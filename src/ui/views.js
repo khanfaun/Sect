@@ -1,0 +1,193 @@
+// ---------- màn bản đồ: thẻ trạng thái, nút bản đồ, thẻ địa điểm ----------
+function sectText(){const r=G.run;return r.flags.tongmon?'Đệ tử tông môn':'Tán tu · Tự do';}
+function hudHTML(){
+  const r=G.run,s=S(),t=W().t;const left=s.life-r.age;const warn=left<s.life*0.12;const pa=PART[partOf(t)];
+  const row=(n,cur,max,cls,txt,tip)=>`<div class="hrow"${ta(tip)}><span class="hn">${n}</span>${bar(cur,max,cls)}<span class="hv">${txt}</span></div>`;
+  const n=curNode();const atDp=n&&n.dp&&!r.moving;const brk=canBreak();
+  const hurt=r.hp<s.maxHp*0.35?' · <b class="bad">Trọng thương</b>':'';
+  let h=`<div class="hud-top" data-act="hud"><div class="hud-date"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)]+'\nNgày '+(Math.floor((t%HM)/HD)+1)+' trong tháng')}><small>Năm</small><b id="clkY">${tYear(t)}</b><small id="clkM">Tháng ${MONTH[tMonth(t)]}</small></div>
+   <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small><span id="clkH">Giờ ${gioName(t)}</span> · ${sectText()}${UI.paused?' · <i>đang dừng</i>':''}</small></div>
+   <span class="hud-tg">${ic(UI.hudOpen?'up':'down')}</span></div>`;
+  if(UI.hudOpen){
+    h+=`<div class="hud-body">${row('Tu vi',r.tv,100,'tv',Math.floor(r.tv)+'%','Đủ 100% thì có thể đột phá ở nơi có động phủ')}
+     ${row('Khí huyết',r.hp,s.maxHp,'hp',r.hp+' / '+s.maxHp,'Về 0 là chết')}
+     ${row('Linh lực',r.mp,s.maxMp,'mp',r.mp+' / '+s.maxMp,'Dùng để thi triển pháp thuật')}
+     ${row('Thọ',r.age,s.life,warn?'life warn':'life',Math.floor(r.age)+' / '+s.life,'Tuổi / thọ nguyên. Đột phá để sống lâu hơn.'+(warn?'\nThọ nguyên sắp cạn!':''))}
+     <div class="hline"><span class="hn">Linh thạch</span>${stoneHTML(r.st)}${hurt}${r.tamma>0?` · <span class="${r.tamma>=60?'bad':''}"${ta('Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình')}>Tâm ma ${r.tamma}</span>`:''}</div>
+     <div class="hbtns"><button data-act="hudBq"${atDp?'':' disabled'}${ta(atDp?'Ngồi tu luyện, tự chọn thời gian':'Cần đứng ở nơi có động phủ (chấm xanh ngọc trên bản đồ)')}>Bế quan</button>
+      <button data-act="hudBt" class="${brk&&atDp?'hl':''}"${brk&&atDp?'':' disabled'}${ta(brk?(atDp?'Chuẩn bị đột phá':'Tu vi đã viên mãn. Tìm nơi có động phủ để đột phá'):'Tu vi chưa viên mãn')}>Đột phá</button>
+      <button data-act="panel" data-arg="craft"${r.moving?' disabled':''}${ta('Luyện đan, luyện khí từ vật liệu nhặt được')}>Luyện chế</button></div></div>`;
+  }
+  return h;
+}
+function statusList(){const r=G.run,s=S(),w=W();const L=[];
+  if(r.hp<s.maxHp*0.35)L.push(['bad','Trọng thương','Khí huyết dưới 35%. Thua trận là chết.']);
+  if(r.tamma>=60)L.push(['bad','Tâm ma dày','Tâm ma '+r.tamma+'/100. Tĩnh tọa hoặc dưỡng thương để giảm.']);
+  if(s.life-r.age<s.life*0.12)L.push(['bad','Thọ nguyên sắp cạn','Còn chừng '+Math.max(0,Math.floor(s.life-r.age))+' năm.']);
+  if(entsHere(r.region).some(e=>e.type==='truysat'))L.push(['bad','Bị truy đuổi','Có kẻ đang lần theo dấu ngươi.']);
+  for(const p of r.party||[])L.push(['','Đồng hành: '+p.ten,'Còn '+durH(Math.max(0,p.until-w.t))]);
+  const pet=typeof petOut==='function'&&r.pets&&r.petOut!=null&&r.pets[r.petOut];if(pet)L.push(['','Linh thú: '+pet.n,pet.rest>w.t?'Đang dưỡng thương, còn '+durH(pet.rest-w.t):'Bậc '+pet.lv+' · '+petFxText(pet)]);
+  for(const q of r.quests)if(q.state==='open')L.push(['','Việc: '+q.text,'Còn '+durH(Math.max(0,q.due-w.t))]);
+  if(canBreak())L.push(['good','Tu vi viên mãn','Tới nơi có động phủ để đột phá.']);
+  return L;}
+function mapUiHTML(){
+  const r=G.run;const sp=UI.speed||1;const L=statusList();const bad=L.filter(x=>x[0]==='bad').length;
+  const B=(act,arg,lab,tip,on,dis)=>`<button class="mb${on?' on':''}" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}${dis?' disabled':''}${ta(tip)}>${lab}</button>`;
+  let h=`<div class="mleft"><button class="mb" data-act="status"${ta('Tình trạng')}>${ic('info')}${bad?`<i class="dot">${bad}</i>`:L.length?'<i class="dot soft"></i>':''}</button></div>`;
+  if(UI.status)h+=`<div class="stat-pop"><header><b>Tình trạng</b><button class="xb" data-act="status">${ic('left')}</button></header>${L.length?L.map(x=>`<div class="sl ${x[0]}"><b>${esc(x[1])}</b><small>${esc(x[2])}</small></div>`).join(''):'<p class="hint">Không có gì đáng lo.</p>'}</div>`;
+  h+=`<div class="mright">${B('zoom',1,ic('plus'),'Phóng to')}${B('zoom',-1,ic('minus'),'Thu nhỏ')}${B('center',null,ic('target'),'Về chỗ ngươi')}</div>`;
+  h+=`<div class="mtime">${B('speed',0,ic(UI.paused?'play':'pause'),UI.paused?'Cho thời gian chạy tiếp':'Tạm dừng thời gian',UI.paused)}${B('speed',1,'×1','1 giây = 1 giờ',!UI.paused&&sp===1)}${B('speed',12,'×12','Chờ nhanh',!UI.paused&&sp===12)}${B('wait','sang',ic('sun'),'Chờ tới sáng',0,!!r.moving)}${B('wait','toi',ic('moon'),'Chờ tới tối',0,!!r.moving)}</div>`;
+  return h;
+}
+const ENTER_L={tran:'Vào thôn trấn',thanh:'Vào thành',tong:'Lên sơn môn',ai:'Tới cửa ải',sao:'Vào sào huyệt',dong:'Vào hang',phe:'Vào phế tích',ma:'Vào ma địa',thien:'Bước lên',rung:'Vào rừng',nui:'Lên núi',song:'Ra bến nước',bien:'Ra bờ biển',hoang:'Vào hoang dã'};
+function nodeInfo(n){const sure=n.fog>=2||n.memory;let info=`${capS(TYPE_NAME[n.type])}${sure?'':' (nghe đồn)'}`;
+  const tags=[];if(n.fog>=3&&n.dp)tags.push('có động phủ');if(n.memory)tags.push('ký ức kiếp trước');if((n.vstate||'ok')==='ruin'&&n.fog>=2)tags.push('hoang tàn');if(n.fog>=2&&W().t-n.seenT>HY)tags.push('tin cũ');if(n.grave)tags.push('có mộ cũ');
+  return {sure,info,tags};}
+function dockHTML(){
+  const r=G.run;const cur=curNode();
+  if(r.moving){const m=r.moving;const dest=nodeById(m.path[m.path.length-1]);let L=0;for(let i=m.seg;i<m.path.length-1;i++)L+=edgeLen(m.path[i],m.path[i+1])*(i===m.seg?1-m.prog:1);
+    return `<div class="dock go"><div class="dk-t"><small>Đang trên đường tới</small><b>${esc(dest.name)}</b><small id="mvLeft">còn ${Math.round(L)} dặm</small></div><button class="btn" data-act="stop">Dừng lại</button></div>`;}
+  const n=UI.sel!=null&&nodeById(UI.sel);
+  if(n&&n.fog>=1&&Math.floor(n.id/100)===r.region&&!UI.cardMin){
+    const I=nodeInfo(n);const here=n.id===r.at;const dg=nodeDanger(n);
+    let mid='';
+    if(!here){const p=findPath(r.at,n.id);if(p){const Ln=Math.round(pathLen(p));mid=`<p class="nc-d">~${Ln} dặm · ${durH(travelHours(p))} đường</p>`;}else mid='<p class="nc-d">Chưa biết đường tới.</p>';}
+    const nt=noteOf(n.id);
+    return `<div class="dock card"><div class="nc-h"><b>${esc(n.name+(I.sure?'':'?'))}</b><small>${esc(I.info)}</small></div>
+      <p class="nc-g dg${dg}"><i></i>${DANGER[dg]}${n.fog>=2||n.memory?'':'?'}${I.tags.length?' · '+esc(I.tags.join(' · ')):''}</p>${mid}
+      ${nt?`<p class="nc-n">${ic('pin')} ${esc(nt)}</p>`:''}
+      <div class="nc-b">${here?`<button class="btn pri" data-act="enter">${ENTER_L[n.type]||'Vào'}</button>`:`<button class="btn pri" data-act="go" data-arg="${n.id}"${findPath(r.at,n.id)?'':' disabled'}>Đi tới</button>`}
+      <button class="btn" data-act="noteEdit" data-arg="${n.id}"${ta('Ghim một ghi chú lên điểm này')}>Ghi chú</button><button class="btn" data-act="cardMin">Gọn</button><button class="btn" data-act="unsel">Đóng</button></div></div>`;}
+  return `<div class="dock loc"><span class="lc-n">${esc(cur.name)}</span><button class="btn pri" data-act="enter">${ENTER_L[cur.type]||'Vào'}</button></div>`;
+}
+function navHTML(){
+  const r=G.run;const it=[['char','user','Nhân vật'],['pets','paw','Linh thú'],['journal','book','Sổ tay'],['affairs','globe','Thiên hạ'],['bonds','people','Giao tình'],['more','more','Thêm']];
+  const dot={journal:r&&r.quests.some(q=>q.state==='open'),pets:r&&r.eggs&&r.eggs.length>0};
+  return it.map(([k,i,n])=>`<button class="nv${UI.panel===k?' on':''}" data-act="panel" data-arg="${k}">${ic(i)}<span>${n}</span>${dot[k]?'<i class="dot soft"></i>':''}</button>`).join('');
+}
+
+// ---------- các cảnh hiện đè lên bản đồ ----------
+function storyHTML(story){return story.map((x,i)=>{const old=i<story.length-1?' old':'';const neu=i>=UI.lastStory?' new':'';
+  if(typeof x==='object')return `<p class="q${old}">${esc(x.q)}</p>`;return `<p class="${old}${neu}">${esc(x)}</p>`;}).join('');}
+function card(title,sub,body,o){o=o||{};return `<section class="scard ${o.cls||''}">${o.art||''}<header class="sc-h"><h2>${esc(title)}</h2>${sub?`<small>${esc(sub)}</small>`:''}</header><div class="sc-b">${body}</div>${o.foot?`<footer class="sc-f">${o.foot}</footer>`:''}</section>`;}
+function goBtn(act,label,arg,cls){return `<button class="btn ${cls||'pri'} wide" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}>${label}</button>`;}
+function choiceBtn(n,act,arg,label,extra,o){o=o||{};return `<button class="ch${o.cls?' '+o.cls:''}" data-act="${act}" data-arg="${arg}"${o.dis?' disabled':''}${ta(o.tip)}><span class="cn">${n}</span><span class="ct">${label}</span>${extra||''}</button>`;}
+function choiceExtra(c){let x='';const r=G.run;
+  if(c.cost){if(c.cost.st){const v=Math.round(c.cost.st*SC[r.region]);x+=`<span class="cx${r.st<v?' no':''}"${ta('Tốn linh thạch')}>${stoneHTML(v)}</span>`;}if(c.cost.mp)x+=`<span class="cx"${ta('Tốn linh lực')}>linh lực ${c.cost.mp}</span>`;if(c.cost.hp)x+=`<span class="cx"${ta('Tốn khí huyết')}>khí huyết ${c.cost.hp}</span>`;}
+  if(c.chk){const p=Math.round(chkChance(c.chk)*100);x+=`<span class="cx chk"${ta('Phép thử '+CHKN[c.chk[0]]+'\nCơ hội thành công '+p+'%')}>${CHKN[c.chk[0]].toLowerCase()} ${p}%</span>`;}
+  if(c.fight)x+=`<span class="cx"${ta('Sẽ phải giao chiến'+(c.fight.spar?' (luận võ, thua không chết)':''))}>giao chiến</span>`;
+  return x;}
+function vRegionIntro(sc){const r=G.run;const og=ORIGIN.find(o=>o.id===r.origin);
+  return `<div class="intro" data-act="regionGo"><div class="in-b"><small>Kiếp thứ ${r.kiep}</small><h1>${esc(r.ten)}</h1><p class="in-o">${esc(og.n)} · quê ở ${esc(r.que)}</p><p class="in-t">${esc(sc.text)}</p>${sc.sub?`<p class="hint">${esc(sc.sub)}</p>`:''}<p class="hint tap">Chạm để lên đường</p></div></div>`;}
+function vEvent(sc){
+  const r=G.run;const e=EVMAP[sc.id];let b=`<div class="story">${storyHTML(sc.story)}</div>`;
+  if(sc.news)b+=`<p class="news"${ta('Tin đồn giang hồ')}>${esc(sc.news)}</p>`;
+  b+=chipsHTML(sc.chips);
+  if(sc.phase==='choose'){b+='<div class="choices">';let k=1;for(const {c,i} of visChoices(sc)){b+=choiceBtn((k++)+'.','choose',i,esc(T(c.l,sc.v)),choiceExtra(c),{dis:!costOk(c.cost)});}b+='</div>';}
+  return card(e&&e.n||'Kỳ ngộ',r.place.n,b,{foot:sc.phase==='choose'?'':goBtn('next','Tiếp tục')});
+}
+function foeLine(en){return `<div class="foe-l"><span class="foe-i">${en.i}</span><div><b>${esc(en.n)}</b><small>${elSeal(en.el)} ${esc(en.sub||'')}</small></div></div>`;}
+function vEnc(sc){
+  const r=G.run,en=sc.en;let b=foeLine(en)+`<div class="story"><p class="new">${esc(sc.text)}</p>${sc.res?`<p class="new">${esc(sc.res)}</p>`:''}</div>`;
+  if(sc.done)return card(sc.elite?'Hung địa':'Chạm trán',r.place.n,b+chipsHTML(sc.paid?[chip('💎','−'+sc.paid,'Linh thạch','dn')]:[]),{foot:goBtn('next','Tiếp tục')});
+  const p=Math.round(encSneak(sc)*100);const pay=Math.round(12*SC[r.region]);
+  b+=`<div class="choices">${choiceBtn('1.','enc','fight','Xuất thủ','<span class="cx">giao chiến</span>')}${choiceBtn('2.','enc','sneak','Lẩn tránh',`<span class="cx chk"${ta('Dựa vào thân pháp\nThất bại thì vẫn phải đánh')}>thân pháp ${p}%</span>`)}`;
+  if(en.f==='nhan'&&!sc.elite)b+=choiceBtn('3.','enc','pay','Nộp tiền mãi lộ',`<span class="cx">${stoneHTML(pay)}</span>`,{dis:r.st<pay});
+  return card(sc.elite?'Hung địa':'Chạm trán',r.place.n,b+'</div>');
+}
+function vBoss(sc){const r=G.run;return card('Sào huyệt',r.place.n,`<div class="foe-l big"><span class="foe-i">${sc.b.i}</span><div><b>${esc(sc.b.n)}</b><small>Thủ lĩnh vùng ${esc(REG[r.region].n)}</small></div></div><div class="story"><p class="new">${esc(sc.text)}</p></div>`,{foot:goBtn('bossFight','Nghênh chiến')});}
+function itemView(p){
+  if(p.k==='relic')return {ic:'🏺',n:p.rel.name,sub:GRADE[p.rel.tier],tip:relicTip(p.rel)};
+  if(p.k==='skill'){const sk=SK[p.id];const h=G.run.skills.find(x=>x.id===p.id);return {ic:elSeal(sk.el),n:sk.n,sub:h?'Tinh thông thêm một bậc':'Pháp thuật bậc '+sk.t,tip:skillTip(sk,h?h.lv+1:1)};}
+  if(p.k==='pill')return {ic:PILL[p.id].i,n:(p.q?PQ[p.q]+' ':'')+PILL[p.id].n,sub:PILL[p.id].d.replace('{x}',pillX(p.id,p.q)),tip:pillTip(p.id,p.q)};
+  if(p.k==='pass')return {ic:'🎫',n:p.n,sub:'Lệnh bài thông quan',tip:'Trình ở quan ải để sang '+REG[p.reg].n};
+  return {ic:'💎',n:p.n+' linh thạch',sub:'',tip:''};}
+function vReward(sc){
+  const r=G.run;let b=`<div class="story"><p class="new">${esc(sc.text)}</p></div>`+chipsHTML(sc.chips);
+  if(sc.picks.length){b+=`<p class="hint">${sc.taken<0?'Chọn một món':'Đã chọn'}</p><div class="rows">${sc.picks.map((p,i)=>{const v=itemView(p);const cls=sc.taken===i?' taken':sc.taken>=0?' dim':'';return `<button class="row${cls}" data-act="pick" data-arg="${i}"${sc.taken>=0?' disabled':''}${ta(v.tip)}><span class="r-i">${v.ic}</span><span class="r-t"><b>${esc(v.n)}</b><small>${esc(v.sub)}</small></span></button>`;}).join('')}</div>`;}
+  return card(sc.kind==='boss'?'Chiến thắng':'Chiến lợi phẩm',r.place.n,b,{foot:goBtn('rcont',sc.picks.length&&sc.taken<0?'Bỏ qua':'Tiếp tục')});
+}
+function vShop(sc){
+  const r=G.run;const tab=UI.tab.shop||'buy';
+  let b=`<p class="shop-top">${esc(sc.text)}</p>`+tabsHTML('shop',[['buy','Mua'],['svc','Việc khác']],tab);
+  if(tab==='buy'){b+='<div class="grid">';sc.items.forEach((it,i)=>{const v=itemView(it);const no=it.sold||r.st<it.p;
+    b+=`<button class="cell${it.sold?' sold':''}" data-act="buy" data-arg="${i}"${no?' disabled':''}${ta(v.n+'\n'+v.tip)}><span class="c-i">${v.ic}</span><span class="c-n">${esc(v.n)}</span><span class="c-p">${it.sold?'đã mua':stoneHTML(it.p)}</span></button>`;});b+='</div><p class="hint">Chạm giữ một món để xem công dụng. Chạm để mua.</p>';}
+  else b+=`<div class="rows"><button class="row" data-act="heal"${sc.healed||r.st<sc.heal?' disabled':''}${ta('Hồi đầy khí huyết và linh lực')}><span class="r-i">🩹</span><span class="r-t"><b>Mời y sư trị thương</b><small>Hồi đầy khí huyết, linh lực</small></span><span class="r-x">${sc.healed?'xong':stoneHTML(sc.heal)}</span></button></div>`;
+  return card('Phường thị',r.place.n,b,{cls:'tall',foot:`<span class="grow">Trong túi: ${stoneHTML(r.st)}</span>`+goBtn('next','Rời đi','', 'pri')});
+}
+function vSwap(sc){
+  const r=G.run,sk=SK[sc.id];let b=`<div class="story"><p>Ngươi lĩnh ngộ được <b${ta(skillTip(sk,1))}>${esc(sk.n)}</b>. Nhưng tâm trí chỉ chứa nổi bốn môn. Quên đi môn nào?</p></div><div class="choices">`;
+  r.skills.forEach((k,i)=>{const s0=SK[k.id];b+=choiceBtn(elSeal(s0.el),'swap',i,esc(s0.n),'<span class="cx">quên</span>',{tip:skillTip(s0,k.lv)});});
+  return card('Lĩnh ngộ','',b+choiceBtn('·','swap',-1,'Không học '+esc(sk.n),'',{cls:'soft'})+'</div>');
+}
+const PGROUP=[['Sự vụ',['tea','board','join','lib']],['Nghỉ ngơi',['inn','tinh','heal']],['Mua bán',['shop','ghost']],['Tu luyện',['bq']],['Việc khác',['bury','quyan']]];
+const PNOW=['boss','cross','bt','grave','patron'];
+function vPlace(sc){
+  const r=G.run,n=nodeById(sc.id);const acts=placeActs(n).filter(a=>a.a!=='bq1'&&a.a!=='bq3');
+  if(n.dp)acts.push({a:'bq',i:'',l:'Bế quan',h:0,tip:'Ngồi tu luyện, tự chọn thời gian',x:'+'+numVN(bqRate())+'% tu vi mỗi năm'});
+  const by=k=>acts.find(a=>a.a===k);
+  const btn=a=>{const qa=a.a==='quyan'&&UI.confirm==='quyan';const x=(a.x?`<span class="cx">${esc(String(a.x).replace(/💎/g,'linh thạch ').replace(/✨/g,'tu vi ').replace(/🌕/g,'thành công '))}</span>`:'')+(a.h?`<span class="cx tm"${ta('Thời gian sẽ trôi qua')}>${durH(a.h)}</span>`:'');
+    return `<button class="ch${a.a==='bt'?' hl':''}${a.a==='quyan'?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':a.l)}</span>${x}</button>`;};
+  let b=`<div class="story"><p>${esc(sc.intro)}</p>${sc.msg.map(m=>`<p class="new">${esc(m)}</p>`).join('')}</div>`+chipsHTML(sc.chips);
+  const here=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);
+  const now=PNOW.map(by).filter(Boolean);
+  if(now.length||here.length){b+=`<h3 class="grp now">Trước mắt</h3><div class="choices">${here.map(e=>`<div class="ch info"><span class="cn">${e.icon||ENT_T[e.type].i}</span><span class="ct">${esc(e.name)}</span><span class="cx">${esc(ENT_T[e.type].n)} · còn ${durH(Math.max(1,e.until-W().t))}</span></div>`).join('')}${now.map(btn).join('')}</div>`;}
+  let any=false,g='';for(const [name,ks] of PGROUP){const L=ks.map(by).filter(Boolean);if(!L.length)continue;any=true;g+=`<h4 class="sgrp">${name}</h4><div class="choices">${L.map(btn).join('')}</div>`;}
+  if(any)b+=`<h3 class="grp">Thường nhật</h3>`+g;
+  const ex=by('explore');
+  const I=nodeInfo(n);
+  return card(n.name,capS(TYPE_NAME[n.type])+' · '+REG[r.region].n+' · '+DANGER[n.danger],b,{cls:'tall place',art:sceneCv(n.name,r.region,n.type,'strip'),
+    foot:(ex?`<button class="btn" data-act="pact" data-arg="explore"${ex.dis?' disabled':''}${ta(ex.tip+'\nTốn 2 giờ')}>Thăm dò</button>`:'')+`<span class="grow"></span><button class="btn" data-act="leave">Rời đi</button>`});
+}
+function vPass(sc){
+  const r=G.run;let b=`<div class="story"><p class="new">${esc(sc.text)}</p><p class="hint">Qua ải mất khoảng ${CROSS_M[sc.k]} tháng đường.</p></div><div class="choices">`;let k=1;
+  for(const o of passOpts())b+=choiceBtn((k++)+'.','pass',o.a,esc(o.l),o.x?`<span class="cx">${esc(String(o.x).replace(/💎/g,'linh thạch '))}</span>`:'',{dis:!o.ok,tip:o.tip});
+  return card('Quan ải → '+REG[sc.k].n,r.place.n,b+'</div>',{foot:goBtn('next','Quay lại','','')});
+}
+function vPrep(sc){
+  const r=G.run;const v=prepView();const to=btTarget();
+  let b=`<div class="story"><p>Chọn tối đa ba vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.</p></div>`;
+  b+=`<div class="slots">${[0,1,2].map(k=>{const i=sc.slots[k];const it=i!=null&&r.pills[i];return it?`<button class="slot on" data-act="prep" data-arg="${i}"${ta(pillTip(it.id,it.q))}>${PILL[it.id].i}<small>${esc(PILL[it.id].n)}</small></button>`:'<span class="slot">＋</span>';}).join('')}</div>`;
+  const stg=btStages(to).map(x=>x==='tamma'?'Tâm ma kiếp':'Lôi kiếp '+x.n+' đạo'+(x.waves>1?' × '+x.waves+' đợt':'')).join(', ')||'Không có thiên kiếp';
+  b+=`<div class="kv"><div${ta('Tỉ lệ xung quan thành công')}><span>Tỉ lệ thành công</span><b>${Math.round(v.rate*100)}%</b></div><div${ta('Phẩm chất dự kiến nếu thành công\nĐạo cơ hiện có '+v.dao+(v.next?', mốc kế tiếp '+v.next:''))}><span>Phẩm chất dự kiến</span><b>${QNAME[v.q]} (đạo cơ ${v.dao})</b></div><div${ta('Thiên kiếp phải vượt sau khi xung quan')}><span>Thiên kiếp</span><b>${esc(stg)}</b></div>${v.e.guard?'<div><span>Hộ mệnh</span><b>có</b></div>':''}</div>`;
+  const L=btItems();
+  b+=`<h4 class="sgrp">Túi đồ dùng được</h4><div class="rows">`+(L.length?L.map(({p,i})=>`<button class="row${sc.slots.includes(i)?' taken':''}" data-act="prep" data-arg="${i}"${ta(pillTip(p.id,p.q))}><span class="r-i">${PILL[p.id].i}</span><span class="r-t"><b>${p.q?PQ[p.q]+' ':''}${esc(PILL[p.id].n)}</b><small>${esc(PILL[p.id].d.replace('{x}',pillX(p.id,p.q)))}</small></span></button>`).join(''):'<p class="hint">Không có vật phẩm nào dùng được.</p>')+'</div>';
+  return card(to===5?'Độ kiếp phi thăng':'Đột phá '+REALM[to],r.place.n,b,{cls:'tall',foot:`<button class="btn" data-act="next">Để sau</button><span class="grow"></span><button class="btn pri" data-act="prepGo">Bắt đầu</button>`});
+}
+function vBtres(sc){
+  const r=G.run;let b=`<div class="story"><p class="new">${esc(sc.text)}</p></div>`+chipsHTML(sc.chips);
+  const more=r.bt&&!sc.done&&r.bt.si<r.bt.stages.length;
+  if(more){const st=r.bt.stages[r.bt.si];b+=`<p class="hint">${st==='tamma'?'Tâm ma kiếp: đánh một trận với chính mình.':'Lôi kiếp: '+st.n+' đạo lôi không né được, chỉ đỡ được. Gục là chết thật.'}</p>`;}
+  return card(sc.ok?'Đột phá':'Thất bại',r.place.n,b,{foot:goBtn('btGo',more?'Nghênh kiếp':'Tiếp tục')});
+}
+function vBoard(sc){
+  const r=G.run,n=nodeById(sc.id);const open=r.quests.filter(q=>q.state==='open').length;
+  let b=`<div class="story"><p>Mấy tờ cáo thị dán chồng lên nhau, giấy đã ngả vàng. Nhận việc thì phải xong trước hạn, thất hứa thì mang tiếng.</p></div><div class="choices">`;
+  n.board.list.forEach((q,i)=>{b+=choiceBtn((i+1)+'.','quest',i,esc(q.text),`<span class="cx tm">${q.days} ngày</span><span class="cx">${stoneHTML(q.reward.st)}</span>`,{dis:q.taken||open>=3,tip:q.kind==='diet'?'Tới nơi rồi thăm dò để tìm mục tiêu':'Chỉ cần tới nơi'});});
+  return card('Bảng treo thưởng',n.name,b+`</div><p class="hint">Đang nhận ${open}/3 việc.</p>`,{foot:goBtn('next','Quay lại','','')});
+}
+function vBury(sc){
+  const r=G.run,n=nodeById(sc.id);
+  let b=`<div class="story"><p>Chọn tối đa ba món. Kiếp sau tới đúng chỗ này, thăm dò sẽ tìm thấy.</p></div><div class="rows">`;
+  r.relics.forEach((x,i)=>{const k='r'+i;b+=`<button class="row${sc.sel.includes(k)?' taken':''}" data-act="bsel" data-arg="${k}"${ta(relicTip(x))}><span class="r-i">🏺</span><span class="r-t"><b>${esc(x.name)}</b><small>${GRADE[x.tier]}</small></span></button>`;});
+  r.pills.forEach((x,i)=>{const k='p'+i;b+=`<button class="row${sc.sel.includes(k)?' taken':''}" data-act="bsel" data-arg="${k}"${ta(pillTip(x.id,x.q))}><span class="r-i">${PILL[x.id].i}</span><span class="r-t"><b>${esc(PILL[x.id].n)}</b></span></button>`;});
+  return card('Chôn đồ',n.name,b+'</div>',{cls:'tall',foot:`<button class="btn" data-act="next">Thôi</button><span class="grow"></span><button class="btn pri" data-act="buryGo"${sc.sel.length?'':' disabled'}>Chôn</button>`});
+}
+const SCENE_V={event:vEvent,enc:vEnc,boss:vBoss,reward:vReward,shop:vShop,swap:vSwap,place:vPlace,pass:vPass,prep:vPrep,btres:vBtres,board:vBoard,bury:vBury};
+
+// ---------- hộp thoại ----------
+function modalHTML(){
+  const m=UI.modal;if(!m)return '';
+  if(m.k==='danger'){const n=nodeById(m.id);return `<div class="mbox"><h3>Tử địa</h3><p>${esc(n.name)} linh áp nặng nề, vượt xa ${esc(REALM[G.run.realm])} của ngươi. Bước vào đó, sơ sẩy là hết kiếp này.</p><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="goSure" data-arg="${n.id}">Vẫn đi</button></div></div>`;}
+  if(m.k==='note'){const n=nodeById(m.id);return `<div class="mbox"><h3>Ghi chú · ${esc(n.name)}</h3><p class="hint">Ghim chỉ để nhớ, không đổi đường đi. Để trống rồi lưu là gỡ ghim.</p><input id="noteIn" maxlength="80" value="${esc(noteOf(n.id))}" placeholder="vd: có động phủ, quay lại khi Trúc Cơ"><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="noteSave" data-arg="${n.id}">Lưu</button></div></div>`;}
+  if(m.k==='bq'){const I=bqInfo();const y=clamp(m.y||Math.min(1,I.maxY),0.25,I.maxY);m.y=y;const gain=bqRate()*y*(y<1?0.9:1);const risk=y>=1?Math.round(Math.min(.5,.11*y)*100):0;
+    return `<div class="mbox bq">${sceneCv('bequan'+G.run.at,G.run.region,'dong','mart','nhan:0.5:0.5:0:bq')}<h3>Bế quan</h3>
+     <div class="kv"><div><span>Tốc độ tu luyện</span><b>+${numVN(I.rate)}% mỗi năm</b></div><div><span>Thọ nguyên còn</span><b>${numVN(Math.max(0,I.left))} năm</b></div><div><span>Tới viên mãn cần</span><b>${I.full?'đã viên mãn':'chừng '+numVN(I.need)+' năm'}</b></div></div>
+     <label class="rng"><span>Thời gian: <b id="bqY">${durH(y*HY)}</b></span><input type="range" id="bqR" min="0.25" max="${I.maxY}" step="0.25" value="${y}"></label>
+     <div class="hbtns"><button data-act="bqSet" data-arg="0.25">3 tháng</button><button data-act="bqSet" data-arg="1">1 năm</button><button data-act="bqSet" data-arg="${Math.min(I.maxY,I.need)}"${I.full?' disabled':''}>Tới viên mãn</button></div>
+     <p class="hint" id="bqHint">Tu vi +${numVN(Math.min(100,gain))}%${risk?' · '+risk+'% bị quấy nhiễu giữa chừng':' · yên ổn'}. Xuất quan thì khí huyết, linh lực hồi đầy.</p>
+     <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="bqGo">Nhập định</button></div></div>`;}
+  if(m.k==='res'){return `<div class="mbox"><h3>${esc(m.title)}</h3><p>${esc(m.t)}</p>${chipsHTML(m.chips)}<div class="mb-f"><span class="grow"></span><button class="btn pri" data-act="modalX">Tiếp tục</button></div></div>`;}
+  if(m.k==='clog'){const sc=G.run.scene;return `<div class="mbox"><h3>Diễn biến trận</h3><div class="logl">${(sc.log||[]).slice().reverse().map(l=>`<p class="${l.c?'lg-'+l.c:''}">${esc(l.t)}</p>`).join('')}</div><div class="mb-f"><span class="grow"></span><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
+  return '';
+}
