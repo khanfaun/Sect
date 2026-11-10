@@ -24,7 +24,7 @@ console.log(run(`(()=>{let ok=0,err=0;for(let k=0;k<100;k++){try{fresh();startCo
  for(let i=0;i<4000&&!sc.done&&me.phase==='charge';i++){combatStep(0.05);if(sc.qte)qteResolve(1);if(readyPlayer(sc))playerAct('_wait');if(sc.dodge)dodgeResolve(null);}
  if(me.phase!=='charge')ok++;}catch(e){err++;}}return 'Mục tiêu gục trước: chiêu đổi mục tiêu hoặc hủy, không lỗi: '+ok+'/100, lỗi: '+err;})()`));
 // 4) né với ne−cx=0
-console.log(run(`(()=>{const a={cx:20},d={ne:20};let n0=0,n1=0;for(let i=0;i<2000;i++){if(R()<dodgeP(a,d,null,true).p)n0++;if(R()<dodgeP(a,d,0.03,true).p)n1++;}return 'ne−cx=0: không nhấn né được '+(n0/20).toFixed(1)+'%, nhấn chuẩn '+(n1/20).toFixed(1)+'% (2000 lần gieo)';})()`));
+console.log(run(`(()=>{const a={cx:20},d={ne:20};let n0=0,n1=0;for(let i=0;i<2000;i++){if(R()<dodgeP(a,d,null,true).p)n0++;if(R()<dodgeP(a,d,0.03,true).p)n1++;}return 'Né theo chỉ số, ne−cx=0: không nhấn '+(n0/20).toFixed(1)+'%, có nhấn '+(n1/20).toFixed(1)+'% (2000 lần gieo)';})()`));
 // 5) lôi kiếp 6 đạo
 console.log(run(`(()=>{const die=[];let surv=0;for(const mode of ['none','perfect'])for(let k=0;k<50;k++){fresh(2);const r=G.run;r.realm=2;const s=S();r.hp=s.maxHp;startCombat({kiep:{n:6}},{kind:'bt'});const sc=r.scene;
  for(let i=0;i<20000&&!sc.done;i++){combatStep(0.05);if(sc.dodge)dodgeResolve(mode==='perfect'?[0]:null);if(sc.qte)qteResolve(1);if(readyPlayer(sc))playerAct('_wait');}
