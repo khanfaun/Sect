@@ -86,19 +86,30 @@ function botScene(){
   }
 }
 `);
-// chiến đấu: tùy theo phiên bản (lượt cũ hoặc thanh hành động)
+// chiến đấu: thanh hành động
 run(`
 function botCombat(sc){
-  const r=G.run;
-  if(typeof combatStep==='function'&&sc.units){botBar(sc);return;}
   if(sc.done){combatContinue();return;}
-  const s=S();
-  const hp=r.pills.findIndex(p=>p.id==='hoixuan');
-  if(r.hp<s.maxHp*0.3&&hp>=0){playerPill(hp);return;}
-  const ok=r.skills.filter(k=>{const sk=SK[k.id];return r.mp>=skillCost(sk);});
-  if(ok.length&&chance(.7)){playerSkill(pick(ok).id);return;}
-  if(chance(.15)){playerGuard();return;}
-  playerSkill('_atk');
+  if(sc.dodge){dodgeResolve(null);return;}   // coi mọi lần né là "không nhấn"
+  if(sc.qte){qteResolve(null);return;}
+  const u=readyPlayer(sc);
+  if(u){
+    const r=G.run;const heal=r.skills.find(k=>SK[k.id].fx.heal&&u.mp>=skillCost(SK[k.id]));
+    const hp=r.pills.findIndex(p=>p.id==='hoixuan');
+    if(u.hp<u.max*0.35&&hp>=0){if(playerPillAct(hp))return;}
+    if(u.hp<u.max*0.45&&heal){if(playerAct(heal.id))return;}
+    const ok=r.skills.filter(k=>{const sk=SK[k.id];return sk.fx.p&&u.mp>=skillCost(sk);});
+    const foes=alive(sc,'B');const t=foes.slice().sort((a,b)=>a.hp-b.hp)[0];
+    if(ok.length&&chance(.7)){if(playerAct(pick(ok).id,t&&t.id))return;}
+    if(chance(.12)&&playerAct('_guard'))return;
+    playerAct('_atk',t&&t.id);return;
+  }
+  for(let i=0;i<4000;i++){combatStep(0.05);if(sc.done||sc.dodge||sc.qte||readyPlayer(sc))break;}
+}
+function botSceneX(sc){
+  if(sc.type==='prep'){for(const x of btItems()){if(sc.slots.length>=3)break;prepToggle(x.i);}prepStart();return true;}
+  if(sc.type==='btres'){btContinue();return true;}
+  return false;
 }
 `);
 
