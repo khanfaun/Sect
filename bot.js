@@ -43,6 +43,8 @@ function botPlan(){
   if(r.region<4&&(r.realm>=r.region+1||r.passes.includes(r.region+1))){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';return;}}
   if(!r.bossDone[r.region]&&r.realm>=r.region+1&&chance(.5)){const n=nodeById(R0.lair);if(n.fog>=1&&goOrOpen(n)){r._goal='boss';return;}}
   if(r.region<4&&r.realm>=r.region&&chance(.05)){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';return;}}
+  // việc treo thưởng còn hạn
+  const q=r.quests.find(q=>q.state==='open');if(q&&chance(.6)){const n=nodeById(q.node);if(goOrOpen(n)){r._goal='explore';return;}}
   // khám phá: ưu tiên điểm chưa tới
   const cand=R0.nodes.filter(n=>n.fog>=1&&n.fog<3&&n.id!==r.at);
   const known=R0.nodes.filter(n=>n.fog>=1&&n.id!==r.at&&n.type!=='ai'&&n.type!=='sao');
@@ -55,7 +57,7 @@ function botPlace(){
   const s=S();
   if(r._goal==='cross'&&has('cross')){r._goal=null;placeAct('cross');return;}
   if(r._goal==='boss'&&has('boss')){r._goal=null;placeAct('boss');return;}
-  if(has('bt')){placeAct('bt');return;}
+  if(has('bt')){if(r.hp<s.maxHp*0.95&&has('heal')){placeAct('heal');return;}placeAct('bt');return;}
   if(r.hp<s.maxHp*0.45){if(has('inn')){placeAct('inn');return;}if(has('heal')){placeAct('heal');return;}if(has('tinh')){placeAct('tinh');return;}}
   if(r._goal==='bq'&&has('bq3')){r._goal=null;placeAct(chance(.7)?'bq3':'bq1');return;}
   if(has('bq3')&&r.tvMinor>=40){placeAct(chance(.75)?'bq3':'bq1');return;}
@@ -63,7 +65,7 @@ function botPlace(){
   if(has('shop')&&chance(.3)){placeAct('shop');return;}
   if(has('board')&&chance(.15)){placeAct('board');return;}
   if(has('ghost')&&chance(.3)){placeAct('ghost');return;}
-  if(has('bury')&&chance(.03)&&typeof buryItem==='function'){placeAct('bury');return;}
+  if(has('bury')&&chance(.03)&&typeof buryItems==='function'){placeAct('bury');return;}
   if(has('grave')&&chance(.5)){placeAct('grave');return;}
   if(has('patron')&&chance(.5)){placeAct('patron');return;}
   if(has('explore')&&chance(.8)){placeAct('explore');return;}
@@ -98,6 +100,8 @@ function botCombat(sc){
     const hp=r.pills.findIndex(p=>p.id==='hoixuan');
     if(u.hp<u.max*0.35&&hp>=0){if(playerPillAct(hp))return;}
     if(u.hp<u.max*0.45&&heal){if(playerAct(heal.id))return;}
+    if(sc.kiep){if(u.hp<u.max*0.5&&heal&&playerAct(heal.id))return;if(u.hp<u.max*0.75||chance(.5)){if(playerAct('_guard'))return;}}
+    if(!sc.kiep&&!sc.boss&&u.hp<u.max*0.25&&chance(.6)&&playerFlee())return;
     const ok=r.skills.filter(k=>{const sk=SK[k.id];return sk.fx.p&&u.mp>=skillCost(sk);});
     const foes=alive(sc,'B');const t=foes.slice().sort((a,b)=>a.hp-b.hp)[0];
     if(ok.length&&chance(.7)){if(playerAct(pick(ok).id,t&&t.id))return;}
@@ -109,6 +113,8 @@ function botCombat(sc){
 function botSceneX(sc){
   if(sc.type==='prep'){for(const x of btItems()){if(sc.slots.length>=3)break;prepToggle(x.i);}prepStart();return true;}
   if(sc.type==='btres'){btContinue();return true;}
+  if(sc.type==='board'){const n=nodeById(sc.id);const i=n.board.list.findIndex(q=>!q.taken);if(i>=0&&chance(.6))takeQuest(i);endScene();return true;}
+  if(sc.type==='bury'){if(G.run.relics.length)buryToggle('r0');else if(G.run.pills.length)buryToggle('p0');if(sc.sel.length)buryItems();else endScene();return true;}
   return false;
 }
 `);
@@ -126,7 +132,7 @@ while(life<LIVES){
     const scr=run('G.screen');
     if(scr==='over'||scr==='title'||scr==='meta'||!run('!!G.run')){
       if(scr==='over'){
-        const L=run('G.over.life');const c=run('G.over.cause');stats.cause[c]=(stats.cause[c]||0)+1;stats.ages.push(L.tuoi);life++;
+        const L=run('G.over.life');const c=run('G.over.cause');stats.cause[c]=(stats.cause[c]||0)+1;stats.ages.push(L.tuoi);life++;const rn=L.realm.replace(/^(Nhân|Địa|Thiên) Đạo /,'');stats.rc=stats.rc||{};stats.rc[rn]=(stats.rc[rn]||0)+1;stats.rg=stats.rg||[0,0,0,0,0];stats.rg[L._mr||0]++;
       }
       if(!SAME&&life%25===0&&life>0&&scr==='over')run('G.meta=newMeta();');
       if(life>=LIVES)break;
@@ -137,7 +143,7 @@ while(life<LIVES){
     if(run('!!G.run')){
       scanTexts();
       const mr=run('G.run.region'),re=run('G.run.realm');stats.maxRegion[mr]=Math.max(1,stats.maxRegion[mr]);
-      run(`G.run._mr=Math.max(G.run._mr||0,G.run.region);G.run._me=Math.max(G.run._me||0,G.run.realm);`);
+      
     }
     if(stepsLife>30000){stats.errors.push('kiếp kẹt quá 30000 bước: '+run('JSON.stringify({sc:G.run&&G.run.scene&&G.run.scene.type,at:G.run&&G.run.at,mv:G.run&&G.run.moving})'));run('die("toahoa")');}
   }catch(e){
@@ -152,7 +158,7 @@ const sz=Buffer.byteLength(run('JSON.stringify({meta:G.meta,run:G.run})'));
 const realmCount={};for(const L of lives){realmCount[L.realm]=(realmCount[L.realm]||0)+1;}
 console.log('Số kiếp:',life,'| bước:',stats.steps,'| thời gian:',((Date.now()-t0)/1000).toFixed(1)+'s');
 console.log('Nguyên nhân chết:',stats.cause);
-console.log('Cảnh giới cao nhất (40 kiếp gần nhất):',realmCount);
+console.log('Cảnh giới khi chết:',stats.rc);console.log('Vùng xa nhất mỗi kiếp (vùng 1..5):',stats.rg);
 console.log('Vùng xa nhất từng tới:',run('G.meta.lives.length'),'kiếp; vùng có mặt:',stats.maxRegion.map((x,i)=>x?i:null).filter(x=>x!=null).join(','));
 console.log('Tuổi chết trung bình:',(stats.ages.reduce((a,b)=>a+b,0)/Math.max(1,stats.ages.length)).toFixed(1));
 console.log('Năm thế giới hiện tại:',run('tYear(W().t)'),'| cỡ bản lưu:',(sz/1024).toFixed(1)+' KB');
