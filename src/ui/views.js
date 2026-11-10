@@ -111,7 +111,7 @@ function vShop(sc){
   const r=G.run;const tab=UI.tab.shop||'buy';
   let b=`<p class="shop-top">${esc(sc.text)}</p>`+tabsHTML('shop',[['buy','Mua'],['svc','Việc khác']],tab);
   if(tab==='buy'){b+='<div class="grid">';sc.items.forEach((it,i)=>{const v=itemView(it);const no=it.sold||r.st<it.p;
-    b+=`<button class="cell${it.sold?' sold':''}" data-act="buy" data-arg="${i}"${no?' disabled':''}${ta(v.n+'\n'+v.tip)}><span class="c-i">${v.ic}</span><span class="c-n">${esc(v.n)}</span><span class="c-p">${it.sold?'đã mua':stoneHTML(it.p)}</span></button>`;});b+='</div><p class="hint">Chạm giữ một món để xem công dụng. Chạm để mua.</p>';}
+    b+=`<button class="cell${it.sold?' sold':''}" data-act="buy" data-arg="${i}"${no?' disabled':''}${ta(v.tip||v.n)}><span class="c-i">${v.ic}</span><span class="c-n">${esc(v.n)}</span><span class="c-p">${it.sold?'đã mua':stoneHTML(it.p)}</span></button>`;});b+='</div><p class="hint">Chạm giữ một món để xem công dụng. Chạm để mua.</p>';}
   else b+=`<div class="rows"><button class="row" data-act="heal"${sc.healed||r.st<sc.heal?' disabled':''}${ta('Hồi đầy khí huyết và linh lực')}><span class="r-i">🩹</span><span class="r-t"><b>Mời y sư trị thương</b><small>Hồi đầy khí huyết, linh lực</small></span><span class="r-x">${sc.healed?'xong':stoneHTML(sc.heal)}</span></button></div>`;
   return card('Phường thị',r.place.n,b,{cls:'tall',foot:`<span class="grow">Trong túi: ${stoneHTML(r.st)}</span>`+goBtn('next','Rời đi','', 'pri')});
 }
