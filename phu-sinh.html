@@ -217,9 +217,25 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .logl span{flex:0 0 2.4em;color:var(--ink3);text-align:right}
 textarea{width:100%;margin-top:12px;font:400 .8rem/1.4 ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px}
 
+/* bản đồ */
+.date{font-size:.82rem;color:var(--ink2);padding:0 0 2px;cursor:help}.date i{color:var(--red);font-style:normal}
+.mapw{position:relative;margin:8px -22px 0;background:var(--bg2)}
+#map{display:block;width:100%;height:min(66vh,118vw);touch-action:none;user-select:none;-webkit-user-select:none}
+#map .nd{cursor:pointer}#map .nd.rum{opacity:.7}#map .nd.old{opacity:.5}#map .nd.sel circle{stroke:var(--red)}
+#map .ni{font-size:26px}#map .nn{font:600 22px var(--disp);fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:5px}
+.mctl{position:absolute;left:8px;top:8px;display:flex;gap:4px;flex-wrap:wrap}
+.mzoom{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:4px}
+.mstop{position:absolute;left:50%;bottom:10px;transform:translateX(-50%)}
+.mb{min-width:38px;height:36px;padding:0 9px;border:0;border-radius:999px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--gold2);font-size:.9rem}
+.mb.on{background:var(--gold);color:var(--paper)}.mb:disabled{opacity:.4}
+.ncard{display:flex;align-items:center;gap:10px;padding:12px 2px;border-bottom:1px solid var(--line);min-height:64px}
+.ncard.hint{color:var(--ink3);font-size:.9rem}
+.nc-t{flex:1;display:flex;flex-direction:column;line-height:1.3}.nc-t b{font:600 1.2rem var(--disp)}.nc-t small{color:var(--ink2);font-size:.82rem}
+.nc-b{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.go.sm{padding:5px 18px;font-size:1rem}
 #tip{position:fixed;z-index:50;max-width:min(300px,86vw);background:var(--tipbg);color:var(--tipfg);font-size:.84rem;line-height:1.5;padding:9px 13px;border-radius:10px;white-space:pre-line;pointer-events:none;box-shadow:0 8px 24px rgba(40,25,5,.25)}
 #tip[hidden]{display:none}
-@media (max-width:420px){body{font-size:16.5px}#app{padding:0 18px 64px}#top,.banner,.title{margin-left:-18px;margin-right:-18px}#top{padding-left:18px;padding-right:18px}.skills{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr}.intent{right:-22px}}
+@media (max-width:420px){body{font-size:16.5px}#app{padding:0 18px 64px}#top,.banner,.title,.mapw{margin-left:-18px;margin-right:-18px}#top{padding-left:18px;padding-right:18px}.skills{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr}.intent{right:-22px}}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -284,6 +300,16 @@ const P = {
   canh_hoang: ['Đồng hoang mênh mông, cỏ úa cao ngang gối.','Xương trắng rải rác, giáo gãy cắm nghiêng trong cát.','Gió cát thổi rát mặt, chân trời đỏ quạch.','Một gò đất cô độc, trên đó có gốc cây khô.','Mặt đất nứt nẻ như mai rùa, hơi nóng bốc lên run rẩy.'],
   canh_ma: ['Trời đỏ như máu, mặt trăng màu tím bầm.','Ma khí lượn lờ thành từng sợi đen, bám vào da thịt lạnh buốt.','Đất đen như mực, cây cối vặn vẹo như người đang quằn quại.','Tiếng khóc than ở đâu đó, nghe kỹ lại thành tiếng cười.','Sông máu chảy chậm, mặt nổi bọt lục bục.'],
   canh_thien: ['Mây trắng dưới chân, sao trời ngay trên đầu.','Bậc thang ngọc lơ lửng giữa hư không, không biết dẫn về đâu.','Gió nơi đây mang theo tiếng chuông, mà không thấy chuông.','Những mảnh lục địa vỡ trôi lững lờ, cỏ cây trên đó vẫn xanh.','Ánh sáng không có nguồn, chiếu từ mọi phía.'],
+  canh_ai: ['Cổng ải xây bằng đá xanh, rêu bám kín chân tường, cờ hiệu rách tả tơi bay trên lầu canh.','Hai vách núi kẹp lấy một con đường hẹp, cửa ải chặn ngang như hàm răng đá.','Lính gác ải ngồi quanh đống lửa, giáo dựng cạnh người, mắt không rời lối đi.','Bia đá trước ải khắc tên những kẻ từng vượt qua. Phần lớn đã mờ, vài cái tên còn mới.'],
+  canh_sao: ['Xương thú chất thành đống trước cửa hang, ruồi nhặng bay vo ve.','Hàng rào gỗ nhọn cắm máu khô, đầu lâu treo lủng lẳng trên cọc.','Khói đen bốc lên từ sâu bên trong, mùi tanh nồng phả ra từng đợt.','Tiếng trống da thú đập đều đều, như tim của một con quái vật khổng lồ.'],
+  buoi_sang: ['Nắng sớm còn nhạt, sương chưa tan hẳn trên ngọn cỏ.','Gà gáy xa xa, khói bếp đầu tiên vừa bốc lên.','Trời mới hửng, gió sớm mát rượi.','Chim chóc ríu rít gọi nhau đón ngày mới.','Mặt trời vừa nhô khỏi rặng núi, rải vàng lên mọi thứ.'],
+  buoi_chieu: ['Nắng gắt đổ thẳng xuống, bóng người ngắn lại dưới chân.','Buổi trưa oi ả, ve kêu không ngớt.','Nắng chiều nghiêng, gió bắt đầu nổi.','Mây trắng trôi lững lờ, trời trong vắt.','Giữa ngày, mọi thứ uể oải như muốn ngủ.'],
+  buoi_toi: ['Hoàng hôn buông, trời đỏ như than hồng.','Đèn lồng lục tục thắp lên, bóng người dài ra.','Chạng vạng, dơi bắt đầu chao liệng.','Khói bếp bay lên, mùi cơm mới thoang thoảng.','Mặt trời lặn hẳn, chân trời chỉ còn một vệt tím.'],
+  buoi_dem: ['Đêm đen như mực, chỉ có tiếng côn trùng rả rích.','Trăng treo lưng trời, sáng lạnh như sương.','Canh khuya, gió thổi qua nghe như tiếng ai thì thầm.','Sao trời dày đặc, dải ngân hà vắt ngang đầu.','Đêm tĩnh mịch, xa xa có tiếng chó sủa rồi im.'],
+  mua_xuan: ['Hoa đào nở rộ, cánh hồng bay theo gió.','Mưa xuân lất phất, cỏ non xanh mướt.','Cành liễu đâm chồi, chim én chao liệng.','Khí trời ấm dần, đất ẩm thơm mùi lá mới.'],
+  mua_ha: ['Mùa hạ nóng bức, sen nở kín mặt hồ.','Mưa rào bất chợt, rồi nắng lại gắt như cũ.','Cây cối xanh um, ve kêu suốt ngày.','Gió nồm thổi tới, mang theo hơi nước.'],
+  mua_thu: ['Lá phong đỏ rụng đầy lối, gió heo may se lạnh.','Trời thu cao vời vợi, nhạn bay thành hàng.','Lúa chín vàng ruộng, hương cốm thoang thoảng.','Sương thu buông sớm, trăng thu tròn vành vạnh.'],
+  mua_dong: ['Tuyết phủ trắng xóa, hơi thở hóa thành sương.','Gió bấc rít từng cơn, cây trơ cành khẳng khiu.','Băng đóng trên mái ngói, nước giếng lạnh buốt.','Trời đông âm u, ngày ngắn đêm dài.'],
   // ---------- dáng vẻ người
   look_gia_nam: ['râu tóc bạc phơ, mắt đục như nước giếng','gầy như que củi, khoác tấm đạo bào vá chằng vá đụp','lưng còng, tay chống gậy trúc đã lên nước bóng','mặt đầy nếp nhăn, cười hở hai chiếc răng cửa','mắt nhắm hờ, móng tay dài cong như vuốt chim','mặc áo vải thô, sau lưng đeo một chiếc hồ lô sứt miệng'],
   look_gia_nu: ['tóc bạc búi cao, cài trâm gỗ đào','lưng còng, tay xách giỏ trúc','mắt đã mờ, nhưng nhìn ngươi như nhìn thấu tâm can','da nhăn như vỏ quýt khô, giọng lại trong như chuông'],
@@ -1580,7 +1606,9 @@ function sense(){
 }
 function arrive(id){
   const r=G.run,n=nodeById(id);r.at=id;r.place={n:n.name,t:n.type};
-  n.fog=3;n.memory=false;n.seenT=W().t;n.vstate=n.state;sense();
+  n.fog=3;n.memory=false;n.seenT=W().t;n.vstate=n.state;
+  for(const v of neighbors(id))hearOf(nodeById(v)); // biển chỉ đường: biết tên các điểm kề
+  sense();
 }
 function travelTo(id){
   const r=G.run;if(!r||r.scene)return false;
@@ -2753,10 +2781,13 @@ function storyHTML(story){
 
 // ---------- thanh trạng thái ----------
 function realmTip(){const r=G.run;const R0=rootView(r.root);return `${realmLabel()}\nTu vi ${Math.floor(r.tv)}%\n${R0.n}: ${r.root.els.map(e=>EL[e].n).join(', ')}`;}
+function tDayText(t){return 'Ngày '+(Math.floor((t%HM)/HD)+1)+' trong tháng';}
 function topBar(){
   const r=G.run,s=S();const left=s.life-r.age;const warn=left<s.life*0.12;
   const st=(i,v,t,cls)=>`<span class="st ${cls||''}"${ta(t)}>${i}<b>${v}</b></span>`;
-  return `<div class="bar"><div class="realm"${ta(realmTip())}>${esc(realmLabel())}</div>
+  const t=W().t,pa=PART[partOf(t)];
+  return `<div class="date"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)]+'\n'+tDayText(t))}><span>${pa.i}</span> <span id="clock">${esc(dateText(t))}</span>${UI.paused?' <i>(dừng)</i>':''}</div>
+  <div class="bar"><div class="realm"${ta(realmTip())}>${esc(realmLabel())}</div>
    <nav class="icons">
     <button data-act="sheet" data-arg="char"${ta('Nhân vật')} aria-label="Nhân vật">👤</button>
     <button data-act="sheet" data-arg="bag"${ta('Hành trang')} aria-label="Hành trang">🎒</button>
@@ -2774,19 +2805,7 @@ function topBar(){
 }
 
 // ---------- các cảnh ----------
-function vRegion(sc){const r=G.run;return banner(REG[r.region].n,r.region,T(REG[r.region].sub,{quoc:G.meta.world.quoc}))+`<div class="story"><p class="new">${esc(sc.text)}</p></div>`+goBtn('regionGo','Lên đường');}
-function progress(){const r=G.run;let o='';for(let i=1;i<=STEPS;i++){o+=i===STEPS?`<span class="pd boss${r.step>=i?' on':''}"${ta('Quan ải')}>🏯</span>`:`<span class="pd${i<r.step?' done':i===r.step?' now':''}"></span>`;}return `<div class="prog">${o}</div>`;}
-function vPath(sc){
-  const r=G.run;const see=U('nhan');
-  let h=banner(r.place.n,r.region)+progress()+`<div class="story"><p>${esc(sc.text)}</p></div><div class="paths">`;
-  sc.opts.forEach((o,i)=>{const N=NODE[o.type];
-    const hint=N.n;
-    let pv='';
-    if((o.type==='combat'||o.type==='elite')&&o.en)pv=`<span class="pv"${ta(see?o.en.n+'\n'+o.en.sub:'Thứ gì đó đang chờ')}>${o.en.i}${see?' '+esc(o.en.n):''}</span>`;
-    if(o.type==='event'&&see&&o.ev)pv=`<span class="pv">${esc(EVMAP[o.ev].n||'')}</span>`;
-    h+=`<button class="path" data-act="path" data-arg="${i}"${ta(N.d)}><span class="pi">${N.i}</span><span class="pt"><b>${esc(o.place.n)}</b><small>${hint}, ${TYPE_NAME[o.place.t]}</small></span>${pv}</button>`;});
-  return h+'</div>';
-}
+function vRegion(sc){const r=G.run;return banner(REG[r.region].n,r.region,T(REG[r.region].sub,{quoc:G.meta.world.quoc}))+`<div class="story"><p class="new">${esc(sc.text)}</p>${sc.sub?`<p class="hint">${esc(sc.sub)}</p>`:''}</div>`+goBtn('regionGo','Lên đường');}
 function choiceExtra(c){
   let x='';const r=G.run;
   if(c.cost){if(c.cost.st)x+=`<span class="cx${r.st<Math.round(c.cost.st*SC[r.region])?' no':''}"${ta('Tốn linh thạch')}>💎${Math.round(c.cost.st*SC[r.region])}</span>`;if(c.cost.mp)x+=`<span class="cx"${ta('Tốn linh lực')}>💧${c.cost.mp}</span>`;if(c.cost.hp)x+=`<span class="cx"${ta('Tốn khí huyết')}>❤️${c.cost.hp}</span>`;}
@@ -2817,7 +2836,7 @@ function foeCard(en,live,sc){
    <div class="foe-n">${esc(en.n)}</div><div class="foe-sub">${elSeal(en.el)} ${esc(en.sub||'')}</div>
    ${live?`<div class="foe-hp">${bar(Math.max(0,en.hp),en.max,'hp')}<span>${Math.max(0,en.hp)}/${en.max}</span></div>${stIcons(en.st)}`:''}</section>`;
 }
-function vBoss(sc){const r=G.run;return banner(r.place.n,r.region,'Quan ải')+`<section class="foe"><div class="foe-ic boss">${sc.b.i}</div><div class="foe-n">${esc(sc.b.n)}</div></section><div class="story"><p class="new">${esc(sc.text)}</p></div>`+goBtn('bossFight','Nghênh chiến');}
+function vBoss(sc){const r=G.run;return banner(r.place.n,r.region,'Sào huyệt')+`<section class="foe"><div class="foe-ic boss">${sc.b.i}</div><div class="foe-n">${esc(sc.b.n)}</div></section><div class="story"><p class="new">${esc(sc.text)}</p></div>`+goBtn('bossFight','Nghênh chiến');}
 function vCombat(sc){
   const r=G.run,s=S(),en=sc.en;
   let h=`<div class="combat">`+foeCard(en,!sc.done,sc);
@@ -2859,25 +2878,12 @@ function vShop(sc){
   sc.items.forEach((it,i)=>{let ic,n,tip,sub;
     if(it.k==='pill'){ic=PILL[it.id].i;n=(it.q?PQ[it.q]+' ':'')+PILL[it.id].n;tip=pillTip(it.id,it.q);sub=PILL[it.id].d.replace('{x}',pillX(it.id,it.q));}
     else if(it.k==='skill'){const sk=SK[it.id];ic=elSeal(sk.el);n=sk.n;tip=skillTip(sk,1);sub='Bí tịch bậc '+sk.t;}
+    else if(it.k==='pass'){ic='🎫';n=it.n;tip='Trình ở quan ải để sang '+REG[it.reg].n;sub='Đồ đấu giá';}
     else {ic='🏺';n=it.rel.name;tip=relicTip(it.rel);sub=GRADE[it.rel.tier];}
     const no=it.sold||r.st<it.p;
     h+=`<button class="srow${it.sold?' sold':''}" data-act="buy" data-arg="${i}"${no?' disabled':''}${ta(tip)}><span class="pk-i">${ic}</span><span class="pk-t"><b>${esc(n)}</b><small>${esc(sub)}</small></span><span class="price">${it.sold?'✓':'💎'+it.p}</span></button>`;});
   h+=`<button class="srow" data-act="heal"${sc.healed||r.st<sc.heal?' disabled':''}${ta('Hồi đầy khí huyết và linh lực')}><span class="pk-i">🩹</span><span class="pk-t"><b>Mời y sư trị thương</b><small>Hồi đầy</small></span><span class="price">${sc.healed?'✓':'💎'+sc.heal}</span></button></div>`;
   return h+goBtn('next','Rời đi');
-}
-function vRest(sc){
-  const r=G.run,s=S();let h=banner(r.place.n,r.region,'Động phủ',true)+`<div class="story"><p>${esc(sc.text)}</p>${storyHTML(sc.story)}</div>`+chipsHTML(sc.chips);
-  if(sc.phase!=='choose')return h+goBtn('restGo','Tiếp tục');
-  const ts=TS[r.region];const bqm=1+(s.fx.bqP||0)/100;
-  const o=[];
-  o.push(['tinh','🧘','Tĩnh tọa điều tức',`<span class="cx"${ta('Hồi 45% khí huyết, đầy linh lực')}>⏳${dur(.25*ts)}</span>`]);
-  o.push(['bq1','📿','Bế quan ngắn',`<span class="cx"${ta('Tu vi tăng khá, hồi đầy')}>✨+${Math.round(tvGain(20*bqm))}%</span><span class="cx">⏳${dur(ts)}</span>`]);
-  o.push(['bq3','⛰️','Bế quan dài',`<span class="cx"${ta('Tu vi tăng nhiều, có thể bị quấy nhiễu')}>✨+${Math.round(tvGain(44*bqm))}%</span><span class="cx">⏳${dur(3*ts)}</span>`]);
-  if(r.tv>=100&&r.realm<4){const p=Math.round(btChance()*100);const pid=btPill();const hp=r.pills.some(x=>x.id===pid);o.unshift(['bt','🌕','Đột phá '+REALM[r.realm+1],`<span class="cx chk"${ta('Ngộ tính, đạo tâm giúp tăng cơ hội; tâm ma làm giảm.'+(hp?'\nSẽ dùng '+PILL[pid].n:'\nCó '+PILL[pid].n+' sẽ dễ hơn')+'\nThất bại: trọng thương, mất tu vi')}>🌕${p}%</span>`]);}
-  const qa=UI.confirm==='quyan';
-  o.push(['quyan','🍃',qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':'Gác kiếm quy ẩn',`<span class="cx"${ta('Kết thúc kiếp này trong yên bình')}>☸</span>`]);
-  h+='<div class="choices">'+o.map(([a,i,l,x])=>`<button class="ch${a==='bt'?' hl':''}${a==='quyan'?' soft':''}" data-act="rest" data-arg="${a}"><span class="ci">${i}</span><span class="ct">${esc(l)}</span>${x}</button>`).join('')+'</div>';
-  return h;
 }
 function vSwap(sc){
   const r=G.run,sk=SK[sc.id];
@@ -2885,7 +2891,83 @@ function vSwap(sc){
   r.skills.forEach((k,i)=>{const s0=SK[k.id];h+=`<button class="ch" data-act="swap" data-arg="${i}"${ta(skillTip(s0,k.lv))}><span class="ci">${elSeal(s0.el)}</span><span class="ct">${esc(s0.n)}</span><span class="cx">quên</span></button>`;});
   return h+`<button class="ch soft" data-act="swap" data-arg="-1"><span class="ci">✋</span><span class="ct">Không học ${esc(sk.n)}</span></button></div>`;
 }
-function vRegionEnd(sc){const r=G.run;return banner(REG[r.region].n,r.region,'Khép lại')+`<div class="story"><p class="new">${esc(sc.text)}</p></div>`+goBtn('nextReg','Đi tiếp');}
+function vPlace(sc){
+  const r=G.run,n=nodeById(sc.id);
+  let h=banner(n.name,r.region,TYPE_NAME[n.type]+' · '+DANGER[n.danger])+`<div class="story"><p>${esc(sc.intro)}</p>${sc.msg.map(m=>`<p class="new">${esc(m)}</p>`).join('')}</div>`+chipsHTML(sc.chips);
+  h+='<div class="choices">';
+  for(const a of placeActs(n)){
+    const qa=a.a==='quyan'&&UI.confirm==='quyan';
+    const x=(a.x?`<span class="cx">${esc(a.x)}</span>`:'')+(a.h?`<span class="cx"${ta('Thời gian sẽ trôi qua')}>⏳${durH(a.h)}</span>`:'');
+    h+=`<button class="ch${a.a==='bt'?' hl':''}${a.a==='quyan'?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="ci">${a.i}</span><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':a.l)}</span>${x}</button>`;
+  }
+  return h+'</div>'+goBtn('leave','Ra bản đồ');
+}
+function vPass(sc){
+  const r=G.run;let h=banner(r.place.n,r.region,'Quan ải → '+REG[sc.k].n)+`<div class="story"><p class="new">${esc(sc.text)}</p><p class="hint">Qua ải mất khoảng ${CROSS_M[sc.k]} tháng đường.</p></div><div class="choices">`;
+  for(const o of passOpts())h+=`<button class="ch" data-act="pass" data-arg="${o.a}"${o.ok?'':' disabled'}${ta(o.tip)}><span class="ci">${o.i}</span><span class="ct">${esc(o.l)}</span>${o.x?`<span class="cx">${o.x}</span>`:''}</button>`;
+  return h+'</div>'+goBtn('next','Quay lại');
+}
+
+// ---------- bản đồ ----------
+function mapView(){
+  const r=G.run;const X0=r.region*1000;if(!UI.z)UI.z=2;const z=UI.z;const w=1000/z;
+  if(UI.vreg!==r.region||UI.vx==null){const [px,py]=playerXY();UI.vx=px-w/2;UI.vy=py-w/2;UI.vreg=r.region;}
+  UI.vx=clamp(UI.vx,X0-w*0.25,X0+1000-w*0.75);UI.vy=clamp(UI.vy,-w*0.25,1000-w*0.75);
+  return [UI.vx,UI.vy,w,w];
+}
+function mapSVG(){
+  const r=G.run,w=W(),R0=regionOf(r.region),X0=r.region*1000,tint=REG[r.region].tint;
+  const [vx,vy,vw,vh]=mapView();
+  let s=`<svg id="map" viewBox="${vx} ${vy} ${vw} ${vh}" preserveAspectRatio="xMidYMid meet"><defs>
+   <radialGradient id="fogg"><stop offset=".55" stop-color="#000"/><stop offset="1" stop-color="#fff"/></radialGradient>
+   <mask id="fogm" maskUnits="userSpaceOnUse" x="${X0-500}" y="-500" width="2000" height="2000"><rect x="${X0-500}" y="-500" width="2000" height="2000" fill="#fff"/>${r.reveal.filter(c=>c[0]>=X0-200&&c[0]<X0+1200).map(c=>`<circle cx="${c[0]}" cy="${c[1]}" r="${c[2]}" fill="url(#fogg)"/>`).join('')}</mask></defs>
+   <rect x="${X0-500}" y="-500" width="2000" height="2000" fill="var(--paper)"/>`;
+  for(const t of R0.terr){
+    if(t.k==='m')s+=`<path d="M${t.x-t.s} ${t.y+t.s*0.5} L${t.x} ${t.y-t.s*0.6} L${t.x+t.s} ${t.y+t.s*0.5} Z M${t.x-t.s*0.4} ${t.y+t.s*0.5} L${t.x+t.s*0.25} ${t.y-t.s*0.15} L${t.x+t.s*0.7} ${t.y+t.s*0.5}" fill="${tint[0]}" opacity=".55" stroke="${tint[2]}" stroke-width="2"/>`;
+    else s+=`<path d="M${t.p.map(p=>p.join(' ')).join(' L')}" fill="none" stroke="var(--blue)" stroke-width="7" opacity=".28" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }
+  s+=`<rect x="${X0-500}" y="-500" width="2000" height="2000" fill="var(--bg2)" mask="url(#fogm)" opacity=".96"/>`;
+  s+=`<rect x="${X0}" y="0" width="1000" height="1000" fill="none" stroke="var(--line)" stroke-width="3" stroke-dasharray="14 10"/>`;
+  const vis=n=>n.fog>=2;
+  for(const e of R0.edges){const a=nodeById(e.a),b=nodeById(e.b);if(!vis(a)||!vis(b))continue;s+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="var(--ink2)" stroke-width="3" opacity=".55" stroke-dasharray="2 7" stroke-linecap="round"/>`;}
+  if(r.moving){const m=r.moving;let d='';for(let i=m.seg;i<m.path.length;i++){const n=nodeById(m.path[i]);d+=(d?' L':'M')+(i===m.seg?playerXY().join(' '):n.x+' '+n.y);}s+=`<path d="${d}" fill="none" stroke="var(--red)" stroke-width="3" opacity=".6"/>`;}
+  for(const n of R0.nodes){
+    if(n.fog<1)continue; // điểm chưa biết: không vẽ gì
+    const [x,y]=nodeShown(n);const sure=n.fog>=2||n.memory;const old=n.fog>=2&&n.seenT>=0&&w.t-n.seenT>HY;
+    const sel=UI.sel===n.id;const ruin=(n.vstate||'ok')==='ruin'&&n.fog>=2;
+    s+=`<g class="nd${sure?'':' rum'}${old||n.memory?' old':''}${sel?' sel':''}" data-act="sel" data-arg="${n.id}" transform="translate(${x} ${y})">
+      <circle r="26" fill="var(--paper)" stroke="${n.dp?'var(--jade)':'var(--gold)'}" stroke-width="${sel?5:3}"${sure?'':' stroke-dasharray="6 5"'}/>
+      <text class="ni" y="10" text-anchor="middle">${n.fog>=2||n.memory?(ruin?'🔥':NODE_IC[n.type]):'❔'}</text>
+      <text class="nn" y="50" text-anchor="middle">${esc(n.name+(sure?'':'?'))}</text>${old?`<text class="nn" y="72" text-anchor="middle" font-size="18">tin cũ</text>`:''}</g>`;
+  }
+  if(typeof entsSVG==='function')s+=entsSVG();
+  const [px,py]=playerXY();
+  s+=`<g id="me" transform="translate(${px} ${py})"><rect x="-15" y="-15" width="30" height="30" rx="3" fill="var(--red)" transform="rotate(-6)"/><text y="9" text-anchor="middle" fill="#F8EBD6" font-size="22">我</text></g>`;
+  return s+'</svg>';
+}
+function nodeCard(){
+  const r=G.run;const n=UI.sel!=null&&nodeById(UI.sel);
+  if(!n||n.fog<1||Math.floor(n.id/100)!==r.region)return `<div class="ncard hint">Chạm vào một điểm trên bản đồ để xem.</div>`;
+  const sure=n.fog>=2||n.memory;const here=n.id===r.at&&!r.moving;
+  let info=`${TYPE_NAME[n.type]}${sure?'':' (nghe đồn)'} · ${DANGER[nodeDanger(n)]}${n.fog>=2||n.memory?'':'?'}`;
+  if(n.fog>=3&&n.dp)info+=' · có động phủ';
+  if(n.memory)info+=' · ký ức kiếp trước';
+  if((n.vstate||'ok')==='ruin'&&n.fog>=2)info+=' · hoang tàn';
+  if(n.fog>=2&&W().t-n.seenT>HY)info+=' · tin cũ';
+  let btn='';
+  if(here)btn=`<button class="go sm" data-act="enter">Vào</button>`;
+  else{let p=null;const m=r.moving;const st=m&&m.seg<m.path.length-1?m.path[m.seg+1]:r.at;p=findPath(st,n.id)||(n.id===st?[st]:null);
+    if(p){const L=Math.round(pathLen(p));btn=`<span class="cx">${L} dặm · ${durH(L/walkSpeed())}</span><button class="go sm" data-act="go" data-arg="${n.id}">Đi tới</button>`;}}
+  return `<div class="ncard"><div class="nc-t"><b>${esc(n.name+(sure?'':'?'))}</b><small>${esc(info)}</small></div><div class="nc-b">${btn}</div></div>`;
+}
+function vMap(){
+  const r=G.run;const sp=UI.speed||1;
+  const B=(act,arg,lab,tip,on,dis)=>`<button class="mb${on?' on':''}" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}${dis?' disabled':''}${ta(tip)}>${lab}</button>`;
+  return `<div class="mapw"><div id="mapbox">${mapSVG()}</div>
+   <div class="mctl">${B('speed',0,'⏸','Tạm dừng',UI.paused)}${B('speed',1,'×1','1 giây = 1 giờ',!UI.paused&&sp===1)}${B('speed',12,'×12','Chờ nhanh',!UI.paused&&sp===12)}${B('wait','sang','🌅','Chờ tới sáng',0,!!r.moving)}${B('wait','toi','🌇','Chờ tới tối',0,!!r.moving)}</div>
+   <div class="mzoom">${B('zoom',1,'＋','Phóng to')}${B('zoom',-1,'－','Thu nhỏ')}${B('center',null,'◎','Về chỗ ngươi')}</div>
+   ${r.moving?`<div class="mstop">${B('stop',null,'✋ Dừng','Dừng lại giữa đường')}</div>`:''}</div>${nodeCard()}`;
+}
 
 // ---------- màn hình ngoài ----------
 function vTitle(){
@@ -2926,7 +3008,7 @@ function vCodex(){
   if(tab==='lives'){h+=M.lives.length?M.lives.map(L=>`<details class="life"><summary><b>${esc(L.ten)}</b><small>Kiếp ${L.k}, ${L.tuoi} tuổi, ${esc(L.realm)}</small></summary><p class="ep">${esc(L.ep)}</p>${L.lines.map(l=>`<p>${esc(l)}</p>`).join('')}</details>`).join(''):'<p class="hint">Chưa có kiếp nào kết thúc.</p>';}
   if(tab==='lore'){const ks=Object.keys(LORE);h+=`<p class="hint">${M.lore.length}/${ks.length}</p>`+ks.map(k=>M.lore.includes(k)?`<details class="life"><summary><b>${esc(LORE[k].n)}</b></summary><p>${esc(LORE[k].t)}</p></details>`:`<div class="life lock">？</div>`).join('');}
   if(tab==='ach'){h+=`<p class="hint">${M.ach.length}/${ACH.length}</p><div class="achs">`+ACH.map(a=>`<span class="chip ${M.ach.includes(a.id)?'item':'lockc'}"${ta(a.d)}>${M.ach.includes(a.id)?'🏅':'○'} ${esc(a.n)}</span>`).join('')+'</div>';}
-  return h+`</div>`+goBtn('screen','Quay lại',G.run?'run':'meta');
+  return h+`</div>`+goBtn('screen','Quay lại',G.run?'map':'meta');
 }
 function tabs(list,cur){return `<div class="tabs">${list.map(([k,n])=>`<button data-act="tab" data-arg="${k}" class="${k===cur?'on':''}">${n}</button>`).join('')}</div>`;}
 
@@ -2960,7 +3042,7 @@ function sheetHTML(){
     const tab=UI.tab||'log';let h=`<h3 class="sh">Nhật ký</h3>`+tabs([['log','Đời này'],['bang','Thiên Kiêu'],['news','Tin đồn']],tab);
     if(tab==='log')h+=`<div class="logl">${r.log.slice().reverse().map(l=>`<p><span>${l.a}</span>${esc(l.t)}</p>`).join('')}</div>`;
     if(tab==='bang'){const w=G.meta.world;
-      h+=r.bang?`<p class="hint">Công bố năm ngươi ${r.bang.nam} tuổi</p><div class="list">${r.bang.ds.map((x,i)=>`<div class="li${x.i<0?' me':''}"><span>${i+1}</span><span>${esc(x.ten)}</span><small>${REALM[x.realm]}</small></div>`).join('')}</div>`:'<p class="hint">Thiên Kiêu Bảng chưa tới kỳ công bố.</p>';
+      h+=r.bang?`<p class="hint">Công bố năm ${r.bang.y||''}, khi ngươi ${r.bang.nam} tuổi</p><div class="list">${r.bang.ds.map((x,i)=>`<div class="li${x.i<0?' me':''}"><span>${i+1}</span><span>${esc(x.ten)}</span><small>${REALM[x.realm]}</small></div>`).join('')}</div>`:'<p class="hint">Thiên Kiêu Bảng chưa tới kỳ công bố.</p>';
       h+=`<h4>Thiên kiêu đương thời</h4><div class="list">${r.rivals.map(x=>{const wr=w.rivals[x.i];return `<div class="li${x.alive?'':' dead'}"${ta(wr.tt+' của '+w.sects[wr.s].n)}>${elSeal(wr.el)}<span>${esc(wr.ten)}</span><small>${x.alive?REALM[x.realm]:'đã mất'}</small></div>`;}).join('')}</div>`;}
     if(tab==='news')h+=`<div class="logl">${r.news.length?r.news.slice().reverse().map(l=>`<p><span>${l.a}</span>${esc(l.t)}</p>`).join(''):'<p class="hint">Chưa nghe được gì.</p>'}</div>`;
     return h;
@@ -2990,11 +3072,11 @@ function render(){
     else if(G.screen==='meta')h=vMeta();
     else if(G.screen==='codex')h=vCodex();
     else if(G.run){const sc=G.run.scene;
-      h=({region:vRegion,path:vPath,event:vEvent,enc:vEnc,boss:vBoss,combat:vCombat,reward:vReward,shop:vShop,rest:vRest,swap:vSwap,regionEnd:vRegionEnd}[sc.type]||(()=>''))(sc);}
+      h=sc?({region:vRegion,event:vEvent,enc:vEnc,boss:vBoss,combat:vCombat,reward:vReward,shop:vShop,swap:vSwap,place:vPlace,pass:vPass}[sc.type]||(typeof sceneView==='function'?sceneView:(()=>'')))(sc):vMap();}
     else {G.screen='title';h=vTitle();}
   }catch(e){console.error(e);h=`<div class="pad"><p>Có lỗi khi vẽ màn hình: ${esc(e.message)}</p>${goBtn('screen','Về màn hình đầu','title')}</div>`;}
-  top.innerHTML=(G.screen==='run'&&G.run)?topBar():'';
-  top.hidden=!(G.screen==='run'&&G.run);
+  top.innerHTML=(G.screen==='map'&&G.run)?topBar():'';
+  top.hidden=!(G.screen==='map'&&G.run);
   st.innerHTML=h;
   const sh=$('#sheet');
   if(UI.sheet){$('#sheetBody').innerHTML=sheetHTML();sh.hidden=false;}else sh.hidden=true;
@@ -3002,10 +3084,36 @@ function render(){
   hideTip();
 }
 let lastSceneKey='';
+// ---------- đồng hồ chạy ngầm ----------
+function clockOn(){return G.screen==='map'&&G.run&&!G.run.scene&&!UI.sheet&&!UI.paused&&!document.hidden;}
+let clkLast=performance.now(),clkAcc=0,clkFlush=0,clkSaveT=0;
+function clockLoop(now){
+  let dt=Math.min(1,(now-clkLast)/1000);clkLast=now;
+  if(clockOn()&&!UI.drag){
+    clkAcc+=dt;
+    if(now-clkFlush>=250){clkFlush=now;const r=G.run;const sp=UI.speed||1;const hrs=clkAcc*sp;clkAcc=0;
+      try{
+        let redraw=false;
+        if(r.moving){redraw=travelTick(hrs*Math.max(sp,6)/sp*1)||true;}
+        else{advanceTime(hrs);if(G.run)autoCheck();}
+        if(!G.run||G.run.scene||G.screen!=='map'){after();}
+        else if(redraw){render();}
+        else{const c=$('#clock');if(c)c.textContent=dateText(W().t);}
+        if(G.run&&(W().t-clkSaveT>=30||(G.run.moving&&now-(UI.mvSave||0)>500))){clkSaveT=W().t;UI.mvSave=now;saveSoon();}
+      }catch(e){console.error(e);}
+    }
+  } else clkAcc=0;
+  requestAnimationFrame(clockLoop);
+}
+document.addEventListener('visibilitychange',()=>{clkLast=performance.now();clkAcc=0;});
+// kéo bản đồ
+document.addEventListener('pointerdown',e=>{const m=e.target.closest('#map');if(!m)return;UI.drag={x:e.clientX,y:e.clientY,vx:UI.vx,vy:UI.vy,moved:false,w:m.getBoundingClientRect().width};});
+document.addEventListener('pointermove',e=>{const d=UI.drag;if(!d)return;const dx=e.clientX-d.x,dy=e.clientY-d.y;if(Math.abs(dx)+Math.abs(dy)>6)d.moved=true;if(!d.moved)return;const k=(1000/(UI.z||1))/d.w;UI.vx=d.vx-dx*k;UI.vy=d.vy-dy*k;const v=mapView();const m=$('#map');if(m)m.setAttribute('viewBox',v.join(' '));});
+['pointerup','pointercancel'].forEach(t=>document.addEventListener(t,()=>{const d=UI.drag;if(d&&d.moved)UI.suppress=true;UI.drag=null;}));
 function after(){
   const sc=G.run&&G.run.scene;const key=G.screen+(sc?sc.type+(sc.id||'')+(sc.story?sc.story.length:0):'');
   render();saveSoon();
-  if(key!==lastSceneKey&&!(sc&&sc.type==='combat')){window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+  if(key!==lastSceneKey&&!(sc&&sc.type==='combat')&&sc){window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
   lastSceneKey=key;
 }
 
@@ -3013,12 +3121,22 @@ function after(){
 const ACT={
   birth:()=>{genBirth();},
   born:i=>{newRun(G.birth.cards[+i]);},
-  resume:()=>{G.screen='run';},
-  screen:a=>{UI.sheet=null;UI.tab=null;if(a==='run'){G.screen=G.run?'run':'title';}else{G.screen=a;}if(a==='meta')G.over=null;},
-  regionGo:()=>regionGo(),
-  path:i=>choosePath(+i),
+  resume:()=>{G.screen='map';},
+  screen:a=>{UI.sheet=null;UI.tab=null;if(a==='map'){G.screen=G.run?'map':'title';}else{G.screen=a;}if(a==='meta')G.over=null;},
+  regionGo:()=>{G.run.scene=null;UI.vx=null;},
   choose:i=>choose(+i),
-  next:()=>nextNode(),
+  next:()=>endScene(),
+  pact:a=>{if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
+  leave:()=>leavePlace(),
+  pass:a=>passAct(a),
+  sel:id=>{UI.sel=+id;},
+  go:id=>{if(travelTo(+id)){UI.paused=false;}},
+  enter:()=>{openPlace(G.run.at);},
+  stop:()=>stopTravel(),
+  speed:v=>{v=+v;if(!v)UI.paused=!UI.paused;else{UI.paused=false;UI.speed=v;}},
+  wait:k=>{const h=tHour(W().t);const tgt=k==='sang'?5:17;let d=(tgt-h+24)%24;if(d<0.01)d=24;advanceTime(d);if(G.run)autoCheck();},
+  zoom:d=>{const z0=UI.z||1;const z=clamp(z0*(+d>0?1.5:1/1.5),1,4);const w0=1000/z0,w1=1000/z;UI.vx+=(w0-w1)/2;UI.vy+=(w0-w1)/2;UI.z=z;},
+  center:()=>{UI.vx=null;},
   enc:a=>encAct(a),
   bossFight:()=>bossFight(),
   skill:id=>{UI.pillTray=false;playerSkill(id);},
@@ -3031,10 +3149,7 @@ const ACT={
   rcont:()=>rewardContinue(),
   buy:i=>buy(+i),
   heal:()=>healBuy(),
-  rest:a=>{if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;restAct(a);},
-  restGo:()=>restContinue(),
   swap:i=>swapSkill(+i),
-  nextReg:()=>nextRegion(),
   upg:id=>buyUpg(id),
   tab:t=>{UI.tab=t;},
   sheet:k=>{UI.sheet=UI.sheet===k?null:k;UI.tab=null;UI.code=null;UI.msg=null;UI.confirm=null;},
@@ -3052,7 +3167,7 @@ document.addEventListener('click',e=>{
   if(!el){const t=e.target.closest('[data-tip]');if(t){showTip(t,true);}else hideTip();return;}
   if(el.disabled)return;
   const a=el.dataset.act;const f=ACT[a];if(!f)return;
-  if(a!=='rest'&&a!=='wipe')UI.confirm=null;
+  if(a!=='pact'&&a!=='wipe')UI.confirm=null;
   f(el.dataset.arg,el);after();
 },true);
 
@@ -3075,12 +3190,21 @@ window.addEventListener('scroll',()=>{if(tipEl&&tipEl.closest('[data-act]'))hide
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(UI.sheet){UI.sheet=null;render();}hideTip();}});
 
 // ---------- lưu ----------
-const KEY='phusinh_save_v1';
-function snapshot(){return {v:1,ts:Date.now(),meta:G.meta,run:G.run,over:G.over,birth:G.birth,screen:G.screen};}
+const KEY='phusinh2_save_v1';
+function snapshot(){return {v:SAVE_V,ts:Date.now(),meta:G.meta,run:G.run,over:G.over,birth:G.birth,screen:G.screen};}
 function encodeSave(){return 'PS1.'+btoa(unescape(encodeURIComponent(JSON.stringify(snapshot()))));}
 function decodeSave(s){s=s.trim();if(s.startsWith('PS1.'))s=s.slice(4);return JSON.parse(decodeURIComponent(escape(atob(s))));}
-function loadData(d){if(!d||!d.meta)throw new Error('bad');G={meta:d.meta,run:d.run||null,over:d.over||null,birth:d.birth||null,screen:d.screen||'title'};
-  if(G.screen==='run'&&!G.run)G.screen='title';if(G.screen==='over'&&!G.over)G.screen='meta';if(G.screen==='birth'&&!G.birth)G.screen='title';
+// điền giá trị mặc định cho trường mới; mỗi lần chỉnh sửa tăng SAVE_V và thêm một bước ở đây
+function migrate(d){
+  if(!d||!d.meta||!d.meta.world||!d.meta.world.regions)throw new Error('bad');
+  d.v=d.v||1;
+  if(d.run&&d.run.scene&&d.run.scene.type==='combat'&&d.run.scene.dodge)d.run.scene.dodge=null;
+  if(typeof migrateX==='function')migrateX(d);
+  d.v=SAVE_V;d.meta.v=SAVE_V;
+  return d;
+}
+function loadData(d){d=migrate(d);G={meta:d.meta,run:d.run||null,over:d.over||null,birth:d.birth||null,screen:d.screen||'title'};
+  if((G.screen==='map'||G.screen==='run')&&!G.run)G.screen='title';if(G.screen==='run')G.screen='map';if(G.screen==='over'&&!G.over)G.screen='meta';if(G.screen==='birth'&&!G.birth)G.screen='title';
   if(!G.meta.world)G.meta.world=genWorld();}
 let DB=null,dbBusy=false,dbPending=false,dbTimer=null;
 saveSoon=function(){
@@ -3111,6 +3235,7 @@ async function initDB(){
   if(!ok){G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};}
   render();
   initDB();
+  requestAnimationFrame(clockLoop);
 })();
 
 </script>
