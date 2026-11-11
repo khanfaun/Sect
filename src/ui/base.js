@@ -82,6 +82,7 @@ const ICP={
   flag:'M6 21V4M6 5h11l-2 4 2 4H6',
   eye:'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 100 6 3 3 0 000-6z',
   check:'M5 12l5 5 9-10',
+  pen:'M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4M4 20l1-4',
   seat:'M12 6a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM7 13c0-3 2-5 5-5s5 2 5 5M3 20c3-4 6-5 9-5s6 1 9 5M7 13l-2 4M17 13l2 4',
 };
 function ib(n,c){return `<span class="ib${c?' ib-'+c:''}">${ic(n)}</span>`;}

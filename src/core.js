@@ -2029,7 +2029,11 @@ const ENT_T={
   thienkieu:{n:'Thiên kiêu',i:'🌟',sp:10,w:1,life:[8,20]},
   truysat:{n:'Kẻ truy sát',i:'🗡️',sp:7,w:0,life:[30,60]},
   di:{n:'Dị tượng',i:'✨',sp:0,w:2,life:[3,10]},
+  khach:{n:'Khách qua đường',i:'🎒',sp:3,w:1,life:[10,25]},
 };
+// gặp thực thể hiền: chỉ có xác suất p, và cách lần gặp trước (cùng nhóm g) ít nhất cd ngày
+const MEET_SOFT={thuong:{p:.25,cd:20,g:'td'},khach:{p:.3,cd:12,g:'kh'},tuantra:{p:.5,cd:8,g:'tt'}};
+const KHACH_K=[['Lữ khách','🎒'],['Tiều phu','🪓'],['Thợ săn','🏹'],['Hành cước tăng','📿'],['Thư sinh lên kinh','📜'],['Tán tu','🧘'],['Gánh hát rong','🎭'],['Người hái thuốc','🌿']];
 const DI_K={bicanh:{n:'Bí cảnh mở cửa',i:'🌀',ev:'bi_canh'},saoroi:{n:'Sao rơi',i:'☄️',ev:'sao_roi'},daugia:{n:'Hội đấu giá',i:'🏮',ev:'dau_gia'}};
 function entsHere(k){return W().ents.filter(e=>e.r===k);}
 function entXY(e){const a=nodeById(e.at);if(e.to==null)return [a.x,a.y];const b=nodeById(e.to);return [a.x+(b.x-a.x)*e.prog,a.y+(b.y-a.y)*e.prog];}
@@ -2048,6 +2052,10 @@ function spawnEnt(type,k,o){
   else if(type==='thienkieu'){const al=(G.run?G.run.rivals:w.rstate||[]).filter(x=>x.alive);if(!al.length)return null;const rv=o.rv!=null?o.rv:pick(al).i;if(w.ents.some(x=>x.type==='thienkieu'&&x.data.rv===rv))return null;e.data.rv=rv;e.name=w.rivals[rv].ten;
     const di=w.ents.find(x=>x.r===k&&x.type==='di');const a=pick(ns.filter(n=>n.type!=='ai'));e.at=a.id;setRoute(e,di?di.at:pick(ns).id);}
   else if(type==='truysat'){const a=o.at!=null?o.at:pick(ns.filter(n=>n.id!==(G.run&&G.run.at))).id;e.at=a;e.data=o.data||{};e.name=o.name||'Kẻ truy sát';e.until=w.t+60*HD;if(G.run)setRoute(e,G.run.at);}
+  else if(type==='khach'){const pool=ns.filter(n=>n.type!=='ai');let a=pick(pool),dst=pick(pool.filter(x=>x!==a));
+    if(o.near!=null){a=nodeById(pick(neighbors(o.near)));e.at=a.id;setRoute(e,o.near);e.route=e.route.concat((findPath(o.near,dst.id)||[]).slice(1));e.dest=dst.id;}
+    else{e.at=a.id;setRoute(e,dst.id);}
+    const kk=pick(KHACH_K);e.data.k=kk[0];e.name=kk[0]+' họ '+pick(NAME.ho);e.icon=kk[1];}
   else if(type==='di'){const kk=o.k||pick(Object.keys(DI_K));const pool=ns.filter(n=>kk==='daugia'?n.type==='thanh':!['tran','thanh','ai','sao'].includes(n.type));if(!pool.length)return null;const a=pick(pool);e.at=a.id;e.data.k=kk;e.name=DI_K[kk].n;e.icon=DI_K[kk].i;e.speed=0;
     chronQuiet(`${DI_K[kk].n} ở ${a.name}.`);}
   if(e.at==null)return null;
@@ -2061,7 +2069,7 @@ function director(){
   for(const s of r.seeds){if(s.t==='oan'&&!s.ent&&W().t-(s.at||0)>=30*HD&&chance(.25)){const e=spawnEnt('truysat',k,{name:s.ten,data:{seed:1}});if(e){s.ent=e.id;}}}
   const nem=W().nemesis;if(nem&&!nem.ent&&k>=Math.min(nem.r,3)&&r.kiep>nem.kiep&&chance(.2)){const e=spawnEnt('truysat',k,{name:nem.n,data:{nem:1}});if(e){e.icon=nem.i||'🗡️';nem.ent=e.id;}}
   // quanh người chơi trống trải: cho một đoàn người đi ngang qua
-  {const me=nodeById(r.at);if(!L.some(e=>{const p=entXY(e);return Math.hypot(p[0]-me.x,p[1]-me.y)<=senseR();})&&L.length<12&&chance(.6))spawnEnt('thuong',k,{near:r.at});}
+  {const me=nodeById(r.at);if(!L.some(e=>{const p=entXY(e);return Math.hypot(p[0]-me.x,p[1]-me.y)<=senseR();})&&L.length<12&&chance(.12))spawnEnt(chance(.5)?'thuong':'khach',k,{near:r.at});}
   if(L.length>=6)return;
   const cnt={};for(const e of L)cnt[e.type]=(cnt[e.type]||0)+1;
   const pool=Object.keys(ENT_T).filter(t=>ENT_T[t].w>0&&(cnt[t]||0)<3);
@@ -2083,6 +2091,7 @@ function entIdle(e){
   else if(e.type==='tuantra'){const nb=neighbors(e.data.home);setRoute(e,e.at===e.data.home?pick(nb):e.data.home);}
   else if(e.type==='thienkieu'){const di=W().ents.find(x=>x.r===e.r&&x.type==='di');setRoute(e,di&&di.at!==e.at?di.at:pick(regionOf(e.r).nodes).id);}
   else if(e.type==='truysat'&&r)setRoute(e,r.at);
+  else if(e.type==='khach'){const ns=regionOf(e.r).nodes.filter(x=>x.id!==e.at&&x.type!=='ai');if(ns.length)setRoute(e,pick(ns).id);}
 }
 function entArrive(e){
   const w=W();const n=nodeById(e.at);
@@ -2091,6 +2100,7 @@ function entArrive(e){
     if(n.state==='ok'){n.state='ruin';n.stateUntil=w.t+6*HM;chron(`Thú triều tràn qua ${n.name}. Nhà cửa đổ nát, người sống sót bỏ đi.`);}
     removeEnt(e);return;}
   if(e.type==='tuantra')e.wait=6;
+  if(e.type==='khach')e.wait=ri(4,16);
   if(e.type==='thienkieu')e.wait=ri(6,24);
 }
 // gặp nhau: người chơi tới điểm có thực thể, hoặc đi ngược chiều trên cùng đoạn đường
@@ -2100,7 +2110,13 @@ function entMeetAt(id,from){
     if(e.met===r.kiep+':'+Math.floor(W().t/HD))continue;
     const atNode=e.to==null&&e.at===id||e.to!=null&&e.prog<0.05&&e.at===id;
     const opp=from!=null&&e.at===id&&e.to===from;
-    if(atNode||opp){meetEnt(e);return true;}
+    if(atNode||opp){
+      // thương đội và khách qua đường: không phải lần nào đi ngang cũng dừng lại nói chuyện
+      const soft=MEET_SOFT[e.type];
+      if(soft){const day=Math.floor(W().t/HD);e.met=r.kiep+':'+day;const last=(r.meetT||{})[soft.g];
+        if(last!=null&&W().t-last<soft.cd*HD||!chance(soft.p))continue;
+        (r.meetT||(r.meetT={}))[soft.g]=W().t;}
+      meetEnt(e);return true;}
   }
   return false;
 }
@@ -3071,6 +3087,32 @@ ev({id:'td_nan',src:'ent:thuong',n:'Thương đội bị yêu thú vây',tg:['*'
  t:['Tiếng ngựa hí thất thanh. {$en} bị một bầy yêu thú vây giữa đường, hộ vệ đã ngã mấy người.'],
  c:[{i:'⚔️',l:'Xông vào cứu',fight:{k:'beast',cnt:2},win:{t:'Bầy thú tan tác. {$a.ten} quỳ xuống cảm tạ, dâng cả túi linh thạch.',e:{st:35,karma:6,an:['a','cứu khỏi bầy yêu thú']}}},
     {i:'🚶',l:'Đứng xa nhìn',t:'Ngươi không xen vào. Lúc ngươi đi, tiếng kêu cứu đã tắt.',e:{tamma:4,karma:-2}}]});
+// ----- Khách qua đường (người thường, không buôn bán) -----
+ev({id:'kh_hoiduong',src:'ent:khach',n:'Hỏi đường',tg:['*'],w:3,v:()=>({a:npc('pham')}),
+ t:['{$en} đứng bên ngã ba, tay cầm tấm bản đồ rách. Thấy ngươi, {$a.hn} mừng rỡ: “{$a.goi}, đường nào ra trấn gần nhất?”','Một bóng người từ trong bụi bước ra, là {$en}. {$a.hn} lúng túng chắp tay hỏi đường.'],
+ c:[{i:'👉',l:'Chỉ đường cho tử tế',t:'{$a.ten} cảm ơn rối rít, còn kể cho ngươi nghe chuyện vừa thấy dọc đường.',e:{rumor:1,karma:2}},
+    {i:'🤷',l:'Bảo không biết',t:'Ngươi lắc đầu rồi đi tiếp. Sau lưng, {$a.hn} vẫn xoay xoay tấm bản đồ.'}]});
+ev({id:'kh_chung',src:'ent:khach',n:'Đi chung một quãng',tg:['*'],w:3,v:()=>({a:npc('pham')}),
+ t:['{$en} đi cùng hướng với ngươi. Đường dài, {$a.hn} bắt chuyện cho đỡ buồn.','Trời sắp tối. {$en} đề nghị đốt chung một đống lửa bên đường cho đỡ sợ thú dữ.'],
+ c:[{i:'🔥',l:'Ngồi cùng nghỉ chân',t:'Hai người chia nhau miếng lương khô. {$a.ten} kể chuyện quê nhà, ngươi nghe mà lòng nhẹ đi.',e:{h:6,tamma:-3,an:['a','cùng nghỉ chân bên đường']}},
+    {i:'🚶',l:'Đi trước một mình',t:'Ngươi chào rồi rảo bước. Tu tiên vốn là đường một người.'}]});
+ev({id:'kh_benh',src:'ent:khach',n:'Người ốm bên đường',tg:['*'],w:2,v:()=>({a:npc('gia')}),
+ t:['{$en} ngồi gục dưới gốc cây, mặt tái mét, thở không ra hơi.'],
+ c:[{i:'💊',l:'Cho một viên đan',req:r=>r.pills.length>0,t:'Một lúc sau {$a.ten} hồng hào trở lại, run run lạy ngươi một lạy.',e:{dropPill:1,karma:6,an:['a','cứu mạng giữa đường']}},
+    {i:'🤲',l:'Truyền chút chân khí',cost:{mp:8},t:'Chân khí ấm áp chạy vào kinh mạch người phàm. {$a.ten} đỡ hẳn, cảm kích không thôi.',e:{karma:4,an:['a','truyền chân khí cứu giúp']}},
+    {i:'🚶',l:'Đi qua',t:'Ngươi không dừng lại. Đi được một quãng vẫn còn nghe tiếng ho khan.',e:{tamma:2}}]});
+ev({id:'kh_cuop',src:'ent:khach',n:'Kẻ cướp đường',tg:['*'],w:1,v:()=>({a:npc('pham')}),
+ t:['{$en} trông hiền lành, nhưng vừa tới gần đã rút dao, sau bụi còn hai tên đồng bọn nhảy ra.'],
+ c:[{i:'⚔️',l:'Ra tay',fight:{k:'sontac',cnt:2},win:{t:'Bọn chúng chạy mất dép, bỏ lại túi tiền cướp được.',e:{st:18}}},
+    {i:'💨',l:'Lách người bỏ đi',chk:['tp',9],ok:{t:'Ngươi lướt qua như gió. Bọn chúng còn chưa kịp nhìn rõ mặt.'},no:{t:'Không thoát được, đành bỏ ra ít linh thạch cho xong chuyện.',e:{st:-8}}}]});
+ev({id:'kh_vat',src:'ent:khach',n:'Đồ đánh rơi',tg:['*'],w:2,v:()=>({a:npc('pham')}),
+ t:['Trên đường có một cái túi vải. Phía trước chừng trăm bước, {$en} đang lật đật tìm kiếm thứ gì.'],
+ c:[{i:'🤝',l:'Trả lại',t:'{$a.ten} mừng như bắt được vàng, nhất quyết biếu ngươi chút lộ phí.',e:{st:6,karma:5}},
+    {i:'👜',l:'Giữ lấy',t:'Trong túi có ít bạc vụn và một lá thư nhà. Ngươi lặng lẽ rẽ sang lối khác.',e:{st:10,karma:-5}}]});
+ev({id:'kh_dam',src:'ent:khach',n:'Đàm đạo',tg:['*'],w:2,v:()=>({a:npc('dao')}),
+ t:['{$en} ngồi nghỉ trên tảng đá, thấy ngươi liền mỉm cười: “{$a.goi} cũng là người tu hành? Ngồi đây nói chuyện một lát.”'],
+ c:[{i:'🍵',l:'Ngồi luận đạo',chk:['ngo',10],ok:{t:'Một câu nói vu vơ của {$a.ten} chạm đúng chỗ ngươi đang vướng. Chân khí trong người thông suốt hẳn.',e:{tv:4,h:3}},no:{t:'Hai người nói chuyện trời đất, không thu được gì nhưng lòng thấy thư thái.',e:{tamma:-2,h:3}}},
+    {i:'🙏',l:'Chắp tay rồi đi',t:'Ngươi cúi chào. {$a.ten} gật đầu, lại nhắm mắt như ngủ.'}]});
 // ----- Thú triều -----
 ev({id:'tt_chan',src:'ent:thutrieu',n:'Thú triều ập tới',tg:['*'],w:3,
  t:['Mặt đất rung lên. {$en} tràn tới như nước vỡ bờ, mắt đỏ rực, nhắm thẳng hướng thôn trấn gần nhất.','Bụi mù che kín trời. {$en} đang lao qua, cây cối đổ rạp theo từng bước chạy.'],

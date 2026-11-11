@@ -45,7 +45,7 @@ const out = process.argv[2] || '.', plan = process.argv[3] || 'start';
     await ev(() => { cfgSet('autoFight', false); cfgSet('cspeed', 1); syncDodge(); if (G.run && G.run.scene && G.run.scene.type === 'combat' && G.run.scene.done) { ACT.cont(); } render(); });
     await shot('after-combat');
     await ev(() => { if (G.run) { G.run.scene = null; G.run.hp = S().maxHp; G.run.mats = { thao: 9, khoang: 9, dan: 4 }; G.run.eggs.push({ k: 'lang', n: 'Tiểu Lang', i: '🐺', el: 'moc', t: 0 }); autoCheck(); G.run.scene = null; render(); } });
-    for (const k of ['char', 'pets', 'journal', 'bonds', 'more']) { await act('panel', k); await shot('panel-' + k); if (k === 'char') { await act('tab', 'char:bag'); await act('chuAuto'); await shot('bag'); } if (k === 'more') { await act('tab', 'more:cfg'); await shot('cfg'); await act('tab', 'more:legend'); await shot('legend'); } }
+    for (const k of ['char', 'pets', 'journal', 'bonds', 'more']) { await act('panel', k); await shot('panel-' + k); if (k === 'char') { await act('tab', 'char:bag'); await shot('bag'); await act('tab', 'char:hoc'); await act('chuAuto'); await shot('hoc'); await act('tab', 'char:kn'); await shot('kn'); } if (k === 'more') { await act('tab', 'more:cfg'); await shot('cfg'); await act('tab', 'more:legend'); await shot('legend'); } }
     await act('closePanel');
     await act('panel', 'craft'); await shot('craft'); await act('craft', 'dan1'); await shot('craft-res'); await act('modalX'); await act('closePanel');
     // chọn một điểm kề rồi đi tới

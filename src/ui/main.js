@@ -154,18 +154,27 @@ const ACT={
   forget:u=>{if(UI.confirm!=='fg'+u){UI.confirm='fg'+u;return;}UI.confirm=null;dropArt(+u);},
   chuUnblock:()=>{if(chuUnblock())note('Một ô kinh mạch đã thông.','up');},
   knSel:a=>{const [c,i]=a.split(':');const K=UI.knSel;UI.knSel=K&&K.c===c&&K.i===+i?null:{c,i:+i};},
-  knPut:id=>{const K=UI.knSel;if(!K)return;knSet(K.c,K.i,id||null);UI.knSel=null;},
+  knPick:a=>{const [c,i]=a.split(':');UI.knSel={c,i:+i};UI.modal={k:'pick',key:'K'+a};},
+  knPut:id=>{const K=UI.knSel;if(!K)return;knSet(K.c,K.i,id||null);UI.knSel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
+  knDel:a=>{const [c,i]=a.split(':');knSet(c,+i,null);UI.knSel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
+  slotPick:k=>{UI.modal={k:'pick',key:k};},
+  eqPut:i=>{const m=UI.modal;if(m&&m.key&&m.key[0]==='E')equipTo(+i,m.key.slice(1));UI.modal=null;bagSt().sel=null;},
+  ddPutM:i=>{ddPut(+i);UI.modal=null;bagSt().sel=null;},
+  chuPick:i=>{UI.chuSel=+i;UI.modal={k:'pick',key:'C'+i};},
+  chuDel:i=>{chuSet(+i,null);syncSkills();UI.chuSel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
+  artOpen:u=>{UI.modal={k:'art',u:+u};},
+  phamHelp:()=>{UI.modal={k:'pham'};},
   bagTab:c=>{const B=bagSt();B.tab=c;B.sel=null;},
   bagSel:k=>{const B=bagSt();B.sel=B.sel===k?null:k;B.n=1;},
-  bagPham:()=>{const B=bagSt();B.pham=B.pham>=6?-1:B.pham+1;B.sel=null;},
-  bagSort:()=>{const B=bagSt();B.sort=(B.sort+1)%4;},
+  bagPham:v=>{const B=bagSt();B.pham=v==null?(B.pham>=6?-1:B.pham+1):+v;B.sel=null;},
+  bagSort:v=>{const B=bagSt();B.sort=v==null?(B.sort+1)%4:+v;},
   bagN:d=>{const B=bagSt();const it=bagItems().find(x=>x.key===B.sel);if(!it)return;B.n=d==='all'?it.cnt:clamp((B.n||1)+(+d),1,it.cnt);},
   bagUse:()=>{const B=bagSt();bagUse(B.sel,B.n||1);if(!bagItems().find(x=>x.key===B.sel))B.sel=null;B.n=1;},
   bagDrop:()=>{const B=bagSt();if(UI.confirm!=='drop'){UI.confirm='drop';return;}UI.confirm=null;bagDrop(B.sel,B.n||1);B.sel=null;B.n=1;},
   eqOn:i=>{equip(+i);bagSt().sel=null;},
-  eqOff:s=>{unequip(s);bagSt().sel=null;},
+  eqOff:s=>{unequip(s);bagSt().sel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
   ddPut:i=>{if(ddPut(+i))bagSt().sel=null;},
-  ddTake:j=>{ddTake(+j);bagSt().sel=null;},
+  ddTake:j=>{ddTake(+j);bagSt().sel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
   yield:()=>{UI.menu=null;playerYield();},
   cont:()=>{UI.menu=null;UI.pendSk=null;combatContinue();},
   pick:i=>takePick(+i),
@@ -180,7 +189,7 @@ const ACT={
   cfg:a=>{const i=a.indexOf('=');const k=a.slice(0,i);cfgSet(k,JSON.parse(a.slice(i+1)));if(k==='autoFight')syncDodge();if(k==='theme'||k==='font'){Art.clear();}Map2.resize();},
   usepill:i=>{const m=usePill(+i,false);if(m&&G.run)log('Dùng '+m+'.');},
   chuSel:i=>{UI.chuSel=UI.chuSel===+i?null:+i;},
-  chuPut:i=>{if(UI.chuSel==null)return;if(+i<0)chuSet(UI.chuSel,null);else{const c=chuPool()[+i];if(c)chuSet(UI.chuSel,c);}syncSkills();},
+  chuPut:i=>{if(UI.chuSel==null)return;if(+i<0)chuSet(UI.chuSel,null);else{const c=chuPool()[+i];if(c)chuSet(UI.chuSel,c);}syncSkills();if(UI.modal&&UI.modal.k==='pick'){UI.modal=null;UI.chuSel=null;}},
   chuAuto:()=>{chuAuto();syncSkills();UI.chuSel=null;},
   chuClear:()=>{const r=run2();r.chu=[null,null,null,null,null,null,null,null];clampHp();syncSkills();UI.chuSel=null;},
   petSet:i=>petSet(+i),
@@ -191,9 +200,10 @@ const ACT={
   exp:()=>{UI.code=encodeSave();UI.codeMode='exp';UI.msg='Sao chép đoạn mã trên và cất đi. Dán lại ở mục Nạp mã lưu để khôi phục.';setTimeout(()=>{const t=$('#code');if(t){t.select();}},30);},
   imp:()=>{UI.code='';UI.codeMode='imp';UI.msg=null;},
   impGo:()=>{const t=$('#code');try{const d=decodeSave(t.value);loadData(d);UI.panel=null;UI.code=null;}catch(e){UI.code=t.value;UI.msg='Mã lưu không hợp lệ.';}},
+  newGame:()=>{if(UI.confirm!=='newGame'){UI.confirm='newGame';return;}UI.confirm=null;G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};UI.panel=null;UI.modal=null;UI.sel=null;UI.bag=null;syncDodge();ACT.birth();saveSoon();},
   wipe:()=>{if(UI.confirm!=='wipe'){UI.confirm='wipe';return;}UI.confirm=null;G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};UI.panel=null;UI.sel=null;syncDodge();},
 };
-const KEEP_CONFIRM={pact:1,wipe:1,petFree:1,bagDrop:1,forget:1};
+const KEEP_CONFIRM={pact:1,wipe:1,newGame:1,petFree:1,bagDrop:1,forget:1};
 document.addEventListener('click',e=>{
   if(UI.suppress){UI.suppress=false;e.preventDefault();e.stopPropagation();return;}
   const el=e.target.closest('[data-act]');
@@ -204,6 +214,8 @@ document.addEventListener('click',e=>{
   try{f(el.dataset.arg,el);}catch(err){console.error(err);note('Có lỗi: '+err.message);}
   after();
 },true);
+// ô chọn dạng thả xuống (bộ lọc túi đồ): đổi giá trị thì gọi đúng hành động
+document.addEventListener('change',e=>{const el=e.target.closest&&e.target.closest('select[data-chg]');if(!el)return;const f=ACT[el.dataset.chg];if(!f)return;try{f(el.value,el);}catch(err){console.error(err);}after();});
 document.addEventListener('input',e=>{if(e.target.id==='bqR'&&UI.modal&&UI.modal.k==='bq'){const y=+e.target.value;UI.modal.y=y;const a=$('#bqY');if(a)a.textContent=durH(y*HY);
   const gain=bqRate()*y*(y<1?0.9:1),risk=Math.round(bqRisk(y)*100);const h=$('#bqHint');if(h)h.textContent=`Tu vi +${numVN(Math.min(100,gain))}%${risk?' · '+risk+'% bị quấy nhiễu giữa chừng':' · yên ổn'}. Xuất quan thì khí huyết, linh lực hồi đầy.`;HCACHE.modal=null;}});
 

@@ -274,6 +274,22 @@ function dangerTag(n){const r=G.run;if(!n||!r)return 0;
 function dangerWhy(n){const g=dangerTag(n);if(SETTLE.includes(n.type))return g?'Thế lực tọa trấn nơi này không ưa ngươi.':'Có người tọa trấn, yên ổn.';
   return ['Yêu ma ở đây yếu hơn ngươi hẳn.','Yêu ma ở đây ngang sức ngươi.','Yêu ma ở đây mạnh hơn ngươi.','Linh áp vượt xa cảnh giới của ngươi.'][g];}
 
+// ----- thông tin thêm cho thẻ địa điểm: thế lực tọa trấn, quy mô, đôi dòng mô tả (cố định theo từng nơi) -----
+function placeMeta(n){const h=hashS('pm'+W().seed+':'+n.id),w=W();const pk=(L,k)=>L[(h>>>(k||0))%L.length];
+  const sect=w.sects&&w.sects.length?pk(w.sects,3).n:'một tông môn';const ho=pk(NAME.ho,5);
+  let luc,quy;const t=n.type;
+  if(t==='tong'){luc=n.owner||sect;quy=pk(['Sơn môn nhỏ, vài trăm đệ tử','Tông môn hạng trung, gần ngàn đệ tử','Đại tông, đệ tử hàng ngàn'],7);}
+  else if(t==='thanh'){luc=pk(['Thành chủ phủ họ '+ho,'Quan phủ triều đình',sect+' (phân đà)','Thương hội '+ho+' gia'],2);quy=pk(['Thành trì, vài vạn hộ','Đại thành, chục vạn dân','Thành cổ, tường cao ba trượng'],6);}
+  else if(t==='tran'){luc=pk(['Hương lão trong thôn','Lý trưởng họ '+ho,ho+' gia, một tiểu gia tộc tu tiên','Võ quán họ '+ho],2);quy=pk(['Thôn nhỏ, vài chục nóc nhà','Trấn vừa, chừng trăm hộ','Trấn lớn, ba bốn trăm hộ'],6);}
+  else if(t==='cho'){luc='Thương hội '+ho+' gia';quy=pk(['Phường thị nhỏ, vài chục sạp','Phường thị sầm uất, trăm sạp'],6);}
+  else if(t==='ancu'){luc='Ẩn sĩ không rõ danh tính';quy='Vài gian nhà tranh';}
+  else if(t==='ai'){luc='Quân trấn ải';quy='Quan ải hiểm yếu';}
+  else if(t==='ma'){luc=pk(['Ma tu chiếm cứ','Huyết sát môn đồ','Âm hồn bất tán'],2);quy=pk(['Vùng ma khí nhỏ','Ma địa rộng chừng chục dặm'],6);}
+  else{luc=(n.danger||0)>=3?'Yêu vương chiếm cứ':(n.danger||0)>=2?'Yêu thú chiếm cứ':(n.danger||0)>=1?'Thú dữ lảng vảng':'Vô chủ';
+    quy=pk(['Nhỏ, đi nửa ngày là hết','Vừa, rộng chừng năm dặm','Rộng chừng hai mươi dặm','Mênh mông, chưa ai đi hết'],6);}
+  if((n.vstate||n.state)==='ruin'){luc='Bỏ hoang';}
+  const L=P['canh_'+t]||P.canh_tran;const desc=L[(h>>>9)%L.length];
+  return {luc,quy,desc:desc.indexOf('{')<0?desc:''};}
 // ----- đi đường: tính theo tháng năm, tùy thân pháp và phương tiện -----
 const MOUNT=[{id:'ngua',n:'Tuấn mã',m:2,p:30,d:'Đi nhanh gấp đôi'},{id:'thuyen',n:'Phi chu',m:4,p:220,d:'Pháp khí phi hành, nhanh gấp bốn',realm:1},{id:'kiem',n:'Ngự kiếm phi hành',m:7,p:900,d:'Nhanh gấp bảy',realm:2}];
 function mountOf(){const r=G.run;return r&&r.mount?MOUNT.find(x=>x.id===r.mount):null;}
@@ -540,6 +556,8 @@ function slotsFor(rel){const s=slotOf(rel);return s==='nhan'?['nhan1','nhan2']:s
 function eqOf(){const r=G.run;if(!r.eq)r.eq={};if(!r.dd)r.dd=[];return r.eq;}
 function equip(i){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;const S0=slotsFor(rel);const s=S0.find(x=>!E[x])||S0[0];
   r.relics.splice(i,1);if(E[s]){E[s].seen=1;r.relics.push(E[s]);}rel.seen=1;E[s]=rel;clampHp();saveSoon();}
+function equipTo(i,slot){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;if(!slot||!slotsFor(rel).includes(slot))return equip(i);
+  r.relics.splice(i,1);if(E[slot]){E[slot].seen=1;r.relics.push(E[slot]);}rel.seen=1;E[slot]=rel;clampHp();saveSoon();}
 function unequip(s){const r=G.run,E=eqOf();if(!E[s])return;E[s].seen=1;r.relics.push(E[s]);E[s]=null;clampHp();saveSoon();}
 // đan điền: uẩn dưỡng vũ khí, pháp bảo. Mỗi năm mạnh thêm 5%, tối đa gấp đôi; trong trận tế ra đánh một lần.
 const DD_N=[0,1,2,3,4,4];
