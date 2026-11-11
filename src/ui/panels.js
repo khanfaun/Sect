@@ -298,7 +298,7 @@ function chuHTML(){
     svg+=`<g class="chu-n${it?' on':''}${hy?' hy-on':''}"${st} data-act="chuPick" data-arg="${i}" transform="translate(${p[0]} ${p[1]})"><circle class="chu-o" r="19"/>${it?`<circle r="13.5" class="chu-in el-${it.el}"/><text y="4.6" text-anchor="middle" class="chu-e">${(EL[it.el]||EL.vo).c}</text>`:'<path class="chu-p" d="M-5 0h10M0 -5v10"/>'}${hy?'<circle class="hy" cx="13" cy="-13" r="4"/>':''}${it?`<g class="chu-x" data-act="chuDel" data-arg="${i}" transform="translate(-14 -14)"><circle r="6"/><path d="M-2.3 -2.3L2.3 2.3M2.3 -2.3L-2.3 2.3"/></g>`:''}</g>`;}
   // tiểu huyệt: rải quanh đan điền, lệch nhẹ vào ra cho tự nhiên
   const TL=thList();
-  for(let i=0;i<TH_N;i++){const ang=-Math.PI/2+(i+0.5)*2*Math.PI/TH_N;const rr=90+((i*37)%3-1)*9;const x=cx+Math.cos(ang)*rr,y=cy+Math.sin(ang)*rr;const on=TL.includes(i);
+  for(let i=0;i<TH_N;i++){const ang=-Math.PI/2+(i+0.5)*2*Math.PI/TH_N;const rr=88;const x=cx+Math.cos(ang)*rr,y=cy+Math.sin(ang)*rr;const on=TL.includes(i);
     svg+=`<g class="th-n${on?' on':''}" data-act="thPick" data-arg="${i}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle class="th-hit" r="11"/><circle class="th-o el-${thEl(i)}" r="${on?6.5:5}"/></g>`;}
   svg+='</svg>';
   const blk=chuBlocked();
@@ -315,10 +315,10 @@ function artCard(a){const r=G.run;const v=chuView();const slot=artSlot(a);const 
    <div class="bact">${slot<0?`<button class="btn pri sm" data-act="artRun" data-arg="${a.u}"${chuView().it.filter(Boolean).length>=chuSlots()?' disabled':''}>Vận hành</button>`:`<button class="btn sm" data-act="chuDel" data-arg="${slot}">Ngừng vận hành</button>`}<button class="btn sm" data-act="study" data-arg="${a.u}"${artNextWhy(a)||r.scene||r.moving?' disabled':''}${ta(artNextWhy(a)||'Tham ngộ lên tầng '+(a.lv+1)+': mở dòng kế tiếp.')}>${a.lv>=a.lines.length?'Viên mãn':'Tham ngộ · '+durH(studyTime(a))}</button><button class="btn sm" data-act="forget" data-arg="${a.u}">${UI.confirm==='fg'+a.u?'Chắc chứ?':'Phế bỏ'}</button></div>`;}
 function artModalHTML(m){const a=artBy(+m.u);if(!a)return '';return `<div class="mbox imod"><div class="mb-h"><span class="grow"></span><button class="xb" data-act="modalX" aria-label="Đóng">${ic('close')}</button></div>${artCard(a)}</div>`;}
 function artGrid(type){const r=run2();const A=arts().filter(a=>a.type===type).sort((a,b)=>(artSlot(b)>=0)-(artSlot(a)>=0)||b.tier-a.tier);const cap=artCap(type);const books=r.relics.filter(x=>x.k==='book'&&x.art.type===type).length;
-  let h=A.map(a=>{const s=artSlot(a);return `<button class="acell${s>=0?' run':''}" data-act="artOpen" data-arg="${a.u}" style="${pcs(a.tier)}"${tah(artTipH(a))}><span class="qi">${artArt(a)}</span><b class="qt">${esc(a.n)}</b>${lvPips(a.lv,a.lines.length)}${s>=0?slotX('chuDel',s,'Ngừng vận hành'):''}</button>`;}).join('');
+  let h=A.map(a=>{const s=artSlot(a);return `<button class="acell${s>=0?' run':''}" data-act="artOpen" data-arg="${a.u}" style="${pcs(a.tier)}"${tah(artTipH(a))}><span class="qi">${artArt(a)}<i class="alv"${ta('Tầng '+a.lv+' / '+a.lines.length)}>${a.lv}</i></span><b class="qt">${esc(a.n)}</b>${s>=0?slotX('chuDel',s,'Ngừng vận hành'):''}</button>`;}).join('');
   for(let i=A.length;i<cap;i++)h+=`<button class="acell emp" data-act="slotPick" data-arg="L${type}"${ta(books?'Có '+books+' bí tịch trong túi. Chạm để học.':'Ô trống. Tìm bí tịch để học.')}><span class="qi">${ic('plus')}</span><small>${books?books+' bí tịch':'trống'}</small></button>`;
-  const nx=ART_CAP[type].findIndex(x=>x>cap);
-  if(nx>0)h+=`<span class="acell lockc"${ta('Mở thêm ô khi đạt '+REALM[nx])}><span class="qi">${ic('lock')}</span><small>${REALM[nx]}</small></span>`;
+  // luôn bày đủ 10 ô (2 hàng × 5); ô chưa mở ghi cảnh giới cần
+  for(let i=Math.max(A.length,cap);i<ART_MAX;i++){const nx=ART_CAP[type].findIndex(x=>x>i);h+=`<span class="acell lockc"${ta('Mở khi đạt '+REALM[nx])}><span class="qi">${ic('lock')}</span><small>${REALM[nx]}</small></span>`;}
   return `<div class="agrid2">${h}</div>`;}
 function hocTabHTML(){const A=arts();const v=chuView();
   const head=(icn,t,type)=>`<h4 class="sgrp">${ib(icn,'soft')}${t} <small>${A.filter(a=>a.type===type).length}/${artCap(type)}</small></h4>`;
@@ -333,7 +333,7 @@ function knTabHTML(){const r=run2();syncSkills();
     for(let i=0;i<CAT_MAX[c];i++){const id=L[i];const sk=id&&SK[id];
       h+=`<button class="kns${sk?' on':''}" data-act="knPick" data-arg="${c}:${i}" style="${sk?pcs(sk.t):''}"${sk?tah(skTipH(sk,av[id])):ta('Ô trống. Chạm để chọn chiêu.')}>${sk?`<span class="qi">${skArt(sk)}</span><span class="at-t"><b class="qt">${esc(sk.n)}</b><small>${skillCost(sk)} linh lực</small></span>`+slotX('knDel',c+':'+i,'Gỡ chiêu'):`<span class="kn-e">${ic('plus')}</span><small>${Object.keys(av).length?'chọn chiêu':'trống'}</small>`}</button>`;}
     h+='</div></div>';}
-  h+='</div><p class="hint">Chiêu lấy từ các công pháp đang vận hành. Trong trận, Tấn công, Thân pháp, Thần thông nằm ở nút Công; Phòng thủ nằm ở nút Thủ.</p>';
+  h+='</div><p class="hint">Chiêu lấy từ các công pháp đang vận hành. Trong trận, Tấn công và Thân pháp nằm ở nút Tấn công; Phòng thủ nằm ở nút Phòng thủ. Thần thông: khi thần lực đầy, chạm avatar để hiển hóa pháp tướng, chạm lần nữa để tung đòn tối thượng.</p>';
   const m=mindArt();
   if(m)h+=`<h4 class="sgrp">${ib('eye','soft')}Thần thức</h4><div class="row"><span class="r-i">${ic('eye')}</span><span class="r-t"><b>Thần Thức Thứ</b><small>Từ ${qName(m.n,m.tier)} · tốn 30% linh lực · niệm lực ${S().than}: hơn đối thủ thì làm choáng</small></span></div>`;
   const P=[];const vv=chuView();vv.it.forEach((it,i)=>{if(!it)return;const a=artBy(it.u);artFxList(a,chuPot(vv,i)).forEach(x=>P.push([a,(x.n?x.n+': ':'')+x.t.replace('{v}',numFx(x.v))]));});

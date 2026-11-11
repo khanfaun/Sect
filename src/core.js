@@ -1274,7 +1274,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         let ev=false,q=null;
         if(t.st.evade>0){t.st.evade--;ev=true;}
         else{const o=offs==='auto'?'auto':(Array.isArray(offs)?offs[Math.min(h,2)]:null);const D=dodgeP(u,t,o,t.isMain&&offs!=null);q=D.q;ev=R()<D.p;}
-        if(ev){dod++;if(t.isMain&&q==='chuan')t.bonusPos=8;continue;}
+        if(ev){dod++;cfx(sc,{k:'dodge',id:t.id});if(t.isMain&&q==='chuan')t.bonusPos=8;continue;}
         let mult=lvM*qm*(f.aoe?0.6:1);
         if(isP){mult*=elemMult(sk.el,t.el);if(f.bonusIf==='dot'&&(t.st.poison>0||t.st.burn>0))mult*=1.5;if(fx.execute&&t.hp<t.max*0.3)mult*=1+fx.execute/100;}
         else if(KHAC[u.el]===t.el)mult*=1.25;
@@ -1282,7 +1282,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         const crit=chance(((u.crit||5)+(f.crit||0))/100);if(crit){mult*=Math.max(1.1,((u.critDmg||150)-(t.hoTam||0))/100);crits++;}
         let d=dmgCalc(av,u.st.rage,u.st.weak,t.def,t.st.vuln,f.p,mult,f.pierce);
         if(t.st.stance){if(!t._blk){if((t.tl==null?100:t.tl)>=TL_BLOCK){if(t.tl!=null)t.tl-=TL_BLOCK;t._blk=1;blk++;}else t._blk=2;}if(t._blk===1)d=Math.max(1,Math.round(d*(1-blockCut(u,t))));}
-        d=absorb(t.st,d);t.hp-=d;total+=d;hits++;
+        d=absorb(t.st,d);t.hp-=d;total+=d;hits++;onHit(sc,u,t,d,crit,t._blk===1,sk);
         if(t.isMain&&d>0){const fx2=S().fx;if(fx2.reflect){u.hp-=Math.round(d*fx2.reflect/100);if(u.hp<=0)down(sc,u);}}
         if(isP){if(fx.poisonHit)t.st.poison=(t.st.poison||0)+Math.round(u.atk*fx.poisonHit);if(fx.burnHit)t.st.burn=(t.st.burn||0)+Math.round(u.atk*fx.burnHit);}
         // phá tụ lực
@@ -1310,6 +1310,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
     if(sc.kiep&&total){const k=sc.kiep;const me=mainUnit(sc);const cut=Math.min(0.25,total/me.max*0.5);k.uy=Math.max(0.3,k.uy-cut);msg+=` (lôi uy −${Math.round(cut*100)}%)`;}
   }
   // tự thân
+  const hp0=u.hp;
   if(f.block)u.st.block=(u.st.block||0)+Math.round(u.atk*f.block*lvM);
   if(f.eblock)u.st.block=(u.st.block||0)+Math.round(u.atk*f.eblock);
   if(f.heal)u.hp=Math.min(u.max,u.hp+Math.round(u.max*f.heal*lvM/100));
@@ -1325,6 +1326,8 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
   if(f.p&&!total&&!dod&&hits)msg+=' · bị hộ thể chặn';
   if(isP&&sk.f&&!sc['_u'+sk.id]){sc['_u'+sk.id]=1;clog(sc,sk.f,'fl');}
   if(!isP){const V=(VERB[u.f]||VERB.vat);const it=sk.it;msg=(V[it]?T(V[it]):(VERB2[it]||'{e} ra tay')).replace('{e}',u.name)+(total?`: ${total}`:'')+(dod?' (né '+dod+')':'')+(crits?' · chí mạng!':'')+(blk?' · ngươi đỡ được':'')+(f.p&&!total&&!dod?' · bị chặn':'');if(sk.fx.charge)msg=T((VERB[u.f]||VERB.vat).heavy).replace('{e}',u.name)+`: ${total}`+(dod?' (né '+dod+')':'')+(blk?' · ngươi đỡ được':'');}
+  if(u.hp>hp0)cfx(sc,{k:'heal',id:u.id,d:Math.round(u.hp-hp0)});
+  if(f.guard||f.block||f.eblock)cfx(sc,{k:'shield',id:u.id});
   clog(sc,(isP?'':'')+msg,u.side==='A'?'me':'en');
   finishAct(sc,u,sk);
 }

@@ -43,7 +43,7 @@ function hexTip(c,x,y){const tip=$('#tip');const n=hexNode(c);const I=hexInfo(c)
 // ---------- đồng hồ và vòng lặp khung hình ----------
 function clockOn(){const r=G.run;return G.screen==='map'&&r&&!r.scene&&!UI.panel&&!UI.modal&&!UI.paused&&!document.hidden&&(CFG.clockIdle||!!r.moving);}
 let clkLast=performance.now(),clkAcc=0,clkFlush=0,clkSaveT=0,clkDay=-1,clkPart='';
-function clockText(){const t=W().t;const a=$('#clkY'),b=$('#clkM'),c=$('#clkH');if(a)a.textContent=tYear(t);if(b)b.textContent='Ngày '+(Math.floor((t%HM)/HD)+1)+' · tháng '+MONTH[tMonth(t)];if(c)c.textContent='Giờ '+gioName(t);}
+function clockText(){const a=$('#clk');if(a)a.innerHTML=clkStr(W().t);}
 function loop(now){
   let dt=Math.min(1,(now-clkLast)/1000);clkLast=now;
   const r=G.run;
@@ -96,6 +96,7 @@ const ACT={
   legT:t=>{const h=Object.assign({},CFG.hideT||{});if(h[t])delete h[t];else h[t]=1;cfgSet('hideT',h);},
   legE:t=>{const h=Object.assign({},CFG.hideE||{});if(h[t])delete h[t];else h[t]=1;cfgSet('hideE',h);},
   legAll:()=>{const any=Object.keys(CFG.hideT||{}).length+Object.keys(CFG.hideE||{}).length>0;if(any){cfgSet('hideT',{});cfgSet('hideE',{});}else{const a={},b={};Object.keys(GLYPH).forEach(k=>{if(TYPE_NAME[k])a[k]=1;});Object.keys(ENT_T).forEach(k=>b[k]=1);cfgSet('hideT',a);cfgSet('hideE',b);}},
+  legendOpen:()=>{UI.panel='more';UI.tab.more='legend';},
   bagOpen:()=>{UI.panel='char';UI.tab.char='bag';UI.code=null;UI.msg=null;},
   hudBt:()=>{UI.modal=null;const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')placeAct('bt');},
   status:()=>{UI.status=!UI.status;},
@@ -182,6 +183,7 @@ const ACT={
   eqOff:s=>{unequip(s);bagSt().sel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
   ddPut:i=>{if(ddPut(+i)){bagSt().sel=null;if(UI.modal&&UI.modal.k==='item')UI.modal=null;}},
   ddTake:j=>{ddTake(+j);bagSt().sel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
+  ult:(a,el)=>{if(el&&el.getAttribute('aria-disabled'))return;UI.menu=null;UI.pendSk=null;playerUlt();},
   burnOpen:()=>{UI.burnOpen=!UI.burnOpen;},
   burn:()=>{if(playerBurn())UI.burnOpen=false;},
   yield:()=>{UI.menu=null;playerYield();},

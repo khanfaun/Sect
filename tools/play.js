@@ -20,7 +20,7 @@ const out = process.argv[2] || '.', plan = process.argv[3] || 'start';
   await p.waitForTimeout(2600); await shot('intro');
   await act('regionGo'); await shot('map');
   if (plan !== 'start') {
-    await act('enter'); await shot('place'); await ev(() => { ACT.wait('sang'); const a = tHour(W().t); ACT.wait('toi'); const b = tHour(W().t); if (a !== 7 || b !== 19) console.error('WAIT sai ' + a + ' ' + b); render(); });
+    await ev(() => { UI.sel = G.run.at; UI.cardMin = false; render(); }); await act('enter'); await shot('place'); await ev(() => { ACT.wait('sang'); const a = tHour(W().t); ACT.wait('toi'); const b = tHour(W().t); if (a !== 7 || b !== 19) console.error('WAIT sai ' + a + ' ' + b); render(); });
     await act('exStat'); await shot('explore-stat'); await act('modalX'); await act('evGo', 0); await shot('explore');
     // đi hết sự kiện bằng cách luôn chọn lựa chọn đầu
     for (let i = 0; i < 12; i++) {
