@@ -9,7 +9,7 @@ function trackHTML(sc){
 }
 // thanh chỉ số trong trận: khí huyết đổi màu theo mức (xanh, vàng, đỏ)
 function hpCls(u){const p=u.hp/Math.max(1,u.max);return p>0.5?'hp':p>0.2?'hp mid':'hp low';}
-function cBar(cur,max,cls){return `<div class="cbar ${cls}"><i style="width:${clamp(cur/Math.max(1,max)*100,0,100)}%"></i></div>`;}
+function cBar(cur,max,cls,gid){const p=clamp(cur/Math.max(1,max)*100,0,100);return `<div class="cbar ${cls}">${gid!=null?`<em id="gh${gid}" style="width:${ghPct(gid,p)}%"></em>`:''}<i style="width:${p}%"></i></div>`;}
 function phBadge(u){return u.dazed?`<span class="ph dz"${ta('Cạn định lực: mất lượt kế tiếp')}>choáng</span>`:u.phase==='charge'?`<span class="ph"${ta('Đang tụ lực: tới mốc phát lực thì tung chiêu')}>tụ lực</span>`:u.phase==='guard'?`<span class="ph"${ta('Đang thủ thế: bị đánh trước mốc phát lực thì đỡ được một lần')}>thủ thế</span>`:u.stunT>0?'<span class="ph dz">choáng</span>':'';}
 function dlOf(u){return u.dl==null?100:u.dl;}
 function uAvatar(u){const foe=u.side==='B';return u.isMain?assetImg('hero','me',u.icon):foe?assetImg('foe',u.k||u.name,u.icon):assetImg('pet',u.k||u.name,u.icon);}
@@ -20,9 +20,9 @@ function unitCard(sc,u,pickMode,compact){
   const sub=u.sub||(foe?(sc.elite?'Tinh anh':sc.boss?'Thủ lĩnh':'Đối thủ'):'Đồng hành');
   let bars;
   if(u.immune)bars=`<small class="u-s">${sc.kiep?'Đạo '+Math.min(sc.kiep.n,sc.kiep.done+1)+'/'+sc.kiep.n+(sc.kiep.waves>1?' · đợt '+sc.kiep.wave:''):''}${sc.kiep&&sc.kiep.uy<1?' · uy '+Math.round(sc.kiep.uy*100)+'%':''}</small>`;
-  else bars=`<div class="brow"${ta('Khí huyết '+Math.max(0,Math.round(u.hp))+' / '+u.max)}>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}${compact?'':`<b>${Math.max(0,Math.round(u.hp))}</b>`}</div><div class="brow thin"${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}>${cBar(dlOf(u),100,'dl')}</div>`;
+  else bars=`<div class="brow"${ta('Khí huyết '+Math.max(0,Math.round(u.hp))+' / '+u.max)}>${cBar(Math.max(0,u.hp),u.max,hpCls(u),u.id)}${compact?'':`<b>${Math.max(0,Math.round(u.hp))}</b>`}</div><div class="brow thin"${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}>${cBar(dlOf(u),100,'dl')}</div>`;
   const av=`<span class="u-av${foe?'':' al'}"${compact?ta(u.name+'\n'+sub):''}>${uAvatar(u)}${phBadge(u)}</span>`;
-  if(compact)return `<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av}${bars}${stIcons(u.st)}</div>`;
+  if(compact)return `<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av}<b class="u-cn">${esc(u.name)}${u.immune?'':`<small>${Math.max(0,Math.round(u.hp))}</small>`}</b>${bars}${stIcons(u.st)}</div>`;
   return `<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av}<div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${elSeal(u.el||'vo')} ${esc(sub)}</small></div>${bars}${stIcons(u.st)}</div></div>`;
 }
 // thẻ nhân vật chính: avatar có vòng thần lực (chạm để hiển hóa pháp tướng / tung đòn tối thượng)
@@ -31,11 +31,11 @@ function meCard(sc,u){
   const st=sc.pt?'burn':full?'full':'';
   const tip=sc.kiep?'Trong thiên kiếp không hiển hóa được pháp tướng.':sc.pt?(sc.pt.n+(sc.pt.left>0?' · còn '+sc.pt.left+' lượt':' · tới hết trận')+'\n'+PT[sc.pt.el].d+(sc.pt.sk?'\n\nChạm để tung đòn tối thượng: '+SK[sc.pt.sk].n+'\nTung xong, pháp tướng tan và thần lực về 0.':'\n\nChưa gắn thần thông nên không có đòn tối thượng.')):('Thần lực '+Math.round(than)+'%\nĐánh trúng hoặc bị đánh trúng thì nạp.\n'+(full?'Đã đầy: chạm để hiển hóa ':'Đầy thì chạm để hiển hóa ')+V.P.n+'\n'+V.P.d+(V.P.turns?' · '+V.P.turns+' lượt':' · tới hết trận')+(V.sk?'\nĐòn tối thượng: '+V.sk.n:''));
   const ok=rp&&!u.dazed&&!CFG.autoFight&&!sc.kiep&&(sc.pt?!!sc.pt.sk:full);
-  const ring=`<svg class="tl-ring ${st}" viewBox="0 0 64 64" style="animation-delay:-${((performance.now()/1000)%2.4).toFixed(2)}s"><circle class="bg" cx="32" cy="32" r="29"/><circle class="fg" cx="32" cy="32" r="29" stroke-dasharray="${(C*than/100).toFixed(1)} ${C.toFixed(1)}"/></svg>`;
+  const ring=`<svg class="tl-ring ${st}" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="29"/><circle class="fg" cx="32" cy="32" r="29" stroke-dasharray="${(C*than/100).toFixed(1)} ${C.toFixed(1)}"/></svg>`;
   return `<div class="ucard me${sc.cur===u.id?' cur':''}" id="uc${u.id}">
    <button class="ult-av ${st}${ok?' ok':''}" data-act="ult"${ok?'':' aria-disabled="true"'}${ta(tip)}>${ring}${sc.pt?'<i class="flame"></i><i class="flame f2"></i>':''}<span class="ult-in">${uAvatar(u)}</span>${phBadge(u)}</button>
    <div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${esc(realmLabel())}</small></div>
-    <div class="brow"${ta('Khí huyết')}><span class="bl">${ic('heart')}</span>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}<b>${Math.max(0,Math.round(u.hp))} / ${u.max}</b></div>
+    <div class="brow"${ta('Khí huyết')}><span class="bl">${ic('heart')}</span>${cBar(Math.max(0,u.hp),u.max,hpCls(u),u.id)}<b>${Math.max(0,Math.round(u.hp))} / ${u.max}</b></div>
     <div class="brow"${ta('Linh lực')}><span class="bl">${ic('drop')}</span>${cBar(u.mp,u.maxMp,'mp')}<b>${Math.round(u.mp)} / ${u.maxMp}</b></div>
     <div class="brow2"><span${ta('Thể lực '+Math.round(u.tl)+'%\nNé tốn 25%, đỡ được đòn tốn 30%.\nHồi 20% mỗi khi về mốc đầu')}><i class="bt">Thể lực</i>${cBar(u.tl,100,'tl')}</span><span${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt, rồi hồi đầy.')}><i class="bt">Định lực</i>${cBar(dlOf(u),100,'dl')}</span></div>
     ${stIcons(u.st)}</div></div>`;
@@ -53,7 +53,7 @@ function vCombat(sc){
   const n=curNode();
   const party=al.filter(u=>!u.isMain);const fc=foes.length>1;
   let h=`<section class="cb">${trackHTML(sc)}<div class="cb-foes${fc?' many':''}">${foes.map(u=>unitCard(sc,u,pickMode,fc)).join('')}</div>
-   <div class="cb-art" id="cbArt" data-nf="${foes.length}">${sceneCv('cb'+r.at+sc.en.n,r.region,n?n.type:'',"",figs.join(','))}${sc.pt?`<div class="pt-fig el-${sc.pt.el}"${ta(sc.pt.n)}>${ptFigSVG()}<b>${esc(sc.pt.n)}</b></div>`:''}</div>
+   <div class="cb-art" id="cbArt" data-nf="${foes.length}">${sceneCv('cb'+r.at+sc.en.n,r.region,n?n.type:'',"",'')}${sc.pt?`<div class="pt-fig el-${sc.pt.el}"${ta(sc.pt.n)}>${ptFigSVG()}<b>${esc(sc.pt.n)}</b></div>`:''}</div>
    <div class="cb-ally">${meCard(sc,me)}${party.length?`<div class="cb-party">${party.map(u=>unitCard(sc,u,false,true)).join('')}</div>`:''}</div>`;
   const lg=sc.log.slice(-3);
   h+=`<div class="clog" data-act="clog"${ta('Chạm để xem toàn bộ diễn biến')}>${lg.map((l,i)=>`<p class="${l.c?'lg-'+l.c:''} ${i<lg.length-1?'old':''}">${esc(l.t)}</p>`).join('')}</div>`;
@@ -106,7 +106,7 @@ function autoPick(sc){
   playerAct(best);
 }
 function combatFrame(now,dt){
-  const sc=G.run&&G.run.scene;if(!sc||sc.type!=='combat')return;if(sc.fxq&&sc.fxq.length)fxDrain(sc);
+  const sc=G.run&&G.run.scene;if(!sc||sc.type!=='combat')return;if(sc.fxq&&sc.fxq.length)fxDrain(sc);figSync();ghTick(dt);
   if(sc.done||UI.panel||UI.modal||document.hidden||now<(UI.fxHold||0))return;
   if(sc.dodge){
     if(!UI.dg||UI.dg.id!==sc.dodge.id){UI.dg={id:sc.dodge.id,t0:now+DG_LEAD*1000,n:sc.dodge.n,T:sc.dodge.T*1000,offs:[],lit:sc.dodge.lit};}

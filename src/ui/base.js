@@ -110,5 +110,6 @@ function numVN(x){return String(Math.round(x*10)/10).replace('.',',');}
 function stoneHTML(v){return `<span class="stone"><i></i>${v}</span>`;}
 function win(title,body,o){o=o||{};return `<section class="win ${o.cls||''}"><header class="win-h"><h2>${title}</h2>${o.extra||''}${o.noClose?'':`<button class="xb" data-act="${o.close||'closePanel'}" aria-label="Đóng">${ic('close')}</button>`}</header><div class="win-b">${body}</div>${o.foot?`<footer class="win-f">${o.foot}</footer>`:''}</section>`;}
 function toastFlush(){const L=G.toasts;if(!L||!L.length)return;const box=$('#toast');if(!box)return;
-  for(const t of L){const d=document.createElement('div');d.className='toast '+(t.c||'');d.textContent=t.t;box.appendChild(d);setTimeout(()=>d.remove(),3600);}
-  G.toasts=[];while(box.children.length>3)box.firstChild.remove();}
+  const seen=new Set([...box.children].map(d=>d.textContent));
+  for(const t of L){if(seen.has(t.t))continue;seen.add(t.t);const d=document.createElement('div');d.className='toast '+(t.c||'');d.textContent=t.t;box.appendChild(d);setTimeout(()=>d.remove(),2900);}
+  G.toasts=[];while(box.children.length>2)box.firstChild.remove();}

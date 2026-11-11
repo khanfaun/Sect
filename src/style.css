@@ -590,3 +590,96 @@ span.el[class*=el-]{background:var(--ec);border-color:var(--ec);color:#fffaf0!im
 :root[data-anim="0"] .tl-ring,:root[data-anim="0"] .flame,:root[data-anim="0"] .ult-av.full{animation:none}
 #fx{z-index:60}
 .cine-bar,.cine-txt{top:13%}.cine-fig{width:min(135vw,760px);height:96%;bottom:-8%}
+/* ===================== THỦY MẶC: giấy dó, mực tàu, dấu son =====================
+   Lớp phủ cuối cùng: đè lên các đợt trước. Màu ít, nhiều khoảng trắng, nét mảnh,
+   bóng đổ nhẹ như giấy đặt trên giấy. Mọi hiệu ứng trận đấu lấy màu từ đây và từ FXC. */
+:root,:root[data-theme=light],:root[data-theme=dark]{--bg:#ede6d3;--bg2:#e2d9c2;--paper:#f6f1e4;--paper2:#ebe3cf;--ink:#1f1b16;--ink2:#463e33;--ink3:#776c5a;--line:#cbbfa4;
+  --acc:#2a241c;--acc2:#56707f;--seal:#a8322a;--jade:#4d7a63;--gold:#9a7430;--vio:#5f4a78;--water:#8fa6ad;--r:5px;
+  --sh:0 1px 0 rgba(40,30,15,.08),0 6px 18px -8px rgba(40,30,15,.28);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .16 0 0 0 0 .1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  --acc:#e9e1cd;--acc2:#8fa6ad;--seal:#cf5a4b;--jade:#77a98f;--gold:#c9a25a;--vio:#9c88bf;--water:#3d5560;--sh:0 6px 18px -8px rgba(0,0,0,.6)}
+html,body{background:var(--bg2)}
+#app,#full,.scard,.win,.mbox,.hud,.dock,.ucard,.clog,.sk,.nv,.row,.cell{background-image:var(--grain)}
+#app,#full{background-color:var(--bg)}
+.frame,.hud,.dock,.scard,.win,.mbox,.stat-pop,.ucard,.clog{border-color:color-mix(in srgb,var(--ink) 16%,transparent)}
+/* móc góc: đổi thành nét mực mảnh */
+.hud::before,.scard::before,.win::before,.mbox::before,.dock.card::before{opacity:.35}
+/* tiêu đề viết bằng chữ thư pháp */
+.t-title,.title h1,.win-h b,.win header b,.scard h2,.scard h3,.cb-end b,.mk em,.ink-h{font-family:var(--xf)}
+/* nút chính: khối mực đen, chữ giấy; viền mảnh bên trong như khung tranh */
+.btn.pri{background:var(--ink);border-color:var(--ink);color:var(--paper);box-shadow:inset 0 0 0 2px var(--ink),inset 0 0 0 3px color-mix(in srgb,var(--paper) 35%,transparent);border-radius:var(--r)}
+:root[data-theme=dark] .btn.pri{color:#14120f}
+.btn{border-color:color-mix(in srgb,var(--ink) 45%,transparent)}
+.nv.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}.nv.on .ic{color:var(--paper)}.nv .ic{color:var(--ink2)}
+/* chữ phụ: đậm hơn, to hơn một bậc cho dễ đọc trên điện thoại */
+.hint,.u-nm small,.hud-id small,.nc-h small,.dk-t small{color:var(--ink3)}
+.bt{font-size:.74em}.acell small{font-size:.72em}.acell b{font-size:.76em}.si{font-size:.74em}
+/* thông báo nhỏ: dải giấy ở mép trên, viền son bên trái, không che nút */
+#toast,:root #toast{top:calc(env(safe-area-inset-top,0px) + var(--hudh,84px) + 12px);bottom:auto;z-index:55}
+.toast{background:var(--paper);color:var(--ink);border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-left:3px solid var(--seal);border-radius:var(--r);padding:.4em .9em;box-shadow:var(--sh);animation:toast2 2.9s both}
+@keyframes toast2{0%{opacity:0;transform:translateY(-8px)}8%,82%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+/* hàng thẻ cuộn ngang: vệt mờ ở mép phải để biết còn mục */
+.tabs,.chips{-webkit-mask:linear-gradient(90deg,#000 calc(100% - 26px),transparent);mask:linear-gradient(90deg,#000 calc(100% - 26px),transparent)}
+
+/* ---------- trận đấu ---------- */
+.track{height:52px;margin:26px 22px 4px;border-top:2px solid var(--ink)}
+.mk em{font-size:.95em;color:var(--ink2);top:-21px}.mk.m50{background:var(--seal)}.mk.m75{background:var(--gold)}
+.av{width:38px;height:38px;margin-left:-19px;font-size:20px;background:var(--paper);border:2px solid var(--seal);box-shadow:0 2px 6px -2px rgba(40,30,15,.4)}.av.A{border-color:var(--jade)}.av.me{border-color:var(--ink)}
+.ucard{border-radius:var(--r);box-shadow:var(--sh)}
+.ucard.foe{border-top:2px solid var(--seal)}.ucard.ally{border-top:2px solid var(--jade)}.ucard.me{border-top:2px solid var(--ink)}
+.ucard.cur,.ucard.me.cur{box-shadow:0 0 0 2px var(--gold),var(--sh)}
+.u-cn{display:block;font-size:.8em;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.u-cn small{margin-left:.4em;color:var(--ink3);font-weight:600;font-variant-numeric:tabular-nums}
+.u-av{border-color:var(--seal);background:var(--paper2)}
+/* thanh chỉ số: màu mực pha, có vệt máu vừa mất */
+.cbar{position:relative;border-radius:2px;border-color:color-mix(in srgb,var(--ink) 22%,transparent)}.cbar i{position:relative;border-radius:0}
+.cbar em{position:absolute;left:0;top:0;bottom:0;background:color-mix(in srgb,var(--seal) 38%,var(--paper));font-style:normal}
+.cbar.hp i{background:#55806a}.cbar.hp.mid i{background:#b08a33}.cbar.hp.low i{background:#a8322a}.cbar.mp i{background:#4d6d86}.cbar.tl i{background:#b4893a}.cbar.dl i{background:var(--ink)}
+.cb-art{border-radius:var(--r);border-color:color-mix(in srgb,var(--ink) 20%,transparent);box-shadow:inset 0 0 30px color-mix(in srgb,var(--paper) 60%,transparent)}
+.clog{border-radius:var(--r)}.cwait{padding:.8em 0}
+/* thần lực: vòng đứng yên, chỉ đổi độ dài; đầy thì sáng son */
+.tl-ring,:root[data-anim="1"] .tl-ring{animation:none!important;transform:rotate(-90deg)}
+.tl-ring .bg{stroke:color-mix(in srgb,var(--seal) 14%,var(--paper2))}.tl-ring .fg{stroke:#b5562a}
+.tl-ring.full .fg,.tl-ring.burn .fg{stroke:var(--seal);filter:drop-shadow(0 0 3px color-mix(in srgb,var(--seal) 70%,transparent))}
+.ult-av.full{animation:ultink 1.6s ease-in-out infinite alternate}@keyframes ultink{from{filter:drop-shadow(0 0 1px var(--seal))}to{filter:drop-shadow(0 0 8px var(--seal))}}
+.flame,.flame.f2{animation:none!important;background:radial-gradient(circle,transparent 55%,color-mix(in srgb,var(--seal) 70%,transparent) 62%,transparent 72%);-webkit-mask:none;mask:none;filter:blur(2px);opacity:.8}
+/* lớp bóng mực: trùng khung cảnh, nằm trên tranh, dưới bảng và hộp thoại */
+#cbFig{position:absolute;z-index:21;pointer-events:none;overflow:hidden;border-radius:var(--r)}
+.fg{position:absolute;transform:translateX(-50%);transition:opacity .4s}.fg canvas{display:block;transform-origin:50% 88%}
+/* đang tụ lực: quầng mực son tỏa dưới chân, báo trước đòn lớn */
+.fg.chg::before{content:"";position:absolute;left:12%;right:12%;bottom:4%;height:42%;border-radius:50%;background:radial-gradient(ellipse at 50% 80%,color-mix(in srgb,var(--seal) 55%,transparent),transparent 70%);filter:blur(4px);animation:chg 0.9s ease-in-out infinite alternate}
+@keyframes chg{from{opacity:.35;transform:scale(.85)}to{opacity:1;transform:scale(1.08)}}
+:root[data-anim="0"] .fg.chg::before{animation:none;opacity:.8}
+/* gục ngã: tan thành mực loang rồi biến mất */
+.fg.dead canvas{animation:inkgone 1.2s ease-in forwards}
+@keyframes inkgone{0%{filter:none;opacity:1}30%{filter:blur(1px) contrast(1.4);opacity:.9;transform:translateY(2px) scaleY(.97)}100%{filter:blur(9px);opacity:0;transform:translateY(10px) scale(1.12,.7)}}
+:root[data-anim="0"] .fg.dead canvas{animation:none;opacity:0}
+/* mở trận: nét cọ quệt ngang + chữ */
+.fx-open{width:min(86vw,420px);height:70px;display:grid;place-items:center}
+.fx-open i{position:absolute;inset:8px 0;background:var(--ink);border-radius:40% 8% 45% 10%/50% 20% 60% 30%;transform-origin:0 50%;animation:brush 1.3s cubic-bezier(.6,0,.2,1) both;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent)}
+.fx-open b{position:relative;font:700 34px var(--xf);color:var(--paper);letter-spacing:.12em;animation:brushtx 1.3s ease-out both}
+@keyframes brush{0%{transform:scaleX(0);opacity:.95}30%{transform:scaleX(1)}75%{opacity:.92;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1.04)}}
+@keyframes brushtx{0%,18%{opacity:0;transform:scale(1.25)}35%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
+/* vết mực ở chỗ trúng đòn */
+.fx-ink svg{display:block;mix-blend-mode:multiply;animation:inkhit .9s ease-out both}
+:root[data-theme=dark] .fx-ink svg{mix-blend-mode:screen;opacity:.7}
+@keyframes inkhit{0%{transform:scale(.3);opacity:0}12%{transform:scale(1);opacity:.85}60%{opacity:.55}100%{transform:scale(1.08);opacity:0}}
+/* ánh sáng nổ: dịu lại cho hợp giấy mực */
+.fx-core{opacity:.75}.fx-ring{box-shadow:none;border-width:2px}.fx-slash svg{filter:drop-shadow(0 0 4px var(--c))}
+/* số sát thương: chữ thư pháp mực đen viền giấy; bạo kích và mình trúng đòn: son */
+.fx-num b{color:var(--ink);-webkit-text-stroke:0;text-shadow:0 0 3px var(--paper),0 0 6px var(--paper),0 0 10px var(--paper)}
+.fx-num.dmg b{color:var(--ink)}.fx-num.me b{color:var(--seal);text-shadow:0 0 3px var(--paper),0 0 8px var(--paper)}
+.fx-num.crit b{color:var(--seal);font-size:44px;text-shadow:0 0 3px var(--paper),0 0 8px var(--paper),0 0 16px var(--paper)}
+.fx-num.heal b{color:var(--jade);text-shadow:0 0 4px var(--paper),0 0 8px var(--paper)}.fx-num.ev b,.fx-num.blk b{color:var(--acc2);text-shadow:0 0 4px var(--paper),0 0 8px var(--paper)}.fx-num.dz b{color:var(--gold);text-shadow:0 0 4px var(--paper),0 0 8px var(--paper)}
+.fx-vig{background:radial-gradient(ellipse at center,transparent 50%,color-mix(in srgb,var(--seal) 45%,transparent) 100%)}
+/* kết trận: con dấu son đóng xuống */
+.cb-end b{display:inline-block;align-self:center;font:700 2em/1.1 var(--xf);letter-spacing:.1em;color:var(--seal);border:3px solid var(--seal);border-radius:6px;padding:.15em .55em;box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 4px var(--seal);transform:rotate(-4deg);background:color-mix(in srgb,var(--seal) 6%,transparent)}
+.cb-end.win b{color:var(--seal)}.cb-end.flee b{color:var(--ink2);border-color:var(--ink2);box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 4px var(--ink2)}
+:root[data-anim="1"] .cb-end b{animation:stamp .45s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes stamp{0%{transform:rotate(-4deg) scale(2.2);opacity:0}60%{transform:rotate(-4deg) scale(.94);opacity:1}100%{transform:rotate(-4deg) scale(1)}}
+/* ánh sáng nổ dịu, lá chắn bằng nét mực; khung cảnh trận cao hơn cho đỡ trống */
+.fx-core{opacity:.45;mix-blend-mode:normal;background:radial-gradient(circle,color-mix(in srgb,var(--c0) 70%,transparent) 0,color-mix(in srgb,var(--c1) 40%,transparent) 40%,transparent 68%)}
+.fx-shield{filter:none}.fx-shield path:first-child{fill:color-mix(in srgb,var(--paper) 35%,transparent);stroke:var(--ink);stroke-width:3}.fx-shield path+path{stroke:var(--seal)}
+.fx-vig{opacity:.6}
+.cb-art{max-height:330px;min-height:150px}
+:root[data-view=screen] #toast{top:calc(env(safe-area-inset-top,0px) + 10px)}
+:root[data-view=combat] #toast{top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 120px)}
