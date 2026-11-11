@@ -145,7 +145,7 @@ const PANEL_V={tong:pTong,char:pChar,pets:pPets,journal:pJournal,affairs:pAffair
 
 // ---------- Túi đồ: hình người mặc trang bị, đan điền uẩn dưỡng, vật tùy thân, linh thạch và các ô đồ ----------
 // màu phẩm dùng chung: chữ tên và khung ảnh của mọi thứ có phẩm
-const PCOL=['#8d8672','#4f8a4a','#4a6fae','#7b56a8','#c97a2b','#c05a94','#b8402f'];
+const PCOL=['#7d8a96','#12b257','#1e8fff','#9b45ff','#f28a00','#ff3da5','#ff4655'];
 const PHAM_FROM=['Phàm Nhân','Phàm Nhân','Luyện Khí','Trúc Cơ','Kết Đan','Nguyên Anh','Hóa Thần'];
 function pcs(t){return '--pc:'+PCOL[clamp(t||0,0,6)];}
 function qName(n,t){return `<b class="qt" style="${pcs(t)}">${esc(n)}</b>`;}
