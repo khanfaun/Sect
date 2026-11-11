@@ -39,7 +39,7 @@ function mapTap(n){const r=G.run;if(!r||r.scene)return;if(UI.status){UI.status=f
 // ---------- đồng hồ và vòng lặp khung hình ----------
 function clockOn(){const r=G.run;return G.screen==='map'&&r&&!r.scene&&!UI.panel&&!UI.modal&&!UI.paused&&!document.hidden&&(CFG.clockIdle||!!r.moving);}
 let clkLast=performance.now(),clkAcc=0,clkFlush=0,clkSaveT=0,clkDay=-1,clkPart='';
-function clockText(){const t=W().t;const a=$('#clkY'),b=$('#clkM'),c=$('#clkH');if(a)a.textContent=tYear(t);if(b)b.textContent='Tháng '+MONTH[tMonth(t)];if(c)c.textContent='Giờ '+gioName(t);}
+function clockText(){const t=W().t;const a=$('#clkY'),b=$('#clkM'),c=$('#clkH');if(a)a.textContent=tYear(t);if(b)b.textContent='Ngày '+(Math.floor((t%HM)/HD)+1)+' · tháng '+MONTH[tMonth(t)];if(c)c.textContent='Giờ '+gioName(t);}
 function loop(now){
   let dt=Math.min(1,(now-clkLast)/1000);clkLast=now;
   const r=G.run;
@@ -66,7 +66,7 @@ document.addEventListener('visibilitychange',()=>{clkLast=performance.now();clkA
 window.addEventListener('resize',()=>{Map2.resize();Art.clear();Art.fillAll();});
 
 // ---------- hành động ----------
-function openBq(){const r=G.run;if(bqCan())return;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')UI.modal={k:'bq'};}
+function openBq(){const r=G.run;if(bqCan())return;UI.bqOpened=!r.scene;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')UI.modal={k:'bq'};}
 const ACT={
   birth:()=>{genBirth();const c=G.birth.cards;newRun(c[Math.floor(Math.random()*c.length)]);UI.sel=null;UI.panel=null;run2();},
   born:i=>{newRun(G.birth.cards[+i]);UI.sel=null;UI.panel=null;run2();},
@@ -78,7 +78,7 @@ const ACT={
   regionGo:()=>{G.run.scene=null;Map2.center();},
   choose:i=>{UI.evMin=false;choose(+i);},
   next:()=>endScene(),
-  pact:a=>{if(a==='bq'){UI.modal={k:'bq'};return;}if(a==='laibuon'||a==='tram'||a==='nhansu'||a==='conghien'){UI.modal={k:a};return;}if(a==='tinhthat'){G.bqRoom=true;UI.modal={k:'bq'};return;}if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
+  pact:a=>{if(a==='bq'){UI.modal={k:'bq'};return;}if(a==='laibuon'||a==='tram'||a==='nhansu'||a==='conghien'){UI.modal={k:a};return;}if(a==='tinhthat'){G.bqRoom=true;UI.bqOpened=false;UI.modal={k:'bq'};return;}if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
   leave:()=>leavePlace(),
   pass:a=>passAct(a),
   hud:()=>{UI.hudOpen=!UI.hudOpen;},
@@ -96,7 +96,7 @@ const ACT={
   status:()=>{UI.status=!UI.status;},
   panel:k=>{UI.panel=UI.panel===k?null:k;UI.code=null;UI.msg=null;UI.confirm=null;UI.chuSel=null;},
   closePanel:()=>{UI.panel=null;UI.code=null;UI.msg=null;},
-  modalX:()=>{UI.modal=null;G.bqRoom=false;},
+  modalX:()=>{const m=UI.modal;UI.modal=null;G.bqRoom=false;if(m&&m.k==='bq'&&UI.bqOpened&&G.run&&G.run.scene&&G.run.scene.type==='place'){G.run.scene=null;}UI.bqOpened=false;},
   unsel:()=>{UI.sel=null;},
   cardMin:()=>{UI.cardMin=true;},
   cardMax:()=>{UI.cardMin=false;},
@@ -120,7 +120,7 @@ const ACT={
   noteSave:id=>{const i=$('#noteIn');if(noteSet(+id,i?i.value:'')===false){note('Đã ghim đủ 50 chỗ.');}UI.modal=null;},
   noteGo:k=>{const n=nodeById(+k);if(n&&Math.floor(n.id/100)===G.run.region&&n.fog>=1){UI.panel=null;UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else note('Chỗ ấy không ở vùng này, hoặc kiếp này ngươi chưa biết tới.');},
   bqSet:y=>{if(UI.modal&&UI.modal.k==='bq')UI.modal.y=+y;},
-  bqGo:()=>{const y=UI.modal&&UI.modal.y||1;UI.modal=null;bqCustom(y);},
+  bqGo:()=>{const y=UI.modal&&UI.modal.y||1;UI.modal=null;const t0=W().t,tv0=G.run.tv;bqCustom(y);const r=G.run,sc=r&&r.scene;if(sc&&sc.type==='place'){UI.modal={k:'res',title:'Xuất quan',t:sc.msg.join(' ')+' Thời gian trôi qua '+durH(W().t-t0)+', tu vi '+(r.tv>=tv0?'tăng '+numVN(r.tv-tv0)+'%':'đã viên mãn')+'.',chips:sc.chips};sc.msg=[];sc.chips=[];if(UI.bqOpened)r.scene=null;}UI.bqOpened=false;},
   enc:a=>encAct(a),
   bossFight:()=>bossFight(),
   skill:id=>{UI.menu=null;const sc=G.run.scene;if(needTarget(sc,id)){UI.pendSk=id;return;}UI.pendSk=null;playerAct(id);},
