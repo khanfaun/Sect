@@ -573,7 +573,12 @@ function playerDD(j,tid){const r=G.run,sc=r.scene;const u=readyPlayer(sc);eqOf()
 {const _agg4=aggFx;aggFx=function(){const r=G.run;if(!r)return _agg4();const E=eqOf();const bag=r.relics;
   const act=Object.values(E).filter(Boolean).concat(r.dd.map(d=>{const m=ddMul(d),fx={};for(const k in d.rel.fx)fx[k]=typeof d.rel.fx[k]==='number'?d.rel.fx[k]*m:d.rel.fx[k];return Object.assign({},d.rel,{fx});}));
   r.relics=act;let fx;try{fx=_agg4();}finally{r.relics=bag;}fx.pillSlot=(fx.pillSlot||0)+25;return fx;};}
-function bagCap(){return 30+((aggFx().pillSlot||25)-25)*5;}
+// sức chứa túi: theo cảnh giới cộng túi trữ vật đang đeo (theo phẩm), tối đa BAG_MAX ô
+const BAG_BASE=[30,50,70,95,120,150],BAG_TUI=[10,20,35,55,80,110,150],BAG_MAX=300;
+function bagCap(){const r=G.run;if(!r)return BAG_BASE[0];const t=eqOf().tuivat;const up=((G.meta&&G.meta.upg&&G.meta.upg.tui)||0)*5;return Math.min(BAG_MAX,BAG_BASE[clamp(r.realm,0,5)]+(t?BAG_TUI[clamp(t.tier||0,0,6)]:0)+up);}
+function bagStacks(){const r=G.run;return r.relics.length+Object.keys(r.mats||{}).filter(k=>r.mats[k]>0).length+(r.eggs||[]).length+(r.passes||[]).length;}
+// đan dược chiếm phần ô còn lại của túi
+{const _S6=S;S=function(){const s=_S6();if(G.run&&G.run.relics)s.pillMax=Math.max(5,bagCap()-bagStacks());return s;};}
 // đồ mới nhặt: ô còn trống thì tự mặc
 function eqAuto(){const r=G.run;if(!r)return;const E=eqOf();const put=[];for(let i=r.relics.length-1;i>=0;i--){const rel=r.relics[i];if(rel.seen)continue;rel.seen=1;const s=slotsFor(rel).find(x=>!E[x]);if(s){r.relics.splice(i,1);E[s]=rel;put.push(rel);}}
   if(put.length===1)note('Mặc '+put[0].name+' vào ô '+SLOT_N[slotOf(put[0])].toLowerCase()+'.','up');else if(put.length>1)note('Tự mặc '+put.length+' món mới vào các ô còn trống.','up');
@@ -594,7 +599,7 @@ function bagItems(){const r=run2();eqOf();const L=[];
 function bagUse(key,n){const r=G.run;const it=bagItems().find(x=>x.key===key);if(!it||!it.use)return 0;let c=0;
   for(let k=0;k<n;k++){const i=r.pills.findIndex(p=>p.id===it.ref.id&&(p.q||0)===it.ref.q);if(i<0)break;const m=usePill(i,false);if(!G.run)break;if(m===false||r.pills[i]&&r.pills.filter(p=>p.id===it.ref.id&&(p.q||0)===it.ref.q).length===it.cnt-c)break;c++;}
   if(c&&G.run)log('Dùng '+c+' '+it.n+'.');return c;}
-function bagDrop(key,n){const r=G.run;const it=bagItems().find(x=>x.key===key);if(!it)return 0;const R0=it.ref;let c=0;
+function bagDrop(key,n){const r=G.run;const it=bagItems().find(x=>x.key===key);if(!it)return 0;if(it.ref.t==='rel'?r.relics[it.ref.i].lock:(r.locks&&r.locks[key]))return 0;const R0=it.ref;let c=0;
   if(R0.t==='rel'){r.relics.splice(R0.i,1);c=1;}
   else if(R0.t==='pill'){for(let k=0;k<n;k++){const i=r.pills.findIndex(p=>p.id===R0.id&&(p.q||0)===R0.q);if(i<0)break;r.pills.splice(i,1);c++;}}
   else if(R0.t==='mat'){c=Math.min(n,r.mats[R0.k]);r.mats[R0.k]-=c;}
@@ -605,7 +610,7 @@ function bagDrop(key,n){const r=G.run;const it=bagItems().find(x=>x.key===key);i
 // Công pháp: cộng chỉ số theo hệ và mang 1–3 chiêu. Tâm pháp: toàn nội tại, đôi khi có đòn thần thức.
 // Học từ bí tịch; chỉ môn đang đặt trong vòng vận công mới vận hành.
 function skCat(sk){return sk.fx.evade?'move':!sk.fx.p?'def':sk.t>=3?'ult':'atk';}
-const CAT_N={atk:'Tấn công',def:'Phòng thủ',move:'Thân pháp',ult:'Thần thông'},CAT_MAX={atk:3,def:2,move:1,ult:1};
+const CAT_N={atk:'Tấn công',def:'Phòng thủ',move:'Thân pháp',ult:'Thần thông'},CAT_MAX={atk:3,def:3,move:1,ult:1};
 const ART_SFX={cp:['Quyết','Kinh','Công','Chân Giải','Đạo Thư','Bí Lục'],tp:['Tâm Kinh','Tâm Pháp','Dưỡng Khí Thiên','Nội Kinh','Tĩnh Tâm Chú']};
 const EL_FX={kim:['atkP',6],moc:['hpP',6],thuy:['mpP',8],hoa:['matkP',7],tho:['defP',8],loi:['crit',3],bang:['defP',6],phong:['tp',1.2],am:['drain',3],phat:['tam',1.5],vo:['tvP',5]};
 const PAS={
@@ -643,7 +648,9 @@ function gainBookTp(tier){const r=G.run;run2();const b=bookOf(genArt('tp',tier))
 function arts(){const r=G.run;return r.arts||(r.arts=[]);}
 function artBy(u){return arts().find(a=>a.u===u);}
 function learnTime(a){return (a.tier+1)*2*HM;}
-function learnWhy(rel){const r=G.run;if(r.scene||r.moving)return 'Phải đứng yên ngoài bản đồ mới tham ngộ được.';if(r.realm<ART_REQ[rel.art.tier])return 'Cần '+REALM[ART_REQ[rel.art.tier]]+' mới đọc hiểu.';return '';}
+const ART_CAP={cp:[3,4,5,6,7,8],tp:[2,3,4,5,6,6]};
+function artCap(type){const r=G.run;return ART_CAP[type][clamp(r.realm,0,5)];}
+function learnWhy(rel){const r=G.run;if(rel&&rel.art&&!arts().some(x=>x.n===rel.art.n&&x.type===rel.art.type)&&arts().filter(x=>x.type===rel.art.type).length>=artCap(rel.art.type))return 'Đã đủ '+artCap(rel.art.type)+' ô '+(rel.art.type==='cp'?'công pháp':'tâm pháp')+'. Phế bỏ một môn hoặc lên cảnh giới để mở thêm ô.';if(r.scene||r.moving)return 'Phải đứng yên ngoài bản đồ mới tham ngộ được.';if(r.realm<ART_REQ[rel.art.tier])return 'Cần '+REALM[ART_REQ[rel.art.tier]]+' mới đọc hiểu.';return '';}
 function learnBook(i){const r=G.run;const rel=r.relics[i];if(!rel||rel.k!=='book'||learnWhy(rel))return null;const a=rel.art;r.relics.splice(i,1);
   const old=arts().find(x=>x.n===a.n&&x.type===a.type);advanceTime(learnTime(a));if(!G.run)return null;let t;
   if(old){if(old.lv<3)old.lv++;t=`Đọc lại ${a.n}, lĩnh hội thêm một tầng: ${LV_N[old.lv-1]}.`;}
@@ -697,3 +704,16 @@ function playerMind(tid){const r=G.run,sc=r.scene;const u=readyPlayer(sc);if(!u|
   for(const k of r.skills||[]){if(!SK[k.id])continue;const a=genArt('cp',SK[k.id].t,k.id);a.lv=clamp(k.lv||1,1,3);r.arts.push(a);}
   r.aid=(r.aid||0)+1;r.arts.push({u:r.aid,type:'tp',n:'Dẫn Khí Quyết',el:'vo',tier:0,lv:1,sk:[],pas:['tu'],mind:0});
   r.chu=[null,null,null,null,null,null,null,null];r.chuOpen=4;r.arts.slice(0,4).forEach((a,i)=>{r.chu[i]={k:'a',u:a.u};});r.kn=null;syncSkills();return r;};}
+// ----- thiêu đốt thọ nguyên: mỗi trận tối đa hai lần, lần sau đắt và dữ hơn -----
+// Lần 1 · Đốt huyết: mất thọ, hồi đầy linh lực và thể lực, giải độc, bỏng, suy yếu. Không mất lượt.
+// Lần 2 · Đốt nguyên thần: mất gấp đôi thọ; 3 lượt tới đòn đánh xuyên 40% thủ và hút 15% sát thương; hết thì suy yếu 2 lượt.
+const BURN=[{n:'Đốt huyết',m:0.04},{n:'Đốt nguyên thần',m:0.08}];
+function burnInfo(sc){const r=G.run;const k=(sc&&sc.burnN)||0;if(k>=2)return {k,done:true};const y=Math.max(2*(k+1),Math.round(LIFE[r.realm]*BURN[k].m));const left=Math.floor(S().life-r.age);return {k,y,left,ok:left>y+1};}
+function playerBurn(){const sc=G.run.scene;const u=readyPlayer(sc);if(!u)return false;const b=burnInfo(sc);if(b.done||!b.ok)return false;const r=G.run;
+  r.lifeAdj-=b.y;sc.burnN=b.k+1;
+  if(b.k===0){u.mp=u.maxMp;u.tl=100;u.st.poison=0;u.st.burn=0;u.st.weak=0;clog(sc,`Ngươi thiêu đốt ${b.y} năm thọ nguyên. Huyết khí sôi trào: linh lực, thể lực hồi đầy, độc tố tiêu tan.`,'me');}
+  else{u.st.soul=3;clog(sc,`Ngươi đốt cả nguyên thần, mất ${b.y} năm thọ. Ba lượt tới mỗi đòn xuyên giáp, hút máu.`,'me');}
+  syncMain(sc);sc.rev=(sc.rev||0)+1;log(`Thiêu đốt ${b.y} năm thọ nguyên trong trận.`);return true;}
+{const _rs=resolveSkill;resolveSkill=function(sc,u,sk,lv,tg,qm,offs){if(u.ctrl==='player'&&u.st&&u.st.soul>0&&sk.fx&&sk.fx.p)sk=Object.assign({},sk,{fx:Object.assign({},sk.fx,{pierce:Math.min(1,(sk.fx.pierce||0)+0.4),drain:(sk.fx.drain||0)+15})});return _rs(sc,u,sk,lv,tg,qm,offs);};}
+{const _oz=onZero;onZero=function(sc,u){const had=u.st&&u.st.soul>0;_oz(sc,u);if(had&&u.st){u.st.soul--;if(!u.st.soul){u.st.weak=Math.max(u.st.weak||0,2);clog(sc,'Nguyên thần cạn kiệt: ngươi suy yếu hai lượt.','en');}}};}
+function fightsHuman(sc){return (sc.en&&sc.en.f==='nhan')||sc.units.some(u=>u.side==='B'&&u.hp>0&&u.f==='nhan');}

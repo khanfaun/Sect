@@ -3,6 +3,12 @@
 const $=s=>document.querySelector(s);
 const $$=s=>Array.from(document.querySelectorAll(s));
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// chú thích dạng HTML (vật phẩm, công pháp...): data-tiph chứa mã HTML đã thoát ký tự
+// ảnh asset: điền đường dẫn ảnh vào đây là game tự dùng, chưa có thì hiện hình vẽ tạm.
+// item: ảnh vuông PNG không nền (khóa: loại món như 'kiem', 'pill:hoi', 'mat:thao'); npc, hero, pet, foe: ảnh tròn; place: ảnh ngang theo loại nơi
+const ASSET={item:{},art:{},npc:{},hero:{},pet:{},foe:{},place:{}};
+function assetImg(kind,id,fb){const u=ASSET[kind]&&id!=null&&ASSET[kind][id];return u?`<img class="asset as-${kind}" src="${esc(u)}" alt="" loading="lazy" draggable="false">`:fb;}
+const tah=h=>h?` data-tip="1" data-tiph="${esc(h)}"`:'';
 const ta=s=>s?` data-tip="${esc(String(s)[0].toUpperCase()+String(s).slice(1))}"`:'';
 const UI={panel:null,tab:{},sel:null,cardMin:false,hudOpen:true,modal:null,confirm:null,lastStory:0,menu:null,pendSk:null,speed:1,paused:false,narr:null,intro:null,filter:'all'};
 
@@ -82,6 +88,11 @@ const ICP={
   flag:'M6 21V4M6 5h11l-2 4 2 4H6',
   eye:'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 100 6 3 3 0 000-6z',
   check:'M5 12l5 5 9-10',
+  lock:'M7 11V8a5 5 0 0110 0v3M5 11h14v10H5zM12 15v2',
+  unlock:'M7 11V8a5 5 0 019.6-2M5 11h14v10H5zM12 15v2',
+  flame:'M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z',
+  run:'M13 4a1.5 1.5 0 100 .01M9 20l3-6 3 2v5M7 12l3-4h4l3 3 3-1M12 14l-2-3',
+  skip:'M5 5l8 7-8 7zM15 5v14M19 5v14',
   pen:'M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4M4 20l1-4',
   seat:'M12 6a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM7 13c0-3 2-5 5-5s5 2 5 5M3 20c3-4 6-5 9-5s6 1 9 5M7 13l-2 4M17 13l2 4',
 };

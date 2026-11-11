@@ -71,7 +71,7 @@ function dockHTML(){
     let mid='';
     if(!here){const p=findPath(r.at,n.id);mid=p?`<span>~${Math.round(pathLen(p))} dặm · ${durH(travelHours(p))}</span>`:'<span>chưa biết đường</span>';}else mid='<span class="good">ngươi đang ở đây</span>';
     const nt=noteOf(n.id);const M=I.sure?placeMeta(n):null;
-    return `<div class="dock card nc"><div class="nc-top"><div class="nc-tt"><b>${esc(n.name+(I.sure?'':'?'))}</b><small>${esc(I.info)}</small></div>
+    const pimg=ASSET.place[n.type];return `<div class="dock card nc">${pimg&&I.sure?`<div class="nc-img">${assetImg('place',n.type,'')}</div>`:''}<div class="nc-top"><div class="nc-tt"><b>${esc(n.name+(I.sure?'':'?'))}</b><small>${esc(I.info)}</small></div>
       <button class="icb" data-act="noteEdit" data-arg="${n.id}"${ta('Ghi chú: ghim một dòng lên điểm này')} aria-label="Ghi chú">${ic('pen')}</button><button class="icb" data-act="cardMin"${ta('Thu gọn')} aria-label="Thu gọn">${ic('down')}</button><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div>
       <p class="nc-m"><span class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${DTAG[dg]}${I.sure?'':'?'}</span>${I.sure?`<span>linh khí ${LK_N[lkOf(n)].toLowerCase()}</span>`:''}${mid}</p>
       ${M?`<div class="nc-kv"><div><small>Tọa trấn</small><b>${esc(M.luc)}</b></div><div><small>Quy mô</small><b>${esc(M.quy)}</b></div></div>${M.desc?`<p class="nc-d">${esc(M.desc)}</p>`:''}`:'<p class="nc-d">Mới nghe đồn, chưa tận mắt thấy. Vị trí có thể lệch.</p>'}
@@ -108,7 +108,7 @@ function vEvent(sc){
   if(sc.phase==='choose'){b+='<div class="choices">';let k=1;for(const {c,i} of visChoices(sc)){const NL=needList(c);const bad=NL.filter(x=>!x.ok);b+=choiceBtn((k++)+'.','choose',i,esc(T(c.l,sc.v)),choiceExtra(c),{dis:bad.length>0,cls:bad.length?'soft':''});if(bad.length)b+=`<p class="why">(${esc(bad.map(x=>x.t).join(', '))})</p>`;}b+='</div>';}
   return card(e&&e.n||'Kỳ ngộ',r.place.n,b,{head:sc.phase==='choose'?`<button class="pl-tg" data-act="evMin"${ta('Tạm gác lại để xem bản đồ, túi đồ… rồi quay lại chọn sau')}>Để sau ${ic('down')}</button>`:'',foot:sc.phase==='choose'?'':goBtn('next','Tiếp tục')});
 }
-function foeLine(en){return `<div class="foe-l"><span class="foe-i">${en.i}</span><div><b>${esc(en.n)}</b><small>${elSeal(en.el)} ${esc(en.sub||'')}</small></div></div>`;}
+function foeLine(en){return `<div class="foe-l"><span class="foe-i">${assetImg('foe',en.k||en.n,en.i)}</span><div><b>${esc(en.n)}</b><small>${elSeal(en.el)} ${esc(en.sub||'')}</small></div></div>`;}
 function vEnc(sc){
   const r=G.run,en=sc.en;let b=foeLine(en)+`<div class="story"><p class="new">${esc(sc.text)}</p>${sc.res?`<p class="new">${esc(sc.res)}</p>`:''}</div>`;
   if(sc.done)return card(sc.elite?'Hung địa':'Chạm trán',r.place.n,b+chipsHTML(sc.paid?[chip('💎','−'+sc.paid,'Linh thạch','dn')]:[]),{foot:goBtn('next','Tiếp tục')});
@@ -118,7 +118,7 @@ function vEnc(sc){
   if(en.f==='nhan'&&!sc.elite)b+=choiceBtn('3.','enc','pay','Nộp tiền mãi lộ',`<span class="cx">${stoneHTML(pay)}</span>`,{dis:r.st<pay});
   return card(sc.elite?'Hung địa':'Chạm trán',r.place.n,b+'</div>');
 }
-function vBoss(sc){const r=G.run;return card('Sào huyệt',r.place.n,`<div class="foe-l big"><span class="foe-i">${sc.b.i}</span><div><b>${esc(sc.b.n)}</b><small>Thủ lĩnh vùng ${esc(REG[r.region].n)}</small></div></div><div class="story"><p class="new">${esc(sc.text)}</p></div>`,{foot:goBtn('bossFight','Nghênh chiến')});}
+function vBoss(sc){const r=G.run;return card('Sào huyệt',r.place.n,`<div class="foe-l big"><span class="foe-i">${assetImg('foe',sc.b.n,sc.b.i)}</span><div><b>${esc(sc.b.n)}</b><small>Thủ lĩnh vùng ${esc(REG[r.region].n)}</small></div></div><div class="story"><p class="new">${esc(sc.text)}</p></div>`,{foot:goBtn('bossFight','Nghênh chiến')});}
 function itemView(p){
   if(p.k==='relic')return {ic:relIcon(p.rel),n:p.rel.name,sub:GRADE[p.rel.tier],tip:relicTip(p.rel),t:p.rel.tier||0};
   if(p.k==='skill'){const sk=SK[p.id];const h=G.run.skills.find(x=>x.id===p.id);return {ic:elSeal(sk.el),n:sk.n,sub:'Bí tịch công pháp · '+PHAM[sk.t],tip:skillTip(sk,h?h.lv+1:1),t:sk.t};}
@@ -231,6 +231,7 @@ function modalHTML(){
   if(m.k==='tram'){const L=stageList(nodeById(G.run.at));return `<div class="mbox"><h3>Trạm dịch</h3><p class="hint">Xe ngựa chỉ tới những thôn trấn ngươi từng đặt chân. Nhanh gấp ba, không bị chặn đường.</p><h4 class="sgrp">Sắm phương tiện riêng</h4><div class="rows">${MOUNT.map(x=>{const own=G.run.mount===x.id;const no=G.run.realm<(x.realm||0);return `<button class="row${own?' taken':''}" data-act="mount" data-arg="${x.id}"${own||no||G.run.st<price(x.p)?' disabled':''}><span class="r-t"><b>${x.n}</b><small>${x.d}${no?' · cần '+REALM[x.realm]:''}</small></span><span class="r-x">${own?'đang dùng':stoneHTML(price(x.p))}</span></button>`;}).join('')}</div><h4 class="sgrp">Thuê xe chuyến</h4><div class="rows">${L.length?L.map(x=>`<button class="row" data-act="stage" data-arg="${x.id}"${G.run.st<x.c?' disabled':''}><span class="r-t"><b>${esc(x.n)}</b><small>${durH(x.h)} đường</small></span><span class="r-x">${stoneHTML(x.c)}</span></button>`).join(''):'<p class="empty">Chưa tới thôn trấn nào khác trong vùng.</p>'}</div><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button></div></div>`;}
   if(m.k==='nhansu'){const n=nodeById(G.run.at);const L=sectPeople(n);return `<div class="mbox"><h3>Nhân sự · ${esc(n.name)}</h3><div class="rows">${L.length?L.map(x=>`<div class="row${x.alive?'':' dim'}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b>${esc(x.ten)}</b><small>${esc(x.tt)}</small></span><span class="r-x">${x.alive?REALM[x.realm]:'đã mất'}</span></div>`).join(''):'<p class="empty">Chưa nghe danh ai nổi bật ở đây.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='pick')return pickModalHTML(m);
+  if(m.k==='item')return itemModalHTML(m);
   if(m.k==='art')return artModalHTML(m);
   if(m.k==='pham')return phamHelpHTML();
   if(m.k==='res'){return `<div class="mbox"><h3>${esc(m.title)}</h3><p>${esc(m.t)}</p>${chipsHTML(m.chips)}<div class="mb-f"><span class="grow"></span><button class="btn pri" data-act="modalX">Tiếp tục</button></div></div>`;}

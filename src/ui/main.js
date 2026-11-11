@@ -38,7 +38,7 @@ function after(){render();saveSoon();}
 function mapTap(n,c){const r=G.run;if(!r||r.scene)return;UI.sel=n?n.id:null;UI.cell=n||c==null?null:(UI.cell===c?null:c);UI.cardMin=false;render();}
 function hexTip(c,x,y){const tip=$('#tip');const n=hexNode(c);const I=hexInfo(c);const shown=n&&!((CFG.hideT||{})[n.type]&&n.id!==G.run.at);if(!shown){hideTip();return;}
   tip.textContent=n.name+(n.fog>=2||n.memory?'':'?')+' · '+TYPE_NAME[n.type]+'\n'+DTAG[dangerTag(n)]+'\n'+I.regName+(I.dist?' › '+I.dist:'');tip.hidden=false;tipEl=null;
-  const tw=tip.offsetWidth,th=tip.offsetHeight;tip.style.left=Math.max(8,Math.min(window.innerWidth-tw-8,x+14))+'px';tip.style.top=Math.max(8,y-th-12)+'px';}
+  tip.className='';placeTip(x,y);}
 
 // ---------- đồng hồ và vòng lặp khung hình ----------
 function clockOn(){const r=G.run;return G.screen==='map'&&r&&!r.scene&&!UI.panel&&!UI.modal&&!UI.paused&&!document.hidden&&(CFG.clockIdle||!!r.moving);}
@@ -149,7 +149,7 @@ const ACT={
   flee:()=>{UI.menu=null;playerFlee();},
   dd:j=>{UI.menu=null;playerDD(+j);},
   mind:()=>{UI.menu=null;playerMind();},
-  learn:i=>{const t=learnBook(+i);bagSt().sel=null;if(t)UI.modal={k:'res',title:'Sở học',t,chips:[]};},
+  learn:i=>{const t=learnBook(+i);bagSt().sel=null;UI.modal=t?{k:'res',title:'Sở học',t,chips:[]}:null;},
   study:u=>{const t=studyArt(+u);if(t)UI.modal={k:'res',title:'Tham ngộ',t,chips:[]};},
   forget:u=>{if(UI.confirm!=='fg'+u){UI.confirm='fg'+u;return;}UI.confirm=null;dropArt(+u);},
   chuUnblock:()=>{if(chuUnblock())note('Một ô kinh mạch đã thông.','up');},
@@ -164,17 +164,23 @@ const ACT={
   chuDel:i=>{chuSet(+i,null);syncSkills();UI.chuSel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
   artOpen:u=>{UI.modal={k:'art',u:+u};},
   phamHelp:()=>{UI.modal={k:'pham'};},
-  bagTab:c=>{const B=bagSt();B.tab=c;B.sel=null;},
-  bagSel:k=>{const B=bagSt();B.sel=B.sel===k?null:k;B.n=1;},
-  bagPham:v=>{const B=bagSt();B.pham=v==null?(B.pham>=6?-1:B.pham+1):+v;B.sel=null;},
-  bagSort:v=>{const B=bagSt();B.sort=v==null?(B.sort+1)%4:+v;},
+  bagTab:c=>{UI.dd=null;const B=bagSt();B.tab=c;B.sel=null;},
+  ddOpen:k=>{UI.dd=UI.dd===k?null:k;},
+  pickSel:j=>{if(UI.modal)UI.modal.sel=+j;},
+  bagLock:()=>{const r=G.run,B=bagSt();const it=bagItems().find(x=>x.key===B.sel);if(!it)return;if(it.ref.t==='rel'){const x=r.relics[it.ref.i];x.lock=x.lock?0:1;}else{r.locks=r.locks||{};if(r.locks[it.key])delete r.locks[it.key];else r.locks[it.key]=1;}},
+  artRun:u=>{const r=run2();const n=chuSlots();for(let j=0;j<n;j++)if(!r.chu[j]){chuSet(j,{k:'a',u:+u});break;}syncSkills();},
+  bagSel:k=>{const B=bagSt();B.sel=k;B.n=1;UI.modal={k:'item',key:k};},
+  bagPham:v=>{UI.dd=null;const B=bagSt();B.pham=v==null?(B.pham>=6?-1:B.pham+1):+v;B.sel=null;},
+  bagSort:v=>{UI.dd=null;const B=bagSt();B.sort=v==null?(B.sort+1)%4:+v;},
   bagN:d=>{const B=bagSt();const it=bagItems().find(x=>x.key===B.sel);if(!it)return;B.n=d==='all'?it.cnt:clamp((B.n||1)+(+d),1,it.cnt);},
-  bagUse:()=>{const B=bagSt();bagUse(B.sel,B.n||1);if(!bagItems().find(x=>x.key===B.sel))B.sel=null;B.n=1;},
-  bagDrop:()=>{const B=bagSt();if(UI.confirm!=='drop'){UI.confirm='drop';return;}UI.confirm=null;bagDrop(B.sel,B.n||1);B.sel=null;B.n=1;},
-  eqOn:i=>{equip(+i);bagSt().sel=null;},
+  bagUse:()=>{const B=bagSt();bagUse(B.sel,B.n||1);if(!bagItems().find(x=>x.key===B.sel)){B.sel=null;if(UI.modal&&UI.modal.k==='item')UI.modal=null;}B.n=1;},
+  bagDrop:()=>{const B=bagSt();if(UI.confirm!=='drop'){UI.confirm='drop';return;}UI.confirm=null;bagDrop(B.sel,B.n||1);B.n=1;if(!bagItems().find(x=>x.key===B.sel)){B.sel=null;if(UI.modal&&UI.modal.k==='item')UI.modal=null;}},
+  eqOn:i=>{equip(+i);bagSt().sel=null;if(UI.modal&&UI.modal.k==='item')UI.modal=null;},
   eqOff:s=>{unequip(s);bagSt().sel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
-  ddPut:i=>{if(ddPut(+i))bagSt().sel=null;},
+  ddPut:i=>{if(ddPut(+i)){bagSt().sel=null;if(UI.modal&&UI.modal.k==='item')UI.modal=null;}},
   ddTake:j=>{ddTake(+j);bagSt().sel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
+  burnOpen:()=>{UI.burnOpen=!UI.burnOpen;},
+  burn:()=>{if(playerBurn())UI.burnOpen=false;},
   yield:()=>{UI.menu=null;playerYield();},
   cont:()=>{UI.menu=null;UI.pendSk=null;combatContinue();},
   pick:i=>takePick(+i),
@@ -185,6 +191,7 @@ const ACT={
   upg:id=>buyUpg(id),
   tab:a=>{const [k,v]=a.split(':');UI.tab[k]=v;if(k==='more'&&v==='cfg'&&!UI.tab.cfg)UI.tab.cfg='gfx';UI.confirm=null;},
   filter:f=>{UI.filter=f;},
+  affCat:f=>{UI.filter=f;UI.dd=null;},
   affGo:a=>{if(!a)return;const [x,y,id]=a.split(',');UI.panel=null;Map2.focus(+x,+y);if(id!==''){UI.sel=+id;UI.cardMin=false;}},
   cfg:a=>{const i=a.indexOf('=');const k=a.slice(0,i);cfgSet(k,JSON.parse(a.slice(i+1)));if(k==='autoFight')syncDodge();if(k==='theme'||k==='font'){Art.clear();}Map2.resize();},
   usepill:i=>{const m=usePill(+i,false);if(m&&G.run)log('Dùng '+m+'.');},
@@ -207,10 +214,13 @@ const KEEP_CONFIRM={pact:1,wipe:1,newGame:1,petFree:1,bagDrop:1,forget:1};
 document.addEventListener('click',e=>{
   if(UI.suppress){UI.suppress=false;e.preventDefault();e.stopPropagation();return;}
   const el=e.target.closest('[data-act]');
-  if(!el){const t=e.target.closest('[data-tip]');if(t){showTip(t,true);}else hideTip();return;}
+  if(!el&&UI.dd){UI.dd=null;render();}
+  if(!el){const t=e.target.closest('[data-tip]');if(t){showTip(t,true,e.clientX||e.clientY?[e.clientX,e.clientY]:null);}else hideTip();return;}
   if(el.disabled)return;
   const a=el.dataset.act;const f=ACT[a];if(!f)return;
   if(!KEEP_CONFIRM[a])UI.confirm=null;
+  if(a!=='burnOpen'&&a!=='burn')UI.burnOpen=false;
+  if(a!=='ddOpen'&&!/^bag(Tab|Pham|Sort)$|^affCat$/.test(a))UI.dd=null;
   try{f(el.dataset.arg,el);}catch(err){console.error(err);note('Có lỗi: '+err.message);}
   after();
 },true);
@@ -221,17 +231,24 @@ document.addEventListener('input',e=>{if(e.target.id==='bqR'&&UI.modal&&UI.modal
 
 // ---------- chú thích ----------
 let tipT=null,tipEl=null;
-function showTip(el,toggle){
+// đặt chú thích cạnh con trỏ; chạm mép phải/dưới thì lật sang phía bên kia
+function placeTip(x,y){const tip=$('#tip');const tw=tip.offsetWidth,th=tip.offsetHeight,W=window.innerWidth,H=window.innerHeight;
+  let L=x+14,T=y+16;if(L+tw>W-6)L=x-tw-12;if(L<6)L=Math.max(6,Math.min(W-tw-6,x-tw/2));if(T+th>H-6)T=y-th-12;if(T<6)T=Math.max(6,Math.min(H-th-6,y+16));
+  tip.style.left=L+'px';tip.style.top=T+'px';}
+function showTip(el,toggle,xy){
   const tip=$('#tip');const txt=el.dataset.tip;if(!txt)return;
   if(toggle&&tipEl===el&&!tip.hidden){hideTip();return;}
-  tipEl=el;tip.textContent=txt;tip.hidden=false;
+  tipEl=el;if(el.dataset.tiph){tip.innerHTML=el.dataset.tiph;tip.className='rich';}else{tip.textContent=txt;tip.className='';}tip.hidden=false;
+  if(xy){placeTip(xy[0],xy[1]);return;}
+  // chạm (không có con trỏ): đặt trên phần tử, không đủ chỗ thì xuống dưới
   const r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;
-  let x=r.left+r.width/2-tw/2;x=Math.max(8,Math.min(window.innerWidth-tw-8,x));
-  let y=r.top-th-10;if(y<8)y=r.bottom+10;
+  let x=r.left+Math.min(r.width/2,60)-tw/2;x=Math.max(6,Math.min(window.innerWidth-tw-6,x));
+  let y=r.top-th-8;if(y<6)y=Math.min(window.innerHeight-th-6,r.bottom+8);
   tip.style.left=x+'px';tip.style.top=y+'px';
 }
 function hideTip(){const t=$('#tip');if(t){t.hidden=true;}tipEl=null;}
-document.addEventListener('pointerover',e=>{if(e.pointerType!=='mouse')return;const t=e.target.closest('[data-tip]');if(t)showTip(t);else hideTip();});
+document.addEventListener('pointerover',e=>{if(e.pointerType!=='mouse')return;const t=e.target.closest('[data-tip]');if(t){if(t!==tipEl)showTip(t,false,[e.clientX,e.clientY]);}else if(tipEl)hideTip();});
+document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||!tipEl)return;const tip=$('#tip');if(!tip.hidden&&tipEl.contains(e.target))placeTip(e.clientX,e.clientY);});
 document.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;const t=e.target.closest('[data-tip]');clearTimeout(tipT);if(!t)return;tipT=setTimeout(()=>{if(t.closest('[data-act]')){UI.suppress=true;}showTip(t);},420);});
 ['pointerup','pointercancel','pointermove'].forEach(ev=>document.addEventListener(ev,e=>{if(ev==='pointermove'&&e.pointerType==='mouse')return;clearTimeout(tipT);}));
 document.addEventListener('scroll',()=>{if(tipEl)hideTip();},{passive:true,capture:true});
