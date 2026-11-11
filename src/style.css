@@ -909,3 +909,6 @@ span.el[class*=el-]{border-radius:0;text-shadow:none;color:#fff!important}
 .t-sub{margin-top:.5em}.narr{margin-top:7em}.t-btn{margin-top:7.5em}
 .cb-end b{text-transform:uppercase}
 .t-art{opacity:1;height:40%;border-top:5px solid var(--navy)}
+/* nền chiến đấu phủ hết bề ngang màn hình */
+.cb{background:none}
+:root[data-view=combat] #full{background:linear-gradient(168deg,var(--navy) 0 150px,var(--seal) 150px 156px,var(--yel) 156px 160px,transparent 160px),radial-gradient(circle,color-mix(in srgb,var(--ink) 10%,transparent) 1.2px,transparent 1.6px) 0 0/16px 16px,var(--bg)}
