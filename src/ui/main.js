@@ -229,7 +229,7 @@ function migrate(d){
 function loadData(d){d=migrate(d);G={meta:d.meta,run:d.run||null,over:d.over||null,birth:d.birth||null,screen:d.screen||'title'};
   if((G.screen==='map'||G.screen==='run')&&!G.run)G.screen='title';if(G.screen==='run')G.screen='map';if(G.screen==='codex')G.screen='meta';if(G.screen==='over'&&!G.over)G.screen='title';if(G.screen==='birth'&&!G.birth)G.screen='title';
   if(!G.meta.world)G.meta.world=genWorld();
-  extendWorld(G.meta.world);snapWorld(G.meta.world);if(G.run)run2();syncDodge();
+  extendWorld(G.meta.world);snapWorld(G.meta.world);entsRescale(G.meta.world);if(G.run)run2();syncDodge();
   const sc=G.run&&G.run.scene;if(sc&&sc.type==='combat'){if(sc.dodge)dodgeResolve(null);if(sc.qte)qteResolve(null);}}
 let DB=null,dbBusy=false,dbPending=false,dbTimer=null;
 saveSoon=function(){

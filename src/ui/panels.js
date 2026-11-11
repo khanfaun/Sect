@@ -1,5 +1,5 @@
 // ---------- các bảng mở từ thanh dưới ----------
-function kvRow(n,v,t,cls){return `<div class="kr ${cls||''}"${ta(t)}><span>${n}</span><b>${v}</b></div>`;}
+function kvRow(n,v,t,cls){return `<div class="kr ${cls||''}"${ta(t)}><span>${sib(n)}${n}</span><b>${v}</b></div>`;}
 function pChar(){
   const r=G.run,s=S();const tab=UI.tab.char||'base';
   let b=tabsHTML('char',[['base','Căn cơ'],['chu','Chu thiên'],['bag','Túi đồ']],tab);

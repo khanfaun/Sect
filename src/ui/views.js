@@ -2,7 +2,7 @@
 function sectText(){const r=G.run;return r.flags.tongmon?'Đệ tử tông môn':'Tán tu · Tự do';}
 function hudHTML(){
   const r=G.run,s=S(),t=W().t;const left=s.life-r.age;const warn=left<s.life*0.12;const pa=PART[partOf(t)];
-  const row=(n,cur,max,cls,txt,tip)=>`<div class="hrow"${ta(tip)}><span class="hn">${n}</span>${bar(cur,max,cls)}<span class="hv">${txt}</span></div>`;
+  const row=(n,cur,max,cls,txt,tip)=>`<div class="hrow"${ta(tip)}><span class="hn">${sib(n)}${n}</span>${bar(cur,max,cls)}<span class="hv">${txt}</span></div>`;
   const n=curNode();const atDp=n&&n.dp&&!r.moving;const brk=canBreak();const bqNo=bqCan();
   const hurt=wounds().length?' · <b class="bad">'+esc(WOUND[wounds()[0].k].n)+(wounds().length>1?' +'+(wounds().length-1):'')+'</b>':r.hp<s.maxHp*0.35?' · <b class="bad">Khí huyết cạn</b>':'';
   let h=`<div class="hud-top" data-act="hud"><div class="hud-date"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)]+'\nNgày '+(Math.floor((t%HM)/HD)+1)+' trong tháng')}><small>Năm</small><b id="clkY">${tYear(t)}</b><small id="clkM">Ngày ${Math.floor((t%HM)/HD)+1} · tháng ${MONTH[tMonth(t)]}</small></div>
@@ -13,7 +13,7 @@ function hudHTML(){
      ${row('Khí huyết',r.hp,s.maxHp,'hp',r.hp+' / '+s.maxHp,'Về 0 là chết')}
      ${row('Linh lực',r.mp,s.maxMp,'mp',r.mp+' / '+s.maxMp,'Dùng để thi triển pháp thuật')}
      ${row('Thọ',r.age,s.life,warn?'life warn':'life',Math.floor(r.age)+' / '+s.life,'Tuổi / thọ nguyên. Đột phá để sống lâu hơn.'+(warn?'\nThọ nguyên sắp cạn!':''))}
-     <div class="hline"><span class="hn">Linh thạch</span>${stoneHTML(r.st)}${hurt}${r.tamma>0?` · <span class="${r.tamma>=60?'bad':''}"${ta('Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình')}>Tâm ma ${r.tamma}</span>`:''}</div>
+     <div class="hline"><span class="hn">${sib('Linh thạch')}Linh thạch</span>${stoneHTML(r.st)}${hurt}${r.tamma>0?` · <span class="${r.tamma>=60?'bad':''}"${ta('Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình')}>Tâm ma ${r.tamma}</span>`:''}</div>
      <div class="hbtns"><button data-act="hudBq"${bqNo?' disabled':''}${ta(bqNo||('Ngồi tu luyện ngay tại đây, tự chọn thời gian.\nLinh khí nơi này: '+LK_N[lkOf(n)]+(n&&n.dp?', có động phủ':'')))}>Bế quan</button>
       <button data-act="hudBt" class="${brk&&atDp?'hl':''}"${brk&&atDp?'':' disabled'}${ta(brk?(atDp?'Chuẩn bị đột phá':'Tu vi đã viên mãn. Tìm nơi có động phủ để đột phá'):'Tu vi chưa viên mãn')}>Đột phá</button>
       <button data-act="panel" data-arg="craft"${r.moving?' disabled':''}${ta('Luyện đan, luyện khí từ vật liệu nhặt được')}>Luyện chế</button></div></div>`;
@@ -47,8 +47,8 @@ function mapUiHTML(){
   const r=G.run;const sp=UI.speed||1;
   const B=(act,arg,lab,tip,on,dis)=>`<button class="mb${on?' on':''}" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}${dis?' disabled':''}${ta(tip)}>${lab}</button>`;
   let h=`<div class="mleft wb">${woundBar()}</div>`;
-  h+=`<div class="mright">${B('zoom',1,ic('plus'),'Phóng to')}${B('zoom',-1,ic('minus'),'Thu nhỏ')}${B('center',null,ic('target'),'Về chỗ ngươi')}${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}</div>`;
-  h+=`<div class="mtime">${B('speed',0,ic(UI.paused?'play':'pause'),UI.paused?'Cho thời gian chạy tiếp':'Tạm dừng thời gian',UI.paused)}${B('speed',1,'×1','1 giây = 1 giờ',!UI.paused&&sp===1)}${B('speed',12,'×12','Chờ nhanh',!UI.paused&&sp===12)}${B('wait','sang',ic('sun'),'Chờ tới sáng',0,!!r.moving)}${B('wait','toi',ic('moon'),'Chờ tới tối',0,!!r.moving)}</div>`;
+  h+=`<div class="mright">${B('zoom',1,ic('plus'),'Phóng to')}${B('zoom',-1,ic('minus'),'Thu nhỏ')}${B('center',null,ic('target'),'Về chỗ ngươi')}${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}<i class="sp"></i>
+   ${B('speed',0,ic(UI.paused?'play':'pause'),UI.paused?'Cho thời gian chạy tiếp':'Tạm dừng thời gian',UI.paused)}${B('speed',1,'×1','1 giây = 1 giờ',!UI.paused&&sp===1)}${B('speed',12,'×12','Chờ nhanh',!UI.paused&&sp===12)}${B('wait','sang',ic('sun'),'Chờ tới sáng',0,!!r.moving)}${B('wait','toi',ic('moon'),'Chờ tới tối',0,!!r.moving)}</div>`;
   return h;
 }
 const ENTER_L={tran:'Vào thôn trấn',thanh:'Vào thành',tong:'Lên sơn môn',ai:'Tới cửa ải',sao:'Vào sào huyệt',dong:'Vào hang',phe:'Vào phế tích',ma:'Vào ma địa',thien:'Bước lên',rung:'Vào rừng',nui:'Lên núi',song:'Ra bến nước',bien:'Ra bờ biển',hoang:'Vào hoang dã'};
@@ -82,7 +82,7 @@ function dockHTML(){
 function navHTML(){
   const r=G.run;const it=[['char','user','Nhân vật'],['pets','paw','Linh thú'],['journal','book','Sổ tay'],['affairs','globe','Thiên hạ'],['bonds','people','Giao tình'],['more','more','Thêm']];
   const dot={journal:r&&r.quests.some(q=>q.state==='open'),pets:r&&r.eggs&&r.eggs.length>0};
-  return it.map(([k,i,n])=>`<button class="nv${UI.panel===k?' on':''}" data-act="panel" data-arg="${k}">${ic(i)}<span>${n}</span>${dot[k]?'<i class="dot soft"></i>':''}</button>`).join('');
+  return it.map(([k,i,n])=>`<button class="nv${UI.panel===k?' on':''}" data-act="panel" data-arg="${k}">${ib(i)}<span>${n}</span>${dot[k]?'<i class="dot soft"></i>':''}</button>`).join('');
 }
 
 // ---------- các cảnh hiện đè lên bản đồ ----------
@@ -143,6 +143,7 @@ function vSwap(sc){
 }
 const PGROUP=[['Sự vụ',['board']],['Tông môn',['congmon','join','lib','nhansu','tongviec','conghien','tinhthat']],['Mua bán',['laibuon','taphoa','shop','ghost']],['Nghỉ chân',['tea','inn','tuu','tinh','heal']],['Đi lại',['tram']],['Tu luyện',['khaiphu','thinhgiao']],['Hoang dã',['sanyeu','haithuoc','daokhoang']],['Việc khác',['grave','patron','bury','quyan']]];
 const PNOW=['boss','cross','bt'];
+const GRP_IC={'Sự vụ':'scroll','Tông môn':'gate','Mua bán':'bag','Nghỉ chân':'tea','Đi lại':'cart','Tu luyện':'seat','Hoang dã':'tree','Việc khác':'more'};
 const PL_N={tea:'Trà lâu',inn:'Khách điếm',shop:'Phường thị',board:'Bảng treo thưởng',ghost:'Quỷ thị',join:'Sơn môn',lib:'Tàng Kinh Các',tinh:'Tĩnh tọa',heal:'Dưỡng thương'};
 function vPlace(sc){
   const r=G.run,n=nodeById(sc.id),w=W();const acts=placeActs(n).filter(a=>!['bq1','bq3','explore'].includes(a.a));
@@ -154,13 +155,13 @@ function vPlace(sc){
   b+=chipsHTML(sc.chips);
   const ents=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);const qs=r.quests.filter(q=>q.state==='open'&&q.node===n.id);
   const big=PNOW.map(by).filter(Boolean);
-  if(big.length||ents.length||qs.length){b+=`<h3 class="grp big">Chuyện lớn</h3><div class="choices">${big.map(btn).join('')}
+  if(big.length||ents.length||qs.length){b+=`<h3 class="grp big">${ib('flag','gold')}Chuyện lớn</h3><div class="choices">${big.map(btn).join('')}
     ${ents.map(e=>`<button class="ch big" data-act="meet" data-arg="${e.id}"${ta(ENT_T[e.type].n+' đang dừng chân ở đây.\nChạm để tới gặp. Họ sẽ rời đi sau '+durH(Math.max(1,e.until-w.t))+'.')}><span class="cn">${++k}.</span><span class="ct">Gặp ${esc(e.name)}</span><span class="cx">${esc(ENT_T[e.type].n.toLowerCase())}</span></button>`).join('')}
     ${qs.map(q=>`<button class="ch big" data-act="questGo"${ta('Việc đã nhận ở bảng treo thưởng. Chạm để lùng tìm, tốn 2 giờ.')}><span class="cn">${++k}.</span><span class="ct">${esc(q.text)}</span><span class="cx tm">2 giờ</span></button>`).join('')}</div>`;}
   const evs=nodeEvs(n);
-  if(evs.length){const yl=Math.max(1,Math.round((n.evs.until-w.t)/HY));b+=`<h3 class="grp now">Trước mắt<i${ta('Những chuyện này không chờ ai. Bỏ mặc lâu thì tự mất.')}>biến mất sau chừng ${yl} năm</i></h3><div class="choices">${evs.map((id,i)=>`<button class="ch now" data-act="evGo" data-arg="${i}"${ta('Chạm để dính vào chuyện này. Tốn 2 giờ.')}><span class="cn">${++k}.</span><span class="ex">!</span><span class="ct">${esc(EVMAP[id].n||'Một chuyện lạ')}</span></button>`).join('')}</div>`;}
-  let g='';for(const [name,ks] of PGROUP){const L=ks.map(by).filter(Boolean);if(!L.length)continue;g+=`<h4 class="sgrp">${name}</h4><div class="choices">${L.map(btn).join('')}</div>`;}
-  if(g)b+=`<h3 class="grp">Thường nhật</h3>`+g;
+  if(evs.length){const yl=Math.max(1,Math.round((n.evs.until-w.t)/HY));b+=`<h3 class="grp now">${ib('bell','seal')}Trước mắt<i${ta('Những chuyện này không chờ ai. Bỏ mặc lâu thì tự mất.')}>biến mất sau chừng ${yl} năm</i></h3><div class="choices">${evs.map((id,i)=>`<button class="ch now" data-act="evGo" data-arg="${i}"${ta('Chạm để dính vào chuyện này. Tốn 2 giờ.')}><span class="cn">${++k}.</span><span class="ex">!</span><span class="ct">${esc(EVMAP[id].n||'Một chuyện lạ')}</span></button>`).join('')}</div>`;}
+  let g='';for(const [name,ks] of PGROUP){const L=ks.map(by).filter(Boolean);if(!L.length)continue;g+=`<h4 class="sgrp">${ib(GRP_IC[name]||'more','soft')}${name}</h4><div class="choices">${L.map(btn).join('')}</div>`;}
+  if(g)b+=`<h3 class="grp">${ib('book','ink')}Thường nhật</h3>`+g;
   const canEx=n.type!=='ai';
   return card(n.name,capS(TYPE_NAME[n.type])+' · '+REG[r.region].n+' · '+DANGER[n.danger],b,{cls:'tall place',art:sceneCv(n.name,r.region,n.type,'strip'),
     head:`<button class="pl-tg" data-act="descTg">Cảnh trí ${ic(UI.descHide?'down':'up')}</button>`,

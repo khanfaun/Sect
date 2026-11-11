@@ -50,6 +50,32 @@ const ICP={
   hour:'M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9',
   bag:'M6 8h12l1 12H5L6 8zM9 8V6a3 3 0 016 0v2',
   hex:'M12 2l8.7 5v10L12 22l-8.7-5V7z',
+  heart:'M12 20s-7-4.6-7-10.2A4.3 4.3 0 0112 7.2a4.3 4.3 0 017 2.6C19 15.4 12 20 12 20z',
+  drop:'M12 3s6 7 6 11.5a6 6 0 01-12 0C6 10 12 3 12 3z',
+  spark:'M12 3l1.8 5.6L19.5 10l-5.7 1.4L12 17l-1.8-5.6L4.5 10l5.7-1.4zM19 16l.7 2 2 .6-2 .7-.7 2-.6-2-2-.7 2-.6z',
+  gem:'M6 4h12l4 6-10 11L2 10l4-6zM2 10h20M9 4l-2 6 5 11 5-11-2-6',
+  wand:'M4 20L16 8M14 4l1 2.5L17.5 7.5 15 8.5 14 11l-1-2.5L10.5 7.5 13 6.5zM19 13l.6 1.4L21 15l-1.4.6L19 17l-.6-1.4L17 15l1.4-.6z',
+  shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z',
+  wind:'M3 9h11a3 3 0 10-3-3M3 14h15a3 3 0 11-3 3M3 19h7',
+  feather:'M20 4c-8 0-13 5-13 12v4M7 16c6 0 10-3 11-8M7 20l5-5',
+  cycle:'M4 12a8 8 0 0114-5l2-2v6h-6l2-2M20 12a8 8 0 01-14 5l-2 2v-6h6l-2 2',
+  brain:'M9 4a3 3 0 00-3 3 3 3 0 00-2 5 3 3 0 002 5 3 3 0 006 0V7a3 3 0 00-3-3zM15 4a3 3 0 013 3 3 3 0 012 5 3 3 0 01-2 5 3 3 0 01-6 0',
+  lotus:'M12 20c-5 0-8-3-8-7 3 0 5 1 8 4 3-3 5-4 8-4 0 4-3 7-8 7zM12 15c-2-3-2-7 0-11 2 4 2 8 0 11z',
+  clover:'M12 11a3 3 0 110-6 3 3 0 010 6zM13 12a3 3 0 116 0 3 3 0 01-6 0zM12 13a3 3 0 110 6 3 3 0 010-6zM11 12a3 3 0 11-6 0 3 3 0 016 0zM14 14l4 6',
+  skull:'M6 12a6 6 0 1112 0v3l-2 1v3H8v-3l-2-1zM9.5 12.5h.01M14.5 12.5h.01',
+  yin:'M12 3a9 9 0 100 18 9 9 0 000-18zM12 3a4.5 4.5 0 000 9 4.5 4.5 0 010 9M12 7.5h.01M12 16.5h.01',
+  scale:'M12 4v16M6 20h12M5 8h14M5 8l-3 6a3 3 0 006 0zM19 8l-3 6a3 3 0 006 0z',
+  walk:'M13 4a2 2 0 100 4 2 2 0 000-4zM11 9l-3 5 3 2v5M12 11l3 3h3M8 21l2-4',
+  scroll:'M6 4h11a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2V4zM6 4a2 2 0 00-2 2v1h2M9 9h7M9 13h7',
+  star:'M12 3l2.7 5.6 6.1.8-4.5 4.3 1.1 6.1L12 17l-5.4 2.8 1.1-6.1L3.2 9.4l6.1-.8z',
+  medal:'M12 14a5 5 0 100-10 5 5 0 000 10zM9 13l-2 8 5-3 5 3-2-8',
+  gate:'M3 7c6 2 12 2 18 0M5 11h14M7 7v13M17 7v13M12 4v3',
+  tea:'M5 9h11v5a5 5 0 01-5 5h-1a5 5 0 01-5-5zM16 10h2a2 2 0 010 5h-2M8 3v3M12 3v3',
+  cart:'M3 6h12v9H3zM15 9h4l2 3v3h-6M7 18a2 2 0 100-.01M17 18a2 2 0 100-.01',
+  tree:'M8 20v-4M4 16l4-6 4 6zM5 10l3-5 3 5M17 20v-3M14 17l3-5 3 5z',
+  bell:'M6 16V11a6 6 0 0112 0v5l2 2H4zM10 20a2 2 0 004 0',
+  crit:'M12 5a7 7 0 100 14 7 7 0 000-14zM12 9a3 3 0 100 6 3 3 0 000-6zM12 2v3M12 19v3M2 12h3M19 12h3',
+  root:'M12 3v8M12 11c-4 0-6 3-6 6M12 11c4 0 6 3 6 6M12 11v10M8 21h8',
   ring:'M12 3a9 9 0 100 18 9 9 0 000-18zM12 7a5 5 0 100 10 5 5 0 000-10z',
   home:'M4 11l8-7 8 7M6 10v10h12V10',
   trash:'M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13',
@@ -58,6 +84,9 @@ const ICP={
   check:'M5 12l5 5 9-10',
   seat:'M12 6a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM7 13c0-3 2-5 5-5s5 2 5 5M3 20c3-4 6-5 9-5s6 1 9 5M7 13l-2 4M17 13l2 4',
 };
+function ib(n,c){return `<span class="ib${c?' ib-'+c:''}">${ic(n)}</span>`;}
+const STAT_IC={'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
+function sib(label){const x=STAT_IC[label];return x?ib(x[0],x[1]):'';}
 function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICP[n]||ICP.info}"/></svg>`;}
 
 // ---------- mẩu nhỏ dùng chung ----------
