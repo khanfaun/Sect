@@ -4,7 +4,7 @@ function hudHTML(){
   const r=G.run,s=S(),t=W().t;const left=s.life-r.age;const warn=left<s.life*0.12;const pa=PART[partOf(t)];
   const row=(n,cur,max,cls,txt,tip)=>`<div class="hrow"${ta(tip)}><span class="hn">${n}</span>${bar(cur,max,cls)}<span class="hv">${txt}</span></div>`;
   const n=curNode();const atDp=n&&n.dp&&!r.moving;const brk=canBreak();const bqNo=bqCan();
-  const hurt=injured()?' · <b class="bad">Bị thương</b>':r.hp<s.maxHp*0.35?' · <b class="bad">Khí huyết cạn</b>':'';
+  const hurt=wounds().length?' · <b class="bad">'+esc(WOUND[wounds()[0].k].n)+(wounds().length>1?' +'+(wounds().length-1):'')+'</b>':r.hp<s.maxHp*0.35?' · <b class="bad">Khí huyết cạn</b>':'';
   let h=`<div class="hud-top" data-act="hud"><div class="hud-date"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)]+'\nNgày '+(Math.floor((t%HM)/HD)+1)+' trong tháng')}><small>Năm</small><b id="clkY">${tYear(t)}</b><small id="clkM">Tháng ${MONTH[tMonth(t)]}</small></div>
    <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small><span id="clkH">Giờ ${gioName(t)}</span> · ${sectText()}${UI.paused?' · <i>đang dừng</i>':''}</small></div>
    <span class="hud-tg">${ic(UI.hudOpen?'up':'down')}</span></div>`;
@@ -21,7 +21,8 @@ function hudHTML(){
   return h;
 }
 function statusList(){const r=G.run,s=S(),w=W();const L=[];
-  if(injured())L.push(['bad','Bị thương','Còn chừng '+durH(r.inj.until-w.t)+' mới tự lành. Công, thủ giảm 20%. Thua trận nữa là chết.\nDưỡng thương ở động phủ hoặc mời y sư ở phường thị thì lành ngay.']);
+  for(const x of wounds())L.push(['bad',WOUND[x.k].n,WOUND[x.k].d+' '+woundText(x)]);
+  if(injured())L.push(['bad','Đang mang thương','Thua trận nữa là chết. Dưỡng thương ở động phủ trị ngoại thương, bỏng; y sư ở phường thị trị thêm gãy xương, độc.']);
   if(r.hp<s.maxHp*0.35)L.push(['bad','Khí huyết cạn','Khí huyết dưới 35%. Nghỉ ngơi hoặc dùng đan.']);
   if(r.tamma>=60)L.push(['bad','Tâm ma dày','Tâm ma '+r.tamma+'/100. Tĩnh tọa hoặc dưỡng thương để giảm.']);
   if(s.life-r.age<s.life*0.12)L.push(['bad','Thọ nguyên sắp cạn','Còn chừng '+Math.max(0,Math.floor(s.life-r.age))+' năm.']);

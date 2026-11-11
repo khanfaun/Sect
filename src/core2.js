@@ -385,10 +385,63 @@ function playerYield(){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||sc.ki
 {const _fc2=finishCombat;finishCombat=function(sc){_fc2(sc);const r=G.run;if(!r||!sc.beaten||sc.looted)return;sc.looted=1;
   const mo=sc.beaten===2?ri(2,5):ri(4,12);r.inj={until:W().t+mo*HM};clampHp();
   const L=lootPlayer(sc);
-  clog(sc,`Ngươi bị thương, chừng ${mo} tháng mới lành. Chưa lành mà thua nữa là chết.`,'en');
   if(L.length)clog(sc,`${sc.en.n} lục soát người ngươi, lấy đi: ${L.join(', ')}.`,'en');
   log(`Thua ${sc.en.n}, bị thương`+(L.length?', mất '+L.join(', '):'')+'.');};}
 {const _agg2=aggFx;aggFx=function(){const fx=_agg2();if(injured()){fx.atkP=(fx.atkP||0)-20;fx.defP=(fx.defP||0)-20;fx.matkP=(fx.matkP||0)-20;}return fx;};}
 {const _ac2=autoCheck;autoCheck=function(){const r=G.run;if(r&&r.inj&&r.inj.until<=W().t)injHeal('Thương thế đã lành hẳn.');_ac2();};}
 {const _pa4=placeAct;placeAct=function(a){const was=injured();_pa4(a);if(was&&a==='heal'&&G.run)injHeal('Một tháng tĩnh dưỡng, thương thế đã lành.');};}
 {const _hb=healBuy;healBuy=function(){const r=G.run;const st=r.st;_hb();if(G.run&&G.run.st<st&&injured())injHeal('Y sư bó thuốc, nắn xương. Thương thế đã lành.');};}
+
+// ================= CÁC LOẠI THƯƠNG THẾ =================
+// m: số tháng tự lành [ít, nhiều]; fx: ảnh hưởng khi còn mang; perm: vĩnh viễn cho tới cảnh giới regen
+const WOUND={
+  ngoai:{n:'Ngoại thương',m:[2,6],fx:{atkP:-10,defP:-10},d:'Vết chém, vết cào ngoài da thịt.'},
+  bong:{n:'Bỏng',m:[3,8],fx:{defP:-15},d:'Da thịt cháy sém.'},
+  gay:{n:'Gãy xương',m:[6,14],fx:{atkP:-15,tp:-3},d:'Xương gãy, cử động khó.'},
+  noi:{n:'Nội thương',m:[12,24],fx:{mpP:-20,matkP:-20},d:'Kinh mạch chấn động, chân khí tán loạn.'},
+  than:{n:'Thần thức tổn thương',m:[12,30],fx:{ngo:-3,tam:-2},d:'Thức hải rạn nứt, đầu đau như búa bổ.'},
+  doc:{n:'Trúng độc',m:[6,12],fx:{},d:'Mỗi giờ mất 1% khí huyết (không xuống dưới một phần mười). Giải Độc Đan trị dứt.'},
+  nguy:{n:'Vết thương chí mạng',fx:{atkP:-25,defP:-25},d:'Phải dùng đan hồi khí huyết trong ba ngày, không thì chết hoặc tàn phế.'},
+  mu:{n:'Mù một mắt',perm:1,fx:{dodge:-6,crit:-5},d:'Thương tật vĩnh viễn.'},
+  cut:{n:'Cụt một tay',perm:1,fx:{atkP:-25},d:'Thương tật vĩnh viễn.'},
+  que:{n:'Què chân',perm:1,fx:{tp:-4},d:'Thương tật vĩnh viễn.'},
+};
+const REGEN_REALM=3; // Nguyên Anh: tái tạo nhục thân, thương tật vĩnh viễn mới lành
+const HEAL_PILL=['hoixuan','baohuyet'];
+function wounds(){const r=G.run;if(!r)return [];if(!r.wounds)r.wounds=[];if(r.inj){if(r.inj.until>W().t)r.wounds.push({k:'ngoai',until:r.inj.until});r.inj=null;}return r.wounds;}
+function addWound(k,by){const r=G.run,L=wounds(),w=W(),D=WOUND[k];const old=L.find(x=>x.k===k);
+  if(D.perm){if(!old)L.push({k,perm:1});return D.n;}
+  if(k==='nguy'){if(!old)L.push({k,dl:w.t+3*HD,by});return D.n;}
+  const u=w.t+ri(D.m[0],D.m[1])*HM;if(old)old.until=Math.max(old.until,u)+2*HM;else L.push({k,until:u});return D.n;}
+function cureWound(ks){const r=G.run;const n=wounds().length;r.wounds=r.wounds.filter(x=>!ks.includes(x.k));clampHp();return n-r.wounds.length;}
+function injured(){return wounds().some(x=>!x.perm&&x.k!=='doc');}
+function injHeal(){}
+function woundText(x){const D=WOUND[x.k],w=W();return x.perm?'Vĩnh viễn, tới '+REALM[REGEN_REALM]+' mới tái tạo được.':x.k==='nguy'?'Còn '+durH(Math.max(1,x.dl-w.t))+' để dùng đan hồi khí huyết!':'Tự lành sau chừng '+durH(Math.max(1,x.until-w.t))+'.';}
+function woundTick(){const r=G.run;if(!r)return;const L=wounds(),w=W();const dt=Math.max(0,w.t-(r.wT==null?w.t:r.wT));r.wT=w.t;if(!L.length)return;
+  if(r.realm>=REGEN_REALM&&L.some(x=>x.perm)){r.wounds=L.filter(x=>!x.perm);note('Nhục thân tái tạo: thương tật cũ đã lành.','up');log('Thương tật vĩnh viễn được tái tạo.');}
+  for(const x of r.wounds.slice()){
+    if(x.k==='doc'&&dt>0){const s=S();const fl=Math.ceil(s.maxHp*0.1);if(r.hp>fl)r.hp=Math.max(fl,Math.round(r.hp-s.maxHp*0.01*dt));}
+    if(x.until&&x.until<=w.t){r.wounds=r.wounds.filter(y=>y!==x);note(WOUND[x.k].n+' đã lành.','up');}
+    if(x.k==='nguy'&&x.dl<=w.t){r.wounds=r.wounds.filter(y=>y!==x);
+      if(chance(.3)&&!r.scene){log('Vết thương chí mạng không được chữa.');die('combat',{n:x.by||'kẻ thù cũ'});return;}
+      const p=pick(['mu','cut','que']);addWound(p);addWound('noi');note('Vết thương không được chữa kịp: '+WOUND[p].n.toLowerCase()+'.','dn');log('Để lại thương tật: '+WOUND[p].n+'.');}}
+  clampHp();}
+function rollWounds(sc){const E=EN[sc.en.k]||{};const el=sc.en.el;const out=[];
+  if(sc.beaten===2){out.push(addWound('ngoai'));return out;}
+  const pool=[['ngoai',35],['gay',20],['noi',20]];if(el==='hoa'||el==='loi')pool.push(['bong',25]);if(E.f==='quy'||el==='am')pool.push(['than',25]);
+  out.push(addWound(wpick(pool,x=>x[1])[0]));if(chance(.3))out.push(addWound(wpick(pool,x=>x[1])[0]));
+  const fx=aggFx();if(!fx.poisonImm&&((E.pat||[]).includes('poison')||(E.f==='thu'&&chance(.25))))out.push(addWound('doc'));
+  if(chance(.06))out.push(addWound('nguy',sc.en.n));else if(chance(.03))out.push(addWound(pick(['mu','cut','que'])));
+  return [...new Set(out)];}
+{const _fc3=finishCombat;finishCombat=function(sc){_fc3(sc);const r=G.run;if(!r||!sc.beaten||sc.wounded)return;sc.wounded=1;r.inj=null;
+  const L=rollWounds(sc);clog(sc,'Thương thế: '+L.join(', ')+'. Chưa lành mà thua nữa là chết.','en');log('Mang thương: '+L.join(', ')+'.');
+  if(L.includes(WOUND.nguy.n))note('Vết thương chí mạng! Dùng đan hồi khí huyết trong ba ngày.','dn');};}
+{const _agg3=aggFx;aggFx=function(){const fx=_agg3();const r=G.run;if(r&&r.wounds)for(const x of r.wounds){const f=WOUND[x.k].fx;for(const k in f)fx[k]=(fx[k]||0)+f[k];}return fx;};}
+{const _ac3=autoCheck;autoCheck=function(){woundTick();if(G.run)_ac3();};}
+{const _up=usePill;usePill=function(idx,inCombat){const r=G.run;const p=r.pills[idx];const id=p&&p.id;const res=_up(idx,inCombat);
+  if(G.run&&id&&r.pills[idx]!==p){if(id==='giaidoc'&&cureWound(['doc']))note('Độc đã giải.','up');if(HEAL_PILL.includes(id)&&cureWound(['nguy'])){addWound('ngoai');note('Giữ được mạng. Vết thương chí mạng còn lại ngoại thương.','up');}}
+  return res;};}
+{const _pa5=placeAct;placeAct=function(a){const had=wounds().length;_pa5(a);const r=G.run;if(!r||!had||a!=='heal')return;
+  const n=cureWound(['ngoai','bong']);for(const x of r.wounds)if(x.until)x.until-=6*HM;woundTick();if(n)note('Một tháng tĩnh dưỡng: vết thương ngoài da đã lành.','up');};}
+{const _hb2=healBuy;healBuy=function(){const r=G.run;const st=r.st;_hb2();if(!G.run||G.run.st>=st||!wounds().length)return;
+  const n=cureWound(['ngoai','bong','gay','doc','nguy']);for(const x of r.wounds)if(x.until)x.until-=6*HM;woundTick();if(n)note('Y sư bó thuốc, nắn xương, giải độc. Nội thương và thần thức thì phải chờ.','up');};}
