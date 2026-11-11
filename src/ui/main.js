@@ -14,6 +14,7 @@ function render(){
     const inMap=G.screen==='map'&&!!G.run;const sc=inMap?G.run.scene:null;const cb=sc&&sc.type==='combat';
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
     if(cb){UI.panel=null;}
+    if(!inMap&&UI.modal)UI.modal=null;
     if(!inMap){full=G.screen==='birth'&&G.birth?vBirth():G.screen==='over'&&G.over?vOver():G.screen==='meta'?vMeta():vTitle();}
     else{
       if(cb)full=vCombat(sc);
@@ -120,7 +121,7 @@ const ACT={
   noteSave:id=>{const i=$('#noteIn');if(noteSet(+id,i?i.value:'')===false){note('Đã ghim đủ 50 chỗ.');}UI.modal=null;},
   noteGo:k=>{const n=nodeById(+k);if(n&&Math.floor(n.id/100)===G.run.region&&n.fog>=1){UI.panel=null;UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else note('Chỗ ấy không ở vùng này, hoặc kiếp này ngươi chưa biết tới.');},
   bqSet:y=>{if(UI.modal&&UI.modal.k==='bq')UI.modal.y=+y;},
-  bqGo:()=>{const y=UI.modal&&UI.modal.y||1;UI.modal=null;const t0=W().t,tv0=G.run.tv;bqCustom(y);const r=G.run,sc=r&&r.scene;if(sc&&sc.type==='place'){UI.modal={k:'res',title:'Xuất quan',t:sc.msg.join(' ')+' Thời gian trôi qua '+durH(W().t-t0)+', tu vi '+(r.tv>=tv0?'tăng '+numVN(r.tv-tv0)+'%':'đã viên mãn')+'.',chips:sc.chips};sc.msg=[];sc.chips=[];if(UI.bqOpened)r.scene=null;}UI.bqOpened=false;},
+  bqGo:()=>{const y=UI.modal&&UI.modal.y||1;UI.modal=null;const t0=W().t,tv0=G.run.tv;const done=bqCustom(y);const r=G.run,sc=r&&r.scene;if(!done){note(bqCan()||'Không bế quan được ở đây.');if(UI.bqOpened&&sc&&sc.type==='place')r.scene=null;}else if(sc&&sc.type==='place'){UI.modal={k:'res',title:'Xuất quan',t:sc.msg.join(' ')+' Thời gian trôi qua '+durH(W().t-t0)+', tu vi '+(r.tv>=tv0?'tăng '+numVN(r.tv-tv0)+'%':'đã viên mãn')+'.',chips:sc.chips};sc.msg=[];sc.chips=[];if(UI.bqOpened)r.scene=null;}UI.bqOpened=false;},
   enc:a=>encAct(a),
   bossFight:()=>bossFight(),
   skill:id=>{UI.menu=null;const sc=G.run.scene;if(needTarget(sc,id)){UI.pendSk=id;return;}UI.pendSk=null;playerAct(id);},
