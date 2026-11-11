@@ -24,15 +24,24 @@ function pChar(){
 }
 // vòng chu thiên: các ô xếp thành vòng quanh đan điền, khí chảy theo chiều kim đồng hồ
 function chuHTML(){
-  const r=run2();const v=chuView();const n=v.n;const R=104,cx=150,cy=150;const sel=UI.chuSel;
+  const r=run2();const v=chuView();const n=v.n;const R=128,cx=160,cy=160,RD=56;const sel=UI.chuSel;
   const P=i=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+R*Math.cos(a),cy+R*Math.sin(a)];};
   const LC={1:'var(--jade)',2:'var(--gold)','-1':'var(--seal)',0:'var(--line)'};
-  let svg=`<svg class="chu" viewBox="0 0 300 300"><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--line)" stroke-dasharray="2 5"/>`;
-  for(let i=0;i<n;i++){const a=P(i),b=P((i+1)%n);const l=v.links[i];const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;const ox=(mx-cx)*0.16,oy=(my-cy)*0.16;
-    svg+=`<path d="M${a[0]} ${a[1]} Q${mx+ox} ${my+oy} ${b[0]} ${b[1]}" fill="none" stroke="${LC[l]}" stroke-width="${l?4:1.5}" ${l===-1?'stroke-dasharray="5 4"':''} opacity="${l?0.9:0.6}"/>`;
-    if(l)svg+=`<text x="${mx+ox*1.9}" y="${my+oy*1.9+4}" text-anchor="middle" class="chu-l" fill="${LC[l]}">${l===1?'sinh':l===2?'đồng':'khắc'}</text>`;}
-  svg+=`<circle cx="${cx}" cy="${cy}" r="30" fill="var(--paper)" stroke="var(--seal)" stroke-width="2"/><text x="${cx}" y="${cy-2}" text-anchor="middle" class="chu-c">Đan</text><text x="${cx}" y="${cy+14}" text-anchor="middle" class="chu-s">đan điền</text>`;
-  for(let i=0;i<n;i++){const p=P(i),it=v.it[i];svg+=`<g class="chu-n${sel===i?' sel':''}${it?' on':''}" data-act="chuSel" data-arg="${i}" transform="translate(${p[0]} ${p[1]})"><circle r="24"/>${it?`<text y="7" text-anchor="middle" class="chu-e el-${it.el}">${(EL[it.el]||EL.vo).c}</text>`:'<text y="7" text-anchor="middle" class="chu-p">＋</text>'}<text y="-29" text-anchor="middle" class="chu-i">${i+1}</text></g>`;}
+  let svg=`<svg class="chu" viewBox="0 0 320 320"><defs><radialGradient id="ddg"><stop offset="0.55" stop-color="#6fb6ea" stop-opacity=".0"/><stop offset="0.8" stop-color="#6fb6ea" stop-opacity=".28"/><stop offset="1" stop-color="#6fb6ea" stop-opacity="0"/></radialGradient></defs>
+   <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--line)" stroke-dasharray="2 6"/>`;
+  // linh khí từ đan điền tỏa ra từng ô đang vận hành: nét lõi sáng chạy trên một quầng mờ
+  for(let i=0;i<n;i++){if(!v.it[i])continue;const p=P(i),a=Math.atan2(p[1]-cy,p[0]-cx);const x0=cx+Math.cos(a)*(RD+4),y0=cy+Math.sin(a)*(RD+4),x1=p[0]-Math.cos(a)*19,y1=p[1]-Math.sin(a)*19;
+    svg+=`<line class="lk-g" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/><line class="lk" style="animation-delay:-${(i*0.37).toFixed(2)}s" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;}
+  for(let i=0;i<n;i++){const a=P(i),b=P((i+1)%n);const l=v.links[i];const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;const ox=(mx-cx)*0.16,oy=(my-cy)*0.16;const d=`M${a[0]} ${a[1]} Q${mx+ox} ${my+oy} ${b[0]} ${b[1]}`;
+    if(l){svg+=`<path d="${d}" fill="none" stroke="${LC[l]}" stroke-width="7" opacity=".18"/><path class="${l===-1?'':'lkf'}" style="animation-delay:-${(i*0.5).toFixed(2)}s" d="${d}" fill="none" stroke="${LC[l]}" stroke-width="2.4" ${l===-1?'stroke-dasharray="5 4"':''} opacity=".95"/>`;
+      svg+=`<text x="${mx+ox*2.1}" y="${my+oy*2.1+4}" text-anchor="middle" class="chu-l" fill="${LC[l]}">${l===1?'sinh':l===2?'đồng':'khắc'}</text>`;}
+    else svg+=`<path d="${d}" fill="none" stroke="var(--line)" stroke-width="1.2" opacity=".7"/>`;}
+  // đan điền: thái cực xoay chậm, vòng phù văn xoay ngược, quầng linh khí thở nhẹ
+  svg+=`<circle class="dd-glow" cx="${cx}" cy="${cy}" r="${RD+22}" fill="url(#ddg)"/>
+   <g class="dd-rev"><circle cx="${cx}" cy="${cy}" r="${RD}" fill="var(--paper)" stroke="var(--gold)" stroke-width="1.5"/><circle cx="${cx}" cy="${cy}" r="${RD-6}" fill="none" stroke="var(--gold)" stroke-width="3" stroke-dasharray="2 9" opacity=".8"/></g>
+   <g class="dd-rot"><circle cx="${cx}" cy="${cy}" r="40" fill="var(--paper)" stroke="var(--acc)" stroke-width="1.5"/><path d="M${cx} ${cy-40}a40 40 0 0 1 0 80a20 20 0 0 1 0-40a20 20 0 0 0 0-40z" fill="var(--acc)"/><circle cx="${cx}" cy="${cy-20}" r="5.5" fill="var(--acc)"/><circle cx="${cx}" cy="${cy+20}" r="5.5" fill="var(--paper)"/></g>
+   <text x="${cx}" y="${cy+RD+15}" text-anchor="middle" class="chu-s">đan điền</text>`;
+  for(let i=0;i<n;i++){const p=P(i),it=v.it[i];svg+=`<g class="chu-n${sel===i?' sel':''}${it?' on':''}" data-act="chuSel" data-arg="${i}" transform="translate(${p[0]} ${p[1]})"><rect x="-17" y="-17" width="34" height="34" rx="8"/>${it?`<text y="4.5" text-anchor="middle" class="chu-e el-${it.el}">${(EL[it.el]||EL.vo).c}</text>`:'<text y="6" text-anchor="middle" class="chu-p">＋</text>'}<text y="-21" text-anchor="middle" class="chu-i">${i+1}</text></g>`;}
   svg+='</svg>';
   let h=`<p class="hint">Linh khí chảy quanh đan điền theo chiều kim đồng hồ. Ô trước <b class="good">sinh</b> ô sau thì hệ đó mạnh lên, <b class="bad">khắc</b> thì yếu đi. Chạm một ô để đặt công pháp đang vận hành.</p>${svg}`;
   h+=`<div class="chips"><span class="chip up"${ta('Mỗi mối tương sinh: hệ của ô nhận +6% uy lực, linh lực +3%')}>tương sinh ${v.sinh}</span><span class="chip"${ta('Hai ô cạnh nhau cùng hệ: hệ đó +3% uy lực')}>đồng hệ ${v.dong}</span><span class="chip dn"${ta('Mỗi mối tương khắc: hệ bị khắc −5% uy lực')}>tương khắc ${v.khac}</span><span class="chip ${v.dai?'item':''}"${ta('Kín vòng, không có mối khắc nào và chỉ hở tối đa một mối: tu luyện +15%, khí huyết +8%')}>${v.dai?'Đại chu thiên đã thành':'Đại chu thiên chưa thành'}</span></div>`;

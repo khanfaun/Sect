@@ -260,3 +260,24 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .bdet{margin-top:10px;padding:10px 14px;border:1px solid var(--line);border-left:5px solid var(--pc,var(--line));border-radius:10px;background:var(--paper)}
 .bdet .bn{display:block;font-size:1.1em;color:var(--pc,var(--ink))}.bdet small{color:var(--ink3)}.bdet p{margin:.4em 0;font-size:.94em}
 .bact{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px}.qty{display:inline-flex;align-items:center;gap:5px}.qty b{min-width:1.6em;text-align:center}
+
+/* ===== vòng vận công: đan điền lớn, linh khí chớp chạy nhẹ ===== */
+.chu{max-width:340px}.chu-n rect{fill:var(--paper);stroke:var(--ink3);stroke-width:1.5;stroke-dasharray:4 3}.chu-n.on rect{stroke:var(--ink);stroke-dasharray:none;fill:var(--paper2)}.chu-n.sel rect{stroke:var(--seal);stroke-width:3}
+.chu-e{font-size:11px}.chu-p{font-size:15px}.chu-i{font-size:9px}
+.lk-g{stroke:#6fb6ea;stroke-width:7;stroke-linecap:round;opacity:.22}
+.lk{stroke:#9fd4ff;stroke-width:2;stroke-linecap:round;stroke-dasharray:10 7}
+.dd-rot,.dd-rev,.dd-glow{transform-box:fill-box;transform-origin:center}
+:root[data-anim="1"] .lk{animation:lkflow 2.6s linear infinite,lkblink 3.4s ease-in-out infinite}
+:root[data-anim="1"] .lkf{stroke-dasharray:14 6;animation:lkflow 3.2s linear infinite}
+:root[data-anim="1"] .lk-g{animation:lkblink 3.4s ease-in-out infinite}
+:root[data-anim="1"] .dd-rot{animation:ddspin 26s linear infinite}
+:root[data-anim="1"] .dd-rev{animation:ddspin 60s linear infinite reverse}
+:root[data-anim="1"] .dd-glow{animation:ddbreath 5s ease-in-out infinite}
+@keyframes lkflow{to{stroke-dashoffset:-34}}
+@keyframes lkblink{0%,100%{opacity:.95}45%{opacity:.55}55%{opacity:1}70%{opacity:.7}}
+@keyframes ddspin{to{transform:rotate(360deg)}}
+@keyframes ddbreath{0%,100%{transform:scale(.94);opacity:.7}50%{transform:scale(1.06);opacity:1}}
+/* ô trang bị và ô túi nhỏ lại */
+.eqc{min-height:52px;padding:4px 2px;gap:1px;border-radius:8px}.eqc small{font-size:.62em}.sli{width:20px;height:20px}.dgrid{gap:6px;padding:10px}.ddrow{gap:6px}
+.bgrid{grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:5px;padding:7px}.bc{border-radius:7px}.bem{font-size:1.1em}.bc .sli{width:18px;height:18px}.bc i{font-size:.62em}
+@media (min-width:900px){.bagR{position:sticky;top:0}}
