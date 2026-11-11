@@ -241,6 +241,34 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .ib{color:var(--paper)!important}.ib .ic{color:inherit!important}.ib-soft{color:var(--acc)!important}.nv.on .ib{color:var(--acc)!important}
 :root[data-theme=dark] .ib{color:#10141a!important}:root[data-theme=dark] .ib-soft,:root[data-theme=dark] .nv.on .ib{color:var(--acc)!important}
 
+/* ===== bỏ xanh dương: điểm nhấn là nâu sẫm ===== */
+:root,:root[data-theme=dark]{--bg:#ebdfc0;--bg2:#e0d1aa;--paper:#f7ecce;--paper2:#efe0ba;--ink:#2a2318;--ink2:#5a4d38;--ink3:#93866c;--line:#cdbb8f;--acc:#5b4426;--acc2:#6f8794;--seal:#b3372c;--jade:#3c7a65;--gold:#a67a27;--vio:#6a4b86;--water:#8fb0bd;--sh:0 4px 16px rgba(70,50,15,.2)}
+.el-thuy{color:#4f7896}.ib{color:var(--paper)!important}
+.sic{width:1.05em;height:1.05em;margin-right:.45em;opacity:.8;vertical-align:-.18em;color:inherit}
+.kr span,.hn{gap:0}.hrow{grid-template-columns:6.4em 1fr 5.4em}
+.hud-st{margin-left:auto;margin-right:.6em;font-size:.95em}
+/* ===== túi đồ ===== */
+.win.wide{max-width:none}
+@media (min-width:900px){#panel:has(.win.wide){width:min(1080px,96vw)}.bagwrap{display:grid;grid-template-columns:minmax(310px,370px) 1fr;gap:22px;align-items:start}}
+.doll{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper2)}
+.dollbg{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.dgrid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
+.eqc{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:68px;padding:5px 3px;border:1.5px dashed var(--ink3);border-radius:10px;background:color-mix(in srgb,var(--paper) 78%,transparent);color:var(--ink3);text-align:center;min-width:0}
+.eqc small{font-size:.68em;line-height:1.15;max-height:2.3em;overflow:hidden;width:100%}
+.eqc.on{border:2px solid var(--pc);background:color-mix(in srgb,var(--pc) 14%,var(--paper));color:var(--ink)}.eqc.on .sli{stroke:var(--pc)}
+.eqc.sel,.bc.sel{box-shadow:0 0 0 3px var(--gold)}.eqc.lock{opacity:.45}
+.eqc i{position:absolute;top:2px;right:4px;font-size:.62em;font-style:normal;font-weight:700;color:var(--jade)}
+.sli{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ddrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.ddrow.five{grid-template-columns:repeat(5,1fr)}
+.bagbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:6px;padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--paper2)}
+.bc{position:relative;aspect-ratio:1;border:1.5px dashed color-mix(in srgb,var(--ink3) 55%,transparent);border-radius:9px;display:grid;place-items:center;min-width:0}
+.bc.on{border:2px solid var(--pc);background:color-mix(in srgb,var(--pc) 16%,var(--paper));color:var(--pc)}
+.bem{font-size:1.5em;line-height:1}.bc i{position:absolute;right:3px;bottom:1px;font-size:.7em;font-style:normal;font-weight:700;color:var(--ink);text-shadow:0 0 3px var(--paper),0 0 3px var(--paper)}
+.bdet{margin-top:10px;padding:10px 14px;border:1px solid var(--line);border-left:5px solid var(--pc,var(--line));border-radius:10px;background:var(--paper)}
+.bdet .bn{display:block;font-size:1.1em;color:var(--pc,var(--ink))}.bdet small{color:var(--ink3)}.bdet p{margin:.4em 0;font-size:.94em}
+.bact{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px}.qty{display:inline-flex;align-items:center;gap:5px}.qty b{min-width:1.6em;text-align:center}
+
 </style>
 </head>
 <body>
@@ -4047,6 +4075,66 @@ function hexNode(i){const g=geo(),r=G.run;if(!g.nodeAt||g.nodeKey!==r.kiep+':'+W
 for(const k in ENT_T){ENT_T[k].sp/=60;if(ENT_T[k].sp>0)ENT_T[k].life=ENT_T[k].life.map(x=>x*30);}
 function entsRescale(w){for(const e of (w&&w.ents)||[])if(e.speed>1)e.speed/=60;}
 
+// ================= ĐỢT 4: PHẨM, TRANG BỊ THEO Ô, ĐAN ĐIỀN UẨN DƯỠNG, VẬT TÙY THÂN, TÚI ĐỒ =================
+const PHAM=['Phàm phẩm','Hoàng phẩm','Huyền phẩm','Địa phẩm','Thiên phẩm','Tiên phẩm','Thần phẩm'];
+const PHAM_M=[0.5,1,1.75,2.75,4,5.5,7.5];
+for(let i=0;i<GRADE.length;i++)GRADE[i]=PHAM[i];
+PQ[0]=PHAM[0];PQ[1]=PHAM[1];PQ[2]=PHAM[2];
+RELIC_K.push({k:'non',b:['Quan','Đấu Lạp','Ngọc Quan'],fx:{tam:2,defP:6}},{k:'gang',b:['Hộ Thủ','Quyền Sáo','Thủ Giáp'],fx:{atkP:5,crit:2}},{k:'dai',b:['Đai','Ngọc Đái','Yêu Đái'],fx:{hpP:6,tp:1}},
+  {k:'hoa',b:['Hỏa Chủng','Địa Tâm Hỏa','Thanh Liên Hỏa'],fx:{craftP:6}},{k:'tran',b:['Trận Bàn','Trận Kỳ','Tụ Linh Trận Đồ'],fx:{bqP:8,bqSafe:15}});
+FXT.craftP='Luyện chế dễ thành hơn {v}%';FXT.bqSafe='Bế quan ít bị quấy nhiễu hơn {v}%';
+const SLOTS=[['vukhi','Vũ khí'],['non','Nón'],['boi','Ngọc bội'],['gang','Găng'],['giap','Giáp'],['choang','Áo choàng'],['nhan1','Nhẫn'],['dai','Đai lưng'],['nhan2','Nhẫn'],['phapbao1','Pháp bảo'],['giay','Giày'],['phapbao2','Pháp bảo']];
+const SPEC=[['tuivat','Trữ vật'],['phuongtien','Phương tiện'],['hoa','Hỏa chủng'],['dinh','Lô đỉnh'],['tran','Trận pháp']];
+const KSLOT={kiem:'vukhi',dao:'vukhi',phap:'vukhi',but:'vukhi',giap:'giap',bao:'choang',tram:'non',non:'non',ngoa:'giay',hoan:'gang',gang:'gang',dai:'dai',nhan:'nhan',boi:'boi',hotam:'boi',tui:'tuivat',dinh:'dinh',hoa:'hoa',tran:'tran'};
+const SLOT_N={vukhi:'Vũ khí',non:'Nón',boi:'Ngọc bội',gang:'Găng',giap:'Giáp',choang:'Áo choàng',nhan:'Nhẫn',dai:'Đai lưng',phapbao:'Pháp bảo',giay:'Giày',tuivat:'Trữ vật',hoa:'Hỏa chủng',dinh:'Lô đỉnh',tran:'Trận pháp',phuongtien:'Phương tiện'};
+function slotOf(rel){return KSLOT[rel.k]||'phapbao';}
+function slotsFor(rel){const s=slotOf(rel);return s==='nhan'?['nhan1','nhan2']:s==='phapbao'?['phapbao1','phapbao2']:[s];}
+function eqOf(){const r=G.run;if(!r.eq)r.eq={};if(!r.dd)r.dd=[];return r.eq;}
+function equip(i){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;const S0=slotsFor(rel);const s=S0.find(x=>!E[x])||S0[0];
+  r.relics.splice(i,1);if(E[s]){E[s].seen=1;r.relics.push(E[s]);}rel.seen=1;E[s]=rel;clampHp();saveSoon();}
+function unequip(s){const r=G.run,E=eqOf();if(!E[s])return;E[s].seen=1;r.relics.push(E[s]);E[s]=null;clampHp();saveSoon();}
+// đan điền: uẩn dưỡng vũ khí, pháp bảo. Mỗi năm mạnh thêm 5%, tối đa gấp đôi; trong trận tế ra đánh một lần.
+const DD_N=[0,1,2,3,4,4];
+function ddCan(rel){const s=slotOf(rel);return s==='vukhi'||s==='phapbao';}
+function ddMul(d){return 1+Math.min(1,Math.max(0,W().t-d.t0)/HY*0.05);}
+function ddPut(i){const r=G.run;eqOf();const rel=r.relics[i];if(!rel||!ddCan(rel)||r.dd.length>=DD_N[r.realm])return false;rel.seen=1;r.relics.splice(i,1);r.dd.push({rel,t0:W().t});log('Đưa '+rel.name+' vào đan điền uẩn dưỡng.');clampHp();saveSoon();return true;}
+function ddTake(j){const r=G.run;eqOf();const d=r.dd[j];if(!d)return;r.dd.splice(j,1);d.rel.seen=1;r.relics.push(d.rel);clampHp();saveSoon();}
+function playerDD(j,tid){const r=G.run,sc=r.scene;const u=readyPlayer(sc);eqOf();const d=r.dd[j];if(!u||!d)return false;sc.ddUsed=sc.ddUsed||{};if(sc.ddUsed[j])return false;
+  const sk={id:'_dd'+j,n:'Tế '+d.rel.name,el:d.rel.el||'vo',t:0,c:0,fx:{p:Math.round((1.5+0.35*(d.rel.tier||0))*ddMul(d)*100)/100},f:d.rel.name+' từ đan điền vọt ra, linh quang chói mắt.',dt:'ph'};
+  if(sc.kiep)tid=sc.units.find(x=>x.kind==='kiep').id;const foes=alive(sc,'B');if(tid==null||!U_(sc,+tid)||U_(sc,+tid).hp<=0)tid=foes.length?foes[0].id:null;
+  sc.ddUsed[j]=1;runAct(sc,()=>beginSkill(sc,u,sk,1,tid==null?null:+tid));return true;}
+// chỉ đồ đang mặc và đồ đang uẩn dưỡng mới có tác dụng
+{const _agg4=aggFx;aggFx=function(){const r=G.run;if(!r)return _agg4();const E=eqOf();const bag=r.relics;
+  const act=Object.values(E).filter(Boolean).concat(r.dd.map(d=>{const m=ddMul(d),fx={};for(const k in d.rel.fx)fx[k]=typeof d.rel.fx[k]==='number'?d.rel.fx[k]*m:d.rel.fx[k];return Object.assign({},d.rel,{fx});}));
+  r.relics=act;let fx;try{fx=_agg4();}finally{r.relics=bag;}fx.pillSlot=(fx.pillSlot||0)+25;return fx;};}
+function bagCap(){return 30+((aggFx().pillSlot||25)-25)*5;}
+// đồ mới nhặt: ô còn trống thì tự mặc
+function eqAuto(){const r=G.run;if(!r)return;const E=eqOf();const put=[];for(let i=r.relics.length-1;i>=0;i--){const rel=r.relics[i];if(rel.seen)continue;rel.seen=1;const s=slotsFor(rel).find(x=>!E[x]);if(s){r.relics.splice(i,1);E[s]=rel;put.push(rel);}}
+  if(put.length===1)note('Mặc '+put[0].name+' vào ô '+SLOT_N[slotOf(put[0])].toLowerCase()+'.','up');else if(put.length>1)note('Tự mặc '+put.length+' món mới vào các ô còn trống.','up');
+  if(r.chu)for(let j=0;j<8;j++)if(r.chu[j]&&r.chu[j].k==='r')r.chu[j]=null;clampHp();}
+{const _ac4=autoCheck;autoCheck=function(){eqAuto();_ac4();};}
+function chuPool(){const r=run2();const used=new Set(r.chu.map(chuKey));const L=[];for(const k of r.skills){const c={k:'s',id:k.id};if(!used.has(chuKey(c)))L.push(c);}return L;}
+function craftRate(c){const s=S();return clamp(c.base+(s.ngo-10)*0.02+(s.van-3)*0.01+(s.fx.craftP||0)/100,0.1,0.97);}
+{const _br=bqRisk;bqRisk=function(y){return _br(y)*(1-Math.min(80,aggFx().bqSafe||0)/100);};}
+// ----- túi đồ: gom mọi thứ mang theo thành các ô, cùng loại thì chồng lên nhau -----
+const BAG_CAT={all:'Tất cả',eq:'Trang bị',dan:'Đan dược',duoc:'Linh dược',khoang:'Khoáng sản',vl:'Vật liệu',trung:'Trứng',nv:'Nhiệm vụ'};
+function bagItems(){const r=run2();eqOf();const L=[];
+  r.relics.forEach((x,i)=>L.push({key:'r'+i,cat:'eq',n:x.name,tier:x.tier||0,cnt:1,el:x.el||'vo',slot:slotOf(x),ref:{t:'rel',i},tip:fxLines(relicFx(x),x).join('\n')+'\n\n'+(x.lore||'')}));
+  const st={};r.pills.forEach((p,i)=>{const k='p'+p.id+':'+(p.q||0);if(!st[k])L.push(st[k]={key:k,cat:'dan',n:PILL[p.id].n,tier:p.q||0,cnt:0,em:PILL[p.id].i,ref:{t:'pill',id:p.id,q:p.q||0},use:PILL[p.id].w==='any',tip:pillTip(p.id,p.q)});st[k].cnt++;});
+  const M={thao:'duoc',khoang:'khoang',dan:'vl'};for(const k in MAT)if(r.mats[k]>0)L.push({key:'m'+k,cat:M[k],n:MAT[k].n,tier:0,cnt:r.mats[k],em:MAT[k].i,ref:{t:'mat',k},tip:MAT[k].d});
+  r.eggs.forEach((e,i)=>L.push({key:'e'+i,cat:'trung',n:'Trứng '+e.n,tier:1,cnt:1,em:'🥚',ref:{t:'egg',i},tip:e.t>W().t?'Còn '+durH(e.t-W().t)+' nữa thì nở.':'Sắp nở.'}));
+  r.passes.forEach(g=>L.push({key:'q'+g,cat:'nv',n:'Lệnh bài thông quan '+REG[g].n,tier:2,cnt:1,em:'🎫',ref:{t:'pass'},tip:'Trình ở quan ải để sang '+REG[g].n+'.'}));
+  return L;}
+function bagUse(key,n){const r=G.run;const it=bagItems().find(x=>x.key===key);if(!it||!it.use)return 0;let c=0;
+  for(let k=0;k<n;k++){const i=r.pills.findIndex(p=>p.id===it.ref.id&&(p.q||0)===it.ref.q);if(i<0)break;const m=usePill(i,false);if(!G.run)break;if(m===false||r.pills[i]&&r.pills.filter(p=>p.id===it.ref.id&&(p.q||0)===it.ref.q).length===it.cnt-c)break;c++;}
+  if(c&&G.run)log('Dùng '+c+' '+it.n+'.');return c;}
+function bagDrop(key,n){const r=G.run;const it=bagItems().find(x=>x.key===key);if(!it)return 0;const R0=it.ref;let c=0;
+  if(R0.t==='rel'){r.relics.splice(R0.i,1);c=1;}
+  else if(R0.t==='pill'){for(let k=0;k<n;k++){const i=r.pills.findIndex(p=>p.id===R0.id&&(p.q||0)===R0.q);if(i<0)break;r.pills.splice(i,1);c++;}}
+  else if(R0.t==='mat'){c=Math.min(n,r.mats[R0.k]);r.mats[R0.k]-=c;}
+  else if(R0.t==='egg'){r.eggs.splice(R0.i,1);c=1;}
+  if(c)log('Vứt '+c+' '+it.n+'.');saveSoon();return c;}
+
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
 const $=s=>document.querySelector(s);
@@ -4061,7 +4149,7 @@ const CFG_DEF={gfx:'auto',fps:30,dpr:0,fx:true,clouds:true,daynight:true,anim:tr
   names:true,roads:true,grid:true,ents:true,ring:true,notes:true,terrain:true,
   font:'m',theme:'light',cspeed:1,autoFight:false,confirmDanger:true,clockIdle:true};
 let CFG=Object.assign({},CFG_DEF);
-function cfgLoad(){try{const o=JSON.parse(localStorage.getItem(CFG_KEY)||'null');if(o)CFG=Object.assign({},CFG_DEF,o);else{try{const t=localStorage.getItem('phusinh_theme');if(t)CFG.theme=t;}catch(e){}}}catch(e){}cfgApply();}
+function cfgLoad(){try{const o=JSON.parse(localStorage.getItem(CFG_KEY)||'null');if(o)CFG=Object.assign({},CFG_DEF,o);else{try{const t=localStorage.getItem('phusinh_theme');if(t)CFG.theme=t;}catch(e){}}}catch(e){}CFG.theme='light';cfgApply();}
 function cfgSave(){try{localStorage.setItem(CFG_KEY,JSON.stringify(CFG));}catch(e){}}
 // mức đồ họa thực tế: 0 tiết kiệm, 1 cân bằng, 2 đẹp
 let GFX_AUTO=1;
@@ -4135,7 +4223,7 @@ const ICP={
 };
 function ib(n,c){return `<span class="ib${c?' ib-'+c:''}">${ic(n)}</span>`;}
 const STAT_IC={'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
-function sib(label){const x=STAT_IC[label];return x?ib(x[0],x[1]):'';}
+function sib(label){const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
 function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICP[n]||ICP.info}"/></svg>`;}
 
 // ---------- mẩu nhỏ dùng chung ----------
@@ -4479,7 +4567,7 @@ function hudHTML(){
   const hurt=wounds().length?' · <b class="bad">'+esc(WOUND[wounds()[0].k].n)+(wounds().length>1?' +'+(wounds().length-1):'')+'</b>':r.hp<s.maxHp*0.35?' · <b class="bad">Khí huyết cạn</b>':'';
   let h=`<div class="hud-top" data-act="hud"><div class="hud-date"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)]+'\nNgày '+(Math.floor((t%HM)/HD)+1)+' trong tháng')}><small>Năm</small><b id="clkY">${tYear(t)}</b><small id="clkM">Ngày ${Math.floor((t%HM)/HD)+1} · tháng ${MONTH[tMonth(t)]}</small></div>
    <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small><span id="clkH">Giờ ${gioName(t)}</span> · ${sectText()}${UI.paused?' · <i>đang dừng</i>':''}</small></div>
-   <span class="hud-tg">${ic(UI.hudOpen?'up':'down')}</span></div>`;
+   ${UI.hudOpen?'':`<span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span>`}<span class="hud-tg">${ic(UI.hudOpen?'up':'down')}</span></div>`;
   if(UI.hudOpen){
     h+=`<div class="hud-body">${row('Tu vi',r.tv,100,'tv',Math.floor(r.tv)+'%','Đủ 100% thì có thể đột phá ở nơi có động phủ')}
      ${row('Khí huyết',r.hp,s.maxHp,'hp',r.hp+' / '+s.maxHp,'Về 0 là chết')}
@@ -4552,7 +4640,7 @@ function dockHTML(){
   return `<div class="dock loc"><span class="lc-n">${esc(cur.name)}</span><button class="btn pri" data-act="enter">${ENTER_L[cur.type]||'Vào'}</button></div>`;
 }
 function navHTML(){
-  const r=G.run;const it=[['char','user','Nhân vật'],['pets','paw','Linh thú'],['journal','book','Sổ tay'],['affairs','globe','Thiên hạ'],['bonds','people','Giao tình'],['more','more','Thêm']];
+  const r=G.run;const it=[['char','user','Nhân vật'],['pets','paw','Linh thú'],['journal','book','Sổ tay'],['bonds','people','Giao tình'],['more','more','Thêm']];
   const dot={journal:r&&r.quests.some(q=>q.state==='open'),pets:r&&r.eggs&&r.eggs.length>0};
   return it.map(([k,i,n])=>`<button class="nv${UI.panel===k?' on':''}" data-act="panel" data-arg="${k}">${ib(i)}<span>${n}</span>${dot[k]?'<i class="dot soft"></i>':''}</button>`).join('');
 }
@@ -4748,7 +4836,7 @@ function vCombat(sc){
       const btn=(id,sk,lv,tip)=>{const c=skillCost(sk);const no=me.mp<c;const d=sk.fx.p?Math.round(sk.fx.p*100)+'% uy lực':'';return `<button class="sk" data-act="skill" data-arg="${id}"${no?' disabled':''}${ta(tip||skillTip(sk,lv))}>${elSeal(sk.el)}<span class="sn">${esc(sk.n)}${lv>1?' <i>'+'Ⅰ Ⅱ Ⅲ'.split(' ')[lv-1]+'</i>':''}<small>${[d,c?c+' linh lực':'',sk.fx.charge?'tụ lực':''].filter(Boolean).join(' · ')}</small></span></button>`;};
       const cp=r.pills.map((p,i)=>({p,i})).filter(x=>PILL[x.p.id].w!=='bt');const m=UI.menu;
       const back='<button class="sk mback" data-act="menu" data-arg=""><span class="sn">Quay lại</span></button>';
-      if(m==='atk'){h+='<div class="skills">'+btn('_atk',BASIC,1,'Đánh thường bằng chân khí\nKhông tốn linh lực');for(const id of atkSlots()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}h+=back+'</div>';}
+      if(m==='atk'){h+='<div class="skills">'+btn('_atk',BASIC,1,'Đánh thường bằng chân khí\nKhông tốn linh lực');for(const id of atkSlots()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}(r.dd||[]).forEach((d,j)=>{const used=sc.ddUsed&&sc.ddUsed[j];h+=`<button class="sk" data-act="dd" data-arg="${j}"${used?' disabled':''}${ta('Tế '+d.rel.name+' từ đan điền ra đánh.\nMỗi trận một lần, không tốn linh lực.')}>${elSeal(d.rel.el||'vo')}<span class="sn" style="color:${PCOL[d.rel.tier||0]}">Tế ${esc(d.rel.name)}<small>${used?'đã dùng trận này':'uẩn dưỡng · mỗi trận một lần'}</small></span></button>`;});h+=back+'</div>';}
       else if(m==='def'){h+='<div class="skills">'+`<button class="sk" data-act="skill" data-arg="_block"${me.tl<TL_BLOCK?' disabled':''}${ta('Đỡ đòn: như tụ lực, đứng ở mốc 75 chờ đối thủ ra đòn.\nBị đánh: giảm khoảng 20–30% sát thương, tốn 30% thể lực, rồi chạy tiếp.\nĐối thủ không đánh mình: không tốn gì.')}><span class="el">Đỡ</span><span class="sn">Đỡ đòn<small>30% thể lực</small></span></button>`;
         h+=btn('_guard',GUARD_SK,1,'Vận khí thủ thế\nĐược hộ thể và hồi 30% linh lực');for(const id of defSkills()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}
         if(!(sc.boss||sc.kiep||sc.noFlee))h+=`<button class="sk" data-act="flee"${ta('Cả đội bỏ chạy\nThành công dựa vào thân pháp')}><span class="el">Chạy</span><span class="sn">Thoát thân</span></button>`;if(!(sc.kiep||sc.spar||sc.en.n==='Tâm Ma'))h+=`<button class="sk" data-act="yield"${injured()?' disabled':''}${ta(injured()?'Đang mang thương, đối phương không tha: nhận thua cũng chết.':'Buông tay chịu thua.\nNgươi sẽ bị thương vài tháng và bị đối phương lục lấy một phần linh thạch, vài món đồ.')}><span class="el">Thua</span><span class="sn">Nhận thua</span></button>`;h+=back+'</div>';}
@@ -4806,7 +4894,7 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn')){e.
 function kvRow(n,v,t,cls){return `<div class="kr ${cls||''}"${ta(t)}><span>${sib(n)}${n}</span><b>${v}</b></div>`;}
 function pChar(){
   const r=G.run,s=S();const tab=UI.tab.char||'base';
-  let b=tabsHTML('char',[['base','Căn cơ'],['chu','Chu thiên'],['bag','Túi đồ']],tab);
+  let b=tabsHTML('char',[['base','Căn cơ'],['bag','Túi đồ']],tab==='chu'?'bag':tab);
   if(tab==='base'){
     const og=ORIGIN.find(o=>o.id===r.origin),tr=TRAIT.find(t=>t.id===r.trait),R0=rootView(r.root);
     b+=`<h4 class="sgrp">Căn cơ</h4><div class="hrow"><span class="hn">Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${Math.floor(r.tv)}%</span></div>
@@ -4823,15 +4911,8 @@ function pChar(){
     ${kvRow('Thân pháp',s.tp,'Tốc độ chạy trên nửa đầu thanh hành động')}${kvRow('Chính xác',s.cx,'Đối phương né khó hơn')}${kvRow('Né',s.ne,'Phải bấm Né đúng lúc mới phát huy hết')}${kvRow('Hồi phục',s.hoi,'Tốc độ trên nửa sau thanh hành động')}
     ${kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế')}${kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá')}${kvRow('Khí vận',s.van,'Chí mạng, may mắn')}${kvRow('Đã hạ',r.kills,'Số kẻ địch đã đánh bại')}</div>`;
   }
-  if(tab==='chu')b+=chuHTML();
-  if(tab==='bag'){
-    const AS=atkSlots();
-    b+=`<h4 class="sgrp">Pháp thuật <small>${r.skills.length}/4</small></h4><div class="rows">`+r.skills.map(x=>{const sk=SK[x.id];const on=AS.includes(x.id);return `<div class="row"${ta(skillTip(sk,x.lv))}><span class="r-i">${elSeal(sk.el)}</span><span class="r-t"><b>${esc(sk.n)}${x.lv>1?' · bậc '+x.lv:''}</b><small>${skillCost(sk)} linh lực${sk.fx.p?'':' · phòng thủ'}</small></span>${sk.fx.p?`<button class="btn sm${on?' on':''}" data-act="atkslot" data-arg="${x.id}"${ta('Đặt vào nút Tấn công trong trận (tối đa 3)')}>${on?'đang dùng':'đặt'}</button>`:''}</div>`;}).join('')+'</div>';
-    b+=`<h4 class="sgrp">Pháp bảo <small>${r.relics.length}</small></h4><div class="grid">`+(r.relics.length?r.relics.map(x=>`<div class="cell"${ta(relicTip(x))}><span class="c-i">${elSeal(x.el||'vo')}</span><span class="c-n">${esc(x.name)}</span><span class="c-p">${GRADE[x.tier]}</span></div>`).join(''):'<p class="hint">Chưa có món nào.</p>')+'</div>';
-    b+=`<h4 class="sgrp">Đan dược · phù lục <small>${r.pills.length}/${s.pillMax}</small></h4><div class="rows">`+(r.pills.length?r.pills.map((p,i)=>{const P0=PILL[p.id];const can=P0.w==='any';return `<div class="row"${ta(pillTip(p.id,p.q))}><span class="r-i">${P0.i}</span><span class="r-t"><b>${p.q?PQ[p.q]+' ':''}${esc(P0.n)}</b><small>${esc(P0.d.replace('{x}',pillX(p.id,p.q)))}</small></span>${can?`<button class="btn sm" data-act="usepill" data-arg="${i}">Dùng</button>`:`<small class="r-x">${P0.w==='bt'?'khi đột phá':'trong trận'}</small>`}</div>`;}).join(''):'<p class="hint">Trống.</p>')+'</div>';
-    const m=r.mats||{};b+=`<h4 class="sgrp">Vật liệu</h4><div class="grid">${Object.keys(MAT).map(k=>`<div class="cell"${ta(MAT[k].n+'\n'+MAT[k].d)}><span class="c-i">${MAT[k].i}</span><span class="c-n">${MAT[k].n}</span><span class="c-p">${m[k]||0}</span></div>`).join('')}</div>`;
-  }
-  return win(esc(r.ten),b,{cls:'tall'});
+  if(tab==='bag'||tab==='chu')b+=bagTabHTML();
+  return win(esc(r.ten),b,{cls:'tall'+(tab==='base'?'':' wide')});
 }
 // vòng chu thiên: các ô xếp thành vòng quanh đan điền, khí chảy theo chiều kim đồng hồ
 function chuHTML(){
@@ -4845,7 +4926,7 @@ function chuHTML(){
   svg+=`<circle cx="${cx}" cy="${cy}" r="30" fill="var(--paper)" stroke="var(--seal)" stroke-width="2"/><text x="${cx}" y="${cy-2}" text-anchor="middle" class="chu-c">Đan</text><text x="${cx}" y="${cy+14}" text-anchor="middle" class="chu-s">đan điền</text>`;
   for(let i=0;i<n;i++){const p=P(i),it=v.it[i];svg+=`<g class="chu-n${sel===i?' sel':''}${it?' on':''}" data-act="chuSel" data-arg="${i}" transform="translate(${p[0]} ${p[1]})"><circle r="24"/>${it?`<text y="7" text-anchor="middle" class="chu-e el-${it.el}">${(EL[it.el]||EL.vo).c}</text>`:'<text y="7" text-anchor="middle" class="chu-p">＋</text>'}<text y="-29" text-anchor="middle" class="chu-i">${i+1}</text></g>`;}
   svg+='</svg>';
-  let h=`<p class="hint">Linh khí chảy quanh đan điền theo chiều kim đồng hồ. Ô trước <b class="good">sinh</b> ô sau thì hệ đó mạnh lên, <b class="bad">khắc</b> thì yếu đi. Chạm một ô để đặt công pháp hoặc pháp bảo.</p>${svg}`;
+  let h=`<p class="hint">Linh khí chảy quanh đan điền theo chiều kim đồng hồ. Ô trước <b class="good">sinh</b> ô sau thì hệ đó mạnh lên, <b class="bad">khắc</b> thì yếu đi. Chạm một ô để đặt công pháp đang vận hành.</p>${svg}`;
   h+=`<div class="chips"><span class="chip up"${ta('Mỗi mối tương sinh: hệ của ô nhận +6% uy lực, linh lực +3%')}>tương sinh ${v.sinh}</span><span class="chip"${ta('Hai ô cạnh nhau cùng hệ: hệ đó +3% uy lực')}>đồng hệ ${v.dong}</span><span class="chip dn"${ta('Mỗi mối tương khắc: hệ bị khắc −5% uy lực')}>tương khắc ${v.khac}</span><span class="chip ${v.dai?'item':''}"${ta('Kín vòng, không có mối khắc nào và chỉ hở tối đa một mối: tu luyện +15%, khí huyết +8%')}>${v.dai?'Đại chu thiên đã thành':'Đại chu thiên chưa thành'}</span></div>`;
   h+=`<div class="hbtns"><button data-act="chuAuto"${ta('Máy thử xếp sao cho nhiều mối tương sinh nhất')}>Tự xếp</button><button data-act="chuClear">Gỡ hết</button></div>`;
   if(sel!=null&&sel<n){const it=v.it[sel];const pool=chuPool();
@@ -4869,20 +4950,22 @@ function pPets(){
 }
 function pJournal(){
   const r=G.run,w=W();const tab=UI.tab.journal||'log';
-  let b=tabsHTML('journal',[['log','Đời này'],['quest','Việc'],['news','Tin đồn'],['chron','Biên niên']],tab);
+  let b=tabsHTML('journal',[['log','Đời này'],['aff','Thiên hạ'],['quest','Việc'],['news','Tin đồn'],['chron','Biên niên']],tab);
+  if(tab==='aff')b+=affairsBody();
   if(tab==='log')b+=`<div class="logl">${r.log.slice().reverse().map(l=>`<p><span>${l.a} tuổi</span>${esc(l.t)}</p>`).join('')}</div>`;
   if(tab==='quest'){const L=r.quests.slice().reverse();b+=L.length?`<div class="rows">${L.map(q=>`<div class="row${q.state==='fail'?' dim':''}"><span class="r-i">${q.state==='done'?ic('check'):q.state==='fail'?ic('close'):ic('hour')}</span><span class="r-t"><b>${esc(q.text)}</b><small>${q.state==='open'?'còn '+durH(Math.max(0,q.due-w.t)):q.state==='done'?'đã xong':'thất hứa'}</small></span></div>`).join('')}</div>`:'<p class="empty">Chưa nhận việc nào. Tìm bảng treo thưởng ở thôn trấn.</p>';}
   if(tab==='news')b+=`<div class="logl">${r.news.length?r.news.slice().reverse().map(l=>`<p><span>${l.a} tuổi</span>${esc(l.t)}</p>`).join(''):'<p class="empty">Chưa nghe được gì. Ghé trà lâu mà hỏi.</p>'}</div>`;
   if(tab==='chron'){const C=w.chron.slice().reverse();b+=C.length?`<div class="logl">${C.map(l=>`<p><span>năm ${l.y}</span>${esc(l.t)}</p>`).join('')}</div>`:'<p class="empty">Thế gian còn yên ả.</p>';}
   return win('Sổ tay',b,{cls:'tall'});
 }
-function pAffairs(){
+function affairsBody(){
   const L=affairs();const f=UI.filter||'all';const cnt=k=>k==='all'?L.length:L.filter(x=>x.cat===k).length;
   let b=`<div class="tabs wrap">${Object.keys(AFF_CAT).map(k=>`<button data-act="filter" data-arg="${k}" class="${k===f?'on':''}">${AFF_CAT[k]} · ${cnt(k)}</button>`).join('')}</div>`;
   const M=L.filter(x=>f==='all'||x.cat===f);
   b+=M.length?`<div class="rows">${M.map(x=>`<button class="row" data-act="affGo" data-arg="${x.x!=null?Math.round(x.x)+','+Math.round(x.y)+','+(x.node!=null?x.node:''):''}"${x.x==null?' disabled':''}><span class="r-i">${x.i}</span><span class="r-t"><b>${esc(x.n)}</b><small>${esc(x.sub)}${x.old?' · nghe '+durH(x.old)+' trước':''}</small></span><span class="r-x">${x.left!=null?'còn chừng '+durH(Math.max(1,x.left)):''}</span></button>`).join('')}</div><p class="hint">Chạm một dòng để xem chỗ đó trên bản đồ. Chỉ hiện những chuyện ngươi tự thấy hoặc đã nghe tin.</p>`:'<p class="empty">Chưa nghe ngóng được gì. Ghé trà lâu, hoặc đi xa hơn.</p>';
-  return win('Thiên hạ',b,{cls:'tall'});
+  return b;
 }
+function pAffairs(){return win('Thiên hạ',affairsBody(),{cls:'tall'});}
 function pBonds(){
   const r=G.run,w=W();const R=relations();const tab=UI.tab.bonds||'an';
   let b=tabsHTML('bonds',[['an','Ân oán'],['bang','Thiên Kiêu Bảng'],['tong','Tông môn']],tab);
@@ -4944,7 +5027,7 @@ function cfgHTML(){
     +setRow('Độ nét',seg('dpr',[[0,'Tự động'],[1,'Thường'],[1.5,'Nét'],[2,'Rất nét']]),'Độ nét của bản đồ. Càng nét càng nặng trên màn hình độ phân giải cao.')
     +setRow('Mây trôi',onoff('clouds'),'Bóng mây lướt trên bản đồ')+setRow('Hạt theo mùa',onoff('fx'),'Hoa rơi mùa xuân, đom đóm đêm hè, lá thu, tuyết đông')
     +setRow('Sắc trời theo buổi',onoff('daynight'),'Bản đồ ngả màu theo sáng, chiều, tối, đêm')+setRow('Chuyển động giao diện',onoff('anim'),'Hiệu ứng trượt, mờ dần của các bảng')+setRow('Hiện số khung hình',onoff('showFps'));
-  if(st==='view')b+=setRow('Giao diện',seg('theme',[['light','Giấy dó'],['dark','Dạ mặc']]),'Nền sáng hoặc nền tối')+setRow('Cỡ chữ',seg('font',[['m','Vừa'],['l','Lớn'],['xl','Rất lớn']]))
+  if(st==='view')b+=setRow('Cỡ chữ',seg('font',[['m','Vừa'],['l','Lớn'],['xl','Rất lớn']]))
     +setRow('Tên địa danh',onoff('names'))+setRow('Thực thể qua lại',onoff('ents'),'Thương đội, thú triều, tuần tra, thiên kiêu, dị tượng trên bản đồ')+setRow('Vòng thần thức',onoff('ring'))+setRow('Dấu ghi chú',onoff('notes'))+setRow('Địa hình vẽ tay',onoff('terrain'));
   if(st==='play'){const ad=G.meta.opt&&G.meta.opt.userDodge;
     b+=setRow('Tự né',`<div class="seg"><button data-act="autoDodge" data-arg="0" class="${ad?'':'on'}">Tắt</button><button data-act="autoDodge" data-arg="1" class="${ad?'on':''}">Bật</button></div>`,'Bật thì không cần nhấn nút Né.\nLuôn tính như né ở mức khá, trừ đi 10%.')
@@ -4955,6 +5038,47 @@ function cfgHTML(){
   return b+`</div><p class="hint ver">Phù Sinh · bản 3 · cấu hình đồ họa lưu riêng trên từng máy.</p>`;
 }
 const PANEL_V={char:pChar,pets:pPets,journal:pJournal,affairs:pAffairs,bonds:pBonds,more:pMore,craft:pCraft};
+
+// ---------- Túi đồ: hình người mặc trang bị, đan điền uẩn dưỡng, vòng vận công, vật tùy thân, và các ô đồ ----------
+const PCOL=['#8d8672','#4f8a4a','#4a6fae','#7b56a8','#c97a2b','#c05a94','#b8402f'];
+const SLOT_IC={vukhi:'M14 4h6v6L9 21l-2-2-3 1 1-3-2-2L14 4zM6 15l3 3',non:'M4 16c0-6 3-10 8-10s8 4 8 10zM2 16h20M12 6V3',boi:'M12 3v5M12 8a5 5 0 100 10 5 5 0 000-10zM12 18v3M12 11v4',gang:'M7 21v-9l-2-4 2-1 2 3V4h2v6V3h2v7-6h2v8l2-3 1 2-2 5v5z',giap:'M7 4l5 2 5-2 3 4-3 2v10H7V10L4 8z',choang:'M8 3h8l4 17H4zM8 3c1 3 7 3 8 0',nhan:'M12 9a6 6 0 100 12 6 6 0 000-12zM9 6l3-3 3 3-3 3z',dai:'M3 10h18v4H3zM10 9h4v6h-4z',phapbao:'M12 3l7 9-7 9-7-9zM5 12h14M12 3v18',giay:'M5 4h5v9l8 3v4H5zM5 16h13',tuivat:'M6 8h12l1 12H5L6 8zM9 8V6a3 3 0 016 0v2',phuongtien:'M3 6h12v9H3zM15 9h4l2 3v3h-6M7 18a2 2 0 100-.01M17 18a2 2 0 100-.01',hoa:'M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z',dinh:'M6 8h12v6a6 6 0 01-12 0zM4 8h16M8 20l-1 2M16 20l1 2M9 5h6',tran:'M12 3l8 5v8l-8 5-8-5V8zM12 3v18M4 8l16 8M20 8L4 16'};
+function slotIcon(s){s=s.replace(/[12]$/,'');return `<svg class="sli" viewBox="0 0 24 24"><path d="${SLOT_IC[s]||SLOT_IC.phapbao}"/></svg>`;}
+function bagSt(){return UI.bag||(UI.bag={tab:'all',pham:-1,sort:0,sel:null,n:1});}
+function eqCell(key,label,rel,o){o=o||{};const B=bagSt();const tip=rel?rel.name+'\n'+PHAM[rel.tier||0]+'\n'+fxLines(relicFx(rel),rel).join('\n'):(o.tip||label+': trống');
+  return `<button class="eqc${rel?' on':''}${B.sel===key?' sel':''}${o.lock?' lock':''}" data-act="bagSel" data-arg="${key}"${o.lock?' disabled':''} style="${rel?'--pc:'+PCOL[rel.tier||0]:''}"${ta(tip)}>${slotIcon(o.ic||slotOf(rel||{k:''}))}<small>${rel?esc(rel.name):label}</small>${o.badge?`<i>${o.badge}</i>`:''}</button>`;}
+function bagTabHTML(){
+  const r=run2(),E=eqOf(),B=bagSt(),w=W();
+  // --- cột trái: hình người ---
+  let L=`<div class="doll">${sceneCv('doll'+r.ten,r.region,'','dollbg','nhan:0.5:0.92:0:doll')}<div class="dgrid">${SLOTS.map(([k,n])=>eqCell('E'+k,n,E[k],{ic:k})).join('')}</div></div>`;
+  const dn=DD_N[r.realm];
+  L+=`<h4 class="sgrp">Đan điền · uẩn dưỡng <small>${r.dd.length}/${dn}</small></h4><p class="hint">Vũ khí, pháp bảo nuôi trong đan điền mỗi năm mạnh thêm 5% (tối đa gấp đôi), vẫn cho chỉ số, và trong trận tế ra đánh được một lần.</p><div class="ddrow">${[0,1,2,3].map(j=>{const d=r.dd[j];if(d)return eqCell('D'+j,'',d.rel,{badge:'+'+Math.round((ddMul(d)-1)*100)+'%'});const need=DD_N.findIndex(x=>x>j);return eqCell('D'+j,j<dn?'Trống':'Cần '+REALM[need],null,{lock:j>=dn,ic:'phapbao',tip:j<dn?'Chọn một vũ khí hoặc pháp bảo trong túi rồi bấm Uẩn dưỡng.':'Mở khi đạt '+REALM[need]+'.'});}).join('')}</div>`;
+  L+=`<h4 class="sgrp">Vật tùy thân</h4><div class="ddrow five">${SPEC.map(([k,n])=>{if(k==='phuongtien'){const m=mountOf();return `<div class="eqc${m?' on':''}" style="${m?'--pc:'+PCOL[1]:''}"${ta(m?m.n+'\n'+m.d:'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.')}>${slotIcon(k)}<small>${m?m.n:n}</small></div>`;}return eqCell('E'+k,n,E[k],{ic:k});}).join('')}</div>`;
+  L+=`<h4 class="sgrp">Vòng vận công</h4>`+chuHTML();
+  const AS=atkSlots();
+  L+=`<h4 class="sgrp">Pháp thuật đã học <small>${r.skills.length}/4</small></h4><div class="rows">`+r.skills.map(x=>{const sk=SK[x.id];const on=AS.includes(x.id);return `<div class="row"${ta(skillTip(sk,x.lv))}><span class="r-i">${elSeal(sk.el)}</span><span class="r-t"><b style="color:${PCOL[sk.t]}">${esc(sk.n)}${x.lv>1?' · bậc '+x.lv:''}</b><small>${PHAM[sk.t]} · ${skillCost(sk)} linh lực${sk.fx.p?'':' · phòng thủ'}</small></span>${sk.fx.p?`<button class="btn sm${on?' on':''}" data-act="atkslot" data-arg="${x.id}"${ta('Đặt vào nút Tấn công trong trận (tối đa 3)')}>${on?'đang dùng':'đặt'}</button>`:''}</div>`;}).join('')+'</div>';
+  // --- cột phải: các ô đồ ---
+  let items=bagItems();const cnt=c=>c==='all'?items.length:items.filter(x=>x.cat===c).length;
+  let V=items.filter(x=>(B.tab==='all'||x.cat===B.tab)&&(B.pham<0||x.tier===B.pham));
+  const SORT=['Phẩm cao trước','Phẩm thấp trước','Theo tên','Theo loại'];
+  V.sort([(a,b)=>b.tier-a.tier||a.n.localeCompare(b.n),(a,b)=>a.tier-b.tier||a.n.localeCompare(b.n),(a,b)=>a.n.localeCompare(b.n),(a,b)=>a.cat.localeCompare(b.cat)||b.tier-a.tier][B.sort]);
+  let R=`<div class="bagbar"><b>Túi đồ · ${items.length} / ${bagCap()} ô</b><span class="grow"></span><button class="btn sm" data-act="bagPham"${ta('Lọc theo phẩm. Bấm để đổi.')}>${B.pham<0?'Mọi phẩm':PHAM[B.pham]}</button><button class="btn sm" data-act="bagSort"${ta('Cách sắp xếp. Bấm để đổi.')}>${SORT[B.sort]}</button><span class="btn sm"${ta(PHAM.map((p,i)=>p+': công dụng ×'+numVN(PHAM_M[i])).join('\n'))}>?</span></div>`;
+  R+=`<div class="tabs wrap">${Object.keys(BAG_CAT).map(c=>`<button data-act="bagTab" data-arg="${c}" class="${c===B.tab?'on':''}">${BAG_CAT[c]}${cnt(c)?' · '+cnt(c):''}</button>`).join('')}</div>`;
+  const pad=Math.max(15,Math.ceil(V.length/5)*5);
+  R+=`<div class="bgrid">${V.map(x=>`<button class="bc on${B.sel===x.key?' sel':''}" data-act="bagSel" data-arg="${x.key}" style="--pc:${PCOL[x.tier]}"${ta(x.n+'\n'+PHAM[x.tier]+(x.tip?'\n'+x.tip:''))}>${x.em?`<span class="bem">${x.em}</span>`:slotIcon(x.slot||'phapbao')}${x.cnt>1?`<i>${x.cnt}</i>`:''}</button>`).join('')}${'<span class="bc"></span>'.repeat(pad-V.length)}</div>`;
+  // --- ô chi tiết ---
+  let D='';const k=B.sel;
+  if(k){let rel=null,it=null,act='';
+    if(k[0]==='E'){rel=E[k.slice(1)];if(rel)act=`<button class="btn" data-act="eqOff" data-arg="${k.slice(1)}">Tháo ra</button>`;}
+    else if(k[0]==='D'){const d=r.dd[+k.slice(1)];if(d){rel=d.rel;act=`<span class="hint">Đã uẩn dưỡng ${durH(Math.max(1,w.t-d.t0))} · mạnh thêm ${Math.round((ddMul(d)-1)*100)}%</span><button class="btn" data-act="ddTake" data-arg="${k.slice(1)}">Lấy ra</button>`;}}
+    else{it=items.find(x=>x.key===k);
+      if(it&&it.ref.t==='rel'){rel=r.relics[it.ref.i];const sp=slotOf(rel);act=`<button class="btn pri" data-act="eqOn" data-arg="${it.ref.i}">Mặc vào</button>${ddCan(rel)?`<button class="btn" data-act="ddPut" data-arg="${it.ref.i}"${r.dd.length>=dn?' disabled':''}${ta(dn?'Đưa vào đan điền uẩn dưỡng':'Phải đạt Trúc Cơ mới uẩn dưỡng được')}>Uẩn dưỡng</button>`:''}<button class="btn" data-act="bagDrop">${UI.confirm==='drop'?'Chắc chứ?':'Vứt'}</button>`;}
+      else if(it){const n=clamp(B.n||1,1,it.cnt);B.n=n;const canDrop=it.ref.t!=='pass';
+        act=(it.cnt>1?`<span class="qty"><button class="btn sm" data-act="bagN" data-arg="-1">−</button><b>${n}</b><button class="btn sm" data-act="bagN" data-arg="1">+</button><button class="btn sm" data-act="bagN" data-arg="all">Tất cả</button></span>`:'')+(it.use?`<button class="btn pri" data-act="bagUse">Dùng ${n>1?n:''}</button>`:'')+(it.ref.t==='egg'?`<button class="btn" data-act="panel" data-arg="pets">Xem ở Linh thú</button>`:'')+(canDrop?`<button class="btn" data-act="bagDrop">${UI.confirm==='drop'?'Chắc chứ?':'Vứt '+(n>1?n:'')}</button>`:'');}}
+    if(rel)D=`<div class="bdet" style="--pc:${PCOL[rel.tier||0]}"><b class="bn">${esc(rel.name)}</b><small>${PHAM[rel.tier||0]} · ${SLOT_N[slotOf(rel)]} · hệ ${(EL[rel.el]||EL.vo).n}</small><p>${fxLines(relicFx(rel),rel).map(esc).join('<br>')}</p>${rel.lore?`<p class="hint">${esc(rel.lore)}</p>`:''}<div class="bact">${act}</div></div>`;
+    else if(it)D=`<div class="bdet" style="--pc:${PCOL[it.tier]}"><b class="bn">${esc(it.n)}${it.cnt>1?' ×'+it.cnt:''}</b><small>${PHAM[it.tier]} · ${BAG_CAT[it.cat]}</small><p>${esc(it.tip||'').replace(/\n/g,'<br>')}</p><div class="bact">${act}</div></div>`;
+    else if(k[0]==='E')D=`<div class="bdet"><b class="bn">${SLOT_N[k.slice(1).replace(/[12]$/,'')]||''}: trống</b><p class="hint">Chọn một món hợp ô này trong túi rồi bấm “Mặc vào”.</p></div>`;}
+  return `<div class="bagwrap"><div class="bagL">${L}</div><div class="bagR">${R}${D||'<p class="hint">Chạm một ô đồ hoặc một ô trang bị để xem và thao tác.</p>'}</div></div>`;
+}
 
 // ---------- màn ngoài: mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên ----------
 function vTitle(){
@@ -5146,6 +5270,18 @@ const ACT={
   clog:()=>{UI.modal={k:'clog'};},
   cpill:i=>{UI.menu=null;playerPillAct(+i);},
   flee:()=>{UI.menu=null;playerFlee();},
+  dd:j=>{UI.menu=null;playerDD(+j);},
+  bagTab:c=>{const B=bagSt();B.tab=c;B.sel=null;},
+  bagSel:k=>{const B=bagSt();B.sel=B.sel===k?null:k;B.n=1;},
+  bagPham:()=>{const B=bagSt();B.pham=B.pham>=6?-1:B.pham+1;B.sel=null;},
+  bagSort:()=>{const B=bagSt();B.sort=(B.sort+1)%4;},
+  bagN:d=>{const B=bagSt();const it=bagItems().find(x=>x.key===B.sel);if(!it)return;B.n=d==='all'?it.cnt:clamp((B.n||1)+(+d),1,it.cnt);},
+  bagUse:()=>{const B=bagSt();bagUse(B.sel,B.n||1);if(!bagItems().find(x=>x.key===B.sel))B.sel=null;B.n=1;},
+  bagDrop:()=>{const B=bagSt();if(UI.confirm!=='drop'){UI.confirm='drop';return;}UI.confirm=null;bagDrop(B.sel,B.n||1);B.sel=null;B.n=1;},
+  eqOn:i=>{equip(+i);bagSt().sel=null;},
+  eqOff:s=>{unequip(s);bagSt().sel=null;},
+  ddPut:i=>{if(ddPut(+i))bagSt().sel=null;},
+  ddTake:j=>{ddTake(+j);bagSt().sel=null;},
   yield:()=>{UI.menu=null;playerYield();},
   cont:()=>{UI.menu=null;UI.pendSk=null;combatContinue();},
   pick:i=>takePick(+i),
@@ -5173,7 +5309,7 @@ const ACT={
   impGo:()=>{const t=$('#code');try{const d=decodeSave(t.value);loadData(d);UI.panel=null;UI.code=null;}catch(e){UI.code=t.value;UI.msg='Mã lưu không hợp lệ.';}},
   wipe:()=>{if(UI.confirm!=='wipe'){UI.confirm='wipe';return;}UI.confirm=null;G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};UI.panel=null;UI.sel=null;syncDodge();},
 };
-const KEEP_CONFIRM={pact:1,wipe:1,petFree:1};
+const KEEP_CONFIRM={pact:1,wipe:1,petFree:1,bagDrop:1};
 document.addEventListener('click',e=>{
   if(UI.suppress){UI.suppress=false;e.preventDefault();e.stopPropagation();return;}
   const el=e.target.closest('[data-act]');

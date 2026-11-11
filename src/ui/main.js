@@ -147,6 +147,18 @@ const ACT={
   clog:()=>{UI.modal={k:'clog'};},
   cpill:i=>{UI.menu=null;playerPillAct(+i);},
   flee:()=>{UI.menu=null;playerFlee();},
+  dd:j=>{UI.menu=null;playerDD(+j);},
+  bagTab:c=>{const B=bagSt();B.tab=c;B.sel=null;},
+  bagSel:k=>{const B=bagSt();B.sel=B.sel===k?null:k;B.n=1;},
+  bagPham:()=>{const B=bagSt();B.pham=B.pham>=6?-1:B.pham+1;B.sel=null;},
+  bagSort:()=>{const B=bagSt();B.sort=(B.sort+1)%4;},
+  bagN:d=>{const B=bagSt();const it=bagItems().find(x=>x.key===B.sel);if(!it)return;B.n=d==='all'?it.cnt:clamp((B.n||1)+(+d),1,it.cnt);},
+  bagUse:()=>{const B=bagSt();bagUse(B.sel,B.n||1);if(!bagItems().find(x=>x.key===B.sel))B.sel=null;B.n=1;},
+  bagDrop:()=>{const B=bagSt();if(UI.confirm!=='drop'){UI.confirm='drop';return;}UI.confirm=null;bagDrop(B.sel,B.n||1);B.sel=null;B.n=1;},
+  eqOn:i=>{equip(+i);bagSt().sel=null;},
+  eqOff:s=>{unequip(s);bagSt().sel=null;},
+  ddPut:i=>{if(ddPut(+i))bagSt().sel=null;},
+  ddTake:j=>{ddTake(+j);bagSt().sel=null;},
   yield:()=>{UI.menu=null;playerYield();},
   cont:()=>{UI.menu=null;UI.pendSk=null;combatContinue();},
   pick:i=>takePick(+i),
@@ -174,7 +186,7 @@ const ACT={
   impGo:()=>{const t=$('#code');try{const d=decodeSave(t.value);loadData(d);UI.panel=null;UI.code=null;}catch(e){UI.code=t.value;UI.msg='Mã lưu không hợp lệ.';}},
   wipe:()=>{if(UI.confirm!=='wipe'){UI.confirm='wipe';return;}UI.confirm=null;G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};UI.panel=null;UI.sel=null;syncDodge();},
 };
-const KEEP_CONFIRM={pact:1,wipe:1,petFree:1};
+const KEEP_CONFIRM={pact:1,wipe:1,petFree:1,bagDrop:1};
 document.addEventListener('click',e=>{
   if(UI.suppress){UI.suppress=false;e.preventDefault();e.stopPropagation();return;}
   const el=e.target.closest('[data-act]');
