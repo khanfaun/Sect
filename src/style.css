@@ -170,3 +170,9 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .dlg{max-height:38vh;overflow-y:auto;border-left:2px solid var(--line);padding:.2em .2em .2em .9em;margin:.6em 0;scrollbar-width:thin;scrollbar-color:var(--ink3) transparent;overscroll-behavior:contain}
 .dlg p{margin:.4em 0}.dlg .dq{font-style:italic;color:var(--ink2)}.dlg .dq~p:not(.dq){color:var(--ink)}
 .dlg::-webkit-scrollbar{width:6px}.dlg::-webkit-scrollbar-thumb{background:var(--ink3);border-radius:3px}
+
+.why{font-size:.84em;font-style:italic;color:var(--ink3);margin:-2px 0 2px 2.2em}
+.lgg{display:grid;grid-template-columns:1fr 1fr;gap:6px}.lgc{display:flex;align-items:center;gap:.5em;text-align:left;padding:.3em .4em;border:1px solid var(--line);border-radius:2px;min-height:38px;font-size:.92em;opacity:.5}.lgc.on{opacity:1;background:var(--paper)}
+.cb{width:18px;height:18px;min-width:18px;border:1.5px solid var(--ink2);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;flex:none;font-style:normal;line-height:0;background:var(--paper)}.cb .ic{width:13px;height:13px;color:var(--acc);stroke-width:3.2;vertical-align:0}
+.lgi{width:1.5em;height:1.5em;border-radius:3px;flex:none;fill:none;stroke:#fbf7ea;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;padding:2px}.lge{width:1.5em;text-align:center}
+.dock.go .btn{flex:none}
