@@ -13,15 +13,15 @@ const out = process.argv[2] || '.', plan = process.argv[3] || 'start';
   await p.waitForTimeout(400);
   let n = 0;
   const shot = async name => { await p.waitForTimeout(250); await p.screenshot({ path: path.join(out, String(++n).padStart(2, '0') + '-' + name + '.png') }); };
-  const act = async (a, arg) => { const s = arg == null ? `[data-act="${a}"]` : `[data-act="${a}"][data-arg="${arg}"]`; const el = await p.$(s); if (!el) { errs.push('MISSING ' + s); return false; } await el.click(); await p.waitForTimeout(120); return true; };
+  const act = async (a, arg) => { const s = arg == null ? `[data-act="${a}"]` : `[data-act="${a}"][data-arg="${arg}"]`; const el = await p.$(s); if (!el) { errs.push('MISSING ' + s); return false; } await el.click({ force: true }); await p.waitForTimeout(120); return true; };
   const ev = f => p.evaluate(f);
-  await shot('title');
+  await shot('title'); await act('titleCfg'); await shot('title-cfg'); await act('closePanel');
   await act('birth'); await shot('birth');
-  await act('born', 0); await p.waitForTimeout(2600); await shot('intro');
+  await p.waitForTimeout(2600); await shot('intro');
   await act('regionGo'); await shot('map');
   if (plan !== 'start') {
     await act('enter'); await shot('place');
-    await act('pact', 'explore'); await shot('explore');
+    await act('exStat'); await shot('explore-stat'); await act('modalX'); await act('evGo', 0); await shot('explore');
     // đi hết sự kiện bằng cách luôn chọn lựa chọn đầu
     for (let i = 0; i < 12; i++) {
       const t = await ev(() => { const sc = G.run && G.run.scene; return sc ? sc.type + ':' + (sc.phase || '') + ':' + (sc.done ? 'd' : '') : G.screen; });

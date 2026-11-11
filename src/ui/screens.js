@@ -8,7 +8,7 @@ function vTitle(){
     mid=`<div class="narr${UI.narrSkip?' skip':''}" data-act="narrSkip">${N.map((t,i)=>`<p style="animation-delay:${i*1.1}s">${esc(t)}</p>`).join('')}<p class="k" style="animation-delay:${N.length*1.1}s">Kiếp thứ ${M.nlife+1} bắt đầu.</p></div>
      <div class="t-btn" style="animation-delay:${UI.narrSkip?0:N.length*1.1+0.6}s"><button class="btn pri big" data-act="birth">Luân hồi</button><button class="btn" data-act="screen" data-arg="meta">Lên Bến Vong Xuyên · ${M.pts} điểm</button><p class="hint">Đã trải ${M.nlife} kiếp</p></div>`;}
   else mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="birth">Nhập thế</button><p class="hint">Thế gian không chờ ai. Chết rồi lại sinh, mang theo chút gì còn khắc trong chân linh.</p></div>`;
-  return `<div class="title">${sceneCv('phusinh-title'+M.nlife,Math.min(4,last?last._mr||0:0),'song','t-art')}<div class="t-seal">浮</div><h1>Phù Sinh</h1>${mid}
+  return `<div class="title">${sceneCv('phusinh-title'+M.nlife,Math.min(4,last?last._mr||0:0),'song','t-art')}<div class="t-seal">Phù</div><h1>Phù Sinh</h1>${mid}
    <div class="t-foot">${has&&M.nlife>1?`<button class="lnk" data-act="screen" data-arg="meta">Bến Vong Xuyên · ${M.pts} điểm</button>`:''}<button class="lnk" data-act="titleCfg">Cấu hình</button></div></div>`;
 }
 function vBirth(){

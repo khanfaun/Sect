@@ -29,6 +29,7 @@ function render(){
   setH('hud',hud);setH('mapui',mapui);setH('dock',dock);setH('nav',nav);setH('sheet',sheet);setH('full',full);setH('panel',panel);setH('modal',modal);
   const sc2=G.run&&G.run.scene;UI.lastStory=sc2&&sc2.story?sc2.story.length:0;
   const hd=document.getElementById('hud');document.getElementById('app').style.setProperty('--hudh',(hd&&!hd.hidden?hd.offsetHeight:0)+'px');
+  const dl=document.getElementById('dlg');if(dl)dl.scrollTop=dl.scrollHeight;
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
@@ -64,7 +65,7 @@ window.addEventListener('resize',()=>{Map2.resize();Art.clear();Art.fillAll();})
 // ---------- hành động ----------
 function openBq(){const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')UI.modal={k:'bq'};}
 const ACT={
-  birth:()=>{genBirth();},
+  birth:()=>{genBirth();const c=G.birth.cards;newRun(c[Math.floor(Math.random()*c.length)]);UI.sel=null;UI.panel=null;run2();},
   born:i=>{newRun(G.birth.cards[+i]);UI.sel=null;UI.panel=null;run2();},
   resume:()=>{G.screen='map';},
   screen:a=>{UI.panel=null;UI.modal=null;if(a==='map'){G.screen=G.run?'map':'title';}else if(a==='codex'){G.screen='meta';UI.tab.meta='lives';}else{G.screen=a;}if(a==='meta'||a==='title')G.over=null;if(a==='title')UI.narrSkip=true;},
@@ -74,7 +75,7 @@ const ACT={
   regionGo:()=>{G.run.scene=null;Map2.center();},
   choose:i=>choose(+i),
   next:()=>endScene(),
-  pact:a=>{if(a==='bq'){UI.modal={k:'bq'};return;}if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
+  pact:a=>{if(a==='bq'){UI.modal={k:'bq'};return;}if(a==='laibuon'||a==='tram'||a==='nhansu'){UI.modal={k:a};return;}if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
   leave:()=>leavePlace(),
   pass:a=>passAct(a),
   hud:()=>{UI.hudOpen=!UI.hudOpen;},
@@ -86,6 +87,15 @@ const ACT={
   modalX:()=>{UI.modal=null;},
   unsel:()=>{UI.sel=null;},
   cardMin:()=>{UI.cardMin=true;},
+  cardMax:()=>{UI.cardMin=false;},
+  descTg:()=>{UI.descHide=!UI.descHide;},
+  exStat:()=>{UI.modal={k:'explore'};},
+  exGo:()=>{UI.modal=null;placeAct('explore');},
+  evGo:i=>{const r=G.run,n=nodeById(r.scene.id);const id=n.evs&&n.evs.L[+i];if(!id)return;n.evs.L.splice(+i,1);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place')startEvent(id);},
+  meet:id=>{const r=G.run,at=r.at;const e=W().ents.find(x=>String(x.id)===id);if(!e)return;meetEnt(e);if(G.run&&G.run.scene&&G.run.scene.type==='event')G.run.scene.back=at;else note('Họ lướt qua, chẳng để ý tới ngươi.');},
+  questGo:()=>{const n=nodeById(G.run.at);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place'&&!questExplore(n))note('Chưa thấy tung tích gì.');},
+  sell:a=>{const [k,i]=a.split(':');sellItem(k,+i);},
+  stage:id=>{UI.modal=null;stageGo(+id);},
   go:id=>{const n=nodeById(+id);if(CFG.confirmDanger&&nodeDanger(n)>=3&&n.id!==G.run.at){UI.modal={k:'danger',id:n.id};return;}ACT.goSure(id);},
   goSure:id=>{UI.modal=null;if(travelTo(+id)){UI.paused=false;UI.cardMin=true;Map2.cam.follow=true;}},
   enter:()=>{openPlace(G.run.at);},

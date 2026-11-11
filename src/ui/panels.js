@@ -38,7 +38,7 @@ function chuHTML(){
   for(let i=0;i<n;i++){const a=P(i),b=P((i+1)%n);const l=v.links[i];const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;const ox=(mx-cx)*0.16,oy=(my-cy)*0.16;
     svg+=`<path d="M${a[0]} ${a[1]} Q${mx+ox} ${my+oy} ${b[0]} ${b[1]}" fill="none" stroke="${LC[l]}" stroke-width="${l?4:1.5}" ${l===-1?'stroke-dasharray="5 4"':''} opacity="${l?0.9:0.6}"/>`;
     if(l)svg+=`<text x="${mx+ox*1.9}" y="${my+oy*1.9+4}" text-anchor="middle" class="chu-l" fill="${LC[l]}">${l===1?'sinh':l===2?'đồng':'khắc'}</text>`;}
-  svg+=`<circle cx="${cx}" cy="${cy}" r="30" fill="var(--paper)" stroke="var(--seal)" stroke-width="2"/><text x="${cx}" y="${cy-2}" text-anchor="middle" class="chu-c">丹</text><text x="${cx}" y="${cy+14}" text-anchor="middle" class="chu-s">đan điền</text>`;
+  svg+=`<circle cx="${cx}" cy="${cy}" r="30" fill="var(--paper)" stroke="var(--seal)" stroke-width="2"/><text x="${cx}" y="${cy-2}" text-anchor="middle" class="chu-c">Đan</text><text x="${cx}" y="${cy+14}" text-anchor="middle" class="chu-s">đan điền</text>`;
   for(let i=0;i<n;i++){const p=P(i),it=v.it[i];svg+=`<g class="chu-n${sel===i?' sel':''}${it?' on':''}" data-act="chuSel" data-arg="${i}" transform="translate(${p[0]} ${p[1]})"><circle r="24"/>${it?`<text y="7" text-anchor="middle" class="chu-e el-${it.el}">${(EL[it.el]||EL.vo).c}</text>`:'<text y="7" text-anchor="middle" class="chu-p">＋</text>'}<text y="-29" text-anchor="middle" class="chu-i">${i+1}</text></g>`;}
   svg+='</svg>';
   let h=`<p class="hint">Linh khí chảy quanh đan điền theo chiều kim đồng hồ. Ô trước <b class="good">sinh</b> ô sau thì hệ đó mạnh lên, <b class="bad">khắc</b> thì yếu đi. Chạm một ô để đặt công pháp hoặc pháp bảo.</p>${svg}`;

@@ -96,7 +96,7 @@ button,input,textarea{font:inherit;color:inherit}button{cursor:pointer;backgroun
 .kvl.two{display:grid;grid-template-columns:1fr 1fr;column-gap:18px}
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--ink2);margin:.2em 0 .6em;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs.wrap{flex-wrap:wrap;border-bottom:0;gap:6px}
 .tabs button{padding:.35em .8em;white-space:nowrap;color:var(--ink2);border:1px solid transparent;border-bottom:0}.tabs button.on{color:var(--acc);font-weight:700;background:var(--paper2);border-color:var(--ink2);box-shadow:inset 0 2px 0 var(--acc)}.tabs.wrap button{border:1px solid var(--line);border-radius:2px}.tabs.wrap button.on{border-color:var(--acc);box-shadow:none}.tabs.sub{border-bottom:1px dotted var(--line)}.tabs.sub button{font-size:.9em}
-.el{display:inline-grid;place-items:center;width:1.5em;height:1.5em;font-size:.8em;border:1px solid currentColor;border-radius:2px;color:var(--ink2);font-style:normal;font-weight:700;flex:none;font-family:serif}
+.el{display:inline-grid;place-items:center;min-width:1.5em;height:1.6em;padding:0 .25em;font-size:.72em;white-space:nowrap;border:1px solid currentColor;border-radius:2px;color:var(--ink2);font-style:normal;font-weight:700;flex:none}
 .el-kim{color:var(--gold)}.el-moc{color:var(--jade)}.el-thuy{color:var(--acc2)}.el-hoa{color:var(--seal)}.el-tho{color:#8a6a3c}.el-loi{color:var(--vio)}.el-bang{color:#5b9bb5}.el-phong{color:#6c9a7c}.el-am{color:#5a5670}.el-phat{color:#b88a2e}
 /* lời mở đầu kiếp */
 .intro{flex:1;display:flex;align-items:center;cursor:pointer}.in-b{width:100%;padding:26px 22px;text-align:center;background:linear-gradient(90deg,transparent,var(--paper) 14%,var(--paper) 86%,transparent)}
@@ -116,7 +116,7 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .life{border:1px solid var(--line);padding:.5em .8em;margin:.35em 0;border-radius:2px;background:var(--paper)}.life summary{cursor:pointer}.life summary small{color:var(--ink3);margin-left:.6em}.life p{margin:.4em 0;font-size:.94em}.life.lock{color:var(--ink3);font-style:italic;border-style:dashed}.ep{font-style:italic;color:var(--ink2);text-align:center;margin:.6em 0}
 /* vòng chu thiên */
 .chu{display:block;width:100%;max-width:320px;margin:0 auto}.chu-n{cursor:pointer}.chu-n circle{fill:var(--paper);stroke:var(--ink3);stroke-width:1.5;stroke-dasharray:4 3}.chu-n.on circle{stroke:var(--ink);stroke-dasharray:none;fill:var(--paper2)}.chu-n.sel circle{stroke:var(--seal);stroke-width:3}
-.chu-e{font:700 19px serif;fill:currentColor}.chu-p{font-size:18px;fill:var(--ink3)}.chu-i{font-size:10px;fill:var(--ink3)}.chu-l{font-size:10px;font-style:italic}.chu-c{font:700 22px serif;fill:var(--seal)}.chu-s{font-size:9px;fill:var(--ink3)}
+.chu-e{font-weight:700;font-size:13px;fill:currentColor}.chu-p{font-size:18px;fill:var(--ink3)}.chu-i{font-size:10px;fill:var(--ink3)}.chu-l{font-size:10px;font-style:italic}.chu-c{font-weight:700;font-size:17px;fill:var(--seal)}.chu-s{font-size:9px;fill:var(--ink3)}
 /* hộp thoại */
 #modal{position:absolute;inset:0;z-index:30;display:grid;place-items:center;padding:16px;background:rgba(20,24,30,.45)}
 .mbox{width:100%;max-width:440px;padding:16px 18px;max-height:92%;overflow-y:auto}.mbox h3{color:var(--acc);font-size:1.15em;border-bottom:1px solid var(--line);padding-bottom:.3em;margin-bottom:.5em}.mb-f{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
@@ -125,7 +125,7 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 #full{position:absolute;inset:0;z-index:20;background:var(--bg);overflow-y:auto}
 .title{min-height:100%;display:flex;flex-direction:column;align-items:center;padding:calc(28px + env(safe-area-inset-top,0px)) 22px 20px;position:relative;text-align:center}
 .t-art{position:absolute;left:0;right:0;bottom:0;height:46%;opacity:.8;background:none}.title>*:not(.t-art){position:relative}
-.t-seal{width:46px;height:46px;background:var(--seal);color:#fbf7ea;display:grid;place-items:center;font:700 26px serif;border-radius:4px;transform:rotate(-4deg);box-shadow:inset 0 0 0 2px var(--seal),inset 0 0 0 3px rgba(251,247,234,.5)}
+.t-seal{width:46px;height:46px;background:var(--seal);color:#fbf7ea;display:grid;place-items:center;font-weight:700;font-size:17px;border-radius:4px;transform:rotate(-4deg);box-shadow:inset 0 0 0 2px var(--seal),inset 0 0 0 3px rgba(251,247,234,.5)}
 .title h1{font-size:2.3em;letter-spacing:.2em;margin:.3em 0 .1em}.t-sub{color:var(--ink2);font-style:italic}
 .narr{margin:1.2em 0 .6em;max-width:30em;cursor:pointer}.narr p{margin:.7em 0;color:var(--ink2)}.narr p.k{color:var(--seal);font-weight:700;letter-spacing:.12em;margin-top:1.2em}
 :root[data-anim="1"] .narr:not(.skip) p,:root[data-anim="1"] .narr:not(.skip)+.t-btn{animation:rise 1s ease-out both}:root[data-anim="0"] .narr p,.narr.skip p{animation:none!important}
@@ -146,7 +146,7 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .u-h{display:flex;align-items:center;gap:8px}.u-i{font-size:1.5em;width:1.5em;height:1.5em;display:grid;place-items:center;position:relative;flex:none}.u-n{flex:1;min-width:0;line-height:1.2}.u-n small{display:block;color:var(--acc);font-size:.76em;font-weight:700}.u-n b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ph{font-size:.74em;color:var(--gold);border:1px solid var(--gold);padding:0 .4em;border-radius:2px}.intent{font-size:.78em;color:var(--seal);font-style:italic;margin-top:2px}
 .u-bar{display:grid;grid-template-columns:4.4em 1fr auto;gap:6px;align-items:center;font-size:.8em;margin-top:3px}.u-bar span{color:var(--ink2)}.u-bar b{font-variant-numeric:tabular-nums;font-weight:600;min-width:4.5em;text-align:right}.u-s{color:var(--ink3)}
-.sts{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}.si{font:700 .72em serif;border:1px solid var(--ink3);padding:0 .3em;border-radius:2px}.si b{font-family:var(--font);margin-left:.2em}
+.sts{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}.si{font-weight:700;font-size:.72em;border:1px solid var(--ink3);padding:0 .3em;border-radius:2px}.si b{font-family:var(--font);margin-left:.2em}
 .cb-art{position:relative;flex:1;min-height:110px;max-height:250px;border:1px solid var(--line);overflow:hidden}.cb-art .art{position:absolute;inset:0;height:100%}.cb-rd{position:absolute;left:6px;top:6px;font-size:.78em;background:var(--paper);border:1px solid var(--line);padding:0 .5em}
 .clog{background:var(--paper);border:1px solid var(--line);padding:4px 10px;font-size:.86em;min-height:4.6em;cursor:pointer}.clog p.old{opacity:.6}
 .cb-cmd{min-height:112px}.skills{display:grid;grid-template-columns:1fr 1fr;gap:6px}
@@ -167,6 +167,17 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 :root[data-anim="0"] .scard,:root[data-anim="0"] .win,:root[data-anim="0"] .mbox,:root[data-anim="0"] .dock,:root[data-anim="0"] .story p,:root[data-anim="0"] .in-b>*,:root[data-anim="0"] .t-btn,:root[data-anim="0"] .toast,:root[data-anim="0"] .ucard.tg{animation:none!important}
 @media (min-width:601px){#app{border-left:1px solid var(--line);border-right:1px solid var(--line)}}
 @media (max-height:620px){.cb-art{display:none}}
+
+:root[data-view=screen] #panel{z-index:25;bottom:0}
+.grp.big{color:var(--gold)}.ch.big{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--paper));font-weight:600}
+.ch.now{border-left:4px solid var(--ink);font-weight:600}.ex{width:1.3em;height:1.3em;border-radius:50%;background:var(--seal);color:#fff;display:grid;place-items:center;font-size:.8em;flex:none}
+.grp i{font-style:italic;text-transform:none;letter-spacing:0;margin-left:.6em;text-decoration:underline dotted;color:var(--ink3)}
+.pl-tg{margin-left:auto;font-style:italic;color:var(--ink2);font-size:.9em}.pl-desc.hide{display:none}
+.foes{display:flex;flex-wrap:wrap;gap:5px}
+
+.dlg{max-height:38vh;overflow-y:auto;border-left:2px solid var(--line);padding:.2em .2em .2em .9em;margin:.6em 0;scrollbar-width:thin;scrollbar-color:var(--ink3) transparent;overscroll-behavior:contain}
+.dlg p{margin:.4em 0}.dlg .dq{font-style:italic;color:var(--ink2)}.dlg .dq~p:not(.dq){color:var(--ink)}
+.dlg::-webkit-scrollbar{width:6px}.dlg::-webkit-scrollbar-thumb{background:var(--ink3);border-radius:3px}
 
 </style>
 </head>
@@ -3622,6 +3633,62 @@ function noteOf(id){const w=W();return w.notes&&w.notes[id]||'';}
   const r=run2();if(r&&r.eggs.length&&r.pets.length<PET_MAX){for(let i=r.eggs.length-1;i>=0;i--)if(W().t>=r.eggs[i].t)petHatch(i);}
   _ac();};}
 
+// ---------------- ĐỊA ĐIỂM MỞ RỘNG ----------------
+for(const k in EL)EL[k].c=EL[k].n; // hiện tên hệ bằng tiếng Việt thay cho chữ Hán
+const WILD2=['rung','nui','song','bien','hoang','phe','dong','ma','thien'];
+function isWild(n){return WILD2.includes(n.type);}
+// chuyện "trước mắt" của mỗi nơi: hiện sẵn, tự mất sau chừng 5 năm
+function nodeEvs(n){const r=G.run,w=W();if(n.type==='ai')return [];
+  if(!n.evs||n.evs.kiep!==r.kiep||w.t>n.evs.until){const k=n.type==='sao'?1:isWild(n)?3:ri(1,3);const L=[];
+    for(let i=0;i<k*4&&L.length<k;i++){const id=pickEvent(n.type,'explore');if(id&&EVMAP[id]&&!L.includes(id))L.push(id);}
+    n.evs={kiep:r.kiep,until:w.t+5*HY,L};}
+  return n.evs.L;}
+function exploreStats(n){const fp=[0.04,0.14,0.26,0.4][n.danger]+(['phe','ma'].includes(n.type)?0.08:0)+(n.type==='sao'?0.3:0);
+  const foes=Object.keys(EN).filter(k=>EN[k].pl&&EN[k].pl.includes(n.type)).map(k=>EN[k]);
+  const mat=['rung','hoang','song','bien','thien'].includes(n.type)?'thao':['nui','dong','phe','ma','sao'].includes(n.type)?'khoang':null;
+  return {fp:Math.min(.9,fp),foes,mat,egg:Math.min(.5,0.1+S().van*0.01)};}
+{const _pa0=placeActs;placeActs=function(n){const L=_pa0(n);const r=G.run,w=W(),t=n.type,ruin=n.state==='ruin';
+  const add=(a,i,l,h,tip,dis,x)=>L.push({a,i,l,h,tip,dis:!!dis,x});
+  if((t==='tran'||t==='thanh')&&!ruin){if(t==='tran')add('taphoa','','Tiệm tạp hóa',1,'Mua đan dược, bí tịch, pháp bảo');
+    add('laibuon','','Lái buôn thu mua',0,'Bán bớt pháp bảo, đan dược lấy linh thạch');
+    add('tuu','','Tửu phường',3,'Uống chén rượu, nghe chuyện, nguôi tâm ma',r.st<price(2),'linh thạch '+price(2));
+    add('tram','','Trạm dịch',0,'Thuê xe ngựa tới thôn trấn đã từng tới, nhanh gấp ba đi bộ');}
+  if(t==='tong')add('nhansu','','Nhân sự',0,'Những gương mặt đáng chú ý của sơn môn');
+  if(isWild(n)){
+    if(!n.dp)add('khaiphu','','Khai phủ',HM,'Đào một động phủ ở đây để bế quan, đột phá',n.danger>=3,n.danger>=3?'Đất này là tử địa.':'');
+    const y=Math.floor(w.t/HY);const hc=n.hunt&&n.hunt.y===y&&n.hunt.k===r.kiep?n.hunt.c:0;
+    add('sanyeu','',hc>=3?'Săn yêu · hết lượt năm nay':'Săn yêu · còn '+(3-hc)+' lần',2,'Lùng yêu thú quanh đây. Thắng thì được yêu đan, đôi khi có trứng linh thú.',hc>=3);
+    const m=Math.floor(w.t/HM);const gc=n.gath&&n.gath.m===m&&n.gath.k===r.kiep?n.gath.c:0;const mt=exploreStats(n).mat;
+    if(mt==='thao')add('haithuoc','','Hái thuốc dại',6,'Kiếm linh thảo để luyện đan. Mỗi tháng hai lần.',gc>=2);
+    if(mt==='khoang')add('daokhoang','','Đào khoáng',6,'Kiếm linh khoáng để luyện khí. Mỗi tháng hai lần.',gc>=2);}
+  return L;};}
+const PA2={khaiphu:1,sanyeu:1,haithuoc:1,daokhoang:1,tuu:1,taphoa:1};
+{const _pa1=placeAct;placeAct=function(a){if(!PA2[a])return _pa1(a);
+  const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return;const n=nodeById(sc.id);const act=placeActs(n).find(x=>x.a===a);if(!act||act.dis)return;
+  sc.msg=[];sc.chips=[];const tick=h=>{advanceTime(h);return !!G.run&&G.run.scene===sc;};
+  if(a==='taphoa'){if(tick(1))openShop(n);return;}
+  if(a==='sanyeu'){const y=Math.floor(W().t/HY);if(!n.hunt||n.hunt.y!==y||n.hunt.k!==r.kiep)n.hunt={y,k:r.kiep,c:0};n.hunt.c++;if(!tick(2))return;encounter({type:n.danger>=3&&chance(.35)?'elite':'combat'});return;}
+  if(a==='khaiphu'){if(!tick(HM))return;n.dp=1;sc.msg=['Ngươi tìm một vách đá khuất gió, đục suốt một tháng. Động phủ đơn sơ đã thành: có chỗ ngồi, có cấm chế, có khe nước.'];sc.chips=[chip('⏳','1 tháng','Thời gian trôi qua','')];return;}
+  if(a==='haithuoc'||a==='daokhoang'){const m=Math.floor(W().t/HM);if(!n.gath||n.gath.m!==m||n.gath.k!==r.kiep)n.gath={m,k:r.kiep,c:0};n.gath.c++;if(!tick(6))return;
+    const k=a==='haithuoc'?'thao':'khoang';const x=ri(1,3)+(n.danger>=2?1:0);run2().mats[k]+=x;
+    sc.msg=[k==='thao'?'Ngươi lần theo mùi thuốc, vạch cỏ, men theo khe suối. Giỏ đầy dần.':'Ngươi gõ từng mỏm đá, nghe tiếng mà đoán mạch. Vài khối khoáng lấp lánh linh quang.'];
+    sc.chips=[chip(MAT[k].i,'+'+x+' '+MAT[k].n.toLowerCase(),'Vật liệu để luyện chế','up'),chip('⏳','6 giờ','Thời gian trôi qua','')];return;}
+  if(a==='tuu'){r.st-=price(2);if(!tick(3))return;const s=S();r.hp=Math.min(s.maxHp,r.hp+Math.round(s.maxHp*.1));teaHouse(n);
+    sc.msg.unshift(pick(['Rượu nhạt mà cay. Bàn bên to tiếng, ngươi nghe được vài câu.','Chưởng quầy rót đầy chén, kể chuyện không ai hỏi.','Ba chén vào bụng, lòng nhẹ đi đôi chút.']));
+    sc.chips=[chip('💎','−'+price(2),'Linh thạch','dn'),chip('⏳','3 giờ','Thời gian trôi qua','')].concat(applyE({tamma:-4}));return;}
+};}
+function sellList(){const r=G.run;const L=[];
+  r.relics.forEach((x,i)=>L.push({k:'r',i,n:x.name,sub:GRADE[x.tier||0],p:price(25+(x.tier||0)*30),ic:'🏺'}));
+  r.pills.forEach((x,i)=>L.push({k:'p',i,n:PILL[x.id].n,sub:'Đan dược',p:Math.max(1,Math.round(price(PILL[x.id].p||10)*0.4)),ic:PILL[x.id].i}));return L;}
+function sellItem(k,i){const r=G.run;const it=sellList().find(x=>x.k===k&&x.i===i);if(!it)return;
+  if(k==='r'){const rel=r.relics[i];r.relics.splice(i,1);const c=run2().chu;for(let j=0;j<8;j++)if(c[j]&&c[j].k==='r'&&c[j].n===rel.name)c[j]=null;clampHp();}else r.pills.splice(i,1);
+  r.st+=it.p;log(`Bán ${it.n} được ${it.p} linh thạch.`);note(`Bán ${it.n}: +${it.p} linh thạch`,'up');}
+function stageList(n){const r=G.run;return regionOf(r.region).nodes.filter(x=>x.id!==n.id&&(x.type==='tran'||x.type==='thanh')&&x.fog>=3&&x.state!=='ruin')
+  .map(x=>{const p=findPath(n.id,x.id);return p?{id:x.id,n:x.name,h:travelHours(p)/3,c:price(1+Math.round(pathLen(p)/60))}:null;}).filter(Boolean);}
+function stageGo(id){const r=G.run;const s=stageList(nodeById(r.at)).find(x=>x.id===id);if(!s||r.st<s.c)return;r.st-=s.c;r.scene=null;
+  advanceTime(s.h);if(!G.run||G.run.scene)return;arrive(id);openPlace(id);G.run.scene.msg=['Xe ngựa lắc lư '+durH(s.h)+' đường, rồi dừng trước cổng '+s.n+'.'];}
+function sectPeople(n){const w=W();return w.rivals.map((x,i)=>({x,i})).filter(o=>w.sects[o.x.s]&&w.sects[o.x.s].n===n.owner).map(o=>{const st=(w.rstate||[]).find(s=>s.i===o.i)||{};return {ten:o.x.ten,tt:o.x.tt,el:o.x.el,realm:st.realm||0,alive:st.alive!==false};});}
+
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
 const $=s=>document.querySelector(s);
@@ -4013,6 +4080,8 @@ function dockHTML(){
   if(r.moving){const m=r.moving;const dest=nodeById(m.path[m.path.length-1]);let L=0;for(let i=m.seg;i<m.path.length-1;i++)L+=edgeLen(m.path[i],m.path[i+1])*(i===m.seg?1-m.prog:1);
     return `<div class="dock go"><div class="dk-t"><small>Đang trên đường tới</small><b>${esc(dest.name)}</b><small id="mvLeft">còn ${Math.round(L)} dặm</small></div><button class="btn" data-act="stop">Dừng lại</button></div>`;}
   const n=UI.sel!=null&&nodeById(UI.sel);
+  if(n&&n.fog>=1&&Math.floor(n.id/100)===r.region&&UI.cardMin){const here=n.id===r.at;
+    return `<div class="dock loc"><span class="lc-n">${esc(n.name)}</span>${here?`<button class="btn pri" data-act="enter">${ENTER_L[n.type]||'Vào'}</button>`:`<button class="btn pri" data-act="go" data-arg="${n.id}"${findPath(r.at,n.id)?'':' disabled'}>Đi tới</button>`}<button class="btn" data-act="cardMax">Mở</button></div>`;}
   if(n&&n.fog>=1&&Math.floor(n.id/100)===r.region&&!UI.cardMin){
     const I=nodeInfo(n);const here=n.id===r.at;const dg=nodeDanger(n);
     let mid='';
@@ -4034,7 +4103,7 @@ function navHTML(){
 // ---------- các cảnh hiện đè lên bản đồ ----------
 function storyHTML(story){return story.map((x,i)=>{const old=i<story.length-1?' old':'';const neu=i>=UI.lastStory?' new':'';
   if(typeof x==='object')return `<p class="q${old}">${esc(x.q)}</p>`;return `<p class="${old}${neu}">${esc(x)}</p>`;}).join('');}
-function card(title,sub,body,o){o=o||{};return `<section class="scard ${o.cls||''}">${o.art||''}<header class="sc-h"><h2>${esc(title)}</h2>${sub?`<small>${esc(sub)}</small>`:''}</header><div class="sc-b">${body}</div>${o.foot?`<footer class="sc-f">${o.foot}</footer>`:''}</section>`;}
+function card(title,sub,body,o){o=o||{};return `<section class="scard ${o.cls||''}">${o.art||''}<header class="sc-h"><h2>${esc(title)}</h2>${sub?`<small>${esc(sub)}</small>`:''}${o.head||''}</header><div class="sc-b">${body}</div>${o.foot?`<footer class="sc-f">${o.foot}</footer>`:''}</section>`;}
 function goBtn(act,label,arg,cls){return `<button class="btn ${cls||'pri'} wide" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}>${label}</button>`;}
 function choiceBtn(n,act,arg,label,extra,o){o=o||{};return `<button class="ch${o.cls?' '+o.cls:''}" data-act="${act}" data-arg="${arg}"${o.dis?' disabled':''}${ta(o.tip)}><span class="cn">${n}</span><span class="ct">${label}</span>${extra||''}</button>`;}
 function choiceExtra(c){let x='';const r=G.run;
@@ -4045,7 +4114,8 @@ function choiceExtra(c){let x='';const r=G.run;
 function vRegionIntro(sc){const r=G.run;const og=ORIGIN.find(o=>o.id===r.origin);
   return `<div class="intro" data-act="regionGo"><div class="in-b"><small>Kiếp thứ ${r.kiep}</small><h1>${esc(r.ten)}</h1><p class="in-o">${esc(og.n)} · quê ở ${esc(r.que)}</p><p class="in-t">${esc(sc.text)}</p>${sc.sub?`<p class="hint">${esc(sc.sub)}</p>`:''}<p class="hint tap">Chạm để lên đường</p></div></div>`;}
 function vEvent(sc){
-  const r=G.run;const e=EVMAP[sc.id];let b=`<div class="story">${storyHTML(sc.story)}</div>`;
+  const r=G.run;const e=EVMAP[sc.id];const st=sc.story;const qi=st.findIndex(x=>typeof x==='object');
+  let b=qi<0?`<div class="story">${storyHTML(st)}</div>`:`<div class="story">${storyHTML(st.slice(0,qi))}</div><div class="dlg" id="dlg">${st.slice(qi).map((x,i)=>typeof x==='object'?`<p class="dq">› ${esc(x.q)}</p>`:`<p class="${qi+i>=UI.lastStory?'new':''}">${esc(x)}</p>`).join('')}</div>`;
   if(sc.news)b+=`<p class="news"${ta('Tin đồn giang hồ')}>${esc(sc.news)}</p>`;
   b+=chipsHTML(sc.chips);
   if(sc.phase==='choose'){b+='<div class="choices">';let k=1;for(const {c,i} of visChoices(sc)){b+=choiceBtn((k++)+'.','choose',i,esc(T(c.l,sc.v)),choiceExtra(c),{dis:!costOk(c.cost)});}b+='</div>';}
@@ -4085,24 +4155,31 @@ function vSwap(sc){
   r.skills.forEach((k,i)=>{const s0=SK[k.id];b+=choiceBtn(elSeal(s0.el),'swap',i,esc(s0.n),'<span class="cx">quên</span>',{tip:skillTip(s0,k.lv)});});
   return card('Lĩnh ngộ','',b+choiceBtn('·','swap',-1,'Không học '+esc(sk.n),'',{cls:'soft'})+'</div>');
 }
-const PGROUP=[['Sự vụ',['tea','board','join','lib']],['Nghỉ ngơi',['inn','tinh','heal']],['Mua bán',['shop','ghost']],['Tu luyện',['bq']],['Việc khác',['bury','quyan']]];
-const PNOW=['boss','cross','bt','grave','patron'];
+const PGROUP=[['Sự vụ',['board']],['Tông môn',['join','lib','nhansu']],['Mua bán',['laibuon','taphoa','shop','ghost']],['Nghỉ chân',['tea','inn','tuu','tinh','heal']],['Đi lại',['tram']],['Tu luyện',['bq','khaiphu']],['Hoang dã',['sanyeu','haithuoc','daokhoang']],['Việc khác',['grave','patron','bury','quyan']]];
+const PNOW=['boss','cross','bt'];
+const PL_N={tea:'Trà lâu',inn:'Khách điếm',shop:'Phường thị',board:'Bảng treo thưởng',ghost:'Quỷ thị',join:'Sơn môn',lib:'Tàng Kinh Các',tinh:'Tĩnh tọa',heal:'Dưỡng thương'};
 function vPlace(sc){
-  const r=G.run,n=nodeById(sc.id);const acts=placeActs(n).filter(a=>a.a!=='bq1'&&a.a!=='bq3');
-  if(n.dp)acts.push({a:'bq',i:'',l:'Bế quan',h:0,tip:'Ngồi tu luyện, tự chọn thời gian',x:'+'+numVN(bqRate())+'% tu vi mỗi năm'});
-  const by=k=>acts.find(a=>a.a===k);
-  const btn=a=>{const qa=a.a==='quyan'&&UI.confirm==='quyan';const x=(a.x?`<span class="cx">${esc(String(a.x).replace(/💎/g,'linh thạch ').replace(/✨/g,'tu vi ').replace(/🌕/g,'thành công '))}</span>`:'')+(a.h?`<span class="cx tm"${ta('Thời gian sẽ trôi qua')}>${durH(a.h)}</span>`:'');
-    return `<button class="ch${a.a==='bt'?' hl':''}${a.a==='quyan'?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':a.l)}</span>${x}</button>`;};
-  let b=`<div class="story"><p>${esc(sc.intro)}</p>${sc.msg.map(m=>`<p class="new">${esc(m)}</p>`).join('')}</div>`+chipsHTML(sc.chips);
-  const here=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);
-  const now=PNOW.map(by).filter(Boolean);
-  if(now.length||here.length){b+=`<h3 class="grp now">Trước mắt</h3><div class="choices">${here.map(e=>`<div class="ch info"><span class="cn">${e.icon||ENT_T[e.type].i}</span><span class="ct">${esc(e.name)}</span><span class="cx">${esc(ENT_T[e.type].n)} · còn ${durH(Math.max(1,e.until-W().t))}</span></div>`).join('')}${now.map(btn).join('')}</div>`;}
-  let any=false,g='';for(const [name,ks] of PGROUP){const L=ks.map(by).filter(Boolean);if(!L.length)continue;any=true;g+=`<h4 class="sgrp">${name}</h4><div class="choices">${L.map(btn).join('')}</div>`;}
-  if(any)b+=`<h3 class="grp">Thường nhật</h3>`+g;
-  const ex=by('explore');
-  const I=nodeInfo(n);
+  const r=G.run,n=nodeById(sc.id),w=W();const acts=placeActs(n).filter(a=>!['bq1','bq3','explore'].includes(a.a));
+  if(n.dp)acts.push({a:'bq',l:'Bế quan',h:0,tip:'Ngồi tu luyện, tự chọn thời gian',x:'+'+numVN(bqRate())+'% tu vi mỗi năm'});
+  const by=k=>acts.find(a=>a.a===k);let k=0;
+  const btn=a=>{const qa=a.a==='quyan'&&UI.confirm==='quyan';const x=(a.x?`<span class="cx">${esc(String(a.x).replace(/💎/g,'linh thạch ').replace(/✨/g,'tu vi ').replace(/🌕/g,'thành công '))}</span>`:'')+(a.h&&!a.dis?`<span class="cx tm"${ta('Thời gian sẽ trôi qua')}>${durH(a.h)}</span>`:'');
+    return `<button class="ch${a.a==='bt'?' hl big':PNOW.includes(a.a)?' big':''}${a.a==='quyan'||a.dis?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="cn">${++k}.</span><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':(PL_N[a.a]&&a.l.length>PL_N[a.a].length+6?PL_N[a.a]:a.l))}</span>${x}</button>`;};
+  let b=`<div class="pl-desc${UI.descHide?' hide':''}"><div class="story"><p>${esc(sc.intro)}</p></div></div>`;
+  if(sc.msg.length)b+=`<div class="story">${sc.msg.map(m=>`<p class="new">${esc(m)}</p>`).join('')}</div>`;
+  b+=chipsHTML(sc.chips);
+  const ents=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);const qs=r.quests.filter(q=>q.state==='open'&&q.node===n.id);
+  const big=PNOW.map(by).filter(Boolean);
+  if(big.length||ents.length||qs.length){b+=`<h3 class="grp big">Chuyện lớn</h3><div class="choices">${big.map(btn).join('')}
+    ${ents.map(e=>`<button class="ch big" data-act="meet" data-arg="${e.id}"${ta(ENT_T[e.type].n+' đang dừng chân ở đây.\nChạm để tới gặp. Họ sẽ rời đi sau '+durH(Math.max(1,e.until-w.t))+'.')}><span class="cn">${++k}.</span><span class="ct">Gặp ${esc(e.name)}</span><span class="cx">${esc(ENT_T[e.type].n.toLowerCase())}</span></button>`).join('')}
+    ${qs.map(q=>`<button class="ch big" data-act="questGo"${ta('Việc đã nhận ở bảng treo thưởng. Chạm để lùng tìm, tốn 2 giờ.')}><span class="cn">${++k}.</span><span class="ct">${esc(q.text)}</span><span class="cx tm">2 giờ</span></button>`).join('')}</div>`;}
+  const evs=nodeEvs(n);
+  if(evs.length){const yl=Math.max(1,Math.round((n.evs.until-w.t)/HY));b+=`<h3 class="grp now">Trước mắt<i${ta('Những chuyện này không chờ ai. Bỏ mặc lâu thì tự mất.')}>biến mất sau chừng ${yl} năm</i></h3><div class="choices">${evs.map((id,i)=>`<button class="ch now" data-act="evGo" data-arg="${i}"${ta('Chạm để dính vào chuyện này. Tốn 2 giờ.')}><span class="cn">${++k}.</span><span class="ex">!</span><span class="ct">${esc(EVMAP[id].n||'Một chuyện lạ')}</span></button>`).join('')}</div>`;}
+  let g='';for(const [name,ks] of PGROUP){const L=ks.map(by).filter(Boolean);if(!L.length)continue;g+=`<h4 class="sgrp">${name}</h4><div class="choices">${L.map(btn).join('')}</div>`;}
+  if(g)b+=`<h3 class="grp">Thường nhật</h3>`+g;
+  const canEx=n.type!=='ai';
   return card(n.name,capS(TYPE_NAME[n.type])+' · '+REG[r.region].n+' · '+DANGER[n.danger],b,{cls:'tall place',art:sceneCv(n.name,r.region,n.type,'strip'),
-    foot:(ex?`<button class="btn" data-act="pact" data-arg="explore"${ex.dis?' disabled':''}${ta(ex.tip+'\nTốn 2 giờ')}>Thăm dò</button>`:'')+`<span class="grow"></span><button class="btn" data-act="leave">Rời đi</button>`});
+    head:`<button class="pl-tg" data-act="descTg">Cảnh trí ${ic(UI.descHide?'down':'up')}</button>`,
+    foot:(canEx?`<button class="btn" data-act="exStat"${ta('Xem nơi này có gì: yêu ma, vật liệu, tỉ lệ')}>Thăm dò</button>`:'')+`<span class="grow"></span><button class="btn" data-act="leave">Rời đi</button>`});
 }
 function vPass(sc){
   const r=G.run;let b=`<div class="story"><p class="new">${esc(sc.text)}</p><p class="hint">Qua ải mất khoảng ${CROSS_M[sc.k]} tháng đường.</p></div><div class="choices">`;let k=1;
@@ -4152,13 +4229,21 @@ function modalHTML(){
      <div class="hbtns"><button data-act="bqSet" data-arg="0.25">3 tháng</button><button data-act="bqSet" data-arg="1">1 năm</button><button data-act="bqSet" data-arg="${Math.min(I.maxY,I.need)}"${I.full?' disabled':''}>Tới viên mãn</button></div>
      <p class="hint" id="bqHint">Tu vi +${numVN(Math.min(100,gain))}%${risk?' · '+risk+'% bị quấy nhiễu giữa chừng':' · yên ổn'}. Xuất quan thì khí huyết, linh lực hồi đầy.</p>
      <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="bqGo">Nhập định</button></div></div>`;}
+  if(m.k==='explore'){const n=nodeById(G.run.at);const X=exploreStats(n);const fp=Math.round(X.fp*100);
+    return `<div class="mbox"><h3>Thăm dò · ${esc(n.name)}</h3><div class="kv"><div><span>Mức nguy hiểm</span><b>${DANGER[n.danger]}</b></div><div><span>Lục soát mà đụng yêu ma</span><b>${fp}%</b></div><div><span>Gặp cơ duyên, kỳ ngộ</span><b>${100-fp}%</b></div><div><span>Lục soát lần này trong tháng</span><b>${n.exploreT===Math.floor(W().t/HM)?Math.min(3,n.explore):0} / 3</b></div></div>
+     <h4 class="sgrp">Yêu ma có thể gặp</h4>${X.foes.length?`<div class="foes">${X.foes.map(E=>`<span class="chip">${E.i} ${esc((E.nb&&E.nb[0])||(E.t&&E.t[0])||"Yêu vật")}</span>`).join('')}</div>`:'<p class="hint">Chưa nghe nói tới.</p>'}
+     <h4 class="sgrp">Có thể nhận được</h4><div class="kv">${X.mat?`<div><span>${MAT[X.mat].i} ${MAT[X.mat].n}</span><b>50% mỗi lần lục soát</b></div>`:''}<div><span>${MAT.dan.i} Yêu đan</span><b>60% khi hạ yêu thú</b></div><div><span>🥚 Trứng linh thú</span><b>${Math.round(X.egg*100)}% khi hạ yêu thú</b></div><div><span>Đan dược, pháp bảo, công pháp</span><b>tùy kỳ ngộ</b></div></div>
+     <div class="mb-f"><button class="btn" data-act="modalX">Đóng</button><button class="btn pri" data-act="exGo">Lục soát · 2 giờ</button></div></div>`;}
+  if(m.k==='laibuon'){const L=sellList();return `<div class="mbox"><h3>Lái buôn thu mua</h3><p class="hint">Giá bằng chừng nửa giá mua. Trong túi: ${stoneHTML(G.run.st)}</p><div class="rows">${L.length?L.map(x=>`<button class="row" data-act="sell" data-arg="${x.k}:${x.i}"><span class="r-i">${x.ic}</span><span class="r-t"><b>${esc(x.n)}</b><small>${esc(x.sub)}</small></span><span class="r-x">bán ${stoneHTML(x.p)}</span></button>`).join(''):'<p class="empty">Không có gì để bán.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Xong</button></div></div>`;}
+  if(m.k==='tram'){const L=stageList(nodeById(G.run.at));return `<div class="mbox"><h3>Trạm dịch</h3><p class="hint">Xe ngựa chỉ tới những thôn trấn ngươi từng đặt chân. Nhanh gấp ba đi bộ, không bị chặn đường.</p><div class="rows">${L.length?L.map(x=>`<button class="row" data-act="stage" data-arg="${x.id}"${G.run.st<x.c?' disabled':''}><span class="r-t"><b>${esc(x.n)}</b><small>${durH(x.h)} đường</small></span><span class="r-x">${stoneHTML(x.c)}</span></button>`).join(''):'<p class="empty">Chưa tới thôn trấn nào khác trong vùng.</p>'}</div><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button></div></div>`;}
+  if(m.k==='nhansu'){const n=nodeById(G.run.at);const L=sectPeople(n);return `<div class="mbox"><h3>Nhân sự · ${esc(n.name)}</h3><div class="rows">${L.length?L.map(x=>`<div class="row${x.alive?'':' dim'}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b>${esc(x.ten)}</b><small>${esc(x.tt)}</small></span><span class="r-x">${x.alive?REALM[x.realm]:'đã mất'}</span></div>`).join(''):'<p class="empty">Chưa nghe danh ai nổi bật ở đây.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='res'){return `<div class="mbox"><h3>${esc(m.title)}</h3><p>${esc(m.t)}</p>${chipsHTML(m.chips)}<div class="mb-f"><span class="grow"></span><button class="btn pri" data-act="modalX">Tiếp tục</button></div></div>`;}
   if(m.k==='clog'){const sc=G.run.scene;return `<div class="mbox"><h3>Diễn biến trận</h3><div class="logl">${(sc.log||[]).slice().reverse().map(l=>`<p class="${l.c?'lg-'+l.c:''}">${esc(l.t)}</p>`).join('')}</div><div class="mb-f"><span class="grow"></span><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
   return '';
 }
 
 // ---------- màn chiến đấu ----------
-const STI={stance:['盾','Thủ thế đỡ đòn: đứng chờ đòn, giảm khoảng 20–30% sát thương, tốn 30% thể lực'],block:['護','Hộ thể: chặn sát thương'],poison:['毒','Độc: mất khí huyết mỗi khi về mốc đầu, giảm dần'],burn:['焚','Thiêu: mất khí huyết mỗi khi về mốc đầu, giảm một nửa'],weak:['衰','Suy nhược: sát thương gây ra giảm 30%'],vuln:['破','Phá giáp: nhận thêm 30% sát thương'],rage:['怒','Cuồng nộ: mỗi tầng +12% sát thương'],regen:['春','Hồi xuân: hồi 6% khí huyết mỗi khi về mốc đầu'],evade:['影','Ảnh độn: né trọn đòn kế tiếp']};
+const STI={stance:['Thủ','Thủ thế đỡ đòn: đứng chờ đòn, giảm khoảng 20–30% sát thương, tốn 30% thể lực'],block:['Hộ','Hộ thể: chặn sát thương'],poison:['Độc','Độc: mất khí huyết mỗi khi về mốc đầu, giảm dần'],burn:['Thiêu','Thiêu: mất khí huyết mỗi khi về mốc đầu, giảm một nửa'],weak:['Suy','Suy nhược: sát thương gây ra giảm 30%'],vuln:['Phá','Phá giáp: nhận thêm 30% sát thương'],rage:['Nộ','Cuồng nộ: mỗi tầng +12% sát thương'],regen:['Hồi','Hồi xuân: hồi 6% khí huyết mỗi khi về mốc đầu'],evade:['Độn','Ảnh độn: né trọn đòn kế tiếp']};
 function stIcons(st){let o='';for(const k in STI){const v=st[k];if(v>0)o+=`<span class="si si-${k}"${ta(STI[k][1])}>${STI[k][0]}<b>${v}</b></span>`;}return o?`<div class="sts">${o}</div>`:'';}
 function unitKind(u){if(u.kind==='kiep')return 'kiep';if(u.side==='A')return 'nhan';return u.f==='nhan'?'ma':(u.f||'vat');}
 function trackHTML(sc){
@@ -4200,11 +4285,11 @@ function vCombat(sc){
       const cp=r.pills.map((p,i)=>({p,i})).filter(x=>PILL[x.p.id].w!=='bt');const m=UI.menu;
       const back='<button class="sk mback" data-act="menu" data-arg=""><span class="sn">Quay lại</span></button>';
       if(m==='atk'){h+='<div class="skills">'+btn('_atk',BASIC,1,'Đánh thường bằng chân khí\nKhông tốn linh lực');for(const id of atkSlots()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}h+=back+'</div>';}
-      else if(m==='def'){h+='<div class="skills">'+`<button class="sk" data-act="skill" data-arg="_block"${me.tl<TL_BLOCK?' disabled':''}${ta('Đỡ đòn: như tụ lực, đứng ở mốc 75 chờ đối thủ ra đòn.\nBị đánh: giảm khoảng 20–30% sát thương, tốn 30% thể lực, rồi chạy tiếp.\nĐối thủ không đánh mình: không tốn gì.')}><span class="el">盾</span><span class="sn">Đỡ đòn<small>30% thể lực</small></span></button>`;
+      else if(m==='def'){h+='<div class="skills">'+`<button class="sk" data-act="skill" data-arg="_block"${me.tl<TL_BLOCK?' disabled':''}${ta('Đỡ đòn: như tụ lực, đứng ở mốc 75 chờ đối thủ ra đòn.\nBị đánh: giảm khoảng 20–30% sát thương, tốn 30% thể lực, rồi chạy tiếp.\nĐối thủ không đánh mình: không tốn gì.')}><span class="el">Đỡ</span><span class="sn">Đỡ đòn<small>30% thể lực</small></span></button>`;
         h+=btn('_guard',GUARD_SK,1,'Vận khí thủ thế\nĐược hộ thể và hồi 30% linh lực');for(const id of defSkills()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}
-        if(!(sc.boss||sc.kiep||sc.noFlee))h+=`<button class="sk" data-act="flee"${ta('Cả đội bỏ chạy\nThành công dựa vào thân pháp')}><span class="el">走</span><span class="sn">Thoát thân</span></button>`;h+=back+'</div>';}
+        if(!(sc.boss||sc.kiep||sc.noFlee))h+=`<button class="sk" data-act="flee"${ta('Cả đội bỏ chạy\nThành công dựa vào thân pháp')}><span class="el">Chạy</span><span class="sn">Thoát thân</span></button>`;h+=back+'</div>';}
       else if(m==='bag'){h+=`<div class="skills">${cp.map(({p,i})=>`<button class="sk" data-act="cpill" data-arg="${i}"${ta(pillTip(p.id,p.q))}><span class="el">${PILL[p.id].i}</span><span class="sn">${esc(PILL[p.id].n)}</span></button>`).join('')}${back}</div>${cp.length?'':'<p class="hint">Túi không có gì dùng được trong trận.</p>'}`;}
-      else h+=`<div class="skills main4"><button class="sk" data-act="menu" data-arg="atk"><span class="el el-hoa">攻</span><span class="sn">Tấn công</span></button><button class="sk" data-act="menu" data-arg="def"><span class="el el-thuy">守</span><span class="sn">Phòng thủ</span></button><button class="sk" data-act="menu" data-arg="bag"${cp.length?'':' disabled'}><span class="el el-tho">囊</span><span class="sn">Túi đồ<small>${cp.length} món</small></span></button><button class="sk" data-act="skill" data-arg="_wait"${ta('Qua lượt: không làm gì, nhường lượt')}><span class="el">過</span><span class="sn">Qua lượt</span></button></div>`;
+      else h+=`<div class="skills main4"><button class="sk" data-act="menu" data-arg="atk"><span class="el el-hoa">Công</span><span class="sn">Tấn công</span></button><button class="sk" data-act="menu" data-arg="def"><span class="el el-thuy">Thủ</span><span class="sn">Phòng thủ</span></button><button class="sk" data-act="menu" data-arg="bag"${cp.length?'':' disabled'}><span class="el el-tho">Túi</span><span class="sn">Túi đồ<small>${cp.length} món</small></span></button><button class="sk" data-act="skill" data-arg="_wait"${ta('Qua lượt: không làm gì, nhường lượt')}><span class="el">Qua</span><span class="sn">Qua lượt</span></button></div>`;
     }
   } else h+=`<p class="hint cwait">${sc.dodge?(sc.dodge.lit?'Lôi giáng! Chạm “Đỡ” đúng lúc vòng khép lại':'Đòn đánh tới! Chạm “Né” đúng lúc vòng khép lại'):sc.qte?'Chạm đúng lúc vạch vào vùng vàng':CFG.autoFight?'Đang tự đánh…':'…'}</p>`;
   h+='</div>';
@@ -4293,7 +4378,7 @@ function chuHTML(){
   for(let i=0;i<n;i++){const a=P(i),b=P((i+1)%n);const l=v.links[i];const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;const ox=(mx-cx)*0.16,oy=(my-cy)*0.16;
     svg+=`<path d="M${a[0]} ${a[1]} Q${mx+ox} ${my+oy} ${b[0]} ${b[1]}" fill="none" stroke="${LC[l]}" stroke-width="${l?4:1.5}" ${l===-1?'stroke-dasharray="5 4"':''} opacity="${l?0.9:0.6}"/>`;
     if(l)svg+=`<text x="${mx+ox*1.9}" y="${my+oy*1.9+4}" text-anchor="middle" class="chu-l" fill="${LC[l]}">${l===1?'sinh':l===2?'đồng':'khắc'}</text>`;}
-  svg+=`<circle cx="${cx}" cy="${cy}" r="30" fill="var(--paper)" stroke="var(--seal)" stroke-width="2"/><text x="${cx}" y="${cy-2}" text-anchor="middle" class="chu-c">丹</text><text x="${cx}" y="${cy+14}" text-anchor="middle" class="chu-s">đan điền</text>`;
+  svg+=`<circle cx="${cx}" cy="${cy}" r="30" fill="var(--paper)" stroke="var(--seal)" stroke-width="2"/><text x="${cx}" y="${cy-2}" text-anchor="middle" class="chu-c">Đan</text><text x="${cx}" y="${cy+14}" text-anchor="middle" class="chu-s">đan điền</text>`;
   for(let i=0;i<n;i++){const p=P(i),it=v.it[i];svg+=`<g class="chu-n${sel===i?' sel':''}${it?' on':''}" data-act="chuSel" data-arg="${i}" transform="translate(${p[0]} ${p[1]})"><circle r="24"/>${it?`<text y="7" text-anchor="middle" class="chu-e el-${it.el}">${(EL[it.el]||EL.vo).c}</text>`:'<text y="7" text-anchor="middle" class="chu-p">＋</text>'}<text y="-29" text-anchor="middle" class="chu-i">${i+1}</text></g>`;}
   svg+='</svg>';
   let h=`<p class="hint">Linh khí chảy quanh đan điền theo chiều kim đồng hồ. Ô trước <b class="good">sinh</b> ô sau thì hệ đó mạnh lên, <b class="bad">khắc</b> thì yếu đi. Chạm một ô để đặt công pháp hoặc pháp bảo.</p>${svg}`;
@@ -4412,7 +4497,7 @@ function vTitle(){
     mid=`<div class="narr${UI.narrSkip?' skip':''}" data-act="narrSkip">${N.map((t,i)=>`<p style="animation-delay:${i*1.1}s">${esc(t)}</p>`).join('')}<p class="k" style="animation-delay:${N.length*1.1}s">Kiếp thứ ${M.nlife+1} bắt đầu.</p></div>
      <div class="t-btn" style="animation-delay:${UI.narrSkip?0:N.length*1.1+0.6}s"><button class="btn pri big" data-act="birth">Luân hồi</button><button class="btn" data-act="screen" data-arg="meta">Lên Bến Vong Xuyên · ${M.pts} điểm</button><p class="hint">Đã trải ${M.nlife} kiếp</p></div>`;}
   else mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="birth">Nhập thế</button><p class="hint">Thế gian không chờ ai. Chết rồi lại sinh, mang theo chút gì còn khắc trong chân linh.</p></div>`;
-  return `<div class="title">${sceneCv('phusinh-title'+M.nlife,Math.min(4,last?last._mr||0:0),'song','t-art')}<div class="t-seal">浮</div><h1>Phù Sinh</h1>${mid}
+  return `<div class="title">${sceneCv('phusinh-title'+M.nlife,Math.min(4,last?last._mr||0:0),'song','t-art')}<div class="t-seal">Phù</div><h1>Phù Sinh</h1>${mid}
    <div class="t-foot">${has&&M.nlife>1?`<button class="lnk" data-act="screen" data-arg="meta">Bến Vong Xuyên · ${M.pts} điểm</button>`:''}<button class="lnk" data-act="titleCfg">Cấu hình</button></div></div>`;
 }
 function vBirth(){
@@ -4474,6 +4559,7 @@ function render(){
   setH('hud',hud);setH('mapui',mapui);setH('dock',dock);setH('nav',nav);setH('sheet',sheet);setH('full',full);setH('panel',panel);setH('modal',modal);
   const sc2=G.run&&G.run.scene;UI.lastStory=sc2&&sc2.story?sc2.story.length:0;
   const hd=document.getElementById('hud');document.getElementById('app').style.setProperty('--hudh',(hd&&!hd.hidden?hd.offsetHeight:0)+'px');
+  const dl=document.getElementById('dlg');if(dl)dl.scrollTop=dl.scrollHeight;
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
@@ -4509,7 +4595,7 @@ window.addEventListener('resize',()=>{Map2.resize();Art.clear();Art.fillAll();})
 // ---------- hành động ----------
 function openBq(){const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')UI.modal={k:'bq'};}
 const ACT={
-  birth:()=>{genBirth();},
+  birth:()=>{genBirth();const c=G.birth.cards;newRun(c[Math.floor(Math.random()*c.length)]);UI.sel=null;UI.panel=null;run2();},
   born:i=>{newRun(G.birth.cards[+i]);UI.sel=null;UI.panel=null;run2();},
   resume:()=>{G.screen='map';},
   screen:a=>{UI.panel=null;UI.modal=null;if(a==='map'){G.screen=G.run?'map':'title';}else if(a==='codex'){G.screen='meta';UI.tab.meta='lives';}else{G.screen=a;}if(a==='meta'||a==='title')G.over=null;if(a==='title')UI.narrSkip=true;},
@@ -4519,7 +4605,7 @@ const ACT={
   regionGo:()=>{G.run.scene=null;Map2.center();},
   choose:i=>choose(+i),
   next:()=>endScene(),
-  pact:a=>{if(a==='bq'){UI.modal={k:'bq'};return;}if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
+  pact:a=>{if(a==='bq'){UI.modal={k:'bq'};return;}if(a==='laibuon'||a==='tram'||a==='nhansu'){UI.modal={k:a};return;}if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
   leave:()=>leavePlace(),
   pass:a=>passAct(a),
   hud:()=>{UI.hudOpen=!UI.hudOpen;},
@@ -4531,6 +4617,15 @@ const ACT={
   modalX:()=>{UI.modal=null;},
   unsel:()=>{UI.sel=null;},
   cardMin:()=>{UI.cardMin=true;},
+  cardMax:()=>{UI.cardMin=false;},
+  descTg:()=>{UI.descHide=!UI.descHide;},
+  exStat:()=>{UI.modal={k:'explore'};},
+  exGo:()=>{UI.modal=null;placeAct('explore');},
+  evGo:i=>{const r=G.run,n=nodeById(r.scene.id);const id=n.evs&&n.evs.L[+i];if(!id)return;n.evs.L.splice(+i,1);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place')startEvent(id);},
+  meet:id=>{const r=G.run,at=r.at;const e=W().ents.find(x=>String(x.id)===id);if(!e)return;meetEnt(e);if(G.run&&G.run.scene&&G.run.scene.type==='event')G.run.scene.back=at;else note('Họ lướt qua, chẳng để ý tới ngươi.');},
+  questGo:()=>{const n=nodeById(G.run.at);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place'&&!questExplore(n))note('Chưa thấy tung tích gì.');},
+  sell:a=>{const [k,i]=a.split(':');sellItem(k,+i);},
+  stage:id=>{UI.modal=null;stageGo(+id);},
   go:id=>{const n=nodeById(+id);if(CFG.confirmDanger&&nodeDanger(n)>=3&&n.id!==G.run.at){UI.modal={k:'danger',id:n.id};return;}ACT.goSure(id);},
   goSure:id=>{UI.modal=null;if(travelTo(+id)){UI.paused=false;UI.cardMin=true;Map2.cam.follow=true;}},
   enter:()=>{openPlace(G.run.at);},
