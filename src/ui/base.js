@@ -9,7 +9,7 @@ const UI={panel:null,tab:{},sel:null,cardMin:false,hudOpen:true,modal:null,confi
 // ---------- cấu hình (lưu riêng theo từng máy) ----------
 const CFG_KEY='phusinh_cfg_v1';
 const CFG_DEF={gfx:'auto',fps:30,dpr:0,fx:true,clouds:true,daynight:true,anim:true,showFps:false,
-  names:true,roads:true,ents:true,ring:true,notes:true,terrain:true,
+  names:true,roads:true,grid:true,ents:true,ring:true,notes:true,terrain:true,
   font:'m',theme:'light',cspeed:1,autoFight:false,confirmDanger:true,clockIdle:true};
 let CFG=Object.assign({},CFG_DEF);
 function cfgLoad(){try{const o=JSON.parse(localStorage.getItem(CFG_KEY)||'null');if(o)CFG=Object.assign({},CFG_DEF,o);else{try{const t=localStorage.getItem('phusinh_theme');if(t)CFG.theme=t;}catch(e){}}}catch(e){}cfgApply();}
@@ -49,6 +49,7 @@ const ICP={
   moon:'M20 14A8 8 0 019 4a8 8 0 1011 10z',
   hour:'M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9',
   bag:'M6 8h12l1 12H5L6 8zM9 8V6a3 3 0 016 0v2',
+  hex:'M12 2l8.7 5v10L12 22l-8.7-5V7z',
   ring:'M12 3a9 9 0 100 18 9 9 0 000-18zM12 7a5 5 0 100 10 5 5 0 000-10z',
   home:'M4 11l8-7 8 7M6 10v10h12V10',
   trash:'M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13',

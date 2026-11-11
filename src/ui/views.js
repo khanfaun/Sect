@@ -32,12 +32,22 @@ function statusList(){const r=G.run,s=S(),w=W();const L=[];
   for(const q of r.quests)if(q.state==='open')L.push(['','Việc: '+q.text,'Còn '+durH(Math.max(0,q.due-w.t))]);
   if(canBreak())L.push(['good','Tu vi viên mãn','Tới nơi có động phủ để đột phá.']);
   return L;}
+const WICON={ngoai:'M5 19L19 5M8 8l3 3M13 13l3 3',bong:'M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z',gay:'M6 6l12 12M4 6a2 2 0 114 0 2 2 0 11-4 0M16 18a2 2 0 114 0 2 2 0 11-4 0M11 9l-2 2M15 13l-2 2',
+  noi:'M12 20s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.5-7 10-7 10zM12 8l-2 4h4l-2 4',than:'M12 4a8 8 0 100 16 8 8 0 000-16zM12 8a4 4 0 104 4M12 12h.01',doc:'M12 3s6 7 6 11a6 6 0 01-12 0c0-4 6-11 6-11zM10 14h.01M14 14h.01',
+  nguy:'M12 4v10M12 18v.5',mu:'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM4 4l16 16',cut:'M6 4v8a4 4 0 004 4h2M14 16l5 5M19 16l-5 5',que:'M9 4v9l-3 7M9 13h5l3 7M4 20h16',
+  ma:'M6 12a6 6 0 1112 0v3l-2 1v3H8v-3l-2-1zM9.5 12.5h.01M14.5 12.5h.01',tho:'M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9',truy:'M14 4h6v6L9 21l-2-2-3 1 1-3-2-2L14 4z'};
+function durShort(h){if(h<HD)return Math.max(1,Math.round(h))+' giờ';if(h<HM)return Math.round(h/HD)+' ngày';if(h<HY)return Math.round(h/HM)+' th';return numVN(h/HY)+' năm';}
+function woundBar(){const r=G.run,s=S(),w=W();const L=[];
+  for(const x of wounds()){const D=WOUND[x.k];L.push({k:x.k,t:x.perm?'∞':x.k==='nguy'?durShort(Math.max(1,x.dl-w.t)):durShort(Math.max(1,x.until-w.t)),tip:D.n+'\n'+D.d+'\n'+woundText(x)+(x.perm||x.k==='doc'?'':'\nĐang mang thương: thua trận nữa là chết.'),cls:x.k==='nguy'?'crit':x.perm?'perm':''});}
+  if(r.tamma>=60)L.push({k:'ma',t:r.tamma+'/100',tip:'Tâm ma dày\nĐủ 100 sẽ phải đối mặt với chính mình. Tĩnh tọa, dưỡng thương, bế quan để giảm.',cls:''});
+  if(s.life-r.age<s.life*0.12)L.push({k:'tho',t:durShort(Math.max(0,s.life-r.age)*HY),tip:'Thọ nguyên sắp cạn\nĐột phá để sống lâu hơn.',cls:'crit'});
+  if(entsHere(r.region).some(e=>e.type==='truysat'))L.push({k:'truy',t:'',tip:'Bị truy đuổi\nCó kẻ đang lần theo dấu ngươi.',cls:''});
+  return L.map(x=>`<div class="wi ${x.cls}"${ta(x.tip)}><svg viewBox="0 0 24 24"><path d="${WICON[x.k]}"/></svg><small>${x.t}</small></div>`).join('');}
 function mapUiHTML(){
-  const r=G.run;const sp=UI.speed||1;const L=statusList();const bad=L.filter(x=>x[0]==='bad').length;
+  const r=G.run;const sp=UI.speed||1;
   const B=(act,arg,lab,tip,on,dis)=>`<button class="mb${on?' on':''}" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}${dis?' disabled':''}${ta(tip)}>${lab}</button>`;
-  let h=`<div class="mleft"><button class="mb" data-act="status"${ta('Tình trạng')}>${ic('info')}${bad?`<i class="dot">${bad}</i>`:L.length?'<i class="dot soft"></i>':''}</button></div>`;
-  if(UI.status)h+=`<div class="stat-pop"><header><b>Tình trạng</b><button class="xb" data-act="status">${ic('left')}</button></header>${L.length?L.map(x=>`<div class="sl ${x[0]}"><b>${esc(x[1])}</b><small>${esc(x[2])}</small></div>`).join(''):'<p class="hint">Không có gì đáng lo.</p>'}</div>`;
-  h+=`<div class="mright">${B('zoom',1,ic('plus'),'Phóng to')}${B('zoom',-1,ic('minus'),'Thu nhỏ')}${B('center',null,ic('target'),'Về chỗ ngươi')}</div>`;
+  let h=`<div class="mleft wb">${woundBar()}</div>`;
+  h+=`<div class="mright">${B('zoom',1,ic('plus'),'Phóng to')}${B('zoom',-1,ic('minus'),'Thu nhỏ')}${B('center',null,ic('target'),'Về chỗ ngươi')}${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}</div>`;
   h+=`<div class="mtime">${B('speed',0,ic(UI.paused?'play':'pause'),UI.paused?'Cho thời gian chạy tiếp':'Tạm dừng thời gian',UI.paused)}${B('speed',1,'×1','1 giây = 1 giờ',!UI.paused&&sp===1)}${B('speed',12,'×12','Chờ nhanh',!UI.paused&&sp===12)}${B('wait','sang',ic('sun'),'Chờ tới sáng',0,!!r.moving)}${B('wait','toi',ic('moon'),'Chờ tới tối',0,!!r.moving)}</div>`;
   return h;
 }
@@ -49,6 +59,8 @@ function dockHTML(){
   const r=G.run;const cur=curNode();
   if(r.scene&&UI.evMin){const e=EVMAP[r.scene.id];return `<div class="dock loc"><span class="lc-n">Đang dở: ${esc(e&&e.n||'một chuyện')}</span><button class="btn pri" data-act="evBack">Quay lại</button></div>`;}
   if(r.dest!=null&&!r.moving&&r.dest!==r.at){const d=nodeById(r.dest);return `<div class="dock go"><div class="dk-t"><small>Bị cản giữa đường</small><b>${esc(d.name)}</b></div><button class="btn pri" data-act="goSure" data-arg="${d.id}">Đi tiếp</button><button class="btn" data-act="destX">Thôi</button></div>`;}
+  if(r.moving&&r.halt){const m=r.moving;const dest=nodeById(m.path[m.path.length-1]),from=nodeById(m.path[m.seg]);const I=hexInfo(hexAt(...playerMapXY()));
+    return `<div class="dock card"><div class="nc-h"><b>Dừng chân giữa đường</b><small>${esc(I.ter)} · ${esc(I.dist)}</small></div><p class="nc-d">Đang trên đường tới ${esc(dest.name)}. Thời gian vẫn trôi.</p><div class="nc-b"><button class="btn pri" data-act="goOn">Đi tiếp</button><button class="btn" data-act="turnBack">Quay lại ${esc(from.name)}</button></div></div>`;}
   if(r.moving){const m=r.moving;const dest=nodeById(m.path[m.path.length-1]);let L=0;for(let i=m.seg;i<m.path.length-1;i++)L+=edgeLen(m.path[i],m.path[i+1])*(i===m.seg?1-m.prog:1);
     return `<div class="dock go"><div class="dk-t"><small>Đang trên đường tới</small><b>${esc(dest.name)}</b><small id="mvLeft">còn ${Math.round(L)} dặm</small></div><button class="btn" data-act="stop">Dừng lại</button></div>`;}
   const n=UI.sel!=null&&nodeById(UI.sel);
@@ -60,10 +72,11 @@ function dockHTML(){
     if(!here){const p=findPath(r.at,n.id);if(p){const Ln=Math.round(pathLen(p));mid=`<p class="nc-d">~${Ln} dặm · ${durH(travelHours(p))} đường (${moveText()})</p>`;}else mid='<p class="nc-d">Chưa biết đường tới.</p>';}
     const nt=noteOf(n.id);
     return `<div class="dock card"><div class="nc-h"><b>${esc(n.name+(I.sure?'':'?'))}</b><small>${esc(I.info)}</small></div>
-      <p class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${DTAG[dg]}${n.fog>=2||n.memory?'':'?'}${I.tags.length?' · '+esc(I.tags.join(' · ')):''}</p>${I.sure?`<p class="nc-d">Linh khí: ${LK_N[lkOf(n)]}</p>`:''}${mid}
+      <p class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${DTAG[dg]}${n.fog>=2||n.memory?'':'?'}${I.tags.length?' · '+esc(I.tags.join(' · ')):''}</p>${I.sure?`<p class="nc-d">${esc(hexInfo(nodeHex(n)).dist)} · linh khí ${LK_N[lkOf(n)].toLowerCase()}</p>`:''}${mid}
       ${nt?`<p class="nc-n">${ic('pin')} ${esc(nt)}</p>`:''}
       <div class="nc-b">${here?`<button class="btn pri" data-act="enter">${ENTER_L[n.type]||'Vào'}</button>`:`<button class="btn pri" data-act="go" data-arg="${n.id}"${findPath(r.at,n.id)?'':' disabled'}>Đi tới</button>`}
       <button class="btn" data-act="noteEdit" data-arg="${n.id}"${ta('Ghim một ghi chú lên điểm này')}>Ghi chú</button><button class="btn" data-act="cardMin">Gọn</button><button class="btn" data-act="unsel">Đóng</button></div></div>`;}
+  if(UI.cell!=null){const I=hexInfo(UI.cell);return `<div class="dock card"><div class="nc-h"><b>${I.sea?'Biển khơi':I.ter}</b><small>ô trống</small></div><p class="nc-d">${esc(I.regName)}${I.dist?' › '+esc(I.dist):''}</p><p class="nc-d">${I.sea?'Không có đường bộ. Đi ngang qua tốn gấp sáu lần đồng bằng.':'Không có địa điểm nào ở ô này. Đi ngang qua tốn '+numVN(TER_COST[geo().ter[UI.cell]])+' lần đồng bằng.'}</p><div class="nc-b"><button class="btn" data-act="unsel">Đóng</button></div></div>`;}
   return `<div class="dock loc"><span class="lc-n">${esc(cur.name)}</span><button class="btn pri" data-act="enter">${ENTER_L[cur.type]||'Vào'}</button></div>`;
 }
 function navHTML(){

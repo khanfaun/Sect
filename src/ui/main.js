@@ -35,7 +35,10 @@ function render(){
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
-function mapTap(n){const r=G.run;if(!r||r.scene)return;if(UI.status){UI.status=false;}UI.sel=n?n.id:null;UI.cardMin=false;render();}
+function mapTap(n,c){const r=G.run;if(!r||r.scene)return;UI.sel=n?n.id:null;UI.cell=n||c==null?null:(UI.cell===c?null:c);UI.cardMin=false;render();}
+function hexTip(c,x,y){const tip=$('#tip');const n=hexNode(c);const I=hexInfo(c);const shown=n&&!((CFG.hideT||{})[n.type]&&n.id!==G.run.at);
+  tip.textContent=(shown?n.name+(n.fog>=2||n.memory?'':'?')+' · '+TYPE_NAME[n.type]+'\n'+DTAG[dangerTag(n)]:I.sea?'Biển khơi':I.ter)+'\n'+I.regName+(I.dist?' › '+I.dist:'');tip.hidden=false;tipEl=null;
+  const tw=tip.offsetWidth,th=tip.offsetHeight;tip.style.left=Math.max(8,Math.min(window.innerWidth-tw-8,x+14))+'px';tip.style.top=Math.max(8,y-th-12)+'px';}
 
 // ---------- đồng hồ và vòng lặp khung hình ----------
 function clockOn(){const r=G.run;return G.screen==='map'&&r&&!r.scene&&!UI.panel&&!UI.modal&&!UI.paused&&!document.hidden&&(CFG.clockIdle||!!r.moving);}
@@ -48,11 +51,11 @@ function loop(now){
   else if(clockOn()){
     try{
       const sp=UI.speed||1;let redraw=false;
-      if(r.moving){const m=r.moving;const segH=m.seg<m.path.length-1?edgeLen(m.path[m.seg],m.path[m.seg+1])/walkSpeed():24;
-        travelTick(Math.max(6,segH/2.2)*(sp>1?3:1)*dt);redraw=true;Map2.invalidate();}
+      if(r.moving&&!r.halt){const m=r.moving;const segH=m.seg<m.path.length-1?edgeLen(m.path[m.seg],m.path[m.seg+1])/walkSpeed():24;
+        const nc=m.seg<m.path.length-1?hexPath(nodeHex(nodeById(m.path[m.seg])),nodeHex(nodeById(m.path[m.seg+1]))).cells.length:2;travelTick(Math.max(6,segH/Math.max(2,0.4*nc))*(sp>1?3:1)*dt);redraw=true;Map2.invalidate();}
       else clkAcc+=dt;
       if(now-clkFlush>=250||!G.run||G.run.scene){clkFlush=now;
-        if(G.run&&!G.run.moving&&!G.run.scene&&clkAcc>0){advanceTime(clkAcc*sp);if(G.run)autoCheck();}
+        if(G.run&&(!G.run.moving||G.run.halt)&&!G.run.scene&&clkAcc>0){advanceTime(clkAcc*sp);if(G.run)autoCheck();}
         clkAcc=0;
         if(!G.run||G.run.scene||G.screen!=='map'){UI.evMin=false;after();}
         else{const t=W().t;const d=Math.floor(t/HD),p=partOf(t);if(d!==clkDay||p!==clkPart||redraw||(G.toasts&&G.toasts.length)){clkDay=d;clkPart=p;render();}else clockText();Map2.invalidate();}
@@ -98,7 +101,8 @@ const ACT={
   panel:k=>{UI.panel=UI.panel===k?null:k;UI.code=null;UI.msg=null;UI.confirm=null;UI.chuSel=null;},
   closePanel:()=>{UI.panel=null;UI.code=null;UI.msg=null;},
   modalX:()=>{const m=UI.modal;UI.modal=null;G.bqRoom=false;if(m&&m.k==='bq'&&UI.bqOpened&&G.run&&G.run.scene&&G.run.scene.type==='place'){G.run.scene=null;}UI.bqOpened=false;},
-  unsel:()=>{UI.sel=null;},
+  unsel:()=>{UI.sel=null;UI.cell=null;},
+  gridT:()=>{cfgSet('grid',!CFG.grid);},
   cardMin:()=>{UI.cardMin=true;},
   cardMax:()=>{UI.cardMin=false;},
   descTg:()=>{UI.descHide=!UI.descHide;},
@@ -110,9 +114,11 @@ const ACT={
   sell:a=>{const [k,i]=a.split(':');sellItem(k,+i);},
   stage:id=>{UI.modal=null;stageGo(+id);},
   go:id=>{const n=nodeById(+id);if(CFG.confirmDanger&&dangerTag(n)>=3&&n.id!==G.run.at){UI.modal={k:'danger',id:n.id};return;}ACT.goSure(id);},
-  goSure:id=>{UI.modal=null;if(travelTo(+id)){G.run.dest=+id;UI.paused=false;UI.cardMin=true;Map2.cam.follow=true;}},
+  goSure:id=>{UI.modal=null;G.run.halt=false;if(travelTo(+id)){G.run.dest=+id;UI.paused=false;UI.cardMin=true;Map2.cam.follow=true;}},
   enter:()=>{G.run.dest=null;openPlace(G.run.at);},
-  stop:()=>{stopTravel();if(G.run)G.run.dest=null;},
+  stop:()=>{const r=G.run;if(r.moving){r.halt=true;snapStop();}},
+  goOn:()=>{G.run.halt=false;UI.paused=false;},
+  turnBack:()=>{const r=G.run,m=r.moving;if(!m)return;r.halt=false;const a=m.path[m.seg];if(travelTo(a))r.dest=a;},
   speed:v=>{v=+v;if(!v)UI.paused=!UI.paused;else{UI.paused=false;UI.speed=v;}},
   wait:k=>{const t0=W().t;const h=t0%HD;const tgt=k==='sang'?7:19;let d=tgt-h;if(d<0.5)d+=24;advanceTime(d);if(!G.run)return;const t=W().t;G.meta.world.t=Math.floor(t/HD)*HD+tgt+(Math.floor(t/HD)*HD+tgt<t0?HD:0);autoCheck();note('Chờ '+Math.round(d)+' giờ. Nay là giờ '+gioName(W().t)+', buổi '+PART[partOf(W().t)].n+'.');},
   zoom:d=>{Map2.zoom(+d>0?1.4:1/1.4);},
@@ -223,7 +229,7 @@ function migrate(d){
 function loadData(d){d=migrate(d);G={meta:d.meta,run:d.run||null,over:d.over||null,birth:d.birth||null,screen:d.screen||'title'};
   if((G.screen==='map'||G.screen==='run')&&!G.run)G.screen='title';if(G.screen==='run')G.screen='map';if(G.screen==='codex')G.screen='meta';if(G.screen==='over'&&!G.over)G.screen='title';if(G.screen==='birth'&&!G.birth)G.screen='title';
   if(!G.meta.world)G.meta.world=genWorld();
-  extendWorld(G.meta.world);if(G.run)run2();syncDodge();
+  extendWorld(G.meta.world);snapWorld(G.meta.world);if(G.run)run2();syncDodge();
   const sc=G.run&&G.run.scene;if(sc&&sc.type==='combat'){if(sc.dodge)dodgeResolve(null);if(sc.qte)qteResolve(null);}}
 let DB=null,dbBusy=false,dbPending=false,dbTimer=null;
 saveSoon=function(){

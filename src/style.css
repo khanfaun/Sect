@@ -177,3 +177,9 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .lgi{width:1.5em;height:1.5em;border-radius:3px;flex:none;fill:none;stroke:#fbf7ea;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;padding:2px}.lge{width:1.5em;text-align:center}
 .dock.go .btn{flex:none}
 .cb-warn{color:var(--seal);font-weight:700;border-left:3px solid var(--seal);padding:.2em .7em;background:var(--paper2);margin:.3em 0}
+
+.wb{display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 64px)}
+.wi{width:40px;display:flex;flex-direction:column;align-items:center;gap:1px;cursor:help}
+.wi svg{width:40px;height:40px;padding:8px;background:var(--paper);border:1px solid var(--seal);border-radius:3px;box-shadow:var(--sh);fill:none;stroke:var(--seal);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.wi.crit svg{background:var(--seal);stroke:#fbf7ea}.wi.perm svg{border-color:var(--vio);stroke:var(--vio)}
+.wi small{font-size:.66em;line-height:1.1;font-weight:700;color:var(--ink);background:color-mix(in srgb,var(--paper) 85%,transparent);padding:0 3px;border-radius:2px;white-space:nowrap}
