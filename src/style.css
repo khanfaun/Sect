@@ -176,3 +176,4 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .cb{width:18px;height:18px;min-width:18px;border:1.5px solid var(--ink2);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;flex:none;font-style:normal;line-height:0;background:var(--paper)}.cb .ic{width:13px;height:13px;color:var(--acc);stroke-width:3.2;vertical-align:0}
 .lgi{width:1.5em;height:1.5em;border-radius:3px;flex:none;fill:none;stroke:#fbf7ea;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;padding:2px}.lge{width:1.5em;text-align:center}
 .dock.go .btn{flex:none}
+.cb-warn{color:var(--seal);font-weight:700;border-left:3px solid var(--seal);padding:.2em .7em;background:var(--paper2);margin:.3em 0}

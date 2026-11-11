@@ -4,7 +4,7 @@ function hudHTML(){
   const r=G.run,s=S(),t=W().t;const left=s.life-r.age;const warn=left<s.life*0.12;const pa=PART[partOf(t)];
   const row=(n,cur,max,cls,txt,tip)=>`<div class="hrow"${ta(tip)}><span class="hn">${n}</span>${bar(cur,max,cls)}<span class="hv">${txt}</span></div>`;
   const n=curNode();const atDp=n&&n.dp&&!r.moving;const brk=canBreak();const bqNo=bqCan();
-  const hurt=r.hp<s.maxHp*0.35?' · <b class="bad">Trọng thương</b>':'';
+  const hurt=injured()?' · <b class="bad">Bị thương</b>':r.hp<s.maxHp*0.35?' · <b class="bad">Khí huyết cạn</b>':'';
   let h=`<div class="hud-top" data-act="hud"><div class="hud-date"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)]+'\nNgày '+(Math.floor((t%HM)/HD)+1)+' trong tháng')}><small>Năm</small><b id="clkY">${tYear(t)}</b><small id="clkM">Tháng ${MONTH[tMonth(t)]}</small></div>
    <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small><span id="clkH">Giờ ${gioName(t)}</span> · ${sectText()}${UI.paused?' · <i>đang dừng</i>':''}</small></div>
    <span class="hud-tg">${ic(UI.hudOpen?'up':'down')}</span></div>`;
@@ -21,7 +21,8 @@ function hudHTML(){
   return h;
 }
 function statusList(){const r=G.run,s=S(),w=W();const L=[];
-  if(r.hp<s.maxHp*0.35)L.push(['bad','Trọng thương','Khí huyết dưới 35%. Thua trận là chết.']);
+  if(injured())L.push(['bad','Bị thương','Còn chừng '+durH(r.inj.until-w.t)+' mới tự lành. Công, thủ giảm 20%. Thua trận nữa là chết.\nDưỡng thương ở động phủ hoặc mời y sư ở phường thị thì lành ngay.']);
+  if(r.hp<s.maxHp*0.35)L.push(['bad','Khí huyết cạn','Khí huyết dưới 35%. Nghỉ ngơi hoặc dùng đan.']);
   if(r.tamma>=60)L.push(['bad','Tâm ma dày','Tâm ma '+r.tamma+'/100. Tĩnh tọa hoặc dưỡng thương để giảm.']);
   if(s.life-r.age<s.life*0.12)L.push(['bad','Thọ nguyên sắp cạn','Còn chừng '+Math.max(0,Math.floor(s.life-r.age))+' năm.']);
   if(entsHere(r.region).some(e=>e.type==='truysat'))L.push(['bad','Bị truy đuổi','Có kẻ đang lần theo dấu ngươi.']);
@@ -95,6 +96,7 @@ function foeLine(en){return `<div class="foe-l"><span class="foe-i">${en.i}</spa
 function vEnc(sc){
   const r=G.run,en=sc.en;let b=foeLine(en)+`<div class="story"><p class="new">${esc(sc.text)}</p>${sc.res?`<p class="new">${esc(sc.res)}</p>`:''}</div>`;
   if(sc.done)return card(sc.elite?'Hung địa':'Chạm trán',r.place.n,b+chipsHTML(sc.paid?[chip('💎','−'+sc.paid,'Linh thạch','dn')]:[]),{foot:goBtn('next','Tiếp tục')});
+  if(injured())b+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   const p=Math.round(encSneak(sc)*100);const pay=Math.round(12*SC[r.region]);
   b+=`<div class="choices">${choiceBtn('1.','enc','fight','Xuất thủ','<span class="cx">giao chiến</span>')}${choiceBtn('2.','enc','sneak','Lẩn tránh',`<span class="cx chk"${ta('Dựa vào thân pháp\nThất bại thì vẫn phải đánh')}>thân pháp ${p}%</span>`)}`;
   if(en.f==='nhan'&&!sc.elite)b+=choiceBtn('3.','enc','pay','Nộp tiền mãi lộ',`<span class="cx">${stoneHTML(pay)}</span>`,{dis:r.st<pay});

@@ -29,6 +29,7 @@ function vCombat(sc){
    <div class="cb-ally">${al.map(u=>unitCard(sc,u,false)).join('')}</div>`;
   const lg=sc.log.slice(-3);
   h+=`<div class="clog" data-act="clog"${ta('Chạm để xem toàn bộ diễn biến')}>${lg.map((l,i)=>`<p class="${l.c?'lg-'+l.c:''} ${i<lg.length-1?'old':''}">${esc(l.t)}</p>`).join('')}</div>`;
+  if(!sc.done&&injured()&&!sc.spar&&!sc.kiep)h+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   if(sc.done){
     const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong lôi kiếp':'Ngươi đã ngã xuống'}[sc.over];
     return h+`<div class="cb-end ${sc.over}"><b>${t}</b>${goBtn('cont','Tiếp tục')}</div></section>`;
@@ -43,7 +44,7 @@ function vCombat(sc){
       if(m==='atk'){h+='<div class="skills">'+btn('_atk',BASIC,1,'Đánh thường bằng chân khí\nKhông tốn linh lực');for(const id of atkSlots()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}h+=back+'</div>';}
       else if(m==='def'){h+='<div class="skills">'+`<button class="sk" data-act="skill" data-arg="_block"${me.tl<TL_BLOCK?' disabled':''}${ta('Đỡ đòn: như tụ lực, đứng ở mốc 75 chờ đối thủ ra đòn.\nBị đánh: giảm khoảng 20–30% sát thương, tốn 30% thể lực, rồi chạy tiếp.\nĐối thủ không đánh mình: không tốn gì.')}><span class="el">Đỡ</span><span class="sn">Đỡ đòn<small>30% thể lực</small></span></button>`;
         h+=btn('_guard',GUARD_SK,1,'Vận khí thủ thế\nĐược hộ thể và hồi 30% linh lực');for(const id of defSkills()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}
-        if(!(sc.boss||sc.kiep||sc.noFlee))h+=`<button class="sk" data-act="flee"${ta('Cả đội bỏ chạy\nThành công dựa vào thân pháp')}><span class="el">Chạy</span><span class="sn">Thoát thân</span></button>`;h+=back+'</div>';}
+        if(!(sc.boss||sc.kiep||sc.noFlee))h+=`<button class="sk" data-act="flee"${ta('Cả đội bỏ chạy\nThành công dựa vào thân pháp')}><span class="el">Chạy</span><span class="sn">Thoát thân</span></button>`;if(!(sc.kiep||sc.spar||sc.en.n==='Tâm Ma'))h+=`<button class="sk" data-act="yield"${injured()?' disabled':''}${ta(injured()?'Đang mang thương, đối phương không tha: nhận thua cũng chết.':'Buông tay chịu thua.\nNgươi sẽ bị thương vài tháng và bị đối phương lục lấy một phần linh thạch, vài món đồ.')}><span class="el">Thua</span><span class="sn">Nhận thua</span></button>`;h+=back+'</div>';}
       else if(m==='bag'){h+=`<div class="skills">${cp.map(({p,i})=>`<button class="sk" data-act="cpill" data-arg="${i}"${ta(pillTip(p.id,p.q))}><span class="el">${PILL[p.id].i}</span><span class="sn">${esc(PILL[p.id].n)}</span></button>`).join('')}${back}</div>${cp.length?'':'<p class="hint">Túi không có gì dùng được trong trận.</p>'}`;}
       else h+=`<div class="skills main4"><button class="sk" data-act="menu" data-arg="atk"><span class="el el-hoa">Công</span><span class="sn">Tấn công</span></button><button class="sk" data-act="menu" data-arg="def"><span class="el el-thuy">Thủ</span><span class="sn">Phòng thủ</span></button><button class="sk" data-act="menu" data-arg="bag"${cp.length?'':' disabled'}><span class="el el-tho">Túi</span><span class="sn">Túi đồ<small>${cp.length} món</small></span></button><button class="sk" data-act="skill" data-arg="_wait"${ta('Qua lượt: không làm gì, nhường lượt')}><span class="el">Qua</span><span class="sn">Qua lượt</span></button></div>`;
     }

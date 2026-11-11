@@ -140,6 +140,7 @@ const ACT={
   clog:()=>{UI.modal={k:'clog'};},
   cpill:i=>{UI.menu=null;playerPillAct(+i);},
   flee:()=>{UI.menu=null;playerFlee();},
+  yield:()=>{UI.menu=null;playerYield();},
   cont:()=>{UI.menu=null;UI.pendSk=null;combatContinue();},
   pick:i=>takePick(+i),
   rcont:()=>rewardContinue(),

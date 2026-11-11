@@ -184,6 +184,7 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .cb{width:18px;height:18px;min-width:18px;border:1.5px solid var(--ink2);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;flex:none;font-style:normal;line-height:0;background:var(--paper)}.cb .ic{width:13px;height:13px;color:var(--acc);stroke-width:3.2;vertical-align:0}
 .lgi{width:1.5em;height:1.5em;border-radius:3px;flex:none;fill:none;stroke:#fbf7ea;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;padding:2px}.lge{width:1.5em;text-align:center}
 .dock.go .btn{flex:none}
+.cb-warn{color:var(--seal);font-weight:700;border-left:3px solid var(--seal);padding:.2em .7em;background:var(--paper2);margin:.3em 0}
 
 </style>
 </head>
@@ -3835,6 +3836,32 @@ function townStats(n){const r=G.run,g=r.region,L=[],M=[];const q=g>=2?2:g>=1?1:0
   const evs=EVS.filter(e=>!e.spec&&(e.src||'explore')==='explore'&&e.tg&&e.tg.includes(tAs(n.type))&&(!e.r||e.r.includes(g))).slice(0,8).map(e=>e.n).filter(Boolean);
   return {L,M,evs};}
 
+// ================= THƯƠNG THẾ =================
+// Thua hoặc nhận thua: bị thương, bị lục đồ. Đang bị thương mà thua nữa: chết. Để vài tháng tới một năm thì tự lành.
+function injured(){const r=G.run;return !!(r&&r.inj&&r.inj.until>W().t);}
+function injHeal(msg){const r=G.run;if(r&&r.inj){r.inj=null;clampHp();if(msg)note(msg,'up');}}
+function lootPlayer(sc){const r=G.run;const out=[];const E=EN[sc.en.k];const human=!E||E.f==='nhan'||sc.boss;
+  if(r.st>0){const d=Math.max(1,Math.round(r.st*(0.2+R()*0.2)));r.st-=d;out.push(d+' linh thạch');}
+  if(human){const n=ri(1,2);for(let i=0;i<n;i++){const pool=[];r.relics.forEach((x,j)=>{if(!x.u)pool.push(['r',j]);});r.pills.forEach((x,j)=>pool.push(['p',j]));if(!pool.length)break;const [k,j]=pick(pool);
+      if(k==='r'){const x=r.relics.splice(j,1)[0];out.push(x.name);const c=run2().chu;for(let q=0;q<8;q++)if(c[q]&&c[q].k==='r'&&c[q].n===x.name)c[q]=null;}else{const x=r.pills.splice(j,1)[0];out.push(PILL[x.id].n);}}}
+  return out;}
+function playerYield(){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||sc.kiep||sc.spar||sc.en.n==='Tâm Ma'||injured())return false;
+  runAct(sc,()=>{sc.over='lose';sc.beaten=2;clog(sc,'Ngươi buông tay, nhận thua.','me');finishCombat(sc);});return true;}
+{const _ce=checkEnd;checkEnd=function(sc){
+  if(!sc.over&&!sc.spar&&!sc.kiep&&sc.en&&sc.en.n!=='Tâm Ma'){const me=mainUnit(sc);
+    if(me.hp<=0&&!injured()&&!(U('hoi')&&!G.run.revived)){me.hp=1;sc.over='lose';sc.beaten=1;clog(sc,'Ngươi gục xuống, không còn sức đánh trả.','en');finishCombat(sc);return;}}
+  _ce(sc);};}
+{const _fc2=finishCombat;finishCombat=function(sc){_fc2(sc);const r=G.run;if(!r||!sc.beaten||sc.looted)return;sc.looted=1;
+  const mo=sc.beaten===2?ri(2,5):ri(4,12);r.inj={until:W().t+mo*HM};clampHp();
+  const L=lootPlayer(sc);
+  clog(sc,`Ngươi bị thương, chừng ${mo} tháng mới lành. Chưa lành mà thua nữa là chết.`,'en');
+  if(L.length)clog(sc,`${sc.en.n} lục soát người ngươi, lấy đi: ${L.join(', ')}.`,'en');
+  log(`Thua ${sc.en.n}, bị thương`+(L.length?', mất '+L.join(', '):'')+'.');};}
+{const _agg2=aggFx;aggFx=function(){const fx=_agg2();if(injured()){fx.atkP=(fx.atkP||0)-20;fx.defP=(fx.defP||0)-20;fx.matkP=(fx.matkP||0)-20;}return fx;};}
+{const _ac2=autoCheck;autoCheck=function(){const r=G.run;if(r&&r.inj&&r.inj.until<=W().t)injHeal('Thương thế đã lành hẳn.');_ac2();};}
+{const _pa4=placeAct;placeAct=function(a){const was=injured();_pa4(a);if(was&&a==='heal'&&G.run)injHeal('Một tháng tĩnh dưỡng, thương thế đã lành.');};}
+{const _hb=healBuy;healBuy=function(){const r=G.run;const st=r.st;_hb();if(G.run&&G.run.st<st&&injured())injHeal('Y sư bó thuốc, nắn xương. Thương thế đã lành.');};}
+
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
 const $=s=>document.querySelector(s);
@@ -4196,7 +4223,7 @@ function hudHTML(){
   const r=G.run,s=S(),t=W().t;const left=s.life-r.age;const warn=left<s.life*0.12;const pa=PART[partOf(t)];
   const row=(n,cur,max,cls,txt,tip)=>`<div class="hrow"${ta(tip)}><span class="hn">${n}</span>${bar(cur,max,cls)}<span class="hv">${txt}</span></div>`;
   const n=curNode();const atDp=n&&n.dp&&!r.moving;const brk=canBreak();const bqNo=bqCan();
-  const hurt=r.hp<s.maxHp*0.35?' · <b class="bad">Trọng thương</b>':'';
+  const hurt=injured()?' · <b class="bad">Bị thương</b>':r.hp<s.maxHp*0.35?' · <b class="bad">Khí huyết cạn</b>':'';
   let h=`<div class="hud-top" data-act="hud"><div class="hud-date"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)]+'\nNgày '+(Math.floor((t%HM)/HD)+1)+' trong tháng')}><small>Năm</small><b id="clkY">${tYear(t)}</b><small id="clkM">Tháng ${MONTH[tMonth(t)]}</small></div>
    <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small><span id="clkH">Giờ ${gioName(t)}</span> · ${sectText()}${UI.paused?' · <i>đang dừng</i>':''}</small></div>
    <span class="hud-tg">${ic(UI.hudOpen?'up':'down')}</span></div>`;
@@ -4213,7 +4240,8 @@ function hudHTML(){
   return h;
 }
 function statusList(){const r=G.run,s=S(),w=W();const L=[];
-  if(r.hp<s.maxHp*0.35)L.push(['bad','Trọng thương','Khí huyết dưới 35%. Thua trận là chết.']);
+  if(injured())L.push(['bad','Bị thương','Còn chừng '+durH(r.inj.until-w.t)+' mới tự lành. Công, thủ giảm 20%. Thua trận nữa là chết.\nDưỡng thương ở động phủ hoặc mời y sư ở phường thị thì lành ngay.']);
+  if(r.hp<s.maxHp*0.35)L.push(['bad','Khí huyết cạn','Khí huyết dưới 35%. Nghỉ ngơi hoặc dùng đan.']);
   if(r.tamma>=60)L.push(['bad','Tâm ma dày','Tâm ma '+r.tamma+'/100. Tĩnh tọa hoặc dưỡng thương để giảm.']);
   if(s.life-r.age<s.life*0.12)L.push(['bad','Thọ nguyên sắp cạn','Còn chừng '+Math.max(0,Math.floor(s.life-r.age))+' năm.']);
   if(entsHere(r.region).some(e=>e.type==='truysat'))L.push(['bad','Bị truy đuổi','Có kẻ đang lần theo dấu ngươi.']);
@@ -4287,6 +4315,7 @@ function foeLine(en){return `<div class="foe-l"><span class="foe-i">${en.i}</spa
 function vEnc(sc){
   const r=G.run,en=sc.en;let b=foeLine(en)+`<div class="story"><p class="new">${esc(sc.text)}</p>${sc.res?`<p class="new">${esc(sc.res)}</p>`:''}</div>`;
   if(sc.done)return card(sc.elite?'Hung địa':'Chạm trán',r.place.n,b+chipsHTML(sc.paid?[chip('💎','−'+sc.paid,'Linh thạch','dn')]:[]),{foot:goBtn('next','Tiếp tục')});
+  if(injured())b+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   const p=Math.round(encSneak(sc)*100);const pay=Math.round(12*SC[r.region]);
   b+=`<div class="choices">${choiceBtn('1.','enc','fight','Xuất thủ','<span class="cx">giao chiến</span>')}${choiceBtn('2.','enc','sneak','Lẩn tránh',`<span class="cx chk"${ta('Dựa vào thân pháp\nThất bại thì vẫn phải đánh')}>thân pháp ${p}%</span>`)}`;
   if(en.f==='nhan'&&!sc.elite)b+=choiceBtn('3.','enc','pay','Nộp tiền mãi lộ',`<span class="cx">${stoneHTML(pay)}</span>`,{dis:r.st<pay});
@@ -4439,6 +4468,7 @@ function vCombat(sc){
    <div class="cb-ally">${al.map(u=>unitCard(sc,u,false)).join('')}</div>`;
   const lg=sc.log.slice(-3);
   h+=`<div class="clog" data-act="clog"${ta('Chạm để xem toàn bộ diễn biến')}>${lg.map((l,i)=>`<p class="${l.c?'lg-'+l.c:''} ${i<lg.length-1?'old':''}">${esc(l.t)}</p>`).join('')}</div>`;
+  if(!sc.done&&injured()&&!sc.spar&&!sc.kiep)h+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   if(sc.done){
     const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong lôi kiếp':'Ngươi đã ngã xuống'}[sc.over];
     return h+`<div class="cb-end ${sc.over}"><b>${t}</b>${goBtn('cont','Tiếp tục')}</div></section>`;
@@ -4453,7 +4483,7 @@ function vCombat(sc){
       if(m==='atk'){h+='<div class="skills">'+btn('_atk',BASIC,1,'Đánh thường bằng chân khí\nKhông tốn linh lực');for(const id of atkSlots()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}h+=back+'</div>';}
       else if(m==='def'){h+='<div class="skills">'+`<button class="sk" data-act="skill" data-arg="_block"${me.tl<TL_BLOCK?' disabled':''}${ta('Đỡ đòn: như tụ lực, đứng ở mốc 75 chờ đối thủ ra đòn.\nBị đánh: giảm khoảng 20–30% sát thương, tốn 30% thể lực, rồi chạy tiếp.\nĐối thủ không đánh mình: không tốn gì.')}><span class="el">Đỡ</span><span class="sn">Đỡ đòn<small>30% thể lực</small></span></button>`;
         h+=btn('_guard',GUARD_SK,1,'Vận khí thủ thế\nĐược hộ thể và hồi 30% linh lực');for(const id of defSkills()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}
-        if(!(sc.boss||sc.kiep||sc.noFlee))h+=`<button class="sk" data-act="flee"${ta('Cả đội bỏ chạy\nThành công dựa vào thân pháp')}><span class="el">Chạy</span><span class="sn">Thoát thân</span></button>`;h+=back+'</div>';}
+        if(!(sc.boss||sc.kiep||sc.noFlee))h+=`<button class="sk" data-act="flee"${ta('Cả đội bỏ chạy\nThành công dựa vào thân pháp')}><span class="el">Chạy</span><span class="sn">Thoát thân</span></button>`;if(!(sc.kiep||sc.spar||sc.en.n==='Tâm Ma'))h+=`<button class="sk" data-act="yield"${injured()?' disabled':''}${ta(injured()?'Đang mang thương, đối phương không tha: nhận thua cũng chết.':'Buông tay chịu thua.\nNgươi sẽ bị thương vài tháng và bị đối phương lục lấy một phần linh thạch, vài món đồ.')}><span class="el">Thua</span><span class="sn">Nhận thua</span></button>`;h+=back+'</div>';}
       else if(m==='bag'){h+=`<div class="skills">${cp.map(({p,i})=>`<button class="sk" data-act="cpill" data-arg="${i}"${ta(pillTip(p.id,p.q))}><span class="el">${PILL[p.id].i}</span><span class="sn">${esc(PILL[p.id].n)}</span></button>`).join('')}${back}</div>${cp.length?'':'<p class="hint">Túi không có gì dùng được trong trận.</p>'}`;}
       else h+=`<div class="skills main4"><button class="sk" data-act="menu" data-arg="atk"><span class="el el-hoa">Công</span><span class="sn">Tấn công</span></button><button class="sk" data-act="menu" data-arg="def"><span class="el el-thuy">Thủ</span><span class="sn">Phòng thủ</span></button><button class="sk" data-act="menu" data-arg="bag"${cp.length?'':' disabled'}><span class="el el-tho">Túi</span><span class="sn">Túi đồ<small>${cp.length} món</small></span></button><button class="sk" data-act="skill" data-arg="_wait"${ta('Qua lượt: không làm gì, nhường lượt')}><span class="el">Qua</span><span class="sn">Qua lượt</span></button></div>`;
     }
@@ -4841,6 +4871,7 @@ const ACT={
   clog:()=>{UI.modal={k:'clog'};},
   cpill:i=>{UI.menu=null;playerPillAct(+i);},
   flee:()=>{UI.menu=null;playerFlee();},
+  yield:()=>{UI.menu=null;playerYield();},
   cont:()=>{UI.menu=null;UI.pendSk=null;combatContinue();},
   pick:i=>takePick(+i),
   rcont:()=>rewardContinue(),
