@@ -281,3 +281,13 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .eqc{min-height:52px;padding:4px 2px;gap:1px;border-radius:8px}.eqc small{font-size:.62em}.sli{width:20px;height:20px}.dgrid{gap:6px;padding:10px}.ddrow{gap:6px}
 .bgrid{grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:5px;padding:7px}.bc{border-radius:7px}.bem{font-size:1.1em}.bc .sli{width:18px;height:18px}.bc i{font-size:.62em}
 @media (min-width:900px){.bagR{position:sticky;top:0}}
+
+/* ===== Sở học, Kỹ năng ===== */
+.art{border:1px solid var(--line);border-left:5px solid var(--pc);border-radius:10px;background:var(--paper);padding:9px 13px;margin:.5em 0}
+.art-h{display:flex;align-items:baseline;gap:.5em;flex-wrap:wrap}.art-h b{color:var(--pc);font-size:1.06em}.art-h small{color:var(--ink3)}
+.art-s{font-size:.86em;color:var(--ink3);margin:.2em 0}.art-s.good{color:var(--jade)}.art ul{margin:.3em 0 .3em 1.2em;font-size:.93em}
+.knrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:.4em 0}
+.kns{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:62px;padding:7px 10px;border:1.5px dashed var(--ink3);border-radius:10px;text-align:left;color:var(--ink3)}
+.kns.on{border:2px solid var(--pc);background:color-mix(in srgb,var(--pc) 12%,var(--paper));color:var(--ink)}.kns.sel{box-shadow:0 0 0 3px var(--gold)}.kns small{color:var(--ink3);font-size:.78em}.kns b{line-height:1.2}
+.hy{fill:var(--gold);stroke:var(--paper);stroke-width:1.5}
+.ib.ib-soft{color:var(--acc)!important}

@@ -2,7 +2,7 @@
 function kvRow(n,v,t,cls){return `<div class="kr ${cls||''}"${ta(t)}><span>${sib(n)}${n}</span><b>${v}</b></div>`;}
 function pChar(){
   const r=G.run,s=S();const tab=UI.tab.char||'base';
-  let b=tabsHTML('char',[['base','Căn cơ'],['bag','Túi đồ']],tab==='chu'?'bag':tab);
+  let b=tabsHTML('char',[['base','Căn cơ'],['bag','Túi đồ'],['hoc','Sở học'],['kn','Kỹ năng']],tab==='chu'?'bag':tab);
   if(tab==='base'){
     const og=ORIGIN.find(o=>o.id===r.origin),tr=TRAIT.find(t=>t.id===r.trait),R0=rootView(r.root);
     b+=`<h4 class="sgrp">Căn cơ</h4><div class="hrow"><span class="hn">Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${Math.floor(r.tv)}%</span></div>
@@ -17,9 +17,11 @@ function pChar(){
     <h4 class="sgrp">Chỉ số</h4><div class="kvl two">${kvRow('Công vật lý',s.atk,'Dùng cho đánh thường và kiếm pháp, quyền cước')}${kvRow('Công phép',s.matk,'Dùng cho pháp thuật')}
     ${kvRow('Thủ',s.def,'Giảm sát thương nhận vào')}${kvRow('Chí mạng',Math.round(s.crit)+'%','Tỉ lệ chí mạng')}${kvRow('Sát thương chí mạng',s.critDmg+'%')}${kvRow('Hộ tâm',s.hoTam,'Giảm sát thương chí mạng nhận vào')}
     ${kvRow('Thân pháp',s.tp,'Tốc độ chạy trên nửa đầu thanh hành động')}${kvRow('Chính xác',s.cx,'Đối phương né khó hơn')}${kvRow('Né',s.ne,'Phải bấm Né đúng lúc mới phát huy hết')}${kvRow('Hồi phục',s.hoi,'Tốc độ trên nửa sau thanh hành động')}
-    ${kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế')}${kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá')}${kvRow('Khí vận',s.van,'Chí mạng, may mắn')}${kvRow('Đã hạ',r.kills,'Số kẻ địch đã đánh bại')}</div>`;
+    ${kvRow('Niệm lực',s.than,'Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tăng theo cảnh giới, ngộ tính và tâm pháp.')}${kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế')}${kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá')}${kvRow('Khí vận',s.van,'Chí mạng, may mắn')}${kvRow('Đã hạ',r.kills,'Số kẻ địch đã đánh bại')}</div>`;
   }
   if(tab==='bag'||tab==='chu')b+=bagTabHTML();
+  if(tab==='hoc')b+=hocTabHTML();
+  if(tab==='kn')b+=knTabHTML();
   return win(esc(r.ten),b,{cls:'tall'+(tab==='base'?'':' wide')});
 }
 // vòng chu thiên: các ô xếp thành vòng quanh đan điền, khí chảy theo chiều kim đồng hồ
@@ -27,6 +29,7 @@ function chuHTML(){
   const r=run2();const v=chuView();const n=v.n;const R=128,cx=160,cy=160,RD=56;const sel=UI.chuSel;
   const P=i=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+R*Math.cos(a),cy+R*Math.sin(a)];};
   const LC={1:'var(--jade)',2:'var(--gold)','-1':'var(--seal)',0:'var(--line)'};
+  const HY2=chuHuyet();
   let svg=`<svg class="chu" viewBox="0 0 320 320"><defs><radialGradient id="ddg"><stop offset="0.55" stop-color="#6fb6ea" stop-opacity=".0"/><stop offset="0.8" stop-color="#6fb6ea" stop-opacity=".28"/><stop offset="1" stop-color="#6fb6ea" stop-opacity="0"/></radialGradient></defs>
    <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--line)" stroke-dasharray="2 6"/>`;
   // linh khí từ đan điền tỏa ra từng ô đang vận hành: nét lõi sáng chạy trên một quầng mờ
@@ -41,14 +44,17 @@ function chuHTML(){
    <g class="dd-rev"><circle cx="${cx}" cy="${cy}" r="${RD}" fill="var(--paper)" stroke="var(--gold)" stroke-width="1.5"/><circle cx="${cx}" cy="${cy}" r="${RD-6}" fill="none" stroke="var(--gold)" stroke-width="3" stroke-dasharray="2 9" opacity=".8"/></g>
    <g class="dd-rot"><circle cx="${cx}" cy="${cy}" r="40" fill="var(--paper)" stroke="var(--acc)" stroke-width="1.5"/><path d="M${cx} ${cy-40}a40 40 0 0 1 0 80a20 20 0 0 1 0-40a20 20 0 0 0 0-40z" fill="var(--acc)"/><circle cx="${cx}" cy="${cy-20}" r="5.5" fill="var(--acc)"/><circle cx="${cx}" cy="${cy+20}" r="5.5" fill="var(--paper)"/></g>
    <text x="${cx}" y="${cy+RD+15}" text-anchor="middle" class="chu-s">đan điền</text>`;
-  for(let i=0;i<n;i++){const p=P(i),it=v.it[i];svg+=`<g class="chu-n${sel===i?' sel':''}${it?' on':''}" data-act="chuSel" data-arg="${i}" transform="translate(${p[0]} ${p[1]})"><rect x="-17" y="-17" width="34" height="34" rx="8"/>${it?`<text y="4.5" text-anchor="middle" class="chu-e el-${it.el}">${(EL[it.el]||EL.vo).c}</text>`:'<text y="6" text-anchor="middle" class="chu-p">＋</text>'}<text y="-21" text-anchor="middle" class="chu-i">${i+1}</text></g>`;}
+  for(let i=0;i<n;i++){const p=P(i),it=v.it[i];svg+=`<g class="chu-n${sel===i?' sel':''}${it?' on':''}" data-act="chuSel" data-arg="${i}" transform="translate(${p[0]} ${p[1]})"><rect x="-17" y="-17" width="34" height="34" rx="8"/>${HY2.includes(i)?'<circle class="hy" cx="13" cy="-13" r="4.5"/>':''}${it?`<text y="4.5" text-anchor="middle" class="chu-e el-${it.el}">${(EL[it.el]||EL.vo).c}</text>`:'<text y="6" text-anchor="middle" class="chu-p">＋</text>'}<text y="-21" text-anchor="middle" class="chu-i">${i+1}</text></g>`;}
   svg+='</svg>';
-  let h=`<p class="hint">Linh khí chảy quanh đan điền theo chiều kim đồng hồ. Ô trước <b class="good">sinh</b> ô sau thì hệ đó mạnh lên, <b class="bad">khắc</b> thì yếu đi. Chạm một ô để đặt công pháp đang vận hành.</p>${svg}`;
+  let h=`<p class="hint">Linh khí chảy quanh đan điền theo chiều kim đồng hồ. Ô trước <b class="good">sinh</b> ô sau thì hệ đó mạnh lên, <b class="bad">khắc</b> thì yếu đi. Chạm một ô để đặt công pháp, tâm pháp. Chỉ môn nằm trong vòng mới vận hành.</p>${svg}`;
   h+=`<div class="chips"><span class="chip up"${ta('Mỗi mối tương sinh: hệ của ô nhận +6% uy lực, linh lực +3%')}>tương sinh ${v.sinh}</span><span class="chip"${ta('Hai ô cạnh nhau cùng hệ: hệ đó +3% uy lực')}>đồng hệ ${v.dong}</span><span class="chip dn"${ta('Mỗi mối tương khắc: hệ bị khắc −5% uy lực')}>tương khắc ${v.khac}</span><span class="chip ${v.dai?'item':''}"${ta('Kín vòng, không có mối khắc nào và chỉ hở tối đa một mối: tu luyện +15%, khí huyết +8%')}>${v.dai?'Đại chu thiên đã thành':'Đại chu thiên chưa thành'}</span></div>`;
   h+=`<div class="hbtns"><button data-act="chuAuto"${ta('Máy thử xếp sao cho nhiều mối tương sinh nhất')}>Tự xếp</button><button data-act="chuClear">Gỡ hết</button></div>`;
+  const blk=chuBlocked();
+  h+=`<p class="hint">Ô có chấm vàng là <b>huyệt</b>: môn đặt ở đó mạnh gấp rưỡi. ${blk?`Còn <b class="bad">${blk} ô bị tắc</b>.`:''}</p>`;
+  if(blk)h+=`<div class="hbtns"><button data-act="chuUnblock"${r.tv<15||r.scene||r.moving?' disabled':''}${ta('Dồn chân khí xung phá một ô tắc.\nTốn 15% tu vi và 6 tháng.')}>Đả thông một ô · 15% tu vi · 6 tháng</button></div>`;
   if(sel!=null&&sel<n){const it=v.it[sel];const pool=chuPool();
-    h+=`<h4 class="sgrp">Ô ${sel+1}${it?' · '+esc(it.n):' · trống'}</h4><div class="rows">${it?`<button class="row" data-act="chuPut" data-arg="-1"><span class="r-i">✕</span><span class="r-t"><b>Gỡ ra</b></span></button>`:''}`+
-      (pool.length?pool.map((c,i)=>{const x=chuItem(c);return `<button class="row" data-act="chuPut" data-arg="${i}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b>${esc(x.n)}</b><small>${x.k==='s'?'Công pháp':'Pháp bảo'} · hệ ${EL[x.el]?EL[x.el].n:'Vô'}${QUY[x.el]?' (xét như '+EL[QUY[x.el]].n+')':''}</small></span></button>`;}).join(''):'<p class="hint">Không còn món nào để đặt. Học thêm công pháp, tìm thêm pháp bảo.</p>')+'</div>';}
+    h+=`<h4 class="sgrp">Ô ${sel+1}${HY2.includes(sel)?' · huyệt':''}${it?' · '+esc(it.n)+' · hiệu lực ×'+numVN(chuPot(v,sel)):' · trống'}</h4><div class="rows">${it?`<button class="row" data-act="chuPut" data-arg="-1"><span class="r-i">✕</span><span class="r-t"><b>Gỡ ra</b></span></button>`:''}`+
+      (pool.length?pool.map((c,i)=>{const x=chuItem(c);return `<button class="row" data-act="chuPut" data-arg="${i}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b style="color:${PCOL[x.tier]}">${esc(x.n)}</b><small>${x.type==='cp'?'Công pháp':'Tâm pháp'} · ${PHAM[x.tier]} · hệ ${EL[x.el]?EL[x.el].n:'Vô'}${QUY[x.el]?' (xét như '+EL[QUY[x.el]].n+')':''}</small></span></button>`;}).join(''):'<p class="hint">Không còn môn nào để đặt. Học thêm ở tab Sở học.</p>')+'</div>';}
   h+=`<p class="hint">Ngũ hành tương sinh: Mộc → Hỏa → Thổ → Kim → Thủy → Mộc. Hệ Vô không sinh không khắc. Số ô tăng theo cảnh giới (đang có ${n}/8).</p>`;
   return h;
 }
@@ -171,8 +177,6 @@ function bagTabHTML(){
   L+=`<h4 class="sgrp">Đan điền · uẩn dưỡng <small>${r.dd.length}/${dn}</small></h4><p class="hint">Vũ khí, pháp bảo nuôi trong đan điền mỗi năm mạnh thêm 5% (tối đa gấp đôi), vẫn cho chỉ số, và trong trận tế ra đánh được một lần.</p><div class="ddrow">${[0,1,2,3].map(j=>{const d=r.dd[j];if(d)return eqCell('D'+j,'',d.rel,{badge:'+'+Math.round((ddMul(d)-1)*100)+'%'});const need=DD_N.findIndex(x=>x>j);return eqCell('D'+j,j<dn?'Trống':'Cần '+REALM[need],null,{lock:j>=dn,ic:'phapbao',tip:j<dn?'Chọn một vũ khí hoặc pháp bảo trong túi rồi bấm Uẩn dưỡng.':'Mở khi đạt '+REALM[need]+'.'});}).join('')}</div>`;
   L+=`<h4 class="sgrp">Vật tùy thân</h4><div class="ddrow five">${SPEC.map(([k,n])=>{if(k==='phuongtien'){const m=mountOf();return `<div class="eqc${m?' on':''}" style="${m?'--pc:'+PCOL[1]:''}"${ta(m?m.n+'\n'+m.d:'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.')}>${slotIcon(k)}<small>${m?m.n:n}</small></div>`;}return eqCell('E'+k,n,E[k],{ic:k});}).join('')}</div>`;
   L+=`<h4 class="sgrp">Vòng vận công</h4>`+chuHTML();
-  const AS=atkSlots();
-  L+=`<h4 class="sgrp">Pháp thuật đã học <small>${r.skills.length}/4</small></h4><div class="rows">`+r.skills.map(x=>{const sk=SK[x.id];const on=AS.includes(x.id);return `<div class="row"${ta(skillTip(sk,x.lv))}><span class="r-i">${elSeal(sk.el)}</span><span class="r-t"><b style="color:${PCOL[sk.t]}">${esc(sk.n)}${x.lv>1?' · bậc '+x.lv:''}</b><small>${PHAM[sk.t]} · ${skillCost(sk)} linh lực${sk.fx.p?'':' · phòng thủ'}</small></span>${sk.fx.p?`<button class="btn sm${on?' on':''}" data-act="atkslot" data-arg="${x.id}"${ta('Đặt vào nút Tấn công trong trận (tối đa 3)')}>${on?'đang dùng':'đặt'}</button>`:''}</div>`;}).join('')+'</div>';
   // --- cột phải: các ô đồ ---
   let items=bagItems();const cnt=c=>c==='all'?items.length:items.filter(x=>x.cat===c).length;
   let V=items.filter(x=>(B.tab==='all'||x.cat===B.tab)&&(B.pham<0||x.tier===B.pham));
@@ -188,7 +192,9 @@ function bagTabHTML(){
     if(k[0]==='E'){rel=E[k.slice(1)];if(rel)act=`<button class="btn" data-act="eqOff" data-arg="${k.slice(1)}">Tháo ra</button>`;}
     else if(k[0]==='D'){const d=r.dd[+k.slice(1)];if(d){rel=d.rel;act=`<span class="hint">Đã uẩn dưỡng ${durH(Math.max(1,w.t-d.t0))} · mạnh thêm ${Math.round((ddMul(d)-1)*100)}%</span><button class="btn" data-act="ddTake" data-arg="${k.slice(1)}">Lấy ra</button>`;}}
     else{it=items.find(x=>x.key===k);
-      if(it&&it.ref.t==='rel'){rel=r.relics[it.ref.i];const sp=slotOf(rel);act=`<button class="btn pri" data-act="eqOn" data-arg="${it.ref.i}">Mặc vào</button>${ddCan(rel)?`<button class="btn" data-act="ddPut" data-arg="${it.ref.i}"${r.dd.length>=dn?' disabled':''}${ta(dn?'Đưa vào đan điền uẩn dưỡng':'Phải đạt Trúc Cơ mới uẩn dưỡng được')}>Uẩn dưỡng</button>`:''}<button class="btn" data-act="bagDrop">${UI.confirm==='drop'?'Chắc chứ?':'Vứt'}</button>`;}
+      if(it&&it.ref.t==='rel'&&r.relics[it.ref.i].k==='book'){const why=learnWhy(r.relics[it.ref.i]);it=Object.assign({},it,{tip:r.relics[it.ref.i].lore});it.bookAct=`<button class="btn pri" data-act="learn" data-arg="${it.ref.i}"${why?' disabled':''}${ta(why||'Tham ngộ mất '+durH(learnTime(r.relics[it.ref.i].art)))}>Học · ${durH(learnTime(r.relics[it.ref.i].art))}</button><button class="btn" data-act="bagDrop">${UI.confirm==='drop'?'Chắc chứ?':'Vứt'}</button>${why?`<span class="hint">${esc(why)}</span>`:''}`;}
+      else if(it&&it.ref.t==='rel'){rel=r.relics[it.ref.i];const sp=slotOf(rel);act=`<button class="btn pri" data-act="eqOn" data-arg="${it.ref.i}">Mặc vào</button>${ddCan(rel)?`<button class="btn" data-act="ddPut" data-arg="${it.ref.i}"${r.dd.length>=dn?' disabled':''}${ta(dn?'Đưa vào đan điền uẩn dưỡng':'Phải đạt Trúc Cơ mới uẩn dưỡng được')}>Uẩn dưỡng</button>`:''}<button class="btn" data-act="bagDrop">${UI.confirm==='drop'?'Chắc chứ?':'Vứt'}</button>`;}
+      else if(it&&it.bookAct){act=it.bookAct;}
       else if(it){const n=clamp(B.n||1,1,it.cnt);B.n=n;const canDrop=it.ref.t!=='pass';
         act=(it.cnt>1?`<span class="qty"><button class="btn sm" data-act="bagN" data-arg="-1">−</button><b>${n}</b><button class="btn sm" data-act="bagN" data-arg="1">+</button><button class="btn sm" data-act="bagN" data-arg="all">Tất cả</button></span>`:'')+(it.use?`<button class="btn pri" data-act="bagUse">Dùng ${n>1?n:''}</button>`:'')+(it.ref.t==='egg'?`<button class="btn" data-act="panel" data-arg="pets">Xem ở Linh thú</button>`:'')+(canDrop?`<button class="btn" data-act="bagDrop">${UI.confirm==='drop'?'Chắc chứ?':'Vứt '+(n>1?n:'')}</button>`:'');}}
     if(rel)D=`<div class="bdet" style="--pc:${PCOL[rel.tier||0]}"><b class="bn">${esc(rel.name)}</b><small>${PHAM[rel.tier||0]} · ${SLOT_N[slotOf(rel)]} · hệ ${(EL[rel.el]||EL.vo).n}</small><p>${fxLines(relicFx(rel),rel).map(esc).join('<br>')}</p>${rel.lore?`<p class="hint">${esc(rel.lore)}</p>`:''}<div class="bact">${act}</div></div>`;
@@ -196,3 +202,32 @@ function bagTabHTML(){
     else if(k[0]==='E')D=`<div class="bdet"><b class="bn">${SLOT_N[k.slice(1).replace(/[12]$/,'')]||''}: trống</b><p class="hint">Chọn một món hợp ô này trong túi rồi bấm “Mặc vào”.</p></div>`;}
   return `<div class="bagwrap"><div class="bagL">${L}</div><div class="bagR">${R}${D||'<p class="hint">Chạm một ô đồ hoặc một ô trang bị để xem và thao tác.</p>'}</div></div>`;
 }
+
+// ---------- Sở học: công pháp, tâm pháp đã học và bí tịch chờ học ----------
+function artCard(a){const r=G.run;const v=chuView();const slot=r.chu.findIndex((c,i)=>i<v.n&&c&&c.u===a.u);const pot=slot>=0?chuPot(v,slot):null;const aff=artAff(a);
+  const sk=a.sk.map(id=>`<span class="chip"${ta(skillTip(SK[id],a.lv))}>${CAT_N[skCat(SK[id])]} · ${esc(SK[id].n)}</span>`).join('')+(a.mind?`<span class="chip"${ta('Thần Thức Thứ: tốn 30% linh lực, đánh vào thức hải. Niệm lực hơn đối thủ thì làm nó choáng.')}>Thần thức · Thần Thức Thứ</span>`:'');
+  return `<div class="art" style="--pc:${PCOL[a.tier]}"><div class="art-h">${elSeal(a.el)}<b>${esc(a.n)}</b><small>${PHAM[a.tier]} · ${LV_N[a.lv-1]}${aff<1?' · <span class="bad">không hợp linh căn, còn 80%</span>':''}</small></div>
+   <p class="art-s ${slot>=0?'good':''}">${slot>=0?`Đang vận hành ở ô ${slot+1} · hiệu lực ×${numVN(pot)}`:'Chưa vận hành: đặt vào vòng vận công (tab Túi đồ) thì mới có tác dụng'}</p>
+   <ul>${artLines(a,pot==null?1:pot).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>${sk?`<div class="chips">${sk}</div>`:''}
+   <div class="bact"><button class="btn sm" data-act="study" data-arg="${a.u}"${a.lv>=3||r.scene||r.moving?' disabled':''}${ta(a.lv>=3?'Đã viên mãn':'Ngồi tham ngộ để lên một tầng: mọi con số của môn này tăng thêm.')}>${a.lv>=3?'Đã viên mãn':'Tham ngộ · '+durH(a.lv*HY)}</button><button class="btn sm" data-act="forget" data-arg="${a.u}">${UI.confirm==='fg'+a.u?'Chắc chứ?':'Phế bỏ'}</button></div></div>`;}
+function hocTabHTML(){const r=run2();const A=arts();const cp=A.filter(a=>a.type==='cp'),tp=A.filter(a=>a.type==='tp');
+  const books=r.relics.map((x,i)=>({x,i})).filter(o=>o.x.k==='book');
+  let h=`<p class="hint">Công pháp cộng chỉ số theo hệ và mang chiêu dùng trong trận. Tâm pháp là nội tại tự vận hành. Phẩm càng cao, con số càng lớn, chiêu và nội tại càng nhiều. Học không giới hạn, nhưng chỉ môn đặt trong vòng vận công mới có tác dụng (đang mở ${chuSlots()} ô).</p>`;
+  h+=`<h4 class="sgrp">${ib('scroll','soft')}Bí tịch chờ học <small>${books.length}</small></h4>`+(books.length?`<div class="rows">${books.map(({x,i})=>{const why=learnWhy(x);return `<div class="row"${ta(x.lore)}><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b style="color:${PCOL[x.tier]}">${esc(x.art.n)}</b><small>${x.art.type==='cp'?'Công pháp':'Tâm pháp'} · ${PHAM[x.tier]}${why?' · <span class="bad">'+esc(why)+'</span>':''}</small></span><button class="btn sm pri" data-act="learn" data-arg="${i}"${why?' disabled':''}>Học · ${durH(learnTime(x.art))}</button></div>`;}).join('')}</div>`:'<p class="hint">Không có bí tịch nào trong túi. Tìm ở phường thị, Tàng Kinh Các, kỳ ngộ.</p>');
+  h+=`<h4 class="sgrp">${ib('sword','soft')}Công pháp <small>${cp.length}</small></h4>`+(cp.length?cp.map(artCard).join(''):'<p class="hint">Chưa học môn nào.</p>');
+  h+=`<h4 class="sgrp">${ib('lotus','soft')}Tâm pháp <small>${tp.length}</small></h4>`+(tp.length?tp.map(artCard).join(''):'<p class="hint">Chưa học môn nào.</p>');
+  return h;}
+// ---------- Kỹ năng: gắn chiêu vào ô dùng trong trận, xem nội tại đang chạy ----------
+function knTabHTML(){const r=run2();syncSkills();const K=UI.knSel;
+  let h=`<p class="hint">Chiêu lấy từ các công pháp đang vận hành. Chạm một ô để đổi chiêu. Trong trận: ô Tấn công, Thân pháp, Thần thông nằm ở nút Tấn công; ô Phòng thủ nằm ở nút Phòng thủ.</p>`;
+  for(const c in CAT_MAX){const av=knAvail(c);const L=r.kn[c];
+    h+=`<h4 class="sgrp">${ib({atk:'sword',def:'shield',move:'wind',ult:'spark'}[c],'soft')}${CAT_N[c]} <small>${L.length}/${CAT_MAX[c]}</small></h4><div class="knrow">`;
+    for(let i=0;i<CAT_MAX[c];i++){const id=L[i];const sk=id&&SK[id];const sel=K&&K.c===c&&K.i===i;
+      h+=`<button class="kns${sk?' on':''}${sel?' sel':''}" data-act="knSel" data-arg="${c}:${i}" style="${sk?'--pc:'+PCOL[sk.t]:''}"${ta(sk?skillTip(sk,av[id]):'Ô trống')}>${sk?elSeal(sk.el)+`<b>${esc(sk.n)}</b><small>${skillCost(sk)} linh lực${sk.fx.p?' · uy '+Math.round(sk.fx.p*100)+'%':''}</small>`:'<small>trống</small>'}</button>`;}
+    h+='</div>';
+    if(K&&K.c===c){const ids=Object.keys(av);h+=`<div class="rows">${L[K.i]?`<button class="row" data-act="knPut" data-arg=""><span class="r-i">✕</span><span class="r-t"><b>Bỏ trống ô này</b></span></button>`:''}${ids.length?ids.map(id=>{const sk=SK[id];return `<button class="row${L.includes(id)?' taken':''}" data-act="knPut" data-arg="${id}"${ta(skillTip(sk,av[id]))}><span class="r-i">${elSeal(sk.el)}</span><span class="r-t"><b style="color:${PCOL[sk.t]}">${esc(sk.n)}</b><small>${PHAM[sk.t]} · ${skillCost(sk)} linh lực · ${esc(sk.f||'')}</small></span></button>`;}).join(''):`<p class="hint">Chưa có chiêu ${CAT_N[c].toLowerCase()} nào từ các công pháp đang vận hành.</p>`}</div>`;}}
+  const m=mindArt();
+  h+=`<h4 class="sgrp">${ib('eye','soft')}Thần thức</h4>`+(m?`<div class="row"><span class="r-i">${ic('eye')}</span><span class="r-t"><b>Thần Thức Thứ</b><small>Từ ${esc(m.n)} · tốn 30% linh lực · niệm lực của ngươi ${S().than}: hơn đối thủ thì làm choáng</small></span></div>`:'<p class="hint">Chưa có tâm pháp nào dạy đòn thần thức.</p>');
+  const v=chuView();const P=[];v.it.forEach((it,i)=>{if(!it)return;const a=artBy(it.u);artFxList(a,chuPot(v,i)).forEach(x=>P.push([a.n,(x.n?x.n+': ':'')+x.t.replace('{v}',numFx(x.v))]));});
+  h+=`<h4 class="sgrp">${ib('cycle','soft')}Nội tại đang vận hành <small>${P.length}</small></h4>`+(P.length?`<div class="kvl">${P.map(([n,t])=>`<div class="kr"><span>${esc(t)}</span><b class="hint">${esc(n)}</b></div>`).join('')}</div>`:'<p class="hint">Chưa có.</p>');
+  return h;}

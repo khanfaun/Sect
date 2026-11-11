@@ -34,6 +34,7 @@ function botTexts(){
 function nearest(pred){const r=G.run;let best=null,bl=1e9;for(const n of regionOf(r.region).nodes){if(!pred(n))continue;if(n.fog<1&&n.id!==r.at)continue;if(n.id===r.at)return n;const p=findPath(r.at,n.id);if(!p)continue;const L=pathLen(p);if(L<bl){bl=L;best=n;}}return best;}
 function goOrOpen(n){const r=G.run;if(!n)return false;if(n.id===r.at){openPlace(n.id);return true;}if(!travelTo(n.id))return false;travelTick(1e7);return true;}
 function botPlan(){
+  if(typeof learnAll==='function')learnAll();if(!G.run)return;
   const r=G.run,s=S();
   // mục tiêu
   if(r.hp<s.maxHp*0.45){const n=nearest(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok'&&r.st>=price(4)||n.dp);if(n&&goOrOpen(n)){r._goal=n.dp?'heal':'inn';return;}}

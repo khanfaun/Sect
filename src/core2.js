@@ -582,3 +582,100 @@ function bagDrop(key,n){const r=G.run;const it=bagItems().find(x=>x.key===key);i
   else if(R0.t==='mat'){c=Math.min(n,r.mats[R0.k]);r.mats[R0.k]-=c;}
   else if(R0.t==='egg'){r.eggs.splice(R0.i,1);c=1;}
   if(c)log('Vứt '+c+' '+it.n+'.');saveSoon();return c;}
+
+// ================= ĐỢT 5: CÔNG PHÁP, TÂM PHÁP, SỞ HỌC, KỸ NĂNG =================
+// Công pháp: cộng chỉ số theo hệ và mang 1–3 chiêu. Tâm pháp: toàn nội tại, đôi khi có đòn thần thức.
+// Học từ bí tịch; chỉ môn đang đặt trong vòng vận công mới vận hành.
+function skCat(sk){return sk.fx.evade?'move':!sk.fx.p?'def':sk.t>=3?'ult':'atk';}
+const CAT_N={atk:'Tấn công',def:'Phòng thủ',move:'Thân pháp',ult:'Thần thông'},CAT_MAX={atk:3,def:2,move:1,ult:1};
+const ART_SFX={cp:['Quyết','Kinh','Công','Chân Giải','Đạo Thư','Bí Lục'],tp:['Tâm Kinh','Tâm Pháp','Dưỡng Khí Thiên','Nội Kinh','Tĩnh Tâm Chú']};
+const EL_FX={kim:['atkP',6],moc:['hpP',6],thuy:['mpP',8],hoa:['matkP',7],tho:['defP',8],loi:['crit',3],bang:['defP',6],phong:['tp',1.2],am:['drain',3],phat:['tam',1.5],vo:['tvP',5]};
+const PAS={
+  tu:{n:'Tu luyện',fx:'tvP',v:6,d:'Tu vi nhận thêm {v}%'},bq:{n:'Tĩnh tọa',fx:'bqP',v:8,d:'Bế quan hiệu quả hơn {v}%'},
+  than:{n:'Thần thức',fx:'than',v:2,d:'Niệm lực +{v}'},mp:{n:'Hồi linh',fx:'regenMp',v:3,d:'Trong trận mỗi lượt hồi {v}% linh lực'},
+  hp:{n:'Hồi sinh lực',fx:'regenHp',v:1.5,d:'Trong trận mỗi lượt hồi {v}% khí huyết'},atk:{n:'Bổ trợ tấn công',fx:'atkP',v:5,d:'Công vật lý +{v}%'},
+  matk:{n:'Bổ trợ pháp thuật',fx:'matkP',v:5,d:'Công phép +{v}%'},stage:{n:'Tích lũy',fx:'atkStage',v:2,d:'Mỗi tiểu cảnh giới: công +{v}%'},
+  rage:{n:'Chiến ý',fx:'rageTurn',v:0.5,d:'Trong trận mỗi lượt +{v} tầng cuồng nộ, tối đa 5 tầng',int:1},def:{n:'Bổ trợ phòng thủ',fx:'defP',v:6,d:'Thủ +{v}%'},
+  ho:{n:'Hộ thể',fx:'startBlock',v:5,d:'Đầu trận có hộ thể bằng {v}% khí huyết'},tl:{n:'Bổ trợ thể lực',fx:'hpP',v:3,d:'Khí huyết +{v}%'},
+  tam:{n:'Thanh tâm',fx:'tammaRes',v:12,d:'Tâm ma tăng chậm hơn {v}%'},di:{n:'Khinh thân',fx:'moveP',v:8,d:'Đi đường nhanh hơn {v}%'},
+};
+const FX_N={atkP:'Công vật lý +{v}%',hpP:'Khí huyết +{v}%',mpP:'Linh lực +{v}%',matkP:'Công phép +{v}%',defP:'Thủ +{v}%',crit:'Chí mạng +{v}%',tp:'Thân pháp +{v}',drain:'Hút {v}% sát thương thành khí huyết',tam:'Đạo tâm +{v}',tvP:'Tu vi nhận thêm {v}%'};
+const ART_REQ=[0,0,0,1,2,3,4];
+const LV_M=[1,1.25,1.5],LV_N=['tiểu thành','đại thành','viên mãn'];
+SLOT_N.book='Bí tịch';KSLOT.book='book';BAG_CAT.bitich='Bí tịch';
+function genArt(type,tier,sid){const r=G.run;r.aid=(r.aid||0)+1;tier=clamp(Math.round(tier),0,6);
+  if(type==='cp'){const sk0=SK[sid]||SK[rollSkill(clamp(tier,1,4))];const el=sk0.el;const want=tier<=1?1:tier<=3?2:3;const sks=[sk0.id];const cats=new Set([skCat(sk0)]);
+    for(const id of shuffle(SK_RAW.filter(s=>(s[2]===el||s[2]==='vo')&&s[3]<=clamp(tier,1,4)&&s[0]!==sk0.id).map(s=>s[0]))){if(sks.length>=want)break;const c=skCat(SK[id]);if(cats.has(c))continue;cats.add(c);sks.push(id);}
+    const pas=shuffle(Object.keys(PAS)).slice(0,tier>=4?2:tier>=2?1:0);
+    return {u:r.aid,type,n:pick(RELIC_PRE[el]||RELIC_PRE.vo)+' '+pick(ART_SFX.cp),el,tier,lv:1,sk:sks,pas};}
+  const el=chance(.6)?pick(r.root.els):pick(['vo','kim','moc','thuy','hoa','tho']);
+  return {u:r.aid,type:'tp',n:pick(RELIC_PRE[el]||RELIC_PRE.vo)+' '+pick(ART_SFX.tp),el,tier,lv:1,sk:[],pas:shuffle(Object.keys(PAS)).slice(0,1+Math.floor(tier/2)),mind:chance(tier>=3?.4:.12)?1:0};}
+function artAff(a){const r=G.run;return a.el==='vo'||r.root.els.includes(a.el)?1:0.8;}
+function artScale(a,pot){return PHAM_M[a.tier]*LV_M[(a.lv||1)-1]*artAff(a)*(pot==null?1:pot);}
+function artFxList(a,pot){const m=artScale(a,pot),L=[];const rd=(x,int)=>int?Math.max(1,Math.round(x)):Math.round(x*10)/10;
+  if(a.type==='cp'){const e=EL_FX[a.el]||EL_FX.vo;L.push({k:e[0],v:rd(e[1]*m),t:FX_N[e[0]]});}
+  for(const k of a.pas||[]){const p=PAS[k];L.push({k:p.fx,v:rd(p.v*m,p.int),t:p.d,n:p.n});}return L;}
+function artLines(a,pot){return artFxList(a,pot).map(x=>(x.n?x.n+': ':'')+x.t.replace('{v}',numFx(x.v)));}
+function numFx(v){return String(v).replace('.',',');}
+function artDesc(a){return (a.type==='cp'?'Công pháp':'Tâm pháp')+' hệ '+(EL[a.el]||EL.vo).n+'.\n'+artLines(a).join('\n')+(a.sk.length?'\nChiêu: '+a.sk.map(id=>SK[id].n+' ('+CAT_N[skCat(SK[id])].toLowerCase()+')').join(', '):'')+(a.mind?'\nChiêu: Thần Thức Thứ (đánh vào thức hải)':'');}
+function bookOf(a){return {name:'Bí tịch '+a.n,k:'book',tier:a.tier,el:a.el,fx:{},lore:artDesc(a),art:a,seen:1};}
+function gainSkill(id){const r=G.run,sk=SK[id];if(!sk)return null;run2();const a=genArt('cp',sk.t,id);const b=bookOf(a);r.relics.push(b);log('Được '+b.name+'.');
+  return chip('📖',b.name,PHAM[a.tier]+'\n'+b.lore+'\n\nMở Nhân vật → Sở học để học.','item');}
+function gainBookTp(tier){const r=G.run;run2();const b=bookOf(genArt('tp',tier));r.relics.push(b);return b;}
+function arts(){const r=G.run;return r.arts||(r.arts=[]);}
+function artBy(u){return arts().find(a=>a.u===u);}
+function learnTime(a){return (a.tier+1)*2*HM;}
+function learnWhy(rel){const r=G.run;if(r.scene||r.moving)return 'Phải đứng yên ngoài bản đồ mới tham ngộ được.';if(r.realm<ART_REQ[rel.art.tier])return 'Cần '+REALM[ART_REQ[rel.art.tier]]+' mới đọc hiểu.';return '';}
+function learnBook(i){const r=G.run;const rel=r.relics[i];if(!rel||rel.k!=='book'||learnWhy(rel))return null;const a=rel.art;r.relics.splice(i,1);
+  const old=arts().find(x=>x.n===a.n&&x.type===a.type);advanceTime(learnTime(a));if(!G.run)return null;let t;
+  if(old){if(old.lv<3)old.lv++;t=`Đọc lại ${a.n}, lĩnh hội thêm một tầng: ${LV_N[old.lv-1]}.`;}
+  else{r.arts.push(a);const n=chuSlots();for(let j=0;j<n;j++)if(!r.chu[j]){r.chu[j]={k:'a',u:a.u};break;}t=`Học được ${a.n}.`;if(a.sk.some(id=>SK[id].dao)&&addDao(3,'skill'))t+=' Đạo cơ +3.';}
+  log(t);syncSkills();clampHp();autoCheck();saveSoon();return t;}
+function studyArt(u){const r=G.run;const a=artBy(u);if(!a||a.lv>=3||r.scene||r.moving)return null;advanceTime(a.lv*HY);if(!G.run)return null;a.lv++;const t=`Tham ngộ ${a.n}: ${LV_N[a.lv-1]}.`;log(t);syncSkills();clampHp();autoCheck();saveSoon();return t;}
+function dropArt(u){const r=G.run;r.arts=arts().filter(a=>a.u!==u);for(let j=0;j<8;j++)if(r.chu[j]&&r.chu[j].u===u)r.chu[j]=null;syncSkills();clampHp();saveSoon();}
+function learnAll(){const r=G.run;if(!r||r.scene||r.moving)return;for(let i=r.relics.length-1;i>=0&&G.run;i--)if(r.relics[i]&&r.relics[i].k==='book'&&!learnWhy(r.relics[i]))learnBook(i);}
+// ----- vòng vận công: giờ đặt công pháp, tâm pháp. Có huyệt (mạnh gấp rưỡi) và ô tắc phải đả thông -----
+function chuKey(c){return c?'a:'+c.u:'';}
+function chuItem(c){if(!c||c.k!=='a')return null;const a=artBy(c.u);return a?{k:'a',u:a.u,n:a.n,el:a.el,tier:a.tier,type:a.type,lv:a.lv}:null;}
+function chuPool(){const r=run2();const used=new Set(r.chu.filter(Boolean).map(c=>c.u));return arts().filter(a=>!used.has(a.u)).map(a=>({k:'a',u:a.u}));}
+function chuSlots(){const r=G.run;if(!r.chuOpen)r.chuOpen=4;return Math.min(r.chuOpen,CHU_N[r.realm]||4);}
+function chuBlocked(){const r=G.run;return Math.max(0,(CHU_N[r.realm]||4)-chuSlots());}
+function chuUnblock(){const r=G.run;if(!chuBlocked()||r.tv<15||r.scene||r.moving)return false;r.tv-=15;advanceTime(6*HM);if(!G.run)return true;r.chuOpen=chuSlots()+1;log('Đả thông một đoạn kinh mạch bị tắc.');autoCheck();saveSoon();return true;}
+function chuHuyet(){const r=G.run;const h=hashS('huyet'+r.ten+r.kiep);const a=h%8;let b=(h>>>3)%8;if(b===a)b=(b+3)%8;return [a,b];}
+function chuPot(v,i){const n=v.n;const lin=v.links[(i-1+n)%n];return Math.max(0.3,1+(lin===1?0.15:lin===-1?-0.15:lin===2?0.08:0)+(chuHuyet().includes(i)?0.5:0)+(v.dai?0.2:0));}
+function chuFx(fx){const r=G.run;if(!r||!r.chu||!r.arts)return;const v=chuView();
+  for(let i=0;i<v.n;i++){const it=v.it[i];if(!it)continue;const a=artBy(it.u);for(const x of artFxList(a,chuPot(v,i)))fx[x.k]=(fx[x.k]||0)+x.v;
+    const l=v.links[(i-1+v.n)%v.n];if(l)fx.elP[it.el]=(fx.elP[it.el]||0)+(l===1?6:l===2?3:-5);}
+  if(v.dai)fx.tvP=(fx.tvP||0)+10;}
+function activeArts(){const r=run2();const n=chuSlots();const L=[];for(let i=0;i<n;i++){const a=r.chu[i]&&artBy(r.chu[i].u);if(a)L.push(a);}return L;}
+// ----- kỹ năng: gắn chiêu của các môn đang vận hành vào ô dùng trong trận -----
+function knAvail(cat){const m={};for(const a of activeArts())for(const id of a.sk)if(skCat(SK[id])===cat&&(!m[id]||m[id]<a.lv))m[id]=a.lv;return m;}
+function syncSkills(){const r=G.run;if(!r||!r.arts)return;if(!r.kn)r.kn={atk:[],def:[],move:[],ult:[]};const out=[];
+  for(const c in CAT_MAX){const av=knAvail(c);let L=(r.kn[c]||[]).filter((id,i,A)=>av[id]&&A.indexOf(id)===i).slice(0,CAT_MAX[c]);
+    if(!r.knManual||!r.knManual[c])for(const id of Object.keys(av).sort((x,y)=>SK[y].t-SK[x].t)){if(L.length>=CAT_MAX[c])break;if(!L.includes(id))L.push(id);}
+    r.kn[c]=L;for(const id of L)out.push({id,lv:av[id]});}
+  r.skills=out;r.atkSlots=r.kn.atk.slice();r.pendingSkill=null;}
+function knSet(cat,i,id){const r=G.run;syncSkills();r.knManual=r.knManual||{};r.knManual[cat]=1;const L=r.kn[cat];if(id==null)L.splice(i,1);else{const j=L.indexOf(id);if(j>=0)L.splice(j,1);if(i<L.length)L[i]=id;else L.push(id);}syncSkills();saveSoon();}
+function atkSlots(){const r=G.run;if(!r.kn)return [];return r.kn.atk.concat(r.kn.move,r.kn.ult).filter(id=>r.skills.find(k=>k.id===id));}
+function defSkills(){const r=G.run;return r.kn?r.kn.def.filter(id=>r.skills.find(k=>k.id===id)):[];}
+// đòn thần thức của một số tâm pháp: niệm lực hơn đối thủ thì làm choáng
+function mindArt(){return activeArts().find(a=>a.mind);}
+function foeThan(sc,t){const r=G.run;return 8+3*r.region+(sc.elite?3:0)+(sc.boss?6:0)+(t&&t.realm||0);}
+function playerMind(tid){const r=G.run,sc=r.scene;const u=readyPlayer(sc);if(!u||!mindArt())return false;const cost=Math.ceil(u.maxMp*0.3);if(u.mp<cost)return false;
+  const foes=alive(sc,'B').filter(x=>!x.immune);if(!foes.length)return false;const t=(tid!=null&&U_(sc,+tid)&&U_(sc,+tid).hp>0)?U_(sc,+tid):foes[0];const mine=S().than,his=foeThan(sc,t);
+  u.mp-=cost;const sk={id:'_mind',n:'Thần Thức Thứ',el:'vo',t:0,c:0,fx:{p:0.45},f:'Một mũi nhọn vô hình đâm thẳng vào thức hải đối phương.',dt:'ph'};
+  if(mine>his){t.stunT=Math.max(t.stunT||0,(typeof STUN_S==='number'?STUN_S:2)*1.5);clog(sc,`Niệm lực của ngươi (${mine}) đè bẹp ${t.name} (${his}): nó choáng váng.`,'me');}else clog(sc,`Niệm lực của ngươi (${mine}) không xuyên nổi ${t.name} (${his}).`,'en');
+  runAct(sc,()=>beginSkill(sc,u,sk,1,t.id));return true;}
+{const _S5=S;S=function(){const s=_S5();const r=G.run;s.than=Math.round(10+2*r.realm+s.ngo/4+(s.fx.than||0));return s;};}
+{const _agg5=aggFx;aggFx=function(){const fx=_agg5();if(fx.atkStage){const k=fx.atkStage*tieu();fx.atkP=(fx.atkP||0)+k;fx.matkP=(fx.matkP||0)+k;}return fx;};}
+{const _oz=onZero;onZero=function(sc,u){_oz(sc,u);if(u.isMain&&G.run){const v=aggFx().rageTurn;if(v&&u.hp>0){sc.rageAcc=(sc.rageAcc||0)+v;while(sc.rageAcc>=1&&(u.st.rage||0)<5){sc.rageAcc-=1;u.st.rage=(u.st.rage||0)+1;}}}};}
+{const _sc5=startCombat;startCombat=function(spec,after){run2();syncSkills();return _sc5(spec,after);};}
+{const _ws=walkSpeed;walkSpeed=function(){return _ws()*(1+(aggFx().moveP||0)/100);};}
+{const _eq5=equip;equip=function(i){const rel=G.run.relics[i];if(rel&&rel.k==='book')return;_eq5(i);};}
+{const _bi=bagItems;bagItems=function(){const r=G.run;const L=_bi();for(const x of L)if(x.ref.t==='rel'&&r.relics[x.ref.i].k==='book'){x.cat='bitich';x.em='📖';x.tip=r.relics[x.ref.i].lore;}return L;};}
+{const _se=shopExtra;shopExtra=function(items,n){_se(items,n);const r=G.run;if(chance(.55)){const b=bookOf(genArt('tp',clamp(r.region+(chance(.3)?1:0),0,4)));items.push({k:'relic',rel:b,p:price(45+b.tier*40)});}};}
+// chuyển nhân vật cũ sang hệ mới: mỗi pháp thuật thành một công pháp, thêm một tâm pháp nhập môn
+{const _r2=run2;run2=function(){const r=_r2();if(!r||r.arts)return r;r.arts=[];
+  for(const k of r.skills||[]){if(!SK[k.id])continue;const a=genArt('cp',SK[k.id].t,k.id);a.lv=clamp(k.lv||1,1,3);r.arts.push(a);}
+  r.aid=(r.aid||0)+1;r.arts.push({u:r.aid,type:'tp',n:'Dẫn Khí Quyết',el:'vo',tier:0,lv:1,sk:[],pas:['tu'],mind:0});
+  r.chu=[null,null,null,null,null,null,null,null];r.chuOpen=4;r.arts.slice(0,4).forEach((a,i)=>{r.chu[i]={k:'a',u:a.u};});r.kn=null;syncSkills();return r;};}

@@ -148,6 +148,13 @@ const ACT={
   cpill:i=>{UI.menu=null;playerPillAct(+i);},
   flee:()=>{UI.menu=null;playerFlee();},
   dd:j=>{UI.menu=null;playerDD(+j);},
+  mind:()=>{UI.menu=null;playerMind();},
+  learn:i=>{const t=learnBook(+i);bagSt().sel=null;if(t)UI.modal={k:'res',title:'Sở học',t,chips:[]};},
+  study:u=>{const t=studyArt(+u);if(t)UI.modal={k:'res',title:'Tham ngộ',t,chips:[]};},
+  forget:u=>{if(UI.confirm!=='fg'+u){UI.confirm='fg'+u;return;}UI.confirm=null;dropArt(+u);},
+  chuUnblock:()=>{if(chuUnblock())note('Một ô kinh mạch đã thông.','up');},
+  knSel:a=>{const [c,i]=a.split(':');const K=UI.knSel;UI.knSel=K&&K.c===c&&K.i===+i?null:{c,i:+i};},
+  knPut:id=>{const K=UI.knSel;if(!K)return;knSet(K.c,K.i,id||null);UI.knSel=null;},
   bagTab:c=>{const B=bagSt();B.tab=c;B.sel=null;},
   bagSel:k=>{const B=bagSt();B.sel=B.sel===k?null:k;B.n=1;},
   bagPham:()=>{const B=bagSt();B.pham=B.pham>=6?-1:B.pham+1;B.sel=null;},
@@ -173,9 +180,9 @@ const ACT={
   cfg:a=>{const i=a.indexOf('=');const k=a.slice(0,i);cfgSet(k,JSON.parse(a.slice(i+1)));if(k==='autoFight')syncDodge();if(k==='theme'||k==='font'){Art.clear();}Map2.resize();},
   usepill:i=>{const m=usePill(+i,false);if(m&&G.run)log('Dùng '+m+'.');},
   chuSel:i=>{UI.chuSel=UI.chuSel===+i?null:+i;},
-  chuPut:i=>{if(UI.chuSel==null)return;if(+i<0)chuSet(UI.chuSel,null);else{const c=chuPool()[+i];if(c)chuSet(UI.chuSel,c);}},
-  chuAuto:()=>{chuAuto();UI.chuSel=null;},
-  chuClear:()=>{const r=run2();r.chu=[null,null,null,null,null,null,null,null];clampHp();UI.chuSel=null;},
+  chuPut:i=>{if(UI.chuSel==null)return;if(+i<0)chuSet(UI.chuSel,null);else{const c=chuPool()[+i];if(c)chuSet(UI.chuSel,c);}syncSkills();},
+  chuAuto:()=>{chuAuto();syncSkills();UI.chuSel=null;},
+  chuClear:()=>{const r=run2();r.chu=[null,null,null,null,null,null,null,null];clampHp();syncSkills();UI.chuSel=null;},
   petSet:i=>petSet(+i),
   petFree:i=>{if(UI.confirm!=='free'+i){UI.confirm='free'+i;return;}UI.confirm=null;petFree(+i);},
   petHatch:i=>{petHatch(+i,true);},
@@ -186,7 +193,7 @@ const ACT={
   impGo:()=>{const t=$('#code');try{const d=decodeSave(t.value);loadData(d);UI.panel=null;UI.code=null;}catch(e){UI.code=t.value;UI.msg='Mã lưu không hợp lệ.';}},
   wipe:()=>{if(UI.confirm!=='wipe'){UI.confirm='wipe';return;}UI.confirm=null;G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};UI.panel=null;UI.sel=null;syncDodge();},
 };
-const KEEP_CONFIRM={pact:1,wipe:1,petFree:1,bagDrop:1};
+const KEEP_CONFIRM={pact:1,wipe:1,petFree:1,bagDrop:1,forget:1};
 document.addEventListener('click',e=>{
   if(UI.suppress){UI.suppress=false;e.preventDefault();e.stopPropagation();return;}
   const el=e.target.closest('[data-act]');
