@@ -28,7 +28,7 @@ function render(){
     modal=modalHTML();
     document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
   }catch(e){console.error(e);full=`<div class="title"><p>Có lỗi khi vẽ màn hình: ${esc(e.message)}</p><button class="btn pri" data-act="screen" data-arg="title">Về màn hình đầu</button></div>`;UI.panel=null;UI.modal=null;panel='';modal='';}
-  setH('hud',hud);setH('mapui',mapui);setH('dock',dock);setH('nav',nav);setH('sheet',sheet);setH('full',full);setH('panel',panel);setH('modal',modal);
+  setH('hud',hud);setH('mapui',mapui);setH('dock',dock);setH('nav',nav);setH('sheet',sheet);setH('full',full);if(typeof figSync==='function')figSync();setH('panel',panel);setH('modal',modal);
   const sc2=G.run&&G.run.scene;UI.lastStory=sc2&&sc2.story?sc2.story.length:0;
   const hd=document.getElementById('hud');document.getElementById('app').style.setProperty('--hudh',(hd&&!hd.hidden?hd.offsetHeight:0)+'px');
   const dl=document.getElementById('dlg');if(dl)dl.scrollTop=dl.scrollHeight;

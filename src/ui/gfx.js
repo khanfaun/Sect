@@ -268,27 +268,44 @@ const Map2=(()=>{
 // ---------- tranh mực: phong cảnh và bóng nhân vật, vẽ bằng mã rồi giữ lại ----------
 const Art=(()=>{
   const cache=new Map();
-  function ridge(g,W,H,base,amp,rnd,col,alpha,step){let x=-20;const pts=[];while(x<W+40){pts.push([x,base-amp*Math.pow(rnd(),1.4)*(0.5+rnd()*0.5)]);x+=step*(0.6+rnd());}
-    g.beginPath();g.moveTo(-30,H);g.lineTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++){const p=pts[i-1],q=pts[i];g.quadraticCurveTo((p[0]+q[0])/2,Math.min(p[1],q[1])-amp*0.1*rnd(),q[0],q[1]);}g.lineTo(W+40,H);g.closePath();
-    const gr=g.createLinearGradient(0,base-amp,0,H);gr.addColorStop(0,hexA(col,alpha));gr.addColorStop(1,hexA(col,alpha*0.15));g.fillStyle=gr;g.fill();}
+  // dãy núi kiểu thủy mặc: đỉnh đậm mực, chân tan vào sương; nét chấm phá (thuân) dọc sườn
+  function ridge(g,W,H,base,amp,rnd,col,alpha,step,o){o=o||{};const pts=[];amp=Math.min(amp,W*0.32);
+    // các đỉnh núi: mỗi đỉnh một ngọn nhọn hai sườn dốc, chồng lên nhau, có gợn nhỏ
+    const pk=[];const np=o.peaks||Math.max(2,Math.round(W/(step*2.6)));for(let i=0;i<np;i++)pk.push([(i+0.2+rnd()*0.6)/np*W*1.1-W*0.05,amp*(0.35+rnd()*0.65),W*(0.05+rnd()*0.08)*(o.wide||1)]);
+    for(let x=-20;x<W+40;x+=Math.max(2,W/160)){let h=0;for(const [c,ph,w] of pk){const d=Math.abs(x-c)/w;const v=ph*Math.exp(-Math.pow(d,1.25)*1.3)*(1+0.1*Math.sin(x*0.11+c));if(v>h)h=v;}pts.push([x,base-h-amp*0.05*rnd()]);}
+    const path=()=>{g.beginPath();g.moveTo(-30,H);g.lineTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)g.lineTo(pts[i][0],pts[i][1]);g.lineTo(W+40,H);g.closePath();};
+    const top=base-amp,foot=Math.min(H,base+(o.mist==null?H*0.12:o.mist));
+    path();const gr=g.createLinearGradient(0,top,0,foot);gr.addColorStop(0,hexA(col,alpha));gr.addColorStop(0.45,hexA(col,alpha*0.55));gr.addColorStop(1,hexA(col,o.solid?alpha*0.35:0));g.fillStyle=gr;g.fill();
+    // mép núi: một nét mực mảnh, đậm nhạt theo lực cọ
+    g.save();path();g.clip();g.lineCap='round';
+    for(let i=1;i<pts.length;i+=3){const p=pts[i-1],q=pts[Math.min(pts.length-1,i+2)];g.strokeStyle=hexA(col,Math.min(1,alpha*(1.2+rnd()*0.6)));g.lineWidth=Math.max(0.8,H*0.007*(0.4+rnd()));g.beginPath();g.moveTo(p[0],p[1]+1);g.lineTo(pts[i][0],pts[i][1]+1);g.lineTo(q[0],q[1]+1);g.stroke();}
+    if(o.cun){const n=Math.round(W/22);for(let i=0;i<n;i++){const xx=rnd()*W;let yy=null;for(let k=1;k<pts.length;k++)if(pts[k][0]>=xx){const p=pts[k-1],q=pts[k],t=(xx-p[0])/Math.max(1,q[0]-p[0]);yy=p[1]+(q[1]-p[1])*t;break;}
+      if(yy==null)continue;if(yy>base-amp*0.25)continue;const y0=yy+H*0.008+rnd()*amp*0.3,len=Math.min(H,W*0.6)*(0.025+rnd()*0.05);g.strokeStyle=hexA(col,alpha*(0.25+rnd()*0.4));g.lineWidth=Math.max(0.7,H*0.004*(0.6+rnd()));g.beginPath();g.moveTo(xx,y0);g.quadraticCurveTo(xx+len*0.35*(rnd()-0.5),y0+len*0.5,xx+len*0.25*(rnd()-0.5),y0+len);g.stroke();}}
+    g.restore();}
+  function mist(g,W,y,h,paper,a){const m=g.createLinearGradient(0,y-h/2,0,y+h/2);m.addColorStop(0,hexA(paper,0));m.addColorStop(0.5,hexA(paper,a));m.addColorStop(1,hexA(paper,0));g.fillStyle=m;g.fillRect(0,y-h/2,W,h);}
+  function grain(g,W,H,ink,rnd){const n=Math.min(9000,Math.round(W*H/60));g.fillStyle=hexA(ink,0.045);for(let i=0;i<n;i++)g.fillRect(rnd()*W,rnd()*H,1,1);
+    g.strokeStyle=hexA(ink,0.035);g.lineWidth=0.6;for(let i=0;i<Math.round(W/14);i++){const x=rnd()*W,y=rnd()*H,l=6+rnd()*18,a=rnd()*6.3;g.beginPath();g.moveTo(x,y);g.lineTo(x+Math.cos(a)*l,y+Math.sin(a)*l);g.stroke();}}
   function pine(g,x,y,h,ink){g.strokeStyle=hexA(ink,0.75);g.lineWidth=Math.max(1,h*0.035);g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+h*0.08,y-h*0.5,x-h*0.05,y-h);g.stroke();g.fillStyle=hexA(ink,0.6);for(let i=0;i<4;i++){const yy=y-h*(0.45+i*0.16),w=h*(0.34-i*0.06);g.beginPath();g.ellipse(x+(i%2?w*0.3:-w*0.3),yy,w,h*0.06,i%2?-0.15:0.15,0,6.3);g.fill();}}
   function paint(g,W,H,seed,reg,type,night){
     const rnd=mul(hashS(seed));const paper=cssVar('--paper'),ink=cssVar('--ink'),seal=cssVar('--seal'),water=cssVar('--water');const RG=REG[reg]||REG[0];const dark=document.documentElement.dataset.theme==='dark';
-    const sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,dark?mixHex(paper,'#000',0.2):mixHex(RG.sky,paper,0.4));sky.addColorStop(1,paper);g.fillStyle=sky;g.fillRect(0,0,W,H);
-    const sx=W*(0.15+rnd()*0.7),sy=H*(0.18+rnd()*0.14),sr=H*(0.07+rnd()*0.04);g.beginPath();g.arc(sx,sy,sr,0,6.3);g.fillStyle=hexA(night?(dark?'#e8e2c8':'#8a93a8'):seal,night?0.5:0.55);g.fill();
-    const tint=dark?RG.tint.map(t=>mixHex(t,'#0c1016',0.35)):RG.tint;
-    ridge(g,W,H,H*0.52,H*0.36,rnd,tint[0],0.5,W*0.13);
-    const m1=g.createLinearGradient(0,H*0.4,0,H*0.62);m1.addColorStop(0,hexA(paper,0));m1.addColorStop(1,hexA(paper,0.75));g.fillStyle=m1;g.fillRect(0,H*0.4,W,H*0.25);
-    ridge(g,W,H,H*0.68,H*0.3,rnd,tint[1],0.7,W*0.1);
-    const m2=g.createLinearGradient(0,H*0.6,0,H*0.8);m2.addColorStop(0,hexA(paper,0));m2.addColorStop(1,hexA(paper,0.7));g.fillStyle=m2;g.fillRect(0,H*0.6,W,H*0.22);
+    const sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,dark?mixHex(paper,'#000',0.2):mixHex(RG.sky,paper,0.8));sky.addColorStop(0.6,paper);sky.addColorStop(1,paper);g.fillStyle=sky;g.fillRect(0,0,W,H);
+    const sx=W*(0.15+rnd()*0.7),sy=H*(0.18+rnd()*0.14),sr=Math.min(H,W*0.9)*(0.07+rnd()*0.04);const sg=g.createRadialGradient(sx,sy,sr*0.6,sx,sy,sr*1.15);const sc0=night?(dark?'#e8e2c8':'#8a93a8'):seal;sg.addColorStop(0,hexA(sc0,night?0.5:0.62));sg.addColorStop(1,hexA(sc0,0));g.beginPath();g.arc(sx,sy,sr*1.15,0,6.3);g.fillStyle=sg;g.fill();
+    // mực nhuốm chút sắc vùng, còn lại là xám mực: xa nhạt, gần đậm
+    const tint=(dark?RG.tint.map(t=>mixHex(t,'#0c1016',0.35)):RG.tint).map((t,i)=>mixHex(t,ink,dark?0.15:0.45+i*0.12));
+    ridge(g,W,H,H*0.48,H*0.3,rnd,tint[0],0.16,W*0.1,{mist:H*0.1,wide:1.3});
+    ridge(g,W,H,H*0.56,H*0.42,rnd,tint[0],dark?0.5:0.4,W*0.14,{cun:1,mist:H*0.18});
+    mist(g,W,H*0.6,H*0.14,paper,0.8);
+    ridge(g,W,H,H*0.72,H*0.3,rnd,tint[1],dark?0.65:0.62,W*0.12,{cun:1,mist:H*0.14,wide:0.8});
+    mist(g,W,H*0.78,H*0.12,paper,0.75);
     if(type==='song'||type==='bien'){g.fillStyle=hexA(water,0.35);g.fillRect(0,H*0.8,W,H*0.2);g.strokeStyle=hexA(ink,0.3);g.lineWidth=1;for(let i=0;i<9;i++){const x=rnd()*W,y=H*(0.83+rnd()*0.14),w=10+rnd()*24;g.beginPath();g.moveTo(x,y);g.lineTo(x+w,y);g.stroke();}
       const bx=W*(0.3+rnd()*0.4),by=H*0.88;g.fillStyle=hexA(ink,0.75);g.beginPath();g.moveTo(bx-22,by);g.quadraticCurveTo(bx,by+9,bx+24,by);g.lineTo(bx+16,by+5);g.lineTo(bx-15,by+5);g.closePath();g.fill();g.fillRect(bx-2,by-16,1.5,16);}
-    else{ridge(g,W,H,H*0.9,H*0.16,rnd,dark?tint[0]:tint[2],0.85,W*0.09);}
+    else{ridge(g,W,H,H*0.94,H*0.1,rnd,dark?tint[0]:tint[2],0.55,W*0.2,{solid:1,mist:H*0.06,wide:2.2});}
     if(['rung','nui','tong','dong','thien'].includes(type)||!type){for(let i=0;i<3+Math.floor(rnd()*3);i++)pine(g,W*(0.05+rnd()*0.9),H*(0.9+rnd()*0.1),H*(0.22+rnd()*0.2),ink);}
     if(type==='tran'||type==='thanh'||type==='tong'||type==='ai'){const n=type==='tran'?3:5;let x=W*(0.25+rnd()*0.2);g.fillStyle=hexA(ink,0.7);for(let i=0;i<n;i++){const w=W*(0.05+rnd()*0.04),h=H*(type==='tran'?0.1:0.14+rnd()*0.1),y=H*0.9;g.fillRect(x,y-h,w,h);g.beginPath();g.moveTo(x-w*0.25,y-h);g.quadraticCurveTo(x+w/2,y-h-h*0.35,x+w*1.25,y-h);g.lineTo(x+w,y-h+3);g.lineTo(x,y-h+3);g.closePath();g.fill();x+=w*1.5;}}
     if(type==='phe'||type==='ma'||type==='sao'){g.strokeStyle=hexA(ink,0.7);g.lineWidth=3;for(let i=0;i<5;i++){const x=W*(0.1+rnd()*0.8),h=H*(0.1+rnd()*0.2);g.beginPath();g.moveTo(x,H*0.93);g.lineTo(x+rnd()*4-2,H*0.93-h);g.stroke();}if(type!=='phe'){g.fillStyle=hexA(seal,0.12);g.fillRect(0,0,W,H);}}
     for(let b=0;b<2+Math.floor(rnd()*3);b++){const bx=W*(0.1+rnd()*0.8),by=H*(0.1+rnd()*0.25),w=4+rnd()*4;g.strokeStyle=hexA(ink,0.4);g.lineWidth=1;g.beginPath();g.moveTo(bx-w,by);g.quadraticCurveTo(bx-w/2,by-w/2,bx,by);g.quadraticCurveTo(bx+w/2,by-w/2,bx+w,by);g.stroke();}
     if(night){g.fillStyle='rgba(15,28,58,.09)';g.fillRect(0,0,W,H);}
+    grain(g,W,H,ink,rnd);
     const fade=g.createLinearGradient(0,H*0.82,0,H);fade.addColorStop(0,hexA(paper,0));fade.addColorStop(1,hexA(paper,0.9));g.fillStyle=fade;g.fillRect(0,H*0.82,W,H*0.18);}
   // bóng mực: người, thú, quỷ, vật
   function figure(g,x,y,h,kind,seed,flip){const rnd=mul(hashS(seed));const ink=cssVar('--ink'),seal=cssVar('--seal');g.save();g.translate(x,y);if(flip)g.scale(-1,1);const u=h/100;g.fillStyle=hexA(ink,0.86);g.strokeStyle=hexA(ink,0.86);g.lineCap='round';
