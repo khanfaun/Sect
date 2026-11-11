@@ -173,7 +173,7 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 
 .why{font-size:.84em;font-style:italic;color:var(--ink3);margin:-2px 0 2px 2.2em}
 .lgg{display:grid;grid-template-columns:1fr 1fr;gap:6px}.lgc{display:flex;align-items:center;gap:.5em;text-align:left;padding:.3em .4em;border:1px solid var(--line);border-radius:2px;min-height:38px;font-size:.92em;opacity:.5}.lgc.on{opacity:1;background:var(--paper)}
-.cb{width:18px;height:18px;min-width:18px;border:1.5px solid var(--ink2);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;flex:none;font-style:normal;line-height:0;background:var(--paper)}.cb .ic{width:13px;height:13px;color:var(--acc);stroke-width:3.2;vertical-align:0}
+.ckb{width:18px;height:18px;min-width:18px;border:1.5px solid var(--ink2);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;flex:none;font-style:normal;line-height:0;background:var(--paper)}.ckb .ic{width:13px;height:13px;color:var(--acc);stroke-width:3.2;vertical-align:0}
 .lgi{width:1.5em;height:1.5em;border-radius:3px;flex:none;fill:none;stroke:#fbf7ea;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;padding:2px}.lge{width:1.5em;text-align:center}
 .dock.go .btn{flex:none}
 .cb-warn{color:var(--seal);font-weight:700;border-left:3px solid var(--seal);padding:.2em .7em;background:var(--paper2);margin:.3em 0}
@@ -183,3 +183,5 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 .wi svg{width:40px;height:40px;padding:8px;background:var(--paper);border:1px solid var(--seal);border-radius:3px;box-shadow:var(--sh);fill:none;stroke:var(--seal);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .wi.crit svg{background:var(--seal);stroke:#fbf7ea}.wi.perm svg{border-color:var(--vio);stroke:var(--vio)}
 .wi small{font-size:.66em;line-height:1.1;font-weight:700;color:var(--ink);background:color-mix(in srgb,var(--paper) 85%,transparent);padding:0 3px;border-radius:2px;white-space:nowrap}
+
+.dock.go,.dock.loc{animation:none!important}

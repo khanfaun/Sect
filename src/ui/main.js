@@ -36,8 +36,8 @@ function render(){
 }
 function after(){render();saveSoon();}
 function mapTap(n,c){const r=G.run;if(!r||r.scene)return;UI.sel=n?n.id:null;UI.cell=n||c==null?null:(UI.cell===c?null:c);UI.cardMin=false;render();}
-function hexTip(c,x,y){const tip=$('#tip');const n=hexNode(c);const I=hexInfo(c);const shown=n&&!((CFG.hideT||{})[n.type]&&n.id!==G.run.at);
-  tip.textContent=(shown?n.name+(n.fog>=2||n.memory?'':'?')+' · '+TYPE_NAME[n.type]+'\n'+DTAG[dangerTag(n)]:I.sea?'Biển khơi':I.ter)+'\n'+I.regName+(I.dist?' › '+I.dist:'');tip.hidden=false;tipEl=null;
+function hexTip(c,x,y){const tip=$('#tip');const n=hexNode(c);const I=hexInfo(c);const shown=n&&!((CFG.hideT||{})[n.type]&&n.id!==G.run.at);if(!shown){hideTip();return;}
+  tip.textContent=n.name+(n.fog>=2||n.memory?'':'?')+' · '+TYPE_NAME[n.type]+'\n'+DTAG[dangerTag(n)]+'\n'+I.regName+(I.dist?' › '+I.dist:'');tip.hidden=false;tipEl=null;
   const tw=tip.offsetWidth,th=tip.offsetHeight;tip.style.left=Math.max(8,Math.min(window.innerWidth-tw-8,x+14))+'px';tip.style.top=Math.max(8,y-th-12)+'px';}
 
 // ---------- đồng hồ và vòng lặp khung hình ----------
@@ -58,7 +58,7 @@ function loop(now){
         if(G.run&&(!G.run.moving||G.run.halt)&&!G.run.scene&&clkAcc>0){advanceTime(clkAcc*sp);if(G.run)autoCheck();}
         clkAcc=0;
         if(!G.run||G.run.scene||G.screen!=='map'){UI.evMin=false;after();}
-        else{const t=W().t;const d=Math.floor(t/HD),p=partOf(t);if(d!==clkDay||p!==clkPart||redraw||(G.toasts&&G.toasts.length)){clkDay=d;clkPart=p;render();}else clockText();Map2.invalidate();}
+        else{const t=W().t;const d=Math.floor(t/HD),p=partOf(t);const mv=$('#mvLeft');if(redraw&&mv&&G.run.moving&&!(G.toasts&&G.toasts.length)){const m=G.run.moving;const L=m.seg<m.path.length-1?edgeLen(m.path[m.seg],m.path[m.seg+1])*(1-m.prog):0;mv.textContent='còn '+Math.round(L)+' dặm';clockText();if(d!==clkDay){clkDay=d;setH('hud',hudHTML());}}else if(d!==clkDay||p!==clkPart||redraw||(G.toasts&&G.toasts.length)){clkDay=d;clkPart=p;render();}else clockText();Map2.invalidate();}
         if(G.run&&(W().t-clkSaveT>=30||(G.run.moving&&now-(UI.mvSave||0)>800))){clkSaveT=W().t;UI.mvSave=now;saveSoon();}
       }
     }catch(e){console.error(e);}

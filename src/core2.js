@@ -454,10 +454,10 @@ function makeNoise(seed){const rnd=mul(seed);const G0=17,g=new Float32Array(G0*G
     const a=at(xi,yi),b=at(xi+1,yi),c=at(xi,yi+1),d=at(xi+1,yi+1);return a+(b-a)*fx+(c-a)*fy+(a-b-c+d)*fx*fy;};
   return (x,y)=>n1(x*4,y*4)*0.55+n1(x*9+3.7,y*9+1.3)*0.3+n1(x*19+7.1,y*19+5.9)*0.15;}
 const CELL=[{ox:0,oy:1000,mx:0},{ox:1000,oy:1000,mx:0},{ox:2000,oy:1000,mx:0},{ox:2000,oy:0,mx:1},{ox:1000,oy:0,mx:1},{ox:0,oy:0,mx:0}];
-const WORLD_W=3000,WORLD_H=2000;
-function mapXY(k,x,y){const c=CELL[k],lx=x-k*1000;return [c.ox+(c.mx?1000-lx:lx),c.oy+y];}
-function invXY(k,dx,dy){const c=CELL[k];const lx=c.mx?1000-(dx-c.ox):dx-c.ox;return [k*1000+lx,dy-c.oy];}
-const HEXW=60,HEXP=HEXW*0.8660254,HCOLS=50,HROWS=38,HN=HCOLS*HROWS;
+const WORLD_W=3556,WORLD_H=2000,XS=WORLD_W/3000; // 16:9; mỗi vùng giãn ngang XS lần khi lên bản đồ
+function mapXY(k,x,y){const c=CELL[k],lx=x-k*1000;return [(c.ox+(c.mx?1000-lx:lx))*XS,c.oy+y];}
+function invXY(k,dx,dy){const c=CELL[k],u=dx/XS;const lx=c.mx?1000-(u-c.ox):u-c.ox;return [k*1000+lx,dy-c.oy];}
+const HEXW=60,HEXP=HEXW*0.8660254,HCOLS=59,HROWS=38,HN=HCOLS*HROWS;
 function hexCenter(i){const c=i%HCOLS,r=(i-c)/HCOLS;return [(c+0.5+(r%2)*0.5)*HEXW,(r+2/3)*HEXP];}
 function hexAt(x,y){const r0=Math.round(y/HEXP-2/3);let best=0,bd=1e18;
   for(let r=Math.max(0,r0-1);r<=Math.min(HROWS-1,r0+1);r++){const c0=Math.round(x/HEXW-0.5-(r%2)*0.5);
@@ -470,7 +470,7 @@ let GEO=null;
 function geoFor(w){if(GEO&&GEO.seed===w.seed)return GEO;
   const nz=makeNoise(hashS('terr'+w.seed));const reg=new Int8Array(HN),ter=new Uint8Array(HN),dist=new Int16Array(HN).fill(-1);
   const sd=(X,Y)=>{let m=1e9;for(let c=0;c<5;c++){const C0=CELL[c];const dx=Math.max(C0.ox+30-X,0,X-(C0.ox+970)),dy=Math.max(C0.oy+30-Y,0,Y-(C0.oy+970));const d=Math.hypot(dx,dy);if(d<m)m=d;}return m;};
-  for(let i=0;i<HN;i++){const [X,Y]=hexCenter(i);let k=-1;for(let c=0;c<5;c++){const C0=CELL[c];if(X>=C0.ox&&X<C0.ox+1000&&Y>=C0.oy&&Y<C0.oy+1000)k=c;}
+  for(let i=0;i<HN;i++){const hcn=hexCenter(i),X=hcn[0]/XS,Y=hcn[1];let k=-1;for(let c=0;c<5;c++){const C0=CELL[c];if(X>=C0.ox&&X<C0.ox+1000&&Y>=C0.oy&&Y<C0.oy+1000)k=c;}
     const sea=k<0||sd(X,Y)-(nz(X/620+5.3,Y/620+9.1)-0.42)*300>0;reg[i]=sea?-1:k;if(sea){ter[i]=0;continue;}
     const T0=REG[k].types,wet=T0.includes('bien')?0.46:T0.includes('song')?0.3:0.22,e=nz(X/1500,Y/1500);
     ter[i]=e<wet?4:e>0.66?3:nz(X/300+9,Y/300+4)>0.5?2:1;}
