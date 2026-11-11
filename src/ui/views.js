@@ -5,18 +5,17 @@ function hudHTML(){
   const row=(n,cur,max,cls,txt,tip)=>`<div class="hrow"${ta(tip)}><span class="hn">${sib(n)}${n}</span>${bar(cur,max,cls)}<span class="hv">${txt}</span></div>`;
   const n=curNode();const atDp=n&&n.dp&&!r.moving;const brk=canBreak();const bqNo=bqCan();
   const hurt=wounds().length?' · <b class="bad">'+esc(WOUND[wounds()[0].k].n)+(wounds().length>1?' +'+(wounds().length-1):'')+'</b>':r.hp<s.maxHp*0.35?' · <b class="bad">Khí huyết cạn</b>':'';
-  let h=`<div class="hud-top" data-act="hud"><div class="hud-date"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)]+'\nNgày '+(Math.floor((t%HM)/HD)+1)+' trong tháng')}><small>Năm</small><b id="clkY">${tYear(t)}</b><small id="clkM">Ngày ${Math.floor((t%HM)/HD)+1} · tháng ${MONTH[tMonth(t)]}</small></div>
-   <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small><span id="clkH">Giờ ${gioName(t)}</span> · ${sectText()}${UI.paused?' · <i>đang dừng</i>':''}</small></div>
-   ${UI.hudOpen?'':`<span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span>`}<span class="hud-tg">${ic(UI.hudOpen?'up':'down')}</span></div>`;
+  const av=assetImg('hero','me',`<span class="av-txt">${esc((r.ten.split(' ').pop()||'?')[0])}</span>`);
+  let h=`<div class="hud-top"><button class="hud-av" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Nhân vật: căn cơ, túi đồ, sở học, kỹ năng')}>${av}</button>
+   <div class="hud-id" data-act="hud"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="hud-clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])}>Năm <b id="clkY">${tYear(t)}</b> · <span id="clkM">Ngày ${Math.floor((t%HM)/HD)+1} · tháng ${MONTH[tMonth(t)]}</span> · <span id="clkH">Giờ ${gioName(t)}</span></small><small>${sectText()}</small></div>
+   ${UI.hudOpen?'':`<span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span>`}<span class="hud-tg" data-act="hud">${ic(UI.hudOpen?'up':'down')}</span></div>`;
   if(UI.hudOpen){
     h+=`<div class="hud-body">${row('Tu vi',r.tv,100,'tv',Math.floor(r.tv)+'%','Đủ 100% thì có thể đột phá ở nơi có động phủ')}
      ${row('Khí huyết',r.hp,s.maxHp,'hp',r.hp+' / '+s.maxHp,'Về 0 là chết')}
      ${row('Linh lực',r.mp,s.maxMp,'mp',r.mp+' / '+s.maxMp,'Dùng để thi triển pháp thuật')}
      ${row('Thọ',r.age,s.life,warn?'life warn':'life',Math.floor(r.age)+' / '+s.life,'Tuổi / thọ nguyên. Đột phá để sống lâu hơn.'+(warn?'\nThọ nguyên sắp cạn!':''))}
      <div class="hline"><span class="hn">${sib('Linh thạch')}Linh thạch</span>${stoneHTML(r.st)}${hurt}${r.tamma>0?` · <span class="${r.tamma>=60?'bad':''}"${ta('Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình')}>Tâm ma ${r.tamma}</span>`:''}</div>
-     <div class="hbtns"><button data-act="hudBq"${bqNo?' disabled':''}${ta(bqNo||('Ngồi tu luyện ngay tại đây, tự chọn thời gian.\nLinh khí nơi này: '+LK_N[lkOf(n)]+(n&&n.dp?', có động phủ':'')))}>Bế quan</button>
-      <button data-act="hudBt" class="${brk&&atDp?'hl':''}"${brk&&atDp?'':' disabled'}${ta(brk?(atDp?'Chuẩn bị đột phá':'Tu vi đã viên mãn. Tìm nơi có động phủ để đột phá'):'Tu vi chưa viên mãn')}>Đột phá</button>
-      <button data-act="panel" data-arg="craft"${r.moving?' disabled':''}${ta('Luyện đan, luyện khí từ vật liệu nhặt được')}>Luyện chế</button></div></div>`;
+     <div class="hbtns"><button data-act="panel" data-arg="craft"${r.moving?' disabled':''}${ta('Luyện đan, luyện khí từ vật liệu nhặt được')}>Luyện chế</button></div></div>`;
   }
   return h;
 }
@@ -47,8 +46,10 @@ function mapUiHTML(){
   const r=G.run;const sp=UI.speed||1;
   const B=(act,arg,lab,tip,on,dis)=>`<button class="mb${on?' on':''}" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}${dis?' disabled':''}${ta(tip)}>${lab}</button>`;
   let h=`<div class="mleft wb">${woundBar()}</div>`;
-  h+=`<div class="mright">${B('zoom',1,ic('plus'),'Phóng to')}${B('zoom',-1,ic('minus'),'Thu nhỏ')}${B('center',null,ic('target'),'Về chỗ ngươi')}${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}<i class="sp"></i>
-   ${B('speed',0,ic(UI.paused?'play':'pause'),UI.paused?'Cho thời gian chạy tiếp':'Tạm dừng thời gian',UI.paused)}${B('speed',1,'×1','1 giây = 1 giờ',!UI.paused&&sp===1)}${B('speed',12,'×12','Chờ nhanh',!UI.paused&&sp===12)}${B('wait','sang',ic('sun'),'Chờ tới sáng',0,!!r.moving)}${B('wait','toi',ic('moon'),'Chờ tới tối',0,!!r.moving)}</div>`;
+  h+=`<div class="mright">${B('center',null,ic('target'),'Về chỗ ngươi')}${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}</div>`;
+  // góc trái dưới: túi đồ, bế quan (nhấp nháy khi đủ điều kiện đột phá)
+  const bqNo=bqCan();const brk=canBreak();
+  h+=`<div class="mbl"><button class="mb big" data-act="bagOpen"${ta('Mở túi đồ')}>${ic('bag')}<small>Túi đồ</small></button><button class="mb big${brk?' glow':''}" data-act="hudBq"${bqNo?' disabled':''}${ta(bqNo||(brk?'Tu vi viên mãn: vào bế quan để đột phá':'Bế quan tu luyện ngay tại đây'))}>${ic('seat')}<small>Bế quan</small></button></div>`;
   return h;
 }
 const ENTER_L={tran:'Vào thôn trấn',thanh:'Vào thành',tong:'Lên sơn môn',ai:'Tới cửa ải',sao:'Vào sào huyệt',dong:'Vào hang',phe:'Vào phế tích',ma:'Vào ma địa',thien:'Bước lên',rung:'Vào rừng',nui:'Lên núi',song:'Ra bến nước',bien:'Ra bờ biển',hoang:'Vào hoang dã'};
@@ -82,7 +83,7 @@ function dockHTML(){
   return `<div class="dock loc"><span class="lc-n">${esc(cur.name)}</span><button class="btn pri" data-act="enter">${ENTER_L[cur.type]||'Vào'}</button></div>`;
 }
 function navHTML(){
-  const r=G.run;const it=[['char','user','Nhân vật'],['pets','paw','Linh thú'],['journal','book','Sổ tay'],['bonds','people','Giao tình'],['more','more','Thêm']];
+  const r=G.run;const it=[['tong','flag','Tông môn'],['pets','paw','Linh thú'],['journal','book','Sổ tay'],['bonds','people','Giao tình'],['more','more','Thêm']];
   const dot={journal:r&&r.quests.some(q=>q.state==='open'),pets:r&&r.eggs&&r.eggs.length>0};
   return it.map(([k,i,n])=>`<button class="nv${UI.panel===k?' on':''}" data-act="panel" data-arg="${k}">${ib(i)}<span>${n}</span>${dot[k]?'<i class="dot soft"></i>':''}</button>`).join('');
 }
@@ -216,6 +217,7 @@ function modalHTML(){
      <label class="rng"><span>Thời gian: <b id="bqY">${durH(y*HY)}</b></span><input type="range" id="bqR" min="0.25" max="${I.maxY}" step="0.25" value="${y}"></label>
      <div class="hbtns"><button data-act="bqSet" data-arg="0.25">3 tháng</button><button data-act="bqSet" data-arg="1">1 năm</button><button data-act="bqSet" data-arg="${Math.min(I.maxY,I.need)}"${I.full?' disabled':''}>Tới viên mãn</button></div>
      <p class="hint" id="bqHint">Tu vi +${numVN(Math.min(100,gain))}%${risk?' · '+risk+'% bị quấy nhiễu giữa chừng':' · yên ổn'}. Xuất quan thì khí huyết, linh lực hồi đầy.</p>
+     ${(()=>{const brk=canBreak();if(!brk)return '';const atDp=cn&&cn.dp;return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint">${atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>Đột phá</button></div>`;})()}
      <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="bqGo">Nhập định</button></div></div>`;}
   if(m.k==='explore'&&SETTLE.includes(nodeById(G.run.at).type)){const n=nodeById(G.run.at);const X=townStats(n);const tb=UI.tab.ex||'L';const rows=L=>`<div class="kv">${L.map(x=>`<div><span>${esc(x[0])}</span><b>${esc(x[1])}</b></div>`).join('')}</div>`;
     return `<div class="mbox"><h3>${esc(n.name)}</h3>${tabsHTML('ex',[['L','Kiếm được · '+X.L.length],['M','Có thể gặp · '+(X.M.length+X.evs.length)]],tb)}
@@ -232,6 +234,7 @@ function modalHTML(){
   if(m.k==='nhansu'){const n=nodeById(G.run.at);const L=sectPeople(n);return `<div class="mbox"><h3>Nhân sự · ${esc(n.name)}</h3><div class="rows">${L.length?L.map(x=>`<div class="row${x.alive?'':' dim'}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b>${esc(x.ten)}</b><small>${esc(x.tt)}</small></span><span class="r-x">${x.alive?REALM[x.realm]:'đã mất'}</span></div>`).join(''):'<p class="empty">Chưa nghe danh ai nổi bật ở đây.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='pick')return pickModalHTML(m);
   if(m.k==='item')return itemModalHTML(m);
+  if(m.k==='th')return thModalHTML(m);
   if(m.k==='art')return artModalHTML(m);
   if(m.k==='pham')return phamHelpHTML();
   if(m.k==='res'){return `<div class="mbox"><h3>${esc(m.title)}</h3><p>${esc(m.t)}</p>${chipsHTML(m.chips)}<div class="mb-f"><span class="grow"></span><button class="btn pri" data-act="modalX">Tiếp tục</button></div></div>`;}

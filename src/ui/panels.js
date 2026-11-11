@@ -15,7 +15,7 @@ function pChar(){
     b+='</section>';
     b+=sgBox('yin','Tu hành',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+Math.floor(r.tv)+'%'),
       kvRow('Linh căn',r.root.els.map(elSeal).join(' ')+' '+esc(R0.n),ROOT.find(x=>x.id===r.root.id).d),
-      kvRow('Tu luyện','+'+numVN(bqRate())+'% mỗi năm','Tốc độ khi bế quan. Phụ thuộc linh căn, ngộ tính, vòng vận công'),
+      kvRow('Tu luyện','+'+numVN(bqRate())+'% mỗi năm','Tốc độ khi bế quan. Phụ thuộc linh căn, ngộ tính, Khí Hải'),
       kvRow('Đạo cơ',(r.dao||0)+' · '+QNAME[qOf(r.dao||0)],'Điểm đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'\nMốc kế tiếp: '+qNext(r.dao||0)+' điểm':'\nĐã đạt Thiên đạo'))]);
     b+=sgBox('walk','Hành tẩu',[kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.'),kvRow('Thần thức',SENSE[r.realm]+' dặm','Tầm nhìn trên bản đồ')]);
     b+=sgBox('star','Thiên phú',[kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá'),kvRow('Khí vận',s.van,'Chí mạng, may mắn')],true);
@@ -138,7 +138,10 @@ function cfgHTML(){
     ${UI.code!=null?`<textarea id="code" rows="4" placeholder="Dán mã lưu vào đây">${esc(UI.code)}</textarea>${UI.codeMode==='imp'?goBtn('impGo','Nạp'):''}`:''}${UI.msg?`<p class="hint">${esc(UI.msg)}</p>`:''}<div>`;
   return b+`</div><p class="hint ver">Phù Sinh · bản 3 · cấu hình đồ họa lưu riêng trên từng máy.</p>`;
 }
-const PANEL_V={char:pChar,pets:pPets,journal:pJournal,affairs:pAffairs,bonds:pBonds,more:pMore,craft:pCraft};
+// Tông môn: phát triển sau, tạm hiện các tông môn đã biết
+function pTong(){const R=relations();const AL={chinh:'chính đạo',ta:'tà đạo',ma:'ma đạo',trung:'trung lập'};
+  return win('Tông môn',`<div class="soon">${ib('flag','soft')}<b>Tông môn</b><p class="hint">Phần này đang được xây dựng: lập tông, chiêu đệ tử, xây điện các.</p></div><p class="hint">${R.mine?'Ngươi là đệ tử tông môn.':'Ngươi là tán tu, chưa vào tông môn nào.'}</p><div class="rows">${R.sects.map(s=>`<div class="row"><span class="r-i">${ic('flag')}</span><span class="r-t"><b>${esc(s.n)}</b><small>${AL[s.al]||s.al||''}</small></span></div>`).join('')}</div>`,{cls:'tall'});}
+const PANEL_V={tong:pTong,char:pChar,pets:pPets,journal:pJournal,affairs:pAffairs,bonds:pBonds,more:pMore,craft:pCraft};
 
 // ---------- Túi đồ: hình người mặc trang bị, đan điền uẩn dưỡng, vật tùy thân, linh thạch và các ô đồ ----------
 // màu phẩm dùng chung: chữ tên và khung ảnh của mọi thứ có phẩm
@@ -222,7 +225,7 @@ function pickModalHTML(m){
     if(d)cur=relDetail(d.rel,`<span class="hint">Đã uẩn dưỡng ${durH(Math.max(1,W().t-d.t0))} · +${Math.round((ddMul(d)-1)*100)}%</span><button class="btn sm" data-act="ddTake" data-arg="${j}">${ic('close')} Lấy ra</button>`);
     else C=r.relics.map((x,i)=>({x,i})).filter(o=>o.x.k!=='book'&&ddCan(o.x)).sort((a,b)=>(b.x.tier||0)-(a.x.tier||0)).map(o=>relC(o.x,o.i,'ddPutM'));
     empty=d?'':'Chỉ vũ khí và pháp bảo uẩn dưỡng được. Trong túi chưa có món nào.';}
-  else if(k[0]==='C'){const i=+k.slice(1);const v=chuView();const it=v.it[i];title='Vòng vận công'+(chuHuyet().includes(i)?' · huyệt (×1,5)':'');
+  else if(k[0]==='C'){const i=+k.slice(1);const v=chuView();const it=v.it[i];title='Đại huyệt '+(i+1)+(chuHuyet().includes(i)?' · huyệt đạo (×1,5)':'');
     if(it){const a=artBy(it.u);cur=`<div class="pdet">${artTipH(a,chuPot(v,i))}<div class="bact"><button class="btn sm" data-act="chuDel" data-arg="${i}">${ic('close')} Gỡ ra</button></div></div>`;}
     C=chuPool().map((c,j)=>({a:artBy(c.u),j})).filter(o=>o.a).sort((x,y)=>y.a.tier-x.a.tier).map(({a,j})=>({t:a.tier,cell:artArt(a),tip:artTipH(a),det:artTipH(a),act:'chuPut',arg:j,btn:'Vận hành'}));
     empty='Mọi môn đã học đều đang vận hành.';}
@@ -242,8 +245,10 @@ function pickModalHTML(m){
 // ---------- công pháp, tâm pháp, chiêu: ô ảnh (chừa chỗ asset) và thẻ chú thích ----------
 function artArt(a){return assetImg('art',a.n,`<span class="aglyph el-${a.el}">${(EL[a.el]||EL.vo).c}</span>`);}
 function skArt(sk){return assetImg('art',sk.n,`<span class="aglyph el-${sk.el}">${(EL[sk.el]||EL.vo).c}</span>`);}
-function lvPips(lv){return `<span class="lvp">${[1,2,3].map(i=>`<i class="${i<=lv?'on':''}"></i>`).join('')}</span>`;}
-function artTipH(a,pot){return tipCard({ic:artArt(a),n:a.n,t:a.tier,sub:(a.type==='cp'?'Công pháp':'Tâm pháp')+' · hệ '+(EL[a.el]||EL.vo).n+(a.lv?' · '+LV_N[a.lv-1]:''),lines:artLines(a,pot==null?1:pot).concat(a.sk.map(id=>'Chiêu: '+SK[id].n+' ('+CAT_N[skCat(SK[id])].toLowerCase()+')'),a.mind?['Đòn thần thức: Thần Thức Thứ']:[])});}
+function lvPips(lv,n){n=n||3;return `<span class="lvp">${Array.from({length:n},(_,i)=>`<i class="${i<lv?'on':''}"></i>`).join('')}</span>`;}
+function artTipH(a,pot){normArt(a);const r=G.run;const known=arts().includes(a);
+  const li=a.lines.map((x,k)=>{const on=known&&artOpen(a,k);const why=!known?'':k>=a.lv?'tầng '+(k+1):r.realm<x.req?'cần '+reqName(x.req):'';return `<li class="${on?'on':'off'}${x.sk||x.mind?' skl':''}">${esc(lineText(a,x,pot))}${x.req>a.req&&!why?` <small>(${reqName(x.req)})</small>`:''}${why?` <small>· ${why}</small>`:''}</li>`;}).join('');
+  return `<div class="tp" style="${pcs(a.tier)}"><div class="tp-h"><span class="qi">${artArt(a)}</span><span><b>${esc(a.n)}</b><small><span class="qt">${PHAM[a.tier]}</span> · ${a.type==='cp'?'Công pháp':'Tâm pháp'} · hệ ${(EL[a.el]||EL.vo).n}</small><small>Cần <b>${reqName(a.req)}</b>${known?' · '+LV_N[a.lv-1]+' / '+a.lines.length:''}</small></span></div><div class="tp-b"><ul class="alines">${li}</ul></div></div>`;}
 function skTipH(sk,lv){const L=String(skillTip(sk,lv||1)).split('\n').filter(Boolean);return tipCard({ic:skArt(sk),n:sk.n,t:sk.t,sub:CAT_N[skCat(sk)]+' · '+skillCost(sk)+' linh lực',lines:L.slice(1)});}
 
 // ---------- vòng vận công: đan điền ở giữa đổi hình theo cảnh giới, các huyệt tròn xếp quanh ----------
@@ -285,15 +290,16 @@ function chuHTML(){
   const P=i=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+R*Math.cos(a),cy+R*Math.sin(a)];};
   const LC={1:'var(--jade)',2:'var(--gold)','-1':'var(--seal)',0:'var(--line)'};
   const HY2=chuHuyet();
-  let svg=`<svg class="chu" viewBox="0 0 320 320"><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--line)" stroke-dasharray="2 6"/>`;
+  let svg=`<svg class="chu" viewBox="0 0 320 320">`;
   for(let i=0;i<n;i++){if(!v.it[i])continue;const p=P(i),a=Math.atan2(p[1]-cy,p[0]-cx);const x0=cx+Math.cos(a)*60,y0=cy+Math.sin(a)*60,x1=p[0]-Math.cos(a)*21,y1=p[1]-Math.sin(a)*21;
     svg+=`<line class="lk-g" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/><line class="lk" style="animation-delay:-${(i*0.37).toFixed(2)}s" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;}
-  for(let i=0;i<n;i++){const a=P(i),b=P((i+1)%n);const l=v.links[i];const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;const ox=(mx-cx)*0.16,oy=(my-cy)*0.16;const d=`M${a[0]} ${a[1]} Q${mx+ox} ${my+oy} ${b[0]} ${b[1]}`;
-    if(l)svg+=`<path d="${d}" fill="none" stroke="${LC[l]}" stroke-width="7" opacity=".18"/><path class="${l===-1?'':'lkf'}" style="animation-delay:-${(i*0.5).toFixed(2)}s" d="${d}" fill="none" stroke="${LC[l]}" stroke-width="2.4" ${l===-1?'stroke-dasharray="5 4"':''} opacity=".95"><title>${l===1?'tương sinh':l===2?'đồng hệ':'tương khắc'}</title></path>`;
-    else svg+=`<path d="${d}" fill="none" stroke="var(--line)" stroke-width="1.2" opacity=".7"/>`;}
   svg+=danTianSVG(r.realm,cx,cy);
   for(let i=0;i<n;i++){const p=P(i),it=v.it[i];const st=it?` style="${pcs(it.tier||0)}"`:'';const hy=HY2.includes(i);
     svg+=`<g class="chu-n${it?' on':''}${hy?' hy-on':''}"${st} data-act="chuPick" data-arg="${i}" transform="translate(${p[0]} ${p[1]})"><circle class="chu-o" r="19"/>${it?`<circle r="13.5" class="chu-in el-${it.el}"/><text y="4.6" text-anchor="middle" class="chu-e">${(EL[it.el]||EL.vo).c}</text>`:'<path class="chu-p" d="M-5 0h10M0 -5v10"/>'}${hy?'<circle class="hy" cx="13" cy="-13" r="4"/>':''}${it?`<g class="chu-x" data-act="chuDel" data-arg="${i}" transform="translate(-14 -14)"><circle r="6"/><path d="M-2.3 -2.3L2.3 2.3M2.3 -2.3L-2.3 2.3"/></g>`:''}</g>`;}
+  // tiểu huyệt: rải quanh đan điền, lệch nhẹ vào ra cho tự nhiên
+  const TL=thList();
+  for(let i=0;i<TH_N;i++){const ang=-Math.PI/2+(i+0.5)*2*Math.PI/TH_N;const rr=90+((i*37)%3-1)*9;const x=cx+Math.cos(ang)*rr,y=cy+Math.sin(ang)*rr;const on=TL.includes(i);
+    svg+=`<g class="th-n${on?' on':''}" data-act="thPick" data-arg="${i}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle class="th-hit" r="11"/><circle class="th-o el-${thEl(i)}" r="${on?6.5:5}"/></g>`;}
   svg+='</svg>';
   const blk=chuBlocked();
   let h=svg+`<div class="chips cen">${chipSpan('up','Mỗi mối tương sinh: hệ của ô nhận +6% uy lực, linh lực +3%','sinh '+v.sinh)}${chipSpan('','Hai ô cạnh nhau cùng hệ: +3% uy lực','đồng '+v.dong)}${chipSpan('dn','Mỗi mối tương khắc: hệ bị khắc −5% uy lực','khắc '+v.khac)}${chipSpan(v.dai?'item':'','Kín vòng, không mối khắc, hở tối đa một mối: tu luyện +15%, khí huyết +8%',v.dai?'Đại chu thiên ✓':'Đại chu thiên ✗')}</div>`;
@@ -305,11 +311,11 @@ function chipSpan(c,tip,t){return `<span class="chip ${c}"${ta(tip)}>${t}</span>
 // ---------- Sở học: các ô công pháp, tâm pháp (số ô có hạn theo cảnh giới) và vòng vận công ----------
 function artSlot(a){const r=G.run;const v=chuView();return r.chu.findIndex((c,i)=>i<v.n&&c&&c.u===a.u);}
 function artCard(a){const r=G.run;const v=chuView();const slot=artSlot(a);const pot=slot>=0?chuPot(v,slot):null;const aff=artAff(a);
-  return `${artTipH(a,pot)}<div class="art-st">${lvPips(a.lv)}<span class="${slot>=0?'good':'hint'}">${slot>=0?'Đang vận hành · ×'+numVN(pot):'Chưa vận hành'}</span>${aff<1?`<span class="bad"${ta('Không hợp linh căn: hiệu quả còn 80%')}>lệch linh căn</span>`:''}</div>
-   <div class="bact">${slot<0?`<button class="btn pri sm" data-act="artRun" data-arg="${a.u}"${chuView().it.filter(Boolean).length>=chuSlots()?' disabled':''}>Vận hành</button>`:`<button class="btn sm" data-act="chuDel" data-arg="${slot}">Ngừng vận hành</button>`}<button class="btn sm" data-act="study" data-arg="${a.u}"${a.lv>=3||r.scene||r.moving?' disabled':''}${ta(a.lv>=3?'Đã viên mãn':'Tham ngộ lên một tầng: mọi con số của môn này tăng thêm.')}>${a.lv>=3?'Viên mãn':'Tham ngộ · '+durH(a.lv*HY)}</button><button class="btn sm" data-act="forget" data-arg="${a.u}">${UI.confirm==='fg'+a.u?'Chắc chứ?':'Phế bỏ'}</button></div>`;}
+  return `${artTipH(a,pot)}<div class="art-st">${lvPips(a.lv,a.lines.length)}<span class="${slot>=0?'good':'hint'}">${slot>=0?'Đang vận hành · ×'+numVN(pot):'Chưa vận hành'}</span>${aff<1?`<span class="bad"${ta('Không hợp linh căn: hiệu quả còn 80%')}>lệch linh căn</span>`:''}</div>
+   <div class="bact">${slot<0?`<button class="btn pri sm" data-act="artRun" data-arg="${a.u}"${chuView().it.filter(Boolean).length>=chuSlots()?' disabled':''}>Vận hành</button>`:`<button class="btn sm" data-act="chuDel" data-arg="${slot}">Ngừng vận hành</button>`}<button class="btn sm" data-act="study" data-arg="${a.u}"${artNextWhy(a)||r.scene||r.moving?' disabled':''}${ta(artNextWhy(a)||'Tham ngộ lên tầng '+(a.lv+1)+': mở dòng kế tiếp.')}>${a.lv>=a.lines.length?'Viên mãn':'Tham ngộ · '+durH(studyTime(a))}</button><button class="btn sm" data-act="forget" data-arg="${a.u}">${UI.confirm==='fg'+a.u?'Chắc chứ?':'Phế bỏ'}</button></div>`;}
 function artModalHTML(m){const a=artBy(+m.u);if(!a)return '';return `<div class="mbox imod"><div class="mb-h"><span class="grow"></span><button class="xb" data-act="modalX" aria-label="Đóng">${ic('close')}</button></div>${artCard(a)}</div>`;}
 function artGrid(type){const r=run2();const A=arts().filter(a=>a.type===type).sort((a,b)=>(artSlot(b)>=0)-(artSlot(a)>=0)||b.tier-a.tier);const cap=artCap(type);const books=r.relics.filter(x=>x.k==='book'&&x.art.type===type).length;
-  let h=A.map(a=>{const s=artSlot(a);return `<button class="acell${s>=0?' run':''}" data-act="artOpen" data-arg="${a.u}" style="${pcs(a.tier)}"${tah(artTipH(a))}><span class="qi">${artArt(a)}</span><b class="qt">${esc(a.n)}</b>${lvPips(a.lv)}${s>=0?`<i class="at-on"${ta('Đang vận hành')}>${ic('cycle')}</i>`:''}</button>`;}).join('');
+  let h=A.map(a=>{const s=artSlot(a);return `<button class="acell${s>=0?' run':''}" data-act="artOpen" data-arg="${a.u}" style="${pcs(a.tier)}"${tah(artTipH(a))}><span class="qi">${artArt(a)}</span><b class="qt">${esc(a.n)}</b>${lvPips(a.lv,a.lines.length)}${s>=0?slotX('chuDel',s,'Ngừng vận hành'):''}</button>`;}).join('');
   for(let i=A.length;i<cap;i++)h+=`<button class="acell emp" data-act="slotPick" data-arg="L${type}"${ta(books?'Có '+books+' bí tịch trong túi. Chạm để học.':'Ô trống. Tìm bí tịch để học.')}><span class="qi">${ic('plus')}</span><small>${books?books+' bí tịch':'trống'}</small></button>`;
   const nx=ART_CAP[type].findIndex(x=>x>cap);
   if(nx>0)h+=`<span class="acell lockc"${ta('Mở thêm ô khi đạt '+REALM[nx])}><span class="qi">${ic('lock')}</span><small>${REALM[nx]}</small></span>`;
@@ -317,7 +323,7 @@ function artGrid(type){const r=run2();const A=arts().filter(a=>a.type===type).so
 function hocTabHTML(){const A=arts();const v=chuView();
   const head=(icn,t,type)=>`<h4 class="sgrp">${ib(icn,'soft')}${t} <small>${A.filter(a=>a.type===type).length}/${artCap(type)}</small></h4>`;
   const R=head('sword','Công pháp','cp')+artGrid('cp')+head('lotus','Tâm pháp','tp')+artGrid('tp');
-  const L=`<h4 class="sgrp">${ib('cycle','soft')}Vòng vận công <small>${v.it.filter(Boolean).length}/${chuSlots()}</small><span class="grow"></span><span class="qhelp"${ta('Chỉ môn đặt trong vòng mới vận hành.\nLinh khí chảy theo chiều kim đồng hồ: ô trước sinh ô sau thì mạnh lên, khắc thì yếu đi.\nMộc → Hỏa → Thổ → Kim → Thủy → Mộc. Hệ Vô không sinh không khắc.\nChấm vàng là huyệt: mạnh gấp rưỡi.\nSố ô tăng theo cảnh giới.')}>${ic('info','sm')}</span></h4>`+chuHTML();
+  const L=`<h4 class="sgrp">${ib('cycle','soft')}Khí Hải <small>${v.it.filter(Boolean).length}/${chuSlots()} · tiểu huyệt ${thList().length}/${TH_N}</small><span class="grow"></span><span class="qhelp"${ta('Khí Hải là đan điền và các huyệt quanh nó.\nĐại huyệt (ô lớn): đặt công pháp, tâm pháp để vận hành. Mỗi cảnh giới mở thêm một ô.\nHai đại huyệt cạnh nhau: hành trước sinh hành sau thì mạnh lên, khắc thì yếu đi (Mộc → Hỏa → Thổ → Kim → Thủy → Mộc).\nChấm vàng: huyệt đạo, mạnh gấp rưỡi.\nTiểu huyệt (chấm nhỏ): khai bằng tu vi và linh thạch, mỗi cái cho một chỉ số nhỏ; cùng hành với môn ở đại huyệt gần nó thì môn đó mạnh thêm 8%.')}>${ic('info','sm')}</span></h4>`+chuHTML();
   return `<div class="hocwrap"><div class="hocR">${R}</div><div class="hocL">${L}</div></div>`;}
 // ---------- Kỹ năng: gắn chiêu vào ô dùng trong trận, xem nội tại đang chạy ----------
 function knTabHTML(){const r=run2();syncSkills();
@@ -333,3 +339,10 @@ function knTabHTML(){const r=run2();syncSkills();
   const P=[];const vv=chuView();vv.it.forEach((it,i)=>{if(!it)return;const a=artBy(it.u);artFxList(a,chuPot(vv,i)).forEach(x=>P.push([a,(x.n?x.n+': ':'')+x.t.replace('{v}',numFx(x.v))]));});
   h+=`<h4 class="sgrp">${ib('cycle','soft')}Nội tại đang vận hành <small>${P.length}</small></h4>`+(P.length?`<div class="kvl">${P.map(([a,t])=>`<div class="kr"><span>${esc(t)}</span><b class="qt sm" style="${pcs(a.tier)}">${esc(a.n)}</b></div>`).join('')}</div>`:'<p class="hint">Chưa có.</p>');
   return h;}
+// hộp tiểu huyệt: hành, công dụng, đại huyệt gần nhất, giá khai
+function thModalHTML(m){const i=+m.i;const r=G.run;const el=thEl(i);const f=TH_FX[el];const on=thList().includes(i);const v=chuView();const j=thNear(i,v.n);const it=v.it[j];const c=thCost();const why=thWhy(i);
+  const same=it&&chuBase(it.el)===el;
+  return `<div class="mbox imod"><div class="mb-h"><h3>Tiểu huyệt · hành ${EL[el].n}</h3><button class="xb" data-act="modalX" aria-label="Đóng">${ic('close')}</button></div>
+   <div class="kv"><div><span>Trạng thái</span><b class="${on?'good':''}">${on?'Đã khai thông':'Còn bế tắc'}</b></div><div><span>Công dụng</span><b>${f[2].replace('{v}',numFx(f[1]))}</b></div>
+   <div><span>Đại huyệt gần nhất</span><b>${it?esc(it.n):'ô '+(j+1)+' đang trống'}</b></div><div><span>Cộng hưởng</span><b class="${same&&on?'good':''}">${same?'cùng hành: môn ở đó +8%':'khác hành: không cộng hưởng'}</b></div></div>
+   ${on?'':`<p class="hint">Khai thông tốn ${c.tv}% tu vi, ${c.st} linh thạch và ${durH(c.h)}. ${REALM[r.realm]} khai tối đa ${TH_MAX[clamp(r.realm,0,5)]} tiểu huyệt (đã khai ${thList().length}).</p>${why?`<p class="hint bad">${esc(why)}</p>`:''}<div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="thOpen" data-arg="${i}"${why?' disabled':''}>Khai huyệt</button></div>`}</div>`;}

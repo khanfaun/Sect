@@ -980,6 +980,7 @@ const EN_SK={
   block:{n:'Phòng thủ',fx:{eblock:1.3},rec:.8},rage:{n:'Cuồng nộ',fx:{rage:1},rec:.8},poison:{n:'Phun độc',fx:{p:.5,epoison:.45},rec:1},burn:{n:'Thiêu đốt',fx:{p:.6,eburn:.6},rec:1},
   weak:{n:'Làm suy yếu',fx:{p:.5,weak:2},rec:1},vuln:{n:'Phá giáp',fx:{p:.5,vuln:2},rec:1},drain:{n:'Hút máu',fx:{p:.9,edrain:60},rec:1},heal:{n:'Hồi phục',fx:{eheal:10},rec:.9},stun:{n:'Trấn áp',fx:{p:.7,stun:30},rec:1}
 };
+const PHAT=75; // mốc phát lực: điểm cuối của tụ lực và của thế đỡ
 const TL_DODGE=25,TL_BLOCK=30,TL_REGEN=20,BLOCK_CUT=0.6;
 const BLOCK_SK={id:'_block',n:'Đỡ đòn',el:'vo',t:0,c:0,fx:{stance:1,steady:true},f:'',rec:.8};
 const WAIT_SK={id:'_wait',n:'Qua lượt',el:'vo',t:0,c:0,fx:{},f:'',rec:.7};
@@ -1030,7 +1031,7 @@ function startCombat(spec,after){
   // trung bình thân pháp và hồi phục, tính một lần lúc vào trận
   const L=sc.units.filter(u=>!u.immune);
   sc.tpTB=Math.max(1,L.reduce((a,u)=>a+u.tp,0)/L.length);sc.hoiTB=Math.max(1,L.reduce((a,u)=>a+u.hoi,0)/L.length);
-  if(sc.kiep){const k=sc.units.find(u=>u.kind==='kiep');const cyc=50/vRun(sc,me)+50/vRec(sc,me);k.fixedV=1.1*50/cyc; /* nhanh hơn một vòng hành động của người chơi 1,1 lần */}
+  if(sc.kiep){const k=sc.units.find(u=>u.kind==='kiep');const cyc=50/vRun(sc,me)+(100-PHAT)/vRec(sc,me);k.fixedV=1.1*50/cyc; /* nhanh hơn một vòng hành động của người chơi 1,1 lần */}
   // hiệu ứng pháp bảo đầu trận
   const fx=S().fx;
   if(fx.startBlock)me.st.block=(me.st.block||0)+Math.round(me.max*fx.startBlock/100);
@@ -1045,8 +1046,8 @@ function partyUnit(p,id){
   return {realm:r.realm,matk:Math.round(s.matk*m),critDmg:150,hoTam:s.hoTam,id,side:'A',ctrl:'ai',ally:p.id,name:p.ten,icon:p.icon||'🧑',el:p.el||'vo',f:'nhan',hp:p.hp,max:Math.round(s.maxHp*m),mp:0,maxMp:0,atk:Math.round(s.atk*m),def:Math.round(s.def*m),tp:Math.round(s.tp*0.9),cx:s.cx,ne:Math.round(s.ne*0.9),hoi:s.hoi,crit:5,
     pat:['atk','atk','multi','block','heavy'],pi:0,st:{},pos:0,phase:'run',pending:null,waitSet:[],stunT:0,rec:1,chargeT:0};
 }
-function vRun(sc,u){if(u.fixedV)return u.fixedV;return 14*clamp(u.tp/sc.tpTB,0.6,1.8);}
-function vRec(sc,u){if(u.fixedV)return u.fixedV;return 18*clamp(u.hoi/sc.hoiTB,0.6,1.8)/(u.rec||1);}
+function vRun(sc,u){if(u.fixedV)return u.fixedV;return 20*clamp(u.tp/sc.tpTB,0.6,1.8);}
+function vRec(sc,u){if(u.fixedV)return u.fixedV;return 26*clamp(u.hoi/sc.hoiTB,0.6,1.8)/(u.rec||1);}
 function nextIntent(u){
   let it=u.pat[u.pi%u.pat.length];u.pi++;if(it==='charge')it='heavy';
   if(chance(.22)&&!u.boss){it=pick(u.pat);if(it==='charge')it='heavy';}
@@ -1067,11 +1068,10 @@ function combatStep(dt){
     if(u.stunT>0){u.stunT=Math.max(0,u.stunT-dt);continue;}
     if(u.phase==='run')u.pos+=vRun(sc,u)*dt;
     else if(u.phase==='recover'){u.pos+=vRec(sc,u)*dt;if(u.pos>=100){u.pos=0;u.phase='run';onZero(sc,u);if(sc.over)return;}}
-    else if(u.phase==='charge')u.chargeT+=dt;
+    else if(u.phase==='charge'||u.phase==='guard'){u.pos=Math.min(PHAT,u.pos+vRec(sc,u)*dt);u.chargeT+=dt;if(u.phase==='guard'&&u.pos>=PHAT)endStance(sc,u,(u.ctrl==='player'?'Ngươi':u.name)+' không phải đỡ đòn nào, buông thế.');}
   }
   // người đang tụ lực: đủ điều kiện thì tung chiêu
-  for(const u of sc.units)if(u.phase==='charge'&&u.pending&&u.pending.block&&u.hp>0&&(u.waitSet.length===0||u.chargeT>=CHARGE_MAX)){endStance(sc,u,'Không ai ra đòn. '+(u.ctrl==='player'?'Ngươi':u.name)+' buông thế đỡ.');}
-  const ch=sc.units.find(u=>u.phase==='charge'&&u.hp>0&&(u.waitSet.length===0||u.chargeT>=CHARGE_MAX));
+  const ch=sc.units.find(u=>u.phase==='charge'&&u.hp>0&&u.pos>=PHAT);
   if(ch){sc.hold=true;sc.cur=ch.id;
     if(ch.ctrl==='player'&&!sc.kiep&&!(G.meta.opt&&G.meta.opt.autoQte)){sc.qte={uid:ch.id,id:(sc.qid=(sc.qid||0)+1)};sc.rev++;return;}
     runAct(sc,()=>fireCharge(sc,ch,1));return;}
@@ -1081,10 +1081,10 @@ function combatStep(dt){
     rd.sort((a,b)=>(b.pos-a.pos)||(b.tp-a.tp)||((a.side==='A'?0:1)-(b.side==='A'?0:1))||(a.id-b.id));
     const u=rd[0];
     for(const x of rd.slice(1))x.pos=49.9;
-    u.pos=50;u.phase='ready';sc.cur=u.id;sc.hold=true;sc.rev++;
+    u.pos=50;u.phase='ready';u.burnedTurn=0;sc.cur=u.id;sc.hold=true;sc.rev++;
     if(u.kind==='kiep'){runAct(sc,()=>kiepStrike(sc,u));return;}
     if(u.ctrl==='player')return; // chờ người chơi chọn chiêu
-    sc.aiWait=0.4;
+    sc.aiWait=0.3;
   }
 }
 // tắt hold ở đúng một chỗ
@@ -1172,8 +1172,10 @@ function playerFlee(){
 // đỡ đòn: giảm khoảng 20–30%, tùy chênh lệch cảnh giới và lực chiến hai bên
 function power(u){return Math.sqrt(Math.max(1,u.max)*Math.max(1,(u.atk+(u.matk||u.atk))/2+(u.def||0)));}
 function blockCut(att,def){const rd=(def.realm||0)-(att.realm||0);return clamp(0.25+0.03*rd+0.08*Math.log(power(def)/power(att)),0.15,0.35);}
-function endStance(sc,u,msg){u.st.stance=0;u._blk=0;toRecover(sc,u,BLOCK_SK.rec);u.pos=75;if(msg)clog(sc,msg,'fl');sc.rev=(sc.rev||0)+1;}
-function toRecover(sc,u,rec){u.phase='recover';u.rec=rec||1;if(u.pos<50)u.pos=50;u.pending=null;u.waitSet=[];u.chargeT=0;}
+// hết thế đỡ: chạy tiếp từ chỗ đang đứng về mốc cuối
+function endStance(sc,u,msg){u.st.stance=0;u._blk=0;u.phase='recover';u.rec=BLOCK_SK.rec;u.pending=null;u.waitSet=[];u.chargeT=0;if(u.pos<50)u.pos=50;if(msg)clog(sc,msg,'fl');sc.rev=(sc.rev||0)+1;}
+// ra chiêu xong: nhảy thẳng tới mốc phát lực rồi chạy dần về mốc cuối
+function toRecover(sc,u,rec){u.phase='recover';u.rec=rec||1;if(u.pos<PHAT)u.pos=PHAT;u.pending=null;u.waitSet=[];u.chargeT=0;}
 // ---------- máy điều khiển ----------
 function aiAct(sc,u){
   if(!u||u.hp<=0)return;
@@ -1191,14 +1193,14 @@ function beginSkill(sc,u,sk,lv,tid){
   const cost=skillCost(sk);u.st.stance=0;
   if(u.ctrl==='player'){u.mp-=cost;if(sk.fx.selfHp)u.hp=Math.max(1,u.hp-Math.round(u.max*sk.fx.selfHp/100));}
   if(sk.fx.stance){
-    u.phase='charge';u.pos=75;u.chargeT=0;u.pending={sk,lv,tid:null,block:1};u.st.stance=1;
-    u.waitSet=alive(sc,foeSide(u.side)).filter(x=>!x.immune||sc.kiep).map(x=>x.id);
+    // đỡ đòn: chạy dần từ mốc ra chiêu tới mốc phát lực; trong quãng đó bị đánh thì đỡ được một lần
+    u.phase='guard';u.pos=50;u.rec=1;u.chargeT=0;u.pending=null;u.st.stance=1;u._blk=0;u.waitSet=[];
     clog(sc,(u.ctrl==='player'?'Ngươi':u.name)+' thủ thế, chờ đòn.',u.side==='A'?'me':'en');doneAct(sc,u);return;
   }
   if(sk.fx.charge){
     // vào tụ lực: nhảy tới 75, chờ mọi kẻ địch còn sống hành động xong
-    u.phase='charge';u.pos=75;u.chargeT=0;u.pending={sk,lv,tid};
-    u.waitSet=alive(sc,foeSide(u.side)).filter(x=>!x.immune||sc.kiep).map(x=>x.id);
+    // tụ lực: chạy dần từ mốc ra chiêu tới mốc phát lực, tới nơi thì tung chiêu
+    u.phase='charge';u.pos=50;u.rec=1;u.chargeT=0;u.pending={sk,lv,tid};u.waitSet=[];
     clog(sc,(u.ctrl==='player'?'Ngươi':u.name)+' bắt đầu tụ lực: '+sk.n+'…',u.side==='A'?'me':'en');
     doneAct(sc,u); // bước vào tụ lực cũng tính là đã hành động
     return;
@@ -1302,7 +1304,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
           doneAct(sc,t);}
       }
     }
-    for(const t of tg)if(t.st.stance&&t.pending&&t.pending.block&&t.hp>0)endStance(sc,t,null);
+    for(const t of tg)if(t.st.stance&&t.phase==='guard'&&t._blk&&t.hp>0)endStance(sc,t,null);
     if(total&&(f.drain||(isP&&fx.drain)))u.hp=Math.min(u.max,u.hp+Math.round(total*((f.drain||0)+(isP?fx.drain||0:0))/100));
     if(total&&f.edrain)u.hp=Math.min(u.max,u.hp+Math.round(total*f.edrain/100));
     if(sc.kiep&&total){const k=sc.kiep;const me=mainUnit(sc);const cut=Math.min(0.25,total/me.max*0.5);k.uy=Math.max(0.3,k.uy-cut);msg+=` (lôi uy −${Math.round(cut*100)}%)`;}
@@ -1322,7 +1324,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
   if(crits)msg+=' · chí mạng!';if(dod)msg+=` · né ${dod}`;if(blk)msg+=' · bị đỡ';
   if(f.p&&!total&&!dod&&hits)msg+=' · bị hộ thể chặn';
   if(isP&&sk.f&&!sc['_u'+sk.id]){sc['_u'+sk.id]=1;clog(sc,sk.f,'fl');}
-  if(!isP){const V=(VERB[u.f]||VERB.vat);const it=sk.it;msg=(V[it]?T(V[it]):(VERB2[it]||'{e} ra tay')).replace('{e}',u.name)+(total?`: ${total}`:'')+(dod?' (né '+dod+')':'')+(crits?' · chí mạng!':'')+(blk?' · ngươi đỡ được':'')+(f.p&&!total&&!dod?' · bị chặn':'');if(sk.fx.charge)msg=T((VERB[u.f]||VERB.vat).heavy).replace('{e}',u.name)+`: ${total}`;}
+  if(!isP){const V=(VERB[u.f]||VERB.vat);const it=sk.it;msg=(V[it]?T(V[it]):(VERB2[it]||'{e} ra tay')).replace('{e}',u.name)+(total?`: ${total}`:'')+(dod?' (né '+dod+')':'')+(crits?' · chí mạng!':'')+(blk?' · ngươi đỡ được':'')+(f.p&&!total&&!dod?' · bị chặn':'');if(sk.fx.charge)msg=T((VERB[u.f]||VERB.vat).heavy).replace('{e}',u.name)+`: ${total}`+(dod?' (né '+dod+')':'')+(blk?' · ngươi đỡ được':'');}
   clog(sc,(isP?'':'')+msg,u.side==='A'?'me':'en');
   finishAct(sc,u,sk);
 }
@@ -1354,7 +1356,7 @@ function kiepHit(sc,k,off){
   const K=sc.kiep,me=mainUnit(sc);const i=K.done+1;
   let d=Math.round(me.max*(0.14+0.03*i)*K.uy);K.uy=1;
   if(me.st.stance&&me.tl>=TL_BLOCK){me.tl-=TL_BLOCK;d=Math.round(d*(1-0.25));}
-  if(me.st.stance&&me.pending&&me.pending.block)endStance(sc,me,null);
+  if(me.st.stance&&me.phase==='guard')endStance(sc,me,null);
   let red=0;if(off==='auto')red=0.25*0.6;else if(off!=null&&Math.abs(off)<=0.09)red=0.5;else if(off!=null&&Math.abs(off)<=0.25)red=0.25;
   d=Math.round(d*(1-red));d=absorb(me.st,d);me.hp-=d;K.done++;
   clog(sc,`Đạo lôi thứ ${i}${K.waves>1?' (đợt '+K.wave+')':''} giáng xuống: ${d}`+(red?` (đỡ ${Math.round(red*100)}%)`:''),'en');

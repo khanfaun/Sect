@@ -434,3 +434,46 @@ span.el[class*=el-]{background:var(--ec);border-color:var(--ec);color:#fffaf0!im
 .u-i.av-r{border-radius:50%;overflow:visible}
 .nc-img{margin:-8px -10px 6px -14px;height:84px;overflow:hidden;border-radius:13px 13px 0 0}.nc-img .asset{object-fit:cover}
 .bfil.one{grid-template-columns:minmax(0,260px)}
+/* ===== đợt 5: thẻ dưới không bị thanh dưới che (tính cả vùng an toàn của điện thoại) ===== */
+#dock{bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 8px)}
+#sheet{bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 8px)}
+#toast{bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 70px)}
+.dock.card{max-height:calc(100vh - var(--hudh,84px) - var(--nav) - env(safe-area-inset-bottom,0px) - 40px);overflow-y:auto}
+/* thẻ trạng thái: avatar tròn bên trái, thời gian nhỏ nằm trong cụm tên */
+.hud-top{gap:10px}
+.hud-av{width:54px;height:54px;flex:none;border-radius:50%;padding:0;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,var(--paper),var(--paper2));border:2px solid var(--acc);box-shadow:0 0 0 3px var(--paper),0 0 0 4px var(--line)}
+.hud-av .asset{width:100%;height:100%;object-fit:cover;border-radius:50%}.av-txt{font-size:1.5em;font-weight:700;color:var(--acc)}
+.hud-id{cursor:pointer}.hud-id .nm{font-size:1.05em}.hud-clk{color:var(--ink2)!important;font-size:.76em!important}.hud-clk b{color:var(--seal);font-weight:700}
+.hud-tg{cursor:pointer;padding:4px}
+/* góc trái dưới: túi đồ, bế quan */
+.mbl{position:absolute;left:8px;bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 86px);display:flex;flex-direction:column;gap:8px;align-items:center}
+.mb.big{width:52px;height:52px;display:flex;flex-direction:column;gap:0;font-weight:600}.mb.big .ic{width:22px;height:22px}.mb.big small{font-size:.62em;line-height:1}
+.glow{animation:bqglow 1.4s ease-in-out infinite;border-color:var(--gold)!important;color:var(--gold)}
+@keyframes bqglow{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--gold) 0%,transparent),var(--sh)}50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 45%,transparent),0 0 18px var(--gold)}}
+:root[data-anim="0"] .glow{animation:none;box-shadow:0 0 0 3px var(--gold)}
+.bt-box{margin:10px 0 4px;padding:8px 12px;border:1px dashed var(--line);border-radius:10px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}.bt-box.on{border:1.5px solid var(--gold);background:color-mix(in srgb,var(--gold) 10%,var(--paper))}.bt-box b{color:var(--gold);display:flex;align-items:center;gap:.3em}
+.soon{display:flex;flex-direction:column;align-items:center;gap:6px;padding:1.4em 0;text-align:center}.soon .ib{font-size:1.6em}
+@media (min-width:900px){.mbl{bottom:24px}}
+/* khí hải: tiểu huyệt */
+.th-n{cursor:pointer}.th-hit{fill:transparent}
+.th-n .th-o{fill:var(--paper);stroke:var(--ec,#77705f);stroke-width:1.4;stroke-dasharray:2 2;opacity:.75}
+.th-n.on .th-o{fill:var(--ec,#77705f);stroke:#fffaf0;stroke-width:1.2;stroke-dasharray:none;opacity:1;filter:drop-shadow(0 0 3px var(--ec))}
+.th-n:hover .th-o{opacity:1;stroke-width:2}
+/* dòng công pháp */
+.alines{list-style:none;margin:0!important;padding:0}.alines li{position:relative;padding:2px 0 2px 16px}
+.alines li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--pc)}
+.alines li.off{color:var(--ink3)}.alines li.off::before{background:none;border:1.5px solid var(--ink3)}.alines li.skl{font-weight:600}
+.alines small{color:var(--ink3);font-style:italic}
+.tp-h small+small{margin-top:1px}
+.tp-h small b{display:inline;font-size:1em;color:var(--ink);line-height:inherit}
+/* né: lớp phủ tối, nút né ở giữa, vòng thu vào mép nút */
+.dodge-ov{position:fixed;inset:0;z-index:40;background:rgba(12,9,4,.66);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#fbf2e0;touch-action:none;user-select:none;-webkit-user-select:none}
+.dodge-ov p{font-size:1.2em;font-weight:700;letter-spacing:.1em}.dodge-ov small{opacity:.75}
+.dg-wrap{position:relative;width:200px;height:200px;display:grid;place-items:center}
+.dodge2{width:118px;height:118px;border-radius:50%;background:var(--seal);color:#fbf7ea;font-size:1.7em;font-weight:700;letter-spacing:.2em;padding-left:.2em;box-shadow:0 0 0 4px rgba(251,247,234,.25),0 6px 24px rgba(0,0,0,.5),inset 0 0 0 3px var(--seal),inset 0 0 0 5px rgba(251,247,234,.45);position:relative;z-index:1}
+.dodge2.hit{background:var(--ink2)}
+.dg-ring{position:absolute;inset:0;border-radius:50%;border:4px solid #ffd76a;box-shadow:0 0 14px #ffd76a;animation-name:dgshrink;animation-timing-function:linear;animation-fill-mode:both;pointer-events:none}
+@keyframes dgshrink{from{transform:scale(1);opacity:.35}to{transform:scale(.6);opacity:1}}
+/* chiến đấu: ô ngũ hành trên nút chiêu gọn, cân */
+.sk span.el{width:2.3em;height:2.3em;min-width:0;padding:0;font-size:.66em;border-radius:50%;line-height:1;flex:none}
+.sk .sn{font-size:.95em}

@@ -223,7 +223,7 @@ const Map2=(()=>{
     // mây trôi, hạt theo mùa, sắc trời theo buổi
     if(lv>0&&CFG.clouds){if(!cloudSpr)cloudSpr=cloudSprite();if(!clouds.length)for(let i=0;i<[0,9,16][lv];i++)clouds.push({x:Math.random()*(WORLD_W+500)-250,y:Math.random()*2500-250,s:160+Math.random()*220,v:6+Math.random()*10});
       ctx.globalAlpha=C.dark?0.06:0.5;for(const c of clouds){c.x+=c.v*dt;if(c.x>WORLD_W+300)c.x=-500;const x=SX(c.x),y=SY(c.y),s=c.s*z*2;if(x+s<0||x>W0||y+s<0||y>H0)continue;ctx.drawImage(cloudSpr,x,y,s,s*0.6);}ctx.globalAlpha=1;}
-    if(CFG.daynight&&!(r.moving&&!r.halt)){const p=partOf(w.t);const t=p==='dem'?['#0f1c3a',C.dark?0.12:0.07]:p==='toi'?['#5a2f4a',0.04]:p==='sang'?['#f2c078',0.025]:null;if(t){ctx.fillStyle=hexA(t[0],t[1]);ctx.fillRect(0,0,W0,H0);}}
+    if(CFG.daynight&&!(r.moving&&!r.halt)){const p=partOf(w.t);const t=p==='dem'?['#0f1c3a',C.dark?0.2:0.16]:p==='toi'?['#7a3a4a',0.1]:p==='sang'?['#f2c078',0.07]:['#fff3c4',0.035];if(t){ctx.fillStyle=hexA(t[0],t[1]);ctx.fillRect(0,0,W0,H0);}}
     if(lv>0&&CFG.fx){if(!(r.moving&&!r.halt)||!pse)pse=[seasonOf(w.t),partOf(w.t)==='dem'];const se=pse[0],night=pse[1];const want=se==='ha'&&!night?0:[0,16,38][lv];
       while(parts.length<want)parts.push({x:Math.random()*W0,y:Math.random()*H0,v:10+Math.random()*24,a:Math.random()*6.3,s:1.5+Math.random()*2.5});
       if(parts.length>want)parts.length=want;
