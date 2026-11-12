@@ -324,7 +324,7 @@ function chTrade(){const r=run2();if((r.ch||0)<15||r.pills.length>=S().pillMax)r
 // ----- lựa chọn có điều kiện: đủ thì sáng, thiếu thì mờ kèm lý do -----
 const STAT_N={ngo:'ngộ tính',tam:'đạo tâm',van:'khí vận',tp:'thân pháp',atk:'công',def:'thủ'};
 function needList(c){const r=G.run,s=S(),L=[];if(!c)return L;
-  if(c.cost&&c.cost.st){const v=Math.round(c.cost.st*SC[r.region]);L.push({ok:r.st>=v,t:'linh thạch ≥ '+v});}
+  if(c.cost&&c.cost.st){const v=Math.max(1,Math.round(c.cost.st*SC[r.region]));L.push({ok:r.st>=v,t:'linh thạch ≥ '+v});}
   if(c.cost&&c.cost.mp){const v=Math.round(s.maxMp*parseFloat(c.cost.mp)/100);L.push({ok:r.mp>=v,t:'linh lực ≥ '+v});}
   const n=c.need;if(n){
     if(n.realm!=null)L.push({ok:r.realm>=n.realm,t:'cần '+REALM[n.realm]});
@@ -547,14 +547,17 @@ PQ[0]=PHAM[0];PQ[1]=PHAM[1];PQ[2]=PHAM[2];
 RELIC_K.push({k:'non',b:['Quan','Đấu Lạp','Ngọc Quan'],fx:{tam:2,defP:6}},{k:'gang',b:['Hộ Thủ','Quyền Sáo','Thủ Giáp'],fx:{atkP:5,crit:2}},{k:'dai',b:['Đai','Ngọc Đái','Yêu Đái'],fx:{hpP:6,tp:1}},
   {k:'hoa',b:['Hỏa Chủng','Địa Tâm Hỏa','Thanh Liên Hỏa'],fx:{craftP:6}},{k:'tran',b:['Trận Bàn','Trận Kỳ','Tụ Linh Trận Đồ'],fx:{bqP:8,bqSafe:15}});
 FXT.craftP='Luyện chế dễ thành hơn {v}%';FXT.bqSafe='Bế quan ít bị quấy nhiễu hơn {v}%';
-const SLOTS=[['vukhi','Vũ khí'],['non','Nón'],['boi','Ngọc bội'],['gang','Găng'],['giap','Giáp'],['choang','Áo choàng'],['nhan1','Nhẫn'],['dai','Đai lưng'],['nhan2','Nhẫn'],['phapbao1','Pháp bảo'],['giay','Giày'],['phapbao2','Pháp bảo']];
+// ô trang bị 3×3; trang sức chỉ một ô (nhẫn, sau này thêm vòng, khuyên…); pháp bảo ra mục riêng 3 ô, mở ở Trúc Cơ, Kết Đan, Nguyên Anh
+const SLOTS=[['vukhi','Vũ khí'],['non','Nón'],['boi','Ngọc bội'],['gang','Găng'],['giap','Giáp'],['choang','Áo choàng'],['nhan1','Trang sức'],['dai','Đai lưng'],['giay','Giày']];
+const PB_SLOTS=['phapbao1','phapbao2','phapbao3'],PB_REQ=[1,2,3];
+function pbOpen(){const r=G.run;return PB_REQ.filter(q=>(r.realm||0)>=q&&!(typeof isPham==='function'&&isPham())).length;}
 const SPEC=[['tuivat','Trữ vật'],['phuongtien','Phương tiện'],['hoa','Hỏa chủng'],['dinh','Lô đỉnh'],['tran','Trận pháp']];
 const KSLOT={kiem:'vukhi',dao:'vukhi',phap:'vukhi',but:'vukhi',giap:'giap',bao:'choang',tram:'non',non:'non',ngoa:'giay',hoan:'gang',gang:'gang',dai:'dai',nhan:'nhan',boi:'boi',hotam:'boi',tui:'tuivat',dinh:'dinh',hoa:'hoa',tran:'tran'};
-const SLOT_N={vukhi:'Vũ khí',non:'Nón',boi:'Ngọc bội',gang:'Găng',giap:'Giáp',choang:'Áo choàng',nhan:'Nhẫn',dai:'Đai lưng',phapbao:'Pháp bảo',giay:'Giày',tuivat:'Trữ vật',hoa:'Hỏa chủng',dinh:'Lô đỉnh',tran:'Trận pháp',phuongtien:'Phương tiện'};
+const SLOT_N={vukhi:'Vũ khí',non:'Nón',boi:'Ngọc bội',gang:'Găng',giap:'Giáp',choang:'Áo choàng',nhan:'Trang sức',dai:'Đai lưng',phapbao:'Pháp bảo',giay:'Giày',tuivat:'Trữ vật',hoa:'Hỏa chủng',dinh:'Lô đỉnh',tran:'Trận pháp',phuongtien:'Phương tiện'};
 function slotOf(rel){return KSLOT[rel.k]||'phapbao';}
-function slotsFor(rel){const s=slotOf(rel);return s==='nhan'?['nhan1','nhan2']:s==='phapbao'?['phapbao1','phapbao2']:[s];}
+function slotsFor(rel){const s=slotOf(rel);return s==='nhan'?['nhan1']:s==='phapbao'?PB_SLOTS.slice(0,pbOpen()):[s];}
 function eqOf(){const r=G.run;if(!r.eq)r.eq={};if(!r.dd)r.dd=[];return r.eq;}
-function equip(i){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;const S0=slotsFor(rel);const s=S0.find(x=>!E[x])||S0[0];
+function equip(i){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;const S0=slotsFor(rel);if(!S0.length){if(typeof note==='function')note('Ô pháp bảo mở khi đạt Trúc Cơ.');return;}const s=S0.find(x=>!E[x])||S0[0];
   r.relics.splice(i,1);if(E[s]){E[s].seen=1;r.relics.push(E[s]);}rel.seen=1;E[s]=rel;clampHp();saveSoon();}
 function equipTo(i,slot){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;if(!slot||!slotsFor(rel).includes(slot))return equip(i);
   r.relics.splice(i,1);if(E[slot]){E[slot].seen=1;r.relics.push(E[slot]);}rel.seen=1;E[slot]=rel;clampHp();saveSoon();}
@@ -734,8 +737,8 @@ function playerMind(tid){const r=G.run,sc=r.scene;const u=readyPlayer(sc);if(!u|
 // chuyển nhân vật cũ sang hệ mới: mỗi pháp thuật thành một công pháp, thêm một tâm pháp nhập môn
 {const _r2=run2;run2=function(){const r=_r2();if(!r||r.arts)return r;r.arts=[];
   // khởi đầu: một công pháp, một tâm pháp phàm phẩm, cảnh giới phàm nhân cũng học được
-  const s0=(r.skills||[]).find(k=>SK[k.id]);const c0=genArt('cp',0,s0?s0.id:null,{req:0});c0.lines.forEach(x=>x.req=0);r.arts.push(c0);
-  const t0=genArt('tp',0,null,{req:0,el:'vo'});t0.n='Dẫn Khí Quyết';t0.lines[0]={fx:'tvP',v:6,n:'Tu luyện',d:'Tu vi nhận thêm {v}%',req:0};t0.lines.forEach(x=>x.req=0);r.arts.push(t0);
+  for(const s0 of (r.skills||[]).filter(k=>SK[k.id])){const c0=genArt('cp',0,s0.id,{req:0});c0.lines.forEach(x=>x.req=0);c0.src=s0.src||'';r.arts.push(c0);}
+  const t0=genArt('tp',0,null,{req:0,el:'vo'});t0.n='Dẫn Khí Quyết';t0.start=1;t0.lines[0]={fx:'tvP',v:6,n:'Tu luyện',d:'Tu vi nhận thêm {v}%',req:0};t0.lines.forEach(x=>x.req=0);r.arts.push(t0);
   r.chu=[null,null,null,null,null,null,null,null];r.chuOpen=4;r.arts.slice(0,4).forEach((a,i)=>{r.chu[i]={k:'a',u:a.u};});r.kn=null;syncSkills();return r;};}
 // ----- thiêu đốt thọ nguyên: mỗi trận tối đa hai lần, lần sau đắt và dữ hơn -----
 // Lần 1 · Đốt huyết: mất ~7% thọ tối đa, hồi 60% linh lực, đầy thể lực, giải độc, bỏng, suy yếu. Không mất lượt.
@@ -762,7 +765,7 @@ function thEl(i){return TH_EL[i%5];}
 function thList(){const r=G.run;return r.th||(r.th=[]);}
 function thNear(i,n){return Math.round((i+0.5)/TH_N*n)%n;}
 function thCost(){const n=thList().length;return {tv:8+n*2,st:price(6+n*3),h:3*HM};}
-function thWhy(i){const r=G.run;if(thList().includes(i))return 'Đã khai.';if(thList().length>=TH_MAX[clamp(r.realm,0,5)])return REALM[r.realm]+' chỉ khai được '+TH_MAX[clamp(r.realm,0,5)]+' tiểu huyệt.';
+function thWhy(i){const r=G.run;if(thList().includes(i))return 'Đã khai.';if(thList().length>=TH_MAX[clamp(r.realm,0,5)])return realmName()+' chỉ khai được '+TH_MAX[clamp(r.realm,0,5)]+' tiểu huyệt.';
   const c=thCost();if(r.scene||r.moving)return 'Phải đứng yên ngoài bản đồ.';if(r.tv<c.tv)return 'Cần '+c.tv+'% tu vi.';if(r.st<c.st)return 'Cần '+c.st+' linh thạch.';return '';}
 function thOpenAct(i){const r=G.run;if(thWhy(i))return false;const c=thCost();r.tv-=c.tv;r.st-=c.st;thList().push(i);advanceTime(c.h);if(!G.run)return true;log('Khai thông một tiểu huyệt hành '+EL[thEl(i)].n+'.');clampHp();saveSoon();return true;}
 {const _cf=chuFx;chuFx=function(fx){_cf(fx);const r=G.run;if(!r||!r.th)return;for(const i of r.th){const f=TH_FX[thEl(i)];fx[f[0]]=(fx[f[0]]||0)+f[1];}};}
@@ -780,7 +783,7 @@ function onHit(sc,u,t,d,crit,blocked,sk){
   if(!t.dazed){let loss=clamp(d/Math.max(1,t.max)*220,8,45);if(blocked)loss*=0.5;if(t.boss)loss*=0.5;if(crit)loss*=1.3;t.dl=Math.max(0,t.dl-loss);
     if(t.dl<=0){t.dazed=1;clog(sc,(t.isMain?'Ngươi':t.name)+' cạn định lực, choáng váng: mất lượt kế tiếp.',t.side==='A'?'en':'me');cfx(sc,{k:'daze',id:t.id});
       if(t.phase==='charge'&&!(t.pending&&t.pending.sk.fx.steady)){toRecover(sc,t,1);doneAct(sc,t);}}}
-  if(!sc.pt){const me=mainUnit(sc);if(me&&me.hp>0){if(u===me)me.than=Math.min(100,(me.than||0)+9);else if(t===me)me.than=Math.min(100,(me.than||0)+8);}}
+  if(!sc.pt){const me=mainUnit(sc);if(me&&me.hp>0){if(u===me)me.than=Math.min(100,(me.than||0)+12);else if(t===me)me.than=Math.min(100,(me.than||0)+17);}}
 }
 function dazeClear(sc,u){u.dazed=0;u.dl=100;clog(sc,(u.isMain?'Ngươi':u.name)+' choáng, bỏ lỡ một lượt.',u.side==='A'?'en':'me');}
 {const _ai=aiAct;aiAct=function(sc,u){if(u&&u.hp>0&&u.dazed){dazeClear(sc,u);toRecover(sc,u,1);doneAct(sc,u);return;}return _ai(sc,u);};}
@@ -821,3 +824,1341 @@ function playerUlt(){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||u.dazed
   ptEnd(sc,u,'Pháp tướng tan đi, thần lực cạn sạch.');return ok;}
 {const _oz2=onZero;onZero=function(sc,u){if(u.isMain&&sc.pt&&PT[sc.pt.el].regen)u.st.regen=Math.max(u.st.regen||0,1);_oz2(sc,u);
   if(u.isMain&&sc.pt&&sc.pt.left>0&&u.hp>0){sc.pt.left--;if(sc.pt.left<=0)ptEnd(sc,u,'Hết thời hạn, pháp tướng tan đi.');}};}
+
+// ================= ĐỢT 7: TƯ CHẤT, NIỆM LỰC, THẦN LỰC CỦA ĐỐI THỦ =================
+// Tư chất: độ tinh thuần của linh căn (1–100), định sẵn lúc sinh. Linh căn là "mấy đường ống" dẫn linh khí,
+// tư chất là "ống to hay nhỏ": cùng là tam linh căn nhưng tư chất cao vẫn tu nhanh hơn hẳn.
+// Linh căn càng ít hệ thì tư chất thường càng cao. Hệ số tu luyện từ 0,7 (tư chất 0) tới 1,3 (tư chất 100).
+const TC_BIAS={thien:15,bien:12,song:6,tam:0,tu:-4,tap:-8};
+const TC_N=[[90,'Thiên tư'],[75,'Cực phẩm'],[55,'Thượng phẩm'],[35,'Trung phẩm'],[0,'Hạ phẩm']];
+function tuChat(){const r=G.run;if(!r)return 50;if(r.tuchat==null){const h=hashS('tuchat'+r.ten+r.kiep+(r.bornT||0));r.tuchat=clamp((h%41)+((h>>>7)%41)+10+(TC_BIAS[r.root.id]||0),5,100);}return r.tuchat;}
+function tcName(v){return (TC_N.find(x=>v>=x[0])||TC_N[4])[1];}
+function tcMult(v){return 0.7+v*0.006;}
+// Niệm lực: kho sức thần thức dùng trong trận, bằng ba lần chỉ số Thần thức. Vào trận thì đầy.
+// Dùng vật phẩm, tế pháp bảo, đánh thần thức đều tốn niệm lực. Dùng đồ lúc chuẩn bị trước trận thì không tốn.
+const NL_PILL=10,NL_DD=15,NL_MIND=20;
+{const _S7=S;S=function(){const s=_S7();if(G.run){s.tuchat=tuChat();s.tvM*=tcMult(s.tuchat);s.nl=Math.round(s.than*3);}return s;};}
+{const _pu=playerUnit;playerUnit=function(){const u=_pu();const n=S().nl;u.nl=n;u.maxNl=n;return u;};}
+function nlOk(u,c){return u&&(u.maxNl==null||(u.nl||0)>=c);}
+function nlUse(u,c){if(u&&u.maxNl!=null)u.nl=Math.max(0,(u.nl||0)-c);}
+{const _pp7=playerPillAct;playerPillAct=function(i){const sc=G.run.scene;const u=readyPlayer(sc);if(u&&!u.dazed&&!nlOk(u,NL_PILL))return false;const ok=_pp7(i);if(ok&&u&&!u.dazed)nlUse(u,NL_PILL);return ok;};}
+{const _pd7=playerDD;playerDD=function(j,t){const u=readyPlayer(G.run.scene);if(!nlOk(u,NL_DD))return false;const ok=_pd7(j,t);if(ok)nlUse(u,NL_DD);return ok;};}
+// đòn thần thức: nay tốn niệm lực thay cho linh lực
+{const _pm7=playerMind;playerMind=function(t){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||u.dazed||!nlOk(u,NL_MIND))return false;const add=Math.ceil(u.maxMp*0.3);u.mp+=add;const ok=_pm7(t);if(ok)nlUse(u,NL_MIND);else u.mp-=add;return ok;};}
+// Thần lực của đối thủ: cũng nạp khi đánh trúng hoặc bị trúng. Đầy thì hiển hóa pháp tướng theo hệ của nó,
+// lượt sau dồn hết vào một đòn tối thượng (uy lực ×1,6), đánh xong pháp tướng tan, thần lực về 0.
+{const _oh7=onHit;onHit=function(sc,u,t,d,crit,blocked,sk){_oh7(sc,u,t,d,crit,blocked,sk);if(d<=0||sc.kiep)return;
+  const add=(x,v)=>{if(x&&x.side==='B'&&!x.immune&&x.hp>0&&!x.fpt)x.than=Math.min(100,(x.than||0)+v);};add(t,12);add(u,9);};}
+function foePtStart(sc,u){const P=PT[u.el]||PT.vo;u.fpt={n:P.n,el:PT[u.el]?u.el:'vo',undo:{atk:u.atk,matk:u.matk,def:u.def,crit:u.crit}};
+  if(P.atk){u.atk=Math.round(u.atk*(1+P.atk));u.matk=Math.round((u.matk||u.atk)*(1+P.atk));}if(P.def)u.def=Math.round(u.def*(1+P.def));if(P.crit)u.crit=(u.crit||5)+P.crit;
+  if(P.block)u.st.block=(u.st.block||0)+Math.round(u.max*P.block);if(P.evade)u.st.evade=(u.st.evade||0)+P.evade;
+  clog(sc,`${u.name} thần lực viên mãn! ${P.n} hiển hóa sau lưng nó.`,'en');cfx(sc,{k:'ult',el:u.fpt.el,n:u.name+' · '+P.n});sc.rev=(sc.rev||0)+1;}
+function foePtEnd(sc,u){const o=u.fpt&&u.fpt.undo;if(!o)return;u.atk=o.atk;u.matk=o.matk;u.def=o.def;u.crit=o.crit;u.fpt=null;u.than=0;u._ult=0;clog(sc,`Pháp tướng của ${u.name} tan đi.`,'fl');sc.rev=(sc.rev||0)+1;}
+{const _ai7=aiAct;aiAct=function(sc,u){
+  if(u&&u.side==='B'&&u.hp>0&&!u.immune&&!u.dazed&&!sc.kiep&&!sc.spar){
+    if(u.fpt)u._ult=1;else if((u.than||0)>=100)foePtStart(sc,u);}
+  return _ai7(sc,u);};}
+{const _rs7=resolveSkill;resolveSkill=function(sc,u,sk,lv,tg,qm,offs){
+  if(u&&u._ult&&u.fpt&&sk&&sk.fx&&sk.fx.p){u._ult=0;cfx(sc,{k:'strike',el:u.fpt.el,n:sk.n});clog(sc,`${u.name} dồn hết thần uy vào một đòn: ${sk.n}!`,'en');
+    sk=Object.assign({},sk,{fx:Object.assign({},sk.fx,{p:sk.fx.p*1.6})});const res=_rs7(sc,u,sk,lv,tg,qm,offs);foePtEnd(sc,u);return res;}
+  return _rs7(sc,u,sk,lv,tg,qm,offs);};}
+
+// ================= ĐỢT 9: LỰC CHIẾN, TU VI TÍNH BẰNG ĐIỂM, BẾ QUAN HÊN XUI =================
+// Lực chiến = căn bậc hai của (sức đánh × sức chịu đòn) × hệ số tốc độ × 2.
+// Lấy căn bậc hai nên khí huyết gấp đôi thì lực chiến chỉ tăng khoảng 1,4 lần, không vọt lên vì máu nhiều.
+// Trang bị, công pháp đã nằm sẵn trong các chỉ số nên được tính luôn.
+function lcCalc(o){const atk=Math.max(o.atk||0,o.matk||0);
+  const off=atk*(1+(o.crit||0)/100*Math.max(0,(o.critDmg||150)-100)/100)*(1+((o.cx||10)-10)*0.01);
+  const surv=((o.maxHp||o.max||1)+0.3*(o.maxMp||0))*(1+Math.max(0,o.def||0)/40)*(1+(o.ne||0)*0.01)*(1+(o.hoTam||0)*0.005);
+  const spd=Math.max(0.6,1+(((o.tp||10)+(o.hoi||10))/2-10)*0.02);return Math.round(Math.sqrt(Math.max(0,off*surv))*spd*2);}
+function lucChien(){return lcCalc(S());}
+// Thang điểm tu vi: tu vi vẫn lưu theo %, đổi ra điểm để hiển thị. Đầy một cảnh giới = số năm bế quan chuẩn × 8640 giờ × 5 điểm.
+// Một giây đồng hồ trong game là một giờ, nên "tu vi/giây" là số điểm mỗi giờ bế quan.
+const TV_K=5,BQ_LO=0.6,BQ_HI=1.4;
+const TVP=[500,1500,4000,10000,25000,60000]; // tu vi cần để đầy mỗi cảnh giới (lịch luyện cùng thang)
+function tvPts(realm){return TVP[clamp(realm,0,5)];}
+// tu vi thực nhận khi bế quan còn nhân thêm hệ số tu luyện một lần nữa lúc cộng vào (luật cũ), nên con số hiển thị tính cả lần đó
+function bqReal(){return bqRate()*S().tvM;}
+function bqNeedY(){const r=G.run;return r.tv>=100?0:Math.max(0.25,Math.ceil((100-r.tv)/bqReal()*4)/4);}
+function tvPerMonth(){const avg=bqReal()/100*tvPts(G.run.realm)/12;return [Math.max(0,Math.floor(avg*BQ_LO)),Math.max(1,Math.ceil(avg*BQ_HI))];}
+function bqSpan(y){const r=G.run;if(!(y>0))return [0,0];const base=bqReal()*y*(y<1?0.9:1),pas=thonapPct()*y*12;const P=tvPts(r.realm)/100;
+  return [Math.floor(tvSimAdd(base*BQ_LO+pas)*P),Math.ceil(tvSimAdd(base*BQ_HI+pas)*P)];}
+function fmtN(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+// mỗi lần bế quan rút một hệ số may rủi từ 0,6 tới 1,4: trung bình vẫn như cũ
+{const _bc9=bqCustom;bqCustom=function(y){const f=BQ_LO+Math.random()*(BQ_HI-BQ_LO);const _r=bqRate;bqRate=function(){return _r()*f;};try{return _bc9(y);}finally{bqRate=_r;}};}
+
+// ================= ĐỢT 10: THỔ NẠP VÀ LỊCH LUYỆN =================
+// Thổ nạp: thân thể tự hít thở linh khí, không cần bế quan, tu vi vẫn nhích lên theo thời gian.
+// Rất ít: chừng 5% tốc độ bế quan. Theo hệ số tu luyện (linh căn, tư chất, ngộ tính từ xuất thân,
+// tu vi +% từ công pháp, tâm pháp, trang bị, mệnh cách) và linh khí nơi đang đứng.
+function thonapPct(){const r=G.run;if(!r)return 0;const n=nodeById(r.at);return 100/(BQ_Y[clamp(r.realm,0,5)]*12)*0.05*S().tvM*LK_M[lkOf(n)];} // % tu vi mỗi tháng
+function thonapPts(){return Math.round(thonapPct()*12/100*tvPts(G.run.realm));} // tu vi mỗi năm
+{const _adv10=advanceTime;let dep=0;advanceTime=function(h){dep++;let o;try{o=_adv10(h);}finally{dep--;}
+  if(!dep&&G.run&&h>0&&G.run.tv<100){const add=thonapPct()*h/HM;if(add>0)addTv(add);}return o;};}
+// Lịch luyện: như tu vi nhưng chỉ có được nhờ thực chiến và đi lại giang hồ. Lưu theo % như tu vi.
+// Tu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần (mọi nguồn, kể cả đan dược):
+// vượt dưới 20% nhận đủ; 30% còn 70%; 40% còn 35%; 60% còn 10%; từ 70% trở lên chỉ còn 2% (bình cảnh).
+// Lịch luyện cao hơn tu vi thì được ngộ đạo: nhận thêm tối đa 15%.
+// Muốn đột phá phải có lịch luyện ít nhất 70%. Đột phá xong lịch luyện về 0, giữ lại 20% phần vượt quá 100%.
+const LL_T=[[20,1],[30,.7],[40,.35],[60,.1],[70,.02]],LL_BT=100,LL_MAX=150,LL_CAPE=0.05; // dưới 5% coi như chạm đáy
+function llOf(){return (G.run&&G.run.ll)||0;}
+function llEff(tv){const ll=llOf();const gap=tv-ll;if(gap<0)return 1+Math.min(0.15,-gap/100*0.5);if(gap<=LL_T[0][0])return 1;
+  for(let i=1;i<LL_T.length;i++){const [g1,e1]=LL_T[i-1],[g2,e2]=LL_T[i];if(gap<=g2)return e1+(e2-e1)*(gap-g1)/(g2-g1);}return LL_T[LL_T.length-1][1];}
+function tvSimAdd(raw){const r=G.run;let add=0,rem=raw;while(rem>1e-9&&r.tv+add<100){const st=Math.min(rem,0.5);add+=st*llEff(r.tv+add);rem-=st;}return Math.min(add,100-r.tv);}
+// tu vi luôn cộng theo số nguyên: phần lẻ dồn lại cho lần sau
+{const _at10=addTv;addTv=function(x){const r=G.run;if(!(x>0)||!r)return _at10(x);const P=tvPts(r.realm)/100;const raw=tvSimAdd(x)*P+(r.tvAcc||0);const pts=Math.floor(raw+1e-9);r.tvAcc=raw-pts;if(pts<=0)return;
+  const res=_at10(pts/P);if(G.run&&G.run.tv<100)G.run.tv=Math.round(G.run.tv*P)/P;return res;};}
+// bế quan tới mức nào thì chạm đáy (chỉ còn 2%): trả về số năm, hoặc null nếu 5 năm vẫn chưa chạm
+function bqCapY(){const r=G.run;if(r.tv>=100)return null;for(let y=0.25;y<=5;y+=0.25){const raw=bqReal()*y*(y<1?0.9:1)+thonapPct()*y*12;if(llEff(r.tv+tvSimAdd(raw))<=LL_CAPE)return y;}return null;}
+function llPtsOf(){return Math.round(llOf()/100*tvPts(G.run.realm));}
+function llAdd(x,why,quiet){const r=G.run;if(!r||!(x>0))return 0;const P=tvPts(r.realm)/100;const pts=Math.max(1,Math.round(x*P));const b=r.ll||0;r.ll=Math.min(LL_MAX,Math.round((b*P+pts))/P);const d=Math.round((r.ll-b)*P);
+  if(d>0&&!quiet){if(why)log(`Lịch luyện +${d} (${why}).`);const sc=r.scene;if(sc&&sc.type==='combat')sc.llGain=(sc.llGain||0)+d;else if(sc&&Array.isArray(sc.chips))sc.chips.push(chip('⚔','+'+d+' lịch luyện','Lịch luyện: '+why,'up'));else note('+'+d+' lịch luyện · '+why);}return d;}
+{const _cb10=canBreak;canBreak=function(){return _cb10()&&llOf()>=LL_BT;};}
+{const _bf10=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const res=_bf10.apply(this,arguments);if(G.run&&G.run.realm>rl)G.run.ll=Math.max(0,(G.run.ll||0)-100)*0.2;return res;};}
+// nguồn lịch luyện
+{const _fc10=finishCombat;finishCombat=function(sc){const res=_fc10(sc);try{const r=G.run;if(r&&!sc.spar&&!sc.kiep&&sc.en&&sc.en.k!=='tamma'&&sc.over!=='dead'){
+  const foes=sc.units.filter(u=>u.side==='B'&&!u.immune);const fl=foes.reduce((a,u)=>a+lcCalc(u),0);const ratio=clamp(fl/Math.max(1,lucChien()),0.15,2);
+  const me=mainUnit(sc);const k=sc.en.k||sc.en.n;r.llSeen=r.llSeen||{};const cnt=r.llSeen[k]||0;r.llSeen[k]=cnt+1;
+  let g=(sc.over==='win'?9:sc.over==='lose'?3:1)*Math.pow(ratio,0.8)/(1+0.25*cnt);if(sc.over==='win'&&me&&me.hp<me.max*0.2)g*=1.5;
+  llAdd(g,sc.over==='win'?'thắng trận':'trận thua');}}catch(e){console.error(e);}return res;};}
+{const _op10=openPlace;openPlace=function(id){_op10(id);const r=G.run;if(!r||!r.scene)return;r.llP=r.llP||[];const k=r.scene.id;if(!r.llP.includes(k)){r.llP.push(k);llAdd(4,'tới nơi mới');}};}
+{const _me10=meetEnt;meetEnt=function(e){const res=_me10(e);const r=G.run;if(r&&e){r.llN=r.llN||[];const k=e.name||e.id;if(!r.llN.includes(k)){r.llN.push(k);llAdd(3,'quen người mới');}}return res;};}
+{const _qw10=questWin;questWin=function(q){const res=_qw10(q);if(res&&res.length)llAdd(5,'xong việc');return res;};}
+
+// ================= ĐỢT 12: ĐÁNH NHAU KHÔNG CHO TU VI; LỰA CHỌN Ở TRÀ LÂU, KHÁCH ĐIẾM, TỬU PHƯỜNG =================
+// Trong lúc xử lý kết quả một trận, mọi phần thưởng tu vi đổi thành lịch luyện (một nửa).
+let FIGHT_OUT=0;
+function llChipMerge(L,d){if(!(d>0))return;const c=L.find(x=>x&&x.i==='⚔');if(c){c.t='+'+(parseInt(c.t.replace(/\D/g,''))+d)+' lịch luyện';}else L.unshift(chip('⚔','+'+d+' lịch luyện','Lịch luyện: có được nhờ thực chiến','up'));}
+{const _ae12=applyE;applyE=function(e,v){if(FIGHT_OUT&&e&&e.tv>0){e=Object.assign({},e);const x=e.tv*0.5;delete e.tv;const ch=_ae12(e,v);llChipMerge(ch,llAdd(x,null,true));return ch;}return _ae12(e,v);};}
+{const _cc12=combatContinue;combatContinue=function(){const sc0=G.run&&G.run.scene;const g=sc0&&sc0.llGain||0;FIGHT_OUT=1;let res;try{res=_cc12();}finally{FIGHT_OUT=0;}
+  const sc=G.run&&G.run.scene;if(g&&sc&&sc!==sc0){if(!Array.isArray(sc.chips))sc.chips=[];llChipMerge(sc.chips,g);}return res;};}
+
+// Trà lâu, khách điếm, tửu phường: chạm vào thì hiện vài lựa chọn. Mỗi lựa chọn có giá (giờ, linh thạch),
+// có thể đòi chỉ số (ngộ tính, đạo tâm...), và đôi khi có chuyện đặc biệt chỉ còn trong ít giờ.
+const VENUE_N={tea:'Trà lâu',inn:'Khách điếm',tuu:'Tửu phường'};
+const VENUE_IN={tea:['Trà lâu ồn ào tiếng quạt giấy và chén sứ. Tiểu nhị đon đả chạy ra.','Mùi trà mới pha thơm lừng. Bàn nào cũng có người bàn chuyện thiên hạ.'],
+  inn:['Chưởng quầy ngẩng lên khỏi bàn tính, cười: “Khách quan nghỉ chân hay ở trọ?”','Khách điếm hai tầng, dưới ăn trên ngủ. Tiếng bát đũa lách cách.'],
+  tuu:['Tửu phường nồng mùi rượu và mồ hôi. Giữa phòng có người đang vỗ bàn ca hát.','Vò rượu xếp chồng tận trần. Tửu khách nhìn ngươi từ đầu tới chân.']};
+const VENUE_SP={tea:{id:'doicau',l:'Thi đối câu đối của lão tú tài',d:'Lão tú tài treo giải: ai đối được vế của lão thì nhận một túi linh thạch.',h:1,req:['ngo',14,'Ngộ tính'],g:{st:12,ll:2}},
+  inn:{id:'hotong',l:'Nhận lời hộ tống một thương nhân',d:'Một thương nhân đang tìm người hộ tống qua đoạn đường vắng. Trả công hậu, nhưng dễ đụng cướp.',h:4,g:{st:15},fight:1},
+  tuu:{id:'gaysu',l:'Dạy cho gã say gây sự một bài học',d:'Một gã say đập bàn, chửi bới, giật đồ của tửu khách. Không ai dám can.',h:1,g:{st:6,karma:1},fight:1}};
+function venueSpec(n,v){const r=G.run,w=W();if(!n.vsp||n.vsp.k!==r.kiep||n.vsp.v!==v||w.t>n.vsp.until){n.vsp={k:r.kiep,v,until:chance(.35)?w.t+ri(4,12):-1};}return n.vsp.until>w.t?n.vsp.until-w.t:0;}
+function venueOpts(n,v){const s=S(),r=G.run;const hp=s.maxHp,L=[];const add=o=>L.push(o);
+  if(v==='tea'){add({id:'nghe',l:'Gọi ấm trà, ngồi nghe chuyện',d:'Ngồi một góc, nghe bàn bên kể chuyện: biết thêm một nơi chưa tới quanh đây và tin tức giang hồ.',h:1,g:{info:1}});
+    add({id:'hoi',l:'Dúi tiền hỏi tiểu nhị đường đi',d:'Tiểu nhị chạy bàn khắp nơi, biết nhiều. Cho ít tiền, hắn chỉ cho ngươi hai nơi quanh vùng.',h:1,st:price(1),g:{info:2}});
+    add({id:'co',l:'Đánh một ván cờ với khách lạ',d:'Ông khách áo xám bày sẵn bàn cờ. Thắng được thì ông ta kể cho nghe chuyện đi đường, coi như lịch luyện.',h:2,req:['ngo',12,'Ngộ tính'],g:{ll:3,tamma:-2}});
+    add({id:'tinh',l:'Ngồi yên thưởng trà, tĩnh tâm',d:'Không nghe, không nói, chỉ ngồi uống trà nhìn người qua lại. Lòng lắng xuống.',h:2,st:price(1),g:{tamma:-4}});}
+  if(v==='inn'){add({id:'phong',l:'Thuê phòng thường, ngủ một đêm',d:'Phòng chật nhưng sạch. Ngủ một giấc là hồi đầy khí huyết, linh lực.',h:8,st:price(4),g:{hp:hp-r.hp,mp:s.maxMp-r.mp,tamma:-2}});
+    add({id:'thuong',l:'Thuê phòng thượng hạng có tụ linh trận',d:'Phòng tốt nhất, dưới sàn khắc tụ linh trận nhỏ. Ngủ dậy hồi đầy, tâm lắng hẳn, tu vi nhích lên chút ít.',h:8,st:price(10),g:{hp:hp-r.hp,mp:s.maxMp-r.mp,tamma:-6,tv:1}});
+    add({id:'an',l:'Ngồi sảnh dưới ăn một bữa',d:'Bát cơm nóng, đĩa thịt kho. Ăn no thì khí huyết hồi một ít.',h:1,st:price(1),g:{hp:Math.min(hp-r.hp,Math.round(hp*0.15))}});
+    add({id:'chuong',l:'Hỏi chưởng quầy có chuyện gì lạ',d:'Chưởng quầy gặp đủ loại khách, nghe đủ loại chuyện. Hỏi thì biết thêm tin tức.',h:1,g:{info:1}});}
+  if(v==='tuu'){add({id:'chen',l:'Uống vài chén, nghe chuyện',d:'Rượu nhạt mà cay. Uống xong thì người ấm lên, tâm ma nguôi bớt, nghe được ít tin tức.',h:3,st:price(2),g:{hp:Math.min(hp-r.hp,Math.round(hp*0.1)),tamma:-4,info:1}});
+    add({id:'moi',l:'Mời cả bàn một vò rượu ngon',d:'Bỏ tiền mời rượu, làm quen tửu khách khắp nơi. Nghe được chuyện giang hồ, coi như lịch luyện.',h:3,st:price(6),g:{tamma:-5,ll:3,info:1}});
+    add({id:'dau',l:'Đấu rượu với gã tửu khách to con',d:'Gã to con thách ai uống thắng được hắn thì lấy hết tiền cược trên bàn. Cần đạo tâm vững để không gục.',h:2,req:['tam',11,'Đạo tâm'],g:{st:price(5),ll:1}});
+    add({id:'ca',l:'Nghe ca kỹ đàn hát',d:'Một khúc tì bà, giọng hát trong veo. Lòng nhẹ hẳn đi.',h:2,st:price(3),g:{tamma:-8}});}
+  const left=venueSpec(n,v);if(left>0){const o=Object.assign({},VENUE_SP[v],{spec:left});if(o.id==='gaysu'||o.id==='hotong')o.g=Object.assign({},o.g);add(o);}
+  for(const o of L){o.st=o.st||0;o.no=r.st<o.st?'Không đủ linh thạch':'';if(o.req&&(s[o.req[0]]||0)<o.req[1])o.lack=o.req[2]+' cần '+o.req[1]+', ngươi có '+(s[o.req[0]]||0);}
+  return L;}
+function venueDo(v,id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);const o=venueOpts(n,v).find(x=>x.id===id);if(!o||o.no||o.lack)return false;
+  r.st-=o.st;advanceTime(o.h);if(!G.run||G.run.scene!==sc)return true;sc.msg=[];let ch=[];
+  if(o.st)ch.push(chip('💎','−'+o.st,'Linh thạch','dn'));ch.push(chip('⏳',durH(o.h),'Thời gian trôi qua',''));
+  const g=o.g||{};
+  if(o.fight){n.vsp.until=-1;sc.venue=null;if(o.id==='gaysu')sc.msg=['Ngươi đứng dậy, gõ nhẹ lên bàn gã say. Gã quay lại, mắt đỏ ngầu.'];else sc.msg=['Đi được nửa đường, một toán cướp nhảy ra chặn xe.'];
+    startCombat({cnt:o.id==='hotong'?2:1},{kind:'node'});const cs=G.run.scene;if(cs)cs.venueWin=g;return true;}
+  if(o.spec)n.vsp.until=-1;
+  if(g.info){if(v==='tea'&&id==='nghe'||v==='tuu'||v==='inn'){teaHouse(n);}else{for(let i=0;i<g.info;i++){const c=regionOf(r.region).nodes.filter(x=>x.fog===0);if(c.length){const x=pick(c);hearOf(x);sc.msg.push('Tiểu nhị chỉ đường tới '+x.name+'.');}}}}
+  const LEAD={tea:{nghe:[''],hoi:['Tiểu nhị nhận tiền, ghé tai nói nhỏ.','Tiểu nhị đút tiền vào tay áo, kéo ngươi ra góc khuất.','“Khách quan hỏi đúng người rồi.” Tiểu nhị cười hề hề.'],
+      co:['Ván cờ kéo dài tới khi trà nguội. Ông khách thua, cười khà, kể cho ngươi nghe chuyện đi đường.','Hai bên giằng co từng nước. Cuối cùng ông khách buông quân, kể chuyện một chuyến vượt núi năm xưa.','Ông khách đi nước nào cũng chậm rãi. Thua rồi, ông ta chỉ cho ngươi mấy mẹo sống sót nơi hoang dã.'],
+      tinh:['Ngươi ngồi yên, nhìn khói trà bay lên. Lòng lắng như mặt hồ.','Tiếng ồn quanh quán dần xa. Chỉ còn hơi trà ấm trong tay.','Nắng xiên qua song cửa. Ngươi uống cạn chén, thấy lòng nhẹ hẳn.'],doicau:['Ngươi viết vế đối. Lão tú tài đọc đi đọc lại, rồi vỗ đùi: “Hay!”']},
+    inn:{phong:['Phòng chật nhưng sạch, chăn có mùi nắng. Ngươi ngủ một giấc ngon.','Đêm nay mưa rơi lộp độp trên mái. Ngươi ngủ say tới sáng.','Phòng cũ, giường kêu cót két. Nhưng mệt quá, ngươi vẫn ngủ một mạch.'],
+      thuong:['Tụ linh trận rì rầm suốt đêm. Sáng ra ngươi thấy tinh thần sảng khoái lạ thường.','Linh khí trong phòng đặc như sương. Ngươi ngủ mà như đang tĩnh tọa.','Hương trầm thoảng nhẹ, trận văn dưới sàn lấp lánh. Ngươi thức dậy, thân thể nhẹ bẫng.'],
+      an:['Cơm nóng, canh ngọt. Ăn xong thấy người khỏe ra.','Hôm nay quán có cá kho. Ngươi ăn hết hai bát.','Bánh bao nóng hổi, trà gừng cay cay. Người ấm hẳn lên.'],chuong:['Chưởng quầy hạ giọng kể chuyện mấy vị khách lạ.','Chưởng quầy lật sổ, chỉ vào vài cái tên lạ mới ghi tuần trước.','“Chuyện thì nhiều, khách quan muốn nghe chuyện gì?” Chưởng quầy rót thêm trà.']},
+    tuu:{chen:['Ba chén vào bụng, lòng nhẹ đi đôi chút.','Rượu nhạt mà cay. Bàn bên to tiếng, ngươi nghe được vài câu.','Chưởng quầy rót đầy chén, kể chuyện không ai hỏi.'],moi:['Cả bàn nâng chén. Người nào cũng có một chuyện để kể.','“Đạo hữu hào sảng!” Mấy tửu khách xúm lại, kể chuyện giang hồ tới khuya.','Vò rượu ngon vừa mở, cả quán quay sang. Ngươi làm quen thêm mấy gã giang hồ.'],
+      dau:['Chén thứ mười hai, gã to con gục xuống bàn. Cả quán vỗ tay.','Gã to con uống tới chén thứ chín thì lăn ra ngủ. Tiền cược về tay ngươi.','Hai bên uống tới khi trời sáng. Gã to con chịu thua, móc túi trả cược.'],
+      ca:['Khúc nhạc dứt, ngươi mới nhận ra mình đã ngồi rất lâu.','Ca kỹ hát một khúc biệt ly. Cả quán lặng đi.','Tiếng tì bà như mưa rơi trên lá chuối. Lòng ngươi dịu lại.']}};
+  sc.lastL=sc.lastL||{};const pool=(LEAD[v]&&LEAD[v][id])||[''];const cands=pool.filter(x=>x!==sc.lastL[v+id]);const lead=pick(cands.length?cands:pool);sc.lastL[v+id]=lead;
+  if(lead)sc.msg.unshift(lead);
+  if(g.hp>0)r.hp=Math.min(S().maxHp,r.hp+g.hp);if(g.mp>0)r.mp=Math.min(S().maxMp,r.mp+g.mp);if(g.hp>0)ch.push(chip('❤️','+'+g.hp,'Khí huyết','up'));
+  if(g.tamma<0&&r.tamma<=0)sc.msg.push('Lòng ngươi vốn đã yên, chẳng còn tâm ma nào để gột.');
+  const e={};if(g.tamma)e.tamma=g.tamma;if(g.st)e.st=g.st;if(g.karma)e.karma=g.karma;if(g.tv)e.tv=g.tv;ch=ch.concat(applyE(e));
+  if(g.ll){const d=llAdd(g.ll,null,true);llChipMerge(ch,d);}
+  if(!sc.msg.length)sc.msg=['Trà nhạt, chuyện cũng nhạt.'];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;return true;}
+// chuyện đặc biệt có đánh nhau: thắng thì nhận công
+{const _cc12b=combatContinue;combatContinue=function(){const sc0=G.run&&G.run.scene;const vw=sc0&&sc0.venueWin;const win=sc0&&sc0.over==='win';const res=_cc12b();
+  if(vw&&win&&G.run&&G.run.scene){const ps=G.run.scene;const ch=applyE({st:vw.st||0,karma:vw.karma||0});ps.chips=(ps.chips||[]).concat(ch);}return res;};}
+// khách điếm, tửu phường giờ có nhiều lựa chọn giá khác nhau: không khóa ô vì thiếu tiền
+{const _pa12=placeActs;placeActs=function(n){const L=_pa12(n);const r=G.run;for(const a of L){if(a.a==='inn'||a.a==='tuu'){a.dis=false;a.x='';a.h=0;}if(a.a==='tea')a.h=0;}return L;};}
+{const _pa12b=placeAct;placeAct=function(a){if(VENUE_N[a]){const sc=G.run&&G.run.scene;if(sc)sc.venue=a;return;}return _pa12b(a);};}
+// Chiến lợi phẩm: rớt ngẫu nhiên, không cho chọn. Thường 0–1 món, tinh anh 1–2, thủ lĩnh 2.
+{const _rw13=rewardScene;rewardScene=function(kind,en){_rw13(kind,en);const sc=G.run&&G.run.scene;if(!sc||sc.type!=='reward'||!sc.picks||!sc.picks.length)return;
+  const n=kind==='boss'?2:kind==='elite'?ri(1,2):1;const P=sc.picks.slice();const got=[];
+  for(let k=0;k<n&&P.length;k++){const i=Math.floor(R()*P.length);got.push(P.splice(i,1)[0]);}
+  sc.picks=got;for(let i=0;i<got.length;i++){sc.taken=-1;takePick(i);}sc.picks=[];sc.taken=0;};}
+
+// ================= ĐỢT 13: TRẠM DỊCH MỚI, HÀNG CÓ SỐ LƯỢNG =================
+// Phương tiện: mỗi loại có 5 phẩm. Mỗi trạm dịch bày ngẫu nhiên 3–5 món (loại, phẩm, số lượng), ba tháng thay hàng một lần.
+// Thuê: dùng được một tháng. Mua: dùng mãi. Giá cao hơn trước nhiều.
+const VEH_T=[{k:'ngua',n:['Ngựa thồ','Tuấn mã','Hãn huyết mã','Long câu','Thiên lý long câu'],m:1.7,p:60,realm:0,ic:'run'},
+  {k:'loc',n:['Linh lộc','Bạch lộc','Ngọc giác lộc','Cửu sắc lộc','Thần lộc'],m:1.9,p:90,realm:0,ic:'tree'},
+  {k:'hac',n:['Bạch hạc','Tiên hạc','Huyền hạc','Đan đỉnh hạc','Cửu thiên hạc'],m:2.8,p:260,realm:1,ic:'feather'},
+  {k:'chu',n:['Phi chu','Mộc lan chu','Thanh vân chu','Bích lạc chu','Càn khôn chu'],m:3.6,p:500,realm:1,ic:'cart'},
+  {k:'kiem',n:['Phi kiếm','Thanh phong kiếm','Lưu quang kiếm','Tử điện kiếm','Tru tiên kiếm'],m:6,p:1600,realm:2,ic:'sword'}];
+const TRAM_RESET=3*HM;
+function vehMake(k,tier){const T=VEH_T.find(x=>x.k===k);return {k,tier,n:T.n[tier],m:Math.round(T.m*(1+0.22*tier)*10)/10,realm:T.realm,ic:T.ic,p:T.p*Math.pow(1.9,tier)*1.8};}
+function vehBuy(v){return price(v.p);}function vehRent(v){return Math.max(2,Math.round(price(v.p)*0.08));}
+function tramStock(n){const r=G.run,w=W();const q=Math.floor(w.t/TRAM_RESET);
+  if(!n.tram||n.tram.q!==q||n.tram.kiep!==r.kiep){const T=VEH_T.filter(x=>x.realm<=r.region+1);const L=[];const cnt=ri(3,5);
+    for(let i=0;i<cnt;i++){const t=pick(T);const roll=R();const tier=clamp(Math.floor(roll*roll*3+r.region*0.6+(chance(.1)?1:0)),0,4);L.push(Object.assign(vehMake(t.k,tier),{qty:ri(1,3)}));}
+    L.sort((a,b)=>a.p-b.p);n.tram={q,kiep:r.kiep,L};}
+  return n.tram.L;}
+function tramResetIn(){return TRAM_RESET-(W().t%TRAM_RESET);}
+mountOf=function(){const r=G.run;if(!r)return null;const w=W();const own=r.veh||(r.mount?MOUNT.find(x=>x.id===r.mount):null);
+  const rent=r.rent&&r.rent.until>w.t?r.rent.v:null;if(rent&&(!own||rent.m>=own.m))return Object.assign({},rent,{rented:1});return own;};
+function vehTake(i,mode){const r=G.run,sc=r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);const L=tramStock(n);const v=L[i];if(!v||v.qty<=0||r.realm<v.realm)return false;
+  const c=mode==='buy'?vehBuy(v):vehRent(v);if(r.st<c)return false;r.st-=c;v.qty--;const o={k:v.k,tier:v.tier,n:v.n,m:v.m,realm:v.realm,ic:v.ic,p:v.p};
+  if(mode==='buy'){r.veh=o;r.mount=null;log('Mua '+v.n+'.');note('Đã mua '+v.n,'up');}else{r.rent={v:o,until:W().t+HM};log('Thuê '+v.n+' một tháng.');note('Đã thuê '+v.n+' một tháng','up');}return true;}
+// xe chuyến cũng đắt hơn
+{const _sl13=stageList;stageList=function(n){return _sl13(n).map(x=>Object.assign(x,{c:x.c*2}));};}
+// các tiệm: mỗi món có số lượng, hết thì thôi; một tháng thay hàng
+{const _os13=openShop;openShop=function(n){_os13(n);const sc=G.run&&G.run.scene;if(sc&&sc.type==='shop')for(const it of sc.items)if(it.qty==null)it.qty=it.k==='pill'?ri(1,3):1;};}
+{const _by13=buy;buy=function(i){const sc=G.run&&G.run.scene;const it=sc&&sc.items&&sc.items[i];if(!it||it.sold)return _by13(i);const q=it.qty==null?1:it.qty;_by13(i);if(it.sold){it.qty=q-1;if(it.qty>0)it.sold=0;}};}
+function shopResetIn(){return HM-(W().t%HM);}
+// tiệm tạp hóa: vào xem không tốn thời gian
+{const _pa13=placeActs;placeActs=function(n){const L=_pa13(n);for(const a of L)if(a.a==='taphoa')a.h=0;return L;};}
+{const _pc13=placeAct;placeAct=function(a){if(a==='taphoa'){const sc=G.run&&G.run.scene;if(sc&&sc.type==='place'){openShop(nodeById(sc.id));return;}}return _pc13(a);};}
+// ----- nhiệm vụ: phẩm theo độ khó, trả lại có phạt -----
+const QGRADE=['Dễ','Thường','Khó','Hiểm','Tử nạn','Tuyệt cảnh'];
+function questGrade(q){if(q.grade!=null)return q.grade;const n=nodeById(q.node);return clamp((n?n.danger:0)+(q.kind==='diet'?1:0),0,4);}
+{const _ob13=openBoard;openBoard=function(n){_ob13(n);if(n&&n.board)for(const q of n.board.list)if(q.grade==null){q.grade=questGrade(q);q.reward.st=Math.round(q.reward.st*(1+q.grade*0.25));}};}
+{const _tq13=takeQuest;takeQuest=function(i){const r=G.run,sc=r.scene;const n=sc&&nodeById(sc.id);const b=n&&n.board&&n.board.list[+i];const k=r.quests.length;_tq13(i);if(b&&r.quests.length>k){const q=r.quests[r.quests.length-1];q.grade=questGrade(b);q.d=b.kind==='diet'?'Tới nơi, vào mục Nhiệm vụ trong địa điểm để lùng tìm và hạ mục tiêu.':'Tới nơi, vào mục Nhiệm vụ trong địa điểm để giao tận tay.';}};}
+function questPenalty(q){return {st:Math.round((q.reward.st||0)*0.5),karma:-2};}
+function questCancel(id){const r=G.run;const q=r.quests.find(x=>x.id===id&&x.state==='open');if(!q)return false;const P=questPenalty(q);
+  q.state='fail';q.dropped=1;r.st=Math.max(0,r.st-P.st);applyE({karma:P.karma});log(`Trả lại việc: ${q.text}. Mất ${P.st} linh thạch, mang tiếng thất hứa.`);
+  const fn=nodeById(q.from);if(fn&&fn.board){const b=fn.board.list.find(x=>x.id===q.id);if(b)b.taken=false;}return true;}
+// ----- nhiệm vụ: hạn chót đủ rộng -----
+// Hạn cũ chỉ bằng thời gian đi đường cộng 3–8 ngày nên gần như luôn trễ. Nay: gấp rưỡi thời gian đi đường cộng 15–40 ngày.
+{const _ob14=openBoard;openBoard=function(n){_ob14(n);if(n&&n.board)for(const q of n.board.list)if(!q.v2){const p=findPath(n.id,q.node);const tH=p?travelHours(p):24*30;q.days=Math.ceil(tH*1.5/24)+ri(15,40);q.v2=1;}};}
+// việc đang nhận từ bản cũ: nới hạn thêm một lần
+{const _adv14=advanceTime;advanceTime=function(h){const r=G.run;if(r&&r.quests&&!r.qfix14){for(const q of r.quests)if(q.state==='open')q.due+=60*HD;r.qfix14=1;}return _adv14(h);};}
+// đi xe chuyến tới nơi cũng tính là đã tới
+{const _sg14=stageGo;stageGo=function(id){const r=G.run;const a=r&&r.at;_sg14(id);if(G.run&&G.run.at!==a)questArrive(G.run.at);};}
+
+{const _pa15=placeAct;placeAct=function(a){const sc=G.run&&G.run.scene;const res=_pa15(a);const s2=G.run&&G.run.scene;if(s2&&s2===sc)s2.seq=(s2.seq||0)+1;return res;};}
+
+// ================= ĐỢT 15: NHIỆM VỤ LÀM TẠI CHỖ, PHẦN THƯỞNG THEO PHẨM, THÔNG BÁO =================
+// Tới nơi không tự xong: vào địa điểm, mục "Nhiệm vụ" có việc riêng. Đưa tin thì giao tận tay; diệt yêu thì phải đánh.
+// Đánh thua hoặc bỏ chạy: nhiệm vụ thất bại. Quá hạn: thất hứa.
+// Phần thưởng: ít linh thạch (Dễ 3–5 ... Tử nạn 30–40), thêm đan dược, vật liệu, pháp bảo theo phẩm, và lịch luyện.
+const QST=[[3,5],[6,10],[12,18],[20,28],[30,40],[45,60]];
+function questRewardGen(g,reg){const st=Math.round(ri(QST[g][0],QST[g][1])*(1+0.5*reg));const it=[];
+  if(g===0&&chance(.5))it.push({k:'pill',id:pick(['hoixuan','tukhi']),q:0});
+  if(g>=1)it.push({k:'pill',id:rollPill(),q:g>=3?1:0});
+  if(g>=2)it.push({k:'mat',m:pick(['thao','khoang']),n:ri(1,2)+g-2});
+  if(g>=3)it.push({k:'relic',tier:clamp(reg+(g>=4?1:0),0,4)});
+  if(g>=4)it.push({k:'pill',id:btPill(),q:g>=5?2:1});
+  if(g>=5)it.push({k:'relic',tier:clamp(reg+2,0,4)});
+  return {st,ll:3+g*3,it,v:2};}
+{const _ob15=openBoard;openBoard=function(n){_ob15(n);if(n&&n.board)for(const q of n.board.list)if(!q.reward||q.reward.v!==2){q.grade=questGrade(q);q.reward=questRewardGen(q.grade,G.run.region);}};}
+function questRewardOf(q){if(q.reward&&q.reward.v===2)return q.reward;return {st:Math.min(40,Math.max(3,Math.round((q.reward&&q.reward.st||10)*ECON))),ll:3+questGrade(q)*3,it:[],v:2};}
+function questRewardChips(q){const R0=questRewardOf(q);const L=[chip('💎','+'+R0.st,'Linh thạch','up'),chip('⚔','+'+Math.round(R0.ll/100*tvPts(G.run.realm))+' lịch luyện','Lịch luyện','up')];
+  const tt=(av,n,sub,d,t)=>`<div class="tt-it" style="${t!=null?'--pc:'+QCOL[clamp(t,0,5)]:''}"><span class="tt-av">${av}</span><div><b>${n}</b><small>${sub}</small><p>${d}</p></div></div>`;
+  for(const x of R0.it){let c;if(x.k==='pill'){const P0=PILL[x.id];c=chip(P0.i,(x.q?PQ[x.q]+' ':'')+P0.n,pillTip(x.id,x.q),'item');c.h=tt(P0.i,(x.q?PQ[x.q]+' ':'')+P0.n,'Đan dược',P0.d.replace('{x}',pillX(x.id,x.q)),x.q||0);}
+    else if(x.k==='mat'){const M0=MAT[x.m];c=chip(M0.i,x.n+' '+M0.n.toLowerCase(),M0.n+'\n'+M0.d,'item');c.h=tt(M0.i,M0.n+' × '+x.n,'Vật liệu luyện chế',M0.d);}
+    else if(x.k==='relic'){c=chip('🏺','pháp bảo '+GRADE[x.tier].toLowerCase(),'Pháp bảo '+GRADE[x.tier]+'\nChưa rõ là món gì, nhận rồi mới biết.','item');c.h=tt('?','Pháp bảo ?',GRADE[x.tier],'Chưa rõ là món gì. Nhận rồi mới biết.',x.tier);}
+    if(c)L.push(c);}
+  return L;}
+function questGive(q){const r=G.run;const R0=questRewardOf(q);const ch=[];r.st+=R0.st;ch.push(chip('💎','+'+R0.st,'Linh thạch','up'));
+  for(const x of R0.it){if(x.k==='pill'){const c=gainPill(x.id,x.q);if(c)ch.push(c);}else if(x.k==='mat'){run2().mats[x.m]=(run2().mats[x.m]||0)+x.n;ch.push(chip(MAT[x.m].i,'+'+x.n+' '+MAT[x.m].n.toLowerCase(),'Vật liệu','up'));}
+    else if(x.k==='relic'){const rel=genRelic(x.tier);r.relics.push(rel);clampHp();ch.push(chip('🏺',rel.name,relicTip(rel),'item'));}}
+  llChipMerge(ch,llAdd(R0.ll,null,true));applyE({karma:2});return ch;}
+function qPop(kind,q,ch){G.qpop=G.qpop||[];G.qpop.push({kind,text:q.text,grade:questGrade(q),ch:ch||[]});}
+// tới nơi: chỉ báo, không tự xong
+questArrive=function(id){const r=G.run;for(const q of r.quests)if(q.state==='open'&&q.node===id&&!q.arrNote){q.arrNote=1;note('Đã tới nơi của nhiệm vụ. Vào địa điểm, mục Nhiệm vụ.');}};
+// làm nhiệm vụ tại chỗ
+function questDo(id){const r=G.run,sc=r.scene;const q=r.quests.find(x=>x.id===id&&x.state==='open');if(!q||!sc||sc.type!=='place'||q.node!==sc.id)return false;
+  if(q.kind==='den'){advanceTime(1);if(!G.run)return true;q.state='done';const ch=questGive(q);log(`Xong việc: ${q.text}.`);pushNews('Xong việc: '+q.text,true);
+    sc.msg=[pick(['Người nhận mở thư, đọc xong thì thở phào, rút tiền công trả ngươi.','Món hàng tới tay người nhận nguyên vẹn. Họ cảm tạ rối rít.','Ngươi trao tận tay. Người nhận gật đầu, đưa tiền công cùng ít quà cảm tạ.'])];sc.chips=ch;sc.seq=(sc.seq||0)+1;qPop('done',q,ch);return true;}
+  advanceTime(2);if(!G.run||G.run.scene!==sc)return true;const n=nodeById(sc.id);
+  encounter({type:n.danger>=3?'elite':'combat'});r.scene.quest=q.id;r.scene.text='Ngươi lần theo dấu vết trong tờ cáo thị và tìm ra mục tiêu. '+r.scene.text;return true;}
+// thắng: xong (phần thưởng mới); thua hay chạy: thất bại
+questWin=function(qid){const r=G.run;const q=r.quests.find(x=>x.id===qid&&x.state==='open');if(!q)return [];q.state='done';log(`Xong việc: ${q.text}.`);const ch=questGive(q);qPop('done',q,ch);return ch;};
+{const _cc15=combatContinue;combatContinue=function(){const sc=G.run&&G.run.scene;const qid=sc&&sc.after&&sc.after.quest;const res=sc&&sc.over;
+  if(qid&&(res==='lose'||res==='flee')){const q=G.run.quests.find(x=>x.id===qid&&x.state==='open');if(q){q.state='fail';q.lost=1;G.run.karma=clamp(G.run.karma-2,-100,100);log('Thất bại: '+q.text);qPop('fail',q,[]);}}
+  return _cc15();};}
+// quá hạn: thất hứa
+{const _adv15=advanceTime;advanceTime=function(h){const r=G.run;const open=r&&r.quests?r.quests.filter(q=>q.state==='open'):[];const o=_adv15(h);if(G.run)for(const q of open)if(q.state==='fail'&&!q.dropped&&!q.lost&&!q.popd){q.popd=1;qPop('late',q,[]);}return o;};}
+
+// ================= ĐỢT 16: SỰ KIỆN DỌC ĐƯỜNG CỦA NHIỆM VỤ, NGƯỜI DẪN ĐẦU THƯƠNG ĐỘI =================
+// Đang mang hàng/thư cho nhiệm vụ: thỉnh thoảng bị chặn đường (6% mỗi chặng, cách nhau ít nhất 15 ngày),
+// hoặc bị chặn ngay trước cửa người nhận (12% lúc giao). Thắng: giữ được hàng, đi tiếp. Thua hoặc bỏ chạy: nhiệm vụ thất bại.
+const QAMB_T=['Bọn cướp đã nghe phong thanh về món hàng ngươi mang theo. Chúng chặn ngay giữa đường.','Một kẻ bịt mặt bám theo ngươi từ mấy dặm trước, giờ mới ra mặt: “Để món hàng lại.”','Có kẻ được thuê để chặn tay ngươi trước khi món hàng tới nơi.'];
+function questAmbush(q,text){const r=G.run;r.qAmbT=W().t;q.amb=1;encounter({type:'combat'});const sc=r.scene;sc.quest=q.id;sc.back=sc.back!=null?sc.back:null;sc.text=text+' '+sc.text;}
+{const _qw16=questWin;questWin=function(qid){const r=G.run;const q=r.quests.find(x=>x.id===qid&&x.state==='open');if(q&&q.amb){q.amb=0;return [chip('📜','giữ được món hàng','Nhiệm vụ vẫn tiếp tục: tới nơi rồi giao tận tay','up')];}return _qw16(qid);};}
+{const _se16=spawnEnt;spawnEnt=function(type,k,o){const e=_se16(type,k,o);if(e&&type==='thuong'&&!e.lead)e.lead=npc('thuong').ten;return e;};}
+
+// ----- sự kiện dọc đường của nhiệm vụ: nhiều loại, có lựa chọn, đều dính tới việc đang làm -----
+// Mỗi chặng đường: 7% (cách nhau ít nhất 15 ngày). Lúc giao hàng: 15%.
+// Kết quả có thể: giữ được hàng, mất một phần thưởng, thêm thưởng, đổi nơi giao, thất bại, phải đánh nhau.
+function qCut(q,f){const R0=questRewardOf(q);R0.st=Math.max(1,Math.round(R0.st*f));q.reward=R0;}
+const QEV=[
+ {id:'cuop',k:['den','diet'],t:q=>pick(QAMB_T),c:[{l:'Rút binh khí nghênh chiến',fight:1},{l:'Bỏ ra ít linh thạch cho qua',st:3,go:q=>({t:'Bọn chúng đếm tiền, cười khẩy rồi tránh đường.'})}]},
+ {id:'mua',k:['den'],t:q=>'Mưa lớn ập tới. Bọc hàng của nhiệm vụ bắt đầu thấm nước.',c:[{l:'Tìm chỗ trú, đợi tạnh hẳn',h:HD,go:q=>({t:'Ngươi ngồi dưới mái đình hoang cả ngày. Hàng khô ráo, chỉ mất chút thời gian.'})},
+   {l:'Che tạm, đi tiếp',go:q=>chance(.45)?(qCut(q,0.5),{t:'Tới chặng sau mới thấy một góc hàng đã ướt sũng. Người nhận chắc sẽ trả ít đi.',ch:[chip('📜','thưởng giảm một nửa','Hàng bị hỏng một phần','dn')]}):{t:'May mắn, lớp vải dầu che kín. Hàng vẫn nguyên.'}}]},
+ {id:'muagia',k:['den'],t:q=>'Một thương nhân áo gấm chặn ngươi lại: “Món hàng đó, ta trả gấp rưỡi. Ai biết đâu mà.”',c:[{l:'Từ chối, giữ chữ tín',go:q=>({t:'Hắn nhún vai bỏ đi. Lòng ngươi thanh thản.',e:{karma:1}})},
+   {l:'Bán cho hắn',go:q=>{const v=Math.round(questRewardOf(q).st*1.5);G.run.st+=v;q.state='fail';q.lost=1;G.run.karma=clamp(G.run.karma-4,-100,100);qPop('fail',q,[]);return {t:'Linh thạch nặng tay. Nhưng tiếng thất tín sẽ theo ngươi một thời gian.',ch:[chip('💎','+'+v,'Linh thạch','up')]};}}]},
+ {id:'doinoi',k:['den'],t:q=>'Một người quen của người nhận báo tin: họ đã dọn đi nơi khác.',c:[{l:'Hỏi nơi ở mới',go:q=>{const n0=nodeById(q.node);const ns=regionOf(G.run.region).nodes.filter(x=>x.id!==q.node&&(x.type==='tran'||x.type==='thanh'||x.type==='ancu')).sort((a,b)=>Math.hypot(a.x-n0.x,a.y-n0.y)-Math.hypot(b.x-n0.x,b.y-n0.y));const t=ns[0];if(!t)return {t:'Không ai biết họ đi đâu. Ngươi đành tới chỗ cũ xem sao.'};q.node=t.id;hearOf(t);q.due+=20*HD;q.text=q.text.replace(n0.name,t.name);return {t:'Họ đã chuyển tới '+t.name+'. Hạn được nới thêm hai mươi ngày.'};}}]},
+ {id:'nho',k:['den'],t:q=>'Một bà lão nghe nói ngươi đi về phía ấy, nhờ mang thêm một gói thuốc cho cháu.',c:[{l:'Nhận lời',h:2,go:q=>{const R0=questRewardOf(q);R0.it.push({k:'pill',id:pick(['hoixuan','tukhi']),q:0});q.reward=R0;return {t:'Bà lão cảm tạ. Người nhận chắc sẽ hậu tạ thêm.',e:{karma:1}};}},{l:'Từ chối khéo',go:q=>({t:'Bà lão gật đầu, không nói gì.'})}]},
+ {id:'cam',k:['den'],t:q=>'Đêm nghỉ chân, bọc hàng của nhiệm vụ bỗng phát ra ánh sáng xanh mờ. Có cấm chế lạ bám trên đó.',c:[{l:'Thử giải cấm chế',req:['ngo',12,'Ngộ tính'],go:q=>({t:'Ngươi lần theo trận văn, gỡ từng nút. Cấm chế tan, lòng ngươi lĩnh hội thêm chút ít.',ll:3})},{l:'Mặc kệ, ngủ tiếp',go:q=>({t:'Cả đêm ngươi mơ thấy những tiếng thì thầm.',e:{tamma:3}})}]},
+ {id:'manhmoi',k:['diet'],t:q=>'Một người sống sót kể lại cách mục tiêu của nhiệm vụ ra tay.',c:[{l:'Ngồi nghe kỹ',h:2,go:q=>({t:'Ngươi ghi nhớ thói quen của nó. Trận tới sẽ chủ động hơn.',ll:3})},{l:'Cho người ấy ít thuốc',go:q=>({t:'Người ấy cảm tạ, chỉ thêm đường tắt.',e:{karma:2}})}]},
+ {id:'tho',k:['diet'],t:q=>'Một thợ săn già cũng đang lùng mục tiêu của nhiệm vụ, muốn chia đôi phần thưởng nếu hợp sức.',c:[{l:'Đồng ý chia đôi',go:q=>{qCut(q,0.5);q.helper=1;return {t:'Lão chỉ cho ngươi chỗ nó hay lui tới. Thưởng chia đôi, nhưng dễ tìm hơn hẳn.',ll:2,ch:[chip('📜','thưởng giảm một nửa','Chia cho thợ săn','dn')]};}},{l:'Tự làm một mình',go:q=>({t:'Lão nhún vai: “Tùy ngươi.”'})}]},
+];
+function qevStart(q,ev){const r=G.run;r.qAmbT=W().t;r.scene={type:'qev',q:q.id,ev:ev.id,text:ev.t(q),back:null,res:null,chips:[]};}
+function qevPick(i){const r=G.run,sc=r.scene;if(!sc||sc.type!=='qev'||sc.res)return;const q=r.quests.find(x=>x.id===sc.q);const ev=QEV.find(x=>x.id===sc.ev);const c=ev&&ev.c[i];if(!q||!c)return;
+  if(c.req&&(S()[c.req[0]]||0)<c.req[1])return;if(c.st){if(r.st<c.st)return;r.st-=c.st;}
+  if(c.fight){q.amb=1;encounter({type:'combat'});r.scene.quest=q.id;r.scene.back=null;r.scene.text=sc.text+' '+r.scene.text;return;}
+  if(c.h){advanceTime(c.h);if(!G.run)return;}
+  const o=c.go(q)||{};let ch=(o.ch||[]).slice();if(c.st)ch.unshift(chip('💎','−'+c.st,'Linh thạch','dn'));if(c.h)ch.push(chip('⏳',durH(c.h),'Thời gian trôi qua',''));
+  if(o.e)ch=ch.concat(applyE(o.e));if(o.ll)llChipMerge(ch,llAdd(o.ll,null,true));sc.res={l:c.l,t:o.t};sc.chips=ch;}
+function qevOpts(sc){const ev=QEV.find(x=>x.id===sc.ev);const s=S();return ev.c.map(c=>({l:c.l,st:c.st||0,h:c.h||0,fight:!!c.fight,lack:c.req&&(s[c.req[0]]||0)<c.req[1]?c.req[2]+' cần '+c.req[1]:'',no:!!(c.st&&G.run.st<c.st)}));}
+{const _rr17=roadRoll;roadRoll=function(a,b){const r=G.run;const qs=r&&r.quests.filter(x=>x.state==='open');
+  if(qs&&qs.length&&!r.scene&&chance(.07)&&W().t-(r.qAmbT||-1e9)>15*HD){const q=pick(qs);const L=QEV.filter(e=>e.k.includes(q.kind));if(L.length){r.place={n:'đường tới '+nodeById(b).name,t:nodeById(b).type};qevStart(q,pick(L));return;}}
+  return _rr17(a,b);};}
+// lúc giao hàng: đôi khi có chuyện trước cửa
+const QDOOR=[{t:'Người nhận vắng nhà. Hàng xóm bảo chiều mai mới về. Ngươi đành đợi một ngày.',go:q=>{advanceTime(HD);return 'wait';}},{t:'Ngay trước cửa nhà người nhận, một gã lạ mặt chặn ngươi lại, đòi món hàng.',go:q=>'fight'},{t:'Người nhận mừng rỡ, nhất quyết giữ ngươi lại ăn bữa cơm, dúi thêm quà.',go:q=>{const R0=questRewardOf(q);R0.st+=2;q.reward=R0;return 'bonus';}}];
+{const _qd17=questDo;questDo=function(id){const r=G.run;const q=r.quests.find(x=>x.id===id&&x.state==='open');
+  if(q&&q.kind==='den'&&!q.ambDoor&&chance(.15)){q.ambDoor=1;const D=pick(QDOOR);const res=D.go(q);if(!G.run)return true;
+    if(res==='fight'){const back=r.scene&&r.scene.id;questAmbush(q,D.t);r.scene.back=back;return true;}
+    const ok=_qd17(id);const sc=G.run.scene;if(sc&&sc.msg)sc.msg.unshift(D.t);return ok;}
+  return _qd17(id);};}
+
+// ================= ĐỢT 17: BẢNG TREO THƯỞNG THAY HÀNG NGẪU NHIÊN, HẠN NHẬN, VIỆC ĐẶC BIỆT =================
+// Mỗi bảng giữ 20–60 ngày rồi thay việc mới (mỗi nơi một nhịp). Việc thường: nhận lúc nào cũng được tới khi bảng thay.
+// Việc đặc biệt (chừng 1/5 số bảng): khó hơn một bậc, thưởng hậu, chỉ nhận được trong 1–4 ngày và hạn làm rất gấp.
+// Vật phẩm thưởng giấu là "???" cho tới khi nhận. Việc đã hủy thì không nhận lại được.
+{const _ob17=openBoard;openBoard=function(n){const w=W();
+  if(n&&n.board){if(n.board.until&&w.t>n.board.until)n.board=null;else if(n.board.until)n.board.m=Math.floor(w.t/HM);}
+  _ob17(n);if(!n||!n.board)return;const B=n.board;
+  if(!B.until){B.until=w.t+ri(20,60)*HD;
+    if(chance(.22)){const ns=regionOf(G.run.region).nodes.filter(x=>x.id!==n.id&&x.type!=='ai'&&x.danger>=1);const tgt=ns.length?pick(ns):null;
+      if(tgt){const p=findPath(n.id,tgt.id);const tH=p?travelHours(p):24*30;const g=clamp(questGrade({node:tgt.id,kind:'diet'})+(chance(.25)?2:1),1,5);
+        const q={id:'qs'+n.id+'_'+Math.floor(w.t),text:pick(['Gấp: diệt yêu vật đang tàn sát ở ','Gấp: bắt kẻ cướp đang trốn ở ','Gấp: cứu người bị bắt vào '])+tgt.name,node:tgt.id,kind:'diet',days:Math.ceil(tH*1.1/24)+ri(2,6),special:1,acc:w.t+ri(1,4)*HD,grade:g,v2:1,taken:false};
+        q.reward=questRewardGen(g,G.run.region);q.reward.st=Math.round(q.reward.st*1.3);hearOf(tgt);B.list.unshift(q);}}}};}
+function boardLeft(n){return n&&n.board&&n.board.until?Math.max(0,n.board.until-W().t):0;}
+{const _tq17=takeQuest;takeQuest=function(i){const r=G.run,sc=r.scene;const n=sc&&nodeById(sc.id);const b=n&&n.board&&n.board.list[+i];
+  if(!b||b.cancelled||(b.acc&&W().t>b.acc))return;const k=r.quests.length;_tq17(i);if(r.quests.length>k){const q=r.quests[r.quests.length-1];q.reward=b.reward;q.grade=b.grade;if(b.special)q.special=1;}};}
+{const _qc17=questCancel;questCancel=function(id){const r=G.run;const q=r.quests.find(x=>x.id===id);const ok=_qc17(id);if(ok&&q){const fn=nodeById(q.from);const b=fn&&fn.board&&fn.board.list.find(x=>x.id===q.id);if(b){b.taken=true;b.cancelled=1;}}return ok;};}
+// phần thưởng chưa nhận: chỉ biết linh thạch và lịch luyện, vật phẩm là "???" có khung màu phẩm
+function questRewardChipsHidden(q){const R0=questRewardOf(q);const L=questRewardChips(q).slice(0,2);
+  for(const x of R0.it){const t=x.k==='relic'?x.tier:x.k==='pill'?(x.q||0):Math.max(0,questGrade(q)-2);const c=chip('','???','Vật phẩm bí ẩn · '+GRADE[clamp(t,0,4)]+'\nNhận việc rồi mới biết là gì.','item');c.t2=t;
+    c.h=`<div class="tt-it" style="--pc:${QCOL[clamp(t,0,5)]}"><span class="tt-av">?</span><div><b>???</b><small>${GRADE[clamp(t,0,4)]}</small><p>Vật phẩm bí ẩn. Nhận việc rồi mới biết là gì.</p></div></div>`;c.c='item hid q'+clamp(t,0,5);L.push(c);}
+  return L;}
+
+// màu phẩm nhiệm vụ: Dễ xám, Thường lục, Khó lam, Hiểm tím, Tử nạn cam, Tuyệt cảnh đỏ
+const QCOL=['#8d8672','#4f8a4a','#4a6fae','#7b56a8','#c97a2b','#b8302a'];function qpc(g){return '--pc:'+QCOL[clamp(g||0,0,5)];}
+
+// ================= ĐỢT 18: KỲ NGỘ HIẾM =================
+// Hai loại, xác suất rất thấp, mỗi ngày trong game gieo một lần (cách nhau ít nhất nửa năm):
+//  - Tần suất mỗi ngày: có giá 1/8000, hữu duyên 1/12000, vớ vẩn 1/9000 (cộng lại chừng 11 lần mỗi trăm năm).
+//  - Kỳ ngộ có giá: muốn có thì phải trả: thọ nguyên, vật phẩm, chỉ số mất vĩnh viễn, linh thạch.
+//  - Kỳ ngộ hữu duyên (~1/1000 mỗi ngày): không mất gì, gặp là được.
+// Chỉ xảy ra khi đang ở ngoài bản đồ (không trong địa điểm hay trận đánh), không xảy ra trong lúc bế quan dài.
+function lifeLose(y){const r=G.run;r.lifeAdj-=y;return chip('⏳','thọ −'+y+' năm','Thọ nguyên mất vĩnh viễn','dn');}
+function lifeGain(y){const r=G.run;r.lifeAdj+=y;return chip('⏳','thọ +'+y+' năm','Thọ nguyên tăng','up');}
+const KYNGO=[
+ {id:'doitho',paid:1,n:'Lão nhân đổi thọ',t:'Bên vách đá có lão nhân tóc bạc ngồi đánh cờ một mình. Lão ngẩng lên: “Ngươi có muốn thông tuệ hơn người? Ta lấy của ngươi tám năm thọ.”',
+  c:[{l:'Đổi tám năm thọ lấy ngộ tính',cost:'−8 năm thọ nguyên',go:()=>{const ch=[lifeLose(8)];return {t:'Lão chạm hai ngón tay lên trán ngươi. Đầu óc bỗng sáng như gương. Lúc tỉnh lại, lão đã biến mất, tóc mai ngươi điểm bạc.',ch:ch.concat(applyE({ngo:3}))};}},{l:'Cúi chào rồi đi',go:()=>({t:'Lão cười khà, tiếp tục ván cờ dang dở.'})}]},
+ {id:'huyette',paid:1,n:'Huyết tế pháp bảo',t:'Một tế đàn cổ phủ rêu, trên khắc: “Hiến một bảo vật, đổi lấy một bảo vật.” Rãnh máu vẫn còn ướt.',
+  c:[{l:'Hiến một pháp bảo trong túi',cost:'mất một pháp bảo ngẫu nhiên',need:()=>G.run.relics.length>0?'':'Không có pháp bảo nào',go:()=>{const r=G.run;const i=Math.floor(R()*r.relics.length);const old=r.relics.splice(i,1)[0];const nw=genRelic(clamp((old.tier||0)+1,0,4));r.relics.push(nw);clampHp();
+    return {t:'Món '+old.name+' tan vào tế đàn. Khói đỏ cuộn lên, rồi một bảo vật khác từ từ hiện ra.',ch:[chip('🏺','mất '+old.name,'Đã hiến','dn'),chip('🏺',nw.name,relicTip(nw),'item')]};}},{l:'Không dám, rời đi',go:()=>({t:'Ngươi lùi lại. Sau lưng như có tiếng ai thở dài.'})}]},
+ {id:'linhtuyen',paid:1,n:'Linh tuyền cấm địa',t:'Giữa hẻm núi có một dòng suối xanh biếc, linh khí đặc quánh. Nhưng nước lạnh thấu xương, ngấm vào là tổn kinh mạch.',
+  c:[{l:'Ngâm mình trong linh tuyền',cost:'khí huyết tối đa −10% vĩnh viễn',go:()=>({t:'Ngươi run lên từng cơn. Khi bước ra, linh lực trong người dồi dào gấp bội, còn thân thể thì yếu đi trông thấy.',ch:applyE({hpP:-10,mpP:25,tv:6,tvMajor:1})})},{l:'Chỉ vốc một ngụm',go:()=>({t:'Một ngụm nước lạnh buốt. Tinh thần tỉnh táo hẳn.',ch:applyE({tamma:-5})})}]},
+ {id:'mataam',paid:1,n:'Ma tâm kinh',t:'Trong hốc cây cháy đen có cuốn sách da người. Chữ trong đó như đang bò, thì thầm hứa hẹn sức mạnh.',
+  c:[{l:'Đọc hết cuốn sách',cost:'đạo tâm −3 vĩnh viễn, tâm ma +15',go:()=>({t:'Từng chữ khắc vào xương. Ngươi thấy mình mạnh lên, nhưng giấc ngủ không còn yên.',ch:applyE({tam:-3,tamma:15,atkP:15})})},{l:'Đốt nó đi',go:()=>({t:'Lửa bén vào, sách kêu lên như người. Lòng ngươi thanh thản.',ch:applyE({karma:3,tam:1})})}]},
+ {id:'cuoc',paid:1,n:'Đánh cược với tiên nhân',t:'Một gã say mặc đạo bào rách, tay cầm hồ lô: “Cược không? Ngươi đặt một nửa linh thạch, ta đặt một viên đan đột phá.”',
+  c:[{l:'Đặt cược một nửa linh thạch',cost:'mất một nửa linh thạch đang có',need:()=>G.run.st>=4?'':'Không đủ linh thạch',go:()=>{const r=G.run;const v=Math.floor(r.st/2);r.st-=v;const ch=[chip('💎','−'+v,'Linh thạch','dn')];
+    if(chance(.5)){const c=gainPill(btPill(),2);if(c)ch.push(c);return {t:'Gã lắc hồ lô, đổ ra ba hạt xúc xắc. Ngươi thắng. Gã cười ha hả, ném viên đan qua.',ch};}return {t:'Ba hạt xúc xắc lăn tròn. Ngươi thua. Gã cười, ôm túi linh thạch, biến vào mây.',ch};}},{l:'Lắc đầu đi tiếp',go:()=>({t:'Gã nhún vai, ngửa cổ tu một ngụm.'})}]},
+ {id:'saoroi',n:'Sao rơi trước mặt',t:'Đêm ấy một vệt sáng rạch trời, rơi ngay bãi cỏ trước mặt ngươi. Trong hố còn ấm, một món đồ đang tỏa quang.',
+  c:[{l:'Nhặt lên',go:()=>{const nw=genRelic(clamp(G.run.region+1,0,4));G.run.relics.push(nw);clampHp();return {t:'Là một pháp bảo, còn vương hơi nóng của trời cao. Hữu duyên mới gặp.',ch:[chip('🏺',nw.name,relicTip(nw),'item')]};}}]},
+ {id:'mongtien',n:'Tiên nhân báo mộng',t:'Trong giấc ngủ, ngươi thấy mình đứng giữa biển mây. Một bóng người áo trắng giảng một đoạn kinh rồi tan biến.',
+  c:[{l:'Ngồi dậy ghi nhớ',go:()=>({t:'Lời kinh vẫn còn văng vẳng. Ngươi ngộ ra thêm đôi điều.',ch:applyE({ngo:1,tv:4,tvMajor:1})})}]},
+ {id:'linhchi',n:'Linh chi ngàn năm',t:'Dưới gốc cây cổ thụ đổ, một cây linh chi to bằng chiếc nón lá, vân đỏ như máu.',
+  c:[{l:'Hái và ăn ngay',go:()=>({t:'Vị đắng chát, rồi một luồng ấm chạy khắp thân. Ngươi thấy mình trẻ ra.',ch:[lifeGain(3)].concat(applyE({hpP:5}))})}]},
+ {id:'lakhach',n:'Kiếm khách vô danh',t:'Một kiếm khách lướt qua, dừng lại nhìn ngươi hồi lâu: “Căn cốt không tệ.” Rồi múa một đường kiếm cho ngươi xem.',
+  c:[{l:'Chăm chú xem',go:()=>({t:'Đường kiếm như nước chảy. Ngươi nhìn mà thấy tay mình ngứa ngáy.',ch:applyE({atkP:5,van:1})})}]},
+];
+function kyStart(ev){const r=G.run;r.kyT=W().t;r.scene={type:'kyngo',ev:ev.id,text:ev.t,res:null,chips:[],back:r.moving?null:r.at};if(r.moving)r.moving.halt=1;}
+function kyOpts(sc){const ev=KYNGO.find(x=>x.id===sc.ev);return ev.c.map(c=>({l:c.l,cost:c.cost||'',no:c.need?c.need():''}));}
+function kyPick(i){const r=G.run,sc=r.scene;if(!sc||sc.type!=='kyngo'||sc.res)return;const ev=KYNGO.find(x=>x.id===sc.ev);const c=ev&&ev.c[i];if(!c||(c.need&&c.need()))return;
+  const o=c.go()||{};sc.res={l:c.l,t:o.t};sc.chips=o.ch||[];log('Kỳ ngộ: '+ev.n+'.');if(G.run&&r.age>=S().life)die('toahoa');}
+{const _adv18=advanceTime;advanceTime=function(h){const o=_adv18(h);const r=G.run;if(!r||h>48)return o;r.kyAcc=(r.kyAcc||0)+h;
+  while(r.kyAcc>=HD){r.kyAcc-=HD;if(r.scene||G.screen!=='map'||W().t-(r.kyT||-1e9)<HY/2)continue;
+    const roll=R();if(roll<KY_P[0]){kyStart(pick(KYNGO.filter(x=>x.paid)));break;}if(roll<KY_P[0]+KY_P[1]){kyStart(pick(KYNGO.filter(x=>!x.paid&&!x.joke&&!x.sp)));break;}if(roll<KY_P[0]+KY_P[1]+KY_P[2]){kyStart(pick(KYNGO.filter(x=>x.joke)));break;}}
+  return o;};}
+
+const KY_P=[1/8000,1/12000,1/9000];
+// kỳ ngộ vớ vẩn: trông như hữu duyên, hóa ra đồ dởm hoặc bị lừa
+function junkRelic(n){const x=genRelic(0);x.name=n;x.k='kiem';for(const k in x.fx)x.fx[k]=x.fx[k]>0?1:x.fx[k];x.lore='Chuôi khắc chữ “Hàng thịt chợ Đông”. Thái thịt thì tốt.';return x;}
+KYNGO.push(
+ {id:'bikip',joke:1,n:'Bí kíp gia truyền',t:'Một gã mặt mũi bí hiểm kéo ngươi vào góc: “Bí kíp tuyệt thế của tổ tiên ta. Thấy ngươi có duyên, chỉ lấy ba linh thạch.”',
+  c:[{l:'Mua ngay kẻo lỡ',need:()=>G.run.st>=3?'':'Không đủ linh thạch',go:()=>{G.run.st-=3;return {t:'Về mở ra đọc: “Món kho cá ngon nhất làng.” Trang cuối còn ghi: “Thêm chút đường.” Ngươi bật cười, lòng nhẹ hẳn.',ch:[chip('💎','−3','Linh thạch','dn')].concat(applyE({tamma:-2}))};}},{l:'Mỉm cười từ chối',go:()=>({t:'Gã lắc đầu tiếc rẻ rồi chạy sang mời người khác.'})}]},
+ {id:'tiendan',joke:1,n:'Tiên đan giá rẻ',t:'Đạo sĩ dạo bày bán “Cửu Chuyển Kim Đan, uống vào thành tiên”, giá chỉ năm linh thạch một viên. Đan đen bóng, mùi hơi lạ.',
+  c:[{l:'Mua một viên, uống thử',need:()=>G.run.st>=5?'':'Không đủ linh thạch',go:()=>{G.run.st-=5;const s=S();G.run.hp=Math.max(1,G.run.hp-Math.round(s.maxHp*0.1));return {t:'Uống xong ngươi đau bụng cả buổi chiều. Tới lúc nhìn kỹ viên thứ hai mới nhận ra: là phân dê vo tròn, lăn qua bột than.',ch:[chip('💎','−5','Linh thạch','dn'),chip('❤️','−10%','Khí huyết','dn')]};}},{l:'Hỏi đan làm từ gì',go:()=>({t:'Đạo sĩ ấp úng, thu sạp chạy mất.'})}]},
+ {id:'anmay',joke:1,n:'Cao nhân ăn mày',t:'Lão ăn mày rách rưới nắm áo ngươi: “Ta là ẩn thế cao nhân. Cúi đầu lại gần, ta truyền công cho.”',
+  c:[{l:'Cúi đầu lại gần',go:()=>{const v=Math.min(G.run.st,ri(2,4));G.run.st-=v;return {t:'Lão vỗ “bốp” một cái lên trán ngươi, hét: “Ngộ chưa!” Ngươi còn đang choáng thì lão đã cắp túi linh thạch chạy biến.',ch:v?[chip('💎','−'+v,'Bị móc túi','dn')]:[]};}},{l:'Cho lão cái bánh rồi đi',go:()=>({t:'Lão nhai ngấu nghiến, gật gù: “Hậu sinh khả úy.”',ch:applyE({karma:1})})}]},
+ {id:'thanbinh',joke:1,n:'Thần binh dưới bùn',t:'Dưới đáy ao cạn, một thanh binh khí cắm thẳng, quanh chuôi như có ánh sáng mờ.',
+  c:[{l:'Lội xuống rút lên',go:()=>{const x=junkRelic('Dao phay rỉ sét');G.run.relics.push(x);clampHp();return {t:'Rút mãi mới ra. Ánh sáng là do mặt trời phản chiếu. Chuôi còn khắc chữ “Hàng thịt chợ Đông”.',ch:[chip('🏺',x.name,relicTip(x),'item')]};}}]},
+ {id:'khobau',joke:1,n:'Kho báu dưới gốc đa',t:'Ngươi nhặt được tấm bản đồ rách, đánh dấu chữ thập đỏ dưới gốc đa đầu làng: “Kho báu ở đây.”',
+  c:[{l:'Đào suốt đêm',h:8,go:()=>{advanceTime(8);return {t:'Gần sáng, xẻng chạm vào một cái hũ. Mở ra: dưa muối, còn khá ngon. Dưới đáy hũ có mảnh giấy: “Bà để dành cho cháu.”',ch:[chip('⏳','8 giờ','Thời gian trôi qua','')].concat(applyE({tamma:-3}))};}},{l:'Vứt bản đồ đi',go:()=>({t:'Gió thổi tấm bản đồ bay mất. Có lẽ là duyên chưa tới, hoặc là may.'})}]}
+);
+// ----- kho công pháp: tháo một môn ra khỏi ô đã học thì cất vào kho riêng (không về túi đồ), lắp lại lúc nào cũng được nếu còn ô -----
+function artKho(){const r=G.run;return r.artKho||(r.artKho=[]);}
+function artStash(u){const r=G.run;const a=arts().find(x=>x.u===u);if(!a)return false;r.arts=r.arts.filter(x=>x!==a);for(let j=0;j<8;j++)if(r.chu[j]&&r.chu[j].u===u)r.chu[j]=null;artKho().push(a);syncSkills();clampHp();saveSoon();return true;}
+function artUnstash(u){const r=G.run;const a=artKho().find(x=>x.u===u);if(!a)return false;if(arts().filter(x=>x.type===a.type).length>=artCap(a.type))return false;r.artKho=artKho().filter(x=>x!==a);r.arts.push(a);syncSkills();saveSoon();return true;}
+
+// ================= ĐỢT 19: PHÀM NHÂN =================
+// Nhân vật mới sinh ra là phàm nhân: chưa dẫn khí nhập thể. Đây là bậc trước Luyện Khí.
+// Cần 50 tu vi (mọi nguồn tu vi lúc này nhân 10, vì thang chỉ 50 thay vì 500). Đủ thì tự dẫn khí nhập thể, bước vào Luyện Khí sơ kỳ.
+// Phàm nhân: khí huyết −20%, linh lực −50%, công −15%; không cần lịch luyện hay động phủ để bước qua bậc này.
+// Nhân vật trong bản lưu cũ (không có cờ) coi như đã qua bậc phàm nhân.
+const PHAM_TVP=50,PHAM_MUL=500/PHAM_TVP;
+function isPham(){const r=G.run;return !!(r&&r.pham);}
+{const _nr19=newRun;newRun=function(c){const res=_nr19(c);if(G.run){G.run.pham=1;G.run.tv=0;}return res;};}
+{const _tp19=tvPts;tvPts=function(realm){return isPham()&&realm===G.run.realm?PHAM_TVP:_tp19(realm);};}
+{const _br19=bqReal;bqReal=function(){return _br19()*(isPham()?PHAM_MUL:1);};}
+{const _tn19=thonapPct;thonapPct=function(){return _tn19()*(isPham()?PHAM_MUL:1);};}
+{const _at19=addTv;addTv=function(x){const r=G.run;if(!r||!r.pham||!(x>0))return _at19(x);
+  const res=_at19(x*PHAM_MUL);return res;};}
+// dẫn khí nhập thể: gọi khi đột phá thành công (tu vi, lịch luyện đều đầy)
+function phamUp(){if(G.run&&G.run.pham&&G.run.tv>=100&&llOf()>=LL_BT){const g=G.run;g.pham=0;g.tv=0;g.tvAcc=0;g.ll=Math.max(0,(g.ll||0)-100)*0.2;const s=S();g.hp=s.maxHp;g.mp=s.maxMp;
+    log(`Năm ${Math.floor(g.age)} tuổi, dẫn khí nhập thể, bước vào Luyện Khí.`);if(typeof bio==='function')bio(`Năm ${Math.floor(g.age)} tuổi, ${g.ten} dẫn khí nhập thể, bước vào Luyện Khí.`);}}
+// phàm nhân không có lịch luyện ràng buộc
+{const _le19=llEff;llEff=function(tv){return isPham()?1:_le19(tv);};}
+{const _S19=S;S=function(){const s=_S19();if(isPham()){s.maxHp=Math.round(s.maxHp*0.8);s.maxMp=Math.round(s.maxMp*0.5);s.atk=Math.round(s.atk*0.85);s.matk=Math.round(s.matk*0.85);}return s;};}
+// tên cảnh giới
+{const _rl19=realmLabel;realmLabel=function(){return isPham()?'Phàm nhân':_rl19();};}
+{const _rt19=realmText;realmText=function(r){r=r||G.run;return r===G.run&&isPham()?'Phàm nhân':_rt19(r);};}
+function realmName(){return isPham()?'Phàm nhân':REALM[G.run.realm];}
+{const _ae19=applyE;applyE=function(e,v){const was=isPham();const ch=_ae19(e,v);if(was&&G.run&&!isPham()&&Array.isArray(ch)){const i=ch.findIndex(c=>c&&c.i==='✨');if(i>=0)ch.splice(i,1);ch.push(chip('✨','dẫn khí nhập thể','Bước vào Luyện Khí sơ kỳ','up'));}return ch;};}
+// ----- phàm nhân chưa dẫn khí: không có linh lực, không thúc được pháp bảo (từ linh phẩm trở lên), chưa dùng chiêu thức, chưa mở Khí Hải -----
+function phamLock(rel){return isPham()&&rel&&(rel.tier||0)>=1&&rel.k!=='book';}
+{const _S20=S;S=function(){const s=_S20();if(isPham()){s.maxMp=0;}return s;};}
+{const _eq20=equip;equip=function(i){const rel=G.run.relics[i];if(phamLock(rel)){note('Phàm nhân chưa có linh lực, không thúc được pháp bảo này. Dẫn khí nhập thể rồi hãy dùng.');return;}return _eq20(i);};}
+{const _et20=equipTo;equipTo=function(i,s){const rel=G.run.relics[i];if(phamLock(rel)){note('Phàm nhân chưa có linh lực, không thúc được pháp bảo này. Dẫn khí nhập thể rồi hãy dùng.');return;}return _et20(i,s);};}
+{const _ea20=eqAuto;eqAuto=function(){if(!isPham())return _ea20();const r=G.run;const keep=r.relics.filter(x=>!x.seen&&phamLock(x));keep.forEach(x=>x.seen=1);const res=_ea20();keep.forEach(x=>x.seen=1);return res;};}
+// trong trận: chỉ đánh thường, thủ thế, đỡ đòn, dùng đồ; chưa có thần thông
+{const _pa20=playerAct;playerAct=function(id,t){if(isPham()&&id&&id[0]!=='_')return false;return _pa20(id,t);};}
+{const _pu20=playerUlt;playerUlt=function(){if(isPham())return false;return _pu20();};}
+// tháo, lắp lại phương tiện
+function vehOff(){const r=G.run;const m=mountOf();if(!m)return;if(m.rented){r.rentOff=r.rent;r.rent=null;}else{r.vehOff=r.veh||null;r.veh=null;if(r.mount){r.vehOff=MOUNT.find(x=>x.id===r.mount);r.mount=null;}}note('Đã tháo '+m.n+'. Chạm ô phương tiện để dùng lại.');}
+function vehOn(){const r=G.run;if(r.vehOff){r.veh=r.vehOff;r.vehOff=null;return true;}if(r.rentOff&&r.rentOff.until>W().t){r.rent=r.rentOff;r.rentOff=null;return true;}return false;}
+
+// ================= ĐỢT 21: TÂM PHÁP LÀ CON TÀU =================
+// Mọi việc tu luyện (bế quan, thổ nạp, mọi nguồn tu vi) đều cần một tâm pháp đang vận hành.
+// Phàm nhân: tâm pháp đã học tự chạy ở ô dẫn khí (Khí Hải chưa mở). Từ Luyện Khí: tâm pháp phải nằm trong Khí Hải.
+// Phẩm tâm pháp quyết định tốc độ tu luyện và cảnh giới tối đa nó đưa tới được (phàm phẩm: tới Luyện Khí viên mãn).
+// Hệ trùng linh căn: nhanh thêm 10%.
+// Có tâm pháp đầu tiên: xuất thân gia truyền, bái nhập tông môn, mua bản chép tay ở tạp hóa, cao nhân truyền dạy,
+// kỳ ngộ, khắc vào chân linh từ kiếp trước (Bến Vong Xuyên), tự ngộ (ngộ tính từ 14).
+// Bảo đảm: phàm nhân không bao giờ quá 5 năm mà chưa có tâm pháp; từ năm thứ nhất cơ hội gặp cao nhân tăng dần,
+// tới 4 năm rưỡi gặp chắc chắn ngay khi rảnh, tròn 5 năm thì được truyền thẳng dù đang làm gì.
+const TU_M=[0.7,1,1.25,1.5,1.8,2.1,2.5],TP_Y=5;
+function tpMax(a){return clamp(a.tier,0,5);}
+function tuOf(L){return L.filter(a=>a&&a.type==='tp').sort((x,y)=>y.tier-x.tier)[0]||null;}
+function tuArt(){const r=G.run;if(!r)return null;run2();return tuOf(isPham()?arts():activeArts());}
+function tuMul(){const a=tuArt();if(!a)return 0;const r=G.run;return TU_M[clamp(a.tier,0,6)]*(a.el!=='vo'&&r.root.els.includes(a.el)?1.1:1);}
+function hasTp(){const r=G.run;return arts().some(a=>a.type==='tp')||r.relics.some(x=>x.k==='book'&&x.art&&x.art.type==='tp');}
+function tuWhy(){if(tuArt())return '';return arts().some(a=>a.type==='tp')?'Chưa vận hành tâm pháp nào trong Khí Hải: linh khí vào thân rồi lại tản mất.':'Chưa có tâm pháp tu luyện: không biết cách dẫn linh khí vào thân. Tìm ở tạp hóa, tông môn, cao nhân, hoặc chờ cơ duyên.';}
+function tuCapWhy(){const r=G.run;const a=tuArt();if(!a||isPham())return '';return tpMax(a)<r.realm+1?a.n+' ('+PHAM[a.tier]+') chỉ đưa tới '+REALM[tpMax(a)]+' viên mãn. Muốn lên '+REALM[clamp(r.realm+1,0,5)]+' phải có tâm pháp '+PHAM[r.realm+1]+' trở lên đang vận hành.':'';}
+{const _br21=bqRate;bqRate=function(){return _br21()*tuMul();};}
+{const _tn21=thonapPct;thonapPct=function(){return _tn21()*tuMul();};}
+{const _bn21=bqNeedY;bqNeedY=function(){return bqReal()>0?_bn21():99;};}
+{const _bc21=bqCan;bqCan=function(){return _bc21()||tuWhy();};}
+{const _at21=addTv;addTv=function(x){const r=G.run;if(r&&x>0&&!tuArt()){G._tvLost=1;return;}return _at21(x);};}
+{const _ae21=applyE;applyE=function(e,v){G._tvLost=0;const was=G.run&&G.run.flags&&G.run.flags.tongmon;const ch=_ae21(e,v);
+  if(G.run&&Array.isArray(ch)){if(G._tvLost&&e&&e.tv>0)ch.push(chip('✨','linh khí tản mất','Chưa có tâm pháp tu luyện vận hành nên không giữ được tu vi','dn'));
+    if(!was&&G.run.flags.tongmon){const c=tpSect();if(c)ch.push(c);}}G._tvLost=0;return ch;};}
+{const _cb21=canBreak;canBreak=function(){return _cb21()&&!tuCapWhy()&&!!tuArt();};}
+// học thẳng một tâm pháp (truyền khẩu, tự ngộ): vào sở học và ô vận hành ngay
+function tpLearn(tier,o){const r=run2();o=o||{};const a=genArt('tp',tier,null,{req:0,el:o.el});if(o.n)a.n=o.n;a.req=0;a.lines[0]={fx:'tvP',v:6+3*a.tier,n:'Tu luyện',d:'Tu vi nhận thêm {v}%'};
+  a.lines.forEach((x,i)=>{x.req=i?Math.max(x.req||0,0):0;});a.src=o.src||'';r.arts.push(a);const n=chuSlots();for(let j=0;j<n;j++)if(!r.chu[j]){r.chu[j]={k:'a',u:a.u};break;}
+  syncSkills();log('Có tâm pháp tu luyện: '+a.n+(o.src?' ('+o.src+')':'')+'.');saveSoon();return a;}
+function tpChip(a){return chip('📖',a.n,PHAM[a.tier]+' · tâm pháp · tốc độ tu luyện ×'+numFx(TU_M[a.tier]),'item');}
+function tpSect(){const r=G.run;if(r.flags.sectTp)return null;r.flags.sectTp=1;const a=tpLearn(1,{el:pick(r.root.els.filter(e=>EL[e]))||'vo',src:'tông môn truyền'});a.n=pick(RELIC_PRE[a.el]||RELIC_PRE.vo)+' Nhập Môn Tâm Kinh';return tpChip(a);}
+// bỏ tâm pháp tự cấp cho mọi kiếp; xuất thân gia truyền, ký ức kiếp trước
+const TP_ORIGIN={thegia:1,tran:0,daodong:0,mieu:0};
+for(const id in TP_ORIGIN){const o=ORIGIN.find(x=>x.id===id);if(o)o.d+=', có tâm pháp gia truyền';}
+UPG.push({id:'kytp',n:'Khắc tâm pháp vào chân linh',i:'🪷',max:2,c:[12,28],d:'Đầu thai nhớ lại tâm pháp tốt nhất kiếp trước: bậc 1 giảm một phẩm (tối đa Hoàng phẩm), bậc 2 giữ nguyên phẩm (tối đa Huyền phẩm)'});
+{const _die21=die;die=function(cause,info){const r=G.run;if(r&&r.arts){const a=tuOf(arts());if(a)G.meta.tpMem={n:a.n,tier:a.tier,el:a.el};}return _die21(cause,info);};}
+{const _nr21=newRun;newRun=function(c){const res=_nr21(c);const r=G.run;if(!r||!r.pham)return res;run2();
+  const old=r.arts.filter(a=>a.start).map(a=>a.u);r.arts=r.arts.filter(a=>!a.start);for(let j=0;j<8;j++)if(r.chu[j]&&old.includes(r.chu[j].u))r.chu[j]=null;
+  const og=TP_ORIGIN[r.origin];const mem=G.meta.tpMem,k=U('kytp');
+  if(og!=null){const a=tpLearn(og,{src:'gia truyền'});if(r.origin==='tran')a.lines[0].v+=4;}
+  else if(mem&&k){const t=k>=2?Math.min(mem.tier,2):Math.min(Math.max(0,mem.tier-1),1);tpLearn(t,{n:mem.n,el:mem.el,src:'ký ức kiếp trước'});}
+  syncSkills();const s=S();r.hp=s.maxHp;r.mp=s.maxMp;return res;};}
+// tạp hóa: còn chưa có tâm pháp thì luôn bày một bản chép tay rẻ
+{const _se21=shopExtra;shopExtra=function(items,n){_se21(items,n);const r=G.run;if(!isPham()||hasTp())return;const a=genArt('tp',0,null,{req:0,el:'vo'});a.n='Dẫn Khí Quyết (chép tay)';a.lines[0]={fx:'tvP',v:4,n:'Tu luyện',d:'Tu vi nhận thêm {v}%'};a.lines.forEach(x=>x.req=0);
+  items.unshift({k:'relic',rel:bookOf(a),p:price(15)});};}
+// cao nhân, tự ngộ, lão nhân: kỳ ngộ riêng, không rơi vào vòng ngẫu nhiên
+KYNGO.push(
+ {id:'tp_ansi',sp:1,n:'Ẩn sĩ bên suối',t:'Bên con suối có túp lều tranh. Lão ẩn sĩ chân yếu đang loay hoay với đống củi ướt. Thấy ngươi, lão nheo mắt: “Hậu sinh, thân thể ngươi chưa có lấy một sợi linh khí.”',
+  c:[{l:'Ở lại giúp lão ba tháng',cost:'3 tháng',go:()=>{const a=tpLearn(chance(.3)?1:0,{src:'ẩn sĩ truyền'});advanceTime(3*HM);return {t:'Ngươi bổ củi, gánh nước, sắc thuốc cho lão. Tối nào lão cũng đọc cho ngươi vài câu khẩu quyết. Ngày đi, lão chỉ nói: “Nhớ thở cho đúng.”',ch:[chip('⏳','3 tháng','Thời gian trôi qua',''),tpChip(a)].concat(applyE({karma:3}))};}},
+     {l:'Đang vội, cáo từ',go:()=>({t:'Lão phẩy tay: “Duyên chưa tới thì thôi.”'})}]},
+ {id:'tp_laonhan',sp:1,g:1,pop:'Một lão nhân đi ngang, dừng lại nhìn ngươi rất lâu rồi đọc cho ngươi một bài khẩu quyết.',n:'Lão nhân dưới gốc tùng',t:'Lão nhân áo vải ngồi dưới gốc tùng như đã chờ từ lâu: “Năm năm rồi mà ngươi vẫn chưa biết dẫn khí. Trời không tuyệt đường người. Ngồi xuống đây.”',
+  c:[{l:'Ngồi xuống nghe giảng',go:()=>{const a=tpLearn(0,{n:'Dẫn Khí Quyết',src:'lão nhân truyền'});advanceTime(2*HD);return {t:'Lão giảng suốt hai ngày hai đêm, giọng đều như tiếng gió. Lúc ngươi mở mắt, gốc tùng chỉ còn lại một chiếc lá khô.',ch:[chip('⏳','2 ngày','Thời gian trôi qua',''),tpChip(a)]};}},
+     {l:'Hỏi lão là ai',go:()=>{const a=tpLearn(0,{n:'Dẫn Khí Quyết',src:'lão nhân truyền'});return {t:'Lão cười: “Người qua đường.” Rồi đọc một mạch khẩu quyết. Ngươi nhớ được hết, như thể đã từng học ở đâu đó.',ch:[tpChip(a)]};}}]},
+ {id:'tp_cothu',n:'Thạch thất cổ nhân',t:'Mưa lở một mảng vách núi, lộ ra thạch thất của cổ nhân. Trên bàn đá có một quyển sách lụa, chữ vẫn còn rõ.',
+  c:[{l:'Cất quyển sách',go:()=>{const r=G.run;const b=gainBookTp(clamp(r.region+1+(chance(.3)?1:0),1,5));return {t:'Trang đầu ghi: “Người hữu duyên tự học.” Ngươi cẩn thận gói lại.',ch:[chip('📖',b.name,PHAM[b.tier]+'\n'+b.lore,'item')]};}}]}
+);
+{const _adv21=advanceTime;advanceTime=function(h){const o=_adv21(h);const r=G.run;if(!r||!r.pham||!(h>0))return o;if(hasTp()){r.tpAcc=0;return o;}
+  r.tpAcc=(r.tpAcc||0)+h;const y=r.age-r.birthAge;const free=()=>!r.scene&&G.screen==='map';
+  if(y>=TP_Y-0.5&&free()){kyStart(tpGuarPick());r.tpAcc=0;return o;}
+  while(r.tpAcc>=HM&&G.run&&!hasTp()){r.tpAcc-=HM;
+    if(S().ngo>=14&&chance(.03)){const a=tpLearn(0,{n:'Tĩnh Tọa Tự Ngộ Quyết',el:pick(r.root.els.filter(e=>EL[e]))||'vo',src:'tự ngộ'});tpPop(a,'Tự ngộ tâm pháp','Đêm ấy ngồi nhìn trăng, hơi thở bỗng theo một nhịp lạ. Ngươi tự ngộ ra cách dẫn khí.');break;}
+    if(y>=1&&free()&&chance(.04+.03*y)){kyStart(KYNGO.find(x=>x.id==='tp_ansi'));break;}}
+  if(G.run&&!hasTp()&&y>=TP_Y){const v=tpGuarPick();const a=tpGuarLearn(v);tpPop(a,v.n,v.pop);}
+  return o;};}
+function tpPop(a,title,text){note(text+' Có tâm pháp: '+a.n+'.','up');G.qpop=G.qpop||[];G.qpop.push({kind:'done',text:a.n,grade:a.tier+1,ch:[tpChip(a)],title});}
+
+// ----- tình huống bảo đảm có tâm pháp: nhiều kiểu gặp gỡ, kiếp sau ưu tiên kiểu chưa gặp -----
+// Mỗi tình huống: ai cũng truyền được tâm pháp, chỉ khác cái giá và cái được thêm tùy lựa chọn.
+function tpGuarPick(){const M=G.meta;const all=KYNGO.filter(x=>x.g);const seen=M.tpSeen||(M.tpSeen=[]);let L=all.filter(x=>!seen.includes(x.id));if(!L.length){M.tpSeen=seen.slice(-2);L=all.filter(x=>!M.tpSeen.includes(x.id));}
+  const v=pick(L);M.tpSeen.push(v.id);return v;}
+function tpGuarLearn(v){const sp=v.tp||{n:['Dẫn Khí Quyết']};const r=G.run;const el=sp.el==='root'?(pick(r.root.els.filter(e=>EL[e]))||'vo'):sp.el;return tpLearn(0,{n:pick(sp.n),el,src:sp.src||'được truyền'});}
+function tpGv(id,n,t,pop,tp,c){KYNGO.push({id,sp:1,g:1,n,t,pop,tp,c:c.map(o=>({l:o.l,cost:o.cost,need:o.need,go:()=>{const v=KYNGO.find(x=>x.id===id);const a=tpGuarLearn(v);let ch=[];
+  if(o.h){advanceTime(o.h);ch.push(chip('⏳',durH(o.h),'Thời gian trôi qua',''));}if(!G.run)return {t:o.t};ch.push(tpChip(a));if(o.fx){const e=Object.assign({},typeof o.fx==='function'?o.fx():o.fx);if(e._st){ch.push(chip('💎',(e._st>0?'+':'')+e._st,'Linh thạch',e._st>0?'up':'dn'));delete e._st;}ch=ch.concat(applyE(e));}if(o.ll)llAdd(o.ll,'đường xa',1);return {t:o.t,ch};}}))});}
+tpGv('tp_hoathuong','Hòa thượng hành cước','Một hòa thượng gầy gò, bình bát sứt mẻ, đứng chắn giữa đường. Ông chắp tay: “Thí chủ hít thở rối loạn như ngựa hoang. Để bần tăng chỉ cho một cách thở.”',
+  'Một hòa thượng hành cước ghé xin nước, tiện tay chỉ cho ngươi cách điều hòa hơi thở.',{n:['Tĩnh Tâm Thiền Quyết','Bát Nhã Điều Tức Pháp','Thanh Tịnh Tọa Thiền Kinh'],el:'vo',src:'hòa thượng truyền'},
+  [{l:'Theo sư phụ đi một đoạn đường',cost:'1 tháng',h:HM,fx:{karma:3,tamma:-6},t:'Suốt một tháng ngươi khất thực, ngủ miếu cùng ông. Tối nào ông cũng ngồi thiền, ngươi ngồi theo. Lúc chia tay, ông chỉ nói: “Tâm yên thì khí tự về.”'},
+   {l:'Xin khẩu quyết rồi đi ngay',t:'Ông cười hiền, đọc chậm ba lần. Ngươi nhẩm theo tới khi thuộc làu.'}]);
+tpGv('tp_ysu','Nữ y sư giữa làng dịch','Làng bên đường đang có dịch. Một nữ y sư áo xanh chạy đôn chạy đáo giữa các mái nhà. Nàng liếc ngươi: “Thân thể khỏe mạnh mà không có chút linh khí… Phụ ta một tay, ta dạy cho ngươi cách dưỡng khí.”',
+  'Một nữ y sư đi ngang, bắt mạch cho ngươi rồi viết lên giấy một bài dưỡng khí quyết.',{n:['Thanh Mộc Dưỡng Sinh Quyết','Hồi Xuân Dưỡng Khí Thiên','Bách Thảo Điều Tức Pháp'],el:'moc',src:'y sư truyền'},
+  [{l:'Ở lại phụ chữa bệnh',cost:'10 ngày',h:10*HD,fx:{karma:5},ll:4,t:'Mười ngày sắc thuốc, đun nước, khiêng người. Dịch lui, nàng giữ lời, đêm cuối ngồi dạy ngươi từng nhịp thở.'},
+   {l:'Xin học ngay, ta còn đường xa',t:'Nàng thở dài, vẫn viết cho ngươi bài khẩu quyết: “Học được thì nhớ quay lại giúp người.”',fx:{karma:-1}}]);
+tpGv('tp_xactu','Xác tu sĩ trong khe núi','Dưới khe núi có một xác người mặc đạo bào đã khô quắt, tay vẫn ôm chặt một quyển sách mỏng trước ngực.',
+  'Ngươi tình cờ thấy xác một tu sĩ, trong ngực áo còn quyển tâm pháp nhập môn.',{n:['Huyền Môn Nhập Đạo Thiên','Dẫn Khí Sơ Giải','Vân Du Tâm Pháp'],el:'root',src:'di vật cổ nhân'},
+  [{l:'Chôn cất tử tế rồi mới lấy sách',cost:'1 ngày',h:HD,fx:{karma:4,tamma:-2},t:'Ngươi đào huyệt, đắp mộ, cắm một cành cây làm bia. Lúc mở sách, trang đầu ghi: “Người chôn ta, sách này tặng ngươi.”'},
+   {l:'Lấy sách, lục luôn túi áo',fx:()=>{const v=ri(2,5);G.run.st+=v;return {karma:-3,tamma:3,_st:v};},t:'Ngươi lấy sách, lại moi được mấy viên linh thạch. Đêm ấy nằm mơ thấy có người đứng nhìn ngươi rất lâu.'}]);
+tpGv('tp_mong','Giấc mộng giữa đêm','Đêm ấy ngươi mơ thấy mình ngồi trên đỉnh núi mây. Một bóng người không rõ mặt ngồi đối diện, giọng như tiếng chuông xa: “Nghe cho kỹ, ta chỉ nói một lần.”',
+  'Một đêm nằm mộng, có người không rõ mặt giảng cho ngươi một bài khẩu quyết. Tỉnh dậy vẫn nhớ từng chữ.',{n:['Mộng Trung Dẫn Khí Quyết','Vân Đỉnh Tâm Kinh','Thái Hư Mộng Đạo Thiên'],el:'root',src:'mộng truyền'},
+  [{l:'Bật dậy chép lại ngay',t:'Ngươi thắp đèn, chép một mạch tới sáng. Đọc lại thấy câu nào cũng đúng.'},
+   {l:'Nằm yên, cố mơ tiếp',cost:'3 ngày',h:3*HD,fx:{ngo:1,tamma:2},t:'Ba đêm liền ngươi mơ cùng một giấc mơ. Đêm thứ ba bóng người ấy gật đầu rồi tan đi. Đầu óc ngươi sáng hẳn ra, chỉ là đôi khi giật mình không biết đâu là mộng.'}]);
+tpGv('tp_nguong','Ngư ông hát chèo','Bên sông, một ngư ông buông câu, miệng hát bài chèo nghe rất lạ: hít vào ba nhịp, thở ra chín nhịp, lời hát cứ xoáy vào tai ngươi.',
+  'Một ngư ông bên sông hát đi hát lại một bài chèo. Nghe mãi ngươi mới biết lời hát là khẩu quyết dẫn khí.',{n:['Thủy Nguyệt Điều Tức Ca','Ngư Ca Dẫn Khí Quyết','Trường Giang Tâm Pháp'],el:'thuy',src:'ngư ông truyền'},
+  [{l:'Ngồi câu cá cùng ông tới tối',cost:'nửa ngày',h:12,fx:{tamma:-4},t:'Tới khi mặt trời lặn, ngươi đã hát theo được cả bài. Ông thu cần: “Hát đúng nhịp thì khí tự theo.”'},
+   {l:'Hỏi thẳng lời hát là gì',t:'Ông cười khà: “Hỏi thì ta hát chậm lại.” Hát chậm lại ba lần, ngươi nhớ hết.'}]);
+tpGv('tp_tantu','Tán tu trọng thương','Bên vệ đường một tán tu mình đầy máu, thều thào: “Đưa ta qua núi… người của chúng đang đuổi… ta không có gì ngoài một quyển tâm pháp.”',
+  'Ngươi băng bó cho một tán tu bị thương. Trước khi đi, hắn để lại một quyển tâm pháp nhập môn.',{n:['Liệt Hỏa Luyện Khí Quyết','Kim Cương Dẫn Khí Thiên','Phong Lôi Sơ Thức Pháp'],el:'root',src:'tán tu tặng'},
+  [{l:'Cõng hắn qua núi',cost:'7 ngày',h:7*HD,fx:{karma:4},ll:6,t:'Bảy ngày băng rừng, hai lần suýt bị phát hiện. Qua được núi, hắn dúi quyển sách vào tay ngươi: “Ân này ta nhớ.”'},
+   {l:'Băng bó rồi đi đường mình',t:'Hắn nhìn ngươi một lúc, rồi vẫn ném cho ngươi quyển sách: “Cầm lấy, ta sợ chết rồi không ai đọc.”'}]);
+tpGv('tp_mieuhoang','Vách khắc trong miếu hoang','Mưa to, ngươi chui vào một ngôi miếu hoang trú tạm. Sau tượng thần đổ nát, trên vách đá có khắc chi chít chữ: một bài khẩu quyết dẫn khí.',
+  'Trú mưa trong miếu hoang, ngươi đọc được bài khẩu quyết dẫn khí khắc sau tượng thần.',{n:['Hậu Thổ Thạch Bích Quyết','Cổ Miếu Dẫn Khí Văn','Thạch Khắc Tâm Kinh'],el:'tho',src:'vách khắc cổ'},
+  [{l:'Thắp hương rồi mới đọc',fx:{karma:2},t:'Ngươi dọn sạch bàn thờ, thắp mấy nén hương cỏ. Đọc tới đâu thuộc tới đó.'},
+   {l:'Đọc cả đêm cho thuộc',cost:'1 ngày',h:HD,fx:{ngo:1},t:'Ngươi đọc đi đọc lại tới sáng, còn ngộ ra mấy chỗ người khắc viết sai.'}]);
+tpGv('tp_tre','Sách lót chuồng trâu','Đứa bé chăn trâu chìa ra một quyển sách cũ: “Người có bánh không? Đổi cái này. Nhà em lấy lót chuồng, mà chữ đẹp lắm.”',
+  'Một đứa bé chăn trâu đổi cho ngươi quyển sách lót chuồng. Mở ra mới biết là một bài tâm pháp.',{n:['Dẫn Khí Quyết (bản cũ)','Mục Đồng Tâm Pháp','Thanh Ngưu Điều Tức Thiên'],el:'vo',src:'đổi được'},
+  [{l:'Đổi bánh lấy sách',t:'Thằng bé cầm bánh chạy biến. Quyển sách hơi mùi trâu, nhưng chữ vẫn đọc được.'},
+   {l:'Cho thêm ít tiền',need:()=>G.run.st>=1?'':'Không có linh thạch',fx:()=>{G.run.st=Math.max(0,G.run.st-1);return {karma:3,_st:-1};},t:'Ngươi dúi thêm cho nó một viên linh thạch. Nó tròn mắt, chạy về khoe cả làng.'}]);
+tpGv('tp_kyuc','Ký ức chợt về','Đi ngang một khúc sông, ngươi bỗng đứng sững: cảnh này đã từng thấy. Trong đầu vang lên một bài khẩu quyết, như của ai đó, mà cũng như của chính mình.',
+  'Một hôm đi ngang khúc sông quen lạ, trong đầu ngươi bỗng vang lên một bài khẩu quyết từ kiếp nào.',{n:['Túc Tuệ Dẫn Khí Quyết','Luân Hồi Tâm Ấn','Vong Xuyên Tàn Thiên'],el:'root',src:'ký ức kiếp trước'},
+  [{l:'Nhắm mắt nhớ lại',t:'Từng câu hiện lên rõ dần. Ngươi không biết mình đã học nó ở đâu, chỉ biết là đúng.'},
+   {l:'Ngồi bên sông cả ngày',cost:'1 ngày',h:HD,fx:{tam:1},t:'Ngươi ngồi tới khi trăng lên. Bài khẩu quyết đã thuộc, lòng cũng yên hẳn.'}]);
+
+// ================= ĐỢT 22: ĐỒ KHỞI ĐẦU NGẪU NHIÊN, CÂU CHUYỆN MỞ ĐẦU KIẾP =================
+// Không còn mặc định Hồi Xuân Đan và một công pháp. Mỗi kiếp có thể có 0 tới 2 món phổ thông (thường phàm phẩm,
+// hiếm lắm mới hoàng phẩm), mỗi món kèm nguồn gốc để kể trong trang mở đầu.
+const START_IT=[
+ {w:4,k:'pill',id:'hoixuan',s:['Bà lang đầu làng thương tình cho một viên Hồi Xuân Đan, dặn chỉ dùng lúc nguy cấp.','Dưới đáy rương cũ của ông nội còn sót một viên Hồi Xuân Đan, gói kỹ trong giấy dầu.']},
+ {w:2,k:'pill',id:'giaidoc',s:['Một người hái thuốc đi ngang xin bát nước, lúc đi để lại một viên Giải Độc Đan coi như trả ơn.']},
+ {w:1,k:'pill',id:'tukhi',s:['Đổi được một viên Tụ Khí Đan của gã bán hàng rong, tới giờ vẫn chưa biết dùng vào việc gì.']},
+ {w:3,k:'relic',s:['Món {n} treo trên vách nhà từ đời nào chẳng ai nhớ, nay thuộc về {ten}.','Sau trận lũ năm ấy, {ten} nhặt được {n} dưới bãi bồi, lau sạch bùn vẫn còn dùng được.','Người thợ già cuối làng trước lúc dọn đi để lại cho {ten} món {n}.']},
+ {w:2,k:'book',s:['Ở chợ phiên mua được quyển {n} rách bìa, chữ mờ, giá bằng hai cái bánh bao.','Trong gác xép nhà kho có quyển {n} bị chuột gặm mất góc, {ten} đọc lén suốt mấy mùa đông.']},
+ {w:2,k:'st',s:['Dành dụm mấy năm được {v} viên linh thạch vụn, khâu kín trong lót áo.']}];
+function startItems(){const r=G.run;const out=[];const n=chance(.55)?(chance(.25)?2:1):0;
+  for(let i=0;i<n;i++){const it=wpick(START_IT.filter(x=>!out.some(o=>o.it===x)),x=>x.w);if(!it)break;const o={it,s:pick(it.s)};
+    if(it.k==='pill'){r.pills.push({id:it.id,q:0});o.n=PILL[it.id].n;}
+    else if(it.k==='relic'){const x=genRelic(chance(.08)?1:0);r.relics.push(x);o.n=x.name;}
+    else if(it.k==='book'){const b=bookOf(genArt('cp',chance(.08)?1:0));r.relics.push(b);o.n=b.art.n;}
+    else {o.v=ri(1,3);r.st+=o.v;}
+    out.push(o);}
+  return out;}
+// ----- câu chuyện: thơ ấu tới hiện tại, dựa trên xuất thân, mệnh cách, linh căn (chỉ gợi, không gọi tên), chỉ số nổi bật, đồ mang theo -----
+const LS_OG={
+ nong:['{ten} sinh ra trong một gian nhà tranh ven ruộng ở {que}. Tiếng khóc đầu đời lẫn trong tiếng ếch nhái mùa mưa.','Lên bảy đã theo cha ra đồng, chân lấm bùn từ sớm tới tối, chưa từng nghĩ tới chuyện gì xa hơn bờ ruộng.'],
+ tran:['Họ {ho} ở {que} từng có tiếng về trận pháp. Tới đời cha {ten} thì chỉ còn lại một gian thư phòng ẩm mốc và mấy cuộn trận đồ rách.','Thuở nhỏ {ten} hay ngồi xếp sỏi thành hình. Cha nhìn thấy, không khen, chỉ lặng lẽ thở dài.'],
+ dote:['Lò mổ nhà họ {ho} nằm ở đầu chợ {que}. {ten} lớn lên giữa mùi máu và tiếng dao chặt xương.','Mười tuổi đã tự tay cầm dao, mắt không chớp. Bạn cùng lứa thấy là tránh xa.'],
+ thusinh:['{ten} là con nhà nghèo ở {que}. Cả nhà ăn cháo loãng để dành tiền cho một người đèn sách.','Ba lần lều chõng lên kinh, ba lần trượt. Lần cuối trở về, trong tay chỉ còn một bọc sách cũ.'],
+ khat:['Không ai biết {ten} sinh ở đâu. Từ khi nhớ được, đã ngủ dưới mái hiên chợ {que}, giành ăn với chó hoang.','Bị đánh nhiều tới mức học được cách chạy nhanh hơn bất cứ ai.'],
+ thegia:['{ten} là con thứ của {ho} gia ở {que}. Nhà cao cửa rộng, nhưng chẳng có chỗ nào thật sự là của mình.','Anh cả được mời thầy dạy võ dạy chữ, còn {ten} chỉ được đứng ngoài cửa nghe lỏm.'],
+ mieu:['Một đêm đông, lão từ giữ miếu hoang ở {que} nghe tiếng trẻ khóc trước cửa. Trong chiếc giỏ tre là {ten}, quấn trong mảnh vải không thêu tên.','Lớn lên bên mõ gỗ và khói hương: sáng quét sân, tối ngồi nghe lão tụng kinh tới khi ngủ gật.'],
+ ren:['Lò rèn nhà họ {ho} đỏ lửa quanh năm ở {que}. {ten} lớn lên trong tiếng búa nện lên đe.','Năm lên tám đã kéo bễ, tay chai sần, vai rộng hơn hẳn bạn cùng lứa.'],
+ daodong:['Cha mẹ mất sớm, {ten} được gửi vào một đạo quán nhỏ trên núi gần {que}, làm đạo đồng quét sân.','Đạo trưởng già lẩm cẩm, nhưng sáng nào cũng bắt ngồi thẳng lưng mà thở, miệng đọc mấy câu pháp quyết.'],
+ linh:['{ten} sinh ở {que}. Năm mười tuổi bị bắt lính, theo quân trấn thủ biên ải {quoc}.','Sáu năm chinh chiến, trở về với ba vết sẹo, mấy đồng bạc vụn và những giấc ngủ không bao giờ yên.'],
+ buon:['Nhà họ {ho} buôn vải ở {que}, giàu chẳng bằng ai nhưng cũng chưa từng thiếu ăn.','{ten} biết tính toán trước khi biết chữ, mặc cả còn giỏi hơn cả cha.'],
+ chai:['{ten} sinh ra trên một chiếc thuyền nan neo ở bến {que}.','Chưa biết đi đã biết bơi, theo cha quăng lưới từ khi còn chưa cao bằng mái chèo.'],
+ duoc:['Mồ côi từ nhỏ, {ten} được một hiệu thuốc ở {que} nhận về làm dược đồng.','Ngày ngày phơi thuốc tán thuốc, thuộc lòng trăm vị thảo dược trước khi thuộc mặt chữ.'],
+ mahuyet:['Đêm {ten} chào đời ở {que}, trời không trăng, chó cả làng sủa tới sáng.','Đôi mắt đỏ như máu khiến dân làng gọi là con quỷ. Trẻ con ném đá, người lớn quay mặt đi.'],
+ hat:['{ten} sinh ra sau cánh gà của một gánh hát rong.','Theo gánh hát đi khắp {quoc}, hôm làm vua, mai làm ăn mày, sớm học được cách nhìn mặt người mà đoán lòng.']};
+const LS_EL={kim:'mê tiếng chuông đồng, món đồ sắt nào cầm vào tay cũng không muốn buông',moc:'thích vào rừng nằm dưới gốc cây cả buổi, cây tự tay trồng cây nào cũng xanh tốt',
+ thuy:'thích nước, mùa mưa đứng ngoài sân hứng mưa mãi không chán, xuống sông là bơi như cá',hoa:'không biết lạnh là gì, mùa đông vẫn đi chân trần, ngồi nhìn bếp lửa tới quên ăn',
+ tho:'thích nặn đất thành người thành vật, đi đâu chân cũng vững như đóng cọc',loi:'không sợ sấm, đêm giông trẻ con trốn trong chăn, còn mình chạy ra hiên ngửa mặt nhìn trời',
+ bang:'chịu lạnh giỏi, mùa đông lại khỏe hơn mùa hè, thích ngắm băng đóng trên mặt ao',phong:'thích trèo lên chỗ cao nhất làng đứng hứng gió, chạy nhanh tới mức người lớn đuổi không kịp'};
+const LS_ELN={kim:'tiếng chuông',moc:'cây cỏ',thuy:'nước',hoa:'lửa',tho:'đất đá'};
+const LS_TR={kiemtam:'Có lần nhặt được một thanh kiếm gãy, {ten} giữ khư khư, đêm ngủ cũng ôm bên mình.',thanluc:'Mười tuổi đã vác nổi bao thóc của người lớn, sức như trâu non.',
+ menhcung:'Mấy lần ốm thập tử nhất sinh, thầy lang đã lắc đầu, vậy mà lần nào cũng gượng dậy được.',chithuy:'Tính trầm lặng, chuyện lớn chuyện nhỏ đều không làm mặt mày đổi sắc.',
+ linhnhan:'Đôi mắt sáng lạ thường, nhìn đâu cũng thấy những thứ người khác bỏ qua.',luoi:'Miệng lưỡi lanh lợi, nói ngọt tới mức bà bán bánh đầu chợ lần nào cũng cho thêm một cái.',
+ yeuhuyet:'Vết thương trên người lành nhanh lạ thường, sáng trầy da, tối đã kín miệng.',thiendo:'Sáng dạ hơn người nhưng thân thể ốm yếu. Thầy tướng xem qua chỉ nói một câu: “Trời ghen.”',
+ phuctinh:'Số may lạ: rơi xuống giếng cũng có người đi ngang, lạc trong rừng cũng tìm được đường về.',hoalinh:'Có lần bếp bén lửa, {ten} xông vào bê nồi ra, tay không hề bỏng.',
+ bangco:'Da trắng như ngọc mà rắn như đá, ngã đâu cũng chẳng gãy xương.',truongtho:'Bà đỡ xem chỉ tay, cười bảo: “Đứa này sống dai lắm.”',
+ bachdoc:'Mấy lần ăn nhầm nấm độc, người khác nằm liệt giường, {ten} chỉ đau bụng một đêm.',ngodao:'Thứ gì học cũng nhanh, như thể trước đây đã từng biết.',
+ khotu:'Tính lì, việc gì đã làm là làm tới cùng, ngồi một chỗ cả ngày không biết chán.',sattinh:'Trong mắt có một luồng sát khí, chó dữ trong làng gặp cũng cụp đuôi.',
+ mongdu:'Đêm nào cũng mơ thấy những tòa lầu trên mây. Tỉnh dậy kể lại, chẳng ai tin.',huyenco:'Đôi khi ngồi yên lại thấy trong người có gì đó chảy như suối nhỏ. Hỏi ai cũng không ai biết.'};
+const LS_TPG={thegia:'Ngày rời nhà, mẹ dúi vào tay {ten} một quyển sách mỏng bọc vải: {n}, tâm pháp truyền đời của {ho} gia, vốn chẳng bao giờ tới lượt con thứ.',
+ tran:'Trước lúc mất, cha để lại quyển {n}, dặn: “Trận pháp không học cũng được, cái này thì phải học.”',daodong:'Mấy câu đạo trưởng bắt đọc mỗi sáng, hóa ra là {n}, một bài tâm pháp nhập môn.',
+ mieu:'Lão từ trước khi viên tịch truyền lại {n}, bảo đó là thứ duy nhất lão mang theo từ thuở còn trẻ.'};
+function lifeStory(r,items,region){const og=ORIGIN.find(o=>o.id===r.origin);const s=S();const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const ho=h2?w.slice(0,2).join(' '):w[0],ten2=w.slice(h2?2:1).join(' ')||r.ten;
+  const v={ten:r.ten,ho,que:r.que,quoc:G.meta.world.quoc};const f=t=>lsFill(t,v);const L=[];
+  const O=LS_OG[r.origin]||[og.bio];L.push(f(O[0]));v.ten=ten2;
+  // linh căn: chỉ gợi qua sở thích thuở nhỏ
+  const els=r.root.els.filter(e=>LS_EL[e]);
+  if(els.length>=4)L.push(f('Thứ gì {ten} cũng thích một chút: '+els.map(e=>LS_ELN[e]).filter(Boolean).join(', ')+'… mà chẳng thứ gì thật sự gắn bó lâu.'));
+  else if(els.length===1)L.push(f('Từ bé {ten} đã '+LS_EL[els[0]]+', như thể trời sinh ra đã thuộc về thứ ấy.'));
+  else if(els.length)L.push(f('Từ bé {ten} đã '+LS_EL[els[0]]+'; lại '+LS_EL[els[1]]+'.'));
+  if(O[1])L.push(f(O[1]));
+  if(LS_TR[r.trait])L.push(f(LS_TR[r.trait]));
+  // chỉ số nổi bật
+  const tr=TRAIT.find(t=>t.id===r.trait)||{};const fx=Object.assign({},og.fx||{});for(const k in tr.fx||{})if(typeof tr.fx[k]==='number')fx[k]=(fx[k]||0)+tr.fx[k];
+  const body=(fx.atkP||0)+(fx.hpP||0)+(fx.defP||0)/2;const ngo=s.ngo,tam=s.tam,van=s.van,tp=s.tp;const P=[];
+  if(ngo<=9&&body>=10)P.push('Đọc sách thì ngủ gật, chữ vào tai này ra tai kia; nhưng sức lực dồi dào, khí huyết cuồn cuộn, một mình gánh nổi việc của hai người.');
+  else if(ngo>=13&&body<0)P.push('Đọc sách một lần là thuộc, câu khó hiểu mấy cũng nghĩ ra; chỉ là thân thể mảnh khảnh, đi đường xa đã thở dốc.');
+  else if(ngo>=13)P.push('Sách vở đọc một lần là nhớ, thầy đồ trong làng từng nói đứa trẻ này nên đi thi.');
+  else if(ngo<=8)P.push('Đọc sách thì ngủ gật, thầy đồ dạy mười câu nhớ được một.');
+  else if(body>=10)P.push('Thân thể cường tráng, khí huyết sung mãn, ít khi ốm đau.');
+  if(tam>=12)P.push('Lòng dạ vững vàng, chuyện gì đã quyết thì khó ai lay chuyển được.');else if(tam<=7)P.push('Tính khí nóng nảy, gặp chuyện bất bình là máu nóng dồn lên mặt.');
+  if(P.length<2&&van>=7)P.push('Vận khí cũng tốt, đi chợ nhặt được tiền, đi rừng gặp nấm quý.');else if(P.length<2&&tp>=9)P.push('Chân tay nhanh nhẹn, trèo cây leo núi chẳng ai theo kịp.');
+  for(const x of P.slice(0,2))L.push(f(x));
+  // đồ mang theo và nguồn gốc
+  for(const a of arts()){if(a.type==='tp'){if(a.src==='gia truyền'&&LS_TPG[r.origin])L.push(lsFill(LS_TPG[r.origin],Object.assign({n:a.n},v)));else if(a.src==='ký ức kiếp trước')L.push(f('Có những đêm trong mơ vang lên một bài khẩu quyết. Tỉnh dậy vẫn nhớ từng chữ: '+a.n+'. Chẳng ai dạy, như thể mang theo từ kiếp trước.'));}
+    else if(a.type==='cp'){const sk=(r.skills||[]).find(k=>a.lines.some(x=>x.sk===k.id));const src=sk&&sk.src;
+      if(src==='xuat')L.push(f('Đạo trưởng còn dạy thêm môn '+a.n+' để phòng thân, bảo: “Trên núi nhiều thú dữ.”'));else if(src==='ky')L.push(f('Đôi khi tay chân tự múa thành chiêu, như đã luyện từ kiếp nào: '+a.n+'.'));}}
+  if(r.origin==='thegia')L.push(f('Lão quản gia thương tình, lén cho thêm một túi linh thạch và một viên Hồi Xuân Đan.'));
+  if(r.origin==='duoc')L.push(f('Ông chủ hiệu thuốc cho mang theo một viên Hồi Xuân Đan và một viên Giải Độc Đan, coi như tiền công mấy năm.'));
+  if(r.origin==='buon')L.push(f('Lúc {ten} đi, cha đưa cho một túi linh thạch, dặn tiêu cho khéo.'));
+  if(r.origin==='khat')L.push(f('Ngày rời {que}, trong túi không có lấy một đồng.'));
+  for(const o of items)L.push(lsFill(o.s,Object.assign({n:o.n,v:o.v},v)));
+  // hiện tại
+  L.push(f('Năm nay {ten} '+Math.floor(r.age)+' tuổi.'+(region?' '+region.replace(/\b[Nn]gươi\b/g,ten2):'')));
+  L.push(f(tuArt()?'Trong tay có một bài tâm pháp và đôi chân của mình. Đường tu còn dài, chẳng ai biết sẽ đi tới đâu.':'{ten} vẫn là phàm nhân, chưa biết cách dẫn một sợi linh khí vào thân. Nhưng đường thì vẫn ở trước mặt.'));
+  return L;}
+{const _nr22=newRun;newRun=function(c){const res=_nr22(c);const r=G.run;if(!r)return res;const items=startItems();
+  const reg=r.scene&&r.scene.type==='region'?r.scene.text:'';if(r.scene&&r.scene.type==='region')r.scene=null;
+  r.story=lifeStory(r,items,reg);syncSkills();saveSoon();return res;};}
+function lsFill(t,v){return String(t).replace(/\{(\w+)\}/g,(m,k)=>v[k]!=null?v[k]:m);}
+
+// ================= ĐỢT 23: ĐỘT PHÁ =================
+// Bỏ giới hạn cảnh giới theo phẩm tâm pháp: phẩm tâm pháp chỉ ảnh hưởng tốc độ tu luyện và tỉ lệ đột phá.
+tuCapWhy=function(){return '';};
+// Tu vi đầy mà lịch luyện chưa đầy: bình cảnh. Cả hai đầy: đột phá (kể cả phàm nhân dẫn khí nhập thể, không còn tự động).
+function btState(){const r=G.run;if(!r||r.tv<100)return '';return canBreak()?'dp':'bc';}
+{const _bt23=btTarget;btTarget=function(){return isPham()?0:_bt23();};}
+{const _bs23=btStages;btStages=function(to){return isPham()?[]:_bs23(to);};}
+{const _bi23=btItems;btItems=function(){return isPham()?G.run.pills.map((p,i)=>({p,i})).filter(x=>PILL[x.p.id].bt&&PILL[x.p.id].realm==null):_bi23();};}
+// Tỉ lệ thành công: cộng từ nhiều nguồn, mỗi nguồn hiện riêng trong màn chuẩn bị
+const BT_ROOT={thien:6,bien:4,song:2,tam:0,tu:-3,tap:-6},BT_LK=[-6,-2,2,6];
+function btParts(slots){const r=G.run,s=S();const e=btEff(slots||[]);const to=btTarget();const n=nodeById(r.at);const L=[];const add=(t,v,tip)=>{v=Math.round(v*10)/10;if(v)L.push({t,v,tip});};
+  add(isPham()?'Dẫn khí nhập thể':'Cơ bản · '+REALM[to],(isPham()?0.75:BT_BASE[Math.min(4,r.realm)])*100,'Cảnh giới càng cao càng khó');
+  add('Ngộ tính '+s.ngo,(s.ngo-10)*1.2,'Mỗi điểm trên 10: +1,2%');add('Đạo tâm '+s.tam,(s.tam-10)*1.2,'Mỗi điểm trên 10: +1,2%');
+  if(r.tamma)add('Tâm ma '+r.tamma,-r.tamma*0.4,'Mỗi điểm tâm ma: −0,4%');
+  add('Linh căn',BT_ROOT[r.root.id]||0,rootView(r.root).n);
+  const a=tuArt();if(a){const d=a.tier-Math.max(0,to);add('Tâm pháp '+PHAM[a.tier],d<0?d*6:Math.min(d,3)*3,d<0?'Phẩm tâm pháp thấp so với cảnh giới muốn lên':'Tâm pháp vững, dẫn khí xung quan dễ hơn');
+    if(a.el!=='vo')add(r.root.els.includes(a.el)?'Tâm pháp hợp linh căn':'Tâm pháp lệch linh căn',r.root.els.includes(a.el)?4:-4,'Hệ tâm pháp '+(EL[a.el]||EL.vo).n);}
+  const cps=(isPham()?[]:activeArts()).filter(x=>x.type==='cp'&&x.el!=='vo');const bad=cps.filter(x=>!r.root.els.includes(x.el)).length;
+  if(cps.length)add(bad?'Công pháp lệch linh căn ('+bad+')':'Công pháp hợp linh căn',bad?-Math.min(6,bad*2):3,'Công pháp đang vận hành trong Khí Hải so với linh căn');
+  add('Linh khí: '+LK_N[lkOf(n)],BT_LK[lkOf(n)],'Linh khí nơi đột phá');
+  if(llOf()>100)add('Lịch luyện dư',Math.min(10,(llOf()-100)*0.2),'Lịch luyện vượt mức: tối đa +10%');
+  if(r.btFail)add('Thất bại trước '+r.btFail+' lần',r.btFail*8,'Rút kinh nghiệm từ lần trước');
+  const w=wounds().filter(x=>!x.perm).length;if(w)add('Đang mang thương',-5*w,'Mỗi vết thương: −5%');
+  if(r.hp<S().maxHp*0.5)add('Khí huyết dưới một nửa',-5,'');
+  if(e.rate)add('Đan dược, linh vật',e.rate,'Vật phẩm đặt vào ô chuẩn bị');
+  return L;}
+btRate=function(slots){return clamp(btParts(slots).reduce((a,x)=>a+x.v,0)/100,0.05,0.97);};
+// Đạo cơ (phẩm chất cảnh giới): ngoài đạo cơ tích lũy và linh dược, lúc đột phá còn cộng thêm
+function daoParts(){const r=G.run;if(isPham())return [];const to=btTarget();const L=[];const a=tuArt();const n=nodeById(r.at);
+  if(a&&a.tier>=to+1)L.push({t:'Tâm pháp '+PHAM[a.tier]+' vượt cảnh giới',v:a.tier>=to+2?2:1});
+  if(['thien','bien'].includes(r.root.id))L.push({t:rootView(r.root).n,v:1});
+  if(lkOf(n)>=3)L.push({t:'Linh khí dồi dào',v:1});
+  if(llOf()>=130)L.push({t:'Lịch luyện dư dả',v:1});
+  if(!r.tamma)L.push({t:'Tâm không vướng ma',v:1});
+  return L;}
+{const _be23=btEff;btEff=function(slots){const o=_be23(slots);o.dao+=daoParts().reduce((a,x)=>a+x.v,0);return o;};}
+// phàm nhân: đột phá thành dẫn khí nhập thể, không có thiên kiếp, không có phẩm chất
+{const _ps23=prepStart;prepStart=function(){const r=G.run,sc=r&&r.scene;if(!isPham())return _ps23();if(!sc||sc.type!=='prep'||!canBreak())return;
+  const p=btRate(sc.slots);const idx=sc.slots.slice().sort((a,b)=>b-a);const used=idx.map(i=>r.pills[i]).filter(Boolean).map(x=>PILL[x.id].n);for(const i of idx)r.pills.splice(i,1);sc.slots=[];
+  advanceTime(7*HD);if(!G.run)return;const back=sc.back;r.bt={to:0,stages:[],si:0,used};
+  if(R()<p){r.bt=null;phamUp();r.scene={type:'btres',back,ok:true,done:1,text:'Theo nhịp thở, một sợi linh khí mảnh như tơ len vào kinh mạch, chảy xuống đan điền rồi cuộn lại ở đó. Thân thể nhẹ bẫng, tai nghe rõ tiếng lá rơi ngoài trăm bước. Từ hôm nay, không còn là phàm nhân nữa.',
+    chips:used.map(n=>chip('⚗️',n,'Đã dùng','')).concat([chip('☯️','Luyện Khí sơ kỳ','Dẫn khí nhập thể, bước vào Luyện Khí','up')])};}
+  else btFail(back,used);};}
+// phàm nhân dẫn khí nhập thể ở đâu cũng được, không cần động phủ
+{const _pa23=placeAct;placeAct=function(a){const r=G.run,sc=r&&r.scene;if(a==='bt'&&isPham()&&canBreak()&&sc&&sc.type==='place'){openPrep(nodeById(sc.id));return;}return _pa23(a);};}
+
+// ================= ĐỢT 24: CÁC LOẠI THIÊN KIẾP =================
+// Cảnh giới quyết định có bao nhiêu kiếp; loại kiếp tùy nhân vật (linh căn, nhân quả). Các kiếp tới lần lượt, từng trận một.
+//  Trúc Cơ: không có · Kết Đan: tâm ma · Nguyên Anh: kiếp riêng 6 đạo · Hóa Thần: kiếp riêng 9 đạo rồi tâm ma
+//  Phi thăng: Tam Tai (Âm Hỏa, Bị Phong) rồi Cửu Trùng Lôi Kiếp (9 đợt, mỗi đợt 4 đạo, đợt sau mạnh hơn đợt trước).
+// Mỗi loại thử một mặt khác nhau:
+//  Thiên Lôi: sát thương thuần · Tử Tiêu Thần Lôi (linh căn Lôi): mạnh hơn 10%
+//  Ngũ Hành Thần Lôi (tạp linh căn): mỗi đạo mang một hành, kèm ngẫu nhiên hiệu ứng của các kiếp khác
+//  Âm Hỏa: đốt khí huyết từng lượt · Nghiệp Hỏa (nhân quả ác nặng): đốt mạnh hơn, mỗi đạo thêm tâm ma
+//  Bị Phong: gió cắt rút thể lực, khó thủ thế đỡ đòn · Âm Hàn: rút linh lực
+const KIEP={loi:{n:'Thiên Lôi Kiếp',u:'Đạo lôi',i:'🌩️',el:'loi',d:'Sấm sét thuần túy, chỉ đỡ được, không né được.'},
+ tutieu:{n:'Tử Tiêu Thần Lôi Kiếp',u:'Đạo tử lôi',i:'🌩️',el:'loi',m:1.1,d:'Lôi tím của người mang linh căn Lôi: mạnh hơn lôi thường 10%.'},
+ nguhanh:{n:'Ngũ Hành Thần Lôi Kiếp',u:'Đạo ngũ hành lôi',i:'🌈',el:'loi',m:0.92,d:'Mỗi đạo mang một hành, kèm ngẫu nhiên lửa đốt, gió cắt hoặc hàn khí.'},
+ hoa:{n:'Âm Hỏa Kiếp',u:'Luồng âm hỏa',i:'🔥',el:'hoa',m:0.75,d:'Lửa bốc từ lòng bàn chân, sát thương nhẹ hơn nhưng thiêu đốt khí huyết từng lượt.'},
+ nghiep:{n:'Nghiệp Hỏa Kiếp',u:'Luồng nghiệp hỏa',i:'🔥',el:'hoa',m:0.75,d:'Lửa của sát nghiệp: thiêu đốt dữ dội, mỗi đạo thêm tâm ma.'},
+ phong:{n:'Bị Phong Kiếp',u:'Cơn cương phong',i:'🌪️',el:'phong',m:0.97,d:'Gió cắt thổi từ thóp đầu, rút thể lực, khó thủ thế đỡ đòn.'},
+ am:{n:'Âm Hàn Kiếp',u:'Luồng âm hàn',i:'❄️',el:'bang',m:0.97,d:'Hàn khí thấu xương, rút linh lực.'},
+ cuu:{n:'Cửu Trùng Lôi Kiếp',u:'Đạo lôi',i:'⚡',el:'loi',d:'Chín đợt lôi kiếp, đợt sau mạnh hơn đợt trước. Giữa các đợt hồi lại được một hơi.'}};
+const KIEP_EL={kim:'hoa',moc:'phong',thuy:'am',hoa:'am',tho:'loi',bang:'hoa',phong:'phong',loi:'tutieu'};
+function kiepKind(){const r=G.run;if((r.karma||0)<=-30)return 'nghiep';if(r.root.els.includes('loi'))return 'tutieu';if(r.root.els.length>=5)return 'nguhanh';return KIEP_EL[r.root.els[0]]||'loi';}
+btStages=function(to){if(isPham())return [];const k=kiepKind();
+  return to===1?[]:to===2?['tamma']:to===3?[{n:6,kind:k}]:to===4?[{n:9,kind:k},'tamma']:[{n:6,kind:'hoa'},{n:6,kind:'phong'},{n:4,waves:9,kind:'cuu'}];};
+function stageName(x){if(x==='tamma')return 'Tâm ma kiếp';const K=KIEP[x.kind||'loi'];return K.n+' · '+(x.waves>1?x.waves+' đợt × '+x.n+' đạo':x.n+' đạo');}
+btNextStage=function(){const r=G.run;const b=r.bt;if(!b)return;const st=b.stages[b.si];
+  if(st==='tamma'){startCombat({k:'tamma'},{kind:'bt'});r.scene.noFlee=1;clog(r.scene,'Tâm ma kiếp: bóng tối trong lòng ngươi đứng dậy.','en');return;}
+  const n=Math.max(1,st.n-(b.kiepCut||0));startCombat({kiep:{n,waves:st.waves||1,block:b.kiepHp,kind:st.kind||'loi'}},{kind:'bt'});};
+{const _sc24=startCombat;startCombat=function(spec,after){const res=_sc24(spec,after);const sc=G.run&&G.run.scene;
+  if(spec&&spec.kiep&&sc&&sc.kiep){const kd=spec.kiep.kind||'loi';const K=KIEP[kd];sc.kiep.kind=kd;sc.en.n=K.n;sc.en.i=K.i;sc.en.el=K.el;const u=sc.units.find(x=>x.kind==='kiep');if(u){u.icon=K.i;u.el=K.el;u.kk=kd;u.name=K.n;}
+    sc.log=sc.log.filter(x=>!/^Mây kiếp vần vũ/.test(x.t));clog(sc,K.n+': '+K.d+' '+sc.kiep.n+' '+K.u.toLowerCase()+(sc.kiep.waves>1?' × '+sc.kiep.waves+' đợt':'')+' sắp giáng xuống.','en');}
+  return res;};}
+{const _kh24=kiepHit;kiepHit=function(sc,k,off){const K=sc.kiep;const kd=K&&K.kind||'loi';const me=mainUnit(sc);const KD=KIEP[kd];
+  let m=KD.m||1;if(kd==='cuu')m*=1.1+0.12*(K.wave-1);K.uy*=m;const n0=sc.log.length;_kh24(sc,k,off);
+  const last=sc.log[sc.log.length-1];if(last&&sc.log.length>n0&&KD.u!=='Đạo lôi')last.t=last.t.replace(/^Đạo lôi/,KD.u);
+  if(me.hp<=0)return;let fx=kd;if(kd==='nguhanh'){const e=pick(['kim','moc','thuy','hoa','tho']);fx=pick(['hoa','phong','am',null]);if(last)last.t=last.t.replace(KD.u,KD.u+' hệ '+EL[e].n);}
+  if(fx==='hoa'||fx==='nghiep'){const b=Math.round(me.max*(fx==='nghiep'?0.036:0.028));me.st.burn=(me.st.burn||0)+b;clog(sc,'Lửa bám vào người: mỗi lượt thiêu thêm.','en');if(fx==='nghiep'){G.run.tamma=Math.min(100,(G.run.tamma||0)+2);}}
+  if(fx==='phong'){me.tl=Math.max(0,(me.tl||0)-35);clog(sc,'Cương phong cắt da, thể lực tụt mạnh.','en');}
+  if(fx==='am'){const v=Math.round(me.maxMp*0.25);me.mp=Math.max(0,me.mp-v);if(v)clog(sc,'Hàn khí đông cứng kinh mạch: mất '+v+' linh lực.','en');}};}
+
+// ================= ĐỢT 25: TIÊN THIÊN KHÍ VẬN, TIÊN THIÊN THỂ CHẤT =================
+// ----- dữ liệu chép từ khanfaun/Thienmenh (physiques.ts, effects.ts) -----
+const TT_PHYS=[] = [
+    // === RANK 6: CHÍ TÔN (Supreme) ===
+    {
+        id: 'hon_don_the',
+        name: 'Hỗn Độn Đạo Thể',
+        rank: 6,
+        description: 'Vạn cổ đệ nhất thể chất. Dung nạp vạn vật, chuyển hóa ngũ hành, phá vỡ mọi quy tắc. Cần có đại cơ duyên "Hỗn Nguyên Đạo" để dung hợp ngũ hành tạp loạn thành hỗn độn chi lực.',
+        effects: {
+            primaryStatChangePercent: { maxHp: 20, maxSpiritPower: 20, maxStamina: 20, maxMentalState: 15, lifespan: 15 },
+            attributeChangePercent: { physicalStrength: 20, magicPower: 20, physicalBody: 20, agility: 15, spiritualSense: 20, aptitude: 20, critChance: 10, critDamage: 20, damageReduction: 10, armorPen: 10, evasion: 10, critResist: 10 },
+            expPerTurn: 20
+        }
+    },
+    {
+        id: 'hoang_co_thanh_the',
+        name: 'Hoang Cổ Thánh Thể',
+        rank: 6,
+        description: 'Thể chất cái thế của Nhân tộc, nhục thân vô địch, máu huyết vàng ròng. Khắc chế mọi tà ma ngoại đạo, vạn pháp bất xâm. Yêu cầu tâm tính quang minh chính đại.',
+        effects: {
+            primaryStatChangePercent: { maxHp: 25, maxStamina: 20 },
+            attributeChangePercent: { physicalBody: 25, physicalStrength: 20, critDamage: 15, damageReduction: 15, critResist: 15 },
+            expPerTurn: 5 // Tốn tài nguyên
+        }
+    },
+    {
+        id: 'tien_thien_dao_thai',
+        name: 'Tiên Thiên Đạo Thai',
+        rank: 6,
+        description: 'Con cưng của đại đạo, sinh ra đã hòa hợp với thiên địa. Ngộ tính nghịch thiên, tu luyện pháp thuật như uống nước. Tâm cảnh luôn ở trạng thái "Minh Kính Chỉ Thủy".',
+        effects: {
+            primaryStatChangePercent: { maxSpiritPower: 25, maxMentalState: 20 },
+            attributeChangePercent: { magicPower: 20, spiritualSense: 25, aptitude: 25, msRegen: 15, mpRegen: 15 },
+            expPerTurn: 25
+        }
+    },
+    {
+        id: 'van_co_ma_the',
+        name: 'Vạn Cổ Ma Thể',
+        rank: 6,
+        description: 'Thể chất cấm kỵ của Ma Đạo. Lấy oán khí làm thức ăn, lấy sát lục làm đường tu. Tâm tính vặn vẹo, tàn nhẫn nhưng sức mạnh hủy thiên diệt địa.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 25, magicPower: 15, critChance: 15, critDamage: 30, physicalBody: -10, lifeSteal: 10, armorPen: 10 },
+            primaryStatChangePercent: { maxMentalState: -15 }
+        }
+    },
+    {
+        id: 'cuu_khieu_linh_lung',
+        name: 'Cửu Khiếu Linh Lung Thể',
+        rank: 6,
+        description: 'Trái tim có chín lỗ, thấu hiểu vạn vật, nhìn thấu hồng trần. Trí tuệ siêu phàm, có khả năng suy diễn thiên cơ.',
+        effects: {
+            attributeChangePercent: { spiritualSense: 30, accuracy: 15, aptitude: 25 },
+            primaryStatChangePercent: { maxMentalState: 25 }
+        }
+    },
+
+    // === RANK 5: CỰC PHẨM (Legendary) ===
+    {
+        id: 'thuong_thien_ba_the',
+        name: 'Thương Thiên Bá Thể',
+        rank: 5,
+        description: 'Bá đạo vô song, lấy chiến nuôi chiến. Tính cách cuồng ngạo, không chịu khuất phục.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 12, physicalBody: 12, critChance: 8, armorPen: 8, damageReduction: 5 },
+            primaryStatChangePercent: { maxHp: 15 }
+        }
+    },
+    {
+        id: 'thai_duong_the',
+        name: 'Thái Dương Thần Thể',
+        rank: 5,
+        description: 'Chí dương chí cương, như mặt trời ban trưa. Yêu cầu Hỏa linh căn cực thịnh và tâm tính hướng dương.',
+        effects: {
+            attributeChangePercent: { magicPower: 12, physicalStrength: 8, dmgFire: 15, resFire: 15 },
+            primaryStatChangePercent: { maxSpiritPower: 15 }
+        }
+    },
+    {
+        id: 'thai_am_the',
+        name: 'Thái Âm Ngọc Thể',
+        rank: 5,
+        description: 'Chí âm chí hàn, như trăng lạnh lẽo. Yêu cầu Thủy linh căn cực thịnh và tâm tính lãnh đạm.',
+        effects: {
+            attributeChangePercent: { magicPower: 12, spiritualSense: 10, dmgWater: 15, resWater: 15 },
+            primaryStatChangePercent: { maxSpiritPower: 15 }
+        }
+    },
+    {
+        id: 'thien_yeu_the',
+        name: 'Thiên Yêu Hoàng Thể',
+        rank: 5,
+        description: 'Thể chất của Yêu tộc hoàng giả. Tốc độ và sức mạnh kinh người, thường xuất hiện ở người có tính cách hoang dã.',
+        effects: {
+            attributeChangePercent: { agility: 12, physicalBody: 10, attackSpeed: 10, evasion: 10, hpRegen: 10 },
+            primaryStatChangePercent: { maxHp: 15, maxStamina: 15 }
+        }
+    },
+    {
+        id: 'loi_dinh_chien_the',
+        name: 'Lôi Đình Chiến Thể',
+        rank: 5,
+        description: 'Thân thể như lôi điện, bộc phát sức mạnh hủy diệt trong nháy mắt. Cần có dị linh căn Lôi.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 12, magicPower: 8, critDamage: 15, attackSpeed: 10, dmgLightning: 15, resLightning: 15 }
+        }
+    },
+    {
+        id: 'hu_khong_chi_the',
+        name: 'Hư Không Chi Thể',
+        rank: 5,
+        description: 'Hòa mình vào hư không, xuất quỷ nhập thần. Cần tâm tính tự do, không bị trói buộc.',
+        effects: {
+            attributeChangePercent: { agility: 15, spiritualSense: 10, evasion: 15 },
+            primaryStatChangePercent: { maxStamina: -8 }
+        }
+    },
+    {
+        id: 'duoc_linh_thanh_the',
+        name: 'Dược Linh Thánh Thể',
+        rank: 5,
+        description: 'Cơ thể là lò luyện đan sống, bách độc bất xâm, hấp thu đan dược không để lại tạp chất.',
+        effects: {
+            primaryStatChangePercent: { maxHp: 15, lifespan: 15 },
+            attributeChangePercent: { physicalBody: 10, hpRegen: 15, resWood: 15 },
+            expPerTurn: 10
+        }
+    },
+
+    // === RANK 4: THƯỢNG PHẨM (Epic) ===
+    {
+        id: 'ngu_hanh_linh_the',
+        name: 'Ngũ Hành Linh Thể',
+        rank: 4,
+        description: 'Ngũ hành cân bằng, sinh sinh bất tức. Tuy không bá đạo nhưng đường tu vững chắc.',
+        effects: {
+            attributeChangePercent: { aptitude: 8, magicPower: 6 },
+            expPerTurn: 10
+        }
+    },
+    {
+        id: 'vo_cau_kiem_the',
+        name: 'Vô Cấu Kiếm Thể',
+        rank: 4,
+        description: 'Trời sinh kiếm cốt, tâm như kiếm sắc. Sát thương kiếm pháp tăng mạnh.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 8, critDamage: 8, attackSpeed: 5, armorPen: 6 }
+        }
+    },
+    {
+        id: 'huyet_sat_ma_the',
+        name: 'Huyết Sát Ma Thể',
+        rank: 4,
+        description: 'Thích giết chóc, lấy máu nuôi thân. Càng giết nhiều sát khí càng nặng.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 6, critChance: 5, lifeSteal: 5 },
+            primaryStatChangePercent: { maxMentalState: -5 } // Dễ tẩu hỏa
+        }
+    },
+    {
+        id: 'bang_co_ngoc_cot',
+        name: 'Băng Cơ Ngọc Cốt',
+        rank: 4,
+        description: 'Da như băng tuyết, xương như ngọc. Kháng hàn, tăng cường thần thức.',
+        effects: {
+            attributeChangePercent: { physicalBody: 6, spiritualSense: 8, resIce: 10, dmgIce: 8 }
+        }
+    },
+    {
+        id: 'tat_phong_linh_the',
+        name: 'Tật Phong Linh Thể',
+        rank: 4,
+        description: 'Thân nhẹ như gió, đi lại vô hình. Tốc độ là sở trường tuyệt đối.',
+        effects: {
+            attributeChangePercent: { agility: 10, attackSpeed: 5, evasion: 5, dmgWind: 8 }
+        }
+    },
+    {
+        id: 'cuu_duong_chi_the',
+        name: 'Cửu Dương Chi Thể',
+        rank: 4,
+        description: 'Dương khí dồi dào, khắc chế âm tà, tu luyện hỏa pháp cực nhanh.',
+        effects: {
+            attributeChangePercent: { magicPower: 8, physicalStrength: 5, dmgFire: 8, resFire: 8 }
+        }
+    },
+    {
+        id: 'huyen_am_chi_the',
+        name: 'Huyền Âm Chi Thể',
+        rank: 4,
+        description: 'Âm khí cực thịnh, thích hợp làm lô đỉnh hoặc tu luyện mị thuật, âm công.',
+        effects: {
+            attributeChangePercent: { magicPower: 8, spiritualSense: 5, dmgWater: 8, resWater: 8 }
+        }
+    },
+
+    // === RANK 3: TRUNG PHẨM (Rare) ===
+    {
+        id: 'kim_cuong_bat_hoai',
+        name: 'Kim Cương Bất Hoại',
+        rank: 3,
+        description: 'Thân thể cứng như kim cương, đao thương bất nhập ở mức độ nhất định.',
+        effects: { attributeChangePercent: { physicalBody: 5, damageReduction: 4, counterDamage: 4 } }
+    },
+    {
+        id: 'moc_linh_chi_the',
+        name: 'Mộc Linh Chi Thể',
+        rank: 3,
+        description: 'Thân thiện với cây cỏ, hồi phục sinh lực nhanh.',
+        effects: { primaryStatChangePercent: { maxHp: 5 }, attributeChangePercent: { physicalBody: 4 } }
+    },
+    {
+        id: 'am_sat_the',
+        name: 'Ám Sát Thể',
+        rank: 3,
+        description: 'Thích hợp đi trong bóng tối, giỏi che giấu khí tức.',
+        effects: { attributeChangePercent: { agility: 5, critChance: 4 } }
+    },
+    {
+        id: 'cuong_chien_the',
+        name: 'Cuồng Chiến Thể',
+        rank: 3,
+        description: 'Càng đánh càng hăng, máu càng ít đánh càng đau. Tính cách nóng nảy.',
+        effects: { attributeChangePercent: { physicalStrength: 5, physicalBody: 4 } }
+    },
+    {
+        id: 'tho_linh_the',
+        name: 'Thổ Linh Chi Thể',
+        rank: 3,
+        description: 'Sức chịu đựng cao, chân đạp đất thì sức mạnh vô cùng.',
+        effects: { primaryStatChangePercent: { maxStamina: 5 }, attributeChangePercent: { physicalBody: 5 } }
+    },
+    {
+        id: 'thuy_linh_the',
+        name: 'Thủy Linh Chi Thể',
+        rank: 3,
+        description: 'Linh lực dẻo dai, bền bỉ, thiên về công pháp hệ Thủy.',
+        effects: { primaryStatChangePercent: { maxSpiritPower: 5 }, attributeChangePercent: { magicPower: 4 } }
+    },
+    {
+        id: 'hoa_linh_the',
+        name: 'Hỏa Linh Chi Thể',
+        rank: 3,
+        description: 'Sức công phá mạnh, thiên về công pháp hệ Hỏa.',
+        effects: { attributeChangePercent: { magicPower: 5, critChance: 3 } }
+    },
+    {
+        id: 'kim_linh_the',
+        name: 'Kim Linh Chi Thể',
+        rank: 3,
+        description: 'Thân thể cứng cáp, thiên về công pháp hệ Kim.',
+        effects: { attributeChangePercent: { physicalStrength: 4, physicalBody: 4 } }
+    },
+
+    // === RANK 2: HẠ PHẨM (Uncommon) ===
+    {
+        id: 'man_luc_the',
+        name: 'Man Hoang Lực Thể',
+        rank: 2,
+        description: 'Sức mạnh cơ bắp hơn người thường một chút.',
+        effects: { attributeChangePercent: { physicalStrength: 3 } }
+    },
+    {
+        id: 'thong_tue_the',
+        name: 'Thông Tuệ Thể',
+        rank: 2,
+        description: 'Đầu óc linh hoạt, học tập nhanh hơn.',
+        effects: { attributeChangePercent: { aptitude: 3 } }
+    },
+    {
+        id: 'kien_nhan_the',
+        name: 'Kiên Nhan Thể',
+        rank: 2,
+        description: 'Sức chịu đựng dẻo dai, không dễ bỏ cuộc.',
+        effects: { primaryStatChangePercent: { maxStamina: 3, maxMentalState: 3 } }
+    },
+    {
+        id: 'linh_cam_the',
+        name: 'Linh Cảm Thể',
+        rank: 2,
+        description: 'Giác quan nhạy bén hơn người thường.',
+        effects: { attributeChangePercent: { spiritualSense: 3 } }
+    },
+    {
+        id: 'truong_tho_the',
+        name: 'Trường Thọ Thể',
+        rank: 2,
+        description: 'Sống lâu hơn người thường, ít bệnh tật.',
+        effects: { primaryStatChangePercent: { lifespan: 3, maxHp: 3 } }
+    },
+
+    // === RANK 1: PHÀM PHẨM (Common) ===
+    {
+        id: 'pham_the',
+        name: 'Phàm Thể',
+        rank: 1,
+        description: 'Thân thể người thường, cân bằng, không có gì đặc sắc.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 1, magicPower: 1, physicalBody: 1, agility: 1, spiritualSense: 1, aptitude: 1 }
+        }
+    }
+];
+const TT_DEST={
+    // --- RANK 1 (White) ---
+    'than_the_khoe_manh': { id: 'than_the_khoe_manh', name: 'Thân Thể Khỏe Mạnh', description: 'Bẩm sinh khỏe mạnh hơn người thường.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { maxHp: 2 }, attributeChangePercent: { physicalBody: 1 } } },
+    'tinh_than_minh_man': { id: 'tinh_than_minh_man', name: 'Tinh Thần Minh Mẫn', description: 'Đầu óc lanh lợi, thần hồn sáng suốt.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { maxMentalState: 2 }, attributeChangePercent: { spiritualSense: 1 } } },
+    'khi_luc_doi_dao': { id: 'khi_luc_doi_dao', name: 'Khí Lực Dồi Dào', description: 'Thể lực bẩm sinh tốt.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { maxStamina: 2 }, attributeChangePercent: { agility: 1 } } },
+    'gia_canh_kha_gia': { id: 'gia_canh_kha_gia', name: 'Gia Cảnh Khá Giả', description: 'Xuất thân từ gia đình giàu có.', rank: 1, cost: 10 },
+    'ke_ngoc': { id: 'ke_ngoc', name: 'Kẻ Ngốc', description: 'Tư chất kém nhưng bù lại thân thể tráng kiện.', rank: 1, cost: 10, effects: { attributeChangePercent: { aptitude: -1, physicalBody: 2 } } },
+    'yeu_menh': { id: 'yeu_menh', name: 'Yểu Mệnh', description: 'Sinh ra đã yếu ớt, tuổi thọ ngắn ngủi nhưng ngộ tính khá cao.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { lifespan: -5, maxHp: -2 }, attributeChangePercent: { aptitude: 2 } } },
+    'mu_mau': { id: 'mu_mau', name: 'Mù Màu', description: 'Khó phân biệt màu sắc, nhưng tai rất thính.', rank: 1, cost: 10, effects: { attributeChangePercent: { spiritualSense: -1, accuracy: 2 } } },
+    'tay_chan_long_ngong': { id: 'tay_chan_long_ngong', name: 'Tay Chân Lóng Ngóng', description: 'Vụng về, thân pháp kém.', rank: 1, cost: 10, effects: { attributeChangePercent: { agility: -1 } } },
+    'so_do_cao': { id: 'so_do_cao', name: 'Sợ Độ Cao', description: 'Không dám bay cao, ảnh hưởng tâm cảnh khi phi hành.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { maxMentalState: -2 } } },
+    'ngu_hanh_khuyet_moc': { id: 'ngu_hanh_khuyet_moc', name: 'Ngũ Hành Khuyết Mộc', description: 'Thiên sinh không thể cảm nhận Mộc khí.', rank: 1, cost: 10, effects: { nguHanhBonus: { moc: -1 } } },
+    'vo_can': { id: 'vo_can', name: 'Vô Căn', description: 'Không có linh căn, con đường tu tiên vô cùng gian nan.', rank: 1, cost: 10, effects: { attributeChangePercent: { aptitude: -3, magicPower: -3 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 1)
+    'thien_luong_chi_nhan': { id: 'thien_luong_chi_nhan', name: 'Thiện Lương Chi Nhân', description: 'Bản tính hiền lành, ít khi làm điều ác.', rank: 1, cost: 10, effects: { amDuongBonus: { chinh: 5 } } },
+    'tieu_nhan_bi_oi': { id: 'tieu_nhan_bi_oi', name: 'Tiểu Nhân Bỉ Ổi', description: 'Lòng dạ hẹp hòi, hay tính toán chi li.', rank: 1, cost: 10, effects: { amDuongBonus: { ta: 5 } } },
+
+    // --- RANK 2 (Green) ---
+    'sat_phat_qua_duyet': { id: 'sat_phat_qua_duyet', name: 'Sát Phạt Quả Quyết', description: 'Ra tay tàn nhẫn, có duyên với sát đạo.', rank: 2, cost: 20, effects: { attributeChangePercent: { physicalStrength: 3, critChance: 1 } } },
+    'linh_khi_than_hoa': { id: 'linh_khi_than_hoa', name: 'Linh Khí Thân Hòa', description: 'Thân thể dễ dàng tương thích và hấp thụ linh khí.', rank: 2, cost: 20, effects: { primaryStatChangePercent: { maxSpiritPower: 3 }, attributeChangePercent: { magicPower: 2 } } },
+    'thien_co_thong_minh': { id: 'thien_co_thong_minh', name: 'Thiên Tư Thông Minh', description: 'Tư chất hơn người, học nhanh.', rank: 2, cost: 20, expPerTurn: 1, effects: { attributeChangePercent: { aptitude: 3 } } },
+    'da_day_hon_sat': { id: 'da_day_hon_sat', name: 'Da Dày Hơn Sắt', description: 'Thân thể cứng cáp.', rank: 2, cost: 20, effects: { attributeChangePercent: { physicalBody: 3 } } },
+    'benh_tat_quan_than': { id: 'benh_tat_quan_than', name: 'Bệnh Tật Quấn Thân', description: 'Thân thể yếu đuối nhưng thần hồn mạnh mẽ.', rank: 2, cost: 20, effects: { primaryStatChangePercent: { maxHp: -3 }, attributeChangePercent: { spiritualSense: 3, magicPower: 2 } } },
+    'duyen_voi_nuoc': { id: 'duyen_voi_nuoc', name: 'Duyên Với Nước', description: 'Thích nước, bơi lội giỏi.', rank: 2, cost: 20, effects: { nguHanhBonus: { thuy: 1 } } },
+    'thich_lua': { id: 'thich_lua', name: 'Thích Lửa', description: 'Không sợ nóng, thích nghịch lửa.', rank: 2, cost: 20, effects: { nguHanhBonus: { hoa: 1 } } },
+    'yeu_cay_co': { id: 'yeu_cay_co', name: 'Yêu Cây Cỏ', description: 'Mát tay trồng trọt.', rank: 2, cost: 20, effects: { nguHanhBonus: { moc: 1 } } },
+    'cung_dau': { id: 'cung_dau', name: 'Cứng Đầu', description: 'Tính tình cố chấp, vững như đá.', rank: 2, cost: 20, effects: { nguHanhBonus: { tho: 1 }, attributeChangePercent: { physicalBody: 2 } } },
+    'sac_ben': { id: 'sac_ben', name: 'Sắc Bén', description: 'Khí chất sắc bén như kim loại.', rank: 2, cost: 20, effects: { nguHanhBonus: { kim: 1 }, attributeChangePercent: { physicalStrength: 2 } } },
+    'thu_sinh': { id: 'thu_sinh', name: 'Thư Sinh', description: 'Dáng vẻ nho nhã, tinh thần tốt nhưng yếu ớt.', rank: 2, cost: 20, effects: { attributeChangePercent: { spiritualSense: 3, physicalStrength: -2 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 2)
+    'hanh_hiep_truong_nghia': { id: 'hanh_hiep_truong_nghia', name: 'Hành Hiệp Trượng Nghĩa', description: 'Thấy chuyện bất bình chẳng tha, khí khái hào hùng.', rank: 2, cost: 20, effects: { amDuongBonus: { chinh: 10 }, attributeChangePercent: { physicalStrength: 2 } } },
+    'tu_loi_vi_ban': { id: 'tu_loi_vi_ban', name: 'Tư Lợi Vi Bản', description: 'Luôn đặt lợi ích bản thân lên trên hết.', rank: 2, cost: 20, effects: { amDuongBonus: { ta: 10 }, attributeChangePercent: { aptitude: 2 } } },
+
+    // --- RANK 3 (Blue) ---
+    'thien_ly_nhan': { id: 'thien_ly_nhan', name: 'Thiên Lý Nhãn', description: 'Tầm nhìn xa, thần thức mạnh mẽ.', rank: 3, cost: 30, effects: { attributeChangePercent: { spiritualSense: 5 } } },
+    'phong_hanh_giả': { id: 'phong_hanh_giả', name: 'Phong Hành Giả', description: 'Thân nhẹ như yến, tốc độ hơn người.', rank: 3, cost: 30, effects: { attributeChangePercent: { agility: 5, attackSpeed: 2 } } },
+    'dai_khi_van': { id: 'dai_khi_van', name: 'Đại Khí Vận', description: 'Khí vận hơn người, thường gặp may mắn.', rank: 3, cost: 30, effects: { attributeChangePercent: { critChance: 4 } } },
+    'van_du_thien_ha': { id: 'van_du_thien_ha', name: 'Vân Du Thiên Hạ', description: 'Thích ngao du sơn thủy, thân pháp tốt.', rank: 3, cost: 30, effects: { attributeChangePercent: { agility: 4, spiritualSense: 2 } } },
+    'cuu_duong': { id: 'cuu_duong', name: 'Cửu Dương', description: 'Thân thể phụ thuộc Hỏa, tăng khả năng Hỏa linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { hoa: 2 } } },
+    'nhuoc_thuy': { id: 'nhuoc_thuy', name: 'Nhược Thủy', description: 'Thân thể phụ thuộc Thủy, tăng khả năng Thủy linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { thuy: 2 } } },
+    'at_moc': { id: 'at_moc', name: 'Ất Mộc', description: 'Thân thể phụ thuộc Mộc, tăng khả năng Mộc linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { moc: 2 } } },
+    'canh_kim': { id: 'canh_kim', name: 'Canh Kim', description: 'Thân thể phụ thuộc Kim, tăng khả năng Kim linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { kim: 2 } } },
+    'hau_tho': { id: 'hau_tho', name: 'Hậu Thổ', description: 'Thân thể phụ thuộc Thổ, tăng khả năng Thổ linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { tho: 2 } } },
+    'vo_si': { id: 'vo_si', name: 'Võ Sĩ', description: 'Quen với việc rèn luyện thân thể.', rank: 3, cost: 30, effects: { attributeChangePercent: { physicalStrength: 4, agility: 2 } } },
+    'kiem_phach': { id: 'kiem_phach', name: 'Kiếm Phách', description: 'Có thiên phú với kiếm đạo.', rank: 3, cost: 30, effects: { nguHanhBonus: { kim: 2 }, attributeChangePercent: { physicalStrength: 5 } } },
+    'duoc_dong': { id: 'duoc_dong', name: 'Dược Đồng', description: 'Có khiếu làm luyện đan sư.', rank: 3, cost: 30, effects: { nguHanhBonus: { moc: 1, hoa: 1 }, attributeChangePercent: { spiritualSense: 4 } } },
+    'mi_cot': { id: 'mi_cot', name: 'Mị Cốt', description: 'Trời sinh quyến rũ, dễ dàng thu phục lòng người.', rank: 3, cost: 30, effects: { attributeChangePercent: { spiritualSense: 5 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 3)
+    'tam_nhu_chi_thuy': { id: 'tam_nhu_chi_thuy', name: 'Tâm Như Chỉ Thủy', description: 'Lòng lặng như nước, không bị ngoại vật quấy nhiễu.', rank: 3, cost: 30, effects: { amDuongBonus: { chinh: 15 }, primaryStatChangePercent: { maxMentalState: 5 } } },
+    'tam_ma_xam_thuc': { id: 'tam_ma_xam_thuc', name: 'Tâm Ma Xâm Thực', description: 'Dễ bị cảm xúc tiêu cực chi phối, nhưng sức mạnh tinh thần bùng nổ.', rank: 3, cost: 30, effects: { amDuongBonus: { ta: 20 }, attributeChangePercent: { spiritualSense: 5 }, primaryStatChangePercent: { maxMentalState: -4 } } },
+
+    // --- RANK 4 (Purple) ---
+    'dai_tri_nhuoc_ngu': { id: 'dai_tri_nhuoc_ngu', name: 'Đại Trí Nhược Ngu', description: 'Bề ngoài khờ khạo nhưng ngộ tính kinh người.', rank: 4, cost: 40, expPerTurn: 2, effects: { attributeChangePercent: { aptitude: 8 } } },
+    'cuong_vong_tu_dai': { id: 'cuong_vong_tu_dai', name: 'Cuồng Vọng Tự Đại', description: 'Kiêu ngạo, tấn công mạnh nhưng nhục thân yếu.', rank: 4, cost: 40, effects: { attributeChangePercent: { physicalStrength: 8, critDamage: 10, physicalBody: -5 } } },
+    'dao_ma_chuyen_the': { id: 'dao_ma_chuyen_the', name: 'Đạo Ma Chuyển Thế', description: 'Sở hữu tiềm năng của cả Đạo và Ma.', rank: 4, cost: 40, effects: { attributeChangePercent: { physicalStrength: 6, magicPower: 6, physicalBody: 6 } } },
+    'hon_nguyen_dao': { id: 'hon_nguyen_dao', name: 'Hỗn Nguyên Đạo', description: 'Dung nạp ngũ hành, ép phẩm chất lên Cực Linh Căn.', rank: 4, cost: 40, effects: { nguHanhBonus: { all: 2 } } },
+    'chinh_khi_lam_nhiet': { id: 'chinh_khi_lam_nhiet', name: 'Chính Khí Lẫm Liệt', description: 'Một lòng hướng đạo, tà ma bất xâm.', rank: 4, cost: 40, effects: { amDuongBonus: { chinh: 20 }, attributeChangePercent: { physicalBody: 8 } } },
+    'ma_tinh_tham_tang': { id: 'ma_tinh_tham_tang', name: 'Ma Tính Thâm Tàng', description: 'Ngoài mặt bình thường nhưng tâm địa thâm sâu.', rank: 4, cost: 40, effects: { amDuongBonus: { ta: 20 }, attributeChangePercent: { critChance: 5, spiritualSense: 5 } } },
+    'quy_nhan': { id: 'quy_nhan', name: 'Quỷ Nhãn', description: 'Đôi mắt nhìn thấu âm dương.', rank: 4, cost: 40, effects: { attributeChangePercent: { spiritualSense: 8 }, amDuongBonus: { ta: 10 } } },
+    'phat_tu': { id: 'phat_tu', name: 'Phật Tử', description: 'Có duyên với Phật pháp.', rank: 4, cost: 40, effects: { amDuongBonus: { chinh: 20 }, primaryStatChangePercent: { maxMentalState: 10 } } },
+    'huyet_ma': { id: 'huyet_ma', name: 'Huyết Ma', description: 'Thích máu tanh, thiên hướng tà đạo.', rank: 4, cost: 40, effects: { amDuongBonus: { ta: 20 }, attributeChangePercent: { physicalStrength: 8 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 4)
+    'diet_ma_chi_tam': { id: 'diet_ma_chi_tam', name: 'Diệt Ma Chi Tâm', description: 'Thề diệt hết ma quái trong thiên hạ, chấp niệm quá sâu.', rank: 4, cost: 40, effects: { amDuongBonus: { chinh: 30, ta: -10 }, attributeChangePercent: { attackSpeed: 5 } } },
+    'nhan_qua_dao': { id: 'nhan_qua_dao', name: 'Nhân Quả Đạo', description: 'Hiểu thấu nhân quả, thiện ác song hành.', rank: 4, cost: 40, effects: { amDuongBonus: { chinh: 20, ta: 20 }, attributeChangePercent: { spiritualSense: 10 } } },
+
+    // --- RANK 5 (Orange) ---
+    'son_ha_xa_tac': { id: 'son_ha_xa_tac', name: 'Sơn Hà Xã Tắc', description: 'Thân thể bền bỉ như đất, sức sống như cây.', rank: 5, cost: 50, effects: { primaryStatChangePercent: { maxHp: 12 }, attributeChangePercent: { physicalBody: 10 }, nguHanhBonus: { tho: 1, moc: 1 } } },
+    'kiem_khi_truong_giang': { id: 'kiem_khi_truong_giang', name: 'Kiếm Khí Trường Giang', description: 'Kiếm khí như nước chảy.', rank: 5, cost: 50, effects: { attributeChangePercent: { physicalStrength: 10, magicPower: 10 }, nguHanhBonus: { kim: 1, thuy: 1 } } },
+    'thuong_long_at_moc': { id: 'thuong_long_at_moc', name: 'Thương Long Ất Mộc', description: 'Sinh sôi nảy nở, hồi phục mạnh mẽ.', rank: 5, cost: 50, effects: { primaryStatChangePercent: { maxSpiritPower: 12, maxStamina: 12 }, attributeChangePercent: { spiritualSense: 8, hpRegen: 5, spRegen: 5 }, nguHanhBonus: { thuy: 1, moc: 1 } } },
+    'chu_tuoc_phan_thien': { id: 'chu_tuoc_phan_thien', name: 'Chu Tước Phần Thiên', description: 'Lửa bùng cháy, bạo phát mạnh mẽ.', rank: 5, cost: 50, effects: { attributeChangePercent: { magicPower: 12, critChance: 8, dmgFire: 10 }, nguHanhBonus: { moc: 1, hoa: 1 } } },
+    'dia_tam_hoa_lien': { id: 'dia_tam_hoa_lien', name: 'Địa Tâm Hỏa Liên', description: 'Sức chịu đựng và phản kích.', rank: 5, cost: 50, effects: { attributeChangePercent: { physicalBody: 12, counterDamage: 8 }, nguHanhBonus: { hoa: 1, tho: 1 } } },
+    'tuyet_vuc_bang_tam': { id: 'tuyet_vuc_bang_tam', name: 'Tuyết Vực Băng Tâm', description: 'Tâm lặng như băng, kháng hiệu ứng.', rank: 5, cost: 50, effects: { primaryStatChangePercent: { maxMentalState: 15 }, attributeChangePercent: { spiritualSense: 10, critResist: 10 }, nguHanhBonus: { thuy: 1, kim: 1 } } },
+    'phuong_hoang_niet_ban': { id: 'phuong_hoang_niet_ban', name: 'Phượng Hoàng Niết Bàn', description: 'Tuổi thọ cao, thiên phú hỏa pháp.', rank: 5, cost: 50, effects: { primaryStatChangePercent: { lifespan: 15 }, attributeChangePercent: { magicPower: 10, agility: 8, attackSpeed: 5, hpRegen: 10 }, nguHanhBonus: { hoa: 2 } } },
+    'loi_dinh_ba': { id: 'loi_dinh_ba', name: 'Lôi Đình Bá', description: 'Thân thể chứa lôi đình. Tự động kích hoạt Lôi Linh Căn.', rank: 5, cost: 50, effects: { attributeChangePercent: { physicalStrength: 12, critDamage: 15, dmgLightning: 10 } } },
+    'bang_tam_ngoc_cot': { id: 'bang_tam_ngoc_cot', name: 'Băng Tâm Ngọc Cốt', description: 'Cốt tủy băng giá. Tự động kích hoạt Băng Linh Căn.', rank: 5, cost: 50, effects: { attributeChangePercent: { magicPower: 10, physicalBody: 10, resIce: 10 } } },
+    'huyen_anh_phong_than': { id: 'huyen_anh_phong_than', name: 'Huyễn Ảnh Phong Thân', description: 'Thân như gió. Tự động kích hoạt Phong Linh Căn.', rank: 5, cost: 50, effects: { attributeChangePercent: { agility: 12, attackSpeed: 8, evasion: 8 } } },
+    'bang_phach': { id: 'bang_phach', name: 'Băng Phách', description: 'Linh hồn lạnh giá, ép linh căn thành Băng dị chủng.', rank: 5, cost: 50, effects: { attributeChangePercent: { magicPower: 12, dmgIce: 10 } } },
+    'phong_than': { id: 'phong_than', name: 'Phong Thần', description: 'Con của gió, ép linh căn thành Phong dị chủng.', rank: 5, cost: 50, effects: { attributeChangePercent: { agility: 12, dmgWind: 10 } } },
+    'thien_sat_co_tinh': { id: 'thien_sat_co_tinh', name: 'Thiên Sát Cô Tinh', description: 'Số phận cô độc, khắc người thân nhưng sức mạnh vượt trội.', rank: 5, cost: 50, effects: { attributeChangePercent: { physicalStrength: 15, physicalBody: -8, critChance: 10, armorPen: 10 }, primaryStatChangePercent: { lifespan: 10 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 5)
+    'hao_nhien_chinh_khi': { id: 'hao_nhien_chinh_khi', name: 'Hạo Nhiên Chính Khí', description: 'Chính khí ngút trời, tà ma tránh xa.', rank: 5, cost: 50, effects: { amDuongBonus: { chinh: 50, ta: -20 }, attributeChangePercent: { physicalBody: 12, spiritualSense: 10, critResist: 10 } } },
+    'vo_tinh_sat_dao': { id: 'vo_tinh_sat_dao', name: 'Vô Tình Sát Đạo', description: 'Diệt tuyệt thất tình lục dục, chỉ còn sát đạo.', rank: 5, cost: 50, effects: { amDuongBonus: { ta: 50, chinh: -20 }, attributeChangePercent: { critDamage: 20, physicalStrength: 12, armorPen: 10 } } },
+    'ta_than_nghich_tu': { id: 'ta_than_nghich_tu', name: 'Tà Thần Nghịch Tử', description: 'Kẻ phản nghịch, chà đạp luân thường đạo lý.', rank: 5, cost: 50, effects: { amDuongBonus: { ta: 40, chinh: -40 }, attributeChangePercent: { magicPower: 15, lifeSteal: 10 } } },
+
+    // --- RANK 6 (Red) ---
+    'thien_menh_chi_tu': { id: 'thien_menh_chi_tu', name: 'Thiên Mệnh Chi Tử', description: 'Kẻ được thiên mệnh ưu ái, tư chất toàn diện.', rank: 6, cost: 80, expPerTurn: 3, effects: { attributeChangePercent: { physicalStrength: 20, magicPower: 20, physicalBody: 20, agility: 15, spiritualSense: 20, aptitude: 20, attackSpeed: 10, damageReduction: 10, armorPen: 10 }, nguHanhBonus: { all: 3 } } },
+    'ngu_hanh_hop_nhat': { id: 'ngu_hanh_hop_nhat', name: 'Ngũ Hành Hợp Nhất', description: 'Ngũ hành tương sinh, ép phẩm chất thành Cực Linh Căn.', rank: 6, cost: 60, effects: { nguHanhBonus: { all: 2 }, attributeChangePercent: { magicPower: 25, aptitude: 25 } } },
+    'loi_than_giang_the': { id: 'loi_than_giang_the', name: 'Lôi Thần Giáng Thế', description: 'Hóa thân của sấm sét, ép linh căn thành Lôi dị chủng cực phẩm.', rank: 6, cost: 70, effects: { attributeChangePercent: { physicalStrength: 25, critDamage: 30, attackSpeed: 15, dmgLightning: 20 } } },
+    'van_khi_nghich_thien': { id: 'van_khi_nghich_thien', name: 'Vận Khí Nghịch Thiên', description: 'May mắn đến mức nghịch thiên, đi đường cũng nhặt được bảo vật.', rank: 6, cost: 80, effects: { attributeChangePercent: { critChance: 15, evasion: 15 } } },
+    'nguoi_xuyen_viet': { id: 'nguoi_xuyen_viet', name: 'Người Xuyên Việt', description: 'Linh hồn đến từ thế giới khác, tâm trí kiên định, kiến thức rộng mở.', rank: 6, cost: 60, effects: { primaryStatChangePercent: { maxMentalState: 30 }, attributeChangePercent: { aptitude: 25, spiritualSense: 25 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 6)
+    'thien_ma_hang_the': { id: 'thien_ma_hang_the', name: 'Thiên Ma Hàng Thế', description: 'Ma chủ tái sinh, vạn ma thần phục.', rank: 6, cost: 80, effects: { amDuongBonus: { ta: 80, chinh: -50 }, attributeChangePercent: { magicPower: 25, spiritualSense: 20, lifeSteal: 15, armorPen: 15 } } },
+};
+// Khí vận tiên thiên: mỗi kiếp rút 1–3 cái lúc đầu thai, phẩm càng cao càng hiếm.
+// Khí vận có hành (Cửu Dương, Nhược Thủy, Canh Kim…) kéo linh căn về hành đó; một số ép linh căn thành biến dị (Lôi, Băng, Phong)
+// hoặc Cực linh căn (đủ ngũ hành, tương sinh); Ngũ Hành Khuyết Mộc thì không cảm được Mộc khí.
+// Thể chất tiên thiên: suy ra từ linh căn (tỉ lệ hành), khí vận, nhân quả (chính tà) và tính tình (theo xuất thân, mệnh cách), lấy tối đa ba cái phẩm cao nhất,
+// không khớp gì thì là Phàm Thể. Tất cả đều cộng vào chỉ số.
+delete TT_DEST.vo_can; // không có linh căn thì không tu được: bỏ
+const TT_RW=[0,40,28,17,9,4.5,1.5];
+const TT_RANK=['','Phàm','Lương','Hiếm','Quý','Cực hiếm','Nghịch thiên'],TT_COL=['','#8d8672','#4f8a4a','#4a6fae','#7b56a8','#c97a2b','#b8302a'];
+function ttRoll(){const n=wpick([1,2,3],x=>[40,45,15][x-1]);const L=[];const all=Object.values(TT_DEST);
+  for(let i=0;i<n;i++){const rk=wpick([1,2,3,4,5,6],x=>TT_RW[x]);const pool=all.filter(d=>d.rank===rk&&!L.includes(d.id));if(pool.length)L.push(pick(pool).id);}return L;}
+const TT_FORCE={loi_dinh_ba:'loi',loi_than_giang_the:'loi',bang_tam_ngoc_cot:'bang',bang_phach:'bang',huyen_anh_phong_than:'phong',phong_than:'phong'};
+ROOT.push({id:'cuc',n:'Cực linh căn',m:1.5,w:0,k:5,d:'Đủ ngũ hành, tương sinh không khắc. Hiếm tới mức chỉ khí vận nghịch thiên mới ép ra được.'});
+function ttShape(root,ids){const els=root.els.slice();let id=root.id;
+  for(const k of ids){if(TT_FORCE[k])return {id:'bien',els:[TT_FORCE[k]]};}
+  if(ids.some(k=>k==='hon_nguyen_dao'||k==='ngu_hanh_hop_nhat'))return {id:'cuc',els:NGUHANH.slice()};
+  if(id==='bien')return root;
+  for(const k of ids){const nb=(TT_DEST[k].effects||{}).nguHanhBonus;if(!nb)continue;
+    for(const [e,v] of Object.entries(nb)){if(e==='all'||v<=0||els.includes(e))continue;if(v>=2||chance(.5)){const out=els.filter(x=>!ids.some(q=>((TT_DEST[q].effects||{}).nguHanhBonus||{})[x]>0));if(out.length)els[els.indexOf(pick(out))]=e;}}}
+  if(ids.includes('ngu_hanh_khuyet_moc')&&els.includes('moc')){if(els.length>=5){els.splice(els.indexOf('moc'),1);id='tu';}else{const o=NGUHANH.filter(x=>!els.includes(x));els[els.indexOf('moc')]=pick(o);}}
+  return {id,els};}
+{const _gb25=genBirth;genBirth=function(){_gb25();for(const c of G.birth.cards){c.kv=ttRoll();c.root=ttShape(c.root,c.kv);
+  for(const k of c.kv){const a=(TT_DEST[k].effects||{}).amDuongBonus;if(a)c.karmaAdj=(c.karmaAdj||0)+Math.round(((a.chinh||0)-(a.ta||0))/2);}}};}
+// tính tình theo xuất thân và mệnh cách (Thienmenh xét thể chất theo tính tình)
+const TT_TRAITS={dote:['Tàn nhẫn'],mahuyet:['Cuồng tà','Căm thù'],khat:['Tự do'],linh:['Hiếu chiến'],mieu:['Nhân hậu'],thusinh:['Thận trọng'],buon:['Thực dụng'],hat:['Quái gở'],thegia:['Bảo thủ'],tran:['Thông tuệ'],daodong:['Thận trọng'],nong:['Chính trực'],ren:['Chính trực'],chai:['Tự do'],duoc:['Nhân hậu'],
+ sattinh:['Sát phạt','Hiếu chiến'],chithuy:['Lạnh lùng'],linhnhan:['Thông tuệ'],thiendo:['Thông tuệ'],luoi:['Thực dụng'],thanluc:['Hiếu chiến'],bangco:['Lạnh lùng'],kiemtam:['Hào sảng']};
+function ttPhys(r){const els=r.root.els.filter(e=>NGUHANH.includes(e));const pct=e=>els.includes(e)?Math.round(100/Math.max(1,els.length)):0;const D=r.kv||[];const has=k=>D.includes(k);
+  const T=(TT_TRAITS[r.origin]||[]).concat(TT_TRAITS[r.trait]||[]);const hasT=t=>T.includes(t);const anyT=L=>L.some(hasT);
+  const k=r.karma||0;const pureR=k>=40,pureE=k<=-40,neutral=Math.abs(k)<20;const lc=r.root.id==='cuc'?'Cực Linh Căn':r.root.id==='thien'?'Thiên Linh Căn':'';
+  const evil=['Độc ác','Tàn nhẫn','Thâm độc','Cuồng tà','Vị kỷ','Căm thù'],wild=['Cuồng tà','Quái gở','Tự do'];const bal5=els.length===5;
+  const C={hon_don_the:bal5&&lc==='Cực Linh Căn'&&neutral&&(has('ngu_hanh_hop_nhat')||(has('hon_nguyen_dao')&&D.some(q=>q!=='hon_nguyen_dao'&&TT_DEST[q].rank>=5))),hoang_co_thanh_the:pct('tho')>=80&&(has('son_ha_xa_tac')||has('da_day_hon_sat'))&&pureR&&!anyT(evil),
+   van_co_ma_the:pureE&&(has('sat_phat_qua_duyet')||has('dao_ma_chuyen_the'))&&anyT(evil),tien_thien_dao_thai:!!lc&&has('dai_tri_nhuoc_ngu')&&!pureE,
+   cuu_khieu_linh_lung:(has('thien_co_thong_minh')||has('thien_ly_nhan'))&&anyT(['Thận trọng','Thực dụng','Thông tuệ']),
+   thuong_thien_ba_the:(pct('tho')>=60||pct('kim')>=60)&&!pureR&&(anyT(wild)||has('cuong_vong_tu_dai')),thai_duong_the:pct('hoa')>=80&&has('cuu_duong')&&!hasT('Lạnh lùng'),
+   thai_am_the:pct('thuy')>=80&&has('nhuoc_thuy'),thien_yeu_the:(pct('moc')>=60||has('huyen_anh_phong_than'))&&anyT(wild),loi_dinh_chien_the:has('loi_dinh_ba')&&anyT(wild.concat(['Hào sảng','Hiếu chiến'])),
+   hu_khong_chi_the:has('huyen_anh_phong_than')&&hasT('Tự do'),duoc_linh_thanh_the:pct('moc')+pct('hoa')>=60&&(has('duoc_linh_the')||has('chu_tuoc_phan_thien')||r.origin==='duoc'),
+   ngu_hanh_linh_the:bal5,vo_cau_kiem_the:pct('kim')>=60&&has('kiem_khi_truong_giang'),huyet_sat_ma_the:pct('thuy')>=40&&k<-60&&anyT(['Độc ác','Tàn nhẫn','Sát phạt']),
+   bang_co_ngoc_cot:has('bang_tam_ngoc_cot')&&hasT('Lạnh lùng'),tat_phong_linh_the:pct('moc')>=40&&pct('thuy')>=20&&has('phong_hanh_giả'),cuu_duong_chi_the:pct('hoa')>=60&&has('cuu_duong'),
+   huyen_am_chi_the:pct('thuy')>=60&&has('nhuoc_thuy'),kim_cuong_bat_hoai:pct('kim')>=50&&pct('tho')>=50,kim_linh_the:pct('kim')>=70,moc_linh_chi_the:pct('moc')>=70,thuy_linh_the:pct('thuy')>=70,
+   hoa_linh_the:pct('hoa')>=70,tho_linh_the:pct('tho')>=70,am_sat_the:k<=-50&&hasT('Thâm độc'),cuong_chien_the:hasT('Cuồng tà')||(hasT('Hiếu chiến')&&['vo_si','sat_phat_qua_duyet','huyet_ma','cuong_vong_tu_dai','than_the_khoe_manh'].some(has)),man_luc_the:has('than_the_khoe_manh'),
+   thong_tue_the:has('tinh_than_minh_man'),kien_nhan_the:has('khi_luc_doi_dao'),linh_cam_the:has('thien_ly_nhan'),truong_tho_the:has('thien_menh_chi_tu')||pct('moc')>=50};
+  const L=TT_PHYS.filter(p=>C[p.id]).sort((a,b)=>b.rank-a.rank).slice(0,3).map(p=>p.id);return L.length?L:['pham_the'];}
+function ttPhysOf(id){return TT_PHYS.find(p=>p.id===id);}
+// đổi hiệu ứng của Thienmenh sang chỉ số của game này
+const TT_MAP={physicalStrength:['atkP',1],magicPower:['matkP',1],physicalBody:['defP',1],damageReduction:['defP',1],counterDamage:['defP',0.5],armorPen:['atkP',0.5],
+ agility:['tp',0.25],attackSpeed:['tp',0.2],spiritualSense:['than',0.5],aptitude:['ngo',0.34],critChance:['crit',1],critDamage:['critDmg',1],evasion:['dodge',1],critResist:['hoTam',0.5],
+ lifeSteal:['drain',0.5],hpRegen:['regenHp',0.2],maxHp:['hpP',1],maxSpiritPower:['mpP',1],maxStamina:['hpP',0.3],maxMentalState:['tam',0.34],lifespan:['lifeP',1]};
+const TT_ELD={dmgFire:'hoa',dmgLightning:'loi',dmgIce:'bang',dmgWind:'phong'};
+function ttFx(def){const o={};if(!def)return o;const E=def.effects||{};const add=(k,v)=>{if(!v)return;o[k]=(o[k]||0)+v;};
+  for(const grp of [E.attributeChangePercent,E.primaryStatChangePercent])for(const [k,v] of Object.entries(grp||{})){if(TT_ELD[k]){o.elP=o.elP||{};o.elP[TT_ELD[k]]=(o.elP[TT_ELD[k]]||0)+v;continue;}const m=TT_MAP[k];if(!m)continue;
+    let x=v*m[1];x=['tp','ngo','tam','than','hoTam','drain','regenHp'].includes(m[0])?Math.sign(x)*Math.max(1,Math.round(Math.abs(x))):Math.round(x);add(m[0],x);}
+  const ex=(E.expPerTurn||0)+(def.expPerTurn||0)*3;if(ex)add('tvP',ex);return o;}
+const TT_FXN={atkP:'Công vật lý {v}%',matkP:'Công phép {v}%',defP:'Thủ {v}%',hpP:'Khí huyết {v}%',mpP:'Linh lực {v}%',tp:'Thân pháp {v}',than:'Thần thức {v}',ngo:'Ngộ tính {v}',tam:'Đạo tâm {v}',crit:'Chí mạng {v}%',critDmg:'ST chí mạng {v}%',dodge:'Né tránh {v}',hoTam:'Hộ tâm {v}',drain:'Hút máu {v}%',regenHp:'Hồi khí huyết mỗi lượt {v}%',lifeP:'Thọ nguyên {v}%',tvP:'Tu vi nhận thêm {v}%'};
+function ttFxText(def){const o=ttFx(def);const L=[];for(const [k,v] of Object.entries(o)){if(k==='elP'){for(const [e,x] of Object.entries(v))L.push('Sát thương hệ '+EL[e].n+' '+(x>0?'+':'')+x+'%');continue;}if(TT_FXN[k])L.push(TT_FXN[k].replace('{v}',(v>0?'+':'')+v));}
+  const E=def.effects||{};if(E.nguHanhBonus)L.push('Linh căn nghiêng về '+Object.keys(E.nguHanhBonus).map(e=>e==='all'?'ngũ hành':(EL[e]||{n:e}).n).join(', ')+(Object.values(E.nguHanhBonus).some(v=>v<0)?' (khuyết)':''));
+  if(TT_FORCE[def.id])L.push('Linh căn hóa '+EL[TT_FORCE[def.id]].n+' (biến dị)');if(def.id==='hon_nguyen_dao'||def.id==='ngu_hanh_hop_nhat')L.push('Ép thành Cực linh căn');
+  if(E.amDuongBonus){const d=Math.round(((E.amDuongBonus.chinh||0)-(E.amDuongBonus.ta||0))/2);if(d)L.push('Nhân quả '+(d>0?'+':'')+d);}return L;}
+{const _ag25=aggFx;aggFx=function(){const fx=_ag25();const r=G.run;if(!r)return fx;const add=src=>{for(const [k,v] of Object.entries(src)){if(k==='elP'){fx.elP=fx.elP||{};for(const [e,x] of Object.entries(v))fx.elP[e]=(fx.elP[e]||0)+x;}else fx[k]=(fx[k]||0)+v;}};
+  for(const k of r.kv||[])add(ttFx(TT_DEST[k]));for(const k of r.the||[])add(ttFx(ttPhysOf(k)));return fx;};}
+{const _nr25=newRun;newRun=function(c){const res=_nr25(c);const r=G.run;if(r){r.kv=(c.kv||[]).slice();r.karma=clamp((r.karma||0)+(c.karmaAdj||0),-100,100);r.the=ttPhys(r);const s=S();r.hp=s.maxHp;r.mp=s.maxMp;}return res;};}
+// câu chuyện mở đầu: nhắc tới thể chất nổi bật (từ phẩm Hiếm trở lên)
+{const _nr25b=newRun;newRun=function(c){const res=_nr25b(c);const r=G.run;if(r&&r.story&&r.the){const p=ttPhysOf(r.the[0]);if(p&&p.rank>=3){const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const nm=w.slice(h2?2:1).join(' ')||r.ten;
+  r.story.splice(Math.max(1,r.story.length-2),0,'Có lần một lão đạo sĩ đi ngang, nhìn '+nm+' rất lâu rồi lẩm bẩm: “'+p.name+'…” '+p.description);}}return res;};}
+
+// ================= ĐỢT 26: ĐỠ ĐÒN CÓ VÒNG BẤM, CHÍ MẠNG CÓ THANH TRƯỢT =================
+// Đang thủ thế mà địch đánh tới: vòng bấm hiện nút "Đỡ" thay cho "Né". Không né nữa mà đỡ: bấm chuẩn thì đỡ thêm 25%,
+// bấm khá thêm 10%, không bấm hoặc hụt thì đỡ kém đi 10%. Thủ thế mà địch không đánh thì không hiện gì.
+{const _ds26=doSkill;doSkill=function(sc,u,sk,lv,tid,qm){const had=sc.dodge;const res=_ds26(sc,u,sk,lv,tid,qm);const me=mainUnit(sc);if(sc.dodge&&sc.dodge!==had&&!sc.dodge.kiep&&me&&me.st.stance){sc.dodge.blk=1;sc.rev++;}return res;};}
+{const _dr26=dodgeResolve;dodgeResolve=function(offs){const sc=G.run&&G.run.scene;const d=sc&&sc.dodge;if(!d||!d.blk)return _dr26(offs);const me=mainUnit(sc);
+  const L=(offs||[]).filter(x=>x!=null).map(Math.abs);const a=L.length?Math.min(...L):null;const q=a==null?-0.1:a<=0.09?0.25:a<=0.25?0.1:-0.1;
+  me._bq=q;clog(sc,q>=0.25?'Đỡ chuẩn: hóa giải phần lớn lực đòn.':q>0?'Đỡ kịp.':'Đỡ trễ, lực đòn dội thẳng vào người.',q>0?'me':'en');
+  try{return _dr26([]);}finally{me._bq=0;}};}
+{const _bc26=blockCut;blockCut=function(att,def){const b=_bc26(att,def);return def&&def._bq?clamp(b+def._bq,0.05,0.75):b;};}
+// Chí mạng: khi đòn của ngươi gieo trúng chí mạng, thanh trượt chạy qua lại; chạm đúng vùng xanh thì mới chí mạng,
+// trượt thì đòn vẫn trúng nhưng không chí mạng. Tự đánh thì máy tự bấm (trúng khoảng 70%).
+{const _ds26b=doSkill;doSkill=function(sc,u,sk,lv,tid,qm){if(u&&u._critF!=null)return _ds26b(sc,u,sk,lv,tid,qm);
+  if(u&&u.isMain&&u.ctrl==='player'&&sk&&sk.fx&&sk.fx.p&&!sc.kiep&&!sc.critQ){const p=((u.crit||5)+(sk.fx.crit||0))/100;
+    if(chance(p)){if((typeof CFG!=='undefined'&&CFG.autoFight)||(G.meta.opt&&G.meta.opt.autoQte)||typeof document==='undefined'){u._critF=chance(.7);try{return _ds26b(sc,u,sk,lv,tid,qm);}finally{u._critF=null;}}
+      sc.critQ={id:(sc.cqid=(sc.cqid||0)+1),uid:u.id,sk,lv,tid,qm};sc.rev++;return;}
+    u._critF=false;try{return _ds26b(sc,u,sk,lv,tid,qm);}finally{u._critF=null;}}
+  return _ds26b(sc,u,sk,lv,tid,qm);};}
+function critResolve(ok){const sc=G.run&&G.run.scene;if(!sc||!sc.critQ)return;const c=sc.critQ;sc.critQ=null;const u=U_(sc,c.uid);if(!u){return;}
+  runAct(sc,()=>{clog(sc,ok?'Chí mạng!':'Lỡ thời cơ chí mạng.',ok?'me':'fl');u._critF=!!ok;try{doSkill(sc,u,c.sk,c.lv,c.tid,c.qm);}finally{u._critF=null;}});}
+
+// ================= ĐỢT 27: THIÊU ĐỐT TINH HUYẾT, THỌ NGUYÊN, HUYẾT TẾ =================
+// Nút "Huyết thuật" trong trận mở bảng chọn:
+//  · Thiêu đốt tinh huyết (lần 1): mất 20% khí huyết tối đa từ khí huyết hiện tại (không mất thọ); hồi 60% linh lực, đầy thể lực, giải độc, bỏng, suy yếu.
+//  · Thiêu đốt thọ nguyên (chỉ sau khi đã đốt tinh huyết): như "đốt nguyên thần" cũ, mất 20% thọ tối đa (tối thiểu 10 năm), nhiều hơn bản cũ.
+//  · Huyết tế (mỗi trận một lần): hiến 20% khí huyết tối đa. Trong trận: công +25%. Khí huyết tối đa thiếu hụt suốt 15 tháng,
+//    sau đó mới bắt đầu hồi dần trong 12 tháng. Dùng cho trận pháp, pháp bảo sẽ phát triển sau.
+// Mỗi lượt chỉ dùng một huyết thuật.
+const HT_P=0.2,HT_HOLD=15,HT_REC=12;
+function htPen(){const r=G.run;if(!r||!r.ht||!r.ht.length)return 0;const t=W().t;r.ht=r.ht.filter(x=>t<x.re);let p=0;for(const x of r.ht)p+=x.p*(t<x.rs?1:(x.re-t)/(x.re-x.rs));return Math.min(0.6,p);}
+{const _S27=S;S=function(){const s=_S27();const p=htPen();if(p>0)s.maxHp=Math.max(1,Math.round(s.maxHp*(1-p)));return s;};}
+function burnOpts(sc){const r=G.run;const u=mainUnit(sc);const L=[];const left=Math.floor(S().life-r.age);
+  if(!sc.tinh){const c=Math.round(u.max*0.2);L.push({k:'tinh',n:'Thiêu đốt tinh huyết',d:['Hồi 60% linh lực, đầy thể lực','Giải độc, bỏng, suy yếu','Không mất lượt, không mất thọ'],cost:'Mất '+c+' khí huyết hiện tại',ok:u.hp>c+1,why:'Khí huyết không đủ để đốt'});}
+  else if(!sc.tho){const y=Math.max(10,Math.round(LIFE[r.realm]*0.2));L.push({k:'tho',n:'Thiêu đốt thọ nguyên',y,d:['3 lượt tới mỗi đòn xuyên 25% thủ, hút 10% sát thương','Hết 3 lượt: suy yếu 2 lượt'],cost:'Mất vĩnh viễn '+y+' năm thọ (còn '+left+' năm)',ok:left>y+1,why:'Thọ nguyên không đủ'});}
+  if(!sc.ht){const c=Math.round(u.max*HT_P);L.push({k:'ht',n:'Huyết tế',d:['Hiến tinh huyết: công +25% tới hết trận','Mỗi trận một lần'],cost:'Khí huyết tối đa −'+c+' trong '+HT_HOLD+' tháng, sau đó mới hồi dần trong '+HT_REC+' tháng',ok:u.hp>c+1,why:'Khí huyết không đủ để hiến'});}
+  return L;}
+function burnInfo(sc){const L=burnOpts(sc);return {done:!L.length,L,label:sc.tinh?'Thiêu đốt thọ nguyên':'Huyết thuật'};}
+function playerBurn(k){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||u.burnedTurn||u.dazed)return false;const o=burnOpts(sc).find(x=>x.k===k);if(!o||!o.ok)return false;const r=G.run;u.burnedTurn=1;
+  if(k==='tinh'){const c=Math.round(u.max*0.2);u.hp=Math.max(1,u.hp-c);sc.tinh=1;u.mp=Math.min(u.maxMp,u.mp+Math.round(u.maxMp*0.6));u.tl=100;u.st.poison=0;u.st.burn=0;u.st.weak=0;
+    clog(sc,`Ngươi thiêu đốt tinh huyết, mất ${c} khí huyết. Huyết khí sôi trào: linh lực hồi 60%, thể lực đầy, độc tố tiêu tan.`,'me');log('Thiêu đốt tinh huyết trong trận.');}
+  else if(k==='tho'){r.lifeAdj-=o.y;sc.tho=1;u.st.soul=3;clog(sc,`Ngươi thiêu đốt thọ nguyên, mất ${o.y} năm thọ. Ba lượt tới mỗi đòn xuyên giáp, hút máu.`,'me');log(`Thiêu đốt ${o.y} năm thọ nguyên trong trận.`);}
+  else{const c=Math.round(u.max*HT_P);sc.ht=1;const t=W().t;(r.ht=r.ht||[]).push({p:HT_P,rs:t+HT_HOLD*HM,re:t+(HT_HOLD+HT_REC)*HM});u.max=Math.max(1,u.max-c);u.hp=Math.min(u.hp,u.max);u.atk=Math.round(u.atk*1.25);u.matk=Math.round((u.matk||u.atk)*1.25);
+    clog(sc,`Ngươi huyết tế, hiến ${c} khí huyết tối đa. Máu tươi hóa thành sát khí: công +25% tới hết trận.`,'me');log('Huyết tế: khí huyết tối đa giảm, 15 tháng sau mới bắt đầu hồi.');}
+  syncMain(sc);sc.rev=(sc.rev||0)+1;return true;}
+// ----- khí vận có tác dụng riêng ngoài chỉ số (bổ sung cho bản Thienmenh): khí vận, giá mua, gia cảnh -----
+const TT_EXTRA={dai_khi_van:{van:2},van_khi_nghich_thien:{van:5},mi_cot:{shopP:10},tieu_nhan_bi_oi:{shopP:5},tu_loi_vi_ban:{shopP:5}};
+{const _tf27=ttFx;ttFx=function(def){const o=_tf27(def);const x=def&&TT_EXTRA[def.id];if(x)for(const [k,v] of Object.entries(x))o[k]=(o[k]||0)+v;return o;};}
+Object.assign(TT_FXN,{van:'Khí vận {v}',shopP:'Mua đồ rẻ {v}%'});
+{const _ft27=ttFxText;ttFxText=function(def){const L=_ft27(def);if(def&&def.id==='gia_canh_kha_gia')L.push('Đầu thai mang theo thêm linh thạch');return L;};}
+// câu chuyện mở đầu: khí vận nổi bật nhất, gia cảnh khá giả thì có thêm linh thạch
+{const _nr27=newRun;newRun=function(c){const res=_nr27(c);const r=G.run;if(!r||!r.story||!r.kv)return res;
+  const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const nm=w.slice(h2?2:1).join(' ')||r.ten;const at=Math.max(1,r.story.length-2);
+  if(r.kv.includes('gia_canh_kha_gia')){const v=ri(3,6);r.st+=v;r.story.splice(at,0,'Nhà vẫn còn chút của để dành. Lúc '+nm+' ra đi, trong tay nải có thêm '+v+' viên linh thạch.');}
+  const top=r.kv.map(k=>TT_DEST[k]).filter(d=>d&&d.rank>=2&&d.id!=='gia_canh_kha_gia'&&!d.mc&&!d.tr&&!/linh căn|kích hoạt|tự động/i.test(d.description)).sort((a,b)=>b.rank-a.rank)[0];
+  if(top){const d=top.description.replace(/\.$/,'');r.story.splice(Math.max(1,r.story.length-2),0,'Người quen ai cũng nói về '+nm+': '+d.charAt(0).toLowerCase()+d.slice(1)+'.');}
+  saveSoon();return res;};}
+
+// ================= ĐỢT 28: GỘP MỆNH CÁCH VÀO TIÊN THIÊN KHÍ VẬN =================
+// 18 mệnh cách cũ thành khí vận phẩm Hiếm (giữ nguyên tác dụng riêng: thiêu, miễn độc, bế quan, mua rẻ, kết liễu…), đổi tên cho ra dáng khí vận.
+// Nhân vật mới không còn mệnh cách riêng; bản lưu cũ vẫn giữ mệnh cách đang có.
+const MC_REN={kiemtam:['Kiếm Duyên','Từ nhỏ đã có duyên với kiếm, cầm kiếm như cầm đũa.'],thanluc:['Thiên Sinh Thần Lực','Sinh ra đã khỏe hơn người.'],
+ menhcung:['Mệnh Cứng','Số mệnh cứng cỏi, mấy lần cận kề cái chết vẫn sống.'],chithuy:['Tâm Bình Khí Hòa','Lòng dạ bình thản, khó bị ngoại vật lay động.'],
+ linhnhan:['Mắt Sáng Hơn Người','Nhìn đâu cũng thấy điều người khác bỏ qua.'],luoi:['Ba Tấc Lưỡi','Ăn nói khéo léo, mua bán ít khi chịu thiệt.'],
+ yeuhuyet:['Huyết Mạch Yêu Tộc','Trong máu có chút huyết mạch yêu tộc, vết thương lành rất nhanh.'],thiendo:['Thiên Đố Anh Tài','Thông minh hơn người, nhưng trời ghen nên khó sống lâu.'],
+ phuctinh:['Phúc Tinh Cao Chiếu','Sao phúc chiếu mệnh, gặp dữ hóa lành.'],hoalinh:['Mệnh Hỏa Vượng','Sinh vào giờ hỏa vượng, có duyên với lửa.'],
+ bangco:['Sinh Nơi Băng Tuyết','Sinh ra giữa mùa băng tuyết, thân thể cứng cỏi, hợp với hàn khí.'],truongtho:['Tướng Thọ','Mang tướng mạo của người sống lâu.'],
+ bachdoc:['Bách Độc Bất Xâm','Trời sinh không sợ độc.'],ngodao:['Duyên Ngộ Đạo','Có duyên với đạo, tu luyện nhanh hơn người.'],
+ khotu:['Bền Chí Khổ Tu','Chịu được cô quạnh, ngồi yên tu luyện bao lâu cũng được.'],sattinh:['Sát Tinh Chiếu Mệnh','Sát khí nặng, ra tay với kẻ yếu thế không chút nương tay.'],
+ mongdu:['Mộng Du Tiên Cảnh','Đêm nào cũng mơ thấy tiên cảnh.'],huyenco:['Kinh Mạch Thông Suốt','Kinh mạch thông suốt, linh lực vận hành trơn tru.']};
+for(const t of TRAIT){const m=MC_REN[t.id];if(!m)continue;const id='mc_'+t.id;TT_DEST[id]={id,name:m[0],description:m[1],rank:3,mc:t.id};}
+TRAIT.push({id:'none',n:'Không',i:'',fx:{},d:''});
+{const _tf28=ttFx;ttFx=function(def){if(def&&def.mc){const t=TRAIT.find(x=>x.id===def.mc);return JSON.parse(JSON.stringify((t&&t.fx)||{}));}return _tf28(def);};}
+{const _ft28=ttFxText;ttFxText=function(def){if(def&&def.mc){const t=TRAIT.find(x=>x.id===def.mc);return t?[t.d]:[];}return _ft28(def);};}
+// thêm lượt rút khí vận nhờ nâng cấp Thiên mệnh ở Bến Vong Xuyên
+{const u=UPG.find(x=>x.id==='menh');if(u){u.n='Thiên mệnh';u.d='Đầu thai rút thêm một tiên thiên khí vận';}}
+{const _tr28=ttRoll;ttRoll=function(){const L=_tr28();const all=Object.values(TT_DEST);for(let i=0;i<U('menh');i++){const rk=wpick([1,2,3,4,5,6],x=>TT_RW[x]);const pool=all.filter(d=>d.rank===rk&&!L.includes(d.id));if(pool.length)L.push(pick(pool).id);}return L;};}
+{const _gb28=genBirth;genBirth=function(){_gb28();for(const c of G.birth.cards)c.trait='none';};}
+// tính tình (xét thể chất) lấy từ xuất thân và khí vận gốc mệnh cách
+{const _tp28=ttPhys;ttPhys=function(r){const keep=r.trait;const mc=(r.kv||[]).map(k=>TT_DEST[k]&&(TT_DEST[k].mc||TT_DEST[k].tr)).filter(Boolean);
+  const save={};for(const m of mc){save[m]=1;}const extra=mc.flatMap(m=>TT_TRAITS[m]||[]);const o=TT_TRAITS[r.origin];TT_TRAITS[r.origin]=(o||[]).concat(extra);try{return _tp28(r);}finally{TT_TRAITS[r.origin]=o;if(!o)delete TT_TRAITS[r.origin];}};}
+// câu chuyện mở đầu: khí vận gốc mệnh cách kể bằng câu cũ của mệnh cách
+{const _nr28=newRun;newRun=function(c){const res=_nr28(c);const r=G.run;if(!r||!r.story||!r.kv)return res;const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const nm=w.slice(h2?2:1).join(' ')||r.ten;
+  let at=Math.min(3,r.story.length-2);for(const k of r.kv){const d=TT_DEST[k];const tk=d&&(d.mc||d.tr);if(tk&&LS_TR[tk]){r.story.splice(at++,0,lsFill(LS_TR[tk],{ten:nm}));}}return res;};}
+
+// bản lưu cũ: nhẫn thứ hai và pháp bảo ở ô chưa mở thì cất về túi
+function eqFix(){const r=G.run;if(!r||!r.eq)return;const E=r.eq;const back=k=>{if(E[k]){E[k].seen=1;r.relics.push(E[k]);E[k]=null;}};back('nhan2');PB_SLOTS.forEach((k,j)=>{if(j>=pbOpen())back(k);});}
+{const _r228=run2;run2=function(){const r=_r228();if(r&&!r._eq3){r._eq3=1;eqFix();}return r;};}
+
+// ================= ĐỢT 29: GỘP KHÍ VẬN TRÙNG NGHĨA, GIẢM BUFF =================
+// Mệnh cách cũ trùng tên hoặc trùng nghĩa với khí vận của Thienmenh: bỏ bản mệnh cách, dồn tác dụng riêng (đã giảm) vào khí vận kia.
+// Câu chuyện mở đầu và tính tình (xét thể chất) vẫn dùng câu cũ của mệnh cách đó.
+const TT_MERGE={kiemtam:['kiem_phach',{elP:{kim:10}}],chithuy:['tam_nhu_chi_thuy',{tam:2,tammaRes:25}],linhnhan:['thien_ly_nhan',{chkP:6}],
+ thiendo:['yeu_menh',{ngo:2,lifeP:-6}],phuctinh:['dai_khi_van',{van:1}],hoalinh:['cuu_duong',{elP:{hoa:10},burnHit:0.08}],
+ ngodao:['thien_co_thong_minh',{tvP:8}],sattinh:['sat_phat_qua_duyet',{execute:15}],huyenco:['linh_khi_than_hoa',{mpP:8,mpCost:-8}]};
+for(const [mc,[to,fx]] of Object.entries(TT_MERGE)){delete TT_DEST['mc_'+mc];const d=TT_DEST[to];if(!d)continue;d.tr=mc;
+  const X=TT_EXTRA[to]||(TT_EXTRA[to]={});for(const [k,v] of Object.entries(fx)){if(k==='elP'){X.elP=X.elP||{};for(const [e,x] of Object.entries(v))X.elP[e]=(X.elP[e]||0)+x;}else X[k]=(X[k]||0)+v;}}
+// Yểu Mệnh mang luôn tên Thiên Đố Anh Tài: trời ghen người tài
+Object.assign(TT_DEST.yeu_menh,{name:'Thiên Đố Anh Tài',description:'Thông minh hơn người, nhưng trời ghen nên thân thể yếu ớt, khó sống lâu.',rank:2});
+// ttFx cộng thêm elP từ TT_EXTRA (bản trước chỉ cộng số)
+{const _tf29=ttFx;ttFx=function(def){if(def&&!def.mc&&TT_EXTRA[def.id]&&TT_EXTRA[def.id].elP){const bak=TT_EXTRA[def.id];const {elP,...rest}=bak;TT_EXTRA[def.id]=rest;let o;try{o=_tf29(def);}finally{TT_EXTRA[def.id]=bak;}o.elP=o.elP||{};for(const [e,x] of Object.entries(elP))o.elP[e]=(o.elP[e]||0)+x;return o;}return _tf29(def);};}
+Object.assign(TT_FXN,{chkP:'Phép thử {v}%',tammaRes:'Kháng tâm ma {v}%',execute:'Sát thương lên kẻ dưới 30% khí huyết {v}%',burnHit:'Đòn đánh gây thiêu',mpCost:'Linh lực tiêu hao {v}%',bqP:'Hiệu quả bế quan {v}%',regenHp:'Hồi khí huyết mỗi lượt {v}%'});
+// Mệnh cách còn lại (không trùng): giảm buff cho cân bằng với khí vận khác cùng phẩm
+const MC_NERF={thanluc:[{atkP:8},'Công +8%'],menhcung:[{hpP:10},'Khí huyết +10%'],luoi:[{shopP:12},'Mua đồ rẻ 12%'],yeuhuyet:[{regenHp:2},'Mỗi lượt hồi 2% khí huyết'],
+ bangco:[{defP:10,elP:{thuy:8,bang:8}},'Thủ +10%, Thủy và Băng +8%'],truongtho:[{lifeP:12},'Thọ nguyên +12%'],bachdoc:[{poisonImm:1,hpP:3},'Miễn nhiễm độc, khí huyết +3%'],
+ khotu:[{bqP:25},'Bế quan hiệu quả hơn 25%'],mongdu:[{tvP:6,tam:1},'Tu vi +6%, đạo tâm +1']};
+for(const [id,[fx,d]] of Object.entries(MC_NERF)){const t=TRAIT.find(x=>x.id===id);if(t){t.fx=fx;t.d=d;}}
+// các mệnh cách đã gộp: bản lưu cũ còn giữ thì tác dụng cũng giảm theo
+for(const [mc,[,fx]] of Object.entries(TT_MERGE)){const t=TRAIT.find(x=>x.id===mc);if(t){t.fx=JSON.parse(JSON.stringify(fx));}}
+
+// ================= ĐỢT 30: YÊU CẦU CẢNH GIỚI CHO MỌI VẬT PHẨM DÙNG ĐƯỢC =================
+// Bậc người dùng: 0 Phàm nhân, 1 Luyện Khí, 2 Trúc Cơ, 3 Kết Đan, 4 Nguyên Anh, 5 Hóa Thần, 6 Độ Kiếp.
+// Trang bị, pháp bảo, pháp khí tùy thân: phẩm nào cần bậc nấy (phàm phẩm: phàm nhân dùng được; hoàng phẩm: Luyện Khí; huyền phẩm: Trúc Cơ…).
+// Công pháp, tâm pháp đã có yêu cầu riêng (cần cảnh giới mới đọc hiểu, từng tầng có cảnh giới mở). Phương tiện đã có yêu cầu riêng ở trạm dịch.
+const LV_NAME=['Phàm nhân'].concat(REALM);
+function plv(){const r=G.run;if(!r)return 0;return isPham()?0:clamp((r.realm||0)+1,1,6);}
+function relReq(rel){if(!rel||rel.k==='book')return 0;return rel.req!=null?rel.req:clamp(rel.tier||0,0,6);}
+function relOk(rel){return plv()>=relReq(rel);}
+function relWhy(rel){return relOk(rel)?'':'Cần '+LV_NAME[relReq(rel)]+' mới dùng được '+(rel.name||'món này')+'.';}
+phamLock=function(rel){return !!rel&&rel.k!=='book'&&!relOk(rel);};
+{const _e30=equip;equip=function(i){const rel=G.run.relics[i];if(rel&&!relOk(rel)){note(relWhy(rel));return;}return _e30(i);};}
+{const _et30=equipTo;equipTo=function(i,s){const rel=G.run.relics[i];if(rel&&!relOk(rel)){note(relWhy(rel));return;}return _et30(i,s);};}
+{const _dp30=ddPut;ddPut=function(i){const rel=G.run.relics[i];if(rel&&!relOk(rel)){note(relWhy(rel));return false;}return _dp30(i);};}
+{const _ea30=eqAuto;eqAuto=function(){const r=G.run;if(!r)return _ea30();const keep=r.relics.filter(x=>!x.seen&&x.k!=='book'&&!relOk(x));keep.forEach(x=>x.seen=1);return _ea30();};}
+// đồ đang mặc mà chưa đủ cảnh giới (bản lưu cũ): cất về túi
+{const _ef30=eqFix;eqFix=function(){_ef30();const r=G.run;if(!r||!r.eq)return;for(const k in r.eq){const x=r.eq[k];if(x&&!relOk(x)){x.seen=1;r.relics.push(x);r.eq[k]=null;}}
+  r.dd=(r.dd||[]).filter(d=>{if(relOk(d.rel))return true;d.rel.seen=1;r.relics.push(d.rel);return false;});};}
+{const _r230=run2;run2=function(){const r=_r230();if(r&&!r._eq4){r._eq4=1;eqFix();}return r;};}
+// ----- sửa lại: phẩm không gắn với cảnh giới. Mỗi món có yêu cầu cảnh giới riêng, theo nơi nó xuất hiện -----
+// Vùng 1 (Phàm Trần): cần Phàm nhân hoặc Luyện Khí; vùng 2: Luyện Khí hoặc Trúc Cơ; vùng 3: Trúc Cơ hoặc Kết Đan… Phẩm nào cũng có thể gặp ở mọi yêu cầu.
+// Món cũ chưa có yêu cầu (bản lưu trước): coi như Phàm nhân dùng được.
+function relReqRoll(){const r=G.run;const k=clamp((r&&r.region)||0,0,4);return clamp(k+(chance(k===0?0.4:0.5)?1:0),0,6);}
+{const _gr31=genRelic;genRelic=function(t){const x=_gr31(t);if(x&&x.req==null)x.req=relReqRoll();return x;};}
+relReq=function(rel){if(!rel||rel.k==='book')return 0;return rel.req!=null?rel.req:0;};
+// ----- phẩm quyết định SỐ dòng chỉ số, cảnh giới yêu cầu quyết định ĐỘ LỚN chỉ số -----
+// Mỗi món giữ chỉ số gốc theo loại (kiếm: công, giáp: thủ…); phẩm càng cao càng thêm nhiều dòng phụ:
+//  phàm 0 · hoàng 1 · huyền 1 · địa 2 · thiên 2 · tiên 3 · thần 4 dòng phụ.
+// Mọi dòng (gốc và phụ) nhân theo cảnh giới yêu cầu: Phàm nhân ×1 · Luyện Khí ×1,3 · Trúc Cơ ×1,7 · Kết Đan ×2,2 · Nguyên Anh ×2,8 · Hóa Thần ×3,5 · Độ Kiếp ×4,3.
+// Nên món thần phẩm cần Trúc Cơ: nhiều dòng, số vừa; món phàm phẩm cần Hóa Thần: một loại chỉ số nhưng số rất lớn.
+const REL_X=[0,1,1,2,2,3,4],REL_M=[1,1.3,1.7,2.2,2.8,3.5,4.3];
+const REL_POOL={atkP:5,matkP:6,defP:8,hpP:6,mpP:8,tp:1,crit:3,critDmg:8,dodge:3,hoTam:3,van:1,tam:1,ngo:1,regenHp:1,regenMp:2,drain:3,tvP:5};
+{const _gr32=genRelic;genRelic=function(t){const x=_gr32(t);if(!x)return x;const n=REL_X[clamp(x.tier||0,0,6)];const keys=Object.keys(REL_POOL).filter(k=>!(k in x.fx));x.fx2={};
+  for(const k of shuffle(keys).slice(0,n))x.fx2[k]=REL_POOL[k];x.v2=1;return x;};}
+{const _rf32=relicFx;relicFx=function(rel){if(!rel||!rel.v2)return _rf32(rel);const m=REL_M[clamp(rel.req||0,0,6)];const o=_rf32(Object.assign({},rel,{tier:0}));
+  for(const k in o){if(['firstEvade','weakStart','vulnStart','pillSlot'].includes(k))continue;o[k]=k==='poisonHit'?Math.round(o[k]*m*100)/100:Math.max(1,Math.round(o[k]*m));}
+  for(const [k,v] of Object.entries(rel.fx2||{})){const x=v*m;o[k]=(o[k]||0)+(['tp','van','tam','ngo','regenHp','regenMp'].includes(k)?Math.max(1,Math.round(x)):Math.round(x));}
+  return o;};}
+// "thêm ô đan dược" (pillSlot) trên vật phẩm: đan dược đã dùng chung túi đồ, nên đổi thành thêm ô túi đồ (chỉ tính đồ đang mặc, đang uẩn dưỡng)
+FXT.pillSlot='👝 Túi đồ thêm {v} ô';
+{const _bc33=bagCap;bagCap=function(){const r=G.run;const b=_bc33();if(!r)return b;const E=eqOf();let add=0;for(const x of Object.values(E))if(x)add=Math.max(add,relicFx(x).pillSlot||0);for(const d of r.dd||[])add=Math.max(add,relicFx(d.rel).pillSlot||0);return Math.min(BAG_MAX,b+add);};}
+
+// ================= ĐỢT 31: NỘI TẠI CỦA VẬT PHẨM =================
+// Chỉ số đặc biệt trên vật phẩm gọi là nội tại. Nội tại là duy nhất: mang nhiều món cùng nội tại thì chỉ tính món mạnh nhất, không cộng dồn.
+// (Nội tại cùng loại từ tiên thiên khí vận, thể chất vẫn cộng bình thường.) Dòng phụ ngẫu nhiên không bao giờ là nội tại.
+const NT_KEYS=['firstEvade','startBlock','blockTurn','weakStart','vulnStart','poisonHit','stunP','reflect','execute','drain','regenHp','regenMp','healAfter','hoTam','pillP','stonesP','pillSlot','shopP','tammaRes','elX','craftP','bqSafe','bqP'];
+for(const k of ['hoTam','drain','regenHp','regenMp'])delete REL_POOL[k];
+function relActive(){const r=G.run;if(!r)return [];const E=eqOf();const L=Object.values(E).filter(Boolean).map(x=>({rel:x,m:1}));for(const d of r.dd||[]){const m=ddMul(d),fx={};for(const k in d.rel.fx)fx[k]=typeof d.rel.fx[k]==='number'?d.rel.fx[k]*m:d.rel.fx[k];L.push({rel:Object.assign({},d.rel,{fx}),m:1});}return L;}
+{const _ag34=aggFx;aggFx=function(){const fx=_ag34();const r=G.run;if(!r||!r.eq)return fx;const A=relActive();
+  for(const k of NT_KEYS){if(k==='elX')continue;let sum=0,max=0;for(const {rel,m} of A){const v=(relicFx(rel)[k]||0)*m;sum+=v;if(v>max)max=v;}if(sum>max)fx[k]=(fx[k]||0)-sum+max;}
+  const byEl={};for(const {rel,m} of A){const v=(relicFx(rel).elX||0)*m;if(!v)continue;const e=rel.el;const o=byEl[e]||(byEl[e]={s:0,x:0});o.s+=v;o.x=Math.max(o.x,v);}
+  for(const [e,o] of Object.entries(byEl))if(o.s>o.x&&fx.elP)fx.elP[e]=(fx.elP[e]||0)-o.s+o.x;
+  // nội tại dạng đếm (né mấy đòn, mấy lượt suy nhược…) luôn là số nguyên
+  for(const k of ['firstEvade','weakStart','vulnStart'])if(fx[k])fx[k]=Math.floor(fx[k]+1e-9);
+  return fx;};}
+// tên gọi của từng nội tại (nội tại cùng tên không cộng dồn)
+const NT_NAME={firstEvade:'Tàn Ảnh',startBlock:'Kim Chung Tráo',blockTurn:'Huyền Vũ Thuẫn',weakStart:'Nhiếp Hồn Âm',vulnStart:'Khổn Tiên Tác',poisonHit:'Vạn Độc Phệ',
+ stunP:'Phiên Thiên Ấn',reflect:'Phản Chiếu',execute:'Đoạn Mệnh',drain:'Thôn Huyết',regenHp:'Sinh Sinh Bất Tức',regenMp:'Linh Tuyền',healAfter:'Cam Lộ',hoTam:'Hộ Tâm Kính',
+ pillP:'Đan Hỏa',stonesP:'Tụ Bảo',pillSlot:'Càn Khôn',shopP:'Thương Hội Lệnh',tammaRes:'Thanh Tâm',elX:'Linh Dẫn',craftP:'Thiên Công',bqSafe:'Hộ Pháp Trận',bqP:'Tụ Linh Trận'};

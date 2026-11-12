@@ -1,0 +1,240 @@
+// ---------- bộ hình 2D vẽ bằng vector: pháp bảo, đan dược, vật liệu, kẻ địch, nhân vật, phương tiện ----------
+// Cùng một phong cách: nét viền nâu mực, màu phẳng có điểm sáng, khung 64×64, nền trong suốt.
+// Muốn thay bằng ảnh vẽ tay thì gán đường dẫn vào ASSET như hướng dẫn trong README; hình ở đây chỉ là mặc định.
+const AS_O='#3b2414';
+function asSvg(body,vb){return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb||'0 0 64 64'}"><g stroke="${AS_O}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">${body}</g></svg>`);}
+const AS_SH='<ellipse cx="32" cy="58" rx="18" ry="3" fill="#000" opacity=".15" stroke="none"/>';
+const AS_ITEM={
+  kiem:`${AS_SH}<path d="M46 8l6 6-26 26-6-6z" fill="#d9dde3"/><path d="M47 9l4 4-24 24" fill="none" stroke="#fff" stroke-width="1.2" opacity=".8"/><path d="M16 36l12 12-3 3-12-12z" fill="#d4a53c"/><path d="M18 46l-8 8M14 42l-6 6" stroke="${AS_O}"/><path d="M19 45l-9 9 4 1 8-7z" fill="#6b4222"/><path d="M10 54c-2 3-1 6 2 6" fill="none" stroke="#c03a2b" stroke-width="2.5"/>`,
+  dao:`${AS_SH}<path d="M50 8c4 10-2 24-18 34l-5-5C40 29 46 18 50 8z" fill="#d9dde3"/><path d="M48 14c0 9-6 18-17 26" fill="none" stroke="#fff" stroke-width="1.2" opacity=".8"/><path d="M22 36l8 8-3 3-8-8z" fill="#d4a53c"/><path d="M23 44l-10 10 4 2 9-9z" fill="#6b4222"/>`,
+  hotam:`${AS_SH}<circle cx="32" cy="32" r="18" fill="#6fb38a"/><circle cx="32" cy="32" r="6" fill="#e9f3e6"/><path d="M22 24a14 14 0 0 1 10-6" fill="none" stroke="#e9f3e6" stroke-width="2" opacity=".8"/><path d="M32 6v8" stroke="#c03a2b" stroke-width="3"/>`,
+  phap:`${AS_SH}<path d="M18 56L40 20" stroke="${AS_O}" stroke-width="7"/><path d="M18 56L40 20" stroke="#8a5a32" stroke-width="4"/><circle cx="44" cy="15" r="9" fill="#7fb7e8"/><circle cx="41" cy="12" r="3" fill="#fff" stroke="none" opacity=".8"/><path d="M36 22c-3 1-5 4-4 7M50 20c3 2 3 6 1 8" fill="none"/>`,
+  giap:`${AS_SH}<path d="M18 14l8-4h12l8 4 6 10-6 4v22H18V28l-6-4z" fill="#8f99a6"/><path d="M26 10c2 5 10 5 12 0" fill="#6d7783"/><path d="M22 30h20M22 37h20M22 44h20" stroke="#5b6470" stroke-width="1.6"/><path d="M32 22v28" stroke="#5b6470" stroke-width="1.6"/><circle cx="32" cy="22" r="3" fill="#d4a53c"/>`,
+  bao:`${AS_SH}<path d="M24 8h16l14 12-6 6-4-4v34H20V22l-4 4-6-6z" fill="#4a6fae"/><path d="M24 8l8 14 8-14" fill="#e8dcc0"/><path d="M20 34h24" stroke="#d4a53c" stroke-width="3"/><path d="M32 22v34" stroke="#2f4f86" stroke-width="1.5"/>`,
+  boi:`${AS_SH}<path d="M32 6v10" stroke="#c03a2b" stroke-width="2.5"/><path d="M20 22h24l4 12-16 18-16-18z" fill="#7fc49b"/><circle cx="32" cy="32" r="5" fill="#d8efe0"/><path d="M26 52l-2 6M38 52l2 6" stroke="#c03a2b" stroke-width="2"/>`,
+  ngoa:`${AS_SH}<path d="M22 10h14v28l14 8c4 2 4 10-2 10H18c-3 0-4-3-4-6l8-12z" fill="#5c3a1e"/><path d="M14 50h38" stroke="#e8dcc0" stroke-width="3"/><path d="M22 10h14v6H22z" fill="#d4a53c"/><path d="M40 46c4-6 10-6 12-2" fill="none" stroke="#e8dcc0" stroke-width="1.5"/>`,
+  linh:`${AS_SH}<path d="M32 8v6"/><circle cx="32" cy="8" r="3" fill="#d4a53c"/><path d="M20 46c0-18 4-30 12-30s12 12 12 30z" fill="#d4a53c"/><path d="M16 46h32v5H16z" fill="#b8862a"/><circle cx="32" cy="54" r="3" fill="#8a6418"/><path d="M26 22c-2 6-3 14-3 20" fill="none" stroke="#fff3c4" stroke-width="2" opacity=".7"/>`,
+  hoan:`${AS_SH}<circle cx="32" cy="32" r="18" fill="none" stroke="${AS_O}" stroke-width="10"/><circle cx="32" cy="32" r="18" fill="none" stroke="#d4a53c" stroke-width="6"/><circle cx="32" cy="14" r="4" fill="#c03a2b"/><path d="M20 22a16 16 0 0 1 8-6" fill="none" stroke="#fff3c4" stroke-width="2"/>`,
+  dinh:`${AS_SH}<path d="M14 22h36l-4 22H18z" fill="#a8743f"/><path d="M12 18h40v6H12z" fill="#8a5a32"/><path d="M20 44l-4 12M44 44l4 12M32 44v12"/><path d="M18 18c-2-6 0-10 4-10M46 18c2-6 0-10-4-10" fill="none"/><path d="M22 32h20" stroke="#5c3a1e"/><path d="M28 14c0-4 4-4 4-8M36 14c0-4-4-4-2-8" fill="none" stroke="#9aa3ad" stroke-width="1.6"/>`,
+  phien:`${AS_SH}<path d="M18 56V6"/><path d="M18 8h30l-6 10 6 10H18z" fill="#c03a2b"/><path d="M26 14l8 8M34 14l-8 8" stroke="#fff3c4" stroke-width="1.8"/><circle cx="18" cy="6" r="3" fill="#d4a53c"/>`,
+  chau:`${AS_SH}<circle cx="32" cy="30" r="16" fill="#e8f2ff"/><circle cx="32" cy="30" r="16" fill="#9fc8f0" opacity=".55" stroke="none"/><circle cx="26" cy="24" r="5" fill="#fff" stroke="none"/><path d="M14 30H8M56 30h-6M32 12V6M32 54v-6" stroke="#9fc8f0" stroke-width="2"/>`,
+  kinh:`${AS_SH}<circle cx="32" cy="28" r="18" fill="#c48a3a"/><circle cx="32" cy="28" r="13" fill="#e6eef2"/><path d="M24 22l8-4M24 30l14-8" stroke="#fff" stroke-width="2"/><path d="M28 46h8v10h-8z" fill="#8a5a32"/>`,
+  gian:`${AS_SH}<path d="M14 14h36v36H14z" fill="#9fd4b0"/><path d="M20 14v36M26 14v36M32 14v36M38 14v36M44 14v36" stroke="#5b9a73" stroke-width="1.4"/><path d="M10 12h44v4H10zM10 48h44v4H10z" fill="#c03a2b"/>`,
+  an:`${AS_SH}<path d="M16 34h32v18H16z" fill="#c03a2b"/><path d="M22 34c0-12 4-20 10-20s10 8 10 20z" fill="#d4a53c"/><circle cx="32" cy="14" r="4" fill="#d4a53c"/><path d="M24 42h16M32 38v10" stroke="#fff3c4" stroke-width="2"/>`,
+  nhan:`${AS_SH}<circle cx="32" cy="38" r="15" fill="none" stroke="${AS_O}" stroke-width="8"/><circle cx="32" cy="38" r="15" fill="none" stroke="#d4a53c" stroke-width="4"/><path d="M24 22l8-12 8 12-8 6z" fill="#7a5ad0"/><path d="M28 20l4-6" stroke="#fff" stroke-width="1.5"/>`,
+  but:`${AS_SH}<path d="M44 8l6 6-22 22-6-6z" fill="#8a5a32"/><path d="M22 30l6 6-6 6c-6 6-12 8-14 6s0-8 6-14z" fill="#2a2018"/><path d="M42 10l6 6" stroke="#d4a53c" stroke-width="3"/>`,
+  cam:`${AS_SH}<path d="M6 30l50-12 4 8-50 14z" fill="#8a5a32"/><path d="M10 34l46-12M12 37l46-12M11 31l46-12" stroke="#e8dcc0" stroke-width="1"/><circle cx="14" cy="34" r="2" fill="#d4a53c"/><path d="M50 22l4 10" stroke="#c03a2b" stroke-width="2"/>`,
+  cot:`${AS_SH}<path d="M18 46L44 18" stroke="${AS_O}" stroke-width="9"/><path d="M18 46L44 18" stroke="#ece4d0" stroke-width="5"/><circle cx="16" cy="44" r="5" fill="#ece4d0"/><circle cx="20" cy="50" r="5" fill="#ece4d0"/><circle cx="42" cy="14" r="5" fill="#ece4d0"/><circle cx="48" cy="20" r="5" fill="#ece4d0"/>`,
+  dang:`${AS_SH}<path d="M24 50h16l-2-8H26z" fill="#8a5a32"/><path d="M20 22h24l-4 20H24z" fill="#e8b84a"/><path d="M20 22l12-10 12 10" fill="#c03a2b"/><path d="M32 26c-3 4-3 8 0 10 3-2 3-6 0-10z" fill="#ff8a2a" stroke="none"/>`,
+  holo:`${AS_SH}<circle cx="32" cy="42" r="14" fill="#d9a53c"/><circle cx="32" cy="22" r="9" fill="#d9a53c"/><path d="M28 12h8v4h-8z" fill="#8a5a32"/><path d="M24 30h16" stroke="#c03a2b" stroke-width="3"/><path d="M24 38a10 10 0 0 1 4-6" fill="none" stroke="#fff3c4" stroke-width="2"/>`,
+  huyet:`${AS_SH}<path d="M32 6l14 20-14 30-14-30z" fill="#c0392b"/><path d="M32 6v50M18 26h28" stroke="#7a1f16" stroke-width="1.4"/><path d="M28 14l-4 10" stroke="#ffb3a8" stroke-width="2"/>`,
+  lenh:`${AS_SH}<path d="M18 10h28v40l-14 8-14-8z" fill="#d4a53c"/><path d="M22 14h20v32l-10 6-10-6z" fill="#b8862a"/><path d="M26 24h12M32 20v20M26 32h12" stroke="#5c3a1e" stroke-width="2"/>`,
+  phu:`${AS_SH}<path d="M20 6h24v52H20z" fill="#f3d55a"/><path d="M26 14h12M32 14v30M26 24c4 2 8 2 12 0M26 34c4 2 8 2 12 0M28 44l4 6 4-6" fill="none" stroke="#c03a2b" stroke-width="2"/>`,
+  tan:`${AS_SH}<path d="M6 30C10 14 54 14 58 30z" fill="#c03a2b"/><path d="M14 28c4-8 10-12 18-12M32 16c8 0 14 4 18 12M32 16v14" fill="none" stroke="#7a1f16" stroke-width="1.4"/><path d="M32 30v24c0 3-6 3-6 0"  fill="none" stroke-width="2.6"/>`,
+  thap:`${AS_SH}<path d="M24 50h16v6H24z" fill="#8a5a32"/><path d="M18 50l4-8h20l4 8zM20 40l4-8h16l4 8zM22 30l4-8h12l4 8zM24 20l8-12 8 12z" fill="#d4a53c"/><path d="M32 4v4"/>`,
+  tram:`${AS_SH}<path d="M14 54L46 14" stroke="${AS_O}" stroke-width="5"/><path d="M14 54L46 14" stroke="#d4a53c" stroke-width="2.6"/><path d="M42 12c4-6 12-4 12 2s-6 8-10 6z" fill="#e87a9a"/><circle cx="48" cy="14" r="2.5" fill="#fff3c4"/>`,
+  tui:`${AS_SH}<path d="M22 18c-8 8-12 18-10 28 2 8 38 8 40 0 2-10-2-20-10-28z" fill="#8a5a32"/><path d="M22 18h20l-4-8H26z" fill="#a8743f"/><path d="M22 18c6 3 14 3 20 0" fill="none" stroke="#d4a53c" stroke-width="3"/><circle cx="32" cy="36" r="5" fill="#d4a53c"/>`,
+  xich:`${AS_SH}<g fill="none" stroke="#9aa3ad" stroke-width="5"><ellipse cx="16" cy="16" rx="7" ry="5" transform="rotate(45 16 16)"/><ellipse cx="26" cy="26" rx="7" ry="5" transform="rotate(-45 26 26)"/><ellipse cx="36" cy="36" rx="7" ry="5" transform="rotate(45 36 36)"/><ellipse cx="46" cy="46" rx="7" ry="5" transform="rotate(-45 46 46)"/></g>`,
+  book:`${AS_SH}<path d="M12 12h36l4 4v40H16l-4-4z" fill="#5c3a1e"/><path d="M16 16h32v36H16z" fill="#e8dcc0"/><path d="M22 22h20v8H22z" fill="#c03a2b"/><path d="M22 36h20M22 42h14" stroke="#8a7a5a" stroke-width="1.6"/>`,
+};
+// đan dược: viên đan có màu theo loại, bùa giấy, quả, hạt, sữa
+const AS_PILLC={hoixuan:'#4fbf6a',tukhi:'#4a8fe0',baohuyet:'#d9402e',giaidoc:'#e8e8e8',dinhthan:'#9a6ad6',tinhnguyen:'#f0c840',phacanh:'#f2d36b',homach:'#6fa0c8',duongnguyen:'#7fc49b',taytuy:'#ece4d0',khaitri:'#4fc0c0',trucco:'#e08a2a',ngungkim:'#e8c040',phaanh:'#c0507a',hoathan:'#4a5ac8'};
+const AS_BT=['trucco','ngungkim','phaanh','hoathan','phacanh'];
+function asPill(c){return `${AS_SH}<circle cx="32" cy="34" r="16" fill="${c}"/><circle cx="32" cy="34" r="16" fill="url(#g)" stroke="none"/><circle cx="26" cy="27" r="5" fill="#fff" stroke="none" opacity=".75"/><path d="M20 40c4 6 14 8 22 2" fill="none" stroke="#000" stroke-width="1.4" opacity=".2"/>`;}
+const AS_PILL={
+  kimcang:`${AS_SH}<path d="M20 6h24v52H20z" fill="#f3d55a"/><path d="M26 16h12v12H26zM32 28v16M26 44h12" fill="none" stroke="#b8862a" stroke-width="2"/>`,
+  loiphu:`${AS_SH}<path d="M20 6h24v52H20z" fill="#f3d55a"/><path d="M36 12l-8 18h8l-6 20" fill="none" stroke="#7a5ad0" stroke-width="2.6"/>`,
+  thanhanh:`${AS_SH}<path d="M20 6h24v52H20z" fill="#f3d55a"/><path d="M26 34c6-14 14-16 14-16-2 10-6 16-14 16zM26 44c6-2 10-6 12-10" fill="#5faf6a" stroke="#2f7a3f" stroke-width="1.6"/>`,
+  tiloi:`${AS_SH}<path d="M20 6h24v52H20z" fill="#f3d55a"/><circle cx="32" cy="28" r="9" fill="none" stroke="#c03a2b" stroke-width="2"/><path d="M28 24l8 8M36 24l-8 8M32 40v10" stroke="#c03a2b" stroke-width="2"/>`,
+  dientho:`${AS_SH}<path d="M32 18c-14 0-20 10-18 22 2 10 12 14 18 14s16-4 18-14c2-12-4-22-18-22z" fill="#f4a3a0"/><path d="M32 18c-4 8-4 26 0 36" fill="none" stroke="#d9726e" stroke-width="1.6"/><path d="M32 18c2-6 8-10 14-8-2 6-8 8-14 8z" fill="#5faf6a"/><circle cx="24" cy="30" r="4" fill="#fff" stroke="none" opacity=".6"/>`,
+  thiendao:`${AS_SH}<circle cx="32" cy="36" r="18" fill="#e04a3a"/><path d="M32 18c0-6 2-10 6-12" fill="none" stroke="#5c3a1e" stroke-width="2.4"/><path d="M34 16c6-4 12-2 14 2-6 4-12 2-14-2z" fill="#5faf6a"/><circle cx="24" cy="30" r="5" fill="#fff" stroke="none" opacity=".55"/><path d="M14 20l-4-4M50 22l4-4M32 8v-4" stroke="#f3d55a" stroke-width="2"/>`,
+  bode:`${AS_SH}<g fill="#8a5a32">${[0,1,2,3,4,5,6,7,8,9].map(i=>{const a=i/10*6.283;return `<circle cx="${(32+Math.cos(a)*18).toFixed(1)}" cy="${(32+Math.sin(a)*18).toFixed(1)}" r="5"/>`;}).join('')}</g><circle cx="32" cy="50" r="5" fill="#c03a2b"/>`,
+  diamach:`${AS_SH}<path d="M14 30h36c0 14-8 22-18 22s-18-8-18-22z" fill="#c9a26a"/><ellipse cx="32" cy="30" rx="18" ry="5" fill="#fbf6ea"/><path d="M26 18c0 4 4 4 4 8M36 16c0 4-4 4-2 8" fill="none" stroke="#9aa3ad" stroke-width="1.6"/>`,
+  nhanhoang:`${AS_SH}<path d="M32 58V30"/><path d="M32 40c-10-2-16-10-16-18 8 0 14 6 16 18zM32 34c8-2 14-10 14-18-8 0-14 6-14 18z" fill="#5faf6a"/><circle cx="32" cy="24" r="6" fill="#f0c840"/>`,
+  linhnhu:`${AS_SH}<path d="M32 8c10 14 16 22 16 30a16 16 0 0 1-32 0c0-8 6-16 16-30z" fill="#8fd0f0"/><path d="M24 36c0-6 3-10 6-14" fill="none" stroke="#fff" stroke-width="2.4"/>`,
+};
+const AS_MAT={
+  thao:`${AS_SH}<path d="M32 58V26M32 44l-12-8M32 38l12-8" /><path d="M32 26c-6-8-4-18 0-22 4 4 6 14 0 22z" fill="#5faf6a"/><path d="M20 36c-8-2-12-8-12-12 6-2 12 4 12 12z" fill="#7fc49b"/><path d="M44 30c8-2 12-8 12-12-6-2-12 4-12 12z" fill="#7fc49b"/>`,
+  khoang:`${AS_SH}<path d="M10 52l8-22 10 6 6-20 10 14 10-4 0 26z" fill="#8a8f98"/><path d="M28 36l6-20 10 14-8 12z" fill="#7fd0e8"/><path d="M32 22l4 10" stroke="#fff" stroke-width="1.6"/><path d="M18 30l10 6" fill="none"/>`,
+  dan:`${AS_SH}<circle cx="32" cy="32" r="16" fill="#7a4ac8"/><circle cx="32" cy="32" r="9" fill="#b48af0" stroke="none"/><circle cx="27" cy="26" r="4" fill="#fff" stroke="none" opacity=".7"/><path d="M14 32H8M56 32h-6M32 14V8" stroke="#b48af0" stroke-width="2"/>`,
+};
+// kẻ địch theo họ
+const AS_FOE={
+  thu:`<circle cx="32" cy="32" r="30" fill="#e8dcc0" stroke="none"/><path d="M14 20l6-12 8 10h8l8-10 6 12-2 16c-2 10-10 16-16 16s-14-6-16-16z" fill="#7a6a5a"/><path d="M22 30l6 3M42 30l-6 3" stroke="#f0c840" stroke-width="3"/><path d="M26 44l6 4 6-4" fill="#e8dcc0"/><path d="M28 46l2 4M36 46l-2 4" stroke="#fff" stroke-width="1.6"/>`,
+  nhan:`<circle cx="32" cy="32" r="30" fill="#e8dcc0" stroke="none"/><path d="M8 24c8-6 40-6 48 0-6 4-42 4-48 0z" fill="#8a6a3a"/><path d="M18 24c0 16 6 28 14 28s14-12 14-28z" fill="#e8c09a"/><path d="M18 32h28v8H18z" fill="#2a2018"/><path d="M24 30l4 2M40 30l-4 2" stroke="#2a2018"/><path d="M26 22c2-10 10-10 12 0" fill="#5c3a1e"/>`,
+  quy:`<circle cx="32" cy="32" r="30" fill="#e8dcc0" stroke="none"/><path d="M14 54c0-30 6-44 18-44s18 14 18 44l-6-6-6 6-6-6-6 6-6-6z" fill="#cfe0e8" opacity=".9"/><circle cx="25" cy="28" r="4" fill="#2a2018"/><circle cx="39" cy="28" r="4" fill="#2a2018"/><path d="M28 40c2 2 6 2 8 0" fill="none"/>`,
+  vat:`<circle cx="32" cy="32" r="30" fill="#e8dcc0" stroke="none"/><path d="M16 50l4-30 12-10 12 10 4 30z" fill="#8a8f98"/><path d="M22 30l8 2M42 30l-8 2" stroke="#7fd0e8" stroke-width="3"/><path d="M24 42h16M28 20l4 6 4-6" stroke="#5b6470"/>`,
+  boss:`<circle cx="32" cy="32" r="30" fill="#e8dcc0" stroke="none"/><path d="M14 10l8 14M50 10l-8 14" stroke="${AS_O}" stroke-width="4"/><path d="M14 10l8 14M50 10l-8 14" stroke="#ece4d0" stroke-width="2"/><path d="M16 26c0 18 6 28 16 28s16-10 16-28c-4-4-28-4-32 0z" fill="#9a3a2a"/><path d="M22 32l6 3M42 32l-6 3" stroke="#f0c840" stroke-width="3"/><path d="M24 44h16l-2 4h-12z" fill="#e8dcc0"/>`,
+};
+// chân dung người chơi
+const AS_HERO={
+  nam:`<circle cx="32" cy="32" r="30" fill="#dbe6e4" stroke="none"/><path d="M12 62c2-12 10-18 20-18s18 6 20 18z" fill="#4a6fae"/><path d="M26 44l6 8 6-8" fill="#e8dcc0"/><path d="M20 26c0 12 5 18 12 18s12-6 12-18-5-14-12-14-12 2-12 14z" fill="#f0cfa8"/><path d="M19 26c0-10 5-16 13-16s13 6 13 16c-4-6-8-8-13-8s-9 2-13 8z" fill="#2a2018"/><circle cx="32" cy="8" r="4" fill="#2a2018"/><path d="M28 8h8" stroke="#d4a53c" stroke-width="2"/><path d="M26 28h3M35 28h3" stroke="#2a2018"/><path d="M30 37c1 1 3 1 4 0" fill="none"/>`,
+  nu:`<circle cx="32" cy="32" r="30" fill="#ead8e0" stroke="none"/><path d="M12 62c2-12 10-18 20-18s18 6 20 18z" fill="#b8506a"/><path d="M26 44l6 8 6-8" fill="#e8dcc0"/><path d="M14 48c0-14 2-30 18-30s18 16 18 30c-4-2-6-8-6-14H20c0 6-2 12-6 14z" fill="#2a2018"/><path d="M21 28c0 11 5 16 11 16s11-5 11-16-5-12-11-12-11 1-11 12z" fill="#f4d8bc"/><path d="M20 26c2-8 6-12 12-12s10 4 12 12c-4-5-8-6-12-6s-8 1-12 6z" fill="#2a2018"/><circle cx="32" cy="10" r="6" fill="#2a2018"/><path d="M38 6l8-4" stroke="#d4a53c" stroke-width="2"/><circle cx="46" cy="2" r="2" fill="#e87a9a" stroke="none"/><path d="M27 29h3M35 29h3" stroke="#2a2018"/><path d="M30 37c1 1 3 1 4 0" fill="none" stroke="#c03a2b"/>`,
+};
+// phương tiện ở trạm dịch
+const AS_VEH={
+  ngua:`${AS_SH}<path d="M18 56l2-14M26 56l1-12M40 56l-1-12M48 56l-2-14" stroke-width="3"/><path d="M14 38c0-8 6-12 14-12h12c6 0 10-6 12-14l6 2c0 10-4 18-8 22v4c0 6-6 8-14 8H24c-6 0-10-4-10-10z" fill="#8a5a32"/><path d="M46 12l4-6 2 7" fill="#8a5a32"/><path d="M44 14c-4 6-6 12-6 18" fill="none" stroke="#4a2c16" stroke-width="3"/><circle cx="53" cy="16" r="1.2" fill="${AS_O}"/><path d="M14 34c-4 0-6 4-6 8" fill="none" stroke="#4a2c16" stroke-width="3"/><path d="M24 30h14v10H24z" fill="#c03a2b"/>`,
+  loc:`${AS_SH}<path d="M20 56l2-14M28 56l1-12M40 56l-1-12M46 56l-2-14" stroke-width="3"/><path d="M16 40c0-8 6-12 14-12h10c4 0 8-4 10-10l4 2c0 8-2 14-6 18v2c0 6-6 8-12 8H26c-6 0-10-2-10-8z" fill="#d9a06a"/><path d="M50 18c-2-6-6-8-10-8M50 18c2-6 6-10 10-10M46 12l-4-6M56 10l2-6" fill="none" stroke="#8a5a32" stroke-width="2.4"/><circle cx="26" cy="36" r="2" fill="#fff" stroke="none"/><circle cx="34" cy="34" r="2" fill="#fff" stroke="none"/><circle cx="52" cy="22" r="1.2" fill="${AS_O}"/>`,
+  hac:`${AS_SH}<path d="M16 34c8-10 22-10 30-4l12-4-8 8c-2 8-12 12-22 10-6-1-10-4-12-10z" fill="#fbf6ea"/><path d="M20 30c6-14 16-20 26-22-4 8-10 16-22 22z" fill="#2a2018"/><path d="M46 30c2-10 2-18-2-24" fill="none" stroke-width="3"/><path d="M44 6c2-2 6-2 8 0-2 2-6 2-8 0z" fill="#c03a2b"/><path d="M52 6l8 2" stroke="#d4a53c" stroke-width="2"/><path d="M30 44l-2 12M36 44l2 12" stroke-width="2"/>`,
+  chu:`${AS_SH}<path d="M6 34h52l-8 14H14z" fill="#a8743f"/><path d="M10 38h44" stroke="#7a4f27"/><path d="M32 34V8"/><path d="M32 10l16 18H32z" fill="#e8dcc0"/><path d="M32 12l-12 16h12z" fill="#d8ccb0"/><path d="M6 52c8-4 16 0 24-2s16-4 28 0" fill="none" stroke="#9fc8f0" stroke-width="2"/><circle cx="20" cy="42" r="2" fill="#d4a53c"/><circle cx="44" cy="42" r="2" fill="#d4a53c"/>`,
+  kiem:`${AS_SH}<path d="M6 40L52 18l6 4-46 24z" fill="#d9dde3"/><path d="M10 40l42-20" stroke="#fff" stroke-width="1.2"/><path d="M14 36l-4 10 6 2 4-8z" fill="#d4a53c"/><path d="M8 50l-4 4" stroke="#6b4222" stroke-width="3"/><path d="M14 46c10 2 24-2 40-14" fill="none" stroke="#9fc8f0" stroke-width="2" opacity=".8"/><path d="M18 50c10 2 22-2 34-10" fill="none" stroke="#9fc8f0" stroke-width="1.4" opacity=".6"/>`,
+};
+const AS_DEF='<defs><radialGradient id="g" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></radialGradient></defs>';
+// gắn vào bảng ASSET (chỉ điền chỗ còn trống, ảnh do người dùng gắn vẫn được ưu tiên)
+(function(){const put=(kind,id,svg)=>{if(!ASSET[kind][id])ASSET[kind][id]=asSvg(AS_DEF+svg);};
+  for(const k in AS_ITEM)put('item',k,AS_ITEM[k]);
+  for(const id of Object.keys(PILL))put('item','pill:'+id,AS_PILL[id]||((AS_BT.includes(id)?'<circle cx="32" cy="34" r="23" fill="none" stroke="'+(AS_PILLC[id]||'#e0b04a')+'" stroke-width="2" opacity=".5" stroke-dasharray="3 4"/>':'')+asPill(AS_PILLC[id]||'#e0b04a')));
+  for(const k in AS_MAT)put('item','mat:'+k,AS_MAT[k]);
+  for(const k of Object.keys(EN)){const f=EN[k].f;put('foe',k,AS_FOE[f]||AS_FOE.thu);}
+  put('foe','_boss',AS_FOE.boss);put('foe','_thu',AS_FOE.thu);put('foe','_nhan',AS_FOE.nhan);put('foe','_quy',AS_FOE.quy);put('foe','_vat',AS_FOE.vat);
+  ASSET.veh={};for(const k in AS_VEH)ASSET.veh[k]=asSvg(AS_DEF+AS_VEH[k]);
+  ASSET.heroG={nam:asSvg(AS_HERO.nam),nu:asSvg(AS_HERO.nu)};
+  if(!ASSET.hero.me)Object.defineProperty(ASSET.hero,'me',{get(){const r=typeof G!=='undefined'&&G.run;return ASSET.heroG[r&&r.g==='nu'?'nu':'nam'];},configurable:true,enumerable:true});
+})();
+
+// ---------- ngũ hành: biểu tượng nhỏ thay cho chữ ----------
+const EL_COL={kim:'#c9962a',moc:'#3f8f4e',thuy:'#3d7fc0',hoa:'#d9532c',tho:'#8f6230',loi:'#7a5ad0',bang:'#3fa8c8',phong:'#4f9f80',am:'#5a4a7a',phat:'#d39a12',vo:'#8d8672'};
+const EL_P={kim:'M5 16h14l-2.5-5h-9zM9 11l1.5-3h3l1.5 3',moc:'M6 18c0-7 5-12 12-12 0 7-5 12-12 12zM6 18l7-7',thuy:'M12 4c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z',
+  hoa:'M12 3c1 4 5 6 5 11a5 5 0 0 1-10 0c0-3 2-4 2-6 1 2 2 3 3 3 0-3-1-5 0-8z',tho:'M3 18l6-9 4 5 2-3 6 7z',loi:'M13 3L6 13h5l-1 8 7-11h-5z',bang:'M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5l2.5 2 2.5-2M9.5 19.5l2.5-2 2.5 2',
+  phong:'M3 9h11a3 3 0 1 0-3-3M3 13h15a3 3 0 1 1-3 3M3 17h7',am:'M15 4a8 8 0 1 0 5 12A7 7 0 0 1 15 4z',phat:'M12 6c2 2 3 5 0 9-3-4-2-7 0-9zM6 10c3 0 5 2 6 5-4 1-6-1-6-5zM18 10c-3 0-5 2-6 5 4 1 6-1 6-5zM5 18h14',vo:'M12 5a7 7 0 1 0 0 14a7 7 0 1 0 0-14'};
+function elIcon(e){e=EL_P[e]?e:'vo';return `<svg viewBox="0 0 24 24" class="eli"><path d="${EL_P[e]}"/></svg>`;}
+elSeal=function(e){const E=EL[e]||EL.vo;return `<span class="el el-${e}" style="--ec:${EL_COL[e]||EL_COL.vo}"${ta('Hệ '+E.n+(KHAC[e]?'\nKhắc '+EL[KHAC[e]].n:''))}>${elIcon(e)}</span>`;};
+
+// ---------- ảnh công pháp, tâm pháp, chiêu thức: tranh nhỏ theo chủ đề, tô màu theo hệ ----------
+function hsh(s){let h=2166136261;for(const c of String(s)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
+const ART_M={
+  cp:['<path d="M16 48L44 14l4 4-30 32z" fill="#e8eef2"/><path d="M14 44l8 8-4 3-7-7z" fill="#d4a53c"/><path d="M48 48L20 14l-4 4 30 32z" fill="#e8eef2" opacity=".85"/>',
+      '<path d="M22 46V26c0-3 5-3 5 0v-6c0-3 5-3 5 0v-2c0-3 5-3 5 0v4c0-3 5-3 5 0v16c0 6-4 10-10 10h-2c-5 0-8-4-8-8z" fill="#f0cfa8"/><path d="M14 30l-6-2M14 38H6M16 22l-5-5" stroke-width="2"/>',
+      '<path d="M32 6l4 40-4 12-4-12z" fill="#e8eef2"/><path d="M24 44h16l-2 4H26z" fill="#d4a53c"/><path d="M28 8c-6 4-10 10-10 18M36 8c6 4 10 10 10 18" fill="none" stroke-width="1.6"/>',
+      '<circle cx="32" cy="32" r="14" fill="none" stroke-width="3"/><path d="M32 10v8M32 46v8M10 32h8M46 32h8M16 16l6 6M42 42l6 6M48 16l-6 6M16 48l6-6" stroke-width="2.4"/>'],
+  tp:['<path d="M10 16c8-4 16-4 22 2 6-6 14-6 22-2v32c-8-4-16-4-22 2-6-6-14-6-22-2z" fill="#f3ead2"/><path d="M32 18v32M16 24h10M16 30h10M38 24h10M38 30h10" stroke-width="1.6"/>',
+      '<path d="M32 16c5 5 7 12 0 22-7-10-5-17 0-22zM16 26c8 0 13 5 16 12-10 2-16-3-16-12zM48 26c-8 0-13 5-16 12 10 2 16-3 16-12z" fill="#f6c8d6"/><path d="M14 46h36" stroke-width="2.4"/>',
+      '<circle cx="32" cy="32" r="18" fill="#f3ead2"/><path d="M32 14a9 9 0 0 1 0 18 9 9 0 0 0 0 18 18 18 0 0 1 0-36z" fill="#2a2018"/><circle cx="32" cy="23" r="3" fill="#2a2018"/><circle cx="32" cy="41" r="3" fill="#f3ead2"/>',
+      '<path d="M18 12h28v40H18z" fill="#f3ead2"/><path d="M14 10h36v5H14zM14 49h36v5H14z" fill="#c03a2b"/><path d="M26 20v24M32 20v24M38 20v24" stroke-width="1.4"/>'],
+  atk:['<path d="M12 48C24 36 36 22 52 12" fill="none" stroke-width="4"/><path d="M14 52C28 42 40 30 52 22" fill="none" stroke-width="2" opacity=".7"/><path d="M48 10l6 2-2 6" fill="none" stroke-width="2.4"/>'],
+  def:['<path d="M32 10l18 6v14c0 12-8 20-18 24-10-4-18-12-18-24V16z" fill="#f3ead2"/><path d="M32 18l10 4v8c0 7-4 12-10 15-6-3-10-8-10-15v-8z" fill="none" stroke-width="1.8"/>'],
+  move:['<path d="M10 24h28a6 6 0 1 0-6-6M10 32h36a6 6 0 1 1-6 6M10 40h18" fill="none" stroke-width="3"/>'],
+  ult:['<circle cx="32" cy="32" r="10" fill="#fff3c4"/><path d="M32 6v12M32 46v12M6 32h12M46 32h12M14 14l8 8M42 42l8 8M50 14l-8 8M14 50l8-8" stroke-width="3"/>'],
+};
+function artPic(name,el,kind){const c=EL_COL[el]||EL_COL.vo;const L=ART_M[kind]||ART_M.cp;const m=L[hsh(name)%L.length];
+  return asSvg(`<defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c}" stop-opacity=".95"/><stop offset="1" stop-color="${c}" stop-opacity=".6"/></linearGradient></defs><rect x="3" y="3" width="58" height="58" rx="10" fill="url(#b)"/><circle cx="32" cy="32" r="22" fill="#fff" opacity=".18" stroke="none"/><g stroke="${AS_O}">${m}</g>`);}
+const ART_CACHE={};
+function artUri(name,el,kind){const k=kind+'|'+el+'|'+name;return ART_CACHE[k]||(ART_CACHE[k]=artPic(name,el,kind));}
+
+// ---------- ảnh địa điểm: phong cảnh ngang theo loại nơi ----------
+function pl(sky,ground,body){return asSvg(`<defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset="1" stop-color="${sky[1]}"/></linearGradient></defs><rect width="160" height="90" fill="url(#s)" stroke="none"/><path d="M0 52c20-10 40-14 60-8s40-12 60-10 30 6 40 4v52H0z" fill="${ground[0]}" stroke="none" opacity=".55"/>${body}<path d="M0 70c30-6 60-6 90-2s50 2 70-2v24H0z" fill="${ground[1]}" stroke="none"/>`,'0 0 160 90');}
+const HOUSE=(x,y,s,roof)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M2 14h20v12H2z" fill="#e8dcc0"/><path d="M-2 15L12 4l14 11z" fill="${roof||'#7a4a2a'}"/><path d="M9 18h6v8H9z" fill="#5c3a1e"/></g>`;
+const TREE=(x,y,s,c)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M8 30v-8" stroke-width="2"/><path d="M8 2L0 16h4l-4 8h16l-4-8h4z" fill="${c||'#3f7a4e'}"/></g>`;
+const PEAK=(x,y,w,h,c)=>`<path d="M${x} ${y}l${w/2} ${-h} ${w/2} ${h}z" fill="${c}"/><path d="M${x+w/2} ${y-h}l${w*0.12} ${h*0.25}-${w*0.12} ${h*0.08}-${w*0.1}-${h*0.1}z" fill="#fbf6ea" stroke="none"/>`;
+const PLACE_ART={
+  tran:()=>pl(['#f6e2b8','#efd9a8'],['#c9b88a','#b7a77a'],HOUSE(30,46,1.1)+HOUSE(62,42,1.3,'#8a5a32')+HOUSE(100,48,1)+TREE(128,40,1)+TREE(14,44,.8)),
+  thanh:()=>pl(['#f2dcb0','#e8d2a0'],['#c2b088','#ab9a72'],'<path d="M10 66V40h140v26z" fill="#b8a888"/><path d="M10 40h140" stroke-width="2"/>'+[14,30,46,98,114,130].map(x=>`<path d="M${x} 40v-5h8v5" fill="#b8a888"/>`).join('')+'<path d="M62 66V30h36v36z" fill="#a89878"/><path d="M56 32L80 16l24 16z" fill="#7a2a20"/><path d="M72 66V50a8 8 0 0 1 16 0v16z" fill="#4a2c16"/>'),
+  tong:()=>pl(['#e6eef0','#f2ead6'],['#a8b8a8','#8fa48f'],PEAK(20,66,70,52,'#7d8f88')+PEAK(70,66,80,60,'#6a7f78')+'<path d="M92 36h28v10H92z" fill="#e8dcc0"/><path d="M86 37l20-12 20 12z" fill="#8a2a20"/><path d="M98 26l8-6 8 6" fill="#8a2a20"/><path d="M60 66c10-8 20-14 34-20" fill="none" stroke="#e8dcc0" stroke-width="2" stroke-dasharray="3 3"/>'),
+  cho:()=>pl(['#f6e2b8','#efd9a8'],['#c9b88a','#b7a77a'],[20,62,104].map((x,i)=>`<path d="M${x} 60h36V46H${x}z" fill="#e8dcc0"/><path d="M${x-4} 46l6-10h28l6 10z" fill="${['#c03a2b','#3d7fc0','#d4a53c'][i]}"/><path d="M${x+6} 54h8M${x+20} 54h8" stroke-width="2"/>`).join('')),
+  ancu:()=>pl(['#e9f0e6','#f0ead2'],['#a8c09a','#8fa880'],PEAK(80,64,90,40,'#8fa89a')+'<path d="M44 66V50h30v16z" fill="#c9a26a"/><path d="M38 51l21-14 21 14z" fill="#b89a5a"/><path d="M54 66v-9h8v9z" fill="#5c3a1e"/>'+TREE(18,40,1.1,'#4f8a5a')+TREE(110,44,.9,'#4f8a5a')),
+  ai:()=>pl(['#e2dccb','#ece2c8'],['#a89a80','#958870'],PEAK(0,66,60,46,'#8a8270')+PEAK(100,66,60,46,'#8a8270')+'<path d="M52 66V30h56v36z" fill="#9a8a6a"/><path d="M48 30h64v-6H48z" fill="#7a6a4a"/><path d="M70 66V48a10 10 0 0 1 20 0v18z" fill="#3a2a1a"/><path d="M80 24V12l10 4-10 4" fill="#c03a2b"/>'),
+  rung:()=>pl(['#e2efdc','#e8ecd6'],['#7fa070','#5f8a58'],[6,24,42,60,78,96,114,132].map((x,i)=>TREE(x,26+(i%3)*6,1.2+(i%2)*.3,['#3f7a4e','#2f6a3e','#4f8a5a'][i%3])).join('')),
+  nui:()=>pl(['#e6eef2','#eef0e6'],['#9aa8a0','#86968c'],PEAK(-10,70,80,50,'#8a9a94')+PEAK(40,70,90,62,'#738680')+PEAK(100,70,80,44,'#8a9a94')),
+  song:()=>pl(['#e8f0f2','#eef0e2'],['#a8c09a','#8fb0a0'],TREE(10,34,1)+TREE(140,36,.9)+'<path d="M0 62c40-6 80-6 160 0v10H0z" fill="#8fc0d8"/><path d="M60 58h30l-4 5H64z" fill="#8a5a32"/><path d="M75 58V44l8 12" fill="#e8dcc0"/><path d="M20 66h20M100 68h24" stroke="#fff" stroke-width="1.2"/>'),
+  bien:()=>pl(['#e2eef6','#eaf2f2'],['#8fc0d8','#5f9ec0'],'<circle cx="124" cy="24" r="10" fill="#f6dc9a" stroke="none"/><path d="M0 50c20-4 40 4 60 0s40-4 60 0 30 4 40 0v40H0z" fill="#6fb0d0"/><path d="M10 60c8-4 16 4 24 0M60 64c8-4 16 4 24 0M110 58c8-4 16 4 24 0" fill="none" stroke="#fff" stroke-width="1.6"/>'),
+  hoang:()=>pl(['#f6e6c0','#f0dcae'],['#d8c08a','#c8ac72'],'<circle cx="120" cy="26" r="12" fill="#f6c86a" stroke="none"/>'+[20,50,90,130].map(x=>`<path d="M${x} 66c2-8 4-10 6-12M${x+4} 66c0-6 2-10 4-12M${x+8} 66c-1-6 0-8 2-10" fill="none" stroke="#8a7a4a" stroke-width="1.4"/>`).join('')),
+  dam:()=>pl(['#dfe6dc','#e4e6d4'],['#8fa088','#6f8a70'],'<path d="M0 60c40-4 80 4 160 0v12H0z" fill="#6f8f80"/>'+[14,30,48,110,128,146].map(x=>`<path d="M${x} 64V40M${x+3} 64V46M${x-3} 64V48" stroke="#4f6a48" stroke-width="1.6"/><ellipse cx="${x}" cy="40" rx="2" ry="5" fill="#7a5a32"/>`).join('')),
+  thien:()=>pl(['#d8e6f6','#f2eee6'],['#e8eef6','#dfe8f2'],'<path d="M0 58c20-8 40-8 60 0s40 8 60 0 30-6 40-2v34H0z" fill="#fff" opacity=".9"/><path d="M40 70V30h6v40zM114 70V26h6v44z" fill="#d4a53c"/><path d="M34 30h18M108 26h18" stroke-width="2.4"/><path d="M43 60c20-14 50-20 74-30" fill="none" stroke="#c03a2b" stroke-width="2"/>'),
+  linhdia:()=>pl(['#e6f2ea','#eef0e2'],['#9ac0a0','#7aa88a'],TREE(16,38,1)+TREE(130,40,1)+'<ellipse cx="80" cy="62" rx="34" ry="8" fill="#9fe0e0"/><path d="M80 58c-4-10 0-20 0-28M70 56c-6-6-4-14-2-20M90 56c6-6 4-14 2-20" fill="none" stroke="#9fe0e0" stroke-width="2" opacity=".8"/><circle cx="80" cy="28" r="3" fill="#fff" stroke="none"/>'),
+  duoc:()=>pl(['#e6f0dc','#eef0dc'],['#9ac08a','#7aa870'],PEAK(90,64,80,36,'#8faa94')+[24,44,64,84].map(x=>`<path d="M${x} 66V54" stroke="#3f7a4e"/><path d="M${x} 56c-5-2-7-6-6-9 4 0 6 4 6 9zM${x} 54c5-2 7-6 6-9-4 0-6 4-6 9z" fill="#5faf6a"/><circle cx="${x}" cy="50" r="2" fill="#e04a6a"/>`).join('')),
+  khoang:()=>pl(['#ece6dc','#eee6d4'],['#a89a88','#958878'],PEAK(20,66,120,48,'#8a8278')+'<path d="M64 66V48a16 14 0 0 1 32 0v18z" fill="#3a2a1a"/><path d="M60 48h40" stroke-width="3"/><path d="M40 66l6-8 6 8zM112 66l5-10 6 10z" fill="#7fd0e8"/><path d="M106 62h20l-3 4h-14z" fill="#8a5a32"/>'),
+  dong:()=>pl(['#d8d8d0','#e2ddd0'],['#8a8478','#777064'],'<path d="M10 66C20 30 50 18 80 18s60 12 70 48z" fill="#8a8478"/><path d="M50 66c0-20 14-30 30-30s30 10 30 30z" fill="#2a2018"/><path d="M60 40l3 8 3-8M92 40l3 8 3-8" fill="#ece4d0" stroke-width="1"/>'),
+  phe:()=>pl(['#e8e2d4','#ece4d0'],['#a8a08a','#958e7a'],'<path d="M20 66V34h10v32zM56 66V40h10v26zM100 66V30h10v36z" fill="#c8bea8"/><path d="M16 34h18M96 30h18" stroke-width="2.4"/><path d="M30 66l26-10" fill="none"/><path d="M120 66l8-12 6 6 6-4 4 10z" fill="#a8a08a"/><path d="M66 50l10 2-2 6" fill="#c8bea8"/>'),
+  ma:()=>pl(['#3a2030','#6a2a2a'],['#4a2a2a','#2a1818'],'<circle cx="122" cy="24" r="10" fill="#c04a6a" stroke="none"/>'+[20,60,104,140].map(x=>`<path d="M${x} 66V40l-6-8M${x} 46l7-7M${x} 52l-5-3" fill="none" stroke="#1a0e0e" stroke-width="2.4"/>`).join('')+'<path d="M0 66c40-6 80-4 160 0" fill="none" stroke="#7a2a2a" stroke-width="2"/>'),
+  sao:()=>pl(['#4a3a2a','#7a5a3a'],['#5a4030','#3a2a1e'],'<path d="M20 66C30 28 60 16 80 16s50 12 60 50z" fill="#5a4a3a"/><path d="M54 66c0-18 12-28 26-28s26 10 26 28z" fill="#1a0e0e"/><circle cx="72" cy="50" r="2.5" fill="#f0c840" stroke="none"/><circle cx="88" cy="50" r="2.5" fill="#f0c840" stroke="none"/><path d="M30 66c4-4 10-4 12 0M120 66c4-4 10-4 12 0" fill="#ece4d0"/>'),
+};
+(function(){for(const k in PLACE_ART)if(!ASSET.place[k])ASSET.place[k]=PLACE_ART[k]();})();
+
+// ---------- huy hiệu tông môn ----------
+function sectPic(name,al){const c={chinh:'#3d6fae',ta:'#7a5ad0',ma:'#9a2a2a',trung:'#8a6a3a',phat:'#c9962a'}[al]||'#4f8a5a';
+  const m=/Kiếm/.test(name)?'<path d="M32 12v34" stroke-width="5"/><path d="M32 12v34" stroke="#e8eef2" stroke-width="2.4"/><path d="M24 44h16M32 46v8" stroke-width="3"/>':/Đan|Dược/.test(name)?'<path d="M20 30h24l-3 14H23z" fill="#d4a53c"/><path d="M18 26h28v5H18z" fill="#b8862a"/><path d="M24 44l-3 8M40 44l3 8"/><path d="M28 22c0-4 4-4 4-8M36 22c0-4-4-4-2-8" fill="none" stroke="#fff" stroke-width="1.6"/>':/Phật|Tự|Thiền/.test(name)?'<path d="M32 18c5 5 7 12 0 22-7-10-5-17 0-22zM18 28c8 0 13 5 14 12-10 2-14-3-14-12zM46 28c-8 0-13 5-14 12 10 2 14-3 14-12z" fill="#f6c8d6"/>':/Ma|Huyết|U |Độc|Âm/.test(name)?'<path d="M22 28c0-8 4-12 10-12s10 4 10 12c0 4-2 6-4 8v6H26v-6c-2-2-4-4-4-8z" fill="#ece4d0"/><circle cx="28" cy="28" r="3" fill="#2a2018"/><circle cx="36" cy="28" r="3" fill="#2a2018"/>':/Thú|Ngự/.test(name)?'<path d="M32 30c-6 0-10 5-10 10 0 3 2 4 5 4 2 0 3-1 5-1s3 1 5 1c3 0 5-1 5-4 0-5-4-10-10-10z" fill="#ece4d0"/><circle cx="22" cy="26" r="3.5" fill="#ece4d0"/><circle cx="42" cy="26" r="3.5" fill="#ece4d0"/><circle cx="28" cy="20" r="3.5" fill="#ece4d0"/><circle cx="36" cy="20" r="3.5" fill="#ece4d0"/>':/Trận|Cơ/.test(name)?'<path d="M32 14l15 9v17l-15 9-15-9V23z" fill="none" stroke="#ece4d0" stroke-width="3"/><circle cx="32" cy="32" r="5" fill="#ece4d0"/>':'<path d="M14 46l12-20 6 8 6-12 12 24z" fill="#ece4d0"/><circle cx="44" cy="20" r="4" fill="#ece4d0"/>';
+  return asSvg(`<path d="M32 4l24 8v18c0 16-10 26-24 32C18 56 8 46 8 30V12z" fill="${c}"/><path d="M32 9l19 6v15c0 13-8 21-19 26-11-5-19-13-19-26V15z" fill="none" stroke="#fff" stroke-width="1.2" opacity=".5"/><g stroke="${AS_O}">${m}</g>`);}
+// ---------- linh thú: con thú nhỏ tô màu theo hệ ----------
+function petPic(el){const c=EL_COL[el]||EL_COL.vo;return asSvg(`<circle cx="32" cy="32" r="30" fill="#efe6d0" stroke="none"/><path d="M14 22l4-12 8 8M50 22l-4-12-8 8" fill="${c}"/><path d="M14 36c0-12 8-18 18-18s18 6 18 18-8 18-18 18-18-6-18-18z" fill="${c}"/><ellipse cx="32" cy="42" rx="10" ry="8" fill="#fbf6ea"/><circle cx="25" cy="33" r="3.2" fill="#2a2018"/><circle cx="39" cy="33" r="3.2" fill="#2a2018"/><circle cx="26" cy="32" r="1" fill="#fff" stroke="none"/><circle cx="40" cy="32" r="1" fill="#fff" stroke="none"/><path d="M30 40l2 2 2-2" fill="#2a2018"/><path d="M18 40l-6 1M18 43l-6 3M46 40l6 1M46 43l6 3" stroke-width="1.4"/>`);}
+(function(){for(const k of Object.keys(EN))if(EN[k].f==='thu'&&!ASSET.pet[k])ASSET.pet[k]=petPic(EN[k].el||'vo');})();
+
+// ---------- phân lớp hình vật phẩm ----------
+// Pháp bảo: hào quang tỏa tia phía sau + đốm lấp lánh phía trước (bảo vật).
+// Đan dược: viên tròn có vân đan xoáy + hơi khói nhẹ, không hào quang. Bùa: lá giấy. Vật liệu: nằm trên nền đất đá.
+const FX_AURA='<g stroke="none"><circle cx="32" cy="30" r="27" fill="url(#au)"/>'+Array.from({length:12},(_,i)=>{const a=i/12*6.283;const x1=32+Math.cos(a)*16,y1=30+Math.sin(a)*16,x2=32+Math.cos(a)*29,y2=30+Math.sin(a)*29;return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="#f6d77a" stroke-width="${i%2?1.2:2.2}" stroke-linecap="round" opacity="${i%2?.45:.7}"/>`;}).join('')+'</g>';
+const FX_SPARK='<g fill="#fff6c8" stroke="#e0b030" stroke-width=".8"><path d="M52 10l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/><path d="M11 44l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z"/><path d="M50 46l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></g>';
+const FX_DEFS='<defs><radialGradient id="au" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff3b0" stop-opacity=".9"/><stop offset=".55" stop-color="#f6d77a" stop-opacity=".35"/><stop offset="1" stop-color="#f6d77a" stop-opacity="0"/></radialGradient><radialGradient id="g" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></radialGradient></defs>';
+const PILL_DECO='<path d="M22 34c2-6 8-9 12-7s4 8 0 10-8-1-6-4" fill="none" stroke="#fff" stroke-width="1.3" opacity=".55"/><path d="M27 14c-2-3 0-5 2-6M35 12c2-3 0-6-2-7M31 15c0-3 2-4 1-7" fill="none" stroke="#b9b0a0" stroke-width="1.4" opacity=".7"/>';
+const MAT_BASE='<path d="M8 56c4-6 12-8 24-8s20 2 24 8z" fill="#9a8a70"/><path d="M14 56l4-3M44 55l5-3" stroke="#6a5a40" stroke-width="1.2"/>';
+(function(){const set=(id,body)=>{ASSET.item[id]=asSvg(FX_DEFS+body);};
+  for(const k in AS_ITEM){if(k==='book')continue;set(k,FX_AURA+AS_ITEM[k].replace(AS_SH,'')+FX_SPARK);}
+  for(const id of Object.keys(PILL)){const src=AS_PILL[id];if(src&&/f3d55a/.test(src))continue; // bùa giữ nguyên
+    const base=src||((AS_BT.includes(id)?'<circle cx="32" cy="34" r="23" fill="none" stroke="'+(AS_PILLC[id]||'#e0b04a')+'" stroke-width="2" opacity=".5" stroke-dasharray="3 4"/>':'')+asPill(AS_PILLC[id]||'#e0b04a'));
+    set('pill:'+id,base+(src?'':PILL_DECO));}
+  for(const k in AS_MAT)set('mat:'+k,AS_MAT[k].replace(AS_SH,MAT_BASE));
+})();
+
+// ================= TRANH THỦY MẶC: địa điểm và màn khởi đầu =================
+// Mực đen loang nhiều tầng đậm nhạt trên nền giấy, nét có rung nhẹ như bút lông, sương trắng ngang,
+// điểm son đỏ. Viền tranh mờ dần vào nền (mặt nạ), nên đặt lên giấy nào cũng hòa.
+const INK='#2b2620',SEAL='#9c2a22';
+function inkSvg(w,h,body,fade){fade=fade||'all';const m=fade==='bottom'
+  ?`<linearGradient id="fv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".38" stop-color="#fff"/><stop offset=".85" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><linearGradient id="fh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000"/><stop offset=".12" stop-color="#fff"/><stop offset=".88" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>`
+  :`<radialGradient id="fv" cx=".5" cy=".55" r=".62"><stop offset=".55" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`;
+  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}"><defs>
+  <filter id="br" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="1.6"/></filter>
+  <filter id="wa" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="3" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" result="d"/><feGaussianBlur in="d" stdDeviation=".9"/></filter>
+  <filter id="mi"><feGaussianBlur stdDeviation="3"/></filter>
+  <linearGradient id="mt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${INK}" stop-opacity=".75"/><stop offset="1" stop-color="${INK}" stop-opacity=".05"/></linearGradient>
+  <linearGradient id="mf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${INK}" stop-opacity=".32"/><stop offset="1" stop-color="${INK}" stop-opacity="0"/></linearGradient>
+  ${m}<mask id="fm"><rect width="${w}" height="${h}" fill="url(#fv)"/>${fade==='bottom'?`<rect width="${w}" height="${h}" fill="url(#fh)" style="mix-blend-mode:multiply"/>`:''}</mask></defs>
+  <g mask="url(#fm)">${body}</g></svg>`);}
+// các mảnh ghép
+const iFar=(d)=>`<path d="${d}" fill="url(#mf)" filter="url(#wa)"/>`;
+const iMid=(d)=>`<path d="${d}" fill="url(#mt)" filter="url(#wa)"/>`;
+const iMist=(y,o)=>`<ellipse cx="80" cy="${y}" rx="95" ry="6" fill="#f4ecd8" opacity="${o||.85}" filter="url(#mi)"/>`;
+const iTree=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})" filter="url(#br)"><path d="M0 0v-14" stroke="${INK}" stroke-width="1.4"/><path d="M0-16c-6 0-8 4-6 6 2 0 4-2 6-2 2 0 4 2 6 2 2-2 0-6-6-6zM0-22c-4 0-6 3-4 5h8c2-2 0-5-4-5z" fill="${INK}" opacity=".8"/></g>`;
+const iPine=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})" filter="url(#br)"><path d="M0 0v-22" stroke="${INK}" stroke-width="1.6"/><path d="M-9-6h18l-9-6zM-8-12h16l-8-6zM-6-18h12l-6-6z" fill="${INK}" opacity=".85"/></g>`;
+const iHouse=(x,y,s,o)=>`<g transform="translate(${x} ${y}) scale(${s})" filter="url(#br)" opacity="${o||1}"><path d="M-10 0V-7h20V0" fill="#f4ecd8" stroke="${INK}" stroke-width="1"/><path d="M-14-6c6-5 22-5 28 0l-3-4c-6-3-16-3-22 0z" fill="${INK}"/><path d="M-2 0v-4h4v4" fill="${INK}"/></g>`;
+const iPav=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})" filter="url(#br)"><path d="M-8 0v-8h16V0" fill="#f4ecd8" stroke="${INK}" stroke-width="1"/><path d="M-14-7c7-4 21-4 28 0l-3-3c-7-3-15-3-22 0z" fill="${INK}"/><path d="M-11-12c6-3 16-3 22 0l-3-3c-5-2-11-2-16 0z" fill="${INK}"/><path d="M0-16v-3" stroke="${INK}"/></g>`;
+const iBoat=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})" filter="url(#br)"><path d="M-12 0c6 3 18 3 24 0z" fill="${INK}"/><path d="M-2 0v-9" stroke="${INK}" stroke-width=".8"/><circle cx="-2" cy="-10" r="1.6" fill="${INK}"/><path d="M2-1l12-6" stroke="${INK}" stroke-width=".6"/></g>`;
+const iSun=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${SEAL}" opacity=".85" filter="url(#wa)"/>`;
+const iBirds=(x,y)=>`<g fill="none" stroke="${INK}" stroke-width=".8" opacity=".7"><path d="M${x} ${y}q2-2 4 0q2-2 4 0"/><path d="M${x+10} ${y-4}q1.5-1.5 3 0q1.5-1.5 3 0"/></g>`;
+const iWater=(y)=>`<g stroke="${INK}" stroke-width=".7" opacity=".45" fill="none"><path d="M20 ${y}h30M70 ${y+4}h40M30 ${y+8}h22M100 ${y+9}h30"/></g>`;
+const iReed=(x,y)=>`<g stroke="${INK}" stroke-width=".9" fill="none" filter="url(#br)"><path d="M${x} ${y}v-16M${x+3} ${y}l2-13M${x-3} ${y}l-2-12"/><ellipse cx="${x}" cy="${y-17}" rx="1.2" ry="3" fill="${INK}"/></g>`;
+const iRock=(x,y,s)=>`<path transform="translate(${x} ${y}) scale(${s})" d="M-12 0c0-8 6-12 12-12s12 4 12 12z" fill="${INK}" opacity=".55" filter="url(#wa)"/>`;
+const GROUND=`<path d="M0 74c30-5 60-6 90-3s50 2 70-1v20H0z" fill="${INK}" opacity=".12" filter="url(#wa)"/>`;
+const INK_PLACE={
+  tran:iFar('M0 50c20-12 40-16 60-10s40-14 60-10 30 6 40 4v56H0z')+iMist(56)+iHouse(48,66,1.1)+iHouse(78,63,1.4)+iHouse(108,68,1)+iTree(26,70,1.1)+iTree(130,70,.9)+GROUND+iBirds(110,20),
+  thanh:iFar('M0 46c30-10 60-12 90-6s50-8 70-6v56H0z')+`<g filter="url(#br)"><path d="M14 68V46h132v22" fill="#f4ecd8" stroke="${INK}" stroke-width="1.2"/><path d="M14 46h132" stroke="${INK}" stroke-width="2"/>${[20,34,48,104,118,132].map(x=>`<path d="M${x} 46v-3h6v3" fill="${INK}"/>`).join('')}<path d="M66 68V36h28v32" fill="#f4ecd8" stroke="${INK}"/><path d="M58 37c12-6 32-6 44 0l-4-5c-10-4-26-4-36 0z" fill="${INK}"/><path d="M74 68v-12a6 6 0 0 1 12 0v12" fill="${INK}"/></g>`+iMist(74,.7)+iSun(132,22,6),
+  tong:iMid('M10 74L40 24l14 18 10-14 30 46z')+iFar('M70 74l30-52 20 20 16-10 24 42z')+iPav(98,30,1)+iPav(46,30,.7)+`<path d="M60 70c10-12 24-22 34-34" fill="none" stroke="${INK}" stroke-width=".8" stroke-dasharray="2 2" opacity=".6"/>`+iMist(50,.8)+iMist(66,.6)+iBirds(20,16),
+  cho:iFar('M0 54c30-8 60-8 90-4s50-4 70-2v52H0z')+[24,64,104].map(x=>`<g filter="url(#br)"><path d="M${x} 68V56h32v12" fill="#f4ecd8" stroke="${INK}"/><path d="M${x-4} 56l6-8h28l6 8z" fill="${INK}" opacity=".85"/></g>`).join('')+`<path d="M78 44v-8l8 3-8 3" fill="${SEAL}"/>`+GROUND,
+  ancu:iMid('M70 74l30-48 20 22 16-12 30 38z')+iMist(52)+`<g filter="url(#br)"><path d="M40 70V58h24v12" fill="#f4ecd8" stroke="${INK}"/><path d="M34 59c6-8 30-8 36 0l-6-6c-6-4-18-4-24 0z" fill="${INK}" opacity=".8"/></g>`+iPine(22,72,1)+iPine(84,72,.8)+iSun(130,20,5),
+  ai:iMid('M0 74L24 26l18 20 18-22v50z')+iMid('M160 74L136 26l-18 20-18-22v50z')+`<g filter="url(#br)"><path d="M58 74V34h44v40" fill="#f4ecd8" stroke="${INK}" stroke-width="1.2"/><path d="M52 34c10-5 46-5 56 0l-4-5c-10-4-38-4-48 0z" fill="${INK}"/><path d="M72 74V56a8 8 0 0 1 16 0v18" fill="${INK}"/><path d="M80 28V16l9 3-9 3" fill="${SEAL}"/></g>`+iMist(68,.7),
+  rung:iFar('M0 50c20-8 50-10 80-6s50-6 80-4v50H0z')+[8,22,36,52,68,84,100,116,132,148].map((x,i)=>iPine(x,70+(i%3)*3,1.1+(i%2)*.4)).join('')+iMist(60,.5),
+  nui:iFar('M0 74L30 30l14 14 18-26 24 30 20-20 30 32 24-10v24z')+iMid('M20 74l26-34 12 12 16-18 26 40z')+iMist(48,.85)+iMist(64,.6)+iBirds(118,18)+iSun(134,20,5),
+  song:iFar('M0 48c30-10 60-8 90-2s50-6 70-4v58H0z')+iMist(54,.7)+iPine(18,62,1)+iTree(146,64,1)+iBoat(80,66,1.2)+iWater(70),
+  bien:iFar('M0 54c40-6 80-6 160 0v36H0z')+iSun(124,26,9)+`<g fill="none" stroke="${INK}" stroke-width="1" opacity=".55" filter="url(#br)"><path d="M10 64c8-5 16 5 24 0s16 5 24 0M70 70c8-5 16 5 24 0s16 5 24 0M110 60c6-4 12 4 18 0"/></g>`+iBoat(50,58,.8),
+  hoang:iFar('M0 58c40-8 80-8 160-2v34H0z')+iSun(116,26,10)+[16,46,82,124].map(x=>`<g stroke="${INK}" stroke-width=".8" fill="none" opacity=".6" filter="url(#br)"><path d="M${x} 72c1-6 3-9 5-10M${x+4} 72c0-6 2-9 3-11M${x+8} 72c-1-5 0-8 2-9"/></g>`).join('')+iBirds(40,24),
+  dam:iFar('M0 54c40-6 80 2 160 0v36H0z')+[10,22,34,112,126,140].map(x=>iReed(x,72)).join('')+iWater(66)+iMist(58,.7),
+  thien:iMist(40,.9)+iMist(60,.9)+`<g filter="url(#br)"><path d="M42 74V30h4v44M112 74V26h4v48" stroke="${INK}" stroke-width="1.2" fill="none"/><path d="M36 30h16M106 26h16" stroke="${INK}" stroke-width="2.4"/></g><path d="M44 58c22-14 48-20 70-30" fill="none" stroke="${SEAL}" stroke-width="1.6" opacity=".8"/>`+iFar('M0 80c30-10 60-10 90-4s50-6 70-2v16H0z'),
+  linhdia:iFar('M0 52c30-8 60-8 90-2s50-6 70-4v54H0z')+`<ellipse cx="80" cy="66" rx="30" ry="6" fill="${INK}" opacity=".18" filter="url(#wa)"/><path d="M80 62c-3-10 0-20 0-28M72 60c-4-6-3-14-1-20M88 60c4-6 3-14 1-20" fill="none" stroke="${INK}" stroke-width=".8" opacity=".5" filter="url(#br)"/>`+iPine(22,68,1)+iPine(136,70,.9)+iSun(80,26,4),
+  duoc:iMid('M90 74l26-38 16 16 28-10v32z')+[26,42,58,74].map(x=>`<g filter="url(#br)"><path d="M${x} 72V60" stroke="${INK}"/><path d="M${x} 62c-5-2-6-6-5-8 4 0 5 4 5 8zM${x} 60c5-2 6-6 5-8-4 0-5 4-5 8z" fill="${INK}" opacity=".8"/><circle cx="${x}" cy="57" r="1.6" fill="${SEAL}"/></g>`).join('')+iMist(54,.6),
+  khoang:iMid('M10 74l40-44 20 16 18-20 40 48z')+`<g filter="url(#br)"><path d="M66 74V58a12 10 0 0 1 24 0v16" fill="${INK}"/><path d="M62 58h32" stroke="${INK}" stroke-width="2"/></g>`+iRock(120,72,.8)+iMist(48,.6),
+  dong:iMid('M8 74C18 36 50 22 80 22s62 14 72 52z')+`<path d="M54 74c0-18 12-28 26-28s26 10 26 28z" fill="${INK}" opacity=".9" filter="url(#wa)"/>`+iMist(70,.5)+iTree(20,72,.9),
+  phe:iFar('M0 54c40-6 80-4 160 0v36H0z')+`<g filter="url(#br)" fill="#f4ecd8" stroke="${INK}"><path d="M22 72V40h8v32M60 72V46h8v26M104 72V36h8v36"/><path d="M18 40h16M100 36h16" stroke-width="2"/></g>`+iRock(132,74,.9)+iRock(80,74,.6)+iMist(62,.6),
+  ma:`<rect width="160" height="90" fill="${INK}" opacity=".18"/>`+iMid('M0 74c30-12 60-14 90-6s50-4 70-6v28H0z')+iSun(124,24,8)+[22,58,100,140].map(x=>`<g stroke="${INK}" stroke-width="1.8" fill="none" filter="url(#br)"><path d="M${x} 72V44l-6-8M${x} 50l7-7M${x} 58l-5-3"/></g>`).join(''),
+  sao:`<rect width="160" height="90" fill="${INK}" opacity=".1"/>`+iMid('M12 74C24 34 56 20 80 20s58 14 70 54z')+`<path d="M54 74c0-18 12-28 26-28s26 10 26 28z" fill="${INK}" filter="url(#wa)"/><circle cx="72" cy="58" r="2" fill="${SEAL}"/><circle cx="88" cy="58" r="2" fill="${SEAL}"/>`+iRock(26,74,.7)+iRock(136,74,.8),
+};
+(function(){for(const k in INK_PLACE)ASSET.place[k]=inkSvg(160,90,INK_PLACE[k],'all');
+  // màn khởi đầu: dãy núi trùng điệp, sông, thuyền, trăng son, sương
+  const tm=(y,o,rx)=>`<ellipse cx="300" cy="${y}" rx="${rx||340}" ry="14" fill="#f4ecd8" opacity="${o}" filter="url(#mi2)"/>`;
+  ASSET.title=inkSvg(600,260,
+    '<defs><filter id="mi2" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="9"/></filter></defs>'+
+    iSun(470,70,20)+iBirds(150,64)+iBirds(380,92)+
+    iFar('M0 170L50 110l30 30 40-62 34 44 30-30 44 56 34-36 46 46 40-32 46 42 50-28 56 34v200H0z')+tm(140,.85)+
+    iMid('M-10 230L60 128l34 34 28-40 52 84 34-26 56 68z')+iMid('M300 230l70-110 36 40 32-26 46 58 34-22 60 60z')+tm(196,.9)+
+    `<path d="M0 236c100-10 200-12 300-6s170 4 300 0v30H0z" fill="${INK}" opacity=".1" filter="url(#wa)"/>`+
+    iBoat(300,228,1.6)+iWater(236).replace(/M20 /,'M220 ').replace(/M70 /,'M330 ').replace(/M30 /,'M250 ').replace(/M100 /,'M360 ')+
+    iPine(40,246,2)+iPine(560,248,1.7),'bottom');
+})();

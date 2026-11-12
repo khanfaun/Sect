@@ -24,4 +24,4 @@ Game đã chừa sẵn chỗ cho ảnh. Mở `src/ui/base.js`, tìm `const ASSET
 - `hero` (khóa `me`), `npc`, `pet`, `foe`: ảnh hiển thị trong khung tròn.
 - `place`: ảnh ngang cho thẻ địa điểm, theo loại nơi (`tran`, `thanh`, `rung`...).
 
-Chưa có ảnh thì game tự dùng hình vẽ tạm.
+Chưa có ảnh thì game dùng bộ hình 2D vẽ sẵn bằng vector trong `src/ui/assets.js` (pháp bảo, đan dược, vật liệu, kẻ địch theo họ, chân dung nhân vật nam/nữ, phương tiện, xe ngựa thương đội). Ảnh gắn vào `ASSET` luôn được ưu tiên hơn bộ hình này.
