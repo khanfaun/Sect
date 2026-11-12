@@ -161,7 +161,7 @@ Pháp bảo: Kiếm, Trường Kiếm, Đoản Kiếm, Cổ Kiếm, Đao, Trảm
 
 Đan dược: Hồi Xuân Đan, Tụ Khí Đan, Bạo Huyết Đan, Kim Cang Phù, Chưởng Lôi Phù, Giải Độc Đan, Thần Hành Phù, Định Thần Đan, Tinh Nguyên Đan, Diên Thọ Đan, Phá Cảnh Đan, Hộ Mạch Đan, Bồ Đề Tử, Tị Lôi Phù, Dưỡng Nguyên Đan, Thiên Đạo Quả, Địa Mạch Linh Nhũ, Nhân Hoàng Thảo, Linh Nhũ Ngưng Thần.
 
-Công pháp / kỹ năng: Ngự Kiếm Thuật, Kim Châm Quyết, Duệ Kim Kiếm Khí, Triền Đằng Thuật, Vạn Kiếm Thuật (có trong game), Trụ Tiên (có trong game), và các môn có trong danh sách SK_RAW của game.
+Công pháp / kỹ năng: Ngự Kiếm Thuật, Kim Châm Quyết, Duệ Kim Kiếm Khí, Triền Đằng Thuật, Vạn Kiếm Quy Tông, Tru Tiên Kiếm Trận, và các môn có trong danh sách SK_RAW của game.
 
 Pháp bảo đặc biệt: Nhẫn Sắt Cũ, Hồn Phiên Vô Chủ, Đồng Tâm Kết, Kiếm Gãy Vô Danh, Di Vật Kiếp Trước, Vấn Tâm Kính, Long Lân Hộ Tâm, Tinh Thiết Kiếm Phôi, Lôi Kích Mộc Tâm, Thiên Tâm Ngọc, Lệnh bài đệ tử.
 
