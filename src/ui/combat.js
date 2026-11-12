@@ -72,7 +72,7 @@ function vCombat(sc){
   if(!sc.done&&injured()&&!sc.spar&&!sc.kiep)h+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   if(sc.done){
     const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong thiên kiếp':'Ngươi đã ngã xuống'}[sc.over];
-    return h+`<div class="cb-end ${sc.over}"><b>${t}</b>${sc.llGain?`<span class="chip up">⚔ +${Math.max(1,Math.round(sc.llGain/(tvPts(G.run.realm)/100)))}% lịch luyện</span>`:''}${goBtn('cont','Tiếp tục')}</div></section>`;
+    return h+`<div class="cb-end ${sc.over}"><b>${t}</b>${sc.llGain?`<span class="chip up">⚔ +${llShowGain(sc.llGain/(tvPts(G.run.realm)/100))}% lịch luyện</span>`:''}${goBtn('cont','Tiếp tục')}</div></section>`;
   }
   h+='<div class="cb-cmd">';
   if(rp&&!CFG.autoFight){

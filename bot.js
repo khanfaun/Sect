@@ -53,7 +53,7 @@ function botPlan(){
   const known=R0.nodes.filter(n=>n.fog>=1&&n.id!==r.at&&n.type!=='ai'&&n.type!=='sao');
   // lịch luyện tụt sau tu vi: ưu tiên nơi chưa tới
   const lag=(r.ll||0)<r.tv-15;
-  if(lag||((r.tv>=100||(lkOn()&&lkTang()>=9))&&(r.ll||0)<llNeedBt())){const seen=new Set(r.llP||[]);const n=nearest(x=>x.id!==r.at&&!seen.has(x.id)&&x.type!=='ai'&&x.type!=='sao');if(n&&goOrOpen(n)){r._goal='explore';return;}}
+  if(lag||((r.tv>=100||(lkOn()&&lkTang()>=9))&&(r.ll||0)<llNeedBt())||(lkXkState()&&lkXkState().ll)){const seen=new Set(r.llP||[]);const n=nearest(x=>x.id!==r.at&&!seen.has(x.id)&&x.type!=='ai'&&x.type!=='sao');if(n&&goOrOpen(n)){r._goal='explore';return;}}
   let t=cand.length&&chance(lag?.95:.7)?pick(cand):(chance(.5)?nodeById(r.at):pick(known.length?known:[nodeById(r.at)]));
   r._goal='explore';goOrOpen(t);
 }
