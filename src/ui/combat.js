@@ -174,7 +174,7 @@ function prepUnitRow(u,me,cmp){const foe=u.side==='B';const sub=me?realmLabel():
   const lc=RT('lc',pLc(u));
   return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
    <div class="pp-row2"><div class="pp-bars"><span${ta('Khí huyết')}>${ic('heart')}${cBar(hp,mh,'hp'+(hp<mh*0.3?' low':hp<mh*0.6?' mid':''))}</span><span${ta(mm?'Linh lực':'Chưa có linh lực')}>${ic('drop')}${cBar(mp,mm||1,'mp')}</span></div>
-   <div class="pp-lc"${ta(foe?'Lực chiến của kẻ này, so với người ở cảnh giới của ngươi':'Lực chiến so với người cùng cảnh giới')}><small>Lực chiến</small>${lc}</div></div></div></div>`;}
+   <div class="pp-lc"${ta(foe?'Lực chiến của kẻ này, so với người ở cảnh giới của ngươi':'Lực chiến so với người cùng cảnh giới')}>${lc}</div></div></div></div>`;}
 // so sức hai đội theo tổng lực chiến
 function teamCmp(sc){const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');const ta=A.reduce((s,u)=>s+pLc(u),0),tb=B.reduce((s,u)=>s+pLc(u),0);const q=tb/Math.max(1,ta);
   return q>=1.35?{side:'B',t:'Mạnh hơn',c:'st'}:q<=0.75?{side:'A',t:'Mạnh hơn',c:'st'}:{side:'B',t:'Vừa sức',c:'ev'};}

@@ -1127,3 +1127,7 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .cbprep .pp-row2{margin-top:2px;gap:8px}.cbprep .pp-row2 .pp-lc{padding:0 7px}.cbprep .pp-row2 .pp-lc small{font-size:.62em}.cbprep .pp-row2 .pp-lc .rt{font-size:.84em}
 .cbprep .pp-act{margin:8px 0 2px}.cbprep .pp-act .btn{min-height:32px}.cbprep>.sc-b>.hint{font-size:.74em;margin:.2em 0}
 .cbprep .pp-tg{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:0 0 3px;color:var(--ink3);display:flex;justify-content:space-between;align-items:baseline}.cbprep .pp-tg small{font-size:1em;letter-spacing:.05em;text-transform:none}
+/* 5 màu đánh giá rõ hơn: xám lạnh, nâu cam, mực, xanh lục, vàng kim đậm */
+.rt0,.kr .rt0,.kv .rt0{color:#7f8a94!important}.rt1,.kr .rt1,.kv .rt1{color:#b0662e!important}.rt2,.kr .rt2,.kv .rt2{color:var(--ink)!important}.rt3,.kr .rt3,.kv .rt3{color:#2f8a45!important}.rt4,.kr .rt4,.kv .rt4{color:#c08a10!important;font-weight:700}
+/* thanh đầu: chữ cùng màu icon */
+.hud-stats .hs .rt{color:inherit!important;font-weight:inherit}
