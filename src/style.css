@@ -709,3 +709,36 @@ b,strong,h1,h2,h3,h4,th,.kr b,.kv b,.hud-id .rl,.stone,.lc-n,.grp,.sgrp,.f-n b,.
 .nc .nc-d{margin-top:8px;font-size:.86em;-webkit-line-clamp:3}
 .nc-tags{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:6px;font-size:.74em;color:var(--ink3)}.nc-tags span::before{content:"· "}
 .nc .nc-b{margin-top:12px}.nc .nc-b .btn{min-height:44px;flex:1}
+/* ===== đợt 7: một phông duy nhất, chữ nhỏ lại một chút ===== */
+:root{--fs:14px}:root[data-font=l]{--fs:15.5px}:root[data-font=xl]{--fs:17px}
+body *:not(.title h1){font-family:var(--font)!important}
+body *{font-weight:400!important}
+.btn.pri,.btn.big,.title h1,.fx-num b,.cine-txt b,.dodge2,.dodge-ov p,.dot,.at-on,.alv{font-weight:500!important}
+.win-h h2,.sc-h h2,.nc-tt b,.place .sc-h h2,.mbox h3{letter-spacing:.01em}
+.win-h h2{font-size:1.25em}.sc-h h2{font-size:1.2em}.place .sc-h h2{font-size:1.4em}.nc-tt b{font-size:1.3em}
+.hud-id .nm{font-size:1.05em}.hud-id .rl{color:var(--ink)}
+.kr b,.kv b{color:var(--ink)}.kr span,.kv span{color:var(--ink2)}
+.sgrp{color:var(--ink);font-size:1em;letter-spacing:.02em}
+/* chữ đang quá nhỏ: giữ tối thiểu */
+.nv{font-size:10px}.nc-eb,.pl-kv small,.nc-kv2 small,.place .grp{font-size:10px!important}.lnk{font-size:10.5px}.tabs button{font-size:11px}
+.grp{font-size:10.5px}
+/* tab căn cơ */
+.lc2{display:inline-flex;flex-direction:column;align-items:flex-end;line-height:1.3;text-align:right}.lc2 small{font-size:.86em;color:var(--ink2)}
+.cbstat summary{list-style:none;cursor:pointer;display:flex;align-items:center}.cbstat summary::-webkit-details-marker{display:none}
+.cbstat summary small{margin-left:auto;font-size:.72em;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.cbstat summary::after{display:none}
+/* thanh tâm ma, niệm lực, thần lực địch */
+.hb.tm i{background:var(--vio)}.cbar.nl i{background:#7a63b8}.cbar.th i{background:#f08a1c}.cbar.th.burn i{background:#ff6a1c;box-shadow:0 0 6px #ff9a2e}
+.u-av.fpt{box-shadow:0 0 0 2px #ff9a2e,0 0 14px #ff9a2e}
+.u-av .flame{position:absolute;inset:-6px;pointer-events:none}
+/* chuẩn bị trước trận */
+.cbprep .sc-b{padding-top:4px}
+.pp-h{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin:14px 0 6px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+.pp-sides{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.pp-vs{align-self:center;font-size:.8em;letter-spacing:.2em;text-transform:uppercase;color:var(--seal);padding-top:30px}
+.pp-u{display:flex;gap:8px;align-items:flex-start;padding:6px 0}.pp-u .u-av{width:40px;height:40px;flex:none;border-radius:50%;overflow:hidden;display:grid;place-items:center;border:1px solid var(--line);font-size:1.3em}
+.pp-t{min-width:0;flex:1}.pp-n{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pp-t>small{display:block;color:var(--ink3);font-size:.8em}
+.pp-st{display:flex;flex-direction:column;margin-top:4px;font-size:.84em}.pp-st span{display:flex;justify-content:space-between;gap:6px}.pp-st small{color:var(--ink3)}
+.pp-kn{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}.pp-kn>div{min-width:0}.pp-kn small{display:block;font-size:.76em;color:var(--ink3)}.pp-kn span{display:block;font-size:.9em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-act{display:flex;gap:8px;margin:14px 0 4px}.pp-act .btn{flex:1}
+.cbprep .sc-f .btn.big{min-width:60%}

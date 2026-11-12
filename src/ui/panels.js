@@ -6,26 +6,30 @@ function pChar(){
   let b=tabsHTML('char',[['base','Căn cơ'],['bag','Túi đồ'],['hoc','Sở học'],['kn','Kỹ năng']],tab);
   if(tab==='base'){
     const og=ORIGIN.find(o=>o.id===r.origin),tr=TRAIT.find(t=>t.id===r.trait),R0=rootView(r.root);
+    const R1=ROOT.find(x=>x.id===r.root.id);const tc=s.tuchat;const left=Math.max(0,Math.floor(s.life-r.age));
+    const lcV=`<span class="lc2"><span>${r.root.els.map(elSeal).join(' ')}</span><small>${esc(R0.n)}</small></span>`;
     b+=`<div class="basegrid">`;
-    b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),kvRow('Mệnh cách',esc(tr.n),tr.d),kvRow('Nhân quả',karmaName(r.karma)+' ('+r.karma+')','Thiện ác đều có báo'),
+    b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),kvRow('Mệnh cách',esc(tr.n),tr.d),
+      kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
+      kvRow('Tư chất',tc+' · '+tcName(tc),'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
+      kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá'),kvRow('Khí vận',s.van,'Chí mạng, may mắn'),
+      kvRow('Nhân quả',karmaName(r.karma)+' ('+r.karma+')','Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
+    b+=sgBox('yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+Math.floor(r.tv)+'%'),
+      `<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${Math.floor(r.tv)}%</span></div>`,
+      kvRow('Tốc độ tu','+'+numVN(bqRate())+'% mỗi năm','Tốc độ khi bế quan. Phụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và nơi bế quan'),
+      kvRow('Đạo cơ',(r.dao||0)+' · '+QNAME[qOf(r.dao||0)],'Điểm đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'\nMốc kế tiếp: '+qNext(r.dao||0)+' điểm':'\nĐã đạt Thiên đạo')),
+      kvRow('Tâm ma',r.tamma,'Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
+      kvRow('Thần thức',s.than+' · tầm '+SENSE[r.realm]+' dặm','Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
+      kvRow('Niệm lực',s.nl,'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.'),
+      kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.'),
       kvRow('Cống hiến',r.ch||0,'Điểm cống hiến tông môn'),kvRow('Đã hạ',r.kills,'Số kẻ địch đã đánh bại')]);
-
-    b+=`<section class="sgbox"><h4 class="sgrp">${ib('spark','soft')}Tu vi</h4>`;
-    b+=`<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${Math.floor(r.tv)}%</span></div>`;
-    b+='</section>';
-    b+=sgBox('yin','Tu hành',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+Math.floor(r.tv)+'%'),
-      kvRow('Linh căn',r.root.els.map(elSeal).join(' ')+' '+esc(R0.n),ROOT.find(x=>x.id===r.root.id).d),
-      kvRow('Tu luyện','+'+numVN(bqRate())+'% mỗi năm','Tốc độ khi bế quan. Phụ thuộc linh căn, ngộ tính, Khí Hải'),
-      kvRow('Đạo cơ',(r.dao||0)+' · '+QNAME[qOf(r.dao||0)],'Điểm đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'\nMốc kế tiếp: '+qNext(r.dao||0)+' điểm':'\nĐã đạt Thiên đạo'))]);
-    b+=sgBox('walk','Hành tẩu',[kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.'),kvRow('Thần thức',SENSE[r.realm]+' dặm','Tầm nhìn trên bản đồ')]);
-    b+=sgBox('star','Thiên phú',[kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá'),kvRow('Khí vận',s.van,'Chí mạng, may mắn')],true);
-    b+=sgBox('heart','Sinh mệnh',[kvRow('Tuổi',Math.floor(r.age)+' / '+s.life,'Hết thọ nguyên là tọa hóa'),kvRow('Tâm ma',r.tamma,'Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
-      kvRow('Khí huyết',r.hp+' / '+s.maxHp,'Về 0 là chết'),kvRow('Linh lực',r.mp+' / '+s.maxMp,'Thi triển pháp thuật')],true);
-    b+=sgBox('sword','Công kích',[kvRow('Công vật lý',s.atk,'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',s.matk,'Dùng cho pháp thuật'),
+    b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl two">${[
+      kvRow('Khí huyết',r.hp+' / '+s.maxHp,'Về 0 là chết'),kvRow('Linh lực',r.mp+' / '+s.maxMp,'Thi triển pháp thuật'),
+      kvRow('Công vật lý',s.atk,'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',s.matk,'Dùng cho pháp thuật'),
       kvRow('Chí mạng',Math.round(s.crit)+'%','Tỉ lệ chí mạng'),kvRow('ST chí mạng',s.critDmg+'%','Sát thương khi chí mạng'),
-      kvRow('Chính xác',s.cx,'Đối phương né khó hơn'),kvRow('Niệm lực',s.than,'Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tăng theo cảnh giới, ngộ tính và tâm pháp.')],true);
-    b+=sgBox('shield','Phòng ngự',[kvRow('Thủ',s.def,'Giảm sát thương nhận vào'),kvRow('Hộ tâm',s.hoTam,'Giảm sát thương chí mạng nhận vào'),
-      kvRow('Né',s.ne,'Phải bấm Né đúng lúc mới phát huy hết'),kvRow('Thân pháp',s.tp,'Tốc độ chạy trên nửa đầu thanh hành động'),kvRow('Hồi phục',s.hoi,'Tốc độ trên nửa sau thanh hành động')],true);
+      kvRow('Chính xác',s.cx,'Đối phương né khó hơn'),kvRow('Thủ',s.def,'Giảm sát thương nhận vào'),
+      kvRow('Hộ tâm',s.hoTam,'Giảm sát thương chí mạng nhận vào'),kvRow('Né',s.ne,'Phải bấm Né đúng lúc mới phát huy hết'),
+      kvRow('Thân pháp',s.tp,'Tốc độ chạy trên nửa đầu thanh hành động'),kvRow('Hồi phục',s.hoi,'Tốc độ trên nửa sau thanh hành động')].join('')}</div></details>`;
     b+='</div>';
   }
   if(tab==='bag')b+=bagTabHTML();

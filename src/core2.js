@@ -821,3 +821,41 @@ function playerUlt(){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||u.dazed
   ptEnd(sc,u,'Pháp tướng tan đi, thần lực cạn sạch.');return ok;}
 {const _oz2=onZero;onZero=function(sc,u){if(u.isMain&&sc.pt&&PT[sc.pt.el].regen)u.st.regen=Math.max(u.st.regen||0,1);_oz2(sc,u);
   if(u.isMain&&sc.pt&&sc.pt.left>0&&u.hp>0){sc.pt.left--;if(sc.pt.left<=0)ptEnd(sc,u,'Hết thời hạn, pháp tướng tan đi.');}};}
+
+// ================= ĐỢT 7: TƯ CHẤT, NIỆM LỰC, THẦN LỰC CỦA ĐỐI THỦ =================
+// Tư chất: độ tinh thuần của linh căn (1–100), định sẵn lúc sinh. Linh căn là "mấy đường ống" dẫn linh khí,
+// tư chất là "ống to hay nhỏ": cùng là tam linh căn nhưng tư chất cao vẫn tu nhanh hơn hẳn.
+// Linh căn càng ít hệ thì tư chất thường càng cao. Hệ số tu luyện từ 0,7 (tư chất 0) tới 1,3 (tư chất 100).
+const TC_BIAS={thien:15,bien:12,song:6,tam:0,tu:-4,tap:-8};
+const TC_N=[[90,'Thiên tư'],[75,'Cực phẩm'],[55,'Thượng phẩm'],[35,'Trung phẩm'],[0,'Hạ phẩm']];
+function tuChat(){const r=G.run;if(!r)return 50;if(r.tuchat==null){const h=hashS('tuchat'+r.ten+r.kiep+(r.bornT||0));r.tuchat=clamp((h%41)+((h>>>7)%41)+10+(TC_BIAS[r.root.id]||0),5,100);}return r.tuchat;}
+function tcName(v){return (TC_N.find(x=>v>=x[0])||TC_N[4])[1];}
+function tcMult(v){return 0.7+v*0.006;}
+// Niệm lực: kho sức thần thức dùng trong trận, bằng ba lần chỉ số Thần thức. Vào trận thì đầy.
+// Dùng vật phẩm, tế pháp bảo, đánh thần thức đều tốn niệm lực. Dùng đồ lúc chuẩn bị trước trận thì không tốn.
+const NL_PILL=10,NL_DD=15,NL_MIND=20;
+{const _S7=S;S=function(){const s=_S7();if(G.run){s.tuchat=tuChat();s.tvM*=tcMult(s.tuchat);s.nl=Math.round(s.than*3);}return s;};}
+{const _pu=playerUnit;playerUnit=function(){const u=_pu();const n=S().nl;u.nl=n;u.maxNl=n;return u;};}
+function nlOk(u,c){return u&&(u.maxNl==null||(u.nl||0)>=c);}
+function nlUse(u,c){if(u&&u.maxNl!=null)u.nl=Math.max(0,(u.nl||0)-c);}
+{const _pp7=playerPillAct;playerPillAct=function(i){const sc=G.run.scene;const u=readyPlayer(sc);if(u&&!u.dazed&&!nlOk(u,NL_PILL))return false;const ok=_pp7(i);if(ok&&u&&!u.dazed)nlUse(u,NL_PILL);return ok;};}
+{const _pd7=playerDD;playerDD=function(j,t){const u=readyPlayer(G.run.scene);if(!nlOk(u,NL_DD))return false;const ok=_pd7(j,t);if(ok)nlUse(u,NL_DD);return ok;};}
+// đòn thần thức: nay tốn niệm lực thay cho linh lực
+{const _pm7=playerMind;playerMind=function(t){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||u.dazed||!nlOk(u,NL_MIND))return false;const add=Math.ceil(u.maxMp*0.3);u.mp+=add;const ok=_pm7(t);if(ok)nlUse(u,NL_MIND);else u.mp-=add;return ok;};}
+// Thần lực của đối thủ: cũng nạp khi đánh trúng hoặc bị trúng. Đầy thì hiển hóa pháp tướng theo hệ của nó,
+// lượt sau dồn hết vào một đòn tối thượng (uy lực ×1,6), đánh xong pháp tướng tan, thần lực về 0.
+{const _oh7=onHit;onHit=function(sc,u,t,d,crit,blocked,sk){_oh7(sc,u,t,d,crit,blocked,sk);if(d<=0||sc.kiep)return;
+  const add=(x,v)=>{if(x&&x.side==='B'&&!x.immune&&x.hp>0&&!x.fpt)x.than=Math.min(100,(x.than||0)+v);};add(t,12);add(u,9);};}
+function foePtStart(sc,u){const P=PT[u.el]||PT.vo;u.fpt={n:P.n,el:PT[u.el]?u.el:'vo',undo:{atk:u.atk,matk:u.matk,def:u.def,crit:u.crit}};
+  if(P.atk){u.atk=Math.round(u.atk*(1+P.atk));u.matk=Math.round((u.matk||u.atk)*(1+P.atk));}if(P.def)u.def=Math.round(u.def*(1+P.def));if(P.crit)u.crit=(u.crit||5)+P.crit;
+  if(P.block)u.st.block=(u.st.block||0)+Math.round(u.max*P.block);if(P.evade)u.st.evade=(u.st.evade||0)+P.evade;
+  clog(sc,`${u.name} thần lực viên mãn! ${P.n} hiển hóa sau lưng nó.`,'en');cfx(sc,{k:'ult',el:u.fpt.el,n:u.name+' · '+P.n});sc.rev=(sc.rev||0)+1;}
+function foePtEnd(sc,u){const o=u.fpt&&u.fpt.undo;if(!o)return;u.atk=o.atk;u.matk=o.matk;u.def=o.def;u.crit=o.crit;u.fpt=null;u.than=0;u._ult=0;clog(sc,`Pháp tướng của ${u.name} tan đi.`,'fl');sc.rev=(sc.rev||0)+1;}
+{const _ai7=aiAct;aiAct=function(sc,u){
+  if(u&&u.side==='B'&&u.hp>0&&!u.immune&&!u.dazed&&!sc.kiep&&!sc.spar){
+    if(u.fpt)u._ult=1;else if((u.than||0)>=100)foePtStart(sc,u);}
+  return _ai7(sc,u);};}
+{const _rs7=resolveSkill;resolveSkill=function(sc,u,sk,lv,tg,qm,offs){
+  if(u&&u._ult&&u.fpt&&sk&&sk.fx&&sk.fx.p){u._ult=0;cfx(sc,{k:'strike',el:u.fpt.el,n:sk.n});clog(sc,`${u.name} dồn hết thần uy vào một đòn: ${sk.n}!`,'en');
+    sk=Object.assign({},sk,{fx:Object.assign({},sk.fx,{p:sk.fx.p*1.6})});const res=_rs7(sc,u,sk,lv,tg,qm,offs);foePtEnd(sc,u);return res;}
+  return _rs7(sc,u,sk,lv,tg,qm,offs);};}

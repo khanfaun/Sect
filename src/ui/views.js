@@ -14,6 +14,7 @@ function distCardHTML(c){const g=geo(),I=hexInfo(c),r=G.run;
    <div class="nc-kv"><div><small>Địa thế</small><b>${esc(ter.join(', '))}</b></div><div><small>Trấn giữ</small><b>${luc?esc(placeMeta(luc).luc):'Chưa rõ'}</b></div></div>
    <p class="nc-d sm" style="-webkit-line-clamp:3">${kn.length?'Nơi đã biết ('+kn.length+'/'+all.length+'): '+esc(kn.map(n=>n.name).join(', ')):'Chưa biết nơi nào trong quận này'+(all.length?' (nghe nói có '+all.length+' nơi).':'.')}</p>
    <p class="nc-d sm">Ô đang chọn: ${esc(I.ter.toLowerCase())}, đi qua tốn ${numVN(TER_COST[g.ter[c]])} lần đồng bằng.</p></div>`;}
+function hudIsOpen(){return G.run&&G.run.scene?!!UI.hudScene:UI.hudOpen;}
 function hudHTML(){
   const r=G.run,s=S(),t=W().t;const left=s.life-r.age;const warn=left<s.life*0.12;const pa=PART[partOf(t)];
   const row=(n,cur,max,cls,txt,tip)=>`<div class="hrow"${ta(tip)}><span class="hn">${sib(n)}${n}</span>${bar(cur,max,cls)}<span class="hv">${txt}</span></div>`;
@@ -22,13 +23,14 @@ function hudHTML(){
   const av=assetImg('hero','me',`<span class="av-txt">${esc((r.ten.split(' ').pop()||'?')[0])}</span>`);
   let h=`<div class="hud-top"><button class="hud-av" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Nhân vật: căn cơ, túi đồ, sở học, kỹ năng')}>${av}</button>
    <div class="hud-id" data-act="hud"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="hud-clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])} id="clk">${clkStr(t)}</small><small>${sectText()}</small></div>
-   ${UI.hudOpen?'':`<span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span>`}<span class="hud-tg" data-act="hud">${ic(UI.hudOpen?'up':'down')}</span></div>`;
-  if(UI.hudOpen){
+   ${hudIsOpen()?'':`<span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span>`}<span class="hud-tg" data-act="hud">${ic(hudIsOpen()?'up':'down')}</span></div>`;
+  if(hudIsOpen()){
     h+=`<div class="hud-body">${row('Tu vi',r.tv,100,'tv',Math.floor(r.tv)+'%','Đủ 100% thì có thể đột phá ở nơi có động phủ')}
      ${row('Khí huyết',r.hp,s.maxHp,'hp',r.hp+' / '+s.maxHp,'Về 0 là chết')}
      ${row('Linh lực',r.mp,s.maxMp,'mp',r.mp+' / '+s.maxMp,'Dùng để thi triển pháp thuật')}
      ${row('Thọ',r.age,s.life,warn?'life warn':'life',Math.floor(r.age)+' / '+s.life,'Tuổi / thọ nguyên. Đột phá để sống lâu hơn.'+(warn?'\nThọ nguyên sắp cạn!':''))}
-     <div class="hline"><span class="hn">${sib('Linh thạch')}Linh thạch</span>${stoneHTML(r.st)}${hurt}${r.tamma>0?` · <span class="${r.tamma>=60?'bad':''}"${ta('Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình')}>Tâm ma ${r.tamma}</span>`:''}</div>
+     ${row('Tâm ma',r.tamma,100,r.tamma>=60?'tm warn':'tm',r.tamma+' / 100','Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình. Bế quan, Định Thần Đan giúp giảm.')}
+     <div class="hline"><span class="hn">${sib('Linh thạch')}Linh thạch</span>${stoneHTML(r.st)}${hurt}<span class="grow"></span><small class="hint"${ta('Tuổi hiện tại và số năm thọ nguyên còn lại')}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm</small></div>
      </div>`;
   }
   return h;

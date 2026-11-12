@@ -719,6 +719,39 @@ b,strong,h1,h2,h3,h4,th,.kr b,.kv b,.hud-id .rl,.stone,.lc-n,.grp,.sgrp,.f-n b,.
 .nc .nc-d{margin-top:8px;font-size:.86em;-webkit-line-clamp:3}
 .nc-tags{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:6px;font-size:.74em;color:var(--ink3)}.nc-tags span::before{content:"· "}
 .nc .nc-b{margin-top:12px}.nc .nc-b .btn{min-height:44px;flex:1}
+/* ===== đợt 7: một phông duy nhất, chữ nhỏ lại một chút ===== */
+:root{--fs:14px}:root[data-font=l]{--fs:15.5px}:root[data-font=xl]{--fs:17px}
+body *:not(.title h1){font-family:var(--font)!important}
+body *{font-weight:400!important}
+.btn.pri,.btn.big,.title h1,.fx-num b,.cine-txt b,.dodge2,.dodge-ov p,.dot,.at-on,.alv{font-weight:500!important}
+.win-h h2,.sc-h h2,.nc-tt b,.place .sc-h h2,.mbox h3{letter-spacing:.01em}
+.win-h h2{font-size:1.25em}.sc-h h2{font-size:1.2em}.place .sc-h h2{font-size:1.4em}.nc-tt b{font-size:1.3em}
+.hud-id .nm{font-size:1.05em}.hud-id .rl{color:var(--ink)}
+.kr b,.kv b{color:var(--ink)}.kr span,.kv span{color:var(--ink2)}
+.sgrp{color:var(--ink);font-size:1em;letter-spacing:.02em}
+/* chữ đang quá nhỏ: giữ tối thiểu */
+.nv{font-size:10px}.nc-eb,.pl-kv small,.nc-kv2 small,.place .grp{font-size:10px!important}.lnk{font-size:10.5px}.tabs button{font-size:11px}
+.grp{font-size:10.5px}
+/* tab căn cơ */
+.lc2{display:inline-flex;flex-direction:column;align-items:flex-end;line-height:1.3;text-align:right}.lc2 small{font-size:.86em;color:var(--ink2)}
+.cbstat summary{list-style:none;cursor:pointer;display:flex;align-items:center}.cbstat summary::-webkit-details-marker{display:none}
+.cbstat summary small{margin-left:auto;font-size:.72em;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.cbstat summary::after{display:none}
+/* thanh tâm ma, niệm lực, thần lực địch */
+.hb.tm i{background:var(--vio)}.cbar.nl i{background:#7a63b8}.cbar.th i{background:#f08a1c}.cbar.th.burn i{background:#ff6a1c;box-shadow:0 0 6px #ff9a2e}
+.u-av.fpt{box-shadow:0 0 0 2px #ff9a2e,0 0 14px #ff9a2e}
+.u-av .flame{position:absolute;inset:-6px;pointer-events:none}
+/* chuẩn bị trước trận */
+.cbprep .sc-b{padding-top:4px}
+.pp-h{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin:14px 0 6px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+.pp-sides{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.pp-vs{align-self:center;font-size:.8em;letter-spacing:.2em;text-transform:uppercase;color:var(--seal);padding-top:30px}
+.pp-u{display:flex;gap:8px;align-items:flex-start;padding:6px 0}.pp-u .u-av{width:40px;height:40px;flex:none;border-radius:50%;overflow:hidden;display:grid;place-items:center;border:1px solid var(--line);font-size:1.3em}
+.pp-t{min-width:0;flex:1}.pp-n{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pp-t>small{display:block;color:var(--ink3);font-size:.8em}
+.pp-st{display:flex;flex-direction:column;margin-top:4px;font-size:.84em}.pp-st span{display:flex;justify-content:space-between;gap:6px}.pp-st small{color:var(--ink3)}
+.pp-kn{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}.pp-kn>div{min-width:0}.pp-kn small{display:block;font-size:.76em;color:var(--ink3)}.pp-kn span{display:block;font-size:.9em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-act{display:flex;gap:8px;margin:14px 0 4px}.pp-act .btn{flex:1}
+.cbprep .sc-f .btn.big{min-width:60%}
 
 </style>
 </head>
@@ -4873,6 +4906,44 @@ function playerUlt(){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||u.dazed
 {const _oz2=onZero;onZero=function(sc,u){if(u.isMain&&sc.pt&&PT[sc.pt.el].regen)u.st.regen=Math.max(u.st.regen||0,1);_oz2(sc,u);
   if(u.isMain&&sc.pt&&sc.pt.left>0&&u.hp>0){sc.pt.left--;if(sc.pt.left<=0)ptEnd(sc,u,'Hết thời hạn, pháp tướng tan đi.');}};}
 
+// ================= ĐỢT 7: TƯ CHẤT, NIỆM LỰC, THẦN LỰC CỦA ĐỐI THỦ =================
+// Tư chất: độ tinh thuần của linh căn (1–100), định sẵn lúc sinh. Linh căn là "mấy đường ống" dẫn linh khí,
+// tư chất là "ống to hay nhỏ": cùng là tam linh căn nhưng tư chất cao vẫn tu nhanh hơn hẳn.
+// Linh căn càng ít hệ thì tư chất thường càng cao. Hệ số tu luyện từ 0,7 (tư chất 0) tới 1,3 (tư chất 100).
+const TC_BIAS={thien:15,bien:12,song:6,tam:0,tu:-4,tap:-8};
+const TC_N=[[90,'Thiên tư'],[75,'Cực phẩm'],[55,'Thượng phẩm'],[35,'Trung phẩm'],[0,'Hạ phẩm']];
+function tuChat(){const r=G.run;if(!r)return 50;if(r.tuchat==null){const h=hashS('tuchat'+r.ten+r.kiep+(r.bornT||0));r.tuchat=clamp((h%41)+((h>>>7)%41)+10+(TC_BIAS[r.root.id]||0),5,100);}return r.tuchat;}
+function tcName(v){return (TC_N.find(x=>v>=x[0])||TC_N[4])[1];}
+function tcMult(v){return 0.7+v*0.006;}
+// Niệm lực: kho sức thần thức dùng trong trận, bằng ba lần chỉ số Thần thức. Vào trận thì đầy.
+// Dùng vật phẩm, tế pháp bảo, đánh thần thức đều tốn niệm lực. Dùng đồ lúc chuẩn bị trước trận thì không tốn.
+const NL_PILL=10,NL_DD=15,NL_MIND=20;
+{const _S7=S;S=function(){const s=_S7();if(G.run){s.tuchat=tuChat();s.tvM*=tcMult(s.tuchat);s.nl=Math.round(s.than*3);}return s;};}
+{const _pu=playerUnit;playerUnit=function(){const u=_pu();const n=S().nl;u.nl=n;u.maxNl=n;return u;};}
+function nlOk(u,c){return u&&(u.maxNl==null||(u.nl||0)>=c);}
+function nlUse(u,c){if(u&&u.maxNl!=null)u.nl=Math.max(0,(u.nl||0)-c);}
+{const _pp7=playerPillAct;playerPillAct=function(i){const sc=G.run.scene;const u=readyPlayer(sc);if(u&&!u.dazed&&!nlOk(u,NL_PILL))return false;const ok=_pp7(i);if(ok&&u&&!u.dazed)nlUse(u,NL_PILL);return ok;};}
+{const _pd7=playerDD;playerDD=function(j,t){const u=readyPlayer(G.run.scene);if(!nlOk(u,NL_DD))return false;const ok=_pd7(j,t);if(ok)nlUse(u,NL_DD);return ok;};}
+// đòn thần thức: nay tốn niệm lực thay cho linh lực
+{const _pm7=playerMind;playerMind=function(t){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||u.dazed||!nlOk(u,NL_MIND))return false;const add=Math.ceil(u.maxMp*0.3);u.mp+=add;const ok=_pm7(t);if(ok)nlUse(u,NL_MIND);else u.mp-=add;return ok;};}
+// Thần lực của đối thủ: cũng nạp khi đánh trúng hoặc bị trúng. Đầy thì hiển hóa pháp tướng theo hệ của nó,
+// lượt sau dồn hết vào một đòn tối thượng (uy lực ×1,6), đánh xong pháp tướng tan, thần lực về 0.
+{const _oh7=onHit;onHit=function(sc,u,t,d,crit,blocked,sk){_oh7(sc,u,t,d,crit,blocked,sk);if(d<=0||sc.kiep)return;
+  const add=(x,v)=>{if(x&&x.side==='B'&&!x.immune&&x.hp>0&&!x.fpt)x.than=Math.min(100,(x.than||0)+v);};add(t,12);add(u,9);};}
+function foePtStart(sc,u){const P=PT[u.el]||PT.vo;u.fpt={n:P.n,el:PT[u.el]?u.el:'vo',undo:{atk:u.atk,matk:u.matk,def:u.def,crit:u.crit}};
+  if(P.atk){u.atk=Math.round(u.atk*(1+P.atk));u.matk=Math.round((u.matk||u.atk)*(1+P.atk));}if(P.def)u.def=Math.round(u.def*(1+P.def));if(P.crit)u.crit=(u.crit||5)+P.crit;
+  if(P.block)u.st.block=(u.st.block||0)+Math.round(u.max*P.block);if(P.evade)u.st.evade=(u.st.evade||0)+P.evade;
+  clog(sc,`${u.name} thần lực viên mãn! ${P.n} hiển hóa sau lưng nó.`,'en');cfx(sc,{k:'ult',el:u.fpt.el,n:u.name+' · '+P.n});sc.rev=(sc.rev||0)+1;}
+function foePtEnd(sc,u){const o=u.fpt&&u.fpt.undo;if(!o)return;u.atk=o.atk;u.matk=o.matk;u.def=o.def;u.crit=o.crit;u.fpt=null;u.than=0;u._ult=0;clog(sc,`Pháp tướng của ${u.name} tan đi.`,'fl');sc.rev=(sc.rev||0)+1;}
+{const _ai7=aiAct;aiAct=function(sc,u){
+  if(u&&u.side==='B'&&u.hp>0&&!u.immune&&!u.dazed&&!sc.kiep&&!sc.spar){
+    if(u.fpt)u._ult=1;else if((u.than||0)>=100)foePtStart(sc,u);}
+  return _ai7(sc,u);};}
+{const _rs7=resolveSkill;resolveSkill=function(sc,u,sk,lv,tg,qm,offs){
+  if(u&&u._ult&&u.fpt&&sk&&sk.fx&&sk.fx.p){u._ult=0;cfx(sc,{k:'strike',el:u.fpt.el,n:sk.n});clog(sc,`${u.name} dồn hết thần uy vào một đòn: ${sk.n}!`,'en');
+    sk=Object.assign({},sk,{fx:Object.assign({},sk.fx,{p:sk.fx.p*1.6})});const res=_rs7(sc,u,sk,lv,tg,qm,offs);foePtEnd(sc,u);return res;}
+  return _rs7(sc,u,sk,lv,tg,qm,offs);};}
+
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
 const $=s=>document.querySelector(s);
@@ -4972,7 +5043,7 @@ const ICP={
   seat:'M12 6a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM7 13c0-3 2-5 5-5s5 2 5 5M3 20c3-4 6-5 9-5s6 1 9 5M7 13l-2 4M17 13l2 4',
 };
 function ib(n,c){return `<span class="ib${c?' ib-'+c:''}">${ic(n)}</span>`;}
-const STAT_IC={'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['eye','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
+const STAT_IC={'Tư chất':['gem','gold'],'Tốc độ tu':['seat','acc'],'ST chí mạng':['bolt','seal'],'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
 function sib(label){const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
 function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICP[n]||ICP.info}"/></svg>`;}
 
@@ -5324,6 +5395,7 @@ function distCardHTML(c){const g=geo(),I=hexInfo(c),r=G.run;
    <div class="nc-kv"><div><small>Địa thế</small><b>${esc(ter.join(', '))}</b></div><div><small>Trấn giữ</small><b>${luc?esc(placeMeta(luc).luc):'Chưa rõ'}</b></div></div>
    <p class="nc-d sm" style="-webkit-line-clamp:3">${kn.length?'Nơi đã biết ('+kn.length+'/'+all.length+'): '+esc(kn.map(n=>n.name).join(', ')):'Chưa biết nơi nào trong quận này'+(all.length?' (nghe nói có '+all.length+' nơi).':'.')}</p>
    <p class="nc-d sm">Ô đang chọn: ${esc(I.ter.toLowerCase())}, đi qua tốn ${numVN(TER_COST[g.ter[c]])} lần đồng bằng.</p></div>`;}
+function hudIsOpen(){return G.run&&G.run.scene?!!UI.hudScene:UI.hudOpen;}
 function hudHTML(){
   const r=G.run,s=S(),t=W().t;const left=s.life-r.age;const warn=left<s.life*0.12;const pa=PART[partOf(t)];
   const row=(n,cur,max,cls,txt,tip)=>`<div class="hrow"${ta(tip)}><span class="hn">${sib(n)}${n}</span>${bar(cur,max,cls)}<span class="hv">${txt}</span></div>`;
@@ -5332,13 +5404,14 @@ function hudHTML(){
   const av=assetImg('hero','me',`<span class="av-txt">${esc((r.ten.split(' ').pop()||'?')[0])}</span>`);
   let h=`<div class="hud-top"><button class="hud-av" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Nhân vật: căn cơ, túi đồ, sở học, kỹ năng')}>${av}</button>
    <div class="hud-id" data-act="hud"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="hud-clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])} id="clk">${clkStr(t)}</small><small>${sectText()}</small></div>
-   ${UI.hudOpen?'':`<span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span>`}<span class="hud-tg" data-act="hud">${ic(UI.hudOpen?'up':'down')}</span></div>`;
-  if(UI.hudOpen){
+   ${hudIsOpen()?'':`<span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span>`}<span class="hud-tg" data-act="hud">${ic(hudIsOpen()?'up':'down')}</span></div>`;
+  if(hudIsOpen()){
     h+=`<div class="hud-body">${row('Tu vi',r.tv,100,'tv',Math.floor(r.tv)+'%','Đủ 100% thì có thể đột phá ở nơi có động phủ')}
      ${row('Khí huyết',r.hp,s.maxHp,'hp',r.hp+' / '+s.maxHp,'Về 0 là chết')}
      ${row('Linh lực',r.mp,s.maxMp,'mp',r.mp+' / '+s.maxMp,'Dùng để thi triển pháp thuật')}
      ${row('Thọ',r.age,s.life,warn?'life warn':'life',Math.floor(r.age)+' / '+s.life,'Tuổi / thọ nguyên. Đột phá để sống lâu hơn.'+(warn?'\nThọ nguyên sắp cạn!':''))}
-     <div class="hline"><span class="hn">${sib('Linh thạch')}Linh thạch</span>${stoneHTML(r.st)}${hurt}${r.tamma>0?` · <span class="${r.tamma>=60?'bad':''}"${ta('Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình')}>Tâm ma ${r.tamma}</span>`:''}</div>
+     ${row('Tâm ma',r.tamma,100,r.tamma>=60?'tm warn':'tm',r.tamma+' / 100','Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình. Bế quan, Định Thần Đan giúp giảm.')}
+     <div class="hline"><span class="hn">${sib('Linh thạch')}Linh thạch</span>${stoneHTML(r.st)}${hurt}<span class="grow"></span><small class="hint"${ta('Tuổi hiện tại và số năm thọ nguyên còn lại')}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm</small></div>
      </div>`;
   }
   return h;
@@ -5593,8 +5666,8 @@ function unitCard(sc,u,pickMode,compact){
   const sub=u.sub||(foe?(sc.elite?'Tinh anh':sc.boss?'Thủ lĩnh':'Đối thủ'):'Đồng hành');
   let bars;
   if(u.immune)bars=`<small class="u-s">${sc.kiep?'Đạo '+Math.min(sc.kiep.n,sc.kiep.done+1)+'/'+sc.kiep.n+(sc.kiep.waves>1?' · đợt '+sc.kiep.wave:''):''}${sc.kiep&&sc.kiep.uy<1?' · uy '+Math.round(sc.kiep.uy*100)+'%':''}</small>`;
-  else bars=`<div class="brow"${ta('Khí huyết '+Math.max(0,Math.round(u.hp))+' / '+u.max)}>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}${compact?'':`<b>${Math.max(0,Math.round(u.hp))}</b>`}</div><div class="brow thin"${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}>${cBar(dlOf(u),100,'dl')}</div>`;
-  const av=`<span class="u-av${foe?'':' al'}"${compact?ta(u.name+'\n'+sub):''}>${uAvatar(u)}${phBadge(u)}</span>`;
+  else bars=`<div class="brow"${ta('Khí huyết '+Math.max(0,Math.round(u.hp))+' / '+u.max)}>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}${compact?'':`<b>${Math.max(0,Math.round(u.hp))}</b>`}</div><div class="brow thin"${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}>${cBar(dlOf(u),100,'dl')}</div>${foe?`<div class="brow thin"${ta(u.fpt?u.fpt.n+'\nLượt tới nó sẽ tung đòn tối thượng!':'Thần lực '+Math.round(u.than||0)+'%\nĐầy thì hiển hóa pháp tướng, lượt sau tung đòn tối thượng.')}>${cBar(u.fpt?100:(u.than||0),100,'th'+(u.fpt?' burn':''))}</div>`:''}`;
+  const av=`<span class="u-av${foe?'':' al'}${u.fpt?' fpt':''}"${compact?ta(u.name+'\n'+sub):''}>${uAvatar(u)}${phBadge(u)}${u.fpt?'<i class="flame"></i>':''}</span>`;
   if(compact)return `<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av}${bars}${stIcons(u.st)}</div>`;
   return `<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av}<div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${elSeal(u.el||'vo')} ${esc(sub)}</small></div>${bars}${stIcons(u.st)}</div></div>`;
 }
@@ -5610,6 +5683,7 @@ function meCard(sc,u){
    <div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${esc(realmLabel())}</small></div>
     <div class="brow"${ta('Khí huyết')}><span class="bl">${ic('heart')}</span>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}<b>${Math.max(0,Math.round(u.hp))} / ${u.max}</b></div>
     <div class="brow"${ta('Linh lực')}><span class="bl">${ic('drop')}</span>${cBar(u.mp,u.maxMp,'mp')}<b>${Math.round(u.mp)} / ${u.maxMp}</b></div>
+    <div class="brow"${ta('Niệm lực: sức thần thức trong trận\nDùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.\nVào trận thì đầy.')}><span class="bl">${ic('eye')}</span>${cBar(u.nl||0,u.maxNl||1,'nl')}<b>${Math.round(u.nl||0)} / ${u.maxNl||0}</b></div>
     <div class="brow2"><span${ta('Thể lực '+Math.round(u.tl)+'%\nNé tốn 25%, đỡ được đòn tốn 30%.\nHồi 20% mỗi khi về mốc đầu')}><i class="bt">Thể lực</i>${cBar(u.tl,100,'tl')}</span><span${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt, rồi hồi đầy.')}><i class="bt">Định lực</i>${cBar(dlOf(u),100,'dl')}</span></div>
     ${stIcons(u.st)}</div></div>`;
 }
@@ -5643,12 +5717,12 @@ function vCombat(sc){
       const btn=(id,sk,lv,tip)=>{const c=skillCost(sk);const no=me.mp<c;const d=sk.fx.p?Math.round(sk.fx.p*100)+'% uy lực':'';return `<button class="sk${(sk.t!=null&&String(sk.id||'')[0]!=='_')?' qk':''}" data-act="skill" data-arg="${id}"${no?' disabled':''} style="${(sk.t!=null&&String(sk.id||'')[0]!=='_')?pcs(sk.t):''}"${ta(tip||skillTip(sk,lv))}>${elSeal(sk.el)}<span class="sn"><span class="${(sk.t!=null&&String(sk.id||'')[0]!=='_')?'qt':''}">${esc(sk.n)}</span>${lv>1?' <i>'+'Ⅰ Ⅱ Ⅲ'.split(' ')[lv-1]+'</i>':''}<small>${[d,c?c+' linh lực':'',sk.fx.charge?'tụ lực':''].filter(Boolean).join(' · ')}</small></span></button>`;};
       const cp=r.pills.map((p,i)=>({p,i})).filter(x=>PILL[x.p.id].w!=='bt');const m=UI.menu;
       const back='<button class="sk mback" data-act="menu" data-arg=""><span class="sn">Quay lại</span></button>';
-      if(m==='atk'){h+='<div class="skills">'+btn('_atk',BASIC,1,'Đánh thường bằng chân khí\nKhông tốn linh lực');for(const id of atkSlots()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}if(mindArt()){const cost=Math.ceil(me.maxMp*0.3);h+=`<button class="sk" data-act="mind"${me.mp<cost?' disabled':''}${ta('Đánh vào thức hải đối phương.\nNiệm lực của ngươi '+S().than+': hơn đối thủ thì làm nó choáng.')}><span class="el">Thần</span><span class="sn">Thần Thức Thứ<small>${cost} linh lực · làm choáng</small></span></button>`;}(r.dd||[]).forEach((d,j)=>{const used=sc.ddUsed&&sc.ddUsed[j];h+=`<button class="sk" data-act="dd" data-arg="${j}"${used?' disabled':''}${ta('Tế '+d.rel.name+' từ đan điền ra đánh.\nMỗi trận một lần, không tốn linh lực.')}>${elSeal(d.rel.el||'vo')}<span class="sn" style="color:${PCOL[d.rel.tier||0]}">Tế ${esc(d.rel.name)}<small>${used?'đã dùng trận này':'uẩn dưỡng · mỗi trận một lần'}</small></span></button>`;});h+=back+'</div>';}
+      if(m==='atk'){h+='<div class="skills">'+btn('_atk',BASIC,1,'Đánh thường bằng chân khí\nKhông tốn linh lực');for(const id of atkSlots()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}if(mindArt()){h+=`<button class="sk" data-act="mind"${!nlOk(me,NL_MIND)?' disabled':''}${ta('Đánh vào thức hải đối phương.\nThần thức của ngươi '+S().than+': hơn đối thủ thì làm nó choáng.')}><span class="el">Thần</span><span class="sn">Thần Thức Thứ<small>${NL_MIND} niệm lực · làm choáng</small></span></button>`;}(r.dd||[]).forEach((d,j)=>{const used=sc.ddUsed&&sc.ddUsed[j];h+=`<button class="sk" data-act="dd" data-arg="${j}"${used||!nlOk(me,NL_DD)?' disabled':''}${ta('Tế '+d.rel.name+' từ đan điền ra đánh.\nMỗi trận một lần, không tốn linh lực.')}>${elSeal(d.rel.el||'vo')}<span class="sn" style="color:${PCOL[d.rel.tier||0]}">Tế ${esc(d.rel.name)}<small>${used?'đã dùng trận này':'uẩn dưỡng · mỗi trận một lần'}</small></span></button>`;});h+=back+'</div>';}
       else if(m==='def'){h+='<div class="skills">'+`<button class="sk" data-act="skill" data-arg="_block"${me.tl<TL_BLOCK?' disabled':''}${ta('Đỡ đòn: thủ thế, chạy dần từ mốc ra chiêu tới mốc phát lực.\nTrong quãng đó bị đánh thì đỡ được một lần: giảm khoảng 20–30% sát thương, tốn 30% thể lực.\nKhông ai đánh thì không có gì xảy ra.')}><span class="el">Đỡ</span><span class="sn">Đỡ đòn<small>30% thể lực</small></span></button>`;
         h+=btn('_guard',GUARD_SK,1,'Vận khí thủ thế\nĐược hộ thể và hồi 30% linh lực');for(const id of defSkills()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}
         h+=back+'</div>';}
-      else if(m==='bag'){h+=`<div class="skills">${cp.map(({p,i})=>`<button class="sk qk" data-act="cpill" data-arg="${i}" style="${pcs(p.q)}"${ta(pillTip(p.id,p.q))}><span class="el">${PILL[p.id].i}</span><span class="sn qt">${esc(PILL[p.id].n)}</span></button>`).join('')}${back}</div>${cp.length?'':'<p class="hint">Túi không có gì dùng được trong trận.</p>'}`;}
-      else h+=`<div class="skills main4"><button class="sk" data-act="menu" data-arg="atk"><span class="cbi">${ic('sword')}</span><span class="sn">Tấn công</span></button><button class="sk" data-act="menu" data-arg="def"><span class="cbi">${ic('shield')}</span><span class="sn">Phòng thủ</span></button><button class="sk" data-act="menu" data-arg="bag"${cp.length?'':' disabled'}><span class="cbi">${ic('bag')}</span><span class="sn">Túi đồ<small>${cp.length} món</small></span></button><button class="sk" data-act="skill" data-arg="_wait"${ta('Qua lượt: không làm gì, nhường lượt')}><span class="cbi">${ic('skip')}</span><span class="sn">Qua lượt</span></button></div>`;
+      else if(m==='bag'){h+=`<div class="skills">${cp.map(({p,i})=>`<button class="sk qk" data-act="cpill" data-arg="${i}"${nlOk(me,NL_PILL)?'':' disabled'} style="${pcs(p.q)}"${ta(pillTip(p.id,p.q)+'\nDùng trong trận tốn '+NL_PILL+' niệm lực')}><span class="el">${PILL[p.id].i}</span><span class="sn qt">${esc(PILL[p.id].n)}</span></button>`).join('')}${back}</div>${cp.length?'':'<p class="hint">Túi không có gì dùng được trong trận.</p>'}`;}
+      else h+=`<div class="skills main4"><button class="sk" data-act="menu" data-arg="atk"><span class="cbi">${ic('sword')}</span><span class="sn">Tấn công</span></button><button class="sk" data-act="menu" data-arg="def"><span class="cbi">${ic('shield')}</span><span class="sn">Phòng thủ</span></button><button class="sk" data-act="menu" data-arg="bag"${cp.length?'':' disabled'}><span class="cbi">${ic('bag')}</span><span class="sn">Túi đồ<small>${cp.length} món · ${NL_PILL} niệm lực</small></span></button><button class="sk" data-act="skill" data-arg="_wait"${ta('Qua lượt: không làm gì, nhường lượt')}><span class="cbi">${ic('skip')}</span><span class="sn">Qua lượt</span></button></div>`;
     }
   } else h+=`<p class="hint cwait">${sc.dodge?(sc.dodge.lit?'Lôi giáng! Chạm “Đỡ” đúng lúc vòng khép lại':'Đòn đánh tới! Chạm “Né” đúng lúc vòng khép lại'):sc.qte?'Chạm đúng lúc vạch vào vùng vàng':CFG.autoFight?'Đang tự đánh…':'…'}</p>`;
   h+='</div>';
@@ -5709,6 +5783,26 @@ function dodgePress(){
 }
 function qtePress(){const q=UI.qt;if(!q)return;const ph=((performance.now()-q.t0)/1200);const x=ph<0.5?ph*2:2-ph*2;UI.qt=null;qteResolve(qteMult(clamp(x,0,1)));after();}
 document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodgeOv')){e.preventDefault();dodgePress();}else if(e.target.closest('#qte')){e.preventDefault();qtePress();}},true);
+
+// ---------- chuẩn bị trước trận: xem hai phe, chỉnh chiêu, dùng đồ (không tốn niệm lực), rồi bấm Bắt đầu ----------
+{const _scU=startCombat;startCombat=function(spec,after){const res=_scU(spec,after);const sc=G.run&&G.run.scene;
+  if(sc&&sc.type==='combat'&&!sc.kiep&&!CFG.autoFight&&!UI.noPrep)sc.prep=1;return res;};}
+function prepUnitRow(u,me){const foe=u.side==='B';const sub=me?realmLabel():u.sub||(foe?'Đối thủ':'Đồng hành');
+  const st=me?[['Khí huyết',G.run.hp+' / '+S().maxHp],['Linh lực',G.run.mp+' / '+S().maxMp],['Niệm lực',S().nl]]:[['Khí huyết',Math.round(u.hp)+' / '+u.max],['Công',u.atk],['Thủ',u.def]];
+  return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><span class="pp-n">${esc(u.name)}</span><small>${elSeal(u.el||'vo')} ${esc(sub)}</small>
+   <div class="pp-st">${st.map(([a,b])=>`<span><small>${a}</small>${b}</span>`).join('')}</div></div></div>`;}
+function vCbPrep(sc){const r=G.run;const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B');
+  const cat=[['atk','Công'],['move','Thân pháp'],['def','Thủ'],['ult','Thần thông']];
+  const kn=r.kn||{};const cp=r.pills.filter(p=>PILL[p.id].w!=='bt').length;
+  let b=`<div class="pp-sides"><div><p class="pp-h">Phe ta</p>${A.map(u=>prepUnitRow(u,u.isMain)).join('')}</div><div><p class="pp-h">Phe địch</p>${B.map(u=>prepUnitRow(u,false)).join('')}</div></div>`;
+  b+=`<p class="pp-h">Chiêu thức đang gắn</p><div class="pp-kn">${cat.map(([c,n])=>`<div><small>${n}</small>${(kn[c]||[]).length?(kn[c]).map(id=>SK[id]?`<span>${elSeal(SK[id].el)} ${esc(SK[id].n)}</span>`:'').join(''):'<span class="hint">trống</span>'}</div>`).join('')}</div>`;
+  b+=`<div class="pp-act"><button class="btn" data-act="prepKn">${ic('scroll')} Chỉnh chiêu thức</button><button class="btn" data-act="prepBag">${ic('bag')} Túi đồ · ${cp} món</button></div>`;
+  b+=`<p class="hint">Dùng đồ lúc này không tốn niệm lực. Vào trận rồi, mỗi lần dùng tốn ${NL_PILL} niệm lực.</p>`;
+  return card('Sắp giao chiến',sc.en.n+(sc.boss?' · thủ lĩnh':sc.elite?' · tinh anh':''),b,{cls:'tall cbprep',foot:`<span class="grow"></span><button class="btn pri big" data-act="cbGo">Bắt đầu</button><span class="grow"></span>`});}
+SCENE_V.combat=vCbPrep;
+function prepGo(){const sc=G.run&&G.run.scene;if(!sc||!sc.prep)return;const me=mainUnit(sc),f=playerUnit();
+  for(const k of ['hp','max','mp','maxMp','atk','matk','def','crit','critDmg','hoTam','tp','cx','ne','hoi','skills','nl','maxNl','el'])me[k]=f[k];
+  sc.prep=0;UI.panel=null;UI.menu=null;sc.rev=(sc.rev||0)+1;}
 
 // ---------- hiệu ứng trận đấu: phần luật ghi sự kiện vào sc.fxq, ở đây lấy ra vẽ lên lớp #fx ----------
 const FXC={kim:['#fff1b8','#d9a520'],moc:['#d6f8bf','#3c9a52'],thuy:['#d6f1ff','#3d8ecf'],hoa:['#ffe58f','#f0521f'],tho:['#f0d9a8','#96682a'],loi:['#f6eaff','#9a5cf0'],bang:['#ecfcff','#5cc3e0'],phong:['#e6ffec','#5fb07c'],am:['#dccbff','#5a2d91'],phat:['#fff5c9','#e0a81c'],vo:['#ffffff','#b9b2a0']};
@@ -5771,26 +5865,30 @@ function pChar(){
   let b=tabsHTML('char',[['base','Căn cơ'],['bag','Túi đồ'],['hoc','Sở học'],['kn','Kỹ năng']],tab);
   if(tab==='base'){
     const og=ORIGIN.find(o=>o.id===r.origin),tr=TRAIT.find(t=>t.id===r.trait),R0=rootView(r.root);
+    const R1=ROOT.find(x=>x.id===r.root.id);const tc=s.tuchat;const left=Math.max(0,Math.floor(s.life-r.age));
+    const lcV=`<span class="lc2"><span>${r.root.els.map(elSeal).join(' ')}</span><small>${esc(R0.n)}</small></span>`;
     b+=`<div class="basegrid">`;
-    b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),kvRow('Mệnh cách',esc(tr.n),tr.d),kvRow('Nhân quả',karmaName(r.karma)+' ('+r.karma+')','Thiện ác đều có báo'),
+    b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),kvRow('Mệnh cách',esc(tr.n),tr.d),
+      kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
+      kvRow('Tư chất',tc+' · '+tcName(tc),'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
+      kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá'),kvRow('Khí vận',s.van,'Chí mạng, may mắn'),
+      kvRow('Nhân quả',karmaName(r.karma)+' ('+r.karma+')','Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
+    b+=sgBox('yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+Math.floor(r.tv)+'%'),
+      `<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${Math.floor(r.tv)}%</span></div>`,
+      kvRow('Tốc độ tu','+'+numVN(bqRate())+'% mỗi năm','Tốc độ khi bế quan. Phụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và nơi bế quan'),
+      kvRow('Đạo cơ',(r.dao||0)+' · '+QNAME[qOf(r.dao||0)],'Điểm đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'\nMốc kế tiếp: '+qNext(r.dao||0)+' điểm':'\nĐã đạt Thiên đạo')),
+      kvRow('Tâm ma',r.tamma,'Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
+      kvRow('Thần thức',s.than+' · tầm '+SENSE[r.realm]+' dặm','Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
+      kvRow('Niệm lực',s.nl,'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.'),
+      kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.'),
       kvRow('Cống hiến',r.ch||0,'Điểm cống hiến tông môn'),kvRow('Đã hạ',r.kills,'Số kẻ địch đã đánh bại')]);
-
-    b+=`<section class="sgbox"><h4 class="sgrp">${ib('spark','soft')}Tu vi</h4>`;
-    b+=`<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${Math.floor(r.tv)}%</span></div>`;
-    b+='</section>';
-    b+=sgBox('yin','Tu hành',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+Math.floor(r.tv)+'%'),
-      kvRow('Linh căn',r.root.els.map(elSeal).join(' ')+' '+esc(R0.n),ROOT.find(x=>x.id===r.root.id).d),
-      kvRow('Tu luyện','+'+numVN(bqRate())+'% mỗi năm','Tốc độ khi bế quan. Phụ thuộc linh căn, ngộ tính, Khí Hải'),
-      kvRow('Đạo cơ',(r.dao||0)+' · '+QNAME[qOf(r.dao||0)],'Điểm đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'\nMốc kế tiếp: '+qNext(r.dao||0)+' điểm':'\nĐã đạt Thiên đạo'))]);
-    b+=sgBox('walk','Hành tẩu',[kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.'),kvRow('Thần thức',SENSE[r.realm]+' dặm','Tầm nhìn trên bản đồ')]);
-    b+=sgBox('star','Thiên phú',[kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá'),kvRow('Khí vận',s.van,'Chí mạng, may mắn')],true);
-    b+=sgBox('heart','Sinh mệnh',[kvRow('Tuổi',Math.floor(r.age)+' / '+s.life,'Hết thọ nguyên là tọa hóa'),kvRow('Tâm ma',r.tamma,'Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
-      kvRow('Khí huyết',r.hp+' / '+s.maxHp,'Về 0 là chết'),kvRow('Linh lực',r.mp+' / '+s.maxMp,'Thi triển pháp thuật')],true);
-    b+=sgBox('sword','Công kích',[kvRow('Công vật lý',s.atk,'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',s.matk,'Dùng cho pháp thuật'),
+    b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl two">${[
+      kvRow('Khí huyết',r.hp+' / '+s.maxHp,'Về 0 là chết'),kvRow('Linh lực',r.mp+' / '+s.maxMp,'Thi triển pháp thuật'),
+      kvRow('Công vật lý',s.atk,'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',s.matk,'Dùng cho pháp thuật'),
       kvRow('Chí mạng',Math.round(s.crit)+'%','Tỉ lệ chí mạng'),kvRow('ST chí mạng',s.critDmg+'%','Sát thương khi chí mạng'),
-      kvRow('Chính xác',s.cx,'Đối phương né khó hơn'),kvRow('Niệm lực',s.than,'Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tăng theo cảnh giới, ngộ tính và tâm pháp.')],true);
-    b+=sgBox('shield','Phòng ngự',[kvRow('Thủ',s.def,'Giảm sát thương nhận vào'),kvRow('Hộ tâm',s.hoTam,'Giảm sát thương chí mạng nhận vào'),
-      kvRow('Né',s.ne,'Phải bấm Né đúng lúc mới phát huy hết'),kvRow('Thân pháp',s.tp,'Tốc độ chạy trên nửa đầu thanh hành động'),kvRow('Hồi phục',s.hoi,'Tốc độ trên nửa sau thanh hành động')],true);
+      kvRow('Chính xác',s.cx,'Đối phương né khó hơn'),kvRow('Thủ',s.def,'Giảm sát thương nhận vào'),
+      kvRow('Hộ tâm',s.hoTam,'Giảm sát thương chí mạng nhận vào'),kvRow('Né',s.ne,'Phải bấm Né đúng lúc mới phát huy hết'),
+      kvRow('Thân pháp',s.tp,'Tốc độ chạy trên nửa đầu thanh hành động'),kvRow('Hồi phục',s.hoi,'Tốc độ trên nửa sau thanh hành động')].join('')}</div></details>`;
     b+='</div>';
   }
   if(tab==='bag')b+=bagTabHTML();
@@ -6166,7 +6264,7 @@ function render(){
   let full='',hud='',mapui='',dock='',nav='',sheet='',panel='',modal='';
   try{
     if(G.screen==='map'&&!G.run)G.screen='title';
-    const inMap=G.screen==='map'&&!!G.run;const sc=inMap?G.run.scene:null;const cb=sc&&sc.type==='combat';
+    const inMap=G.screen==='map'&&!!G.run;const sc=inMap?G.run.scene:null;const cb=sc&&sc.type==='combat'&&!sc.prep;
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
     if(cb){UI.panel=null;}
     if(!inMap&&UI.modal)UI.modal=null;
@@ -6206,7 +6304,7 @@ function clockText(){const a=$('#clk');if(a)a.innerHTML=clkStr(W().t);}
 function loop(now){
   let dt=Math.min(1,(now-clkLast)/1000);clkLast=now;
   const r=G.run;
-  if(r&&r.scene&&r.scene.type==='combat'){try{combatFrame(now,dt);}catch(e){console.error(e);}}
+  if(r&&r.scene&&r.scene.type==='combat'&&!r.scene.prep){try{combatFrame(now,dt);}catch(e){console.error(e);}}
   else if(clockOn()){
     try{
       const sp=UI.speed||1;let redraw=false;
@@ -6244,7 +6342,8 @@ const ACT={
   pact:a=>{if(a==='bq'){UI.modal={k:'bq'};return;}if(a==='laibuon'||a==='tram'||a==='nhansu'||a==='conghien'){UI.modal={k:a};return;}if(a==='tinhthat'){G.bqRoom=true;UI.bqOpened=false;UI.modal={k:'bq'};return;}if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
   leave:()=>leavePlace(),
   pass:a=>passAct(a),
-  hud:()=>{UI.hudOpen=!UI.hudOpen;},
+  hud:()=>{if(G.run&&G.run.scene)UI.hudScene=!UI.hudScene;else UI.hudOpen=!UI.hudOpen;},
+  cbGo:()=>prepGo(),cbOpen:()=>{UI.cbOpen=!UI.cbOpen;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
   hudBq:()=>{G.bqRoom=false;openBq();},
   evMin:()=>{UI.evMin=true;},
   evBack:()=>{UI.evMin=false;},

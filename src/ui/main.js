@@ -11,7 +11,7 @@ function render(){
   let full='',hud='',mapui='',dock='',nav='',sheet='',panel='',modal='';
   try{
     if(G.screen==='map'&&!G.run)G.screen='title';
-    const inMap=G.screen==='map'&&!!G.run;const sc=inMap?G.run.scene:null;const cb=sc&&sc.type==='combat';
+    const inMap=G.screen==='map'&&!!G.run;const sc=inMap?G.run.scene:null;const cb=sc&&sc.type==='combat'&&!sc.prep;
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
     if(cb){UI.panel=null;}
     if(!inMap&&UI.modal)UI.modal=null;
@@ -51,7 +51,7 @@ function clockText(){const a=$('#clk');if(a)a.innerHTML=clkStr(W().t);}
 function loop(now){
   let dt=Math.min(1,(now-clkLast)/1000);clkLast=now;
   const r=G.run;
-  if(r&&r.scene&&r.scene.type==='combat'){try{combatFrame(now,dt);}catch(e){console.error(e);}}
+  if(r&&r.scene&&r.scene.type==='combat'&&!r.scene.prep){try{combatFrame(now,dt);}catch(e){console.error(e);}}
   else if(clockOn()){
     try{
       const sp=UI.speed||1;let redraw=false;
@@ -89,7 +89,8 @@ const ACT={
   pact:a=>{if(a==='bq'){UI.modal={k:'bq'};return;}if(a==='laibuon'||a==='tram'||a==='nhansu'||a==='conghien'){UI.modal={k:a};return;}if(a==='tinhthat'){G.bqRoom=true;UI.bqOpened=false;UI.modal={k:'bq'};return;}if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
   leave:()=>leavePlace(),
   pass:a=>passAct(a),
-  hud:()=>{UI.hudOpen=!UI.hudOpen;},
+  hud:()=>{if(G.run&&G.run.scene)UI.hudScene=!UI.hudScene;else UI.hudOpen=!UI.hudOpen;},
+  cbGo:()=>prepGo(),cbOpen:()=>{UI.cbOpen=!UI.cbOpen;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
   hudBq:()=>{G.bqRoom=false;openBq();},
   evMin:()=>{UI.evMin=true;},
   evBack:()=>{UI.evMin=false;},
