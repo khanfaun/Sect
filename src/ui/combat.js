@@ -60,7 +60,7 @@ function vCombat(sc){
   if(!sc.done&&injured()&&!sc.spar&&!sc.kiep)h+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   if(sc.done){
     const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong lôi kiếp':'Ngươi đã ngã xuống'}[sc.over];
-    return h+`<div class="cb-end ${sc.over}"><b>${t}</b>${goBtn('cont','Tiếp tục')}</div></section>`;
+    return h+`<div class="cb-end ${sc.over}"><b>${t}</b>${sc.llGain?`<span class="chip up">⚔ +${sc.llGain} lịch luyện</span>`:''}${goBtn('cont','Tiếp tục')}</div></section>`;
   }
   h+='<div class="cb-cmd">';
   if(rp&&!CFG.autoFight){
@@ -140,9 +140,11 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodg
 // ---------- chuẩn bị trước trận: xem hai phe, chỉnh chiêu, dùng đồ (không tốn niệm lực), rồi bấm Bắt đầu ----------
 {const _scU=startCombat;startCombat=function(spec,after){const res=_scU(spec,after);const sc=G.run&&G.run.scene;
   if(sc&&sc.type==='combat'&&!sc.kiep&&!UI.noPrep)sc.prep=1;return res;};}
-function prepUnitRow(u,me){const foe=u.side==='B';const sub=me?realmLabel():u.sub||(foe?'Đối thủ':'Đồng hành');
-  const st=me?[['Lực chiến',`<b class="lc-c">${fmtN(lucChien())}</b>`],['Khí huyết',G.run.hp+' / '+S().maxHp],['Linh lực',G.run.mp+' / '+S().maxMp],['Niệm lực',S().nl],['Công',Math.max(S().atk,S().matk)],['Thủ',S().def],['Thân pháp',S().tp]]:[['Lực chiến',`<b class="lc-c">${fmtN(lcCalc(u))}</b>`],['Khí huyết',Math.round(u.hp)+' / '+u.max],['Công',Math.max(u.atk,u.matk||0)],['Thủ',u.def],['Thân pháp',u.tp],['Chí mạng',Math.round(u.crit)+'%']];
-  return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><span class="pp-n">${esc(u.name)}</span><small>${elSeal(u.el||'vo')} ${esc(sub)}</small>
+function prepUnitRow(u,me){const foe=u.side==='B';const sub=me?realmLabel():u.sub||(foe?'Đối thủ':'Đồng hành');const S0=me?S():null;
+  const lc=me?lucChien():lcCalc(u);
+  const st=me?[['Khí huyết',G.run.hp+'/'+S0.maxHp],['Linh lực',G.run.mp+'/'+S0.maxMp],['Niệm lực',S0.nl],['Công',Math.max(S0.atk,S0.matk)],['Thủ',S0.def],['Thân pháp',S0.tp]]
+    :[['Khí huyết',Math.round(u.hp)+'/'+u.max],['Công',Math.max(u.atk,u.matk||0)],['Thủ',u.def],['Thân pháp',u.tp],['Chí mạng',Math.round(u.crit)+'%']];
+  return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}</span><b class="lc-c"${ta('Lực chiến')}>${ic('sword')}${fmtN(lc)}</b></div><small>${elSeal(u.el||'vo')} ${esc(sub)}</small>
    <div class="pp-st">${st.map(([a,b])=>`<span><small>${a}</small>${b}</span>`).join('')}</div></div></div>`;}
 function vCbPrep(sc){const r=G.run;const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B');
   const cat=[['atk','Công'],['move','Thân pháp'],['def','Thủ'],['ult','Thần thông']];

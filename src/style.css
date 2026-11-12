@@ -806,3 +806,25 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .bq-warn{border:1px solid color-mix(in srgb,var(--seal) 50%,transparent);background:color-mix(in srgb,var(--seal) 7%,var(--paper));padding:10px 12px;margin:8px 0;border-radius:var(--r)}
 .bq-warn p{margin:.3em 0;font-size:.9em}.bq-warn b{color:var(--seal)}
 .basegrid .hrow{grid-template-columns:7.4em 1fr 4em}
+/* ===== đợt 11 ===== */
+.bq-res{display:flex;align-items:baseline;justify-content:space-between;padding:10px 0 4px;border-top:1px solid var(--line);margin-top:8px}
+.bq-res small{color:var(--ink2)}.bq-res b{font-size:1.25em}
+.bq-ll{font-size:.86em;margin:4px 0 8px;padding:6px 10px;border-left:2px solid var(--line);color:var(--ink2)}
+.bq-ok{border-color:#2f8f4e}.bq-mid{border-color:#c99412;color:#8a6a0c}.bq-bad{border-color:var(--seal);color:var(--seal)}
+.cb-end .chip{align-self:center}
+.cb-bot.cb-ext{flex-wrap:nowrap;gap:4px;justify-content:center}
+.cb-ext .btn,.cb-ext .btn.sm{font-size:9.5px;letter-spacing:.05em;min-height:30px;padding:0 .55em;gap:.25em;flex:0 1 auto;min-width:0}
+.cb-ext .btn .ic{width:12px;height:12px}.cb-ext .burnw{flex:0 1 auto;min-width:0;display:flex}
+/* màn chuẩn bị gọn: hai phe xếp chồng trên điện thoại, chỉ số chia 3 cột */
+.pp-sides{grid-template-columns:1fr 1fr}
+.pp-nl{display:flex;align-items:baseline;justify-content:space-between;gap:6px}.pp-nl b{display:inline-flex;align-items:center;gap:3px;font-size:.84em;white-space:nowrap}.pp-nl .ic{width:12px;height:12px}
+.pp-st{display:grid;grid-template-columns:repeat(3,auto);gap:1px 12px;justify-content:start;margin-top:3px;font-size:.8em}
+.pp-st span{display:flex;flex-direction:column;gap:0;line-height:1.25}.pp-st small{font-size:.86em}
+.pp-u{padding:5px 0}.pp-u .u-av{width:34px;height:34px;font-size:1.1em}
+.pp-h{margin:10px 0 4px}
+@media (max-width:600px){.pp-sides{grid-template-columns:1fr;gap:0}.pp-kn{grid-template-columns:1fr 1fr;gap:4px 12px}.pp-act{margin:10px 0 2px}.pp-act .btn{min-height:36px;font-size:.66em}.cbprep .sc-f .btn.big{min-height:46px}.cbprep>.sc-b>.hint{font-size:.78em;margin:.3em 0}}
+/* máy tính: thẻ "Kiếp thứ" và màn chuẩn bị nằm giữa */
+@media (min-width:900px){#sheet:has(.intro),#sheet:has(.cbprep){left:50%;right:auto;transform:translateX(-50%);width:min(560px,92vw)}}
+/* màn thấp: bảng bế quan bỏ tranh để không che nút */
+@media (max-height:760px){.mbox.bq .art.mart{display:none}.mbox.bq{padding:12px 16px}}
+@media (min-width:900px){#sheet:has(.cbprep){justify-content:center}#sheet .scard.cbprep{height:auto;max-height:100%}}
