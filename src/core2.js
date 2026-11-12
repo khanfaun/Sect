@@ -149,7 +149,7 @@ function noteOf(id){const w=W();return w.notes&&w.notes[id]||'';}
 {const _agg=aggFx;aggFx=function(){const fx=_agg();chuFx(fx);petFx(fx);return fx;};}
 {const _sc=startCombat;startCombat=function(spec,after){
   const r=run2();const p=!(spec&&spec.kiep)&&petOut();let tmp=null;
-  if(p){const s=S();tmp={id:-7,ten:p.n,icon:p.i,el:p.el,pow:petPow(p),hp:Math.round(s.maxHp*petPow(p))};r.party=[tmp].concat((r.party||[]).slice(0,1),(r.party||[]).slice(1));}
+  if(p){const s=S();tmp={id:-7,ten:p.n,icon:p.i,el:p.el,pow:petPow(p),hp:Math.round(s.maxHp*petPow(p)),sub:'Yêu thú '+GIAI[clamp((p.lv||1)-1,0,GIAI.length-1)].toLowerCase()+' giai'};r.party=[tmp].concat((r.party||[]).slice(0,1),(r.party||[]).slice(1));}
   try{return _sc(spec,after);}finally{if(tmp)r.party=r.party.filter(x=>x!==tmp);}};}
 {const _fc=finishCombat;finishCombat=function(sc){
   _fc(sc);const r=run2();if(!r||sc.kiep)return;
@@ -2186,8 +2186,8 @@ function llFresh(){const r=G.run;if(!r)return;r.llP=[];r.llN=[];r.llSeen={};}
 // Đánh giá = chỉ số thật / sàn: dưới 0,7 rất kém · 0,7–0,9 kém · 0,9–1,25 bình thường · 1,25–1,7 tốt · từ 1,7 rất tốt.
 // Hệ thống vẫn tính bằng số; đánh giá chỉ để hiển thị.
 const RATE_T=[0.7,0.9,1.25,1.7];
-const RATE_W={luc:['Rất yếu','Yếu','Vừa','Mạnh','Rất mạnh'],toc:['Rất chậm','Chậm','Vừa','Nhanh','Rất nhanh'],muc:['Rất thấp','Thấp','Vừa','Cao','Rất cao'],
- ben:['Rất mỏng','Mỏng','Vừa','Dày','Rất dày'],xa:['Rất gần','Gần','Vừa','Xa','Rất xa']};
+const RATE_W={luc:['Rất yếu','Yếu','Bình thường','Mạnh','Rất mạnh'],toc:['Rất chậm','Chậm','Bình thường','Nhanh','Rất nhanh'],muc:['Rất thấp','Thấp','Bình thường','Cao','Rất cao'],
+ ben:['Rất mỏng','Mỏng','Bình thường','Dày','Rất dày'],xa:['Rất gần','Gần','Bình thường','Xa','Rất xa']};
 const RATE_COL=['#8d8672','#a5835a','var(--ink)','#3f8a4a','#b8902a'];
 // tốc độ tu, thổ nạp nhân dồn nhiều thứ (linh căn, tư chất, ngộ tính, khí vận) nên mốc rộng hơn
 const RATE_TK={bq:[0.6,0.85,1.4,2.3],thonap:[0.6,0.85,1.4,2.3]};
@@ -2226,7 +2226,7 @@ function btWord(p){return p<0.3?'Rất khó':p<0.5?'Khó':p<0.7?'Ngang tay':p<0.
 function partWord(v){const a=Math.abs(v);return (v>0?'▲ ':'▼ ')+(a<3?'ít':a<8?'vừa':'nhiều');}
 
 // tâm ma bằng chữ (không hiện số)
-function tmWord(v){return ['Rất thấp','Thấp','Vừa','Cao','Rất cao'][Math.min(4,Math.floor((v||0)/20))];}
+function tmWord(v){return ['Rất thấp','Thấp','Bình thường','Cao','Rất cao'][Math.min(4,Math.floor((v||0)/20))];}
 
 // ----- nhật ký trận không hiện số: mô tả mức trúng đòn bằng lời -----
 const NUM_VI=['không','một','hai','ba','bốn','năm','sáu','bảy','tám','chín','mười','mười một','mười hai','mười ba','mười bốn','mười lăm'];

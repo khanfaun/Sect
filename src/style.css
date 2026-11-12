@@ -1111,3 +1111,10 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 
 .pp-row2{display:flex;align-items:center;gap:10px;margin-top:4px}.pp-row2 .pp-bars{flex:1;min-width:0;margin-top:0;gap:8px}
 .pp-row2 .pp-lc{margin-top:0;flex:none;padding:1px 9px;gap:6px}.pp-row2 .pp-lc small{font-size:.66em}.pp-row2 .pp-lc .rt{font-size:.92em}
+/* thanh đầu: 4 ô đánh giá chia đều + linh thạch; chữ dài (Bình thường) vẫn vừa */
+.hud-stats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:2px!important;align-items:center}
+.hud-stats .hs{font-size:.66em!important;gap:3px!important;min-width:0;overflow:hidden;white-space:nowrap}.hud-stats .hs .ic{width:11px!important;height:11px!important}
+/* màn chuẩn bị trận: tiêu đề một hàng, tên địch dài thì cắt bớt để nút Tốc chiến không rớt dòng */
+.cbprep .sc-h{flex-wrap:nowrap}.cbprep .sc-h h2{white-space:nowrap;flex:none}.cbprep .sc-h small{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hud-stats{justify-items:stretch!important}.hud-stats .hs{display:flex!important;align-items:center;justify-content:flex-start}.hud-stats .hs.st{justify-content:flex-end}
+.hud-stats .hs.dt{width:auto;height:auto;border-radius:0;margin:0}

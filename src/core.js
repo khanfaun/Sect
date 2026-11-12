@@ -748,7 +748,7 @@ function applyE(e,v){
   if(e.shop)r.goShop=1;
   if(e.dropPill&&r.pills.length){const i=Math.floor(R()*r.pills.length);const p=r.pills.splice(i,1)[0];ch.push(chip(PILL[p.id].i,'mất '+PILL[p.id].n,'Đã trao đi','dn'));}
   if(e.party&&v&&v[e.party.k]){const c=addParty(v[e.party.k],e.party.days);if(c)ch.push(c);}
-  if(e.partyRv&&v&&v.rv){const c=addParty({ten:v.rv.ten,g:v.rv.hn==='nàng'?'nu':'nam'},e.partyRv,0.9);if(c)ch.push(c);}
+  if(e.partyRv&&v&&v.rv){const c=addParty({ten:v.rv.ten,g:v.rv.hn==='nàng'?'nu':'nam',realm:v.rv.realm},e.partyRv,0.9);if(c)ch.push(c);}
   if(e.partyP&&v&&v.p){const c=addParty({ten:v.p.ten,g:'nam'},e.partyP,0.7);if(c)ch.push(c);}
   if(e.nemDone)W().nemesis=null;
   if(e.entGone&&v&&v.eid!=null){const x=W().ents.find(z=>z.id===v.eid);if(x)removeEnt(x);}
@@ -1042,7 +1042,7 @@ function startCombat(spec,after){
 function partyUnit(p,id){
   const r=G.run,s=S();if(!p||p.hp<=0)return null;
   const m=p.pow||0.6;
-  return {realm:r.realm,matk:Math.round(s.matk*m),critDmg:150,hoTam:s.hoTam,id,side:'A',ctrl:'ai',ally:p.id,name:p.ten,icon:p.icon||'🧑',el:p.el||'vo',f:'nhan',hp:p.hp,max:Math.round(s.maxHp*m),mp:0,maxMp:0,atk:Math.round(s.atk*m),def:Math.round(s.def*m),tp:Math.round(s.tp*0.9),cx:s.cx,ne:Math.round(s.ne*0.9),hoi:s.hoi,crit:5,
+  return {realm:r.realm,sub:p.sub||(typeof realmName==='function'?realmName():REALM[r.realm]),matk:Math.round(s.matk*m),critDmg:150,hoTam:s.hoTam,id,side:'A',ctrl:'ai',ally:p.id,name:p.ten,icon:p.icon||'🧑',el:p.el||'vo',f:'nhan',hp:p.hp,max:Math.round(s.maxHp*m),mp:0,maxMp:0,atk:Math.round(s.atk*m),def:Math.round(s.def*m),tp:Math.round(s.tp*0.9),cx:s.cx,ne:Math.round(s.ne*0.9),hoi:s.hoi,crit:5,
     pat:['atk','atk','multi','block','heavy'],pi:0,st:{},pos:0,phase:'run',pending:null,waitSet:[],stunT:0,rec:1,chargeT:0};
 }
 const CHG_SLOW=0.6; // tụ lực, thủ thế: đoạn từ mốc giữa tới mốc phát lực chạy chậm lại còn 60%
@@ -2220,7 +2220,7 @@ function findCache(n){
 // ---------------- ĐỒNG ĐỘI TẠM THỜI ----------------
 function addParty(v,days,pow){
   const r=G.run;r.party=r.party||[];if(r.party.length>=2)return null;
-  const s=S();const p={id:(r.pid=(r.pid||0)+1),ten:v.ten,icon:v.g==='nu'?'👩':'🧑',hp:Math.round(s.maxHp*(pow||0.6)),pow:pow||0.6,until:W().t+(days||30)*HD,el:'vo'};
+  const s=S();const p={id:(r.pid=(r.pid||0)+1),ten:v.ten,icon:v.g==='nu'?'👩':'🧑',hp:Math.round(s.maxHp*(pow||0.6)),pow:pow||0.6,until:W().t+(days||30)*HD,el:'vo',sub:typeof v.realm==='number'?REALM[clamp(v.realm,0,5)]:typeof v.realm==='string'&&v.realm?v.realm:(typeof realmName==='function'?realmName():REALM[r.realm])};
   r.party.push(p);log(`${v.ten} đi cùng ngươi ${days||30} ngày.`);return chip('🤝',v.ten+' đồng hành','Đi cùng và chiến đấu bên ngươi '+(days||30)+' ngày','up');
 }
 
