@@ -37,6 +37,7 @@ function render(){
   const hd=document.getElementById('hud');document.getElementById('app').style.setProperty('--hudh',(hd&&!hd.hidden?hd.offsetHeight:0)+'px');
   const dl=document.getElementById('dlg');if(dl)dl.scrollTop=dl.scrollHeight;
   if(UI.plTop){UI.plTop=0;const pb=document.querySelector('#sheet .sc-b');if(pb)pb.scrollTop=0;}
+  {const tk=document.getElementById('plTalk');if(tk&&tk.dataset.n!==String(tk.scrollHeight)){tk.dataset.n=tk.scrollHeight;tk.scrollTop=tk.scrollHeight;}}
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
@@ -99,6 +100,7 @@ const ACT={
   evBack:()=>{UI.evMin=false;},
   destX:()=>{G.run.dest=null;},
   mount:id=>buyMount(id),
+  vehi:i=>{UI.modal={k:'vehi',i:+i};},tramBack:()=>{UI.modal={k:'tram'};},vehGo:x=>{const [i,md]=x.split(':');if(vehTake(+i,md))UI.modal={k:'tram'};},
   chGive:k=>chGive(k),
   chTrade:()=>chTrade(),
   legT:t=>{const h=Object.assign({},CFG.hideT||{});if(h[t])delete h[t];else h[t]=1;cfgSet('hideT',h);},
@@ -154,6 +156,10 @@ const ACT={
   prepGo:()=>prepStart(),
   btGo:()=>btContinue(),
   quest:i=>takeQuest(i),
+  qExp:id=>{UI.qOpen=UI.qOpen||{};UI.qOpen[id]=!UI.qOpen[id];},
+  qDrop:id=>{UI.modal={k:'qdrop',id};},qDropGo:id=>{UI.modal=null;questCancel(id);},
+  qNav:id=>{const q=G.run.quests.find(x=>x.id===id);if(!q)return;const n=nodeById(q.node);if(!n)return;if(Math.floor(n.id/100)!==G.run.region){note('Nơi ấy không ở vùng này.');return;}
+    UI.panel=null;if(n.fog>=1){UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else{UI.sel=null;Map2.focus(n.x,n.y);note('Nơi ấy còn chìm trong sương mù, chỉ biết đại khái ở quanh đây.');}},
   bsel:k=>buryToggle(k),
   buryGo:()=>buryItems(),
   autoDodge:v=>{const o=G.meta.opt=G.meta.opt||{};o.userDodge=v==='1';syncDodge();},

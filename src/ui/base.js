@@ -53,7 +53,7 @@ const ICP={
   bolt:'M13 2L4 14h7l-1 8 9-12h-7l1-8z',
   sun:'M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19',
   moon:'M20 14A8 8 0 019 4a8 8 0 1011 10z',
-  hour:'M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9',
+  hour:'M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0M12 7v5l3.2 2',
   bag:'M6 8h12l1 12H5L6 8zM9 8V6a3 3 0 016 0v2',
   hex:'M12 2l8.7 5v10L12 22l-8.7-5V7z',
   heart:'M12 20s-7-4.6-7-10.2A4.3 4.3 0 0112 7.2a4.3 4.3 0 017 2.6C19 15.4 12 20 12 20z',
@@ -98,16 +98,20 @@ const ICP={
 };
 function ib(n,c){return `<span class="ib${c?' ib-'+c:''}">${ic(n)}</span>`;}
 const STAT_IC={'Lịch luyện':['sword','gold'],'Thổ nạp':['wind','jade'],'Hiệu suất tu':['cycle','acc'],'Tư chất':['gem','gold'],'Tốc độ tu':['seat','acc'],'ST chí mạng':['bolt','seal'],'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
-function sib(label){const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
+function sib(label){if(label==='Linh thạch')return '<i class="rh sic"></i>';const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
 function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICP[n]||ICP.info}"/></svg>`;}
 
 // ---------- mẩu nhỏ dùng chung ----------
-function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}>${c.i==='💎'?'<i class="rh"></i>':c.i} ${esc(c.t)}</span>`).join('')}</div>`;}
+// mỗi loại một biểu tượng duy nhất: các biểu tượng cũ dạng emoji trong nhãn được đổi sang bộ biểu tượng nét mảnh
+const EMO_IC={'⏳':'hour','🏺':'ring','❤️':'heart','📖':'book','☯️':'yin','🤝':'people','💧':'drop','✨':'spark','⚗️':'flask','⚔':'sword','⚔️':'sword','🗡️':'sword','😈':'skull','🗺️':'pin','📜':'scroll','🏅':'medal','🎫':'flag','🍃':'clover','🍀':'clover','🌩️':'bolt','☁️':'sun','🛡️':'shield','🌀':'wind','🧠':'brain','🪷':'lotus','🌕':'moon'};
+function emoIc(e){if(e==='💎')return '<i class="rh"></i>';const k=EMO_IC[e];return k?ic(k):e;}
+function emoTxt(h){return String(h).replace(/💎/g,'<i class="rh"></i>').replace(/⏳/g,ic('hour'));}
+function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
 function elSeal(e){const E=EL[e]||EL.vo;return `<span class="el el-${e}"${ta('Hệ '+E.n+(KHAC[e]?'\nKhắc '+EL[KHAC[e]].n:''))}>${E.c}</span>`;}
 function bar(cur,max,cls){const p=Math.max(0,Math.min(100,cur/Math.max(1,max)*100));return `<div class="hb ${cls||''}"><i style="width:${p}%"></i></div>`;}
 function tabsHTML(key,list,cur){return `<div class="tabs">${list.map(([k,n])=>`<button data-act="tab" data-arg="${key}:${k}" class="${k===cur?'on':''}">${n}</button>`).join('')}</div>`;}
 function numVN(x){return String(Math.round(x*10)/10).replace('.',',');}
-function stoneHTML(v){return `<span class="stone"><i></i>${v}</span>`;}
+function stoneHTML(v){return `<span class="stone"><i class="rh"></i>${v}</span>`;}
 function win(title,body,o){o=o||{};return `<section class="win ${o.cls||''}"><header class="win-h"><h2>${title}</h2>${o.extra||''}${o.noClose?'':`<button class="xb" data-act="${o.close||'closePanel'}" aria-label="Đóng">${ic('close')}</button>`}</header><div class="win-b">${body}</div>${o.foot?`<footer class="win-f">${o.foot}</footer>`:''}</section>`;}
 function toastFlush(){const L=G.toasts;if(!L||!L.length)return;const box=$('#toast');if(!box)return;
   for(const t of L){const d=document.createElement('div');d.className='toast '+(t.c||'');d.textContent=t.t;box.appendChild(d);setTimeout(()=>d.remove(),3600);}

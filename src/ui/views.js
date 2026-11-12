@@ -103,7 +103,7 @@ function dockHTML(){
 function navHTML(){
   const r=G.run;const it=[['tong','flag','Tông môn'],['pets','paw','Linh thú'],['journal','book','Sổ tay'],['bonds','people','Giao tình'],['more','more','Thêm']];
   const dot={journal:r&&r.quests.some(q=>q.state==='open'),pets:r&&r.eggs&&r.eggs.length>0};
-  return it.map(([k,i,n])=>`<button class="nv${UI.panel===k?' on':''}" data-act="panel" data-arg="${k}">${ib(i)}<span>${n}</span>${dot[k]?'<i class="dot soft"></i>':''}</button>`).join('');
+  return it.map(([k,i,n])=>`<button class="nv${UI.panel===k?' on':''}" data-act="panel" data-arg="${k}">${ib(i)}<span>${n}</span>${dot[k]?`<i class="dot soft"${ta(k==='journal'?'Đang có nhiệm vụ chưa xong':'Có trứng linh thú đang ấp')}></i>`:''}</button>`).join('');
 }
 
 // ---------- các cảnh hiện đè lên bản đồ ----------
@@ -153,7 +153,7 @@ function vShop(sc){
   const r=G.run;const tab=UI.tab.shop||'buy';
   let b=`<p class="shop-top">${esc(sc.text)}</p>`+tabsHTML('shop',[['buy','Mua'],['svc','Việc khác']],tab);
   if(tab==='buy'){b+='<div class="grid">';sc.items.forEach((it,i)=>{const v=itemView(it);const no=it.sold||r.st<it.p;
-    b+=`<button class="cell qc${it.sold?' sold':''}" data-act="buy" data-arg="${i}"${no?' disabled':''} style="${v.t!=null?pcs(v.t):''}"${ta(v.tip||v.n)}><span class="c-i">${v.ic}</span><span class="c-n${v.t!=null?' qt':''}">${esc(v.n)}</span><span class="c-p">${it.sold?'đã mua':stoneHTML(it.p)}</span></button>`;});b+='</div><p class="hint">Chạm giữ một món để xem công dụng. Chạm để mua.</p>';}
+    b+=`<button class="cell qc${it.sold?' sold':''}" data-act="buy" data-arg="${i}"${no?' disabled':''} style="${v.t!=null?pcs(v.t):''}"${ta(v.tip||v.n)}><span class="c-i">${v.ic}</span><span class="c-n${v.t!=null?' qt':''}">${esc(v.n)}</span><span class="c-p">${it.sold?'hết hàng':stoneHTML(it.p)}</span>${!it.sold&&it.qty!=null?`<span class="c-q">còn ${it.qty}</span>`:''}</button>`;});b+=`</div><p class="hint">Chạm giữ một món để xem công dụng. Chạm để mua. Hàng mới sau ${durH(shopResetIn())}.</p>`;}
   else b+=`<div class="rows"><button class="row" data-act="heal"${sc.healed||r.st<sc.heal?' disabled':''}${ta('Hồi đầy khí huyết và linh lực')}><span class="r-i">🩹</span><span class="r-t"><b>Mời y sư trị thương</b><small>Hồi đầy khí huyết, linh lực</small></span><span class="r-x">${sc.healed?'xong':stoneHTML(sc.heal)}</span></button></div>`;
   return card('Phường thị',r.place.n,b,{cls:'tall',foot:`<span class="grow">Trong túi: ${stoneHTML(r.st)}</span>`+goBtn('next','Rời đi','', 'pri')});
 }
@@ -172,9 +172,9 @@ function vPlace(sc){
   const btn=a=>{const qa=a.a==='quyan'&&UI.confirm==='quyan';const x=VENUE_N[a.a]?`<span class="cx">${a.dis?'đang đóng cửa':'chọn việc'}</span>`:(a.x&&!/^(💎|linh thạch )/.test(a.x)?`<span class="cx">${esc(String(a.x).replace(/✨/g,'tu vi ').replace(/🌕/g,'thành công '))}</span>`:'')+(a.h&&!a.dis&&a.a!=='bt'?`<span class="cx tm"${ta('Thời gian sẽ trôi qua')}>${durH(a.h)}</span>`:'');
     return `<button class="ch${a.a==='bt'?' hl big':PNOW.includes(a.a)?' big':''}${a.a==='quyan'||a.dis?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="cn">${++k}.</span><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':(PL_N[a.a]&&a.l.length>PL_N[a.a].length+6?PL_N[a.a]:a.l))}</span>${x}</button>`;};
   let b=sc.venue&&VENUE_N[sc.venue]?venueHTML(n,sc.venue):'';
-  b+=`<div class="pl-desc${UI.descHide?' hide':''}"><div class="story"><p>${esc(sc.intro)}</p></div></div>`;
-  if(sc.msg.length)b+=`<div class="story">${sc.msg.map(m=>`<p class="new">${esc(m)}</p>`).join('')}</div>`;
-  b+=chipsHTML(sc.chips);
+  // lời kể: cảnh trí và chuyện vừa xảy ra cùng một kiểu chữ, nằm trong một khung cuộn riêng
+  const talk=(UI.descHide?[]:[sc.intro]).concat(sc.msg||[]);
+  if(talk.length||(sc.chips&&sc.chips.length))b+=`<div class="pl-talk" id="plTalk"><div class="story">${talk.map(m=>`<p>${esc(m)}</p>`).join('')}</div>${chipsHTML(sc.chips)}</div>`;
   const ents=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);const qs=r.quests.filter(q=>q.state==='open'&&q.node===n.id);
   const big=PNOW.map(by).filter(Boolean);
   if(big.length||ents.length||qs.length){b+=`<h3 class="grp big">${ib('flag','gold')}Chuyện lớn</h3><div class="choices">${big.map(btn).join('')}
@@ -194,7 +194,7 @@ function vPlace(sc){
 }
 function vPass(sc){
   const r=G.run;let b=`<div class="story"><p class="new">${esc(sc.text)}</p><p class="hint">Qua ải mất khoảng ${CROSS_M[sc.k]} tháng đường.</p></div><div class="choices">`;let k=1;
-  for(const o of passOpts())b+=choiceBtn((k++)+'.','pass',o.a,esc(o.l),o.x?`<span class="cx">${esc(String(o.x).replace(/💎/g,'linh thạch '))}</span>`:'',{dis:!o.ok,tip:o.tip});
+  for(const o of passOpts())b+=choiceBtn((k++)+'.','pass',o.a,esc(o.l),o.x?`<span class="cx">${emoTxt(esc(String(o.x)))}</span>`:'',{dis:!o.ok,tip:o.tip});
   return card('Quan ải → '+REG[sc.k].n,r.place.n,b+'</div>',{foot:goBtn('next','Quay lại','','')});
 }
 function vPrep(sc){
@@ -216,8 +216,11 @@ function vBtres(sc){
 function vBoard(sc){
   const r=G.run,n=nodeById(sc.id);const open=r.quests.filter(q=>q.state==='open').length;
   let b=`<div class="story"><p>Mấy tờ cáo thị dán chồng lên nhau, giấy đã ngả vàng. Nhận việc thì phải xong trước hạn, thất hứa thì mang tiếng.</p></div><div class="choices">`;
-  n.board.list.forEach((q,i)=>{b+=choiceBtn((i+1)+'.','quest',i,esc(q.text),`<span class="cx tm">${q.days} ngày</span><span class="cx">${stoneHTML(q.reward.st)}</span>`,{dis:q.taken||open>=3,tip:q.kind==='diet'?'Tới nơi rồi thăm dò để tìm mục tiêu':'Chỉ cần tới nơi'});});
-  return card('Bảng treo thưởng',n.name,b+`</div><p class="hint">Đang nhận ${open}/3 việc.</p>`,{foot:goBtn('next','Quay lại','','')});
+  n.board.list.forEach((q,i)=>{const g=questGrade(q);b+=`<button class="ch qrow" data-act="quest" data-arg="${i}"${q.taken||open>=3?' disabled':''} style="${pcs(g)}"${ta(q.kind==='diet'?'Tới nơi rồi thăm dò để tìm mục tiêu':'Chỉ cần tới nơi')}><span class="ct">${esc(q.text)}</span><span class="qmeta"><span class="qgr">${QGRADE[g]}</span>${costHTML(q.days*HD,0)}<span class="cost-s"><i class="rh"></i>${q.reward.st}</span>${q.taken?'<span class="qtk">đã nhận</span>':''}</span></button>`;});
+  const mine=r.quests.filter(q=>q.state==='open'&&q.from===n.id);
+  b+=`</div><p class="hint">Đang nhận ${open}/3 việc.</p>`;
+  if(mine.length)b+=`<h4 class="sgrp">Việc vừa nhận ở đây</h4><div class="rows">${mine.map(q=>`<div class="row qrow" style="${pcs(questGrade(q))}"><span class="r-t"><b>${esc(q.text)}</b><small>còn ${durH(Math.max(0,q.due-W().t))}</small></span><button class="btn sm" data-act="qDrop" data-arg="${q.id}">Trả lại</button></div>`).join('')}</div>`;
+  return card('Bảng treo thưởng',n.name,b,{foot:goBtn('next','Quay lại','','')});
 }
 function vBury(sc){
   const r=G.run,n=nodeById(sc.id);
@@ -256,7 +259,19 @@ function modalHTML(){
      <h4 class="sgrp">Có thể nhận được</h4><div class="kv">${X.mat?`<div><span>${MAT[X.mat].i} ${MAT[X.mat].n}</span><b>50% mỗi lần lục soát</b></div>`:''}<div><span>${MAT.dan.i} Yêu đan</span><b>60% khi hạ yêu thú</b></div><div><span>🥚 Trứng linh thú</span><b>${Math.round(X.egg*100)}% khi hạ yêu thú</b></div><div><span>Đan dược, pháp bảo, công pháp</span><b>tùy kỳ ngộ</b></div></div>
      <div class="mb-f"><button class="btn" data-act="modalX">Đóng</button><button class="btn pri" data-act="exGo">Lục soát · 2 giờ</button></div></div>`;}
   if(m.k==='laibuon'){const L=sellList();return `<div class="mbox"><h3>Lái buôn thu mua</h3><p class="hint">Giá bằng chừng nửa giá mua. Trong túi: ${stoneHTML(G.run.st)}</p><div class="rows">${L.length?L.map(x=>`<button class="row" data-act="sell" data-arg="${x.k}:${x.i}"><span class="r-i">${x.ic}</span><span class="r-t"><b>${esc(x.n)}</b><small>${esc(x.sub)}</small></span><span class="r-x">bán ${stoneHTML(x.p)}</span></button>`).join(''):'<p class="empty">Không có gì để bán.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Xong</button></div></div>`;}
-  if(m.k==='tram'){const L=stageList(nodeById(G.run.at));return `<div class="mbox"><h3>Trạm dịch</h3><p class="hint">Xe ngựa chỉ tới những thôn trấn ngươi từng đặt chân. Nhanh gấp ba, không bị chặn đường.</p><h4 class="sgrp">Sắm phương tiện riêng</h4><div class="rows">${MOUNT.map(x=>{const own=G.run.mount===x.id;const no=G.run.realm<(x.realm||0);return `<button class="row${own?' taken':''}" data-act="mount" data-arg="${x.id}"${own||no||G.run.st<price(x.p)?' disabled':''}><span class="r-t"><b>${x.n}</b><small>${x.d}${no?' · cần '+REALM[x.realm]:''}</small></span><span class="r-x">${own?'đang dùng':stoneHTML(price(x.p))}</span></button>`;}).join('')}</div><h4 class="sgrp">Thuê xe chuyến</h4><div class="rows">${L.length?L.map(x=>`<button class="row" data-act="stage" data-arg="${x.id}"${G.run.st<x.c?' disabled':''}><span class="r-t"><b>${esc(x.n)}</b><small>${durH(x.h)} đường</small></span><span class="r-x">${stoneHTML(x.c)}</span></button>`).join(''):'<p class="empty">Chưa tới thôn trấn nào khác trong vùng.</p>'}</div><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button></div></div>`;}
+  if(m.k==='tram'||m.k==='vehi'){const n=nodeById(G.run.at);const L=tramStock(n);const r=G.run;const cur=mountOf();
+    if(m.k==='vehi'){const v=L[m.i];if(!v)return '';const lock=r.realm<v.realm;const cb=vehBuy(v),cr=vehRent(v);
+      return `<div class="mbox veh"><div class="vh-top"><span class="vslot big" style="${pcs(v.tier)}">${ic(v.ic)}</span><div><h3 class="qt" style="${pcs(v.tier)}">${esc(v.n)}</h3><small>${GRADE[v.tier]} · còn ${v.qty}</small></div></div>
+       <div class="kv"><div><span>Tốc độ đi đường</span><b>×${numVN(v.m)}</b></div><div><span>Đang dùng</span><b>${cur?esc(cur.n)+' ×'+numVN(cur.m)+(cur.rented?' (thuê)':''):'đi bộ'}</b></div>${lock?`<div><span>Yêu cầu</span><b class="bad">${REALM[v.realm]}</b></div>`:''}</div>
+       <div class="veh-b"><button class="btn" data-act="vehGo" data-arg="${m.i}:rent"${lock||v.qty<=0||r.st<cr?' disabled':''}><span>Thuê 1 tháng</span><span class="cost-s"><i class="rh"></i>${cr}</span></button><button class="btn pri" data-act="vehGo" data-arg="${m.i}:buy"${lock||v.qty<=0||r.st<cb?' disabled':''}><span>Mua</span><span class="cost-s"><i class="rh"></i>${fmtN(cb)}</span></button></div>
+       <div class="mb-f"><span class="grow">Trong túi: ${stoneHTML(r.st)}</span><button class="btn" data-act="tramBack">Quay lại</button></div></div>`;}
+    const S0=stageList(n);const rl=r.rent&&r.rent.until>W().t?r.rent:null;
+    return `<div class="mbox tram"><h3>Trạm dịch</h3>
+     <div class="vh-cur"><span class="vslot${cur?'':' empty'}" style="${cur?pcs(cur.tier||0):''}">${cur?ic(cur.ic||'run'):ic('walk')}</span><div><b>${cur?esc(cur.n):'Đi bộ'}</b><small>${cur?'Tốc độ ×'+numVN(cur.m)+(cur.rented&&rl?' · thuê, còn '+durH(rl.until-W().t):''):'Chưa có phương tiện'}</small></div></div>
+     <h4 class="sgrp">Hàng ở trạm<small>đổi hàng sau ${durH(tramResetIn())}</small></h4>
+     <div class="vgrid">${L.map((v,i)=>`<button class="vcell${v.qty<=0?' out':''}${r.realm<v.realm?' lock':''}" data-act="vehi" data-arg="${i}" style="${pcs(v.tier)}"${ta(v.n+' · '+GRADE[v.tier]+'\nTốc độ ×'+numVN(v.m))}><span class="vslot" style="${pcs(v.tier)}">${ic(v.ic)}</span><span class="vn">${esc(v.n)}</span><span class="vq">${v.qty>0?'còn '+v.qty:'hết'}</span></button>`).join('')}</div>
+     <h4 class="sgrp">Thuê xe chuyến</h4><div class="rows">${S0.length?S0.map(x=>`<button class="row" data-act="stage" data-arg="${x.id}"${r.st<x.c?' disabled':''}><span class="r-t"><b>${esc(x.n)}</b><small>${durH(x.h)} đường · nhanh gấp ba, không bị chặn</small></span><span class="r-x">${stoneHTML(x.c)}</span></button>`).join(''):'<p class="empty">Chưa tới thôn trấn nào khác trong vùng.</p>'}</div>
+     <div class="mb-f"><span class="grow">Trong túi: ${stoneHTML(r.st)}</span><button class="btn" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='nhansu'){const n=nodeById(G.run.at);const L=sectPeople(n);return `<div class="mbox"><h3>Nhân sự · ${esc(n.name)}</h3><div class="rows">${L.length?L.map(x=>`<div class="row${x.alive?'':' dim'}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b>${esc(x.ten)}</b><small>${esc(x.tt)}</small></span><span class="r-x">${x.alive?REALM[x.realm]:'đã mất'}</span></div>`).join(''):'<p class="empty">Chưa nghe danh ai nổi bật ở đây.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='pick')return pickModalHTML(m);
   if(m.k==='item')return itemModalHTML(m);
@@ -313,6 +328,8 @@ function confirmHTML(title,d,h,st,g,act,arg){return `<div class="mbox pconf"><h3
    ${h||st?`<div class="pc-row"><small>Tốn</small><span class="cost">${costHTML(h,st)}</span></div>`:''}${g?`<div class="pc-row"><small>Nhận được</small>${gainHTML(g)}</div>`:''}
    <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="${act}" data-arg="${arg}">Đồng ý</button></div></div>`;}
 {const _mh12=modalHTML;modalHTML=function(){const m=UI.modal;const r=G.run;
+  if(m&&m.k==='qdrop'&&r){const q=r.quests.find(x=>x.id===m.id);if(!q)return '';const P=questPenalty(q);
+    return `<div class="mbox pconf"><h3>Hủy nhiệm vụ?</h3><p>${esc(q.text)}</p><p>Đã nhận lời thì phải giữ chữ tín. Bỏ ngang thì phải đền một nửa tiền thưởng và mang tiếng thất hứa.</p><div class="pc-row"><small>Bị phạt</small><span class="gains"><span class="gn st"><i class="rh"></i>−${P.st}</span><span class="gn in">nhân quả ${P.karma}</span></span></div><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="qDropGo" data-arg="${q.id}">Hủy nhiệm vụ</button></div></div>`;}
   if(m&&m.k==='pconf'&&r&&r.scene){const n=nodeById(r.scene.id);const a=placeActs(n).find(x=>x.a===m.a);if(!a)return '';const I=PA_INFO[m.a]||{d:a.tip||''};const g=typeof I.g==='function'?I.g():I.g;
     return confirmHTML(PL_N[m.a]||a.l,I.d,a.h,0,g,'pactGo',m.a);}
   if(m&&(m.k==='vconf'||m.k==='vreq')&&r&&r.scene){const n=nodeById(r.scene.id);const o=venueOpts(n,m.v).find(x=>x.id===m.id);if(!o)return '';

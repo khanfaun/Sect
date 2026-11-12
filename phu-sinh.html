@@ -864,6 +864,31 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .pc-row .cost{display:flex;gap:12px}.pc-row .cost .cost-t,.pc-row .cost .cost-s{font-size:.9em}.pc-row.bad span{color:var(--seal);font-size:.9em}
 .gains{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}.gn{display:inline-flex;align-items:center;gap:3px;font-size:.92em}.gn .ic{width:14px;height:14px}
 .gn.hp{color:#3f8f5c}.gn.mp{color:#4a7fb0}.gn.tm{color:var(--vio)}.gn.tv{color:#2f74c0}.gn.ll{color:#d9731a}.gn.st{color:var(--jade)}.gn.in{color:var(--ink2)}
+/* ===== đợt 13 ===== */
+.pl-talk{max-height:min(34vh,260px);overflow-y:auto;padding:2px 10px 2px 0;margin:2px 0 8px;scrollbar-width:thin;scrollbar-color:var(--ink3) transparent;overscroll-behavior:contain}
+.pl-talk::-webkit-scrollbar{width:4px}.pl-talk::-webkit-scrollbar-thumb{background:var(--ink3);border-radius:2px}
+.place .pl-talk .story p{color:var(--ink);font-style:normal;font-size:.95em;line-height:1.7;margin:.35em 0}
+/* trạm dịch */
+.vslot{width:44px;height:44px;display:grid;place-items:center;border:2px solid var(--pc,var(--line));border-radius:10px;background:color-mix(in srgb,var(--pc,var(--ink3)) 12%,var(--paper));color:var(--pc,var(--ink2));flex:none}
+.vslot .ic{width:22px;height:22px}.vslot.empty{border-style:dashed;color:var(--ink3)}.vslot.big{width:58px;height:58px}.vslot.big .ic{width:28px;height:28px}
+.vh-cur,.vh-top{display:flex;align-items:center;gap:12px;padding:6px 0 10px}.vh-cur small,.vh-top small{display:block;color:var(--ink3);font-size:.8em}.vh-top h3{border:0;margin:0;padding:0}
+.sgrp small{margin-left:auto;font-size:.76em;color:var(--ink3)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin:6px 0 10px}
+.vcell{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);text-align:center}
+.vcell:hover{border-color:var(--pc)}.vcell .vn{font-size:.76em;line-height:1.2;color:var(--pc)}.vcell .vq{font-size:.68em;color:var(--ink3)}.vcell.out,.vcell.lock{opacity:.45}
+.veh-b{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 4px}.veh-b .btn{flex-direction:column;gap:2px;min-height:52px}.veh-b .btn.pri .cost-s{color:#bfe6cf}
+.cell .c-q{font-size:.68em;color:var(--ink3)}
+/* chấm báo trên thanh dưới: nằm sát góc biểu tượng */
+.nv{position:relative}.nv .dot.soft{top:4px;right:auto;left:calc(50% + 8px);width:7px;height:7px;min-width:7px}
+.dt.qd{display:inline-grid;place-items:center;width:13px;height:13px;border-radius:50%;background:var(--gold);color:#fffaf0;font:700 9px/1 sans-serif;font-style:normal}
+/* nhiệm vụ: khung theo phẩm (độ khó) */
+.qrow{border:1px solid color-mix(in srgb,var(--pc) 55%,transparent)!important;background:color-mix(in srgb,var(--pc) 7%,var(--paper))!important;box-shadow:inset 3px 0 0 var(--pc)!important;flex-wrap:wrap}
+.ch.qrow{flex-direction:column;align-items:flex-start;gap:3px}.qmeta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.qgr{font-size:.72em;color:var(--pc);border:1px solid color-mix(in srgb,var(--pc) 60%,transparent);border-radius:999px;padding:0 .5em}.qtk{font-size:.72em;color:var(--ink3)}
+.qcard{border:1px solid color-mix(in srgb,var(--pc) 55%,transparent);background:color-mix(in srgb,var(--pc) 6%,var(--paper));box-shadow:inset 3px 0 0 var(--pc);border-radius:var(--r);padding:6px 8px;margin-bottom:6px}
+.qcard.dim{opacity:.55}.qc-h{display:flex;align-items:center;gap:8px}.qc-h .r-t{flex:1;min-width:0}.qc-h small{display:block;color:var(--ink3);font-size:.8em}
+.qc-b{display:flex;gap:2px}.qc-b .icb{width:30px;height:30px;border:0;background:none;color:var(--ink2)}.qc-b .icb:hover{color:var(--ink)}
+.qc-d{padding:6px 2px 2px 34px}.qc-d p{font-size:.88em;color:var(--ink2);margin:0 0 6px}
 
 </style>
 </head>
@@ -5174,6 +5199,52 @@ function venueDo(v,id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')ret
 // khách điếm, tửu phường giờ có nhiều lựa chọn giá khác nhau: không khóa ô vì thiếu tiền
 {const _pa12=placeActs;placeActs=function(n){const L=_pa12(n);const r=G.run;for(const a of L){if(a.a==='inn'||a.a==='tuu'){a.dis=false;a.x='';a.h=0;}if(a.a==='tea')a.h=0;}return L;};}
 {const _pa12b=placeAct;placeAct=function(a){if(VENUE_N[a]){const sc=G.run&&G.run.scene;if(sc)sc.venue=a;return;}return _pa12b(a);};}
+// Chiến lợi phẩm: rớt ngẫu nhiên, không cho chọn. Thường 0–1 món, tinh anh 1–2, thủ lĩnh 2.
+{const _rw13=rewardScene;rewardScene=function(kind,en){_rw13(kind,en);const sc=G.run&&G.run.scene;if(!sc||sc.type!=='reward'||!sc.picks||!sc.picks.length)return;
+  const n=kind==='boss'?2:kind==='elite'?ri(1,2):1;const P=sc.picks.slice();const got=[];
+  for(let k=0;k<n&&P.length;k++){const i=Math.floor(R()*P.length);got.push(P.splice(i,1)[0]);}
+  sc.picks=got;for(let i=0;i<got.length;i++){sc.taken=-1;takePick(i);}sc.picks=[];sc.taken=0;};}
+
+// ================= ĐỢT 13: TRẠM DỊCH MỚI, HÀNG CÓ SỐ LƯỢNG =================
+// Phương tiện: mỗi loại có 5 phẩm. Mỗi trạm dịch bày ngẫu nhiên 3–5 món (loại, phẩm, số lượng), ba tháng thay hàng một lần.
+// Thuê: dùng được một tháng. Mua: dùng mãi. Giá cao hơn trước nhiều.
+const VEH_T=[{k:'ngua',n:['Ngựa thồ','Tuấn mã','Hãn huyết mã','Long câu','Thiên lý long câu'],m:1.7,p:60,realm:0,ic:'run'},
+  {k:'loc',n:['Linh lộc','Bạch lộc','Ngọc giác lộc','Cửu sắc lộc','Thần lộc'],m:1.9,p:90,realm:0,ic:'tree'},
+  {k:'hac',n:['Bạch hạc','Tiên hạc','Huyền hạc','Đan đỉnh hạc','Cửu thiên hạc'],m:2.8,p:260,realm:1,ic:'feather'},
+  {k:'chu',n:['Phi chu','Mộc lan chu','Thanh vân chu','Bích lạc chu','Càn khôn chu'],m:3.6,p:500,realm:1,ic:'cart'},
+  {k:'kiem',n:['Phi kiếm','Thanh phong kiếm','Lưu quang kiếm','Tử điện kiếm','Tru tiên kiếm'],m:6,p:1600,realm:2,ic:'sword'}];
+const TRAM_RESET=3*HM;
+function vehMake(k,tier){const T=VEH_T.find(x=>x.k===k);return {k,tier,n:T.n[tier],m:Math.round(T.m*(1+0.22*tier)*10)/10,realm:T.realm,ic:T.ic,p:T.p*Math.pow(1.9,tier)*1.8};}
+function vehBuy(v){return price(v.p);}function vehRent(v){return Math.max(2,Math.round(price(v.p)*0.08));}
+function tramStock(n){const r=G.run,w=W();const q=Math.floor(w.t/TRAM_RESET);
+  if(!n.tram||n.tram.q!==q||n.tram.kiep!==r.kiep){const T=VEH_T.filter(x=>x.realm<=r.region+1);const L=[];const cnt=ri(3,5);
+    for(let i=0;i<cnt;i++){const t=pick(T);const roll=R();const tier=clamp(Math.floor(roll*roll*3+r.region*0.6+(chance(.1)?1:0)),0,4);L.push(Object.assign(vehMake(t.k,tier),{qty:ri(1,3)}));}
+    L.sort((a,b)=>a.p-b.p);n.tram={q,kiep:r.kiep,L};}
+  return n.tram.L;}
+function tramResetIn(){return TRAM_RESET-(W().t%TRAM_RESET);}
+mountOf=function(){const r=G.run;if(!r)return null;const w=W();const own=r.veh||(r.mount?MOUNT.find(x=>x.id===r.mount):null);
+  const rent=r.rent&&r.rent.until>w.t?r.rent.v:null;if(rent&&(!own||rent.m>=own.m))return Object.assign({},rent,{rented:1});return own;};
+function vehTake(i,mode){const r=G.run,sc=r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);const L=tramStock(n);const v=L[i];if(!v||v.qty<=0||r.realm<v.realm)return false;
+  const c=mode==='buy'?vehBuy(v):vehRent(v);if(r.st<c)return false;r.st-=c;v.qty--;const o={k:v.k,tier:v.tier,n:v.n,m:v.m,realm:v.realm,ic:v.ic,p:v.p};
+  if(mode==='buy'){r.veh=o;r.mount=null;log('Mua '+v.n+'.');note('Đã mua '+v.n,'up');}else{r.rent={v:o,until:W().t+HM};log('Thuê '+v.n+' một tháng.');note('Đã thuê '+v.n+' một tháng','up');}return true;}
+// xe chuyến cũng đắt hơn
+{const _sl13=stageList;stageList=function(n){return _sl13(n).map(x=>Object.assign(x,{c:x.c*2}));};}
+// các tiệm: mỗi món có số lượng, hết thì thôi; một tháng thay hàng
+{const _os13=openShop;openShop=function(n){_os13(n);const sc=G.run&&G.run.scene;if(sc&&sc.type==='shop')for(const it of sc.items)if(it.qty==null)it.qty=it.k==='pill'?ri(1,3):1;};}
+{const _by13=buy;buy=function(i){const sc=G.run&&G.run.scene;const it=sc&&sc.items&&sc.items[i];if(!it||it.sold)return _by13(i);const q=it.qty==null?1:it.qty;_by13(i);if(it.sold){it.qty=q-1;if(it.qty>0)it.sold=0;}};}
+function shopResetIn(){return HM-(W().t%HM);}
+// tiệm tạp hóa: vào xem không tốn thời gian
+{const _pa13=placeActs;placeActs=function(n){const L=_pa13(n);for(const a of L)if(a.a==='taphoa')a.h=0;return L;};}
+{const _pc13=placeAct;placeAct=function(a){if(a==='taphoa'){const sc=G.run&&G.run.scene;if(sc&&sc.type==='place'){openShop(nodeById(sc.id));return;}}return _pc13(a);};}
+// ----- nhiệm vụ: phẩm theo độ khó, trả lại có phạt -----
+const QGRADE=['Dễ','Thường','Khó','Hiểm','Tử nạn'];
+function questGrade(q){if(q.grade!=null)return q.grade;const n=nodeById(q.node);return clamp((n?n.danger:0)+(q.kind==='diet'?1:0),0,4);}
+{const _ob13=openBoard;openBoard=function(n){_ob13(n);if(n&&n.board)for(const q of n.board.list)if(q.grade==null){q.grade=questGrade(q);q.reward.st=Math.round(q.reward.st*(1+q.grade*0.25));}};}
+{const _tq13=takeQuest;takeQuest=function(i){const r=G.run,sc=r.scene;const n=sc&&nodeById(sc.id);const b=n&&n.board&&n.board.list[+i];const k=r.quests.length;_tq13(i);if(b&&r.quests.length>k){const q=r.quests[r.quests.length-1];q.grade=questGrade(b);q.d=b.kind==='diet'?'Tới nơi rồi thăm dò để tìm và hạ mục tiêu.':'Chỉ cần tới nơi là xong.';}};}
+function questPenalty(q){return {st:Math.round((q.reward.st||0)*0.5),karma:-2};}
+function questCancel(id){const r=G.run;const q=r.quests.find(x=>x.id===id&&x.state==='open');if(!q)return false;const P=questPenalty(q);
+  q.state='fail';q.dropped=1;r.st=Math.max(0,r.st-P.st);applyE({karma:P.karma});log(`Trả lại việc: ${q.text}. Mất ${P.st} linh thạch, mang tiếng thất hứa.`);
+  const fn=nodeById(q.from);if(fn&&fn.board){const b=fn.board.list.find(x=>x.id===q.id);if(b)b.taken=false;}return true;}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -5230,7 +5301,7 @@ const ICP={
   bolt:'M13 2L4 14h7l-1 8 9-12h-7l1-8z',
   sun:'M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19',
   moon:'M20 14A8 8 0 019 4a8 8 0 1011 10z',
-  hour:'M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9',
+  hour:'M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0M12 7v5l3.2 2',
   bag:'M6 8h12l1 12H5L6 8zM9 8V6a3 3 0 016 0v2',
   hex:'M12 2l8.7 5v10L12 22l-8.7-5V7z',
   heart:'M12 20s-7-4.6-7-10.2A4.3 4.3 0 0112 7.2a4.3 4.3 0 017 2.6C19 15.4 12 20 12 20z',
@@ -5275,16 +5346,20 @@ const ICP={
 };
 function ib(n,c){return `<span class="ib${c?' ib-'+c:''}">${ic(n)}</span>`;}
 const STAT_IC={'Lịch luyện':['sword','gold'],'Thổ nạp':['wind','jade'],'Hiệu suất tu':['cycle','acc'],'Tư chất':['gem','gold'],'Tốc độ tu':['seat','acc'],'ST chí mạng':['bolt','seal'],'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
-function sib(label){const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
+function sib(label){if(label==='Linh thạch')return '<i class="rh sic"></i>';const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
 function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICP[n]||ICP.info}"/></svg>`;}
 
 // ---------- mẩu nhỏ dùng chung ----------
-function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}>${c.i==='💎'?'<i class="rh"></i>':c.i} ${esc(c.t)}</span>`).join('')}</div>`;}
+// mỗi loại một biểu tượng duy nhất: các biểu tượng cũ dạng emoji trong nhãn được đổi sang bộ biểu tượng nét mảnh
+const EMO_IC={'⏳':'hour','🏺':'ring','❤️':'heart','📖':'book','☯️':'yin','🤝':'people','💧':'drop','✨':'spark','⚗️':'flask','⚔':'sword','⚔️':'sword','🗡️':'sword','😈':'skull','🗺️':'pin','📜':'scroll','🏅':'medal','🎫':'flag','🍃':'clover','🍀':'clover','🌩️':'bolt','☁️':'sun','🛡️':'shield','🌀':'wind','🧠':'brain','🪷':'lotus','🌕':'moon'};
+function emoIc(e){if(e==='💎')return '<i class="rh"></i>';const k=EMO_IC[e];return k?ic(k):e;}
+function emoTxt(h){return String(h).replace(/💎/g,'<i class="rh"></i>').replace(/⏳/g,ic('hour'));}
+function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
 function elSeal(e){const E=EL[e]||EL.vo;return `<span class="el el-${e}"${ta('Hệ '+E.n+(KHAC[e]?'\nKhắc '+EL[KHAC[e]].n:''))}>${E.c}</span>`;}
 function bar(cur,max,cls){const p=Math.max(0,Math.min(100,cur/Math.max(1,max)*100));return `<div class="hb ${cls||''}"><i style="width:${p}%"></i></div>`;}
 function tabsHTML(key,list,cur){return `<div class="tabs">${list.map(([k,n])=>`<button data-act="tab" data-arg="${key}:${k}" class="${k===cur?'on':''}">${n}</button>`).join('')}</div>`;}
 function numVN(x){return String(Math.round(x*10)/10).replace('.',',');}
-function stoneHTML(v){return `<span class="stone"><i></i>${v}</span>`;}
+function stoneHTML(v){return `<span class="stone"><i class="rh"></i>${v}</span>`;}
 function win(title,body,o){o=o||{};return `<section class="win ${o.cls||''}"><header class="win-h"><h2>${title}</h2>${o.extra||''}${o.noClose?'':`<button class="xb" data-act="${o.close||'closePanel'}" aria-label="Đóng">${ic('close')}</button>`}</header><div class="win-b">${body}</div>${o.foot?`<footer class="win-f">${o.foot}</footer>`:''}</section>`;}
 function toastFlush(){const L=G.toasts;if(!L||!L.length)return;const box=$('#toast');if(!box)return;
   for(const t of L){const d=document.createElement('div');d.className='toast '+(t.c||'');d.textContent=t.t;box.appendChild(d);setTimeout(()=>d.remove(),3600);}
@@ -5490,7 +5565,7 @@ const Map2=(()=>{
     if(false&&CFG.ring){ctx.beginPath();ctx.arc(SX(pos[0]),SY(pos[1]),senseR()*z,0,6.3);ctx.strokeStyle=hexA(C.acc,0.28);ctx.lineWidth=1;ctx.setLineDash([3,5]);ctx.stroke();ctx.setLineDash([]);}
     // điểm
     const s0=clamp(21*Math.sqrt(z/0.8),7,24)*(CFG.font==='xl'?1.15:1);const small=z<0.5;const notes=w.notes||{};
-    const HT=CFG.hideT||{},HE=CFG.hideE||{},DC=[C.jade,C.gold,C.seal,C.vio];
+    const HT=CFG.hideT||{},HE=CFG.hideE||{},DC=[C.jade,C.gold,C.seal,C.vio];const QN=new Set((r.quests||[]).filter(q=>q.state==='open').map(q=>q.node));
     for(const k of VR)if(k<5)for(const n of regionOf(k).nodes){if(n.fog<1)continue;if(HT[n.type]&&n.id!==r.at&&UI.sel!==n.id)continue;const [nx,ny]=mapNode(n);let x=SX(nx),y=SY(ny);if(x<-60||y<-60||x>W0+60||y>H0+60)continue;const under=n.id===r.at&&!r.moving;if(under){x+=s0*0.62;y+=s0*0.62;}const sN=under?s0*0.6:s0;
       const sure=n.fog>=2||n.memory;const old=n.fog>=2&&n.seenT>=0&&w.t-n.seenT>HY;const ruin=(n.vstate||'ok')==='ruin'&&n.fog>=2;const sel=UI.sel===n.id;
       const col=C[NODE_CAT[n.type]||'ink'];
@@ -5499,13 +5574,14 @@ const Map2=(()=>{
       if(sure&&k===reg&&!ruin){ctx.strokeStyle=DC[dangerTag(n)];ctx.lineWidth=1.2;ctx.beginPath();ctx.roundRect?ctx.roundRect(x-s0/2-2,y-s0/2-2,s0+4,s0+4,s0*0.24):ctx.rect(x-s0/2-2,y-s0/2-2,s0+4,s0+4);ctx.stroke();}
       if(n.dp&&n.fog>=3){ctx.beginPath();ctx.arc(x+s0/2-1,y-s0/2+1,4,0,6.3);ctx.fillStyle=C.jade;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();}
       if(n.grave&&n.fog>=1){ctx.fillStyle=C.ink2;ctx.fillRect(x-s0/2-2,y-s0/2-2,5,7);}
+      if(QN.has(n.id)){const qx=x+s0/2,qy=y+s0/2;ctx.beginPath();ctx.arc(qx,qy,6.5,0,6.3);ctx.fillStyle=C.gold;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='#fffaf0';ctx.font='700 10px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('!',qx,qy+0.5);}
       if(CFG.notes&&notes[n.id]){ctx.beginPath();ctx.arc(x-s0/2+1,y+s0/2-1,4.5,0,6.3);ctx.fillStyle=C.gold;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();}
       if(CFG.names&&(!small||sel||n.id===r.at||n.type==='thanh'||n.type==='ai')&&(z>=0.3||sel||n.id===r.at)){label(n.name+(sure?'':'?'),x,y+s0/2+3,{c:sure?C.ink:C.ink3,s:CFG.font==='m'?12:14});if(old)label('tin cũ',x,y+s0/2+18,{c:C.ink3,s:10});}}
     // thực thể qua lại
     if(CFG.ents){const sr=senseR();for(const e of entsHere(reg)){if(HE[e.type])continue;const p=entXY(e);const see=Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr;
       if(!see&&!e.heard)continue;const q=mapXY(reg,see?p[0]:e.heard.x,see?p[1]:e.heard.y);const x=SX(q[0]),y=SY(q[1]);if(x<-30||y<-30||x>W0+30||y>H0+30)continue;
       const bad=e.type==='thutrieu'||e.type==='truysat';ctx.globalAlpha=see?1:0.55;ctx.beginPath();ctx.arc(x,y,9,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=1.5;ctx.strokeStyle=bad?C.seal:e.type==='di'?C.vio:C.acc;if(!see)ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
-      ctx.font='11px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(e.icon||ENT_T[e.type].i,x,y+1);ctx.globalAlpha=1;
+      ctx.font='11px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(ENT_T[e.type].i,x,y+1);ctx.globalAlpha=1;
       if(CFG.names&&!small)label(see?e.name:e.name+' (nghe đồn)',x,y+11,{c:bad?C.seal:C.ink2,s:10});}}
     // người chơi: con dấu son
     {const x=SX(pos[0]),y=SY(pos[1]);ctx.save();ctx.translate(x,y);
@@ -5715,7 +5791,7 @@ function dockHTML(){
 function navHTML(){
   const r=G.run;const it=[['tong','flag','Tông môn'],['pets','paw','Linh thú'],['journal','book','Sổ tay'],['bonds','people','Giao tình'],['more','more','Thêm']];
   const dot={journal:r&&r.quests.some(q=>q.state==='open'),pets:r&&r.eggs&&r.eggs.length>0};
-  return it.map(([k,i,n])=>`<button class="nv${UI.panel===k?' on':''}" data-act="panel" data-arg="${k}">${ib(i)}<span>${n}</span>${dot[k]?'<i class="dot soft"></i>':''}</button>`).join('');
+  return it.map(([k,i,n])=>`<button class="nv${UI.panel===k?' on':''}" data-act="panel" data-arg="${k}">${ib(i)}<span>${n}</span>${dot[k]?`<i class="dot soft"${ta(k==='journal'?'Đang có nhiệm vụ chưa xong':'Có trứng linh thú đang ấp')}></i>`:''}</button>`).join('');
 }
 
 // ---------- các cảnh hiện đè lên bản đồ ----------
@@ -5765,7 +5841,7 @@ function vShop(sc){
   const r=G.run;const tab=UI.tab.shop||'buy';
   let b=`<p class="shop-top">${esc(sc.text)}</p>`+tabsHTML('shop',[['buy','Mua'],['svc','Việc khác']],tab);
   if(tab==='buy'){b+='<div class="grid">';sc.items.forEach((it,i)=>{const v=itemView(it);const no=it.sold||r.st<it.p;
-    b+=`<button class="cell qc${it.sold?' sold':''}" data-act="buy" data-arg="${i}"${no?' disabled':''} style="${v.t!=null?pcs(v.t):''}"${ta(v.tip||v.n)}><span class="c-i">${v.ic}</span><span class="c-n${v.t!=null?' qt':''}">${esc(v.n)}</span><span class="c-p">${it.sold?'đã mua':stoneHTML(it.p)}</span></button>`;});b+='</div><p class="hint">Chạm giữ một món để xem công dụng. Chạm để mua.</p>';}
+    b+=`<button class="cell qc${it.sold?' sold':''}" data-act="buy" data-arg="${i}"${no?' disabled':''} style="${v.t!=null?pcs(v.t):''}"${ta(v.tip||v.n)}><span class="c-i">${v.ic}</span><span class="c-n${v.t!=null?' qt':''}">${esc(v.n)}</span><span class="c-p">${it.sold?'hết hàng':stoneHTML(it.p)}</span>${!it.sold&&it.qty!=null?`<span class="c-q">còn ${it.qty}</span>`:''}</button>`;});b+=`</div><p class="hint">Chạm giữ một món để xem công dụng. Chạm để mua. Hàng mới sau ${durH(shopResetIn())}.</p>`;}
   else b+=`<div class="rows"><button class="row" data-act="heal"${sc.healed||r.st<sc.heal?' disabled':''}${ta('Hồi đầy khí huyết và linh lực')}><span class="r-i">🩹</span><span class="r-t"><b>Mời y sư trị thương</b><small>Hồi đầy khí huyết, linh lực</small></span><span class="r-x">${sc.healed?'xong':stoneHTML(sc.heal)}</span></button></div>`;
   return card('Phường thị',r.place.n,b,{cls:'tall',foot:`<span class="grow">Trong túi: ${stoneHTML(r.st)}</span>`+goBtn('next','Rời đi','', 'pri')});
 }
@@ -5784,9 +5860,9 @@ function vPlace(sc){
   const btn=a=>{const qa=a.a==='quyan'&&UI.confirm==='quyan';const x=VENUE_N[a.a]?`<span class="cx">${a.dis?'đang đóng cửa':'chọn việc'}</span>`:(a.x&&!/^(💎|linh thạch )/.test(a.x)?`<span class="cx">${esc(String(a.x).replace(/✨/g,'tu vi ').replace(/🌕/g,'thành công '))}</span>`:'')+(a.h&&!a.dis&&a.a!=='bt'?`<span class="cx tm"${ta('Thời gian sẽ trôi qua')}>${durH(a.h)}</span>`:'');
     return `<button class="ch${a.a==='bt'?' hl big':PNOW.includes(a.a)?' big':''}${a.a==='quyan'||a.dis?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="cn">${++k}.</span><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':(PL_N[a.a]&&a.l.length>PL_N[a.a].length+6?PL_N[a.a]:a.l))}</span>${x}</button>`;};
   let b=sc.venue&&VENUE_N[sc.venue]?venueHTML(n,sc.venue):'';
-  b+=`<div class="pl-desc${UI.descHide?' hide':''}"><div class="story"><p>${esc(sc.intro)}</p></div></div>`;
-  if(sc.msg.length)b+=`<div class="story">${sc.msg.map(m=>`<p class="new">${esc(m)}</p>`).join('')}</div>`;
-  b+=chipsHTML(sc.chips);
+  // lời kể: cảnh trí và chuyện vừa xảy ra cùng một kiểu chữ, nằm trong một khung cuộn riêng
+  const talk=(UI.descHide?[]:[sc.intro]).concat(sc.msg||[]);
+  if(talk.length||(sc.chips&&sc.chips.length))b+=`<div class="pl-talk" id="plTalk"><div class="story">${talk.map(m=>`<p>${esc(m)}</p>`).join('')}</div>${chipsHTML(sc.chips)}</div>`;
   const ents=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);const qs=r.quests.filter(q=>q.state==='open'&&q.node===n.id);
   const big=PNOW.map(by).filter(Boolean);
   if(big.length||ents.length||qs.length){b+=`<h3 class="grp big">${ib('flag','gold')}Chuyện lớn</h3><div class="choices">${big.map(btn).join('')}
@@ -5806,7 +5882,7 @@ function vPlace(sc){
 }
 function vPass(sc){
   const r=G.run;let b=`<div class="story"><p class="new">${esc(sc.text)}</p><p class="hint">Qua ải mất khoảng ${CROSS_M[sc.k]} tháng đường.</p></div><div class="choices">`;let k=1;
-  for(const o of passOpts())b+=choiceBtn((k++)+'.','pass',o.a,esc(o.l),o.x?`<span class="cx">${esc(String(o.x).replace(/💎/g,'linh thạch '))}</span>`:'',{dis:!o.ok,tip:o.tip});
+  for(const o of passOpts())b+=choiceBtn((k++)+'.','pass',o.a,esc(o.l),o.x?`<span class="cx">${emoTxt(esc(String(o.x)))}</span>`:'',{dis:!o.ok,tip:o.tip});
   return card('Quan ải → '+REG[sc.k].n,r.place.n,b+'</div>',{foot:goBtn('next','Quay lại','','')});
 }
 function vPrep(sc){
@@ -5828,8 +5904,11 @@ function vBtres(sc){
 function vBoard(sc){
   const r=G.run,n=nodeById(sc.id);const open=r.quests.filter(q=>q.state==='open').length;
   let b=`<div class="story"><p>Mấy tờ cáo thị dán chồng lên nhau, giấy đã ngả vàng. Nhận việc thì phải xong trước hạn, thất hứa thì mang tiếng.</p></div><div class="choices">`;
-  n.board.list.forEach((q,i)=>{b+=choiceBtn((i+1)+'.','quest',i,esc(q.text),`<span class="cx tm">${q.days} ngày</span><span class="cx">${stoneHTML(q.reward.st)}</span>`,{dis:q.taken||open>=3,tip:q.kind==='diet'?'Tới nơi rồi thăm dò để tìm mục tiêu':'Chỉ cần tới nơi'});});
-  return card('Bảng treo thưởng',n.name,b+`</div><p class="hint">Đang nhận ${open}/3 việc.</p>`,{foot:goBtn('next','Quay lại','','')});
+  n.board.list.forEach((q,i)=>{const g=questGrade(q);b+=`<button class="ch qrow" data-act="quest" data-arg="${i}"${q.taken||open>=3?' disabled':''} style="${pcs(g)}"${ta(q.kind==='diet'?'Tới nơi rồi thăm dò để tìm mục tiêu':'Chỉ cần tới nơi')}><span class="ct">${esc(q.text)}</span><span class="qmeta"><span class="qgr">${QGRADE[g]}</span>${costHTML(q.days*HD,0)}<span class="cost-s"><i class="rh"></i>${q.reward.st}</span>${q.taken?'<span class="qtk">đã nhận</span>':''}</span></button>`;});
+  const mine=r.quests.filter(q=>q.state==='open'&&q.from===n.id);
+  b+=`</div><p class="hint">Đang nhận ${open}/3 việc.</p>`;
+  if(mine.length)b+=`<h4 class="sgrp">Việc vừa nhận ở đây</h4><div class="rows">${mine.map(q=>`<div class="row qrow" style="${pcs(questGrade(q))}"><span class="r-t"><b>${esc(q.text)}</b><small>còn ${durH(Math.max(0,q.due-W().t))}</small></span><button class="btn sm" data-act="qDrop" data-arg="${q.id}">Trả lại</button></div>`).join('')}</div>`;
+  return card('Bảng treo thưởng',n.name,b,{foot:goBtn('next','Quay lại','','')});
 }
 function vBury(sc){
   const r=G.run,n=nodeById(sc.id);
@@ -5868,7 +5947,19 @@ function modalHTML(){
      <h4 class="sgrp">Có thể nhận được</h4><div class="kv">${X.mat?`<div><span>${MAT[X.mat].i} ${MAT[X.mat].n}</span><b>50% mỗi lần lục soát</b></div>`:''}<div><span>${MAT.dan.i} Yêu đan</span><b>60% khi hạ yêu thú</b></div><div><span>🥚 Trứng linh thú</span><b>${Math.round(X.egg*100)}% khi hạ yêu thú</b></div><div><span>Đan dược, pháp bảo, công pháp</span><b>tùy kỳ ngộ</b></div></div>
      <div class="mb-f"><button class="btn" data-act="modalX">Đóng</button><button class="btn pri" data-act="exGo">Lục soát · 2 giờ</button></div></div>`;}
   if(m.k==='laibuon'){const L=sellList();return `<div class="mbox"><h3>Lái buôn thu mua</h3><p class="hint">Giá bằng chừng nửa giá mua. Trong túi: ${stoneHTML(G.run.st)}</p><div class="rows">${L.length?L.map(x=>`<button class="row" data-act="sell" data-arg="${x.k}:${x.i}"><span class="r-i">${x.ic}</span><span class="r-t"><b>${esc(x.n)}</b><small>${esc(x.sub)}</small></span><span class="r-x">bán ${stoneHTML(x.p)}</span></button>`).join(''):'<p class="empty">Không có gì để bán.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Xong</button></div></div>`;}
-  if(m.k==='tram'){const L=stageList(nodeById(G.run.at));return `<div class="mbox"><h3>Trạm dịch</h3><p class="hint">Xe ngựa chỉ tới những thôn trấn ngươi từng đặt chân. Nhanh gấp ba, không bị chặn đường.</p><h4 class="sgrp">Sắm phương tiện riêng</h4><div class="rows">${MOUNT.map(x=>{const own=G.run.mount===x.id;const no=G.run.realm<(x.realm||0);return `<button class="row${own?' taken':''}" data-act="mount" data-arg="${x.id}"${own||no||G.run.st<price(x.p)?' disabled':''}><span class="r-t"><b>${x.n}</b><small>${x.d}${no?' · cần '+REALM[x.realm]:''}</small></span><span class="r-x">${own?'đang dùng':stoneHTML(price(x.p))}</span></button>`;}).join('')}</div><h4 class="sgrp">Thuê xe chuyến</h4><div class="rows">${L.length?L.map(x=>`<button class="row" data-act="stage" data-arg="${x.id}"${G.run.st<x.c?' disabled':''}><span class="r-t"><b>${esc(x.n)}</b><small>${durH(x.h)} đường</small></span><span class="r-x">${stoneHTML(x.c)}</span></button>`).join(''):'<p class="empty">Chưa tới thôn trấn nào khác trong vùng.</p>'}</div><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button></div></div>`;}
+  if(m.k==='tram'||m.k==='vehi'){const n=nodeById(G.run.at);const L=tramStock(n);const r=G.run;const cur=mountOf();
+    if(m.k==='vehi'){const v=L[m.i];if(!v)return '';const lock=r.realm<v.realm;const cb=vehBuy(v),cr=vehRent(v);
+      return `<div class="mbox veh"><div class="vh-top"><span class="vslot big" style="${pcs(v.tier)}">${ic(v.ic)}</span><div><h3 class="qt" style="${pcs(v.tier)}">${esc(v.n)}</h3><small>${GRADE[v.tier]} · còn ${v.qty}</small></div></div>
+       <div class="kv"><div><span>Tốc độ đi đường</span><b>×${numVN(v.m)}</b></div><div><span>Đang dùng</span><b>${cur?esc(cur.n)+' ×'+numVN(cur.m)+(cur.rented?' (thuê)':''):'đi bộ'}</b></div>${lock?`<div><span>Yêu cầu</span><b class="bad">${REALM[v.realm]}</b></div>`:''}</div>
+       <div class="veh-b"><button class="btn" data-act="vehGo" data-arg="${m.i}:rent"${lock||v.qty<=0||r.st<cr?' disabled':''}><span>Thuê 1 tháng</span><span class="cost-s"><i class="rh"></i>${cr}</span></button><button class="btn pri" data-act="vehGo" data-arg="${m.i}:buy"${lock||v.qty<=0||r.st<cb?' disabled':''}><span>Mua</span><span class="cost-s"><i class="rh"></i>${fmtN(cb)}</span></button></div>
+       <div class="mb-f"><span class="grow">Trong túi: ${stoneHTML(r.st)}</span><button class="btn" data-act="tramBack">Quay lại</button></div></div>`;}
+    const S0=stageList(n);const rl=r.rent&&r.rent.until>W().t?r.rent:null;
+    return `<div class="mbox tram"><h3>Trạm dịch</h3>
+     <div class="vh-cur"><span class="vslot${cur?'':' empty'}" style="${cur?pcs(cur.tier||0):''}">${cur?ic(cur.ic||'run'):ic('walk')}</span><div><b>${cur?esc(cur.n):'Đi bộ'}</b><small>${cur?'Tốc độ ×'+numVN(cur.m)+(cur.rented&&rl?' · thuê, còn '+durH(rl.until-W().t):''):'Chưa có phương tiện'}</small></div></div>
+     <h4 class="sgrp">Hàng ở trạm<small>đổi hàng sau ${durH(tramResetIn())}</small></h4>
+     <div class="vgrid">${L.map((v,i)=>`<button class="vcell${v.qty<=0?' out':''}${r.realm<v.realm?' lock':''}" data-act="vehi" data-arg="${i}" style="${pcs(v.tier)}"${ta(v.n+' · '+GRADE[v.tier]+'\nTốc độ ×'+numVN(v.m))}><span class="vslot" style="${pcs(v.tier)}">${ic(v.ic)}</span><span class="vn">${esc(v.n)}</span><span class="vq">${v.qty>0?'còn '+v.qty:'hết'}</span></button>`).join('')}</div>
+     <h4 class="sgrp">Thuê xe chuyến</h4><div class="rows">${S0.length?S0.map(x=>`<button class="row" data-act="stage" data-arg="${x.id}"${r.st<x.c?' disabled':''}><span class="r-t"><b>${esc(x.n)}</b><small>${durH(x.h)} đường · nhanh gấp ba, không bị chặn</small></span><span class="r-x">${stoneHTML(x.c)}</span></button>`).join(''):'<p class="empty">Chưa tới thôn trấn nào khác trong vùng.</p>'}</div>
+     <div class="mb-f"><span class="grow">Trong túi: ${stoneHTML(r.st)}</span><button class="btn" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='nhansu'){const n=nodeById(G.run.at);const L=sectPeople(n);return `<div class="mbox"><h3>Nhân sự · ${esc(n.name)}</h3><div class="rows">${L.length?L.map(x=>`<div class="row${x.alive?'':' dim'}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b>${esc(x.ten)}</b><small>${esc(x.tt)}</small></span><span class="r-x">${x.alive?REALM[x.realm]:'đã mất'}</span></div>`).join(''):'<p class="empty">Chưa nghe danh ai nổi bật ở đây.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='pick')return pickModalHTML(m);
   if(m.k==='item')return itemModalHTML(m);
@@ -5925,6 +6016,8 @@ function confirmHTML(title,d,h,st,g,act,arg){return `<div class="mbox pconf"><h3
    ${h||st?`<div class="pc-row"><small>Tốn</small><span class="cost">${costHTML(h,st)}</span></div>`:''}${g?`<div class="pc-row"><small>Nhận được</small>${gainHTML(g)}</div>`:''}
    <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="${act}" data-arg="${arg}">Đồng ý</button></div></div>`;}
 {const _mh12=modalHTML;modalHTML=function(){const m=UI.modal;const r=G.run;
+  if(m&&m.k==='qdrop'&&r){const q=r.quests.find(x=>x.id===m.id);if(!q)return '';const P=questPenalty(q);
+    return `<div class="mbox pconf"><h3>Hủy nhiệm vụ?</h3><p>${esc(q.text)}</p><p>Đã nhận lời thì phải giữ chữ tín. Bỏ ngang thì phải đền một nửa tiền thưởng và mang tiếng thất hứa.</p><div class="pc-row"><small>Bị phạt</small><span class="gains"><span class="gn st"><i class="rh"></i>−${P.st}</span><span class="gn in">nhân quả ${P.karma}</span></span></div><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="qDropGo" data-arg="${q.id}">Hủy nhiệm vụ</button></div></div>`;}
   if(m&&m.k==='pconf'&&r&&r.scene){const n=nodeById(r.scene.id);const a=placeActs(n).find(x=>x.a===m.a);if(!a)return '';const I=PA_INFO[m.a]||{d:a.tip||''};const g=typeof I.g==='function'?I.g():I.g;
     return confirmHTML(PL_N[m.a]||a.l,I.d,a.h,0,g,'pactGo',m.a);}
   if(m&&(m.k==='vconf'||m.k==='vreq')&&r&&r.scene){const n=nodeById(r.scene.id);const o=venueOpts(n,m.v).find(x=>x.id===m.id);if(!o)return '';
@@ -6208,7 +6301,11 @@ function pJournal(){
   let b=tabsHTML('journal',[['quest','Nhiệm vụ'],['log','Đời này'],['aff','Thiên hạ'],['news','Tin đồn'],['chron','Biên niên']],tab);
   if(tab==='aff')b+=affairsBody();
   if(tab==='log')b+=`<div class="logl">${r.log.slice().reverse().map(l=>`<p><span>${l.a} tuổi</span>${esc(l.t)}</p>`).join('')}</div>`;
-  if(tab==='quest'){const L=r.quests.slice().reverse();b+=L.length?`<div class="rows">${L.map(q=>`<div class="row${q.state==='fail'?' dim':''}"><span class="r-i">${q.state==='done'?ic('check'):q.state==='fail'?ic('close'):ic('hour')}</span><span class="r-t"><b>${esc(q.text)}</b><small>${q.state==='open'?'còn '+durH(Math.max(0,q.due-w.t)):q.state==='done'?'đã xong':'thất hứa'}</small></span></div>`).join('')}</div>`:'<p class="empty">Chưa nhận nhiệm vụ nào. Tìm bảng treo thưởng ở thôn trấn.</p>';}
+  if(tab==='quest'){const L=r.quests.slice().reverse();UI.qOpen=UI.qOpen||{};
+    b+=L.length?`<div class="rows">${L.map(q=>{const g=questGrade(q);const op=q.state==='open';const ex=UI.qOpen[q.id];const tg=nodeById(q.node);const fn=nodeById(q.from);
+      return `<div class="qcard${op?'':' dim'}" style="${pcs(g)}"><div class="qc-h"><span class="r-i">${q.state==='done'?ic('check'):q.state==='fail'?ic('close'):ic('hour')}</span><span class="r-t"><b>${esc(q.text)}</b><small><span class="qgr">${QGRADE[g]}</span> · ${op?'còn '+durH(Math.max(0,q.due-w.t)):q.state==='done'?'đã xong':q.dropped?'đã trả lại':'thất hứa'}</small></span>
+        <span class="qc-b"><button class="icb" data-act="qExp" data-arg="${q.id}"${ta(ex?'Thu gọn':'Xem thêm')}>${ic(ex?'up':'down')}</button>${op?`<button class="icb" data-act="qNav" data-arg="${q.id}"${ta('Dẫn đường: đưa bản đồ tới nơi cần tới')}>${ic('target')}</button><button class="icb" data-act="qDrop" data-arg="${q.id}"${ta('Hủy nhiệm vụ')}>${ic('trash')}</button>`:''}</span></div>
+        ${ex?`<div class="qc-d"><p>${esc(q.d||(q.kind==='diet'?'Tới nơi rồi thăm dò để tìm và hạ mục tiêu.':'Chỉ cần tới nơi là xong.'))}</p><div class="kv"><div><span>Nơi tới</span><b>${esc(tg&&tg.fog>=1?tg.name:'chưa rõ')}</b></div><div><span>Nhận ở</span><b>${esc(fn?fn.name:'')}</b></div><div><span>Phần thưởng</span><b><span class="cost-s"><i class="rh"></i>${q.reward.st}</span></b></div><div><span>Hủy thì phạt</span><b class="bad">mất ${questPenalty(q).st} linh thạch, nhân quả ${questPenalty(q).karma}</b></div></div></div>`:''}</div>`;}).join('')}</div>`:'<p class="empty">Chưa nhận nhiệm vụ nào. Tìm bảng treo thưởng ở thôn trấn.</p>';}
   if(tab==='news')b+=`<div class="logl">${r.news.length?r.news.slice().reverse().map(l=>`<p><span>${l.a} tuổi</span>${esc(l.t)}</p>`).join(''):'<p class="empty">Chưa nghe được gì. Ghé trà lâu mà hỏi.</p>'}</div>`;
   if(tab==='chron'){const C=w.chron.slice().reverse();b+=C.length?`<div class="logl">${C.map(l=>`<p><span>năm ${l.y}</span>${esc(l.t)}</p>`).join('')}</div>`:'<p class="empty">Thế gian còn yên ả.</p>';}
   return win('Sổ tay',b,{cls:'tall'});
@@ -6267,7 +6364,7 @@ function pMore(){
     b+=`<h4 class="sgrp">Thực thể qua lại · ô tròn</h4><div class="lgg">${Object.keys(ENT_T).map(k=>ck('legE',k,!HE[k],`<span class="lge">${ENT_T[k].i}</span>`+ENT_T[k].n)).join('')}</div>
     <h4 class="sgrp">Màu viền · mức nguy hiểm so với ngươi</h4><div class="lgg">${DTAG.map((d,i)=>`<div class="nc-g dg${i}"><i></i>${d}</div>`).join('')}</div>
     <h4 class="sgrp">Linh khí</h4><p class="hint">${LK_N.join(' · ')}: xem trong thẻ địa điểm. Linh khí càng dồi dào, bế quan càng nhanh.</p>
-    <h4 class="sgrp">Dấu phụ</h4><div class="lg"><div><i class="sq hollow"></i>Nghe đồn, chưa tận mắt thấy (vị trí có thể lệch)</div><div><i class="sq" style="background:var(--ink3);opacity:.6"></i>Ký ức kiếp trước hoặc tin đã cũ</div><div><i class="dt" style="background:var(--jade)"></i>Có động phủ</div><div><i class="dt" style="background:var(--gold)"></i>Có ghi chú của ngươi</div><div><i class="sq" style="background:var(--ink2);width:8px;height:11px"></i>Có mộ cũ</div><div><i class="rd dash"></i>Thực thể chỉ nghe tin, vị trí lúc nghe</div></div>`;}
+    <h4 class="sgrp">Dấu phụ</h4><div class="lg"><div><i class="sq hollow"></i>Nghe đồn, chưa tận mắt thấy (vị trí có thể lệch)</div><div><i class="sq" style="background:var(--ink3);opacity:.6"></i>Ký ức kiếp trước hoặc tin đã cũ</div><div><i class="dt" style="background:var(--jade)"></i>Có động phủ</div><div><i class="dt" style="background:var(--gold)"></i>Có ghi chú của ngươi</div><div><i class="dt qd">!</i>Nơi cần tới của nhiệm vụ đang nhận</div><div><i class="sq" style="background:var(--ink2);width:8px;height:11px"></i>Có mộ cũ</div><div><i class="rd dash"></i>Thực thể chỉ nghe tin, vị trí lúc nghe</div></div>`;}
   if(tab==='notes'){const N=(G.meta.world.notes)||{};const ks=Object.keys(N);
     b+=`<p class="hint">Chạm một điểm trên bản đồ rồi bấm “Ghi chú” để ghim. Ghim chỉ để nhớ, giữ qua các kiếp. ${ks.length}/50</p>`+(ks.length?`<div class="rows">${ks.map(k=>{const n=nodeById(+k);return `<button class="row" data-act="noteGo" data-arg="${k}"><span class="r-i">${ic('pin')}</span><span class="r-t"><b>${esc(n&&n.fog>=1?n.name:'Một nơi kiếp trước')}</b><small>${esc(N[k])}</small></span></button>`;}).join('')}</div>`:'<p class="empty">Chưa ghim chỗ nào.</p>');}
   if(tab==='help')b+=`<div class="story help"><p><b>Mục tiêu.</b> Tu luyện, đột phá qua các cảnh giới trước khi hết thọ nguyên. Chết thì luân hồi, thế giới vẫn tiếp tục già đi.</p><p><b>Thời gian.</b> Đứng ở bản đồ, 1 giây = 1 giờ. Đi đường, bế quan, đột phá, vượt ải ngốn tháng năm. Mở bảng nào đó thì thời gian dừng.</p><p><b>Bản đồ.</b> Chạm một điểm để xem, bấm “Đi tới”. Tới nơi bấm “Vào” để thăm dò, nghỉ ngơi, mua bán. Chấm xanh ngọc là nơi có động phủ: bế quan và đột phá ở đó.</p><p><b>Chiến đấu.</b> Mỗi bên chạy trên thanh hành động; tới mốc giữa thì ra chiêu. Bị đánh thì bấm “Né” đúng lúc vòng khép lại. Lười thì bật “Tự đánh”.</p><p><b>Vòng chu thiên.</b> Trong bảng Nhân vật: xếp công pháp, pháp bảo quanh đan điền sao cho hệ trước sinh hệ sau.</p><p><b>Linh thú, luyện chế.</b> Hạ yêu thú có khi được trứng và yêu đan. Thăm dò nơi hoang dã được linh thảo, linh khoáng để luyện đan, luyện khí.</p></div>`;
@@ -6329,7 +6426,7 @@ function bagTabHTML(){
   let L=`<div class="doll">${sceneCv('doll'+r.ten,r.region,'','dollbg','nhan:0.5:0.92:0:doll')}<div class="dgrid">${SLOTS.map(([k,n])=>eqCell('E'+k,n,E[k],{ic:k,x:['eqOff',k,'Tháo ra']})).join('')}</div></div>`;
   const dn=DD_N[r.realm];
   L+=`<h4 class="sgrp">Đan điền · uẩn dưỡng <small>${r.dd.length}/${dn}</small><span class="grow"></span><span class="qhelp"${ta('Vũ khí, pháp bảo nuôi trong đan điền mỗi năm mạnh thêm 5% (tối đa gấp đôi), vẫn cho chỉ số, và trong trận tế ra đánh được một lần.')}>${ic('info','sm')}</span></h4><div class="ddrow">${[0,1,2,3].map(j=>{const d=r.dd[j];if(d)return eqCell('D'+j,'',d.rel,{badge:'+'+Math.round((ddMul(d)-1)*100)+'%',x:['ddTake',j,'Lấy ra']});const need=DD_N.findIndex(x=>x>j);return eqCell('D'+j,j<dn?'Trống':REALM[need],null,{lock:j>=dn,ic:'phapbao',tip:j<dn?'Chạm để chọn vũ khí hoặc pháp bảo đưa vào uẩn dưỡng.':'Mở khi đạt '+REALM[need]+'.'});}).join('')}</div>`;
-  L+=`<h4 class="sgrp">Pháp khí tùy thân</h4><div class="ddrow five">${SPEC.map(([k,n])=>{if(k==='phuongtien'){const m=mountOf();return `<div class="eqc${m?' on':''}" style="${m?pcs(1):''}"${ta(m?m.n+'\n'+m.d:'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.')}>${slotIcon(k)}<small>${m?m.n:n}</small></div>`;}return eqCell('E'+k,n,E[k],{ic:k,x:['eqOff',k,'Tháo ra']});}).join('')}</div>`;
+  L+=`<h4 class="sgrp">Pháp khí tùy thân</h4><div class="ddrow five">${SPEC.map(([k,n])=>{if(k==='phuongtien'){const m=mountOf();return `<div class="eqc${m?' on':''}" style="${m?pcs(m.tier||1):''}"${ta(m?m.n+'\n'+m.d:'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.')}>${slotIcon(k)}<small>${m?m.n:n}</small></div>`;}return eqCell('E'+k,n,E[k],{ic:k,x:['eqOff',k,'Tháo ra']});}).join('')}</div>`;
   // --- cột phải: bộ lọc, các ô đồ ---
   const items=bagItems();const cnt=c=>c==='all'?items.length:items.filter(x=>x.cat===c).length;
   const V=items.filter(x=>(B.tab==='all'||x.cat===B.tab)&&(B.pham<0||x.tier===B.pham));
@@ -6582,6 +6679,7 @@ function render(){
   const hd=document.getElementById('hud');document.getElementById('app').style.setProperty('--hudh',(hd&&!hd.hidden?hd.offsetHeight:0)+'px');
   const dl=document.getElementById('dlg');if(dl)dl.scrollTop=dl.scrollHeight;
   if(UI.plTop){UI.plTop=0;const pb=document.querySelector('#sheet .sc-b');if(pb)pb.scrollTop=0;}
+  {const tk=document.getElementById('plTalk');if(tk&&tk.dataset.n!==String(tk.scrollHeight)){tk.dataset.n=tk.scrollHeight;tk.scrollTop=tk.scrollHeight;}}
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
@@ -6644,6 +6742,7 @@ const ACT={
   evBack:()=>{UI.evMin=false;},
   destX:()=>{G.run.dest=null;},
   mount:id=>buyMount(id),
+  vehi:i=>{UI.modal={k:'vehi',i:+i};},tramBack:()=>{UI.modal={k:'tram'};},vehGo:x=>{const [i,md]=x.split(':');if(vehTake(+i,md))UI.modal={k:'tram'};},
   chGive:k=>chGive(k),
   chTrade:()=>chTrade(),
   legT:t=>{const h=Object.assign({},CFG.hideT||{});if(h[t])delete h[t];else h[t]=1;cfgSet('hideT',h);},
@@ -6699,6 +6798,10 @@ const ACT={
   prepGo:()=>prepStart(),
   btGo:()=>btContinue(),
   quest:i=>takeQuest(i),
+  qExp:id=>{UI.qOpen=UI.qOpen||{};UI.qOpen[id]=!UI.qOpen[id];},
+  qDrop:id=>{UI.modal={k:'qdrop',id};},qDropGo:id=>{UI.modal=null;questCancel(id);},
+  qNav:id=>{const q=G.run.quests.find(x=>x.id===id);if(!q)return;const n=nodeById(q.node);if(!n)return;if(Math.floor(n.id/100)!==G.run.region){note('Nơi ấy không ở vùng này.');return;}
+    UI.panel=null;if(n.fog>=1){UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else{UI.sel=null;Map2.focus(n.x,n.y);note('Nơi ấy còn chìm trong sương mù, chỉ biết đại khái ở quanh đây.');}},
   bsel:k=>buryToggle(k),
   buryGo:()=>buryItems(),
   autoDodge:v=>{const o=G.meta.opt=G.meta.opt||{};o.userDodge=v==='1';syncDodge();},
