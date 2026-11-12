@@ -9,9 +9,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from excel_chung import DANG_K, K_SHEET, EQ_SHEETS, PHAM, VUNG, CG, HE, N_TYPE, sheet_rows
 
-XLSX = os.path.join(ROOT, 'docs/vat-pham.xlsx')
-OUT = os.path.join(ROOT, 'src/data/catalog.js')
-REPORT = os.path.join(ROOT, 'docs/bao-cao-vat-pham.md')
+XLSX = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'docs/vat-pham.xlsx')
+OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'src/data/catalog.js')
+REPORT = sys.argv[3] if len(sys.argv) > 3 else os.path.join(ROOT, 'docs/bao-cao-vat-pham.md')
 
 EQ_FX = set('atkP matkP defP hpP mpP crit critDmg dodge tp ngo tam van tvP regenHp regenMp startBlock blockTurn reflect poisonHit stunP elX pillP mpCost shopP stonesP lifeP drain execute healAfter firstEvade weakStart vulnStart pillSlot tammaRes hoTam craftP bqSafe bqP'.split())
 TRAIT_FX = EQ_FX | {'burnHit', 'chkP', 'poisonImm'}
@@ -64,8 +64,7 @@ def fx_from(d, sh, row, allowed, ncol, kcol='Chỉ số {}', vcol='Giá trị {}
     return fx
 
 wb = openpyxl.load_workbook(XLSX, data_only=True)
-C = {'relics': [], 'uniqOver': {}, 'pre': {}, 'base': {}, 'skills': [], 'skOver': {}, 'arts': [], 'pills': [], 'pillOver': {},
-     'mounts': [], 'mats': [], 'beasts': [], 'origins': [], 'originOver': {}, 'traits': [], 'traitOver': {}, 'qitems': []}
+C = {'relics': [], 'pre': {}, 'base': {}, 'skills': [], 'arts': [], 'pills': [], 'mounts': [], 'mats': [], 'beasts': [], 'origins': [], 'qitems': []}
 seen_id = {}
 
 def take_id(d, sh, row):
@@ -75,23 +74,44 @@ def take_id(d, sh, row):
     if i in seen_id: err(sh, row, f'ID trùng với {seen_id[i]}'); return None
     seen_id[i] = f'{sh} dòng {row}'; return i
 
-# ---------- trang bị và vật tùy thân ----------
+# ---------- trang bị và vật tùy thân (luật mới: phẩm = số dòng, cảnh giới cần = độ lớn) ----------
+REL_X = [0, 1, 1, 2, 2, 3, 4]
+POOL = set('atkP matkP defP hpP mpP tp crit critDmg dodge van tam ngo tvP'.split())
+NT = set('firstEvade startBlock blockTurn weakStart vulnStart poisonHit stunP reflect execute drain regenHp regenMp healAfter hoTam pillP stonesP pillSlot shopP tammaRes elX craftP bqSafe bqP'.split())
+KFX = {'kiem': ['atkP'], 'dao': ['atkP', 'crit', 'critDmg'], 'hotam': ['hoTam', 'defP'], 'phap': ['matkP'], 'giap': ['defP'], 'bao': ['hpP'], 'boi': ['mpP'], 'ngoa': ['tp', 'dodge'],
+       'linh': ['startBlock'], 'hoan': ['regenMp'], 'dinh': ['pillP'], 'phien': ['poisonHit'], 'chau': ['regenHp'], 'kinh': ['reflect'], 'gian': ['tvP'], 'an': ['stunP'], 'tram': ['dodge'],
+       'holo': ['healAfter'], 'thap': ['defP', 'blockTurn'], 'tan': ['firstEvade'], 'cam': ['weakStart'], 'xich': ['vulnStart'], 'but': ['ngo'], 'tui': ['stonesP', 'pillSlot'],
+       'nhan': ['van', 'crit', 'critDmg'], 'lenh': ['tam', 'shopP'], 'dang': ['tam', 'tammaRes'], 'cot': ['execute'], 'huyet': ['drain'], 'phu': ['hpP', 'defP'], 'hap': ['elX'],
+       'non': ['tam', 'defP'], 'gang': ['atkP', 'crit'], 'dai': ['hpP', 'tp'], 'hoa': ['craftP'], 'tran': ['bqP', 'bqSafe']}
+pending = collections.Counter()
 for sh in EQ_SHEETS:
     for row, d in sheet_rows(wb[sh]):
+        if code_of(d): continue   # đồ có sẵn trong game: chỉ để tra
         cid = take_id(d, sh, row)
         if not cid or not d.get('Tên'): continue
         k = DANG_K.get(d.get('Dạng'))
         if not k or K_SHEET[k][0] != sh: err(sh, row, f'Dạng "{d.get("Dạng")}" không thuộc trang này'); continue
-        fx = fx_from(d, sh, row, EQ_FX, 4)
-        if not fx: err(sh, row, 'không có chỉ số nào dùng được'); continue
+        if not any(d.get(f'Số gốc {i}') not in (None, '') for i in (1, 2, 3)): pending[sh] += 1; continue
+        if d.get('Cảnh giới cần') not in CG: err(sh, row, 'thiếu Cảnh giới cần'); continue
+        req = CG.index(d['Cảnh giới cần']); t = idx(PHAM, d.get('Phẩm'), sh, row, 'Phẩm', 1); reg = region_of(d.get('Vùng xuất hiện')); uniq = d.get('Độc nhất') == 'Có'
+        if not (reg <= req <= reg + 1) and not (uniq and reg == 4 and req == 6): warn(sh, row, f'Cảnh giới cần {d["Cảnh giới cần"]} lệch với vùng {reg}')
+        fx = fx_from(d, sh, row, EQ_FX, 3, 'Gốc {}', 'Số gốc {}')
+        if sorted(k2 for k2 in fx) != sorted(KFX[k]): warn(sh, row, f'mã gốc {list(fx)} khác mã gốc của dạng {KFX[k]}')
+        sub = fx_from(d, sh, row, EQ_FX, 4, 'Phụ {}', 'Số phụ {}')
+        for k2 in list(sub):
+            if k2 not in POOL or k2 in fx: warn(sh, row, f'dòng phụ {k2} không hợp lệ (ngoài 13 mã phụ hoặc trùng mã gốc), bỏ'); del sub[k2]
+        if len(sub) != REL_X[t]: warn(sh, row, f'{PHAM[t]} cần {REL_X[t]} dòng phụ, đang có {len(sub)}')
+        ex = fx_from(d, sh, row, EQ_FX, 1, 'Nội tại thêm', 'Số nội tại thêm') if d.get('Nội tại thêm') else {}
+        for k2 in list(ex):
+            if k2 not in NT: warn(sh, row, f'"{k2}" không phải nội tại, bỏ'); del ex[k2]
+            elif not uniq or any(x in NT for x in fx): warn(sh, row, 'chỉ đồ Độc nhất có dạng chưa có nội tại mới được thêm nội tại, bỏ'); del ex[k2]
+        allfx = dict(fx)
+        for k2, v in list(sub.items()) + list(ex.items()): allfx[k2] = allfx.get(k2, 0) + v
+        if sum(1 for x in allfx if x in NT) > 1: warn(sh, row, 'có hơn 1 nội tại')
         el = d.get('Hệ') if d.get('Hệ') in HE else 'vo'
-        item = {'id': cid, 'n': d['Tên'], 'k': k, 'el': el, 't': idx(PHAM, d.get('Phẩm'), sh, row, 'Phẩm', 1),
-                'reg': region_of(d.get('Vùng xuất hiện')), 'u': 1 if d.get('Độc nhất') == 'Có' else 0, 'fx': fx,
-                'lore': d.get('Mô tả / lời tựa') or '', 'src': d.get('Nguồn gặp') or ''}
-        code = code_of(d)
-        if code: C['uniqOver'][code] = {'name': item['n'], 'el': el, 'fx': fx, 'lore': item['lore']}; continue
-        if item['t'] == 6 and not item['u']: warn(sh, row, 'Thần phẩm phải là đồ độc nhất, đặt Độc nhất = Có'); item['u'] = 1
-        C['relics'].append(item)
+        if t == 6 and not uniq: warn(sh, row, 'Thần phẩm phải là đồ độc nhất, đặt Độc nhất = Có'); uniq = True
+        C['relics'].append({'id': cid, 'n': d['Tên'], 'k': k, 'el': el, 't': t, 'req': req, 'reg': reg, 'u': 1 if uniq else 0, 'fx': allfx,
+                            'lore': d.get('Mô tả / lời tựa') or '', 'src': d.get('Nguồn gặp') or ''})
 
 # ---------- tên ghép ----------
 sh = 'TB Tên ghép'
@@ -133,7 +153,7 @@ for row, d in sheet_rows(wb[sh]):
          'vl': 1 if d.get('Kiểu sát thương') == 'Vật lý' else 0, 'ch': 1 if d.get('Tụ lực') == 'Có' else 0, 'aoe': 1 if d.get('Diện rộng') == 'Có' else 0,
          'dao': 1 if d.get('Đạo pháp') == 'Có' else 0}
     sk_name[d['Tên'].lower()] = gid; sk_name[cid] = gid; sk_name[gid] = gid
-    (C['skOver'].__setitem__(gid, s) if code else C['skills'].append(s))
+    if not code: C['skills'].append(s)
 
 # ---------- công pháp, tâm pháp ----------
 for sh, typ in [('BT Công pháp', 'cp'), ('BT Tâm pháp', 'tp')]:
@@ -205,12 +225,13 @@ for sh in ['DD Đan dược', 'DD Phù lục', 'DD Đột phá']:
             else: p['d'] = EFF_D[e]
             if e == 'linhnhu': p['dao'] = x
         code = code_of(d)
-        if code: C['pillOver'][code] = {k: p[k] for k in ('n', 'i', 'x', 'p')}; continue
+        if code: continue
         C['pills'].append(p)
 
 # ---------- phương tiện ----------
 sh = 'VT Phương tiện'
 for row, d in sheet_rows(wb[sh]):
+    if code_of(d): continue
     cid = take_id(d, sh, row)
     if not cid or not d.get('Tên'): continue
     m = num(d.get('Tốc độ (gấp mấy lần đi bộ)'))
@@ -274,15 +295,22 @@ for row, d in sheet_rows(wb[sh]):
     if ps: o['pill'] = ps[0]
     if len(ps) > 1: o['pill2'] = ps[1]
     if not o['bio']: err(sh, row, 'thiếu câu tiểu sử'); continue
-    (C['originOver'].__setitem__(o['id'], o) if code_of(d) else C['origins'].append(o))
-sh = 'NV Thiên phú'
-for row, d in sheet_rows(wb[sh]):
-    cid = take_id(d, sh, row)
-    if not cid or not d.get('Tên'): continue
-    o = {'id': code_of(d) or cid, 'n': d['Tên'], 'i': d.get('Biểu tượng') or '✨', 'fx': fx_from(d, sh, row, TRAIT_FX, 3), 'd': d.get('Mô tả ngắn (hiện khi chọn)') or ''}
-    if not o['fx']: err(sh, row, 'không có chỉ số'); continue
-    (C['traitOver'].__setitem__(o['id'], o) if code_of(d) else C['traits'].append(o))
-
+    ls = [x.replace('{que}', '{que}') for x in (d.get('Chuyện thơ ấu 1'), d.get('Chuyện thơ ấu 2')) if x]
+    if len(ls) < 2: warn(sh, row, 'thiếu chuyện thơ ấu (trang mở đầu kiếp chỉ hiện câu tiểu sử)')
+    if ls: o['ls'] = ls
+    TINH = {'Bảo thủ', 'Chính trực', 'Cuồng tà', 'Căm thù', 'Hiếu chiến', 'Hào sảng', 'Lạnh lùng', 'Nhân hậu', 'Quái gở', 'Sát phạt', 'Thông tuệ', 'Thận trọng', 'Thực dụng', 'Tàn nhẫn', 'Tự do', 'Độc ác', 'Thâm độc', 'Vị kỷ'}
+    tinh = [x.strip() for x in str(d.get('Tính tình') or '').split(',') if x.strip()]
+    bad = [x for x in tinh if x not in TINH]
+    if bad: warn(sh, row, f'tính tình lạ {bad}, bỏ')
+    tinh = [x for x in tinh if x in TINH]
+    if tinh: o['tinh'] = tinh
+    elif not code_of(d): warn(sh, row, 'thiếu tính tình')
+    tp = d.get('Tâm pháp gia truyền')
+    if tp in ('Phàm phẩm', 'Hoàng phẩm'):
+        o['tp'] = PHAM.index(tp)
+        if d.get('Câu kể tâm pháp'): o['tpc'] = d['Câu kể tâm pháp']
+        else: warn(sh, row, 'có tâm pháp gia truyền nhưng thiếu câu kể')
+    if not code_of(d): C['origins'].append(o)
 # ---------- ghi ra ----------
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 with open(OUT, 'w', encoding='utf-8') as f:
@@ -294,15 +322,16 @@ nerr = sum(1 for L in msgs.values() for x in L if x[1] == 'BỎ'); nw = sum(len(
 with open(REPORT, 'w', encoding='utf-8') as f:
     f.write('# Báo cáo chuyển Excel vào game\n\nTệp sinh tự động mỗi lần chạy `tools/excel2game.py`.\n\n')
     f.write('## Số lượng đưa vào game\n\n| Nhóm | Số mục |\n|---|---|\n')
-    N = {'relics': 'Trang bị, vật tùy thân (mới)', 'uniqOver': 'Đồ độc nhất cũ (cập nhật theo Excel)', 'pre': 'Hệ có tiền tố', 'base': 'Dạng có tên gốc',
-         'skills': 'Chiêu thức mới', 'skOver': 'Chiêu cũ (cập nhật)', 'arts': 'Công pháp + tâm pháp viết sẵn', 'pills': 'Đan dược, phù lục, đan đột phá mới',
-         'pillOver': 'Đan cũ (cập nhật)', 'mounts': 'Phương tiện', 'mats': 'Nguyên liệu có tên', 'beasts': 'Loài yêu thú mới', 'origins': 'Xuất thân mới',
-         'originOver': 'Xuất thân cũ (cập nhật)', 'traits': 'Thiên phú mới', 'traitOver': 'Thiên phú cũ (cập nhật)', 'qitems': 'Vật nhiệm vụ'}
+    N = {'relics': 'Trang bị, vật tùy thân mới (đã có chỉ số theo luật mới)', 'pre': 'Hệ có tiền tố', 'base': 'Dạng có tên gốc', 'skills': 'Chiêu thức mới',
+         'arts': 'Công pháp + tâm pháp viết sẵn', 'pills': 'Đan dược, phù lục, đan đột phá mới', 'mounts': 'Phương tiện mới', 'mats': 'Nguyên liệu có tên',
+         'beasts': 'Loài yêu thú mới', 'origins': 'Xuất thân mới', 'qitems': 'Vật nhiệm vụ'}
     for k, v in cnt.items(): f.write(f'| {N[k]} | {v} |\n')
+    if pending: f.write('\nTrang bị CHƯA có chỉ số theo luật mới (chờ GPT viết, chưa đưa vào game): ' + ', '.join(f'{k} {v}' for k, v in pending.items()) + f' · tổng {sum(pending.values())}\n')
+    f.write('\nDòng tô xanh (đồ có sẵn trong game) chỉ để tra, công cụ không đè lên game.\n')
     f.write(f'\nTiền tố: {sum(len(v) for v in C["pre"].values())} · Tên gốc: {sum(len(v) for v in C["base"].values())}\n')
     f.write(f'\n## Lỗi và chỗ đã sửa ({nerr} dòng bị bỏ, {nw} chỗ tự sửa)\n\n"BỎ" = dòng không đưa vào game. "sửa" = vẫn đưa vào, đã chỉnh như mô tả.\n')
     for sh, L in msgs.items():
         f.write(f'\n### {sh}\n\n')
         for r, lv, t in L: f.write(f'- dòng {r} · **{lv}** · {t}\n')
 print('Đã ghi', OUT, '|', ', '.join(f'{k}={v}' for k, v in cnt.items()))
-print(f'Bỏ {nerr} dòng, tự sửa {nw} chỗ. Xem {REPORT}')
+print(f'Bỏ {nerr} dòng, tự sửa {nw} chỗ, trang bị chờ viết {sum(pending.values())}. Xem {REPORT}')

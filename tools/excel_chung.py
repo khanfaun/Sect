@@ -26,7 +26,7 @@ _PB = ['linh', 'phien', 'chau', 'kinh', 'gian', 'an', 'holo', 'thap', 'tan', 'ca
 K_SHEET = {'kiem': ('TB Vũ khí', 'vk_'), 'dao': ('TB Vũ khí', 'vk_'), 'phap': ('TB Vũ khí', 'vk_'), 'but': ('TB Vũ khí', 'vk_'),
            'non': ('TB Nón', 'non_'), 'tram': ('TB Nón', 'non_'), 'boi': ('TB Ngọc bội', 'boi_'), 'hotam': ('TB Ngọc bội', 'boi_'),
            'gang': ('TB Găng', 'gang_'), 'hoan': ('TB Găng', 'gang_'), 'giap': ('TB Giáp', 'giap_'), 'bao': ('TB Áo choàng', 'ao_'),
-           'nhan': ('TB Nhẫn', 'nhan_'), 'dai': ('TB Đai lưng', 'dai_'), 'ngoa': ('TB Giày', 'giay_'),
+           'nhan': ('TB Trang sức', 'nhan_'), 'dai': ('TB Đai lưng', 'dai_'), 'ngoa': ('TB Giày', 'giay_'),
            'tui': ('VT Trữ vật', 'tui_'), 'hoa': ('VT Hỏa chủng', 'hoa_'), 'dinh': ('VT Lô đỉnh', 'dinh_'), 'tran': ('VT Trận pháp', 'tran_')}
 for _k in _PB: K_SHEET[_k] = ('TB Pháp bảo', 'pb_')
 EQ_SHEETS = sorted({v[0] for v in K_SHEET.values()})

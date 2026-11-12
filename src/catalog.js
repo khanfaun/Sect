@@ -4,7 +4,7 @@
 // lớp bọc quanh hàm sẵn có, bỏ tệp này ra thì game trở lại như cũ.
 const CAT=(function(){
   const D=CATALOG_DATA;const by={};
-  for(const k of ['relics','skills','arts','pills','mounts','mats','beasts','origins','traits','qitems'])for(const x of D[k])by[x.id]=x;
+  for(const k of ['relics','skills','arts','pills','mounts','mats','beasts','origins','qitems'])for(const x of D[k])by[x.id]=x;
   return Object.assign({byId:by},D);
 })();
 
@@ -13,30 +13,26 @@ for(let i=0;i<PHAM.length;i++)GRADE[i]=PHAM[i];
 // ---------- chữ: thay {who} {sect} {pl} trong lời tựa ----------
 function catText(s){if(!s)return '';return s.replace(/\{who\}/g,()=>genName(chance(.5)?'nam':'nu')).replace(/\{sect\}/g,()=>pick(G.meta.world.sects).n).replace(/\{pl\}/g,()=>placeName(pick(['nui','thanh','tran','song','phe'])));}
 
-// ---------- 1. đồ độc nhất cũ: cập nhật theo Excel ----------
-for(const [id,o] of Object.entries(CAT.uniqOver)){const U0=RELIC_UNIQUE[id];if(U0)Object.assign(U0,{name:o.name,el:o.el,fx:o.fx,lore:o.lore});}
-
 // ---------- 2. tên ghép cho đồ rơi ngẫu nhiên ----------
 for(const [el,L] of Object.entries(CAT.pre)){RELIC_PRE[el]=Array.from(new Set((RELIC_PRE[el]||[]).concat(L)));}
 for(const [k,L] of Object.entries(CAT.base)){const K=RELIC_K.find(x=>x.k===k);if(K)K.b=Array.from(new Set(K.b.concat(L)));}
 
-// ---------- 3. trang bị viết sẵn: rơi theo phẩm, đồ độc nhất mỗi kiếp gặp một lần ----------
-function catRelic(x){return {name:x.n,k:x.k,tier:x.t,el:x.el,fx:Object.assign({},x.fx),fix:1,lore:catText(x.lore),cid:x.id,u:x.u?x.id:undefined};}
+// ---------- 3. trang bị viết sẵn (luật mới: cảnh giới cần quyết định độ lớn; số trong Excel là số người chơi thấy) ----------
+function catRelic(x){return {name:x.n,k:x.k,tier:x.t,el:x.el,fx:Object.assign({},x.fx),fix:1,req:x.req,lore:catText(x.lore),cid:x.id,u:x.u?x.id:undefined};}
 function catOwned(id){const r=G.run;if((r.uSeen||[]).includes(id))return true;const E=r.eq||{};return r.relics.some(x=>x.cid===id)||Object.values(E).some(x=>x&&x.cid===id)||(r.dd||[]).some(d=>d.rel.cid===id);}
-function catRelicPick(tier){const r=G.run;let t=tier+(chance(.25)?1:0);if(tier>=4&&chance(.15))t=5;
-  let pool=CAT.relics.filter(x=>!x.u&&x.t===t&&x.reg<=r.region+1);if(!pool.length)pool=CAT.relics.filter(x=>!x.u&&x.t===tier);
+function catRelicPick(tier){const req=relReqRoll();const t=clamp(tier+(chance(.25)?1:0)+(chance(.1)?1:0),0,6);
+  let pool=CAT.relics.filter(x=>!x.u&&x.req===req&&x.t===t);if(!pool.length)pool=CAT.relics.filter(x=>!x.u&&x.req===req);
   return pool.length?catRelic(pick(pool)):null;}
-function catUniquePick(tier){const r=G.run;const pool=CAT.relics.filter(x=>x.u&&x.t<=tier+1&&x.reg<=r.region&&!catOwned(x.id));
+function catUniquePick(){const r=G.run;const pool=CAT.relics.filter(x=>x.u&&x.reg<=r.region&&!catOwned(x.id));
   if(!pool.length)return null;const x=pick(pool);(r.uSeen=r.uSeen||[]).push(x.id);return catRelic(x);}
-{const _g=genRelic;genRelic=function(tier){if(chance(.035)){const u=catUniquePick(tier);if(u)return u;}if(chance(.55)){const x=catRelicPick(tier);if(x)return x;}return _g(tier);};}
-// đồ viết sẵn mang đúng con số ghi trong Excel, không nhân theo phẩm nữa
+{const _g=genRelic;genRelic=function(tier){if(CAT.relics.length){if(chance(.035)){const u=catUniquePick();if(u)return u;}if(chance(.55)){const x=catRelicPick(tier);if(x)return x;}}return _g(tier);};}
+// đồ viết sẵn mang đúng con số ghi trong Excel (đã tính theo cảnh giới cần)
 {const _rf=relicFx;relicFx=function(rel){if(!rel||!rel.fix)return _rf(rel);return Object.assign({},rel.fx);};}
 
 // ---------- 4. chiêu thức ----------
 function catSkill(s){const fx=Object.assign({},s.fx);if(s.ch){fx.charge=true;if(fx.p)fx.p=Math.round(fx.p*1.35*100)/100;}if(s.aoe)fx.aoe=true;
   return {id:s.id,n:s.n,el:s.el,t:s.t,c:s.c,fx,f:s.f,dao:s.dao,dt:s.vl?'vl':'phep'};}
 for(const s of CAT.skills){if(SK[s.id])continue;SK_RAW.push([s.id,s.n,s.el,s.t,s.c,s.fx,s.f]);SK[s.id]=catSkill(s);}
-for(const [id,s] of Object.entries(CAT.skOver)){if(!SK[id])continue;const raw=SK_RAW.find(x=>x[0]===id);if(raw){raw[1]=s.n;raw[2]=s.el;raw[3]=s.t;raw[4]=s.c;raw[5]=s.fx;raw[6]=s.f;}SK[id]=catSkill(s);}
 
 // ---------- 5. công pháp, tâm pháp viết sẵn ----------
 const CAT_INT=['rageTurn','firstEvade','weakStart','vulnStart','pillSlot','ngo','tam','van'];
@@ -55,7 +51,6 @@ function catArt(a){const r=G.run;r.aid=(r.aid||0)+1;
 // ---------- 6. đan dược, phù lục, đan đột phá ----------
 for(const p of CAT.pills){if(PILL[p.id])continue;const o={n:p.n,i:p.i,x:p.x,d:p.d,w:p.w,p:p.p,eff:p.eff,reg:p.reg,lore:p.lore,cat:1};
   if(p.el)o.el=p.el;if(p.bt)o.bt=p.bt;if(p.realm!=null)o.realm=p.realm;if(p.dao)o.dao=p.dao;else if(p.eff&&PILL[p.eff]&&PILL[p.eff].dao)o.dao=PILL[p.eff].dao;PILL[p.id]=o;}
-for(const [id,o] of Object.entries(CAT.pillOver)){if(PILL[id])Object.assign(PILL[id],o);}
 // đan mới mượn cách tác dụng của đan gốc cùng loại
 {const _up=usePill;usePill=function(idx,inCombat){const r=G.run,it=r&&r.pills[idx];const p=it&&PILL[it.id];if(!p||!p.eff)return _up(idx,inCombat);
   if(p.eff==='loiphu'&&p.el&&p.el!=='loi')return catStrike(idx,inCombat,p);
@@ -79,11 +74,12 @@ function catMountSync(){const r=G.run;const re=r?r.realm:0;const L=CAT_MOUNT.fil
 // ---------- 8. loài yêu thú mới (gặp ngoài đồng, có thể nở trứng thành linh thú) ----------
 for(const b of CAT.beasts){if(EN[b.id])continue;EN[b.id]={f:'thu',i:b.i,nb:b.nb,hp:b.hp,atk:b.atk,def:b.def,pat:b.pat,el:b.el,pl:b.pl};for(const g of b.regs)if(REG_EN[g]&&!REG_EN[g].includes(b.id))REG_EN[g].push(b.id);}
 
-// ---------- 9. xuất thân, thiên phú ----------
-for(const [id,o] of Object.entries(CAT.originOver)){const x=ORIGIN.find(z=>z.id===id);if(x){const sk=x.skill;Object.assign(x,o);if(sk)x.skill=sk;}}
-for(const o of CAT.origins)if(!ORIGIN.some(z=>z.id===o.id))ORIGIN.push(o);
-for(const [id,o] of Object.entries(CAT.traitOver)){const x=TRAIT.find(z=>z.id===id);if(x)Object.assign(x,o);}
-for(const o of CAT.traits)if(!TRAIT.some(z=>z.id===o.id))TRAIT.push(o);
+// ---------- 9. xuất thân: chuyện thơ ấu, tính tình (xét thể chất), tâm pháp gia truyền ----------
+for(const o of CAT.origins){if(ORIGIN.some(z=>z.id===o.id))continue;const x={id:o.id,n:o.n,i:o.i,fx:o.fx,d:o.d,bio:o.bio};
+  for(const k of ['st','karma','tamma','age','pill','pill2'])if(o[k]!=null)x[k]=o[k];
+  if(o.ls)LS_OG[o.id]=o.ls.map(t=>t.replace(/\{que\}/g,'{que}'));if(o.tinh)TT_TRAITS[o.id]=o.tinh;
+  if(o.tp!=null){TP_ORIGIN[o.id]=o.tp;if(o.tpc)LS_TPG[o.id]=o.tpc;x.d+=', có tâm pháp gia truyền';}
+  ORIGIN.push(x);}
 
 // ---------- 10. nguyên liệu có tên: tổng số mỗi nhóm vẫn là của game, tên chỉ chia phần ----------
 function catMatSync(){const r=G.run;if(!r||!r.mats)return;const N=r.matN||(r.matN={});

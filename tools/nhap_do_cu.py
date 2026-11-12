@@ -21,7 +21,7 @@ const html=fs.readFileSync(process.argv[2],'utf8');
 const a=html.indexOf('<script>')+8,b=html.indexOf('// ================= GIAO DIỆN');
 const ctx=vm.createContext({console,Math,JSON,Date,performance:{now:()=>Date.now()}});
 vm.runInContext(html.slice(a,b),ctx);
-process.stdout.write(JSON.stringify(vm.runInContext(`({RELIC_UNIQUE,RELIC_K,RELIC_PRE,PILL,SK_RAW,SK,MOUNT,MAT,EN,ORIGIN,TRAIT,REG_EN,CATALOG_IDS:typeof CATALOG!=='undefined'?Object.keys(CATALOG.byId||{}):[]})`,ctx)));
+process.stdout.write(JSON.stringify(vm.runInContext(`({RELIC_UNIQUE,RELIC_K,RELIC_PRE,PILL,SK_RAW,SK,MOUNT,MAT,EN,ORIGIN,REG_EN,LS_OG,LS_TPG,TT_TRAITS,TP_ORIGIN})`,ctx)));
 '''
 with tempfile.NamedTemporaryFile('w', suffix='.js', delete=False) as f:
     f.write(js); jsf = f.name
@@ -68,9 +68,9 @@ ICON = {'kiem': '🗡️', 'phien': '🏴', 'boi': '💠', 'nhan': '💍', 'kinh
 # 1. pháp bảo độc nhất
 for code, u in G['RELIC_UNIQUE'].items():
     k = u['k']; dang = K_DANG[k]
-    row = {'ID': K_SHEET[k][1] + code, 'Tên': u['name'], 'Dạng': dang, 'Hệ': u.get('el', 'vo'), 'Phẩm': 'Hoàng phẩm',
+    row = {'ID': K_SHEET[k][1] + code, 'Tên': u['name'], 'Dạng': dang, 'Hệ': u.get('el', 'vo'), 'Phẩm': 'Hoàng phẩm', 'Cảnh giới cần': 'Phàm nhân',
            'Vùng xuất hiện': VUNG[0], 'Độc nhất': 'Có', 'Biểu tượng': ICON.get(k, '🏺'), 'Mô tả / lời tựa': u.get('lore', ''), 'Nguồn gặp': 'Sự kiện'}
-    row.update(fx_cols(u['fx']))
+    for j, (kk, vv) in enumerate(u['fx'].items(), 1): row[f'Gốc {j}'] = kk; row[f'Số gốc {j}'] = vv
     upsert(K_SHEET[k][0], row, code)
 
 # 2. tên ghép: tên gốc theo dạng và tiền tố theo hệ
@@ -130,17 +130,17 @@ for code, e in G['EN'].items():
                            'Biểu tượng': e['i'], 'Khí huyết': e['hp'], 'Công': e['atk'], 'Thủ': e['def'], 'Nhịp đánh': ', '.join(e['pat']),
                            'Nơi sống': ', '.join(TYPE_N.get(p, p) for p in e['pl']), 'Vùng xuất hiện': ', '.join(regs) or '0'}, code, keycol='Tên loài')
 
-# 8. xuất thân, thiên phú
+# 8. xuất thân (kèm chuyện thơ ấu, tính tình, tâm pháp gia truyền)
+PH = ['Phàm phẩm', 'Hoàng phẩm']
 for o in G['ORIGIN']:
+    ls = G['LS_OG'].get(o['id'], [])
     row = {'ID': 'xt_' + o['id'], 'Tên': o['n'], 'Biểu tượng': o['i'], 'Linh thạch thêm': o.get('st', 0),
            'Đan dược tặng': ', '.join(G['PILL'][p]['n'] for p in [o.get('pill'), o.get('pill2')] if p), 'Nhân quả': o.get('karma', 0), 'Tâm ma ban đầu': o.get('tamma', 0),
-           'Nhập đạo muộn (năm)': o.get('age', 0), 'Mô tả ngắn (hiện khi chọn)': o['d'], 'Câu tiểu sử': o['bio'].replace('{$que}', '{que}').replace('{$quoc}', '{quoc}')}
+           'Nhập đạo muộn (năm)': o.get('age', 0), 'Mô tả ngắn (hiện khi chọn)': o['d'], 'Câu tiểu sử': o['bio'].replace('{$que}', '{que}').replace('{$quoc}', '{quoc}'),
+           'Chuyện thơ ấu 1': ls[0] if ls else None, 'Chuyện thơ ấu 2': ls[1] if len(ls) > 1 else None, 'Tính tình': ', '.join(G['TT_TRAITS'].get(o['id'], [])) or None,
+           'Tâm pháp gia truyền': PH[G['TP_ORIGIN'][o['id']]] if o['id'] in G['TP_ORIGIN'] else 'Không', 'Câu kể tâm pháp': G['LS_TPG'].get(o['id'])}
     row.update(fx_cols(o.get('fx', {}), 2))
-    if o.get('skill'): row['Mô tả ngắn (hiện khi chọn)'] = o['d']
     upsert('NV Xuất thân', row, o['id'])
-for o in G['TRAIT']:
-    row = {'ID': 'tf_' + o['id'], 'Tên': o['n'], 'Biểu tượng': o['i'], 'Mô tả ngắn (hiện khi chọn)': o['d']}
-    row.update(fx_cols(o['fx'], 3)); upsert('NV Thiên phú', row, o['id'])
 
 # 9. vật nhiệm vụ có sẵn
 upsert('NV Nhiệm vụ & kỳ vật', {'ID': 'nv_lenhbai_thongquan', 'Tên': 'Lệnh bài thông quan', 'Dạng': 'Lệnh bài', 'Biểu tượng': '🎫', 'Dùng trong (sự kiện / chuỗi nào)': 'Trình ở quan ải để sang vùng kế tiếp', 'Mô tả': 'Rơi từ thủ lĩnh vùng, hoặc mua ở hội đấu giá.'}, 'pass')
