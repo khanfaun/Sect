@@ -2141,3 +2141,6 @@ const REL_POOL={atkP:5,matkP:6,defP:8,hpP:6,mpP:8,tp:1,crit:3,critDmg:8,dodge:3,
   for(const k in o){if(['firstEvade','weakStart','vulnStart','pillSlot'].includes(k))continue;o[k]=k==='poisonHit'?Math.round(o[k]*m*100)/100:Math.max(1,Math.round(o[k]*m));}
   for(const [k,v] of Object.entries(rel.fx2||{})){const x=v*m;o[k]=(o[k]||0)+(['tp','van','tam','ngo','regenHp','regenMp'].includes(k)?Math.max(1,Math.round(x)):Math.round(x));}
   return o;};}
+// "thêm ô đan dược" (pillSlot) trên vật phẩm: đan dược đã dùng chung túi đồ, nên đổi thành thêm ô túi đồ (chỉ tính đồ đang mặc, đang uẩn dưỡng)
+FXT.pillSlot='👝 Túi đồ thêm {v} ô';
+{const _bc33=bagCap;bagCap=function(){const r=G.run;const b=_bc33();if(!r)return b;const E=eqOf();let add=0;for(const x of Object.values(E))if(x)add+=relicFx(x).pillSlot||0;for(const d of r.dd||[])add+=relicFx(d.rel).pillSlot||0;return Math.min(BAG_MAX,b+add);};}
