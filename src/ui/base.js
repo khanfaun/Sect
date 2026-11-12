@@ -104,7 +104,7 @@ function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" 
 // ---------- mẩu nhỏ dùng chung ----------
 // mỗi loại một biểu tượng duy nhất: các biểu tượng cũ dạng emoji trong nhãn được đổi sang bộ biểu tượng nét mảnh
 const EMO_IC={'⏳':'hour','🏺':'ring','❤️':'heart','📖':'book','☯️':'yin','🤝':'people','💧':'drop','✨':'spark','⚗️':'flask','⚔':'sword','⚔️':'sword','🗡️':'sword','😈':'skull','🗺️':'pin','📜':'scroll','🏅':'medal','🎫':'flag','🍃':'clover','🍀':'clover','🌩️':'bolt','☁️':'sun','🛡️':'shield','🌀':'wind','🧠':'brain','🪷':'lotus','🌕':'moon'};
-function emoIc(e){if(e==='💎')return '<i class="rh"></i>';const k=EMO_IC[e];return k?ic(k):e;}
+function emoIc(e){if(e==='?')return '<i class="qmk">?</i>';if(e==='💎')return '<i class="rh"></i>';const k=EMO_IC[e];return k?ic(k):e;}
 function emoTxt(h){return String(h).replace(/💎/g,'<i class="rh"></i>').replace(/⏳/g,ic('hour'));}
 function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}${c.h?` data-tiph="${esc(c.h)}"`:''}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
 function elSeal(e){const E=EL[e]||EL.vo;return `<span class="el el-${e}"${ta('Hệ '+E.n+(KHAC[e]?'\nKhắc '+EL[KHAC[e]].n:''))}>${E.c}</span>`;}
