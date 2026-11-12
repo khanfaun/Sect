@@ -6436,7 +6436,7 @@ Object.assign(TT_FXN,{van:'Khí vận {v}',shopP:'Mua đồ rẻ {v}%'});
 {const _nr27=newRun;newRun=function(c){const res=_nr27(c);const r=G.run;if(!r||!r.story||!r.kv)return res;
   const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const nm=w.slice(h2?2:1).join(' ')||r.ten;const at=Math.max(1,r.story.length-2);
   if(r.kv.includes('gia_canh_kha_gia')){const v=ri(3,6);r.st+=v;r.story.splice(at,0,'Nhà vẫn còn chút của để dành. Lúc '+nm+' ra đi, trong tay nải có thêm '+v+' viên linh thạch.');}
-  const top=r.kv.map(k=>TT_DEST[k]).filter(d=>d&&d.rank>=2&&d.id!=='gia_canh_kha_gia'&&!d.mc&&!/linh căn|kích hoạt|tự động/i.test(d.description)).sort((a,b)=>b.rank-a.rank)[0];
+  const top=r.kv.map(k=>TT_DEST[k]).filter(d=>d&&d.rank>=2&&d.id!=='gia_canh_kha_gia'&&!d.mc&&!d.tr&&!/linh căn|kích hoạt|tự động/i.test(d.description)).sort((a,b)=>b.rank-a.rank)[0];
   if(top){const d=top.description.replace(/\.$/,'');r.story.splice(Math.max(1,r.story.length-2),0,'Người quen ai cũng nói về '+nm+': '+d.charAt(0).toLowerCase()+d.slice(1)+'.');}
   saveSoon();return res;};}
 
@@ -6461,15 +6461,36 @@ TRAIT.push({id:'none',n:'Không',i:'',fx:{},d:''});
 {const _tr28=ttRoll;ttRoll=function(){const L=_tr28();const all=Object.values(TT_DEST);for(let i=0;i<U('menh');i++){const rk=wpick([1,2,3,4,5,6],x=>TT_RW[x]);const pool=all.filter(d=>d.rank===rk&&!L.includes(d.id));if(pool.length)L.push(pick(pool).id);}return L;};}
 {const _gb28=genBirth;genBirth=function(){_gb28();for(const c of G.birth.cards)c.trait='none';};}
 // tính tình (xét thể chất) lấy từ xuất thân và khí vận gốc mệnh cách
-{const _tp28=ttPhys;ttPhys=function(r){const keep=r.trait;const mc=(r.kv||[]).map(k=>TT_DEST[k]&&TT_DEST[k].mc).filter(Boolean);
+{const _tp28=ttPhys;ttPhys=function(r){const keep=r.trait;const mc=(r.kv||[]).map(k=>TT_DEST[k]&&(TT_DEST[k].mc||TT_DEST[k].tr)).filter(Boolean);
   const save={};for(const m of mc){save[m]=1;}const extra=mc.flatMap(m=>TT_TRAITS[m]||[]);const o=TT_TRAITS[r.origin];TT_TRAITS[r.origin]=(o||[]).concat(extra);try{return _tp28(r);}finally{TT_TRAITS[r.origin]=o;if(!o)delete TT_TRAITS[r.origin];}};}
 // câu chuyện mở đầu: khí vận gốc mệnh cách kể bằng câu cũ của mệnh cách
 {const _nr28=newRun;newRun=function(c){const res=_nr28(c);const r=G.run;if(!r||!r.story||!r.kv)return res;const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const nm=w.slice(h2?2:1).join(' ')||r.ten;
-  let at=Math.min(3,r.story.length-2);for(const k of r.kv){const d=TT_DEST[k];if(d&&d.mc&&LS_TR[d.mc]){r.story.splice(at++,0,lsFill(LS_TR[d.mc],{ten:nm}));}}return res;};}
+  let at=Math.min(3,r.story.length-2);for(const k of r.kv){const d=TT_DEST[k];const tk=d&&(d.mc||d.tr);if(tk&&LS_TR[tk]){r.story.splice(at++,0,lsFill(LS_TR[tk],{ten:nm}));}}return res;};}
 
 // bản lưu cũ: nhẫn thứ hai và pháp bảo ở ô chưa mở thì cất về túi
 function eqFix(){const r=G.run;if(!r||!r.eq)return;const E=r.eq;const back=k=>{if(E[k]){E[k].seen=1;r.relics.push(E[k]);E[k]=null;}};back('nhan2');PB_SLOTS.forEach((k,j)=>{if(j>=pbOpen())back(k);});}
 {const _r228=run2;run2=function(){const r=_r228();if(r&&!r._eq3){r._eq3=1;eqFix();}return r;};}
+
+// ================= ĐỢT 29: GỘP KHÍ VẬN TRÙNG NGHĨA, GIẢM BUFF =================
+// Mệnh cách cũ trùng tên hoặc trùng nghĩa với khí vận của Thienmenh: bỏ bản mệnh cách, dồn tác dụng riêng (đã giảm) vào khí vận kia.
+// Câu chuyện mở đầu và tính tình (xét thể chất) vẫn dùng câu cũ của mệnh cách đó.
+const TT_MERGE={kiemtam:['kiem_phach',{elP:{kim:10}}],chithuy:['tam_nhu_chi_thuy',{tam:2,tammaRes:25}],linhnhan:['thien_ly_nhan',{chkP:6}],
+ thiendo:['yeu_menh',{ngo:2,lifeP:-6}],phuctinh:['dai_khi_van',{van:1}],hoalinh:['cuu_duong',{elP:{hoa:10},burnHit:0.08}],
+ ngodao:['thien_co_thong_minh',{tvP:8}],sattinh:['sat_phat_qua_duyet',{execute:15}],huyenco:['linh_khi_than_hoa',{mpP:8,mpCost:-8}]};
+for(const [mc,[to,fx]] of Object.entries(TT_MERGE)){delete TT_DEST['mc_'+mc];const d=TT_DEST[to];if(!d)continue;d.tr=mc;
+  const X=TT_EXTRA[to]||(TT_EXTRA[to]={});for(const [k,v] of Object.entries(fx)){if(k==='elP'){X.elP=X.elP||{};for(const [e,x] of Object.entries(v))X.elP[e]=(X.elP[e]||0)+x;}else X[k]=(X[k]||0)+v;}}
+// Yểu Mệnh mang luôn tên Thiên Đố Anh Tài: trời ghen người tài
+Object.assign(TT_DEST.yeu_menh,{name:'Thiên Đố Anh Tài',description:'Thông minh hơn người, nhưng trời ghen nên thân thể yếu ớt, khó sống lâu.',rank:2});
+// ttFx cộng thêm elP từ TT_EXTRA (bản trước chỉ cộng số)
+{const _tf29=ttFx;ttFx=function(def){if(def&&!def.mc&&TT_EXTRA[def.id]&&TT_EXTRA[def.id].elP){const bak=TT_EXTRA[def.id];const {elP,...rest}=bak;TT_EXTRA[def.id]=rest;let o;try{o=_tf29(def);}finally{TT_EXTRA[def.id]=bak;}o.elP=o.elP||{};for(const [e,x] of Object.entries(elP))o.elP[e]=(o.elP[e]||0)+x;return o;}return _tf29(def);};}
+Object.assign(TT_FXN,{chkP:'Phép thử {v}%',tammaRes:'Kháng tâm ma {v}%',execute:'Sát thương lên kẻ dưới 30% khí huyết {v}%',burnHit:'Đòn đánh gây thiêu',mpCost:'Linh lực tiêu hao {v}%',bqP:'Hiệu quả bế quan {v}%',regenHp:'Hồi khí huyết mỗi lượt {v}%'});
+// Mệnh cách còn lại (không trùng): giảm buff cho cân bằng với khí vận khác cùng phẩm
+const MC_NERF={thanluc:[{atkP:8},'Công +8%'],menhcung:[{hpP:10},'Khí huyết +10%'],luoi:[{shopP:12},'Mua đồ rẻ 12%'],yeuhuyet:[{regenHp:2},'Mỗi lượt hồi 2% khí huyết'],
+ bangco:[{defP:10,elP:{thuy:8,bang:8}},'Thủ +10%, Thủy và Băng +8%'],truongtho:[{lifeP:12},'Thọ nguyên +12%'],bachdoc:[{poisonImm:1,hpP:3},'Miễn nhiễm độc, khí huyết +3%'],
+ khotu:[{bqP:25},'Bế quan hiệu quả hơn 25%'],mongdu:[{tvP:6,tam:1},'Tu vi +6%, đạo tâm +1']};
+for(const [id,[fx,d]] of Object.entries(MC_NERF)){const t=TRAIT.find(x=>x.id===id);if(t){t.fx=fx;t.d=d;}}
+// các mệnh cách đã gộp: bản lưu cũ còn giữ thì tác dụng cũng giảm theo
+for(const [mc,[,fx]] of Object.entries(TT_MERGE)){const t=TRAIT.find(x=>x.id===mc);if(t){t.fx=JSON.parse(JSON.stringify(fx));}}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
