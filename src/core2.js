@@ -780,7 +780,7 @@ function onHit(sc,u,t,d,crit,blocked,sk){
   if(!t.dazed){let loss=clamp(d/Math.max(1,t.max)*220,8,45);if(blocked)loss*=0.5;if(t.boss)loss*=0.5;if(crit)loss*=1.3;t.dl=Math.max(0,t.dl-loss);
     if(t.dl<=0){t.dazed=1;clog(sc,(t.isMain?'Ngươi':t.name)+' cạn định lực, choáng váng: mất lượt kế tiếp.',t.side==='A'?'en':'me');cfx(sc,{k:'daze',id:t.id});
       if(t.phase==='charge'&&!(t.pending&&t.pending.sk.fx.steady)){toRecover(sc,t,1);doneAct(sc,t);}}}
-  if(!sc.pt){const me=mainUnit(sc);if(me&&me.hp>0){if(u===me)me.than=Math.min(100,(me.than||0)+9);else if(t===me)me.than=Math.min(100,(me.than||0)+8);}}
+  if(!sc.pt){const me=mainUnit(sc);if(me&&me.hp>0){if(u===me)me.than=Math.min(100,(me.than||0)+12);else if(t===me)me.than=Math.min(100,(me.than||0)+17);}}
 }
 function dazeClear(sc,u){u.dazed=0;u.dl=100;clog(sc,(u.isMain?'Ngươi':u.name)+' choáng, bỏ lỡ một lượt.',u.side==='A'?'en':'me');}
 {const _ai=aiAct;aiAct=function(sc,u){if(u&&u.hp>0&&u.dazed){dazeClear(sc,u);toRecover(sc,u,1);doneAct(sc,u);return;}return _ai(sc,u);};}

@@ -31,7 +31,7 @@ function meCard(sc,u){
   const st=sc.pt?'burn':full?'full':'';
   const tip=sc.kiep?'Trong thiên kiếp không hiển hóa được pháp tướng.':sc.pt?(sc.pt.n+(sc.pt.left>0?' · còn '+sc.pt.left+' lượt':' · tới hết trận')+'\n'+PT[sc.pt.el].d+(sc.pt.sk?'\n\nChạm để tung đòn tối thượng: '+SK[sc.pt.sk].n+'\nTung xong, pháp tướng tan và thần lực về 0.':'\n\nChưa gắn thần thông nên không có đòn tối thượng.')):('Thần lực '+Math.round(than)+'%\nĐánh trúng hoặc bị đánh trúng thì nạp.\n'+(full?'Đã đầy: chạm để hiển hóa ':'Đầy thì chạm để hiển hóa ')+V.P.n+'\n'+V.P.d+(V.P.turns?' · '+V.P.turns+' lượt':' · tới hết trận')+(V.sk?'\nĐòn tối thượng: '+V.sk.n:''));
   const ok=rp&&!u.dazed&&!CFG.autoFight&&!sc.kiep&&(sc.pt?!!sc.pt.sk:full);
-  const ring=`<svg class="tl-ring ${st}" viewBox="0 0 64 64" style="animation-delay:-${((performance.now()/1000)%2.4).toFixed(2)}s"><circle class="bg" cx="32" cy="32" r="29"/><circle class="fg" cx="32" cy="32" r="29" stroke-dasharray="${(C*than/100).toFixed(1)} ${C.toFixed(1)}"/></svg>`;
+  const ring=`<svg class="tl-ring ${st}" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="29"/><circle class="fg" cx="32" cy="32" r="29" stroke-dasharray="${(C*than/100).toFixed(1)} ${C.toFixed(1)}"/></svg>`;
   return `<div class="ucard me${sc.cur===u.id?' cur':''}" id="uc${u.id}">
    <button class="ult-av ${st}${ok?' ok':''}" data-act="ult"${ok?'':' aria-disabled="true"'}${ta(tip)}>${ring}${sc.pt?'<i class="flame"></i><i class="flame f2"></i>':''}<span class="ult-in">${uAvatar(u)}</span>${phBadge(u)}</button>
    <div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${esc(realmLabel())}</small></div>
@@ -129,7 +129,7 @@ const DG_LEAD=1.0; // giây nghỉ trước khi vòng né bắt đầu thu lại
 function dodgePress(){
   const d=UI.dg;if(!d)return;const now=performance.now();if(now<d.t0)return;
   let k=Math.round((now-d.t0)/d.T)-1;k=clamp(k,0,d.n-1);
-  if(d.offs[k]!=null)return;
+  if(d.pressed)return;d.pressed=1;
   {const me=mainUnit(G.run.scene);const used=d.offs.filter(x=>x!=null).length;if(!d.lit&&me&&me.tl-used*TL_DODGE<TL_DODGE){const b=$('#dodgeBtn');if(b)b.textContent='Kiệt sức';return;}}
   d.offs[k]=(now-(d.t0+(k+1)*d.T))/1000;
   const b=$('#dodgeBtn');if(b){b.classList.add('hit');const a=Math.abs(d.offs[k]);b.textContent=a<=0.09?'Chuẩn!':a<=0.25?'Khá':'Hụt';}

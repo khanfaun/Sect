@@ -325,7 +325,7 @@ async function initDB(){
 
 // chuyển cảnh: vết mực loang phủ kín màn hình rồi tan dần để lộ cảnh mới
 function inkEl(){let d=document.getElementById('ink');if(d)return d;d=document.createElement('div');d.id='ink';
-  d.innerHTML=`<svg viewBox="-100 -100 200 200"><defs><filter id="inkf" x="-50%" y="-50%" width="200%" height="200%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="${Math.floor(Math.random()*99)}"/><feDisplacementMap in="SourceGraphic" scale="22"/></filter></defs><g filter="url(#inkf)"><circle class="wash" r="40"/><circle class="core" r="34"/></g></svg>`;
+  d.innerHTML=`<svg viewBox="-100 -100 200 200"><defs><filter id="inkf" x="-50%" y="-50%" width="200%" height="200%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="${Math.floor(Math.random()*99)}"/><feDisplacementMap in="SourceGraphic" scale="30"/></filter></defs><g filter="url(#inkf)"><circle class="b b1" r="46" cx="-8" cy="6"/><circle class="b b2" r="38" cx="10" cy="-6"/><circle class="b b3" r="30" cx="0" cy="2"/></g></svg>`;
   document.body.appendChild(d);return d;}
-function inkCover(done){const d=inkEl();d.className='on cover';setTimeout(done,950);}
-function inkReveal(){const d=inkEl();d.className='on reveal';setTimeout(()=>{d.className='';},780);}
+function inkCover(done){const d=inkEl();d.className='on cover';setTimeout(done,1350);}
+function inkReveal(){const d=inkEl();d.className='on reveal';setTimeout(()=>{d.className='';},920);}

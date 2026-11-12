@@ -1256,8 +1256,8 @@ function dodgeP(att,def,off,isMain){
   const base=clamp(0.35+(def.ne-att.cx)*0.025,0.05,0.80);
   if(!isMain)return {p:base*0.5,q:null};
   if(off==='auto')return {p:base*0.8,q:'kha'};
-  if(off==null||Math.abs(off)>0.25)return {p:base*0.3,q:null}; // không nhấn né
-  return {p:base,q:Math.abs(off)<=0.09?'chuan':'kha'};
+  if(off==null||Math.abs(off)>0.25)return {p:0,q:null}; // không bấm hoặc bấm hụt: không né được
+  return {p:1,q:Math.abs(off)<=0.09?'chuan':'kha'}; // bấm trúng nhịp: chắc chắn né
 }
 function resolveSkill(sc,u,sk,lv,tg,qm,offs){
   const f=sk.fx,isP=u.ctrl==='player';const s=isP?S():null;const fx=isP?s.fx:{};
