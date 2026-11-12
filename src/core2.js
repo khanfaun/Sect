@@ -1224,12 +1224,10 @@ function isPham(){const r=G.run;return !!(r&&r.pham);}
 {const _br19=bqReal;bqReal=function(){return _br19()*(isPham()?PHAM_MUL:1);};}
 {const _tn19=thonapPct;thonapPct=function(){return _tn19()*(isPham()?PHAM_MUL:1);};}
 {const _at19=addTv;addTv=function(x){const r=G.run;if(!r||!r.pham||!(x>0))return _at19(x);
-  const res=_at19(x*PHAM_MUL);phamUp();return res;};}
-// dẫn khí nhập thể: tu vi và lịch luyện đều đầy
+  const res=_at19(x*PHAM_MUL);return res;};}
+// dẫn khí nhập thể: gọi khi đột phá thành công (tu vi, lịch luyện đều đầy)
 function phamUp(){if(G.run&&G.run.pham&&G.run.tv>=100&&llOf()>=LL_BT){const g=G.run;g.pham=0;g.tv=0;g.tvAcc=0;g.ll=Math.max(0,(g.ll||0)-100)*0.2;const s=S();g.hp=s.maxHp;g.mp=s.maxMp;
-    log(`Năm ${Math.floor(g.age)} tuổi, dẫn khí nhập thể, bước vào Luyện Khí.`);if(typeof bio==='function')bio(`Năm ${Math.floor(g.age)} tuổi, ${g.ten} dẫn khí nhập thể, bước vào Luyện Khí.`);
-    note('Dẫn khí nhập thể: bước vào Luyện Khí sơ kỳ!','up');if(typeof qPop==='function'){G.qpop=G.qpop||[];G.qpop.push({kind:'done',text:'Dẫn khí nhập thể · Luyện Khí sơ kỳ',grade:1,ch:[],title:'Đột phá'});}}}
-{const _la19=llAdd;llAdd=function(x,why,quiet){const d=_la19(x,why,quiet);phamUp();return d;};}
+    log(`Năm ${Math.floor(g.age)} tuổi, dẫn khí nhập thể, bước vào Luyện Khí.`);if(typeof bio==='function')bio(`Năm ${Math.floor(g.age)} tuổi, ${g.ten} dẫn khí nhập thể, bước vào Luyện Khí.`);}}
 // phàm nhân không có lịch luyện ràng buộc
 {const _le19=llEff;llEff=function(tv){return isPham()?1:_le19(tv);};}
 {const _S19=S;S=function(){const s=_S19();if(isPham()){s.maxHp=Math.round(s.maxHp*0.8);s.maxMp=Math.round(s.maxMp*0.5);s.atk=Math.round(s.atk*0.85);s.matk=Math.round(s.matk*0.85);}return s;};}
@@ -1281,7 +1279,7 @@ function tuCapWhy(){const r=G.run;const a=tuArt();if(!a||isPham())return '';retu
 function tpLearn(tier,o){const r=run2();o=o||{};const a=genArt('tp',tier,null,{req:0,el:o.el});if(o.n)a.n=o.n;a.req=0;a.lines[0]={fx:'tvP',v:6+3*a.tier,n:'Tu luyện',d:'Tu vi nhận thêm {v}%'};
   a.lines.forEach((x,i)=>{x.req=i?Math.max(x.req||0,0):0;});a.src=o.src||'';r.arts.push(a);const n=chuSlots();for(let j=0;j<n;j++)if(!r.chu[j]){r.chu[j]={k:'a',u:a.u};break;}
   syncSkills();log('Có tâm pháp tu luyện: '+a.n+(o.src?' ('+o.src+')':'')+'.');saveSoon();return a;}
-function tpChip(a){return chip('📖',a.n,PHAM[a.tier]+' · tâm pháp · tốc độ tu luyện ×'+numFx(TU_M[a.tier])+' · tối đa '+REALM[tpMax(a)]+' viên mãn','item');}
+function tpChip(a){return chip('📖',a.n,PHAM[a.tier]+' · tâm pháp · tốc độ tu luyện ×'+numFx(TU_M[a.tier]),'item');}
 function tpSect(){const r=G.run;if(r.flags.sectTp)return null;r.flags.sectTp=1;const a=tpLearn(1,{el:pick(r.root.els.filter(e=>EL[e]))||'vo',src:'tông môn truyền'});a.n=pick(RELIC_PRE[a.el]||RELIC_PRE.vo)+' Nhập Môn Tâm Kinh';return tpChip(a);}
 // bỏ tâm pháp tự cấp cho mọi kiếp; xuất thân gia truyền, ký ức kiếp trước
 const TP_ORIGIN={thegia:1,tran:0,daodong:0,mieu:0};
@@ -1452,3 +1450,49 @@ function lifeStory(r,items,region){const og=ORIGIN.find(o=>o.id===r.origin);cons
   const reg=r.scene&&r.scene.type==='region'?r.scene.text:'';if(r.scene&&r.scene.type==='region')r.scene=null;
   r.story=lifeStory(r,items,reg);syncSkills();saveSoon();return res;};}
 function lsFill(t,v){return String(t).replace(/\{(\w+)\}/g,(m,k)=>v[k]!=null?v[k]:m);}
+
+// ================= ĐỢT 23: ĐỘT PHÁ =================
+// Bỏ giới hạn cảnh giới theo phẩm tâm pháp: phẩm tâm pháp chỉ ảnh hưởng tốc độ tu luyện và tỉ lệ đột phá.
+tuCapWhy=function(){return '';};
+// Tu vi đầy mà lịch luyện chưa đầy: bình cảnh. Cả hai đầy: đột phá (kể cả phàm nhân dẫn khí nhập thể, không còn tự động).
+function btState(){const r=G.run;if(!r||r.tv<100)return '';return canBreak()?'dp':'bc';}
+{const _bt23=btTarget;btTarget=function(){return isPham()?0:_bt23();};}
+{const _bs23=btStages;btStages=function(to){return isPham()?[]:_bs23(to);};}
+{const _bi23=btItems;btItems=function(){return isPham()?G.run.pills.map((p,i)=>({p,i})).filter(x=>PILL[x.p.id].bt&&PILL[x.p.id].realm==null):_bi23();};}
+// Tỉ lệ thành công: cộng từ nhiều nguồn, mỗi nguồn hiện riêng trong màn chuẩn bị
+const BT_ROOT={thien:6,bien:4,song:2,tam:0,tu:-3,tap:-6},BT_LK=[-6,-2,2,6];
+function btParts(slots){const r=G.run,s=S();const e=btEff(slots||[]);const to=btTarget();const n=nodeById(r.at);const L=[];const add=(t,v,tip)=>{v=Math.round(v*10)/10;if(v)L.push({t,v,tip});};
+  add(isPham()?'Dẫn khí nhập thể':'Cơ bản · '+REALM[to],(isPham()?0.75:BT_BASE[Math.min(4,r.realm)])*100,'Cảnh giới càng cao càng khó');
+  add('Ngộ tính '+s.ngo,(s.ngo-10)*1.2,'Mỗi điểm trên 10: +1,2%');add('Đạo tâm '+s.tam,(s.tam-10)*1.2,'Mỗi điểm trên 10: +1,2%');
+  if(r.tamma)add('Tâm ma '+r.tamma,-r.tamma*0.4,'Mỗi điểm tâm ma: −0,4%');
+  add('Linh căn',BT_ROOT[r.root.id]||0,rootView(r.root).n);
+  const a=tuArt();if(a){const d=a.tier-Math.max(0,to);add('Tâm pháp '+PHAM[a.tier],d<0?d*6:Math.min(d,3)*3,d<0?'Phẩm tâm pháp thấp so với cảnh giới muốn lên':'Tâm pháp vững, dẫn khí xung quan dễ hơn');
+    if(a.el!=='vo')add(r.root.els.includes(a.el)?'Tâm pháp hợp linh căn':'Tâm pháp lệch linh căn',r.root.els.includes(a.el)?4:-4,'Hệ tâm pháp '+(EL[a.el]||EL.vo).n);}
+  const cps=(isPham()?[]:activeArts()).filter(x=>x.type==='cp'&&x.el!=='vo');const bad=cps.filter(x=>!r.root.els.includes(x.el)).length;
+  if(cps.length)add(bad?'Công pháp lệch linh căn ('+bad+')':'Công pháp hợp linh căn',bad?-Math.min(6,bad*2):3,'Công pháp đang vận hành trong Khí Hải so với linh căn');
+  add('Linh khí: '+LK_N[lkOf(n)],BT_LK[lkOf(n)],'Linh khí nơi đột phá');
+  if(llOf()>100)add('Lịch luyện dư',Math.min(10,(llOf()-100)*0.2),'Lịch luyện vượt mức: tối đa +10%');
+  if(r.btFail)add('Thất bại trước '+r.btFail+' lần',r.btFail*8,'Rút kinh nghiệm từ lần trước');
+  const w=wounds().filter(x=>!x.perm).length;if(w)add('Đang mang thương',-5*w,'Mỗi vết thương: −5%');
+  if(r.hp<S().maxHp*0.5)add('Khí huyết dưới một nửa',-5,'');
+  if(e.rate)add('Đan dược, linh vật',e.rate,'Vật phẩm đặt vào ô chuẩn bị');
+  return L;}
+btRate=function(slots){return clamp(btParts(slots).reduce((a,x)=>a+x.v,0)/100,0.05,0.97);};
+// Đạo cơ (phẩm chất cảnh giới): ngoài đạo cơ tích lũy và linh dược, lúc đột phá còn cộng thêm
+function daoParts(){const r=G.run;if(isPham())return [];const to=btTarget();const L=[];const a=tuArt();const n=nodeById(r.at);
+  if(a&&a.tier>=to+1)L.push({t:'Tâm pháp '+PHAM[a.tier]+' vượt cảnh giới',v:a.tier>=to+2?2:1});
+  if(['thien','bien'].includes(r.root.id))L.push({t:rootView(r.root).n,v:1});
+  if(lkOf(n)>=3)L.push({t:'Linh khí dồi dào',v:1});
+  if(llOf()>=130)L.push({t:'Lịch luyện dư dả',v:1});
+  if(!r.tamma)L.push({t:'Tâm không vướng ma',v:1});
+  return L;}
+{const _be23=btEff;btEff=function(slots){const o=_be23(slots);o.dao+=daoParts().reduce((a,x)=>a+x.v,0);return o;};}
+// phàm nhân: đột phá thành dẫn khí nhập thể, không có thiên kiếp, không có phẩm chất
+{const _ps23=prepStart;prepStart=function(){const r=G.run,sc=r&&r.scene;if(!isPham())return _ps23();if(!sc||sc.type!=='prep'||!canBreak())return;
+  const p=btRate(sc.slots);const idx=sc.slots.slice().sort((a,b)=>b-a);const used=idx.map(i=>r.pills[i]).filter(Boolean).map(x=>PILL[x.id].n);for(const i of idx)r.pills.splice(i,1);sc.slots=[];
+  advanceTime(7*HD);if(!G.run)return;const back=sc.back;r.bt={to:0,stages:[],si:0,used};
+  if(R()<p){r.bt=null;phamUp();r.scene={type:'btres',back,ok:true,done:1,text:'Theo nhịp thở, một sợi linh khí mảnh như tơ len vào kinh mạch, chảy xuống đan điền rồi cuộn lại ở đó. Thân thể nhẹ bẫng, tai nghe rõ tiếng lá rơi ngoài trăm bước. Từ hôm nay, không còn là phàm nhân nữa.',
+    chips:used.map(n=>chip('⚗️',n,'Đã dùng','')).concat([chip('☯️','Luyện Khí sơ kỳ','Dẫn khí nhập thể, bước vào Luyện Khí','up')])};}
+  else btFail(back,used);};}
+// phàm nhân dẫn khí nhập thể ở đâu cũng được, không cần động phủ
+{const _pa23=placeAct;placeAct=function(a){const r=G.run,sc=r&&r.scene;if(a==='bt'&&isPham()&&canBreak()&&sc&&sc.type==='place'){openPrep(nodeById(sc.id));return;}return _pa23(a);};}
