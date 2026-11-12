@@ -28,6 +28,10 @@ function render(){
     modal=modalHTML();
     document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
   }catch(e){console.error(e);full=`<div class="title"><p>Có lỗi khi vẽ màn hình: ${esc(e.message)}</p><button class="btn pri" data-act="screen" data-arg="title">Về màn hình đầu</button></div>`;UI.panel=null;UI.modal=null;panel='';modal='';}
+  const vtok=document.documentElement.dataset.view==='combat'?'combat':G.screen==='map'&&G.run?'map':'screen:'+G.screen;
+  if(UI.inkBusy)return;
+  if(UI.vtok&&UI.vtok!==vtok&&CFG.anim!==false){UI.inkBusy=true;inkCover(()=>{UI.inkBusy=false;UI.vtok=vtok;render();inkReveal();});return;}
+  UI.vtok=vtok;
   setH('hud',hud);setH('mapui',mapui);setH('dock',dock);setH('nav',nav);setH('sheet',sheet);setH('full',full);setH('panel',panel);setH('modal',modal);
   const sc2=G.run&&G.run.scene;UI.lastStory=sc2&&sc2.story?sc2.story.length:0;
   const hd=document.getElementById('hud');document.getElementById('app').style.setProperty('--hudh',(hd&&!hd.hidden?hd.offsetHeight:0)+'px');
@@ -318,3 +322,10 @@ async function initDB(){
   initDB();
   requestAnimationFrame(loop);
 })();
+
+// chuyển cảnh: vết mực loang phủ kín màn hình rồi tan dần để lộ cảnh mới
+function inkEl(){let d=document.getElementById('ink');if(d)return d;d=document.createElement('div');d.id='ink';
+  d.innerHTML=`<svg viewBox="-100 -100 200 200"><defs><filter id="inkf" x="-50%" y="-50%" width="200%" height="200%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="${Math.floor(Math.random()*99)}"/><feDisplacementMap in="SourceGraphic" scale="22"/></filter></defs><g filter="url(#inkf)"><circle class="wash" r="40"/><circle class="core" r="34"/></g></svg>`;
+  document.body.appendChild(d);return d;}
+function inkCover(done){const d=inkEl();d.className='on cover';setTimeout(done,950);}
+function inkReveal(){const d=inkEl();d.className='on reveal';setTimeout(()=>{d.className='';},780);}

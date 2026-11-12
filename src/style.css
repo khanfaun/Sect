@@ -590,3 +590,64 @@ span.el[class*=el-]{background:var(--ec);border-color:var(--ec);color:#fffaf0!im
 :root[data-anim="0"] .tl-ring,:root[data-anim="0"] .flame,:root[data-anim="0"] .ult-av.full{animation:none}
 #fx{z-index:60}
 .cine-bar,.cine-txt{top:13%}.cine-fig{width:min(135vw,760px);height:96%;bottom:-8%}
+
+/* ===== giao diện mới: tối giản, sang trọng kiểu tạp chí thời trang ===== */
+:root,:root[data-theme=light]{--bg:#f3efe7;--bg2:#ebe5da;--paper:#faf8f3;--paper2:#f1ece2;--ink:#151413;--ink2:#4a4642;--ink3:#97918a;--line:rgba(21,20,19,.12);
+  --acc:#151413;--seal:#9c2a22;--gold:#9a7b45;--jade:#3d6b58;--r:2px;--sh:0 18px 50px -24px rgba(21,20,19,.35);--ease:cubic-bezier(.22,1,.36,1);
+  --font:"Be Vietnam Pro","Helvetica Neue",Arial,sans-serif;--disp:"Cormorant Garamond","Noto Serif",Georgia,serif}
+:root[data-theme=dark]{--bg:#0f0e0d;--bg2:#0a0a09;--paper:#171615;--paper2:#1f1d1b;--ink:#efeae1;--ink2:#bdb6ab;--ink3:#79736b;--line:rgba(239,234,225,.12);
+  --acc:#efeae1;--seal:#d0574b;--gold:#c9a86a;--sh:0 18px 50px -20px rgba(0,0,0,.7)}
+body{font-weight:400;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.title h1,.in-b h1,.win-h h2,.sc-h h2,.birth h2,.f-n b,.hud-id .nm,.hud-date b{font-family:var(--disp);font-weight:600;letter-spacing:.02em}
+.title h1{font-size:3.2em;letter-spacing:.32em;font-weight:500}
+/* bỏ sọc giấy, bỏ viền kép, chỉ còn đường mảnh */
+.sc-b,.win-b{background-image:none!important}
+.hud,.dock,.scard,.win,.mbox,.stat-pop{border-radius:var(--r);border:1px solid var(--line);box-shadow:var(--sh);background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.xb,.mb,.nv,.row,.cell,.sk,.ucard,.chip,.slot,.lgc,.fate,.life,.seg button,.hbtns button,.wi svg,.clog,.el,.si,.ph,textarea,#noteIn,.cb-art,.art.mart,.foe-i,.ch,.tabs button,.eqc,.bc,.bgrid,.doll,.bdet,.art.strip{border-radius:var(--r)}
+.row,.cell,.ch,.fate,.life,.sk,.ucard,.lgc,.nv,.hbtns button,.mb,.xb{border-color:var(--line);box-shadow:none;background:transparent}
+.win-h,.sc-f,.win-f{border-color:var(--line)}
+.win-h h2,.mbox h3{color:var(--ink);font-size:1.4em}.mbox h3{border:0;letter-spacing:.04em}
+/* nút: chữ in hoa giãn, chuyển màu mượt */
+.btn{border-radius:var(--r);border:1px solid var(--ink);background:transparent;box-shadow:none!important;text-transform:uppercase;letter-spacing:.16em;font-size:.78em;font-weight:500;min-height:42px;padding:.3em 1.4em;
+  transition:background .45s var(--ease),color .45s var(--ease),border-color .45s var(--ease),transform .2s var(--ease)}
+.btn.pri,.btn.on{background:var(--ink);color:var(--paper)!important;border-color:var(--ink)}
+.btn:not(:disabled):hover{background:var(--ink);color:var(--paper)}.btn.pri:not(:disabled):hover{background:var(--seal);border-color:var(--seal)}
+.btn.big{font-size:.9em;letter-spacing:.42em;min-height:56px;padding:.3em 3em}.btn.sm{font-size:.7em;min-height:32px;padding:.1em .9em}
+.ch,.row,.fate,.sk,.nv,.tabs button,.lgc,.cell{transition:background .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease)}
+.ch:not(:disabled):hover,button.row:not(:disabled):hover,.fate:hover,.sk:not(:disabled):hover{border-color:var(--ink);background:var(--paper2)}
+.ch.hl{box-shadow:inset 2px 0 0 var(--seal)}.ch .cn{color:var(--seal);font-family:var(--disp);font-size:1.1em}
+.lnk{font-style:normal;text-decoration:none;letter-spacing:.14em;text-transform:uppercase;font-size:.72em;border-bottom:1px solid currentColor;padding:.2em 0;margin:0 .6em}
+/* thẻ tab: gạch chân mảnh thay vì viên thuốc */
+.tabs{gap:18px;border-bottom:1px solid var(--line)}.tabs button,.tabs button.on{border:0;border-radius:0;background:none;padding:.5em 0;font-size:.78em;letter-spacing:.14em;text-transform:uppercase;box-shadow:inset 0 -1px 0 transparent;color:var(--ink3)}
+.tabs button.on{color:var(--ink);font-weight:500;box-shadow:inset 0 -2px 0 var(--ink)}
+/* thanh dưới */
+#nav{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.nv{border:0;font-size:.62em;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}.nv .ib{background:none!important;color:var(--ink2)!important}
+.nv.on{background:none;color:var(--ink)}.nv.on .ib{color:var(--seal)!important}.nv.on::after{content:"";position:absolute;bottom:2px;left:35%;right:35%;height:1px;background:var(--ink)}
+.ib{border-radius:50%}
+.hb{height:3px;border:0;background:var(--line);border-radius:0}.hb i{border-radius:0;transition:width .8s var(--ease)}
+.hud-date b{color:var(--seal);font-size:1.9em}
+.grp{letter-spacing:.22em;font-size:.68em;font-weight:500;color:var(--ink3)}
+.t-seal{border-radius:0;transform:none;box-shadow:none;width:40px;height:40px;font-family:var(--disp)}
+.narr p{line-height:1.8}.narr p.k{font-family:var(--disp);font-size:1.25em;letter-spacing:.3em}
+#modal{background:rgba(15,14,13,.32);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#panel{background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.toast,#tip{border-radius:var(--r);letter-spacing:.04em}
+/* xuất hiện mượt */
+:root[data-anim="1"] .story p.new,:root[data-anim="1"] .scard,:root[data-anim="1"] .win,:root[data-anim="1"] .dock{animation:lux .7s var(--ease) both}
+:root[data-anim="1"] .mbox{animation:luxm .55s var(--ease) both}:root[data-anim="1"] #modal{animation:fadein .4s var(--ease) both}
+@keyframes lux{from{opacity:0;transform:translateY(18px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@keyframes luxm{from{opacity:0;transform:scale(.97) translateY(10px)}to{opacity:1;transform:none}}
+@keyframes fadein{from{opacity:0}}
+/* chuyển cảnh vết mực loang */
+#ink{position:fixed;inset:0;z-index:100;pointer-events:none;display:none}
+#ink.on{display:block;pointer-events:auto}
+#ink svg{position:absolute;left:50%;top:50%;width:300vmax;height:300vmax;transform:translate(-50%,-50%)}
+#ink .wash,#ink .core{transform-box:fill-box;transform-origin:center;transform:scale(0)}
+#ink .wash{fill:#8c857a;opacity:.85}#ink .core{fill:#0e0d0c}
+#ink.cover .wash{animation:inkw .9s cubic-bezier(.5,0,.2,1) forwards}
+#ink.cover .core{animation:inkc .9s cubic-bezier(.6,0,.3,1) .12s forwards}
+#ink.reveal{animation:inkout .75s var(--ease) forwards}
+#ink.reveal .wash,#ink.reveal .core{transform:scale(1.2)}
+@keyframes inkw{to{transform:scale(1.25)}}@keyframes inkc{to{transform:scale(1.2)}}
+@keyframes inkout{from{opacity:1}to{opacity:0}}
