@@ -1024,3 +1024,10 @@ function questPenalty(q){return {st:Math.round((q.reward.st||0)*0.5),karma:-2};}
 function questCancel(id){const r=G.run;const q=r.quests.find(x=>x.id===id&&x.state==='open');if(!q)return false;const P=questPenalty(q);
   q.state='fail';q.dropped=1;r.st=Math.max(0,r.st-P.st);applyE({karma:P.karma});log(`Trả lại việc: ${q.text}. Mất ${P.st} linh thạch, mang tiếng thất hứa.`);
   const fn=nodeById(q.from);if(fn&&fn.board){const b=fn.board.list.find(x=>x.id===q.id);if(b)b.taken=false;}return true;}
+// ----- nhiệm vụ: hạn chót đủ rộng -----
+// Hạn cũ chỉ bằng thời gian đi đường cộng 3–8 ngày nên gần như luôn trễ. Nay: gấp rưỡi thời gian đi đường cộng 15–40 ngày.
+{const _ob14=openBoard;openBoard=function(n){_ob14(n);if(n&&n.board)for(const q of n.board.list)if(!q.v2){const p=findPath(n.id,q.node);const tH=p?travelHours(p):24*30;q.days=Math.ceil(tH*1.5/24)+ri(15,40);q.v2=1;}};}
+// việc đang nhận từ bản cũ: nới hạn thêm một lần
+{const _adv14=advanceTime;advanceTime=function(h){const r=G.run;if(r&&r.quests&&!r.qfix14){for(const q of r.quests)if(q.state==='open')q.due+=60*HD;r.qfix14=1;}return _adv14(h);};}
+// đi xe chuyến tới nơi cũng tính là đã tới
+{const _sg14=stageGo;stageGo=function(id){const r=G.run;const a=r&&r.at;_sg14(id);if(G.run&&G.run.at!==a)questArrive(G.run.at);};}

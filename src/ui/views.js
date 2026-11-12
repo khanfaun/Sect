@@ -173,8 +173,10 @@ function vPlace(sc){
     return `<button class="ch${a.a==='bt'?' hl big':PNOW.includes(a.a)?' big':''}${a.a==='quyan'||a.dis?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="cn">${++k}.</span><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':(PL_N[a.a]&&a.l.length>PL_N[a.a].length+6?PL_N[a.a]:a.l))}</span>${x}</button>`;};
   let b=sc.venue&&VENUE_N[sc.venue]?venueHTML(n,sc.venue):'';
   // lời kể: cảnh trí và chuyện vừa xảy ra cùng một kiểu chữ, nằm trong một khung cuộn riêng
-  const talk=(UI.descHide?[]:[sc.intro]).concat(sc.msg||[]);
-  if(talk.length||(sc.chips&&sc.chips.length))b+=`<div class="pl-talk" id="plTalk"><div class="story">${talk.map(m=>`<p>${esc(m)}</p>`).join('')}</div>${chipsHTML(sc.chips)}</div>`;
+  // lịch sử: mỗi lần chọn một việc, giữ lại lựa chọn và kết quả (giống hộp thoại sự kiện)
+  sc.hist=sc.hist||[];if((sc.msg&&sc.msg.length)||(sc.chips&&sc.chips.length)){const key=JSON.stringify(sc.msg)+JSON.stringify((sc.chips||[]).map(c=>c.t));if(sc.histK!==key){sc.hist.push({q:UI.lastQ||null,m:sc.msg.slice(),c:(sc.chips||[]).slice()});sc.histK=key;if(sc.hist.length>12)sc.hist.shift();}}
+  UI.lastQ=null;
+  b+=`<div class="pl-talk" id="plTalk" data-n="${sc.hist.length}"><div class="story">${UI.descHide?'':`<p>${esc(sc.intro)}</p>`}${sc.hist.map(h=>(h.q?`<div class="ev-q"><p class="ev-c">› ${esc(h.q)}</p>${h.m.map(m=>`<p>${esc(m)}</p>`).join('')}</div>`:h.m.map(m=>`<p>${esc(m)}</p>`).join(''))+chipsHTML(h.c)).join('')}</div></div>`;
   const ents=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);const qs=r.quests.filter(q=>q.state==='open'&&q.node===n.id);
   const big=PNOW.map(by).filter(Boolean);
   if(big.length||ents.length||qs.length){b+=`<h3 class="grp big">${ib('flag','gold')}Chuyện lớn</h3><div class="choices">${big.map(btn).join('')}

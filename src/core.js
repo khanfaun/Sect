@@ -1813,6 +1813,7 @@ function placeAct(a){
   switch(a){
     case 'explore':{
       if(!tick(2))return;
+      if(questExplore(n))return; // mục tiêu nhiệm vụ luôn tìm được, dù chỗ này đã lục nhiều lần
       const m=Math.floor(W().t/HM);if(n.exploreT!==m){n.exploreT=m;n.explore=0;}n.explore++;
       if(n.explore>=4){sc.msg.unshift(T(['Ngươi đi một vòng nữa. Không còn gì mới.','Chỗ này ngươi đã lục tung cả rồi. Không còn gì mới.','Mọi ngóc ngách đều đã quen mặt. Không còn gì mới.']));sc.chips=[chip('⏳','2 giờ','Thời gian trôi qua','')];return;}
       if(CACHE_ON&&n.cache&&n.cache.items&&n.cache.items.length){findCache(n);return;}

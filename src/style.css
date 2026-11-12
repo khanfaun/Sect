@@ -879,3 +879,9 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .qcard.dim{opacity:.55}.qc-h{display:flex;align-items:center;gap:8px}.qc-h .r-t{flex:1;min-width:0}.qc-h small{display:block;color:var(--ink3);font-size:.8em}
 .qc-b{display:flex;gap:2px}.qc-b .icb{width:30px;height:30px;border:0;background:none;color:var(--ink2)}.qc-b .icb:hover{color:var(--ink)}
 .qc-d{padding:6px 2px 2px 34px}.qc-d p{font-size:.88em;color:var(--ink2);margin:0 0 6px}
+/* lời kể trong địa điểm: lựa chọn và kết quả giống hộp thoại sự kiện */
+.pl-talk .ev-q{border-left:3px solid var(--line);padding:2px 0 2px 14px;margin:.6em 0}
+.pl-talk .ev-q .ev-c{color:var(--ink2)!important;margin:.2em 0 .4em}
+.pl-talk .chips{margin:.4em 0 .7em}
+#sheet.still .scard,#sheet.still .story p.new{animation:none!important}
+.pl-talk{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-top:4px;padding-bottom:4px}

@@ -889,6 +889,12 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .qcard.dim{opacity:.55}.qc-h{display:flex;align-items:center;gap:8px}.qc-h .r-t{flex:1;min-width:0}.qc-h small{display:block;color:var(--ink3);font-size:.8em}
 .qc-b{display:flex;gap:2px}.qc-b .icb{width:30px;height:30px;border:0;background:none;color:var(--ink2)}.qc-b .icb:hover{color:var(--ink)}
 .qc-d{padding:6px 2px 2px 34px}.qc-d p{font-size:.88em;color:var(--ink2);margin:0 0 6px}
+/* lời kể trong địa điểm: lựa chọn và kết quả giống hộp thoại sự kiện */
+.pl-talk .ev-q{border-left:3px solid var(--line);padding:2px 0 2px 14px;margin:.6em 0}
+.pl-talk .ev-q .ev-c{color:var(--ink2)!important;margin:.2em 0 .4em}
+.pl-talk .chips{margin:.4em 0 .7em}
+#sheet.still .scard,#sheet.still .story p.new{animation:none!important}
+.pl-talk{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-top:4px;padding-bottom:4px}
 
 </style>
 </head>
@@ -2723,6 +2729,7 @@ function placeAct(a){
   switch(a){
     case 'explore':{
       if(!tick(2))return;
+      if(questExplore(n))return; // mục tiêu nhiệm vụ luôn tìm được, dù chỗ này đã lục nhiều lần
       const m=Math.floor(W().t/HM);if(n.exploreT!==m){n.exploreT=m;n.explore=0;}n.explore++;
       if(n.explore>=4){sc.msg.unshift(T(['Ngươi đi một vòng nữa. Không còn gì mới.','Chỗ này ngươi đã lục tung cả rồi. Không còn gì mới.','Mọi ngóc ngách đều đã quen mặt. Không còn gì mới.']));sc.chips=[chip('⏳','2 giờ','Thời gian trôi qua','')];return;}
       if(CACHE_ON&&n.cache&&n.cache.items&&n.cache.items.length){findCache(n);return;}
@@ -5245,6 +5252,13 @@ function questPenalty(q){return {st:Math.round((q.reward.st||0)*0.5),karma:-2};}
 function questCancel(id){const r=G.run;const q=r.quests.find(x=>x.id===id&&x.state==='open');if(!q)return false;const P=questPenalty(q);
   q.state='fail';q.dropped=1;r.st=Math.max(0,r.st-P.st);applyE({karma:P.karma});log(`Trả lại việc: ${q.text}. Mất ${P.st} linh thạch, mang tiếng thất hứa.`);
   const fn=nodeById(q.from);if(fn&&fn.board){const b=fn.board.list.find(x=>x.id===q.id);if(b)b.taken=false;}return true;}
+// ----- nhiệm vụ: hạn chót đủ rộng -----
+// Hạn cũ chỉ bằng thời gian đi đường cộng 3–8 ngày nên gần như luôn trễ. Nay: gấp rưỡi thời gian đi đường cộng 15–40 ngày.
+{const _ob14=openBoard;openBoard=function(n){_ob14(n);if(n&&n.board)for(const q of n.board.list)if(!q.v2){const p=findPath(n.id,q.node);const tH=p?travelHours(p):24*30;q.days=Math.ceil(tH*1.5/24)+ri(15,40);q.v2=1;}};}
+// việc đang nhận từ bản cũ: nới hạn thêm một lần
+{const _adv14=advanceTime;advanceTime=function(h){const r=G.run;if(r&&r.quests&&!r.qfix14){for(const q of r.quests)if(q.state==='open')q.due+=60*HD;r.qfix14=1;}return _adv14(h);};}
+// đi xe chuyến tới nơi cũng tính là đã tới
+{const _sg14=stageGo;stageGo=function(id){const r=G.run;const a=r&&r.at;_sg14(id);if(G.run&&G.run.at!==a)questArrive(G.run.at);};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -5861,8 +5875,10 @@ function vPlace(sc){
     return `<button class="ch${a.a==='bt'?' hl big':PNOW.includes(a.a)?' big':''}${a.a==='quyan'||a.dis?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="cn">${++k}.</span><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':(PL_N[a.a]&&a.l.length>PL_N[a.a].length+6?PL_N[a.a]:a.l))}</span>${x}</button>`;};
   let b=sc.venue&&VENUE_N[sc.venue]?venueHTML(n,sc.venue):'';
   // lời kể: cảnh trí và chuyện vừa xảy ra cùng một kiểu chữ, nằm trong một khung cuộn riêng
-  const talk=(UI.descHide?[]:[sc.intro]).concat(sc.msg||[]);
-  if(talk.length||(sc.chips&&sc.chips.length))b+=`<div class="pl-talk" id="plTalk"><div class="story">${talk.map(m=>`<p>${esc(m)}</p>`).join('')}</div>${chipsHTML(sc.chips)}</div>`;
+  // lịch sử: mỗi lần chọn một việc, giữ lại lựa chọn và kết quả (giống hộp thoại sự kiện)
+  sc.hist=sc.hist||[];if((sc.msg&&sc.msg.length)||(sc.chips&&sc.chips.length)){const key=JSON.stringify(sc.msg)+JSON.stringify((sc.chips||[]).map(c=>c.t));if(sc.histK!==key){sc.hist.push({q:UI.lastQ||null,m:sc.msg.slice(),c:(sc.chips||[]).slice()});sc.histK=key;if(sc.hist.length>12)sc.hist.shift();}}
+  UI.lastQ=null;
+  b+=`<div class="pl-talk" id="plTalk" data-n="${sc.hist.length}"><div class="story">${UI.descHide?'':`<p>${esc(sc.intro)}</p>`}${sc.hist.map(h=>(h.q?`<div class="ev-q"><p class="ev-c">› ${esc(h.q)}</p>${h.m.map(m=>`<p>${esc(m)}</p>`).join('')}</div>`:h.m.map(m=>`<p>${esc(m)}</p>`).join(''))+chipsHTML(h.c)).join('')}</div></div>`;
   const ents=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);const qs=r.quests.filter(q=>q.state==='open'&&q.node===n.id);
   const big=PNOW.map(by).filter(Boolean);
   if(big.length||ents.length||qs.length){b+=`<h3 class="grp big">${ib('flag','gold')}Chuyện lớn</h3><div class="choices">${big.map(btn).join('')}
@@ -6643,9 +6659,11 @@ function vMeta(){
 // ---------- vẽ màn hình ----------
 const HCACHE={};
 function setH(id,html){const el=document.getElementById(id);if(!el)return false;if(HCACHE[id]===html){return false;}
+  const tk0=id==='sheet'&&document.getElementById('plTalk');const tkTop=tk0?tk0.scrollTop:0,tkN=tk0?tk0.dataset.n:null;
   const sc=el.querySelector('.win-b,.sc-b');const top=sc?sc.scrollTop:0;const key=el.dataset.k;
   HCACHE[id]=html;el.innerHTML=html;el.hidden=!html;
-  const k2=viewKey(id);el.dataset.k=k2;if(id==='modal')el.classList.toggle('still',!!k2&&key===k2);if(top&&key===k2){const s2=el.querySelector('.win-b,.sc-b');if(s2)s2.scrollTop=top;}
+  const k2=viewKey(id);el.dataset.k=k2;if(id==='modal')el.classList.toggle('still',!!k2&&key===k2);
+  if(id==='sheet'){el.classList.toggle('still',!!k2&&key===k2);const tk=document.getElementById('plTalk');if(tk){if(tkN!=null&&tkN===tk.dataset.n)tk.scrollTop=tkTop;else tk.scrollTop=tk.scrollHeight;}}if(top&&key===k2){const s2=el.querySelector('.win-b,.sc-b');if(s2)s2.scrollTop=top;}
   return true;}
 function viewKey(id){const sc=G.run&&G.run.scene;if(id==='sheet')return sc?sc.type+':'+(sc.id||'')+':'+(sc.story?sc.story.length:0)+':'+(sc.phase||''):'';if(id==='panel')return (UI.panel||'')+JSON.stringify(UI.tab);if(id==='full')return G.screen+(UI.tab.meta||'');if(id==='modal')return UI.modal?UI.modal.k:'';return '';}
 function syncDodge(){const o=G.meta.opt=G.meta.opt||{};if(o.userDodge===undefined)o.userDodge=!!o.autoDodge;o.autoDodge=!!(o.userDodge||CFG.autoFight);o.autoQte=!!CFG.autoFight;}
@@ -6679,7 +6697,7 @@ function render(){
   const hd=document.getElementById('hud');document.getElementById('app').style.setProperty('--hudh',(hd&&!hd.hidden?hd.offsetHeight:0)+'px');
   const dl=document.getElementById('dlg');if(dl)dl.scrollTop=dl.scrollHeight;
   if(UI.plTop){UI.plTop=0;const pb=document.querySelector('#sheet .sc-b');if(pb)pb.scrollTop=0;}
-  {const tk=document.getElementById('plTalk');if(tk&&tk.dataset.n!==String(tk.scrollHeight)){tk.dataset.n=tk.scrollHeight;tk.scrollTop=tk.scrollHeight;}}
+
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
@@ -6780,10 +6798,10 @@ const ACT={
   noteEdit:id=>{UI.modal={k:'note',id:+id};setTimeout(()=>{const i=$('#noteIn');if(i)i.focus();},50);},
   noteSave:id=>{const i=$('#noteIn');if(noteSet(+id,i?i.value:'')===false){note('Đã ghim đủ 50 chỗ.');}UI.modal=null;},
   noteGo:k=>{const n=nodeById(+k);if(n&&Math.floor(n.id/100)===G.run.region&&n.fog>=1){UI.panel=null;UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else note('Chỗ ấy không ở vùng này, hoặc kiếp này ngươi chưa biết tới.');},
-  pactGo:a=>{UI.modal=null;UI.confirm=null;placeAct(a);UI.plTop=1;},
+  pactGo:a=>{UI.modal=null;UI.confirm=null;const sc=G.run.scene;const A=sc&&sc.type==='place'&&placeActs(nodeById(sc.id)).find(x=>x.a===a);UI.lastQ=PL_N[a]||(A&&A.l)||null;placeAct(a);UI.plTop=1;},
   vclose:()=>{const sc=G.run&&G.run.scene;if(sc)sc.venue=null;},
   vopt:id=>{const sc=G.run&&G.run.scene;if(!sc||!sc.venue)return;const o=venueOpts(nodeById(sc.id),sc.venue).find(x=>x.id===id);if(!o)return;UI.modal={k:o.lack||o.no?'vreq':'vconf',v:sc.venue,id};},
-  vgo:x=>{const [v,id]=x.split(':');UI.modal=null;venueDo(v,id);UI.plTop=1;},
+  vgo:x=>{const [v,id]=x.split(':');UI.modal=null;const sc=G.run.scene;const o=sc&&venueOpts(nodeById(sc.id),v).find(z=>z.id===id);UI.lastQ=o?VENUE_N[v]+': '+o.l:null;venueDo(v,id);UI.plTop=1;},
   bqSet:y=>{if(UI.modal&&UI.modal.k==='bq'){UI.modal.y=+y;UI.modal.ok=0;const c=bqCapY();UI.modal.warn=c!=null&&+y>c?1:0;}},
   bqWarnX:()=>{if(UI.modal){UI.modal.warn=0;const c=bqCapY();if(c!=null)UI.modal.y=c;}},bqWarnOk:()=>{if(UI.modal){UI.modal.warn=0;UI.modal.ok=1;ACT.bqGo();}},
   bqGo:()=>{const y=UI.modal&&UI.modal.y;if(!(y>0))return;{const c=bqCapY();if(c!=null&&y>c&&!UI.modal.ok){UI.modal.warn=1;return;}}UI.modal=null;const t0=W().t,tv0=G.run.tv;const done=bqCustom(y);const r=G.run,sc=r&&r.scene;if(!done){note(bqCan()||'Không bế quan được ở đây.');if(UI.bqOpened&&sc&&sc.type==='place')r.scene=null;}else if(sc&&sc.type==='place'){UI.modal={k:'res',title:'Xuất quan',t:sc.msg.join(' ')+' Thời gian trôi qua '+durH(W().t-t0)+', tu vi '+(r.tv>=tv0?'tăng '+numVN(r.tv-tv0)+'%':'đã viên mãn')+'.',chips:sc.chips};sc.msg=[];sc.chips=[];if(UI.bqOpened)r.scene=null;}UI.bqOpened=false;},
