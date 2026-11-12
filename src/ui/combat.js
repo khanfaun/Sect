@@ -4,7 +4,7 @@ function stIcons(st){let o='';for(const k in STI){const v=st[k];if(v>0)o+=`<span
 function unitKind(u){if(u.kind==='kiep')return 'kiep';if(u.side==='A')return 'nhan';return u.f==='nhan'?'ma':(u.f||'vat');}
 function trackHTML(sc){
   let h='<div class="track"><i class="mk m0"></i><i class="mk m50"><em>ra chiêu</em></i><i class="mk m75"><em>phát lực</em></i><i class="mk m100"></i>';
-  for(const u of sc.units){if(u.hp<=0&&!u.immune)continue;h+=`<span class="av ${u.side}${u.isMain?' me':''}" id="av${u.id}" style="left:${Math.min(100,u.pos)}%">${u.icon}</span>`;}
+  for(const u of sc.units){if(u.hp<=0&&!u.immune)continue;h+=`<span class="av ${u.side}${u.isMain?' me':''}" id="av${u.id}" style="left:${Math.min(100,u.pos)}%">${u.immune?u.icon:uAvatar(u)}</span>`;}
   return h+'</div>';
 }
 // thanh chỉ số trong trận: khí huyết đổi màu theo mức (xanh, vàng, đỏ)
@@ -12,7 +12,7 @@ function hpCls(u){const p=u.hp/Math.max(1,u.max);return p>0.5?'hp':p>0.2?'hp mid
 function cBar(cur,max,cls){return `<div class="cbar ${cls}"><i style="width:${clamp(cur/Math.max(1,max)*100,0,100)}%"></i></div>`;}
 function phBadge(u){return u.dazed?`<span class="ph dz"${ta('Cạn định lực: mất lượt kế tiếp')}>choáng</span>`:u.phase==='charge'?`<span class="ph"${ta('Đang tụ lực: tới mốc phát lực thì tung chiêu')}>tụ lực</span>`:u.phase==='guard'?`<span class="ph"${ta('Đang thủ thế: bị đánh trước mốc phát lực thì đỡ được một lần')}>thủ thế</span>`:u.stunT>0?'<span class="ph dz">choáng</span>':'';}
 function dlOf(u){return u.dl==null?100:u.dl;}
-function uAvatar(u){const foe=u.side==='B';return u.isMain?assetImg('hero','me',u.icon):foe?assetImg('foe',u.k||u.name,u.icon):assetImg('pet',u.k||u.name,u.icon);}
+function uAvatar(u){const foe=u.side==='B';return u.isMain?assetImg('hero','me',u.icon):foe?assetImg('foe',u.boss?'_boss':ASSET.foe[u.k]?u.k:'_'+(u.f||'thu'),u.icon):assetImg('pet',u.k||u.name,u.icon);}
 // thẻ kẻ địch / đồng hành. compact: chỉ avatar ở giữa, thanh khí huyết, thanh định lực, trạng thái
 function unitCard(sc,u,pickMode,compact){
   const dead=u.hp<=0&&!u.immune;const foe=u.side==='B';const tgt=pickMode&&foe&&!dead&&!u.immune;

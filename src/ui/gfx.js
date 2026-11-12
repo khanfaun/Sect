@@ -33,6 +33,7 @@ const GLYPH={
 const P2D={};function p2d(k){return P2D[k]||(P2D[k]=new Path2D(GLYPH[k]||GLYPH.tran));}
 const NODE_CAT={tran:'gold',thanh:'gold',tong:'acc',rung:'jade',nui:'jade',song:'jade',bien:'jade',hoang:'jade',thien:'acc',phe:'vio',dong:'vio',ma:'seal',sao:'seal',ai:'ink',linhdia:'acc',khoang:'vio',duoc:'jade',cho:'gold',ancu:'acc',dam:'jade'};
 
+const HERO_IMG={};function heroImg(){const u=ASSET.hero.me;if(!u||typeof Image==='undefined')return null;if(!HERO_IMG[u]){const im=new Image();im.onload=()=>Map2.invalidate();im.src=u;HERO_IMG[u]=im;}return HERO_IMG[u];}
 const ENT_GLYPH={thutrieu:'paw',di:'star'};const ICPATH={};function icPath(k){return ICPATH[k]||(ICPATH[k]=new Path2D(ICP[k]));}
 function entCol(t,C){return ['thutrieu','truysat'].includes(t)?C.seal:t==='di'?C.vio:t==='thuong'?C.gold:C.acc;}
 function avLetter(name){const w=String(name||'?').trim().split(/\s+/);return (w[w.length-1]||'?')[0].toUpperCase();}
@@ -218,8 +219,8 @@ const Map2=(()=>{
       if(!see&&!e.heard)continue;const q=mapXY(reg,see?p[0]:e.heard.x,see?p[1]:e.heard.y);const x=SX(q[0]),y=SY(q[1]);if(x<-30||y<-30||x>W0+30||y>H0+30)continue;
       const bad=e.type==='thutrieu'||e.type==='truysat';ctx.globalAlpha=see?1:0.55;const ec=entCol(e.type,C);const gk=ENT_GLYPH[e.type];
       if(e.type==='thuong'){ // xe ngựa, trên đầu là ảnh nhỏ người dẫn đầu
-        const wi=wagonImg();if(wi&&wi.complete&&wi.naturalWidth){ctx.drawImage(wi,x-28,y-17,56,32.7);}else{ctx.save();ctx.translate(x-11,y-9);ctx.scale(22/24,22/24);ctx.lineWidth=2;ctx.strokeStyle=ec;ctx.stroke(icPath('cart'));ctx.restore();}
-        ctx.beginPath();ctx.arc(x+10,y-22,7,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=1.5;ctx.strokeStyle=ec;ctx.stroke();ctx.font=`500 8px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(avLetter(e.lead||e.name),x+10,y-21.5);}
+        const wi=wagonImg();if(wi&&wi.complete&&wi.naturalWidth){ctx.drawImage(wi,x-15,y-9,30,17.5);}else{ctx.save();ctx.translate(x-11,y-9);ctx.scale(22/24,22/24);ctx.lineWidth=2;ctx.strokeStyle=ec;ctx.stroke(icPath('cart'));ctx.restore();}
+        ctx.beginPath();ctx.arc(x+6,y-12,4.5,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=1.5;ctx.strokeStyle=ec;ctx.stroke();ctx.font=`500 6px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(avLetter(e.lead||e.name),x+6,y-11.6);}
       else{ctx.beginPath();ctx.arc(x,y,10,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=ec;if(!see)ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
         if(gk){ctx.save();ctx.translate(x-6.5,y-6.5);ctx.scale(13/24,13/24);ctx.lineWidth=2.2;ctx.strokeStyle=ec;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke(icPath(gk));ctx.restore();}
         else{ctx.font=`500 10px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(avLetter(ENT_T[e.type].n),x,y+1);}}
@@ -228,7 +229,8 @@ const Map2=(()=>{
     // người chơi: con dấu son
     if(!HT._me){const x=SX(pos[0]),y=SY(pos[1]);const rr=s0*0.62;
       ctx.beginPath();ctx.arc(x,y,rr+2.5,0,6.3);ctx.fillStyle=C.seal;ctx.fill();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.fillStyle=C.paper;ctx.fill();
-      ctx.fillStyle=C.ink;ctx.font=`500 ${Math.round(rr*1.05)}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(avLetter(r.ten),x,y+1);
+      const hi=heroImg();if(hi&&hi.complete&&hi.naturalWidth){ctx.save();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.clip();ctx.drawImage(hi,x-rr,y-rr,rr*2,rr*2);ctx.restore();}
+      else{ctx.fillStyle=C.ink;ctx.font=`500 ${Math.round(rr*1.05)}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(avLetter(r.ten),x,y+1);}
       if(CFG.names)label(r.ten,x,y-rr-15,{c:C.seal,b:1,s:CFG.font==='m'?12:14});}
     // mây trôi, hạt theo mùa, sắc trời theo buổi
     if(lv>0&&CFG.clouds){if(!cloudSpr)cloudSpr=cloudSprite();if(!clouds.length)for(let i=0;i<[0,9,16][lv];i++)clouds.push({x:Math.random()*(WORLD_W+500)-250,y:Math.random()*2500-250,s:160+Math.random()*220,v:6+Math.random()*10});
