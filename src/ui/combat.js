@@ -186,7 +186,9 @@ function vCbPrep(sc){const r=G.run;const A=sc.units.filter(u=>u.side==='A'),B=sc
   const lab=side=>T.side===side&&!solo?`<b class="lc-c ${T.c}"${ta(cmp?'So tổng lực chiến hai đội':'So lực chiến hai bên')}>${T.t}</b>`:'';
   const hd=(n,side,L)=>`<p class="pp-h"><span>${n}${cmp?' · '+L.length+' người':''}</span>${lab(side)}</p>`;
   let b=`<div class="pp-sides pp-cmp"><div>${hd('Phe ta','A',A)}${A.map(u=>prepUnitRow(u,u.isMain,cmp)).join('')}</div><div>${hd('Phe địch','B',B)}${B.map(u=>prepUnitRow(u,false,cmp)).join('')}</div></div>`;
-  b+=`<p class="pp-h">Chiêu thức đang gắn</p><div class="pp-kn">${cat.map(([c,n])=>`<div><small>${n}</small>${(kn[c]||[]).length?(kn[c]).map(id=>SK[id]?`<span>${elSeal(SK[id].el)} ${esc(SK[id].n)}</span>`:'').join(''):'<span class="hint">trống</span>'}</div>`).join('')}</div>`;
+  {const nK=cat.reduce((x,[c])=>x+(kn[c]||[]).filter(id=>SK[id]).length,0);const open=UI.ppKn!=null?UI.ppKn:!cmp;
+  b+=`<button class="pp-h pp-tg" data-act="ppKn"><span>Chiêu thức đang gắn · ${nK?nK+' chiêu':'trống'}</span><small>${open?'thu gọn ▲':'mở rộng ▼'}</small></button>`;
+  if(open)b+=`<div class="pp-kn">${cat.map(([c,n])=>`<div><small>${n}</small>${(kn[c]||[]).length?(kn[c]).map(id=>SK[id]?`<span>${elSeal(SK[id].el)} ${esc(SK[id].n)}</span>`:'').join(''):'<span class="hint">trống</span>'}</div>`).join('')}</div>`;}
   b+=`<div class="pp-act"><button class="btn" data-act="prepKn">${ic('scroll')} Chỉnh chiêu thức</button><button class="btn" data-act="prepBag">${ic('bag')} Túi đồ · ${cp} món</button></div>`;
   b+=`<p class="hint">Dùng đồ lúc này không tốn niệm lực. Vào trận rồi, mỗi lần dùng tốn ${pctOf(NL_PILL,S().nl||1)} niệm lực.</p>`;
   return card('Sắp giao chiến',sc.en.n+(sc.boss?' · thủ lĩnh':sc.elite?' · tinh anh':''),b,{cls:'tall cbprep',head:`${crushAny(sc)?`<button class="btn sm cb-quick" data-act="cbQuick"${ta('Bỏ qua trận đánh: hệ thống tự đánh thay ngươi và tính kết quả.\nKhí huyết, linh lực, đồ dùng, chiến lợi phẩm vẫn thay đổi như đánh thật.')}>Tốc chiến</button>`:''}`,foot:`<span class="grow"></span><button class="btn pri big" data-act="cbGo">Bắt đầu</button><span class="grow"></span>`});}
