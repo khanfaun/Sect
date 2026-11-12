@@ -215,7 +215,7 @@ const ACT={
   ddTake:j=>{ddTake(+j);bagSt().sel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
   ult:(a,el)=>{if(el&&el.getAttribute('aria-disabled'))return;UI.menu=null;UI.pendSk=null;playerUlt();},
   burnOpen:()=>{UI.burnOpen=!UI.burnOpen;},
-  burn:()=>{if(playerBurn())UI.burnOpen=false;},
+  burn:k=>{if(playerBurn(k))UI.burnOpen=false;},
   yield:()=>{UI.menu=null;playerYield();},
   cont:()=>{UI.menu=null;UI.pendSk=null;combatContinue();},
   pick:i=>takePick(+i),

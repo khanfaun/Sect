@@ -2012,3 +2012,39 @@ function ttFxText(def){const o=ttFx(def);const L=[];for(const [k,v] of Object.en
   return _ds26b(sc,u,sk,lv,tid,qm);};}
 function critResolve(ok){const sc=G.run&&G.run.scene;if(!sc||!sc.critQ)return;const c=sc.critQ;sc.critQ=null;const u=U_(sc,c.uid);if(!u){return;}
   runAct(sc,()=>{clog(sc,ok?'Chí mạng!':'Lỡ thời cơ chí mạng.',ok?'me':'fl');u._critF=!!ok;try{doSkill(sc,u,c.sk,c.lv,c.tid,c.qm);}finally{u._critF=null;}});}
+
+// ================= ĐỢT 27: THIÊU ĐỐT TINH HUYẾT, THỌ NGUYÊN, HUYẾT TẾ =================
+// Nút "Huyết thuật" trong trận mở bảng chọn:
+//  · Thiêu đốt tinh huyết (lần 1): mất 20% khí huyết tối đa từ khí huyết hiện tại (không mất thọ); hồi 60% linh lực, đầy thể lực, giải độc, bỏng, suy yếu.
+//  · Thiêu đốt thọ nguyên (chỉ sau khi đã đốt tinh huyết): như "đốt nguyên thần" cũ, mất 20% thọ tối đa (tối thiểu 10 năm), nhiều hơn bản cũ.
+//  · Huyết tế (mỗi trận một lần): hiến 20% khí huyết tối đa. Trong trận: công +25%. Khí huyết tối đa thiếu hụt suốt 15 tháng,
+//    sau đó mới bắt đầu hồi dần trong 12 tháng. Dùng cho trận pháp, pháp bảo sẽ phát triển sau.
+// Mỗi lượt chỉ dùng một huyết thuật.
+const HT_P=0.2,HT_HOLD=15,HT_REC=12;
+function htPen(){const r=G.run;if(!r||!r.ht||!r.ht.length)return 0;const t=W().t;r.ht=r.ht.filter(x=>t<x.re);let p=0;for(const x of r.ht)p+=x.p*(t<x.rs?1:(x.re-t)/(x.re-x.rs));return Math.min(0.6,p);}
+{const _S27=S;S=function(){const s=_S27();const p=htPen();if(p>0)s.maxHp=Math.max(1,Math.round(s.maxHp*(1-p)));return s;};}
+function burnOpts(sc){const r=G.run;const u=mainUnit(sc);const L=[];const left=Math.floor(S().life-r.age);
+  if(!sc.tinh){const c=Math.round(u.max*0.2);L.push({k:'tinh',n:'Thiêu đốt tinh huyết',d:['Hồi 60% linh lực, đầy thể lực','Giải độc, bỏng, suy yếu','Không mất lượt, không mất thọ'],cost:'Mất '+c+' khí huyết hiện tại',ok:u.hp>c+1,why:'Khí huyết không đủ để đốt'});}
+  else if(!sc.tho){const y=Math.max(10,Math.round(LIFE[r.realm]*0.2));L.push({k:'tho',n:'Thiêu đốt thọ nguyên',y,d:['3 lượt tới mỗi đòn xuyên 25% thủ, hút 10% sát thương','Hết 3 lượt: suy yếu 2 lượt'],cost:'Mất vĩnh viễn '+y+' năm thọ (còn '+left+' năm)',ok:left>y+1,why:'Thọ nguyên không đủ'});}
+  if(!sc.ht){const c=Math.round(u.max*HT_P);L.push({k:'ht',n:'Huyết tế',d:['Hiến tinh huyết: công +25% tới hết trận','Mỗi trận một lần'],cost:'Khí huyết tối đa −'+c+' trong '+HT_HOLD+' tháng, sau đó mới hồi dần trong '+HT_REC+' tháng',ok:u.hp>c+1,why:'Khí huyết không đủ để hiến'});}
+  return L;}
+function burnInfo(sc){const L=burnOpts(sc);return {done:!L.length,L,label:sc.tinh?'Thiêu đốt thọ nguyên':'Huyết thuật'};}
+function playerBurn(k){const sc=G.run.scene;const u=readyPlayer(sc);if(!u||u.burnedTurn||u.dazed)return false;const o=burnOpts(sc).find(x=>x.k===k);if(!o||!o.ok)return false;const r=G.run;u.burnedTurn=1;
+  if(k==='tinh'){const c=Math.round(u.max*0.2);u.hp=Math.max(1,u.hp-c);sc.tinh=1;u.mp=Math.min(u.maxMp,u.mp+Math.round(u.maxMp*0.6));u.tl=100;u.st.poison=0;u.st.burn=0;u.st.weak=0;
+    clog(sc,`Ngươi thiêu đốt tinh huyết, mất ${c} khí huyết. Huyết khí sôi trào: linh lực hồi 60%, thể lực đầy, độc tố tiêu tan.`,'me');log('Thiêu đốt tinh huyết trong trận.');}
+  else if(k==='tho'){r.lifeAdj-=o.y;sc.tho=1;u.st.soul=3;clog(sc,`Ngươi thiêu đốt thọ nguyên, mất ${o.y} năm thọ. Ba lượt tới mỗi đòn xuyên giáp, hút máu.`,'me');log(`Thiêu đốt ${o.y} năm thọ nguyên trong trận.`);}
+  else{const c=Math.round(u.max*HT_P);sc.ht=1;const t=W().t;(r.ht=r.ht||[]).push({p:HT_P,rs:t+HT_HOLD*HM,re:t+(HT_HOLD+HT_REC)*HM});u.max=Math.max(1,u.max-c);u.hp=Math.min(u.hp,u.max);u.atk=Math.round(u.atk*1.25);u.matk=Math.round((u.matk||u.atk)*1.25);
+    clog(sc,`Ngươi huyết tế, hiến ${c} khí huyết tối đa. Máu tươi hóa thành sát khí: công +25% tới hết trận.`,'me');log('Huyết tế: khí huyết tối đa giảm, 15 tháng sau mới bắt đầu hồi.');}
+  syncMain(sc);sc.rev=(sc.rev||0)+1;return true;}
+// ----- khí vận có tác dụng riêng ngoài chỉ số (bổ sung cho bản Thienmenh): khí vận, giá mua, gia cảnh -----
+const TT_EXTRA={dai_khi_van:{van:2},van_khi_nghich_thien:{van:5},mi_cot:{shopP:10},tieu_nhan_bi_oi:{shopP:5},tu_loi_vi_ban:{shopP:5}};
+{const _tf27=ttFx;ttFx=function(def){const o=_tf27(def);const x=def&&TT_EXTRA[def.id];if(x)for(const [k,v] of Object.entries(x))o[k]=(o[k]||0)+v;return o;};}
+Object.assign(TT_FXN,{van:'Khí vận {v}',shopP:'Mua đồ rẻ {v}%'});
+{const _ft27=ttFxText;ttFxText=function(def){const L=_ft27(def);if(def&&def.id==='gia_canh_kha_gia')L.push('Đầu thai mang theo thêm linh thạch');return L;};}
+// câu chuyện mở đầu: khí vận nổi bật nhất, gia cảnh khá giả thì có thêm linh thạch
+{const _nr27=newRun;newRun=function(c){const res=_nr27(c);const r=G.run;if(!r||!r.story||!r.kv)return res;
+  const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const nm=w.slice(h2?2:1).join(' ')||r.ten;const at=Math.max(1,r.story.length-2);
+  if(r.kv.includes('gia_canh_kha_gia')){const v=ri(3,6);r.st+=v;r.story.splice(at,0,'Nhà vẫn còn chút của để dành. Lúc '+nm+' ra đi, trong tay nải có thêm '+v+' viên linh thạch.');}
+  const top=r.kv.map(k=>TT_DEST[k]).filter(d=>d&&d.rank>=2&&d.id!=='gia_canh_kha_gia'&&!/linh căn|kích hoạt|tự động/i.test(d.description)).sort((a,b)=>b.rank-a.rank)[0];
+  if(top){const d=top.description.replace(/\.$/,'');r.story.splice(Math.max(1,r.story.length-2),0,'Người quen ai cũng nói về '+nm+': '+d.charAt(0).toLowerCase()+d.slice(1)+'.');}
+  saveSoon();return res;};}
