@@ -1,6 +1,6 @@
 // ---------- màn bản đồ: thẻ trạng thái, nút bản đồ, thẻ địa điểm ----------
 function sectText(){const r=G.run;return r.flags.tongmon?'Đệ tử tông môn':'Tán tu · Tự do';}
-function clkStr(t){return `Năm <b>${tYear(t)}</b> · tháng ${tMonth(t)+1} · ngày ${Math.floor((t%HM)/HD)+1} · giờ ${gioName(t)}`;}
+function clkStr(t){return `<b class="ck-y">Năm ${tYear(t)}</b><span>tháng ${tMonth(t)+1} · ngày ${Math.floor((t%HM)/HD)+1}</span><span>giờ ${gioName(t)}</span>`;}
 // thẻ thông tin quận: hiện khi chạm một ô đất trống
 function distCardHTML(c){const g=geo(),I=hexInfo(c),r=G.run;
   if(I.sea)return `<div class="dock card nc"><div class="nc-top"><div class="nc-tt"><b>Vô Tận Hải</b><small>biển khơi</small></div><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div><p class="nc-d">Không có đường bộ. Đi ngang qua tốn gấp sáu lần đồng bằng.</p></div>`;
@@ -27,10 +27,9 @@ function hudHTML(){
     <path class="hp ${hc}" d="M5 32A27 27 0 0 1 59 32" stroke-dasharray="${(HC*hp).toFixed(1)} ${HC.toFixed(1)}"/><path class="mp" d="M5 32A27 27 0 0 0 59 32" stroke-dasharray="${(HC*mp).toFixed(1)} ${HC.toFixed(1)}"/></svg>`;
   const tm=r.tamma;
   let h=`<div class="hud-top"><button class="hud-av hud-av2" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Khí huyết '+r.hp+' / '+s.maxHp+' (nửa trên)\nLinh lực '+r.mp+' / '+s.maxMp+' (nửa dưới)\nChạm để mở nhân vật')}>${ring}<span class="hud-avi">${av}</span></button>
-   <div class="hud-id"><span class="nmrow"><b class="nm">${esc(r.ten)}</b>${btBadge()}</span><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="${warn?'bad':''}"${ta('Tuổi / thọ nguyên '+s.life+(warn?'\nThọ nguyên sắp cạn!':''))}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm${hurt}</small></div>
+   <div class="hud-id"><span class="nmrow"><b class="nm">${esc(r.ten)}</b>${btBadge()}</span><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="${warn?'bad':''}"${ta('Tuổi / thọ nguyên '+s.life+(warn?'\nThọ nguyên sắp cạn!':''))}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm${hurt}</small></div><div class="hud-clk3" id="clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])}>${clkStr(t)}</div>
    </div><div class="hud-stats"><span class="hs lc"${ta('Lực chiến '+fmtN(lucChien())+'\nTính từ chỉ số chiến đấu và trang bị.')}>${ic('sword')}${fmtN(lucChien())}</span><span class="hs tu"${ta('Tốc độ tu luyện khi bế quan: ~'+tvPerMonth().join('-')+' tu vi mỗi tháng\nThổ nạp: +'+fmtN(thonapPts())+' tu vi mỗi tháng, không cần bế quan')}>${ic('seat')}${tvPerMonth().join('-')}</span><span class="hs tm${tm>=60?' hi':''}"${ta('Tâm ma '+tm+' / 100\nĐủ 100 sẽ phải đối mặt với chính mình')}>${ic('skull')}${tm}</span><span class="hs dt"${ta('Đạo tâm\nChống ảo cảnh, giúp đột phá')}>${ic('lotus')}${s.tam}</span><span class="hs st"${ta('Linh thạch')}><i class="rh"></i>${fmtN(r.st)}</span></div>
-   <i class="hud-tv" style="width:${clamp(r.tv,0,100)}%"${ta('Tu vi '+Math.round(r.tv/100*tvPts(r.realm))+' / '+tvPts(r.realm))}></i><i class="hud-ll" style="width:${clamp(llOf(),0,100)}%"${ta('Lịch luyện '+llPtsOf()+' / '+tvPts(r.realm))}></i>
-   <div class="hud-clk2" id="clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])}>${clkStr(t)}</div>`;
+   <i class="hud-tv" style="width:${clamp(r.tv,0,100)}%"${ta('Tu vi '+Math.round(r.tv/100*tvPts(r.realm))+' / '+tvPts(r.realm))}></i><i class="hud-ll" style="width:${clamp(llOf(),0,100)}%"${ta('Lịch luyện '+llPtsOf()+' / '+tvPts(r.realm))}></i>`;
   return h;
 }
 function statusList(){const r=G.run,s=S(),w=W();const L=[];
