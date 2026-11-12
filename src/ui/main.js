@@ -128,6 +128,7 @@ const ACT={
   closeAll:()=>{if(G.run){G.run.scene=null;}UI.modal=null;UI.panel=null;},
   openJournal:()=>{if(G.run)G.run.scene=null;UI.modal=null;UI.panel='journal';UI.tab.journal='quest';},
   qevPick:i=>qevPick(+i),qevDone:()=>{if(G.run)G.run.scene=null;},
+  kyPick:i=>kyPick(+i),kyDone:()=>{const r=G.run;if(r){r.scene=null;if(r.moving)r.moving.halt=0;}},
   qDo:id=>{UI.modal={k:'qdo',id};},qDoGo:id=>{UI.modal=null;const q=G.run.quests.find(x=>x.id===id);UI.lastQ=q?(q.kind==='den'?'Giao tận tay: ':'Lùng tìm: ')+q.text:null;questDo(id);UI.plTop=1;},
   questGo:()=>{const n=nodeById(G.run.at);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place'&&!questExplore(n))note('Chưa thấy tung tích gì.');},
   sell:a=>{const [k,i]=a.split(':');sellItem(k,+i);},
@@ -365,6 +366,6 @@ function inkReveal(){const d=document.getElementById('ink');requestAnimationFram
 // bảng thông báo nhiệm vụ: xong, thất bại, thất hứa. Tự tắt sau chừng 2,5 giây; chạm để tắt ngay.
 function qpopFlush(){const L=G.qpop;if(!L||!L.length||document.querySelector('.qpop'))return;const q=L.shift();const app=document.getElementById('app');if(!app)return;
   const T={done:['Hoàn thành nhiệm vụ','ok'],fail:['Nhiệm vụ thất bại','bad'],late:['Thất hứa · quá hạn','bad']}[q.kind];
-  const d=document.createElement('div');d.className='qpop '+T[1];d.style.cssText=pcs(q.grade);
+  const d=document.createElement('div');d.className='qpop '+T[1];d.style.cssText=qpc(q.grade);
   d.innerHTML=`<b>${T[0]}</b><p>${esc(q.text)}</p>${q.ch&&q.ch.length?chipsHTML(q.ch):''}`;d.addEventListener('pointerdown',()=>{d.remove();qpopFlush();});
   app.appendChild(d);setTimeout(()=>{d.classList.add('out');setTimeout(()=>{d.remove();qpopFlush();},400);},2500);}

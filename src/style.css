@@ -913,3 +913,7 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .qsp{font-size:.7em;letter-spacing:.12em;text-transform:uppercase;color:#fffaf0;background:#c97a2b;padding:.05em .55em;border-radius:999px}
 .chip.hid{border-style:dashed;border-width:1.5px}.chip.hid.q0{border-color:#8d8672}.chip.hid.q1{border-color:#4f8a4a;background:color-mix(in srgb,#4f8a4a 10%,transparent)}.chip.hid.q2{border-color:#4a6fae;background:color-mix(in srgb,#4a6fae 10%,transparent)}.chip.hid.q3{border-color:#7b56a8;background:color-mix(in srgb,#7b56a8 10%,transparent)}.chip.hid.q4{border-color:#c97a2b;background:color-mix(in srgb,#c97a2b 12%,transparent)}
 .qmk{font-style:normal;font-weight:500!important;display:inline-grid;place-items:center;width:1em}
+.lav.e-thuong{border:0;border-radius:4px;width:2.2em;background:none}.lwag{width:100%;height:auto}
+.chip.hid.q5{border-color:#b8302a;background:color-mix(in srgb,#b8302a 12%,transparent)}.qrow.q5,.qcard.q5{background:color-mix(in srgb,#b8302a 10%,var(--paper))!important;box-shadow:inset 3px 0 0 #b8302a,0 0 0 1px color-mix(in srgb,#b8302a 40%,transparent)!important}
+.ky-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#2f8f4e;margin:0 0 6px}.ky-tag.paid{color:var(--seal)}
+.scard.kyngo{box-shadow:var(--sh),inset 0 3px 0 var(--gold)}
