@@ -897,7 +897,7 @@ function thonapPts(){return Math.round(thonapPct()*12/100*tvPts(G.run.realm));} 
 // vượt dưới 20% nhận đủ; 30% còn 70%; 40% còn 35%; 60% còn 10%; từ 70% trở lên chỉ còn 2% (bình cảnh).
 // Lịch luyện cao hơn tu vi thì được ngộ đạo: nhận thêm tối đa 15%.
 // Muốn đột phá phải có lịch luyện ít nhất 70%. Đột phá xong lịch luyện về 0, giữ lại 20% phần vượt quá 100%.
-const LL_T=[[20,1],[30,.7],[40,.35],[60,.1],[70,.02]],LL_BT=70,LL_MAX=150,LL_CAPE=0.05; // dưới 5% coi như chạm đáy
+const LL_T=[[20,1],[30,.7],[40,.35],[60,.1],[70,.02]],LL_BT=100,LL_MAX=150,LL_CAPE=0.05; // dưới 5% coi như chạm đáy
 function llOf(){return (G.run&&G.run.ll)||0;}
 function llEff(tv){const ll=llOf();const gap=tv-ll;if(gap<0)return 1+Math.min(0.15,-gap/100*0.5);if(gap<=LL_T[0][0])return 1;
   for(let i=1;i<LL_T.length;i++){const [g1,e1]=LL_T[i-1],[g2,e2]=LL_T[i];if(gap<=g2)return e1+(e2-e1)*(gap-g1)/(g2-g1);}return LL_T[LL_T.length-1][1];}
@@ -1224,10 +1224,12 @@ function isPham(){const r=G.run;return !!(r&&r.pham);}
 {const _br19=bqReal;bqReal=function(){return _br19()*(isPham()?PHAM_MUL:1);};}
 {const _tn19=thonapPct;thonapPct=function(){return _tn19()*(isPham()?PHAM_MUL:1);};}
 {const _at19=addTv;addTv=function(x){const r=G.run;if(!r||!r.pham||!(x>0))return _at19(x);
-  const res=_at19(x*PHAM_MUL);if(G.run&&G.run.pham&&G.run.tv>=100){const g=G.run;g.pham=0;g.tv=0;g.tvAcc=0;const s=S();g.hp=s.maxHp;g.mp=s.maxMp;
+  const res=_at19(x*PHAM_MUL);phamUp();return res;};}
+// dẫn khí nhập thể: tu vi và lịch luyện đều đầy
+function phamUp(){if(G.run&&G.run.pham&&G.run.tv>=100&&llOf()>=LL_BT){const g=G.run;g.pham=0;g.tv=0;g.tvAcc=0;g.ll=Math.max(0,(g.ll||0)-100)*0.2;const s=S();g.hp=s.maxHp;g.mp=s.maxMp;
     log(`Năm ${Math.floor(g.age)} tuổi, dẫn khí nhập thể, bước vào Luyện Khí.`);if(typeof bio==='function')bio(`Năm ${Math.floor(g.age)} tuổi, ${g.ten} dẫn khí nhập thể, bước vào Luyện Khí.`);
-    note('Dẫn khí nhập thể: bước vào Luyện Khí sơ kỳ!','up');if(typeof qPop==='function'){G.qpop=G.qpop||[];G.qpop.push({kind:'done',text:'Dẫn khí nhập thể · Luyện Khí sơ kỳ',grade:1,ch:[],title:'Đột phá'});}}
-  return res;};}
+    note('Dẫn khí nhập thể: bước vào Luyện Khí sơ kỳ!','up');if(typeof qPop==='function'){G.qpop=G.qpop||[];G.qpop.push({kind:'done',text:'Dẫn khí nhập thể · Luyện Khí sơ kỳ',grade:1,ch:[],title:'Đột phá'});}}}
+{const _la19=llAdd;llAdd=function(x,why,quiet){const d=_la19(x,why,quiet);phamUp();return d;};}
 // phàm nhân không có lịch luyện ràng buộc
 {const _le19=llEff;llEff=function(tv){return isPham()?1:_le19(tv);};}
 {const _S19=S;S=function(){const s=_S19();if(isPham()){s.maxHp=Math.round(s.maxHp*0.8);s.maxMp=Math.round(s.maxMp*0.5);s.atk=Math.round(s.atk*0.85);s.matk=Math.round(s.matk*0.85);}return s;};}
