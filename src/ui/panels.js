@@ -395,5 +395,5 @@ function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="t
 {const _rt34=relTip;relTip=function(rel){if(!rel||rel.k==='book')return _rt34(rel);const fx=relicFx(rel);const nt={},ns={};for(const [k,v] of Object.entries(fx))(NT_KEYS.includes(k)?nt:ns)[k]=v;
   const sub=SLOT_N[slotOf(rel)]+' · hệ '+(EL[rel.el]||EL.vo).n;const ok=relOk(rel);const NL=fxLines(nt,rel);
   let h=tipCard({ic:relIcon(rel),n:rel.name,t:rel.tier,sub,lines:fxLines(ns,rel),lore:rel.lore});const i=h.lastIndexOf('</div>');
-  const add=(NL.length?`<div class="nt"><b>Nội tại</b>${NL.map(x=>`<span>${esc(x)}</span>`).join('')}<small>Không cộng dồn với món khác có cùng nội tại</small></div>`:'')+`<p class="req${ok?'':' bad'}">Yêu cầu: ${LV_NAME[relReq(rel)]}${ok?'':' · chưa đủ'}</p>`;
+  const add=(NL.length?`<div class="nt"><b>Nội tại duy nhất · không cộng dồn</b>${NL.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:'')+`<p class="req${ok?'':' bad'}">Yêu cầu: ${LV_NAME[relReq(rel)]}${ok?'':' · chưa đủ'}</p>`;
   return h.slice(0,i)+add+h.slice(i);};}
