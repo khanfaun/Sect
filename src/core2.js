@@ -2158,3 +2158,7 @@ function relActive(){const r=G.run;if(!r)return [];const E=eqOf();const L=Object
   // nội tại dạng đếm (né mấy đòn, mấy lượt suy nhược…) luôn là số nguyên
   for(const k of ['firstEvade','weakStart','vulnStart'])if(fx[k])fx[k]=Math.floor(fx[k]+1e-9);
   return fx;};}
+// tên gọi của từng nội tại (nội tại cùng tên không cộng dồn)
+const NT_NAME={firstEvade:'Tàn Ảnh',startBlock:'Kim Chung Tráo',blockTurn:'Huyền Vũ Thuẫn',weakStart:'Nhiếp Hồn Âm',vulnStart:'Khổn Tiên Tác',poisonHit:'Vạn Độc Phệ',
+ stunP:'Phiên Thiên Ấn',reflect:'Phản Chiếu',execute:'Đoạn Mệnh',drain:'Thôn Huyết',regenHp:'Sinh Sinh Bất Tức',regenMp:'Linh Tuyền',healAfter:'Cam Lộ',hoTam:'Hộ Tâm Kính',
+ pillP:'Đan Hỏa',stonesP:'Tụ Bảo',pillSlot:'Càn Khôn',shopP:'Thương Hội Lệnh',tammaRes:'Thanh Tâm',elX:'Linh Dẫn',craftP:'Thiên Công',bqSafe:'Hộ Pháp Trận',bqP:'Tụ Linh Trận'};
