@@ -25,3 +25,19 @@ Game đã chừa sẵn chỗ cho ảnh. Mở `src/ui/base.js`, tìm `const ASSET
 - `place`: ảnh ngang cho thẻ địa điểm, theo loại nơi (`tran`, `thanh`, `rung`...).
 
 Chưa có ảnh thì game tự dùng hình vẽ tạm.
+
+## Danh mục vật phẩm từ Excel (đang thử nghiệm)
+
+`docs/vat-pham.xlsx` là sổ gốc của mọi vật phẩm, công pháp, chiêu thức, đan dược, linh thú, xuất thân, thiên phú. Dòng xanh lá là đồ đã có sẵn trong game (cột Ghi chú ghi mã, đừng đổi mã).
+
+Sau khi sửa Excel:
+
+```bash
+python3 tools/excel2game.py
+node tools/build-thu.js
+```
+
+- `tools/excel2game.py` kiểm tra lỗi từng dòng, ghi `src/data/catalog.js` và báo cáo `docs/bao-cao-vat-pham.md`.
+- `tools/build-thu.js` ráp bản thử `phu-sinh-thu.html` (có danh mục). Bản chính `phu-sinh.html` chưa dùng danh mục.
+- `src/catalog.js` nối danh mục vào luật game bằng các lớp bọc; bỏ tệp này ra là game trở lại như cũ.
+- `tools/nhap_do_cu.py` chép mọi thứ đang có trong code game vào Excel (chạy lại không sinh dòng trùng).
