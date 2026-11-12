@@ -1000,6 +1000,12 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 /* căn cơ: thanh tu vi, lịch luyện co giãn, con số không xuống dòng */
 .basegrid .hrow{grid-template-columns:7.4em minmax(40px,1fr) auto!important}.basegrid .hrow .hv{white-space:nowrap;min-width:0;text-align:right;padding-left:6px}
 .pham-lock{text-align:center;padding:24px 16px;border:1px dashed var(--line);border-radius:var(--r);color:var(--ink2)}.pham-lock .ic{width:26px;height:26px;color:var(--ink3)}.pham-lock b{display:block;margin:6px 0}.pham-lock p{font-size:.88em;color:var(--ink3);margin:0}
+/* ô dẫn khí của phàm nhân, dòng tu luyện trên thẻ tâm pháp */
+.tu-slot{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;margin:0 0 12px;border:1.5px dashed var(--line);border-radius:12px;background:var(--paper);color:var(--ink2);text-align:left}
+.tu-slot.on{cursor:pointer;border-style:solid;border-color:var(--pc);background:color-mix(in srgb,var(--pc) 8%,var(--paper));box-shadow:0 0 0 3px color-mix(in srgb,var(--pc) 15%,transparent)}
+.tu-slot .qi{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center}.tu-slot:not(.on) .qi .ic{width:22px;height:22px;color:var(--ink3)}
+.tu-slot b{display:block;color:var(--ink)}.tu-slot small{display:block;font-size:.8em;color:var(--ink3);margin-top:3px;line-height:1.35}
+.tp .tu-ln{margin:6px 12px 10px;font-size:.82em;color:var(--ink2);border-top:1px solid var(--line);padding-top:6px}
 
 </style>
 </head>
@@ -5068,7 +5074,7 @@ function playerMind(tid){const r=G.run,sc=r.scene;const u=readyPlayer(sc);if(!u|
 {const _r2=run2;run2=function(){const r=_r2();if(!r||r.arts)return r;r.arts=[];
   // khởi đầu: một công pháp, một tâm pháp phàm phẩm, cảnh giới phàm nhân cũng học được
   const s0=(r.skills||[]).find(k=>SK[k.id]);const c0=genArt('cp',0,s0?s0.id:null,{req:0});c0.lines.forEach(x=>x.req=0);r.arts.push(c0);
-  const t0=genArt('tp',0,null,{req:0,el:'vo'});t0.n='Dẫn Khí Quyết';t0.lines[0]={fx:'tvP',v:6,n:'Tu luyện',d:'Tu vi nhận thêm {v}%',req:0};t0.lines.forEach(x=>x.req=0);r.arts.push(t0);
+  const t0=genArt('tp',0,null,{req:0,el:'vo'});t0.n='Dẫn Khí Quyết';t0.start=1;t0.lines[0]={fx:'tvP',v:6,n:'Tu luyện',d:'Tu vi nhận thêm {v}%',req:0};t0.lines.forEach(x=>x.req=0);r.arts.push(t0);
   r.chu=[null,null,null,null,null,null,null,null];r.chuOpen=4;r.arts.slice(0,4).forEach((a,i)=>{r.chu[i]={k:'a',u:a.u};});r.kn=null;syncSkills();return r;};}
 // ----- thiêu đốt thọ nguyên: mỗi trận tối đa hai lần, lần sau đắt và dữ hơn -----
 // Lần 1 · Đốt huyết: mất ~7% thọ tối đa, hồi 60% linh lực, đầy thể lực, giải độc, bỏng, suy yếu. Không mất lượt.
@@ -5522,7 +5528,7 @@ function kyPick(i){const r=G.run,sc=r.scene;if(!sc||sc.type!=='kyngo'||sc.res)re
   const o=c.go()||{};sc.res={l:c.l,t:o.t};sc.chips=o.ch||[];log('Kỳ ngộ: '+ev.n+'.');if(G.run&&r.age>=S().life)die('toahoa');}
 {const _adv18=advanceTime;advanceTime=function(h){const o=_adv18(h);const r=G.run;if(!r||h>48)return o;r.kyAcc=(r.kyAcc||0)+h;
   while(r.kyAcc>=HD){r.kyAcc-=HD;if(r.scene||G.screen!=='map'||W().t-(r.kyT||-1e9)<HY/2)continue;
-    const roll=R();if(roll<KY_P[0]){kyStart(pick(KYNGO.filter(x=>x.paid)));break;}if(roll<KY_P[0]+KY_P[1]){kyStart(pick(KYNGO.filter(x=>!x.paid&&!x.joke)));break;}if(roll<KY_P[0]+KY_P[1]+KY_P[2]){kyStart(pick(KYNGO.filter(x=>x.joke)));break;}}
+    const roll=R();if(roll<KY_P[0]){kyStart(pick(KYNGO.filter(x=>x.paid)));break;}if(roll<KY_P[0]+KY_P[1]){kyStart(pick(KYNGO.filter(x=>!x.paid&&!x.joke&&!x.sp)));break;}if(roll<KY_P[0]+KY_P[1]+KY_P[2]){kyStart(pick(KYNGO.filter(x=>x.joke)));break;}}
   return o;};}
 
 const KY_P=[1/8000,1/12000,1/9000];
@@ -5581,6 +5587,73 @@ function phamLock(rel){return isPham()&&rel&&(rel.tier||0)>=1&&rel.k!=='book';}
 // tháo, lắp lại phương tiện
 function vehOff(){const r=G.run;const m=mountOf();if(!m)return;if(m.rented){r.rentOff=r.rent;r.rent=null;}else{r.vehOff=r.veh||null;r.veh=null;if(r.mount){r.vehOff=MOUNT.find(x=>x.id===r.mount);r.mount=null;}}note('Đã tháo '+m.n+'. Chạm ô phương tiện để dùng lại.');}
 function vehOn(){const r=G.run;if(r.vehOff){r.veh=r.vehOff;r.vehOff=null;return true;}if(r.rentOff&&r.rentOff.until>W().t){r.rent=r.rentOff;r.rentOff=null;return true;}return false;}
+
+// ================= ĐỢT 21: TÂM PHÁP LÀ CON TÀU =================
+// Mọi việc tu luyện (bế quan, thổ nạp, mọi nguồn tu vi) đều cần một tâm pháp đang vận hành.
+// Phàm nhân: tâm pháp đã học tự chạy ở ô dẫn khí (Khí Hải chưa mở). Từ Luyện Khí: tâm pháp phải nằm trong Khí Hải.
+// Phẩm tâm pháp quyết định tốc độ tu luyện và cảnh giới tối đa nó đưa tới được (phàm phẩm: tới Luyện Khí viên mãn).
+// Hệ trùng linh căn: nhanh thêm 10%.
+// Có tâm pháp đầu tiên: xuất thân gia truyền, bái nhập tông môn, mua bản chép tay ở tạp hóa, cao nhân truyền dạy,
+// kỳ ngộ, khắc vào chân linh từ kiếp trước (Bến Vong Xuyên), tự ngộ (ngộ tính từ 14).
+// Bảo đảm: phàm nhân không bao giờ quá 5 năm mà chưa có tâm pháp; từ năm thứ nhất cơ hội gặp cao nhân tăng dần,
+// tới 4 năm rưỡi gặp chắc chắn ngay khi rảnh, tròn 5 năm thì được truyền thẳng dù đang làm gì.
+const TU_M=[0.7,1,1.25,1.5,1.8,2.1,2.5],TP_Y=5;
+function tpMax(a){return clamp(a.tier,0,5);}
+function tuOf(L){return L.filter(a=>a&&a.type==='tp').sort((x,y)=>y.tier-x.tier)[0]||null;}
+function tuArt(){const r=G.run;if(!r)return null;run2();return tuOf(isPham()?arts():activeArts());}
+function tuMul(){const a=tuArt();if(!a)return 0;const r=G.run;return TU_M[clamp(a.tier,0,6)]*(a.el!=='vo'&&r.root.els.includes(a.el)?1.1:1);}
+function hasTp(){const r=G.run;return arts().some(a=>a.type==='tp')||r.relics.some(x=>x.k==='book'&&x.art&&x.art.type==='tp');}
+function tuWhy(){if(tuArt())return '';return arts().some(a=>a.type==='tp')?'Chưa vận hành tâm pháp nào trong Khí Hải: linh khí vào thân rồi lại tản mất.':'Chưa có tâm pháp tu luyện: không biết cách dẫn linh khí vào thân. Tìm ở tạp hóa, tông môn, cao nhân, hoặc chờ cơ duyên.';}
+function tuCapWhy(){const r=G.run;const a=tuArt();if(!a||isPham())return '';return tpMax(a)<r.realm+1?a.n+' ('+PHAM[a.tier]+') chỉ đưa tới '+REALM[tpMax(a)]+' viên mãn. Muốn lên '+REALM[clamp(r.realm+1,0,5)]+' phải có tâm pháp '+PHAM[r.realm+1]+' trở lên đang vận hành.':'';}
+{const _br21=bqRate;bqRate=function(){return _br21()*tuMul();};}
+{const _tn21=thonapPct;thonapPct=function(){return _tn21()*tuMul();};}
+{const _bn21=bqNeedY;bqNeedY=function(){return bqReal()>0?_bn21():99;};}
+{const _bc21=bqCan;bqCan=function(){return _bc21()||tuWhy();};}
+{const _at21=addTv;addTv=function(x){const r=G.run;if(r&&x>0&&!tuArt()){G._tvLost=1;return;}return _at21(x);};}
+{const _ae21=applyE;applyE=function(e,v){G._tvLost=0;const was=G.run&&G.run.flags&&G.run.flags.tongmon;const ch=_ae21(e,v);
+  if(G.run&&Array.isArray(ch)){if(G._tvLost&&e&&e.tv>0)ch.push(chip('✨','linh khí tản mất','Chưa có tâm pháp tu luyện vận hành nên không giữ được tu vi','dn'));
+    if(!was&&G.run.flags.tongmon){const c=tpSect();if(c)ch.push(c);}}G._tvLost=0;return ch;};}
+{const _cb21=canBreak;canBreak=function(){return _cb21()&&!tuCapWhy()&&!!tuArt();};}
+// học thẳng một tâm pháp (truyền khẩu, tự ngộ): vào sở học và ô vận hành ngay
+function tpLearn(tier,o){const r=run2();o=o||{};const a=genArt('tp',tier,null,{req:0,el:o.el});if(o.n)a.n=o.n;a.req=0;a.lines[0]={fx:'tvP',v:6+3*a.tier,n:'Tu luyện',d:'Tu vi nhận thêm {v}%'};
+  a.lines.forEach((x,i)=>{x.req=i?Math.max(x.req||0,0):0;});a.src=o.src||'';r.arts.push(a);const n=chuSlots();for(let j=0;j<n;j++)if(!r.chu[j]){r.chu[j]={k:'a',u:a.u};break;}
+  syncSkills();log('Có tâm pháp tu luyện: '+a.n+(o.src?' ('+o.src+')':'')+'.');saveSoon();return a;}
+function tpChip(a){return chip('📖',a.n,PHAM[a.tier]+' · tâm pháp · tốc độ tu luyện ×'+numFx(TU_M[a.tier])+' · tối đa '+REALM[tpMax(a)]+' viên mãn','item');}
+function tpSect(){const r=G.run;if(r.flags.sectTp)return null;r.flags.sectTp=1;const a=tpLearn(1,{el:pick(r.root.els.filter(e=>EL[e]))||'vo',src:'tông môn truyền'});a.n=pick(RELIC_PRE[a.el]||RELIC_PRE.vo)+' Nhập Môn Tâm Kinh';return tpChip(a);}
+// bỏ tâm pháp tự cấp cho mọi kiếp; xuất thân gia truyền, ký ức kiếp trước
+const TP_ORIGIN={thegia:1,tran:0,daodong:0,mieu:0};
+for(const id in TP_ORIGIN){const o=ORIGIN.find(x=>x.id===id);if(o)o.d+=', có tâm pháp gia truyền';}
+UPG.push({id:'kytp',n:'Khắc tâm pháp vào chân linh',i:'🪷',max:2,c:[12,28],d:'Đầu thai nhớ lại tâm pháp tốt nhất kiếp trước: bậc 1 giảm một phẩm (tối đa Hoàng phẩm), bậc 2 giữ nguyên phẩm (tối đa Huyền phẩm)'});
+{const _die21=die;die=function(cause,info){const r=G.run;if(r&&r.arts){const a=tuOf(arts());if(a)G.meta.tpMem={n:a.n,tier:a.tier,el:a.el};}return _die21(cause,info);};}
+{const _nr21=newRun;newRun=function(c){const res=_nr21(c);const r=G.run;if(!r||!r.pham)return res;run2();
+  const old=r.arts.filter(a=>a.start).map(a=>a.u);r.arts=r.arts.filter(a=>!a.start);for(let j=0;j<8;j++)if(r.chu[j]&&old.includes(r.chu[j].u))r.chu[j]=null;
+  const og=TP_ORIGIN[r.origin];const mem=G.meta.tpMem,k=U('kytp');
+  if(og!=null){const a=tpLearn(og,{src:'gia truyền'});if(r.origin==='tran')a.lines[0].v+=4;}
+  else if(mem&&k){const t=k>=2?Math.min(mem.tier,2):Math.min(Math.max(0,mem.tier-1),1);tpLearn(t,{n:mem.n,el:mem.el,src:'ký ức kiếp trước'});}
+  syncSkills();const s=S();r.hp=s.maxHp;r.mp=s.maxMp;return res;};}
+// tạp hóa: còn chưa có tâm pháp thì luôn bày một bản chép tay rẻ
+{const _se21=shopExtra;shopExtra=function(items,n){_se21(items,n);const r=G.run;if(!isPham()||hasTp())return;const a=genArt('tp',0,null,{req:0,el:'vo'});a.n='Dẫn Khí Quyết (chép tay)';a.lines[0]={fx:'tvP',v:4,n:'Tu luyện',d:'Tu vi nhận thêm {v}%'};a.lines.forEach(x=>x.req=0);
+  items.unshift({k:'relic',rel:bookOf(a),p:price(15)});};}
+// cao nhân, tự ngộ, lão nhân: kỳ ngộ riêng, không rơi vào vòng ngẫu nhiên
+KYNGO.push(
+ {id:'tp_ansi',sp:1,n:'Ẩn sĩ bên suối',t:'Bên con suối có túp lều tranh. Lão ẩn sĩ chân yếu đang loay hoay với đống củi ướt. Thấy ngươi, lão nheo mắt: “Hậu sinh, thân thể ngươi chưa có lấy một sợi linh khí.”',
+  c:[{l:'Ở lại giúp lão ba tháng',cost:'3 tháng',go:()=>{const a=tpLearn(chance(.3)?1:0,{src:'ẩn sĩ truyền'});advanceTime(3*HM);return {t:'Ngươi bổ củi, gánh nước, sắc thuốc cho lão. Tối nào lão cũng đọc cho ngươi vài câu khẩu quyết. Ngày đi, lão chỉ nói: “Nhớ thở cho đúng.”',ch:[chip('⏳','3 tháng','Thời gian trôi qua',''),tpChip(a)].concat(applyE({karma:3}))};}},
+     {l:'Đang vội, cáo từ',go:()=>({t:'Lão phẩy tay: “Duyên chưa tới thì thôi.”'})}]},
+ {id:'tp_laonhan',sp:1,n:'Lão nhân dưới gốc tùng',t:'Lão nhân áo vải ngồi dưới gốc tùng như đã chờ từ lâu: “Năm năm rồi mà ngươi vẫn chưa biết dẫn khí. Trời không tuyệt đường người. Ngồi xuống đây.”',
+  c:[{l:'Ngồi xuống nghe giảng',go:()=>{const a=tpLearn(0,{n:'Dẫn Khí Quyết',src:'lão nhân truyền'});advanceTime(2*HD);return {t:'Lão giảng suốt hai ngày hai đêm, giọng đều như tiếng gió. Lúc ngươi mở mắt, gốc tùng chỉ còn lại một chiếc lá khô.',ch:[chip('⏳','2 ngày','Thời gian trôi qua',''),tpChip(a)]};}},
+     {l:'Hỏi lão là ai',go:()=>{const a=tpLearn(0,{n:'Dẫn Khí Quyết',src:'lão nhân truyền'});return {t:'Lão cười: “Người qua đường.” Rồi đọc một mạch khẩu quyết. Ngươi nhớ được hết, như thể đã từng học ở đâu đó.',ch:[tpChip(a)]};}}]},
+ {id:'tp_cothu',n:'Thạch thất cổ nhân',t:'Mưa lở một mảng vách núi, lộ ra thạch thất của cổ nhân. Trên bàn đá có một quyển sách lụa, chữ vẫn còn rõ.',
+  c:[{l:'Cất quyển sách',go:()=>{const r=G.run;const b=gainBookTp(clamp(r.region+1+(chance(.3)?1:0),1,5));return {t:'Trang đầu ghi: “Người hữu duyên tự học.” Ngươi cẩn thận gói lại.',ch:[chip('📖',b.name,PHAM[b.tier]+'\n'+b.lore,'item')]};}}]}
+);
+{const _adv21=advanceTime;advanceTime=function(h){const o=_adv21(h);const r=G.run;if(!r||!r.pham||!(h>0))return o;if(hasTp()){r.tpAcc=0;return o;}
+  r.tpAcc=(r.tpAcc||0)+h;const y=r.age-r.birthAge;const free=()=>!r.scene&&G.screen==='map';
+  if(y>=TP_Y-0.5&&free()){kyStart(KYNGO.find(x=>x.id==='tp_laonhan'));r.tpAcc=0;return o;}
+  while(r.tpAcc>=HM&&G.run&&!hasTp()){r.tpAcc-=HM;
+    if(S().ngo>=14&&chance(.03)){const a=tpLearn(0,{n:'Tĩnh Tọa Tự Ngộ Quyết',el:pick(r.root.els.filter(e=>EL[e]))||'vo',src:'tự ngộ'});tpPop(a,'Tự ngộ tâm pháp','Đêm ấy ngồi nhìn trăng, hơi thở bỗng theo một nhịp lạ. Ngươi tự ngộ ra cách dẫn khí.');break;}
+    if(y>=1&&free()&&chance(.04+.03*y)){kyStart(KYNGO.find(x=>x.id==='tp_ansi'));break;}}
+  if(G.run&&!hasTp()&&y>=TP_Y){const a=tpLearn(0,{n:'Dẫn Khí Quyết',src:'lão nhân truyền'});tpPop(a,'Lão nhân truyền pháp','Một lão nhân đi ngang, dừng lại nhìn ngươi rất lâu rồi đọc cho ngươi một bài khẩu quyết.');}
+  return o;};}
+function tpPop(a,title,text){note(text+' Có tâm pháp: '+a.n+'.','up');G.qpop=G.qpop||[];G.qpop.push({kind:'done',text:a.n,grade:a.tier+1,ch:[tpChip(a)],title});}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -6384,6 +6457,7 @@ function statusList(){const r=G.run,s=S(),w=W();const L=[];
   for(const p of r.party||[])L.push(['','Đồng hành: '+p.ten,'Còn '+durH(Math.max(0,p.until-w.t))]);
   const pet=typeof petOut==='function'&&r.pets&&r.petOut!=null&&r.pets[r.petOut];if(pet)L.push(['','Linh thú: '+pet.n,pet.rest>w.t?'Đang dưỡng thương, còn '+durH(pet.rest-w.t):'Bậc '+pet.lv+' · '+petFxText(pet)]);
   for(const q of r.quests)if(q.state==='open')L.push(['','Việc: '+q.text,'Còn '+durH(Math.max(0,q.due-w.t))]);
+  {const w=tuWhy();if(w)L.push(['bad',isPham()&&!hasTp()?'Chưa có tâm pháp':'Tâm pháp chưa vận hành',w]);const c=tuCapWhy();if(c&&r.tv>=100)L.push(['bad','Tâm pháp tới giới hạn',c]);}
   if(canBreak())L.push(['good','Tu vi viên mãn','Tới nơi có động phủ để đột phá.']);
   else if(r.tv>=100&&llOf()<LL_BT)L.push(['bad','Lịch luyện chưa đủ','Tu vi đã viên mãn nhưng lịch luyện mới '+llPtsOf()+', cần '+Math.round(LL_BT/100*tvPts(r.realm))+' mới đột phá được.']);
   if(llEff(r.tv)<0.5)L.push(['bad','Bình cảnh','Tu vi bỏ xa lịch luyện: tu vi thực nhận chỉ còn '+Math.round(llEff(r.tv)*100)+'%.']);
@@ -6589,7 +6663,7 @@ function modalHTML(){
      <p class="bq-ll ${B.sc}" id="bqS">${B.s}</p>
      <div class="kv"><div><span>Thọ nguyên còn lại</span><b id="bqL" class="${B.lc}">${B.l}</b></div><div><span>Tới viên mãn còn</span><b id="bqN">${B.n}</b></div></div>
      <p class="hint" id="bqHint">${B.h}</p>
-     ${(()=>{if(r.tv>=100&&llOf()<LL_BT)return `<div class="bt-box"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint bad">Lịch luyện chưa đủ để đột phá (cần ${fmtN(Math.round(LL_BT/100*T))}). Hãy ra ngoài lịch luyện.</p></div>`;const brk=canBreak();if(!brk)return '';const atDp=cn&&cn.dp;return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint">${atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>Đột phá</button></div>`;})()}
+     ${(()=>{{const cw=tuCapWhy();if(r.tv>=100&&cw)return `<div class="bt-box"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint bad">${esc(cw)}</p></div>`;}if(r.tv>=100&&llOf()<LL_BT)return `<div class="bt-box"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint bad">Lịch luyện chưa đủ để đột phá (cần ${fmtN(Math.round(LL_BT/100*T))}). Hãy ra ngoài lịch luyện.</p></div>`;const brk=canBreak();if(!brk)return '';const atDp=cn&&cn.dp;return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint">${atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>Đột phá</button></div>`;})()}
      ${m.warn?`<div class="bq-warn"><p><b>Lịch luyện không đủ</b></p><p>Bế quan quá ${durH(cap*HY)} thì gần như không tăng thêm tu vi nữa. Nên ra ngoài lịch luyện trước.</p><p>Vẫn tiếp tục bế quan ${durH(y*HY)}?</p><div class="mb-f"><button class="btn" data-act="bqWarnX">Thôi</button><button class="btn pri" data-act="bqWarnOk">Xác nhận, tiếp tục</button></div></div>`:''}
      <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" id="bqGoB" data-act="bqGo"${y>0?'':' disabled'}>Nhập định</button></div></div>`;}
   if(m.k==='explore'&&SETTLE.includes(nodeById(G.run.at).type)){const n=nodeById(G.run.at);const X=townStats(n);const tb=UI.tab.ex||'L';const rows=L=>`<div class="kv">${L.map(x=>`<div><span>${esc(x[0])}</span><b>${esc(x[1])}</b></div>`).join('')}</div>`;
@@ -7299,7 +7373,15 @@ const ENT_DESC={thuong:'Thương đội: đoàn xe buôn đi giữa các thôn t
 // phàm nhân: khóa tab Kỹ năng và Khí Hải
 const PHAM_LOCK=(t,d)=>`<div class="pham-lock">${ic('lock')}<b>${t}</b><p>${d}</p></div>`;
 {const _kn=knTabHTML;knTabHTML=function(){return isPham()?PHAM_LOCK('Chưa dẫn khí nhập thể','Phàm nhân chưa có linh lực nên chưa dùng được chiêu thức. Trong trận chỉ đánh thường, thủ thế, đỡ đòn và dùng đồ. Đủ tu vi để dẫn khí nhập thể, bước vào Luyện Khí thì mở.'):_kn();};}
-{const _hc=hocTabHTML;hocTabHTML=function(){const h=_hc();if(!isPham())return h;const i=h.indexOf('<div class="hocL">');return i<0?h:h.slice(0,i)+'<div class="hocL">'+PHAM_LOCK('Khí Hải chưa mở','Phàm nhân chưa dẫn khí vào thân, đan điền còn trống. Dẫn khí nhập thể rồi mới vận hành công pháp trong Khí Hải được.')+'</div></div>';};}
+{const _hc=hocTabHTML;hocTabHTML=function(){const h=_hc();if(!isPham())return h;const i=h.indexOf('<div class="hocL">');return i<0?h:h.slice(0,i)+'<div class="hocL">'+tuSlotHTML()+PHAM_LOCK('Khí Hải chưa mở','Phàm nhân chưa dẫn khí vào thân, đan điền còn trống. Dẫn khí nhập thể rồi mới vận hành công pháp trong Khí Hải được. Riêng ô dẫn khí ở trên tự chạy tâm pháp tốt nhất ngươi đã học.')+'</div></div>';};}
+// ô dẫn khí của phàm nhân: chạy tâm pháp nhập môn
+function tuSlotHTML(){const a=tuArt();const r=G.run;
+  if(a)return `<h4 class="sgrp">${ib('lotus','soft')}Ô dẫn khí</h4><div class="tu-slot on" style="${pcs(a.tier)}" data-act="artOpen" data-arg="${a.u}"${tah(artTipH(a))}><span class="qi">${artArt(a)}</span><span class="grow"><b>${esc(a.n)}</b><small>${PHAM[a.tier]} · đang vận hành · tốc độ tu luyện ×${numFx(Math.round(tuMul()*100)/100)}</small><small>Đưa tới tối đa ${REALM[tpMax(a)]} viên mãn</small></span></div>`;
+  const y=Math.max(0,TP_Y-(r.age-r.birthAge));const bk=r.relics.some(x=>x.k==='book'&&x.art&&x.art.type==='tp');
+  return `<h4 class="sgrp">${ib('lotus','soft')}Ô dẫn khí</h4><div class="tu-slot"><span class="qi">${ic('lock')}</span><span class="grow"><b>Chưa có tâm pháp tu luyện</b><small>${bk?'Trong túi có bí tịch tâm pháp: học ở mục Tâm pháp bên cạnh.':'Không có tâm pháp thì không bế quan, không thổ nạp, tu vi không lên.'}</small>
+   <small>Cách có: xuất thân gia truyền · bái nhập tông môn · bản chép tay ở tạp hóa · cao nhân truyền dạy · kỳ ngộ · tự ngộ (ngộ tính từ 14).</small><small>Trời không tuyệt đường người: chậm nhất ${y>0.05?'chừng '+numFx(Math.ceil(y*2)/2)+' năm nữa':'sắp tới'} sẽ gặp được người truyền pháp.</small></span></div>`;}
+// thẻ tâm pháp: tốc độ tu luyện, cảnh giới tối đa
+{const _at21=artTipH;artTipH=function(a,pot){const h=_at21(a,pot);if(!a||a.type!=='tp')return h;const i=h.lastIndexOf('</div></div>');return i<0?h:h.slice(0,i)+`<p class="tu-ln">Tu luyện ×${numFx(TU_M[clamp(a.tier,0,6)])}${a.el!=='vo'&&G.run.root.els.includes(a.el)?' (hợp linh căn +10%)':''} · đưa tới tối đa <b>${REALM[tpMax(a)]}</b> viên mãn</p>`+h.slice(i);};}
 
 // ---------- màn ngoài: mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên ----------
 function vTitle(){
