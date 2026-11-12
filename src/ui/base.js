@@ -18,7 +18,7 @@ const CFG_DEF={gfx:'auto',fps:30,dpr:0,fx:true,clouds:true,daynight:true,anim:tr
   names:true,roads:true,grid:true,ents:true,ring:true,notes:true,terrain:true,
   font:'m',theme:'light',cspeed:1,autoFight:false,confirmDanger:true,clockIdle:true};
 let CFG=Object.assign({},CFG_DEF);
-function cfgLoad(){try{const o=JSON.parse(localStorage.getItem(CFG_KEY)||'null');if(o)CFG=Object.assign({},CFG_DEF,o);else{try{const t=localStorage.getItem('phusinh_theme');if(t)CFG.theme=t;}catch(e){}}}catch(e){}CFG.theme='light';cfgApply();}
+function cfgLoad(){try{const o=JSON.parse(localStorage.getItem(CFG_KEY)||'null');if(o)CFG=Object.assign({},CFG_DEF,o);else{try{const t=localStorage.getItem('phusinh_theme');if(t)CFG.theme=t;}catch(e){}}}catch(e){}CFG.theme='light';CFG.autoFight=false;CFG.cspeed=1;cfgApply();}
 function cfgSave(){try{localStorage.setItem(CFG_KEY,JSON.stringify(CFG));}catch(e){}}
 // mức đồ họa thực tế: 0 tiết kiệm, 1 cân bằng, 2 đẹp
 let GFX_AUTO=1;
@@ -53,7 +53,7 @@ const ICP={
   bolt:'M13 2L4 14h7l-1 8 9-12h-7l1-8z',
   sun:'M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19',
   moon:'M20 14A8 8 0 019 4a8 8 0 1011 10z',
-  hour:'M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9',
+  hour:'M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0M12 7v5l3.2 2',
   bag:'M6 8h12l1 12H5L6 8zM9 8V6a3 3 0 016 0v2',
   hex:'M12 2l8.7 5v10L12 22l-8.7-5V7z',
   heart:'M12 20s-7-4.6-7-10.2A4.3 4.3 0 0112 7.2a4.3 4.3 0 017 2.6C19 15.4 12 20 12 20z',
@@ -97,18 +97,88 @@ const ICP={
   seat:'M12 6a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM7 13c0-3 2-5 5-5s5 2 5 5M3 20c3-4 6-5 9-5s6 1 9 5M7 13l-2 4M17 13l2 4',
 };
 function ib(n,c){return `<span class="ib${c?' ib-'+c:''}">${ic(n)}</span>`;}
-const STAT_IC={'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['eye','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
-function sib(label){const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
+const STAT_IC={'Tiên thiên khí vận':['star','gold'],'Tiên thiên thể chất':['heart','seal'],'Lịch luyện':['sword','gold'],'Thổ nạp':['wind','jade'],'Hiệu suất tu':['cycle','acc'],'Tư chất':['gem','gold'],'Tốc độ tu':['seat','acc'],'ST chí mạng':['bolt','seal'],'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
+function sib(label){if(label==='Linh thạch')return '<i class="rh sic"></i>';const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
 function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICP[n]||ICP.info}"/></svg>`;}
 
 // ---------- mẩu nhỏ dùng chung ----------
-function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}>${c.i} ${esc(c.t)}</span>`).join('')}</div>`;}
+// mỗi loại một biểu tượng duy nhất: các biểu tượng cũ dạng emoji trong nhãn được đổi sang bộ biểu tượng nét mảnh
+const EMO_IC={'⏳':'hour','🏺':'ring','❤️':'heart','📖':'book','☯️':'yin','🤝':'people','💧':'drop','✨':'spark','⚗️':'flask','⚔':'sword','⚔️':'sword','🗡️':'sword','😈':'skull','🗺️':'pin','📜':'scroll','🏅':'medal','🎫':'flag','🍃':'clover','🍀':'clover','🌩️':'bolt','☁️':'sun','🛡️':'shield','🌀':'wind','🧠':'brain','🪷':'lotus','🌕':'moon'};
+function emoIc(e){if(e==='?')return '<i class="qmk">?</i>';if(e==='💎')return '<i class="rh"></i>';const k=EMO_IC[e];return k?ic(k):e;}
+function emoTxt(h){return String(h).replace(/💎/g,'<i class="rh"></i>').replace(/⏳/g,ic('hour'));}
+function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}${c.h?` data-tiph="${esc(c.h)}"`:''}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
 function elSeal(e){const E=EL[e]||EL.vo;return `<span class="el el-${e}"${ta('Hệ '+E.n+(KHAC[e]?'\nKhắc '+EL[KHAC[e]].n:''))}>${E.c}</span>`;}
 function bar(cur,max,cls){const p=Math.max(0,Math.min(100,cur/Math.max(1,max)*100));return `<div class="hb ${cls||''}"><i style="width:${p}%"></i></div>`;}
 function tabsHTML(key,list,cur){return `<div class="tabs">${list.map(([k,n])=>`<button data-act="tab" data-arg="${key}:${k}" class="${k===cur?'on':''}">${n}</button>`).join('')}</div>`;}
 function numVN(x){return String(Math.round(x*10)/10).replace('.',',');}
-function stoneHTML(v){return `<span class="stone"><i></i>${v}</span>`;}
+function stoneHTML(v){return `<span class="stone"><i class="rh"></i>${v}</span>`;}
 function win(title,body,o){o=o||{};return `<section class="win ${o.cls||''}"><header class="win-h"><h2>${title}</h2>${o.extra||''}${o.noClose?'':`<button class="xb" data-act="${o.close||'closePanel'}" aria-label="Đóng">${ic('close')}</button>`}</header><div class="win-b">${body}</div>${o.foot?`<footer class="win-f">${o.foot}</footer>`:''}</section>`;}
 function toastFlush(){const L=G.toasts;if(!L||!L.length)return;const box=$('#toast');if(!box)return;
   for(const t of L){const d=document.createElement('div');d.className='toast '+(t.c||'');d.textContent=t.t;box.appendChild(d);setTimeout(()=>d.remove(),3600);}
   G.toasts=[];while(box.children.length>3)box.firstChild.remove();}
+
+// ---------- từ điển: thuật ngữ trong lời kể có gạch chân đứt, chạm vào xem giải thích ----------
+const GLOSS={
+  'tu sĩ':'Người tu luyện để cầu trường sinh, hấp thu linh khí trời đất vào thân.',
+  'tán tu':'Tu sĩ không thuộc tông môn nào, tự tu tự lo, tự do mà thiếu chỗ dựa.',
+  'tông môn':'Môn phái tu tiên. Có công pháp truyền thừa, động phủ, tài nguyên; đệ tử phải làm việc, đóng góp cống hiến.',
+  'sơn môn':'Cổng chính và cũng là cách gọi một tông môn tu tiên.',
+  'ma tu':'Tu sĩ đi đường tà: luyện bằng máu thịt, hồn phách hay tà thuật. Mạnh nhanh nhưng dễ bị tâm ma cắn trả.',
+  'linh thạch':'Đá chứa linh khí, vừa là tiền tệ vừa là tài nguyên tu luyện của giới tu tiên. Rất quý.',
+  'linh khí':'Khí tinh túy của trời đất. Tu sĩ hút linh khí vào thân để tăng tu vi. Nơi linh khí dồi dào tu nhanh hơn.',
+  'linh căn':'Căn cơ bẩm sinh quyết định có tu được hay không và hợp với hệ nào (Kim, Mộc, Thủy, Hỏa, Thổ...). Càng ít hệ càng thuần.',
+  'tư chất':'Độ tinh thuần của linh căn, định sẵn lúc sinh. Tư chất cao thì hấp thu linh khí nhanh hơn.',
+  'tu vi':'Mức tích lũy tu luyện trong cảnh giới hiện tại. Đầy thì có thể đột phá.',
+  'lịch luyện':'Kinh nghiệm thực chiến, đi lại giang hồ. Tu vi bỏ xa lịch luyện thì tu luyện chậm lại; đủ lịch luyện mới đột phá được.',
+  'cảnh giới':'Các bậc tu luyện: Luyện Khí, Trúc Cơ, Kết Đan, Nguyên Anh, Hóa Thần, Độ Kiếp.',
+  'luyện khí':'Cảnh giới đầu tiên: dẫn linh khí vào thân, luyện thành chân khí.',
+  'trúc cơ':'Cảnh giới thứ hai: xây nền móng đạo cơ. Thọ nguyên tăng, ngự được pháp khí.',
+  'kết đan':'Cảnh giới thứ ba: chân khí ngưng thành kim đan trong đan điền.',
+  'nguyên anh':'Cảnh giới thứ tư: kim đan hóa thành nguyên anh, thân chết mà nguyên anh còn thì còn đường sống.',
+  'hóa thần':'Cảnh giới thứ năm: thần thức hòa với trời đất, gần chạm tới phi thăng.',
+  'độ kiếp':'Vượt thiên kiếp cuối cùng để phi thăng thành tiên.',
+  'đột phá':'Vượt lên cảnh giới mới khi tu vi viên mãn. Cần ở động phủ, đủ lịch luyện, có thể phải chịu thiên kiếp.',
+  'thiên kiếp':'Kiếp nạn trời giáng khi tu sĩ đột phá cảnh giới lớn: lôi, hỏa, phong, hàn khí hay tâm ma, tùy người. Các kiếp tới lần lượt. Vượt được thì lên, không thì tan thành tro.',
+  'lôi kiếp':'Sấm sét trời giáng thử thách tu sĩ khi đột phá. Chỉ đỡ được, không né được.',
+  'bế quan':'Đóng cửa tu luyện liền mạch nhiều tháng năm ở động phủ, tu vi tăng mạnh nhưng thời gian trôi qua.',
+  'động phủ':'Hang động, chỗ ở có cấm chế của tu sĩ. Nơi bế quan và đột phá.',
+  'tâm ma':'Tạp niệm, oán hận tích tụ trong lòng. Đủ 100 thì phải đối mặt với chính mình.',
+  'đạo tâm':'Sự vững vàng của lòng cầu đạo. Chống ảo cảnh, giúp đột phá.',
+  'ngộ tính':'Khả năng lĩnh hội. Ngộ tính cao thì tu nhanh, giải đố giỏi, luyện chế dễ.',
+  'khí vận':'Vận may. Ảnh hưởng chí mạng và những cơ duyên bất ngờ.',
+  'nhân quả':'Thiện ác đã làm. Thiện có thiện báo, ác có ác báo, kiếp này hoặc kiếp sau.',
+  'thọ nguyên':'Tuổi thọ tối đa. Hết thọ nguyên là tọa hóa. Đột phá cảnh giới để sống lâu hơn.',
+  'thần thức':'Ý thức tỏa ra ngoài thân để dò xét. Thần thức mạnh thì thấy xa và đánh thần thức được.',
+  'niệm lực':'Sức thần thức dùng trong trận: dùng vật phẩm, tế pháp bảo, đánh thần thức đều tốn.',
+  'pháp tướng':'Hình bóng khổng lồ của thần thông hiện sau lưng khi thần lực viên mãn, tăng sức chiến đấu.',
+  'pháp bảo':'Vật phẩm tu sĩ luyện chế hoặc tìm được: binh khí, áo giáp, nhẫn, ngọc bội... tăng chỉ số khi mang.',
+  'pháp khí':'Bảo vật cấp thấp hơn pháp bảo, dùng để phi hành, chứa đồ, phòng thân.',
+  'đan dược':'Thuốc luyện từ linh thảo: hồi phục, tăng tu vi, hỗ trợ đột phá.',
+  'linh thảo':'Cỏ cây hấp thu linh khí lâu năm, nguyên liệu luyện đan.',
+  'linh khoáng':'Khoáng thạch chứa linh khí, nguyên liệu luyện khí.',
+  'yêu thú':'Thú vật tu luyện thành tinh, có sức mạnh và trí khôn. Yêu đan trong bụng là bảo vật.',
+  'yêu đan':'Viên đan kết trong bụng yêu thú, chứa tinh hoa tu luyện của nó.',
+  'phù lục':'Lá bùa vẽ trận văn, xé ra là phát tác pháp thuật.',
+  'cấm chế':'Trận pháp nhỏ bảo vệ một nơi hay một vật.',
+  'trận pháp':'Bố trí linh thạch, trận văn để tạo hiệu ứng: phòng ngự, tụ linh, mê hoặc, sát phạt.',
+  'phường thị':'Chợ của tu sĩ, mua bán đan dược, pháp bảo, bí tịch.',
+  'quỷ thị':'Chợ đêm của kẻ không dám ra ánh sáng. Hàng lạ, giá lạ.',
+  'bí cảnh':'Tiểu thế giới ẩn, chỉ mở cửa trong thời gian ngắn. Nhiều cơ duyên, nhiều hiểm nguy.',
+  'cơ duyên':'Dịp may hiếm có trên đường tu: bảo vật, truyền thừa, kỳ ngộ.',
+  'luân hồi':'Chết đi rồi đầu thai kiếp khác. Chỉ điểm luân hồi khắc trong chân linh là còn mang theo.',
+  'chân linh':'Phần bản ngã sâu nhất, theo người qua các kiếp luân hồi.',
+  'phi thăng':'Rời nhân gian lên tiên giới, đích đến cuối cùng của tu sĩ.',
+  'đan điền':'Nơi chứa chân khí dưới rốn, gốc rễ của tu vi.',
+  'chân khí':'Linh khí đã luyện hóa trong thân, dùng để thi triển pháp thuật, võ công.',
+  'công pháp':'Phương pháp tu luyện và chiêu thức chiến đấu được truyền lại.',
+  'tâm pháp':'Công pháp nội tu, giúp tu luyện nhanh hơn hoặc tăng chỉ số.',
+  'bí tịch':'Sách ghi chép công pháp. Đọc hiểu thì học được.',
+  'thiên kiêu':'Thiên tài trẻ tuổi xuất chúng của các tông môn.',
+};
+let GLOSS_RE=null;
+function gloss(h){if(!GLOSS_RE){const ks=Object.keys(GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));GLOSS_RE=new RegExp('(^|[^\\p{L}])('+ks.join('|')+')(?![\\p{L}])','giu');}
+  const seen=new Set();return String(h).replace(GLOSS_RE,(m,pre,w)=>{const k=w.toLowerCase();if(seen.has(k))return m;seen.add(k);return `${pre}<span class="gl" data-tip="${esc(w.charAt(0).toUpperCase()+w.slice(1)+': '+GLOSS[k])}">${w}</span>`;});}
+function txt(s){return gloss(esc(s));}
+
+// hình xe ngựa của thương đội (đồ họa 2D vẽ tay)
+const WAGON_URI='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgNzAiPjxlbGxpcHNlIGN4PSI2MiIgY3k9IjY0IiByeD0iNTQiIHJ5PSI0IiBmaWxsPSIjMDAwIiBvcGFjaXR5PSIuMTgiLz48ZyBzdHJva2U9IiMzYjI0MTQiIHN0cm9rZS13aWR0aD0iMS42IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik0yNyA0NmwtMiAxNWgzLjVsMi0xM00zNCA0N2wxIDE0aDMuNWwtLjUtMTRNNDQgNDdsMSAxNGgzLjVsLS41LTE0TTQ5IDQ1bDMgMTZoMy41bC0yLjUtMTYiIGZpbGw9IiM3YTRhMjYiLz48cGF0aCBkPSJNMjQgMzdjMC03IDYtMTAgMTQtMTBoOGM2IDAgMTAgMyAxMCA5IDAgNi00IDExLTEyIDExSDMzYy02IDAtOS00LTktMTB6IiBmaWxsPSIjOGE1YTMyIi8+PHBhdGggZD0iTTI4IDMxYy0yLTUtNC0xMC05LTE0bC02IDJjLTIgMS0zIDMtMiA1bDIgMmMyIDAgMy0xIDQtMiAyIDIgNCA2IDUgMTB6IiBmaWxsPSIjOGE1YTMyIi8+PHBhdGggZD0iTTE4IDE2bDEtNSAzIDQiIGZpbGw9IiM4YTVhMzIiLz48cGF0aCBkPSJNMjEgMTVjNCAyIDcgNyA5IDEzbC0zIDJjLTItNS00LTktNy0xMnoiIGZpbGw9IiM0YTJjMTYiIHN0cm9rZT0ibm9uZSIvPjxwYXRoIGQ9Ik01NiAzNGM0IDEgNiA0IDYgOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNGEyYzE2IiBzdHJva2Utd2lkdGg9IjIuNCIvPjxjaXJjbGUgY3g9IjE1LjUiIGN5PSIxOSIgcj0iMSIgZmlsbD0iIzFiMGYwOCIgc3Ryb2tlPSJub25lIi8+PHBhdGggZD0iTTI0IDMzaDI4IiBzdHJva2U9IiNjMDNhMmIiIHN0cm9rZS13aWR0aD0iMS42Ii8+PHBhdGggZD0iTTUyIDM0aDExIiBzdHJva2U9IiM1YzNhMWUiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik02MiAyMmg0OHYyNEg2MnoiIGZpbGw9IiNhODc0M2YiLz48cGF0aCBkPSJNNjIgMzBoNDhNNjIgMzhoNDgiIHN0cm9rZT0iIzdhNGYyNyIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48cGF0aCBkPSJNNjAgMjJjNC0xNCA0Ni0xNCA1MiAweiIgZmlsbD0iI2U4ZGNjMCIvPjxwYXRoIGQ9Ik03MCAyMWMyLTggOC0xMSAxNS0xMU05NSAyMWMtMS03LTUtMTAtMTAtMTEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YTk4NiIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48cGF0aCBkPSJNNTggMjJoNTYiIHN0cm9rZT0iIzVjM2ExZSIgc3Ryb2tlLXdpZHRoPSIyLjQiLz48Y2lyY2xlIGN4PSI3NCIgY3k9IjUxIiByPSIxMCIgZmlsbD0iIzZiNDIyMiIvPjxjaXJjbGUgY3g9Ijc0IiBjeT0iNTEiIHI9IjYuNSIgZmlsbD0iI2M5OWE1YiIvPjxwYXRoIGQ9Ik03NCA0MXYyME02NCA1MWgyME02NyA0NGwxNCAxNE04MSA0NGwtMTQgMTQiIHN0cm9rZT0iIzZiNDIyMiIgc3Ryb2tlLXdpZHRoPSIxLjQiLz48Y2lyY2xlIGN4PSIxMDIiIGN5PSI1MSIgcj0iMTAiIGZpbGw9IiM2YjQyMjIiLz48Y2lyY2xlIGN4PSIxMDIiIGN5PSI1MSIgcj0iNi41IiBmaWxsPSIjYzk5YTViIi8+PHBhdGggZD0iTTEwMiA0MXYyME05MiA1MWgyME05NSA0NGwxNCAxNE0xMDkgNDRsLTE0IDE0IiBzdHJva2U9IiM2YjQyMjIiIHN0cm9rZS13aWR0aD0iMS40Ii8+PGNpcmNsZSBjeD0iNzQiIGN5PSI1MSIgcj0iMiIgZmlsbD0iIzNiMjQxNCIvPjxjaXJjbGUgY3g9IjEwMiIgY3k9IjUxIiByPSIyIiBmaWxsPSIjM2IyNDE0Ii8+PHJlY3QgeD0iODQiIHk9IjI1IiB3aWR0aD0iMTAiIGhlaWdodD0iNyIgcng9IjEiIGZpbGw9IiNjMDNhMmIiIHN0cm9rZT0iIzdhMWYxNiIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9nPjwvc3ZnPg==';let WAGON_IMG=null;function wagonImg(){if(!WAGON_IMG&&typeof Image!=='undefined'){WAGON_IMG=new Image();WAGON_IMG.onload=()=>{if(typeof Map2!=='undefined')Map2.invalidate();};WAGON_IMG.src=WAGON_URI;}return WAGON_IMG;}

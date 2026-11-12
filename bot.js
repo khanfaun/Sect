@@ -38,7 +38,7 @@ function botPlan(){
   const r=G.run,s=S();
   // mục tiêu
   if(r.hp<s.maxHp*0.45){const n=nearest(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok'&&r.st>=price(4)||n.dp);if(n&&goOrOpen(n)){r._goal=n.dp?'heal':'inn';return;}}
-  if(r.tv>=100&&r.realm<4){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bt';return;}}
+  if(r.tv>=100&&r.realm<4&&canBreak()){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bt';return;}}
   if(r.tvMinor>=40||r.tv>=60&&chance(.3)){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bq';return;}}
   const R0=regionOf(r.region);
   if(r.region<4&&(r.realm>=r.region+1||r.passes.includes(r.region+1))){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';return;}}
@@ -56,13 +56,14 @@ function botPlace(){
   const r=G.run,sc=r.scene,n=nodeById(sc.id);const acts=placeActs(n).filter(a=>!a.dis);const has=k=>acts.find(a=>a.a===k);
   r._pc=(r._pc||0)+1;if(r._pc>6){r._pc=0;leavePlace();return;}
   const s=S();
+  {const qq=r.quests.find(q=>q.state==='open'&&q.node===r.scene.id);if(qq&&r.hp>s.maxHp*0.5&&questDo(qq.id))return;}
   if(r._goal==='cross'&&has('cross')){r._goal=null;placeAct('cross');return;}
   if(r._goal==='boss'&&has('boss')){r._goal=null;placeAct('boss');return;}
   if(has('bt')){if(r.hp<s.maxHp*0.95&&has('heal')){placeAct('heal');return;}placeAct('bt');return;}
-  if(r.hp<s.maxHp*0.45){if(has('inn')){placeAct('inn');return;}if(has('heal')){placeAct('heal');return;}if(has('tinh')){placeAct('tinh');return;}}
+  if(r.hp<s.maxHp*0.45){if(has('inn')&&venueDo('inn','phong'))return;if(has('heal')){placeAct('heal');return;}if(has('tinh')){placeAct('tinh');return;}}
   if(r._goal==='bq'&&!bqCan()){r._goal=null;bqCustom(chance(.7)?2:0.25);return;}
   if(n.dp&&!bqCan()&&r.tvMinor>=40){bqCustom(chance(.75)?2:0.25);return;}
-  if(has('tea')&&chance(.3)){placeAct('tea');return;}
+  if(has('tea')&&chance(.3)&&venueDo('tea','nghe'))return;
   if(has('shop')&&chance(.3)){placeAct('shop');return;}
   if(has('board')&&chance(.15)){placeAct('board');return;}
   if(has('ghost')&&chance(.3)){placeAct('ghost');return;}
