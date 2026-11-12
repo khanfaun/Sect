@@ -129,6 +129,7 @@ const ACT={
   openJournal:()=>{if(G.run)G.run.scene=null;UI.modal=null;UI.panel='journal';UI.tab.journal='quest';},
   qevPick:i=>qevPick(+i),qevDone:()=>{if(G.run)G.run.scene=null;},
   kyPick:i=>kyPick(+i),kyDone:()=>{const r=G.run;if(r){r.scene=null;if(r.moving)r.moving.halt=0;}},
+  vehOff:()=>vehOff(),vehOn:()=>{vehOn();},
   qDo:id=>{UI.modal={k:'qdo',id};},qDoGo:id=>{UI.modal=null;const q=G.run.quests.find(x=>x.id===id);UI.lastQ=q?(q.kind==='den'?'Giao tận tay: ':'Lùng tìm: ')+q.text:null;questDo(id);UI.plTop=1;},
   questGo:()=>{const n=nodeById(G.run.at);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place'&&!questExplore(n))note('Chưa thấy tung tích gì.');},
   sell:a=>{const [k,i]=a.split(':');sellItem(k,+i);},

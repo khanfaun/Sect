@@ -997,6 +997,9 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .art.pimg .asset{object-fit:cover;object-position:50% 60%}
 .t-ink{height:auto!important;max-height:58%;top:auto;bottom:0;object-fit:cover;object-position:50% 100%}
 .title .t-foot{margin-top:14px!important;padding-top:0!important;z-index:2}
+/* căn cơ: thanh tu vi, lịch luyện co giãn, con số không xuống dòng */
+.basegrid .hrow{grid-template-columns:7.4em minmax(40px,1fr) auto!important}.basegrid .hrow .hv{white-space:nowrap;min-width:0;text-align:right;padding-left:6px}
+.pham-lock{text-align:center;padding:24px 16px;border:1px dashed var(--line);border-radius:var(--r);color:var(--ink2)}.pham-lock .ic{width:26px;height:26px;color:var(--ink3)}.pham-lock b{display:block;margin:6px 0}.pham-lock p{font-size:.88em;color:var(--ink3);margin:0}
 
 </style>
 </head>
@@ -5566,6 +5569,18 @@ function isPham(){const r=G.run;return !!(r&&r.pham);}
 {const _rt19=realmText;realmText=function(r){r=r||G.run;return r===G.run&&isPham()?'Phàm nhân':_rt19(r);};}
 function realmName(){return isPham()?'Phàm nhân':REALM[G.run.realm];}
 {const _ae19=applyE;applyE=function(e,v){const was=isPham();const ch=_ae19(e,v);if(was&&G.run&&!isPham()&&Array.isArray(ch)){const i=ch.findIndex(c=>c&&c.i==='✨');if(i>=0)ch.splice(i,1);ch.push(chip('✨','dẫn khí nhập thể','Bước vào Luyện Khí sơ kỳ','up'));}return ch;};}
+// ----- phàm nhân chưa dẫn khí: không có linh lực, không thúc được pháp bảo (từ linh phẩm trở lên), chưa dùng chiêu thức, chưa mở Khí Hải -----
+function phamLock(rel){return isPham()&&rel&&(rel.tier||0)>=1&&rel.k!=='book';}
+{const _S20=S;S=function(){const s=_S20();if(isPham()){s.maxMp=0;}return s;};}
+{const _eq20=equip;equip=function(i){const rel=G.run.relics[i];if(phamLock(rel)){note('Phàm nhân chưa có linh lực, không thúc được pháp bảo này. Dẫn khí nhập thể rồi hãy dùng.');return;}return _eq20(i);};}
+{const _et20=equipTo;equipTo=function(i,s){const rel=G.run.relics[i];if(phamLock(rel)){note('Phàm nhân chưa có linh lực, không thúc được pháp bảo này. Dẫn khí nhập thể rồi hãy dùng.');return;}return _et20(i,s);};}
+{const _ea20=eqAuto;eqAuto=function(){if(!isPham())return _ea20();const r=G.run;const keep=r.relics.filter(x=>!x.seen&&phamLock(x));keep.forEach(x=>x.seen=1);const res=_ea20();keep.forEach(x=>x.seen=1);return res;};}
+// trong trận: chỉ đánh thường, thủ thế, đỡ đòn, dùng đồ; chưa có thần thông
+{const _pa20=playerAct;playerAct=function(id,t){if(isPham()&&id&&id[0]!=='_')return false;return _pa20(id,t);};}
+{const _pu20=playerUlt;playerUlt=function(){if(isPham())return false;return _pu20();};}
+// tháo, lắp lại phương tiện
+function vehOff(){const r=G.run;const m=mountOf();if(!m)return;if(m.rented){r.rentOff=r.rent;r.rent=null;}else{r.vehOff=r.veh||null;r.veh=null;if(r.mount){r.vehOff=MOUNT.find(x=>x.id===r.mount);r.mount=null;}}note('Đã tháo '+m.n+'. Chạm ô phương tiện để dùng lại.');}
+function vehOn(){const r=G.run;if(r.vehOff){r.veh=r.vehOff;r.vehOff=null;return true;}if(r.rentOff&&r.rentOff.until>W().t){r.rent=r.rentOff;r.rentOff=null;return true;}return false;}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -6765,7 +6780,7 @@ function vCombat(sc){
     if(rp.dazed){h+=`<p class="cb-warn">Định lực cạn: ngươi choáng váng, buộc phải bỏ lượt này.</p><div class="skills main4"><button class="sk hl" data-act="skill" data-arg="_wait"><span class="cbi">${ic('skip')}</span><span class="sn">Qua lượt</span></button></div>`;}
     else if(pickMode){h+=`<p class="hint">Chạm vào kẻ địch để tung ${esc(pSkill(UI.pendSk).sk.n)}</p><div class="skills"><button class="sk" data-act="cancelSk"><span class="sn">Thôi</span></button></div>`;}
     else{
-      const btn=(id,sk,lv,tip)=>{const c=skillCost(sk);const no=me.mp<c;const d=sk.fx.p?Math.round(sk.fx.p*100)+'% uy lực':'';return `<button class="sk${(sk.t!=null&&String(sk.id||'')[0]!=='_')?' qk':''}" data-act="skill" data-arg="${id}"${no?' disabled':''} style="${(sk.t!=null&&String(sk.id||'')[0]!=='_')?pcs(sk.t):''}"${ta(tip||skillTip(sk,lv))}>${elSeal(sk.el)}<span class="sn"><span class="${(sk.t!=null&&String(sk.id||'')[0]!=='_')?'qt':''}">${esc(sk.n)}</span>${lv>1?' <i>'+'Ⅰ Ⅱ Ⅲ'.split(' ')[lv-1]+'</i>':''}<small>${[d,c?c+' linh lực':'',sk.fx.charge?'tụ lực':''].filter(Boolean).join(' · ')}</small></span></button>`;};
+      const btn=(id,sk,lv,tip)=>{const c=skillCost(sk);const no=me.mp<c||(isPham()&&String(id)[0]!=='_');const d=sk.fx.p?Math.round(sk.fx.p*100)+'% uy lực':'';return `<button class="sk${(sk.t!=null&&String(sk.id||'')[0]!=='_')?' qk':''}" data-act="skill" data-arg="${id}"${no?' disabled':''} style="${(sk.t!=null&&String(sk.id||'')[0]!=='_')?pcs(sk.t):''}"${ta(tip||skillTip(sk,lv))}>${elSeal(sk.el)}<span class="sn"><span class="${(sk.t!=null&&String(sk.id||'')[0]!=='_')?'qt':''}">${esc(sk.n)}</span>${lv>1?' <i>'+'Ⅰ Ⅱ Ⅲ'.split(' ')[lv-1]+'</i>':''}<small>${[d,c?c+' linh lực':'',sk.fx.charge?'tụ lực':''].filter(Boolean).join(' · ')}</small></span></button>`;};
       const cp=r.pills.map((p,i)=>({p,i})).filter(x=>PILL[x.p.id].w!=='bt');const m=UI.menu;
       const back='<button class="sk mback" data-act="menu" data-arg=""><span class="sn">Quay lại</span></button>';
       if(m==='atk'){h+='<div class="skills">'+btn('_atk',BASIC,1,'Đánh thường bằng chân khí\nKhông tốn linh lực');for(const id of atkSlots()){const k=r.skills.find(x=>x.id===id);h+=btn(id,SK[id],k.lv);}if(mindArt()){h+=`<button class="sk" data-act="mind"${!nlOk(me,NL_MIND)?' disabled':''}${ta('Đánh vào thức hải đối phương.\nThần thức của ngươi '+S().than+': hơn đối thủ thì làm nó choáng.')}><span class="el">Thần</span><span class="sn">Thần Thức Thứ<small>${NL_MIND} niệm lực · làm choáng</small></span></button>`;}(r.dd||[]).forEach((d,j)=>{const used=sc.ddUsed&&sc.ddUsed[j];h+=`<button class="sk" data-act="dd" data-arg="${j}"${used||!nlOk(me,NL_DD)?' disabled':''}${ta('Tế '+d.rel.name+' từ đan điền ra đánh.\nMỗi trận một lần, không tốn linh lực.')}>${elSeal(d.rel.el||'vo')}<span class="sn" style="color:${PCOL[d.rel.tier||0]}">Tế ${esc(d.rel.name)}<small>${used?'đã dùng trận này':'uẩn dưỡng · mỗi trận một lần'}</small></span></button>`;});h+=back+'</div>';}
@@ -7097,7 +7112,7 @@ function bagTabHTML(){
   L+='<div class="ddpair"><div class="ddg">';
   L+=`<h4 class="sgrp">Đan điền · uẩn dưỡng <small>${r.dd.length}/${dn}</small><span class="grow"></span><span class="qhelp"${ta('Vũ khí, pháp bảo nuôi trong đan điền mỗi năm mạnh thêm 5% (tối đa gấp đôi), vẫn cho chỉ số, và trong trận tế ra đánh được một lần.')}>${ic('info','sm')}</span></h4><div class="ddrow">${[0,1,2,3].map(j=>{const d=r.dd[j];if(d)return eqCell('D'+j,'',d.rel,{badge:'+'+Math.round((ddMul(d)-1)*100)+'%',x:['ddTake',j,'Lấy ra']});const need=DD_N.findIndex(x=>x>j);return eqCell('D'+j,j<dn?'Trống':REALM[need],null,{lock:j>=dn,ic:'phapbao',tip:j<dn?'Chạm để chọn vũ khí hoặc pháp bảo đưa vào uẩn dưỡng.':'Mở khi đạt '+REALM[need]+'.'});}).join('')}</div>`;
   L+='</div><div class="ddg">';
-  L+=`<h4 class="sgrp">Pháp khí tùy thân</h4><div class="ddrow five">${SPEC.map(([k,n])=>{if(k==='phuongtien'){const m=mountOf();return `<div class="eqc${m?' on':''}" style="${m?pcs(m.tier||1):''}"${ta(m?m.n+'\n'+m.d:'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.')}>${slotIcon(k)}<small>${m?m.n:n}</small></div>`;}return eqCell('E'+k,n,E[k],{ic:k,x:['eqOff',k,'Tháo ra']});}).join('')}</div>`;
+  L+=`<h4 class="sgrp">Pháp khí tùy thân</h4><div class="ddrow five">${SPEC.map(([k,n])=>{if(k==='phuongtien'){const m=mountOf();const off=r.vehOff||r.rentOff;return `<div class="eqc${m?' on':''}" style="${m?pcs(m.tier||1):''}"${off&&!m?' data-act="vehOn"':''}${ta(m?m.n+(m.d?'\n'+m.d:'')+'\nTốc độ ×'+numVN(m.m||1):off?'Đang tháo '+off.n+(off.v?off.v.n:'')+'. Chạm để dùng lại.':'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.')}>${m&&m.k&&ASSET.veh&&ASSET.veh[m.k]?`<img class="asset" src="${ASSET.veh[m.k]}" alt="">`:slotIcon(k)}<small>${m?m.n:n}</small>${m?slotX('vehOff','','Tháo phương tiện'):''}</div>`;}return eqCell('E'+k,n,E[k],{ic:k,x:['eqOff',k,'Tháo ra']});}).join('')}</div>`;
   L+='</div></div></div>';
   // --- cột phải: bộ lọc, các ô đồ ---
   const items=bagItems();const cnt=c=>c==='all'?items.length:items.filter(x=>x.cat===c).length;
@@ -7281,6 +7296,11 @@ function questCardHTML(q){const w=W();const g=questGrade(q);const op=q.state==='
         ${ex?`<div class="qc-d"><p>${esc(q.d||(q.kind==='diet'?'Tới nơi, vào mục Nhiệm vụ trong địa điểm để lùng tìm và hạ mục tiêu.':'Tới nơi, vào mục Nhiệm vụ trong địa điểm để giao tận tay.'))}</p><div class="kv"><div><span>Nơi tới</span><b>${esc(tg&&tg.fog>=1?tg.name:'chưa rõ')}</b></div><div><span>Nhận ở</span><b>${esc(fn?fn.name:'')}</b></div><div class="qrw-row"><span>Phần thưởng</span><b class="qrw">${chipsHTML(questRewardChips(q))}</b></div><div><span>Hủy thì phạt</span><b class="bad">mất ${questPenalty(q).st} linh thạch, nhân quả ${questPenalty(q).karma}</b></div></div></div>`:''}</div>`;}
 const ENT_DESC={thuong:'Thương đội: đoàn xe buôn đi giữa các thôn trấn. Ảnh nhỏ trên xe là người dẫn đầu.',thutrieu:'Thú triều: bầy yêu thú kéo đi thành đàn. Không phải người, gặp là phải đánh.',tuantra:'Đệ tử tuần tra của tông môn quanh vùng.',thienkieu:'Thiên kiêu: thiên tài trẻ của các tông môn đi lịch luyện.',truysat:'Kẻ truy sát đang lùng tìm ngươi.',di:'Dị tượng: cơ duyên hiện ra trong ít ngày như bí cảnh mở cửa, sao rơi, hội đấu giá. Không phải người hay thú, là một nơi đáng tới.',khach:'Khách qua đường: lữ khách, tiều phu, thợ săn, thư sinh...'};
 
+// phàm nhân: khóa tab Kỹ năng và Khí Hải
+const PHAM_LOCK=(t,d)=>`<div class="pham-lock">${ic('lock')}<b>${t}</b><p>${d}</p></div>`;
+{const _kn=knTabHTML;knTabHTML=function(){return isPham()?PHAM_LOCK('Chưa dẫn khí nhập thể','Phàm nhân chưa có linh lực nên chưa dùng được chiêu thức. Trong trận chỉ đánh thường, thủ thế, đỡ đòn và dùng đồ. Đủ tu vi để dẫn khí nhập thể, bước vào Luyện Khí thì mở.'):_kn();};}
+{const _hc=hocTabHTML;hocTabHTML=function(){const h=_hc();if(!isPham())return h;const i=h.indexOf('<div class="hocL">');return i<0?h:h.slice(0,i)+'<div class="hocL">'+PHAM_LOCK('Khí Hải chưa mở','Phàm nhân chưa dẫn khí vào thân, đan điền còn trống. Dẫn khí nhập thể rồi mới vận hành công pháp trong Khí Hải được.')+'</div></div>';};}
+
 // ---------- màn ngoài: mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên ----------
 function vTitle(){
   const M=G.meta;const has=!!G.run;const last=M.lives[0];
@@ -7453,6 +7473,7 @@ const ACT={
   openJournal:()=>{if(G.run)G.run.scene=null;UI.modal=null;UI.panel='journal';UI.tab.journal='quest';},
   qevPick:i=>qevPick(+i),qevDone:()=>{if(G.run)G.run.scene=null;},
   kyPick:i=>kyPick(+i),kyDone:()=>{const r=G.run;if(r){r.scene=null;if(r.moving)r.moving.halt=0;}},
+  vehOff:()=>vehOff(),vehOn:()=>{vehOn();},
   qDo:id=>{UI.modal={k:'qdo',id};},qDoGo:id=>{UI.modal=null;const q=G.run.quests.find(x=>x.id===id);UI.lastQ=q?(q.kind==='den'?'Giao tận tay: ':'Lùng tìm: ')+q.text:null;questDo(id);UI.plTop=1;},
   questGo:()=>{const n=nodeById(G.run.at);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place'&&!questExplore(n))note('Chưa thấy tung tích gì.');},
   sell:a=>{const [k,i]=a.split(':');sellItem(k,+i);},

@@ -1236,3 +1236,15 @@ function isPham(){const r=G.run;return !!(r&&r.pham);}
 {const _rt19=realmText;realmText=function(r){r=r||G.run;return r===G.run&&isPham()?'Phàm nhân':_rt19(r);};}
 function realmName(){return isPham()?'Phàm nhân':REALM[G.run.realm];}
 {const _ae19=applyE;applyE=function(e,v){const was=isPham();const ch=_ae19(e,v);if(was&&G.run&&!isPham()&&Array.isArray(ch)){const i=ch.findIndex(c=>c&&c.i==='✨');if(i>=0)ch.splice(i,1);ch.push(chip('✨','dẫn khí nhập thể','Bước vào Luyện Khí sơ kỳ','up'));}return ch;};}
+// ----- phàm nhân chưa dẫn khí: không có linh lực, không thúc được pháp bảo (từ linh phẩm trở lên), chưa dùng chiêu thức, chưa mở Khí Hải -----
+function phamLock(rel){return isPham()&&rel&&(rel.tier||0)>=1&&rel.k!=='book';}
+{const _S20=S;S=function(){const s=_S20();if(isPham()){s.maxMp=0;}return s;};}
+{const _eq20=equip;equip=function(i){const rel=G.run.relics[i];if(phamLock(rel)){note('Phàm nhân chưa có linh lực, không thúc được pháp bảo này. Dẫn khí nhập thể rồi hãy dùng.');return;}return _eq20(i);};}
+{const _et20=equipTo;equipTo=function(i,s){const rel=G.run.relics[i];if(phamLock(rel)){note('Phàm nhân chưa có linh lực, không thúc được pháp bảo này. Dẫn khí nhập thể rồi hãy dùng.');return;}return _et20(i,s);};}
+{const _ea20=eqAuto;eqAuto=function(){if(!isPham())return _ea20();const r=G.run;const keep=r.relics.filter(x=>!x.seen&&phamLock(x));keep.forEach(x=>x.seen=1);const res=_ea20();keep.forEach(x=>x.seen=1);return res;};}
+// trong trận: chỉ đánh thường, thủ thế, đỡ đòn, dùng đồ; chưa có thần thông
+{const _pa20=playerAct;playerAct=function(id,t){if(isPham()&&id&&id[0]!=='_')return false;return _pa20(id,t);};}
+{const _pu20=playerUlt;playerUlt=function(){if(isPham())return false;return _pu20();};}
+// tháo, lắp lại phương tiện
+function vehOff(){const r=G.run;const m=mountOf();if(!m)return;if(m.rented){r.rentOff=r.rent;r.rent=null;}else{r.vehOff=r.veh||null;r.veh=null;if(r.mount){r.vehOff=MOUNT.find(x=>x.id===r.mount);r.mount=null;}}note('Đã tháo '+m.n+'. Chạm ô phương tiện để dùng lại.');}
+function vehOn(){const r=G.run;if(r.vehOff){r.veh=r.vehOff;r.vehOff=null;return true;}if(r.rentOff&&r.rentOff.until>W().t){r.rent=r.rentOff;r.rentOff=null;return true;}return false;}
