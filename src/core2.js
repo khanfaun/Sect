@@ -2238,7 +2238,9 @@ function hitPh(r,X){const P=r<0.04?['{X} chỉ khẽ lắc người, chẳng h�
 // Luyện Khí chia 13 tầng. Thanh tu vi Luyện Khí kéo tới tầng 13 (100%). Tầng 9 nằm ở 50%: tới đó là đột phá Trúc Cơ được.
 // Tầng 1–9 tốn tu vi như cả Luyện Khí cũ; tầng 10–13 mỗi tầng một khó hơn. Tu lên tầng 10–12 thì đột phá được thêm chỉ số,
 // tầng 13 thêm một tiên thiên khí vận ngẫu nhiên. Lịch luyện chỉ cần theo kịp tu vi (không cần đầy) mới đột phá được.
-const LK_TH=[0,6.25,12.5,18.75,25,31.25,37.5,43.75,50,57.5,67.5,80,100],LK_MUL=0.5;
+const LK_TH=[0,6.25,12.5,18.75,25,31.25,37.5,43.75,50,56,64,74,86],LK_MUL=0.5; // mốc bắt đầu mỗi tầng; tầng 13 đầy ở 100
+// tầng đã tu trọn (đầy cây): đang giữa tầng 11 thì mới trọn tầng 10
+function lkDone(){const r=G.run;if(r.tv>=100)return 13;if(typeof lkCapped==='function'&&lkCapped())return 12;return lkTang()-1;}
 function lkOn(){const r=G.run;return !!r&&r.realm===0&&!r.pham;}
 function lkTang(tv){if(tv==null)tv=G.run.tv;let n=0;for(const t of LK_TH)if(tv>=t-1e-6)n++;return n;}
 function llNeedBt(){return lkOn()?LK_TH[8]:LL_BT;} // Luyện Khí: từ tầng 9 trở lên, đủ lịch luyện của tầng 9 là đột phá được bất cứ lúc nào
@@ -2256,12 +2258,12 @@ function kvOffer(n,to){const L=[];const pool=kvPool();for(let i=0;i<n;i++){const
   const rk=wpick([1,2,3,4,5,6].filter(x=>left.some(d=>d.rank===x)),x=>TT_RW[x]*Math.pow(1.6,((to||1)-1)*(x-1)/2));L.push(pick(left.filter(d=>d.rank===rk)).id);}return L;}
 function kvGain(id,why){const r=G.run;if(!r||!id||!TT_DEST[id])return;r.kv=(r.kv||[]).concat(id);const d=TT_DEST[id];{const a=(d.effects||{}).amDuongBonus;if(a)r.karma=clamp((r.karma||0)+Math.round(((a.chinh||0)-(a.ta||0))/2),-100,100);}log(`Nhận tiên thiên khí vận: ${d.name}${why?' ('+why+')':''}.`);if(typeof bio==='function')bio(`Năm ${Math.floor(r.age)} tuổi, ${r.ten} được khí vận ${d.name}.`);const s=S();r.hp=Math.min(r.hp,s.maxHp);r.mp=Math.min(r.mp,s.maxMp);}
 function kvChoose(i){const r=G.run;if(!r||!r.kvPick)return;const id=r.kvPick[+i];r.kvPick=null;kvGain(id,'đột phá');}
-{const _bf33=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const g=r&&rl===0&&!r.pham?lkTang():0;const res=_bf33.apply(this,arguments);const r2=G.run;
+{const _bf33=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const g=r&&rl===0&&!r.pham?lkDone():0;const res=_bf33.apply(this,arguments);const r2=G.run;
   if(r2&&r2.realm>rl&&r2.realm<5){const sc=r2.scene;const ch=sc&&Array.isArray(sc.chips)?sc.chips:null;
     const B=LK_BON[g];if(B){const b=r2.bon;for(const k of ['hpP','mpP','atkP','defP','matkP'])b[k]=(b[k]||0)+B.p;b.ngo=(b.ngo||0)+B.n;b.tam=(b.tam||0)+B.n;b.tp=(b.tp||0)+B.tp;
-      const s=S();r2.hp=s.maxHp;r2.mp=s.maxMp;log(`Đột phá từ Luyện Khí tầng ${g}: căn cơ vững hơn người thường.`);
-      if(ch)ch.push(chip('🏯','tầng '+g+' · căn cơ ▲','Đột phá từ Luyện Khí tầng '+g+'.\nKhí huyết, linh lực, công, thủ tăng '+magW(B.p,1)+'; ngộ tính, đạo tâm tăng'+(B.tp?', thân pháp tăng':'')+'.','up'));
-      if(g>=13){const id=kvOffer(1,1)[0];if(id){kvGain(id,'Luyện Khí tầng 13');if(ch)ch.push(chip('✨',TT_DEST[id].name,'Tu tới tầng 13 mới đột phá: trời ban một tiên thiên khí vận.\n'+TT_DEST[id].description,'up'));}}}
+      const s=S();r2.hp=s.maxHp;r2.mp=s.maxMp;log(`Tu trọn Luyện Khí tầng ${g} rồi mới đột phá: căn cơ vững hơn người thường.`);
+      if(ch)ch.push(chip('🏯','trọn tầng '+g+' · căn cơ ▲','Tu trọn Luyện Khí tầng '+g+' rồi mới đột phá.\nKhí huyết, linh lực, công, thủ tăng '+magW(B.p,1)+'; ngộ tính, đạo tâm tăng'+(B.tp?', thân pháp tăng':'')+'.','up'));
+      if(g>=13){const id=kvOffer(1,1)[0];if(id){kvGain(id,'tu trọn Luyện Khí tầng 13');if(ch)ch.push(chip('✨',TT_DEST[id].name,'Tu trọn tầng 13 mới đột phá: trời ban một tiên thiên khí vận.\n'+TT_DEST[id].description,'up'));}}}
     const o=kvOffer(3,r2.realm);if(o.length)r2.kvPick=o;}
   return res;};}
 
@@ -2294,7 +2296,7 @@ function cbNarr(o){const {u,sk,f,isP,tgN}=o;let a='';const P=[];
 //  · tâm pháp đang vận hành từ Huyền phẩm trở lên (căn cơ công pháp đủ sâu);
 //  · đốn ngộ khi bế quan lúc đang kẹt (năm càng dài, ngộ tính càng cao càng dễ);
 //  · gặp linh tuyền tẩy tủy khi thăm dò nơi linh khí dồi dào (nơi trung bình thì hiếm hơn).
-const LK_CAP=99.9;
+const LK_CAP=85.9; // chưa có cơ duyên: dừng ở đầy tầng 12
 function lk13Open(){const r=G.run;const a=typeof tuArt==='function'&&tuArt();return !!(r&&(r.lk13||(a&&a.tier>=2)));}
 function lkCapped(){return lkOn()&&!lk13Open()&&G.run.tv>=LK_CAP-1e-6;}
 {const _at34=addTv;addTv=function(x){const res=_at34(x);const r=G.run;if(r&&lkOn()&&!lk13Open()&&r.tv>LK_CAP)r.tv=LK_CAP;return res;};}
@@ -2310,3 +2312,6 @@ function lk13Unlock(why,txt){const r=G.run;if(!r||r.lk13)return;r.lk13=1;log('B�
 
 // tên kiếp: kiếp đầu tiên, kiếp thứ 2…
 function kiepName(k){return +k===1?'Kiếp đầu tiên':'Kiếp thứ '+k;}
+
+// phần đã tu của tầng Luyện Khí đang ở (đầy 100% là trọn tầng)
+function lkPct(){const r=G.run;const g=lkTang();if(lkCapped())return 100;const a=LK_TH[g-1],b=g<13?LK_TH[g]:100;return Math.floor(clamp((r.tv-a)/(b-a),0,1)*100);}
