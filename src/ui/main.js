@@ -194,7 +194,7 @@ const ACT={
   chuDel:i=>{chuSet(+i,null);syncSkills();UI.chuSel=null;if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
   thPick:i=>{UI.modal={k:'th',i:+i};},
   thOpen:i=>{if(thOpenAct(+i)){UI.modal=null;note('Một tiểu huyệt đã khai thông.','up');}},
-  artStash:u=>{artStash(+u);},artUnstash:u=>{if(!artUnstash(+u))note('Hết ô trống. Tháo một môn khác ra trước.');},
+  artStash:u=>{artStash(+u);},artUnstash:u=>{if(!artUnstash(+u))note('Hết ô trống. Tháo một môn khác ra trước.');else if(UI.modal&&UI.modal.k==='pick')UI.modal=null;},
   artOpen:u=>{UI.modal={k:'art',u:+u};},
   phamHelp:()=>{UI.modal={k:'pham'};},
   bagTab:c=>{UI.dd=null;const B=bagSt();B.tab=c;B.sel=null;},

@@ -42,11 +42,22 @@ function meCard(sc,u){
     ${stIcons(u.st)}</div></div>`;
 }
 // pháp tướng khổng lồ đứng sau lưng nhân vật trong khung cảnh
-function ptFigSVG(){return `<svg viewBox="0 0 200 240" preserveAspectRatio="xMidYMax meet"><defs><linearGradient id="ptg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--fc)" stop-opacity=".95"/><stop offset=".7" stop-color="var(--fc)" stop-opacity=".5"/><stop offset="1" stop-color="var(--fc)" stop-opacity="0"/></linearGradient></defs>
-  <g class="pt-halo" fill="none" stroke="var(--fc)"><circle cx="100" cy="66" r="56" stroke-width="3" opacity=".8"/><circle cx="100" cy="66" r="66" stroke-width="1.5" stroke-dasharray="4 8" opacity=".7"/>${Array.from({length:16},(_,i)=>{const a=i*Math.PI/8;return `<line x1="${(100+Math.cos(a)*72).toFixed(1)}" y1="${(66+Math.sin(a)*72).toFixed(1)}" x2="${(100+Math.cos(a)*(i%2?82:92)).toFixed(1)}" y2="${(66+Math.sin(a)*(i%2?82:92)).toFixed(1)}" stroke-width="2" opacity=".6"/>`;}).join('')}</g>
-  <g fill="url(#ptg)"><path d="M82 48L88 26l12 14 12-14 6 22z"/><circle cx="100" cy="62" r="19"/><path d="M100 82C62 84 42 108 36 148L18 240h164l-18-92c-6-40-26-64-64-66z"/>
-  <path d="M44 122C14 112 2 84 8 58l9-3c-3 22 8 42 34 50z"/><path d="M156 122c30-10 42-38 36-64l-9-3c3 22-8 42-34 50z"/><path d="M56 100C36 78 34 50 46 30l8 4c-9 17-6 38 10 56z"/><path d="M144 100c20-22 22-50 10-70l-8 4c9 17 6 38-10 56z"/></g>
-  <g fill="#fff" opacity=".85"><ellipse cx="92" cy="60" rx="3.2" ry="1.6"/><ellipse cx="108" cy="60" rx="3.2" ry="1.6"/><circle cx="100" cy="50" r="1.8"/></g></svg>`;}
+function ptFigSVG(){return `<svg viewBox="0 0 200 240" preserveAspectRatio="xMidYMax meet"><defs><linearGradient id="ptg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--fc)" stop-opacity=".9"/><stop offset=".65" stop-color="var(--fc)" stop-opacity=".45"/><stop offset="1" stop-color="var(--fc)" stop-opacity="0"/></linearGradient>
+  <radialGradient id="pth" cx=".5" cy=".5" r=".5"><stop offset=".55" stop-color="var(--fl)" stop-opacity="0"/><stop offset=".8" stop-color="var(--fl)" stop-opacity=".55"/><stop offset="1" stop-color="var(--fl)" stop-opacity="0"/></radialGradient></defs>
+  <circle class="pt-halo" cx="100" cy="64" r="58" fill="url(#pth)"/>
+  <g class="pt-halo" fill="none" stroke="var(--fl)" opacity=".75"><circle cx="100" cy="64" r="44" stroke-width="2"/><circle cx="100" cy="64" r="52" stroke-width="1" stroke-dasharray="2 6"/></g>
+  <g fill="url(#ptg)">
+   <path d="M93 34c0-6 3-10 7-10s7 4 7 10z"/>
+   <ellipse cx="100" cy="56" rx="17" ry="20"/>
+   <path d="M86 74c-4 4-6 8-6 12h40c0-4-2-8-6-12z"/>
+   <path d="M100 82c-30 2-48 16-56 40l-14 118h140l-14-118c-8-24-26-38-56-40z"/>
+   <path d="M58 104c-14 10-26 30-30 58 10 4 22 2 30-6 2-18 4-34 10-46z" opacity=".85"/>
+   <path d="M142 104c14 10 26 30 30 58-10 4-22 2-30-6-2-18-4-34-10-46z" opacity=".85"/>
+   <path d="M86 138c4-8 10-12 14-12s10 4 14 12c-4 6-9 8-14 8s-10-2-14-8z" opacity=".9"/>
+  </g>
+  <g fill="none" stroke="var(--fl)" stroke-width="1.6" opacity=".7"><path d="M100 84v150M80 96c-6 30-8 80-6 140M120 96c6 30 8 80 6 140"/><path d="M70 120c10 6 50 6 60 0"/></g>
+  <g fill="#fff" opacity=".9"><path d="M90 56c2-1.2 5-1.2 7 0"/><path d="M103 56c2-1.2 5-1.2 7 0"/><circle cx="100" cy="44" r="1.8"/></g>
+  <g stroke="#fff" stroke-width="1.6" fill="none" opacity=".85"><path d="M90 56q3.5 2 7 0M103 56q3.5 2 7 0"/></g></svg>`;}
 function vCombat(sc){
   const r=G.run;const me=mainUnit(sc);const rp=readyPlayer(sc);const pickMode=!!(rp&&UI.pendSk);
   const foes=sc.units.filter(u=>u.side==='B'),al=sc.units.filter(u=>u.side==='A');
