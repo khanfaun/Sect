@@ -245,12 +245,12 @@ function modalHTML(){
     return `<div class="mbox bq">${sceneCv('bequan'+G.run.at,G.run.region,'dong','mart','nhan:0.5:0.5:0:bq')}<h3>Bế quan</h3>
      <div class="kv"><div><span>Nơi bế quan</span>${lkTag(cn)}</div><div><span>Tu vi</span><b>${tvShow()}%</b></div><div><span>Lịch luyện</span><b>${Math.floor(Math.min(100,llOf()))}%</b></div></div>
      <label class="rng"><span>Thời gian: <b id="bqY">${y>0?durH(y*HY):'0 tháng'}</b></span><input type="range" id="bqR" min="0" max="${mx}" step="0.25" value="${y}" style="--cap:${capP}%;--val:${mx>0?y/mx*100:0}%"></label>
-     <div class="hbtns"><button data-act="bqSet" data-arg="0.25">3 tháng</button><button data-act="bqSet" data-arg="0.5"${mx<0.5?' disabled':''}>6 tháng</button><button data-act="bqSet" data-arg="1"${mx<1?' disabled':''}>1 năm</button><button data-act="bqSet" data-arg="${Math.min(mx,bqNeedY())}"${I.full?' disabled':''}>${lkOn()?'Tới đầy tầng':'Tới viên mãn'}</button></div>
+     <div class="hbtns"><button data-act="bqSet" data-arg="0.25">3 tháng</button><button data-act="bqSet" data-arg="0.5"${mx<0.5?' disabled':''}>6 tháng</button><button data-act="bqSet" data-arg="1"${mx<1?' disabled':''}>1 năm</button><button data-act="bqSet" data-arg="${Math.min(mx,bqNeedY())}"${I.full?' disabled':''}>${sgOn()&&sgGate()<sgTh().length?'Tới đầy '+(lkOn()?'tầng':'kỳ'):'Tới viên mãn'}</button></div>
      <div class="bq-res"${ta('Hên xui: mỗi lần bế quan nhận được một số trong khoảng này. Đã gồm phần thổ nạp.')}><small>Nhận được</small><b class="tu-c" id="bqG">${B.g}</b></div>
      <p class="bq-ll ${B.sc}" id="bqS">${B.s}</p>
-     <div class="kv"><div><span>Thọ nguyên còn lại</span><b id="bqL" class="${B.lc}">${B.l}</b></div><div><span>${lkOn()?'Tới đầy tầng còn':'Tới viên mãn còn'}</span><b id="bqN">${B.n}</b></div></div>
+     <div class="kv"><div><span>Thọ nguyên còn lại</span><b id="bqL" class="${B.lc}">${B.l}</b></div><div><span>${sgOn()&&sgGate()<sgTh().length?'Tới đầy '+(lkOn()?'tầng':'kỳ')+' còn':'Tới viên mãn còn'}</span><b id="bqN">${B.n}</b></div></div>
      <p class="hint" id="bqHint">${B.h}</p>
-     ${(()=>{{const cw=tuCapWhy();if(btReadyTv()&&cw)return `<div class="bt-box"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint bad">${esc(cw)}</p></div>`;}const lk9=lkOn();const bth=lk9?'Luyện Khí tầng '+lkTang()+', đủ để đột phá':'Tu vi đã viên mãn';if(btReadyTv()&&llOf()<llNeedBt())return `<div class="bt-box"><b>${ic('spark')} ${bth}</b><p class="hint bad">Lịch luyện chưa theo kịp nên chưa đột phá được. Hãy ra ngoài lịch luyện.</p></div>`;const brk=canBreak();if(!brk)return '';const atDp=(cn&&cn.dp)||isPham();return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} ${bth}</b><p class="hint">${atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>Đột phá</button></div>`;})()}
+     ${(()=>{{const cw=tuCapWhy();if(btReadyTv()&&cw)return `<div class="bt-box"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint bad">${esc(cw)}</p></div>`;}const lk9=lkOn();const bth=isPham()?'Đủ để xung kích Luyện Khí tầng 1':lk9?'Luyện Khí tầng '+lkTang()+', đủ để đột phá':'Tu vi đã viên mãn';if(btReadyTv()&&llOf()<llNeedBt())return `<div class="bt-box"><b>${ic('spark')} ${bth}</b><p class="hint bad">Lịch luyện chưa theo kịp nên chưa đột phá được. Hãy ra ngoài lịch luyện.</p></div>`;const brk=canBreak();if(!brk)return '';const atDp=(cn&&cn.dp)||isPham();return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} ${bth}</b><p class="hint">${isPham()?'Có thể dẫn khí nhập thể ngay tại đây.':atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>${isPham()?'Xung kích':'Đột phá'}</button></div>`;})()}
      ${xkBoxHTML()}
      ${m.warn?`<div class="bq-warn"><p><b>Lịch luyện không đủ</b></p><p>Bế quan quá ${durH(cap*HY)} thì gần như không tăng thêm tu vi nữa. Nên ra ngoài lịch luyện trước.</p><p>Vẫn tiếp tục bế quan ${durH(y*HY)}?</p><div class="mb-f"><button class="btn" data-act="bqWarnX">Thôi</button><button class="btn pri" data-act="bqWarnOk">Xác nhận, tiếp tục</button></div></div>`:''}
      <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" id="bqGoB" data-act="bqGo"${y>0?'':' disabled'}>Nhập định</button></div></div>`;}
@@ -294,7 +294,7 @@ function bqBits(y,I){I=I||bqInfo();const sp=bqSpan(y);const left=Math.max(0,I.le
   const r=G.run;const P=tvPts(r.realm)/100;const e0=llEff(r.tv),e1=llEff(Math.min(100,r.tv+sp[1]/P));const cap=bqCapY();
   let st,sc;
   if(r.tv>=100){st='Tu vi đã viên mãn, bế quan thêm không tăng tu vi.';sc='';}
-  else if(lkOn()&&lkFull()&&!lkCapped()){st='Tu vi tầng '+lkTang()+' đã đầy, bế quan thêm không tăng. Đột phá, hoặc xung kích lên tầng kế.';sc='';}
+  else if(sgOn()&&sgFull()&&!lkCapped()){st='Tu vi '+sgName(sgTang())+' đã đầy, bế quan thêm không tăng. '+(canBreak()?'Đột phá, hoặc xung kích lên '+(lkOn()?'tầng':'kỳ')+' kế.':'Hãy xung kích lên '+(lkOn()?'tầng':'kỳ')+' kế.');sc='';}
   else if(lkCapped()){st='Tu vi dường như đã chạm tới giới hạn, không nhích thêm được nữa.';sc='mid';}
   else if(y>0&&cap!=null&&y>cap){st=`Lịch luyện không đủ: bế quan quá ${durH(cap*HY)} thì gần như không tăng thêm tu vi.`;sc='bad';}
   else if(e0<0.5){st='Bình cảnh: tu vi đã bỏ lịch luyện quá xa nên bế quan rất chậm. Hãy ra ngoài đánh trận, đi đây đó.';sc='bad';}
@@ -302,7 +302,7 @@ function bqBits(y,I){I=I||bqInfo();const sp=bqSpan(y);const left=Math.max(0,I.le
   else if(e0>1){st='Lịch luyện dày dặn: bế quan nhanh hơn bình thường.';sc='ok';}
   else{st='Lịch luyện vững vàng: bế quan bình thường.';sc='ok';}
   return {g:y>0?bqGainTxt(sp[0]/P,sp[1]/P):'0% tu vi',s:st,sc:'bq-'+(sc||'n'),l:Math.floor(left)+' năm',lc:left<=10?'lv-bad':left<=30?'lv-mid':'lv-ok',
-    n:I.full?(lkOn()?'đã đầy':'đã viên mãn'):need<=0?'viên mãn':'chừng '+numVN(need)+' năm',h:(y>0?(risk?(risk<10?'Ít khi':risk<30?'Có thể':'Dễ')+' bị quấy nhiễu giữa chừng. ':'Yên ổn, không bị quấy nhiễu. '):'Chọn thời gian bế quan. ')+'Xuất quan thì khí huyết, linh lực hồi đầy.'};}
+    n:I.full?(sgOn()&&G.run.tv<100?'đã đầy':'đã viên mãn'):need<=0?'viên mãn':'chừng '+numVN(need)+' năm',h:(y>0?(risk?(risk<10?'Ít khi':risk<30?'Có thể':'Dễ')+' bị quấy nhiễu giữa chừng. ':'Yên ổn, không bị quấy nhiễu. '):'Chọn thời gian bế quan. ')+'Xuất quan thì khí huyết, linh lực hồi đầy.'};}
 function bqUpd(y){const B=bqBits(y);const set=(id,t,c)=>{const e=document.getElementById(id);if(e){e.textContent=t;if(c!=null)e.className=c;}};
   set('bqY',y>0?durH(y*HY):'0 tháng');set('bqG',B.g);set('bqS',B.s,'bq-ll '+B.sc);set('bqL',B.l,B.lc);set('bqN',B.n);set('bqHint',B.h);const b=document.getElementById('bqGoB');if(b)b.disabled=!(y>0);
   const R=document.getElementById('bqR');if(R)R.style.setProperty('--val',(+R.max>0?y/+R.max*100:0)+'%');}
@@ -365,7 +365,8 @@ SCENE_V.kyngo=vKyngo;
 // nhãn trên thanh đầu, cùng hàng tên: bình cảnh (tu vi đầy, lịch luyện chưa đầy) hoặc đột phá (cả hai đầy, nhấp nháy)
 function btBadge(){const st=btState();if(!st)return '';const r=G.run;
   if(st==='bc')return `<span class="hbt bc"${ta('Bình cảnh: tu vi đã đầy, không tăng thêm được.\nLịch luyện '+Math.floor(Math.min(100,llOf()))+'%: cần đầy mới đột phá được.\nHãy ra ngoài lịch luyện: đánh trận, tới nơi mới, quen người mới, làm việc.')}>Bình cảnh</span>`;
-  return `<button class="hbt dp" data-act="hudBq"${ta('Tu vi và lịch luyện đều đầy: có thể đột phá.\n'+(isPham()?'Bế quan ở bất cứ đâu để dẫn khí nhập thể.':'Tới nơi có động phủ, mở bế quan rồi chọn Đột phá.'))}>Đột phá</button>`;}
+  if(st==='xk')return `<button class="hbt dp" data-act="hudBq"${ta('Tu vi '+sgName(sgTang())+' đã đầy: có thể xung kích lên '+lkXkState().nx+'.\nMở bế quan rồi chọn Xung kích.')}>Xung kích</button>`;
+  return `<button class="hbt dp" data-act="hudBq"${ta(isPham()?'Tu vi và lịch luyện đều đầy: có thể xung kích Luyện Khí tầng 1.\nBế quan ở bất cứ đâu để dẫn khí nhập thể.':'Có thể đột phá '+(G.run.realm>=4?'phi thăng':REALM[G.run.realm+1])+'.\nTới nơi có động phủ, mở bế quan rồi chọn Đột phá.')}>${isPham()?'Xung kích':'Đột phá'}</button>`;}
 // màn chuẩn bị đột phá: tỉ lệ thành công tách theo từng nguồn, phẩm chất dự kiến cũng vậy
 vPrep=function(sc){const r=G.run;const v=prepView();const to=btTarget();const ph=isPham();const P=btParts(sc.slots);const D=daoParts();const e0=btEff(sc.slots);const dD=D.reduce((a,x)=>a+x.v,0);
   let b=`<div class="story"><p>${ph?'Ngồi yên, theo tâm pháp dẫn sợi linh khí đầu tiên vào thân. Thành thì bước vào Luyện Khí; bại thì tổn thương kinh mạch, mất một phần tu vi.':'Chọn tối đa ba vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.'}</p></div>`;
@@ -378,7 +379,7 @@ vPrep=function(sc){const r=G.run;const v=prepView();const to=btTarget();const ph
   b+=`<div class="kv"><div${ta('Xung quan thành công thì các kiếp lần lượt kéo tới, từng cái một. Gục giữa kiếp là chết.')}><span>Thiên kiếp</span><b>${esc(stg)}</b></div>${v.e.guard?'<div><span>Hộ mệnh</span><b>Có</b></div>':''}</div>`;
   const L=btItems();
   b+=`<h4 class="sgrp">Túi đồ dùng được</h4><div class="rows">`+(L.length?L.map(({p,i})=>`<button class="row${sc.slots.includes(i)?' taken':''}" data-act="prep" data-arg="${i}"${ta(pillTip(p.id,p.q))}><span class="r-i">${PILL[p.id].i}</span><span class="r-t"><b>${p.q?PQ[p.q]+' ':''}${esc(PILL[p.id].n)}</b><small>${esc(PILL[p.id].d.replace('{x}',pillX(p.id,p.q)))}</small></span></button>`).join(''):'<p class="hint">Không có vật phẩm nào dùng được.</p>')+'</div>';
-  return card(ph?'Dẫn khí nhập thể':to===5?'Độ kiếp phi thăng':'Đột phá '+REALM[to],r.place.n,b,{cls:'tall',foot:`<button class="btn" data-act="next">Để sau</button><span class="grow"></span><button class="btn pri" data-act="prepGo">Bắt đầu</button>`});};
+  return card(ph?'Xung kích Luyện Khí tầng 1':to===5?'Độ kiếp phi thăng':'Đột phá '+REALM[to],r.place.n,b,{cls:'tall',foot:`<button class="btn" data-act="next">Để sau</button><span class="grow"></span><button class="btn pri" data-act="prepGo">Bắt đầu</button>`});};
 SCENE_V.prep=vPrep;
 
 
@@ -386,9 +387,7 @@ SCENE_V.prep=vPrep;
 function kvPickHTML(){const r=G.run;return `<div class="mbox kvpick"><h3>Khí vận hội tụ</h3><p class="hint">Đột phá thành công, thiên địa cảm ứng. Chọn một tiên thiên khí vận.</p><div class="kvp">${r.kvPick.map((id,i)=>{const d=TT_DEST[id];return `<button class="kvo" data-act="kvPick" data-arg="${i}" style="--pc:${TT_COL[d.rank]}"><span class="kvh"><b>${esc(d.name)}</b><small>${TT_RANK[d.rank]}</small></span><p>${esc(d.description)}</p><p class="kvf">${ttFxText(d).map(esc).join('<br>')}</p></button>`;}).join('')}</div></div>`;}
 
 // nút xung kích tầng Luyện Khí trong bảng bế quan
-function xkBoxHTML(){const X=lkXkState();if(!X)return '';const g=lkGate();return `<div class="bt-box${X.ok?' on':''}"><b>${ic('spark')} Xung kích tầng ${g+1}</b><p class="hint${X.ok?'':' bad'}">${X.ok?'Thanh tu vi tầng '+g+' đã đầy. Dồn linh lực phá quan để lên tầng kế (mất chừng một tháng).':esc(X.why)}</p><button class="btn ${X.ok?'pri':''}" data-act="xkGo"${X.ok?'':' disabled'}>Xung kích</button></div>`;}
+function xkBoxHTML(){const X=lkXkState();if(!X)return '';const g=sgGate();return `<div class="bt-box${X.ok?' on':''}"><b>${ic('spark')} Xung kích ${esc(X.nx)}</b><p class="hint${X.ok?'':' bad'}">${X.ok?'Thanh tu vi '+sgName(g)+' đã đầy. Dồn linh lực phá quan để lên '+X.nx+' (mất chừng một tháng).':esc(X.why)}</p><button class="btn ${X.ok?'pri':''}" data-act="xkGo"${X.ok?'':' disabled'}>Xung kích</button></div>`;}
 
 // khoảng tu vi nhận được khi bế quan; ở Luyện Khí tính theo tầng (vượt tầng thì nói lên mấy tầng)
-function bqGainTxt(a,b){if(!lkOn())return '~'+Math.floor(a)+'% – '+Math.ceil(b)+'% tu vi';const r=G.run;const g=lkTang();const ta=lkTang(r.tv+a),tb=lkTang(r.tv+b);
-  if(tb>g)return ta>g?'lên '+(ta-g)+(tb>ta?' – '+(tb-g):'')+' tầng':'có thể lên '+(tb-g)+' tầng';
-  const w=lkW(g);return '~'+Math.floor(a/w*100)+'% – '+Math.ceil(b/w*100)+'% tu vi';}
+function bqGainTxt(a,b){if(!sgOn())return '~'+Math.floor(a)+'% – '+Math.ceil(b)+'% tu vi';const w=sgW();return '~'+Math.floor(a/w*100)+'% – '+Math.ceil(b/w*100)+'% tu vi';}

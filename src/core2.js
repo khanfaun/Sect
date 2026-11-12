@@ -1238,7 +1238,7 @@ function phamUp(){if(G.run&&G.run.pham&&G.run.tv>=100&&llOf()>=LL_BT){const g=G.
 {const _rl19=realmLabel;realmLabel=function(){return isPham()?'Phàm nhân':_rl19();};}
 {const _rt19=realmText;realmText=function(r){r=r||G.run;return r===G.run&&isPham()?'Phàm nhân':_rt19(r);};}
 function realmName(){return isPham()?'Phàm nhân':REALM[G.run.realm];}
-{const _ae19=applyE;applyE=function(e,v){const was=isPham();const ch=_ae19(e,v);if(was&&G.run&&!isPham()&&Array.isArray(ch)){const i=ch.findIndex(c=>c&&c.i==='✨');if(i>=0)ch.splice(i,1);ch.push(chip('✨','dẫn khí nhập thể','Bước vào Luyện Khí sơ kỳ','up'));}return ch;};}
+{const _ae19=applyE;applyE=function(e,v){const was=isPham();const ch=_ae19(e,v);if(was&&G.run&&!isPham()&&Array.isArray(ch)){const i=ch.findIndex(c=>c&&c.i==='✨');if(i>=0)ch.splice(i,1);ch.push(chip('✨','dẫn khí nhập thể','Bước vào Luyện Khí tầng 1','up'));}return ch;};}
 // ----- phàm nhân chưa dẫn khí: không có linh lực, không thúc được pháp bảo (từ linh phẩm trở lên), chưa dùng chiêu thức, chưa mở Khí Hải -----
 function phamLock(rel){return isPham()&&rel&&(rel.tier||0)>=1&&rel.k!=='book';}
 {const _S20=S;S=function(){const s=_S20();if(isPham()){s.maxMp=0;}return s;};}
@@ -1495,7 +1495,7 @@ function daoParts(){const r=G.run;if(isPham())return [];const to=btTarget();cons
   const p=btRate(sc.slots);const idx=sc.slots.slice().sort((a,b)=>b-a);const used=idx.map(i=>r.pills[i]).filter(Boolean).map(x=>PILL[x.id].n);for(const i of idx)r.pills.splice(i,1);sc.slots=[];
   advanceTime(7*HD);if(!G.run)return;const back=sc.back;r.bt={to:0,stages:[],si:0,used};
   if(R()<p){r.bt=null;phamUp();r.scene={type:'btres',back,ok:true,done:1,text:'Theo nhịp thở, một sợi linh khí mảnh như tơ len vào kinh mạch, chảy xuống đan điền rồi cuộn lại ở đó. Thân thể nhẹ bẫng, tai nghe rõ tiếng lá rơi ngoài trăm bước. Từ hôm nay, không còn là phàm nhân nữa.',
-    chips:used.map(n=>chip('⚗️',n,'Đã dùng','')).concat([chip('☯️','Luyện Khí sơ kỳ','Dẫn khí nhập thể, bước vào Luyện Khí','up')])};}
+    chips:used.map(n=>chip('⚗️',n,'Đã dùng','')).concat([chip('☯️','Luyện Khí tầng 1','Dẫn khí nhập thể, bước vào Luyện Khí tầng 1','up')])};}
   else btFail(back,used);};}
 // phàm nhân dẫn khí nhập thể ở đâu cũng được, không cần động phủ
 {const _pa23=placeAct;placeAct=function(a){const r=G.run,sc=r&&r.scene;if(a==='bt'&&isPham()&&canBreak()&&sc&&sc.type==='place'){openPrep(nodeById(sc.id));return;}return _pa23(a);};}
@@ -2338,3 +2338,50 @@ function btReadyTv(){return lkOn()?(lkTang()>=10||(lkTang()===9&&lkFull())):G.ru
 // ở Luyện Khí, mất tu vi (đột phá hỏng…) không làm rớt tầng
 {const _at38=addTv;addTv=function(x){const r=G.run;if(r&&lkOn()&&x<0){const f=LK_TH[lkTang()-1];const res=_at38(x);if(G.run&&G.run.tv<f)G.run.tv=f;return res;}return _at38(x);};}
 {const _bi38=bqInfo;bqInfo=function(){const o=_bi38();if(lkOn())o.full=lkFull();return o;};}
+
+// ================= ĐỢT 37: XUNG KÍCH TIỂU CẢNH GIỚI, ĐỘT PHÁ ĐẠI CẢNH GIỚI =================
+// Trong một đại cảnh giới, mỗi tầng (Luyện Khí) hay mỗi kỳ (sơ, trung, hậu) có thanh tu vi riêng 0–100%.
+// Đầy thanh thì tu vi dừng lại; muốn lên tầng/kỳ kế phải tự xung kích. Lên đại cảnh giới mới gọi là đột phá.
+// Phàm nhân lên Luyện Khí tầng 1 cũng là xung kích.
+const SG_TH=[0,100/3,200/3];
+function sgOn(){const r=G.run;return !!r&&!r.pham;}
+function sgTh(){return G.run.realm===0?LK_TH:SG_TH;}
+function sgNat(tv){let n=0;for(const t of sgTh())if(tv>=t-1e-6)n++;return Math.max(1,n);}
+function sgGate(){const r=G.run;if(!r)return 1;if(r.sg==null)r.sg=r.realm===0&&r.lkG?r.lkG:sgNat(r.tv); // bản lưu cũ: lấy theo tu vi đang có
+  return r.sg;}
+function sgEnd(g){const th=sgTh();return g<th.length?th[g]:100;}
+function sgTang(tv){if(tv==null)tv=G.run.tv;return Math.min(sgNat(tv),sgGate());}
+function sgFull(){return sgOn()&&G.run.tv>=sgEnd(sgGate())-1e-6;}
+function sgW(g){g=g||sgTang();return sgEnd(g)-sgTh()[g-1];}
+function sgPct(tv){const r=G.run;if(tv==null)tv=r.tv;const g=sgTang(tv);return Math.floor(clamp((tv-sgTh()[g-1])/sgW(g),0,1)*100+1e-6);}
+function sgName(g){return G.run.realm===0?'tầng '+g:TIEU[g-1];}
+// Luyện Khí dùng chung
+function lkGate(){return sgGate();}
+function lkTang(tv){return sgTang(tv);}
+function lkEnd(g){return sgEnd(g);}
+function lkFull(){return lkOn()&&sgFull();}
+function lkW(g){return sgW(g);}
+function lkPct(tv){return sgPct(tv);}
+function tvShow(){return sgOn()?sgPct():Math.floor(G.run.tv);}
+function lkShowGain(x){return sgOn()?x*(lkOn()?LK_MUL:1)/sgW()*100:x;}
+// xung kích
+function lkXkState(){if(!sgOn())return null;const r=G.run;const g=sgGate();const last=sgTh().length;if(g>=last)return null;
+  const nx=r.realm===0?'Luyện Khí tầng '+(g+1):REALM[r.realm]+' '+TIEU[g];
+  if(!sgFull())return {ok:false,nx,why:'Tu vi '+sgName(g)+' chưa đầy, chưa đủ sức xung kích.'};
+  if(r.realm===0&&g===12&&!lk13Open())return {ok:false,nx,why:'Linh lực xông mãi vẫn không qua được.'};return {ok:true,nx,why:''};}
+function lkXk(){const X=lkXkState();if(!X||!X.ok)return false;const r=G.run;r.sg=sgGate()+1;if(r.realm===0)r.lkG=r.sg;advanceTime(HM);if(!G.run)return true;
+  const s=S();r.hp=Math.max(r.hp,0);clampHp();
+  const t='Ngươi dồn hết linh lực xông thẳng qua kinh mạch. Một tiếng “rắc” khẽ vang trong người: đã lên '+X.nx+'.';log('Xung kích lên '+X.nx+'.');note('✨ Lên '+X.nx,'up');
+  const sc=r.scene;if(sc&&sc.type==='place'){sc.msg=[t];sc.chips=[chip('✨',X.nx,'Xung kích thành công','up')];}return true;}
+// đổi đại cảnh giới (đột phá, dẫn khí nhập thể): về tầng/kỳ đầu
+{const _bf37=btFinish;btFinish=function(){const rl=G.run&&G.run.realm;const res=_bf37.apply(this,arguments);if(G.run&&G.run.realm!==rl){G.run.sg=1;G.run.lkG=null;}return res;};}
+{const _pu37=phamUp;phamUp=function(){const was=isPham();const res=_pu37.apply(this,arguments);if(was&&G.run&&!isPham()){G.run.sg=1;G.run.lkG=null;}return res;};}
+// chặn tu vi ở đỉnh tầng/kỳ đang mở; mất tu vi không rớt tầng/kỳ
+{const _at37=addTv;addTv=function(x){const r=G.run;if(!r||!sgOn())return _at37(x);const f=sgTh()[sgTang()-1];const res=_at37(x);const r2=G.run;if(r2&&sgOn()){if(r2.tv>sgEnd(sgGate()))r2.tv=sgEnd(sgGate());if(x<0&&r2.tv<f)r2.tv=f;}return res;};}
+{const _ts37=tvSimAdd;tvSimAdd=function(raw){const v=_ts37(raw);if(!sgOn())return v;return Math.max(0,Math.min(v,sgEnd(sgGate())-G.run.tv));};}
+{const _bn37=bqNeedY;bqNeedY=function(){if(!sgOn())return _bn37();const r=G.run;const left=sgEnd(sgGate())-r.tv;return left<=1e-6?0:Math.max(0.25,Math.ceil(left/bqReal()*4)/4);};}
+{const _bi37=bqInfo;bqInfo=function(){const o=_bi37();if(sgOn())o.full=sgFull();return o;};}
+// nhãn trên thanh đầu: thêm "xung kích" khi tầng/kỳ đã đầy
+function btState(){const r=G.run;if(!r)return '';if(canBreak())return 'dp';const X=lkXkState();if(X&&X.ok)return 'xk';if((isPham()?r.tv>=100:btReadyTv())&&llOf()<llNeedBt())return 'bc';return '';}
+// phàm nhân: nút ghi "Xung kích Luyện Khí tầng 1"
+{const _pa39=placeActs;placeActs=function(n){const L=_pa39(n);if(isPham())for(const a of L)if(a.a==='bt'){a.l='Xung kích Luyện Khí tầng 1';a.tip='Dẫn khí nhập thể, bước vào Luyện Khí tầng 1.';}return L;};}
