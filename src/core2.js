@@ -2138,7 +2138,7 @@ const REL_POOL={atkP:5,matkP:6,defP:8,hpP:6,mpP:8,tp:1,crit:3,critDmg:8,dodge:3,
 {const _gr32=genRelic;genRelic=function(t){const x=_gr32(t);if(!x)return x;const n=REL_X[clamp(x.tier||0,0,6)];const keys=Object.keys(REL_POOL).filter(k=>!(k in x.fx));x.fx2={};
   for(const k of shuffle(keys).slice(0,n))x.fx2[k]=REL_POOL[k];x.v2=1;return x;};}
 {const _rf32=relicFx;relicFx=function(rel){if(!rel||!rel.v2)return _rf32(rel);const m=REL_M[clamp(rel.req||0,0,6)];const o=_rf32(Object.assign({},rel,{tier:0}));
-  for(const k in o){if(['firstEvade','weakStart','vulnStart','pillSlot'].includes(k))continue;o[k]=k==='poisonHit'?Math.round(o[k]*m*100)/100:Math.max(1,Math.round(o[k]*m));}
+  for(const k in o){if(['firstEvade','weakStart','vulnStart','pillSlot'].includes(k))continue;o[k]=k==='poisonHit'?Math.round(o[k]*m*100)/100:o[k]<0?Math.min(-1,Math.round(o[k]*m)):Math.max(1,Math.round(o[k]*m));}
   for(const [k,v] of Object.entries(rel.fx2||{})){const x=v*m;o[k]=(o[k]||0)+(['tp','van','tam','ngo','regenHp','regenMp'].includes(k)?Math.max(1,Math.round(x)):Math.round(x));}
   return o;};}
 // "thêm ô đan dược" (pillSlot) trên vật phẩm: đan dược đã dùng chung túi đồ, nên đổi thành thêm ô túi đồ (chỉ tính đồ đang mặc, đang uẩn dưỡng)
@@ -2162,3 +2162,19 @@ function relActive(){const r=G.run;if(!r)return [];const E=eqOf();const L=Object
 const NT_NAME={firstEvade:'Tàn Ảnh',startBlock:'Kim Chung Tráo',blockTurn:'Huyền Vũ Thuẫn',weakStart:'Nhiếp Hồn Âm',vulnStart:'Khổn Tiên Tác',poisonHit:'Vạn Độc Phệ',
  stunP:'Phiên Thiên Ấn',reflect:'Phản Chiếu',execute:'Đoạn Mệnh',drain:'Thôn Huyết',regenHp:'Sinh Sinh Bất Tức',regenMp:'Linh Tuyền',healAfter:'Cam Lộ',hoTam:'Hộ Tâm Kính',
  pillP:'Đan Hỏa',stonesP:'Tụ Bảo',pillSlot:'Càn Khôn',shopP:'Thương Hội Lệnh',tammaRes:'Thanh Tâm',elX:'Linh Dẫn',craftP:'Thiên Công',bqSafe:'Hộ Pháp Trận',bqP:'Tụ Linh Trận'};
+// ----- cân lại lịch luyện: đột phá cần đầy 100% (trước là 70%) nên mọi nguồn lịch luyện nhân 1,45;
+// đánh lại cùng loại địch giảm chậm hơn (mỗi lần trước −25%, nay −12%) -----
+const LL_MUL=1.45;
+{const _la35=llAdd;llAdd=function(x,why,quiet){return _la35(x>0?x*LL_MUL:x,why,quiet);};}
+{const _fc35=finishCombat;finishCombat=function(sc){const r=G.run;const k=sc&&sc.en&&(sc.en.k||sc.en.n);let keep=null;
+  if(r&&k&&r.llSeen&&r.llSeen[k]){keep=r.llSeen[k];r.llSeen[k]=Math.floor(keep*0.48);}const res=_fc35(sc);if(G.run&&keep!=null&&G.run.llSeen)G.run.llSeen[k]=keep+1;return res;};}
+// lên cảnh giới mới (kể cả dẫn khí nhập thể): nơi đã tới, người đã quen, địch đã đánh đều được "nhìn bằng con mắt mới", lại cho lịch luyện như lần đầu
+function llFresh(){const r=G.run;if(!r)return;r.llP=[];r.llN=[];r.llSeen={};}
+{const _pu35=phamUp;phamUp=function(){const was=G.run&&G.run.pham;const res=_pu35.apply(this,arguments);if(was&&G.run&&!G.run.pham)llFresh();return res;};}
+{const _bf35=btFinish;btFinish=function(){const rl=G.run&&G.run.realm;const res=_bf35.apply(this,arguments);if(G.run&&G.run.realm>rl)llFresh();return res;};}
+// ----- món độc nhất (Kiếm Gãy Vô Danh, Nhẫn Sắt Cũ…): theo luật mới -----
+// Có cảnh giới yêu cầu theo nơi nhận được (lệnh bài đệ tử, di vật kiếp trước, linh thú: ai cũng dùng được);
+// chỉ số nhân theo cảnh giới yêu cầu như mọi món khác; không thêm dòng phụ (chỉ số của chúng đã là độc nhất).
+{const _ur36=uniqueRelic;uniqueRelic=function(id){const x=_ur36(id);if(!x)return x;x.req=['lenhtong','mocu','linhthu'].includes(id)?0:relReqRoll();x.v2=1;x.fx2={};return x;};}
+// chỉ số âm hiện "−3" thay vì "+-3"
+{const _fl36=fxLines;fxLines=function(fx,rel){return _fl36(fx,rel).map(s=>s.replace(/\+-/g,'−'));};}
