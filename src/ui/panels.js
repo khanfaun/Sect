@@ -9,7 +9,7 @@ function pChar(){
     const R1=ROOT.find(x=>x.id===r.root.id);const tc=s.tuchat;const left=Math.max(0,Math.floor(s.life-r.age));
     const lcV=`<span class="lc2"><small>${esc(R0.n)}</small><span class="lc-els">${r.root.els.map(elSeal).join('')}</span></span>`;
     b+=`<div class="basegrid">`;
-    b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),kvRow('Mệnh cách',esc(tr.n),tr.d),
+    b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),...(tr&&tr.id!=='none'?[kvRow('Mệnh cách',esc(tr.n),tr.d)]:[]),
       kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
       ttRow('Tiên thiên khí vận',(r.kv||[]).map(k=>TT_DEST[k]),'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.'),
       ttRow('Tiên thiên thể chất',(r.the||[]).map(ttPhysOf),'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.'),
@@ -162,7 +162,7 @@ function qName(n,t){return `<b class="qt" style="${pcs(t)}">${esc(n)}</b>`;}
 const SLOT_IC={vukhi:'M14 4h6v6L9 21l-2-2-3 1 1-3-2-2L14 4zM6 15l3 3',non:'M4 16c0-6 3-10 8-10s8 4 8 10zM2 16h20M12 6V3',boi:'M12 3v5M12 8a5 5 0 100 10 5 5 0 000-10zM12 18v3M12 11v4',gang:'M7 21v-9l-2-4 2-1 2 3V4h2v6V3h2v7-6h2v8l2-3 1 2-2 5v5z',giap:'M7 4l5 2 5-2 3 4-3 2v10H7V10L4 8z',choang:'M8 3h8l4 17H4zM8 3c1 3 7 3 8 0',nhan:'M12 9a6 6 0 100 12 6 6 0 000-12zM9 6l3-3 3 3-3 3z',dai:'M3 10h18v4H3zM10 9h4v6h-4z',phapbao:'M12 3l7 9-7 9-7-9zM5 12h14M12 3v18',giay:'M5 4h5v9l8 3v4H5zM5 16h13',tuivat:'M6 8h12l1 12H5L6 8zM9 8V6a3 3 0 016 0v2',
   phuongtien:'M5 13L17 3l2.5.5L20 6 9 17l-2.5-.5zM8 13l2 2M3 20c2-1.4 4-1.4 6 0s4 1.4 6 0 4-1.4 6 0M6 17c1.5-.8 3-.8 4.5 0',
   hoa:'M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z',dinh:'M6 8h12v6a6 6 0 01-12 0zM4 8h16M8 20l-1 2M16 20l1 2M9 5h6',tran:'M12 3l8 5v8l-8 5-8-5V8zM12 3v18M4 8l16 8M20 8L4 16',book:'M5 4h10l4 4v12H5zM15 4v4h4M8 12h8M8 16h6'};
-function slotIcon(s){s=String(s).replace(/[12]$/,'');return `<svg class="sli" viewBox="0 0 24 24"><path d="${SLOT_IC[s]||SLOT_IC.phapbao}"/></svg>`;}
+function slotIcon(s){s=String(s).replace(/[123]$/,'');return `<svg class="sli" viewBox="0 0 24 24"><path d="${SLOT_IC[s]||SLOT_IC.phapbao}"/></svg>`;}
 function relIcon(rel){return assetImg('item',rel.img||rel.k,slotIcon(rel.k==='book'?'book':slotOf(rel)));}
 // ô ảnh vật phẩm (chừa chỗ gắn ảnh asset vuông)
 function itemArt(x){if(x.ref&&x.ref.t==='rel')return relIcon(G.run.relics[x.ref.i]);const id=x.ref.t==='pill'?'pill:'+x.ref.id:x.ref.t==='mat'?'mat:'+x.ref.k:x.ref.t;return assetImg('item',id,x.em?`<span class="bem">${x.em}</span>`:slotIcon('phapbao'));}
@@ -184,6 +184,7 @@ function bagTabHTML(){
   let L=`<div class="eqwrap"><div class="doll">${sceneCv('doll'+r.ten,r.region,'','dollbg','nhan:0.5:0.92:0:doll')}<div class="dgrid">${SLOTS.map(([k,n])=>eqCell('E'+k,n,E[k],{ic:k,x:['eqOff',k,'Tháo ra']})).join('')}</div></div>`;
   const dn=DD_N[r.realm];
   L+='<div class="ddpair"><div class="ddg">';
+  {const po=pbOpen();L+=`<h4 class="sgrp">Pháp bảo <small>${PB_SLOTS.filter(k=>E[k]).length}/${po}</small><span class="grow"></span><span class="qhelp"${ta('Pháp bảo đang mang theo người: cho chỉ số. Ô thứ nhất mở ở Kết Đan, ô thứ hai ở Nguyên Anh, ô thứ ba ở Hóa Thần.')}>${ic('info','sm')}</span></h4><div class="ddrow three">${PB_SLOTS.map((k,j)=>j<po?eqCell('E'+k,'Pháp bảo',E[k],{ic:'phapbao',x:['eqOff',k,'Tháo ra']}):eqCell('E'+k,REALM[PB_REQ[j]],null,{lock:1,ic:'phapbao',tip:'Mở khi đạt '+REALM[PB_REQ[j]]+'.'})).join('')}</div>`;}
   L+=`<h4 class="sgrp">Đan điền · uẩn dưỡng <small>${r.dd.length}/${dn}</small><span class="grow"></span><span class="qhelp"${ta('Vũ khí, pháp bảo nuôi trong đan điền mỗi năm mạnh thêm 5% (tối đa gấp đôi), vẫn cho chỉ số, và trong trận tế ra đánh được một lần.')}>${ic('info','sm')}</span></h4><div class="ddrow">${[0,1,2,3].map(j=>{const d=r.dd[j];if(d)return eqCell('D'+j,'',d.rel,{badge:'+'+Math.round((ddMul(d)-1)*100)+'%',x:['ddTake',j,'Lấy ra']});const need=DD_N.findIndex(x=>x>j);return eqCell('D'+j,j<dn?'Trống':REALM[need],null,{lock:j>=dn,ic:'phapbao',tip:j<dn?'Chạm để chọn vũ khí hoặc pháp bảo đưa vào uẩn dưỡng.':'Mở khi đạt '+REALM[need]+'.'});}).join('')}</div>`;
   L+='</div><div class="ddg">';
   L+=`<h4 class="sgrp">Pháp khí tùy thân</h4><div class="ddrow five">${SPEC.map(([k,n])=>{if(k==='phuongtien'){const m=mountOf();const off=r.vehOff||r.rentOff;return `<div class="eqc${m?' on':''}" style="${m?pcs(m.tier||1):''}"${off&&!m?' data-act="vehOn"':''}${ta(m?m.n+(m.d?'\n'+m.d:'')+'\nTốc độ ×'+numVN(m.m||1):off?'Đang tháo '+off.n+(off.v?off.v.n:'')+'. Chạm để dùng lại.':'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.')}>${m&&m.k&&ASSET.veh&&ASSET.veh[m.k]?`<img class="asset" src="${ASSET.veh[m.k]}" alt="">`:slotIcon(k)}<small>${m?m.n:n}</small>${m?slotX('vehOff','','Tháo phương tiện'):''}</div>`;}return eqCell('E'+k,n,E[k],{ic:k,x:['eqOff',k,'Tháo ra']});}).join('')}</div>`;
@@ -230,7 +231,7 @@ function pickModalHTML(m){
   const r=run2(),E=eqOf();const k=m.key;let title='',cur='',C=[],empty='';
   // C: danh sách ứng viên {cell, det, act, arg}
   const relC=(x,i,act)=>({t:x.tier||0,cell:relIcon(x),tip:relTip(x),det:relTip(x),act,arg:i,btn:act==='eqPut'?'Mặc vào':act==='ddPutM'?'Uẩn dưỡng':'Chọn'});
-  if(k[0]==='E'){const s=k.slice(1);title=SLOT_N[s.replace(/[12]$/,'')]||'Trang bị';const rel=E[s];
+  if(k[0]==='E'){const s=k.slice(1);title=SLOT_N[s.replace(/[123]$/,'')]||'Trang bị';const rel=E[s];
     if(rel)cur=relDetail(rel,`<button class="btn sm" data-act="eqOff" data-arg="${s}">${ic('close')} Tháo ra</button>`);
     C=r.relics.map((x,i)=>({x,i})).filter(o=>o.x.k!=='book'&&slotsFor(o.x).includes(s)).sort((a,b)=>(b.x.tier||0)-(a.x.tier||0)).map(o=>relC(o.x,o.i,'eqPut'));
     empty='Trong túi không có món nào hợp ô này.';}

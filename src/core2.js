@@ -547,14 +547,17 @@ PQ[0]=PHAM[0];PQ[1]=PHAM[1];PQ[2]=PHAM[2];
 RELIC_K.push({k:'non',b:['Quan','Đấu Lạp','Ngọc Quan'],fx:{tam:2,defP:6}},{k:'gang',b:['Hộ Thủ','Quyền Sáo','Thủ Giáp'],fx:{atkP:5,crit:2}},{k:'dai',b:['Đai','Ngọc Đái','Yêu Đái'],fx:{hpP:6,tp:1}},
   {k:'hoa',b:['Hỏa Chủng','Địa Tâm Hỏa','Thanh Liên Hỏa'],fx:{craftP:6}},{k:'tran',b:['Trận Bàn','Trận Kỳ','Tụ Linh Trận Đồ'],fx:{bqP:8,bqSafe:15}});
 FXT.craftP='Luyện chế dễ thành hơn {v}%';FXT.bqSafe='Bế quan ít bị quấy nhiễu hơn {v}%';
-const SLOTS=[['vukhi','Vũ khí'],['non','Nón'],['boi','Ngọc bội'],['gang','Găng'],['giap','Giáp'],['choang','Áo choàng'],['nhan1','Nhẫn'],['dai','Đai lưng'],['nhan2','Nhẫn'],['phapbao1','Pháp bảo'],['giay','Giày'],['phapbao2','Pháp bảo']];
+// ô trang bị 3×3; trang sức chỉ một ô (nhẫn, sau này thêm vòng, khuyên…); pháp bảo ra mục riêng 3 ô, mở ở Kết Đan, Nguyên Anh, Hóa Thần
+const SLOTS=[['vukhi','Vũ khí'],['non','Nón'],['boi','Ngọc bội'],['gang','Găng'],['giap','Giáp'],['choang','Áo choàng'],['nhan1','Trang sức'],['dai','Đai lưng'],['giay','Giày']];
+const PB_SLOTS=['phapbao1','phapbao2','phapbao3'],PB_REQ=[2,3,4];
+function pbOpen(){const r=G.run;return PB_REQ.filter(q=>(r.realm||0)>=q&&!(typeof isPham==='function'&&isPham())).length;}
 const SPEC=[['tuivat','Trữ vật'],['phuongtien','Phương tiện'],['hoa','Hỏa chủng'],['dinh','Lô đỉnh'],['tran','Trận pháp']];
 const KSLOT={kiem:'vukhi',dao:'vukhi',phap:'vukhi',but:'vukhi',giap:'giap',bao:'choang',tram:'non',non:'non',ngoa:'giay',hoan:'gang',gang:'gang',dai:'dai',nhan:'nhan',boi:'boi',hotam:'boi',tui:'tuivat',dinh:'dinh',hoa:'hoa',tran:'tran'};
-const SLOT_N={vukhi:'Vũ khí',non:'Nón',boi:'Ngọc bội',gang:'Găng',giap:'Giáp',choang:'Áo choàng',nhan:'Nhẫn',dai:'Đai lưng',phapbao:'Pháp bảo',giay:'Giày',tuivat:'Trữ vật',hoa:'Hỏa chủng',dinh:'Lô đỉnh',tran:'Trận pháp',phuongtien:'Phương tiện'};
+const SLOT_N={vukhi:'Vũ khí',non:'Nón',boi:'Ngọc bội',gang:'Găng',giap:'Giáp',choang:'Áo choàng',nhan:'Trang sức',dai:'Đai lưng',phapbao:'Pháp bảo',giay:'Giày',tuivat:'Trữ vật',hoa:'Hỏa chủng',dinh:'Lô đỉnh',tran:'Trận pháp',phuongtien:'Phương tiện'};
 function slotOf(rel){return KSLOT[rel.k]||'phapbao';}
-function slotsFor(rel){const s=slotOf(rel);return s==='nhan'?['nhan1','nhan2']:s==='phapbao'?['phapbao1','phapbao2']:[s];}
+function slotsFor(rel){const s=slotOf(rel);return s==='nhan'?['nhan1']:s==='phapbao'?PB_SLOTS.slice(0,pbOpen()):[s];}
 function eqOf(){const r=G.run;if(!r.eq)r.eq={};if(!r.dd)r.dd=[];return r.eq;}
-function equip(i){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;const S0=slotsFor(rel);const s=S0.find(x=>!E[x])||S0[0];
+function equip(i){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;const S0=slotsFor(rel);if(!S0.length){if(typeof note==='function')note('Ô pháp bảo mở khi đạt Kết Đan.');return;}const s=S0.find(x=>!E[x])||S0[0];
   r.relics.splice(i,1);if(E[s]){E[s].seen=1;r.relics.push(E[s]);}rel.seen=1;E[s]=rel;clampHp();saveSoon();}
 function equipTo(i,slot){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;if(!slot||!slotsFor(rel).includes(slot))return equip(i);
   r.relics.splice(i,1);if(E[slot]){E[slot].seen=1;r.relics.push(E[slot]);}rel.seen=1;E[slot]=rel;clampHp();saveSoon();}
@@ -2045,6 +2048,37 @@ Object.assign(TT_FXN,{van:'Khí vận {v}',shopP:'Mua đồ rẻ {v}%'});
 {const _nr27=newRun;newRun=function(c){const res=_nr27(c);const r=G.run;if(!r||!r.story||!r.kv)return res;
   const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const nm=w.slice(h2?2:1).join(' ')||r.ten;const at=Math.max(1,r.story.length-2);
   if(r.kv.includes('gia_canh_kha_gia')){const v=ri(3,6);r.st+=v;r.story.splice(at,0,'Nhà vẫn còn chút của để dành. Lúc '+nm+' ra đi, trong tay nải có thêm '+v+' viên linh thạch.');}
-  const top=r.kv.map(k=>TT_DEST[k]).filter(d=>d&&d.rank>=2&&d.id!=='gia_canh_kha_gia'&&!/linh căn|kích hoạt|tự động/i.test(d.description)).sort((a,b)=>b.rank-a.rank)[0];
+  const top=r.kv.map(k=>TT_DEST[k]).filter(d=>d&&d.rank>=2&&d.id!=='gia_canh_kha_gia'&&!d.mc&&!/linh căn|kích hoạt|tự động/i.test(d.description)).sort((a,b)=>b.rank-a.rank)[0];
   if(top){const d=top.description.replace(/\.$/,'');r.story.splice(Math.max(1,r.story.length-2),0,'Người quen ai cũng nói về '+nm+': '+d.charAt(0).toLowerCase()+d.slice(1)+'.');}
   saveSoon();return res;};}
+
+// ================= ĐỢT 28: GỘP MỆNH CÁCH VÀO TIÊN THIÊN KHÍ VẬN =================
+// 18 mệnh cách cũ thành khí vận phẩm Hiếm (giữ nguyên tác dụng riêng: thiêu, miễn độc, bế quan, mua rẻ, kết liễu…), đổi tên cho ra dáng khí vận.
+// Nhân vật mới không còn mệnh cách riêng; bản lưu cũ vẫn giữ mệnh cách đang có.
+const MC_REN={kiemtam:['Kiếm Duyên','Từ nhỏ đã có duyên với kiếm, cầm kiếm như cầm đũa.'],thanluc:['Thiên Sinh Thần Lực','Sinh ra đã khỏe hơn người.'],
+ menhcung:['Mệnh Cứng','Số mệnh cứng cỏi, mấy lần cận kề cái chết vẫn sống.'],chithuy:['Tâm Bình Khí Hòa','Lòng dạ bình thản, khó bị ngoại vật lay động.'],
+ linhnhan:['Mắt Sáng Hơn Người','Nhìn đâu cũng thấy điều người khác bỏ qua.'],luoi:['Ba Tấc Lưỡi','Ăn nói khéo léo, mua bán ít khi chịu thiệt.'],
+ yeuhuyet:['Huyết Mạch Yêu Tộc','Trong máu có chút huyết mạch yêu tộc, vết thương lành rất nhanh.'],thiendo:['Thiên Đố Anh Tài','Thông minh hơn người, nhưng trời ghen nên khó sống lâu.'],
+ phuctinh:['Phúc Tinh Cao Chiếu','Sao phúc chiếu mệnh, gặp dữ hóa lành.'],hoalinh:['Mệnh Hỏa Vượng','Sinh vào giờ hỏa vượng, có duyên với lửa.'],
+ bangco:['Sinh Nơi Băng Tuyết','Sinh ra giữa mùa băng tuyết, thân thể cứng cỏi, hợp với hàn khí.'],truongtho:['Tướng Thọ','Mang tướng mạo của người sống lâu.'],
+ bachdoc:['Bách Độc Bất Xâm','Trời sinh không sợ độc.'],ngodao:['Duyên Ngộ Đạo','Có duyên với đạo, tu luyện nhanh hơn người.'],
+ khotu:['Bền Chí Khổ Tu','Chịu được cô quạnh, ngồi yên tu luyện bao lâu cũng được.'],sattinh:['Sát Tinh Chiếu Mệnh','Sát khí nặng, ra tay với kẻ yếu thế không chút nương tay.'],
+ mongdu:['Mộng Du Tiên Cảnh','Đêm nào cũng mơ thấy tiên cảnh.'],huyenco:['Kinh Mạch Thông Suốt','Kinh mạch thông suốt, linh lực vận hành trơn tru.']};
+for(const t of TRAIT){const m=MC_REN[t.id];if(!m)continue;const id='mc_'+t.id;TT_DEST[id]={id,name:m[0],description:m[1],rank:3,mc:t.id};}
+TRAIT.push({id:'none',n:'Không',i:'',fx:{},d:''});
+{const _tf28=ttFx;ttFx=function(def){if(def&&def.mc){const t=TRAIT.find(x=>x.id===def.mc);return JSON.parse(JSON.stringify((t&&t.fx)||{}));}return _tf28(def);};}
+{const _ft28=ttFxText;ttFxText=function(def){if(def&&def.mc){const t=TRAIT.find(x=>x.id===def.mc);return t?[t.d]:[];}return _ft28(def);};}
+// thêm lượt rút khí vận nhờ nâng cấp Thiên mệnh ở Bến Vong Xuyên
+{const u=UPG.find(x=>x.id==='menh');if(u){u.n='Thiên mệnh';u.d='Đầu thai rút thêm một tiên thiên khí vận';}}
+{const _tr28=ttRoll;ttRoll=function(){const L=_tr28();const all=Object.values(TT_DEST);for(let i=0;i<U('menh');i++){const rk=wpick([1,2,3,4,5,6],x=>TT_RW[x]);const pool=all.filter(d=>d.rank===rk&&!L.includes(d.id));if(pool.length)L.push(pick(pool).id);}return L;};}
+{const _gb28=genBirth;genBirth=function(){_gb28();for(const c of G.birth.cards)c.trait='none';};}
+// tính tình (xét thể chất) lấy từ xuất thân và khí vận gốc mệnh cách
+{const _tp28=ttPhys;ttPhys=function(r){const keep=r.trait;const mc=(r.kv||[]).map(k=>TT_DEST[k]&&TT_DEST[k].mc).filter(Boolean);
+  const save={};for(const m of mc){save[m]=1;}const extra=mc.flatMap(m=>TT_TRAITS[m]||[]);const o=TT_TRAITS[r.origin];TT_TRAITS[r.origin]=(o||[]).concat(extra);try{return _tp28(r);}finally{TT_TRAITS[r.origin]=o;if(!o)delete TT_TRAITS[r.origin];}};}
+// câu chuyện mở đầu: khí vận gốc mệnh cách kể bằng câu cũ của mệnh cách
+{const _nr28=newRun;newRun=function(c){const res=_nr28(c);const r=G.run;if(!r||!r.story||!r.kv)return res;const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const nm=w.slice(h2?2:1).join(' ')||r.ten;
+  let at=Math.min(3,r.story.length-2);for(const k of r.kv){const d=TT_DEST[k];if(d&&d.mc&&LS_TR[d.mc]){r.story.splice(at++,0,lsFill(LS_TR[d.mc],{ten:nm}));}}return res;};}
+
+// bản lưu cũ: nhẫn thứ hai và pháp bảo ở ô chưa mở thì cất về túi
+function eqFix(){const r=G.run;if(!r||!r.eq)return;const E=r.eq;const back=k=>{if(E[k]){E[k].seen=1;r.relics.push(E[k]);E[k]=null;}};back('nhan2');PB_SLOTS.forEach((k,j)=>{if(j>=pbOpen())back(k);});}
+{const _r228=run2;run2=function(){const r=_r228();if(r&&!r._eq3){r._eq3=1;eqFix();}return r;};}

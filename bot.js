@@ -38,7 +38,7 @@ function botPlan(){
   const r=G.run,s=S();
   // mục tiêu
   if(r.hp<s.maxHp*0.45){const n=nearest(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok'&&r.st>=price(4)||n.dp);if(n&&goOrOpen(n)){r._goal=n.dp?'heal':'inn';return;}}
-  if(r.tv>=100&&r.realm<4){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bt';return;}}
+  if(r.tv>=100&&r.realm<4&&canBreak()){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bt';return;}}
   if(r.tvMinor>=40||r.tv>=60&&chance(.3)){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bq';return;}}
   const R0=regionOf(r.region);
   if(r.region<4&&(r.realm>=r.region+1||r.passes.includes(r.region+1))){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';return;}}
