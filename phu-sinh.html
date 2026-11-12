@@ -6378,7 +6378,7 @@ function ttFxText(def){const o=ttFx(def);const L=[];for(const [k,v] of Object.en
 // trượt thì đòn vẫn trúng nhưng không chí mạng. Tự đánh thì máy tự bấm (trúng khoảng 70%).
 {const _ds26b=doSkill;doSkill=function(sc,u,sk,lv,tid,qm){if(u&&u._critF!=null)return _ds26b(sc,u,sk,lv,tid,qm);
   if(u&&u.isMain&&u.ctrl==='player'&&sk&&sk.fx&&sk.fx.p&&!sc.kiep&&!sc.critQ){const p=((u.crit||5)+(sk.fx.crit||0))/100;
-    if(chance(p)){if(CFG.autoFight||(G.meta.opt&&G.meta.opt.autoQte)){u._critF=chance(.7);try{return _ds26b(sc,u,sk,lv,tid,qm);}finally{u._critF=null;}}
+    if(chance(p)){if((typeof CFG!=='undefined'&&CFG.autoFight)||(G.meta.opt&&G.meta.opt.autoQte)||typeof document==='undefined'){u._critF=chance(.7);try{return _ds26b(sc,u,sk,lv,tid,qm);}finally{u._critF=null;}}
       sc.critQ={id:(sc.cqid=(sc.cqid||0)+1),uid:u.id,sk,lv,tid,qm};sc.rev++;return;}
     u._critF=false;try{return _ds26b(sc,u,sk,lv,tid,qm);}finally{u._critF=null;}}
   return _ds26b(sc,u,sk,lv,tid,qm);};}
