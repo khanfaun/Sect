@@ -155,7 +155,7 @@ function dodgePress(){
   const b=$('#dodgeBtn');if(b){b.classList.add('hit');const a=Math.abs(d.offs[k]);b.textContent=a<=0.09?'Chuẩn!':a<=0.25?'Khá':'Hụt';}
 }
 // thanh trượt chí mạng: vạch chạy qua lại (mỗi lượt đi về CQ_T ms), vùng xanh ở giữa rộng 18%
-const CQ_T=900,CQ_G=[0.41,0.59];
+const CQ_T=1800,CQ_G=[0.41,0.59];
 function critPress(){const q=UI.cq;if(!q)return;const ph=((performance.now()-q.t0)%CQ_T)/CQ_T;const x=ph<0.5?ph*2:2-ph*2;UI.cq=null;critResolve(x>=CQ_G[0]&&x<=CQ_G[1]);after();}
 function qtePress(){const q=UI.qt;if(!q)return;const ph=((performance.now()-q.t0)/1200);const x=ph<0.5?ph*2:2-ph*2;UI.qt=null;qteResolve(qteMult(clamp(x,0,1)));after();}
 document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodgeOv')){e.preventDefault();dodgePress();}else if(e.target.closest('#critq')){e.preventDefault();critPress();}else if(e.target.closest('#qte')){e.preventDefault();qtePress();}},true);

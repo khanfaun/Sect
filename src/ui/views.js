@@ -44,7 +44,8 @@ function statusList(){const r=G.run,s=S(),w=W();const L=[];
   for(const q of r.quests)if(q.state==='open')L.push(['','Việc: '+q.text,'Còn '+durH(Math.max(0,q.due-w.t))]);
   {const w=tuWhy();if(w)L.push(['bad',isPham()&&!hasTp()?'Chưa có tâm pháp':'Tâm pháp chưa vận hành',w]);const c=tuCapWhy();if(c&&r.tv>=100)L.push(['bad','Tâm pháp tới giới hạn',c]);}
   const lk9=lkOn()&&lkTang()>=9&&r.tv<100;
-  if(canBreak())L.push(lk9?['good','Đạt Luyện Khí tầng '+lkTang(),'Đủ để đột phá Trúc Cơ ở nơi có động phủ. Tu tiếp lên tầng 10 tới 13 rồi mới đột phá thì được thêm lợi; tầng 13 còn được trời ban một tiên thiên khí vận.']:['good','Tu vi viên mãn','Tới nơi có động phủ để đột phá.']);
+  if(lkCapped())L.push(['','Bình cảnh tầng 12','Tầng 13 không phải ai cũng tu tới. Cần tâm pháp từ Huyền phẩm trở lên, hoặc một cơ duyên: đốn ngộ khi bế quan lâu, hay gặp linh tuyền ở nơi linh khí dồi dào.']);
+  if(canBreak())L.push(lk9?['good','Đạt Luyện Khí tầng '+lkTang(),'Đủ để đột phá Trúc Cơ ở nơi có động phủ. Tu tiếp lên tầng 10 tới 13 rồi mới đột phá thì được thêm lợi; tầng 13 (cần cơ duyên mới tu tới) còn được trời ban một tiên thiên khí vận.']:['good','Tu vi viên mãn','Tới nơi có động phủ để đột phá.']);
   else if((r.tv>=100||lk9)&&llOf()<llNeedBt())L.push(['bad','Lịch luyện chưa đủ',lk9?'Tu vi đủ tầng '+lkTang()+' nhưng lịch luyện chưa theo kịp, chưa đột phá được.':'Tu vi đã viên mãn nhưng lịch luyện mới '+Math.floor(llOf())+'%, cần đầy mới đột phá được.']);
   if(llEff(r.tv)<0.5)L.push(['bad','Bình cảnh','Tu vi bỏ xa lịch luyện: tu vi thực nhận giảm rất mạnh.']);
   return L;}
@@ -293,6 +294,7 @@ function bqBits(y,I){I=I||bqInfo();const sp=bqSpan(y);const left=Math.max(0,I.le
   const r=G.run;const P=tvPts(r.realm)/100;const e0=llEff(r.tv),e1=llEff(Math.min(100,r.tv+sp[1]/P));const cap=bqCapY();
   let st,sc;
   if(r.tv>=100){st='Tu vi đã viên mãn, bế quan thêm không tăng tu vi.';sc='';}
+  else if(lkCapped()){st='Tu vi chạm bình cảnh tầng 12, không tăng thêm. Bế quan lâu có khi đốn ngộ mà phá được.';sc='mid';}
   else if(y>0&&cap!=null&&y>cap){st=`Lịch luyện không đủ: bế quan quá ${durH(cap*HY)} thì gần như không tăng thêm tu vi.`;sc='bad';}
   else if(e0<0.5){st='Bình cảnh: tu vi đã bỏ lịch luyện quá xa nên bế quan rất chậm. Hãy ra ngoài đánh trận, đi đây đó.';sc='bad';}
   else if(e0<1||e1<0.9){st='Lịch luyện hơi mỏng: bế quan càng lâu càng chậm dần. Nên xen kẽ ra ngoài lịch luyện.';sc='mid';}

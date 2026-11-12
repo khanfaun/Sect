@@ -13,7 +13,7 @@ function pChar(){
       kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
       ttRow('Tiên thiên khí vận',(r.kv||[]).map(k=>TT_DEST[k]),'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.'),
       ttRow('Tiên thiên thể chất',(r.the||[]).map(ttPhysOf),'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.'),
-      kvRow('Tư chất',tcName(tc),'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
+      kvRow('Tư chất',`<span style="color:${PCOL[Math.max(0,4-TC_N.findIndex(x=>tc>=x[0]))]}">${tcName(tc)}</span>`,'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
       kvRow('Ngộ tính',RT('ngo',s.ngo,'muc'),'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',RT('tam',s.tam,'muc'),'Chống ảo cảnh, đột phá'),kvRow('Khí vận',RT('van',s.van,'muc'),'Chí mạng, may mắn'),
       kvRow('Nhân quả',karmaName(r.karma),'Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
     b+=sgBox('yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+Math.floor(r.tv)+'%'),
@@ -21,19 +21,19 @@ function pChar(){
       `<div class="hrow tvrow"${ta('Lịch luyện '+Math.floor(Math.min(100,llOf()))+'%\nCó được nhờ thực chiến (thắng nhiều, thua ít, đánh kẻ mạnh hơn được nhiều hơn), tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Cần đầy lịch luyện mới đột phá được.')}><span class="hn">${sib('Lịch luyện')}Lịch luyện</span>${bar(Math.min(100,llOf()),100,'ll')}<span class="hv">${Math.floor(Math.min(100,llOf()))}%</span></div>`,
       kvRow('Tốc độ tu',RT('bq',bqReal(),'toc'),'Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.'),
       kvRow('Thổ nạp',RT('thonap',thonapPct(),'toc'),'Thân thể tự hít thở linh khí: không cần bế quan, tu vi vẫn tự tăng theo thời gian, kể cả lúc đi đường hay bế quan.\nRất ít, chừng 5% tốc độ bế quan. Theo linh căn, tư chất, ngộ tính, công pháp, tâm pháp, trang bị, mệnh cách và linh khí nơi đang đứng.'),
-      kvRow('Hiệu suất tu',(()=>{const e=llEff(r.tv);const t=e>1.001?'Ngộ đạo':e>=0.99?'Đầy đủ':e>=0.7?'Hơi giảm':e>=0.35?'Giảm':e>=0.1?'Giảm mạnh':'Bình cảnh';return `<span class="${e<0.5?'bad':e>1.001?'good':''}">${t}</span>`;})(),'Phần tu vi thực nhận so với lẽ ra được nhận, do chênh lệch tu vi và lịch luyện.\nTu vi càng bỏ xa lịch luyện thì nhận càng ít, tới mức bình cảnh gần như đứng yên.\nLịch luyện cao hơn tu vi thì được ngộ đạo, nhận thêm một ít.'),
+      kvRow('Hiệu suất tu',(()=>{const e=llEff(r.tv);const t=e>1.001?'Ngộ đạo':e>=0.99?'Đầy đủ':e>=0.7?'Hơi giảm':e>=0.35?'Giảm':e>=0.1?'Giảm mạnh':'Bình cảnh';return `<span class="${e>1.001?'rt4':e>=0.99?'rt3':e>=0.7?'rt2':e>=0.35?'rt1':e>=0.1?'rt0':'bad'}">${t}</span>`;})(),'Phần tu vi thực nhận so với lẽ ra được nhận, do chênh lệch tu vi và lịch luyện.\nTu vi càng bỏ xa lịch luyện thì nhận càng ít, tới mức bình cảnh gần như đứng yên.\nLịch luyện cao hơn tu vi thì được ngộ đạo, nhận thêm một ít.'),
       kvRow('Đạo cơ',QNAME[qOf(r.dao||0)],'Đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'':'\nĐã đạt Thiên đạo')),
-      kvRow('Tâm ma',tmWord(r.tamma),'Tâm ma đầy thì phải đối mặt với chính mình',r.tamma>=60?'bad':''),
+      kvRow('Tâm ma',`<span class="${['rt3','rt3','rt2','bad','bad'][Math.min(4,Math.floor((r.tamma||0)/20))]}">${tmWord(r.tamma)}</span>`,'Tâm ma đầy thì phải đối mặt với chính mình',r.tamma>=60?'bad':''),
       kvRow('Thần thức',RT('than',s.than,'luc'),'Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
       kvRow('Niệm lực',RT('nl',s.nl,'luc'),'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm, tế pháp bảo, đòn thần thức đều tốn niệm lực.'),
-      kvRow('Đi lại',capS(moveText())+' · '+RT('walk',walkSpeed(),'toc'),'Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.')]);
+      kvRow('Thân pháp',RT('tp',s.tp,'toc'),'Nhanh nhẹn. Trong trận là tốc độ chạy trên nửa đầu thanh hành động; ngoài trận đi lại cũng nhanh hơn.')]);
     b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<span class="lc-c"${ta('Lực chiến: tính từ chỉ số chiến đấu và trang bị')}>Lực chiến ${RT('lc',lucChien(),'luc')}</span><small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl">${[
       kvRow('Khí huyết',RT('maxHp',s.maxHp,'ben'),'Khí huyết tối đa dày hay mỏng. Về 0 là chết'),kvRow('Linh lực',RT('maxMp',s.maxMp,'ben'),'Thi triển pháp thuật'),
       kvRow('Công vật lý',RT('atk',s.atk),'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',RT('matk',s.matk),'Dùng cho pháp thuật'),
       kvRow('Chí mạng',RT('crit',s.crit,'muc'),'Tỉ lệ chí mạng'),kvRow('ST chí mạng',RT('critDmg',s.critDmg),'Sát thương khi chí mạng'),
       kvRow('Chính xác',RT('cx',s.cx,'muc'),'Đối phương né khó hơn'),kvRow('Thủ',RT('def',s.def),'Giảm sát thương nhận vào'),
       kvRow('Hộ tâm',RT('hoTam',s.hoTam),'Giảm sát thương chí mạng nhận vào'),kvRow('Né',RT('ne',s.ne,'muc'),'Phải bấm Né đúng lúc mới phát huy hết'),
-      kvRow('Thân pháp',RT('tp',s.tp,'toc'),'Tốc độ chạy trên nửa đầu thanh hành động'),kvRow('Hồi phục',RT('hoi',s.hoi,'toc'),'Tốc độ trên nửa sau thanh hành động')].join('')}</div></details>`;
+      kvRow('Hồi phục',RT('hoi',s.hoi,'toc'),'Tốc độ trên nửa sau thanh hành động')].join('')}</div></details>`;
     b+='</div>';
   }
   if(tab==='bag')b+=bagTabHTML();
