@@ -2385,3 +2385,22 @@ function lkXk(){const X=lkXkState();if(!X||!X.ok)return false;const r=G.run;r.sg
 function btState(){const r=G.run;if(!r)return '';if(canBreak())return 'dp';const X=lkXkState();if(X&&X.ok)return 'xk';if((isPham()?r.tv>=100:btReadyTv())&&llOf()<llNeedBt())return 'bc';return '';}
 // phàm nhân: nút ghi "Xung kích Luyện Khí tầng 1"
 {const _pa39=placeActs;placeActs=function(n){const L=_pa39(n);if(isPham())for(const a of L)if(a.a==='bt'){a.l='Xung kích Luyện Khí tầng 1';a.tip='Dẫn khí nhập thể, bước vào Luyện Khí tầng 1.';}return L;};}
+
+// ================= ĐỢT 38: NGHIỀN ÉP, UY ÁP, TỐC CHIẾN =================
+// Lực chiến chênh từ 3 lần trở lên (hơn một đại cảnh giới) thì bên mạnh nghiền ép bên yếu:
+// bên yếu bị uy áp, đòn đánh chỉ sượt được chút da (1–2 khí huyết); bên mạnh ra đòn nặng gấp rưỡi hơn.
+const NE_T=3,NE_UP=2.5;
+function uLc(u){return u._lc||lcCalc(u);}
+function crushPair(a,b){if(!a||!b||a.kind==='kiep'||b.kind==='kiep')return 0;const x=uLc(a),y=uLc(b);return x>=y*NE_T?1:y>=x*NE_T?-1:0;}
+function crushD(u,t,d){const c=crushPair(u,t);if(c>0)return Math.round(d*NE_UP);if(c<0)return d>0?ri(1,2):d;return d;}
+function uyApSet(sc){const A=sc.units.filter(u=>u.side==='A'),Bs=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');
+  for(const u of sc.units){u._lc=lcCalc(u);if(u.st)u.st.uyap=0;}
+  for(const a of A)for(const b of Bs){const c=crushPair(a,b);if(c>0)b.st.uyap=1;if(c<0)a.st.uyap=1;}
+  const me=mainUnit(sc);
+  if(me&&me.st.uyap){const f=Bs.find(b=>crushPair(b,me)>0);clog(sc,`Uy áp của ${f.name} ập xuống như núi đè. Linh lực trong người ngươi trì trệ hẳn, ra tay chẳng khác gì gãi ngứa.`,'en');}
+  const low=Bs.filter(b=>b.st.uyap);if(low.length)clog(sc,`Uy áp của ngươi tỏa ra, ${low.map(b=>b.name).join(', ')} run rẩy, khí thế tan nát.`,'me');}
+{const _cs38=combatStep;combatStep=function(dt){const sc=G.run&&G.run.scene;if(sc&&sc.type==='combat'&&!sc.prep&&!sc._ua&&!sc.kiep){sc._ua=1;uyApSet(sc);}return _cs38(dt);};}
+// so sánh một kẻ địch với nhân vật chính (màn chuẩn bị)
+function foeCmp(f,meLc){const q=lcCalc(f)/Math.max(1,meLc);return q>=NE_T?{t:'Nghiền ép',c:'ne'}:q>=1.35?{t:'Mạnh hơn',c:'rt1'}:q>0.75?{t:'Vừa sức',c:'rt2'}:{t:'Yếu hơn',c:'rt3'};}
+function meCrushes(sc,meLc){const Bs=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');return Bs.length&&Bs.every(b=>meLc>=lcCalc(b)*NE_T);}
+function crushAny(sc,meLc){const Bs=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');return Bs.some(b=>{const y=lcCalc(b);return meLc>=y*NE_T||y>=meLc*NE_T;});}

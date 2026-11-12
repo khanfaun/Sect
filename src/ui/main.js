@@ -97,7 +97,7 @@ const ACT={
   leave:()=>leavePlace(),
   pass:a=>passAct(a),
   hud:()=>{if(G.run&&G.run.scene)UI.hudScene=!UI.hudScene;else UI.hudOpen=!UI.hudOpen;},
-  cbGo:()=>prepGo(),cbOpen:()=>{UI.cbOpen=!UI.cbOpen;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
+  cbGo:()=>prepGo(),cbQuick:()=>quickFight(),cbOpen:()=>{UI.cbOpen=!UI.cbOpen;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
   hudBq:()=>{G.bqRoom=false;openBq();},
   evMin:()=>{UI.evMin=true;},
   evBack:()=>{UI.evMin=false;},
