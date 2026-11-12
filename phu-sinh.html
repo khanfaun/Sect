@@ -1047,6 +1047,16 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .hud-clk3 .ck-y{font-family:var(--disp);font-size:1.35em;font-weight:500;color:var(--ink);letter-spacing:.02em}
 .hud-clk3 span{font-size:.78em;color:var(--ink3);letter-spacing:.04em}
 .burnpop .bp-o{padding:6px 0 8px;border-bottom:1px dotted var(--line)}.burnpop .bp-o:last-of-type{border-bottom:0}.burnpop .bp-o>b{display:block;margin-bottom:2px}
+/* túi đồ (gọn hơn): ô trang bị 42px; bên phải mỗi hàng chia 5 cột đều nhau nên không bao giờ rớt dòng */
+.eqwrap{gap:8px}
+.eqwrap .dgrid{grid-template-columns:repeat(3,42px)!important;gap:4px!important;padding:6px!important}
+.eqwrap .dgrid .eqc{width:42px;height:42px}
+.eqwrap .ddpair .ddrow,.eqwrap .ddpair .ddrow.five,.eqwrap .ddpair .ddrow.three{display:grid!important;grid-template-columns:repeat(5,minmax(0,34px));gap:3px!important;flex-wrap:nowrap!important}
+.eqwrap .ddpair .eqc{width:100%!important;height:auto!important;aspect-ratio:1;max-width:34px}
+.eqwrap .ddpair .eqc .sli{width:14px;height:14px}
+.eqwrap .ddpair .sgrp{font-size:.74em;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;margin:.15em 0 .3em}
+.eqwrap .ddpair .sgrp small{font-size:.9em}
+@media (min-width:600px){.eqwrap .dgrid{grid-template-columns:repeat(3,48px)!important}.eqwrap .dgrid .eqc{width:48px;height:48px}.eqwrap .ddpair .ddrow,.eqwrap .ddpair .ddrow.five,.eqwrap .ddpair .ddrow.three{grid-template-columns:repeat(5,40px)}.eqwrap .ddpair .eqc{max-width:40px}}
 
 </style>
 </head>
