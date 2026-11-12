@@ -547,9 +547,9 @@ PQ[0]=PHAM[0];PQ[1]=PHAM[1];PQ[2]=PHAM[2];
 RELIC_K.push({k:'non',b:['Quan','Đấu Lạp','Ngọc Quan'],fx:{tam:2,defP:6}},{k:'gang',b:['Hộ Thủ','Quyền Sáo','Thủ Giáp'],fx:{atkP:5,crit:2}},{k:'dai',b:['Đai','Ngọc Đái','Yêu Đái'],fx:{hpP:6,tp:1}},
   {k:'hoa',b:['Hỏa Chủng','Địa Tâm Hỏa','Thanh Liên Hỏa'],fx:{craftP:6}},{k:'tran',b:['Trận Bàn','Trận Kỳ','Tụ Linh Trận Đồ'],fx:{bqP:8,bqSafe:15}});
 FXT.craftP='Luyện chế dễ thành hơn {v}%';FXT.bqSafe='Bế quan ít bị quấy nhiễu hơn {v}%';
-// ô trang bị 3×3; trang sức chỉ một ô (nhẫn, sau này thêm vòng, khuyên…); pháp bảo ra mục riêng 3 ô, mở ở Kết Đan, Nguyên Anh, Hóa Thần
+// ô trang bị 3×3; trang sức chỉ một ô (nhẫn, sau này thêm vòng, khuyên…); pháp bảo ra mục riêng 3 ô, mở ở Trúc Cơ, Nguyên Anh, Hóa Thần
 const SLOTS=[['vukhi','Vũ khí'],['non','Nón'],['boi','Ngọc bội'],['gang','Găng'],['giap','Giáp'],['choang','Áo choàng'],['nhan1','Trang sức'],['dai','Đai lưng'],['giay','Giày']];
-const PB_SLOTS=['phapbao1','phapbao2','phapbao3'],PB_REQ=[2,3,4];
+const PB_SLOTS=['phapbao1','phapbao2','phapbao3'],PB_REQ=[1,3,4];
 function pbOpen(){const r=G.run;return PB_REQ.filter(q=>(r.realm||0)>=q&&!(typeof isPham==='function'&&isPham())).length;}
 const SPEC=[['tuivat','Trữ vật'],['phuongtien','Phương tiện'],['hoa','Hỏa chủng'],['dinh','Lô đỉnh'],['tran','Trận pháp']];
 const KSLOT={kiem:'vukhi',dao:'vukhi',phap:'vukhi',but:'vukhi',giap:'giap',bao:'choang',tram:'non',non:'non',ngoa:'giay',hoan:'gang',gang:'gang',dai:'dai',nhan:'nhan',boi:'boi',hotam:'boi',tui:'tuivat',dinh:'dinh',hoa:'hoa',tran:'tran'};
@@ -557,7 +557,7 @@ const SLOT_N={vukhi:'Vũ khí',non:'Nón',boi:'Ngọc bội',gang:'Găng',giap:'
 function slotOf(rel){return KSLOT[rel.k]||'phapbao';}
 function slotsFor(rel){const s=slotOf(rel);return s==='nhan'?['nhan1']:s==='phapbao'?PB_SLOTS.slice(0,pbOpen()):[s];}
 function eqOf(){const r=G.run;if(!r.eq)r.eq={};if(!r.dd)r.dd=[];return r.eq;}
-function equip(i){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;const S0=slotsFor(rel);if(!S0.length){if(typeof note==='function')note('Ô pháp bảo mở khi đạt Kết Đan.');return;}const s=S0.find(x=>!E[x])||S0[0];
+function equip(i){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;const S0=slotsFor(rel);if(!S0.length){if(typeof note==='function')note('Ô pháp bảo mở khi đạt Trúc Cơ.');return;}const s=S0.find(x=>!E[x])||S0[0];
   r.relics.splice(i,1);if(E[s]){E[s].seen=1;r.relics.push(E[s]);}rel.seen=1;E[s]=rel;clampHp();saveSoon();}
 function equipTo(i,slot){const r=G.run,E=eqOf();const rel=r.relics[i];if(!rel)return;if(!slot||!slotsFor(rel).includes(slot))return equip(i);
   r.relics.splice(i,1);if(E[slot]){E[slot].seen=1;r.relics.push(E[slot]);}rel.seen=1;E[slot]=rel;clampHp();saveSoon();}
