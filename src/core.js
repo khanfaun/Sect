@@ -651,7 +651,7 @@ function newRun(c){
   if(og.pill2) r.pills.push({id:og.pill2,q:0});
   const s=S();r.hp=s.maxHp;r.mp=s.maxMp;
   G.meta.nlife++;
-  log(`Kiếp thứ ${r.kiep}: ${r.ten}, ${og.n.toLowerCase()}, quê ở ${r.que}.`);
+  log(`${kiepName(r.kiep)}: ${r.ten}, ${og.n.toLowerCase()}, quê ở ${r.que}.`);
   bio(T(`${r.ten} ${og.bio}.`,{que:r.que,quoc:G.meta.world.quoc}));
   for(const L of (G.meta.world.legacy||[]))if(L.feud&&!L.used&&chance(.5)){L.used=1;r.seeds.push({t:'oan',ten:L.ten,hn:L.hn,d:L.d+' (kiếp trước, khi ngươi còn là '+L.who+')',r:0,at:G.meta.world.t-60*HD});}
   G.birth=null;G.screen='map';G.meta.world.lastBirth=c.at;

@@ -1084,6 +1084,9 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .kr .rt0,.kv .rt0{color:#8d8672}.kr .rt1,.kv .rt1{color:#a5835a}.kr .rt2,.kv .rt2{color:var(--ink)}.kr .rt3,.kv .rt3{color:#3f8a4a}.kr .rt4,.kv .rt4{color:#b8902a;font-weight:600}.kr span.bad{color:#b8402f}
 .basegrid .sic{display:none}
 
+/* cụm tốc độ trận: góc trên bên phải tranh trận */
+.cb-art{position:relative}.cspd.cspd-art{position:absolute;top:18px;right:18px;z-index:4}.cspd-art button{background:rgba(250,245,232,.85)}.cspd-art button.on{background:var(--ink)}
+
 </style>
 </head>
 <body>
@@ -1755,7 +1758,7 @@ function newRun(c){
   if(og.pill2) r.pills.push({id:og.pill2,q:0});
   const s=S();r.hp=s.maxHp;r.mp=s.maxMp;
   G.meta.nlife++;
-  log(`Kiếp thứ ${r.kiep}: ${r.ten}, ${og.n.toLowerCase()}, quê ở ${r.que}.`);
+  log(`${kiepName(r.kiep)}: ${r.ten}, ${og.n.toLowerCase()}, quê ở ${r.que}.`);
   bio(T(`${r.ten} ${og.bio}.`,{que:r.que,quoc:G.meta.world.quoc}));
   for(const L of (G.meta.world.legacy||[]))if(L.feud&&!L.used&&chance(.5)){L.used=1;r.seeds.push({t:'oan',ten:L.ten,hn:L.hn,d:L.d+' (kiếp trước, khi ngươi còn là '+L.who+')',r:0,at:G.meta.world.t-60*HD});}
   G.birth=null;G.screen='map';G.meta.world.lastBirth=c.at;
@@ -6654,7 +6657,7 @@ function hitPh(r,X){const P=r<0.04?['{X} chỉ khẽ lắc người, chẳng h�
 const LK_TH=[0,6.25,12.5,18.75,25,31.25,37.5,43.75,50,57.5,67.5,80,100],LK_MUL=0.5;
 function lkOn(){const r=G.run;return !!r&&r.realm===0&&!r.pham;}
 function lkTang(tv){if(tv==null)tv=G.run.tv;let n=0;for(const t of LK_TH)if(tv>=t-1e-6)n++;return n;}
-function llNeedBt(){return lkOn()?Math.min(LL_BT,G.run.tv):LL_BT;}
+function llNeedBt(){return lkOn()?LK_TH[8]:LL_BT;} // Luyện Khí: từ tầng 9 trở lên, đủ lịch luyện của tầng 9 là đột phá được bất cứ lúc nào
 {const _tp33=tvPts;tvPts=function(realm){const r=G.run;return realm===0&&r&&r.realm===0&&!r.pham?_tp33(0)/LK_MUL:_tp33(realm);};}
 {const _br33=bqReal;bqReal=function(){return _br33()*(lkOn()?LK_MUL:1);};}
 {const _tn33=thonapPct;thonapPct=function(){return _tn33()*(lkOn()?LK_MUL:1);};}
@@ -6720,6 +6723,9 @@ function lk13Unlock(why,txt){const r=G.run;if(!r||r.lk13)return;r.lk13=1;log('B�
   const res=_pa34(a);
   if(cap&&G.run&&n&&!G.run.lk13){const lv=lkOf(n);if(chance(lv>=3?0.12:lv>=2?0.04:0))lk13Unlock('gặp linh tuyền tẩy tủy ở '+n.name,'Sâu trong '+n.name+' có một mạch linh tuyền. Ngâm mình ba ngày ba đêm, kinh mạch được gột rửa: từ nay có thể tu lên tầng 13.');}
   return res;};}
+
+// tên kiếp: kiếp đầu tiên, kiếp thứ 2…
+function kiepName(k){return +k===1?'Kiếp đầu tiên':'Kiếp thứ '+k;}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -7609,7 +7615,7 @@ function choiceExtra(c){let x='';const r=G.run;
   if(c.fight)x+=`<span class="cx"${ta('Sẽ phải giao chiến'+(c.fight.spar?' (luận võ, thua không chết)':''))}>giao chiến</span>`;
   return x;}
 function vRegionIntro(sc){const r=G.run;const og=ORIGIN.find(o=>o.id===r.origin);
-  return `<div class="intro" data-act="regionGo"><div class="in-b"><small>Kiếp thứ ${r.kiep}</small><h1>${esc(r.ten)}</h1><p class="in-o">${esc(og.n)} · quê ở ${esc(r.que)}</p><p class="in-t">${esc(sc.text)}</p>${sc.sub?`<p class="hint">${esc(sc.sub)}</p>`:''}<p class="hint tap">Chạm để lên đường</p></div></div>`;}
+  return `<div class="intro" data-act="regionGo"><div class="in-b"><small>${kiepName(r.kiep)}</small><h1>${esc(r.ten)}</h1><p class="in-o">${esc(og.n)} · quê ở ${esc(r.que)}</p><p class="in-t">${esc(sc.text)}</p>${sc.sub?`<p class="hint">${esc(sc.sub)}</p>`:''}<p class="hint tap">Chạm để lên đường</p></div></div>`;}
 function vEvent(sc){
   const r=G.run;const e=EVMAP[sc.id];const st=sc.story;const qi=st.findIndex(x=>typeof x==='object');
   let b=qi<0?`<div class="story">${storyHTML(st)}</div>`:`<div class="story">${storyHTML(st.slice(0,qi))}</div><div class="dlg" id="dlg">${st.slice(qi).map((x,i)=>typeof x==='object'?`<p class="dq">› ${esc(x.q)}</p>`:`<p class="${qi+i>=UI.lastStory?'new':''}">${txt(x)}</p>`).join('')}</div>`;
@@ -7940,10 +7946,10 @@ function vCombat(sc){
   const n=curNode();
   const party=al.filter(u=>!u.isMain);const fc=foes.length>1;
   let h=`<section class="cb">${trackHTML(sc)}<div class="cb-foes${fc?' many':''}">${foes.map(u=>unitCard(sc,u,pickMode,fc)).join('')}</div>
-   <div class="cb-art" id="cbArt" data-nf="${foes.length}">${sceneCv('cb'+r.at+sc.en.n,r.region,n?n.type:'',"",figs.join(','))}${sc.pt?`<div class="pt-fig el-${sc.pt.el}"${ta(sc.pt.n)}>${ptFigSVG()}<b>${esc(sc.pt.n)}</b></div>`:''}</div>
+   <div class="cb-art" id="cbArt" data-nf="${foes.length}"><span class="cspd cspd-art">${[1,2,3].map(n=>`<button class="${(CFG.cspeed||1)===n?'on':''}" data-act="cspd" data-arg="${n}"${ta('Tốc độ trận ×'+n)}>×${n}</button>`).join('')}</span>${sceneCv('cb'+r.at+sc.en.n,r.region,n?n.type:'',"",figs.join(','))}${sc.pt?`<div class="pt-fig el-${sc.pt.el}"${ta(sc.pt.n)}>${ptFigSVG()}<b>${esc(sc.pt.n)}</b></div>`:''}</div>
    <div class="cb-ally">${meCard(sc,me)}${party.length?`<div class="cb-party">${party.map(u=>unitCard(sc,u,false,true)).join('')}</div>`:''}</div>`;
   const lg=sc.log.slice(-3);
-  h+=`<div class="clog" data-act="clog"${ta('Chạm để xem toàn bộ diễn biến')}><span class="cspd">${[1,2,3].map(n=>`<button class="${(CFG.cspeed||1)===n?'on':''}" data-act="cspd" data-arg="${n}"${ta('Tốc độ trận ×'+n)}>×${n}</button>`).join('')}</span>${lg.map((l,i)=>`<p class="${l.c?'lg-'+l.c:''} ${i<lg.length-1?'old':''}">${esc(l.t)}</p>`).join('')}</div>`;
+  h+=`<div class="clog" data-act="clog"${ta('Chạm để xem toàn bộ diễn biến')}>${lg.map((l,i)=>`<p class="${l.c?'lg-'+l.c:''} ${i<lg.length-1?'old':''}">${esc(l.t)}</p>`).join('')}</div>`;
   if(!sc.done&&injured()&&!sc.spar&&!sc.kiep)h+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   if(sc.done){
     const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong thiên kiếp':'Ngươi đã ngã xuống'}[sc.over];
@@ -8527,7 +8533,7 @@ function vTitle(){
   if(has){mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="resume">Tiếp tục kiếp ${G.run.kiep}</button><p class="hint">${esc(G.run.ten)} · ${esc(realmLabel())} · ${Math.floor(G.run.age)} tuổi</p></div>`;}
   else if(last){
     const L=last.lines.slice(-4);const N=[`Kiếp trước, có một người tên ${last.ten}.`].concat(L,[`Hồn phách qua cầu Nại Hà. Bát canh Mạnh Bà xóa đi tên họ, xóa đi ân oán, chỉ ${M.pts} điểm luân hồi còn khắc trong chân linh.`]);
-    mid=`<div class="narr${UI.narrSkip?' skip':''}" data-act="narrSkip">${N.map((t,i)=>`<p style="animation-delay:${i*1.1}s">${txt(t)}</p>`).join('')}<p class="k" style="animation-delay:${N.length*1.1}s">Kiếp thứ ${M.nlife+1} bắt đầu.</p></div>
+    mid=`<div class="narr${UI.narrSkip?' skip':''}" data-act="narrSkip">${N.map((t,i)=>`<p style="animation-delay:${i*1.1}s">${txt(t)}</p>`).join('')}<p class="k" style="animation-delay:${N.length*1.1}s">${kiepName(M.nlife+1)} bắt đầu.</p></div>
      <div class="t-btn" style="animation-delay:${UI.narrSkip?0:N.length*1.1+0.6}s"><button class="btn pri big" data-act="birth">Luân hồi</button><button class="btn" data-act="screen" data-arg="meta">Lên Bến Vong Xuyên · ${M.pts} điểm</button><p class="hint">Đã trải ${M.nlife} kiếp</p></div>`;}
   else mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="birth">Nhập thế</button><p class="hint">Thế gian không chờ ai. Chết rồi lại sinh, mang theo chút gì còn khắc trong chân linh.</p></div>`;
   return `<div class="title">${ASSET.title?`<img class="t-art t-ink" src="${ASSET.title}" alt="">`:sceneCv('phusinh-title'+M.nlife,Math.min(4,last?last._mr||0:0),'song','t-art')}<div class="t-seal">Phù</div><h1>Phù Sinh</h1>${mid}
@@ -8555,14 +8561,14 @@ function vMeta(){
   let b=`<p class="m-in">Lão Đò neo thuyền bên bến, chờ ngươi bày ra những gì còn mang theo được.</p>`+tabsHTML('meta',[['upg','Khắc vào chân linh'],['lives','Các kiếp'],['lore','Điển tích'],['ach','Thành tựu']],tab);
   if(tab==='upg'){b+='<div class="rows">';for(const u of UPG){const lv=M.upg[u.id]||0;const mx=lv>=u.max;const c=mx?0:u.c[lv];
     b+=`<div class="row"><span class="r-t"><b>${esc(u.n)}</b><small>${esc(u.d)}</small><span class="pips">${'●'.repeat(lv)}${'○'.repeat(u.max-lv)}</span></span>${mx?'<span class="r-x">đã đủ</span>':`<button class="btn sm" data-act="upg" data-arg="${u.id}"${M.pts<c?' disabled':''}>Khắc · ${c} điểm</button>`}</div>`;}b+='</div>';}
-  if(tab==='lives')b+=M.lives.length?M.lives.map(L=>`<details class="life"><summary><b>${esc(L.ten)}</b><small>Kiếp ${L.k} · ${L.tuoi} tuổi · ${esc(L.realm)}</small></summary><p class="ep">${esc(L.ep)}</p>${L.lines.map(l=>`<p>${esc(l)}</p>`).join('')}</details>`).join(''):'<p class="empty">Chưa có kiếp nào kết thúc.</p>';
+  if(tab==='lives')b+=M.lives.length?M.lives.map(L=>`<details class="life"><summary><b>${esc(L.ten)}</b><small>${kiepName(L.k)} · ${L.tuoi} tuổi · ${esc(L.realm)}</small></summary><p class="ep">${esc(L.ep)}</p>${L.lines.map(l=>`<p>${esc(l)}</p>`).join('')}</details>`).join(''):'<p class="empty">Chưa có kiếp nào kết thúc.</p>';
   if(tab==='lore'){const ks=Object.keys(LORE);b+=`<p class="hint">Đã biết ${M.lore.length}/${ks.length}</p>`+ks.map(k=>M.lore.includes(k)?`<details class="life"><summary><b>${esc(LORE[k].n)}</b></summary><p>${esc(LORE[k].t)}</p></details>`:`<div class="life lock">chưa biết</div>`).join('');}
   if(tab==='ach')b+=`<p class="hint">Đạt ${M.ach.length}/${ACH.length}</p><div class="rows">`+ACH.map(a=>`<div class="row${M.ach.includes(a.id)?' taken':' dim'}"><span class="r-i">${M.ach.includes(a.id)?ic('check'):''}</span><span class="r-t"><b>${esc(a.n)}</b><small>${esc(a.d)}</small></span></div>`).join('')+'</div>';
   return `<div class="meta">${sceneCv('ben-vong-xuyen',3,'song','m-art','nhan:0.62:0.42:1:laodo')}${win('Bến Vong Xuyên',b,{cls:'tall',noClose:true,extra:`<span class="m-pts">${M.pts} điểm luân hồi</span>`,foot:`<span class="grow"></span><button class="btn pri" data-act="screen" data-arg="title">Rời bến</button>`})}</div>`;
 }
 // ---------- trang mở đầu kiếp: tiêu đề, từng dòng chuyện hiện dần, một nút ----------
 function vLife(){const r=G.run;const L=r.story||[];const d=i=>`style="animation-delay:${(UI.lifeAll?0:i*LIFE_D+0.9).toFixed(2)}s"`;
-  return `<div class="lsx${UI.lifeAll?' all':''}" data-act="lifeAll"><div class="lsx-b"><small class="lsx-k" ${d(-0.5)}>Kiếp thứ ${r.kiep}</small><h1 class="lsx-h" ${d(-0.3)}>${esc(r.ten)}</h1>
+  return `<div class="lsx${UI.lifeAll?' all':''}" data-act="lifeAll"><div class="lsx-b"><small class="lsx-k" ${d(-0.5)}>${kiepName(r.kiep)}</small><h1 class="lsx-h" ${d(-0.3)}>${esc(r.ten)}</h1>
    <div class="lsx-t">${L.map((x,i)=>`<p ${d(i)}>${esc(x)}</p>`).join('')}</div>
    <div class="lsx-go" ${d(L.length+0.2)}><button class="btn pri big" data-act="lifeGo">Lên đường</button></div></div></div>`;}
 

@@ -119,7 +119,7 @@ function choiceExtra(c){let x='';const r=G.run;
   if(c.fight)x+=`<span class="cx"${ta('Sẽ phải giao chiến'+(c.fight.spar?' (luận võ, thua không chết)':''))}>giao chiến</span>`;
   return x;}
 function vRegionIntro(sc){const r=G.run;const og=ORIGIN.find(o=>o.id===r.origin);
-  return `<div class="intro" data-act="regionGo"><div class="in-b"><small>Kiếp thứ ${r.kiep}</small><h1>${esc(r.ten)}</h1><p class="in-o">${esc(og.n)} · quê ở ${esc(r.que)}</p><p class="in-t">${esc(sc.text)}</p>${sc.sub?`<p class="hint">${esc(sc.sub)}</p>`:''}<p class="hint tap">Chạm để lên đường</p></div></div>`;}
+  return `<div class="intro" data-act="regionGo"><div class="in-b"><small>${kiepName(r.kiep)}</small><h1>${esc(r.ten)}</h1><p class="in-o">${esc(og.n)} · quê ở ${esc(r.que)}</p><p class="in-t">${esc(sc.text)}</p>${sc.sub?`<p class="hint">${esc(sc.sub)}</p>`:''}<p class="hint tap">Chạm để lên đường</p></div></div>`;}
 function vEvent(sc){
   const r=G.run;const e=EVMAP[sc.id];const st=sc.story;const qi=st.findIndex(x=>typeof x==='object');
   let b=qi<0?`<div class="story">${storyHTML(st)}</div>`:`<div class="story">${storyHTML(st.slice(0,qi))}</div><div class="dlg" id="dlg">${st.slice(qi).map((x,i)=>typeof x==='object'?`<p class="dq">› ${esc(x.q)}</p>`:`<p class="${qi+i>=UI.lastStory?'new':''}">${txt(x)}</p>`).join('')}</div>`;

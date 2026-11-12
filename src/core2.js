@@ -2241,7 +2241,7 @@ function hitPh(r,X){const P=r<0.04?['{X} chỉ khẽ lắc người, chẳng h�
 const LK_TH=[0,6.25,12.5,18.75,25,31.25,37.5,43.75,50,57.5,67.5,80,100],LK_MUL=0.5;
 function lkOn(){const r=G.run;return !!r&&r.realm===0&&!r.pham;}
 function lkTang(tv){if(tv==null)tv=G.run.tv;let n=0;for(const t of LK_TH)if(tv>=t-1e-6)n++;return n;}
-function llNeedBt(){return lkOn()?Math.min(LL_BT,G.run.tv):LL_BT;}
+function llNeedBt(){return lkOn()?LK_TH[8]:LL_BT;} // Luyện Khí: từ tầng 9 trở lên, đủ lịch luyện của tầng 9 là đột phá được bất cứ lúc nào
 {const _tp33=tvPts;tvPts=function(realm){const r=G.run;return realm===0&&r&&r.realm===0&&!r.pham?_tp33(0)/LK_MUL:_tp33(realm);};}
 {const _br33=bqReal;bqReal=function(){return _br33()*(lkOn()?LK_MUL:1);};}
 {const _tn33=thonapPct;thonapPct=function(){return _tn33()*(lkOn()?LK_MUL:1);};}
@@ -2307,3 +2307,6 @@ function lk13Unlock(why,txt){const r=G.run;if(!r||r.lk13)return;r.lk13=1;log('B�
   const res=_pa34(a);
   if(cap&&G.run&&n&&!G.run.lk13){const lv=lkOf(n);if(chance(lv>=3?0.12:lv>=2?0.04:0))lk13Unlock('gặp linh tuyền tẩy tủy ở '+n.name,'Sâu trong '+n.name+' có một mạch linh tuyền. Ngâm mình ba ngày ba đêm, kinh mạch được gột rửa: từ nay có thể tu lên tầng 13.');}
   return res;};}
+
+// tên kiếp: kiếp đầu tiên, kiếp thứ 2…
+function kiepName(k){return +k===1?'Kiếp đầu tiên':'Kiếp thứ '+k;}
