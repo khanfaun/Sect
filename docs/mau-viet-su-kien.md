@@ -19,6 +19,35 @@ Người chơi là một tu sĩ đi từ thấp lên cao qua 5 vùng (mỗi vùn
 Cảnh giới: Luyện Khí → Trúc Cơ → Kết Đan → Nguyên Anh → Hóa Thần → Độ Kiếp.
 Nhân quả (thiện/ác), tâm ma, tu vi, linh thạch, thọ nguyên là những thứ người chơi quan tâm.
 
+## 1b. QUY TẮC VÀNG: KHÔNG TỰ ĐẶT TÊN RIÊNG
+
+Tên người, tên tông môn, tên địa danh, tên thiên kiêu, tên quốc gia, tên đan dược đột phá… **do game tự sinh**. Bạn **tuyệt đối không viết tên riêng cụ thể** (không viết "Lý Thanh Vân", "Thiên Kiếm Tông", "trấn Hắc Thủy"…). Mọi chỗ cần tên phải dùng chữ thay thế ở mục 3. Chỉ được dùng danh từ chung: "lão thợ rèn", "một tiểu thôn ven sông", "vị trưởng lão áo xám", "con gái nhà họ" …
+
+## 1c. Quy mô sự kiện – ghi rõ mỗi sự kiện thuộc loại nào
+
+| Loại | Ví dụ | Game hiện hỗ trợ thế nào |
+|---|---|---|
+| **Thường ngày** | gặp người, nhặt đồ, ngộ đạo | Sự kiện khi thăm dò / trên đường |
+| **Tông môn / thế lực** | tuyển đồ, đại bỉ, tranh chấp hai phái, bị vu oan trong tông | Sự kiện ở sơn môn; có thể đặt "chỉ khi ngươi đã bái nhập tông môn" / "chưa bái nhập" |
+| **Thiên kiêu** | gặp, thách đấu, kết bạn, cướp cơ duyên của nhau | Dùng `{$rv}`; hoặc sự kiện "gặp thiên kiêu trên bản đồ"; có thể tăng/giảm thiện cảm |
+| **NPC / gia đình** | cha con thợ săn, một nhà bị yêu quấy, lão chưởng quỹ | Nhân vật A, B, C… do game sinh tên. Kết ân / kết oán để sau này họ quay lại |
+| **Địa điểm** | miếu hoang, giếng cổ, ngôi làng bị tàn phá | Gắn với loại địa hình; dùng `{$pl}`, `{$canh}` |
+| **Bí cảnh mở cửa** | | Dị tượng trên bản đồ (đã có loại này) – viết thêm sự kiện bên trong |
+| **Bảo vật xuất thế / sao rơi** | | Dị tượng trên bản đồ (đã có) |
+| **Hội đấu giá** | | Dị tượng trên bản đồ (đã có) |
+| **Thú triều** | | Thú triều trên bản đồ (đã có) |
+| **Hạn giờ** | đưa thư trước 10 ngày, diệt yêu ở nơi X | Bảng việc ở thôn trấn: chỉ cần viết **một câu nhiệm vụ**, nơi đến dùng `{$pl}` |
+| **Cấp thế giới / thiên tai** (hạn hán, nạn chuột, ôn dịch, lũ, động đất, nhật thực, thiên tượng) | | Viết thành **(1) tin đồn** lan khắp nơi + **(2) sự kiện tại chỗ** khi ngươi đi ngang vùng bị nạn. (Game chưa có cơ chế "thiên tai kéo dài nhiều tháng, đổi giá cả cả vùng" – nếu muốn, báo người làm game.) |
+
+## 1d. Ngoài sự kiện, còn có thể viết TIN ĐỒN (1–2 câu)
+
+Tin đồn hiện ra trong nhật ký, tạo cảm giác thế giới đang sống. Các nhóm:
+- **Thiên kiêu tiến bộ** – dùng `{$a}` (tên thiên kiêu), `{$s}` (tông môn của họ), `{$cg}` (cảnh giới), `{$pl}`.
+- **Thiên kiêu làm ác** · **Chuyện tình** (`{$a}` và `{$b}`) · **Thiên kiêu tử nạn**.
+- **Chuyện thiên hạ** – tông môn mở cửa, đại bỉ, đấu giá, thiên tai, dị tượng: `{$s}`, `{$s2}`, `{$pl}`, `{$dan}`.
+
+Ví dụ thật: *“Tin dữ: {$a} tử trận ở {$pl}, kiếm gãy làm ba.”* · *“{$s} mở sơn môn thu nhận đệ tử, thiếu niên khắp nơi nô nức kéo về.”*
+
 ## 2. Văn phong (BẮT BUỘC)
 
 - Gọi người chơi là **"ngươi"**. Kể ở ngôi thứ hai, thì hiện tại, câu ngắn.
@@ -51,6 +80,14 @@ Nhân quả (thiện/ác), tâm ma, tu vi, linh thạch, thọ nguyên là nhữ
 | `{$canh}` | một câu tả cảnh nơi đang đứng (đặt đầu đoạn) |
 | `{$en}` | (chỉ dùng cho sự kiện gặp đoàn người/nhân vật trên bản đồ) tên đoàn/người đó |
 | `{$rv}` | tên một thiên kiêu đối thủ |
+| `{$sect2}` | tên một tông môn khác (khi cần hai phe) · `{$sectP}` chùa/phật môn |
+| `{$lao}` | họ tên một lão tiền bối (người được nhắc tới, không xuất hiện) |
+| `{$who}` | tên một người bất kỳ được nhắc tới |
+| `{$nick}` | biệt hiệu ma đầu (vd. kiểu "Huyết Thủ") |
+| `{$quoc}` | tên quốc gia phàm nhân · `{$que}` quê nhà của ngươi · `{$reg}` tên vùng hiện tại |
+| `{$dan}` | tên loại đan dùng để đột phá cảnh giới hiện tại |
+
+Cần nhiều nhân vật trong một sự kiện thì dùng A, B, C…: `{$a.ten}`, `{$b.ten}`, `{$c.ten}` (vd. A = cha, B = con gái). Ghi rõ quan hệ trong dòng "Nhân vật".
 
 **Loại nhân vật A/B được phép:** lão nhân, nhà sư, đạo sĩ, ma tu, thương nhân, trẻ con, phàm nhân, tu sĩ trẻ, nữ, nam.
 
@@ -82,6 +119,8 @@ Khí huyết ±% · Linh lực ±% · Tu vi + (nhỏ 2–5, vừa 6–10) · Lin
 
 ```
 ### SỰ KIỆN: <Tên ngắn, 2–5 chữ>
+Quy mô: <thường ngày | tông môn | thiên kiêu | NPC/gia đình | địa điểm | bí cảnh | bảo vật xuất thế | đấu giá | thú triều | thiên tai/thế giới>
+Kèm tin đồn: <không | 1–2 câu tin đồn đi kèm, nếu sự kiện lớn>
 Nơi: <A: rừng sâu, núi non | B: trên đường | C: thương đội …>
 Vùng: <0,1,2 | mọi vùng>
 Điều kiện thêm: <không | ban đêm | mùa đông | …>
@@ -103,6 +142,18 @@ Lựa chọn 1: <biểu tượng emoji> <nhãn ngắn>
 
 Lựa chọn 2: ...
 Lựa chọn 3 (thường là bỏ đi / không xen vào): ...
+```
+
+**Mẫu tin đồn:**
+```
+### TIN ĐỒN – <thiên kiêu tiến bộ | thiên kiêu làm ác | chuyện tình | tử nạn | chuyện thiên hạ>
+- <1–2 câu, dùng {$a} {$b} {$s} {$s2} {$pl} {$cg} {$dan}>
+```
+
+**Mẫu việc hạn giờ (bảng việc ở thôn trấn):**
+```
+### VIỆC – <diệt (phải đánh) | đưa (mang đồ tới)>
+- <một câu, nơi đến viết {$pl}, người nhờ viết {$a}>
 ```
 
 Mỗi sự kiện có 2–4 lựa chọn. Luôn có một lựa chọn "bỏ đi" an toàn.
