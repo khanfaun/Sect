@@ -47,11 +47,38 @@ Ví dụ giọng văn trong game:
 - Việc có hạn chót: người nhờ đưa thư, diệt yêu trong bao nhiêu ngày.
 - Chỉ xảy ra ban đêm, hoặc vào một mùa.
 
+## Dài ngắn đều có – CHUỖI SỰ KIỆN NỐI TIẾP
+
+Ngoài các chuyện ngắn (một lần là xong), hãy viết cả **chuỗi chuyện dài** gồm nhiều phần. Mỗi phần cách nhau một thời gian (vài ngày, vài tháng, vài năm), xảy ra ở nơi khác, và **tùy lựa chọn lần trước mà lần sau khác đi**.
+
+Ví dụ:
+1. Ngươi cứu một con hươu con khỏi miệng hổ. Hết chuyện.
+2. Vài tháng sau, đi qua rừng, con hươu tìm tới, ngậm một gốc linh thảo đặt dưới chân ngươi.
+3. Vài tháng sau nữa, ngươi nghe tin con hươu bị [tu sĩ A] giết để lấy sừng.
+4. Ngươi đi tìm A: giết A, tha A, hay A có nỗi khổ riêng…
+→ Nếu ở phần 1 ngươi **không cứu** hươu, chuỗi dừng lại, hoặc rẽ sang hướng khác.
+
+Khi viết chuỗi, hãy ghi:
+```
+# CHUỖI: <tên chuỗi>  (số phần: …)
+## Phần 1 – <tên>   (điều kiện: không)
+…
+## Phần 2 – <tên>   (điều kiện: phần 1 đã chọn "cứu"; cách phần 1 khoảng vài tháng; ở rừng)
+…
+## Phần 2b – <tên>  (điều kiện: phần 1 đã chọn "bỏ đi")
+…
+```
+Nhân vật trong chuỗi giữ nguyên ký hiệu từ đầu tới cuối ([tu sĩ A] ở phần 1 cũng là [tu sĩ A] ở phần 4).
+
+## Đủ mọi cảm xúc
+
+Giọng văn chung là điềm và hơi buồn, nhưng **nội dung** phải đủ sắc thái: cảm động, vui ấm áp, **hài hước** (tán tu ngốc, lừa đảo vụng về, linh thú tham ăn), kinh dị, bi thương, phẫn nộ, lãng mạn, và cả **cẩu huyết não tàn** (thiếu gia hống hách "ngươi có biết cha ta là ai không", vị hôn thê từ hôn, nhận nhầm con, đánh mặt kẻ khinh người…). Chuyện hài vẫn kể bằng giọng tỉnh bơ: buồn cười vì tình huống, không phải vì câu chữ lố. Ghi cảm xúc chính ở dòng đầu mỗi sự kiện.
+
 ## Cách viết mỗi sự kiện (chỉ cần đại ý như sau)
 
 ```
 ## <Tên sự kiện>
-(Ở đâu, vùng nào, loại chuyện gì – ghi một dòng)
+(Ở đâu, vùng nào, loại chuyện gì, cảm xúc chính – ghi một dòng)
 
 <Đoạn mở đầu. Có thể viết 2–3 cách mở khác nhau.>
 
