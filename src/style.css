@@ -694,3 +694,18 @@ b,strong,h1,h2,h3,h4,th,.kr b,.kv b,.hud-id .rl,.stone,.lc-n,.grp,.sgrp,.f-n b,.
 .place .sgrp+.choices .ch .ct{flex:1 1 calc(100% - 2.5em)}
 .place .sgrp+.choices .ch .cx{width:auto!important;padding-left:0!important;margin:0 .6em 0 0;font-size:.74em}
 .place .sgrp+.choices .ch .cn+.ct~.cx:first-of-type,.place .sgrp+.choices .ch .ct+.cx{margin-left:2.1em}
+/* ===== thẻ địa điểm dưới bản đồ ===== */
+.dock.card.nc{padding:14px 16px 14px;font-size:.95em}
+.nc-top{align-items:flex-start;gap:4px}
+.nc-tt b{font-family:var(--disp);font-weight:600;font-size:1.55em;line-height:1.1;margin-top:2px}
+.nc-eb{display:block;font-size:.66em!important;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nc .icb{width:32px;height:32px;border:0;background:transparent;color:var(--ink3)}.nc .icb:hover{color:var(--ink)}
+.nc-chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.nc-chips>span{display:inline-flex;align-items:center;gap:.4em;font-size:.76em;padding:.25em .75em;border:1px solid var(--line);border-radius:999px;color:var(--ink2);margin:0}
+.nc-chips .ic{width:1em;height:1em}.nc-chips .here{color:var(--jade);border-color:color-mix(in srgb,var(--jade) 45%,transparent)}
+.nc-kv2{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.nc-kv2>div{padding:8px 0;line-height:1.35;min-width:0}.nc-kv2>div+div{border-left:1px solid var(--line);padding-left:12px}
+.nc-kv2 small{display:block;font-size:.64em;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)}.nc-kv2 span{font-size:.88em}
+.nc .nc-d{margin-top:8px;font-size:.86em;-webkit-line-clamp:3}
+.nc-tags{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:6px;font-size:.74em;color:var(--ink3)}.nc-tags span::before{content:"· "}
+.nc .nc-b{margin-top:12px}.nc .nc-b .btn{min-height:44px;flex:1}

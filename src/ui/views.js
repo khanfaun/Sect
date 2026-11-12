@@ -84,13 +84,15 @@ function dockHTML(){
   if(n&&n.fog>=1&&Math.floor(n.id/100)===r.region&&!UI.cardMin){
     const I=nodeInfo(n);const here=n.id===r.at;const dg=dangerTag(n);
     let mid='';
-    if(!here){const p=findPath(r.at,n.id);mid=p?`<span>~${Math.round(pathLen(p))} dặm · ${durH(travelHours(p))}</span>`:'<span>chưa biết đường</span>';}else mid='<span class="good">ngươi đang ở đây</span>';
     const nt=noteOf(n.id);const M=I.sure?placeMeta(n):null;
-    const pimg=ASSET.place[n.type];return `<div class="dock card nc">${pimg&&I.sure?`<div class="nc-img">${assetImg('place',n.type,'')}</div>`:''}<div class="nc-top"><div class="nc-tt"><b>${esc(n.name+(I.sure?'':'?'))}</b><small>${esc(I.info)}</small></div>
+    if(!here){const p=findPath(r.at,n.id);mid=p?`<span>${ic('pin')}~${Math.round(pathLen(p))} dặm · ${durH(travelHours(p))}</span>`:'<span>Chưa biết đường</span>';}else mid='<span class="here">Ngươi đang ở đây</span>';
+    const eb=[I.info,I.sure?hexInfo(nodeHex(n)).dist:''].filter(Boolean).join(' · ');
+    const pimg=ASSET.place[n.type];return `<div class="dock card nc">${pimg&&I.sure?`<div class="nc-img">${assetImg('place',n.type,'')}</div>`:''}
+      <div class="nc-top"><div class="nc-tt"><small class="nc-eb">${esc(eb)}</small><b>${esc(n.name+(I.sure?'':'?'))}</b></div>
       <button class="icb" data-act="noteEdit" data-arg="${n.id}"${ta('Ghi chú: ghim một dòng lên điểm này')} aria-label="Ghi chú">${ic('pen')}</button><button class="icb" data-act="cardMin"${ta('Thu gọn')} aria-label="Thu gọn">${ic('down')}</button><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div>
-      <p class="nc-m"><span class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${DTAG[dg]}${I.sure?'':'?'}</span>${I.sure?`<span>linh khí ${LK_N[lkOf(n)].toLowerCase()}</span>`:''}${mid}</p>
-      ${M?`<div class="nc-kv"><div><small>Tọa trấn</small><b>${esc(M.luc)}</b></div><div><small>Quy mô</small><b>${esc(M.quy)}</b></div></div>${M.desc?`<p class="nc-d">${esc(M.desc)}</p>`:''}`:'<p class="nc-d">Mới nghe đồn, chưa tận mắt thấy. Vị trí có thể lệch.</p>'}
-      ${I.tags.length||I.sure?`<p class="nc-d sm">${esc([I.sure?hexInfo(nodeHex(n)).dist:''].concat(I.tags).filter(Boolean).join(' · '))}</p>`:''}
+      <div class="nc-chips"><span class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${DTAG[dg]}${I.sure?'':'?'}</span>${I.sure?`<span>Linh khí ${LK_N[lkOf(n)].toLowerCase()}</span>`:''}${mid}</div>
+      ${M?`<div class="nc-kv2"><div><small>Tọa trấn</small><span>${esc(M.luc)}</span></div><div><small>Quy mô</small><span>${esc(M.quy)}</span></div></div>${M.desc?`<p class="nc-d">${esc(M.desc)}</p>`:''}`:'<p class="nc-d">Mới nghe đồn, chưa tận mắt thấy. Vị trí có thể lệch.</p>'}
+      ${I.tags.length?`<p class="nc-tags">${I.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</p>`:''}
       ${nt?`<p class="nc-n">${ic('pin')} ${esc(nt)}</p>`:''}
       <div class="nc-b">${here?`<button class="btn pri" data-act="enter">${ENTER_L[n.type]||'Vào'}</button>`:`<button class="btn pri" data-act="go" data-arg="${n.id}"${findPath(r.at,n.id)?'':' disabled'}>Đi tới</button>`}</div></div>`;}
   if(UI.cell!=null)return distCardHTML(UI.cell);

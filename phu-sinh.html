@@ -704,6 +704,21 @@ b,strong,h1,h2,h3,h4,th,.kr b,.kv b,.hud-id .rl,.stone,.lc-n,.grp,.sgrp,.f-n b,.
 .place .sgrp+.choices .ch .ct{flex:1 1 calc(100% - 2.5em)}
 .place .sgrp+.choices .ch .cx{width:auto!important;padding-left:0!important;margin:0 .6em 0 0;font-size:.74em}
 .place .sgrp+.choices .ch .cn+.ct~.cx:first-of-type,.place .sgrp+.choices .ch .ct+.cx{margin-left:2.1em}
+/* ===== thẻ địa điểm dưới bản đồ ===== */
+.dock.card.nc{padding:14px 16px 14px;font-size:.95em}
+.nc-top{align-items:flex-start;gap:4px}
+.nc-tt b{font-family:var(--disp);font-weight:600;font-size:1.55em;line-height:1.1;margin-top:2px}
+.nc-eb{display:block;font-size:.66em!important;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nc .icb{width:32px;height:32px;border:0;background:transparent;color:var(--ink3)}.nc .icb:hover{color:var(--ink)}
+.nc-chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.nc-chips>span{display:inline-flex;align-items:center;gap:.4em;font-size:.76em;padding:.25em .75em;border:1px solid var(--line);border-radius:999px;color:var(--ink2);margin:0}
+.nc-chips .ic{width:1em;height:1em}.nc-chips .here{color:var(--jade);border-color:color-mix(in srgb,var(--jade) 45%,transparent)}
+.nc-kv2{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.nc-kv2>div{padding:8px 0;line-height:1.35;min-width:0}.nc-kv2>div+div{border-left:1px solid var(--line);padding-left:12px}
+.nc-kv2 small{display:block;font-size:.64em;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)}.nc-kv2 span{font-size:.88em}
+.nc .nc-d{margin-top:8px;font-size:.86em;-webkit-line-clamp:3}
+.nc-tags{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:6px;font-size:.74em;color:var(--ink3)}.nc-tags span::before{content:"· "}
+.nc .nc-b{margin-top:12px}.nc .nc-b .btn{min-height:44px;flex:1}
 
 </style>
 </head>
@@ -5379,13 +5394,15 @@ function dockHTML(){
   if(n&&n.fog>=1&&Math.floor(n.id/100)===r.region&&!UI.cardMin){
     const I=nodeInfo(n);const here=n.id===r.at;const dg=dangerTag(n);
     let mid='';
-    if(!here){const p=findPath(r.at,n.id);mid=p?`<span>~${Math.round(pathLen(p))} dặm · ${durH(travelHours(p))}</span>`:'<span>chưa biết đường</span>';}else mid='<span class="good">ngươi đang ở đây</span>';
     const nt=noteOf(n.id);const M=I.sure?placeMeta(n):null;
-    const pimg=ASSET.place[n.type];return `<div class="dock card nc">${pimg&&I.sure?`<div class="nc-img">${assetImg('place',n.type,'')}</div>`:''}<div class="nc-top"><div class="nc-tt"><b>${esc(n.name+(I.sure?'':'?'))}</b><small>${esc(I.info)}</small></div>
+    if(!here){const p=findPath(r.at,n.id);mid=p?`<span>${ic('pin')}~${Math.round(pathLen(p))} dặm · ${durH(travelHours(p))}</span>`:'<span>Chưa biết đường</span>';}else mid='<span class="here">Ngươi đang ở đây</span>';
+    const eb=[I.info,I.sure?hexInfo(nodeHex(n)).dist:''].filter(Boolean).join(' · ');
+    const pimg=ASSET.place[n.type];return `<div class="dock card nc">${pimg&&I.sure?`<div class="nc-img">${assetImg('place',n.type,'')}</div>`:''}
+      <div class="nc-top"><div class="nc-tt"><small class="nc-eb">${esc(eb)}</small><b>${esc(n.name+(I.sure?'':'?'))}</b></div>
       <button class="icb" data-act="noteEdit" data-arg="${n.id}"${ta('Ghi chú: ghim một dòng lên điểm này')} aria-label="Ghi chú">${ic('pen')}</button><button class="icb" data-act="cardMin"${ta('Thu gọn')} aria-label="Thu gọn">${ic('down')}</button><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div>
-      <p class="nc-m"><span class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${DTAG[dg]}${I.sure?'':'?'}</span>${I.sure?`<span>linh khí ${LK_N[lkOf(n)].toLowerCase()}</span>`:''}${mid}</p>
-      ${M?`<div class="nc-kv"><div><small>Tọa trấn</small><b>${esc(M.luc)}</b></div><div><small>Quy mô</small><b>${esc(M.quy)}</b></div></div>${M.desc?`<p class="nc-d">${esc(M.desc)}</p>`:''}`:'<p class="nc-d">Mới nghe đồn, chưa tận mắt thấy. Vị trí có thể lệch.</p>'}
-      ${I.tags.length||I.sure?`<p class="nc-d sm">${esc([I.sure?hexInfo(nodeHex(n)).dist:''].concat(I.tags).filter(Boolean).join(' · '))}</p>`:''}
+      <div class="nc-chips"><span class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${DTAG[dg]}${I.sure?'':'?'}</span>${I.sure?`<span>Linh khí ${LK_N[lkOf(n)].toLowerCase()}</span>`:''}${mid}</div>
+      ${M?`<div class="nc-kv2"><div><small>Tọa trấn</small><span>${esc(M.luc)}</span></div><div><small>Quy mô</small><span>${esc(M.quy)}</span></div></div>${M.desc?`<p class="nc-d">${esc(M.desc)}</p>`:''}`:'<p class="nc-d">Mới nghe đồn, chưa tận mắt thấy. Vị trí có thể lệch.</p>'}
+      ${I.tags.length?`<p class="nc-tags">${I.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</p>`:''}
       ${nt?`<p class="nc-n">${ic('pin')} ${esc(nt)}</p>`:''}
       <div class="nc-b">${here?`<button class="btn pri" data-act="enter">${ENTER_L[n.type]||'Vào'}</button>`:`<button class="btn pri" data-act="go" data-arg="${n.id}"${findPath(r.at,n.id)?'':' disabled'}>Đi tới</button>`}</div></div>`;}
   if(UI.cell!=null)return distCardHTML(UI.cell);
