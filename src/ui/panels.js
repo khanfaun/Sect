@@ -394,6 +394,6 @@ function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="t
 // tooltip vật phẩm: chỉ số thường ở trên, nội tại tách riêng bên dưới
 {const _rt34=relTip;relTip=function(rel){if(!rel||rel.k==='book')return _rt34(rel);const fx=relicFx(rel);const nt={},ns={};for(const [k,v] of Object.entries(fx))(NT_KEYS.includes(k)?nt:ns)[k]=v;
   const sub=SLOT_N[slotOf(rel)]+' · hệ '+(EL[rel.el]||EL.vo).n;const ok=relOk(rel);const NL=Object.keys(nt).map(k=>({n:NT_NAME[k]||'',t:fxLines({[k]:nt[k]},rel)[0]||''})).filter(x=>x.t);
-  let h=tipCard({ic:relIcon(rel),n:rel.name,t:rel.tier,sub,lines:fxLines(ns,rel),lore:rel.lore});const i=h.lastIndexOf('</div>');
+  let h=tipCard({ic:relIcon(rel),n:rel.name,t:rel.tier,sub,lines:fxLines(ns,rel),lore:rel.lore});if(rel.lore){const lp='<p>'+esc(rel.lore)+'</p>';if(h.includes('<div class="tp-b"><ul>')){h=h.replace(lp,'').replace('<div class="tp-b"><ul>','<div class="tp-b">'+lp+'<ul>');}}const i=h.lastIndexOf('</div>');
   const add=(NL.length?`<div class="nt"><b>Nội tại duy nhất · không cộng dồn</b>${NL.map(x=>`<span><em class="ntn">${esc(x.n)}</em>${esc(x.t)}</span>`).join('')}</div>`:'')+`<p class="req${ok?'':' bad'}">Yêu cầu: ${LV_NAME[relReq(rel)]}${ok?'':' · chưa đủ'}</p>`;
   return h.slice(0,i)+add+h.slice(i);};}
