@@ -5091,7 +5091,7 @@ function thEl(i){return TH_EL[i%5];}
 function thList(){const r=G.run;return r.th||(r.th=[]);}
 function thNear(i,n){return Math.round((i+0.5)/TH_N*n)%n;}
 function thCost(){const n=thList().length;return {tv:8+n*2,st:price(6+n*3),h:3*HM};}
-function thWhy(i){const r=G.run;if(thList().includes(i))return 'Đã khai.';if(thList().length>=TH_MAX[clamp(r.realm,0,5)])return REALM[r.realm]+' chỉ khai được '+TH_MAX[clamp(r.realm,0,5)]+' tiểu huyệt.';
+function thWhy(i){const r=G.run;if(thList().includes(i))return 'Đã khai.';if(thList().length>=TH_MAX[clamp(r.realm,0,5)])return realmName()+' chỉ khai được '+TH_MAX[clamp(r.realm,0,5)]+' tiểu huyệt.';
   const c=thCost();if(r.scene||r.moving)return 'Phải đứng yên ngoài bản đồ.';if(r.tv<c.tv)return 'Cần '+c.tv+'% tu vi.';if(r.st<c.st)return 'Cần '+c.st+' linh thạch.';return '';}
 function thOpenAct(i){const r=G.run;if(thWhy(i))return false;const c=thCost();r.tv-=c.tv;r.st-=c.st;thList().push(i);advanceTime(c.h);if(!G.run)return true;log('Khai thông một tiểu huyệt hành '+EL[thEl(i)].n+'.');clampHp();saveSoon();return true;}
 {const _cf=chuFx;chuFx=function(fx){_cf(fx);const r=G.run;if(!r||!r.th)return;for(const i of r.th){const f=TH_FX[thEl(i)];fx[f[0]]=(fx[f[0]]||0)+f[1];}};}
@@ -5540,6 +5540,31 @@ KYNGO.push(
 function artKho(){const r=G.run;return r.artKho||(r.artKho=[]);}
 function artStash(u){const r=G.run;const a=arts().find(x=>x.u===u);if(!a)return false;r.arts=r.arts.filter(x=>x!==a);for(let j=0;j<8;j++)if(r.chu[j]&&r.chu[j].u===u)r.chu[j]=null;artKho().push(a);syncSkills();clampHp();saveSoon();return true;}
 function artUnstash(u){const r=G.run;const a=artKho().find(x=>x.u===u);if(!a)return false;if(arts().filter(x=>x.type===a.type).length>=artCap(a.type))return false;r.artKho=artKho().filter(x=>x!==a);r.arts.push(a);syncSkills();saveSoon();return true;}
+
+// ================= ĐỢT 19: PHÀM NHÂN =================
+// Nhân vật mới sinh ra là phàm nhân: chưa dẫn khí nhập thể. Đây là bậc trước Luyện Khí.
+// Cần 50 tu vi (mọi nguồn tu vi lúc này nhân 10, vì thang chỉ 50 thay vì 500). Đủ thì tự dẫn khí nhập thể, bước vào Luyện Khí sơ kỳ.
+// Phàm nhân: khí huyết −20%, linh lực −50%, công −15%; không cần lịch luyện hay động phủ để bước qua bậc này.
+// Nhân vật trong bản lưu cũ (không có cờ) coi như đã qua bậc phàm nhân.
+const PHAM_TVP=50,PHAM_MUL=500/PHAM_TVP;
+function isPham(){const r=G.run;return !!(r&&r.pham);}
+{const _nr19=newRun;newRun=function(c){const res=_nr19(c);if(G.run){G.run.pham=1;G.run.tv=0;}return res;};}
+{const _tp19=tvPts;tvPts=function(realm){return isPham()&&realm===G.run.realm?PHAM_TVP:_tp19(realm);};}
+{const _br19=bqReal;bqReal=function(){return _br19()*(isPham()?PHAM_MUL:1);};}
+{const _tn19=thonapPct;thonapPct=function(){return _tn19()*(isPham()?PHAM_MUL:1);};}
+{const _at19=addTv;addTv=function(x){const r=G.run;if(!r||!r.pham||!(x>0))return _at19(x);
+  const res=_at19(x*PHAM_MUL);if(G.run&&G.run.pham&&G.run.tv>=100){const g=G.run;g.pham=0;g.tv=0;g.tvAcc=0;const s=S();g.hp=s.maxHp;g.mp=s.maxMp;
+    log(`Năm ${Math.floor(g.age)} tuổi, dẫn khí nhập thể, bước vào Luyện Khí.`);if(typeof bio==='function')bio(`Năm ${Math.floor(g.age)} tuổi, ${g.ten} dẫn khí nhập thể, bước vào Luyện Khí.`);
+    note('Dẫn khí nhập thể: bước vào Luyện Khí sơ kỳ!','up');if(typeof qPop==='function'){G.qpop=G.qpop||[];G.qpop.push({kind:'done',text:'Dẫn khí nhập thể · Luyện Khí sơ kỳ',grade:1,ch:[],title:'Đột phá'});}}
+  return res;};}
+// phàm nhân không có lịch luyện ràng buộc
+{const _le19=llEff;llEff=function(tv){return isPham()?1:_le19(tv);};}
+{const _S19=S;S=function(){const s=_S19();if(isPham()){s.maxHp=Math.round(s.maxHp*0.8);s.maxMp=Math.round(s.maxMp*0.5);s.atk=Math.round(s.atk*0.85);s.matk=Math.round(s.matk*0.85);}return s;};}
+// tên cảnh giới
+{const _rl19=realmLabel;realmLabel=function(){return isPham()?'Phàm nhân':_rl19();};}
+{const _rt19=realmText;realmText=function(r){r=r||G.run;return r===G.run&&isPham()?'Phàm nhân':_rt19(r);};}
+function realmName(){return isPham()?'Phàm nhân':REALM[G.run.realm];}
+{const _ae19=applyE;applyE=function(e,v){const was=isPham();const ch=_ae19(e,v);if(was&&G.run&&!isPham()&&Array.isArray(ch)){const i=ch.findIndex(c=>c&&c.i==='✨');if(i>=0)ch.splice(i,1);ch.push(chip('✨','dẫn khí nhập thể','Bước vào Luyện Khí sơ kỳ','up'));}return ch;};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -6537,7 +6562,7 @@ const SCENE_V={event:vEvent,enc:vEnc,boss:vBoss,reward:vReward,shop:vShop,swap:v
 // ---------- hộp thoại ----------
 function modalHTML(){
   const m=UI.modal;if(!m)return '';
-  if(m.k==='danger'){const n=nodeById(m.id);return `<div class="mbox"><h3>Tử địa</h3><p>${esc(n.name)}: ${esc(dangerWhy(n))} Với ${esc(REALM[G.run.realm])} của ngươi, Bước vào đó, sơ sẩy là hết kiếp này.</p><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="goSure" data-arg="${n.id}">Vẫn đi</button></div></div>`;}
+  if(m.k==='danger'){const n=nodeById(m.id);return `<div class="mbox"><h3>Tử địa</h3><p>${esc(n.name)}: ${esc(dangerWhy(n))} Với ${esc(realmName())} của ngươi, Bước vào đó, sơ sẩy là hết kiếp này.</p><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="goSure" data-arg="${n.id}">Vẫn đi</button></div></div>`;}
   if(m.k==='note'){const n=nodeById(m.id);return `<div class="mbox"><h3>Ghi chú · ${esc(n.name)}</h3><p class="hint">Ghim chỉ để nhớ, không đổi đường đi. Để trống rồi lưu là gỡ ghim.</p><input id="noteIn" maxlength="80" value="${esc(noteOf(n.id))}" placeholder="vd: có động phủ, quay lại khi Trúc Cơ"><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="noteSave" data-arg="${n.id}">Lưu</button></div></div>`;}
   if(m.k==='bq'){const I=bqInfo();const mx=Math.min(5,I.maxY);const y=clamp(m.y==null?Math.min(1,mx):m.y,0,mx);m.y=y;const cn=curNode();const B=bqBits(y,I);const cap=bqCapY();const capP=cap!=null&&mx>0?Math.min(100,cap/mx*100):100;const r=G.run,T=tvPts(r.realm);
     return `<div class="mbox bq">${sceneCv('bequan'+G.run.at,G.run.region,'dong','mart','nhan:0.5:0.5:0:bq')}<h3>Bế quan</h3>
@@ -7246,7 +7271,7 @@ function thModalHTML(m){const i=+m.i;const r=G.run;const el=thEl(i);const f=TH_F
   return `<div class="mbox imod"><div class="mb-h"><h3>Tiểu huyệt · hành ${EL[el].n}</h3><button class="xb" data-act="modalX" aria-label="Đóng">${ic('close')}</button></div>
    <div class="kv"><div><span>Trạng thái</span><b class="${on?'good':''}">${on?'Đã khai thông':'Còn bế tắc'}</b></div><div><span>Công dụng</span><b>${f[2].replace('{v}',numFx(f[1]))}</b></div>
    <div><span>Đại huyệt gần nhất</span><b>${it?esc(it.n):'ô '+(j+1)+' đang trống'}</b></div><div><span>Cộng hưởng</span><b class="${same&&on?'good':''}">${same?'cùng hành: môn ở đó +8%':'khác hành: không cộng hưởng'}</b></div></div>
-   ${on?'':`<p class="hint">Khai thông tốn ${c.tv}% tu vi, ${c.st} linh thạch và ${durH(c.h)}. ${REALM[r.realm]} khai tối đa ${TH_MAX[clamp(r.realm,0,5)]} tiểu huyệt (đã khai ${thList().length}).</p>${why?`<p class="hint bad">${esc(why)}</p>`:''}<div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="thOpen" data-arg="${i}"${why?' disabled':''}>Khai huyệt</button></div>`}</div>`;}
+   ${on?'':`<p class="hint">Khai thông tốn ${c.tv}% tu vi, ${c.st} linh thạch và ${durH(c.h)}. ${realmName()} khai tối đa ${TH_MAX[clamp(r.realm,0,5)]} tiểu huyệt (đã khai ${thList().length}).</p>${why?`<p class="hint bad">${esc(why)}</p>`:''}<div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="thOpen" data-arg="${i}"${why?' disabled':''}>Khai huyệt</button></div>`}</div>`;}
 
 // thẻ nhiệm vụ dùng chung cho sổ tay và bảng treo thưởng: mở rộng, dẫn đường, hủy
 function questCardHTML(q){const w=W();const g=questGrade(q);const op=q.state==='open';const ex=UI.qOpen[q.id];const tg=nodeById(q.node);const fn=nodeById(q.from);
@@ -7664,7 +7689,7 @@ function inkReveal(){const d=document.getElementById('ink');requestAnimationFram
 
 // bảng thông báo nhiệm vụ: xong, thất bại, thất hứa. Tự tắt sau chừng 2,5 giây; chạm để tắt ngay.
 function qpopFlush(){const L=G.qpop;if(!L||!L.length||document.querySelector('.qpop'))return;const q=L.shift();const app=document.getElementById('app');if(!app)return;
-  const T={done:['Hoàn thành nhiệm vụ','ok'],fail:['Nhiệm vụ thất bại','bad'],late:['Thất hứa · quá hạn','bad']}[q.kind];
+  const T={done:['Hoàn thành nhiệm vụ','ok'],fail:['Nhiệm vụ thất bại','bad'],late:['Thất hứa · quá hạn','bad']}[q.kind];if(q.title)T[0]=q.title;
   const d=document.createElement('div');d.className='qpop '+T[1];d.style.cssText=qpc(q.grade);
   d.innerHTML=`<b>${T[0]}</b><p>${esc(q.text)}</p>${q.ch&&q.ch.length?chipsHTML(q.ch):''}`;d.addEventListener('pointerdown',()=>{d.remove();qpopFlush();});
   app.appendChild(d);setTimeout(()=>{d.classList.add('out');setTimeout(()=>{d.remove();qpopFlush();},400);},2500);}

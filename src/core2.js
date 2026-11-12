@@ -762,7 +762,7 @@ function thEl(i){return TH_EL[i%5];}
 function thList(){const r=G.run;return r.th||(r.th=[]);}
 function thNear(i,n){return Math.round((i+0.5)/TH_N*n)%n;}
 function thCost(){const n=thList().length;return {tv:8+n*2,st:price(6+n*3),h:3*HM};}
-function thWhy(i){const r=G.run;if(thList().includes(i))return 'Đã khai.';if(thList().length>=TH_MAX[clamp(r.realm,0,5)])return REALM[r.realm]+' chỉ khai được '+TH_MAX[clamp(r.realm,0,5)]+' tiểu huyệt.';
+function thWhy(i){const r=G.run;if(thList().includes(i))return 'Đã khai.';if(thList().length>=TH_MAX[clamp(r.realm,0,5)])return realmName()+' chỉ khai được '+TH_MAX[clamp(r.realm,0,5)]+' tiểu huyệt.';
   const c=thCost();if(r.scene||r.moving)return 'Phải đứng yên ngoài bản đồ.';if(r.tv<c.tv)return 'Cần '+c.tv+'% tu vi.';if(r.st<c.st)return 'Cần '+c.st+' linh thạch.';return '';}
 function thOpenAct(i){const r=G.run;if(thWhy(i))return false;const c=thCost();r.tv-=c.tv;r.st-=c.st;thList().push(i);advanceTime(c.h);if(!G.run)return true;log('Khai thông một tiểu huyệt hành '+EL[thEl(i)].n+'.');clampHp();saveSoon();return true;}
 {const _cf=chuFx;chuFx=function(fx){_cf(fx);const r=G.run;if(!r||!r.th)return;for(const i of r.th){const f=TH_FX[thEl(i)];fx[f[0]]=(fx[f[0]]||0)+f[1];}};}
@@ -1211,3 +1211,28 @@ KYNGO.push(
 function artKho(){const r=G.run;return r.artKho||(r.artKho=[]);}
 function artStash(u){const r=G.run;const a=arts().find(x=>x.u===u);if(!a)return false;r.arts=r.arts.filter(x=>x!==a);for(let j=0;j<8;j++)if(r.chu[j]&&r.chu[j].u===u)r.chu[j]=null;artKho().push(a);syncSkills();clampHp();saveSoon();return true;}
 function artUnstash(u){const r=G.run;const a=artKho().find(x=>x.u===u);if(!a)return false;if(arts().filter(x=>x.type===a.type).length>=artCap(a.type))return false;r.artKho=artKho().filter(x=>x!==a);r.arts.push(a);syncSkills();saveSoon();return true;}
+
+// ================= ĐỢT 19: PHÀM NHÂN =================
+// Nhân vật mới sinh ra là phàm nhân: chưa dẫn khí nhập thể. Đây là bậc trước Luyện Khí.
+// Cần 50 tu vi (mọi nguồn tu vi lúc này nhân 10, vì thang chỉ 50 thay vì 500). Đủ thì tự dẫn khí nhập thể, bước vào Luyện Khí sơ kỳ.
+// Phàm nhân: khí huyết −20%, linh lực −50%, công −15%; không cần lịch luyện hay động phủ để bước qua bậc này.
+// Nhân vật trong bản lưu cũ (không có cờ) coi như đã qua bậc phàm nhân.
+const PHAM_TVP=50,PHAM_MUL=500/PHAM_TVP;
+function isPham(){const r=G.run;return !!(r&&r.pham);}
+{const _nr19=newRun;newRun=function(c){const res=_nr19(c);if(G.run){G.run.pham=1;G.run.tv=0;}return res;};}
+{const _tp19=tvPts;tvPts=function(realm){return isPham()&&realm===G.run.realm?PHAM_TVP:_tp19(realm);};}
+{const _br19=bqReal;bqReal=function(){return _br19()*(isPham()?PHAM_MUL:1);};}
+{const _tn19=thonapPct;thonapPct=function(){return _tn19()*(isPham()?PHAM_MUL:1);};}
+{const _at19=addTv;addTv=function(x){const r=G.run;if(!r||!r.pham||!(x>0))return _at19(x);
+  const res=_at19(x*PHAM_MUL);if(G.run&&G.run.pham&&G.run.tv>=100){const g=G.run;g.pham=0;g.tv=0;g.tvAcc=0;const s=S();g.hp=s.maxHp;g.mp=s.maxMp;
+    log(`Năm ${Math.floor(g.age)} tuổi, dẫn khí nhập thể, bước vào Luyện Khí.`);if(typeof bio==='function')bio(`Năm ${Math.floor(g.age)} tuổi, ${g.ten} dẫn khí nhập thể, bước vào Luyện Khí.`);
+    note('Dẫn khí nhập thể: bước vào Luyện Khí sơ kỳ!','up');if(typeof qPop==='function'){G.qpop=G.qpop||[];G.qpop.push({kind:'done',text:'Dẫn khí nhập thể · Luyện Khí sơ kỳ',grade:1,ch:[],title:'Đột phá'});}}
+  return res;};}
+// phàm nhân không có lịch luyện ràng buộc
+{const _le19=llEff;llEff=function(tv){return isPham()?1:_le19(tv);};}
+{const _S19=S;S=function(){const s=_S19();if(isPham()){s.maxHp=Math.round(s.maxHp*0.8);s.maxMp=Math.round(s.maxMp*0.5);s.atk=Math.round(s.atk*0.85);s.matk=Math.round(s.matk*0.85);}return s;};}
+// tên cảnh giới
+{const _rl19=realmLabel;realmLabel=function(){return isPham()?'Phàm nhân':_rl19();};}
+{const _rt19=realmText;realmText=function(r){r=r||G.run;return r===G.run&&isPham()?'Phàm nhân':_rt19(r);};}
+function realmName(){return isPham()?'Phàm nhân':REALM[G.run.realm];}
+{const _ae19=applyE;applyE=function(e,v){const was=isPham();const ch=_ae19(e,v);if(was&&G.run&&!isPham()&&Array.isArray(ch)){const i=ch.findIndex(c=>c&&c.i==='✨');if(i>=0)ch.splice(i,1);ch.push(chip('✨','dẫn khí nhập thể','Bước vào Luyện Khí sơ kỳ','up'));}return ch;};}
