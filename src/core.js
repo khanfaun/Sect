@@ -1044,6 +1044,7 @@ function partyUnit(p,id){
   return {realm:r.realm,matk:Math.round(s.matk*m),critDmg:150,hoTam:s.hoTam,id,side:'A',ctrl:'ai',ally:p.id,name:p.ten,icon:p.icon||'🧑',el:p.el||'vo',f:'nhan',hp:p.hp,max:Math.round(s.maxHp*m),mp:0,maxMp:0,atk:Math.round(s.atk*m),def:Math.round(s.def*m),tp:Math.round(s.tp*0.9),cx:s.cx,ne:Math.round(s.ne*0.9),hoi:s.hoi,crit:5,
     pat:['atk','atk','multi','block','heavy'],pi:0,st:{},pos:0,phase:'run',pending:null,waitSet:[],stunT:0,rec:1,chargeT:0};
 }
+const CHG_SLOW=0.6; // tụ lực, thủ thế: đoạn từ mốc giữa tới mốc phát lực chạy chậm lại còn 60%
 function vRun(sc,u){if(u.fixedV)return u.fixedV;return 20*clamp(u.tp/sc.tpTB,0.6,1.8);}
 function vRec(sc,u){if(u.fixedV)return u.fixedV;return 26*clamp(u.hoi/sc.hoiTB,0.6,1.8)/(u.rec||1);}
 function nextIntent(u){
@@ -1066,7 +1067,7 @@ function combatStep(dt){
     if(u.stunT>0){u.stunT=Math.max(0,u.stunT-dt);continue;}
     if(u.phase==='run')u.pos+=vRun(sc,u)*dt;
     else if(u.phase==='recover'){u.pos+=vRec(sc,u)*dt;if(u.pos>=100){u.pos=0;u.phase='run';onZero(sc,u);if(sc.over)return;}}
-    else if(u.phase==='charge'||u.phase==='guard'){u.pos=Math.min(PHAT,u.pos+vRec(sc,u)*dt);u.chargeT+=dt;if(u.phase==='guard'&&u.pos>=PHAT)endStance(sc,u,(u.ctrl==='player'?'Ngươi':u.name)+' không phải đỡ đòn nào, buông thế.');}
+    else if(u.phase==='charge'||u.phase==='guard'){u.pos=Math.min(PHAT,u.pos+vRec(sc,u)*dt*CHG_SLOW);u.chargeT+=dt;if(u.phase==='guard'&&u.pos>=PHAT)endStance(sc,u,(u.ctrl==='player'?'Ngươi':u.name)+' không phải đỡ đòn nào, buông thế.');}
   }
   // người đang tụ lực: đủ điều kiện thì tung chiêu
   const ch=sc.units.find(u=>u.phase==='charge'&&u.hp>0&&u.pos>=PHAT);

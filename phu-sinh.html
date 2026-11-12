@@ -2111,6 +2111,7 @@ function partyUnit(p,id){
   return {realm:r.realm,matk:Math.round(s.matk*m),critDmg:150,hoTam:s.hoTam,id,side:'A',ctrl:'ai',ally:p.id,name:p.ten,icon:p.icon||'🧑',el:p.el||'vo',f:'nhan',hp:p.hp,max:Math.round(s.maxHp*m),mp:0,maxMp:0,atk:Math.round(s.atk*m),def:Math.round(s.def*m),tp:Math.round(s.tp*0.9),cx:s.cx,ne:Math.round(s.ne*0.9),hoi:s.hoi,crit:5,
     pat:['atk','atk','multi','block','heavy'],pi:0,st:{},pos:0,phase:'run',pending:null,waitSet:[],stunT:0,rec:1,chargeT:0};
 }
+const CHG_SLOW=0.6; // tụ lực, thủ thế: đoạn từ mốc giữa tới mốc phát lực chạy chậm lại còn 60%
 function vRun(sc,u){if(u.fixedV)return u.fixedV;return 20*clamp(u.tp/sc.tpTB,0.6,1.8);}
 function vRec(sc,u){if(u.fixedV)return u.fixedV;return 26*clamp(u.hoi/sc.hoiTB,0.6,1.8)/(u.rec||1);}
 function nextIntent(u){
@@ -2133,7 +2134,7 @@ function combatStep(dt){
     if(u.stunT>0){u.stunT=Math.max(0,u.stunT-dt);continue;}
     if(u.phase==='run')u.pos+=vRun(sc,u)*dt;
     else if(u.phase==='recover'){u.pos+=vRec(sc,u)*dt;if(u.pos>=100){u.pos=0;u.phase='run';onZero(sc,u);if(sc.over)return;}}
-    else if(u.phase==='charge'||u.phase==='guard'){u.pos=Math.min(PHAT,u.pos+vRec(sc,u)*dt);u.chargeT+=dt;if(u.phase==='guard'&&u.pos>=PHAT)endStance(sc,u,(u.ctrl==='player'?'Ngươi':u.name)+' không phải đỡ đòn nào, buông thế.');}
+    else if(u.phase==='charge'||u.phase==='guard'){u.pos=Math.min(PHAT,u.pos+vRec(sc,u)*dt*CHG_SLOW);u.chargeT+=dt;if(u.phase==='guard'&&u.pos>=PHAT)endStance(sc,u,(u.ctrl==='player'?'Ngươi':u.name)+' không phải đỡ đòn nào, buông thế.');}
   }
   // người đang tụ lực: đủ điều kiện thì tung chiêu
   const ch=sc.units.find(u=>u.phase==='charge'&&u.hp>0&&u.pos>=PHAT);
@@ -7020,8 +7021,8 @@ const Map2=(()=>{
     const zf=clamp(Math.log(z/zMin())/Math.log(1.6/zMin()),0,1);const showIc=zf>=0.5;
     {const gc=geo();if(!gc.cent){const rs={},ds={};for(let i=0;i<gc.reg.length;i++){const k=gc.reg[i];if(k<0)continue;const p=hexCenter(i);const a=rs[k]||(rs[k]=[0,0,0]);a[0]+=p[0];a[1]+=p[1];a[2]++;const d=gc.dist[i];const b=ds[d]||(ds[d]=[0,0,0]);b[0]+=p[0];b[1]+=p[1];b[2]++;}gc.cent={rs,ds};}
      ctx.textAlign='center';ctx.textBaseline='middle';
-     const ra=clamp(1-zf/0.2,0,1);if(ra>0){ctx.font=`600 ${Math.round(clamp(z*70,15,26))}px ${FONT}`;for(const [k,a] of Object.entries(gc.cent.rs)){const x=SX(a[0]/a[2]),y=SY(a[1]/a[2]);ctx.fillStyle=hexA(C.paper,0.7*ra);ctx.fillText(REG[k].n.toUpperCase().split('').join(' '),x+1,y+1);ctx.fillStyle=hexA(C.ink,0.75*ra);ctx.fillText(REG[k].n.toUpperCase().split('').join(' '),x,y);}}
-     const da=Math.min(clamp((zf-0.12)/0.08,0,1),clamp((0.5-zf)/0.08,0,1));if(da>0){ctx.font=`italic 500 ${Math.round(clamp(z*40,11,16))}px ${FONT}`;for(const [d,a] of Object.entries(gc.cent.ds)){const nm=gc.dnames[d];if(!nm)continue;const x=SX(a[0]/a[2]),y=SY(a[1]/a[2]);if(x<-80||y<-30||x>W0+80||y>H0+30)continue;ctx.fillStyle=hexA(C.paper,0.7*da);ctx.fillText(nm,x+1,y+1);ctx.fillStyle=hexA(C.ink2,0.9*da);ctx.fillText(nm,x,y);}}}
+     const ra=clamp(1-zf/0.2,0,1);const SERIF='"Cormorant Garamond","Noto Serif",Georgia,serif';if(ra>0){ctx.font=`600 ${Math.round(clamp(z*80,17,30))}px ${SERIF}`;for(const [k,a] of Object.entries(gc.cent.rs)){const x=SX(a[0]/a[2]),y=SY(a[1]/a[2]);ctx.fillStyle=hexA(C.paper,0.7*ra);ctx.fillText(REG[k].n.toUpperCase().split('').join(' '),x+1,y+1);ctx.fillStyle=hexA(C.ink,0.75*ra);ctx.fillText(REG[k].n.toUpperCase().split('').join(' '),x,y);}}
+     const da=Math.min(clamp((zf-0.12)/0.08,0,1),clamp((0.5-zf)/0.08,0,1));if(da>0){ctx.font=`italic 600 ${Math.round(clamp(z*46,13,19))}px ${SERIF}`;for(const [d,a] of Object.entries(gc.cent.ds)){const nm=gc.dnames[d];if(!nm)continue;const x=SX(a[0]/a[2]),y=SY(a[1]/a[2]);if(x<-80||y<-30||x>W0+80||y>H0+30)continue;ctx.fillStyle=hexA(C.paper,0.7*da);ctx.fillText(nm,x+1,y+1);ctx.fillStyle=hexA(C.ink2,0.9*da);ctx.fillText(nm,x,y);}}}
     if(false&&CFG.ring){ctx.beginPath();ctx.arc(SX(pos[0]),SY(pos[1]),senseR()*z,0,6.3);ctx.strokeStyle=hexA(C.acc,0.28);ctx.lineWidth=1;ctx.setLineDash([3,5]);ctx.stroke();ctx.setLineDash([]);}
     // điểm
     const s0=clamp(21*Math.sqrt(z/0.8),7,24)*(CFG.font==='xl'?1.15:1);const small=z<0.5;const notes=w.notes||{};
