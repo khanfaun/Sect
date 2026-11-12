@@ -7158,7 +7158,7 @@ function sceneCv(seed,reg,type,cls,figs){const night=G.meta&&G.meta.world&&partO
 
 // ---------- màn bản đồ: thẻ trạng thái, nút bản đồ, thẻ địa điểm ----------
 function sectText(){const r=G.run;return r.flags.tongmon?'Đệ tử tông môn':'Tán tu · Tự do';}
-function clkStr(t){return `<b class="ck-y">Năm ${tYear(t)}</b><span>tháng ${tMonth(t)+1} · ngày ${Math.floor((t%HM)/HD)+1}</span><span>giờ ${gioName(t)}</span>`;}
+function clkStr(t){return `<span>ngày ${Math.floor((t%HM)/HD)+1} · tháng ${tMonth(t)+1}</span><b class="ck-y">Năm ${tYear(t)}</b><span>giờ ${gioName(t)}</span>`;}
 // thẻ thông tin quận: hiện khi chạm một ô đất trống
 function distCardHTML(c){const g=geo(),I=hexInfo(c),r=G.run;
   if(I.sea)return `<div class="dock card nc"><div class="nc-top"><div class="nc-tt"><b>Vô Tận Hải</b><small>biển khơi</small></div><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div><p class="nc-d">Không có đường bộ. Đi ngang qua tốn gấp sáu lần đồng bằng.</p></div>`;
