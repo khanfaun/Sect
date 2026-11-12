@@ -324,8 +324,15 @@ async function initDB(){
 })();
 
 // chuyển cảnh: vết mực loang phủ kín màn hình rồi tan dần để lộ cảnh mới
-function inkEl(){let d=document.getElementById('ink');if(d)return d;d=document.createElement('div');d.id='ink';
-  d.innerHTML=`<svg viewBox="-100 -100 200 200"><defs><filter id="inkf" x="-50%" y="-50%" width="200%" height="200%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="${Math.floor(Math.random()*99)}"/><feDisplacementMap in="SourceGraphic" scale="30"/></filter></defs><g filter="url(#inkf)"><circle class="b b1" r="46" cx="-8" cy="6"/><circle class="b b2" r="38" cx="10" cy="-6"/><circle class="b b3" r="30" cx="0" cy="2"/></g></svg>`;
-  document.body.appendChild(d);return d;}
-function inkCover(done){const d=inkEl();d.className='on cover';setTimeout(done,1350);}
-function inkReveal(){const d=inkEl();d.className='on reveal';setTimeout(()=>{d.className='';},920);}
+// vệt mực vẽ bằng đường cong ngẫu nhiên (không dùng bộ lọc để chạy mượt)
+function inkBlob(r,cx,cy,rough){const n=18,P=[];const ph=[Math.random()*6,Math.random()*6,Math.random()*6];
+  for(let i=0;i<n;i++){const a=i/n*6.283;const k=1+rough*(0.5*Math.sin(3*a+ph[0])+0.3*Math.sin(5*a+ph[1])+0.2*Math.sin(9*a+ph[2]))+(Math.random()-.5)*rough*.5;P.push([cx+Math.cos(a)*r*k,cy+Math.sin(a)*r*k]);}
+  let d='';for(let i=0;i<n;i++){const p0=P[(i-1+n)%n],p1=P[i],p2=P[(i+1)%n],p3=P[(i+2)%n];
+    if(!i)d+=`M${p1[0].toFixed(1)} ${p1[1].toFixed(1)}`;
+    d+=`C${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;}
+  return d+'Z';}
+function inkEl(){let d=document.getElementById('ink');if(!d){d=document.createElement('div');d.id='ink';document.body.appendChild(d);}
+  d.innerHTML=`<svg viewBox="-100 -100 200 200"><path class="b b1" d="${inkBlob(46,-8,6,.32)}"/><path class="b b2" d="${inkBlob(38,10,-6,.3)}"/><path class="b b3" d="${inkBlob(30,0,2,.28)}"/><path class="b b4" d="${inkBlob(30,3,-2,.22)}"/></svg>`;
+  return d;}
+function inkCover(done){const d=inkEl();void d.offsetWidth;d.className='on cover';setTimeout(()=>requestAnimationFrame(done),1600);}
+function inkReveal(){const d=document.getElementById('ink');requestAnimationFrame(()=>requestAnimationFrame(()=>{d.className='on reveal';}));setTimeout(()=>{if(d.className==='on reveal')d.className='';},1000);}
