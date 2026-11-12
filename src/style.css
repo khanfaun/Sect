@@ -1087,3 +1087,16 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .pp-nl .lc-c.st{color:#b8562a!important}.pp-nl .lc-c.ev{color:#b8902a!important}.pp-nl .ne-i{display:inline-flex;vertical-align:-2px;margin-right:4px}.pp-nl .ne-i svg{width:1.15em;height:1.15em;stroke:#b8302a}
 /* chỉ số địch: mạnh là nguy hiểm (đỏ), yếu là có lợi (xanh), vừa là vàng */
 .pp-u.foe .pp-st .rt3,.pp-u.foe .pp-st .rt4{color:#b8302a!important;font-weight:600}.pp-u.foe .pp-st .rt2{color:#b8902a!important}.pp-u.foe .pp-st .rt0,.pp-u.foe .pp-st .rt1{color:#3f8a4a!important;font-weight:400}
+
+/* màn chuẩn bị trận: tiêu đề đội có nhãn so sức, tên địch đỏ, bố cục gọn khi đông người */
+.pp-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.pp-h .lc-c{font-size:1.15em;letter-spacing:.04em;text-transform:none}
+.pp-h .lc-c.st{color:#b8562a!important}.pp-h .lc-c.ev{color:#b8902a!important}
+.pp-u.foe .pp-n{color:#b8302a}
+.pp-cmp .pp-u{padding:4px 0;border-bottom:1px dotted var(--line)}.pp-cmp .pp-u:last-child{border-bottom:0}.pp-cmp .pp-u .u-av{width:28px;height:28px;font-size:.95em}
+.pp-cmp .pp-n{font-size:.92em}.pp-cmp .pp-t>small{font-size:.74em}.pp-cmp .pp-st{grid-template-columns:repeat(4,auto);gap:0 10px;font-size:.74em;margin-top:2px}
+
+.pp-cmp .pp-n{display:flex;align-items:baseline;gap:6px;min-width:0}.pp-cmp .pp-sub{font-size:.78em;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-cmp .pp-st{display:flex;flex-wrap:wrap;gap:0 10px}.pp-cmp .pp-st span{flex-direction:row;gap:3px;align-items:baseline}
+.pp-cmp .pp-st{flex-direction:row!important}.pp-cmp .pp-st span{justify-content:flex-start!important}
+/* thanh đầu: chữ đánh giá dài (Rất cao…) không đè ô bên cạnh */
+.hud-stats{gap:2px!important}.hud-stats .hs{font-size:.7em!important;flex:0 1 auto!important;min-width:0;white-space:nowrap}.hud-stats .hs .ic{width:13px;height:13px;flex:none}

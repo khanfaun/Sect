@@ -1098,6 +1098,19 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 /* chỉ số địch: mạnh là nguy hiểm (đỏ), yếu là có lợi (xanh), vừa là vàng */
 .pp-u.foe .pp-st .rt3,.pp-u.foe .pp-st .rt4{color:#b8302a!important;font-weight:600}.pp-u.foe .pp-st .rt2{color:#b8902a!important}.pp-u.foe .pp-st .rt0,.pp-u.foe .pp-st .rt1{color:#3f8a4a!important;font-weight:400}
 
+/* màn chuẩn bị trận: tiêu đề đội có nhãn so sức, tên địch đỏ, bố cục gọn khi đông người */
+.pp-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.pp-h .lc-c{font-size:1.15em;letter-spacing:.04em;text-transform:none}
+.pp-h .lc-c.st{color:#b8562a!important}.pp-h .lc-c.ev{color:#b8902a!important}
+.pp-u.foe .pp-n{color:#b8302a}
+.pp-cmp .pp-u{padding:4px 0;border-bottom:1px dotted var(--line)}.pp-cmp .pp-u:last-child{border-bottom:0}.pp-cmp .pp-u .u-av{width:28px;height:28px;font-size:.95em}
+.pp-cmp .pp-n{font-size:.92em}.pp-cmp .pp-t>small{font-size:.74em}.pp-cmp .pp-st{grid-template-columns:repeat(4,auto);gap:0 10px;font-size:.74em;margin-top:2px}
+
+.pp-cmp .pp-n{display:flex;align-items:baseline;gap:6px;min-width:0}.pp-cmp .pp-sub{font-size:.78em;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-cmp .pp-st{display:flex;flex-wrap:wrap;gap:0 10px}.pp-cmp .pp-st span{flex-direction:row;gap:3px;align-items:baseline}
+.pp-cmp .pp-st{flex-direction:row!important}.pp-cmp .pp-st span{justify-content:flex-start!important}
+/* thanh đầu: chữ đánh giá dài (Rất cao…) không đè ô bên cạnh */
+.hud-stats{gap:2px!important}.hud-stats .hs{font-size:.7em!important;flex:0 1 auto!important;min-width:0;white-space:nowrap}.hud-stats .hs .ic{width:13px;height:13px;flex:none}
+
 </style>
 </head>
 <body>
@@ -6830,7 +6843,7 @@ function uyApSet(sc){const A=sc.units.filter(u=>u.side==='A'),Bs=sc.units.filter
 // so sánh một kẻ địch với nhân vật chính (màn chuẩn bị)
 function foeCmp(f,meLc){const q=lcCalc(f)/Math.max(1,meLc);return q>=NE_T?{t:'Nghiền ép',c:'ne'}:q>=1.35?{t:'Mạnh hơn',c:'rt1'}:q>0.75?{t:'Vừa sức',c:'rt2'}:{t:'Yếu hơn',c:'rt3'};}
 function meCrushes(sc,meLc){const Bs=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');return Bs.length&&Bs.every(b=>meLc>=lcCalc(b)*NE_T);}
-function crushAny(sc,meLc){const Bs=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');return Bs.some(b=>{const y=lcCalc(b);return meLc>=y*NE_T||y>=meLc*NE_T;});}
+function crushAny(sc){return typeof crushVictims==='function'&&sc.units.some(u=>u.kind!=='kiep'&&crushVictims(sc,u).length);}
 
 // ----- lịch luyện hiện theo tầng/kỳ đang ở, như tu vi. Xung kích cần lịch luyện của tầng/kỳ đó từ 65%; đột phá đại cảnh giới vẫn cần đầy.
 const XK_LL=0.65;
@@ -8166,21 +8179,32 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodg
 // ---------- chuẩn bị trước trận: xem hai phe, chỉnh chiêu, dùng đồ (không tốn niệm lực), rồi bấm Bắt đầu ----------
 {const _scU=startCombat;startCombat=function(spec,after){const res=_scU(spec,after);const sc=G.run&&G.run.scene;
   if(sc&&sc.type==='combat'&&!sc.kiep&&!UI.noPrep)sc.prep=1;return res;};}
-function prepUnitRow(u,me){const foe=u.side==='B';const sub=me?realmLabel():u.sub||(foe?'Đối thủ':'Đồng hành');const S0=me?S():null;
-  const lc=me?lucChien():lcCalc(u);
-  const st=me?[['Khí huyết',pctOf(G.run.hp,S0.maxHp)],['Linh lực',S0.maxMp?pctOf(G.run.mp,S0.maxMp):'—'],['Niệm lực',RT('nl',S0.nl)],['Công',RT('atk',Math.max(S0.atk,S0.matk))],['Thủ',RT('def',S0.def)],['Thân pháp',RT('tp',S0.tp,'toc')]]
+// lực chiến dùng để so trong màn chuẩn bị (nhân vật chính lấy theo chỉ số hiện tại)
+function pLc(u){return u.isMain?lucChien():lcCalc(u);}
+// ai bị người này nghiền ép (khác phe, lực chiến kém từ 3 lần)
+function crushVictims(sc,u){const o=sc.units.filter(x=>x.side!==u.side&&x.kind!=='kiep'&&x.hp>0);const a=pLc(u);return o.filter(x=>a>=pLc(x)*NE_T);}
+function prepUnitRow(u,me,cmp){const foe=u.side==='B';const sub=me?realmLabel():u.sub||(foe?'Đối thủ':'Đồng hành');const S0=me?S():null;const sc=G.run.scene;
+  let st=me?[['Khí huyết',pctOf(G.run.hp,S0.maxHp)],['Linh lực',S0.maxMp?pctOf(G.run.mp,S0.maxMp):'—'],['Niệm lực',RT('nl',S0.nl)],['Công',RT('atk',Math.max(S0.atk,S0.matk))],['Thủ',RT('def',S0.def)],['Thân pháp',RT('tp',S0.tp,'toc')]]
     :[['Khí huyết',RT('maxHp',u.max,'ben')],['Công',RT('atk',Math.max(u.atk,u.matk||0))],['Thủ',RT('def',u.def)],['Thân pháp',RT('tp',u.tp,'toc')],['Chí mạng',RT('crit',u.crit,'muc')]];
-  return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}</span>${(()=>{const sc=G.run.scene;const ml=lucChien();const sk=`<span class="ne-i">${ic('skull')}</span>`;
-    if(foe){const c=foeCmp(u,ml);if(c.c==='ne')return `<b class="lc-c ne"${ta('Nghiền ép: lực chiến của nó hơn ngươi một đại cảnh giới.\nNgươi sẽ bị uy áp, đòn đánh gần như vô dụng.')}>${sk}Nghiền ép</b>`;if(c.c==='rt1')return `<b class="lc-c st"${ta('Kẻ này mạnh hơn ngươi')}>Mạnh hơn</b>`;if(c.c==='rt2')return `<b class="lc-c ev"${ta('Hai bên ngang sức')}>Vừa sức</b>`;return '';}
-    if(me&&sc){const Bs=sc.units.filter(x=>x.side==='B'&&x.kind!=='kiep');if(!Bs.length)return '';const top=Math.max(...Bs.map(x=>lcCalc(x)));
-      if(ml>=top*NE_T)return `<b class="lc-c ne"${ta('Nghiền ép: lực chiến của ngươi hơn đối thủ một đại cảnh giới.\nĐối thủ bị uy áp, đòn của nó gần như vô dụng.')}>${sk}Nghiền ép</b>`;
-      if(ml/Math.max(1,top)>=1/0.75)return `<b class="lc-c st"${ta('Ngươi mạnh hơn đối thủ')}>Mạnh hơn</b>`;}return '';})()}</div><small>${elSeal(u.el||'vo')} ${esc(sub)}</small>
+  if(cmp)st=st.filter(x=>['Khí huyết','Công','Thủ','Thân pháp'].includes(x[0]));
+  const V=sc?crushVictims(sc,u):[];
+  const tag=V.length?`<b class="lc-c ne"${ta('Nghiền ép '+V.map(x=>x.isMain?'ngươi':x.name).join(', ')+': lực chiến hơn hẳn một đại cảnh giới.\nBên bị nghiền ép chịu uy áp, đòn đánh vào người này gần như vô dụng.')}><span class="ne-i">${ic('skull')}</span>Nghiền ép</b>`:'';
+  if(cmp)return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
+   <div class="pp-st">${st.map(([a,b])=>`<span><small>${a}</small> ${b}</span>`).join('')}</div></div></div>`;
+  return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}</span>${tag}</div><small>${elSeal(u.el||'vo')} ${esc(sub)}</small>
    <div class="pp-st">${st.map(([a,b])=>`<span><small>${a}</small>${b}</span>`).join('')}</div></div></div>`;}
+// so sức hai đội theo tổng lực chiến
+function teamCmp(sc){const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');const ta=A.reduce((s,u)=>s+pLc(u),0),tb=B.reduce((s,u)=>s+pLc(u),0);const q=tb/Math.max(1,ta);
+  return q>=1.35?{side:'B',t:'Mạnh hơn',c:'st'}:q<=0.75?{side:'A',t:'Mạnh hơn',c:'st'}:{side:'B',t:'Vừa sức',c:'ev'};}
 function vCbPrep(sc){const r=G.run;const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B');
   const cat=[['atk','Công'],['move','Thân pháp'],['def','Thủ'],['ult','Thần thông']];
   const kn=r.kn||{};const cp=r.pills.filter(p=>PILL[p.id].w!=='bt').length;
-  let b=`<div class="pp-sides"><div><p class="pp-h">Phe ta</p>${A.map(u=>prepUnitRow(u,u.isMain)).join('')}</div><div><p class="pp-h">Phe địch</p>${B.map(u=>prepUnitRow(u,false)).join('')}</div></div>`;
-  b+=`<div class="pp-quick">${crushAny(sc,lucChien())?`<button class="btn sm cb-quick" data-act="cbQuick"${ta('Bỏ qua trận đánh: hệ thống tự đánh thay ngươi và tính kết quả.\nKhí huyết, linh lực, đồ dùng, chiến lợi phẩm vẫn thay đổi như đánh thật.')}>Tốc chiến</button>`:''}</div>`;
+  const cmp=A.length+B.length>2;const T=teamCmp(sc);
+  const solo=!cmp&&(T.side==='A'?A:B).some(u=>crushVictims(sc,u).length); // 1 đấu 1 đã có nghiền ép thì khỏi nhãn đội
+  const lab=side=>T.side===side&&!solo?`<b class="lc-c ${T.c}"${ta(cmp?'So tổng lực chiến hai đội':'So lực chiến hai bên')}>${T.t}</b>`:'';
+  const hd=(n,side,L)=>`<p class="pp-h"><span>${n}${cmp?' · '+L.length+' người':''}</span>${lab(side)}</p>`;
+  let b=`<div class="pp-sides${cmp?' pp-cmp':''}"><div>${hd('Phe ta','A',A)}${A.map(u=>prepUnitRow(u,u.isMain,cmp)).join('')}</div><div>${hd('Phe địch','B',B)}${B.map(u=>prepUnitRow(u,false,cmp)).join('')}</div></div>`;
+  b+=`<div class="pp-quick">${crushAny(sc)?`<button class="btn sm cb-quick" data-act="cbQuick"${ta('Bỏ qua trận đánh: hệ thống tự đánh thay ngươi và tính kết quả.\nKhí huyết, linh lực, đồ dùng, chiến lợi phẩm vẫn thay đổi như đánh thật.')}>Tốc chiến</button>`:''}</div>`;
   b+=`<p class="pp-h">Chiêu thức đang gắn</p><div class="pp-kn">${cat.map(([c,n])=>`<div><small>${n}</small>${(kn[c]||[]).length?(kn[c]).map(id=>SK[id]?`<span>${elSeal(SK[id].el)} ${esc(SK[id].n)}</span>`:'').join(''):'<span class="hint">trống</span>'}</div>`).join('')}</div>`;
   b+=`<div class="pp-act"><button class="btn" data-act="prepKn">${ic('scroll')} Chỉnh chiêu thức</button><button class="btn" data-act="prepBag">${ic('bag')} Túi đồ · ${cp} món</button></div>`;
   b+=`<p class="hint">Dùng đồ lúc này không tốn niệm lực. Vào trận rồi, mỗi lần dùng tốn ${pctOf(NL_PILL,S().nl||1)} niệm lực.</p>`;

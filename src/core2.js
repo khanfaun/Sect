@@ -2403,7 +2403,7 @@ function uyApSet(sc){const A=sc.units.filter(u=>u.side==='A'),Bs=sc.units.filter
 // so sánh một kẻ địch với nhân vật chính (màn chuẩn bị)
 function foeCmp(f,meLc){const q=lcCalc(f)/Math.max(1,meLc);return q>=NE_T?{t:'Nghiền ép',c:'ne'}:q>=1.35?{t:'Mạnh hơn',c:'rt1'}:q>0.75?{t:'Vừa sức',c:'rt2'}:{t:'Yếu hơn',c:'rt3'};}
 function meCrushes(sc,meLc){const Bs=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');return Bs.length&&Bs.every(b=>meLc>=lcCalc(b)*NE_T);}
-function crushAny(sc,meLc){const Bs=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');return Bs.some(b=>{const y=lcCalc(b);return meLc>=y*NE_T||y>=meLc*NE_T;});}
+function crushAny(sc){return typeof crushVictims==='function'&&sc.units.some(u=>u.kind!=='kiep'&&crushVictims(sc,u).length);}
 
 // ----- lịch luyện hiện theo tầng/kỳ đang ở, như tu vi. Xung kích cần lịch luyện của tầng/kỳ đó từ 65%; đột phá đại cảnh giới vẫn cần đầy.
 const XK_LL=0.65;
