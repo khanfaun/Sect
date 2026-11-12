@@ -6519,6 +6519,19 @@ phamLock=function(rel){return !!rel&&rel.k!=='book'&&!relOk(rel);};
 function relReqRoll(){const r=G.run;const k=clamp((r&&r.region)||0,0,4);return clamp(k+(chance(k===0?0.4:0.5)?1:0),0,6);}
 {const _gr31=genRelic;genRelic=function(t){const x=_gr31(t);if(x&&x.req==null)x.req=relReqRoll();return x;};}
 relReq=function(rel){if(!rel||rel.k==='book')return 0;return rel.req!=null?rel.req:0;};
+// ----- phẩm quyết định SỐ dòng chỉ số, cảnh giới yêu cầu quyết định ĐỘ LỚN chỉ số -----
+// Mỗi món giữ chỉ số gốc theo loại (kiếm: công, giáp: thủ…); phẩm càng cao càng thêm nhiều dòng phụ:
+//  phàm 0 · hoàng 1 · huyền 1 · địa 2 · thiên 2 · tiên 3 · thần 4 dòng phụ.
+// Mọi dòng (gốc và phụ) nhân theo cảnh giới yêu cầu: Phàm nhân ×1 · Luyện Khí ×1,3 · Trúc Cơ ×1,7 · Kết Đan ×2,2 · Nguyên Anh ×2,8 · Hóa Thần ×3,5 · Độ Kiếp ×4,3.
+// Nên món thần phẩm cần Trúc Cơ: nhiều dòng, số vừa; món phàm phẩm cần Hóa Thần: một loại chỉ số nhưng số rất lớn.
+const REL_X=[0,1,1,2,2,3,4],REL_M=[1,1.3,1.7,2.2,2.8,3.5,4.3];
+const REL_POOL={atkP:5,matkP:6,defP:8,hpP:6,mpP:8,tp:1,crit:3,critDmg:8,dodge:3,hoTam:3,van:1,tam:1,ngo:1,regenHp:1,regenMp:2,drain:3,tvP:5};
+{const _gr32=genRelic;genRelic=function(t){const x=_gr32(t);if(!x)return x;const n=REL_X[clamp(x.tier||0,0,6)];const keys=Object.keys(REL_POOL).filter(k=>!(k in x.fx));x.fx2={};
+  for(const k of shuffle(keys).slice(0,n))x.fx2[k]=REL_POOL[k];x.v2=1;return x;};}
+{const _rf32=relicFx;relicFx=function(rel){if(!rel||!rel.v2)return _rf32(rel);const m=REL_M[clamp(rel.req||0,0,6)];const o=_rf32(Object.assign({},rel,{tier:0}));
+  for(const k in o){if(['firstEvade','weakStart','vulnStart','pillSlot'].includes(k))continue;o[k]=k==='poisonHit'?Math.round(o[k]*m*100)/100:Math.max(1,Math.round(o[k]*m));}
+  for(const [k,v] of Object.entries(rel.fx2||{})){const x=v*m;o[k]=(o[k]||0)+(['tp','van','tam','ngo','regenHp','regenMp'].includes(k)?Math.max(1,Math.round(x)):Math.round(x));}
+  return o;};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
