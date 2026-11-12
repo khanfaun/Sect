@@ -59,10 +59,10 @@ function botPlace(){
   if(r._goal==='cross'&&has('cross')){r._goal=null;placeAct('cross');return;}
   if(r._goal==='boss'&&has('boss')){r._goal=null;placeAct('boss');return;}
   if(has('bt')){if(r.hp<s.maxHp*0.95&&has('heal')){placeAct('heal');return;}placeAct('bt');return;}
-  if(r.hp<s.maxHp*0.45){if(has('inn')){placeAct('inn');return;}if(has('heal')){placeAct('heal');return;}if(has('tinh')){placeAct('tinh');return;}}
+  if(r.hp<s.maxHp*0.45){if(has('inn')&&venueDo('inn','phong'))return;if(has('heal')){placeAct('heal');return;}if(has('tinh')){placeAct('tinh');return;}}
   if(r._goal==='bq'&&!bqCan()){r._goal=null;bqCustom(chance(.7)?2:0.25);return;}
   if(n.dp&&!bqCan()&&r.tvMinor>=40){bqCustom(chance(.75)?2:0.25);return;}
-  if(has('tea')&&chance(.3)){placeAct('tea');return;}
+  if(has('tea')&&chance(.3)&&venueDo('tea','nghe'))return;
   if(has('shop')&&chance(.3)){placeAct('shop');return;}
   if(has('board')&&chance(.15)){placeAct('board');return;}
   if(has('ghost')&&chance(.3)){placeAct('ghost');return;}
