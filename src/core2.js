@@ -908,8 +908,8 @@ function tvSimAdd(raw){const r=G.run;let add=0,rem=raw;while(rem>1e-9&&r.tv+add<
 // bế quan tới mức nào thì chạm đáy (chỉ còn 2%): trả về số năm, hoặc null nếu 5 năm vẫn chưa chạm
 function bqCapY(){const r=G.run;if(r.tv>=100)return null;for(let y=0.25;y<=5;y+=0.25){const raw=bqReal()*y*(y<1?0.9:1)+thonapPct()*y*12;if(llEff(r.tv+tvSimAdd(raw))<=LL_CAPE)return y;}return null;}
 function llPtsOf(){return Math.round(llOf()/100*tvPts(G.run.realm));}
-function llAdd(x,why){const r=G.run;if(!r||!(x>0))return 0;const P=tvPts(r.realm)/100;const pts=Math.max(1,Math.round(x*P));const b=r.ll||0;r.ll=Math.min(LL_MAX,Math.round((b*P+pts))/P);const d=Math.round((r.ll-b)*P);
-  if(d>0){if(why)log(`Lịch luyện +${d} (${why}).`);const sc=r.scene;if(sc&&sc.type==='combat')sc.llGain=(sc.llGain||0)+d;else if(sc&&Array.isArray(sc.chips))sc.chips.push(chip('⚔','+'+d+' lịch luyện','Lịch luyện: '+why,'up'));else note('+'+d+' lịch luyện · '+why);}return d;}
+function llAdd(x,why,quiet){const r=G.run;if(!r||!(x>0))return 0;const P=tvPts(r.realm)/100;const pts=Math.max(1,Math.round(x*P));const b=r.ll||0;r.ll=Math.min(LL_MAX,Math.round((b*P+pts))/P);const d=Math.round((r.ll-b)*P);
+  if(d>0&&!quiet){if(why)log(`Lịch luyện +${d} (${why}).`);const sc=r.scene;if(sc&&sc.type==='combat')sc.llGain=(sc.llGain||0)+d;else if(sc&&Array.isArray(sc.chips))sc.chips.push(chip('⚔','+'+d+' lịch luyện','Lịch luyện: '+why,'up'));else note('+'+d+' lịch luyện · '+why);}return d;}
 {const _cb10=canBreak;canBreak=function(){return _cb10()&&llOf()>=LL_BT;};}
 {const _bf10=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const res=_bf10.apply(this,arguments);if(G.run&&G.run.realm>rl)G.run.ll=Math.max(0,(G.run.ll||0)-100)*0.2;return res;};}
 // nguồn lịch luyện
@@ -921,3 +921,60 @@ function llAdd(x,why){const r=G.run;if(!r||!(x>0))return 0;const P=tvPts(r.realm
 {const _op10=openPlace;openPlace=function(id){_op10(id);const r=G.run;if(!r||!r.scene)return;r.llP=r.llP||[];const k=r.scene.id;if(!r.llP.includes(k)){r.llP.push(k);llAdd(4,'tới nơi mới');}};}
 {const _me10=meetEnt;meetEnt=function(e){const res=_me10(e);const r=G.run;if(r&&e){r.llN=r.llN||[];const k=e.name||e.id;if(!r.llN.includes(k)){r.llN.push(k);llAdd(3,'quen người mới');}}return res;};}
 {const _qw10=questWin;questWin=function(q){const res=_qw10(q);if(res&&res.length)llAdd(5,'xong việc');return res;};}
+
+// ================= ĐỢT 12: ĐÁNH NHAU KHÔNG CHO TU VI; LỰA CHỌN Ở TRÀ LÂU, KHÁCH ĐIẾM, TỬU PHƯỜNG =================
+// Trong lúc xử lý kết quả một trận, mọi phần thưởng tu vi đổi thành lịch luyện (một nửa).
+let FIGHT_OUT=0;
+function llChipMerge(L,d){if(!(d>0))return;const c=L.find(x=>x&&x.i==='⚔');if(c){c.t='+'+(parseInt(c.t.replace(/\D/g,''))+d)+' lịch luyện';}else L.unshift(chip('⚔','+'+d+' lịch luyện','Lịch luyện: có được nhờ thực chiến','up'));}
+{const _ae12=applyE;applyE=function(e,v){if(FIGHT_OUT&&e&&e.tv>0){e=Object.assign({},e);const x=e.tv*0.5;delete e.tv;const ch=_ae12(e,v);llChipMerge(ch,llAdd(x,null,true));return ch;}return _ae12(e,v);};}
+{const _cc12=combatContinue;combatContinue=function(){const sc0=G.run&&G.run.scene;const g=sc0&&sc0.llGain||0;FIGHT_OUT=1;let res;try{res=_cc12();}finally{FIGHT_OUT=0;}
+  const sc=G.run&&G.run.scene;if(g&&sc&&sc!==sc0){if(!Array.isArray(sc.chips))sc.chips=[];llChipMerge(sc.chips,g);}return res;};}
+
+// Trà lâu, khách điếm, tửu phường: chạm vào thì hiện vài lựa chọn. Mỗi lựa chọn có giá (giờ, linh thạch),
+// có thể đòi chỉ số (ngộ tính, đạo tâm...), và đôi khi có chuyện đặc biệt chỉ còn trong ít giờ.
+const VENUE_N={tea:'Trà lâu',inn:'Khách điếm',tuu:'Tửu phường'};
+const VENUE_IN={tea:['Trà lâu ồn ào tiếng quạt giấy và chén sứ. Tiểu nhị đon đả chạy ra.','Mùi trà mới pha thơm lừng. Bàn nào cũng có người bàn chuyện thiên hạ.'],
+  inn:['Chưởng quầy ngẩng lên khỏi bàn tính, cười: “Khách quan nghỉ chân hay ở trọ?”','Khách điếm hai tầng, dưới ăn trên ngủ. Tiếng bát đũa lách cách.'],
+  tuu:['Tửu phường nồng mùi rượu và mồ hôi. Giữa phòng có người đang vỗ bàn ca hát.','Vò rượu xếp chồng tận trần. Tửu khách nhìn ngươi từ đầu tới chân.']};
+const VENUE_SP={tea:{id:'doicau',l:'Thi đối câu đối của lão tú tài',d:'Lão tú tài treo giải: ai đối được vế của lão thì nhận một túi linh thạch.',h:1,req:['ngo',14,'Ngộ tính'],g:{st:12,ll:2}},
+  inn:{id:'hotong',l:'Nhận lời hộ tống một thương nhân',d:'Một thương nhân đang tìm người hộ tống qua đoạn đường vắng. Trả công hậu, nhưng dễ đụng cướp.',h:4,g:{st:15},fight:1},
+  tuu:{id:'gaysu',l:'Dạy cho gã say gây sự một bài học',d:'Một gã say đập bàn, chửi bới, giật đồ của tửu khách. Không ai dám can.',h:1,g:{st:6,karma:1},fight:1}};
+function venueSpec(n,v){const r=G.run,w=W();if(!n.vsp||n.vsp.k!==r.kiep||n.vsp.v!==v||w.t>n.vsp.until){n.vsp={k:r.kiep,v,until:chance(.35)?w.t+ri(4,12):-1};}return n.vsp.until>w.t?n.vsp.until-w.t:0;}
+function venueOpts(n,v){const s=S(),r=G.run;const hp=s.maxHp,L=[];const add=o=>L.push(o);
+  if(v==='tea'){add({id:'nghe',l:'Gọi ấm trà, ngồi nghe chuyện',d:'Ngồi một góc, nghe bàn bên kể chuyện: biết thêm một nơi chưa tới quanh đây và tin tức giang hồ.',h:1,g:{info:1}});
+    add({id:'hoi',l:'Dúi tiền hỏi tiểu nhị đường đi',d:'Tiểu nhị chạy bàn khắp nơi, biết nhiều. Cho ít tiền, hắn chỉ cho ngươi hai nơi quanh vùng.',h:1,st:price(1),g:{info:2}});
+    add({id:'co',l:'Đánh một ván cờ với khách lạ',d:'Ông khách áo xám bày sẵn bàn cờ. Thắng được thì ông ta kể cho nghe chuyện đi đường, coi như lịch luyện.',h:2,req:['ngo',12,'Ngộ tính'],g:{ll:3,tamma:-2}});
+    add({id:'tinh',l:'Ngồi yên thưởng trà, tĩnh tâm',d:'Không nghe, không nói, chỉ ngồi uống trà nhìn người qua lại. Lòng lắng xuống.',h:2,st:price(1),g:{tamma:-4}});}
+  if(v==='inn'){add({id:'phong',l:'Thuê phòng thường, ngủ một đêm',d:'Phòng chật nhưng sạch. Ngủ một giấc là hồi đầy khí huyết, linh lực.',h:8,st:price(4),g:{hp:hp-r.hp,mp:s.maxMp-r.mp,tamma:-2}});
+    add({id:'thuong',l:'Thuê phòng thượng hạng có tụ linh trận',d:'Phòng tốt nhất, dưới sàn khắc tụ linh trận nhỏ. Ngủ dậy hồi đầy, tâm lắng hẳn, tu vi nhích lên chút ít.',h:8,st:price(10),g:{hp:hp-r.hp,mp:s.maxMp-r.mp,tamma:-6,tv:1}});
+    add({id:'an',l:'Ngồi sảnh dưới ăn một bữa',d:'Bát cơm nóng, đĩa thịt kho. Ăn no thì khí huyết hồi một ít.',h:1,st:price(1),g:{hp:Math.min(hp-r.hp,Math.round(hp*0.15))}});
+    add({id:'chuong',l:'Hỏi chưởng quầy có chuyện gì lạ',d:'Chưởng quầy gặp đủ loại khách, nghe đủ loại chuyện. Hỏi thì biết thêm tin tức.',h:1,g:{info:1}});}
+  if(v==='tuu'){add({id:'chen',l:'Uống vài chén, nghe chuyện',d:'Rượu nhạt mà cay. Uống xong thì người ấm lên, tâm ma nguôi bớt, nghe được ít tin tức.',h:3,st:price(2),g:{hp:Math.min(hp-r.hp,Math.round(hp*0.1)),tamma:-4,info:1}});
+    add({id:'moi',l:'Mời cả bàn một vò rượu ngon',d:'Bỏ tiền mời rượu, làm quen tửu khách khắp nơi. Nghe được chuyện giang hồ, coi như lịch luyện.',h:3,st:price(6),g:{tamma:-5,ll:3,info:1}});
+    add({id:'dau',l:'Đấu rượu với gã tửu khách to con',d:'Gã to con thách ai uống thắng được hắn thì lấy hết tiền cược trên bàn. Cần đạo tâm vững để không gục.',h:2,req:['tam',11,'Đạo tâm'],g:{st:price(5),ll:1}});
+    add({id:'ca',l:'Nghe ca kỹ đàn hát',d:'Một khúc tì bà, giọng hát trong veo. Lòng nhẹ hẳn đi.',h:2,st:price(3),g:{tamma:-8}});}
+  const left=venueSpec(n,v);if(left>0){const o=Object.assign({},VENUE_SP[v],{spec:left});if(o.id==='gaysu'||o.id==='hotong')o.g=Object.assign({},o.g);add(o);}
+  for(const o of L){o.st=o.st||0;o.no=r.st<o.st?'Không đủ linh thạch':'';if(o.req&&(s[o.req[0]]||0)<o.req[1])o.lack=o.req[2]+' cần '+o.req[1]+', ngươi có '+(s[o.req[0]]||0);}
+  return L;}
+function venueDo(v,id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);const o=venueOpts(n,v).find(x=>x.id===id);if(!o||o.no||o.lack)return false;
+  r.st-=o.st;advanceTime(o.h);if(!G.run||G.run.scene!==sc)return true;sc.msg=[];let ch=[];
+  if(o.st)ch.push(chip('💎','−'+o.st,'Linh thạch','dn'));ch.push(chip('⏳',durH(o.h),'Thời gian trôi qua',''));
+  const g=o.g||{};
+  if(o.fight){n.vsp.until=-1;sc.venue=null;if(o.id==='gaysu')sc.msg=['Ngươi đứng dậy, gõ nhẹ lên bàn gã say. Gã quay lại, mắt đỏ ngầu.'];else sc.msg=['Đi được nửa đường, một toán cướp nhảy ra chặn xe.'];
+    startCombat({cnt:o.id==='hotong'?2:1},{kind:'node'});const cs=G.run.scene;if(cs)cs.venueWin=g;return true;}
+  if(o.spec)n.vsp.until=-1;
+  if(g.info){if(v==='tea'&&id==='nghe'||v==='tuu'||v==='inn'){teaHouse(n);}else{for(let i=0;i<g.info;i++){const c=regionOf(r.region).nodes.filter(x=>x.fog===0);if(c.length){const x=pick(c);hearOf(x);sc.msg.push('Tiểu nhị chỉ đường tới '+x.name+'.');}}}}
+  const lead={tea:{nghe:'',hoi:'Tiểu nhị nhận tiền, ghé tai nói nhỏ.',co:'Ván cờ kéo dài tới khi trà nguội. Ông khách thua, cười khà, kể cho ngươi nghe chuyện đi đường.',tinh:'Ngươi ngồi yên, nhìn khói trà bay lên. Lòng lắng như mặt hồ.',doicau:'Ngươi viết vế đối. Lão tú tài đọc đi đọc lại, rồi vỗ đùi: “Hay!”'},
+    inn:{phong:'Phòng chật nhưng sạch, chăn có mùi nắng. Ngươi ngủ một giấc ngon.',thuong:'Tụ linh trận rì rầm suốt đêm. Sáng ra ngươi thấy tinh thần sảng khoái lạ thường.',an:'Cơm nóng, canh ngọt. Ăn xong thấy người khỏe ra.',chuong:'Chưởng quầy hạ giọng kể chuyện mấy vị khách lạ.'},
+    tuu:{chen:'Ba chén vào bụng, lòng nhẹ đi đôi chút.',moi:'Cả bàn nâng chén. Người nào cũng có một chuyện để kể.',dau:'Chén thứ mười hai, gã to con gục xuống bàn. Cả quán vỗ tay.',ca:'Khúc nhạc dứt, ngươi mới nhận ra mình đã ngồi rất lâu.'}}[v][id];
+  if(lead)sc.msg.unshift(lead);
+  if(g.hp>0)r.hp=Math.min(S().maxHp,r.hp+g.hp);if(g.mp>0)r.mp=Math.min(S().maxMp,r.mp+g.mp);if(g.hp>0)ch.push(chip('❤️','+'+g.hp,'Khí huyết','up'));
+  const e={};if(g.tamma)e.tamma=g.tamma;if(g.st)e.st=g.st;if(g.karma)e.karma=g.karma;if(g.tv)e.tv=g.tv;ch=ch.concat(applyE(e));
+  if(g.ll){const d=llAdd(g.ll,null,true);llChipMerge(ch,d);}
+  if(!sc.msg.length)sc.msg=['Trà nhạt, chuyện cũng nhạt.'];sc.chips=ch;sc.venue=null;return true;}
+// chuyện đặc biệt có đánh nhau: thắng thì nhận công
+{const _cc12b=combatContinue;combatContinue=function(){const sc0=G.run&&G.run.scene;const vw=sc0&&sc0.venueWin;const win=sc0&&sc0.over==='win';const res=_cc12b();
+  if(vw&&win&&G.run&&G.run.scene){const ps=G.run.scene;const ch=applyE({st:vw.st||0,karma:vw.karma||0});ps.chips=(ps.chips||[]).concat(ch);}return res;};}
+// khách điếm, tửu phường giờ có nhiều lựa chọn giá khác nhau: không khóa ô vì thiếu tiền
+{const _pa12=placeActs;placeActs=function(n){const L=_pa12(n);const r=G.run;for(const a of L){if(a.a==='inn'||a.a==='tuu'){a.dis=false;a.x='';a.h=0;}if(a.a==='tea')a.h=0;}return L;};}
+{const _pa12b=placeAct;placeAct=function(a){if(VENUE_N[a]){const sc=G.run&&G.run.scene;if(sc)sc.venue=a;return;}return _pa12b(a);};}

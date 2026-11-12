@@ -828,3 +828,29 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 /* màn thấp: bảng bế quan bỏ tranh để không che nút */
 @media (max-height:760px){.mbox.bq .art.mart{display:none}.mbox.bq{padding:12px 16px}}
 @media (min-width:900px){#sheet:has(.cbprep){justify-content:center}#sheet .scard.cbprep{height:auto;max-height:100%}}
+/* ===== đợt 12 ===== */
+/* thẻ thu gọn của địa điểm: nhỏ lại */
+.dock.loc{padding:4px 4px 4px 12px;gap:8px;font-size:.88em}.dock.loc .btn{min-height:32px;padding:.2em .9em;font-size:.68em}.dock.loc .icb{width:30px;height:30px}
+/* ô việc trong địa điểm: nhỏ, chữ nhỏ, chi phí ở dưới */
+.place .sgrp+.choices{gap:5px}
+.place .ch{min-height:38px;padding:.3em .6em;font-size:.88em}.place .sgrp+.choices .ch{min-height:44px}
+.place .ch .cn{display:none}.place .sgrp+.choices .ch .cx{margin-left:0!important;padding-left:0!important}
+.place .sgrp+.choices .ch .ct{flex-basis:100%}
+.cx.tm::before{content:none!important}
+.cost-t,.cost-s,.vn-sp{display:inline-flex;align-items:center;gap:3px;font-size:.78em;color:var(--ink3);white-space:nowrap}.cost-t .ic,.vn-sp .ic{width:11px;height:11px}
+.cost-s{color:var(--jade)}.cost-s .rh{width:.55em;height:.55em}
+/* trà lâu, khách điếm, tửu phường */
+.venue{border:1px solid var(--line);background:color-mix(in srgb,var(--paper2) 60%,transparent);padding:10px 12px;margin:4px 0 12px;border-radius:var(--r)}
+.vn-h{display:flex;align-items:center;justify-content:space-between}.vn-h b{font-size:1.05em}.xb.sm{width:28px;height:28px}
+.vn-in{font-style:italic;color:var(--ink2);font-size:.9em;margin:4px 0 8px}
+.vn-l{display:flex;flex-direction:column;gap:5px}
+.vn-o{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:.4em .7em;border:1px solid var(--line);background:var(--paper);border-radius:var(--r);font-size:.9em;transition:border-color .3s}
+.vn-o:hover{border-color:var(--ink)}.vn-o.dim{opacity:.6}.vn-o.spec{border-color:color-mix(in srgb,var(--gold) 70%,transparent);background:color-mix(in srgb,var(--gold) 8%,var(--paper))}
+.vn-k{color:var(--ink3);margin-right:.4em;font-size:.85em}.vn-c{display:flex;gap:10px;flex-wrap:wrap;padding-left:1.4em}
+.vn-sp{color:#b07a12}.vn-rq{font-size:.78em;color:var(--ink3)}.vn-rq.bad{color:var(--seal)}
+/* hộp xác nhận */
+.pconf p{font-size:.92em;color:var(--ink2);line-height:1.6;margin:.2em 0 .8em}
+.pc-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line)}.pc-row small{color:var(--ink3);font-size:.8em}
+.pc-row .cost{display:flex;gap:12px}.pc-row .cost .cost-t,.pc-row .cost .cost-s{font-size:.9em}.pc-row.bad span{color:var(--seal);font-size:.9em}
+.gains{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}.gn{display:inline-flex;align-items:center;gap:3px;font-size:.92em}.gn .ic{width:14px;height:14px}
+.gn.hp{color:#3f8f5c}.gn.mp{color:#4a7fb0}.gn.tm{color:var(--vio)}.gn.tv{color:#2f74c0}.gn.ll{color:#d9731a}.gn.st{color:var(--jade)}.gn.in{color:var(--ink2)}

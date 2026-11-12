@@ -169,9 +169,10 @@ const PL_N={tea:'Trà lâu',inn:'Khách điếm',shop:'Phường thị',board:'B
 function vPlace(sc){
   const r=G.run,n=nodeById(sc.id),w=W();const acts=placeActs(n).filter(a=>!['bq1','bq3','explore'].includes(a.a));
   const by=k=>acts.find(a=>a.a===k);let k=0;
-  const btn=a=>{const qa=a.a==='quyan'&&UI.confirm==='quyan';const x=(a.x?`<span class="cx">${esc(String(a.x).replace(/💎/g,'linh thạch ').replace(/✨/g,'tu vi ').replace(/🌕/g,'thành công '))}</span>`:'')+(a.h&&!a.dis?`<span class="cx tm"${ta('Thời gian sẽ trôi qua')}>${durH(a.h)}</span>`:'');
+  const btn=a=>{const qa=a.a==='quyan'&&UI.confirm==='quyan';const x=VENUE_N[a.a]?`<span class="cx">${a.dis?'đang đóng cửa':'chọn việc'}</span>`:(a.x&&!/^(💎|linh thạch )/.test(a.x)?`<span class="cx">${esc(String(a.x).replace(/✨/g,'tu vi ').replace(/🌕/g,'thành công '))}</span>`:'')+(a.h&&!a.dis&&a.a!=='bt'?`<span class="cx tm"${ta('Thời gian sẽ trôi qua')}>${durH(a.h)}</span>`:'');
     return `<button class="ch${a.a==='bt'?' hl big':PNOW.includes(a.a)?' big':''}${a.a==='quyan'||a.dis?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="cn">${++k}.</span><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':(PL_N[a.a]&&a.l.length>PL_N[a.a].length+6?PL_N[a.a]:a.l))}</span>${x}</button>`;};
-  let b=`<div class="pl-desc${UI.descHide?' hide':''}"><div class="story"><p>${esc(sc.intro)}</p></div></div>`;
+  let b=sc.venue&&VENUE_N[sc.venue]?venueHTML(n,sc.venue):'';
+  b+=`<div class="pl-desc${UI.descHide?' hide':''}"><div class="story"><p>${esc(sc.intro)}</p></div></div>`;
   if(sc.msg.length)b+=`<div class="story">${sc.msg.map(m=>`<p class="new">${esc(m)}</p>`).join('')}</div>`;
   b+=chipsHTML(sc.chips);
   const ents=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);const qs=r.quests.filter(q=>q.state==='open'&&q.node===n.id);
@@ -284,3 +285,37 @@ function bqUpd(y){const B=bqBits(y);const set=(id,t,c)=>{const e=document.getEle
   const R=document.getElementById('bqR');if(R)R.style.setProperty('--val',(+R.max>0?y/+R.max*100:0)+'%');}
 function lkTag(n){const m=LK_M[lkOf(n)]*(n&&n.dp?1.15:1)*(G.bqRoom?1.5:1);const c=m>=1.3?'lk-up':m>=0.9?'':m>=0.7?'lk-dn':'lk-bad';
   const t=LK_N[lkOf(n)]+(n&&n.dp?' · có động phủ':'')+(G.bqRoom?' · tĩnh thất tông môn':'');return `<b class="lk ${c}">${t}</b>`;}
+
+// ---------- trà lâu, khách điếm, tửu phường: các lựa chọn ----------
+function costHTML(h,st){return `${h?`<span class="cost-t">${ic('hour')}${durH(h)}</span>`:''}${st?`<span class="cost-s"><i class="rh"></i>${st}</span>`:''}`;}
+function venueHTML(n,v){const L=venueOpts(n,v);const vi=(n.vin&&n.vin[v])||(n.vin=n.vin||{},n.vin[v]=pick(VENUE_IN[v]));
+  return `<div class="venue"><div class="vn-h"><b>${VENUE_N[v]}</b><button class="xb sm" data-act="vclose" aria-label="Rời đi">${ic('close')}</button></div><p class="vn-in">${esc(vi)}</p>
+   <div class="vn-l">${L.map((o,i)=>`<button class="vn-o${o.spec?' spec':''}${o.lack||o.no?' dim':''}" data-act="vopt" data-arg="${o.id}"><span class="vn-t"><span class="vn-k">${i+1}.</span>${esc(o.l)}</span>
+    <span class="vn-c">${o.spec?`<span class="vn-sp">${ic('hour')}còn ${durH(o.spec)}</span>`:''}${costHTML(o.h,o.st)}${o.req?`<span class="vn-rq${o.lack?' bad':''}">${esc(o.req[2])} ${o.req[1]}</span>`:''}</span></button>`).join('')}</div></div>`;}
+// biểu tượng phần nhận được: chỉ biểu tượng và con số
+function gainHTML(g){if(!g)return '';const P=tvPts(G.run.realm)/100;const L=[];
+  if(g.hp>0)L.push(['heart','hp','+'+g.hp,'Khí huyết']);if(g.hpTxt)L.push(['heart','hp',g.hpTxt,'Khí huyết']);
+  if(g.mp>0)L.push(['drop','mp','+'+g.mp,'Linh lực']);if(g.mpTxt)L.push(['drop','mp',g.mpTxt,'Linh lực']);
+  if(g.tamma)L.push(['skull','tm',(g.tamma>0?'+':'−')+Math.abs(g.tamma),'Tâm ma']);if(g.tmTxt)L.push(['skull','tm',g.tmTxt,'Tâm ma']);
+  if(g.tv)L.push(['spark','tv','+'+Math.max(1,Math.round(tvGain(g.tv)*P)),'Tu vi']);if(g.ll)L.push(['sword','ll','+'+Math.max(1,Math.round(g.ll*P)),'Lịch luyện']);
+  if(g.st)L.push(['rh','st','+'+g.st,'Linh thạch']);if(g.info)L.push(['eye','in','tin tức','Biết thêm nơi chốn, tin giang hồ']);if(g.txt)L.push(['star','in',g.txt,'']);
+  return `<div class="gains">${L.map(([i,c,t,tip])=>`<span class="gn ${c}"${ta(tip)}>${i==='rh'?'<i class="rh"></i>':ic(i)}${esc(t)}</span>`).join('')}</div>`;}
+// giải thích các việc trong địa điểm
+const PA_INFO={explore:{d:'Đi một vòng quanh đây: có thể gặp cơ duyên, chuyện lạ, hoặc kẻ địch.',g:{txt:'cơ duyên'}},
+  shop:{d:'Vào phường thị xem hàng: đan dược, bí tịch, pháp bảo.'},taphoa:{d:'Vào tiệm tạp hóa xem hàng: đan dược, bí tịch, pháp bảo.'},ghost:{d:'Chợ đêm của kẻ không dám ra ánh sáng. Hàng lạ, giá lạ, người càng lạ.'},
+  join:{d:'Tới sơn môn xin bái sư. Được nhận thì thành đệ tử, có chỗ tu luyện và cống hiến.'},lib:{d:'Vào Tàng Kinh Các đọc kinh thư, có thể lĩnh hội công pháp.'},
+  tinh:{d:'Ngồi xuống tĩnh tọa điều tức: khí huyết hồi gần một nửa, linh lực hồi đầy, tâm ma nguôi bớt.',g:()=>{const s=S(),r=G.run;return {hp:Math.min(s.maxHp-r.hp,Math.round(s.maxHp*0.45)),mp:s.maxMp-r.mp,tamma:-4,tv:2};}},
+  heal:{d:'Nằm trong động phủ tĩnh dưỡng: khí huyết, linh lực hồi đầy, thương thế lành dần.',g:()=>{const s=S(),r=G.run;return {hp:s.maxHp-r.hp,mp:s.maxMp-r.mp,tmTxt:'giảm'};}},
+  boss:{d:'Bước vào sào huyệt khiêu chiến thủ lĩnh của vùng. Thắng thì có lệnh bài thông quan.'},sanyeu:{d:'Lùng yêu thú quanh đây. Thắng thì được yêu đan, đôi khi có trứng linh thú, và lịch luyện.'},
+  haithuoc:{d:'Lần theo mùi thuốc trong rừng, hái linh thảo để luyện đan.',g:{txt:'linh thảo'}},daokhoang:{d:'Gõ đá đoán mạch, đào linh khoáng để luyện khí.',g:{txt:'linh khoáng'}},
+  khaiphu:{d:'Đục một động phủ ở đây. Có động phủ mới bế quan, đột phá được.'},bury:{d:'Chôn vật phẩm ở đây cho kiếp sau.'},grave:{d:'Viếng mộ, thắp nén hương.'},patron:{d:'Tới thăm ân nhân.'}};
+function confirmHTML(title,d,h,st,g,act,arg){return `<div class="mbox pconf"><h3>${esc(title)}</h3><p>${esc(d)}</p>
+   ${h||st?`<div class="pc-row"><small>Tốn</small><span class="cost">${costHTML(h,st)}</span></div>`:''}${g?`<div class="pc-row"><small>Nhận được</small>${gainHTML(g)}</div>`:''}
+   <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="${act}" data-arg="${arg}">Đồng ý</button></div></div>`;}
+{const _mh12=modalHTML;modalHTML=function(){const m=UI.modal;const r=G.run;
+  if(m&&m.k==='pconf'&&r&&r.scene){const n=nodeById(r.scene.id);const a=placeActs(n).find(x=>x.a===m.a);if(!a)return '';const I=PA_INFO[m.a]||{d:a.tip||''};const g=typeof I.g==='function'?I.g():I.g;
+    return confirmHTML(PL_N[m.a]||a.l,I.d,a.h,0,g,'pactGo',m.a);}
+  if(m&&(m.k==='vconf'||m.k==='vreq')&&r&&r.scene){const n=nodeById(r.scene.id);const o=venueOpts(n,m.v).find(x=>x.id===m.id);if(!o)return '';
+    if(m.k==='vreq')return `<div class="mbox pconf"><h3>${esc(o.l)}</h3><p>${esc(o.d)}</p><div class="pc-row bad"><small>Chưa đủ</small><span>${esc(o.lack||o.no)}</span></div><div class="mb-f"><button class="btn pri" data-act="modalX">Đã hiểu</button></div></div>`;
+    return confirmHTML(o.l,o.d,o.h,o.st,o.fight?{st:o.g.st,txt:'phải đánh một trận'}:o.g,'vgo',m.v+':'+m.id);}
+  return _mh12();};}

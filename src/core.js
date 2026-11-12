@@ -1521,7 +1521,7 @@ function genPicks(kind){
 function rewardScene(kind,en){
   const r=G.run;
   const base={normal:{tv:7,st:9},elite:{tv:15,st:22},boss:{tv:25,st:55}}[kind];
-  const chips=applyE({tv:base.tv,st:base.st+ri(-3,4)});
+  const chips=applyE({st:base.st+ri(-3,4)}); // đánh nhau không cho tu vi: lịch luyện tính ở finishCombat
   {const af=r.scene&&r.scene.after;if(af&&af.quest)questWin(af.quest).forEach(c=>chips.push(c));}
   if(kind==='boss'){const s=S();r.hp=Math.min(s.maxHp,r.hp+Math.round(s.maxHp*0.5));r.mp=s.maxMp;}
   const picks=(kind!=='normal'||chance(.55))?genPicks(kind):[];
