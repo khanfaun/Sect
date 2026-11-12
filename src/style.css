@@ -789,3 +789,20 @@ body *{font-weight:400!important}
 .lk{display:inline-flex;align-items:center;gap:4px}.lk-i{display:inline-flex}.lk-i .ic{width:14px;height:14px;margin-right:-6px}.lk-i .ic:last-child{margin-right:0}
 .lk.lk-up{color:#2f74c0!important}.lk.lk-dn{color:#c99412!important}.lk.lk-bad{color:var(--seal)!important}
 .lk-i{flex-direction:column;line-height:0}.lk-i .ic{width:12px;height:12px;margin:0!important;stroke-width:2.4}.lk-i .ic+.ic{margin-top:-7px!important}
+/* ===== đợt 10 ===== */
+/* thẻ trạng thái: hàng chỉ số dàn ngang */
+.hud-stats{margin:8px 0 0;display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:6px;border-top:1px solid var(--line);padding-top:6px}
+.hs{font-size:.82em}.hs.bc{color:var(--seal);border:1px solid color-mix(in srgb,var(--seal) 50%,transparent);border-radius:999px;padding:0 .5em;font-size:.72em}
+i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transform:rotate(45deg);border-radius:1px;box-shadow:inset -1px -1px 0 rgba(0,0,0,.25);margin:0 2px}
+.rh-ib{display:inline-grid;place-items:center;width:1.55em;height:1.55em;margin-right:.45em;flex:none}.rh-ib i{width:.8em;height:.8em;background:var(--jade);transform:rotate(45deg);border-radius:1px;box-shadow:inset -1px -1px 0 rgba(0,0,0,.25)}
+/* lịch luyện: đường cam ngay dưới đường tu vi */
+.hud-tv{bottom:1px}.hud-ll{position:absolute;left:0;bottom:-2px;height:2px;background:#e8892a;box-shadow:0 0 5px #f0a04a;border-radius:0 2px 2px 0;transition:width .8s var(--ease)}
+.hb.ll i{background:#e8892a!important}
+/* bế quan: phần thanh trượt sau ngưỡng lịch luyện kẻ sọc */
+.rng input[type=range]{-webkit-appearance:none;appearance:none;height:8px;border-radius:4px;padding:0;margin:8px 0;
+  background:linear-gradient(90deg,var(--ink) 0 var(--val),transparent var(--val)),linear-gradient(90deg,#d6cbb0 0 var(--cap),transparent var(--cap)),repeating-linear-gradient(135deg,color-mix(in srgb,var(--seal) 45%,#d6cbb0) 0 4px,#d6cbb0 4px 8px)}
+.rng input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--ink);border:3px solid var(--paper);box-shadow:0 0 0 1px var(--ink)}
+.rng input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid var(--paper)}
+.bq-warn{border:1px solid color-mix(in srgb,var(--seal) 50%,transparent);background:color-mix(in srgb,var(--seal) 7%,var(--paper));padding:10px 12px;margin:8px 0;border-radius:var(--r)}
+.bq-warn p{margin:.3em 0;font-size:.9em}.bq-warn b{color:var(--seal)}
+.basegrid .hrow{grid-template-columns:7.4em 1fr 4em}

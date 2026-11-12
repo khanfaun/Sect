@@ -799,6 +799,23 @@ body *{font-weight:400!important}
 .lk{display:inline-flex;align-items:center;gap:4px}.lk-i{display:inline-flex}.lk-i .ic{width:14px;height:14px;margin-right:-6px}.lk-i .ic:last-child{margin-right:0}
 .lk.lk-up{color:#2f74c0!important}.lk.lk-dn{color:#c99412!important}.lk.lk-bad{color:var(--seal)!important}
 .lk-i{flex-direction:column;line-height:0}.lk-i .ic{width:12px;height:12px;margin:0!important;stroke-width:2.4}.lk-i .ic+.ic{margin-top:-7px!important}
+/* ===== đợt 10 ===== */
+/* thẻ trạng thái: hàng chỉ số dàn ngang */
+.hud-stats{margin:8px 0 0;display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:6px;border-top:1px solid var(--line);padding-top:6px}
+.hs{font-size:.82em}.hs.bc{color:var(--seal);border:1px solid color-mix(in srgb,var(--seal) 50%,transparent);border-radius:999px;padding:0 .5em;font-size:.72em}
+i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transform:rotate(45deg);border-radius:1px;box-shadow:inset -1px -1px 0 rgba(0,0,0,.25);margin:0 2px}
+.rh-ib{display:inline-grid;place-items:center;width:1.55em;height:1.55em;margin-right:.45em;flex:none}.rh-ib i{width:.8em;height:.8em;background:var(--jade);transform:rotate(45deg);border-radius:1px;box-shadow:inset -1px -1px 0 rgba(0,0,0,.25)}
+/* lịch luyện: đường cam ngay dưới đường tu vi */
+.hud-tv{bottom:1px}.hud-ll{position:absolute;left:0;bottom:-2px;height:2px;background:#e8892a;box-shadow:0 0 5px #f0a04a;border-radius:0 2px 2px 0;transition:width .8s var(--ease)}
+.hb.ll i{background:#e8892a!important}
+/* bế quan: phần thanh trượt sau ngưỡng lịch luyện kẻ sọc */
+.rng input[type=range]{-webkit-appearance:none;appearance:none;height:8px;border-radius:4px;padding:0;margin:8px 0;
+  background:linear-gradient(90deg,var(--ink) 0 var(--val),transparent var(--val)),linear-gradient(90deg,#d6cbb0 0 var(--cap),transparent var(--cap)),repeating-linear-gradient(135deg,color-mix(in srgb,var(--seal) 45%,#d6cbb0) 0 4px,#d6cbb0 4px 8px)}
+.rng input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--ink);border:3px solid var(--paper);box-shadow:0 0 0 1px var(--ink)}
+.rng input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid var(--paper)}
+.bq-warn{border:1px solid color-mix(in srgb,var(--seal) 50%,transparent);background:color-mix(in srgb,var(--seal) 7%,var(--paper));padding:10px 12px;margin:8px 0;border-radius:var(--r)}
+.bq-warn p{margin:.3em 0;font-size:.9em}.bq-warn b{color:var(--seal)}
+.basegrid .hrow{grid-template-columns:7.4em 1fr 4em}
 
 </style>
 </head>
@@ -1550,7 +1567,7 @@ function applyE(e,v){
   const pct=(x,max)=>{if(typeof x==='string'&&x.endsWith('%'))return max*parseFloat(x)/100;return +x;};
   if(e.hp!=null){const d=Math.round(pct(e.hp,s.maxHp));const before=r.hp;r.hp=clamp(r.hp+d,1,s.maxHp);const dd=r.hp-before;if(dd)ch.push(chip('❤️',sgn(dd),'Khí huyết',dd>0?'up':'dn'));}
   if(e.mp!=null){const d=Math.round(pct(e.mp,s.maxMp));const before=r.mp;r.mp=clamp(r.mp+d,0,s.maxMp);const dd=r.mp-before;if(dd)ch.push(chip('💧',sgn(dd),'Linh lực',dd>0?'up':'dn'));}
-  if(e.tv){let x=e.tv>0?tvGain(e.tv):e.tv;if(x>0&&!e.tvMajor){const room=Math.max(0,40-(r.tvMinor||0));x=Math.min(x,room);r.tvMinor=(r.tvMinor||0)+x;}const b=r.tv;addTv(x);const d=r.tv-b;if(Math.abs(d)>=0.5)ch.push(chip('✨',sgn(d)+'%','Tu vi',d>0?'up':'dn'));else if(e.tv>0&&r.tv>=100)ch.push(chip('✨','viên mãn','Tu vi đã đầy, cần đột phá ở động phủ','up'));}
+  if(e.tv){let x=e.tv>0?tvGain(e.tv):e.tv;if(x>0&&!e.tvMajor){const room=Math.max(0,40-(r.tvMinor||0));x=Math.min(x,room);r.tvMinor=(r.tvMinor||0)+x;}const b=r.tv;addTv(x);const d=r.tv-b;if(Math.abs(d)>=0.5)ch.push(chip('✨',sgn(d/100*tvPts(r.realm))+' tu vi','Tu vi',d>0?'up':'dn'));else if(e.tv>0&&r.tv>=100)ch.push(chip('✨','viên mãn','Tu vi đã đầy, cần đột phá ở động phủ','up'));}
   if(e.st!=null){let d;if(typeof e.st==='string')d=Math.round(r.st*parseFloat(e.st)/100);else d=Math.round(e.st*SC[r.region]*(e.st>0?(1+(s.fx.stonesP||0)/100):1));const b=r.st;r.st=Math.max(0,r.st+d);const dd=r.st-b;if(dd)ch.push(chip('💎',sgn(dd),'Linh thạch',dd>0?'up':'dn'));}
   const statN={atkP:['⚔️','Công','%'],defP:['🛡️','Thủ','%'],hpP:['❤️','Khí huyết tối đa','%'],mpP:['💧','Linh lực tối đa','%'],tp:['🌀','Thân pháp',''],ngo:['🧠','Ngộ tính',''],van:['🍀','Khí vận',''],tam:['🪷','Đạo tâm','']};
   for(const k in statN){if(e[k]){const s0=S();r.bon[k]+=e[k];const s1=S();if(k==='hpP')r.hp+=s1.maxHp-s0.maxHp;if(k==='mpP')r.mp+=s1.maxMp-s0.maxMp;ch.push(chip(statN[k][0],sgn(e[k])+statN[k][2],statN[k][1]+' (vĩnh viễn)',e[k]>0?'up':'dn'));}}
@@ -5007,12 +5024,46 @@ function tvPts(realm){return BQ_Y[clamp(realm,0,5)]*HY*TV_K;}
 // tu vi thực nhận khi bế quan còn nhân thêm hệ số tu luyện một lần nữa lúc cộng vào (luật cũ), nên con số hiển thị tính cả lần đó
 function bqReal(){return bqRate()*S().tvM;}
 function bqNeedY(){const r=G.run;return r.tv>=100?0:Math.max(0.25,Math.ceil((100-r.tv)/bqReal()*4)/4);}
-function tvPerSec(){const avg=bqReal()/100*tvPts(G.run.realm)/HY;return [Math.max(0,Math.floor(avg*BQ_LO)),Math.max(1,Math.ceil(avg*BQ_HI))];}
-function bqSpan(y){const r=G.run;const g=bqReal()*y*(y<1?0.9:1);const P=tvPts(r.realm)/100;
-  return y<=0?[0,0]:[Math.floor(Math.min(100-r.tv,g*BQ_LO)*P),Math.ceil(Math.min(100-r.tv,g*BQ_HI)*P)];}
+function tvPerMonth(){const avg=bqReal()/100*tvPts(G.run.realm)/12;return [Math.max(0,Math.floor(avg*BQ_LO)),Math.max(1,Math.ceil(avg*BQ_HI))];}
+function bqSpan(y){const r=G.run;if(!(y>0))return [0,0];const base=bqReal()*y*(y<1?0.9:1),pas=thonapPct()*y*12;const P=tvPts(r.realm)/100;
+  return [Math.floor(tvSimAdd(base*BQ_LO+pas)*P),Math.ceil(tvSimAdd(base*BQ_HI+pas)*P)];}
 function fmtN(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
 // mỗi lần bế quan rút một hệ số may rủi từ 0,6 tới 1,4: trung bình vẫn như cũ
 {const _bc9=bqCustom;bqCustom=function(y){const f=BQ_LO+Math.random()*(BQ_HI-BQ_LO);const _r=bqRate;bqRate=function(){return _r()*f;};try{return _bc9(y);}finally{bqRate=_r;}};}
+
+// ================= ĐỢT 10: THỔ NẠP VÀ LỊCH LUYỆN =================
+// Thổ nạp: thân thể tự hít thở linh khí, không cần bế quan, tu vi vẫn nhích lên theo thời gian.
+// Rất ít: chừng 5% tốc độ bế quan. Theo hệ số tu luyện (linh căn, tư chất, ngộ tính từ xuất thân,
+// tu vi +% từ công pháp, tâm pháp, trang bị, mệnh cách) và linh khí nơi đang đứng.
+function thonapPct(){const r=G.run;if(!r)return 0;const n=nodeById(r.at);return 100/(BQ_Y[clamp(r.realm,0,5)]*12)*0.05*S().tvM*LK_M[lkOf(n)];} // % tu vi mỗi tháng
+function thonapPts(){return Math.round(thonapPct()/100*tvPts(G.run.realm));}
+{const _adv10=advanceTime;let dep=0;advanceTime=function(h){dep++;let o;try{o=_adv10(h);}finally{dep--;}
+  if(!dep&&G.run&&h>0&&G.run.tv<100){const add=thonapPct()*h/HM;if(add>0)addTv(add);}return o;};}
+// Lịch luyện: như tu vi nhưng chỉ có được nhờ thực chiến và đi lại giang hồ. Lưu theo % như tu vi.
+// Tu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần (mọi nguồn, kể cả đan dược):
+// vượt dưới 20% nhận đủ; 30% còn 70%; 40% còn 35%; 60% còn 10%; từ 70% trở lên chỉ còn 2% (bình cảnh).
+// Lịch luyện cao hơn tu vi thì được ngộ đạo: nhận thêm tối đa 15%.
+// Muốn đột phá phải có lịch luyện ít nhất 70%. Đột phá xong lịch luyện về 0, giữ lại 20% phần vượt quá 100%.
+const LL_T=[[20,1],[30,.7],[40,.35],[60,.1],[70,.02]],LL_BT=70,LL_MAX=150,LL_CAPE=0.05; // dưới 5% coi như chạm đáy
+function llOf(){return (G.run&&G.run.ll)||0;}
+function llEff(tv){const ll=llOf();const gap=tv-ll;if(gap<0)return 1+Math.min(0.15,-gap/100*0.5);if(gap<=LL_T[0][0])return 1;
+  for(let i=1;i<LL_T.length;i++){const [g1,e1]=LL_T[i-1],[g2,e2]=LL_T[i];if(gap<=g2)return e1+(e2-e1)*(gap-g1)/(g2-g1);}return LL_T[LL_T.length-1][1];}
+function tvSimAdd(raw){const r=G.run;let add=0,rem=raw;while(rem>1e-9&&r.tv+add<100){const st=Math.min(rem,0.5);add+=st*llEff(r.tv+add);rem-=st;}return Math.min(add,100-r.tv);}
+{const _at10=addTv;addTv=function(x){if(!(x>0)||!G.run)return _at10(x);return _at10(tvSimAdd(x));};}
+// bế quan tới mức nào thì chạm đáy (chỉ còn 2%): trả về số năm, hoặc null nếu 5 năm vẫn chưa chạm
+function bqCapY(){const r=G.run;if(r.tv>=100)return null;for(let y=0.25;y<=5;y+=0.25){const raw=bqReal()*y*(y<1?0.9:1)+thonapPct()*y*12;if(llEff(r.tv+tvSimAdd(raw))<=LL_CAPE)return y;}return null;}
+function llAdd(x,why){const r=G.run;if(!r||!(x>0))return 0;const b=r.ll||0;r.ll=Math.min(LL_MAX,b+x);const d=r.ll-b;if(d>=0.5&&why)log(`Lịch luyện +${Math.round(d)}% (${why}).`);return d;}
+{const _cb10=canBreak;canBreak=function(){return _cb10()&&llOf()>=LL_BT;};}
+{const _bf10=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const res=_bf10.apply(this,arguments);if(G.run&&G.run.realm>rl)G.run.ll=Math.max(0,(G.run.ll||0)-100)*0.2;return res;};}
+// nguồn lịch luyện
+{const _fc10=finishCombat;finishCombat=function(sc){const res=_fc10(sc);try{const r=G.run;if(r&&!sc.spar&&!sc.kiep&&sc.en&&sc.en.k!=='tamma'&&sc.over!=='dead'){
+  const foes=sc.units.filter(u=>u.side==='B'&&!u.immune);const fl=foes.reduce((a,u)=>a+lcCalc(u),0);const ratio=clamp(fl/Math.max(1,lucChien()),0.15,2);
+  const me=mainUnit(sc);const k=sc.en.k||sc.en.n;r.llSeen=r.llSeen||{};const cnt=r.llSeen[k]||0;r.llSeen[k]=cnt+1;
+  let g=(sc.over==='win'?9:sc.over==='lose'?3:1)*Math.pow(ratio,0.8)/(1+0.25*cnt);if(sc.over==='win'&&me&&me.hp<me.max*0.2)g*=1.5;
+  llAdd(g,sc.over==='win'?'thắng trận':'trận thua');}}catch(e){console.error(e);}return res;};}
+{const _op10=openPlace;openPlace=function(id){_op10(id);const r=G.run;if(!r||!r.scene)return;r.llP=r.llP||[];const k=r.scene.id;if(!r.llP.includes(k)){r.llP.push(k);llAdd(4,'tới nơi mới');}};}
+{const _me10=meetEnt;meetEnt=function(e){const res=_me10(e);const r=G.run;if(r&&e){r.llN=r.llN||[];const k=e.name||e.id;if(!r.llN.includes(k)){r.llN.push(k);llAdd(3,'quen người mới');}}return res;};}
+{const _qw10=questWin;questWin=function(q){const res=_qw10(q);if(res&&res.length)llAdd(5,'xong việc');return res;};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -5113,7 +5164,7 @@ const ICP={
   seat:'M12 6a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM7 13c0-3 2-5 5-5s5 2 5 5M3 20c3-4 6-5 9-5s6 1 9 5M7 13l-2 4M17 13l2 4',
 };
 function ib(n,c){return `<span class="ib${c?' ib-'+c:''}">${ic(n)}</span>`;}
-const STAT_IC={'Tư chất':['gem','gold'],'Tốc độ tu':['seat','acc'],'ST chí mạng':['bolt','seal'],'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
+const STAT_IC={'Lịch luyện':['sword','gold'],'Thổ nạp':['wind','jade'],'Hiệu suất tu':['cycle','acc'],'Tư chất':['gem','gold'],'Tốc độ tu':['seat','acc'],'ST chí mạng':['bolt','seal'],'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
 function sib(label){const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
 function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICP[n]||ICP.info}"/></svg>`;}
 
@@ -5479,10 +5530,8 @@ function hudHTML(){
   const tm=r.tamma;
   let h=`<div class="hud-top"><button class="hud-av hud-av2" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Khí huyết '+r.hp+' / '+s.maxHp+' (nửa trên)\nLinh lực '+r.mp+' / '+s.maxMp+' (nửa dưới)\nChạm để mở nhân vật')}>${ring}<span class="hud-avi">${av}</span></button>
    <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="${warn?'bad':''}"${ta('Tuổi / thọ nguyên '+s.life+(warn?'\nThọ nguyên sắp cạn!':''))}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm${hurt}</small></div>
-   <div class="hud-stats"><span class="hs lc"${ta('Lực chiến '+fmtN(lucChien())+'\nTính từ chỉ số chiến đấu và trang bị.')}>${ic('sword')}${fmtN(lucChien())}</span><span class="hs st"${ta('Linh thạch')}>${ic('gem')}${fmtN(r.st)}</span>
-    <span class="hs tu"${ta('Tốc độ tu luyện: ~'+tvPerSec().join('-')+' tu vi mỗi giây bế quan\nHên xui: mỗi lần bế quan nhận được trong khoảng này')}>${ic('seat')}${tvPerSec().join('-')}</span><span class="hs tm${tm>=60?' hi':''}"${ta('Tâm ma '+tm+' / 100\nĐủ 100 sẽ phải đối mặt với chính mình')}>${ic('skull')}${tm}</span>
-    <span class="hs dt"${ta('Đạo tâm\nChống ảo cảnh, giúp đột phá')}>${ic('lotus')}${s.tam}</span></div></div>
-   <i class="hud-tv" style="width:${clamp(r.tv,0,100)}%"${ta('Tu vi '+Math.floor(r.tv)+'%')}></i>
+   </div><div class="hud-stats">${(()=>{const e=llEff(r.tv);return e<0.5?`<span class="hs bc"${ta('Bình cảnh: tu vi bỏ xa lịch luyện, tu vi thực nhận chỉ còn '+Math.round(e*100)+'%.\nHãy đi lịch luyện: đánh trận, tới nơi mới, quen người mới.')}>Bình cảnh</span>`:'';})()}<span class="hs lc"${ta('Lực chiến '+fmtN(lucChien())+'\nTính từ chỉ số chiến đấu và trang bị.')}>${ic('sword')}${fmtN(lucChien())}</span><span class="hs tu"${ta('Tốc độ tu luyện khi bế quan: ~'+tvPerMonth().join('-')+' tu vi mỗi tháng\nThổ nạp: +'+fmtN(thonapPts())+' tu vi mỗi tháng, không cần bế quan')}>${ic('seat')}${tvPerMonth().join('-')}</span><span class="hs tm${tm>=60?' hi':''}"${ta('Tâm ma '+tm+' / 100\nĐủ 100 sẽ phải đối mặt với chính mình')}>${ic('skull')}${tm}</span><span class="hs dt"${ta('Đạo tâm\nChống ảo cảnh, giúp đột phá')}>${ic('lotus')}${s.tam}</span><span class="hs st"${ta('Linh thạch')}><i class="rh"></i>${fmtN(r.st)}</span></div>
+   <i class="hud-tv" style="width:${clamp(r.tv,0,100)}%"${ta('Tu vi '+Math.floor(r.tv)+'%')}></i><i class="hud-ll" style="width:${clamp(llOf(),0,100)}%"${ta('Lịch luyện '+Math.floor(llOf())+'%')}></i>
    <div class="hud-clk2" id="clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])}>${clkStr(t)}</div>`;
   return h;
 }
@@ -5497,6 +5546,8 @@ function statusList(){const r=G.run,s=S(),w=W();const L=[];
   const pet=typeof petOut==='function'&&r.pets&&r.petOut!=null&&r.pets[r.petOut];if(pet)L.push(['','Linh thú: '+pet.n,pet.rest>w.t?'Đang dưỡng thương, còn '+durH(pet.rest-w.t):'Bậc '+pet.lv+' · '+petFxText(pet)]);
   for(const q of r.quests)if(q.state==='open')L.push(['','Việc: '+q.text,'Còn '+durH(Math.max(0,q.due-w.t))]);
   if(canBreak())L.push(['good','Tu vi viên mãn','Tới nơi có động phủ để đột phá.']);
+  else if(r.tv>=100&&llOf()<LL_BT)L.push(['bad','Lịch luyện chưa đủ','Tu vi đã viên mãn nhưng lịch luyện mới '+Math.floor(llOf())+'%, cần '+LL_BT+'% mới đột phá được.']);
+  if(llEff(r.tv)<0.5)L.push(['bad','Bình cảnh','Tu vi bỏ xa lịch luyện: tu vi thực nhận chỉ còn '+Math.round(llEff(r.tv)*100)+'%.']);
   return L;}
 const WICON={ngoai:'M5 19L19 5M8 8l3 3M13 13l3 3',bong:'M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z',gay:'M6 6l12 12M4 6a2 2 0 114 0 2 2 0 11-4 0M16 18a2 2 0 114 0 2 2 0 11-4 0M11 9l-2 2M15 13l-2 2',
   noi:'M12 20s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.5-7 10-7 10zM12 8l-2 4h4l-2 4',than:'M12 4a8 8 0 100 16 8 8 0 000-16zM12 8a4 4 0 104 4M12 12h.01',doc:'M12 3s6 7 6 11a6 6 0 01-12 0c0-4 6-11 6-11zM10 14h.01M14 14h.01',
@@ -5683,13 +5734,16 @@ function modalHTML(){
   const m=UI.modal;if(!m)return '';
   if(m.k==='danger'){const n=nodeById(m.id);return `<div class="mbox"><h3>Tử địa</h3><p>${esc(n.name)}: ${esc(dangerWhy(n))} Với ${esc(REALM[G.run.realm])} của ngươi, Bước vào đó, sơ sẩy là hết kiếp này.</p><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="goSure" data-arg="${n.id}">Vẫn đi</button></div></div>`;}
   if(m.k==='note'){const n=nodeById(m.id);return `<div class="mbox"><h3>Ghi chú · ${esc(n.name)}</h3><p class="hint">Ghim chỉ để nhớ, không đổi đường đi. Để trống rồi lưu là gỡ ghim.</p><input id="noteIn" maxlength="80" value="${esc(noteOf(n.id))}" placeholder="vd: có động phủ, quay lại khi Trúc Cơ"><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="noteSave" data-arg="${n.id}">Lưu</button></div></div>`;}
-  if(m.k==='bq'){const I=bqInfo();const mx=Math.min(5,I.maxY);const y=clamp(m.y==null?Math.min(1,mx):m.y,0,mx);m.y=y;const cn=curNode();const B=bqBits(y,I);
+  if(m.k==='bq'){const I=bqInfo();const mx=Math.min(5,I.maxY);const y=clamp(m.y==null?Math.min(1,mx):m.y,0,mx);m.y=y;const cn=curNode();const B=bqBits(y,I);const cap=bqCapY();const capP=cap!=null&&mx>0?Math.min(100,cap/mx*100):100;const e=llEff(G.run.tv);
     return `<div class="mbox bq">${sceneCv('bequan'+G.run.at,G.run.region,'dong','mart','nhan:0.5:0.5:0:bq')}<h3>Bế quan</h3>
-     <div class="kv"><div><span>Linh khí nơi này</span>${lkTag(cn)}</div><div><span>Tu vi nhận được</span><b class="tu-c" id="bqG">${B.g}</b></div><div><span>Thọ nguyên còn</span><b id="bqL" class="${B.lc}">${B.l}</b></div><div><span>Tới viên mãn cần</span><b id="bqN">${B.n}</b></div></div>
-     <label class="rng"><span>Thời gian: <b id="bqY">${y>0?durH(y*HY):'0 tháng'}</b></span><input type="range" id="bqR" min="0" max="${mx}" step="0.25" value="${y}"></label>
+     <div class="kv"><div><span>Linh khí nơi này</span>${lkTag(cn)}</div><div${ta('Thổ nạp: tu vi tự tăng theo thời gian, không cần bế quan. Đã tính vào tu vi nhận được.')}><span>Thổ nạp</span><b>+${fmtN(thonapPts())} tu vi/tháng</b></div>
+     <div${ta('Do chênh lệch tu vi và lịch luyện. Tu vi càng bỏ xa lịch luyện, tu vi thực nhận càng ít.')}><span>Hiệu suất (lịch luyện ${Math.floor(llOf())}%)</span><b class="${e<0.5?'lv-bad':e<1?'lv-mid':'lv-ok'}">${Math.round(e*100)}%${e<0.5?' · bình cảnh':e>1?' · ngộ đạo':''}</b></div>
+     <div><span>Tu vi nhận được</span><b class="tu-c" id="bqG">${B.g}</b></div><div><span>Thọ nguyên còn</span><b id="bqL" class="${B.lc}">${B.l}</b></div><div><span>Tới viên mãn cần</span><b id="bqN">${B.n}</b></div></div>
+     <label class="rng"><span>Thời gian: <b id="bqY">${y>0?durH(y*HY):'0 tháng'}</b></span><input type="range" id="bqR" min="0" max="${mx}" step="0.25" value="${y}" data-cap="${cap!=null?cap:''}" style="--cap:${capP}%;--val:${mx>0?y/mx*100:0}%"></label>
      <div class="hbtns"><button data-act="bqSet" data-arg="0.25">3 tháng</button><button data-act="bqSet" data-arg="0.5"${mx<0.5?' disabled':''}>6 tháng</button><button data-act="bqSet" data-arg="1"${mx<1?' disabled':''}>1 năm</button><button data-act="bqSet" data-arg="${Math.min(mx,bqNeedY())}"${I.full?' disabled':''}>Tới viên mãn</button></div>
      <p class="hint" id="bqHint">${B.h}</p>
-     ${(()=>{const brk=canBreak();if(!brk)return '';const atDp=cn&&cn.dp;return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint">${atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>Đột phá</button></div>`;})()}
+     ${(()=>{const r=G.run;if(r.tv>=100&&llOf()<LL_BT)return `<div class="bt-box"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint bad">Lịch luyện mới ${Math.floor(llOf())}%, cần ${LL_BT}% mới đột phá được. Hãy ra ngoài lịch luyện.</p></div>`;const brk=canBreak();if(!brk)return '';const atDp=cn&&cn.dp;return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint">${atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>Đột phá</button></div>`;})()}
+     ${m.warn?`<div class="bq-warn"><p><b>Lịch luyện không đủ</b></p><p>Bế quan quá ${durH(cap*HY)}, tu vi sẽ bỏ xa lịch luyện quá nhiều: phần thời gian còn lại chỉ nhận được dưới ${Math.round(LL_CAPE*100)}% tu vi. Nên ra ngoài lịch luyện trước.</p><p>Vẫn tiếp tục bế quan ${durH(y*HY)}?</p><div class="mb-f"><button class="btn" data-act="bqWarnX">Thôi</button><button class="btn pri" data-act="bqWarnOk">Xác nhận, tiếp tục</button></div></div>`:''}
      <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" id="bqGoB" data-act="bqGo"${y>0?'':' disabled'}>Nhập định</button></div></div>`;}
   if(m.k==='explore'&&SETTLE.includes(nodeById(G.run.at).type)){const n=nodeById(G.run.at);const X=townStats(n);const tb=UI.tab.ex||'L';const rows=L=>`<div class="kv">${L.map(x=>`<div><span>${esc(x[0])}</span><b>${esc(x[1])}</b></div>`).join('')}</div>`;
     return `<div class="mbox"><h3>${esc(n.name)}</h3>${tabsHTML('ex',[['L','Kiếm được · '+X.L.length],['M','Có thể gặp · '+(X.M.length+X.evs.length)]],tb)}
@@ -5716,14 +5770,18 @@ function modalHTML(){
 
 // ---------- bế quan: các con số đổi theo thanh trượt ----------
 function bqBits(y,I){I=I||bqInfo();const sp=bqSpan(y);const left=Math.max(0,I.left-y);const need=Math.max(0,bqNeedY()-y);const risk=Math.round(bqRisk(y)*100);
-  return {g:y>0?'~'+fmtN(sp[0])+'-'+fmtN(sp[1])+' tu vi':'0 tu vi',l:numVN(Math.floor(left*4)/4)+' năm',lc:left<=10?'lv-bad':left<=30?'lv-mid':'lv-ok',
-    n:I.full?'đã viên mãn':need<=0?'viên mãn':'chừng '+numVN(need)+' năm',h:(y>0?(risk?risk+'% bị quấy nhiễu giữa chừng':'Yên ổn')+'. ':'Chọn thời gian bế quan. ')+'Hên xui: nhận được trong khoảng trên. Xuất quan thì khí huyết, linh lực hồi đầy.'};}
+  const r=G.run;const P=tvPts(r.realm)/100;const e0=llEff(r.tv),e1=llEff(Math.min(100,r.tv+sp[0]/P));const cap=bqCapY();
+  let ll='';if(y>0){if(cap!=null&&y>cap)ll=`Lịch luyện không đủ: quá ${durH(cap*HY)} thì tu vi chỉ còn nhận dưới ${Math.round(LL_CAPE*100)}%. `;
+    else if(e0<0.5)ll=`Đang bình cảnh (hiệu suất ${Math.round(e0*100)}%): nên đi lịch luyện trước. `;
+    else if(e1<e0-0.05)ll=`Tu vi càng lên, càng bỏ xa lịch luyện (${Math.floor(llOf())}%): hiệu suất sẽ tụt còn khoảng ${Math.round(e1*100)}%. `;
+    else if(e0>1)ll=`Lịch luyện dày: được ngộ đạo, nhận thêm ${Math.round((e0-1)*100)}%. `;}
+  return {g:y>0?'~'+fmtN(sp[0])+'-'+fmtN(sp[1])+' tu vi':'0 tu vi',l:Math.floor(left)+' năm',lc:left<=10?'lv-bad':left<=30?'lv-mid':'lv-ok',
+    n:I.full?'đã viên mãn':need<=0?'viên mãn':'chừng '+numVN(need)+' năm',h:(y>0?(risk?risk+'% bị quấy nhiễu giữa chừng. ':'Yên ổn. '):'Chọn thời gian bế quan. ')+ll+'Hên xui: nhận được trong khoảng trên, đã gồm thổ nạp. Xuất quan thì khí huyết, linh lực hồi đầy.'};}
 function bqUpd(y){const B=bqBits(y);const set=(id,t,c)=>{const e=document.getElementById(id);if(e){e.textContent=t;if(c!=null)e.className=c;}};
-  set('bqY',y>0?durH(y*HY):'0 tháng');set('bqG',B.g);set('bqL',B.l,B.lc);set('bqN',B.n);set('bqHint',B.h);const b=document.getElementById('bqGoB');if(b)b.disabled=!(y>0);}
-// linh khí: nhiều thì xanh dương kèm dấu ^ (rất nhiều thì ^^), ít thì dấu ngược màu vàng, quá ít thì đỏ
-function lkTag(n){const m=LK_M[lkOf(n)]*(n&&n.dp?1.15:1)*(G.bqRoom?1.5:1);const s=m>=2?2:m>=1.3?1:m>=0.9?0:m>=0.7?-1:-2;const t=LK_N[lkOf(n)]+(n&&n.dp?' · có động phủ':'')+(G.bqRoom?' · tĩnh thất tông môn':'');
-  const c=s>=1?'lk-up':s===0?'':s===-1?'lk-dn':'lk-bad';const k=s>=2?2:s===1?1:s===-1?1:s<=-2?2:0;
-  return `<b class="lk ${c}">${k?`<span class="lk-i">${Array(k).fill(ic(s>0?'up':'down')).join('')}</span>`:''}${t}</b>`;}
+  set('bqY',y>0?durH(y*HY):'0 tháng');set('bqG',B.g);set('bqL',B.l,B.lc);set('bqN',B.n);set('bqHint',B.h);const b=document.getElementById('bqGoB');if(b)b.disabled=!(y>0);
+  const R=document.getElementById('bqR');if(R)R.style.setProperty('--val',(+R.max>0?y/+R.max*100:0)+'%');}
+function lkTag(n){const m=LK_M[lkOf(n)]*(n&&n.dp?1.15:1)*(G.bqRoom?1.5:1);const c=m>=1.3?'lk-up':m>=0.9?'':m>=0.7?'lk-dn':'lk-bad';
+  const t=LK_N[lkOf(n)]+(n&&n.dp?' · có động phủ':'')+(G.bqRoom?' · tĩnh thất tông môn':'');return `<b class="lk ${c}">${t}</b>`;}
 
 // ---------- màn chiến đấu ----------
 const STI={stance:['Thủ','Thủ thế đỡ đòn: đứng chờ đòn, giảm khoảng 20–30% sát thương, tốn 30% thể lực'],block:['Hộ','Hộ thể: chặn sát thương'],poison:['Độc','Độc: mất khí huyết mỗi khi về mốc đầu, giảm dần'],burn:['Thiêu','Thiêu: mất khí huyết mỗi khi về mốc đầu, giảm một nửa'],weak:['Suy','Suy nhược: sát thương gây ra giảm 30%'],vuln:['Phá','Phá giáp: nhận thêm 30% sát thương'],rage:['Nộ','Cuồng nộ: mỗi tầng +12% sát thương'],regen:['Hồi','Hồi xuân: hồi 6% khí huyết mỗi khi về mốc đầu'],evade:['Độn','Ảnh độn: né trọn đòn kế tiếp']};
@@ -5955,7 +6013,10 @@ function pChar(){
       kvRow('Nhân quả',karmaName(r.karma)+' ('+r.karma+')','Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
     b+=sgBox('yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+Math.floor(r.tv)+'%'),
       `<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${Math.floor(r.tv)}%</span></div>`,
-      kvRow('Tốc độ tu','<span class="tu-c">~'+tvPerSec().join('-')+' tu vi/giây</span>','Tu vi nhận được mỗi giây khi bế quan ở nơi đang đứng. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.\nĐầy cảnh giới này cần '+fmtN(tvPts(r.realm))+' tu vi.'),
+      kvRow('Tốc độ tu','<span class="tu-c">~'+tvPerMonth().join('-')+' tu vi/tháng</span>','Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.\nĐầy cảnh giới này cần '+fmtN(tvPts(r.realm))+' tu vi.'),
+      kvRow('Thổ nạp','+'+fmtN(thonapPts())+' tu vi/tháng','Thân thể tự hít thở linh khí: không cần bế quan, tu vi vẫn tự tăng theo thời gian, kể cả lúc đi đường hay bế quan.\nRất ít, chừng 5% tốc độ bế quan. Theo linh căn, tư chất, ngộ tính, công pháp, tâm pháp, trang bị, mệnh cách và linh khí nơi đang đứng.'),
+      `<div class="hrow tvrow"${ta('Lịch luyện '+Math.floor(llOf())+'%\nCó được nhờ thực chiến (thắng nhiều, thua ít, đánh kẻ mạnh hơn được nhiều hơn), tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Cần '+LL_BT+'% để đột phá.')}><span class="hn">${sib('Lịch luyện')}Lịch luyện</span>${bar(Math.min(100,llOf()),100,'ll')}<span class="hv">${Math.floor(llOf())}%</span></div>`,
+      kvRow('Hiệu suất tu',(()=>{const e=llEff(r.tv);return `<span class="${e<0.5?'bad':e>1?'good':''}">${Math.round(e*100)}%${e<0.5?' · bình cảnh':e>1?' · ngộ đạo':''}</span>`;})(),'Phần tu vi thực nhận so với lẽ ra được nhận, do chênh lệch tu vi và lịch luyện.\nTu vi vượt lịch luyện dưới 20%: nhận đủ. Vượt 30%: 70%. Vượt 40%: 35%. Vượt 60%: 10%. Từ 70%: chỉ 2%.\nLịch luyện cao hơn tu vi: nhận thêm tối đa 15%.'),
       kvRow('Đạo cơ',(r.dao||0)+' · '+QNAME[qOf(r.dao||0)],'Điểm đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'\nMốc kế tiếp: '+qNext(r.dao||0)+' điểm':'\nĐã đạt Thiên đạo')),
       kvRow('Tâm ma',r.tamma,'Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
       kvRow('Thần thức',s.than+' · tầm '+SENSE[r.realm]+' dặm','Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
@@ -6124,7 +6185,7 @@ function bagTabHTML(){
   const SORT=['Phẩm cao','Phẩm thấp','Tên A–Z','Loại'];
   V.sort([(a,b)=>b.tier-a.tier||a.n.localeCompare(b.n),(a,b)=>a.tier-b.tier||a.n.localeCompare(b.n),(a,b)=>a.n.localeCompare(b.n),(a,b)=>a.cat.localeCompare(b.cat)||b.tier-a.tier][B.sort]);
   const cap=bagCap();
-  const TOP=`<div class="bagtop"><div class="bst"${ta('Linh thạch: tiền tệ của giới tu tiên')}>${ib('gem','jade')}<span><small>Linh thạch</small>${stoneHTML(r.st)}</span></div><div class="bcap"${ta('Sức chứa tăng theo cảnh giới và túi trữ vật đang đeo.\nTối đa '+BAG_MAX+' ô.')}><small>Túi đồ</small><b>${items.length} / ${cap} ô</b></div><button class="icb" data-act="phamHelp" aria-label="Các phẩm"${ta('Bảng màu các phẩm')}>?</button></div>`;
+  const TOP=`<div class="bagtop"><div class="bst"${ta('Linh thạch: tiền tệ của giới tu tiên')}><span class="rh-ib"><i></i></span><span><small>Linh thạch</small>${stoneHTML(r.st)}</span></div><div class="bcap"${ta('Sức chứa tăng theo cảnh giới và túi trữ vật đang đeo.\nTối đa '+BAG_MAX+' ô.')}><small>Túi đồ</small><b>${items.length} / ${cap} ô</b></div><button class="icb" data-act="phamHelp" aria-label="Các phẩm"${ta('Bảng màu các phẩm')}>?</button></div>`;
   let R=`<div class="bfil">${ddSel('bagTab','Loại',Object.keys(BAG_CAT).map(c=>({v:c,h:esc(BAG_CAT[c])+(cnt(c)?` <small>${cnt(c)}</small>`:'')})),B.tab)}
    ${ddSel('bagPham','Phẩm',[{v:-1,h:'Mọi phẩm'}].concat(PHAM.map((p,i)=>({v:i,h:qName(p,i)}))),B.pham)}
    ${ddSel('bagSort','Sắp xếp',SORT.map((n,i)=>({v:i,h:n})),B.sort)}</div>`;
@@ -6466,8 +6527,9 @@ const ACT={
   noteEdit:id=>{UI.modal={k:'note',id:+id};setTimeout(()=>{const i=$('#noteIn');if(i)i.focus();},50);},
   noteSave:id=>{const i=$('#noteIn');if(noteSet(+id,i?i.value:'')===false){note('Đã ghim đủ 50 chỗ.');}UI.modal=null;},
   noteGo:k=>{const n=nodeById(+k);if(n&&Math.floor(n.id/100)===G.run.region&&n.fog>=1){UI.panel=null;UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else note('Chỗ ấy không ở vùng này, hoặc kiếp này ngươi chưa biết tới.');},
-  bqSet:y=>{if(UI.modal&&UI.modal.k==='bq')UI.modal.y=+y;},
-  bqGo:()=>{const y=UI.modal&&UI.modal.y;if(!(y>0))return;UI.modal=null;const t0=W().t,tv0=G.run.tv;const done=bqCustom(y);const r=G.run,sc=r&&r.scene;if(!done){note(bqCan()||'Không bế quan được ở đây.');if(UI.bqOpened&&sc&&sc.type==='place')r.scene=null;}else if(sc&&sc.type==='place'){UI.modal={k:'res',title:'Xuất quan',t:sc.msg.join(' ')+' Thời gian trôi qua '+durH(W().t-t0)+', tu vi '+(r.tv>=tv0?'tăng '+numVN(r.tv-tv0)+'%':'đã viên mãn')+'.',chips:sc.chips};sc.msg=[];sc.chips=[];if(UI.bqOpened)r.scene=null;}UI.bqOpened=false;},
+  bqSet:y=>{if(UI.modal&&UI.modal.k==='bq'){UI.modal.y=+y;UI.modal.ok=0;const c=bqCapY();UI.modal.warn=c!=null&&+y>c?1:0;}},
+  bqWarnX:()=>{if(UI.modal){UI.modal.warn=0;const c=bqCapY();if(c!=null)UI.modal.y=c;}},bqWarnOk:()=>{if(UI.modal){UI.modal.warn=0;UI.modal.ok=1;ACT.bqGo();}},
+  bqGo:()=>{const y=UI.modal&&UI.modal.y;if(!(y>0))return;{const c=bqCapY();if(c!=null&&y>c&&!UI.modal.ok){UI.modal.warn=1;return;}}UI.modal=null;const t0=W().t,tv0=G.run.tv;const done=bqCustom(y);const r=G.run,sc=r&&r.scene;if(!done){note(bqCan()||'Không bế quan được ở đây.');if(UI.bqOpened&&sc&&sc.type==='place')r.scene=null;}else if(sc&&sc.type==='place'){UI.modal={k:'res',title:'Xuất quan',t:sc.msg.join(' ')+' Thời gian trôi qua '+durH(W().t-t0)+', tu vi '+(r.tv>=tv0?'tăng '+numVN(r.tv-tv0)+'%':'đã viên mãn')+'.',chips:sc.chips};sc.msg=[];sc.chips=[];if(UI.bqOpened)r.scene=null;}UI.bqOpened=false;},
   enc:a=>encAct(a),
   bossFight:()=>bossFight(),
   skill:id=>{UI.menu=null;const sc=G.run.scene;if(needTarget(sc,id)){UI.pendSk=id;return;}UI.pendSk=null;playerAct(id);},
@@ -6570,6 +6632,7 @@ document.addEventListener('click',e=>{
 },true);
 // ô chọn dạng thả xuống (bộ lọc túi đồ): đổi giá trị thì gọi đúng hành động
 document.addEventListener('change',e=>{const el=e.target.closest&&e.target.closest('select[data-chg]');if(!el)return;const f=ACT[el.dataset.chg];if(!f)return;try{f(el.value,el);}catch(err){console.error(err);}after();});
+document.addEventListener('change',e=>{if(e.target.id==='bqR'&&UI.modal&&UI.modal.k==='bq'){const y=+e.target.value;const c=bqCapY();UI.modal.y=y;UI.modal.ok=0;if(c!=null&&y>c){UI.modal.warn=1;render();}}});
 document.addEventListener('input',e=>{if(e.target.id==='bqR'&&UI.modal&&UI.modal.k==='bq'){const y=+e.target.value;UI.modal.y=y;bqUpd(y);HCACHE.modal=null;}});
 
 // ---------- chú thích ----------

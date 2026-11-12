@@ -876,9 +876,43 @@ function tvPts(realm){return BQ_Y[clamp(realm,0,5)]*HY*TV_K;}
 // tu vi thực nhận khi bế quan còn nhân thêm hệ số tu luyện một lần nữa lúc cộng vào (luật cũ), nên con số hiển thị tính cả lần đó
 function bqReal(){return bqRate()*S().tvM;}
 function bqNeedY(){const r=G.run;return r.tv>=100?0:Math.max(0.25,Math.ceil((100-r.tv)/bqReal()*4)/4);}
-function tvPerSec(){const avg=bqReal()/100*tvPts(G.run.realm)/HY;return [Math.max(0,Math.floor(avg*BQ_LO)),Math.max(1,Math.ceil(avg*BQ_HI))];}
-function bqSpan(y){const r=G.run;const g=bqReal()*y*(y<1?0.9:1);const P=tvPts(r.realm)/100;
-  return y<=0?[0,0]:[Math.floor(Math.min(100-r.tv,g*BQ_LO)*P),Math.ceil(Math.min(100-r.tv,g*BQ_HI)*P)];}
+function tvPerMonth(){const avg=bqReal()/100*tvPts(G.run.realm)/12;return [Math.max(0,Math.floor(avg*BQ_LO)),Math.max(1,Math.ceil(avg*BQ_HI))];}
+function bqSpan(y){const r=G.run;if(!(y>0))return [0,0];const base=bqReal()*y*(y<1?0.9:1),pas=thonapPct()*y*12;const P=tvPts(r.realm)/100;
+  return [Math.floor(tvSimAdd(base*BQ_LO+pas)*P),Math.ceil(tvSimAdd(base*BQ_HI+pas)*P)];}
 function fmtN(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
 // mỗi lần bế quan rút một hệ số may rủi từ 0,6 tới 1,4: trung bình vẫn như cũ
 {const _bc9=bqCustom;bqCustom=function(y){const f=BQ_LO+Math.random()*(BQ_HI-BQ_LO);const _r=bqRate;bqRate=function(){return _r()*f;};try{return _bc9(y);}finally{bqRate=_r;}};}
+
+// ================= ĐỢT 10: THỔ NẠP VÀ LỊCH LUYỆN =================
+// Thổ nạp: thân thể tự hít thở linh khí, không cần bế quan, tu vi vẫn nhích lên theo thời gian.
+// Rất ít: chừng 5% tốc độ bế quan. Theo hệ số tu luyện (linh căn, tư chất, ngộ tính từ xuất thân,
+// tu vi +% từ công pháp, tâm pháp, trang bị, mệnh cách) và linh khí nơi đang đứng.
+function thonapPct(){const r=G.run;if(!r)return 0;const n=nodeById(r.at);return 100/(BQ_Y[clamp(r.realm,0,5)]*12)*0.05*S().tvM*LK_M[lkOf(n)];} // % tu vi mỗi tháng
+function thonapPts(){return Math.round(thonapPct()/100*tvPts(G.run.realm));}
+{const _adv10=advanceTime;let dep=0;advanceTime=function(h){dep++;let o;try{o=_adv10(h);}finally{dep--;}
+  if(!dep&&G.run&&h>0&&G.run.tv<100){const add=thonapPct()*h/HM;if(add>0)addTv(add);}return o;};}
+// Lịch luyện: như tu vi nhưng chỉ có được nhờ thực chiến và đi lại giang hồ. Lưu theo % như tu vi.
+// Tu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần (mọi nguồn, kể cả đan dược):
+// vượt dưới 20% nhận đủ; 30% còn 70%; 40% còn 35%; 60% còn 10%; từ 70% trở lên chỉ còn 2% (bình cảnh).
+// Lịch luyện cao hơn tu vi thì được ngộ đạo: nhận thêm tối đa 15%.
+// Muốn đột phá phải có lịch luyện ít nhất 70%. Đột phá xong lịch luyện về 0, giữ lại 20% phần vượt quá 100%.
+const LL_T=[[20,1],[30,.7],[40,.35],[60,.1],[70,.02]],LL_BT=70,LL_MAX=150,LL_CAPE=0.05; // dưới 5% coi như chạm đáy
+function llOf(){return (G.run&&G.run.ll)||0;}
+function llEff(tv){const ll=llOf();const gap=tv-ll;if(gap<0)return 1+Math.min(0.15,-gap/100*0.5);if(gap<=LL_T[0][0])return 1;
+  for(let i=1;i<LL_T.length;i++){const [g1,e1]=LL_T[i-1],[g2,e2]=LL_T[i];if(gap<=g2)return e1+(e2-e1)*(gap-g1)/(g2-g1);}return LL_T[LL_T.length-1][1];}
+function tvSimAdd(raw){const r=G.run;let add=0,rem=raw;while(rem>1e-9&&r.tv+add<100){const st=Math.min(rem,0.5);add+=st*llEff(r.tv+add);rem-=st;}return Math.min(add,100-r.tv);}
+{const _at10=addTv;addTv=function(x){if(!(x>0)||!G.run)return _at10(x);return _at10(tvSimAdd(x));};}
+// bế quan tới mức nào thì chạm đáy (chỉ còn 2%): trả về số năm, hoặc null nếu 5 năm vẫn chưa chạm
+function bqCapY(){const r=G.run;if(r.tv>=100)return null;for(let y=0.25;y<=5;y+=0.25){const raw=bqReal()*y*(y<1?0.9:1)+thonapPct()*y*12;if(llEff(r.tv+tvSimAdd(raw))<=LL_CAPE)return y;}return null;}
+function llAdd(x,why){const r=G.run;if(!r||!(x>0))return 0;const b=r.ll||0;r.ll=Math.min(LL_MAX,b+x);const d=r.ll-b;if(d>=0.5&&why)log(`Lịch luyện +${Math.round(d)}% (${why}).`);return d;}
+{const _cb10=canBreak;canBreak=function(){return _cb10()&&llOf()>=LL_BT;};}
+{const _bf10=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const res=_bf10.apply(this,arguments);if(G.run&&G.run.realm>rl)G.run.ll=Math.max(0,(G.run.ll||0)-100)*0.2;return res;};}
+// nguồn lịch luyện
+{const _fc10=finishCombat;finishCombat=function(sc){const res=_fc10(sc);try{const r=G.run;if(r&&!sc.spar&&!sc.kiep&&sc.en&&sc.en.k!=='tamma'&&sc.over!=='dead'){
+  const foes=sc.units.filter(u=>u.side==='B'&&!u.immune);const fl=foes.reduce((a,u)=>a+lcCalc(u),0);const ratio=clamp(fl/Math.max(1,lucChien()),0.15,2);
+  const me=mainUnit(sc);const k=sc.en.k||sc.en.n;r.llSeen=r.llSeen||{};const cnt=r.llSeen[k]||0;r.llSeen[k]=cnt+1;
+  let g=(sc.over==='win'?9:sc.over==='lose'?3:1)*Math.pow(ratio,0.8)/(1+0.25*cnt);if(sc.over==='win'&&me&&me.hp<me.max*0.2)g*=1.5;
+  llAdd(g,sc.over==='win'?'thắng trận':'trận thua');}}catch(e){console.error(e);}return res;};}
+{const _op10=openPlace;openPlace=function(id){_op10(id);const r=G.run;if(!r||!r.scene)return;r.llP=r.llP||[];const k=r.scene.id;if(!r.llP.includes(k)){r.llP.push(k);llAdd(4,'tới nơi mới');}};}
+{const _me10=meetEnt;meetEnt=function(e){const res=_me10(e);const r=G.run;if(r&&e){r.llN=r.llN||[];const k=e.name||e.id;if(!r.llN.includes(k)){r.llN.push(k);llAdd(3,'quen người mới');}}return res;};}
+{const _qw10=questWin;questWin=function(q){const res=_qw10(q);if(res&&res.length)llAdd(5,'xong việc');return res;};}
