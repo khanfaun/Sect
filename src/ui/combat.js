@@ -1,7 +1,7 @@
 // ---------- màn chiến đấu ----------
 const STI={stance:['Thủ','Thủ thế đỡ đòn: đứng chờ đòn, giảm khoảng 20–30% sát thương, tốn 30% thể lực'],block:['Hộ','Hộ thể: chặn sát thương'],poison:['Độc','Độc: mất khí huyết mỗi khi về mốc đầu, giảm dần'],burn:['Thiêu','Thiêu: mất khí huyết mỗi khi về mốc đầu, giảm một nửa'],weak:['Suy','Suy nhược: sát thương gây ra giảm 30%'],vuln:['Phá','Phá giáp: nhận thêm 30% sát thương'],rage:['Nộ','Cuồng nộ: mỗi tầng +12% sát thương'],regen:['Hồi','Hồi xuân: hồi 6% khí huyết mỗi khi về mốc đầu'],evade:['Độn','Ảnh độn: né trọn đòn kế tiếp']};
 function stIcons(st){let o='';for(const k in STI){const v=st[k];if(v>0)o+=`<span class="si si-${k}"${ta(STI[k][1])}>${STI[k][0]}<b>${v}</b></span>`;}if(st.soul>0)o+=`<span class="si si-soul"${ta('Đốt nguyên thần: đòn đánh xuyên 25% thủ, hút 10% sát thương')}>Thần<b>${st.soul}</b></span>`;return o?`<div class="sts">${o}</div>`:'';}
-function unitKind(u){if(u.kind==='kiep')return 'kiep';if(u.side==='A')return 'nhan';return u.f==='nhan'?'ma':(u.f||'vat');}
+function unitKind(u){if(u.kind==='kiep')return 'kiep'+(u.kk?'-'+u.kk:'');if(u.side==='A')return 'nhan';return u.f==='nhan'?'ma':(u.f||'vat');}
 function trackHTML(sc){
   let h='<div class="track"><i class="mk m0"></i><i class="mk m50"><em>ra chiêu</em></i><i class="mk m75"><em>phát lực</em></i><i class="mk m100"></i>';
   for(const u of sc.units){if(u.hp<=0&&!u.immune)continue;h+=`<span class="av ${u.side}${u.isMain?' me':''}" id="av${u.id}" style="left:${Math.min(100,u.pos)}%">${u.immune?u.icon:uAvatar(u)}</span>`;}
@@ -71,7 +71,7 @@ function vCombat(sc){
   h+=`<div class="clog" data-act="clog"${ta('Chạm để xem toàn bộ diễn biến')}><span class="cspd">${[1,2,3].map(n=>`<button class="${(CFG.cspeed||1)===n?'on':''}" data-act="cspd" data-arg="${n}"${ta('Tốc độ trận ×'+n)}>×${n}</button>`).join('')}</span>${lg.map((l,i)=>`<p class="${l.c?'lg-'+l.c:''} ${i<lg.length-1?'old':''}">${esc(l.t)}</p>`).join('')}</div>`;
   if(!sc.done&&injured()&&!sc.spar&&!sc.kiep)h+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   if(sc.done){
-    const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong lôi kiếp':'Ngươi đã ngã xuống'}[sc.over];
+    const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong thiên kiếp':'Ngươi đã ngã xuống'}[sc.over];
     return h+`<div class="cb-end ${sc.over}"><b>${t}</b>${sc.llGain?`<span class="chip up">⚔ +${sc.llGain} lịch luyện</span>`:''}${goBtn('cont','Tiếp tục')}</div></section>`;
   }
   h+='<div class="cb-cmd">';

@@ -2356,7 +2356,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
     for(const t of tg)if(t.st.stance&&t.phase==='guard'&&t._blk&&t.hp>0)endStance(sc,t,null);
     if(total&&(f.drain||(isP&&fx.drain)))u.hp=Math.min(u.max,u.hp+Math.round(total*((f.drain||0)+(isP?fx.drain||0:0))/100));
     if(total&&f.edrain)u.hp=Math.min(u.max,u.hp+Math.round(total*f.edrain/100));
-    if(sc.kiep&&total){const k=sc.kiep;const me=mainUnit(sc);const cut=Math.min(0.25,total/me.max*0.5);k.uy=Math.max(0.3,k.uy-cut);msg+=` (lôi uy −${Math.round(cut*100)}%)`;}
+    if(sc.kiep&&total){const k=sc.kiep;const me=mainUnit(sc);const cut=Math.min(0.25,total/me.max*0.5);k.uy=Math.max(0.3,k.uy-cut);msg+=` (kiếp uy −${Math.round(cut*100)}%)`;}
   }
   // tự thân
   const hp0=u.hp;
@@ -3024,7 +3024,7 @@ function lifeSummary(cause,info){
   if(cause==='combat')end=`Năm ${age} tuổi, ${r.ten} chết dưới tay ${info.n} ở ${r.place.n}.`;
   else if(cause==='toahoa')end=`Năm ${age} tuổi, thọ nguyên cạn kiệt, ${r.ten} tọa hóa ở ${r.place.n}.`;
   else if(cause==='tamma')end=`Năm ${age} tuổi, ${r.ten} tẩu hỏa nhập ma.`;
-  else if(cause==='kiep')end=`Năm ${age} tuổi, ${r.ten} tan thành tro bụi dưới lôi kiếp ở ${r.place.n}.`;
+  else if(cause==='kiep')end=`Năm ${age} tuổi, ${r.ten} tan thành tro bụi dưới thiên kiếp ở ${r.place.n}.`;
   else if(cause==='quyan')end=`Năm ${age} tuổi, ${r.ten} gác kiếm quy ẩn ở ${r.place.n}, sống nốt phần đời còn lại như một phàm nhân.`;
   else if(cause==='phithang')end=`Năm ${age} tuổi, ${r.ten} vượt Cửu Trùng Lôi Kiếp, phá không phi thăng.`;
   lines.push(end+(cause==='combat'||cause==='toahoa'?' '+pick(['Một đời tu tiên, như bao người khác.','Không ai kịp nhớ tên.','Người đời nhắc tới vài năm, rồi quên.','Tiên lộ dài, chân người ngắn.']):''));
@@ -5857,6 +5857,43 @@ function daoParts(){const r=G.run;if(isPham())return [];const to=btTarget();cons
 // phàm nhân dẫn khí nhập thể ở đâu cũng được, không cần động phủ
 {const _pa23=placeAct;placeAct=function(a){const r=G.run,sc=r&&r.scene;if(a==='bt'&&isPham()&&canBreak()&&sc&&sc.type==='place'){openPrep(nodeById(sc.id));return;}return _pa23(a);};}
 
+// ================= ĐỢT 24: CÁC LOẠI THIÊN KIẾP =================
+// Cảnh giới quyết định có bao nhiêu kiếp; loại kiếp tùy nhân vật (linh căn, nhân quả). Các kiếp tới lần lượt, từng trận một.
+//  Trúc Cơ: không có · Kết Đan: tâm ma · Nguyên Anh: kiếp riêng 6 đạo · Hóa Thần: kiếp riêng 9 đạo rồi tâm ma
+//  Phi thăng: Tam Tai (Âm Hỏa, Bị Phong) rồi Cửu Trùng Lôi Kiếp (9 đợt, mỗi đợt 4 đạo, đợt sau mạnh hơn đợt trước).
+// Mỗi loại thử một mặt khác nhau:
+//  Thiên Lôi: sát thương thuần · Tử Tiêu Thần Lôi (linh căn Lôi): mạnh hơn 10%
+//  Ngũ Hành Thần Lôi (tạp linh căn): mỗi đạo mang một hành, kèm ngẫu nhiên hiệu ứng của các kiếp khác
+//  Âm Hỏa: đốt khí huyết từng lượt · Nghiệp Hỏa (nhân quả ác nặng): đốt mạnh hơn, mỗi đạo thêm tâm ma
+//  Bị Phong: gió cắt rút thể lực, khó thủ thế đỡ đòn · Âm Hàn: rút linh lực
+const KIEP={loi:{n:'Thiên Lôi Kiếp',u:'Đạo lôi',i:'🌩️',el:'loi',d:'Sấm sét thuần túy, chỉ đỡ được, không né được.'},
+ tutieu:{n:'Tử Tiêu Thần Lôi Kiếp',u:'Đạo tử lôi',i:'🌩️',el:'loi',m:1.1,d:'Lôi tím của người mang linh căn Lôi: mạnh hơn lôi thường 10%.'},
+ nguhanh:{n:'Ngũ Hành Thần Lôi Kiếp',u:'Đạo ngũ hành lôi',i:'🌈',el:'loi',m:0.92,d:'Mỗi đạo mang một hành, kèm ngẫu nhiên lửa đốt, gió cắt hoặc hàn khí.'},
+ hoa:{n:'Âm Hỏa Kiếp',u:'Luồng âm hỏa',i:'🔥',el:'hoa',m:0.75,d:'Lửa bốc từ lòng bàn chân, sát thương nhẹ hơn nhưng thiêu đốt khí huyết từng lượt.'},
+ nghiep:{n:'Nghiệp Hỏa Kiếp',u:'Luồng nghiệp hỏa',i:'🔥',el:'hoa',m:0.75,d:'Lửa của sát nghiệp: thiêu đốt dữ dội, mỗi đạo thêm tâm ma.'},
+ phong:{n:'Bị Phong Kiếp',u:'Cơn cương phong',i:'🌪️',el:'phong',m:0.97,d:'Gió cắt thổi từ thóp đầu, rút thể lực, khó thủ thế đỡ đòn.'},
+ am:{n:'Âm Hàn Kiếp',u:'Luồng âm hàn',i:'❄️',el:'bang',m:0.97,d:'Hàn khí thấu xương, rút linh lực.'},
+ cuu:{n:'Cửu Trùng Lôi Kiếp',u:'Đạo lôi',i:'⚡',el:'loi',d:'Chín đợt lôi kiếp, đợt sau mạnh hơn đợt trước. Giữa các đợt hồi lại được một hơi.'}};
+const KIEP_EL={kim:'hoa',moc:'phong',thuy:'am',hoa:'am',tho:'loi',bang:'hoa',phong:'phong',loi:'tutieu'};
+function kiepKind(){const r=G.run;if((r.karma||0)<=-30)return 'nghiep';if(r.root.els.includes('loi'))return 'tutieu';if(r.root.els.length>=5)return 'nguhanh';return KIEP_EL[r.root.els[0]]||'loi';}
+btStages=function(to){if(isPham())return [];const k=kiepKind();
+  return to===1?[]:to===2?['tamma']:to===3?[{n:6,kind:k}]:to===4?[{n:9,kind:k},'tamma']:[{n:6,kind:'hoa'},{n:6,kind:'phong'},{n:4,waves:9,kind:'cuu'}];};
+function stageName(x){if(x==='tamma')return 'Tâm ma kiếp';const K=KIEP[x.kind||'loi'];return K.n+' · '+(x.waves>1?x.waves+' đợt × '+x.n+' đạo':x.n+' đạo');}
+btNextStage=function(){const r=G.run;const b=r.bt;if(!b)return;const st=b.stages[b.si];
+  if(st==='tamma'){startCombat({k:'tamma'},{kind:'bt'});r.scene.noFlee=1;clog(r.scene,'Tâm ma kiếp: bóng tối trong lòng ngươi đứng dậy.','en');return;}
+  const n=Math.max(1,st.n-(b.kiepCut||0));startCombat({kiep:{n,waves:st.waves||1,block:b.kiepHp,kind:st.kind||'loi'}},{kind:'bt'});};
+{const _sc24=startCombat;startCombat=function(spec,after){const res=_sc24(spec,after);const sc=G.run&&G.run.scene;
+  if(spec&&spec.kiep&&sc&&sc.kiep){const kd=spec.kiep.kind||'loi';const K=KIEP[kd];sc.kiep.kind=kd;sc.en.n=K.n;sc.en.i=K.i;sc.en.el=K.el;const u=sc.units.find(x=>x.kind==='kiep');if(u){u.icon=K.i;u.el=K.el;u.kk=kd;u.name=K.n;}
+    sc.log=sc.log.filter(x=>!/^Mây kiếp vần vũ/.test(x.t));clog(sc,K.n+': '+K.d+' '+sc.kiep.n+' '+K.u.toLowerCase()+(sc.kiep.waves>1?' × '+sc.kiep.waves+' đợt':'')+' sắp giáng xuống.','en');}
+  return res;};}
+{const _kh24=kiepHit;kiepHit=function(sc,k,off){const K=sc.kiep;const kd=K&&K.kind||'loi';const me=mainUnit(sc);const KD=KIEP[kd];
+  let m=KD.m||1;if(kd==='cuu')m*=1.1+0.12*(K.wave-1);K.uy*=m;const n0=sc.log.length;_kh24(sc,k,off);
+  const last=sc.log[sc.log.length-1];if(last&&sc.log.length>n0&&KD.u!=='Đạo lôi')last.t=last.t.replace(/^Đạo lôi/,KD.u);
+  if(me.hp<=0)return;let fx=kd;if(kd==='nguhanh'){const e=pick(['kim','moc','thuy','hoa','tho']);fx=pick(['hoa','phong','am',null]);if(last)last.t=last.t.replace(KD.u,KD.u+' hệ '+EL[e].n);}
+  if(fx==='hoa'||fx==='nghiep'){const b=Math.round(me.max*(fx==='nghiep'?0.036:0.028));me.st.burn=(me.st.burn||0)+b;clog(sc,'Lửa bám vào người: mỗi lượt thiêu thêm.','en');if(fx==='nghiep'){G.run.tamma=Math.min(100,(G.run.tamma||0)+2);}}
+  if(fx==='phong'){me.tl=Math.max(0,(me.tl||0)-35);clog(sc,'Cương phong cắt da, thể lực tụt mạnh.','en');}
+  if(fx==='am'){const v=Math.round(me.maxMp*0.25);me.mp=Math.max(0,me.mp-v);if(v)clog(sc,'Hàn khí đông cứng kinh mạch: mất '+v+' linh lực.','en');}};}
+
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
 const $=s=>document.querySelector(s);
@@ -5997,7 +6034,7 @@ const GLOSS={
   'hóa thần':'Cảnh giới thứ năm: thần thức hòa với trời đất, gần chạm tới phi thăng.',
   'độ kiếp':'Vượt thiên kiếp cuối cùng để phi thăng thành tiên.',
   'đột phá':'Vượt lên cảnh giới mới khi tu vi viên mãn. Cần ở động phủ, đủ lịch luyện, có thể phải chịu thiên kiếp.',
-  'thiên kiếp':'Lôi kiếp trời giáng khi tu sĩ đột phá cảnh giới lớn. Vượt được thì lên, không thì tan thành tro.',
+  'thiên kiếp':'Kiếp nạn trời giáng khi tu sĩ đột phá cảnh giới lớn: lôi, hỏa, phong, hàn khí hay tâm ma, tùy người. Các kiếp tới lần lượt. Vượt được thì lên, không thì tan thành tro.',
   'lôi kiếp':'Sấm sét trời giáng thử thách tu sĩ khi đột phá. Chỉ đỡ được, không né được.',
   'bế quan':'Đóng cửa tu luyện liền mạch nhiều tháng năm ở động phủ, tu vi tăng mạnh nhưng thời gian trôi qua.',
   'động phủ':'Hang động, chỗ ở có cấm chế của tu sĩ. Nơi bế quan và đột phá.',
@@ -6594,7 +6631,7 @@ const Art=(()=>{
       g.lineWidth=5*u;g.beginPath();g.moveTo(-32*u,-40*u);g.quadraticCurveTo(-54*u,-60*u,-46*u,-78*u);g.stroke();g.fillStyle=seal;g.beginPath();g.arc(36*u,-52*u,2.2*u,0,6.3);g.fill();}
     else if(kind==='quy'){g.globalAlpha=0.8;g.beginPath();g.moveTo(-20*u,0);g.quadraticCurveTo(-34*u,-50*u,-12*u,-86*u);g.quadraticCurveTo(0,-104*u,14*u,-86*u);g.quadraticCurveTo(34*u,-50*u,22*u,0);g.quadraticCurveTo(12*u,-12*u,6*u,0);g.quadraticCurveTo(-2*u,-12*u,-8*u,0);g.quadraticCurveTo(-14*u,-10*u,-20*u,0);g.fill();g.globalAlpha=1;g.fillStyle=cssVar('--paper');g.beginPath();g.arc(-6*u,-74*u,3*u,0,6.3);g.arc(8*u,-74*u,3*u,0,6.3);g.fill();}
     else if(kind==='vat'){g.beginPath();g.moveTo(-30*u,0);g.lineTo(-36*u,-52*u);g.lineTo(-14*u,-92*u);g.lineTo(18*u,-88*u);g.lineTo(36*u,-48*u);g.lineTo(28*u,0);g.closePath();g.fill();g.strokeStyle=hexA(cssVar('--paper'),0.5);g.lineWidth=1.5*u;g.beginPath();g.moveTo(-10*u,-80*u);g.lineTo(4*u,-50*u);g.lineTo(-8*u,-20*u);g.stroke();g.fillStyle=seal;g.beginPath();g.arc(6*u,-64*u,3*u,0,6.3);g.fill();}
-    else if(kind==='kiep'){g.globalAlpha=0.7;for(let i=0;i<6;i++){g.beginPath();g.ellipse((rnd()*80-40)*u,(-78-rnd()*20)*u,(22+rnd()*14)*u,(10+rnd()*6)*u,0,0,6.3);g.fill();}g.globalAlpha=1;g.strokeStyle=cssVar('--gold');g.lineWidth=3*u;g.beginPath();g.moveTo(0,-70*u);g.lineTo(-10*u,-44*u);g.lineTo(4*u,-40*u);g.lineTo(-8*u,-6*u);g.stroke();}
+    else if(kind.slice(0,4)==='kiep'){const KC={hoa:'#d2572b',nghiep:'#a3241c',phong:'#6f9c8f',am:'#5b7fb8',tutieu:'#8a4fc0',nguhanh:'#c9a227'};g.globalAlpha=0.7;for(let i=0;i<6;i++){g.beginPath();g.ellipse((rnd()*80-40)*u,(-78-rnd()*20)*u,(22+rnd()*14)*u,(10+rnd()*6)*u,0,0,6.3);g.fill();}g.globalAlpha=1;g.strokeStyle=KC[kind.slice(5)]||cssVar('--gold');g.lineWidth=3*u;g.beginPath();g.moveTo(0,-70*u);g.lineTo(-10*u,-44*u);g.lineTo(4*u,-40*u);g.lineTo(-8*u,-6*u);g.stroke();}
     else{ // người tu hành: áo bào, tóc búi, kiếm đeo lưng
       g.beginPath();g.moveTo(-17*u,0);g.quadraticCurveTo(-24*u,-34*u,-12*u,-66*u);g.lineTo(10*u,-66*u);g.quadraticCurveTo(26*u,-36*u,20*u,0);g.quadraticCurveTo(2*u,-6*u,-17*u,0);g.fill();
       g.beginPath();g.arc(-1*u,-76*u,9.5*u,0,6.3);g.fill();g.beginPath();g.arc(-2*u,-88*u,4*u,0,6.3);g.fill();
@@ -6829,7 +6866,7 @@ function vPrep(sc){
 function vBtres(sc){
   const r=G.run;let b=`<div class="story"><p class="new">${txt(sc.text)}</p></div>`+chipsHTML(sc.chips);
   const more=r.bt&&!sc.done&&r.bt.si<r.bt.stages.length;
-  if(more){const st=r.bt.stages[r.bt.si];b+=`<p class="hint">${st==='tamma'?'Tâm ma kiếp: đánh một trận với chính mình.':'Lôi kiếp: '+st.n+' đạo lôi không né được, chỉ đỡ được. Gục là chết thật.'}</p>`;}
+  if(more){const st=r.bt.stages[r.bt.si];b+=`<p class="hint">${st==='tamma'?'Tâm ma kiếp: đánh một trận với chính mình.':esc(stageName(st)+': '+KIEP[st.kind||'loi'].d+' Gục là chết thật.')}</p>`;}
   return card(sc.ok?'Đột phá':'Thất bại',r.place.n,b,{foot:goBtn('btGo',more?'Nghênh kiếp':'Tiếp tục')});
 }
 function vBoard(sc){
@@ -6982,7 +7019,7 @@ function btBadge(){const st=btState();if(!st)return '';const r=G.run;
 vPrep=function(sc){const r=G.run;const v=prepView();const to=btTarget();const ph=isPham();const P=btParts(sc.slots);const D=daoParts();const e0=btEff(sc.slots);const dD=D.reduce((a,x)=>a+x.v,0);
   let b=`<div class="story"><p>${ph?'Ngồi yên, theo tâm pháp dẫn sợi linh khí đầu tiên vào thân. Thành thì bước vào Luyện Khí; bại thì tổn thương kinh mạch, mất một phần tu vi.':'Chọn tối đa ba vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.'}</p></div>`;
   b+=`<div class="slots">${[0,1,2].map(k=>{const i=sc.slots[k];const it=i!=null&&r.pills[i];return it?`<button class="slot on" data-act="prep" data-arg="${i}"${ta(pillTip(it.id,it.q))}>${PILL[it.id].i}<small>${esc(PILL[it.id].n)}</small></button>`:'<span class="slot">＋</span>';}).join('')}</div>`;
-  const stg=btStages(to).map(x=>x==='tamma'?'Tâm ma kiếp':'Lôi kiếp '+x.n+' đạo'+(x.waves>1?' × '+x.waves+' đợt':'')).join(' → ')||'Không có thiên kiếp';
+  const stg=btStages(to).map(stageName).join(' → ')||'Không có thiên kiếp';
   b+=`<div class="bt-sum"><div><small>Tỉ lệ thành công</small><b>${Math.round(v.rate*100)}%</b></div>${ph?'':`<div><small>Phẩm chất dự kiến</small><b>${QNAME[v.q]}</b><small>đạo cơ ${v.dao}${v.next?' · mốc kế '+v.next:''}</small></div>`}</div>`;
   b+=`<h4 class="sgrp">Tỉ lệ thành công</h4><div class="bt-parts">${P.map(x=>`<div${ta(x.tip||'')}><span>${esc(x.t)}</span><b class="${x.v>0?'good':'bad'}">${x.v>0?'+':''}${numFx(x.v)}%</b></div>`).join('')}<div class="tot"><span>Tổng (trong khoảng 5% tới 97%)</span><b>${Math.round(v.rate*100)}%</b></div></div>`;
   if(!ph){const DL=[{t:'Đạo cơ tích lũy',v:r.dao||0}].concat(e0.dao-dD?[{t:'Linh dược trong ô',v:e0.dao-dD}]:[]).concat(D);
@@ -6996,7 +7033,7 @@ SCENE_V.prep=vPrep;
 // ---------- màn chiến đấu ----------
 const STI={stance:['Thủ','Thủ thế đỡ đòn: đứng chờ đòn, giảm khoảng 20–30% sát thương, tốn 30% thể lực'],block:['Hộ','Hộ thể: chặn sát thương'],poison:['Độc','Độc: mất khí huyết mỗi khi về mốc đầu, giảm dần'],burn:['Thiêu','Thiêu: mất khí huyết mỗi khi về mốc đầu, giảm một nửa'],weak:['Suy','Suy nhược: sát thương gây ra giảm 30%'],vuln:['Phá','Phá giáp: nhận thêm 30% sát thương'],rage:['Nộ','Cuồng nộ: mỗi tầng +12% sát thương'],regen:['Hồi','Hồi xuân: hồi 6% khí huyết mỗi khi về mốc đầu'],evade:['Độn','Ảnh độn: né trọn đòn kế tiếp']};
 function stIcons(st){let o='';for(const k in STI){const v=st[k];if(v>0)o+=`<span class="si si-${k}"${ta(STI[k][1])}>${STI[k][0]}<b>${v}</b></span>`;}if(st.soul>0)o+=`<span class="si si-soul"${ta('Đốt nguyên thần: đòn đánh xuyên 25% thủ, hút 10% sát thương')}>Thần<b>${st.soul}</b></span>`;return o?`<div class="sts">${o}</div>`:'';}
-function unitKind(u){if(u.kind==='kiep')return 'kiep';if(u.side==='A')return 'nhan';return u.f==='nhan'?'ma':(u.f||'vat');}
+function unitKind(u){if(u.kind==='kiep')return 'kiep'+(u.kk?'-'+u.kk:'');if(u.side==='A')return 'nhan';return u.f==='nhan'?'ma':(u.f||'vat');}
 function trackHTML(sc){
   let h='<div class="track"><i class="mk m0"></i><i class="mk m50"><em>ra chiêu</em></i><i class="mk m75"><em>phát lực</em></i><i class="mk m100"></i>';
   for(const u of sc.units){if(u.hp<=0&&!u.immune)continue;h+=`<span class="av ${u.side}${u.isMain?' me':''}" id="av${u.id}" style="left:${Math.min(100,u.pos)}%">${u.immune?u.icon:uAvatar(u)}</span>`;}
@@ -7066,7 +7103,7 @@ function vCombat(sc){
   h+=`<div class="clog" data-act="clog"${ta('Chạm để xem toàn bộ diễn biến')}><span class="cspd">${[1,2,3].map(n=>`<button class="${(CFG.cspeed||1)===n?'on':''}" data-act="cspd" data-arg="${n}"${ta('Tốc độ trận ×'+n)}>×${n}</button>`).join('')}</span>${lg.map((l,i)=>`<p class="${l.c?'lg-'+l.c:''} ${i<lg.length-1?'old':''}">${esc(l.t)}</p>`).join('')}</div>`;
   if(!sc.done&&injured()&&!sc.spar&&!sc.kiep)h+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   if(sc.done){
-    const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong lôi kiếp':'Ngươi đã ngã xuống'}[sc.over];
+    const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong thiên kiếp':'Ngươi đã ngã xuống'}[sc.over];
     return h+`<div class="cb-end ${sc.over}"><b>${t}</b>${sc.llGain?`<span class="chip up">⚔ +${sc.llGain} lịch luyện</span>`:''}${goBtn('cont','Tiếp tục')}</div></section>`;
   }
   h+='<div class="cb-cmd">';

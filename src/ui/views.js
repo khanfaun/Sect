@@ -213,7 +213,7 @@ function vPrep(sc){
 function vBtres(sc){
   const r=G.run;let b=`<div class="story"><p class="new">${txt(sc.text)}</p></div>`+chipsHTML(sc.chips);
   const more=r.bt&&!sc.done&&r.bt.si<r.bt.stages.length;
-  if(more){const st=r.bt.stages[r.bt.si];b+=`<p class="hint">${st==='tamma'?'Tâm ma kiếp: đánh một trận với chính mình.':'Lôi kiếp: '+st.n+' đạo lôi không né được, chỉ đỡ được. Gục là chết thật.'}</p>`;}
+  if(more){const st=r.bt.stages[r.bt.si];b+=`<p class="hint">${st==='tamma'?'Tâm ma kiếp: đánh một trận với chính mình.':esc(stageName(st)+': '+KIEP[st.kind||'loi'].d+' Gục là chết thật.')}</p>`;}
   return card(sc.ok?'Đột phá':'Thất bại',r.place.n,b,{foot:goBtn('btGo',more?'Nghênh kiếp':'Tiếp tục')});
 }
 function vBoard(sc){
@@ -366,7 +366,7 @@ function btBadge(){const st=btState();if(!st)return '';const r=G.run;
 vPrep=function(sc){const r=G.run;const v=prepView();const to=btTarget();const ph=isPham();const P=btParts(sc.slots);const D=daoParts();const e0=btEff(sc.slots);const dD=D.reduce((a,x)=>a+x.v,0);
   let b=`<div class="story"><p>${ph?'Ngồi yên, theo tâm pháp dẫn sợi linh khí đầu tiên vào thân. Thành thì bước vào Luyện Khí; bại thì tổn thương kinh mạch, mất một phần tu vi.':'Chọn tối đa ba vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.'}</p></div>`;
   b+=`<div class="slots">${[0,1,2].map(k=>{const i=sc.slots[k];const it=i!=null&&r.pills[i];return it?`<button class="slot on" data-act="prep" data-arg="${i}"${ta(pillTip(it.id,it.q))}>${PILL[it.id].i}<small>${esc(PILL[it.id].n)}</small></button>`:'<span class="slot">＋</span>';}).join('')}</div>`;
-  const stg=btStages(to).map(x=>x==='tamma'?'Tâm ma kiếp':'Lôi kiếp '+x.n+' đạo'+(x.waves>1?' × '+x.waves+' đợt':'')).join(' → ')||'Không có thiên kiếp';
+  const stg=btStages(to).map(stageName).join(' → ')||'Không có thiên kiếp';
   b+=`<div class="bt-sum"><div><small>Tỉ lệ thành công</small><b>${Math.round(v.rate*100)}%</b></div>${ph?'':`<div><small>Phẩm chất dự kiến</small><b>${QNAME[v.q]}</b><small>đạo cơ ${v.dao}${v.next?' · mốc kế '+v.next:''}</small></div>`}</div>`;
   b+=`<h4 class="sgrp">Tỉ lệ thành công</h4><div class="bt-parts">${P.map(x=>`<div${ta(x.tip||'')}><span>${esc(x.t)}</span><b class="${x.v>0?'good':'bad'}">${x.v>0?'+':''}${numFx(x.v)}%</b></div>`).join('')}<div class="tot"><span>Tổng (trong khoảng 5% tới 97%)</span><b>${Math.round(v.rate*100)}%</b></div></div>`;
   if(!ph){const DL=[{t:'Đạo cơ tích lũy',v:r.dao||0}].concat(e0.dao-dD?[{t:'Linh dược trong ô',v:e0.dao-dD}]:[]).concat(D);

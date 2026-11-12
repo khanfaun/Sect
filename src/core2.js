@@ -1496,3 +1496,40 @@ function daoParts(){const r=G.run;if(isPham())return [];const to=btTarget();cons
   else btFail(back,used);};}
 // phàm nhân dẫn khí nhập thể ở đâu cũng được, không cần động phủ
 {const _pa23=placeAct;placeAct=function(a){const r=G.run,sc=r&&r.scene;if(a==='bt'&&isPham()&&canBreak()&&sc&&sc.type==='place'){openPrep(nodeById(sc.id));return;}return _pa23(a);};}
+
+// ================= ĐỢT 24: CÁC LOẠI THIÊN KIẾP =================
+// Cảnh giới quyết định có bao nhiêu kiếp; loại kiếp tùy nhân vật (linh căn, nhân quả). Các kiếp tới lần lượt, từng trận một.
+//  Trúc Cơ: không có · Kết Đan: tâm ma · Nguyên Anh: kiếp riêng 6 đạo · Hóa Thần: kiếp riêng 9 đạo rồi tâm ma
+//  Phi thăng: Tam Tai (Âm Hỏa, Bị Phong) rồi Cửu Trùng Lôi Kiếp (9 đợt, mỗi đợt 4 đạo, đợt sau mạnh hơn đợt trước).
+// Mỗi loại thử một mặt khác nhau:
+//  Thiên Lôi: sát thương thuần · Tử Tiêu Thần Lôi (linh căn Lôi): mạnh hơn 10%
+//  Ngũ Hành Thần Lôi (tạp linh căn): mỗi đạo mang một hành, kèm ngẫu nhiên hiệu ứng của các kiếp khác
+//  Âm Hỏa: đốt khí huyết từng lượt · Nghiệp Hỏa (nhân quả ác nặng): đốt mạnh hơn, mỗi đạo thêm tâm ma
+//  Bị Phong: gió cắt rút thể lực, khó thủ thế đỡ đòn · Âm Hàn: rút linh lực
+const KIEP={loi:{n:'Thiên Lôi Kiếp',u:'Đạo lôi',i:'🌩️',el:'loi',d:'Sấm sét thuần túy, chỉ đỡ được, không né được.'},
+ tutieu:{n:'Tử Tiêu Thần Lôi Kiếp',u:'Đạo tử lôi',i:'🌩️',el:'loi',m:1.1,d:'Lôi tím của người mang linh căn Lôi: mạnh hơn lôi thường 10%.'},
+ nguhanh:{n:'Ngũ Hành Thần Lôi Kiếp',u:'Đạo ngũ hành lôi',i:'🌈',el:'loi',m:0.92,d:'Mỗi đạo mang một hành, kèm ngẫu nhiên lửa đốt, gió cắt hoặc hàn khí.'},
+ hoa:{n:'Âm Hỏa Kiếp',u:'Luồng âm hỏa',i:'🔥',el:'hoa',m:0.75,d:'Lửa bốc từ lòng bàn chân, sát thương nhẹ hơn nhưng thiêu đốt khí huyết từng lượt.'},
+ nghiep:{n:'Nghiệp Hỏa Kiếp',u:'Luồng nghiệp hỏa',i:'🔥',el:'hoa',m:0.75,d:'Lửa của sát nghiệp: thiêu đốt dữ dội, mỗi đạo thêm tâm ma.'},
+ phong:{n:'Bị Phong Kiếp',u:'Cơn cương phong',i:'🌪️',el:'phong',m:0.97,d:'Gió cắt thổi từ thóp đầu, rút thể lực, khó thủ thế đỡ đòn.'},
+ am:{n:'Âm Hàn Kiếp',u:'Luồng âm hàn',i:'❄️',el:'bang',m:0.97,d:'Hàn khí thấu xương, rút linh lực.'},
+ cuu:{n:'Cửu Trùng Lôi Kiếp',u:'Đạo lôi',i:'⚡',el:'loi',d:'Chín đợt lôi kiếp, đợt sau mạnh hơn đợt trước. Giữa các đợt hồi lại được một hơi.'}};
+const KIEP_EL={kim:'hoa',moc:'phong',thuy:'am',hoa:'am',tho:'loi',bang:'hoa',phong:'phong',loi:'tutieu'};
+function kiepKind(){const r=G.run;if((r.karma||0)<=-30)return 'nghiep';if(r.root.els.includes('loi'))return 'tutieu';if(r.root.els.length>=5)return 'nguhanh';return KIEP_EL[r.root.els[0]]||'loi';}
+btStages=function(to){if(isPham())return [];const k=kiepKind();
+  return to===1?[]:to===2?['tamma']:to===3?[{n:6,kind:k}]:to===4?[{n:9,kind:k},'tamma']:[{n:6,kind:'hoa'},{n:6,kind:'phong'},{n:4,waves:9,kind:'cuu'}];};
+function stageName(x){if(x==='tamma')return 'Tâm ma kiếp';const K=KIEP[x.kind||'loi'];return K.n+' · '+(x.waves>1?x.waves+' đợt × '+x.n+' đạo':x.n+' đạo');}
+btNextStage=function(){const r=G.run;const b=r.bt;if(!b)return;const st=b.stages[b.si];
+  if(st==='tamma'){startCombat({k:'tamma'},{kind:'bt'});r.scene.noFlee=1;clog(r.scene,'Tâm ma kiếp: bóng tối trong lòng ngươi đứng dậy.','en');return;}
+  const n=Math.max(1,st.n-(b.kiepCut||0));startCombat({kiep:{n,waves:st.waves||1,block:b.kiepHp,kind:st.kind||'loi'}},{kind:'bt'});};
+{const _sc24=startCombat;startCombat=function(spec,after){const res=_sc24(spec,after);const sc=G.run&&G.run.scene;
+  if(spec&&spec.kiep&&sc&&sc.kiep){const kd=spec.kiep.kind||'loi';const K=KIEP[kd];sc.kiep.kind=kd;sc.en.n=K.n;sc.en.i=K.i;sc.en.el=K.el;const u=sc.units.find(x=>x.kind==='kiep');if(u){u.icon=K.i;u.el=K.el;u.kk=kd;u.name=K.n;}
+    sc.log=sc.log.filter(x=>!/^Mây kiếp vần vũ/.test(x.t));clog(sc,K.n+': '+K.d+' '+sc.kiep.n+' '+K.u.toLowerCase()+(sc.kiep.waves>1?' × '+sc.kiep.waves+' đợt':'')+' sắp giáng xuống.','en');}
+  return res;};}
+{const _kh24=kiepHit;kiepHit=function(sc,k,off){const K=sc.kiep;const kd=K&&K.kind||'loi';const me=mainUnit(sc);const KD=KIEP[kd];
+  let m=KD.m||1;if(kd==='cuu')m*=1.1+0.12*(K.wave-1);K.uy*=m;const n0=sc.log.length;_kh24(sc,k,off);
+  const last=sc.log[sc.log.length-1];if(last&&sc.log.length>n0&&KD.u!=='Đạo lôi')last.t=last.t.replace(/^Đạo lôi/,KD.u);
+  if(me.hp<=0)return;let fx=kd;if(kd==='nguhanh'){const e=pick(['kim','moc','thuy','hoa','tho']);fx=pick(['hoa','phong','am',null]);if(last)last.t=last.t.replace(KD.u,KD.u+' hệ '+EL[e].n);}
+  if(fx==='hoa'||fx==='nghiep'){const b=Math.round(me.max*(fx==='nghiep'?0.036:0.028));me.st.burn=(me.st.burn||0)+b;clog(sc,'Lửa bám vào người: mỗi lượt thiêu thêm.','en');if(fx==='nghiep'){G.run.tamma=Math.min(100,(G.run.tamma||0)+2);}}
+  if(fx==='phong'){me.tl=Math.max(0,(me.tl||0)-35);clog(sc,'Cương phong cắt da, thể lực tụt mạnh.','en');}
+  if(fx==='am'){const v=Math.round(me.maxMp*0.25);me.mp=Math.max(0,me.mp-v);if(v)clog(sc,'Hàn khí đông cứng kinh mạch: mất '+v+' linh lực.','en');}};}

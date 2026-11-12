@@ -138,7 +138,7 @@ const GLOSS={
   'hóa thần':'Cảnh giới thứ năm: thần thức hòa với trời đất, gần chạm tới phi thăng.',
   'độ kiếp':'Vượt thiên kiếp cuối cùng để phi thăng thành tiên.',
   'đột phá':'Vượt lên cảnh giới mới khi tu vi viên mãn. Cần ở động phủ, đủ lịch luyện, có thể phải chịu thiên kiếp.',
-  'thiên kiếp':'Lôi kiếp trời giáng khi tu sĩ đột phá cảnh giới lớn. Vượt được thì lên, không thì tan thành tro.',
+  'thiên kiếp':'Kiếp nạn trời giáng khi tu sĩ đột phá cảnh giới lớn: lôi, hỏa, phong, hàn khí hay tâm ma, tùy người. Các kiếp tới lần lượt. Vượt được thì lên, không thì tan thành tro.',
   'lôi kiếp':'Sấm sét trời giáng thử thách tu sĩ khi đột phá. Chỉ đỡ được, không né được.',
   'bế quan':'Đóng cửa tu luyện liền mạch nhiều tháng năm ở động phủ, tu vi tăng mạnh nhưng thời gian trôi qua.',
   'động phủ':'Hang động, chỗ ở có cấm chế của tu sĩ. Nơi bế quan và đột phá.',

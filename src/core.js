@@ -1305,7 +1305,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
     for(const t of tg)if(t.st.stance&&t.phase==='guard'&&t._blk&&t.hp>0)endStance(sc,t,null);
     if(total&&(f.drain||(isP&&fx.drain)))u.hp=Math.min(u.max,u.hp+Math.round(total*((f.drain||0)+(isP?fx.drain||0:0))/100));
     if(total&&f.edrain)u.hp=Math.min(u.max,u.hp+Math.round(total*f.edrain/100));
-    if(sc.kiep&&total){const k=sc.kiep;const me=mainUnit(sc);const cut=Math.min(0.25,total/me.max*0.5);k.uy=Math.max(0.3,k.uy-cut);msg+=` (lôi uy −${Math.round(cut*100)}%)`;}
+    if(sc.kiep&&total){const k=sc.kiep;const me=mainUnit(sc);const cut=Math.min(0.25,total/me.max*0.5);k.uy=Math.max(0.3,k.uy-cut);msg+=` (kiếp uy −${Math.round(cut*100)}%)`;}
   }
   // tự thân
   const hp0=u.hp;
@@ -1973,7 +1973,7 @@ function lifeSummary(cause,info){
   if(cause==='combat')end=`Năm ${age} tuổi, ${r.ten} chết dưới tay ${info.n} ở ${r.place.n}.`;
   else if(cause==='toahoa')end=`Năm ${age} tuổi, thọ nguyên cạn kiệt, ${r.ten} tọa hóa ở ${r.place.n}.`;
   else if(cause==='tamma')end=`Năm ${age} tuổi, ${r.ten} tẩu hỏa nhập ma.`;
-  else if(cause==='kiep')end=`Năm ${age} tuổi, ${r.ten} tan thành tro bụi dưới lôi kiếp ở ${r.place.n}.`;
+  else if(cause==='kiep')end=`Năm ${age} tuổi, ${r.ten} tan thành tro bụi dưới thiên kiếp ở ${r.place.n}.`;
   else if(cause==='quyan')end=`Năm ${age} tuổi, ${r.ten} gác kiếm quy ẩn ở ${r.place.n}, sống nốt phần đời còn lại như một phàm nhân.`;
   else if(cause==='phithang')end=`Năm ${age} tuổi, ${r.ten} vượt Cửu Trùng Lôi Kiếp, phá không phi thăng.`;
   lines.push(end+(cause==='combat'||cause==='toahoa'?' '+pick(['Một đời tu tiên, như bao người khác.','Không ai kịp nhớ tên.','Người đời nhắc tới vài năm, rồi quên.','Tiên lộ dài, chân người ngắn.']):''));
