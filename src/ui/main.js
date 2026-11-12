@@ -17,7 +17,7 @@ function render(){
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
     if(cb){UI.panel=null;}
     if(!inMap&&UI.modal)UI.modal=null;
-    if(!inMap){full=G.screen==='birth'&&G.birth?vBirth():G.screen==='over'&&G.over?vOver():G.screen==='meta'?vMeta():vTitle();}
+    if(!inMap){full=G.screen==='birth'&&G.birth?vBirth():G.screen==='over'&&G.over?vOver():G.screen==='meta'?vMeta():G.screen==='life'&&G.run?vLife():vTitle();}
     else{
       if(cb)full=vCombat(sc);
       else{hud=hudHTML();nav=navHTML();
@@ -343,7 +343,7 @@ async function initDB(){
   let ok=false;
   try{const l=JSON.parse(localStorage.getItem(KEY)||'null');if(l){loadData(l);ok=true;}}catch(e){}
   if(!ok){G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};syncDodge();}
-  UI.narrSkip=false;if(G.screen==='map'&&G.run)G.screen='title';
+  UI.narrSkip=false;if((G.screen==='map'||G.screen==='life')&&G.run)G.screen='title';if(G.screen==='life')G.screen='title';
   try{Map2.setFont(getComputedStyle(document.body).fontFamily);}catch(e){}
   Map2.attach($('#mapcv'));
   render();
@@ -373,4 +373,10 @@ function qpopFlush(){const L=G.qpop;if(!L||!L.length||document.querySelector('.q
   app.appendChild(d);setTimeout(()=>{d.classList.add('out');setTimeout(()=>{d.remove();qpopFlush();},400);},2500);}
 // mỗi kiếp mới: tắt tự đánh, tốc độ trận và tốc độ bản đồ về ×1 (mở lại game cũng vậy, xem cfgLoad)
 function speedReset(){CFG.autoFight=false;CFG.cspeed=1;cfgSave();UI.speed=1;UI.paused=false;if(G.meta)syncDodge();}
-{const _nrU=newRun;newRun=function(c){const res=_nrU(c);speedReset();return res;};}
+{const _nrU=newRun;newRun=function(c){const res=_nrU(c);speedReset();if(G.run&&G.run.story){G.screen='life';UI.lifeT=performance.now();UI.lifeAll=false;lifeScroll();}return res;};}
+// trang mở đầu kiếp: dòng chữ hiện dần, cuộn theo dòng mới nhất
+const LIFE_D=1.7;
+function lifeScroll(){clearInterval(UI.lifeIv);UI.lifeIv=setInterval(()=>{if(G.screen!=='life'){clearInterval(UI.lifeIv);return;}const P=document.querySelectorAll('.lsx-t p');const k=UI.lifeAll?P.length:Math.floor((performance.now()-UI.lifeT)/1000/LIFE_D);
+  const el=UI.lifeAll||k>=P.length?document.querySelector('.lsx-go'):P[k];if(el)el.scrollIntoView({block:'nearest',behavior:'smooth'});if(UI.lifeAll||k>P.length)clearInterval(UI.lifeIv);},500);}
+Object.assign(ACT,{lifeGo:()=>{G.screen='map';clearInterval(UI.lifeIv);saveSoon();if(typeof Map2!=='undefined')Map2.center();},
+  lifeAll:()=>{if(UI.lifeAll)return;UI.lifeAll=true;const b=document.querySelector('.lsx');if(b)b.classList.add('all');setTimeout(()=>{const g=document.querySelector('.lsx-go');if(g)g.scrollIntoView({block:'nearest',behavior:'smooth'});},50);}});

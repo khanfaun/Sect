@@ -38,3 +38,8 @@ function vMeta(){
   if(tab==='ach')b+=`<p class="hint">Đạt ${M.ach.length}/${ACH.length}</p><div class="rows">`+ACH.map(a=>`<div class="row${M.ach.includes(a.id)?' taken':' dim'}"><span class="r-i">${M.ach.includes(a.id)?ic('check'):''}</span><span class="r-t"><b>${esc(a.n)}</b><small>${esc(a.d)}</small></span></div>`).join('')+'</div>';
   return `<div class="meta">${sceneCv('ben-vong-xuyen',3,'song','m-art','nhan:0.62:0.42:1:laodo')}${win('Bến Vong Xuyên',b,{cls:'tall',noClose:true,extra:`<span class="m-pts">${M.pts} điểm luân hồi</span>`,foot:`<span class="grow"></span><button class="btn pri" data-act="screen" data-arg="title">Rời bến</button>`})}</div>`;
 }
+// ---------- trang mở đầu kiếp: tiêu đề, từng dòng chuyện hiện dần, một nút ----------
+function vLife(){const r=G.run;const L=r.story||[];const d=i=>`style="animation-delay:${(UI.lifeAll?0:i*LIFE_D+0.9).toFixed(2)}s"`;
+  return `<div class="lsx${UI.lifeAll?' all':''}" data-act="lifeAll"><div class="lsx-b"><small class="lsx-k" ${d(-0.5)}>Kiếp thứ ${r.kiep}</small><h1 class="lsx-h" ${d(-0.3)}>${esc(r.ten)}</h1>
+   <div class="lsx-t">${L.map((x,i)=>`<p ${d(i)}>${esc(x)}</p>`).join('')}</div>
+   <div class="lsx-go" ${d(L.length+0.2)}><button class="btn pri big" data-act="lifeGo">Lên đường</button></div></div></div>`;}

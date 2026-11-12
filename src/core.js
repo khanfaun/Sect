@@ -645,13 +645,10 @@ function newRun(c){
     kiep:G.meta.nlife+1,scene:null,lastPicks:{},maxRealm:0};
   if(c.trait==='loithan') r.root.els.push('loi');
   r.st=Math.max(0,r.st);
-  // công pháp khởi đầu
-  const starter=SK_RAW.filter(s=>s[3]===1&&(r.root.els.includes(s[2])||s[2]==='vo'));
-  r.skills.push({id:pick(starter.length?starter:SK_RAW.filter(s=>s[3]===1))[0],lv:1});
-  if(og.skill||U('ky')){const t=U('ky')>=2?2:1;const pool=SK_RAW.filter(s=>s[3]===t&&!r.skills.find(k=>k.id===s[0]));r.skills.push({id:pick(pool)[0],lv:1});}
+  // không còn công pháp khởi đầu cho mọi kiếp: chỉ xuất thân hoặc ký ức kiếp trước mới có
+  if(og.skill||U('ky')){const t=U('ky')>=2?2:1;const pool=SK_RAW.filter(s=>s[3]===t&&!r.skills.find(k=>k.id===s[0]));r.skills.push({id:pick(pool)[0],lv:1,src:og.skill?'xuat':'ky'});}
   if(og.pill) r.pills.push({id:og.pill,q:0});
   if(og.pill2) r.pills.push({id:og.pill2,q:0});
-  r.pills.push({id:'hoixuan',q:0});
   const s=S();r.hp=s.maxHp;r.mp=s.maxMp;
   G.meta.nlife++;
   log(`Kiếp thứ ${r.kiep}: ${r.ten}, ${og.n.toLowerCase()}, quê ở ${r.que}.`);
