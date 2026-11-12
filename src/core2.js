@@ -547,9 +547,9 @@ PQ[0]=PHAM[0];PQ[1]=PHAM[1];PQ[2]=PHAM[2];
 RELIC_K.push({k:'non',b:['Quan','Đấu Lạp','Ngọc Quan'],fx:{tam:2,defP:6}},{k:'gang',b:['Hộ Thủ','Quyền Sáo','Thủ Giáp'],fx:{atkP:5,crit:2}},{k:'dai',b:['Đai','Ngọc Đái','Yêu Đái'],fx:{hpP:6,tp:1}},
   {k:'hoa',b:['Hỏa Chủng','Địa Tâm Hỏa','Thanh Liên Hỏa'],fx:{craftP:6}},{k:'tran',b:['Trận Bàn','Trận Kỳ','Tụ Linh Trận Đồ'],fx:{bqP:8,bqSafe:15}});
 FXT.craftP='Luyện chế dễ thành hơn {v}%';FXT.bqSafe='Bế quan ít bị quấy nhiễu hơn {v}%';
-// ô trang bị 3×3; trang sức chỉ một ô (nhẫn, sau này thêm vòng, khuyên…); pháp bảo ra mục riêng 3 ô, mở ở Trúc Cơ, Nguyên Anh, Hóa Thần
+// ô trang bị 3×3; trang sức chỉ một ô (nhẫn, sau này thêm vòng, khuyên…); pháp bảo ra mục riêng 3 ô, mở ở Trúc Cơ, Kết Đan, Nguyên Anh
 const SLOTS=[['vukhi','Vũ khí'],['non','Nón'],['boi','Ngọc bội'],['gang','Găng'],['giap','Giáp'],['choang','Áo choàng'],['nhan1','Trang sức'],['dai','Đai lưng'],['giay','Giày']];
-const PB_SLOTS=['phapbao1','phapbao2','phapbao3'],PB_REQ=[1,3,4];
+const PB_SLOTS=['phapbao1','phapbao2','phapbao3'],PB_REQ=[1,2,3];
 function pbOpen(){const r=G.run;return PB_REQ.filter(q=>(r.realm||0)>=q&&!(typeof isPham==='function'&&isPham())).length;}
 const SPEC=[['tuivat','Trữ vật'],['phuongtien','Phương tiện'],['hoa','Hỏa chủng'],['dinh','Lô đỉnh'],['tran','Trận pháp']];
 const KSLOT={kiem:'vukhi',dao:'vukhi',phap:'vukhi',but:'vukhi',giap:'giap',bao:'choang',tram:'non',non:'non',ngoa:'giay',hoan:'gang',gang:'gang',dai:'dai',nhan:'nhan',boi:'boi',hotam:'boi',tui:'tuivat',dinh:'dinh',hoa:'hoa',tran:'tran'};
@@ -2122,3 +2122,9 @@ phamLock=function(rel){return !!rel&&rel.k!=='book'&&!relOk(rel);};
 {const _ef30=eqFix;eqFix=function(){_ef30();const r=G.run;if(!r||!r.eq)return;for(const k in r.eq){const x=r.eq[k];if(x&&!relOk(x)){x.seen=1;r.relics.push(x);r.eq[k]=null;}}
   r.dd=(r.dd||[]).filter(d=>{if(relOk(d.rel))return true;d.rel.seen=1;r.relics.push(d.rel);return false;});};}
 {const _r230=run2;run2=function(){const r=_r230();if(r&&!r._eq4){r._eq4=1;eqFix();}return r;};}
+// ----- sửa lại: phẩm không gắn với cảnh giới. Mỗi món có yêu cầu cảnh giới riêng, theo nơi nó xuất hiện -----
+// Vùng 1 (Phàm Trần): cần Phàm nhân hoặc Luyện Khí; vùng 2: Luyện Khí hoặc Trúc Cơ; vùng 3: Trúc Cơ hoặc Kết Đan… Phẩm nào cũng có thể gặp ở mọi yêu cầu.
+// Món cũ chưa có yêu cầu (bản lưu trước): coi như Phàm nhân dùng được.
+function relReqRoll(){const r=G.run;const k=clamp((r&&r.region)||0,0,4);return clamp(k+(chance(k===0?0.4:0.5)?1:0),0,6);}
+{const _gr31=genRelic;genRelic=function(t){const x=_gr31(t);if(x&&x.req==null)x.req=relReqRoll();return x;};}
+relReq=function(rel){if(!rel||rel.k==='book')return 0;return rel.req!=null?rel.req:0;};
