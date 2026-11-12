@@ -912,7 +912,7 @@ function tvSimAdd(raw){const r=G.run;let add=0,rem=raw;while(rem>1e-9&&r.tv+add<
 function bqCapY(){const r=G.run;if(r.tv>=100)return null;for(let y=0.25;y<=5;y+=0.25){const raw=bqReal()*y*(y<1?0.9:1)+thonapPct()*y*12;if(llEff(r.tv+tvSimAdd(raw))<=LL_CAPE)return y;}return null;}
 function llPtsOf(){return Math.round(llOf()/100*tvPts(G.run.realm));}
 function llAdd(x,why,quiet){const r=G.run;if(!r||!(x>0))return 0;const P=tvPts(r.realm)/100;const pts=Math.max(1,Math.round(x*P));const b=r.ll||0;r.ll=Math.min(LL_MAX,Math.round((b*P+pts))/P);const d=Math.round((r.ll-b)*P);
-  if(d>0&&!quiet){if(why)log(`Lịch luyện +${d} (${why}).`);const sc=r.scene;if(sc&&sc.type==='combat')sc.llGain=(sc.llGain||0)+d;else if(sc&&Array.isArray(sc.chips))sc.chips.push(chip('⚔','+'+d+' lịch luyện','Lịch luyện: '+why,'up'));else note('+'+d+' lịch luyện · '+why);}return d;}
+  if(d>0&&!quiet){if(why)log(`Lịch luyện +${Math.max(1,Math.round(d/P))}% (${why}).`);const sc=r.scene;if(sc&&sc.type==='combat')sc.llGain=(sc.llGain||0)+d;else if(sc&&Array.isArray(sc.chips))sc.chips.push(chip('⚔','+'+Math.max(1,Math.round(d/P))+'% lịch luyện','Lịch luyện: '+why,'up'));else note('+'+Math.max(1,Math.round(d/P))+'% lịch luyện · '+why);}return d;}
 {const _cb10=canBreak;canBreak=function(){return _cb10()&&llOf()>=LL_BT;};}
 {const _bf10=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const res=_bf10.apply(this,arguments);if(G.run&&G.run.realm>rl)G.run.ll=Math.max(0,(G.run.ll||0)-100)*0.2;return res;};}
 // nguồn lịch luyện
@@ -928,7 +928,7 @@ function llAdd(x,why,quiet){const r=G.run;if(!r||!(x>0))return 0;const P=tvPts(r
 // ================= ĐỢT 12: ĐÁNH NHAU KHÔNG CHO TU VI; LỰA CHỌN Ở TRÀ LÂU, KHÁCH ĐIẾM, TỬU PHƯỜNG =================
 // Trong lúc xử lý kết quả một trận, mọi phần thưởng tu vi đổi thành lịch luyện (một nửa).
 let FIGHT_OUT=0;
-function llChipMerge(L,d){if(!(d>0))return;const c=L.find(x=>x&&x.i==='⚔');if(c){c.t='+'+(parseInt(c.t.replace(/\D/g,''))+d)+' lịch luyện';}else L.unshift(chip('⚔','+'+d+' lịch luyện','Lịch luyện: có được nhờ thực chiến','up'));}
+function llChipMerge(L,d){if(!(d>0))return;d=Math.max(1,Math.round(d/(tvPts(G.run.realm)/100)));const c=L.find(x=>x&&x.i==='⚔');if(c){c.t='+'+(parseInt(c.t.replace(/\D/g,''))+d)+'% lịch luyện';}else L.unshift(chip('⚔','+'+d+'% lịch luyện','Lịch luyện: có được nhờ thực chiến','up'));}
 {const _ae12=applyE;applyE=function(e,v){if(FIGHT_OUT&&e&&e.tv>0){e=Object.assign({},e);const x=e.tv*0.5;delete e.tv;const ch=_ae12(e,v);llChipMerge(ch,llAdd(x,null,true));return ch;}return _ae12(e,v);};}
 {const _cc12=combatContinue;combatContinue=function(){const sc0=G.run&&G.run.scene;const g=sc0&&sc0.llGain||0;FIGHT_OUT=1;let res;try{res=_cc12();}finally{FIGHT_OUT=0;}
   const sc=G.run&&G.run.scene;if(g&&sc&&sc!==sc0){if(!Array.isArray(sc.chips))sc.chips=[];llChipMerge(sc.chips,g);}return res;};}
@@ -1060,7 +1060,7 @@ function questRewardGen(g,reg){const st=Math.round(ri(QST[g][0],QST[g][1])*(1+0.
   return {st,ll:3+g*3,it,v:2};}
 {const _ob15=openBoard;openBoard=function(n){_ob15(n);if(n&&n.board)for(const q of n.board.list)if(!q.reward||q.reward.v!==2){q.grade=questGrade(q);q.reward=questRewardGen(q.grade,G.run.region);}};}
 function questRewardOf(q){if(q.reward&&q.reward.v===2)return q.reward;return {st:Math.min(40,Math.max(3,Math.round((q.reward&&q.reward.st||10)*ECON))),ll:3+questGrade(q)*3,it:[],v:2};}
-function questRewardChips(q){const R0=questRewardOf(q);const L=[chip('💎','+'+R0.st,'Linh thạch','up'),chip('⚔','+'+Math.round(R0.ll/100*tvPts(G.run.realm))+' lịch luyện','Lịch luyện','up')];
+function questRewardChips(q){const R0=questRewardOf(q);const L=[chip('💎','+'+R0.st,'Linh thạch','up'),chip('⚔','+'+Math.round(R0.ll*(typeof LL_MUL==='number'?LL_MUL:1))+'% lịch luyện','Lịch luyện','up')];
   const tt=(av,n,sub,d,t)=>`<div class="tt-it" style="${t!=null?'--pc:'+QCOL[clamp(t,0,5)]:''}"><span class="tt-av">${av}</span><div><b>${n}</b><small>${sub}</small><p>${d}</p></div></div>`;
   for(const x of R0.it){let c;if(x.k==='pill'){const P0=PILL[x.id];c=chip(P0.i,(x.q?PQ[x.q]+' ':'')+P0.n,pillTip(x.id,x.q),'item');c.h=tt(P0.i,(x.q?PQ[x.q]+' ':'')+P0.n,'Đan dược',P0.d.replace('{x}',pillX(x.id,x.q)),x.q||0);}
     else if(x.k==='mat'){const M0=MAT[x.m];c=chip(M0.i,x.n+' '+M0.n.toLowerCase(),M0.n+'\n'+M0.d,'item');c.h=tt(M0.i,M0.n+' × '+x.n,'Vật liệu luyện chế',M0.d);}
@@ -1466,8 +1466,8 @@ function btState(){const r=G.run;if(!r||r.tv<100)return '';return canBreak()?'dp
 const BT_ROOT={thien:6,bien:4,song:2,tam:0,tu:-3,tap:-6},BT_LK=[-6,-2,2,6];
 function btParts(slots){const r=G.run,s=S();const e=btEff(slots||[]);const to=btTarget();const n=nodeById(r.at);const L=[];const add=(t,v,tip)=>{v=Math.round(v*10)/10;if(v)L.push({t,v,tip});};
   add(isPham()?'Dẫn khí nhập thể':'Cơ bản · '+REALM[to],(isPham()?0.75:BT_BASE[Math.min(4,r.realm)])*100,'Cảnh giới càng cao càng khó');
-  add('Ngộ tính '+s.ngo,(s.ngo-10)*1.2,'Mỗi điểm trên 10: +1,2%');add('Đạo tâm '+s.tam,(s.tam-10)*1.2,'Mỗi điểm trên 10: +1,2%');
-  if(r.tamma)add('Tâm ma '+r.tamma,-r.tamma*0.4,'Mỗi điểm tâm ma: −0,4%');
+  add('Ngộ tính',(s.ngo-10)*1.2,'Mỗi điểm trên 10: +1,2%');add('Đạo tâm',(s.tam-10)*1.2,'Mỗi điểm trên 10: +1,2%');
+  if(r.tamma)add('Tâm ma',-r.tamma*0.4,'Mỗi điểm tâm ma: −0,4%');
   add('Linh căn',BT_ROOT[r.root.id]||0,rootView(r.root).n);
   const a=tuArt();if(a){const d=a.tier-Math.max(0,to);add('Tâm pháp '+PHAM[a.tier],d<0?d*6:Math.min(d,3)*3,d<0?'Phẩm tâm pháp thấp so với cảnh giới muốn lên':'Tâm pháp vững, dẫn khí xung quan dễ hơn');
     if(a.el!=='vo')add(r.root.els.includes(a.el)?'Tâm pháp hợp linh căn':'Tâm pháp lệch linh căn',r.root.els.includes(a.el)?4:-4,'Hệ tâm pháp '+(EL[a.el]||EL.vo).n);}
@@ -2178,3 +2178,49 @@ function llFresh(){const r=G.run;if(!r)return;r.llP=[];r.llN=[];r.llSeen={};}
 {const _ur36=uniqueRelic;uniqueRelic=function(id){const x=_ur36(id);if(!x)return x;x.req=['lenhtong','mocu','linhthu'].includes(id)?0:relReqRoll();x.v2=1;x.fx2={};return x;};}
 // chỉ số âm hiện "−3" thay vì "+-3"
 {const _fl36=fxLines;fxLines=function(fx,rel){return _fl36(fx,rel).map(s=>s.replace(/\+-/g,'−'));};}
+
+// ================= ĐỢT 32: CHỈ SỐ SÀN VÀ ĐÁNH GIÁ 5 MỨC =================
+// Chỉ số sàn: chỉ số của một nhân vật chuẩn ở ĐÚNG đại cảnh giới và tiểu cảnh giới hiện tại (phàm nhân tính riêng):
+// không đồ, không công pháp, không khí vận, thể chất, không nâng cấp Bến Vong Xuyên, không phẩm chất cảnh giới;
+// tam linh căn, tư chất trung bình (50), các chỉ số gốc trung bình, tâm pháp phàm phẩm, đứng ở cùng nơi với nhân vật (linh khí nơi bế quan hiện riêng).
+// Đánh giá = chỉ số thật / sàn: dưới 0,7 rất kém · 0,7–0,9 kém · 0,9–1,25 bình thường · 1,25–1,7 tốt · từ 1,7 rất tốt.
+// Hệ thống vẫn tính bằng số; đánh giá chỉ để hiển thị.
+const RATE_T=[0.7,0.9,1.25,1.7];
+const RATE_W={luc:['Rất yếu','Yếu','Bình thường','Mạnh','Rất mạnh'],toc:['Rất chậm','Chậm','Bình thường','Nhanh','Rất nhanh'],muc:['Rất thấp','Thấp','Bình thường','Cao','Rất cao'],
+ ben:['Rất mỏng','Mỏng','Bình thường','Dày','Rất dày'],xa:['Rất gần','Gần','Bình thường','Xa','Rất xa']};
+const RATE_COL=['#8d8672','#a5835a','var(--ink)','#3f8a4a','#b8902a'];
+// tốc độ tu, thổ nạp nhân dồn nhiều thứ (linh căn, tư chất, ngộ tính, khí vận) nên mốc rộng hơn
+const RATE_TK={bq:[0.6,0.85,1.4,2.3],thonap:[0.6,0.85,1.4,2.3]};
+function rateLv(v,f,T){T=T||RATE_T;if(!(f>0))return v>0?3:2;const x=v/f;let i=0;while(i<T.length&&x>=T[i]-1e-9)i++;return i;}
+let FLOOR_C={k:null,v:null};
+function floorKey(){const r=G.run;return [r.kiep,r.realm,tieu(),r.pham?1:0,r.region,r.at,G.bqRoom?1:0].join('|');}
+function floorStats(){const r=G.run;if(!r)return null;const k=floorKey();if(FLOOR_C.k===k)return FLOOR_C.v;
+  const F=JSON.parse(JSON.stringify(r));const tp={u:-999,type:'tp',tier:0,el:'vo',lines:[],lv:1,v:2,req:0,n:'chuẩn'};
+  Object.assign(F,{relics:[],eq:{},dd:[],arts:[tp],artKho:[],chu:[{k:'a',u:-999},null,null,null,null,null,null,null],chuOpen:4,kv:[],the:[],origin:'__none',trait:'none',
+    root:{id:'tam',els:['kim','moc','thuy']},bon:{atkP:0,defP:0,hpP:0,mpP:0,tp:0,ngo:0,van:0,tam:0,matkP:0},base:{tp:6,ngo:10,van:4,tam:9},tuchat:50,lifeAdj:0,quality:[0,0,0,0,0,0],
+    tamma:0,ht:[],wounds:[],inj:null,pets:[],petOut:null,th:[],scene:null,moving:null});
+  const keepR=G.run,keepU=G.meta.upg,keepRoom=G.bqRoom;let v=null;
+  try{G.run=F;G.meta.upg={};G.bqRoom=false;const s=S();
+    v={maxHp:s.maxHp,maxMp:s.maxMp,atk:s.atk,matk:s.matk,def:s.def,tp:s.tp,ne:s.ne,ngo:s.ngo,tam:s.tam,van:s.van,than:s.than,nl:s.nl,crit:s.crit,critDmg:s.critDmg,
+      cx:s.cx,hoi:s.hoi,hoTam:s.hoTam,lc:lucChien(),bq:bqReal(),thonap:thonapPct(),walk:walkSpeed(),sense:SENSE[F.realm]||1};}
+  catch(e){console.error(e);}finally{G.run=keepR;G.meta.upg=keepU;G.bqRoom=keepRoom;}
+  FLOOR_C={k,v};return v;}
+// đánh giá một chỉ số của người chơi: trả về {lv, t (chữ), c (màu)}
+function rateOf(key,val,kind){const f=floorStats();const lv=rateLv(val,f?f[key]:0,RATE_TK[key]);const W=RATE_W[kind||'luc'];return {lv,t:W[lv],c:RATE_COL[lv]};}
+function pctOf(a,b){return Math.round(clamp(a/Math.max(1,b),0,1)*100)+'%';}
+// ----- mô tả chỉ số bằng chữ: "+29%" → "tăng mạnh", "Ngộ tính +3" → "Ngộ tính tăng khá" -----
+// Số kiểu đếm (né 1 đòn, 2 lượt, thêm 2 ô, năm, tháng…) giữ nguyên vì đó là số lượng.
+// Mốc: chỉ số tính theo % (dưới 6 nhẹ, dưới 15 khá, dưới 30 mạnh, còn lại rất mạnh); chỉ số điểm (dưới 2 nhẹ, dưới 4 khá, dưới 7 mạnh).
+function magW(v,pct){const b=pct?[6,15,30]:[2,4,7];return v<b[0]?'nhẹ':v<b[1]?'khá':v<b[2]?'mạnh':'rất mạnh';}
+const NUM_KEEP=/^\s*(đòn|lượt|ô|năm|tháng|ngày|giờ|linh thạch|viên|lần|đạo|đợt)/;
+function numWords(str){str=String(str);
+  str=str.replace(/([+−-])\s?(\d+(?:[.,]\d+)?)(\s?%)?/g,(m,sg,n,pc,off,all)=>{if(NUM_KEEP.test(all.slice(off+m.length)))return m;const v=parseFloat(n.replace(',','.'));return (sg==='+'?'tăng ':'giảm ')+magW(v,!!pc);});
+  let tail='';str=str.replace(/(\d+(?:[.,]\d+)?)\s?%\s?/g,(m,n,off,all)=>{if(NUM_KEEP.test(all.slice(off+m.length)))return m;tail=magW(parseFloat(n.replace(',','.')),true);return '';});
+  return (tail?str.replace(/\s+$/,'')+' · '+tail:str).replace(/\s{2,}/g,' ');}
+{const _fl37=fxLines;fxLines=function(fx,rel){return _fl37(fx,rel).map(numWords);};}
+{const _lt37=lineText;lineText=function(a,x,pot){const t=_lt37(a,x,pot);return x&&(x.sk||x.mind)?t:numWords(t.replace(/\s*\(đang [^)]*\)/,''));};}
+{const _tt37=ttFxText;ttFxText=function(def){return _tt37(def).map(x=>/^Nhân quả/.test(x)?(/[−-]/.test(x)?'Thiên về ác':'Thiên về thiện'):numWords(x));};}
+
+// khả năng đột phá bằng chữ; từng nguồn cộng trừ bằng chữ
+function btWord(p){return p<0.3?'Rất khó':p<0.5?'Khó':p<0.7?'Ngang tay':p<0.85?'Dễ':'Gần như chắc chắn';}
+function partWord(v){const a=Math.abs(v);return (v>0?'▲ ':'▼ ')+(a<3?'ít':a<8?'vừa':'nhiều');}

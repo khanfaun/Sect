@@ -13,27 +13,27 @@ function pChar(){
       kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
       ttRow('Tiên thiên khí vận',(r.kv||[]).map(k=>TT_DEST[k]),'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.'),
       ttRow('Tiên thiên thể chất',(r.the||[]).map(ttPhysOf),'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.'),
-      kvRow('Tư chất',tc+' · '+tcName(tc),'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
-      kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá'),kvRow('Khí vận',s.van,'Chí mạng, may mắn'),
-      kvRow('Nhân quả',karmaName(r.karma)+' ('+r.karma+')','Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
+      kvRow('Tư chất',tcName(tc),'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
+      kvRow('Ngộ tính',RT('ngo',s.ngo,'muc'),'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',RT('tam',s.tam,'muc'),'Chống ảo cảnh, đột phá'),kvRow('Khí vận',RT('van',s.van,'muc'),'Chí mạng, may mắn'),
+      kvRow('Nhân quả',karmaName(r.karma),'Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
     b+=sgBox('yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+Math.floor(r.tv)+'%'),
-      `<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${fmtN(Math.round(r.tv/100*tvPts(r.realm)))} / ${fmtN(tvPts(r.realm))}</span></div>`,
-      `<div class="hrow tvrow"${ta('Lịch luyện '+llPtsOf()+' / '+tvPts(r.realm)+'\nCó được nhờ thực chiến (thắng nhiều, thua ít, đánh kẻ mạnh hơn được nhiều hơn), tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Cần '+Math.round(LL_BT/100*tvPts(r.realm))+' lịch luyện để đột phá.')}><span class="hn">${sib('Lịch luyện')}Lịch luyện</span>${bar(Math.min(100,llOf()),100,'ll')}<span class="hv">${fmtN(llPtsOf())} / ${fmtN(tvPts(r.realm))}</span></div>`,
-      kvRow('Tốc độ tu','<span class="tu-c">~'+tvPerMonth().join('-')+' tu vi/tháng</span>','Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.\nĐầy cảnh giới này cần '+fmtN(tvPts(r.realm))+' tu vi.'),
-      kvRow('Thổ nạp','+'+fmtN(thonapPts())+' tu vi/năm','Thân thể tự hít thở linh khí: không cần bế quan, tu vi vẫn tự tăng theo thời gian, kể cả lúc đi đường hay bế quan.\nRất ít, chừng 5% tốc độ bế quan. Theo linh căn, tư chất, ngộ tính, công pháp, tâm pháp, trang bị, mệnh cách và linh khí nơi đang đứng.'),
+      `<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${Math.floor(r.tv)}%</span></div>`,
+      `<div class="hrow tvrow"${ta('Lịch luyện '+Math.floor(Math.min(100,llOf()))+'%\nCó được nhờ thực chiến (thắng nhiều, thua ít, đánh kẻ mạnh hơn được nhiều hơn), tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Cần đầy lịch luyện mới đột phá được.')}><span class="hn">${sib('Lịch luyện')}Lịch luyện</span>${bar(Math.min(100,llOf()),100,'ll')}<span class="hv">${Math.floor(Math.min(100,llOf()))}%</span></div>`,
+      kvRow('Tốc độ tu',RT('bq',bqReal(),'toc'),'Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.'),
+      kvRow('Thổ nạp',RT('thonap',thonapPct(),'toc'),'Thân thể tự hít thở linh khí: không cần bế quan, tu vi vẫn tự tăng theo thời gian, kể cả lúc đi đường hay bế quan.\nRất ít, chừng 5% tốc độ bế quan. Theo linh căn, tư chất, ngộ tính, công pháp, tâm pháp, trang bị, mệnh cách và linh khí nơi đang đứng.'),
       kvRow('Hiệu suất tu',(()=>{const e=llEff(r.tv);return `<span class="${e<0.5?'bad':e>1?'good':''}">${Math.round(e*100)}%${e<0.5?' · bình cảnh':e>1?' · ngộ đạo':''}</span>`;})(),'Phần tu vi thực nhận so với lẽ ra được nhận, do chênh lệch tu vi và lịch luyện.\nTu vi vượt lịch luyện dưới 20%: nhận đủ. Vượt 30%: 70%. Vượt 40%: 35%. Vượt 60%: 10%. Từ 70%: chỉ 2%.\nLịch luyện cao hơn tu vi: nhận thêm tối đa 15%.'),
-      kvRow('Đạo cơ',(r.dao||0)+' · '+QNAME[qOf(r.dao||0)],'Điểm đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'\nMốc kế tiếp: '+qNext(r.dao||0)+' điểm':'\nĐã đạt Thiên đạo')),
-      kvRow('Tâm ma',r.tamma,'Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
-      kvRow('Thần thức',s.than+' · tầm '+SENSE[r.realm]+' dặm','Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
-      kvRow('Niệm lực',s.nl,'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.'),
-      kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.')]);
-    b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<span class="lc-c"${ta('Lực chiến: tính từ chỉ số chiến đấu và trang bị')}>Lực chiến ${fmtN(lucChien())}</span><small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl two">${[
-      kvRow('Khí huyết',r.hp+' / '+s.maxHp,'Về 0 là chết'),kvRow('Linh lực',r.mp+' / '+s.maxMp,'Thi triển pháp thuật'),
-      kvRow('Công vật lý',s.atk,'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',s.matk,'Dùng cho pháp thuật'),
-      kvRow('Chí mạng',Math.round(s.crit)+'%','Tỉ lệ chí mạng'),kvRow('ST chí mạng',s.critDmg+'%','Sát thương khi chí mạng'),
-      kvRow('Chính xác',s.cx,'Đối phương né khó hơn'),kvRow('Thủ',s.def,'Giảm sát thương nhận vào'),
-      kvRow('Hộ tâm',s.hoTam,'Giảm sát thương chí mạng nhận vào'),kvRow('Né',s.ne,'Phải bấm Né đúng lúc mới phát huy hết'),
-      kvRow('Thân pháp',s.tp,'Tốc độ chạy trên nửa đầu thanh hành động'),kvRow('Hồi phục',s.hoi,'Tốc độ trên nửa sau thanh hành động')].join('')}</div></details>`;
+      kvRow('Đạo cơ',QNAME[qOf(r.dao||0)],'Đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'':'\nĐã đạt Thiên đạo')),
+      kvRow('Tâm ma',r.tamma+'%','Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
+      kvRow('Thần thức',RT('than',s.than,'luc'),'Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
+      kvRow('Niệm lực',RT('nl',s.nl,'luc'),'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm, tế pháp bảo, đòn thần thức đều tốn niệm lực.'),
+      kvRow('Đi lại',capS(moveText())+' · '+RT('walk',walkSpeed(),'toc'),'Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.')]);
+    b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<span class="lc-c"${ta('Lực chiến: tính từ chỉ số chiến đấu và trang bị')}>Lực chiến ${RT('lc',lucChien(),'luc')}</span><small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl">${[
+      kvRow('Khí huyết',pctOf(r.hp,s.maxHp)+' · '+RT('maxHp',s.maxHp,'ben'),'Còn bao nhiêu phần khí huyết, và khí huyết tối đa dày hay mỏng. Về 0 là chết'),kvRow('Linh lực',(s.maxMp?pctOf(r.mp,s.maxMp)+' · ':'')+RT('maxMp',s.maxMp,'ben'),'Thi triển pháp thuật'),
+      kvRow('Công vật lý',RT('atk',s.atk),'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',RT('matk',s.matk),'Dùng cho pháp thuật'),
+      kvRow('Chí mạng',RT('crit',s.crit,'muc'),'Tỉ lệ chí mạng'),kvRow('ST chí mạng',RT('critDmg',s.critDmg),'Sát thương khi chí mạng'),
+      kvRow('Chính xác',RT('cx',s.cx,'muc'),'Đối phương né khó hơn'),kvRow('Thủ',RT('def',s.def),'Giảm sát thương nhận vào'),
+      kvRow('Hộ tâm',RT('hoTam',s.hoTam),'Giảm sát thương chí mạng nhận vào'),kvRow('Né',RT('ne',s.ne,'muc'),'Phải bấm Né đúng lúc mới phát huy hết'),
+      kvRow('Thân pháp',RT('tp',s.tp,'toc'),'Tốc độ chạy trên nửa đầu thanh hành động'),kvRow('Hồi phục',RT('hoi',s.hoi,'toc'),'Tốc độ trên nửa sau thanh hành động')].join('')}</div></details>`;
     b+='</div>';
   }
   if(tab==='bag')b+=bagTabHTML();
@@ -395,6 +395,15 @@ function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="t
 // tooltip vật phẩm: chỉ số thường ở trên, nội tại tách riêng bên dưới
 {const _rt34=relTip;relTip=function(rel){if(!rel||rel.k==='book')return _rt34(rel);const fx=relicFx(rel);const nt={},ns={};for(const [k,v] of Object.entries(fx))(NT_KEYS.includes(k)?nt:ns)[k]=v;
   const sub=SLOT_N[slotOf(rel)]+' · hệ '+(EL[rel.el]||EL.vo).n;const ok=relOk(rel);const NL=Object.keys(nt).map(k=>({n:NT_NAME[k]||'',t:fxLines({[k]:nt[k]},rel)[0]||''})).filter(x=>x.t);
-  let h=tipCard({ic:relIcon(rel),n:rel.name,t:rel.tier,sub,lines:fxLines(ns,rel),lore:rel.lore});if(rel.lore){const lp='<p>'+esc(rel.lore)+'</p>';if(h.includes('<div class="tp-b"><ul>')){h=h.replace(lp,'').replace('<div class="tp-b"><ul>','<div class="tp-b">'+lp+'<ul>');}}const i=h.lastIndexOf('</div>');
+  const cmp=relCmpOf(rel);let h=tipCard({ic:relIcon(rel),n:rel.name,t:rel.tier,sub,lines:(cmp?['So với '+cmp.name+' đang dùng:']:[]).concat(relCmpLines(ns,rel,cmp)),lore:rel.lore});if(rel.lore){const lp='<p>'+esc(rel.lore)+'</p>';if(h.includes('<div class="tp-b"><ul>')){h=h.replace(lp,'').replace('<div class="tp-b"><ul>','<div class="tp-b">'+lp+'<ul>');}}const i=h.lastIndexOf('</div>');
   const add=(NL.length?`<div class="nt"><b>Nội tại duy nhất · không cộng dồn</b>${NL.map(x=>`<span><em class="ntn">${esc(x.n)}</em>${esc(x.t)}</span>`).join('')}</div>`:'')+`<p class="req${ok?'':' bad'}">Yêu cầu: ${LV_NAME[relReq(rel)]}${ok?'':' · chưa đủ'}</p>`;
   return h.slice(0,i)+add+h.slice(i);};}
+
+// đánh giá một chỉ số thành chữ có màu (5 mức so với sàn của tiểu cảnh giới hiện tại)
+function RT(key,val,kind){const o=rateOf(key,val,kind);return `<span class="rt rt${o.lv}">${o.t}</span>`;}
+
+// so với món đang dùng cùng ô: mỗi dòng chỉ số có ▲ (hơn), ▼ (kém), = (ngang); món đang mặc thì không so
+function relCmpOf(rel){const r=G.run;if(!r||!rel||rel.k==='book')return null;const E=eqOf();if(Object.values(E).includes(rel)||(r.dd||[]).some(d=>d.rel===rel))return null;
+  const S0=slotsFor(rel).length?slotsFor(rel):[slotOf(rel)];const cur=S0.map(k=>E[k]).filter(Boolean);if(!cur.length)return null;return cur.sort((a,b)=>Object.keys(relicFx(a)).length-Object.keys(relicFx(b)).length)[0];}
+function relCmpLines(ns,rel,cmp){const keys=Object.keys(ns);if(!cmp)return fxLines(ns,rel);const cf=relicFx(cmp);
+  return keys.map(k=>{const t=fxLines({[k]:ns[k]},rel)[0]||'';const v=ns[k],o=cf[k]||0;const a=typeof v!=='number'?'':v>o?' ▲':v<o?' ▼':' =';return t+a;}).concat(Object.keys(cf).filter(k=>!(k in ns)&&!NT_KEYS.includes(k)).map(k=>'Mất: '+(fxLines({[k]:cf[k]},cmp)[0]||'')+' ▼'));}
