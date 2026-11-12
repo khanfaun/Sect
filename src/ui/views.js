@@ -108,8 +108,8 @@ function navHTML(){
 
 // ---------- các cảnh hiện đè lên bản đồ ----------
 function storyHTML(story){return story.map((x,i)=>{const old=i<story.length-1?' old':'';const neu=i>=UI.lastStory?' new':'';
-  if(typeof x==='object')return `<p class="q${old}">${esc(x.q)}</p>`;return `<p class="${old}${neu}">${esc(x)}</p>`;}).join('');}
-function card(title,sub,body,o){o=o||{};return `<section class="scard ${o.cls||''}">${o.art||''}<header class="sc-h"><h2>${esc(title)}</h2>${sub?`<small>${esc(sub)}</small>`:''}${o.head||''}</header><div class="sc-b">${body}</div>${o.foot?`<footer class="sc-f">${o.foot}</footer>`:''}</section>`;}
+  if(typeof x==='object')return `<p class="q${old}">${esc(x.q)}</p>`;return `<p class="${old}${neu}">${txt(x)}</p>`;}).join('');}
+function card(title,sub,body,o){o=o||{};return `<section class="scard ${o.cls||''}">${o.art||''}<header class="sc-h"><h2>${esc(title)}</h2>${sub?`<small>${esc(sub)}</small>`:''}${o.head||''}${o.x?`<button class="xb sc-x" data-act="closeAll" aria-label="Đóng"${ta('Đóng hẳn, về bản đồ')}>${ic('close')}</button>`:''}</header><div class="sc-b">${body}</div>${o.foot?`<footer class="sc-f">${o.foot}</footer>`:''}</section>`;}
 function goBtn(act,label,arg,cls){return `<button class="btn ${cls||'pri'} wide" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}>${label}</button>`;}
 function choiceBtn(n,act,arg,label,extra,o){o=o||{};return `<button class="ch${o.cls?' '+o.cls:''}" data-act="${act}" data-arg="${arg}"${o.dis?' disabled':''}${ta(o.tip)}><span class="cn">${n}</span><span class="ct">${label}</span>${extra||''}</button>`;}
 function choiceExtra(c){let x='';const r=G.run;
@@ -121,7 +121,7 @@ function vRegionIntro(sc){const r=G.run;const og=ORIGIN.find(o=>o.id===r.origin)
   return `<div class="intro" data-act="regionGo"><div class="in-b"><small>Kiếp thứ ${r.kiep}</small><h1>${esc(r.ten)}</h1><p class="in-o">${esc(og.n)} · quê ở ${esc(r.que)}</p><p class="in-t">${esc(sc.text)}</p>${sc.sub?`<p class="hint">${esc(sc.sub)}</p>`:''}<p class="hint tap">Chạm để lên đường</p></div></div>`;}
 function vEvent(sc){
   const r=G.run;const e=EVMAP[sc.id];const st=sc.story;const qi=st.findIndex(x=>typeof x==='object');
-  let b=qi<0?`<div class="story">${storyHTML(st)}</div>`:`<div class="story">${storyHTML(st.slice(0,qi))}</div><div class="dlg" id="dlg">${st.slice(qi).map((x,i)=>typeof x==='object'?`<p class="dq">› ${esc(x.q)}</p>`:`<p class="${qi+i>=UI.lastStory?'new':''}">${esc(x)}</p>`).join('')}</div>`;
+  let b=qi<0?`<div class="story">${storyHTML(st)}</div>`:`<div class="story">${storyHTML(st.slice(0,qi))}</div><div class="dlg" id="dlg">${st.slice(qi).map((x,i)=>typeof x==='object'?`<p class="dq">› ${esc(x.q)}</p>`:`<p class="${qi+i>=UI.lastStory?'new':''}">${txt(x)}</p>`).join('')}</div>`;
   if(sc.news)b+=`<p class="news"${ta('Tin đồn giang hồ')}>${esc(sc.news)}</p>`;
   b+=chipsHTML(sc.chips);
   if(sc.phase==='choose'){b+='<div class="choices">';let k=1;for(const {c,i} of visChoices(sc)){const NL=needList(c);const bad=NL.filter(x=>!x.ok);b+=choiceBtn((k++)+'.','choose',i,esc(T(c.l,sc.v)),choiceExtra(c),{dis:bad.length>0,cls:bad.length?'soft':''});if(bad.length)b+=`<p class="why">(${esc(bad.map(x=>x.t).join(', '))})</p>`;}b+='</div>';}
@@ -129,7 +129,7 @@ function vEvent(sc){
 }
 function foeLine(en){return `<div class="foe-l"><span class="foe-i">${assetImg('foe',en.k||en.n,en.i)}</span><div><b>${esc(en.n)}</b><small>${elSeal(en.el)} ${esc(en.sub||'')}</small></div></div>`;}
 function vEnc(sc){
-  const r=G.run,en=sc.en;let b=foeLine(en)+`<div class="story"><p class="new">${esc(sc.text)}</p>${sc.res?`<p class="new">${esc(sc.res)}</p>`:''}</div>`;
+  const r=G.run,en=sc.en;let b=foeLine(en)+`<div class="story"><p class="new">${txt(sc.text)}</p>${sc.res?`<p class="new">${txt(sc.res)}</p>`:''}</div>`;
   if(sc.done)return card(sc.elite?'Hung địa':'Chạm trán',r.place.n,b+chipsHTML(sc.paid?[chip('💎','−'+sc.paid,'Linh thạch','dn')]:[]),{foot:goBtn('next','Tiếp tục')});
   if(injured())b+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   const p=Math.round(encSneak(sc)*100);const pay=Math.round(12*SC[r.region]);
@@ -145,7 +145,7 @@ function itemView(p){
   if(p.k==='pass')return {ic:'🎫',n:p.n,sub:'Lệnh bài thông quan',tip:'Trình ở quan ải để sang '+REG[p.reg].n,t:2};
   return {ic:'💎',n:p.n+' linh thạch',sub:'',tip:''};}
 function vReward(sc){
-  const r=G.run;let b=`<div class="story"><p class="new">${esc(sc.text)}</p></div>`+chipsHTML(sc.chips);
+  const r=G.run;let b=`<div class="story"><p class="new">${txt(sc.text)}</p></div>`+chipsHTML(sc.chips);
   if(sc.picks.length){b+=`<p class="hint">${sc.taken<0?'Chọn một món':'Đã chọn'}</p><div class="rows">${sc.picks.map((p,i)=>{const v=itemView(p);const cls=sc.taken===i?' taken':sc.taken>=0?' dim':'';return `<button class="row prow${cls}" data-act="pick" data-arg="${i}"${sc.taken>=0?' disabled':''} style="${v.t!=null?pcs(v.t):''}"${ta(v.tip)}><span class="qi">${v.ic}</span><span class="r-t"><b class="${v.t!=null?'qt':''}">${esc(v.n)}</b><small>${esc(v.sub)}</small></span></button>`;}).join('')}</div>`;}
   return card(sc.kind==='boss'?'Chiến thắng':'Chiến lợi phẩm',r.place.n,b,{foot:goBtn('rcont',sc.picks.length&&sc.taken<0?'Bỏ qua':'Tiếp tục')});
 }
@@ -155,7 +155,7 @@ function vShop(sc){
   if(tab==='buy'){b+='<div class="grid">';sc.items.forEach((it,i)=>{const v=itemView(it);const no=it.sold||r.st<it.p;
     b+=`<button class="cell qc${it.sold?' sold':''}" data-act="buy" data-arg="${i}"${no?' disabled':''} style="${v.t!=null?pcs(v.t):''}"${ta(v.tip||v.n)}><span class="c-i">${v.ic}</span><span class="c-n${v.t!=null?' qt':''}">${esc(v.n)}</span><span class="c-p">${it.sold?'hết hàng':stoneHTML(it.p)}</span>${!it.sold&&it.qty!=null?`<span class="c-q">còn ${it.qty}</span>`:''}</button>`;});b+=`</div><p class="hint">Chạm giữ một món để xem công dụng. Chạm để mua. Hàng mới sau ${durH(shopResetIn())}.</p>`;}
   else b+=`<div class="rows"><button class="row" data-act="heal"${sc.healed||r.st<sc.heal?' disabled':''}${ta('Hồi đầy khí huyết và linh lực')}><span class="r-i">🩹</span><span class="r-t"><b>Mời y sư trị thương</b><small>Hồi đầy khí huyết, linh lực</small></span><span class="r-x">${sc.healed?'xong':stoneHTML(sc.heal)}</span></button></div>`;
-  return card('Phường thị',r.place.n,b,{cls:'tall',foot:`<span class="grow">Trong túi: ${stoneHTML(r.st)}</span>`+goBtn('next','Rời đi','', 'pri')});
+  return card('Phường thị',r.place.n,b,{cls:'tall',x:1,foot:`<span class="grow">Trong túi: ${stoneHTML(r.st)}</span>`+goBtn('next','Rời đi','', 'pri')});
 }
 function vSwap(sc){
   const r=G.run,sk=SK[sc.id];let b=`<div class="story"><p>Ngươi lĩnh ngộ được <b class="qt" style="${pcs(sk.t)}"${ta(skillTip(sk,1))}>${esc(sk.n)}</b>. Nhưng tâm trí chỉ chứa nổi bốn môn. Quên đi môn nào?</p></div><div class="choices">`;
@@ -176,7 +176,7 @@ function vPlace(sc){
   // lịch sử: mỗi lần chọn một việc, giữ lại lựa chọn và kết quả (giống hộp thoại sự kiện)
   sc.hist=sc.hist||[];if((sc.msg&&sc.msg.length)||(sc.chips&&sc.chips.length)){const key=(sc.seq||0)+JSON.stringify(sc.msg)+JSON.stringify((sc.chips||[]).map(c=>c.t));if(sc.histK!==key){sc.hist.push({q:UI.lastQ||null,m:sc.msg.slice(),c:(sc.chips||[]).slice()});sc.histK=key;if(sc.hist.length>12)sc.hist.shift();}}
   UI.lastQ=null;
-  b+=`<div class="pl-talk" id="plTalk" data-n="${sc.hist.length}"><div class="story">${UI.descHide?'':`<p>${esc(sc.intro)}</p>`}${sc.hist.map(h=>(h.q?`<div class="ev-q"><p class="ev-c">› ${esc(h.q)}</p>${h.m.map(m=>`<p>${esc(m)}</p>`).join('')}</div>`:h.m.map(m=>`<p>${esc(m)}</p>`).join(''))+chipsHTML(h.c)).join('')}</div></div>`;
+  b+=`<div class="pl-talk" id="plTalk" data-n="${sc.hist.length}"><div class="story">${UI.descHide?'':`<p>${txt(sc.intro)}</p>`}${sc.hist.map(h=>(h.q?`<div class="ev-q"><p class="ev-c">› ${esc(h.q)}</p>${h.m.map(m=>`<p>${txt(m)}</p>`).join('')}</div>`:h.m.map(m=>`<p>${txt(m)}</p>`).join(''))+chipsHTML(h.c)).join('')}</div></div>`;
   const ents=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);const qs=r.quests.filter(q=>q.state==='open'&&q.node===n.id);
   const big=PNOW.map(by).filter(Boolean);
   if(qs.length){b+=`<h3 class="grp big">${ib('scroll','gold')}Nhiệm vụ</h3><div class="choices">${qs.map(q=>`<button class="ch qrow qdo" data-act="qDo" data-arg="${q.id}" style="${pcs(questGrade(q))}"><span class="ct">${q.kind==='den'?'Giao tận tay':'Lùng tìm mục tiêu'} · ${esc(q.text)}</span><span class="qmeta"><span class="qgr">${QGRADE[questGrade(q)]}</span>${costHTML(q.kind==='den'?1:2,0)}</span></button>`).join('')}</div>`;}
@@ -196,7 +196,7 @@ function vPlace(sc){
     foot:(canEx?`<button class="btn" data-act="exStat"${ta('Xem nơi này có gì: yêu ma, vật liệu, tỉ lệ')}>Thăm dò</button>`:'')+`<span class="grow"></span><button class="btn" data-act="leave">Rời đi</button>`});
 }
 function vPass(sc){
-  const r=G.run;let b=`<div class="story"><p class="new">${esc(sc.text)}</p><p class="hint">Qua ải mất khoảng ${CROSS_M[sc.k]} tháng đường.</p></div><div class="choices">`;let k=1;
+  const r=G.run;let b=`<div class="story"><p class="new">${txt(sc.text)}</p><p class="hint">Qua ải mất khoảng ${CROSS_M[sc.k]} tháng đường.</p></div><div class="choices">`;let k=1;
   for(const o of passOpts())b+=choiceBtn((k++)+'.','pass',o.a,esc(o.l),o.x?`<span class="cx">${emoTxt(esc(String(o.x)))}</span>`:'',{dis:!o.ok,tip:o.tip});
   return card('Quan ải → '+REG[sc.k].n,r.place.n,b+'</div>',{foot:goBtn('next','Quay lại','','')});
 }
@@ -211,7 +211,7 @@ function vPrep(sc){
   return card(to===5?'Độ kiếp phi thăng':'Đột phá '+REALM[to],r.place.n,b,{cls:'tall',foot:`<button class="btn" data-act="next">Để sau</button><span class="grow"></span><button class="btn pri" data-act="prepGo">Bắt đầu</button>`});
 }
 function vBtres(sc){
-  const r=G.run;let b=`<div class="story"><p class="new">${esc(sc.text)}</p></div>`+chipsHTML(sc.chips);
+  const r=G.run;let b=`<div class="story"><p class="new">${txt(sc.text)}</p></div>`+chipsHTML(sc.chips);
   const more=r.bt&&!sc.done&&r.bt.si<r.bt.stages.length;
   if(more){const st=r.bt.stages[r.bt.si];b+=`<p class="hint">${st==='tamma'?'Tâm ma kiếp: đánh một trận với chính mình.':'Lôi kiếp: '+st.n+' đạo lôi không né được, chỉ đỡ được. Gục là chết thật.'}</p>`;}
   return card(sc.ok?'Đột phá':'Thất bại',r.place.n,b,{foot:goBtn('btGo',more?'Nghênh kiếp':'Tiếp tục')});
@@ -219,11 +219,11 @@ function vBtres(sc){
 function vBoard(sc){
   const r=G.run,n=nodeById(sc.id);const open=r.quests.filter(q=>q.state==='open').length;
   let b=`<div class="story"><p>Mấy tờ cáo thị dán chồng lên nhau, giấy đã ngả vàng. Nhận việc thì phải xong trước hạn, thất hứa thì mang tiếng.</p></div><div class="choices">`;
-  n.board.list.forEach((q,i)=>{const g=questGrade(q);b+=`<button class="ch qrow" data-act="quest" data-arg="${i}"${q.taken||open>=3?' disabled':''} style="${pcs(g)}"${ta(q.kind==='diet'?'Tới nơi rồi thăm dò để tìm mục tiêu':'Chỉ cần tới nơi')}><span class="ct">${esc(q.text)}</span><span class="qmeta"><span class="qgr">${QGRADE[g]}</span>${costHTML(q.days*HD,0)}${q.taken?'<span class="qtk">đã nhận</span>':''}</span><span class="qrw">${chipsHTML(questRewardChips(q))}</span></button>`;});
+  n.board.list.forEach((q,i)=>{const g=questGrade(q);const dis=q.taken||open>=3;b+=`<div role="button" class="ch qrow${dis?' qdis':''}"${dis?'':` data-act="quest" data-arg="${i}"`} style="${pcs(g)}"${ta(q.kind==='diet'?'Tới nơi rồi lùng tìm, đánh hạ mục tiêu':'Tới nơi rồi giao tận tay')}><span class="ct">${esc(q.text)}</span><span class="qmeta"><span class="qgr">${QGRADE[g]}</span>${costHTML(q.days*HD,0)}${q.taken?'<span class="qtk">đã nhận</span>':''}</span><span class="qrw">${chipsHTML(questRewardChips(q))}</span></div>`;});
   const mine=r.quests.filter(q=>q.state==='open'&&q.from===n.id);
   b+=`</div><p class="hint">Đang nhận ${open}/3 việc.</p>`;
-  if(mine.length)b+=`<h4 class="sgrp">Việc vừa nhận ở đây</h4><div class="rows">${mine.map(q=>`<div class="row qrow" style="${pcs(questGrade(q))}"><span class="r-t"><b>${esc(q.text)}</b><small>còn ${durH(Math.max(0,q.due-W().t))}</small></span><button class="btn sm" data-act="qDrop" data-arg="${q.id}">Trả lại</button></div>`).join('')}</div>`;
-  return card('Bảng treo thưởng',n.name,b,{foot:goBtn('next','Quay lại','','')});
+  UI.qOpen=UI.qOpen||{};if(mine.length)b+=`<h4 class="sgrp">Việc đã nhận ở đây</h4><div class="rows">${mine.map(q=>questCardHTML(q)).join('')}</div>`;
+  return card('Bảng treo thưởng',n.name,b,{x:1,foot:`<button class="btn" data-act="next">Quay lại</button><span class="grow"></span><button class="btn pri" data-act="openJournal">${ic('book')} Sổ tay</button>`});
 }
 function vBury(sc){
   const r=G.run,n=nodeById(sc.id);
@@ -307,7 +307,7 @@ function lkTag(n){const m=LK_M[lkOf(n)]*(n&&n.dp?1.15:1)*(G.bqRoom?1.5:1);const 
 // ---------- trà lâu, khách điếm, tửu phường: các lựa chọn ----------
 function costHTML(h,st){return `${h?`<span class="cost-t">${ic('hour')}${durH(h)}</span>`:''}${st?`<span class="cost-s"><i class="rh"></i>${st}</span>`:''}`;}
 function venueHTML(n,v){const L=venueOpts(n,v);const vi=(n.vin&&n.vin[v])||(n.vin=n.vin||{},n.vin[v]=pick(VENUE_IN[v]));
-  return `<div class="venue"><div class="vn-h"><b>${VENUE_N[v]}</b><button class="xb sm" data-act="vclose" aria-label="Rời đi">${ic('close')}</button></div><p class="vn-in">${esc(vi)}</p>
+  return `<div class="venue"><div class="vn-h"><b>${VENUE_N[v]}</b><button class="xb sm" data-act="vclose" aria-label="Rời đi">${ic('close')}</button></div><p class="vn-in">${txt(vi)}</p>
    <div class="vn-l">${L.map((o,i)=>`<button class="vn-o${o.spec?' spec':''}${o.lack||o.no?' dim':''}" data-act="vopt" data-arg="${o.id}"><span class="vn-t"><span class="vn-k">${i+1}.</span>${esc(o.l)}</span>
     <span class="vn-c">${o.spec?`<span class="vn-sp">${ic('hour')}còn ${durH(o.spec)}</span>`:''}${costHTML(o.h,o.st)}${o.req?`<span class="vn-rq${o.lack?' bad':''}">${esc(o.req[2])} ${o.req[1]}</span>`:''}</span></button>`).join('')}</div></div>`;}
 // biểu tượng phần nhận được: chỉ biểu tượng và con số
@@ -343,3 +343,10 @@ function confirmHTML(title,d,h,st,g,act,arg){return `<div class="mbox pconf"><h3
     if(m.k==='vreq')return `<div class="mbox pconf"><h3>${esc(o.l)}</h3><p>${esc(o.d)}</p><div class="pc-row bad"><small>Chưa đủ</small><span>${esc(o.lack||o.no)}</span></div><div class="mb-f"><button class="btn pri" data-act="modalX">Đã hiểu</button></div></div>`;
     return confirmHTML(o.l,o.d,o.h,o.st,o.fight?{st:o.g.st,txt:'phải đánh một trận'}:o.g,'vgo',m.v+':'+m.id);}
   return _mh12();};}
+
+// sự kiện dọc đường của nhiệm vụ
+function vQev(sc){const r=G.run;const q=r.quests.find(x=>x.id===sc.q);let b=`<div class="story"><p class="new">${txt(sc.text)}</p></div>${q?`<p class="hint">Nhiệm vụ: ${esc(q.text)}</p>`:''}`;
+  if(sc.res){b+=`<div class="story"><div class="ev-q"><p class="ev-c">› ${esc(sc.res.l)}</p><p>${txt(sc.res.t)}</p></div></div>`+chipsHTML(sc.chips);return card('Trên đường làm nhiệm vụ',r.place.n,b,{foot:goBtn('qevDone','Tiếp tục')});}
+  b+='<div class="choices">'+qevOpts(sc).map((o,i)=>`<button class="ch${o.lack||o.no?' soft':''}" data-act="qevPick" data-arg="${i}"${o.lack||o.no?' disabled':''}><span class="cn">${i+1}.</span><span class="ct">${esc(o.l)}</span>${o.fight?'<span class="cx">phải đánh</span>':''}${o.h||o.st?`<span class="cx">${costHTML(o.h,o.st)}</span>`:''}${o.lack?`<span class="cx no">${esc(o.lack)}</span>`:''}</button>`).join('')+'</div>';
+  return card('Trên đường làm nhiệm vụ',r.place.n,b,{});}
+SCENE_V.qev=vQev;

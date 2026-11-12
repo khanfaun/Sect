@@ -899,3 +899,12 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .qpop{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);z-index:60;width:min(320px,86vw);padding:14px 16px;text-align:center;background:var(--paper);border:1px solid color-mix(in srgb,var(--pc) 60%,transparent);box-shadow:0 20px 60px -20px rgba(0,0,0,.5),inset 0 3px 0 var(--pc);border-radius:var(--r);animation:qpin .35s var(--ease) both}
 .qpop b{display:block;letter-spacing:.14em;text-transform:uppercase;font-size:.78em;color:#2f8f4e}.qpop.bad b{color:var(--seal)}.qpop p{margin:6px 0 4px;font-size:.92em}.qpop .chips{justify-content:center;margin:6px 0 0}
 .qpop.out{animation:qpout .4s ease both}@keyframes qpin{from{opacity:0;transform:translate(-50%,-44%) scale(.96)}}@keyframes qpout{to{opacity:0;transform:translate(-50%,-56%)}}
+[data-tip]{cursor:pointer}.gl{border-bottom:1px dashed color-mix(in srgb,var(--ink2) 55%,transparent);cursor:help}
+/* chú thích vật phẩm */
+#tip.rich{max-width:280px;padding:.6em .7em}
+.tt-it{display:flex;gap:10px;align-items:flex-start}.tt-av{width:40px;height:40px;flex:none;display:grid;place-items:center;border:2px solid var(--pc,#8d8672);border-radius:8px;font-size:1.3em;background:rgba(255,255,255,.08);color:var(--pc,#ddd)}
+.tt-it b{display:block;color:var(--pc,inherit)}.tt-it small{display:block;opacity:.7;font-size:.86em}.tt-it p{margin:.3em 0 0;font-size:.92em;white-space:normal}
+.lav .ic{width:13px;height:13px}
+.place .pl-talk .story p{font-size:.86em!important;line-height:1.65}.pl-talk .chip{font-size:.78em}
+.ch.qdis{opacity:.55;cursor:default}.ch.qdis .chip{opacity:1}
+.sc-h .sc-x{margin-left:auto;width:32px;height:32px;align-self:center}.sc-h:has(.sc-x){flex-wrap:nowrap}

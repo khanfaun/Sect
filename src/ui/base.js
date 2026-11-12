@@ -106,7 +106,7 @@ function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" 
 const EMO_IC={'⏳':'hour','🏺':'ring','❤️':'heart','📖':'book','☯️':'yin','🤝':'people','💧':'drop','✨':'spark','⚗️':'flask','⚔':'sword','⚔️':'sword','🗡️':'sword','😈':'skull','🗺️':'pin','📜':'scroll','🏅':'medal','🎫':'flag','🍃':'clover','🍀':'clover','🌩️':'bolt','☁️':'sun','🛡️':'shield','🌀':'wind','🧠':'brain','🪷':'lotus','🌕':'moon'};
 function emoIc(e){if(e==='💎')return '<i class="rh"></i>';const k=EMO_IC[e];return k?ic(k):e;}
 function emoTxt(h){return String(h).replace(/💎/g,'<i class="rh"></i>').replace(/⏳/g,ic('hour'));}
-function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
+function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}${c.h?` data-tiph="${esc(c.h)}"`:''}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
 function elSeal(e){const E=EL[e]||EL.vo;return `<span class="el el-${e}"${ta('Hệ '+E.n+(KHAC[e]?'\nKhắc '+EL[KHAC[e]].n:''))}>${E.c}</span>`;}
 function bar(cur,max,cls){const p=Math.max(0,Math.min(100,cur/Math.max(1,max)*100));return `<div class="hb ${cls||''}"><i style="width:${p}%"></i></div>`;}
 function tabsHTML(key,list,cur){return `<div class="tabs">${list.map(([k,n])=>`<button data-act="tab" data-arg="${key}:${k}" class="${k===cur?'on':''}">${n}</button>`).join('')}</div>`;}
@@ -116,3 +116,66 @@ function win(title,body,o){o=o||{};return `<section class="win ${o.cls||''}"><he
 function toastFlush(){const L=G.toasts;if(!L||!L.length)return;const box=$('#toast');if(!box)return;
   for(const t of L){const d=document.createElement('div');d.className='toast '+(t.c||'');d.textContent=t.t;box.appendChild(d);setTimeout(()=>d.remove(),3600);}
   G.toasts=[];while(box.children.length>3)box.firstChild.remove();}
+
+// ---------- từ điển: thuật ngữ trong lời kể có gạch chân đứt, chạm vào xem giải thích ----------
+const GLOSS={
+  'tu sĩ':'Người tu luyện để cầu trường sinh, hấp thu linh khí trời đất vào thân.',
+  'tán tu':'Tu sĩ không thuộc tông môn nào, tự tu tự lo, tự do mà thiếu chỗ dựa.',
+  'tông môn':'Môn phái tu tiên. Có công pháp truyền thừa, động phủ, tài nguyên; đệ tử phải làm việc, đóng góp cống hiến.',
+  'sơn môn':'Cổng chính và cũng là cách gọi một tông môn tu tiên.',
+  'ma tu':'Tu sĩ đi đường tà: luyện bằng máu thịt, hồn phách hay tà thuật. Mạnh nhanh nhưng dễ bị tâm ma cắn trả.',
+  'linh thạch':'Đá chứa linh khí, vừa là tiền tệ vừa là tài nguyên tu luyện của giới tu tiên. Rất quý.',
+  'linh khí':'Khí tinh túy của trời đất. Tu sĩ hút linh khí vào thân để tăng tu vi. Nơi linh khí dồi dào tu nhanh hơn.',
+  'linh căn':'Căn cơ bẩm sinh quyết định có tu được hay không và hợp với hệ nào (Kim, Mộc, Thủy, Hỏa, Thổ...). Càng ít hệ càng thuần.',
+  'tư chất':'Độ tinh thuần của linh căn, định sẵn lúc sinh. Tư chất cao thì hấp thu linh khí nhanh hơn.',
+  'tu vi':'Mức tích lũy tu luyện trong cảnh giới hiện tại. Đầy thì có thể đột phá.',
+  'lịch luyện':'Kinh nghiệm thực chiến, đi lại giang hồ. Tu vi bỏ xa lịch luyện thì tu luyện chậm lại; đủ lịch luyện mới đột phá được.',
+  'cảnh giới':'Các bậc tu luyện: Luyện Khí, Trúc Cơ, Kết Đan, Nguyên Anh, Hóa Thần, Độ Kiếp.',
+  'luyện khí':'Cảnh giới đầu tiên: dẫn linh khí vào thân, luyện thành chân khí.',
+  'trúc cơ':'Cảnh giới thứ hai: xây nền móng đạo cơ. Thọ nguyên tăng, ngự được pháp khí.',
+  'kết đan':'Cảnh giới thứ ba: chân khí ngưng thành kim đan trong đan điền.',
+  'nguyên anh':'Cảnh giới thứ tư: kim đan hóa thành nguyên anh, thân chết mà nguyên anh còn thì còn đường sống.',
+  'hóa thần':'Cảnh giới thứ năm: thần thức hòa với trời đất, gần chạm tới phi thăng.',
+  'độ kiếp':'Vượt thiên kiếp cuối cùng để phi thăng thành tiên.',
+  'đột phá':'Vượt lên cảnh giới mới khi tu vi viên mãn. Cần ở động phủ, đủ lịch luyện, có thể phải chịu thiên kiếp.',
+  'thiên kiếp':'Lôi kiếp trời giáng khi tu sĩ đột phá cảnh giới lớn. Vượt được thì lên, không thì tan thành tro.',
+  'lôi kiếp':'Sấm sét trời giáng thử thách tu sĩ khi đột phá. Chỉ đỡ được, không né được.',
+  'bế quan':'Đóng cửa tu luyện liền mạch nhiều tháng năm ở động phủ, tu vi tăng mạnh nhưng thời gian trôi qua.',
+  'động phủ':'Hang động, chỗ ở có cấm chế của tu sĩ. Nơi bế quan và đột phá.',
+  'tâm ma':'Tạp niệm, oán hận tích tụ trong lòng. Đủ 100 thì phải đối mặt với chính mình.',
+  'đạo tâm':'Sự vững vàng của lòng cầu đạo. Chống ảo cảnh, giúp đột phá.',
+  'ngộ tính':'Khả năng lĩnh hội. Ngộ tính cao thì tu nhanh, giải đố giỏi, luyện chế dễ.',
+  'khí vận':'Vận may. Ảnh hưởng chí mạng và những cơ duyên bất ngờ.',
+  'nhân quả':'Thiện ác đã làm. Thiện có thiện báo, ác có ác báo, kiếp này hoặc kiếp sau.',
+  'thọ nguyên':'Tuổi thọ tối đa. Hết thọ nguyên là tọa hóa. Đột phá cảnh giới để sống lâu hơn.',
+  'thần thức':'Ý thức tỏa ra ngoài thân để dò xét. Thần thức mạnh thì thấy xa và đánh thần thức được.',
+  'niệm lực':'Sức thần thức dùng trong trận: dùng vật phẩm, tế pháp bảo, đánh thần thức đều tốn.',
+  'pháp tướng':'Hình bóng khổng lồ của thần thông hiện sau lưng khi thần lực viên mãn, tăng sức chiến đấu.',
+  'pháp bảo':'Vật phẩm tu sĩ luyện chế hoặc tìm được: binh khí, áo giáp, nhẫn, ngọc bội... tăng chỉ số khi mang.',
+  'pháp khí':'Bảo vật cấp thấp hơn pháp bảo, dùng để phi hành, chứa đồ, phòng thân.',
+  'đan dược':'Thuốc luyện từ linh thảo: hồi phục, tăng tu vi, hỗ trợ đột phá.',
+  'linh thảo':'Cỏ cây hấp thu linh khí lâu năm, nguyên liệu luyện đan.',
+  'linh khoáng':'Khoáng thạch chứa linh khí, nguyên liệu luyện khí.',
+  'yêu thú':'Thú vật tu luyện thành tinh, có sức mạnh và trí khôn. Yêu đan trong bụng là bảo vật.',
+  'yêu đan':'Viên đan kết trong bụng yêu thú, chứa tinh hoa tu luyện của nó.',
+  'phù lục':'Lá bùa vẽ trận văn, xé ra là phát tác pháp thuật.',
+  'cấm chế':'Trận pháp nhỏ bảo vệ một nơi hay một vật.',
+  'trận pháp':'Bố trí linh thạch, trận văn để tạo hiệu ứng: phòng ngự, tụ linh, mê hoặc, sát phạt.',
+  'phường thị':'Chợ của tu sĩ, mua bán đan dược, pháp bảo, bí tịch.',
+  'quỷ thị':'Chợ đêm của kẻ không dám ra ánh sáng. Hàng lạ, giá lạ.',
+  'bí cảnh':'Tiểu thế giới ẩn, chỉ mở cửa trong thời gian ngắn. Nhiều cơ duyên, nhiều hiểm nguy.',
+  'cơ duyên':'Dịp may hiếm có trên đường tu: bảo vật, truyền thừa, kỳ ngộ.',
+  'luân hồi':'Chết đi rồi đầu thai kiếp khác. Chỉ điểm luân hồi khắc trong chân linh là còn mang theo.',
+  'chân linh':'Phần bản ngã sâu nhất, theo người qua các kiếp luân hồi.',
+  'phi thăng':'Rời nhân gian lên tiên giới, đích đến cuối cùng của tu sĩ.',
+  'đan điền':'Nơi chứa chân khí dưới rốn, gốc rễ của tu vi.',
+  'chân khí':'Linh khí đã luyện hóa trong thân, dùng để thi triển pháp thuật, võ công.',
+  'công pháp':'Phương pháp tu luyện và chiêu thức chiến đấu được truyền lại.',
+  'tâm pháp':'Công pháp nội tu, giúp tu luyện nhanh hơn hoặc tăng chỉ số.',
+  'bí tịch':'Sách ghi chép công pháp. Đọc hiểu thì học được.',
+  'thiên kiêu':'Thiên tài trẻ tuổi xuất chúng của các tông môn.',
+};
+let GLOSS_RE=null;
+function gloss(h){if(!GLOSS_RE){const ks=Object.keys(GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));GLOSS_RE=new RegExp('(^|[^\\p{L}])('+ks.join('|')+')(?![\\p{L}])','giu');}
+  const seen=new Set();return String(h).replace(GLOSS_RE,(m,pre,w)=>{const k=w.toLowerCase();if(seen.has(k))return m;seen.add(k);return `${pre}<span class="gl" data-tip="${esc(w.charAt(0).toUpperCase()+w.slice(1)+': '+GLOSS[k])}">${w}</span>`;});}
+function txt(s){return gloss(esc(s));}
