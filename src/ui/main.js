@@ -15,7 +15,7 @@ function render(){
     if(G.screen==='map'&&!G.run)G.screen='title';
     const inMap=G.screen==='map'&&!!G.run;const sc=inMap?G.run.scene:null;const cb=sc&&sc.type==='combat'&&!sc.prep;
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
-    if(cb){UI.panel=null;}
+    if(cb&&UI.panel!=='more'){UI.panel=null;}
     if(!inMap&&UI.modal)UI.modal=null;
     if(!inMap){full=G.screen==='birth'&&G.birth?vBirth():G.screen==='over'&&G.over?vOver():G.screen==='meta'?vMeta():G.screen==='life'&&G.run?vLife():vTitle();}
     else{

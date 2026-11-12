@@ -2,7 +2,7 @@
 function vTitle(){
   const M=G.meta;const has=!!G.run;const last=M.lives[0];
   let mid='';
-  if(has){mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="resume">Tiếp tục kiếp ${G.run.kiep}</button><p class="hint">${esc(G.run.ten)} · ${esc(realmLabel())} · ${Math.floor(G.run.age)} tuổi</p></div>`;}
+  if(has){mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="resume">Tiếp tục ${kiepName(G.run.kiep).toLowerCase()}</button><p class="hint">${esc(G.run.ten)} · ${esc(realmLabel())} · ${Math.floor(G.run.age)} tuổi</p></div>`;}
   else if(last){
     const L=last.lines.slice(-4);const N=[`Kiếp trước, có một người tên ${last.ten}.`].concat(L,[`Hồn phách qua cầu Nại Hà. Bát canh Mạnh Bà xóa đi tên họ, xóa đi ân oán, chỉ ${M.pts} điểm luân hồi còn khắc trong chân linh.`]);
     mid=`<div class="narr${UI.narrSkip?' skip':''}" data-act="narrSkip">${N.map((t,i)=>`<p style="animation-delay:${i*1.1}s">${txt(t)}</p>`).join('')}<p class="k" style="animation-delay:${N.length*1.1}s">${kiepName(M.nlife+1)} bắt đầu.</p></div>
