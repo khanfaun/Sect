@@ -248,6 +248,8 @@ const ACT={
 const KEEP_CONFIRM={pact:1,wipe:1,newGame:1,petFree:1,bagDrop:1,forget:1};
 document.addEventListener('click',e=>{
   if(UI.suppress){UI.suppress=false;e.preventDefault();e.stopPropagation();return;}
+  // chú thích vừa hiện bằng chạm nhanh: bỏ qua cú click đi kèm để khỏi bật rồi tắt ngay
+  if(performance.now()-tipTapAt<600&&e.target.closest('[data-tip]')&&!e.target.closest('[data-act]')){e.preventDefault();return;}
   // chạm vào nhãn vật phẩm hay chữ gạch chân: chỉ xem chú thích, không bấm nút chứa nó
   {const t0=e.target.closest('.chip[data-tip],.gl[data-tip]');if(t0){e.preventDefault();showTip(t0,false,e.clientX||e.clientY?[e.clientX,e.clientY]:null);return;}}
   const el=e.target.closest('[data-act]');
@@ -286,8 +288,16 @@ function showTip(el,toggle,xy){
 function hideTip(){const t=$('#tip');if(t){t.hidden=true;}tipEl=null;}
 document.addEventListener('pointerover',e=>{if(e.pointerType!=='mouse')return;const t=e.target.closest('[data-tip]');if(t){if(t!==tipEl)showTip(t,false,[e.clientX,e.clientY]);}else if(tipEl)hideTip();});
 document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||!tipEl)return;const tip=$('#tip');if(!tip.hidden&&tipEl.contains(e.target))placeTip(e.clientX,e.clientY);});
-document.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;const t=e.target.closest('[data-tip]');clearTimeout(tipT);if(!t)return;tipT=setTimeout(()=>{if(t.closest('[data-act]')){UI.suppress=true;}showTip(t);},420);});
-['pointerup','pointercancel','pointermove'].forEach(ev=>document.addEventListener(ev,e=>{if(ev==='pointermove'&&e.pointerType==='mouse')return;clearTimeout(tipT);}));
+// cảm ứng: chạm nhanh vào chữ có chú thích (không phải nút) là hiện ngay, không chờ sự kiện click (iPhone hay nuốt mất);
+// nút có chú thích thì giữ 0,35 giây; ngón tay xê dịch dưới 12px không hủy; chạm chỗ khác thì ẩn
+let tipTouch=null,tipTapAt=0;
+document.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;clearTimeout(tipT);const t=e.target.closest('[data-tip]');
+  if(!e.target.closest('#tip')&&!t)hideTip();tipTouch={x:e.clientX,y:e.clientY,t:performance.now(),el:t};if(!t)return;
+  if(t.closest('[data-act]'))tipT=setTimeout(()=>{UI.suppress=true;showTip(t);tipTouch=null;},350);},true);
+document.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'||!tipTouch)return;if(Math.hypot(e.clientX-tipTouch.x,e.clientY-tipTouch.y)>12){clearTimeout(tipT);tipTouch=null;}},true);
+document.addEventListener('pointercancel',()=>{clearTimeout(tipT);tipTouch=null;},true);
+document.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;clearTimeout(tipT);const T=tipTouch;tipTouch=null;if(!T||!T.el)return;
+  if(T.el.closest('[data-act]'))return;if(performance.now()-T.t>800)return;tipTapAt=performance.now();showTip(T.el,true);},true);
 document.addEventListener('scroll',()=>{if(tipEl)hideTip();},{passive:true,capture:true});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(UI.modal)UI.modal=null;else if(UI.panel)UI.panel=null;else return;render();}});
 
