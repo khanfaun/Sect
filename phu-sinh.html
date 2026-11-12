@@ -1091,7 +1091,12 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .lc-c.ne,.kr .ne{color:#b8302a;font-weight:700}.si.si-uyap{background:#b8302a;color:#fff;border-color:#b8302a}
 /* màn chuẩn bị trận: nhãn so sức, nút tốc chiến */
 .pp-nl .lc-c.ne{color:#b8302a!important;font-weight:700}.pp-nl .lc-c.rt1{color:#a5835a!important}.pp-nl .lc-c.rt2{color:var(--ink)!important}.pp-nl .lc-c.rt3{color:#3f8a4a!important}
-.cbprep .sc-f{gap:10px}.cbprep .sc-f .btn.big{flex:1 1 0;min-width:0;max-width:200px;padding-left:6px;padding-right:6px;letter-spacing:.06em}
+/* nút tốc chiến nhỏ ở góc phải, nút Bắt đầu giữ nguyên giữa */
+.pp-quick{display:flex;justify-content:flex-end;margin-top:6px}.pp-quick:empty{display:none}.cbprep .cb-quick{font-size:.8em;padding:4px 10px;letter-spacing:.04em}
+/* nhãn so sức: nghiền ép đỏ có đầu lâu, mạnh hơn nâu đỏ, vừa sức vàng */
+.pp-nl .lc-c.st{color:#b8562a!important}.pp-nl .lc-c.ev{color:#b8902a!important}.pp-nl .ne-i{display:inline-flex;vertical-align:-2px;margin-right:4px}.pp-nl .ne-i svg{width:1.15em;height:1.15em;stroke:#b8302a}
+/* chỉ số địch: mạnh là nguy hiểm (đỏ), yếu là có lợi (xanh), vừa là vàng */
+.pp-u.foe .pp-st .rt3,.pp-u.foe .pp-st .rt4{color:#b8302a!important;font-weight:600}.pp-u.foe .pp-st .rt2{color:#b8902a!important}.pp-u.foe .pp-st .rt0,.pp-u.foe .pp-st .rt1{color:#3f8a4a!important;font-weight:400}
 
 </style>
 </head>
@@ -8165,16 +8170,21 @@ function prepUnitRow(u,me){const foe=u.side==='B';const sub=me?realmLabel():u.su
   const lc=me?lucChien():lcCalc(u);
   const st=me?[['Khí huyết',pctOf(G.run.hp,S0.maxHp)],['Linh lực',S0.maxMp?pctOf(G.run.mp,S0.maxMp):'—'],['Niệm lực',RT('nl',S0.nl)],['Công',RT('atk',Math.max(S0.atk,S0.matk))],['Thủ',RT('def',S0.def)],['Thân pháp',RT('tp',S0.tp,'toc')]]
     :[['Khí huyết',RT('maxHp',u.max,'ben')],['Công',RT('atk',Math.max(u.atk,u.matk||0))],['Thủ',RT('def',u.def)],['Thân pháp',RT('tp',u.tp,'toc')],['Chí mạng',RT('crit',u.crit,'muc')]];
-  return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}</span>${(()=>{const sc=G.run.scene;const ml=lucChien();if(foe){const c=foeCmp(u,ml);return `<b class="lc-c ${c.c}"${ta(c.c==='ne'?'Nghiền ép: lực chiến của nó hơn ngươi một đại cảnh giới.\nNgươi sẽ bị uy áp, đòn đánh gần như vô dụng.':'So với ngươi')}>${c.t}</b>`;}if(me&&sc&&meCrushes(sc,ml))return `<b class="lc-c ne"${ta('Nghiền ép: lực chiến của ngươi hơn đối thủ một đại cảnh giới.\nĐối thủ bị uy áp, đòn của nó gần như vô dụng.')}>Nghiền ép</b>`;return '';})()}</div><small>${elSeal(u.el||'vo')} ${esc(sub)}</small>
+  return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}</span>${(()=>{const sc=G.run.scene;const ml=lucChien();const sk=`<span class="ne-i">${ic('skull')}</span>`;
+    if(foe){const c=foeCmp(u,ml);if(c.c==='ne')return `<b class="lc-c ne"${ta('Nghiền ép: lực chiến của nó hơn ngươi một đại cảnh giới.\nNgươi sẽ bị uy áp, đòn đánh gần như vô dụng.')}>${sk}Nghiền ép</b>`;if(c.c==='rt1')return `<b class="lc-c st"${ta('Kẻ này mạnh hơn ngươi')}>Mạnh hơn</b>`;if(c.c==='rt2')return `<b class="lc-c ev"${ta('Hai bên ngang sức')}>Vừa sức</b>`;return '';}
+    if(me&&sc){const Bs=sc.units.filter(x=>x.side==='B'&&x.kind!=='kiep');if(!Bs.length)return '';const top=Math.max(...Bs.map(x=>lcCalc(x)));
+      if(ml>=top*NE_T)return `<b class="lc-c ne"${ta('Nghiền ép: lực chiến của ngươi hơn đối thủ một đại cảnh giới.\nĐối thủ bị uy áp, đòn của nó gần như vô dụng.')}>${sk}Nghiền ép</b>`;
+      if(ml/Math.max(1,top)>=1/0.75)return `<b class="lc-c st"${ta('Ngươi mạnh hơn đối thủ')}>Mạnh hơn</b>`;}return '';})()}</div><small>${elSeal(u.el||'vo')} ${esc(sub)}</small>
    <div class="pp-st">${st.map(([a,b])=>`<span><small>${a}</small>${b}</span>`).join('')}</div></div></div>`;}
 function vCbPrep(sc){const r=G.run;const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B');
   const cat=[['atk','Công'],['move','Thân pháp'],['def','Thủ'],['ult','Thần thông']];
   const kn=r.kn||{};const cp=r.pills.filter(p=>PILL[p.id].w!=='bt').length;
   let b=`<div class="pp-sides"><div><p class="pp-h">Phe ta</p>${A.map(u=>prepUnitRow(u,u.isMain)).join('')}</div><div><p class="pp-h">Phe địch</p>${B.map(u=>prepUnitRow(u,false)).join('')}</div></div>`;
+  b+=`<div class="pp-quick">${crushAny(sc,lucChien())?`<button class="btn sm cb-quick" data-act="cbQuick"${ta('Bỏ qua trận đánh: hệ thống tự đánh thay ngươi và tính kết quả.\nKhí huyết, linh lực, đồ dùng, chiến lợi phẩm vẫn thay đổi như đánh thật.')}>Tốc chiến</button>`:''}</div>`;
   b+=`<p class="pp-h">Chiêu thức đang gắn</p><div class="pp-kn">${cat.map(([c,n])=>`<div><small>${n}</small>${(kn[c]||[]).length?(kn[c]).map(id=>SK[id]?`<span>${elSeal(SK[id].el)} ${esc(SK[id].n)}</span>`:'').join(''):'<span class="hint">trống</span>'}</div>`).join('')}</div>`;
   b+=`<div class="pp-act"><button class="btn" data-act="prepKn">${ic('scroll')} Chỉnh chiêu thức</button><button class="btn" data-act="prepBag">${ic('bag')} Túi đồ · ${cp} món</button></div>`;
   b+=`<p class="hint">Dùng đồ lúc này không tốn niệm lực. Vào trận rồi, mỗi lần dùng tốn ${pctOf(NL_PILL,S().nl||1)} niệm lực.</p>`;
-  return card('Sắp giao chiến',sc.en.n+(sc.boss?' · thủ lĩnh':sc.elite?' · tinh anh':''),b,{cls:'tall cbprep',foot:`<span class="grow"></span>${crushAny(sc,lucChien())?`<button class="btn big" data-act="cbQuick"${ta('Bỏ qua trận đánh: hệ thống tự đánh thay ngươi và tính kết quả.\nKhí huyết, linh lực, đồ dùng, chiến lợi phẩm vẫn thay đổi như đánh thật.')}>Tốc chiến</button>`:''}<button class="btn pri big" data-act="cbGo">Bắt đầu</button><span class="grow"></span>`});}
+  return card('Sắp giao chiến',sc.en.n+(sc.boss?' · thủ lĩnh':sc.elite?' · tinh anh':''),b,{cls:'tall cbprep',foot:`<span class="grow"></span><button class="btn pri big" data-act="cbGo">Bắt đầu</button><span class="grow"></span>`});}
 // tốc chiến: tự đánh tới hết trận, không hiện quá trình
 function quickFight(){const sc=G.run&&G.run.scene;if(!sc||sc.type!=='combat')return;prepGo();const o=G.meta.opt=G.meta.opt||{};const ad=o.autoDodge,aq=o.autoQte;o.autoDodge=true;o.autoQte=true;
   try{for(let i=0;i<40000&&G.run&&G.run.scene===sc&&!sc.done;i++){
