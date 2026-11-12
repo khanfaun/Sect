@@ -1030,6 +1030,18 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 /* bảng tỉ lệ đột phá */
 .bt-sum{display:flex;gap:10px;margin:10px 0}.bt-sum>div{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center}.bt-sum small{display:block;color:var(--ink3);font-size:.75em}.bt-sum b{display:block;font-size:1.5em;font-family:var(--disp);margin:2px 0}
 .bt-parts>div{display:flex;justify-content:space-between;gap:10px;padding:5px 2px;border-bottom:1px dotted var(--line);font-size:.88em}.bt-parts>div span{color:var(--ink2)}.bt-parts .tot{border-bottom:0;font-weight:600}.bt-parts .tot span{color:var(--ink)}
+/* nhãn khí vận, thể chất tiên thiên */
+.ttl{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}.ttc{font-size:.82em;padding:2px 8px;border-radius:999px;border:1px solid color-mix(in srgb,var(--pc) 55%,transparent);color:var(--pc);background:color-mix(in srgb,var(--pc) 8%,transparent);white-space:nowrap;cursor:help}
+/* khung hội thoại địa điểm: thu gọn chỉ giữ diễn biến mới nhất, khung thấp lại */
+.pl-talkw.min .pl-talk{max-height:min(16vh,120px)}
+/* thanh trượt chí mạng */
+.critq .cq-t{display:block;font-family:var(--disp);font-size:1.4em;color:var(--seal);letter-spacing:.08em;margin-bottom:6px}
+.cqg{position:absolute;left:41%;width:18%;top:0;bottom:0;background:var(--jade);opacity:.55}
+.cqm{position:absolute;top:-2px;bottom:-2px;width:4px;background:var(--seal);animation:cqrun .9s linear infinite}@keyframes cqrun{0%{left:0}50%{left:calc(100% - 4px)}100%{left:0}}
+/* nút né, đỡ: nhún nhắc bấm trong lúc chờ vòng vàng (đúng 1 giây), vòng bắt đầu chạy thì thôi */
+.dodge2{animation:dgTap .25s ease-in-out 0s 4}
+.dodge2.hit{animation:none}
+@keyframes dgTap{0%,100%{transform:scale(1)}40%{transform:scale(.86);filter:brightness(1.25)}}
 
 </style>
 </head>
@@ -2140,7 +2152,7 @@ function combatStep(dt){
 function runAct(sc,fn){
   try{fn();}
   finally{
-    if(sc.dodge||sc.qte)return; // còn chờ thao tác
+    if(sc.dodge||sc.qte||sc.critQ)return; // còn chờ thao tác
     sc.cur=null;sc.aiWait=null;checkEnd(sc);sc.hold=false;sc.rev++;
     syncMain(sc);
   }
@@ -2181,7 +2193,7 @@ function checkEnd(sc){
   if(!alive(sc,'B').length){sc.over='win';finishCombat(sc);}
 }
 function finishCombat(sc){
-  sc.done=true;sc.hold=true;sc.dodge=null;sc.qte=null;syncMain(sc);
+  sc.done=true;sc.hold=true;sc.dodge=null;sc.qte=null;sc.critQ=null;syncMain(sc);
   const r=G.run;
   // đồng đội: ghi lại khí huyết
   for(const u of sc.units)if(u.ally!=null){const p=(r.party||[]).find(x=>x.id===u.ally);if(p)p.hp=Math.max(0,u.hp);}
@@ -2192,7 +2204,7 @@ function finishCombat(sc){
     if(sc.after&&sc.after.nemesis)ach('baothu');}
 }
 // ---------- người chơi ra lệnh ----------
-function readyPlayer(sc){const u=sc&&sc.cur&&U_(sc,sc.cur);return u&&u.ctrl==='player'&&u.phase==='ready'&&!sc.dodge&&!sc.qte?u:null;}
+function readyPlayer(sc){const u=sc&&sc.cur&&U_(sc,sc.cur);return u&&u.ctrl==='player'&&u.phase==='ready'&&!sc.dodge&&!sc.qte&&!sc.critQ?u:null;}
 function pSkill(id){
   const r=G.run;if(id==='_atk')return {sk:BASIC,lv:1};if(id==='_guard')return {sk:GUARD_SK,lv:1};if(id==='_wait')return {sk:WAIT_SK,lv:1};if(id==='_block')return {sk:BLOCK_SK,lv:1};
   const own=r.skills.find(x=>x.id===id);return own?{sk:SK[id],lv:own.lv}:null;
@@ -2328,7 +2340,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         if(isP){mult*=elemMult(sk.el,t.el);if(f.bonusIf==='dot'&&(t.st.poison>0||t.st.burn>0))mult*=1.5;if(fx.execute&&t.hp<t.max*0.3)mult*=1+fx.execute/100;}
         else if(KHAC[u.el]===t.el)mult*=1.25;
         const magic=(sk.dt?sk.dt==='phep':(!isP&&(u.f==='quy'||u.f==='vat')));const av=magic?(u.matk||u.atk):u.atk;
-        const crit=chance(((u.crit||5)+(f.crit||0))/100);if(crit){mult*=Math.max(1.1,((u.critDmg||150)-(t.hoTam||0))/100);crits++;}
+        const crit=u._critF!=null?u._critF:chance(((u.crit||5)+(f.crit||0))/100);if(crit){mult*=Math.max(1.1,((u.critDmg||150)-(t.hoTam||0))/100);crits++;}
         let d=dmgCalc(av,u.st.rage,u.st.weak,t.def,t.st.vuln,f.p,mult,f.pierce);
         if(t.st.stance){if(!t._blk){if((t.tl==null?100:t.tl)>=TL_BLOCK){if(t.tl!=null)t.tl-=TL_BLOCK;t._blk=1;blk++;}else t._blk=2;}if(t._blk===1)d=Math.max(1,Math.round(d*(1-blockCut(u,t))));}
         d=absorb(t.st,d);t.hp-=d;total+=d;hits++;onHit(sc,u,t,d,crit,t._blk===1,sk);
@@ -5894,6 +5906,485 @@ btNextStage=function(){const r=G.run;const b=r.bt;if(!b)return;const st=b.stages
   if(fx==='phong'){me.tl=Math.max(0,(me.tl||0)-35);clog(sc,'Cương phong cắt da, thể lực tụt mạnh.','en');}
   if(fx==='am'){const v=Math.round(me.maxMp*0.25);me.mp=Math.max(0,me.mp-v);if(v)clog(sc,'Hàn khí đông cứng kinh mạch: mất '+v+' linh lực.','en');}};}
 
+// ================= ĐỢT 25: TIÊN THIÊN KHÍ VẬN, TIÊN THIÊN THỂ CHẤT =================
+// ----- dữ liệu chép từ khanfaun/Thienmenh (physiques.ts, effects.ts) -----
+const TT_PHYS=[] = [
+    // === RANK 6: CHÍ TÔN (Supreme) ===
+    {
+        id: 'hon_don_the',
+        name: 'Hỗn Độn Đạo Thể',
+        rank: 6,
+        description: 'Vạn cổ đệ nhất thể chất. Dung nạp vạn vật, chuyển hóa ngũ hành, phá vỡ mọi quy tắc. Cần có đại cơ duyên "Hỗn Nguyên Đạo" để dung hợp ngũ hành tạp loạn thành hỗn độn chi lực.',
+        effects: {
+            primaryStatChangePercent: { maxHp: 20, maxSpiritPower: 20, maxStamina: 20, maxMentalState: 15, lifespan: 15 },
+            attributeChangePercent: { physicalStrength: 20, magicPower: 20, physicalBody: 20, agility: 15, spiritualSense: 20, aptitude: 20, critChance: 10, critDamage: 20, damageReduction: 10, armorPen: 10, evasion: 10, critResist: 10 },
+            expPerTurn: 20
+        }
+    },
+    {
+        id: 'hoang_co_thanh_the',
+        name: 'Hoang Cổ Thánh Thể',
+        rank: 6,
+        description: 'Thể chất cái thế của Nhân tộc, nhục thân vô địch, máu huyết vàng ròng. Khắc chế mọi tà ma ngoại đạo, vạn pháp bất xâm. Yêu cầu tâm tính quang minh chính đại.',
+        effects: {
+            primaryStatChangePercent: { maxHp: 25, maxStamina: 20 },
+            attributeChangePercent: { physicalBody: 25, physicalStrength: 20, critDamage: 15, damageReduction: 15, critResist: 15 },
+            expPerTurn: 5 // Tốn tài nguyên
+        }
+    },
+    {
+        id: 'tien_thien_dao_thai',
+        name: 'Tiên Thiên Đạo Thai',
+        rank: 6,
+        description: 'Con cưng của đại đạo, sinh ra đã hòa hợp với thiên địa. Ngộ tính nghịch thiên, tu luyện pháp thuật như uống nước. Tâm cảnh luôn ở trạng thái "Minh Kính Chỉ Thủy".',
+        effects: {
+            primaryStatChangePercent: { maxSpiritPower: 25, maxMentalState: 20 },
+            attributeChangePercent: { magicPower: 20, spiritualSense: 25, aptitude: 25, msRegen: 15, mpRegen: 15 },
+            expPerTurn: 25
+        }
+    },
+    {
+        id: 'van_co_ma_the',
+        name: 'Vạn Cổ Ma Thể',
+        rank: 6,
+        description: 'Thể chất cấm kỵ của Ma Đạo. Lấy oán khí làm thức ăn, lấy sát lục làm đường tu. Tâm tính vặn vẹo, tàn nhẫn nhưng sức mạnh hủy thiên diệt địa.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 25, magicPower: 15, critChance: 15, critDamage: 30, physicalBody: -10, lifeSteal: 10, armorPen: 10 },
+            primaryStatChangePercent: { maxMentalState: -15 }
+        }
+    },
+    {
+        id: 'cuu_khieu_linh_lung',
+        name: 'Cửu Khiếu Linh Lung Thể',
+        rank: 6,
+        description: 'Trái tim có chín lỗ, thấu hiểu vạn vật, nhìn thấu hồng trần. Trí tuệ siêu phàm, có khả năng suy diễn thiên cơ.',
+        effects: {
+            attributeChangePercent: { spiritualSense: 30, accuracy: 15, aptitude: 25 },
+            primaryStatChangePercent: { maxMentalState: 25 }
+        }
+    },
+
+    // === RANK 5: CỰC PHẨM (Legendary) ===
+    {
+        id: 'thuong_thien_ba_the',
+        name: 'Thương Thiên Bá Thể',
+        rank: 5,
+        description: 'Bá đạo vô song, lấy chiến nuôi chiến. Tính cách cuồng ngạo, không chịu khuất phục.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 12, physicalBody: 12, critChance: 8, armorPen: 8, damageReduction: 5 },
+            primaryStatChangePercent: { maxHp: 15 }
+        }
+    },
+    {
+        id: 'thai_duong_the',
+        name: 'Thái Dương Thần Thể',
+        rank: 5,
+        description: 'Chí dương chí cương, như mặt trời ban trưa. Yêu cầu Hỏa linh căn cực thịnh và tâm tính hướng dương.',
+        effects: {
+            attributeChangePercent: { magicPower: 12, physicalStrength: 8, dmgFire: 15, resFire: 15 },
+            primaryStatChangePercent: { maxSpiritPower: 15 }
+        }
+    },
+    {
+        id: 'thai_am_the',
+        name: 'Thái Âm Ngọc Thể',
+        rank: 5,
+        description: 'Chí âm chí hàn, như trăng lạnh lẽo. Yêu cầu Thủy linh căn cực thịnh và tâm tính lãnh đạm.',
+        effects: {
+            attributeChangePercent: { magicPower: 12, spiritualSense: 10, dmgWater: 15, resWater: 15 },
+            primaryStatChangePercent: { maxSpiritPower: 15 }
+        }
+    },
+    {
+        id: 'thien_yeu_the',
+        name: 'Thiên Yêu Hoàng Thể',
+        rank: 5,
+        description: 'Thể chất của Yêu tộc hoàng giả. Tốc độ và sức mạnh kinh người, thường xuất hiện ở người có tính cách hoang dã.',
+        effects: {
+            attributeChangePercent: { agility: 12, physicalBody: 10, attackSpeed: 10, evasion: 10, hpRegen: 10 },
+            primaryStatChangePercent: { maxHp: 15, maxStamina: 15 }
+        }
+    },
+    {
+        id: 'loi_dinh_chien_the',
+        name: 'Lôi Đình Chiến Thể',
+        rank: 5,
+        description: 'Thân thể như lôi điện, bộc phát sức mạnh hủy diệt trong nháy mắt. Cần có dị linh căn Lôi.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 12, magicPower: 8, critDamage: 15, attackSpeed: 10, dmgLightning: 15, resLightning: 15 }
+        }
+    },
+    {
+        id: 'hu_khong_chi_the',
+        name: 'Hư Không Chi Thể',
+        rank: 5,
+        description: 'Hòa mình vào hư không, xuất quỷ nhập thần. Cần tâm tính tự do, không bị trói buộc.',
+        effects: {
+            attributeChangePercent: { agility: 15, spiritualSense: 10, evasion: 15 },
+            primaryStatChangePercent: { maxStamina: -8 }
+        }
+    },
+    {
+        id: 'duoc_linh_thanh_the',
+        name: 'Dược Linh Thánh Thể',
+        rank: 5,
+        description: 'Cơ thể là lò luyện đan sống, bách độc bất xâm, hấp thu đan dược không để lại tạp chất.',
+        effects: {
+            primaryStatChangePercent: { maxHp: 15, lifespan: 15 },
+            attributeChangePercent: { physicalBody: 10, hpRegen: 15, resWood: 15 },
+            expPerTurn: 10
+        }
+    },
+
+    // === RANK 4: THƯỢNG PHẨM (Epic) ===
+    {
+        id: 'ngu_hanh_linh_the',
+        name: 'Ngũ Hành Linh Thể',
+        rank: 4,
+        description: 'Ngũ hành cân bằng, sinh sinh bất tức. Tuy không bá đạo nhưng đường tu vững chắc.',
+        effects: {
+            attributeChangePercent: { aptitude: 8, magicPower: 6 },
+            expPerTurn: 10
+        }
+    },
+    {
+        id: 'vo_cau_kiem_the',
+        name: 'Vô Cấu Kiếm Thể',
+        rank: 4,
+        description: 'Trời sinh kiếm cốt, tâm như kiếm sắc. Sát thương kiếm pháp tăng mạnh.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 8, critDamage: 8, attackSpeed: 5, armorPen: 6 }
+        }
+    },
+    {
+        id: 'huyet_sat_ma_the',
+        name: 'Huyết Sát Ma Thể',
+        rank: 4,
+        description: 'Thích giết chóc, lấy máu nuôi thân. Càng giết nhiều sát khí càng nặng.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 6, critChance: 5, lifeSteal: 5 },
+            primaryStatChangePercent: { maxMentalState: -5 } // Dễ tẩu hỏa
+        }
+    },
+    {
+        id: 'bang_co_ngoc_cot',
+        name: 'Băng Cơ Ngọc Cốt',
+        rank: 4,
+        description: 'Da như băng tuyết, xương như ngọc. Kháng hàn, tăng cường thần thức.',
+        effects: {
+            attributeChangePercent: { physicalBody: 6, spiritualSense: 8, resIce: 10, dmgIce: 8 }
+        }
+    },
+    {
+        id: 'tat_phong_linh_the',
+        name: 'Tật Phong Linh Thể',
+        rank: 4,
+        description: 'Thân nhẹ như gió, đi lại vô hình. Tốc độ là sở trường tuyệt đối.',
+        effects: {
+            attributeChangePercent: { agility: 10, attackSpeed: 5, evasion: 5, dmgWind: 8 }
+        }
+    },
+    {
+        id: 'cuu_duong_chi_the',
+        name: 'Cửu Dương Chi Thể',
+        rank: 4,
+        description: 'Dương khí dồi dào, khắc chế âm tà, tu luyện hỏa pháp cực nhanh.',
+        effects: {
+            attributeChangePercent: { magicPower: 8, physicalStrength: 5, dmgFire: 8, resFire: 8 }
+        }
+    },
+    {
+        id: 'huyen_am_chi_the',
+        name: 'Huyền Âm Chi Thể',
+        rank: 4,
+        description: 'Âm khí cực thịnh, thích hợp làm lô đỉnh hoặc tu luyện mị thuật, âm công.',
+        effects: {
+            attributeChangePercent: { magicPower: 8, spiritualSense: 5, dmgWater: 8, resWater: 8 }
+        }
+    },
+
+    // === RANK 3: TRUNG PHẨM (Rare) ===
+    {
+        id: 'kim_cuong_bat_hoai',
+        name: 'Kim Cương Bất Hoại',
+        rank: 3,
+        description: 'Thân thể cứng như kim cương, đao thương bất nhập ở mức độ nhất định.',
+        effects: { attributeChangePercent: { physicalBody: 5, damageReduction: 4, counterDamage: 4 } }
+    },
+    {
+        id: 'moc_linh_chi_the',
+        name: 'Mộc Linh Chi Thể',
+        rank: 3,
+        description: 'Thân thiện với cây cỏ, hồi phục sinh lực nhanh.',
+        effects: { primaryStatChangePercent: { maxHp: 5 }, attributeChangePercent: { physicalBody: 4 } }
+    },
+    {
+        id: 'am_sat_the',
+        name: 'Ám Sát Thể',
+        rank: 3,
+        description: 'Thích hợp đi trong bóng tối, giỏi che giấu khí tức.',
+        effects: { attributeChangePercent: { agility: 5, critChance: 4 } }
+    },
+    {
+        id: 'cuong_chien_the',
+        name: 'Cuồng Chiến Thể',
+        rank: 3,
+        description: 'Càng đánh càng hăng, máu càng ít đánh càng đau. Tính cách nóng nảy.',
+        effects: { attributeChangePercent: { physicalStrength: 5, physicalBody: 4 } }
+    },
+    {
+        id: 'tho_linh_the',
+        name: 'Thổ Linh Chi Thể',
+        rank: 3,
+        description: 'Sức chịu đựng cao, chân đạp đất thì sức mạnh vô cùng.',
+        effects: { primaryStatChangePercent: { maxStamina: 5 }, attributeChangePercent: { physicalBody: 5 } }
+    },
+    {
+        id: 'thuy_linh_the',
+        name: 'Thủy Linh Chi Thể',
+        rank: 3,
+        description: 'Linh lực dẻo dai, bền bỉ, thiên về công pháp hệ Thủy.',
+        effects: { primaryStatChangePercent: { maxSpiritPower: 5 }, attributeChangePercent: { magicPower: 4 } }
+    },
+    {
+        id: 'hoa_linh_the',
+        name: 'Hỏa Linh Chi Thể',
+        rank: 3,
+        description: 'Sức công phá mạnh, thiên về công pháp hệ Hỏa.',
+        effects: { attributeChangePercent: { magicPower: 5, critChance: 3 } }
+    },
+    {
+        id: 'kim_linh_the',
+        name: 'Kim Linh Chi Thể',
+        rank: 3,
+        description: 'Thân thể cứng cáp, thiên về công pháp hệ Kim.',
+        effects: { attributeChangePercent: { physicalStrength: 4, physicalBody: 4 } }
+    },
+
+    // === RANK 2: HẠ PHẨM (Uncommon) ===
+    {
+        id: 'man_luc_the',
+        name: 'Man Hoang Lực Thể',
+        rank: 2,
+        description: 'Sức mạnh cơ bắp hơn người thường một chút.',
+        effects: { attributeChangePercent: { physicalStrength: 3 } }
+    },
+    {
+        id: 'thong_tue_the',
+        name: 'Thông Tuệ Thể',
+        rank: 2,
+        description: 'Đầu óc linh hoạt, học tập nhanh hơn.',
+        effects: { attributeChangePercent: { aptitude: 3 } }
+    },
+    {
+        id: 'kien_nhan_the',
+        name: 'Kiên Nhan Thể',
+        rank: 2,
+        description: 'Sức chịu đựng dẻo dai, không dễ bỏ cuộc.',
+        effects: { primaryStatChangePercent: { maxStamina: 3, maxMentalState: 3 } }
+    },
+    {
+        id: 'linh_cam_the',
+        name: 'Linh Cảm Thể',
+        rank: 2,
+        description: 'Giác quan nhạy bén hơn người thường.',
+        effects: { attributeChangePercent: { spiritualSense: 3 } }
+    },
+    {
+        id: 'truong_tho_the',
+        name: 'Trường Thọ Thể',
+        rank: 2,
+        description: 'Sống lâu hơn người thường, ít bệnh tật.',
+        effects: { primaryStatChangePercent: { lifespan: 3, maxHp: 3 } }
+    },
+
+    // === RANK 1: PHÀM PHẨM (Common) ===
+    {
+        id: 'pham_the',
+        name: 'Phàm Thể',
+        rank: 1,
+        description: 'Thân thể người thường, cân bằng, không có gì đặc sắc.',
+        effects: {
+            attributeChangePercent: { physicalStrength: 1, magicPower: 1, physicalBody: 1, agility: 1, spiritualSense: 1, aptitude: 1 }
+        }
+    }
+];
+const TT_DEST={
+    // --- RANK 1 (White) ---
+    'than_the_khoe_manh': { id: 'than_the_khoe_manh', name: 'Thân Thể Khỏe Mạnh', description: 'Bẩm sinh khỏe mạnh hơn người thường.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { maxHp: 2 }, attributeChangePercent: { physicalBody: 1 } } },
+    'tinh_than_minh_man': { id: 'tinh_than_minh_man', name: 'Tinh Thần Minh Mẫn', description: 'Đầu óc lanh lợi, thần hồn sáng suốt.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { maxMentalState: 2 }, attributeChangePercent: { spiritualSense: 1 } } },
+    'khi_luc_doi_dao': { id: 'khi_luc_doi_dao', name: 'Khí Lực Dồi Dào', description: 'Thể lực bẩm sinh tốt.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { maxStamina: 2 }, attributeChangePercent: { agility: 1 } } },
+    'gia_canh_kha_gia': { id: 'gia_canh_kha_gia', name: 'Gia Cảnh Khá Giả', description: 'Xuất thân từ gia đình giàu có.', rank: 1, cost: 10 },
+    'ke_ngoc': { id: 'ke_ngoc', name: 'Kẻ Ngốc', description: 'Tư chất kém nhưng bù lại thân thể tráng kiện.', rank: 1, cost: 10, effects: { attributeChangePercent: { aptitude: -1, physicalBody: 2 } } },
+    'yeu_menh': { id: 'yeu_menh', name: 'Yểu Mệnh', description: 'Sinh ra đã yếu ớt, tuổi thọ ngắn ngủi nhưng ngộ tính khá cao.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { lifespan: -5, maxHp: -2 }, attributeChangePercent: { aptitude: 2 } } },
+    'mu_mau': { id: 'mu_mau', name: 'Mù Màu', description: 'Khó phân biệt màu sắc, nhưng tai rất thính.', rank: 1, cost: 10, effects: { attributeChangePercent: { spiritualSense: -1, accuracy: 2 } } },
+    'tay_chan_long_ngong': { id: 'tay_chan_long_ngong', name: 'Tay Chân Lóng Ngóng', description: 'Vụng về, thân pháp kém.', rank: 1, cost: 10, effects: { attributeChangePercent: { agility: -1 } } },
+    'so_do_cao': { id: 'so_do_cao', name: 'Sợ Độ Cao', description: 'Không dám bay cao, ảnh hưởng tâm cảnh khi phi hành.', rank: 1, cost: 10, effects: { primaryStatChangePercent: { maxMentalState: -2 } } },
+    'ngu_hanh_khuyet_moc': { id: 'ngu_hanh_khuyet_moc', name: 'Ngũ Hành Khuyết Mộc', description: 'Thiên sinh không thể cảm nhận Mộc khí.', rank: 1, cost: 10, effects: { nguHanhBonus: { moc: -1 } } },
+    'vo_can': { id: 'vo_can', name: 'Vô Căn', description: 'Không có linh căn, con đường tu tiên vô cùng gian nan.', rank: 1, cost: 10, effects: { attributeChangePercent: { aptitude: -3, magicPower: -3 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 1)
+    'thien_luong_chi_nhan': { id: 'thien_luong_chi_nhan', name: 'Thiện Lương Chi Nhân', description: 'Bản tính hiền lành, ít khi làm điều ác.', rank: 1, cost: 10, effects: { amDuongBonus: { chinh: 5 } } },
+    'tieu_nhan_bi_oi': { id: 'tieu_nhan_bi_oi', name: 'Tiểu Nhân Bỉ Ổi', description: 'Lòng dạ hẹp hòi, hay tính toán chi li.', rank: 1, cost: 10, effects: { amDuongBonus: { ta: 5 } } },
+
+    // --- RANK 2 (Green) ---
+    'sat_phat_qua_duyet': { id: 'sat_phat_qua_duyet', name: 'Sát Phạt Quả Quyết', description: 'Ra tay tàn nhẫn, có duyên với sát đạo.', rank: 2, cost: 20, effects: { attributeChangePercent: { physicalStrength: 3, critChance: 1 } } },
+    'linh_khi_than_hoa': { id: 'linh_khi_than_hoa', name: 'Linh Khí Thân Hòa', description: 'Thân thể dễ dàng tương thích và hấp thụ linh khí.', rank: 2, cost: 20, effects: { primaryStatChangePercent: { maxSpiritPower: 3 }, attributeChangePercent: { magicPower: 2 } } },
+    'thien_co_thong_minh': { id: 'thien_co_thong_minh', name: 'Thiên Tư Thông Minh', description: 'Tư chất hơn người, học nhanh.', rank: 2, cost: 20, expPerTurn: 1, effects: { attributeChangePercent: { aptitude: 3 } } },
+    'da_day_hon_sat': { id: 'da_day_hon_sat', name: 'Da Dày Hơn Sắt', description: 'Thân thể cứng cáp.', rank: 2, cost: 20, effects: { attributeChangePercent: { physicalBody: 3 } } },
+    'benh_tat_quan_than': { id: 'benh_tat_quan_than', name: 'Bệnh Tật Quấn Thân', description: 'Thân thể yếu đuối nhưng thần hồn mạnh mẽ.', rank: 2, cost: 20, effects: { primaryStatChangePercent: { maxHp: -3 }, attributeChangePercent: { spiritualSense: 3, magicPower: 2 } } },
+    'duyen_voi_nuoc': { id: 'duyen_voi_nuoc', name: 'Duyên Với Nước', description: 'Thích nước, bơi lội giỏi.', rank: 2, cost: 20, effects: { nguHanhBonus: { thuy: 1 } } },
+    'thich_lua': { id: 'thich_lua', name: 'Thích Lửa', description: 'Không sợ nóng, thích nghịch lửa.', rank: 2, cost: 20, effects: { nguHanhBonus: { hoa: 1 } } },
+    'yeu_cay_co': { id: 'yeu_cay_co', name: 'Yêu Cây Cỏ', description: 'Mát tay trồng trọt.', rank: 2, cost: 20, effects: { nguHanhBonus: { moc: 1 } } },
+    'cung_dau': { id: 'cung_dau', name: 'Cứng Đầu', description: 'Tính tình cố chấp, vững như đá.', rank: 2, cost: 20, effects: { nguHanhBonus: { tho: 1 }, attributeChangePercent: { physicalBody: 2 } } },
+    'sac_ben': { id: 'sac_ben', name: 'Sắc Bén', description: 'Khí chất sắc bén như kim loại.', rank: 2, cost: 20, effects: { nguHanhBonus: { kim: 1 }, attributeChangePercent: { physicalStrength: 2 } } },
+    'thu_sinh': { id: 'thu_sinh', name: 'Thư Sinh', description: 'Dáng vẻ nho nhã, tinh thần tốt nhưng yếu ớt.', rank: 2, cost: 20, effects: { attributeChangePercent: { spiritualSense: 3, physicalStrength: -2 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 2)
+    'hanh_hiep_truong_nghia': { id: 'hanh_hiep_truong_nghia', name: 'Hành Hiệp Trượng Nghĩa', description: 'Thấy chuyện bất bình chẳng tha, khí khái hào hùng.', rank: 2, cost: 20, effects: { amDuongBonus: { chinh: 10 }, attributeChangePercent: { physicalStrength: 2 } } },
+    'tu_loi_vi_ban': { id: 'tu_loi_vi_ban', name: 'Tư Lợi Vi Bản', description: 'Luôn đặt lợi ích bản thân lên trên hết.', rank: 2, cost: 20, effects: { amDuongBonus: { ta: 10 }, attributeChangePercent: { aptitude: 2 } } },
+
+    // --- RANK 3 (Blue) ---
+    'thien_ly_nhan': { id: 'thien_ly_nhan', name: 'Thiên Lý Nhãn', description: 'Tầm nhìn xa, thần thức mạnh mẽ.', rank: 3, cost: 30, effects: { attributeChangePercent: { spiritualSense: 5 } } },
+    'phong_hanh_giả': { id: 'phong_hanh_giả', name: 'Phong Hành Giả', description: 'Thân nhẹ như yến, tốc độ hơn người.', rank: 3, cost: 30, effects: { attributeChangePercent: { agility: 5, attackSpeed: 2 } } },
+    'dai_khi_van': { id: 'dai_khi_van', name: 'Đại Khí Vận', description: 'Khí vận hơn người, thường gặp may mắn.', rank: 3, cost: 30, effects: { attributeChangePercent: { critChance: 4 } } },
+    'van_du_thien_ha': { id: 'van_du_thien_ha', name: 'Vân Du Thiên Hạ', description: 'Thích ngao du sơn thủy, thân pháp tốt.', rank: 3, cost: 30, effects: { attributeChangePercent: { agility: 4, spiritualSense: 2 } } },
+    'cuu_duong': { id: 'cuu_duong', name: 'Cửu Dương', description: 'Thân thể phụ thuộc Hỏa, tăng khả năng Hỏa linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { hoa: 2 } } },
+    'nhuoc_thuy': { id: 'nhuoc_thuy', name: 'Nhược Thủy', description: 'Thân thể phụ thuộc Thủy, tăng khả năng Thủy linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { thuy: 2 } } },
+    'at_moc': { id: 'at_moc', name: 'Ất Mộc', description: 'Thân thể phụ thuộc Mộc, tăng khả năng Mộc linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { moc: 2 } } },
+    'canh_kim': { id: 'canh_kim', name: 'Canh Kim', description: 'Thân thể phụ thuộc Kim, tăng khả năng Kim linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { kim: 2 } } },
+    'hau_tho': { id: 'hau_tho', name: 'Hậu Thổ', description: 'Thân thể phụ thuộc Thổ, tăng khả năng Thổ linh khí.', rank: 3, cost: 30, effects: { nguHanhBonus: { tho: 2 } } },
+    'vo_si': { id: 'vo_si', name: 'Võ Sĩ', description: 'Quen với việc rèn luyện thân thể.', rank: 3, cost: 30, effects: { attributeChangePercent: { physicalStrength: 4, agility: 2 } } },
+    'kiem_phach': { id: 'kiem_phach', name: 'Kiếm Phách', description: 'Có thiên phú với kiếm đạo.', rank: 3, cost: 30, effects: { nguHanhBonus: { kim: 2 }, attributeChangePercent: { physicalStrength: 5 } } },
+    'duoc_dong': { id: 'duoc_dong', name: 'Dược Đồng', description: 'Có khiếu làm luyện đan sư.', rank: 3, cost: 30, effects: { nguHanhBonus: { moc: 1, hoa: 1 }, attributeChangePercent: { spiritualSense: 4 } } },
+    'mi_cot': { id: 'mi_cot', name: 'Mị Cốt', description: 'Trời sinh quyến rũ, dễ dàng thu phục lòng người.', rank: 3, cost: 30, effects: { attributeChangePercent: { spiritualSense: 5 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 3)
+    'tam_nhu_chi_thuy': { id: 'tam_nhu_chi_thuy', name: 'Tâm Như Chỉ Thủy', description: 'Lòng lặng như nước, không bị ngoại vật quấy nhiễu.', rank: 3, cost: 30, effects: { amDuongBonus: { chinh: 15 }, primaryStatChangePercent: { maxMentalState: 5 } } },
+    'tam_ma_xam_thuc': { id: 'tam_ma_xam_thuc', name: 'Tâm Ma Xâm Thực', description: 'Dễ bị cảm xúc tiêu cực chi phối, nhưng sức mạnh tinh thần bùng nổ.', rank: 3, cost: 30, effects: { amDuongBonus: { ta: 20 }, attributeChangePercent: { spiritualSense: 5 }, primaryStatChangePercent: { maxMentalState: -4 } } },
+
+    // --- RANK 4 (Purple) ---
+    'dai_tri_nhuoc_ngu': { id: 'dai_tri_nhuoc_ngu', name: 'Đại Trí Nhược Ngu', description: 'Bề ngoài khờ khạo nhưng ngộ tính kinh người.', rank: 4, cost: 40, expPerTurn: 2, effects: { attributeChangePercent: { aptitude: 8 } } },
+    'cuong_vong_tu_dai': { id: 'cuong_vong_tu_dai', name: 'Cuồng Vọng Tự Đại', description: 'Kiêu ngạo, tấn công mạnh nhưng nhục thân yếu.', rank: 4, cost: 40, effects: { attributeChangePercent: { physicalStrength: 8, critDamage: 10, physicalBody: -5 } } },
+    'dao_ma_chuyen_the': { id: 'dao_ma_chuyen_the', name: 'Đạo Ma Chuyển Thế', description: 'Sở hữu tiềm năng của cả Đạo và Ma.', rank: 4, cost: 40, effects: { attributeChangePercent: { physicalStrength: 6, magicPower: 6, physicalBody: 6 } } },
+    'hon_nguyen_dao': { id: 'hon_nguyen_dao', name: 'Hỗn Nguyên Đạo', description: 'Dung nạp ngũ hành, ép phẩm chất lên Cực Linh Căn.', rank: 4, cost: 40, effects: { nguHanhBonus: { all: 2 } } },
+    'chinh_khi_lam_nhiet': { id: 'chinh_khi_lam_nhiet', name: 'Chính Khí Lẫm Liệt', description: 'Một lòng hướng đạo, tà ma bất xâm.', rank: 4, cost: 40, effects: { amDuongBonus: { chinh: 20 }, attributeChangePercent: { physicalBody: 8 } } },
+    'ma_tinh_tham_tang': { id: 'ma_tinh_tham_tang', name: 'Ma Tính Thâm Tàng', description: 'Ngoài mặt bình thường nhưng tâm địa thâm sâu.', rank: 4, cost: 40, effects: { amDuongBonus: { ta: 20 }, attributeChangePercent: { critChance: 5, spiritualSense: 5 } } },
+    'quy_nhan': { id: 'quy_nhan', name: 'Quỷ Nhãn', description: 'Đôi mắt nhìn thấu âm dương.', rank: 4, cost: 40, effects: { attributeChangePercent: { spiritualSense: 8 }, amDuongBonus: { ta: 10 } } },
+    'phat_tu': { id: 'phat_tu', name: 'Phật Tử', description: 'Có duyên với Phật pháp.', rank: 4, cost: 40, effects: { amDuongBonus: { chinh: 20 }, primaryStatChangePercent: { maxMentalState: 10 } } },
+    'huyet_ma': { id: 'huyet_ma', name: 'Huyết Ma', description: 'Thích máu tanh, thiên hướng tà đạo.', rank: 4, cost: 40, effects: { amDuongBonus: { ta: 20 }, attributeChangePercent: { physicalStrength: 8 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 4)
+    'diet_ma_chi_tam': { id: 'diet_ma_chi_tam', name: 'Diệt Ma Chi Tâm', description: 'Thề diệt hết ma quái trong thiên hạ, chấp niệm quá sâu.', rank: 4, cost: 40, effects: { amDuongBonus: { chinh: 30, ta: -10 }, attributeChangePercent: { attackSpeed: 5 } } },
+    'nhan_qua_dao': { id: 'nhan_qua_dao', name: 'Nhân Quả Đạo', description: 'Hiểu thấu nhân quả, thiện ác song hành.', rank: 4, cost: 40, effects: { amDuongBonus: { chinh: 20, ta: 20 }, attributeChangePercent: { spiritualSense: 10 } } },
+
+    // --- RANK 5 (Orange) ---
+    'son_ha_xa_tac': { id: 'son_ha_xa_tac', name: 'Sơn Hà Xã Tắc', description: 'Thân thể bền bỉ như đất, sức sống như cây.', rank: 5, cost: 50, effects: { primaryStatChangePercent: { maxHp: 12 }, attributeChangePercent: { physicalBody: 10 }, nguHanhBonus: { tho: 1, moc: 1 } } },
+    'kiem_khi_truong_giang': { id: 'kiem_khi_truong_giang', name: 'Kiếm Khí Trường Giang', description: 'Kiếm khí như nước chảy.', rank: 5, cost: 50, effects: { attributeChangePercent: { physicalStrength: 10, magicPower: 10 }, nguHanhBonus: { kim: 1, thuy: 1 } } },
+    'thuong_long_at_moc': { id: 'thuong_long_at_moc', name: 'Thương Long Ất Mộc', description: 'Sinh sôi nảy nở, hồi phục mạnh mẽ.', rank: 5, cost: 50, effects: { primaryStatChangePercent: { maxSpiritPower: 12, maxStamina: 12 }, attributeChangePercent: { spiritualSense: 8, hpRegen: 5, spRegen: 5 }, nguHanhBonus: { thuy: 1, moc: 1 } } },
+    'chu_tuoc_phan_thien': { id: 'chu_tuoc_phan_thien', name: 'Chu Tước Phần Thiên', description: 'Lửa bùng cháy, bạo phát mạnh mẽ.', rank: 5, cost: 50, effects: { attributeChangePercent: { magicPower: 12, critChance: 8, dmgFire: 10 }, nguHanhBonus: { moc: 1, hoa: 1 } } },
+    'dia_tam_hoa_lien': { id: 'dia_tam_hoa_lien', name: 'Địa Tâm Hỏa Liên', description: 'Sức chịu đựng và phản kích.', rank: 5, cost: 50, effects: { attributeChangePercent: { physicalBody: 12, counterDamage: 8 }, nguHanhBonus: { hoa: 1, tho: 1 } } },
+    'tuyet_vuc_bang_tam': { id: 'tuyet_vuc_bang_tam', name: 'Tuyết Vực Băng Tâm', description: 'Tâm lặng như băng, kháng hiệu ứng.', rank: 5, cost: 50, effects: { primaryStatChangePercent: { maxMentalState: 15 }, attributeChangePercent: { spiritualSense: 10, critResist: 10 }, nguHanhBonus: { thuy: 1, kim: 1 } } },
+    'phuong_hoang_niet_ban': { id: 'phuong_hoang_niet_ban', name: 'Phượng Hoàng Niết Bàn', description: 'Tuổi thọ cao, thiên phú hỏa pháp.', rank: 5, cost: 50, effects: { primaryStatChangePercent: { lifespan: 15 }, attributeChangePercent: { magicPower: 10, agility: 8, attackSpeed: 5, hpRegen: 10 }, nguHanhBonus: { hoa: 2 } } },
+    'loi_dinh_ba': { id: 'loi_dinh_ba', name: 'Lôi Đình Bá', description: 'Thân thể chứa lôi đình. Tự động kích hoạt Lôi Linh Căn.', rank: 5, cost: 50, effects: { attributeChangePercent: { physicalStrength: 12, critDamage: 15, dmgLightning: 10 } } },
+    'bang_tam_ngoc_cot': { id: 'bang_tam_ngoc_cot', name: 'Băng Tâm Ngọc Cốt', description: 'Cốt tủy băng giá. Tự động kích hoạt Băng Linh Căn.', rank: 5, cost: 50, effects: { attributeChangePercent: { magicPower: 10, physicalBody: 10, resIce: 10 } } },
+    'huyen_anh_phong_than': { id: 'huyen_anh_phong_than', name: 'Huyễn Ảnh Phong Thân', description: 'Thân như gió. Tự động kích hoạt Phong Linh Căn.', rank: 5, cost: 50, effects: { attributeChangePercent: { agility: 12, attackSpeed: 8, evasion: 8 } } },
+    'bang_phach': { id: 'bang_phach', name: 'Băng Phách', description: 'Linh hồn lạnh giá, ép linh căn thành Băng dị chủng.', rank: 5, cost: 50, effects: { attributeChangePercent: { magicPower: 12, dmgIce: 10 } } },
+    'phong_than': { id: 'phong_than', name: 'Phong Thần', description: 'Con của gió, ép linh căn thành Phong dị chủng.', rank: 5, cost: 50, effects: { attributeChangePercent: { agility: 12, dmgWind: 10 } } },
+    'thien_sat_co_tinh': { id: 'thien_sat_co_tinh', name: 'Thiên Sát Cô Tinh', description: 'Số phận cô độc, khắc người thân nhưng sức mạnh vượt trội.', rank: 5, cost: 50, effects: { attributeChangePercent: { physicalStrength: 15, physicalBody: -8, critChance: 10, armorPen: 10 }, primaryStatChangePercent: { lifespan: 10 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 5)
+    'hao_nhien_chinh_khi': { id: 'hao_nhien_chinh_khi', name: 'Hạo Nhiên Chính Khí', description: 'Chính khí ngút trời, tà ma tránh xa.', rank: 5, cost: 50, effects: { amDuongBonus: { chinh: 50, ta: -20 }, attributeChangePercent: { physicalBody: 12, spiritualSense: 10, critResist: 10 } } },
+    'vo_tinh_sat_dao': { id: 'vo_tinh_sat_dao', name: 'Vô Tình Sát Đạo', description: 'Diệt tuyệt thất tình lục dục, chỉ còn sát đạo.', rank: 5, cost: 50, effects: { amDuongBonus: { ta: 50, chinh: -20 }, attributeChangePercent: { critDamage: 20, physicalStrength: 12, armorPen: 10 } } },
+    'ta_than_nghich_tu': { id: 'ta_than_nghich_tu', name: 'Tà Thần Nghịch Tử', description: 'Kẻ phản nghịch, chà đạp luân thường đạo lý.', rank: 5, cost: 50, effects: { amDuongBonus: { ta: 40, chinh: -40 }, attributeChangePercent: { magicPower: 15, lifeSteal: 10 } } },
+
+    // --- RANK 6 (Red) ---
+    'thien_menh_chi_tu': { id: 'thien_menh_chi_tu', name: 'Thiên Mệnh Chi Tử', description: 'Kẻ được thiên mệnh ưu ái, tư chất toàn diện.', rank: 6, cost: 80, expPerTurn: 3, effects: { attributeChangePercent: { physicalStrength: 20, magicPower: 20, physicalBody: 20, agility: 15, spiritualSense: 20, aptitude: 20, attackSpeed: 10, damageReduction: 10, armorPen: 10 }, nguHanhBonus: { all: 3 } } },
+    'ngu_hanh_hop_nhat': { id: 'ngu_hanh_hop_nhat', name: 'Ngũ Hành Hợp Nhất', description: 'Ngũ hành tương sinh, ép phẩm chất thành Cực Linh Căn.', rank: 6, cost: 60, effects: { nguHanhBonus: { all: 2 }, attributeChangePercent: { magicPower: 25, aptitude: 25 } } },
+    'loi_than_giang_the': { id: 'loi_than_giang_the', name: 'Lôi Thần Giáng Thế', description: 'Hóa thân của sấm sét, ép linh căn thành Lôi dị chủng cực phẩm.', rank: 6, cost: 70, effects: { attributeChangePercent: { physicalStrength: 25, critDamage: 30, attackSpeed: 15, dmgLightning: 20 } } },
+    'van_khi_nghich_thien': { id: 'van_khi_nghich_thien', name: 'Vận Khí Nghịch Thiên', description: 'May mắn đến mức nghịch thiên, đi đường cũng nhặt được bảo vật.', rank: 6, cost: 80, effects: { attributeChangePercent: { critChance: 15, evasion: 15 } } },
+    'nguoi_xuyen_viet': { id: 'nguoi_xuyen_viet', name: 'Người Xuyên Việt', description: 'Linh hồn đến từ thế giới khác, tâm trí kiên định, kiến thức rộng mở.', rank: 6, cost: 60, effects: { primaryStatChangePercent: { maxMentalState: 30 }, attributeChangePercent: { aptitude: 25, spiritualSense: 25 } } },
+    // NEW ALIGNMENT DESTINIES (Rank 6)
+    'thien_ma_hang_the': { id: 'thien_ma_hang_the', name: 'Thiên Ma Hàng Thế', description: 'Ma chủ tái sinh, vạn ma thần phục.', rank: 6, cost: 80, effects: { amDuongBonus: { ta: 80, chinh: -50 }, attributeChangePercent: { magicPower: 25, spiritualSense: 20, lifeSteal: 15, armorPen: 15 } } },
+};
+// Khí vận tiên thiên: mỗi kiếp rút 1–3 cái lúc đầu thai, phẩm càng cao càng hiếm.
+// Khí vận có hành (Cửu Dương, Nhược Thủy, Canh Kim…) kéo linh căn về hành đó; một số ép linh căn thành biến dị (Lôi, Băng, Phong)
+// hoặc Cực linh căn (đủ ngũ hành, tương sinh); Ngũ Hành Khuyết Mộc thì không cảm được Mộc khí.
+// Thể chất tiên thiên: suy ra từ linh căn (tỉ lệ hành), khí vận, nhân quả (chính tà) và tính tình (theo xuất thân, mệnh cách), lấy tối đa ba cái phẩm cao nhất,
+// không khớp gì thì là Phàm Thể. Tất cả đều cộng vào chỉ số.
+delete TT_DEST.vo_can; // không có linh căn thì không tu được: bỏ
+const TT_RW=[0,40,28,17,9,4.5,1.5];
+const TT_RANK=['','Phàm','Lương','Hiếm','Quý','Cực hiếm','Nghịch thiên'],TT_COL=['','#8d8672','#4f8a4a','#4a6fae','#7b56a8','#c97a2b','#b8302a'];
+function ttRoll(){const n=wpick([1,2,3],x=>[40,45,15][x-1]);const L=[];const all=Object.values(TT_DEST);
+  for(let i=0;i<n;i++){const rk=wpick([1,2,3,4,5,6],x=>TT_RW[x]);const pool=all.filter(d=>d.rank===rk&&!L.includes(d.id));if(pool.length)L.push(pick(pool).id);}return L;}
+const TT_FORCE={loi_dinh_ba:'loi',loi_than_giang_the:'loi',bang_tam_ngoc_cot:'bang',bang_phach:'bang',huyen_anh_phong_than:'phong',phong_than:'phong'};
+ROOT.push({id:'cuc',n:'Cực linh căn',m:1.5,w:0,k:5,d:'Đủ ngũ hành, tương sinh không khắc. Hiếm tới mức chỉ khí vận nghịch thiên mới ép ra được.'});
+function ttShape(root,ids){const els=root.els.slice();let id=root.id;
+  for(const k of ids){if(TT_FORCE[k])return {id:'bien',els:[TT_FORCE[k]]};}
+  if(ids.some(k=>k==='hon_nguyen_dao'||k==='ngu_hanh_hop_nhat'))return {id:'cuc',els:NGUHANH.slice()};
+  if(id==='bien')return root;
+  for(const k of ids){const nb=(TT_DEST[k].effects||{}).nguHanhBonus;if(!nb)continue;
+    for(const [e,v] of Object.entries(nb)){if(e==='all'||v<=0||els.includes(e))continue;if(v>=2||chance(.5)){const out=els.filter(x=>!ids.some(q=>((TT_DEST[q].effects||{}).nguHanhBonus||{})[x]>0));if(out.length)els[els.indexOf(pick(out))]=e;}}}
+  if(ids.includes('ngu_hanh_khuyet_moc')&&els.includes('moc')){if(els.length>=5){els.splice(els.indexOf('moc'),1);id='tu';}else{const o=NGUHANH.filter(x=>!els.includes(x));els[els.indexOf('moc')]=pick(o);}}
+  return {id,els};}
+{const _gb25=genBirth;genBirth=function(){_gb25();for(const c of G.birth.cards){c.kv=ttRoll();c.root=ttShape(c.root,c.kv);
+  for(const k of c.kv){const a=(TT_DEST[k].effects||{}).amDuongBonus;if(a)c.karmaAdj=(c.karmaAdj||0)+Math.round(((a.chinh||0)-(a.ta||0))/2);}}};}
+// tính tình theo xuất thân và mệnh cách (Thienmenh xét thể chất theo tính tình)
+const TT_TRAITS={dote:['Tàn nhẫn'],mahuyet:['Cuồng tà','Căm thù'],khat:['Tự do'],linh:['Hiếu chiến'],mieu:['Nhân hậu'],thusinh:['Thận trọng'],buon:['Thực dụng'],hat:['Quái gở'],thegia:['Bảo thủ'],tran:['Thông tuệ'],daodong:['Thận trọng'],nong:['Chính trực'],ren:['Chính trực'],chai:['Tự do'],duoc:['Nhân hậu'],
+ sattinh:['Sát phạt','Hiếu chiến'],chithuy:['Lạnh lùng'],linhnhan:['Thông tuệ'],thiendo:['Thông tuệ'],luoi:['Thực dụng'],thanluc:['Hiếu chiến'],bangco:['Lạnh lùng'],kiemtam:['Hào sảng']};
+function ttPhys(r){const els=r.root.els.filter(e=>NGUHANH.includes(e));const pct=e=>els.includes(e)?Math.round(100/Math.max(1,els.length)):0;const D=r.kv||[];const has=k=>D.includes(k);
+  const T=(TT_TRAITS[r.origin]||[]).concat(TT_TRAITS[r.trait]||[]);const hasT=t=>T.includes(t);const anyT=L=>L.some(hasT);
+  const k=r.karma||0;const pureR=k>=40,pureE=k<=-40,neutral=Math.abs(k)<20;const lc=r.root.id==='cuc'?'Cực Linh Căn':r.root.id==='thien'?'Thiên Linh Căn':'';
+  const evil=['Độc ác','Tàn nhẫn','Thâm độc','Cuồng tà','Vị kỷ','Căm thù'],wild=['Cuồng tà','Quái gở','Tự do'];const bal5=els.length===5;
+  const C={hon_don_the:bal5&&lc==='Cực Linh Căn'&&neutral&&(has('ngu_hanh_hop_nhat')||(has('hon_nguyen_dao')&&D.some(q=>q!=='hon_nguyen_dao'&&TT_DEST[q].rank>=5))),hoang_co_thanh_the:pct('tho')>=80&&(has('son_ha_xa_tac')||has('da_day_hon_sat'))&&pureR&&!anyT(evil),
+   van_co_ma_the:pureE&&(has('sat_phat_qua_duyet')||has('dao_ma_chuyen_the'))&&anyT(evil),tien_thien_dao_thai:!!lc&&has('dai_tri_nhuoc_ngu')&&!pureE,
+   cuu_khieu_linh_lung:(has('thien_co_thong_minh')||has('thien_ly_nhan'))&&anyT(['Thận trọng','Thực dụng','Thông tuệ']),
+   thuong_thien_ba_the:(pct('tho')>=60||pct('kim')>=60)&&!pureR&&(anyT(wild)||has('cuong_vong_tu_dai')),thai_duong_the:pct('hoa')>=80&&has('cuu_duong')&&!hasT('Lạnh lùng'),
+   thai_am_the:pct('thuy')>=80&&has('nhuoc_thuy'),thien_yeu_the:(pct('moc')>=60||has('huyen_anh_phong_than'))&&anyT(wild),loi_dinh_chien_the:has('loi_dinh_ba')&&anyT(wild.concat(['Hào sảng','Hiếu chiến'])),
+   hu_khong_chi_the:has('huyen_anh_phong_than')&&hasT('Tự do'),duoc_linh_thanh_the:pct('moc')+pct('hoa')>=60&&(has('duoc_linh_the')||has('chu_tuoc_phan_thien')||r.origin==='duoc'),
+   ngu_hanh_linh_the:bal5,vo_cau_kiem_the:pct('kim')>=60&&has('kiem_khi_truong_giang'),huyet_sat_ma_the:pct('thuy')>=40&&k<-60&&anyT(['Độc ác','Tàn nhẫn','Sát phạt']),
+   bang_co_ngoc_cot:has('bang_tam_ngoc_cot')&&hasT('Lạnh lùng'),tat_phong_linh_the:pct('moc')>=40&&pct('thuy')>=20&&has('phong_hanh_giả'),cuu_duong_chi_the:pct('hoa')>=60&&has('cuu_duong'),
+   huyen_am_chi_the:pct('thuy')>=60&&has('nhuoc_thuy'),kim_cuong_bat_hoai:pct('kim')>=50&&pct('tho')>=50,kim_linh_the:pct('kim')>=70,moc_linh_chi_the:pct('moc')>=70,thuy_linh_the:pct('thuy')>=70,
+   hoa_linh_the:pct('hoa')>=70,tho_linh_the:pct('tho')>=70,am_sat_the:k<=-50&&hasT('Thâm độc'),cuong_chien_the:hasT('Cuồng tà')||(hasT('Hiếu chiến')&&['vo_si','sat_phat_qua_duyet','huyet_ma','cuong_vong_tu_dai','than_the_khoe_manh'].some(has)),man_luc_the:has('than_the_khoe_manh'),
+   thong_tue_the:has('tinh_than_minh_man'),kien_nhan_the:has('khi_luc_doi_dao'),linh_cam_the:has('thien_ly_nhan'),truong_tho_the:has('thien_menh_chi_tu')||pct('moc')>=50};
+  const L=TT_PHYS.filter(p=>C[p.id]).sort((a,b)=>b.rank-a.rank).slice(0,3).map(p=>p.id);return L.length?L:['pham_the'];}
+function ttPhysOf(id){return TT_PHYS.find(p=>p.id===id);}
+// đổi hiệu ứng của Thienmenh sang chỉ số của game này
+const TT_MAP={physicalStrength:['atkP',1],magicPower:['matkP',1],physicalBody:['defP',1],damageReduction:['defP',1],counterDamage:['defP',0.5],armorPen:['atkP',0.5],
+ agility:['tp',0.25],attackSpeed:['tp',0.2],spiritualSense:['than',0.5],aptitude:['ngo',0.34],critChance:['crit',1],critDamage:['critDmg',1],evasion:['dodge',1],critResist:['hoTam',0.5],
+ lifeSteal:['drain',0.5],hpRegen:['regenHp',0.2],maxHp:['hpP',1],maxSpiritPower:['mpP',1],maxStamina:['hpP',0.3],maxMentalState:['tam',0.34],lifespan:['lifeP',1]};
+const TT_ELD={dmgFire:'hoa',dmgLightning:'loi',dmgIce:'bang',dmgWind:'phong'};
+function ttFx(def){const o={};if(!def)return o;const E=def.effects||{};const add=(k,v)=>{if(!v)return;o[k]=(o[k]||0)+v;};
+  for(const grp of [E.attributeChangePercent,E.primaryStatChangePercent])for(const [k,v] of Object.entries(grp||{})){if(TT_ELD[k]){o.elP=o.elP||{};o.elP[TT_ELD[k]]=(o.elP[TT_ELD[k]]||0)+v;continue;}const m=TT_MAP[k];if(!m)continue;
+    let x=v*m[1];x=['tp','ngo','tam','than','hoTam','drain','regenHp'].includes(m[0])?Math.sign(x)*Math.max(1,Math.round(Math.abs(x))):Math.round(x);add(m[0],x);}
+  const ex=(E.expPerTurn||0)+(def.expPerTurn||0)*3;if(ex)add('tvP',ex);return o;}
+const TT_FXN={atkP:'Công vật lý {v}%',matkP:'Công phép {v}%',defP:'Thủ {v}%',hpP:'Khí huyết {v}%',mpP:'Linh lực {v}%',tp:'Thân pháp {v}',than:'Thần thức {v}',ngo:'Ngộ tính {v}',tam:'Đạo tâm {v}',crit:'Chí mạng {v}%',critDmg:'ST chí mạng {v}%',dodge:'Né tránh {v}',hoTam:'Hộ tâm {v}',drain:'Hút máu {v}%',regenHp:'Hồi khí huyết mỗi lượt {v}%',lifeP:'Thọ nguyên {v}%',tvP:'Tu vi nhận thêm {v}%'};
+function ttFxText(def){const o=ttFx(def);const L=[];for(const [k,v] of Object.entries(o)){if(k==='elP'){for(const [e,x] of Object.entries(v))L.push('Sát thương hệ '+EL[e].n+' '+(x>0?'+':'')+x+'%');continue;}if(TT_FXN[k])L.push(TT_FXN[k].replace('{v}',(v>0?'+':'')+v));}
+  const E=def.effects||{};if(E.nguHanhBonus)L.push('Linh căn nghiêng về '+Object.keys(E.nguHanhBonus).map(e=>e==='all'?'ngũ hành':(EL[e]||{n:e}).n).join(', ')+(Object.values(E.nguHanhBonus).some(v=>v<0)?' (khuyết)':''));
+  if(TT_FORCE[def.id])L.push('Linh căn hóa '+EL[TT_FORCE[def.id]].n+' (biến dị)');if(def.id==='hon_nguyen_dao'||def.id==='ngu_hanh_hop_nhat')L.push('Ép thành Cực linh căn');
+  if(E.amDuongBonus){const d=Math.round(((E.amDuongBonus.chinh||0)-(E.amDuongBonus.ta||0))/2);if(d)L.push('Nhân quả '+(d>0?'+':'')+d);}return L;}
+{const _ag25=aggFx;aggFx=function(){const fx=_ag25();const r=G.run;if(!r)return fx;const add=src=>{for(const [k,v] of Object.entries(src)){if(k==='elP'){fx.elP=fx.elP||{};for(const [e,x] of Object.entries(v))fx.elP[e]=(fx.elP[e]||0)+x;}else fx[k]=(fx[k]||0)+v;}};
+  for(const k of r.kv||[])add(ttFx(TT_DEST[k]));for(const k of r.the||[])add(ttFx(ttPhysOf(k)));return fx;};}
+{const _nr25=newRun;newRun=function(c){const res=_nr25(c);const r=G.run;if(r){r.kv=(c.kv||[]).slice();r.karma=clamp((r.karma||0)+(c.karmaAdj||0),-100,100);r.the=ttPhys(r);const s=S();r.hp=s.maxHp;r.mp=s.maxMp;}return res;};}
+// câu chuyện mở đầu: nhắc tới thể chất nổi bật (từ phẩm Hiếm trở lên)
+{const _nr25b=newRun;newRun=function(c){const res=_nr25b(c);const r=G.run;if(r&&r.story&&r.the){const p=ttPhysOf(r.the[0]);if(p&&p.rank>=3){const w=r.ten.split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);const nm=w.slice(h2?2:1).join(' ')||r.ten;
+  r.story.splice(Math.max(1,r.story.length-2),0,'Có lần một lão đạo sĩ đi ngang, nhìn '+nm+' rất lâu rồi lẩm bẩm: “'+p.name+'…” '+p.description);}}return res;};}
+
+// ================= ĐỢT 26: ĐỠ ĐÒN CÓ VÒNG BẤM, CHÍ MẠNG CÓ THANH TRƯỢT =================
+// Đang thủ thế mà địch đánh tới: vòng bấm hiện nút "Đỡ" thay cho "Né". Không né nữa mà đỡ: bấm chuẩn thì đỡ thêm 25%,
+// bấm khá thêm 10%, không bấm hoặc hụt thì đỡ kém đi 10%. Thủ thế mà địch không đánh thì không hiện gì.
+{const _ds26=doSkill;doSkill=function(sc,u,sk,lv,tid,qm){const had=sc.dodge;const res=_ds26(sc,u,sk,lv,tid,qm);const me=mainUnit(sc);if(sc.dodge&&sc.dodge!==had&&!sc.dodge.kiep&&me&&me.st.stance){sc.dodge.blk=1;sc.rev++;}return res;};}
+{const _dr26=dodgeResolve;dodgeResolve=function(offs){const sc=G.run&&G.run.scene;const d=sc&&sc.dodge;if(!d||!d.blk)return _dr26(offs);const me=mainUnit(sc);
+  const L=(offs||[]).filter(x=>x!=null).map(Math.abs);const a=L.length?Math.min(...L):null;const q=a==null?-0.1:a<=0.09?0.25:a<=0.25?0.1:-0.1;
+  me._bq=q;clog(sc,q>=0.25?'Đỡ chuẩn: hóa giải phần lớn lực đòn.':q>0?'Đỡ kịp.':'Đỡ trễ, lực đòn dội thẳng vào người.',q>0?'me':'en');
+  try{return _dr26([]);}finally{me._bq=0;}};}
+{const _bc26=blockCut;blockCut=function(att,def){const b=_bc26(att,def);return def&&def._bq?clamp(b+def._bq,0.05,0.75):b;};}
+// Chí mạng: khi đòn của ngươi gieo trúng chí mạng, thanh trượt chạy qua lại; chạm đúng vùng xanh thì mới chí mạng,
+// trượt thì đòn vẫn trúng nhưng không chí mạng. Tự đánh thì máy tự bấm (trúng khoảng 70%).
+{const _ds26b=doSkill;doSkill=function(sc,u,sk,lv,tid,qm){if(u&&u._critF!=null)return _ds26b(sc,u,sk,lv,tid,qm);
+  if(u&&u.isMain&&u.ctrl==='player'&&sk&&sk.fx&&sk.fx.p&&!sc.kiep&&!sc.critQ){const p=((u.crit||5)+(sk.fx.crit||0))/100;
+    if(chance(p)){if(CFG.autoFight||(G.meta.opt&&G.meta.opt.autoQte)){u._critF=chance(.7);try{return _ds26b(sc,u,sk,lv,tid,qm);}finally{u._critF=null;}}
+      sc.critQ={id:(sc.cqid=(sc.cqid||0)+1),uid:u.id,sk,lv,tid,qm};sc.rev++;return;}
+    u._critF=false;try{return _ds26b(sc,u,sk,lv,tid,qm);}finally{u._critF=null;}}
+  return _ds26b(sc,u,sk,lv,tid,qm);};}
+function critResolve(ok){const sc=G.run&&G.run.scene;if(!sc||!sc.critQ)return;const c=sc.critQ;sc.critQ=null;const u=U_(sc,c.uid);if(!u){return;}
+  runAct(sc,()=>{clog(sc,ok?'Chí mạng!':'Lỡ thời cơ chí mạng.',ok?'me':'fl');u._critF=!!ok;try{doSkill(sc,u,c.sk,c.lv,c.tid,c.qm);}finally{u._critF=null;}});}
+
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
 const $=s=>document.querySelector(s);
@@ -5993,7 +6484,7 @@ const ICP={
   seat:'M12 6a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM7 13c0-3 2-5 5-5s5 2 5 5M3 20c3-4 6-5 9-5s6 1 9 5M7 13l-2 4M17 13l2 4',
 };
 function ib(n,c){return `<span class="ib${c?' ib-'+c:''}">${ic(n)}</span>`;}
-const STAT_IC={'Lịch luyện':['sword','gold'],'Thổ nạp':['wind','jade'],'Hiệu suất tu':['cycle','acc'],'Tư chất':['gem','gold'],'Tốc độ tu':['seat','acc'],'ST chí mạng':['bolt','seal'],'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
+const STAT_IC={'Tiên thiên khí vận':['star','gold'],'Tiên thiên thể chất':['heart','seal'],'Lịch luyện':['sword','gold'],'Thổ nạp':['wind','jade'],'Hiệu suất tu':['cycle','acc'],'Tư chất':['gem','gold'],'Tốc độ tu':['seat','acc'],'ST chí mạng':['bolt','seal'],'Tu vi':['spark','gold'],'Khí huyết':['heart','jade'],'Linh lực':['drop','acc'],'Thọ':['hour','ink'],'Tuổi':['hour','ink'],'Linh thạch':['gem','jade'],'Cảnh giới':['yin','acc'],'Tu luyện':['seat','acc'],'Đi lại':['walk','ink'],'Thần thức':['eye','acc'],'Xuất thân':['scroll','ink'],'Mệnh cách':['star','gold'],'Đạo cơ':['lotus','gold'],'Nhân quả':['scale','ink'],'Tâm ma':['skull','seal'],'Cống hiến':['medal','gold'],'Linh căn':['root','jade'],'Công vật lý':['sword','seal'],'Công phép':['wand','vio'],'Thủ':['shield','acc'],'Chí mạng':['crit','seal'],'Sát thương chí mạng':['bolt','seal'],'Hộ tâm':['heart','acc'],'Thân pháp':['wind','jade'],'Chính xác':['target','ink'],'Né':['feather','jade'],'Hồi phục':['cycle','jade'],'Ngộ tính':['brain','vio'],'Niệm lực':['brain','vio'],'Đạo tâm':['lotus','acc'],'Khí vận':['clover','jade'],'Đã hạ':['skull','ink']};
 function sib(label){if(label==='Linh thạch')return '<i class="rh sic"></i>';const x=STAT_IC[label];return x?ic(x[0],'sic'):'';}
 function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICP[n]||ICP.info}"/></svg>`;}
 
@@ -6525,7 +7016,10 @@ const Map2=(()=>{
     // điểm
     const s0=clamp(21*Math.sqrt(z/0.8),7,24)*(CFG.font==='xl'?1.15:1);const small=z<0.5;const notes=w.notes||{};
     const HT=CFG.hideT||{},HE=CFG.hideE||{},DC=[C.jade,C.gold,C.seal,C.vio];const QN=new Set((r.quests||[]).filter(q=>q.state==='open').map(q=>q.node));
-    for(const k of VR)if(k<5)for(const n of regionOf(k).nodes){if(n.fog<1)continue;if(HT[n.type])continue;const [nx,ny]=mapNode(n);let x=SX(nx),y=SY(ny);if(x<-60||y<-60||x>W0+60||y>H0+60)continue;const under=n.id===r.at&&!r.moving;if(under){x+=s0*0.62;y+=s0*0.62;}const sN=under?s0*0.6:s0;
+    // một ô lục giác có cả địa điểm lẫn người (ngươi, hoặc thực thể đang dừng chân): địa điểm lùi sang trái, người sang phải, cả hai nhỏ lại cho khỏi đè nhau
+    const HW=HEXW/2*z;const OCC=new Set();if(!r.moving&&!HT._me)OCC.add(r.at);
+    if(CFG.ents){const sr0=senseR();for(const e of entsHere(reg)){if(HE[e.type]||e.to!=null)continue;const p=entXY(e);if(Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr0)OCC.add(e.at);}}
+    for(const k of VR)if(k<5)for(const n of regionOf(k).nodes){if(n.fog<1)continue;if(HT[n.type])continue;const [nx,ny]=mapNode(n);let x=SX(nx),y=SY(ny);if(x<-60||y<-60||x>W0+60||y>H0+60)continue;const under=OCC.has(n.id);if(under)x-=HW*0.42;const sN=under?Math.min(s0*0.75,HW*0.72):s0;
       const sure=n.fog>=2||n.memory;const old=n.fog>=2&&n.seenT>=0&&w.t-n.seenT>HY;const ruin=(n.vstate||'ok')==='ruin'&&n.fog>=2;const sel=UI.sel===n.id;
       const col=C[NODE_CAT[n.type]||'ink'];
       if(sel){ctx.beginPath();ctx.arc(x,y,s0*0.95,0,6.3);ctx.fillStyle=hexA(C.acc,0.16);ctx.fill();ctx.strokeStyle=C.acc;ctx.lineWidth=1.5;ctx.stroke();}
@@ -6537,18 +7031,18 @@ const Map2=(()=>{
       if(CFG.names&&(!small||sel||n.id===r.at||n.type==='thanh'||n.type==='ai')&&(z>=0.3||sel||n.id===r.at)){label(n.name+(sure?'':'?'),x,y+s0/2+3,{c:sure?C.ink:C.ink3,s:CFG.font==='m'?12:14});if(old)label('tin cũ',x,y+s0/2+18,{c:C.ink3,s:10});}}
     // thực thể qua lại
     if(CFG.ents){const sr=senseR();for(const e of entsHere(reg)){if(HE[e.type])continue;const p=entXY(e);const see=Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr;
-      if(!see&&!e.heard)continue;const q=mapXY(reg,see?p[0]:e.heard.x,see?p[1]:e.heard.y);const x=SX(q[0]),y=SY(q[1]);if(x<-30||y<-30||x>W0+30||y>H0+30)continue;
+      if(!see&&!e.heard)continue;const q=mapXY(reg,see?p[0]:e.heard.x,see?p[1]:e.heard.y);const parked=see&&e.to==null;const meHere=parked&&e.at===r.at&&!r.moving;const x=SX(q[0])+(parked?HW*0.42:0),y=SY(q[1])+(meHere?HW*0.36:0);const er=parked?Math.min(10,HW*(meHere?0.26:0.36)):10;if(x<-30||y<-30||x>W0+30||y>H0+30)continue;
       const bad=e.type==='thutrieu'||e.type==='truysat';ctx.globalAlpha=see?1:0.55;const ec=entCol(e.type,C);const gk=ENT_GLYPH[e.type];
       if(e.type==='thuong'){ // xe ngựa, trên đầu là ảnh nhỏ người dẫn đầu
         const wi=wagonImg();if(wi&&wi.complete&&wi.naturalWidth){ctx.drawImage(wi,x-15,y-9,30,17.5);}else{ctx.save();ctx.translate(x-11,y-9);ctx.scale(22/24,22/24);ctx.lineWidth=2;ctx.strokeStyle=ec;ctx.stroke(icPath('cart'));ctx.restore();}
         ctx.beginPath();ctx.arc(x+6,y-12,4.5,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=1.5;ctx.strokeStyle=ec;ctx.stroke();ctx.font=`500 6px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(avLetter(e.lead||e.name),x+6,y-11.6);}
-      else{ctx.beginPath();ctx.arc(x,y,10,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=ec;if(!see)ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
-        if(gk){ctx.save();ctx.translate(x-6.5,y-6.5);ctx.scale(13/24,13/24);ctx.lineWidth=2.2;ctx.strokeStyle=ec;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke(icPath(gk));ctx.restore();}
+      else{ctx.beginPath();ctx.arc(x,y,er,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=ec;if(!see)ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
+        if(gk){const gs=er*1.3;ctx.save();ctx.translate(x-gs/2,y-gs/2);ctx.scale(gs/24,gs/24);ctx.lineWidth=2.2;ctx.strokeStyle=ec;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke(icPath(gk));ctx.restore();}
         else{ctx.font=`500 10px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(avLetter(ENT_T[e.type].n),x,y+1);}}
       ctx.globalAlpha=1;
       if(CFG.names&&!small)label(see?e.name:e.name+' (nghe đồn)',x,y+11,{c:bad?C.seal:C.ink2,s:10});}}
     // người chơi: con dấu son
-    if(!HT._me){const x=SX(pos[0]),y=SY(pos[1]);const rr=s0*0.62;
+    if(!HT._me){const atN=!r.moving;const eH=atN&&CFG.ents&&entsHere(reg).some(e=>e.to==null&&e.at===r.at&&!HE[e.type]);const x=SX(pos[0])+(atN?HW*0.42:0),y=SY(pos[1])-(eH?HW*0.2:0);const rr=atN?Math.min(s0*0.5,HW*(eH?0.3:0.38)):s0*0.62;
       ctx.beginPath();ctx.arc(x,y,rr+2.5,0,6.3);ctx.fillStyle=C.seal;ctx.fill();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.fillStyle=C.paper;ctx.fill();
       const hi=heroImg();if(hi&&hi.complete&&hi.naturalWidth){ctx.save();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.clip();ctx.drawImage(hi,x-rr,y-rr,rr*2,rr*2);ctx.restore();}
       else{ctx.fillStyle=C.ink;ctx.font=`500 ${Math.round(rr*1.05)}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(avLetter(r.ten),x,y+1);}
@@ -6830,7 +7324,8 @@ function vPlace(sc){
   // lịch sử: mỗi lần chọn một việc, giữ lại lựa chọn và kết quả (giống hộp thoại sự kiện)
   sc.hist=sc.hist||[];if((sc.msg&&sc.msg.length)||(sc.chips&&sc.chips.length)){const key=(sc.seq||0)+JSON.stringify(sc.msg)+JSON.stringify((sc.chips||[]).map(c=>c.t));if(sc.histK!==key){sc.hist.push({q:UI.lastQ||null,m:sc.msg.slice(),c:(sc.chips||[]).slice()});sc.histK=key;if(sc.hist.length>12)sc.hist.shift();}}
   UI.lastQ=null;
-  b+=`<div class="pl-talkw"><button class="pl-tg2" data-act="descTg"${ta(UI.descHide?'Hiện cảnh trí':'Thu gọn cảnh trí')} aria-label="Cảnh trí">${ic(UI.descHide?'down':'up')}</button><div class="pl-talk" id="plTalk" data-n="${sc.hist.length}"><div class="story">${UI.descHide?'':`<p>${txt(sc.intro)}</p>`}${sc.hist.map(h=>(h.q?`<div class="ev-q"><p class="ev-c">› ${esc(h.q)}</p>${h.m.map(m=>`<p>${txt(m)}</p>`).join('')}</div>`:h.m.map(m=>`<p>${txt(m)}</p>`).join(''))+chipsHTML(h.c)).join('')}</div></div></div>`;
+  const tm=!!UI.descHide;const HL=tm?sc.hist.slice(-1):sc.hist;
+  b+=`<div class="pl-talkw${tm?' min':''}"><button class="pl-tg2" data-act="descTg"${ta(tm?'Mở rộng hội thoại':'Thu gọn hội thoại: chỉ giữ diễn biến mới nhất')} aria-label="${tm?'Mở rộng':'Thu gọn'}">${ic(tm?'down':'up')}</button><div class="pl-talk" id="plTalk" data-n="${sc.hist.length}"><div class="story">${tm&&HL.length?'':`<p>${txt(sc.intro)}</p>`}${HL.map(h=>(h.q?`<div class="ev-q"><p class="ev-c">› ${esc(h.q)}</p>${h.m.map(m=>`<p>${txt(m)}</p>`).join('')}</div>`:h.m.map(m=>`<p>${txt(m)}</p>`).join(''))+chipsHTML(h.c)).join('')}</div></div></div>`;
   const ents=entsHere(r.region).filter(e=>e.to==null&&e.at===n.id);const qs=r.quests.filter(q=>q.state==='open'&&q.node===n.id);
   const big=PNOW.map(by).filter(Boolean);
   if(qs.length){b+=`<h3 class="grp big">${ib('scroll','gold')}Nhiệm vụ</h3><div class="choices">${qs.map(q=>`<button class="ch qrow qdo" data-act="qDo" data-arg="${q.id}" style="${qpc(questGrade(q))}"><span class="ct">${q.kind==='den'?'Giao tận tay':'Lùng tìm mục tiêu'} · ${esc(q.text)}</span><span class="qmeta"><span class="qgr">${QGRADE[questGrade(q)]}</span>${costHTML(q.kind==='den'?1:2,0)}</span></button>`).join('')}</div>`;}
@@ -7121,10 +7616,11 @@ function vCombat(sc){
       else if(m==='bag'){h+=`<div class="skills">${cp.map(({p,i})=>`<button class="sk qk" data-act="cpill" data-arg="${i}"${nlOk(me,NL_PILL)?'':' disabled'} style="${pcs(p.q)}"${ta(pillTip(p.id,p.q)+'\nDùng trong trận tốn '+NL_PILL+' niệm lực')}><span class="el">${PILL[p.id].i}</span><span class="sn qt">${esc(PILL[p.id].n)}</span></button>`).join('')}${back}</div>${cp.length?'':'<p class="hint">Túi không có gì dùng được trong trận.</p>'}`;}
       else h+=`<div class="skills main4"><button class="sk" data-act="menu" data-arg="atk"><span class="cbi">${ic('sword')}</span><span class="sn">Tấn công</span></button><button class="sk" data-act="menu" data-arg="def"><span class="cbi">${ic('shield')}</span><span class="sn">Phòng thủ</span></button><button class="sk" data-act="menu" data-arg="bag"${cp.length?'':' disabled'}><span class="cbi">${ic('bag')}</span><span class="sn">Túi đồ<small>${cp.length} món · ${NL_PILL} niệm lực</small></span></button><button class="sk" data-act="skill" data-arg="_wait"${ta('Qua lượt: không làm gì, nhường lượt')}><span class="cbi">${ic('skip')}</span><span class="sn">Qua lượt</span></button></div>`;
     }
-  } else h+=`<p class="hint cwait">${sc.dodge?(sc.dodge.lit?'Lôi giáng! Chạm “Đỡ” đúng lúc vòng khép lại':'Đòn đánh tới! Chạm “Né” đúng lúc vòng khép lại'):sc.qte?'Chạm đúng lúc vạch vào vùng vàng':CFG.autoFight?'Đang tự đánh…':'…'}</p>`;
+  } else h+=`<p class="hint cwait">${sc.dodge?(sc.dodge.lit||sc.dodge.blk?'Chạm “Đỡ” đúng lúc vòng khép lại':'Đòn đánh tới! Chạm “Né” đúng lúc vòng khép lại'):sc.qte?'Chạm đúng lúc vạch vào vùng vàng':CFG.autoFight?'Đang tự đánh…':'…'}</p>`;
   h+='</div>';
   // né: phủ tối cả màn hình, nút né nằm trên cùng; nghỉ một nhịp ngắn rồi vòng mới thu lại
-  if(sc.dodge)h+=`<div class="dodge-ov" id="dodgeOv"><p>${sc.dodge.lit?'Lôi giáng!':'Đòn đánh tới!'}${sc.dodge.n>1?' · '+sc.dodge.n+' nhát':''}</p><div class="dg-wrap"><span class="dg-ring" style="animation-duration:${sc.dodge.T}s;animation-delay:${DG_LEAD}s;animation-iteration-count:${sc.dodge.n}"></span><button id="dodgeBtn" class="dodge2">${sc.dodge.lit?'Đỡ':'Né'}</button></div><small>Chờ vòng vàng thu lại, chạm đúng lúc nó khép vào nút</small></div>`;
+  if(sc.dodge)h+=`<div class="dodge-ov" id="dodgeOv"><p>${sc.dodge.lit?'Lôi giáng!':sc.dodge.blk?'Đỡ đòn!':'Đòn đánh tới!'}${sc.dodge.n>1?' · '+sc.dodge.n+' nhát':''}</p><div class="dg-wrap"><span class="dg-ring" style="animation-duration:${sc.dodge.T}s;animation-delay:${DG_LEAD}s;animation-iteration-count:${sc.dodge.n}"></span><button id="dodgeBtn" class="dodge2">${sc.dodge.lit||sc.dodge.blk?'Đỡ':'Né'}</button></div><small>Chờ vòng vàng thu lại, chạm đúng lúc nó khép vào nút</small></div>`;
+  if(sc.critQ)h+=`<div id="critq" class="qte critq"><b class="cq-t">Chí mạng!</b><div class="qbar"><i class="cqg"></i><span class="cqm"></span></div><p>Chạm khi vạch chạy vào vùng xanh. Trượt thì đòn vẫn trúng nhưng không chí mạng.</p></div>`;
   if(sc.qte)h+=`<div id="qte" class="qte"><div class="qbar"><i class="qg"></i><i class="qy"></i><span class="qm"></span></div><p>Chạm để tung chiêu</p></div>`;
   const sp=CFG.cspeed||1;
   // hàng nút ngoài: thiêu đốt thọ nguyên, thoát thân, nhận thua (chỉ khi đấu với người), rồi tự đánh, tốc độ, diễn biến
@@ -7153,8 +7649,14 @@ function combatFrame(now,dt){
   const sc=G.run&&G.run.scene;if(!sc||sc.type!=='combat')return;if(sc.fxq&&sc.fxq.length)fxDrain(sc);
   if(sc.done||UI.panel||UI.modal||document.hidden||now<(UI.fxHold||0))return;
   if(sc.dodge){
-    if(!UI.dg||UI.dg.id!==sc.dodge.id){UI.dg={id:sc.dodge.id,t0:now+DG_LEAD*1000,n:sc.dodge.n,T:sc.dodge.T*1000,offs:[],lit:sc.dodge.lit};}
+    if(!UI.dg||UI.dg.id!==sc.dodge.id){UI.dg={id:sc.dodge.id,t0:now+DG_LEAD*1000,n:sc.dodge.n,T:sc.dodge.T*1000,offs:[],lit:sc.dodge.lit,blk:sc.dodge.blk};}
     const d=UI.dg;if(now>d.t0+d.n*d.T+250){const o=[];for(let k=0;k<d.n;k++)o.push(d.offs[k]==null?null:d.offs[k]);UI.dg=null;dodgeResolve(o);after();}
+    return;
+  }
+  if(sc.critQ){
+    if(!UI.cq||UI.cq.id!==sc.critQ.id)UI.cq={id:sc.critQ.id,t0:now};
+    if(CFG.autoFight){UI.cq=null;critResolve(chance(.7));after();return;}
+    if(now>UI.cq.t0+CQ_T*2){UI.cq=null;critResolve(false);after();}
     return;
   }
   if(sc.qte){
@@ -7174,12 +7676,15 @@ function dodgePress(){
   const d=UI.dg;if(!d)return;const now=performance.now();if(now<d.t0)return;
   let k=Math.round((now-d.t0)/d.T)-1;k=clamp(k,0,d.n-1);
   if(d.pressed)return;d.pressed=1;
-  {const me=mainUnit(G.run.scene);const used=d.offs.filter(x=>x!=null).length;if(!d.lit&&me&&me.tl-used*TL_DODGE<TL_DODGE){const b=$('#dodgeBtn');if(b)b.textContent='Kiệt sức';return;}}
+  {const me=mainUnit(G.run.scene);const used=d.offs.filter(x=>x!=null).length;if(!d.lit&&!d.blk&&me&&me.tl-used*TL_DODGE<TL_DODGE){const b=$('#dodgeBtn');if(b)b.textContent='Kiệt sức';return;}}
   d.offs[k]=(now-(d.t0+(k+1)*d.T))/1000;
   const b=$('#dodgeBtn');if(b){b.classList.add('hit');const a=Math.abs(d.offs[k]);b.textContent=a<=0.09?'Chuẩn!':a<=0.25?'Khá':'Hụt';}
 }
+// thanh trượt chí mạng: vạch chạy qua lại (mỗi lượt đi về CQ_T ms), vùng xanh ở giữa rộng 18%
+const CQ_T=900,CQ_G=[0.41,0.59];
+function critPress(){const q=UI.cq;if(!q)return;const ph=((performance.now()-q.t0)%CQ_T)/CQ_T;const x=ph<0.5?ph*2:2-ph*2;UI.cq=null;critResolve(x>=CQ_G[0]&&x<=CQ_G[1]);after();}
 function qtePress(){const q=UI.qt;if(!q)return;const ph=((performance.now()-q.t0)/1200);const x=ph<0.5?ph*2:2-ph*2;UI.qt=null;qteResolve(qteMult(clamp(x,0,1)));after();}
-document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodgeOv')){e.preventDefault();dodgePress();}else if(e.target.closest('#qte')){e.preventDefault();qtePress();}},true);
+document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodgeOv')){e.preventDefault();dodgePress();}else if(e.target.closest('#critq')){e.preventDefault();critPress();}else if(e.target.closest('#qte')){e.preventDefault();qtePress();}},true);
 
 // ---------- chuẩn bị trước trận: xem hai phe, chỉnh chiêu, dùng đồ (không tốn niệm lực), rồi bấm Bắt đầu ----------
 {const _scU=startCombat;startCombat=function(spec,after){const res=_scU(spec,after);const sc=G.run&&G.run.scene;
@@ -7269,6 +7774,8 @@ function pChar(){
     b+=`<div class="basegrid">`;
     b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),kvRow('Mệnh cách',esc(tr.n),tr.d),
       kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
+      ttRow('Tiên thiên khí vận',(r.kv||[]).map(k=>TT_DEST[k]),'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.'),
+      ttRow('Tiên thiên thể chất',(r.the||[]).map(ttPhysOf),'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.'),
       kvRow('Tư chất',tc+' · '+tcName(tc),'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
       kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá'),kvRow('Khí vận',s.van,'Chí mạng, may mắn'),
       kvRow('Nhân quả',karmaName(r.karma)+' ('+r.karma+')','Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
@@ -7282,8 +7789,7 @@ function pChar(){
       kvRow('Tâm ma',r.tamma,'Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
       kvRow('Thần thức',s.than+' · tầm '+SENSE[r.realm]+' dặm','Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
       kvRow('Niệm lực',s.nl,'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.'),
-      kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.'),
-      kvRow('Cống hiến',r.ch||0,'Điểm cống hiến tông môn'),kvRow('Đã hạ',r.kills,'Số kẻ địch đã đánh bại')]);
+      kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.')]);
     b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<span class="lc-c"${ta('Lực chiến: tính từ chỉ số chiến đấu và trang bị')}>Lực chiến ${fmtN(lucChien())}</span><small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl two">${[
       kvRow('Khí huyết',r.hp+' / '+s.maxHp,'Về 0 là chết'),kvRow('Linh lực',r.mp+' / '+s.maxMp,'Thi triển pháp thuật'),
       kvRow('Công vật lý',s.atk,'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',s.matk,'Dùng cho pháp thuật'),
@@ -7639,6 +8145,10 @@ function tuSlotHTML(){const a=tuArt();const r=G.run;
    <small>Cách có: xuất thân gia truyền · bái nhập tông môn · bản chép tay ở tạp hóa · cao nhân truyền dạy · kỳ ngộ · tự ngộ (ngộ tính từ 14).</small><small>Trời không tuyệt đường người: chậm nhất ${y>0.05?'chừng '+numFx(Math.ceil(y*2)/2)+' năm nữa':'sắp tới'} sẽ gặp được người truyền pháp.</small></span></div>`;}
 // thẻ tâm pháp: tốc độ tu luyện, cảnh giới tối đa
 {const _at21=artTipH;artTipH=function(a,pot){const h=_at21(a,pot);if(!a||a.type!=='tp')return h;const i=h.lastIndexOf('</div></div>');return i<0?h:h.slice(0,i)+`<p class="tu-ln">Tốc độ tu luyện ×${numFx(TU_M[clamp(a.tier,0,6)])}${a.el!=='vo'&&G.run.root.els.includes(a.el)?' (hợp linh căn +10%)':''}</p>`+h.slice(i);};}
+
+// dòng khí vận, thể chất trong tab Căn cơ: mỗi mục một nhãn màu theo phẩm, chạm xem tác dụng
+function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="ttl">${L.map(d=>`<span class="ttc" style="--pc:${TT_COL[d.rank]}"${tah(`<div class="tt-it" style="--pc:${TT_COL[d.rank]}"><div><b>${esc(d.name)}</b><small>${TT_RANK[d.rank]}</small><p>${esc(d.description)}</p><p>${ttFxText(d).map(esc).join('<br>')}</p></div></div>`)}>${esc(d.name)}</span>`).join('')}</span>`:'<span class="hint">Không có</span>';
+  return kvRow(label,v,tip);}
 
 // ---------- màn ngoài: mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên ----------
 function vTitle(){

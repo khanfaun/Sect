@@ -1089,7 +1089,7 @@ function combatStep(dt){
 function runAct(sc,fn){
   try{fn();}
   finally{
-    if(sc.dodge||sc.qte)return; // còn chờ thao tác
+    if(sc.dodge||sc.qte||sc.critQ)return; // còn chờ thao tác
     sc.cur=null;sc.aiWait=null;checkEnd(sc);sc.hold=false;sc.rev++;
     syncMain(sc);
   }
@@ -1130,7 +1130,7 @@ function checkEnd(sc){
   if(!alive(sc,'B').length){sc.over='win';finishCombat(sc);}
 }
 function finishCombat(sc){
-  sc.done=true;sc.hold=true;sc.dodge=null;sc.qte=null;syncMain(sc);
+  sc.done=true;sc.hold=true;sc.dodge=null;sc.qte=null;sc.critQ=null;syncMain(sc);
   const r=G.run;
   // đồng đội: ghi lại khí huyết
   for(const u of sc.units)if(u.ally!=null){const p=(r.party||[]).find(x=>x.id===u.ally);if(p)p.hp=Math.max(0,u.hp);}
@@ -1141,7 +1141,7 @@ function finishCombat(sc){
     if(sc.after&&sc.after.nemesis)ach('baothu');}
 }
 // ---------- người chơi ra lệnh ----------
-function readyPlayer(sc){const u=sc&&sc.cur&&U_(sc,sc.cur);return u&&u.ctrl==='player'&&u.phase==='ready'&&!sc.dodge&&!sc.qte?u:null;}
+function readyPlayer(sc){const u=sc&&sc.cur&&U_(sc,sc.cur);return u&&u.ctrl==='player'&&u.phase==='ready'&&!sc.dodge&&!sc.qte&&!sc.critQ?u:null;}
 function pSkill(id){
   const r=G.run;if(id==='_atk')return {sk:BASIC,lv:1};if(id==='_guard')return {sk:GUARD_SK,lv:1};if(id==='_wait')return {sk:WAIT_SK,lv:1};if(id==='_block')return {sk:BLOCK_SK,lv:1};
   const own=r.skills.find(x=>x.id===id);return own?{sk:SK[id],lv:own.lv}:null;
@@ -1277,7 +1277,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         if(isP){mult*=elemMult(sk.el,t.el);if(f.bonusIf==='dot'&&(t.st.poison>0||t.st.burn>0))mult*=1.5;if(fx.execute&&t.hp<t.max*0.3)mult*=1+fx.execute/100;}
         else if(KHAC[u.el]===t.el)mult*=1.25;
         const magic=(sk.dt?sk.dt==='phep':(!isP&&(u.f==='quy'||u.f==='vat')));const av=magic?(u.matk||u.atk):u.atk;
-        const crit=chance(((u.crit||5)+(f.crit||0))/100);if(crit){mult*=Math.max(1.1,((u.critDmg||150)-(t.hoTam||0))/100);crits++;}
+        const crit=u._critF!=null?u._critF:chance(((u.crit||5)+(f.crit||0))/100);if(crit){mult*=Math.max(1.1,((u.critDmg||150)-(t.hoTam||0))/100);crits++;}
         let d=dmgCalc(av,u.st.rage,u.st.weak,t.def,t.st.vuln,f.p,mult,f.pierce);
         if(t.st.stance){if(!t._blk){if((t.tl==null?100:t.tl)>=TL_BLOCK){if(t.tl!=null)t.tl-=TL_BLOCK;t._blk=1;blk++;}else t._blk=2;}if(t._blk===1)d=Math.max(1,Math.round(d*(1-blockCut(u,t))));}
         d=absorb(t.st,d);t.hp-=d;total+=d;hits++;onHit(sc,u,t,d,crit,t._blk===1,sk);

@@ -1020,3 +1020,15 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 /* bảng tỉ lệ đột phá */
 .bt-sum{display:flex;gap:10px;margin:10px 0}.bt-sum>div{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center}.bt-sum small{display:block;color:var(--ink3);font-size:.75em}.bt-sum b{display:block;font-size:1.5em;font-family:var(--disp);margin:2px 0}
 .bt-parts>div{display:flex;justify-content:space-between;gap:10px;padding:5px 2px;border-bottom:1px dotted var(--line);font-size:.88em}.bt-parts>div span{color:var(--ink2)}.bt-parts .tot{border-bottom:0;font-weight:600}.bt-parts .tot span{color:var(--ink)}
+/* nhãn khí vận, thể chất tiên thiên */
+.ttl{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}.ttc{font-size:.82em;padding:2px 8px;border-radius:999px;border:1px solid color-mix(in srgb,var(--pc) 55%,transparent);color:var(--pc);background:color-mix(in srgb,var(--pc) 8%,transparent);white-space:nowrap;cursor:help}
+/* khung hội thoại địa điểm: thu gọn chỉ giữ diễn biến mới nhất, khung thấp lại */
+.pl-talkw.min .pl-talk{max-height:min(16vh,120px)}
+/* thanh trượt chí mạng */
+.critq .cq-t{display:block;font-family:var(--disp);font-size:1.4em;color:var(--seal);letter-spacing:.08em;margin-bottom:6px}
+.cqg{position:absolute;left:41%;width:18%;top:0;bottom:0;background:var(--jade);opacity:.55}
+.cqm{position:absolute;top:-2px;bottom:-2px;width:4px;background:var(--seal);animation:cqrun .9s linear infinite}@keyframes cqrun{0%{left:0}50%{left:calc(100% - 4px)}100%{left:0}}
+/* nút né, đỡ: nhún nhắc bấm trong lúc chờ vòng vàng (đúng 1 giây), vòng bắt đầu chạy thì thôi */
+.dodge2{animation:dgTap .25s ease-in-out 0s 4}
+.dodge2.hit{animation:none}
+@keyframes dgTap{0%,100%{transform:scale(1)}40%{transform:scale(.86);filter:brightness(1.25)}}

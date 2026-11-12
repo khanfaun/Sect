@@ -89,10 +89,11 @@ function vCombat(sc){
       else if(m==='bag'){h+=`<div class="skills">${cp.map(({p,i})=>`<button class="sk qk" data-act="cpill" data-arg="${i}"${nlOk(me,NL_PILL)?'':' disabled'} style="${pcs(p.q)}"${ta(pillTip(p.id,p.q)+'\nDùng trong trận tốn '+NL_PILL+' niệm lực')}><span class="el">${PILL[p.id].i}</span><span class="sn qt">${esc(PILL[p.id].n)}</span></button>`).join('')}${back}</div>${cp.length?'':'<p class="hint">Túi không có gì dùng được trong trận.</p>'}`;}
       else h+=`<div class="skills main4"><button class="sk" data-act="menu" data-arg="atk"><span class="cbi">${ic('sword')}</span><span class="sn">Tấn công</span></button><button class="sk" data-act="menu" data-arg="def"><span class="cbi">${ic('shield')}</span><span class="sn">Phòng thủ</span></button><button class="sk" data-act="menu" data-arg="bag"${cp.length?'':' disabled'}><span class="cbi">${ic('bag')}</span><span class="sn">Túi đồ<small>${cp.length} món · ${NL_PILL} niệm lực</small></span></button><button class="sk" data-act="skill" data-arg="_wait"${ta('Qua lượt: không làm gì, nhường lượt')}><span class="cbi">${ic('skip')}</span><span class="sn">Qua lượt</span></button></div>`;
     }
-  } else h+=`<p class="hint cwait">${sc.dodge?(sc.dodge.lit?'Lôi giáng! Chạm “Đỡ” đúng lúc vòng khép lại':'Đòn đánh tới! Chạm “Né” đúng lúc vòng khép lại'):sc.qte?'Chạm đúng lúc vạch vào vùng vàng':CFG.autoFight?'Đang tự đánh…':'…'}</p>`;
+  } else h+=`<p class="hint cwait">${sc.dodge?(sc.dodge.lit||sc.dodge.blk?'Chạm “Đỡ” đúng lúc vòng khép lại':'Đòn đánh tới! Chạm “Né” đúng lúc vòng khép lại'):sc.qte?'Chạm đúng lúc vạch vào vùng vàng':CFG.autoFight?'Đang tự đánh…':'…'}</p>`;
   h+='</div>';
   // né: phủ tối cả màn hình, nút né nằm trên cùng; nghỉ một nhịp ngắn rồi vòng mới thu lại
-  if(sc.dodge)h+=`<div class="dodge-ov" id="dodgeOv"><p>${sc.dodge.lit?'Lôi giáng!':'Đòn đánh tới!'}${sc.dodge.n>1?' · '+sc.dodge.n+' nhát':''}</p><div class="dg-wrap"><span class="dg-ring" style="animation-duration:${sc.dodge.T}s;animation-delay:${DG_LEAD}s;animation-iteration-count:${sc.dodge.n}"></span><button id="dodgeBtn" class="dodge2">${sc.dodge.lit?'Đỡ':'Né'}</button></div><small>Chờ vòng vàng thu lại, chạm đúng lúc nó khép vào nút</small></div>`;
+  if(sc.dodge)h+=`<div class="dodge-ov" id="dodgeOv"><p>${sc.dodge.lit?'Lôi giáng!':sc.dodge.blk?'Đỡ đòn!':'Đòn đánh tới!'}${sc.dodge.n>1?' · '+sc.dodge.n+' nhát':''}</p><div class="dg-wrap"><span class="dg-ring" style="animation-duration:${sc.dodge.T}s;animation-delay:${DG_LEAD}s;animation-iteration-count:${sc.dodge.n}"></span><button id="dodgeBtn" class="dodge2">${sc.dodge.lit||sc.dodge.blk?'Đỡ':'Né'}</button></div><small>Chờ vòng vàng thu lại, chạm đúng lúc nó khép vào nút</small></div>`;
+  if(sc.critQ)h+=`<div id="critq" class="qte critq"><b class="cq-t">Chí mạng!</b><div class="qbar"><i class="cqg"></i><span class="cqm"></span></div><p>Chạm khi vạch chạy vào vùng xanh. Trượt thì đòn vẫn trúng nhưng không chí mạng.</p></div>`;
   if(sc.qte)h+=`<div id="qte" class="qte"><div class="qbar"><i class="qg"></i><i class="qy"></i><span class="qm"></span></div><p>Chạm để tung chiêu</p></div>`;
   const sp=CFG.cspeed||1;
   // hàng nút ngoài: thiêu đốt thọ nguyên, thoát thân, nhận thua (chỉ khi đấu với người), rồi tự đánh, tốc độ, diễn biến
@@ -121,8 +122,14 @@ function combatFrame(now,dt){
   const sc=G.run&&G.run.scene;if(!sc||sc.type!=='combat')return;if(sc.fxq&&sc.fxq.length)fxDrain(sc);
   if(sc.done||UI.panel||UI.modal||document.hidden||now<(UI.fxHold||0))return;
   if(sc.dodge){
-    if(!UI.dg||UI.dg.id!==sc.dodge.id){UI.dg={id:sc.dodge.id,t0:now+DG_LEAD*1000,n:sc.dodge.n,T:sc.dodge.T*1000,offs:[],lit:sc.dodge.lit};}
+    if(!UI.dg||UI.dg.id!==sc.dodge.id){UI.dg={id:sc.dodge.id,t0:now+DG_LEAD*1000,n:sc.dodge.n,T:sc.dodge.T*1000,offs:[],lit:sc.dodge.lit,blk:sc.dodge.blk};}
     const d=UI.dg;if(now>d.t0+d.n*d.T+250){const o=[];for(let k=0;k<d.n;k++)o.push(d.offs[k]==null?null:d.offs[k]);UI.dg=null;dodgeResolve(o);after();}
+    return;
+  }
+  if(sc.critQ){
+    if(!UI.cq||UI.cq.id!==sc.critQ.id)UI.cq={id:sc.critQ.id,t0:now};
+    if(CFG.autoFight){UI.cq=null;critResolve(chance(.7));after();return;}
+    if(now>UI.cq.t0+CQ_T*2){UI.cq=null;critResolve(false);after();}
     return;
   }
   if(sc.qte){
@@ -142,12 +149,15 @@ function dodgePress(){
   const d=UI.dg;if(!d)return;const now=performance.now();if(now<d.t0)return;
   let k=Math.round((now-d.t0)/d.T)-1;k=clamp(k,0,d.n-1);
   if(d.pressed)return;d.pressed=1;
-  {const me=mainUnit(G.run.scene);const used=d.offs.filter(x=>x!=null).length;if(!d.lit&&me&&me.tl-used*TL_DODGE<TL_DODGE){const b=$('#dodgeBtn');if(b)b.textContent='Kiệt sức';return;}}
+  {const me=mainUnit(G.run.scene);const used=d.offs.filter(x=>x!=null).length;if(!d.lit&&!d.blk&&me&&me.tl-used*TL_DODGE<TL_DODGE){const b=$('#dodgeBtn');if(b)b.textContent='Kiệt sức';return;}}
   d.offs[k]=(now-(d.t0+(k+1)*d.T))/1000;
   const b=$('#dodgeBtn');if(b){b.classList.add('hit');const a=Math.abs(d.offs[k]);b.textContent=a<=0.09?'Chuẩn!':a<=0.25?'Khá':'Hụt';}
 }
+// thanh trượt chí mạng: vạch chạy qua lại (mỗi lượt đi về CQ_T ms), vùng xanh ở giữa rộng 18%
+const CQ_T=900,CQ_G=[0.41,0.59];
+function critPress(){const q=UI.cq;if(!q)return;const ph=((performance.now()-q.t0)%CQ_T)/CQ_T;const x=ph<0.5?ph*2:2-ph*2;UI.cq=null;critResolve(x>=CQ_G[0]&&x<=CQ_G[1]);after();}
 function qtePress(){const q=UI.qt;if(!q)return;const ph=((performance.now()-q.t0)/1200);const x=ph<0.5?ph*2:2-ph*2;UI.qt=null;qteResolve(qteMult(clamp(x,0,1)));after();}
-document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodgeOv')){e.preventDefault();dodgePress();}else if(e.target.closest('#qte')){e.preventDefault();qtePress();}},true);
+document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodgeOv')){e.preventDefault();dodgePress();}else if(e.target.closest('#critq')){e.preventDefault();critPress();}else if(e.target.closest('#qte')){e.preventDefault();qtePress();}},true);
 
 // ---------- chuẩn bị trước trận: xem hai phe, chỉnh chiêu, dùng đồ (không tốn niệm lực), rồi bấm Bắt đầu ----------
 {const _scU=startCombat;startCombat=function(spec,after){const res=_scU(spec,after);const sc=G.run&&G.run.scene;

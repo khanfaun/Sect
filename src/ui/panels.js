@@ -11,6 +11,8 @@ function pChar(){
     b+=`<div class="basegrid">`;
     b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),kvRow('Mệnh cách',esc(tr.n),tr.d),
       kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
+      ttRow('Tiên thiên khí vận',(r.kv||[]).map(k=>TT_DEST[k]),'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.'),
+      ttRow('Tiên thiên thể chất',(r.the||[]).map(ttPhysOf),'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.'),
       kvRow('Tư chất',tc+' · '+tcName(tc),'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
       kvRow('Ngộ tính',s.ngo,'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',s.tam,'Chống ảo cảnh, đột phá'),kvRow('Khí vận',s.van,'Chí mạng, may mắn'),
       kvRow('Nhân quả',karmaName(r.karma)+' ('+r.karma+')','Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
@@ -24,8 +26,7 @@ function pChar(){
       kvRow('Tâm ma',r.tamma,'Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
       kvRow('Thần thức',s.than+' · tầm '+SENSE[r.realm]+' dặm','Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
       kvRow('Niệm lực',s.nl,'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.'),
-      kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.'),
-      kvRow('Cống hiến',r.ch||0,'Điểm cống hiến tông môn'),kvRow('Đã hạ',r.kills,'Số kẻ địch đã đánh bại')]);
+      kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.')]);
     b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<span class="lc-c"${ta('Lực chiến: tính từ chỉ số chiến đấu và trang bị')}>Lực chiến ${fmtN(lucChien())}</span><small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl two">${[
       kvRow('Khí huyết',r.hp+' / '+s.maxHp,'Về 0 là chết'),kvRow('Linh lực',r.mp+' / '+s.maxMp,'Thi triển pháp thuật'),
       kvRow('Công vật lý',s.atk,'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',s.matk,'Dùng cho pháp thuật'),
@@ -381,3 +382,7 @@ function tuSlotHTML(){const a=tuArt();const r=G.run;
    <small>Cách có: xuất thân gia truyền · bái nhập tông môn · bản chép tay ở tạp hóa · cao nhân truyền dạy · kỳ ngộ · tự ngộ (ngộ tính từ 14).</small><small>Trời không tuyệt đường người: chậm nhất ${y>0.05?'chừng '+numFx(Math.ceil(y*2)/2)+' năm nữa':'sắp tới'} sẽ gặp được người truyền pháp.</small></span></div>`;}
 // thẻ tâm pháp: tốc độ tu luyện, cảnh giới tối đa
 {const _at21=artTipH;artTipH=function(a,pot){const h=_at21(a,pot);if(!a||a.type!=='tp')return h;const i=h.lastIndexOf('</div></div>');return i<0?h:h.slice(0,i)+`<p class="tu-ln">Tốc độ tu luyện ×${numFx(TU_M[clamp(a.tier,0,6)])}${a.el!=='vo'&&G.run.root.els.includes(a.el)?' (hợp linh căn +10%)':''}</p>`+h.slice(i);};}
+
+// dòng khí vận, thể chất trong tab Căn cơ: mỗi mục một nhãn màu theo phẩm, chạm xem tác dụng
+function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="ttl">${L.map(d=>`<span class="ttc" style="--pc:${TT_COL[d.rank]}"${tah(`<div class="tt-it" style="--pc:${TT_COL[d.rank]}"><div><b>${esc(d.name)}</b><small>${TT_RANK[d.rank]}</small><p>${esc(d.description)}</p><p>${ttFxText(d).map(esc).join('<br>')}</p></div></div>`)}>${esc(d.name)}</span>`).join('')}</span>`:'<span class="hint">Không có</span>';
+  return kvRow(label,v,tip);}
