@@ -27,8 +27,10 @@ function hudHTML(){
     <path class="hp ${hc}" d="M5 32A27 27 0 0 1 59 32" stroke-dasharray="${(HC*hp).toFixed(1)} ${HC.toFixed(1)}"/><path class="mp" d="M5 32A27 27 0 0 0 59 32" stroke-dasharray="${(HC*mp).toFixed(1)} ${HC.toFixed(1)}"/></svg>`;
   const tm=r.tamma;
   let h=`<div class="hud-top"><button class="hud-av hud-av2" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Khí huyết '+r.hp+' / '+s.maxHp+' (nửa trên)\nLinh lực '+r.mp+' / '+s.maxMp+' (nửa dưới)\nChạm để mở nhân vật')}>${ring}<span class="hud-avi">${av}</span></button>
-   <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small>${sectText()}</small><small class="${warn?'bad':''}"${ta('Tuổi / thọ nguyên '+s.life+(warn?'\nThọ nguyên sắp cạn!':''))}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm${hurt}</small></div>
-   <span class="hud-tm${tm>=60?' hi':tm>=30?' md':''}"${ta('Tâm ma '+tm+' / 100\nĐủ 100 sẽ phải đối mặt với chính mình')}>${ic('skull')}</span><span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span></div>
+   <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="${warn?'bad':''}"${ta('Tuổi / thọ nguyên '+s.life+(warn?'\nThọ nguyên sắp cạn!':''))}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm${hurt}</small></div>
+   <div class="hud-stats"><span class="hs lc"${ta('Lực chiến '+fmtN(lucChien())+'\nTính từ chỉ số chiến đấu và trang bị.')}>${ic('sword')}${fmtN(lucChien())}</span><span class="hs st"${ta('Linh thạch')}>${ic('gem')}${fmtN(r.st)}</span>
+    <span class="hs tu"${ta('Tốc độ tu luyện: ~'+tvPerSec().join('-')+' tu vi mỗi giây bế quan\nHên xui: mỗi lần bế quan nhận được trong khoảng này')}>${ic('seat')}${tvPerSec().join('-')}</span><span class="hs tm${tm>=60?' hi':''}"${ta('Tâm ma '+tm+' / 100\nĐủ 100 sẽ phải đối mặt với chính mình')}>${ic('skull')}${tm}</span>
+    <span class="hs dt"${ta('Đạo tâm\nChống ảo cảnh, giúp đột phá')}>${ic('lotus')}${s.tam}</span></div></div>
    <i class="hud-tv" style="width:${clamp(r.tv,0,100)}%"${ta('Tu vi '+Math.floor(r.tv)+'%')}></i>
    <div class="hud-clk2" id="clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])}>${clkStr(t)}</div>`;
   return h;
@@ -230,14 +232,14 @@ function modalHTML(){
   const m=UI.modal;if(!m)return '';
   if(m.k==='danger'){const n=nodeById(m.id);return `<div class="mbox"><h3>Tử địa</h3><p>${esc(n.name)}: ${esc(dangerWhy(n))} Với ${esc(REALM[G.run.realm])} của ngươi, Bước vào đó, sơ sẩy là hết kiếp này.</p><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="goSure" data-arg="${n.id}">Vẫn đi</button></div></div>`;}
   if(m.k==='note'){const n=nodeById(m.id);return `<div class="mbox"><h3>Ghi chú · ${esc(n.name)}</h3><p class="hint">Ghim chỉ để nhớ, không đổi đường đi. Để trống rồi lưu là gỡ ghim.</p><input id="noteIn" maxlength="80" value="${esc(noteOf(n.id))}" placeholder="vd: có động phủ, quay lại khi Trúc Cơ"><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="noteSave" data-arg="${n.id}">Lưu</button></div></div>`;}
-  if(m.k==='bq'){const I=bqInfo();const y=clamp(m.y||Math.min(1,I.maxY),0.25,I.maxY);m.y=y;const gain=bqRate()*y*(y<1?0.9:1);const risk=Math.round(bqRisk(y)*100);const cn=curNode();
+  if(m.k==='bq'){const I=bqInfo();const mx=Math.min(5,I.maxY);const y=clamp(m.y==null?Math.min(1,mx):m.y,0,mx);m.y=y;const cn=curNode();const B=bqBits(y,I);
     return `<div class="mbox bq">${sceneCv('bequan'+G.run.at,G.run.region,'dong','mart','nhan:0.5:0.5:0:bq')}<h3>Bế quan</h3>
-     <div class="kv"><div><span>Linh khí nơi này</span><b>${LK_N[lkOf(cn)]}${cn.dp?' · có động phủ':''}${G.bqRoom?' · tĩnh thất tông môn':''}</b></div><div><span>Tốc độ tu luyện</span><b>+${numVN(I.rate)}% mỗi năm</b></div><div><span>Thọ nguyên còn</span><b>${numVN(Math.max(0,I.left))} năm</b></div><div><span>Tới viên mãn cần</span><b>${I.full?'đã viên mãn':'chừng '+numVN(I.need)+' năm'}</b></div></div>
-     <label class="rng"><span>Thời gian: <b id="bqY">${durH(y*HY)}</b></span><input type="range" id="bqR" min="0.25" max="${I.maxY}" step="0.25" value="${y}"></label>
-     <div class="hbtns"><button data-act="bqSet" data-arg="0.25">3 tháng</button><button data-act="bqSet" data-arg="1">1 năm</button><button data-act="bqSet" data-arg="${Math.min(I.maxY,I.need)}"${I.full?' disabled':''}>Tới viên mãn</button></div>
-     <p class="hint" id="bqHint">Tu vi +${numVN(Math.min(100,gain))}%${risk?' · '+risk+'% bị quấy nhiễu giữa chừng':' · yên ổn'}. Xuất quan thì khí huyết, linh lực hồi đầy.</p>
+     <div class="kv"><div><span>Linh khí nơi này</span>${lkTag(cn)}</div><div><span>Tu vi nhận được</span><b class="tu-c" id="bqG">${B.g}</b></div><div><span>Thọ nguyên còn</span><b id="bqL" class="${B.lc}">${B.l}</b></div><div><span>Tới viên mãn cần</span><b id="bqN">${B.n}</b></div></div>
+     <label class="rng"><span>Thời gian: <b id="bqY">${y>0?durH(y*HY):'0 tháng'}</b></span><input type="range" id="bqR" min="0" max="${mx}" step="0.25" value="${y}"></label>
+     <div class="hbtns"><button data-act="bqSet" data-arg="0.25">3 tháng</button><button data-act="bqSet" data-arg="0.5"${mx<0.5?' disabled':''}>6 tháng</button><button data-act="bqSet" data-arg="1"${mx<1?' disabled':''}>1 năm</button><button data-act="bqSet" data-arg="${Math.min(mx,bqNeedY())}"${I.full?' disabled':''}>Tới viên mãn</button></div>
+     <p class="hint" id="bqHint">${B.h}</p>
      ${(()=>{const brk=canBreak();if(!brk)return '';const atDp=cn&&cn.dp;return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint">${atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>Đột phá</button></div>`;})()}
-     <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="bqGo">Nhập định</button></div></div>`;}
+     <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" id="bqGoB" data-act="bqGo"${y>0?'':' disabled'}>Nhập định</button></div></div>`;}
   if(m.k==='explore'&&SETTLE.includes(nodeById(G.run.at).type)){const n=nodeById(G.run.at);const X=townStats(n);const tb=UI.tab.ex||'L';const rows=L=>`<div class="kv">${L.map(x=>`<div><span>${esc(x[0])}</span><b>${esc(x[1])}</b></div>`).join('')}</div>`;
     return `<div class="mbox"><h3>${esc(n.name)}</h3>${tabsHTML('ex',[['L','Kiếm được · '+X.L.length],['M','Có thể gặp · '+(X.M.length+X.evs.length)]],tb)}
      ${tb==='L'?`<p class="hint">Những thứ chắc chắn có ở đây. Hàng trên kệ đổi theo tháng, không phải lúc nào cũng đủ.</p>${rows(X.L)}`:`<p class="hint">Chỉ gặp khi có duyên; thường là đồ tốt hơn hàng bày sẵn.</p>${rows(X.M)}${X.evs.length?`<h4 class="sgrp">Chuyện, người có thể gặp</h4><div class="foes">${X.evs.map(t=>`<span class="chip">${esc(t)}</span>`).join('')}</div>`:''}`}
@@ -260,3 +262,14 @@ function modalHTML(){
   if(m.k==='clog'){const sc=G.run.scene;return `<div class="mbox"><h3>Diễn biến trận</h3><div class="logl">${(sc.log||[]).slice().reverse().map(l=>`<p class="${l.c?'lg-'+l.c:''}">${esc(l.t)}</p>`).join('')}</div><div class="mb-f"><span class="grow"></span><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
   return '';
 }
+
+// ---------- bế quan: các con số đổi theo thanh trượt ----------
+function bqBits(y,I){I=I||bqInfo();const sp=bqSpan(y);const left=Math.max(0,I.left-y);const need=Math.max(0,bqNeedY()-y);const risk=Math.round(bqRisk(y)*100);
+  return {g:y>0?'~'+fmtN(sp[0])+'-'+fmtN(sp[1])+' tu vi':'0 tu vi',l:numVN(Math.floor(left*4)/4)+' năm',lc:left<=10?'lv-bad':left<=30?'lv-mid':'lv-ok',
+    n:I.full?'đã viên mãn':need<=0?'viên mãn':'chừng '+numVN(need)+' năm',h:(y>0?(risk?risk+'% bị quấy nhiễu giữa chừng':'Yên ổn')+'. ':'Chọn thời gian bế quan. ')+'Hên xui: nhận được trong khoảng trên. Xuất quan thì khí huyết, linh lực hồi đầy.'};}
+function bqUpd(y){const B=bqBits(y);const set=(id,t,c)=>{const e=document.getElementById(id);if(e){e.textContent=t;if(c!=null)e.className=c;}};
+  set('bqY',y>0?durH(y*HY):'0 tháng');set('bqG',B.g);set('bqL',B.l,B.lc);set('bqN',B.n);set('bqHint',B.h);const b=document.getElementById('bqGoB');if(b)b.disabled=!(y>0);}
+// linh khí: nhiều thì xanh dương kèm dấu ^ (rất nhiều thì ^^), ít thì dấu ngược màu vàng, quá ít thì đỏ
+function lkTag(n){const m=LK_M[lkOf(n)]*(n&&n.dp?1.15:1)*(G.bqRoom?1.5:1);const s=m>=2?2:m>=1.3?1:m>=0.9?0:m>=0.7?-1:-2;const t=LK_N[lkOf(n)]+(n&&n.dp?' · có động phủ':'')+(G.bqRoom?' · tĩnh thất tông môn':'');
+  const c=s>=1?'lk-up':s===0?'':s===-1?'lk-dn':'lk-bad';const k=s>=2?2:s===1?1:s===-1?1:s<=-2?2:0;
+  return `<b class="lk ${c}">${k?`<span class="lk-i">${Array(k).fill(ic(s>0?'up':'down')).join('')}</span>`:''}${t}</b>`;}

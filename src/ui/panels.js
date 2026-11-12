@@ -16,14 +16,14 @@ function pChar(){
       kvRow('Nhân quả',karmaName(r.karma)+' ('+r.karma+')','Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
     b+=sgBox('yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+Math.floor(r.tv)+'%'),
       `<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(r.tv,100,'tv')}<span class="hv">${Math.floor(r.tv)}%</span></div>`,
-      kvRow('Tốc độ tu','+'+numVN(bqRate())+'% mỗi năm','Tốc độ khi bế quan. Phụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và nơi bế quan'),
+      kvRow('Tốc độ tu','<span class="tu-c">~'+tvPerSec().join('-')+' tu vi/giây</span>','Tu vi nhận được mỗi giây khi bế quan ở nơi đang đứng. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.\nĐầy cảnh giới này cần '+fmtN(tvPts(r.realm))+' tu vi.'),
       kvRow('Đạo cơ',(r.dao||0)+' · '+QNAME[qOf(r.dao||0)],'Điểm đạo cơ quyết định phẩm chất khi đột phá.'+(qNext(r.dao||0)?'\nMốc kế tiếp: '+qNext(r.dao||0)+' điểm':'\nĐã đạt Thiên đạo')),
       kvRow('Tâm ma',r.tamma,'Đủ 100 phải đối mặt với chính mình',r.tamma>=60?'bad':''),
       kvRow('Thần thức',s.than+' · tầm '+SENSE[r.realm]+' dặm','Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
       kvRow('Niệm lực',s.nl,'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.'),
       kvRow('Đi lại',capS(moveText())+' · '+numVN(walkSpeed()*24)+' dặm/ngày','Tùy thân pháp, cảnh giới và phương tiện. Sắm phương tiện ở Trạm dịch.'),
       kvRow('Cống hiến',r.ch||0,'Điểm cống hiến tông môn'),kvRow('Đã hạ',r.kills,'Số kẻ địch đã đánh bại')]);
-    b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl two">${[
+    b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<span class="lc-c"${ta('Lực chiến: tính từ chỉ số chiến đấu và trang bị')}>Lực chiến ${fmtN(lucChien())}</span><small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl two">${[
       kvRow('Khí huyết',r.hp+' / '+s.maxHp,'Về 0 là chết'),kvRow('Linh lực',r.mp+' / '+s.maxMp,'Thi triển pháp thuật'),
       kvRow('Công vật lý',s.atk,'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',s.matk,'Dùng cho pháp thuật'),
       kvRow('Chí mạng',Math.round(s.crit)+'%','Tỉ lệ chí mạng'),kvRow('ST chí mạng',s.critDmg+'%','Sát thương khi chí mạng'),

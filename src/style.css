@@ -770,3 +770,22 @@ body *{font-weight:400!important}
 /* thanh tu vi trong tab căn cơ cùng kiểu */
 .hb.tv i{background:#3f9bff!important;box-shadow:0 0 6px #5fb0ff;animation:tvglow 2.6s ease-in-out infinite}
 #sheet{top:calc(env(safe-area-inset-top,0px) + var(--hudh,84px) + 40px)!important}
+/* ===== đợt 9 ===== */
+.clog{position:relative;padding-right:96px}
+.cspd{position:absolute;top:4px;right:4px;display:flex;gap:3px}
+.cspd button{min-width:28px;height:24px;padding:0 4px;border:1px solid var(--line);border-radius:var(--r);font-size:11px;color:var(--ink2);background:var(--paper)}
+.cspd button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.brow2 .bl{display:inline-grid;place-items:center;color:var(--ink3)}.brow2 .bl .ic{width:14px;height:14px}
+/* thẻ trạng thái: cụm chỉ số bên phải */
+.hud-stats{margin-left:auto;display:grid;grid-template-columns:auto auto;gap:3px 12px;align-content:center;justify-items:end}
+.hs{display:inline-flex;align-items:center;gap:4px;font-size:.84em;font-variant-numeric:tabular-nums;white-space:nowrap}.hs .ic{width:14px;height:14px}
+.hs.lc{color:#d9731a}.hs.st{color:var(--jade)}.hs.tu{color:#2f8f4e}.hs.tm{color:var(--vio)}.hs.tm.hi{color:var(--seal);animation:tmpulse 1.6s ease-in-out infinite}.hs.dt{color:var(--ink2)}
+.hud-tm,.hud-st{display:none}
+.lc-c{color:#d9731a!important}.tu-c{color:#2f8f4e!important}
+.cbstat summary .lc-c{margin-left:auto;font-size:.88em}.cbstat summary small{margin-left:12px}
+/* bế quan */
+#modal.still,#modal.still .mbox{animation:none!important}
+.lv-ok{color:#2f8f4e!important}.lv-mid{color:#c99412!important}.lv-bad{color:var(--seal)!important}
+.lk{display:inline-flex;align-items:center;gap:4px}.lk-i{display:inline-flex}.lk-i .ic{width:14px;height:14px;margin-right:-6px}.lk-i .ic:last-child{margin-right:0}
+.lk.lk-up{color:#2f74c0!important}.lk.lk-dn{color:#c99412!important}.lk.lk-bad{color:var(--seal)!important}
+.lk-i{flex-direction:column;line-height:0}.lk-i .ic{width:12px;height:12px;margin:0!important;stroke-width:2.4}.lk-i .ic+.ic{margin-top:-7px!important}

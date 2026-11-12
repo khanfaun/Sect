@@ -859,3 +859,26 @@ function foePtEnd(sc,u){const o=u.fpt&&u.fpt.undo;if(!o)return;u.atk=o.atk;u.mat
   if(u&&u._ult&&u.fpt&&sk&&sk.fx&&sk.fx.p){u._ult=0;cfx(sc,{k:'strike',el:u.fpt.el,n:sk.n});clog(sc,`${u.name} dồn hết thần uy vào một đòn: ${sk.n}!`,'en');
     sk=Object.assign({},sk,{fx:Object.assign({},sk.fx,{p:sk.fx.p*1.6})});const res=_rs7(sc,u,sk,lv,tg,qm,offs);foePtEnd(sc,u);return res;}
   return _rs7(sc,u,sk,lv,tg,qm,offs);};}
+
+// ================= ĐỢT 9: LỰC CHIẾN, TU VI TÍNH BẰNG ĐIỂM, BẾ QUAN HÊN XUI =================
+// Lực chiến = căn bậc hai của (sức đánh × sức chịu đòn) × hệ số tốc độ × 2.
+// Lấy căn bậc hai nên khí huyết gấp đôi thì lực chiến chỉ tăng khoảng 1,4 lần, không vọt lên vì máu nhiều.
+// Trang bị, công pháp đã nằm sẵn trong các chỉ số nên được tính luôn.
+function lcCalc(o){const atk=Math.max(o.atk||0,o.matk||0);
+  const off=atk*(1+(o.crit||0)/100*Math.max(0,(o.critDmg||150)-100)/100)*(1+((o.cx||10)-10)*0.01);
+  const surv=((o.maxHp||o.max||1)+0.3*(o.maxMp||0))*(1+Math.max(0,o.def||0)/40)*(1+(o.ne||0)*0.01)*(1+(o.hoTam||0)*0.005);
+  const spd=Math.max(0.6,1+(((o.tp||10)+(o.hoi||10))/2-10)*0.02);return Math.round(Math.sqrt(Math.max(0,off*surv))*spd*2);}
+function lucChien(){return lcCalc(S());}
+// Thang điểm tu vi: tu vi vẫn lưu theo %, đổi ra điểm để hiển thị. Đầy một cảnh giới = số năm bế quan chuẩn × 8640 giờ × 5 điểm.
+// Một giây đồng hồ trong game là một giờ, nên "tu vi/giây" là số điểm mỗi giờ bế quan.
+const TV_K=5,BQ_LO=0.6,BQ_HI=1.4;
+function tvPts(realm){return BQ_Y[clamp(realm,0,5)]*HY*TV_K;}
+// tu vi thực nhận khi bế quan còn nhân thêm hệ số tu luyện một lần nữa lúc cộng vào (luật cũ), nên con số hiển thị tính cả lần đó
+function bqReal(){return bqRate()*S().tvM;}
+function bqNeedY(){const r=G.run;return r.tv>=100?0:Math.max(0.25,Math.ceil((100-r.tv)/bqReal()*4)/4);}
+function tvPerSec(){const avg=bqReal()/100*tvPts(G.run.realm)/HY;return [Math.max(0,Math.floor(avg*BQ_LO)),Math.max(1,Math.ceil(avg*BQ_HI))];}
+function bqSpan(y){const r=G.run;const g=bqReal()*y*(y<1?0.9:1);const P=tvPts(r.realm)/100;
+  return y<=0?[0,0]:[Math.floor(Math.min(100-r.tv,g*BQ_LO)*P),Math.ceil(Math.min(100-r.tv,g*BQ_HI)*P)];}
+function fmtN(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+// mỗi lần bế quan rút một hệ số may rủi từ 0,6 tới 1,4: trung bình vẫn như cũ
+{const _bc9=bqCustom;bqCustom=function(y){const f=BQ_LO+Math.random()*(BQ_HI-BQ_LO);const _r=bqRate;bqRate=function(){return _r()*f;};try{return _bc9(y);}finally{bqRate=_r;}};}

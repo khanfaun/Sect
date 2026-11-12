@@ -37,7 +37,7 @@ function meCard(sc,u){
    <div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${esc(realmLabel())}</small></div>
     <div class="brow"${ta('Khí huyết')}><span class="bl">${ic('heart')}</span>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}<b>${Math.max(0,Math.round(u.hp))} / ${u.max}</b></div>
     <div class="brow2 mpnl"><span${ta('Linh lực '+Math.round(u.mp)+' / '+u.maxMp+'\nThi triển pháp thuật')}><span class="bl">${ic('drop')}</span>${cBar(u.mp,u.maxMp,'mp')}<b>${Math.round(u.mp)}</b></span><span${ta('Niệm lực '+Math.round(u.nl||0)+' / '+(u.maxNl||0)+'\nSức thần thức trong trận. Dùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.\nVào trận thì đầy.')}><span class="bl">${ic('brain')}</span>${cBar(u.nl||0,u.maxNl||1,'nl')}<b>${Math.round(u.nl||0)}</b></span></div>
-    <div class="brow2"><span${ta('Thể lực '+Math.round(u.tl)+'%\nNé tốn 25%, đỡ được đòn tốn 30%.\nHồi 20% mỗi khi về mốc đầu')}><i class="bt">Thể lực</i>${cBar(u.tl,100,'tl')}</span><span${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt, rồi hồi đầy.')}><i class="bt">Định lực</i>${cBar(dlOf(u),100,'dl')}</span></div>
+    <div class="brow2"><span${ta('Thể lực '+Math.round(u.tl)+'%\nNé tốn 25%, đỡ được đòn tốn 30%.\nHồi 20% mỗi khi về mốc đầu')}><span class="bl">${ic('run')}</span>${cBar(u.tl,100,'tl')}</span><span${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt, rồi hồi đầy.')}><span class="bl">${ic('lotus')}</span>${cBar(dlOf(u),100,'dl')}</span></div>
     ${stIcons(u.st)}</div></div>`;
 }
 // pháp tướng khổng lồ đứng sau lưng nhân vật trong khung cảnh
@@ -56,7 +56,7 @@ function vCombat(sc){
    <div class="cb-art" id="cbArt" data-nf="${foes.length}">${sceneCv('cb'+r.at+sc.en.n,r.region,n?n.type:'',"",figs.join(','))}${sc.pt?`<div class="pt-fig el-${sc.pt.el}"${ta(sc.pt.n)}>${ptFigSVG()}<b>${esc(sc.pt.n)}</b></div>`:''}</div>
    <div class="cb-ally">${meCard(sc,me)}${party.length?`<div class="cb-party">${party.map(u=>unitCard(sc,u,false,true)).join('')}</div>`:''}</div>`;
   const lg=sc.log.slice(-3);
-  h+=`<div class="clog" data-act="clog"${ta('Chạm để xem toàn bộ diễn biến')}>${lg.map((l,i)=>`<p class="${l.c?'lg-'+l.c:''} ${i<lg.length-1?'old':''}">${esc(l.t)}</p>`).join('')}</div>`;
+  h+=`<div class="clog" data-act="clog"${ta('Chạm để xem toàn bộ diễn biến')}><span class="cspd">${[1,2,3].map(n=>`<button class="${(CFG.cspeed||1)===n?'on':''}" data-act="cspd" data-arg="${n}"${ta('Tốc độ trận ×'+n)}>×${n}</button>`).join('')}</span>${lg.map((l,i)=>`<p class="${l.c?'lg-'+l.c:''} ${i<lg.length-1?'old':''}">${esc(l.t)}</p>`).join('')}</div>`;
   if(!sc.done&&injured()&&!sc.spar&&!sc.kiep)h+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   if(sc.done){
     const t={win:'Thắng trận',lose:'Bại trận',flee:'Thoát thân',dead:sc.kiep?'Ngươi tan biến trong lôi kiếp':'Ngươi đã ngã xuống'}[sc.over];
@@ -91,7 +91,7 @@ function vCombat(sc){
     bx+=`<span class="burnw">${pop}<button class="btn sm burn${UI.burnOpen?' on':''}" data-act="burnOpen"${bi.done||(readyPlayer(sc)&&readyPlayer(sc).dazed)?' disabled':''}>${ic('flame')} Thiêu đốt${bi.done?'':' · '+bi.y+' năm'}</button></span>`;}
   if(!(sc.boss||sc.kiep||sc.noFlee))bx+=`<button class="btn sm" data-act="flee"${rdy?'':' disabled'}${ta('Cả đội bỏ chạy\nThành công dựa vào thân pháp')}>${ic('run')} Thoát thân</button>`;
   if(fightsHuman(sc)&&!(sc.kiep||sc.spar||sc.en.n==='Tâm Ma'))bx+=`<button class="btn sm" data-act="yield"${rdy&&!injured()?'':' disabled'}${ta(injured()?'Đang mang thương, đối phương không tha: nhận thua cũng chết.':'Buông tay chịu thua.\nNgươi sẽ bị thương vài tháng và bị đối phương lục lấy một phần linh thạch, vài món đồ.')}>${ic('flag')} Nhận thua</button>`;
-  h+=`<div class="cb-bot cb-ext">${bx}<button class="btn sm${CFG.autoFight?' on':''}" data-act="autoFight"${ta('Tự đánh: máy tự chọn chiêu và tự né ở mức khá.\nTắt đi để tự tay điều khiển.')}>${ic('bolt')} Tự đánh</button><button class="btn sm" data-act="cspeed"${ta('Tốc độ trận')}>${ic('ff')} ×${sp}</button></div></section>`;
+  h+=`<div class="cb-bot cb-ext">${bx}<button class="btn sm${CFG.autoFight?' on':''}" data-act="autoFight"${ta('Tự đánh: máy tự chọn chiêu và tự né ở mức khá.\nTắt đi để tự tay điều khiển.')}>${ic('bolt')} Tự đánh</button></div></section>`;
   return h;
 }
 // máy đánh thay khi bật "Tự đánh"
@@ -139,9 +139,9 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodg
 
 // ---------- chuẩn bị trước trận: xem hai phe, chỉnh chiêu, dùng đồ (không tốn niệm lực), rồi bấm Bắt đầu ----------
 {const _scU=startCombat;startCombat=function(spec,after){const res=_scU(spec,after);const sc=G.run&&G.run.scene;
-  if(sc&&sc.type==='combat'&&!sc.kiep&&!CFG.autoFight&&!UI.noPrep)sc.prep=1;return res;};}
+  if(sc&&sc.type==='combat'&&!sc.kiep&&!UI.noPrep)sc.prep=1;return res;};}
 function prepUnitRow(u,me){const foe=u.side==='B';const sub=me?realmLabel():u.sub||(foe?'Đối thủ':'Đồng hành');
-  const st=me?[['Khí huyết',G.run.hp+' / '+S().maxHp],['Linh lực',G.run.mp+' / '+S().maxMp],['Niệm lực',S().nl]]:[['Khí huyết',Math.round(u.hp)+' / '+u.max],['Công',u.atk],['Thủ',u.def]];
+  const st=me?[['Lực chiến',`<b class="lc-c">${fmtN(lucChien())}</b>`],['Khí huyết',G.run.hp+' / '+S().maxHp],['Linh lực',G.run.mp+' / '+S().maxMp],['Niệm lực',S().nl],['Công',Math.max(S().atk,S().matk)],['Thủ',S().def],['Thân pháp',S().tp]]:[['Lực chiến',`<b class="lc-c">${fmtN(lcCalc(u))}</b>`],['Khí huyết',Math.round(u.hp)+' / '+u.max],['Công',Math.max(u.atk,u.matk||0)],['Thủ',u.def],['Thân pháp',u.tp],['Chí mạng',Math.round(u.crit)+'%']];
   return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><span class="pp-n">${esc(u.name)}</span><small>${elSeal(u.el||'vo')} ${esc(sub)}</small>
    <div class="pp-st">${st.map(([a,b])=>`<span><small>${a}</small>${b}</span>`).join('')}</div></div></div>`;}
 function vCbPrep(sc){const r=G.run;const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B');
