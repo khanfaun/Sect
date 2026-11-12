@@ -18,7 +18,7 @@ const CFG_DEF={gfx:'auto',fps:30,dpr:0,fx:true,clouds:true,daynight:true,anim:tr
   names:true,roads:true,grid:true,ents:true,ring:true,notes:true,terrain:true,
   font:'m',theme:'light',cspeed:1,autoFight:false,confirmDanger:true,clockIdle:true};
 let CFG=Object.assign({},CFG_DEF);
-function cfgLoad(){try{const o=JSON.parse(localStorage.getItem(CFG_KEY)||'null');if(o)CFG=Object.assign({},CFG_DEF,o);else{try{const t=localStorage.getItem('phusinh_theme');if(t)CFG.theme=t;}catch(e){}}}catch(e){}CFG.theme='light';cfgApply();}
+function cfgLoad(){try{const o=JSON.parse(localStorage.getItem(CFG_KEY)||'null');if(o)CFG=Object.assign({},CFG_DEF,o);else{try{const t=localStorage.getItem('phusinh_theme');if(t)CFG.theme=t;}catch(e){}}}catch(e){}CFG.theme='light';CFG.autoFight=false;CFG.cspeed=1;cfgApply();}
 function cfgSave(){try{localStorage.setItem(CFG_KEY,JSON.stringify(CFG));}catch(e){}}
 // mức đồ họa thực tế: 0 tiết kiệm, 1 cân bằng, 2 đẹp
 let GFX_AUTO=1;

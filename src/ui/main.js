@@ -371,3 +371,6 @@ function qpopFlush(){const L=G.qpop;if(!L||!L.length||document.querySelector('.q
   const d=document.createElement('div');d.className='qpop '+T[1];d.style.cssText=qpc(q.grade);
   d.innerHTML=`<b>${T[0]}</b><p>${esc(q.text)}</p>${q.ch&&q.ch.length?chipsHTML(q.ch):''}`;d.addEventListener('pointerdown',()=>{d.remove();qpopFlush();});
   app.appendChild(d);setTimeout(()=>{d.classList.add('out');setTimeout(()=>{d.remove();qpopFlush();},400);},2500);}
+// mỗi kiếp mới: tắt tự đánh, tốc độ trận và tốc độ bản đồ về ×1 (mở lại game cũng vậy, xem cfgLoad)
+function speedReset(){CFG.autoFight=false;CFG.cspeed=1;cfgSave();UI.speed=1;UI.paused=false;if(G.meta)syncDodge();}
+{const _nrU=newRun;newRun=function(c){const res=_nrU(c);speedReset();return res;};}
