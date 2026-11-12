@@ -40,11 +40,12 @@ function render(){
   const dl=document.getElementById('dlg');if(dl)dl.scrollTop=dl.scrollHeight;
   if(UI.plTop){UI.plTop=0;const pb=document.querySelector('#sheet .sc-b');if(pb)pb.scrollTop=0;}
 
+  qpopFlush();
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
 function mapTap(n,c){const r=G.run;if(!r||r.scene)return;UI.sel=n?n.id:null;UI.cell=n||c==null?null:(UI.cell===c?null:c);UI.cardMin=false;render();}
-function hexTip(c,x,y){const tip=$('#tip');const n=hexNode(c);const I=hexInfo(c);const shown=n&&!((CFG.hideT||{})[n.type]&&n.id!==G.run.at);if(!shown){hideTip();return;}
+function hexTip(c,x,y){const tip=$('#tip');const n=hexNode(c);const I=hexInfo(c);const shown=n&&!(CFG.hideT||{})[n.type];if(!shown){hideTip();return;}
   tip.textContent=n.name+(n.fog>=2||n.memory?'':'?')+' · '+TYPE_NAME[n.type]+'\n'+DTAG[dangerTag(n)]+'\n'+I.regName+(I.dist?' › '+I.dist:'');tip.hidden=false;tipEl=null;
   tip.className='';placeTip(x,y);}
 
@@ -107,7 +108,7 @@ const ACT={
   chTrade:()=>chTrade(),
   legT:t=>{const h=Object.assign({},CFG.hideT||{});if(h[t])delete h[t];else h[t]=1;cfgSet('hideT',h);},
   legE:t=>{const h=Object.assign({},CFG.hideE||{});if(h[t])delete h[t];else h[t]=1;cfgSet('hideE',h);},
-  legAll:()=>{const any=Object.keys(CFG.hideT||{}).length+Object.keys(CFG.hideE||{}).length>0;if(any){cfgSet('hideT',{});cfgSet('hideE',{});}else{const a={},b={};Object.keys(GLYPH).forEach(k=>{if(TYPE_NAME[k])a[k]=1;});Object.keys(ENT_T).forEach(k=>b[k]=1);cfgSet('hideT',a);cfgSet('hideE',b);}},
+  legAll:()=>{const any=Object.keys(CFG.hideT||{}).length+Object.keys(CFG.hideE||{}).length>0;if(any){cfgSet('hideT',{});cfgSet('hideE',{});}else{const a={},b={};Object.keys(GLYPH).forEach(k=>{if(TYPE_NAME[k])a[k]=1;});a._me=1;Object.keys(ENT_T).forEach(k=>b[k]=1);cfgSet('hideT',a);cfgSet('hideE',b);}},
   legendOpen:()=>{UI.panel='more';UI.tab.more='legend';},
   bagOpen:()=>{UI.panel='char';UI.tab.char='bag';UI.code=null;UI.msg=null;},
   hudBt:()=>{UI.modal=null;const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')placeAct('bt');},
@@ -124,6 +125,7 @@ const ACT={
   exGo:()=>{UI.modal=null;placeAct('explore');},
   evGo:i=>{const r=G.run,n=nodeById(r.scene.id);const id=n.evs&&n.evs.L[+i];if(!id)return;n.evs.L.splice(+i,1);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place')startEvent(id);},
   meet:id=>{const r=G.run,at=r.at;const e=W().ents.find(x=>String(x.id)===id);if(!e)return;meetEnt(e);if(G.run&&G.run.scene&&G.run.scene.type==='event')G.run.scene.back=at;else note('Họ lướt qua, chẳng để ý tới ngươi.');},
+  qDo:id=>{UI.modal={k:'qdo',id};},qDoGo:id=>{UI.modal=null;const q=G.run.quests.find(x=>x.id===id);UI.lastQ=q?(q.kind==='den'?'Giao tận tay: ':'Lùng tìm: ')+q.text:null;questDo(id);UI.plTop=1;},
   questGo:()=>{const n=nodeById(G.run.at);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place'&&!questExplore(n))note('Chưa thấy tung tích gì.');},
   sell:a=>{const [k,i]=a.split(':');sellItem(k,+i);},
   stage:id=>{UI.modal=null;stageGo(+id);},
@@ -354,3 +356,10 @@ function inkEl(){let d=document.getElementById('ink');if(!d){d=document.createEl
   return d;}
 function inkCover(done){const d=inkEl();void d.offsetWidth;d.className='on cover';setTimeout(()=>requestAnimationFrame(done),1600);}
 function inkReveal(){const d=document.getElementById('ink');requestAnimationFrame(()=>requestAnimationFrame(()=>{d.className='on reveal';}));setTimeout(()=>{if(d.className==='on reveal')d.className='';},1000);}
+
+// bảng thông báo nhiệm vụ: xong, thất bại, thất hứa. Tự tắt sau chừng 2,5 giây; chạm để tắt ngay.
+function qpopFlush(){const L=G.qpop;if(!L||!L.length||document.querySelector('.qpop'))return;const q=L.shift();const app=document.getElementById('app');if(!app)return;
+  const T={done:['Hoàn thành nhiệm vụ','ok'],fail:['Nhiệm vụ thất bại','bad'],late:['Thất hứa · quá hạn','bad']}[q.kind];
+  const d=document.createElement('div');d.className='qpop '+T[1];d.style.cssText=pcs(q.grade);
+  d.innerHTML=`<b>${T[0]}</b><p>${esc(q.text)}</p>${q.ch&&q.ch.length?chipsHTML(q.ch):''}`;d.addEventListener('pointerdown',()=>{d.remove();qpopFlush();});
+  app.appendChild(d);setTimeout(()=>{d.classList.add('out');setTimeout(()=>{d.remove();qpopFlush();},400);},2500);}

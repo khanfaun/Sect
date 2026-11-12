@@ -324,7 +324,7 @@ function chTrade(){const r=run2();if((r.ch||0)<15||r.pills.length>=S().pillMax)r
 // ----- lựa chọn có điều kiện: đủ thì sáng, thiếu thì mờ kèm lý do -----
 const STAT_N={ngo:'ngộ tính',tam:'đạo tâm',van:'khí vận',tp:'thân pháp',atk:'công',def:'thủ'};
 function needList(c){const r=G.run,s=S(),L=[];if(!c)return L;
-  if(c.cost&&c.cost.st){const v=Math.round(c.cost.st*SC[r.region]);L.push({ok:r.st>=v,t:'linh thạch ≥ '+v});}
+  if(c.cost&&c.cost.st){const v=Math.max(1,Math.round(c.cost.st*SC[r.region]));L.push({ok:r.st>=v,t:'linh thạch ≥ '+v});}
   if(c.cost&&c.cost.mp){const v=Math.round(s.maxMp*parseFloat(c.cost.mp)/100);L.push({ok:r.mp>=v,t:'linh lực ≥ '+v});}
   const n=c.need;if(n){
     if(n.realm!=null)L.push({ok:r.realm>=n.realm,t:'cần '+REALM[n.realm]});
@@ -964,14 +964,22 @@ function venueDo(v,id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')ret
     startCombat({cnt:o.id==='hotong'?2:1},{kind:'node'});const cs=G.run.scene;if(cs)cs.venueWin=g;return true;}
   if(o.spec)n.vsp.until=-1;
   if(g.info){if(v==='tea'&&id==='nghe'||v==='tuu'||v==='inn'){teaHouse(n);}else{for(let i=0;i<g.info;i++){const c=regionOf(r.region).nodes.filter(x=>x.fog===0);if(c.length){const x=pick(c);hearOf(x);sc.msg.push('Tiểu nhị chỉ đường tới '+x.name+'.');}}}}
-  const lead={tea:{nghe:'',hoi:'Tiểu nhị nhận tiền, ghé tai nói nhỏ.',co:'Ván cờ kéo dài tới khi trà nguội. Ông khách thua, cười khà, kể cho ngươi nghe chuyện đi đường.',tinh:'Ngươi ngồi yên, nhìn khói trà bay lên. Lòng lắng như mặt hồ.',doicau:'Ngươi viết vế đối. Lão tú tài đọc đi đọc lại, rồi vỗ đùi: “Hay!”'},
-    inn:{phong:'Phòng chật nhưng sạch, chăn có mùi nắng. Ngươi ngủ một giấc ngon.',thuong:'Tụ linh trận rì rầm suốt đêm. Sáng ra ngươi thấy tinh thần sảng khoái lạ thường.',an:'Cơm nóng, canh ngọt. Ăn xong thấy người khỏe ra.',chuong:'Chưởng quầy hạ giọng kể chuyện mấy vị khách lạ.'},
-    tuu:{chen:'Ba chén vào bụng, lòng nhẹ đi đôi chút.',moi:'Cả bàn nâng chén. Người nào cũng có một chuyện để kể.',dau:'Chén thứ mười hai, gã to con gục xuống bàn. Cả quán vỗ tay.',ca:'Khúc nhạc dứt, ngươi mới nhận ra mình đã ngồi rất lâu.'}}[v][id];
+  const LEAD={tea:{nghe:[''],hoi:['Tiểu nhị nhận tiền, ghé tai nói nhỏ.','Tiểu nhị đút tiền vào tay áo, kéo ngươi ra góc khuất.','“Khách quan hỏi đúng người rồi.” Tiểu nhị cười hề hề.'],
+      co:['Ván cờ kéo dài tới khi trà nguội. Ông khách thua, cười khà, kể cho ngươi nghe chuyện đi đường.','Hai bên giằng co từng nước. Cuối cùng ông khách buông quân, kể chuyện một chuyến vượt núi năm xưa.','Ông khách đi nước nào cũng chậm rãi. Thua rồi, ông ta chỉ cho ngươi mấy mẹo sống sót nơi hoang dã.'],
+      tinh:['Ngươi ngồi yên, nhìn khói trà bay lên. Lòng lắng như mặt hồ.','Tiếng ồn quanh quán dần xa. Chỉ còn hơi trà ấm trong tay.','Nắng xiên qua song cửa. Ngươi uống cạn chén, thấy lòng nhẹ hẳn.'],doicau:['Ngươi viết vế đối. Lão tú tài đọc đi đọc lại, rồi vỗ đùi: “Hay!”']},
+    inn:{phong:['Phòng chật nhưng sạch, chăn có mùi nắng. Ngươi ngủ một giấc ngon.','Đêm nay mưa rơi lộp độp trên mái. Ngươi ngủ say tới sáng.','Phòng cũ, giường kêu cót két. Nhưng mệt quá, ngươi vẫn ngủ một mạch.'],
+      thuong:['Tụ linh trận rì rầm suốt đêm. Sáng ra ngươi thấy tinh thần sảng khoái lạ thường.','Linh khí trong phòng đặc như sương. Ngươi ngủ mà như đang tĩnh tọa.','Hương trầm thoảng nhẹ, trận văn dưới sàn lấp lánh. Ngươi thức dậy, thân thể nhẹ bẫng.'],
+      an:['Cơm nóng, canh ngọt. Ăn xong thấy người khỏe ra.','Hôm nay quán có cá kho. Ngươi ăn hết hai bát.','Bánh bao nóng hổi, trà gừng cay cay. Người ấm hẳn lên.'],chuong:['Chưởng quầy hạ giọng kể chuyện mấy vị khách lạ.','Chưởng quầy lật sổ, chỉ vào vài cái tên lạ mới ghi tuần trước.','“Chuyện thì nhiều, khách quan muốn nghe chuyện gì?” Chưởng quầy rót thêm trà.']},
+    tuu:{chen:['Ba chén vào bụng, lòng nhẹ đi đôi chút.','Rượu nhạt mà cay. Bàn bên to tiếng, ngươi nghe được vài câu.','Chưởng quầy rót đầy chén, kể chuyện không ai hỏi.'],moi:['Cả bàn nâng chén. Người nào cũng có một chuyện để kể.','“Đạo hữu hào sảng!” Mấy tửu khách xúm lại, kể chuyện giang hồ tới khuya.','Vò rượu ngon vừa mở, cả quán quay sang. Ngươi làm quen thêm mấy gã giang hồ.'],
+      dau:['Chén thứ mười hai, gã to con gục xuống bàn. Cả quán vỗ tay.','Gã to con uống tới chén thứ chín thì lăn ra ngủ. Tiền cược về tay ngươi.','Hai bên uống tới khi trời sáng. Gã to con chịu thua, móc túi trả cược.'],
+      ca:['Khúc nhạc dứt, ngươi mới nhận ra mình đã ngồi rất lâu.','Ca kỹ hát một khúc biệt ly. Cả quán lặng đi.','Tiếng tì bà như mưa rơi trên lá chuối. Lòng ngươi dịu lại.']}};
+  sc.lastL=sc.lastL||{};const pool=(LEAD[v]&&LEAD[v][id])||[''];const cands=pool.filter(x=>x!==sc.lastL[v+id]);const lead=pick(cands.length?cands:pool);sc.lastL[v+id]=lead;
   if(lead)sc.msg.unshift(lead);
   if(g.hp>0)r.hp=Math.min(S().maxHp,r.hp+g.hp);if(g.mp>0)r.mp=Math.min(S().maxMp,r.mp+g.mp);if(g.hp>0)ch.push(chip('❤️','+'+g.hp,'Khí huyết','up'));
+  if(g.tamma<0&&r.tamma<=0)sc.msg.push('Lòng ngươi vốn đã yên, chẳng còn tâm ma nào để gột.');
   const e={};if(g.tamma)e.tamma=g.tamma;if(g.st)e.st=g.st;if(g.karma)e.karma=g.karma;if(g.tv)e.tv=g.tv;ch=ch.concat(applyE(e));
   if(g.ll){const d=llAdd(g.ll,null,true);llChipMerge(ch,d);}
-  if(!sc.msg.length)sc.msg=['Trà nhạt, chuyện cũng nhạt.'];sc.chips=ch;sc.venue=null;return true;}
+  if(!sc.msg.length)sc.msg=['Trà nhạt, chuyện cũng nhạt.'];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;return true;}
 // chuyện đặc biệt có đánh nhau: thắng thì nhận công
 {const _cc12b=combatContinue;combatContinue=function(){const sc0=G.run&&G.run.scene;const vw=sc0&&sc0.venueWin;const win=sc0&&sc0.over==='win';const res=_cc12b();
   if(vw&&win&&G.run&&G.run.scene){const ps=G.run.scene;const ch=applyE({st:vw.st||0,karma:vw.karma||0});ps.chips=(ps.chips||[]).concat(ch);}return res;};}
@@ -1031,3 +1039,43 @@ function questCancel(id){const r=G.run;const q=r.quests.find(x=>x.id===id&&x.sta
 {const _adv14=advanceTime;advanceTime=function(h){const r=G.run;if(r&&r.quests&&!r.qfix14){for(const q of r.quests)if(q.state==='open')q.due+=60*HD;r.qfix14=1;}return _adv14(h);};}
 // đi xe chuyến tới nơi cũng tính là đã tới
 {const _sg14=stageGo;stageGo=function(id){const r=G.run;const a=r&&r.at;_sg14(id);if(G.run&&G.run.at!==a)questArrive(G.run.at);};}
+
+{const _pa15=placeAct;placeAct=function(a){const sc=G.run&&G.run.scene;const res=_pa15(a);const s2=G.run&&G.run.scene;if(s2&&s2===sc)s2.seq=(s2.seq||0)+1;return res;};}
+
+// ================= ĐỢT 15: NHIỆM VỤ LÀM TẠI CHỖ, PHẦN THƯỞNG THEO PHẨM, THÔNG BÁO =================
+// Tới nơi không tự xong: vào địa điểm, mục "Nhiệm vụ" có việc riêng. Đưa tin thì giao tận tay; diệt yêu thì phải đánh.
+// Đánh thua hoặc bỏ chạy: nhiệm vụ thất bại. Quá hạn: thất hứa.
+// Phần thưởng: ít linh thạch (Dễ 3–5 ... Tử nạn 30–40), thêm đan dược, vật liệu, pháp bảo theo phẩm, và lịch luyện.
+const QST=[[3,5],[6,10],[12,18],[20,28],[30,40]];
+function questRewardGen(g,reg){const st=Math.round(ri(QST[g][0],QST[g][1])*(1+0.5*reg));const it=[];
+  if(g===0&&chance(.5))it.push({k:'pill',id:pick(['hoixuan','tukhi']),q:0});
+  if(g>=1)it.push({k:'pill',id:rollPill(),q:g>=3?1:0});
+  if(g>=2)it.push({k:'mat',m:pick(['thao','khoang']),n:ri(1,2)+g-2});
+  if(g>=3)it.push({k:'relic',tier:clamp(reg+(g>=4?1:0),0,4)});
+  if(g>=4)it.push({k:'pill',id:btPill(),q:1});
+  return {st,ll:3+g*3,it,v:2};}
+{const _ob15=openBoard;openBoard=function(n){_ob15(n);if(n&&n.board)for(const q of n.board.list)if(!q.reward||q.reward.v!==2){q.grade=questGrade(q);q.reward=questRewardGen(q.grade,G.run.region);}};}
+function questRewardOf(q){if(q.reward&&q.reward.v===2)return q.reward;return {st:Math.min(40,Math.max(3,Math.round((q.reward&&q.reward.st||10)*ECON))),ll:3+questGrade(q)*3,it:[],v:2};}
+function questRewardChips(q){const R0=questRewardOf(q);const L=[chip('💎','+'+R0.st,'Linh thạch','up'),chip('⚔','+'+Math.round(R0.ll/100*tvPts(G.run.realm))+' lịch luyện','Lịch luyện','up')];
+  for(const x of R0.it){if(x.k==='pill')L.push(chip(PILL[x.id].i,(x.q?PQ[x.q]+' ':'')+PILL[x.id].n,'Đan dược','item'));else if(x.k==='mat')L.push(chip(MAT[x.m].i,x.n+' '+MAT[x.m].n.toLowerCase(),'Vật liệu','item'));else if(x.k==='relic')L.push(chip('🏺','pháp bảo '+GRADE[x.tier].toLowerCase(),'Pháp bảo','item'));}
+  return L;}
+function questGive(q){const r=G.run;const R0=questRewardOf(q);const ch=[];r.st+=R0.st;ch.push(chip('💎','+'+R0.st,'Linh thạch','up'));
+  for(const x of R0.it){if(x.k==='pill'){const c=gainPill(x.id,x.q);if(c)ch.push(c);}else if(x.k==='mat'){run2().mats[x.m]=(run2().mats[x.m]||0)+x.n;ch.push(chip(MAT[x.m].i,'+'+x.n+' '+MAT[x.m].n.toLowerCase(),'Vật liệu','up'));}
+    else if(x.k==='relic'){const rel=genRelic(x.tier);r.relics.push(rel);clampHp();ch.push(chip('🏺',rel.name,relicTip(rel),'item'));}}
+  llChipMerge(ch,llAdd(R0.ll,null,true));applyE({karma:2});return ch;}
+function qPop(kind,q,ch){G.qpop=G.qpop||[];G.qpop.push({kind,text:q.text,grade:questGrade(q),ch:ch||[]});}
+// tới nơi: chỉ báo, không tự xong
+questArrive=function(id){const r=G.run;for(const q of r.quests)if(q.state==='open'&&q.node===id&&!q.arrNote){q.arrNote=1;note('Đã tới nơi của nhiệm vụ. Vào địa điểm, mục Nhiệm vụ.');}};
+// làm nhiệm vụ tại chỗ
+function questDo(id){const r=G.run,sc=r.scene;const q=r.quests.find(x=>x.id===id&&x.state==='open');if(!q||!sc||sc.type!=='place'||q.node!==sc.id)return false;
+  if(q.kind==='den'){advanceTime(1);if(!G.run)return true;q.state='done';const ch=questGive(q);log(`Xong việc: ${q.text}.`);pushNews('Xong việc: '+q.text,true);
+    sc.msg=[pick(['Người nhận mở thư, đọc xong thì thở phào, rút tiền công trả ngươi.','Món hàng tới tay người nhận nguyên vẹn. Họ cảm tạ rối rít.','Ngươi trao tận tay. Người nhận gật đầu, đưa tiền công cùng ít quà cảm tạ.'])];sc.chips=ch;sc.seq=(sc.seq||0)+1;qPop('done',q,ch);return true;}
+  advanceTime(2);if(!G.run||G.run.scene!==sc)return true;const n=nodeById(sc.id);
+  encounter({type:n.danger>=3?'elite':'combat'});r.scene.quest=q.id;r.scene.text='Ngươi lần theo dấu vết trong tờ cáo thị và tìm ra mục tiêu. '+r.scene.text;return true;}
+// thắng: xong (phần thưởng mới); thua hay chạy: thất bại
+questWin=function(qid){const r=G.run;const q=r.quests.find(x=>x.id===qid&&x.state==='open');if(!q)return [];q.state='done';log(`Xong việc: ${q.text}.`);const ch=questGive(q);qPop('done',q,ch);return ch;};
+{const _cc15=combatContinue;combatContinue=function(){const sc=G.run&&G.run.scene;const qid=sc&&sc.after&&sc.after.quest;const res=sc&&sc.over;
+  if(qid&&(res==='lose'||res==='flee')){const q=G.run.quests.find(x=>x.id===qid&&x.state==='open');if(q){q.state='fail';q.lost=1;G.run.karma=clamp(G.run.karma-2,-100,100);log('Thất bại: '+q.text);qPop('fail',q,[]);}}
+  return _cc15();};}
+// quá hạn: thất hứa
+{const _adv15=advanceTime;advanceTime=function(h){const r=G.run;const open=r&&r.quests?r.quests.filter(q=>q.state==='open'):[];const o=_adv15(h);if(G.run)for(const q of open)if(q.state==='fail'&&!q.dropped&&!q.lost&&!q.popd){q.popd=1;qPop('late',q,[]);}return o;};}

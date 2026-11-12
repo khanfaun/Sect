@@ -56,6 +56,7 @@ function botPlace(){
   const r=G.run,sc=r.scene,n=nodeById(sc.id);const acts=placeActs(n).filter(a=>!a.dis);const has=k=>acts.find(a=>a.a===k);
   r._pc=(r._pc||0)+1;if(r._pc>6){r._pc=0;leavePlace();return;}
   const s=S();
+  {const qq=r.quests.find(q=>q.state==='open'&&q.node===r.scene.id);if(qq&&r.hp>s.maxHp*0.5&&questDo(qq.id))return;}
   if(r._goal==='cross'&&has('cross')){r._goal=null;placeAct('cross');return;}
   if(r._goal==='boss'&&has('boss')){r._goal=null;placeAct('boss');return;}
   if(has('bt')){if(r.hp<s.maxHp*0.95&&has('heal')){placeAct('heal');return;}placeAct('bt');return;}
