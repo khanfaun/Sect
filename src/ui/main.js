@@ -271,13 +271,17 @@ document.addEventListener('input',e=>{if(e.target.id==='bqR'&&UI.modal&&UI.modal
 // ---------- chú thích ----------
 let tipT=null,tipEl=null;
 // đặt chú thích cạnh con trỏ; chạm mép phải/dưới thì lật sang phía bên kia
+// cảm ứng: đặt ngay phía trên đầu ngón tay (không che chỗ chạm), không đủ chỗ thì ngay phía dưới; căn giữa theo ngón tay
+function placeTipTouch(x,y){const tip=$('#tip');const tw=tip.offsetWidth,th=tip.offsetHeight,W=window.innerWidth,H=window.innerHeight;
+  let L=Math.max(8,Math.min(W-tw-8,x-tw/2)),T=y-th-22;if(T<8)T=Math.min(H-th-8,y+28);tip.style.left=L+'px';tip.style.top=T+'px';}
 function placeTip(x,y){const tip=$('#tip');const tw=tip.offsetWidth,th=tip.offsetHeight,W=window.innerWidth,H=window.innerHeight;
   let L=x+14,T=y+16;if(L+tw>W-6)L=x-tw-12;if(L<6)L=Math.max(6,Math.min(W-tw-6,x-tw/2));if(T+th>H-6)T=y-th-12;if(T<6)T=Math.max(6,Math.min(H-th-6,y+16));
   tip.style.left=L+'px';tip.style.top=T+'px';}
-function showTip(el,toggle,xy){
+function showTip(el,toggle,xy,touch){
   const tip=$('#tip');const txt=el.dataset.tip;if(!txt)return;
   if(toggle&&tipEl===el&&!tip.hidden){hideTip();return;}
   tipEl=el;if(el.dataset.tiph){tip.innerHTML=el.dataset.tiph;tip.className='rich';}else{tip.textContent=txt;tip.className='';}tip.hidden=false;
+  if(xy&&touch){placeTipTouch(xy[0],xy[1]);return;}
   if(xy){placeTip(xy[0],xy[1]);return;}
   // chạm (không có con trỏ): đặt trên phần tử, không đủ chỗ thì xuống dưới
   const r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;
@@ -293,11 +297,13 @@ document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||!tipEl)r
 let tipTouch=null,tipTapAt=0;
 document.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;clearTimeout(tipT);const t=e.target.closest('[data-tip]');
   if(!e.target.closest('#tip')&&!t)hideTip();tipTouch={x:e.clientX,y:e.clientY,t:performance.now(),el:t};if(!t)return;
-  if(t.closest('[data-act]'))tipT=setTimeout(()=>{UI.suppress=true;showTip(t);tipTouch=null;},350);},true);
+  const ax=e.clientX,ay=e.clientY;if(tipActOf(t))tipT=setTimeout(()=>{UI.suppress=true;showTip(t,false,[ax,ay],1);tipTouch=null;},350);},true);
 document.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'||!tipTouch)return;if(Math.hypot(e.clientX-tipTouch.x,e.clientY-tipTouch.y)>12){clearTimeout(tipT);tipTouch=null;}},true);
 document.addEventListener('pointercancel',()=>{clearTimeout(tipT);tipTouch=null;},true);
 document.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;clearTimeout(tipT);const T=tipTouch;tipTouch=null;if(!T||!T.el)return;
-  if(T.el.closest('[data-act]'))return;if(performance.now()-T.t>800)return;tipTapAt=performance.now();showTip(T.el,true);},true);
+  if(tipActOf(T.el))return;if(performance.now()-T.t>800)return;tipTapAt=performance.now();showTip(T.el,true,[e.clientX,e.clientY],1);},true);
+// phần tử có hành động thật (không bị tắt) thì chạm là bấm, giữ mới xem chú thích; ô khóa, nút tắt: chạm là xem
+function tipActOf(t){const a=t.closest('[data-act]');return a&&!a.disabled&&!a.classList.contains('lock')?a:null;}
 document.addEventListener('scroll',()=>{if(tipEl)hideTip();},{passive:true,capture:true});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(UI.modal)UI.modal=null;else if(UI.panel)UI.panel=null;else return;render();}});
 
