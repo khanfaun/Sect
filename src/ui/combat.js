@@ -36,8 +36,7 @@ function meCard(sc,u){
    <button class="ult-av ${st}${ok?' ok':''}" data-act="ult"${ok?'':' aria-disabled="true"'}${ta(tip)}>${ring}${sc.pt?'<i class="flame"></i><i class="flame f2"></i>':''}<span class="ult-in">${uAvatar(u)}</span>${phBadge(u)}</button>
    <div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${esc(realmLabel())}</small></div>
     <div class="brow"${ta('Khí huyết')}><span class="bl">${ic('heart')}</span>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}<b>${Math.max(0,Math.round(u.hp))} / ${u.max}</b></div>
-    <div class="brow"${ta('Linh lực')}><span class="bl">${ic('drop')}</span>${cBar(u.mp,u.maxMp,'mp')}<b>${Math.round(u.mp)} / ${u.maxMp}</b></div>
-    <div class="brow"${ta('Niệm lực: sức thần thức trong trận\nDùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.\nVào trận thì đầy.')}><span class="bl">${ic('eye')}</span>${cBar(u.nl||0,u.maxNl||1,'nl')}<b>${Math.round(u.nl||0)} / ${u.maxNl||0}</b></div>
+    <div class="brow2 mpnl"><span${ta('Linh lực '+Math.round(u.mp)+' / '+u.maxMp+'\nThi triển pháp thuật')}><span class="bl">${ic('drop')}</span>${cBar(u.mp,u.maxMp,'mp')}<b>${Math.round(u.mp)}</b></span><span${ta('Niệm lực '+Math.round(u.nl||0)+' / '+(u.maxNl||0)+'\nSức thần thức trong trận. Dùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.\nVào trận thì đầy.')}><span class="bl">${ic('brain')}</span>${cBar(u.nl||0,u.maxNl||1,'nl')}<b>${Math.round(u.nl||0)}</b></span></div>
     <div class="brow2"><span${ta('Thể lực '+Math.round(u.tl)+'%\nNé tốn 25%, đỡ được đòn tốn 30%.\nHồi 20% mỗi khi về mốc đầu')}><i class="bt">Thể lực</i>${cBar(u.tl,100,'tl')}</span><span${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt, rồi hồi đầy.')}><i class="bt">Định lực</i>${cBar(dlOf(u),100,'dl')}</span></div>
     ${stIcons(u.st)}</div></div>`;
 }

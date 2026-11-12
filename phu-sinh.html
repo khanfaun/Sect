@@ -752,6 +752,34 @@ body *{font-weight:400!important}
 .pp-kn{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}.pp-kn>div{min-width:0}.pp-kn small{display:block;font-size:.76em;color:var(--ink3)}.pp-kn span{display:block;font-size:.9em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pp-act{display:flex;gap:8px;margin:14px 0 4px}.pp-act .btn{flex:1}
 .cbprep .sc-f .btn.big{min-width:60%}
+/* ===== đợt 8: không xoay vòng thần lực, vòng né dày hơn ===== */
+.tl-ring{animation:none!important;transform:rotate(-90deg)!important}.flame{animation:none!important}
+.dg-ring{border-width:6px}
+.brow2.mpnl{display:grid;grid-template-columns:1fr 1fr;gap:10px}.brow2.mpnl>span{display:flex;align-items:center;gap:5px;min-width:0}.brow2.mpnl .cbar{flex:1}.brow2.mpnl b{font-size:.8em;min-width:2em;text-align:right;font-variant-numeric:tabular-nums}
+/* ===== thẻ trạng thái mới ===== */
+.hud{padding:8px 12px 10px;overflow:visible}
+.hud-top{cursor:default;gap:12px}
+.hud-av2{position:relative;width:60px;height:60px;flex:none;padding:0;border:0!important;background:none!important;border-radius:50%}
+.hud-ring{position:absolute;inset:0;width:100%;height:100%}
+.hud-ring path{fill:none;stroke-width:3.5;stroke-linecap:round}.hud-ring .bg{stroke:color-mix(in srgb,var(--ink) 12%,transparent)}
+.hud-ring .hp.ok{stroke:#3f8f5c}.hud-ring .hp.mid{stroke:#d1a020}.hud-ring .hp.low{stroke:#c0392b}.hud-ring .mp{stroke:#4a7fb0}
+.hud-ring path.hp,.hud-ring path.mp{transition:stroke-dasharray .6s var(--ease)}
+.hud-avi{position:absolute;inset:7px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:var(--paper2)}
+.hud-avi .av-txt{font-size:1.25em}
+.hud-id{line-height:1.3}.hud-id .nm{font-size:1.05em}.hud-id .rl{font-size:.82em;color:var(--ink2)}
+.hud-id small{display:block;font-size:.78em;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hud-tm{display:grid;place-items:center;width:28px;height:28px;color:var(--ink3);margin-left:auto}.hud-tm .ic{width:18px;height:18px}
+.hud-tm.md{color:var(--vio)}.hud-tm.hi{color:var(--seal);animation:tmpulse 1.6s ease-in-out infinite}@keyframes tmpulse{50%{opacity:.45}}
+.hud-st{margin:0 2px 0 0}
+.hud-tv{position:absolute;left:0;bottom:-1px;height:2px;background:#3f9bff;border-radius:0 2px 2px 0;box-shadow:0 0 6px #3f9bff;animation:tvglow 2.6s ease-in-out infinite;transition:width .8s var(--ease)}
+@keyframes tvglow{0%,100%{opacity:1;box-shadow:0 0 7px #5fb0ff}50%{opacity:.55;box-shadow:0 0 2px #5fb0ff}}
+.hud-clk2{position:absolute;left:50%;top:calc(100% + 8px);transform:translateX(-50%);white-space:nowrap;font-size:.8em;letter-spacing:.06em;color:#fbf6ea;text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 10px rgba(0,0,0,.35);pointer-events:auto}
+.hud-clk2 *{color:inherit!important}
+.hud-body,.hud-tg{display:none!important}
+.mleft,.mright{top:calc(var(--hudh,84px) + 34px)}
+/* thanh tu vi trong tab căn cơ cùng kiểu */
+.hb.tv i{background:#3f9bff!important;box-shadow:0 0 6px #5fb0ff;animation:tvglow 2.6s ease-in-out infinite}
+#sheet{top:calc(env(safe-area-inset-top,0px) + var(--hudh,84px) + 40px)!important}
 
 </style>
 </head>
@@ -5402,18 +5430,16 @@ function hudHTML(){
   const n=curNode();const atDp=n&&n.dp&&!r.moving;const brk=canBreak();const bqNo=bqCan();
   const hurt=wounds().length?' · <b class="bad">'+esc(WOUND[wounds()[0].k].n)+(wounds().length>1?' +'+(wounds().length-1):'')+'</b>':r.hp<s.maxHp*0.35?' · <b class="bad">Khí huyết cạn</b>':'';
   const av=assetImg('hero','me',`<span class="av-txt">${esc((r.ten.split(' ').pop()||'?')[0])}</span>`);
-  let h=`<div class="hud-top"><button class="hud-av" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Nhân vật: căn cơ, túi đồ, sở học, kỹ năng')}>${av}</button>
-   <div class="hud-id" data-act="hud"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="hud-clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])} id="clk">${clkStr(t)}</small><small>${sectText()}</small></div>
-   ${hudIsOpen()?'':`<span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span>`}<span class="hud-tg" data-act="hud">${ic(hudIsOpen()?'up':'down')}</span></div>`;
-  if(hudIsOpen()){
-    h+=`<div class="hud-body">${row('Tu vi',r.tv,100,'tv',Math.floor(r.tv)+'%','Đủ 100% thì có thể đột phá ở nơi có động phủ')}
-     ${row('Khí huyết',r.hp,s.maxHp,'hp',r.hp+' / '+s.maxHp,'Về 0 là chết')}
-     ${row('Linh lực',r.mp,s.maxMp,'mp',r.mp+' / '+s.maxMp,'Dùng để thi triển pháp thuật')}
-     ${row('Thọ',r.age,s.life,warn?'life warn':'life',Math.floor(r.age)+' / '+s.life,'Tuổi / thọ nguyên. Đột phá để sống lâu hơn.'+(warn?'\nThọ nguyên sắp cạn!':''))}
-     ${row('Tâm ma',r.tamma,100,r.tamma>=60?'tm warn':'tm',r.tamma+' / 100','Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình. Bế quan, Định Thần Đan giúp giảm.')}
-     <div class="hline"><span class="hn">${sib('Linh thạch')}Linh thạch</span>${stoneHTML(r.st)}${hurt}<span class="grow"></span><small class="hint"${ta('Tuổi hiện tại và số năm thọ nguyên còn lại')}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm</small></div>
-     </div>`;
-  }
+  // khung tròn quanh ảnh: nửa trên khí huyết (xanh, vàng, đỏ theo %), nửa dưới linh lực
+  const R=27,HC=Math.PI*R,hp=clamp(r.hp/Math.max(1,s.maxHp),0,1),mp=clamp(r.mp/Math.max(1,s.maxMp),0,1);const hc=hp>0.5?'ok':hp>0.2?'mid':'low';
+  const ring=`<svg class="hud-ring" viewBox="0 0 64 64"><path class="bg" d="M5 32A27 27 0 0 1 59 32"/><path class="bg" d="M5 32A27 27 0 0 0 59 32"/>
+    <path class="hp ${hc}" d="M5 32A27 27 0 0 1 59 32" stroke-dasharray="${(HC*hp).toFixed(1)} ${HC.toFixed(1)}"/><path class="mp" d="M5 32A27 27 0 0 0 59 32" stroke-dasharray="${(HC*mp).toFixed(1)} ${HC.toFixed(1)}"/></svg>`;
+  const tm=r.tamma;
+  let h=`<div class="hud-top"><button class="hud-av hud-av2" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Khí huyết '+r.hp+' / '+s.maxHp+' (nửa trên)\nLinh lực '+r.mp+' / '+s.maxMp+' (nửa dưới)\nChạm để mở nhân vật')}>${ring}<span class="hud-avi">${av}</span></button>
+   <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small>${sectText()}</small><small class="${warn?'bad':''}"${ta('Tuổi / thọ nguyên '+s.life+(warn?'\nThọ nguyên sắp cạn!':''))}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm${hurt}</small></div>
+   <span class="hud-tm${tm>=60?' hi':tm>=30?' md':''}"${ta('Tâm ma '+tm+' / 100\nĐủ 100 sẽ phải đối mặt với chính mình')}>${ic('skull')}</span><span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span></div>
+   <i class="hud-tv" style="width:${clamp(r.tv,0,100)}%"${ta('Tu vi '+Math.floor(r.tv)+'%')}></i>
+   <div class="hud-clk2" id="clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])}>${clkStr(t)}</div>`;
   return h;
 }
 function statusList(){const r=G.run,s=S(),w=W();const L=[];
@@ -5682,8 +5708,7 @@ function meCard(sc,u){
    <button class="ult-av ${st}${ok?' ok':''}" data-act="ult"${ok?'':' aria-disabled="true"'}${ta(tip)}>${ring}${sc.pt?'<i class="flame"></i><i class="flame f2"></i>':''}<span class="ult-in">${uAvatar(u)}</span>${phBadge(u)}</button>
    <div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${esc(realmLabel())}</small></div>
     <div class="brow"${ta('Khí huyết')}><span class="bl">${ic('heart')}</span>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}<b>${Math.max(0,Math.round(u.hp))} / ${u.max}</b></div>
-    <div class="brow"${ta('Linh lực')}><span class="bl">${ic('drop')}</span>${cBar(u.mp,u.maxMp,'mp')}<b>${Math.round(u.mp)} / ${u.maxMp}</b></div>
-    <div class="brow"${ta('Niệm lực: sức thần thức trong trận\nDùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.\nVào trận thì đầy.')}><span class="bl">${ic('eye')}</span>${cBar(u.nl||0,u.maxNl||1,'nl')}<b>${Math.round(u.nl||0)} / ${u.maxNl||0}</b></div>
+    <div class="brow2 mpnl"><span${ta('Linh lực '+Math.round(u.mp)+' / '+u.maxMp+'\nThi triển pháp thuật')}><span class="bl">${ic('drop')}</span>${cBar(u.mp,u.maxMp,'mp')}<b>${Math.round(u.mp)}</b></span><span${ta('Niệm lực '+Math.round(u.nl||0)+' / '+(u.maxNl||0)+'\nSức thần thức trong trận. Dùng vật phẩm tốn '+NL_PILL+', tế pháp bảo tốn '+NL_DD+', đòn thần thức tốn '+NL_MIND+'.\nVào trận thì đầy.')}><span class="bl">${ic('brain')}</span>${cBar(u.nl||0,u.maxNl||1,'nl')}<b>${Math.round(u.nl||0)}</b></span></div>
     <div class="brow2"><span${ta('Thể lực '+Math.round(u.tl)+'%\nNé tốn 25%, đỡ được đòn tốn 30%.\nHồi 20% mỗi khi về mốc đầu')}><i class="bt">Thể lực</i>${cBar(u.tl,100,'tl')}</span><span${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt, rồi hồi đầy.')}><i class="bt">Định lực</i>${cBar(dlOf(u),100,'dl')}</span></div>
     ${stIcons(u.st)}</div></div>`;
 }

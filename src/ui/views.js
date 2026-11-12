@@ -21,18 +21,16 @@ function hudHTML(){
   const n=curNode();const atDp=n&&n.dp&&!r.moving;const brk=canBreak();const bqNo=bqCan();
   const hurt=wounds().length?' · <b class="bad">'+esc(WOUND[wounds()[0].k].n)+(wounds().length>1?' +'+(wounds().length-1):'')+'</b>':r.hp<s.maxHp*0.35?' · <b class="bad">Khí huyết cạn</b>':'';
   const av=assetImg('hero','me',`<span class="av-txt">${esc((r.ten.split(' ').pop()||'?')[0])}</span>`);
-  let h=`<div class="hud-top"><button class="hud-av" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Nhân vật: căn cơ, túi đồ, sở học, kỹ năng')}>${av}</button>
-   <div class="hud-id" data-act="hud"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="hud-clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])} id="clk">${clkStr(t)}</small><small>${sectText()}</small></div>
-   ${hudIsOpen()?'':`<span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span>`}<span class="hud-tg" data-act="hud">${ic(hudIsOpen()?'up':'down')}</span></div>`;
-  if(hudIsOpen()){
-    h+=`<div class="hud-body">${row('Tu vi',r.tv,100,'tv',Math.floor(r.tv)+'%','Đủ 100% thì có thể đột phá ở nơi có động phủ')}
-     ${row('Khí huyết',r.hp,s.maxHp,'hp',r.hp+' / '+s.maxHp,'Về 0 là chết')}
-     ${row('Linh lực',r.mp,s.maxMp,'mp',r.mp+' / '+s.maxMp,'Dùng để thi triển pháp thuật')}
-     ${row('Thọ',r.age,s.life,warn?'life warn':'life',Math.floor(r.age)+' / '+s.life,'Tuổi / thọ nguyên. Đột phá để sống lâu hơn.'+(warn?'\nThọ nguyên sắp cạn!':''))}
-     ${row('Tâm ma',r.tamma,100,r.tamma>=60?'tm warn':'tm',r.tamma+' / 100','Tâm ma\nĐủ 100 sẽ phải đối mặt với chính mình. Bế quan, Định Thần Đan giúp giảm.')}
-     <div class="hline"><span class="hn">${sib('Linh thạch')}Linh thạch</span>${stoneHTML(r.st)}${hurt}<span class="grow"></span><small class="hint"${ta('Tuổi hiện tại và số năm thọ nguyên còn lại')}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm</small></div>
-     </div>`;
-  }
+  // khung tròn quanh ảnh: nửa trên khí huyết (xanh, vàng, đỏ theo %), nửa dưới linh lực
+  const R=27,HC=Math.PI*R,hp=clamp(r.hp/Math.max(1,s.maxHp),0,1),mp=clamp(r.mp/Math.max(1,s.maxMp),0,1);const hc=hp>0.5?'ok':hp>0.2?'mid':'low';
+  const ring=`<svg class="hud-ring" viewBox="0 0 64 64"><path class="bg" d="M5 32A27 27 0 0 1 59 32"/><path class="bg" d="M5 32A27 27 0 0 0 59 32"/>
+    <path class="hp ${hc}" d="M5 32A27 27 0 0 1 59 32" stroke-dasharray="${(HC*hp).toFixed(1)} ${HC.toFixed(1)}"/><path class="mp" d="M5 32A27 27 0 0 0 59 32" stroke-dasharray="${(HC*mp).toFixed(1)} ${HC.toFixed(1)}"/></svg>`;
+  const tm=r.tamma;
+  let h=`<div class="hud-top"><button class="hud-av hud-av2" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Khí huyết '+r.hp+' / '+s.maxHp+' (nửa trên)\nLinh lực '+r.mp+' / '+s.maxMp+' (nửa dưới)\nChạm để mở nhân vật')}>${ring}<span class="hud-avi">${av}</span></button>
+   <div class="hud-id"><b class="nm">${esc(r.ten)}</b><span class="rl"${ta(realmLabel()+'\nTu vi '+Math.floor(r.tv)+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small>${sectText()}</small><small class="${warn?'bad':''}"${ta('Tuổi / thọ nguyên '+s.life+(warn?'\nThọ nguyên sắp cạn!':''))}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm${hurt}</small></div>
+   <span class="hud-tm${tm>=60?' hi':tm>=30?' md':''}"${ta('Tâm ma '+tm+' / 100\nĐủ 100 sẽ phải đối mặt với chính mình')}>${ic('skull')}</span><span class="hud-st"${ta('Linh thạch')}>${stoneHTML(r.st)}</span></div>
+   <i class="hud-tv" style="width:${clamp(r.tv,0,100)}%"${ta('Tu vi '+Math.floor(r.tv)+'%')}></i>
+   <div class="hud-clk2" id="clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])}>${clkStr(t)}</div>`;
   return h;
 }
 function statusList(){const r=G.run,s=S(),w=W();const L=[];
