@@ -2103,3 +2103,22 @@ const MC_NERF={thanluc:[{atkP:8},'Công +8%'],menhcung:[{hpP:10},'Khí huyết +
 for(const [id,[fx,d]] of Object.entries(MC_NERF)){const t=TRAIT.find(x=>x.id===id);if(t){t.fx=fx;t.d=d;}}
 // các mệnh cách đã gộp: bản lưu cũ còn giữ thì tác dụng cũng giảm theo
 for(const [mc,[,fx]] of Object.entries(TT_MERGE)){const t=TRAIT.find(x=>x.id===mc);if(t){t.fx=JSON.parse(JSON.stringify(fx));}}
+
+// ================= ĐỢT 30: YÊU CẦU CẢNH GIỚI CHO MỌI VẬT PHẨM DÙNG ĐƯỢC =================
+// Bậc người dùng: 0 Phàm nhân, 1 Luyện Khí, 2 Trúc Cơ, 3 Kết Đan, 4 Nguyên Anh, 5 Hóa Thần, 6 Độ Kiếp.
+// Trang bị, pháp bảo, pháp khí tùy thân: phẩm nào cần bậc nấy (phàm phẩm: phàm nhân dùng được; hoàng phẩm: Luyện Khí; huyền phẩm: Trúc Cơ…).
+// Công pháp, tâm pháp đã có yêu cầu riêng (cần cảnh giới mới đọc hiểu, từng tầng có cảnh giới mở). Phương tiện đã có yêu cầu riêng ở trạm dịch.
+const LV_NAME=['Phàm nhân'].concat(REALM);
+function plv(){const r=G.run;if(!r)return 0;return isPham()?0:clamp((r.realm||0)+1,1,6);}
+function relReq(rel){if(!rel||rel.k==='book')return 0;return rel.req!=null?rel.req:clamp(rel.tier||0,0,6);}
+function relOk(rel){return plv()>=relReq(rel);}
+function relWhy(rel){return relOk(rel)?'':'Cần '+LV_NAME[relReq(rel)]+' mới dùng được '+(rel.name||'món này')+'.';}
+phamLock=function(rel){return !!rel&&rel.k!=='book'&&!relOk(rel);};
+{const _e30=equip;equip=function(i){const rel=G.run.relics[i];if(rel&&!relOk(rel)){note(relWhy(rel));return;}return _e30(i);};}
+{const _et30=equipTo;equipTo=function(i,s){const rel=G.run.relics[i];if(rel&&!relOk(rel)){note(relWhy(rel));return;}return _et30(i,s);};}
+{const _dp30=ddPut;ddPut=function(i){const rel=G.run.relics[i];if(rel&&!relOk(rel)){note(relWhy(rel));return false;}return _dp30(i);};}
+{const _ea30=eqAuto;eqAuto=function(){const r=G.run;if(!r)return _ea30();const keep=r.relics.filter(x=>!x.seen&&x.k!=='book'&&!relOk(x));keep.forEach(x=>x.seen=1);return _ea30();};}
+// đồ đang mặc mà chưa đủ cảnh giới (bản lưu cũ): cất về túi
+{const _ef30=eqFix;eqFix=function(){_ef30();const r=G.run;if(!r||!r.eq)return;for(const k in r.eq){const x=r.eq[k];if(x&&!relOk(x)){x.seen=1;r.relics.push(x);r.eq[k]=null;}}
+  r.dd=(r.dd||[]).filter(d=>{if(relOk(d.rel))return true;d.rel.seen=1;r.relics.push(d.rel);return false;});};}
+{const _r230=run2;run2=function(){const r=_r230();if(r&&!r._eq4){r._eq4=1;eqFix();}return r;};}

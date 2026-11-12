@@ -1057,6 +1057,9 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .eqwrap .ddpair .sgrp{font-size:.74em;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;margin:.15em 0 .3em}
 .eqwrap .ddpair .sgrp small{font-size:.9em}
 @media (min-width:600px){.eqwrap .dgrid{grid-template-columns:repeat(3,48px)!important}.eqwrap .dgrid .eqc{width:48px;height:48px}.eqwrap .ddpair .ddrow,.eqwrap .ddpair .ddrow.five,.eqwrap .ddpair .ddrow.three{grid-template-columns:repeat(5,40px)}.eqwrap .ddpair .eqc{max-width:40px}}
+.tp .req{margin:6px 12px 10px;font-size:.8em;color:var(--ink2);border-top:1px solid var(--line);padding-top:6px}.tp .req.bad{color:var(--bad,#b8302a)}
+/* ô túi đồ: món chưa đủ cảnh giới để dùng */
+.bc .rq{position:absolute;left:2px;right:2px;bottom:2px;font-style:normal;font-size:9px;line-height:1.3;text-align:center;color:#fff;background:color-mix(in srgb,var(--bad,#b8302a) 85%,transparent);border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
 
 </style>
 </head>
@@ -6492,6 +6495,25 @@ for(const [id,[fx,d]] of Object.entries(MC_NERF)){const t=TRAIT.find(x=>x.id===i
 // các mệnh cách đã gộp: bản lưu cũ còn giữ thì tác dụng cũng giảm theo
 for(const [mc,[,fx]] of Object.entries(TT_MERGE)){const t=TRAIT.find(x=>x.id===mc);if(t){t.fx=JSON.parse(JSON.stringify(fx));}}
 
+// ================= ĐỢT 30: YÊU CẦU CẢNH GIỚI CHO MỌI VẬT PHẨM DÙNG ĐƯỢC =================
+// Bậc người dùng: 0 Phàm nhân, 1 Luyện Khí, 2 Trúc Cơ, 3 Kết Đan, 4 Nguyên Anh, 5 Hóa Thần, 6 Độ Kiếp.
+// Trang bị, pháp bảo, pháp khí tùy thân: phẩm nào cần bậc nấy (phàm phẩm: phàm nhân dùng được; hoàng phẩm: Luyện Khí; huyền phẩm: Trúc Cơ…).
+// Công pháp, tâm pháp đã có yêu cầu riêng (cần cảnh giới mới đọc hiểu, từng tầng có cảnh giới mở). Phương tiện đã có yêu cầu riêng ở trạm dịch.
+const LV_NAME=['Phàm nhân'].concat(REALM);
+function plv(){const r=G.run;if(!r)return 0;return isPham()?0:clamp((r.realm||0)+1,1,6);}
+function relReq(rel){if(!rel||rel.k==='book')return 0;return rel.req!=null?rel.req:clamp(rel.tier||0,0,6);}
+function relOk(rel){return plv()>=relReq(rel);}
+function relWhy(rel){return relOk(rel)?'':'Cần '+LV_NAME[relReq(rel)]+' mới dùng được '+(rel.name||'món này')+'.';}
+phamLock=function(rel){return !!rel&&rel.k!=='book'&&!relOk(rel);};
+{const _e30=equip;equip=function(i){const rel=G.run.relics[i];if(rel&&!relOk(rel)){note(relWhy(rel));return;}return _e30(i);};}
+{const _et30=equipTo;equipTo=function(i,s){const rel=G.run.relics[i];if(rel&&!relOk(rel)){note(relWhy(rel));return;}return _et30(i,s);};}
+{const _dp30=ddPut;ddPut=function(i){const rel=G.run.relics[i];if(rel&&!relOk(rel)){note(relWhy(rel));return false;}return _dp30(i);};}
+{const _ea30=eqAuto;eqAuto=function(){const r=G.run;if(!r)return _ea30();const keep=r.relics.filter(x=>!x.seen&&x.k!=='book'&&!relOk(x));keep.forEach(x=>x.seen=1);return _ea30();};}
+// đồ đang mặc mà chưa đủ cảnh giới (bản lưu cũ): cất về túi
+{const _ef30=eqFix;eqFix=function(){_ef30();const r=G.run;if(!r||!r.eq)return;for(const k in r.eq){const x=r.eq[k];if(x&&!relOk(x)){x.seen=1;r.relics.push(x);r.eq[k]=null;}}
+  r.dd=(r.dd||[]).filter(d=>{if(relOk(d.rel))return true;d.rel.seen=1;r.relics.push(d.rel);return false;});};}
+{const _r230=run2;run2=function(){const r=_r230();if(r&&!r._eq4){r._eq4=1;eqFix();}return r;};}
+
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
 const $=s=>document.querySelector(s);
@@ -8077,7 +8099,7 @@ function bagTabHTML(){
    ${ddSel('bagPham','Phẩm',[{v:-1,h:'Mọi phẩm'}].concat(PHAM.map((p,i)=>({v:i,h:qName(p,i)}))),B.pham)}
    ${ddSel('bagSort','Sắp xếp',SORT.map((n,i)=>({v:i,h:n})),B.sort)}</div>`;
   const full=B.tab==='all'&&B.pham<0;
-  const cells=V.map(x=>{const lk=itemLocked(x);return `<button class="bc on${B.sel===x.key?' sel':''}" data-act="bagSel" data-arg="${x.key}" style="${pcs(x.tier)}"${tah(itemTip(x))}>${itemArt(x)}${x.cnt>1?`<i>${x.cnt}</i>`:''}${lk?`<em class="lk">${ic('lock')}</em>`:''}</button>`;}).join('');
+  const cells=V.map(x=>{const lk=itemLocked(x);return `<button class="bc on${B.sel===x.key?' sel':''}" data-act="bagSel" data-arg="${x.key}" style="${pcs(x.tier)}"${tah(itemTip(x))}>${itemArt(x)}${x.cnt>1?`<i>${x.cnt}</i>`:''}${lk?`<em class="lk">${ic('lock')}</em>`:''}${(()=>{const rl=x.ref&&x.ref.t==='rel'&&r.relics[x.ref.i];return rl&&rl.k!=='book'&&!relOk(rl)?`<em class="rq">${LV_NAME[relReq(rl)]}</em>`:'';})()}</button>`;}).join('');
   const emp=full?Math.max(0,cap-V.length):Math.max(0,Math.ceil(Math.max(V.length,10)/6)*6-V.length);
   const locked=full?Math.max(0,BAG_MAX-Math.max(cap,V.length)):0;
   R+=`<div class="bscroll"><div class="bgrid">${cells}${'<span class="bc"></span>'.repeat(emp)}${`<span class="bc lock"${ta('Ô bị khóa. Lên cảnh giới hoặc đeo túi trữ vật tốt hơn để mở.')}>${ic('lock')}</span>`.repeat(locked)}</div></div>`;
@@ -8264,6 +8286,9 @@ function tuSlotHTML(){const a=tuArt();const r=G.run;
 // dòng khí vận, thể chất trong tab Căn cơ: mỗi mục một nhãn màu theo phẩm, chạm xem tác dụng
 function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="ttl">${L.map(d=>`<span class="ttc" style="--pc:${TT_COL[d.rank]}"${tah(`<div class="tt-it" style="--pc:${TT_COL[d.rank]}"><div><b>${esc(d.name)}</b><small>${TT_RANK[d.rank]}</small><p>${esc(d.description)}</p><p>${ttFxText(d).map(esc).join('<br>')}</p></div></div>`)}>${esc(d.name)}</span>`).join('')}</span>`:'<span class="hint">Không có</span>';
   return kvRow(label,v,tip);}
+
+// tooltip vật phẩm: dòng yêu cầu cảnh giới (đỏ khi chưa đủ)
+{const _rt30=relTip;relTip=function(rel){const h=_rt30(rel);if(!rel||rel.k==='book')return h;const ok=relOk(rel);const i=h.lastIndexOf('</div>');return h.slice(0,i)+`<p class="req${ok?'':' bad'}">Yêu cầu: ${LV_NAME[relReq(rel)]}${ok?'':' · chưa đủ'}</p>`+h.slice(i);};}
 
 // ---------- màn ngoài: mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên ----------
 function vTitle(){
