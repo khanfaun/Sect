@@ -280,7 +280,7 @@ function placeTip(x,y){const tip=$('#tip');const tw=tip.offsetWidth,th=tip.offse
 function showTip(el,toggle,xy,touch){
   const tip=$('#tip');const txt=el.dataset.tip;if(!txt)return;
   if(toggle&&tipEl===el&&!tip.hidden){hideTip();return;}
-  tipEl=el;if(el.dataset.tiph){tip.innerHTML=el.dataset.tiph;tip.className='rich';}else{tip.textContent=txt;tip.className='';}tip.hidden=false;
+  tipEl=el;if(el.dataset.tiph){tip.innerHTML=el.dataset.tiph;tip.className='rich';}else{tip.textContent=txt;tip.className='';}tip.style.left='0px';tip.style.top='0px';tip.hidden=false;
   if(xy&&touch){placeTipTouch(xy[0],xy[1]);return;}
   if(xy){placeTip(xy[0],xy[1]);return;}
   // chạm (không có con trỏ): đặt trên phần tử, không đủ chỗ thì xuống dưới
