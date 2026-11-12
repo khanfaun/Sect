@@ -943,3 +943,32 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .ddpair{gap:8px}.ddpair .eqc{width:31px;height:31px}.ddpair .ddrow,.ddpair .ddrow.five{gap:3px}
 @media (min-width:600px){.ddpair .eqc{width:44px;height:44px}}
 .art.pimg{height:110px}.art.pimg .asset{object-position:50% 72%}
+.kho-h{font-size:.76em;color:var(--ink3);margin:8px 0 4px;letter-spacing:.06em}
+.kho{display:flex;flex-direction:column;gap:4px;margin-bottom:6px}.khoc{display:flex;align-items:center;gap:8px;padding:4px 8px;border:1px dashed color-mix(in srgb,var(--pc) 50%,transparent);border-radius:var(--r);background:var(--paper);text-align:left}
+.khoc .qi{width:30px;height:30px;flex:none}.khoc .kt b{display:block;font-size:.86em}.khoc .kt small{font-size:.72em;color:var(--ink3)}
+.lc2{align-items:flex-end}.lc2 small{font-size:.92em;color:var(--ink)}
+.lc-els{display:flex;gap:3px;justify-content:flex-end;margin-top:3px}
+.lc-els .el{background:var(--ec)!important;color:#fffaf0!important;width:1.35em!important;height:1.35em!important;opacity:1}
+.kr span .el,.kr b .el{opacity:1}
+/* túi đồ: trang bị 3×4 bên trái (có nền hình người), đan điền và pháp khí tùy thân ở cột phải */
+.eqwrap{display:flex;gap:12px;align-items:flex-start}
+.eqwrap .doll{flex:none;border-radius:var(--r)}
+.eqwrap .dgrid{grid-template-columns:repeat(3,48px)!important;gap:5px!important;padding:8px!important}
+.eqwrap .dgrid .eqc{width:48px;height:48px}
+.eqwrap .ddpair{flex:1;min-width:0;flex-direction:column;gap:2px}
+.eqwrap .ddpair .ddg{width:100%}.eqwrap .ddpair .sgrp{margin:.2em 0 .35em;white-space:normal;line-height:1.25}
+.eqwrap .ddpair .ddrow,.eqwrap .ddpair .ddrow.five{flex-wrap:wrap!important;gap:4px}
+.eqwrap .ddpair .eqc{width:36px;height:36px}
+@media (min-width:600px){.eqwrap .ddpair .eqc{width:44px;height:44px}}
+/* thẻ tóm tắt địa điểm: ảnh vuông bên trái, cao bằng cụm chữ */
+.nc-head{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:stretch}
+.nc-pic{position:relative;align-self:stretch;aspect-ratio:1;min-height:64px;max-height:96px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--paper2)}
+.nc-pic img{width:100%;height:100%;object-fit:cover;object-position:50% 70%}
+.nc-pic.rum img{filter:grayscale(1) blur(1px);opacity:.45}.nc-pic.rum b{position:absolute;inset:0;display:grid;place-items:center;font-size:1.4em;color:var(--ink2)}
+.nc-info{min-width:0}.nc-info .nc-nm{display:block;font-size:1.25em;line-height:1.2;margin:1px 0 6px}
+.nc-info .nc-chips{margin:0}.nc-btns{display:flex;align-items:flex-start}
+/* bảng chi tiết địa điểm: tên, nút, hàng nhãn và đường kẻ cùng đứng yên khi cuộn */
+.place .sc-h{flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px;margin:0 18px}.place .sc-h{padding-left:0;padding-right:0}
+.place .sc-h .pl-meta{flex-basis:100%;margin:6px 0 0}
+.place .pl-tg{width:30px;height:30px;display:grid;place-items:center;padding:0}
+.place .sc-b{padding-top:10px}
