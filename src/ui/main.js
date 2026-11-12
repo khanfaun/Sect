@@ -152,6 +152,7 @@ const ACT={
   vopt:id=>{const sc=G.run&&G.run.scene;if(!sc||!sc.venue)return;const o=venueOpts(nodeById(sc.id),sc.venue).find(x=>x.id===id);if(!o)return;UI.modal={k:o.lack||o.no?'vreq':'vconf',v:sc.venue,id};},
   vgo:x=>{const [v,id]=x.split(':');UI.modal=null;const sc=G.run.scene;const o=sc&&venueOpts(nodeById(sc.id),v).find(z=>z.id===id);UI.lastQ=o?VENUE_N[v]+': '+o.l:null;venueDo(v,id);UI.plTop=1;},
   kvPick:i=>{kvChoose(+i);},
+  xkGo:()=>{UI.modal=null;const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')placeAct('xk');},
   bqSet:y=>{if(UI.modal&&UI.modal.k==='bq'){UI.modal.y=+y;UI.modal.ok=0;const c=bqCapY();UI.modal.warn=c!=null&&+y>c?1:0;}},
   bqWarnX:()=>{if(UI.modal){UI.modal.warn=0;const c=bqCapY();if(c!=null)UI.modal.y=c;}},bqWarnOk:()=>{if(UI.modal){UI.modal.warn=0;UI.modal.ok=1;ACT.bqGo();}},
   bqGo:()=>{const y=UI.modal&&UI.modal.y;if(!(y>0))return;{const c=bqCapY();if(c!=null&&y>c&&!UI.modal.ok){UI.modal.warn=1;return;}}UI.modal=null;const t0=W().t,tv0=G.run.tv;const done=bqCustom(y);const r=G.run,sc=r&&r.scene;if(!done){note(bqCan()||'Không bế quan được ở đây.');if(UI.bqOpened&&sc&&sc.type==='place')r.scene=null;}else if(sc&&sc.type==='place'){UI.modal={k:'res',title:'Xuất quan',t:sc.msg.join(' ')+' Thời gian trôi qua '+durH(W().t-t0)+', tu vi '+(r.tv>=tv0?'tăng '+numVN(r.tv-tv0)+'%':'đã viên mãn')+'.',chips:sc.chips};sc.msg=[];sc.chips=[];if(UI.bqOpened)r.scene=null;}UI.bqOpened=false;},

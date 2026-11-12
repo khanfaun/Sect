@@ -2238,12 +2238,18 @@ function hitPh(r,X){const P=r<0.04?['{X} chỉ khẽ lắc người, chẳng h�
 // Luyện Khí chia 13 tầng. Thanh tu vi Luyện Khí kéo tới tầng 13 (100%). Tầng 9 nằm ở 50%: tới đó là đột phá Trúc Cơ được.
 // Tầng 1–9 tốn tu vi như cả Luyện Khí cũ; tầng 10–13 mỗi tầng một khó hơn. Tu lên tầng 10–12 thì đột phá được thêm chỉ số,
 // tầng 13 thêm một tiên thiên khí vận ngẫu nhiên. Lịch luyện chỉ cần theo kịp tu vi (không cần đầy) mới đột phá được.
-const LK_TH=[0,6.25,12.5,18.75,25,31.25,37.5,43.75,50,56,64,74,86],LK_MUL=0.5; // mốc bắt đầu mỗi tầng; tầng 13 đầy ở 100
-// tầng đã tu trọn (đầy cây): đang giữa tầng 11 thì mới trọn tầng 10
-function lkDone(){const r=G.run;if(r.tv>=100)return 13;if(typeof lkCapped==='function'&&lkCapped())return 12;return lkTang()-1;}
+// Mỗi tầng một thanh tu vi riêng 0–100% (bên trong vẫn lưu một thang chung cho cả Luyện Khí, chỉ đổi cách hiện).
+// Tầng 1–8 đầy thì tự lên tầng sau. Từ tầng 9: đầy thanh thì dừng lại; muốn lên tầng kế phải tự "xung kích".
+// Đầy tầng 9 mới được đột phá Trúc Cơ; từ tầng 10 trở đi đột phá lúc nào cũng được.
+const LK_TH=[0,50/9,100/9,150/9,200/9,250/9,300/9,350/9,400/9,50,58,68,80],LK_MUL=0.5; // mốc bắt đầu mỗi tầng; tầng 13 đầy ở 100
+function lkEnd(g){return g<13?LK_TH[g]:100;}
+function lkGate(){return (G.run&&G.run.lkG)||9;}
+function lkFull(){return lkOn()&&G.run.tv>=lkEnd(lkGate())-1e-6;}
+// tầng đã tu trọn (đầy thanh): đang giữa tầng 11 thì mới trọn tầng 10
+function lkDone(){return lkPct()>=100?lkTang():lkTang()-1;}
 function lkOn(){const r=G.run;return !!r&&r.realm===0&&!r.pham;}
-function lkTang(tv){if(tv==null)tv=G.run.tv;let n=0;for(const t of LK_TH)if(tv>=t-1e-6)n++;return n;}
-function llNeedBt(){return lkOn()?LK_TH[8]:LL_BT;} // Luyện Khí: từ tầng 9 trở lên, đủ lịch luyện của tầng 9 là đột phá được bất cứ lúc nào
+function lkTang(tv){if(tv==null)tv=G.run.tv;let n=0;for(const t of LK_TH)if(tv>=t-1e-6)n++;return Math.min(n,lkGate());}
+function llNeedBt(){return lkOn()?LK_TH[9]:LL_BT;} // Luyện Khí: từ tầng 9 trở lên, đủ lịch luyện của tầng 9 là đột phá được bất cứ lúc nào
 {const _tp33=tvPts;tvPts=function(realm){const r=G.run;return realm===0&&r&&r.realm===0&&!r.pham?_tp33(0)/LK_MUL:_tp33(realm);};}
 {const _br33=bqReal;bqReal=function(){return _br33()*(lkOn()?LK_MUL:1);};}
 {const _tn33=thonapPct;thonapPct=function(){return _tn33()*(lkOn()?LK_MUL:1);};}
@@ -2296,9 +2302,9 @@ function cbNarr(o){const {u,sk,f,isP,tgN}=o;let a='';const P=[];
 //  · tâm pháp đang vận hành từ Huyền phẩm trở lên (căn cơ công pháp đủ sâu);
 //  · đốn ngộ khi bế quan lúc đang kẹt (năm càng dài, ngộ tính càng cao càng dễ);
 //  · gặp linh tuyền tẩy tủy khi thăm dò nơi linh khí dồi dào (nơi trung bình thì hiếm hơn).
-const LK_CAP=85.9; // chưa có cơ duyên: dừng ở đầy tầng 12
+const LK_CAP=100;
 function lk13Open(){const r=G.run;const a=typeof tuArt==='function'&&tuArt();return !!(r&&(r.lk13||(a&&a.tier>=2)));}
-function lkCapped(){return lkOn()&&!lk13Open()&&G.run.tv>=LK_CAP-1e-6;}
+function lkCapped(){return lkOn()&&lkGate()===12&&lkFull()&&!lk13Open();}
 {const _at34=addTv;addTv=function(x){const res=_at34(x);const r=G.run;if(r&&lkOn()&&!lk13Open()&&r.tv>LK_CAP)r.tv=LK_CAP;return res;};}
 function lk13Unlock(why,txt){const r=G.run;if(!r||r.lk13)return;r.lk13=1;log('Bình cảnh tầng 12 đã phá: '+why+'.');if(typeof bio==='function')bio(`Năm ${Math.floor(r.age)} tuổi, ${r.ten} ${why}, phá bình cảnh Luyện Khí tầng 12.`);note('✨ '+txt,'up');}
 {const _bc34=bqCustom;bqCustom=function(y){const cap=lkCapped();const res=_bc34(y);const r=G.run;
@@ -2314,4 +2320,21 @@ function lk13Unlock(why,txt){const r=G.run;if(!r||r.lk13)return;r.lk13=1;log('B�
 function kiepName(k){return +k===1?'Kiếp đầu tiên':'Kiếp thứ '+k;}
 
 // phần đã tu của tầng Luyện Khí đang ở (đầy 100% là trọn tầng)
-function lkPct(){const r=G.run;const g=lkTang();if(lkCapped())return 100;const a=LK_TH[g-1],b=g<13?LK_TH[g]:100;return Math.floor(clamp((r.tv-a)/(b-a),0,1)*100);}
+function lkPct(tv){const r=G.run;if(tv==null)tv=r.tv;const g=lkTang(tv);const a=LK_TH[g-1],b=lkEnd(g);return Math.floor(clamp((tv-a)/(b-a),0,1)*100+1e-6);}
+
+// ----- Luyện Khí: chặn tu vi ở đỉnh tầng đang mở; xung kích lên tầng kế -----
+{const _at36=addTv;addTv=function(x){const res=_at36(x);const r=G.run;if(r&&lkOn()&&r.tv>lkEnd(lkGate()))r.tv=lkEnd(lkGate());return res;};}
+{const _ts36=tvSimAdd;tvSimAdd=function(raw){const v=_ts36(raw);if(!lkOn())return v;return Math.max(0,Math.min(v,lkEnd(lkGate())-G.run.tv));};}
+{const _bn36=bqNeedY;bqNeedY=function(){if(!lkOn())return _bn36();const r=G.run;const left=lkEnd(lkGate())-r.tv;return left<=1e-6?0:Math.max(0.25,Math.ceil(left/bqReal()*4)/4);};}
+function lkXkState(){if(!lkOn()||lkTang()<9)return null;const g=lkGate();if(g>=13)return null;if(!lkFull())return {ok:false,why:'Tu vi tầng '+g+' chưa đầy, chưa đủ sức xung kích.'};if(g===12&&!lk13Open())return {ok:false,why:'Linh lực xông mãi vẫn không qua được.'};return {ok:true,why:''};}
+function lkXk(){const S0=lkXkState();if(!S0||!S0.ok)return false;const r=G.run;r.lkG=lkGate()+1;advanceTime(HM);if(!G.run)return true;const t='Ngươi dồn hết linh lực xông thẳng qua kinh mạch. Một tiếng “rắc” khẽ vang trong người: đã lên Luyện Khí tầng '+r.lkG+'.';log('Xung kích lên Luyện Khí tầng '+r.lkG+'.');note('✨ Lên Luyện Khí tầng '+r.lkG,'up');const sc=r.scene;if(sc&&sc.type==='place'){sc.msg=[t];sc.chips=[chip('✨','tầng '+r.lkG,'Xung kích thành công','up')];}return true;}
+{const _pa36=placeActs;placeActs=function(n){const L=_pa36(n);const X=lkXkState();if(X&&n.type!=='ai'&&n.type!=='sao'){const g=lkGate();L.push({a:'xk',i:'✨',l:'Xung kích tầng '+(g+1),h:HM,tip:X.ok?'Dồn linh lực phá quan, lên Luyện Khí tầng '+(g+1)+'.\nTầng càng cao, đột phá Trúc Cơ càng được nhiều lợi.':X.why,dis:!X.ok,x:''});}return L;};}
+{const _pa37=placeAct;placeAct=function(a){if(a==='xk'){lkXk();return;}return _pa37(a);};}
+// hiện tu vi: ở Luyện Khí là phần trăm của tầng đang ở
+function tvShow(){return lkOn()?lkPct():Math.floor(G.run.tv);}
+function lkW(g){g=g||lkTang();return lkEnd(g)-LK_TH[g-1];}
+function lkShowGain(x){return lkOn()?x*LK_MUL/lkW()*100:x;} // % tu vi (thang cảnh giới) → % của tầng đang ở
+function btReadyTv(){return lkOn()?(lkTang()>=10||(lkTang()===9&&lkFull())):G.run.tv>=100;}
+// ở Luyện Khí, mất tu vi (đột phá hỏng…) không làm rớt tầng
+{const _at38=addTv;addTv=function(x){const r=G.run;if(r&&lkOn()&&x<0){const f=LK_TH[lkTang()-1];const res=_at38(x);if(G.run&&G.run.tv<f)G.run.tv=f;return res;}return _at38(x);};}
+{const _bi38=bqInfo;bqInfo=function(){const o=_bi38();if(lkOn())o.full=lkFull();return o;};}

@@ -729,7 +729,7 @@ function applyE(e,v){
   const pct=(x,max)=>{if(typeof x==='string'&&x.endsWith('%'))return max*parseFloat(x)/100;return +x;};
   if(e.hp!=null){const d=Math.round(pct(e.hp,s.maxHp));const before=r.hp;r.hp=clamp(r.hp+d,1,s.maxHp);const dd=r.hp-before;if(dd)ch.push(chip('❤️',sgn(Math.round(dd/Math.max(1,s.maxHp)*100)||Math.sign(dd))+'%','Khí huyết',dd>0?'up':'dn'));}
   if(e.mp!=null){const d=Math.round(pct(e.mp,s.maxMp));const before=r.mp;r.mp=clamp(r.mp+d,0,s.maxMp);const dd=r.mp-before;if(dd)ch.push(chip('💧',sgn(Math.round(dd/Math.max(1,s.maxMp)*100)||Math.sign(dd))+'%','Linh lực',dd>0?'up':'dn'));}
-  if(e.tv){let x=e.tv>0?tvGain(e.tv):e.tv;if(x>0&&!e.tvMajor){const room=Math.max(0,40-(r.tvMinor||0));x=Math.min(x,room);r.tvMinor=(r.tvMinor||0)+x;}const b=r.tv;addTv(x);const d=r.tv-b;if(Math.abs(d)>=0.5)ch.push(chip('✨',sgn(Math.round(d)||Math.sign(d))+'% tu vi','Tu vi',d>0?'up':'dn'));else if(e.tv>0&&r.tv>=100)ch.push(chip('✨','viên mãn','Tu vi đã đầy, cần đột phá ở động phủ','up'));}
+  if(e.tv){let x=e.tv>0?tvGain(e.tv):e.tv;if(x>0&&!e.tvMajor){const room=Math.max(0,40-(r.tvMinor||0));x=Math.min(x,room);r.tvMinor=(r.tvMinor||0)+x;}const b=r.tv;const g0=lkOn()?lkTang():0;addTv(x);const d=r.tv-b;if(lkOn()){const g1=lkTang();if(g1>g0)ch.push(chip('✨','lên tầng '+g1,'Tu vi tiến lên Luyện Khí tầng '+g1,'up'));else if(Math.abs(d)>1e-6)ch.push(chip('✨',(d>0?'+':'−')+Math.max(1,Math.round(Math.abs(d)/lkW(g1)*100))+'% tu vi','Tu vi tầng '+g1,d>0?'up':'dn'));else if(e.tv>0&&lkFull())ch.push(chip('✨','tầng đầy','Tu vi tầng '+g1+' đã đầy','up'));}else if(Math.abs(d)>=0.5)ch.push(chip('✨',sgn(Math.round(d)||Math.sign(d))+'% tu vi','Tu vi',d>0?'up':'dn'));else if(e.tv>0&&r.tv>=100)ch.push(chip('✨','viên mãn','Tu vi đã đầy, cần đột phá ở động phủ','up'));}
   if(e.st!=null){let d;if(typeof e.st==='string')d=Math.round(r.st*parseFloat(e.st)/100);else{d=Math.round(e.st*SC[r.region]*(e.st>0?(1+(s.fx.stonesP||0)/100):1));if(!d&&e.st)d=e.st>0?1:-1;}const b=r.st;r.st=Math.max(0,r.st+d);const dd=r.st-b;if(dd)ch.push(chip('💎',sgn(dd),'Linh thạch',dd>0?'up':'dn'));}
   const statN={atkP:['⚔️','Công','%'],defP:['🛡️','Thủ','%'],hpP:['❤️','Khí huyết tối đa','%'],mpP:['💧','Linh lực tối đa','%'],tp:['🌀','Thân pháp',''],ngo:['🧠','Ngộ tính',''],van:['🍀','Khí vận',''],tam:['🪷','Đạo tâm','']};
   for(const k in statN){if(e[k]){const s0=S();r.bon[k]+=e[k];const s1=S();if(k==='hpP')r.hp+=s1.maxHp-s0.maxHp;if(k==='mpP')r.mp+=s1.maxMp-s0.maxMp;ch.push(chip(statN[k][0],statN[k][1]+(e[k]>0?' ▲':' ▼'),statN[k][1]+(e[k]>0?' tăng':' giảm')+' vĩnh viễn',e[k]>0?'up':'dn'));}}
@@ -1425,7 +1425,7 @@ function btRate(slots){
   return clamp(p,0.05,0.97);
 }
 function btChance(){return btRate([]);}
-function canBreak(){const r=G.run;return (r.tv>=100||(lkOn()&&lkTang()>=9))&&(r.realm<4||(r.realm===4&&r.region===4));}
+function canBreak(){const r=G.run;return (lkOn()?(lkTang()>=10||(lkTang()===9&&lkFull())):r.tv>=100)&&(r.realm<4||(r.realm===4&&r.region===4));}
 function openPrep(n){const r=G.run;r.scene={type:'prep',slots:[],back:n.id,id:n.id};}
 function prepToggle(i){
   const sc=G.run.scene;if(!sc||sc.type!=='prep')return;i=+i;
