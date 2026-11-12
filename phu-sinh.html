@@ -1060,6 +1060,8 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .tp .req{margin:6px 12px 10px;font-size:.8em;color:var(--ink2);border-top:1px solid var(--line);padding-top:6px}.tp .req.bad{color:var(--bad,#b8302a)}
 /* ô túi đồ: món chưa đủ cảnh giới để dùng */
 .bc .rq{position:absolute;left:2px;right:2px;bottom:2px;font-style:normal;font-size:9px;line-height:1.3;text-align:center;color:#fff;background:color-mix(in srgb,var(--bad,#b8302a) 85%,transparent);border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.tp .nt{margin:6px 12px 4px;padding:6px 8px;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:8px;background:color-mix(in srgb,var(--gold) 8%,transparent);font-size:.84em}
+.tp .nt b{display:block;font-size:.82em;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}.tp .nt span{display:block}.tp .nt small{display:block;color:var(--ink3);font-size:.85em;margin-top:3px}
 
 </style>
 </head>
@@ -6534,7 +6536,19 @@ const REL_POOL={atkP:5,matkP:6,defP:8,hpP:6,mpP:8,tp:1,crit:3,critDmg:8,dodge:3,
   return o;};}
 // "thêm ô đan dược" (pillSlot) trên vật phẩm: đan dược đã dùng chung túi đồ, nên đổi thành thêm ô túi đồ (chỉ tính đồ đang mặc, đang uẩn dưỡng)
 FXT.pillSlot='👝 Túi đồ thêm {v} ô';
-{const _bc33=bagCap;bagCap=function(){const r=G.run;const b=_bc33();if(!r)return b;const E=eqOf();let add=0;for(const x of Object.values(E))if(x)add+=relicFx(x).pillSlot||0;for(const d of r.dd||[])add+=relicFx(d.rel).pillSlot||0;return Math.min(BAG_MAX,b+add);};}
+{const _bc33=bagCap;bagCap=function(){const r=G.run;const b=_bc33();if(!r)return b;const E=eqOf();let add=0;for(const x of Object.values(E))if(x)add=Math.max(add,relicFx(x).pillSlot||0);for(const d of r.dd||[])add=Math.max(add,relicFx(d.rel).pillSlot||0);return Math.min(BAG_MAX,b+add);};}
+
+// ================= ĐỢT 31: NỘI TẠI CỦA VẬT PHẨM =================
+// Chỉ số đặc biệt trên vật phẩm gọi là nội tại. Nội tại là duy nhất: mang nhiều món cùng nội tại thì chỉ tính món mạnh nhất, không cộng dồn.
+// (Nội tại cùng loại từ tiên thiên khí vận, thể chất vẫn cộng bình thường.) Dòng phụ ngẫu nhiên không bao giờ là nội tại.
+const NT_KEYS=['firstEvade','startBlock','blockTurn','weakStart','vulnStart','poisonHit','stunP','reflect','execute','drain','regenHp','regenMp','healAfter','hoTam','pillP','stonesP','pillSlot','shopP','tammaRes','elX','craftP','bqSafe','bqP'];
+for(const k of ['hoTam','drain','regenHp','regenMp'])delete REL_POOL[k];
+function relActive(){const r=G.run;if(!r)return [];const E=eqOf();const L=Object.values(E).filter(Boolean).map(x=>({rel:x,m:1}));for(const d of r.dd||[])L.push({rel:d.rel,m:ddMul(d)});return L;}
+{const _ag34=aggFx;aggFx=function(){const fx=_ag34();const r=G.run;if(!r||!r.eq)return fx;const A=relActive();
+  for(const k of NT_KEYS){if(k==='elX')continue;let sum=0,max=0;for(const {rel,m} of A){const v=(relicFx(rel)[k]||0)*m;sum+=v;if(v>max)max=v;}if(sum>max)fx[k]=(fx[k]||0)-sum+max;}
+  const byEl={};for(const {rel,m} of A){const v=(relicFx(rel).elX||0)*m;if(!v)continue;const e=rel.el;const o=byEl[e]||(byEl[e]={s:0,x:0});o.s+=v;o.x=Math.max(o.x,v);}
+  for(const [e,o] of Object.entries(byEl))if(o.s>o.x&&fx.elP)fx.elP[e]=(fx.elP[e]||0)-o.s+o.x;
+  return fx;};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -8311,6 +8325,13 @@ function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="t
 
 // tooltip vật phẩm: dòng yêu cầu cảnh giới (đỏ khi chưa đủ)
 {const _rt30=relTip;relTip=function(rel){const h=_rt30(rel);if(!rel||rel.k==='book')return h;const ok=relOk(rel);const i=h.lastIndexOf('</div>');return h.slice(0,i)+`<p class="req${ok?'':' bad'}">Yêu cầu: ${LV_NAME[relReq(rel)]}${ok?'':' · chưa đủ'}</p>`+h.slice(i);};}
+
+// tooltip vật phẩm: chỉ số thường ở trên, nội tại tách riêng bên dưới
+{const _rt34=relTip;relTip=function(rel){if(!rel||rel.k==='book')return _rt34(rel);const fx=relicFx(rel);const nt={},ns={};for(const [k,v] of Object.entries(fx))(NT_KEYS.includes(k)?nt:ns)[k]=v;
+  const sub=SLOT_N[slotOf(rel)]+' · hệ '+(EL[rel.el]||EL.vo).n;const ok=relOk(rel);const NL=fxLines(nt,rel);
+  let h=tipCard({ic:relIcon(rel),n:rel.name,t:rel.tier,sub,lines:fxLines(ns,rel),lore:rel.lore});const i=h.lastIndexOf('</div>');
+  const add=(NL.length?`<div class="nt"><b>Nội tại</b>${NL.map(x=>`<span>${esc(x)}</span>`).join('')}<small>Không cộng dồn với món khác có cùng nội tại</small></div>`:'')+`<p class="req${ok?'':' bad'}">Yêu cầu: ${LV_NAME[relReq(rel)]}${ok?'':' · chưa đủ'}</p>`;
+  return h.slice(0,i)+add+h.slice(i);};}
 
 // ---------- màn ngoài: mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên ----------
 function vTitle(){

@@ -390,3 +390,10 @@ function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="t
 
 // tooltip vật phẩm: dòng yêu cầu cảnh giới (đỏ khi chưa đủ)
 {const _rt30=relTip;relTip=function(rel){const h=_rt30(rel);if(!rel||rel.k==='book')return h;const ok=relOk(rel);const i=h.lastIndexOf('</div>');return h.slice(0,i)+`<p class="req${ok?'':' bad'}">Yêu cầu: ${LV_NAME[relReq(rel)]}${ok?'':' · chưa đủ'}</p>`+h.slice(i);};}
+
+// tooltip vật phẩm: chỉ số thường ở trên, nội tại tách riêng bên dưới
+{const _rt34=relTip;relTip=function(rel){if(!rel||rel.k==='book')return _rt34(rel);const fx=relicFx(rel);const nt={},ns={};for(const [k,v] of Object.entries(fx))(NT_KEYS.includes(k)?nt:ns)[k]=v;
+  const sub=SLOT_N[slotOf(rel)]+' · hệ '+(EL[rel.el]||EL.vo).n;const ok=relOk(rel);const NL=fxLines(nt,rel);
+  let h=tipCard({ic:relIcon(rel),n:rel.name,t:rel.tier,sub,lines:fxLines(ns,rel),lore:rel.lore});const i=h.lastIndexOf('</div>');
+  const add=(NL.length?`<div class="nt"><b>Nội tại</b>${NL.map(x=>`<span>${esc(x)}</span>`).join('')}<small>Không cộng dồn với món khác có cùng nội tại</small></div>`:'')+`<p class="req${ok?'':' bad'}">Yêu cầu: ${LV_NAME[relReq(rel)]}${ok?'':' · chưa đủ'}</p>`;
+  return h.slice(0,i)+add+h.slice(i);};}

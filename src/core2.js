@@ -2143,4 +2143,16 @@ const REL_POOL={atkP:5,matkP:6,defP:8,hpP:6,mpP:8,tp:1,crit:3,critDmg:8,dodge:3,
   return o;};}
 // "thêm ô đan dược" (pillSlot) trên vật phẩm: đan dược đã dùng chung túi đồ, nên đổi thành thêm ô túi đồ (chỉ tính đồ đang mặc, đang uẩn dưỡng)
 FXT.pillSlot='👝 Túi đồ thêm {v} ô';
-{const _bc33=bagCap;bagCap=function(){const r=G.run;const b=_bc33();if(!r)return b;const E=eqOf();let add=0;for(const x of Object.values(E))if(x)add+=relicFx(x).pillSlot||0;for(const d of r.dd||[])add+=relicFx(d.rel).pillSlot||0;return Math.min(BAG_MAX,b+add);};}
+{const _bc33=bagCap;bagCap=function(){const r=G.run;const b=_bc33();if(!r)return b;const E=eqOf();let add=0;for(const x of Object.values(E))if(x)add=Math.max(add,relicFx(x).pillSlot||0);for(const d of r.dd||[])add=Math.max(add,relicFx(d.rel).pillSlot||0);return Math.min(BAG_MAX,b+add);};}
+
+// ================= ĐỢT 31: NỘI TẠI CỦA VẬT PHẨM =================
+// Chỉ số đặc biệt trên vật phẩm gọi là nội tại. Nội tại là duy nhất: mang nhiều món cùng nội tại thì chỉ tính món mạnh nhất, không cộng dồn.
+// (Nội tại cùng loại từ tiên thiên khí vận, thể chất vẫn cộng bình thường.) Dòng phụ ngẫu nhiên không bao giờ là nội tại.
+const NT_KEYS=['firstEvade','startBlock','blockTurn','weakStart','vulnStart','poisonHit','stunP','reflect','execute','drain','regenHp','regenMp','healAfter','hoTam','pillP','stonesP','pillSlot','shopP','tammaRes','elX','craftP','bqSafe','bqP'];
+for(const k of ['hoTam','drain','regenHp','regenMp'])delete REL_POOL[k];
+function relActive(){const r=G.run;if(!r)return [];const E=eqOf();const L=Object.values(E).filter(Boolean).map(x=>({rel:x,m:1}));for(const d of r.dd||[])L.push({rel:d.rel,m:ddMul(d)});return L;}
+{const _ag34=aggFx;aggFx=function(){const fx=_ag34();const r=G.run;if(!r||!r.eq)return fx;const A=relActive();
+  for(const k of NT_KEYS){if(k==='elX')continue;let sum=0,max=0;for(const {rel,m} of A){const v=(relicFx(rel)[k]||0)*m;sum+=v;if(v>max)max=v;}if(sum>max)fx[k]=(fx[k]||0)-sum+max;}
+  const byEl={};for(const {rel,m} of A){const v=(relicFx(rel).elX||0)*m;if(!v)continue;const e=rel.el;const o=byEl[e]||(byEl[e]={s:0,x:0});o.s+=v;o.x=Math.max(o.x,v);}
+  for(const [e,o] of Object.entries(byEl))if(o.s>o.x&&fx.elP)fx.elP[e]=(fx.elP[e]||0)-o.s+o.x;
+  return fx;};}
