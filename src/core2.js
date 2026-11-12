@@ -2028,7 +2028,7 @@ function htPen(){const r=G.run;if(!r||!r.ht||!r.ht.length)return 0;const t=W().t
 {const _S27=S;S=function(){const s=_S27();const p=htPen();if(p>0)s.maxHp=Math.max(1,Math.round(s.maxHp*(1-p)));return s;};}
 function burnOpts(sc){const r=G.run;const u=mainUnit(sc);const L=[];const left=Math.floor(S().life-r.age);
   if(!sc.tinh){const c=Math.round(u.max*0.2);L.push({k:'tinh',n:'Thiêu đốt tinh huyết',d:['Linh lực hồi quá nửa, thể lực sung mãn trở lại','Độc, bỏng, suy yếu đều tan','Không mất lượt, không tổn thọ'],cost:'Đổi lại hao mất một mảng khí huyết đang có',ok:u.hp>c+1,why:'Khí huyết không đủ để đốt'});}
-  else if(!sc.tho){const y=Math.max(10,Math.round(LIFE[r.realm]*0.2));L.push({k:'tho',n:'Thiêu đốt thọ nguyên',y,d:['Ba lượt tới, mỗi đòn xuyên qua phòng ngự, hút máu đối thủ','Hết ba lượt, nguyên thần cạn kiệt: suy yếu hai lượt'],cost:'Mất vĩnh viễn '+(y<15?'hơn chục':y<30?'vài chục':'mấy chục')+' năm thọ nguyên',ok:left>y+1,why:'Thọ nguyên không đủ'});}
+  else if(!sc.tho){const y=Math.max(10,Math.round(LIFE[r.realm]*0.2));L.push({k:'tho',n:'Thiêu đốt thọ nguyên',y,d:['Ba lượt tới, mỗi đòn xuyên qua phòng ngự, hút máu đối thủ','Hết ba lượt, nguyên thần cạn kiệt: suy yếu hai lượt'],cost:'Mất vĩnh viễn '+y+' năm thọ nguyên',ok:left>y+1,why:'Thọ nguyên không đủ'});}
   if(!sc.ht){const c=Math.round(u.max*HT_P);L.push({k:'ht',n:'Huyết tế',d:['Hiến tinh huyết cho sát khí: công lực tăng vọt tới hết trận','Mỗi trận chỉ một lần'],cost:'Căn cơ khí huyết hao tổn hơn một năm, sau đó mới hồi lại dần',ok:u.hp>c+1,why:'Khí huyết không đủ để hiến'});}
   return L;}
 function burnInfo(sc){const L=burnOpts(sc);return {done:!L.length,L,label:sc.tinh?'Thiêu đốt thọ nguyên':'Huyết thuật'};}
