@@ -1430,7 +1430,7 @@ function openPrep(n){const r=G.run;r.scene={type:'prep',slots:[],back:n.id,id:n.
 function prepToggle(i){
   const sc=G.run.scene;if(!sc||sc.type!=='prep')return;i=+i;
   const k=sc.slots.indexOf(i);if(k>=0){sc.slots.splice(k,1);return;}
-  if(sc.slots.length>=3)return;if(!btItems().some(x=>x.i===i))return;sc.slots.push(i);
+  if(sc.slots.length>=5)return;if(!btItems().some(x=>x.i===i))return;sc.slots.push(i);
 }
 function prepView(){const sc=G.run.scene;const e=btEff(sc.slots);const p=G.run.dao+e.dao;return {rate:btRate(sc.slots),e,dao:p,q:qOf(p),next:qNext(p)};}
 function prepStart(){

@@ -202,8 +202,8 @@ function vPass(sc){
 }
 function vPrep(sc){
   const r=G.run;const v=prepView();const to=btTarget();
-  let b=`<div class="story"><p>Chọn tối đa ba vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.</p></div>`;
-  b+=`<div class="slots">${[0,1,2].map(k=>{const i=sc.slots[k];const it=i!=null&&r.pills[i];return it?`<button class="slot on" data-act="prep" data-arg="${i}"${ta(pillTip(it.id,it.q))}>${PILL[it.id].i}<small>${esc(PILL[it.id].n)}</small></button>`:'<span class="slot">＋</span>';}).join('')}</div>`;
+  let b=`<div class="story"><p>Chọn tối đa năm vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.</p></div>`;
+  b+=`<div class="slots">${[0,1,2,3,4].map(k=>{const i=sc.slots[k];const it=i!=null&&r.pills[i];return it?`<button class="slot on" data-act="prep" data-arg="${i}"${ta(pillTip(it.id,it.q))}>${PILL[it.id].i}<small>${esc(PILL[it.id].n)}</small></button>`:'<span class="slot">＋</span>';}).join('')}</div>`;
   const stg=btStages(to).map(x=>x==='tamma'?'Tâm ma kiếp':'Lôi kiếp '+x.n+' đạo'+(x.waves>1?' × '+x.waves+' đợt':'')).join(', ')||'Không có thiên kiếp';
   b+=`<div class="kv"><div${ta('Tỉ lệ xung quan thành công')}><span>Tỉ lệ thành công</span><b>${Math.round(v.rate*100)}%</b></div><div${ta('Phẩm chất dự kiến nếu thành công\nĐạo cơ hiện có '+v.dao+(v.next?', mốc kế tiếp '+v.next:''))}><span>Phẩm chất dự kiến</span><b>${QNAME[v.q]}${v.tcWhy?'':' (đạo cơ '+v.dao+')'}</b></div><div${ta('Thiên kiếp phải vượt sau khi xung quan')}><span>Thiên kiếp</span><b>${esc(stg)}</b></div>${v.e.guard?'<div><span>Hộ mệnh</span><b>có</b></div>':''}</div>`;
   const L=btItems();
@@ -370,8 +370,8 @@ function btBadge(){const st=btState();if(!st)return '';const r=G.run;
   return `<button class="hbt dp" data-act="hudBq"${ta(isPham()?'Tu vi và lịch luyện đều đầy: có thể xung kích Luyện Khí tầng 1.\nBế quan ở bất cứ đâu để dẫn khí nhập thể.':'Có thể đột phá '+(G.run.realm>=4?'phi thăng':REALM[G.run.realm+1])+'.\nTới nơi có động phủ, mở bế quan rồi chọn Đột phá.')}>${isPham()?'Xung kích':'Đột phá'}</button>`;}
 // màn chuẩn bị đột phá: tỉ lệ thành công tách theo từng nguồn, phẩm chất dự kiến cũng vậy
 vPrep=function(sc){const r=G.run;const v=prepView();const to=btTarget();const ph=isPham();const P=btParts(sc.slots);const D=daoParts();const e0=btEff(sc.slots);const dD=D.reduce((a,x)=>a+x.v,0);
-  let b=`<div class="story"><p>${ph?'Ngồi yên, theo tâm pháp dẫn sợi linh khí đầu tiên vào thân. Thành thì bước vào Luyện Khí; bại thì tổn thương kinh mạch, mất một phần tu vi.':'Chọn tối đa ba vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.'}</p></div>`;
-  b+=`<div class="slots">${[0,1,2].map(k=>{const i=sc.slots[k];const it=i!=null&&r.pills[i];return it?`<button class="slot on" data-act="prep" data-arg="${i}"${ta(pillTip(it.id,it.q))}>${PILL[it.id].i}<small>${esc(PILL[it.id].n)}</small></button>`:'<span class="slot">＋</span>';}).join('')}</div>`;
+  let b=`<div class="story"><p>${ph?'Ngồi yên, theo tâm pháp dẫn sợi linh khí đầu tiên vào thân. Thành thì bước vào Luyện Khí; bại thì tổn thương kinh mạch, mất một phần tu vi.':'Chọn tối đa năm vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.'}</p></div>`;
+  b+=`<div class="slots">${[0,1,2,3,4].map(k=>{const i=sc.slots[k];const it=i!=null&&r.pills[i];return it?`<button class="slot on" data-act="prep" data-arg="${i}"${ta(pillTip(it.id,it.q))}>${PILL[it.id].i}<small>${esc(PILL[it.id].n)}</small></button>`:'<span class="slot">＋</span>';}).join('')}</div>`;
   const stg=btStages(to).map(stageName).join(' → ')||'Không có thiên kiếp';
   b+=`<div class="bt-sum"><div><small>Khả năng thành công</small><b>${btWord(v.rate)}</b></div>${ph?'':`<div${v.tcWhy?ta('Phẩm Trúc Cơ tính theo tầng Luyện Khí lúc đột phá.'+(v.tcWhy.length?'\nChưa lên phẩm cao hơn vì: '+v.tcWhy.join(', ')+'.':'')):''}><small>Phẩm chất dự kiến</small><b>${QNAME[v.q]}</b></div>`}</div>`;
   b+=`<h4 class="sgrp">Khả năng thành công</h4><div class="bt-parts">${P.map((x,i)=>`<div${ta(x.tip||'')}><span>${esc(x.t)}</span><b class="${i===0?'':x.v>0?'good':'bad'}">${i===0?btWord(x.v/100):partWord(x.v)}</b></div>`).join('')}<div class="tot"><span>Tổng</span><b>${btWord(v.rate)}</b></div></div>`;
