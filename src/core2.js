@@ -2530,8 +2530,8 @@ btFinish=(function(prev){return function(){return prev.apply(this,arguments);};}
 // thần thức (thần lực) và thân pháp: tăng rất mạnh; chỉ số chiến đấu: như cũ (tăng mạnh); chí mạng, bạo thương: tăng ít.
 {const _Sx=S;S=function(){const s=_Sx();const r=G.run;if(!r)return s;const R0=r.realm||0,t=tieu();
   s.ngo+=Math.floor(R0/2)-R0*2;s.tam-=R0*2;
-  s.tp+=R0*6+t*2;s.ne+=R0*6+t*2;
-  s.than=Math.round(s.than-2*R0+15*R0+t*3);s.nl=Math.round(s.than*3);
+  s.tp+=R0*6+t;s.ne+=R0*6+t;
+  s.than=Math.round(s.than-2*R0+15*R0+t*1.5);s.nl=Math.round(s.than*3);
   s.crit+=R0*0.6;s.critDmg+=R0*4;
   // đại viên mãn: +5% khí huyết, linh lực, công, thủ
   if(dvm()){for(const k of ['maxHp','maxMp','atk','def','matk'])s[k]=Math.round(s[k]*1.05);s.dvm=1;}

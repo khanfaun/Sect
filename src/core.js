@@ -590,7 +590,7 @@ function aggFx(){
 }
 function tieu(){const t=G.run.tv;if(typeof lkOn==='function'&&lkOn()){const g=lkTang();return g>=9?3:g>=7?2:g>=4?1:0;}if(typeof sgOn==='function'&&sgOn())return t>=100?3:sgTang()-1;return t>=100?3:t>=66?2:t>=33?1:0;}
 function S(){
-  const r=G.run, fx=aggFx(), b=r.bon, k=tieu()*0.18, R0=r.realm;
+  const r=G.run, fx=aggFx(), b=r.bon, k=tieu()*0.1, R0=r.realm;
   const lerp=(a)=>a[R0]+(a[R0+1]-a[R0])*k;
   const dq=qMulAll(r); // hệ số phẩm chất nhân dồn, chỉ nhân ở đây
   const s={fx};

@@ -432,7 +432,7 @@ function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
     return h+'</div>';}
   const img=a.k==='bt'?ascPlaceImg(a):'';
   h+=`<div class="asc-in res">${img?`<div class="asc-img"><img src="${esc(img)}" alt=""></div>`:''}<small>${a.k==='bt'?'Đột phá thành công':'Xung kích thành công'}</small><h2 class="asc-to"><span>${esc(a.to)}</span></h2>
-    <div class="asc-st">${ascStory(a).map(t=>`<p>${esc(t)}</p>`).join('')}</div>${a.ht&&HTMAP[a.ht]?`<p class="asc-ht">Hậu thiên khí vận: <b>${esc(HTMAP[a.ht].n)}</b></p>`:''}
+    <div class="asc-st">${ascStory(a).map(t=>`<p>${esc(t)}</p>`).join('')}</div>${a.ht&&HTMAP[a.ht]?`<p class="asc-ht">Hậu thiên khí vận <span class="ht-tag r${HTMAP[a.ht].r}"${ta(HTMAP[a.ht].n+' · '+HT_RANK[HTMAP[a.ht].r]+'\n'+HTMAP[a.ht].d)}>${esc(HTMAP[a.ht].n)}</span></p>`:''}
     ${ascDiffHTML(a)}<button class="btn pri big" data-act="ascDone">Tiếp tục</button></div>`;
   return h+'</div>';}
 {const _mh=modalHTML;modalHTML=function(){const r=G.run;if(r&&r.asc&&G.screen==='map'&&!(r.scene&&r.scene.type==='combat')){if(!UI.modal||UI.modal.k!=='asc')UI.modal={k:'asc'};document.documentElement.dataset.asc='1';return ascHTML();}
@@ -440,14 +440,14 @@ function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
 ACT.ascSel=i=>{UI.ascSel=+i<0?null:+i;};
 ACT.ascPick=()=>{const r=G.run;if(UI.ascSel==null||!r.htPick)return;const id=htChoose(UI.ascSel);if(r.asc)r.asc.ht=id;UI.ascSel=null;UI.ascPh='res';};
 ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=null;delete document.documentElement.dataset.asc;const now=performance.now();
-  UI.realmAnim={from:a.from,to:a.to,t0:now};UI.lvGlow={t0:now,t1:now+3600};setTimeout(()=>{UI.realmAnim=null;render();},3400);
+  UI.realmAnim={from:a.from,to:a.to,t0:now};UI.lvGlow={t0:now,t1:now+3600,c:'up'};setTimeout(()=>hnote((a.k==='bt'?'Đột phá thành công · ':'Xung kích thành công · ')+a.to,'up'),500);setTimeout(()=>{UI.realmAnim=null;render();},3400);
   const sc=r.scene;if(sc&&sc.type==='btres')endScene();if(G.run&&G.run.scene&&G.run.scene.type==='place')G.run.scene=null;UI.panel=null;saveSoon();};
 // thanh đầu: dòng cảnh giới chuyển từ cũ sang mới
 {const _hh=hudHTML;hudHTML=function(){let h=_hh();const A=UI.realmAnim;if(A&&G.run){const cur=esc(realmLabel());h=h.replace('>'+cur+'</span>','><span class="rl-anim"><i class="o">'+esc(A.from)+'</i><i class="n">'+esc(A.to)+'</i></span></span>');}
   if(UI.talA)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talchg');else if(UI.talNew)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talnew');return h;};}
 // thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
 {const _ptR=playerTal;playerTal=function(){const t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talS==null)UI.talS=t.tier;
-  if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
+  if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};{const up=t.tier>UI.talS;const nw=performance.now();UI.lvGlow={t0:nw,t1:nw+3000,c:up?'up':'down'};setTimeout(()=>hnote(up?'Thiên phú thăng lên · '+TAL_N[t.tier]:'Thiên phú suy giảm · '+TAL_N[t.tier],up?'up':'down'),50);}setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
   return t.tier===UI.talS?t:Object.assign({},t,{tier:UI.talS});};}
 {const _tc2=talCardHTML;talCardHTML=function(){const h=_tc2();return UI.talA?h.replace('class="tal-wrap','class="talchg tal-wrap'):UI.talNew?h.replace('class="tal-wrap','class="talnew tal-wrap'):h;};}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e.stopImmediatePropagation();}},true);
@@ -456,5 +456,20 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e
 ACT.fxDemo=k=>{const r=G.run;if(!r)return;UI.panel=null;UI.modal=null;
   if(k==='tal'){const t=playerTal();if(t){UI.talS=(t.tier+4)%5;UI.talA=null;}return;}
   const lb=realmLabel();const D=ASC_K.map(([kk,n],i)=>({k:kk,n,lv:1+(i*7)%3}));
-  if(k==='bt'){r.asc={k:'bt',demo:1,from:lb,to:lb,diff:D,place:'dong'};r.htPick=htOffer(3,r.realm+1);r._htDemo=1;}else r.asc={k:'xk',demo:1,from:lb,to:lb,diff:D};};
+  if(k==='bt'){r.asc={k:'bt',demo:1,from:lb,to:lb,diff:D,place:'dong'};r.htPick=htOffer(3,r.realm+1);r._htDemo=1;}else r.asc={k:'xk',demo:1,from:lb,to:lb,diff:D.map(d=>Object.assign({},d,{lv:1}))};};
 {const _ap=ACT.ascPick;ACT.ascPick=()=>{const r=G.run;if(r&&r._htDemo&&r.asc&&r.asc.demo){if(UI.ascSel==null||!r.htPick)return;r.asc.ht=r.htPick[UI.ascSel];r.htPick=null;r._htDemo=0;UI.ascSel=null;UI.ascPh='res';return;}_ap();};}
+
+// ----- thông báo nhỏ dưới thanh đầu, tự tắt sau chừng 1 giây -----
+function hnote(t,c){let box=document.getElementById('hnote');if(!box){box=document.createElement('div');box.id='hnote';document.body.appendChild(box);}
+  const hd=document.getElementById('hud');const top=(hd&&!hd.hidden&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+8;box.style.top=top+'px';
+  const d=document.createElement('div');d.className='hn '+(c||'');d.textContent=t;box.appendChild(d);while(box.children.length>4)box.firstChild.remove();setTimeout(()=>d.classList.add('out'),1100);setTimeout(()=>d.remove(),1500);}
+// ----- nhận hoặc mất vật phẩm: so túi đồ giữa hai lần vẽ -----
+function invSig(){const r=G.run;const M={};const add=(n,c)=>{if(n)M[n]=(M[n]||0)+(c||1);};
+  for(const x of r.relics||[])add(x.k==='book'&&x.art?x.art.n:x.name);for(const x of Object.values(r.eq||{}))if(x)add(x.k==='book'&&x.art?x.art.n:x.name);for(const d of r.dd||[])if(d&&d.rel)add(d.rel.name);
+  for(const p of r.pills||[])add((p.q?PQ[p.q]+' ':'')+PILL[p.id].n);for(const k in (r.mats||{}))if(r.mats[k]>0&&MAT[k])add(MAT[k].n,r.mats[k]);return M;}
+{const _rd=render;render=function(){_rd();try{const r=G.run;if(!r||G.screen!=='map'){UI.invPrev=null;return;}const now=invSig();const P=UI.invPrev;UI.invPrev=now;if(!P||UI.invRun!==r){UI.invRun=r;return;}
+  const sc=r.scene;if(sc&&sc.type==='combat')return;let n=0;
+  for(const k in now){const d=now[k]-(P[k]||0);if(d>0&&n<3){hnote('Nhận được '+k+(d>1?' ×'+d:''),'up');n++;}}
+  for(const k in P){const d=P[k]-(now[k]||0);if(d>0&&n<3){hnote('Mất '+k+(d>1?' ×'+d:''),'down');n++;}}}catch(e){}};}
+// ----- rìa màn hình tỏa sáng theo hiệu ứng nhân vật -----
+setInterval(()=>{const g=UI.lvGlow;const on=g&&performance.now()<g.t1&&G.screen==='map'&&G.run&&!G.run.asc;const v=on?g.c||'up':'';if(document.documentElement.dataset.edge!==v){if(v)document.documentElement.dataset.edge=v;else delete document.documentElement.dataset.edge;}},150);
