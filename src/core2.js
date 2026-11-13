@@ -2351,7 +2351,7 @@ function sgGate(){const r=G.run;if(!r)return 1;if(r.sg==null)r.sg=r.realm===0&&r
   return r.sg;}
 function sgEnd(g){const th=sgTh();return g<th.length?th[g]:100;}
 function sgTang(tv){if(tv==null)tv=G.run.tv;return Math.min(sgNat(tv),sgGate());}
-function sgFull(){return sgOn()&&G.run.tv>=sgEnd(sgGate())-1e-6;}
+function sgFull(){return sgOn()&&G.run.tv>=sgEnd(sgGate())-0.15;} // tu vi làm tròn tới 0,1: sát mốc là tính đầy
 function sgW(g){g=g||sgTang();return sgEnd(g)-sgTh()[g-1];}
 function sgPct(tv){const r=G.run;if(tv==null)tv=r.tv;const g=sgTang(tv);return Math.floor(clamp((tv-sgTh()[g-1])/sgW(g),0,1)*100+1e-6);}
 function sgName(g){return G.run.realm===0?'tầng '+g:TIEU[g-1];}
@@ -2377,7 +2377,7 @@ function lkXk(){const X=lkXkState();if(!X||!X.ok)return false;const r=G.run;r.sg
 {const _bf37=btFinish;btFinish=function(){const rl=G.run&&G.run.realm;const res=_bf37.apply(this,arguments);if(G.run&&G.run.realm!==rl){G.run.sg=1;G.run.lkG=null;}return res;};}
 {const _pu37=phamUp;phamUp=function(){const was=isPham();const res=_pu37.apply(this,arguments);if(was&&G.run&&!isPham()){G.run.sg=1;G.run.lkG=null;}return res;};}
 // chặn tu vi ở đỉnh tầng/kỳ đang mở; mất tu vi không rớt tầng/kỳ
-{const _at37=addTv;addTv=function(x){const r=G.run;if(!r||!sgOn())return _at37(x);const f=sgTh()[sgTang()-1];const res=_at37(x);const r2=G.run;if(r2&&sgOn()){if(r2.tv>sgEnd(sgGate()))r2.tv=sgEnd(sgGate());if(x<0&&r2.tv<f)r2.tv=f;}return res;};}
+{const _at37=addTv;addTv=function(x){const r=G.run;if(!r||!sgOn())return _at37(x);const f=sgTh()[sgTang()-1];const res=_at37(x);const r2=G.run;if(r2&&sgOn()){if(r2.tv>=sgEnd(sgGate())-0.15)r2.tv=sgEnd(sgGate());if(x<0&&r2.tv<f)r2.tv=f;}return res;};}
 {const _ts37=tvSimAdd;tvSimAdd=function(raw){const v=_ts37(raw);if(!sgOn())return v;return Math.max(0,Math.min(v,sgEnd(sgGate())-G.run.tv));};}
 {const _bn37=bqNeedY;bqNeedY=function(){if(!sgOn())return _bn37();const r=G.run;const left=sgEnd(sgGate())-r.tv;return left<=1e-6?0:Math.max(0.25,Math.ceil(left/bqReal()*4)/4);};}
 {const _bi37=bqInfo;bqInfo=function(){const o=_bi37();if(sgOn())o.full=sgFull();return o;};}
