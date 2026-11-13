@@ -767,6 +767,10 @@ function ach(id){if(!G.meta.ach.includes(id)){G.meta.ach.push(id);const a=ACH.fi
 function gainLore(id){if(!LORE[id])return null;if(G.run&&!G.run.flags['lore_'+id]){G.run.flags['lore_'+id]=1;}const fresh=!G.meta.lore.includes(id);if(fresh)G.meta.lore.push(id);return chip('📜',LORE[id].n,fresh?'Điển tích mới, xem trong Tiên Lộ':'Đã có trong Tiên Lộ','item');}
 
 // ---------------- VẬT PHẨM ----------------
+// câu mô tả phải hợp chất liệu: gỉ sét, thợ rèn chỉ cho đồ kim loại; "đáy có con dấu" chỉ cho đồ có đáy
+function relicLorePool(name){const soft=/Phất Trần|Trượng|Phiến|Quạt|Y\b|Bào|Áo|Ngọc|Châu|Đồ|Phù|Kết|Lụa|Đai|Mũ|Quan|Giày|Hài|Trâm|Sách|Quyển|Cầm|Tiêu|Sáo|Trúc|Mộc|Hồ Lô|Bình|Khăn|Dây|Thằng|Sa\b|Liên|Hoa/i.test(name);
+  const vessel=/Đỉnh|Bình|Hồ Lô|Bát|Lô\b|Chung|Ấn|Hạp|Hộp/i.test(name);
+  return RELIC_LORE.filter(t=>!(soft&&/gỉ sét|thợ rèn/.test(t))&&!(!vessel&&/^Đáy có/.test(t)));}
 function genRelic(tier){
   const r=G.run;const K=pick(RELIC_K);
   let el,base;
@@ -774,7 +778,7 @@ function genRelic(tier){
   else {el=chance(.45)?'vo':pick(NGUHANH);base=pick(K.b);}
   const pre=pick(RELIC_PRE[el]||RELIC_PRE.vo);
   const who=genName(chance(.5)?'nam':'nu');
-  const lore=T(pick(RELIC_LORE),{who,sect:pick(G.meta.world.sects).n,pl:placeName(pick(['nui','thanh','tran']))});
+  const lore=T(pick(relicLorePool(pre+' '+base)),{who,sect:pick(G.meta.world.sects).n,pl:placeName(pick(['nui','thanh','tran']))});
   return {name:pre+' '+base,k:K.k,tier,el,fx:Object.assign({},K.fx),lore};
 }
 function uniqueRelic(id){
@@ -1043,7 +1047,7 @@ function startCombat(spec,after){
 function partyUnit(p,id){
   const r=G.run,s=S();if(!p||p.hp<=0)return null;
   const m=p.pow||0.6;
-  return {realm:r.realm,sub:p.sub||(typeof realmName==='function'?realmName():REALM[r.realm]),matk:Math.round(s.matk*m),critDmg:150,hoTam:s.hoTam,id,side:'A',ctrl:'ai',ally:p.id,name:p.ten,icon:p.icon||'🧑',el:p.el||'vo',f:'nhan',hp:p.hp,max:Math.round(s.maxHp*m),mp:0,maxMp:0,atk:Math.round(s.atk*m),def:Math.round(s.def*m),tp:Math.round(s.tp*0.9),cx:s.cx,ne:Math.round(s.ne*0.9),hoi:s.hoi,crit:5,
+  return {realm:r.realm,sub:p.sub||(typeof realmName==='function'?realmName():REALM[r.realm]),matk:Math.round(s.matk*m),critDmg:150,hoTam:s.hoTam,id,side:'A',ctrl:'ai',ally:p.id,name:p.ten,icon:p.icon||'🧑',el:p.el||'vo',f:p.f||'nhan',hp:p.hp,max:Math.round(s.maxHp*m),mp:0,maxMp:0,atk:Math.round(s.atk*m),def:Math.round(s.def*m),tp:Math.round(s.tp*0.9),cx:s.cx,ne:Math.round(s.ne*0.9),hoi:s.hoi,crit:5,
     pat:['atk','atk','multi','block','heavy'],pi:0,st:{},pos:0,phase:'run',pending:null,waitSet:[],stunT:0,rec:1,chargeT:0};
 }
 const CHG_SLOW=0.6; // tụ lực, thủ thế: đoạn từ mốc giữa tới mốc phát lực chạy chậm lại còn 60%
@@ -1121,7 +1125,7 @@ function down(sc,u){
   u.hp=0;u.phase='down';u.pending=null;u.waitSet=[];doneAct(sc,u);
   // gỡ khỏi mọi waitSet ngay khi gục
   for(const x of sc.units)x.waitSet=x.waitSet.filter(i=>i!==u.id);
-  clog(sc,u.isMain?'Ngươi ngã xuống, trước mắt tối sầm.':pick([`${u.name} đổ gục xuống, không gượng dậy nổi.`,`${u.name} ngã xuống, hơi thở tắt dần.`,`${u.name} lảo đảo mấy bước rồi gục hẳn.`]),u.side==='A'?'en':'win');
+  clog(sc,u.isMain?'Ngươi ngã xuống, trước mắt tối sầm.':pick(u.f==='vat'?[`${u.name} vỡ vụn, không còn động đậy.`,`${u.name} đổ sập xuống, linh quang trên thân tắt hẳn.`]:u.f==='quy'?[`${u.name} rú lên một tiếng rồi tan thành làn khói đen.`,`Âm khí quanh ${u.name} tan hết, chỉ còn lại một nắm tro lạnh.`]:[`${u.name} đổ gục xuống, không gượng dậy nổi.`,`${u.name} ngã xuống, hơi thở tắt dần.`,`${u.name} lảo đảo mấy bước rồi gục hẳn.`]),u.side==='A'?'en':'win');
 }
 function checkEnd(sc){
   if(sc.over)return;const me=mainUnit(sc);
@@ -1324,7 +1328,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
   if(f.guard){u.st.block=(u.st.block||0)+Math.round(u.atk*0.9+u.max*0.06);const g=Math.round(u.maxMp*0.3);u.mp=Math.min(u.maxMp,u.mp+g);guardG=g;}
   if(f.stance)u.st.stance=1;
   const tgN=cbTgName(tg),tgR=total/Math.max(1,tg.reduce((a,t)=>a+(t.max||0),0));
-  msg=cbNarr({u,sk,f,isP,tgN,r:tgR,total,hits,dod,blk,crits,stunL,kiep:!!(tg[0]&&tg[0].kind==='kiep'),guardG,heal:u.hp>hp0});
+  msg=cbNarr({u,sk,f,isP,tgN,r:tgR,total,hits,dod,blk,crits,stunL,kiep:!!(tg[0]&&tg[0].kind==='kiep'),tf:tg[0]&&tg[0].f,guardG,heal:u.hp>hp0});
   if(u.hp>hp0)cfx(sc,{k:'heal',id:u.id,d:Math.round(u.hp-hp0)});
   if(f.guard||f.block||f.eblock)cfx(sc,{k:'shield',id:u.id});
   {const q=sc._dq;sc._dq=null;if(isP&&sk.f&&!sc['_u'+sk.id]){sc['_u'+sk.id]=1;clog(sc,sk.f,'fl');}clog(sc,msg,u.side==='A'?'me':'en');for(const [t,c] of q||[])clog(sc,t,c);}
@@ -1509,8 +1513,8 @@ function genPicks(kind){
   for(let i=0;i<n;i++){
     let k;
     if(kind==='boss')k=i<2?'relic':pick(['relic','skill']);
-    else if(kind==='elite')k=i===0?'relic':pick(['relic','skill','pill']);
-    else k=pick(['skill','pill','pill','st','relic']);
+    else if(kind==='elite')k=i===0?'relic':pick(G._lootBeast?['relic','pill','st']:['relic','skill','pill']);
+    else k=pick(G._lootBeast?['pill','pill','st','st','relic']:['skill','pill','pill','st','relic']); // yêu thú, khôi lỗi không mang bí tịch
     if(k==='relic')out.push({k,rel:genRelic(relT)});
     else if(k==='skill'){let id,g=0;do{id=rollSkill(kind==='boss'?[1,2,3,4,4][reg]:null);}while(out.some(o=>o.id===id)&&g++<10);out.push({k,id});}
     else if(k==='pill')out.push({k,id:rollPill(),q:reg>=3?ri(1,2):reg>=1?ri(0,1):0});
@@ -1519,6 +1523,7 @@ function genPicks(kind){
   return out;
 }
 function rewardScene(kind,en){
+  {const E=en&&EN[en.k];G._lootBeast=kind!=='boss'&&!!E&&(E.f==='thu'||E.f==='vat');}
   const r=G.run;
   const base={normal:{tv:7,st:9},elite:{tv:15,st:22},boss:{tv:25,st:55}}[kind];
   const chips=applyE({st:base.st+ri(-3,4)}); // đánh nhau không cho tu vi: lịch luyện tính ở finishCombat
@@ -1618,7 +1623,7 @@ function chron(t){const w=W();w.chron.push({y:tYear(w.t),t});if(w.chron.length>6
 
 // ---------------- BẢN ĐỒ ----------------
 const SENSE=[120,200,320,500,800,800];
-const WALK=[8,20,60,200,800,800];
+const WALK=[24,36,70,200,800,800]; // phàm nhân, Luyện Khí đi chừng 4 dặm mỗi ngày (trước chỉ hơn 1 dặm, 78 dặm mất 2 tháng)
 const CROSS_M=[0,1,2,4,6];
 const WILD=['rung','nui','song','bien','hoang'];
 TYPE_NAME.ai='quan ải';TYPE_NAME.sao='sào huyệt';
@@ -1651,13 +1656,15 @@ function genRegion(k,w){
   const caveT=reg.types.includes('dong')?'dong':'nui';
   for(let q=0;q<2;q++){const c=take(()=>R()-.5);nodes[c].type=q===0?caveT:pick(['nui','dong','rung'].filter(x=>reg.types.includes(x)).concat([caveT]));nodes[c].dp=1;}
   if(k===0){for(let q=0;q<2;q++){const c=take(()=>R()-.5);nodes[c].type='tran';}}
-  for(const i of free){nodes[i].type=pick(reg.types);}
+  // mỗi tông môn trong thiên hạ đều có sơn môn thật trên bản đồ, chia theo vùng
+  {const want=[1,3,2,2,0][k]||0;for(let q=0;q<want&&free.length;q++){const c=take(()=>R()-.5);nodes[c].type='tong';nodes[c].sectFix=1;}}
+  for(const i of free){nodes[i].type=pick(reg.types.filter(t=>t!=='tong'));}
   for(const n of nodes){
     if(n.type==='dong')n.dp=1;
     const dd=dist[n.id]/Math.max(1,dmax);
     n.danger=n.id===nodes[0].id?0:clamp(Math.floor(dd*4),0,3);
     if(n.type==='sao')n.danger=3;if(n.type==='ai')n.danger=Math.max(2,n.danger);
-    if(n.type==='tong'){const s=pick(w.sects);n.name=s.n;n.owner=s.n;}
+    if(n.type==='tong'){const s=w.sects[(w._si=(w._si||0))%w.sects.length];w._si++;n.name=s.n;n.owner=s.n;n.danger=Math.min(n.danger,1);}
     else n.name=placeName(n.type);
   }
   // không trùng tên trong vùng
@@ -1907,6 +1914,8 @@ function forceTamma(){
 const ENC_T={
   thu:['{mo} Bụi cây rung lên. {$e} hiện ra, mắt đăm đăm nhìn ngươi.','Mùi tanh hôi xộc tới trước khi ngươi kịp thấy nó. {$e} chặn ngay giữa lối.','{$canh} Yêu khí ập tới sát bên. {$e} đã theo dấu ngươi từ lâu.','Đàn chim vụt bay. {$e} lao ra từ chỗ tối, nhắm thẳng vào ngươi.','Ngươi giẫm phải lãnh địa của {$e}. Nó không định để ngươi đi.','{$canh} Trên mặt đất có dấu vết còn mới. Rồi {$e} xuất hiện.'],
   nhan:['“Đứng lại!” {$e} chặn đường, ánh mắt dán vào túi trữ vật của ngươi.','{$e} từ trên cây nhảy xuống, cười nhạt: “Giao đồ ra, ta cho ngươi chết toàn thây.”','Có kẻ bám theo ngươi đã ba ngày. Hôm nay, {$e} không giấu nữa.','{$canh} {$e} ngồi chờ sẵn ở ngã ba, như biết ngươi sẽ đi qua.','“{$p.tt}, giết ngươi cũng chẳng oan đâu.” {$e} nói, giọng như bàn chuyện thời tiết.','{mo} Ngươi vừa dừng chân thì {$e} đã chắn trước mặt, tay đặt lên chuôi binh khí.'],
+  // người không phải phường cướp (đệ tử chính đạo, võ tăng, kiếm khách, đạo sĩ): động thủ vì hiểu lầm, truy bắt hay thử tài, không đòi mãi lộ
+  nhanChinh:['{$e} chặn ngươi lại, mắt nhìn chằm chằm: “Trên người ngươi có mùi huyết khí. Theo ta về tra hỏi!” Chưa kịp phân trần, đòn đã tới.','{mo} {$e} đứng chắn giữa đường, ôm quyền: “Nghe danh đã lâu, xin chỉ giáo vài chiêu.” Ánh mắt kẻ này chẳng có chút gì là nương tay.','{$canh} {$e} đang truy một kẻ bỏ trốn, thấy ngươi liền quát: “Đồng bọn của hắn?” rồi xuất thủ.','{$e} rút binh khí: “Có kẻ lạ phá cấm chế quanh đây mấy hôm nay. Là ngươi?” Không đợi ngươi trả lời, kiếm quang đã lóe lên.'],
   quy:['Nhiệt độ hạ xuống đột ngột, hơi thở ngươi hóa thành sương. {$e} trôi ra từ bóng tối.','{mo} Tiếng khóc than vẳng tới, càng lúc càng gần. Rồi {$e} hiện ra, ngay sau lưng ngươi.','Đuốc trong tay ngươi tắt phụt. Khi thắp lại, {$e} đã đứng đó.','{$canh} Có tiếng cười khanh khách. {$e} ngồi vắt vẻo trên cành cây chết, nhìn ngươi.'],
   vat:['Mặt đất rung lên. {$e} từ từ chuyển động, như vừa tỉnh dậy sau giấc ngủ ngàn năm.','Không tiếng động, không dấu hiệu. {$e} đã ở đó, chặn đường ngươi.','{$canh} Từ khe nứt hư không, {$e} chui ra.'],
 };
@@ -1914,7 +1923,7 @@ function sceneBack(){const r=G.run,sc=r.scene;if(!sc)return null;if(sc.type==='p
 function encounter(o){
   const r=G.run;const back=sceneBack();const en=o.en||mkEnemy({elite:o.type==='elite'});
   const v=baseV();v.e=en.n;
-  let text=T(ENC_T[en.f]||ENC_T.vat,v);
+  let text=T(encLawful(en)?ENC_T.nhanChinh:(ENC_T[en.f]||ENC_T.vat),v);
   if(o.type==='elite')text+=' '+T(['Khí tức của nó đè nặng lên vai ngươi. Kẻ này mạnh hơn hẳn những gì ngươi từng gặp.','Ngươi cảm thấy tử khí. Trận này không dễ.','Uy áp tỏa ra khiến cỏ cây quanh đó rạp xuống.']);
   r.scene={type:'enc',en,elite:o.type==='elite',text,v,back};
 }
@@ -1924,6 +1933,9 @@ function encAct(a){
   if(a==='sneak'){const ok=R()<encSneak(sc);if(ok){sc.res=T(['Ngươi nín thở, lùi vào bóng tối. Nó đi qua, không phát hiện ra.','Ngươi đi vòng qua một quãng xa. Thoát được.','Ngươi ẩn mình sau tảng đá cho tới khi bóng nó khuất hẳn.']);sc.done=1;}else{sc.failSneak=1;encAct('fight');clog(G.run.scene,'Bị phát hiện!','en');}return;}
   if(a==='pay'){const c=Math.max(1,Math.round(12*SC[r.region]));if(r.st<c)return;r.st-=c;sc.res=T(['Ngươi ném túi linh thạch qua. {$e} cân thử, cười khẩy rồi tránh đường.','“Biết điều đấy.” {$e} cất linh thạch, phẩy tay cho ngươi đi.'],{e:sc.en.n});sc.paid=c;sc.done=1;return;}
 }
+// kẻ chặn đường có phải phường cướp bóc không: đệ tử tông chính đạo, Phật môn, võ tăng, kiếm khách, đạo sĩ thì không
+function encLawful(en){if(!en||en.f!=='nhan')return false;if(['votang','kiemtu','phusu'].includes(en.k))return true;
+  if(en.k==='detu'){const ss=(G.meta&&G.meta.world&&G.meta.world.sects)||[];const s0=ss.find(x=>en.sub&&en.sub.includes(x.n)||en.n&&en.n.includes(x.n));return !s0||s0.al!=='ma';}return false;}
 function encSneak(sc){const s=S();return clamp(0.35+(s.tp-8-G.run.region*3)*0.05,0.1,0.85)*(sc.elite?0.5:1);}
 function bossIntro(){
   const r=G.run;const back=sceneBack();const pool=BOSS[r.region];const b=pick(pool);r.bossDef=b;r.bossV={nick:pick(NAME.ma1),sect:pick(G.meta.world.sects.filter(s=>s.al==='chinh')).n,ten:genName('nam')};
@@ -1941,7 +1953,7 @@ function openShop(n){
   if(n&&n.shop&&n.shop.m===m&&n.shop.kiep===r.kiep){r.scene={type:'shop',text,items:n.shop.items,heal:n.shop.heal,back,node:n.id};return;}
   const items=[];
   for(let i=0;i<3;i++){const id=rollPill();const q=r.region>=2?ri(0,2):r.region>=1?ri(0,1):0;items.push({k:'pill',id,q,p:price(PILL[id].p*PQM[q])});}
-  if(chance(.6)||r.realm>=r.region)items.push({k:'pill',id:btPill(),q:0,p:price(PILL[btPill()].p)});
+  if((chance(.6)||r.realm>=r.region)&&!(n&&n.type==='tran'))items.push({k:'pill',id:btPill(),q:0,p:price(PILL[btPill()].p)}); // tạp hóa thôn quê không có đan đột phá
   for(let i=0;i<2;i++){const id=rollSkill();items.push({k:'skill',id,p:price(40+SK[id].t*28)});}
   const rel=genRelic(clamp(r.region+(chance(.2)?1:0),0,4));items.push({k:'relic',rel,p:price(70+rel.tier*45)});
   if(typeof shopExtra==='function')shopExtra(items,n);
@@ -2155,7 +2167,7 @@ function timeHooks(h){
   const r=G.run,w=W();if(!r)return;
   if(h<=48)entsStep(h);
   if(w.t-(w.dirT||0)>=HD){w.dirT=w.t;director();}
-  for(const q of r.quests){if(q.state==='open'&&w.t>q.due){q.state='fail';r.karma=clamp(r.karma-4,-100,100);log(`Thất hứa: ${q.text}`);pushNews('Thất hứa, nhân quả giảm.',true);}}
+  for(const q of r.quests){if(q.state==='open'&&w.t>q.due){q.state='fail';r.karma=clamp(r.karma-4,-100,100);log(`Thất hứa: ${q.text}`);note('Thất hứa: '+q.text+'. Nhân quả giảm.','dn');}}
   if(r.quests.length>12)r.quests=r.quests.filter(q=>q.state==='open').concat(r.quests.filter(q=>q.state!=='open').slice(-4));
   if(r.party&&r.party.length){const b=r.party.length;r.party=r.party.filter(p=>p.until>w.t&&p.hp>0);if(r.party.length<b)log('Một người đồng hành đã chia tay.');}
   // kẻ địch tự tìm tới khi đứng yên

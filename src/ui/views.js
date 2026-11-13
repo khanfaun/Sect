@@ -122,7 +122,7 @@ function vRegionIntro(sc){const r=G.run;const og=ORIGIN.find(o=>o.id===r.origin)
 function vEvent(sc){
   const r=G.run;const e=EVMAP[sc.id];const st=sc.story;const qi=st.findIndex(x=>typeof x==='object');
   let b=qi<0?`<div class="story">${storyHTML(st)}</div>`:`<div class="story">${storyHTML(st.slice(0,qi))}</div><div class="dlg" id="dlg">${st.slice(qi).map((x,i)=>typeof x==='object'?`<p class="dq">› ${esc(x.q)}</p>`:`<p class="${qi+i>=UI.lastStory?'new':''}">${txt(x)}</p>`).join('')}</div>`;
-  if(sc.news)b+=`<p class="news"${ta('Tin đồn giang hồ')}>${esc(sc.news)}</p>`;
+  if(sc.news&&sc.phase==='choose')b+=`<p class="news"><b>Tin đồn giang hồ:</b> ${esc(sc.news)}</p>`; // chỉ hiện lúc đang chọn, ghi rõ là tin đồn để không lẫn vào lời kể
   b+=chipsHTML(sc.chips);
   if(sc.phase==='choose'){b+='<div class="choices">';let k=1;const VC=visChoices(sc);const anyOk=VC.some(({c})=>!needList(c).some(x=>!x.ok)&&(!c.chk||chkChance(c.chk)>=0.5));for(const {c,i} of VC){const NL=needList(c);const bad=NL.filter(x=>!x.ok);const ck=c.chk?(chkChance(c.chk)>=0.5||!anyOk):true;const dis=bad.length>0||!ck;b+=choiceBtn((k++)+'.','choose',i,esc(T(c.l,sc.v)),choiceExtra(c),{dis,cls:dis?'soft':''});{const bw=bad.filter(x=>!/^linh thạch/.test(x.t));if(bw.length)b+=`<p class="why">(${esc(bw.map(x=>x.t).join(', '))})</p>`;}if(c.chk)b+=`<p class="chreq ${ck?'ok':'bad'}">${CHKN[c.chk[0]]} ${ck?'đạt yêu cầu':'chưa đạt yêu cầu'}</p>`;}b+='</div>';}
   return card(e&&e.n||'Kỳ ngộ',r.place.n,b,{head:sc.phase==='choose'?`<button class="pl-tg" data-act="evMin"${ta('Tạm gác lại để xem bản đồ, túi đồ… rồi quay lại chọn sau')}>Để sau ${ic('down')}</button>`:'',foot:sc.phase==='choose'?'':goBtn('next','Tiếp tục')});
@@ -134,7 +134,7 @@ function vEnc(sc){
   if(injured())b+=`<p class="cb-warn">Đang mang thương: thua trận này là chết.</p>`;
   const p=Math.round(encSneak(sc)*100);const pay=Math.round(12*SC[r.region]);
   b+=`<div class="choices">${choiceBtn('1.','enc','fight','Xuất thủ','<span class="cx">giao chiến</span>')}${choiceBtn('2.','enc','sneak','Lẩn tránh',`<span class="cx chk"${ta('Dựa vào thân pháp\nThất bại thì vẫn phải đánh')}>thân pháp ${p}%</span>`)}`;
-  if(en.f==='nhan'&&!sc.elite)b+=choiceBtn('3.','enc','pay','Nộp tiền mãi lộ',`<span class="cx">${stoneHTML(pay)}</span>`,{dis:r.st<pay});
+  if(en.f==='nhan'&&!sc.elite&&!encLawful(en))b+=choiceBtn('3.','enc','pay','Nộp tiền mãi lộ',`<span class="cx">${stoneHTML(pay)}</span>`,{dis:r.st<pay});
   return card(sc.elite?'Hung địa':'Chạm trán',r.place.n,b+'</div>');
 }
 function vBoss(sc){const r=G.run;return card('Sào huyệt',r.place.n,`<div class="foe-l big"><span class="foe-i">${assetImg('foe','_boss',sc.b.i)}</span><div><b>${esc(sc.b.n)}</b><small>Thủ lĩnh vùng ${esc(REG[r.region].n)}</small></div></div><div class="story"><p class="new">${esc(sc.text)}</p></div>`,{foot:goBtn('bossFight','Nghênh chiến')});}
@@ -369,8 +369,8 @@ function vKyngo(sc){const r=G.run;const ev=KYNGO.find(x=>x.id===sc.ev);let b=`<p
 SCENE_V.kyngo=vKyngo;
 // nhãn trên thanh đầu, cùng hàng tên: bình cảnh (tu vi đầy, lịch luyện chưa đầy) hoặc đột phá (cả hai đầy, nhấp nháy)
 function btBadge(){const st=btState();if(!st)return '';const r=G.run;
-  if(st==='bc'&&!canBreak()&&lkXkState()&&lkXkState().ll)return `<span class="hbt bc"${ta('Bình cảnh: tu vi đã đầy, không tăng thêm được.\nLịch luyện '+llShow()+'%: cần chừng 65% mới xung kích được.\nHãy ra ngoài lịch luyện: đánh trận, tới nơi mới, quen người mới, làm việc.')}>Bình cảnh</span>`;
-  if(st==='bc')return `<span class="hbt bc"${ta('Bình cảnh: tu vi đã đầy, không tăng thêm được.\nLịch luyện '+llShow()+'%: cần đầy mới đột phá được.\nHãy ra ngoài lịch luyện: đánh trận, tới nơi mới, quen người mới, làm việc.')}>Bình cảnh</span>`;
+  if(st==='bc'&&!canBreak()&&lkXkState()&&lkXkState().ll)return `<span class="hbt hbc"${ta('Bình cảnh: tu vi đã đầy, không tăng thêm được.\nLịch luyện '+llShow()+'%: cần chừng 65% mới xung kích được.\nHãy ra ngoài lịch luyện: đánh trận, tới nơi mới, quen người mới, làm việc.')}>Bình cảnh</span>`;
+  if(st==='bc')return `<span class="hbt hbc"${ta('Bình cảnh: tu vi đã đầy, không tăng thêm được.\nLịch luyện '+llShow()+'%: cần đầy mới đột phá được.\nHãy ra ngoài lịch luyện: đánh trận, tới nơi mới, quen người mới, làm việc.')}>Bình cảnh</span>`;
   if(st==='xk')return `<button class="hbt dp" data-act="hudBq"${ta('Tu vi '+sgName(sgTang())+' đã đầy: có thể xung kích lên '+lkXkState().nx+'.\nMở bế quan rồi chọn Xung kích.')}>Xung kích</button>`;
   return `<button class="hbt dp" data-act="hudBq"${ta(isPham()?'Tu vi và lịch luyện đều đầy: có thể xung kích Luyện Khí tầng 1.\nBế quan ở bất cứ đâu để dẫn khí nhập thể.':'Có thể đột phá '+(G.run.realm>=4?'phi thăng':REALM[G.run.realm+1])+'.\nTới nơi có động phủ, mở bế quan rồi chọn Đột phá.')}>${isPham()?'Xung kích':'Đột phá'}</button>`;}
 // màn chuẩn bị đột phá: tỉ lệ thành công tách theo từng nguồn, phẩm chất dự kiến cũng vậy
@@ -393,7 +393,7 @@ SCENE_V.prep=vPrep;
 function kvPickHTML(){const r=G.run;return `<div class="mbox kvpick"><h3>Khí vận hội tụ</h3><p class="hint">Đột phá thành công, thiên địa cảm ứng. Chọn một tiên thiên khí vận.</p><div class="kvp">${r.kvPick.map((id,i)=>{const d=TT_DEST[id];return `<button class="kvo" data-act="kvPick" data-arg="${i}" style="--pc:${TT_COL[d.rank]}"><span class="kvh"><b>${esc(d.name)}</b><small>${TT_RANK[d.rank]}</small></span><p>${esc(d.description)}</p><p class="kvf">${ttFxText(d).map(esc).join('<br>')}</p></button>`;}).join('')}</div></div>`;}
 
 // nút xung kích tầng Luyện Khí trong bảng bế quan
-function xkBoxHTML(){const X=lkXkState();if(!X)return '';const g=sgGate();return `<div class="bt-box${X.ok?' on':''}"><b>${ic('spark')} Xung kích ${esc(X.nx)}</b><p class="hint${X.ok?'':' bad'}">${X.ok?'Thanh tu vi '+sgName(g)+' đã đầy. Dồn linh lực phá quan để lên '+X.nx+' (mất chừng một tháng).':esc(X.why)}</p><button class="btn ${X.ok?'pri':''}" data-act="xkGo"${X.ok?'':' disabled'}>Xung kích</button></div>`;}
+function xkBoxHTML(){const X=lkXkState();if(!X)return '';const g=sgGate();return `<div class="bt-box${X.ok?' on':''}"><b>${ic('spark')} Xung kích ${esc(X.nx)}</b><p class="hint${X.ok?'':' bad'}">${X.ok?'Thanh tu vi '+sgName(g)+' đã đầy. Dồn linh lực phá quan để lên '+X.nx+' (mất chừng một tháng).'+(X.why?' '+esc(X.why):''):esc(X.why)}</p><button class="btn ${X.ok?'pri':''}" data-act="xkGo"${X.ok?'':' disabled'}>Xung kích</button></div>`;}
 
 // khoảng tu vi nhận được khi bế quan; ở Luyện Khí tính theo tầng (vượt tầng thì nói lên mấy tầng)
 function bqGainTxt(a,b){if(!sgOn())return '~'+Math.floor(a)+'% – '+Math.ceil(b)+'% tu vi';const w=sgW();return '~'+Math.floor(a/w*100)+'% – '+Math.ceil(b/w*100)+'% tu vi';}
