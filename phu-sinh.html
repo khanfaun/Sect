@@ -2346,7 +2346,7 @@ function evOk(e,type,src){
 function pickEvent(type,src){
   const r=G.run;src=src||'explore';
   // sự kiện đặc biệt
-  const sp=src!=='explore'?[]:EVS.filter(e=>e.spec&&srcOk(e,src)&&whenOk(e)&&(r.evCount[e.id]||0)<2&&(!e.r||e.r.includes(r.region))&&!(e.once&&r.evCount[e.id])&&!r.evRecent.includes(e.id)&&e.cond&&e.cond(r));
+  const sp=src!=='explore'?[]:EVS.filter(e=>e.spec&&srcOk(e,src)&&whenOk(e)&&(!type||!e.tg||e.tg.includes('*')||e.tg.includes(type))&&(r.evCount[e.id]||0)<2&&(!e.r||e.r.includes(r.region))&&!(e.once&&r.evCount[e.id])&&!r.evRecent.includes(e.id)&&e.cond&&e.cond(r));
   if(sp.length&&chance(.55))return pick(sp).id;
   let pool=EVS.filter(e=>evOk(e,type,src));
   if(!pool.length)pool=EVS.filter(e=>evOk(e,null,src));
@@ -2354,9 +2354,10 @@ function pickEvent(type,src){
   if(!pool.length)return null;
   return wpick(pool,e=>(e.w||1)*((e.tg&&e.tg.includes(type))?2:1)/(1+(r.evCount[e.id]||0)*2)).id;
 }
-function startEvent(id){
+function startEvent(id,extra){
   const r=G.run,e=EVMAP[id];
-  const v=Object.assign(baseV(),e.v?e.v(r):{});
+  const v=Object.assign(baseV(),e.v?e.v(r):{},extra||{});
+  if(!v.en&&v.a&&v.a.ten)v.en=v.a.ten; // sự kiện của người đi đường gặp qua thăm dò: lấy tên người trong sự kiện
   r.evCount[id]=(r.evCount[id]||0)+1;r.evRecent.push(id);if(r.evRecent.length>14)r.evRecent.shift();r.evDone++;
   const story=[T(e.t,v)];const back=sceneBack();
   r.scene={type:'event',id,v,story,cur:['c'],phase:'choose',chips:[],news:takeNews(),back};
@@ -2829,7 +2830,8 @@ function kiepHit(sc,k,off){
 }
 // ---------- kết thúc trận ----------
 function combatContinue(){
-  const r=G.run,sc=r.scene;const res=sc.over;const af=sc.after||{kind:'node'};
+  const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='combat'||!sc.over)return; // bấm hai lần hoặc màn chưa kịp vẽ lại
+  const res=sc.over;const af=sc.after||{kind:'node'};
   if(af.kind==='bt'){btAfterStage(res);return;}
   if(res==='dead'){die(sc.en.n==='Tâm Ma'?'tamma':'combat',sc.en);return;}
   advanceTime(1);if(!G.run)return;
@@ -3058,21 +3060,21 @@ function worldCoarse(m){
   for(let i=0;i<m;i++){
     w.t+=HM;
     if(G.run)worldTick(HM/HY);
-    if(chance(.08))flipNode();
+    if(chance(.03))flipNode(); // chừng ba năm mới có một nơi đổi chủ hay gặp nạn
     nodeRecover();
   }
 }
 function nodeRecover(){
   const w=W();
-  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;}}
+  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;if(n.type==='tran'||n.type==='thanh')chron(`${n.name} dần hồi sinh, khói bếp lại bốc lên.`);}}
 }
 function flipNode(){
   const w=W();const r=G.run;
-  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if(['tran','thanh','tong'].includes(n.type)&&(!r||n.id!==r.at))pool.push(n);
+  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if(['tran','thanh','tong'].includes(n.type)&&n.state!=='ruin'&&(!r||n.id!==r.at))pool.push(n); // nơi đang hoang tàn thì không "gặp nạn" lần nữa
   if(!pool.length)return;const n=pick(pool);
   if(n.state==='ruin'){n.state='ok';n.stateUntil=0;chron(`${n.name} dần hồi sinh, khói bếp lại bốc lên.`);}
   else if(n.type==='tong'){const s=pick(w.sects);n.owner=s.n;chron(`Sơn môn ở ${n.name} đổi chủ, nay thuộc ${s.n}.`);}
-  else {n.state='ruin';n.stateUntil=w.t+6*HM;chron(`${n.name} gặp nạn, thành hoang tàn.`);}
+  else {n.state='ruin';n.stateUntil=w.t+ri(3,6)*HY;chron(`${n.name} gặp nạn, thành hoang tàn.`);}
 }
 function chron(t){const w=W();w.chron.push({y:tYear(w.t),t});if(w.chron.length>60)w.chron.shift();if(TICK_OUT)TICK_OUT.push(t);if(G.run)pushNews(t,true);}
 
@@ -3227,7 +3229,10 @@ const BQ_Y=[8,16,30,50,80,80]; // số năm bế quan cho 100% tu vi theo cảnh
 function openPlace(id){const r=G.run;const n=nodeById(id==null?r.at:id);r.place={n:n.name,t:n.type};r.scene={type:'place',id:n.id,msg:[],chips:[],intro:placeIntro(n)};}
 function placeIntro(n){
   const t=W().t;let s=T('{canh_'+(P['canh_'+n.type]?n.type:(n.type==='ai'?'nui':n.type==='sao'?'phe':'tran'))+'}');
-  const pp=P['buoi_'+partOf(t)],ss=P['mua_'+seasonOf(t)];
+  const pt=partOf(t);const town=['tran','thanh','cho','tong','ancu','ai'].includes(n.type);
+  // bỏ những câu không hợp chỗ (khói bếp, mái ngói ở nơi hoang vu) hoặc không hợp giờ (nắng, chim én lúc đêm)
+  const fit=L=>(L||[]).filter(x=>(town||!/khói bếp|đèn lồng|chó sủa|mái ngói|nước giếng|lúa chín|cơm mới/i.test(x))&&(!(pt==='dem'||pt==='toi')||!/nắng|chim én|ve kêu|nhạn bay|mây trắng/i.test(x)));
+  const pp=fit(P['buoi_'+pt]),ss=fit(P['mua_'+seasonOf(t)]);
   if(pp&&pp.length)s+=' '+T(pp);if(SEASON_ON&&ss&&ss.length&&chance(.5))s+=' '+T(ss);
   if(n.state==='ruin')s+=' '+T(['Nhà cửa đổ nát, xác thú và tro tàn còn ngổn ngang. Chẳng còn ai buôn bán gì.','Nơi này đã thành hoang tàn. Vài người sống sót ngồi thẫn thờ bên đống gạch vỡ.']);
   return s;
@@ -3291,7 +3296,7 @@ function placeAct(a){
     case 'heal':{if(!tick(HM))return;const s1=S();r.hp=s1.maxHp;r.mp=s1.maxMp;sc.msg.unshift(T(['Ngươi nằm trong động suốt một tháng, uống nước suối, ăn quả rừng. Vết thương lành dần.','Một tháng tĩnh dưỡng. Xương cốt lại liền, kinh mạch lại thông.']));ch=[chip('❤️','hồi đầy','Khí huyết, linh lực','up'),chip('⏳','1 tháng','Thời gian trôi qua','')].concat(applyE({tamma:-8}));break;}
     case 'bq1':case 'bq3':{
       const y=a==='bq1'?0.25:2;const g=bqGain(y)*(1+(s.fx.bqP||0)/100);
-      sc.msg.unshift(T(REST_T.bq));
+      sc.msg.unshift(T(bqText()));
       if(a==='bq3'&&chance(.22)){
         if(!tick(HY))return;sc.msg.push(T(REST_T.bqint));
         ch=applyE({tv:g*0.5,tvMajor:1,tamma:-3});sc.chips=ch;
@@ -3393,7 +3398,7 @@ function bossFight(){startCombat('boss',{kind:'boss'});}
 function price(base){const fx=aggFx();return Math.max(1,Math.round(base*SC[G.run.region]*(1-Math.min(40,fx.shopP||0)/100)));}
 function openShop(n){
   const r=G.run;const back=sceneBack();const a=npc('thuong');const v=Object.assign(baseV(),{a});
-  const text=T(['{$a.ten}, {$a.look}, xoa tay cười: “{$a.goi} cần gì? Hàng ở đây không giả.”','Tiệm tạp hóa nhỏ, hàng bày lộn xộn. {$a.ten} ngáp dài: “Xem thoải mái. Mua thì trả tiền.”','Chi nhánh Vạn Bảo Thương Hội. Tiểu nhị cúi chào tới tận đất, mắt liếc túi trữ vật của ngươi.','Một tán tu bày sạp ven đường, vừa thấy ngươi đã mời mọc rối rít.','Phường thị đông nghịt. Ngươi chen vào một sạp hàng có tấm biển viết: “Không trả giá.”'],v);
+  const text=!n?T(['{$a.ten} lật tấm bạt, bày từng món lên mặt hòm: “{$a.goi} xem đi, đường xa nên giá có nhỉnh hơn chút.”','Hàng hóa xếp trên mấy cỗ xe, mùi da thuộc lẫn mùi hương liệu. {$a.ten} gõ gõ nắp hòm: “Món nào cũng có lai lịch.”'],v):T(['{$a.ten}, {$a.look}, xoa tay cười: “{$a.goi} cần gì? Hàng ở đây không giả.”','Tiệm tạp hóa nhỏ, hàng bày lộn xộn. {$a.ten} ngáp dài: “Xem thoải mái. Mua thì trả tiền.”','Chi nhánh Vạn Bảo Thương Hội. Tiểu nhị cúi chào tới tận đất, mắt liếc túi trữ vật của ngươi.','Một tán tu bày sạp ven đường, vừa thấy ngươi đã mời mọc rối rít.','Phường thị đông nghịt. Ngươi chen vào một sạp hàng có tấm biển viết: “Không trả giá.”'],v);
   const m=Math.floor(W().t/HM);
   if(n&&n.shop&&n.shop.m===m&&n.shop.kiep===r.kiep){r.scene={type:'shop',text,items:n.shop.items,heal:n.shop.heal,back,node:n.id};return;}
   const items=[];
@@ -3418,6 +3423,7 @@ function healBuy(){const r=G.run,sc=r.scene;if(r.st<sc.heal)return;r.st-=sc.heal
 // ---------------- ĐỘNG PHỦ ----------------
 const REST_T={
   tinh:['Ngươi ngồi xếp bằng, vận khí một chu thiên. Mệt mỏi tan dần như sương dưới nắng.','Gió nhẹ, lá rơi. Ngươi điều tức nửa ngày, thương thế lành quá nửa.','Một nén nhang, rồi hai nén. Hơi thở ngươi dài ra, chậm lại, hòa vào tiếng côn trùng.'],
+  bqTown:['Ngươi thuê một gian phòng sau khách điếm, cài then, ngồi xếp bằng. Tiếng rao ngoài phố xa dần rồi tắt hẳn.','Ngươi đóng cửa phòng trọ, dặn chủ quán đừng gõ cửa. Ngày tháng trôi qua như nước chảy dưới cầu.','Ngươi mở mắt, bên ngoài đã đổi mùa mấy lượt. Chủ trọ nhìn ngươi như nhìn người từ cõi khác về.','Bế quan lần này ngươi mơ rất nhiều. Tỉnh dậy, ngoài cửa sổ phố xá vẫn ồn ã như chưa từng có ai ngồi đó.'],
   bq:['Ngươi bố trí cấm chế, ngồi vào chỗ sâu nhất của động phủ. Ngày tháng trôi qua như nước chảy dưới cầu.','Đá phủ rêu, rêu khô rồi lại xanh. Ngươi mở mắt, bên ngoài đã đổi mùa mấy lượt.','Bế quan lần này ngươi mơ rất nhiều. Có giấc mơ là kiếp trước, có giấc mơ là kiếp sau.','Linh khí trong động bị ngươi hút cạn, vách đá bạc trắng như vôi. Ngươi đứng dậy, xương cốt kêu răng rắc.','Ngươi quên cả ngày đêm. Lúc xuất quan, có con chim đã làm tổ trên vai.'],
   bqint:['Đang ngồi thì có động, đành xuất quan giữa chừng. Có kẻ tới trước chỗ ngươi ngồi.','Cấm chế vỡ tan. Ngươi bừng mắt: kẻ xâm nhập đã đứng ngay cửa động.'],
   bt:[['Linh khí trong đan điền ngưng tụ thành một đài sen, vững như núi. Đạo cơ đã thành.','Ngươi nghe trong người có tiếng nổ nhẹ như măng mọc. Rồi mọi thứ lắng lại. Trúc Cơ.'],
@@ -3430,7 +3436,7 @@ const REST_T={
 // ---------------- KẾT THÚC KIẾP ----------------
 function lifeSummary(cause,info){
   const r=G.run;const age=Math.floor(r.age);
-  const lines=r.bio.slice(0,6);
+  const lines=r.bio.length>6?[r.bio[0]].concat(r.bio.slice(-5)):r.bio.slice(); // giữ dòng xuất thân và những chuyện gần nhất (cảnh giới cao nhất thường ở cuối)
   let end='';
   if(cause==='combat')end=`Năm ${age} tuổi, ${r.ten} chết dưới tay ${info.n} ở ${r.place.n}.`;
   else if(cause==='toahoa')end=`Năm ${age} tuổi, thọ nguyên cạn kiệt, ${r.ten} tọa hóa ở ${r.place.n}.`;
@@ -3563,7 +3569,7 @@ function entArrive(e){
   const w=W();const n=nodeById(e.at);
   if(e.type==='thuong')e.wait=12;
   if(e.type==='thutrieu'&&e.at===e.data.tgt){
-    if(n.state==='ok'){n.state='ruin';n.stateUntil=w.t+6*HM;chron(`Thú triều tràn qua ${n.name}. Nhà cửa đổ nát, người sống sót bỏ đi.`);}
+    if(n.state==='ok'){n.state='ruin';n.stateUntil=w.t+ri(2,4)*HY;chron(`Thú triều tràn qua ${n.name}. Nhà cửa đổ nát, người sống sót bỏ đi.`);}
     removeEnt(e);return;}
   if(e.type==='tuantra')e.wait=6;
   if(e.type==='khach')e.wait=ri(4,16);
@@ -3595,7 +3601,7 @@ function meetEnt(e){
   if(!id){const L=EVS.filter(x=>x.src==='ent:'+e.type&&(e.type!=='di'||!x.dk||x.dk===e.data.k)&&(e.type!=='truysat'||x.id!=='no_kiep_truoc')&&whenOk(x)&&(!x.cond||x.cond(r))&&(!x.r||x.r.includes(r.region)));if(L.length)id=wpick(L,x=>(x.w||1)/(1+(r.evCount[x.id]||0))).id;}
   if(!id||!EVMAP[id]){return;}
   if(e.type==='thienkieu')r.metRival=e.data.rv;
-  startEvent(id);r.scene.back=null;r.scene.v.eid=e.id;r.scene.v.en=e.name;
+  startEvent(id,{eid:e.id,en:e.name});r.scene.back=null;
   if(e.type==='di'||e.type==='truysat'&&!e.data.nem)removeEnt(e);
   if(e.type==='truysat'&&e.data.nem){removeEnt(e);}
 }
@@ -3828,10 +3834,10 @@ ev({id:'sap_ban',n:'Sạp hàng đồ cổ',tg:['tran','thanh'],w:2,v:()=>({a:np
  ]});
 
 ev({id:'thu_con',n:'Thú non lạc mẹ',tg:['rung','nui','dong','hoang'],w:2,
- t:['Trong hốc cây, một con thú nhỏ lông trắng đang run rẩy, chân bị kẹp. Nó kêu ư ử khi thấy ngươi.',
+ t:['Trong hốc cây, một con hồ ly nhỏ lông trắng đang run rẩy, chân bị kẹp. Nó kêu ư ử khi thấy ngươi.',
     'Tiếng kêu non nớt dẫn ngươi tới một con hồ ly con, lông đỏ như lửa, mắt đen láy. Mẹ nó nằm chết cách đó không xa, trên mình cắm ba mũi tên.'],
  c:[
-  {i:'🐾',l:'Cứu và nuôi nó',req:r=>!r.relics.find(x=>x.u==='linhthu'),t:'Ngươi gỡ bẫy, băng bó cho nó. Con thú nhỏ liếm tay ngươi rồi chui vào ngực áo, từ đó không chịu rời.',e:{relic:'linhthu',karma:4}},
+  {i:'🐾',l:'Cứu và nuôi nó',req:r=>!(r.pets&&r.pets.length>=3)&&!r.relics.find(x=>x.u==='linhthu'),t:'Ngươi ôm nó lên, lau sạch bùn đất, băng chỗ bị thương. Con thú nhỏ liếm tay ngươi rồi chui vào ngực áo, từ đó không chịu rời.',e:{petNew:'holy',karma:4}},
   {i:'🗡️',l:'Lấy yêu đan',t:'Ngươi xuống tay dứt khoát. Yêu đan nhỏ như hạt đậu, vẫn còn ấm.',e:{tv:6,karma:-5,tamma:3}},
   {i:'🔙',l:'Đưa về hang',o:[
     {w:2,t:'Ngươi đặt nó trước cửa hang. Một con thú lớn hiện ra, nhìn ngươi rất lâu, rồi đẩy ra một viên ngọc sáng.',e:{relic:0,karma:4}},
@@ -3938,8 +3944,8 @@ ev({id:'tre_ban_hoa',n:'Đứa trẻ bán hoa',tg:['tran','thanh'],w:2,v:()=>({a
   {i:'🚶',l:'Thế gian khổ nhiều, giúp không xuể',t:'Ngươi bước đi. Tiếng rao non nớt đuổi theo mãi một đoạn đường.',e:{tamma:2}}
  ]});
 
-ev({id:'kiem_khach',n:'Kiếm khách say',tg:['tran','thanh','song','nui'],w:2,v:()=>({a:npc('nam')}),
- t:['Trên lan can tửu lâu, một kiếm khách {$a.look} đang ngửa cổ tu rượu. Thấy kiếm khí trên người ngươi, hắn cười lớn: “Đấu một trận không?”','Giữa cầu đá có kẻ say nằm chắn ngang, kiếm đặt trên bụng. Hắn không nhúc nhích: “Muốn qua cầu, đỡ ta ba kiếm.”'],
+ev({id:'kiem_khach',n:'Kiếm khách say',tg:['tran','thanh'],w:2,v:()=>({a:npc('nam')}),
+ t:['Trên lan can tửu lâu, một kiếm khách {$a.look} đang ngửa cổ tu rượu. Thấy ngươi đứng nhìn, hắn cười lớn: “Đấu một trận không?”','Giữa cầu đá có kẻ say nằm chắn ngang, kiếm đặt trên bụng. Hắn không nhúc nhích: “Muốn qua cầu, đỡ ta ba kiếm.”'],
  c:[
   {i:'⚔️',l:'Nhận lời',fight:{k:'kiemtu',n:'{$a.ten}',spar:1},win:{t:'Hắn tỉnh rượu hẳn, chắp tay: “Hay! Hay!” Rồi tặng ngươi nửa bầu rượu và một câu kiếm quyết.',e:{tv:6,atkP:3}},lose:{t:'Ba kiếm. Ngươi đỡ được hai. Hắn thu kiếm, vỗ vai ngươi: “Không tệ.”',e:{tv:4}}},
   {i:'🍶',l:'Uống cùng hắn',cost:{st:8},t:'Hai người uống từ trưa tới tối. Hắn kể về một người con gái đã chết, về thanh kiếm hắn chưa từng rút khỏi vỏ. Lúc chia tay, hắn cười rất buồn.',e:{tam:2,an:['a','uống rượu nghe chuyện']}},
@@ -4177,8 +4183,8 @@ ev({id:'hoi_den',when:{season:['xuan']},n:'Hội hoa đăng',tg:['tran','thanh',
   {i:'🍡',l:'Ăn uống thỏa thích',cost:{st:5},t:'Bánh trôi, kẹo hồ lô, rượu nếp. Lâu lắm rồi ngươi mới thấy mình là người.',e:{hp:'50%',van:1}}
  ]});
 
-ev({id:'thu_nha',n:'Thư nhà',tg:['*'],r:[0,1],once:1,w:1,
- t:['Một con hạc giấy bay tới đậu trên vai ngươi. Thư từ {$que}.'],
+ev({id:'thu_nha',n:'Thư nhà',tg:['*'],r:[0,1],once:1,w:1,cond:r=>{const h=W().regions.flatMap(R=>R.nodes).find(n=>n.name===r.que);return !h||h.state!=='ruin';}, // quê đang hoang tàn thì không có thư "vẫn ổn"
+ t:['Một người phu trạm đường xa hỏi thăm mãi mới tìm được ngươi, trao một lá thư gói trong giấy dầu. Thư từ {$que}.'],
  c:[
   {i:'📜',l:'Đọc thư',o:[
     {w:2,t:'Thư viết: ở nhà vẫn ổn, năm nay được mùa, đừng lo. Cuối thư có vẽ một bông hoa xiêu vẹo.',e:{tam:2,tamma:-8}},
@@ -4274,7 +4280,7 @@ ev({id:'tran_co',n:'Trận đồ cổ',tg:['phe','dong','tong'],w:2,
  ]});
 
 ev({id:'dao_lu',n:'Đạo lữ',tg:['*'],r:[1,2,3],once:1,w:1,cond:r=>!r.flags.daolu,v:r=>({a:npc(r.g==='nam'?'nu':'nam')}),
- t:['Đã ba lần ngươi gặp {$a.ten} trên đường. Lần này, {$a.hn} không giả vờ tình cờ nữa: “Đường tiên dài lắm. Đi cùng nhau, được không?”','Sau trận chiến, {$a.ten} băng bó vết thương cho ngươi. Tay {$a.hn} run run: “Ta không muốn thấy ngươi bị thương nữa.”'],
+ t:['Mấy ngày nay {$a.ten} cứ đi cùng một con đường với ngươi, lúc trước lúc sau. Tối nay bên đống lửa, {$a.hn} không giả vờ tình cờ nữa: “Đường tiên dài lắm. Đi cùng nhau, được không?”','Sau trận chiến, {$a.ten} băng bó vết thương cho ngươi. Tay {$a.hn} run run: “Ta không muốn thấy ngươi bị thương nữa.”'],
  c:[
   {i:'❤️',l:'Nhận lời kết làm đạo lữ',t:'Hai người cùng thắt một sợi dây đỏ. Từ hôm ấy, đường xa bớt lạnh.',e:{relic:'dongtam',flag:'daolu',tam:2}},
   {i:'🌫️',l:'Từ chối',t:'{$a.hn} cười buồn, quay lưng đi. Ngươi không gọi lại.',e:{tam:1}}
@@ -4439,7 +4445,7 @@ ev({id:'tinh_ha',n:'Sông sao',tg:['thien'],w:2,
  ]});
 
 ev({id:'di_thue',n:'Di thuế tiên nhân',tg:['thien','phe'],w:2,
- t:['Một bộ xác ngồi xếp bằng trên đài ngọc, da thịt vẫn hồng hào. Tiên nhân di thuế: thân xác tiên nhân bỏ lại khi phi thăng.'],
+ t:['Một bộ xác ngồi xếp bằng trên đài ngọc, da thịt vẫn hồng hào. Đây là tiên nhân di thuế, cái xác một bậc tiền bối để lại khi phi thăng.'],
  c:[
   {i:'🙇',l:'Bái lạy',t:'Ngươi lạy ba lạy. Khóe môi bộ xác dường như khẽ cong lên.',e:{tam:3,van:2,lore:'tien_khu'}},
   {i:'✋',l:'Lấy pháp bảo trên người',fight:{k:'khoiloi',elite:1},win:{t:'Khôi lỗi canh giữ đổ sập. Pháp bảo của tiên nhân là của ngươi.',e:{relic:2,karma:-3}}},
@@ -4740,7 +4746,7 @@ ev({id:'m_xuan1',n:'Lễ hội mùa xuân',when:{season:['xuan']},tg:['tran','th
     {i:'🚶',l:'Đi tiếp',t:'Tiếng pháo xa dần.'}]});
 ev({id:'m_xuan2',n:'Hoa nở linh thảo',when:{season:['xuan']},tg:['rung','nui','song'],w:2,
  t:['Mùa xuân, linh thảo đâm chồi khắp sườn núi.'],
- c:[{i:'🌿',l:'Hái',t:'Ngươi hái được một gùi.',e:{pill:'hoixuan',st:10,h:6}},
+ c:[{i:'🌿',l:'Hái',t:'Ngươi hái được một gùi linh thảo, đủ để luyện mấy lò đan.',e:{thao:5,h:6}},
     {i:'🧘',l:'Ngồi cảm thụ sinh khí',t:'Sinh khí mùa xuân thấm vào kinh mạch.',e:{tv:3,h:6}}]});
 ev({id:'m_ha1',n:'Mưa rào mùa hạ',when:{season:['ha']},tg:['*'],w:2,
  t:['Mưa rào ập xuống, trắng xóa trời đất. Sấm rền liên hồi.'],
@@ -4772,6 +4778,16 @@ ev({id:'bao_an_co',n:'Người cũ báo ân',spec:1,cond:()=>false,
  c:[{i:'🤝',l:'Nhận lấy',t:'{$p.ten} đưa ngươi một túi đồ, dặn dò rất lâu như dặn con cháu.',e:{relic:1,pill:1,tv:6,ach:'baoan',patronDone:1}},
     {i:'🍶',l:'Chỉ ngồi uống chén trà',t:'Hai người ngồi tới chiều. {$p.ten} kể về {$p.who}, về những chuyện chính ngươi không còn nhớ.',e:{tam:3,tamma:-8,ach:'baoan',patronDone:1,partyP:30}}]});
 
+
+// lời kể bế quan theo chỗ ngồi: giữa thành trấn (chưa có động phủ) thì là phòng trọ, không phải vách đá
+function bqText(){const r=G.run;const n=r&&nodeById(r.at);return n&&!n.dp&&['tran','thanh','cho'].includes(n.type)?REST_T.bqTown:REST_T.bq;}
+
+// câu mở đầu {mo} (thời tiết, thời khắc) phải hợp giờ và mùa đang có: không "giữa trưa" lúc nửa đêm, không "tuyết đầu mùa" giữa hè
+{const MO0=P.mo.slice();const PART={sang:[5,11],chieu:[4,9,18,22],toi:[0,10],dem:[3,7,13,19,23]};const ANY=[1,2,8,12,14,16,17];const SEA={dong:[6,15],thu:[20],xuan:[21],ha:[9]};
+ const dayAll=[16];let key='';
+ Object.defineProperty(P,'mo',{configurable:true,get(){if(!G.run||!G.meta||!G.meta.world)return MO0;const t=W().t,pt=partOf(t),se=seasonOf(t);
+   const ok=new Set(ANY.concat(PART[pt]||[],SEA[se]||[]));if(pt==='dem'||pt==='toi')ok.delete(16);for(const [k,L] of Object.entries(SEA))if(k!==se)L.forEach(i=>ok.delete(i));
+   const k=pt+se;if(k!==key){key=k;delete BAG.mo;}return MO0.filter((x,i)=>ok.has(i));}});}
 
 // ================= LÕI BỔ SUNG =================
 // Vòng chu thiên, linh thú, luyện chế, bế quan tùy chọn, thế cục, nhân mạch, ghi chú bản đồ.
@@ -4838,6 +4854,12 @@ function petFx(fx){const r=G.run;if(!r||!r.pets)return;const p=r.petOut!=null&&r
   const k=PET_FX[chuBase(p.el)];if(k)fx[k]=(fx[k]||0)+2*p.lv;else fx.van=(fx.van||0)+Math.ceil(p.lv/3);}
 function petFxText(p){const k=PET_FX[chuBase(p.el)];const N={atkP:'Công',hpP:'Khí huyết',mpP:'Linh lực',matkP:'Sát thương phép',defP:'Thủ'};return k?N[k]+' +'+2*p.lv+'%':'Khí vận +'+Math.ceil(p.lv/3);}
 function petName(en){const E=EN[en.k];const b=E&&E.nb?E.nb[0]:'Thú';return pick(['Tiểu ','A ','Lão ','Hắc ','Bạch ','Xích '])+b;}
+// vật liệu nhận qua sự kiện: linh thảo (thao), linh khoáng (khoang)
+{const _aeMat=applyE;applyE=function(e,v){const has=e&&(e.thao||e.khoang);const ch=_aeMat(has?Object.assign({},e,{thao:undefined,khoang:undefined}):e,v);if(has&&G.run){const r=run2();for(const k of ['thao','khoang'])if(e[k]){r.mats[k]=(r.mats[k]||0)+e[k];ch.push(chip(MAT[k].i,'+'+e[k]+' '+MAT[k].n.toLowerCase(),'Vật liệu để luyện chế','up'));}}return ch;};}
+// linh thú nhận qua sự kiện (không qua trứng): vào thẳng mục Linh thú
+{const _aePet=applyE;applyE=function(e,v){const ch=_aePet(e&&e.petNew?Object.assign({},e,{petNew:undefined}):e,v);if(e&&e.petNew&&G.run){const r=run2();
+  if(r.pets.length<PET_MAX){const E=EN[e.petNew]||{};const p={n:pick(['Đoàn Tử','Tiểu Hỏa','Mao Cầu','Tiểu Tuyết','A Hoàng']),i:E.i||'🐾',el:pick(E.el||['vo']),k:e.petNew,lv:1,exp:0,rest:0};r.pets.push(p);if(r.petOut==null)r.petOut=r.pets.length-1;
+    log(`${p.n} theo ngươi.`);ch.push(chip(p.i,p.n,'Linh thú mới, xem ở mục Linh thú','up'));}}return ch;};}
 function petHatch(i,pay){const r=run2();const e=r.eggs[i];if(!e)return null;
   if(pay){const c=price(10);if(r.st<c)return null;r.st-=c;}
   else if(W().t<e.t)return null;
@@ -4882,7 +4904,7 @@ function bqInfo(){const r=G.run,s=S();const rate=bqRate();const left=Math.max(0,
   return {rate,left,need:Math.max(0.25,Math.ceil(need*4)/4),maxY,full:r.tv>=100};}
 function bqCustom(y){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);if(!n.dp)return false;
   const I=bqInfo();y=clamp(Math.round(y*4)/4,0.25,I.maxY);
-  const g=bqRate()*y*(y<1?0.9:1);sc.msg=[T(REST_T.bq)];sc.chips=[];
+  const g=bqRate()*y*(y<1?0.9:1);sc.msg=[T(bqText())];sc.chips=[];
   if(y>=1&&chance(Math.min(.5,.11*y))){
     const o=advanceTime(y*HY*0.5);if(!G.run)return true;sc.msg.push(T(REST_T.bqint));
     sc.chips=applyE({tv:g*0.5,tvMajor:1,tamma:-3});if(!G.run)return true;
@@ -4971,7 +4993,7 @@ function exploreStats(n){const fp=[0.04,0.14,0.26,0.4][n.danger]+(['phe','ma'].i
     if(!n.dp)add('khaiphu','','Khai phủ',HM,'Đào một động phủ ở đây để bế quan, đột phá',n.danger>=3,n.danger>=3?'Đất này là tử địa.':'');
     const y=Math.floor(w.t/HY);const hc=n.hunt&&n.hunt.y===y&&n.hunt.k===r.kiep?n.hunt.c:0;
     add('sanyeu','',hc>=3?'Săn yêu · hết lượt năm nay':'Săn yêu · còn '+(3-hc)+' lần',2,'Lùng yêu thú quanh đây. Thắng thì được yêu đan, đôi khi có trứng linh thú.',hc>=3);
-    const m=Math.floor(w.t/HM);const gc=n.gath&&n.gath.m===m&&n.gath.k===r.kiep?n.gath.c:0;const mt=exploreStats(n).mat;
+    const m=Math.floor(w.t/HM);const gc=n.gath&&n.gath.m===m&&n.gath.k===r.kiep?n.gath.c:0;const mt=n.type==='duoc'?'thao':n.type==='khoang'?'khoang':exploreStats(n).mat; // dược cốc luôn hái thuốc, mỏ luôn đào khoáng
     if(mt==='thao')add('haithuoc','','Hái thuốc dại',6,'Kiếm linh thảo để luyện đan. Mỗi tháng hai lần.',gc>=2);
     if(mt==='khoang')add('daokhoang','','Đào khoáng',6,'Kiếm linh khoáng để luyện khí. Mỗi tháng hai lần.',gc>=2);}
   return L;};}
@@ -5083,7 +5105,7 @@ function bqInfo(){const r=G.run,s=S();const rate=bqRate();const left=Math.max(0,
 function bqCustom(y){const r=G.run;if(!r||bqCan())return false;if(!r.scene)openPlace(r.at);const sc=r.scene;if(!sc||sc.type!=='place')return false;
   const I=bqInfo();y=clamp(Math.round(y*4)/4,0.25,I.maxY);const room=!!G.bqRoom;
   if(room){const c=Math.ceil(y*CH_YEAR);if((r.ch||0)<c){G.bqRoom=false;return false;}r.ch-=c;}
-  const g=bqRate()*y*(y<1?0.9:1);const risk=bqRisk(y);G.bqRoom=false;sc.msg=[T(REST_T.bq)];sc.chips=[];
+  const g=bqRate()*y*(y<1?0.9:1);const risk=bqRisk(y);G.bqRoom=false;sc.msg=[T(bqText())];sc.chips=[];
   if(chance(risk)){advanceTime(y*HY*0.5);if(!G.run)return true;sc.msg.push(T(REST_T.bqint));
     sc.chips=applyE({tv:g*0.5,tvMajor:1,tamma:-3});if(!G.run)return true;startCombat({},{kind:'place',msg:sc.msg.slice()});return true;}
   const o=advanceTime(y*HY);if(!G.run)return true;if(o.length)sc.msg.push('Trong lúc ấy: '+o.slice(-2).join(' '));
@@ -5914,7 +5936,7 @@ const QDOOR=[{t:'Người nhận vắng nhà. Hàng xóm bảo chiều mai mới
   if(n&&n.board){if(n.board.until&&w.t>n.board.until)n.board=null;else if(n.board.until)n.board.m=Math.floor(w.t/HM);}
   _ob17(n);if(!n||!n.board)return;const B=n.board;
   if(!B.until){B.until=w.t+ri(20,60)*HD;
-    if(chance(.22)){const ns=regionOf(G.run.region).nodes.filter(x=>x.id!==n.id&&x.type!=='ai'&&x.danger>=1);const tgt=ns.length?pick(ns):null;
+    if(chance(.22)){const ns=regionOf(G.run.region).nodes.filter(x=>{if(x.id===n.id||x.type==='ai'||x.danger<1)return false;const p0=findPath(n.id,x.id);return p0&&travelHours(p0)<=90*24;});const tgt=ns.length?pick(ns):null; // việc gấp chỉ nhắm nơi đi tới trong chừng ba tháng
       if(tgt){const p=findPath(n.id,tgt.id);const tH=p?travelHours(p):24*30;const g=clamp(questGrade({node:tgt.id,kind:'diet'})+(chance(.25)?2:1),1,5);
         const q={id:'qs'+n.id+'_'+Math.floor(w.t),text:pick(['Gấp: diệt yêu vật đang tàn sát ở ','Gấp: bắt kẻ cướp đang trốn ở ','Gấp: cứu người bị bắt vào '])+tgt.name,node:tgt.id,kind:'diet',days:Math.ceil(tH*1.1/24)+ri(2,6),special:1,acc:w.t+ri(1,4)*HD,grade:g,v2:1,taken:false};
         q.reward=questRewardGen(g,G.run.region);q.reward.st=Math.round(q.reward.st*1.3);hearOf(tgt);B.list.unshift(q);}}}};}
@@ -7639,7 +7661,7 @@ function catMatSync(){const r=G.run;if(!r||!r.mats)return;const N=r.matN||(r.mat
 const CAT_MATC={thao:'duoc',khoang:'khoang',dan:'vl'};
 {const _bi=bagItems;bagItems=function(){catMatSync();const r=G.run;const L=_bi().filter(x=>!(x.ref&&x.ref.t==='mat'));const N=r.matN||{};
   for(const [id,c] of Object.entries(N)){const m=CAT.byId[id];if(!m||c<=0)continue;
-    L.push({key:'n'+id,cat:CAT_MATC[m.cat],n:m.n,tier:m.t,cnt:c,em:m.i||MAT[m.cat].i,ref:{t:'mat',k:m.cat,id},tip:[m.d,m.where&&'Nơi kiếm: '+m.where,m.use&&'Dùng để luyện: '+m.use,'Tính là '+MAT[m.cat].n.toLowerCase()+' khi luyện chế.'].filter(Boolean).join('\n')});}
+    L.push({key:'n'+id,cat:CAT_MATC[m.cat],n:m.n,tier:m.t,cnt:c,em:m.i||MAT[m.cat].i,ref:{t:'mat',k:m.cat,id},tip:[m.d,m.where&&'Thường kiếm ở: '+m.where,m.use&&'Dùng để luyện: '+m.use,'Tính là '+MAT[m.cat].n.toLowerCase()+' khi luyện chế.'].filter(Boolean).join('\n')});}
   for(const q of (r.qitems||[])){const x=CAT.byId[q];if(x)L.push({key:'v'+q,cat:'nv',n:x.n,tier:2,cnt:1,em:x.i,ref:{t:'qi',id:q},tip:[x.d,x.use].filter(Boolean).join('\n')});}
   return L;};}
 {const _bd=bagDrop;bagDrop=function(key,n){const r=G.run;
@@ -7686,7 +7708,10 @@ for(const d of SU_KIEN_DATA){
   const o={id:d.id,n:d.n,tg:d.tg,w:1,once:1,t:[d.t],c:d.c.map((x,j)=>skChoice(d,x,j))};
   if(!d.chain){o.r=[d.reg];o.v=()=>skNames(d.roles);}
   else{
-    o.v=r=>{const S=skChains();const s=S[d.chain]||(S[d.chain]={p:null,c:{},t:0,v:skNames(d.roles)});return s.v;};
+    o.v=r=>{const S=skChains();const s=S[d.chain]||(S[d.chain]={p:null,c:{},t:0,v:skNames(d.roles)});
+      // phần 3 và 4 có những câu "Nếu ngươi từng…" viết theo thứ tự lựa chọn ở phần trước: ghi lại để chỉ giữ câu đúng
+      const k=d.part==='4'?{p:'3',c:s.c['3']}:d.part==='3'?{p:s.p,c:s.c['2']}:null;
+      return k?Object.assign({},s.v,{_skP:k.p,_skC:k.c}):s.v;};
     if(d.part==='1'){o.r=[d.reg];o.cond=()=>!skChains()[d.chain];}
     else{o.spec=1;o.cond=()=>skOkPart(d,skChains()[d.chain]);}
   }
@@ -7695,6 +7720,17 @@ for(const d of SU_KIEN_DATA){
 // ghi lại lựa chọn của chuỗi
 {const _ae=applyE;applyE=function(e,v){const ch=_ae(e,v);if(e&&e.chainMark&&G.run){const [cid,part,j]=e.chainMark;const S=skChains();const s=S[cid]||(S[cid]={c:{},v:v});
   if(j<0)s.end=true;else{s.p=part;s.c[part==='2b'?'2':part]=j;s.c[part]=j;s.t=W().t;if(part==='4')s.end=true;}}return ch;};}
+
+// chỉ giữ câu "Nếu…" khớp với lựa chọn trước đó, bỏ vế điều kiện; không khớp câu nào thì bỏ cả cụm
+function skCond(t,v){
+  if(typeof t!=='string'||t.indexOf('Nếu ')<0||v._skC==null)return t;
+  const parts=t.split(/(?<=[.!?…”])\s+/);const out=[];let run=[];
+  const flush=()=>{if(!run.length)return;const n=run.length;const c=+v._skC;
+    const k=v._skP==='2b'?(n>=3?2:c):(c<n?c:-1);
+    if(k>=0&&k<n){let x=run[k].replace(/^Nếu [^,]*,\s*/,'');x=x.charAt(0).toUpperCase()+x.slice(1);out.push(x);}run=[];};
+  for(const p of parts){if(/^Nếu /.test(p))run.push(p);else{flush();out.push(p);}}
+  flush();return out.join(' ');}
+{const _T0=T;T=function(s,v){if(v&&v._skC!=null){if(Array.isArray(s))s=s.map(x=>skCond(x,v));else s=skCond(s,v);}return _T0(s,v);};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -8670,7 +8706,7 @@ function vPlace(sc){
   if(g)b+=`<h3 class="grp">${ib('book','ink')}Thường nhật</h3>`+g;
   const canEx=n.type!=='ai';
   const M=placeMeta(n),dg=dangerTag(n);
-  const meta=`<div class="pl-meta"><span>${esc(capS(TYPE_NAME[n.type]))}</span><span>${esc(REG[r.region].n)}</span><span class="nc-g dg${dg}"><i></i>${esc(DANGER[n.danger])}</span><span>Linh khí ${esc(LK_N[lkOf(n)].toLowerCase())}</span></div>`;const kv=(M?`<div class="pl-kv"><div><small>Tọa trấn</small><span>${esc(M.luc)}</span></div><div><small>Quy mô</small><span>${esc(M.quy)}</span></div></div>`:'');
+  const meta=`<div class="pl-meta"><span>${esc(capS(TYPE_NAME[n.type]))}</span><span>${esc(REG[r.region].n)}</span><span class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${esc(DTAG[dg])}</span><span>Linh khí ${esc(LK_N[lkOf(n)].toLowerCase())}</span></div>`;const kv=(M?`<div class="pl-kv"><div><small>Tọa trấn</small><span>${esc(M.luc)}</span></div><div><small>Quy mô</small><span>${esc(M.quy)}</span></div></div>`:'');
   return card(n.name,'',kv+b,{cls:'tall place',art:ASSET.place[n.type]?`<div class="art strip pimg"><img class="asset" src="${ASSET.place[n.type]}" alt=""></div>`:sceneCv(n.name,r.region,n.type,'strip'),
     head:`<button class="xb sc-x" data-act="leave"${ta('Đóng, rời khỏi nơi này')} aria-label="Đóng">${ic('close')}</button>${meta}`,
     foot:(canEx?`<button class="btn" data-act="exStat"${ta('Xem nơi này có gì: yêu ma, vật liệu, tỉ lệ')}>Thăm dò</button>`:'')+`<span class="grow"></span><button class="btn" data-act="leave">Rời đi</button>`});
@@ -8732,7 +8768,7 @@ function modalHTML(){
      ${(()=>{{const cw=tuCapWhy();if(btReadyTv()&&cw)return `<div class="bt-box"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint bad">${esc(cw)}</p></div>`;}const lk9=lkOn();const bth=isPham()?'Đủ để xung kích Luyện Khí tầng 1':lk9?'Luyện Khí tầng '+lkTang()+', đủ để đột phá':'Tu vi đã viên mãn';if(btReadyTv()&&llOf()<llNeedBt())return `<div class="bt-box"><b>${ic('spark')} ${bth}</b><p class="hint bad">Lịch luyện chưa theo kịp nên chưa đột phá được. Hãy ra ngoài lịch luyện.</p></div>`;const brk=canBreak();if(!brk)return '';const atDp=(cn&&cn.dp)||isPham();return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} ${bth}</b><p class="hint">${isPham()?'Có thể dẫn khí nhập thể ngay tại đây.':atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>${isPham()?'Xung kích':'Đột phá'}</button></div>`;})()}
      ${xkBoxHTML()}
      ${m.warn?`<div class="bq-warn"><p><b>Lịch luyện không đủ</b></p><p>Bế quan quá ${durH(cap*HY)} thì gần như không tăng thêm tu vi nữa. Nên ra ngoài lịch luyện trước.</p><p>Vẫn tiếp tục bế quan ${durH(y*HY)}?</p><div class="mb-f"><button class="btn" data-act="bqWarnX">Thôi</button><button class="btn pri" data-act="bqWarnOk">Xác nhận, tiếp tục</button></div></div>`:''}
-     <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" id="bqGoB" data-act="bqGo"${y>0?'':' disabled'}>Nhập định</button></div></div>`;}
+     <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" id="bqGoB" data-act="bqGo"${y>0&&!bqFullNow()?'':' disabled'}>Nhập định</button></div></div>`;}
   if(m.k==='explore'&&SETTLE.includes(nodeById(G.run.at).type)){const n=nodeById(G.run.at);const X=townStats(n);const tb=UI.tab.ex||'L';const rows=L=>`<div class="kv">${L.map(x=>`<div><span>${esc(x[0])}</span><b>${esc(x[1])}</b></div>`).join('')}</div>`;
     return `<div class="mbox"><h3>${esc(n.name)}</h3>${tabsHTML('ex',[['L','Kiếm được · '+X.L.length],['M','Có thể gặp · '+(X.M.length+X.evs.length)]],tb)}
      ${tb==='L'?`<p class="hint">Những thứ chắc chắn có ở đây. Hàng trên kệ đổi theo tháng, không phải lúc nào cũng đủ.</p>${rows(X.L)}`:`<p class="hint">Chỉ gặp khi có duyên; thường là đồ tốt hơn hàng bày sẵn.</p>${rows(X.M)}${X.evs.length?`<h4 class="sgrp">Chuyện, người có thể gặp</h4><div class="foes">${X.evs.map(t=>`<span class="chip">${esc(t)}</span>`).join('')}</div>`:''}`}
@@ -8773,6 +8809,8 @@ function modalHTML(){
 }
 
 // ---------- bế quan: các con số đổi theo thanh trượt ----------
+// tu vi đã đầy (cả cảnh giới, hoặc tầng/kỳ đang ở) thì bế quan thêm chỉ mất thời gian: khóa nút Nhập định
+function bqFullNow(){const r=G.run;return !!r&&(r.tv>=100||(sgOn()&&sgFull()&&!lkCapped()));}
 function bqBits(y,I){I=I||bqInfo();const sp=bqSpan(y);const left=Math.max(0,I.left-y);const need=Math.max(0,bqNeedY()-y);const risk=Math.round(bqRisk(y)*100);
   const r=G.run;const P=tvPts(r.realm)/100;const e0=llEff(r.tv),e1=llEff(Math.min(100,r.tv+sp[1]/P));const cap=bqCapY();
   let st,sc;
@@ -8787,7 +8825,7 @@ function bqBits(y,I){I=I||bqInfo();const sp=bqSpan(y);const left=Math.max(0,I.le
   return {g:y>0?bqGainTxt(sp[0]/P,sp[1]/P):'0% tu vi',s:st,sc:'bq-'+(sc||'n'),l:Math.floor(left)+' năm',lc:left<=10?'lv-bad':left<=30?'lv-mid':'lv-ok',
     n:I.full?(sgOn()&&G.run.tv<100?'đã đầy':'đã viên mãn'):need<=0?'viên mãn':'chừng '+numVN(need)+' năm',h:(y>0?(risk?(risk<10?'Ít khi':risk<30?'Có thể':'Dễ')+' bị quấy nhiễu giữa chừng. ':'Yên ổn, không bị quấy nhiễu. '):'Chọn thời gian bế quan. ')+'Xuất quan thì khí huyết, linh lực hồi đầy.'};}
 function bqUpd(y){const B=bqBits(y);const set=(id,t,c)=>{const e=document.getElementById(id);if(e){e.textContent=t;if(c!=null)e.className=c;}};
-  set('bqY',y>0?durH(y*HY):'0 tháng');set('bqG',B.g);set('bqS',B.s,'bq-ll '+B.sc);set('bqL',B.l,B.lc);set('bqN',B.n);set('bqHint',B.h);const b=document.getElementById('bqGoB');if(b)b.disabled=!(y>0);
+  set('bqY',y>0?durH(y*HY):'0 tháng');set('bqG',B.g);set('bqS',B.s,'bq-ll '+B.sc);set('bqL',B.l,B.lc);set('bqN',B.n);set('bqHint',B.h);const b=document.getElementById('bqGoB');if(b)b.disabled=!(y>0)||bqFullNow();
   const R=document.getElementById('bqR');if(R)R.style.setProperty('--val',(+R.max>0?y/+R.max*100:0)+'%');}
 function lkTag(n){const m=LK_M[lkOf(n)]*(n&&n.dp?1.15:1)*(G.bqRoom?1.5:1);const c=m>=1.3?'lk-up':m>=0.9?'':m>=0.7?'lk-dn':'lk-bad';
   const t=LK_N[lkOf(n)]+(n&&n.dp?' · có động phủ':'')+(G.bqRoom?' · tĩnh thất tông môn':'');return `<b class="lk ${c}">${t}</b>`;}
@@ -9245,7 +9283,7 @@ function pBonds(){
     b+=r.bang?`<p class="hint">Công bố năm ${r.bang.y||''}, khi ngươi ${r.bang.nam} tuổi</p><div class="rows">${r.bang.ds.map((x,i)=>`<div class="row${x.i<0?' taken':''}"><span class="r-i">${i+1}</span><span class="r-t"><b>${esc(x.ten)}</b></span><span class="r-x">${REALM[x.realm]}</span></div>`).join('')}</div>`:`<p class="hint">Thiên Kiêu Bảng chưa tới kỳ công bố (năm ${w.bangY}).</p>`;
     b+=`<h4 class="sgrp">Thiên kiêu đương thời</h4><div class="rows">${R.rivals.map(x=>bondRow(x.ten,x.g,x.tt+' của '+x.sect,x.alive?REALM[x.realm]:'đã mất',[['Danh hiệu',x.tt],['Tông môn',x.sect],['Cảnh giới',x.alive?REALM[x.realm]:'đã mất'],['Thuộc tính',x.el&&EL[x.el]?EL[x.el].n:'']],!x.alive)).join('')}</div>`;
   }
-  if(tab==='tong'){const AL={chinh:'chính đạo',ta:'tà đạo',ma:'ma đạo',trung:'trung lập'};
+  if(tab==='tong'){const AL={chinh:'chính đạo',ta:'tà đạo',ma:'ma đạo',trung:'trung lập',phat:'Phật môn'};
     b+=`<p class="hint">${R.mine?'Ngươi là đệ tử tông môn.':'Ngươi là tán tu, chưa vào tông môn nào.'}</p><div class="rows">${R.sects.map((s,i)=>{const f=sectFav(i),L=favLv(f);return `<details class="bond"><summary class="row"><span class="r-i sect-i"><img src="${sectPic(s.n,s.al)}" alt=""></span><span class="r-t"><b>${esc(s.n)}</b><small>${AL[s.al]||s.al||''}</small></span><span class="fav f-${L[2]}">${L[1]}</span><i class="cc-ch">${ic('down')}</i></summary><div class="bond-d"><p class="hint">Hảo cảm của tông môn tính từ cao tầng (nặng hơn) và đệ tử.</p>${sectElders(i).map(e=>bondRow('@'+i+':'+e.t,null,e.t,'',[],false,{disp:e.ten,realm:Math.min(5,(G.run.realm||0)+2)})).join('')}${sectDisciples(i).slice(0,6).map(n=>bondRow(n,null,'Đệ tử','',[],false)).join('')}</div></details>`;}).join('')}</div>`;}
   return win('Giao tình',b,{cls:'tall'});
 }
@@ -9305,7 +9343,7 @@ function cfgHTML(){
   return b+`</div><p class="hint ver">Phù Sinh · bản 3 · cấu hình đồ họa lưu riêng trên từng máy.</p>`;
 }
 // Tông môn: phát triển sau, tạm hiện các tông môn đã biết
-function pTong(){const R=relations();const AL={chinh:'chính đạo',ta:'tà đạo',ma:'ma đạo',trung:'trung lập'};
+function pTong(){const R=relations();const AL={chinh:'chính đạo',ta:'tà đạo',ma:'ma đạo',trung:'trung lập',phat:'Phật môn'};
   return win('Tông môn',`<div class="soon">${ib('flag','soft')}<b>Tông môn</b><p class="hint">Phần này đang được xây dựng: lập tông, chiêu đệ tử, xây điện các.</p></div><p class="hint">${R.mine?'Ngươi là đệ tử tông môn.':'Ngươi là tán tu, chưa vào tông môn nào.'}</p><div class="rows">${R.sects.map(s=>`<div class="row"><span class="r-i sect-i"><img src="${sectPic(s.n,s.al)}" alt=""></span><span class="r-t"><b>${esc(s.n)}</b><small>${AL[s.al]||s.al||''}</small></span></div>`).join('')}</div>`,{cls:'tall'});}
 const PANEL_V={tong:pTong,char:pChar,pets:pPets,journal:pJournal,affairs:pAffairs,bonds:pBonds,more:pMore,craft:pCraft};
 
@@ -9485,7 +9523,7 @@ function chipSpan(c,tip,t){return `<span class="chip ${c}"${ta(tip)}>${t}</span>
 function artSlot(a){const r=G.run;const v=chuView();return r.chu.findIndex((c,i)=>i<v.n&&c&&c.u===a.u);}
 function artCard(a){const r=G.run;const v=chuView();const slot=artSlot(a);const pot=slot>=0?chuPot(v,slot):null;const aff=artAff(a);
   return `${artTipH(a,pot)}<div class="art-st">${lvPips(a.lv,a.lines.length)}<span class="${slot>=0?'good':'hint'}">${slot>=0?'Đang vận hành · ×'+numVN(pot):'Chưa vận hành'}</span>${aff<1?`<span class="bad"${ta('Không hợp linh căn: hiệu quả còn 80%')}>lệch linh căn</span>`:''}</div>
-   <div class="bact">${slot<0?`<button class="btn pri sm" data-act="artRun" data-arg="${a.u}"${chuView().it.filter(Boolean).length>=chuSlots()?' disabled':''}>Vận hành</button>`:`<button class="btn sm" data-act="chuDel" data-arg="${slot}">Ngừng vận hành</button>`}<button class="btn sm" data-act="study" data-arg="${a.u}"${artNextWhy(a)||r.scene||r.moving?' disabled':''}${ta(artNextWhy(a)||'Tham ngộ lên tầng '+(a.lv+1)+': mở dòng kế tiếp.')}>${a.lv>=a.lines.length?'Viên mãn':'Tham ngộ · '+durH(studyTime(a))}</button><button class="btn sm" data-act="forget" data-arg="${a.u}">${UI.confirm==='fg'+a.u?'Chắc chứ?':'Phế bỏ'}</button></div>`;}
+   <div class="bact">${slot<0?`<button class="btn pri sm" data-act="artRun" data-arg="${a.u}"${chuView().it.filter(Boolean).length>=chuSlots()?' disabled':''}>Vận hành</button>`:`<button class="btn sm" data-act="chuDel" data-arg="${slot}">Ngừng vận hành</button>`}<button class="btn sm" data-act="study" data-arg="${a.u}"${artNextWhy(a)||(r.scene&&r.scene.type!=='place')||r.moving?' disabled':''}${ta(artNextWhy(a)||(r.moving?'Đang đi đường, dừng lại rồi mới tham ngộ được.':(r.scene&&r.scene.type!=='place')?'Xong việc trước mắt rồi mới tham ngộ được.':'Tham ngộ lên tầng '+(a.lv+1)+': mở dòng kế tiếp.'))}>${a.lv>=a.lines.length?'Viên mãn':'Tham ngộ · '+durH(studyTime(a))}</button><button class="btn sm" data-act="forget" data-arg="${a.u}">${UI.confirm==='fg'+a.u?'Chắc chứ?':'Phế bỏ'}</button></div>`;}
 function artModalHTML(m){const a=artBy(+m.u);if(!a)return '';return `<div class="mbox imod"><div class="mb-h"><span class="grow"></span><button class="xb" data-act="modalX" aria-label="Đóng">${ic('close')}</button></div>${artCard(a)}</div>`;}
 function artGrid(type){const r=run2();const A=arts().filter(a=>a.type===type).sort((a,b)=>(artSlot(b)>=0)-(artSlot(a)>=0)||b.tier-a.tier);const cap=artCap(type);const books=r.relics.filter(x=>x.k==='book'&&x.art.type===type).length+artKho().filter(x=>x.type===type).length;
   let h=A.map(a=>{const s=artSlot(a);return `<button class="acell${s>=0?' run':''}" data-act="artOpen" data-arg="${a.u}" style="${pcs(a.tier)}"${tah(artTipH(a))}><span class="qi">${artArt(a)}<i class="alv"${ta('Tầng '+a.lv+' / '+a.lines.length)}>${a.lv}</i></span><b class="qt">${esc(a.n)}</b>${slotX('artStash',a.u,'Tháo ra, cất vào kho công pháp')}</button>`;}).join('');
@@ -9660,7 +9698,7 @@ function tfxCrown(id,P,t,cx,y,sc){const n=t===4?5:t===3?3:t===2?1:0;if(!n)return
   const bw=W/2+7*sc;return `${sp}<path d="M${cx-bw} ${y+3*sc}C${cx-W/4} ${y-4*sc} ${cx+W/4} ${y-4*sc} ${cx+bw} ${y+3*sc}C${cx+W/4} ${y}  ${cx-W/4} ${y} ${cx-bw} ${y+3*sc}Z" fill="url(#${id}m)" stroke="${P.dk}" stroke-width=".7"/>${tfxGem(id,P,cx,y-2*sc,(t>=3?7:5.5)*sc)}`;}
 // đáy theo bậc (tâm cx, cy)
 function tfxBottom(id,P,t,cx,cy,sc,wide){if(t===4){const wing=f=>{let w='';const L=[[52,0,1],[46,4,.92],[39,7,.85],[31,10,.78]];const k=wide||1;
-    for(const [len0,dy,o] of L){const len=len0*k;w+=`<path d="M0 0C-${len*.35} -${(6-dy*.3)*sc} -${len*.75} -${(7-dy*.4)*sc} -${len} -${(3.5-dy*.6)*sc}C-${len*.7} -${(1-dy*.2)*sc} -${len*.4} ${(1+dy*.2)*sc} 0 ${3.5*sc}Z" transform="translate(0 ${dy*.25*sc})" fill="url(#${id}m)" fill-opacity="${o}" stroke="${P.dk}" stroke-width=".6"/>`;}
+    for(const [len0,dy,o] of L){const len=len0*k;w+=`<path d="M0 0C${-len*.35} ${-(6-dy*.3)*sc} ${-len*.75} ${-(7-dy*.4)*sc} ${-len} ${-(3.5-dy*.6)*sc}C${-len*.7} ${-(1-dy*.2)*sc} ${-len*.4} ${(1+dy*.2)*sc} 0 ${3.5*sc}Z" transform="translate(0 ${dy*.25*sc})" fill="url(#${id}m)" fill-opacity="${o}" stroke="${P.dk}" stroke-width=".6"/>`;}
     return `<g transform="translate(${cx} ${cy}) scale(${f*sc} ${1})">${w}<path d="M-4 -1C-16 -3 -32 -4 -${48*k} -3" fill="none" stroke="${P.hi}" stroke-opacity=".7" stroke-width=".5"/></g>`;};return wing(1)+wing(-1)+tfxGem(id,P,cx,cy+1*sc,7.5*sc);}
   if(t===3){const pet=(a,l,w)=>`<path transform="rotate(${a} ${cx} ${cy+6*sc})" d="M${cx} ${cy+6*sc}C${cx-w*sc} ${cy+6*sc-l*.45*sc} ${cx-w*.6*sc} ${cy+6*sc-l*sc} ${cx} ${cy+6*sc-(l+2.5)*sc}C${cx+w*.6*sc} ${cy+6*sc-l*sc} ${cx+w*sc} ${cy+6*sc-l*.45*sc} ${cx} ${cy+6*sc}Z" fill="url(#${id}v)" stroke="${P.dk}" stroke-width=".6"/>`;
     return pet(-78,12,5)+pet(78,12,5)+pet(-52,15,5.5)+pet(52,15,5.5)+pet(-26,17,5.5)+pet(26,17,5.5)+pet(0,18,6)+tfxGem(id,P,cx,cy-1*sc,6*sc);}
@@ -9940,7 +9978,7 @@ const ACT={
   legAll:()=>{const any=Object.keys(CFG.hideT||{}).length+Object.keys(CFG.hideE||{}).length>0;if(any){cfgSet('hideT',{});cfgSet('hideE',{});}else{const a={},b={};Object.keys(GLYPH).forEach(k=>{if(TYPE_NAME[k])a[k]=1;});a._me=1;Object.keys(ENT_T).forEach(k=>b[k]=1);cfgSet('hideT',a);cfgSet('hideE',b);}},
   legendOpen:()=>{UI.panel='more';UI.tab.more='legend';},
   bagOpen:()=>{UI.panel='char';UI.tab.char='bag';UI.code=null;UI.msg=null;},
-  hudBt:()=>{UI.modal=null;const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')placeAct('bt');},
+  hudBt:()=>{UI.modal=null;const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place'){placeAct('bt');if(r.scene&&r.scene.type==='place')note(nodeById(r.at).dp?'Chưa đủ điều kiện đột phá.':'Đột phá cần ngồi trong động phủ. Hãy khai phủ ở nơi hoang dã, hoặc quay về động phủ cũ.');}},
   status:()=>{UI.status=!UI.status;},
   panel:k=>{UI.panel=UI.panel===k?null:k;UI.code=null;UI.msg=null;UI.confirm=null;UI.chuSel=null;},
   closePanel:()=>{UI.panel=null;UI.code=null;UI.msg=null;},
@@ -9984,7 +10022,7 @@ const ACT={
   xkGo:()=>{UI.modal=null;const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')placeAct('xk');},
   bqSet:y=>{if(UI.modal&&UI.modal.k==='bq'){UI.modal.y=+y;UI.modal.ok=0;const c=bqCapY();UI.modal.warn=c!=null&&+y>c?1:0;}},
   bqWarnX:()=>{if(UI.modal){UI.modal.warn=0;const c=bqCapY();if(c!=null)UI.modal.y=c;}},bqWarnOk:()=>{if(UI.modal){UI.modal.warn=0;UI.modal.ok=1;ACT.bqGo();}},
-  bqGo:()=>{const y=UI.modal&&UI.modal.y;if(!(y>0))return;{const c=bqCapY();if(c!=null&&y>c&&!UI.modal.ok){UI.modal.warn=1;return;}}UI.modal=null;const t0=W().t,tv0=G.run.tv;const done=bqCustom(y);const r=G.run,sc=r&&r.scene;if(!done){note(bqCan()||'Không bế quan được ở đây.');if(UI.bqOpened&&sc&&sc.type==='place')r.scene=null;}else if(sc&&sc.type==='place'){UI.modal={k:'res',title:'Xuất quan',t:sc.msg.join(' ')+' Thời gian trôi qua '+durH(W().t-t0)+', tu vi '+(r.tv>=tv0?'tăng '+numVN(r.tv-tv0)+'%':'đã viên mãn')+'.',chips:sc.chips};sc.msg=[];sc.chips=[];if(UI.bqOpened)r.scene=null;}UI.bqOpened=false;},
+  bqGo:()=>{const y=UI.modal&&UI.modal.y;if(!(y>0)||bqFullNow())return;{const c=bqCapY();if(c!=null&&y>c&&!UI.modal.ok){UI.modal.warn=1;return;}}UI.modal=null;const t0=W().t,tv0=G.run.tv;const done=bqCustom(y);const r=G.run,sc=r&&r.scene;if(!done){note(bqCan()||'Không bế quan được ở đây.');if(UI.bqOpened&&sc&&sc.type==='place')r.scene=null;}else if(sc&&sc.type==='place'){UI.modal={k:'res',title:'Xuất quan',t:sc.msg.join(' '),chips:sc.chips.map(c=>c&&c.i==='⏳'?Object.assign({},c,{t:durH(W().t-t0)}):c)};sc.msg=[];sc.chips=[];if(UI.bqOpened)r.scene=null;}UI.bqOpened=false;},
   enc:a=>encAct(a),
   bossFight:()=>bossFight(),
   skill:id=>{UI.menu=null;const sc=G.run.scene;if(needTarget(sc,id)){UI.pendSk=id;return;}UI.pendSk=null;playerAct(id);},

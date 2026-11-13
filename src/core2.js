@@ -63,6 +63,12 @@ function petFx(fx){const r=G.run;if(!r||!r.pets)return;const p=r.petOut!=null&&r
   const k=PET_FX[chuBase(p.el)];if(k)fx[k]=(fx[k]||0)+2*p.lv;else fx.van=(fx.van||0)+Math.ceil(p.lv/3);}
 function petFxText(p){const k=PET_FX[chuBase(p.el)];const N={atkP:'Công',hpP:'Khí huyết',mpP:'Linh lực',matkP:'Sát thương phép',defP:'Thủ'};return k?N[k]+' +'+2*p.lv+'%':'Khí vận +'+Math.ceil(p.lv/3);}
 function petName(en){const E=EN[en.k];const b=E&&E.nb?E.nb[0]:'Thú';return pick(['Tiểu ','A ','Lão ','Hắc ','Bạch ','Xích '])+b;}
+// vật liệu nhận qua sự kiện: linh thảo (thao), linh khoáng (khoang)
+{const _aeMat=applyE;applyE=function(e,v){const has=e&&(e.thao||e.khoang);const ch=_aeMat(has?Object.assign({},e,{thao:undefined,khoang:undefined}):e,v);if(has&&G.run){const r=run2();for(const k of ['thao','khoang'])if(e[k]){r.mats[k]=(r.mats[k]||0)+e[k];ch.push(chip(MAT[k].i,'+'+e[k]+' '+MAT[k].n.toLowerCase(),'Vật liệu để luyện chế','up'));}}return ch;};}
+// linh thú nhận qua sự kiện (không qua trứng): vào thẳng mục Linh thú
+{const _aePet=applyE;applyE=function(e,v){const ch=_aePet(e&&e.petNew?Object.assign({},e,{petNew:undefined}):e,v);if(e&&e.petNew&&G.run){const r=run2();
+  if(r.pets.length<PET_MAX){const E=EN[e.petNew]||{};const p={n:pick(['Đoàn Tử','Tiểu Hỏa','Mao Cầu','Tiểu Tuyết','A Hoàng']),i:E.i||'🐾',el:pick(E.el||['vo']),k:e.petNew,lv:1,exp:0,rest:0};r.pets.push(p);if(r.petOut==null)r.petOut=r.pets.length-1;
+    log(`${p.n} theo ngươi.`);ch.push(chip(p.i,p.n,'Linh thú mới, xem ở mục Linh thú','up'));}}return ch;};}
 function petHatch(i,pay){const r=run2();const e=r.eggs[i];if(!e)return null;
   if(pay){const c=price(10);if(r.st<c)return null;r.st-=c;}
   else if(W().t<e.t)return null;
@@ -107,7 +113,7 @@ function bqInfo(){const r=G.run,s=S();const rate=bqRate();const left=Math.max(0,
   return {rate,left,need:Math.max(0.25,Math.ceil(need*4)/4),maxY,full:r.tv>=100};}
 function bqCustom(y){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);if(!n.dp)return false;
   const I=bqInfo();y=clamp(Math.round(y*4)/4,0.25,I.maxY);
-  const g=bqRate()*y*(y<1?0.9:1);sc.msg=[T(REST_T.bq)];sc.chips=[];
+  const g=bqRate()*y*(y<1?0.9:1);sc.msg=[T(bqText())];sc.chips=[];
   if(y>=1&&chance(Math.min(.5,.11*y))){
     const o=advanceTime(y*HY*0.5);if(!G.run)return true;sc.msg.push(T(REST_T.bqint));
     sc.chips=applyE({tv:g*0.5,tvMajor:1,tamma:-3});if(!G.run)return true;
@@ -196,7 +202,7 @@ function exploreStats(n){const fp=[0.04,0.14,0.26,0.4][n.danger]+(['phe','ma'].i
     if(!n.dp)add('khaiphu','','Khai phủ',HM,'Đào một động phủ ở đây để bế quan, đột phá',n.danger>=3,n.danger>=3?'Đất này là tử địa.':'');
     const y=Math.floor(w.t/HY);const hc=n.hunt&&n.hunt.y===y&&n.hunt.k===r.kiep?n.hunt.c:0;
     add('sanyeu','',hc>=3?'Săn yêu · hết lượt năm nay':'Săn yêu · còn '+(3-hc)+' lần',2,'Lùng yêu thú quanh đây. Thắng thì được yêu đan, đôi khi có trứng linh thú.',hc>=3);
-    const m=Math.floor(w.t/HM);const gc=n.gath&&n.gath.m===m&&n.gath.k===r.kiep?n.gath.c:0;const mt=exploreStats(n).mat;
+    const m=Math.floor(w.t/HM);const gc=n.gath&&n.gath.m===m&&n.gath.k===r.kiep?n.gath.c:0;const mt=n.type==='duoc'?'thao':n.type==='khoang'?'khoang':exploreStats(n).mat; // dược cốc luôn hái thuốc, mỏ luôn đào khoáng
     if(mt==='thao')add('haithuoc','','Hái thuốc dại',6,'Kiếm linh thảo để luyện đan. Mỗi tháng hai lần.',gc>=2);
     if(mt==='khoang')add('daokhoang','','Đào khoáng',6,'Kiếm linh khoáng để luyện khí. Mỗi tháng hai lần.',gc>=2);}
   return L;};}
@@ -308,7 +314,7 @@ function bqInfo(){const r=G.run,s=S();const rate=bqRate();const left=Math.max(0,
 function bqCustom(y){const r=G.run;if(!r||bqCan())return false;if(!r.scene)openPlace(r.at);const sc=r.scene;if(!sc||sc.type!=='place')return false;
   const I=bqInfo();y=clamp(Math.round(y*4)/4,0.25,I.maxY);const room=!!G.bqRoom;
   if(room){const c=Math.ceil(y*CH_YEAR);if((r.ch||0)<c){G.bqRoom=false;return false;}r.ch-=c;}
-  const g=bqRate()*y*(y<1?0.9:1);const risk=bqRisk(y);G.bqRoom=false;sc.msg=[T(REST_T.bq)];sc.chips=[];
+  const g=bqRate()*y*(y<1?0.9:1);const risk=bqRisk(y);G.bqRoom=false;sc.msg=[T(bqText())];sc.chips=[];
   if(chance(risk)){advanceTime(y*HY*0.5);if(!G.run)return true;sc.msg.push(T(REST_T.bqint));
     sc.chips=applyE({tv:g*0.5,tvMajor:1,tamma:-3});if(!G.run)return true;startCombat({},{kind:'place',msg:sc.msg.slice()});return true;}
   const o=advanceTime(y*HY);if(!G.run)return true;if(o.length)sc.msg.push('Trong lúc ấy: '+o.slice(-2).join(' '));
@@ -1139,7 +1145,7 @@ const QDOOR=[{t:'Người nhận vắng nhà. Hàng xóm bảo chiều mai mới
   if(n&&n.board){if(n.board.until&&w.t>n.board.until)n.board=null;else if(n.board.until)n.board.m=Math.floor(w.t/HM);}
   _ob17(n);if(!n||!n.board)return;const B=n.board;
   if(!B.until){B.until=w.t+ri(20,60)*HD;
-    if(chance(.22)){const ns=regionOf(G.run.region).nodes.filter(x=>x.id!==n.id&&x.type!=='ai'&&x.danger>=1);const tgt=ns.length?pick(ns):null;
+    if(chance(.22)){const ns=regionOf(G.run.region).nodes.filter(x=>{if(x.id===n.id||x.type==='ai'||x.danger<1)return false;const p0=findPath(n.id,x.id);return p0&&travelHours(p0)<=90*24;});const tgt=ns.length?pick(ns):null; // việc gấp chỉ nhắm nơi đi tới trong chừng ba tháng
       if(tgt){const p=findPath(n.id,tgt.id);const tH=p?travelHours(p):24*30;const g=clamp(questGrade({node:tgt.id,kind:'diet'})+(chance(.25)?2:1),1,5);
         const q={id:'qs'+n.id+'_'+Math.floor(w.t),text:pick(['Gấp: diệt yêu vật đang tàn sát ở ','Gấp: bắt kẻ cướp đang trốn ở ','Gấp: cứu người bị bắt vào '])+tgt.name,node:tgt.id,kind:'diet',days:Math.ceil(tH*1.1/24)+ri(2,6),special:1,acc:w.t+ri(1,4)*HD,grade:g,v2:1,taken:false};
         q.reward=questRewardGen(g,G.run.region);q.reward.st=Math.round(q.reward.st*1.3);hearOf(tgt);B.list.unshift(q);}}}};}

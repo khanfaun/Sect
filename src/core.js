@@ -884,7 +884,7 @@ function evOk(e,type,src){
 function pickEvent(type,src){
   const r=G.run;src=src||'explore';
   // sự kiện đặc biệt
-  const sp=src!=='explore'?[]:EVS.filter(e=>e.spec&&srcOk(e,src)&&whenOk(e)&&(r.evCount[e.id]||0)<2&&(!e.r||e.r.includes(r.region))&&!(e.once&&r.evCount[e.id])&&!r.evRecent.includes(e.id)&&e.cond&&e.cond(r));
+  const sp=src!=='explore'?[]:EVS.filter(e=>e.spec&&srcOk(e,src)&&whenOk(e)&&(!type||!e.tg||e.tg.includes('*')||e.tg.includes(type))&&(r.evCount[e.id]||0)<2&&(!e.r||e.r.includes(r.region))&&!(e.once&&r.evCount[e.id])&&!r.evRecent.includes(e.id)&&e.cond&&e.cond(r));
   if(sp.length&&chance(.55))return pick(sp).id;
   let pool=EVS.filter(e=>evOk(e,type,src));
   if(!pool.length)pool=EVS.filter(e=>evOk(e,null,src));
@@ -892,9 +892,10 @@ function pickEvent(type,src){
   if(!pool.length)return null;
   return wpick(pool,e=>(e.w||1)*((e.tg&&e.tg.includes(type))?2:1)/(1+(r.evCount[e.id]||0)*2)).id;
 }
-function startEvent(id){
+function startEvent(id,extra){
   const r=G.run,e=EVMAP[id];
-  const v=Object.assign(baseV(),e.v?e.v(r):{});
+  const v=Object.assign(baseV(),e.v?e.v(r):{},extra||{});
+  if(!v.en&&v.a&&v.a.ten)v.en=v.a.ten; // sự kiện của người đi đường gặp qua thăm dò: lấy tên người trong sự kiện
   r.evCount[id]=(r.evCount[id]||0)+1;r.evRecent.push(id);if(r.evRecent.length>14)r.evRecent.shift();r.evDone++;
   const story=[T(e.t,v)];const back=sceneBack();
   r.scene={type:'event',id,v,story,cur:['c'],phase:'choose',chips:[],news:takeNews(),back};
@@ -1367,7 +1368,8 @@ function kiepHit(sc,k,off){
 }
 // ---------- kết thúc trận ----------
 function combatContinue(){
-  const r=G.run,sc=r.scene;const res=sc.over;const af=sc.after||{kind:'node'};
+  const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='combat'||!sc.over)return; // bấm hai lần hoặc màn chưa kịp vẽ lại
+  const res=sc.over;const af=sc.after||{kind:'node'};
   if(af.kind==='bt'){btAfterStage(res);return;}
   if(res==='dead'){die(sc.en.n==='Tâm Ma'?'tamma':'combat',sc.en);return;}
   advanceTime(1);if(!G.run)return;
@@ -1596,21 +1598,21 @@ function worldCoarse(m){
   for(let i=0;i<m;i++){
     w.t+=HM;
     if(G.run)worldTick(HM/HY);
-    if(chance(.08))flipNode();
+    if(chance(.03))flipNode(); // chừng ba năm mới có một nơi đổi chủ hay gặp nạn
     nodeRecover();
   }
 }
 function nodeRecover(){
   const w=W();
-  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;}}
+  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;if(n.type==='tran'||n.type==='thanh')chron(`${n.name} dần hồi sinh, khói bếp lại bốc lên.`);}}
 }
 function flipNode(){
   const w=W();const r=G.run;
-  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if(['tran','thanh','tong'].includes(n.type)&&(!r||n.id!==r.at))pool.push(n);
+  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if(['tran','thanh','tong'].includes(n.type)&&n.state!=='ruin'&&(!r||n.id!==r.at))pool.push(n); // nơi đang hoang tàn thì không "gặp nạn" lần nữa
   if(!pool.length)return;const n=pick(pool);
   if(n.state==='ruin'){n.state='ok';n.stateUntil=0;chron(`${n.name} dần hồi sinh, khói bếp lại bốc lên.`);}
   else if(n.type==='tong'){const s=pick(w.sects);n.owner=s.n;chron(`Sơn môn ở ${n.name} đổi chủ, nay thuộc ${s.n}.`);}
-  else {n.state='ruin';n.stateUntil=w.t+6*HM;chron(`${n.name} gặp nạn, thành hoang tàn.`);}
+  else {n.state='ruin';n.stateUntil=w.t+ri(3,6)*HY;chron(`${n.name} gặp nạn, thành hoang tàn.`);}
 }
 function chron(t){const w=W();w.chron.push({y:tYear(w.t),t});if(w.chron.length>60)w.chron.shift();if(TICK_OUT)TICK_OUT.push(t);if(G.run)pushNews(t,true);}
 
@@ -1765,7 +1767,10 @@ const BQ_Y=[8,16,30,50,80,80]; // số năm bế quan cho 100% tu vi theo cảnh
 function openPlace(id){const r=G.run;const n=nodeById(id==null?r.at:id);r.place={n:n.name,t:n.type};r.scene={type:'place',id:n.id,msg:[],chips:[],intro:placeIntro(n)};}
 function placeIntro(n){
   const t=W().t;let s=T('{canh_'+(P['canh_'+n.type]?n.type:(n.type==='ai'?'nui':n.type==='sao'?'phe':'tran'))+'}');
-  const pp=P['buoi_'+partOf(t)],ss=P['mua_'+seasonOf(t)];
+  const pt=partOf(t);const town=['tran','thanh','cho','tong','ancu','ai'].includes(n.type);
+  // bỏ những câu không hợp chỗ (khói bếp, mái ngói ở nơi hoang vu) hoặc không hợp giờ (nắng, chim én lúc đêm)
+  const fit=L=>(L||[]).filter(x=>(town||!/khói bếp|đèn lồng|chó sủa|mái ngói|nước giếng|lúa chín|cơm mới/i.test(x))&&(!(pt==='dem'||pt==='toi')||!/nắng|chim én|ve kêu|nhạn bay|mây trắng/i.test(x)));
+  const pp=fit(P['buoi_'+pt]),ss=fit(P['mua_'+seasonOf(t)]);
   if(pp&&pp.length)s+=' '+T(pp);if(SEASON_ON&&ss&&ss.length&&chance(.5))s+=' '+T(ss);
   if(n.state==='ruin')s+=' '+T(['Nhà cửa đổ nát, xác thú và tro tàn còn ngổn ngang. Chẳng còn ai buôn bán gì.','Nơi này đã thành hoang tàn. Vài người sống sót ngồi thẫn thờ bên đống gạch vỡ.']);
   return s;
@@ -1829,7 +1834,7 @@ function placeAct(a){
     case 'heal':{if(!tick(HM))return;const s1=S();r.hp=s1.maxHp;r.mp=s1.maxMp;sc.msg.unshift(T(['Ngươi nằm trong động suốt một tháng, uống nước suối, ăn quả rừng. Vết thương lành dần.','Một tháng tĩnh dưỡng. Xương cốt lại liền, kinh mạch lại thông.']));ch=[chip('❤️','hồi đầy','Khí huyết, linh lực','up'),chip('⏳','1 tháng','Thời gian trôi qua','')].concat(applyE({tamma:-8}));break;}
     case 'bq1':case 'bq3':{
       const y=a==='bq1'?0.25:2;const g=bqGain(y)*(1+(s.fx.bqP||0)/100);
-      sc.msg.unshift(T(REST_T.bq));
+      sc.msg.unshift(T(bqText()));
       if(a==='bq3'&&chance(.22)){
         if(!tick(HY))return;sc.msg.push(T(REST_T.bqint));
         ch=applyE({tv:g*0.5,tvMajor:1,tamma:-3});sc.chips=ch;
@@ -1931,7 +1936,7 @@ function bossFight(){startCombat('boss',{kind:'boss'});}
 function price(base){const fx=aggFx();return Math.max(1,Math.round(base*SC[G.run.region]*(1-Math.min(40,fx.shopP||0)/100)));}
 function openShop(n){
   const r=G.run;const back=sceneBack();const a=npc('thuong');const v=Object.assign(baseV(),{a});
-  const text=T(['{$a.ten}, {$a.look}, xoa tay cười: “{$a.goi} cần gì? Hàng ở đây không giả.”','Tiệm tạp hóa nhỏ, hàng bày lộn xộn. {$a.ten} ngáp dài: “Xem thoải mái. Mua thì trả tiền.”','Chi nhánh Vạn Bảo Thương Hội. Tiểu nhị cúi chào tới tận đất, mắt liếc túi trữ vật của ngươi.','Một tán tu bày sạp ven đường, vừa thấy ngươi đã mời mọc rối rít.','Phường thị đông nghịt. Ngươi chen vào một sạp hàng có tấm biển viết: “Không trả giá.”'],v);
+  const text=!n?T(['{$a.ten} lật tấm bạt, bày từng món lên mặt hòm: “{$a.goi} xem đi, đường xa nên giá có nhỉnh hơn chút.”','Hàng hóa xếp trên mấy cỗ xe, mùi da thuộc lẫn mùi hương liệu. {$a.ten} gõ gõ nắp hòm: “Món nào cũng có lai lịch.”'],v):T(['{$a.ten}, {$a.look}, xoa tay cười: “{$a.goi} cần gì? Hàng ở đây không giả.”','Tiệm tạp hóa nhỏ, hàng bày lộn xộn. {$a.ten} ngáp dài: “Xem thoải mái. Mua thì trả tiền.”','Chi nhánh Vạn Bảo Thương Hội. Tiểu nhị cúi chào tới tận đất, mắt liếc túi trữ vật của ngươi.','Một tán tu bày sạp ven đường, vừa thấy ngươi đã mời mọc rối rít.','Phường thị đông nghịt. Ngươi chen vào một sạp hàng có tấm biển viết: “Không trả giá.”'],v);
   const m=Math.floor(W().t/HM);
   if(n&&n.shop&&n.shop.m===m&&n.shop.kiep===r.kiep){r.scene={type:'shop',text,items:n.shop.items,heal:n.shop.heal,back,node:n.id};return;}
   const items=[];
@@ -1956,6 +1961,7 @@ function healBuy(){const r=G.run,sc=r.scene;if(r.st<sc.heal)return;r.st-=sc.heal
 // ---------------- ĐỘNG PHỦ ----------------
 const REST_T={
   tinh:['Ngươi ngồi xếp bằng, vận khí một chu thiên. Mệt mỏi tan dần như sương dưới nắng.','Gió nhẹ, lá rơi. Ngươi điều tức nửa ngày, thương thế lành quá nửa.','Một nén nhang, rồi hai nén. Hơi thở ngươi dài ra, chậm lại, hòa vào tiếng côn trùng.'],
+  bqTown:['Ngươi thuê một gian phòng sau khách điếm, cài then, ngồi xếp bằng. Tiếng rao ngoài phố xa dần rồi tắt hẳn.','Ngươi đóng cửa phòng trọ, dặn chủ quán đừng gõ cửa. Ngày tháng trôi qua như nước chảy dưới cầu.','Ngươi mở mắt, bên ngoài đã đổi mùa mấy lượt. Chủ trọ nhìn ngươi như nhìn người từ cõi khác về.','Bế quan lần này ngươi mơ rất nhiều. Tỉnh dậy, ngoài cửa sổ phố xá vẫn ồn ã như chưa từng có ai ngồi đó.'],
   bq:['Ngươi bố trí cấm chế, ngồi vào chỗ sâu nhất của động phủ. Ngày tháng trôi qua như nước chảy dưới cầu.','Đá phủ rêu, rêu khô rồi lại xanh. Ngươi mở mắt, bên ngoài đã đổi mùa mấy lượt.','Bế quan lần này ngươi mơ rất nhiều. Có giấc mơ là kiếp trước, có giấc mơ là kiếp sau.','Linh khí trong động bị ngươi hút cạn, vách đá bạc trắng như vôi. Ngươi đứng dậy, xương cốt kêu răng rắc.','Ngươi quên cả ngày đêm. Lúc xuất quan, có con chim đã làm tổ trên vai.'],
   bqint:['Đang ngồi thì có động, đành xuất quan giữa chừng. Có kẻ tới trước chỗ ngươi ngồi.','Cấm chế vỡ tan. Ngươi bừng mắt: kẻ xâm nhập đã đứng ngay cửa động.'],
   bt:[['Linh khí trong đan điền ngưng tụ thành một đài sen, vững như núi. Đạo cơ đã thành.','Ngươi nghe trong người có tiếng nổ nhẹ như măng mọc. Rồi mọi thứ lắng lại. Trúc Cơ.'],
@@ -1968,7 +1974,7 @@ const REST_T={
 // ---------------- KẾT THÚC KIẾP ----------------
 function lifeSummary(cause,info){
   const r=G.run;const age=Math.floor(r.age);
-  const lines=r.bio.slice(0,6);
+  const lines=r.bio.length>6?[r.bio[0]].concat(r.bio.slice(-5)):r.bio.slice(); // giữ dòng xuất thân và những chuyện gần nhất (cảnh giới cao nhất thường ở cuối)
   let end='';
   if(cause==='combat')end=`Năm ${age} tuổi, ${r.ten} chết dưới tay ${info.n} ở ${r.place.n}.`;
   else if(cause==='toahoa')end=`Năm ${age} tuổi, thọ nguyên cạn kiệt, ${r.ten} tọa hóa ở ${r.place.n}.`;
@@ -2101,7 +2107,7 @@ function entArrive(e){
   const w=W();const n=nodeById(e.at);
   if(e.type==='thuong')e.wait=12;
   if(e.type==='thutrieu'&&e.at===e.data.tgt){
-    if(n.state==='ok'){n.state='ruin';n.stateUntil=w.t+6*HM;chron(`Thú triều tràn qua ${n.name}. Nhà cửa đổ nát, người sống sót bỏ đi.`);}
+    if(n.state==='ok'){n.state='ruin';n.stateUntil=w.t+ri(2,4)*HY;chron(`Thú triều tràn qua ${n.name}. Nhà cửa đổ nát, người sống sót bỏ đi.`);}
     removeEnt(e);return;}
   if(e.type==='tuantra')e.wait=6;
   if(e.type==='khach')e.wait=ri(4,16);
@@ -2133,7 +2139,7 @@ function meetEnt(e){
   if(!id){const L=EVS.filter(x=>x.src==='ent:'+e.type&&(e.type!=='di'||!x.dk||x.dk===e.data.k)&&(e.type!=='truysat'||x.id!=='no_kiep_truoc')&&whenOk(x)&&(!x.cond||x.cond(r))&&(!x.r||x.r.includes(r.region)));if(L.length)id=wpick(L,x=>(x.w||1)/(1+(r.evCount[x.id]||0))).id;}
   if(!id||!EVMAP[id]){return;}
   if(e.type==='thienkieu')r.metRival=e.data.rv;
-  startEvent(id);r.scene.back=null;r.scene.v.eid=e.id;r.scene.v.en=e.name;
+  startEvent(id,{eid:e.id,en:e.name});r.scene.back=null;
   if(e.type==='di'||e.type==='truysat'&&!e.data.nem)removeEnt(e);
   if(e.type==='truysat'&&e.data.nem){removeEnt(e);}
 }
@@ -2366,10 +2372,10 @@ ev({id:'sap_ban',n:'Sạp hàng đồ cổ',tg:['tran','thanh'],w:2,v:()=>({a:np
  ]});
 
 ev({id:'thu_con',n:'Thú non lạc mẹ',tg:['rung','nui','dong','hoang'],w:2,
- t:['Trong hốc cây, một con thú nhỏ lông trắng đang run rẩy, chân bị kẹp. Nó kêu ư ử khi thấy ngươi.',
+ t:['Trong hốc cây, một con hồ ly nhỏ lông trắng đang run rẩy, chân bị kẹp. Nó kêu ư ử khi thấy ngươi.',
     'Tiếng kêu non nớt dẫn ngươi tới một con hồ ly con, lông đỏ như lửa, mắt đen láy. Mẹ nó nằm chết cách đó không xa, trên mình cắm ba mũi tên.'],
  c:[
-  {i:'🐾',l:'Cứu và nuôi nó',req:r=>!r.relics.find(x=>x.u==='linhthu'),t:'Ngươi gỡ bẫy, băng bó cho nó. Con thú nhỏ liếm tay ngươi rồi chui vào ngực áo, từ đó không chịu rời.',e:{relic:'linhthu',karma:4}},
+  {i:'🐾',l:'Cứu và nuôi nó',req:r=>!(r.pets&&r.pets.length>=3)&&!r.relics.find(x=>x.u==='linhthu'),t:'Ngươi ôm nó lên, lau sạch bùn đất, băng chỗ bị thương. Con thú nhỏ liếm tay ngươi rồi chui vào ngực áo, từ đó không chịu rời.',e:{petNew:'holy',karma:4}},
   {i:'🗡️',l:'Lấy yêu đan',t:'Ngươi xuống tay dứt khoát. Yêu đan nhỏ như hạt đậu, vẫn còn ấm.',e:{tv:6,karma:-5,tamma:3}},
   {i:'🔙',l:'Đưa về hang',o:[
     {w:2,t:'Ngươi đặt nó trước cửa hang. Một con thú lớn hiện ra, nhìn ngươi rất lâu, rồi đẩy ra một viên ngọc sáng.',e:{relic:0,karma:4}},
@@ -2476,8 +2482,8 @@ ev({id:'tre_ban_hoa',n:'Đứa trẻ bán hoa',tg:['tran','thanh'],w:2,v:()=>({a
   {i:'🚶',l:'Thế gian khổ nhiều, giúp không xuể',t:'Ngươi bước đi. Tiếng rao non nớt đuổi theo mãi một đoạn đường.',e:{tamma:2}}
  ]});
 
-ev({id:'kiem_khach',n:'Kiếm khách say',tg:['tran','thanh','song','nui'],w:2,v:()=>({a:npc('nam')}),
- t:['Trên lan can tửu lâu, một kiếm khách {$a.look} đang ngửa cổ tu rượu. Thấy kiếm khí trên người ngươi, hắn cười lớn: “Đấu một trận không?”','Giữa cầu đá có kẻ say nằm chắn ngang, kiếm đặt trên bụng. Hắn không nhúc nhích: “Muốn qua cầu, đỡ ta ba kiếm.”'],
+ev({id:'kiem_khach',n:'Kiếm khách say',tg:['tran','thanh'],w:2,v:()=>({a:npc('nam')}),
+ t:['Trên lan can tửu lâu, một kiếm khách {$a.look} đang ngửa cổ tu rượu. Thấy ngươi đứng nhìn, hắn cười lớn: “Đấu một trận không?”','Giữa cầu đá có kẻ say nằm chắn ngang, kiếm đặt trên bụng. Hắn không nhúc nhích: “Muốn qua cầu, đỡ ta ba kiếm.”'],
  c:[
   {i:'⚔️',l:'Nhận lời',fight:{k:'kiemtu',n:'{$a.ten}',spar:1},win:{t:'Hắn tỉnh rượu hẳn, chắp tay: “Hay! Hay!” Rồi tặng ngươi nửa bầu rượu và một câu kiếm quyết.',e:{tv:6,atkP:3}},lose:{t:'Ba kiếm. Ngươi đỡ được hai. Hắn thu kiếm, vỗ vai ngươi: “Không tệ.”',e:{tv:4}}},
   {i:'🍶',l:'Uống cùng hắn',cost:{st:8},t:'Hai người uống từ trưa tới tối. Hắn kể về một người con gái đã chết, về thanh kiếm hắn chưa từng rút khỏi vỏ. Lúc chia tay, hắn cười rất buồn.',e:{tam:2,an:['a','uống rượu nghe chuyện']}},
@@ -2715,8 +2721,8 @@ ev({id:'hoi_den',when:{season:['xuan']},n:'Hội hoa đăng',tg:['tran','thanh',
   {i:'🍡',l:'Ăn uống thỏa thích',cost:{st:5},t:'Bánh trôi, kẹo hồ lô, rượu nếp. Lâu lắm rồi ngươi mới thấy mình là người.',e:{hp:'50%',van:1}}
  ]});
 
-ev({id:'thu_nha',n:'Thư nhà',tg:['*'],r:[0,1],once:1,w:1,
- t:['Một con hạc giấy bay tới đậu trên vai ngươi. Thư từ {$que}.'],
+ev({id:'thu_nha',n:'Thư nhà',tg:['*'],r:[0,1],once:1,w:1,cond:r=>{const h=W().regions.flatMap(R=>R.nodes).find(n=>n.name===r.que);return !h||h.state!=='ruin';}, // quê đang hoang tàn thì không có thư "vẫn ổn"
+ t:['Một người phu trạm đường xa hỏi thăm mãi mới tìm được ngươi, trao một lá thư gói trong giấy dầu. Thư từ {$que}.'],
  c:[
   {i:'📜',l:'Đọc thư',o:[
     {w:2,t:'Thư viết: ở nhà vẫn ổn, năm nay được mùa, đừng lo. Cuối thư có vẽ một bông hoa xiêu vẹo.',e:{tam:2,tamma:-8}},
@@ -2812,7 +2818,7 @@ ev({id:'tran_co',n:'Trận đồ cổ',tg:['phe','dong','tong'],w:2,
  ]});
 
 ev({id:'dao_lu',n:'Đạo lữ',tg:['*'],r:[1,2,3],once:1,w:1,cond:r=>!r.flags.daolu,v:r=>({a:npc(r.g==='nam'?'nu':'nam')}),
- t:['Đã ba lần ngươi gặp {$a.ten} trên đường. Lần này, {$a.hn} không giả vờ tình cờ nữa: “Đường tiên dài lắm. Đi cùng nhau, được không?”','Sau trận chiến, {$a.ten} băng bó vết thương cho ngươi. Tay {$a.hn} run run: “Ta không muốn thấy ngươi bị thương nữa.”'],
+ t:['Mấy ngày nay {$a.ten} cứ đi cùng một con đường với ngươi, lúc trước lúc sau. Tối nay bên đống lửa, {$a.hn} không giả vờ tình cờ nữa: “Đường tiên dài lắm. Đi cùng nhau, được không?”','Sau trận chiến, {$a.ten} băng bó vết thương cho ngươi. Tay {$a.hn} run run: “Ta không muốn thấy ngươi bị thương nữa.”'],
  c:[
   {i:'❤️',l:'Nhận lời kết làm đạo lữ',t:'Hai người cùng thắt một sợi dây đỏ. Từ hôm ấy, đường xa bớt lạnh.',e:{relic:'dongtam',flag:'daolu',tam:2}},
   {i:'🌫️',l:'Từ chối',t:'{$a.hn} cười buồn, quay lưng đi. Ngươi không gọi lại.',e:{tam:1}}
@@ -2977,7 +2983,7 @@ ev({id:'tinh_ha',n:'Sông sao',tg:['thien'],w:2,
  ]});
 
 ev({id:'di_thue',n:'Di thuế tiên nhân',tg:['thien','phe'],w:2,
- t:['Một bộ xác ngồi xếp bằng trên đài ngọc, da thịt vẫn hồng hào. Tiên nhân di thuế: thân xác tiên nhân bỏ lại khi phi thăng.'],
+ t:['Một bộ xác ngồi xếp bằng trên đài ngọc, da thịt vẫn hồng hào. Đây là tiên nhân di thuế, cái xác một bậc tiền bối để lại khi phi thăng.'],
  c:[
   {i:'🙇',l:'Bái lạy',t:'Ngươi lạy ba lạy. Khóe môi bộ xác dường như khẽ cong lên.',e:{tam:3,van:2,lore:'tien_khu'}},
   {i:'✋',l:'Lấy pháp bảo trên người',fight:{k:'khoiloi',elite:1},win:{t:'Khôi lỗi canh giữ đổ sập. Pháp bảo của tiên nhân là của ngươi.',e:{relic:2,karma:-3}}},
@@ -3278,7 +3284,7 @@ ev({id:'m_xuan1',n:'Lễ hội mùa xuân',when:{season:['xuan']},tg:['tran','th
     {i:'🚶',l:'Đi tiếp',t:'Tiếng pháo xa dần.'}]});
 ev({id:'m_xuan2',n:'Hoa nở linh thảo',when:{season:['xuan']},tg:['rung','nui','song'],w:2,
  t:['Mùa xuân, linh thảo đâm chồi khắp sườn núi.'],
- c:[{i:'🌿',l:'Hái',t:'Ngươi hái được một gùi.',e:{pill:'hoixuan',st:10,h:6}},
+ c:[{i:'🌿',l:'Hái',t:'Ngươi hái được một gùi linh thảo, đủ để luyện mấy lò đan.',e:{thao:5,h:6}},
     {i:'🧘',l:'Ngồi cảm thụ sinh khí',t:'Sinh khí mùa xuân thấm vào kinh mạch.',e:{tv:3,h:6}}]});
 ev({id:'m_ha1',n:'Mưa rào mùa hạ',when:{season:['ha']},tg:['*'],w:2,
  t:['Mưa rào ập xuống, trắng xóa trời đất. Sấm rền liên hồi.'],
@@ -3310,3 +3316,13 @@ ev({id:'bao_an_co',n:'Người cũ báo ân',spec:1,cond:()=>false,
  c:[{i:'🤝',l:'Nhận lấy',t:'{$p.ten} đưa ngươi một túi đồ, dặn dò rất lâu như dặn con cháu.',e:{relic:1,pill:1,tv:6,ach:'baoan',patronDone:1}},
     {i:'🍶',l:'Chỉ ngồi uống chén trà',t:'Hai người ngồi tới chiều. {$p.ten} kể về {$p.who}, về những chuyện chính ngươi không còn nhớ.',e:{tam:3,tamma:-8,ach:'baoan',patronDone:1,partyP:30}}]});
 
+
+// lời kể bế quan theo chỗ ngồi: giữa thành trấn (chưa có động phủ) thì là phòng trọ, không phải vách đá
+function bqText(){const r=G.run;const n=r&&nodeById(r.at);return n&&!n.dp&&['tran','thanh','cho'].includes(n.type)?REST_T.bqTown:REST_T.bq;}
+
+// câu mở đầu {mo} (thời tiết, thời khắc) phải hợp giờ và mùa đang có: không "giữa trưa" lúc nửa đêm, không "tuyết đầu mùa" giữa hè
+{const MO0=P.mo.slice();const PART={sang:[5,11],chieu:[4,9,18,22],toi:[0,10],dem:[3,7,13,19,23]};const ANY=[1,2,8,12,14,16,17];const SEA={dong:[6,15],thu:[20],xuan:[21],ha:[9]};
+ const dayAll=[16];let key='';
+ Object.defineProperty(P,'mo',{configurable:true,get(){if(!G.run||!G.meta||!G.meta.world)return MO0;const t=W().t,pt=partOf(t),se=seasonOf(t);
+   const ok=new Set(ANY.concat(PART[pt]||[],SEA[se]||[]));if(pt==='dem'||pt==='toi')ok.delete(16);for(const [k,L] of Object.entries(SEA))if(k!==se)L.forEach(i=>ok.delete(i));
+   const k=pt+se;if(k!==key){key=k;delete BAG.mo;}return MO0.filter((x,i)=>ok.has(i));}});}

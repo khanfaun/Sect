@@ -190,7 +190,7 @@ function vPlace(sc){
   if(g)b+=`<h3 class="grp">${ib('book','ink')}Thường nhật</h3>`+g;
   const canEx=n.type!=='ai';
   const M=placeMeta(n),dg=dangerTag(n);
-  const meta=`<div class="pl-meta"><span>${esc(capS(TYPE_NAME[n.type]))}</span><span>${esc(REG[r.region].n)}</span><span class="nc-g dg${dg}"><i></i>${esc(DANGER[n.danger])}</span><span>Linh khí ${esc(LK_N[lkOf(n)].toLowerCase())}</span></div>`;const kv=(M?`<div class="pl-kv"><div><small>Tọa trấn</small><span>${esc(M.luc)}</span></div><div><small>Quy mô</small><span>${esc(M.quy)}</span></div></div>`:'');
+  const meta=`<div class="pl-meta"><span>${esc(capS(TYPE_NAME[n.type]))}</span><span>${esc(REG[r.region].n)}</span><span class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${esc(DTAG[dg])}</span><span>Linh khí ${esc(LK_N[lkOf(n)].toLowerCase())}</span></div>`;const kv=(M?`<div class="pl-kv"><div><small>Tọa trấn</small><span>${esc(M.luc)}</span></div><div><small>Quy mô</small><span>${esc(M.quy)}</span></div></div>`:'');
   return card(n.name,'',kv+b,{cls:'tall place',art:ASSET.place[n.type]?`<div class="art strip pimg"><img class="asset" src="${ASSET.place[n.type]}" alt=""></div>`:sceneCv(n.name,r.region,n.type,'strip'),
     head:`<button class="xb sc-x" data-act="leave"${ta('Đóng, rời khỏi nơi này')} aria-label="Đóng">${ic('close')}</button>${meta}`,
     foot:(canEx?`<button class="btn" data-act="exStat"${ta('Xem nơi này có gì: yêu ma, vật liệu, tỉ lệ')}>Thăm dò</button>`:'')+`<span class="grow"></span><button class="btn" data-act="leave">Rời đi</button>`});
@@ -252,7 +252,7 @@ function modalHTML(){
      ${(()=>{{const cw=tuCapWhy();if(btReadyTv()&&cw)return `<div class="bt-box"><b>${ic('spark')} Tu vi đã viên mãn</b><p class="hint bad">${esc(cw)}</p></div>`;}const lk9=lkOn();const bth=isPham()?'Đủ để xung kích Luyện Khí tầng 1':lk9?'Luyện Khí tầng '+lkTang()+', đủ để đột phá':'Tu vi đã viên mãn';if(btReadyTv()&&llOf()<llNeedBt())return `<div class="bt-box"><b>${ic('spark')} ${bth}</b><p class="hint bad">Lịch luyện chưa theo kịp nên chưa đột phá được. Hãy ra ngoài lịch luyện.</p></div>`;const brk=canBreak();if(!brk)return '';const atDp=(cn&&cn.dp)||isPham();return `<div class="bt-box${atDp?' on':''}"><b>${ic('spark')} ${bth}</b><p class="hint">${isPham()?'Có thể dẫn khí nhập thể ngay tại đây.':atDp?'Nơi này có động phủ, có thể đột phá ngay.':'Phải tới nơi có động phủ mới đột phá được.'}</p><button class="btn ${atDp?'pri glow':''}" data-act="hudBt"${atDp?'':' disabled'}>${isPham()?'Xung kích':'Đột phá'}</button></div>`;})()}
      ${xkBoxHTML()}
      ${m.warn?`<div class="bq-warn"><p><b>Lịch luyện không đủ</b></p><p>Bế quan quá ${durH(cap*HY)} thì gần như không tăng thêm tu vi nữa. Nên ra ngoài lịch luyện trước.</p><p>Vẫn tiếp tục bế quan ${durH(y*HY)}?</p><div class="mb-f"><button class="btn" data-act="bqWarnX">Thôi</button><button class="btn pri" data-act="bqWarnOk">Xác nhận, tiếp tục</button></div></div>`:''}
-     <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" id="bqGoB" data-act="bqGo"${y>0?'':' disabled'}>Nhập định</button></div></div>`;}
+     <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" id="bqGoB" data-act="bqGo"${y>0&&!bqFullNow()?'':' disabled'}>Nhập định</button></div></div>`;}
   if(m.k==='explore'&&SETTLE.includes(nodeById(G.run.at).type)){const n=nodeById(G.run.at);const X=townStats(n);const tb=UI.tab.ex||'L';const rows=L=>`<div class="kv">${L.map(x=>`<div><span>${esc(x[0])}</span><b>${esc(x[1])}</b></div>`).join('')}</div>`;
     return `<div class="mbox"><h3>${esc(n.name)}</h3>${tabsHTML('ex',[['L','Kiếm được · '+X.L.length],['M','Có thể gặp · '+(X.M.length+X.evs.length)]],tb)}
      ${tb==='L'?`<p class="hint">Những thứ chắc chắn có ở đây. Hàng trên kệ đổi theo tháng, không phải lúc nào cũng đủ.</p>${rows(X.L)}`:`<p class="hint">Chỉ gặp khi có duyên; thường là đồ tốt hơn hàng bày sẵn.</p>${rows(X.M)}${X.evs.length?`<h4 class="sgrp">Chuyện, người có thể gặp</h4><div class="foes">${X.evs.map(t=>`<span class="chip">${esc(t)}</span>`).join('')}</div>`:''}`}
@@ -293,6 +293,8 @@ function modalHTML(){
 }
 
 // ---------- bế quan: các con số đổi theo thanh trượt ----------
+// tu vi đã đầy (cả cảnh giới, hoặc tầng/kỳ đang ở) thì bế quan thêm chỉ mất thời gian: khóa nút Nhập định
+function bqFullNow(){const r=G.run;return !!r&&(r.tv>=100||(sgOn()&&sgFull()&&!lkCapped()));}
 function bqBits(y,I){I=I||bqInfo();const sp=bqSpan(y);const left=Math.max(0,I.left-y);const need=Math.max(0,bqNeedY()-y);const risk=Math.round(bqRisk(y)*100);
   const r=G.run;const P=tvPts(r.realm)/100;const e0=llEff(r.tv),e1=llEff(Math.min(100,r.tv+sp[1]/P));const cap=bqCapY();
   let st,sc;
@@ -307,7 +309,7 @@ function bqBits(y,I){I=I||bqInfo();const sp=bqSpan(y);const left=Math.max(0,I.le
   return {g:y>0?bqGainTxt(sp[0]/P,sp[1]/P):'0% tu vi',s:st,sc:'bq-'+(sc||'n'),l:Math.floor(left)+' năm',lc:left<=10?'lv-bad':left<=30?'lv-mid':'lv-ok',
     n:I.full?(sgOn()&&G.run.tv<100?'đã đầy':'đã viên mãn'):need<=0?'viên mãn':'chừng '+numVN(need)+' năm',h:(y>0?(risk?(risk<10?'Ít khi':risk<30?'Có thể':'Dễ')+' bị quấy nhiễu giữa chừng. ':'Yên ổn, không bị quấy nhiễu. '):'Chọn thời gian bế quan. ')+'Xuất quan thì khí huyết, linh lực hồi đầy.'};}
 function bqUpd(y){const B=bqBits(y);const set=(id,t,c)=>{const e=document.getElementById(id);if(e){e.textContent=t;if(c!=null)e.className=c;}};
-  set('bqY',y>0?durH(y*HY):'0 tháng');set('bqG',B.g);set('bqS',B.s,'bq-ll '+B.sc);set('bqL',B.l,B.lc);set('bqN',B.n);set('bqHint',B.h);const b=document.getElementById('bqGoB');if(b)b.disabled=!(y>0);
+  set('bqY',y>0?durH(y*HY):'0 tháng');set('bqG',B.g);set('bqS',B.s,'bq-ll '+B.sc);set('bqL',B.l,B.lc);set('bqN',B.n);set('bqHint',B.h);const b=document.getElementById('bqGoB');if(b)b.disabled=!(y>0)||bqFullNow();
   const R=document.getElementById('bqR');if(R)R.style.setProperty('--val',(+R.max>0?y/+R.max*100:0)+'%');}
 function lkTag(n){const m=LK_M[lkOf(n)]*(n&&n.dp?1.15:1)*(G.bqRoom?1.5:1);const c=m>=1.3?'lk-up':m>=0.9?'':m>=0.7?'lk-dn':'lk-bad';
   const t=LK_N[lkOf(n)]+(n&&n.dp?' · có động phủ':'')+(G.bqRoom?' · tĩnh thất tông môn':'');return `<b class="lk ${c}">${t}</b>`;}

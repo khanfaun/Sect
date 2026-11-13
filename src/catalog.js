@@ -90,7 +90,7 @@ function catMatSync(){const r=G.run;if(!r||!r.mats)return;const N=r.matN||(r.mat
 const CAT_MATC={thao:'duoc',khoang:'khoang',dan:'vl'};
 {const _bi=bagItems;bagItems=function(){catMatSync();const r=G.run;const L=_bi().filter(x=>!(x.ref&&x.ref.t==='mat'));const N=r.matN||{};
   for(const [id,c] of Object.entries(N)){const m=CAT.byId[id];if(!m||c<=0)continue;
-    L.push({key:'n'+id,cat:CAT_MATC[m.cat],n:m.n,tier:m.t,cnt:c,em:m.i||MAT[m.cat].i,ref:{t:'mat',k:m.cat,id},tip:[m.d,m.where&&'Nơi kiếm: '+m.where,m.use&&'Dùng để luyện: '+m.use,'Tính là '+MAT[m.cat].n.toLowerCase()+' khi luyện chế.'].filter(Boolean).join('\n')});}
+    L.push({key:'n'+id,cat:CAT_MATC[m.cat],n:m.n,tier:m.t,cnt:c,em:m.i||MAT[m.cat].i,ref:{t:'mat',k:m.cat,id},tip:[m.d,m.where&&'Thường kiếm ở: '+m.where,m.use&&'Dùng để luyện: '+m.use,'Tính là '+MAT[m.cat].n.toLowerCase()+' khi luyện chế.'].filter(Boolean).join('\n')});}
   for(const q of (r.qitems||[])){const x=CAT.byId[q];if(x)L.push({key:'v'+q,cat:'nv',n:x.n,tier:2,cnt:1,em:x.i,ref:{t:'qi',id:q},tip:[x.d,x.use].filter(Boolean).join('\n')});}
   return L;};}
 {const _bd=bagDrop;bagDrop=function(key,n){const r=G.run;
