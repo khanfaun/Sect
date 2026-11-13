@@ -1270,3 +1270,4 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .tc0-fl{left:4%;right:4%;width:92%;bottom:3px;height:34px;opacity:.85;z-index:1}
 .tal-card.tal0 b{position:relative;z-index:2}
 .tc0-ck{inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);overflow:hidden}
+.tc0-fl{display:none}

@@ -560,7 +560,7 @@ function talFrame0(id){id=id||'tf0';let s=tf0Defs(id);
   // vết nứt
   for(const [a,l] of [[20,1],[95,-1],[160,1],[250,-1],[310,1]])s+=`<g transform="rotate(${a} 50 50)"><path d="M50 6.5L51.5 9L49.5 11L51 13.5" fill="none" stroke="${TF0.dk}" stroke-width=".9"/><path d="M51.5 9L${53*l>0?54:47} 9.5" fill="none" stroke="${TF0.dk}" stroke-width=".6"/></g>`;
   // lửa âm u liếm lên từ đáy
-  s+=tf0Flame(id,38,94,16,6,-25)+tf0Flame(id,62,94,16,6,25)+tf0Flame(id,50,97,22,7,0)+tf0Flame(id,27,88,11,4,-45)+tf0Flame(id,73,88,11,4,45);
+  // (bỏ lửa dưới đáy)
   // tàn tro
   for(const [x,y,r] of [[22,70,1],[80,62,.8],[44,74,.7],[66,80,.9],[14,50,.6],[88,46,.7]])s+=`<circle cx="${x}" cy="${y}" r="${r}" fill="#ff7a3a" opacity=".8"/>`;
   return `<svg viewBox="0 0 100 100" aria-hidden="true">${s}</svg>`;}
