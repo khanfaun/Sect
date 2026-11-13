@@ -404,3 +404,5 @@ function lifeScroll(){clearInterval(UI.lifeIv);UI.lifeIv=setInterval(()=>{if(G.s
   const el=UI.lifeAll||k>=P.length?document.querySelector('.lsx-go'):P[k];if(el)el.scrollIntoView({block:'nearest',behavior:'smooth'});if(UI.lifeAll||k>P.length)clearInterval(UI.lifeIv);},500);}
 Object.assign(ACT,{lifeGo:()=>{G.screen='map';clearInterval(UI.lifeIv);saveSoon();if(typeof Map2!=='undefined')Map2.center();},
   lifeAll:()=>{if(UI.lifeAll)return;UI.lifeAll=true;const b=document.querySelector('.lsx');if(b)b.classList.add('all');setTimeout(()=>{const g=document.querySelector('.lsx-go');if(g)g.scrollIntoView({block:'nearest',behavior:'smooth'});},50);}});
+// công pháp/tâm pháp vượt cảnh giới: chưa đủ điều kiện thì không cho vận hành
+{const _ar=ACT.artRun;ACT.artRun=u=>{const a=artBy(+u);const w=typeof artUseWhy==='function'&&artUseWhy(a);if(w){note(w,'dn');return;}_ar(u);};}

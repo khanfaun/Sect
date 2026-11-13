@@ -2525,3 +2525,57 @@ btFinish=(function(prev){return function(){return prev.apply(this,arguments);};}
 {const _bfq2=btFinish;btFinish=function(){const r=G.run;if(r&&r.bt&&r.bt.to===1&&tcOn()){const dan=r._tcDan;const _q=qOf;qOf=p=>tcQual(dan,p).q;try{return _bfq2.apply(this,arguments);}finally{qOf=_q;}}return _bfq2.apply(this,arguments);};}
 {const _pv2=prepView;prepView=function(){const v=_pv2();if(tcOn()){const sc=G.run.scene;const dan=sc.slots.some(i=>G.run.pills[i]&&G.run.pills[i].id==='trucco');const T0=tcQual(dan,v.dao);v.q=T0.q;v.tcWhy=T0.why;}return v;};}
 {const _br=btRate;btRate=function(slots){const p=_br(slots);if(!tcOn())return p;const e=btEff(slots||[]);const d=(G.run.dao||0)+e.dao;return clamp(p+tcDaoRate(d),0.05,0.97);};}
+// ===== Chỉ số khi lên cảnh giới: căn cốt bẩm sinh gần như đứng yên, cái luyện ra thì tăng mạnh =====
+// ngộ tính: rất ít (+1 mỗi 2 đại cảnh giới); đạo tâm, khí vận, tư chất: không đổi theo cảnh giới;
+// thần thức (thần lực) và thân pháp: tăng rất mạnh; chỉ số chiến đấu: như cũ (tăng mạnh); chí mạng, bạo thương: tăng ít.
+{const _Sx=S;S=function(){const s=_Sx();const r=G.run;if(!r)return s;const R0=r.realm||0,t=tieu();
+  s.ngo+=Math.floor(R0/2)-R0*2;s.tam-=R0*2;
+  s.tp+=R0*6+t*2;s.ne+=R0*6+t*2;
+  s.than=Math.round(s.than-2*R0+15*R0+t*3);s.nl=Math.round(s.than*3);
+  s.crit+=R0*0.6;s.critDmg+=R0*4;
+  // đại viên mãn: +5% khí huyết, linh lực, công, thủ
+  if(dvm()){for(const k of ['maxHp','maxMp','atk','def','matk'])s[k]=Math.round(s[k]*1.05);s.dvm=1;}
+  return s;};}
+// bù cho tỉ lệ đột phá (trước đây ngộ tính, đạo tâm tự tăng theo cảnh giới và góp vào tỉ lệ)
+{const _brx=btRate;btRate=function(slots){const r=G.run;const R0=r.realm||0;return clamp(_brx(slots)+(R0*4-Math.floor(R0/2))*0.012,0.05,0.97);};}
+// tâm ma giảm nhẹ khi xung kích tiểu cảnh giới / đột phá đại cảnh giới
+{const _xk=lkXk;lkXk=function(){const ok=_xk.apply(this,arguments);const r=G.run;if(ok&&r)r.tamma=Math.max(0,(r.tamma||0)-2);return ok;};}
+{const _bfz=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const res=_bfz.apply(this,arguments);const r2=G.run;if(r2&&r2.realm>rl)r2.tamma=Math.max(0,(r2.tamma||0)-5);return res;};}
+
+// ===== Tiểu cảnh giới: sơ kỳ → trung kỳ → hậu kỳ → đỉnh phong (đầy tu vi) → đại viên mãn =====
+TIEU[3]='đỉnh phong';
+// Luyện Khí: tầng 1–3 sơ, 4–6 trung, 7–9 hậu, 10–12 đỉnh phong, 13 bán bộ Trúc Cơ
+{const _ti=tieu;tieu=function(){if(typeof lkOn==='function'&&lkOn()){const g=lkTang();return g>=10?3:g>=7?2:g>=4?1:0;}return _ti();};}
+function dinhPhong(){const r=G.run;return !!(r&&!isPham()&&r.realm<5&&tieu()===3);}
+const DVM_TAMMA=25,DVM_TAM=12; // đại viên mãn: tâm ma dưới 25, đạo tâm từ 12 (mức Cao)
+function dvmTam(){const r=G.run;return r.base.tam+(r.bon.tam||0)+((aggFx().tam)||0);}
+function dvmWhy(){const r=G.run;if(!dinhPhong())return 'chưa tới đỉnh phong';const L=[];if(injured())L.push('đang trọng thương');if((r.tamma||0)>=DVM_TAMMA)L.push('tâm ma từ '+DVM_TAMMA+' trở lên');if(dvmTam()<DVM_TAM)L.push('đạo tâm chưa đủ cao');return L.join(', ');}
+let _dvmIn=0;function dvm(){if(_dvmIn)return false;_dvmIn=1;try{return dinhPhong()&&!dvmWhy();}finally{_dvmIn=0;}}
+
+// ===== Bán bộ: dùng được đồ của cảnh giới sau, chỉ số vẫn như cũ =====
+//  · tạm thời: xung quan thành công, đang vượt thiên kiếp/tâm ma kiếp
+//  · lâu dài: Luyện Khí tầng 13; hoặc đang đỉnh phong và vận hành tâm pháp của cảnh giới sau
+function chuRaw(){const r=G.run;const n=chuSlots();const L=[];for(let i=0;i<n;i++){const a=r.chu[i]&&artBy(r.chu[i].u);if(a)L.push(a);}return L;}
+function bbTemp(){const r=G.run;return !!(r&&r.bt&&r.bt.stages&&r.bt.stages.length&&r.bt.to===r.realm+1);}
+function bbKind(){const r=G.run;if(!r||isPham()||r.realm>=5)return '';if(bbTemp())return 'temp';if(lkOn()&&lkTang()>=13)return 'lk13';
+  if(dinhPhong()&&chuRaw().some(a=>a.type==='tp'&&a.req===r.realm+1))return 'tp';return '';}
+function bb(){return !!bbKind();}
+function effRealm(){const r=G.run;return (r.realm||0)+(bb()?1:0);}
+{const _plv=plv;plv=function(){return _plv()+(G.run&&!isPham()&&bb()?1:0);};}
+// tầng công pháp và học bí tịch theo cảnh giới hiệu lực
+artOpen=function(a,i){const x=a.lines[i];return i<a.lv&&effRealm()>=x.req;};
+artNextWhy=function(a){if(a.lv>=a.lines.length)return 'Đã tham ngộ hết các tầng.';const x=a.lines[a.lv];if(effRealm()<x.req)return 'Tầng kế tiếp cần '+reqName(x.req)+'.';return '';};
+// ngộ tính vượt xa người thường: đọc hiểu được công pháp/tâm pháp của cảnh giới kế tiếp (mức Tinh anh, Thiên kiêu)
+const NGO_BB={1:20,2:24,3:28,4:32};
+function ngoLearn(req){const r=G.run;return req===r.realm+1&&NGO_BB[req]!=null&&S().ngo>=NGO_BB[req];}
+{const _lw=learnWhy;learnWhy=function(rel){const r=G.run;const w=_lw(rel);if(!w||!rel||!rel.art||!/mới đọc hiểu/.test(w))return w;const q=rel.art.req;
+  if(effRealm()>=q||ngoLearn(q))return '';return w+(q===r.realm+1&&NGO_BB[q]?' Hoặc ngộ tính từ '+NGO_BB[q]+' (đang có '+S().ngo+').':'');};}
+// công pháp/tâm pháp vượt cảnh giới: học được nhưng chưa chắc dùng được
+function artUseWhy(a){const r=G.run;if(!a||a.req<=effRealm())return '';if(a.req===r.realm+1&&a.type==='tp'){return dinhPhong()?'':'Tâm pháp '+reqName(a.req)+': phải tới đỉnh phong mới vận hành được.';}
+  return 'Cần '+reqName(a.req)+' (hoặc bán bộ '+reqName(a.req)+') mới dùng được.';}
+{const _aa=activeArts;activeArts=function(){return _aa().filter(a=>!artUseWhy(a));};}
+// Thiên đạo Trúc Cơ: chắc chắn gặp 3 đạo lôi kiếp
+{const _bs=btStages;btStages=function(to){const L=_bs(to);const r=G.run;if(to===1&&tcOn()&&tcQual(r._tcDan,r.dao||0).q===3)return [{n:3}];return L;};}
+// tên cảnh giới hiển thị
+{const _rl=realmLabel;realmLabel=function(){const r=G.run;if(!r||isPham())return _rl();const k=bbKind();if(k&&k!=='temp'&&r.realm<5)return 'Bán bộ '+REALM[r.realm+1];if(k==='temp')return 'Bán bộ '+REALM[r.realm+1]+' (đang độ kiếp)';
+  const b=_rl();return dvm()?b.replace(/đỉnh phong$/,'')+(lkOn()?' · đại viên mãn':'đại viên mãn'):b;};}
