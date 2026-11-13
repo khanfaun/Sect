@@ -1,0 +1,291 @@
+# Chỉnh tay thưởng phạt cho sự kiện (đọc bởi tools/su_kien_chuyen.py). Cú pháp xem đầu bảng SUA trong công cụ.
+# ===== Phàm Trần =====
+gk_hu_muc_mua_thu 1: mua k=-2 tv=3
+gk_manh_truc_quay_vao 1: mua k=-1
+gk_con_dau_bun 1: loi k=-1
+gk_duong_kien_qua_nong 0: xoa tv=4 h=6
+gk_duong_kien_qua_nong 1: xoa tv=4 k=-2
+gk_mot_dot_den_gianh_lai 1: oan
+gk_duoi_vach_voi 1: tra k=3
+gk_cai_chan_ke_cao 1: xoa tra k=1
+gk_manh_va_tren_buom_giay 1: xoa
+gk_tieng_dep_trong_chum 0: hp=10
+gk_cai_bong_o_chan_coi 0: xoa giup tm=-3
+gk_mai_ra_dem_ngoi 1: tra k=1
+gk_gio_dong_cua_ai 0: an
+ch_nua_dau_tay_1 1: xoa k=1
+ch_nua_dau_tay_2 1: loi k=-1
+ch_nua_dau_tay_2b 0: xoa giup
+ch_nua_dau_tay_4 1: -tamma
+ch_cay_dau_khong_bong_1 1: loi k=-2
+ch_cay_dau_khong_bong_2 1: k=2
+ch_cay_dau_khong_bong_2b 0: xoa giup
+ch_cay_dau_khong_bong_2b 1: xoa loi0
+ch_nguoi_gac_lua_1 1: hp=10
+ch_nguoi_gac_lua_2 1: tra k=-2
+ch_nguoi_gac_lua_2b 1: tra k=0
+ch_nguoi_gac_lua_3 0: hp=15
+ch_nguoi_gac_lua_4 0: tra k=6
+ch_nguoi_gac_lua_4 1: k=-2
+ch_tam_phan_danh_cho_khach_2 1: xoa loi0 k=-1
+ch_tam_phan_danh_cho_khach_2b 1: xoa giup k=2
+ch_tam_phan_danh_cho_khach_3 1: loi0
+ch_tam_phan_danh_cho_khach_4 1: loi0
+# ===== Linh Sơn Vạn Lĩnh =====
+gk_tam_dem_duoi_kiem 1: xoa tv=4 k=-1
+gk_ghe_da_co_nguoi_dat_truoc 1: xoa k=-4 st=10 tm=2
+gk_dot_tre_o_cua_ngach 0: hp=5
+gk_dot_tre_o_cua_ngach 1: xoa loi oan
+gk_nguoi_ke_ban_tho 1: xoa mua k=-2 van=1
+gk_dinh_lo_mat_nap 0: xoa k=2
+gk_dinh_lo_mat_nap 1: xoa k=3
+gk_cua_da_tho_mua_dong 0: xoa giup hp=10 tm=-3
+gk_cua_da_tho_mua_dong 1: xoa dan tm=4
+gk_bac_da_chi_mon_mot_ben 0: xoa tv=4 h=4
+gk_bac_da_chi_mon_mot_ben 1: xoa tv=3 k=-1
+gk_nua_qua_can_cua_hai_phai 0: tra
+gk_nua_qua_can_cua_hai_phai 1: xoa loi
+gk_loi_khac_o_tay_vin 0: h=24
+gk_canh_man_trong_chen_mai 0: h=12
+gk_canh_man_trong_chen_mai 1: xoa tra k=1 do
+gk_nam_hon_da_vao_mua_gio 0: hp=10
+gk_nam_hon_da_vao_mua_gio 1: xoa tv=4 k=-3
+gk_mat_ca_trong_ranh_kiem 0: hp=10 h=12
+gk_mat_ca_trong_ranh_kiem 1: xoa tv=5 k=-4 tm=3
+gk_ban_ve_tren_lung_rua 1: xoa mua do
+gk_so_truc_sau_ba_tieng_mo 0: h=12 an
+gk_so_truc_sau_ba_tieng_mo 1: xoa st=10 k=-2
+gk_vet_cat_tren_thiep_hon 1: xoa tra k=0 st=25
+gk_vet_cat_tren_thiep_hon 2: h=12 an
+gk_nam_voi_chua_toi 0: xoa giup
+gk_nam_voi_chua_toi 1: xoa mp st=12 k=2
+gk_duong_kim_qua_phu_rach 1: xoa tra k=1 dan
+gk_bac_tren_cung_thieu_mot_phie 1: xoa tv=5 k=-1
+gk_soi_day_giua_hai_mai 0: h=6
+gk_soi_day_giua_hai_mai 1: xoa dan k=-2
+ch_vach_phan_tren_chuoi_kiem_1 0: an
+ch_vach_phan_tren_chuoi_kiem_1 1: xoa tv=4
+ch_vach_phan_tren_chuoi_kiem_2 0: h=12
+ch_vach_phan_tren_chuoi_kiem_2 1: xoa mua bitich
+ch_vach_phan_tren_chuoi_kiem_2b 1: tra k=2
+ch_vach_phan_tren_chuoi_kiem_3 0: hp=10
+ch_vach_phan_tren_chuoi_kiem_3 1: xoa k=1 tv=3
+ch_vach_phan_tren_chuoi_kiem_4 1: xoa do
+ch_chi_bac_tren_ao_chiu_tang_1 1: xoa k=-2
+ch_chi_bac_tren_ao_chiu_tang_2 1: xoa k=-1 st=10
+ch_chi_bac_tren_ao_chiu_tang_2b 0: xoa giup an
+ch_chi_bac_tren_ao_chiu_tang_2b 1: xoa st=12 k=-2
+ch_chi_bac_tren_ao_chiu_tang_4 1: xoa mua do
+ch_loi_noi_duoi_phien_da_1 0: xoa giup h=12 tm=-2
+ch_loi_noi_duoi_phien_da_1 1: xoa k=-1
+ch_loi_noi_duoi_phien_da_2 1: xoa dan k=1
+ch_loi_noi_duoi_phien_da_2b 1: tra k=2
+ch_loi_noi_duoi_phien_da_3 0: xoa giup
+ch_loi_noi_duoi_phien_da_3 1: xoa mua st=20 k=1
+ch_loi_noi_duoi_phien_da_4 1: xoa k=2
+ch_cot_gio_khong_co_1 1: xoa st=16 k=-3
+ch_cot_gio_khong_co_2 1: xoa k=-1
+ch_cot_gio_khong_co_2b 1: xoa loi
+ch_cot_gio_khong_co_3 1: xoa st=16 k=-2
+ch_cot_gio_khong_co_4 0: xoa giup
+ch_cot_gio_khong_co_4 1: xoa tra k=2
+# ===== Đông Hải Yêu Vực =====
+gk_lo_tho_phia_tren_vach_trieu 0: hp=15 tv=-3
+gk_lo_tho_phia_tren_vach_trieu 1: k=1
+gk_cau_thang_cho_nguoi_co_vay 1: xoa loi
+gk_khuyen_tai_buoc_neo 0: h=6
+gk_khuyen_tai_buoc_neo 1: xoa st=12 k=-1
+gk_chan_cua_thue_theo_ngay 0: tra k=2
+gk_chan_cua_thue_theo_ngay 1: xoa mua
+gk_muc_tron_khoi_nghien 0: h=24
+gk_muc_tron_khoi_nghien 1: xoa tv=3 tm=3
+gk_con_song_biet_cho 0: xoa tv=5 h=12
+gk_con_song_biet_cho 1: xoa tv=4 k=-1
+gk_luoi_ca_chan_cong_thue 0: h=12
+gk_luoi_ca_chan_cong_thue 1: xoa loi
+gk_vay_cao_duoi_bung_thuyen 0: xoa giup tm=-3
+gk_vay_cao_duoi_bung_thuyen 1: xoa do tm=4 hp=5
+gk_ban_tay_dat_o_mui_thuyen 0: h=12
+gk_ban_tay_dat_o_mui_thuyen 1: tra k=1 tm=2
+gk_to_khe_ngam_trong_mang 1: xoa loi
+gk_cong_co_trong_be_trung 1: xoa loi k=-1
+gk_dinh_bien_rut_luc_trieu_xuon 0: an
+gk_dinh_bien_rut_luc_trieu_xuon 1: k=2
+gk_mat_bien_con_tro 0: mp
+gk_mat_bien_con_tro 1: xoa mua do
+gk_hang_rang_tren_mai_cho 0: xoa k=2 dan
+gk_tang_da_che_mua_nang 1: xoa tra k=3
+gk_vang_bac_theo_trieu_nguoc 0: hp=10
+gk_vang_bac_theo_trieu_nguoc 1: xoa do k=-3
+gk_mau_khoa_phia_duoi_boong 0: oan
+gk_mau_khoa_phia_duoi_boong 1: xoa st=16 k=-4 tm=3
+gk_mai_nha_moc_tren_coc_chet 0: xoa k=2
+gk_mai_nha_moc_tren_coc_chet 1: xoa mua do k=-2
+gk_bong_nguoi_trong_guong_nuoc_ 1: xoa tv=3 k=-1
+ch_le_do_nuoc_1 0: h=24
+ch_le_do_nuoc_1 1: -tamma
+ch_le_do_nuoc_2 0: h=12
+ch_le_do_nuoc_2b 1: xoa loi
+ch_le_do_nuoc_3 1: -tamma
+ch_le_do_nuoc_4 0: xoa giup
+ch_le_do_nuoc_4 1: xoa loi0 k=1
+ch_ben_kia_mot_hoi_tho_1 0: xoa giup an
+ch_ben_kia_mot_hoi_tho_1 1: xoa mua tv=4
+ch_ben_kia_mot_hoi_tho_2 0: mp
+ch_ben_kia_mot_hoi_tho_2 1: xoa tv=3
+ch_ben_kia_mot_hoi_tho_2b 0: h=24
+ch_ben_kia_mot_hoi_tho_2b 1: tra k=2
+ch_ben_kia_mot_hoi_tho_3 0: xoa giup
+ch_ben_kia_mot_hoi_tho_3 1: mp k=2
+ch_ben_kia_mot_hoi_tho_4 1: xoa loi0
+ch_vet_man_tren_don_thuoc_1 0: xoa giup
+ch_vet_man_tren_don_thuoc_1 1: tm=3
+ch_vet_man_tren_don_thuoc_2b 0: xoa tra
+ch_vet_man_tren_don_thuoc_2b 1: xoa st=24 k=-5 tm=4
+ch_vet_man_tren_don_thuoc_4 0: xoa giup
+ch_vet_man_tren_don_thuoc_4 1: xoa tra k=1
+ch_cai_ten_bo_khoi_banh_lai_1 0: an
+ch_cai_ten_bo_khoi_banh_lai_1 1: oan
+ch_cai_ten_bo_khoi_banh_lai_2 0: h=24
+ch_cai_ten_bo_khoi_banh_lai_2 1: -st -tamma k=-1
+ch_cai_ten_bo_khoi_banh_lai_2b 1: k=3
+ch_cai_ten_bo_khoi_banh_lai_3 1: xoa k=-1
+ch_cai_ten_bo_khoi_banh_lai_4 0: xoa tra
+ch_cai_ten_bo_khoi_banh_lai_4 1: xoa mua
+# ===== Cửu U Ma Vực =====
+gk_giot_dau_khong_ben_lua 1: xoa dan tm=4
+gk_cai_mieng_giau_trong_vai 0:
+gk_cai_mieng_giau_trong_vai 1: xoa mua tm=5 do
+gk_gio_am_cua_cho_tro 0: xoa giup mp an
+gk_gio_am_cua_cho_tro 1: xoa k=-2
+gk_muon_tuoi_qua_mua_ret 0: xoa giup tho=3 an
+gk_muon_tuoi_qua_mua_ret 1: xoa mua st=40 k=-5 tm=4
+gk_bat_canh_danh_cho_nguoi_cam 0: h=24 tm=-2
+gk_bat_canh_danh_cho_nguoi_cam 1: xoa k=-2
+gk_hai_cot_che_doi_ung 0: xoa k=2
+gk_hai_cot_che_doi_ung 1: xoa k=1 tm=2
+gk_nut_that_giu_cau_noi_cuoi 1: xoa tra k=1
+gk_mach_nuoc_khong_nhan_mau 0: xoa tv=5
+gk_mach_nuoc_khong_nhan_mau 1: xoa tv=4 k=-3 tm=3
+gk_nguoi_than_tinh_theo_bai_vi 1: xoa do k=-4 tm=2
+gk_huong_dot_tu_dau_chan 1: xoa k=2 hp=10 tm=3
+gk_hai_chiec_ghe_quay_lung 1: xoa bitich k=-1
+gk_coi_nghien_chu_the 0: hp=10
+gk_coi_nghien_chu_the 1: -st do
+gk_con_bui_bo_duoi_chan 0: mp
+gk_con_bui_bo_duoi_chan 1: xoa do k=-1
+gk_mong_tay_tren_cua_luyen_thi 1: xoa k=2 tm=2
+gk_ban_khe_khong_co_mat_chu 0: xoa giup an
+gk_ban_khe_khong_co_mat_chu 1: xoa mua do tm=3
+gk_dau_kim_tim_duong_ve 0: xoa giup an
+gk_dau_kim_tim_duong_ve 1: -st st=20
+gk_mau_phan_thu_giong 0: xoa k=2
+gk_mau_phan_thu_giong 1: -st dan k=-1 tm=2
+gk_mat_dat_nho_chan_quy 0: hp=10
+gk_mat_dat_nho_chan_quy 1: xoa dan k=-2 tm=3
+gk_bep_tro_phia_sau_nha_giam 1: xoa dan tm=2
+gk_nap_hom_co_then_ngoai 1: xoa k=3 tra
+ch_no_mot_mua_toc_bac_1 0: xoa giup tho=4 an
+ch_no_mot_mua_toc_bac_1 1: xoa mua k=-3
+ch_no_mot_mua_toc_bac_2 0: xoa tra an
+ch_no_mot_mua_toc_bac_2 1: xoa k=1 tm=2
+ch_no_mot_mua_toc_bac_2b 0: xoa giup
+ch_no_mot_mua_toc_bac_2b 1: xoa mua k=-3
+ch_no_mot_mua_toc_bac_3 0: hp=10
+ch_no_mot_mua_toc_bac_3 1: -st k=-4 tm=3
+ch_no_mot_mua_toc_bac_4 0: tho=3
+ch_no_mot_mua_toc_bac_4 1: xoa tra k=1
+ch_vet_khau_duoi_lop_da_1 0: tra
+ch_vet_khau_duoi_lop_da_1 1: -st bitich
+ch_vet_khau_duoi_lop_da_2 0: h=24
+ch_vet_khau_duoi_lop_da_2 1: xoa do k=-2 tm=3
+ch_vet_khau_duoi_lop_da_2b 0: xoa giup
+ch_vet_khau_duoi_lop_da_2b 1: xoa mua k=-4 tm=4
+ch_vet_khau_duoi_lop_da_3 1: xoa k=1
+ch_vet_khau_duoi_lop_da_4 1: xoa do k=-1
+ch_buc_tuong_nghe_ten_minh_1 0: xoa tv=3 tm=-4
+ch_buc_tuong_nghe_ten_minh_1 1: xoa k=-1 tm=2
+ch_buc_tuong_nghe_ten_minh_2 0: hp=15 tm=-6
+ch_buc_tuong_nghe_ten_minh_2 1: xoa mua tm=4
+ch_buc_tuong_nghe_ten_minh_2b 1: xoa mua k=-2
+ch_buc_tuong_nghe_ten_minh_3 0: hp=10
+ch_buc_tuong_nghe_ten_minh_3 1: xoa do k=-4
+ch_buc_tuong_nghe_ten_minh_4 0: tm=-3
+ch_buc_tuong_nghe_ten_minh_4 1: xoa tam=1
+ch_nguoi_cho_sau_rem_than_1 0:
+ch_nguoi_cho_sau_rem_than_1 1: -st dan tm=3
+ch_nguoi_cho_sau_rem_than_2 0: mp hp=10
+ch_nguoi_cho_sau_rem_than_2 1: xoa k=-2 dan
+ch_nguoi_cho_sau_rem_than_2b 0: tra
+ch_nguoi_cho_sau_rem_than_2b 1: k=2
+ch_nguoi_cho_sau_rem_than_3 1: -st k=-1
+ch_nguoi_cho_sau_rem_than_4 0: tra mp
+ch_nguoi_cho_sau_rem_than_4 1: do
+# ===== Cửu Thiên Cổ Lộ =====
+gk_chiec_can_can_mot_buoc_chan 0: xoa tv=5 tam=1
+gk_chiec_can_can_mot_buoc_chan 1: xoa tv=3 k=-1
+gk_tam_ao_cu_qua_nam_tram_mua 1: xoa mua do k=-2
+gk_loi_chao_dung_lai_ngoai_cua 0: tam=1
+gk_loi_chao_dung_lai_ngoai_cua 1: xoa mua tm=-4
+gk_mot_dem_giu_nen_troi 0: an
+gk_mot_dem_giu_nen_troi 1: xoa tv=4 k=-3
+gk_mua_roi_nguoc_trong_long_ban 1: xoa do k=-3
+gk_ke_doi_binh_tren_dau 0: xoa k=2
+gk_ke_doi_binh_tren_dau 1: xoa mua do
+gk_mep_bong_muon_cua_nguoi_sau 1: xoa k=2 tm=-2
+gk_hai_bac_nhin_xuong_nha 1: xoa k=-1 tv=2
+gk_o_cua_nho_hon_tieng_goi 0: xoa giup tho=3 tm=-3
+gk_o_cua_nho_hon_tieng_goi 1: xoa van=1 tm=3
+gk_tay_vin_du_mot_nguoi_giu 0: h=12 an
+gk_tay_vin_du_mot_nguoi_giu 1: tra k=2
+gk_cuong_la_ganh_mot_vung_troi 0: xoa tv=5
+gk_cuong_la_ganh_mot_vung_troi 1: xoa do k=-2
+gk_mot_vong_quay_doi_gio_com 0: xoa k=2
+gk_mot_vong_quay_doi_gio_com 1: xoa mua do
+gk_manh_dem_va_ban_ngay 0: tam=1
+gk_manh_dem_va_ban_ngay 1: xoa tv=4 k=-3 tm=2
+gk_nguoi_quet_bui_tren_mat_tran 0: h=12
+gk_nguoi_quet_bui_tren_mat_tran 1: xoa mua tp=1
+gk_hat_bui_co_tieng_vo 0: hp=10
+gk_hat_bui_co_tieng_vo 1: xoa do tm=3
+gk_san_buoc_qua_mot_lan_noi_gia 1: xoa tm=-6 tam=1
+gk_mot_cai_o_co_hai_cai_bong 0: xoa giup tho=3 an
+gk_mot_cai_o_co_hai_cai_bong 1: xoa k=-1
+gk_ao_giap_chua_lo_nghe_tim 1: xoa st=24 k=-1
+gk_phan_troi_mong_hon_mot_dong 0: h=24
+gk_phan_troi_mong_hon_mot_dong 1: xoa k=-3 dan
+gk_doi_chan_cua_tuong_quy 1: -st van=1
+ch_den_soi_duong_lui_1 0: xoa tra
+ch_den_soi_duong_lui_1 1: xoa k=-2
+ch_den_soi_duong_lui_2 0: h=24 an
+ch_den_soi_duong_lui_2 1: xoa k=-1
+ch_den_soi_duong_lui_2b 0: xoa giup hp=10
+ch_den_soi_duong_lui_2b 1: -st do
+ch_den_soi_duong_lui_3 0: tv=-4
+ch_den_soi_duong_lui_4 0: xoa tra
+ch_den_soi_duong_lui_4 1: xoa loi0
+ch_hoi_chuong_den_truoc_nguoi_g_1 0: xoa giup
+ch_hoi_chuong_den_truoc_nguoi_g_1 1: xoa k=-3 tm=3
+ch_hoi_chuong_den_truoc_nguoi_g_2 0: tra
+ch_hoi_chuong_den_truoc_nguoi_g_2 1: xoa mua k=-2
+ch_hoi_chuong_den_truoc_nguoi_g_2b 0: tra k=5
+ch_hoi_chuong_den_truoc_nguoi_g_2b 1: xoa loi
+ch_hoi_chuong_den_truoc_nguoi_g_3 0: tv=-4 hp=15
+ch_hoi_chuong_den_truoc_nguoi_g_3 1: xoa k=-1
+ch_hoi_chuong_den_truoc_nguoi_g_4 0: tra
+ch_hoi_chuong_den_truoc_nguoi_g_4 1: xoa loi0
+ch_hinh_nguoi_nam_ngoai_ao_1 0: xoa giup an
+ch_hinh_nguoi_nam_ngoai_ao_1 1: xoa mua k=-1 tm=2
+ch_hinh_nguoi_nam_ngoai_ao_2 1: xoa k=-1
+ch_hinh_nguoi_nam_ngoai_ao_2b 1: xoa k=1
+ch_hinh_nguoi_nam_ngoai_ao_3 0: xoa giup
+ch_hinh_nguoi_nam_ngoai_ao_3 1: xoa k=-2
+ch_hinh_nguoi_nam_ngoai_ao_4 1: mua do -karma
+ch_mot_chu_dung_tren_van_cau_1 0: h=12
+ch_mot_chu_dung_tren_van_cau_1 1: xoa k=-2 tp=1
+ch_mot_chu_dung_tren_van_cau_2 0: h=24 an
+ch_mot_chu_dung_tren_van_cau_2 1: xoa bitich k=-1
+ch_mot_chu_dung_tren_van_cau_2b 1: xoa k=1
+ch_mot_chu_dung_tren_van_cau_3 0: tv=-3
+ch_mot_chu_dung_tren_van_cau_3 1: xoa k=-1
+ch_mot_chu_dung_tren_van_cau_4 1: xoa bitich

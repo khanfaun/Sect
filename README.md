@@ -25,3 +25,21 @@ Game đã chừa sẵn chỗ cho ảnh. Mở `src/ui/base.js`, tìm `const ASSET
 - `place`: ảnh ngang cho thẻ địa điểm, theo loại nơi (`tran`, `thanh`, `rung`...).
 
 Chưa có ảnh thì game dùng bộ hình 2D vẽ sẵn bằng vector trong `src/ui/assets.js` (pháp bảo, đan dược, vật liệu, kẻ địch theo họ, chân dung nhân vật nam/nữ, phương tiện, xe ngựa thương đội). Ảnh gắn vào `ASSET` luôn được ưu tiên hơn bộ hình này.
+
+## Danh mục vật phẩm từ Excel và sự kiện cốt truyện
+
+`docs/vat-pham.xlsx` là sổ gốc của mọi vật phẩm, công pháp, chiêu thức, đan dược, linh thú, xuất thân, khí vận, thể chất. Dòng xanh lá là đồ đã có sẵn trong game (cột Ghi chú ghi mã, đừng đổi mã).
+
+Sau khi sửa Excel:
+
+```bash
+python3 tools/excel2game.py
+node tools/build-thu.js
+```
+
+- `tools/excel2game.py` kiểm tra lỗi từng dòng, ghi `src/data/catalog.js` và báo cáo `docs/bao-cao-vat-pham.md`.
+- `tools/build.js` ráp cả danh mục và sự kiện cốt truyện vào bản chính `phu-sinh.html`; `tools/build-thu.js` ráp cùng nội dung ra `phu-sinh-thu.html`.
+- Sự kiện cốt truyện: sửa `docs/nhap/phu-sinh-su-kien.md` hoặc `tools/su_kien_sua.txt`, chạy `python3 tools/su_kien_chuyen.py` rồi `node tools/build.js`.
+- `src/catalog.js` nối danh mục vào luật game bằng các lớp bọc; bỏ tệp này ra là game trở lại như cũ.
+- `tools/nhap_do_cu.py` chép mọi thứ đang có trong code game vào Excel (chạy lại không sinh dòng trùng).
+- Hướng dẫn đầy đủ (luật vật phẩm, công cụ, cách kiểm tra): `tools/HUONG-DAN-DANH-MUC.md`.
