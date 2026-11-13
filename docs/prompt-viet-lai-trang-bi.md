@@ -11,7 +11,7 @@ Game tu tiên "Phù Sinh" vừa đổi luật trang bị. Tôi gửi kèm file E
 - **Dòng chữ nghiêng đầu mỗi trang**: luật của trang đó.
 
 ## Luật trang bị mới (BẮT BUỘC)
-Ghi **số thật** (game dùng để tính). Người chơi không thấy con số mà thấy chữ: tăng nhẹ / khá / mạnh / rất mạnh, nên lời tựa không nhắc con số.
+Ô số **luôn ghi con số** (ví dụ 14, 0.15, -3), không ghi chữ. Việc hiện mạnh/yếu cho người chơi là việc của game.
 
 1. **Phẩm quyết định SỐ DÒNG**, **Cảnh giới cần quyết định ĐỘ LỚN**. Phẩm nào cũng có thể gặp ở mọi cảnh giới.
 2. **Cảnh giới cần** theo Vùng xuất hiện (chia gần đều hai mức):
