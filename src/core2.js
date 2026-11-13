@@ -2664,3 +2664,19 @@ function ascDiff(a,b){const L=[];for(const [k,n] of ASC_K){const x=a[k]||0,y=b[k
 // hậu thiên khí vận: mô tả bằng chữ (tăng nhẹ/khá/mạnh/rất mạnh), không lộ con số
 const HT_FXN=Object.assign({},TT_FXN,{tammaRes:'Kháng tâm ma {v}%',tvP:'Tốc độ tu luyện {v}%'});
 function htFxText(x){const L=[];for(const [k,v] of Object.entries(x.fx||{})){const t=HT_FXN[k];if(t)L.push(numWords(t.replace('{v}',(v>0?'+':'')+v)));}return L;}
+
+// ===== Bậc (trước gọi là thiên phú) nay chủ yếu theo lực chiến so với người cùng cảnh giới =====
+playerTal=function(){const r=G.run;if(!r)return null;const p=playerTalProfile(r);const lc=lucChien();const f=floorStats();const fl=f?lcCalc(f):0;
+  const lv=rateOf('lc',lc).lv;return {tier:clamp(lv,0,4),score:fl>0?lc/fl:1,p,lc:1};};
+// đơn vị trong trận: so lực chiến với mức thường của cấp đó (mỗi đại cảnh giới chừng ×2,2)
+const TAL_LV_G=2.2;
+{const _ut=unitTal;unitTal=function(u){if(!u)return null;if(u.isMain)return playerTal();if(u.kind==='kiep'||u.immune)return null;if(u.f&&u.f!=='nhan'&&u.side==='B')return null;
+  const r=G.run;const f=floorStats();if(!f)return _ut(u);const fl=lcCalc(f);const L=u.side==='A'?r.realm:unitLv(u);const exp=fl*Math.pow(TAL_LV_G,L-(r.realm||0));const q=lcCalc(u)/Math.max(1,exp);
+  let lv=0;for(const x of RATE_T)if(q>=x-1e-9)lv++;return {tier:clamp(lv,0,4),score:q};};}
+// Uy áp theo bậc: bên thấp hơn bị giảm công và thủ (kém 1 bậc 6%, kém từ 2 bậc 12%)
+const TAP_P=[0,0.06,0.12];
+{const _ua=uyApSet;uyApSet=function(sc){_ua(sc);const me=mainUnit(sc);if(!me)return;const mt=unitTal(me);if(!mt)return;
+  for(const b of sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep'&&!u.immune)){const bt=unitTal(b);if(!bt)continue;const d=bt.tier-mt.tier;
+    const lo=d>0?me:d<0?b:null;if(!lo)continue;const k=Math.min(2,Math.abs(d));if((lo.st.tap||0)>=k)continue;const prev=lo.st.tap||0;const m=(1-TAP_P[k])/(1-TAP_P[prev]);
+    lo.atk=Math.round(lo.atk*m);lo.def=Math.round(lo.def*m);if(lo.matk)lo.matk=Math.round(lo.matk*m);lo.st.tap=k;
+    clog(sc,lo===me?`Khí thế của ${b.name} lấn át ngươi${k>1?' hẳn hai bậc':''}, ra tay có phần chùn lại.`:`${b.name} bị khí thế của ngươi lấn át${k>1?' hẳn hai bậc':''}.`,lo===me?'en':'me');}};}

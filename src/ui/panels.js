@@ -111,7 +111,7 @@ function pMore(){
   if(tab==='menu'){
     b+=`<div class="menu">${[['cfg','gear','Cấu hình','Đồ họa, khung hình, hiển thị, lối chơi'],['layer','layers','Lớp bản đồ','Bật tắt tên, thực thể qua lại'],['legend','list','Chú giải','Ý nghĩa các ký hiệu trên bản đồ'],['notes','pin','Ghi chú','Các điểm ngươi đã ghim'],['help','info','Cách chơi','Tóm tắt luật chơi']].map(([k,i,n,d])=>`<button class="row" data-act="tab" data-arg="more:${k}"><span class="r-i">${ic(i)}</span><span class="r-t"><b>${n}</b><small>${d}</small></span></button>`).join('')}
      <button class="row" data-act="newGame"><span class="r-i">${ic('cycle')}</span><span class="r-t"><b class="${UI.confirm==='newGame'?'bad':''}">${UI.confirm==='newGame'?'Bấm lần nữa để chơi lại từ đầu':'Chơi mới từ đầu'}</b><small>Xóa kiếp này, thế giới và mọi tích lũy, đầu thai lại. Không hoàn tác.</small></span></button>
-     ${DEV?`<button class="row" data-act="devOpen"><span class="r-i">${ic('bolt')}</span><span class="r-t"><b>Dev test</b><small>Công cụ thử nghiệm, bản chính thức sẽ ẩn</small></span></button>`:''}<button class="row" data-act="screen" data-arg="title"><span class="r-i">${ic('home')}</span><span class="r-t"><b>Về màn hình đầu</b><small>Kiếp này vẫn được giữ lại</small></span></button></div>`;
+     <button class="row" data-act="screen" data-arg="title"><span class="r-i">${ic('home')}</span><span class="r-t"><b>Về màn hình đầu</b><small>Kiếp này vẫn được giữ lại</small></span></button></div>`;
   }
   if(tab==='layer')b+=`<div class="sets">${setRow('Tên địa danh',onoff('names'))}${setRow('Thực thể qua lại',onoff('ents'),'Thương đội, thú triều, đệ tử tuần tra, thiên kiêu, dị tượng… đang di chuyển trên bản đồ')}${setRow('Lưới ô lục giác',onoff('grid'),'Lưới ô và ranh giới các quận. Ranh giới đại khu vực luôn hiện.')}${setRow('Dấu ghi chú',onoff('notes'))}${setRow('Địa hình vẽ tay',onoff('terrain'),'Tắt đi thì bản đồ chỉ còn nền giấy trơn, nhẹ máy nhất')}</div>`;
   if(tab==='legend'){const HT=CFG.hideT||{},HE=CFG.hideE||{};const any=Object.keys(HT).length+Object.keys(HE).length>0;
@@ -413,7 +413,7 @@ function relCmpLines(ns,rel,cmp){const keys=Object.keys(ns);if(!cmp)return fxLin
 // ô Thiên phú ở đầu tab Căn cơ: nổi bật nhất bảng; Tinh anh khung bạc, Thiên kiêu khung vàng
 function talCardHTML(){const t=playerTal();if(!t)return '';const p=t.p;const RLN={tap:'Ngũ hành tạp linh căn',tu:'Tứ linh căn',tam:'Tam linh căn',song:'Song linh căn',thien:'Thiên linh căn',bien:'Biến dị linh căn',cuc:'Cực linh căn'};
   const w=v=>['rất kém','kém','bình thường','tốt','rất tốt'][clamp(Math.round(v),0,4)];
-  const tip='Thiên phú: gốc rễ bên trong, không phải sức chiến đấu.\n· Linh căn: '+(RLN[p.root]||'')+'\n· Tư chất: '+tcName(tuChat())+'\n· Ngộ tính: '+w(((p.ngo||10)-8)/1.5)+'\n· Phẩm tiên thiên khí vận: '+w(((p.kvMax||1)-1)*0.8)+'\n· Phẩm thể chất: '+w(((p.th||1)-1)*0.8)+'\n· Đạo cơ: '+w((p.dao||0)/5)+'\n\nTạp linh căn cao nhất chỉ tới Bình phàm; tư chất hạ phẩm cao nhất chỉ tới Bất phàm.'+'\n\nNăm bậc: Phế vật, Bình phàm, Bất phàm, Tinh anh, Thiên kiêu.';
+  const tip='Đánh giá theo lực chiến so với người cùng cảnh giới: công, thủ, khí huyết, linh lực, trang bị, công pháp.\nTrong trận, ai kém bậc hơn sẽ bị khí thế lấn át: kém một bậc giảm nhẹ công và thủ, kém từ hai bậc giảm khá.\n\nNăm bậc: Phế vật, Bình phàm, Bất phàm, Tinh anh, Thiên kiêu.';
   return `<div class="tal-wrap tw${t.tier}"><div class="tal-card tal${t.tier}"${ta(tip)}><b>${TAL_N[t.tier]}</b></div>${talCardOrn(t)}</div>`;}
 function talCls(t){return t&&t.tier>=0?' tf'+t.tier:'';}
 
@@ -601,3 +601,8 @@ function htRow(){const r=G.run;const L=(r.htkv||[]).map(id=>HTMAP[id]).filter(Bo
   const v=L.length?`<span class="ttl">${L.map(x=>`<span class="ttc r${HT_COLR[x.r]}" style="--pc:${TT_COL[HT_COLR[x.r]]}"${tah(htTipH(x))}>${esc(x.n)}</span>`).join('')}</span>`:'<span class="hint">Chưa có</span>';
   return kvRow('Hậu thiên khí vận',v,'Cơ duyên có được sau mỗi lần đột phá đại cảnh giới.');}
 STAT_IC['Hậu thiên khí vận']=['spark','jade'];
+
+TFX[0]={hi:'#ffb3a8',lo:'#3a0606',m1:'#c0392b',m2:'#6e1410',m3:'#9a2a20',dk:'#1e0404',gem:['#ffd0c8','#b01e1e','#3a0404'],acc:'#5a0e0e',glow:'rgba(160,20,20,.35)'};
+function tfAs1(t,fn){const sv=TFX[1];TFX[1]=TFX[0];try{return fn(Object.assign({},t,{tier:1}));}finally{TFX[1]=sv;}}
+talFrameSVG=function(t,id){if(!t||t.tier<0||t.tier===1)return '';if(t.tier===0)return tfAs1(t,x=>talFrameX(x,id));return talFrameX(t,id);};
+{const _tco=talCardOrn;talCardOrn=function(t){if(t.tier===1)return '';if(t.tier===0)return tfAs1(t,x=>_tco(x)).replace(/tcx1/g,'tcx0');return _tco(t);};}

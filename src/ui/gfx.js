@@ -248,7 +248,9 @@ const Map2=(()=>{
     // mây trôi, hạt theo mùa, sắc trời theo buổi
     if(lv>0&&CFG.clouds){if(!cloudSpr)cloudSpr=cloudSprite();if(!clouds.length)for(let i=0;i<[0,9,16][lv];i++)clouds.push({x:Math.random()*(WORLD_W+500)-250,y:Math.random()*2500-250,s:160+Math.random()*220,v:6+Math.random()*10});
       ctx.globalAlpha=C.dark?0.06:0.5;for(const c of clouds){c.x+=c.v*dt;if(c.x>WORLD_W+300)c.x=-500;const x=SX(c.x),y=SY(c.y),s=c.s*z*2;if(x+s<0||x>W0||y+s<0||y>H0)continue;ctx.drawImage(cloudSpr,x,y,s,s*0.6);}ctx.globalAlpha=1;}
-    if(CFG.daynight&&!(r.moving&&!r.halt)){const p=partOf(w.t);const t=p==='dem'?['#0f1c3a',C.dark?0.2:0.16]:p==='toi'?['#7a3a4a',0.1]:p==='sang'?['#f2c078',0.07]:['#fff3c4',0.035];if(t){ctx.fillStyle=hexA(t[0],t[1]);ctx.fillRect(0,0,W0,H0);}}
+    {const on=CFG.daynight&&!(r.moving&&!r.halt);const tg=on?dnTint(tHour(w.t),C.dark):[0,0,0,0];const c=UI.dnCur||(UI.dnCur=tg.slice());let mv=0;
+      for(let i=0;i<4;i++){const d=tg[i]-c[i];if(Math.abs(d)>(i<3?0.5:0.0008)){c[i]+=d*0.06;mv=1;}else c[i]=tg[i];}
+      if(c[3]>0.002){ctx.fillStyle=`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${c[3].toFixed(3)})`;ctx.fillRect(0,0,W0,H0);}if(mv)UI.dnMv=1;else UI.dnMv=0;}
     if(lv>0&&CFG.fx){if(!(r.moving&&!r.halt)||!pse)pse=[seasonOf(w.t),partOf(w.t)==='dem'];const se=pse[0],night=pse[1];const want=se==='ha'&&!night?0:[0,16,38][lv];
       while(parts.length<want)parts.push({x:Math.random()*W0,y:Math.random()*H0,v:10+Math.random()*24,a:Math.random()*6.3,s:1.5+Math.random()*2.5});
       if(parts.length>want)parts.length=want;
@@ -345,3 +347,9 @@ function sceneCv(seed,reg,type,cls,figs){const night=G.meta&&G.meta.world&&partO
 
 // khung thiên phú trên bản đồ: Tinh anh ánh bạc, Thiên kiêu ánh kim
 function talGrad(ctx,x,y,r,t){if(!t||t.tier<0)return null;const g=ctx.createLinearGradient(x-r,y-r,x+r,y+r);const S={4:['#ffffff','#9fd8ff','#f2f8ff','#6a74d8','#cfe9ff'],3:['#fff4c2','#d9a521','#fff0a8','#9a6a08','#ffd75e'],2:['#ffffff','#9aa4ae','#f4f7fa','#6f7984','#dfe5ea'],1:['#ffe2c4','#c07a40','#f5c9a0','#6e3a18','#d9945a'],0:['#a8382a','#3a0a06','#6a1810','#1a0404','#5a1410']}[t.tier];S.forEach((c,i)=>g.addColorStop(i/(S.length-1),c));return g;}
+
+// màu phủ theo giờ: nội suy giữa các mốc để chuyển buổi êm, không giật
+const DN_K=[[0,'#0f1c3a',.16],[4.5,'#0f1c3a',.16],[6.5,'#f2c078',.07],[10,'#fff3c4',.035],[16,'#fff3c4',.035],[18,'#7a3a4a',.1],[20.5,'#0f1c3a',.16],[24,'#0f1c3a',.16]];
+function dnTint(h,dark){h=((h%24)+24)%24;let a=DN_K[0],b=DN_K[1];for(let i=0;i<DN_K.length-1;i++)if(h>=DN_K[i][0]&&h<=DN_K[i+1][0]){a=DN_K[i];b=DN_K[i+1];break;}
+  const f=(h-a[0])/Math.max(1e-6,b[0]-a[0]);const rgb=x=>[parseInt(x.slice(1,3),16),parseInt(x.slice(3,5),16),parseInt(x.slice(5,7),16)];const A=rgb(a[1]),B=rgb(b[1]);
+  let al=a[2]+(b[2]-a[2])*f;if(dark&&a[1]==='#0f1c3a'&&b[1]==='#0f1c3a')al=0.2;return [A[0]+(B[0]-A[0])*f,A[1]+(B[1]-A[1])*f,A[2]+(B[2]-A[2])*f,al];}
