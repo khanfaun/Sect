@@ -419,7 +419,7 @@ function ascPlaceImg(a){const P=ASSET.place||{};return P[a.place]||P.dongphu||P.
 function ascStory(a){const r=G.run;const x=a.ht&&HTMAP[a.ht];const L=[];
   L.push(a.k==='bt'?`Lôi vân tan dần. ${r.ten} mở mắt, thấy trời đất như vừa được gột rửa: núi xanh hơn, gió trong hơn, từng sợi linh khí hiện rõ như tơ.`:`Một tiếng “rắc” khẽ vang trong kinh mạch. Linh lực dồn nén bao lâu nay ào qua quan ải.`);
   if(x)L.push(x.st.replace(/\{ten\}/g,r.ten));return L;}
-function ascDiffHTML(a){return `<div class="asc-diff">${a.diff.length?a.diff.map(d=>`<div class="ad"><span>${esc(d.n)}</span>${chevIc(d.lv)}</div>`).join(''):'<p class="hint">Căn cơ vững lại, chưa thấy đổi khác rõ rệt.</p>'}</div><p class="asc-lg">${chevIc(1)} tăng vừa ${chevIc(2)} tăng mạnh ${chevIc(3)} tăng rất mạnh</p>`;}
+function ascDiffHTML(a){return `<div class="asc-diff">${a.diff.length?a.diff.map(d=>`<div class="ad"><span>${esc(d.n)}</span>${chevIc(d.lv)}</div>`).join(''):'<p class="hint">Căn cơ vững lại, chưa thấy đổi khác rõ rệt.</p>'}</div>`;}
 function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
   if(UI.ascId!==a._id){UI.ascId=a._id;UI.ascPh='flash';UI.ascSel=null;clearTimeout(UI.ascT);
     const ms=CFG.anim===false?200:a.k==='bt'?3000:1600;document.documentElement.dataset.ascShake=a.k;setTimeout(()=>{delete document.documentElement.dataset.ascShake;},ms);
@@ -431,9 +431,9 @@ function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
     if(sel!=null){const x=HTMAP[r.htPick[sel]];h+=`<div class="asc-cf"><div class="mbox"><h3>Nắm lấy ${esc(x.n)}?</h3><p>${esc(x.d)}</p><p class="hint">Chọn rồi không đổi được.</p><div class="mb-f"><button class="btn" data-act="ascSel" data-arg="-1">Nghĩ lại</button><span class="grow"></span><button class="btn pri" data-act="ascPick">Xác nhận</button></div></div></div>`;}
     return h+'</div>';}
   const img=a.k==='bt'?ascPlaceImg(a):'';
-  h+=`<div class="asc-in res">${img?`<div class="asc-img"><img src="${esc(img)}" alt=""></div>`:''}<small>${a.k==='bt'?'Đột phá thành công':'Xung kích thành công'}</small><h2 class="asc-to"><s>${esc(a.from)}</s><span>${esc(a.to)}</span></h2>
+  h+=`<div class="asc-in res">${img?`<div class="asc-img"><img src="${esc(img)}" alt=""></div>`:''}<small>${a.k==='bt'?'Đột phá thành công':'Xung kích thành công'}</small><h2 class="asc-to"><span>${esc(a.to)}</span></h2>
     <div class="asc-st">${ascStory(a).map(t=>`<p>${esc(t)}</p>`).join('')}</div>${a.ht&&HTMAP[a.ht]?`<p class="asc-ht">Hậu thiên khí vận: <b>${esc(HTMAP[a.ht].n)}</b></p>`:''}
-    ${ascDiffHTML(a)}<button class="btn pri big" data-act="ascDone">${a.k==='bt'?'Bước ra khỏi động phủ':'Tiếp tục'}</button></div>`;
+    ${ascDiffHTML(a)}<button class="btn pri big" data-act="ascDone">Tiếp tục</button></div>`;
   return h+'</div>';}
 {const _mh=modalHTML;modalHTML=function(){const r=G.run;if(r&&r.asc&&G.screen==='map'&&!(r.scene&&r.scene.type==='combat')){if(!UI.modal||UI.modal.k!=='asc')UI.modal={k:'asc'};document.documentElement.dataset.asc='1';return ascHTML();}
   delete document.documentElement.dataset.asc;if(UI.modal&&UI.modal.k==='asc')UI.modal=null;return _mh();};}
