@@ -20,7 +20,7 @@ function render(){
     if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth',vBirth):G.screen==='over'&&G.over?rxv('Over',vOver):G.screen==='meta'?rxv('Meta',vMeta):G.screen==='life'&&G.run?rxv('Life',vLife):rxv('Title',vTitle);}
     else{
       if(cb)full=vCombat(sc);
-      else{hud=hudHTML();nav=navHTML();
+      else{hud=rxv('Hud',hudHTML);nav=rxv('Nav',navHTML);
         if(!sc){mapui=mapUiHTML();dock=dockHTML();}
         else if(UI.evMin&&sc.type==='event'){mapui=mapUiHTML();dock=dockHTML();}
         else if(sc.type==='region')sheet=vRegionIntro(sc);

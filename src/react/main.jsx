@@ -3,6 +3,8 @@
 import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
 import { ManMoDau, ManChonKiep, ManHetKiep, ManBenVongXuyen, ManMoDauKiep } from './man-ngoai';
+import { Hud } from './ban-do/Hud';
+import { Nav } from './ban-do/Nav';
 
 const VIEWS = {
   Title: ManMoDau,
@@ -10,6 +12,8 @@ const VIEWS = {
   Over: ManHetKiep,
   Meta: ManBenVongXuyen,
   Life: ManMoDauKiep,
+  Hud,
+  Nav,
 };
 
 window.RX = {
