@@ -35,10 +35,12 @@ function nearest(pred){const r=G.run;let best=null,bl=1e9;for(const n of regionO
 function goOrOpen(n){const r=G.run;if(!n)return false;if(n.id===r.at){openPlace(n.id);return true;}if(!travelTo(n.id))return false;travelTick(1e7);return true;}
 function botPlan(){
   if(typeof learnAll==='function')learnAll();if(!G.run)return;
+  if(G.run.kvPick&&(!G.run.scene||G.run.scene.type==='place')){kvChoose(0);return;}
+  {const X=typeof lkXkState==='function'&&lkXkState();if(X&&X.ok&&!(G.run.realm===0&&lkTang()>=9)&&(!G.run.scene||G.run.scene.type==='place')){lkXk();return;}}
   const r=G.run,s=S();
   // mục tiêu
   if(r.hp<s.maxHp*0.45){const n=nearest(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok'&&r.st>=price(4)||n.dp);if(n&&goOrOpen(n)){r._goal=n.dp?'heal':'inn';return;}}
-  if(r.tv>=100&&r.realm<4&&canBreak()){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bt';return;}}
+  if(r.realm<4&&canBreak()){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bt';return;}}
   if((r.tvMinor>=40||r.tv<100&&!bqCan()&&chance((r.ll||0)>=r.tv+10?.75:r.tv>=60?.3:.2))&&(r.ll||0)>=r.tv-15){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bq';return;}}
   const R0=regionOf(r.region);
   if(r.region<4&&(r.realm>=r.region+1||r.passes.includes(r.region+1))){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';return;}}
@@ -51,7 +53,7 @@ function botPlan(){
   const known=R0.nodes.filter(n=>n.fog>=1&&n.id!==r.at&&n.type!=='ai'&&n.type!=='sao');
   // lịch luyện tụt sau tu vi: ưu tiên nơi chưa tới
   const lag=(r.ll||0)<r.tv-15;
-  if(lag||(r.tv>=100&&(r.ll||0)<100)){const seen=new Set(r.llP||[]);const n=nearest(x=>x.id!==r.at&&!seen.has(x.id)&&x.type!=='ai'&&x.type!=='sao');if(n&&goOrOpen(n)){r._goal='explore';return;}}
+  if(lag||((r.tv>=100||(lkOn()&&lkTang()>=9))&&(r.ll||0)<llNeedBt())||(lkXkState()&&lkXkState().ll)){const seen=new Set(r.llP||[]);const n=nearest(x=>x.id!==r.at&&!seen.has(x.id)&&x.type!=='ai'&&x.type!=='sao');if(n&&goOrOpen(n)){r._goal='explore';return;}}
   let t=cand.length&&chance(lag?.95:.7)?pick(cand):(chance(.5)?nodeById(r.at):pick(known.length?known:[nodeById(r.at)]));
   r._goal='explore';goOrOpen(t);
 }
@@ -64,8 +66,8 @@ function botPlace(){
   if(r._goal==='boss'&&has('boss')){r._goal=null;placeAct('boss');return;}
   if(has('bt')){if(r.hp<s.maxHp*0.95&&has('heal')){placeAct('heal');return;}placeAct('bt');return;}
   if(r.hp<s.maxHp*0.45){if(has('inn')&&venueDo('inn','phong'))return;if(has('heal')){placeAct('heal');return;}if(has('tinh')){placeAct('tinh');return;}}
-  if(r._goal==='bq'&&!bqCan()){r._goal=null;bqCustom(chance(.7)?2:0.25);return;}
-  if(n.dp&&!bqCan()&&r.tvMinor>=40){bqCustom(chance(.75)?2:0.25);return;}
+  if(r._goal==='bq'&&!bqCan()){r._goal=null;bqCustom(Math.max(0.25,Math.min(chance(.7)?2:0.25,bqNeedY()||0.25)));return;}
+  if(n.dp&&!bqCan()&&r.tvMinor>=40){bqCustom(Math.max(0.25,Math.min(chance(.75)?2:0.25,bqNeedY()||0.25)));return;}
   if(has('tea')&&chance(.3)&&venueDo('tea','nghe'))return;
   if(has('shop')&&chance(.3)){placeAct('shop');return;}
   if(has('board')&&chance(.15)){placeAct('board');return;}

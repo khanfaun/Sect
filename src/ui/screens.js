@@ -2,10 +2,10 @@
 function vTitle(){
   const M=G.meta;const has=!!G.run;const last=M.lives[0];
   let mid='';
-  if(has){mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="resume">Tiếp tục kiếp ${G.run.kiep}</button><p class="hint">${esc(G.run.ten)} · ${esc(realmLabel())} · ${Math.floor(G.run.age)} tuổi</p></div>`;}
+  if(has){mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="resume">Tiếp tục ${kiepName(G.run.kiep).toLowerCase()}</button><p class="hint">${esc(G.run.ten)} · ${esc(realmLabel())} · ${Math.floor(G.run.age)} tuổi</p></div>`;}
   else if(last){
     const L=last.lines.slice(-4);const N=[`Kiếp trước, có một người tên ${last.ten}.`].concat(L,[`Hồn phách qua cầu Nại Hà. Bát canh Mạnh Bà xóa đi tên họ, xóa đi ân oán, chỉ ${M.pts} điểm luân hồi còn khắc trong chân linh.`]);
-    mid=`<div class="narr${UI.narrSkip?' skip':''}" data-act="narrSkip">${N.map((t,i)=>`<p style="animation-delay:${i*1.1}s">${txt(t)}</p>`).join('')}<p class="k" style="animation-delay:${N.length*1.1}s">Kiếp thứ ${M.nlife+1} bắt đầu.</p></div>
+    mid=`<div class="narr${UI.narrSkip?' skip':''}" data-act="narrSkip">${N.map((t,i)=>`<p style="animation-delay:${i*1.1}s">${txt(t)}</p>`).join('')}<p class="k" style="animation-delay:${N.length*1.1}s">${kiepName(M.nlife+1)} bắt đầu.</p></div>
      <div class="t-btn" style="animation-delay:${UI.narrSkip?0:N.length*1.1+0.6}s"><button class="btn pri big" data-act="birth">Luân hồi</button><button class="btn" data-act="screen" data-arg="meta">Lên Bến Vong Xuyên · ${M.pts} điểm</button><p class="hint">Đã trải ${M.nlife} kiếp</p></div>`;}
   else mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="birth">Nhập thế</button><p class="hint">Thế gian không chờ ai. Chết rồi lại sinh, mang theo chút gì còn khắc trong chân linh.</p></div>`;
   return `<div class="title">${ASSET.title?`<img class="t-art t-ink" src="${ASSET.title}" alt="">`:sceneCv('phusinh-title'+M.nlife,Math.min(4,last?last._mr||0:0),'song','t-art')}<div class="t-seal">Phù</div><h1>Phù Sinh</h1>${mid}
@@ -33,13 +33,13 @@ function vMeta(){
   let b=`<p class="m-in">Lão Đò neo thuyền bên bến, chờ ngươi bày ra những gì còn mang theo được.</p>`+tabsHTML('meta',[['upg','Khắc vào chân linh'],['lives','Các kiếp'],['lore','Điển tích'],['ach','Thành tựu']],tab);
   if(tab==='upg'){b+='<div class="rows">';for(const u of UPG){const lv=M.upg[u.id]||0;const mx=lv>=u.max;const c=mx?0:u.c[lv];
     b+=`<div class="row"><span class="r-t"><b>${esc(u.n)}</b><small>${esc(u.d)}</small><span class="pips">${'●'.repeat(lv)}${'○'.repeat(u.max-lv)}</span></span>${mx?'<span class="r-x">đã đủ</span>':`<button class="btn sm" data-act="upg" data-arg="${u.id}"${M.pts<c?' disabled':''}>Khắc · ${c} điểm</button>`}</div>`;}b+='</div>';}
-  if(tab==='lives')b+=M.lives.length?M.lives.map(L=>`<details class="life"><summary><b>${esc(L.ten)}</b><small>Kiếp ${L.k} · ${L.tuoi} tuổi · ${esc(L.realm)}</small></summary><p class="ep">${esc(L.ep)}</p>${L.lines.map(l=>`<p>${esc(l)}</p>`).join('')}</details>`).join(''):'<p class="empty">Chưa có kiếp nào kết thúc.</p>';
+  if(tab==='lives')b+=M.lives.length?M.lives.map(L=>`<details class="life"><summary><b>${esc(L.ten)}</b><small>${kiepName(L.k)} · ${L.tuoi} tuổi · ${esc(L.realm)}</small></summary><p class="ep">${esc(L.ep)}</p>${L.lines.map(l=>`<p>${esc(l)}</p>`).join('')}</details>`).join(''):'<p class="empty">Chưa có kiếp nào kết thúc.</p>';
   if(tab==='lore'){const ks=Object.keys(LORE);b+=`<p class="hint">Đã biết ${M.lore.length}/${ks.length}</p>`+ks.map(k=>M.lore.includes(k)?`<details class="life"><summary><b>${esc(LORE[k].n)}</b></summary><p>${esc(LORE[k].t)}</p></details>`:`<div class="life lock">chưa biết</div>`).join('');}
   if(tab==='ach')b+=`<p class="hint">Đạt ${M.ach.length}/${ACH.length}</p><div class="rows">`+ACH.map(a=>`<div class="row${M.ach.includes(a.id)?' taken':' dim'}"><span class="r-i">${M.ach.includes(a.id)?ic('check'):''}</span><span class="r-t"><b>${esc(a.n)}</b><small>${esc(a.d)}</small></span></div>`).join('')+'</div>';
   return `<div class="meta">${sceneCv('ben-vong-xuyen',3,'song','m-art','nhan:0.62:0.42:1:laodo')}${win('Bến Vong Xuyên',b,{cls:'tall',noClose:true,extra:`<span class="m-pts">${M.pts} điểm luân hồi</span>`,foot:`<span class="grow"></span><button class="btn pri" data-act="screen" data-arg="title">Rời bến</button>`})}</div>`;
 }
 // ---------- trang mở đầu kiếp: tiêu đề, từng dòng chuyện hiện dần, một nút ----------
 function vLife(){const r=G.run;const L=r.story||[];const d=i=>`style="animation-delay:${(UI.lifeAll?0:i*LIFE_D+0.9).toFixed(2)}s"`;
-  return `<div class="lsx${UI.lifeAll?' all':''}" data-act="lifeAll"><div class="lsx-b"><small class="lsx-k" ${d(-0.5)}>Kiếp thứ ${r.kiep}</small><h1 class="lsx-h" ${d(-0.3)}>${esc(r.ten)}</h1>
+  return `<div class="lsx${UI.lifeAll?' all':''}" data-act="lifeAll"><div class="lsx-b"><small class="lsx-k" ${d(-0.5)}>${kiepName(r.kiep)}</small><h1 class="lsx-h" ${d(-0.3)}>${esc(r.ten)}</h1>
    <div class="lsx-t">${L.map((x,i)=>`<p ${d(i)}>${esc(x)}</p>`).join('')}</div>
    <div class="lsx-go" ${d(L.length+0.2)}><button class="btn pri big" data-act="lifeGo">Lên đường</button></div></div></div>`;}

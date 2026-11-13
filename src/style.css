@@ -1058,3 +1058,87 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 /* chú thích: đo ở mép trái rồi mới đặt chỗ nên không bị bóp hẹp sát mép; rộng vừa đủ đọc */
 #tip{width:max-content;max-width:min(320px,calc(100vw - 16px))}
 #tip.rich{width:min(300px,calc(100vw - 16px));max-width:min(300px,calc(100vw - 16px))}
+/* 5 mức đánh giá: xám, nâu nhạt, mực, xanh lục, vàng kim */
+.rt0{color:#8d8672}.rt1{color:#a5835a}.rt2{color:var(--ink)}.rt3{color:#3f8a4a}.rt4{color:#b8902a;font-weight:600}
+/* thanh đầu: chữ đánh giá dài hơn con số nên chia 5 cột đều, chữ nhỏ lại, không chồng nhau */
+.hud-stats{display:flex!important;flex-wrap:nowrap;justify-content:space-between;gap:4px!important}
+.hud-stats .hs{font-size:.74em;letter-spacing:0;flex:none}.hud-stats .hs .ic{width:12px;height:12px;flex:none}
+
+/* chọn khí vận sau đột phá */
+.kvp{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.kvo{text-align:left;font:inherit;color:inherit;background:rgba(255,255,255,.35);border:1px solid var(--pc);border-left:4px solid var(--pc);border-radius:8px;padding:8px 10px;cursor:pointer}
+.kvo:hover{background:rgba(255,255,255,.6)}.kvh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.kvh b{color:var(--pc)}.kvh small{opacity:.7}
+.kvo p{margin:.3em 0 0;font-size:.9em}.kvo .kvf{opacity:.85}
+
+/* Căn cơ: màu đánh giá thắng màu chữ của hàng; ẩn icon chỉ số (giữ icon tiêu đề và ngũ hành) */
+.kr .rt0,.kv .rt0{color:#8d8672}.kr .rt1,.kv .rt1{color:#a5835a}.kr .rt2,.kv .rt2{color:var(--ink)}.kr .rt3,.kv .rt3{color:#3f8a4a}.kr .rt4,.kv .rt4{color:#b8902a;font-weight:600}.kr span.bad{color:#b8402f}
+.basegrid .sic{display:none}
+
+/* cụm tốc độ trận: góc trên bên phải tranh trận */
+.cb-art{position:relative}.cspd.cspd-art{position:absolute;top:18px;right:18px;z-index:4}.cspd-art button{background:rgba(250,245,232,.85)}.cspd-art button.on{background:var(--ink)}
+
+/* nghiền ép, uy áp */
+.lc-c.ne,.kr .ne{color:#b8302a;font-weight:700}.si.si-uyap{background:#b8302a;color:#fff;border-color:#b8302a}
+/* màn chuẩn bị trận: nhãn so sức, nút tốc chiến */
+.pp-nl .lc-c.ne{color:#b8302a!important;font-weight:700}.pp-nl .lc-c.rt1{color:#a5835a!important}.pp-nl .lc-c.rt2{color:var(--ink)!important}.pp-nl .lc-c.rt3{color:#3f8a4a!important}
+/* nút tốc chiến nhỏ ở góc phải, nút Bắt đầu giữ nguyên giữa */
+.pp-quick{display:flex;justify-content:flex-end;margin-top:6px}.pp-quick:empty{display:none}.cbprep .cb-quick{font-size:.8em;padding:4px 10px;letter-spacing:.04em}
+/* nhãn so sức: nghiền ép đỏ có đầu lâu, mạnh hơn nâu đỏ, vừa sức vàng */
+.pp-nl .lc-c.st{color:#b8562a!important}.pp-nl .lc-c.ev{color:#b8902a!important}.pp-nl .ne-i{display:inline-flex;vertical-align:-2px;margin-right:4px}.pp-nl .ne-i svg{width:1.15em;height:1.15em;stroke:#b8302a}
+/* chỉ số địch: mạnh là nguy hiểm (đỏ), yếu là có lợi (xanh), vừa là vàng */
+.pp-u.foe .pp-st .rt3,.pp-u.foe .pp-st .rt4{color:#b8302a!important;font-weight:600}.pp-u.foe .pp-st .rt2{color:#b8902a!important}.pp-u.foe .pp-st .rt0,.pp-u.foe .pp-st .rt1{color:#3f8a4a!important;font-weight:400}
+
+/* màn chuẩn bị trận: tiêu đề đội có nhãn so sức, tên địch đỏ, bố cục gọn khi đông người */
+.pp-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.pp-h .lc-c{font-size:1.15em;letter-spacing:.04em;text-transform:none}
+.pp-h .lc-c.st{color:#b8562a!important}.pp-h .lc-c.ev{color:#b8902a!important}
+.pp-u.foe .pp-n{color:#b8302a}
+.pp-cmp .pp-u{padding:4px 0;border-bottom:1px dotted var(--line)}.pp-cmp .pp-u:last-child{border-bottom:0}.pp-cmp .pp-u .u-av{width:28px;height:28px;font-size:.95em}
+.pp-cmp .pp-n{font-size:.92em}.pp-cmp .pp-t>small{font-size:.74em}.pp-cmp .pp-st{grid-template-columns:repeat(4,auto);gap:0 10px;font-size:.74em;margin-top:2px}
+
+.pp-cmp .pp-n{display:flex;align-items:baseline;gap:6px;min-width:0}.pp-cmp .pp-sub{font-size:.78em;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-cmp .pp-st{display:flex;flex-wrap:wrap;gap:0 10px}.pp-cmp .pp-st span{flex-direction:row;gap:3px;align-items:baseline}
+.pp-cmp .pp-st{flex-direction:row!important}.pp-cmp .pp-st span{justify-content:flex-start!important}
+/* thanh đầu: chữ đánh giá dài (Rất cao…) không đè ô bên cạnh */
+.hud-stats{gap:2px!important}.hud-stats .hs{font-size:.7em!important;flex:0 1 auto!important;min-width:0;white-space:nowrap}.hud-stats .hs .ic{width:13px;height:13px;flex:none}
+
+.cbprep .sc-h .cb-quick{margin-left:auto;align-self:center;flex:none}
+
+/* màn chuẩn bị trận: mỗi người chỉ có thanh khí huyết, linh lực và lực chiến nổi bật */
+.pp-bars{display:flex;gap:10px;margin-top:4px}.pp-bars>span{flex:1;display:flex;align-items:center;gap:4px;min-width:0}.pp-bars .ic{width:12px;height:12px;flex:none;opacity:.7}.pp-bars .cbar{height:7px}
+.pp-lc{display:inline-flex;align-items:baseline;gap:8px;margin-top:5px;padding:2px 10px;border-radius:12px;background:rgba(184,144,42,.13);border:1px solid rgba(184,144,42,.35)}
+.pp-lc small{font-size:.72em;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}.pp-lc .rt{font-weight:700;font-size:1.02em}
+.pp-u.foe .pp-lc .rt3,.pp-u.foe .pp-lc .rt4{color:#b8302a!important}.pp-u.foe .pp-lc .rt2{color:#b8902a!important}.pp-u.foe .pp-lc .rt0,.pp-u.foe .pp-lc .rt1{color:#3f8a4a!important}
+
+.pp-row2{display:flex;align-items:center;gap:10px;margin-top:4px}.pp-row2 .pp-bars{flex:1;min-width:0;margin-top:0;gap:8px}
+.pp-row2 .pp-lc{margin-top:0;flex:none;padding:1px 9px;gap:6px}.pp-row2 .pp-lc small{font-size:.66em}.pp-row2 .pp-lc .rt{font-size:.92em}
+/* thanh đầu: 4 ô đánh giá chia đều + linh thạch; chữ dài (Bình thường) vẫn vừa */
+.hud-stats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:2px!important;align-items:center}
+.hud-stats .hs{font-size:.66em!important;gap:3px!important;min-width:0;overflow:hidden;white-space:nowrap}.hud-stats .hs .ic{width:11px!important;height:11px!important}
+/* màn chuẩn bị trận: tiêu đề một hàng, tên địch dài thì cắt bớt để nút Tốc chiến không rớt dòng */
+.cbprep .sc-h{flex-wrap:nowrap}.cbprep .sc-h h2{white-space:nowrap;flex:none}.cbprep .sc-h small{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hud-stats{justify-items:stretch!important}.hud-stats .hs{display:flex!important;align-items:center;justify-content:flex-start}.hud-stats .hs.st{justify-content:flex-end}
+.hud-stats .hs.dt{width:auto;height:auto;border-radius:0;margin:0}
+
+/* màn chuẩn bị trận: gọn khoảng cách để đủ chỗ khi 3 đấu 3; chiêu thức gập/mở */
+.pp-tg{width:100%;background:none;border:0;border-bottom:1px solid var(--line);font:inherit;cursor:pointer;text-align:left}.pp-tg small{letter-spacing:.05em;text-transform:none;font-size:1em;color:var(--ink3)}
+.cbprep .pp-h{margin:8px 0 3px;padding-bottom:3px}
+.cbprep .pp-cmp .pp-u{padding:3px 0;gap:7px}.cbprep .pp-cmp .pp-u .u-av{width:26px;height:26px}
+.cbprep .pp-cmp .pp-n{font-size:.88em}.cbprep .pp-nl .lc-c{font-size:.78em}
+.cbprep .pp-row2{margin-top:2px;gap:8px}.cbprep .pp-row2 .pp-lc{padding:0 7px}.cbprep .pp-row2 .pp-lc small{font-size:.62em}.cbprep .pp-row2 .pp-lc .rt{font-size:.84em}
+.cbprep .pp-act{margin:8px 0 2px}.cbprep .pp-act .btn{min-height:32px}.cbprep>.sc-b>.hint{font-size:.74em;margin:.2em 0}
+.cbprep .pp-tg{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:0 0 3px;color:var(--ink3);display:flex;justify-content:space-between;align-items:baseline}.cbprep .pp-tg small{font-size:1em;letter-spacing:.05em;text-transform:none}
+/* 5 màu đánh giá rõ hơn: xám lạnh, nâu cam, mực, xanh lục, vàng kim đậm */
+.rt0,.kr .rt0,.kv .rt0{color:#7f8a94!important}.rt1,.kr .rt1,.kv .rt1{color:#b0662e!important}.rt2,.kr .rt2,.kv .rt2{color:var(--ink)!important}.rt3,.kr .rt3,.kv .rt3{color:#2f8a45!important}.rt4,.kr .rt4,.kv .rt4{color:#c08a10!important;font-weight:700}
+/* thanh đầu: chữ cùng màu icon */
+.hud-stats .hs .rt{color:inherit!important;font-weight:inherit}
+/* 5 màu đánh giá: rất yếu đỏ, yếu cam, bình thường vàng, mạnh xanh dương, rất mạnh xanh lá */
+.rt0,.kr .rt0,.kv .rt0{color:#c0392b!important;font-weight:inherit}.rt1,.kr .rt1,.kv .rt1{color:#d9731a!important}.rt2,.kr .rt2,.kv .rt2{color:#b8960c!important}.rt3,.kr .rt3,.kv .rt3{color:#2f6fb5!important}.rt4,.kr .rt4,.kv .rt4{color:#2f8a45!important;font-weight:700}
+.hud-stats .hs .rt{color:inherit!important}
+/* chuẩn bị trận: tách hai đội xa hơn, chữ nhỏ lại */
+.cbprep .pp-sides>div+div{margin-top:14px}
+.cbprep .pp-cmp .pp-n{font-size:.8em}.cbprep .pp-cmp .pp-sub{font-size:.82em}.cbprep .pp-nl .lc-c{font-size:.72em}
+.cbprep .pp-row2 .pp-lc .rt{font-size:.74em}.cbprep .pp-row2 .pp-lc{padding:0 6px}
+
+/* nút Thêm trong trận: góc trên trái tranh trận, chỉ có icon */
+.cb-more{position:absolute;top:18px;left:18px;z-index:4;width:30px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:var(--r);background:rgba(250,245,232,.85);color:var(--ink2);padding:0;cursor:pointer}.cb-more .ic,.cb-more svg{width:16px;height:16px}
+:root[data-view=combat] #panel{z-index:25;bottom:0}
