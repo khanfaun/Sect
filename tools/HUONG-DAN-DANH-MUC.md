@@ -7,8 +7,8 @@
 - **Sổ gốc** của mọi nội dung là `docs/vat-pham.xlsx`. Muốn thêm hay sửa đồ thì sửa Excel, không sửa tay trong code.
 - Công cụ đọc Excel, kiểm luật, rồi ghi dữ liệu cho game vào `src/data/catalog.js`.
 - `src/catalog.js` nối dữ liệu đó vào luật game bằng các **lớp bọc** quanh hàm sẵn có. Bỏ tệp này ra thì game trở lại như cũ.
-- **Hiện chỉ là bản thử**: dữ liệu chỉ được ráp vào `phu-sinh-thu.html` (bằng `tools/build-thu.js`). Bản chính `phu-sinh.html` (bằng `tools/build.js`) **chưa dùng** danh mục.
-- **Chủ dự án dặn: KHÔNG đưa vào `main` khi chưa được cho phép rõ ràng.** Làm trên nhánh riêng, push lên nhánh đó.
+- **Đã vào bản chính** (theo yêu cầu của chủ dự án): `tools/build.js` ráp cả danh mục (`src/data/catalog.js`, `src/catalog.js`) và sự kiện cốt truyện (`src/data/su_kien.js`, `src/su_kien.js`) vào `phu-sinh.html`. `tools/build-thu.js` ráp cùng nội dung ra `phu-sinh-thu.html`.
+- Thay đổi lớn về sau: làm trên nhánh riêng, chỉ đưa vào `main` khi chủ dự án cho phép.
 - Chủ dự án không phải lập trình viên: trao đổi bằng tiếng Việt dễ hiểu, ít thuật ngữ.
 
 ## 2. Các tệp
@@ -74,6 +74,18 @@ Khi `main` có thay đổi: gộp `origin/main` vào nhánh đang làm, rồi so
 
 **Các nhóm khác** (chưa đổi luật): công pháp, tâm pháp (công cụ quy số GPT về mức gốc vì game tự nhân theo phẩm), chiêu thức (tụ lực được game cộng 35%), đan dược (mượn cách tác dụng của đan gốc cùng loại), phù lục, đan đột phá, phương tiện, linh thú (thêm vào EN và REG_EN), nguyên liệu có tên (chỉ chia phần tổng số của game), vật nhiệm vụ (sự kiện trao bằng `e.item`, lấy lại bằng `e.rmItem`, kiểm `hasItem()`; chưa sự kiện nào dùng).
 
+## 4b. Sự kiện cốt truyện (file GPT viết)
+
+| Tệp | Việc |
+|---|---|
+| `docs/nhap/phu-sinh-su-kien.md` | Cốt truyện gốc GPT viết: 5 vùng × (20 sự kiện lẻ + 4 chuỗi × 5 phần) = 200 cảnh, 604 lựa chọn. |
+| `tools/su_kien_tach.py` | Tách markdown thành dữ liệu. `python3 tools/su_kien_tach.py docs/nhap/phu-sinh-su-kien.md <vùng>` in gọn một vùng để đọc. |
+| `tools/su_kien_chuyen.py` | Chuyển thành `src/data/su_kien.js`: đổi `[Vai A]` thành tên do game sinh, `[thị trấn này]` → `{$pl}`, `[tông môn]` → `{$sect}`, `[quê nhà ngươi]` → `{$que}`; đoán loại nơi; tự suy thưởng phạt (giúp người / làm lợi / bỏ đi); thời gian chờ giữa các phần chuỗi. `--xem <vùng>` in thưởng phạt từng lựa chọn để soát. |
+| `tools/su_kien_sua.txt` | **Chỉnh tay** thưởng phạt từng lựa chọn (đã soát cả 604). Cú pháp ở đầu bảng SUA trong `su_kien_chuyen.py`: `loi`, `loi0`, `mua`, `tra`, `giup`, `xoa`, `k=`, `tm=`, `hp=`, `tv=`, `h=`, `mp`, `tho=`, `st=`, `gia=`, `an`, `oan`, `dan`, `do`, `bitich`, `van= tam= ngo= tp=`, `-<mã>`. |
+| `src/su_kien.js` | Đăng ký sự kiện vào game. Sự kiện lẻ: mỗi kiếp 1 lần, đúng vùng. Chuỗi: phần 1 như sự kiện thường; phần 2/2b/3/4 là `spec` (ưu tiên khi thăm dò), chỉ hiện khi lần trước chọn đúng hướng và đủ thời gian chờ; "Bỏ đi" khép chuỗi; tên nhân vật giữ trong `G.run.chainSt`. |
+
+Sau khi sửa cốt truyện hoặc bảng chỉnh tay: `python3 tools/su_kien_chuyen.py` rồi `node tools/build.js`.
+
 ## 5. Kiểm tra sau khi sửa
 
 - Báo cáo `docs/bao-cao-vat-pham.md` sạch.
@@ -83,6 +95,6 @@ Khi `main` có thay đổi: gộp `origin/main` vào nhánh đang làm, rồi so
 
 ## 6. Việc còn dở
 
-- Sự kiện GPT viết (`docs/nhap/phu-sinh-su-kien.md`) chưa đọc và chưa đưa vào game. Đã thống nhất với chủ dự án: AI đọc như đọc sách, tự lọc, sắp xếp, chuyển thành sự kiện trong code; có chuỗi sự kiện nối tiếp và đủ sắc thái cảm xúc.
+- Vật nhiệm vụ (trang NV Nhiệm vụ & kỳ vật) đã có trong game nhưng chưa sự kiện nào trao cho người chơi.
+- Thưởng phạt của sự kiện mới chưa có đánh nhau thật: các lựa chọn "Thắng…/Thua…" dùng phép thử thân pháp.
 - Lỗi có sẵn trong game gốc, chưa sửa vì chủ dự án chưa cho đụng: sự kiện "Nấm mộ quen" cho "Đào lên" nhiều lần, mỗi lần được thêm linh thạch.
-- Đưa danh mục vào bản chính: chỉ làm khi chủ dự án đồng ý. Khi đó thêm `src/data/catalog.js` và `src/catalog.js` vào danh sách tệp của `tools/build.js` (sau `src/core2.js`, trước `src/ui/base.js`).
