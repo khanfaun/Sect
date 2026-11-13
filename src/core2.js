@@ -2198,7 +2198,7 @@ function floorStats(){const r=G.run;if(!r)return null;const k=floorKey();if(FLOO
   const F=JSON.parse(JSON.stringify(r));const tp={u:-999,type:'tp',tier:0,el:'vo',lines:[],lv:1,v:2,req:0,n:'chuẩn'};
   Object.assign(F,{relics:[],eq:{},dd:[],arts:[tp],artKho:[],chu:[{k:'a',u:-999},null,null,null,null,null,null,null],chuOpen:4,kv:[],the:[],origin:'__none',trait:'none',
     root:{id:'tam',els:['kim','moc','thuy']},bon:{atkP:0,defP:0,hpP:0,mpP:0,tp:0,ngo:0,van:0,tam:0,matkP:0},base:{tp:6,ngo:10,van:4,tam:9},tuchat:50,lifeAdj:0,quality:[0,0,0,0,0,0],
-    tamma:0,ht:[],wounds:[],inj:null,pets:[],petOut:null,th:[],scene:null,moving:null});
+    tamma:0,ht:[],wounds:[],inj:null,pets:[],petOut:null,th:[],scene:null,moving:null,_avgTT:1});
   const keepR=G.run,keepU=G.meta.upg,keepRoom=G.bqRoom;let v=null;
   try{G.run=F;G.meta.upg={};G.bqRoom=false;const s=S();
     v={maxHp:s.maxHp,maxMp:s.maxMp,atk:s.atk,matk:s.matk,def:s.def,tp:s.tp,ne:s.ne,ngo:s.ngo,tam:s.tam,van:s.van,than:s.than,nl:s.nl,crit:s.crit,critDmg:s.critDmg,
@@ -2411,3 +2411,32 @@ function llShow(){const ll=llOf();if(!sgOn())return Math.floor(Math.min(100,ll))
 function llShowGain(x){return sgOn()?Math.max(1,Math.round(x/sgW()*100)):Math.max(1,Math.round(x));}
 {const _xs40=lkXkState;lkXkState=function(){const X=_xs40();if(!X||!X.ok)return X;const g=sgGate();if(llOf()<sgTh()[g-1]+sgW(g)*XK_LL-1e-6)return {ok:false,ll:1,nx:X.nx,why:'Lịch luyện '+sgName(g)+' mới '+llShow()+'%, cần chừng '+Math.round(XK_LL*100)+'% mới xung kích được. Hãy ra ngoài lịch luyện.'};return X;};}
 {const _bs40=btState;btState=function(){const st=_bs40();if(st)return st;const X=lkXkState();return X&&X.ll?'bc':'';};}
+
+// ================= ĐỢT 41: SÀN CÓ KHÍ VẬN TRUNG BÌNH; THIÊN PHÚ 5 BẬC CHO NGƯỜI CHƠI VÀ NPC =================
+// Người chuẩn dùng làm sàn cũng mang khí vận và thể chất ở mức trung bình (lấy mẫu 3000 lần đầu thai),
+// nên ai có khí vận trung bình thì ra "Bình thường", hơn mới ra "Mạnh".
+const TT_AVG={matkP:2.64,mpP:0.63,than:1.58,atkP:2.86,defP:2.67,tp:0.69,ngo:1.53,lifeP:0.25,hpP:1,crit:0.48,tvP:2.42,van:0.07,tam:0.43,bqP:0.31,dodge:0.21,critDmg:0.62,hoTam:0.08};
+{const _ag41=aggFx;aggFx=function(){const fx=_ag41();const r=G.run;if(r&&r._avgTT)for(const [k,v] of Object.entries(TT_AVG))fx[k]=(fx[k]||0)+v;return fx;};}
+// Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới. Gộp linh căn, tư chất, tiên thiên khí vận, thể chất, ngộ tính/đạo tâm/khí vận gốc.
+const TAL_N=['Phế vật','Phàm tài','Trung tài','Tinh anh','Thiên kiêu'];
+const TAL_T=[0.94,1.37,1.88,2.52]; // mốc chia 5 bậc (cân theo lấy mẫu: ~10% · 25% · 35% · 22% · 8%)
+const TAL_RL={tap:0,tu:1,tam:2,song:3,thien:4,bien:4,cuc:4};
+function talScore(p){const root=TAL_RL[p.root]!=null?TAL_RL[p.root]:2;const tc=clamp(p.tc,0,4);const kv=Math.min(4,p.kv*0.8);const th=Math.min(4,Math.max(0,(p.th-1)*1.2));const bs=clamp(2+p.dev*0.5,0,4);
+  return (1.3*root+1.3*tc+kv+th+0.6*bs)/5.2;}
+function talTierOf(sc){let t=0;for(const x of TAL_T)if(sc>=x)t++;return t;}
+function playerTalProfile(r){r=r||G.run;const tc=4-TC_N.findIndex(x=>tuChat()>=x[0]);return {root:r.root.id,tc,kv:(r.kv||[]).reduce((a,k)=>a+(((TT_DEST[k]||{}).rank||1)-1),0),
+  th:Math.max(1,...(r.the||[]).map(k=>(ttPhysOf(k)||{}).rank||1)),dev:(r.base.ngo-10)+(r.base.tam-9)+(r.base.van-4)};}
+function playerTal(){const r=G.run;if(!r)return null;const p=playerTalProfile(r);const sc=talScore(p);return {tier:talTierOf(sc),score:sc,p};}
+// NPC: tạo hồ sơ bẩm sinh theo đúng cách nhân vật chính được sinh ra, cố định theo tên (gặp lại vẫn y nguyên)
+function seedRng(key){let a=hashS(String(key))>>>0;return ()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
+function npcTalProfile(key){const R1=seedRng('tal:'+key);const wp=(L,w)=>{let s=L.reduce((a,x)=>a+w(x),0)*R1();for(const x of L){s-=w(x);if(s<=0)return x;}return L[L.length-1];};
+  const root=wp(ROOT,x=>x.w).id;const tcv=clamp(Math.floor(R1()*41)+Math.floor(R1()*41)+10+(TC_BIAS[root]||0),5,100);const tc=4-TC_N.findIndex(x=>tcv>=x[0]);
+  const n=wp([1,2,3],x=>[40,45,15][x-1]);let kv=0;for(let i=0;i<n;i++)kv+=wp([1,2,3,4,5,6],x=>TT_RW[x])-1;
+  const th=wp([1,2,3,4,5,6],x=>[35,20,20,17,6,2][x-1]);const dev=[0,0,0].reduce(a=>a+Math.floor(R1()*5)-2,0);return {root,tc,kv,th,dev};}
+const NPC_TAL_C={};
+function npcTal(key,minTier){const k=key+'|'+(minTier||0);if(NPC_TAL_C[k])return NPC_TAL_C[k];const p=npcTalProfile(key);const sc=talScore(p);const o={tier:Math.max(minTier||0,talTierOf(sc)),score:sc,p};NPC_TAL_C[k]=o;return o;}
+// thiên kiêu các tông môn: ít nhất là Tinh anh, thiên tư cao thì là Thiên kiêu
+function rivalTal(i){const w=W();const rv=w.rivals[i];if(!rv)return null;return npcTal('rv:'+rv.ten,rv.tal>=1.2?4:3);}
+// đơn vị trong trận và thực thể trên bản đồ: chỉ người mới có thiên phú
+function unitTal(u){if(!u)return null;if(u.isMain)return playerTal();if(u.kind==='kiep'||u.immune)return null;if(u.side==='A')return u.ally===-7?null:npcTal('ally:'+u.name);if(u.f&&u.f!=='nhan')return null;return npcTal('foe:'+u.name);}
+function entTal(e){if(!e)return null;if(e.type==='thienkieu')return e.data&&e.data.rv!=null?rivalTal(e.data.rv):null;if(['khach','tuantra','truysat','thuong'].includes(e.type))return npcTal('ent:'+e.id+':'+e.name);return null;}

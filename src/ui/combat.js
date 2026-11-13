@@ -4,7 +4,7 @@ function stIcons(st){let o='';for(const k in STI){const v=st[k];if(v>0)o+=`<span
 function unitKind(u){if(u.kind==='kiep')return 'kiep'+(u.kk?'-'+u.kk:'');if(u.side==='A')return 'nhan';return u.f==='nhan'?'ma':(u.f||'vat');}
 function trackHTML(sc){
   let h='<div class="track"><i class="mk m0"></i><i class="mk m50"><em>ra chiêu</em></i><i class="mk m75"><em>phát lực</em></i><i class="mk m100"></i>';
-  for(const u of sc.units){if(u.hp<=0&&!u.immune)continue;h+=`<span class="av ${u.side}${u.isMain?' me':''}" id="av${u.id}" style="left:${Math.min(100,u.pos)}%">${u.immune?u.icon:uAvatar(u)}</span>`;}
+  for(const u of sc.units){if(u.hp<=0&&!u.immune)continue;h+=`<span class="av ${u.side}${u.isMain?' me':''}${talCls(unitTal(u))}" id="av${u.id}" style="left:${Math.min(100,u.pos)}%">${u.immune?u.icon:uAvatar(u)}</span>`;}
   return h+'</div>';
 }
 // thanh chỉ số trong trận: khí huyết đổi màu theo mức (xanh, vàng, đỏ)
@@ -22,7 +22,7 @@ function unitCard(sc,u,pickMode,compact){
   if(u.immune)bars=`<small class="u-s">${sc.kiep?'Đạo '+Math.min(sc.kiep.n,sc.kiep.done+1)+'/'+sc.kiep.n+(sc.kiep.waves>1?' · đợt '+sc.kiep.wave:''):''}${sc.kiep&&sc.kiep.uy<1?' · uy '+Math.round(sc.kiep.uy*100)+'%':''}</small>`;
   else bars=`<div class="brow"${ta('Khí huyết '+pctOf(Math.max(0,u.hp),u.max))}>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}${compact?'':`<b>${pctOf(Math.max(0,u.hp),u.max)}</b>`}</div><div class="brow thin"${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}>${cBar(dlOf(u),100,'dl')}</div>`;
   const th=u.fpt?100:clamp(u.than||0,0,100),RC=2*Math.PI*29;const fring=foe&&!u.immune?`<svg class="tl-ring ${u.fpt?'burn':th>=100?'full':''}" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="29"/><circle class="fg" cx="32" cy="32" r="29" stroke-dasharray="${(RC*th/100).toFixed(1)} ${RC.toFixed(1)}"/></svg>`:'';
-  const av=`<span class="u-av${foe?' fav':' al'}${u.fpt?' fpt':''}"${ta(foe&&!u.immune?(u.fpt?u.fpt.n+'\nLượt tới nó sẽ tung đòn tối thượng!':'Thần lực '+Math.round(th)+'%\nĐầy thì hiển hóa pháp tướng, lượt sau tung đòn tối thượng.'):(compact?u.name+'\n'+sub:''))}>${fring}<span class="fav-in">${uAvatar(u)}</span>${phBadge(u)}${u.fpt?'<i class="flame"></i>':''}</span>`;
+  const av=`<span class="u-av${foe?' fav':' al'}${u.fpt?' fpt':''}${talCls(unitTal(u))}"${ta(foe&&!u.immune?(u.fpt?u.fpt.n+'\nLượt tới nó sẽ tung đòn tối thượng!':'Thần lực '+Math.round(th)+'%\nĐầy thì hiển hóa pháp tướng, lượt sau tung đòn tối thượng.'):(compact?u.name+'\n'+sub:''))}>${fring}<span class="fav-in">${uAvatar(u)}</span>${phBadge(u)}${u.fpt?'<i class="flame"></i>':''}</span>`;
   if(compact)return `<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av}${bars}${stIcons(u.st)}</div>`;
   return `<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av}<div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${elSeal(u.el||'vo')} ${esc(sub)}</small></div>${bars}${stIcons(u.st)}</div></div>`;
 }
@@ -172,7 +172,7 @@ function prepUnitRow(u,me,cmp){const foe=u.side==='B';const sub=me?realmLabel():
   const V=sc?crushVictims(sc,u):[];
   const tag=V.length?`<b class="lc-c ne"${ta('Nghiền ép '+V.map(x=>x.isMain?'ngươi':x.name).join(', ')+': lực chiến hơn hẳn một đại cảnh giới.\nBên bị nghiền ép chịu uy áp, đòn đánh vào người này gần như vô dụng.')}><span class="ne-i">${ic('skull')}</span>Nghiền ép</b>`:'';
   const lc=RT('lc',pLc(u));
-  return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
+  return `<div class="pp-u${foe?' foe':''}"><span class="u-av${talCls(unitTal(u))}"${unitTal(u)?ta('Thiên phú: '+TAL_N[unitTal(u).tier]):''}>${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
    <div class="pp-row2"><div class="pp-bars"><span${ta('Khí huyết')}>${ic('heart')}${cBar(hp,mh,'hp'+(hp<mh*0.3?' low':hp<mh*0.6?' mid':''))}</span><span${ta(mm?'Linh lực':'Chưa có linh lực')}>${ic('drop')}${cBar(mp,mm||1,'mp')}</span></div>
    <div class="pp-lc"${ta(foe?'Lực chiến của kẻ này, so với người ở cảnh giới của ngươi':'Lực chiến so với người cùng cảnh giới')}>${lc}</div></div></div></div>`;}
 // so sức hai đội theo tổng lực chiến

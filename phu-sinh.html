@@ -1153,6 +1153,20 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .cb-more{position:absolute;top:18px;left:18px;z-index:4;width:30px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:var(--r);background:rgba(250,245,232,.85);color:var(--ink2);padding:0;cursor:pointer}.cb-more .ic,.cb-more svg{width:16px;height:16px}
 :root[data-view=combat] #panel{z-index:25;bottom:0}
 
+/* ===== Thiên phú: ô ở Căn cơ và khung avatar (Tinh anh: ánh bạc, Thiên kiêu: ánh kim) ===== */
+:root{--tf3:conic-gradient(from 200deg,#ffffff,#b9c2cc,#f4f7fa,#7d8792,#e9eef3,#a7b0ba,#ffffff);--tf4:conic-gradient(from 200deg,#fff4c2,#d9a521,#fff0a8,#9a6a08,#ffd75e,#b8860b,#fff4c2)}
+.tal-card{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 10px;padding:10px 14px;border-radius:10px;border:2px solid var(--line);background:var(--paper)}
+.tal-card small{font-size:.72em;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3)}.tal-card b{font-size:1.35em;letter-spacing:.04em}
+.tal-card.tal0 b{color:#c0392b}.tal-card.tal1 b{color:#d9731a}.tal-card.tal2 b{color:#b8960c}
+.tal-card.tal3,.tal-card.tal4{border:3px solid transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--tf3) border-box;box-shadow:0 0 12px rgba(160,175,190,.55)}
+.tal-card.tal4{background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--tf4) border-box;box-shadow:0 0 14px rgba(214,160,30,.55)}
+.tal-card.tal3 b{background:linear-gradient(90deg,#6e7883,#c9d1d9,#5d6670);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tal-card.tal4 b{background:linear-gradient(90deg,#9a6a08,#f1c232,#a4720a);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+.u-av.tf3,.u-av.tf4,.av.tf3,.av.tf4,.hud-avi.tf3,.hud-avi.tf4{border:3px solid transparent!important;background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tf3) border-box!important}
+.u-av.tf4,.av.tf4,.hud-avi.tf4{background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tf4) border-box!important}
+.u-av.tf3,.av.tf3,.hud-avi.tf3{box-shadow:0 0 8px rgba(170,185,200,.8)}.u-av.tf4,.av.tf4,.hud-avi.tf4{box-shadow:0 0 9px rgba(222,170,40,.85)}
+.hud-avi.tf3,.hud-avi.tf4{inset:6px}
+
 </style>
 </head>
 <body>
@@ -6680,7 +6694,7 @@ function floorStats(){const r=G.run;if(!r)return null;const k=floorKey();if(FLOO
   const F=JSON.parse(JSON.stringify(r));const tp={u:-999,type:'tp',tier:0,el:'vo',lines:[],lv:1,v:2,req:0,n:'chuẩn'};
   Object.assign(F,{relics:[],eq:{},dd:[],arts:[tp],artKho:[],chu:[{k:'a',u:-999},null,null,null,null,null,null,null],chuOpen:4,kv:[],the:[],origin:'__none',trait:'none',
     root:{id:'tam',els:['kim','moc','thuy']},bon:{atkP:0,defP:0,hpP:0,mpP:0,tp:0,ngo:0,van:0,tam:0,matkP:0},base:{tp:6,ngo:10,van:4,tam:9},tuchat:50,lifeAdj:0,quality:[0,0,0,0,0,0],
-    tamma:0,ht:[],wounds:[],inj:null,pets:[],petOut:null,th:[],scene:null,moving:null});
+    tamma:0,ht:[],wounds:[],inj:null,pets:[],petOut:null,th:[],scene:null,moving:null,_avgTT:1});
   const keepR=G.run,keepU=G.meta.upg,keepRoom=G.bqRoom;let v=null;
   try{G.run=F;G.meta.upg={};G.bqRoom=false;const s=S();
     v={maxHp:s.maxHp,maxMp:s.maxMp,atk:s.atk,matk:s.matk,def:s.def,tp:s.tp,ne:s.ne,ngo:s.ngo,tam:s.tam,van:s.van,than:s.than,nl:s.nl,crit:s.crit,critDmg:s.critDmg,
@@ -6893,6 +6907,35 @@ function llShow(){const ll=llOf();if(!sgOn())return Math.floor(Math.min(100,ll))
 function llShowGain(x){return sgOn()?Math.max(1,Math.round(x/sgW()*100)):Math.max(1,Math.round(x));}
 {const _xs40=lkXkState;lkXkState=function(){const X=_xs40();if(!X||!X.ok)return X;const g=sgGate();if(llOf()<sgTh()[g-1]+sgW(g)*XK_LL-1e-6)return {ok:false,ll:1,nx:X.nx,why:'Lịch luyện '+sgName(g)+' mới '+llShow()+'%, cần chừng '+Math.round(XK_LL*100)+'% mới xung kích được. Hãy ra ngoài lịch luyện.'};return X;};}
 {const _bs40=btState;btState=function(){const st=_bs40();if(st)return st;const X=lkXkState();return X&&X.ll?'bc':'';};}
+
+// ================= ĐỢT 41: SÀN CÓ KHÍ VẬN TRUNG BÌNH; THIÊN PHÚ 5 BẬC CHO NGƯỜI CHƠI VÀ NPC =================
+// Người chuẩn dùng làm sàn cũng mang khí vận và thể chất ở mức trung bình (lấy mẫu 3000 lần đầu thai),
+// nên ai có khí vận trung bình thì ra "Bình thường", hơn mới ra "Mạnh".
+const TT_AVG={matkP:2.64,mpP:0.63,than:1.58,atkP:2.86,defP:2.67,tp:0.69,ngo:1.53,lifeP:0.25,hpP:1,crit:0.48,tvP:2.42,van:0.07,tam:0.43,bqP:0.31,dodge:0.21,critDmg:0.62,hoTam:0.08};
+{const _ag41=aggFx;aggFx=function(){const fx=_ag41();const r=G.run;if(r&&r._avgTT)for(const [k,v] of Object.entries(TT_AVG))fx[k]=(fx[k]||0)+v;return fx;};}
+// Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới. Gộp linh căn, tư chất, tiên thiên khí vận, thể chất, ngộ tính/đạo tâm/khí vận gốc.
+const TAL_N=['Phế vật','Phàm tài','Trung tài','Tinh anh','Thiên kiêu'];
+const TAL_T=[0.94,1.37,1.88,2.52]; // mốc chia 5 bậc (cân theo lấy mẫu: ~10% · 25% · 35% · 22% · 8%)
+const TAL_RL={tap:0,tu:1,tam:2,song:3,thien:4,bien:4,cuc:4};
+function talScore(p){const root=TAL_RL[p.root]!=null?TAL_RL[p.root]:2;const tc=clamp(p.tc,0,4);const kv=Math.min(4,p.kv*0.8);const th=Math.min(4,Math.max(0,(p.th-1)*1.2));const bs=clamp(2+p.dev*0.5,0,4);
+  return (1.3*root+1.3*tc+kv+th+0.6*bs)/5.2;}
+function talTierOf(sc){let t=0;for(const x of TAL_T)if(sc>=x)t++;return t;}
+function playerTalProfile(r){r=r||G.run;const tc=4-TC_N.findIndex(x=>tuChat()>=x[0]);return {root:r.root.id,tc,kv:(r.kv||[]).reduce((a,k)=>a+(((TT_DEST[k]||{}).rank||1)-1),0),
+  th:Math.max(1,...(r.the||[]).map(k=>(ttPhysOf(k)||{}).rank||1)),dev:(r.base.ngo-10)+(r.base.tam-9)+(r.base.van-4)};}
+function playerTal(){const r=G.run;if(!r)return null;const p=playerTalProfile(r);const sc=talScore(p);return {tier:talTierOf(sc),score:sc,p};}
+// NPC: tạo hồ sơ bẩm sinh theo đúng cách nhân vật chính được sinh ra, cố định theo tên (gặp lại vẫn y nguyên)
+function seedRng(key){let a=hashS(String(key))>>>0;return ()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
+function npcTalProfile(key){const R1=seedRng('tal:'+key);const wp=(L,w)=>{let s=L.reduce((a,x)=>a+w(x),0)*R1();for(const x of L){s-=w(x);if(s<=0)return x;}return L[L.length-1];};
+  const root=wp(ROOT,x=>x.w).id;const tcv=clamp(Math.floor(R1()*41)+Math.floor(R1()*41)+10+(TC_BIAS[root]||0),5,100);const tc=4-TC_N.findIndex(x=>tcv>=x[0]);
+  const n=wp([1,2,3],x=>[40,45,15][x-1]);let kv=0;for(let i=0;i<n;i++)kv+=wp([1,2,3,4,5,6],x=>TT_RW[x])-1;
+  const th=wp([1,2,3,4,5,6],x=>[35,20,20,17,6,2][x-1]);const dev=[0,0,0].reduce(a=>a+Math.floor(R1()*5)-2,0);return {root,tc,kv,th,dev};}
+const NPC_TAL_C={};
+function npcTal(key,minTier){const k=key+'|'+(minTier||0);if(NPC_TAL_C[k])return NPC_TAL_C[k];const p=npcTalProfile(key);const sc=talScore(p);const o={tier:Math.max(minTier||0,talTierOf(sc)),score:sc,p};NPC_TAL_C[k]=o;return o;}
+// thiên kiêu các tông môn: ít nhất là Tinh anh, thiên tư cao thì là Thiên kiêu
+function rivalTal(i){const w=W();const rv=w.rivals[i];if(!rv)return null;return npcTal('rv:'+rv.ten,rv.tal>=1.2?4:3);}
+// đơn vị trong trận và thực thể trên bản đồ: chỉ người mới có thiên phú
+function unitTal(u){if(!u)return null;if(u.isMain)return playerTal();if(u.kind==='kiep'||u.immune)return null;if(u.side==='A')return u.ally===-7?null:npcTal('ally:'+u.name);if(u.f&&u.f!=='nhan')return null;return npcTal('foe:'+u.name);}
+function entTal(e){if(!e)return null;if(e.type==='thienkieu')return e.data&&e.data.rv!=null?rivalTal(e.data.rv):null;if(['khach','tuantra','truysat','thuong'].includes(e.type))return npcTal('ent:'+e.id+':'+e.name);return null;}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -7551,7 +7594,7 @@ const Map2=(()=>{
       if(e.type==='thuong'){ // xe ngựa, trên đầu là ảnh nhỏ người dẫn đầu
         const wi=wagonImg();if(wi&&wi.complete&&wi.naturalWidth){ctx.drawImage(wi,x-15,y-9,30,17.5);}else{ctx.save();ctx.translate(x-11,y-9);ctx.scale(22/24,22/24);ctx.lineWidth=2;ctx.strokeStyle=ec;ctx.stroke(icPath('cart'));ctx.restore();}
         ctx.beginPath();ctx.arc(x+6,y-12,4.5,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=1.5;ctx.strokeStyle=ec;ctx.stroke();ctx.font=`500 6px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(avLetter(e.lead||e.name),x+6,y-11.6);}
-      else{ctx.beginPath();ctx.arc(x,y,er,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=ec;if(!see)ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
+      else{const tg=talGrad(ctx,x,y,er,entTal(e));ctx.beginPath();ctx.arc(x,y,er,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=tg?3.2:2;ctx.strokeStyle=tg||ec;if(!see)ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
         if(gk){const gs=er*1.3;ctx.save();ctx.translate(x-gs/2,y-gs/2);ctx.scale(gs/24,gs/24);ctx.lineWidth=2.2;ctx.strokeStyle=ec;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke(icPath(gk));ctx.restore();}
         else{ctx.font=`500 10px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(avLetter(ENT_T[e.type].n),x,y+1);}}
       ctx.globalAlpha=1;
@@ -7559,7 +7602,7 @@ const Map2=(()=>{
     // người chơi: con dấu son
     if(!HT._me){// đứng ở địa điểm: địa điểm giữ ở tâm ô, nhân vật nằm ngay phía trên, cách một khe nhỏ
       const nd=!r.moving&&showIc&&!HT[(nodeById(r.at)||{}).type]?nodeById(r.at):null;const nS=Math.min(s0,HW*0.7);const rr=nd?Math.min(s0*0.5,HW*0.36):s0*0.62;const x=SX(pos[0]),y=SY(pos[1])-(nd?nS/2+3+rr+2.5:0);
-      ctx.beginPath();ctx.arc(x,y,rr+2.5,0,6.3);ctx.fillStyle=C.seal;ctx.fill();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.fillStyle=C.paper;ctx.fill();
+      {const tg=talGrad(ctx,x,y,rr+3.5,playerTal());ctx.beginPath();ctx.arc(x,y,rr+(tg?3.5:2.5),0,6.3);ctx.fillStyle=tg||C.seal;ctx.fill();}ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.fillStyle=C.paper;ctx.fill();
       const hi=heroImg();if(hi&&hi.complete&&hi.naturalWidth){ctx.save();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.clip();ctx.drawImage(hi,x-rr,y-rr,rr*2,rr*2);ctx.restore();}
       else{ctx.fillStyle=C.ink;ctx.font=`500 ${Math.round(rr*1.05)}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(avLetter(r.ten),x,y+1);}
 }
@@ -7661,6 +7704,9 @@ const Art=(()=>{
 })();
 function sceneCv(seed,reg,type,cls,figs){const night=G.meta&&G.meta.world&&partOf(W().t)==='dem'?1:0;return `<canvas class="art ${cls||''}" data-scene="${esc([seed,reg,type||'',night,figs||''].join('~'))}"></canvas>`;}
 
+// khung thiên phú trên bản đồ: Tinh anh ánh bạc, Thiên kiêu ánh kim
+function talGrad(ctx,x,y,r,t){if(!t||t.tier<3)return null;const g=ctx.createLinearGradient(x-r,y-r,x+r,y+r);const S=t.tier===4?['#fff4c2','#d9a521','#fff0a8','#9a6a08','#ffd75e']:['#ffffff','#9aa4ae','#f4f7fa','#6f7984','#dfe5ea'];S.forEach((c,i)=>g.addColorStop(i/(S.length-1),c));return g;}
+
 // ---------- màn bản đồ: thẻ trạng thái, nút bản đồ, thẻ địa điểm ----------
 function sectText(){const r=G.run;return r.flags.tongmon?'Đệ tử tông môn':'Tán tu · Tự do';}
 function clkStr(t){return `<span>ngày ${Math.floor((t%HM)/HD)+1} · tháng ${tMonth(t)+1}</span><b class="ck-y">Năm ${tYear(t)}</b><span>giờ ${gioName(t)}</span>`;}
@@ -7689,7 +7735,7 @@ function hudHTML(){
   const ring=`<svg class="hud-ring" viewBox="0 0 64 64"><path class="bg" d="M5 32A27 27 0 0 1 59 32"/><path class="bg" d="M5 32A27 27 0 0 0 59 32"/>
     <path class="hp ${hc}" d="M5 32A27 27 0 0 1 59 32" stroke-dasharray="${(HC*hp).toFixed(1)} ${HC.toFixed(1)}"/><path class="mp" d="M5 32A27 27 0 0 0 59 32" stroke-dasharray="${(HC*mp).toFixed(1)} ${HC.toFixed(1)}"/></svg>`;
   const tm=r.tamma;
-  let h=`<div class="hud-top"><button class="hud-av hud-av2" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Khí huyết '+pctOf(r.hp,s.maxHp)+' (nửa trên)\nLinh lực '+(s.maxMp?pctOf(r.mp,s.maxMp):'chưa có')+' (nửa dưới)\nChạm để mở nhân vật')}>${ring}<span class="hud-avi">${av}</span></button>
+  let h=`<div class="hud-top"><button class="hud-av hud-av2" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Khí huyết '+pctOf(r.hp,s.maxHp)+' (nửa trên)\nLinh lực '+(s.maxMp?pctOf(r.mp,s.maxMp):'chưa có')+' (nửa dưới)\nChạm để mở nhân vật')}>${ring}<span class="hud-avi${talCls(playerTal())}">${av}</span></button>
    <div class="hud-id"><span class="nmrow"><b class="nm">${esc(r.ten)}</b>${btBadge()}</span><span class="rl"${ta(realmLabel()+'\nTu vi '+tvShow()+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="${warn?'bad':''}"${ta('Tuổi / thọ nguyên '+s.life+(warn?'\nThọ nguyên sắp cạn!':''))}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm${hurt}</small></div><div class="hud-clk3" id="clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])}>${clkStr(t)}</div>
    </div><div class="hud-stats"><span class="hs lc"${ta('Lực chiến: '+rateOf('lc',lucChien()).t+'\nSo với người cùng cảnh giới, tính từ chỉ số chiến đấu và trang bị.')}>${ic('sword')}${RT('lc',lucChien())}</span><span class="hs tu"${ta('Tốc độ tu luyện khi bế quan ở đây: '+rateOf('bq',bqReal(),'toc').t+'\nThổ nạp: '+rateOf('thonap',thonapPct(),'toc').t)}>${ic('seat')}${RT('bq',bqReal(),'toc')}</span><span class="hs tm${tm>=60?' hi':''}"${ta('Tâm ma: '+tmWord(tm).toLowerCase()+'\nĐầy sẽ phải đối mặt với chính mình')}>${ic('skull')}${tmWord(tm)}</span><span class="hs dt"${ta('Đạo tâm: '+rateOf('tam',s.tam,'muc').t+'\nChống ảo cảnh, giúp đột phá')}>${ic('lotus')}${RT('tam',s.tam,'muc')}</span><span class="hs st"${ta('Linh thạch')}><i class="rh"></i>${fmtN(r.st)}</span></div>
    <i class="hud-tv" style="width:${clamp(tvShow(),0,100)}%"${ta('Tu vi '+tvShow()+'%')}></i><i class="hud-ll" style="width:${llShow()}%"${ta('Lịch luyện '+llShow()+'%')}></i>`;
@@ -8063,7 +8109,7 @@ function stIcons(st){let o='';for(const k in STI){const v=st[k];if(v>0)o+=`<span
 function unitKind(u){if(u.kind==='kiep')return 'kiep'+(u.kk?'-'+u.kk:'');if(u.side==='A')return 'nhan';return u.f==='nhan'?'ma':(u.f||'vat');}
 function trackHTML(sc){
   let h='<div class="track"><i class="mk m0"></i><i class="mk m50"><em>ra chiêu</em></i><i class="mk m75"><em>phát lực</em></i><i class="mk m100"></i>';
-  for(const u of sc.units){if(u.hp<=0&&!u.immune)continue;h+=`<span class="av ${u.side}${u.isMain?' me':''}" id="av${u.id}" style="left:${Math.min(100,u.pos)}%">${u.immune?u.icon:uAvatar(u)}</span>`;}
+  for(const u of sc.units){if(u.hp<=0&&!u.immune)continue;h+=`<span class="av ${u.side}${u.isMain?' me':''}${talCls(unitTal(u))}" id="av${u.id}" style="left:${Math.min(100,u.pos)}%">${u.immune?u.icon:uAvatar(u)}</span>`;}
   return h+'</div>';
 }
 // thanh chỉ số trong trận: khí huyết đổi màu theo mức (xanh, vàng, đỏ)
@@ -8081,7 +8127,7 @@ function unitCard(sc,u,pickMode,compact){
   if(u.immune)bars=`<small class="u-s">${sc.kiep?'Đạo '+Math.min(sc.kiep.n,sc.kiep.done+1)+'/'+sc.kiep.n+(sc.kiep.waves>1?' · đợt '+sc.kiep.wave:''):''}${sc.kiep&&sc.kiep.uy<1?' · uy '+Math.round(sc.kiep.uy*100)+'%':''}</small>`;
   else bars=`<div class="brow"${ta('Khí huyết '+pctOf(Math.max(0,u.hp),u.max))}>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}${compact?'':`<b>${pctOf(Math.max(0,u.hp),u.max)}</b>`}</div><div class="brow thin"${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}>${cBar(dlOf(u),100,'dl')}</div>`;
   const th=u.fpt?100:clamp(u.than||0,0,100),RC=2*Math.PI*29;const fring=foe&&!u.immune?`<svg class="tl-ring ${u.fpt?'burn':th>=100?'full':''}" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="29"/><circle class="fg" cx="32" cy="32" r="29" stroke-dasharray="${(RC*th/100).toFixed(1)} ${RC.toFixed(1)}"/></svg>`:'';
-  const av=`<span class="u-av${foe?' fav':' al'}${u.fpt?' fpt':''}"${ta(foe&&!u.immune?(u.fpt?u.fpt.n+'\nLượt tới nó sẽ tung đòn tối thượng!':'Thần lực '+Math.round(th)+'%\nĐầy thì hiển hóa pháp tướng, lượt sau tung đòn tối thượng.'):(compact?u.name+'\n'+sub:''))}>${fring}<span class="fav-in">${uAvatar(u)}</span>${phBadge(u)}${u.fpt?'<i class="flame"></i>':''}</span>`;
+  const av=`<span class="u-av${foe?' fav':' al'}${u.fpt?' fpt':''}${talCls(unitTal(u))}"${ta(foe&&!u.immune?(u.fpt?u.fpt.n+'\nLượt tới nó sẽ tung đòn tối thượng!':'Thần lực '+Math.round(th)+'%\nĐầy thì hiển hóa pháp tướng, lượt sau tung đòn tối thượng.'):(compact?u.name+'\n'+sub:''))}>${fring}<span class="fav-in">${uAvatar(u)}</span>${phBadge(u)}${u.fpt?'<i class="flame"></i>':''}</span>`;
   if(compact)return `<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av}${bars}${stIcons(u.st)}</div>`;
   return `<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av}<div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b><small>${elSeal(u.el||'vo')} ${esc(sub)}</small></div>${bars}${stIcons(u.st)}</div></div>`;
 }
@@ -8231,7 +8277,7 @@ function prepUnitRow(u,me,cmp){const foe=u.side==='B';const sub=me?realmLabel():
   const V=sc?crushVictims(sc,u):[];
   const tag=V.length?`<b class="lc-c ne"${ta('Nghiền ép '+V.map(x=>x.isMain?'ngươi':x.name).join(', ')+': lực chiến hơn hẳn một đại cảnh giới.\nBên bị nghiền ép chịu uy áp, đòn đánh vào người này gần như vô dụng.')}><span class="ne-i">${ic('skull')}</span>Nghiền ép</b>`:'';
   const lc=RT('lc',pLc(u));
-  return `<div class="pp-u${foe?' foe':''}"><span class="u-av">${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
+  return `<div class="pp-u${foe?' foe':''}"><span class="u-av${talCls(unitTal(u))}"${unitTal(u)?ta('Thiên phú: '+TAL_N[unitTal(u).tier]):''}>${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
    <div class="pp-row2"><div class="pp-bars"><span${ta('Khí huyết')}>${ic('heart')}${cBar(hp,mh,'hp'+(hp<mh*0.3?' low':hp<mh*0.6?' mid':''))}</span><span${ta(mm?'Linh lực':'Chưa có linh lực')}>${ic('drop')}${cBar(mp,mm||1,'mp')}</span></div>
    <div class="pp-lc"${ta(foe?'Lực chiến của kẻ này, so với người ở cảnh giới của ngươi':'Lực chiến so với người cùng cảnh giới')}>${lc}</div></div></div></div>`;}
 // so sức hai đội theo tổng lực chiến
@@ -8326,6 +8372,7 @@ function pChar(){
     const og=ORIGIN.find(o=>o.id===r.origin),tr=TRAIT.find(t=>t.id===r.trait),R0=rootView(r.root);
     const R1=ROOT.find(x=>x.id===r.root.id);const tc=s.tuchat;const left=Math.max(0,Math.floor(s.life-r.age));
     const lcV=`<span class="lc2"><small>${esc(R0.n)}</small><span class="lc-els">${r.root.els.map(elSeal).join('')}</span></span>`;
+    b+=talCardHTML();
     b+=`<div class="basegrid">`;
     b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),...(tr&&tr.id!=='none'?[kvRow('Mệnh cách',esc(tr.n),tr.d)]:[]),
       kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
@@ -8725,6 +8772,13 @@ function relCmpOf(rel){const r=G.run;if(!r||!rel||rel.k==='book')return null;con
   const S0=slotsFor(rel).length?slotsFor(rel):[slotOf(rel)];const cur=S0.map(k=>E[k]).filter(Boolean);if(!cur.length)return null;return cur.sort((a,b)=>Object.keys(relicFx(a)).length-Object.keys(relicFx(b)).length)[0];}
 function relCmpLines(ns,rel,cmp){const keys=Object.keys(ns);if(!cmp)return fxLines(ns,rel);const cf=relicFx(cmp);
   return keys.map(k=>{const t=fxLines({[k]:ns[k]},rel)[0]||'';const v=ns[k],o=cf[k]||0;const a=typeof v!=='number'?'':v>o?' ▲':v<o?' ▼':' =';return t+a;}).concat(Object.keys(cf).filter(k=>!(k in ns)&&!NT_KEYS.includes(k)).map(k=>'Mất: '+(fxLines({[k]:cf[k]},cmp)[0]||'')+' ▼'));}
+
+// ô Thiên phú ở đầu tab Căn cơ: nổi bật nhất bảng; Tinh anh khung bạc, Thiên kiêu khung vàng
+function talCardHTML(){const t=playerTal();if(!t)return '';const p=t.p;const RLN={tap:'Ngũ hành tạp linh căn',tu:'Tứ linh căn',tam:'Tam linh căn',song:'Song linh căn',thien:'Thiên linh căn',bien:'Biến dị linh căn',cuc:'Cực linh căn'};
+  const w=v=>['rất kém','kém','bình thường','tốt','rất tốt'][clamp(Math.round(v),0,4)];
+  const tip='Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới.\n· Linh căn: '+(RLN[p.root]||'')+'\n· Tư chất: '+tcName(tuChat())+'\n· Tiên thiên khí vận: '+w(Math.min(4,p.kv*0.8))+'\n· Thể chất: '+w(Math.max(0,(p.th-1)*1.2))+'\n· Ngộ tính, đạo tâm, khí vận gốc: '+w(2+p.dev*0.5)+'\n\nNăm bậc: Phế vật, Phàm tài, Trung tài, Tinh anh, Thiên kiêu.';
+  return `<div class="tal-card tal${t.tier}"${ta(tip)}><small>Thiên phú</small><b>${TAL_N[t.tier]}</b></div>`;}
+function talCls(t){return t&&t.tier>=3?' tf'+t.tier:'';}
 
 // ---------- màn ngoài: mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên ----------
 function vTitle(){

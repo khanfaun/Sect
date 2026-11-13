@@ -1142,3 +1142,17 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 /* nút Thêm trong trận: góc trên trái tranh trận, chỉ có icon */
 .cb-more{position:absolute;top:18px;left:18px;z-index:4;width:30px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:var(--r);background:rgba(250,245,232,.85);color:var(--ink2);padding:0;cursor:pointer}.cb-more .ic,.cb-more svg{width:16px;height:16px}
 :root[data-view=combat] #panel{z-index:25;bottom:0}
+
+/* ===== Thiên phú: ô ở Căn cơ và khung avatar (Tinh anh: ánh bạc, Thiên kiêu: ánh kim) ===== */
+:root{--tf3:conic-gradient(from 200deg,#ffffff,#b9c2cc,#f4f7fa,#7d8792,#e9eef3,#a7b0ba,#ffffff);--tf4:conic-gradient(from 200deg,#fff4c2,#d9a521,#fff0a8,#9a6a08,#ffd75e,#b8860b,#fff4c2)}
+.tal-card{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 10px;padding:10px 14px;border-radius:10px;border:2px solid var(--line);background:var(--paper)}
+.tal-card small{font-size:.72em;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3)}.tal-card b{font-size:1.35em;letter-spacing:.04em}
+.tal-card.tal0 b{color:#c0392b}.tal-card.tal1 b{color:#d9731a}.tal-card.tal2 b{color:#b8960c}
+.tal-card.tal3,.tal-card.tal4{border:3px solid transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--tf3) border-box;box-shadow:0 0 12px rgba(160,175,190,.55)}
+.tal-card.tal4{background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--tf4) border-box;box-shadow:0 0 14px rgba(214,160,30,.55)}
+.tal-card.tal3 b{background:linear-gradient(90deg,#6e7883,#c9d1d9,#5d6670);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tal-card.tal4 b{background:linear-gradient(90deg,#9a6a08,#f1c232,#a4720a);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+.u-av.tf3,.u-av.tf4,.av.tf3,.av.tf4,.hud-avi.tf3,.hud-avi.tf4{border:3px solid transparent!important;background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tf3) border-box!important}
+.u-av.tf4,.av.tf4,.hud-avi.tf4{background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tf4) border-box!important}
+.u-av.tf3,.av.tf3,.hud-avi.tf3{box-shadow:0 0 8px rgba(170,185,200,.8)}.u-av.tf4,.av.tf4,.hud-avi.tf4{box-shadow:0 0 9px rgba(222,170,40,.85)}
+.hud-avi.tf3,.hud-avi.tf4{inset:6px}

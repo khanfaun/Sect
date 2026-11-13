@@ -229,7 +229,7 @@ const Map2=(()=>{
       if(e.type==='thuong'){ // xe ngựa, trên đầu là ảnh nhỏ người dẫn đầu
         const wi=wagonImg();if(wi&&wi.complete&&wi.naturalWidth){ctx.drawImage(wi,x-15,y-9,30,17.5);}else{ctx.save();ctx.translate(x-11,y-9);ctx.scale(22/24,22/24);ctx.lineWidth=2;ctx.strokeStyle=ec;ctx.stroke(icPath('cart'));ctx.restore();}
         ctx.beginPath();ctx.arc(x+6,y-12,4.5,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=1.5;ctx.strokeStyle=ec;ctx.stroke();ctx.font=`500 6px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(avLetter(e.lead||e.name),x+6,y-11.6);}
-      else{ctx.beginPath();ctx.arc(x,y,er,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=ec;if(!see)ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
+      else{const tg=talGrad(ctx,x,y,er,entTal(e));ctx.beginPath();ctx.arc(x,y,er,0,6.3);ctx.fillStyle=C.paper;ctx.fill();ctx.lineWidth=tg?3.2:2;ctx.strokeStyle=tg||ec;if(!see)ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
         if(gk){const gs=er*1.3;ctx.save();ctx.translate(x-gs/2,y-gs/2);ctx.scale(gs/24,gs/24);ctx.lineWidth=2.2;ctx.strokeStyle=ec;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke(icPath(gk));ctx.restore();}
         else{ctx.font=`500 10px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=C.ink;ctx.fillText(avLetter(ENT_T[e.type].n),x,y+1);}}
       ctx.globalAlpha=1;
@@ -237,7 +237,7 @@ const Map2=(()=>{
     // người chơi: con dấu son
     if(!HT._me){// đứng ở địa điểm: địa điểm giữ ở tâm ô, nhân vật nằm ngay phía trên, cách một khe nhỏ
       const nd=!r.moving&&showIc&&!HT[(nodeById(r.at)||{}).type]?nodeById(r.at):null;const nS=Math.min(s0,HW*0.7);const rr=nd?Math.min(s0*0.5,HW*0.36):s0*0.62;const x=SX(pos[0]),y=SY(pos[1])-(nd?nS/2+3+rr+2.5:0);
-      ctx.beginPath();ctx.arc(x,y,rr+2.5,0,6.3);ctx.fillStyle=C.seal;ctx.fill();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.fillStyle=C.paper;ctx.fill();
+      {const tg=talGrad(ctx,x,y,rr+3.5,playerTal());ctx.beginPath();ctx.arc(x,y,rr+(tg?3.5:2.5),0,6.3);ctx.fillStyle=tg||C.seal;ctx.fill();}ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.fillStyle=C.paper;ctx.fill();
       const hi=heroImg();if(hi&&hi.complete&&hi.naturalWidth){ctx.save();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.clip();ctx.drawImage(hi,x-rr,y-rr,rr*2,rr*2);ctx.restore();}
       else{ctx.fillStyle=C.ink;ctx.font=`500 ${Math.round(rr*1.05)}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(avLetter(r.ten),x,y+1);}
 }
@@ -338,3 +338,6 @@ const Art=(()=>{
   return {fillAll,clear:()=>cache.clear(),figure};
 })();
 function sceneCv(seed,reg,type,cls,figs){const night=G.meta&&G.meta.world&&partOf(W().t)==='dem'?1:0;return `<canvas class="art ${cls||''}" data-scene="${esc([seed,reg,type||'',night,figs||''].join('~'))}"></canvas>`;}
+
+// khung thiên phú trên bản đồ: Tinh anh ánh bạc, Thiên kiêu ánh kim
+function talGrad(ctx,x,y,r,t){if(!t||t.tier<3)return null;const g=ctx.createLinearGradient(x-r,y-r,x+r,y+r);const S=t.tier===4?['#fff4c2','#d9a521','#fff0a8','#9a6a08','#ffd75e']:['#ffffff','#9aa4ae','#f4f7fa','#6f7984','#dfe5ea'];S.forEach((c,i)=>g.addColorStop(i/(S.length-1),c));return g;}

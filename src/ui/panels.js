@@ -8,6 +8,7 @@ function pChar(){
     const og=ORIGIN.find(o=>o.id===r.origin),tr=TRAIT.find(t=>t.id===r.trait),R0=rootView(r.root);
     const R1=ROOT.find(x=>x.id===r.root.id);const tc=s.tuchat;const left=Math.max(0,Math.floor(s.life-r.age));
     const lcV=`<span class="lc2"><small>${esc(R0.n)}</small><span class="lc-els">${r.root.els.map(elSeal).join('')}</span></span>`;
+    b+=talCardHTML();
     b+=`<div class="basegrid">`;
     b+=sgBox('flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),...(tr&&tr.id!=='none'?[kvRow('Mệnh cách',esc(tr.n),tr.d)]:[]),
       kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
@@ -407,3 +408,10 @@ function relCmpOf(rel){const r=G.run;if(!r||!rel||rel.k==='book')return null;con
   const S0=slotsFor(rel).length?slotsFor(rel):[slotOf(rel)];const cur=S0.map(k=>E[k]).filter(Boolean);if(!cur.length)return null;return cur.sort((a,b)=>Object.keys(relicFx(a)).length-Object.keys(relicFx(b)).length)[0];}
 function relCmpLines(ns,rel,cmp){const keys=Object.keys(ns);if(!cmp)return fxLines(ns,rel);const cf=relicFx(cmp);
   return keys.map(k=>{const t=fxLines({[k]:ns[k]},rel)[0]||'';const v=ns[k],o=cf[k]||0;const a=typeof v!=='number'?'':v>o?' ▲':v<o?' ▼':' =';return t+a;}).concat(Object.keys(cf).filter(k=>!(k in ns)&&!NT_KEYS.includes(k)).map(k=>'Mất: '+(fxLines({[k]:cf[k]},cmp)[0]||'')+' ▼'));}
+
+// ô Thiên phú ở đầu tab Căn cơ: nổi bật nhất bảng; Tinh anh khung bạc, Thiên kiêu khung vàng
+function talCardHTML(){const t=playerTal();if(!t)return '';const p=t.p;const RLN={tap:'Ngũ hành tạp linh căn',tu:'Tứ linh căn',tam:'Tam linh căn',song:'Song linh căn',thien:'Thiên linh căn',bien:'Biến dị linh căn',cuc:'Cực linh căn'};
+  const w=v=>['rất kém','kém','bình thường','tốt','rất tốt'][clamp(Math.round(v),0,4)];
+  const tip='Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới.\n· Linh căn: '+(RLN[p.root]||'')+'\n· Tư chất: '+tcName(tuChat())+'\n· Tiên thiên khí vận: '+w(Math.min(4,p.kv*0.8))+'\n· Thể chất: '+w(Math.max(0,(p.th-1)*1.2))+'\n· Ngộ tính, đạo tâm, khí vận gốc: '+w(2+p.dev*0.5)+'\n\nNăm bậc: Phế vật, Phàm tài, Trung tài, Tinh anh, Thiên kiêu.';
+  return `<div class="tal-card tal${t.tier}"${ta(tip)}><small>Thiên phú</small><b>${TAL_N[t.tier]}</b></div>`;}
+function talCls(t){return t&&t.tier>=3?' tf'+t.tier:'';}
