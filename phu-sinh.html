@@ -1339,6 +1339,53 @@ details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim
 .slots{flex-wrap:wrap;gap:6px}.slots .slot{width:64px;height:64px;font-size:.92em}
 .u-s.nosee{color:var(--ink3);font-style:italic}.bb-cost{margin:.3em 0 .6em 1.2em;color:var(--seal);font-size:.9em}
 .mbox .mb-f{flex-wrap:wrap;gap:8px}.mbox .mb-f .btn{max-width:100%;white-space:normal}
+/* ===== Lột xác ===== */
+:root[data-asc] #hud,:root[data-asc] #nav,:root[data-asc] #dock,:root[data-asc] #mapui,:root[data-asc] #sheet{visibility:hidden}
+:root[data-asc] #modal{background:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:0;z-index:60}
+:root[data-asc-shake=xk] #app{animation:ascShk .45s ease-in-out 2}
+:root[data-asc-shake=bt] #app{animation:ascShk2 .5s ease-in-out 4}
+@keyframes ascShk{0%,100%{transform:none}25%{transform:translate(-3px,2px)}50%{transform:translate(3px,-2px)}75%{transform:translate(-2px,-1px)}}
+@keyframes ascShk2{0%,100%{transform:none}20%{transform:translate(-7px,4px) rotate(-.4deg)}40%{transform:translate(6px,-5px) rotate(.4deg)}60%{transform:translate(-5px,-3px)}80%{transform:translate(4px,5px)}}
+.asc{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden;z-index:60}
+.asc-bg{position:absolute;inset:0;background:var(--paper);opacity:1}
+.asc.ph-flash .asc-bg{opacity:0;animation:ascBg 1.6s ease-in forwards}
+.asc-bt.ph-flash .asc-bg{animation:ascBg 3s cubic-bezier(.5,0,.8,.4) forwards}
+@keyframes ascBg{0%{opacity:0}55%{opacity:.25}100%{opacity:1}}
+.asc-glow{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#fff6dc 30%,rgba(255,236,180,.6) 55%,transparent 72%);animation:ascGlow 1.6s ease-in forwards}
+.asc-bt .asc-glow{animation:ascGlow 3s cubic-bezier(.6,0,.7,.5) forwards}
+@keyframes ascGlow{0%{transform:scale(.2);opacity:0}25%{opacity:1}100%{transform:scale(60);opacity:1}}
+.asc-rays{position:absolute;left:50%;top:50%;width:200vmax;height:200vmax;margin:-100vmax;background:repeating-conic-gradient(from 0deg,rgba(255,226,140,.0) 0 6deg,rgba(255,226,140,.45) 7deg 9deg,rgba(255,226,140,0) 10deg 18deg);animation:ascRay 3s linear forwards;mix-blend-mode:screen}
+@keyframes ascRay{0%{opacity:0;transform:rotate(0) scale(.3)}30%{opacity:1}100%{opacity:.2;transform:rotate(40deg) scale(1)}}
+.asc-in{position:relative;width:min(560px,100%);max-height:100%;overflow:auto;padding:28px 18px 24px;text-align:center;color:var(--ink);animation:ascIn .7s ease-out both}
+@keyframes ascIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.asc-in>small{letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-size:.78em}
+.asc-in h2{margin:.25em 0 .5em;font-size:1.6em;letter-spacing:.06em}
+.asc-in>p{color:var(--ink2);line-height:1.6;margin:0 auto 1em;max-width:30em}
+.htp{display:grid;gap:10px;margin-top:6px}
+.hto{position:relative;text-align:left;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--paper2) 70%,#fff);cursor:pointer;font:inherit;color:var(--ink);transition:transform .15s,box-shadow .15s}
+.hto:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(120,90,20,.18)}
+.hto small{font-size:.72em;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}.hto b{display:block;font-size:1.08em;margin:2px 0}.hto p{margin:0;font-size:.86em;color:var(--ink2)}
+.hto.r2{border-color:#6a9bc9}.hto.r2 small{color:#3d74a8}.hto.r3{border-color:#c9a03a}.hto.r3 small{color:#a67a1a}.hto.r4{border-color:#b04a8a;box-shadow:0 0 14px rgba(176,74,138,.25)}.hto.r4 small{color:#a0306f}
+.hto.sel{outline:2px solid var(--gold)}
+.asc-cf{position:fixed;inset:0;display:grid;place-items:center;background:rgba(40,30,10,.3);padding:16px;z-index:2}
+.asc-img{width:100%;height:150px;border-radius:12px;overflow:hidden;margin-bottom:12px;-webkit-mask:radial-gradient(ellipse at center,#000 55%,transparent 78%);mask:radial-gradient(ellipse at center,#000 55%,transparent 78%)}.asc-img img{width:100%;height:100%;object-fit:cover}
+.asc-to{display:flex;flex-direction:column;gap:2px;align-items:center}.asc-to s{font-size:.6em;color:var(--ink3);text-decoration:line-through}.asc-to span{color:var(--gold);text-shadow:0 0 12px rgba(230,190,80,.45)}
+.asc-st p{text-align:left;line-height:1.7;color:var(--ink2);margin:.4em 0;font-size:.95em}
+.asc-ht{font-size:.9em;color:var(--ink2)}.asc-ht b{color:var(--gold)}
+.asc-diff{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin:12px 0 4px;text-align:left}
+.ad{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px dotted var(--line);font-size:.92em}
+.chev{display:inline-flex;flex-direction:column;align-items:center;gap:1px;vertical-align:middle}.chev svg{width:14px;height:9px;fill:#2f9a4e}
+.asc-lg{font-size:.72em;color:var(--ink3);display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:6px 0 14px}.asc-lg .chev svg{width:10px;height:6px}
+/* dòng cảnh giới đổi từ từ */
+.rl-anim{position:relative;display:inline-grid}.rl-anim i{grid-area:1/1;font-style:normal;white-space:nowrap}
+.rl-anim .o{animation:rlOut 1.4s ease-in forwards}.rl-anim .n{opacity:0;animation:rlIn 1.2s ease-out 1.2s forwards}
+@keyframes rlOut{0%,40%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px);filter:blur(2px)}}
+@keyframes rlIn{0%{opacity:0;transform:translateY(8px);color:var(--gold);text-shadow:0 0 10px rgba(240,200,90,.9)}60%{opacity:1;transform:none;color:var(--gold);text-shadow:0 0 10px rgba(240,200,90,.9)}100%{opacity:1;color:inherit;text-shadow:none}}
+/* thiên phú đổi bậc: khung cũ lóe sáng rồi đổi */
+.hud-av2.talchg .tfr,.talchg .tal-card{animation:talChg 1.7s ease-in-out forwards}
+@keyframes talChg{0%{filter:none}30%{filter:brightness(1.6) drop-shadow(0 0 6px #ffe39a)}60%{filter:brightness(2.4) drop-shadow(0 0 14px #fff2c4);transform:scale(1.06)}100%{filter:brightness(3) blur(1px) drop-shadow(0 0 18px #fff);opacity:.4;transform:scale(1.1)}}
+.hud-av2.talnew .tfr,.talnew .tal-card,.talnew .tcx-top,.talnew svg{animation:talNew 1.2s ease-out both}
+@keyframes talNew{0%{filter:brightness(3) drop-shadow(0 0 18px #fff);opacity:.3;transform:scale(1.12)}100%{filter:none;opacity:1;transform:none}}
 
 </style>
 </head>
@@ -7294,6 +7341,45 @@ function bbForceLearn2(i,gi){const r=G.run;const rel=r.relics[i];if(!rel||!bbTem
   if(g&&PILL[g.id].bt&&PILL[g.id].bt.guard)r.pills.splice(gi,1);
   if(!ok){r.bt=null;die('thanvo',{n:'Thần thức tan vỡ'});return 'dead';}
   const e=bbForceLearn(i);if(e)return e;r.tamma=Math.min(100,(r.tamma||0)+10);log(`Lấy ${PILL[g.id].n} hộ thần thức, cưỡng ép lĩnh ngộ thêm ${rel.art?rel.art.n:'một môn'}.`);return '';}
+// ===== Hậu thiên khí vận: cơ duyên có được sau mỗi lần đột phá đại cảnh giới (chọn 1 trong 3) =====
+const HT_RANK=['','Hạ phẩm','Trung phẩm','Thượng phẩm','Cực phẩm'];
+const HT_RW={1:40,2:33,3:20,4:7};
+const HTKV=[
+ {id:'ht_kiemy',r:1,n:'Kiếm Ý Sơ Thành',fx:{atkP:6,crit:1},d:'Công +6%, chí mạng +1%',st:'Lúc linh khí cuộn trào, {ten} bỗng thấy kiếm khí trong người tự tìm đường đi. Từ đó vung tay một cái, gió cũng phải nhường lối.'},
+ {id:'ht_kimcot',r:1,n:'Kim Cốt Sơ Hiện',fx:{defP:7,hpP:3},d:'Thủ +7%, khí huyết +3%',st:'Xương cốt rèn qua thiên kiếp ánh lên sắc vàng nhạt. {ten} gõ nhẹ lên cánh tay mình, nghe như gõ vào chuông đồng.'},
+ {id:'ht_linhtuyen',r:1,n:'Linh Tuyền Đan Điền',fx:{mpP:8},d:'Linh lực +8%',st:'Đan điền mở rộng như một mạch suối ngầm. Linh lực chảy vào không ngớt, rót mãi không đầy.'},
+ {id:'ht_khinhthan',r:1,n:'Khinh Thân Như Yến',fx:{tp:2,dodge:2},d:'Thân pháp +2, né +2',st:'Thân thể nhẹ bẫng, {ten} đứng dậy mà ngỡ mình sắp bay lên. Gió núi lướt qua, áo không động.'},
+ {id:'ht_tinhtam',r:1,n:'Tĩnh Tâm Như Thủy',fx:{tam:1,tammaRes:15},d:'Đạo tâm +1, kháng tâm ma +15%',st:'Sau cơn bão, lòng {ten} lặng như mặt hồ thu. Những tạp niệm cũ trôi qua như mây, không còn vướng lại.'},
+ {id:'ht_tuluc',r:1,n:'Tụ Linh Chi Thể',fx:{tvP:6},d:'Tốc độ tu luyện +6%',st:'Linh khí quanh động phủ như có mắt, tự tìm tới thân {ten}. Ngồi yên một khắc bằng người khác ngồi nửa ngày.'},
+ {id:'ht_lohoa',r:2,n:'Lô Hỏa Thuần Thanh',fx:{matkP:10,mpP:4},d:'Pháp công +10%, linh lực +4%',st:'Chân hỏa trong đan điền chuyển từ đỏ sang xanh. {ten} búng tay, đốm lửa nhỏ bay ra cháy mãi không tắt.'},
+ {id:'ht_banthach',r:2,n:'Bàn Thạch Chi Khu',fx:{defP:10,hpP:8},d:'Thủ +10%, khí huyết +8%',st:'Thiên lôi đánh xuống mà thân thể chỉ hơi tê. {ten} biết từ nay mình đã có một tấm thân như đá tảng giữa dòng.'},
+ {id:'ht_thanthuc',r:2,n:'Thức Hải Khai Khoát',fx:{than:6,ngo:1},d:'Thần thức +6, ngộ tính +1',st:'Thức hải rộng ra như biển sau mưa. Nhắm mắt lại, {ten} nghe được cả tiếng lá rơi ngoài trăm trượng.'},
+ {id:'ht_trudiem',r:2,n:'Trường Sinh Chi Mạch',fx:{lifeP:8,hpP:4},d:'Thọ nguyên +8%, khí huyết +4%',st:'Một sợi sinh cơ xanh biếc quấn quanh tâm mạch. Tóc mai {ten} đen lại, khóe mắt bớt đi mấy nếp nhăn.'},
+ {id:'ht_phong',r:2,n:'Ngự Phong Thân Pháp',fx:{tp:4,dodge:3},d:'Thân pháp +4, né +3',st:'Gió trên đỉnh núi như quen biết từ lâu. {ten} bước một bước, người đã ở ngoài mười trượng.'},
+ {id:'ht_satkhi',r:2,n:'Sát Khí Ngưng Hình',fx:{atkP:9,critDmg:15},d:'Công +9%, bạo thương +15%',st:'Sát khí tích bao năm chiến đấu ngưng lại thành một luồng lạnh buốt. Thú dữ quanh núi im bặt khi {ten} bước ra.'},
+ {id:'ht_ngodao',r:3,n:'Ngộ Đạo Linh Quang',fx:{ngo:2,tvP:10},d:'Ngộ tính +2, tốc độ tu luyện +10%',st:'Trong khoảnh khắc lôi quang tắt lịm, {ten} chợt thấy một tia linh quang. Bao điều trước nay mù mờ bỗng rõ như ban ngày.'},
+ {id:'ht_hutien',r:3,n:'Hư Tiên Cốt',fx:{atkP:8,defP:8,hpP:8,mpP:8},d:'Công, thủ, khí huyết, linh lực +8%',st:'Thân thể được thiên kiếp tôi luyện từ trong ra ngoài. Mỗi tấc da thịt của {ten} đều ánh lên một tầng ánh ngọc nhàn nhạt.'},
+ {id:'ht_thanthong',r:3,n:'Thần Thức Hóa Kiếm',fx:{than:12,crit:3},d:'Thần thức +12, chí mạng +3%',st:'Thần thức của {ten} sắc như lưỡi kiếm. Chỉ một ánh nhìn, kẻ yếu bóng vía đã thấy đầu óc ong ong.'},
+ {id:'ht_bathu',r:3,n:'Bất Hủ Chi Tâm',fx:{tam:2,tammaRes:30,lifeP:6},d:'Đạo tâm +2, kháng tâm ma +30%, thọ nguyên +6%',st:'Qua kiếp nạn, lòng {ten} cứng như kim cương. Tâm ma gõ cửa, chỉ nghe thấy một khoảng lặng.'},
+ {id:'ht_lucdao',r:4,n:'Lục Đạo Luân Hồi Ấn',fx:{atkP:14,defP:12,hpP:12,mpP:12,tvP:8},d:'Công +14%, thủ, khí huyết, linh lực +12%, tu luyện +8%',st:'Giữa lôi vân hiện ra một ấn ký sáu cánh, lặng lẽ in vào giữa trán {ten}. Trời đất như cúi đầu một khắc.'},
+ {id:'ht_thienco',r:4,n:'Thiên Cơ Khai Nhãn',fx:{ngo:3,than:15,crit:4},d:'Ngộ tính +3, thần thức +15, chí mạng +4%',st:'Đôi mắt {ten} chợt nhìn thấu những sợi tơ vô hình giăng khắp thiên địa. Đó là thiên cơ, mấy ai được thấy một lần.'},
+ {id:'ht_vanco',r:4,n:'Vạn Cổ Trường Thanh',fx:{lifeP:20,hpP:15,tammaRes:25},d:'Thọ nguyên +20%, khí huyết +15%, kháng tâm ma +25%',st:'Một gốc tùng cổ hiện ra trong thức hải {ten}, rễ cắm sâu vào hư không. Năm tháng từ nay trôi chậm hẳn quanh người.'},
+];
+const HTMAP={};for(const x of HTKV)HTMAP[x.id]=x;
+function htOffer(n,to){const r=G.run;const own=r.htkv||[];const L=[];for(let i=0;i<n;i++){const left=HTKV.filter(x=>!own.includes(x.id)&&!L.includes(x.id));if(!left.length)break;
+  const rk=wpick([1,2,3,4].filter(k=>left.some(x=>x.r===k)),k=>HT_RW[k]*Math.pow(1.5,((to||1)-1)*(k-1)/2));L.push(pick(left.filter(x=>x.r===rk)).id);}return L;}
+function htChoose(i){const r=G.run;if(!r||!r.htPick)return null;const id=r.htPick[+i];r.htPick=null;if(!HTMAP[id])return null;(r.htkv=r.htkv||[]).push(id);log(`Nhận hậu thiên khí vận: ${HTMAP[id].n}.`);if(typeof bio==='function')bio(`Năm ${Math.floor(r.age)} tuổi, ${r.ten} được ${HTMAP[id].n} sau lần đột phá.`);const s=S();r.hp=s.maxHp;r.mp=s.maxMp;return id;}
+{const _agH=aggFx;aggFx=function(){const fx=_agH();const r=G.run;if(r&&r.htkv)for(const id of r.htkv){const x=HTMAP[id];if(x)for(const k in x.fx)fx[k]=(fx[k]||0)+x.fx[k];}return fx;};}
+// đột phá đại cảnh giới: thay lựa chọn tiên thiên khí vận bằng hậu thiên khí vận
+{const _bfH=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const res=_bfH.apply(this,arguments);const r2=G.run;if(r2&&r2.realm>rl&&r2.realm<5){r2.kvPick=null;const o=htOffer(3,r2.realm);if(o.length)r2.htPick=o;}return res;};}
+// ===== Ghi lại trước/sau khi xung kích, đột phá để giao diện diễn hiệu ứng lột xác =====
+const ASC_K=[['maxHp','Khí huyết'],['maxMp','Linh lực'],['atk','Công'],['def','Thủ'],['matk','Pháp công'],['than','Thần thức'],['tp','Thân pháp'],['ngo','Ngộ tính'],['crit','Chí mạng'],['life','Thọ nguyên']];
+function ascSnap(){const s=S();const o={};for(const [k] of ASC_K)o[k]=s[k]||0;return o;}
+function ascDiff(a,b){const L=[];for(const [k,n] of ASC_K){const x=a[k]||0,y=b[k]||0;if(y<=x+1e-6)continue;const p=x>0?(y-x)/x:1;L.push({k,n,lv:p>=0.8?3:p>=0.3?2:1});}return L;}
+{const _psA=prepStart;prepStart=function(){const r=G.run;if(r){r._ascPre=ascSnap();r._ascFrom=realmLabel();}return _psA.apply(this,arguments);};}
+{const _bfA=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const pre=r&&r._ascPre,from=r&&r._ascFrom;const res=_bfA.apply(this,arguments);const r2=G.run;
+  if(r2&&r2.realm>rl&&pre){r2.asc={k:'bt',from,to:realmLabel(),realm:r2.realm,diff:ascDiff(pre,ascSnap()),place:(r2.place&&r2.place.t)||'dong'};}if(r2){r2._ascPre=null;}return res;};}
+{const _xkA=lkXk;lkXk=function(){const r=G.run;const pre=r&&ascSnap(),from=r&&realmLabel();const ok=_xkA.apply(this,arguments);const r2=G.run;if(ok&&r2&&pre)r2.asc={k:'xk',from,to:realmLabel(),diff:ascDiff(pre,ascSnap())};return ok;};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -7960,6 +8046,10 @@ const Map2=(()=>{
     // người chơi: con dấu son
     if(!HT._me){// đứng ở địa điểm: địa điểm giữ ở tâm ô, nhân vật nằm ngay phía trên, cách một khe nhỏ
       const nd=!r.moving&&showIc&&!HT[(nodeById(r.at)||{}).type]?nodeById(r.at):null;const nS=Math.min(s0,HW*0.7);const rr=nd?Math.min(s0*0.5,HW*0.36):s0*0.62;const x=SX(pos[0]),y=SY(pos[1])-(nd?nS/2+3+rr+2.5:0);
+      if(UI.lvGlow){const nw=performance.now(),G0=UI.lvGlow;if(nw<G0.t1){const p=(nw-G0.t0)/(G0.t1-G0.t0),fa=p<0.15?p/0.15:1-Math.max(0,(p-0.6)/0.4);ctx.save();
+        const pg=ctx.createLinearGradient(x,y-rr*9,x,y);pg.addColorStop(0,'rgba(255,236,170,0)');pg.addColorStop(1,`rgba(255,224,130,${0.55*fa})`);ctx.fillStyle=pg;ctx.fillRect(x-rr*1.1,y-rr*9,rr*2.2,rr*9);
+        for(let k=0;k<3;k++){const q=((p*2.4)+k/3)%1;ctx.beginPath();ctx.arc(x,y,rr+q*rr*2.6,0,6.3);ctx.strokeStyle=`rgba(240,196,80,${(1-q)*0.8*fa})`;ctx.lineWidth=2.5*(1-q)+0.5;ctx.stroke();}
+        const rg=ctx.createRadialGradient(x,y,rr*0.5,x,y,rr*2.4);rg.addColorStop(0,`rgba(255,240,190,${0.6*fa})`);rg.addColorStop(1,'rgba(255,240,190,0)');ctx.fillStyle=rg;ctx.beginPath();ctx.arc(x,y,rr*2.4,0,6.3);ctx.fill();ctx.restore();}else UI.lvGlow=null;}
       {const tg=talGrad(ctx,x,y,rr+3.5,playerTal());ctx.beginPath();ctx.arc(x,y,rr+(tg?3.5:2.5),0,6.3);ctx.fillStyle=tg||C.seal;ctx.fill();}ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.fillStyle=C.paper;ctx.fill();
       const hi=heroImg();if(hi&&hi.complete&&hi.naturalWidth){ctx.save();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.clip();ctx.drawImage(hi,x-rr,y-rr,rr*2,rr*2);ctx.restore();}
       else{ctx.fillStyle=C.ink;ctx.font=`500 ${Math.round(rr*1.05)}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(avLetter(r.ten),x,y+1);}
@@ -9453,6 +9543,7 @@ function loop(now){
       }
     }catch(e){console.error(e);}
   } else clkAcc=0;
+  if(UI.lvGlow&&now<UI.lvGlow.t1+100)Map2.invalidate();
   if(G.screen==='map'&&G.run)Map2.frame(now);
   requestAnimationFrame(loop);
 }
@@ -9793,6 +9884,44 @@ ACT.bbLearn=i=>{const e=bbForceLearn(+i);if(e){UI.modal={k:'bbLearn',err:e};retu
 ACT.bbAsk2=i=>{UI.modal={k:'bbLearn2',i:+i};};
 ACT.bbBack=()=>{UI.modal=bbBooks().length?{k:'bbLearn'}:null;};
 ACT.bbLearn2=a=>{const [i,g]=String(a).split(',').map(Number);const e=bbForceLearn2(i,g);if(e==='dead'){UI.modal=null;return;}if(e){UI.modal={k:'bbLearn',err:e};return;}UI.modal=bbBooks().length?{k:'bbLearn'}:null;note('Vật bảo mệnh vỡ tan, hộ trì thức hải. Thêm một môn đã khắc vào lòng.','dn');};
+// ================= Lột xác: hiệu ứng sau xung kích / đột phá =================
+function chevIc(n){return `<span class="chev c${n}">${'<svg viewBox="0 0 20 13"><path d="M1 7L10 1L19 7V12L10 6L1 12Z"/></svg>'.repeat(n)}</span>`;}
+function ascPlaceImg(a){const P=ASSET.place||{};return P[a.place]||P.dongphu||P.dong||P.nui||Object.values(P)[0]||'';}
+function ascStory(a){const r=G.run;const x=a.ht&&HTMAP[a.ht];const L=[];
+  L.push(a.k==='bt'?`Lôi vân tan dần. ${r.ten} mở mắt, thấy trời đất như vừa được gột rửa: núi xanh hơn, gió trong hơn, từng sợi linh khí hiện rõ như tơ.`:`Một tiếng “rắc” khẽ vang trong kinh mạch. Linh lực dồn nén bao lâu nay ào qua quan ải.`);
+  if(x)L.push(x.st.replace(/\{ten\}/g,r.ten));return L;}
+function ascDiffHTML(a){return `<div class="asc-diff">${a.diff.length?a.diff.map(d=>`<div class="ad"><span>${esc(d.n)}</span>${chevIc(d.lv)}</div>`).join(''):'<p class="hint">Căn cơ vững lại, chưa thấy đổi khác rõ rệt.</p>'}</div><p class="asc-lg">${chevIc(1)} tăng vừa ${chevIc(2)} tăng mạnh ${chevIc(3)} tăng rất mạnh</p>`;}
+function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
+  if(UI.ascId!==a._id){UI.ascId=a._id;UI.ascPh='flash';UI.ascSel=null;clearTimeout(UI.ascT);
+    const ms=CFG.anim===false?200:a.k==='bt'?3000:1600;document.documentElement.dataset.ascShake=a.k;setTimeout(()=>{delete document.documentElement.dataset.ascShake;},ms);
+    UI.ascT=setTimeout(()=>{UI.ascPh=a.k==='bt'&&r.htPick?'pick':'res';render();},ms);}
+  const ph=UI.ascPh;let h=`<div class="asc asc-${a.k} ph-${ph}"><div class="asc-bg"></div>`;
+  if(ph==='flash')return h+`<div class="asc-glow"></div>${a.k==='bt'?'<div class="asc-rays"></div>':''}</div>`;
+  if(ph==='pick'){const sel=UI.ascSel;h+=`<div class="asc-in"><small>Thiên địa cảm ứng</small><h2>Hậu thiên khí vận</h2><p>Kiếp nạn đã qua, cơ duyên hiện trước mắt. Ba luồng khí vận lơ lửng giữa không trung, chỉ có thể nắm lấy một.</p>
+    <div class="htp">${r.htPick.map((id,i)=>{const x=HTMAP[id];return `<button class="hto r${x.r}${sel===i?' sel':''}" data-act="ascSel" data-arg="${i}"><small>${HT_RANK[x.r]}</small><b>${esc(x.n)}</b><p>${esc(x.d)}</p></button>`;}).join('')}</div></div>`;
+    if(sel!=null){const x=HTMAP[r.htPick[sel]];h+=`<div class="asc-cf"><div class="mbox"><h3>Nắm lấy ${esc(x.n)}?</h3><p>${esc(x.d)}</p><p class="hint">Chọn rồi không đổi được.</p><div class="mb-f"><button class="btn" data-act="ascSel" data-arg="-1">Nghĩ lại</button><span class="grow"></span><button class="btn pri" data-act="ascPick">Xác nhận</button></div></div></div>`;}
+    return h+'</div>';}
+  const img=a.k==='bt'?ascPlaceImg(a):'';
+  h+=`<div class="asc-in res">${img?`<div class="asc-img"><img src="${esc(img)}" alt=""></div>`:''}<small>${a.k==='bt'?'Đột phá thành công':'Xung kích thành công'}</small><h2 class="asc-to"><s>${esc(a.from)}</s><span>${esc(a.to)}</span></h2>
+    <div class="asc-st">${ascStory(a).map(t=>`<p>${esc(t)}</p>`).join('')}</div>${a.ht&&HTMAP[a.ht]?`<p class="asc-ht">Hậu thiên khí vận: <b>${esc(HTMAP[a.ht].n)}</b></p>`:''}
+    ${ascDiffHTML(a)}<button class="btn pri big" data-act="ascDone">${a.k==='bt'?'Bước ra khỏi động phủ':'Tiếp tục'}</button></div>`;
+  return h+'</div>';}
+{const _mh=modalHTML;modalHTML=function(){const r=G.run;if(r&&r.asc&&G.screen==='map'&&!(r.scene&&r.scene.type==='combat')){if(!UI.modal||UI.modal.k!=='asc')UI.modal={k:'asc'};document.documentElement.dataset.asc='1';return ascHTML();}
+  delete document.documentElement.dataset.asc;if(UI.modal&&UI.modal.k==='asc')UI.modal=null;return _mh();};}
+ACT.ascSel=i=>{UI.ascSel=+i<0?null:+i;};
+ACT.ascPick=()=>{const r=G.run;if(UI.ascSel==null||!r.htPick)return;const id=htChoose(UI.ascSel);if(r.asc)r.asc.ht=id;UI.ascSel=null;UI.ascPh='res';};
+ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=null;delete document.documentElement.dataset.asc;const now=performance.now();
+  UI.realmAnim={from:a.from,to:a.to,t0:now};UI.lvGlow={t0:now,t1:now+3600};setTimeout(()=>{UI.realmAnim=null;render();},3400);
+  const sc=r.scene;if(sc&&sc.type==='btres')endScene();if(G.run&&G.run.scene&&G.run.scene.type==='place')G.run.scene=null;UI.panel=null;saveSoon();};
+// thanh đầu: dòng cảnh giới chuyển từ cũ sang mới
+{const _hh=hudHTML;hudHTML=function(){let h=_hh();const A=UI.realmAnim;if(A&&G.run){const cur=esc(realmLabel());h=h.replace('>'+cur+'</span>','><span class="rl-anim"><i class="o">'+esc(A.from)+'</i><i class="n">'+esc(A.to)+'</i></span></span>');}
+  if(UI.talA)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talchg');else if(UI.talNew)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talnew');return h;};}
+// thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
+{const _ptR=playerTal;playerTal=function(){const t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talS==null)UI.talS=t.tier;
+  if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
+  return t.tier===UI.talS?t:Object.assign({},t,{tier:UI.talS});};}
+{const _tc2=talCardHTML;talCardHTML=function(){const h=_tc2();return UI.talA?h.replace('class="tal-wrap','class="talchg tal-wrap'):UI.talNew?h.replace('class="tal-wrap','class="talnew tal-wrap'):h;};}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e.stopImmediatePropagation();}},true);
 
 </script>
 </body>

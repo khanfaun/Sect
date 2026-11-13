@@ -2621,3 +2621,42 @@ function bbForceLearn2(i,gi){const r=G.run;const rel=r.relics[i];if(!rel||!bbTem
   if(g&&PILL[g.id].bt&&PILL[g.id].bt.guard)r.pills.splice(gi,1);
   if(!ok){r.bt=null;die('thanvo',{n:'Thần thức tan vỡ'});return 'dead';}
   const e=bbForceLearn(i);if(e)return e;r.tamma=Math.min(100,(r.tamma||0)+10);log(`Lấy ${PILL[g.id].n} hộ thần thức, cưỡng ép lĩnh ngộ thêm ${rel.art?rel.art.n:'một môn'}.`);return '';}
+// ===== Hậu thiên khí vận: cơ duyên có được sau mỗi lần đột phá đại cảnh giới (chọn 1 trong 3) =====
+const HT_RANK=['','Hạ phẩm','Trung phẩm','Thượng phẩm','Cực phẩm'];
+const HT_RW={1:40,2:33,3:20,4:7};
+const HTKV=[
+ {id:'ht_kiemy',r:1,n:'Kiếm Ý Sơ Thành',fx:{atkP:6,crit:1},d:'Công +6%, chí mạng +1%',st:'Lúc linh khí cuộn trào, {ten} bỗng thấy kiếm khí trong người tự tìm đường đi. Từ đó vung tay một cái, gió cũng phải nhường lối.'},
+ {id:'ht_kimcot',r:1,n:'Kim Cốt Sơ Hiện',fx:{defP:7,hpP:3},d:'Thủ +7%, khí huyết +3%',st:'Xương cốt rèn qua thiên kiếp ánh lên sắc vàng nhạt. {ten} gõ nhẹ lên cánh tay mình, nghe như gõ vào chuông đồng.'},
+ {id:'ht_linhtuyen',r:1,n:'Linh Tuyền Đan Điền',fx:{mpP:8},d:'Linh lực +8%',st:'Đan điền mở rộng như một mạch suối ngầm. Linh lực chảy vào không ngớt, rót mãi không đầy.'},
+ {id:'ht_khinhthan',r:1,n:'Khinh Thân Như Yến',fx:{tp:2,dodge:2},d:'Thân pháp +2, né +2',st:'Thân thể nhẹ bẫng, {ten} đứng dậy mà ngỡ mình sắp bay lên. Gió núi lướt qua, áo không động.'},
+ {id:'ht_tinhtam',r:1,n:'Tĩnh Tâm Như Thủy',fx:{tam:1,tammaRes:15},d:'Đạo tâm +1, kháng tâm ma +15%',st:'Sau cơn bão, lòng {ten} lặng như mặt hồ thu. Những tạp niệm cũ trôi qua như mây, không còn vướng lại.'},
+ {id:'ht_tuluc',r:1,n:'Tụ Linh Chi Thể',fx:{tvP:6},d:'Tốc độ tu luyện +6%',st:'Linh khí quanh động phủ như có mắt, tự tìm tới thân {ten}. Ngồi yên một khắc bằng người khác ngồi nửa ngày.'},
+ {id:'ht_lohoa',r:2,n:'Lô Hỏa Thuần Thanh',fx:{matkP:10,mpP:4},d:'Pháp công +10%, linh lực +4%',st:'Chân hỏa trong đan điền chuyển từ đỏ sang xanh. {ten} búng tay, đốm lửa nhỏ bay ra cháy mãi không tắt.'},
+ {id:'ht_banthach',r:2,n:'Bàn Thạch Chi Khu',fx:{defP:10,hpP:8},d:'Thủ +10%, khí huyết +8%',st:'Thiên lôi đánh xuống mà thân thể chỉ hơi tê. {ten} biết từ nay mình đã có một tấm thân như đá tảng giữa dòng.'},
+ {id:'ht_thanthuc',r:2,n:'Thức Hải Khai Khoát',fx:{than:6,ngo:1},d:'Thần thức +6, ngộ tính +1',st:'Thức hải rộng ra như biển sau mưa. Nhắm mắt lại, {ten} nghe được cả tiếng lá rơi ngoài trăm trượng.'},
+ {id:'ht_trudiem',r:2,n:'Trường Sinh Chi Mạch',fx:{lifeP:8,hpP:4},d:'Thọ nguyên +8%, khí huyết +4%',st:'Một sợi sinh cơ xanh biếc quấn quanh tâm mạch. Tóc mai {ten} đen lại, khóe mắt bớt đi mấy nếp nhăn.'},
+ {id:'ht_phong',r:2,n:'Ngự Phong Thân Pháp',fx:{tp:4,dodge:3},d:'Thân pháp +4, né +3',st:'Gió trên đỉnh núi như quen biết từ lâu. {ten} bước một bước, người đã ở ngoài mười trượng.'},
+ {id:'ht_satkhi',r:2,n:'Sát Khí Ngưng Hình',fx:{atkP:9,critDmg:15},d:'Công +9%, bạo thương +15%',st:'Sát khí tích bao năm chiến đấu ngưng lại thành một luồng lạnh buốt. Thú dữ quanh núi im bặt khi {ten} bước ra.'},
+ {id:'ht_ngodao',r:3,n:'Ngộ Đạo Linh Quang',fx:{ngo:2,tvP:10},d:'Ngộ tính +2, tốc độ tu luyện +10%',st:'Trong khoảnh khắc lôi quang tắt lịm, {ten} chợt thấy một tia linh quang. Bao điều trước nay mù mờ bỗng rõ như ban ngày.'},
+ {id:'ht_hutien',r:3,n:'Hư Tiên Cốt',fx:{atkP:8,defP:8,hpP:8,mpP:8},d:'Công, thủ, khí huyết, linh lực +8%',st:'Thân thể được thiên kiếp tôi luyện từ trong ra ngoài. Mỗi tấc da thịt của {ten} đều ánh lên một tầng ánh ngọc nhàn nhạt.'},
+ {id:'ht_thanthong',r:3,n:'Thần Thức Hóa Kiếm',fx:{than:12,crit:3},d:'Thần thức +12, chí mạng +3%',st:'Thần thức của {ten} sắc như lưỡi kiếm. Chỉ một ánh nhìn, kẻ yếu bóng vía đã thấy đầu óc ong ong.'},
+ {id:'ht_bathu',r:3,n:'Bất Hủ Chi Tâm',fx:{tam:2,tammaRes:30,lifeP:6},d:'Đạo tâm +2, kháng tâm ma +30%, thọ nguyên +6%',st:'Qua kiếp nạn, lòng {ten} cứng như kim cương. Tâm ma gõ cửa, chỉ nghe thấy một khoảng lặng.'},
+ {id:'ht_lucdao',r:4,n:'Lục Đạo Luân Hồi Ấn',fx:{atkP:14,defP:12,hpP:12,mpP:12,tvP:8},d:'Công +14%, thủ, khí huyết, linh lực +12%, tu luyện +8%',st:'Giữa lôi vân hiện ra một ấn ký sáu cánh, lặng lẽ in vào giữa trán {ten}. Trời đất như cúi đầu một khắc.'},
+ {id:'ht_thienco',r:4,n:'Thiên Cơ Khai Nhãn',fx:{ngo:3,than:15,crit:4},d:'Ngộ tính +3, thần thức +15, chí mạng +4%',st:'Đôi mắt {ten} chợt nhìn thấu những sợi tơ vô hình giăng khắp thiên địa. Đó là thiên cơ, mấy ai được thấy một lần.'},
+ {id:'ht_vanco',r:4,n:'Vạn Cổ Trường Thanh',fx:{lifeP:20,hpP:15,tammaRes:25},d:'Thọ nguyên +20%, khí huyết +15%, kháng tâm ma +25%',st:'Một gốc tùng cổ hiện ra trong thức hải {ten}, rễ cắm sâu vào hư không. Năm tháng từ nay trôi chậm hẳn quanh người.'},
+];
+const HTMAP={};for(const x of HTKV)HTMAP[x.id]=x;
+function htOffer(n,to){const r=G.run;const own=r.htkv||[];const L=[];for(let i=0;i<n;i++){const left=HTKV.filter(x=>!own.includes(x.id)&&!L.includes(x.id));if(!left.length)break;
+  const rk=wpick([1,2,3,4].filter(k=>left.some(x=>x.r===k)),k=>HT_RW[k]*Math.pow(1.5,((to||1)-1)*(k-1)/2));L.push(pick(left.filter(x=>x.r===rk)).id);}return L;}
+function htChoose(i){const r=G.run;if(!r||!r.htPick)return null;const id=r.htPick[+i];r.htPick=null;if(!HTMAP[id])return null;(r.htkv=r.htkv||[]).push(id);log(`Nhận hậu thiên khí vận: ${HTMAP[id].n}.`);if(typeof bio==='function')bio(`Năm ${Math.floor(r.age)} tuổi, ${r.ten} được ${HTMAP[id].n} sau lần đột phá.`);const s=S();r.hp=s.maxHp;r.mp=s.maxMp;return id;}
+{const _agH=aggFx;aggFx=function(){const fx=_agH();const r=G.run;if(r&&r.htkv)for(const id of r.htkv){const x=HTMAP[id];if(x)for(const k in x.fx)fx[k]=(fx[k]||0)+x.fx[k];}return fx;};}
+// đột phá đại cảnh giới: thay lựa chọn tiên thiên khí vận bằng hậu thiên khí vận
+{const _bfH=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const res=_bfH.apply(this,arguments);const r2=G.run;if(r2&&r2.realm>rl&&r2.realm<5){r2.kvPick=null;const o=htOffer(3,r2.realm);if(o.length)r2.htPick=o;}return res;};}
+// ===== Ghi lại trước/sau khi xung kích, đột phá để giao diện diễn hiệu ứng lột xác =====
+const ASC_K=[['maxHp','Khí huyết'],['maxMp','Linh lực'],['atk','Công'],['def','Thủ'],['matk','Pháp công'],['than','Thần thức'],['tp','Thân pháp'],['ngo','Ngộ tính'],['crit','Chí mạng'],['life','Thọ nguyên']];
+function ascSnap(){const s=S();const o={};for(const [k] of ASC_K)o[k]=s[k]||0;return o;}
+function ascDiff(a,b){const L=[];for(const [k,n] of ASC_K){const x=a[k]||0,y=b[k]||0;if(y<=x+1e-6)continue;const p=x>0?(y-x)/x:1;L.push({k,n,lv:p>=0.8?3:p>=0.3?2:1});}return L;}
+{const _psA=prepStart;prepStart=function(){const r=G.run;if(r){r._ascPre=ascSnap();r._ascFrom=realmLabel();}return _psA.apply(this,arguments);};}
+{const _bfA=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const pre=r&&r._ascPre,from=r&&r._ascFrom;const res=_bfA.apply(this,arguments);const r2=G.run;
+  if(r2&&r2.realm>rl&&pre){r2.asc={k:'bt',from,to:realmLabel(),realm:r2.realm,diff:ascDiff(pre,ascSnap()),place:(r2.place&&r2.place.t)||'dong'};}if(r2){r2._ascPre=null;}return res;};}
+{const _xkA=lkXk;lkXk=function(){const r=G.run;const pre=r&&ascSnap(),from=r&&realmLabel();const ok=_xkA.apply(this,arguments);const r2=G.run;if(ok&&r2&&pre)r2.asc={k:'xk',from,to:realmLabel(),diff:ascDiff(pre,ascSnap())};return ok;};}

@@ -72,6 +72,7 @@ function loop(now){
       }
     }catch(e){console.error(e);}
   } else clkAcc=0;
+  if(UI.lvGlow&&now<UI.lvGlow.t1+100)Map2.invalidate();
   if(G.screen==='map'&&G.run)Map2.frame(now);
   requestAnimationFrame(loop);
 }
@@ -412,3 +413,41 @@ ACT.bbLearn=i=>{const e=bbForceLearn(+i);if(e){UI.modal={k:'bbLearn',err:e};retu
 ACT.bbAsk2=i=>{UI.modal={k:'bbLearn2',i:+i};};
 ACT.bbBack=()=>{UI.modal=bbBooks().length?{k:'bbLearn'}:null;};
 ACT.bbLearn2=a=>{const [i,g]=String(a).split(',').map(Number);const e=bbForceLearn2(i,g);if(e==='dead'){UI.modal=null;return;}if(e){UI.modal={k:'bbLearn',err:e};return;}UI.modal=bbBooks().length?{k:'bbLearn'}:null;note('Vật bảo mệnh vỡ tan, hộ trì thức hải. Thêm một môn đã khắc vào lòng.','dn');};
+// ================= Lột xác: hiệu ứng sau xung kích / đột phá =================
+function chevIc(n){return `<span class="chev c${n}">${'<svg viewBox="0 0 20 13"><path d="M1 7L10 1L19 7V12L10 6L1 12Z"/></svg>'.repeat(n)}</span>`;}
+function ascPlaceImg(a){const P=ASSET.place||{};return P[a.place]||P.dongphu||P.dong||P.nui||Object.values(P)[0]||'';}
+function ascStory(a){const r=G.run;const x=a.ht&&HTMAP[a.ht];const L=[];
+  L.push(a.k==='bt'?`Lôi vân tan dần. ${r.ten} mở mắt, thấy trời đất như vừa được gột rửa: núi xanh hơn, gió trong hơn, từng sợi linh khí hiện rõ như tơ.`:`Một tiếng “rắc” khẽ vang trong kinh mạch. Linh lực dồn nén bao lâu nay ào qua quan ải.`);
+  if(x)L.push(x.st.replace(/\{ten\}/g,r.ten));return L;}
+function ascDiffHTML(a){return `<div class="asc-diff">${a.diff.length?a.diff.map(d=>`<div class="ad"><span>${esc(d.n)}</span>${chevIc(d.lv)}</div>`).join(''):'<p class="hint">Căn cơ vững lại, chưa thấy đổi khác rõ rệt.</p>'}</div><p class="asc-lg">${chevIc(1)} tăng vừa ${chevIc(2)} tăng mạnh ${chevIc(3)} tăng rất mạnh</p>`;}
+function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
+  if(UI.ascId!==a._id){UI.ascId=a._id;UI.ascPh='flash';UI.ascSel=null;clearTimeout(UI.ascT);
+    const ms=CFG.anim===false?200:a.k==='bt'?3000:1600;document.documentElement.dataset.ascShake=a.k;setTimeout(()=>{delete document.documentElement.dataset.ascShake;},ms);
+    UI.ascT=setTimeout(()=>{UI.ascPh=a.k==='bt'&&r.htPick?'pick':'res';render();},ms);}
+  const ph=UI.ascPh;let h=`<div class="asc asc-${a.k} ph-${ph}"><div class="asc-bg"></div>`;
+  if(ph==='flash')return h+`<div class="asc-glow"></div>${a.k==='bt'?'<div class="asc-rays"></div>':''}</div>`;
+  if(ph==='pick'){const sel=UI.ascSel;h+=`<div class="asc-in"><small>Thiên địa cảm ứng</small><h2>Hậu thiên khí vận</h2><p>Kiếp nạn đã qua, cơ duyên hiện trước mắt. Ba luồng khí vận lơ lửng giữa không trung, chỉ có thể nắm lấy một.</p>
+    <div class="htp">${r.htPick.map((id,i)=>{const x=HTMAP[id];return `<button class="hto r${x.r}${sel===i?' sel':''}" data-act="ascSel" data-arg="${i}"><small>${HT_RANK[x.r]}</small><b>${esc(x.n)}</b><p>${esc(x.d)}</p></button>`;}).join('')}</div></div>`;
+    if(sel!=null){const x=HTMAP[r.htPick[sel]];h+=`<div class="asc-cf"><div class="mbox"><h3>Nắm lấy ${esc(x.n)}?</h3><p>${esc(x.d)}</p><p class="hint">Chọn rồi không đổi được.</p><div class="mb-f"><button class="btn" data-act="ascSel" data-arg="-1">Nghĩ lại</button><span class="grow"></span><button class="btn pri" data-act="ascPick">Xác nhận</button></div></div></div>`;}
+    return h+'</div>';}
+  const img=a.k==='bt'?ascPlaceImg(a):'';
+  h+=`<div class="asc-in res">${img?`<div class="asc-img"><img src="${esc(img)}" alt=""></div>`:''}<small>${a.k==='bt'?'Đột phá thành công':'Xung kích thành công'}</small><h2 class="asc-to"><s>${esc(a.from)}</s><span>${esc(a.to)}</span></h2>
+    <div class="asc-st">${ascStory(a).map(t=>`<p>${esc(t)}</p>`).join('')}</div>${a.ht&&HTMAP[a.ht]?`<p class="asc-ht">Hậu thiên khí vận: <b>${esc(HTMAP[a.ht].n)}</b></p>`:''}
+    ${ascDiffHTML(a)}<button class="btn pri big" data-act="ascDone">${a.k==='bt'?'Bước ra khỏi động phủ':'Tiếp tục'}</button></div>`;
+  return h+'</div>';}
+{const _mh=modalHTML;modalHTML=function(){const r=G.run;if(r&&r.asc&&G.screen==='map'&&!(r.scene&&r.scene.type==='combat')){if(!UI.modal||UI.modal.k!=='asc')UI.modal={k:'asc'};document.documentElement.dataset.asc='1';return ascHTML();}
+  delete document.documentElement.dataset.asc;if(UI.modal&&UI.modal.k==='asc')UI.modal=null;return _mh();};}
+ACT.ascSel=i=>{UI.ascSel=+i<0?null:+i;};
+ACT.ascPick=()=>{const r=G.run;if(UI.ascSel==null||!r.htPick)return;const id=htChoose(UI.ascSel);if(r.asc)r.asc.ht=id;UI.ascSel=null;UI.ascPh='res';};
+ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=null;delete document.documentElement.dataset.asc;const now=performance.now();
+  UI.realmAnim={from:a.from,to:a.to,t0:now};UI.lvGlow={t0:now,t1:now+3600};setTimeout(()=>{UI.realmAnim=null;render();},3400);
+  const sc=r.scene;if(sc&&sc.type==='btres')endScene();if(G.run&&G.run.scene&&G.run.scene.type==='place')G.run.scene=null;UI.panel=null;saveSoon();};
+// thanh đầu: dòng cảnh giới chuyển từ cũ sang mới
+{const _hh=hudHTML;hudHTML=function(){let h=_hh();const A=UI.realmAnim;if(A&&G.run){const cur=esc(realmLabel());h=h.replace('>'+cur+'</span>','><span class="rl-anim"><i class="o">'+esc(A.from)+'</i><i class="n">'+esc(A.to)+'</i></span></span>');}
+  if(UI.talA)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talchg');else if(UI.talNew)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talnew');return h;};}
+// thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
+{const _ptR=playerTal;playerTal=function(){const t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talS==null)UI.talS=t.tier;
+  if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
+  return t.tier===UI.talS?t:Object.assign({},t,{tier:UI.talS});};}
+{const _tc2=talCardHTML;talCardHTML=function(){const h=_tc2();return UI.talA?h.replace('class="tal-wrap','class="talchg tal-wrap'):UI.talNew?h.replace('class="tal-wrap','class="talnew tal-wrap'):h;};}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e.stopImmediatePropagation();}},true);

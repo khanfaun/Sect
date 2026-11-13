@@ -1329,3 +1329,50 @@ details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim
 .slots{flex-wrap:wrap;gap:6px}.slots .slot{width:64px;height:64px;font-size:.92em}
 .u-s.nosee{color:var(--ink3);font-style:italic}.bb-cost{margin:.3em 0 .6em 1.2em;color:var(--seal);font-size:.9em}
 .mbox .mb-f{flex-wrap:wrap;gap:8px}.mbox .mb-f .btn{max-width:100%;white-space:normal}
+/* ===== Lột xác ===== */
+:root[data-asc] #hud,:root[data-asc] #nav,:root[data-asc] #dock,:root[data-asc] #mapui,:root[data-asc] #sheet{visibility:hidden}
+:root[data-asc] #modal{background:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:0;z-index:60}
+:root[data-asc-shake=xk] #app{animation:ascShk .45s ease-in-out 2}
+:root[data-asc-shake=bt] #app{animation:ascShk2 .5s ease-in-out 4}
+@keyframes ascShk{0%,100%{transform:none}25%{transform:translate(-3px,2px)}50%{transform:translate(3px,-2px)}75%{transform:translate(-2px,-1px)}}
+@keyframes ascShk2{0%,100%{transform:none}20%{transform:translate(-7px,4px) rotate(-.4deg)}40%{transform:translate(6px,-5px) rotate(.4deg)}60%{transform:translate(-5px,-3px)}80%{transform:translate(4px,5px)}}
+.asc{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden;z-index:60}
+.asc-bg{position:absolute;inset:0;background:var(--paper);opacity:1}
+.asc.ph-flash .asc-bg{opacity:0;animation:ascBg 1.6s ease-in forwards}
+.asc-bt.ph-flash .asc-bg{animation:ascBg 3s cubic-bezier(.5,0,.8,.4) forwards}
+@keyframes ascBg{0%{opacity:0}55%{opacity:.25}100%{opacity:1}}
+.asc-glow{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#fff6dc 30%,rgba(255,236,180,.6) 55%,transparent 72%);animation:ascGlow 1.6s ease-in forwards}
+.asc-bt .asc-glow{animation:ascGlow 3s cubic-bezier(.6,0,.7,.5) forwards}
+@keyframes ascGlow{0%{transform:scale(.2);opacity:0}25%{opacity:1}100%{transform:scale(60);opacity:1}}
+.asc-rays{position:absolute;left:50%;top:50%;width:200vmax;height:200vmax;margin:-100vmax;background:repeating-conic-gradient(from 0deg,rgba(255,226,140,.0) 0 6deg,rgba(255,226,140,.45) 7deg 9deg,rgba(255,226,140,0) 10deg 18deg);animation:ascRay 3s linear forwards;mix-blend-mode:screen}
+@keyframes ascRay{0%{opacity:0;transform:rotate(0) scale(.3)}30%{opacity:1}100%{opacity:.2;transform:rotate(40deg) scale(1)}}
+.asc-in{position:relative;width:min(560px,100%);max-height:100%;overflow:auto;padding:28px 18px 24px;text-align:center;color:var(--ink);animation:ascIn .7s ease-out both}
+@keyframes ascIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.asc-in>small{letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-size:.78em}
+.asc-in h2{margin:.25em 0 .5em;font-size:1.6em;letter-spacing:.06em}
+.asc-in>p{color:var(--ink2);line-height:1.6;margin:0 auto 1em;max-width:30em}
+.htp{display:grid;gap:10px;margin-top:6px}
+.hto{position:relative;text-align:left;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--paper2) 70%,#fff);cursor:pointer;font:inherit;color:var(--ink);transition:transform .15s,box-shadow .15s}
+.hto:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(120,90,20,.18)}
+.hto small{font-size:.72em;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}.hto b{display:block;font-size:1.08em;margin:2px 0}.hto p{margin:0;font-size:.86em;color:var(--ink2)}
+.hto.r2{border-color:#6a9bc9}.hto.r2 small{color:#3d74a8}.hto.r3{border-color:#c9a03a}.hto.r3 small{color:#a67a1a}.hto.r4{border-color:#b04a8a;box-shadow:0 0 14px rgba(176,74,138,.25)}.hto.r4 small{color:#a0306f}
+.hto.sel{outline:2px solid var(--gold)}
+.asc-cf{position:fixed;inset:0;display:grid;place-items:center;background:rgba(40,30,10,.3);padding:16px;z-index:2}
+.asc-img{width:100%;height:150px;border-radius:12px;overflow:hidden;margin-bottom:12px;-webkit-mask:radial-gradient(ellipse at center,#000 55%,transparent 78%);mask:radial-gradient(ellipse at center,#000 55%,transparent 78%)}.asc-img img{width:100%;height:100%;object-fit:cover}
+.asc-to{display:flex;flex-direction:column;gap:2px;align-items:center}.asc-to s{font-size:.6em;color:var(--ink3);text-decoration:line-through}.asc-to span{color:var(--gold);text-shadow:0 0 12px rgba(230,190,80,.45)}
+.asc-st p{text-align:left;line-height:1.7;color:var(--ink2);margin:.4em 0;font-size:.95em}
+.asc-ht{font-size:.9em;color:var(--ink2)}.asc-ht b{color:var(--gold)}
+.asc-diff{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin:12px 0 4px;text-align:left}
+.ad{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px dotted var(--line);font-size:.92em}
+.chev{display:inline-flex;flex-direction:column;align-items:center;gap:1px;vertical-align:middle}.chev svg{width:14px;height:9px;fill:#2f9a4e}
+.asc-lg{font-size:.72em;color:var(--ink3);display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:6px 0 14px}.asc-lg .chev svg{width:10px;height:6px}
+/* dòng cảnh giới đổi từ từ */
+.rl-anim{position:relative;display:inline-grid}.rl-anim i{grid-area:1/1;font-style:normal;white-space:nowrap}
+.rl-anim .o{animation:rlOut 1.4s ease-in forwards}.rl-anim .n{opacity:0;animation:rlIn 1.2s ease-out 1.2s forwards}
+@keyframes rlOut{0%,40%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px);filter:blur(2px)}}
+@keyframes rlIn{0%{opacity:0;transform:translateY(8px);color:var(--gold);text-shadow:0 0 10px rgba(240,200,90,.9)}60%{opacity:1;transform:none;color:var(--gold);text-shadow:0 0 10px rgba(240,200,90,.9)}100%{opacity:1;color:inherit;text-shadow:none}}
+/* thiên phú đổi bậc: khung cũ lóe sáng rồi đổi */
+.hud-av2.talchg .tfr,.talchg .tal-card{animation:talChg 1.7s ease-in-out forwards}
+@keyframes talChg{0%{filter:none}30%{filter:brightness(1.6) drop-shadow(0 0 6px #ffe39a)}60%{filter:brightness(2.4) drop-shadow(0 0 14px #fff2c4);transform:scale(1.06)}100%{filter:brightness(3) blur(1px) drop-shadow(0 0 18px #fff);opacity:.4;transform:scale(1.1)}}
+.hud-av2.talnew .tfr,.talnew .tal-card,.talnew .tcx-top,.talnew svg{animation:talNew 1.2s ease-out both}
+@keyframes talNew{0%{filter:brightness(3) drop-shadow(0 0 18px #fff);opacity:.3;transform:scale(1.12)}100%{filter:none;opacity:1;transform:none}}

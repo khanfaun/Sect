@@ -36,6 +36,8 @@ function goOrOpen(n){const r=G.run;if(!n)return false;if(n.id===r.at){openPlace(
 function botPlan(){
   if(typeof learnAll==='function')learnAll();if(!G.run)return;
   if(G.run.kvPick&&(!G.run.scene||G.run.scene.type==='place')){kvChoose(0);return;}
+  if(G.run.htPick){htChoose(0);}
+  if(G.run.asc)G.run.asc=null;
   {const X=typeof lkXkState==='function'&&lkXkState();if(X&&X.ok&&!(G.run.realm===0&&lkTang()>=9)&&(!G.run.scene||G.run.scene.type==='place')){lkXk();return;}}
   const r=G.run,s=S();
   // mục tiêu
