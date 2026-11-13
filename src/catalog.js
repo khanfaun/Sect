@@ -20,8 +20,8 @@ for(const [k,L] of Object.entries(CAT.base)){const K=RELIC_K.find(x=>x.k===k);if
 // ---------- 3. trang bị viết sẵn (luật mới: cảnh giới cần quyết định độ lớn; số trong Excel là số người chơi thấy) ----------
 function catRelic(x){return {name:x.n,k:x.k,tier:x.t,el:x.el,fx:Object.assign({},x.fx),fix:1,req:x.req,lore:catText(x.lore),cid:x.id,u:x.u?x.id:undefined};}
 function catOwned(id){const r=G.run;if((r.uSeen||[]).includes(id))return true;const E=r.eq||{};return r.relics.some(x=>x.cid===id)||Object.values(E).some(x=>x&&x.cid===id)||(r.dd||[]).some(d=>d.rel.cid===id);}
-function catRelicPick(tier){const req=relReqRoll();const t=clamp(tier+(chance(.25)?1:0)+(chance(.1)?1:0),0,6);
-  let pool=CAT.relics.filter(x=>!x.u&&x.req===req&&x.t===t);if(!pool.length)pool=CAT.relics.filter(x=>!x.u&&x.req===req);
+function catRelicPick(tier){const req=relReqRoll();const t=clamp(tier,0,6); // cùng phẩm, cùng cảnh giới cần như đồ game tự sinh
+  let pool=CAT.relics.filter(x=>!x.u&&x.req===req&&x.t===t);if(!pool.length)pool=CAT.relics.filter(x=>!x.u&&x.req===req&&Math.abs(x.t-t)<=1);if(!pool.length)pool=CAT.relics.filter(x=>!x.u&&x.req===req);
   return pool.length?catRelic(pick(pool)):null;}
 function catUniquePick(){const r=G.run;const pool=CAT.relics.filter(x=>x.u&&x.reg<=r.region&&!catOwned(x.id));
   if(!pool.length)return null;const x=pick(pool);(r.uSeen=r.uSeen||[]).push(x.id);return catRelic(x);}

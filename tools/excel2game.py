@@ -48,7 +48,7 @@ def region_of(v):
 def realm_of(v):  # "Cảnh giới cần" → chỉ số cảnh giới trong game (0 = Luyện Khí)
     return max(0, CG.index(v) - 1) if v in CG else 0
 
-def fx_from(d, sh, row, allowed, ncol, kcol='Chỉ số {}', vcol='Giá trị {}'):
+def fx_from(d, sh, row, allowed, ncol, kcol='Chỉ số {}', vcol='Giá trị {}', cap=True):
     fx = {}
     for i in range(1, ncol + 1):
         k, v = d.get(kcol.format(i)), num(d.get(vcol.format(i)))
@@ -59,7 +59,7 @@ def fx_from(d, sh, row, allowed, ncol, kcol='Chỉ số {}', vcol='Giá trị {}
             if m.group(1) not in HE: warn(sh, row, f'hệ {m.group(1)} lạ'); continue
             fx.setdefault('elP', {})[m.group(1)] = v; continue
         if k not in allowed: warn(sh, row, f'mã chỉ số lạ "{k}", bỏ'); continue
-        if k in CAP and v > CAP[k]: warn(sh, row, f'{k} {v} vượt trần, hạ về {CAP[k]}'); v = CAP[k]
+        if cap and k in CAP and v > CAP[k]: warn(sh, row, f'{k} {v} vượt trần, hạ về {CAP[k]}'); v = CAP[k]
         fx[k] = fx.get(k, 0) + v
     return fx
 
@@ -84,6 +84,27 @@ KFX = {'kiem': ['atkP'], 'dao': ['atkP', 'crit', 'critDmg'], 'hotam': ['hoTam', 
        'nhan': ['van', 'crit', 'critDmg'], 'lenh': ['tam', 'shopP'], 'dang': ['tam', 'tammaRes'], 'cot': ['execute'], 'huyet': ['drain'], 'phu': ['hpP', 'defP'], 'hap': ['elX'],
        'non': ['tam', 'defP'], 'gang': ['atkP', 'crit'], 'dai': ['hpP', 'tp'], 'hoa': ['craftP'], 'tran': ['bqP', 'bqSafe']}
 pending = collections.Counter()
+KBASE = {'kiem': {'atkP': 10}, 'dao': {'atkP': 7, 'crit': 5, 'critDmg': 10}, 'hotam': {'hoTam': 6, 'defP': 5}, 'phap': {'matkP': 12}, 'giap': {'defP': 20}, 'bao': {'hpP': 12},
+         'boi': {'mpP': 18}, 'ngoa': {'tp': 3, 'dodge': 3}, 'linh': {'startBlock': 12}, 'hoan': {'regenMp': 6}, 'dinh': {'pillP': 30}, 'phien': {'poisonHit': 0.15},
+         'chau': {'regenHp': 3}, 'kinh': {'reflect': 15}, 'gian': {'tvP': 15}, 'an': {'stunP': 8}, 'tram': {'dodge': 6}, 'holo': {'healAfter': 10}, 'thap': {'defP': 8, 'blockTurn': 4},
+         'tan': {'firstEvade': 1}, 'cam': {'weakStart': 1}, 'xich': {'vulnStart': 1}, 'but': {'ngo': 3}, 'tui': {'stonesP': 20, 'pillSlot': 2}, 'nhan': {'van': 3, 'crit': 3, 'critDmg': 8},
+         'lenh': {'tam': 3, 'shopP': 8}, 'dang': {'tam': 2, 'tammaRes': 30}, 'cot': {'execute': 20}, 'huyet': {'drain': 8}, 'phu': {'hpP': 6, 'defP': 8}, 'hap': {'elX': 20},
+         'non': {'tam': 2, 'defP': 6}, 'gang': {'atkP': 5, 'crit': 2}, 'dai': {'hpP': 6, 'tp': 1}, 'hoa': {'craftP': 6}, 'tran': {'bqP': 8, 'bqSafe': 15}}
+PBASE = {'atkP': 5, 'matkP': 6, 'defP': 8, 'hpP': 6, 'mpP': 8, 'tp': 1, 'crit': 3, 'critDmg': 8, 'dodge': 3, 'van': 1, 'tam': 1, 'ngo': 1, 'tvP': 5, 'lifeP': 5}
+NBASE = {'firstEvade': 1, 'startBlock': 12, 'blockTurn': 4, 'weakStart': 1, 'vulnStart': 1, 'poisonHit': 0.15, 'stunP': 8, 'reflect': 15, 'execute': 20, 'drain': 8, 'regenHp': 3,
+         'regenMp': 6, 'healAfter': 10, 'hoTam': 6, 'pillP': 30, 'stonesP': 20, 'pillSlot': 2, 'shopP': 8, 'tammaRes': 30, 'elX': 20, 'craftP': 6, 'bqSafe': 15, 'bqP': 8}
+REL_M = [1, 1.3, 1.7, 2.2, 2.8, 3.5, 4.3]
+COUNTK = {'firstEvade', 'weakStart', 'vulnStart', 'pillSlot'}
+def limit(sh, row, k, v, base, req, uniq):
+    """không cho vượt số của game ở cảnh giới đó quá 25% (đồ độc nhất 40%); dạng đếm tối đa 3"""
+    if k in ('tp', 'ngo', 'tam', 'van'): v = max(1, round(v)) if v > 0 else min(-1, round(v))
+    if v <= 0: return v
+    top = 3 if k in COUNTK else base * (1 if k in COUNTK else REL_M[req]) * (1.4 if uniq else 1.25) * 1.02
+    if k in ('tp', 'ngo', 'tam', 'van'): top = -(-top // 1)   # chỉ số điểm: làm tròn lên
+    if v > top + 0.5:
+        nv = round(top, 2) if k == 'poisonHit' else (int(top) if k in COUNTK else round(top, 1))
+        warn(sh, row, f'{k} {v} quá cao so với cảnh giới, hạ về {nv}'); return nv
+    return v
 for sh in EQ_SHEETS:
     for row, d in sheet_rows(wb[sh]):
         if code_of(d): continue   # đồ có sẵn trong game: chỉ để tra
@@ -95,9 +116,14 @@ for sh in EQ_SHEETS:
         if d.get('Cảnh giới cần') not in CG: err(sh, row, 'thiếu Cảnh giới cần'); continue
         req = CG.index(d['Cảnh giới cần']); t = idx(PHAM, d.get('Phẩm'), sh, row, 'Phẩm', 1); reg = region_of(d.get('Vùng xuất hiện')); uniq = d.get('Độc nhất') == 'Có'
         if not (reg <= req <= reg + 1) and not (uniq and reg == 4 and req == 6): warn(sh, row, f'Cảnh giới cần {d["Cảnh giới cần"]} lệch với vùng {reg}')
-        fx = fx_from(d, sh, row, EQ_FX, 3, 'Gốc {}', 'Số gốc {}')
-        if sorted(k2 for k2 in fx) != sorted(KFX[k]): warn(sh, row, f'mã gốc {list(fx)} khác mã gốc của dạng {KFX[k]}')
-        sub = fx_from(d, sh, row, EQ_FX, 4, 'Phụ {}', 'Số phụ {}')
+        fx = fx_from(d, sh, row, EQ_FX, 3, 'Gốc {}', 'Số gốc {}', cap=False)
+        for k2 in list(fx):
+            if k2 not in KBASE[k]: warn(sh, row, f'mã gốc {k2} không thuộc dạng này, bỏ'); del fx[k2]
+        for k2, b in KBASE[k].items():
+            if k2 not in fx:
+                fx[k2] = b if k2 in COUNTK else (round(b * REL_M[req], 2) if k2 == 'poisonHit' else max(1, round(b * REL_M[req])))
+                warn(sh, row, f'thiếu mã gốc {k2}, đã bù theo số của game: {fx[k2]}')
+        sub = fx_from(d, sh, row, EQ_FX, 4, 'Phụ {}', 'Số phụ {}', cap=False)
         neg = [k2 for k2, v in sub.items() if v < 0]
         if len(neg) > 1 or (neg and not uniq): warn(sh, row, 'chỉ đồ Độc nhất được 1 dòng âm, bỏ dòng âm thừa'); [sub.pop(k2) for k2 in (neg if not uniq else neg[1:])]; neg = neg[:1] if uniq else []
         for k2 in list(sub):
@@ -105,13 +131,15 @@ for sh in EQ_SHEETS:
             if not ok or k2 in fx: warn(sh, row, f'dòng phụ {k2} không hợp lệ (ngoài 13 mã phụ hoặc trùng mã gốc), bỏ'); del sub[k2]
         npos = sum(1 for v in sub.values() if v > 0)
         if npos != REL_X[t]: warn(sh, row, f'{PHAM[t]} cần {REL_X[t]} dòng phụ, đang có {npos}')
-        ex = fx_from(d, sh, row, EQ_FX, 1, 'Nội tại thêm', 'Số nội tại thêm') if d.get('Nội tại thêm') else {}
+        ex = fx_from(d, sh, row, EQ_FX, 1, 'Nội tại thêm', 'Số nội tại thêm', cap=False) if d.get('Nội tại thêm') else {}
         for k2 in list(ex):
             if k2 not in NT: warn(sh, row, f'"{k2}" không phải nội tại, bỏ'); del ex[k2]
             elif not uniq or any(x in NT for x in fx): warn(sh, row, 'chỉ đồ Độc nhất có dạng chưa có nội tại mới được thêm nội tại, bỏ'); del ex[k2]
+        for k2 in fx: fx[k2] = limit(sh, row, k2, fx[k2], KBASE[k][k2], req, uniq)
+        for k2 in sub: sub[k2] = limit(sh, row, k2, sub[k2], PBASE.get(k2, 5), req, uniq)
+        for k2 in ex: ex[k2] = limit(sh, row, k2, ex[k2], NBASE.get(k2, 10), req, True)
         allfx = dict(fx)
         for k2, v in list(sub.items()) + list(ex.items()): allfx[k2] = allfx.get(k2, 0) + v
-        if sum(1 for x in allfx if x in NT) > 1: warn(sh, row, 'có hơn 1 nội tại')
         el = d.get('Hệ') if d.get('Hệ') in HE else 'vo'
         if t == 6 and not uniq: warn(sh, row, 'Thần phẩm phải là đồ độc nhất, đặt Độc nhất = Có'); uniq = True
         C['relics'].append({'id': cid, 'n': d['Tên'], 'k': k, 'el': el, 't': t, 'req': req, 'reg': reg, 'u': 1 if uniq else 0, 'fx': allfx,

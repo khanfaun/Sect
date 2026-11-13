@@ -34,7 +34,7 @@ Cách chuyển:
    Riêng đồ Độc nhất ở vùng 4 được lên Độ Kiếp.
 3. **Gốc 1–3**: đúng các mã gốc của Dạng ở bảng A, không thêm không bớt. Số lấy theo cột cảnh giới tương ứng ở bảng A, lệch được ±25%.
 4. **Phụ 1–4**: đúng số dòng theo phẩm: Phàm 0 · Hoàng 1 · Huyền 1 · Địa 2 · Thiên 2 · Tiên 3 · Thần 4. Mã chọn trong 13 mã ở bảng B, không trùng mã gốc, không trùng nhau. Số lấy theo bảng B, lệch được ±25%. Chọn mã phụ hợp với Hệ, Dạng và lời tựa của món.
-5. **Nội tại**: mỗi món **tối đa 1** nội tại.
+5. **Nội tại**: nội tại có sẵn trong mã gốc của Dạng thì giữ đủ (trận pháp, túi trữ vật có 2).
    - Dạng nào trong bảng A đã có nội tại (ghi "Nội tại: …") thì không được thêm.
    - Chỉ món **Độc nhất** mà Dạng chưa có nội tại mới được ghi 1 nội tại ở cột "Nội tại thêm".
    - Số nội tại lấy "Số gốc" ở bảng C × hệ số cảnh giới. Riêng dạng đếm (firstEvade, weakStart, vulnStart, pillSlot) không nhân, ghi 1–3.
