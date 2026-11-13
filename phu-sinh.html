@@ -7181,7 +7181,8 @@ function tcOn(){const r=G.run;return !!(r&&r.realm===0&&!isPham()&&lkOn());}
 {const _bfq=btFinish;btFinish=function(){const r=G.run;if(r&&r.bt&&r.bt.to===1&&tcOn()){const Q=tcQual(r._tcDan).q;const _q=qOf;qOf=()=>Q;try{return _bfq.apply(this,arguments);}finally{qOf=_q;if(G.run)G.run._tcDan=0;}}return _bfq.apply(this,arguments);};}
 {const _pv=prepView;prepView=function(){const v=_pv();if(tcOn()){const sc=G.run.scene;const dan=sc.slots.some(i=>G.run.pills[i]&&G.run.pills[i].id==='trucco');const T0=tcQual(dan);v.q=T0.q;v.tcWhy=T0.why;v.next=null;}return v;};}
 // Trúc Cơ: đạo cơ là thêm một điều kiện cho từng phẩm (Hoàn mỹ ≥3, Địa đạo ≥6, Thiên đạo ≥10) và cộng tỉ lệ thành công
-const TC_DAO={4:3,2:6,3:10};const TC_DAO_RATE=0.015,TC_DAO_RMAX=0.15;
+const TC_DAO={4:3,2:6,3:10};// đạo cơ đủ (từ 3) cộng vừa phải; thiếu thì trừ mạnh, càng thiếu trừ càng nặng
+function tcDaoRate(d){return d>=10?0.10:d>=6?0.08:d>=3?0.05:[-0.35,-0.20,-0.10][Math.max(0,Math.floor(d))];}
 tcQual=function(dan,dao){const r=G.run;dao=dao==null?(r.dao||0):dao;const g=lkDone();if(g<10)return {q:1,g,why:['đột phá ở tầng '+Math.max(g,9)+', cần từ tầng 10']};
   const a=tuArt();const full=!!(a&&a.lv>=a.lines.length);
   if(dao<TC_DAO[4])return {q:1,g,why:['đạo cơ '+dao+', cần '+TC_DAO[4]+' cho Hoàn mỹ']};
@@ -7192,7 +7193,7 @@ tcQual=function(dan,dao){const r=G.run;dao=dao==null?(r.dao||0):dao;const g=lkDo
 btFinish=(function(prev){return function(){return prev.apply(this,arguments);};})(btFinish);
 {const _bfq2=btFinish;btFinish=function(){const r=G.run;if(r&&r.bt&&r.bt.to===1&&tcOn()){const dan=r._tcDan;const _q=qOf;qOf=p=>tcQual(dan,p).q;try{return _bfq2.apply(this,arguments);}finally{qOf=_q;}}return _bfq2.apply(this,arguments);};}
 {const _pv2=prepView;prepView=function(){const v=_pv2();if(tcOn()){const sc=G.run.scene;const dan=sc.slots.some(i=>G.run.pills[i]&&G.run.pills[i].id==='trucco');const T0=tcQual(dan,v.dao);v.q=T0.q;v.tcWhy=T0.why;}return v;};}
-{const _br=btRate;btRate=function(slots){const p=_br(slots);if(!tcOn())return p;const e=btEff(slots||[]);const d=(G.run.dao||0)+e.dao;return clamp(p+Math.min(TC_DAO_RMAX,d*TC_DAO_RATE),0.05,0.97);};}
+{const _br=btRate;btRate=function(slots){const p=_br(slots);if(!tcOn())return p;const e=btEff(slots||[]);const d=(G.run.dao||0)+e.dao;return clamp(p+tcDaoRate(d),0.05,0.97);};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
