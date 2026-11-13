@@ -511,7 +511,7 @@ const CG_R=[
  {i:3,n:'Nguyên Anh',d:'Phá đan thành anh, nguyên thần có hình có dạng. Thân xác hỏng còn có thể tái tạo.',brk:'Tới đỉnh phong, lịch luyện đủ, vượt chín đạo lôi kiếp.'},
  {i:4,n:'Hóa Thần',d:'Nguyên anh hóa thần, cảm ứng thiên địa. Đã đứng ở đỉnh nhân gian.',brk:'Viên mãn Hóa Thần, tìm tới nơi trời đất mỏng nhất để độ kiếp phi thăng.'},
  {i:5,n:'Độ Kiếp',d:'Lời đồn kể rằng qua được cửa này là rời khỏi nhân gian. Chưa ai quay về kể lại.',brk:''}];
-const LK_LEG={10:'Tầng mười: nghe nói ngàn năm trước có một vị Bạch Y kiếm khách từng đạt tới, đến nay chưa có người thứ hai.',11:'Tầng mười một: truyền thuyết kể rằng trăm vạn năm trước có người chạm tới. Thật giả không ai rõ.',12:'Tầng mười hai: xưa nay chỉ nghe đồn là có, chưa từng thấy ai đạt được.'};
+const LK_LEG={10:'Tầng mười: các bậc tiền bối kể rằng chuyện đã xảy ra từ rất lâu về trước, từng có người tu tới tầng này.',11:'Tầng mười một: chỉ còn trong truyền thuyết. Nghe nói thuở xa xưa có người đạt được, nhưng không ai còn nhớ là ai.',12:'Tầng mười hai: chưa từng nghe ai nói có người đạt tới. Chỉ là một cái tên ghi trong sách cổ.'};
 function cgK(){const m=G.meta;return m.cgK||(m.cgK=[]);}
 function cgKnow(k){return cgK().includes(k);}
 function cgReached(i){const r=G.run;const cur=isPham()?-1:r.realm;return i<=cur;}
