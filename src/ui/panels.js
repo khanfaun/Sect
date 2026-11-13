@@ -479,8 +479,12 @@ function talFrameVan(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tv'+t.
 function talFramePlain(t,id){const P=TF_PAL[t.tier];id=id||'tp'+t.tier;return `<svg viewBox="0 0 100 100" aria-hidden="true">${tfRing(P,id)}${tfGem(id,P,50,92,5)}${t.tier>=2?tfGem(id,P,50,8,5):''}</svg>`;}
 // trang trí ô Thiên phú: ngọc trên viền trên; dưới viền dưới là cánh (Thiên kiêu) / sen (Tinh anh) / ngọc
 function talCardOrn(t){const P=TF_PAL[t.tier];const id='tco'+t.tier;const defs=`<defs><linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".3" stop-color="${P.b}"/><stop offset=".55" stop-color="${P.c}"/><stop offset=".75" stop-color="${P.b}"/><stop offset="1" stop-color="${P.c}"/></linearGradient><radialGradient id="${id}g" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="${P.gem[0]}"/><stop offset=".45" stop-color="${P.gem[1]}"/><stop offset="1" stop-color="${P.gem[2]}"/></radialGradient></defs>`;
-  const top=t.tier>=2?`<svg class="tco-top" viewBox="0 0 20 24">${defs}${tfGem(id,P,10,12,9.5)}</svg>`:'';
-  const wing=f=>`<path transform="${f?'translate(120 0) scale(-1 1)':''}" d="M56 16C44 4 26 0 6 4C16 6 23 9 27 13C17 12 8 14 2 18C11 18 20 19 26 22C19 23 12 26 8 31C24 33 42 28 56 16Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".9"/>`;
-  const pet=(a,l)=>`<path transform="rotate(${a} 60 32)" d="M60 32C52 22 52 ${30-l} 60 ${22-l}C68 ${30-l} 68 22 60 32Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".9"/>`;
-  const bot=t.tier===4?wing(0)+wing(1):t.tier===3?pet(-62,6)+pet(62,6)+pet(-30,10)+pet(30,10)+pet(0,12):'';
-  return `${top}<svg class="tco-bot" viewBox="0 0 120 40">${defs}${bot}${tfGem(id,P,60,22,t.tier>=3?11:9.5)}</svg>`;}
+  const top=t.tier>=2?`<svg class="tco-top" viewBox="0 0 20 24">${defs}${tfGem(id,P,10,12,6)}</svg>`:'';
+  // đôi cánh Thiên kiêu: dài, dẹt, ba lớp lông vũ xếp chồng
+  const wing=f=>{const g=(d,o)=>`<path d="${d}" fill="url(#${id}m)" fill-opacity="${o}" stroke="${P.d}" stroke-width=".7"/>`;
+    return `<g transform="${f?'translate(160 0) scale(-1 1)':''}">${g('M72 16C60 9 40 6 4 8C22 10 34 12 44 14C30 14 18 16 8 19C24 19 38 19 50 18C40 20 30 23 22 27C40 26 58 22 72 16Z',1)}
+     ${g('M70 16C58 12 44 11 26 12C36 13 44 14 50 15C42 16 34 18 28 20C42 20 56 19 70 16Z',.9)}${g('M68 16C60 14 52 13.5 42 14C48 15 54 16 68 16Z',.8)}
+     <path d="M10 9C28 10 44 12 66 15M14 19C32 18 48 17 66 16M26 26C42 23 56 19 66 17" fill="none" stroke="${P.a}" stroke-opacity=".6" stroke-width=".6"/></g>`;};
+  const pet=(a,l)=>`<path transform="rotate(${a} 80 18)" d="M80 18C74 10 74 ${18-l} 80 ${12-l}C86 ${18-l} 86 10 80 18Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;
+  const bot=t.tier===4?wing(0)+wing(1):t.tier===3?pet(-64,8)+pet(64,8)+pet(-32,12)+pet(32,12)+pet(0,14):'';
+  return `${top}<svg class="tco-bot" viewBox="0 0 160 32">${defs}${bot}${tfGem(id,P,80,t.tier===3?14:16,7.5)}</svg>`;}

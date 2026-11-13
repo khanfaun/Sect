@@ -1231,3 +1231,8 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .tal-card.tal2 b{color:#eef4fa!important;text-shadow:0 1px 0 #3d4650,0 0 6px rgba(190,210,230,.6)}
 .tal-card.tal3 b{color:#ffd864!important;text-shadow:0 1px 0 #7a4a00,0 0 8px rgba(255,190,50,.75)}
 .tal-card.tal4 b{color:#eaf6ff!important;text-shadow:0 1px 0 #232a6a,0 0 8px rgba(140,200,255,.95),0 0 16px rgba(150,120,255,.6)}
+
+.tco-top{top:-12px}
+.tco-bot{width:160px;height:32px;margin-left:-80px;bottom:-16px}.tw1 .tco-bot,.tw2 .tco-bot{bottom:-16px}
+.tal-wrap{margin-bottom:16px}
+.tal-card.tal1,.tal-card.tal2,.tal-card.tal3,.tal-card.tal4{border-width:3px}
