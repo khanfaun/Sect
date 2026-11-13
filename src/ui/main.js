@@ -451,3 +451,10 @@ ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=nu
   return t.tier===UI.talS?t:Object.assign({},t,{tier:UI.talS});};}
 {const _tc2=talCardHTML;talCardHTML=function(){const h=_tc2();return UI.talA?h.replace('class="tal-wrap','class="talchg tal-wrap'):UI.talNew?h.replace('class="tal-wrap','class="talnew tal-wrap'):h;};}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e.stopImmediatePropagation();}},true);
+
+// xem thử hiệu ứng (không đổi gì ở nhân vật)
+ACT.fxDemo=k=>{const r=G.run;if(!r)return;UI.panel=null;UI.modal=null;
+  if(k==='tal'){const t=playerTal();if(t){UI.talS=(t.tier+4)%5;UI.talA=null;}return;}
+  const lb=realmLabel();const D=ASC_K.map(([kk,n],i)=>({k:kk,n,lv:1+(i*7)%3}));
+  if(k==='bt'){r.asc={k:'bt',demo:1,from:lb,to:lb,diff:D,place:'dong'};r.htPick=htOffer(3,r.realm+1);r._htDemo=1;}else r.asc={k:'xk',demo:1,from:lb,to:lb,diff:D};};
+{const _ap=ACT.ascPick;ACT.ascPick=()=>{const r=G.run;if(r&&r._htDemo&&r.asc&&r.asc.demo){if(UI.ascSel==null||!r.htPick)return;r.asc.ht=r.htPick[UI.ascSel];r.htPick=null;r._htDemo=0;UI.ascSel=null;UI.ascPh='res';return;}_ap();};}
