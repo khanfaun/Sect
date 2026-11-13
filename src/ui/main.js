@@ -446,7 +446,7 @@ ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=nu
 {const _hh=hudHTML;hudHTML=function(){let h=_hh();const A=UI.realmAnim;if(A&&G.run){const cur=esc(realmLabel());h=h.replace('>'+cur+'</span>','><span class="rl-anim'+(A.down?' dn':'')+'"><i class="o">'+esc(A.from)+'</i><i class="n">'+esc(A.to)+'</i></span></span>');}
   if(UI.talA)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talchg');else if(UI.talNew)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talnew');return h;};}
 // thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
-{const _ptR=playerTal;playerTal=function(){const t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talS==null)UI.talS=t.tier;
+{const _ptR=playerTal;playerTal=function(){let t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talFake){if(performance.now()<UI.talFake.until)t=Object.assign({},t,{tier:UI.talFake.tier});else{UI.talFake=null;UI.talS=t.tier;}}if(UI.talS==null)UI.talS=t.tier;
   if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};{const up=t.tier>UI.talS;const nw=performance.now();UI.lvGlow={t0:nw,t1:nw+3000,c:up?'up':'down'};setTimeout(()=>hnote(up?'Thiên phú thăng lên · '+TAL_N[t.tier]:'Thiên phú suy giảm · '+TAL_N[t.tier],up?'up':'down'),50);}setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
   return t.tier===UI.talS?t:Object.assign({},t,{tier:UI.talS});};}
 {const _tc2=talCardHTML;talCardHTML=function(){const h=_tc2();return UI.talA?h.replace('class="tal-wrap','class="talchg tal-wrap'):UI.talNew?h.replace('class="tal-wrap','class="talnew tal-wrap'):h;};}
@@ -454,6 +454,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e
 
 // xem thử hiệu ứng (không đổi gì ở nhân vật)
 ACT.fxDemo=k=>{const r=G.run;if(!r)return;UI.panel=null;UI.modal=null;
+  if(k==='lowhp'){UI.devLow=performance.now()+8000;return;}if(k==='heal'){edgeHeal();return;}
+  if(k==='talup'){const t=playerTal();UI.talFake={tier:4,until:performance.now()+5000};if(t&&t.tier===4)UI.talS=3;UI.talA=null;return;}
   if(k==='talup'||k==='taldn'){const t=playerTal();if(t){UI.talS=k==='talup'?t.tier-1:t.tier+1;UI.talA=null;}return;}
   if(k==='rldn'){const r=G.run;const t=tieu();const hi=isPham()?'Luyện Khí tầng 1':lkOn()?'Luyện Khí tầng '+Math.min(13,lkTang()+1):t<3?REALM[r.realm]+' '+TIEU[t+1]:REALM[Math.min(5,r.realm+1)]+' sơ kỳ';rlDrop(hi,realmLabel());return;}
   const lb=realmLabel();const D=ASC_K.map(([kk,n],i)=>({k:kk,n,lv:1+(i*7)%3}));
@@ -480,3 +482,17 @@ function rlDrop(from,to){const now=performance.now();UI.realmAnim={from,to,t0:no
 function rlRank(){const r=G.run;if(!r)return 0;return (isPham()?-1:r.realm)*100+(lkOn()?lkTang():tieu()*10);}
 {const _rd2=render;render=function(){_rd2();try{const r=G.run;if(!r||G.screen!=='map'){UI.rlPrev=null;return;}const k=rlRank(),lb=realmLabel();const P=UI.rlPrev;UI.rlPrev={r,k,lb};
   if(P&&P.r===r&&k<P.k&&!r.asc)rlDrop(P.lb,lb);}catch(e){}};}
+
+const DEV=true; // bản chính thức: đặt false để ẩn Dev test
+ACT.devOpen=()=>{UI.panel=null;UI.modal={k:'dev'};};
+// ----- máu thấp: rìa màn hình nhấp nháy u ám chậm rãi; thoát mức đỏ hoặc hết trọng thương: thở phào màu xanh -----
+function hpRatio(){const r=G.run;if(!r)return 1;const sc=r.scene;if(sc&&sc.type==='combat'&&sc.units){const me=sc.units.find(u=>u.isMain);if(me)return me.hp/Math.max(1,me.max);}return r.hp/Math.max(1,S().maxHp);}
+function edgeHeal(){UI.healT=performance.now()+2600;}
+setInterval(()=>{if(!G.run||G.screen!=='map'){UI.lowPrev=null;UI.injPrev=null;return;}const now=performance.now();
+  const low=hpRatio()<=0.2||(UI.devLow&&now<UI.devLow);const inj=injured();
+  if(UI.lowPrev&&!low)edgeHeal();if(UI.injPrev&&!inj)edgeHeal();UI.lowPrev=low;UI.injPrev=inj;
+  const el=document.getElementById('lowfx')||(()=>{const d=document.createElement('div');d.id='lowfx';document.body.appendChild(d);return d;})();
+  const st=G.run.asc?'':UI.healT&&now<UI.healT?'heal':low?'low':'';if(el.dataset.s!==st){el.dataset.s=st;el.className=st;}},250);
+// số khung hình: nhãn nhỏ góc phải, dạng "30FPS"
+{let fc=0,ft=performance.now();const tick=t=>{fc++;if(t-ft>=1000){const el=document.getElementById('fpsb')||(()=>{const d=document.createElement('div');d.id='fpsb';document.body.appendChild(d);return d;})();
+  el.hidden=!CFG.showFps;if(CFG.showFps){el.textContent=Math.round(fc*1000/(t-ft))+'FPS';const hd=document.getElementById('hud');el.style.top=((hd&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+6)+'px';}fc=0;ft=t;}requestAnimationFrame(tick);};requestAnimationFrame(tick);}

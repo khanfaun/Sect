@@ -1399,3 +1399,12 @@ details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim
 @keyframes rlInDn{0%{opacity:0;transform:translateY(-8px);color:var(--seal);text-shadow:0 0 8px rgba(120,10,20,.8)}60%{opacity:1;transform:none;color:var(--seal);text-shadow:0 0 8px rgba(120,10,20,.8)}100%{opacity:1;color:inherit;text-shadow:none}}
 .rl-anim.dn .o{animation-name:rlOutDn}
 @keyframes rlOutDn{0%,40%{opacity:1;transform:none}100%{opacity:0;transform:translateY(8px);filter:blur(2px)}}
+
+.mbox.dev .devg{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+/* máu thấp / hồi phục */
+#lowfx{position:fixed;inset:0;pointer-events:none;z-index:64;opacity:0}
+#lowfx.low{box-shadow:inset 0 0 80px 26px rgba(110,10,20,.6);background:radial-gradient(ellipse at center,transparent 55%,rgba(40,0,0,.2));animation:lowPulse 2.8s ease-in-out infinite}
+@keyframes lowPulse{0%,100%{opacity:.35}50%{opacity:1}}
+#lowfx.heal{box-shadow:inset 0 0 70px 22px rgba(60,170,90,.55);background:radial-gradient(ellipse at center,transparent 60%,rgba(80,190,110,.12));animation:healBreath 2.6s ease-out forwards}
+@keyframes healBreath{0%{opacity:0}20%{opacity:.55}38%{opacity:.25}70%{opacity:1}100%{opacity:0}}
+#fpsb{position:fixed;right:8px;z-index:66;font:600 10px/1 monospace;color:var(--ink2);background:color-mix(in srgb,var(--paper) 80%,transparent);padding:2px 5px;border-radius:4px;pointer-events:none}
