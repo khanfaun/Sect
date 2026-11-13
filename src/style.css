@@ -1394,3 +1394,8 @@ details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim
 :root[data-edge=up]::after{box-shadow:inset 0 0 60px 18px rgba(255,214,110,.55)}
 :root[data-edge=down]::after{box-shadow:inset 0 0 70px 22px rgba(110,10,20,.55);background:radial-gradient(ellipse at center,transparent 55%,rgba(40,0,0,.18))}
 @keyframes edgeGl{0%{opacity:0}20%{opacity:1}70%{opacity:.8}100%{opacity:0}}
+
+.rl-anim.dn .n{animation-name:rlInDn}
+@keyframes rlInDn{0%{opacity:0;transform:translateY(-8px);color:var(--seal);text-shadow:0 0 8px rgba(120,10,20,.8)}60%{opacity:1;transform:none;color:var(--seal);text-shadow:0 0 8px rgba(120,10,20,.8)}100%{opacity:1;color:inherit;text-shadow:none}}
+.rl-anim.dn .o{animation-name:rlOutDn}
+@keyframes rlOutDn{0%,40%{opacity:1;transform:none}100%{opacity:0;transform:translateY(8px);filter:blur(2px)}}

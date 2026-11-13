@@ -443,7 +443,7 @@ ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=nu
   UI.realmAnim={from:a.from,to:a.to,t0:now};UI.lvGlow={t0:now,t1:now+3600,c:'up'};setTimeout(()=>hnote((a.k==='bt'?'Đột phá thành công · ':'Xung kích thành công · ')+a.to,'up'),500);setTimeout(()=>{UI.realmAnim=null;render();},3400);
   const sc=r.scene;if(sc&&sc.type==='btres')endScene();if(G.run&&G.run.scene&&G.run.scene.type==='place')G.run.scene=null;UI.panel=null;saveSoon();};
 // thanh đầu: dòng cảnh giới chuyển từ cũ sang mới
-{const _hh=hudHTML;hudHTML=function(){let h=_hh();const A=UI.realmAnim;if(A&&G.run){const cur=esc(realmLabel());h=h.replace('>'+cur+'</span>','><span class="rl-anim"><i class="o">'+esc(A.from)+'</i><i class="n">'+esc(A.to)+'</i></span></span>');}
+{const _hh=hudHTML;hudHTML=function(){let h=_hh();const A=UI.realmAnim;if(A&&G.run){const cur=esc(realmLabel());h=h.replace('>'+cur+'</span>','><span class="rl-anim'+(A.down?' dn':'')+'"><i class="o">'+esc(A.from)+'</i><i class="n">'+esc(A.to)+'</i></span></span>');}
   if(UI.talA)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talchg');else if(UI.talNew)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talnew');return h;};}
 // thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
 {const _ptR=playerTal;playerTal=function(){const t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talS==null)UI.talS=t.tier;
@@ -454,7 +454,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e
 
 // xem thử hiệu ứng (không đổi gì ở nhân vật)
 ACT.fxDemo=k=>{const r=G.run;if(!r)return;UI.panel=null;UI.modal=null;
-  if(k==='tal'){const t=playerTal();if(t){UI.talS=(t.tier+4)%5;UI.talA=null;}return;}
+  if(k==='talup'||k==='taldn'){const t=playerTal();if(t){UI.talS=k==='talup'?t.tier-1:t.tier+1;UI.talA=null;}return;}
+  if(k==='rldn'){rlDrop(realmLabel()+' ',realmLabel());return;}
   const lb=realmLabel();const D=ASC_K.map(([kk,n],i)=>({k:kk,n,lv:1+(i*7)%3}));
   if(k==='bt'){r.asc={k:'bt',demo:1,from:lb,to:lb,diff:D,place:'dong'};r.htPick=htOffer(3,r.realm+1);r._htDemo=1;}else r.asc={k:'xk',demo:1,from:lb,to:lb,diff:D.map(d=>Object.assign({},d,{lv:1}))};};
 {const _ap=ACT.ascPick;ACT.ascPick=()=>{const r=G.run;if(r&&r._htDemo&&r.asc&&r.asc.demo){if(UI.ascSel==null||!r.htPick)return;r.asc.ht=r.htPick[UI.ascSel];r.htPick=null;r._htDemo=0;UI.ascSel=null;UI.ascPh='res';return;}_ap();};}
@@ -473,3 +474,9 @@ function invSig(){const r=G.run;const M={};const add=(n,c)=>{if(n)M[n]=(M[n]||0)
   for(const k in P){const d=P[k]-(now[k]||0);if(d>0&&n<3){hnote('Mất '+k+(d>1?' ×'+d:''),'down');n++;}}}catch(e){}};}
 // ----- rìa màn hình tỏa sáng theo hiệu ứng nhân vật -----
 setInterval(()=>{const g=UI.lvGlow;const on=g&&performance.now()<g.t1&&G.screen==='map'&&G.run&&!G.run.asc;const v=on?g.c||'up':'';if(document.documentElement.dataset.edge!==v){if(v)document.documentElement.dataset.edge=v;else delete document.documentElement.dataset.edge;}},150);
+
+// ----- rớt cảnh giới: hiệu ứng u ám -----
+function rlDrop(from,to){const now=performance.now();UI.realmAnim={from,to,t0:now,down:1};UI.lvGlow={t0:now,t1:now+3200,c:'down'};setTimeout(()=>{UI.realmAnim=null;render();},3400);setTimeout(()=>hnote('Cảnh giới tụt xuống · '+to,'down'),300);render();}
+function rlRank(){const r=G.run;if(!r)return 0;return (isPham()?-1:r.realm)*100+(lkOn()?lkTang():tieu()*10);}
+{const _rd2=render;render=function(){_rd2();try{const r=G.run;if(!r||G.screen!=='map'){UI.rlPrev=null;return;}const k=rlRank(),lb=realmLabel();const P=UI.rlPrev;UI.rlPrev={r,k,lb};
+  if(P&&P.r===r&&k<P.k&&!r.asc)rlDrop(P.lb,lb);}catch(e){}};}
