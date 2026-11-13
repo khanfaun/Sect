@@ -413,9 +413,30 @@ function relCmpLines(ns,rel,cmp){const keys=Object.keys(ns);if(!cmp)return fxLin
 function talCardHTML(){const t=playerTal();if(!t)return '';const p=t.p;const RLN={tap:'Ngũ hành tạp linh căn',tu:'Tứ linh căn',tam:'Tam linh căn',song:'Song linh căn',thien:'Thiên linh căn',bien:'Biến dị linh căn',cuc:'Cực linh căn'};
   const w=v=>['rất kém','kém','bình thường','tốt','rất tốt'][clamp(Math.round(v),0,4)];
   const tip='Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới.\n· Linh căn: '+(RLN[p.root]||'')+'\n· Tư chất: '+tcName(tuChat())+'\n· Tiên thiên khí vận: '+w(Math.min(4,p.kv*0.8))+'\n· Thể chất: '+w(Math.max(0,(p.th-1)*1.2))+'\n· Ngộ tính, đạo tâm, khí vận gốc: '+w(2+p.dev*0.5)+'\n\nNăm bậc: Phế vật, Phàm tài, Trung tài, Tinh anh, Thiên kiêu.';
-  return `<div class="tal-card tal${t.tier}"${ta(tip)}><b>${TAL_N[t.tier]}</b></div>`;}
+  return `<div class="tal-card tal${t.tier}"${ta(tip)}>${t.tier>=3?talWings(t):''}<b>${TAL_N[t.tier]}</b>${t.tier>=3?talWings(t,1):''}</div>`;}
 function talCls(t){return t&&t.tier>=3?' tf'+t.tier:'';}
 
 // mục gập/mở được trong tab Căn cơ (Thân thế, Tu luyện), cùng kiểu với mục Chiến đấu
 function sgBoxC(key,icon,name,rows){const o=UI.ccOpen=UI.ccOpen||{};const open=o[key]!==false;
   return `<details class="sgbox cbstat"${open?' open':''}><summary class="sgrp" data-act="ccOpen" data-arg="${key}">${ib(icon,'soft')}${name}<small>${open?'thu gọn':'mở rộng'}</small></summary><div class="kvl">${rows.join('')}</div></details>`;}
+
+// ----- khung Tinh anh / Thiên kiêu kiểu khung hạng: vòng kim loại nổi, ngọc và đôi cánh ở đỉnh, ngọc nhỏ ở đáy -----
+const TF_PAL={3:{a:'#ffffff',b:'#c9d2db',c:'#7e8994',d:'#3d4650',gem:['#d8f0ff','#3f8fd8','#123a6e'],glow:'rgba(150,200,255,.55)'},
+  4:{a:'#fff6c9',b:'#f1c232',c:'#a8720c',d:'#4a2c00',gem:['#ffd6d0','#e0302a','#5a0a08'],glow:'rgba(255,200,60,.6)'}};
+function tfWing(P,id,flip){return `<path transform="${flip?'translate(100 0) scale(-1 1)':''}" d="M42 12C34 4 22 2 12 6C19 7 24 9 27 12C20 11 14 12 9 15C16 15 22 16 26 19C21 19 17 20 14 23C22 23 30 21 36 17Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;}
+function talFrameSVG(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tf'+t.tier;
+  return `<svg viewBox="0 0 100 100" aria-hidden="true"><defs>
+   <linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".3" stop-color="${P.b}"/><stop offset=".55" stop-color="${P.c}"/><stop offset=".75" stop-color="${P.b}"/><stop offset="1" stop-color="${P.c}"/></linearGradient>
+   <radialGradient id="${id}g" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="${P.gem[0]}"/><stop offset=".45" stop-color="${P.gem[1]}"/><stop offset="1" stop-color="${P.gem[2]}"/></radialGradient></defs>
+   <circle cx="50" cy="50" r="40.6" fill="none" stroke="${P.d}" stroke-width="10.8"/>
+   <circle cx="50" cy="50" r="40.6" fill="none" stroke="url(#${id}m)" stroke-width="9"/>
+   <circle cx="50" cy="50" r="44.2" fill="none" stroke="${P.a}" stroke-opacity=".7" stroke-width=".7"/>
+   <circle cx="50" cy="50" r="36.9" fill="none" stroke="${P.d}" stroke-opacity=".8" stroke-width=".9"/>
+   <path d="M17 32A38 38 0 0 1 50 11" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="1.6" stroke-linecap="round"/>
+   ${tfWing(P,id,0)}${tfWing(P,id,1)}
+   <path d="M50 1L57 9L50 17L43 9Z" fill="url(#${id}g)" stroke="${P.d}" stroke-width="1"/><path d="M50 3.5L53 7.5L50 9L47 7.5Z" fill="#fff" fill-opacity=".7"/>
+   <path d="M50 86L54 91L50 96L46 91Z" fill="url(#${id}g)" stroke="${P.d}" stroke-width=".8"/></svg>`;}
+
+function talWings(t,flip){const P=TF_PAL[t.tier];const id='tcw'+t.tier+(flip?'r':'l');return `<svg class="tcw${flip?' r':''}" viewBox="0 0 48 26" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".4" stop-color="${P.b}"/><stop offset=".75" stop-color="${P.c}"/><stop offset="1" stop-color="${P.b}"/></linearGradient></defs>
+  <path d="M46 13C38 3 24 0 10 4C18 5 23 7 26 10C18 9 10 10 4 13C10 13 18 14 24 16C18 16 12 18 8 22C20 24 34 21 46 13Z" fill="url(#${id})" stroke="${P.d}" stroke-width=".8"/>
+  <path d="M42 13L46 9L50 13L46 17Z" transform="translate(-4 0)" fill="${P.gem[1]}" stroke="${P.d}" stroke-width=".7"/></svg>`;}
