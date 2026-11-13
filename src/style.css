@@ -1206,3 +1206,28 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 :root[data-tf=ink] .tal-card.tal3::after{content:'英'}
 
 .tfr svg.tf-rot{transform:rotate(180deg)}
+
+/* ===== bảng màu khung theo bậc: Phàm tài đồng · Trung tài bạc · Tinh anh vàng kim · Thiên kiêu kim cương ===== */
+:root{--tg1:linear-gradient(135deg,#ffe2c4,#c07a40,#f5c9a0,#6e3a18,#d9945a);--tg2:linear-gradient(135deg,#fff,#9aa5b1,#eef2f6,#5f6a76,#dfe5ea);--tg3:linear-gradient(135deg,#fff3c0,#d9a521,#fff0a8,#8a5a05,#ffd75e);--tg4:linear-gradient(135deg,#ffffff,#9fd8ff,#f2f8ff,#6a74d8,#cfe9ff,#ffffff)}
+.u-av.tf1,.av.tf1{border:3px solid transparent!important;background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tg1) border-box!important;box-shadow:0 0 0 1px #3a1e0c!important}
+.u-av.tf2,.av.tf2{border:3px solid transparent!important;background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tg2) border-box!important;box-shadow:0 0 0 1px #3d4650!important}
+.u-av.tf3,.av.tf3{background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tg3) border-box!important;box-shadow:0 0 0 1px #4a2c00,0 0 7px rgba(255,200,60,.6)!important}
+.u-av.tf4,.av.tf4{background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tg4) border-box!important;box-shadow:0 0 0 1px #232a6a,0 0 9px rgba(150,200,255,.8)!important}
+.hud-av2.tf1,.hud-av2.tf2,.hud-av2.tf3,.hud-av2.tf4{box-shadow:none!important;overflow:visible!important}
+.hud-av2.tf4 .tfr{filter:drop-shadow(0 0 5px rgba(150,200,255,.8)) drop-shadow(0 1px 2px rgba(0,0,0,.35))}.hud-av2.tf3 .tfr{filter:drop-shadow(0 0 4px rgba(255,200,60,.55)) drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.hud-av2.tf1 .tfr,.hud-av2.tf2 .tfr{filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+/* ô Thiên phú: ngọc trên viền trên, cánh/sen/ngọc đè lên viền dưới */
+.tal-wrap{position:relative;margin:8px 0 22px}.tal-wrap .tal-card{margin:0}
+.tco-top{position:absolute;left:50%;top:-11px;width:20px;height:24px;margin-left:-10px;z-index:2;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
+.tco-bot{position:absolute;left:50%;bottom:-24px;width:120px;height:40px;margin-left:-60px;z-index:2;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.tw1 .tco-bot,.tw2 .tco-bot{bottom:-22px}
+.tal-card.tal1,.tal-card.tal2,.tal-card.tal3,.tal-card.tal4{position:relative;display:flex;align-items:center;justify-content:center;padding:12px 12px 14px;border:2px solid transparent;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 2px 8px rgba(0,0,0,.25)}
+.tal-card.tal1{background:radial-gradient(ellipse at 50% 0%,#6a3f22,#2a160a 75%) padding-box,var(--tg1) border-box}
+.tal-card.tal2{background:radial-gradient(ellipse at 50% 0%,#46525e,#1e252d 75%) padding-box,var(--tg2) border-box}
+.tal-card.tal3{background:radial-gradient(ellipse at 50% 0%,#6b3f12,#2a1606 75%) padding-box,var(--tg3) border-box}
+.tal-card.tal4{background:radial-gradient(ellipse at 50% 0%,#3a3f9a,#111640 75%) padding-box,var(--tg4) border-box;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 0 14px rgba(150,200,255,.55)}
+.tal-card.tal1 b,.tal-card.tal2 b,.tal-card.tal3 b,.tal-card.tal4 b{background:none!important;-webkit-background-clip:border-box;background-clip:border-box;font-size:1.3em;letter-spacing:.12em;text-transform:uppercase;filter:none!important}
+.tal-card.tal1 b{color:#f3c9a0!important;text-shadow:0 1px 0 #3a1e0c,0 0 6px rgba(210,130,70,.6)}
+.tal-card.tal2 b{color:#eef4fa!important;text-shadow:0 1px 0 #3d4650,0 0 6px rgba(190,210,230,.6)}
+.tal-card.tal3 b{color:#ffd864!important;text-shadow:0 1px 0 #7a4a00,0 0 8px rgba(255,190,50,.75)}
+.tal-card.tal4 b{color:#eaf6ff!important;text-shadow:0 1px 0 #232a6a,0 0 8px rgba(140,200,255,.95),0 0 16px rgba(150,120,255,.6)}

@@ -340,4 +340,4 @@ const Art=(()=>{
 function sceneCv(seed,reg,type,cls,figs){const night=G.meta&&G.meta.world&&partOf(W().t)==='dem'?1:0;return `<canvas class="art ${cls||''}" data-scene="${esc([seed,reg,type||'',night,figs||''].join('~'))}"></canvas>`;}
 
 // khung thiên phú trên bản đồ: Tinh anh ánh bạc, Thiên kiêu ánh kim
-function talGrad(ctx,x,y,r,t){if(!t||t.tier<3)return null;const g=ctx.createLinearGradient(x-r,y-r,x+r,y+r);const S=t.tier===4?['#fff4c2','#d9a521','#fff0a8','#9a6a08','#ffd75e']:['#ffffff','#9aa4ae','#f4f7fa','#6f7984','#dfe5ea'];S.forEach((c,i)=>g.addColorStop(i/(S.length-1),c));return g;}
+function talGrad(ctx,x,y,r,t){if(!t||t.tier<1)return null;const g=ctx.createLinearGradient(x-r,y-r,x+r,y+r);const S={4:['#ffffff','#9fd8ff','#f2f8ff','#6a74d8','#cfe9ff'],3:['#fff4c2','#d9a521','#fff0a8','#9a6a08','#ffd75e'],2:['#ffffff','#9aa4ae','#f4f7fa','#6f7984','#dfe5ea'],1:['#ffe2c4','#c07a40','#f5c9a0','#6e3a18','#d9945a']}[t.tier];S.forEach((c,i)=>g.addColorStop(i/(S.length-1),c));return g;}

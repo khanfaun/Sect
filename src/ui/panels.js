@@ -413,16 +413,18 @@ function relCmpLines(ns,rel,cmp){const keys=Object.keys(ns);if(!cmp)return fxLin
 function talCardHTML(){const t=playerTal();if(!t)return '';const p=t.p;const RLN={tap:'Ngũ hành tạp linh căn',tu:'Tứ linh căn',tam:'Tam linh căn',song:'Song linh căn',thien:'Thiên linh căn',bien:'Biến dị linh căn',cuc:'Cực linh căn'};
   const w=v=>['rất kém','kém','bình thường','tốt','rất tốt'][clamp(Math.round(v),0,4)];
   const tip='Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới.\n· Linh căn: '+(RLN[p.root]||'')+'\n· Tư chất: '+tcName(tuChat())+'\n· Tiên thiên khí vận: '+w(Math.min(4,p.kv*0.8))+'\n· Thể chất: '+w(Math.max(0,(p.th-1)*1.2))+'\n· Ngộ tính, đạo tâm, khí vận gốc: '+w(2+p.dev*0.5)+'\n\nNăm bậc: Phế vật, Phàm tài, Trung tài, Tinh anh, Thiên kiêu.';
-  return `<div class="tal-card tal${t.tier}"${ta(tip)}>${t.tier>=3?talWings(t):''}<b>${TAL_N[t.tier]}</b>${t.tier>=3?talWings(t,1):''}</div>`;}
-function talCls(t){return t&&t.tier>=3?' tf'+t.tier:'';}
+  return `<div class="tal-wrap tw${t.tier}"><div class="tal-card tal${t.tier}"${ta(tip)}><b>${TAL_N[t.tier]}</b></div>${t.tier>=1?talCardOrn(t):''}</div>`;}
+function talCls(t){return t&&t.tier>=1?' tf'+t.tier:'';}
 
 // mục gập/mở được trong tab Căn cơ (Thân thế, Tu luyện), cùng kiểu với mục Chiến đấu
 function sgBoxC(key,icon,name,rows){const o=UI.ccOpen=UI.ccOpen||{};const open=o[key]!==false;
   return `<details class="sgbox cbstat"${open?' open':''}><summary class="sgrp" data-act="ccOpen" data-arg="${key}">${ib(icon,'soft')}${name}<small>${open?'thu gọn':'mở rộng'}</small></summary><div class="kvl">${rows.join('')}</div></details>`;}
 
 // ----- khung Tinh anh / Thiên kiêu kiểu khung hạng: vòng kim loại nổi, ngọc và đôi cánh ở đỉnh, ngọc nhỏ ở đáy -----
-const TF_PAL={3:{a:'#ffffff',b:'#c9d2db',c:'#7e8994',d:'#3d4650',gem:['#d8f0ff','#3f8fd8','#123a6e'],glow:'rgba(150,200,255,.55)'},
-  4:{a:'#fff6c9',b:'#f1c232',c:'#a8720c',d:'#4a2c00',gem:['#ffd6d0','#e0302a','#5a0a08'],glow:'rgba(255,200,60,.6)'}};
+const TF_PAL={1:{a:'#ffe2c4',b:'#d08a4e',c:'#7a4320',d:'#3a1e0c',gem:['#ffe0c8','#d0642a','#5a2008'],glow:'rgba(210,130,70,.45)'},
+  2:{a:'#ffffff',b:'#c9d2db',c:'#7e8994',d:'#3d4650',gem:['#d8f0ff','#3f8fd8','#123a6e'],glow:'rgba(170,190,210,.5)'},
+  3:{a:'#fff6c9',b:'#f1c232',c:'#a8720c',d:'#4a2c00',gem:['#ffd6d0','#e0302a','#5a0a08'],glow:'rgba(255,200,60,.6)'},
+  4:{a:'#ffffff',b:'#bfe6ff',c:'#7a86e0',d:'#232a6a',gem:['#ffffff','#7fd8ff','#3346c8'],glow:'rgba(150,200,255,.75)'}};
 function tfWing(P,id,flip){return `<path transform="${flip?'translate(100 0) scale(-1 1)':''}" d="M42 12C34 4 22 2 12 6C19 7 24 9 27 12C20 11 14 12 9 15C16 15 22 16 26 19C21 19 17 20 14 23C22 23 30 21 36 17Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;}
 function talFrameHang(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tf'+t.tier;
   return `<svg viewBox="0 0 100 100" aria-hidden="true" class="tf-rot"><defs>
@@ -455,7 +457,7 @@ function talFrameInk(t,id){const P=TF_INK[t.tier];if(!P)return '';id=id||'ti'+t.
    <g transform="translate(70 72) rotate(-8)"><rect x="0" y="0" width="22" height="22" rx="2" fill="${P.seal}"/><rect x="2" y="2" width="18" height="18" rx="1" fill="none" stroke="#f6eedd" stroke-width="1.2"/>
     <text x="11" y="16.5" text-anchor="middle" font-size="14" font-weight="700" fill="#f6eedd" font-family="serif">${P.ch}</text></g></svg>`;}
 function talWingsInk(t,flip){const P=TF_INK[t.tier];return `<svg class="tcw${flip?' r':''}" viewBox="0 0 48 26" aria-hidden="true"><path d="M46 14C34 9 20 10 4 15C16 12 30 12 46 16Z" fill="${P.ink}" fill-opacity=".8"/><path d="M40 19C30 17 20 18 10 21C20 19 30 19.5 40 21Z" fill="${P.ink}" fill-opacity=".45"/></svg>`;}
-function talFrameSVG(t,id){return t.tier===3?talFrameSen(t,id):talFrameHang(t,id);} // Thiên kiêu: Song dực · Tinh anh: Liên hoa
+function talFrameSVG(t,id){return t.tier===4?talFrameHang(t,id):t.tier===3?talFrameSen(t,id):t.tier>=1?talFramePlain(t,id):'';} // Thiên kiêu: cánh · Tinh anh: sen · Trung tài: 2 ngọc · Phàm tài: 1 ngọc dưới
 function talWings(t,flip){return talWingsHang(t,flip);}
 
 // vòng kim loại dùng chung cho các kiểu khung
@@ -472,3 +474,13 @@ function talFrameSen(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'ts'+t.
 function talFrameVan(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tv'+t.tier;
   const cl=f=>`<path transform="${f?'translate(100 0) scale(-1 1)':''}" d="M47 93C38 98 22 96 16 86C11 78 16 69 24 70C31 71 32 79 26 80C22 81 21 76 24 75C19 76 20 85 28 86C36 87 38 78 34 72C42 78 42 88 47 93Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;
   return `<svg viewBox="0 0 100 100" aria-hidden="true">${tfRing(P,id)}${cl(0)}${cl(1)}${tfGem(id,P,50,92,6)}${tfGem(id,P,50,9,4.5)}</svg>`;}
+
+// khung tròn đơn: Trung tài 2 ngọc, Phàm tài 1 ngọc dưới
+function talFramePlain(t,id){const P=TF_PAL[t.tier];id=id||'tp'+t.tier;return `<svg viewBox="0 0 100 100" aria-hidden="true">${tfRing(P,id)}${tfGem(id,P,50,92,5)}${t.tier>=2?tfGem(id,P,50,8,5):''}</svg>`;}
+// trang trí ô Thiên phú: ngọc trên viền trên; dưới viền dưới là cánh (Thiên kiêu) / sen (Tinh anh) / ngọc
+function talCardOrn(t){const P=TF_PAL[t.tier];const id='tco'+t.tier;const defs=`<defs><linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".3" stop-color="${P.b}"/><stop offset=".55" stop-color="${P.c}"/><stop offset=".75" stop-color="${P.b}"/><stop offset="1" stop-color="${P.c}"/></linearGradient><radialGradient id="${id}g" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="${P.gem[0]}"/><stop offset=".45" stop-color="${P.gem[1]}"/><stop offset="1" stop-color="${P.gem[2]}"/></radialGradient></defs>`;
+  const top=t.tier>=2?`<svg class="tco-top" viewBox="0 0 20 24">${defs}${tfGem(id,P,10,12,9.5)}</svg>`:'';
+  const wing=f=>`<path transform="${f?'translate(120 0) scale(-1 1)':''}" d="M56 16C44 4 26 0 6 4C16 6 23 9 27 13C17 12 8 14 2 18C11 18 20 19 26 22C19 23 12 26 8 31C24 33 42 28 56 16Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".9"/>`;
+  const pet=(a,l)=>`<path transform="rotate(${a} 60 32)" d="M60 32C52 22 52 ${30-l} 60 ${22-l}C68 ${30-l} 68 22 60 32Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".9"/>`;
+  const bot=t.tier===4?wing(0)+wing(1):t.tier===3?pet(-62,6)+pet(62,6)+pet(-30,10)+pet(30,10)+pet(0,12):'';
+  return `${top}<svg class="tco-bot" viewBox="0 0 120 40">${defs}${bot}${tfGem(id,P,60,22,t.tier>=3?11:9.5)}</svg>`;}

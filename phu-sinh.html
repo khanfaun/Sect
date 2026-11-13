@@ -1217,6 +1217,31 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 
 .tfr svg.tf-rot{transform:rotate(180deg)}
 
+/* ===== bảng màu khung theo bậc: Phàm tài đồng · Trung tài bạc · Tinh anh vàng kim · Thiên kiêu kim cương ===== */
+:root{--tg1:linear-gradient(135deg,#ffe2c4,#c07a40,#f5c9a0,#6e3a18,#d9945a);--tg2:linear-gradient(135deg,#fff,#9aa5b1,#eef2f6,#5f6a76,#dfe5ea);--tg3:linear-gradient(135deg,#fff3c0,#d9a521,#fff0a8,#8a5a05,#ffd75e);--tg4:linear-gradient(135deg,#ffffff,#9fd8ff,#f2f8ff,#6a74d8,#cfe9ff,#ffffff)}
+.u-av.tf1,.av.tf1{border:3px solid transparent!important;background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tg1) border-box!important;box-shadow:0 0 0 1px #3a1e0c!important}
+.u-av.tf2,.av.tf2{border:3px solid transparent!important;background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tg2) border-box!important;box-shadow:0 0 0 1px #3d4650!important}
+.u-av.tf3,.av.tf3{background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tg3) border-box!important;box-shadow:0 0 0 1px #4a2c00,0 0 7px rgba(255,200,60,.6)!important}
+.u-av.tf4,.av.tf4{background:linear-gradient(var(--paper2),var(--paper2)) padding-box,var(--tg4) border-box!important;box-shadow:0 0 0 1px #232a6a,0 0 9px rgba(150,200,255,.8)!important}
+.hud-av2.tf1,.hud-av2.tf2,.hud-av2.tf3,.hud-av2.tf4{box-shadow:none!important;overflow:visible!important}
+.hud-av2.tf4 .tfr{filter:drop-shadow(0 0 5px rgba(150,200,255,.8)) drop-shadow(0 1px 2px rgba(0,0,0,.35))}.hud-av2.tf3 .tfr{filter:drop-shadow(0 0 4px rgba(255,200,60,.55)) drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.hud-av2.tf1 .tfr,.hud-av2.tf2 .tfr{filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+/* ô Thiên phú: ngọc trên viền trên, cánh/sen/ngọc đè lên viền dưới */
+.tal-wrap{position:relative;margin:8px 0 22px}.tal-wrap .tal-card{margin:0}
+.tco-top{position:absolute;left:50%;top:-11px;width:20px;height:24px;margin-left:-10px;z-index:2;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
+.tco-bot{position:absolute;left:50%;bottom:-24px;width:120px;height:40px;margin-left:-60px;z-index:2;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.tw1 .tco-bot,.tw2 .tco-bot{bottom:-22px}
+.tal-card.tal1,.tal-card.tal2,.tal-card.tal3,.tal-card.tal4{position:relative;display:flex;align-items:center;justify-content:center;padding:12px 12px 14px;border:2px solid transparent;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 2px 8px rgba(0,0,0,.25)}
+.tal-card.tal1{background:radial-gradient(ellipse at 50% 0%,#6a3f22,#2a160a 75%) padding-box,var(--tg1) border-box}
+.tal-card.tal2{background:radial-gradient(ellipse at 50% 0%,#46525e,#1e252d 75%) padding-box,var(--tg2) border-box}
+.tal-card.tal3{background:radial-gradient(ellipse at 50% 0%,#6b3f12,#2a1606 75%) padding-box,var(--tg3) border-box}
+.tal-card.tal4{background:radial-gradient(ellipse at 50% 0%,#3a3f9a,#111640 75%) padding-box,var(--tg4) border-box;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 0 14px rgba(150,200,255,.55)}
+.tal-card.tal1 b,.tal-card.tal2 b,.tal-card.tal3 b,.tal-card.tal4 b{background:none!important;-webkit-background-clip:border-box;background-clip:border-box;font-size:1.3em;letter-spacing:.12em;text-transform:uppercase;filter:none!important}
+.tal-card.tal1 b{color:#f3c9a0!important;text-shadow:0 1px 0 #3a1e0c,0 0 6px rgba(210,130,70,.6)}
+.tal-card.tal2 b{color:#eef4fa!important;text-shadow:0 1px 0 #3d4650,0 0 6px rgba(190,210,230,.6)}
+.tal-card.tal3 b{color:#ffd864!important;text-shadow:0 1px 0 #7a4a00,0 0 8px rgba(255,190,50,.75)}
+.tal-card.tal4 b{color:#eaf6ff!important;text-shadow:0 1px 0 #232a6a,0 0 8px rgba(140,200,255,.95),0 0 16px rgba(150,120,255,.6)}
+
 </style>
 </head>
 <body>
@@ -7769,7 +7794,7 @@ const Art=(()=>{
 function sceneCv(seed,reg,type,cls,figs){const night=G.meta&&G.meta.world&&partOf(W().t)==='dem'?1:0;return `<canvas class="art ${cls||''}" data-scene="${esc([seed,reg,type||'',night,figs||''].join('~'))}"></canvas>`;}
 
 // khung thiên phú trên bản đồ: Tinh anh ánh bạc, Thiên kiêu ánh kim
-function talGrad(ctx,x,y,r,t){if(!t||t.tier<3)return null;const g=ctx.createLinearGradient(x-r,y-r,x+r,y+r);const S=t.tier===4?['#fff4c2','#d9a521','#fff0a8','#9a6a08','#ffd75e']:['#ffffff','#9aa4ae','#f4f7fa','#6f7984','#dfe5ea'];S.forEach((c,i)=>g.addColorStop(i/(S.length-1),c));return g;}
+function talGrad(ctx,x,y,r,t){if(!t||t.tier<1)return null;const g=ctx.createLinearGradient(x-r,y-r,x+r,y+r);const S={4:['#ffffff','#9fd8ff','#f2f8ff','#6a74d8','#cfe9ff'],3:['#fff4c2','#d9a521','#fff0a8','#9a6a08','#ffd75e'],2:['#ffffff','#9aa4ae','#f4f7fa','#6f7984','#dfe5ea'],1:['#ffe2c4','#c07a40','#f5c9a0','#6e3a18','#d9945a']}[t.tier];S.forEach((c,i)=>g.addColorStop(i/(S.length-1),c));return g;}
 
 // ---------- màn bản đồ: thẻ trạng thái, nút bản đồ, thẻ địa điểm ----------
 function sectText(){const r=G.run;return r.flags.tongmon?'Đệ tử tông môn':'Tán tu · Tự do';}
@@ -7799,7 +7824,7 @@ function hudHTML(){
   const ring=`<svg class="hud-ring" viewBox="0 0 64 64"><path class="bg" d="M5 32A27 27 0 0 1 59 32"/><path class="bg" d="M5 32A27 27 0 0 0 59 32"/>
     <path class="hp ${hc}" d="M5 32A27 27 0 0 1 59 32" stroke-dasharray="${(HC*hp).toFixed(1)} ${HC.toFixed(1)}"/><path class="mp" d="M5 32A27 27 0 0 0 59 32" stroke-dasharray="${(HC*mp).toFixed(1)} ${HC.toFixed(1)}"/></svg>`;
   const tm=r.tamma;
-  let h=`<div class="hud-top"><button class="hud-av hud-av2${talCls(playerTal())}" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Khí huyết '+pctOf(r.hp,s.maxHp)+' (nửa trên)\nLinh lực '+(s.maxMp?pctOf(r.mp,s.maxMp):'chưa có')+' (nửa dưới)\nChạm để mở nhân vật')}>${ring}<span class="hud-avi">${av}</span>${(()=>{const t=playerTal();return t&&t.tier>=3?`<span class="tfr">${talFrameSVG(t,'hudtf')}</span>`:'';})()}</button>
+  let h=`<div class="hud-top"><button class="hud-av hud-av2${talCls(playerTal())}" data-act="panel" data-arg="char" aria-label="Nhân vật"${ta('Khí huyết '+pctOf(r.hp,s.maxHp)+' (nửa trên)\nLinh lực '+(s.maxMp?pctOf(r.mp,s.maxMp):'chưa có')+' (nửa dưới)\nChạm để mở nhân vật')}>${ring}<span class="hud-avi">${av}</span>${(()=>{const t=playerTal();return t&&t.tier>=1?`<span class="tfr">${talFrameSVG(t,'hudtf')}</span>`:'';})()}</button>
    <div class="hud-id"><span class="nmrow"><b class="nm">${esc(r.ten)}</b>${btBadge()}</span><span class="rl"${ta(realmLabel()+'\nTu vi '+tvShow()+'%\n'+rootView(r.root).n+': '+r.root.els.map(e=>EL[e].n).join(', '))}>${esc(realmLabel())}</span><small class="${warn?'bad':''}"${ta('Tuổi / thọ nguyên '+s.life+(warn?'\nThọ nguyên sắp cạn!':''))}>${Math.floor(r.age)} tuổi · còn ${Math.max(0,Math.floor(left))} năm${hurt}</small></div><div class="hud-clk3" id="clk"${ta(dateText(t)+'\nBuổi '+pa.n+', mùa '+SEASON[seasonOf(t)])}>${clkStr(t)}</div>
    </div><div class="hud-stats"><span class="hs lc"${ta('Lực chiến: '+rateOf('lc',lucChien()).t+'\nSo với người cùng cảnh giới, tính từ chỉ số chiến đấu và trang bị.')}>${ic('sword')}${RT('lc',lucChien())}</span><span class="hs tu"${ta('Tốc độ tu luyện khi bế quan ở đây: '+rateOf('bq',bqReal(),'toc').t+'\nThổ nạp: '+rateOf('thonap',thonapPct(),'toc').t)}>${ic('seat')}${RT('bq',bqReal(),'toc')}</span><span class="hs tm${tm>=60?' hi':''}"${ta('Tâm ma: '+tmWord(tm).toLowerCase()+'\nĐầy sẽ phải đối mặt với chính mình')}>${ic('skull')}${tmWord(tm)}</span><span class="hs dt"${ta('Đạo tâm: '+rateOf('tam',s.tam,'muc').t+'\nChống ảo cảnh, giúp đột phá')}>${ic('lotus')}${RT('tam',s.tam,'muc')}</span><span class="hs st"${ta('Linh thạch')}><i class="rh"></i>${fmtN(r.st)}</span></div>
    <i class="hud-tv" style="width:${clamp(tvShow(),0,100)}%"${ta('Tu vi '+tvShow()+'%')}></i><i class="hud-ll" style="width:${llShow()}%"${ta('Lịch luyện '+llShow()+'%')}></i>`;
@@ -8841,16 +8866,18 @@ function relCmpLines(ns,rel,cmp){const keys=Object.keys(ns);if(!cmp)return fxLin
 function talCardHTML(){const t=playerTal();if(!t)return '';const p=t.p;const RLN={tap:'Ngũ hành tạp linh căn',tu:'Tứ linh căn',tam:'Tam linh căn',song:'Song linh căn',thien:'Thiên linh căn',bien:'Biến dị linh căn',cuc:'Cực linh căn'};
   const w=v=>['rất kém','kém','bình thường','tốt','rất tốt'][clamp(Math.round(v),0,4)];
   const tip='Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới.\n· Linh căn: '+(RLN[p.root]||'')+'\n· Tư chất: '+tcName(tuChat())+'\n· Tiên thiên khí vận: '+w(Math.min(4,p.kv*0.8))+'\n· Thể chất: '+w(Math.max(0,(p.th-1)*1.2))+'\n· Ngộ tính, đạo tâm, khí vận gốc: '+w(2+p.dev*0.5)+'\n\nNăm bậc: Phế vật, Phàm tài, Trung tài, Tinh anh, Thiên kiêu.';
-  return `<div class="tal-card tal${t.tier}"${ta(tip)}>${t.tier>=3?talWings(t):''}<b>${TAL_N[t.tier]}</b>${t.tier>=3?talWings(t,1):''}</div>`;}
-function talCls(t){return t&&t.tier>=3?' tf'+t.tier:'';}
+  return `<div class="tal-wrap tw${t.tier}"><div class="tal-card tal${t.tier}"${ta(tip)}><b>${TAL_N[t.tier]}</b></div>${t.tier>=1?talCardOrn(t):''}</div>`;}
+function talCls(t){return t&&t.tier>=1?' tf'+t.tier:'';}
 
 // mục gập/mở được trong tab Căn cơ (Thân thế, Tu luyện), cùng kiểu với mục Chiến đấu
 function sgBoxC(key,icon,name,rows){const o=UI.ccOpen=UI.ccOpen||{};const open=o[key]!==false;
   return `<details class="sgbox cbstat"${open?' open':''}><summary class="sgrp" data-act="ccOpen" data-arg="${key}">${ib(icon,'soft')}${name}<small>${open?'thu gọn':'mở rộng'}</small></summary><div class="kvl">${rows.join('')}</div></details>`;}
 
 // ----- khung Tinh anh / Thiên kiêu kiểu khung hạng: vòng kim loại nổi, ngọc và đôi cánh ở đỉnh, ngọc nhỏ ở đáy -----
-const TF_PAL={3:{a:'#ffffff',b:'#c9d2db',c:'#7e8994',d:'#3d4650',gem:['#d8f0ff','#3f8fd8','#123a6e'],glow:'rgba(150,200,255,.55)'},
-  4:{a:'#fff6c9',b:'#f1c232',c:'#a8720c',d:'#4a2c00',gem:['#ffd6d0','#e0302a','#5a0a08'],glow:'rgba(255,200,60,.6)'}};
+const TF_PAL={1:{a:'#ffe2c4',b:'#d08a4e',c:'#7a4320',d:'#3a1e0c',gem:['#ffe0c8','#d0642a','#5a2008'],glow:'rgba(210,130,70,.45)'},
+  2:{a:'#ffffff',b:'#c9d2db',c:'#7e8994',d:'#3d4650',gem:['#d8f0ff','#3f8fd8','#123a6e'],glow:'rgba(170,190,210,.5)'},
+  3:{a:'#fff6c9',b:'#f1c232',c:'#a8720c',d:'#4a2c00',gem:['#ffd6d0','#e0302a','#5a0a08'],glow:'rgba(255,200,60,.6)'},
+  4:{a:'#ffffff',b:'#bfe6ff',c:'#7a86e0',d:'#232a6a',gem:['#ffffff','#7fd8ff','#3346c8'],glow:'rgba(150,200,255,.75)'}};
 function tfWing(P,id,flip){return `<path transform="${flip?'translate(100 0) scale(-1 1)':''}" d="M42 12C34 4 22 2 12 6C19 7 24 9 27 12C20 11 14 12 9 15C16 15 22 16 26 19C21 19 17 20 14 23C22 23 30 21 36 17Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;}
 function talFrameHang(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tf'+t.tier;
   return `<svg viewBox="0 0 100 100" aria-hidden="true" class="tf-rot"><defs>
@@ -8883,7 +8910,7 @@ function talFrameInk(t,id){const P=TF_INK[t.tier];if(!P)return '';id=id||'ti'+t.
    <g transform="translate(70 72) rotate(-8)"><rect x="0" y="0" width="22" height="22" rx="2" fill="${P.seal}"/><rect x="2" y="2" width="18" height="18" rx="1" fill="none" stroke="#f6eedd" stroke-width="1.2"/>
     <text x="11" y="16.5" text-anchor="middle" font-size="14" font-weight="700" fill="#f6eedd" font-family="serif">${P.ch}</text></g></svg>`;}
 function talWingsInk(t,flip){const P=TF_INK[t.tier];return `<svg class="tcw${flip?' r':''}" viewBox="0 0 48 26" aria-hidden="true"><path d="M46 14C34 9 20 10 4 15C16 12 30 12 46 16Z" fill="${P.ink}" fill-opacity=".8"/><path d="M40 19C30 17 20 18 10 21C20 19 30 19.5 40 21Z" fill="${P.ink}" fill-opacity=".45"/></svg>`;}
-function talFrameSVG(t,id){return t.tier===3?talFrameSen(t,id):talFrameHang(t,id);} // Thiên kiêu: Song dực · Tinh anh: Liên hoa
+function talFrameSVG(t,id){return t.tier===4?talFrameHang(t,id):t.tier===3?talFrameSen(t,id):t.tier>=1?talFramePlain(t,id):'';} // Thiên kiêu: cánh · Tinh anh: sen · Trung tài: 2 ngọc · Phàm tài: 1 ngọc dưới
 function talWings(t,flip){return talWingsHang(t,flip);}
 
 // vòng kim loại dùng chung cho các kiểu khung
@@ -8900,6 +8927,16 @@ function talFrameSen(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'ts'+t.
 function talFrameVan(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tv'+t.tier;
   const cl=f=>`<path transform="${f?'translate(100 0) scale(-1 1)':''}" d="M47 93C38 98 22 96 16 86C11 78 16 69 24 70C31 71 32 79 26 80C22 81 21 76 24 75C19 76 20 85 28 86C36 87 38 78 34 72C42 78 42 88 47 93Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;
   return `<svg viewBox="0 0 100 100" aria-hidden="true">${tfRing(P,id)}${cl(0)}${cl(1)}${tfGem(id,P,50,92,6)}${tfGem(id,P,50,9,4.5)}</svg>`;}
+
+// khung tròn đơn: Trung tài 2 ngọc, Phàm tài 1 ngọc dưới
+function talFramePlain(t,id){const P=TF_PAL[t.tier];id=id||'tp'+t.tier;return `<svg viewBox="0 0 100 100" aria-hidden="true">${tfRing(P,id)}${tfGem(id,P,50,92,5)}${t.tier>=2?tfGem(id,P,50,8,5):''}</svg>`;}
+// trang trí ô Thiên phú: ngọc trên viền trên; dưới viền dưới là cánh (Thiên kiêu) / sen (Tinh anh) / ngọc
+function talCardOrn(t){const P=TF_PAL[t.tier];const id='tco'+t.tier;const defs=`<defs><linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".3" stop-color="${P.b}"/><stop offset=".55" stop-color="${P.c}"/><stop offset=".75" stop-color="${P.b}"/><stop offset="1" stop-color="${P.c}"/></linearGradient><radialGradient id="${id}g" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="${P.gem[0]}"/><stop offset=".45" stop-color="${P.gem[1]}"/><stop offset="1" stop-color="${P.gem[2]}"/></radialGradient></defs>`;
+  const top=t.tier>=2?`<svg class="tco-top" viewBox="0 0 20 24">${defs}${tfGem(id,P,10,12,9.5)}</svg>`:'';
+  const wing=f=>`<path transform="${f?'translate(120 0) scale(-1 1)':''}" d="M56 16C44 4 26 0 6 4C16 6 23 9 27 13C17 12 8 14 2 18C11 18 20 19 26 22C19 23 12 26 8 31C24 33 42 28 56 16Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".9"/>`;
+  const pet=(a,l)=>`<path transform="rotate(${a} 60 32)" d="M60 32C52 22 52 ${30-l} 60 ${22-l}C68 ${30-l} 68 22 60 32Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".9"/>`;
+  const bot=t.tier===4?wing(0)+wing(1):t.tier===3?pet(-62,6)+pet(62,6)+pet(-30,10)+pet(30,10)+pet(0,12):'';
+  return `${top}<svg class="tco-bot" viewBox="0 0 120 40">${defs}${bot}${tfGem(id,P,60,22,t.tier>=3?11:9.5)}</svg>`;}
 
 // ---------- màn ngoài: mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên ----------
 function vTitle(){
