@@ -387,7 +387,7 @@ function tuSlotHTML(){const a=tuArt();const r=G.run;
 {const _at21=artTipH;artTipH=function(a,pot){const h=_at21(a,pot);if(!a||a.type!=='tp')return h;const i=h.lastIndexOf('</div></div>');return i<0?h:h.slice(0,i)+`<p class="tu-ln">Tốc độ tu luyện ×${numFx(TU_M[clamp(a.tier,0,6)])}${a.el!=='vo'&&G.run.root.els.includes(a.el)?' (hợp linh căn +10%)':''}</p>`+h.slice(i);};}
 
 // dòng khí vận, thể chất trong tab Căn cơ: mỗi mục một nhãn màu theo phẩm, chạm xem tác dụng
-function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="ttl">${L.map(d=>`<span class="ttc" style="--pc:${TT_COL[d.rank]}"${tah(`<div class="tt-it" style="--pc:${TT_COL[d.rank]}"><div><b>${esc(d.name)}</b><small>${TT_RANK[d.rank]}</small><p>${esc(d.description)}</p><p>${ttFxText(d).map(esc).join('<br>')}</p></div></div>`)}>${esc(d.name)}</span>`).join('')}</span>`:'<span class="hint">Không có</span>';
+function ttRow(label,L,tip){L=L.filter(Boolean);const v=L.length?`<span class="ttl">${L.map(d=>`<span class="ttc r${d.rank}" style="--pc:${TT_COL[d.rank]}"${tah(`<div class="tt-it" style="--pc:${TT_COL[d.rank]}"><div><b>${esc(d.name)}</b><small>${TT_RANK[d.rank]}</small><p>${esc(d.description)}</p><p>${ttFxText(d).map(esc).join('<br>')}</p></div></div>`)}>${esc(d.name)}</span>`).join('')}</span>`:'<span class="hint">Không có</span>';
   return kvRow(label,v,tip);}
 
 // tooltip vật phẩm: dòng yêu cầu cảnh giới (đỏ khi chưa đủ)
