@@ -712,7 +712,7 @@ function publishBang(){
 }
 
 // ---------------- HIỆU ỨNG ----------------
-function chip(i,t,tip,c){return {i,t,tip,c};}
+function chip(i,t,tip,c,tier){return tier==null?{i,t,tip,c}:{i,t,tip,c,tier};}
 function sgn(x){return (x>0?'+':'−')+Math.abs(Math.round(x));}
 function addTv(x){
   const r=G.run;const b=tieu();const s0=S();const g0=lkOn()?lkTang():0;
@@ -738,7 +738,7 @@ function applyE(e,v){
   if(e.h){ch.push(chip('⏳',durH(e.h),'Thời gian trôi qua',''));advanceTime(e.h);if(!G.run)return ch;}
   if(e.lifeCut){const y=Math.round(LIFE[r.realm]*e.lifeCut/100);r.lifeAdj-=y;ch.push(chip('⏳','thọ −'+y+' năm','Thọ nguyên giảm','dn'));if(r.age>=S().life){die('toahoa');return ch;}}
   if(e.life){r.lifeAdj+=e.life;ch.push(chip('⏳','thọ +'+e.life+' năm','Thọ nguyên','up'));}
-  if(e.relic!=null){const rel=typeof e.relic==='number'?genRelic(clamp(r.region+e.relic,0,4)):uniqueRelic(e.relic);if(rel&&!(rel.u&&r.relics.find(x=>x.u===rel.u))){r.relics.push(rel);clampHp();ch.push(chip('🏺',rel.name,relicTip(rel),'item'));log(`Nhận được ${rel.name}.`);}}
+  if(e.relic!=null){const rel=typeof e.relic==='number'?genRelic(clamp(r.region+e.relic,0,4)):uniqueRelic(e.relic);if(rel&&!(rel.u&&r.relics.find(x=>x.u===rel.u))){r.relics.push(rel);clampHp();ch.push(chip('🏺',rel.name,relicTip(rel),'item',rel.tier));log(`Nhận được ${rel.name}.`);}}
   if(e.rmRelic){const k=r.relics.findIndex(x=>x.u===e.rmRelic);if(k>=0){const n=r.relics[k].name;r.relics.splice(k,1);clampHp();ch.push(chip('🏺','mất '+n,'Pháp bảo đã mất','dn'));}}
   if(e.skill!=null){const id=typeof e.skill==='number'?rollSkill(e.skill):e.skill;const c=gainSkill(id);if(c)ch.push(c);}
   if(e.pill!=null){const arr=Array.isArray(e.pill)?e.pill:[e.pill];if(e.pill2)arr.push(e.pill2);for(const p of arr){const c=gainPill(p===1||p===0?rollPill():(p==='@bt'?btPill():p),r.region>=3?2:r.region>=1?ri(0,1):0);if(c)ch.push(c);}}
@@ -1531,7 +1531,7 @@ function rewardScene(kind,en){
 }
 function takePick(i){
   const r=G.run,sc=r.scene;if(sc.taken>=0)return;const p=sc.picks[i];if(!p)return;sc.taken=i;let c;
-  if(p.k==='relic'){r.relics.push(p.rel);clampHp();log(`Nhận được ${p.rel.name}.`);c=chip('🏺',p.rel.name,relicTip(p.rel),'item');}
+  if(p.k==='relic'){r.relics.push(p.rel);clampHp();log(`Nhận được ${p.rel.name}.`);c=chip('🏺',p.rel.name,relicTip(p.rel),'item',p.rel.tier);}
   else if(p.k==='skill')c=gainSkill(p.id);
   else if(p.k==='pill')c=gainPill(p.id,p.q);
   else {r.st+=p.n;c=chip('💎','+'+p.n,'Linh thạch','up');}
@@ -2197,7 +2197,7 @@ function visitGrave(n){
 }
 function graveTake(v){
   const r=G.run;const n=nodeById(v.gnode);const ch=[];if(!n||!n.grave)return ch;
-  for(const it of n.grave.items||[]){r.relics.push(it);ch.push(chip('🏺',it.name,relicTip(it),'item'));log(`Đào được ${it.name} từ mộ cũ.`);}
+  for(const it of n.grave.items||[]){r.relics.push(it);ch.push(chip('🏺',it.name,relicTip(it),'item',it.tier));log(`Đào được ${it.name} từ mộ cũ.`);}
   n.grave.items=[];n.grave.dug=1;clampHp();return ch;
 }
 function openBury(n){const r=G.run;if(n.cache||W().regions.reduce((a,R0)=>a+R0.nodes.filter(x=>x.cache).length,0)>=5){pmsg('Chỗ này không chôn thêm được nữa. Cả thế gian ngươi chỉ nhớ nổi năm hố.');return;}r.scene={type:'bury',id:n.id,back:n.id,sel:[]};}
@@ -2212,7 +2212,7 @@ function buryItems(){
 }
 function findCache(n){
   const r=G.run;const c=n.cache;n.cache=null;const ch=[];
-  for(const it of c.items){if(it.k==='relic'){r.relics.push(it.rel);ch.push(chip('🏺',it.rel.name,relicTip(it.rel),'item'));}else{const x=gainPill(it.id,it.q);if(x)ch.push(x);}}
+  for(const it of c.items){if(it.k==='relic'){r.relics.push(it.rel);ch.push(chip('🏺',it.rel.name,relicTip(it.rel),'item',it.rel.tier));}else{const x=gainPill(it.id,it.q);if(x)ch.push(x);}}
   clampHp();log(`Đào được đồ ${c.by} chôn năm ${tYear(c.t)}.`);
   openPlace(n.id);const sc=r.scene;sc.msg=[c.by===r.ten?'Ngươi đào đúng chỗ đã chôn.':`Dưới ba hòn đá xếp chồng có một hố đất cũ. Bên trong là đồ của ${c.by}, chôn từ năm ${tYear(c.t)}. Ngươi biết chỗ này. Ngươi đã từng là người chôn nó.`];sc.chips=ch;
 }
@@ -2416,7 +2416,10 @@ ev({id:'do_thach',n:'Đổ thạch',tg:['thanh','tran'],r:[0,1,2],w:2,v:()=>({a:
  c:[
   {i:'🪨',l:'Mua một khối nhỏ',cost:{st:15},o:[{w:3,t:'Đá. Chỉ là đá.'},{w:2,t:'Có một mạch linh thạch nhỏ, đủ hoàn vốn và lời chút ít.',e:{st:25}},{w:1,t:'Lớp vỏ vỡ, ánh xanh tràn ra. Cả phường lặng đi. Một khối linh tủy!',e:{st:60,van:1}}]},
   {i:'💰',l:'Chơi lớn',cost:{st:40},o:[{w:3,t:'Đá. Ngươi nghe tiếng ai đó cười khúc khích sau lưng.'},{w:2,t:'Một mạch linh thạch dày bằng ngón tay. Đám đông xuýt xoa.',e:{st:80}},{w:1,t:'Bên trong là một món pháp bảo bị phong ấn trong đá!',e:{relic:1}}]},
-  {i:'👁️',l:'Dùng thần thức dò trước',chk:['ngo',12],ok:{t:'Ngươi chọn một khối xấu xí ở góc. Chủ sạp cười, bán rẻ. Mở ra, cả phường im bặt.',e:{st:50}},no:{t:'Thần thức vừa chạm vào đã bị cấm chế đánh bật. Bị phát hiện dò trộm, ngươi bị mời ra ngoài.',e:{tamma:2}}}
+  {i:'👁️',l:'Dùng thần thức dò trước',chk:['ngo',12],ok:{t:'Thần thức len qua lớp vỏ đá. Trong một khối xấu xí ở góc, một mạch linh ngọc đang ẩn hiện. Chủ sạp không hay biết, chỉ ra giá như đá thường.',
+    c:[{i:'💰',l:'Mua khối đá ấy',cost:{st:20},t:'Ngươi trả tiền, ôm khối đá ra một góc. Đao bổ xuống, ánh xanh tràn ra, cả phường im bặt.',e:{st:55}},
+       {i:'🚶',l:'Thôi, không mua',t:'Ngươi lặng lẽ đi ra. Khối đá vẫn nằm đó, chờ một kẻ có duyên khác.'}]},
+   no:{t:'Thần thức vừa chạm vào đã bị cấm chế đánh bật. Bị phát hiện dò trộm, ngươi bị mời ra ngoài.',e:{tamma:2}}}
  ]});
 
 ev({id:'hac_diem',n:'Quán trọ đen',tg:['tran','rung','song','hoang'],w:2,

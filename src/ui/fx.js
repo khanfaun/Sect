@@ -27,7 +27,7 @@ function fxBurst(x,y,el,big){const c=FXC[el]||FXC.vo;const S0=big?190:120;
 function fxShield(x,y){fxEl(`<svg viewBox="0 0 100 110" width="110" height="120"><path d="M50 4L92 20v34c0 26-18 42-42 52C26 96 8 80 8 54V20z" fill="rgba(120,190,255,.28)" stroke="#bfe3ff" stroke-width="4"/><path d="M50 18L80 30v24c0 18-12 30-30 38-18-8-30-20-30-38V30z" fill="none" stroke="#ffe9a8" stroke-width="2"/></svg>`,x,y,560,'fx-shield');}
 function fxOne(sc,e){if(!G.run||G.run.scene!==sc)return;const fx=CFG.anim!==false;const t=sc.units.find(u=>u.id===e.id);const [x,y]=fxPos(sc,e.id);const me=t&&t.isMain;
   if(e.k==='hit'){if(fx){fxSlash(x,y,e.el,e.big);fxBurst(x,y,e.el,e.big);if(e.blk)fxShield(x,y);if(me){fxShake(e.big||e.crit);if(!e.blk&&e.d>0)fxEl('',0,0,450,'fx-vig');}else if(e.big||e.crit)fxShake(false);}
-    if(e.blk)fxNum(x,y-26,'Đỡ!','blk');if(e.crit&&e.d>0)fxNum(x,y,'Bạo kích!','crit');else if(!(e.d>0))fxNum(x,y,'Hộ thể','blk');
+    if(e.blk)fxNum(x,y-26,'Đỡ!','blk');if(e.crit&&e.d>0)fxNum(x,y,'Chí mạng!','crit');else if(!(e.d>0))fxNum(x,y,'Hộ thể','blk');
     const c=document.getElementById('uc'+e.id);if(c){c.classList.remove('hitf');void c.offsetWidth;c.classList.add('hitf');}}
   else if(e.k==='dodge'){fxNum(x,y,'Né!','ev');if(fx)fxEl('<i></i><i></i><i></i>',x,y,420,'fx-dash');}
   else if(e.k==='heal'){if(fx)fxEl(Array.from({length:6},(_,i)=>`<i style="left:${(Math.random()*80-40).toFixed(0)}px;animation-delay:${(i*0.07).toFixed(2)}s">+</i>`).join(''),x,y,900,'fx-heal');}
@@ -50,3 +50,12 @@ function fxDrain(sc){const q=sc.fxq;sc.fxq=[];if(!$('#fx')||!q||!q.length)return
     const d=delay+nh*110;if(e.k==='hit'||e.k==='dodge')nh++;
     if(d)setTimeout(()=>fxOne(sc,e),d);else fxOne(sc,e);}
 }
+// chữ tên đòn bay lên cạnh người ra đòn; hiệu ứng hồi chỉ số; bùng phát huyết thuật
+const FXG_C={hp:['#bff5c8','#2f9a4e','+'],mp:['#cfe6ff','#3a7fd0','+'],dl:['#ffffff','#9aa6b4','✦'],than:['#ffe0b0','#e07a1a','✦'],tl:['#fff3a8','#e0b81a','⚡']};
+{const _fo=fxOne;fxOne=function(sc,e){if(!G.run||G.run.scene!==sc)return;
+  if(e.k==='heal')return;
+  if(e.k==='act'){const [x,y]=fxPos(sc,e.id);fxEl(`<b>${esc(e.n)}</b>`,x,y-58,1300,'fx-act');return;}
+  if(e.k==='gain'){if(CFG.anim===false)return;const [x,y]=fxPos(sc,e.id);const c=FXG_C[e.s];if(!c)return;
+    fxEl(Array.from({length:7},(_,i)=>`<i style="left:${(Math.random()*90-45).toFixed(0)}px;top:${(Math.random()*30-10).toFixed(0)}px;animation-delay:${(i*0.08).toFixed(2)}s">${c[2]}</i>`).join(''),x,y,1100,'fx-gain fg-'+e.s,`--c0:${c[0]};--c1:${c[1]}`);return;}
+  if(e.k==='burst'){if(CFG.anim===false)return;const [x,y]=fxPos(sc,e.id);fxEl('<i></i><i></i><i></i>',x,y,900,'fx-blood b-'+e.t);fxShake(false);return;}
+  return _fo(sc,e);};}

@@ -16,7 +16,7 @@ const UI={panel:null,tab:{},sel:null,cardMin:false,hudOpen:true,modal:null,confi
 const CFG_KEY='phusinh_cfg_v1';
 const CFG_DEF={tfStyle:'hang',gfx:'auto',fps:30,dpr:0,fx:true,clouds:true,daynight:true,anim:true,showFps:false,
   names:true,roads:true,grid:true,ents:true,ring:true,notes:true,terrain:true,
-  font:'m',theme:'light',cspeed:1,autoFight:false,confirmDanger:true,clockIdle:true};
+  font:'m',theme:'light',cspeed:1,autoFight:false,autoBlk:false,autoDg:false,confirmDanger:true,clockIdle:true};
 let CFG=Object.assign({},CFG_DEF);
 function cfgLoad(){try{const o=JSON.parse(localStorage.getItem(CFG_KEY)||'null');if(o)CFG=Object.assign({},CFG_DEF,o);else{try{const t=localStorage.getItem('phusinh_theme');if(t)CFG.theme=t;}catch(e){}}}catch(e){}CFG.theme='light';CFG.autoFight=false;CFG.cspeed=1;cfgApply();}
 function cfgSave(){try{localStorage.setItem(CFG_KEY,JSON.stringify(CFG));}catch(e){}}
@@ -106,7 +106,7 @@ function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" 
 const EMO_IC={'⏳':'hour','🏺':'ring','❤️':'heart','📖':'book','☯️':'yin','🤝':'people','💧':'drop','✨':'spark','⚗️':'flask','⚔':'sword','⚔️':'sword','🗡️':'sword','😈':'skull','🗺️':'pin','📜':'scroll','🏅':'medal','🎫':'flag','🍃':'clover','🍀':'clover','🌩️':'bolt','☁️':'sun','🛡️':'shield','🌀':'wind','🧠':'brain','🪷':'lotus','🌕':'moon'};
 function emoIc(e){if(e==='?')return '<i class="qmk">?</i>';if(e==='💎')return '<i class="rh"></i>';const k=EMO_IC[e];return k?ic(k):e;}
 function emoTxt(h){return String(h).replace(/💎/g,'<i class="rh"></i>').replace(/⏳/g,ic('hour'));}
-function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}"${ta(c.tip)}${c.h?` data-tiph="${esc(c.h)}"`:''}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
+function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}${c.tier!=null?' tq':''}"${c.tier!=null?` style="${pcs(c.tier)}"`:''}${ta(c.tip)}${c.h?` data-tiph="${esc(c.h)}"`:''}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
 function elSeal(e){const E=EL[e]||EL.vo;return `<span class="el el-${e}"${ta('Hệ '+E.n+(KHAC[e]?'\nKhắc '+EL[KHAC[e]].n:''))}>${E.c}</span>`;}
 function bar(cur,max,cls){const p=Math.max(0,Math.min(100,cur/Math.max(1,max)*100));return `<div class="hb ${cls||''}"><i style="width:${p}%"></i></div>`;}
 function tabsHTML(key,list,cur){return `<div class="tabs">${list.map(([k,n])=>`<button data-act="tab" data-arg="${key}:${k}" class="${k===cur?'on':''}">${n}</button>`).join('')}</div>`;}

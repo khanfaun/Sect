@@ -88,7 +88,7 @@ function dockHTML(){
     const I=nodeInfo(n);const here=n.id===r.at;const dg=dangerTag(n);
     let mid='';
     const nt=noteOf(n.id);const M=I.sure?placeMeta(n):null;
-    if(!here){const p=findPath(r.at,n.id);mid=p?`<span>${ic('pin')}~${Math.round(pathLen(p))} dặm · ${durH(travelHours(p))}</span>`:'<span>Chưa biết đường</span>';}else mid='<span class="here">Ngươi đang ở đây</span>';
+    if(!here){const p=findPath(r.at,n.id);mid=p?`<span>${ic('pin')}~${Math.round(pathLen(p))} dặm · ${durH(travelHours(p))}</span>`:'<span>Chưa biết đường</span>';}else mid='';
     const eb=[I.info,I.sure?hexInfo(nodeHex(n)).dist:''].filter(Boolean).join(' · ');
     const pimg=ASSET.place[n.type];return `<div class="dock card nc"><div class="nc-head"><div class="nc-pic${I.sure?'':' rum'}">${pimg?`<img src="${pimg}" alt="">`:''}${I.sure?'':'<b>?</b>'}</div>
       <div class="nc-info"><small class="nc-eb">${esc(eb)}</small><b class="nc-nm">${esc(n.name+(I.sure?'':'?'))}</b>
@@ -115,7 +115,6 @@ function goBtn(act,label,arg,cls){return `<button class="btn ${cls||'pri'} wide"
 function choiceBtn(n,act,arg,label,extra,o){o=o||{};return `<button class="ch${o.cls?' '+o.cls:''}" data-act="${act}" data-arg="${arg}"${o.dis?' disabled':''}${ta(o.tip)}><span class="cn">${n}</span><span class="ct">${label}</span>${extra||''}</button>`;}
 function choiceExtra(c){let x='';const r=G.run;
   if(c.cost){if(c.cost.st){const v=Math.round(c.cost.st*SC[r.region]);x+=`<span class="cx${r.st<v?' no':''}"${ta('Tốn linh thạch')}>${stoneHTML(v)}</span>`;}if(c.cost.mp)x+=`<span class="cx"${ta('Tốn linh lực')}>linh lực ${c.cost.mp}</span>`;if(c.cost.hp)x+=`<span class="cx"${ta('Tốn khí huyết')}>khí huyết ${c.cost.hp}</span>`;}
-  if(c.chk){const p=Math.round(chkChance(c.chk)*100);x+=`<span class="cx chk"${ta('Phép thử '+CHKN[c.chk[0]]+'\nCơ hội thành công '+p+'%')}>${CHKN[c.chk[0]].toLowerCase()} ${p}%</span>`;}
   if(c.fight)x+=`<span class="cx"${ta('Sẽ phải giao chiến'+(c.fight.spar?' (luận võ, thua không chết)':''))}>giao chiến</span>`;
   return x;}
 function vRegionIntro(sc){const r=G.run;const og=ORIGIN.find(o=>o.id===r.origin);
@@ -125,7 +124,7 @@ function vEvent(sc){
   let b=qi<0?`<div class="story">${storyHTML(st)}</div>`:`<div class="story">${storyHTML(st.slice(0,qi))}</div><div class="dlg" id="dlg">${st.slice(qi).map((x,i)=>typeof x==='object'?`<p class="dq">› ${esc(x.q)}</p>`:`<p class="${qi+i>=UI.lastStory?'new':''}">${txt(x)}</p>`).join('')}</div>`;
   if(sc.news)b+=`<p class="news"${ta('Tin đồn giang hồ')}>${esc(sc.news)}</p>`;
   b+=chipsHTML(sc.chips);
-  if(sc.phase==='choose'){b+='<div class="choices">';let k=1;for(const {c,i} of visChoices(sc)){const NL=needList(c);const bad=NL.filter(x=>!x.ok);b+=choiceBtn((k++)+'.','choose',i,esc(T(c.l,sc.v)),choiceExtra(c),{dis:bad.length>0,cls:bad.length?'soft':''});if(bad.length)b+=`<p class="why">(${esc(bad.map(x=>x.t).join(', '))})</p>`;}b+='</div>';}
+  if(sc.phase==='choose'){b+='<div class="choices">';let k=1;const VC=visChoices(sc);const anyOk=VC.some(({c})=>!needList(c).some(x=>!x.ok)&&(!c.chk||chkChance(c.chk)>=0.5));for(const {c,i} of VC){const NL=needList(c);const bad=NL.filter(x=>!x.ok);const ck=c.chk?(chkChance(c.chk)>=0.5||!anyOk):true;const dis=bad.length>0||!ck;b+=choiceBtn((k++)+'.','choose',i,esc(T(c.l,sc.v)),choiceExtra(c),{dis,cls:dis?'soft':''});{const bw=bad.filter(x=>!/^linh thạch/.test(x.t));if(bw.length)b+=`<p class="why">(${esc(bw.map(x=>x.t).join(', '))})</p>`;}if(c.chk)b+=`<p class="chreq ${ck?'ok':'bad'}">${CHKN[c.chk[0]]} ${ck?'đạt yêu cầu':'chưa đạt yêu cầu'}</p>`;}b+='</div>';}
   return card(e&&e.n||'Kỳ ngộ',r.place.n,b,{head:sc.phase==='choose'?`<button class="pl-tg" data-act="evMin"${ta('Tạm gác lại để xem bản đồ, túi đồ… rồi quay lại chọn sau')}>Để sau ${ic('down')}</button>`:'',foot:sc.phase==='choose'?'':goBtn('next','Tiếp tục')});
 }
 function foeLine(en){return `<div class="foe-l"><span class="foe-i">${assetImg('foe',en.k||en.n,en.i)}</span><div><b>${esc(en.n)}</b><small>${elSeal(en.el)} ${esc(en.sub||'')}</small></div></div>`;}
@@ -171,7 +170,7 @@ function vPlace(sc){
   const r=G.run,n=nodeById(sc.id),w=W();const acts=placeActs(n).filter(a=>!['bq1','bq3','explore'].includes(a.a));
   const by=k=>acts.find(a=>a.a===k);let k=0;
   const btn=a=>{const qa=a.a==='quyan'&&UI.confirm==='quyan';const x=VENUE_N[a.a]?`<span class="cx">${a.dis?'đang đóng cửa':'chọn việc'}</span>`:(a.x&&!/^(💎|linh thạch )/.test(a.x)?`<span class="cx">${esc(String(a.x).replace(/✨/g,'tu vi ').replace(/🌕/g,'thành công '))}</span>`:'')+(a.h&&!a.dis&&a.a!=='bt'?`<span class="cx tm"${ta('Thời gian sẽ trôi qua')}>${durH(a.h)}</span>`:'');
-    return `<button class="ch${a.a==='bt'?' hl big':PNOW.includes(a.a)?' big':''}${a.a==='quyan'||a.dis?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="cn">${++k}.</span><span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':(PL_N[a.a]&&a.l.length>PL_N[a.a].length+6?PL_N[a.a]:a.l))}</span>${x}</button>`;};
+    return `<button class="ch${a.a==='bt'?' hl big':PNOW.includes(a.a)?' big':''}${a.a==='quyan'||a.dis?' soft':''}" data-act="pact" data-arg="${a.a}"${a.dis?' disabled':''}${ta(a.tip)}><span class="cn">${++k}.</span>${VENUE_N[a.a]&&n.vsp&&n.vsp.k===r.kiep&&n.vsp.v===a.a&&n.vsp.until>w.t?`<span class="ex"${ta('Đang có chuyện đặc biệt, không chờ lâu')}>!</span>`:''}<span class="ct">${esc(qa?'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc':(PL_N[a.a]&&a.l.length>PL_N[a.a].length+6?PL_N[a.a]:a.l))}</span>${x}</button>`;};
   let b=sc.venue&&VENUE_N[sc.venue]?venueHTML(n,sc.venue):'';
   // lời kể: cảnh trí và chuyện vừa xảy ra cùng một kiểu chữ, nằm trong một khung cuộn riêng
   // lịch sử: mỗi lần chọn một việc, giữ lại lựa chọn và kết quả (giống hộp thoại sự kiện)

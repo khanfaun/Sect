@@ -8,7 +8,7 @@ function setH(id,html){const el=document.getElementById(id);if(!el)return false;
   if(id==='sheet'){el.classList.toggle('still',!!k2&&key===k2);const tk=document.getElementById('plTalk');if(tk){if(tkN!=null&&tkN===tk.dataset.n)tk.scrollTop=tkTop;else tk.scrollTop=tk.scrollHeight;}}if(top&&key===k2){const s2=el.querySelector('.win-b,.sc-b');if(s2)s2.scrollTop=top;}
   return true;}
 function viewKey(id){const sc=G.run&&G.run.scene;if(id==='sheet')return sc?sc.type+':'+(sc.id||'')+':'+(sc.story?sc.story.length:0)+':'+(sc.phase||''):'';if(id==='panel')return (UI.panel||'')+JSON.stringify(UI.tab);if(id==='full')return G.screen+(UI.tab.meta||'');if(id==='modal')return UI.modal?UI.modal.k:'';return '';}
-function syncDodge(){const o=G.meta.opt=G.meta.opt||{};if(o.userDodge===undefined)o.userDodge=!!o.autoDodge;o.autoDodge=!!(o.userDodge||CFG.autoFight);o.autoQte=!!CFG.autoFight;}
+function syncDodge(){const o=G.meta.opt=G.meta.opt||{};if(o.userDodge===undefined)o.userDodge=!!o.autoDodge;o.autoDodge=!!o.userDodge;o.autoQte=!!CFG.autoFight;}
 function render(){
   let full='',hud='',mapui='',dock='',nav='',sheet='',panel='',modal='';
   try{
@@ -101,7 +101,7 @@ const ACT={
   leave:()=>leavePlace(),
   pass:a=>passAct(a),
   hud:()=>{if(G.run&&G.run.scene)UI.hudScene=!UI.hudScene;else UI.hudOpen=!UI.hudOpen;},
-  cbGo:()=>prepGo(),ppKn:()=>{const sc=G.run&&G.run.scene;const cmp=sc&&sc.units&&sc.units.length>2;UI.ppKn=!(UI.ppKn!=null?UI.ppKn:!cmp);},cbQuick:()=>quickFight(),ccOpen:k=>{const o=UI.ccOpen=UI.ccOpen||{};o[k]=o[k]===false;},cbOpen:()=>{UI.cbOpen=!UI.cbOpen;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
+  cbGo:()=>prepGo(),ppKn:()=>{const sc=G.run&&G.run.scene;const cmp=sc&&sc.units&&sc.units.length>2;UI.ppKn=!(UI.ppKn!=null?UI.ppKn:!cmp);},cbQuick:()=>quickFight(),ccOpen:k=>{const o=UI.ccOpen=UI.ccOpen||{};o[k]=o[k]===false;},cbOpen:()=>{UI.cbOpen=UI.cbOpen===false;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
   hudBq:()=>{G.bqRoom=false;openBq();},
   evMin:()=>{UI.evMin=true;},
   evBack:()=>{UI.evMin=false;},
@@ -179,6 +179,8 @@ const ACT={
   buryGo:()=>buryItems(),
   autoDodge:v=>{const o=G.meta.opt=G.meta.opt||{};o.userDodge=v==='1';syncDodge();},
   autoFight:()=>{cfgSet('autoFight',!CFG.autoFight);syncDodge();UI.menu=null;UI.pendSk=null;},
+  autoOpen:()=>{UI.autoOpen=!UI.autoOpen;},
+  autoTg:k=>{if(!['autoFight','autoBlk','autoDg'].includes(k))return;cfgSet(k,!CFG[k]);syncDodge();if(k==='autoFight'){UI.menu=null;UI.pendSk=null;}},
   cspd:n=>{cfgSet('cspeed',+n);},
   cspeed:()=>{cfgSet('cspeed',CFG.cspeed>=3?1:CFG.cspeed+1);},
   clog:()=>{UI.modal={k:'clog'};},
@@ -394,7 +396,7 @@ function qpopFlush(){const L=G.qpop;if(!L||!L.length||document.querySelector('.q
   d.innerHTML=`<b>${T[0]}</b><p>${esc(q.text)}</p>${q.ch&&q.ch.length?chipsHTML(q.ch):''}`;d.addEventListener('pointerdown',()=>{d.remove();qpopFlush();});
   app.appendChild(d);setTimeout(()=>{d.classList.add('out');setTimeout(()=>{d.remove();qpopFlush();},400);},2500);}
 // mỗi kiếp mới: tắt tự đánh, tốc độ trận và tốc độ bản đồ về ×1 (mở lại game cũng vậy, xem cfgLoad)
-function speedReset(){CFG.autoFight=false;CFG.cspeed=1;cfgSave();UI.speed=1;UI.paused=false;if(G.meta)syncDodge();}
+function speedReset(){CFG.autoFight=false;CFG.autoBlk=false;CFG.autoDg=false;UI.autoOpen=false;CFG.cspeed=1;cfgSave();UI.speed=1;UI.paused=false;if(G.meta)syncDodge();}
 {const _nrU=newRun;newRun=function(c){const res=_nrU(c);speedReset();if(G.run&&G.run.story){G.screen='life';UI.lifeT=performance.now();UI.lifeAll=false;lifeScroll();}return res;};}
 // trang mở đầu kiếp: dòng chữ hiện dần, cuộn theo dòng mới nhất
 const LIFE_D=1.7;
