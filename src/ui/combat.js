@@ -19,6 +19,8 @@ function unitCard(sc,u,pickMode,compact){
   const cls=`ucard ${foe?'foe':'ally'}${dead?' dead':''}${tgt?' tg':''}${sc.cur===u.id?' cur':''}${compact?' cmp':''}`;
   const sub=u.sub||(foe?(sc.elite?'Tinh anh':sc.boss?'Thủ lĩnh':'Đối thủ'):'Đồng hành');
   let bars;
+  if(foe&&!dead&&!canSee(u)){const av0=`<span class="u-av fav"${ta('Thần thức không đủ để dò xét đối phương')}>${u.immune?u.icon:uAvatar(u)}</span>`;const nb=`<small class="u-s nosee">Thần thức không dò thấu</small>`;
+    return compact?`<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av0}${nb}</div>`:`<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av0}<div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b></div>${nb}</div></div>`;}
   if(u.immune)bars=`<small class="u-s">${sc.kiep?'Đạo '+Math.min(sc.kiep.n,sc.kiep.done+1)+'/'+sc.kiep.n+(sc.kiep.waves>1?' · đợt '+sc.kiep.wave:''):''}${sc.kiep&&sc.kiep.uy<1?' · uy '+Math.round(sc.kiep.uy*100)+'%':''}</small>`;
   else bars=`<div class="brow"${ta('Khí huyết '+pctOf(Math.max(0,u.hp),u.max))}>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}${compact?'':`<b>${pctOf(Math.max(0,u.hp),u.max)}</b>`}</div><div class="brow thin"${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}>${cBar(dlOf(u),100,'dl')}</div>`;
   const th=u.fpt?100:clamp(u.than||0,0,100),RC=2*Math.PI*29;const fring=foe&&!u.immune?`<svg class="tl-ring ${u.fpt?'burn':th>=100?'full':''}" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="29"/><circle class="fg" cx="32" cy="32" r="29" stroke-dasharray="${(RC*th/100).toFixed(1)} ${RC.toFixed(1)}"/></svg>`:'';
@@ -164,7 +166,8 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodg
 
 // ---------- chuẩn bị trước trận: xem hai phe, chỉnh chiêu, dùng đồ (không tốn niệm lực), rồi bấm Bắt đầu ----------
 {const _scU=startCombat;startCombat=function(spec,after){const res=_scU(spec,after);const sc=G.run&&G.run.scene;
-  if(sc&&sc.type==='combat'&&!sc.kiep&&!UI.noPrep)sc.prep=1;return res;};}
+  if(sc&&sc.type==='combat'&&(!sc.kiep||bbTemp())&&!UI.noPrep)sc.prep=1;
+  if(sc&&sc.prep&&bbTemp()){const r=G.run;const k='bbAsk'+r.bt.si;if(!r.bt[k]&&bbBooks().length){r.bt[k]=1;UI.modal={k:'bbLearn'};}}return res;};}
 // lực chiến dùng để so trong màn chuẩn bị (nhân vật chính lấy theo chỉ số hiện tại)
 function pLc(u){return u.isMain?lucChien():lcCalc(u);}
 // ai bị người này nghiền ép (khác phe, lực chiến kém từ 3 lần)
@@ -205,3 +208,6 @@ SCENE_V.combat=vCbPrep;
 function prepGo(){const sc=G.run&&G.run.scene;if(!sc||!sc.prep)return;const me=mainUnit(sc),f=playerUnit();
   for(const k of ['hp','max','mp','maxMp','atk','matk','def','crit','critDmg','hoTam','tp','cx','ne','hoi','skills','nl','maxNl','el'])me[k]=f[k];
   sc.prep=0;UI.panel=null;UI.menu=null;sc.rev=(sc.rev||0)+1;}
+// màn chuẩn bị: thần thức không đủ thì không thấy khí huyết, linh lực, lực chiến của đối phương
+{const _pur=prepUnitRow;prepUnitRow=function(u,me,cmp){if(u.side==='B'&&!canSee(u))return `<div class="pp-u foe"><span class="u-av"${ta('Thần thức không đủ để dò xét')}>${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}</span></div><small class="u-s nosee">Thần thức không dò thấu</small></div></div>`;return _pur(u,me,cmp);};}
+{const _tc=teamCmp;teamCmp=function(sc){if(sc.units.some(u=>u.side==='B'&&!canSee(u)))return {side:'B',t:'Không rõ',c:'ev'};return _tc(sc);};}

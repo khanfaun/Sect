@@ -1337,6 +1337,7 @@ details.bond .bav{width:34px;height:34px;border-radius:50%;overflow:hidden;displ
 details.bond .cc-ch{font-style:normal;color:var(--ink3);margin-left:6px;transition:transform .2s;display:inline-grid}details.bond[open] .cc-ch{transform:rotate(180deg)}details.bond .cc-ch svg{width:14px;height:14px}
 details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim{opacity:.6}
 .slots{flex-wrap:wrap;gap:6px}.slots .slot{width:64px;height:64px;font-size:.92em}
+.u-s.nosee{color:var(--ink3);font-style:italic}.bb-cost{margin:.3em 0 .6em 1.2em;color:var(--seal);font-size:.9em}
 
 </style>
 </head>
@@ -7249,6 +7250,23 @@ function artUseWhy(a){const r=G.run;if(!a||a.req<=effRealm())return '';if(a.req=
 // tên cảnh giới hiển thị
 {const _rl=realmLabel;realmLabel=function(){const r=G.run;if(!r||isPham())return _rl();const k=bbKind();if(k&&k!=='temp'&&r.realm<5)return 'Bán bộ '+REALM[r.realm+1];if(k==='temp')return 'Bán bộ '+REALM[r.realm+1]+' (đang độ kiếp)';
   const b=_rl();return dvm()?b.replace(/đỉnh phong$/,'')+(lkOn()?' · đại viên mãn':'đại viên mãn'):b;};}
+// ===== Cưỡng ép lĩnh ngộ trước khi độ kiếp (đang bán bộ tạm thời) =====
+WOUND.thanbb={n:'Thức hải trọng thương',m:[1,3],fx:{ngo:-3,tam:-2},d:'Cưỡng ép lĩnh ngộ công pháp cảnh giới trên để độ kiếp. Thần thức và niệm lực chỉ còn bốn phần mười.'};
+const BB_THAN=0.4;
+{const _Sb=S;S=function(){const s=_Sb();const r=G.run;if(r&&(r.wounds||[]).some(x=>x.k==='thanbb')){s.than=Math.round(s.than*BB_THAN);s.nl=Math.round(s.than*3);}return s;};}
+function bbBooks(){const r=G.run;if(!r||!bbTemp())return [];return r.relics.map((x,i)=>({x,i})).filter(o=>o.x.k==='book'&&o.x.art&&o.x.art.req===r.realm+1&&!arts().some(a=>a.n===o.x.art.n&&a.type===o.x.art.type));}
+function bbForceLearn(i){const r=G.run;const rel=r.relics[i];if(!rel||rel.k!=='book'||!bbTemp())return null;const a=rel.art;normArt(a);
+  if(arts().filter(x=>x.type===a.type).length>=artCap(a.type))return 'Đã đủ ô '+(a.type==='cp'?'công pháp':'tâm pháp')+', không chứa thêm được.';
+  r.relics.splice(i,1);r.arts.push(a);const n=chuSlots();for(let j=0;j<n;j++)if(!r.chu[j]){r.chu[j]={k:'a',u:a.u};break;}
+  addWound('thanbb','cưỡng ép lĩnh ngộ');log(`Cưỡng ép lĩnh ngộ ${a.n} trước giờ độ kiếp, thức hải rạn nứt.`);syncSkills();clampHp();saveSoon();return '';}
+// ===== Thần thức trong trận: đủ thì dò được khí huyết, linh lực, định lực… của đối phương =====
+function unitLv(u){const r=G.run;if(u.kind==='kiep')return (r.bt&&r.bt.to)||r.realm+1;if(r.bt&&u.k==='tamma')return r.bt.to||r.realm+1;return (r.region||0)+(u.boss?1:u.elite?0.5:0);}
+function seeNeed(u){return Math.round(10+10.5*unitLv(u));}
+function canSee(u){if(!u||u.side!=='B')return true;return S().than>=seeNeed(u);}
+// ===== Độ kiếp thành công: hồi đầy, xóa thương tích và trạng thái bất lợi =====
+{const _bfk=btFinish;btFinish=function(){const r=G.run;const k=!!(r&&r.bt&&r.bt.stages&&r.bt.stages.length);const rl=r&&r.realm;const res=_bfk.apply(this,arguments);const r2=G.run;
+  if(k&&r2&&r2.realm>rl){r2.wounds=(r2.wounds||[]).filter(x=>x.perm);r2.inj=null;r2.ht=[];const s=S();r2.hp=s.maxHp;r2.mp=s.maxMp;const sc=r2.scene;if(sc&&Array.isArray(sc.chips))sc.chips.push(chip('✨','thân thể như mới','Độ kiếp thành công: hồi đầy, mọi thương tích và trạng thái bất lợi đều tan','up'));}
+  return res;};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
@@ -8300,6 +8318,7 @@ function modalHTML(){
      <h4 class="sgrp">Thuê xe chuyến</h4><div class="rows">${S0.length?S0.map(x=>`<button class="row" data-act="stage" data-arg="${x.id}"${r.st<x.c?' disabled':''}><span class="r-t"><b>${esc(x.n)}</b><small>${durH(x.h)} đường · nhanh gấp ba, không bị chặn</small></span><span class="r-x">${stoneHTML(x.c)}</span></button>`).join(''):'<p class="empty">Chưa tới thôn trấn nào khác trong vùng.</p>'}</div>
      <div class="mb-f"><span class="grow">Trong túi: ${stoneHTML(r.st)}</span><button class="btn" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='nhansu'){const n=nodeById(G.run.at);const L=sectPeople(n);return `<div class="mbox"><h3>Nhân sự · ${esc(n.name)}</h3><div class="rows">${L.length?L.map(x=>`<div class="row${x.alive?'':' dim'}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b>${esc(x.ten)}</b><small>${esc(x.tt)}</small></span><span class="r-x">${x.alive?REALM[x.realm]:'đã mất'}</span></div>`).join(''):'<p class="empty">Chưa nghe danh ai nổi bật ở đây.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
+  if(m.k==='bbLearn'){const L=bbBooks();const r=G.run;return `<div class="mbox"><h3>${ic('book')} Lĩnh ngộ gấp trước giờ độ kiếp?</h3><p>Ngươi đang ở bán bộ ${REALM[r.realm+1]}. Trong túi có ${L.length>1?'những ':''}bí tịch ${REALM[r.realm+1]}. Cưỡng ép lĩnh ngộ ngay thì dùng được trong lúc độ kiếp, nhưng phải trả giá:</p><ul class="bb-cost"><li>Thức hải trọng thương (vài tháng)</li><li>Thần thức, niệm lực chỉ còn bốn phần mười: khó dò xét kiếp vân, khó dùng vật phẩm, pháp bảo</li></ul><div class="rows">${L.map(o=>`<button class="row" data-act="bbLearn" data-arg="${o.i}"${tah(artTipH(o.x.art))}><span class="r-i">${artArt(o.x.art)}</span><span class="r-t"><b>${esc(o.x.art.n)}</b><small>${PHAM[o.x.art.tier]} · ${o.x.art.type==='cp'?'công pháp':'tâm pháp'}</small></span><span class="r-x">Học ngay</span></button>`).join('')}</div>${m.err?`<p class="bad">${esc(m.err)}</p>`:''}<div class="mb-f"><span class="grow"></span><button class="btn" data-act="modalX">Không, giữ thần thức</button></div></div>`;}
   if(m.k==='cbResume'){const sc=G.run&&G.run.scene;const en=sc&&sc.en?sc.en.n:'kẻ địch';return `<div class="mbox cbres"><h3>${ic('sword')} Trận chiến đang dang dở</h3><p>Ngươi vẫn đang giao chiến với <b>${esc(en)}</b>. Trận đánh tạm ngưng chờ ngươi trở lại.</p><div class="mb-f"><span class="grow"></span><button class="btn pri big" data-act="cbResumeGo">Tiếp tục trận chiến</button><span class="grow"></span></div></div>`;}
   if(m.k==='pick')return pickModalHTML(m);
   if(m.k==='item')return itemModalHTML(m);
@@ -8436,6 +8455,8 @@ function unitCard(sc,u,pickMode,compact){
   const cls=`ucard ${foe?'foe':'ally'}${dead?' dead':''}${tgt?' tg':''}${sc.cur===u.id?' cur':''}${compact?' cmp':''}`;
   const sub=u.sub||(foe?(sc.elite?'Tinh anh':sc.boss?'Thủ lĩnh':'Đối thủ'):'Đồng hành');
   let bars;
+  if(foe&&!dead&&!canSee(u)){const av0=`<span class="u-av fav"${ta('Thần thức không đủ để dò xét đối phương')}>${u.immune?u.icon:uAvatar(u)}</span>`;const nb=`<small class="u-s nosee">Thần thức không dò thấu</small>`;
+    return compact?`<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av0}${nb}</div>`:`<div class="${cls}" id="uc${u.id}"${tgt?` data-act="tgt" data-arg="${u.id}"`:''}>${av0}<div class="u-b"><div class="u-nm"><b>${esc(u.name)}</b></div>${nb}</div></div>`;}
   if(u.immune)bars=`<small class="u-s">${sc.kiep?'Đạo '+Math.min(sc.kiep.n,sc.kiep.done+1)+'/'+sc.kiep.n+(sc.kiep.waves>1?' · đợt '+sc.kiep.wave:''):''}${sc.kiep&&sc.kiep.uy<1?' · uy '+Math.round(sc.kiep.uy*100)+'%':''}</small>`;
   else bars=`<div class="brow"${ta('Khí huyết '+pctOf(Math.max(0,u.hp),u.max))}>${cBar(Math.max(0,u.hp),u.max,hpCls(u))}${compact?'':`<b>${pctOf(Math.max(0,u.hp),u.max)}</b>`}</div><div class="brow thin"${ta('Định lực '+Math.round(dlOf(u))+'%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}>${cBar(dlOf(u),100,'dl')}</div>`;
   const th=u.fpt?100:clamp(u.than||0,0,100),RC=2*Math.PI*29;const fring=foe&&!u.immune?`<svg class="tl-ring ${u.fpt?'burn':th>=100?'full':''}" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="29"/><circle class="fg" cx="32" cy="32" r="29" stroke-dasharray="${(RC*th/100).toFixed(1)} ${RC.toFixed(1)}"/></svg>`:'';
@@ -8581,7 +8602,8 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodg
 
 // ---------- chuẩn bị trước trận: xem hai phe, chỉnh chiêu, dùng đồ (không tốn niệm lực), rồi bấm Bắt đầu ----------
 {const _scU=startCombat;startCombat=function(spec,after){const res=_scU(spec,after);const sc=G.run&&G.run.scene;
-  if(sc&&sc.type==='combat'&&!sc.kiep&&!UI.noPrep)sc.prep=1;return res;};}
+  if(sc&&sc.type==='combat'&&(!sc.kiep||bbTemp())&&!UI.noPrep)sc.prep=1;
+  if(sc&&sc.prep&&bbTemp()){const r=G.run;const k='bbAsk'+r.bt.si;if(!r.bt[k]&&bbBooks().length){r.bt[k]=1;UI.modal={k:'bbLearn'};}}return res;};}
 // lực chiến dùng để so trong màn chuẩn bị (nhân vật chính lấy theo chỉ số hiện tại)
 function pLc(u){return u.isMain?lucChien():lcCalc(u);}
 // ai bị người này nghiền ép (khác phe, lực chiến kém từ 3 lần)
@@ -8622,6 +8644,9 @@ SCENE_V.combat=vCbPrep;
 function prepGo(){const sc=G.run&&G.run.scene;if(!sc||!sc.prep)return;const me=mainUnit(sc),f=playerUnit();
   for(const k of ['hp','max','mp','maxMp','atk','matk','def','crit','critDmg','hoTam','tp','cx','ne','hoi','skills','nl','maxNl','el'])me[k]=f[k];
   sc.prep=0;UI.panel=null;UI.menu=null;sc.rev=(sc.rev||0)+1;}
+// màn chuẩn bị: thần thức không đủ thì không thấy khí huyết, linh lực, lực chiến của đối phương
+{const _pur=prepUnitRow;prepUnitRow=function(u,me,cmp){if(u.side==='B'&&!canSee(u))return `<div class="pp-u foe"><span class="u-av"${ta('Thần thức không đủ để dò xét')}>${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}</span></div><small class="u-s nosee">Thần thức không dò thấu</small></div></div>`;return _pur(u,me,cmp);};}
+{const _tc=teamCmp;teamCmp=function(sc){if(sc.units.some(u=>u.side==='B'&&!canSee(u)))return {side:'B',t:'Không rõ',c:'ev'};return _tc(sc);};}
 
 // ---------- hiệu ứng trận đấu: phần luật ghi sự kiện vào sc.fxq, ở đây lấy ra vẽ lên lớp #fx ----------
 const FXC={kim:['#fff1b8','#d9a520'],moc:['#d6f8bf','#3c9a52'],thuy:['#d6f1ff','#3d8ecf'],hoa:['#ffe58f','#f0521f'],tho:['#f0d9a8','#96682a'],loi:['#f6eaff','#9a5cf0'],bang:['#ecfcff','#5cc3e0'],phong:['#e6ffec','#5fb07c'],am:['#dccbff','#5a2d91'],phat:['#fff5c9','#e0a81c'],vo:['#ffffff','#b9b2a0']};
@@ -9734,6 +9759,8 @@ Object.assign(ACT,{lifeGo:()=>{G.screen='map';clearInterval(UI.lifeIv);saveSoon(
   lifeAll:()=>{if(UI.lifeAll)return;UI.lifeAll=true;const b=document.querySelector('.lsx');if(b)b.classList.add('all');setTimeout(()=>{const g=document.querySelector('.lsx-go');if(g)g.scrollIntoView({block:'nearest',behavior:'smooth'});},50);}});
 // công pháp/tâm pháp vượt cảnh giới: chưa đủ điều kiện thì không cho vận hành
 {const _ar=ACT.artRun;ACT.artRun=u=>{const a=artBy(+u);const w=typeof artUseWhy==='function'&&artUseWhy(a);if(w){note(w,'dn');return;}_ar(u);};}
+
+ACT.bbLearn=i=>{const e=bbForceLearn(+i);if(e){UI.modal={k:'bbLearn',err:e};return;}UI.modal=bbBooks().length?{k:'bbLearn'}:null;note('Thức hải rạn nứt, thần thức suy giảm. Nhưng tâm pháp mới đã khắc vào lòng.','dn');};
 
 </script>
 </body>

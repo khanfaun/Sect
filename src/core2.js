@@ -2579,3 +2579,20 @@ function artUseWhy(a){const r=G.run;if(!a||a.req<=effRealm())return '';if(a.req=
 // tên cảnh giới hiển thị
 {const _rl=realmLabel;realmLabel=function(){const r=G.run;if(!r||isPham())return _rl();const k=bbKind();if(k&&k!=='temp'&&r.realm<5)return 'Bán bộ '+REALM[r.realm+1];if(k==='temp')return 'Bán bộ '+REALM[r.realm+1]+' (đang độ kiếp)';
   const b=_rl();return dvm()?b.replace(/đỉnh phong$/,'')+(lkOn()?' · đại viên mãn':'đại viên mãn'):b;};}
+// ===== Cưỡng ép lĩnh ngộ trước khi độ kiếp (đang bán bộ tạm thời) =====
+WOUND.thanbb={n:'Thức hải trọng thương',m:[1,3],fx:{ngo:-3,tam:-2},d:'Cưỡng ép lĩnh ngộ công pháp cảnh giới trên để độ kiếp. Thần thức và niệm lực chỉ còn bốn phần mười.'};
+const BB_THAN=0.4;
+{const _Sb=S;S=function(){const s=_Sb();const r=G.run;if(r&&(r.wounds||[]).some(x=>x.k==='thanbb')){s.than=Math.round(s.than*BB_THAN);s.nl=Math.round(s.than*3);}return s;};}
+function bbBooks(){const r=G.run;if(!r||!bbTemp())return [];return r.relics.map((x,i)=>({x,i})).filter(o=>o.x.k==='book'&&o.x.art&&o.x.art.req===r.realm+1&&!arts().some(a=>a.n===o.x.art.n&&a.type===o.x.art.type));}
+function bbForceLearn(i){const r=G.run;const rel=r.relics[i];if(!rel||rel.k!=='book'||!bbTemp())return null;const a=rel.art;normArt(a);
+  if(arts().filter(x=>x.type===a.type).length>=artCap(a.type))return 'Đã đủ ô '+(a.type==='cp'?'công pháp':'tâm pháp')+', không chứa thêm được.';
+  r.relics.splice(i,1);r.arts.push(a);const n=chuSlots();for(let j=0;j<n;j++)if(!r.chu[j]){r.chu[j]={k:'a',u:a.u};break;}
+  addWound('thanbb','cưỡng ép lĩnh ngộ');log(`Cưỡng ép lĩnh ngộ ${a.n} trước giờ độ kiếp, thức hải rạn nứt.`);syncSkills();clampHp();saveSoon();return '';}
+// ===== Thần thức trong trận: đủ thì dò được khí huyết, linh lực, định lực… của đối phương =====
+function unitLv(u){const r=G.run;if(u.kind==='kiep')return (r.bt&&r.bt.to)||r.realm+1;if(r.bt&&u.k==='tamma')return r.bt.to||r.realm+1;return (r.region||0)+(u.boss?1:u.elite?0.5:0);}
+function seeNeed(u){return Math.round(10+10.5*unitLv(u));}
+function canSee(u){if(!u||u.side!=='B')return true;return S().than>=seeNeed(u);}
+// ===== Độ kiếp thành công: hồi đầy, xóa thương tích và trạng thái bất lợi =====
+{const _bfk=btFinish;btFinish=function(){const r=G.run;const k=!!(r&&r.bt&&r.bt.stages&&r.bt.stages.length);const rl=r&&r.realm;const res=_bfk.apply(this,arguments);const r2=G.run;
+  if(k&&r2&&r2.realm>rl){r2.wounds=(r2.wounds||[]).filter(x=>x.perm);r2.inj=null;r2.ht=[];const s=S();r2.hp=s.maxHp;r2.mp=s.maxMp;const sc=r2.scene;if(sc&&Array.isArray(sc.chips))sc.chips.push(chip('✨','thân thể như mới','Độ kiếp thành công: hồi đầy, mọi thương tích và trạng thái bất lợi đều tan','up'));}
+  return res;};}
