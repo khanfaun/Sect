@@ -13,6 +13,7 @@ function pChar(){
     b+=sgBoxC('than','flag','Thân thế',[kvRow('Xuất thân',esc(og.n),og.d),...(tr&&tr.id!=='none'?[kvRow('Mệnh cách',esc(tr.n),tr.d)]:[]),
       kvRow('Linh căn',lcV,R1.d+'\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×'+numVN(R1.m)+').'),
       ttRow('Tiên thiên khí vận',(r.kv||[]).map(k=>TT_DEST[k]),'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.'),
+      htRow(),
       ttRow('Tiên thiên thể chất',(r.the||[]).map(ttPhysOf),'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.'),
       kvRow('Tư chất',`<span style="color:${PCOL[Math.max(0,4-TC_N.findIndex(x=>tc>=x[0]))]}">${tcName(tc)}</span>`,'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
       kvRow('Ngộ tính',RT('ngo',s.ngo,'muc'),'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',RT('tam',s.tam,'muc'),'Chống ảo cảnh, đột phá'),kvRow('Khí vận',RT('van',s.van,'muc'),'Chí mạng, may mắn'),
@@ -593,3 +594,11 @@ let ENT_C=null;function entIdxC(){const t=Date.now();if(!ENT_C||t-ENT_C.t>400||E
   return h.split(/(<[^>]+>)/).map(part=>part[0]==='<'?part:part.replace(re,(m,pre,w)=>{if(seen.has(w))return m;seen.add(w);const k=ks.find(x=>esc(x)===w);return `${pre}<span class="gl ent"${tah(M[k])}>${w}</span>`;})).join('');};}
 
 function bondRow(n,g,sub,x,kv,dim){return `<details class="bond${dim?' dim':''}"><summary class="row"><span class="r-i bav">${npcAv(n,g)}</span><span class="r-t"><b>${esc(n)}</b><small>${esc(sub)}</small></span>${x?`<span class="r-x">${esc(x)}</span>`:''}<i class="cc-ch">${ic('down')}</i></summary><div class="kvl bond-d">${kv.filter(k=>k[1]).map(k=>`<div class="kr"><span>${esc(k[0])}</span><b>${esc(k[1])}</b></div>`).join('')}</div></details>`;}
+
+// hậu thiên khí vận trong tab Căn cơ
+const HT_COLR={1:2,2:3,3:4,4:5};
+function htTipH(x){const c=TT_COL[HT_COLR[x.r]];return `<div class="tt-it" style="--pc:${c}"><div><b>${esc(x.n)}</b><small>${HT_RANK[x.r]} · hậu thiên</small><p>${htFxText(x).map(esc).join('<br>')}</p></div></div>`;}
+function htRow(){const r=G.run;const L=(r.htkv||[]).map(id=>HTMAP[id]).filter(Boolean);
+  const v=L.length?`<span class="ttl">${L.map(x=>`<span class="ttc r${HT_COLR[x.r]}" style="--pc:${TT_COL[HT_COLR[x.r]]}"${tah(htTipH(x))}>${esc(x.n)}</span>`).join('')}</span>`:'<span class="hint">Chưa có</span>';
+  return kvRow('Hậu thiên khí vận',v,'Cơ duyên có được sau mỗi lần đột phá đại cảnh giới.');}
+STAT_IC['Hậu thiên khí vận']=['spark','jade'];
