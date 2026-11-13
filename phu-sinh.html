@@ -6833,7 +6833,7 @@ function sgGate(){const r=G.run;if(!r)return 1;if(r.sg==null)r.sg=r.realm===0&&r
   return r.sg;}
 function sgEnd(g){const th=sgTh();return g<th.length?th[g]:100;}
 function sgTang(tv){if(tv==null)tv=G.run.tv;return Math.min(sgNat(tv),sgGate());}
-function sgFull(){return sgOn()&&G.run.tv>=sgEnd(sgGate())-1e-6;}
+function sgFull(){return sgOn()&&G.run.tv>=sgEnd(sgGate())-0.15;} // tu vi làm tròn tới 0,1: sát mốc là tính đầy
 function sgW(g){g=g||sgTang();return sgEnd(g)-sgTh()[g-1];}
 function sgPct(tv){const r=G.run;if(tv==null)tv=r.tv;const g=sgTang(tv);return Math.floor(clamp((tv-sgTh()[g-1])/sgW(g),0,1)*100+1e-6);}
 function sgName(g){return G.run.realm===0?'tầng '+g:TIEU[g-1];}
@@ -6859,7 +6859,7 @@ function lkXk(){const X=lkXkState();if(!X||!X.ok)return false;const r=G.run;r.sg
 {const _bf37=btFinish;btFinish=function(){const rl=G.run&&G.run.realm;const res=_bf37.apply(this,arguments);if(G.run&&G.run.realm!==rl){G.run.sg=1;G.run.lkG=null;}return res;};}
 {const _pu37=phamUp;phamUp=function(){const was=isPham();const res=_pu37.apply(this,arguments);if(was&&G.run&&!isPham()){G.run.sg=1;G.run.lkG=null;}return res;};}
 // chặn tu vi ở đỉnh tầng/kỳ đang mở; mất tu vi không rớt tầng/kỳ
-{const _at37=addTv;addTv=function(x){const r=G.run;if(!r||!sgOn())return _at37(x);const f=sgTh()[sgTang()-1];const res=_at37(x);const r2=G.run;if(r2&&sgOn()){if(r2.tv>sgEnd(sgGate()))r2.tv=sgEnd(sgGate());if(x<0&&r2.tv<f)r2.tv=f;}return res;};}
+{const _at37=addTv;addTv=function(x){const r=G.run;if(!r||!sgOn())return _at37(x);const f=sgTh()[sgTang()-1];const res=_at37(x);const r2=G.run;if(r2&&sgOn()){if(r2.tv>=sgEnd(sgGate())-0.15)r2.tv=sgEnd(sgGate());if(x<0&&r2.tv<f)r2.tv=f;}return res;};}
 {const _ts37=tvSimAdd;tvSimAdd=function(raw){const v=_ts37(raw);if(!sgOn())return v;return Math.max(0,Math.min(v,sgEnd(sgGate())-G.run.tv));};}
 {const _bn37=bqNeedY;bqNeedY=function(){if(!sgOn())return _bn37();const r=G.run;const left=sgEnd(sgGate())-r.tv;return left<=1e-6?0:Math.max(0.25,Math.ceil(left/bqReal()*4)/4);};}
 {const _bi37=bqInfo;bqInfo=function(){const o=_bi37();if(sgOn())o.full=sgFull();return o;};}
@@ -7942,6 +7942,7 @@ function modalHTML(){
      <h4 class="sgrp">Thuê xe chuyến</h4><div class="rows">${S0.length?S0.map(x=>`<button class="row" data-act="stage" data-arg="${x.id}"${r.st<x.c?' disabled':''}><span class="r-t"><b>${esc(x.n)}</b><small>${durH(x.h)} đường · nhanh gấp ba, không bị chặn</small></span><span class="r-x">${stoneHTML(x.c)}</span></button>`).join(''):'<p class="empty">Chưa tới thôn trấn nào khác trong vùng.</p>'}</div>
      <div class="mb-f"><span class="grow">Trong túi: ${stoneHTML(r.st)}</span><button class="btn" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='nhansu'){const n=nodeById(G.run.at);const L=sectPeople(n);return `<div class="mbox"><h3>Nhân sự · ${esc(n.name)}</h3><div class="rows">${L.length?L.map(x=>`<div class="row${x.alive?'':' dim'}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b>${esc(x.ten)}</b><small>${esc(x.tt)}</small></span><span class="r-x">${x.alive?REALM[x.realm]:'đã mất'}</span></div>`).join(''):'<p class="empty">Chưa nghe danh ai nổi bật ở đây.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
+  if(m.k==='cbResume'){const sc=G.run&&G.run.scene;const en=sc&&sc.en?sc.en.n:'kẻ địch';return `<div class="mbox cbres"><h3>${ic('sword')} Trận chiến đang dang dở</h3><p>Ngươi vẫn đang giao chiến với <b>${esc(en)}</b>. Trận đánh tạm ngưng chờ ngươi trở lại.</p><div class="mb-f"><span class="grow"></span><button class="btn pri big" data-act="cbResumeGo">Tiếp tục trận chiến</button><span class="grow"></span></div></div>`;}
   if(m.k==='pick')return pickModalHTML(m);
   if(m.k==='item')return itemModalHTML(m);
   if(m.k==='th')return thModalHTML(m);
@@ -8856,7 +8857,11 @@ function openBq(){const r=G.run;if(bqCan())return;UI.bqOpened=!r.scene;if(!r.sce
 const ACT={
   birth:()=>{genBirth();const c=G.birth.cards;newRun(c[Math.floor(Math.random()*c.length)]);UI.sel=null;UI.panel=null;run2();},
   born:i=>{newRun(G.birth.cards[+i]);UI.sel=null;UI.panel=null;run2();},
-  resume:()=>{G.screen='map';},
+  resume:()=>{G.screen='map';UI.modal=null;UI.panel=null;UI.menu=null;UI.pendSk=null;UI.confirm=null;
+    const r=G.run,sc=r&&r.scene;
+    if(sc&&sc.type==='place')r.scene=null; // bảng chi tiết địa điểm: đóng, mở lại khi cần
+    else if(sc&&sc.type==='combat'&&!sc.done)UI.modal={k:'cbResume'};}, // đang đánh: phải xác nhận mới đánh tiếp
+  cbResumeGo:()=>{UI.modal=null;},
   screen:a=>{UI.panel=null;UI.modal=null;if(a==='map'){G.screen=G.run?'map':'title';}else if(a==='codex'){G.screen='meta';UI.tab.meta='lives';}else{G.screen=a;}if(a==='meta'||a==='title')G.over=null;if(a==='title')UI.narrSkip=true;},
   overNext:()=>{G.over=null;G.screen='title';UI.narrSkip=false;},
   narrSkip:()=>{UI.narrSkip=true;},
@@ -9080,7 +9085,7 @@ document.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;clea
 // phần tử có hành động thật (không bị tắt) thì chạm là bấm, giữ mới xem chú thích; ô khóa, nút tắt: chạm là xem
 function tipActOf(t){const a=t.closest('[data-act]');return a&&!a.disabled&&!a.classList.contains('lock')?a:null;}
 document.addEventListener('scroll',()=>{if(tipEl)hideTip();},{passive:true,capture:true});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(UI.modal)UI.modal=null;else if(UI.panel)UI.panel=null;else return;render();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(UI.modal&&UI.modal.k==='cbResume')return;if(UI.modal)UI.modal=null;else if(UI.panel)UI.panel=null;else return;render();}});
 
 // ---------- lưu ----------
 const KEY='phusinh2_save_v1';
