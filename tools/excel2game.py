@@ -13,7 +13,7 @@ XLSX = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'docs/vat-pham.x
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'src/data/catalog.js')
 REPORT = sys.argv[3] if len(sys.argv) > 3 else os.path.join(ROOT, 'docs/bao-cao-vat-pham.md')
 
-EQ_FX = set('atkP matkP defP hpP mpP crit critDmg dodge tp ngo tam van tvP regenHp regenMp startBlock blockTurn reflect poisonHit stunP elX pillP mpCost shopP stonesP lifeP drain execute healAfter firstEvade weakStart vulnStart pillSlot tammaRes hoTam craftP bqSafe bqP'.split())
+EQ_FX = set('lifeP atkP matkP defP hpP mpP crit critDmg dodge tp ngo tam van tvP regenHp regenMp startBlock blockTurn reflect poisonHit stunP elX pillP mpCost shopP stonesP lifeP drain execute healAfter firstEvade weakStart vulnStart pillSlot tammaRes hoTam craftP bqSafe bqP'.split())
 TRAIT_FX = EQ_FX | {'burnHit', 'chkP', 'poisonImm'}
 ART_FX = EQ_FX | {'than', 'rageTurn', 'moveP', 'atkStage', 'hpStage', 'defStage', 'matkStage'}
 SK_FX = {'p', 'h', 'pierce', 'crit', 'poison', 'burn', 'stun', 'weak', 'vuln', 'drain', 'heal', 'regen', 'block', 'evade', 'rage', 'selfHp', 'cleanse', 'bonusIf'}
@@ -98,9 +98,13 @@ for sh in EQ_SHEETS:
         fx = fx_from(d, sh, row, EQ_FX, 3, 'Gốc {}', 'Số gốc {}')
         if sorted(k2 for k2 in fx) != sorted(KFX[k]): warn(sh, row, f'mã gốc {list(fx)} khác mã gốc của dạng {KFX[k]}')
         sub = fx_from(d, sh, row, EQ_FX, 4, 'Phụ {}', 'Số phụ {}')
+        neg = [k2 for k2, v in sub.items() if v < 0]
+        if len(neg) > 1 or (neg and not uniq): warn(sh, row, 'chỉ đồ Độc nhất được 1 dòng âm, bỏ dòng âm thừa'); [sub.pop(k2) for k2 in (neg if not uniq else neg[1:])]; neg = neg[:1] if uniq else []
         for k2 in list(sub):
-            if k2 not in POOL or k2 in fx: warn(sh, row, f'dòng phụ {k2} không hợp lệ (ngoài 13 mã phụ hoặc trùng mã gốc), bỏ'); del sub[k2]
-        if len(sub) != REL_X[t]: warn(sh, row, f'{PHAM[t]} cần {REL_X[t]} dòng phụ, đang có {len(sub)}')
+            ok = k2 in POOL or (k2 in neg and k2 == 'lifeP')
+            if not ok or k2 in fx: warn(sh, row, f'dòng phụ {k2} không hợp lệ (ngoài 13 mã phụ hoặc trùng mã gốc), bỏ'); del sub[k2]
+        npos = sum(1 for v in sub.values() if v > 0)
+        if npos != REL_X[t]: warn(sh, row, f'{PHAM[t]} cần {REL_X[t]} dòng phụ, đang có {npos}')
         ex = fx_from(d, sh, row, EQ_FX, 1, 'Nội tại thêm', 'Số nội tại thêm') if d.get('Nội tại thêm') else {}
         for k2 in list(ex):
             if k2 not in NT: warn(sh, row, f'"{k2}" không phải nội tại, bỏ'); del ex[k2]

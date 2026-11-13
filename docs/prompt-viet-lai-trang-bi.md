@@ -11,6 +11,8 @@ Game tu tiên "Phù Sinh" vừa đổi luật trang bị. Tôi gửi kèm file E
 - **Dòng chữ nghiêng đầu mỗi trang**: luật của trang đó.
 
 ## Luật trang bị mới (BẮT BUỘC)
+Ghi **số thật** (game dùng để tính). Người chơi không thấy con số mà thấy chữ: tăng nhẹ / khá / mạnh / rất mạnh, nên lời tựa không nhắc con số.
+
 1. **Phẩm quyết định SỐ DÒNG**, **Cảnh giới cần quyết định ĐỘ LỚN**. Phẩm nào cũng có thể gặp ở mọi cảnh giới.
 2. **Cảnh giới cần** theo Vùng xuất hiện (chia gần đều hai mức):
    - vùng 0 → Phàm nhân hoặc Luyện Khí
@@ -26,7 +28,7 @@ Game tu tiên "Phù Sinh" vừa đổi luật trang bị. Tôi gửi kèm file E
    - Dạng nào trong bảng A đã có nội tại (ghi "Nội tại: …") thì không được thêm.
    - Chỉ món **Độc nhất** mà Dạng chưa có nội tại mới được ghi 1 nội tại ở cột "Nội tại thêm".
    - Số nội tại lấy "Số gốc" ở bảng C × hệ số cảnh giới. Riêng dạng đếm (firstEvade, weakStart, vulnStart, pillSlot) không nhân, ghi 1–3.
-6. **Độc nhất** được mạnh hơn tới +40%.
+6. **Độc nhất** được mạnh hơn tới +40%, và được có thêm **1 dòng âm** (cái giá phải trả, ví dụ đạo tâm giảm, thọ nguyên giảm): ghi số âm ở một ô Phụ, mã chọn trong 13 mã phụ hoặc lifeP.
 7. **Giữ nguyên**: ID, Tên, Dạng, Hệ, Phẩm, Vùng, Độc nhất, Biểu tượng, Nguồn gặp.
    - Lời tựa được sửa nhẹ nếu không còn hợp với chỉ số.
    - **Không đụng các dòng tô xanh** (đồ đang có trong game).
