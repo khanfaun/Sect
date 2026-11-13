@@ -1426,6 +1426,22 @@ details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim
 .rel-tag{font-style:normal;font-size:.7em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:middle}
 details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:rotate(180deg)}
 
+/* hệ thống cảnh giới */
+.bq-tabs{margin:-4px 0 10px}
+.cgbox{max-height:min(88vh,760px);overflow:auto}
+.cg-list{display:flex;flex-direction:column;gap:6px}
+.cg-it{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--paper2);font:inherit;color:var(--ink);cursor:pointer;text-align:left}
+.cg-it b{font-size:1.02em;letter-spacing:.04em}.cg-it.fut{opacity:.75}.cg-it.cur{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset;background:color-mix(in srgb,var(--gold) 10%,var(--paper2))}
+.cg-st{font-size:.74em;color:var(--ink3)}.cg-st.now{color:var(--gold);font-weight:600}.cg-it.done .cg-st{color:#2f8f4e}
+.cg-det h3{margin:.5em 0 .2em}.cg-d{color:var(--ink2);line-height:1.6;font-size:.92em}
+.cg-ts{display:flex;flex-direction:column;gap:3px}.cg-t{display:flex;justify-content:space-between;gap:8px;padding:6px 10px;border-radius:6px;background:var(--paper2);font-size:.88em}
+.cg-t small{color:var(--ink3)}.cg-t.ok{color:#2f8f4e}.cg-t.on{outline:1.5px solid var(--gold);font-weight:600}.cg-t.leg{font-style:italic;color:var(--ink2);font-size:.82em;line-height:1.5}
+.fog{letter-spacing:.3em;color:var(--ink3);filter:blur(.4px)}
+.cg-t.fog13{justify-content:center;background:linear-gradient(90deg,transparent,rgba(150,150,160,.25),transparent);animation:fog 4s ease-in-out infinite}
+@keyframes fog{0%,100%{opacity:.55}50%{opacity:1}}
+.cg-q{display:grid;gap:6px}.cg-qi{padding:6px 10px;border:1px dashed var(--line);border-radius:6px}.cg-qi b{display:block;font-size:.9em}.cg-qi small{color:var(--ink2);font-size:.8em}.cg-qi.got{border-style:solid;border-color:#2f8f4e;background:color-mix(in srgb,#2f8f4e 8%,transparent)}
+.cg-act{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+
 </style>
 </head>
 <body>
@@ -8378,7 +8394,7 @@ function mapUiHTML(){
   h+=`<div class="mright">${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}${B('legendOpen',null,ic('list'),'Chú giải ký hiệu trên bản đồ')}${B('center',null,ic('target'),'Về chỗ ngươi')}</div>`;
   // góc trái dưới: luyện chế, túi đồ, bế quan (nhấp nháy khi đủ điều kiện đột phá)
   const bqNo=bqCan();const brk=canBreak();
-  h+=`<div class="mbl">${B('panel','craft',ic('flask'),'Luyện chế: luyện đan, luyện khí từ vật liệu',0,!!r.moving)}${B('bagOpen',null,ic('bag'),'Túi đồ')}<button class="mb${brk?' glow':''}" data-act="hudBq"${bqNo?' disabled':''}${ta(bqNo||(brk?'Bế quan · tu vi viên mãn: vào để đột phá':'Bế quan tu luyện ngay tại đây'))}>${ic('seat')}</button>${typeof DEV!=='undefined'&&DEV?`<button class="mb dev" data-act="devOpen"${ta('Dev test: thử hiệu ứng')}>${ic('bolt')}</button>`:''}</div>`;
+  h+=`<div class="mbl">${B('panel','craft',ic('flask'),'Luyện chế: luyện đan, luyện khí từ vật liệu',0,!!r.moving)}${B('bagOpen',null,ic('bag'),'Túi đồ')}<button class="mb${brk?' glow':''}" data-act="hudBq"${bqNo?' disabled':''}${ta(bqNo||(brk?'Bế quan · tu vi viên mãn: vào để đột phá':'Bế quan tu luyện ngay tại đây'))}>${ic('seat')}</button><button class="mb" data-act="cgOpen"${ta('Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá')}>${ic('yin')}</button>${typeof DEV!=='undefined'&&DEV?`<button class="mb dev" data-act="devOpen"${ta('Dev test: thử hiệu ứng')}>${ic('bolt')}</button>`:''}</div>`;
   return h;
 }
 const ENTER_L={tran:'Vào thôn trấn',thanh:'Vào thành',tong:'Lên sơn môn',ai:'Tới cửa ải',sao:'Vào sào huyệt',dong:'Vào hang',phe:'Vào phế tích',ma:'Vào ma địa',thien:'Bước lên',rung:'Vào rừng',nui:'Lên núi',song:'Ra bến nước',bien:'Ra bờ biển',hoang:'Vào hoang dã'};
@@ -9004,7 +9020,7 @@ function pChar(){
       kvRow('Tư chất',`<span style="color:${PCOL[Math.max(0,4-TC_N.findIndex(x=>tc>=x[0]))]}">${tcName(tc)}</span>`,'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
       kvRow('Ngộ tính',RT('ngo',s.ngo,'muc'),'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',RT('tam',s.tam,'muc'),'Chống ảo cảnh, đột phá'),kvRow('Khí vận',RT('van',s.van,'muc'),'Chí mạng, may mắn'),kvRow('Mị lực',`<span class="mi-v">${miName()}</span>`,'Dung mạo, phong thái. Ảnh hưởng giá mua bán, các phép thử thuyết phục, ấn tượng ban đầu của người lạ, việc kết giao, bái sư, kết đạo lữ.\nQuá nổi bật đôi khi cũng chuốc lấy ghen ghét.'),
       kvRow('Nhân quả',karmaName(r.karma),'Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
-    b+=sgBoxC('tu','yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+tvShow()+'%'+(dinhPhong()?(dvm()?'\nĐại viên mãn: khí huyết, linh lực, công, thủ +5%.':'\nChưa đại viên mãn: '+dvmWhy()+'.\n(Cần: không trọng thương, tâm ma dưới '+DVM_TAMMA+', đạo tâm từ '+DVM_TAM+')'):'')+(bbKind()?'\nBán bộ '+REALM[G.run.realm+1]+': dùng được đồ, công pháp, tâm pháp của '+REALM[G.run.realm+1]+'; chỉ số vẫn như cũ.':'')),
+    b+=sgBoxC('tu','yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel())+` <span class="qhelp" data-act="cgOpen"${ta('Mở hệ thống cảnh giới')}>?</span>`,'Tu vi '+tvShow()+'%'+(dinhPhong()?(dvm()?'\nĐại viên mãn: khí huyết, linh lực, công, thủ +5%.':'\nChưa đại viên mãn: '+dvmWhy()+'.\n(Cần: không trọng thương, tâm ma dưới '+DVM_TAMMA+', đạo tâm từ '+DVM_TAM+')'):'')+(bbKind()?'\nBán bộ '+REALM[G.run.realm+1]+': dùng được đồ, công pháp, tâm pháp của '+REALM[G.run.realm+1]+'; chỉ số vẫn như cũ.':'')),
       `<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(tvShow(),100,'tv')}<span class="hv">${tvShow()}%</span></div>`,
       `<div class="hrow tvrow"${ta('Lịch luyện '+llShow()+'%\nCó được nhờ thực chiến (thắng nhiều, thua ít, đánh kẻ mạnh hơn được nhiều hơn), tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Lịch luyện tính theo tầng/kỳ đang ở: chừng 65% là xung kích được, đột phá đại cảnh giới thì cần đầy.')}><span class="hn">${sib('Lịch luyện')}Lịch luyện</span>${bar(llShow(),100,'ll')}<span class="hv">${llShow()}%</span></div>`,
       kvRow('Tốc độ tu',RT('bq',bqReal(),'toc'),'Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.'),
@@ -10156,6 +10172,60 @@ setInterval(()=>{if(!G.run||G.screen!=='map'){UI.lowPrev=null;UI.injPrev=null;re
 ACT.favGift=n=>{UI.bondOpen=n;const w=favGift(n);if(w)note(w,'dn');else note('Đã tặng lễ cho '+(n.replace(/^@\d+:/,'')),'up');};
 ACT.relMake=a=>{const i=a.lastIndexOf('|');const n=a.slice(0,i),k=a.slice(i+1);UI.bondOpen=n;const w=relMake(n,k,npcInfo(n));if(w)note(w,'dn');else hnote('Kết '+REL_T[k].n.toLowerCase()+' · '+n.replace(/^@\d+:/,''),'up');};
 ACT.relBreak=n=>{UI.bondOpen=n;relBreak(n);};
+
+// ================= HỆ THỐNG CẢNH GIỚI (tab trong bảng bế quan) =================
+// Thông tin chỉ mở khi người chơi đã nghe ngóng được (trà lâu, tửu phường, Tàng Kinh Các) hoặc đã tự trải qua.
+const CG_R=[
+ {i:-1,n:'Phàm nhân',d:'Thân xác phàm tục, chưa dẫn được linh khí vào người. Sống chết theo lẽ thường.',brk:'Tìm được tâm pháp dẫn khí, ngồi yên dẫn sợi linh khí đầu tiên vào thân.'},
+ {i:0,n:'Luyện Khí',d:'Dẫn linh khí vào kinh mạch, rèn thân thành bình chứa. Mười ba tầng, phần lớn người tu cả đời không qua tầng chín.',brk:'Tu vi đầy từ tầng chín trở lên, lịch luyện theo kịp, ngồi ở nơi có động phủ.'},
+ {i:1,n:'Trúc Cơ',d:'Đắp nền cho đại đạo. Nền vững thì đường sau rộng, nền lệch thì cả đời vá víu.',brk:'Tới đỉnh phong, lịch luyện đủ, ở động phủ, vượt qua tâm ma kiếp.'},
+ {i:2,n:'Kết Đan',d:'Ngưng chân nguyên thành kim đan trong đan điền. Từ đây mới thật sự bước vào hàng tu sĩ.',brk:'Tới đỉnh phong, lịch luyện đủ, vượt sáu đạo lôi kiếp rồi tâm ma kiếp.'},
+ {i:3,n:'Nguyên Anh',d:'Phá đan thành anh, nguyên thần có hình có dạng. Thân xác hỏng còn có thể tái tạo.',brk:'Tới đỉnh phong, lịch luyện đủ, vượt chín đạo lôi kiếp.'},
+ {i:4,n:'Hóa Thần',d:'Nguyên anh hóa thần, cảm ứng thiên địa. Đã đứng ở đỉnh nhân gian.',brk:'Viên mãn Hóa Thần, tìm tới nơi trời đất mỏng nhất để độ kiếp phi thăng.'},
+ {i:5,n:'Độ Kiếp',d:'Lời đồn kể rằng qua được cửa này là rời khỏi nhân gian. Chưa ai quay về kể lại.',brk:''}];
+const LK_LEG={10:'Tầng mười: nghe nói ngàn năm trước có một vị Bạch Y kiếm khách từng đạt tới, đến nay chưa có người thứ hai.',11:'Tầng mười một: truyền thuyết kể rằng trăm vạn năm trước có người chạm tới. Thật giả không ai rõ.',12:'Tầng mười hai: xưa nay chỉ nghe đồn là có, chưa từng thấy ai đạt được.'};
+function cgK(){const m=G.meta;return m.cgK||(m.cgK=[]);}
+function cgKnow(k){return cgK().includes(k);}
+function cgReached(i){const r=G.run;const cur=isPham()?-1:r.realm;return i<=cur;}
+// mục nào được biết: đã trải qua thì tự biết; còn lại phải nghe ngóng
+function cgOk(k,i){if(i!=null&&cgReached(i))return true;return cgKnow(k);}
+const CG_KEYS=()=>{const L=[];for(const R of CG_R){if(R.i>=0)L.push('R'+R.i+'b');if(R.i>=1&&R.i<=4)L.push('Q'+R.i);}L.push('lk10','lk11','lk12');return L;};
+function cgLearn(why){const r=G.run;if(!r)return false;const cur=isPham()?-1:r.realm;const L=CG_KEYS().filter(k=>!cgKnow(k)&&!(/^R(-?\d)b$/.test(k)&&cgReached(+k.slice(1,-1)))&&!(/^Q(\d)$/.test(k)&&cgReached(+k.slice(1))));
+  if(!L.length)return false;const near=L.filter(k=>{const m=/(-?\d+)/.exec(k);return k.startsWith('lk')||!m||+m[1]<=cur+2;});const k=pick(near.length?near:L);cgK().push(k);
+  const T=k.startsWith('lk')?'truyền thuyết Luyện Khí '+k.slice(2).replace('10','tầng mười').replace('11','tầng mười một').replace('12','tầng mười hai'):k[0]==='R'?'cách đột phá '+(CG_R.find(x=>x.i===+k.slice(1,-1))||{}).n:'các phẩm '+REALM[+k.slice(1)];
+  if(typeof note==='function')note('Nghe ngóng được: '+T+'. Xem trong mục Cảnh giới.','up');return true;}
+{const _th=teaHouse;teaHouse=function(n){const res=_th.apply(this,arguments);if(chance(0.3))cgLearn('tea');return res;};}
+{const _pa=placeAct;placeAct=function(a){const res=_pa.apply(this,arguments);if(a==='lib'&&chance(0.6))cgLearn('lib');return res;};}
+const Q_DESC={1:[['Nhân đạo','Đột phá ở tầng chín.'],['Hoàn mỹ','Đột phá từ tầng mười, đạo cơ từ ba.'],['Địa đạo','Từ tầng mười, đạo cơ từ sáu, không dùng Trúc Cơ Đan, tâm pháp Địa phẩm đã học trọn.'],['Thiên đạo','Tầng mười ba, đạo cơ từ mười, tâm pháp Thiên phẩm học trọn, luyện thể tầng mười. Sẽ gặp ba đạo lôi kiếp.']]};
+function qDescs(i){return Q_DESC[i]||[['Nhân đạo','Đạo cơ từ ba lúc đột phá.'],['Địa đạo','Đạo cơ từ sáu lúc đột phá.'],['Thiên đạo','Đạo cơ từ mười lúc đột phá.']];}
+function cgListHTML(){const r=G.run;const cur=isPham()?-1:r.realm;
+  return `<div class="cg-list">${CG_R.slice().reverse().map(R=>{const st=R.i<cur?'done':R.i===cur?'cur':'fut';const q=R.i>=1&&R.i<=cur?(r.quality||[])[R.i]:null;
+    return `<button class="cg-it ${st}" data-act="cgSel" data-arg="${R.i}"><b>${R.n}</b>${st==='done'?`<span class="cg-st">Đã đột phá${q?' · '+QNAME[q]:''}</span>`:st==='cur'?'<span class="cg-st now">Hiện tại</span>':''}</button>`;}).join('')}</div>`;}
+function cgDetailHTML(i){const r=G.run;const R=CG_R.find(x=>x.i===i);if(!R)return '';const cur=isPham()?-1:r.realm;const here=i===cur;
+  let h=`<div class="cg-det"><button class="btn sm" data-act="cgSel" data-arg="">‹ Các cảnh giới</button><h3>${R.n}${here?' <small class="cg-st now">Hiện tại</small>':''}</h3><p class="cg-d">${esc(R.d)}</p>`;
+  if(i>=0)h+=`<div class="kv"><div><span>Thọ nguyên</span><b>${i<=cur+1?'chừng '+LIFE[i]+' năm':'?'}</b></div></div>`;
+  // tiểu cảnh giới
+  if(i===0){const past=i<cur,lt=here?lkTang():past?99:0;let rows='';for(let g=1;g<=9;g++)rows+=`<div class="cg-t${here&&lt===g?' on':''}${lt>g?' ok':''}">Tầng ${g}<small>${g<=3?'sơ kỳ':g<=6?'trung kỳ':'hậu kỳ'}</small></div>`;
+    for(const g of [10,11,12])rows+=`<div class="cg-t leg${here&&lkTang()===g?' on':''}${here&&lkTang()>g?' ok':''}">${cgOk('lk'+g)||(here&&lkTang()>=g)?esc(LK_LEG[g]):'<span class="fog">? ? ? ? ? ?</span>'}</div>`;
+    rows+=`<div class="cg-t fog13">${here&&lkTang()>=13?'Bán bộ Trúc Cơ':'<span class="fog">? ? ? ? ? ? ? ? ? ?</span>'}</div>`;h+=`<h4 class="sgrp">Các tầng</h4><div class="cg-ts">${rows}</div>`;}
+  else if(i>0&&i<5){const t=here?tieu():i<cur?4:-1;h+=`<h4 class="sgrp">Tiểu cảnh giới</h4><div class="cg-ts">${['Sơ kỳ','Trung kỳ','Hậu kỳ','Đỉnh phong'].map((n,k)=>`<div class="cg-t${t===k?' on':''}${t>k?' ok':''}">${n}</div>`).join('')}<div class="cg-t${here&&dvm()?' on':''}">Đại viên mãn<small>đỉnh phong, không trọng thương, tâm ma thấp, đạo tâm cao</small></div></div>`;}
+  // phẩm
+  if(i>=1&&i<=4){const got=i<=cur?(r.quality||[])[i]:null;h+=`<h4 class="sgrp">Phẩm khi đột phá</h4><div class="cg-q">${qDescs(i).map(([n,d])=>{const qi=QNAME.indexOf(n);return `<div class="cg-qi${got===qi?' got':''}"><b>${n}${got===qi?' ✓':''}</b><small>${cgOk('Q'+i,i)?esc(d):'? ? ?'}</small></div>`;}).join('')}</div>`;}
+  // cách đột phá lên cảnh giới sau
+  const nx=CG_R.find(x=>x.i===i+1);if(nx&&R.brk)h+=`<h4 class="sgrp">Đột phá lên ${nx.n}</h4><p class="cg-d">${cgOk('R'+i+'b',i+1)||here&&cgKnow('R'+i+'b')?esc(R.brk):'Chưa rõ. Có lẽ phải nghe ngóng ở trà lâu, tửu phường, hoặc tìm đọc trong Tàng Kinh Các.'}</p>`;
+  if(here){const X=typeof lkXkState==='function'&&lkXkState();const brk=canBreak();
+    h+=`<div class="cg-act">${X?`<button class="btn${X.ok?' pri':''}" data-act="xkGo"${X.ok?'':' disabled'}${ta(X.ok?'':X.why||'')}>${ic('spark')} Xung kích ${esc(X.nx)}</button>`:''}${brk?`<button class="btn pri" data-act="hudBt">${ic('spark')} Đột phá</button>`:''}</div>`;}
+  return h+'</div>';}
+function cgTabHTML(){const s=UI.cgSel;return s===''||s==null?cgListHTML():cgDetailHTML(+s);}
+// bảng lớn: hai tab Bế quan / Cảnh giới
+{const _mh2=modalHTML;modalHTML=function(){const m=UI.modal;if(!m||m.k!=='bq'||!G.run)return _mh2();
+  const tabs=`<div class="tabs bq-tabs"><button class="${m.tab!=='cg'?'on':''}" data-act="bqTab" data-arg="bq">Bế quan</button><button class="${m.tab==='cg'?'on':''}" data-act="bqTab" data-arg="cg">Cảnh giới</button></div>`;
+  if(m.tab==='cg')return `<div class="mbox bq cgbox">${tabs}${cgTabHTML()}<div class="mb-f"><span class="grow"></span><button class="btn" data-act="modalX">Đóng</button></div></div>`;
+  let h=_mh2();h=h.replace('<div class="mbox bq">','<div class="mbox bq">'+tabs).replace(/data-act="hudBt"/g,'data-act="cgGo"').replace(/data-act="xkGo"/g,'data-act="cgGo"');return h;};}
+ACT.bqTab=t=>{const m=UI.modal;if(!m)return;if(t==='bq'&&m.tab==='cg'){const r=G.run;if(!r.scene||r.scene.type!=='place'){const w=bqCan();if(w){note(w,'dn');return;}openBq();if(UI.modal)UI.modal.tab='bq';return;}}m.tab=t;if(t==='cg'&&UI.cgSel==null)UI.cgSel='';};
+ACT.cgGo=()=>{const r=G.run;UI.modal=Object.assign(UI.modal||{k:'bq'},{tab:'cg'});UI.cgSel=String(isPham()?-1:r.realm);};
+ACT.cgSel=a=>{UI.cgSel=a;};
+ACT.cgOpen=()=>{UI.panel=null;const r=G.run;UI.modal={k:'bq',tab:'cg'};UI.cgSel=String(isPham()?-1:r.realm);};
 
 </script>
 </body>

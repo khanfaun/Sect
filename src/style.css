@@ -1415,3 +1415,19 @@ details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim
 .bond-a{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.bond-a .btn{font-size:.72em;padding:4px 8px}
 .rel-tag{font-style:normal;font-size:.7em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:middle}
 details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:rotate(180deg)}
+
+/* hệ thống cảnh giới */
+.bq-tabs{margin:-4px 0 10px}
+.cgbox{max-height:min(88vh,760px);overflow:auto}
+.cg-list{display:flex;flex-direction:column;gap:6px}
+.cg-it{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--paper2);font:inherit;color:var(--ink);cursor:pointer;text-align:left}
+.cg-it b{font-size:1.02em;letter-spacing:.04em}.cg-it.fut{opacity:.75}.cg-it.cur{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset;background:color-mix(in srgb,var(--gold) 10%,var(--paper2))}
+.cg-st{font-size:.74em;color:var(--ink3)}.cg-st.now{color:var(--gold);font-weight:600}.cg-it.done .cg-st{color:#2f8f4e}
+.cg-det h3{margin:.5em 0 .2em}.cg-d{color:var(--ink2);line-height:1.6;font-size:.92em}
+.cg-ts{display:flex;flex-direction:column;gap:3px}.cg-t{display:flex;justify-content:space-between;gap:8px;padding:6px 10px;border-radius:6px;background:var(--paper2);font-size:.88em}
+.cg-t small{color:var(--ink3)}.cg-t.ok{color:#2f8f4e}.cg-t.on{outline:1.5px solid var(--gold);font-weight:600}.cg-t.leg{font-style:italic;color:var(--ink2);font-size:.82em;line-height:1.5}
+.fog{letter-spacing:.3em;color:var(--ink3);filter:blur(.4px)}
+.cg-t.fog13{justify-content:center;background:linear-gradient(90deg,transparent,rgba(150,150,160,.25),transparent);animation:fog 4s ease-in-out infinite}
+@keyframes fog{0%,100%{opacity:.55}50%{opacity:1}}
+.cg-q{display:grid;gap:6px}.cg-qi{padding:6px 10px;border:1px dashed var(--line);border-radius:6px}.cg-qi b{display:block;font-size:.9em}.cg-qi small{color:var(--ink2);font-size:.8em}.cg-qi.got{border-style:solid;border-color:#2f8f4e;background:color-mix(in srgb,#2f8f4e 8%,transparent)}
+.cg-act{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
