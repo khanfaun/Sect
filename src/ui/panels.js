@@ -413,8 +413,8 @@ function relCmpLines(ns,rel,cmp){const keys=Object.keys(ns);if(!cmp)return fxLin
 function talCardHTML(){const t=playerTal();if(!t)return '';const p=t.p;const RLN={tap:'Ngũ hành tạp linh căn',tu:'Tứ linh căn',tam:'Tam linh căn',song:'Song linh căn',thien:'Thiên linh căn',bien:'Biến dị linh căn',cuc:'Cực linh căn'};
   const w=v=>['rất kém','kém','bình thường','tốt','rất tốt'][clamp(Math.round(v),0,4)];
   const tip='Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới.\n· Linh căn: '+(RLN[p.root]||'')+'\n· Tư chất: '+tcName(tuChat())+'\n· Tiên thiên khí vận: '+w(Math.min(4,p.kv*0.8))+'\n· Thể chất: '+w(Math.max(0,(p.th-1)*1.2))+'\n· Ngộ tính, đạo tâm, khí vận gốc: '+w(2+p.dev*0.5)+'\n\nNăm bậc: Phế vật, Bình phàm, Bất phàm, Tinh anh, Thiên kiêu.';
-  return `<div class="tal-wrap tw${t.tier}"><div class="tal-card tal${t.tier}"${ta(tip)}><b>${TAL_N[t.tier]}</b></div>${t.tier>=1?talCardOrn(t):''}</div>`;}
-function talCls(t){return t&&t.tier>=1?' tf'+t.tier:'';}
+  return `<div class="tal-wrap tw${t.tier}"><div class="tal-card tal${t.tier}"${ta(tip)}><b>${TAL_N[t.tier]}</b></div>${talCardOrn(t)}</div>`;}
+function talCls(t){return t&&t.tier>=0?' tf'+t.tier:'';}
 
 // mục gập/mở được trong tab Căn cơ (Thân thế, Tu luyện), cùng kiểu với mục Chiến đấu
 function sgBoxC(key,icon,name,rows){const o=UI.ccOpen=UI.ccOpen||{};const open=o[key]!==false;
@@ -524,9 +524,9 @@ function talFrameX(t,id){const P=TFX[t.tier];if(!P)return '';id=id||'tx'+t.tier;
   s+=tfxCrown(id,P,t.tier,50,11,.62)+tfxBottom(id,P,t.tier,50,92,.62,1.25);
   if(t.tier===4)s+=tfxStar(14,18,1.4)+tfxStar(88,24,1.1)+tfxStar(92,70,1.3)+tfxStar(8,78,1)+tfxStar(70,3,1);
   return `<svg viewBox="0 0 100 100" aria-hidden="true">${s}</svg>`;}
-talFrameSVG=function(t,id){return t&&t.tier>=1?talFrameX(t,id):'';};
+talFrameSVG=function(t,id){return !t?'':t.tier===0?talFrame0(id):talFrameX(t,id);};
 // ô Thiên phú: vương miện trên viền trên, móng ở 4 góc, ngọc hai bên, đáy theo bậc
-talCardOrn=function(t){const P=TFX[t.tier];const id='tcx'+t.tier;const d=tfxDefs(P,id);
+talCardOrn=function(t){if(t.tier===0)return talCard0();const P=TFX[t.tier];const id='tcx'+t.tier;const d=tfxDefs(P,id);
   const top=`<svg class="tcx-top" viewBox="0 0 80 30">${d}${t.tier>=2?tfxCrown(id,P,t.tier,40,22,1):''}</svg>`;
   const bot=`<svg class="tcx-bot" viewBox="0 0 200 40">${d}${tfxBottom(id,P,t.tier,100,16,1,1.9)}</svg>`;
   const cl=(c)=>`<svg class="tcx-cl ${c}" viewBox="0 0 26 26">${d}<path d="M-1 22C-2 10 3 1 15 -2C11 3 10 7 11 11C14 6 19 3 26 -3C24 7 19 13 12 16C16 17 19 19 21 23C12 23 6 23 -1 22Z" fill="url(#${id}m)" stroke="${P.dk}" stroke-width=".8"/>${t.tier>=2?`<path d="M8 8L10.5 10.5L8 13L5.5 10.5Z" fill="url(#${id}g)" stroke="${P.dk}" stroke-width=".5"/>`:''}</svg>`;
@@ -546,3 +546,24 @@ talFrameX=function(t,id){const base=_tfx0(t,id);if(t.tier!==4)return base;const 
 function talCardT4(id,P){return `<svg class="tcx-t4" viewBox="0 0 300 80" preserveAspectRatio="none">${tfxDefs(P,id+'b')}<rect x="3" y="3" width="294" height="74" rx="7" fill="none" stroke="url(#${id}bm)" stroke-width="1.6" stroke-dasharray="3 2"/></svg>
   <svg class="tcx-fl l" viewBox="0 0 40 16">${tfxDefs(P,id+'f')}<path d="M40 8C30 2 18 2 8 6C14 6 18 7 20 8C14 9 10 11 6 14C18 14 30 13 40 8Z" fill="url(#${id}fm)" stroke="${P.dk}" stroke-width=".6"/><circle cx="4" cy="8" r="2" fill="url(#${id}fg)"/></svg>
   <svg class="tcx-fl r" viewBox="0 0 40 16">${tfxDefs(P,id+'r')}<path d="M40 8C30 2 18 2 8 6C14 6 18 7 20 8C14 9 10 11 6 14C18 14 30 13 40 8Z" fill="url(#${id}rm)" stroke="${P.dk}" stroke-width=".6"/><circle cx="4" cy="8" r="2" fill="url(#${id}rg)"/></svg>`;}
+
+// Phế vật: vòng sắt cháy sém, nứt vỡ, lửa âm u đỏ thẫm liếm lên từ đáy, tàn tro bay
+const TF0={dk:'#140404',m1:'#5a1410',m2:'#2a0806',hi:'#a8382a',fl:['#ff8a3a','#c0281a','#4a0606']};
+function tf0Defs(id){return `<defs><linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${TF0.hi}"/><stop offset=".4" stop-color="${TF0.m1}"/><stop offset=".75" stop-color="${TF0.m2}"/><stop offset="1" stop-color="${TF0.m1}"/></linearGradient>
+ <linearGradient id="${id}f" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="${TF0.fl[2]}"/><stop offset=".45" stop-color="${TF0.fl[1]}"/><stop offset="1" stop-color="${TF0.fl[0]}" stop-opacity=".9"/></linearGradient></defs>`;}
+const tf0Flame=(id,x,y,h,w,tilt)=>{const f=(H,W,c)=>`<path d="M${x-W} ${y}C${x-W} ${y-H*.35} ${x-W*.35} ${y-H*.45} ${x-W*.55} ${y-H*.85}C${x-W*.1} ${y-H*.62} ${x-W*.05} ${y-H*.72} ${x+W*.05} ${y-H}C${x+W*.25} ${y-H*.68} ${x+W*.45} ${y-H*.58} ${x+W*.62} ${y-H*.78}C${x+W*.68} ${y-H*.48} ${x+W} ${y-H*.36} ${x+W} ${y}Z" fill="${c}"/>`;
+  return `<g transform="rotate(${tilt} ${x} ${y})">${f(h,w,`url(#${id}f)`)}${f(h*.55,w*.5,'rgba(230,100,40,.65)')}</g>`;};
+function talFrame0(id){id=id||'tf0';let s=tf0Defs(id);
+  s+=`<circle cx="50" cy="50" r="42" fill="none" stroke="rgba(120,10,0,.45)" stroke-width="12" style="filter:blur(3px)"/>`;
+  // vòng sắt đứt khúc (các đoạn gãy)
+  s+=`<circle cx="50" cy="50" r="40.6" fill="none" stroke="${TF0.dk}" stroke-width="10" stroke-dasharray="40 3 22 4 55 2.5 30 5 60 3"/><circle cx="50" cy="50" r="40.6" fill="none" stroke="url(#${id}m)" stroke-width="7.6" stroke-dasharray="40 3 22 4 55 2.5 30 5 60 3"/>`;
+  // vết nứt
+  for(const [a,l] of [[20,1],[95,-1],[160,1],[250,-1],[310,1]])s+=`<g transform="rotate(${a} 50 50)"><path d="M50 6.5L51.5 9L49.5 11L51 13.5" fill="none" stroke="${TF0.dk}" stroke-width=".9"/><path d="M51.5 9L${53*l>0?54:47} 9.5" fill="none" stroke="${TF0.dk}" stroke-width=".6"/></g>`;
+  // lửa âm u liếm lên từ đáy
+  s+=tf0Flame(id,38,94,16,6,-25)+tf0Flame(id,62,94,16,6,25)+tf0Flame(id,50,97,22,7,0)+tf0Flame(id,27,88,11,4,-45)+tf0Flame(id,73,88,11,4,45);
+  // tàn tro
+  for(const [x,y,r] of [[22,70,1],[80,62,.8],[44,74,.7],[66,80,.9],[14,50,.6],[88,46,.7]])s+=`<circle cx="${x}" cy="${y}" r="${r}" fill="#ff7a3a" opacity=".8"/>`;
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">${s}</svg>`;}
+function talCard0(){const id='tc0';return `<svg class="tc0-fl" viewBox="0 0 200 40" preserveAspectRatio="none">${tf0Defs(id)}${[20,46,74,100,126,154,180].map((x,i)=>tf0Flame(id,x,40,i%2?22:30,9,(i-3)*6)).join('')}</svg>
+  <svg class="tc0-ash" viewBox="0 0 300 80" preserveAspectRatio="none">${[[30,20,1.4],[260,30,1.2],[90,10,1],[200,14,1.1],[150,6,.9],[240,60,1]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#ff7a3a" opacity=".85"/>`).join('')}</svg>
+  <svg class="tc0-ck" viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0 18L14 24L10 34L22 40M300 60L284 54L290 44L276 38M120 0L126 10L118 16" fill="none" stroke="#140404" stroke-width="1.6"/></svg>`;}

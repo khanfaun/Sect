@@ -1257,3 +1257,16 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .tcx-t4{position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);pointer-events:none;z-index:1}
 .tcx-fl{position:absolute;top:50%;width:40px;height:16px;margin-top:-8px;z-index:2}.tcx-fl.l{left:18%}.tcx-fl.r{right:18%;transform:scaleX(-1)}
 .tal-card{position:relative}
+
+/* ===== Phế vật: đỏ thẫm, nứt vỡ, lửa âm u ===== */
+.tal-card.tal0{position:relative;display:flex;align-items:center;justify-content:center;padding:12px 12px 14px;border:3px solid transparent;border-radius:6px;overflow:visible;
+  background:radial-gradient(ellipse at 50% 120%,#5a0e08,#1a0504 70%) padding-box,linear-gradient(135deg,#a8382a,#3a0a06,#6a1810,#1a0404,#5a1410) border-box;box-shadow:inset 0 -10px 18px rgba(200,40,10,.3),0 2px 8px rgba(0,0,0,.4)}
+.tal-card.tal0 b{color:#c9b8b0!important;font-size:1.3em;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 1px 0 #000,0 0 6px rgba(200,40,10,.7);opacity:.85}
+.tc0-fl{position:absolute;left:8%;right:8%;bottom:-6px;width:84%;height:28px;z-index:3;opacity:.9;filter:drop-shadow(0 0 4px rgba(255,80,20,.5))}
+.tc0-ash,.tc0-ck{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.u-av.tf0,.av.tf0{border:3px solid transparent!important;background:linear-gradient(var(--paper2),var(--paper2)) padding-box,linear-gradient(135deg,#a8382a,#3a0a06,#6a1810,#1a0404) border-box!important;box-shadow:0 0 0 1px #140404,0 0 6px rgba(200,40,10,.55)!important}
+.hud-av2.tf0{box-shadow:none!important;overflow:visible!important}.hud-av2.tf0 .tfr{filter:drop-shadow(0 0 3px rgba(200,40,10,.6))}
+
+.tc0-fl{left:4%;right:4%;width:92%;bottom:3px;height:34px;opacity:.85;z-index:1}
+.tal-card.tal0 b{position:relative;z-index:2}
+.tc0-ck{inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);overflow:hidden}
