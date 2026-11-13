@@ -83,7 +83,11 @@ function openBq(){const r=G.run;if(bqCan())return;UI.bqOpened=!r.scene;if(!r.sce
 const ACT={
   birth:()=>{genBirth();const c=G.birth.cards;newRun(c[Math.floor(Math.random()*c.length)]);UI.sel=null;UI.panel=null;run2();},
   born:i=>{newRun(G.birth.cards[+i]);UI.sel=null;UI.panel=null;run2();},
-  resume:()=>{G.screen='map';},
+  resume:()=>{G.screen='map';UI.modal=null;UI.panel=null;UI.menu=null;UI.pendSk=null;UI.confirm=null;
+    const r=G.run,sc=r&&r.scene;
+    if(sc&&sc.type==='place')r.scene=null; // bảng chi tiết địa điểm: đóng, mở lại khi cần
+    else if(sc&&sc.type==='combat'&&!sc.done)UI.modal={k:'cbResume'};}, // đang đánh: phải xác nhận mới đánh tiếp
+  cbResumeGo:()=>{UI.modal=null;},
   screen:a=>{UI.panel=null;UI.modal=null;if(a==='map'){G.screen=G.run?'map':'title';}else if(a==='codex'){G.screen='meta';UI.tab.meta='lives';}else{G.screen=a;}if(a==='meta'||a==='title')G.over=null;if(a==='title')UI.narrSkip=true;},
   overNext:()=>{G.over=null;G.screen='title';UI.narrSkip=false;},
   narrSkip:()=>{UI.narrSkip=true;},
@@ -307,7 +311,7 @@ document.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;clea
 // phần tử có hành động thật (không bị tắt) thì chạm là bấm, giữ mới xem chú thích; ô khóa, nút tắt: chạm là xem
 function tipActOf(t){const a=t.closest('[data-act]');return a&&!a.disabled&&!a.classList.contains('lock')?a:null;}
 document.addEventListener('scroll',()=>{if(tipEl)hideTip();},{passive:true,capture:true});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(UI.modal)UI.modal=null;else if(UI.panel)UI.panel=null;else return;render();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(UI.modal&&UI.modal.k==='cbResume')return;if(UI.modal)UI.modal=null;else if(UI.panel)UI.panel=null;else return;render();}});
 
 // ---------- lưu ----------
 const KEY='phusinh2_save_v1';
