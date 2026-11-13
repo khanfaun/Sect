@@ -2415,7 +2415,7 @@ function llShowGain(x){return sgOn()?Math.max(1,Math.round(x/sgW()*100)):Math.ma
 // ================= ĐỢT 41: SÀN CÓ KHÍ VẬN TRUNG BÌNH; THIÊN PHÚ 5 BẬC CHO NGƯỜI CHƠI VÀ NPC =================
 // Người chuẩn dùng làm sàn cũng mang khí vận và thể chất ở mức trung bình (lấy mẫu 3000 lần đầu thai),
 // nên ai có khí vận trung bình thì ra "Bình thường", hơn mới ra "Mạnh".
-const TT_AVG={matkP:2.64,mpP:0.63,than:1.58,atkP:2.86,defP:2.67,tp:0.69,ngo:1.53,lifeP:0.25,hpP:1,crit:0.48,tvP:2.42,van:0.07,tam:0.43,bqP:0.31,dodge:0.21,critDmg:0.62,hoTam:0.08};
+const TT_AVG={matkP:2.64,mpP:0.63,than:1.58,atkP:2.86,defP:2.67,tp:0.69,ngo:1.53,lifeP:0.25,hpP:1,crit:0.48,tvP:2.42,tam:0.43,bqP:0.31,dodge:0.21,critDmg:0.62};
 {const _ag41=aggFx;aggFx=function(){const fx=_ag41();const r=G.run;if(r&&r._avgTT)for(const [k,v] of Object.entries(TT_AVG))fx[k]=(fx[k]||0)+v;return fx;};}
 // Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới. Gộp linh căn, tư chất, tiên thiên khí vận, thể chất, ngộ tính/đạo tâm/khí vận gốc.
 const TAL_N=['Phế vật','Phàm tài','Trung tài','Tinh anh','Thiên kiêu'];

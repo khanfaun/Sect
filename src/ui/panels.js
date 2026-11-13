@@ -28,8 +28,8 @@ function pChar(){
       kvRow('Thần thức',RT('than',s.than,'luc'),'Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'),
       kvRow('Niệm lực',RT('nl',s.nl,'luc'),'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm, tế pháp bảo, đòn thần thức đều tốn niệm lực.'),
       kvRow('Thân pháp',RT('tp',s.tp,'toc'),'Nhanh nhẹn. Trong trận là tốc độ chạy trên nửa đầu thanh hành động; ngoài trận đi lại cũng nhanh hơn.')]);
-    b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<span class="lc-c"${ta('Lực chiến: tính từ chỉ số chiến đấu và trang bị')}>Lực chiến ${RT('lc',lucChien(),'luc')}</span><small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl">${[
-      kvRow('Khí huyết',RT('maxHp',s.maxHp,'ben'),'Khí huyết tối đa dày hay mỏng. Về 0 là chết'),kvRow('Linh lực',RT('maxMp',s.maxMp,'ben'),'Thi triển pháp thuật'),
+    b+=`<details class="sgbox cbstat"${UI.cbOpen?' open':''}><summary class="sgrp" data-act="cbOpen">${ib('sword','soft')}Chỉ số chiến đấu<small>${UI.cbOpen?'thu gọn':'mở rộng'}</small></summary><div class="kvl">${[
+      kvRow('Lực chiến',RT('lc',lucChien(),'luc'),'Lực chiến: tính từ chỉ số chiến đấu và trang bị','lcrow'),kvRow('Khí huyết',RT('maxHp',s.maxHp,'ben'),'Khí huyết tối đa dày hay mỏng. Về 0 là chết'),kvRow('Linh lực',RT('maxMp',s.maxMp,'ben'),'Thi triển pháp thuật'),
       kvRow('Công vật lý',RT('atk',s.atk),'Dùng cho đánh thường và kiếm pháp, quyền cước'),kvRow('Công phép',RT('matk',s.matk),'Dùng cho pháp thuật'),
       kvRow('Chí mạng',RT('crit',s.crit,'muc'),'Tỉ lệ chí mạng'),kvRow('ST chí mạng',RT('critDmg',s.critDmg),'Sát thương khi chí mạng'),
       kvRow('Chính xác',RT('cx',s.cx,'muc'),'Đối phương né khó hơn'),kvRow('Thủ',RT('def',s.def),'Giảm sát thương nhận vào'),
