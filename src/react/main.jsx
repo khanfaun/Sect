@@ -5,6 +5,8 @@ import { flushSync } from 'react-dom';
 import { ManMoDau, ManChonKiep, ManHetKiep, ManBenVongXuyen, ManMoDauKiep } from './man-ngoai';
 import { Hud } from './ban-do/Hud';
 import { Nav } from './ban-do/Nav';
+import { NutBanDo } from './ban-do/NutBanDo';
+import { TheDiaDiem } from './ban-do/TheDiaDiem';
 
 const VIEWS = {
   Title: ManMoDau,
@@ -14,6 +16,8 @@ const VIEWS = {
   Life: ManMoDauKiep,
   Hud,
   Nav,
+  NutBanDo,
+  TheDiaDiem,
 };
 
 window.RX = {

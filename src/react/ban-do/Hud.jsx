@@ -28,6 +28,13 @@ function Vong({ hp, mp }) {
   );
 }
 
+// Tên cảnh giới; khi vừa đổi cảnh giới thì chạy hiệu ứng chữ cũ trôi đi, chữ mới hiện ra
+function TenCanhGioi() {
+  const A = PS.UI.realmAnim;
+  if (!A) return PS.realmLabel();
+  return <span className={'rl-anim' + (A.down ? ' dn' : '')}><i className="o">{A.from}</i><i className="n">{A.to}</i></span>;
+}
+
 export function Hud() {
   const { G, clamp } = PS;
   const r = G.run, s = PS.S(), t = PS.W().t;
@@ -46,7 +53,7 @@ export function Hud() {
       </button>
       <div className="hud-id">
         <span className="nmrow"><b className="nm">{r.ten}</b><NhanDotPha /></span>
-        <span className="rl" {...tip(PS.realmLabel() + '\nTu vi ' + tv + '%\n' + PS.rootView(r.root).n + ': ' + r.root.els.map(e => PS.EL[e].n).join(', '))}>{PS.realmLabel()}</span>
+        <span className="rl" {...tip(PS.realmLabel() + '\nTu vi ' + tv + '%\n' + PS.rootView(r.root).n + ': ' + r.root.els.map(e => PS.EL[e].n).join(', '))}><TenCanhGioi /></span>
         <small className={warn ? 'bad' : ''} {...tip('Tuổi / thọ nguyên ' + s.life + (warn ? '\nThọ nguyên sắp cạn!' : ''))}>
           {Math.floor(r.age)} tuổi · còn {Math.max(0, Math.floor(left))} năm{hurt && <> · <b className="bad">{hurt}</b></>}
         </small>

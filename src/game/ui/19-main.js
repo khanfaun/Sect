@@ -21,8 +21,8 @@ function render(){
     else{
       if(cb)full=vCombat(sc);
       else{hud=rxv('Hud',hudHTML);nav=rxv('Nav',navHTML);
-        if(!sc){mapui=mapUiHTML();dock=dockHTML();}
-        else if(UI.evMin&&sc.type==='event'){mapui=mapUiHTML();dock=dockHTML();}
+        if(!sc){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
+        else if(UI.evMin&&sc.type==='event'){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
         else if(sc.type==='region')sheet=vRegionIntro(sc);
         else sheet=(SCENE_V[sc.type]||(()=>''))(sc);}
     }
