@@ -16,7 +16,7 @@ function pChar(){
       htRow(),
       ttRow('Tiên thiên thể chất',(r.the||[]).map(ttPhysOf),'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.'),
       kvRow('Tư chất',`<span style="color:${PCOL[Math.max(0,4-TC_N.findIndex(x=>tc>=x[0]))]}">${tcName(tc)}</span>`,'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
-      kvRow('Ngộ tính',RT('ngo',s.ngo,'muc'),'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',RT('tam',s.tam,'muc'),'Chống ảo cảnh, đột phá'),kvRow('Khí vận',RT('van',s.van,'muc'),'Chí mạng, may mắn'),
+      kvRow('Ngộ tính',RT('ngo',s.ngo,'muc'),'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',RT('tam',s.tam,'muc'),'Chống ảo cảnh, đột phá'),kvRow('Khí vận',RT('van',s.van,'muc'),'Chí mạng, may mắn'),kvRow('Mị lực',`<span class="mi-v">${miName()}</span>`,'Dung mạo, phong thái. Ảnh hưởng giá mua bán, các phép thử thuyết phục, ấn tượng ban đầu của người lạ, việc kết giao, bái sư, kết đạo lữ.\nQuá nổi bật đôi khi cũng chuốc lấy ghen ghét.'),
       kvRow('Nhân quả',karmaName(r.karma),'Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
     b+=sgBoxC('tu','yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+tvShow()+'%'+(dinhPhong()?(dvm()?'\nĐại viên mãn: khí huyết, linh lực, công, thủ +5%.':'\nChưa đại viên mãn: '+dvmWhy()+'.\n(Cần: không trọng thương, tâm ma dưới '+DVM_TAMMA+', đạo tâm từ '+DVM_TAM+')'):'')+(bbKind()?'\nBán bộ '+REALM[G.run.realm+1]+': dùng được đồ, công pháp, tâm pháp của '+REALM[G.run.realm+1]+'; chỉ số vẫn như cũ.':'')),
       `<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(tvShow(),100,'tv')}<span class="hv">${tvShow()}%</span></div>`,
@@ -79,7 +79,7 @@ function affairsBody(){
 function pAffairs(){return win('Thiên hạ',affairsBody(),{cls:'tall'});}
 function pBonds(){
   const r=G.run,w=W();const R=relations();const tab=UI.tab.bonds||'an';
-  let b=tabsHTML('bonds',[['an','Ân oán'],['bang','Thiên Kiêu Bảng'],['tong','Tông môn']],tab);
+  let b=tabsHTML('bonds',[['an','Nhân mạch'],['bang','Thiên Kiêu Bảng'],['tong','Tông môn']],tab);
   if(tab==='an'){
     const seed=(s,cls)=>bondRow(s.ten,null,cls==='an'?'Chịu ơn ngươi':'Mang thù với ngươi','',[['Chuyện cũ',s.d],['Vùng',REG[s.r||0].n]]);
     b+=`<h4 class="sgrp">Đồng hành</h4>`+(R.party.length?`<div class="rows">${R.party.map(p=>bondRow(p.ten,null,'Đồng hành','',[['Còn đi cùng',durH(Math.max(0,p.until-w.t))]])).join('')}</div>`:'<p class="hint">Đang đi một mình.</p>');
@@ -92,7 +92,7 @@ function pBonds(){
     b+=`<h4 class="sgrp">Thiên kiêu đương thời</h4><div class="rows">${R.rivals.map(x=>bondRow(x.ten,x.g,x.tt+' của '+x.sect,x.alive?REALM[x.realm]:'đã mất',[['Danh hiệu',x.tt],['Tông môn',x.sect],['Cảnh giới',x.alive?REALM[x.realm]:'đã mất'],['Thuộc tính',x.el&&EL[x.el]?EL[x.el].n:'']],!x.alive)).join('')}</div>`;
   }
   if(tab==='tong'){const AL={chinh:'chính đạo',ta:'tà đạo',ma:'ma đạo',trung:'trung lập'};
-    b+=`<p class="hint">${R.mine?'Ngươi là đệ tử tông môn.':'Ngươi là tán tu, chưa vào tông môn nào.'}</p><div class="rows">${R.sects.map(s=>`<div class="row"><span class="r-i sect-i"><img src="${sectPic(s.n,s.al)}" alt=""></span><span class="r-t"><b>${esc(s.n)}</b><small>${AL[s.al]||s.al||''}</small></span></div>`).join('')}</div>`;}
+    b+=`<p class="hint">${R.mine?'Ngươi là đệ tử tông môn.':'Ngươi là tán tu, chưa vào tông môn nào.'}</p><div class="rows">${R.sects.map((s,i)=>{const f=sectFav(i),L=favLv(f);return `<details class="bond"><summary class="row"><span class="r-i sect-i"><img src="${sectPic(s.n,s.al)}" alt=""></span><span class="r-t"><b>${esc(s.n)}</b><small>${AL[s.al]||s.al||''}</small></span><span class="fav f-${L[2]}">${L[1]}</span><i class="cc-ch">${ic('down')}</i></summary><div class="bond-d"><p class="hint">Hảo cảm của tông môn tính từ cao tầng (nặng hơn) và đệ tử.</p>${sectElders(i).map(e=>bondRow('@'+i+':'+e.t,null,e.t,'',[],false,{disp:e.ten,realm:Math.min(5,(G.run.realm||0)+2)})).join('')}${sectDisciples(i).slice(0,6).map(n=>bondRow(n,null,'Đệ tử','',[],false)).join('')}</div></details>`;}).join('')}</div>`;}
   return win('Giao tình',b,{cls:'tall'});
 }
 function pCraft(){
@@ -592,7 +592,7 @@ let ENT_C=null;function entIdxC(){const t=Date.now();if(!ENT_C||t-ENT_C.t>400||E
   // không chạm vào phần đã nằm trong thẻ
   return h.split(/(<[^>]+>)/).map(part=>part[0]==='<'?part:part.replace(re,(m,pre,w)=>{if(seen.has(w))return m;seen.add(w);const k=ks.find(x=>esc(x)===w);return `${pre}<span class="gl ent"${tah(M[k])}>${w}</span>`;})).join('');};}
 
-function bondRow(n,g,sub,x,kv,dim){return `<details class="bond${dim?' dim':''}"><summary class="row"><span class="r-i bav">${npcAv(n,g)}</span><span class="r-t"><b>${esc(n)}</b><small>${esc(sub)}</small></span>${x?`<span class="r-x">${esc(x)}</span>`:''}<i class="cc-ch">${ic('down')}</i></summary><div class="kvl bond-d">${kv.filter(k=>k[1]).map(k=>`<div class="kr"><span>${esc(k[0])}</span><b>${esc(k[1])}</b></div>`).join('')}</div></details>`;}
+function bondRow(n,g,sub,x,kv,dim,o){o=o||npcInfo(n);g=g||o.g;const F=favOf(n),L=favLv(F),rk=relOfNpc(n);const dn=o.disp||n;return `<details class="bond${dim?' dim':''}"${UI.bondOpen===n?' open':''}><summary class="row"><span class="r-i bav">${npcAv(dn,g)}</span><span class="r-t"><b>${esc(dn)}${rk?` <em class="rel-tag">${REL_T[rk].n}</em>`:''}</b><small>${esc(sub)}</small></span>${x?`<span class="r-x">${esc(x)}</span>`:''}<span class="fav f-${L[2]}">${L[1]}</span><i class="cc-ch">${ic('down')}</i></summary><div class="kvl bond-d"><div class="kr"><span>Hảo cảm</span><b class="fav f-${L[2]}">${L[1]}</b></div>${kv.filter(k=>k[1]).map(k=>`<div class="kr"><span>${esc(k[0])}</span><b>${esc(k[1])}</b></div>`).join('')}${bondActs(n,o)}</div></details>`;}
 
 // hậu thiên khí vận trong tab Căn cơ
 const HT_COLR={1:2,2:3,3:4,4:5};
@@ -606,3 +606,18 @@ TFX[0]={hi:'#ffb3a8',lo:'#3a0606',m1:'#c0392b',m2:'#6e1410',m3:'#9a2a20',dk:'#1e
 function tfAs1(t,fn){const sv=TFX[1];TFX[1]=TFX[0];try{return fn(Object.assign({},t,{tier:1}));}finally{TFX[1]=sv;}}
 talFrameSVG=function(t,id){if(!t||t.tier<0||t.tier===1)return '';if(t.tier===0)return tfAs1(t,x=>talFrameX(x,id));return talFrameX(t,id);};
 {const _tco=talCardOrn;talCardOrn=function(t){if(t.tier===1)return '';if(t.tier===0)return tfAs1(t,x=>_tco(x)).replace(/tcx1/g,'tcx0');return _tco(t);};}
+
+// thông tin NPC để xét điều kiện quan hệ
+function npcInfo(n){const r=G.run,w=W();const k=(w.rivals||[]).findIndex(x=>x.ten===n);if(k>=0){const rv=(r.rivals||[]).find(x=>x.i===k);return {g:w.rivals[k].g,realm:rv?rv.realm:r.realm,sect:w.rivals[k].s};}
+  const o=(r.npcs||{})[n];if(o)return {g:o.g,realm:o.realm!=null?o.realm:Math.max(0,(r.region||0)),sect:o.sect};const m=/^@(\d+):/.exec(n);if(m)return {realm:Math.min(5,(r.realm||0)+2)};return {};}
+function bondActs(n,o){const rk=relOfNpc(n);const B=k=>{const w=relWhy(n,k,o);return `<button class="btn sm" data-act="relMake" data-arg="${esc(n)}|${k}"${w?' disabled':''}${ta(REL_T[k].d+(w?'\n\nChưa được: '+w:''))}>${REL_T[k].n}</button>`;};
+  return `<div class="bond-a"><button class="btn sm" data-act="favGift" data-arg="${esc(n)}"${ta('Tặng lễ vật: tốn '+giftCost(n)+' linh thạch, 2 giờ. Tăng hảo cảm.')}>Tặng lễ</button>${rk?`<button class="btn sm bad" data-act="relBreak" data-arg="${esc(n)}">Cắt đứt ${REL_T[rk].n.toLowerCase()}</button>`:['kn','np','sp','dd','pt','dl'].map(B).join('')}</div>`;}
+// tab Nhân mạch: thêm Quan hệ và Quen biết
+{const _pb=pBonds;pBonds=function(){const h=_pb();const tab=UI.tab.bonds||'an';if(tab!=='an')return h;const r=G.run;const B=bonds();const N=r.npcs||{};
+  const rel=Object.keys(B).map(n=>bondRow(n,null,REL_T[B[n]].n,'',[],false)).join('');
+  const known=Object.values(N).filter(o=>!B[o.n]&&!/^@/.test(o.n)&&o.met).slice(-20).reverse().map(o=>bondRow(o.n,o.g,o.type&&ENT_T[o.type]?ENT_T[o.type].n:'Người quen','',[],false)).join('');
+  const add=`<h4 class="sgrp">Quan hệ <small>${Object.keys(B).length}</small></h4>${rel?`<div class="rows">${rel}</div>`:'<p class="hint">Chưa kết nghĩa, bái sư hay kết đạo lữ với ai.</p>'}<h4 class="sgrp">Quen biết</h4>${known?`<div class="rows">${known}</div>`:'<p class="hint">Chưa quen ai trên đường.</p>'}`;
+  const i=h.indexOf('<h4 class="sgrp">Đồng hành</h4>');return i<0?h:h.slice(0,i)+add+h.slice(i);};}
+STAT_IC['Mị lực']=['heart','vio'];
+
+PANEL_V.bonds=pBonds;

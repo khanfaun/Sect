@@ -1419,6 +1419,13 @@ details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim
 @keyframes healBreath{0%{opacity:0}20%{opacity:.55}38%{opacity:.25}70%{opacity:1}100%{opacity:0}}
 #fpsb{position:fixed;right:8px;z-index:66;font:600 10px/1 monospace;color:var(--ink2);background:color-mix(in srgb,var(--paper) 80%,transparent);padding:2px 5px;border-radius:4px;pointer-events:none}
 
+.fav{font-size:.72em;padding:1px 8px;border-radius:999px;border:1px solid currentColor;margin-left:auto;white-space:nowrap;font-weight:600}
+.bond .row .fav{margin-right:4px}
+.f-al{color:#1f7a3e}.f-tk{color:#2f9a4e}.f-th{color:#3f8f6a}.f-qb{color:var(--acc2)}.f-xl{color:var(--ink3)}.f-gb{color:#b8792a}.f-td{color:var(--seal)}.f-tu{color:#7a0a10;background:rgba(122,10,16,.08)}
+.bond-a{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.bond-a .btn{font-size:.72em;padding:4px 8px}
+.rel-tag{font-style:normal;font-size:.7em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:middle}
+details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:rotate(180deg)}
+
 </style>
 </head>
 <body>
@@ -7433,6 +7440,94 @@ const TAP_P=[0,0.06,0.12];
     lo.atk=Math.round(lo.atk*m);lo.def=Math.round(lo.def*m);if(lo.matk)lo.matk=Math.round(lo.matk*m);lo.st.tap=k;
     clog(sc,lo===me?`Khí thế của ${b.name} lấn át ngươi${k>1?' hẳn hai bậc':''}, ra tay có phần chùn lại.`:`${b.name} bị khí thế của ngươi lấn át${k>1?' hẳn hai bậc':''}.`,lo===me?'en':'me');}};}
 
+// ===================== MỊ LỰC =====================
+// con số ẩn, người chơi thấy mức chữ. Ảnh hưởng: giá mua bán, phép thử thuyết phục, ấn tượng ban đầu của NPC,
+// dễ được nhận làm đồ đệ / vào tông, mặt trái: dễ bị ghen ghét.
+const MI_N=[[25,'Tiên tư'],[20,'Khuynh thành'],[15,'Xuất chúng'],[10,'Ưa nhìn'],[5,'Tầm thường'],[-99,'Xấu xí']];
+function miBase(r){r=r||G.run;if(r.mi==null){const h=hashS('mi'+r.ten+r.kiep+(r.bornT||0));r.mi=clamp(3+(h%7)+((h>>>5)%7),2,18);}return r.mi;}
+function miOf(){const r=G.run;if(!r)return 10;return Math.round(miBase(r)+((aggFx().mi)||0));}
+function miName(v){if(v==null)v=miOf();for(const [t,n] of MI_N)if(v>=t)return n;return 'Xấu xí';}
+// giá: mỗi điểm trên 10 giảm 0,8% giá mua (tối đa 10%), dưới 10 thì đắt lên (tối đa 6%)
+function miShop(){return clamp((miOf()-10)*0.8,-6,10);}
+{const _agM=aggFx;aggFx=function(){const fx=_agM();if(G.run&&!G.run._miIn){G.run._miIn=1;try{fx.shopP=(fx.shopP||0)+miShop();}finally{G.run._miIn=0;}}return fx;};}
+// bán đồ: giá bán tăng theo mị lực thay vì giảm
+{const _sl=sellList;sellList=function(){const L=_sl();const b=miShop();const m=(1+Math.max(-6,b)/100)/Math.max(0.6,1-Math.min(40,(aggFx().shopP||0))/100);for(const x of L)x.p=Math.max(1,Math.round(x.p*m));return L;};}
+// phép thử thuyết phục: cộng theo mị lực
+const MI_RX=/thuyết|xin |mời|nói |hỏi|khuyên|năn nỉ|dỗ|làm quen|kết giao|cầu|thương lượng|mặc cả|trả giá/i;
+CHKN.mi='Mị lực';
+{const _cc=chkChance;chkChance=function(chk){if(chk&&chk[0]==='mi'){const s=S();return clamp(0.5+(miOf()-chk[1]-G.run.region)*0.05+s.van*0.004,0.08,0.95);}return _cc(chk);};}
+{const _ch=choose;choose=function(i){const r=G.run,sc=r&&r.scene;let bump=0;if(sc&&sc.type==='event'){const e=EVMAP[sc.id];const L=resolveP(e,sc.cur)||[];const c=L[i];if(c&&c.chk&&(MI_RX.test(c.l||'')||sc.id==='son_mon')){bump=clamp((miOf()-10)*0.012,-0.06,0.12);}}
+  if(!bump)return _ch(i);const _cc2=chkChance;chkChance=function(k){return clamp(_cc2(k)+bump,0.05,0.97);};try{return _ch(i);}finally{chkChance=_cc2;}};}
+
+// ===================== HẢO CẢM (gộp) =====================
+// -100 … 100. Mức: Tử địch, Thù địch, Ghét bỏ, Xa lạ, Quen biết, Thân thiện, Tri kỷ, Đồng minh
+const FAV_N=[[85,'Đồng minh','al'],[60,'Tri kỷ','tk'],[35,'Thân thiện','th'],[10,'Quen biết','qb'],[-19,'Xa lạ','xl'],[-49,'Ghét bỏ','gb'],[-79,'Thù địch','td'],[-101,'Tử địch','tu']];
+function favLv(v){for(const x of FAV_N)if(v>=x[0])return x;return FAV_N[FAV_N.length-1];}
+function npcs(){const r=G.run;return r.npcs||(r.npcs={});}
+function favKey(n){return String(n||'');}
+function npcRec(n,info){const N=npcs();const k=favKey(n);if(!k)return null;let o=N[k];if(!o){o=N[k]={n:k,fav:0,met:0};
+  // ấn tượng ban đầu theo mị lực
+  o.fav=clamp(Math.round((miOf()-10)*0.8),-8,12);}
+  if(info)for(const x in info)if(info[x]!=null)o[x]=info[x];return o;}
+function favOf(n){const r=G.run;const o=npcs()[favKey(n)];if(o)return o.fav;
+  const s=(r.seeds||[]).find(x=>x.ten===n);if(s)return s.t==='an'?45:-60;
+  const w=W();const ri=(w.rivals||[]).findIndex(x=>x.ten===n);if(ri>=0){const rv=(r.rivals||[]).find(x=>x.i===ri);return clamp(Math.round(((rv&&rv.rel)||0)*10),-100,100);}
+  if((r.party||[]).some(p=>p.ten===n))return 40;return 0;}
+function favAdd(n,d,why){if(!n||!d)return 0;const o=npcRec(n);if(o.fav===0&&!o.met)o.fav=favOf(n)||o.fav;const b=o.fav;o.fav=clamp(o.fav+d,-100,100);const L0=favLv(b),L1=favLv(o.fav);
+  if(L0[1]!==L1[1]&&typeof note==='function')note(`${n}: ${L1[1].toLowerCase()}`,o.fav>b?'up':'dn');if(why)log(`${n} ${o.fav>b?'có thêm thiện cảm':'thêm phần bất mãn'} (${why}).`);return o.fav-b;}
+// đồng bộ từ hệ thống cũ: ân tình, oán thù, thiên kiêu
+{const _sd=typeof addSeed==='function'?addSeed:null;}
+// gặp NPC trên bản đồ: ghi nhận, kẻ thù thì tấn công, người thân thì tặng quà
+{const _me2=meetEnt;meetEnt=function(e){const r=G.run;if(e&&e.name&&['khach','tuantra','truysat','thuong','thienkieu'].includes(e.type)){
+    const o=npcRec(e.name,{type:e.type,g:e.data&&e.data.g,sect:e.data&&e.data.s});o.met=(o.met||0)+1;if(o.met===1&&e.type!=='truysat')o.fav=Math.max(o.fav,favOf(e.name));
+    const f=o.fav;
+    if(f<=-50&&e.type!=='thienkieu'&&!r.moving){note(`${e.name} thấy ngươi, sát khí bốc lên!`,'dn');startCombat({cnt:1},{kind:'node'});const sc=G.run.scene;if(sc&&sc.units){const u=sc.units.find(x=>x.side==='B');if(u){u.name=e.name;if(u.realName)u.realName=e.name;}}return;}
+    if(f>=35&&chance(f>=60?0.5:0.3)){const g=f>=60?ri(15,40):ri(5,15);const v=Math.round(g*SC[r.region]);r.st+=v;note(`${e.name} vui vẻ biếu ngươi ${v} linh thạch.`,'up');}
+    else favAdd(e.name,2);}
+  return _me2(e);};}
+// đánh người: kẻ bại thêm hận
+{const _fcF=finishCombat;finishCombat=function(sc){const r=G.run;if(sc&&sc.units&&sc.over==='win'&&!sc.spar)for(const u of sc.units)if(u.side==='B'&&isHumanFoe(u)){const n=u.realName||u.name;if(n&&n!=='???')favAdd(n,-35);}
+  if(sc&&sc.spar&&sc.units)for(const u of sc.units)if(u.side==='B'){const n=u.realName||u.name;if(n&&n!=='???')favAdd(n,sc.over==='win'?6:3);}return _fcF(sc);};}
+// tặng lễ: tốn linh thạch, tăng hảo cảm (càng thân càng khó tăng)
+function giftCost(n){return Math.max(5,Math.round(12*SC[G.run.region]));}
+function favGift(n){const r=G.run;const c=giftCost(n);if(r.st<c)return 'Không đủ linh thạch.';r.st-=c;const f=favOf(n);const d=f>=60?3:f>=35?5:f>=0?8:6;favAdd(n,d+Math.max(0,Math.round((miOf()-10)/5)));advanceTime(2);return '';}
+
+// ===================== HẢO CẢM TÔNG MÔN =====================
+// = 60% cao tầng (chưởng môn, trưởng lão) + 40% đệ tử (thiên kiêu và đệ tử đã gặp của tông đó)
+const ELDER_T=['Chưởng môn','Đại trưởng lão','Truyền công trưởng lão'];
+function sectElders(i){const w=W();const s=w.sects[i];if(!s)return [];if(!s.eld){const R1=seedRng('eld:'+s.n);s.eld=ELDER_T.map((t,k)=>({t,ten:(NAME&&NAME.ho?NAME.ho[Math.floor(R1()*NAME.ho.length)]:'Lý')+' '+(k===0?'Chân Nhân':['Huyền','Thanh','Vân','Mặc','Trường'][Math.floor(R1()*5)]+' '+['Tử','Tôn','Lão'][Math.floor(R1()*3)])}));}return s.eld;}
+function sectDisciples(i){const w=W();const r=G.run;const L=[];(w.rivals||[]).forEach((x,k)=>{if(x.s===i)L.push(x.ten);});for(const o of Object.values(npcs()))if(o.sect===i&&!L.includes(o.n))L.push(o.n);return L;}
+function sectFav(i){const r=G.run;const E=sectElders(i).map(e=>favOf('@'+i+':'+e.t));const D=sectDisciples(i).map(favOf);const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+  const base=(r.sfav&&r.sfav[i])||0;return clamp(Math.round(avg(E)*0.6+avg(D)*0.4+base),-100,100);}
+function sectFavAdd(i,d){const r=G.run;r.sfav=r.sfav||{};r.sfav[i]=clamp((r.sfav[i]||0)+d,-100,100);}
+
+// ===================== MỐI QUAN HỆ =====================
+// kết nghĩa (huynh đệ/tỷ muội), nghĩa phụ/nghĩa mẫu, sư đồ (bái sư / thu đồ), phu thê, đạo lữ
+const REL_T={
+  kn:{n:'Kết nghĩa',need:60,d:'Huynh đệ / tỷ muội kết nghĩa: gặp nạn thì giúp, thỉnh thoảng gửi quà.',fx:{hpP:3,chkP:3}},
+  np:{n:'Nghĩa phụ / nghĩa mẫu',need:60,d:'Nhận làm cha mẹ nuôi: được chở che, che chở khi gặp hiểm.',fx:{lifeP:3,tammaRes:10}},
+  sp:{n:'Sư phụ',need:60,d:'Bái sư: được chỉ dạy, tu luyện nhanh hơn.',fx:{tvP:6,ngo:1}},
+  dd:{n:'Đồ đệ',need:50,d:'Thu đồ: có người nối y bát, đạo tâm vững hơn.',fx:{tam:1}},
+  pt:{n:'Phu thê',need:85,d:'Kết tóc se duyên: một nhà yên ấm, tâm ma khó xâm.',fx:{hpP:5,tammaRes:20}},
+  dl:{n:'Đạo lữ',need:85,d:'Cùng nhau tu đạo: song tu tinh tiến.',fx:{tvP:10,mpP:5}}};
+function bonds(){const r=G.run;return r.bonds||(r.bonds={});}
+function relOfNpc(n){return bonds()[favKey(n)]||null;}
+// điều kiện từng mối quan hệ; trả '' nếu được
+function relWhy(n,k,info){const r=G.run;const T=REL_T[k];const f=favOf(n);info=info||{};const B=bonds();
+  if(B[favKey(n)])return 'Đã có mối quan hệ: '+REL_T[B[favKey(n)]].n+'.';if(f<T.need)return 'Cần hảo cảm từ mức '+favLv(T.need)[1]+'.';
+  const has=x=>Object.values(B).includes(x);const myR=isPham()?-1:r.realm;const hisR=info.realm!=null?info.realm:null;
+  if(k==='sp'){if(has('sp'))return 'Đã có sư phụ.';if(hisR==null||hisR<myR+1)return 'Người này phải cao hơn ngươi ít nhất một đại cảnh giới.';}
+  if(k==='dd'){if(hisR!=null&&hisR>=myR)return 'Đồ đệ phải thấp hơn ngươi.';if(myR<1)return 'Phải tới Trúc Cơ mới thu đồ được.';}
+  if(k==='np'){if(hisR==null||hisR<myR)return 'Người này phải là bậc trưởng bối, cảnh giới không thấp hơn ngươi.';}
+  if(k==='pt'||k==='dl'){if(has('pt')||has('dl'))return 'Đã có '+(has('pt')?'phu thê':'đạo lữ')+'.';if(info.g&&info.g===r.g)return 'Chỉ kết được với người khác giới.';if(miOf()<5)return 'Mị lực quá thấp, người ta không để mắt tới.';
+    if(k==='dl'&&(isPham()||hisR==null||Math.abs(hisR-myR)>1))return 'Đạo lữ phải đều là tu sĩ, cảnh giới chênh không quá một bậc.';}
+  return '';}
+function relMake(n,k,info){const w=relWhy(n,k,info);if(w)return w;bonds()[favKey(n)]=k;favAdd(n,5);log(`Kết ${REL_T[k].n.toLowerCase()} với ${n}.`);if(typeof bio==='function')bio(`Năm ${Math.floor(G.run.age)} tuổi, ${G.run.ten} cùng ${n} kết ${REL_T[k].n.toLowerCase()}.`);return '';}
+function relBreak(n){const B=bonds();const k=B[favKey(n)];if(!k)return;delete B[favKey(n)];favAdd(n,-40,'cắt đứt quan hệ');}
+{const _agR=aggFx;aggFx=function(){const fx=_agR();const r=G.run;if(r&&r.bonds)for(const k of Object.values(r.bonds)){const T=REL_T[k];if(T)for(const x in T.fx)fx[x]=(fx[x]||0)+T.fx[x];}return fx;};}
+// mặt trái mị lực: rất đẹp thì đôi khi bị kẻ xấu để mắt (thêm hận nhẹ với người lạ gặp lần đầu)
+{const _nr=npcRec;npcRec=function(n,info){const N=npcs();const fresh=!N[favKey(n)];const o=_nr(n,info);if(fresh&&o&&miOf()>=20&&chance(0.12))o.fav-=25;return o;};}
+
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
 const $=s=>document.querySelector(s);
@@ -8497,7 +8592,7 @@ function modalHTML(){
   if(m.k==='nhansu'){const n=nodeById(G.run.at);const L=sectPeople(n);return `<div class="mbox"><h3>Nhân sự · ${esc(n.name)}</h3><div class="rows">${L.length?L.map(x=>`<div class="row${x.alive?'':' dim'}"><span class="r-i">${elSeal(x.el)}</span><span class="r-t"><b>${esc(x.ten)}</b><small>${esc(x.tt)}</small></span><span class="r-x">${x.alive?REALM[x.realm]:'đã mất'}</span></div>`).join(''):'<p class="empty">Chưa nghe danh ai nổi bật ở đây.</p>'}</div><div class="mb-f"><button class="btn pri" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='bbLearn2'){const r=G.run;const rel=r.relics[m.i];const Gd=bbGuards();const need=bb2Need(),th=S().than;return `<div class="mbox"><h3>${ic('flame')} Cưỡng ép lĩnh ngộ thêm ${rel&&rel.art?esc(rel.art.n):''}?</h3><p class="bad">Thức hải đã rạn nứt. Lĩnh ngộ thêm một môn nữa, thần thức sẽ tan vỡ mà chết, trừ khi có vật bảo mệnh hộ trì <b>và</b> thần thức còn từ ${need} (đang có ${th}).</p>${th<need?`<p class="bad">Thần thức hiện không đủ: dù có vật bảo mệnh cũng không giữ nổi.</p>`:''}<h4 class="sgrp">Vật bảo mệnh trong túi</h4>${Gd.length?`<div class="rows">${Gd.map(o=>`<button class="row" data-act="bbLearn2" data-arg="${m.i},${o.i}"><span class="r-i">${PILL[o.p.id].i}</span><span class="r-t"><b>${esc(PILL[o.p.id].n)}</b><small>Dùng một lần, dùng xong là mất</small></span><span class="r-x">Dùng</span></button>`).join('')}</div>`:'<p class="hint">Không tìm thấy vật bảo mệnh nào.</p>'}<div class="mb-f"><button class="btn bad" data-act="bbLearn2" data-arg="${m.i},-1">Cưỡng ép không hộ trì (chết)</button><span class="grow"></span><button class="btn" data-act="bbBack">Thôi</button></div></div>`;}
   if(m.k==='bbLearn'){const L=bbBooks();const r=G.run;return `<div class="mbox"><h3>${ic('book')} Lĩnh ngộ gấp trước giờ độ kiếp?</h3><p>Ngươi đang ở bán bộ ${REALM[r.realm+1]}. Trong túi có ${L.length>1?'những ':''}bí tịch ${REALM[r.realm+1]}. Cưỡng ép lĩnh ngộ ngay thì dùng được trong lúc độ kiếp, nhưng phải trả giá:</p><ul class="bb-cost"><li>Thức hải trọng thương (vài tháng)</li><li>Thần thức, niệm lực chỉ còn bốn phần mười: khó dò xét kiếp vân, khó dùng vật phẩm, pháp bảo</li></ul><div class="rows">${L.map(o=>`<button class="row" data-act="${bbCount()?'bbAsk2':'bbLearn'}" data-arg="${o.i}"${tah(artTipH(o.x.art))}><span class="r-i">${artArt(o.x.art)}</span><span class="r-t"><b>${esc(o.x.art.n)}</b><small>${PHAM[o.x.art.tier]} · ${o.x.art.type==='cp'?'công pháp':'tâm pháp'}</small></span><span class="r-x">${bbCount()?'Học thêm…':'Học ngay'}</span></button>`).join('')}</div>${bbCount()?`<p class="bad">Đã cưỡng ép lĩnh ngộ một môn. Môn thứ hai cần vật bảo mệnh và thần thức đủ, không thì chết.</p>`:`<p class="hint">Chỉ nên chọn một môn. Môn thứ hai cần vật bảo mệnh và thần thức đủ, không thì thần thức tan vỡ mà chết.</p>`}${m.err?`<p class="bad">${esc(m.err)}</p>`:''}<div class="mb-f"><span class="grow"></span><button class="btn" data-act="modalX">Không, giữ thần thức</button></div></div>`;}
-  if(m.k==='dev'){const B=(k,n)=>`<button class="btn" data-act="fxDemo" data-arg="${k}">${n}</button>`;return `<div class="mbox dev"><h3>${ic('bolt')} Dev test</h3><p class="hint">Chỉ để xem hiệu ứng, nhân vật không thay đổi gì.</p><h4 class="sgrp">Hiệu ứng</h4><div class="devg">${B('bt','Đột phá')}${B('xk','Xung kích')}${B('talup','Thiên phú lên Thiên kiêu')}${B('taldn','Thiên phú giảm')}${B('rldn','Rớt cảnh giới')}${B('lowhp','Máu thấp')}${B('heal','Hồi phục')}</div><div class="mb-f"><span class="grow"></span><button class="btn" data-act="modalX">Đóng</button></div></div>`;}
+  if(m.k==='dev'){const B=(k,n)=>`<button class="btn" data-act="fxDemo" data-arg="${k}">${n}</button>`;return `<div class="mbox dev"><h3>${ic('bolt')} Dev test</h3><p class="hint">Chỉ để xem hiệu ứng, nhân vật không thay đổi gì.</p><h4 class="sgrp">Hiệu ứng</h4><div class="devg">${B('bt','Đột phá')}${B('xk','Xung kích')}${B('talup','Tiềm chất lên Thiên kiêu')}${B('taldn','Tiềm chất giảm')}${B('rldn','Rớt cảnh giới')}${B('lowhp','Máu thấp')}${B('heal','Hồi phục')}</div><div class="mb-f"><span class="grow"></span><button class="btn" data-act="modalX">Đóng</button></div></div>`;}
   if(m.k==='cbResume'){const sc=G.run&&G.run.scene;const en=sc&&sc.en?sc.en.n:'kẻ địch';return `<div class="mbox cbres"><h3>${ic('sword')} Trận chiến đang dang dở</h3><p>Ngươi vẫn đang giao chiến với <b>${esc(en)}</b>. Trận đánh tạm ngưng chờ ngươi trở lại.</p><div class="mb-f"><span class="grow"></span><button class="btn pri big" data-act="cbResumeGo">Tiếp tục trận chiến</button><span class="grow"></span></div></div>`;}
   if(m.k==='pick')return pickModalHTML(m);
   if(m.k==='item')return itemModalHTML(m);
@@ -8792,7 +8887,7 @@ function prepUnitRow(u,me,cmp){const foe=u.side==='B';const sub=me?realmLabel():
   const V=sc?crushVictims(sc,u):[];
   const tag=V.length?`<b class="lc-c ne"${ta('Nghiền ép '+V.map(x=>x.isMain?'ngươi':x.name).join(', ')+': lực chiến hơn hẳn một đại cảnh giới.\nBên bị nghiền ép chịu uy áp, đòn đánh vào người này gần như vô dụng.')}><span class="ne-i">${ic('skull')}</span>Nghiền ép</b>`:'';
   const lc=RT('lc',pLc(u));
-  return `<div class="pp-u${foe?' foe':''}"><span class="u-av"${unitTal(u)?ta('Thiên phú: '+TAL_N[unitTal(u).tier]):''}>${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
+  return `<div class="pp-u${foe?' foe':''}"><span class="u-av"${unitTal(u)?ta('Tiềm chất: '+TAL_N[unitTal(u).tier]):''}>${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
    <div class="pp-row2"><div class="pp-bars"><span${ta('Khí huyết')}>${ic('heart')}${cBar(hp,mh,'hp'+(hp<mh*0.3?' low':hp<mh*0.6?' mid':''))}</span><span${ta(mm?'Linh lực':'Chưa có linh lực')}>${ic('drop')}${cBar(mp,mm||1,'mp')}</span></div>
    <div class="pp-lc"${ta(foe?'Lực chiến của kẻ này, so với người ở cảnh giới của ngươi':'Lực chiến so với người cùng cảnh giới')}>${lc}</div></div></div></div>`;}
 // so sức hai đội theo tổng lực chiến
@@ -8907,7 +9002,7 @@ function pChar(){
       htRow(),
       ttRow('Tiên thiên thể chất',(r.the||[]).map(ttPhysOf),'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.'),
       kvRow('Tư chất',`<span style="color:${PCOL[Math.max(0,4-TC_N.findIndex(x=>tc>=x[0]))]}">${tcName(tc)}</span>`,'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×'+numVN(Math.round(tcMult(tc)*100)/100)+' (từ ×0,7 tới ×1,3).'),
-      kvRow('Ngộ tính',RT('ngo',s.ngo,'muc'),'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',RT('tam',s.tam,'muc'),'Chống ảo cảnh, đột phá'),kvRow('Khí vận',RT('van',s.van,'muc'),'Chí mạng, may mắn'),
+      kvRow('Ngộ tính',RT('ngo',s.ngo,'muc'),'Tu luyện nhanh hơn, giải đố, đột phá, luyện chế'),kvRow('Đạo tâm',RT('tam',s.tam,'muc'),'Chống ảo cảnh, đột phá'),kvRow('Khí vận',RT('van',s.van,'muc'),'Chí mạng, may mắn'),kvRow('Mị lực',`<span class="mi-v">${miName()}</span>`,'Dung mạo, phong thái. Ảnh hưởng giá mua bán, các phép thử thuyết phục, ấn tượng ban đầu của người lạ, việc kết giao, bái sư, kết đạo lữ.\nQuá nổi bật đôi khi cũng chuốc lấy ghen ghét.'),
       kvRow('Nhân quả',karmaName(r.karma),'Thiện ác đều có báo'),kvRow('Tuổi',Math.floor(r.age)+' · còn '+left+' năm','Thọ nguyên '+s.life+'. Hết thọ nguyên là tọa hóa')]);
     b+=sgBoxC('tu','yin','Tu luyện',[kvRow('Cảnh giới',esc(realmLabel()),'Tu vi '+tvShow()+'%'+(dinhPhong()?(dvm()?'\nĐại viên mãn: khí huyết, linh lực, công, thủ +5%.':'\nChưa đại viên mãn: '+dvmWhy()+'.\n(Cần: không trọng thương, tâm ma dưới '+DVM_TAMMA+', đạo tâm từ '+DVM_TAM+')'):'')+(bbKind()?'\nBán bộ '+REALM[G.run.realm+1]+': dùng được đồ, công pháp, tâm pháp của '+REALM[G.run.realm+1]+'; chỉ số vẫn như cũ.':'')),
       `<div class="hrow tvrow"><span class="hn">${sib('Tu vi')}Tu vi</span>${bar(tvShow(),100,'tv')}<span class="hv">${tvShow()}%</span></div>`,
@@ -8970,7 +9065,7 @@ function affairsBody(){
 function pAffairs(){return win('Thiên hạ',affairsBody(),{cls:'tall'});}
 function pBonds(){
   const r=G.run,w=W();const R=relations();const tab=UI.tab.bonds||'an';
-  let b=tabsHTML('bonds',[['an','Ân oán'],['bang','Thiên Kiêu Bảng'],['tong','Tông môn']],tab);
+  let b=tabsHTML('bonds',[['an','Nhân mạch'],['bang','Thiên Kiêu Bảng'],['tong','Tông môn']],tab);
   if(tab==='an'){
     const seed=(s,cls)=>bondRow(s.ten,null,cls==='an'?'Chịu ơn ngươi':'Mang thù với ngươi','',[['Chuyện cũ',s.d],['Vùng',REG[s.r||0].n]]);
     b+=`<h4 class="sgrp">Đồng hành</h4>`+(R.party.length?`<div class="rows">${R.party.map(p=>bondRow(p.ten,null,'Đồng hành','',[['Còn đi cùng',durH(Math.max(0,p.until-w.t))]])).join('')}</div>`:'<p class="hint">Đang đi một mình.</p>');
@@ -8983,7 +9078,7 @@ function pBonds(){
     b+=`<h4 class="sgrp">Thiên kiêu đương thời</h4><div class="rows">${R.rivals.map(x=>bondRow(x.ten,x.g,x.tt+' của '+x.sect,x.alive?REALM[x.realm]:'đã mất',[['Danh hiệu',x.tt],['Tông môn',x.sect],['Cảnh giới',x.alive?REALM[x.realm]:'đã mất'],['Thuộc tính',x.el&&EL[x.el]?EL[x.el].n:'']],!x.alive)).join('')}</div>`;
   }
   if(tab==='tong'){const AL={chinh:'chính đạo',ta:'tà đạo',ma:'ma đạo',trung:'trung lập'};
-    b+=`<p class="hint">${R.mine?'Ngươi là đệ tử tông môn.':'Ngươi là tán tu, chưa vào tông môn nào.'}</p><div class="rows">${R.sects.map(s=>`<div class="row"><span class="r-i sect-i"><img src="${sectPic(s.n,s.al)}" alt=""></span><span class="r-t"><b>${esc(s.n)}</b><small>${AL[s.al]||s.al||''}</small></span></div>`).join('')}</div>`;}
+    b+=`<p class="hint">${R.mine?'Ngươi là đệ tử tông môn.':'Ngươi là tán tu, chưa vào tông môn nào.'}</p><div class="rows">${R.sects.map((s,i)=>{const f=sectFav(i),L=favLv(f);return `<details class="bond"><summary class="row"><span class="r-i sect-i"><img src="${sectPic(s.n,s.al)}" alt=""></span><span class="r-t"><b>${esc(s.n)}</b><small>${AL[s.al]||s.al||''}</small></span><span class="fav f-${L[2]}">${L[1]}</span><i class="cc-ch">${ic('down')}</i></summary><div class="bond-d"><p class="hint">Hảo cảm của tông môn tính từ cao tầng (nặng hơn) và đệ tử.</p>${sectElders(i).map(e=>bondRow('@'+i+':'+e.t,null,e.t,'',[],false,{disp:e.ten,realm:Math.min(5,(G.run.realm||0)+2)})).join('')}${sectDisciples(i).slice(0,6).map(n=>bondRow(n,null,'Đệ tử','',[],false)).join('')}</div></details>`;}).join('')}</div>`;}
   return win('Giao tình',b,{cls:'tall'});
 }
 function pCraft(){
@@ -9483,7 +9578,7 @@ let ENT_C=null;function entIdxC(){const t=Date.now();if(!ENT_C||t-ENT_C.t>400||E
   // không chạm vào phần đã nằm trong thẻ
   return h.split(/(<[^>]+>)/).map(part=>part[0]==='<'?part:part.replace(re,(m,pre,w)=>{if(seen.has(w))return m;seen.add(w);const k=ks.find(x=>esc(x)===w);return `${pre}<span class="gl ent"${tah(M[k])}>${w}</span>`;})).join('');};}
 
-function bondRow(n,g,sub,x,kv,dim){return `<details class="bond${dim?' dim':''}"><summary class="row"><span class="r-i bav">${npcAv(n,g)}</span><span class="r-t"><b>${esc(n)}</b><small>${esc(sub)}</small></span>${x?`<span class="r-x">${esc(x)}</span>`:''}<i class="cc-ch">${ic('down')}</i></summary><div class="kvl bond-d">${kv.filter(k=>k[1]).map(k=>`<div class="kr"><span>${esc(k[0])}</span><b>${esc(k[1])}</b></div>`).join('')}</div></details>`;}
+function bondRow(n,g,sub,x,kv,dim,o){o=o||npcInfo(n);g=g||o.g;const F=favOf(n),L=favLv(F),rk=relOfNpc(n);const dn=o.disp||n;return `<details class="bond${dim?' dim':''}"${UI.bondOpen===n?' open':''}><summary class="row"><span class="r-i bav">${npcAv(dn,g)}</span><span class="r-t"><b>${esc(dn)}${rk?` <em class="rel-tag">${REL_T[rk].n}</em>`:''}</b><small>${esc(sub)}</small></span>${x?`<span class="r-x">${esc(x)}</span>`:''}<span class="fav f-${L[2]}">${L[1]}</span><i class="cc-ch">${ic('down')}</i></summary><div class="kvl bond-d"><div class="kr"><span>Hảo cảm</span><b class="fav f-${L[2]}">${L[1]}</b></div>${kv.filter(k=>k[1]).map(k=>`<div class="kr"><span>${esc(k[0])}</span><b>${esc(k[1])}</b></div>`).join('')}${bondActs(n,o)}</div></details>`;}
 
 // hậu thiên khí vận trong tab Căn cơ
 const HT_COLR={1:2,2:3,3:4,4:5};
@@ -9497,6 +9592,21 @@ TFX[0]={hi:'#ffb3a8',lo:'#3a0606',m1:'#c0392b',m2:'#6e1410',m3:'#9a2a20',dk:'#1e
 function tfAs1(t,fn){const sv=TFX[1];TFX[1]=TFX[0];try{return fn(Object.assign({},t,{tier:1}));}finally{TFX[1]=sv;}}
 talFrameSVG=function(t,id){if(!t||t.tier<0||t.tier===1)return '';if(t.tier===0)return tfAs1(t,x=>talFrameX(x,id));return talFrameX(t,id);};
 {const _tco=talCardOrn;talCardOrn=function(t){if(t.tier===1)return '';if(t.tier===0)return tfAs1(t,x=>_tco(x)).replace(/tcx1/g,'tcx0');return _tco(t);};}
+
+// thông tin NPC để xét điều kiện quan hệ
+function npcInfo(n){const r=G.run,w=W();const k=(w.rivals||[]).findIndex(x=>x.ten===n);if(k>=0){const rv=(r.rivals||[]).find(x=>x.i===k);return {g:w.rivals[k].g,realm:rv?rv.realm:r.realm,sect:w.rivals[k].s};}
+  const o=(r.npcs||{})[n];if(o)return {g:o.g,realm:o.realm!=null?o.realm:Math.max(0,(r.region||0)),sect:o.sect};const m=/^@(\d+):/.exec(n);if(m)return {realm:Math.min(5,(r.realm||0)+2)};return {};}
+function bondActs(n,o){const rk=relOfNpc(n);const B=k=>{const w=relWhy(n,k,o);return `<button class="btn sm" data-act="relMake" data-arg="${esc(n)}|${k}"${w?' disabled':''}${ta(REL_T[k].d+(w?'\n\nChưa được: '+w:''))}>${REL_T[k].n}</button>`;};
+  return `<div class="bond-a"><button class="btn sm" data-act="favGift" data-arg="${esc(n)}"${ta('Tặng lễ vật: tốn '+giftCost(n)+' linh thạch, 2 giờ. Tăng hảo cảm.')}>Tặng lễ</button>${rk?`<button class="btn sm bad" data-act="relBreak" data-arg="${esc(n)}">Cắt đứt ${REL_T[rk].n.toLowerCase()}</button>`:['kn','np','sp','dd','pt','dl'].map(B).join('')}</div>`;}
+// tab Nhân mạch: thêm Quan hệ và Quen biết
+{const _pb=pBonds;pBonds=function(){const h=_pb();const tab=UI.tab.bonds||'an';if(tab!=='an')return h;const r=G.run;const B=bonds();const N=r.npcs||{};
+  const rel=Object.keys(B).map(n=>bondRow(n,null,REL_T[B[n]].n,'',[],false)).join('');
+  const known=Object.values(N).filter(o=>!B[o.n]&&!/^@/.test(o.n)&&o.met).slice(-20).reverse().map(o=>bondRow(o.n,o.g,o.type&&ENT_T[o.type]?ENT_T[o.type].n:'Người quen','',[],false)).join('');
+  const add=`<h4 class="sgrp">Quan hệ <small>${Object.keys(B).length}</small></h4>${rel?`<div class="rows">${rel}</div>`:'<p class="hint">Chưa kết nghĩa, bái sư hay kết đạo lữ với ai.</p>'}<h4 class="sgrp">Quen biết</h4>${known?`<div class="rows">${known}</div>`:'<p class="hint">Chưa quen ai trên đường.</p>'}`;
+  const i=h.indexOf('<h4 class="sgrp">Đồng hành</h4>');return i<0?h:h.slice(0,i)+add+h.slice(i);};}
+STAT_IC['Mị lực']=['heart','vio'];
+
+PANEL_V.bonds=pBonds;
 
 // ---------- màn ngoài: mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên ----------
 function vTitle(){
@@ -9993,7 +10103,7 @@ ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=nu
   if(UI.talA)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talchg');else if(UI.talNew)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talnew');return h;};}
 // thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
 {const _ptR=playerTal;playerTal=function(){let t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talFake){if(performance.now()<UI.talFake.until)t=Object.assign({},t,{tier:UI.talFake.tier});else{UI.talFake=null;UI.talS=t.tier;}}if(UI.talS==null)UI.talS=t.tier;
-  if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};{const up=t.tier>UI.talS;const nw=performance.now();if(up){document.documentElement.dataset.ascShake='xk';setTimeout(()=>{delete document.documentElement.dataset.ascShake;},950);}UI.lvGlow={t0:nw,t1:nw+3000,c:up?'up':'down'};setTimeout(()=>hnote(up?'Thiên phú thăng lên · '+TAL_N[t.tier]:'Thiên phú suy giảm · '+TAL_N[t.tier],up?'up':'down'),50);}setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
+  if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};{const up=t.tier>UI.talS;const nw=performance.now();if(up){document.documentElement.dataset.ascShake='xk';setTimeout(()=>{delete document.documentElement.dataset.ascShake;},950);}UI.lvGlow={t0:nw,t1:nw+3000,c:up?'up':'down'};setTimeout(()=>hnote(up?'Tiềm chất thăng lên · '+TAL_N[t.tier]:'Tiềm chất suy giảm · '+TAL_N[t.tier],up?'up':'down'),50);}setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
   return t.tier===UI.talS?t:Object.assign({},t,{tier:UI.talS});};}
 {const _tc2=talCardHTML;talCardHTML=function(){const h=_tc2();return UI.talA?h.replace('class="tal-wrap','class="talchg tal-wrap'):UI.talNew?h.replace('class="tal-wrap','class="talnew tal-wrap'):h;};}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e.stopImmediatePropagation();}},true);
@@ -10042,6 +10152,10 @@ setInterval(()=>{if(!G.run||G.screen!=='map'){UI.lowPrev=null;UI.injPrev=null;re
 // số khung hình: nhãn nhỏ góc phải, dạng "30FPS"
 {let fc=0,ft=performance.now();const tick=t=>{fc++;if(t-ft>=1000){const el=document.getElementById('fpsb')||(()=>{const d=document.createElement('div');d.id='fpsb';document.body.appendChild(d);return d;})();
   el.hidden=!CFG.showFps;if(CFG.showFps){el.textContent=Math.round(fc*1000/(t-ft))+'FPS';const hd=document.getElementById('hud');el.style.top=((hd&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+6)+'px';}fc=0;ft=t;}requestAnimationFrame(tick);};requestAnimationFrame(tick);}
+
+ACT.favGift=n=>{UI.bondOpen=n;const w=favGift(n);if(w)note(w,'dn');else note('Đã tặng lễ cho '+(n.replace(/^@\d+:/,'')),'up');};
+ACT.relMake=a=>{const i=a.lastIndexOf('|');const n=a.slice(0,i),k=a.slice(i+1);UI.bondOpen=n;const w=relMake(n,k,npcInfo(n));if(w)note(w,'dn');else hnote('Kết '+REL_T[k].n.toLowerCase()+' · '+n.replace(/^@\d+:/,''),'up');};
+ACT.relBreak=n=>{UI.bondOpen=n;relBreak(n);};
 
 </script>
 </body>

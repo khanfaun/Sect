@@ -447,7 +447,7 @@ ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=nu
   if(UI.talA)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talchg');else if(UI.talNew)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talnew');return h;};}
 // thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
 {const _ptR=playerTal;playerTal=function(){let t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talFake){if(performance.now()<UI.talFake.until)t=Object.assign({},t,{tier:UI.talFake.tier});else{UI.talFake=null;UI.talS=t.tier;}}if(UI.talS==null)UI.talS=t.tier;
-  if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};{const up=t.tier>UI.talS;const nw=performance.now();if(up){document.documentElement.dataset.ascShake='xk';setTimeout(()=>{delete document.documentElement.dataset.ascShake;},950);}UI.lvGlow={t0:nw,t1:nw+3000,c:up?'up':'down'};setTimeout(()=>hnote(up?'Thiên phú thăng lên · '+TAL_N[t.tier]:'Thiên phú suy giảm · '+TAL_N[t.tier],up?'up':'down'),50);}setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
+  if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};{const up=t.tier>UI.talS;const nw=performance.now();if(up){document.documentElement.dataset.ascShake='xk';setTimeout(()=>{delete document.documentElement.dataset.ascShake;},950);}UI.lvGlow={t0:nw,t1:nw+3000,c:up?'up':'down'};setTimeout(()=>hnote(up?'Tiềm chất thăng lên · '+TAL_N[t.tier]:'Tiềm chất suy giảm · '+TAL_N[t.tier],up?'up':'down'),50);}setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
   return t.tier===UI.talS?t:Object.assign({},t,{tier:UI.talS});};}
 {const _tc2=talCardHTML;talCardHTML=function(){const h=_tc2();return UI.talA?h.replace('class="tal-wrap','class="talchg tal-wrap'):UI.talNew?h.replace('class="tal-wrap','class="talnew tal-wrap'):h;};}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e.stopImmediatePropagation();}},true);
@@ -496,3 +496,7 @@ setInterval(()=>{if(!G.run||G.screen!=='map'){UI.lowPrev=null;UI.injPrev=null;re
 // số khung hình: nhãn nhỏ góc phải, dạng "30FPS"
 {let fc=0,ft=performance.now();const tick=t=>{fc++;if(t-ft>=1000){const el=document.getElementById('fpsb')||(()=>{const d=document.createElement('div');d.id='fpsb';document.body.appendChild(d);return d;})();
   el.hidden=!CFG.showFps;if(CFG.showFps){el.textContent=Math.round(fc*1000/(t-ft))+'FPS';const hd=document.getElementById('hud');el.style.top=((hd&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+6)+'px';}fc=0;ft=t;}requestAnimationFrame(tick);};requestAnimationFrame(tick);}
+
+ACT.favGift=n=>{UI.bondOpen=n;const w=favGift(n);if(w)note(w,'dn');else note('Đã tặng lễ cho '+(n.replace(/^@\d+:/,'')),'up');};
+ACT.relMake=a=>{const i=a.lastIndexOf('|');const n=a.slice(0,i),k=a.slice(i+1);UI.bondOpen=n;const w=relMake(n,k,npcInfo(n));if(w)note(w,'dn');else hnote('Kết '+REL_T[k].n.toLowerCase()+' · '+n.replace(/^@\d+:/,''),'up');};
+ACT.relBreak=n=>{UI.bondOpen=n;relBreak(n);};

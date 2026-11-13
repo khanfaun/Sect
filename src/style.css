@@ -1408,3 +1408,10 @@ details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim
 #lowfx.heal{box-shadow:inset 0 0 70px 22px rgba(60,170,90,.55);background:radial-gradient(ellipse at center,transparent 60%,rgba(80,190,110,.12));animation:healBreath 2.6s ease-out forwards}
 @keyframes healBreath{0%{opacity:0}20%{opacity:.55}38%{opacity:.25}70%{opacity:1}100%{opacity:0}}
 #fpsb{position:fixed;right:8px;z-index:66;font:600 10px/1 monospace;color:var(--ink2);background:color-mix(in srgb,var(--paper) 80%,transparent);padding:2px 5px;border-radius:4px;pointer-events:none}
+
+.fav{font-size:.72em;padding:1px 8px;border-radius:999px;border:1px solid currentColor;margin-left:auto;white-space:nowrap;font-weight:600}
+.bond .row .fav{margin-right:4px}
+.f-al{color:#1f7a3e}.f-tk{color:#2f9a4e}.f-th{color:#3f8f6a}.f-qb{color:var(--acc2)}.f-xl{color:var(--ink3)}.f-gb{color:#b8792a}.f-td{color:var(--seal)}.f-tu{color:#7a0a10;background:rgba(122,10,16,.08)}
+.bond-a{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.bond-a .btn{font-size:.72em;padding:4px 8px}
+.rel-tag{font-style:normal;font-size:.7em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:middle}
+details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:rotate(180deg)}
