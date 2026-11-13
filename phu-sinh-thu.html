@@ -3367,7 +3367,7 @@ function forceTamma(){
   r.scene={type:'event',id:'tam_ma_xam',v,story:['Tâm ma đã lớn tới mức không thể đè nén. Đêm ấy, nó bước ra khỏi thân thể ngươi, khoác khuôn mặt của ngươi, và mỉm cười.'],cur:['force'],phase:'choose',chips:[],back:r.lastBack!=null?r.lastBack:null};
 }
 const ENC_T={
-  thu:['{mo} Bụi cây rung lên. {$e} bước ra, mắt xanh lè, nước dãi nhỏ giọt.','Mùi tanh hôi xộc tới trước khi ngươi kịp thấy nó. {$e} chặn ngay giữa lối, gầm gừ.','{$canh} Tiếng gầm vang lên sát bên tai. {$e} đã theo dấu ngươi từ lâu.','Đàn chim vụt bay. {$e} lao ra từ chỗ tối, nhắm thẳng vào ngươi.','Ngươi giẫm phải lãnh địa của {$e}. Nó không định để ngươi đi.','{$canh} Trên mặt đất có dấu chân to bằng cái nong, còn mới. Rồi {$e} xuất hiện.'],
+  thu:['{mo} Bụi cây rung lên. {$e} hiện ra, mắt đăm đăm nhìn ngươi.','Mùi tanh hôi xộc tới trước khi ngươi kịp thấy nó. {$e} chặn ngay giữa lối.','{$canh} Yêu khí ập tới sát bên. {$e} đã theo dấu ngươi từ lâu.','Đàn chim vụt bay. {$e} lao ra từ chỗ tối, nhắm thẳng vào ngươi.','Ngươi giẫm phải lãnh địa của {$e}. Nó không định để ngươi đi.','{$canh} Trên mặt đất có dấu vết còn mới. Rồi {$e} xuất hiện.'],
   nhan:['“Đứng lại!” {$e} chặn đường, ánh mắt dán vào túi trữ vật của ngươi.','{$e} từ trên cây nhảy xuống, cười nhạt: “Giao đồ ra, ta cho ngươi chết toàn thây.”','Có kẻ bám theo ngươi đã ba ngày. Hôm nay, {$e} không giấu nữa.','{$canh} {$e} ngồi chờ sẵn ở ngã ba, như biết ngươi sẽ đi qua.','“{$p.tt}, giết ngươi cũng chẳng oan đâu.” {$e} nói, giọng như bàn chuyện thời tiết.','{mo} Ngươi vừa dừng chân thì {$e} đã chắn trước mặt, tay đặt lên chuôi binh khí.'],
   quy:['Nhiệt độ hạ xuống đột ngột, hơi thở ngươi hóa thành sương. {$e} trôi ra từ bóng tối.','{mo} Tiếng khóc than vẳng tới, càng lúc càng gần. Rồi {$e} hiện ra, ngay sau lưng ngươi.','Đuốc trong tay ngươi tắt phụt. Khi thắp lại, {$e} đã đứng đó.','{$canh} Có tiếng cười khanh khách. {$e} ngồi vắt vẻo trên cành cây chết, nhìn ngươi.'],
   vat:['Mặt đất rung lên. {$e} từ từ chuyển động, như vừa tỉnh dậy sau giấc ngủ ngàn năm.','Không tiếng động, không dấu hiệu. {$e} đã ở đó, chặn đường ngươi.','{$canh} Từ khe nứt hư không, {$e} chui ra.'],
@@ -3443,7 +3443,7 @@ function lifeSummary(cause,info){
   else if(cause==='tamma')end=`Năm ${age} tuổi, ${r.ten} tẩu hỏa nhập ma.`;
   else if(cause==='thanvo')end=`Năm ${age} tuổi, ${r.ten} cưỡng ép lĩnh ngộ trước giờ độ kiếp, thức hải vỡ nát, thần hồn tan biến ở ${r.place.n}.`;
   else if(cause==='kiep')end=`Năm ${age} tuổi, ${r.ten} tan thành tro bụi dưới thiên kiếp ở ${r.place.n}.`;
-  else if(cause==='quyan')end=`Năm ${age} tuổi, ${r.ten} gác kiếm quy ẩn ở ${r.place.n}, sống nốt phần đời còn lại như một phàm nhân.`;
+  else if(cause==='quyan')end=`Năm ${age} tuổi, ${r.ten} gác kiếm quy ẩn ở ${r.place.n}, từ đó không hỏi tới chuyện tu hành, sống nốt quãng đời còn lại trong yên lặng.`;
   else if(cause==='phithang')end=`Năm ${age} tuổi, ${r.ten} vượt Cửu Trùng Lôi Kiếp, phá không phi thăng.`;
   lines.push(end+(cause==='combat'||cause==='toahoa'?' '+pick(['Một đời tu tiên, như bao người khác.','Không ai kịp nhớ tên.','Người đời nhắc tới vài năm, rồi quên.','Tiên lộ dài, chân người ngắn.']):''));
   return lines;
@@ -4233,7 +4233,7 @@ ev({id:'bat_nat',n:'Ức hiếp tạp dịch',tg:['tong'],w:2,v:()=>({a:npc('tre
 ev({id:'duoc_vien',n:'Dược viên',tg:['tong','nui'],w:2,
  t:['Dược viên của {$sect} trải dài sườn núi, linh thảo trăm năm mọc như cỏ. Người canh vườn là một lão già đang ngủ gật.','Mùi thuốc thơm ngát. Ngươi đứng trước hàng rào trúc của dược viên {$sect}, bên trong có con hạc trắng đang mổ cỏ.'],
  c:[
-  {i:'🌿',l:'Lén hái',chk:['tp',11],ok:{t:'Ngươi vào ra như gió. Trong túi đã có mấy gốc linh thảo thượng hạng.',e:{pill:['tinhnguyen','taytuy'],karma:-4}},no:{t:'Lão già mở mắt. Hóa ra lão chỉ giả ngủ.',fight:{k:'votang',n:'Lão canh vườn',m:1.1},win:{t:'Ngươi chạy thoát, trên tay còn kịp nhổ một gốc.',e:{pill:1,karma:-4}}}},
+  {i:'🌿',l:'Lén hái',chk:['tp',11],ok:{t:'Ngươi vào ra như gió. Trong túi đã có mấy gốc linh thảo thượng hạng.',e:{thao:8,karma:-4}},no:{t:'Lão già mở mắt. Hóa ra lão chỉ giả ngủ.',fight:{k:'votang',n:'Lão canh vườn',m:1.1},win:{t:'Ngươi chạy thoát, trên tay còn kịp nhổ một gốc.',e:{thao:2,karma:-4}}}},
   {i:'🧑‍🌾',l:'Xin làm thuê',t:'Nửa năm nhổ cỏ tưới cây, ngươi học được cách phân biệt trăm loại linh thảo. Lão canh vườn trả công bằng thuốc.',e:{st:20,pill:'hoixuan',tv:5,h:288}},
   {i:'🚶',l:'Đi qua',t:'Con hạc ngẩng đầu nhìn ngươi, rồi lại cúi xuống mổ cỏ.'}
  ]});
@@ -7454,8 +7454,8 @@ const ASC_K=[['maxHp','Khí huyết'],['maxMp','Linh lực'],['atk','Công'],['d
 function ascSnap(){const s=S();const o={};for(const [k] of ASC_K)o[k]=s[k]||0;return o;}
 function ascDiff(a,b){const L=[];for(const [k,n] of ASC_K){const x=a[k]||0,y=b[k]||0;if(y<=x+1e-6)continue;const p=x>0?(y-x)/x:1;L.push({k,n,lv:p>=0.8?3:p>=0.3?2:1});}return L;}
 {const _psA=prepStart;prepStart=function(){const r=G.run;if(r){r._ascPre=ascSnap();r._ascFrom=realmLabel();}return _psA.apply(this,arguments);};}
-{const _bfA=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const pre=r&&r._ascPre,from=r&&r._ascFrom;const res=_bfA.apply(this,arguments);const r2=G.run;
-  if(r2&&r2.realm>rl&&pre){r2.asc={k:'bt',from,to:realmLabel(),realm:r2.realm,diff:ascDiff(pre,ascSnap()),place:(r2.place&&r2.place.t)||'dong'};}if(r2){r2._ascPre=null;}return res;};}
+{const _bfA=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const pre=r&&r._ascPre,from=r&&r._ascFrom;const stg=(r&&r.bt&&r.bt.stages)||[];const kiep=stg.some(x=>x&&x!=='tamma')?'loi':stg.includes('tamma')?'tamma':'';const res=_bfA.apply(this,arguments);const r2=G.run;
+  if(r2&&r2.realm>rl&&pre){r2.asc={k:'bt',kiep,from,to:realmLabel(),realm:r2.realm,diff:ascDiff(pre,ascSnap()),place:(r2.place&&r2.place.t)||'dong'};}if(r2){r2._ascPre=null;}return res;};}
 {const _xkA=lkXk;lkXk=function(){const r=G.run;const pre=r&&ascSnap(),from=r&&realmLabel();const ok=_xkA.apply(this,arguments);const r2=G.run;if(ok&&r2&&pre)r2.asc={k:'xk',from,to:realmLabel(),diff:ascDiff(pre,ascSnap())};return ok;};}
 
 // hậu thiên khí vận: mô tả bằng chữ (tăng nhẹ/khá/mạnh/rất mạnh), không lộ con số
@@ -9088,16 +9088,16 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodg
 function pLc(u){return u.isMain?lucChien():lcCalc(u);}
 // ai bị người này nghiền ép (khác phe, lực chiến kém từ 3 lần)
 function crushVictims(sc,u){const o=sc.units.filter(x=>x.side!==u.side&&x.kind!=='kiep'&&x.hp>0);const a=pLc(u);return o.filter(x=>a>=pLc(x)*NE_T);}
-function prepUnitRow(u,me,cmp){const foe=u.side==='B';const sub=me?realmLabel():u.sub||(foe?'Đối thủ':'Đồng hành');const sc=G.run.scene;
+function prepUnitRow(u,me,cmp){const foe=u.side==='B';const kp=u.kind==='kiep';const sub=me?realmLabel():kp?'Thiên kiếp':u.sub||(foe?'Đối thủ':'Đồng hành');const sc=G.run.scene;
   const S0=me?S():null;const hp=me?G.run.hp:u.hp,mh=me?S0.maxHp:u.max,mp=me?G.run.mp:(u.mp||0),mm=me?S0.maxMp:(u.maxMp||0);
   const V=sc?crushVictims(sc,u):[];
   const tag=V.length?`<b class="lc-c ne"${ta('Nghiền ép '+V.map(x=>x.isMain?'ngươi':x.name).join(', ')+': lực chiến hơn hẳn một đại cảnh giới.\nBên bị nghiền ép chịu uy áp, đòn đánh vào người này gần như vô dụng.')}><span class="ne-i">${ic('skull')}</span>Nghiền ép</b>`:'';
-  const lc=RT('lc',pLc(u));
+  const lc=kp?'<b class="lc-c st">Gục là chết</b>':RT('lc',pLc(u)); // thiên kiếp không so lực chiến như một đối thủ
   return `<div class="pp-u${foe?' foe':''}"><span class="u-av"${unitTal(u)?ta('Tiềm chất: '+TAL_N[unitTal(u).tier]):''}>${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
    <div class="pp-row2"><div class="pp-bars"><span${ta('Khí huyết')}>${ic('heart')}${cBar(hp,mh,'hp'+(hp<mh*0.3?' low':hp<mh*0.6?' mid':''))}</span><span${ta(mm?'Linh lực':'Chưa có linh lực')}>${ic('drop')}${cBar(mp,mm||1,'mp')}</span></div>
    <div class="pp-lc"${ta(foe?'Lực chiến của kẻ này, so với người ở cảnh giới của ngươi':'Lực chiến so với người cùng cảnh giới')}>${lc}</div></div></div></div>`;}
 // so sức hai đội theo tổng lực chiến
-function teamCmp(sc){const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');const ta=A.reduce((s,u)=>s+pLc(u),0),tb=B.reduce((s,u)=>s+pLc(u),0);const q=tb/Math.max(1,ta);
+function teamCmp(sc){const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');if(sc.units.some(u=>u.kind==='kiep'))return {side:'',t:'',c:''};const ta=A.reduce((s,u)=>s+pLc(u),0),tb=B.reduce((s,u)=>s+pLc(u),0);const q=tb/Math.max(1,ta);
   return q>=1.35?{side:'B',t:'Mạnh hơn',c:'st'}:q<=0.75?{side:'A',t:'Mạnh hơn',c:'st'}:{side:'B',t:'Vừa sức',c:'ev'};}
 function vCbPrep(sc){const r=G.run;const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B');
   const cat=[['atk','Công'],['move','Thân pháp'],['def','Thủ'],['ult','Thần thông']];
@@ -10279,7 +10279,7 @@ ACT.bbLearn2=a=>{const [i,g]=String(a).split(',').map(Number);const e=bbForceLea
 function chevIc(n){return `<span class="chev c${n}">${'<svg viewBox="0 0 20 13"><path d="M1 7L10 1L19 7V12L10 6L1 12Z"/></svg>'.repeat(n)}</span>`;}
 function ascPlaceImg(a){const P=ASSET.place||{};return P[a.place]||P.dongphu||P.dong||P.nui||Object.values(P)[0]||'';}
 function ascStory(a){const r=G.run;const x=a.ht&&HTMAP[a.ht];const L=[];
-  L.push(a.k==='bt'?`Lôi vân tan dần. ${r.ten} mở mắt, thấy trời đất như vừa được gột rửa: núi xanh hơn, gió trong hơn, từng sợi linh khí hiện rõ như tơ.`:`Một tiếng “rắc” khẽ vang trong kinh mạch. Linh lực dồn nén bao lâu nay ào qua quan ải.`);
+  L.push(a.k==='bt'?`${a.kiep==='loi'?'Lôi vân tan dần.':a.kiep==='tamma'?'Bóng tâm ma tan vào hư không.':'Linh khí quanh thân lắng xuống.'} ${r.ten} mở mắt, thấy trời đất như vừa được gột rửa: núi xanh hơn, gió trong hơn, từng sợi linh khí hiện rõ như tơ.`:`Một tiếng “rắc” khẽ vang trong kinh mạch. Linh lực dồn nén bao lâu nay ào qua quan ải.`);
   if(x)L.push(x.st.replace(/\{ten\}/g,r.ten));return L;}
 function ascDiffHTML(a){return `<div class="asc-diff">${a.diff.length?a.diff.map(d=>`<div class="ad"><span>${esc(d.n)}</span>${chevIc(d.lv)}</div>`).join(''):'<p class="hint">Căn cơ vững lại, chưa thấy đổi khác rõ rệt.</p>'}</div>`;}
 function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
@@ -10288,7 +10288,7 @@ function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
     UI.ascT=setTimeout(()=>{UI.ascPh=a.k==='bt'&&r.htPick?'pick':'res';render();},ms);}
   const ph=UI.ascPh;let h=`<div class="asc asc-${a.k} ph-${ph}"><div class="asc-bg"></div>`;
   if(ph==='flash')return h+`<div class="asc-glow"></div>${a.k==='bt'?'<div class="asc-rays"></div>':''}</div>`;
-  if(ph==='pick'){const sel=UI.ascSel;h+=`<div class="asc-in"><small>Thiên địa cảm ứng</small><h2>Hậu thiên khí vận</h2><p>Kiếp nạn đã qua, cơ duyên hiện trước mắt. Ba luồng khí vận lơ lửng giữa không trung, chỉ có thể nắm lấy một.</p>
+  if(ph==='pick'){const sel=UI.ascSel;h+=`<div class="asc-in"><small>Thiên địa cảm ứng</small><h2>Hậu thiên khí vận</h2><p>${(G.run.asc&&G.run.asc.kiep)?'Kiếp nạn đã qua, cơ':'Quan ải đã phá, cơ'} duyên hiện trước mắt. Ba luồng khí vận lơ lửng giữa không trung, chỉ có thể nắm lấy một.</p>
     <div class="htp">${r.htPick.map((id,i)=>{const x=HTMAP[id];return `<button class="hto r${x.r}${sel===i?' sel':''}" data-act="ascSel" data-arg="${i}"><small>${HT_RANK[x.r]}</small><b>${esc(x.n)}</b><p>${htFxText(x).map(esc).join('<br>')}</p></button>`;}).join('')}</div></div>`;
     if(sel!=null){const x=HTMAP[r.htPick[sel]];h+=`<div class="asc-cf"><div class="mbox"><h3>Nắm lấy ${esc(x.n)}?</h3><p>${htFxText(x).map(esc).join('<br>')}</p><p class="hint">Chọn rồi không đổi được.</p><div class="mb-f"><button class="btn" data-act="ascSel" data-arg="-1">Nghĩ lại</button><span class="grow"></span><button class="btn pri" data-act="ascPick">Xác nhận</button></div></div></div>`;}
     return h+'</div>';}

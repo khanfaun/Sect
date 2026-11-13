@@ -172,16 +172,16 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest('#dodgeBtn,#dodg
 function pLc(u){return u.isMain?lucChien():lcCalc(u);}
 // ai bị người này nghiền ép (khác phe, lực chiến kém từ 3 lần)
 function crushVictims(sc,u){const o=sc.units.filter(x=>x.side!==u.side&&x.kind!=='kiep'&&x.hp>0);const a=pLc(u);return o.filter(x=>a>=pLc(x)*NE_T);}
-function prepUnitRow(u,me,cmp){const foe=u.side==='B';const sub=me?realmLabel():u.sub||(foe?'Đối thủ':'Đồng hành');const sc=G.run.scene;
+function prepUnitRow(u,me,cmp){const foe=u.side==='B';const kp=u.kind==='kiep';const sub=me?realmLabel():kp?'Thiên kiếp':u.sub||(foe?'Đối thủ':'Đồng hành');const sc=G.run.scene;
   const S0=me?S():null;const hp=me?G.run.hp:u.hp,mh=me?S0.maxHp:u.max,mp=me?G.run.mp:(u.mp||0),mm=me?S0.maxMp:(u.maxMp||0);
   const V=sc?crushVictims(sc,u):[];
   const tag=V.length?`<b class="lc-c ne"${ta('Nghiền ép '+V.map(x=>x.isMain?'ngươi':x.name).join(', ')+': lực chiến hơn hẳn một đại cảnh giới.\nBên bị nghiền ép chịu uy áp, đòn đánh vào người này gần như vô dụng.')}><span class="ne-i">${ic('skull')}</span>Nghiền ép</b>`:'';
-  const lc=RT('lc',pLc(u));
+  const lc=kp?'<b class="lc-c st">Gục là chết</b>':RT('lc',pLc(u)); // thiên kiếp không so lực chiến như một đối thủ
   return `<div class="pp-u${foe?' foe':''}"><span class="u-av"${unitTal(u)?ta('Tiềm chất: '+TAL_N[unitTal(u).tier]):''}>${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
    <div class="pp-row2"><div class="pp-bars"><span${ta('Khí huyết')}>${ic('heart')}${cBar(hp,mh,'hp'+(hp<mh*0.3?' low':hp<mh*0.6?' mid':''))}</span><span${ta(mm?'Linh lực':'Chưa có linh lực')}>${ic('drop')}${cBar(mp,mm||1,'mp')}</span></div>
    <div class="pp-lc"${ta(foe?'Lực chiến của kẻ này, so với người ở cảnh giới của ngươi':'Lực chiến so với người cùng cảnh giới')}>${lc}</div></div></div></div>`;}
 // so sức hai đội theo tổng lực chiến
-function teamCmp(sc){const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');const ta=A.reduce((s,u)=>s+pLc(u),0),tb=B.reduce((s,u)=>s+pLc(u),0);const q=tb/Math.max(1,ta);
+function teamCmp(sc){const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B'&&u.kind!=='kiep');if(sc.units.some(u=>u.kind==='kiep'))return {side:'',t:'',c:''};const ta=A.reduce((s,u)=>s+pLc(u),0),tb=B.reduce((s,u)=>s+pLc(u),0);const q=tb/Math.max(1,ta);
   return q>=1.35?{side:'B',t:'Mạnh hơn',c:'st'}:q<=0.75?{side:'A',t:'Mạnh hơn',c:'st'}:{side:'B',t:'Vừa sức',c:'ev'};}
 function vCbPrep(sc){const r=G.run;const A=sc.units.filter(u=>u.side==='A'),B=sc.units.filter(u=>u.side==='B');
   const cat=[['atk','Công'],['move','Thân pháp'],['def','Thủ'],['ult','Thần thông']];

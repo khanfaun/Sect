@@ -2663,8 +2663,8 @@ const ASC_K=[['maxHp','Khí huyết'],['maxMp','Linh lực'],['atk','Công'],['d
 function ascSnap(){const s=S();const o={};for(const [k] of ASC_K)o[k]=s[k]||0;return o;}
 function ascDiff(a,b){const L=[];for(const [k,n] of ASC_K){const x=a[k]||0,y=b[k]||0;if(y<=x+1e-6)continue;const p=x>0?(y-x)/x:1;L.push({k,n,lv:p>=0.8?3:p>=0.3?2:1});}return L;}
 {const _psA=prepStart;prepStart=function(){const r=G.run;if(r){r._ascPre=ascSnap();r._ascFrom=realmLabel();}return _psA.apply(this,arguments);};}
-{const _bfA=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const pre=r&&r._ascPre,from=r&&r._ascFrom;const res=_bfA.apply(this,arguments);const r2=G.run;
-  if(r2&&r2.realm>rl&&pre){r2.asc={k:'bt',from,to:realmLabel(),realm:r2.realm,diff:ascDiff(pre,ascSnap()),place:(r2.place&&r2.place.t)||'dong'};}if(r2){r2._ascPre=null;}return res;};}
+{const _bfA=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const pre=r&&r._ascPre,from=r&&r._ascFrom;const stg=(r&&r.bt&&r.bt.stages)||[];const kiep=stg.some(x=>x&&x!=='tamma')?'loi':stg.includes('tamma')?'tamma':'';const res=_bfA.apply(this,arguments);const r2=G.run;
+  if(r2&&r2.realm>rl&&pre){r2.asc={k:'bt',kiep,from,to:realmLabel(),realm:r2.realm,diff:ascDiff(pre,ascSnap()),place:(r2.place&&r2.place.t)||'dong'};}if(r2){r2._ascPre=null;}return res;};}
 {const _xkA=lkXk;lkXk=function(){const r=G.run;const pre=r&&ascSnap(),from=r&&realmLabel();const ok=_xkA.apply(this,arguments);const r2=G.run;if(ok&&r2&&pre)r2.asc={k:'xk',from,to:realmLabel(),diff:ascDiff(pre,ascSnap())};return ok;};}
 
 // hậu thiên khí vận: mô tả bằng chữ (tăng nhẹ/khá/mạnh/rất mạnh), không lộ con số

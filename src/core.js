@@ -1905,7 +1905,7 @@ function forceTamma(){
   r.scene={type:'event',id:'tam_ma_xam',v,story:['Tâm ma đã lớn tới mức không thể đè nén. Đêm ấy, nó bước ra khỏi thân thể ngươi, khoác khuôn mặt của ngươi, và mỉm cười.'],cur:['force'],phase:'choose',chips:[],back:r.lastBack!=null?r.lastBack:null};
 }
 const ENC_T={
-  thu:['{mo} Bụi cây rung lên. {$e} bước ra, mắt xanh lè, nước dãi nhỏ giọt.','Mùi tanh hôi xộc tới trước khi ngươi kịp thấy nó. {$e} chặn ngay giữa lối, gầm gừ.','{$canh} Tiếng gầm vang lên sát bên tai. {$e} đã theo dấu ngươi từ lâu.','Đàn chim vụt bay. {$e} lao ra từ chỗ tối, nhắm thẳng vào ngươi.','Ngươi giẫm phải lãnh địa của {$e}. Nó không định để ngươi đi.','{$canh} Trên mặt đất có dấu chân to bằng cái nong, còn mới. Rồi {$e} xuất hiện.'],
+  thu:['{mo} Bụi cây rung lên. {$e} hiện ra, mắt đăm đăm nhìn ngươi.','Mùi tanh hôi xộc tới trước khi ngươi kịp thấy nó. {$e} chặn ngay giữa lối.','{$canh} Yêu khí ập tới sát bên. {$e} đã theo dấu ngươi từ lâu.','Đàn chim vụt bay. {$e} lao ra từ chỗ tối, nhắm thẳng vào ngươi.','Ngươi giẫm phải lãnh địa của {$e}. Nó không định để ngươi đi.','{$canh} Trên mặt đất có dấu vết còn mới. Rồi {$e} xuất hiện.'],
   nhan:['“Đứng lại!” {$e} chặn đường, ánh mắt dán vào túi trữ vật của ngươi.','{$e} từ trên cây nhảy xuống, cười nhạt: “Giao đồ ra, ta cho ngươi chết toàn thây.”','Có kẻ bám theo ngươi đã ba ngày. Hôm nay, {$e} không giấu nữa.','{$canh} {$e} ngồi chờ sẵn ở ngã ba, như biết ngươi sẽ đi qua.','“{$p.tt}, giết ngươi cũng chẳng oan đâu.” {$e} nói, giọng như bàn chuyện thời tiết.','{mo} Ngươi vừa dừng chân thì {$e} đã chắn trước mặt, tay đặt lên chuôi binh khí.'],
   quy:['Nhiệt độ hạ xuống đột ngột, hơi thở ngươi hóa thành sương. {$e} trôi ra từ bóng tối.','{mo} Tiếng khóc than vẳng tới, càng lúc càng gần. Rồi {$e} hiện ra, ngay sau lưng ngươi.','Đuốc trong tay ngươi tắt phụt. Khi thắp lại, {$e} đã đứng đó.','{$canh} Có tiếng cười khanh khách. {$e} ngồi vắt vẻo trên cành cây chết, nhìn ngươi.'],
   vat:['Mặt đất rung lên. {$e} từ từ chuyển động, như vừa tỉnh dậy sau giấc ngủ ngàn năm.','Không tiếng động, không dấu hiệu. {$e} đã ở đó, chặn đường ngươi.','{$canh} Từ khe nứt hư không, {$e} chui ra.'],
@@ -1981,7 +1981,7 @@ function lifeSummary(cause,info){
   else if(cause==='tamma')end=`Năm ${age} tuổi, ${r.ten} tẩu hỏa nhập ma.`;
   else if(cause==='thanvo')end=`Năm ${age} tuổi, ${r.ten} cưỡng ép lĩnh ngộ trước giờ độ kiếp, thức hải vỡ nát, thần hồn tan biến ở ${r.place.n}.`;
   else if(cause==='kiep')end=`Năm ${age} tuổi, ${r.ten} tan thành tro bụi dưới thiên kiếp ở ${r.place.n}.`;
-  else if(cause==='quyan')end=`Năm ${age} tuổi, ${r.ten} gác kiếm quy ẩn ở ${r.place.n}, sống nốt phần đời còn lại như một phàm nhân.`;
+  else if(cause==='quyan')end=`Năm ${age} tuổi, ${r.ten} gác kiếm quy ẩn ở ${r.place.n}, từ đó không hỏi tới chuyện tu hành, sống nốt quãng đời còn lại trong yên lặng.`;
   else if(cause==='phithang')end=`Năm ${age} tuổi, ${r.ten} vượt Cửu Trùng Lôi Kiếp, phá không phi thăng.`;
   lines.push(end+(cause==='combat'||cause==='toahoa'?' '+pick(['Một đời tu tiên, như bao người khác.','Không ai kịp nhớ tên.','Người đời nhắc tới vài năm, rồi quên.','Tiên lộ dài, chân người ngắn.']):''));
   return lines;
@@ -2771,7 +2771,7 @@ ev({id:'bat_nat',n:'Ức hiếp tạp dịch',tg:['tong'],w:2,v:()=>({a:npc('tre
 ev({id:'duoc_vien',n:'Dược viên',tg:['tong','nui'],w:2,
  t:['Dược viên của {$sect} trải dài sườn núi, linh thảo trăm năm mọc như cỏ. Người canh vườn là một lão già đang ngủ gật.','Mùi thuốc thơm ngát. Ngươi đứng trước hàng rào trúc của dược viên {$sect}, bên trong có con hạc trắng đang mổ cỏ.'],
  c:[
-  {i:'🌿',l:'Lén hái',chk:['tp',11],ok:{t:'Ngươi vào ra như gió. Trong túi đã có mấy gốc linh thảo thượng hạng.',e:{pill:['tinhnguyen','taytuy'],karma:-4}},no:{t:'Lão già mở mắt. Hóa ra lão chỉ giả ngủ.',fight:{k:'votang',n:'Lão canh vườn',m:1.1},win:{t:'Ngươi chạy thoát, trên tay còn kịp nhổ một gốc.',e:{pill:1,karma:-4}}}},
+  {i:'🌿',l:'Lén hái',chk:['tp',11],ok:{t:'Ngươi vào ra như gió. Trong túi đã có mấy gốc linh thảo thượng hạng.',e:{thao:8,karma:-4}},no:{t:'Lão già mở mắt. Hóa ra lão chỉ giả ngủ.',fight:{k:'votang',n:'Lão canh vườn',m:1.1},win:{t:'Ngươi chạy thoát, trên tay còn kịp nhổ một gốc.',e:{thao:2,karma:-4}}}},
   {i:'🧑‍🌾',l:'Xin làm thuê',t:'Nửa năm nhổ cỏ tưới cây, ngươi học được cách phân biệt trăm loại linh thảo. Lão canh vườn trả công bằng thuốc.',e:{st:20,pill:'hoixuan',tv:5,h:288}},
   {i:'🚶',l:'Đi qua',t:'Con hạc ngẩng đầu nhìn ngươi, rồi lại cúi xuống mổ cỏ.'}
  ]});

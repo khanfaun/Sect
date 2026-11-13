@@ -417,7 +417,7 @@ ACT.bbLearn2=a=>{const [i,g]=String(a).split(',').map(Number);const e=bbForceLea
 function chevIc(n){return `<span class="chev c${n}">${'<svg viewBox="0 0 20 13"><path d="M1 7L10 1L19 7V12L10 6L1 12Z"/></svg>'.repeat(n)}</span>`;}
 function ascPlaceImg(a){const P=ASSET.place||{};return P[a.place]||P.dongphu||P.dong||P.nui||Object.values(P)[0]||'';}
 function ascStory(a){const r=G.run;const x=a.ht&&HTMAP[a.ht];const L=[];
-  L.push(a.k==='bt'?`Lôi vân tan dần. ${r.ten} mở mắt, thấy trời đất như vừa được gột rửa: núi xanh hơn, gió trong hơn, từng sợi linh khí hiện rõ như tơ.`:`Một tiếng “rắc” khẽ vang trong kinh mạch. Linh lực dồn nén bao lâu nay ào qua quan ải.`);
+  L.push(a.k==='bt'?`${a.kiep==='loi'?'Lôi vân tan dần.':a.kiep==='tamma'?'Bóng tâm ma tan vào hư không.':'Linh khí quanh thân lắng xuống.'} ${r.ten} mở mắt, thấy trời đất như vừa được gột rửa: núi xanh hơn, gió trong hơn, từng sợi linh khí hiện rõ như tơ.`:`Một tiếng “rắc” khẽ vang trong kinh mạch. Linh lực dồn nén bao lâu nay ào qua quan ải.`);
   if(x)L.push(x.st.replace(/\{ten\}/g,r.ten));return L;}
 function ascDiffHTML(a){return `<div class="asc-diff">${a.diff.length?a.diff.map(d=>`<div class="ad"><span>${esc(d.n)}</span>${chevIc(d.lv)}</div>`).join(''):'<p class="hint">Căn cơ vững lại, chưa thấy đổi khác rõ rệt.</p>'}</div>`;}
 function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
@@ -426,7 +426,7 @@ function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
     UI.ascT=setTimeout(()=>{UI.ascPh=a.k==='bt'&&r.htPick?'pick':'res';render();},ms);}
   const ph=UI.ascPh;let h=`<div class="asc asc-${a.k} ph-${ph}"><div class="asc-bg"></div>`;
   if(ph==='flash')return h+`<div class="asc-glow"></div>${a.k==='bt'?'<div class="asc-rays"></div>':''}</div>`;
-  if(ph==='pick'){const sel=UI.ascSel;h+=`<div class="asc-in"><small>Thiên địa cảm ứng</small><h2>Hậu thiên khí vận</h2><p>Kiếp nạn đã qua, cơ duyên hiện trước mắt. Ba luồng khí vận lơ lửng giữa không trung, chỉ có thể nắm lấy một.</p>
+  if(ph==='pick'){const sel=UI.ascSel;h+=`<div class="asc-in"><small>Thiên địa cảm ứng</small><h2>Hậu thiên khí vận</h2><p>${(G.run.asc&&G.run.asc.kiep)?'Kiếp nạn đã qua, cơ':'Quan ải đã phá, cơ'} duyên hiện trước mắt. Ba luồng khí vận lơ lửng giữa không trung, chỉ có thể nắm lấy một.</p>
     <div class="htp">${r.htPick.map((id,i)=>{const x=HTMAP[id];return `<button class="hto r${x.r}${sel===i?' sel':''}" data-act="ascSel" data-arg="${i}"><small>${HT_RANK[x.r]}</small><b>${esc(x.n)}</b><p>${htFxText(x).map(esc).join('<br>')}</p></button>`;}).join('')}</div></div>`;
     if(sel!=null){const x=HTMAP[r.htPick[sel]];h+=`<div class="asc-cf"><div class="mbox"><h3>Nắm lấy ${esc(x.n)}?</h3><p>${htFxText(x).map(esc).join('<br>')}</p><p class="hint">Chọn rồi không đổi được.</p><div class="mb-f"><button class="btn" data-act="ascSel" data-arg="-1">Nghĩ lại</button><span class="grow"></span><button class="btn pri" data-act="ascPick">Xác nhận</button></div></div></div>`;}
     return h+'</div>';}
