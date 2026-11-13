@@ -5,9 +5,9 @@
 ## 1. Tóm tắt
 
 - **Sổ gốc** của mọi nội dung là `docs/vat-pham.xlsx`. Muốn thêm hay sửa đồ thì sửa Excel, không sửa tay trong code.
-- Công cụ đọc Excel, kiểm luật, rồi ghi dữ liệu cho game vào `src/data/catalog.js`.
-- `src/catalog.js` nối dữ liệu đó vào luật game bằng các **lớp bọc** quanh hàm sẵn có. Bỏ tệp này ra thì game trở lại như cũ.
-- **Đã vào bản chính** (theo yêu cầu của chủ dự án): `tools/build.js` ráp cả danh mục (`src/data/catalog.js`, `src/catalog.js`) và sự kiện cốt truyện (`src/data/su_kien.js`, `src/su_kien.js`) vào `phu-sinh.html`. `tools/build-thu.js` ráp cùng nội dung ra `phu-sinh-thu.html`.
+- Công cụ đọc Excel, kiểm luật, rồi ghi dữ liệu cho game vào `src/game/data/01-catalog-du-lieu.js`.
+- `src/game/data/02-catalog.js` nối dữ liệu đó vào luật game bằng các **lớp bọc** quanh hàm sẵn có. Bỏ tệp này ra thì game trở lại như cũ.
+- **Đã vào bản chính** (theo yêu cầu của chủ dự án): `tools/build.js` ráp cả danh mục (`src/game/data/01-catalog-du-lieu.js`, `src/game/data/02-catalog.js`) và sự kiện cốt truyện (`src/game/data/03-su_kien-du-lieu.js`, `src/game/data/04-su-kien.js`) vào `phu-sinh.html`. `tools/build-thu.js` ráp cùng nội dung ra `phu-sinh-thu.html`.
 - Thay đổi lớn về sau: làm trên nhánh riêng, chỉ đưa vào `main` khi chủ dự án cho phép.
 - Chủ dự án không phải lập trình viên: trao đổi bằng tiếng Việt dễ hiểu, ít thuật ngữ.
 
@@ -21,13 +21,13 @@
 | `docs/mau-vat-pham.md`, `docs/mau-viet-su-kien.md` | Prompt cũ cho GPT (vật phẩm, sự kiện). Phần vật phẩm đã lỗi thời, xem luật mới ở mục 4. |
 | `docs/nhap/` | Bản gốc GPT gửi (không sửa): `mau-vat-pham_1.xlsx` (lần 1, luật cũ), `vat-pham-fix.xlsx` (lần 2, luật mới), `phu-sinh-su-kien.md` (sự kiện, **chưa xử lý**). |
 | `tools/excel_chung.py` | Bảng tra dùng chung: Dạng → loại món trong game, trang Excel của từng loại, phẩm, vùng, cảnh giới, hệ, đọc dòng Excel. |
-| `tools/excel2game.py` | **Chuyển Excel → game.** Kiểm luật, ghi `src/data/catalog.js` và báo cáo. |
+| `tools/excel2game.py` | **Chuyển Excel → game.** Kiểm luật, ghi `src/game/data/01-catalog-du-lieu.js` và báo cáo. |
 | `tools/build-thu.js` | Ráp bản thử `phu-sinh-thu.html` (có danh mục). |
 | `tools/ha_chi_so.py` | Nhân đều chỉ số trang bị viết sẵn với một hệ số (mặc định 0.9). Sửa thẳng Excel. |
 | `tools/nhap_do_cu.py` | Chép đồ đang có trong code game vào Excel (tô xanh). Chạy lại không sinh dòng trùng, chỉ điền ô trống. |
 | `tools/excel_v2.py` | Công cụ chạy **một lần** đã dùng để đổi Excel sang luật vật phẩm mới. Không cần chạy lại. |
-| `src/data/catalog.js` | Tệp sinh tự động. **Đừng sửa tay.** |
-| `src/catalog.js` | Lớp bọc nối danh mục vào game. |
+| `src/game/data/01-catalog-du-lieu.js` | Tệp sinh tự động. **Đừng sửa tay.** |
+| `src/game/data/02-catalog.js` | Lớp bọc nối danh mục vào game. |
 
 ## 3. Quy trình thường dùng
 
@@ -49,9 +49,9 @@ python3 tools/ha_chi_so.py 0.9
 
 Thử một file Excel khác mà không đè dữ liệu thật: `python3 tools/excel2game.py <file.xlsx> <ra.js> <bao-cao.md>`. Nhớ chạy lại lệnh không tham số sau đó để trả dữ liệu thật về.
 
-Khi `main` có thay đổi: gộp `origin/main` vào nhánh đang làm, rồi so các bảng dữ liệu của game (RELIC_K, REL_POOL, NT_KEYS, REL_M, REL_X, PILL, SK_RAW, ORIGIN, TT_DEST, TT_PHYS, LS_OG…) giữa hai bản để biết Excel có phải sửa không. Cách so: chạy phần lõi `src/core.js` + `src/core2.js` của hai bản trong `vm` của node rồi so JSON.
+Khi `main` có thay đổi: gộp `origin/main` vào nhánh đang làm, rồi so các bảng dữ liệu của game (RELIC_K, REL_POOL, NT_KEYS, REL_M, REL_X, PILL, SK_RAW, ORIGIN, TT_DEST, TT_PHYS, LS_OG…) giữa hai bản để biết Excel có phải sửa không. Cách so: chạy phần lõi `src/game/core/` + `src/game/core2/` (hoặc `node tools/run.js`) của hai bản trong `vm` của node rồi so JSON.
 
-## 4. Luật vật phẩm hiện tại (theo main, đợt 30–37 trong `src/core2.js`)
+## 4. Luật vật phẩm hiện tại (theo main, đợt 30–37 trong `src/game/core2/`)
 
 **Trang bị và vật tùy thân**
 - **Phẩm quyết định số dòng**, **Cảnh giới cần quyết định độ lớn**. Phẩm nào cũng gặp được ở mọi cảnh giới.
@@ -80,9 +80,9 @@ Khi `main` có thay đổi: gộp `origin/main` vào nhánh đang làm, rồi so
 |---|---|
 | `docs/nhap/phu-sinh-su-kien.md` | Cốt truyện gốc GPT viết: 5 vùng × (20 sự kiện lẻ + 4 chuỗi × 5 phần) = 200 cảnh, 604 lựa chọn. |
 | `tools/su_kien_tach.py` | Tách markdown thành dữ liệu. `python3 tools/su_kien_tach.py docs/nhap/phu-sinh-su-kien.md <vùng>` in gọn một vùng để đọc. |
-| `tools/su_kien_chuyen.py` | Chuyển thành `src/data/su_kien.js`: đổi `[Vai A]` thành tên do game sinh, `[thị trấn này]` → `{$pl}`, `[tông môn]` → `{$sect}`, `[quê nhà ngươi]` → `{$que}`; đoán loại nơi; tự suy thưởng phạt (giúp người / làm lợi / bỏ đi); thời gian chờ giữa các phần chuỗi. `--xem <vùng>` in thưởng phạt từng lựa chọn để soát. |
+| `tools/su_kien_chuyen.py` | Chuyển thành `src/game/data/03-su_kien-du-lieu.js`: đổi `[Vai A]` thành tên do game sinh, `[thị trấn này]` → `{$pl}`, `[tông môn]` → `{$sect}`, `[quê nhà ngươi]` → `{$que}`; đoán loại nơi; tự suy thưởng phạt (giúp người / làm lợi / bỏ đi); thời gian chờ giữa các phần chuỗi. `--xem <vùng>` in thưởng phạt từng lựa chọn để soát. |
 | `tools/su_kien_sua.txt` | **Chỉnh tay** thưởng phạt từng lựa chọn (đã soát cả 604). Cú pháp ở đầu bảng SUA trong `su_kien_chuyen.py`: `loi`, `loi0`, `mua`, `tra`, `giup`, `xoa`, `k=`, `tm=`, `hp=`, `tv=`, `h=`, `mp`, `tho=`, `st=`, `gia=`, `an`, `oan`, `dan`, `do`, `bitich`, `van= tam= ngo= tp=`, `-<mã>`. |
-| `src/su_kien.js` | Đăng ký sự kiện vào game. Sự kiện lẻ: mỗi kiếp 1 lần, đúng vùng. Chuỗi: phần 1 như sự kiện thường; phần 2/2b/3/4 là `spec` (ưu tiên khi thăm dò), chỉ hiện khi lần trước chọn đúng hướng và đủ thời gian chờ; "Bỏ đi" khép chuỗi; tên nhân vật giữ trong `G.run.chainSt`. |
+| `src/game/data/04-su-kien.js` | Đăng ký sự kiện vào game. Sự kiện lẻ: mỗi kiếp 1 lần, đúng vùng. Chuỗi: phần 1 như sự kiện thường; phần 2/2b/3/4 là `spec` (ưu tiên khi thăm dò), chỉ hiện khi lần trước chọn đúng hướng và đủ thời gian chờ; "Bỏ đi" khép chuỗi; tên nhân vật giữ trong `G.run.chainSt`. |
 
 Sau khi sửa cốt truyện hoặc bảng chỉnh tay: `python3 tools/su_kien_chuyen.py` rồi `node tools/build.js`.
 

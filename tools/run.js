@@ -3,10 +3,7 @@
 const fs = require('fs'), vm = require('vm'), path = require('path');
 const root = path.join(__dirname, '..');
 const ctx = vm.createContext({ console, Math, JSON, Date, performance: { now: () => Date.now() } });
-for (const f of ['src/core.js', 'src/core2.js']) {
-  const p = path.join(root, f);
-  if (fs.existsSync(p)) vm.runInContext(fs.readFileSync(p, 'utf8'), ctx, { filename: f });
-}
+vm.runInContext(require('./ghep').script(['core', 'core2']), ctx, { filename: 'luat-choi.js' });
 const arg = process.argv[2] || '';
 const code = fs.existsSync(arg) ? fs.readFileSync(arg, 'utf8') : arg;
 const out = vm.runInContext(code, ctx);

@@ -1,4 +1,4 @@
-# Chuyển file cốt truyện sự kiện (markdown) thành dữ liệu game: src/data/su_kien.js
+# Chuyển file cốt truyện sự kiện (markdown) thành dữ liệu game: src/game/data/03-su_kien-du-lieu.js
 # - Nhân vật [Vai A] → tên do game sinh, giữ nguyên qua các phần của một chuỗi.
 # - [thị trấn này]/[thôn này] → tên nơi đang đứng, [tông môn] → tên tông môn, [quê nhà ngươi] → quê.
 # - Thưởng phạt: suy từ nhãn lựa chọn và câu kết quả (giúp người / làm lợi cho mình / bỏ đi),
@@ -10,7 +10,7 @@ from su_kien_tach import tach
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = next((a for a in sys.argv[1:] if a.endswith('.md')), os.path.join(ROOT, 'docs/nhap/phu-sinh-su-kien.md'))
-OUT = os.path.join(ROOT, 'src/data/su_kien.js')
+OUT = os.path.join(ROOT, 'src/game/data/03-su_kien-du-lieu.js')
 HD, HM, HY = 24, 720, 8640
 
 def slug(s):

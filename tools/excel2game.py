@@ -1,4 +1,4 @@
-# Chuyển Excel danh mục (docs/vat-pham.xlsx) thành dữ liệu game (src/data/catalog.js).
+# Chuyển Excel danh mục (docs/vat-pham.xlsx) thành dữ liệu game (src/game/data/01-catalog-du-lieu.js).
 # Kiểm tra lỗi từng dòng; dòng lỗi nặng bị bỏ qua, lỗi nhẹ được sửa và ghi vào báo cáo
 # docs/bao-cao-vat-pham.md.
 # Dùng: python3 tools/excel2game.py   (rồi node tools/build.js)
@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from excel_chung import DANG_K, K_SHEET, EQ_SHEETS, PHAM, VUNG, CG, HE, N_TYPE, sheet_rows
 
 XLSX = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'docs/vat-pham.xlsx')
-OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'src/data/catalog.js')
+OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'src/game/data/01-catalog-du-lieu.js')
 REPORT = sys.argv[3] if len(sys.argv) > 3 else os.path.join(ROOT, 'docs/bao-cao-vat-pham.md')
 
 EQ_FX = set('lifeP atkP matkP defP hpP mpP crit critDmg dodge tp ngo tam van tvP regenHp regenMp startBlock blockTurn reflect poisonHit stunP elX pillP mpCost shopP stonesP lifeP drain execute healAfter firstEvade weakStart vulnStart pillSlot tammaRes hoTam craftP bqSafe bqP'.split())

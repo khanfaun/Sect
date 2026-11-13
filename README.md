@@ -3,21 +3,27 @@
 Game tu tiên luân hồi chạy trong một tệp duy nhất: mở `phu-sinh.html` bằng trình duyệt là chơi.
 
 - `phu-sinh.html` — bản chơi (được ráp tự động, đừng sửa tay).
-- `src/core.js` — luật chơi và kho truyện gốc. `src/core2.js` — luật bổ sung: vòng chu thiên, linh thú, luyện chế, bế quan tùy chọn, thế cục, nhân mạch, ghi chú.
-- `src/ui/` và `src/style.css` — giao diện: bản đồ canvas, các màn, các bảng, cấu hình.
+- `src/game/` — mã game, chia thành nhiều tệp nhỏ theo nhóm (tên tệp nói nội dung):
+  - `core/` — luật chơi và kho truyện gốc (thế giới, chiến đấu, đột phá, bản đồ, sự kiện…).
+  - `core2/` — luật bổ sung theo từng đợt: vòng chu thiên, linh thú, luyện chế, bế quan, thế cục…
+  - `data/` — danh mục vật phẩm và sự kiện cốt truyện (sinh tự động từ Excel/markdown).
+  - `ui/` — giao diện: bản đồ canvas, các màn, các bảng, cấu hình. `style.css` — trang trí.
+  - `thu-tu.json` — **thứ tự ghép các tệp**. Thêm tệp mới thì ghi tên vào đây, đúng chỗ.
 - `old-phu-sinh-2.html`, `phu-sinh-v1.html` — các bản cũ, giữ để đối chiếu.
 
 Sau khi sửa trong `src/`:
 
 ```bash
-node tools/build.js
+npm install        # lần đầu
+npm run dev        # mở game trên máy để sửa, lưu tệp là tự tải lại
+npm run build      # ra phu-sinh.html (hoặc: node tools/build.js, không cần cài gì)
 ```
 
 Kiểm tra: `node bot.js 80 --quiet` (máy tự chơi 80 kiếp), `node tools/play.js <thư mục ảnh> full` (bấm thử giao diện, chụp ảnh từng màn).
 
 ## Gắn ảnh (asset)
 
-Game đã chừa sẵn chỗ cho ảnh. Mở `src/ui/base.js`, tìm `const ASSET=` và điền đường dẫn ảnh:
+Game đã chừa sẵn chỗ cho ảnh. Mở `src/game/ui/01-base.js`, tìm `const ASSET=` và điền đường dẫn ảnh:
 
 - `item`: ảnh vuông PNG không nền cho vật phẩm. Khóa là loại món (`kiem`, `giap`, `nhan`...), đan dược `pill:<mã>`, nguyên liệu `mat:<mã>`.
 - `art`: ảnh vuông cho công pháp, tâm pháp, chiêu thức, theo tên.

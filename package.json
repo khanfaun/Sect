@@ -1,0 +1,14 @@
+{
+  "name": "phu-sinh",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node tools/sau-build.js",
+    "build:thu": "node tools/build-thu.js",
+    "bot": "node bot.js"
+  },
+  "devDependencies": {
+    "vite": "^6.4.6"
+  }
+}
