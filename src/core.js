@@ -669,7 +669,7 @@ function baseV(type){
   const sC=ss.filter(s=>s.al==='chinh'), sM=ss.filter(s=>s.al==='ma');
   const alive=r.rivals.filter(x=>x.alive);
   const t=type||r.place.t||'tran';
-  const s1=pick(ss);let s2=pick(ss);if(s2===s1)s2=ss[(ss.indexOf(s1)+1)%ss.length];
+  const own=r.place&&r.place.t==='tong'&&ss.find(x=>x.n===(r.place.owner||r.place.n));const s1=own||pick(ss);let s2=pick(ss);if(s2===s1)s2=ss[(ss.indexOf(s1)+1)%ss.length];
   return {p:pView(),pl:r.place.n,plt:TYPE_NAME[t]||'',quoc:w.quoc,que:r.que,sect:s1.n,sect2:s2.n,sectC:pick(sC).n,sectM:pick(sM).n,
     sectP:(ss.find(s=>s.al==='phat')||s1).n,rv:alive.length?rivalView(pick(alive)).ten:genName('nam',true),
     canh:T('{canh_'+t+'}'),who:genName(chance(.5)?'nam':'nu'),nick:pick(NAME.ma1),dan:PILL[btPill()].n,
