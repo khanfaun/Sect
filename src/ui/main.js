@@ -101,7 +101,7 @@ const ACT={
   leave:()=>leavePlace(),
   pass:a=>passAct(a),
   hud:()=>{if(G.run&&G.run.scene)UI.hudScene=!UI.hudScene;else UI.hudOpen=!UI.hudOpen;},
-  cbGo:()=>prepGo(),ppKn:()=>{const sc=G.run&&G.run.scene;const cmp=sc&&sc.units&&sc.units.length>2;UI.ppKn=!(UI.ppKn!=null?UI.ppKn:!cmp);},cbQuick:()=>quickFight(),cbOpen:()=>{UI.cbOpen=!UI.cbOpen;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
+  cbGo:()=>prepGo(),ppKn:()=>{const sc=G.run&&G.run.scene;const cmp=sc&&sc.units&&sc.units.length>2;UI.ppKn=!(UI.ppKn!=null?UI.ppKn:!cmp);},cbQuick:()=>quickFight(),ccOpen:k=>{const o=UI.ccOpen=UI.ccOpen||{};o[k]=o[k]===false;},cbOpen:()=>{UI.cbOpen=!UI.cbOpen;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
   hudBq:()=>{G.bqRoom=false;openBq();},
   evMin:()=>{UI.evMin=true;},
   evBack:()=>{UI.evMin=false;},
