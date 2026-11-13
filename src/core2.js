@@ -1953,7 +1953,7 @@ function ttShape(root,ids){const els=root.els.slice();let id=root.id;
     for(const [e,v] of Object.entries(nb)){if(e==='all'||v<=0||els.includes(e))continue;if(v>=2||chance(.5)){const out=els.filter(x=>!ids.some(q=>((TT_DEST[q].effects||{}).nguHanhBonus||{})[x]>0));if(out.length)els[els.indexOf(pick(out))]=e;}}}
   if(ids.includes('ngu_hanh_khuyet_moc')&&els.includes('moc')){if(els.length>=5){els.splice(els.indexOf('moc'),1);id='tu';}else{const o=NGUHANH.filter(x=>!els.includes(x));els[els.indexOf('moc')]=pick(o);}}
   return {id,els};}
-{const _gb25=genBirth;genBirth=function(){_gb25();for(const c of G.birth.cards){c.kv=ttRoll();c.root=ttShape(c.root,c.kv);
+{const _gb25=genBirth;genBirth=function(){_gb25();for(const c of G.birth.cards){c.kv=ttRoll(c.root&&c.root.els);c.root=ttShape(c.root,c.kv);
   for(const k of c.kv){const a=(TT_DEST[k].effects||{}).amDuongBonus;if(a)c.karmaAdj=(c.karmaAdj||0)+Math.round(((a.chinh||0)-(a.ta||0))/2);}}};}
 // tính tình theo xuất thân và mệnh cách (Thienmenh xét thể chất theo tính tình)
 const TT_TRAITS={dote:['Tàn nhẫn'],mahuyet:['Cuồng tà','Căm thù'],khat:['Tự do'],linh:['Hiếu chiến'],mieu:['Nhân hậu'],thusinh:['Thận trọng'],buon:['Thực dụng'],hat:['Quái gở'],thegia:['Bảo thủ'],tran:['Thông tuệ'],daodong:['Thận trọng'],nong:['Chính trực'],ren:['Chính trực'],chai:['Tự do'],duoc:['Nhân hậu'],
@@ -2261,7 +2261,7 @@ const LK_BON={10:{p:5,n:1,tp:0},11:{p:10,n:2,tp:0},12:{p:15,n:3,tp:1},13:{p:20,n
 // khí vận có thể nhận sau khi sinh: bỏ những cái chỉ có nghĩa lúc đầu thai (đổi linh căn, gia cảnh, tính tình)
 function kvPool(){const r=G.run;const own=r.kv||[];return Object.values(TT_DEST).filter(d=>!own.includes(d.id)&&!d.mc&&!d.tr&&!TT_FORCE[d.id]&&!['hon_nguyen_dao','ngu_hanh_hop_nhat','ngu_hanh_khuyet_moc','gia_canh_kha_gia'].includes(d.id)&&!/linh căn/i.test(d.description||'')&&!(d.effects||{}).nguHanhBonus);}
 function kvOffer(n,to){const L=[];const pool=kvPool();for(let i=0;i<n;i++){const left=pool.filter(d=>!L.includes(d.id));if(!left.length)break;
-  const rk=wpick([1,2,3,4,5,6].filter(x=>left.some(d=>d.rank===x)),x=>TT_RW[x]*Math.pow(1.6,((to||1)-1)*(x-1)/2));L.push(pick(left.filter(d=>d.rank===rk)).id);}return L;}
+  const rk=wpick([1,2,3,4,5,6].filter(x=>left.some(d=>d.rank===x)),x=>TT_RW[x]*Math.pow(1.6,((to||1)-1)*(x-1)/2));L.push(wpick(left.filter(d=>d.rank===rk),d=>kvAff(d,G.run&&G.run.root&&G.run.root.els)).id);}return L;}
 function kvGain(id,why){const r=G.run;if(!r||!id||!TT_DEST[id])return;r.kv=(r.kv||[]).concat(id);const d=TT_DEST[id];{const a=(d.effects||{}).amDuongBonus;if(a)r.karma=clamp((r.karma||0)+Math.round(((a.chinh||0)-(a.ta||0))/2),-100,100);}log(`Nhận tiên thiên khí vận: ${d.name}${why?' ('+why+')':''}.`);if(typeof bio==='function')bio(`Năm ${Math.floor(r.age)} tuổi, ${r.ten} được khí vận ${d.name}.`);const s=S();r.hp=Math.min(r.hp,s.maxHp);r.mp=Math.min(r.mp,s.maxMp);}
 function kvChoose(i){const r=G.run;if(!r||!r.kvPick)return;const id=r.kvPick[+i];r.kvPick=null;kvGain(id,'đột phá');}
 {const _bf33=btFinish;btFinish=function(){const r=G.run;const rl=r&&r.realm;const g=r&&rl===0&&!r.pham?lkDone():0;const res=_bf33.apply(this,arguments);const r2=G.run;
@@ -2440,3 +2440,17 @@ function rivalTal(i){const w=W();const rv=w.rivals[i];if(!rv)return null;return 
 // đơn vị trong trận và thực thể trên bản đồ: chỉ người mới có thiên phú
 function unitTal(u){if(!u)return null;if(u.isMain)return playerTal();if(u.kind==='kiep'||u.immune)return null;if(u.side==='A')return u.ally===-7?null:npcTal('ally:'+u.name);if(u.f&&u.f!=='nhan')return null;return npcTal('foe:'+u.name);}
 function entTal(e){if(!e)return null;if(e.type==='thienkieu')return e.data&&e.data.rv!=null?rivalTal(e.data.rv):null;if(['khach','tuantra','truysat','thuong'].includes(e.type))return npcTal('ent:'+e.id+':'+e.name);return null;}
+
+// ----- khí vận hợp linh căn: mỗi khí vận có một "tính" (cương, linh, tốc, liệt) gắn với hai hành, hoặc trung tính.
+// Lúc đầu thai và lúc chọn khí vận sau đột phá: khí vận hợp linh căn dễ ra gấp đôi, khí vận tương khắc chỉ còn một nửa.
+const KV_GRP={cuong:{k:['physicalStrength','physicalBody','maxHp','maxStamina','hpRegen','critResist','damageReduction','counterDamage'],els:['kim','tho'],n:'Cương'},
+  linh:{k:['spiritualSense','aptitude','maxMentalState','maxSpiritPower','spRegen','resIce','dmgIce'],els:['thuy','bang'],n:'Linh'},
+  toc:{k:['agility','attackSpeed','evasion','accuracy','dmgWind'],els:['phong','moc'],n:'Tốc'},
+  liet:{k:['magicPower','critChance','critDamage','armorPen','dmgLightning','dmgFire','lifeSteal'],els:['hoa','loi'],n:'Liệt'}};
+function kvGroup(d){const E=(d&&d.effects)||{};const nb=E.nguHanhBonus;if(nb){const L=Object.entries(nb).filter(([e,v])=>v>0).map(([e])=>e);if(L.length)return {g:'hanh',els:L.includes('all')?NGUHANH.slice():L};}
+  const sc={};for(const o of [E.attributeChangePercent,E.primaryStatChangePercent])if(o)for(const [k,v] of Object.entries(o))if(v>0)for(const [g,G0] of Object.entries(KV_GRP))if(G0.k.includes(k))sc[g]=(sc[g]||0)+v;
+  const best=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0];return best?{g:best[0],els:KV_GRP[best[0]].els}:null;}
+function kvAff(d,rootEls){const G0=kvGroup(d);if(!G0||!rootEls||!rootEls.length)return 1;const R=rootEls;if(G0.els.some(e=>R.includes(e)))return 2;
+  const kh=(a,b)=>typeof KHAC!=='undefined'&&KHAC[a]===b;if(G0.els.some(e=>R.some(r=>kh(r,e)||kh(e,r))))return 0.5;return 1;}
+ttRoll=function(els){const n=wpick([1,2,3],x=>[40,45,15][x-1]);const L=[];const all=Object.values(TT_DEST);
+  for(let i=0;i<n;i++){const rk=wpick([1,2,3,4,5,6],x=>TT_RW[x]);const pool=all.filter(d=>d.rank===rk&&!L.includes(d.id));if(pool.length)L.push(wpick(pool,d=>kvAff(d,els)).id);}return L;}
