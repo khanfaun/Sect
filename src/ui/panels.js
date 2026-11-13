@@ -139,7 +139,7 @@ function cfgHTML(){
     +setRow('Độ nét',seg('dpr',[[0,'Tự động'],[1,'Thường'],[1.5,'Nét'],[2,'Rất nét']]),'Độ nét của bản đồ. Càng nét càng nặng trên màn hình độ phân giải cao.')
     +setRow('Mây trôi',onoff('clouds'),'Bóng mây lướt trên bản đồ')+setRow('Hạt theo mùa',onoff('fx'),'Hoa rơi mùa xuân, đom đóm đêm hè, lá thu, tuyết đông')
     +setRow('Sắc trời theo buổi',onoff('daynight'),'Bản đồ ngả màu theo sáng, chiều, tối, đêm')+setRow('Chuyển động giao diện',onoff('anim'),'Hiệu ứng trượt, mờ dần của các bảng')+setRow('Hiện số khung hình',onoff('showFps'));
-  if(st==='view')b+=setRow('Khung Tinh anh, Thiên kiêu',seg('tfStyle',[['hang','Khung hạng'],['ink','Thủy mặc']]))+setRow('Cỡ chữ',seg('font',[['m','Vừa'],['l','Lớn'],['xl','Rất lớn']]))
+  if(st==='view')b+=setRow('Khung Tinh anh, Thiên kiêu',seg('tfStyle',[['hang','Song dực'],['sen','Liên hoa'],['van','Tường vân']]))+setRow('Cỡ chữ',seg('font',[['m','Vừa'],['l','Lớn'],['xl','Rất lớn']]))
     +setRow('Tên địa danh',onoff('names'))+setRow('Thực thể qua lại',onoff('ents'),'Thương đội, thú triều, tuần tra, thiên kiêu, dị tượng trên bản đồ')+setRow('Dấu ghi chú',onoff('notes'))+setRow('Địa hình vẽ tay',onoff('terrain'));
   if(st==='play'){const ad=G.meta.opt&&G.meta.opt.userDodge;
     b+=setRow('Tự né',`<div class="seg"><button data-act="autoDodge" data-arg="0" class="${ad?'':'on'}">Tắt</button><button data-act="autoDodge" data-arg="1" class="${ad?'on':''}">Bật</button></div>`,'Bật thì không cần nhấn nút Né.\nLuôn tính như né ở mức khá, trừ đi 10%.')
@@ -425,7 +425,7 @@ const TF_PAL={3:{a:'#ffffff',b:'#c9d2db',c:'#7e8994',d:'#3d4650',gem:['#d8f0ff',
   4:{a:'#fff6c9',b:'#f1c232',c:'#a8720c',d:'#4a2c00',gem:['#ffd6d0','#e0302a','#5a0a08'],glow:'rgba(255,200,60,.6)'}};
 function tfWing(P,id,flip){return `<path transform="${flip?'translate(100 0) scale(-1 1)':''}" d="M42 12C34 4 22 2 12 6C19 7 24 9 27 12C20 11 14 12 9 15C16 15 22 16 26 19C21 19 17 20 14 23C22 23 30 21 36 17Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;}
 function talFrameHang(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tf'+t.tier;
-  return `<svg viewBox="0 0 100 100" aria-hidden="true"><defs>
+  return `<svg viewBox="0 0 100 100" aria-hidden="true" class="tf-rot"><defs>
    <linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".3" stop-color="${P.b}"/><stop offset=".55" stop-color="${P.c}"/><stop offset=".75" stop-color="${P.b}"/><stop offset="1" stop-color="${P.c}"/></linearGradient>
    <radialGradient id="${id}g" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="${P.gem[0]}"/><stop offset=".45" stop-color="${P.gem[1]}"/><stop offset="1" stop-color="${P.gem[2]}"/></radialGradient></defs>
    <circle cx="50" cy="50" r="40.6" fill="none" stroke="${P.d}" stroke-width="10.8"/>
@@ -455,5 +455,20 @@ function talFrameInk(t,id){const P=TF_INK[t.tier];if(!P)return '';id=id||'ti'+t.
    <g transform="translate(70 72) rotate(-8)"><rect x="0" y="0" width="22" height="22" rx="2" fill="${P.seal}"/><rect x="2" y="2" width="18" height="18" rx="1" fill="none" stroke="#f6eedd" stroke-width="1.2"/>
     <text x="11" y="16.5" text-anchor="middle" font-size="14" font-weight="700" fill="#f6eedd" font-family="serif">${P.ch}</text></g></svg>`;}
 function talWingsInk(t,flip){const P=TF_INK[t.tier];return `<svg class="tcw${flip?' r':''}" viewBox="0 0 48 26" aria-hidden="true"><path d="M46 14C34 9 20 10 4 15C16 12 30 12 46 16Z" fill="${P.ink}" fill-opacity=".8"/><path d="M40 19C30 17 20 18 10 21C20 19 30 19.5 40 21Z" fill="${P.ink}" fill-opacity=".45"/></svg>`;}
-function talFrameSVG(t,id){return (CFG.tfStyle==='ink'?talFrameInk:talFrameHang)(t,id);}
-function talWings(t,flip){return (CFG.tfStyle==='ink'?talWingsInk:talWingsHang)(t,flip);}
+function talFrameSVG(t,id){const st=CFG.tfStyle;return st==='sen'?talFrameSen(t,id):st==='van'?talFrameVan(t,id):talFrameHang(t,id);}
+function talWings(t,flip){return talWingsHang(t,flip);}
+
+// vòng kim loại dùng chung cho các kiểu khung
+function tfRing(P,id){return `<defs><linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".3" stop-color="${P.b}"/><stop offset=".55" stop-color="${P.c}"/><stop offset=".75" stop-color="${P.b}"/><stop offset="1" stop-color="${P.c}"/></linearGradient>
+  <radialGradient id="${id}g" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="${P.gem[0]}"/><stop offset=".45" stop-color="${P.gem[1]}"/><stop offset="1" stop-color="${P.gem[2]}"/></radialGradient></defs>
+  <circle cx="50" cy="50" r="40.6" fill="none" stroke="${P.d}" stroke-width="10.8"/><circle cx="50" cy="50" r="40.6" fill="none" stroke="url(#${id}m)" stroke-width="9"/>
+  <circle cx="50" cy="50" r="44.2" fill="none" stroke="${P.a}" stroke-opacity=".7" stroke-width=".7"/><circle cx="50" cy="50" r="36.9" fill="none" stroke="${P.d}" stroke-opacity=".8" stroke-width=".9"/>
+  <path d="M17 32A38 38 0 0 1 50 11" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="1.6" stroke-linecap="round"/>`;}
+const tfGem=(id,P,x,y,s)=>`<path d="M${x} ${y-s}L${x+s*.8} ${y}L${x} ${y+s}L${x-s*.8} ${y}Z" fill="url(#${id}g)" stroke="${P.d}" stroke-width=".9"/>`;
+// Liên hoa: đài sen năm cánh đỡ dưới đáy, ngọc nhỏ trên đỉnh
+function talFrameSen(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'ts'+t.tier;const pet=(a,l)=>`<path transform="rotate(${a} 50 92)" d="M50 92C44 84 44 ${92-l} 50 ${86-l}C56 ${92-l} 56 84 50 92Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">${tfRing(P,id)}${pet(-64,8)}${pet(64,8)}${pet(-32,12)}${pet(32,12)}${pet(0,14)}${tfGem(id,P,50,88,4.5)}${tfGem(id,P,50,9,5)}</svg>`;}
+// Tường vân: hai cụm mây cuộn ôm hai bên đáy, ngọc giữa đáy và đỉnh
+function talFrameVan(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tv'+t.tier;
+  const cl=f=>`<path transform="${f?'translate(100 0) scale(-1 1)':''}" d="M47 93C38 98 22 96 16 86C11 78 16 69 24 70C31 71 32 79 26 80C22 81 21 76 24 75C19 76 20 85 28 86C36 87 38 78 34 72C42 78 42 88 47 93Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">${tfRing(P,id)}${cl(0)}${cl(1)}${tfGem(id,P,50,92,6)}${tfGem(id,P,50,9,4.5)}</svg>`;}
