@@ -1,10 +1,20 @@
 # PROMPT CHO GPT: viết lại chỉ số trang bị theo luật mới, bổ sung xuất thân
 
-Gửi kèm file **`vat-pham.xlsx`** (bản mới), rồi dán nguyên khối dưới đây.
+Gửi kèm **2 file**: `mau-vat-pham_1.xlsx` (bài GPT đã viết lần trước) và `vat-pham.xlsx` (bản mới theo luật mới). Rồi dán nguyên khối dưới đây.
 
 ---
 
-Game tu tiên "Phù Sinh" vừa đổi luật trang bị. Tôi gửi kèm file Excel đã sắp xếp lại theo luật mới. Nhiệm vụ của bạn: **điền chỉ số mới cho các món trang bị**, và **viết thêm phần còn thiếu cho xuất thân**. Trả lại file .xlsx đã điền.
+Game tu tiên "Phù Sinh" vừa đổi luật trang bị. Tôi gửi kèm 2 file:
+- **`mau-vat-pham_1.xlsx`**: bài bạn đã viết lần trước (theo luật cũ). Đây là **bản gốc để dựa vào**.
+- **`vat-pham.xlsx`**: cùng các món đó (cùng ID, tên, lời tựa), đã sắp xếp lại theo luật mới, phần chỉ số đang để trống.
+
+Nhiệm vụ: với từng món, tìm dòng **cùng ID** trong file cũ, **chuyển chỉ số cũ sang luật mới** rồi điền vào file mới. Giữ "tính cách" của món: món cũ thiên về công thì vẫn thiên về công, món cũ có nội tại phản đòn thì vẫn ưu tiên phản đòn… nhưng số dòng, mã và độ lớn phải theo luật mới bên dưới. Ngoài ra **viết thêm phần còn thiếu cho xuất thân**. Trả lại file `vat-pham.xlsx` đã điền (không sửa file cũ).
+
+Cách chuyển:
+- Mã chỉ số cũ nào là **mã gốc của Dạng** thì đưa vào cột Gốc. Số lấy theo bảng A ở cột Cảnh giới cần.
+- Mã cũ thuộc **13 mã phụ** thì ưu tiên giữ làm dòng Phụ. Thiếu thì thêm mã phụ hợp với món, thừa thì bỏ bớt cái yếu nhất.
+- Mã cũ là **nội tại** mà Dạng không có: nếu món Độc nhất thì giữ 1 cái ở cột "Nội tại thêm", còn lại bỏ.
+- Bỏ hẳn con số cũ, tính số mới theo bảng. Số cũ được tính theo phẩm, luật mới tính theo cảnh giới.
 
 ## Đọc trước
 - Trang **02 Bảng chỉ số**: hệ số theo cảnh giới, mã gốc của từng Dạng (bảng A, đã nhân sẵn số cho từng cảnh giới), 13 mã dòng phụ (bảng B), danh sách nội tại (bảng C).
