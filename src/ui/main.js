@@ -455,7 +455,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e
 // xem thử hiệu ứng (không đổi gì ở nhân vật)
 ACT.fxDemo=k=>{const r=G.run;if(!r)return;UI.panel=null;UI.modal=null;
   if(k==='talup'||k==='taldn'){const t=playerTal();if(t){UI.talS=k==='talup'?t.tier-1:t.tier+1;UI.talA=null;}return;}
-  if(k==='rldn'){rlDrop(realmLabel()+' ',realmLabel());return;}
+  if(k==='rldn'){const r=G.run;const t=tieu();const hi=isPham()?'Luyện Khí tầng 1':lkOn()?'Luyện Khí tầng '+Math.min(13,lkTang()+1):t<3?REALM[r.realm]+' '+TIEU[t+1]:REALM[Math.min(5,r.realm+1)]+' sơ kỳ';rlDrop(hi,realmLabel());return;}
   const lb=realmLabel();const D=ASC_K.map(([kk,n],i)=>({k:kk,n,lv:1+(i*7)%3}));
   if(k==='bt'){r.asc={k:'bt',demo:1,from:lb,to:lb,diff:D,place:'dong'};r.htPick=htOffer(3,r.realm+1);r._htDemo=1;}else r.asc={k:'xk',demo:1,from:lb,to:lb,diff:D.map(d=>Object.assign({},d,{lv:1}))};};
 {const _ap=ACT.ascPick;ACT.ascPick=()=>{const r=G.run;if(r&&r._htDemo&&r.asc&&r.asc.demo){if(UI.ascSel==null||!r.htPick)return;r.asc.ht=r.htPick[UI.ascSel];r.htPick=null;r._htDemo=0;UI.ascSel=null;UI.ascPh='res';return;}_ap();};}
