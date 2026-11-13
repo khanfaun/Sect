@@ -7,6 +7,8 @@ import { Hud } from './ban-do/Hud';
 import { Nav } from './ban-do/Nav';
 import { NutBanDo } from './ban-do/NutBanDo';
 import { TheDiaDiem } from './ban-do/TheDiaDiem';
+import { CANH } from './canh';
+import { PS } from './html';
 
 const VIEWS = {
   Title: ManMoDau,
@@ -19,14 +21,17 @@ const VIEWS = {
   NutBanDo,
   TheDiaDiem,
 };
+// Các cảnh: 'Canh:<loại>' vẽ cảnh đang mở (G.run.scene)
+for (const [k, C] of Object.entries(CANH)) VIEWS['Canh:' + k] = () => <C sc={PS.G.run.scene} />;
 
 window.RX = {
   has: name => !!VIEWS[name],
   // vẽ ngay (đồng bộ) để phần vẽ tranh của game chạy sau đó thấy được khung mới
-  show(el, name) {
+  // key đổi (sang cảnh khác) thì dựng lại từ đầu, giống bản cũ thay hẳn nội dung
+  show(el, name, key) {
     if (!el._rx) { el.innerHTML = ''; el._rx = createRoot(el); }
     const View = VIEWS[name];
-    flushSync(() => el._rx.render(<View />));
+    flushSync(() => el._rx.render(<View key={name + '|' + key} />));
   },
   hide(el) {
     if (el._rx) { el._rx.unmount(); el._rx = null; }

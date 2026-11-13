@@ -1,10 +1,12 @@
 // ---------- vẽ màn hình ----------
 const HCACHE={};
-function setH(id,html){const el=document.getElementById(id);if(!el)return false;if(HCACHE[id]===html){return false;}
+// html: chuỗi HTML (bản cũ) hoặc {rx:'TênMàn',fb:hàmBảnCũ} (vẽ bằng React, xem ui/22-cau-noi-react.js)
+function setH(id,html){const el=document.getElementById(id);if(!el)return false;const isRx=html&&typeof html==='object';if(!isRx&&HCACHE[id]===html){return false;}
   const tk0=id==='sheet'&&document.getElementById('plTalk');const tkTop=tk0?tk0.scrollTop:0,tkN=tk0?tk0.dataset.n:null;
   const sc=el.querySelector('.win-b,.sc-b');const top=sc?sc.scrollTop:0;const key=el.dataset.k;
-  HCACHE[id]=html;el.innerHTML=html;el.hidden=!html;
-  const k2=viewKey(id);el.dataset.k=k2;if(id==='modal')el.classList.toggle('still',!!k2&&key===k2);
+  const k2=viewKey(id);
+  if(isRx){try{RX.show(el,html.rx,id+':'+k2);HCACHE[id]=undefined;el.hidden=!el.childNodes.length;}catch(e){console.error(e);RX.hide(el);html=html.fb();}}
+  if(typeof html==='string'){if(el._rx)RX.hide(el);HCACHE[id]=html;el.innerHTML=html;el.hidden=!html;}el.dataset.k=k2;if(id==='modal')el.classList.toggle('still',!!k2&&key===k2);
   if(id==='sheet'){el.classList.toggle('still',!!k2&&key===k2);const tk=document.getElementById('plTalk');if(tk){if(tkN!=null&&tkN===tk.dataset.n)tk.scrollTop=tkTop;else tk.scrollTop=tk.scrollHeight;}}if(top&&key===k2){const s2=el.querySelector('.win-b,.sc-b');if(s2)s2.scrollTop=top;}
   return true;}
 function viewKey(id){const sc=G.run&&G.run.scene;if(id==='sheet')return sc?sc.type+':'+(sc.id||'')+':'+(sc.story?sc.story.length:0)+':'+(sc.phase||''):'';if(id==='panel')return (UI.panel||'')+JSON.stringify(UI.tab);if(id==='full')return G.screen+(UI.tab.meta||'');if(id==='modal')return UI.modal?UI.modal.k:'';return '';}
@@ -23,8 +25,8 @@ function render(){
       else{hud=rxv('Hud',hudHTML);nav=rxv('Nav',navHTML);
         if(!sc){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
         else if(UI.evMin&&sc.type==='event'){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
-        else if(sc.type==='region')sheet=vRegionIntro(sc);
-        else sheet=(SCENE_V[sc.type]||(()=>''))(sc);}
+        else if(sc.type==='region')sheet=rxv('Canh:region',()=>vRegionIntro(sc));
+        else sheet=rxv('Canh:'+sc.type,()=>(SCENE_V[sc.type]||(()=>''))(sc));}
     }
     if(UI.panel)panel=(PANEL_V[UI.panel]||(()=>''))();
     modal=modalHTML();
