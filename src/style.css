@@ -1248,3 +1248,12 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .tcx-st{position:absolute;inset:-10px;width:calc(100% + 20px);height:calc(100% + 20px);pointer-events:none;z-index:3}
 .tfr svg{overflow:visible}
 .tcx-cl.tl{left:-3px;top:-4px}.tcx-cl.tr{right:-3px;top:-4px}.tcx-cl.bl{left:-3px;bottom:-4px}.tcx-cl.br{right:-3px;bottom:-4px}.tcx-sd.l{left:-5px}.tcx-sd.r{right:-5px}
+
+/* trang trí ô Thiên phú nhỏ lại; Thiên kiêu thêm lớp */
+.tcx-bot{width:150px;height:30px;margin-left:-75px;bottom:-15px}
+.tcx-top{width:64px;height:24px;margin-left:-32px;top:-17px}
+.tcx-cl{width:18px;height:18px}.tcx-cl.tl,.tcx-cl.tr{top:-3px}.tcx-cl.bl,.tcx-cl.br{bottom:-3px}.tcx-cl.tl,.tcx-cl.bl{left:-2px}.tcx-cl.tr,.tcx-cl.br{right:-2px}
+.tcx-sd{width:10px;height:10px;margin-top:-5px}
+.tcx-t4{position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);pointer-events:none;z-index:1}
+.tcx-fl{position:absolute;top:50%;width:40px;height:16px;margin-top:-8px;z-index:2}.tcx-fl.l{left:18%}.tcx-fl.r{right:18%;transform:scaleX(-1)}
+.tal-card{position:relative}

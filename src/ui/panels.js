@@ -412,7 +412,7 @@ function relCmpLines(ns,rel,cmp){const keys=Object.keys(ns);if(!cmp)return fxLin
 // ô Thiên phú ở đầu tab Căn cơ: nổi bật nhất bảng; Tinh anh khung bạc, Thiên kiêu khung vàng
 function talCardHTML(){const t=playerTal();if(!t)return '';const p=t.p;const RLN={tap:'Ngũ hành tạp linh căn',tu:'Tứ linh căn',tam:'Tam linh căn',song:'Song linh căn',thien:'Thiên linh căn',bien:'Biến dị linh căn',cuc:'Cực linh căn'};
   const w=v=>['rất kém','kém','bình thường','tốt','rất tốt'][clamp(Math.round(v),0,4)];
-  const tip='Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới.\n· Linh căn: '+(RLN[p.root]||'')+'\n· Tư chất: '+tcName(tuChat())+'\n· Tiên thiên khí vận: '+w(Math.min(4,p.kv*0.8))+'\n· Thể chất: '+w(Math.max(0,(p.th-1)*1.2))+'\n· Ngộ tính, đạo tâm, khí vận gốc: '+w(2+p.dev*0.5)+'\n\nNăm bậc: Phế vật, Phàm tài, Trung tài, Tinh anh, Thiên kiêu.';
+  const tip='Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới.\n· Linh căn: '+(RLN[p.root]||'')+'\n· Tư chất: '+tcName(tuChat())+'\n· Tiên thiên khí vận: '+w(Math.min(4,p.kv*0.8))+'\n· Thể chất: '+w(Math.max(0,(p.th-1)*1.2))+'\n· Ngộ tính, đạo tâm, khí vận gốc: '+w(2+p.dev*0.5)+'\n\nNăm bậc: Phế vật, Bình phàm, Bất phàm, Tinh anh, Thiên kiêu.';
   return `<div class="tal-wrap tw${t.tier}"><div class="tal-card tal${t.tier}"${ta(tip)}><b>${TAL_N[t.tier]}</b></div>${t.tier>=1?talCardOrn(t):''}</div>`;}
 function talCls(t){return t&&t.tier>=1?' tf'+t.tier:'';}
 
@@ -532,4 +532,17 @@ talCardOrn=function(t){const P=TFX[t.tier];const id='tcx'+t.tier;const d=tfxDefs
   const cl=(c)=>`<svg class="tcx-cl ${c}" viewBox="0 0 26 26">${d}<path d="M-1 22C-2 10 3 1 15 -2C11 3 10 7 11 11C14 6 19 3 26 -3C24 7 19 13 12 16C16 17 19 19 21 23C12 23 6 23 -1 22Z" fill="url(#${id}m)" stroke="${P.dk}" stroke-width=".8"/>${t.tier>=2?`<path d="M8 8L10.5 10.5L8 13L5.5 10.5Z" fill="url(#${id}g)" stroke="${P.dk}" stroke-width=".5"/>`:''}</svg>`;
   const side=t.tier>=3?`<svg class="tcx-sd l" viewBox="0 0 12 12">${d}${tfxGem(id,P,6,6,5)}</svg><svg class="tcx-sd r" viewBox="0 0 12 12">${d}${tfxGem(id,P,6,6,5)}</svg>`:'';
   const st=t.tier===4?`<svg class="tcx-st" viewBox="0 0 300 80">${tfxStar(30,12,2)}${tfxStar(270,20,1.6)}${tfxStar(250,70,1.8)}${tfxStar(48,66,1.4)}${tfxStar(200,6,1.3)}</svg>`:'';
-  return top+bot+cl('tl')+cl('tr')+cl('bl')+cl('br')+side+st;};
+  return top+bot+(t.tier>=2?cl('tl')+cl('tr')+cl('bl')+cl('br'):'')+side+st+(t.tier===4?talCardT4(id,P):'');};
+
+// Thiên kiêu: thêm lớp — vòng ngoài khía răng, vương miện sau, cánh phụ, hoa văn hai bên
+const _tfx0=talFrameX;
+talFrameX=function(t,id){const base=_tfx0(t,id);if(t.tier!==4)return base;const P=TFX[4];id=id||'tx4';
+  const back=`<circle cx="50" cy="50" r="47.6" fill="none" stroke="${P.dk}" stroke-width="2.6"/><circle cx="50" cy="50" r="47.6" fill="none" stroke="url(#${id}m)" stroke-width="1.6" stroke-dasharray="2.2 1.6"/>`
+   +[30,60,120,150,210,240,300,330].map(a=>`<g transform="rotate(${a} 50 50)"><path d="M50 0.5L52.2 4.5L50 6L47.8 4.5Z" fill="url(#${id}v)" stroke="${P.dk}" stroke-width=".5"/></g>`).join('')
+   +`<g transform="translate(50 9)"><path d="M-14 2L-17 -9L-9 -1L-5 -12L0 -3L5 -12L9 -1L17 -9L14 2Z" fill="url(#${id}m)" fill-opacity=".75" stroke="${P.dk}" stroke-width=".6"/></g>`
+   +[[-1],[1]].map(([f])=>`<g transform="translate(50 93) scale(${f} 1)"><path d="M6 -2C14 -10 24 -12 34 -10C27 -8 22 -6 19 -3C24 -4 29 -3 33 -1C25 0 16 0 6 -2Z" fill="url(#${id}v)" stroke="${P.dk}" stroke-width=".5"/></g>`).join('');
+  return base.replace('<svg viewBox="0 0 100 100" aria-hidden="true">','<svg viewBox="0 0 100 100" aria-hidden="true">'+tfxDefs(P,id)+back);};
+// ô Thiên phú Thiên kiêu: viền đôi ngoài khía răng, hoa văn mây hai bên chữ
+function talCardT4(id,P){return `<svg class="tcx-t4" viewBox="0 0 300 80" preserveAspectRatio="none">${tfxDefs(P,id+'b')}<rect x="3" y="3" width="294" height="74" rx="7" fill="none" stroke="url(#${id}bm)" stroke-width="1.6" stroke-dasharray="3 2"/></svg>
+  <svg class="tcx-fl l" viewBox="0 0 40 16">${tfxDefs(P,id+'f')}<path d="M40 8C30 2 18 2 8 6C14 6 18 7 20 8C14 9 10 11 6 14C18 14 30 13 40 8Z" fill="url(#${id}fm)" stroke="${P.dk}" stroke-width=".6"/><circle cx="4" cy="8" r="2" fill="url(#${id}fg)"/></svg>
+  <svg class="tcx-fl r" viewBox="0 0 40 16">${tfxDefs(P,id+'r')}<path d="M40 8C30 2 18 2 8 6C14 6 18 7 20 8C14 9 10 11 6 14C18 14 30 13 40 8Z" fill="url(#${id}rm)" stroke="${P.dk}" stroke-width=".6"/><circle cx="4" cy="8" r="2" fill="url(#${id}rg)"/></svg>`;}

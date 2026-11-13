@@ -2418,7 +2418,7 @@ function llShowGain(x){return sgOn()?Math.max(1,Math.round(x/sgW()*100)):Math.ma
 const TT_AVG={matkP:2.64,mpP:0.63,than:1.58,atkP:2.86,defP:2.67,tp:0.69,ngo:1.53,lifeP:0.25,hpP:1,crit:0.48,tvP:2.42,tam:0.43,bqP:0.31,dodge:0.21,critDmg:0.62};
 {const _ag41=aggFx;aggFx=function(){const fx=_ag41();const r=G.run;if(r&&r._avgTT)for(const [k,v] of Object.entries(TT_AVG))fx[k]=(fx[k]||0)+v;return fx;};}
 // Thiên phú: tố chất bẩm sinh, không tính đồ đạc hay cảnh giới. Gộp linh căn, tư chất, tiên thiên khí vận, thể chất, ngộ tính/đạo tâm/khí vận gốc.
-const TAL_N=['Phế vật','Phàm tài','Trung tài','Tinh anh','Thiên kiêu'];
+const TAL_N=['Phế vật','Bình phàm','Bất phàm','Tinh anh','Thiên kiêu'];
 const TAL_T=[0.94,1.37,1.88,2.52]; // mốc chia 5 bậc (cân theo lấy mẫu: ~10% · 25% · 35% · 22% · 8%)
 const TAL_RL={tap:0,tu:1,tam:2,song:3,thien:4,bien:4,cuc:4};
 function talScore(p){const root=TAL_RL[p.root]!=null?TAL_RL[p.root]:2;const tc=clamp(p.tc,0,4);const kv=Math.min(4,p.kv*0.8);const th=Math.min(4,Math.max(0,(p.th-1)*1.2));const bs=clamp(2+p.dev*0.5,0,4);
