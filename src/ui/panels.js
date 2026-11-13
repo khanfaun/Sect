@@ -139,7 +139,7 @@ function cfgHTML(){
     +setRow('Độ nét',seg('dpr',[[0,'Tự động'],[1,'Thường'],[1.5,'Nét'],[2,'Rất nét']]),'Độ nét của bản đồ. Càng nét càng nặng trên màn hình độ phân giải cao.')
     +setRow('Mây trôi',onoff('clouds'),'Bóng mây lướt trên bản đồ')+setRow('Hạt theo mùa',onoff('fx'),'Hoa rơi mùa xuân, đom đóm đêm hè, lá thu, tuyết đông')
     +setRow('Sắc trời theo buổi',onoff('daynight'),'Bản đồ ngả màu theo sáng, chiều, tối, đêm')+setRow('Chuyển động giao diện',onoff('anim'),'Hiệu ứng trượt, mờ dần của các bảng')+setRow('Hiện số khung hình',onoff('showFps'));
-  if(st==='view')b+=setRow('Cỡ chữ',seg('font',[['m','Vừa'],['l','Lớn'],['xl','Rất lớn']]))
+  if(st==='view')b+=setRow('Khung Tinh anh, Thiên kiêu',seg('tfStyle',[['hang','Khung hạng'],['ink','Thủy mặc']]))+setRow('Cỡ chữ',seg('font',[['m','Vừa'],['l','Lớn'],['xl','Rất lớn']]))
     +setRow('Tên địa danh',onoff('names'))+setRow('Thực thể qua lại',onoff('ents'),'Thương đội, thú triều, tuần tra, thiên kiêu, dị tượng trên bản đồ')+setRow('Dấu ghi chú',onoff('notes'))+setRow('Địa hình vẽ tay',onoff('terrain'));
   if(st==='play'){const ad=G.meta.opt&&G.meta.opt.userDodge;
     b+=setRow('Tự né',`<div class="seg"><button data-act="autoDodge" data-arg="0" class="${ad?'':'on'}">Tắt</button><button data-act="autoDodge" data-arg="1" class="${ad?'on':''}">Bật</button></div>`,'Bật thì không cần nhấn nút Né.\nLuôn tính như né ở mức khá, trừ đi 10%.')
@@ -424,7 +424,7 @@ function sgBoxC(key,icon,name,rows){const o=UI.ccOpen=UI.ccOpen||{};const open=o
 const TF_PAL={3:{a:'#ffffff',b:'#c9d2db',c:'#7e8994',d:'#3d4650',gem:['#d8f0ff','#3f8fd8','#123a6e'],glow:'rgba(150,200,255,.55)'},
   4:{a:'#fff6c9',b:'#f1c232',c:'#a8720c',d:'#4a2c00',gem:['#ffd6d0','#e0302a','#5a0a08'],glow:'rgba(255,200,60,.6)'}};
 function tfWing(P,id,flip){return `<path transform="${flip?'translate(100 0) scale(-1 1)':''}" d="M42 12C34 4 22 2 12 6C19 7 24 9 27 12C20 11 14 12 9 15C16 15 22 16 26 19C21 19 17 20 14 23C22 23 30 21 36 17Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;}
-function talFrameSVG(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tf'+t.tier;
+function talFrameHang(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tf'+t.tier;
   return `<svg viewBox="0 0 100 100" aria-hidden="true"><defs>
    <linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".3" stop-color="${P.b}"/><stop offset=".55" stop-color="${P.c}"/><stop offset=".75" stop-color="${P.b}"/><stop offset="1" stop-color="${P.c}"/></linearGradient>
    <radialGradient id="${id}g" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="${P.gem[0]}"/><stop offset=".45" stop-color="${P.gem[1]}"/><stop offset="1" stop-color="${P.gem[2]}"/></radialGradient></defs>
@@ -437,6 +437,23 @@ function talFrameSVG(t,id){const P=TF_PAL[t.tier];if(!P)return '';id=id||'tf'+t.
    <path d="M50 1L57 9L50 17L43 9Z" fill="url(#${id}g)" stroke="${P.d}" stroke-width="1"/><path d="M50 3.5L53 7.5L50 9L47 7.5Z" fill="#fff" fill-opacity=".7"/>
    <path d="M50 86L54 91L50 96L46 91Z" fill="url(#${id}g)" stroke="${P.d}" stroke-width=".8"/></svg>`;}
 
-function talWings(t,flip){const P=TF_PAL[t.tier];const id='tcw'+t.tier+(flip?'r':'l');return `<svg class="tcw${flip?' r':''}" viewBox="0 0 48 26" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".4" stop-color="${P.b}"/><stop offset=".75" stop-color="${P.c}"/><stop offset="1" stop-color="${P.b}"/></linearGradient></defs>
+function talWingsHang(t,flip){const P=TF_PAL[t.tier];const id='tcw'+t.tier+(flip?'r':'l');return `<svg class="tcw${flip?' r':''}" viewBox="0 0 48 26" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".4" stop-color="${P.b}"/><stop offset=".75" stop-color="${P.c}"/><stop offset="1" stop-color="${P.b}"/></linearGradient></defs>
   <path d="M46 13C38 3 24 0 10 4C18 5 23 7 26 10C18 9 10 10 4 13C10 13 18 14 24 16C18 16 12 18 8 22C20 24 34 21 46 13Z" fill="url(#${id})" stroke="${P.d}" stroke-width=".8"/>
   <path d="M42 13L46 9L50 13L46 17Z" transform="translate(-4 0)" fill="${P.gem[1]}" stroke="${P.d}" stroke-width=".7"/></svg>`;}
+
+// ----- kiểu thủy mặc: vòng nét bút lông (đậm nhạt, đứt ở một chỗ như nét viên tướng), triện son ở góc -----
+const TF_INK={3:{ink:'#5b6570',wash:'#9aa4ae',seal:'#4a6f8f',ch:'英'},4:{ink:'#1d1712',wash:'#6b5a40',seal:'#b8302a',ch:'天',leaf:'#c9a227'}};
+function talFrameInk(t,id){const P=TF_INK[t.tier];if(!P)return '';id=id||'ti'+t.tier;
+  return `<svg viewBox="0 0 100 100" aria-hidden="true"><defs><filter id="${id}r"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2.4"/></filter></defs>
+   <g filter="url(#${id}r)" fill="none" stroke-linecap="round">
+    <circle cx="50" cy="50" r="41" stroke="${P.wash}" stroke-opacity=".35" stroke-width="10"/>
+    <path d="M58 9.8A41 41 0 1 1 38 10.7" stroke="${P.ink}" stroke-width="7.5" stroke-opacity=".88"/>
+    <path d="M60 12.5A38 38 0 1 1 34 13.5" stroke="${P.ink}" stroke-width="1.6" stroke-opacity=".5"/>
+    <path d="M30 86A41 41 0 0 1 12 64" stroke="${P.ink}" stroke-width="3.5" stroke-opacity=".45"/>
+    ${P.leaf?`<path d="M74 22A38 38 0 0 1 88 47" stroke="${P.leaf}" stroke-width="2" stroke-opacity=".9" stroke-dasharray="3 4"/>`:''}
+   </g>
+   <g transform="translate(70 72) rotate(-8)"><rect x="0" y="0" width="22" height="22" rx="2" fill="${P.seal}"/><rect x="2" y="2" width="18" height="18" rx="1" fill="none" stroke="#f6eedd" stroke-width="1.2"/>
+    <text x="11" y="16.5" text-anchor="middle" font-size="14" font-weight="700" fill="#f6eedd" font-family="serif">${P.ch}</text></g></svg>`;}
+function talWingsInk(t,flip){const P=TF_INK[t.tier];return `<svg class="tcw${flip?' r':''}" viewBox="0 0 48 26" aria-hidden="true"><path d="M46 14C34 9 20 10 4 15C16 12 30 12 46 16Z" fill="${P.ink}" fill-opacity=".8"/><path d="M40 19C30 17 20 18 10 21C20 19 30 19.5 40 21Z" fill="${P.ink}" fill-opacity=".45"/></svg>`;}
+function talFrameSVG(t,id){return (CFG.tfStyle==='ink'?talFrameInk:talFrameHang)(t,id);}
+function talWings(t,flip){return (CFG.tfStyle==='ink'?talWingsInk:talWingsHang)(t,flip);}

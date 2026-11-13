@@ -28,7 +28,7 @@ function render(){
     }
     if(UI.panel)panel=(PANEL_V[UI.panel]||(()=>''))();
     modal=modalHTML();
-    document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
+    document.documentElement.dataset.tf=CFG.tfStyle||'hang';document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
   }catch(e){console.error(e);full=`<div class="title"><p>Có lỗi khi vẽ màn hình: ${esc(e.message)}</p><button class="btn pri" data-act="screen" data-arg="title">Về màn hình đầu</button></div>`;UI.panel=null;UI.modal=null;panel='';modal='';}
   const vtok=document.documentElement.dataset.view==='combat'?'combat':G.screen==='map'&&G.run?'map':'screen:'+G.screen;
   if(UI.inkBusy)return;

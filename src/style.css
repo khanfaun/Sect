@@ -1191,3 +1191,16 @@ i.rh{display:inline-block;width:.62em;height:.62em;background:var(--jade);transf
 .tal-card.tal3 b,.tal-card.tal4 b{background:none!important;filter:none!important;-webkit-background-clip:border-box;background-clip:border-box}
 .tal-card.tal4 b{color:#ffd864!important;text-shadow:0 1px 0 #7a4a00,0 0 8px rgba(255,190,50,.75)}
 .tal-card.tal3 b{color:#eef4fa!important;text-shadow:0 1px 0 #3d4650,0 0 8px rgba(160,210,255,.7)}
+
+/* ===== kiểu thủy mặc ===== */
+:root[data-tf=ink] .tal-card.tal3,:root[data-tf=ink] .tal-card.tal4{border:1px solid rgba(40,30,20,.25);background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.06),transparent 70%),var(--paper) padding-box;box-shadow:inset 0 0 18px rgba(60,45,25,.12)}
+:root[data-tf=ink] .tal-card.tal3 b,:root[data-tf=ink] .tal-card.tal4 b{text-transform:none;letter-spacing:.2em;font-family:var(--serif,serif);text-shadow:none}
+:root[data-tf=ink] .tal-card.tal4 b{color:#1d1712!important;text-shadow:0 0 1px rgba(201,162,39,.6)}:root[data-tf=ink] .tal-card.tal3 b{color:#4b5560!important}
+:root[data-tf=ink] .tal-card.tal4::after,:root[data-tf=ink] .tal-card.tal3::after{content:'';position:absolute;right:10px;top:50%;width:22px;height:22px;margin-top:-11px;border-radius:2px;transform:rotate(-6deg);opacity:.9;
+  background:#b8302a;box-shadow:inset 0 0 0 2px #b8302a,inset 0 0 0 3.2px #f6eedd}
+:root[data-tf=ink] .tal-card.tal3::after{background:#4a6f8f;box-shadow:inset 0 0 0 2px #4a6f8f,inset 0 0 0 3.2px #f6eedd}
+:root[data-tf=ink] .hud-av2 .tfr{filter:none!important}
+:root[data-tf=ink] .u-av.tf4,:root[data-tf=ink] .av.tf4{background:linear-gradient(var(--paper2),var(--paper2)) padding-box,linear-gradient(135deg,#1d1712,#6b5a40,#1d1712) border-box!important;box-shadow:0 0 0 1px rgba(29,23,18,.3),0 0 6px rgba(201,162,39,.45)!important}
+:root[data-tf=ink] .u-av.tf3,:root[data-tf=ink] .av.tf3{background:linear-gradient(var(--paper2),var(--paper2)) padding-box,linear-gradient(135deg,#5b6570,#a8b0b8,#5b6570) border-box!important;box-shadow:0 0 0 1px rgba(60,70,80,.3)!important}
+:root[data-tf=ink] .tal-card.tal4::after,:root[data-tf=ink] .tal-card.tal3::after{content:'天';display:grid;place-items:center;color:#f6eedd;font:700 14px/1 serif}
+:root[data-tf=ink] .tal-card.tal3::after{content:'英'}

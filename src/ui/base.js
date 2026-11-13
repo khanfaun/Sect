@@ -14,7 +14,7 @@ const UI={panel:null,tab:{},sel:null,cardMin:false,hudOpen:true,modal:null,confi
 
 // ---------- cấu hình (lưu riêng theo từng máy) ----------
 const CFG_KEY='phusinh_cfg_v1';
-const CFG_DEF={gfx:'auto',fps:30,dpr:0,fx:true,clouds:true,daynight:true,anim:true,showFps:false,
+const CFG_DEF={tfStyle:'hang',gfx:'auto',fps:30,dpr:0,fx:true,clouds:true,daynight:true,anim:true,showFps:false,
   names:true,roads:true,grid:true,ents:true,ring:true,notes:true,terrain:true,
   font:'m',theme:'light',cspeed:1,autoFight:false,confirmDanger:true,clockIdle:true};
 let CFG=Object.assign({},CFG_DEF);
