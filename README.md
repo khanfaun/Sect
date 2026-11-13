@@ -41,3 +41,4 @@ node tools/build-thu.js
 - `tools/build-thu.js` ráp bản thử `phu-sinh-thu.html` (có danh mục). Bản chính `phu-sinh.html` chưa dùng danh mục.
 - `src/catalog.js` nối danh mục vào luật game bằng các lớp bọc; bỏ tệp này ra là game trở lại như cũ.
 - `tools/nhap_do_cu.py` chép mọi thứ đang có trong code game vào Excel (chạy lại không sinh dòng trùng).
+- Hướng dẫn đầy đủ (luật vật phẩm, công cụ, cách kiểm tra): `tools/HUONG-DAN-DANH-MUC.md`.
