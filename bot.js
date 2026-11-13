@@ -35,11 +35,13 @@ function nearest(pred){const r=G.run;let best=null,bl=1e9;for(const n of regionO
 function goOrOpen(n){const r=G.run;if(!n)return false;if(n.id===r.at){openPlace(n.id);return true;}if(!travelTo(n.id))return false;travelTick(1e7);return true;}
 function botPlan(){
   if(typeof learnAll==='function')learnAll();if(!G.run)return;
+  if(G.run.kvPick&&(!G.run.scene||G.run.scene.type==='place')){kvChoose(0);return;}
+  {const X=typeof lkXkState==='function'&&lkXkState();if(X&&X.ok&&!(G.run.realm===0&&lkTang()>=9)&&(!G.run.scene||G.run.scene.type==='place')){lkXk();return;}}
   const r=G.run,s=S();
   // mục tiêu
   if(r.hp<s.maxHp*0.45){const n=nearest(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok'&&r.st>=price(4)||n.dp);if(n&&goOrOpen(n)){r._goal=n.dp?'heal':'inn';return;}}
-  if(r.tv>=100&&r.realm<4&&canBreak()){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bt';return;}}
-  if(r.tvMinor>=40||r.tv>=60&&chance(.3)){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bq';return;}}
+  if(r.realm<4&&canBreak()){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bt';return;}}
+  if((r.tvMinor>=40||r.tv<100&&!bqCan()&&chance((r.ll||0)>=r.tv+10?.75:r.tv>=60?.3:.2))&&(r.ll||0)>=r.tv-15){const n=nearest(n=>n.dp);if(n&&goOrOpen(n)){r._goal='bq';return;}}
   const R0=regionOf(r.region);
   if(r.region<4&&(r.realm>=r.region+1||r.passes.includes(r.region+1))){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';return;}}
   if(!r.bossDone[r.region]&&r.realm>=r.region+1&&chance(.5)){const n=nodeById(R0.lair);if(n.fog>=1&&goOrOpen(n)){r._goal='boss';return;}}
@@ -49,7 +51,10 @@ function botPlan(){
   // khám phá: ưu tiên điểm chưa tới
   const cand=R0.nodes.filter(n=>n.fog>=1&&n.fog<3&&n.id!==r.at);
   const known=R0.nodes.filter(n=>n.fog>=1&&n.id!==r.at&&n.type!=='ai'&&n.type!=='sao');
-  let t=cand.length&&chance(.7)?pick(cand):(chance(.5)?nodeById(r.at):pick(known.length?known:[nodeById(r.at)]));
+  // lịch luyện tụt sau tu vi: ưu tiên nơi chưa tới
+  const lag=(r.ll||0)<r.tv-15;
+  if(lag||((r.tv>=100||(lkOn()&&lkTang()>=9))&&(r.ll||0)<llNeedBt())||(lkXkState()&&lkXkState().ll)){const seen=new Set(r.llP||[]);const n=nearest(x=>x.id!==r.at&&!seen.has(x.id)&&x.type!=='ai'&&x.type!=='sao');if(n&&goOrOpen(n)){r._goal='explore';return;}}
+  let t=cand.length&&chance(lag?.95:.7)?pick(cand):(chance(.5)?nodeById(r.at):pick(known.length?known:[nodeById(r.at)]));
   r._goal='explore';goOrOpen(t);
 }
 function botPlace(){
@@ -61,8 +66,8 @@ function botPlace(){
   if(r._goal==='boss'&&has('boss')){r._goal=null;placeAct('boss');return;}
   if(has('bt')){if(r.hp<s.maxHp*0.95&&has('heal')){placeAct('heal');return;}placeAct('bt');return;}
   if(r.hp<s.maxHp*0.45){if(has('inn')&&venueDo('inn','phong'))return;if(has('heal')){placeAct('heal');return;}if(has('tinh')){placeAct('tinh');return;}}
-  if(r._goal==='bq'&&!bqCan()){r._goal=null;bqCustom(chance(.7)?2:0.25);return;}
-  if(n.dp&&!bqCan()&&r.tvMinor>=40){bqCustom(chance(.75)?2:0.25);return;}
+  if(r._goal==='bq'&&!bqCan()){r._goal=null;bqCustom(Math.max(0.25,Math.min(chance(.7)?2:0.25,bqNeedY()||0.25)));return;}
+  if(n.dp&&!bqCan()&&r.tvMinor>=40){bqCustom(Math.max(0.25,Math.min(chance(.75)?2:0.25,bqNeedY()||0.25)));return;}
   if(has('tea')&&chance(.3)&&venueDo('tea','nghe'))return;
   if(has('shop')&&chance(.3)){placeAct('shop');return;}
   if(has('board')&&chance(.15)){placeAct('board');return;}
@@ -125,7 +130,7 @@ function scanTexts(){
   const t=run('botTexts()');
   for(const x of t){if(BAD.test(x)){if(stats.bad.length<30)stats.bad.push(x.slice(0,200));}}
 }
-const SAME=process.argv.includes('--same-world');
+const SAME=process.argv.includes('--same-world');const DBG=process.argv.includes('--debug');let lastSnap='';
 run('G={meta:newMeta(),run:null,birth:null,over:null,screen:"title"};');
 let life=0,stepsLife=0;
 const t0=Date.now();
@@ -134,6 +139,7 @@ while(life<LIVES){
     const scr=run('G.screen');
     if(scr==='over'||scr==='title'||scr==='meta'||!run('!!G.run')){
       if(scr==='over'){
+        if(DBG)console.log('kiếp',life+1,'trước khi chết:',lastSnap);
         const L=run('G.over.life');const c=run('G.over.cause');stats.cause[c]=(stats.cause[c]||0)+1;stats.ages.push(L.tuoi);life++;const rn=L.realm.replace(/^(Nhân|Địa|Thiên) Đạo /,'');stats.rc=stats.rc||{};stats.rc[rn]=(stats.rc[rn]||0)+1;stats.rg=stats.rg||[0,0,0,0,0];stats.rg[L._mr||0]++;
       }
       if(!SAME&&life%25===0&&life>0&&scr==='over')run('G.meta=newMeta();');
@@ -141,6 +147,7 @@ while(life<LIVES){
       run('G.over=null;genBirth();newRun(G.birth.cards[0]);');stepsLife=0;continue;
     }
     run('if(G.run.scene)botScene();else botPlan();');
+    if(DBG&&run('!!G.run'))lastSnap=run('JSON.stringify({pham:!!G.run.pham,tp:typeof tuArt==="function"&&tuArt()?tuArt().n:null,tv:Math.round(G.run.tv),ll:Math.round(G.run.ll||0),age:Math.floor(G.run.age),realm:G.run.realm,bt:typeof canBreak==="function"&&canBreak(),noi:(G.run.llP||[]).length,nguoi:(G.run.llN||[]).length,dich:Object.keys(G.run.llSeen||{}).length,tran:Object.values(G.run.llSeen||{}).reduce((a,b)=>a+b,0),soNoi:regionOf(G.run.region).nodes.length,bq:typeof bqCan==="function"?bqCan():"",goal:G.run._goal,khihai:(G.run.chu||[]).filter(Boolean).length,arts:(G.run.arts||[]).map(a=>a.type).join("")})');
     stats.steps++;stepsLife++;
     if(run('!!G.run')){
       scanTexts();

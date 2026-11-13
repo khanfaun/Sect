@@ -27,10 +27,10 @@ function fxBurst(x,y,el,big){const c=FXC[el]||FXC.vo;const S0=big?190:120;
 function fxShield(x,y){fxEl(`<svg viewBox="0 0 100 110" width="110" height="120"><path d="M50 4L92 20v34c0 26-18 42-42 52C26 96 8 80 8 54V20z" fill="rgba(120,190,255,.28)" stroke="#bfe3ff" stroke-width="4"/><path d="M50 18L80 30v24c0 18-12 30-30 38-18-8-30-20-30-38V30z" fill="none" stroke="#ffe9a8" stroke-width="2"/></svg>`,x,y,560,'fx-shield');}
 function fxOne(sc,e){if(!G.run||G.run.scene!==sc)return;const fx=CFG.anim!==false;const t=sc.units.find(u=>u.id===e.id);const [x,y]=fxPos(sc,e.id);const me=t&&t.isMain;
   if(e.k==='hit'){if(fx){fxSlash(x,y,e.el,e.big);fxBurst(x,y,e.el,e.big);if(e.blk)fxShield(x,y);if(me){fxShake(e.big||e.crit);if(!e.blk&&e.d>0)fxEl('',0,0,450,'fx-vig');}else if(e.big||e.crit)fxShake(false);}
-    if(e.blk)fxNum(x,y-26,'Đỡ!','blk');fxNum(x,y,e.d>0?(e.crit?'Bạo kích ':'')+'−'+e.d:'Hộ thể',e.d>0?(e.crit?'crit':me?'dmg me':'dmg'):'blk');
+    if(e.blk)fxNum(x,y-26,'Đỡ!','blk');if(e.crit&&e.d>0)fxNum(x,y,'Bạo kích!','crit');else if(!(e.d>0))fxNum(x,y,'Hộ thể','blk');
     const c=document.getElementById('uc'+e.id);if(c){c.classList.remove('hitf');void c.offsetWidth;c.classList.add('hitf');}}
   else if(e.k==='dodge'){fxNum(x,y,'Né!','ev');if(fx)fxEl('<i></i><i></i><i></i>',x,y,420,'fx-dash');}
-  else if(e.k==='heal'){fxNum(x,y,'+'+e.d,'heal');if(fx)fxEl(Array.from({length:6},(_,i)=>`<i style="left:${(Math.random()*80-40).toFixed(0)}px;animation-delay:${(i*0.07).toFixed(2)}s">+</i>`).join(''),x,y,900,'fx-heal');}
+  else if(e.k==='heal'){if(fx)fxEl(Array.from({length:6},(_,i)=>`<i style="left:${(Math.random()*80-40).toFixed(0)}px;animation-delay:${(i*0.07).toFixed(2)}s">+</i>`).join(''),x,y,900,'fx-heal');}
   else if(e.k==='shield'){if(fx)fxShield(x,y);}
   else if(e.k==='daze'){fxNum(x,y-20,'Choáng!','dz');if(fx)fxEl('<i>✦</i><i>✦</i><i>✦</i>',x,y-46,900,'fx-daze');}
 }
