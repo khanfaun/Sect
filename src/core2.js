@@ -2493,3 +2493,21 @@ npcTalProfile=function(key){const R1=seedRng('tal:'+key);const wp=(L,w)=>{let s=
   const th=wp([1,2,3,4,5,6],x=>[35,20,20,17,6,2][x-1]);const ngo=8+Math.floor(R1()*5)+(R1()<0.3?Math.floor(R1()*4):0);const dao=Math.floor(R1()*6);return {root,tcv,tc,ngo,kvMax,th,dao};};
 npcTal=function(key,minTier){const k=key+'|'+(minTier||0);if(NPC_TAL_C[k])return NPC_TAL_C[k];const p=npcTalProfile(key);const sc=talScore(p);const o={tier:Math.max(minTier||0,Math.min(talCap(p),talTierOf(sc))),score:sc,p};NPC_TAL_C[k]=o;return o;};
 TAL_T.splice(0,4,1.05,1.62,2.05,2.45);
+// ----- Phẩm Trúc Cơ theo tầng Luyện Khí lúc đột phá (thay cho cách tính theo đạo cơ, chỉ ở Trúc Cơ) -----
+// Thứ tự từ thấp lên cao: Nhân đạo → Hoàn mỹ → Địa đạo → Thiên đạo. Hoàn mỹ dùng chỉ số 4 trong bảng phẩm.
+//  · đột phá ở tầng 9: Nhân đạo
+//  · tầng 10–13: Hoàn mỹ
+//  · tầng 10–13, không dùng Trúc Cơ Đan, tâm pháp đang tu từ Địa phẩm trở lên và đã học hết các tầng: Địa đạo
+//  · tầng 13, đủ điều kiện trên với tâm pháp Thiên phẩm trở lên và luyện thể tầng 10: Thiên đạo
+QNAME[4]='Hoàn mỹ';QPRE[4]='Hoàn Mỹ';QMUL[4]=1.09;QLIFE[4]=7;
+const LT_REQ=10; // luyện thể chưa có: tạm để mốc tầng 10, sau thay giá trị thật
+function ltTang(){const r=G.run;return (r&&r.lt)||0;}
+function tcQual(dan){const r=G.run;const g=lkDone();if(g<10)return {q:1,g,why:[]};const a=tuArt();const full=!!(a&&a.lv>=a.lines.length);const why=[];
+  if(dan)why.push('đã dùng Trúc Cơ Đan');if(!a||a.tier<3)why.push('tâm pháp chưa tới Địa phẩm');if(a&&!full)why.push('tâm pháp chưa học hết các tầng');
+  if(why.length)return {q:4,g,why};
+  if(g>=13&&a.tier>=4&&ltTang()>=LT_REQ)return {q:3,g,why:[]};
+  const w2=[];if(g<13)w2.push('chưa tu trọn tầng 13');if(a.tier<4)w2.push('tâm pháp chưa tới Thiên phẩm');if(ltTang()<LT_REQ)w2.push('luyện thể chưa tới tầng '+LT_REQ);return {q:2,g,why:w2};}
+function tcOn(){const r=G.run;return !!(r&&r.realm===0&&!isPham()&&lkOn());}
+{const _ps=prepStart;prepStart=function(){const r=G.run,sc=r&&r.scene;if(sc&&sc.type==='prep')r._tcDan=sc.slots.some(i=>r.pills[i]&&r.pills[i].id==='trucco');return _ps.apply(this,arguments);};}
+{const _bfq=btFinish;btFinish=function(){const r=G.run;if(r&&r.bt&&r.bt.to===1&&tcOn()){const Q=tcQual(r._tcDan).q;const _q=qOf;qOf=()=>Q;try{return _bfq.apply(this,arguments);}finally{qOf=_q;if(G.run)G.run._tcDan=0;}}return _bfq.apply(this,arguments);};}
+{const _pv=prepView;prepView=function(){const v=_pv();if(tcOn()){const sc=G.run.scene;const dan=sc.slots.some(i=>G.run.pills[i]&&G.run.pills[i].id==='trucco');const T0=tcQual(dan);v.q=T0.q;v.tcWhy=T0.why;v.next=null;}return v;};}

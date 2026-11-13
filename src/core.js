@@ -1483,7 +1483,7 @@ function btFinish(){
   r.realm=to;r.quality[to]=q;r.tv=0;r.btFail=0;r.tvMinor=0;r.dao=0;r.daoSk=0;r.daoPill=0;r.maxRealm=Math.max(r.maxRealm,r.realm);
   const s1=S();r.hp=s1.maxHp;r.mp=s1.maxMp;
   const name=qualName(to,q);
-  sc.text=(T(REST_T.bt[to-1])+' '+['','Đạo cơ vững vàng hơn người thường.','Đạo cơ rắn như đá núi, trời đất cũng phải ghi nhận.','Thiên Đạo ban phẩm! Mưa hoa rơi khắp động phủ, mây lành ngũ sắc kéo tới.'][q]).trim();
+  sc.text=(T(REST_T.bt[to-1])+' '+['','Đạo cơ vững vàng hơn người thường.','Đạo cơ rắn như đá núi, trời đất cũng phải ghi nhận.','Thiên Đạo ban phẩm! Mưa hoa rơi khắp động phủ, mây lành ngũ sắc kéo tới.','Căn cơ hoàn mỹ, chân nguyên đặc quánh, vượt xa người thường.'][q]||'').trim();
   sc.ok=true;sc.done=1;
   sc.chips=[chip('☯️',name,'Đại cảnh giới mới.\nPhẩm chất: '+QNAME[q]+'\nHệ số chỉ số ×'+String(QMUL[q]).replace('.',',')+', thọ nguyên +'+QLIFE[q]+'%','up'),chip('⏳','thọ '+s1.life,'Thọ nguyên mới','up')];
   if(kiepBonus)sc.chips.push(chip('🌩️','đạo cơ +2','Qua thiên kiếp với hơn nửa khí huyết','up'));
