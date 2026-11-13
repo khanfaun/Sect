@@ -488,3 +488,48 @@ function talCardOrn(t){const P=TF_PAL[t.tier];const id='tco'+t.tier;const defs=`
   const pet=(a,l)=>`<path transform="rotate(${a} 80 18)" d="M80 18C74 10 74 ${18-l} 80 ${12-l}C86 ${18-l} 86 10 80 18Z" fill="url(#${id}m)" stroke="${P.d}" stroke-width=".8"/>`;
   const bot=t.tier===4?wing(0)+wing(1):t.tier===3?pet(-64,8)+pet(64,8)+pet(-32,12)+pet(32,12)+pet(0,14):'';
   return `${top}<svg class="tco-bot" viewBox="0 0 160 32">${defs}${bot}${tfGem(id,P,80,t.tier===3?14:16,7.5)}</svg>`;}
+
+// ===== bộ khung chi tiết (vẽ lại từ bản khung vuông): bảng màu theo bậc =====
+const TFX={1:{hi:'#ffe6cc',lo:'#5a2c10',m1:'#e0a06a',m2:'#9a5a2c',m3:'#c98552',dk:'#2e1608',gem:['#fff0e0','#e06a2a','#6a1e06'],acc:'#7a3a18',glow:'rgba(230,140,70,.4)'},
+ 2:{hi:'#ffffff',lo:'#3a434e',m1:'#eef2f6',m2:'#8a96a3',m3:'#c4ccd5',dk:'#1e252d',gem:['#e8f6ff','#3f9be0','#0e2f66'],acc:'#506274',glow:'rgba(180,200,225,.45)'},
+ 3:{hi:'#fff8d8',lo:'#5a3600',m1:'#ffe27a',m2:'#b8800e',m3:'#f1c232',dk:'#2e1a00',gem:['#ffe0da','#e6302a','#5a0806'],acc:'#8a1a14',glow:'rgba(255,200,60,.6)'},
+ 4:{hi:'#ffffff',lo:'#2a2f7a',m1:'#e8f6ff',m2:'#7d86e6',m3:'#b8e2ff',dk:'#14174a',gem:['#ffffff','#8fe0ff','#4a3fd8'],acc:'#6a4ad8',glow:'rgba(140,200,255,.85)'}};
+function tfxDefs(P,id){return `<defs><linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.hi}"/><stop offset=".22" stop-color="${P.m1}"/><stop offset=".45" stop-color="${P.m2}"/><stop offset=".6" stop-color="${P.m3}"/><stop offset=".8" stop-color="${P.m2}"/><stop offset="1" stop-color="${P.m1}"/></linearGradient>
+ <linearGradient id="${id}v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${P.hi}"/><stop offset=".35" stop-color="${P.m3}"/><stop offset=".7" stop-color="${P.m2}"/><stop offset="1" stop-color="${P.lo}"/></linearGradient>
+ <radialGradient id="${id}g" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="${P.gem[0]}"/><stop offset=".4" stop-color="${P.gem[1]}"/><stop offset="1" stop-color="${P.gem[2]}"/></radialGradient></defs>`;}
+const tfxGem=(id,P,cx,cy,r)=>`<path d="M${cx} ${cy-r}L${cx+r*.78} ${cy}L${cx} ${cy+r}L${cx-r*.78} ${cy}Z" fill="url(#${id}g)" stroke="${P.dk}" stroke-width="${r>6?1:.7}"/><path d="M${cx} ${cy-r*.7}L${cx+r*.35} ${cy-r*.15}L${cx} ${cy}L${cx-r*.35} ${cy-r*.15}Z" fill="#fff" fill-opacity=".7"/>`;
+const tfxStar=(x,y,r)=>`<path d="M${x} ${y-r*2.4}L${x+r*.5} ${y-r*.5}L${x+r*2.4} ${y}L${x+r*.5} ${y+r*.5}L${x} ${y+r*2.4}L${x-r*.5} ${y+r*.5}L${x-r*2.4} ${y}L${x-r*.5} ${y-r*.5}Z" fill="#fff" opacity=".9"/>`;
+// vương miện (tâm cx, chân ở y, rộng W)
+function tfxCrown(id,P,t,cx,y,sc){const n=t===4?5:t===3?3:t===2?1:0;if(!n)return '';const W=(t===4?34:t===3?24:0)*sc;let sp='';
+  for(let i=0;i<n;i++){const x=n===1?cx:cx-W/2+i*W/(n-1);const mid=i===(n-1)/2;const h=(mid?14:i%2?8:10)*sc;sp+=`<path d="M${x-4*sc} ${y}L${x} ${y-h}L${x+4*sc} ${y}Z" fill="url(#${id}v)" stroke="${P.dk}" stroke-width=".7"/>`;}
+  const bw=W/2+7*sc;return `${sp}<path d="M${cx-bw} ${y+3*sc}C${cx-W/4} ${y-4*sc} ${cx+W/4} ${y-4*sc} ${cx+bw} ${y+3*sc}C${cx+W/4} ${y}  ${cx-W/4} ${y} ${cx-bw} ${y+3*sc}Z" fill="url(#${id}m)" stroke="${P.dk}" stroke-width=".7"/>${tfxGem(id,P,cx,y-2*sc,(t>=3?7:5.5)*sc)}`;}
+// đáy theo bậc (tâm cx, cy)
+function tfxBottom(id,P,t,cx,cy,sc,wide){if(t===4){const wing=f=>{let w='';const L=[[52,0,1],[46,4,.92],[39,7,.85],[31,10,.78]];const k=wide||1;
+    for(const [len0,dy,o] of L){const len=len0*k;w+=`<path d="M0 0C-${len*.35} -${(6-dy*.3)*sc} -${len*.75} -${(7-dy*.4)*sc} -${len} -${(3.5-dy*.6)*sc}C-${len*.7} -${(1-dy*.2)*sc} -${len*.4} ${(1+dy*.2)*sc} 0 ${3.5*sc}Z" transform="translate(0 ${dy*.25*sc})" fill="url(#${id}m)" fill-opacity="${o}" stroke="${P.dk}" stroke-width=".6"/>`;}
+    return `<g transform="translate(${cx} ${cy}) scale(${f*sc} ${1})">${w}<path d="M-4 -1C-16 -3 -32 -4 -${48*k} -3" fill="none" stroke="${P.hi}" stroke-opacity=".7" stroke-width=".5"/></g>`;};return wing(1)+wing(-1)+tfxGem(id,P,cx,cy+1*sc,7.5*sc);}
+  if(t===3){const pet=(a,l,w)=>`<path transform="rotate(${a} ${cx} ${cy+6*sc})" d="M${cx} ${cy+6*sc}C${cx-w*sc} ${cy+6*sc-l*.45*sc} ${cx-w*.6*sc} ${cy+6*sc-l*sc} ${cx} ${cy+6*sc-(l+2.5)*sc}C${cx+w*.6*sc} ${cy+6*sc-l*sc} ${cx+w*sc} ${cy+6*sc-l*.45*sc} ${cx} ${cy+6*sc}Z" fill="url(#${id}v)" stroke="${P.dk}" stroke-width=".6"/>`;
+    return pet(-78,12,5)+pet(78,12,5)+pet(-52,15,5.5)+pet(52,15,5.5)+pet(-26,17,5.5)+pet(26,17,5.5)+pet(0,18,6)+tfxGem(id,P,cx,cy-1*sc,6*sc);}
+  if(t===2)return `<path d="M${cx} ${cy}L${cx-24*sc} ${cy-5*sc}L${cx-17*sc} ${cy+1*sc}L${cx-25*sc} ${cy+7*sc}L${cx} ${cy+4*sc}Z" fill="url(#${id}m)" stroke="${P.dk}" stroke-width=".6"/><path d="M${cx} ${cy}L${cx+24*sc} ${cy-5*sc}L${cx+17*sc} ${cy+1*sc}L${cx+25*sc} ${cy+7*sc}L${cx} ${cy+4*sc}Z" fill="url(#${id}m)" stroke="${P.dk}" stroke-width=".6"/>`+tfxGem(id,P,cx,cy+1*sc,6*sc);
+  return `<path d="M${cx-12*sc} ${cy}H${cx+12*sc}L${cx+9*sc} ${cy+3.5*sc}H${cx-9*sc}Z" fill="url(#${id}m)" stroke="${P.dk}" stroke-width=".6"/>`+tfxGem(id,P,cx,cy+1.5*sc,5*sc);}
+// móng cong ôm vòng ở 4 góc chéo
+function tfxClaw(id,P,t,a){return `<g transform="rotate(${a} 50 50) translate(50 6.5)"><path d="M-9 4C-6 -1 -2 -3 0 -3C2 -3 6 -1 9 4C5 2 2 1.5 0 3.5C-2 1.5 -5 2 -9 4Z" fill="url(#${id}m)" stroke="${P.dk}" stroke-width=".6"/>${t>=2?`<path d="M0 -1.2L1.3 .6L0 2.4L-1.3 .6Z" fill="url(#${id}g)"/>`:''}</g>`;}
+// khung tròn chi tiết cho avatar
+function talFrameX(t,id){const P=TFX[t.tier];if(!P)return '';id=id||'tx'+t.tier;
+  let s=tfxDefs(P,id)+`<circle cx="50" cy="50" r="41" fill="none" stroke="${P.glow}" stroke-width="12" style="filter:blur(3px)"/>`;
+  s+=`<circle cx="50" cy="50" r="40.6" fill="none" stroke="${P.dk}" stroke-width="11"/><circle cx="50" cy="50" r="40.6" fill="none" stroke="url(#${id}m)" stroke-width="8.6"/>
+   <circle cx="50" cy="50" r="44.3" fill="none" stroke="${P.hi}" stroke-opacity=".75" stroke-width=".7"/><circle cx="50" cy="50" r="37.2" fill="none" stroke="${P.dk}" stroke-width="1"/><circle cx="50" cy="50" r="36" fill="none" stroke="${P.acc}" stroke-opacity=".85" stroke-width=".8"/>
+   <path d="M18 30A37 37 0 0 1 44 13" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.4" stroke-linecap="round"/>`;
+  for(const a of [45,135,225,315])s+=tfxClaw(id,P,t.tier,a);
+  if(t.tier>=3)s+=tfxGem(id,P,9.4,50,3.4)+tfxGem(id,P,90.6,50,3.4);
+  s+=tfxCrown(id,P,t.tier,50,11,.62)+tfxBottom(id,P,t.tier,50,92,.62,1.25);
+  if(t.tier===4)s+=tfxStar(14,18,1.4)+tfxStar(88,24,1.1)+tfxStar(92,70,1.3)+tfxStar(8,78,1)+tfxStar(70,3,1);
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">${s}</svg>`;}
+talFrameSVG=function(t,id){return t&&t.tier>=1?talFrameX(t,id):'';};
+// ô Thiên phú: vương miện trên viền trên, móng ở 4 góc, ngọc hai bên, đáy theo bậc
+talCardOrn=function(t){const P=TFX[t.tier];const id='tcx'+t.tier;const d=tfxDefs(P,id);
+  const top=`<svg class="tcx-top" viewBox="0 0 80 30">${d}${t.tier>=2?tfxCrown(id,P,t.tier,40,22,1):''}</svg>`;
+  const bot=`<svg class="tcx-bot" viewBox="0 0 200 40">${d}${tfxBottom(id,P,t.tier,100,16,1,1.9)}</svg>`;
+  const cl=(c)=>`<svg class="tcx-cl ${c}" viewBox="0 0 26 26">${d}<path d="M-1 22C-2 10 3 1 15 -2C11 3 10 7 11 11C14 6 19 3 26 -3C24 7 19 13 12 16C16 17 19 19 21 23C12 23 6 23 -1 22Z" fill="url(#${id}m)" stroke="${P.dk}" stroke-width=".8"/>${t.tier>=2?`<path d="M8 8L10.5 10.5L8 13L5.5 10.5Z" fill="url(#${id}g)" stroke="${P.dk}" stroke-width=".5"/>`:''}</svg>`;
+  const side=t.tier>=3?`<svg class="tcx-sd l" viewBox="0 0 12 12">${d}${tfxGem(id,P,6,6,5)}</svg><svg class="tcx-sd r" viewBox="0 0 12 12">${d}${tfxGem(id,P,6,6,5)}</svg>`:'';
+  const st=t.tier===4?`<svg class="tcx-st" viewBox="0 0 300 80">${tfxStar(30,12,2)}${tfxStar(270,20,1.6)}${tfxStar(250,70,1.8)}${tfxStar(48,66,1.4)}${tfxStar(200,6,1.3)}</svg>`:'';
+  return top+bot+cl('tl')+cl('tr')+cl('bl')+cl('br')+side+st;};
