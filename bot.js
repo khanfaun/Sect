@@ -1,11 +1,9 @@
 // Người chơi máy cho Phù Sinh 2.
-// Nạp khối lõi + dữ liệu từ phu-sinh.html (không nạp giao diện), tự chơi bằng cách gọi thẳng hàm lõi.
+// Nạp khối lõi + dữ liệu từ src/game/ (không nạp giao diện), tự chơi bằng cách gọi thẳng hàm lõi.
 // Chạy: node bot.js [số_kiếp] [--same-world] [--quiet]
 const fs=require('fs'),vm=require('vm'),path=require('path');
-const html=fs.readFileSync(path.join(__dirname,'phu-sinh.html'),'utf8');
-const a=html.indexOf('<script>')+8,b=html.indexOf('// ================= GIAO DIỆN');
-if(b<0)throw new Error('không thấy mốc GIAO DIỆN');
-const core=html.slice(a,b);
+// Nạp thẳng từ src/game/: phần luật chơi (core, core2) và dữ liệu (data), không nạp giao diện.
+const core=require('./tools/ghep').script(['core','core2','data']);
 const ctx=vm.createContext({console,Math,JSON,Date,performance:{now:()=>Date.now()}});
 vm.runInContext(core,ctx,{filename:'core.js'});
 const run=(code)=>vm.runInContext(code,ctx);

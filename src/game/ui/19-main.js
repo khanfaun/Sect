@@ -17,7 +17,7 @@ function render(){
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
     if(cb&&UI.panel!=='more'){UI.panel=null;}
     if(!inMap&&UI.modal)UI.modal=null;
-    if(!inMap){full=G.screen==='birth'&&G.birth?vBirth():G.screen==='over'&&G.over?vOver():G.screen==='meta'?vMeta():G.screen==='life'&&G.run?vLife():vTitle();}
+    if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth',vBirth):G.screen==='over'&&G.over?rxv('Over',vOver):G.screen==='meta'?rxv('Meta',vMeta):G.screen==='life'&&G.run?rxv('Life',vLife):rxv('Title',vTitle);}
     else{
       if(cb)full=vCombat(sc);
       else{hud=hudHTML();nav=navHTML();

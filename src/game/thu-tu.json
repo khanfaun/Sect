@@ -56,5 +56,6 @@
  "ui/18-screens.js",
  "ui/19-main.js",
  "ui/20-chu-thich.js",
- "ui/21-thong-bao-nho-duoi.js"
+ "ui/21-thong-bao-nho-duoi.js",
+ "ui/22-cau-noi-react.js"
 ]

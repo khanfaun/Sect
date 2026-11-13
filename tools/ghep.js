@@ -13,6 +13,7 @@ function script(nhom) {
 }
 function html(title) {
   let h = rd('src/index.html');
+  title = title || process.env.PS_TITLE;
   if (title) h = h.replace('<title>Phù Sinh</title>', `<title>${title}</title>`);
   return h.replace('/*STYLE*/', () => rd('src/game/style.css')).replace('/*SCRIPT*/', () => script());
 }
