@@ -8,7 +8,7 @@ function setH(id,html){const el=document.getElementById(id);if(!el)return false;
   if(id==='sheet'){el.classList.toggle('still',!!k2&&key===k2);const tk=document.getElementById('plTalk');if(tk){if(tkN!=null&&tkN===tk.dataset.n)tk.scrollTop=tkTop;else tk.scrollTop=tk.scrollHeight;}}if(top&&key===k2){const s2=el.querySelector('.win-b,.sc-b');if(s2)s2.scrollTop=top;}
   return true;}
 function viewKey(id){const sc=G.run&&G.run.scene;if(id==='sheet')return sc?sc.type+':'+(sc.id||'')+':'+(sc.story?sc.story.length:0)+':'+(sc.phase||''):'';if(id==='panel')return (UI.panel||'')+JSON.stringify(UI.tab);if(id==='full')return G.screen+(UI.tab.meta||'');if(id==='modal')return UI.modal?UI.modal.k:'';return '';}
-function syncDodge(){const o=G.meta.opt=G.meta.opt||{};if(o.userDodge===undefined)o.userDodge=!!o.autoDodge;o.autoDodge=!!(o.userDodge||CFG.autoFight);o.autoQte=!!CFG.autoFight;}
+function syncDodge(){const o=G.meta.opt=G.meta.opt||{};if(o.userDodge===undefined)o.userDodge=!!o.autoDodge;o.autoDodge=!!o.userDodge;o.autoQte=!!CFG.autoFight;}
 function render(){
   let full='',hud='',mapui='',dock='',nav='',sheet='',panel='',modal='';
   try{
@@ -28,7 +28,7 @@ function render(){
     }
     if(UI.panel)panel=(PANEL_V[UI.panel]||(()=>''))();
     modal=modalHTML();
-    document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
+    document.documentElement.dataset.tf=CFG.tfStyle||'hang';document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
   }catch(e){console.error(e);full=`<div class="title"><p>Có lỗi khi vẽ màn hình: ${esc(e.message)}</p><button class="btn pri" data-act="screen" data-arg="title">Về màn hình đầu</button></div>`;UI.panel=null;UI.modal=null;panel='';modal='';}
   const vtok=document.documentElement.dataset.view==='combat'?'combat':G.screen==='map'&&G.run?'map':'screen:'+G.screen;
   if(UI.inkBusy)return;
@@ -72,6 +72,7 @@ function loop(now){
       }
     }catch(e){console.error(e);}
   } else clkAcc=0;
+  if((UI.lvGlow&&now<UI.lvGlow.t1+100)||UI.dnMv)Map2.invalidate();
   if(G.screen==='map'&&G.run)Map2.frame(now);
   requestAnimationFrame(loop);
 }
@@ -101,7 +102,7 @@ const ACT={
   leave:()=>leavePlace(),
   pass:a=>passAct(a),
   hud:()=>{if(G.run&&G.run.scene)UI.hudScene=!UI.hudScene;else UI.hudOpen=!UI.hudOpen;},
-  cbGo:()=>prepGo(),ppKn:()=>{const sc=G.run&&G.run.scene;const cmp=sc&&sc.units&&sc.units.length>2;UI.ppKn=!(UI.ppKn!=null?UI.ppKn:!cmp);},cbQuick:()=>quickFight(),cbOpen:()=>{UI.cbOpen=!UI.cbOpen;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
+  cbGo:()=>prepGo(),ppKn:()=>{const sc=G.run&&G.run.scene;const cmp=sc&&sc.units&&sc.units.length>2;UI.ppKn=!(UI.ppKn!=null?UI.ppKn:!cmp);},cbQuick:()=>quickFight(),ccOpen:k=>{const o=UI.ccOpen=UI.ccOpen||{};o[k]=o[k]===false;},cbOpen:()=>{UI.cbOpen=UI.cbOpen===false;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
   hudBq:()=>{G.bqRoom=false;openBq();},
   evMin:()=>{UI.evMin=true;},
   evBack:()=>{UI.evMin=false;},
@@ -179,6 +180,8 @@ const ACT={
   buryGo:()=>buryItems(),
   autoDodge:v=>{const o=G.meta.opt=G.meta.opt||{};o.userDodge=v==='1';syncDodge();},
   autoFight:()=>{cfgSet('autoFight',!CFG.autoFight);syncDodge();UI.menu=null;UI.pendSk=null;},
+  autoOpen:()=>{UI.autoOpen=!UI.autoOpen;},
+  autoTg:k=>{if(!['autoFight','autoBlk','autoDg'].includes(k))return;cfgSet(k,!CFG[k]);syncDodge();if(k==='autoFight'){UI.menu=null;UI.pendSk=null;}},
   cspd:n=>{cfgSet('cspeed',+n);},
   cspeed:()=>{cfgSet('cspeed',CFG.cspeed>=3?1:CFG.cspeed+1);},
   clog:()=>{UI.modal={k:'clog'};},
@@ -394,7 +397,7 @@ function qpopFlush(){const L=G.qpop;if(!L||!L.length||document.querySelector('.q
   d.innerHTML=`<b>${T[0]}</b><p>${esc(q.text)}</p>${q.ch&&q.ch.length?chipsHTML(q.ch):''}`;d.addEventListener('pointerdown',()=>{d.remove();qpopFlush();});
   app.appendChild(d);setTimeout(()=>{d.classList.add('out');setTimeout(()=>{d.remove();qpopFlush();},400);},2500);}
 // mỗi kiếp mới: tắt tự đánh, tốc độ trận và tốc độ bản đồ về ×1 (mở lại game cũng vậy, xem cfgLoad)
-function speedReset(){CFG.autoFight=false;CFG.cspeed=1;cfgSave();UI.speed=1;UI.paused=false;if(G.meta)syncDodge();}
+function speedReset(){CFG.autoFight=false;CFG.autoBlk=false;CFG.autoDg=false;UI.autoOpen=false;CFG.cspeed=1;cfgSave();UI.speed=1;UI.paused=false;if(G.meta)syncDodge();}
 {const _nrU=newRun;newRun=function(c){const res=_nrU(c);speedReset();if(G.run&&G.run.story){G.screen='life';UI.lifeT=performance.now();UI.lifeAll=false;lifeScroll();}return res;};}
 // trang mở đầu kiếp: dòng chữ hiện dần, cuộn theo dòng mới nhất
 const LIFE_D=1.7;
@@ -402,3 +405,152 @@ function lifeScroll(){clearInterval(UI.lifeIv);UI.lifeIv=setInterval(()=>{if(G.s
   const el=UI.lifeAll||k>=P.length?document.querySelector('.lsx-go'):P[k];if(el)el.scrollIntoView({block:'nearest',behavior:'smooth'});if(UI.lifeAll||k>P.length)clearInterval(UI.lifeIv);},500);}
 Object.assign(ACT,{lifeGo:()=>{G.screen='map';clearInterval(UI.lifeIv);saveSoon();if(typeof Map2!=='undefined')Map2.center();},
   lifeAll:()=>{if(UI.lifeAll)return;UI.lifeAll=true;const b=document.querySelector('.lsx');if(b)b.classList.add('all');setTimeout(()=>{const g=document.querySelector('.lsx-go');if(g)g.scrollIntoView({block:'nearest',behavior:'smooth'});},50);}});
+// công pháp/tâm pháp vượt cảnh giới: chưa đủ điều kiện thì không cho vận hành
+{const _ar=ACT.artRun;ACT.artRun=u=>{const a=artBy(+u);const w=typeof artUseWhy==='function'&&artUseWhy(a);if(w){note(w,'dn');return;}_ar(u);};}
+
+ACT.bbLearn=i=>{const e=bbForceLearn(+i);if(e){UI.modal={k:'bbLearn',err:e};return;}UI.modal=bbBooks().length?{k:'bbLearn'}:null;note('Thức hải rạn nứt, thần thức suy giảm. Nhưng tâm pháp mới đã khắc vào lòng.','dn');};
+
+ACT.bbAsk2=i=>{UI.modal={k:'bbLearn2',i:+i};};
+ACT.bbBack=()=>{UI.modal=bbBooks().length?{k:'bbLearn'}:null;};
+ACT.bbLearn2=a=>{const [i,g]=String(a).split(',').map(Number);const e=bbForceLearn2(i,g);if(e==='dead'){UI.modal=null;return;}if(e){UI.modal={k:'bbLearn',err:e};return;}UI.modal=bbBooks().length?{k:'bbLearn'}:null;note('Vật bảo mệnh vỡ tan, hộ trì thức hải. Thêm một môn đã khắc vào lòng.','dn');};
+// ================= Lột xác: hiệu ứng sau xung kích / đột phá =================
+function chevIc(n){return `<span class="chev c${n}">${'<svg viewBox="0 0 20 13"><path d="M1 7L10 1L19 7V12L10 6L1 12Z"/></svg>'.repeat(n)}</span>`;}
+function ascPlaceImg(a){const P=ASSET.place||{};return P[a.place]||P.dongphu||P.dong||P.nui||Object.values(P)[0]||'';}
+function ascStory(a){const r=G.run;const x=a.ht&&HTMAP[a.ht];const L=[];
+  L.push(a.k==='bt'?`Lôi vân tan dần. ${r.ten} mở mắt, thấy trời đất như vừa được gột rửa: núi xanh hơn, gió trong hơn, từng sợi linh khí hiện rõ như tơ.`:`Một tiếng “rắc” khẽ vang trong kinh mạch. Linh lực dồn nén bao lâu nay ào qua quan ải.`);
+  if(x)L.push(x.st.replace(/\{ten\}/g,r.ten));return L;}
+function ascDiffHTML(a){return `<div class="asc-diff">${a.diff.length?a.diff.map(d=>`<div class="ad"><span>${esc(d.n)}</span>${chevIc(d.lv)}</div>`).join(''):'<p class="hint">Căn cơ vững lại, chưa thấy đổi khác rõ rệt.</p>'}</div>`;}
+function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
+  if(UI.ascId!==a._id){UI.ascId=a._id;UI.ascPh='flash';UI.ascSel=null;clearTimeout(UI.ascT);
+    const ms=CFG.anim===false?200:a.k==='bt'?3000:1600;document.documentElement.dataset.ascShake=a.k;setTimeout(()=>{delete document.documentElement.dataset.ascShake;},ms);
+    UI.ascT=setTimeout(()=>{UI.ascPh=a.k==='bt'&&r.htPick?'pick':'res';render();},ms);}
+  const ph=UI.ascPh;let h=`<div class="asc asc-${a.k} ph-${ph}"><div class="asc-bg"></div>`;
+  if(ph==='flash')return h+`<div class="asc-glow"></div>${a.k==='bt'?'<div class="asc-rays"></div>':''}</div>`;
+  if(ph==='pick'){const sel=UI.ascSel;h+=`<div class="asc-in"><small>Thiên địa cảm ứng</small><h2>Hậu thiên khí vận</h2><p>Kiếp nạn đã qua, cơ duyên hiện trước mắt. Ba luồng khí vận lơ lửng giữa không trung, chỉ có thể nắm lấy một.</p>
+    <div class="htp">${r.htPick.map((id,i)=>{const x=HTMAP[id];return `<button class="hto r${x.r}${sel===i?' sel':''}" data-act="ascSel" data-arg="${i}"><small>${HT_RANK[x.r]}</small><b>${esc(x.n)}</b><p>${htFxText(x).map(esc).join('<br>')}</p></button>`;}).join('')}</div></div>`;
+    if(sel!=null){const x=HTMAP[r.htPick[sel]];h+=`<div class="asc-cf"><div class="mbox"><h3>Nắm lấy ${esc(x.n)}?</h3><p>${htFxText(x).map(esc).join('<br>')}</p><p class="hint">Chọn rồi không đổi được.</p><div class="mb-f"><button class="btn" data-act="ascSel" data-arg="-1">Nghĩ lại</button><span class="grow"></span><button class="btn pri" data-act="ascPick">Xác nhận</button></div></div></div>`;}
+    return h+'</div>';}
+  const img=a.k==='bt'?ascPlaceImg(a):'';
+  h+=`<div class="asc-in res">${img?`<div class="asc-img"><img src="${esc(img)}" alt=""></div>`:''}<small>${a.k==='bt'?'Đột phá thành công':'Xung kích thành công'}</small><h2 class="asc-to"><span>${esc(a.to)}</span></h2>
+    <div class="asc-st">${ascStory(a).map(t=>`<p>${esc(t)}</p>`).join('')}</div>${a.ht&&HTMAP[a.ht]?`<p class="asc-ht">Hậu thiên khí vận <span class="ht-tag r${HTMAP[a.ht].r}"${tah(htTipH(HTMAP[a.ht]))}>${esc(HTMAP[a.ht].n)}</span></p>`:''}
+    ${ascDiffHTML(a)}<button class="btn pri big" data-act="ascDone">Tiếp tục</button></div>`;
+  return h+'</div>';}
+{const _mh=modalHTML;modalHTML=function(){const r=G.run;if(r&&r.asc&&G.screen==='map'&&!(r.scene&&r.scene.type==='combat')){if(!UI.modal||UI.modal.k!=='asc')UI.modal={k:'asc'};document.documentElement.dataset.asc='1';return ascHTML();}
+  delete document.documentElement.dataset.asc;if(UI.modal&&UI.modal.k==='asc')UI.modal=null;return _mh();};}
+ACT.ascSel=i=>{UI.ascSel=+i<0?null:+i;};
+ACT.ascPick=()=>{const r=G.run;if(UI.ascSel==null||!r.htPick)return;const id=htChoose(UI.ascSel);if(r.asc)r.asc.ht=id;UI.ascSel=null;UI.ascPh='res';};
+ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=null;delete document.documentElement.dataset.asc;const now=performance.now();
+  UI.realmAnim={from:a.from,to:a.to,t0:now};UI.lvGlow={t0:now,t1:now+3600,c:'up'};setTimeout(()=>hnote((a.k==='bt'?'Đột phá thành công · ':'Xung kích thành công · ')+a.to,'up'),500);setTimeout(()=>{UI.realmAnim=null;render();},3400);
+  const sc=r.scene;if(sc&&sc.type==='btres')endScene();if(G.run&&G.run.scene&&G.run.scene.type==='place')G.run.scene=null;UI.panel=null;saveSoon();};
+// thanh đầu: dòng cảnh giới chuyển từ cũ sang mới
+{const _hh=hudHTML;hudHTML=function(){let h=_hh();const A=UI.realmAnim;if(A&&G.run){const cur=esc(realmLabel());h=h.replace('>'+cur+'</span>','><span class="rl-anim'+(A.down?' dn':'')+'"><i class="o">'+esc(A.from)+'</i><i class="n">'+esc(A.to)+'</i></span></span>');}
+  if(UI.talA)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talchg');else if(UI.talNew)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talnew');return h;};}
+// thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
+{const _ptR=playerTal;playerTal=function(){let t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talFake){if(performance.now()<UI.talFake.until)t=Object.assign({},t,{tier:UI.talFake.tier});else{UI.talFake=null;UI.talS=t.tier;}}if(UI.talS==null)UI.talS=t.tier;
+  if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};{const up=t.tier>UI.talS;const nw=performance.now();if(up){document.documentElement.dataset.ascShake='xk';setTimeout(()=>{delete document.documentElement.dataset.ascShake;},950);}UI.lvGlow={t0:nw,t1:nw+3000,c:up?'up':'down'};setTimeout(()=>hnote(up?'Tiềm chất thăng lên · '+TAL_N[t.tier]:'Tiềm chất suy giảm · '+TAL_N[t.tier],up?'up':'down'),50);}setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
+  return t.tier===UI.talS?t:Object.assign({},t,{tier:UI.talS});};}
+{const _tc2=talCardHTML;talCardHTML=function(){const h=_tc2();return UI.talA?h.replace('class="tal-wrap','class="talchg tal-wrap'):UI.talNew?h.replace('class="tal-wrap','class="talnew tal-wrap'):h;};}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&G.run.asc){e.stopImmediatePropagation();}},true);
+
+// xem thử hiệu ứng (không đổi gì ở nhân vật)
+ACT.fxDemo=k=>{const r=G.run;if(!r)return;UI.panel=null;UI.modal=null;
+  if(k==='lowhp'){UI.devLow=performance.now()+8000;return;}if(k==='heal'){edgeHeal();return;}
+  if(k==='talup'){const t=playerTal();UI.talFake={tier:4,until:performance.now()+5000};if(t&&t.tier===4)UI.talS=3;UI.talA=null;return;}
+  if(k==='talup'||k==='taldn'){const t=playerTal();if(t){UI.talS=k==='talup'?t.tier-1:t.tier+1;UI.talA=null;}return;}
+  if(k==='rldn'){const r=G.run;const t=tieu();const hi=isPham()?'Luyện Khí tầng 1':lkOn()?'Luyện Khí tầng '+Math.min(13,lkTang()+1):t<3?REALM[r.realm]+' '+TIEU[t+1]:REALM[Math.min(5,r.realm+1)]+' sơ kỳ';rlDrop(hi,realmLabel());return;}
+  const lb=realmLabel();const D=ASC_K.map(([kk,n],i)=>({k:kk,n,lv:1+(i*7)%3}));
+  if(k==='bt'){r.asc={k:'bt',demo:1,from:lb,to:lb,diff:D,place:'dong'};r.htPick=htOffer(3,r.realm+1);r._htDemo=1;}else r.asc={k:'xk',demo:1,from:lb,to:lb,diff:D.map(d=>Object.assign({},d,{lv:1}))};};
+{const _ap=ACT.ascPick;ACT.ascPick=()=>{const r=G.run;if(r&&r._htDemo&&r.asc&&r.asc.demo){if(UI.ascSel==null||!r.htPick)return;r.asc.ht=r.htPick[UI.ascSel];r.htPick=null;r._htDemo=0;UI.ascSel=null;UI.ascPh='res';return;}_ap();};}
+
+// ----- thông báo nhỏ dưới thanh đầu, tự tắt sau chừng 1 giây -----
+function hnote(t,c){let box=document.getElementById('hnote');if(!box){box=document.createElement('div');box.id='hnote';document.body.appendChild(box);}
+  const hd=document.getElementById('hud');const top=(hd&&!hd.hidden&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+8;box.style.top=top+'px';
+  const d=document.createElement('div');d.className='hn '+(c||'');d.textContent=t;box.appendChild(d);while(box.children.length>4)box.firstChild.remove();setTimeout(()=>d.classList.add('out'),1100);setTimeout(()=>d.remove(),1500);}
+// ----- nhận hoặc mất vật phẩm: so túi đồ giữa hai lần vẽ -----
+function invSig(){const r=G.run;const M={};const add=(n,c)=>{if(n)M[n]=(M[n]||0)+(c||1);};
+  for(const x of r.relics||[])add(x.k==='book'&&x.art?x.art.n:x.name);for(const x of Object.values(r.eq||{}))if(x)add(x.k==='book'&&x.art?x.art.n:x.name);for(const d of r.dd||[])if(d&&d.rel)add(d.rel.name);
+  for(const p of r.pills||[])add((p.q?PQ[p.q]+' ':'')+PILL[p.id].n);for(const k in (r.mats||{}))if(r.mats[k]>0&&MAT[k])add(MAT[k].n,r.mats[k]);return M;}
+{const _rd=render;render=function(){_rd();try{const r=G.run;if(!r||G.screen!=='map'){UI.invPrev=null;return;}const now=invSig();const P=UI.invPrev;UI.invPrev=now;if(!P||UI.invRun!==r){UI.invRun=r;return;}
+  const sc=r.scene;if(sc&&sc.type==='combat')return;let n=0;
+  for(const k in now){const d=now[k]-(P[k]||0);if(d>0&&n<3){hnote('Nhận được '+k+(d>1?' ×'+d:''),'up');n++;}}
+  for(const k in P){const d=P[k]-(now[k]||0);if(d>0&&n<3){hnote('Mất '+k+(d>1?' ×'+d:''),'down');n++;}}}catch(e){}};}
+// ----- rìa màn hình tỏa sáng theo hiệu ứng nhân vật -----
+setInterval(()=>{const g=UI.lvGlow;const on=g&&performance.now()<g.t1&&G.screen==='map'&&G.run&&!G.run.asc;const v=on?g.c||'up':'';if(document.documentElement.dataset.edge!==v){if(v)document.documentElement.dataset.edge=v;else delete document.documentElement.dataset.edge;}},150);
+
+// ----- rớt cảnh giới: hiệu ứng u ám -----
+function rlDrop(from,to){const now=performance.now();UI.realmAnim={from,to,t0:now,down:1};UI.lvGlow={t0:now,t1:now+3200,c:'down'};setTimeout(()=>{UI.realmAnim=null;render();},3400);setTimeout(()=>hnote('Cảnh giới tụt xuống · '+to,'down'),300);render();}
+function rlRank(){const r=G.run;if(!r)return 0;return (isPham()?-1:r.realm)*100+(lkOn()?lkTang():tieu()*10);}
+{const _rd2=render;render=function(){_rd2();try{const r=G.run;if(!r||G.screen!=='map'){UI.rlPrev=null;return;}const k=rlRank(),lb=realmLabel();const P=UI.rlPrev;UI.rlPrev={r,k,lb};
+  if(P&&P.r===r&&k<P.k&&!r.asc)rlDrop(P.lb,lb);}catch(e){}};}
+
+const DEV=true; // bản chính thức: đặt false để ẩn Dev test
+ACT.devOpen=()=>{UI.panel=null;UI.modal={k:'dev'};};
+// ----- máu thấp: rìa màn hình nhấp nháy u ám chậm rãi; thoát mức đỏ hoặc hết trọng thương: thở phào màu xanh -----
+function hpRatio(){const r=G.run;if(!r)return 1;const sc=r.scene;if(sc&&sc.type==='combat'&&sc.units){const me=sc.units.find(u=>u.isMain);if(me)return me.hp/Math.max(1,me.max);}return r.hp/Math.max(1,S().maxHp);}
+function edgeHeal(){UI.healT=performance.now()+2600;}
+setInterval(()=>{if(!G.run||G.screen!=='map'){UI.lowPrev=null;UI.injPrev=null;return;}const now=performance.now();
+  const low=hpRatio()<=0.2||(UI.devLow&&now<UI.devLow);const inj=injured();
+  if(UI.lowPrev&&!low)edgeHeal();if(UI.injPrev&&!inj)edgeHeal();UI.lowPrev=low;UI.injPrev=inj;
+  const el=document.getElementById('lowfx')||(()=>{const d=document.createElement('div');d.id='lowfx';document.body.appendChild(d);return d;})();
+  const st=G.run.asc?'':UI.healT&&now<UI.healT?'heal':low?'low':'';if(el.dataset.s!==st){el.dataset.s=st;el.className=st;}},250);
+// số khung hình: nhãn nhỏ góc phải, dạng "30FPS"
+{let fc=0,ft=performance.now();const tick=t=>{fc++;if(t-ft>=1000){const el=document.getElementById('fpsb')||(()=>{const d=document.createElement('div');d.id='fpsb';document.body.appendChild(d);return d;})();
+  el.hidden=!CFG.showFps;if(CFG.showFps){el.textContent=Math.round(fc*1000/(t-ft))+'FPS';const hd=document.getElementById('hud');el.style.top=((hd&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+6)+'px';}fc=0;ft=t;}requestAnimationFrame(tick);};requestAnimationFrame(tick);}
+
+ACT.favGift=n=>{UI.bondOpen=n;const w=favGift(n);if(w)note(w,'dn');else note('Đã tặng lễ cho '+(n.replace(/^@\d+:/,'')),'up');};
+ACT.relMake=a=>{const i=a.lastIndexOf('|');const n=a.slice(0,i),k=a.slice(i+1);UI.bondOpen=n;const w=relMake(n,k,npcInfo(n));if(w)note(w,'dn');else hnote('Kết '+REL_T[k].n.toLowerCase()+' · '+n.replace(/^@\d+:/,''),'up');};
+ACT.relBreak=n=>{UI.bondOpen=n;relBreak(n);};
+
+// ================= HỆ THỐNG CẢNH GIỚI (tab trong bảng bế quan) =================
+// Thông tin chỉ mở khi người chơi đã nghe ngóng được (trà lâu, tửu phường, Tàng Kinh Các) hoặc đã tự trải qua.
+const CG_R=[
+ {i:-1,n:'Phàm nhân',d:'Thân xác phàm tục, chưa dẫn được linh khí vào người. Sống chết theo lẽ thường.',brk:'Tìm được tâm pháp dẫn khí, ngồi yên dẫn sợi linh khí đầu tiên vào thân.'},
+ {i:0,n:'Luyện Khí',d:'Dẫn linh khí vào kinh mạch, rèn thân thành bình chứa. Mười ba tầng, phần lớn người tu cả đời không qua tầng chín.',brk:'Tu vi đầy từ tầng chín trở lên, lịch luyện theo kịp, ngồi ở nơi có động phủ.'},
+ {i:1,n:'Trúc Cơ',d:'Đắp nền cho đại đạo. Nền vững thì đường sau rộng, nền lệch thì cả đời vá víu.',brk:'Tới đỉnh phong, lịch luyện đủ, ở động phủ, vượt qua tâm ma kiếp.'},
+ {i:2,n:'Kết Đan',d:'Ngưng chân nguyên thành kim đan trong đan điền. Từ đây mới thật sự bước vào hàng tu sĩ.',brk:'Tới đỉnh phong, lịch luyện đủ, vượt sáu đạo lôi kiếp rồi tâm ma kiếp.'},
+ {i:3,n:'Nguyên Anh',d:'Phá đan thành anh, nguyên thần có hình có dạng. Thân xác hỏng còn có thể tái tạo.',brk:'Tới đỉnh phong, lịch luyện đủ, vượt chín đạo lôi kiếp.'},
+ {i:4,n:'Hóa Thần',d:'Nguyên anh hóa thần, cảm ứng thiên địa. Đã đứng ở đỉnh nhân gian.',brk:'Viên mãn Hóa Thần, tìm tới nơi trời đất mỏng nhất để độ kiếp phi thăng.'},
+ {i:5,n:'Độ Kiếp',d:'Lời đồn kể rằng qua được cửa này là rời khỏi nhân gian. Chưa ai quay về kể lại.',brk:''}];
+const LK_LEG={10:'Tầng mười: các bậc tiền bối kể rằng chuyện đã xảy ra từ rất lâu về trước, từng có người tu tới tầng này.',11:'Tầng mười một: chỉ còn trong truyền thuyết. Nghe nói thuở xa xưa có người đạt được, nhưng không ai còn nhớ là ai.',12:'Tầng mười hai: chưa từng nghe ai nói có người đạt tới. Chỉ là một cái tên ghi trong sách cổ.'};
+function cgK(){const m=G.meta;return m.cgK||(m.cgK=[]);}
+function cgKnow(k){return cgK().includes(k);}
+function cgReached(i){const r=G.run;const cur=isPham()?-1:r.realm;return i<=cur;}
+// mục nào được biết: đã trải qua thì tự biết; còn lại phải nghe ngóng
+function cgOk(k,i){if(i!=null&&cgReached(i))return true;return cgKnow(k);}
+const CG_KEYS=()=>{const L=[];for(const R of CG_R){if(R.i>=0)L.push('R'+R.i+'b');if(R.i>=1&&R.i<=4)L.push('Q'+R.i);}L.push('lk10','lk11','lk12');return L;};
+function cgLearn(why){const r=G.run;if(!r)return false;const cur=isPham()?-1:r.realm;const L=CG_KEYS().filter(k=>!cgKnow(k)&&!(/^R(-?\d)b$/.test(k)&&cgReached(+k.slice(1,-1)))&&!(/^Q(\d)$/.test(k)&&cgReached(+k.slice(1))));
+  if(!L.length)return false;const near=L.filter(k=>{const m=/(-?\d+)/.exec(k);return k.startsWith('lk')||!m||+m[1]<=cur+2;});const k=pick(near.length?near:L);cgK().push(k);
+  const T=k.startsWith('lk')?'truyền thuyết Luyện Khí '+k.slice(2).replace('10','tầng mười').replace('11','tầng mười một').replace('12','tầng mười hai'):k[0]==='R'?'cách đột phá '+(CG_R.find(x=>x.i===+k.slice(1,-1))||{}).n:'các phẩm '+REALM[+k.slice(1)];
+  if(typeof note==='function')note('Nghe ngóng được: '+T+'. Xem trong mục Cảnh giới.','up');return true;}
+{const _th=teaHouse;teaHouse=function(n){const res=_th.apply(this,arguments);if(chance(0.3))cgLearn('tea');return res;};}
+{const _pa=placeAct;placeAct=function(a){const res=_pa.apply(this,arguments);if(a==='lib'&&chance(0.6))cgLearn('lib');return res;};}
+const Q_DESC={1:[['Nhân đạo','Đột phá ở tầng chín.'],['Hoàn mỹ','Đột phá từ tầng mười, đạo cơ từ ba.'],['Địa đạo','Từ tầng mười, đạo cơ từ sáu, không dùng Trúc Cơ Đan, tâm pháp Địa phẩm đã học trọn.'],['Thiên đạo','Tầng mười ba, đạo cơ từ mười, tâm pháp Thiên phẩm học trọn, luyện thể tầng mười. Sẽ gặp ba đạo lôi kiếp.']]};
+function qDescs(i){return Q_DESC[i]||[['Nhân đạo','Đạo cơ từ ba lúc đột phá.'],['Địa đạo','Đạo cơ từ sáu lúc đột phá.'],['Thiên đạo','Đạo cơ từ mười lúc đột phá.']];}
+function cgListHTML(){const r=G.run;const cur=isPham()?-1:r.realm;
+  return `<div class="cg-list">${CG_R.slice().reverse().map(R=>{const st=R.i<cur?'done':R.i===cur?'cur':'fut';const q=R.i>=1&&R.i<=cur?(r.quality||[])[R.i]:null;
+    return `<button class="cg-it ${st}" data-act="cgSel" data-arg="${R.i}"><b>${R.n}</b>${st==='done'?`<span class="cg-st">Đã đột phá${q?' · '+QNAME[q]:''}</span>`:st==='cur'?'<span class="cg-st now">Hiện tại</span>':''}</button>`;}).join('')}</div>`;}
+function cgDetailHTML(i){const r=G.run;const R=CG_R.find(x=>x.i===i);if(!R)return '';const cur=isPham()?-1:r.realm;const here=i===cur;
+  let h=`<div class="cg-det"><button class="btn sm" data-act="cgSel" data-arg="">‹ Các cảnh giới</button><h3>${R.n}${here?' <small class="cg-st now">Hiện tại</small>':''}</h3><p class="cg-d">${esc(R.d)}</p>`;
+  if(i>=0)h+=`<div class="kv"><div><span>Thọ nguyên</span><b>${i<=cur+1?'chừng '+LIFE[i]+' năm':'?'}</b></div></div>`;
+  // tiểu cảnh giới
+  if(i===0){const past=i<cur,lt=here?lkTang():past?99:0;let rows='';for(let g=1;g<=9;g++)rows+=`<div class="cg-t${here&&lt===g?' on':''}${lt>g?' ok':''}">Tầng ${g}<small>${g<=3?'sơ kỳ':g<=6?'trung kỳ':'hậu kỳ'}</small></div>`;
+    for(const g of [10,11,12])rows+=`<div class="cg-t leg${here&&lkTang()===g?' on':''}${here&&lkTang()>g?' ok':''}">${cgOk('lk'+g)||(here&&lkTang()>=g)?esc(LK_LEG[g]):'<span class="fog">? ? ? ? ? ?</span>'}</div>`;
+    rows+=`<div class="cg-t fog13">${here&&lkTang()>=13?'Bán bộ Trúc Cơ':'<span class="fog">? ? ? ? ? ? ? ? ? ?</span>'}</div>`;h+=`<h4 class="sgrp">Các tầng</h4><div class="cg-ts">${rows}</div>`;}
+  else if(i>0&&i<5){const t=here?tieu():i<cur?4:-1;h+=`<h4 class="sgrp">Tiểu cảnh giới</h4><div class="cg-ts">${['Sơ kỳ','Trung kỳ','Hậu kỳ','Đỉnh phong'].map((n,k)=>`<div class="cg-t${t===k?' on':''}${t>k?' ok':''}">${n}</div>`).join('')}<div class="cg-t${here&&dvm()?' on':''}">Đại viên mãn<small>đỉnh phong, không trọng thương, tâm ma thấp, đạo tâm cao</small></div></div>`;}
+  // phẩm
+  if(i>=1&&i<=4){const got=i<=cur?(r.quality||[])[i]:null;h+=`<h4 class="sgrp">Phẩm khi đột phá</h4><div class="cg-q">${qDescs(i).map(([n,d])=>{const qi=QNAME.indexOf(n);return `<div class="cg-qi${got===qi?' got':''}"><b>${n}${got===qi?' ✓':''}</b><small>${cgOk('Q'+i,i)?esc(d):'? ? ?'}</small></div>`;}).join('')}</div>`;}
+  // cách đột phá lên cảnh giới sau
+  const nx=CG_R.find(x=>x.i===i+1);if(nx&&R.brk)h+=`<h4 class="sgrp">Đột phá lên ${nx.n}</h4><p class="cg-d">${cgOk('R'+i+'b',i+1)||here&&cgKnow('R'+i+'b')?esc(R.brk):'Chưa rõ. Có lẽ phải nghe ngóng ở trà lâu, tửu phường, hoặc tìm đọc trong Tàng Kinh Các.'}</p>`;
+  if(here){const X=typeof lkXkState==='function'&&lkXkState();const brk=canBreak();
+    h+=`<div class="cg-act">${X?`<button class="btn${X.ok?' pri':''}" data-act="xkGo"${X.ok?'':' disabled'}${ta(X.ok?'':X.why||'')}>${ic('spark')} Xung kích ${esc(X.nx)}</button>`:''}${brk?`<button class="btn pri" data-act="hudBt">${ic('spark')} Đột phá</button>`:''}</div>`;}
+  return h+'</div>';}
+function cgTabHTML(){const s=UI.cgSel;return s===''||s==null?cgListHTML():cgDetailHTML(+s);}
+// bảng lớn: hai tab Bế quan / Cảnh giới
+{const _mh2=modalHTML;modalHTML=function(){const m=UI.modal;if(!m||m.k!=='bq'||!G.run)return _mh2();
+  const tabs=`<div class="tabs bq-tabs"><button class="${m.tab!=='cg'?'on':''}" data-act="bqTab" data-arg="bq">Bế quan</button><button class="${m.tab==='cg'?'on':''}" data-act="bqTab" data-arg="cg">Cảnh giới</button></div>`;
+  if(m.tab==='cg')return `<div class="mbox bq cgbox">${tabs}${cgTabHTML()}<div class="mb-f"><span class="grow"></span><button class="btn" data-act="modalX">Đóng</button></div></div>`;
+  let h=_mh2();h=h.replace('<div class="mbox bq">','<div class="mbox bq">'+tabs).replace(/data-act="hudBt"/g,'data-act="cgGo"').replace(/data-act="xkGo"/g,'data-act="cgGo"');return h;};}
+ACT.bqTab=t=>{const m=UI.modal;if(!m)return;if(t==='bq'&&m.tab==='cg'){const r=G.run;if(!r.scene||r.scene.type!=='place'){const w=bqCan();if(w){note(w,'dn');return;}openBq();if(UI.modal)UI.modal.tab='bq';return;}}m.tab=t;if(t==='cg'&&UI.cgSel==null)UI.cgSel='';};
+ACT.cgGo=()=>{const r=G.run;UI.modal=Object.assign(UI.modal||{k:'bq'},{tab:'cg'});UI.cgSel=String(isPham()?-1:r.realm);};
+ACT.cgSel=a=>{UI.cgSel=a;};
+ACT.cgOpen=()=>{UI.panel=null;const r=G.run;UI.modal={k:'bq',tab:'cg'};UI.cgSel=String(isPham()?-1:r.realm);};
