@@ -1328,3 +1328,4 @@ details.bond .cc-ch{font-style:normal;color:var(--ink3);margin-left:6px;transiti
 details.bond .bond-d{padding:4px 12px 10px 54px;font-size:.88em}details.bond.dim{opacity:.6}
 .slots{flex-wrap:wrap;gap:6px}.slots .slot{width:64px;height:64px;font-size:.92em}
 .u-s.nosee{color:var(--ink3);font-style:italic}.bb-cost{margin:.3em 0 .6em 1.2em;color:var(--seal);font-size:.9em}
+.mbox .mb-f{flex-wrap:wrap;gap:8px}.mbox .mb-f .btn{max-width:100%;white-space:normal}

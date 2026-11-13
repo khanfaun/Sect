@@ -2596,3 +2596,28 @@ function canSee(u){if(!u||u.side!=='B')return true;return S().than>=seeNeed(u);}
 {const _bfk=btFinish;btFinish=function(){const r=G.run;const k=!!(r&&r.bt&&r.bt.stages&&r.bt.stages.length);const rl=r&&r.realm;const res=_bfk.apply(this,arguments);const r2=G.run;
   if(k&&r2&&r2.realm>rl){r2.wounds=(r2.wounds||[]).filter(x=>x.perm);r2.inj=null;r2.ht=[];const s=S();r2.hp=s.maxHp;r2.mp=s.maxMp;const sc=r2.scene;if(sc&&Array.isArray(sc.chips))sc.chips.push(chip('✨','thân thể như mới','Độ kiếp thành công: hồi đầy, mọi thương tích và trạng thái bất lợi đều tan','up'));}
   return res;};}
+// ===== Thần thức trong trận (bản mới): vượt cấp thì hầu như không thấy, trừ khi thần thức thật cao =====
+// mức cần = thần thức của người bình thường ở cấp đối phương: 12 + 15 × cấp
+unitLv=function(u){const r=G.run;if(u.kind==='kiep')return (r.bt&&r.bt.to)||r.realm+1;if(r.bt&&u.k==='tamma')return r.bt.to||r.realm+1;return (r.region||0)+(u.boss?0.6:u.elite?0.3:0);};
+seeNeed=function(u){return Math.round(12+15*unitLv(u));};
+// lý lịch (tên, chức vụ…) của người lạ: chỉ biết khi quen biết hoặc đã có tin tức
+function knownNames(){const r=G.run,w=W();const K=new Set(r.known||[]);for(const x of r.rivals||[]){const wr=w.rivals[x.i];if(wr)K.add(wr.ten);}for(const s of r.seeds||[])K.add(s.ten);for(const p of r.party||[])K.add(p.ten);if(w.nemesis)K.add(w.nemesis.n);return K;}
+function isHumanFoe(u){return u&&u.side==='B'&&u.kind!=='kiep'&&u.k!=='tamma'&&(u.f==='nhan'||u.kind==='nhan');}
+function knowUnit(u){if(!isHumanFoe(u))return true;const n=u.realName||u.name;return knownNames().has(n);}
+function addKnown(n){const r=G.run;if(!r||!n)return;r.known=r.known||[];if(!r.known.includes(n)){r.known.push(n);if(r.known.length>200)r.known.shift();}}
+// trận đánh: người lạ hiện là "???"; đánh xong thì biết mặt biết tên
+{const _scK=startCombat;startCombat=function(spec,after){const res=_scK(spec,after);const sc=G.run&&G.run.scene;if(sc&&sc.type==='combat')for(const u of sc.units)if(isHumanFoe(u)&&!knowUnit(u)){if(sc.en&&sc.en.n===u.name){sc.en.realN=sc.en.n;sc.en.n='???';}u.realName=u.name;u.realSub=u.sub;u.name='???';u.sub='???';}return res;};}
+{const _fcK=finishCombat;finishCombat=function(sc){if(sc&&sc.en&&sc.en.realN){sc.en.n=sc.en.realN;delete sc.en.realN;}if(sc&&sc.units)for(const u of sc.units)if(u.realName){addKnown(u.realName);u.name=u.realName;u.sub=u.realSub;}return _fcK(sc);};}
+{const _me=meetEnt;meetEnt=function(e){if(e&&e.name)addKnown(e.name);return _me(e);};}
+
+// ===== Học gấp cuốn thứ hai trước giờ độ kiếp: cần vật bảo mệnh và thần thức đủ, không thì thần thức tan vỡ mà chết =====
+function bbGuards(){const r=G.run;return r.pills.map((p,i)=>({p,i})).filter(o=>PILL[o.p.id]&&PILL[o.p.id].bt&&PILL[o.p.id].bt.guard);}
+function bb2Need(){const r=G.run;return Math.round((12+15*((r.bt&&r.bt.to)||r.realm+1))*0.5);}
+function bbCount(){const r=G.run;return (r.bt&&r.bt.bbN)||0;}
+{const _bfl=bbForceLearn;bbForceLearn=function(i){const r=G.run;const e=_bfl(i);if(e===''&&r.bt)r.bt.bbN=(r.bt.bbN||0)+1;return e;};}
+// gi: chỉ số vật bảo mệnh trong túi đan (-1 = không dùng)
+function bbForceLearn2(i,gi){const r=G.run;const rel=r.relics[i];if(!rel||!bbTemp())return null;
+  const g=gi>=0?r.pills[gi]:null;const ok=g&&PILL[g.id].bt&&PILL[g.id].bt.guard&&S().than>=bb2Need();
+  if(g&&PILL[g.id].bt&&PILL[g.id].bt.guard)r.pills.splice(gi,1);
+  if(!ok){r.bt=null;die('thanvo',{n:'Thần thức tan vỡ'});return 'dead';}
+  const e=bbForceLearn(i);if(e)return e;r.tamma=Math.min(100,(r.tamma||0)+10);log(`Lấy ${PILL[g.id].n} hộ thần thức, cưỡng ép lĩnh ngộ thêm ${rel.art?rel.art.n:'một môn'}.`);return '';}

@@ -408,3 +408,7 @@ Object.assign(ACT,{lifeGo:()=>{G.screen='map';clearInterval(UI.lifeIv);saveSoon(
 {const _ar=ACT.artRun;ACT.artRun=u=>{const a=artBy(+u);const w=typeof artUseWhy==='function'&&artUseWhy(a);if(w){note(w,'dn');return;}_ar(u);};}
 
 ACT.bbLearn=i=>{const e=bbForceLearn(+i);if(e){UI.modal={k:'bbLearn',err:e};return;}UI.modal=bbBooks().length?{k:'bbLearn'}:null;note('Thức hải rạn nứt, thần thức suy giảm. Nhưng tâm pháp mới đã khắc vào lòng.','dn');};
+
+ACT.bbAsk2=i=>{UI.modal={k:'bbLearn2',i:+i};};
+ACT.bbBack=()=>{UI.modal=bbBooks().length?{k:'bbLearn'}:null;};
+ACT.bbLearn2=a=>{const [i,g]=String(a).split(',').map(Number);const e=bbForceLearn2(i,g);if(e==='dead'){UI.modal=null;return;}if(e){UI.modal={k:'bbLearn',err:e};return;}UI.modal=bbBooks().length?{k:'bbLearn'}:null;note('Vật bảo mệnh vỡ tan, hộ trì thức hải. Thêm một môn đã khắc vào lòng.','dn');};
