@@ -2511,3 +2511,16 @@ function tcOn(){const r=G.run;return !!(r&&r.realm===0&&!isPham()&&lkOn());}
 {const _ps=prepStart;prepStart=function(){const r=G.run,sc=r&&r.scene;if(sc&&sc.type==='prep')r._tcDan=sc.slots.some(i=>r.pills[i]&&r.pills[i].id==='trucco');return _ps.apply(this,arguments);};}
 {const _bfq=btFinish;btFinish=function(){const r=G.run;if(r&&r.bt&&r.bt.to===1&&tcOn()){const Q=tcQual(r._tcDan).q;const _q=qOf;qOf=()=>Q;try{return _bfq.apply(this,arguments);}finally{qOf=_q;if(G.run)G.run._tcDan=0;}}return _bfq.apply(this,arguments);};}
 {const _pv=prepView;prepView=function(){const v=_pv();if(tcOn()){const sc=G.run.scene;const dan=sc.slots.some(i=>G.run.pills[i]&&G.run.pills[i].id==='trucco');const T0=tcQual(dan);v.q=T0.q;v.tcWhy=T0.why;v.next=null;}return v;};}
+// Trúc Cơ: đạo cơ là thêm một điều kiện cho từng phẩm (Hoàn mỹ ≥3, Địa đạo ≥6, Thiên đạo ≥10) và cộng tỉ lệ thành công
+const TC_DAO={4:3,2:6,3:10};const TC_DAO_RATE=0.015,TC_DAO_RMAX=0.15;
+tcQual=function(dan,dao){const r=G.run;dao=dao==null?(r.dao||0):dao;const g=lkDone();if(g<10)return {q:1,g,why:['đột phá ở tầng '+Math.max(g,9)+', cần từ tầng 10']};
+  const a=tuArt();const full=!!(a&&a.lv>=a.lines.length);
+  if(dao<TC_DAO[4])return {q:1,g,why:['đạo cơ '+dao+', cần '+TC_DAO[4]+' cho Hoàn mỹ']};
+  const why=[];if(dan)why.push('đã dùng Trúc Cơ Đan');if(!a||a.tier<3)why.push('công pháp chưa tới Địa phẩm');if(a&&!full)why.push('công pháp chưa học hết các tầng');if(dao<TC_DAO[2])why.push('đạo cơ '+dao+', cần '+TC_DAO[2]);
+  if(why.length)return {q:4,g,why};
+  const w2=[];if(g<13)w2.push('chưa tu trọn tầng 13');if(a.tier<4)w2.push('công pháp chưa tới Thiên phẩm');if(ltTang()<LT_REQ)w2.push('luyện thể chưa tới tầng '+LT_REQ);if(dao<TC_DAO[3])w2.push('đạo cơ '+dao+', cần '+TC_DAO[3]);
+  return w2.length?{q:2,g,why:w2}:{q:3,g,why:[]};};
+btFinish=(function(prev){return function(){return prev.apply(this,arguments);};})(btFinish);
+{const _bfq2=btFinish;btFinish=function(){const r=G.run;if(r&&r.bt&&r.bt.to===1&&tcOn()){const dan=r._tcDan;const _q=qOf;qOf=p=>tcQual(dan,p).q;try{return _bfq2.apply(this,arguments);}finally{qOf=_q;}}return _bfq2.apply(this,arguments);};}
+{const _pv2=prepView;prepView=function(){const v=_pv2();if(tcOn()){const sc=G.run.scene;const dan=sc.slots.some(i=>G.run.pills[i]&&G.run.pills[i].id==='trucco');const T0=tcQual(dan,v.dao);v.q=T0.q;v.tcWhy=T0.why;}return v;};}
+{const _br=btRate;btRate=function(slots){const p=_br(slots);if(!tcOn())return p;const e=btEff(slots||[]);const d=(G.run.dao||0)+e.dao;return clamp(p+Math.min(TC_DAO_RMAX,d*TC_DAO_RATE),0.05,0.97);};}
