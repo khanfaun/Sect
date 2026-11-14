@@ -1,8 +1,9 @@
 // Cảnh đang ở trong một địa điểm: lời kể, nhiệm vụ, chuyện lớn, chuyện trước mắt, việc thường nhật theo nhóm.
 import { Html, PS } from '../html';
 import { Tranh } from '../html';
-import { Chips, Ib, Ic, tip } from '../chung';
+import { Chips, Cost, Ib, Ic, tip } from '../chung';
 import { Card } from './Khung';
+import { NoiChonViec } from './NoiChonViec';
 
 // Một nút việc làm ở địa điểm
 function NutViec({ a, n, num }) {
@@ -106,7 +107,7 @@ export function DiaDiem({ sc }) {
         <span className="grow"></span><button className="btn" data-act="leave">Rời đi</button>
       </>}>
       {M && <div className="pl-kv"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div></div>}
-      {sc.venue && VENUE_N[sc.venue] && <Html style={{ display: 'contents' }} h={PS.venueHTML(n, sc.venue)} />}
+      {sc.venue && VENUE_N[sc.venue] && <NoiChonViec n={n} v={sc.venue} />}
       <LoiKe sc={sc} />
       {qs.length > 0 && <>
         <h3 className="grp big"><Ib n="scroll" c="gold" />Nhiệm vụ</h3>
@@ -114,7 +115,7 @@ export function DiaDiem({ sc }) {
           {qs.map(q => (
             <button key={q.id} className="ch qrow qdo" data-act="qDo" data-arg={q.id} style={{ '--pc': PS.qpc(PS.questGrade(q)).replace(/^--pc:/, '') }}>
               <span className="ct">{q.kind === 'den' ? 'Giao tận tay' : 'Lùng tìm mục tiêu'} · {q.text}</span>
-              <span className="qmeta"><span className="qgr">{PS.QGRADE[PS.questGrade(q)]}</span><Html style={{ display: 'contents' }} h={PS.costHTML(q.kind === 'den' ? 1 : 2, 0)} /></span>
+              <span className="qmeta"><span className="qgr">{PS.QGRADE[PS.questGrade(q)]}</span><Cost h={q.kind === 'den' ? 1 : 2} st={0} /></span>
             </button>
           ))}
         </div>

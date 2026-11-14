@@ -3,6 +3,8 @@ import { SuKien, GioiThieuVung } from './SuKien';
 import { ChamTran, SaoHuyet } from './ChamTran';
 import { ChienLoiPham, PhuongThi, LinhNgo } from './ChienLoiPham';
 import { DiaDiem } from './DiaDiem';
+import { DocDuong, KyNgo } from './KyNgo';
+import { ChuanBiDotPha } from './ChuanBiDotPha';
 import { QuanAi, KetQuaDotPha, BangTreoThuong, ChonDo } from './ViecKhac';
 
 export const CANH = {
@@ -18,4 +20,7 @@ export const CANH = {
   btres: KetQuaDotPha,
   board: BangTreoThuong,
   bury: ChonDo,
+  qev: DocDuong,
+  kyngo: KyNgo,
+  prep: ChuanBiDotPha,
 };

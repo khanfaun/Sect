@@ -40,3 +40,11 @@ export function Chips({ list }) {
     </div>
   );
 }
+
+// Thời gian + linh thạch phải tốn (giống costHTML())
+export function Cost({ h, st }) {
+  return <>
+    {!!h && <span className="cost-t"><Ic n="hour" />{PS.durH(h)}</span>}
+    {!!st && <span className="cost-s"><i className="rh"></i>{st}</span>}
+  </>;
+}
