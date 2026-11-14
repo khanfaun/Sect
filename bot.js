@@ -1,6 +1,7 @@
 // Người chơi máy cho Phù Sinh 2.
 // Nạp khối lõi + dữ liệu từ src/game/ (không nạp giao diện), tự chơi bằng cách gọi thẳng hàm lõi.
-// Chạy: node bot.js [số_kiếp] [--same-world] [--quiet] [--boost]
+// Chạy: node bot.js [số_kiếp] [--same-world] [--quiet] [--boost] [--smart]
+// --smart: chiến lược có ưu tiên (sống sót > đột phá > tu luyện > tích luỹ > tiến vùng > tranh cơ duyên > khám phá), xem tools/bot-smart.js.
 // --boost: cấp thêm linh thạch và hồi máu để bot sống lâu, đi sâu hơn (thử các tính năng ở cảnh giới và vùng cao).
 // Cuối bản in có "Độ phủ tính năng": các tính năng bot đã/chưa từng chạy tới.
 const fs=require('fs'),vm=require('vm'),path=require('path');
@@ -138,6 +139,7 @@ function scanTexts(){
 }
 const SAME=process.argv.includes('--same-world');const DBG=process.argv.includes('--debug');const BOOST=process.argv.includes('--boost');let lastSnap='';
 run(fs.readFileSync(path.join(__dirname,'tools','bot-ext.js'),'utf8'));
+if(process.argv.includes('--smart'))run(fs.readFileSync(path.join(__dirname,'tools','bot-smart.js'),'utf8'));
 run('G={meta:newMeta(),run:null,birth:null,over:null,screen:"title"};');
 let life=0,stepsLife=0;
 const t0=Date.now();
