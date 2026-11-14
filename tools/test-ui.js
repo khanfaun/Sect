@@ -62,6 +62,15 @@ const TESTS = {
     ok(t < 1500, 'vẽ 5 khung khi đã có mảnh chi tiết: ' + Math.round(t) + 'ms');
     await shot(p, 'bando-zoom');
   },
+  // ô lật gương (vùng 4, 5): mảnh chi tiết phải được vẽ
+  async bandoMx(p) {
+    const errs = []; p.on('pageerror', e => errs.push(e.message));
+    await ev(p, () => { Map2.focus(3500, 500); Map2.zoom(10); });
+    for (let i = 0; i < 25; i++) { await p.waitForTimeout(150); if (await ev(p, () => Map2.dtc > 0)) break; }
+    ok(await ev(p, () => Map2.dtc > 0), 'ô lật gương có mảnh chi tiết');
+    ok(errs.length === 0, 'không báo lỗi');
+    await shot(p, 'bando-mx');
+  },
   // cấu hình: nút nhật ký gỡ lỗi
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');

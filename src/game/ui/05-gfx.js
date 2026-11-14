@@ -178,12 +178,13 @@ const Map2=(()=>{
     for(const k of VR){let t=TC[k];if(!t||t.key!==base){const ks=Object.keys(TC).filter(q=>!VR.includes(+q));if(Object.keys(TC).length>=4&&ks.length){ks.sort((a,b)=>cdist(+b)-cdist(+a));delete TC[ks[0]];}t=TC[k]={key:base,c:buildTerr(k)};}
       if(CFG.terrain)blit(t.c,k);}
     // phóng to sâu: vẽ lại mảnh đang nhìn ở độ nét cao (vẽ khi camera đứng yên một chút, xong thì dán đè lên)
-    if(CFG.terrain&&z>=DT_Z){for(const k of VR){const C0=CELL[k];if(C0.mx)continue;
-      const S2=Math.round(1500*z*dpr/64)*64,L0=SX((C0.ox-250)*XS),T0=SY(C0.oy-250),Q=256,M=128;
-      const ox=Math.floor((-L0*dpr-M)/Q)*Q,oy=Math.floor((-T0*dpr-M)/Q)*Q,w=Math.ceil((W0*dpr+2*M)/Q)*Q+Q,h=Math.ceil((H0*dpr+2*M)/Q)*Q+Q;
+    if(CFG.terrain&&z>=DT_Z){for(const k of VR){const C0=CELL[k],mx=!!C0.mx;
+      const S2=Math.round(1500*z*dpr/64)*64,L0=mx?SX((C0.ox+1250)*XS):SX((C0.ox-250)*XS),T0=SY(C0.oy-250),Q=256,M=128;
+      const dr=D=>{if(mx){ctx.save();ctx.translate(L0,T0);ctx.scale(-1,1);ctx.drawImage(D.c,D.ox/dpr,D.oy/dpr,D.w/dpr,D.h/dpr);ctx.restore();}else ctx.drawImage(D.c,L0+D.ox/dpr,T0+D.oy/dpr,D.w/dpr,D.h/dpr);};
+      const ox=Math.floor(((mx?L0-W0:-L0)*dpr-M)/Q)*Q,oy=Math.floor((-T0*dpr-M)/Q)*Q,w=Math.ceil((W0*dpr+2*M)/Q)*Q+Q,h=Math.ceil((H0*dpr+2*M)/Q)*Q+Q;
       const dk=base+':'+k+':'+S2+':'+ox+':'+oy;const D=DTC[k];
-      if(D&&D.key===dk){ctx.drawImage(D.c,L0+D.ox/dpr,T0+D.oy/dpr,D.w/dpr,D.h/dpr);}
-      else{if(D&&D.S===S2&&D.base===base)ctx.drawImage(D.c,L0+D.ox/dpr,T0+D.oy/dpr,D.w/dpr,D.h/dpr);
+      if(D&&D.key===dk){dr(D);}
+      else{if(D&&D.S===S2&&D.base===base)dr(D);
         if(dtWant!==dk){dtWant=dk;clearTimeout(dtTimer);dtTimer=setTimeout(()=>{if(dtWant!==dk)return;try{DTC[k]={key:dk,base,S:S2,ox,oy,w,h,c:buildTerr(k,{S:S2,ox,oy,w,h})};}catch(e){}invalidate();},220);}}}}
     // sương: một lớp phủ kín màn hình, khoét lỗ mềm ở những chỗ đã thấy; hình đất chưa tới vẫn hiện mờ bên dưới
     {const fw=Math.max(2,Math.round(W0/2)),fh=Math.max(2,Math.round(H0/2));if(!fogS){fogS=document.createElement('canvas');}
