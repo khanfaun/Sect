@@ -170,6 +170,7 @@ const ACT={
   cancelSk:()=>{UI.pendSk=null;},
   menu:m=>{UI.menu=m||null;},
   atkslot:id=>toggleAtkSlot(id),
+  skLock:id=>skLockToggle(id),
   prep:i=>prepToggle(i),
   prepGo:()=>prepStart(),
   btGo:()=>btContinue(),

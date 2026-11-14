@@ -95,11 +95,20 @@ function atkSlots(){const r=G.run;const at=r.skills.filter(k=>SK[k.id].fx.p).map
 function defSkills(){return G.run.skills.filter(k=>!SK[k.id].fx.p).map(k=>k.id);}
 function toggleAtkSlot(id){const r=G.run;let L=atkSlots();if(L.includes(id))L=L.filter(x=>x!==id);else{if(L.length>=3)L.shift();L.push(id);}r.atkSlots=L;}
 function needTarget(sc,id){const p=pSkill(id);if(!p)return false;const f=p.sk.fx;return !!(f.p&&!f.aoe&&alive(sc,'B').length>1);}
+// Khoá chiêu: chiêu bị khoá thì chế độ tự đánh không dùng. Chiêu dùng một lần (sk.once) mặc định khoá.
+function skLocked(id){const r=G.run;const v=r&&r.skLock&&r.skLock[id];if(v!=null)return !!v;return !!(SK[id]&&SK[id].once);}
+function skLockToggle(id){const r=G.run;if(!r||!SK[id])return;r.skLock=r.skLock||{};r.skLock[id]=skLocked(id)?0:1;}
+// chiêu dùng một lần: dùng xong là mất hẳn khỏi người, như đan dược
+function consumeOnceSkill(sc,id){const r=G.run;if(!r||!SK[id]||!SK[id].once)return;
+  r.skills=(r.skills||[]).filter(k=>k.id!==id);if(r.atkSlots)r.atkSlots=r.atkSlots.filter(x=>x!==id);
+  if(r.kn)for(const k of ['atk','move','def','ult'])if(Array.isArray(r.kn[k]))r.kn[k]=r.kn[k].filter(x=>x!==id);
+  if(r.skLock)delete r.skLock[id];clog(sc,`${SK[id].n} chỉ dùng được một lần, giờ đã tan biến khỏi người ngươi.`,'me');}
 function playerAct(id,tid){
   const sc=G.run.scene;const u=readyPlayer(sc);if(!u)return false;
   const p=pSkill(id);if(!p)return false;const sk=p.sk;const cost=skillCost(sk);if(u.mp<cost)return false;
   if(sc.kiep&&p.sk.fx.p){tid=sc.units.find(x=>x.kind==='kiep').id;}
   const foes=alive(sc,'B');if(tid==null||!U_(sc,+tid)||U_(sc,+tid).hp<=0)tid=foes.length?foes[0].id:null;
+  if(sk.once)consumeOnceSkill(sc,id);
   runAct(sc,()=>beginSkill(sc,u,sk,p.lv,tid==null?null:+tid));return true;
 }
 function playerPillAct(idx){
@@ -175,6 +184,8 @@ function doSkill(sc,u,sk,lv,tid,qm){
   const me=mainUnit(sc);
   const autoD=G.meta.opt&&G.meta.opt.autoDodge;
   // nhắm vào nhân vật người chơi: hiện vòng né
+  // bị nghiền ép: không có vòng né, không tốn thể lực, đòn đánh trúng thẳng
+  if(hasDmg(sk)&&tg.includes(me)&&u.side==='B'&&me&&typeof crushPair==='function'&&crushPair(u,me)>0){resolveSkill(sc,u,sk,lv,tg,qm,[]);return;}
   if(hasDmg(sk)&&tg.includes(me)&&u.side==='B'&&!autoD&&!sc.skipDodge){
     const n=Math.min(3,f.h||1);
     sc.dodge={id:(sc.did=(sc.did||0)+1),uid:u.id,sk,lv,tids:tg.map(x=>x.id),qm,n,T:u.phase==='charge'?1.1:0.8,lit:false};sc.rev++;return;
@@ -214,8 +225,9 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         if(t.hp<=0&&!t.immune)break;
         if(t.kind==='kiep'){const d0=dmgCalc(u.atk,u.st.rage,u.st.weak,0,0,f.p,(isP?elemMult(sk.el,'loi'):1)*lvM*qm*(f.aoe?0.6:1),0);total+=d0;hits++;continue;}
         // né
-        let ev=false,q=null;
-        if(t.st.evade>0){t.st.evade--;ev=true;}
+        let ev=false,q=null;const crushed=typeof crushPair==='function'&&crushPair(u,t)>0; // nghiền ép: không né, không đỡ
+        if(crushed){}
+        else if(t.st.evade>0){t.st.evade--;ev=true;}
         else{const o=offs==='auto'?'auto':(Array.isArray(offs)?offs[Math.min(h,2)]:null);const D=dodgeP(u,t,o,t.isMain&&offs!=null);q=D.q;ev=R()<D.p;}
         if(ev){dod++;cfx(sc,{k:'dodge',id:t.id});if(t.isMain&&q==='chuan')t.bonusPos=8;continue;}
         let mult=lvM*qm*(f.aoe?0.6:1);
@@ -224,7 +236,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         const magic=(sk.dt?sk.dt==='phep':(!isP&&(u.f==='quy'||u.f==='vat')));const av=magic?(u.matk||u.atk):u.atk;
         const crit=u._critF!=null?u._critF:chance(((u.crit||5)+(f.crit||0))/100);if(crit){mult*=Math.max(1.1,((u.critDmg||150)-(t.hoTam||0))/100);crits++;}
         let d=dmgCalc(av,u.st.rage,u.st.weak,t.def,t.st.vuln,f.p,mult,f.pierce);d=crushD(u,t,d);
-        if(t.st.stance){if(!t._blk){if((t.tl==null?100:t.tl)>=TL_BLOCK){if(t.tl!=null)t.tl-=TL_BLOCK;t._blk=1;blk++;}else t._blk=2;}if(t._blk===1)d=Math.max(1,Math.round(d*(1-blockCut(u,t))));}
+        if(t.st.stance&&!crushed){if(!t._blk){if((t.tl==null?100:t.tl)>=TL_BLOCK){if(t.tl!=null)t.tl-=TL_BLOCK;t._blk=1;blk++;}else t._blk=2;}if(t._blk===1)d=Math.max(1,Math.round(d*(1-blockCut(u,t))));}
         d=absorb(t.st,d);t.hp-=d;total+=d;hits++;onHit(sc,u,t,d,crit,t._blk===1,sk);
         if(t.isMain&&d>0){const fx2=S().fx;if(fx2.reflect){u.hp-=Math.round(d*fx2.reflect/100);if(u.hp<=0)down(sc,u);}}
         if(isP){if(fx.poisonHit)t.st.poison=(t.st.poison||0)+Math.round(u.atk*fx.poisonHit);if(fx.burnHit)t.st.burn=(t.st.burn||0)+Math.round(u.atk*fx.burnHit);}

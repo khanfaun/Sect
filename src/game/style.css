@@ -1436,3 +1436,5 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 .bq-sky{position:relative;margin:-6px 0 8px}.bq-sky .art.mart{margin:0}
 .bq-tint{position:absolute;inset:0;pointer-events:none;border-radius:var(--r);transition:background 1.2s}
 .bq-time{position:absolute;right:8px;bottom:6px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);font-size:.78em}
+
+.sk{position:relative}.sk-lock{position:absolute;top:2px;right:4px;font-size:.8em;opacity:.45;cursor:pointer;padding:2px}.sk-lock.on{opacity:1}

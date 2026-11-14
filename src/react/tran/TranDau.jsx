@@ -35,7 +35,8 @@ function NutChieu({ id, sk, lv, t, me }) {
   return (
     <button className={'sk' + (q ? ' qk' : '')} data-act="skill" data-arg={id} disabled={no} style={q ? pcs(sk.t) : undefined} {...tip(t || PS.skillTip(sk, lv))}>
       <H h={PS.elSeal(sk.el)} />
-      <span className="sn"><span className={q ? 'qt' : ''}>{sk.n}</span>{lv > 1 && <> <i>{'Ⅰ Ⅱ Ⅲ'.split(' ')[lv - 1]}</i></>}<small>{[d, c ? c + ' linh lực' : '', sk.fx.charge ? 'tụ lực' : ''].filter(Boolean).join(' · ')}</small></span>
+      <span className="sn"><span className={q ? 'qt' : ''}>{sk.n}</span>{lv > 1 && <> <i>{'Ⅰ Ⅱ Ⅲ'.split(' ')[lv - 1]}</i></>}<small>{[sk.once ? 'dùng một lần' : '', d, c ? c + ' linh lực' : '', sk.fx.charge ? 'tụ lực' : ''].filter(Boolean).join(' · ')}</small></span>
+      {String(id)[0] !== '_' && <span className={'sk-lock' + (PS.skLocked(id) ? ' on' : '')} data-act="skLock" data-arg={id} {...tip(PS.skLocked(id) ? 'Đã khoá: chế độ tự đánh không dùng chiêu này. Bấm để mở khoá.' : 'Bấm để khoá: chế độ tự đánh sẽ không dùng chiêu này.')}>{PS.skLocked(id) ? '🔒' : '🔓'}</span>}
     </button>
   );
 }
