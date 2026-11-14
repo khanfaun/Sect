@@ -84,6 +84,15 @@ const TESTS = {
     ok(+run('G.run.region') === 0, 'đã về vùng 1'); ok(run('nodeById(G.run.at).type') === 'ai', 'đứng ở quan ải');
     ok(run('NK.count("region.back")') === 1, 'nhật ký ghi region.back');
   },
+  // thương thế 3 bậc: nhẹ thua vẫn sống, nguy kịch thua là chết
+  thuongthe() {
+    const lose = k => { fresh(`(()=>{addWound('${k}');startCombat({},{kind:"node"});const sc=G.run.scene;mainUnit(sc).hp=0;checkEnd(sc);if(G.run&&G.run.scene&&G.run.scene.over)combatContinue();})();`); return run('G.run?"song":"chet"'); };
+    ok(lose('ngoai') === 'song', 'thương nhẹ thua vẫn sống');
+    ok(lose('nguy') === 'chet', 'nguy kịch thua là chết');
+    let d = 0; for (let i = 0; i < 30; i++) if (lose('gay') === 'chet') d++;
+    ok(d > 3 && d < 25, `thương nặng thua: chết ${d}/30 lần (khoảng 40%)`);
+    fresh("addWound('gay');"); ok(run('woundLv()') === 2, 'gãy xương là thương nặng');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 240000 });
