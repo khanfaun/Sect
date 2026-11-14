@@ -6,5 +6,7 @@ function rxv(name,fb){return window.RX&&RX.has(name)?{rx:name,fb}:fb();}
 // Hộp thoại: lớp ngoài cùng. Hộp thoại khí vận (asc) và loại chưa có bản React thì để các lớp cũ lo.
 {const _mhR=modalHTML;modalHTML=function(){const m=UI.modal,r=G.run;
   const asc=r&&r.asc&&G.screen==='map'&&!(r.scene&&r.scene.type==='combat');
+  if(asc&&window.RX&&RX.has('HopThoai:asc')){if(!UI.modal||UI.modal.k!=='asc')UI.modal={k:'asc'};document.documentElement.dataset.asc='1';return {rx:'HopThoai:asc',fb:_mhR};}
+  if(!m&&r&&r.kvPick&&(!r.scene||r.scene.type==='place')&&G.screen==='map'&&window.RX&&RX.has('HopThoai:kvPick'))return {rx:'HopThoai:kvPick',fb:_mhR};
   if(m&&!asc&&window.RX&&RX.has('HopThoai:'+m.k)){delete document.documentElement.dataset.asc;return {rx:'HopThoai:'+m.k,fb:_mhR};}
   return _mhR();};}
