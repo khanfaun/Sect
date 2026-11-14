@@ -83,7 +83,7 @@ const Map2=(()=>{
     const c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d');
     const seed=hashS('terr'+W().seed+':'+reg),rnd=mul(seed),nz=makeNoise(hashS('terr'+W().seed));
     const px=x=>(x-X0+250)*k,py=y=>(y+250)*k;
-    g.fillStyle=C.paper;g.fillRect(0,0,S,S);
+    g.fillStyle=C.paper;g.fillRect(0,0,S,S);ikPaperWash(g,S,rnd,k,C);
     // trường cao độ, nắn theo loại điểm: sông biển thì trũng, núi thì cao
     const N=lv?176:128,F=new Float32Array(N*N);const wet=RG.types.includes('bien')?0.46:RG.types.includes('song')?0.3:0.22;
     const bumps=R0.nodes.map(n=>({x:(n.x-X0+250)/1500,y:(n.y+250)/1500,v:n.type==='bien'?-0.34:n.type==='song'?-0.2:(n.type==='nui'||n.type==='dong'||n.type==='sao')?0.3:0.16,s:n.type==='bien'?0.11:0.07}));
@@ -110,17 +110,13 @@ const Map2=(()=>{
       path();g.strokeStyle=hexA(C.water,0.5);g.lineWidth=16*k;g.stroke();path();g.strokeStyle=hexA(C.water,0.55);g.lineWidth=7*k;g.stroke();
       path();g.strokeStyle=hexA(C.ink,0.18);g.lineWidth=1.2;g.setLineDash([10*k,14*k]);g.stroke();g.setLineDash([]);}
     // núi: nét mực có mảng loang
-    const mtn=(x,y,s)=>{const X=px(x),Y=py(y),w=s*k,h=s*k*(0.9+rnd()*0.5);
-      const gr=g.createLinearGradient(0,Y-h,0,Y+h*0.3);gr.addColorStop(0,hexA(C.ink,0.5));gr.addColorStop(0.55,hexA(C.ink,0.14));gr.addColorStop(1,hexA(C.ink,0));
-      g.beginPath();g.moveTo(X-w,Y+h*0.3);g.quadraticCurveTo(X-w*0.45,Y-h*0.35,X-w*0.08,Y-h);g.quadraticCurveTo(X+w*0.1,Y-h*0.75,X+w*0.3,Y-h*0.45);g.quadraticCurveTo(X+w*0.6,Y-h*0.2,X+w,Y+h*0.3);g.closePath();g.fillStyle=gr;g.fill();
-      g.beginPath();g.moveTo(X-w*0.75,Y-h*0.05);g.quadraticCurveTo(X-w*0.4,Y-h*0.45,X-w*0.08,Y-h);g.quadraticCurveTo(X+w*0.1,Y-h*0.75,X+w*0.3,Y-h*0.45);g.strokeStyle=hexA(C.ink,0.55);g.lineWidth=Math.max(1,1.6*k);g.stroke();};
+    const mtn=(x,y,s)=>{ikMountain(g,px(x),py(y),s*k*1.15,s*k*(0.9+rnd()*0.5),rnd,k,C);};
     const ML=[];for(const t of R0.terr)if(t.k==='m')ML.push([t.x,t.y,t.s]);
     for(const n of R0.nodes)if(['nui','dong','sao','ai','tong'].includes(n.type))for(let i=0;i<3;i++)ML.push([n.x+ri2(rnd,-70,70),n.y+ri2(rnd,-75,-20),ri2(rnd,28,60)]);
     const extra=[10,26,44][lv];for(let i=0,t=0;i<extra&&t<800;t++){const x=X0-200+rnd()*1400,y=-200+rnd()*1400;if(elev(x,y)>0.66){ML.push([x,y,ri2(rnd,22,48)]);i++;}}
     ML.sort((a,b)=>a[1]-b[1]);for(const m of ML)mtn(m[0],m[1],m[2]);
     // rừng: cụm cây nhỏ
-    const tree=(x,y,s)=>{const X=px(x),Y=py(y),r0=s*k;g.fillStyle=hexA(C.dark?C.jade:mixHex(C.jade,C.ink,0.45),0.5);
-      g.beginPath();g.moveTo(X,Y-r0*2.1);g.lineTo(X-r0,Y);g.lineTo(X+r0,Y);g.closePath();g.fill();g.fillStyle=hexA(C.ink,0.4);g.fillRect(X-r0*0.12,Y,r0*0.24,r0*0.6);};
+    const tree=(x,y,s)=>{ikTreeMap(g,px(x),py(y),s*k,rnd,C);};
     const TL=[];for(const n of R0.nodes)if(n.type==='rung')for(let i=0;i<[10,22,40][lv];i++){const a=rnd()*6.28,d=30+rnd()*95;TL.push([n.x+Math.cos(a)*d,n.y+Math.sin(a)*d*0.8,5+rnd()*5]);}
     const tn=[70,190,420][lv];for(let i=0,t=0;i<tn&&t<4000;t++){const x=X0-220+rnd()*1440,y=-220+rnd()*1440,e=elev(x,y);if(e>wet+0.08&&e<0.6&&nz(x/300+9,y/300+4)>0.5){TL.push([x,y,4+rnd()*5]);i++;}}
     TL.sort((a,b)=>a[1]-b[1]);for(const t of TL)if(elev(t[0],t[1])>wet+0.03)tree(t[0],t[1],t[2]);
@@ -346,7 +342,7 @@ const Art=(()=>{
 function sceneCv(seed,reg,type,cls,figs){const night=G.meta&&G.meta.world&&partOf(W().t)==='dem'?1:0;return `<canvas class="art ${cls||''}" data-scene="${esc([seed,reg,type||'',night,figs||''].join('~'))}"></canvas>`;}
 
 // khung thiên phú trên bản đồ: Tinh anh ánh bạc, Thiên kiêu ánh kim
-function talGrad(ctx,x,y,r,t){if(!t||t.tier<0)return null;const g=ctx.createLinearGradient(x-r,y-r,x+r,y+r);const S={4:['#ffffff','#9fd8ff','#f2f8ff','#6a74d8','#cfe9ff'],3:['#fff4c2','#d9a521','#fff0a8','#9a6a08','#ffd75e'],2:['#ffffff','#9aa4ae','#f4f7fa','#6f7984','#dfe5ea'],1:['#ffe2c4','#c07a40','#f5c9a0','#6e3a18','#d9945a'],0:['#a8382a','#3a0a06','#6a1810','#1a0404','#5a1410']}[t.tier];S.forEach((c,i)=>g.addColorStop(i/(S.length-1),c));return g;}
+function talGrad(ctx,x,y,r,t){if(!t||t.tier<0)return null;const g=ctx.createLinearGradient(x-r,y-r,x+r,y+r);const S={4:['#fff1b0','#c9962a','#f0cf6a','#8a5a05','#ffe08a'],3:['#ffffff','#9aa7b4','#eef2f6','#34567a','#dfe6ec'],2:['#d8efe3','#3f8a6e','#9fd2bc','#26503f','#c9eadb'],1:['#6b645a','#26221d','#4b4538','#26221d','#6b645a'],0:['#9a948a','#6f685c','#b3ada3','#6f685c','#9a948a']}[t.tier];S.forEach((c,i)=>g.addColorStop(i/(S.length-1),c));return g;}
 
 // màu phủ theo giờ: nội suy giữa các mốc để chuyển buổi êm, không giật
 const DN_K=[[0,'#0f1c3a',.16],[4.5,'#0f1c3a',.16],[6.5,'#f2c078',.07],[10,'#fff3c4',.035],[16,'#fff3c4',.035],[18,'#7a3a4a',.1],[20.5,'#0f1c3a',.16],[24,'#0f1c3a',.16]];

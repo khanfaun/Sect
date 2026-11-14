@@ -1431,3 +1431,15 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 @keyframes fog{0%,100%{opacity:.55}50%{opacity:1}}
 .cg-q{display:grid;gap:6px}.cg-qi{padding:6px 10px;border:1px dashed var(--line);border-radius:6px}.cg-qi b{display:block;font-size:.9em}.cg-qi small{color:var(--ink2);font-size:.8em}.cg-qi.got{border-style:solid;border-color:#2f8f4e;background:color-mix(in srgb,#2f8f4e 8%,transparent)}
 .cg-act{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+
+/* ===== Bộ thủy mặc: khung avatar 5 bậc thiên phú (Phế vật, Bình phàm, Bất phàm, Tinh anh, Thiên kiêu) ===== */
+.u-av.tf0,.u-av.tf1,.u-av.tf2,.u-av.tf3,.u-av.tf4,.av.tf0,.av.tf1,.av.tf2,.av.tf3,.av.tf4{border:1px solid color-mix(in srgb,var(--ink) 35%,transparent)!important;background:var(--paper2)!important;box-shadow:none!important;overflow:visible!important}
+.u-av.tf0::after,.u-av.tf1::after,.u-av.tf2::after,.u-av.tf3::after,.u-av.tf4::after,.av.tf0::after,.av.tf1::after,.av.tf2::after,.av.tf3::after,.av.tf4::after{content:'';position:absolute;inset:-17%;background-position:center;background-size:100% 100%;background-repeat:no-repeat;pointer-events:none;z-index:3}
+.u-av.tf4::after,.av.tf4::after{filter:drop-shadow(0 0 3px rgba(201,150,42,.55))}
+.hud-av2 .tfr,.hud-av2.tf1 .tfr,.hud-av2.tf2 .tfr,.hud-av2.tf3 .tfr,.hud-av2.tf0 .tfr{filter:none!important}
+.hud-av2.tf4 .tfr{filter:drop-shadow(0 0 4px rgba(201,150,42,.55))!important}
+.hud-av2.tf0::after,.hud-av2.tf1::after,.hud-av2.tf2::after,.hud-av2.tf3::after,.hud-av2.tf4::after{display:none!important}
+.hud-av2.tf0,.hud-av2.tf1,.hud-av2.tf2,.hud-av2.tf3,.hud-av2.tf4{box-shadow:none!important;overflow:visible!important}
+/* thủy mặc: ảnh màn mở đầu cao hơn, ảnh địa điểm dày hơn để thấy rõ tranh */
+.t-ink{max-height:64%!important}
+.scard.place .art.pimg{height:128px!important}.scard.place .art.pimg .asset{object-position:50% 80%}
