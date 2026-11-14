@@ -11,13 +11,12 @@ function CacLuaChon({ sc }) {
     <div className="choices">
       {VC.map(({ c, i }) => {
         const bad = PS.needList(c).filter(x => !x.ok);
-        const ck = c.chk ? (PS.chkChance(c.chk) >= 0.5 || !anyOk) : true;
+        const ck = true;
         const dis = bad.length > 0 || !ck;
         const bw = bad.filter(x => !/^linh thạch/.test(x.t));
         return [
           <ChoiceBtn key={'b' + i} n={(k++) + '.'} act="choose" arg={i} label={PS.T(c.l, sc.v)} extra={<ChoiceExtra c={c} />} dis={dis} cls={dis ? 'soft' : ''} />,
           bw.length > 0 && <p key={'w' + i} className="why">({bw.map(x => x.t).join(', ')})</p>,
-          c.chk && <p key={'c' + i} className={'chreq ' + (ck ? 'ok' : 'bad')}>{PS.CHKN[c.chk[0]]} {ck ? 'đạt yêu cầu' : 'chưa đạt yêu cầu'}</p>,
         ];
       })}
     </div>
