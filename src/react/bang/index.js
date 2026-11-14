@@ -4,6 +4,7 @@ import { SoTay, BangThienHa } from './SoTay';
 import { GiaoTinh } from './GiaoTinh';
 import { LuyenChe } from './LuyenChe';
 import { Them, TongMon } from './Them';
+import { NhanVat } from './NhanVat';
 
 export const BANG = {
   pets: LinhThu,
@@ -13,4 +14,5 @@ export const BANG = {
   craft: LuyenChe,
   more: Them,
   tong: TongMon,
+  char: NhanVat,
 };
