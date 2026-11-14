@@ -53,6 +53,15 @@ const TESTS = {
     if (b) { await b.click(); await p.waitForTimeout(400); }
     ok(await ev(p, () => NK.count('tinhtoa') === 1 && G.run.hp > 1), 'tĩnh toạ xong, khí huyết tăng');
   },
+  // phóng to tối đa: địa hình được vẽ lại nét (mảnh chi tiết)
+  async bando(p) {
+    await ev(p, () => { Map2.center(); Map2.zoom(10); });
+    for (let i = 0; i < 20; i++) { await p.waitForTimeout(150); if (await ev(p, () => Map2.dtc > 0)) break; }
+    ok(await ev(p, () => Map2.dtc > 0), 'đã vẽ mảnh chi tiết khi phóng to tối đa');
+    const t = await ev(p, () => { const t0 = performance.now(); for (let i = 0; i < 5; i++) { Map2.invalidate(); Map2.frame && Map2.frame(performance.now()); } return performance.now() - t0; });
+    ok(t < 1500, 'vẽ 5 khung khi đã có mảnh chi tiết: ' + Math.round(t) + 'ms');
+    await shot(p, 'bando-zoom');
+  },
   // cấu hình: nút nhật ký gỡ lỗi
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
