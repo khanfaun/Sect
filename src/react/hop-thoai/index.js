@@ -2,6 +2,7 @@
 import { TuDia, GhiChu, KetQua, DienBienTran, TranDangDo, DevTest, NhanSu } from './ThongTin';
 import { DienCongHien, LaiBuon, TramDich } from './MuaBan';
 import { ThamDo } from './ThamDo';
+import { XacNhanViec, XacNhanNoiChon, LamNhiemVu, HuyNhiemVu } from './XacNhan';
 
 export const HOP_THOAI = {
   danger: TuDia,
@@ -16,4 +17,9 @@ export const HOP_THOAI = {
   tram: TramDich,
   vehi: TramDich,
   explore: ThamDo,
+  pconf: XacNhanViec,
+  vconf: XacNhanNoiChon,
+  vreq: XacNhanNoiChon,
+  qdo: LamNhiemVu,
+  qdrop: HuyNhiemVu,
 };
