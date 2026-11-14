@@ -19,10 +19,12 @@ Thứ người chơi để tâm: tu vi, linh thạch, đan dược, pháp bảo,
 ## Văn phong (bắt buộc)
 
 - Gọi người chơi là **"ngươi"**. Câu ngắn, mỗi đoạn 1–3 câu.
-- Giọng điềm, hơi lạnh, có chút buồn. Tu tiên giới tàn nhẫn nhưng còn tình người. Không sến, không hài nhảm, không từ hiện đại.
-- Kết mỗi đoạn bằng một chi tiết nhỏ đọng lại.
+- Giữ chất tiên hiệp nhưng dùng tiếng Việt tự nhiên, dễ hiểu. Chỉ dùng thuật ngữ tu luyện khi có ích cho câu chuyện; phép lạ cũng cần quy luật để người đọc theo được.
+- Đổi giọng theo cảnh: chuyện đời thường có thể vui và rôm rả; chuyện tông môn có tranh luận, lễ phép lẫn bất bình; cảnh hiểm nguy kể gọn, rõ hành động; cảnh tình cảm để nhân vật tự nói và tự quyết; cảnh ma quái gây sợ bằng điều xảy ra cụ thể.
+- Đổi cách mở và kết: có thể mở bằng đối thoại, một việc đang diễn ra, câu hỏi hoặc cảnh vật. Có thể kết bằng quyết định, lời hẹn, kết quả rõ ràng, tiếng cười hay việc còn dang dở. Không bắt mọi cảnh kết bằng một đồ vật buồn hoặc một hình ảnh khó hiểu.
 - Lời thoại dùng “…”.
-- Làm điều tốt thường có giá; làm điều ác thường được lợi trước mắt nhưng để lại vết trong lòng.
+- Hành động có hậu quả hợp lý. Việc tốt có thể được đáp lại, được làm thuận lợi hoặc đơn giản đem lại niềm vui; không cố thêm thương tích hay mất mát cho mọi lần giúp người. Không tự biến tiền cho tặng thành nợ phải trả.
+- Nói rõ ai giữ đồ, vật ở đâu, vì sao hành động giải quyết được vấn đề. Không mặc nhiên cho người chơi có vườn, kho, thuyền hay một đoàn tùy tùng. Khi cần, cho họ mua, thuê hoặc góp công; lời kể phải khớp với chi phí trong game.
 
 Ví dụ giọng văn trong game:
 
@@ -70,9 +72,11 @@ Khi viết chuỗi, hãy ghi:
 ```
 Nhân vật trong chuỗi giữ nguyên ký hiệu từ đầu tới cuối ([tu sĩ A] ở phần 1 cũng là [tu sĩ A] ở phần 4).
 
+Khi biên tập chuỗi đang có trong game, giữ đúng lựa chọn và kết quả trước đó. Các câu mở bằng “Nếu …,” ở phần 3–4 được chọn theo đường dẫn khai báo trong `BRANCHES` / `story_paths` của `tools/su_kien_chuyen.py`. Mỗi câu điều kiện phải trọn một câu, các câu trong cùng cụm phải đứng liền nhau; phần văn chung đặt sau cụm. Thêm hoặc đổi nghĩa một nhánh thì sửa cả đường dẫn, không suy từ vị trí lựa chọn. Với phép thử, phải phân biệt thắng và thua.
+
 ## Đủ mọi cảm xúc
 
-Giọng văn chung là điềm và hơi buồn, nhưng **nội dung** phải đủ sắc thái: cảm động, vui ấm áp, **hài hước** (tán tu ngốc, lừa đảo vụng về, linh thú tham ăn), kinh dị, bi thương, phẫn nộ, lãng mạn, và cả **cẩu huyết não tàn** (thiếu gia hống hách "ngươi có biết cha ta là ai không", vị hôn thê từ hôn, nhận nhầm con, đánh mặt kẻ khinh người…). Chuyện hài vẫn kể bằng giọng tỉnh bơ: buồn cười vì tình huống, không phải vì câu chữ lố. Ghi cảm xúc chính ở dòng đầu mỗi sự kiện.
+Giọng kể và **nội dung** phải đủ sắc thái: cảm động, vui ấm áp, **hài hước** (tán tu ngốc, lừa đảo vụng về, linh thú tham ăn), kinh dị, bi thương, phẫn nộ, lãng mạn, và cả **cẩu huyết não tàn** (thiếu gia hống hách "ngươi có biết cha ta là ai không", vị hôn thê từ hôn, nhận nhầm con, đánh mặt kẻ khinh người…). Chuyện hài vẫn kể bằng giọng tỉnh bơ: buồn cười vì tình huống, không phải vì câu chữ lố. Ghi cảm xúc chính ở dòng đầu mỗi sự kiện.
 
 ## Cách viết mỗi sự kiện (chỉ cần đại ý như sau)
 

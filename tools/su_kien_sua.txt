@@ -289,3 +289,53 @@ ch_mot_chu_dung_tren_van_cau_2b 1: xoa k=1
 ch_mot_chu_dung_tren_van_cau_3 0: tv=-3
 ch_mot_chu_dung_tren_van_cau_3 1: xoa k=-1
 ch_mot_chu_dung_tren_van_cau_4 1: xoa bitich
+
+# ===== Biên tập cốt truyện: cái giá phải khớp với việc được kể =====
+gk_tro_giu_am 0: xoa tra
+gk_gio_dong_cua_ai 0: h=12
+gk_mai_ra_dem_ngoi 0: h=12
+gk_da_trong_cuoi_nam 0: xoa tra tm=-3
+gk_manh_va_tren_buom_giay 0: xoa tra an
+ch_nua_dau_tay_2 0: xoa tra
+ch_nua_dau_tay_3 0: xoa tra
+ch_nua_dau_tay_4 1: xoa loi0
+ch_cay_dau_khong_bong_1 1: xoa mua k=-2
+ch_cay_dau_khong_bong_3 0: xoa tra
+ch_cay_dau_khong_bong_4 0: xoa tra
+ch_cay_dau_khong_bong_4 1: xoa mua
+gk_tam_dem_duoi_kiem 0: xoa tra
+gk_dot_tre_o_cua_ngach 0: xoa giup mp hp=5
+gk_nguoi_ke_ban_tho 0: xoa giup h=6 an
+gk_dinh_lo_mat_nap 0: xoa tra k=2
+gk_duong_kim_qua_phu_rach 0: xoa tra an
+gk_bac_tren_cung_thieu_mot_phie 1: xoa tv=5 h=6
+ch_vach_phan_tren_chuoi_kiem_1 0: xoa tra an
+ch_vach_phan_tren_chuoi_kiem_3 0: xoa giup mp hp=10
+ch_cot_gio_khong_co_1 0: xoa tra
+ch_cot_gio_khong_co_2 0: xoa giup
+ch_cot_gio_khong_co_2 1: xoa st=13
+gk_lo_tho_phia_tren_vach_trieu 0: xoa giup mp hp=15 tv=-3
+gk_mam_com_buoc_phao 0: xoa tra an
+gk_cong_co_trong_be_trung 0: xoa tra an
+ch_ben_kia_mot_hoi_tho_1 0: xoa tra an
+ch_cai_ten_bo_khoi_banh_lai_3 0: xoa tra
+ch_no_mot_mua_toc_bac_3 1: xoa mua k=-4 tm=3 tho_them=20
+ch_vet_khau_duoi_lop_da_3 1: xoa k=1
+gk_giot_dau_khong_ben_lua 0: xoa giup mp tm=-3
+gk_cai_mieng_giau_trong_vai 0: xoa giup tm=-3
+gk_nut_that_giu_cau_noi_cuoi 0: xoa giup mp an
+gk_hai_chiec_ghe_quay_lung 0: xoa giup mp an
+ch_nguoi_cho_sau_rem_than_2 0: -h
+gk_tam_ao_cu_qua_nam_tram_mua 0: xoa giup mp an
+gk_mot_dem_giu_nen_troi 0: xoa giup mp an
+gk_mua_roi_nguoc_trong_long_ban 0: xoa giup mp an
+gk_mep_bong_muon_cua_nguoi_sau 1: xoa k=2 mp tm=-2
+gk_manh_dem_va_ban_ngay 0: xoa giup mp tam=1
+gk_ao_giap_chua_lo_nghe_tim 0: xoa giup mp an
+ch_hinh_nguoi_nam_ngoai_ao_1 0: xoa tra an
+ch_hinh_nguoi_nam_ngoai_ao_2 0: xoa giup tv=4
+ch_hinh_nguoi_nam_ngoai_ao_4 0: xoa tra an
+ch_mot_chu_dung_tren_van_cau_2b 0: xoa giup tp=-1 an
+ch_tam_phan_danh_cho_khach_2 1: xoa loi0
+ch_ben_kia_mot_hoi_tho_2b 0: xoa tra h=24 an
+ch_den_soi_duong_lui_2 1: do

@@ -13,6 +13,54 @@ SRC = next((a for a in sys.argv[1:] if a.endswith('.md')), os.path.join(ROOT, 'd
 OUT = os.path.join(ROOT, 'src/game/data/03-su_kien-du-lieu.js')
 HD, HM, HY = 24, 720, 8640
 
+# Mỗi nhóm câu "Nếu…" có một đường dẫn rõ ràng về lựa chọn trước.
+# Chỉ số lựa chọn bắt đầu từ 0. Hậu tố ok/no là kết quả phép thử.
+# Không suy nhánh 2b từ vị trí câu: cùng một lựa chọn có thể có ý nghĩa khác.
+BRANCHES = {
+    'Nửa dấu tay': [['2:0'], ['2:1'], ['2b:0', '2b:1']],
+    'Cây dâu không bóng': [['2:0'], ['2:1'], ['2b:0', '2b:1']],
+    'Người gác lửa': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Tấm phản dành cho khách': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Vạch phấn trên chuôi kiếm': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Chỉ bạc trên áo chịu tang': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Lời nói dưới phiến đá': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Cột gió không cờ': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Lệ đo nước': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Bên kia một hơi thở': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Vệt mặn trên đơn thuốc': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Cái tên bỏ khỏi bánh lái': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Nợ một mùa tóc bạc': [['2:0', '2:1', '2b:0'], ['2b:1']],
+    'Vết khâu dưới lớp da': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Bức tường nghe tên mình': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Người chờ sau rèm than': [['2:0', '2:1', '2b:0'], ['2b:1']],
+    'Đèn soi đường lui': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Hồi chuông đến trước người gõ': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Hình người nằm ngoài áo': [['2:0', '2b:0'], ['2:1', '2b:1']],
+    'Một chữ đứng trên ván cầu': [['2:0', '2b:0'], ['2:1', '2b:1']],
+}
+
+def story_paths(e):
+    if e['part'] == '3':
+        paths = BRANCHES[e['chain']]
+    elif e['part'] == '4':
+        paths = ([['3:0:ok'], ['3:0:no'], ['3:1']] if e['chain'] == 'Vết khâu dưới lớp da'
+                 else [['3:0'], ['3:1']])
+    else:
+        return None
+    for txt in [e['intro']] + [c['t'] for c in e['c']]:
+        # Kiểm tra từng cụm điều kiện, kể cả khi đoạn có phần văn chung theo sau.
+        n = 0
+        for sentence in re.split(r'(?<=[.!?…”])\s+', txt) + ['']:
+            if sentence.startswith('Nếu '):
+                if not re.match(r'^Nếu [^,]*,\s*', sentence):
+                    raise SystemExit('Thiếu dấu phẩy trong câu điều kiện: ' + e['title'])
+                n += 1
+            elif n:
+                if n != len(paths):
+                    raise SystemExit('Số câu điều kiện không khớp nhánh: ' + e['title'])
+                n = 0
+    return paths
+
 def slug(s):
     s = unicodedata.normalize('NFD', s.replace('đ', 'd').replace('Đ', 'D'))
     s = ''.join(c for c in s if unicodedata.category(c) != 'Mn').lower()
@@ -140,6 +188,8 @@ for i, e in enumerate(S):
     d = {'id': sid, 'n': e['title'], 'reg': e['reg'], 'emo': e['emo'], 'tg': tags(e['place'], e['reg']), 'roles': {k: v['g'] for k, v in R.items()}, 't': intro, 'c': C}
     if cid:
         d['chain'] = cid; d['part'] = e['part']
+        paths = story_paths(e)
+        if paths: d['paths'] = paths
         if e['part'] != '1':
             labels = re.findall(r'“([^”]+)”', e['cond'] or '')
             d['wait'] = delay(e['cond'])
@@ -156,7 +206,7 @@ for i, e in enumerate(S):
 #  loi = làm lợi (linh thạch +, nhân quả −3) · loi0 = làm ăn đàng hoàng (linh thạch +, không trừ nhân quả)
 #  mua = bỏ tiền cho mình (tốn linh thạch, không cộng nhân quả) · tra = bỏ tiền giúp người (tốn linh thạch, nhân quả +4)
 #  giup = giúp không tốn tiền (nhân quả +4) · xoa = xóa hết thưởng phạt tự suy
-#  k=N đặt nhân quả · tm=N tâm ma · hp=N (% âm) · tv=N · h=N giờ · mp (tốn 20% linh lực) · tho=N (% thọ mất)
+#  k=N đặt nhân quả · tm=N tâm ma · hp=N (% âm) · tv=N · h=N giờ · mp (tốn 20% linh lực) · tho=N (% thọ mất) · tho_them=N (số năm nhận)
 #  st=N linh thạch nhận · gia=N giá tiền · an / oan (ân, oán với nhân vật A) · dan (một viên đan) · do (một món đồ) · bitich (một môn công pháp)
 #  van=N tam=N ngo=N tp=N (cộng vĩnh viễn) · lore=<mã>
 SUA_TXT = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'su_kien_sua.txt'), encoding='utf-8').read() if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'su_kien_sua.txt')) else ''
@@ -183,6 +233,7 @@ for line in SUA_TXT.splitlines():
         elif k == 'h': E['h'] = int(v)
         elif k == 'mp': c['cost'] = dict(c.get('cost', {}), mp='20%')
         elif k == 'tho': E['lifeCut'] = int(v)
+        elif k == 'tho_them': E['life'] = int(v)
         elif k == 'st': E['st'] = int(v)
         elif k == 'gia': c['cost'] = dict(c.get('cost', {}), st=int(v))
         elif k == 'an': E['an'] = ['a', d['n'][0].lower() + d['n'][1:]]

@@ -27,6 +27,8 @@ npm run build      # ra phu-sinh.html (hoặc: node tools/build.js, không cần
 
 Kiểm tra: `node bot.js 80 --quiet` (máy tự chơi 80 kiếp), `node tools/play.js <thư mục ảnh> full` (bấm thử giao diện, chụp ảnh từng màn).
 
+Kiểm tra cốt truyện: `node tools/kiem-tra-cot-truyen.js` (200 cảnh, các nhánh của 20 chuỗi, kết quả thắng/thua, bỏ đi và lưu/tải).
+
 ## Gắn ảnh (asset)
 
 Game đã chừa sẵn chỗ cho ảnh. Mở `src/game/ui/01-base.js`, tìm `const ASSET=` và điền đường dẫn ảnh:
