@@ -2,6 +2,7 @@
 import { Html, PS } from '../html';
 import { Chips, Ic, pcs, tip } from '../chung';
 import { Card, ChoiceBtn, GoBtn } from './Khung';
+import { TheNhiemVu } from '../chung/TheNhiemVu';
 
 export function QuanAi({ sc }) {
   const r = PS.G.run;
@@ -68,7 +69,7 @@ export function BangTreoThuong({ sc }) {
       <p className="hint">Đang nhận {open}/3 việc.</p>
       {mine.length > 0 && <>
         <h4 className="sgrp">Việc đã nhận ở đây</h4>
-        <Html as="div" className="rows" h={mine.map(q => PS.questCardHTML(q)).join('')} />
+        <div className="rows">{mine.map(q => <TheNhiemVu key={q.id} q={q} />)}</div>
       </>}
     </Card>
   );

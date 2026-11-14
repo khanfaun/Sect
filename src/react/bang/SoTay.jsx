@@ -2,6 +2,7 @@
 import { Html, PS } from '../html';
 import { Tabs } from '../chung';
 import { Win } from './Khung';
+import { TheNhiemVu } from '../chung/TheNhiemVu';
 
 const TABS = [['quest', 'Nhiệm vụ'], ['log', 'Đời này'], ['aff', 'Thiên hạ'], ['news', 'Tin đồn'], ['chron', 'Biên niên']];
 
@@ -39,7 +40,7 @@ export function SoTay() {
   if (tab === 'log') body = <div className="logl">{r.log.slice().reverse().map((l, i) => <Dong key={i} a={l.a + ' tuổi'} t={l.t} />)}</div>;
   if (tab === 'quest') {
     const L = r.quests.slice().reverse(); UI.qOpen = UI.qOpen || {};
-    body = L.length ? <Html as="div" className="rows" h={L.map(q => PS.questCardHTML(q)).join('')} /> : <p className="empty">Chưa nhận nhiệm vụ nào. Tìm bảng treo thưởng ở thôn trấn.</p>;
+    body = L.length ? <div className="rows">{L.map(q => <TheNhiemVu key={q.id} q={q} />)}</div> : <p className="empty">Chưa nhận nhiệm vụ nào. Tìm bảng treo thưởng ở thôn trấn.</p>;
   }
   if (tab === 'news') body = (
     <div className="logl">
