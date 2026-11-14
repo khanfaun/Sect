@@ -2893,7 +2893,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         if(t.kind==='kiep'){const d0=dmgCalc(u.atk,u.st.rage,u.st.weak,0,0,f.p,(isP?elemMult(sk.el,'loi'):1)*lvM*qm*(f.aoe?0.6:1),0);total+=d0;hits++;continue;}
         // né
         let ev=false,q=null;const crushed=typeof crushPair==='function'&&crushPair(u,t)>0; // nghiền ép: không né, không đỡ
-        if(crushed){dbg('combat.crushed',{att:u.name,def:t.name,main:!!t.isMain});}
+        if(crushed){dbg('combat.crushed',{att:u.name,def:t.name,main:!!t.isMain});if(h===0)cfx(sc,{k:'crushhit',id:t.id});}
         else if(t.st.evade>0){t.st.evade--;ev=true;}
         else{const o=offs==='auto'?'auto':(Array.isArray(offs)?offs[Math.min(h,2)]:null);const D=dodgeP(u,t,o,t.isMain&&offs!=null);q=D.q;ev=R()<D.p;}
         if(ev){dod++;cfx(sc,{k:'dodge',id:t.id});if(t.isMain&&q==='chuan')t.bonusPos=8;continue;}
@@ -9665,6 +9665,7 @@ const FXG_C={hp:['#bff5c8','#2f9a4e','+'],mp:['#cfe6ff','#3a7fd0','+'],dl:['#fff
 {const _fo=fxOne;fxOne=function(sc,e){if(!G.run||G.run.scene!==sc)return;
   if(e.k==='heal')return;
   if(e.k==='banner'){fxBanner(sc,e,0);return;}
+  if(e.k==='crushhit'){const [x,y]=fxPos(sc,e.id);fxNum(x,y-44,'Không né nổi!','crit');return;}
   if(e.k==='act'){const [x,y]=fxPos(sc,e.id);fxEl(`<b>${esc(e.n)}</b>`,x,y-58,1300,'fx-act');return;}
   if(e.k==='gain'){if(CFG.anim===false)return;const [x,y]=fxPos(sc,e.id);const c=FXG_C[e.s];if(!c)return;
     fxEl(Array.from({length:7},(_,i)=>`<i style="left:${(Math.random()*90-45).toFixed(0)}px;top:${(Math.random()*30-10).toFixed(0)}px;animation-delay:${(i*0.08).toFixed(2)}s">${c[2]}</i>`).join(''),x,y,1100,'fx-gain fg-'+e.s,`--c0:${c[0]};--c1:${c[1]}`);return;}

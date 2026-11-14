@@ -229,7 +229,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         if(t.kind==='kiep'){const d0=dmgCalc(u.atk,u.st.rage,u.st.weak,0,0,f.p,(isP?elemMult(sk.el,'loi'):1)*lvM*qm*(f.aoe?0.6:1),0);total+=d0;hits++;continue;}
         // né
         let ev=false,q=null;const crushed=typeof crushPair==='function'&&crushPair(u,t)>0; // nghiền ép: không né, không đỡ
-        if(crushed){dbg('combat.crushed',{att:u.name,def:t.name,main:!!t.isMain});}
+        if(crushed){dbg('combat.crushed',{att:u.name,def:t.name,main:!!t.isMain});if(h===0)cfx(sc,{k:'crushhit',id:t.id});}
         else if(t.st.evade>0){t.st.evade--;ev=true;}
         else{const o=offs==='auto'?'auto':(Array.isArray(offs)?offs[Math.min(h,2)]:null);const D=dodgeP(u,t,o,t.isMain&&offs!=null);q=D.q;ev=R()<D.p;}
         if(ev){dod++;cfx(sc,{k:'dodge',id:t.id});if(t.isMain&&q==='chuan')t.bonusPos=8;continue;}

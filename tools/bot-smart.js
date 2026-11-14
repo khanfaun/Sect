@@ -89,7 +89,7 @@ function smartPlan(){
     if(!r.bossDone[r.region]){const n=nodeById(R0.lair);if(n.fog>=1&&goOrOpen(n)){r._goal='boss';why('tiến vùng','đủ cảnh giới, đánh thủ lĩnh');return;}}
     if(r.region<4&&(r.realm>=r.region+1||r.passes.includes(r.region+1))){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';why('tiến vùng','đủ cảnh giới, vượt ải');return;}}}
   // 6. tranh cơ duyên: hội đấu giá, sao rơi, bí cảnh khi khoẻ và có tiền
-  if(hpR()>=0.8){const e=entsHere(r.region).find(e=>e.to==null&&['daugia','saoroi','bicanh'].includes(e.type)&&nodeById(e.at).fog>=1);if(e&&goOrOpen(nodeById(e.at))){r._goal='ent';why('cơ duyên','đi tranh '+e.type);return;}}
+  if(hpR()>=0.8){const e=entsHere(r.region).find(e=>e.to==null&&e.type==='di'&&nodeById(e.at).fog>=1);if(e&&goOrOpen(nodeById(e.at))){r._goal='ent';why('cơ duyên','đi tranh '+e.type);return;}}
   // 7. khám phá
   const cand=R0.nodes.filter(n=>n.fog>=1&&n.fog<3&&n.id!==r.at&&dangerTag(n)<=Math.min(3,r.realm+1));
   const t=cand.length&&chance(.7)?pick(cand):pick(R0.nodes.filter(n=>n.fog>=1&&n.type!=='ai'&&n.type!=='sao').concat([nodeById(r.at)]));
@@ -109,7 +109,7 @@ function smartPlace(){
   if(!isPham()&&n.dp&&!bqCan()&&bqNeedY()>0&&r.tv<100&&(r._goal==='bq'||r.tvMinor>=30)){const left=Math.max(0,s.life-r.age);const y=Math.max(0.25,Math.min(2,bqNeedY()||0.25,left-1));if(bqCustom(y)){why('tu luyện','bế quan '+y+' năm');return;}}
   if(r._goal==='cross'&&has('cross')){r._goal=null;placeAct('cross');return;}
   if(r._goal==='boss'&&has('boss')){r._goal=null;placeAct('boss');return;}
-  if(r._goal==='ent'||true){const e=entsHere(r.region).find(e=>e.to==null&&e.at===sc.id&&['daugia','saoroi','bicanh'].includes(e.type));if(e&&hpR()>=0.7){r._goal=null;why('cơ duyên','gặp '+e.type);meetEnt(e);return;}}
+  if(r._goal==='ent'||true){const e=entsHere(r.region).find(e=>e.to==null&&e.at===sc.id&&e.type==='di');if(e&&hpR()>=0.7){r._goal=null;why('cơ duyên','gặp '+e.type);meetEnt(e);return;}}
   // kiếm tiền khi thiếu
   if(r.st<reserve()){if(has('board')&&chance(.7)){placeAct('board');return;}for(const k of ['haithuoc','daokhoang','sanyeu']){if(k==='sanyeu'&&r.realm<1)continue;if(has(k)&&hpR()>0.7&&dangerTag(n)<(r.realm>=1?3:2)){why('tích luỹ','thu thập '+k);placeAct(k);return;}}}
   if(has('shop')&&r.st>=reserve()*1.5&&chance(.4)){placeAct('shop');return;}
