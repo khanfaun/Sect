@@ -9,6 +9,12 @@ Game tu tiên luân hồi chạy trong một tệp duy nhất: mở `phu-sinh.ht
   - `data/` — danh mục vật phẩm và sự kiện cốt truyện (sinh tự động từ Excel/markdown).
   - `ui/` — giao diện: bản đồ canvas, các màn, các bảng, cấu hình. `style.css` — trang trí.
   - `thu-tu.json` — **thứ tự ghép các tệp**. Thêm tệp mới thì ghi tên vào đây, đúng chỗ.
+- `src/react/` — giao diện viết bằng React (Vite đóng gói vào cùng tệp `phu-sinh.html`):
+  - `man-ngoai/` màn mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên · `ban-do/` thanh trạng thái, nút bản đồ, thẻ địa điểm
+  - `canh/` các cảnh (sự kiện, chạm trán, phường thị, địa điểm…) · `hop-thoai/` các hộp thoại · `bang/` các bảng (nhân vật, túi đồ, sổ tay…)
+  - `tran/` màn chiến đấu · `chung/` mảnh dùng chung (biểu tượng, nút, chú thích…)
+  - React đọc dữ liệu game qua `PS.<tên>` (cầu nối ở `src/game/ui/22-cau-noi-react.js`). Bấm nút vẫn đi qua `data-act` như cũ.
+  - Các hàm vẽ bằng chuỗi HTML cũ trong `src/game/ui/` vẫn giữ làm dự phòng: màn nào React lỗi thì tự quay về bản cũ.
 - `old-phu-sinh-2.html`, `phu-sinh-v1.html` — các bản cũ, giữ để đối chiếu.
 
 Sau khi sửa trong `src/`:

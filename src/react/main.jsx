@@ -10,6 +10,7 @@ import { TheDiaDiem } from './ban-do/TheDiaDiem';
 import { CANH } from './canh';
 import { HOP_THOAI } from './hop-thoai';
 import { BANG } from './bang';
+import { TranDau } from './tran/TranDau';
 import { PS } from './html';
 
 const VIEWS = {
@@ -22,6 +23,7 @@ const VIEWS = {
   Nav,
   NutBanDo,
   TheDiaDiem,
+  TranDau,
 };
 // Các cảnh: 'Canh:<loại>' vẽ cảnh đang mở (G.run.scene)
 // Hộp thoại: 'HopThoai:<loại>' vẽ hộp thoại đang mở (UI.modal)

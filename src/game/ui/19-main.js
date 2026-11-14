@@ -21,7 +21,7 @@ function render(){
     if(!inMap&&UI.modal)UI.modal=null;
     if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth',vBirth):G.screen==='over'&&G.over?rxv('Over',vOver):G.screen==='meta'?rxv('Meta',vMeta):G.screen==='life'&&G.run?rxv('Life',vLife):rxv('Title',vTitle);}
     else{
-      if(cb)full=vCombat(sc);
+      if(cb)full=rxv('TranDau',()=>vCombat(sc));
       else{hud=rxv('Hud',hudHTML);nav=rxv('Nav',navHTML);
         if(!sc){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
         else if(UI.evMin&&sc.type==='event'){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
