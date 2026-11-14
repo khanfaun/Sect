@@ -3,6 +3,7 @@ import { TuDia, GhiChu, KetQua, DienBienTran, TranDangDo, DevTest, NhanSu } from
 import { DienCongHien, LaiBuon, TramDich } from './MuaBan';
 import { ThamDo } from './ThamDo';
 import { HopChon } from './HopChon';
+import { BeQuan } from './BeQuan';
 import { XemVatPham, XemCongPhap, CacPham, TieuHuyet } from './VatPham';
 import { XacNhanViec, XacNhanNoiChon, LamNhiemVu, HuyNhiemVu } from './XacNhan';
 
@@ -25,6 +26,7 @@ export const HOP_THOAI = {
   qdo: LamNhiemVu,
   qdrop: HuyNhiemVu,
   pick: HopChon,
+  bq: BeQuan,
   item: XemVatPham,
   art: XemCongPhap,
   pham: CacPham,
