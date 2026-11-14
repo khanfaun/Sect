@@ -74,7 +74,6 @@ function CanCo() {
       <HopGon k="tu" icon="yin" name="Tu luyện">
         <Kv n="Cảnh giới" v={esc(PS.realmLabel()) + ` <span class="qhelp" data-act="cgOpen" data-tip="Mở hệ thống cảnh giới">?</span>`} t={tvTip} />
         <Thanh n="Tu vi" v={PS.tvShow()} cls="tv" />
-        <Thanh n="Lịch luyện" v={PS.llShow()} cls="ll" t={'Lịch luyện ' + PS.llShow() + '%\nCó được nhờ thực chiến (thắng nhiều, thua ít, đánh kẻ mạnh hơn được nhiều hơn), tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Lịch luyện tính theo tầng/kỳ đang ở: chừng 65% là xung kích được, đột phá đại cảnh giới thì cần đầy.'} />
         <Kv n="Tốc độ tu" v={RT('bq', PS.bqReal(), 'toc')} t={'Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.'} />
         <Kv n="Thổ nạp" v={RT('thonap', PS.thonapPct(), 'toc')} t={'Thân thể tự hít thở linh khí: không cần bế quan, tu vi vẫn tự tăng theo thời gian, kể cả lúc đi đường hay bế quan.\nRất ít, chừng 5% tốc độ bế quan. Theo linh căn, tư chất, ngộ tính, công pháp, tâm pháp, trang bị, mệnh cách và linh khí nơi đang đứng.'} />
         <Kv n="Hiệu suất tu" v={`<span class="${hs[0]}">${hs[1]}</span>`} t={'Phần tu vi thực nhận so với lẽ ra được nhận, do chênh lệch tu vi và lịch luyện.\nTu vi càng bỏ xa lịch luyện thì nhận càng ít, tới mức bình cảnh gần như đứng yên.\nLịch luyện cao hơn tu vi thì được ngộ đạo, nhận thêm một ít.'} />

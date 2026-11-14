@@ -53,6 +53,34 @@ function ThanhTruot({ y, mx, capP }) {
   return <input ref={ref} type="range" id="bqR" min="0" max={mx} step="0.25" defaultValue={y} style={{ '--cap': capP + '%', '--val': (mx > 0 ? y / mx * 100 : 0) + '%' }} />;
 }
 
+// Bầu trời bế quan: tranh động phủ phủ màu theo giờ hiện tại (cùng màu với bản đồ)
+const PHAN = { sang: 'Buổi sáng', chieu: 'Buổi chiều', toi: 'Chạng vạng', dem: 'Ban đêm' };
+function TroiBeQuan({ G }) {
+  const w = PS.W(), h = PS.tHour(w.t);
+  const on = !PS.CFG || PS.CFG.daynight !== false;
+  const c = on ? PS.dnTint(h, !!(PS.C && PS.C.dark)) : [0, 0, 0, 0];
+  const ph = PS.partOf(w.t);
+  return (
+    <div className="bq-sky">
+      <Tranh seed={'bequan' + G.run.at} reg={G.run.region} type="dong" cls="mart" figs="nhan:0.5:0.5:0:bq" />
+      <i className="bq-tint" style={{ background: `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${Math.min(0.5, c[3] * 2.2).toFixed(3)})` }} />
+      <small className="bq-time">{PHAN[ph]} · {Math.floor(h)}h</small>
+    </div>
+  );
+}
+
+// Thanh tiến độ: tu vi (còn bao xa tới đột phá) và lịch luyện
+function ThanhBQ({ n, v, cls, t, note }) {
+  const p = Math.max(0, Math.min(100, v));
+  return (
+    <div className="hrow tvrow" {...tip(t)}>
+      <span className="hn">{n}</span>
+      <div className={'hb ' + cls}><i style={{ width: p + '%' }} /></div>
+      <span className="hv">{note || v + '%'}</span>
+    </div>
+  );
+}
+
 function TheBeQuan({ m }) {
   const { G, HY } = PS;
   const I = PS.bqInfo(), mx = Math.min(5, I.maxY);
@@ -63,13 +91,13 @@ function TheBeQuan({ m }) {
   return (
     <div className="mbox bq">
       <Tabs m={m} />
-      <Tranh seed={'bequan' + G.run.at} reg={G.run.region} type="dong" cls="mart" figs="nhan:0.5:0.5:0:bq" />
+      <TroiBeQuan G={G} />
       <h3>Bế quan</h3>
       <div className="kv">
         <div><span>Nơi bế quan</span><Html style={{ display: 'contents' }} h={PS.lkTag(cn)} /></div>
-        <div><span>Tu vi</span><b>{PS.tvShow()}%</b></div>
-        <div><span>Lịch luyện</span><b>{PS.llShow()}%</b></div>
       </div>
+      <ThanhBQ n="Tu vi" v={PS.tvShow()} cls="tv" note={PS.btReadyTv() ? 'Viên mãn' : 'Còn ' + (100 - PS.tvShow()) + '%'} t={'Tu vi ' + PS.tvShow() + '%\nĐầy thì đủ sức đột phá.'} />
+      <ThanhBQ n="Lịch luyện" v={PS.llShow()} cls="ll" t={'Lịch luyện ' + PS.llShow() + '%\nCó được nhờ thực chiến, tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Muốn đột phá cần lịch luyện đầy.'} />
       <label className="rng"><span>Thời gian: <b id="bqY">{y > 0 ? PS.durH(y * HY) : '0 tháng'}</b></span><ThanhTruot y={y} mx={mx} capP={capP} /></label>
       <div className="hbtns">
         <button data-act="bqSet" data-arg="0.25">3 tháng</button>
