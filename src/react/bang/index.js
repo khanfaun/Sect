@@ -3,6 +3,7 @@ import { LinhThu } from './LinhThu';
 import { SoTay, BangThienHa } from './SoTay';
 import { GiaoTinh } from './GiaoTinh';
 import { LuyenChe } from './LuyenChe';
+import { Them, TongMon } from './Them';
 
 export const BANG = {
   pets: LinhThu,
@@ -10,4 +11,6 @@ export const BANG = {
   affairs: BangThienHa,
   bonds: GiaoTinh,
   craft: LuyenChe,
+  more: Them,
+  tong: TongMon,
 };
