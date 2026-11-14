@@ -28,7 +28,7 @@ function gfxDetect(){const c=navigator.hardwareConcurrency||4,m=navigator.device
 function gfxLv(){return CFG.gfx==='low'?0:CFG.gfx==='mid'?1:CFG.gfx==='high'?2:GFX_AUTO;}
 function cfgApply(){const d=document.documentElement;d.dataset.theme=CFG.theme;d.dataset.font=CFG.font;d.dataset.gfx=['low','mid','high'][gfxLv()];d.dataset.anim=CFG.anim&&gfxLv()>0?'1':'0';
   if(typeof Map2!=='undefined')Map2.invalidate(true);}
-function cfgSet(k,v){CFG[k]=v;cfgSave();cfgApply();}
+function cfgSet(k,v){CFG[k]=v;cfgSave();cfgApply();if(['gfx','fps','dpr','clouds','fx','daynight'].includes(k)&&typeof Map2!=='undefined'&&Map2.reset)Map2.reset();}
 
 // ---------- biểu tượng nét mảnh ----------
 const ICP={

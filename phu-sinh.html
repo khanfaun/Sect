@@ -7915,7 +7915,7 @@ function gfxDetect(){const c=navigator.hardwareConcurrency||4,m=navigator.device
 function gfxLv(){return CFG.gfx==='low'?0:CFG.gfx==='mid'?1:CFG.gfx==='high'?2:GFX_AUTO;}
 function cfgApply(){const d=document.documentElement;d.dataset.theme=CFG.theme;d.dataset.font=CFG.font;d.dataset.gfx=['low','mid','high'][gfxLv()];d.dataset.anim=CFG.anim&&gfxLv()>0?'1':'0';
   if(typeof Map2!=='undefined')Map2.invalidate(true);}
-function cfgSet(k,v){CFG[k]=v;cfgSave();cfgApply();}
+function cfgSet(k,v){CFG[k]=v;cfgSave();cfgApply();if(['gfx','fps','dpr','clouds','fx','daynight'].includes(k)&&typeof Map2!=='undefined'&&Map2.reset)Map2.reset();}
 
 // ---------- biểu tượng nét mảnh ----------
 const ICP={
@@ -8371,7 +8371,7 @@ const Map2=(()=>{
   const cam={x:500,y:500,z:0.8,follow:true,reg:-1};
   let terr=null,terrKey='',fogC=null,fogKey='',C={},cloudSpr=null;
   let fogS=null,fogKey2='',holeSpr=null;
-  let dirty=true,ema=0,slow=0,fpsT=0,fpsN=0,fpsShow=0,lastT=0;
+  let dirty=true,soft=false,ema=0,slow=0,fpsT=0,fpsN=0,fpsShow=0,lastT=0,lastDraw=0;
   const parts=[],clouds=[];let pos=null;
   const ptr=new Map();let drag=null,pinch=null;
 
@@ -8580,10 +8580,10 @@ const Map2=(()=>{
   function frame(now){
     if(!cv||!G.run||document.hidden||!cv.isConnected)return;
     const gap=1000/(CFG.fps||30);const an=animating()&&!UI.panel&&!(G.run.scene&&G.run.scene.type==='combat');
-    if(!dirty&&!an)return;if(!dirty&&now-lastT<gap-2)return;
+    if(!dirty&&!soft&&!an)return;if(!dirty&&now-lastT<gap-2)return;soft=false;
     const dt=Math.min(0.1,(now-lastT)/1000)||0.016;lastT=now;dirty=false;
     const t0=performance.now();try{draw(now,dt);}catch(e){console.error(e);}const c=performance.now()-t0;
-    ema=ema?ema*0.9+c*0.1:c;fpsN++;if(now-fpsT>1000){fpsShow=fpsN;fpsN=0;fpsT=now;}
+    ema=ema?ema*0.9+c*0.1:c;lastDraw=performance.now();fpsN++;if(now-fpsT>1000){fpsShow=Math.round(fpsN*1000/(now-fpsT));fpsN=0;fpsT=now;}
     // tự hạ mức đồ họa khi máy đuối
     if(CFG.gfx==='auto'&&an){if(ema>16)slow++;else slow=Math.max(0,slow-1);if(slow>90&&GFX_AUTO>0){GFX_AUTO--;slow=0;ema=0;clouds.length=0;parts.length=0;cfgApply();if(typeof note==='function'){note('Máy hơi nóng: đã tự hạ mức đồ họa.');toastFlush();}}}
   }
@@ -8602,7 +8602,7 @@ const Map2=(()=>{
     cv.addEventListener('pointerleave',()=>{if(hov!=null){hov=null;dirty=true;}hideTip();});
     cv.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.15:1/1.15,e.offsetX,e.offsetY);},{passive:false});
   }
-  return {attach,resize,invalidate,frame,center,focus,zoom,cam,setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
+  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,reset(){clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();},get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
 })();
 
 // ---------- tranh mực: phong cảnh và bóng nhân vật, vẽ bằng mã rồi giữ lại ----------
@@ -10089,7 +10089,7 @@ function loop(now){
       }
     }catch(e){console.error(e);}
   } else clkAcc=0;
-  if((UI.lvGlow&&now<UI.lvGlow.t1+100)||UI.dnMv)Map2.invalidate();
+  if((UI.lvGlow&&now<UI.lvGlow.t1+100)||UI.dnMv)Map2.soft();
   if(G.screen==='map'&&G.run)Map2.frame(now);
   requestAnimationFrame(loop);
 }
@@ -10510,9 +10510,11 @@ setInterval(()=>{if(!G.run||G.screen!=='map'){UI.lowPrev=null;UI.injPrev=null;re
   if(UI.lowPrev&&!low)edgeHeal();if(UI.injPrev&&!inj)edgeHeal();UI.lowPrev=low;UI.injPrev=inj;
   const el=document.getElementById('lowfx')||(()=>{const d=document.createElement('div');d.id='lowfx';document.body.appendChild(d);return d;})();
   const st=G.run.asc?'':UI.healT&&now<UI.healT?'heal':low?'low':'';if(el.dataset.s!==st){el.dataset.s=st;el.className=st;}},250);
-// số khung hình: nhãn nhỏ góc phải, dạng "30FPS"
-{let fc=0,ft=performance.now();const tick=t=>{fc++;if(t-ft>=1000){const el=document.getElementById('fpsb')||(()=>{const d=document.createElement('div');d.id='fpsb';document.body.appendChild(d);return d;})();
-  el.hidden=!CFG.showFps;if(CFG.showFps){el.textContent=Math.round(fc*1000/(t-ft))+'FPS';const hd=document.getElementById('hud');el.style.top=((hd&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+6)+'px';}fc=0;ft=t;}requestAnimationFrame(tick);};requestAnimationFrame(tick);}
+// số khung hình: chỉ hiện ở bản đồ chính, đo số khung bản đồ thật sự được vẽ (không phải nhịp màn hình)
+setInterval(()=>{const el=document.getElementById('fpsb')||(()=>{const d=document.createElement('div');d.id='fpsb';document.body.appendChild(d);return d;})();
+  const on=CFG.showFps&&G.run&&!G.run.scene&&!UI.modal&&!UI.panel&&!document.hidden;el.hidden=!on;if(!on)return;
+  el.textContent=Map2.fps+'FPS · '+['tiết kiệm','cân bằng','đẹp'][gfxLv()]+' · x'+(+Map2.dpr.toFixed(1));
+  const hd=document.getElementById('hud');el.style.top=((hd&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+6)+'px';},500);
 
 ACT.favGift=n=>{UI.bondOpen=n;const w=favGift(n);if(w)note(w,'dn');else note('Đã tặng lễ cho '+(n.replace(/^@\d+:/,'')),'up');};
 ACT.relMake=a=>{const i=a.lastIndexOf('|');const n=a.slice(0,i),k=a.slice(i+1);UI.bondOpen=n;const w=relMake(n,k,npcInfo(n));if(w)note(w,'dn');else hnote('Kết '+REL_T[k].n.toLowerCase()+' · '+n.replace(/^@\d+:/,''),'up');};

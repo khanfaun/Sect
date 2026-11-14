@@ -29,9 +29,11 @@ setInterval(()=>{if(!G.run||G.screen!=='map'){UI.lowPrev=null;UI.injPrev=null;re
   if(UI.lowPrev&&!low)edgeHeal();if(UI.injPrev&&!inj)edgeHeal();UI.lowPrev=low;UI.injPrev=inj;
   const el=document.getElementById('lowfx')||(()=>{const d=document.createElement('div');d.id='lowfx';document.body.appendChild(d);return d;})();
   const st=G.run.asc?'':UI.healT&&now<UI.healT?'heal':low?'low':'';if(el.dataset.s!==st){el.dataset.s=st;el.className=st;}},250);
-// số khung hình: nhãn nhỏ góc phải, dạng "30FPS"
-{let fc=0,ft=performance.now();const tick=t=>{fc++;if(t-ft>=1000){const el=document.getElementById('fpsb')||(()=>{const d=document.createElement('div');d.id='fpsb';document.body.appendChild(d);return d;})();
-  el.hidden=!CFG.showFps;if(CFG.showFps){el.textContent=Math.round(fc*1000/(t-ft))+'FPS';const hd=document.getElementById('hud');el.style.top=((hd&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+6)+'px';}fc=0;ft=t;}requestAnimationFrame(tick);};requestAnimationFrame(tick);}
+// số khung hình: chỉ hiện ở bản đồ chính, đo số khung bản đồ thật sự được vẽ (không phải nhịp màn hình)
+setInterval(()=>{const el=document.getElementById('fpsb')||(()=>{const d=document.createElement('div');d.id='fpsb';document.body.appendChild(d);return d;})();
+  const on=CFG.showFps&&G.run&&!G.run.scene&&!UI.modal&&!UI.panel&&!document.hidden;el.hidden=!on;if(!on)return;
+  el.textContent=Map2.fps+'FPS · '+['tiết kiệm','cân bằng','đẹp'][gfxLv()]+' · x'+(+Map2.dpr.toFixed(1));
+  const hd=document.getElementById('hud');el.style.top=((hd&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+6)+'px';},500);
 
 ACT.favGift=n=>{UI.bondOpen=n;const w=favGift(n);if(w)note(w,'dn');else note('Đã tặng lễ cho '+(n.replace(/^@\d+:/,'')),'up');};
 ACT.relMake=a=>{const i=a.lastIndexOf('|');const n=a.slice(0,i),k=a.slice(i+1);UI.bondOpen=n;const w=relMake(n,k,npcInfo(n));if(w)note(w,'dn');else hnote('Kết '+REL_T[k].n.toLowerCase()+' · '+n.replace(/^@\d+:/,''),'up');};

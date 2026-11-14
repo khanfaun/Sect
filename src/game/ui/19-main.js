@@ -74,7 +74,7 @@ function loop(now){
       }
     }catch(e){console.error(e);}
   } else clkAcc=0;
-  if((UI.lvGlow&&now<UI.lvGlow.t1+100)||UI.dnMv)Map2.invalidate();
+  if((UI.lvGlow&&now<UI.lvGlow.t1+100)||UI.dnMv)Map2.soft();
   if(G.screen==='map'&&G.run)Map2.frame(now);
   requestAnimationFrame(loop);
 }

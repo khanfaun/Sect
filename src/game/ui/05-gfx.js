@@ -58,7 +58,7 @@ const Map2=(()=>{
   const cam={x:500,y:500,z:0.8,follow:true,reg:-1};
   let terr=null,terrKey='',fogC=null,fogKey='',C={},cloudSpr=null;
   let fogS=null,fogKey2='',holeSpr=null;
-  let dirty=true,ema=0,slow=0,fpsT=0,fpsN=0,fpsShow=0,lastT=0;
+  let dirty=true,soft=false,ema=0,slow=0,fpsT=0,fpsN=0,fpsShow=0,lastT=0,lastDraw=0;
   const parts=[],clouds=[];let pos=null;
   const ptr=new Map();let drag=null,pinch=null;
 
@@ -267,10 +267,10 @@ const Map2=(()=>{
   function frame(now){
     if(!cv||!G.run||document.hidden||!cv.isConnected)return;
     const gap=1000/(CFG.fps||30);const an=animating()&&!UI.panel&&!(G.run.scene&&G.run.scene.type==='combat');
-    if(!dirty&&!an)return;if(!dirty&&now-lastT<gap-2)return;
+    if(!dirty&&!soft&&!an)return;if(!dirty&&now-lastT<gap-2)return;soft=false;
     const dt=Math.min(0.1,(now-lastT)/1000)||0.016;lastT=now;dirty=false;
     const t0=performance.now();try{draw(now,dt);}catch(e){console.error(e);}const c=performance.now()-t0;
-    ema=ema?ema*0.9+c*0.1:c;fpsN++;if(now-fpsT>1000){fpsShow=fpsN;fpsN=0;fpsT=now;}
+    ema=ema?ema*0.9+c*0.1:c;lastDraw=performance.now();fpsN++;if(now-fpsT>1000){fpsShow=Math.round(fpsN*1000/(now-fpsT));fpsN=0;fpsT=now;}
     // tự hạ mức đồ họa khi máy đuối
     if(CFG.gfx==='auto'&&an){if(ema>16)slow++;else slow=Math.max(0,slow-1);if(slow>90&&GFX_AUTO>0){GFX_AUTO--;slow=0;ema=0;clouds.length=0;parts.length=0;cfgApply();if(typeof note==='function'){note('Máy hơi nóng: đã tự hạ mức đồ họa.');toastFlush();}}}
   }
@@ -289,5 +289,5 @@ const Map2=(()=>{
     cv.addEventListener('pointerleave',()=>{if(hov!=null){hov=null;dirty=true;}hideTip();});
     cv.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.15:1/1.15,e.offsetX,e.offsetY);},{passive:false});
   }
-  return {attach,resize,invalidate,frame,center,focus,zoom,cam,setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
+  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,reset(){clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();},get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
 })();
