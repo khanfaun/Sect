@@ -5,9 +5,10 @@
 //   Nền: phàm nhân 1,5%, mỗi đại cảnh giới đã đột phá +1%. Mỗi nguồn +0,2%.
 //   Cộng dồn: mỗi tháng liên tiếp không bị thương, không mất khí huyết thì hồi thêm 0,2% so với tháng trước (không trần).
 //   Bị thương hoặc mất khí huyết thì cộng dồn về 0. Đầy thì không hồi thêm nhưng cộng dồn vẫn tăng.
-// Số nguồn ước theo tổng chỉ số hồi phục trên đồ (mỗi dòng hồi khí huyết ~1,5%, hồi linh lực ~3%), tối đa RG_SRC_MAX.
-const RG_SRC_MAX=8;
-function rgSrc(fx){return {hp:Math.min(RG_SRC_MAX,Math.round((fx.regenHp||0)/1.5)),mp:Math.min(RG_SRC_MAX,Math.round((fx.regenMp||0)/3))};}
+// Phần cộng thêm từ đồ, công pháp: lấy đúng chỉ số hồi phục ghi trên chúng (cộng dồn), nhân hệ số RG_K để hợp với thang % ở đây.
+// Món mạnh cộng nhiều, món yếu cộng ít. Muốn đổi mức cộng thì sửa RG_K (hoặc sửa chỉ số trên đồ).
+const RG_K=0.13; // 1,5 (một dòng "hồi khí huyết" thường gặp) → +0,2%
+function rgSrc(fx){return {hp:(fx.regenHp||0)*RG_K/0.2,mp:(fx.regenMp||0)/2*RG_K/0.2};}
 function rgTurnRate(){const r=G.run;return isPham()?0.5:0.7+0.2*(r.realm||0);}
 function rgMonthRate(){const r=G.run;return isPham()?1.5:2.5+(r.realm||0);}
 function regenTurn(u,fx){const n=rgSrc(fx);const b=rgTurnRate();
