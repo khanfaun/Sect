@@ -51,3 +51,24 @@ export function Cost({ h, st }) {
     {!!st && <span className="cost-s"><i className="rh"></i>{st}</span>}
   </>;
 }
+
+// Hộp thả xuống tự vẽ (giống ddSel()): mỗi lựa chọn {v, h} với h là chuỗi HTML
+export function DdSel({ act, label, opts, cur }) {
+  const o = opts.find(x => String(x.v) === String(cur)) || opts[0], open = PS.UI.dd === act;
+  return (
+    <div className={'ddw' + (open ? ' open' : '')}>
+      <small>{label}</small>
+      <button className="dds" data-act="ddOpen" data-arg={act}><span dangerouslySetInnerHTML={{ __html: o.h }} /><Ic n={open ? 'up' : 'down'} /></button>
+      {open && (
+        <div className="ddl">
+          {opts.map(x => <button key={String(x.v)} className={'ddo' + (String(x.v) === String(cur) ? ' on' : '')} data-act={act} data-arg={x.v} dangerouslySetInnerHTML={{ __html: x.h }} />)}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Nút × nhỏ ở góc ô để gỡ / tháo (giống slotX())
+export function SlotX({ act, arg, t }) {
+  return <span className="slx" data-act={act} data-arg={arg} role="button" aria-label={t || 'Gỡ'} {...tip(t || 'Gỡ ra')}><Ic n="close" /></span>;
+}
