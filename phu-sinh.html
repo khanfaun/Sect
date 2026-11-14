@@ -7767,8 +7767,9 @@ function camNgoFull(){return camNgo()>=CN_MAX;}
 // ================= NGỘ TÍNH → LỊCH LUYỆN, KHÍ VẬN → KỲ NGỘ =================
 // Ngộ tính cao thì mỗi lần lịch luyện tăng được nhiều hơn: +2,5% cho mỗi điểm trên 10, tối đa +50%.
 const NGO_LL_PER=0.025,NGO_LL_MAX=0.5;
+const LL_BOOST=3; // mọi nguồn lịch luyện nhận gấp LL_BOOST lần (trước đây quá chậm)
 function ngoLlMul(){const r=G.run;if(!r)return 1;return 1+clamp((S().ngo-10)*NGO_LL_PER,0,NGO_LL_MAX);}
-{const _la=llAdd;llAdd=function(x,why,quiet){return _la(x>0?x*ngoLlMul():x,why,quiet);};}
+{const _la=llAdd;llAdd=function(x,why,quiet){return _la(x>0?x*ngoLlMul()*LL_BOOST:x,why,quiet);};}
 // Khí vận cao thì dễ gặp kỳ ngộ: +12% cơ hội cho mỗi điểm trên 4 (mức khởi đầu), thấp nhất 60%, cao nhất 300%.
 // Kỳ ngộ lớn (loại hiếm nhất) chỉ mở khi khí vận từ KY_BIG_VAN trở lên.
 const KY_BIG_VAN=8;
@@ -7826,9 +7827,11 @@ const WT_SCAR={gay:['que','cut'],than:['mu'],noi:['que']};
 //   Nền: phàm nhân 1,5%, mỗi đại cảnh giới đã đột phá +1%. Mỗi nguồn +0,2%.
 //   Cộng dồn: mỗi tháng liên tiếp không bị thương, không mất khí huyết thì hồi thêm 0,2% so với tháng trước (không trần).
 //   Bị thương hoặc mất khí huyết thì cộng dồn về 0. Đầy thì không hồi thêm nhưng cộng dồn vẫn tăng.
-// Số nguồn ước theo tổng chỉ số hồi phục trên đồ (mỗi dòng hồi khí huyết ~1,5%, hồi linh lực ~3%), tối đa RG_SRC_MAX.
-const RG_SRC_MAX=8;
-function rgSrc(fx){return {hp:Math.min(RG_SRC_MAX,Math.round((fx.regenHp||0)/1.5)),mp:Math.min(RG_SRC_MAX,Math.round((fx.regenMp||0)/3))};}
+// Phần cộng thêm từ đồ, công pháp: lấy đúng chỉ số hồi phục ghi trên chúng (cộng dồn), nhân hệ số RG_K để hợp với thang % ở đây.
+// Món mạnh cộng nhiều, món yếu cộng ít. Muốn đổi mức cộng thì sửa RG_K (hoặc sửa chỉ số trên đồ).
+const BQ_MP_MUL=3; // bế quan là hấp thụ linh khí: linh lực hồi nhanh gấp BQ_MP_MUL lần mức nền (khí huyết hồi như thường)
+const RG_K=0.13; // 1,5 (một dòng "hồi khí huyết" thường gặp) → +0,2%
+function rgSrc(fx){return {hp:(fx.regenHp||0)*RG_K/0.2,mp:(fx.regenMp||0)/2*RG_K/0.2};}
 function rgTurnRate(){const r=G.run;return isPham()?0.5:0.7+0.2*(r.realm||0);}
 function rgMonthRate(){const r=G.run;return isPham()?1.5:2.5+(r.realm||0);}
 function regenTurn(u,fx){const n=rgSrc(fx);const b=rgTurnRate();
@@ -7843,17 +7846,23 @@ function rgMonths(n){const r=G.run;if(!r||n<=0)return;const s=S(),fx=aggFx(),src
     if(r.rgLost||injured()){r.rgStreak=0;r.rgLost=0;}else r.rgStreak=(r.rgStreak||0)+1;
     const bon=0.2*r.rgStreak;
     if(r.hp<s.maxHp)r.hp=Math.min(s.maxHp,r.hp+Math.max(1,Math.round(s.maxHp*(base+0.2*src.hp+bon)/100)));
-    if(!isPham()&&r.mp<s.maxMp)r.mp=Math.min(s.maxMp,r.mp+Math.max(1,Math.round(s.maxMp*(base+0.2*src.mp+bon)/100)));}
+    if(!isPham()&&r.mp<s.maxMp)r.mp=Math.min(s.maxMp,r.mp+Math.max(1,Math.round(s.maxMp*(base+0.2*src.mp+bon)*(r._inBq?BQ_MP_MUL:1)/100)));}
   r._hpLast=r.hp;}
 // đếm tháng trôi qua (cả khi bế quan nhiều năm): làm theo vòng lặp có giới hạn, không lặp vô hạn
 {const _at=advanceTime;advanceTime=function(h){rgMark();const o=_at.apply(this,arguments);const r=G.run;
   if(r&&h>0&&!(r.scene&&r.scene.type==='combat')){if(r.hp>S().maxHp)r.hp=S().maxHp;r.rgAcc=(r.rgAcc||0)+h;const m=Math.floor(r.rgAcc/HM);
-    if(m>0){r.rgAcc-=m*HM;rgMonths(Math.min(m,1200));dbg('regen.month',{m,streak:r.rgStreak,hp:r.hp});}}
+    if(m>0){r.rgAcc-=m*HM;rgMonths(Math.min(m,1200));dbg('regen.month',{m,streak:r.rgStreak,hp:r.hp,mp:r.mp,bq:!!r._inBq});}
+    if(r._inBq)r._bqS={hp:r.hp,mp:r.mp};}
   if(G.run)rgMark();return o;};}
 // mất máu trong trận, bị thương: cộng dồn về 0
 {const _fc=finishCombat;finishCombat=function(sc){const x=_fc.apply(this,arguments);const r=G.run;if(r){const me=sc&&mainUnit(sc);if(me&&me.hp<me.max)r.rgLost=1;r._hpLast=r.hp;}return x;};}
 {const _aw=addWound;addWound=function(){const r=G.run;if(r){r.rgLost=1;r.rgStreak=0;}return _aw.apply(this,arguments);};}
 function rgInfo(){const r=G.run;const src=rgSrc(aggFx());return {turn:+(rgTurnRate()+0.2*src.hp).toFixed(1),month:+(rgMonthRate()+0.2*src.hp+0.2*(r.rgStreak||0)).toFixed(1),streak:r.rgStreak||0};}
+
+// bế quan: xuất quan không còn "hồi đầy" cả hai; giữ đúng phần đã hồi theo thời gian (linh lực nhanh hơn khí huyết)
+{const _b=bqCustom;bqCustom=function(y){const r=G.run;if(!r)return _b.apply(this,arguments);r._inBq=1;r._bqS=null;let o;
+  try{o=_b.apply(this,arguments);}finally{if(G.run)G.run._inBq=0;}
+  const g=G.run;if(g&&g._bqS&&!(g.scene&&g.scene.type==='combat')){const s=S();g.hp=Math.min(s.maxHp,g._bqS.hp);g.mp=Math.min(s.maxMp,g._bqS.mp);dbg('bq.regen',{hp:g.hp,mp:g.mp});}return o;};}
 
 // ================= TĨNH TOẠ =================
 // Ngồi yên dưỡng thân: không tăng tu vi, hồi khí huyết, linh lực nhanh gấp TT_MUL lần bình thường, giảm nhẹ tâm ma.
@@ -7994,6 +8003,41 @@ function gtSpawn(){const r=G.run;if(!r||isPham()&&r.age<17)return;const w=W();if
   w.ents.push(e);dbg('gt.spawn',{at:a.name,seen:Math.hypot(a.x-x,a.y-y)<=senseR()});}
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(r&&h>0){r.gtAcc=(r.gtAcc||0)+h;if(r.gtAcc>=HM){r.gtAcc=0;gtSpawn();}}return o;};}
 {const _me=meetEnt;meetEnt=function(e){if(e&&e.type==='giaotranh'){const r=G.run;e.met=r.kiep+':'+Math.floor(W().t/HD);if(r.moving)r.moving=null;if(EVMAP.tranh_bao){startEvent('tranh_bao',{eid:e.id,en:e.name});r.scene.back=null;}removeEnt(e);dbg('gt.meet',{});return;}return _me(e);};}
+
+// ================= TÚI TRỮ VẬT (logic nền) =================
+// Khởi đầu chỉ có BAG_BODY ô (mang trên người). Túi trữ vật (relic k:'tui', đeo ở ô Trữ vật) mở thêm BAG_TUI[phẩm] ô, đánh dấu riêng (src:'tui').
+// Ô của túi chỉ mở được khi có linh lực: phàm nhân hoặc linh lực = 0 thì các ô túi tạm khoá (đồ không mất, chỉ không lấy ra dùng được).
+// Chưa đeo túi thì không có ô túi nên không gì bị khoá. Giao diện ô/khoá gắn sau qua bagLayout() và các trường bsrc/locked của bagItems().
+// Mỗi món pháp bảo, mỗi loại vật liệu, trứng, lệnh bài và MỖI viên đan chiếm một ô.
+const BAG_BODY=10;
+function tuiEq(){const r=G.run;return r?eqOf().tuivat||null:null;}
+function tuiOn(){const r=G.run;return !!(r&&!isPham()&&r.mp>0);}
+function tuiSlots(){const t=tuiEq();if(!t)return 0;const up=((G.meta&&G.meta.upg&&G.meta.upg.tui)||0)*5;return BAG_TUI[clamp(t.tier||0,0,6)]+up;}
+bagCap=function(){const r=G.run;if(!r)return BAG_BODY;return Math.min(BAG_MAX,BAG_BODY+tuiSlots());};
+// các đơn vị chiếm ô, theo thứ tự: pháp bảo, vật liệu, trứng, lệnh bài, đan dược
+function bagUnits(){const r=G.run;const U=[];r.relics.forEach((x,i)=>U.push({t:'r',i}));
+  for(const k of Object.keys(r.mats||{}))if(r.mats[k]>0)U.push({t:'m',k});(r.eggs||[]).forEach((e,i)=>U.push({t:'e',i}));(r.passes||[]).forEach(g=>U.push({t:'q',g}));
+  r.pills.forEach((p,i)=>U.push({t:'p',i}));return U;}
+function bagLayout(){const slots=[];for(let i=0;i<BAG_BODY;i++)slots.push({i,src:'than',locked:false,unit:null});
+  const ts=tuiSlots();for(let k=0;k<ts;k++)slots.push({i:slots.length,src:'tui',tuiName:(tuiEq()||{}).name,locked:!tuiOn(),unit:null});
+  const over=[];bagUnits().forEach((u,n)=>{if(n<slots.length)slots[n].unit=u;else over.push(u);});
+  return {slots,over,on:tuiOn(),cap:slots.length,used:bagUnits().length};}
+function unitLocked(t,v){const L=bagLayout();const s=L.slots.find(x=>x.unit&&x.unit.t===t&&(t==='m'?x.unit.k===v:t==='q'?x.unit.g===v:x.unit.i===v));return !!(s&&s.locked);}
+function bagLockNote(){note('Túi trữ vật bị khoá: không đủ linh lực để mở ra. Đồ vẫn còn nguyên.','dn');}
+// gắn thông tin ô vào từng món của danh sách túi
+{const _bi=bagItems;bagItems=function(){const L=_bi.apply(this,arguments);const ts=tuiSlots();if(!ts)return L;const lay=bagLayout();
+  const f=(t,v)=>lay.slots.find(x=>x.unit&&x.unit.t===t&&(t==='m'?x.unit.k===v:t==='q'?x.unit.g===v:x.unit.i===v));
+  for(const it of L){let s=null;const k=it.key;
+    if(k[0]==='r')s=f('r',+k.slice(1));else if(k[0]==='m')s=f('m',k.slice(1));else if(k[0]==='e')s=f('e',+k.slice(1));else if(k[0]==='q')s=f('q',+k.slice(1));
+    else if(k[0]==='p'){const idx=G.run.pills.map((p,i)=>i).filter(i=>('p'+G.run.pills[i].id+':'+(G.run.pills[i].q||0))===k);const sl=idx.map(i=>f('p',i)).filter(Boolean);it.lockedN=sl.filter(x=>x.locked).length;it.locked=sl.length>0&&it.lockedN===sl.length;it.bsrc=sl.some(x=>x.src==='tui')?'tui':'than';continue;}
+    if(s){it.bsrc=s.src;it.locked=!!s.locked;}}
+  return L;};}
+// khoá thật: không dùng, mang, bán, đưa vào đan điền đồ nằm trong ô túi đang khoá
+{const _eq=equip;equip=function(i){if(G.run.relics[i]&&unitLocked('r',i)){bagLockNote();return;}return _eq.apply(this,arguments);};}
+{const _dp=ddPut;ddPut=function(i){if(G.run.relics[i]&&unitLocked('r',i)){bagLockNote();return false;}return _dp.apply(this,arguments);};}
+{const _sl=sellItem;sellItem=function(k,i){if(k==='r'&&unitLocked('r',i)||k==='p'&&unitLocked('p',i)){bagLockNote();return;}return _sl.apply(this,arguments);};}
+{const _up=usePill;usePill=function(idx,c){if(G.run.pills[idx]&&unitLocked('p',idx)){bagLockNote();return false;}return _up.apply(this,arguments);};}
+{const _ln=learnBook;learnBook=function(i){if(G.run.relics[i]&&unitLocked('r',i)){bagLockNote();return null;}return _ln.apply(this,arguments);};}
 
 // ================= NHẬT KÝ GỠ LỖI =================
 // Ghi lại các sự kiện chính của game vào một bộ nhớ vòng (tối đa NK.max dòng) để kiểm tra bằng chữ thay vì chụp màn hình.

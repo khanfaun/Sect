@@ -7,6 +7,7 @@
 //   Bị thương hoặc mất khí huyết thì cộng dồn về 0. Đầy thì không hồi thêm nhưng cộng dồn vẫn tăng.
 // Phần cộng thêm từ đồ, công pháp: lấy đúng chỉ số hồi phục ghi trên chúng (cộng dồn), nhân hệ số RG_K để hợp với thang % ở đây.
 // Món mạnh cộng nhiều, món yếu cộng ít. Muốn đổi mức cộng thì sửa RG_K (hoặc sửa chỉ số trên đồ).
+const BQ_MP_MUL=3; // bế quan là hấp thụ linh khí: linh lực hồi nhanh gấp BQ_MP_MUL lần mức nền (khí huyết hồi như thường)
 const RG_K=0.13; // 1,5 (một dòng "hồi khí huyết" thường gặp) → +0,2%
 function rgSrc(fx){return {hp:(fx.regenHp||0)*RG_K/0.2,mp:(fx.regenMp||0)/2*RG_K/0.2};}
 function rgTurnRate(){const r=G.run;return isPham()?0.5:0.7+0.2*(r.realm||0);}
@@ -23,14 +24,20 @@ function rgMonths(n){const r=G.run;if(!r||n<=0)return;const s=S(),fx=aggFx(),src
     if(r.rgLost||injured()){r.rgStreak=0;r.rgLost=0;}else r.rgStreak=(r.rgStreak||0)+1;
     const bon=0.2*r.rgStreak;
     if(r.hp<s.maxHp)r.hp=Math.min(s.maxHp,r.hp+Math.max(1,Math.round(s.maxHp*(base+0.2*src.hp+bon)/100)));
-    if(!isPham()&&r.mp<s.maxMp)r.mp=Math.min(s.maxMp,r.mp+Math.max(1,Math.round(s.maxMp*(base+0.2*src.mp+bon)/100)));}
+    if(!isPham()&&r.mp<s.maxMp)r.mp=Math.min(s.maxMp,r.mp+Math.max(1,Math.round(s.maxMp*(base+0.2*src.mp+bon)*(r._inBq?BQ_MP_MUL:1)/100)));}
   r._hpLast=r.hp;}
 // đếm tháng trôi qua (cả khi bế quan nhiều năm): làm theo vòng lặp có giới hạn, không lặp vô hạn
 {const _at=advanceTime;advanceTime=function(h){rgMark();const o=_at.apply(this,arguments);const r=G.run;
   if(r&&h>0&&!(r.scene&&r.scene.type==='combat')){if(r.hp>S().maxHp)r.hp=S().maxHp;r.rgAcc=(r.rgAcc||0)+h;const m=Math.floor(r.rgAcc/HM);
-    if(m>0){r.rgAcc-=m*HM;rgMonths(Math.min(m,1200));dbg('regen.month',{m,streak:r.rgStreak,hp:r.hp});}}
+    if(m>0){r.rgAcc-=m*HM;rgMonths(Math.min(m,1200));dbg('regen.month',{m,streak:r.rgStreak,hp:r.hp,mp:r.mp,bq:!!r._inBq});}
+    if(r._inBq)r._bqS={hp:r.hp,mp:r.mp};}
   if(G.run)rgMark();return o;};}
 // mất máu trong trận, bị thương: cộng dồn về 0
 {const _fc=finishCombat;finishCombat=function(sc){const x=_fc.apply(this,arguments);const r=G.run;if(r){const me=sc&&mainUnit(sc);if(me&&me.hp<me.max)r.rgLost=1;r._hpLast=r.hp;}return x;};}
 {const _aw=addWound;addWound=function(){const r=G.run;if(r){r.rgLost=1;r.rgStreak=0;}return _aw.apply(this,arguments);};}
 function rgInfo(){const r=G.run;const src=rgSrc(aggFx());return {turn:+(rgTurnRate()+0.2*src.hp).toFixed(1),month:+(rgMonthRate()+0.2*src.hp+0.2*(r.rgStreak||0)).toFixed(1),streak:r.rgStreak||0};}
+
+// bế quan: xuất quan không còn "hồi đầy" cả hai; giữ đúng phần đã hồi theo thời gian (linh lực nhanh hơn khí huyết)
+{const _b=bqCustom;bqCustom=function(y){const r=G.run;if(!r)return _b.apply(this,arguments);r._inBq=1;r._bqS=null;let o;
+  try{o=_b.apply(this,arguments);}finally{if(G.run)G.run._inBq=0;}
+  const g=G.run;if(g&&g._bqS&&!(g.scene&&g.scene.type==='combat')){const s=S();g.hp=Math.min(s.maxHp,g._bqS.hp);g.mp=Math.min(s.maxMp,g._bqS.mp);dbg('bq.regen',{hp:g.hp,mp:g.mp});}return o;};}
