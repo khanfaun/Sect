@@ -5,6 +5,9 @@ export { Tabs, Tranh } from '../html';
 // tip('...') → thuộc tính data-tip (game tự hiện ô chú thích), viết hoa chữ đầu như bản cũ.
 export const tip = s => (s ? { 'data-tip': String(s)[0].toUpperCase() + String(s).slice(1) } : {});
 
+// Chú thích dạng HTML có định dạng (giống tah())
+export const tah = h => (h ? { 'data-tip': '1', 'data-tiph': h } : {});
+
 // Biểu tượng nét vẽ (giống ic() bản cũ)
 export function Ic({ n, cls }) {
   return <svg className={'ic' + (cls ? ' ' + cls : '')} viewBox="0 0 24 24" aria-hidden="true"><path d={PS.ICP[n] || PS.ICP.info} /></svg>;
