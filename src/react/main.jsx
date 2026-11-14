@@ -9,6 +9,7 @@ import { NutBanDo } from './ban-do/NutBanDo';
 import { TheDiaDiem } from './ban-do/TheDiaDiem';
 import { CANH } from './canh';
 import { HOP_THOAI } from './hop-thoai';
+import { BANG } from './bang';
 import { PS } from './html';
 
 const VIEWS = {
@@ -25,6 +26,8 @@ const VIEWS = {
 // Các cảnh: 'Canh:<loại>' vẽ cảnh đang mở (G.run.scene)
 // Hộp thoại: 'HopThoai:<loại>' vẽ hộp thoại đang mở (UI.modal)
 for (const [k, C] of Object.entries(HOP_THOAI)) VIEWS['HopThoai:' + k] = () => <C m={PS.UI.modal} />;
+// Bảng: 'Bang:<tên>' vẽ bảng đang mở (UI.panel)
+for (const [k, C] of Object.entries(BANG)) VIEWS['Bang:' + k] = C;
 for (const [k, C] of Object.entries(CANH)) VIEWS['Canh:' + k] = () => <C sc={PS.G.run.scene} />;
 
 window.RX = {

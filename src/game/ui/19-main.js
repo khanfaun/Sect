@@ -28,7 +28,7 @@ function render(){
         else if(sc.type==='region')sheet=rxv('Canh:region',()=>vRegionIntro(sc));
         else sheet=rxv('Canh:'+sc.type,()=>(SCENE_V[sc.type]||(()=>''))(sc));}
     }
-    if(UI.panel)panel=(PANEL_V[UI.panel]||(()=>''))();
+    if(UI.panel)panel=rxv('Bang:'+UI.panel,()=>(PANEL_V[UI.panel]||(()=>''))());
     modal=modalHTML();
     document.documentElement.dataset.tf=CFG.tfStyle||'hang';document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
   }catch(e){console.error(e);full=`<div class="title"><p>Có lỗi khi vẽ màn hình: ${esc(e.message)}</p><button class="btn pri" data-act="screen" data-arg="title">Về màn hình đầu</button></div>`;UI.panel=null;UI.modal=null;panel='';modal='';}
