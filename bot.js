@@ -40,7 +40,7 @@ function botPlan(){
   if(G.run.asc)G.run.asc=null;
   {const X=typeof lkXkState==='function'&&lkXkState();if(X&&X.ok&&!(G.run.realm===0&&lkTang()>=9)&&(!G.run.scene||G.run.scene.type==='place')){lkXk();return;}}
   const r=G.run,s=S();
-  if(botBackGoal())return;
+  if(botBossGoal()||botBackGoal()||botStageGoal())return;
   // mục tiêu
   if(r.hp<s.maxHp*0.45){const n=nearest(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok'&&r.st>=price(4)||n.dp);if(n&&goOrOpen(n)){r._goal=n.dp?'heal':'inn';return;}}
   if(r.realm<4&&canBreak()){const n=nearest(n=>n.dp&&dangerTag(n)<3);if(n&&goOrOpen(n)){r._goal='bt';return;}}
