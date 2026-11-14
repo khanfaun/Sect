@@ -1443,3 +1443,81 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 /* thủy mặc: ảnh màn mở đầu cao hơn, ảnh địa điểm dày hơn để thấy rõ tranh */
 .t-ink{max-height:64%!important}
 .scard.place .art.pimg{height:128px!important}.scard.place .art.pimg .asset{object-position:50% 80%}
+
+/* ===== Màn mở đầu thủy mặc: tranh sống, chạm đâu động đó ===== */
+.t-ink2{position:absolute;left:0;right:0;bottom:0;height:64%;opacity:1!important;overflow:visible}
+.t-ink2>svg{display:block;width:100%;height:100%;overflow:visible}
+.t-ink2 .ik{transform-box:fill-box;transform-origin:50% 50%;cursor:pointer}
+.t-ink2 .ik-fig,.t-ink2 .ik-pine{transform-origin:50% 100%}
+@keyframes ikbob{50%{transform:translateY(-4px)}}
+@keyframes ikfly{0%,100%{transform:translate(0,0)}50%{transform:translate(-26px,6px)}}
+@keyframes ikcr{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-8px)}}
+@keyframes ikrock{0%,100%{transform:rotate(-1.6deg) translateX(0)}50%{transform:rotate(1.6deg) translateX(3px)}}
+@keyframes iksun{50%{transform:scale(1.06);opacity:.88}}
+@keyframes iksway{50%{transform:skewX(-3deg)}}
+@keyframes ikpine{50%{transform:rotate(1.2deg)}}
+@keyframes ikfall{50%{opacity:.8}}
+@keyframes ikcl{50%{transform:translateX(10px)}}
+@keyframes ikmist{50%{transform:translateX(18px);opacity:.72}}
+@keyframes ikbirds{50%{transform:translate(14px,-6px)}}
+:root[data-anim="1"] .t-ink2 .ik-isl1{animation:ikbob 6s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-isl2{animation:ikbob 5s ease-in-out -2s infinite}
+:root[data-anim="1"] .t-ink2 .ik-fly{animation:ikfly 16s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-cr1{animation:ikcr 9s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-cr2{animation:ikcr 9s ease-in-out -3s infinite}
+:root[data-anim="1"] .t-ink2 .ik-boat{animation:ikrock 5s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-sun{animation:iksun 5s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-fig{animation:iksway 4s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-pine{animation:ikpine 5s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-fall{animation:ikfall 2.4s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-cl1{animation:ikcl 12s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-cl2{animation:ikcl 14s ease-in-out -5s infinite reverse}
+:root[data-anim="1"] .t-ink2 .ik-mist{animation:ikmist 14s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-m2{animation-duration:18s;animation-delay:-6s}
+:root[data-anim="1"] .t-ink2 .ik-m3{animation-duration:16s;animation-delay:-3s;animation-direction:reverse}
+:root[data-anim="1"] .t-ink2 .ik-birds{animation:ikbirds 7s ease-in-out infinite}
+/* phản ứng khi rê hoặc chạm */
+@keyframes ikshake{25%{transform:translateX(-4px) rotate(-3deg)}75%{transform:translateX(4px) rotate(3deg)}}
+@keyframes ikflee{100%{transform:translate(130px,-100px) scale(.45);opacity:0}}
+@keyframes ikback{from{opacity:0}to{opacity:1}}
+@keyframes ikdash{50%{transform:translate(-110px,-24px)}}
+@keyframes ikrow{50%{transform:translateX(-16px) rotate(-4deg)}}
+@keyframes ikspl{40%{transform:scaleX(1.9);opacity:.55}}
+@keyframes ikwave{25%{transform:skewX(-9deg) translateY(-3px)}60%{transform:skewX(7deg)}}
+@keyframes ikflash{40%{transform:scale(1.28);opacity:1}}
+@keyframes ikpineh{25%{transform:rotate(-4deg)}60%{transform:rotate(3.5deg)}}
+@keyframes ikscat{100%{transform:translate(40px,-34px);opacity:0}}
+@keyframes ikcloud{50%{transform:translateX(26px)}}
+@keyframes ikpag{40%{transform:scale(1.07)}}
+.t-ink2 .ik.hit.ik-isl1,.t-ink2 .ik.hit.ik-isl2{animation:ikshake .6s ease-in-out 2}
+.t-ink2 .ik.hit.ik-cr{animation:ikflee 1.6s ease-in forwards}.t-ink2 .ik.back.ik-cr{animation:ikback .9s ease-out}
+.t-ink2 .ik.hit.ik-fly{animation:ikdash 1.3s ease-in-out}
+.t-ink2 .ik.hit.ik-boat{animation:ikrow .9s ease-in-out}
+.t-ink2 .ik.hit.ik-fall{animation:ikspl .8s ease-out}
+.t-ink2 .ik.hit.ik-fig{animation:ikwave 1s ease-in-out}
+.t-ink2 .ik.hit.ik-sun{animation:ikflash .8s ease-out}
+.t-ink2 .ik.hit.ik-pine{animation:ikpineh 1s ease-in-out}
+.t-ink2 .ik.hit.ik-birds{animation:ikscat 1.2s ease-in forwards}
+.t-ink2 .ik.hit.ik-cl{animation:ikcloud 1.2s ease-in-out}
+.t-ink2 .ik.hit.ik-pag{animation:ikpag .7s ease-out}
+.ink-rp{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:46% 54% 52% 48%/50% 44% 56% 50%;background:radial-gradient(circle,rgba(38,34,29,.5) 0,rgba(38,34,29,.22) 45%,rgba(38,34,29,0) 72%);filter:blur(1.5px);pointer-events:none;animation:inkrp 2.2s ease-out forwards}
+@keyframes inkrp{0%{transform:scale(.2) rotate(0);opacity:.9}60%{opacity:.5}100%{transform:scale(11) rotate(40deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.t-ink2 .ik{animation:none!important}.ink-rp{display:none}}
+
+/* ===== Ô Thiên phú: khung chữ nhật có mào cánh, kẹp góc, ngọc đáy (thủy mặc) ===== */
+.tal-wrap{margin:30px 0 26px!important}
+.tal-wrap .tal-card{background:linear-gradient(var(--paper),var(--paper2))!important;border:2px solid var(--ink)!important;border-radius:3px!important;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px color-mix(in srgb,var(--ink) 40%,transparent)!important;padding:16px 14px 16px!important;min-height:58px}
+.tal-wrap .tal-card::before,.tal-wrap .tal-card::after{display:none!important}
+.tal-wrap .tal-card b{display:block;text-align:center;background:none!important;filter:none!important;font-size:1.45em;letter-spacing:.34em;text-transform:none!important;color:var(--ink)!important;text-shadow:none!important;padding-left:.34em}
+.tal-wrap .tal-card.tal0{border-style:dashed!important;border-color:#8a8478!important;box-shadow:inset 0 0 0 3px var(--paper)!important}.tal-wrap .tal-card.tal0 b{color:#756f63!important}
+.tal-wrap .tal-card.tal2{border-color:#2f6f55!important;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px #58a888!important}.tal-wrap .tal-card.tal2 b{color:#26503f!important}
+.tal-wrap .tal-card.tal3{border-color:#26394f!important;background:linear-gradient(#f4f7fa,#e4eaf0)!important;box-shadow:inset 0 0 0 3px #f4f7fa,inset 0 0 0 4px #34567a,0 0 10px rgba(52,86,122,.28)!important}.tal-wrap .tal-card.tal3 b{color:#26394f!important;text-shadow:0 0 6px rgba(120,160,210,.45)!important}
+.tal-wrap .tal-card.tal4{border-color:#26221d!important;background:linear-gradient(#fbf1d2,#efdca4)!important;box-shadow:inset 0 0 0 3px #fbf1d2,inset 0 0 0 5px #c9962a,0 0 14px rgba(201,150,42,.5)!important}.tal-wrap .tal-card.tal4 b{color:#3a2a08!important;text-shadow:0 0 8px rgba(255,214,110,.8)!important;font-weight:700}
+.ikp{position:absolute;inset:0;pointer-events:none;z-index:3}
+.ikp .ikp-top{position:absolute;left:50%;top:-34px;width:200px;height:56px;margin-left:-100px;overflow:visible}
+.ikp i{position:absolute;width:30px;height:30px;font-style:normal}.ikp i svg{width:100%;height:100%;overflow:visible;display:block}
+.ikp i.tl{left:-6px;top:-6px}.ikp i.tr{right:-6px;top:-6px;transform:scaleX(-1)}.ikp i.bl{left:-6px;bottom:-6px;transform:scaleY(-1)}.ikp i.br{right:-6px;bottom:-6px;transform:scale(-1,-1)}
+.ikp .ikp-bot{position:absolute;left:50%;bottom:-13px;width:120px;height:24px;margin-left:-60px;overflow:visible}
+.ikp4 .ikp-top{top:-38px}.ikp4 i{width:36px;height:36px}.ikp4 .ikp-bot{width:140px;margin-left:-70px}
+.ikp .ikp-top,.ikp .ikp-bot,.ikp i{filter:drop-shadow(0 1px 1.2px rgba(38,34,29,.4))}
+.ikp4 .ikp-top,.ikp4 .ikp-bot{filter:drop-shadow(0 0 4px rgba(201,150,42,.6)) drop-shadow(0 1px 1px rgba(38,34,29,.4))}

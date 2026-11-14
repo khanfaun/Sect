@@ -1454,6 +1454,84 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 .t-ink{max-height:64%!important}
 .scard.place .art.pimg{height:128px!important}.scard.place .art.pimg .asset{object-position:50% 80%}
 
+/* ===== Màn mở đầu thủy mặc: tranh sống, chạm đâu động đó ===== */
+.t-ink2{position:absolute;left:0;right:0;bottom:0;height:64%;opacity:1!important;overflow:visible}
+.t-ink2>svg{display:block;width:100%;height:100%;overflow:visible}
+.t-ink2 .ik{transform-box:fill-box;transform-origin:50% 50%;cursor:pointer}
+.t-ink2 .ik-fig,.t-ink2 .ik-pine{transform-origin:50% 100%}
+@keyframes ikbob{50%{transform:translateY(-4px)}}
+@keyframes ikfly{0%,100%{transform:translate(0,0)}50%{transform:translate(-26px,6px)}}
+@keyframes ikcr{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-8px)}}
+@keyframes ikrock{0%,100%{transform:rotate(-1.6deg) translateX(0)}50%{transform:rotate(1.6deg) translateX(3px)}}
+@keyframes iksun{50%{transform:scale(1.06);opacity:.88}}
+@keyframes iksway{50%{transform:skewX(-3deg)}}
+@keyframes ikpine{50%{transform:rotate(1.2deg)}}
+@keyframes ikfall{50%{opacity:.8}}
+@keyframes ikcl{50%{transform:translateX(10px)}}
+@keyframes ikmist{50%{transform:translateX(18px);opacity:.72}}
+@keyframes ikbirds{50%{transform:translate(14px,-6px)}}
+:root[data-anim="1"] .t-ink2 .ik-isl1{animation:ikbob 6s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-isl2{animation:ikbob 5s ease-in-out -2s infinite}
+:root[data-anim="1"] .t-ink2 .ik-fly{animation:ikfly 16s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-cr1{animation:ikcr 9s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-cr2{animation:ikcr 9s ease-in-out -3s infinite}
+:root[data-anim="1"] .t-ink2 .ik-boat{animation:ikrock 5s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-sun{animation:iksun 5s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-fig{animation:iksway 4s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-pine{animation:ikpine 5s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-fall{animation:ikfall 2.4s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-cl1{animation:ikcl 12s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-cl2{animation:ikcl 14s ease-in-out -5s infinite reverse}
+:root[data-anim="1"] .t-ink2 .ik-mist{animation:ikmist 14s ease-in-out infinite}
+:root[data-anim="1"] .t-ink2 .ik-m2{animation-duration:18s;animation-delay:-6s}
+:root[data-anim="1"] .t-ink2 .ik-m3{animation-duration:16s;animation-delay:-3s;animation-direction:reverse}
+:root[data-anim="1"] .t-ink2 .ik-birds{animation:ikbirds 7s ease-in-out infinite}
+/* phản ứng khi rê hoặc chạm */
+@keyframes ikshake{25%{transform:translateX(-4px) rotate(-3deg)}75%{transform:translateX(4px) rotate(3deg)}}
+@keyframes ikflee{100%{transform:translate(130px,-100px) scale(.45);opacity:0}}
+@keyframes ikback{from{opacity:0}to{opacity:1}}
+@keyframes ikdash{50%{transform:translate(-110px,-24px)}}
+@keyframes ikrow{50%{transform:translateX(-16px) rotate(-4deg)}}
+@keyframes ikspl{40%{transform:scaleX(1.9);opacity:.55}}
+@keyframes ikwave{25%{transform:skewX(-9deg) translateY(-3px)}60%{transform:skewX(7deg)}}
+@keyframes ikflash{40%{transform:scale(1.28);opacity:1}}
+@keyframes ikpineh{25%{transform:rotate(-4deg)}60%{transform:rotate(3.5deg)}}
+@keyframes ikscat{100%{transform:translate(40px,-34px);opacity:0}}
+@keyframes ikcloud{50%{transform:translateX(26px)}}
+@keyframes ikpag{40%{transform:scale(1.07)}}
+.t-ink2 .ik.hit.ik-isl1,.t-ink2 .ik.hit.ik-isl2{animation:ikshake .6s ease-in-out 2}
+.t-ink2 .ik.hit.ik-cr{animation:ikflee 1.6s ease-in forwards}.t-ink2 .ik.back.ik-cr{animation:ikback .9s ease-out}
+.t-ink2 .ik.hit.ik-fly{animation:ikdash 1.3s ease-in-out}
+.t-ink2 .ik.hit.ik-boat{animation:ikrow .9s ease-in-out}
+.t-ink2 .ik.hit.ik-fall{animation:ikspl .8s ease-out}
+.t-ink2 .ik.hit.ik-fig{animation:ikwave 1s ease-in-out}
+.t-ink2 .ik.hit.ik-sun{animation:ikflash .8s ease-out}
+.t-ink2 .ik.hit.ik-pine{animation:ikpineh 1s ease-in-out}
+.t-ink2 .ik.hit.ik-birds{animation:ikscat 1.2s ease-in forwards}
+.t-ink2 .ik.hit.ik-cl{animation:ikcloud 1.2s ease-in-out}
+.t-ink2 .ik.hit.ik-pag{animation:ikpag .7s ease-out}
+.ink-rp{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:46% 54% 52% 48%/50% 44% 56% 50%;background:radial-gradient(circle,rgba(38,34,29,.5) 0,rgba(38,34,29,.22) 45%,rgba(38,34,29,0) 72%);filter:blur(1.5px);pointer-events:none;animation:inkrp 2.2s ease-out forwards}
+@keyframes inkrp{0%{transform:scale(.2) rotate(0);opacity:.9}60%{opacity:.5}100%{transform:scale(11) rotate(40deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.t-ink2 .ik{animation:none!important}.ink-rp{display:none}}
+
+/* ===== Ô Thiên phú: khung chữ nhật có mào cánh, kẹp góc, ngọc đáy (thủy mặc) ===== */
+.tal-wrap{margin:30px 0 26px!important}
+.tal-wrap .tal-card{background:linear-gradient(var(--paper),var(--paper2))!important;border:2px solid var(--ink)!important;border-radius:3px!important;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px color-mix(in srgb,var(--ink) 40%,transparent)!important;padding:16px 14px 16px!important;min-height:58px}
+.tal-wrap .tal-card::before,.tal-wrap .tal-card::after{display:none!important}
+.tal-wrap .tal-card b{display:block;text-align:center;background:none!important;filter:none!important;font-size:1.45em;letter-spacing:.34em;text-transform:none!important;color:var(--ink)!important;text-shadow:none!important;padding-left:.34em}
+.tal-wrap .tal-card.tal0{border-style:dashed!important;border-color:#8a8478!important;box-shadow:inset 0 0 0 3px var(--paper)!important}.tal-wrap .tal-card.tal0 b{color:#756f63!important}
+.tal-wrap .tal-card.tal2{border-color:#2f6f55!important;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px #58a888!important}.tal-wrap .tal-card.tal2 b{color:#26503f!important}
+.tal-wrap .tal-card.tal3{border-color:#26394f!important;background:linear-gradient(#f4f7fa,#e4eaf0)!important;box-shadow:inset 0 0 0 3px #f4f7fa,inset 0 0 0 4px #34567a,0 0 10px rgba(52,86,122,.28)!important}.tal-wrap .tal-card.tal3 b{color:#26394f!important;text-shadow:0 0 6px rgba(120,160,210,.45)!important}
+.tal-wrap .tal-card.tal4{border-color:#26221d!important;background:linear-gradient(#fbf1d2,#efdca4)!important;box-shadow:inset 0 0 0 3px #fbf1d2,inset 0 0 0 5px #c9962a,0 0 14px rgba(201,150,42,.5)!important}.tal-wrap .tal-card.tal4 b{color:#3a2a08!important;text-shadow:0 0 8px rgba(255,214,110,.8)!important;font-weight:700}
+.ikp{position:absolute;inset:0;pointer-events:none;z-index:3}
+.ikp .ikp-top{position:absolute;left:50%;top:-34px;width:200px;height:56px;margin-left:-100px;overflow:visible}
+.ikp i{position:absolute;width:30px;height:30px;font-style:normal}.ikp i svg{width:100%;height:100%;overflow:visible;display:block}
+.ikp i.tl{left:-6px;top:-6px}.ikp i.tr{right:-6px;top:-6px;transform:scaleX(-1)}.ikp i.bl{left:-6px;bottom:-6px;transform:scaleY(-1)}.ikp i.br{right:-6px;bottom:-6px;transform:scale(-1,-1)}
+.ikp .ikp-bot{position:absolute;left:50%;bottom:-13px;width:120px;height:24px;margin-left:-60px;overflow:visible}
+.ikp4 .ikp-top{top:-38px}.ikp4 i{width:36px;height:36px}.ikp4 .ikp-bot{width:140px;margin-left:-70px}
+.ikp .ikp-top,.ikp .ikp-bot,.ikp i{filter:drop-shadow(0 1px 1.2px rgba(38,34,29,.4))}
+.ikp4 .ikp-top,.ikp4 .ikp-bot{filter:drop-shadow(0 0 4px rgba(201,150,42,.6)) drop-shadow(0 1px 1px rgba(38,34,29,.4))}
+
 </style>
 </head>
 <body>
@@ -9866,36 +9944,37 @@ function ikIsland(p,R,x,y,s){const k=IKC.ink;let t=`<path d="M-40 0q40 -10 80 0q
 function ikFlyer(p,x,y,s){const k=IKC.ink;return `<g transform="translate(${x} ${y}) scale(${s})" filter="url(#${p}b)"><path d="M-22 6l44 -6l4 2l-4 2z" fill="${k}"/><path d="M-22 6l-2 1l2 1" stroke="${k}"/><path d="M-8 3l2 -14l8 -2l3 16z" fill="${k}"/><path d="M-8 -9q-14 2 -20 12q10 -4 18 -4z" fill="${k}" opacity=".7"/><path d="M4 -10q10 -4 16 4" stroke="${IKC.seal}" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="-1" cy="-17" r="3.2" fill="#e9dcc0" stroke="${k}" stroke-width=".7"/><path d="M-4 -18q3 -6 7 -2l-1 -3q-4 -3 -7 2z" fill="${k}"/><ellipse cx="-1" cy="-22" rx="1.8" ry="2" fill="${k}"/><path d="M-30 9q-20 2 -40 -2M-34 5q-24 -3 -44 -1" stroke="${k}" stroke-width=".8" fill="none" opacity=".25"/></g>`;}
 
 // ================= MÀN MỞ ĐẦU =================
+const ik=(cls,body,h)=>`<g class="ik ${cls.split(' ').map(c=>'ik-'+c).join(' ')}" data-ik="${cls.split(' ')[0]}">${h?`<circle cx="${h[0]}" cy="${h[1]}" r="${h[2]}" fill="transparent" pointer-events="all"/>`:''}${body}</g>`;
 function inkTitleSVG(){const W=480,H=640,p='t',R=ikRng(88);let s=ikDefs(p,W,H);
   let g='';
-  g+=ikSun(p,354,206,22);
+  g+=ik('sun',ikSun(p,354,206,22),[354,206,40]);
   // đảo bay + tiên nhân ngự kiếm + hạc trên trời
-  g+=ikIsland(p,R,128,128,.7)+ikIsland(p,R,404,92,.38)+ikFlyer(p,296,150,.9)+ikCrane(p,196,168,.8,-4)+ikCrane(p,232,184,.55,-2)+ikBirds(236,86,4,.9);
+  g+=ik('isl1',ikIsland(p,R,128,128,.7),[128,150,48])+ik('isl2',ikIsland(p,R,404,92,.38),[404,100,26])+ik('fly',ikFlyer(p,296,150,.9),[296,150,32])+ik('cr cr1',ikCrane(p,196,168,.8,-4),[200,166,26])+ik('cr cr2',ikCrane(p,232,184,.55,-2),[234,182,20])+ik('birds',ikBirds(236,86,4,.9),[252,80,30]);
   // núi xa
   const A=ikRidge(R,-20,500,362,150,4,5);g+=`<path d="${ikFill(A.pts,410)}" fill="url(#${p}g1)" filter="url(#${p}r)"/>`+ikBand(p,A.pts,IKC.ink,10,.05,10)+ikCun(R,A.pts,70,IKC.ink,24,{op:.09});
-  g+=ikMist(p,240,362,340,16,.9);
+  g+=ik('mist',ikMist(p,240,362,340,16,.9));
   // núi giữa bên trái: đỉnh cao có chùa, bậc đá ngoằn ngoèo
   const B=ikRidge(R,-40,340,440,260,2,4);g+=`<path d="${ikFill(B.pts,480)}" fill="url(#${p}g2)" filter="url(#${p}r)"/>`+ikBand(p,B.pts,IKC.ink,14,.16,12)+ikCun(R,B.pts,170,IKC.ink,24,{op:.2,w:.7})+ikMoss(R,B.pts,60,IKC.ink,.45);
   const tp=B.pts.filter(q=>q[0]>50&&q[0]<300).reduce((a,b)=>b[1]<a[1]?b:a);
   const hall=(x,y,sc)=>`<g transform="translate(${ikf(x)} ${ikf(y)}) scale(${sc})" filter="url(#${p}b)"><path d="M-10 0v-8h20v8z" fill="#efe5cc" stroke="${IKC.ink}" stroke-width=".7"/><path d="M-4 0v-6h8v6z" fill="${IKC.ink}"/><path d="M-17 -7Q-10 -9 -6 -15T0 -20T6 -15T17 -7Q9 -6 0 -7Q-9 -6 -17 -7z" fill="${IKC.ink}"/></g>`;
   const pag=(x,y,sc)=>`<g transform="translate(${ikf(x)} ${ikf(y)}) scale(${sc})" filter="url(#${p}b)" fill="${IKC.ink}"><path d="M-6 0v-8h12v8z" opacity=".9"/><path d="M-10 -8q10 -6 20 0l-3 -3q-7 -2 -14 0z"/><path d="M-5 -11v-7h10v7z" opacity=".9"/><path d="M-9 -18q9 -5 18 0l-3 -3q-6 -2 -12 0z"/><path d="M-4 -21v-6h8v6z"/><path d="M-7 -27q7 -5 14 0l-2 -2q-5 -2 -10 0z"/><path d="M0 -29v-7" stroke="${IKC.ink}" stroke-width="1"/></g>`;
-  g+=pag(tp[0],tp[1]+5,1.4)+hall(tp[0]+30,tp[1]+52,.9)+hall(tp[0]-26,tp[1]+84,.75);
+  g+=ik('pag',pag(tp[0],tp[1]+5,1.4)+hall(tp[0]+30,tp[1]+52,.9)+hall(tp[0]-26,tp[1]+84,.75),[tp[0],tp[1]-10,30]);
   g+=`<path d="M${ikf(tp[0]+4)} ${ikf(tp[1]+8)}q16 10 4 18t8 16q-18 10 -6 18" fill="none" stroke="#efe5cc" stroke-width="1.6" opacity=".7" filter="url(#${p}b)"/>`;
-  g+=ikMist(p,170,418,260,18,.9);
+  g+=ik('mist m2',ikMist(p,170,418,260,18,.9));
   // núi gần bên phải: thác nước đổ xuống, thông trên vách
   const C=ikRidge(R,230,540,500,310,2,4);g+=`<path d="${ikFill(C.pts,550)}" fill="url(#${p}g3)" filter="url(#${p}r)"/>`+ikBand(p,C.pts,'#f1e8d2',10,.14,6)+ikBand(p,C.pts,IKC.ink,12,.3,22)+ikCun(R,C.pts,170,'#f1e8d2',34,{op:.16,w:.9})+ikCun(R,C.pts,150,IKC.ink,30,{op:.38,w:.8})+ikMoss(R,C.pts,70,IKC.ink,.7);
   const ct=C.pts.filter(q=>q[0]>290).reduce((a,b)=>b[1]<a[1]?b:a);const fx=ct[0]-34;const fyy=(C.pts.find(q=>q[0]>=fx)||ct)[1];const fy=fyy+40;
-  g+=ikFall(p,fx,fy,150,8)+ikMist(p,fx,fy+158,84,14,.95);
-  [-6,-9,-12].forEach((i,k)=>{const q=C.pts[C.pts.length+i];g+=ikPine(p,R,q[0],ikf(q[1]+4),1.5+k*.2,IKC.ink);});
-  g+=ikMist(p,360,482,300,15,.85);
+  g+=ik('fall',ikFall(p,fx,fy,150,8)+ikMist(p,fx,fy+158,84,14,.95),[fx,fy+70,22]);
+  [-6,-9,-12].forEach((i,k)=>{const q=C.pts[C.pts.length+i];g+=ik('pine',ikPine(p,R,q[0],ikf(q[1]+4),1.5+k*.2,IKC.ink),[q[0],q[1]-30,22]);});
+  g+=ik('mist m3',ikMist(p,360,482,300,15,.85));
   // vách đá trước mặt: thông cổ thụ và người tu tiên
   const D=ikRidge(R,-50,270,612,210,1,4);g+=`<path d="${ikFill(D.pts,640)}" fill="${IKC.ink}" opacity=".93" filter="url(#${p}r)"/>`+ikBand(p,D.pts,'#f1e8d2',8,.1,16)+ikCun(R,D.pts,120,'#f1e8d2',30,{op:.13,w:.8})+ikMoss(R,D.pts,30,'#000',.4);
   const top=D.pts.reduce((a,b)=>b[1]<a[1]?b:a);
-  g+=ikPine(p,R,top[0]-46,top[1]+10,2.4)+ikPine(p,R,top[0]-84,top[1]+36,1.6)+ikPine(p,R,top[0]-18,top[1]+14,1.2)+ikFigure(p,top[0]+10,top[1]+3,1.4)+ikCloud(top[0]+100,top[1]-30,1.1,0,IKC.ink2,1.1)+ikCloud(top[0]+196,top[1]+50,.85,1,IKC.ink2,1);
+  g+=ik('pine',ikPine(p,R,top[0]-46,top[1]+10,2.4)+ikPine(p,R,top[0]-84,top[1]+36,1.6)+ikPine(p,R,top[0]-18,top[1]+14,1.2),[top[0]-48,top[1]-40,34])+ik('fig',ikFigure(p,top[0]+10,top[1]+3,1.4),[top[0]+10,top[1]-22,26])+ik('cl cl1',ikCloud(top[0]+100,top[1]-30,1.1,0,IKC.ink2,1.1),[top[0]+112,top[1]-34,24])+ik('cl cl2',ikCloud(top[0]+196,top[1]+50,.85,1,IKC.ink2,1),[top[0]+190,top[1]+44,22]);
   // sông, thuyền, đá
-  g+=`<path d="M0 566c100 -6 200 -8 300 -3s130 4 180 0v90H0z" fill="${IKC.ink}" opacity=".08" filter="url(#${p}r)"/>`+ikRipples(R,120,450,572,630,22,1)+ikBoat(p,326,596,1.7)+`<path d="M286 612q4 -10 12 -10t10 10z" fill="${IKC.ink}" opacity=".5" filter="url(#${p}b)"/>`+ikMist(p,240,562,320,10,.7);
+  g+=`<path d="M0 566c100 -6 200 -8 300 -3s130 4 180 0v90H0z" fill="${IKC.ink}" opacity=".08" filter="url(#${p}r)"/>`+ikRipples(R,120,450,572,630,22,1)+ik('boat',ikBoat(p,326,596,1.7),[326,590,34])+`<path d="M286 612q4 -10 12 -10t10 10z" fill="${IKC.ink}" opacity=".5" filter="url(#${p}b)"/>`+ikMist(p,240,562,320,10,.7);
   s+=`<g mask="url(#${p}mv)"><g mask="url(#${p}mh)">${g}</g></g>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}">${s}</svg>`;}
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax meet">${s}</svg>`;}
 
 // ================= ẢNH ĐỊA ĐIỂM: THÔN TRẤN PHÀM TRẦN =================
 function ikBamboo(p,R,x,y,n){let t='';for(let i=0;i<n;i++){const dx=x+i*9+(R()-.5)*6,h=64+R()*44,l=(R()-.5)*5;t+=`<path d="M${ikf(dx)} ${y}q${ikf(l)} ${-h/2} ${ikf(l*1.4)} ${-h}" fill="none" stroke="${IKC.ink}" stroke-width="${ikf(1.6+R())}" stroke-linecap="round" opacity="${.55+R()*.4}"/>`;for(let k=1;k<5;k++){const yy=y-h*k/5,xx=dx+l*k/3.5;t+=`<path d="M${ikf(xx-1.6)} ${ikf(yy)}h3.2" stroke="${IKC.ink}" stroke-width=".9" opacity=".7"/><path d="M${ikf(xx)} ${ikf(yy)}l${ikf(9+R()*7)} ${ikf(-3-R()*3)}M${ikf(xx)} ${ikf(yy)}l${ikf(7+R()*6)} ${ikf(1+R()*2)}M${ikf(xx)} ${ikf(yy)}l${ikf(-9-R()*7)} ${ikf(-3-R()*3)}M${ikf(xx)} ${ikf(yy)}l${ikf(-7-R()*6)} ${ikf(1+R()*2)}" stroke="${IKC.ink}" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>`;}}
@@ -9978,27 +10057,63 @@ function ikSeal(x,y,s,col,glyph){let m='';
   return `<g transform="translate(${x} ${y}) scale(${s})"><rect x="-5.4" y="-5.4" width="10.8" height="10.8" rx="1" fill="${col}"/><path d="${m}" stroke="#f6eedd" stroke-width="1.1" fill="none" stroke-linecap="round"/></g>`;}
 function ikLotus(x,y,s,fill,stroke){const pt=(a,l)=>`<path transform="rotate(${a})" d="M0 0C-3 -3 -3 ${-l+2} 0 ${-l}C3 ${-l+2} 3 -3 0 0z" fill="${fill}" stroke="${stroke}" stroke-width=".7"/>`;
   return `<g transform="translate(${x} ${y}) scale(${s})">${pt(-56,7)}${pt(56,7)}${pt(-28,9)}${pt(28,9)}${pt(0,10)}</g>`;}
-function ikFrameInner(t){const R=ikRng(30+t),ink=IKC.ink;let s='';
+// ---- khung 5 bậc, kiểu cánh + huy hiệu + ngọc như khung Liên Quân, nhưng bằng mực và màu khoáng ----
+const IKP={0:{a:'#cfc9bd',b:'#8f897d',c:'#5a554b'},1:{a:'#8d867a',b:'#4b4538',c:'#26221d'},2:{a:'#d2efe2',b:'#58a888',c:'#26503f'},3:{a:'#ffffff',b:'#b4c1cf',c:'#34567a'},4:{a:'#fff3bd',b:'#e3b13c',c:'#8a5a05'}};
+const ikGradDef=(id,P)=>`<linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P.a}"/><stop offset=".5" stop-color="${P.b}"/><stop offset="1" stop-color="${P.c}"/></linearGradient>`;
+// một lông cánh: gốc ở (0,0), chỉ về +x, xoay ang độ (âm = hướng lên)
+const ikFeather=(L,w,ang,fill,line)=>`<g transform="rotate(${ang})"><path d="M0 0C${ikf(L*.3)} ${ikf(-w)} ${ikf(L*.72)} ${ikf(-w*.95)} ${L} ${ikf(-L*.14)}C${ikf(L*.74)} ${ikf(w*.12)} ${ikf(L*.34)} ${ikf(w*.5)} 0 0z" fill="${fill}" stroke="${line}" stroke-width=".7" stroke-linejoin="round"/><path d="M${ikf(L*.1)} ${ikf(-w*.08)}Q${ikf(L*.55)} ${ikf(-w*.55)} ${ikf(L*.92)} ${ikf(-L*.12)}" fill="none" stroke="#fff" stroke-width=".5" opacity=".65"/></g>`;
+// cánh bên phải, gốc (x,y); n lông, dài L, xòe spread độ, ngẩng lên base độ
+function ikWing(n,L,w,spread,base,fill,line,x,y){let t='';for(let i=n-1;i>=0;i--){const f=n>1?i/(n-1):0;t+=ikFeather(L*(1-f*.42),w*(1-f*.2),-(base+f*spread),fill,line);}return `<g transform="translate(${x} ${y})">${t}</g>`;}
+const ikMirror=(g,w)=>`<g transform="translate(${w} 0) scale(-1 1)">${g}</g>`;
+function ikGem(x,y,r,fill,line){return `<path d="M${x} ${y-r}L${x+r*.8} ${y}L${x} ${y+r}L${x-r*.8} ${y}Z" fill="${fill}" stroke="${line||IKC.ink}" stroke-width=".8" stroke-linejoin="round"/><path d="M${x} ${y-r}L${x-r*.2} ${y-r*.1}L${x} ${y+r*.9}" fill="none" stroke="#fff" stroke-width=".5" opacity=".6"/>`;}
+function ikFrameInner(t){const R=ikRng(30+t),ink=IKC.ink,P=IKP[t],gid='ikg'+t,gf=`url(#${gid})`;let s=`<defs>${ikGradDef(gid,P)}</defs>`;
   if(t===0){const gap=[[.3,1.9],[2.2,3.7],[4.1,5.9]];s+=gap.map(([a,b])=>ikRing(R,41,2.2,'#6f685c',{a0:a,a1:b,n:20,j:1.2,op:.75})).join('')+gap.map(([a,b])=>ikRing(R,41.6,.8,ink,{a0:a+.1,a1:b-.2,n:16,j:1.6,op:.35})).join('');
-    s+=`<g stroke="${ink}" fill="none" stroke-linecap="round" opacity=".5"><path d="M50 8.6l-1.6 4 2 3M88 62l-5 1 -2 3.6M22 80l2 -3.4 -1 -4"/></g><g fill="${ink}" opacity=".35"><circle cx="9" cy="56" r="1.3"/><circle cx="14" cy="26" r=".9"/><circle cx="91" cy="38" r="1.1"/><circle cx="80" cy="84" r=".8"/></g>`;
-    s+=`<g stroke="#6f685c" stroke-width="1" fill="none" stroke-linecap="round" opacity=".7"><path d="M42 93q-2 -6 -1 -10M46 93q0 -7 2 -11M51 93q2 -5 5 -8"/></g>`;}
-  else if(t===1){s+=ikRing(R,41,3.2,ink,{j:.7,op:.92})+ikRing(R,41.4,1.3,ink,{j:1.1,op:.4,w2:.8})+`<circle cx="50" cy="92.6" r="1.9" fill="${ink}" opacity=".8"/>`;}
-  else if(t===2){const J=IKC.jade;s+=ikRing(R,41,3,ink,{j:.7,op:.92})+ikRing(R,37.6,1,J,{j:.4,op:.85})+ikRing(R,44.4,.8,ink,{j:.9,op:.4,a0:.4,a1:5.6,n:40});
-    const leaf=(x,y,a,sc)=>`<path transform="translate(${x} ${y}) rotate(${a}) scale(${sc})" d="M0 0q6 -2 13 3q-7 3 -13 -3z" fill="${J}" opacity=".9"/>`;
-    s+=leaf(26,87,-40,1)+leaf(24,88,-70,.8)+leaf(74,87,220,1)+leaf(76,88,250,.8)+`<path d="M50 91.4l-3.6 -4.2l3.6 -4l3.6 4z" fill="${J}" stroke="${ink}" stroke-width=".8"/>`;
-    s+=`<path d="M50 8.4l-2 -2.2 2 -2.2 2 2.2z" fill="${J}" stroke="${ink}" stroke-width=".6"/>`;}
-  else if(t===3){const A=IKC.indigo;s+=ikRing(R,41.4,4,ink,{j:.5,op:.95})+ikRing(R,41.2,1.6,'#dfe6ec',{j:.5,op:.9,w2:.3,n:80})+ikRing(R,45.8,.9,A,{j:.8,op:.8,a0:-.5,a1:3.6,n:44})+ikRing(R,45.8,.9,A,{j:.8,op:.8,a0:3.9,a1:5.8,n:20})+ikRing(R,37.7,.8,A,{j:.4,op:.8});
-    s+=`<g>${ikCloud(26,90,1.15,1,A,1.5)}${ikCloud(74,90,1.15,0,A,1.5)}</g>`+ikLotus(50,91.6,1.15,'#eef1f4',ink)+`<path d="M50 5.6l-2.4 3.4 2.4 3.4 2.4 -3.4z" fill="${A}" stroke="${ink}" stroke-width=".6"/>`;}
-  else{const G=IKC.gold;s+=`<circle cx="50" cy="50" r="46" fill="none" stroke="${G}" stroke-width=".7" stroke-dasharray="1.6 3.2" opacity=".75"/>`+ikRing(R,41.6,5,ink,{j:.4,op:.97,w2:.3})+ikRing(R,41.6,3.2,G,{j:.3,op:1,w2:.3,n:90})+ikRing(R,41.4,1.1,'#fff1b0',{j:.3,op:.85,a0:3.3,a1:5.7,n:40})+ikRing(R,37.4,.9,G,{j:.4,op:.9});
-    s+=`<g>${ikCloud(22,86,1.35,1,ink,1.8)}${ikCloud(78,86,1.35,0,ink,1.8)}${ikCloud(22,86,1.35,1,G,.8)}${ikCloud(78,86,1.35,0,G,.8)}</g>`;
-    s+=`<g>${ikCloud(10,50,.9,1,G,1.1)}${ikCloud(90,50,.9,0,G,1.1)}</g>`+ikSeal(50,91,.98,IKC.seal,'tian')+`<path d="M50 3.4l3 5h-6z M44 6l3 3.6h-5z M56 6l3 3.6h-5z" fill="${G}" stroke="${ink}" stroke-width=".7" stroke-linejoin="round"/>`;}
+    s+=`<g stroke="${ink}" fill="none" stroke-linecap="round" opacity=".5"><path d="M50 8.6l-1.6 4 2 3M88 62l-5 1 -2 3.6M22 80l2 -3.4 -1 -4"/></g><g fill="${ink}" opacity=".3"><circle cx="9" cy="56" r="1.3"/><circle cx="91" cy="38" r="1.1"/><circle cx="80" cy="84" r=".8"/></g>`;
+    s+=`<g fill="none" stroke="#6f685c" stroke-linecap="round" opacity=".8"><path d="M44 94q4 -3 8 -1q4 3 8 1" stroke-width="1"/><path d="M52 93q-1 4 -5 6M52 93q2 4 7 5" stroke-width=".9"/><path d="M47 99q-3 1 -4 -2q3 -1 4 2zM59 98q3 -1 3 -4q-3 0 -3 4z" fill="#8f897d" stroke="none" opacity=".7"/></g>`;}
+  else if(t===1){s+=ikRing(R,41,3.2,ink,{j:.7,op:.92})+ikRing(R,41.4,1.3,ink,{j:1.1,op:.4,w2:.8});
+    const w=ikWing(3,9,3.2,22,8,'#e9e1cc',ink,90,54);s+=w+ikMirror(w,100);
+    s+=`<path d="M50 9l-3 -4.4h6z" fill="${ink}"/><path d="M50 91.6l-3 4.2 3 4.2 3 -4.2z" fill="${ink}" opacity=".85"/>`;}
+  else if(t===2){const J=IKC.jade;s+=ikRing(R,41,3,ink,{j:.7,op:.92})+ikRing(R,37.6,1,J,{j:.4,op:.85})+ikRing(R,44.6,.7,ink,{j:.9,op:.35,a0:.4,a1:5.6,n:40});
+    const w=ikWing(4,13,3.8,30,6,gf,ink,90,56);s+=w+ikMirror(w,100);
+    s+=ikGem(50,5,4.4,gf)+`<path d="M50 9.4v3" stroke="${ink}" stroke-width=".8"/>`+ikGem(50,93,4.2,gf)+`<g fill="${J}" stroke="${ink}" stroke-width=".6" opacity=".95"><path d="M45 94q-8 -1 -10 -6q7 0 10 6zM55 94q8 -1 10 -6q-7 0 -10 6z"/></g>`;}
+  else if(t===3){const A=IKC.indigo;s+=ikRing(R,41.4,4,ink,{j:.5,op:.95})+ikRing(R,41.2,1.6,'#dfe6ec',{j:.5,op:.9,w2:.3,n:80})+ikRing(R,46,.9,A,{j:.8,op:.8,a0:-.5,a1:3.6,n:44})+ikRing(R,46,.9,A,{j:.8,op:.8,a0:3.9,a1:5.8,n:20})+ikRing(R,37.7,.8,A,{j:.4,op:.8});
+    const w=ikWing(5,14,4,38,6,gf,A,91,52);s+=w+ikMirror(w,100);
+    s+=`<g>${ikLotus(50,10,1.05,gf,A)}</g>`+ikGem(50,6,3,'#fff',A).replace('M','M')+`<g>${ikCloud(30,91,1.1,1,A,1.4)}${ikCloud(70,91,1.1,0,A,1.4)}</g>`+ikGem(50,93,5,gf,A)+`<path d="M50 98.6v3" stroke="${A}" stroke-width=".8"/>`;}
+  else{const G=IKC.gold;s+=`<circle cx="50" cy="50" r="47" fill="none" stroke="${G}" stroke-width=".7" stroke-dasharray="1.6 3.2" opacity=".75"/>`+ikRing(R,41.6,5,ink,{j:.4,op:.97,w2:.3})+ikRing(R,41.6,3.2,gf,{j:.3,op:1,w2:.3,n:90})+ikRing(R,41.4,1.1,'#fff1b0',{j:.3,op:.85,a0:3.3,a1:5.7,n:40})+ikRing(R,37.4,.9,G,{j:.4,op:.9});
+    const w=ikWing(6,16,4.4,44,4,gf,ink,92,50);s+=w+ikMirror(w,100);
+    s+=`<path d="M50 8.6l-5 -3.4l1 -4l4 2l4 -2l1 4z" fill="${gf}" stroke="${ink}" stroke-width=".8" stroke-linejoin="round"/><circle cx="50" cy="4.6" r="2" fill="${IKC.seal}" stroke="${ink}" stroke-width=".5"/>`;
+    s+=`<g>${ikCloud(24,90,1.3,1,ink,1.8)}${ikCloud(76,90,1.3,0,ink,1.8)}${ikCloud(24,90,1.3,1,G,.8)}${ikCloud(76,90,1.3,0,G,.8)}</g>`+ikSeal(50,93,.98,IKC.seal,'tian');}
   return s;}
+// ô Thiên phú ở tab Căn cơ: mào cánh ở giữa viền trên, kẹp góc, ngọc dưới đáy; bậc càng cao cánh càng dài
+function ikCrest(t){const P=IKP[t],ink=IKC.ink,gid='ikc'+t,gf=`url(#${gid})`;let s=`<defs>${ikGradDef(gid,P)}</defs>`;
+  if(t===0)s+=`<g fill="none" stroke="#6f685c" stroke-linecap="round" opacity=".8"><path d="M86 50q8 -6 14 -2q6 -4 14 2" stroke-width="1.4"/><path d="M96 49l-2 -8M104 49l2 -6" stroke-width="1"/></g>`;
+  else if(t===1){const w=ikWing(3,26,4,20,6,'#e9e1cc',ink,106,44);s+=w+ikMirror(w,200)+`<path d="M100 50l-6 -8l6 -8l6 8z" fill="${ink}"/>`;}
+  else if(t===2){const w=ikWing(4,46,6,28,5,gf,ink,108,44);s+=w+ikMirror(w,200)+ikGem(100,36,9,gf)+`<path d="M92 44h16" stroke="${ink}" stroke-width="1.2"/>`;}
+  else if(t===3){const w=ikWing(5,66,7,36,4,gf,IKC.indigo,110,42);s+=w+ikMirror(w,200)+ikLotus(100,50,1.4,gf,IKC.indigo)+ikGem(100,28,7,'#fff',IKC.indigo);}
+  else{const w=ikWing(7,86,8.5,46,3,gf,ink,112,42);s+=w+ikMirror(w,200)+`<path d="M100 52l-14 -8l-2 -12l8 4l8 -8l8 8l8 -4l-2 12z" fill="${gf}" stroke="${ink}" stroke-width="1" stroke-linejoin="round"/><circle cx="100" cy="34" r="4.4" fill="${IKC.seal}" stroke="${ink}" stroke-width=".7"/><circle cx="98.6" cy="32.8" r="1.2" fill="#fff" opacity=".7"/>`;}
+  return `<svg class="ikp-top" viewBox="0 0 200 56" aria-hidden="true">${s}</svg>`;}
+function ikCorner(t){const P=IKP[t],ink=IKC.ink,gid='ikn'+t,gf=`url(#${gid})`;let s=`<defs>${ikGradDef(gid,P)}</defs>`;
+  if(t===0)s+=`<path d="M3 18V6l4 -3h6M7 3l3 5" fill="none" stroke="#6f685c" stroke-width="1.6" stroke-linecap="round"/>`;
+  else if(t===1)s+=`<path d="M3 24V5q0 -2 2 -2h19" fill="none" stroke="${ink}" stroke-width="2.4" stroke-linecap="round"/><circle cx="5" cy="5" r="2" fill="${ink}"/>`;
+  else if(t===2)s+=`<path d="M3 28V6q0 -3 3 -3h22" fill="none" stroke="${ink}" stroke-width="2.4" stroke-linecap="round"/><path d="M8 24V9q0 -1 1 -1h15" fill="none" stroke="${IKC.jade}" stroke-width="1.2"/>${ikGem(6,6,5,gf)}<path d="M13 3q4 -3 8 0M3 13q-3 4 0 8" fill="none" stroke="${IKC.jade}" stroke-width="1.4" stroke-linecap="round"/>`;
+  else if(t===3)s+=`<path d="M3 32V7q0 -4 4 -4h25" fill="none" stroke="${ink}" stroke-width="2.6" stroke-linecap="round"/><path d="M8 28V10q0 -2 2 -2h18" fill="none" stroke="${IKC.indigo}" stroke-width="1.2"/>${ikGem(7,7,6,gf,IKC.indigo)}${ikCloud(22,8,.8,0,IKC.indigo,1.2)}<g transform="rotate(90 8 8) translate(2 -8)">${ikCloud(12,16,.8,0,IKC.indigo,1.2)}</g>`;
+  else s+=`<path d="M3 36V8q0 -5 5 -5h28" fill="none" stroke="${ink}" stroke-width="3.2" stroke-linecap="round"/><path d="M3 36V8q0 -5 5 -5h28" fill="none" stroke="${gf}" stroke-width="1.8" stroke-linecap="round"/>${ikGem(8,8,7,gf)}<circle cx="8" cy="8" r="2" fill="${IKC.seal}"/>${ikFeather(18,4,-4,gf,ink).replace('<g ','<g transform-origin="0 0" ')}<g transform="translate(6 20) rotate(94)">${ikFeather(14,3.4,-4,gf,ink)}</g><g transform="translate(20 6)">${ikFeather(14,3.2,-8,gf,ink)}</g>`;
+  return `<svg class="ikp-c" viewBox="0 0 40 40" aria-hidden="true">${s}</svg>`;}
+function ikBottom(t){const P=IKP[t],ink=IKC.ink,gid='ikb'+t,gf=`url(#${gid})`;let s=`<defs>${ikGradDef(gid,P)}</defs>`;
+  if(t===0)return '';
+  if(t===1)s+=`<path d="M40 12h40" stroke="${ink}" stroke-width="1.4"/><circle cx="60" cy="12" r="2.4" fill="${ink}"/>`;
+  else if(t===2)s+=`<path d="M30 12h22M68 12h22" stroke="${ink}" stroke-width="1.4"/>${ikGem(60,12,6,gf)}`;
+  else if(t===3){const w=ikWing(3,24,3.2,16,6,gf,IKC.indigo,66,12);s+=w+ikMirror(w,120)+ikGem(60,12,6.4,gf,IKC.indigo)+`<path d="M14 12h24M82 12h24" stroke="${IKC.indigo}" stroke-width="1.2"/>`;}
+  else{const w=ikWing(4,34,3.6,20,4,gf,ink,68,12);s+=w+ikMirror(w,120)+ikGem(60,12,7.6,gf)+`<circle cx="60" cy="12" r="2.2" fill="${IKC.seal}"/>`;}
+  return `<svg class="ikp-bot" viewBox="0 0 120 24" aria-hidden="true">${s}</svg>`;}
+function ikPlaque(t){const n=t.tier;return `<span class="ikp ikp${n}">${ikCrest(n)}<i class="tl">${ikCorner(n)}</i><i class="tr">${ikCorner(n)}</i><i class="bl">${ikCorner(n)}</i><i class="br">${ikCorner(n)}</i>${ikBottom(n)}</span>`;}
 const IK_FR={};
 function ikFrameSvgFull(t){if(IK_FR[t])return IK_FR[t];const p='f'+t;
   return IK_FR[t]=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="${p}b" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="2" seed="${t+3}" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.2"/></filter></defs><g filter="url(#${p}b)">${ikFrameInner(t)}</g></svg>`;}
 function ikTalFrame(t,id){return t&&t.tier>=0?`<svg viewBox="0 0 100 100" aria-hidden="true"><defs><filter id="${id||'tfi'}${t.tier}" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="2" seed="${t.tier+3}" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.2"/></filter></defs><g filter="url(#${id||'tfi'}${t.tier})">${ikFrameInner(t.tier)}</g></svg>`:'';}
 
-talFrameSVG=ikTalFrame; // panels.js gán lại talFrameSVG ở cuối tệp, nên phải gán đè ở đây
+talFrameSVG=ikTalFrame;
+talCardOrn=ikPlaque; // panels.js gán lại talFrameSVG ở cuối tệp, nên phải gán đè ở đây
 
 // ================= NỀN BẢN ĐỒ: giấy dó loang mực =================
 // vệt loang nhạt + sợi giấy; vẽ lên mặt đất đã dựng
@@ -10026,9 +10141,10 @@ function ikTreeMap(g,X,Y,r0,rnd,C){const ink=C.ink||IKC.ink;g.fillStyle=hexA(ink
   else{g.beginPath();g.ellipse(X,Y-r0,r0*.95,r0*.7,0,0,6.3);g.fill();g.beginPath();g.moveTo(X,Y-r0*.4);g.lineTo(X,Y+r0*.5);g.stroke();}}
 
 // ================= GẮN VÀO GAME =================
+const INK_TITLE_LIVE=inkTitleSVG(),INK_TITLE_URL=ikE(INK_TITLE_LIVE);
 (function(){
   try{
-    ASSET.title=ikE(inkTitleSVG());
+    ASSET.title=INK_TITLE_URL;
     ASSET.place.tran=ikE(inkVillageSVG());
     ASSET.heroG={nam:ikE(inkHeroSVG('nam')),nu:ikE(inkHeroSVG('nu'))};
     // khung avatar nhỏ (bản đồ chiến đấu, thẻ đơn vị): vòng mực phủ ngoài
@@ -10038,6 +10154,11 @@ function ikTreeMap(g,X,Y,r0,rnd,C){const ink=C.ink||IKC.ink;g.fillStyle=hexA(ink
     let rules='';for(let t=0;t<5;t++){const u='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(ikFrameSvgFull(t));
       rules+=`.u-av.tf${t}::after,.av.tf${t}::after{background-image:url("${u}")}`;}
     st.textContent=rules;document.head.appendChild(st);
+    // màn mở đầu: rê chuột hoặc chạm vào đâu thì chỗ đó động đậy; chạm nền thì mực loang
+    const hit=e=>{const c=e.target.closest&&e.target.closest('.t-ink2');if(!c)return;const el=e.target.closest('[data-ik]');
+      if(el){if(el.classList.contains('hit'))return;el.classList.add('hit');clearTimeout(el._t);el._t=setTimeout(()=>{el.classList.remove('hit');if(el.classList.contains('ik-cr')){el.classList.add('back');setTimeout(()=>el.classList.remove('back'),900);}},el.classList.contains('ik-cr')?1700:1300);}
+      else if(e.type==='pointerdown'){const r=c.getBoundingClientRect(),i=document.createElement('i');i.className='ink-rp';i.style.left=(e.clientX-r.left)+'px';i.style.top=(e.clientY-r.top)+'px';c.appendChild(i);setTimeout(()=>i.remove(),2300);}};
+    document.addEventListener('pointerover',hit);document.addEventListener('pointerdown',hit);
   }catch(e){console.error('ink',e);}
 })();
 
@@ -10051,7 +10172,7 @@ function vTitle(){
     mid=`<div class="narr${UI.narrSkip?' skip':''}" data-act="narrSkip">${N.map((t,i)=>`<p style="animation-delay:${i*1.1}s">${txt(t)}</p>`).join('')}<p class="k" style="animation-delay:${N.length*1.1}s">${kiepName(M.nlife+1)} bắt đầu.</p></div>
      <div class="t-btn" style="animation-delay:${UI.narrSkip?0:N.length*1.1+0.6}s"><button class="btn pri big" data-act="birth">Luân hồi</button><button class="btn" data-act="screen" data-arg="meta">Lên Bến Vong Xuyên · ${M.pts} điểm</button><p class="hint">Đã trải ${M.nlife} kiếp</p></div>`;}
   else mid=`<p class="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p><div class="t-btn"><button class="btn pri big" data-act="birth">Nhập thế</button><p class="hint">Thế gian không chờ ai. Chết rồi lại sinh, mang theo chút gì còn khắc trong chân linh.</p></div>`;
-  return `<div class="title">${ASSET.title?`<img class="t-art t-ink" src="${ASSET.title}" alt="">`:sceneCv('phusinh-title'+M.nlife,Math.min(4,last?last._mr||0:0),'song','t-art')}<div class="t-seal">Phù</div><h1>Phù Sinh</h1>${mid}
+  return `<div class="title">${ASSET.title&&ASSET.title!==INK_TITLE_URL?`<img class="t-art t-ink" src="${ASSET.title}" alt="">`:ASSET.title?`<div class="t-art t-ink2">${INK_TITLE_LIVE}</div>`:sceneCv('phusinh-title'+M.nlife,Math.min(4,last?last._mr||0:0),'song','t-art')}<div class="t-seal">Phù</div><h1>Phù Sinh</h1>${mid}
    <div class="t-foot">${has&&M.nlife>1?`<button class="lnk" data-act="screen" data-arg="meta">Bến Vong Xuyên · ${M.pts} điểm</button>`:''}<button class="lnk" data-act="titleCfg">Cấu hình</button></div></div>`;
 }
 function vBirth(){
