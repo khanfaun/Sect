@@ -54,11 +54,12 @@ const Map2=(()=>{
     return HX={seed:g.seed,grid,macro,dist,coast,dp};}
   function cellAt(sx,sy){return hexAt((sx-W0/2)/cam.z+cam.x,(sy-H0/2)/cam.z+cam.y);}
   function hexPoly(i){const v=hexVerts(i);ctx.beginPath();ctx.moveTo(v[0][0],v[0][1]);for(let k=1;k<6;k++)ctx.lineTo(v[k][0],v[k][1]);ctx.closePath();}
+  const MOBILE=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
   let cv=null,ctx=null,W0=0,H0=0,dpr=1;
   const cam={x:500,y:500,z:0.8,follow:true,reg:-1};
   let terr=null,terrKey='',fogC=null,fogKey='',C={},cloudSpr=null;
   let fogS=null,fogKey2='',holeSpr=null;
-  let dirty=true,soft=false,ema=0,slow=0,fpsT=0,fpsN=0,fpsShow=0,lastT=0,lastDraw=0;
+  let lastAct=performance.now(),dirty=true,soft=false,ema=0,slow=0,fpsT=0,fpsN=0,fpsShow=0,lastT=0,lastDraw=0;
   const parts=[],clouds=[];let pos=null;
   const ptr=new Map();let drag=null,pinch=null;
 
@@ -68,8 +69,9 @@ const Map2=(()=>{
   function invalidate(all){dirty=true;if(all){for(const k in TC)delete TC[k];for(const k in FC)delete FC[k];colors();}}
   function attach(el){if(cv===el)return;cv=el;ctx=cv?cv.getContext('2d',{alpha:false}):null;if(cv){bind();resize();}}
   function resize(){if(!cv)return;const r=cv.getBoundingClientRect();if(!r.width)return;const lv=gfxLv();
-    dpr=Math.min(window.devicePixelRatio||1,CFG.dpr||[1,1.5,2][lv]);W0=r.width;H0=r.height;
+    dpr=Math.min(window.devicePixelRatio||1,CFG.dpr||(MOBILE?[1,1.25,1.5]:[1,1.5,2])[lv]);W0=r.width;H0=r.height;
     const w=Math.round(W0*dpr),h=Math.round(H0*dpr);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}dirty=true;}
+  function resetAll(){clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();}
   function zMin(){return Math.max(W0/WORLD_W,H0/WORLD_H);}
   function clampCam(){cam.z=clamp(cam.z,zMin(),1.6);const hw=W0/2/cam.z,hh=H0/2/cam.z;const px=W0*0.42/cam.z,py=H0*0.45/cam.z;cam.x=clamp(cam.x,hw-px,Math.max(hw,WORLD_W-hw)+px);cam.y=clamp(cam.y,hh-py,Math.max(hh,WORLD_H-hh)+py);} // cho kéo quá mép nửa màn hình để điểm sát rìa vẫn kéo ra giữa được
   function center(){const r=G.run;if(!r)return;const w0=playerXY(),p=mapXY(r.region,w0[0],w0[1]);cam.x=p[0];cam.y=p[1];cam.follow=true;cam.reg=r.region;clampCam();dirty=true;}
@@ -266,17 +268,23 @@ const Map2=(()=>{
   // gọi mỗi nhịp rAF; tự bỏ khung để giữ đúng trần khung hình
   function frame(now){
     if(!cv||!G.run||document.hidden||!cv.isConnected)return;
-    const gap=1000/(CFG.fps||30);const an=animating()&&!UI.panel&&!(G.run.scene&&G.run.scene.type==='combat');
-    if(!dirty&&!soft&&!an)return;if(!dirty&&now-lastT<gap-2)return;soft=false;
+    const mv=!!G.run.moving&&!G.run.halt,gapU=1000/(CFG.fps||30);
+    const an=animating()&&!UI.panel&&!UI.modal&&!(G.run.scene&&G.run.scene.type==='combat');
+    // đứng yên mà chỉ có mây/hạt thì vẽ thưa hơn (24 khung, lâu không chạm thì 10 khung) để máy đỡ nóng
+    const idle=performance.now()-lastAct,gapA=mv?gapU:Math.max(gapU,idle>30000?100:42);
+    if(!dirty&&!soft&&!an)return;
+    if(now-lastT<(dirty||mv?gapU:gapA)-2)return; // trần khung hình áp cho mọi lần vẽ, cả khi kéo bản đồ
+    soft=false;
     const dt=Math.min(0.1,(now-lastT)/1000)||0.016;lastT=now;dirty=false;
     const t0=performance.now();try{draw(now,dt);}catch(e){console.error(e);}const c=performance.now()-t0;
     ema=ema?ema*0.9+c*0.1:c;lastDraw=performance.now();fpsN++;if(now-fpsT>1000){fpsShow=Math.round(fpsN*1000/(now-fpsT));fpsN=0;fpsT=now;}
     // tự hạ mức đồ họa khi máy đuối
-    if(CFG.gfx==='auto'&&an){if(ema>16)slow++;else slow=Math.max(0,slow-1);if(slow>90&&GFX_AUTO>0){GFX_AUTO--;slow=0;ema=0;clouds.length=0;parts.length=0;cfgApply();if(typeof note==='function'){note('Máy hơi nóng: đã tự hạ mức đồ họa.');toastFlush();}}}
+    if(CFG.gfx==='auto'&&an){if(ema>12)slow++;else slow=Math.max(0,slow-1);if(slow>60&&GFX_AUTO>0){GFX_AUTO--;slow=0;ema=0;cfgApply();resetAll();if(typeof note==='function'){note('Máy hơi nóng: đã tự hạ mức đồ họa.');toastFlush();}}}
   }
   // ----- thao tác -----
   function hit(sx,sy){const r=G.run;let best=null,bd=14;const HT=CFG.hideT||{};for(let k=0;k<5;k++)for(const n of regionOf(k).nodes){if(n.fog<1||HT[n.type])continue;const [nx,ny]=mapNode(n);const d=Math.hypot(SX(nx)-sx,SY(ny)-sy);if(d<bd){bd=d;best=n;}}return best;}
   function bind(){
+    if(!window._psAct){window._psAct=1;['pointerdown','pointermove','keydown','wheel','touchstart'].forEach(t=>document.addEventListener(t,()=>{lastAct=performance.now();},{passive:true}));}
     cv.addEventListener('pointerdown',e=>{cv.setPointerCapture&&cv.setPointerCapture(e.pointerId);ptr.set(e.pointerId,[e.offsetX,e.offsetY]);
       if(ptr.size===1)drag={x:e.offsetX,y:e.offsetY,cx:cam.x,cy:cam.y,moved:false};
       else if(ptr.size===2){const [a,b]=[...ptr.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),z:cam.z};drag=null;}});
@@ -289,5 +297,5 @@ const Map2=(()=>{
     cv.addEventListener('pointerleave',()=>{if(hov!=null){hov=null;dirty=true;}hideTip();});
     cv.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.15:1/1.15,e.offsetX,e.offsetY);},{passive:false});
   }
-  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,reset(){clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();},get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
+  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,reset:resetAll,get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
 })();

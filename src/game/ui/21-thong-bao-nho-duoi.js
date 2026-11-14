@@ -32,7 +32,7 @@ setInterval(()=>{if(!G.run||G.screen!=='map'){UI.lowPrev=null;UI.injPrev=null;re
 // số khung hình: chỉ hiện ở bản đồ chính, đo số khung bản đồ thật sự được vẽ (không phải nhịp màn hình)
 setInterval(()=>{const el=document.getElementById('fpsb')||(()=>{const d=document.createElement('div');d.id='fpsb';document.body.appendChild(d);return d;})();
   const on=CFG.showFps&&G.run&&!G.run.scene&&!UI.modal&&!UI.panel&&!document.hidden;el.hidden=!on;if(!on)return;
-  el.textContent=Map2.fps+'FPS · '+['tiết kiệm','cân bằng','đẹp'][gfxLv()]+' · x'+(+Map2.dpr.toFixed(1));
+  el.textContent=Map2.fps+'FPS';
   const hd=document.getElementById('hud');el.style.top=((hd&&hd.offsetHeight?hd.getBoundingClientRect().bottom:0)+6)+'px';},500);
 
 ACT.favGift=n=>{UI.bondOpen=n;const w=favGift(n);if(w)note(w,'dn');else note('Đã tặng lễ cho '+(n.replace(/^@\d+:/,'')),'up');};
