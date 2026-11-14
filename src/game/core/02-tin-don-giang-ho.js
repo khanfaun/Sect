@@ -25,9 +25,9 @@ const TAB = { // chỉ số gốc theo đại cảnh giới
 const TS = [1,2,4.5,10,22];         // nhịp thời gian theo vùng
 // hệ số linh thạch theo vùng. Linh thạch quý: cả trăm là cả một gia tài, chừng 40 đã là nhiều.
 const ECON=0.15,SC=[1,2.2,4.8,10,20].map(x=>x*ECON);
-const EH = [32,75,170,380,840];     // khí huyết yêu ma thường
-const EA = [11,24,54,120,265];
-const ED = [2,5,11,24,52];
+const EH = [43,101,230,513,1134];     // khí huyết yêu ma thường
+const EA = [14,30,68,150,331];
+const ED = [2,6,12,26,57];
 
 const ROOT = [
   {id:'thien',n:'Thiên linh căn',m:1.6,w:5,k:1,d:'Một hệ thuần khiết. Tu luyện cực nhanh.'},

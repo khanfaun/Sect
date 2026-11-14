@@ -7,7 +7,7 @@ ev({id:'bat_nat',n:'Ức hiếp tạp dịch',tg:['tong'],w:2,v:()=>({a:npc('tre
   {i:'😶',l:'Làm ngơ',t:'Ngươi đi qua. Tiếng roi vụt đuổi theo một quãng dài.',e:{tamma:3}}
  ]});
 
-ev({id:'duoc_vien',n:'Dược viên',tg:['tong','nui'],w:2,
+ev({id:'duoc_vien',n:'Dược viên',tg:['tong'],w:2,
  t:['Dược viên của {$sect} trải dài sườn núi, linh thảo trăm năm mọc như cỏ. Người canh vườn là một lão già đang ngủ gật.','Mùi thuốc thơm ngát. Ngươi đứng trước hàng rào trúc của dược viên {$sect}, bên trong có con hạc trắng đang mổ cỏ.'],
  c:[
   {i:'🌿',l:'Lén hái',chk:['tp',11],ok:{t:'Ngươi vào ra như gió. Trong túi đã có mấy gốc linh thảo thượng hạng.',e:{thao:8,karma:-4}},no:{t:'Lão già mở mắt. Hóa ra lão chỉ giả ngủ.',fight:{k:'votang',n:'Lão canh vườn',m:1.1},win:{t:'Ngươi chạy thoát, trên tay còn kịp nhổ một gốc.',e:{thao:2,karma:-4}}}},
