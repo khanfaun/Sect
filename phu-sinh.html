@@ -1449,6 +1449,11 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 
 .sk{position:relative}.sk-lock{position:absolute;top:2px;right:4px;font-size:.8em;opacity:.45;cursor:pointer;padding:2px}.sk-lock.on{opacity:1}
 
+.fxn.fx-banner{transform:translate(-50%,0);white-space:nowrap;pointer-events:none;animation:fxban 1.7s ease-out forwards;z-index:7}
+.fxn.fx-banner b{font-family:var(--font);font-size:26px;letter-spacing:.18em;color:#fff;text-shadow:0 0 6px #000,0 0 14px rgba(0,0,0,.75),0 2px 0 #000}
+.fxn.fx-banner.bad b{color:#ff8a80}.fxn.fx-banner.good b{color:#ffe08a}
+@keyframes fxban{0%{opacity:0;transform:translate(-50%,0) scale(1.8)}18%{opacity:1;transform:translate(-50%,0) scale(1)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-16px) scale(.96)}}
+
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function u(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=u(d);fetch(d.href,p)}})();var Ja={exports:{}},As={},ei={exports:{}},te={};/**
  * @license React
@@ -7367,6 +7372,7 @@ function uyApSet(sc){const A=sc.units.filter(u=>u.side==='A'),Bs=sc.units.filter
   for(const u of sc.units){u._lc=lcCalc(u);if(u.st)u.st.uyap=0;}
   for(const a of A)for(const b of Bs){const c=crushPair(a,b);if(c>0)b.st.uyap=1;if(c<0)a.st.uyap=1;}
   const me=mainUnit(sc);
+  {const bi=me&&me.st.uyap?['Bị nghiền ép!','bad']:Bs.some(b=>b.st.uyap)?['Nghiền ép!','good']:[sc.boss?'Thủ lĩnh xuất hiện!':'Giao chiến!',''];cfx(sc,{k:'banner',t:bi[0],c:bi[1]});}
   if(me&&me.st.uyap){const f=Bs.find(b=>crushPair(b,me)>0);clog(sc,`Uy áp của ${f.name} ập xuống như núi đè. Linh lực trong người ngươi trì trệ hẳn, ra tay chẳng khác gì gãi ngứa.`,'en');}
   const low=Bs.filter(b=>b.st.uyap);if(low.length)clog(sc,`Uy áp của ngươi tỏa ra, ${low.map(b=>b.name).join(', ')} run rẩy, khí thế tan nát.`,'me');}
 {const _cs38=combatStep;combatStep=function(dt){const sc=G.run&&G.run.scene;if(sc&&sc.type==='combat'&&!sc.prep&&!sc._ua&&!sc.kiep){sc._ua=1;uyApSet(sc);}return _cs38(dt);};}
@@ -9401,9 +9407,14 @@ function fxDrain(sc){const q=sc.fxq;sc.fxq=[];if(!$('#fx')||!q||!q.length)return
     if(d)setTimeout(()=>fxOne(sc,e),d);else fxOne(sc,e);}
 }
 // chữ tên đòn bay lên cạnh người ra đòn; hiệu ứng hồi chỉ số; bùng phát huyết thuật
+// chữ báo đầu trận: màn chiến đấu có thể chưa dựng xong nên thử lại vài lần
+function fxBanner(sc,e,n){if(!G.run||G.run.scene!==sc)return;const a=$('#cbArt');const r=a&&a.getBoundingClientRect();
+  if(!r||r.height<60||!$('#fx')){if(n<8)setTimeout(()=>fxBanner(sc,e,n+1),250);return;}
+  fxEl(`<b>${esc(e.t)}</b>`,r.left+r.width/2,r.top+r.height*0.3,1700,'fx-banner'+(e.c?' '+e.c:''));}
 const FXG_C={hp:['#bff5c8','#2f9a4e','+'],mp:['#cfe6ff','#3a7fd0','+'],dl:['#ffffff','#9aa6b4','✦'],than:['#ffe0b0','#e07a1a','✦'],tl:['#fff3a8','#e0b81a','⚡']};
 {const _fo=fxOne;fxOne=function(sc,e){if(!G.run||G.run.scene!==sc)return;
   if(e.k==='heal')return;
+  if(e.k==='banner'){fxBanner(sc,e,0);return;}
   if(e.k==='act'){const [x,y]=fxPos(sc,e.id);fxEl(`<b>${esc(e.n)}</b>`,x,y-58,1300,'fx-act');return;}
   if(e.k==='gain'){if(CFG.anim===false)return;const [x,y]=fxPos(sc,e.id);const c=FXG_C[e.s];if(!c)return;
     fxEl(Array.from({length:7},(_,i)=>`<i style="left:${(Math.random()*90-45).toFixed(0)}px;top:${(Math.random()*30-10).toFixed(0)}px;animation-delay:${(i*0.08).toFixed(2)}s">${c[2]}</i>`).join(''),x,y,1100,'fx-gain fg-'+e.s,`--c0:${c[0]};--c1:${c[1]}`);return;}

@@ -1438,3 +1438,8 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 .bq-time{position:absolute;right:8px;bottom:6px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);font-size:.78em}
 
 .sk{position:relative}.sk-lock{position:absolute;top:2px;right:4px;font-size:.8em;opacity:.45;cursor:pointer;padding:2px}.sk-lock.on{opacity:1}
+
+.fxn.fx-banner{transform:translate(-50%,0);white-space:nowrap;pointer-events:none;animation:fxban 1.7s ease-out forwards;z-index:7}
+.fxn.fx-banner b{font-family:var(--font);font-size:26px;letter-spacing:.18em;color:#fff;text-shadow:0 0 6px #000,0 0 14px rgba(0,0,0,.75),0 2px 0 #000}
+.fxn.fx-banner.bad b{color:#ff8a80}.fxn.fx-banner.good b{color:#ffe08a}
+@keyframes fxban{0%{opacity:0;transform:translate(-50%,0) scale(1.8)}18%{opacity:1;transform:translate(-50%,0) scale(1)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-16px) scale(.96)}}

@@ -51,9 +51,14 @@ function fxDrain(sc){const q=sc.fxq;sc.fxq=[];if(!$('#fx')||!q||!q.length)return
     if(d)setTimeout(()=>fxOne(sc,e),d);else fxOne(sc,e);}
 }
 // chữ tên đòn bay lên cạnh người ra đòn; hiệu ứng hồi chỉ số; bùng phát huyết thuật
+// chữ báo đầu trận: màn chiến đấu có thể chưa dựng xong nên thử lại vài lần
+function fxBanner(sc,e,n){if(!G.run||G.run.scene!==sc)return;const a=$('#cbArt');const r=a&&a.getBoundingClientRect();
+  if(!r||r.height<60||!$('#fx')){if(n<8)setTimeout(()=>fxBanner(sc,e,n+1),250);return;}
+  fxEl(`<b>${esc(e.t)}</b>`,r.left+r.width/2,r.top+r.height*0.3,1700,'fx-banner'+(e.c?' '+e.c:''));}
 const FXG_C={hp:['#bff5c8','#2f9a4e','+'],mp:['#cfe6ff','#3a7fd0','+'],dl:['#ffffff','#9aa6b4','✦'],than:['#ffe0b0','#e07a1a','✦'],tl:['#fff3a8','#e0b81a','⚡']};
 {const _fo=fxOne;fxOne=function(sc,e){if(!G.run||G.run.scene!==sc)return;
   if(e.k==='heal')return;
+  if(e.k==='banner'){fxBanner(sc,e,0);return;}
   if(e.k==='act'){const [x,y]=fxPos(sc,e.id);fxEl(`<b>${esc(e.n)}</b>`,x,y-58,1300,'fx-act');return;}
   if(e.k==='gain'){if(CFG.anim===false)return;const [x,y]=fxPos(sc,e.id);const c=FXG_C[e.s];if(!c)return;
     fxEl(Array.from({length:7},(_,i)=>`<i style="left:${(Math.random()*90-45).toFixed(0)}px;top:${(Math.random()*30-10).toFixed(0)}px;animation-delay:${(i*0.08).toFixed(2)}s">${c[2]}</i>`).join(''),x,y,1100,'fx-gain fg-'+e.s,`--c0:${c[0]};--c1:${c[1]}`);return;}
