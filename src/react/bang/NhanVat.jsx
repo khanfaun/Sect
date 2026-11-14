@@ -64,9 +64,9 @@ function CanCo() {
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên thể chất', (r.the || []).map(PS.ttPhysOf), 'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.')} />
         <Kv n="Tư chất" v={`<span style="color:${PCOL[Math.max(0, 4 - TC_N.findIndex(x => tc >= x[0]))]}">${PS.tcName(tc)}</span>`}
           t={'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×' + PS.numVN(Math.round(PS.tcMult(tc) * 100) / 100) + ' (từ ×0,7 tới ×1,3).'} />
-        <Kv n="Ngộ tính" v={RT('ngo', s.ngo, 'muc')} t="Tu luyện nhanh hơn, giải đố, đột phá, luyện chế" />
+        <Kv n="Ngộ tính" v={RT('ngo', s.ngo, 'muc')} t="Tu luyện nhanh hơn, giải đố, đột phá, luyện chế. Mỗi điểm trên 10 tăng thêm 2,5% lịch luyện nhận được (tối đa 50%)." />
         <Kv n="Đạo tâm" v={RT('tam', s.tam, 'muc')} t="Chống ảo cảnh, đột phá" />
-        <Kv n="Khí vận" v={RT('van', s.van, 'muc')} t="Chí mạng, may mắn" />
+        <Kv n="Khí vận" v={RT('van', s.van, 'muc')} t={"Chí mạng, may mắn. Khí vận cao thì dễ gặp kỳ ngộ; kỳ ngộ lớn chỉ mở khi khí vận từ " + PS.KY_BIG_VAN + " trở lên."} />
         <Kv n="Mị lực" v={`<span class="mi-v">${PS.miName()}</span>`} t={'Dung mạo, phong thái. Ảnh hưởng giá mua bán, các phép thử thuyết phục, ấn tượng ban đầu của người lạ, việc kết giao, bái sư, kết đạo lữ.\nQuá nổi bật đôi khi cũng chuốc lấy ghen ghét.'} />
         <Kv n="Nhân quả" v={PS.karmaName(r.karma)} t="Thiện ác đều có báo" />
         <Kv n="Tuổi" v={Math.floor(r.age) + ' · còn ' + left + ' năm'} t={'Thọ nguyên ' + s.life + '. Hết thọ nguyên là tọa hóa'} />
