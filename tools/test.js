@@ -93,6 +93,24 @@ const TESTS = {
     ok(d > 3 && d < 25, `thương nặng thua: chết ${d}/30 lần (khoảng 40%)`);
     fresh("addWound('gay');"); ok(run('woundLv()') === 2, 'gãy xương là thương nặng');
   },
+  // hồi phục: theo tháng, cộng dồn, đầy thì dừng, bế quan nhiều năm không treo
+  hoiphuc() {
+    fresh('G.run.hp=1;G.run.rgStreak=0;G.run.rgLost=0;G.run._hpLast=1;');
+    const h0 = +run('G.run.hp'); run('advanceTime(HM)'); const h1 = +run('G.run.hp');
+    ok(h1 > h0, `một tháng hồi được ${h1 - h0} khí huyết`);
+    run('advanceTime(3*HM)'); ok(+run('G.run.rgStreak') >= 3, 'cộng dồn tăng theo tháng: ' + run('G.run.rgStreak'));
+    run('addWound("ngoai")'); ok(+run('G.run.rgStreak') === 0, 'bị thương thì cộng dồn về 0');
+    run('cureWound(["ngoai"]);G.run.hp=S().maxHp;G.run._hpLast=G.run.hp;');
+    const t0 = Date.now(); run('advanceTime(40*HY)'); ok(Date.now() - t0 < 5000 && +run('G.run?G.run.hp:0') <= +run('G.run?S().maxHp:1'), 'trôi 40 năm: không treo, không vượt tối đa');
+    fresh(); ok(run('rgTurnRate()') === 0.5, 'phàm nhân trong trận 0,5%/lượt');
+  },
+  // tĩnh toạ: không tăng tu vi, hồi nhanh hơn để yên
+  tinhtoa() {
+    fresh('G.run.hp=1;G.run._hpLast=1;'); const tv = +run('G.run.tv'); const a0 = +run('G.run.age');
+    ok(run('tinhToa(6)') === true, 'tĩnh toạ 6 tháng'); ok(+run('G.run.tv') === tv, 'tu vi không đổi');
+    ok(+run('G.run.age') - a0 >= 0.49, 'tuổi tăng nửa năm'); ok(+run('G.run.hp') > 1 + 6, 'khí huyết hồi: ' + run('G.run.hp'));
+    ok(run('ttPreview(ttLeftM()+5).over') === true, 'vượt thọ nguyên thì có cảnh báo');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 240000 });

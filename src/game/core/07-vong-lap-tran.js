@@ -49,9 +49,11 @@ function onZero(sc,u){
   if(u.st.poison>0){if(isP&&fx.poisonImm)u.st.poison=0;else{d+=u.st.poison;u.st.poison=Math.floor(u.st.poison*0.75);}}
   if(u.st.burn>0){d+=u.st.burn;u.st.burn=Math.floor(u.st.burn*0.5);}
   if(d){u.hp-=d;clog(sc,(u.isMain?'Ngươi':u.name)+' '+T(['bị độc hỏa gặm nhấm kinh mạch','bị độc khí và lửa thiêu hành hạ','bị độc hỏa làm khí huyết hao mòn'])+'.','dot');if(u.hp<=0){down(sc,u);checkEnd(sc);return;}}
+  if(isP&&typeof regenTurn==='function'){regenTurn(u,fx);} // hồi phục mỗi lượt của người chơi: xem core2/24-hoi-phuc.js
+  else{
   let reg=(fx.regenHp||0)+(u.st.regen>0?6:0);if(u.st.regen>0)u.st.regen--;
   if(reg)u.hp=Math.min(u.max,u.hp+Math.round(u.max*reg/100));
-  if(u.maxMp)u.mp=Math.min(u.maxMp,u.mp+Math.round(u.maxMp*(0.05+(fx.regenMp||0)/100)));
+  if(u.maxMp)u.mp=Math.min(u.maxMp,u.mp+Math.round(u.maxMp*(0.05+(fx.regenMp||0)/100)));}
   if(u.tl!=null)u.tl=Math.min(100,u.tl+TL_REGEN);
   if(u.st.vuln>0)u.st.vuln--;if(u.st.weak>0)u.st.weak--;
   if(u.esc)u.st.rage=(u.st.rage||0)+1;

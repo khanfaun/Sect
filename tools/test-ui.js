@@ -44,6 +44,15 @@ const TESTS = {
     let txt = ''; for (let i = 0; i < 25 && !txt; i++) { await p.waitForTimeout(150); txt = await ev(p, () => (document.querySelector('.fx-banner') || {}).textContent || ''); }
     ok(!!txt, 'chữ báo đầu trận: "' + txt + '"'); await shot(p, 'combat');
   },
+  // tĩnh toạ: thẻ riêng trong hộp bế quan, bấm thì hồi máu và thời gian trôi
+  async tinhtoa(p) {
+    await ev(p, () => { G.run.hp = 1; openPlace(G.run.at); UI.modal = { k: 'bq', tab: 'tt' }; render(); });
+    await p.waitForTimeout(400);
+    ok(await ev(p, () => [...document.querySelectorAll('.mbox h3')].some(h => h.textContent === 'Tĩnh toạ')), 'có thẻ Tĩnh toạ');
+    const b = await p.$('[data-act="ttGo"]'); ok(!!b, 'có nút Tĩnh toạ');
+    if (b) { await b.click(); await p.waitForTimeout(400); }
+    ok(await ev(p, () => NK.count('tinhtoa') === 1 && G.run.hp > 1), 'tĩnh toạ xong, khí huyết tăng');
+  },
   // cấu hình: nút nhật ký gỡ lỗi
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
