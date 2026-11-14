@@ -171,6 +171,7 @@ const ACT={
   menu:m=>{UI.menu=m||null;},
   atkslot:id=>toggleAtkSlot(id),
   skLock:id=>skLockToggle(id),
+  tkUse:()=>{tkUse();if(typeof Map2!=='undefined'&&Map2.invalidate)Map2.invalidate();},
   hideCycle:()=>hideCycle(),
   ttGo:m=>{const v=+m;if(UI.modal&&UI.modal.k==='bq'){if(ttPreview(v).over&&UI.confirm!=='tt'){UI.confirm='tt';note('Vượt thọ nguyên! Bấm lần nữa để vẫn tĩnh toạ.','dn');return;}UI.confirm=null;UI.modal=null;}tinhToa(v);},
   nkToggle:()=>{nkSet(!NK.on);if(NK.on)dbg('nhatky.bat',{});},

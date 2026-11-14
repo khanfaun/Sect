@@ -150,6 +150,18 @@ const TESTS = {
     ok(s.d < 50, 'kẻ thần thức cao nhìn thấu: không được ra tay trước');
     run('hideCycle();hideCycle();hideCycle();'); ok(run('G.run.hide') === null, 'bấm tiếp thì thôi che giấu');
   },
+  // thần thức: tầm nhìn theo chỉ số, nút phóng thần thức, giao tranh
+  thanthuc() {
+    fresh('G.run.pham=0;G.run.mp=S().maxMp;');
+    const a = +run('G.run.base.ngo=0;senseR()'), b = +run('G.run.base.ngo=200;senseR()');
+    ok(b > a, `thần thức cao nhìn xa hơn: ${a} → ${b}`);
+    const c0 = +run('senseR()'); ok(run('tkUse()') === true, 'phóng thần thức'); ok(+run('senseR()') > c0, 'tầm nhìn tăng khi phóng: ' + run('senseR()'));
+    ok(run('tkUse()') === false, 'đang chờ thì không dùng lại được');
+    run('advanceTime(3*HD)'); ok(+run('senseR()') === c0 || run('!tkActive()'), 'hết hiệu lực sau 2 ngày');
+    run('for(let i=0;i<20;i++)gtSpawn();'); const e = run('(W().ents.find(e=>e.type==="giaotranh")||{}).id');
+    ok(!!e, 'có giao tranh gần đó');
+    if (e) { run(`meetEnt(W().ents.find(e=>e.type==="giaotranh"))`); ok(run('G.run.scene&&G.run.scene.id') === 'tranh_bao', 'tới nơi thì vào chuyện tranh bảo vật'); }
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });
