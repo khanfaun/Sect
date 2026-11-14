@@ -102,6 +102,7 @@ function skLockToggle(id){const r=G.run;if(!r||!SK[id])return;r.skLock=r.skLock|
 function consumeOnceSkill(sc,id){const r=G.run;if(!r||!SK[id]||!SK[id].once)return;
   r.skills=(r.skills||[]).filter(k=>k.id!==id);if(r.atkSlots)r.atkSlots=r.atkSlots.filter(x=>x!==id);
   if(r.kn)for(const k of ['atk','move','def','ult'])if(Array.isArray(r.kn[k]))r.kn[k]=r.kn[k].filter(x=>x!==id);
+  r.skUsed=r.skUsed||{};r.skUsed[id]=1; // syncSkills dựng lại chiêu từ công pháp, nên phải nhớ chiêu đã tiêu hao
   if(r.skLock)delete r.skLock[id];clog(sc,`${SK[id].n} chỉ dùng được một lần, giờ đã tan biến khỏi người ngươi.`,'me');}
 function playerAct(id,tid){
   const sc=G.run.scene;const u=readyPlayer(sc);if(!u)return false;
@@ -226,7 +227,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         if(t.kind==='kiep'){const d0=dmgCalc(u.atk,u.st.rage,u.st.weak,0,0,f.p,(isP?elemMult(sk.el,'loi'):1)*lvM*qm*(f.aoe?0.6:1),0);total+=d0;hits++;continue;}
         // né
         let ev=false,q=null;const crushed=typeof crushPair==='function'&&crushPair(u,t)>0; // nghiền ép: không né, không đỡ
-        if(crushed){}
+        if(crushed){dbg('combat.crushed',{att:u.name,def:t.name,main:!!t.isMain});}
         else if(t.st.evade>0){t.st.evade--;ev=true;}
         else{const o=offs==='auto'?'auto':(Array.isArray(offs)?offs[Math.min(h,2)]:null);const D=dodgeP(u,t,o,t.isMain&&offs!=null);q=D.q;ev=R()<D.p;}
         if(ev){dod++;cfx(sc,{k:'dodge',id:t.id});if(t.isMain&&q==='chuan')t.bonusPos=8;continue;}

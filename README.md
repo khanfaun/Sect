@@ -25,7 +25,9 @@ npm run dev        # mở game trên máy để sửa, lưu tệp là tự tải
 npm run build      # ra phu-sinh.html (hoặc: node tools/build.js, không cần cài gì)
 ```
 
-Kiểm tra: `node bot.js 80 --quiet` (máy tự chơi 80 kiếp), `node tools/play.js <thư mục ảnh> full` (bấm thử giao diện, chụp ảnh từng màn).
+Kiểm tra nhanh: `node tools/test.js` (luật chơi), `node tools/test-ui.js` (giao diện, cần build trước), nhật ký gỡ lỗi mở bằng `?debug=1`. Xem thêm `CLAUDE.md`.
+
+Kiểm tra khác: `node bot.js 80 --quiet` (máy tự chơi 80 kiếp), `node tools/play.js <thư mục ảnh> full` (bấm thử giao diện, chụp ảnh từng màn).
 
 ## Gắn ảnh (asset)
 

@@ -30,6 +30,9 @@ function DoHoa() {
     <SetRow n="Sắc trời theo buổi" t="Bản đồ ngả màu theo sáng, chiều, tối, đêm"><OnOff k="daynight" /></SetRow>
     <SetRow n="Chuyển động giao diện" t="Hiệu ứng trượt, mờ dần của các bảng"><OnOff k="anim" /></SetRow>
     <SetRow n="Hiện số khung hình"><OnOff k="showFps" /></SetRow>
+    <SetRow n="Nhật ký gỡ lỗi" t="Ghi lại các sự kiện chính để gửi cho người sửa game khi gặp lỗi. Tắt thì không tốn máy."><span>
+      <button className="btn" data-act="nkToggle">{PS.NK.on ? 'Đang bật' : 'Đang tắt'}</button>{' '}
+      <button className="btn" data-act="nkCopy" disabled={!PS.NK.on}>Sao chép</button></span></SetRow>
   </>;
 }
 

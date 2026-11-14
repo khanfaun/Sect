@@ -171,6 +171,8 @@ const ACT={
   menu:m=>{UI.menu=m||null;},
   atkslot:id=>toggleAtkSlot(id),
   skLock:id=>skLockToggle(id),
+  nkToggle:()=>{nkSet(!NK.on);if(NK.on)dbg('nhatky.bat',{});},
+  nkCopy:()=>{const t=NK.dump();try{navigator.clipboard.writeText(t).then(()=>note('Đã sao chép '+NK.buf.length+' dòng nhật ký.','up'),()=>note('Không sao chép được.','dn'));}catch(e){note('Không sao chép được.','dn');}},
   prep:i=>prepToggle(i),
   prepGo:()=>prepStart(),
   btGo:()=>btContinue(),

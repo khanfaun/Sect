@@ -9,3 +9,6 @@ const KY_BIG_VAN=8;
 function kyMul(){const r=G.run;if(!r)return 1;return clamp(1+(S().van-4)*0.12,0.6,3);}
 function kyBigOpen(){const r=G.run;if(!r)return false;if(S().van>=KY_BIG_VAN)return true;
   if(!r.kyBigMiss){r.kyBigMiss=1;log('Một cơ duyên lớn lướt qua trước mặt, nhưng khí vận chưa đủ để ngươi nhìn thấy nó.');}return false;}
+
+// chiêu dùng một lần đã tiêu hao thì không được dựng lại từ công pháp
+{const _ka=knAvail;knAvail=function(cat){const m=_ka(cat);const u=G.run&&G.run.skUsed;if(u)for(const id in u)delete m[id];return m;};}
