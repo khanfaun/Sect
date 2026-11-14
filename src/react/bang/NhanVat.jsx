@@ -64,17 +64,17 @@ function CanCo() {
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên thể chất', (r.the || []).map(PS.ttPhysOf), 'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.')} />
         <Kv n="Tư chất" v={`<span style="color:${PCOL[Math.max(0, 4 - TC_N.findIndex(x => tc >= x[0]))]}">${PS.tcName(tc)}</span>`}
           t={'Độ tinh thuần của linh căn, định sẵn lúc sinh.\nCùng một loại linh căn, tư chất cao thì hấp thu linh khí nhanh hơn.\nHệ số tu luyện ×' + PS.numVN(Math.round(PS.tcMult(tc) * 100) / 100) + ' (từ ×0,7 tới ×1,3).'} />
-        <Kv n="Ngộ tính" v={RT('ngo', s.ngo, 'muc')} t="Tu luyện nhanh hơn, giải đố, đột phá, luyện chế" />
+        <Kv n="Ngộ tính" v={RT('ngo', s.ngo, 'muc')} t="Tu luyện nhanh hơn, giải đố, đột phá, luyện chế. Mỗi điểm trên 10 tăng thêm 2,5% lịch luyện nhận được (tối đa 50%)." />
         <Kv n="Đạo tâm" v={RT('tam', s.tam, 'muc')} t="Chống ảo cảnh, đột phá" />
-        <Kv n="Khí vận" v={RT('van', s.van, 'muc')} t="Chí mạng, may mắn" />
+        <Kv n="Khí vận" v={RT('van', s.van, 'muc')} t={"Chí mạng, may mắn. Khí vận cao thì dễ gặp kỳ ngộ; kỳ ngộ lớn chỉ mở khi khí vận từ " + PS.KY_BIG_VAN + " trở lên."} />
         <Kv n="Mị lực" v={`<span class="mi-v">${PS.miName()}</span>`} t={'Dung mạo, phong thái. Ảnh hưởng giá mua bán, các phép thử thuyết phục, ấn tượng ban đầu của người lạ, việc kết giao, bái sư, kết đạo lữ.\nQuá nổi bật đôi khi cũng chuốc lấy ghen ghét.'} />
         <Kv n="Nhân quả" v={PS.karmaName(r.karma)} t="Thiện ác đều có báo" />
         <Kv n="Tuổi" v={Math.floor(r.age) + ' · còn ' + left + ' năm'} t={'Thọ nguyên ' + s.life + '. Hết thọ nguyên là tọa hóa'} />
       </HopGon>
       <HopGon k="tu" icon="yin" name="Tu luyện">
         <Kv n="Cảnh giới" v={esc(PS.realmLabel()) + ` <span class="qhelp" data-act="cgOpen" data-tip="Mở hệ thống cảnh giới">?</span>`} t={tvTip} />
+        {!PS.isPham() && PS.G.run.realm >= 1 && <Kv n="Che giấu tu vi" v={`<button class="btn sm" data-act="hideCycle">${PS.hideOn() ? 'Hiện như ' + PS.shownName() : 'Không che'}</button>`} t={'Người ngoài thấy cảnh giới thấp hơn thật. Sức mạnh không đổi. Kẻ địch không nhìn thấu thì coi thường, ngươi ra tay trước. Kẻ có thần thức cao hơn nhìn xuyên được.\nBấm để hạ thêm một bậc, hạ tới phàm nhân thì bấm nữa để thôi.'} />}
         <Thanh n="Tu vi" v={PS.tvShow()} cls="tv" />
-        <Thanh n="Lịch luyện" v={PS.llShow()} cls="ll" t={'Lịch luyện ' + PS.llShow() + '%\nCó được nhờ thực chiến (thắng nhiều, thua ít, đánh kẻ mạnh hơn được nhiều hơn), tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Lịch luyện tính theo tầng/kỳ đang ở: chừng 65% là xung kích được, đột phá đại cảnh giới thì cần đầy.'} />
         <Kv n="Tốc độ tu" v={RT('bq', PS.bqReal(), 'toc')} t={'Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.'} />
         <Kv n="Thổ nạp" v={RT('thonap', PS.thonapPct(), 'toc')} t={'Thân thể tự hít thở linh khí: không cần bế quan, tu vi vẫn tự tăng theo thời gian, kể cả lúc đi đường hay bế quan.\nRất ít, chừng 5% tốc độ bế quan. Theo linh căn, tư chất, ngộ tính, công pháp, tâm pháp, trang bị, mệnh cách và linh khí nơi đang đứng.'} />
         <Kv n="Hiệu suất tu" v={`<span class="${hs[0]}">${hs[1]}</span>`} t={'Phần tu vi thực nhận so với lẽ ra được nhận, do chênh lệch tu vi và lịch luyện.\nTu vi càng bỏ xa lịch luyện thì nhận càng ít, tới mức bình cảnh gần như đứng yên.\nLịch luyện cao hơn tu vi thì được ngộ đạo, nhận thêm một ít.'} />

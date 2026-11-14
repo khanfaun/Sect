@@ -132,6 +132,7 @@ function uyApSet(sc){const A=sc.units.filter(u=>u.side==='A'),Bs=sc.units.filter
   for(const u of sc.units){u._lc=lcCalc(u);if(u.st)u.st.uyap=0;}
   for(const a of A)for(const b of Bs){const c=crushPair(a,b);if(c>0)b.st.uyap=1;if(c<0)a.st.uyap=1;}
   const me=mainUnit(sc);
+  {const bi=me&&me.st.uyap?['Bị nghiền ép!','bad']:Bs.some(b=>b.st.uyap)?['Nghiền ép!','good']:[sc.boss?'Thủ lĩnh xuất hiện!':'Giao chiến!',''];cfx(sc,{k:'banner',t:bi[0],c:bi[1]});}
   if(me&&me.st.uyap){const f=Bs.find(b=>crushPair(b,me)>0);clog(sc,`Uy áp của ${f.name} ập xuống như núi đè. Linh lực trong người ngươi trì trệ hẳn, ra tay chẳng khác gì gãi ngứa.`,'en');}
   const low=Bs.filter(b=>b.st.uyap);if(low.length)clog(sc,`Uy áp của ngươi tỏa ra, ${low.map(b=>b.name).join(', ')} run rẩy, khí thế tan nát.`,'me');}
 {const _cs38=combatStep;combatStep=function(dt){const sc=G.run&&G.run.scene;if(sc&&sc.type==='combat'&&!sc.prep&&!sc._ua&&!sc.kiep){sc._ua=1;uyApSet(sc);}return _cs38(dt);};}

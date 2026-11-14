@@ -1,6 +1,9 @@
 // Người chơi máy cho Phù Sinh 2.
 // Nạp khối lõi + dữ liệu từ src/game/ (không nạp giao diện), tự chơi bằng cách gọi thẳng hàm lõi.
-// Chạy: node bot.js [số_kiếp] [--same-world] [--quiet]
+// Chạy: node bot.js [số_kiếp] [--same-world] [--quiet] [--boost] [--smart]
+// --smart: chiến lược có ưu tiên (sống sót > đột phá > tu luyện > tích luỹ > tiến vùng > tranh cơ duyên > khám phá), xem tools/bot-smart.js.
+// --boost: cấp thêm linh thạch và hồi máu để bot sống lâu, đi sâu hơn (thử các tính năng ở cảnh giới và vùng cao).
+// Cuối bản in có "Độ phủ tính năng": các tính năng bot đã/chưa từng chạy tới.
 const fs=require('fs'),vm=require('vm'),path=require('path');
 // Nạp thẳng từ src/game/: phần luật chơi (core, core2) và dữ liệu (data), không nạp giao diện.
 const core=require('./tools/ghep').script(['core','core2','data']);
@@ -38,6 +41,7 @@ function botPlan(){
   if(G.run.asc)G.run.asc=null;
   {const X=typeof lkXkState==='function'&&lkXkState();if(X&&X.ok&&!(G.run.realm===0&&lkTang()>=9)&&(!G.run.scene||G.run.scene.type==='place')){lkXk();return;}}
   const r=G.run,s=S();
+  if(botBossGoal()||botBackGoal()||botStageGoal())return;
   // mục tiêu
   if(r.hp<s.maxHp*0.45){const n=nearest(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok'&&r.st>=price(4)||n.dp);if(n&&goOrOpen(n)){r._goal=n.dp?'heal':'inn';return;}}
   if(r.realm<4&&canBreak()){const n=nearest(n=>n.dp&&dangerTag(n)<3);if(n&&goOrOpen(n)){r._goal='bt';return;}}
@@ -61,6 +65,7 @@ function botPlace(){
   const r=G.run,sc=r.scene,n=nodeById(sc.id);const acts=placeActs(n).filter(a=>!a.dis);const has=k=>acts.find(a=>a.a===k);
   r._pc=(r._pc||0)+1;if(r._pc>6){r._pc=0;leavePlace();return;}
   const s=S();
+  if(botPlaceX(acts,has,n))return;
   {const qq=r.quests.find(q=>q.state==='open'&&q.node===r.scene.id);if(qq&&r.hp>s.maxHp*0.5&&questDo(qq.id))return;}
   if(r._goal==='cross'&&has('cross')){r._goal=null;placeAct('cross');return;}
   if(r._goal==='boss'&&has('boss')){r._goal=null;placeAct('boss');return;}
@@ -70,7 +75,7 @@ function botPlace(){
   if(n.dp&&!bqCan()&&r.tvMinor>=40){bqCustom(Math.max(0.25,Math.min(chance(.75)?2:0.25,bqNeedY()||0.25)));return;}
   if(has('tea')&&chance(.3)&&venueDo('tea','nghe'))return;
   if(has('shop')&&chance(.3)){placeAct('shop');return;}
-  if(has('board')&&chance(.15)){placeAct('board');return;}
+  if(has('board')&&chance(.4)){placeAct('board');return;}
   if(has('ghost')&&chance(.3)){placeAct('ghost');return;}
   if(has('bury')&&chance(.03)&&typeof buryItems==='function'){placeAct('bury');return;}
   if(has('grave')&&chance(.5)){placeAct('grave');return;}
@@ -79,7 +84,8 @@ function botPlace(){
   r._pc=0;leavePlace();
 }
 function botScene(){
-  const r=G.run,sc=r.scene;
+  const r=G.run,sc=r.scene;covInc('scene:'+sc.type);if(sc.type==='event'&&sc.id)covInc('ev:'+sc.id);
+  if(botSceneY(sc))return;
   switch(sc.type){
     case 'region':r.scene=null;return;
     case 'place':botPlace();return;
@@ -103,6 +109,7 @@ function botCombat(sc){
   if(sc.qte){qteResolve(null);return;}
   const u=readyPlayer(sc);
   if(u){
+    if(botCombatX(sc))return;
     const r=G.run;const heal=r.skills.find(k=>SK[k.id].fx.heal&&u.mp>=skillCost(SK[k.id]));
     const hp=r.pills.findIndex(p=>p.id==='hoixuan');
     if(u.hp<u.max*0.35&&hp>=0){if(playerPillAct(hp))return;}
@@ -130,7 +137,9 @@ function scanTexts(){
   const t=run('botTexts()');
   for(const x of t){if(BAD.test(x)){if(stats.bad.length<30)stats.bad.push(x.slice(0,200));}}
 }
-const SAME=process.argv.includes('--same-world');const DBG=process.argv.includes('--debug');let lastSnap='';
+const SAME=process.argv.includes('--same-world');const DBG=process.argv.includes('--debug');const BOOST=process.argv.includes('--boost');let lastSnap='';
+run(fs.readFileSync(path.join(__dirname,'tools','bot-ext.js'),'utf8'));
+if(process.argv.includes('--smart'))run(fs.readFileSync(path.join(__dirname,'tools','bot-smart.js'),'utf8'));
 run('G={meta:newMeta(),run:null,birth:null,over:null,screen:"title"};');
 let life=0,stepsLife=0;
 const t0=Date.now();
@@ -144,9 +153,9 @@ while(life<LIVES){
       }
       if(!SAME&&life%25===0&&life>0&&scr==='over')run('G.meta=newMeta();');
       if(life>=LIVES)break;
-      run('G.over=null;genBirth();newRun(G.birth.cards[0]);');stepsLife=0;continue;
+      run('G.over=null;genBirth();newRun(G.birth.cards[Math.floor(Math.random()*G.birth.cards.length)]);');stepsLife=0;continue;
     }
-    run('if(G.run.scene)botScene();else botPlan();');
+    if(BOOST)run('botBoost()');run('botManage();if(!G.run)throw new Error("mất kiếp trong botManage");if(G.run.scene)botScene();else botPlan();');
     if(DBG&&run('!!G.run'))lastSnap=run('JSON.stringify({pham:!!G.run.pham,tp:typeof tuArt==="function"&&tuArt()?tuArt().n:null,tv:Math.round(G.run.tv),ll:Math.round(G.run.ll||0),age:Math.floor(G.run.age),realm:G.run.realm,bt:typeof canBreak==="function"&&canBreak(),noi:(G.run.llP||[]).length,nguoi:(G.run.llN||[]).length,dich:Object.keys(G.run.llSeen||{}).length,tran:Object.values(G.run.llSeen||{}).reduce((a,b)=>a+b,0),soNoi:regionOf(G.run.region).nodes.length,bq:typeof bqCan==="function"?bqCan():"",goal:G.run._goal,khihai:(G.run.chu||[]).filter(Boolean).length,arts:(G.run.arts||[]).map(a=>a.type).join("")})');
     stats.steps++;stepsLife++;
     if(run('!!G.run')){
@@ -156,7 +165,7 @@ while(life<LIVES){
     }
     if(stepsLife>30000){stats.errors.push('kiếp kẹt quá 30000 bước: '+run('JSON.stringify({sc:G.run&&G.run.scene&&G.run.scene.type,at:G.run&&G.run.at,mv:G.run&&G.run.moving})'));run('die("toahoa")');}
   }catch(e){
-    stats.errors.push(String(e.stack||e).split('\n').slice(0,4).join(' | '));
+    stats.errors.push(String(e.message)+' @ '+(String(e.stack||'').split('\n').filter(l=>/^\s+at /.test(l)).slice(0,3).map(l=>l.trim().slice(0,90)).join(' < ')));
     if(stats.errors.length>20)break;
     try{run('if(G.run)die("toahoa");else G.screen="title";');}catch(e2){run('G.run=null;G.screen="title";');}
   }

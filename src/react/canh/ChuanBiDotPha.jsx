@@ -37,6 +37,11 @@ export function ChuanBiDotPha({ sc }) {
         <div><small>Khả năng thành công</small><b>{PS.btWord(v.rate)}</b></div>
         {!ph && <div {...tcTip}><small>Phẩm chất dự kiến</small><b>{QNAME[v.q]}</b></div>}
       </div>
+      <div className="hrow tvrow" {...tip('Mỗi lần đột phá thất bại tích thêm một điểm cảm ngộ. Đủ ' + PS.CN_MAX + ' điểm thì lần sau chắc chắn thành công. Đột phá thành công thì cảm ngộ về 0.')}>
+        <span className="hn">Cảm ngộ</span>
+        <div className="hb tv"><i style={{ width: Math.min(100, PS.camNgo() / PS.CN_MAX * 100) + '%' }} /></div>
+        <span className="hv">{PS.camNgo()}/{PS.CN_MAX}</span>
+      </div>
       <h4 className="sgrp">Khả năng thành công</h4>
       <div className="bt-parts">
         {P.map((x, i) => (

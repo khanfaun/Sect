@@ -57,6 +57,7 @@ const Map2=(()=>{
   const MOBILE=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
   let cv=null,ctx=null,W0=0,H0=0,dpr=1;
   const cam={x:500,y:500,z:0.8,follow:true,reg:-1};
+  const DT_Z=1.6,DTC={};let dtWant='',dtTimer=0; // mảnh địa hình chi tiết khi phóng to sâu
   let terr=null,terrKey='',fogC=null,fogKey='',C={},cloudSpr=null;
   let fogS=null,fogKey2='',holeSpr=null;
   let lastAct=performance.now(),dirty=true,soft=false,ema=0,slow=0,fpsT=0,fpsN=0,fpsShow=0,lastT=0,lastDraw=0;
@@ -71,7 +72,7 @@ const Map2=(()=>{
   function resize(){if(!cv)return;const r=cv.getBoundingClientRect();if(!r.width)return;const lv=gfxLv();
     dpr=Math.min(window.devicePixelRatio||1,CFG.dpr||(MOBILE?[1,1.25,1.5]:[1,1.5,2])[lv]);W0=r.width;H0=r.height;
     const w=Math.round(W0*dpr),h=Math.round(H0*dpr);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}dirty=true;}
-  function resetAll(){clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();}
+  function resetAll(){for(const k in DTC)delete DTC[k];dtWant='';clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();}
   function zMin(){return Math.max(W0/WORLD_W,H0/WORLD_H);}
   function clampCam(){cam.z=clamp(cam.z,zMin(),1.6);const hw=W0/2/cam.z,hh=H0/2/cam.z;const px=W0*0.42/cam.z,py=H0*0.45/cam.z;cam.x=clamp(cam.x,hw-px,Math.max(hw,WORLD_W-hw)+px);cam.y=clamp(cam.y,hh-py,Math.max(hh,WORLD_H-hh)+py);} // cho kéo quá mép nửa màn hình để điểm sát rìa vẫn kéo ra giữa được
   function center(){const r=G.run;if(!r)return;const w0=playerXY(),p=mapXY(r.region,w0[0],w0[1]);cam.x=p[0];cam.y=p[1];cam.follow=true;cam.reg=r.region;clampCam();dirty=true;}
@@ -80,9 +81,10 @@ const Map2=(()=>{
   const SX=x=>(x-cam.x)*cam.z+W0/2,SY=y=>(y-cam.y)*cam.z+H0/2;
 
   // ----- địa hình: vẽ một lần cho mỗi vùng -----
-  function buildTerr(reg){
-    const lv=gfxLv(),S=[768,1152,1536][lv],k=S/1500,X0=reg*1000,R0=reg<5?regionOf(reg):{nodes:[],terr:[],edges:[]},RG=REG[reg<5?reg:2],CL=CELL[reg];
-    const c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d');
+  // o (tuỳ chọn): vẽ chi tiết một mảnh {S: cỡ ảo của cả vùng, ox,oy,w,h: mảnh cần vẽ (điểm ảnh thật)} để phóng to tối đa vẫn nét
+  function buildTerr(reg,o){
+    const lv=o?2:gfxLv(),S=o?o.S:[768,1152,1536][lv],k=S/1500,X0=reg*1000,R0=reg<5?regionOf(reg):{nodes:[],terr:[],edges:[]},RG=REG[reg<5?reg:2],CL=CELL[reg];
+    const c=document.createElement('canvas');if(o){c.width=o.w;c.height=o.h;}else c.width=c.height=S;const g=c.getContext('2d');if(o)g.setTransform(XS,0,0,1,-o.ox,-o.oy);
     const seed=hashS('terr'+W().seed+':'+reg),rnd=mul(seed),nz=makeNoise(hashS('terr'+W().seed));
     const px=x=>(x-X0+250)*k,py=y=>(y+250)*k;
     g.fillStyle=C.paper;g.fillRect(0,0,S,S);
@@ -175,6 +177,14 @@ const Map2=(()=>{
     const blit=(c,k)=>{const C0=CELL[k];if(C0.mx){ctx.save();ctx.translate(SX((C0.ox+1250)*XS),SY(C0.oy-250));ctx.scale(-1,1);ctx.drawImage(c,0,0,sz*XS,sz);ctx.restore();}else ctx.drawImage(c,SX((C0.ox-250)*XS),SY(C0.oy-250),sz*XS,sz);};
     for(const k of VR){let t=TC[k];if(!t||t.key!==base){const ks=Object.keys(TC).filter(q=>!VR.includes(+q));if(Object.keys(TC).length>=4&&ks.length){ks.sort((a,b)=>cdist(+b)-cdist(+a));delete TC[ks[0]];}t=TC[k]={key:base,c:buildTerr(k)};}
       if(CFG.terrain)blit(t.c,k);}
+    // phóng to sâu: vẽ lại mảnh đang nhìn ở độ nét cao (vẽ khi camera đứng yên một chút, xong thì dán đè lên)
+    if(CFG.terrain&&z>=DT_Z){for(const k of VR){const C0=CELL[k];if(C0.mx)continue;
+      const S2=Math.round(1500*z*dpr/64)*64,L0=SX((C0.ox-250)*XS),T0=SY(C0.oy-250),Q=256,M=128;
+      const ox=Math.floor((-L0*dpr-M)/Q)*Q,oy=Math.floor((-T0*dpr-M)/Q)*Q,w=Math.ceil((W0*dpr+2*M)/Q)*Q+Q,h=Math.ceil((H0*dpr+2*M)/Q)*Q+Q;
+      const dk=base+':'+k+':'+S2+':'+ox+':'+oy;const D=DTC[k];
+      if(D&&D.key===dk){ctx.drawImage(D.c,L0+D.ox/dpr,T0+D.oy/dpr,D.w/dpr,D.h/dpr);}
+      else{if(D&&D.S===S2&&D.base===base)ctx.drawImage(D.c,L0+D.ox/dpr,T0+D.oy/dpr,D.w/dpr,D.h/dpr);
+        if(dtWant!==dk){dtWant=dk;clearTimeout(dtTimer);dtTimer=setTimeout(()=>{if(dtWant!==dk)return;try{DTC[k]={key:dk,base,S:S2,ox,oy,w,h,c:buildTerr(k,{S:S2,ox,oy,w,h})};}catch(e){}invalidate();},220);}}}}
     // sương: một lớp phủ kín màn hình, khoét lỗ mềm ở những chỗ đã thấy; hình đất chưa tới vẫn hiện mờ bên dưới
     {const fw=Math.max(2,Math.round(W0/2)),fh=Math.max(2,Math.round(H0/2));if(!fogS){fogS=document.createElement('canvas');}
       const fkey=fw+'x'+fh+':'+CFG.theme+':'+r.kiep+':'+r.reveal.length+':'+(lastR?lastR.join(','):'')+':'+cam.x.toFixed(1)+':'+cam.y.toFixed(1)+':'+z.toFixed(4);
@@ -297,5 +307,5 @@ const Map2=(()=>{
     cv.addEventListener('pointerleave',()=>{if(hov!=null){hov=null;dirty=true;}hideTip();});
     cv.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.15:1/1.15,e.offsetX,e.offsetY);},{passive:false});
   }
-  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,reset:resetAll,get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
+  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,reset:resetAll,get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},get dtc(){return Object.keys(DTC).filter(k=>DTC[k]).length;},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
 })();

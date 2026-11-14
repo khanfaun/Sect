@@ -38,6 +38,7 @@ export function NutBanDo() {
     <div className="mright">
       <Nut act="gridT" icon="hex" t={CFG.grid ? 'Ẩn lưới ô' : 'Hiện lưới ô'} on={CFG.grid} />
       <Nut act="legendOpen" icon="list" t="Chú giải ký hiệu trên bản đồ" />
+      {!PS.isPham() && <Nut act="tkUse" icon="eye" on={PS.tkActive()} dis={!!PS.tkWhy() && !PS.tkActive()} t={'Phóng thần thức: tầm nhìn gấp ' + PS.TK_MUL + ' lần trong ' + PS.durH(PS.TK_DUR) + ', tốn ' + PS.TK_MP + '% linh lực, chờ ' + PS.TK_CD + ' ngày mới dùng lại.\nTầm hiện tại: ' + PS.senseR() + (PS.tkWhy() ? '\n' + PS.tkWhy() : '')} />}
       <Nut act="center" icon="target" t="Về chỗ ngươi" />
     </div>
     <div className="mbl">

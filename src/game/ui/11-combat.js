@@ -117,7 +117,7 @@ function autoPick(sc){
   if(!sc.kiep){if(!sc.pt&&(me.than||0)>=100)playerUlt();if(sc.pt&&sc.pt.sk&&(sc.pt.left===1||(sc.pt.left<0&&me.hp<me.max*0.5))){if(playerUlt())return;}}
   if(me.hp<me.max*0.35){const i=r.pills.findIndex(p=>p.id==='hoixuan'||p.id==='baohuyet');if(i>=0){playerPillAct(i);return;}}
   let best='_atk',bp=BASIC.fx.p;
-  for(const id of atkSlots()){const sk=SK[id];if(skillCost(sk)<=me.mp&&(sk.fx.p||0)>bp){bp=sk.fx.p;best=id;}}
+  for(const id of atkSlots()){const sk=SK[id];if(skLocked(id))continue;if(skillCost(sk)<=me.mp&&(sk.fx.p||0)>bp){bp=sk.fx.p;best=id;}}
   if(me.mp<me.maxMp*0.15&&best==='_atk'&&Math.random()<0.3)best='_guard';
   playerAct(best);
 }
@@ -175,7 +175,7 @@ function crushVictims(sc,u){const o=sc.units.filter(x=>x.side!==u.side&&x.kind!=
 function prepUnitRow(u,me,cmp){const foe=u.side==='B';const kp=u.kind==='kiep';const sub=me?realmLabel():kp?'Thiên kiếp':u.sub||(foe?'Đối thủ':'Đồng hành');const sc=G.run.scene;
   const S0=me?S():null;const hp=me?G.run.hp:u.hp,mh=me?S0.maxHp:u.max,mp=me?G.run.mp:(u.mp||0),mm=me?S0.maxMp:(u.maxMp||0);
   const V=sc?crushVictims(sc,u):[];
-  const tag=V.length?`<b class="lc-c ne"${ta('Nghiền ép '+V.map(x=>x.isMain?'ngươi':x.name).join(', ')+': lực chiến hơn hẳn một đại cảnh giới.\nBên bị nghiền ép chịu uy áp, đòn đánh vào người này gần như vô dụng.')}><span class="ne-i">${ic('skull')}</span>Nghiền ép</b>`:'';
+  const tag=V.length?`<b class="lc-c ne"${ta('Nghiền ép '+V.map(x=>x.isMain?'ngươi':x.name).join(', ')+': lực chiến hơn hẳn một đại cảnh giới.\nBên bị nghiền ép chịu uy áp: đòn đánh gần như vô dụng, và không né, không đỡ được đòn của kẻ nghiền ép.')}><span class="ne-i">${ic('skull')}</span>Nghiền ép</b>`:'';
   const lc=kp?'<b class="lc-c st">Gục là chết</b>':RT('lc',pLc(u)); // thiên kiếp không so lực chiến như một đối thủ
   return `<div class="pp-u${foe?' foe':''}"><span class="u-av"${unitTal(u)?ta('Tiềm chất: '+TAL_N[unitTal(u).tier]):''}>${uAvatar(u)}</span><div class="pp-t"><div class="pp-nl"><span class="pp-n">${esc(u.name)}<small class="pp-sub">${elSeal(u.el||'vo')} ${esc(sub)}</small></span>${tag}</div>
    <div class="pp-row2"><div class="pp-bars"><span${ta('Khí huyết')}>${ic('heart')}${cBar(hp,mh,'hp'+(hp<mh*0.3?' low':hp<mh*0.6?' mid':''))}</span><span${ta(mm?'Linh lực':'Chưa có linh lực')}>${ic('drop')}${cBar(mp,mm||1,'mp')}</span></div>
