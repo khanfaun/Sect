@@ -4,6 +4,7 @@ import { Html, PS } from '../html';
 import { Ib, Ic, Tabs, tip } from '../chung';
 import { Win } from './Khung';
 import { TuiDo } from './TuiDo';
+import { SoHoc, KyNang } from './SoHoc';
 
 // Một dòng tên — giá trị (giống kvRow()). v là chuỗi HTML (mức đánh giá có màu…)
 function Kv({ n, v, t, cls }) {
@@ -115,8 +116,8 @@ export function NhanVat() {
       <Tabs k="char" list={TABS} cur={tab} />
       {tab === 'base' && <CanCo />}
       {tab === 'bag' && <TuiDo />}
-      {tab === 'hoc' && <Html style={{ display: 'contents' }} h={PS.hocTabHTML()} />}
-      {tab === 'kn' && <Html style={{ display: 'contents' }} h={PS.knTabHTML()} />}
+      {tab === 'hoc' && <SoHoc />}
+      {tab === 'kn' && <KyNang />}
     </Win>
   );
 }
