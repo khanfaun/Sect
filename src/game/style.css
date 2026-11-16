@@ -1474,3 +1474,8 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 .np-x .icb{width:22px;height:22px}.np-x .icb svg{width:14px;height:14px}.np-x{gap:0}
 .np-pic.ter{color:#fff}.np-pic.ter svg{width:20px;height:20px}
 .mleft .mb{width:38px;height:38px;border-radius:10px;margin-top:6px}.mleft .mb .ic{width:20px;height:20px}
+
+/* iPhone: giữ ngón tay trên bản đồ không bật kính lúp, không chọn chữ */
+body,#map,#dock,canvas{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text}
+canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}

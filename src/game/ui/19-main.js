@@ -54,6 +54,7 @@ function mapAimEnd(ok){const H=UI.hold;UI.hold=null;const r=G.run;if(ok&&H&&r&&!
   if(here){UI.mark=null;UI.sel=n?n.id:null;UI.cell=n?null:H.c;}else if(!walk){UI.mark=null;UI.sel=null;UI.cell=null;}else{UI.mark={k:n?'n'+n.id:'c'+H.c,th:n?hexAt(...mapNode(n)):H.c};UI.sel=null;UI.cell=null;}}
   render();}
 function mapTap(n,c,w,zf){const r=G.run;if(!r||r.scene)return;UI.hold=null;
+  if(r.moving&&zf!=null&&zf>=0.5){UI.sel=null;UI.cell=null;UI.mark=null;render();return;} // đang đi đường: chạm bản đồ không chọn gì
   // mức gần: giữ để xem thẻ; chạm một lần đánh dấu đường đi, chạm lần nữa vào đúng chỗ đó thì lên đường
   if(zf!=null&&zf>=0.5&&!r.moving&&c!=null&&c>=0){UI.pop=null;
     if(!n){const at=nodeById(r.at);if(at&&at.wp&&nodeHex(at)===c)n=at;}

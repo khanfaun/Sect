@@ -69,7 +69,7 @@ function TheO({ c, hold }) {
   const dg = d ? PS.dangerTag(d) : 0, h = walk ? PS.cellHours(c) : null;
   const here = h === 0;
   return (
-    <div className={'dock card np' + (min && !hold ? ' min' : '')} data-ax={hold ? hold.x : cx} data-ay={hold ? hold.y : cy} data-ic={hold ? 46 : undefined}>
+    <div className={'dock card np' + (min && !hold ? ' min' : '') + (hold ? ' hold' : '')} data-ax={hold ? hold.x : cx} data-ay={hold ? hold.y : cy} data-ic={hold ? 46 : undefined}>
       <div className="np-h">
         <div className="np-pic ter" style={{ background: TER_COL[t] }}><Ic n="hex" /></div>
         <div className="np-t">
@@ -97,7 +97,7 @@ function TheNoi({ n, hold }) {
   const where = I.sure ? PS.hexInfo(PS.nodeHex(n)).dist : '';
   const pimg = ASSET.place[n.type];
   return (
-    <div className={'dock card np' + (PS.UI.npMin && !hold ? ' min' : '')} data-ax={hold ? hold.x : n.x} data-ay={hold ? hold.y : n.y} data-ic={hold ? 46 : undefined}>
+    <div className={'dock card np' + (PS.UI.npMin && !hold ? ' min' : '') + (hold ? ' hold' : '')} data-ax={hold ? hold.x : n.x} data-ay={hold ? hold.y : n.y} data-ic={hold ? 46 : undefined}>
       <div className="np-h">
         <div className={'np-pic' + (I.sure ? '' : ' rum')}>{pimg && <img src={pimg} alt="" />}{!I.sure && <b>?</b>}</div>
         <div className="np-t">

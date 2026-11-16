@@ -274,16 +274,21 @@ const Map2=(()=>{
           const d=sel!=null&&g0.reg[sel]>=0?g0.dist[sel]:-1;
           if(d>=0&&hx.dp[d]){ctx.fillStyle=hexA(C.dark?'#ffffff':'#fff6dc',(C.dark?0.1:0.34)*distA);ctx.fill(hx.dp[d]);ctx.globalCompositeOperation=C.dark?'source-over':'multiply';ctx.strokeStyle=hexA(BR,0.32*distA);ctx.lineWidth=0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(hx.dp[d]);ctx.setLineDash([]);ctx.globalCompositeOperation='source-over';}}
         // địa điểm: tô các ô của nó bằng màu icon (phủ overlay, rất nhạt), nếu bật lưới thì có thêm đường ô mảnh
-        {const hn=hov!=null&&showIc?hexNode(hov):null;const L=[];const sn0=UI.sel!=null?nodeById(UI.sel):null;if(sn0&&(sn0.fog>=2||sn0.memory))L.push([sn0,1]);if(hn&&hn!==sn0)L.push([hn,0.65]);
+        {const hn=hov!=null&&showIc?hexNode(hov):null;const L=[];const sn0=UI.sel!=null?nodeById(UI.sel):null;
+          // đích đang ngắm / đã đánh dấu: cả cụm địa điểm sáng lên, viền đỏ quanh cụm; ô đất trống thì viền đỏ riêng ô đó
+          const tgC=r.moving?null:UI.hold?UI.hold.c:UI.mark?UI.mark.th:null,tgN0=r.moving?null:UI.hold?(UI.hold.n!=null?nodeById(UI.hold.n):null):(UI.mark&&UI.mark.k[0]==='n'?nodeById(+UI.mark.k.slice(1)):null);
+          const tgN=tgN0&&(tgN0.fog>=2||tgN0.memory)&&!tgN0.wp?tgN0:null;
+          if(tgN)L.push([tgN,1,1]);if(sn0&&sn0!==tgN&&(sn0.fog>=2||sn0.memory))L.push([sn0,1]);if(hn&&hn!==sn0&&hn!==tgN)L.push([hn,0.65]);
           const DC0=[C.jade,C.gold,C.seal,C.vio];
-          for(const [n,a] of L){const cs=placeCells(n),set=new Set(cs);const cp=new Path2D(),op=new Path2D();
+          for(const [n,a,red] of L){const cs=placeCells(n),set=new Set(cs);const cp=new Path2D(),op=new Path2D();
             for(const c of cs){const v=hexVerts(c);cp.moveTo(v[0][0],v[0][1]);for(let q=1;q<6;q++)cp.lineTo(v[q][0],v[q][1]);cp.closePath();const [cx,cy]=hexCenter(c);
               for(let q=0;q<6;q++){const A=v[q],B=v[(q+1)%6];if(!set.has(hexAt(A[0]+B[0]-cx,A[1]+B[1]-cy))){op.moveTo(A[0],A[1]);op.lineTo(B[0],B[1]);}}}
             const sure=n.fog>=2||n.memory;const col=sure?DC0[dangerTag(n)]:C[NODE_CAT[n.type]||'ink'];
             ctx.globalCompositeOperation='overlay';ctx.fillStyle=hexA(col,0.7*a);ctx.fill(cp);ctx.globalCompositeOperation='source-over';
             ctx.fillStyle=hexA(C.dark?'#ffffff':'#fff8e4',0.3*a);ctx.fill(cp);ctx.fillStyle=hexA(col,0.14*a);ctx.fill(cp);
             if(CFG.grid){ctx.strokeStyle=hexA(BR,0.3*a);ctx.lineWidth=0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(cp);ctx.setLineDash([]);}
-            ctx.strokeStyle=hexA(C.dark?'#fff1d0':mixHex(col,BR,0.5),0.95*a);ctx.lineWidth=1/z;ctx.setLineDash([4/z,3/z]);ctx.stroke(op);ctx.setLineDash([]);}
+            if(red){ctx.strokeStyle=hexA('#d4372a',0.95);ctx.lineWidth=2.2/z;ctx.stroke(op);}else{ctx.strokeStyle=hexA(C.dark?'#fff1d0':mixHex(col,BR,0.5),0.95*a);ctx.lineWidth=1.6/z;ctx.setLineDash([4/z,3/z]);ctx.stroke(op);ctx.setLineDash([]);}}
+          if(tgC!=null&&tgC>=0&&!tgN){hexPoly(tgC);ctx.strokeStyle=hexA('#d4372a',0.95);ctx.lineWidth=2/z;ctx.stroke();}
           if(sel!=null&&showIc&&!hn&&!(UI.sel!=null)){hexPoly(sel);ctx.strokeStyle=hexA(BR,0.6);ctx.lineWidth=0.7/z;ctx.stroke();}}}
       ctx.restore();if(!bgHit){ctx=realCtx;BGK=bgKey;}
       ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(BGC,0,0);ctx.restore();
