@@ -80,6 +80,10 @@ function smartPlan(){
   // 3. tu luyện
   if(!isPham()&&r.tv<100&&!bqCan()&&bqNeedY()>0&&(r.ll||0)>=r.tv-15&&(r.tvMinor>=30||chance(.5))){const n=nearest(n=>n.dp&&dangerTag(n)<3);if(n&&goOrOpen(n)){r._goal='bq';why('tu luyện','bế quan, lịch luyện đã theo kịp');return;}}
   const XK=lkXkState();const lag=(r.ll||0)<r.tv-15||((r.tv>=100||(lkOn()&&lkTang()>=9))&&(r.ll||0)<llNeedBt())||!!(XK&&XK.ll);
+  // thiếu lịch luyện: lịch luyện nay chủ yếu tới từ thực chiến, nên đi săn yêu thú, thám hiểm chỗ vừa sức; nơi mới chỉ là phụ
+  if(lag&&hpR()>=0.7){const okD=x=>x.type!=='ai'&&x.type!=='sao'&&dangerTag(x)<=Math.min(3,r.realm+1);const fightAt=x=>placeActs(x).some(a=>a.a==='sanyeu'||a.a==='explore');
+    const here=nodeById(r.at);const n=here&&okD(here)&&fightAt(here)&&chance(.7)?here:nearest(x=>okD(x)&&fightAt(x));
+    if(n&&goOrOpen(n)){r._goal='ll';why('tu luyện','lịch luyện thiếu, đi tìm trận đánh');return;}}
   if(lag){const seen=new Set(r.llP||[]);const n=nearest(x=>x.id!==r.at&&!seen.has(x.id)&&x.type!=='ai'&&x.type!=='sao'&&dangerTag(x)<=Math.min(3,r.realm+1));if(n&&goOrOpen(n)){r._goal='explore';why('tu luyện','lịch luyện tụt sau tu vi, đi nơi mới');return;}}
   // 4. tích luỹ
   if(r.st<reserve()){const q=r.quests.find(q=>q.state==='open');if(q&&goOrOpen(nodeById(q.node))){r._goal='explore';why('tích luỹ','làm việc treo thưởng lấy linh thạch');return;}
@@ -107,6 +111,7 @@ function smartPlace(){
   if(r._goal==='shop'&&has('shop')){r._goal=null;placeAct('shop');return;}
   // tu luyện
   if(!isPham()&&n.dp&&!bqCan()&&bqNeedY()>0&&r.tv<100&&(r._goal==='bq'||r.tvMinor>=30)){const left=Math.max(0,s.life-r.age);const y=Math.max(0.25,Math.min(2,bqNeedY()||0.25,left-1));if(bqCustom(y)){why('tu luyện','bế quan '+y+' năm');return;}}
+  if(r._goal==='ll'&&hpR()>=0.6){if(has('sanyeu')&&r.realm>=0){why('tu luyện','săn yêu thú lấy lịch luyện');placeAct('sanyeu');return;}if(has('explore')){why('tu luyện','thám hiểm tìm trận đánh');placeAct('explore');return;}}
   if(r._goal==='cross'&&has('cross')){r._goal=null;placeAct('cross');return;}
   if(r._goal==='boss'&&has('boss')){r._goal=null;placeAct('boss');return;}
   if(r._goal==='ent'||true){const e=entsHere(r.region).find(e=>e.to==null&&e.at===sc.id&&e.type==='di');if(e&&hpR()>=0.7){r._goal=null;why('cơ duyên','gặp '+e.type);meetEnt(e);return;}}
