@@ -70,7 +70,7 @@ function TheNoi({ n }) {
         </div>
       </div>
       {M ? <>
-        <div className="nc-kv2"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div></div>
+        <div className="nc-kv2"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span {...tip('Khoảng ' + PS.placeScale(n).area.toLocaleString('vi-VN') + ' dặm vuông. ' + (M.quy || ''))}>{PS.placeScale(n).txt}</span></div></div>
         {M.desc && <p className="nc-d">{M.desc}</p>}
       </> : <p className="nc-d">Mới nghe đồn, chưa tận mắt thấy.</p>}
       {I.tags.length > 0 && <p className="nc-tags">{I.tags.map((t, i) => <span key={i}>{t}</span>)}</p>}
@@ -126,7 +126,7 @@ export function TheDiaDiem() {
     return (
       <div className="dock loc">
         {ASSET.place[n.type] && <span className={'loc-pic' + (n.fog >= 2 || n.memory ? '' : ' rum')}><img src={ASSET.place[n.type]} alt="" /></span>}
-        <span className="lc-n">{n.name}</span>
+        <span className="lc-n">{n.name}{(n.fog >= 2 || n.memory) && <small className="lc-sc"> · {PS.placeScale(n).txt}</small>}</span>
         <NutDiHoacVao n={n} here={here} />
         <button className="icb" data-act="cardMax" {...tip('Mở rộng')} aria-label="Mở rộng"><Ic n="up" /></button>
       </div>

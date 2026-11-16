@@ -109,6 +109,16 @@ const TESTS = {
     ok(sep === 0, 'các địa điểm cách nhau ít nhất một ô trống (' + sep + ' chỗ sát nhau)');
     const clk = run('(()=>{let bad=0,tot=0;for(const R0 of W().regions)for(const n of R0.nodes){n.fog=Math.max(n.fog,2);}geo().nodeAt=null;for(const R0 of W().regions)for(const n of R0.nodes){tot++;if(hexNode(n.hex)!==n)bad++;for(const c of n.cells)if(hexNode(c)!==n)bad++;}return [bad,tot];})()');
     ok(clk[0] === 0, `bấm vào bất cứ ô nào của địa điểm đều chọn đúng nó (${clk[1]} địa điểm)`);
+    const th = run('W().regions.map(R0=>R0.nodes.filter(n=>n.type==="thanh").length).join(",")');
+    ok(th.split(",").every(x => +x >= 3), 'mỗi đại khu vực ít nhất 3 thành (' + th + ')');
+    const qt = run('(()=>{const g=geo();const m={};for(const R0 of W().regions)for(const n of R0.nodes)if(n.type==="tran"){const d=g.dist[n.hex];m[d]=(m[d]||0)+1;}let lo=99,nd=0;for(let d=0;d<g.dnames.length;d++){nd++;lo=Math.min(lo,m[d]||0);}return [lo,nd];})()');
+    ok(qt[0] >= 2, `mỗi quận ít nhất 2 trấn (ít nhất ${qt[0]} trong ${qt[1]} quận)`);
+    const sz = run('(()=>{const o={};for(const R0 of W().regions)for(const n of R0.nodes){const c=n.cells.length;const t=n.type;const e=o[t]||(o[t]=[99,0]);e[0]=Math.min(e[0],c);e[1]=Math.max(e[1],c);}return JSON.stringify(o);})()');
+    const SZ = JSON.parse(sz);
+    ok(SZ.dong[1] <= 2 && SZ.dong[0] >= 1, 'hang động chỉ 1–2 ô ' + JSON.stringify(SZ.dong));
+    ok(SZ.tong[0] >= 2 && SZ.tong[1] >= 5, 'tông môn nhiều ô ' + JSON.stringify(SZ.tong));
+    ok(SZ.tran[1] <= 4 && SZ.thanh[1] <= 7, 'trấn nhỏ hơn thành');
+    ok(run('(()=>{const n=W().regions[0].nodes.find(x=>x.type==="tong");const s=placeScale(n);return /ô$/.test(s.txt)&&s.c===n.cells.length;})()'), 'có chữ quy mô theo số ô');
     ok(run('(()=>{const n=W().regions[0].nodes.find(x=>x.cells.length>2);n.fog=2;geo().nodeAt=null;return hexNode(n.cells[n.cells.length-1])===n;})()'), 'bấm ô phụ cũng chọn đúng địa điểm');
   },
   // thương thế 3 bậc: nhẹ thua vẫn sống, nguy kịch thua là chết

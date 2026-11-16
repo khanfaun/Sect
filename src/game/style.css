@@ -216,10 +216,6 @@ textarea,input[type=text],#noteIn{width:100%;border:1px solid var(--ink3);backgr
 #modal{background:rgba(40,30,10,.38)}
 /* màn rộng: thẻ trạng thái góc trái, thanh mục lục góc phải trên, bảng nằm giữa */
 @media (min-width:900px){
-  :root{--nav:0px}
-  #nav{top:8px;right:8px;left:auto;bottom:auto;height:auto;padding:0;background:none;border:0;gap:6px}
-  .nv{flex:none;flex-direction:row;gap:7px;padding:6px 12px 6px 7px;font-size:.92em;box-shadow:var(--sh)}
-  #hud{right:auto;width:400px}
   #sheet{right:auto;width:500px;top:calc(var(--hudh,84px) + 16px);bottom:14px}
   #dock{left:50%;right:auto;transform:translateX(-50%);width:min(540px,60vw);bottom:16px}
   #panel{left:50%;right:auto;transform:translateX(-50%);width:min(780px,92vw);top:58px;bottom:14px;padding:0;background:none}
@@ -1450,3 +1446,13 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 
 /* thẻ quận gọn: tên, quận thuộc, an nguy, linh khí, địa thế, trấn giữ */
 .dock.card.nc.ncs{padding:8px 12px 9px}.ncs .nc-top{margin:0}.ncs-r{display:flex;flex-wrap:wrap;gap:0 14px;margin:3px 0 0;font-size:.84em;color:var(--ink2);line-height:1.35}.ncs-r b{font-weight:600;color:var(--ink)}.ncs-r .nc-g{margin:0;font-size:1em}
+
+/* header full ngang, footer (thanh dưới) ở mọi cỡ màn hình */
+#hud{left:0;right:0;top:0;width:auto}
+#hud.hud{border-radius:0;border-width:0 0 1px;padding:calc(8px + env(safe-area-inset-top,0px)) 14px 9px}
+.lc-sc{font-weight:400;opacity:.7;font-size:.82em}
+@media (min-width:900px){
+  #panel{bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 8px);top:calc(var(--hudh,84px) + 8px)}
+  #sheet{bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 8px)}
+  .mbl{bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 16px)}
+}

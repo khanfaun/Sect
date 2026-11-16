@@ -38,20 +38,58 @@ function areaOfHex(h){const g=geo();return g.reg[h];}
       const near=R0.nodes.map(n=>[n,Math.round(Math.hypot(n.x-p.x,n.y-p.y))]).sort((a,b)=>a[1]-b[1]);
       const n={id:k*100+R0.nodes.length,r:k,x:p.x,y:p.y,type:'tong',name:sc.n,owner:sc.n,sectFix:1,danger:Math.min(1,near[0][0].danger),fog:0,seenT:-1,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0};
       R0.nodes.push(n);R0.edges.push({a:n.id,b:near[0][0].id,len:near[0][1]});}}
-  for(const n of R0.nodes)if(n.type==='tong'&&!n.quy){const x=R();n.quy=x<0.4?1:x<0.8?2:3;} // 1 tiểu, 2 trung, 3 đại tông
+  for(const n of R0.nodes)if(n.type==='tong'&&!n.quy){const x=R();n.quy=x<0.3?1:x<0.65?2:x<0.9?3:4;} // bốn bậc quy mô tông môn
   R0.pass=null;return R0;};}
-// quy mô: số ô lục giác mỗi địa điểm chiếm; ô mọc ra từ tâm, ưu tiên ô kề nhiều ô đã có (thường thành cụm, đôi khi dài ra)
-const QUY_N=['','Tiểu tông','Trung tông','Đại tông'];
-function placeSize(n){const t=n.type;if(t==='tong')return [0,ri(3,4),ri(5,6),ri(7,9)][n.quy||1];if(t==='thanh')return ri(5,7);if(t==='tran')return ri(2,4);if(t==='sao')return 3;if(t==='dong')return ri(1,2);return ri(1,3);}
+// ---- quy mô địa điểm ----
+// Quy ước: một ô lục giác rộng ~25 dặm (≈ 12 km), diện tích ~540 dặm² (≈ 135 km², cỡ một huyện nhỏ). Cả bản đồ ≈ 2.960 × 1.670 dặm.
+// Địa điểm nào cũng chiếm tối thiểu 1 ô dù thực tế bé hơn nhiều (một cái hang chỉ vài chục trượng vẫn là 1 ô).
+const HEX_DAM=25,HEX_DAM2=Math.round(HEX_DAM*HEX_DAM*0.866);
+const SIZE_T={tran:[2,4],thanh:[4,7],dong:[1,2],khoang:[1,2],duoc:[1,2],ancu:[1,1],cho:[1,2],phe:[1,3],ma:[2,4],sao:[2,3],rung:[3,6],nui:[3,6],song:[2,4],bien:[3,6],hoang:[4,7],thien:[3,5],linhdia:[2,4],dam:[2,4]};
+const TONG_SZ=[null,[3,4],[5,6],[7,8],[9,10]];
+function placeSize(n){const t=n.type;if(t==='tong'){const z=TONG_SZ[n.quy||1];return ri(z[0],z[1]);}const z=SIZE_T[t]||[1,3];return ri(z[0],z[1]);}
+// từ ngữ do hệ thống tính theo loại và số ô thật sự chiếm được
+function scaleWord(n,c){const t=n.type;
+  if(t==='tong')return c<=4?'Khá đồ sộ':c<=6?'Đồ sộ':c<=8?'Khổng lồ':'Bao la';
+  if(t==='thanh')return c<=5?'Tầm trung':'Lớn';
+  if(t==='tran')return c<=2?'Nhỏ':'Trung';
+  return c<=1?'Rất nhỏ':c===2?'Nhỏ':c===3?'Vừa':c===4?'Khá rộng':c<=6?'Rộng':'Mênh mông';}
+function placeScale(n){const c=placeCells(n).length;return {c,w:scaleWord(n,c),txt:scaleWord(n,c)+' · '+c+' ô',area:c*HEX_DAM2};}
 function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô -> địa điểm đang chiếm
   for(const R0 of w.regions)for(const n of R0.nodes){all.push(n);own.set(n.hex,n.id);if(n.cells)for(const c of n.cells)own.set(c,n.id);}
   // mỗi địa điểm chừa ít nhất một ô trống quanh mình: ô mới mọc ra không được kề ô của địa điểm khác
   const ok=(c,k,id)=>!own.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4&&hexNb(c).every(b=>!own.has(b)||own.get(b)===id);
-  all.filter(n=>!n.cells).map(n=>[n,placeSize(n)]).sort((a,b)=>b[1]-a[1]).forEach(([n,sz])=>{const k=Math.floor(n.id/100);const set=[n.hex];const inS=new Set(set);
+  // số ô còn có thể mọc ra quanh một ô gốc (đếm theo đúng luật mọc ô), tối đa cap
+  const reach=(c,k,id,cap)=>{const seen=new Set([c]);let fr=[c];while(fr.length&&seen.size<cap){const nx=[];for(const u of fr)for(const b of hexNb(u))if(!seen.has(b)&&ok(b,k,id)){seen.add(b);nx.push(b);}fr=nx;}return seen.size;};
+  const regCells=new Map();const cellsOf=k=>{if(!regCells.has(k)){const L=[];for(let i=0;i<HN;i++)if(g.reg[i]===k&&terWalk(g.ter[i])&&g.ter[i]!==4)L.push(i);regCells.set(k,L);}return regCells.get(k);};
+  all.filter(n=>!n.cells).map(n=>[n,placeSize(n)]).sort((a,b)=>b[1]-a[1]).forEach(([n,sz])=>{const k=Math.floor(n.id/100);
+    // tông môn, thành mà chỗ chật không đủ chỗ mọc thì dời sang chỗ rộng hơn
+    if((n.type==='tong'||n.type==='thanh')&&reach(n.hex,k,n.id,sz)<Math.min(sz,n.type==='tong'?4:5)){const L=cellsOf(k);
+      for(let t=0;t<500;t++){const c=L[Math.floor(R()*L.length)];if(own.has(c)||hexNb(c).some(b=>own.has(b)))continue;if(reach(c,k,n.id,sz)>=sz){own.delete(n.hex);n.hex=c;own.set(c,n.id);const q=hexCenter(c);n.x=Math.round(q[0]*10)/10;n.y=Math.round(q[1]*10)/10;break;}}}
+    const set=[n.hex];const inS=new Set(set);
     while(set.length<sz){const cand=new Map();for(const c of set)for(const b of hexNb(c))if(!inS.has(b)&&ok(b,k,n.id))cand.set(b,(cand.get(b)||0)+1);if(!cand.size)break;
       const L=[...cand];const b=wpick(L,x=>x[1]*x[1]+0.5)[0];set.push(b);inS.add(b);own.set(b,n.id);}
     n.cells=set;});}
-{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions){if(w.sep!==2){for(const R0 of w.regions)for(const n of R0.nodes)delete n.cells;w.sep=2;}growPlaces(w);}};}
+// mỗi đại khu vực có ít nhất 3 thành, mỗi quận có ít nhất 2 trấn (chuyển loại địa điểm sẵn có hoặc thêm mới), chỉ làm một lần cho mỗi thế giới
+function ensureCounts(w){if(w.ens===1)return;const g=geoFor(w);const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
+  const blocked=new Set();const ring=c=>{blocked.add(c);for(const b of hexNb(c)){blocked.add(b);for(const d of hexNb(b))blocked.add(d);}};for(const n of all)ring(n.hex);
+  const freeCell=(c,k)=>!blocked.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4;
+  const SOFT=['rung','nui','song','hoang','phe','bien','dam','linhdia','duoc','cho','ancu','khoang','dong'];
+  const conv=(n,t)=>{n.type=t;n.dp=0;const R0=w.regions[Math.floor(n.id/100)];const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);n.name=nm;n.danger=Math.min(n.danger,t==='tran'||t==='thanh'?1:n.danger);delete n.cells;};
+  const add=(k,t,c)=>{const R0=w.regions[k];if(R0.nodes.length>=97)return null;const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);const p=hexCenter(c);
+    const near=R0.nodes.map(n=>[n,Math.hypot(n.x-p[0],n.y-p[1])]).sort((a,b)=>a[1]-b[1]);
+    const n={id:k*100+R0.nodes.length,r:k,x:Math.round(p[0]*10)/10,y:Math.round(p[1]*10)/10,hex:c,wc:1,type:t,name:nm,danger:0,fog:0,seenT:-1,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0};
+    R0.nodes.push(n);all.push(n);ring(c);if(near[0])R0.edges.push({a:n.id,b:near[0][0].id,len:Math.round(near[0][1])});if(near[1])R0.edges.push({a:n.id,b:near[1][0].id,len:Math.round(near[1][1])});return n;};
+  const pickCell=(cells,k)=>{const L=cells.filter(c=>freeCell(c,k));return L.length?L[Math.floor(R()*L.length)]:-1;};
+  const regCells=k=>{const L=[];for(let i=0;i<HN;i++)if(g.reg[i]===k)L.push(i);return L;};
+  for(let k=0;k<5;k++){const R0=w.regions[k];let have=R0.nodes.filter(n=>n.type==='thanh').length;
+    while(have<3){const cand=R0.nodes.filter(n=>!['tong','thanh','sao'].includes(n.type)&&!n.dp&&!n.sectFix);cand.sort((a,b)=>(a.type==='tran')-(b.type==='tran'));
+      if(cand.length>8){conv(cand[0],'thanh');have++;continue;}const c=pickCell(regCells(k),k);if(c<0)break;if(add(k,'thanh',c))have++;else break;}}
+  const dc=new Map();for(let i=0;i<HN;i++){const d=g.dist[i];if(d>=0&&g.reg[i]>=0){if(!dc.has(d))dc.set(d,{k:g.reg[i],cells:[]});dc.get(d).cells.push(i);}}
+  for(const [d,D] of dc){const k=D.k,R0=w.regions[k];let have=R0.nodes.filter(n=>n.type==='tran'&&g.dist[n.hex]===d).length;
+    while(have<2){const cand=R0.nodes.filter(n=>g.dist[n.hex]===d&&SOFT.includes(n.type)&&!n.dp&&!n.sectFix);
+      if(cand.length){conv(cand[Math.floor(R()*cand.length)],'tran');have++;continue;}const c=pickCell(D.cells,k);if(c<0)break;if(add(k,'tran',c))have++;else break;}}
+  w.ens=1;}
+{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions){ensureCounts(w);if(w.sep!==3){for(const R0 of w.regions)for(const n of R0.nodes)delete n.cells;w.sep=3;}growPlaces(w);}};}
 function placeCells(n){return n&&n.cells&&n.cells.length?n.cells:n?[nodeHex(n)]:[];}
 function canGoBack(){return false;}
 
