@@ -89,7 +89,7 @@ const Map2=(()=>{
   function zFloor(){return wide?zDeep():zMin();} // lăn chuột chỉ tới zMin; sau khi bấm nút thu nhỏ thì tạm xuống tới mức bản đồ rộng bằng màn hình
   function zfNow(){return clamp(Math.log(cam.z/zMin())/Math.log(ZMAX/zMin()),0,1);}
   function worldAt(sx,sy){return [(sx-W0/2)/cam.z+cam.x,(sy-VCY)/cam.z+cam.y];}
-  function clampCam(){if(wide&&cam.z>=zMin()*0.9999)wide=false;cam.z=clamp(cam.z,zFloor(),ZMAX);const hw=W0/2/cam.z,hh=viewH()/2/cam.z;const ov=zfNow();const px=W0*0.42*ov/cam.z,py=viewH()*0.45*ov/cam.z;
+  function clampCam(){if(wide&&cam.z>=zMin()*0.9999)wide=false;cam.z=clamp(cam.z,zFloor(),ZMAX);const hw=W0/2/cam.z,hh=viewH()/2/cam.z;const ov=zfNow();const px=0,py=0;
     const rx=2*hw>=WORLD_W?[WORLD_W/2,WORLD_W/2]:[hw,WORLD_W-hw],ry=2*hh>=WORLD_H-0.5?[WORLD_H/2,WORLD_H/2]:[hh,WORLD_H-hh];
     cam.x=clamp(cam.x,rx[0]-px,rx[1]+px);cam.y=clamp(cam.y,ry[0]-py,ry[1]+py);} // cho kéo quá mép để điểm sát rìa vẫn kéo ra giữa được
   function center(){const r=G.run;if(!r)return;const w0=playerXY(),p=mapXY(r.region,w0[0],w0[1]);cam.x=p[0];cam.y=p[1];cam.follow=true;cam.reg=r.region;clampCam();dirty=true;}
