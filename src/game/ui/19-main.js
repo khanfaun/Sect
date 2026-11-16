@@ -1,11 +1,11 @@
 // ---------- vẽ màn hình ----------
 const HCACHE={};
-// html: chuỗi HTML (bản cũ) hoặc {rx:'TênMàn',fb:hàmBảnCũ} (vẽ bằng React, xem ui/22-cau-noi-react.js)
+// html: chuỗi HTML hoặc {rx:'TênMàn'} (vẽ bằng React, xem ui/22-cau-noi-react.js)
 function setH(id,html){const el=document.getElementById(id);if(!el)return false;const isRx=html&&typeof html==='object';if(!isRx&&HCACHE[id]===html){return false;}
   const tk0=id==='sheet'&&document.getElementById('plTalk');const tkTop=tk0?tk0.scrollTop:0,tkN=tk0?tk0.dataset.n:null;
   const sc=el.querySelector('.win-b,.sc-b');const top=sc?sc.scrollTop:0;const key=el.dataset.k;
   const k2=viewKey(id);
-  if(isRx){try{RX.show(el,html.rx,id+':'+k2);HCACHE[id]=undefined;el.hidden=!el.childNodes.length;}catch(e){console.error(e);RX.hide(el);html=html.fb();}}
+  if(isRx){if(!window.RX)return false;try{RX.show(el,html.rx,id+':'+k2);HCACHE[id]=undefined;el.hidden=!el.childNodes.length;}catch(e){console.error(e);RX.hide(el);el.hidden=true;}}
   if(typeof html==='string'){if(el._rx)RX.hide(el);HCACHE[id]=html;el.innerHTML=html;el.hidden=!html;}el.dataset.k=k2;if(id==='modal')el.classList.toggle('still',!!k2&&key===k2);
   if(id==='sheet'){el.classList.toggle('still',!!k2&&key===k2);const tk=document.getElementById('plTalk');if(tk){if(tkN!=null&&tkN===tk.dataset.n)tk.scrollTop=tkTop;else tk.scrollTop=tk.scrollHeight;}}if(top&&key===k2){const s2=el.querySelector('.win-b,.sc-b');if(s2)s2.scrollTop=top;}
   return true;}
@@ -19,16 +19,14 @@ function render(){
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
     if(cb&&UI.panel!=='more'){UI.panel=null;}
     if(!inMap&&UI.modal)UI.modal=null;
-    if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth',vBirth):G.screen==='over'&&G.over?rxv('Over',vOver):G.screen==='meta'?rxv('Meta',vMeta):G.screen==='life'&&G.run?rxv('Life',vLife):rxv('Title',vTitle);}
+    if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth'):G.screen==='over'&&G.over?rxv('Over'):G.screen==='meta'?rxv('Meta'):G.screen==='life'&&G.run?rxv('Life'):rxv('Title');}
     else{
-      if(cb)full=rxv('TranDau',()=>vCombat(sc));
-      else{hud=rxv('Hud',hudHTML);nav=rxv('Nav',navHTML);
-        if(!sc){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
-        else if(UI.evMin&&sc.type==='event'){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
-        else if(sc.type==='region')sheet=rxv('Canh:region',()=>vRegionIntro(sc));
-        else sheet=rxv('Canh:'+sc.type,()=>(SCENE_V[sc.type]||(()=>''))(sc));}
+      if(cb)full=rxv('TranDau');
+      else{hud=rxv('Hud');nav=rxv('Nav');
+        if(!sc||(UI.evMin&&sc.type==='event')){mapui=rxv('NutBanDo');dock=rxv('TheDiaDiem');}
+        else sheet=rxv('Canh:'+sc.type);}
     }
-    if(UI.panel)panel=rxv('Bang:'+UI.panel,()=>(PANEL_V[UI.panel]||(()=>''))());
+    if(UI.panel)panel=rxv('Bang:'+UI.panel);
     modal=modalHTML();
     document.documentElement.dataset.tf=CFG.tfStyle||'hang';document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
   }catch(e){console.error(e);full=`<div class="title"><p>Có lỗi khi vẽ màn hình: ${esc(e.message)}</p><button class="btn pri" data-act="screen" data-arg="title">Về màn hình đầu</button></div>`;UI.panel=null;UI.modal=null;panel='';modal='';}
@@ -69,7 +67,7 @@ function loop(now){
         if(G.run&&(!G.run.moving||G.run.halt)&&!G.run.scene&&clkAcc>0){advanceTime(clkAcc*sp);if(G.run)autoCheck();}
         clkAcc=0;
         if(!G.run||G.run.scene||G.screen!=='map'){UI.evMin=false;after();}
-        else{const t=W().t;const d=Math.floor(t/HD),p=partOf(t);const mv=$('#mvLeft');if(redraw&&mv&&G.run.moving&&!(G.toasts&&G.toasts.length)){const m=G.run.moving;const L=m.seg<m.path.length-1?edgeLen(m.path[m.seg],m.path[m.seg+1])*(1-m.prog):0;mv.textContent='còn '+Math.round(L)+' dặm';clockText();if(d!==clkDay){clkDay=d;setH('hud',hudHTML());}}else if(d!==clkDay||p!==clkPart||redraw||(G.toasts&&G.toasts.length)){clkDay=d;clkPart=p;render();}else clockText();Map2.invalidate();}
+        else{const t=W().t;const d=Math.floor(t/HD),p=partOf(t);const mv=$('#mvLeft');if(redraw&&mv&&G.run.moving&&!(G.toasts&&G.toasts.length)){const m=G.run.moving;const L=m.seg<m.path.length-1?edgeLen(m.path[m.seg],m.path[m.seg+1])*(1-m.prog):0;mv.textContent='còn '+Math.round(L)+' dặm';clockText();if(d!==clkDay){clkDay=d;setH('hud',rxv('Hud'));}}else if(d!==clkDay||p!==clkPart||redraw||(G.toasts&&G.toasts.length)){clkDay=d;clkPart=p;render();}else clockText();Map2.invalidate();}
         if(G.run&&(W().t-clkSaveT>=30||(G.run.moving&&now-(UI.mvSave||0)>800))){clkSaveT=W().t;UI.mvSave=now;saveSoon();}
       }
     }catch(e){console.error(e);}

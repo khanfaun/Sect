@@ -84,10 +84,7 @@ function cgDetailHTML(i){const r=G.run;const R=CG_R.find(x=>x.i===i);if(!R)retur
   return h+'</div>';}
 function cgTabHTML(){const s=UI.cgSel;return s===''||s==null?cgListHTML():cgDetailHTML(+s);}
 // bảng lớn: hai tab Bế quan / Cảnh giới
-{const _mh2=modalHTML;modalHTML=function(){const m=UI.modal;if(!m||m.k!=='bq'||!G.run)return _mh2();
-  const tabs=`<div class="tabs bq-tabs"><button class="${m.tab!=='cg'?'on':''}" data-act="bqTab" data-arg="bq">Bế quan</button><button class="${m.tab==='cg'?'on':''}" data-act="bqTab" data-arg="cg">Cảnh giới</button></div>`;
-  if(m.tab==='cg')return `<div class="mbox bq cgbox">${tabs}${cgTabHTML()}<div class="mb-f"><span class="grow"></span><button class="btn" data-act="modalX">Đóng</button></div></div>`;
-  let h=_mh2();h=h.replace('<div class="mbox bq">','<div class="mbox bq">'+tabs).replace(/data-act="hudBt"/g,'data-act="cgGo"').replace(/data-act="xkGo"/g,'data-act="cgGo"');return h;};}
+
 ACT.bqTab=t=>{const m=UI.modal;if(!m)return;if(t==='bq'&&m.tab==='cg'){const r=G.run;if(!r.scene||r.scene.type!=='place'){const w=bqCan();if(w){note(w,'dn');return;}openBq();if(UI.modal)UI.modal.tab='bq';return;}}m.tab=t;if(t==='cg'&&UI.cgSel==null)UI.cgSel='';};
 ACT.cgGo=()=>{const r=G.run;UI.modal=Object.assign(UI.modal||{k:'bq'},{tab:'cg'});UI.cgSel=String(isPham()?-1:r.realm);};
 ACT.cgSel=a=>{UI.cgSel=a;};
