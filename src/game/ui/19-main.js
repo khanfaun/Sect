@@ -44,7 +44,26 @@ function render(){
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
-function mapTap(n,c,w,zf){const r=G.run;if(!r||r.scene)return;
+function mapHold(n,c,w,first){const r=G.run;if(!r||r.scene||r.moving||c==null||c<0)return;const H=UI.hold,id=n?n.id:null;
+  if(H&&H.c===c&&H.n===id){H.x=w[0];H.y=w[1];const el=document.querySelector('#dock .np');if(el){el.dataset.ax=w[0];el.dataset.ay=w[1];}return;}
+  UI.hold={n:id,c,x:w[0],y:w[1]};render();}
+function mapHoldEnd(){if(UI.hold){UI.hold=null;render();}}
+// buông tay sau khi ngắm: đánh dấu điểm cuối (chạm nhanh vào đúng điểm đã đánh dấu mới lên đường)
+function mapAimEnd(ok){const H=UI.hold;UI.hold=null;const r=G.run;if(ok&&H&&r&&!r.scene&&!r.moving){let n=H.n!=null?nodeById(H.n):null;if(!n){const at=nodeById(r.at);if(at&&at.wp&&nodeHex(at)===H.c)n=at;}
+  const here=(n&&n.id===r.at)||(!n&&H.c===nodeHex(nodeById(r.at)));const g=geo(),walk=n?n.fog>=1:(g.reg[H.c]>=0&&terWalk(g.ter[H.c]));
+  if(here){UI.mark=null;UI.sel=n?n.id:null;UI.cell=n?null:H.c;}else if(!walk){UI.mark=null;UI.sel=null;UI.cell=null;}else{UI.mark={k:n?'n'+n.id:'c'+H.c,th:n?hexAt(...mapNode(n)):H.c};UI.sel=null;UI.cell=null;}}
+  render();}
+function mapTap(n,c,w,zf){const r=G.run;if(!r||r.scene)return;UI.hold=null;
+  // mức gần: giữ để xem thẻ; chạm một lần đánh dấu đường đi, chạm lần nữa vào đúng chỗ đó thì lên đường
+  if(zf!=null&&zf>=0.5&&!r.moving&&c!=null&&c>=0){UI.pop=null;
+    if(!n){const at=nodeById(r.at);if(at&&at.wp&&nodeHex(at)===c)n=at;}
+    const here=(n&&n.id===r.at)||(!n&&c===nodeHex(nodeById(r.at)));
+    if(here){UI.mark=null;UI.sel=n?n.id:null;UI.cell=n?null:(UI.cell===c?null:c);render();return;}
+    const g=geo(),walk=n?n.fog>=1:(g.reg[c]>=0&&terWalk(g.ter[c]));
+    if(!walk){UI.mark=null;UI.sel=null;UI.cell=null;render();return;}
+    const k=n?'n'+n.id:'c'+c;
+    if(UI.mark&&UI.mark.k===k){UI.mark=null;UI.sel=null;UI.cell=null;if(n)ACT.go(n.id);else ACT.goCell(c);render();return;}
+    UI.mark={k,th:n?hexAt(...mapNode(n)):c};UI.sel=null;UI.cell=null;render();return;}
   // thu nhỏ hết cỡ: chạm đại khu vực nào thì hiện thẻ mô tả đại khu vực đó (không hiện quận, không chọn địa điểm)
   if(zf!=null&&zf<0.12){const k=c!=null?geo().reg[c]:-1;UI.sel=null;UI.cell=null;UI.pop=k>=0&&!(UI.pop&&UI.pop.k===k)?{k,wx:w[0],wy:w[1]}:null;render();return;}
   UI.pop=null;if(zf!=null&&zf<0.5)n=null;else if(!n&&c!=null){const at=nodeById(r.at);if(at&&at.wp&&nodeHex(at)===c)n=at;} // mức thấy quận: icon địa điểm đang ẩn nên chỉ xem quận
@@ -127,7 +146,7 @@ const ACT={
   modalX:()=>{const m=UI.modal;UI.modal=null;G.bqRoom=false;if(m&&m.k==='bq'&&UI.bqOpened&&G.run&&G.run.scene&&G.run.scene.type==='place'){G.run.scene=null;}UI.bqOpened=false;},
   npMin:()=>{UI.npMin=!UI.npMin;},
   goCell:c=>{const n=wpMake(+c);if(!n)return;UI.cell=null;UI.sel=null;ACT.go(n.id);},
-  unsel:()=>{UI.sel=null;UI.cell=null;UI.pop=null;},
+  unsel:()=>{UI.mark=null;UI.hold=null;UI.sel=null;UI.cell=null;UI.pop=null;},
   gridT:()=>{cfgSet('grid',!CFG.grid);},
   descTg:()=>{UI.descHide=!UI.descHide;},
   exStat:()=>{UI.modal={k:'explore'};},

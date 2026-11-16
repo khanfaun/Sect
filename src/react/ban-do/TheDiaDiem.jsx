@@ -22,7 +22,8 @@ const TER_DESC = [
 const TER_COL = ['#8fa9bd', '#c9b27a', '#58a46f', '#8a8f98', '#4797bb', '#5f8fb3', '#b59a5a', '#7c8a5a'];
 
 // Nút thu gọn / nút đóng dùng chung cho thẻ nổi
-function NutThe({ n }) {
+function NutThe({ n, hold }) {
+  if (hold) return null;
   const min = !!PS.UI.npMin;
   return (
     <div className="np-x">
@@ -62,51 +63,51 @@ function TheQuan({ c }) {
 }
 
 // Thẻ một ô đất bất kỳ (không phải địa điểm): mô tả và nút đi tới
-function TheO({ c }) {
+function TheO({ c, hold }) {
   const g = PS.geo(), I = PS.hexInfo(c), [cx, cy] = PS.hexCenter(c), t = g.ter[c], min = !!PS.UI.npMin;
   const walk = !I.sea && PS.terWalk(t), seen = PS.hexSeen(c), d = walk ? PS.wpDraft(c) : null;
   const dg = d ? PS.dangerTag(d) : 0, h = walk ? PS.cellHours(c) : null;
   const here = h === 0;
   return (
-    <div className={'dock card np' + (min ? ' min' : '')} data-ax={cx} data-ay={cy}>
+    <div className={'dock card np' + (min && !hold ? ' min' : '')} data-ax={hold ? hold.x : cx} data-ay={hold ? hold.y : cy} data-ic={hold ? 46 : undefined}>
       <div className="np-h">
         <div className="np-pic ter" style={{ background: TER_COL[t] }}><Ic n="hex" /></div>
         <div className="np-t">
           <b className="np-nm">{seen || !walk ? PS.TER_N[t] : 'Vùng chưa khám phá'}</b>
           <small>{[I.dist, I.regName].filter(Boolean).join(' · ')}</small>
         </div>
-        <NutThe />
+        <NutThe hold={hold} />
       </div>
       {d && <div className={'np-dg dg' + dg} {...tip('Mức nguy hiểm so với tu vi của ngươi')}><i></i>{PS.DTAG[dg]}{seen ? '' : '?'}</div>}
-      {!min && <p className="np-d">{seen || !walk ? TER_DESC[t] : 'Chưa ai biết ở đó có gì. Đi tới mới rõ.'}</p>}
-      <div className="np-b">
+      {(!min || hold) && <p className="np-d">{seen || !walk ? TER_DESC[t] : 'Chưa ai biết ở đó có gì. Đi tới mới rõ.'}</p>}
+      {hold ? (walk && !here && <p className="np-k"><small>Đường đi</small>{PS.durH(h)}</p>) : <div className="np-b">
         {!walk ? <button className="btn" disabled>Không đi được</button>
           : here ? <button className="btn" disabled>Ngươi đang ở đây</button>
           : <button className="btn pri" data-act="goCell" data-arg={c}>Đi tới<span className="go-t">{' · ' + PS.durH(h)}</span></button>}
-      </div>
+      </div>}
     </div>
   );
 }
 
 // Thẻ địa điểm: nổi gần icon trên bản đồ (game tự đặt vị trí theo data-ax/data-ay)
-function TheNoi({ n }) {
+function TheNoi({ n, hold }) {
   const { G, ASSET } = PS;
   const r = G.run, I = PS.nodeInfo(n), here = n.id === r.at, dg = PS.dangerTag(n);
   const nt = PS.noteOf(n.id), M = I.sure ? PS.placeMeta(n) : null;
   const where = I.sure ? PS.hexInfo(PS.nodeHex(n)).dist : '';
   const pimg = ASSET.place[n.type];
   return (
-    <div className={'dock card np' + (PS.UI.npMin ? ' min' : '')} data-ax={n.x} data-ay={n.y}>
+    <div className={'dock card np' + (PS.UI.npMin && !hold ? ' min' : '')} data-ax={hold ? hold.x : n.x} data-ay={hold ? hold.y : n.y} data-ic={hold ? 46 : undefined}>
       <div className="np-h">
         <div className={'np-pic' + (I.sure ? '' : ' rum')}>{pimg && <img src={pimg} alt="" />}{!I.sure && <b>?</b>}</div>
         <div className="np-t">
           <b className="np-nm">{n.name + (I.sure ? '' : '?')}</b>
           <small>{[I.info, where].filter(Boolean).join(' · ')}</small>
         </div>
-        <NutThe n={n} />
+        <NutThe n={n} hold={hold} />
       </div>
       <div className={'np-dg dg' + dg} {...tip(PS.dangerWhy(n))}><i></i>{PS.DTAG[dg]}{I.sure ? '' : '?'}</div>
-      {!PS.UI.npMin && <>
+      {(!PS.UI.npMin || hold) && <>
         {M ? <>
           <p className="np-k"><small>Tọa trấn</small>{M.luc}</p>
           {M.desc && <p className="np-d">{M.desc}</p>}
@@ -114,7 +115,7 @@ function TheNoi({ n }) {
         {I.tags.length > 0 && <p className="nc-tags">{I.tags.map((t, i) => <span key={i}>{t}</span>)}</p>}
         {nt && <p className="nc-n"><Ic n="pin" /> {nt}</p>}
       </>}
-      <div className="np-b"><NutDiHoacVao n={n} here={here} /></div>
+      {hold ? (!here && <p className="np-k"><small>Đường đi</small>{PS.durH(PS.travelHours(PS.findPath(r.at, n.id)))}</p>) : <div className="np-b"><NutDiHoacVao n={n} here={here} /></div>}
     </div>
   );
 }
@@ -174,6 +175,7 @@ export function TheDiaDiem() {
       </div>
     );
   }
+  if (UI.hold) { const h = UI.hold; return h.n != null ? <TheNoi n={PS.nodeById(h.n)} hold={h} /> : <TheO c={h.c} hold={h} />; }
   const n = UI.sel != null && PS.nodeById(UI.sel);
   if (n && n.fog >= 1) return <TheNoi n={n} />;
   if (UI.pop) return <TheVung pop={UI.pop} />;

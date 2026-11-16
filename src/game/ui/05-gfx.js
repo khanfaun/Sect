@@ -53,6 +53,7 @@ const Map2=(()=>{
         if(a!==b)T=a>=0&&b>=0?macro:coast;else if(a>=0&&g.dist[i]!==g.dist[j])T=dist;
         if(T){T.moveTo(v[p][0],v[p][1]);T.lineTo(v[q][0],v[q][1]);}}}
     return HX={seed:g.seed,grid,macro,dist,coast,dp,rp};}
+  function aimAt(sx,sy,first){const c=cellAt(sx,sy);let n=hexNode(c);if(n&&(CFG.hideT||{})[n.type])n=null;if(!n)n=hit(sx,sy);mapHold(n,c,worldAt(sx,sy),first);dirty=true;}
   function cellAt(sx,sy){return hexAt((sx-W0/2)/cam.z+cam.x,(sy-VCY)/cam.z+cam.y);}
   function hexPoly(i){const v=hexVerts(i);ctx.beginPath();ctx.moveTo(v[0][0],v[0][1]);for(let k=1;k<6;k++)ctx.lineTo(v[k][0],v[k][1]);ctx.closePath();}
   const MOBILE=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
@@ -238,7 +239,7 @@ const Map2=(()=>{
     if(cam.follow&&r.moving){cam.x=pos[0];cam.y=pos[1];clampCam();}
     const z=cam.z,X0=reg*1000;
     // nền + lưới chỉ vẽ lại khi camera, tầm nhìn, ô chọn đổi; còn lại (mây, hạt, đi đường) chỉ dán lại ảnh đệm
-    const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,lv,imgN].join('|');
+    const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,UI.mark&&UI.mark.k,UI.hold&&UI.hold.c,lv,imgN].join('|');
     const bgHit=BGK===bgKey&&BGC&&!(INK&&INK.anim);const realCtx=ctx;ctx.setTransform(dpr,0,0,dpr,0,0);
     if(!bgHit){if(!BGC)BGC=document.createElement('canvas');const bw=Math.round(W0*dpr),bh=Math.round(H0*dpr);if(BGC.width!==bw||BGC.height!==bh){BGC.width=bw;BGC.height=bh;}ctx=BGC.getContext('2d');}
     if(!bgHit){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle=C.dark?C.bg2:mixHex(C.paper,C.bg2,0.55);ctx.fillRect(0,0,W0,H0);
@@ -289,7 +290,10 @@ const Map2=(()=>{
       ctx.save();ctx.translate(W0/2-cam.x*z,VCY-cam.y*z);ctx.scale(z,z);ctx.lineJoin='round';ctx.lineCap='round';
       // đường định đi tới điểm đang chọn
       const sn=UI.sel!=null&&!r.moving&&nodeById(UI.sel);
-      if(sn&&sn.id!==r.at&&sn.fog>=1){const hp=hexPath(nodeHex(nodeById(r.at)),hexAt(...mapNode(sn)));ctx.beginPath();hp.cells.forEach((c,i)=>{const p=hexCenter(c);if(i)ctx.lineTo(p[0],p[1]);else ctx.moveTo(p[0],p[1]);});ctx.strokeStyle=hexA(C.acc,0.6);ctx.lineWidth=2.5/z;ctx.setLineDash([2/z,7/z]);ctx.stroke();ctx.setLineDash([]);}
+      {const h0=nodeHex(nodeById(r.at)),th=r.moving?null:(UI.hold?(UI.hold.n!=null?hexAt(...mapNode(nodeById(UI.hold.n))):UI.hold.c):UI.mark?UI.mark.th:(sn&&sn.id!==r.at&&sn.fog>=1?hexAt(...mapNode(sn)):null));
+        if(th!=null&&th!==h0){const hp=hexPath(h0,th);ctx.beginPath();hp.cells.forEach((c,i)=>{const p=hexCenter(c);if(i)ctx.lineTo(p[0],p[1]);else ctx.moveTo(p[0],p[1]);});
+          ctx.strokeStyle=hexA(C.acc,UI.mark||UI.hold?0.9:0.6);ctx.lineWidth=(UI.mark||UI.hold?1.3:2.5)/z;ctx.setLineDash(UI.mark||UI.hold?[5/z,4/z]:[2/z,7/z]);ctx.stroke();ctx.setLineDash([]);
+          if(UI.mark||UI.hold){const q=hexCenter(th);ctx.beginPath();ctx.arc(q[0],q[1],HEXW*0.32,0,6.3);ctx.lineWidth=1.6/z;ctx.strokeStyle=hexA(C.acc,0.95);ctx.stroke();ctx.fillStyle=hexA(C.acc,0.25);ctx.fill();}}}
       if(r.moving){const m=r.moving;ctx.beginPath();ctx.moveTo(pos[0],pos[1]);
         for(let i=m.seg;i<m.path.length-1;i++){const hp=hexPath(nodeHex(nodeById(m.path[i])),nodeHex(nodeById(m.path[i+1])));const t=i===m.seg?m.prog*(hp.cum[hp.cum.length-1]||1):-1;hp.cells.forEach((c,j)=>{if(hp.cum[j]<=t)return;const p=hexCenter(c);ctx.lineTo(p[0],p[1]);});}
         ctx.strokeStyle=hexA(C.seal,0.85);ctx.lineWidth=2.5/z;ctx.setLineDash([6/z,5/z]);ctx.stroke();ctx.setLineDash([]);}
@@ -366,9 +370,10 @@ const Map2=(()=>{
       else{ctx.fillStyle=C.ink;ctx.font=`500 ${Math.round(rr*1.05)}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(avLetter(r.ten),x,y+1);}
 }
     // thẻ chú thích gắn theo địa điểm / đại khu vực: bám vị trí trên bản đồ, nằm trên icon, hết chỗ thì xuống dưới
+    if(UI.mark&&!r.moving){const h0=nodeHex(nodeById(r.at));if(UI.mark.th!==h0){const q=hexCenter(UI.mark.th),hr=hexPath(h0,UI.mark.th).len/walkSpeed();label(durH(hr),SX(q[0]),SY(q[1])-HEXW*z*0.32-18,{c:C.ink,s:12,b:1});}}
     {const el=document.querySelector('#dock .np');if(el){const ax=+el.dataset.ax,ay=+el.dataset.ay;
       if(el.dataset.area&&zf>=0.2){el.style.visibility='hidden';}
-      else{const w=el.offsetWidth,h=el.offsetHeight;const cr=cv.getBoundingClientRect(),dr=el.parentElement.getBoundingClientRect();const sx=SX(ax),sy=SY(ay);const ic=el.dataset.area?4:Math.max(10,HEXW*z*0.6);
+      else{const w=el.offsetWidth,h=el.offsetHeight;const cr=cv.getBoundingClientRect(),dr=el.parentElement.getBoundingClientRect();const sx=SX(ax),sy=SY(ay);const ic=el.dataset.ic?+el.dataset.ic:el.dataset.area?4:Math.max(10,HEXW*z*0.6);
         let left=clamp(sx-w/2,6,Math.max(6,W0-w-6)),top=sy-ic-h-8;if(top<TOPI+4)top=sy+ic+8;top=clamp(top,TOPI+4,Math.max(TOPI+4,H0-BOTI-h-4));
         el.style.left=Math.round(left+cr.left-dr.left)+'px';el.style.top=Math.round(top+cr.top-dr.top)+'px';el.style.visibility='visible';}}}
     if(false&&CFG.showFps){ctx.font='11px monospace';ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillStyle=C.ink2;ctx.fillText(fpsShow+' khung/giây · mức '+['tiết kiệm','cân bằng','đẹp'][lv],8,H0-6);}
@@ -395,12 +400,13 @@ const Map2=(()=>{
   function bind(){
     if(!window._psAct){window._psAct=1;['pointerdown','pointermove','keydown','wheel','touchstart'].forEach(t=>document.addEventListener(t,()=>{lastAct=performance.now();},{passive:true}));}
     cv.addEventListener('pointerdown',e=>{cv.setPointerCapture&&cv.setPointerCapture(e.pointerId);ptr.set(e.pointerId,[e.offsetX,e.offsetY]);
-      if(ptr.size===1)drag={x:e.offsetX,y:e.offsetY,cx:cam.x,cy:cam.y,moved:false};
-      else if(ptr.size===2){const [a,b]=[...ptr.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),z:cam.z};drag=null;}});
+      if(ptr.size===1){drag={x:e.offsetX,y:e.offsetY,cx:cam.x,cy:cam.y,moved:false,aim:false};const R=G.run;if(R&&!R.scene&&!R.moving&&zfNow()>=0.5&&typeof mapHold==='function'){const dd=drag,ox=e.offsetX,oy=e.offsetY;dd.t=setTimeout(()=>{if(drag!==dd||dd.moved||ptr.size!==1)return;dd.aim=true;aimAt(ox,oy,true);},170);}}
+      else if(ptr.size===2){const [a,b]=[...ptr.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),z:cam.z};if(drag){clearTimeout(drag.t);if(drag.aim&&typeof mapHoldEnd==='function')mapHoldEnd();}drag=null;}});
     cv.addEventListener('pointermove',e=>{if(!ptr.has(e.pointerId))return;ptr.set(e.pointerId,[e.offsetX,e.offsetY]);
       if(pinch&&ptr.size===2){const [a,b]=[...ptr.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pinch.z*d/Math.max(20,pinch.d)<cam.z&&cam.z<=zMin()*1.001&&!wide)bump();cam.z=clamp(pinch.z*d/Math.max(20,pinch.d),zFloor(),ZMAX);cam.follow=false;clampCam();dirty=true;return;}
-      if(drag){const dx=e.offsetX-drag.x,dy=e.offsetY-drag.y;if(Math.abs(dx)+Math.abs(dy)>7)drag.moved=true;if(drag.moved){cam.x=drag.cx-dx/cam.z;cam.y=drag.cy-dy/cam.z;cam.follow=false;clampCam();dirty=true;}}});
-    const up=e=>{const d=drag;ptr.delete(e.pointerId);if(ptr.size<2)pinch=null;if(false){}else if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0){const c=cellAt(e.offsetX,e.offsetY);let n=hexNode(c);if(n&&(CFG.hideT||{})[n.type])n=null;if(!n)n=hit(e.offsetX,e.offsetY);mapTap(n,c,worldAt(e.offsetX,e.offsetY),zfNow());}if(ptr.size===0)drag=null;};
+      if(drag&&drag.aim){aimAt(e.offsetX,e.offsetY,false);return;}
+      if(drag){const dx=e.offsetX-drag.x,dy=e.offsetY-drag.y;if(Math.abs(dx)+Math.abs(dy)>7&&!drag.moved){drag.moved=true;clearTimeout(drag.t);}if(drag.moved){cam.x=drag.cx-dx/cam.z;cam.y=drag.cy-dy/cam.z;cam.follow=false;clampCam();dirty=true;}}});
+    const up=e=>{const d=drag;ptr.delete(e.pointerId);if(ptr.size<2)pinch=null;if(d)clearTimeout(d.t);if(d&&d.aim){if(typeof mapAimEnd==='function')mapAimEnd(e.type==='pointerup');}else if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0){const c=cellAt(e.offsetX,e.offsetY);let n=hexNode(c);if(n&&(CFG.hideT||{})[n.type])n=null;if(!n)n=hit(e.offsetX,e.offsetY);mapTap(n,c,worldAt(e.offsetX,e.offsetY),zfNow());}if(ptr.size===0)drag=null;};
     cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
     cv.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||drag||!G.run||G.run.scene)return;const c=cellAt(e.offsetX,e.offsetY);if(c!==hov){hov=c;dirty=true;}if(cam.z>=ZMAX*0.97)hideTip();else hexTip(c,e.clientX,e.clientY);});
     cv.addEventListener('pointerleave',()=>{if(hov!=null){hov=null;dirty=true;}hideTip();});
