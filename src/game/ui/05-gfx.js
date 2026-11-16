@@ -83,7 +83,9 @@ const Map2=(()=>{
     const ch=t!==TOPI||b!==BOTI;TOPI=t;BOTI=b;VCY=t+(H0-t-b)/2;return ch;}
   function viewH(){return Math.max(60,H0-TOPI-BOTI);}
   function zMin(){return viewH()/WORLD_H;}
-  function zFloor(){return wide?Math.min(W0/WORLD_W,zMin()):zMin();} // lăn chuột chỉ tới zMin; sau khi bấm nút thu nhỏ thì tạm xuống tới mức bản đồ rộng bằng màn hình
+  function zDeep(){return Math.min(W0/WORLD_W,zMin()*0.6);}
+  let bT=0,bN=0;function bump(){const n=performance.now();if(n-bT>1500)bN=0;if(n-bT>150||bN===0)bN++;bT=n;if(bN>=2&&!wide){wide=true;}}
+  function zFloor(){return wide?zDeep():zMin();} // lăn chuột chỉ tới zMin; sau khi bấm nút thu nhỏ thì tạm xuống tới mức bản đồ rộng bằng màn hình
   function zfNow(){return clamp(Math.log(cam.z/zMin())/Math.log(ZMAX/zMin()),0,1);}
   function worldAt(sx,sy){return [(sx-W0/2)/cam.z+cam.x,(sy-VCY)/cam.z+cam.y];}
   function clampCam(){if(wide&&cam.z>=zMin()*0.9999)wide=false;cam.z=clamp(cam.z,zFloor(),ZMAX);const hw=W0/2/cam.z,hh=viewH()/2/cam.z;const ov=zfNow();const px=W0*0.42*ov/cam.z,py=viewH()*0.45*ov/cam.z;
@@ -94,7 +96,7 @@ const Map2=(()=>{
   function zoomOutAll(){wide=true;cam.z=zFloor();cam.follow=false;cam.x=WORLD_W/2;cam.y=WORLD_H/2;clampCam();dirty=true;}
   function locate(){cam.z=zAt(0.53);center();dirty=true;}
   function focus(x,y){const p=mapXY(clamp(Math.floor(x/1000),0,4),x,y);cam.x=p[0];cam.y=p[1];cam.follow=false;clampCam();dirty=true;}
-  function zoom(f,sx,sy){const z0=cam.z;cam.z=clamp(cam.z*f,zFloor(),ZMAX);if(sx!=null){const wx=(sx-W0/2)/z0+cam.x,wy=(sy-VCY)/z0+cam.y;cam.x=wx-(sx-W0/2)/cam.z;cam.y=wy-(sy-VCY)/cam.z;cam.follow=false;}clampCam();dirty=true;}
+  function zoom(f,sx,sy){const z0=cam.z;if(f<1&&cam.z<=zMin()*1.001&&!wide)bump();cam.z=clamp(cam.z*f,zFloor(),ZMAX);if(sx!=null){const wx=(sx-W0/2)/z0+cam.x,wy=(sy-VCY)/z0+cam.y;cam.x=wx-(sx-W0/2)/cam.z;cam.y=wy-(sy-VCY)/cam.z;cam.follow=false;}clampCam();dirty=true;}
   const SX=x=>(x-cam.x)*cam.z+W0/2,SY=y=>(y-cam.y)*cam.z+VCY;
 
   // ----- địa hình: vẽ một lần cho mỗi vùng -----
@@ -260,11 +262,11 @@ const Map2=(()=>{
     // lưới lục giác, ranh quận, ranh đại khu vực, ô đang rê chuột hoặc đang chọn
     const zf=clamp(Math.log(z/zMin())/Math.log(ZMAX/zMin()),0,1);const showIc=zf>=0.5;const zTop=zf>=0.96;
     // thu nhỏ: ranh đại khu vực · tầm thấy tên quận: ranh quận (nét đứt) · tầm thấy địa điểm: chỉ sáng địa điểm đang rê hoặc chọn; không bao giờ phủ cả lưới
-    const macroA=clamp(1-(zf-0.12)/0.12,0,1),distA=Math.min(clamp((zf-0.12)/0.1,0,1),clamp((0.5-zf)/0.1,0,1));
+    const fillA=clamp(1-(cam.z-zDeep())/Math.max(1e-6,zMin()-zDeep()),0,1),macroA=Math.max(fillA,clamp(1-(zf-0.12)/0.12,0,1)),distA=Math.min(clamp((zf-0.12)/0.1,0,1),clamp((0.5-zf)/0.1,0,1));
     {const hx=hexPaths(),g0=geo();ctx.save();ctx.translate(W0/2-cam.x*z,VCY-cam.y*z);ctx.scale(z,z);ctx.lineJoin='round';ctx.lineCap='round';
       if(!bgHit){const BR=C.dark?'#e6d6b4':'#5b3d22'; // nâu mực, hợp màu giấy bản đồ
-        const sel=CFG.grid&&!zTop?(UI.cell!=null?UI.cell:hov):null;
-        if(macroA>0.01){for(let k=0;k<5;k++){ctx.fillStyle=hexA(AREA_COL[k],0.2*macroA);ctx.fill(hx.rp[k]);}}
+        const sel=CFG.grid&&!zTop?(UI.cell!=null?UI.cell:null):null;
+        if(fillA>0.01){for(let k=0;k<5;k++){ctx.fillStyle=hexA(AREA_COL[k],0.2*fillA);ctx.fill(hx.rp[k]);}}
         if(macroA>0.01){ctx.strokeStyle=hexA(BR,0.5*macroA);ctx.lineWidth=1/z;ctx.setLineDash([7/z,5/z]);ctx.stroke(hx.macro);ctx.setLineDash([]);}
         if(CFG.grid&&distA>0.01){ctx.strokeStyle=hexA(C.dark?'#10151b':'#fff4d6',0.6*distA);ctx.lineWidth=2.6/z;ctx.stroke(hx.dist); // viền sáng để ranh quận không chìm vào nền đã khám phá
           ctx.strokeStyle=hexA(BR,0.85*distA);ctx.lineWidth=1/z;ctx.setLineDash([5/z,4/z]);ctx.stroke(hx.dist);ctx.setLineDash([]);
@@ -295,6 +297,7 @@ const Map2=(()=>{
     // mây trôi, hạt theo mùa, sắc trời theo buổi
     if(lv>0&&CFG.clouds){if(!cloudSpr)cloudSpr=cloudSprite();if(!clouds.length)for(let i=0;i<[0,9,16][lv];i++)clouds.push({x:Math.random()*(WORLD_W+500)-250,y:Math.random()*2500-250,s:160+Math.random()*220,v:6+Math.random()*10});
       ctx.globalAlpha=C.dark?0.06:0.5;for(const c of clouds){c.x+=c.v*dt;if(c.x>WORLD_W+300)c.x=-500;const x=SX(c.x),y=SY(c.y),s=c.s*z*2;if(x+s<0||x>W0||y+s<0||y>H0)continue;ctx.drawImage(cloudSpr,x,y,s,s*0.6);}ctx.globalAlpha=1;}
+    if(fillA>0.02&&fillA<0.98&&typeof cloudSpr!=='undefined'&&cloudSpr){const p=1-fillA,a=Math.sin(p*Math.PI)*(C.dark?0.25:0.85);ctx.save();ctx.globalAlpha=a;for(let k=0;k<16;k++){const sd=k%8,side=k<8?-1:1,sz=W0*(0.34+(sd%3)*0.1),yy=VCY+(((sd*37)%11)/11-0.5)*viewH()*1.1-sz*0.3,xx=W0/2+side*(W0*0.1+p*W0*0.75+(sd%4)*W0*0.04)-sz/2;ctx.drawImage(cloudSpr,xx,yy,sz,sz*0.6);}ctx.restore();}
     {const on=CFG.daynight&&!(r.moving&&!r.halt);const tg=on?dnTint(tHour(w.t),C.dark).slice():[0,0,0,0];tg[3]*=1.5;const c=UI.dnCur||(UI.dnCur=tg.slice());let mv=0;
       for(let i=0;i<4;i++){const d=tg[i]-c[i];if(Math.abs(d)>(i<3?0.5:0.0008)){c[i]+=d*0.06;mv=1;}else c[i]=tg[i];}
       if(c[3]>0.002){ctx.fillStyle=`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${c[3].toFixed(3)})`;ctx.fillRect(0,0,W0,H0);}if(mv)UI.dnMv=1;else UI.dnMv=0;}
@@ -386,9 +389,9 @@ const Map2=(()=>{
       if(ptr.size===1)drag={x:e.offsetX,y:e.offsetY,cx:cam.x,cy:cam.y,moved:false};
       else if(ptr.size===2){const [a,b]=[...ptr.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),z:cam.z};drag=null;}});
     cv.addEventListener('pointermove',e=>{if(!ptr.has(e.pointerId))return;ptr.set(e.pointerId,[e.offsetX,e.offsetY]);
-      if(pinch&&ptr.size===2){const [a,b]=[...ptr.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);cam.z=clamp(pinch.z*d/Math.max(20,pinch.d),zFloor(),ZMAX);cam.follow=false;clampCam();dirty=true;return;}
+      if(pinch&&ptr.size===2){const [a,b]=[...ptr.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pinch.z*d/Math.max(20,pinch.d)<cam.z&&cam.z<=zMin()*1.001&&!wide)bump();cam.z=clamp(pinch.z*d/Math.max(20,pinch.d),zFloor(),ZMAX);cam.follow=false;clampCam();dirty=true;return;}
       if(drag){const dx=e.offsetX-drag.x,dy=e.offsetY-drag.y;if(Math.abs(dx)+Math.abs(dy)>7)drag.moved=true;if(drag.moved){cam.x=drag.cx-dx/cam.z;cam.y=drag.cy-dy/cam.z;cam.follow=false;clampCam();dirty=true;}}});
-    const up=e=>{const d=drag;ptr.delete(e.pointerId);if(ptr.size<2)pinch=null;if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0&&pos&&Math.abs(SX(pos[0])-e.offsetX)<20&&e.offsetY>SY(pos[1])-44&&e.offsetY<SY(pos[1])+4&&G.run&&!G.run.scene){UI.panel='char';UI.tab.char='base';after();}else if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0){const c=cellAt(e.offsetX,e.offsetY);let n=hexNode(c);if(n&&(CFG.hideT||{})[n.type])n=null;if(!n)n=hit(e.offsetX,e.offsetY);mapTap(n,c,worldAt(e.offsetX,e.offsetY),zfNow());}if(ptr.size===0)drag=null;};
+    const up=e=>{const d=drag;ptr.delete(e.pointerId);if(ptr.size<2)pinch=null;if(false){}else if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0){const c=cellAt(e.offsetX,e.offsetY);let n=hexNode(c);if(n&&(CFG.hideT||{})[n.type])n=null;if(!n)n=hit(e.offsetX,e.offsetY);mapTap(n,c,worldAt(e.offsetX,e.offsetY),zfNow());}if(ptr.size===0)drag=null;};
     cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
     cv.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||drag||!G.run||G.run.scene)return;const c=cellAt(e.offsetX,e.offsetY);if(c!==hov){hov=c;dirty=true;}if(cam.z>=ZMAX*0.97)hideTip();else hexTip(c,e.clientX,e.clientY);});
     cv.addEventListener('pointerleave',()=>{if(hov!=null){hov=null;dirty=true;}hideTip();});

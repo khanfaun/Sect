@@ -34,7 +34,7 @@ export function NutBanDo() {
   const r = G.run, bqNo = PS.bqCan(), brk = PS.canBreak();
   const dev = !!PS.DEV;
   return <>
-    <div className="mleft wb"><DaiVetThuong /></div>
+    <div className="mleft wb"><DaiVetThuong />{dev && <Nut act="devOpen" icon="bolt" cls="dev" t="Dev test: thử hiệu ứng" />}</div>
     <div className="mright">
       <Nut act="gridT" icon="hex" t={CFG.grid ? 'Ẩn lưới ô' : 'Hiện lưới ô'} on={CFG.grid} />
       <Nut act="legendOpen" icon="list" t="Chú giải ký hiệu trên bản đồ" on={UI.panel === 'more' && UI.tab.more === 'legend'} />
@@ -47,7 +47,6 @@ export function NutBanDo() {
       <Nut act="bagOpen" icon="bag" t="Túi đồ" on={UI.panel === 'char' && UI.tab.char === 'bag'} />
       <Nut act="hudBq" icon="seat" cls={brk ? 'glow' : ''} dis={bqNo} t={bqNo || (brk ? 'Bế quan · tu vi viên mãn: vào để đột phá' : 'Bế quan tu luyện ngay tại đây')} />
       <Nut act="cgOpen" icon="yin" on={!!(UI.modal && /cg/.test(UI.modal.k || ''))} t="Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá" />
-      {dev && <Nut act="devOpen" icon="bolt" cls="dev" t="Dev test: thử hiệu ứng" />}
     </div>
   </>;
 }
