@@ -208,7 +208,7 @@ const Map2=(()=>{
     const z=cam.z,X0=reg*1000;
     // nền + lưới chỉ vẽ lại khi camera, tầm nhìn, ô chọn đổi; còn lại (mây, hạt, đi đường) chỉ dán lại ảnh đệm
     const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,lv,imgN].join('|');
-    const bgHit=BGK===bgKey&&BGC&&!(INK&&INK.anim);const realCtx=ctx;
+    const bgHit=BGK===bgKey&&BGC&&!(INK&&INK.anim);const realCtx=ctx;ctx.setTransform(dpr,0,0,dpr,0,0);
     if(!bgHit){if(!BGC)BGC=document.createElement('canvas');const bw=Math.round(W0*dpr),bh=Math.round(H0*dpr);if(BGC.width!==bw||BGC.height!==bh){BGC.width=bw;BGC.height=bh;}ctx=BGC.getContext('2d');}
     if(!bgHit){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle=C.dark?C.bg2:mixHex(C.paper,C.bg2,0.55);ctx.fillRect(0,0,W0,H0);
     // nền: ảnh "chưa tới" phủ cả bản đồ; chỗ đã đi qua hoặc đang thấy hiện ảnh chi tiết, viền chuyển tiếp là giấy loang mực
