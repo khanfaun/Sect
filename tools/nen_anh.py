@@ -5,6 +5,7 @@ from PIL import Image
 W=int(sys.argv[1]) if len(sys.argv)>1 else 2400; Q=int(sys.argv[2]) if len(sys.argv)>2 else 68
 tot=0
 for f in sorted(glob.glob('src/assets-goc/ban-do/*.webp')):
+    if 'Backup' in f: continue
     im=Image.open(f).convert('RGB'); im=im.resize((W,round(im.height*W/im.width)),Image.LANCZOS)
     o='src/assets/ban-do/'+os.path.basename(f); im.save(o,'WEBP',quality=Q,method=6); tot+=os.path.getsize(o)
 print('tổng ảnh bản đồ: %.2f MB'%(tot/1e6))
