@@ -98,12 +98,12 @@ const Map2=(()=>{
   // làm nhòe bằng thu nhỏ rồi phóng lại (chạy được trên mọi trình duyệt)
   function smooth(m,f){const w=Math.max(2,Math.round(m.width/f)),h=Math.max(2,Math.round(m.height/f));const a=cvs(w,h),ga=a.getContext('2d');ga.imageSmoothingEnabled=true;ga.imageSmoothingQuality='high';ga.drawImage(m,0,0,w,h);
     const b=cvs(m.width,m.height),gb=b.getContext('2d');gb.imageSmoothingEnabled=true;gb.imageSmoothingQuality='high';gb.drawImage(a,0,0,m.width,m.height);return b;}
-  function buildComposite(key){const lv=gfxLv();const CW=[1376,2064,2752][lv],CH=Math.round(CW*WORLD_H/WORLD_W);
+  function buildComposite(key){const lv=gfxLv();const CW=[1000,1600,2400][lv],CH=Math.round(CW*WORLD_H/WORLD_W);
     const base=mapImg(key.split('|')[0]),hid=mapImg('Hidden-map'),tr=mapImg('Transition-map');if(!base||!hid)return null;
     const c=cvs(CW,CH),g=c.getContext('2d');g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.drawImage(hid,0,0,CW,CH);
-    const m0=seenMask();const narrow=smooth(m0,3),wide=smooth(grow(m0,3),5);
+    const m0=seenMask();const narrow=smooth(m0,lv?3:2),wide=lv?smooth(grow(m0,3),5):null;
     const t=cvs(CW,CH),tg=t.getContext('2d');tg.imageSmoothingEnabled=true;tg.imageSmoothingQuality='high';
-    if(tr){tg.drawImage(tr,0,0,CW,CH);tg.globalCompositeOperation='destination-in';tg.drawImage(wide,0,0,CW,CH);g.globalAlpha=0.92;g.drawImage(t,0,0);g.globalAlpha=1;tg.globalCompositeOperation='source-over';tg.clearRect(0,0,CW,CH);}
+    if(tr&&lv>0){tg.drawImage(tr,0,0,CW,CH);tg.globalCompositeOperation='destination-in';tg.drawImage(wide,0,0,CW,CH);g.globalAlpha=0.92;g.drawImage(t,0,0);g.globalAlpha=1;tg.globalCompositeOperation='source-over';tg.clearRect(0,0,CW,CH);}
     tg.drawImage(base,0,0,CW,CH);tg.globalCompositeOperation='destination-in';tg.drawImage(narrow,0,0,CW,CH);g.drawImage(t,0,0);
     return c;}
   function cloudSprite(){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');const gr=g.createRadialGradient(64,64,6,64,64,64);gr.addColorStop(0,'rgba(255,255,255,.9)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,128,128);return c;}
