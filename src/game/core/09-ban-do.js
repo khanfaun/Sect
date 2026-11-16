@@ -85,7 +85,7 @@ function senseR(){return SENSE[G.run.realm];}
 function addReveal(x,y,R0){const L=G.run.reveal;if(L.some(c=>Math.hypot(c[0]-x,c[1]-y)<30&&c[2]>=R0))return false;L.push([Math.round(x),Math.round(y),R0]);if(L.length>300)L.shift();return true;}
 function sense(){
   const r=G.run,w=W();const [x,y]=playerXY();const R0=senseR();let ch=false;
-  for(const n of regionOf(r.region).nodes){if(Math.hypot(n.x-x,n.y-y)<=R0){if(n.fog<2){n.fog=2;ch=true;}if(n.memory){n.memory=false;ch=true;}n.seenT=w.t;n.vstate=n.state;}}
+  for(const n of regionOf(r.khu||0).nodes){if(Math.hypot(n.x-x,n.y-y)<=R0){if(n.fog<2){n.fog=2;ch=true;}if(n.memory){n.memory=false;ch=true;}n.seenT=w.t;n.vstate=n.state;}}
   if(addReveal(x,y,R0))ch=true;
   return ch;
 }
@@ -165,7 +165,7 @@ function placeActs(n){
   const r=G.run,t=n.type,ruin=n.state==='ruin',L=[];
   const add=(a,i,l,h,tip,dis,x)=>L.push({a,i,l,h,tip,dis:!!dis,x});
   if(t==='ai'){add('cross','🚧','Vượt ải',0,'Sang vùng đất kế tiếp');return L;}
-  if(t==='sao'){const done=r.bossDone[r.region];add('boss','☠️',done?'Sào huyệt đã trống':'Khiêu chiến thủ lĩnh',1,'Thủ lĩnh của vùng này. Hạ được thì có lệnh bài thông quan.',done);add('explore','🔍','Thăm dò',2,'Lục soát quanh sào huyệt. Rất nguy hiểm.');return L;}
+  if(t==='sao'){const done=bossDoneAt(n.id);add('boss','☠️',done?'Sào huyệt đã trống':'Khiêu chiến thủ lĩnh',1,'Thủ lĩnh chiếm cứ nơi này, sức mạnh theo cảnh giới của ngươi.',done);add('explore','🔍','Thăm dò',2,'Lục soát quanh sào huyệt. Rất nguy hiểm.');return L;}
   add('explore','🔍','Thăm dò',2,'Tìm cơ duyên, gặp chuyện.'+(n.danger>=2?'\nNơi nguy hiểm, dễ gặp kẻ địch.':''));
   if((t==='tran'||t==='thanh')&&!ruin){
     add('inn','🛏️','Nghỉ ở khách điếm',8,'Hồi đầy khí huyết và linh lực',r.st<price(4),'💎'+price(4));
@@ -237,7 +237,7 @@ function placeAct(a){
 }
 function teaHouse(n){
   const r=G.run,ch=[];const msg=[];
-  const cand=regionOf(r.region).nodes.filter(x=>x.fog===0).sort((a,b)=>Math.hypot(a.x-n.x,a.y-n.y)-Math.hypot(b.x-n.x,b.y-n.y)).slice(0,4);
+  const cand=allNodes().filter(x=>x.fog===0).sort((a,b)=>Math.hypot(a.x-n.x,a.y-n.y)-Math.hypot(b.x-n.x,b.y-n.y)).slice(0,4);
   if(cand.length){const x=pick(cand);hearOf(x);msg.push(T(['Bàn bên có người kể về {$pl}, {$t}, cách đây không xa.','Lão kể chuyện gõ quạt: “Ai từng tới {$pl} chưa? Nghe nói là {$t}.”','Tiểu nhị rỉ tai: đi thêm một quãng là tới {$pl}, {$t}.'],{pl:x.name,t:TYPE_NAME[x.type]}));ch.push(chip('🗺️',x.name+'?','Đã ghi lên bản đồ, vị trí chưa chắc','up'));}
   if(typeof teaEnt==='function'){const m=teaEnt();if(m)msg.push(m);}
   const rv=pick(r.rivals);const pool=chance(.5)?RUMOR.the:RUMOR[pick(['tien','tien','ma','tu'])];const t=T(pool,rumorV(rv));pushNews(t);msg.push(t);

@@ -55,7 +55,7 @@ function ThanhTruot({ y, mx, capP }) {
 }
 
 // Bầu trời bế quan: tranh động phủ phủ màu theo giờ hiện tại (cùng màu với bản đồ)
-const PHAN = { sang: 'Buổi sáng', chieu: 'Buổi chiều', toi: 'Chạng vạng', dem: 'Ban đêm' };
+const PHAN = { sang: 'Ban ngày', chieu: 'Ban ngày', toi: 'Ban ngày', dem: 'Ban đêm' };
 function TroiBeQuan({ G }) {
   const w = PS.W(), h = PS.tHour(w.t);
   const on = !PS.CFG || PS.CFG.daynight !== false;

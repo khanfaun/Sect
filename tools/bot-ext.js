@@ -6,7 +6,7 @@
 var COV={};
 function covInc(k){COV[k]=(COV[k]||0)+1;}
 // bọc hàm để đếm số lần gọi (chỉ quan sát)
-const COV_FN=['equip','unequip','bagUse','usePill','learnBook','studyArt','dropArt','artStash','artUnstash','petHatch','petFeed','petSet','petFree','craft','sellItem','buyUpg','buyMount','chGive','chTrade','ddPut','ddTake','chuAuto','knSet','stageGo','meetEnt','venueDo','questDo','takeQuest','kyPick','qevPick','btFinish','btFail','doCross','doGoBack','lkXk','bqCustom','playerAct','playerPillAct','playerFlee','playerYield','playerDD','playerMind','playerUlt','playerBurn','kvChoose','htChoose','skLockToggle','bossFight','encAct','retire','sellItem','passAct','buy','takePick','rewardContinue','combatContinue','choose','tamMaChon','hoatAnh'];
+const COV_FN=['equip','unequip','bagUse','usePill','learnBook','studyArt','dropArt','artStash','artUnstash','petHatch','petFeed','petSet','petFree','craft','sellItem','buyUpg','buyMount','chGive','chTrade','ddPut','ddTake','chuAuto','knSet','stageGo','meetEnt','venueDo','questDo','takeQuest','kyPick','qevPick','btFinish','btFail','lkXk','bqCustom','playerAct','playerPillAct','playerFlee','playerYield','playerDD','playerMind','playerUlt','playerBurn','kvChoose','htChoose','skLockToggle','bossFight','encAct','retire','sellItem','passAct','buy','takePick','rewardContinue','combatContinue','choose','tamMaChon','hoatAnh'];
 for(const n of COV_FN){const f=globalThis[n];if(typeof f!=='function')continue;globalThis[n]=function(){covInc(n);return f.apply(this,arguments);};}
 {const f=placeAct;placeAct=function(a){covInc('placeAct:'+a);return f.apply(this,arguments);};}
 {const f=venueDo;venueDo=function(v,id){covInc('venue:'+v+':'+id);return f.apply(this,arguments);};}
@@ -96,7 +96,7 @@ function botReport(){
 var BOOST_EN=null;
 function botBoost(){const r=G.run;if(!r)return;if(r.st<800)r.st=800;
   // thủ lĩnh vùng: cho bot biết chỗ sào huyệt khi đủ cảnh giới để thử đánh thủ lĩnh
-  if(r.region<5&&r.realm>=r.region+1){const L=nodeById(regionOf(r.region).lair);if(L&&L.fog<1)L.fog=1;}
+  if(r.realm>=1){const L=nodeById(regionOf(r.khu||0).lair);if(L&&L.fog<1)L.fog=1;}
   // trứng linh thú: nhặt từ kẻ địch vừa đánh (cùng công thức với trò chơi) để thử ấp, cho ăn, thả
   {const sc=r.scene;if(sc&&sc.type==='combat'&&sc.en)BOOST_EN=sc.en;else if(!sc&&BOOST_EN){const q=run2();if(q.pets.length+q.eggs.length<PET_MAX&&chance(.4))q.eggs.push({k:BOOST_EN.k,n:petName(BOOST_EN),i:BOOST_EN.i,el:BOOST_EN.el||'vo',t:W().t+3*HM});BOOST_EN=null;}}
   // cống hiến tông môn: đủ để đổi đan
@@ -104,7 +104,7 @@ function botBoost(){const r=G.run;if(!r)return;if(r.st<800)r.st=800;
   else{const me=mainUnit(sc);if(me&&me.hp>0&&me.hp<me.max*0.6)me.hp=Math.round(me.max*0.6);}}
 // đi về điểm vào của vùng để thử quay về vùng cũ
 // đánh thủ lĩnh vùng khi đủ cảnh giới (trước đây mục tiêu vượt ải luôn lấn át nên chưa bao giờ đánh thủ lĩnh)
-function botBossGoal(){const r=G.run;if(r.region>4||r.bossDone[r.region]||r.realm<r.region+1||r.hp<S().maxHp*0.7||!chance(.15))return false;const n=nodeById(regionOf(r.region).lair);if(n.fog<1&&n.id!==r.at)return false;r._goal='boss';return goOrOpen(n);}
+function botBossGoal(){const r=G.run;const R0=regionOf(r.khu||0);if(R0.lair==null||bossDoneAt(R0.lair)||r.realm<1||r.hp<S().maxHp*0.7||!chance(.15))return false;const n=nodeById(R0.lair);if(n.fog<1&&n.id!==r.at)return false;r._goal='boss';return goOrOpen(n);}
 // đi tới nơi có trạm dịch để thử đi trạm
 function botStageGoal(){const r=G.run;if(!chance(.03))return false;const n=nearest(x=>x.fog>=1&&placeActs(x).some(a=>a.a==='tram'));if(!n)return false;r._goal='tram';return goOrOpen(n);}
-function botBackGoal(){const r=G.run;if(r.region<1||!chance(.03))return false;const n=nodeById(regionOf(r.region).entry);if(n.fog<1&&n.id!==r.at)return false;r._goal='back';return goOrOpen(n);}
+function botBackGoal(){return false;const r=G.run;const n=nodeById(regionOf(r.region).entry);if(n.fog<1&&n.id!==r.at)return false;r._goal='back';return goOrOpen(n);}

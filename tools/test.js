@@ -75,14 +75,41 @@ const TESTS = {
     ok(run('G.run.base.van=1;kyBigOpen()') === false, 'khí vận thấp: kỳ ngộ lớn đóng');
     ok(run('G.run.base.van=KY_BIG_VAN+5;kyBigOpen()') === true, 'khí vận cao: kỳ ngộ lớn mở');
   },
-  // quay về vùng cũ
-  goback() {
-    fresh('G.run.region=1;G.run.maxRegion=1;arrive(regionOf(1).entry);openPlace(regionOf(1).entry);');
-    ok(run('placeActs(nodeById(regionOf(1).entry)).some(a=>a.a==="goback")'), 'điểm vào vùng 2 có nút Quay về');
-    ok(run('placeActs(nodeById(regionOf(0).entry)).every(a=>a.a!=="goback")'), 'vùng 1 không có nút Quay về');
-    run('placeAct("goback")');
-    ok(+run('G.run.region') === 0, 'đã về vùng 1'); ok(run('nodeById(G.run.at).type') === 'ai', 'đứng ở quan ải');
-    ok(run('NK.count("region.back")') === 1, 'nhật ký ghi region.back');
+  // bản đồ mới: 5 đại khu vực, địa hình theo ảnh, đi bộ chỉ trên đất, tầm nhìn theo địa hình, độ khó theo cảnh giới
+  bando() {
+    fresh();
+    ok(+run('W().regions.length') === 5, 'có 5 đại khu vực');
+    ok(run('W().regions.every(R0=>{const n=R0.nodes.filter(x=>x.type==="tong").length;return n>=6&&n<=8;})'), 'mỗi khu 6–8 tông môn');
+    ok(run('new Set(W().sects.map(s=>s.sz)).size>=2'), 'tông môn có lớn có nhỏ');
+    ok(run('allNodes().every(n=>walkable(geo().ter[n.hex]))'), 'mọi địa điểm nằm trên đất liền');
+    ok(run('allNodes().every(n=>n.type!=="ai")'), 'không còn quan ải');
+    ok(run('KHU.map(k=>k.n).join(",")') === 'Trung Châu,Đông Hoang,Nam Lĩnh,Tây Nhạc,Bắc Vân', 'tên năm khu');
+    // đường đi bộ không lội nước, không qua mây
+    const p = JSON.parse(run(`(()=>{const a=regionOf(3).nodes[0],b=regionOf(1).nodes[0];const hp=hexPath(a.hex,b.hex,false);return JSON.stringify({n:hp.cells.length,bad:hp.cells.filter(c=>!walkable(geo().ter[c])).length,end:hp.cells[hp.cells.length-1]===b.hex});})()`));
+    ok(p.bad === 0 && p.end, `đi bộ từ Tây Nhạc sang Đông Hoang: ${p.n} ô, không ô nào là nước/mây`);
+    // ngự kiếm (Kết Đan) bay được qua sông hồ, nhanh hơn
+    const f = JSON.parse(run(`(()=>{const a=regionOf(3).nodes[0],b=regionOf(1).nodes[0];return JSON.stringify({w:hexPath(a.hex,b.hex,false).len,f:hexPath(a.hex,b.hex,true).len});})()`));
+    ok(f.f < f.w, `ngự kiếm ít công sức hơn đi bộ (${Math.round(f.f)} < ${Math.round(f.w)})`);
+    // lên dốc tốn hơn xuống dốc
+    ok(run('(()=>{for(let i=0;i<HN;i++){if(geo().ter[i]!==1)continue;for(const j of hexNb(i))if(geo().ter[j]===4)return stepCost(i,j,false)>stepCost(j,i,false);}return false;})()'), 'lên núi tốn hơn xuống núi');
+    // tầm nhìn: núi chắn, mặt nước nhìn xa
+    const v = JSON.parse(run(`(()=>{const g=geo();let plain=-1,lake=-1;for(let i=0;i<HN;i++){if(g.ter[i]!==1)continue;const nb=hexNb(i);if(plain<0&&nb.every(j=>g.ter[j]===1))plain=i;if(lake<0&&nb.some(j=>g.ter[j]===6))lake=i;}return JSON.stringify({p:visCalc(plain,200).length,l:visCalc(lake,200).length});})()`));
+    ok(v.p > 20 && v.l > 20, `tầm nhìn tính theo ô (đồng bằng ${v.p}, ven hồ ${v.l})`);
+    const blk = JSON.parse(run(`(()=>{const g=geo();let p=-1;for(let i=3000;i<HN;i++){if(g.ter[i]===1&&hexNb(i).every(j=>g.ter[j]===1)){p=i;break;}}
+      const before=visCalc(p,300).length;const ring=new Set();for(const a of hexNb(p))for(const b of hexNb(a))if(b!==p&&!hexNb(p).includes(b))ring.add(b);
+      const old=[...ring].map(b=>[b,g.ter[b]]);for(const b of ring)g.ter[b]=4;const after=visCalc(p,300).length;for(const [b,t] of old)g.ter[b]=t;return JSON.stringify({before,after});})()`));
+    ok(blk.after < blk.before / 2, `vòng núi quanh chỗ đứng chắn tầm nhìn (${blk.before} ô → ${blk.after} ô)`);
+    // thấy rồi thì ghi vào bản lưu
+    run('sense()'); ok(run('typeof G.run.vis==="string"&&G.run.vis.length>100'), 'ô đã thấy lưu vào r.vis');
+    // độ khó theo cảnh giới
+    run('G.run.realm=2;advanceTime(1)'); ok(+run('G.run.region') === 2, 'bậc độ khó = cảnh giới (Kết Đan → 2)');
+    ok(+run('G.run.khu') === +run('khuOfId(G.run.at)'), 'r.khu là khu đang đứng');
+    // sào huyệt: hạ một nơi chỉ nơi đó trống
+    run('G.run.bossAt={};G.run.bossAt[regionOf(0).lair]=1;');
+    ok(run('placeActs(nodeById(regionOf(0).lair)).find(a=>a.a==="boss").dis===true&&placeActs(nodeById(regionOf(1).lair)).find(a=>a.a==="boss").dis===false'), 'sào huyệt tính riêng từng nơi');
+    // bản lưu cũ: dựng lại thế giới theo bản đồ mới
+    run('globalThis.__d={meta:JSON.parse(JSON.stringify(G.meta)),run:JSON.parse(JSON.stringify(G.run))};__d.meta.world.mapV=1;__d.run.at=123;migrateX(__d);');
+    ok(run('__d.meta.world.mapV===MAP_V&&__d.meta.world.regions[khuOfId(__d.run.at)].nodes[__d.run.at%100].type==="tran"'), 'bản lưu cũ: dựng lại bản đồ, đặt về một thôn trấn');
   },
   // thương thế 3 bậc: nhẹ thua vẫn sống, nguy kịch thua là chết
   thuongthe() {

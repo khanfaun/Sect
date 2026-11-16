@@ -24,7 +24,12 @@ Người dùng không phải lập trình viên: trả lời ngắn, ít thuật
 - Sửa xong phải `npm run build` (ra phu-sinh.html) rồi mới kiểm giao diện. Lần đầu cần `npm install`.
 - Các hệ thống mới (core2/23–30): thương thế 3 bậc, hồi phục theo lượt/tháng (đã bỏ hồi theo giờ trong `worldStep`), tĩnh toạ, đối thủ liều mạng, tâm ma, rớt cảnh giới + sống tạm, che giấu tu vi, thần thức/giao tranh. Lựa chọn dạng hộp thoại dùng khung kỳ ngộ: thêm vào `KYNGO` với `sp:1` để không lẫn vào kỳ ngộ ngẫu nhiên.
 - Tuổi (`r.age`) được tính lại từ `birthAge` và thời gian thế giới; trong bài kiểm tra muốn đổi tuổi phải đặt `birthAge`.
-- Bản đồ: phóng to từ 1,6 lần thì vẽ lại mảnh đang nhìn ở độ nét cao (`DTC` trong ui/05-gfx.js); hai vùng lật gương (CELL mx) chưa có mảnh chi tiết.
+- Bản đồ (core2/33-ban-do-moi.js): một đại lục vẽ sẵn, ảnh ở `src/assets/ban-do` (nhúng qua react/anh.js → `window.PS_ANH`). Nền theo mùa + ngày (5h–19h)/đêm; chỗ chưa thấy là Hidden-map, mép nhòe qua Transition-map (`buildComposite` trong ui/05-gfx.js).
+  - Địa hình từng ô: `MAP_TER` (core2/32, sinh bằng `python3 tools/dia_hinh.py --xem ảnh.jpg`; sông hồ núi mây vẽ tay bằng đa giác trong tệp đó). Ô nhỏ 30 đơn vị, 119×76 ô. Sông/hồ/mây không đi bộ được, lên dốc tốn thêm (`stepCost`), từ Kết Đan bay qua sông hồ (`flyMode`).
+  - 5 đại khu vực `KHU` (Trung Châu, Đông Hoang, Nam Lĩnh, Tây Nhạc, Bắc Vân), mỗi khu 6–8 tông môn (`sect.sz` 0–2). Địa điểm id = khu*100+i, thế giới sinh một lần rồi giữ qua các kiếp.
+  - `r.region` giờ là BẬC ĐỘ KHÓ = cảnh giới (0..4), `r.khu` là khu đang đứng. Không còn quan ải/lệnh bài; sào huyệt tính riêng từng nơi (`r.bossAt`).
+  - Tầm nhìn theo ô (`visCalc`: núi chắn, nước nhìn xa); ô đã thấy lưu ở `r.vis` (base64). Thấy thực thể/điểm: `canSee(x,y)`.
+  - Bản lưu cũ (`world.mapV` khác `MAP_V`) được `migrateX` dựng lại thế giới và đưa người chơi về một thôn trấn.
 - Túi đồ (core2/31): 10 ô mang trên người + túi trữ vật (relic k:'tui' đeo ở ô tuivat) mở thêm ô, ô túi khoá khi linh lực = 0 hoặc phàm nhân. Mỗi pháp bảo/vật liệu/trứng/lệnh bài/viên đan chiếm một ô. Giao diện ô/khoá chưa gắn (dùng `bagLayout()`, `it.locked`/`it.bsrc` của `bagItems()`).
 - Lịch luyện nhận ×`LL_BOOST` (20-ngo-tinh-khi-van.js). Bế quan: linh lực hồi ×`BQ_MP_MUL` nhanh hơn khí huyết, xuất quan không còn hồi đầy cả hai (24-hoi-phuc.js).
 

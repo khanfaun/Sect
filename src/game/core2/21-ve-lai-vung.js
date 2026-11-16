@@ -1,7 +1,7 @@
 // ================= VỀ LẠI VÙNG CŨ =================
 // Ở điểm vào của một vùng (từ vùng 2 trở đi) có thể quay về vùng trước, đến thẳng quan ải của vùng đó.
 // Đã qua rồi nên không cần lệnh bài hay tu vi; đường đi tốn thời gian bằng lúc vượt ải.
-function canGoBack(n){const r=G.run;return !!(r&&n&&r.region>0&&n.id===regionOf(r.region).entry);}
+function canGoBack0(n){const r=G.run;return !!(r&&n&&r.region>0&&n.id===regionOf(r.khu||0).entry);}
 {const _pa=placeActs;placeActs=function(n){const L=_pa(n);if(canGoBack(n)){const k=G.run.region-1;L.push({a:'goback',i:'↩️',l:'Quay về '+REG[k].n,h:3,tip:'Trở lại vùng trước, mất khoảng '+CROSS_M[G.run.region]+' tháng đường.',dis:false});}return L;};}
 {const _pc=placeAct;placeAct=function(a){const r=G.run,sc=r&&r.scene;if(a==='goback'&&sc&&sc.type==='place'){const n=nodeById(sc.id);if(canGoBack(n))doGoBack();return;}return _pc(a);};}
 function doGoBack(){

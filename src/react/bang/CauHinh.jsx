@@ -27,7 +27,7 @@ function DoHoa() {
     <SetRow n="Độ nét" t="Độ nét của bản đồ. Càng nét càng nặng trên màn hình độ phân giải cao."><Seg k="dpr" opts={[[0, 'Tự động'], [1, 'Thường'], [1.5, 'Nét'], [2, 'Rất nét']]} /></SetRow>
     <SetRow n="Mây trôi" t="Bóng mây lướt trên bản đồ"><OnOff k="clouds" /></SetRow>
     <SetRow n="Hạt theo mùa" t="Hoa rơi mùa xuân, đom đóm đêm hè, lá thu, tuyết đông"><OnOff k="fx" /></SetRow>
-    <SetRow n="Sắc trời theo buổi" t="Bản đồ ngả màu theo sáng, chiều, tối, đêm"><OnOff k="daynight" /></SetRow>
+    <SetRow n="Sắc trời theo buổi" t="Cảnh bế quan ngả màu theo ngày, đêm (bản đồ đã có ảnh ngày, đêm riêng)"><OnOff k="daynight" /></SetRow>
     <SetRow n="Chuyển động giao diện" t="Hiệu ứng trượt, mờ dần của các bảng"><OnOff k="anim" /></SetRow>
     <SetRow n="Hiện số khung hình"><OnOff k="showFps" /></SetRow>
     <SetRow n="Nhật ký gỡ lỗi" t="Ghi lại các sự kiện chính để gửi cho người sửa game khi gặp lỗi. Tắt thì không tốn máy."><span>

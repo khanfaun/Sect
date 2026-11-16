@@ -43,7 +43,7 @@ function combatContinue(){
     return;
   }
   if(res==='flee'||res==='lose'){r.scene={type:'combat',back:sc.back};endScene();return;}
-  if(af.kind==='boss'){r.bossKills++;r.bossDone[r.region]=1;bio(T(`Năm ${Math.floor(r.age)} tuổi, đánh bại ${en.n} ở ${r.place.n}.`));log(`Đánh bại ${en.n}.`);rewardScene('boss',en);return;}
+  if(af.kind==='boss'){r.bossKills++;r.bossDone[r.region]=1;(r.bossAt||(r.bossAt={}))[r.at]=1;bio(T(`Năm ${Math.floor(r.age)} tuổi, đánh bại ${en.n} ở ${r.place.n}.`));log(`Đánh bại ${en.n}.`);rewardScene('boss',en);return;}
   rewardScene(sc.elite?'elite':'normal',en,many);
 }
 function rememberKill(en){}
@@ -180,7 +180,7 @@ function rewardScene(kind,en){
   const text=kind==='boss'?T(['{$e} ngã xuống, đất trời như lặng đi một nhịp. Ngươi đứng giữa chiến trường, gió thổi tung vạt áo.','Đòn cuối cùng. {$e} gục xuống, không còn đứng dậy. Ngươi thở ra một hơi dài, như trút được cả một vùng trời.'],{e:en.n})
     :T(['{$e} không còn động đậy. Ngươi lục lọi chiến trường.','Trận chiến kết thúc. Ngươi chỉnh lại y phục, nhặt nhạnh những gì còn dùng được.','{$e} gục xuống. Bụi lắng, máu thấm vào đất.','Một trận ác chiến. Ngươi thắng, nhưng không vui lắm.','Kết thúc nhanh gọn. {$e} thậm chí chưa kịp kêu.'],{e:en.n});
   if(kind==='boss'&&r.region>=4){chips.push(chip('☁️','cửa trời mở','Đạt Hóa Thần viên mãn, độ kiếp ở động phủ để phi thăng','item'));const p=gainPill('thiendao',2);if(p)chips.push(p);}
-  if(kind==='boss'&&r.region<4&&!r.passes.includes(r.region+1)){r.passes.push(r.region+1);chips.push(chip('🎫','Lệnh bài thông quan','Trình ở quan ải để sang '+REG[r.region+1].n,'item'));}
+  if(false){r.passes.push(r.region+1);chips.push(chip('🎫','Lệnh bài thông quan','Trình ở quan ải để sang '+REG[r.region+1].n,'item'));}
   r.scene={type:'reward',kind,text,chips,picks,taken:-1,back:sceneBack()};
 }
 function takePick(i){
@@ -198,13 +198,15 @@ function rewardContinue(){endScene();}
 const HD=24, HM=720, HY=8640;
 const MONTH=['Giêng','Hai','Ba','Tư','Năm','Sáu','Bảy','Tám','Chín','Mười','Mười Một','Chạp'];
 const CHI=['Tý','Sửu','Dần','Mão','Thìn','Tỵ','Ngọ','Mùi','Thân','Dậu','Tuất','Hợi'];
-const PART={sang:{n:'sáng',i:'🌅'},chieu:{n:'chiều',i:'☀️'},toi:{n:'tối',i:'🌇'},dem:{n:'đêm',i:'🌙'}};
+// chỉ còn ngày (5h–19h) và đêm; buổi nhỏ bên trong chỉ dùng cho câu tả cảnh
+const PART={sang:{n:'ngày',i:'☀️'},chieu:{n:'ngày',i:'☀️'},toi:{n:'ngày',i:'☀️'},dem:{n:'đêm',i:'🌙'}};
 const SEASON={xuan:'xuân',ha:'hạ',thu:'thu',dong:'đông'};
 function W(){return G.meta.world;}
 function tYear(t){return 1000+Math.floor(t/HY);}
 function tMonth(t){return Math.floor((t%HY)/HM);}
 function tHour(t){return t%HD;}
-function partOf(t){const h=tHour(t);return h>=5&&h<11?'sang':h>=11&&h<17?'chieu':h>=17&&h<21?'toi':'dem';}
+function partOf(t){const h=tHour(t);return h>=5&&h<11?'sang':h>=11&&h<17?'chieu':h>=17&&h<19?'toi':'dem';}
+function isDay(t){const h=tHour(t);return h>=5&&h<19;}
 function seasonOf(t){const m=tMonth(t)+1;return m<=3?'xuan':m<=6?'ha':m<=9?'thu':'dong';}
 function gioName(t){return CHI[Math.floor(((Math.floor(tHour(t))+1)%24)/2)];}
 function dateText(t){return `Năm ${tYear(t)}, tháng ${MONTH[tMonth(t)]}, giờ ${gioName(t)}`;}

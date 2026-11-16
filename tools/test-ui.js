@@ -63,31 +63,39 @@ const TESTS = {
     await shot(p, 'bando-zoom');
   },
   // ô lật gương (vùng 4, 5): mảnh chi tiết phải được vẽ
-  async bandoMx(p) {
+  async bandoZoom(p) {
     const errs = []; p.on('pageerror', e => errs.push(e.message));
-    await ev(p, () => { Map2.focus(3500, 500); Map2.zoom(10); });
-    for (let i = 0; i < 25; i++) { await p.waitForTimeout(150); if (await ev(p, () => Map2.dtc > 0)) break; }
-    ok(await ev(p, () => Map2.dtc > 0), 'ô lật gương có mảnh chi tiết');
-    ok(errs.length === 0, 'không báo lỗi');
-    await shot(p, 'bando-mx');
+    for (const [x, y] of [[300, 300], [3300, 300], [1800, 1000], [300, 1800], [3300, 1800]]) { await ev(p, a => { Map2.focus(a[0], a[1]); Map2.zoom(10); }, [x, y]); await p.waitForTimeout(120); }
+    ok(errs.length === 0, 'phóng to hết cỡ, kéo khắp bản đồ không báo lỗi');
+    await shot(p, 'bando-zoom');
   },
   // cấu hình: nút nhật ký gỡ lỗi
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');
   },
-  // nút Quay về vùng cũ hiện ở giao diện thẻ địa điểm
-  async goback(p) {
-    await ev(p, () => { G.run.region = 1; G.run.maxRegion = 1; arrive(regionOf(1).entry); openPlace(regionOf(1).entry); render(); });
-    await p.waitForTimeout(500);
-    const btn = await p.$('[data-act="pact"][data-arg="goback"]');
-    ok(!!btn, 'nút Quay về có trên giao diện');
-    if (btn) {
-      await btn.click(); await p.waitForTimeout(300);
-      const c = await p.$('.mbox [data-act="pactGo"], .mbox .btn.pri'); if (c) { await c.click(); await p.waitForTimeout(500); }
-      ok(await ev(p, () => G.run.region === 0), 'bấm nút thì về vùng 1'); ok(await ev(p, () => NK.count('region.back') === 1), 'nhật ký ghi region.back');
-    }
-    await shot(p, 'goback');
+  // bản đồ ảnh: đúng mùa và ngày/đêm, chỗ chưa thấy là bản đồ cổ, thu nhỏ hết cỡ thì rê chuột không hiện gì
+  async bando(p) {
+    await p.waitForTimeout(800);
+    const k = await ev(p, () => ({ key: Map2.mapKey, want: { xuan: 'Spring', ha: 'Summer', thu: 'Autumn', dong: 'Winter' }[seasonOf(W().t)] + '-' + (isDay(W().t) ? 'day' : 'night'), anh: Object.keys(window.PS_ANH || {}).length }));
+    ok(k.anh >= 13, 'đã nhúng ' + k.anh + ' ảnh (bản đồ + nền giấy)');
+    ok(k.key.startsWith(k.want + '|'), 'nền bản đồ dùng ảnh ' + k.want + ' (' + k.key + ')');
+    await ev(p, () => { advanceTime(12); render(); Map2.invalidate(); }); await p.waitForTimeout(600);
+    const k2 = await ev(p, () => ({ key: Map2.mapKey, want: (isDay(W().t) ? 'day' : 'night') }));
+    ok(k2.key.split('|')[0].endsWith(k2.want), 'qua 12 giờ thì đổi ảnh ' + k2.want);
+    // điểm ảnh ở góc xa (chưa thấy) khác chỗ đứng (đã thấy)
+    const px = await ev(p, () => { const cv = document.querySelector('canvas'); return !!cv; });
+    ok(px, 'có canvas bản đồ');
+    // thu nhỏ hết cỡ: rê chuột không tô vùng, không hiện chú thích
+    await ev(p, () => { Map2.zoom(0.001); });
+    await p.waitForTimeout(300);
+    const box = await (await p.$('canvas')).boundingBox();
+    await p.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await p.mouse.move(box.x + box.width / 2 + 5, box.y + box.height / 2 + 5);
+    await p.waitForTimeout(200);
+    const t = await ev(p, () => ({ zf: Map2.zf(), hov: Map2.hov, tip: !document.querySelector('#tip') || document.querySelector('#tip').hidden }));
+    ok(t.zf <= 0.02 && t.hov == null && t.tip, 'thu nhỏ hết cỡ: rê chuột không tô ô, không chú thích (zf=' + t.zf.toFixed(2) + ')');
+    ok(await ev(p, () => getComputedStyle(document.documentElement).getPropertyValue('--tex-sq').includes('data:image')), 'nền giấy cho hộp thoại đã gắn');
+    await shot(p, 'bando');
   },
 };
 

@@ -67,7 +67,7 @@ function smartPlan(){
   const r=G.run,s=S();
   if(r.kvPick){kvChoose(0);return;}if(r.htPick)htChoose(0);if(r.asc)r.asc=null;
   {const X=lkXkState();if(X&&X.ok&&!(r.realm===0&&lkTang()>=9)&&(!r.scene||r.scene.type==='place')){why('tu luyện','xung kích tầng');lkXk();return;}}
-  const R0=regionOf(r.region);
+  const R0=regionOf(r.khu||0);
   // 1. sống sót
   if(hpR()<0.55){const n=nearest(n=>n.dp||((n.type==='tran'||n.type==='thanh')&&n.state==='ok'&&r.st>=price(4)));if(n&&goOrOpen(n)){r._goal='heal';why('sống sót','máu thấp, tìm chỗ hồi');return;}}
   // 2. đột phá
@@ -85,9 +85,9 @@ function smartPlan(){
   if(r.st<reserve()){const q=r.quests.find(q=>q.state==='open');if(q&&goOrOpen(nodeById(q.node))){r._goal='explore';why('tích luỹ','làm việc treo thưởng lấy linh thạch');return;}
     const g=nearest(x=>x.fog>=1&&placeActs(x).some(a=>a.a==='board'||a.a==='haithuoc'||a.a==='daokhoang')&&dangerTag(x)<(r.realm>=1?3:2));if(g&&goOrOpen(g)){r._goal='farm';why('tích luỹ','thiếu linh thạch, đi kiếm');return;}}
   // 5. tiến vùng khi đủ mạnh
-  if(r.region<=4&&r.realm>=r.region+1&&hpR()>=0.85){
-    if(!r.bossDone[r.region]){const n=nodeById(R0.lair);if(n.fog>=1&&goOrOpen(n)){r._goal='boss';why('tiến vùng','đủ cảnh giới, đánh thủ lĩnh');return;}}
-    if(r.region<4&&(r.realm>=r.region+1||r.passes.includes(r.region+1))){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';why('tiến vùng','đủ cảnh giới, vượt ải');return;}}}
+  if(r.realm>=1&&hpR()>=0.85){
+    if(R0.lair!=null&&!bossDoneAt(R0.lair)&&chance(.3)){const n=nodeById(R0.lair);if(n.fog>=1&&goOrOpen(n)){r._goal='boss';why('tiến vùng','đủ cảnh giới, đánh thủ lĩnh');return;}}
+    if(chance(.05)){const o=allNodes().filter(n=>khuOfId(n.id)!==(r.khu||0)&&n.fog>=1&&dangerTag(n)<=Math.min(3,r.realm+1));if(o.length&&goOrOpen(pick(o))){r._goal='cross';why('tiến vùng','sang khu khác');return;}}}
   // 6. tranh cơ duyên: hội đấu giá, sao rơi, bí cảnh khi khoẻ và có tiền
   if(hpR()>=0.8){const e=entsHere(r.region).find(e=>e.to==null&&e.type==='di'&&nodeById(e.at).fog>=1);if(e&&goOrOpen(nodeById(e.at))){r._goal='ent';why('cơ duyên','đi tranh '+e.type);return;}}
   // 7. khám phá

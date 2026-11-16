@@ -32,7 +32,9 @@ function botTexts(){
   push(dateText(W().t));
   return out;
 }
-function nearest(pred){const r=G.run;let best=null,bl=1e9;for(const n of regionOf(r.region).nodes){if(!pred(n))continue;if(n.fog<1&&n.id!==r.at)continue;if(n.id===r.at)return n;const p=findPath(r.at,n.id);if(!p)continue;const L=pathLen(p);if(L<bl){bl=L;best=n;}}return best;}
+// gần nhất theo đường đi thật: lọc trước 8 nơi gần nhất theo đường chim bay cho đỡ tính đường
+function nearest(pred){const r=G.run;const me=nodeById(r.at);let best=null,bl=1e9;const L0=[];for(const n of allNodes()){if(!pred(n))continue;if(n.fog<1&&n.id!==r.at)continue;if(n.id===r.at)return n;L0.push([n,Math.hypot(n.x-me.x,n.y-me.y)]);}
+  L0.sort((a,b)=>a[1]-b[1]);for(const [n] of L0.slice(0,8)){const p=findPath(r.at,n.id);if(!p)continue;const L=pathLen(p);if(L<bl){bl=L;best=n;}}return best;}
 function goOrOpen(n){const r=G.run;if(!n)return false;if(n.id===r.at){openPlace(n.id);return true;}if(!travelTo(n.id))return false;travelTick(1e7);return true;}
 function botPlan(){
   if(typeof learnAll==='function')learnAll();if(!G.run)return;
@@ -46,10 +48,10 @@ function botPlan(){
   if(r.hp<s.maxHp*0.45){const n=nearest(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok'&&r.st>=price(4)||n.dp);if(n&&goOrOpen(n)){r._goal=n.dp?'heal':'inn';return;}}
   if(r.realm<4&&canBreak()){const n=nearest(n=>n.dp&&dangerTag(n)<3);if(n&&goOrOpen(n)){r._goal='bt';return;}}
   if((r.tvMinor>=40||r.tv<100&&!bqCan()&&chance((r.ll||0)>=r.tv+10?.75:r.tv>=60?.3:.2))&&(r.ll||0)>=r.tv-15){const n=nearest(n=>n.dp&&dangerTag(n)<3);if(n&&goOrOpen(n)){r._goal='bq';return;}}
-  const R0=regionOf(r.region);
-  if(r.region<4&&(r.realm>=r.region+1||r.passes.includes(r.region+1))){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';return;}}
-  if(!r.bossDone[r.region]&&r.realm>=r.region+1&&chance(.5)){const n=nodeById(R0.lair);if(n.fog>=1&&goOrOpen(n)){r._goal='boss';return;}}
-  if(r.region<4&&r.realm>=r.region&&chance(.05)){const n=nodeById(R0.pass);if(n.fog>=1&&goOrOpen(n)){r._goal='cross';return;}}
+  const R0=regionOf(r.khu||0);
+  if(R0.lair!=null&&!bossDoneAt(R0.lair)&&r.realm>=1&&chance(.2)){const n=nodeById(R0.lair);if(n.fog>=1&&goOrOpen(n)){r._goal='boss';return;}}
+  // thỉnh thoảng sang khu khác (không còn quan ải: đi thẳng tới một nơi đã biết ở khu bên cạnh)
+  if(chance(.04)){const o=allNodes().filter(n=>khuOfId(n.id)!==(r.khu||0)&&n.fog>=1);if(o.length){const n=pick(o);if(goOrOpen(n)){r._goal='cross';return;}}}
   // việc treo thưởng còn hạn
   const q=r.quests.find(q=>q.state==='open');if(q&&chance(.6)){const n=nodeById(q.node);if(goOrOpen(n)){r._goal='explore';return;}}
   // khám phá: ưu tiên điểm chưa tới
@@ -160,7 +162,7 @@ while(life<LIVES){
     stats.steps++;stepsLife++;
     if(run('!!G.run')){
       scanTexts();
-      const mr=run('G.run.region'),re=run('G.run.realm');stats.maxRegion[mr]=Math.max(1,stats.maxRegion[mr]);
+      const mr=run('G.run.khu||0'),re=run('G.run.realm');stats.maxRegion[mr]=Math.max(1,stats.maxRegion[mr]);
       
     }
     if(stepsLife>30000){stats.errors.push('kiếp kẹt quá 30000 bước: '+run('JSON.stringify({sc:G.run&&G.run.scene&&G.run.scene.type,at:G.run&&G.run.at,mv:G.run&&G.run.moving})'));run('die("toahoa")');}
@@ -177,7 +179,7 @@ const realmCount={};for(const L of lives){realmCount[L.realm]=(realmCount[L.real
 console.log('Số kiếp:',life,'| bước:',stats.steps,'| thời gian:',((Date.now()-t0)/1000).toFixed(1)+'s');
 console.log('Nguyên nhân chết:',stats.cause);
 console.log('Cảnh giới khi chết:',stats.rc);console.log('Vùng xa nhất mỗi kiếp (vùng 1..5):',stats.rg);
-console.log('Vùng xa nhất từng tới:',run('G.meta.lives.length'),'kiếp; vùng có mặt:',stats.maxRegion.map((x,i)=>x?i:null).filter(x=>x!=null).join(','));
+console.log('Khu vực đã có mặt:',run('G.meta.lives.length'),'kiếp; vùng có mặt:',stats.maxRegion.map((x,i)=>x?i:null).filter(x=>x!=null).join(','));
 console.log('Tuổi chết trung bình:',(stats.ages.reduce((a,b)=>a+b,0)/Math.max(1,stats.ages.length)).toFixed(1));
 console.log('Năm thế giới hiện tại:',run('tYear(W().t)'),'| cỡ bản lưu:',(sz/1024).toFixed(1)+' KB');
 if(stats.bad.length){console.log('CHUỖI LỖI ('+stats.bad.length+'):');stats.bad.forEach(x=>console.log('  ',x));}

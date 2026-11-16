@@ -1,5 +1,6 @@
 // Lối vào phần giao diện React. Phần luật chơi và các màn chưa chuyển vẫn nằm ở src/game/.
 // Mỗi màn React đăng ký tên ở đây; src/game/ui/22-cau-noi-react.js gọi RX.show để vẽ.
+import './anh';
 import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
 import { ManMoDau, ManChonKiep, ManHetKiep, ManBenVongXuyen, ManMoDauKiep } from './man-ngoai';

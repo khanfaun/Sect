@@ -32,7 +32,7 @@ function townsOf(k){return regionOf(k).nodes.filter(n=>(n.type==='tran'||n.type=
 function setRoute(e,dest){const p=findPath(e.at,dest);if(!p||p.length<2){e.route=[];e.to=null;return false;}e.route=p.slice(1);e.to=e.route[0];e.prog=0;e.dest=dest;return true;}
 function spawnEnt(type,k,o){
   const w=W();o=o||{};const T0=ENT_T[type];const R0=regionOf(k);const ns=R0.nodes;
-  if(entsHere(k).length>=12)return null;
+  if(W().ents.filter(e=>e.r===k).length>=12)return null;
   const e={id:(w.eid=(w.eid||0)+1),type,r:k,name:T0.n,icon:T0.i,at:null,to:null,prog:0,route:[],speed:T0.sp,until:w.t+ri(T0.life[0],T0.life[1])*HD,data:{},wait:0};
   if(type==='thuong'){const ts=townsOf(k);if(ts.length<2)return null;let a=pick(ts),b=pick(ts.filter(x=>x!==a));
     if(o.near!=null){const nb=neighbors(o.near);a=nodeById(pick(nb));const far=ns.filter(x=>x.id!==o.near&&x.id!==a.id&&x.type!=='ai');const p=pick(far);e.at=a.id;setRoute(e,o.near);e.route=e.route.concat((findPath(o.near,p.id)||[]).slice(1));e.dest=p.id;}
@@ -148,7 +148,7 @@ function worldCoarseEnts(){const w=W();w.ents=w.ents.filter(e=>e.until>w.t);}
 function openBoard(n){
   const r=G.run;const m=Math.floor(W().t/HM);
   if(!n.board||n.board.m!==m||n.board.kiep!==r.kiep){
-    const L=[];const ns=regionOf(r.region).nodes.filter(x=>x.id!==n.id&&x.type!=='ai');
+    const L=[];const ns=regionOf(r.khu||0).nodes.filter(x=>x.id!==n.id&&x.type!=='ai');
     for(let i=0;i<ri(2,3);i++){
       const tgt=pick(ns);const dist=pathLen(findPath(n.id,tgt.id)||[n.id]);const kind=tgt.danger>=1&&chance(.55)?'diet':'den';
       const days=Math.ceil(dist/walkSpeed()/24)+ri(3,8);

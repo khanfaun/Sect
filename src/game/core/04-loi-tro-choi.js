@@ -203,5 +203,5 @@ function baseV(type){
   return {p:pView(),pl:r.place.n,plt:TYPE_NAME[t]||'',quoc:w.quoc,que:r.que,sect:s1.n,sect2:s2.n,sectC:pick(sC).n,sectM:pick(sM).n,
     sectP:(ss.find(s=>s.al==='phat')||s1).n,rv:alive.length?rivalView(pick(alive)).ten:genName('nam',true),
     canh:T('{canh_'+t+'}'),who:genName(chance(.5)?'nam':'nu'),nick:pick(NAME.ma1),dan:PILL[btPill()].n,
-    reg:REG[r.region].n,lao:pick(NAME.ho2)+' '+pick(NAME.nam)};
+    reg:khuName(r.khu||0),lao:pick(NAME.ho2)+' '+pick(NAME.nam)};
 }

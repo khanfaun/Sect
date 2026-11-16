@@ -33,7 +33,7 @@ export function SaoHuyet({ sc }) {
   const r = PS.G.run;
   return (
     <Card title="Sào huyệt" sub={r.place.n} foot={<GoBtn act="bossFight" label="Nghênh chiến" />}>
-      <FoeLine en={sc.b} big sub={'Thủ lĩnh vùng ' + PS.REG[r.region].n} />
+      <FoeLine en={sc.b} big sub={'Thủ lĩnh ' + PS.khuName(r.khu || 0)} />
       <div className="story"><p className="new">{sc.text}</p></div>
     </Card>
   );

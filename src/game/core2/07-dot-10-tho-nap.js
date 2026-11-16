@@ -77,7 +77,7 @@ function venueDo(v,id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')ret
   if(o.fight){n.vsp.until=-1;sc.venue=null;if(o.id==='gaysu')sc.msg=['Ngươi đứng dậy, gõ nhẹ lên bàn gã say. Gã quay lại, mắt đỏ ngầu.'];else sc.msg=['Đi được nửa đường, một toán cướp nhảy ra chặn xe.'];
     startCombat({cnt:o.id==='hotong'?2:1},{kind:'node'});const cs=G.run.scene;if(cs)cs.venueWin=g;return true;}
   if(o.spec)n.vsp.until=-1;
-  if(g.info){if(v==='tea'&&id==='nghe'||v==='tuu'||v==='inn'){teaHouse(n);}else{for(let i=0;i<g.info;i++){const c=regionOf(r.region).nodes.filter(x=>x.fog===0);if(c.length){const x=pick(c);hearOf(x);sc.msg.push('Tiểu nhị chỉ đường tới '+x.name+'.');}}}}
+  if(g.info){if(v==='tea'&&id==='nghe'||v==='tuu'||v==='inn'){teaHouse(n);}else{for(let i=0;i<g.info;i++){const c=regionOf(r.khu||0).nodes.filter(x=>x.fog===0);if(c.length){const x=pick(c);hearOf(x);sc.msg.push('Tiểu nhị chỉ đường tới '+x.name+'.');}}}}
   const LEAD={tea:{nghe:[''],hoi:['Tiểu nhị nhận tiền, ghé tai nói nhỏ.','Tiểu nhị đút tiền vào tay áo, kéo ngươi ra góc khuất.','“Khách quan hỏi đúng người rồi.” Tiểu nhị cười hề hề.'],
       co:['Ván cờ kéo dài tới khi trà nguội. Ông khách thua, cười khà, kể cho ngươi nghe chuyện đi đường.','Hai bên giằng co từng nước. Cuối cùng ông khách buông quân, kể chuyện một chuyến vượt núi năm xưa.','Ông khách đi nước nào cũng chậm rãi. Thua rồi, ông ta chỉ cho ngươi mấy mẹo sống sót nơi hoang dã.'],
       tinh:['Ngươi ngồi yên, nhìn khói trà bay lên. Lòng lắng như mặt hồ.','Tiếng ồn quanh quán dần xa. Chỉ còn hơi trà ấm trong tay.','Nắng xiên qua song cửa. Ngươi uống cạn chén, thấy lòng nhẹ hẳn.'],doicau:['Ngươi viết vế đối. Lão tú tài đọc đi đọc lại, rồi vỗ đùi: “Hay!”']},

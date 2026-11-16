@@ -153,7 +153,7 @@ const ACT={
   center:()=>{Map2.center();},
   noteEdit:id=>{UI.modal={k:'note',id:+id};setTimeout(()=>{const i=$('#noteIn');if(i)i.focus();},50);},
   noteSave:id=>{const i=$('#noteIn');if(noteSet(+id,i?i.value:'')===false){note('Đã ghim đủ 50 chỗ.');}UI.modal=null;},
-  noteGo:k=>{const n=nodeById(+k);if(n&&Math.floor(n.id/100)===G.run.region&&n.fog>=1){UI.panel=null;UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else note('Chỗ ấy không ở vùng này, hoặc kiếp này ngươi chưa biết tới.');},
+  noteGo:k=>{const n=nodeById(+k);if(n&&n.fog>=1){UI.panel=null;UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else note('Chỗ ấy không ở vùng này, hoặc kiếp này ngươi chưa biết tới.');},
   pactGo:a=>{UI.modal=null;UI.confirm=null;const sc=G.run.scene;const A=sc&&sc.type==='place'&&placeActs(nodeById(sc.id)).find(x=>x.a===a);UI.lastQ=PL_N[a]||(A&&A.l)||null;placeAct(a);UI.plTop=1;},
   vclose:()=>{const sc=G.run&&G.run.scene;if(sc)sc.venue=null;},
   vopt:id=>{const sc=G.run&&G.run.scene;if(!sc||!sc.venue)return;const o=venueOpts(nodeById(sc.id),sc.venue).find(x=>x.id===id);if(!o)return;UI.modal={k:o.lack||o.no?'vreq':'vconf',v:sc.venue,id};},
@@ -182,7 +182,7 @@ const ACT={
   quest:i=>takeQuest(i),
   qExp:id=>{UI.qOpen=UI.qOpen||{};UI.qOpen[id]=!UI.qOpen[id];},
   qDrop:id=>{UI.modal={k:'qdrop',id};},qDropGo:id=>{UI.modal=null;questCancel(id);},
-  qNav:id=>{const q=G.run.quests.find(x=>x.id===id);if(!q)return;const n=nodeById(q.node);if(!n)return;if(Math.floor(n.id/100)!==G.run.region){note('Nơi ấy không ở vùng này.');return;}
+  qNav:id=>{const q=G.run.quests.find(x=>x.id===id);if(!q)return;const n=nodeById(q.node);if(!n)return;
     UI.panel=null;if(G.run.scene&&G.run.scene.type!=='combat')G.run.scene=null;if(n.fog>=1){UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else{UI.sel=null;Map2.focus(n.x,n.y);note('Nơi ấy còn chìm trong sương mù, chỉ biết đại khái ở quanh đây.');}},
   bsel:k=>buryToggle(k),
   buryGo:()=>buryItems(),

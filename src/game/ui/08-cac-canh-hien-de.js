@@ -81,7 +81,7 @@ function vPlace(sc){
   if(g)b+=`<h3 class="grp">${ib('book','ink')}Thường nhật</h3>`+g;
   const canEx=n.type!=='ai';
   const M=placeMeta(n),dg=dangerTag(n);
-  const meta=`<div class="pl-meta"><span>${esc(capS(TYPE_NAME[n.type]))}</span><span>${esc(REG[r.region].n)}</span><span class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${esc(DTAG[dg])}</span><span>Linh khí ${esc(LK_N[lkOf(n)].toLowerCase())}</span></div>`;const kv=(M?`<div class="pl-kv"><div><small>Tọa trấn</small><span>${esc(M.luc)}</span></div><div><small>Quy mô</small><span>${esc(M.quy)}</span></div></div>`:'');
+  const meta=`<div class="pl-meta"><span>${esc(capS(TYPE_NAME[n.type]))}</span><span>${esc(khuName(khuOfId(n.id)))}</span>${n.type==='tong'&&n.sz!=null?`<span>${SECT_SZ[n.sz]}</span>`:''}<span class="nc-g dg${dg}"${ta(dangerWhy(n))}><i></i>${esc(DTAG[dg])}</span><span>Linh khí ${esc(LK_N[lkOf(n)].toLowerCase())}</span></div>`;const kv=(M?`<div class="pl-kv"><div><small>Tọa trấn</small><span>${esc(M.luc)}</span></div><div><small>Quy mô</small><span>${esc(M.quy)}</span></div></div>`:'');
   return card(n.name,'',kv+b,{cls:'tall place',art:ASSET.place[n.type]?`<div class="art strip pimg"><img class="asset" src="${ASSET.place[n.type]}" alt=""></div>`:sceneCv(n.name,r.region,n.type,'strip'),
     head:`<button class="xb sc-x" data-act="leave"${ta('Đóng, rời khỏi nơi này')} aria-label="Đóng">${ic('close')}</button>${meta}`,
     foot:(canEx?`<button class="btn" data-act="exStat"${ta('Xem nơi này có gì: yêu ma, vật liệu, tỉ lệ')}>Thăm dò</button>`:'')+`<span class="grow"></span><button class="btn" data-act="leave">Rời đi</button>`});

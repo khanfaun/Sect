@@ -6,7 +6,7 @@
   if(n&&n.board){if(n.board.until&&w.t>n.board.until)n.board=null;else if(n.board.until)n.board.m=Math.floor(w.t/HM);}
   _ob17(n);if(!n||!n.board)return;const B=n.board;
   if(!B.until){B.until=w.t+ri(20,60)*HD;
-    if(chance(.22)){const ns=regionOf(G.run.region).nodes.filter(x=>{if(x.id===n.id||x.type==='ai'||x.danger<1)return false;const p0=findPath(n.id,x.id);return p0&&travelHours(p0)<=90*24;});const tgt=ns.length?pick(ns):null; // việc gấp chỉ nhắm nơi đi tới trong chừng ba tháng
+    if(chance(.22)){const ns=regionOf(G.run.khu||0).nodes.filter(x=>{if(x.id===n.id||x.type==='ai'||x.danger<1)return false;const p0=findPath(n.id,x.id);return p0&&travelHours(p0)<=90*24;});const tgt=ns.length?pick(ns):null; // việc gấp chỉ nhắm nơi đi tới trong chừng ba tháng
       if(tgt){const p=findPath(n.id,tgt.id);const tH=p?travelHours(p):24*30;const g=clamp(questGrade({node:tgt.id,kind:'diet'})+(chance(.25)?2:1),1,5);
         const q={id:'qs'+n.id+'_'+Math.floor(w.t),text:pick(['Gấp: diệt yêu vật đang tàn sát ở ','Gấp: bắt kẻ cướp đang trốn ở ','Gấp: cứu người bị bắt vào '])+tgt.name,node:tgt.id,kind:'diet',days:Math.ceil(tH*1.1/24)+ri(2,6),special:1,acc:w.t+ri(1,4)*HD,grade:g,v2:1,taken:false};
         q.reward=questRewardGen(g,G.run.region);q.reward.st=Math.round(q.reward.st*1.3);hearOf(tgt);B.list.unshift(q);}}}};}

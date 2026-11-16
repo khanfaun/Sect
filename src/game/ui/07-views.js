@@ -82,9 +82,9 @@ function dockHTML(){
   if(r.moving){const m=r.moving;const dest=nodeById(m.path[m.path.length-1]);let L=0;for(let i=m.seg;i<m.path.length-1;i++)L+=edgeLen(m.path[i],m.path[i+1])*(i===m.seg?1-m.prog:1);
     return `<div class="dock go"><div class="dk-t"><small>Đang trên đường tới</small><b>${esc(dest.name)}</b><small id="mvLeft">còn ${Math.round(L)} dặm</small></div><button class="btn" data-act="stop">Dừng lại</button></div>`;}
   const n=UI.sel!=null&&nodeById(UI.sel);
-  if(n&&n.fog>=1&&Math.floor(n.id/100)===r.region&&UI.cardMin){const here=n.id===r.at;
+  if(n&&n.fog>=1&&UI.cardMin){const here=n.id===r.at;
     return `<div class="dock loc">${ASSET.place[n.type]?`<span class="loc-pic${n.fog>=2||n.memory?'':' rum'}"><img src="${ASSET.place[n.type]}" alt=""></span>`:''}<span class="lc-n">${esc(n.name)}</span>${here?`<button class="btn pri" data-act="enter">${ENTER_L[n.type]||'Vào'}</button>`:`<button class="btn pri" data-act="go" data-arg="${n.id}"${findPath(r.at,n.id)?'':' disabled'}>Đi tới</button>`}<button class="icb" data-act="cardMax"${ta('Mở rộng')} aria-label="Mở rộng">${ic('up')}</button></div>`;}
-  if(n&&n.fog>=1&&Math.floor(n.id/100)===r.region&&!UI.cardMin){
+  if(n&&n.fog>=1&&!UI.cardMin){
     const I=nodeInfo(n);const here=n.id===r.at;const dg=dangerTag(n);
     let mid='';
     const nt=noteOf(n.id);const M=I.sure?placeMeta(n):null;

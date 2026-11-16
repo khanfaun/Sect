@@ -42,7 +42,7 @@ function afterlife(r,cause,info){
   const keep=[];
   for(const L of w.legacy){
     if(L.done){continue;}
-    if(L.t==='an'&&chance(.5)){const pool=[];for(const R0 of w.regions.slice(0,Math.max(1,(r.maxRegion||0)+1)))for(const x of R0.nodes)if(['tran','thanh','tong'].includes(x.type)&&!x.patron)pool.push(x);
+    if(L.t==='an'&&chance(.5)){const pool=[];for(const R0 of w.regions)for(const x of R0.nodes)if(['tran','thanh','tong'].includes(x.type)&&!x.patron)pool.push(x);
       if(pool.length){const x=pick(pool);x.patron={ten:L.ten,who:L.who,d:L.d,role:x.type==='tong'?'trưởng lão':'chưởng quỹ'};continue;}}
     if(L.t==='oan'&&chance(.5)){L.feud=1;keep.push(L);continue;}
     if(L.t==='oan'&&!L.feud)continue;
@@ -54,7 +54,7 @@ function afterlife(r,cause,info){
 // tin đồn về các kiếp trước
 const RUMOR_KIEP=['Trà lâu vẫn kể chuyện {$a}, người năm {$y} từng {$v}. Có kẻ bảo người ấy chưa chết, chỉ đổi một cái tên.','Ở {$pl} có tấm bia khắc tên {$a}. Người qua đường vẫn dừng lại vái một vái.','“Thời {$a} còn sống ấy à…” Lão già lắc đầu. “Bây giờ không còn ai như thế nữa.”'];
 function rumorKiep(){const L=G.meta.lives.filter(x=>x.hero);if(!L.length)return null;const x=pick(L);return T(RUMOR_KIEP,{a:x.ten,y:x.y||tYear(W().t)-20,v:x.hero,pl:placeName(pick(['nui','thanh','tran']))});}
-function shopExtra(items,n){const r=G.run;if(n&&W().ents.some(e=>e.type==='di'&&e.data.k==='daugia'&&e.at===n.id)&&r.region<4)items.push({k:'pass',reg:r.region+1,n:'Lệnh bài thông quan '+REG[r.region+1].n,p:price(90)});}
+function shopExtra(items,n){const r=G.run;if(n&&W().ents.some(e=>e.type==='di'&&e.data.k==='daugia'&&e.at===n.id)&&false)items.push(null);} // không còn quan ải nên không bán lệnh bài thông quan
 
 // lưu (được UI gán)
 let saveSoon=()=>{};
