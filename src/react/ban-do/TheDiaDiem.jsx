@@ -120,7 +120,7 @@ export function TheDiaDiem() {
     );
   }
   const n = UI.sel != null && PS.nodeById(UI.sel);
-  if (n && n.fog >= 1 && Math.floor(n.id / 100) === r.region) {
+  if (n && n.fog >= 1) {
     if (!UI.cardMin) return <TheNoi n={n} />;
     const here = n.id === r.at;
     return (

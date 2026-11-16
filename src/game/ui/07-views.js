@@ -3,15 +3,17 @@ function sectText(){const r=G.run;return r.flags.tongmon?'Đệ tử tông môn'
 function clkStr(t){return `<span>ngày ${Math.floor((t%HM)/HD)+1} · tháng ${tMonth(t)+1}</span><b class="ck-y">Năm ${tYear(t)}</b><span>giờ ${gioName(t)}</span>`;}
 // thẻ thông tin quận: hiện khi chạm một ô đất trống
 function distCardHTML(c){const g=geo(),I=hexInfo(c),r=G.run;
-  if(I.sea)return `<div class="dock card nc"><div class="nc-top"><div class="nc-tt"><b>Vân Hải</b><small>mây biển</small></div><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div><p class="nc-d sm">Không có đường bộ.</p></div>`;
+  if(I.sea)return `<div class="dock card nc"><div class="nc-top"><div class="nc-tt"><b>Vô Tận Hải</b><small>biển khơi</small></div><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div><p class="nc-d">Không có đường bộ. Đi ngang qua tốn gấp sáu lần đồng bằng.</p></div>`;
   const d=g.dist[c];const cells=[];for(let i=0;i<g.dist.length;i++)if(g.dist[i]===d&&g.reg[i]===I.reg)cells.push(i);
   const tc={};for(const i of cells){const t=TER_N[g.ter[i]];tc[t]=(tc[t]||0)+1;}const ter=Object.keys(tc).sort((a,b)=>tc[b]-tc[a]).slice(0,3);
   const all=regionOf(I.reg).nodes.filter(n=>g.dist[nodeHex(n)]===d);const kn=all.filter(n=>n.fog>=2||n.memory);
   const dg=kn.length?Math.max(...kn.map(dangerTag)):0;const lk=kn.length?Math.round(kn.reduce((a,n)=>a+lkOf(n),0)/kn.length):1;
   const luc=kn.find(n=>n.type==='tong')||kn.find(n=>n.type==='thanh')||kn.find(n=>n.type==='tran');
-  return `<div class="dock card nc ncs"><div class="nc-top"><div class="nc-tt"><b>${esc(I.dist||'Vùng vô danh')}</b><small>quận thuộc ${esc(I.regName)}</small></div><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div>
-   <p class="ncs-r"><span class="nc-g dg${dg}"><i></i>${kn.length?DTAG[dg]:'Chưa rõ an nguy'}</span><span>Linh khí ${kn.length?LK_N[lk].toLowerCase():'chưa rõ'}</span></p>
-   <p class="ncs-r"><span>Địa thế: <b>${esc(ter.join(', '))}</b></span><span>Trấn giữ: <b>${luc?esc(placeMeta(luc).luc):'chưa rõ'}</b></span></p></div>`;}
+  return `<div class="dock card nc"><div class="nc-top"><div class="nc-tt"><b>${esc(I.dist||'Vùng vô danh')}</b><small>quận thuộc ${esc(I.regName)}</small></div><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div>
+   <p class="nc-m"><span class="nc-g dg${dg}"><i></i>${kn.length?DTAG[dg]:'chưa rõ'}</span><span>linh khí ${kn.length?LK_N[lk].toLowerCase():'chưa rõ'}</span><span>rộng ${cells.length} ô</span></p>
+   <div class="nc-kv"><div><small>Địa thế</small><b>${esc(ter.join(', '))}</b></div><div><small>Trấn giữ</small><b>${luc?esc(placeMeta(luc).luc):'Chưa rõ'}</b></div></div>
+   <p class="nc-d sm" style="-webkit-line-clamp:3">${kn.length?'Nơi đã biết ('+kn.length+'/'+all.length+'): '+esc(kn.map(n=>n.name).join(', ')):'Chưa biết nơi nào trong quận này'+(all.length?' (nghe nói có '+all.length+' nơi).':'.')}</p>
+   <p class="nc-d sm">Ô đang chọn: ${esc(I.ter.toLowerCase())}, đi qua tốn ${numVN(TER_COST[g.ter[c]])} lần đồng bằng.</p></div>`;}
 function hudIsOpen(){return G.run&&G.run.scene?!!UI.hudScene:UI.hudOpen;}
 function hudHTML(){
   const r=G.run,s=S(),t=W().t;const left=s.life-r.age;const warn=left<s.life*0.12;const pa=PART[partOf(t)];
@@ -61,10 +63,10 @@ function mapUiHTML(){
   const r=G.run;const sp=UI.speed||1;
   const B=(act,arg,lab,tip,on,dis)=>`<button class="mb${on?' on':''}" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}${dis?' disabled':''}${ta(tip)}>${lab}</button>`;
   let h=`<div class="mleft wb">${woundBar()}</div>`;
-  h+=`<div class="mright">${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}${B('legendOpen',null,ic('list'),'Chú giải ký hiệu trên bản đồ',UI.panel==='more'&&UI.tab.more==='legend')}${B('zoomAll',null,ic('globe'),'Thu nhỏ hết cỡ: xem cả bản đồ')}${B('center',null,ic('target'),'Về chỗ ngươi')}</div>`;
+  h+=`<div class="mright">${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}${B('legendOpen',null,ic('list'),'Chú giải ký hiệu trên bản đồ')}${B('center',null,ic('target'),'Về chỗ ngươi')}</div>`;
   // góc trái dưới: luyện chế, túi đồ, bế quan (nhấp nháy khi đủ điều kiện đột phá)
   const bqNo=bqCan();const brk=canBreak();
-  h+=`<div class="mbl">${B('panel','craft',ic('flask'),'Luyện chế: luyện đan, luyện khí từ vật liệu',UI.panel==='craft',!!r.moving)}${B('bagOpen',null,ic('bag'),'Túi đồ',UI.panel==='char'&&UI.tab.char==='bag')}<button class="mb${brk?' glow':''}" data-act="hudBq"${bqNo?' disabled':''}${ta(bqNo||(brk?'Bế quan · tu vi viên mãn: vào để đột phá':'Bế quan tu luyện ngay tại đây'))}>${ic('seat')}</button><button class="mb${UI.modal&&/cg/.test(UI.modal.k||'')?' on':''}" data-act="cgOpen"${ta('Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá')}>${ic('yin')}</button>${typeof DEV!=='undefined'&&DEV?`<button class="mb dev" data-act="devOpen"${ta('Dev test: thử hiệu ứng')}>${ic('bolt')}</button>`:''}</div>`;
+  h+=`<div class="mbl">${B('panel','craft',ic('flask'),'Luyện chế: luyện đan, luyện khí từ vật liệu',0,!!r.moving)}${B('bagOpen',null,ic('bag'),'Túi đồ')}<button class="mb${brk?' glow':''}" data-act="hudBq"${bqNo?' disabled':''}${ta(bqNo||(brk?'Bế quan · tu vi viên mãn: vào để đột phá':'Bế quan tu luyện ngay tại đây'))}>${ic('seat')}</button><button class="mb" data-act="cgOpen"${ta('Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá')}>${ic('yin')}</button>${typeof DEV!=='undefined'&&DEV?`<button class="mb dev" data-act="devOpen"${ta('Dev test: thử hiệu ứng')}>${ic('bolt')}</button>`:''}</div>`;
   return h;
 }
 const ENTER_L={tran:'Vào thôn trấn',thanh:'Vào thành',tong:'Lên sơn môn',ai:'Tới cửa ải',sao:'Vào sào huyệt',dong:'Vào hang',phe:'Vào phế tích',ma:'Vào ma địa',thien:'Bước lên',rung:'Vào rừng',nui:'Lên núi',song:'Ra bến nước',bien:'Ra bờ biển',hoang:'Vào hoang dã'};
@@ -80,9 +82,9 @@ function dockHTML(){
   if(r.moving){const m=r.moving;const dest=nodeById(m.path[m.path.length-1]);let L=0;for(let i=m.seg;i<m.path.length-1;i++)L+=edgeLen(m.path[i],m.path[i+1])*(i===m.seg?1-m.prog:1);
     return `<div class="dock go"><div class="dk-t"><small>Đang trên đường tới</small><b>${esc(dest.name)}</b><small id="mvLeft">còn ${Math.round(L)} dặm</small></div><button class="btn" data-act="stop">Dừng lại</button></div>`;}
   const n=UI.sel!=null&&nodeById(UI.sel);
-  if(n&&n.fog>=1&&UI.cardMin){const here=n.id===r.at;
+  if(n&&n.fog>=1&&Math.floor(n.id/100)===r.region&&UI.cardMin){const here=n.id===r.at;
     return `<div class="dock loc">${ASSET.place[n.type]?`<span class="loc-pic${n.fog>=2||n.memory?'':' rum'}"><img src="${ASSET.place[n.type]}" alt=""></span>`:''}<span class="lc-n">${esc(n.name)}</span>${here?`<button class="btn pri" data-act="enter">${ENTER_L[n.type]||'Vào'}</button>`:`<button class="btn pri" data-act="go" data-arg="${n.id}"${findPath(r.at,n.id)?'':' disabled'}>Đi tới</button>`}<button class="icb" data-act="cardMax"${ta('Mở rộng')} aria-label="Mở rộng">${ic('up')}</button></div>`;}
-  if(n&&n.fog>=1&&!UI.cardMin){
+  if(n&&n.fog>=1&&Math.floor(n.id/100)===r.region&&!UI.cardMin){
     const I=nodeInfo(n);const here=n.id===r.at;const dg=dangerTag(n);
     let mid='';
     const nt=noteOf(n.id);const M=I.sure?placeMeta(n):null;

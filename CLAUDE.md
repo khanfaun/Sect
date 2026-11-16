@@ -16,6 +16,7 @@ Người dùng không phải lập trình viên: trả lời ngắn, ít thuật
 - Tính năng mới quan trọng nên có `dbg` để lần sau kiểm bằng chữ.
 
 ## Lưu ý kỹ thuật đã gặp
+- **Giao diện thật là React** (`src/react/**`: ban-do, bang, canh, hop-thoai…). Các hàm `*HTML()` trong `src/game/ui/*.js` (vd 07-views.js) chỉ là bản dự phòng cũ qua `rxv(tên, dự_phòng)`, không chạy khi có bản React. Sửa giao diện thì sửa ở `src/react`, KHÔNG sửa bản cũ.
 - Tệp trong `src/game/` ghép theo thứ tự `src/game/thu-tu.json`; hàm sau ghi đè hàm trước bằng kiểu bọc `{const _x=f;f=function(){...}}`. Tệp mới phải ghi tên vào thu-tu.json.
 - Chiêu thức không nằm trực tiếp trong `r.skills`: `syncSkills()` dựng lại từ công pháp. Muốn bỏ hẳn một chiêu phải ghi vào `r.skUsed` (xem 20-ngo-tinh-khi-van.js).
 - Chiêu tier 3 trở lên là "thần thông" chỉ tung qua pháp tướng; chiêu dùng một lần nên đặt tier thấp hơn.
