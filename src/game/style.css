@@ -1441,7 +1441,7 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 @keyframes fxban{0%{opacity:0;transform:translate(-50%,0) scale(1.8)}18%{opacity:1;transform:translate(-50%,0) scale(1)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-16px) scale(.96)}}
 
 /* nút quanh bản đồ: nền đặc, không viền; đang dùng thì đổ màu tối như nút lưới */
-.mright .mb,.mbl .mb,.mtime .mb{background:var(--paper);border-color:transparent;box-shadow:0 1px 4px rgba(0,0,0,.14)}
+.mleft .mb,.mright .mb,.mbl .mb,.mtime .mb{background:var(--paper);border-color:transparent;box-shadow:0 1px 4px rgba(0,0,0,.14)}
 .mright .mb.on,.mbl .mb.on,.mtime .mb.on{background:var(--acc);color:var(--paper);border-color:transparent}
 
 /* thẻ quận gọn: tên, quận thuộc, an nguy, linh khí, địa thế, trấn giữ */
@@ -1469,3 +1469,8 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 .np-k{margin:3px 0 0;display:flex;gap:7px;align-items:baseline;color:var(--ink)}.np-k small{flex:none;color:var(--ink3);font-size:.82em;letter-spacing:.06em}
 .np-d{margin:4px 0 0;color:var(--ink2);font-size:.92em;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .np .nc-tags{margin:4px 0 0}.np .nc-n{margin:4px 0 0}.np-b{display:flex;gap:6px;margin-top:8px}.np-b .btn{flex:1;padding:6px 10px;font-size:.95em}.go-t{font-weight:400;opacity:.85}
+
+.np.min{width:min(236px,calc(100vw - 20px))}.np.min .np-dg{margin:5px 0 2px}.np.min .np-pic{width:34px;height:34px}.np.min .np-b{margin-top:6px}
+.np-x .icb{width:22px;height:22px}.np-x .icb svg{width:14px;height:14px}.np-x{gap:0}
+.np-pic.ter{color:#fff}.np-pic.ter svg{width:20px;height:20px}
+.mleft .mb{width:38px;height:38px;border-radius:10px;margin-top:6px}.mleft .mb .ic{width:20px;height:20px}

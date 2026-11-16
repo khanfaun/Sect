@@ -91,6 +91,11 @@ const TESTS = {
     // sang khu khác bằng đi bộ
     const go = run('(()=>{const r=G.run;const a=r.region;const k=(a+1)%5;const t=regionOf(k).nodes.find(n=>n.type==="tran"||n.type==="thanh")||regionOf(k).nodes[0];t.fog=Math.max(1,t.fog);let tries=0;while(G.run&&r.at!==t.id&&tries++<8){r.scene=null;travelTo(t.id);let g=0;while(G.run&&r.moving&&g++<4000){if(r.scene)r.scene=null;travelTick(6);}}return [a,G.run&&G.run.region,k];})()');
     ok(go[1] === go[2] && go[0] !== go[1], `đi bộ sang đại khu vực khác (${go[0]} → ${go[1]})`);
+    const spl = run('(()=>{const g=geo(),M={};for(let i=0;i<HN;i++){if(g.reg[i]<0)continue;const d=g.dist[i];if(M[d]!=null&&M[d]!==g.reg[i])return d;M[d]=g.reg[i];}return -1;})()');
+    ok(spl === -1, 'mỗi quận nằm trọn trong một đại khu vực');
+    // đi tới ô đất bất kỳ (điểm hoang tạm)
+    const wp = run('(()=>{const r=G.run,g=geo();const h0=nodeHex(nodeById(r.at));let c=-1;for(let i=0;i<HN&&c<0;i++){if(g.reg[i]>=0&&terWalk(g.ter[i])&&hexNode(i)==null&&Math.abs(i-h0)>25&&Math.abs(i-h0)<80)c=i;}const hrs=cellHours(c);const n=wpMake(c);let tries=0;while(G.run&&r.at!==n.id&&tries++<10){r.scene=null;travelTo(n.id);let q=0;while(G.run&&r.moving&&q++<4000){if(r.scene)r.scene=null;travelTick(6);}}const ok1=r.at===n.id&&nodeHex(nodeById(r.at))===c;const hx=hexNode(c);return [ok1,hrs>0,hx==null,nodeById(r.at).wp];})()');
+    ok(wp[0] && wp[1] && wp[2] && wp[3], 'đi tới ô đất bất kỳ: đến đúng ô, có thời gian, không thành icon địa điểm ' + JSON.stringify(wp));
     // tầm nhìn: đồng bằng trống nhìn xa hơn chỗ nhiều núi
     const vv = run('(()=>{const g=geo();let a=0,na=0,b=0,nb=0;for(let i=0;i<HN;i+=7){if(g.reg[i]<0)continue;const nbs=hexNb(i);const m=nbs.filter(j=>g.ter[j]===3&&g.el[j]>=g.el[i]).length;if(g.ter[i]===1&&m===0&&na<30){a+=visCells(i,6).length;na++;}else if(g.ter[i]!==3&&m>=3&&nb<30){b+=visCells(i,6).length;nb++;}}return [a/na,b/nb];})()');
     ok(vv[0] > vv[1], `núi chặn tầm nhìn (đồng bằng ${Math.round(vv[0])} ô, kẹt giữa núi ${Math.round(vv[1])} ô)`);

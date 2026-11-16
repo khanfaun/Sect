@@ -34,7 +34,7 @@ const P2D={};function p2d(k){return P2D[k]||(P2D[k]=new Path2D(GLYPH[k]||GLYPH.t
 const NODE_CAT={tran:'gold',thanh:'gold',tong:'acc',rung:'jade',nui:'jade',song:'jade',bien:'jade',hoang:'jade',thien:'acc',phe:'vio',dong:'vio',ma:'seal',sao:'seal',ai:'ink',linhdia:'acc',khoang:'vio',duoc:'jade',cho:'gold',ancu:'acc',dam:'jade'};
 
 const HERO_IMG={};function heroImg(){const u=ASSET.hero.me;if(!u||typeof Image==='undefined')return null;if(!HERO_IMG[u]){const im=new Image();im.onload=()=>Map2.invalidate();im.src=u;HERO_IMG[u]=im;}return HERO_IMG[u];}
-const ENT_GLYPH={thutrieu:'paw',di:'star'};const ICPATH={};function icPath(k){return ICPATH[k]||(ICPATH[k]=new Path2D(ICP[k]));}
+const ENT_GLYPH={thutrieu:'paw',di:'star',tuantra:'shield',thienkieu:'medal',truysat:'sword',khach:'walk'};const ICPATH={};function icPath(k){return ICPATH[k]||(ICPATH[k]=new Path2D(ICP[k]));}
 function entCol(t,C){return ['thutrieu','truysat'].includes(t)?C.seal:t==='di'?C.vio:t==='thuong'?C.gold:C.acc;}
 function avLetter(name){const w=String(name||'?').trim().split(/\s+/);return (w[w.length-1]||'?')[0].toUpperCase();}
 function mapNode(n){const k=Math.floor(n.id/100);return mapXY(k,n.x,n.y);}
@@ -268,8 +268,8 @@ const Map2=(()=>{
         const sel=CFG.grid&&!zTop?(UI.cell!=null?UI.cell:null):null;
         if(fillA>0.01){for(let k=0;k<5;k++){ctx.fillStyle=hexA(AREA_COL[k],0.2*fillA);ctx.fill(hx.rp[k]);}}
         if(macroA>0.01){ctx.strokeStyle=hexA(BR,0.5*macroA);ctx.lineWidth=1/z;ctx.setLineDash([7/z,5/z]);ctx.stroke(hx.macro);ctx.setLineDash([]);}
-        if(CFG.grid&&distA>0.01){ctx.strokeStyle=hexA(C.dark?'#10151b':'#fff4d6',0.6*distA);ctx.lineWidth=2.6/z;ctx.stroke(hx.dist); // viền sáng để ranh quận không chìm vào nền đã khám phá
-          ctx.strokeStyle=hexA(BR,0.85*distA);ctx.lineWidth=1/z;ctx.setLineDash([5/z,4/z]);ctx.stroke(hx.dist);ctx.setLineDash([]);
+        if(CFG.grid&&distA>0.01){ctx.strokeStyle=hexA(C.dark?'#10151b':'#fff4d6',0.6*distA);ctx.lineWidth=2.6/z;ctx.stroke(hx.dist);ctx.stroke(hx.macro); // viền sáng (ranh đại khu vực cũng là ranh quận) để ranh quận không chìm vào nền đã khám phá
+          ctx.strokeStyle=hexA(BR,0.85*distA);ctx.lineWidth=1/z;ctx.setLineDash([5/z,4/z]);ctx.stroke(hx.dist);ctx.stroke(hx.macro);ctx.setLineDash([]);
           const d=sel!=null&&g0.reg[sel]>=0?g0.dist[sel]:-1;
           if(d>=0&&hx.dp[d]){ctx.fillStyle=hexA(C.dark?'#ffffff':'#fff6dc',(C.dark?0.1:0.34)*distA);ctx.fill(hx.dp[d]);ctx.globalCompositeOperation=C.dark?'source-over':'multiply';ctx.strokeStyle=hexA(BR,0.32*distA);ctx.lineWidth=0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(hx.dp[d]);ctx.setLineDash([]);ctx.globalCompositeOperation='source-over';}}
         // địa điểm: tô các ô của nó bằng màu icon (phủ overlay, rất nhạt), nếu bật lưới thì có thêm đường ô mảnh
@@ -296,7 +296,7 @@ const Map2=(()=>{
       ctx.restore();}
     // mây trôi, hạt theo mùa, sắc trời theo buổi
     if(lv>0&&CFG.clouds){if(!cloudSpr)cloudSpr=cloudSprite();if(!clouds.length)for(let i=0;i<[0,9,16][lv];i++)clouds.push({x:Math.random()*(WORLD_W+500)-250,y:Math.random()*2500-250,s:160+Math.random()*220,v:6+Math.random()*10});
-      ctx.globalAlpha=C.dark?0.06:0.5;for(const c of clouds){c.x+=c.v*dt;if(c.x>WORLD_W+300)c.x=-500;const x=SX(c.x),y=SY(c.y),s=c.s*z*2;if(x+s<0||x>W0||y+s<0||y>H0)continue;ctx.drawImage(cloudSpr,x,y,s,s*0.6);}ctx.globalAlpha=1;}
+      const cA=clamp((0.55-zf)/0.1,0,1);ctx.globalAlpha=(C.dark?0.06:0.5)*cA;if(cA>0.01)for(const c of clouds){c.x+=c.v*dt;if(c.x>WORLD_W+300)c.x=-500;const x=SX(c.x),y=SY(c.y),s=c.s*z*2;if(x+s<0||x>W0||y+s<0||y>H0)continue;ctx.drawImage(cloudSpr,x,y,s,s*0.6);}ctx.globalAlpha=1;}
     if(fillA>0.02&&fillA<0.98&&cloudSpr){const p=1-fillA,pe=p*p*(3-2*p),a=Math.sin(p*Math.PI)*(C.dark?0.25:0.8),vh=viewH();ctx.save();
       const rnd=n=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);};
       for(let k=0;k<30;k++){const side=k%2?1:-1,r1=rnd(k+1),r2=rnd(k*3+7),r3=rnd(k*5+2),r4=rnd(k*7+11);
@@ -324,7 +324,7 @@ const Map2=(()=>{
     {const gc=geo();if(!gc.cent){const rs={},ds={};for(let i=0;i<gc.reg.length;i++){const k=gc.reg[i];if(k<0)continue;const p=hexCenter(i);const a=rs[k]||(rs[k]=[0,0,0]);a[0]+=p[0];a[1]+=p[1];a[2]++;const d=gc.dist[i];const b=ds[d]||(ds[d]=[0,0,0]);b[0]+=p[0];b[1]+=p[1];b[2]++;}gc.cent={rs,ds};}
      ctx.textAlign='center';ctx.textBaseline='middle';
      const ra=clamp(1-zf/0.2,0,1);const SERIF='"Cormorant Garamond","Noto Serif",Georgia,serif';if(ra>0){ctx.font=`600 ${Math.round(clamp(z*80,17,30))}px ${SERIF}`;for(const [k,a] of Object.entries(gc.cent.rs)){const x=SX(a[0]/a[2]),y=SY(a[1]/a[2]);ctx.fillStyle=hexA(C.ink2,0.5*ra);ctx.fillText(REG[k].n.toUpperCase().split('').join(' '),x,y);}}
-     const da=Math.min(clamp((zf-0.12)/0.08,0,1),clamp((0.5-zf)/0.08,0,1));if(da>0){ctx.font=`italic 600 ${Math.round(clamp(z*46,13,19))}px ${SERIF}`;for(const [d,a] of Object.entries(gc.cent.ds)){const nm=gc.dnames[d];if(!nm)continue;const x=SX(a[0]/a[2]),y=SY(a[1]/a[2]);if(x<-80||y<-30||x>W0+80||y>H0+30)continue;ctx.fillStyle=hexA(C.ink,da);ctx.fillText(nm,x,y);}}}
+     const da=Math.min(clamp((zf-0.12)/0.08,0,1),clamp((0.5-zf)/0.08,0,1));if(da>0){ctx.font=`italic 600 ${Math.round(clamp(z*46,13,19))}px ${SERIF}`;for(const [d,a] of Object.entries(gc.cent.ds)){const nm=gc.dnames[d];if(!nm)continue;const x=SX(a[0]/a[2]),y=SY(a[1]/a[2]);if(x<-80||y<-30||x>W0+80||y>H0+30)continue;{const tw=ctx.measureText(nm).width,fh=Math.round(clamp(z*46,13,19)),pw2=7,ph=3;ctx.fillStyle=hexA(C.paper,0.42*da);ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x-tw/2-pw2,y-fh*0.5-ph-1,tw+pw2*2,fh+ph*2+2,5);else ctx.rect(x-tw/2-pw2,y-fh*0.5-ph-1,tw+pw2*2,fh+ph*2+2);ctx.fill();}ctx.fillStyle=hexA(C.ink,da);ctx.fillText(nm,x,y);}}}
     if(false&&CFG.ring){ctx.beginPath();ctx.arc(SX(pos[0]),SY(pos[1]),senseR()*z,0,6.3);ctx.strokeStyle=hexA(C.acc,0.28);ctx.lineWidth=1;ctx.setLineDash([3,5]);ctx.stroke();ctx.setLineDash([]);}
     // điểm
     const s0=Math.max(10,HEXW*z*0.97);const small=z<0.5;const notes=w.notes||{};
