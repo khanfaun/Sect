@@ -17,9 +17,11 @@ function isPB(x){return !!x&&x.k!=='book'&&x.k!=='linhthu'&&slotOf(x)==='phapbao
   for(let i=0;i<12&&isPB(x)&&(relReq(x)<PB_MIN_REQ||!chance(PB_KEEP));i++)x=_gr32b(t);
   if(isPB(x)&&relReq(x)<PB_MIN_REQ){for(let i=0;i<30&&isPB(x);i++)x=_gr32b(t);}
   if(isPB(x)&&relReq(x)<PB_MIN_REQ)x.req=PB_MIN_REQ;return x;};}
-// 5) Từ Kết Đan, phần thưởng bớt bí tịch (một nửa đổi thành đan dược hoặc linh thạch)
-{const _gp32=genPicks;genPicks=function(kind){const L=_gp32.apply(this,arguments);const r=G.run;if(!r||(r.realm||0)<2)return L;
-  return L.map(o=>{if(o.k!=='skill'||!chance(0.5))return o;return chance(0.5)?{k:'pill',id:rollPill(),q:r.region>=3?ri(1,2):r.region>=1?ri(0,1):0}:{k:'st',n:Math.max(1,Math.round(ri(18,30)*SC[r.region]))};});};}
+// 5) Bí tịch rơi ra không vượt quá cảnh giới kế tiếp (đang Luyện Khí thì không gặp bí tịch Kết Đan)
+function artReqCap(){const r=G.run;return isPham()?0:(r.realm||0)+1;}
+{const _ga32=genArt;genArt=function(type,tier,sid,o){if(o||!G.run)return _ga32.apply(this,arguments);const cap=artReqCap();let a=_ga32(type,tier,sid,o);
+  for(let i=0;i<8&&a.req>cap;i++)a=_ga32(type,i<4?tier:Math.max(0,tier-1),sid,o);
+  if(a.req>cap){dbg('art.cap',{req:a.req,cap});a=_ga32(type,Math.min(tier,cap+1),sid,{req:cap});}return a;};}
 // 6) Bậc thiên phú: lực chiến bằng người sàn là Bình phàm (trước bị tính là Bất phàm)
 const TAL_RT=[0.9,1.25,1.7,2.4]; // Phế vật · Bình phàm · Bất phàm · Tinh anh · Thiên kiêu
 function talLvQ(q){let lv=0;for(const x of TAL_RT)if(q>=x-1e-9)lv++;return lv;}
