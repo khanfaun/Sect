@@ -63,6 +63,24 @@ const TESTS = {
     await shot(p, 'bando-zoom');
   },
   // ô lật gương (vùng 4, 5): mảnh chi tiết phải được vẽ
+  // đổi buổi/mùa: đang đi thì giữ ảnh cũ; dừng lại mới đổi, có chuyển cảnh mực loang rồi kết thúc
+  async doibuoi(p) {
+    await p.waitForTimeout(800);
+    const base0 = await ev(p, () => Map2.mapKey.split('|')[0]);
+    // ép đồng hồ sang buổi khác trong lúc "đang đi"
+    await ev(p, () => { const r = G.run; const o = allNodes().find(n => n.id !== r.at); r.moving = { path: [r.at, o.id], seg: 0, prog: 0.3 }; const h = tHour(W().t); W().t += (isDay(W().t) ? 19 - h + 1 : 24 - h + 8); Map2.invalidate(); });
+    await p.waitForTimeout(700);
+    const mv = await ev(p, () => Map2.mapKey.split('|')[0]);
+    ok(mv === base0, 'đang đi: ảnh giữ nguyên (' + base0 + ')');
+    await ev(p, () => { G.run.moving = null; Map2.invalidate(); });
+    let on = false; for (let i = 0; i < 50 && !on; i++) { await p.waitForTimeout(100); on = await ev(p, () => Map2.trOn); }
+    ok(on, 'dừng lại: bắt đầu chuyển cảnh mực loang');
+    for (let i = 0; i < 60 && await ev(p, () => Map2.trOn); i++) await p.waitForTimeout(150);
+    await p.waitForTimeout(400);
+    const end = await ev(p, () => ({ on: Map2.trOn, key: Map2.mapKey.split('|')[0], want: { xuan: 'Spring', ha: 'Summer', thu: 'Autumn', dong: 'Winter' }[seasonOf(W().t)] + '-' + (isDay(W().t) ? 'day' : 'night') }));
+    ok(!end.on && end.key === end.want, 'chuyển cảnh xong, ảnh mới là ' + end.key);
+    await shot(p, 'doibuoi');
+  },
   async bandoZoom(p) {
     const errs = []; p.on('pageerror', e => errs.push(e.message));
     for (const [x, y] of [[300, 300], [3300, 300], [1800, 1000], [300, 1800], [3300, 1800]]) { await ev(p, a => { Map2.focus(a[0], a[1]); Map2.zoom(10); }, [x, y]); await p.waitForTimeout(120); }

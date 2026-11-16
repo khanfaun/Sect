@@ -26,6 +26,8 @@ Người dùng không phải lập trình viên: trả lời ngắn, ít thuật
 - Tuổi (`r.age`) được tính lại từ `birthAge` và thời gian thế giới; trong bài kiểm tra muốn đổi tuổi phải đặt `birthAge`.
 - Bản đồ (core2/33-ban-do-moi.js): một đại lục vẽ sẵn, ảnh ở `src/assets/ban-do` (nhúng qua react/anh.js → `window.PS_ANH`). Nền theo mùa + ngày (5h–19h)/đêm; chỗ chưa thấy là Hidden-map, mép nhòe qua Transition-map (`buildComposite` trong ui/05-gfx.js).
   - Ảnh nhúng là bản nén (`python3 tools/nen_anh.py [rộng] [chất lượng]`, gốc ở `src/assets-goc/ban-do`, không nhúng). Mức đồ họa đổi độ phân giải nền (1000/1600/2400) và lớp chuyển tiếp: tiết kiệm bỏ giấy chuyển tiếp.
+  - Chuyển buổi/mùa: đang đi thì giữ ảnh cũ (`SH.base`), dừng lại mới đổi; ảnh mới loang ra như mực qua mặt nạ nhiễu (`trMask`, 2,8 giây). Mép vùng đã thấy/chưa thấy là mực loang (`inkLayers`: lõi + vành giấy + vết mực), không còn làm nhòe.
+  - Nền be ở giao diện sáng đã đổi sang texture bằng khối CSS sinh tự động ở cuối style.css (giao diện tối giữ nền cũ).
   - Địa hình từng ô: `MAP_TER` (core2/32, sinh bằng `python3 tools/dia_hinh.py --xem ảnh.jpg`; sông hồ núi mây vẽ tay bằng đa giác trong tệp đó). Ô nhỏ 30 đơn vị, 119×76 ô. Sông/hồ/mây không đi bộ được, lên dốc tốn thêm (`stepCost`), từ Kết Đan bay qua sông hồ (`flyMode`).
   - 5 đại khu vực `KHU` (Trung Châu, Đông Hoang, Nam Lĩnh, Tây Nhạc, Bắc Vân), mỗi khu 6–8 tông môn (`sect.sz` 0–2). Địa điểm id = khu*100+i, thế giới sinh một lần rồi giữ qua các kiếp.
   - `r.region` giờ là BẬC ĐỘ KHÓ = cảnh giới (0..4), `r.khu` là khu đang đứng. Không còn quan ải/lệnh bài; sào huyệt tính riêng từng nơi (`r.bossAt`).
