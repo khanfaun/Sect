@@ -156,16 +156,14 @@ function ascHTML(){const r=G.run,a=r.asc;if(!a._id)a._id=Date.now();
     <div class="asc-st">${ascStory(a).map(t=>`<p>${esc(t)}</p>`).join('')}</div>${a.ht&&HTMAP[a.ht]?`<p class="asc-ht">Hậu thiên khí vận <span class="ht-tag r${HTMAP[a.ht].r}"${tah(htTipH(HTMAP[a.ht]))}>${esc(HTMAP[a.ht].n)}</span></p>`:''}
     ${ascDiffHTML(a)}<button class="btn pri big" data-act="ascDone">Tiếp tục</button></div>`;
   return h+'</div>';}
-{const _mh=modalHTML;modalHTML=function(){const r=G.run;if(r&&r.asc&&G.screen==='map'&&!(r.scene&&r.scene.type==='combat')){if(!UI.modal||UI.modal.k!=='asc')UI.modal={k:'asc'};document.documentElement.dataset.asc='1';return ascHTML();}
-  delete document.documentElement.dataset.asc;if(UI.modal&&UI.modal.k==='asc')UI.modal=null;return _mh();};}
+
 ACT.ascSel=i=>{UI.ascSel=+i<0?null:+i;};
 ACT.ascPick=()=>{const r=G.run;if(UI.ascSel==null||!r.htPick)return;const id=htChoose(UI.ascSel);if(r.asc)r.asc.ht=id;UI.ascSel=null;UI.ascPh='res';};
 ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=null;delete document.documentElement.dataset.asc;const now=performance.now();
   UI.realmAnim={from:a.from,to:a.to,t0:now};UI.lvGlow={t0:now,t1:now+3600,c:'up'};setTimeout(()=>hnote((a.k==='bt'?'Đột phá thành công · ':'Xung kích thành công · ')+a.to,'up'),500);setTimeout(()=>{UI.realmAnim=null;render();},3400);
   const sc=r.scene;if(sc&&sc.type==='btres')endScene();if(G.run&&G.run.scene&&G.run.scene.type==='place')G.run.scene=null;UI.panel=null;saveSoon();};
 // thanh đầu: dòng cảnh giới chuyển từ cũ sang mới
-{const _hh=hudHTML;hudHTML=function(){let h=_hh();const A=UI.realmAnim;if(A&&G.run){const cur=esc(realmLabel());h=h.replace('>'+cur+'</span>','><span class="rl-anim'+(A.down?' dn':'')+'"><i class="o">'+esc(A.from)+'</i><i class="n">'+esc(A.to)+'</i></span></span>');}
-  if(UI.talA)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talchg');else if(UI.talNew)h=h.replace('class="hud-av hud-av2','class="hud-av hud-av2 talnew');return h;};}
+
 // thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
 {const _ptR=playerTal;playerTal=function(){let t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talFake){if(performance.now()<UI.talFake.until)t=Object.assign({},t,{tier:UI.talFake.tier});else{UI.talFake=null;UI.talS=t.tier;}}if(UI.talS==null)UI.talS=t.tier;
   if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};{const up=t.tier>UI.talS;const nw=performance.now();if(up){document.documentElement.dataset.ascShake='xk';setTimeout(()=>{delete document.documentElement.dataset.ascShake;},950);}UI.lvGlow={t0:nw,t1:nw+3000,c:up?'up':'down'};setTimeout(()=>hnote(up?'Tiềm chất thăng lên · '+TAL_N[t.tier]:'Tiềm chất suy giảm · '+TAL_N[t.tier],up?'up':'down'),50);}setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}

@@ -101,7 +101,7 @@ function CotPhai({ items }) {
           <button key={x.key} className={'bc on' + (B.sel === x.key ? ' sel' : '')} data-act="bagSel" data-arg={x.key} style={pcs(x.tier)} {...tah(PS.itemTip(x))}>
             <Html style={{ display: 'contents' }} h={PS.itemArt(x)} />
             {x.cnt > 1 && <i>{x.cnt}</i>}
-            {PS.itemLocked(x) && <em className="lk"><Ic n="lock" /></em>}
+            {(PS.itemLocked(x) || x.locked) && <em className="lk"><Ic n="lock" /></em>}
             <YeuCau x={x} r={r} />
           </button>
         ))}
@@ -110,6 +110,7 @@ function CotPhai({ items }) {
       </div>
     </div>
     {!V.length && items.length > 0 && <p className="hint">Không có món nào khớp bộ lọc.</p>}
+    {PS.tuiSlots && PS.tuiSlots() > 0 && !PS.tuiOn() && <p className="hint"><Ic n="lock" /> Túi trữ vật đang khoá: cần có linh lực mới mở ra lấy đồ được.</p>}
   </>;
 }
 

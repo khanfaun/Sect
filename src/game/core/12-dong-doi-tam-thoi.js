@@ -54,7 +54,7 @@ function afterlife(r,cause,info){
 // tin đồn về các kiếp trước
 const RUMOR_KIEP=['Trà lâu vẫn kể chuyện {$a}, người năm {$y} từng {$v}. Có kẻ bảo người ấy chưa chết, chỉ đổi một cái tên.','Ở {$pl} có tấm bia khắc tên {$a}. Người qua đường vẫn dừng lại vái một vái.','“Thời {$a} còn sống ấy à…” Lão già lắc đầu. “Bây giờ không còn ai như thế nữa.”'];
 function rumorKiep(){const L=G.meta.lives.filter(x=>x.hero);if(!L.length)return null;const x=pick(L);return T(RUMOR_KIEP,{a:x.ten,y:x.y||tYear(W().t)-20,v:x.hero,pl:placeName(pick(['nui','thanh','tran']))});}
-function shopExtra(items,n){const r=G.run;if(n&&W().ents.some(e=>e.type==='di'&&e.data.k==='daugia'&&e.at===n.id)&&r.region<4)items.push({k:'pass',reg:r.region+1,n:'Lệnh bài thông quan '+REG[r.region+1].n,p:price(90)});}
+function shopExtra(items,n){const r=G.run;if(n&&W().ents.some(e=>e.type==='di'&&e.data.k==='daugia'&&e.at===n.id)&&false)items.push({k:'pass',reg:r.region+1,n:'Lệnh bài thông quan '+REG[r.region+1].n,p:price(90)});}
 
 // lưu (được UI gán)
 let saveSoon=()=>{};
@@ -356,7 +356,7 @@ ev({id:'nhan_cu',n:'Chiếc nhẫn cũ',tg:['*'],r:[0,1],once:1,w:1,
   {i:'💍',l:'Giữ lấy',t:'Ngươi đeo nhẫn vào tay. Từ đó, những đêm tu luyện, ngươi luôn có cảm giác có người nhìn qua vai mình, thỉnh thoảng hừ một tiếng khi ngươi vận khí sai.',e:{relic:'nhancu',flag:'nhancu'}},
   {i:'🗑️',l:'Vứt đi',t:'Đồ cũ thì có gì tốt. Ngươi ném nó xuống sông. Mặt nước gợn lên một vòng, rồi thôi.'}
  ]});
-ev({id:'nhan_tinh',n:'Hồn trong nhẫn',spec:1,once:1,cond:r=>r.flags.nhancu&&r.region>=1&&r.relics.some(x=>x.u==='nhancu'),
+ev({id:'nhan_tinh',n:'Hồn trong nhẫn',spec:1,once:1,cond:r=>r.flags.nhancu&&rT()>=1&&r.relics.some(x=>x.u==='nhancu'),
  t:['Chiếc nhẫn cũ nóng rực lên. Lần này giọng nói ấy rõ ràng: “{$p.tt}, ta là {$lao}, ba nghìn năm trước từng đứng đầu một phương. Giờ chỉ còn tàn hồn này. Ngươi giúp ta một việc, ta giúp ngươi một đời.”'],
  c:[
   {i:'🤝',l:'Đồng ý giúp',o:[

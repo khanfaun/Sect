@@ -1,7 +1,7 @@
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------
 const $=s=>document.querySelector(s);
-const $$=s=>Array.from(document.querySelectorAll(s));
+
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // chú thích dạng HTML (vật phẩm, công pháp...): data-tiph chứa mã HTML đã thoát ký tự
 // ảnh asset: điền đường dẫn ảnh vào đây là game tự dùng, chưa có thì hiện hình vẽ tạm.
@@ -108,10 +108,10 @@ function emoIc(e){if(e==='?')return '<i class="qmk">?</i>';if(e==='💎')return 
 function emoTxt(h){return String(h).replace(/💎/g,'<i class="rh"></i>').replace(/⏳/g,ic('hour'));}
 function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}${c.tier!=null?' tq':''}"${c.tier!=null?` style="${pcs(c.tier)}"`:''}${ta(c.tip)}${c.h?` data-tiph="${esc(c.h)}"`:''}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
 function elSeal(e){const E=EL[e]||EL.vo;return `<span class="el el-${e}"${ta('Hệ '+E.n+(KHAC[e]?'\nKhắc '+EL[KHAC[e]].n:''))}>${E.c}</span>`;}
-function bar(cur,max,cls){const p=Math.max(0,Math.min(100,cur/Math.max(1,max)*100));return `<div class="hb ${cls||''}"><i style="width:${p}%"></i></div>`;}
+
 function tabsHTML(key,list,cur){return `<div class="tabs">${list.map(([k,n])=>`<button data-act="tab" data-arg="${key}:${k}" class="${k===cur?'on':''}">${n}</button>`).join('')}</div>`;}
 function numVN(x){return String(Math.round(x*10)/10).replace('.',',');}
-function stoneHTML(v){return `<span class="stone"><i class="rh"></i>${v}</span>`;}
+
 function win(title,body,o){o=o||{};return `<section class="win ${o.cls||''}"><header class="win-h"><h2>${title}</h2>${o.extra||''}${o.noClose?'':`<button class="xb" data-act="${o.close||'closePanel'}" aria-label="Đóng">${ic('close')}</button>`}</header><div class="win-b">${body}</div>${o.foot?`<footer class="win-f">${o.foot}</footer>`:''}</section>`;}
 function toastFlush(){const L=G.toasts;if(!L||!L.length)return;const box=$('#toast');if(!box)return;
   for(const t of L){const d=document.createElement('div');d.className='toast '+(t.c||'');d.textContent=t.t;box.appendChild(d);setTimeout(()=>d.remove(),3600);}

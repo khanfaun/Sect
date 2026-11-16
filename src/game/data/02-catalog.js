@@ -23,7 +23,7 @@ function catOwned(id){const r=G.run;if((r.uSeen||[]).includes(id))return true;co
 function catRelicPick(tier){const req=relReqRoll();const t=clamp(tier,0,6); // cùng phẩm, cùng cảnh giới cần như đồ game tự sinh
   let pool=CAT.relics.filter(x=>!x.u&&x.req===req&&x.t===t);if(!pool.length)pool=CAT.relics.filter(x=>!x.u&&x.req===req&&Math.abs(x.t-t)<=1);if(!pool.length)pool=CAT.relics.filter(x=>!x.u&&x.req===req);
   return pool.length?catRelic(pick(pool)):null;}
-function catUniquePick(){const r=G.run;const pool=CAT.relics.filter(x=>x.u&&x.reg<=r.region&&!catOwned(x.id));
+function catUniquePick(){const r=G.run;const pool=CAT.relics.filter(x=>x.u&&x.reg<=rT()&&!catOwned(x.id));
   if(!pool.length)return null;const x=pick(pool);(r.uSeen=r.uSeen||[]).push(x.id);return catRelic(x);}
 {const _g=genRelic;genRelic=function(tier){if(CAT.relics.length){if(chance(.035)){const u=catUniquePick();if(u)return u;}if(chance(.55)){const x=catRelicPick(tier);if(x)return x;}}return _g(tier);};}
 // đồ viết sẵn mang đúng con số ghi trong Excel (đã tính theo cảnh giới cần)
@@ -62,8 +62,8 @@ function catStrike(idx,inCombat,p){const r=G.run,sc=r.scene;if(!inCombat||!sc||s
   if(t){let d=Math.max(s.atk*x/100*0.25,s.atk*x/100-t.def*0.7);if(t.st.vuln)d*=1.3;if(KHAC[p.el]===t.el)d*=1.5;d=absorb(t.st,Math.round(d));t.hp-=d;msg+=': '+d;if(t.hp<=0){down(sc,t);checkEnd(sc);}}
   return msg;}
 {const _pt=pillTip;pillTip=function(id,q){const t=_pt(id,q);const p=PILL[id];return p&&p.lore?t+'\n\n'+p.lore:t;};}
-{const _rp=rollPill;rollPill=function(){const r=G.run;if(chance(.35)){const pool=CAT.pills.filter(p=>p.w!=='bt'&&p.reg<=r.region&&PILL[p.id]);if(pool.length)return pick(pool).id;}return _rp();};}
-{const _bp=btPill;btPill=function(){const r=G.run;if(r&&chance(.3)){const pool=CAT.pills.filter(p=>p.w==='bt'&&PILL[p.id]&&(p.realm==null?p.reg<=r.region:p.realm===r.realm));if(pool.length)return pick(pool).id;}return _bp();};}
+{const _rp=rollPill;rollPill=function(){const r=G.run;if(chance(.35)){const pool=CAT.pills.filter(p=>p.w!=='bt'&&p.reg<=rT()&&PILL[p.id]);if(pool.length)return pick(pool).id;}return _rp();};}
+{const _bp=btPill;btPill=function(){const r=G.run;if(r&&chance(.3)){const pool=CAT.pills.filter(p=>p.w==='bt'&&PILL[p.id]&&(p.realm==null?p.reg<=rT():p.realm===r.realm));if(pool.length)return pick(pool).id;}return _bp();};}
 
 // ---------- 7. phương tiện: trạm dịch chỉ bày loại hợp cảnh giới ----------
 const CAT_MOUNT=MOUNT.slice();
@@ -86,7 +86,7 @@ function catMatSync(){const r=G.run;if(!r||!r.mats)return;const N=r.matN||(r.mat
   for(const cat of ['thao','khoang','dan']){const L=CAT.mats.filter(m=>m.cat===cat);if(!L.length)continue;
     let sum=0;for(const m of L)sum+=N[m.id]||0;let tot=r.mats[cat]||0;
     if(sum>tot){const own=L.filter(m=>N[m.id]>0).sort((a,b)=>a.t-b.t);for(const m of own){if(sum<=tot)break;const c=Math.min(N[m.id],sum-tot);N[m.id]-=c;sum-=c;if(!N[m.id])delete N[m.id];}}
-    if(sum<tot){let pool=L.filter(m=>m.reg<=r.region);if(!pool.length)pool=L;const m=wpick(pool,x=>1/(1+x.t));N[m.id]=(N[m.id]||0)+(tot-sum);}}}
+    if(sum<tot){let pool=L.filter(m=>m.reg<=rT());if(!pool.length)pool=L;const m=wpick(pool,x=>1/(1+x.t));N[m.id]=(N[m.id]||0)+(tot-sum);}}}
 const CAT_MATC={thao:'duoc',khoang:'khoang',dan:'vl'};
 {const _bi=bagItems;bagItems=function(){catMatSync();const r=G.run;const L=_bi().filter(x=>!(x.ref&&x.ref.t==='mat'));const N=r.matN||{};
   for(const [id,c] of Object.entries(N)){const m=CAT.byId[id];if(!m||c<=0)continue;

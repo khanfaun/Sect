@@ -1,11 +1,11 @@
 // ---------- vẽ màn hình ----------
 const HCACHE={};
-// html: chuỗi HTML (bản cũ) hoặc {rx:'TênMàn',fb:hàmBảnCũ} (vẽ bằng React, xem ui/22-cau-noi-react.js)
+// html: chuỗi HTML hoặc {rx:'TênMàn'} (vẽ bằng React, xem ui/22-cau-noi-react.js)
 function setH(id,html){const el=document.getElementById(id);if(!el)return false;const isRx=html&&typeof html==='object';if(!isRx&&HCACHE[id]===html){return false;}
   const tk0=id==='sheet'&&document.getElementById('plTalk');const tkTop=tk0?tk0.scrollTop:0,tkN=tk0?tk0.dataset.n:null;
   const sc=el.querySelector('.win-b,.sc-b');const top=sc?sc.scrollTop:0;const key=el.dataset.k;
   const k2=viewKey(id);
-  if(isRx){try{RX.show(el,html.rx,id+':'+k2);HCACHE[id]=undefined;el.hidden=!el.childNodes.length;}catch(e){console.error(e);RX.hide(el);html=html.fb();}}
+  if(isRx){if(!window.RX)return false;try{RX.show(el,html.rx,id+':'+k2);HCACHE[id]=undefined;el.hidden=!el.childNodes.length;}catch(e){console.error(e);RX.hide(el);el.hidden=true;}}
   if(typeof html==='string'){if(el._rx)RX.hide(el);HCACHE[id]=html;el.innerHTML=html;el.hidden=!html;}el.dataset.k=k2;if(id==='modal')el.classList.toggle('still',!!k2&&key===k2);
   if(id==='sheet'){el.classList.toggle('still',!!k2&&key===k2);const tk=document.getElementById('plTalk');if(tk){if(tkN!=null&&tkN===tk.dataset.n)tk.scrollTop=tkTop;else tk.scrollTop=tk.scrollHeight;}}if(top&&key===k2){const s2=el.querySelector('.win-b,.sc-b');if(s2)s2.scrollTop=top;}
   return true;}
@@ -19,16 +19,14 @@ function render(){
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
     if(cb&&UI.panel!=='more'){UI.panel=null;}
     if(!inMap&&UI.modal)UI.modal=null;
-    if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth',vBirth):G.screen==='over'&&G.over?rxv('Over',vOver):G.screen==='meta'?rxv('Meta',vMeta):G.screen==='life'&&G.run?rxv('Life',vLife):rxv('Title',vTitle);}
+    if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth'):G.screen==='over'&&G.over?rxv('Over'):G.screen==='meta'?rxv('Meta'):G.screen==='life'&&G.run?rxv('Life'):rxv('Title');}
     else{
-      if(cb)full=rxv('TranDau',()=>vCombat(sc));
-      else{hud=rxv('Hud',hudHTML);nav=rxv('Nav',navHTML);
-        if(!sc){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
-        else if(UI.evMin&&sc.type==='event'){mapui=rxv('NutBanDo',mapUiHTML);dock=rxv('TheDiaDiem',dockHTML);}
-        else if(sc.type==='region')sheet=rxv('Canh:region',()=>vRegionIntro(sc));
-        else sheet=rxv('Canh:'+sc.type,()=>(SCENE_V[sc.type]||(()=>''))(sc));}
+      if(cb)full=rxv('TranDau');
+      else{hud=rxv('Hud');nav=rxv('Nav');
+        if(!sc||(UI.evMin&&sc.type==='event')){mapui=rxv('NutBanDo');dock=rxv('TheDiaDiem');}
+        else sheet=rxv('Canh:'+sc.type);}
     }
-    if(UI.panel)panel=rxv('Bang:'+UI.panel,()=>(PANEL_V[UI.panel]||(()=>''))());
+    if(UI.panel)panel=rxv('Bang:'+UI.panel);
     modal=modalHTML();
     document.documentElement.dataset.tf=CFG.tfStyle||'hang';document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
   }catch(e){console.error(e);full=`<div class="title"><p>Có lỗi khi vẽ màn hình: ${esc(e.message)}</p><button class="btn pri" data-act="screen" data-arg="title">Về màn hình đầu</button></div>`;UI.panel=null;UI.modal=null;panel='';modal='';}
@@ -46,8 +44,32 @@ function render(){
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
-function mapTap(n,c){const r=G.run;if(!r||r.scene)return;UI.sel=n?n.id:null;UI.cell=n||c==null?null:(UI.cell===c?null:c);UI.cardMin=false;render();}
-function hexTip(c,x,y){const tip=$('#tip');const n=hexNode(c);const I=hexInfo(c);const shown=n&&!(CFG.hideT||{})[n.type];if(!shown){hideTip();return;}
+function mapHold(n,c,w,first){const r=G.run;if(!r||r.scene||r.moving||c==null||c<0)return;const H=UI.hold,id=n?n.id:null;
+  if(H&&H.c===c&&H.n===id){H.x=w[0];H.y=w[1];const el=document.querySelector('#dock .np');if(el){el.dataset.ax=w[0];el.dataset.ay=w[1];}return;}
+  UI.hold={n:id,c,x:w[0],y:w[1]};render();}
+function mapHoldEnd(){if(UI.hold){UI.hold=null;render();}}
+// buông tay sau khi ngắm: đánh dấu điểm cuối (chạm nhanh vào đúng điểm đã đánh dấu mới lên đường)
+function mapAimEnd(ok){const H=UI.hold;UI.hold=null;const r=G.run;if(ok&&H&&r&&!r.scene&&!r.moving){let n=H.n!=null?nodeById(H.n):null;if(!n){const at=nodeById(r.at);if(at&&at.wp&&nodeHex(at)===H.c)n=at;}
+  const here=(n&&n.id===r.at)||(!n&&H.c===nodeHex(nodeById(r.at)));const g=geo(),walk=n?n.fog>=1:(g.reg[H.c]>=0&&terWalk(g.ter[H.c]));
+  if(here){UI.mark=null;UI.sel=n?n.id:null;UI.cell=n?null:H.c;}else if(!walk){UI.mark=null;UI.sel=null;UI.cell=null;}else{UI.mark={k:n?'n'+n.id:'c'+H.c,th:n?hexAt(...mapNode(n)):H.c};UI.sel=null;UI.cell=null;}}
+  render();}
+function mapTap(n,c,w,zf){const r=G.run;if(!r||r.scene)return;UI.hold=null;
+  if(r.moving&&zf!=null&&zf>=0.5){UI.sel=null;UI.cell=null;UI.mark=null;render();return;} // đang đi đường: chạm bản đồ không chọn gì
+  // mức gần: giữ để xem thẻ; chạm một lần đánh dấu đường đi, chạm lần nữa vào đúng chỗ đó thì lên đường
+  if(zf!=null&&zf>=0.5&&!r.moving&&c!=null&&c>=0){UI.pop=null;
+    if(!n){const at=nodeById(r.at);if(at&&at.wp&&nodeHex(at)===c)n=at;}
+    const here=(n&&n.id===r.at)||(!n&&c===nodeHex(nodeById(r.at)));
+    if(here){UI.mark=null;UI.sel=n?n.id:null;UI.cell=n?null:(UI.cell===c?null:c);render();return;}
+    const g=geo(),walk=n?n.fog>=1:(g.reg[c]>=0&&terWalk(g.ter[c]));
+    if(!walk){UI.mark=null;UI.sel=null;UI.cell=null;render();return;}
+    const k=n?'n'+n.id:'c'+c;
+    if(UI.mark&&UI.mark.k===k){UI.mark=null;UI.sel=null;UI.cell=null;if(n)ACT.go(n.id);else ACT.goCell(c);render();return;}
+    UI.mark={k,th:n?hexAt(...mapNode(n)):c};UI.sel=null;UI.cell=null;render();return;}
+  // thu nhỏ hết cỡ: chạm đại khu vực nào thì hiện thẻ mô tả đại khu vực đó (không hiện quận, không chọn địa điểm)
+  if(zf!=null&&zf<0.12){const k=c!=null?geo().reg[c]:-1;UI.sel=null;UI.cell=null;UI.pop=k>=0&&!(UI.pop&&UI.pop.k===k)?{k,wx:w[0],wy:w[1]}:null;render();return;}
+  UI.pop=null;if(zf!=null&&zf<0.5)n=null;else if(!n&&c!=null){const at=nodeById(r.at);if(at&&at.wp&&nodeHex(at)===c)n=at;} // mức thấy quận: icon địa điểm đang ẩn nên chỉ xem quận
+  UI.sel=n?n.id:null;UI.cell=n||c==null?null:(UI.cell===c?null:c);render();}
+function hexTip(c,x,y){const tip=$('#tip');if(Map2.zf<0.5){hideTip();return;}const n=hexNode(c);const I=hexInfo(c);const shown=n&&!(CFG.hideT||{})[n.type];if(!shown){hideTip();return;}
   tip.textContent=n.name+(n.fog>=2||n.memory?'':'?')+' · '+TYPE_NAME[n.type]+'\n'+DTAG[dangerTag(n)]+'\n'+I.regName+(I.dist?' › '+I.dist:'');tip.hidden=false;tipEl=null;
   tip.className='';placeTip(x,y);}
 
@@ -69,7 +91,7 @@ function loop(now){
         if(G.run&&(!G.run.moving||G.run.halt)&&!G.run.scene&&clkAcc>0){advanceTime(clkAcc*sp);if(G.run)autoCheck();}
         clkAcc=0;
         if(!G.run||G.run.scene||G.screen!=='map'){UI.evMin=false;after();}
-        else{const t=W().t;const d=Math.floor(t/HD),p=partOf(t);const mv=$('#mvLeft');if(redraw&&mv&&G.run.moving&&!(G.toasts&&G.toasts.length)){const m=G.run.moving;const L=m.seg<m.path.length-1?edgeLen(m.path[m.seg],m.path[m.seg+1])*(1-m.prog):0;mv.textContent='còn '+Math.round(L)+' dặm';clockText();if(d!==clkDay){clkDay=d;setH('hud',hudHTML());}}else if(d!==clkDay||p!==clkPart||redraw||(G.toasts&&G.toasts.length)){clkDay=d;clkPart=p;render();}else clockText();Map2.invalidate();}
+        else{const t=W().t;const d=Math.floor(t/HD),p=partOf(t);const mv=$('#mvLeft');if(redraw&&mv&&G.run.moving&&!(G.toasts&&G.toasts.length)){const m=G.run.moving;const L=m.seg<m.path.length-1?edgeLen(m.path[m.seg],m.path[m.seg+1])*(1-m.prog):0;mv.textContent='còn '+Math.round(L)+' dặm';clockText();if(d!==clkDay){clkDay=d;setH('hud',rxv('Hud'));}}else if(d!==clkDay||p!==clkPart||redraw||(G.toasts&&G.toasts.length)){clkDay=d;clkPart=p;render();}else clockText();Map2.invalidate();}
         if(G.run&&(W().t-clkSaveT>=30||(G.run.moving&&now-(UI.mvSave||0)>800))){clkSaveT=W().t;UI.mvSave=now;saveSoon();}
       }
     }catch(e){console.error(e);}
@@ -123,10 +145,10 @@ const ACT={
   panel:k=>{UI.panel=UI.panel===k?null:k;UI.code=null;UI.msg=null;UI.confirm=null;UI.chuSel=null;},
   closePanel:()=>{UI.panel=null;UI.code=null;UI.msg=null;},
   modalX:()=>{const m=UI.modal;UI.modal=null;G.bqRoom=false;if(m&&m.k==='bq'&&UI.bqOpened&&G.run&&G.run.scene&&G.run.scene.type==='place'){G.run.scene=null;}UI.bqOpened=false;},
-  unsel:()=>{UI.sel=null;UI.cell=null;},
+  npMin:()=>{UI.npMin=!UI.npMin;},
+  goCell:c=>{const n=wpMake(+c);if(!n)return;UI.cell=null;UI.sel=null;ACT.go(n.id);},
+  unsel:()=>{UI.mark=null;UI.hold=null;UI.sel=null;UI.cell=null;UI.pop=null;},
   gridT:()=>{cfgSet('grid',!CFG.grid);},
-  cardMin:()=>{UI.cardMin=true;},
-  cardMax:()=>{UI.cardMin=false;},
   descTg:()=>{UI.descHide=!UI.descHide;},
   exStat:()=>{UI.modal={k:'explore'};},
   exGo:()=>{UI.modal=null;placeAct('explore');},
@@ -150,10 +172,11 @@ const ACT={
   speed:v=>{v=+v;if(!v)UI.paused=!UI.paused;else{UI.paused=false;UI.speed=v;}},
   wait:k=>{const t0=W().t;const h=t0%HD;const tgt=k==='sang'?7:19;let d=tgt-h;if(d<0.5)d+=24;advanceTime(d);if(!G.run)return;const t=W().t;G.meta.world.t=Math.floor(t/HD)*HD+tgt+(Math.floor(t/HD)*HD+tgt<t0?HD:0);autoCheck();note('Chờ '+Math.round(d)+' giờ. Nay là giờ '+gioName(W().t)+', buổi '+PART[partOf(W().t)].n+'.');},
   zoom:d=>{Map2.zoom(+d>0?1.4:1/1.4);},
-  center:()=>{Map2.center();},
+  center:()=>{Map2.locate();},
+  zoomAll:()=>{Map2.zoomOutAll();},
   noteEdit:id=>{UI.modal={k:'note',id:+id};setTimeout(()=>{const i=$('#noteIn');if(i)i.focus();},50);},
   noteSave:id=>{const i=$('#noteIn');if(noteSet(+id,i?i.value:'')===false){note('Đã ghim đủ 50 chỗ.');}UI.modal=null;},
-  noteGo:k=>{const n=nodeById(+k);if(n&&Math.floor(n.id/100)===G.run.region&&n.fog>=1){UI.panel=null;UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else note('Chỗ ấy không ở vùng này, hoặc kiếp này ngươi chưa biết tới.');},
+  noteGo:k=>{const n=nodeById(+k);if(n&&n.fog>=1){UI.panel=null;UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else note('Chỗ ấy không ở vùng này, hoặc kiếp này ngươi chưa biết tới.');},
   pactGo:a=>{UI.modal=null;UI.confirm=null;const sc=G.run.scene;const A=sc&&sc.type==='place'&&placeActs(nodeById(sc.id)).find(x=>x.a===a);UI.lastQ=PL_N[a]||(A&&A.l)||null;placeAct(a);UI.plTop=1;},
   vclose:()=>{const sc=G.run&&G.run.scene;if(sc)sc.venue=null;},
   vopt:id=>{const sc=G.run&&G.run.scene;if(!sc||!sc.venue)return;const o=venueOpts(nodeById(sc.id),sc.venue).find(x=>x.id===id);if(!o)return;UI.modal={k:o.lack||o.no?'vreq':'vconf',v:sc.venue,id};},
@@ -182,7 +205,7 @@ const ACT={
   quest:i=>takeQuest(i),
   qExp:id=>{UI.qOpen=UI.qOpen||{};UI.qOpen[id]=!UI.qOpen[id];},
   qDrop:id=>{UI.modal={k:'qdrop',id};},qDropGo:id=>{UI.modal=null;questCancel(id);},
-  qNav:id=>{const q=G.run.quests.find(x=>x.id===id);if(!q)return;const n=nodeById(q.node);if(!n)return;if(Math.floor(n.id/100)!==G.run.region){note('Nơi ấy không ở vùng này.');return;}
+  qNav:id=>{const q=G.run.quests.find(x=>x.id===id);if(!q)return;const n=nodeById(q.node);if(!n)return;
     UI.panel=null;if(G.run.scene&&G.run.scene.type!=='combat')G.run.scene=null;if(n.fog>=1){UI.sel=n.id;UI.cardMin=false;const p=nodeShown(n);Map2.focus(p[0],p[1]);}else{UI.sel=null;Map2.focus(n.x,n.y);note('Nơi ấy còn chìm trong sương mù, chỉ biết đại khái ở quanh đây.');}},
   bsel:k=>buryToggle(k),
   buryGo:()=>buryItems(),

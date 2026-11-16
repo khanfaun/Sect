@@ -1,0 +1,166 @@
+// ================= THẾ GIỚI MỞ: MỘT BẢN ĐỒ LIỀN, NĂM ĐẠI KHU VỰC =================
+// Bản đồ là ảnh vẽ tay (src/assets/ban-do). Năm "vùng" cũ nay là năm đại khu vực địa lý trên cùng một tấm bản đồ,
+// đi bộ thẳng từ khu này sang khu khác, không còn quan ải hay lệnh bài thông quan.
+// r.region = đại khu vực đang đứng (để biết tên, cảnh vẽ, thực thể quanh đây).
+// Độ khó (kẻ địch, vật phẩm, giá cả) không còn theo nơi chốn mà theo cảnh giới người chơi: rT().
+
+// ---- độ khó theo cảnh giới ----
+function rT(){const r=G.run;return r?clamp(r.realm||0,0,4):0;}
+// kẻ địch: phần lớn ngang cảnh giới, thỉnh thoảng gặp kẻ mạnh hơn hoặc yếu hơn một bậc
+function rTv(){const t=rT();const x=R();return clamp(t+(x<0.1?1:x<0.2?-1:0),0,4);}
+
+// ---- năm đại khu vực ----
+const AREA=[
+  {n:'Trung Châu',seal:'中',sub:'Đất giữa thiên hạ, sông lớn chảy qua',types:['tran','thanh','rung','song','tong','phe'],
+    intro:['Ngươi rời {$que} vào một sớm sương mù. Trung Châu rộng lớn, sông dài uốn khúc giữa đồng lúa. Đường tiên dài lắm, nhưng bước đầu tiên chỉ cần một bước.','Người trong làng tiễn ngươi ra tới bến sông. Trung Châu đông người, lắm chợ, lắm tông môn. Ngươi không ngoảnh lại.']},
+  {n:'Đông Hoang',seal:'東',sub:'Đồi thấp, rừng sâu, sương mù quanh năm',types:['rung','hoang','dong','nui','phe','thanh'],
+    intro:['Ngươi rời {$que}. Phía đông là đồi nối đồi, rừng già chen kín, sương chẳng bao giờ tan hẳn.','Đông Hoang ít người ở. Tiếng thú gầm vọng qua thung, khói bếp thưa như sao buổi sớm.']},
+  {n:'Nam Trạch',seal:'南',sub:'Sông nhánh, đầm lầy, đồng nước',types:['song','bien','rung','dong','tran','thanh'],
+    intro:['Ngươi rời {$que}. Nam Trạch nước nhiều hơn đất, thuyền nan len giữa lau sậy, cá quẫy dưới chân cầu.','Gió nồm thổi ẩm. Ở Nam Trạch, đường đi tính bằng con nước, không tính bằng dặm.']},
+  {n:'Tây Lĩnh',seal:'西',sub:'Vạn núi chen nhau, mây phủ đỉnh',types:['nui','dong','tong','rung','thanh','ma'],
+    intro:['Ngươi rời {$que}. Tây Lĩnh núi nối núi, mỗi ngọn là một sơn môn, mỗi hang là một bí mật.','Đường đá dốc đứng, mây lưng chừng núi. Người tu tiên ở Tây Lĩnh nhìn nhau bằng ánh mắt dò xét.']},
+  {n:'Bắc Nhạc',seal:'北',sub:'Đỉnh cao chạm trời, gió lạnh thấu xương',types:['nui','thien','phe','hoang','dong','ma'],
+    intro:['Ngươi rời {$que}. Phía bắc, những đỉnh núi đâm thẳng vào mây, tuyết trên cao không bao giờ tan.','Bắc Nhạc lạnh và vắng. Di cốt của kẻ đi trước rải rác ven đường đá cổ.']},
+];
+for(let k=0;k<5;k++)if(REG[k])Object.assign(REG[k],AREA[k]);
+function areaOfHex(h){const g=geo();return g.reg[h];}
+
+// sinh vùng: bỏ quan ải (không còn ranh giới phải qua cửa)
+{const _gr=genRegion;genRegion=function(k,w){const R0=_gr(k,w);const reg=REG[k];
+  for(const n of R0.nodes)if(n.type==='ai'){n.type=pick(reg.types.filter(t=>t!=='tong'));n.name=placeName(n.type);n.danger=Math.min(n.danger,2);}
+  // khu nào cũng có ít nhất hai trấn nhỏ để người mới sinh ra ở đó
+  for(let q=0;q<2&&R0.nodes.filter(n=>n.type==='tran').length<2;q++){const c=R0.nodes.find(n=>!n.sectFix&&!n.dp&&!['sao','thanh','tran','tong'].includes(n.type));if(!c)break;c.type='tran';c.name=placeName('tran');c.danger=0;}
+  // mỗi đại khu vực 6–8 tông môn, quy mô lớn nhỏ khác nhau
+  {const want=ri(6,8);let have=R0.nodes.filter(n=>n.type==='tong');const used=new Set(w.sects.map(x=>x.n.split(' ')[0]));
+    for(let q=have.length;q<want&&R0.nodes.length<90;q++){let p=null;for(let g=0;g<400&&!p;g++){const c={x:k*1000+ri(40,960),y:ri(40,960)};if(R0.nodes.every(n=>Math.hypot(n.x-c.x,n.y-c.y)>=85))p=c;}if(!p)break;
+      const al=pick(['chinh','chinh','chinh','ma','phat']);let pre,g2=0;do{pre=pick(SECT_PRE[al]);}while(used.has(pre)&&g2++<30);used.add(pre);
+      const kind=al==='ma'?pick(['ma','am']):al==='phat'?'phat':pick(['kiem','dan','dao','tran','khi','phu']);const sc={n:pre+' '+pick(SECT_SFX[kind]),al,kind};w.sects.push(sc);
+      const near=R0.nodes.map(n=>[n,Math.round(Math.hypot(n.x-p.x,n.y-p.y))]).sort((a,b)=>a[1]-b[1]);
+      const n={id:k*100+R0.nodes.length,r:k,x:p.x,y:p.y,type:'tong',name:sc.n,owner:sc.n,sectFix:1,danger:Math.min(1,near[0][0].danger),fog:0,seenT:-1,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0};
+      R0.nodes.push(n);R0.edges.push({a:n.id,b:near[0][0].id,len:near[0][1]});}}
+  for(const n of R0.nodes)if(n.type==='tong'&&!n.quy){const x=R();n.quy=x<0.3?1:x<0.65?2:x<0.9?3:4;} // bốn bậc quy mô tông môn
+  R0.pass=null;return R0;};}
+// ---- quy mô địa điểm ----
+// Quy ước: một ô lục giác rộng ~25 dặm (≈ 12 km), diện tích ~540 dặm² (≈ 135 km², cỡ một huyện nhỏ). Cả bản đồ ≈ 2.960 × 1.670 dặm.
+// Địa điểm nào cũng chiếm tối thiểu 1 ô dù thực tế bé hơn nhiều (một cái hang chỉ vài chục trượng vẫn là 1 ô).
+const HEX_DAM=25,HEX_DAM2=Math.round(HEX_DAM*HEX_DAM*0.866);
+const SIZE_T={tran:[2,4],thanh:[4,7],dong:[1,2],khoang:[1,2],duoc:[1,2],ancu:[1,1],cho:[1,2],phe:[1,3],ma:[2,4],sao:[2,3],rung:[3,6],nui:[3,6],song:[2,4],bien:[3,6],hoang:[4,7],thien:[3,5],linhdia:[2,4],dam:[2,4]};
+const TONG_SZ=[null,[3,4],[5,6],[7,8],[9,10]];
+function placeSize(n){const t=n.type;if(t==='tong'){const z=TONG_SZ[n.quy||1];return ri(z[0],z[1]);}const z=SIZE_T[t]||[1,3];return ri(z[0],z[1]);}
+// từ ngữ do hệ thống tính theo loại và số ô thật sự chiếm được
+function scaleWord(n,c){const t=n.type;
+  if(t==='tong')return c<=4?'Khá đồ sộ':c<=6?'Đồ sộ':c<=8?'Khổng lồ':'Bao la';
+  if(t==='thanh')return c<=5?'Tầm trung':'Lớn';
+  if(t==='tran')return c<=2?'Nhỏ':'Trung';
+  return c<=1?'Rất nhỏ':c===2?'Nhỏ':c===3?'Vừa':c===4?'Khá rộng':c<=6?'Rộng':'Mênh mông';}
+function placeScale(n){const c=placeCells(n).length;return {c,w:scaleWord(n,c),txt:scaleWord(n,c)+' · '+c+' ô',area:c*HEX_DAM2};}
+function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô -> địa điểm đang chiếm
+  for(const R0 of w.regions)for(const n of R0.nodes){all.push(n);own.set(n.hex,n.id);if(n.cells)for(const c of n.cells)own.set(c,n.id);}
+  // mỗi địa điểm chừa ít nhất một ô trống quanh mình: ô mới mọc ra không được kề ô của địa điểm khác
+  const ok=(c,k,id)=>!own.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4&&hexNb(c).every(b=>!own.has(b)||own.get(b)===id);
+  // số ô còn có thể mọc ra quanh một ô gốc (đếm theo đúng luật mọc ô), tối đa cap
+  const reach=(c,k,id,cap)=>{const seen=new Set([c]);let fr=[c];while(fr.length&&seen.size<cap){const nx=[];for(const u of fr)for(const b of hexNb(u))if(!seen.has(b)&&ok(b,k,id)){seen.add(b);nx.push(b);}fr=nx;}return seen.size;};
+  const regCells=new Map();const cellsOf=k=>{if(!regCells.has(k)){const L=[];for(let i=0;i<HN;i++)if(g.reg[i]===k&&terWalk(g.ter[i])&&g.ter[i]!==4)L.push(i);regCells.set(k,L);}return regCells.get(k);};
+  all.filter(n=>!n.cells).map(n=>[n,placeSize(n)]).sort((a,b)=>b[1]-a[1]).forEach(([n,sz])=>{const k=Math.floor(n.id/100);
+    // tông môn, thành mà chỗ chật không đủ chỗ mọc thì dời sang chỗ rộng hơn
+    if((n.type==='tong'||n.type==='thanh')&&reach(n.hex,k,n.id,sz)<Math.min(sz,n.type==='tong'?4:5)){const L=cellsOf(k);
+      for(let t=0;t<500;t++){const c=L[Math.floor(R()*L.length)];if(own.has(c)||hexNb(c).some(b=>own.has(b)))continue;if(reach(c,k,n.id,sz)>=sz){own.delete(n.hex);n.hex=c;own.set(c,n.id);const q=hexCenter(c);n.x=Math.round(q[0]*10)/10;n.y=Math.round(q[1]*10)/10;break;}}}
+    const set=[n.hex];const inS=new Set(set);
+    while(set.length<sz){const cand=new Map();for(const c of set)for(const b of hexNb(c))if(!inS.has(b)&&ok(b,k,n.id))cand.set(b,(cand.get(b)||0)+1);if(!cand.size)break;
+      const L=[...cand];const b=wpick(L,x=>x[1]*x[1]+0.5)[0];set.push(b);inS.add(b);own.set(b,n.id);}
+    n.cells=set;});}
+// mỗi đại khu vực có ít nhất 3 thành, mỗi quận có ít nhất 2 trấn (chuyển loại địa điểm sẵn có hoặc thêm mới), chỉ làm một lần cho mỗi thế giới
+function ensureCounts(w){if(w.ens===1)return;const g=geoFor(w);const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
+  const blocked=new Set();const ring=c=>{blocked.add(c);for(const b of hexNb(c)){blocked.add(b);for(const d of hexNb(b))blocked.add(d);}};for(const n of all)ring(n.hex);
+  const freeCell=(c,k)=>!blocked.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4;
+  const SOFT=['rung','nui','song','hoang','phe','bien','dam','linhdia','duoc','cho','ancu','khoang','dong'];
+  const conv=(n,t)=>{n.type=t;n.dp=0;const R0=w.regions[Math.floor(n.id/100)];const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);n.name=nm;n.danger=Math.min(n.danger,t==='tran'||t==='thanh'?1:n.danger);delete n.cells;};
+  const add=(k,t,c)=>{const R0=w.regions[k];if(R0.nodes.length>=97)return null;const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);const p=hexCenter(c);
+    const near=R0.nodes.map(n=>[n,Math.hypot(n.x-p[0],n.y-p[1])]).sort((a,b)=>a[1]-b[1]);
+    const n={id:k*100+R0.nodes.length,r:k,x:Math.round(p[0]*10)/10,y:Math.round(p[1]*10)/10,hex:c,wc:1,type:t,name:nm,danger:0,fog:0,seenT:-1,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0};
+    R0.nodes.push(n);all.push(n);ring(c);if(near[0])R0.edges.push({a:n.id,b:near[0][0].id,len:Math.round(near[0][1])});if(near[1])R0.edges.push({a:n.id,b:near[1][0].id,len:Math.round(near[1][1])});return n;};
+  const pickCell=(cells,k)=>{const L=cells.filter(c=>freeCell(c,k));return L.length?L[Math.floor(R()*L.length)]:-1;};
+  const regCells=k=>{const L=[];for(let i=0;i<HN;i++)if(g.reg[i]===k)L.push(i);return L;};
+  for(let k=0;k<5;k++){const R0=w.regions[k];let have=R0.nodes.filter(n=>n.type==='thanh').length;
+    while(have<3){const cand=R0.nodes.filter(n=>!['tong','thanh','sao'].includes(n.type)&&!n.dp&&!n.sectFix);cand.sort((a,b)=>(a.type==='tran')-(b.type==='tran'));
+      if(cand.length>8){conv(cand[0],'thanh');have++;continue;}const c=pickCell(regCells(k),k);if(c<0)break;if(add(k,'thanh',c))have++;else break;}}
+  const dc=new Map();for(let i=0;i<HN;i++){const d=g.dist[i];if(d>=0&&g.reg[i]>=0){if(!dc.has(d))dc.set(d,{k:g.reg[i],cells:[]});dc.get(d).cells.push(i);}}
+  for(const [d,D] of dc){const k=D.k,R0=w.regions[k];let have=R0.nodes.filter(n=>n.type==='tran'&&g.dist[n.hex]===d).length;
+    while(have<2){const cand=R0.nodes.filter(n=>g.dist[n.hex]===d&&SOFT.includes(n.type)&&!n.dp&&!n.sectFix);
+      if(cand.length){conv(cand[Math.floor(R()*cand.length)],'tran');have++;continue;}const c=pickCell(D.cells,k);if(c<0)break;if(add(k,'tran',c))have++;else break;}}
+  w.ens=1;}
+{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions){ensureCounts(w);if(w.sep!==3){for(const R0 of w.regions)for(const n of R0.nodes)delete n.cells;w.sep=3;}growPlaces(w);}};}
+function placeCells(n){return n&&n.cells&&n.cells.length?n.cells:n?[nodeHex(n)]:[];}
+function canGoBack(){return false;}
+
+// sinh ra ở bất cứ trấn nào trên bản đồ
+function birthNode(){const w=W();const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
+  let pool=all.filter(n=>n.type==='tran'&&n.id!==w.lastBirth&&n.state!=='ruin');if(!pool.length)pool=all.filter(n=>n.type==='tran'||n.type==='thanh');return pick(pool);}
+{const _nr=newRun;newRun=function(){const x=_nr.apply(this,arguments);const r=G.run;if(r){r.rid=Date.now()+'.'+Math.floor(Math.random()*1e6);r.reveal=[];r.visS='';visReset();sense();
+  if(r.scene&&r.scene.type==='region')r.scene.text=T(REG[r.region].intro,{que:r.que});dbg('mo.spawn',{at:r.at,area:r.region,ten:r.ten});}return x;};}
+
+// tới một địa điểm: biết mình đang ở đại khu vực nào
+{const _ar=arrive;arrive=function(id){const r=G.run;const k=Math.floor(id/100);const was=r.region;r.region=k;r.maxRegion=Math.max(r.maxRegion||0,k);
+  const x=_ar.apply(this,arguments);
+  if(was!==k&&r.areas&&!r.areas.includes(k)){r.areas.push(k);if(typeof note==='function')note('Đặt chân vào '+REG[k].n+': '+REG[k].sub.toLowerCase()+'.');dbg('mo.area',{from:was,to:k});}
+  if(!r.areas)r.areas=[k];return x;};}
+
+// ---- tầm nhìn theo địa hình ----
+// Đồng bằng nhìn bình thường, sông hồ và vân hải nhìn xa hơn, rừng đồi che bớt, núi cao chặn hẳn (thấy núi nhưng không thấy sau núi).
+// Đứng trên cao nhìn xa hơn.
+const VIS_COST=[0.8,1,1.7,1,0.7,0.65,1.4,1.1];
+let VIS=null,VNOW=null,VT=null,VIS_K='',VIS_N=0;
+function visKey(){return G.run?(G.run.rid||'')+':'+G.run.kiep:'';}
+function visReset(){VIS=new Uint8Array(HN);VNOW=new Uint8Array(HN);VT=new Float64Array(HN);VIS_K=visKey();VIS_N++;}
+function visNowMs(){return typeof performance!=='undefined'?performance.now():Date.now();}
+function visLoad(){const r=G.run;if(!r)return;if(VIS&&VIS_K===visKey())return;visReset();
+  const s=r.visS||'';for(let j=0;j<s.length;j++){const v=VIS_A.indexOf(s[j]);if(v<=0)continue;for(let b=0;b<6;b++)if(v&(1<<b)){const i=j*6+b;if(i<HN)VIS[i]=1;}}}
+// ô đã thấy lưu thành chuỗi: mỗi ký tự giữ 6 ô
+const VIS_A='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+function visSave(){const r=G.run;if(!r||!VIS)return;let s='';for(let j=0;j*6<HN;j++){let v=0;for(let b=0;b<6;b++)if(VIS[j*6+b])v|=1<<b;s+=VIS_A[v];}r.visS=s;}
+function visCells(h,R){const g=geo();const e0=g.el[h];R*=1+Math.min(0.6,e0*0.07);
+  const D=new Float32Array(HN).fill(1e9);D[h]=0;const out=[h];const hp=[[0,h]];
+  const push=x=>{hp.push(x);let i=hp.length-1;while(i>0){const p=(i-1)>>1;if(hp[p][0]<=hp[i][0])break;[hp[p],hp[i]]=[hp[i],hp[p]];i=p;}};
+  const pop=()=>{const t=hp[0],l=hp.pop();if(hp.length){hp[0]=l;let i=0;for(;;){let m=i;const x=2*i+1,y=x+1;if(x<hp.length&&hp[x][0]<hp[m][0])m=x;if(y<hp.length&&hp[y][0]<hp[m][0])m=y;if(m===i)break;[hp[m],hp[i]]=[hp[i],hp[m]];i=m;}}return t;};
+  while(hp.length){const [d,u]=pop();if(d>D[u])continue;
+    // núi cao hơn chỗ đứng thì chặn tầm nhìn phía sau; đồi cao hơn hẳn cũng vậy
+    if(u!==h&&((g.ter[u]===3&&g.el[u]>=e0)||(g.ter[u]===6&&g.el[u]>e0+2)))continue;
+    for(const v of hexNb(u)){const nd=d+VIS_COST[g.ter[v]];if(nd<=R&&nd<D[v]){if(D[v]>=1e9)out.push(v);D[v]=nd;push([nd,v]);}}}
+  return out;}
+function visR(){return senseR()*1.15/HEXW;}
+function sense(){const r=G.run,w=W();if(!r)return false;visLoad();const p=playerMapXY();const h=hexAt(p[0],p[1]);
+  const L=visCells(h,visR());let ch=false;const t=visNowMs();VNOW.fill(0);
+  for(const c of L){VNOW[c]=1;if(!VIS[c]){VIS[c]=1;VT[c]=t;ch=true;}}
+  if(ch){visSave();VIS_N++;}
+  for(const R0 of w.regions)for(const n of R0.nodes){if(VNOW[nodeHex(n)]){if(n.fog<2){n.fog=2;ch=true;}if(n.memory){n.memory=false;ch=true;}n.seenT=w.t;n.vstate=n.state;}}
+  if(r.lastVisH!==h){r.lastVisH=h;VIS_N++;ch=true;}
+  return ch;}
+// đã thấy (đã đi qua) hoặc đang trong tầm nhìn
+function hexSeen(i){visLoad();return !!(VIS&&(VIS[i]||VNOW[i]));}
+
+// ---- bản lưu cũ (bản đồ năm ô vuông) không dùng được nữa: dựng lại thế giới, đưa nhân vật về một trấn ----
+function moFixRun(){const r=G.run;if(!r)return;const n=birthNode();r.at=n.id;r.region=Math.floor(n.id/100);r.moving=null;r.reveal=[];r.visS='';r.quests=[];r.passes=[];r.place={n:n.name,t:n.type};
+  if(r.scene&&r.scene.type!=='combat')r.scene=null;visReset();arrive(n.id);dbg('mo.migrate',{at:n.id});}
+if(typeof loadData==='function'){const _ld=loadData;loadData=function(d){
+  const old=d&&d.meta&&d.meta.world&&!d.meta.world.mo;
+  if(old){const w0=d.meta.world;const w=genWorld();for(const k of ['t','bangY','legacy','chron','nemesis','rstate','rivals','sects','quoc'])if(w0[k]!=null)w[k]=w0[k];w.ents=[];d.meta.world=w;}
+  const x=_ld.apply(this,arguments);if(old)moFixRun();if(G.run){visReset();visLoad();sense();}return x;};}
+
+// thống kê một đại khu vực cho thẻ mô tả: địa thế chính, tỉ lệ đã khám phá, số quận
+function areaStat(k){const g=geo();visLoad();const tc={};let land=0,seen=0;const ds=new Set();
+  for(let i=0;i<HN;i++){if(g.reg[i]!==k)continue;if(g.dist[i]>=0)ds.add(g.dist[i]);if(!terWalk(g.ter[i]))continue;land++;if(VIS&&(VIS[i]||VNOW[i]))seen++;const t=TER_N[g.ter[i]];tc[t]=(tc[t]||0)+1;}
+  return {ter:Object.keys(tc).sort((a,b)=>tc[b]-tc[a]).slice(0,3),pct:land?Math.round(seen*100/land):0,quan:ds.size,land};}
+
+// ================= ĐI TỚI Ô ĐẤT BẤT KỲ =================
+// Điểm dừng tạm ("điểm hoang"): nút ngoài danh sách địa điểm, id = khu*100 + 90..99, lưu ở w.wp. Máy chạy y như một địa điểm hoang bình thường.
+const WP0=90,WP_TY=[null,'hoang','rung','nui','song',null,'hoang','hoang'],WP_BASE=[0,0,1,2,1,0,1,1];
+{const _nb=nodeById;nodeById=function(id){if(id%100>=WP0){const w=W();return w&&w.wp&&w.wp[id]||undefined;}return _nb(id);};}
+function wpGC(){const r=G.run,w=W();if(!r||!w||!w.wp)return;const keep=new Set([r.at,r.dest]);if(r.moving)for(const id of r.moving.path)keep.add(id);for(const id in w.wp)if(!keep.has(+id))delete w.wp[id];}
+function wpDraft(c){const g=geo(),k=g.reg[c],t=g.ter[c];if(k<0||!terWalk(t))return null;
+  let nd=null,bd=1e9;const [cx,cy]=hexCenter(c);for(const n of regionOf(k).nodes){const p=mapXY(k,n.x,n.y),d=Math.hypot(p[0]-cx,p[1]-cy);if(d<bd){bd=d;nd=n;}}
+  const dg=clamp(Math.round((WP_BASE[t]+(nd?nd.danger:1))/2),0,3);
+  return {id:-1,r:k,wp:1,hex:c,type:WP_TY[t],name:TER_N[t]+' vô danh',danger:dg,fog:3,seenT:W().t,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0,x:invXY(k,cx,cy)[0],y:invXY(k,cx,cy)[1]};}
+function wpMake(c){const w=W();wpGC();w.wp=w.wp||{};for(const id in w.wp)if(w.wp[id].hex===c)return w.wp[id];
+  const d=wpDraft(c);if(!d)return null;let s=0;while(w.wp[d.r*100+WP0+s]&&s<9)s++;d.id=d.r*100+WP0+s;w.wp[d.id]=d;return d;}
+function cellHours(c){const r=G.run;const a=nodeById(r.at);if(!a)return null;const h=nodeHex(a);if(h===c)return 0;const L=hexPath(h,c).len;return L/walkSpeed();}
+{const _arr=arrive;arrive=function(id){_arr(id);wpGC();};}

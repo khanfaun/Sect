@@ -5,14 +5,14 @@ function resolveP(e,path){let x=e;for(const k of path){x=x==null?undefined:x[k];
 function chkChance(chk){
   const r=G.run,s=S();const [k,dc]=chk;
   if(k==='root'){return clamp(0.15+(rootView(r.root).m-0.7)*0.9+s.van*0.005,0.08,0.95);}
-  const val=s[k]!=null?s[k]:0;const d=dc+r.region*2;
+  const val=s[k]!=null?s[k]:0;const d=dc+rT()*2;
   return clamp(0.5+(val-d)*0.05+s.van*0.004+((s.fx.chkP||0)/100),0.08,0.95);
 }
 const CHKN={tp:'Thân pháp',ngo:'Ngộ tính',tam:'Đạo tâm',van:'Khí vận',root:'Linh căn'};
 const CHKI={tp:'🌀',ngo:'🧠',tam:'🪷',van:'🍀',root:'💠'};
-function costOk(c){if(!c)return true;const r=G.run,s=S();if(c.st&&r.st<Math.max(1,Math.round(c.st*SC[r.region])))return false;if(c.mp&&r.mp<Math.round(s.maxMp*parseFloat(c.mp)/100))return false;return true;}
+function costOk(c){if(!c)return true;const r=G.run,s=S();if(c.st&&r.st<Math.max(1,Math.round(c.st*SC[rT()])))return false;if(c.mp&&r.mp<Math.round(s.maxMp*parseFloat(c.mp)/100))return false;return true;}
 function costChips(c){const r=G.run,s=S(),o=[];if(!c)return o;
-  if(c.st){const d=Math.max(1,Math.round(c.st*SC[r.region]));r.st-=d;o.push(chip('💎','−'+d,'Linh thạch','dn'));}
+  if(c.st){const d=Math.max(1,Math.round(c.st*SC[rT()]));r.st-=d;o.push(chip('💎','−'+d,'Linh thạch','dn'));}
   if(c.mp){const d=Math.round(s.maxMp*parseFloat(c.mp)/100);r.mp-=d;o.push(chip('💧','−'+d,'Linh lực','dn'));}
   if(c.hp){const d=Math.round(s.maxHp*parseFloat(c.hp)/100);r.hp=Math.max(1,r.hp-d);o.push(chip('❤️','−'+d,'Khí huyết','dn'));}
   return o;}
@@ -21,7 +21,7 @@ function srcOk(e,src){const s=e.src||'explore';if(!src)return true;if(s===src)re
 let ENT_ON=false;
 function evOk(e,type,src){
   const r=G.run;if(!srcOk(e,src)||!whenOk(e))return false;
-  if(e.r&&!e.r.includes(r.region))return false;
+  if(e.r&&!e.r.includes(rT()))return false;
   if(type&&e.tg&&!e.tg.includes('*')&&!e.tg.includes(type))return false;
   if(e.once&&r.evCount[e.id])return false;
   if((r.evCount[e.id]||0)>=2)return false;
@@ -33,11 +33,11 @@ function evOk(e,type,src){
 function pickEvent(type,src){
   const r=G.run;src=src||'explore';
   // sự kiện đặc biệt
-  const sp=src!=='explore'?[]:EVS.filter(e=>e.spec&&srcOk(e,src)&&whenOk(e)&&(!type||!e.tg||e.tg.includes('*')||e.tg.includes(type))&&(r.evCount[e.id]||0)<2&&(!e.r||e.r.includes(r.region))&&!(e.once&&r.evCount[e.id])&&!r.evRecent.includes(e.id)&&e.cond&&e.cond(r));
+  const sp=src!=='explore'?[]:EVS.filter(e=>e.spec&&srcOk(e,src)&&whenOk(e)&&(!type||!e.tg||e.tg.includes('*')||e.tg.includes(type))&&(r.evCount[e.id]||0)<2&&(!e.r||e.r.includes(rT()))&&!(e.once&&r.evCount[e.id])&&!r.evRecent.includes(e.id)&&e.cond&&e.cond(r));
   if(sp.length&&chance(.55))return pick(sp).id;
   let pool=EVS.filter(e=>evOk(e,type,src));
   if(!pool.length)pool=EVS.filter(e=>evOk(e,null,src));
-  if(!pool.length)pool=EVS.filter(e=>!e.spec&&!e.once&&srcOk(e,src)&&(!e.r||e.r.includes(r.region)));
+  if(!pool.length)pool=EVS.filter(e=>!e.spec&&!e.once&&srcOk(e,src)&&(!e.r||e.r.includes(rT())));
   if(!pool.length)return null;
   return wpick(pool,e=>(e.w||1)*((e.tg&&e.tg.includes(type))?2:1)/(1+(r.evCount[e.id]||0)*2)).id;
 }
@@ -80,7 +80,7 @@ function doOutcome(out,path,pre){
 // ---------------- KẺ ĐỊCH ----------------
 const GIAI=['Nhất','Nhị','Tam','Tứ','Ngũ','Lục','Thất'];
 function mkEnemy(spec,v){
-  const r=G.run,reg=r.region;spec=spec||{};
+  const r=G.run,reg=rTv();spec=spec||{};
   if(spec.k==='tamma'){const s=S();return {n:'Tâm Ma',sub:'Bóng tối trong lòng ngươi',i:'🌑',el:'am',f:'vat',hp:Math.round(s.maxHp*0.85),max:Math.round(s.maxHp*0.85),atk:Math.round(s.atk*0.9),def:Math.round(s.def*0.9),pat:['drain','weak','atk','charge','heavy','rage'],pi:0,st:{}};}
   let k=spec.k;
   if(spec.nem&&v){k=v.kk;spec=Object.assign({},spec,{i:v.ki});}
@@ -106,7 +106,7 @@ function mkEnemy(spec,v){
   return {n:up1(n),sub,i:spec.i||ty.i,el,f:ty.f,k,hp,max:hp,atk:Math.round(EA[reg]*ty.atk*m*aM),def:Math.round(ED[reg]*ty.def*m),pat:ty.pat.slice(),pi:ri(0,ty.pat.length-1),st:{},elite:!!spec.elite};
 }
 function mkBoss(){
-  const r=G.run,b=r.bossDef;const reg=r.region;const v=baseV();v.ten=genName(chance(.7)?'nam':'nu');v.trai=pick(['Hắc Phong Trại','Huyết Đao Trại','Thiết Cốt Trại','Lang Nha Trại']);
+  const r=G.run,b=r.bossDef;const reg=rT();const v=baseV();v.ten=genName(chance(.7)?'nam':'nu');v.trai=pick(['Hắc Phong Trại','Huyết Đao Trại','Thiết Cốt Trại','Lang Nha Trại']);
   const n=T(b.n,Object.assign(v,r.bossV||{}));const sub=T(b.sub,Object.assign(v,r.bossV||{}));
   const m=1.3;
   const hp=Math.round(EH[reg]*b.hp*m*[0.72,0.9,1,1,1][reg]);
@@ -148,7 +148,7 @@ function playerUnit(){
     skills:r.skills.map(x=>({id:x.id,lv:x.lv})),st:{},pos:0,phase:'run',pending:null,waitSet:[],stunT:0,rec:1,chargeT:0,tl:100};
 }
 function enemyUnit(en,id,f){
-  const reg=G.run.region;f=f||1;
+  const reg=rT();f=f||1;
   const tp=Math.round((6+reg*2.5+(en.boss?2:0)+(en.elite?1:0))*(en.k&&EN[en.k]&&EN[en.k].f==='thu'?1.05:1)),cx=10+2*reg+(en.elite||en.boss?2:0);
   return {id,side:'B',ctrl:'ai',name:en.n,sub:en.sub,icon:en.i,el:en.el,f:en.boss?'boss':en.f,k:en.k,boss:!!en.boss,elite:!!en.elite,esc:en.esc,
     hp:Math.round(en.hp*f),max:Math.round(en.max*f),mp:0,maxMp:0,atk:Math.round(en.atk*f*0.85),def:en.def,tp:en.tp||tp,cx:en.cx||cx,ne:en.ne||tp,hoi:en.hoi||cx,crit:5+reg*1.5+(en.elite?3:0)+(en.boss?5:0),critDmg:150,hoTam:reg*2+(en.elite?4:0)+(en.boss?8:0),realm:reg+(en.boss?1:0)+(en.elite?0.5:0),matk:Math.round(en.atk*f*0.85),

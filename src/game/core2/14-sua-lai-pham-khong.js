@@ -1,7 +1,7 @@
 // ----- sửa lại: phẩm không gắn với cảnh giới. Mỗi món có yêu cầu cảnh giới riêng, theo nơi nó xuất hiện -----
 // Vùng 1 (Phàm Trần): cần Phàm nhân hoặc Luyện Khí; vùng 2: Luyện Khí hoặc Trúc Cơ; vùng 3: Trúc Cơ hoặc Kết Đan… Phẩm nào cũng có thể gặp ở mọi yêu cầu.
 // Món cũ chưa có yêu cầu (bản lưu trước): coi như Phàm nhân dùng được.
-function relReqRoll(){const r=G.run;const k=clamp((r&&r.region)||0,0,4);return clamp(k+(chance(k===0?0.4:0.5)?1:0),0,6);}
+function relReqRoll(){const r=G.run;const k=clamp(rT()||0,0,4);return clamp(k+(chance(k===0?0.4:0.5)?1:0),0,6);}
 {const _gr31=genRelic;genRelic=function(t){const x=_gr31(t);if(x&&x.req==null)x.req=relReqRoll();return x;};}
 relReq=function(rel){if(!rel||rel.k==='book')return 0;return rel.req!=null?rel.req:0;};
 // ----- phẩm quyết định SỐ dòng chỉ số, cảnh giới yêu cầu quyết định ĐỘ LỚN chỉ số -----

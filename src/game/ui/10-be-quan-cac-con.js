@@ -22,10 +22,7 @@ function lkTag(n){const m=LK_M[lkOf(n)]*(n&&n.dp?1.15:1)*(G.bqRoom?1.5:1);const 
 
 // ---------- trà lâu, khách điếm, tửu phường: các lựa chọn ----------
 function costHTML(h,st){return `${h?`<span class="cost-t">${ic('hour')}${durH(h)}</span>`:''}${st?`<span class="cost-s"><i class="rh"></i>${st}</span>`:''}`;}
-function venueHTML(n,v){const L=venueOpts(n,v);const vi=(n.vin&&n.vin[v])||(n.vin=n.vin||{},n.vin[v]=pick(VENUE_IN[v]));
-  return `<div class="venue"><div class="vn-h"><b>${VENUE_N[v]}</b><button class="xb sm" data-act="vclose" aria-label="Rời đi">${ic('close')}</button></div><p class="vn-in">${txt(vi)}</p>
-   <div class="vn-l">${L.map((o,i)=>`<button class="vn-o${o.spec?' spec':''}${o.lack||o.no?' dim':''}" data-act="vopt" data-arg="${o.id}"><span class="vn-t"><span class="vn-k">${i+1}.</span>${esc(o.l)}</span>
-    <span class="vn-c">${o.spec?`<span class="vn-sp">${ic('hour')}còn ${durH(o.spec)}</span>`:''}${costHTML(o.h,o.st)}${o.req?`<span class="vn-rq${o.lack?' bad':''}">${esc(o.req[2])} ${o.req[1]}</span>`:''}</span></button>`).join('')}</div></div>`;}
+
 // biểu tượng phần nhận được: chỉ biểu tượng và con số
 function gainHTML(g){if(!g)return '';const P=tvPts(G.run.realm)/100;const L=[];
   if(g.hp>0)L.push(['heart','hp','+'+Math.max(1,Math.round(g.hp/Math.max(1,S().maxHp)*100))+'%','Khí huyết']);if(g.hpTxt)L.push(['heart','hp',g.hpTxt,'Khí huyết']);
@@ -43,42 +40,13 @@ const PA_INFO={explore:{d:'Đi một vòng quanh đây: có thể gặp cơ duy�
   boss:{d:'Bước vào sào huyệt khiêu chiến thủ lĩnh của vùng. Thắng thì có lệnh bài thông quan.'},sanyeu:{d:'Lùng yêu thú quanh đây. Thắng thì được yêu đan, đôi khi có trứng linh thú, và lịch luyện.'},
   haithuoc:{d:'Lần theo mùi thuốc trong rừng, hái linh thảo để luyện đan.',g:{txt:'linh thảo'}},daokhoang:{d:'Gõ đá đoán mạch, đào linh khoáng để luyện khí.',g:{txt:'linh khoáng'}},
   khaiphu:{d:'Đục một động phủ ở đây. Có động phủ mới bế quan, đột phá được.'},bury:{d:'Chôn vật phẩm ở đây cho kiếp sau.'},grave:{d:'Viếng mộ, thắp nén hương.'},patron:{d:'Tới thăm ân nhân.'}};
-function confirmHTML(title,d,h,st,g,act,arg){return `<div class="mbox pconf"><h3>${esc(title)}</h3><p>${esc(d)}</p>
-   ${h||st?`<div class="pc-row"><small>Tốn</small><span class="cost">${costHTML(h,st)}</span></div>`:''}${g?`<div class="pc-row"><small>Nhận được</small>${gainHTML(g)}</div>`:''}
-   <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="${act}" data-arg="${arg}">Đồng ý</button></div></div>`;}
-{const _mh12=modalHTML;modalHTML=function(){const m=UI.modal;const r=G.run;
-  if(m&&m.k==='qdo'&&r){const q=r.quests.find(x=>x.id===m.id);if(!q)return '';const den=q.kind==='den';
-    return `<div class="mbox pconf"><h3>${den?'Giao tận tay':'Lùng tìm mục tiêu'}</h3><p>${esc(q.text)}.</p><p>${den?'Tìm đúng người nhận, trao tận tay rồi lấy tiền công.':'Lần theo dấu vết trong tờ cáo thị. Tìm ra thì phải đánh một trận. Thắng thì xong việc; thua hoặc bỏ chạy thì nhiệm vụ thất bại.'}</p>
-     <div class="pc-row"><small>Tốn</small><span class="cost">${costHTML(den?1:2,0)}</span></div><div class="pc-row"><small>Nhận được</small><span class="qrw">${chipsHTML(questRewardChips(q))}</span></div>
-     <div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="qDoGo" data-arg="${q.id}">${den?'Giao':'Đi tìm'}</button></div></div>`;}
-  if(m&&m.k==='qdrop'&&r){const q=r.quests.find(x=>x.id===m.id);if(!q)return '';const P=questPenalty(q);
-    return `<div class="mbox pconf"><h3>Hủy nhiệm vụ?</h3><p>${esc(q.text)}</p><p>Đã nhận lời thì phải giữ chữ tín. Bỏ ngang thì phải đền một nửa tiền thưởng và mang tiếng thất hứa.</p><div class="pc-row"><small>Bị phạt</small><span class="gains"><span class="gn st"><i class="rh"></i>−${P.st}</span><span class="gn in">nhân quả ${P.karma}</span></span></div><div class="mb-f"><button class="btn" data-act="modalX">Thôi</button><button class="btn pri" data-act="qDropGo" data-arg="${q.id}">Hủy nhiệm vụ</button></div></div>`;}
-  if(m&&m.k==='pconf'&&r&&r.scene){const n=nodeById(r.scene.id);const a=placeActs(n).find(x=>x.a===m.a);if(!a)return '';const I=PA_INFO[m.a]||{d:a.tip||''};const g=typeof I.g==='function'?I.g():I.g;
-    return confirmHTML(PL_N[m.a]||a.l,I.d,a.h,0,g,'pactGo',m.a);}
-  if(m&&(m.k==='vconf'||m.k==='vreq')&&r&&r.scene){const n=nodeById(r.scene.id);const o=venueOpts(n,m.v).find(x=>x.id===m.id);if(!o)return '';
-    if(m.k==='vreq')return `<div class="mbox pconf"><h3>${esc(o.l)}</h3><p>${esc(o.d)}</p><div class="pc-row bad"><small>Chưa đủ</small><span>${esc(o.lack||o.no)}</span></div><div class="mb-f"><button class="btn pri" data-act="modalX">Đã hiểu</button></div></div>`;
-    return confirmHTML(o.l,o.d,o.h,o.st,o.fight?{st:o.g.st,txt:'phải đánh một trận'}:o.g,'vgo',m.v+':'+m.id);}
-  return _mh12();};}
 
 // sự kiện dọc đường của nhiệm vụ
-function vQev(sc){const r=G.run;const q=r.quests.find(x=>x.id===sc.q);let b=`<div class="story"><p class="new">${txt(sc.text)}</p></div>${q?`<p class="hint">Nhiệm vụ: ${esc(q.text)}</p>`:''}`;
-  if(sc.res){b+=`<div class="story"><div class="ev-q"><p class="ev-c">› ${esc(sc.res.l)}</p><p>${txt(sc.res.t)}</p></div></div>`+chipsHTML(sc.chips);return card('Trên đường làm nhiệm vụ',r.place.n,b,{foot:goBtn('qevDone','Tiếp tục')});}
-  b+='<div class="choices">'+qevOpts(sc).map((o,i)=>`<button class="ch${o.lack||o.no?' soft':''}" data-act="qevPick" data-arg="${i}"${o.lack||o.no?' disabled':''}><span class="cn">${i+1}.</span><span class="ct">${esc(o.l)}</span>${o.fight?'<span class="cx">phải đánh</span>':''}${o.h||o.st?`<span class="cx">${costHTML(o.h,o.st)}</span>`:''}${o.lack?`<span class="cx no">${esc(o.lack)}</span>`:''}</button>`).join('')+'</div>';
-  return card('Trên đường làm nhiệm vụ',r.place.n,b,{});}
-SCENE_V.qev=vQev;
 
 // kỳ ngộ
-function vKyngo(sc){const r=G.run;const ev=KYNGO.find(x=>x.id===sc.ev);let b=`<p class="ky-tag${ev.paid?' paid':''}">${ev.paid?'Kỳ ngộ · phải trả giá':'Kỳ ngộ · hữu duyên'/* loại vớ vẩn cũng ghi hữu duyên cho người chơi mắc lừa */}</p><div class="story"><p class="new">${txt(sc.text)}</p></div>`;
-  if(sc.res){b+=`<div class="story"><div class="ev-q"><p class="ev-c">› ${esc(sc.res.l)}</p><p>${txt(sc.res.t)}</p></div></div>`+chipsHTML(sc.chips);return card(ev.n,'',b,{cls:'kyngo',foot:goBtn('kyDone','Tiếp tục')});}
-  b+='<div class="choices">'+kyOpts(sc).map((o,i)=>`<button class="ch${o.no?' soft':''}" data-act="kyPick" data-arg="${i}"${o.no?' disabled':''}><span class="cn">${i+1}.</span><span class="ct">${esc(o.l)}</span>${o.cost?`<span class="cx no">${esc(o.cost)}</span>`:''}${o.no?`<span class="cx no">${esc(o.no)}</span>`:''}</button>`).join('')+'</div>';
-  return card(ev.n,'',b,{cls:'kyngo'});}
-SCENE_V.kyngo=vKyngo;
+
 // nhãn trên thanh đầu, cùng hàng tên: bình cảnh (tu vi đầy, lịch luyện chưa đầy) hoặc đột phá (cả hai đầy, nhấp nháy)
-function btBadge(){const st=btState();if(!st)return '';const r=G.run;
-  if(st==='bc'&&!canBreak()&&lkXkState()&&lkXkState().ll)return `<span class="hbt hbc"${ta('Bình cảnh: tu vi đã đầy, không tăng thêm được.\nLịch luyện '+llShow()+'%: cần chừng 65% mới xung kích được.\nHãy ra ngoài lịch luyện: đánh trận, tới nơi mới, quen người mới, làm việc.')}>Bình cảnh</span>`;
-  if(st==='bc')return `<span class="hbt hbc"${ta('Bình cảnh: tu vi đã đầy, không tăng thêm được.\nLịch luyện '+llShow()+'%: cần đầy mới đột phá được.\nHãy ra ngoài lịch luyện: đánh trận, tới nơi mới, quen người mới, làm việc.')}>Bình cảnh</span>`;
-  if(st==='xk')return `<button class="hbt dp" data-act="hudBq"${ta('Tu vi '+sgName(sgTang())+' đã đầy: có thể xung kích lên '+lkXkState().nx+'.\nMở bế quan rồi chọn Xung kích.')}>Xung kích</button>`;
-  return `<button class="hbt dp" data-act="hudBq"${ta(isPham()?'Tu vi và lịch luyện đều đầy: có thể xung kích Luyện Khí tầng 1.\nBế quan ở bất cứ đâu để dẫn khí nhập thể.':'Có thể đột phá '+(G.run.realm>=4?'phi thăng':REALM[G.run.realm+1])+'.\nTới nơi có động phủ, mở bế quan rồi chọn Đột phá.')}>${isPham()?'Xung kích':'Đột phá'}</button>`;}
+
 // màn chuẩn bị đột phá: tỉ lệ thành công tách theo từng nguồn, phẩm chất dự kiến cũng vậy
 vPrep=function(sc){const r=G.run;const v=prepView();const to=btTarget();const ph=isPham();const P=btParts(sc.slots);const D=daoParts();const e0=btEff(sc.slots);const dD=D.reduce((a,x)=>a+x.v,0);
   let b=`<div class="story"><p>${ph?'Ngồi yên, theo tâm pháp dẫn sợi linh khí đầu tiên vào thân. Thành thì bước vào Luyện Khí; bại thì tổn thương kinh mạch, mất một phần tu vi.':'Chọn tối đa năm vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.'}</p></div>`;
@@ -92,14 +60,10 @@ vPrep=function(sc){const r=G.run;const v=prepView();const to=btTarget();const ph
   const L=btItems();
   b+=`<h4 class="sgrp">Túi đồ dùng được</h4><div class="rows">`+(L.length?L.map(({p,i})=>`<button class="row${sc.slots.includes(i)?' taken':''}" data-act="prep" data-arg="${i}"${ta(pillTip(p.id,p.q))}><span class="r-i">${PILL[p.id].i}</span><span class="r-t"><b>${p.q?PQ[p.q]+' ':''}${esc(PILL[p.id].n)}</b><small>${esc(PILL[p.id].d.replace('{x}',pillX(p.id,p.q)))}</small></span></button>`).join(''):'<p class="hint">Không có vật phẩm nào dùng được.</p>')+'</div>';
   return card(ph?'Xung kích Luyện Khí tầng 1':to===5?'Độ kiếp phi thăng':'Đột phá '+REALM[to],r.place.n,b,{cls:'tall',foot:`<button class="btn" data-act="next">Để sau</button><span class="grow"></span><button class="btn pri" data-act="prepGo">Bắt đầu</button>`});};
-SCENE_V.prep=vPrep;
-
 
 // chọn một trong ba tiên thiên khí vận sau khi đột phá đại cảnh giới
-function kvPickHTML(){const r=G.run;return `<div class="mbox kvpick"><h3>Khí vận hội tụ</h3><p class="hint">Đột phá thành công, thiên địa cảm ứng. Chọn một tiên thiên khí vận.</p><div class="kvp">${r.kvPick.map((id,i)=>{const d=TT_DEST[id];return `<button class="kvo" data-act="kvPick" data-arg="${i}" style="--pc:${TT_COL[d.rank]}"><span class="kvh"><b>${esc(d.name)}</b><small>${TT_RANK[d.rank]}</small></span><p>${esc(d.description)}</p><p class="kvf">${ttFxText(d).map(esc).join('<br>')}</p></button>`;}).join('')}</div></div>`;}
 
 // nút xung kích tầng Luyện Khí trong bảng bế quan
-function xkBoxHTML(){const X=lkXkState();if(!X)return '';const g=sgGate();return `<div class="bt-box${X.ok?' on':''}"><b>${ic('spark')} Xung kích ${esc(X.nx)}</b><p class="hint${X.ok?'':' bad'}">${X.ok?'Thanh tu vi '+sgName(g)+' đã đầy. Dồn linh lực phá quan để lên '+X.nx+' (mất chừng một tháng).'+(X.why?' '+esc(X.why):''):esc(X.why)}</p><button class="btn ${X.ok?'pri':''}" data-act="xkGo"${X.ok?'':' disabled'}>Xung kích</button></div>`;}
 
 // khoảng tu vi nhận được khi bế quan; ở Luyện Khí tính theo tầng (vượt tầng thì nói lên mấy tầng)
 function bqGainTxt(a,b){if(!sgOn())return '~'+Math.floor(a)+'% – '+Math.ceil(b)+'% tu vi';const w=sgW();return '~'+Math.floor(a/w*100)+'% – '+Math.ceil(b/w*100)+'% tu vi';}

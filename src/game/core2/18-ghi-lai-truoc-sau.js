@@ -42,7 +42,7 @@ function miShop(){return clamp((miOf()-10)*0.8,-6,10);}
 // phép thử thuyết phục: cộng theo mị lực
 const MI_RX=/thuyết|xin |mời|nói |hỏi|khuyên|năn nỉ|dỗ|làm quen|kết giao|cầu|thương lượng|mặc cả|trả giá/i;
 CHKN.mi='Mị lực';
-{const _cc=chkChance;chkChance=function(chk){if(chk&&chk[0]==='mi'){const s=S();return clamp(0.5+(miOf()-chk[1]-G.run.region)*0.05+s.van*0.004,0.08,0.95);}return _cc(chk);};}
+{const _cc=chkChance;chkChance=function(chk){if(chk&&chk[0]==='mi'){const s=S();return clamp(0.5+(miOf()-chk[1]-rT())*0.05+s.van*0.004,0.08,0.95);}return _cc(chk);};}
 {const _ch=choose;choose=function(i){const r=G.run,sc=r&&r.scene;let bump=0;if(sc&&sc.type==='event'){const e=EVMAP[sc.id];const L=resolveP(e,sc.cur)||[];const c=L[i];if(c&&c.chk&&(MI_RX.test(c.l||'')||sc.id==='son_mon')){bump=clamp((miOf()-10)*0.012,-0.06,0.12);}}
   if(!bump)return _ch(i);const _cc2=chkChance;chkChance=function(k){return clamp(_cc2(k)+bump,0.05,0.97);};try{return _ch(i);}finally{chkChance=_cc2;}};}
 
@@ -69,14 +69,14 @@ function favAdd(n,d,why){if(!n||!d)return 0;const o=npcRec(n);if(o.fav===0&&!o.m
     const o=npcRec(e.name,{type:e.type,g:e.data&&e.data.g,sect:e.data&&e.data.s});o.met=(o.met||0)+1;if(o.met===1&&e.type!=='truysat')o.fav=Math.max(o.fav,favOf(e.name));
     const f=o.fav;
     if(f<=-50&&e.type!=='thienkieu'&&!r.moving){note(`${e.name} thấy ngươi, sát khí bốc lên!`,'dn');startCombat({cnt:1},{kind:'node'});const sc=G.run.scene;if(sc&&sc.units){const u=sc.units.find(x=>x.side==='B');if(u){u.name=e.name;if(u.realName)u.realName=e.name;}}return;}
-    if(f>=35&&chance(f>=60?0.5:0.3)){const g=f>=60?ri(15,40):ri(5,15);const v=Math.round(g*SC[r.region]);r.st+=v;note(`${e.name} vui vẻ biếu ngươi ${v} linh thạch.`,'up');}
+    if(f>=35&&chance(f>=60?0.5:0.3)){const g=f>=60?ri(15,40):ri(5,15);const v=Math.round(g*SC[rT()]);r.st+=v;note(`${e.name} vui vẻ biếu ngươi ${v} linh thạch.`,'up');}
     else favAdd(e.name,2);}
   return _me2(e);};}
 // đánh người: kẻ bại thêm hận
 {const _fcF=finishCombat;finishCombat=function(sc){const r=G.run;if(sc&&sc.units&&sc.over==='win'&&!sc.spar)for(const u of sc.units)if(u.side==='B'&&isHumanFoe(u)){const n=u.realName||u.name;if(n&&n!=='???')favAdd(n,-35);}
   if(sc&&sc.spar&&sc.units)for(const u of sc.units)if(u.side==='B'){const n=u.realName||u.name;if(n&&n!=='???')favAdd(n,sc.over==='win'?6:3);}return _fcF(sc);};}
 // tặng lễ: tốn linh thạch, tăng hảo cảm (càng thân càng khó tăng)
-function giftCost(n){return Math.max(5,Math.round(12*SC[G.run.region]));}
+function giftCost(n){return Math.max(5,Math.round(12*SC[rT()]));}
 function favGift(n){const r=G.run;const c=giftCost(n);if(r.st<c)return 'Không đủ linh thạch.';r.st-=c;const f=favOf(n);const d=f>=60?3:f>=35?5:f>=0?8:6;favAdd(n,d+Math.max(0,Math.round((miOf()-10)/5)));advanceTime(2);return '';}
 
 // ===================== HẢO CẢM TÔNG MÔN =====================

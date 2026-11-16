@@ -70,16 +70,16 @@ ev({id:'no_kiep_truoc',src:'ent:truysat',n:'Nợ kiếp trước',spec:1,cond:()
   {i:'🌫️',l:'Buông bỏ',t:'Kiếp trước là kiếp trước. Ngươi quay đi. {$k} nhìn theo, không hiểu vì sao lại thấy lạnh gáy.',e:{tam:3,tamma:-5}}
  ]});
 
-ev({id:'bao_an',n:'Người cũ báo ân',spec:1,cond:r=>r.seeds.some(s=>s.t==='an'&&(s.r<r.region||G.meta.world.t-(s.at||0)>=HM)),
- v:r=>{const i=r.seeds.findIndex(s=>s.t==='an'&&(s.r<r.region||G.meta.world.t-(s.at||0)>=HM));const s=r.seeds.splice(i,1)[0];return {s};},
+ev({id:'bao_an',n:'Người cũ báo ân',spec:1,cond:r=>r.seeds.some(s=>s.t==='an'&&(s.r!==r.region||G.meta.world.t-(s.at||0)>=HM)),
+ v:r=>{const i=r.seeds.findIndex(s=>s.t==='an'&&(s.r!==r.region||G.meta.world.t-(s.at||0)>=HM));const s=r.seeds.splice(i,1)[0];return {s};},
  t:['Có người gọi tên ngươi từ phía sau. Quay lại, ngươi mất một lúc mới nhận ra: {$s.ten}, người ngươi từng {$s.d} năm nào. Giờ {$s.hn} đã khác xưa nhiều.','Một đoàn người dừng lại trước mặt ngươi. Kẻ dẫn đầu xuống ngựa, cúi đầu thật thấp: “Còn nhớ {$s.ten} không? Ơn {$s.d} năm ấy, hôm nay xin trả.”'],
  c:[
   {i:'🤝',l:'Nhận tấm lòng',t:'{$s.ten} kể đã tu luyện ra sao, đã qua những gì. Lúc chia tay, {$s.hn} nhất quyết để lại một món quà.',e:{relic:1,pill:1,tv:6,ach:'baoan'}},
   {i:'🍶',l:'Chỉ uống một chén rượu',t:'Hai người cạn chén. Ngươi không nhận gì cả. {$s.ten} nhìn ngươi rất lâu, rồi cười.',e:{tam:3,van:3,tamma:-8,ach:'baoan'}}
  ]});
 
-ev({id:'bao_oan',src:'ent:truysat',n:'Kẻ thù cũ',spec:1,cond:r=>r.seeds.some(s=>s.t==='oan'&&(s.r<r.region||G.meta.world.t-(s.at||0)>=HM)),
- v:r=>{const i=r.seeds.findIndex(s=>s.t==='oan'&&(s.r<r.region||G.meta.world.t-(s.at||0)>=HM));const s=r.seeds.splice(i,1)[0];return {s};},
+ev({id:'bao_oan',src:'ent:truysat',n:'Kẻ thù cũ',spec:1,cond:r=>r.seeds.some(s=>s.t==='oan'&&(s.r!==r.region||G.meta.world.t-(s.at||0)>=HM)),
+ v:r=>{const i=r.seeds.findIndex(s=>s.t==='oan'&&(s.r!==r.region||G.meta.world.t-(s.at||0)>=HM));const s=r.seeds.splice(i,1)[0];return {s};},
  t:['{$s.ten}. Ngươi suýt không nhận ra. Gương mặt ấy giờ đầy sẹo, ánh mắt chỉ còn hận thù. “Nhớ ta không? Năm ấy ngươi {$s.d}.”','Có kẻ đã chờ ngươi rất lâu. {$s.ten}, người năm xưa bị ngươi {$s.d}, giờ đứng chắn giữa đường, binh khí đã tuốt khỏi vỏ.'],
  c:[
   {i:'⚔️',l:'Ứng chiến',fight:{k:'tantu',n:'{$s.ten}',m:1.2,elite:1},win:{t:'Ngươi thắng. Nhưng ánh mắt lúc ngã xuống của {$s.ten} khiến ngươi mất ngủ nhiều đêm.',e:{tamma:5,tv:8}}},

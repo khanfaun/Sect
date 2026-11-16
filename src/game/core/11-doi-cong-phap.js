@@ -117,7 +117,7 @@ function meetEnt(e){
   let id=null;
   if(e.type==='di'&&chance(.6))id=DI_K[e.data.k].ev;
   else if(e.type==='truysat'&&e.data.nem)id='no_kiep_truoc';
-  if(!id){const L=EVS.filter(x=>x.src==='ent:'+e.type&&(e.type!=='di'||!x.dk||x.dk===e.data.k)&&(e.type!=='truysat'||x.id!=='no_kiep_truoc')&&whenOk(x)&&(!x.cond||x.cond(r))&&(!x.r||x.r.includes(r.region)));if(L.length)id=wpick(L,x=>(x.w||1)/(1+(r.evCount[x.id]||0))).id;}
+  if(!id){const L=EVS.filter(x=>x.src==='ent:'+e.type&&(e.type!=='di'||!x.dk||x.dk===e.data.k)&&(e.type!=='truysat'||x.id!=='no_kiep_truoc')&&whenOk(x)&&(!x.cond||x.cond(r))&&(!x.r||x.r.includes(rT())));if(L.length)id=wpick(L,x=>(x.w||1)/(1+(r.evCount[x.id]||0))).id;}
   if(!id||!EVMAP[id]){return;}
   if(e.type==='thienkieu')r.metRival=e.data.rv;
   startEvent(id,{eid:e.id,en:e.name});r.scene.back=null;

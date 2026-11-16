@@ -97,8 +97,8 @@ export function DiaDiem({ sc }) {
       head={<>
         <button className="xb sc-x" data-act="leave" {...tip('Đóng, rời khỏi nơi này')} aria-label="Đóng"><Ic n="close" /></button>
         <div className="pl-meta">
-          <span>{PS.capS(PS.TYPE_NAME[n.type])}</span><span>{PS.REG[r.region].n}</span>
           <span className={'nc-g dg' + dg} {...tip(PS.dangerWhy(n))}><i></i>{PS.DTAG[dg]}</span>
+          <span>{PS.capS(PS.TYPE_NAME[n.type])}</span><span>{PS.REG[r.region].n}</span>
           <span>Linh khí {PS.LK_N[PS.lkOf(n)].toLowerCase()}</span>
         </div>
       </>}

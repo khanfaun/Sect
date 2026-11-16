@@ -16,6 +16,7 @@ Người dùng không phải lập trình viên: trả lời ngắn, ít thuật
 - Tính năng mới quan trọng nên có `dbg` để lần sau kiểm bằng chữ.
 
 ## Lưu ý kỹ thuật đã gặp
+- **Giao diện chỉ còn React** (`src/react/**`: ban-do, bang, canh, hop-thoai, man-ngoai, tran). Bản chuỗi HTML cũ (hudHTML, vBirth, SCENE_V, PANEL_V, modalHTML cũ…) đã xoá; `rxv(tên)` trong `src/game/ui/22-cau-noi-react.js` chỉ trả tên màn để React vẽ. Muốn sửa giao diện thì sửa ở `src/react`; màn mới phải đăng ký trong `src/react/main.jsx`.
 - Tệp trong `src/game/` ghép theo thứ tự `src/game/thu-tu.json`; hàm sau ghi đè hàm trước bằng kiểu bọc `{const _x=f;f=function(){...}}`. Tệp mới phải ghi tên vào thu-tu.json.
 - Chiêu thức không nằm trực tiếp trong `r.skills`: `syncSkills()` dựng lại từ công pháp. Muốn bỏ hẳn một chiêu phải ghi vào `r.skUsed` (xem 20-ngo-tinh-khi-van.js).
 - Chiêu tier 3 trở lên là "thần thông" chỉ tung qua pháp tướng; chiêu dùng một lần nên đặt tier thấp hơn.
@@ -24,7 +25,9 @@ Người dùng không phải lập trình viên: trả lời ngắn, ít thuật
 - Sửa xong phải `npm run build` (ra phu-sinh.html) rồi mới kiểm giao diện. Lần đầu cần `npm install`.
 - Các hệ thống mới (core2/23–30): thương thế 3 bậc, hồi phục theo lượt/tháng (đã bỏ hồi theo giờ trong `worldStep`), tĩnh toạ, đối thủ liều mạng, tâm ma, rớt cảnh giới + sống tạm, che giấu tu vi, thần thức/giao tranh. Lựa chọn dạng hộp thoại dùng khung kỳ ngộ: thêm vào `KYNGO` với `sp:1` để không lẫn vào kỳ ngộ ngẫu nhiên.
 - Tuổi (`r.age`) được tính lại từ `birthAge` và thời gian thế giới; trong bài kiểm tra muốn đổi tuổi phải đặt `birthAge`.
-- Bản đồ: phóng to từ 1,6 lần thì vẽ lại mảnh đang nhìn ở độ nét cao (`DTC` trong ui/05-gfx.js); hai vùng lật gương (CELL mx) chưa có mảnh chi tiết.
+- Bản đồ (core2/33-the-gioi-mo.js): một bản đồ ảnh liền (src/assets-goc/ban-do gốc, src/assets/ban-do nén cho mức Tiết kiệm). 5 "vùng" cũ = 5 đại khu vực địa lý (Trung Châu, Đông Hoang, Nam Trạch, Tây Lĩnh, Bắc Nhạc); `r.region` = khu đang đứng, độ khó dùng `rT()` (theo cảnh giới) / `rTv()` (kẻ địch, lệch ±1 đôi khi). Không còn quan ải.
+- Địa hình từng ô (loại đất, độ cao, khu vực) sinh từ ảnh bằng `python3 tools/dia-hinh.py [--debug thư_mục]` ra core2/03b-dia-hinh-du-lieu.js (`MAPD`). Ô 30px (`HEXW`), đi bộ theo `TER_COST` + lên dốc; hồ/vân hải coi như không đi được.
+- Tầm nhìn theo địa hình: `visCells` (núi chặn, nước nhìn xa). Ô đã thấy: `VIS` (lưu `r.visS`), đang thấy `VNOW`; vẽ "mực loang" bằng `inkMask` trong ui/05-gfx.js.
 - Túi đồ (core2/31): 10 ô mang trên người + túi trữ vật (relic k:'tui' đeo ở ô tuivat) mở thêm ô, ô túi khoá khi linh lực = 0 hoặc phàm nhân. Mỗi pháp bảo/vật liệu/trứng/lệnh bài/viên đan chiếm một ô. Giao diện ô/khoá chưa gắn (dùng `bagLayout()`, `it.locked`/`it.bsrc` của `bagItems()`).
 - Lịch luyện nhận ×`LL_BOOST` (20-ngo-tinh-khi-van.js). Bế quan: linh lực hồi ×`BQ_MP_MUL` nhanh hơn khí huyết, xuất quan không còn hồi đầy cả hai (24-hoi-phuc.js).
 
