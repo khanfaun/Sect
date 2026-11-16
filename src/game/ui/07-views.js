@@ -61,7 +61,7 @@ function mapUiHTML(){
   const r=G.run;const sp=UI.speed||1;
   const B=(act,arg,lab,tip,on,dis)=>`<button class="mb${on?' on':''}" data-act="${act}"${arg!=null?` data-arg="${arg}"`:''}${dis?' disabled':''}${ta(tip)}>${lab}</button>`;
   let h=`<div class="mleft wb">${woundBar()}</div>`;
-  h+=`<div class="mright">${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}${B('legendOpen',null,ic('list'),'Chú giải ký hiệu trên bản đồ',UI.panel==='more'&&UI.tab.more==='legend')}${B('center',null,ic('target'),'Về chỗ ngươi')}</div>`;
+  h+=`<div class="mright">${B('gridT',null,ic('hex'),CFG.grid?'Ẩn lưới ô':'Hiện lưới ô',CFG.grid)}${B('legendOpen',null,ic('list'),'Chú giải ký hiệu trên bản đồ',UI.panel==='more'&&UI.tab.more==='legend')}${B('zoomAll',null,ic('globe'),'Thu nhỏ hết cỡ: xem cả bản đồ')}${B('center',null,ic('target'),'Về chỗ ngươi')}</div>`;
   // góc trái dưới: luyện chế, túi đồ, bế quan (nhấp nháy khi đủ điều kiện đột phá)
   const bqNo=bqCan();const brk=canBreak();
   h+=`<div class="mbl">${B('panel','craft',ic('flask'),'Luyện chế: luyện đan, luyện khí từ vật liệu',UI.panel==='craft',!!r.moving)}${B('bagOpen',null,ic('bag'),'Túi đồ',UI.panel==='char'&&UI.tab.char==='bag')}<button class="mb${brk?' glow':''}" data-act="hudBq"${bqNo?' disabled':''}${ta(bqNo||(brk?'Bế quan · tu vi viên mãn: vào để đột phá':'Bế quan tu luyện ngay tại đây'))}>${ic('seat')}</button><button class="mb${UI.modal&&/cg/.test(UI.modal.k||'')?' on':''}" data-act="cgOpen"${ta('Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá')}>${ic('yin')}</button>${typeof DEV!=='undefined'&&DEV?`<button class="mb dev" data-act="devOpen"${ta('Dev test: thử hiệu ứng')}>${ic('bolt')}</button>`:''}</div>`;

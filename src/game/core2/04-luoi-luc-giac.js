@@ -40,14 +40,15 @@ function geo(){return geoFor(W());}
 const AREA_BOX=[];
 function areaBox(k){if(AREA_BOX[k])return AREA_BOX[k];let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;for(let i=0;i<HN;i++)if(MAPD.reg[i]===String(k)){const p=hexCenter(i);x0=Math.min(x0,p[0]);y0=Math.min(y0,p[1]);x1=Math.max(x1,p[0]);y1=Math.max(y1,p[1]);}return AREA_BOX[k]=[x0,y0,x1,y1];}
 function snapWorld(w){if(!w||!w.regions)return;const g=geoFor(w);const used=new Set();g.paths={};g.nodeAt=null;
-  const ok=(c,k)=>!used.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4;
+  const blocked=new Set();const ring=c=>{blocked.add(c);for(const b of hexNb(c)){blocked.add(b);for(const d of hexNb(b))blocked.add(d);}};
+  const ok=(c,k)=>!used.has(c)&&!blocked.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4;
   for(const R0 of w.regions){const k=R0.k,B0=areaBox(k);
     for(const n of R0.nodes){
       if(!n.wc){const lx=clamp((n.x-k*1000)/1000,0,1),ly=clamp(n.y/1000,0,1);n.x=B0[0]+lx*(B0[2]-B0[0]);n.y=B0[1]+ly*(B0[3]-B0[1]);n.wc=1;n.hex=null;n.rx=null;n.ry=null;}
       let c=n.hex!=null?n.hex:hexAt(n.x,n.y);
       if(!ok(c,k)){const seen=new Set([c]);let fr=[c],found=-1;for(let it=0;it<80&&found<0&&fr.length;it++){const nx=[];for(const a of fr)for(const b of hexNb(a)){if(seen.has(b))continue;seen.add(b);nx.push(b);if(found<0&&ok(b,k))found=b;}fr=nx;}
         if(found>=0)c=found;}
-      used.add(c);n.hex=c;const p=hexCenter(c);n.x=Math.round(p[0]*10)/10;n.y=Math.round(p[1]*10)/10;if(n.rx!=null){const pr=hexCenter(hexAt(n.rx,n.ry));n.rx=pr[0];n.ry=pr[1];}}
+      used.add(c);ring(c);n.hex=c;const p=hexCenter(c);n.x=Math.round(p[0]*10)/10;n.y=Math.round(p[1]*10)/10;if(n.rx!=null){const pr=hexCenter(hexAt(n.rx,n.ry));n.rx=pr[0];n.ry=pr[1];}}
     for(const e of R0.edges){const a=nodeById2(w,e.a),b=nodeById2(w,e.b);if(a&&b)e.len=Math.round(Math.hypot(a.x-b.x,a.y-b.y));}}
   w.mo=1;}
 function nodeById2(w,id){const R0=w.regions[Math.floor(id/100)];return R0&&R0.nodes[id%100];}
@@ -77,7 +78,10 @@ function playerXY(){const r=G.run;const d=playerMapXY();return invXY(r.region,d[
 function snapStop(){const r=G.run,m=r&&r.moving;if(!m||m.seg>=m.path.length-1)return;const hp=hexPath(nodeHex(nodeById(m.path[m.seg])),nodeHex(nodeById(m.path[m.seg+1])));const tot=hp.cum[hp.cum.length-1]||1;const t=m.prog*tot;
   let b=0,bd=1e9;hp.cum.forEach((c,i)=>{if(Math.abs(c-t)<bd){bd=Math.abs(c-t);b=i;}});m.prog=clamp(hp.cum[b]/tot,0.001,0.999);}
 function hexInfo(i){const g=geo();const k=g.reg[i];return {i,sea:k<0,reg:k,regName:k<0?'Vân Hải':REG[k].n,dist:k<0?'':g.dnames[g.dist[i]]||'',ter:TER_N[g.ter[i]],el:g.el[i]};}
-function hexNode(i){const g=geo(),r=G.run;if(!g.nodeAt||g.nodeKey!==r.kiep+':'+W().t){g.nodeAt={};g.nodeKey=r.kiep+':'+W().t;for(const R0 of W().regions)for(const n of R0.nodes){if(n.fog<1)continue;const h=(n.fog>=2||n.memory)?nodeHex(n):hexAt(...nodeShown(n));if(g.nodeAt[h]==null||n.fog>=2)g.nodeAt[h]=n.id;if((n.fog>=2||n.memory)&&n.cells)for(const c of n.cells)if(g.nodeAt[c]==null)g.nodeAt[c]=n.id;}}
+function hexNode(i){const g=geo(),r=G.run;if(!g.nodeAt||g.nodeKey!==r.kiep+':'+W().t){g.nodeAt={};g.nodeKey=r.kiep+':'+W().t;const L=[];for(const R0 of W().regions)for(const n of R0.nodes)if(n.fog>=1)L.push([R0,n]);
+    // lượt 1: ô gốc của từng địa điểm (nơi đã biết thì ở ô thật, nơi mới nghe đồn thì ở ô hiển thị); lượt 2: các ô phụ, chỉ lấy ô còn trống
+    for(const [R0,n] of L){const h=(n.fog>=2||n.memory)?nodeHex(n):hexAt(...nodeShown(n));if(g.nodeAt[h]==null||n.fog>=2)g.nodeAt[h]=n.id;}
+    for(const [R0,n] of L)if((n.fog>=2||n.memory)&&n.cells)for(const c of n.cells)if(g.nodeAt[c]==null)g.nodeAt[c]=n.id;}
   const id=g.nodeAt[i];return id!=null?nodeById(id):null;}
 
 // thực thể qua lại đi cùng nhịp với người chơi: chậm lại 60 lần, sống lâu hơn 30 lần

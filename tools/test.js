@@ -105,6 +105,10 @@ const TESTS = {
     const cl = run('(()=>{const g=geo();const all=[];for(const R0 of W().regions)for(const n of R0.nodes)all.push(n);const seen=new Set();let dup=0,bad=0,big=0;for(const n of all){for(const c of n.cells){if(seen.has(c))dup++;seen.add(c);if(!terWalk(g.ter[c]))bad++;}if(n.type==="tong"&&n.quy===3&&n.cells.length>=6)big++;}return [dup,bad,big];})()');
     ok(cl[0] === 0 && cl[1] === 0, `ô của các địa điểm không chồng nhau, đều trên đất (${cl})`);
     ok(cl[2] > 0, 'đại tông chiếm nhiều ô (' + cl[2] + ' đại tông ≥ 6 ô)');
+    const sep = run('(()=>{const own=new Map();let adj=0,close=0;const all=[];for(const R0 of W().regions)for(const n of R0.nodes){all.push(n);for(const c of n.cells)own.set(c,n.id);} for(const n of all)for(const c of n.cells)for(const b of hexNb(c)){const o=own.get(b);if(o!=null&&o!==n.id)adj++;}return adj;})()');
+    ok(sep === 0, 'các địa điểm cách nhau ít nhất một ô trống (' + sep + ' chỗ sát nhau)');
+    const clk = run('(()=>{let bad=0,tot=0;for(const R0 of W().regions)for(const n of R0.nodes){n.fog=Math.max(n.fog,2);}geo().nodeAt=null;for(const R0 of W().regions)for(const n of R0.nodes){tot++;if(hexNode(n.hex)!==n)bad++;for(const c of n.cells)if(hexNode(c)!==n)bad++;}return [bad,tot];})()');
+    ok(clk[0] === 0, `bấm vào bất cứ ô nào của địa điểm đều chọn đúng nó (${clk[1]} địa điểm)`);
     ok(run('(()=>{const n=W().regions[0].nodes.find(x=>x.cells.length>2);n.fog=2;geo().nodeAt=null;return hexNode(n.cells[n.cells.length-1])===n;})()'), 'bấm ô phụ cũng chọn đúng địa điểm');
   },
   // thương thế 3 bậc: nhẹ thua vẫn sống, nguy kịch thua là chết

@@ -43,13 +43,15 @@ function areaOfHex(h){const g=geo();return g.reg[h];}
 // quy mô: số ô lục giác mỗi địa điểm chiếm; ô mọc ra từ tâm, ưu tiên ô kề nhiều ô đã có (thường thành cụm, đôi khi dài ra)
 const QUY_N=['','Tiểu tông','Trung tông','Đại tông'];
 function placeSize(n){const t=n.type;if(t==='tong')return [0,ri(3,4),ri(5,6),ri(7,9)][n.quy||1];if(t==='thanh')return ri(5,7);if(t==='tran')return ri(2,4);if(t==='sao')return 3;if(t==='dong')return ri(1,2);return ri(1,3);}
-function growPlaces(w){const g=geoFor(w);const used=new Set();const all=[];for(const R0 of w.regions)for(const n of R0.nodes){all.push(n);used.add(n.hex);if(n.cells)for(const c of n.cells)used.add(c);}
-  const ok=(c,k)=>!used.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4;
+function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô -> địa điểm đang chiếm
+  for(const R0 of w.regions)for(const n of R0.nodes){all.push(n);own.set(n.hex,n.id);if(n.cells)for(const c of n.cells)own.set(c,n.id);}
+  // mỗi địa điểm chừa ít nhất một ô trống quanh mình: ô mới mọc ra không được kề ô của địa điểm khác
+  const ok=(c,k,id)=>!own.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4&&hexNb(c).every(b=>!own.has(b)||own.get(b)===id);
   all.filter(n=>!n.cells).map(n=>[n,placeSize(n)]).sort((a,b)=>b[1]-a[1]).forEach(([n,sz])=>{const k=Math.floor(n.id/100);const set=[n.hex];const inS=new Set(set);
-    while(set.length<sz){const cand=new Map();for(const c of set)for(const b of hexNb(c))if(!inS.has(b)&&ok(b,k))cand.set(b,(cand.get(b)||0)+1);if(!cand.size)break;
-      const L=[...cand];const b=wpick(L,x=>x[1]*x[1]+0.5)[0];set.push(b);inS.add(b);used.add(b);}
+    while(set.length<sz){const cand=new Map();for(const c of set)for(const b of hexNb(c))if(!inS.has(b)&&ok(b,k,n.id))cand.set(b,(cand.get(b)||0)+1);if(!cand.size)break;
+      const L=[...cand];const b=wpick(L,x=>x[1]*x[1]+0.5)[0];set.push(b);inS.add(b);own.set(b,n.id);}
     n.cells=set;});}
-{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions)growPlaces(w);};}
+{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions){if(w.sep!==2){for(const R0 of w.regions)for(const n of R0.nodes)delete n.cells;w.sep=2;}growPlaces(w);}};}
 function placeCells(n){return n&&n.cells&&n.cells.length?n.cells:n?[nodeHex(n)]:[];}
 function canGoBack(){return false;}
 
