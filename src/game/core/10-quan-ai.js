@@ -52,31 +52,31 @@ function encAct(a){
   const r=G.run,sc=r.scene;
   if(a==='fight'){startCombat({pre:sc.en,elite:sc.elite},{kind:'node',quest:sc.quest});return;}
   if(a==='sneak'){const ok=R()<encSneak(sc);if(ok){sc.res=T(['Ngươi nín thở, lùi vào bóng tối. Nó đi qua, không phát hiện ra.','Ngươi đi vòng qua một quãng xa. Thoát được.','Ngươi ẩn mình sau tảng đá cho tới khi bóng nó khuất hẳn.']);sc.done=1;}else{sc.failSneak=1;encAct('fight');clog(G.run.scene,'Bị phát hiện!','en');}return;}
-  if(a==='pay'){const c=Math.max(1,Math.round(12*SC[r.region]));if(r.st<c)return;r.st-=c;sc.res=T(['Ngươi ném túi linh thạch qua. {$e} cân thử, cười khẩy rồi tránh đường.','“Biết điều đấy.” {$e} cất linh thạch, phẩy tay cho ngươi đi.'],{e:sc.en.n});sc.paid=c;sc.done=1;return;}
+  if(a==='pay'){const c=Math.max(1,Math.round(12*SC[rT()]));if(r.st<c)return;r.st-=c;sc.res=T(['Ngươi ném túi linh thạch qua. {$e} cân thử, cười khẩy rồi tránh đường.','“Biết điều đấy.” {$e} cất linh thạch, phẩy tay cho ngươi đi.'],{e:sc.en.n});sc.paid=c;sc.done=1;return;}
 }
 // kẻ chặn đường có phải phường cướp bóc không: đệ tử tông chính đạo, Phật môn, võ tăng, kiếm khách, đạo sĩ thì không
 function encLawful(en){if(!en||en.f!=='nhan')return false;if(['votang','kiemtu','phusu'].includes(en.k))return true;
   if(en.k==='detu'){const ss=(G.meta&&G.meta.world&&G.meta.world.sects)||[];const s0=ss.find(x=>en.sub&&en.sub.includes(x.n)||en.n&&en.n.includes(x.n));return !s0||s0.al!=='ma';}return false;}
-function encSneak(sc){const s=S();return clamp(0.35+(s.tp-8-G.run.region*3)*0.05,0.1,0.85)*(sc.elite?0.5:1);}
+function encSneak(sc){const s=S();return clamp(0.35+(s.tp-8-rT()*3)*0.05,0.1,0.85)*(sc.elite?0.5:1);}
 function bossIntro(){
-  const r=G.run;const back=sceneBack();const pool=BOSS[r.region];const b=pick(pool);r.bossDef=b;r.bossV={nick:pick(NAME.ma1),sect:pick(G.meta.world.sects.filter(s=>s.al==='chinh')).n,ten:genName('nam')};
+  const r=G.run;const back=sceneBack();const pool=BOSS[rT()];const b=pick(pool);r.bossDef=b;r.bossV={nick:pick(NAME.ma1),sect:pick(G.meta.world.sects.filter(s=>s.al==='chinh')).n,ten:genName('nam')};
   const v=Object.assign(baseV(),r.bossV);
   r.scene={type:'boss',text:T(b.t,v),b:{i:b.i,n:T(b.n,v)},back};
 }
 function bossFight(){startCombat('boss',{kind:'boss'});}
 
 // ---------------- PHƯỜNG THỊ ----------------
-function price(base){const fx=aggFx();return Math.max(1,Math.round(base*SC[G.run.region]*(1-Math.min(40,fx.shopP||0)/100)));}
+function price(base){const fx=aggFx();return Math.max(1,Math.round(base*SC[rT()]*(1-Math.min(40,fx.shopP||0)/100)));}
 function openShop(n){
   const r=G.run;const back=sceneBack();const a=npc('thuong');const v=Object.assign(baseV(),{a});
   const text=!n?T(['{$a.ten} lật tấm bạt, bày từng món lên mặt hòm: “{$a.goi} xem đi, đường xa nên giá có nhỉnh hơn chút.”','Hàng hóa xếp trên mấy cỗ xe, mùi da thuộc lẫn mùi hương liệu. {$a.ten} gõ gõ nắp hòm: “Món nào cũng có lai lịch.”'],v):T(['{$a.ten}, {$a.look}, xoa tay cười: “{$a.goi} cần gì? Hàng ở đây không giả.”','Tiệm tạp hóa nhỏ, hàng bày lộn xộn. {$a.ten} ngáp dài: “Xem thoải mái. Mua thì trả tiền.”','Chi nhánh Vạn Bảo Thương Hội. Tiểu nhị cúi chào tới tận đất, mắt liếc túi trữ vật của ngươi.','Một tán tu bày sạp ven đường, vừa thấy ngươi đã mời mọc rối rít.','Phường thị đông nghịt. Ngươi chen vào một sạp hàng có tấm biển viết: “Không trả giá.”'],v);
   const m=Math.floor(W().t/HM);
   if(n&&n.shop&&n.shop.m===m&&n.shop.kiep===r.kiep){r.scene={type:'shop',text,items:n.shop.items,heal:n.shop.heal,back,node:n.id};return;}
   const items=[];
-  for(let i=0;i<3;i++){const id=rollPill();const q=r.region>=2?ri(0,2):r.region>=1?ri(0,1):0;items.push({k:'pill',id,q,p:price(PILL[id].p*PQM[q])});}
-  if((chance(.6)||r.realm>=r.region)&&!(n&&n.type==='tran'))items.push({k:'pill',id:btPill(),q:0,p:price(PILL[btPill()].p)}); // tạp hóa thôn quê không có đan đột phá
+  for(let i=0;i<3;i++){const id=rollPill();const q=rT()>=2?ri(0,2):rT()>=1?ri(0,1):0;items.push({k:'pill',id,q,p:price(PILL[id].p*PQM[q])});}
+  if((chance(.6)||r.realm>=rT())&&!(n&&n.type==='tran'))items.push({k:'pill',id:btPill(),q:0,p:price(PILL[btPill()].p)}); // tạp hóa thôn quê không có đan đột phá
   for(let i=0;i<2;i++){const id=rollSkill();items.push({k:'skill',id,p:price(40+SK[id].t*28)});}
-  const rel=genRelic(clamp(r.region+(chance(.2)?1:0),0,4));items.push({k:'relic',rel,p:price(70+rel.tier*45)});
+  const rel=genRelic(clamp(rT()+(chance(.2)?1:0),0,4));items.push({k:'relic',rel,p:price(70+rel.tier*45)});
   if(typeof shopExtra==='function')shopExtra(items,n);
   const heal=price(10);
   if(n)n.shop={m,kiep:r.kiep,items,heal};
@@ -122,7 +122,7 @@ function lifeSummary(cause,info){
 function calcPts(cause){
   const r=G.run;const o=[];
   o.push(['Cảnh giới',r.maxRealm*12+Math.floor(r.tv/25)]);
-  o.push(['Vùng đất đã qua',r.region*6]);
+  o.push(['Vùng đất đã qua',rT()*6]);
   o.push(['Thủ lĩnh bị hạ',r.bossKills*8]);
   o.push(['Kẻ địch bị hạ',Math.floor(r.kills/3)]);
   o.push(['Kỳ ngộ đã trải',Math.floor(r.evDone/4)]);

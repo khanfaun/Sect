@@ -62,7 +62,7 @@ function bbForceLearn(i){const r=G.run;const rel=r.relics[i];if(!rel||rel.k!=='b
   r.relics.splice(i,1);r.arts.push(a);const n=chuSlots();for(let j=0;j<n;j++)if(!r.chu[j]){r.chu[j]={k:'a',u:a.u};break;}
   addWound('thanbb','cưỡng ép lĩnh ngộ');log(`Cưỡng ép lĩnh ngộ ${a.n} trước giờ độ kiếp, thức hải rạn nứt.`);syncSkills();clampHp();saveSoon();return '';}
 // ===== Thần thức trong trận: đủ thì dò được khí huyết, linh lực, định lực… của đối phương =====
-function unitLv(u){const r=G.run;if(u.kind==='kiep')return (r.bt&&r.bt.to)||r.realm+1;if(r.bt&&u.k==='tamma')return r.bt.to||r.realm+1;return (r.region||0)+(u.boss?1:u.elite?0.5:0);}
+function unitLv(u){const r=G.run;if(u.kind==='kiep')return (r.bt&&r.bt.to)||r.realm+1;if(r.bt&&u.k==='tamma')return r.bt.to||r.realm+1;return rT()+(u.boss?1:u.elite?0.5:0);}
 function seeNeed(u){return Math.round(10+10.5*unitLv(u));}
 function canSee(u){if(!u||u.side!=='B')return true;return S().than>=seeNeed(u);}
 // ===== Độ kiếp thành công: hồi đầy, xóa thương tích và trạng thái bất lợi =====
@@ -71,7 +71,7 @@ function canSee(u){if(!u||u.side!=='B')return true;return S().than>=seeNeed(u);}
   return res;};}
 // ===== Thần thức trong trận (bản mới): vượt cấp thì hầu như không thấy, trừ khi thần thức thật cao =====
 // mức cần = thần thức của người bình thường ở cấp đối phương: 12 + 15 × cấp
-unitLv=function(u){const r=G.run;if(u.kind==='kiep')return (r.bt&&r.bt.to)||r.realm+1;if(r.bt&&u.k==='tamma')return r.bt.to||r.realm+1;return (r.region||0)+(u.boss?0.6:u.elite?0.3:0);};
+unitLv=function(u){const r=G.run;if(u.kind==='kiep')return (r.bt&&r.bt.to)||r.realm+1;if(r.bt&&u.k==='tamma')return r.bt.to||r.realm+1;return rT()+(u.boss?0.6:u.elite?0.3:0);};
 seeNeed=function(u){return Math.round(12+15*unitLv(u));};
 // lý lịch (tên, chức vụ…) của người lạ: chỉ biết khi quen biết hoặc đã có tin tức
 function knownNames(){const r=G.run,w=W();const K=new Set(r.known||[]);for(const x of r.rivals||[]){const wr=w.rivals[x.i];if(wr)K.add(wr.ten);}for(const s of r.seeds||[])K.add(s.ten);for(const p of r.party||[])K.add(p.ten);if(w.nemesis)K.add(w.nemesis.n);return K;}

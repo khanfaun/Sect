@@ -53,41 +53,34 @@ const TESTS = {
     if (b) { await b.click(); await p.waitForTimeout(400); }
     ok(await ev(p, () => NK.count('tinhtoa') === 1 && G.run.hp > 1), 'tĩnh toạ xong, khí huyết tăng');
   },
-  // phóng to tối đa: địa hình được vẽ lại nét (mảnh chi tiết)
+  // bản đồ ảnh: nền "chưa tới" + vệt mực "đã thấy"; phóng to hết cỡ thì rê chuột không hiện chú thích
   async bando(p) {
+    for (let i = 0; i < 30; i++) { await p.waitForTimeout(150); if (await ev(p, () => Map2.imgOk >= 2 && Map2.ink)) break; }
+    ok(await ev(p, () => Map2.imgOk >= 2), 'đã tải ảnh bản đồ (' + await ev(p, () => Map2.imgOk) + ' ảnh)');
+    ok(await ev(p, () => Map2.ink), 'có lớp "đã thấy" quanh nhân vật');
     await ev(p, () => { Map2.center(); Map2.zoom(10); });
-    for (let i = 0; i < 20; i++) { await p.waitForTimeout(150); if (await ev(p, () => Map2.dtc > 0)) break; }
-    ok(await ev(p, () => Map2.dtc > 0), 'đã vẽ mảnh chi tiết khi phóng to tối đa');
-    const t = await ev(p, () => { const t0 = performance.now(); for (let i = 0; i < 5; i++) { Map2.invalidate(); Map2.frame && Map2.frame(performance.now()); } return performance.now() - t0; });
-    ok(t < 1500, 'vẽ 5 khung khi đã có mảnh chi tiết: ' + Math.round(t) + 'ms');
+    await p.waitForTimeout(300);
+    const box = await (await p.$('canvas')).boundingBox();
+    await p.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await p.mouse.move(box.x + box.width / 2 + 9, box.y + box.height / 2 + 7);
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => { const t = document.querySelector('#tip'); return !t || !t.classList.contains('on') && getComputedStyle(t).display === 'none' || t.style.display === 'none' || !t.textContent.trim() || getComputedStyle(t).opacity === '0'; }), 'phóng to hết cỡ: không hiện chú thích khi rê chuột');
+    const t = await ev(p, () => { const t0 = performance.now(); for (let i = 0; i < 5; i++) { Map2.invalidate(); Map2.frame && Map2.frame(performance.now() + i * 100); } return performance.now() - t0; });
+    ok(t < 1500, 'vẽ 5 khung: ' + Math.round(t) + 'ms');
+    await ev(p, () => cfgSet('gfx', 'low'));
+    for (let i = 0; i < 30; i++) { await p.waitForTimeout(150); if (await ev(p, () => Map2.imgOk >= 1)) break; }
+    ok(await ev(p, () => Map2.imgOk >= 1), 'mức Tiết kiệm dùng ảnh nén');
     await shot(p, 'bando-zoom');
   },
-  // ô lật gương (vùng 4, 5): mảnh chi tiết phải được vẽ
-  async bandoMx(p) {
-    const errs = []; p.on('pageerror', e => errs.push(e.message));
-    await ev(p, () => { Map2.focus(3500, 500); Map2.zoom(10); });
-    for (let i = 0; i < 25; i++) { await p.waitForTimeout(150); if (await ev(p, () => Map2.dtc > 0)) break; }
-    ok(await ev(p, () => Map2.dtc > 0), 'ô lật gương có mảnh chi tiết');
-    ok(errs.length === 0, 'không báo lỗi');
-    await shot(p, 'bando-mx');
+  // bản lưu cũ (bản đồ năm ô vuông): dựng lại thế giới, đưa nhân vật về một trấn, không lỗi
+  async luucu(p) {
+    const r = await ev(p, () => { const d = JSON.parse(JSON.stringify(snapshot())); delete d.meta.world.mo; for (const R0 of d.meta.world.regions) for (const n of R0.nodes) { delete n.wc; n.x = R0.k * 1000 + 500; n.y = 500; } loadData(d); render(); return { mo: G.meta.world.mo, at: !!nodeById(G.run.at), t: nodeById(G.run.at).type }; });
+    ok(r.mo === 1 && r.at, 'bản lưu cũ được chuyển sang bản đồ mới (đứng ở ' + r.t + ')');
+    ok(await ev(p, () => NK.count('mo.migrate') === 1), 'nhật ký ghi mo.migrate');
   },
   // cấu hình: nút nhật ký gỡ lỗi
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');
-  },
-  // nút Quay về vùng cũ hiện ở giao diện thẻ địa điểm
-  async goback(p) {
-    await ev(p, () => { G.run.region = 1; G.run.maxRegion = 1; arrive(regionOf(1).entry); openPlace(regionOf(1).entry); render(); });
-    await p.waitForTimeout(500);
-    const btn = await p.$('[data-act="pact"][data-arg="goback"]');
-    ok(!!btn, 'nút Quay về có trên giao diện');
-    if (btn) {
-      await btn.click(); await p.waitForTimeout(300);
-      const c = await p.$('.mbox [data-act="pactGo"], .mbox .btn.pri'); if (c) { await c.click(); await p.waitForTimeout(500); }
-      ok(await ev(p, () => G.run.region === 0), 'bấm nút thì về vùng 1'); ok(await ev(p, () => NK.count('region.back') === 1), 'nhật ký ghi region.back');
-    }
-    await shot(p, 'goback');
   },
 };
 

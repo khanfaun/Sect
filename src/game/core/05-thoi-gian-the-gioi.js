@@ -52,7 +52,7 @@ function applyE(e,v){
   if(e.hp!=null){const d=Math.round(pct(e.hp,s.maxHp));const before=r.hp;r.hp=clamp(r.hp+d,1,s.maxHp);const dd=r.hp-before;if(dd)ch.push(chip('❤️',sgn(Math.round(dd/Math.max(1,s.maxHp)*100)||Math.sign(dd))+'%','Khí huyết',dd>0?'up':'dn'));}
   if(e.mp!=null){const d=Math.round(pct(e.mp,s.maxMp));const before=r.mp;r.mp=clamp(r.mp+d,0,s.maxMp);const dd=r.mp-before;if(dd)ch.push(chip('💧',sgn(Math.round(dd/Math.max(1,s.maxMp)*100)||Math.sign(dd))+'%','Linh lực',dd>0?'up':'dn'));}
   if(e.tv){let x=e.tv>0?tvGain(e.tv):e.tv;if(x>0&&!e.tvMajor){const room=Math.max(0,40-(r.tvMinor||0));x=Math.min(x,room);r.tvMinor=(r.tvMinor||0)+x;}const b=r.tv;addTv(x);const d=r.tv-b;if(sgOn()){const g1=sgTang();if(Math.abs(d)>1e-6)ch.push(chip('✨',(d>0?'+':'−')+Math.max(1,Math.round(Math.abs(d)/sgW(g1)*100))+'% tu vi','Tu vi '+sgName(g1),d>0?'up':'dn'));else if(e.tv>0&&sgFull())ch.push(chip('✨',r.tv>=100?'viên mãn':'đã đầy',r.tv>=100?'Tu vi đã viên mãn, cần đột phá ở động phủ':'Tu vi '+sgName(g1)+' đã đầy, cần xung kích','up'));}else if(Math.abs(d)>=0.5)ch.push(chip('✨',sgn(Math.round(d)||Math.sign(d))+'% tu vi','Tu vi',d>0?'up':'dn'));else if(e.tv>0&&r.tv>=100)ch.push(chip('✨','viên mãn','Tu vi đã đầy, cần đột phá ở động phủ','up'));}
-  if(e.st!=null){let d;if(typeof e.st==='string')d=Math.round(r.st*parseFloat(e.st)/100);else{d=Math.round(e.st*SC[r.region]*(e.st>0?(1+(s.fx.stonesP||0)/100):1));if(!d&&e.st)d=e.st>0?1:-1;}const b=r.st;r.st=Math.max(0,r.st+d);const dd=r.st-b;if(dd)ch.push(chip('💎',sgn(dd),'Linh thạch',dd>0?'up':'dn'));}
+  if(e.st!=null){let d;if(typeof e.st==='string')d=Math.round(r.st*parseFloat(e.st)/100);else{d=Math.round(e.st*SC[rT()]*(e.st>0?(1+(s.fx.stonesP||0)/100):1));if(!d&&e.st)d=e.st>0?1:-1;}const b=r.st;r.st=Math.max(0,r.st+d);const dd=r.st-b;if(dd)ch.push(chip('💎',sgn(dd),'Linh thạch',dd>0?'up':'dn'));}
   const statN={atkP:['⚔️','Công','%'],defP:['🛡️','Thủ','%'],hpP:['❤️','Khí huyết tối đa','%'],mpP:['💧','Linh lực tối đa','%'],tp:['🌀','Thân pháp',''],ngo:['🧠','Ngộ tính',''],van:['🍀','Khí vận',''],tam:['🪷','Đạo tâm','']};
   for(const k in statN){if(e[k]){const s0=S();r.bon[k]+=e[k];const s1=S();if(k==='hpP')r.hp+=s1.maxHp-s0.maxHp;if(k==='mpP')r.mp+=s1.maxMp-s0.maxMp;ch.push(chip(statN[k][0],statN[k][1]+(e[k]>0?' ▲':' ▼'),statN[k][1]+(e[k]>0?' tăng':' giảm')+' vĩnh viễn',e[k]>0?'up':'dn'));}}
   if(e.tamma){let d=e.tamma;if(d>0)d=d*(1-Math.min(80,s.fx.tammaRes||0)/100);d=Math.round(d);const b=r.tamma;r.tamma=clamp(r.tamma+d,0,100);const dd=r.tamma-b;if(dd)ch.push(chip('😈',dd>0?'tâm ma ▲':'tâm ma ▼','Tâm ma '+(dd>0?'dày thêm':'nguôi bớt'),dd>0?'dn':'up'));}
@@ -60,10 +60,10 @@ function applyE(e,v){
   if(e.h){ch.push(chip('⏳',durH(e.h),'Thời gian trôi qua',''));advanceTime(e.h);if(!G.run)return ch;}
   if(e.lifeCut){const y=Math.round(LIFE[r.realm]*e.lifeCut/100);r.lifeAdj-=y;ch.push(chip('⏳','thọ −'+y+' năm','Thọ nguyên giảm','dn'));if(r.age>=S().life){die('toahoa');return ch;}}
   if(e.life){r.lifeAdj+=e.life;ch.push(chip('⏳','thọ +'+e.life+' năm','Thọ nguyên','up'));}
-  if(e.relic!=null){const rel=typeof e.relic==='number'?genRelic(clamp(r.region+e.relic,0,4)):uniqueRelic(e.relic);if(rel&&!(rel.u&&r.relics.find(x=>x.u===rel.u))){r.relics.push(rel);clampHp();ch.push(chip('🏺',rel.name,relicTip(rel),'item',rel.tier));log(`Nhận được ${rel.name}.`);}}
+  if(e.relic!=null){const rel=typeof e.relic==='number'?genRelic(clamp(rT()+e.relic,0,4)):uniqueRelic(e.relic);if(rel&&!(rel.u&&r.relics.find(x=>x.u===rel.u))){r.relics.push(rel);clampHp();ch.push(chip('🏺',rel.name,relicTip(rel),'item',rel.tier));log(`Nhận được ${rel.name}.`);}}
   if(e.rmRelic){const k=r.relics.findIndex(x=>x.u===e.rmRelic);if(k>=0){const n=r.relics[k].name;r.relics.splice(k,1);clampHp();ch.push(chip('🏺','mất '+n,'Pháp bảo đã mất','dn'));}}
   if(e.skill!=null){const id=typeof e.skill==='number'?rollSkill(e.skill):e.skill;const c=gainSkill(id);if(c)ch.push(c);}
-  if(e.pill!=null){const arr=Array.isArray(e.pill)?e.pill:[e.pill];if(e.pill2)arr.push(e.pill2);for(const p of arr){const c=gainPill(p===1||p===0?rollPill():(p==='@bt'?btPill():p),r.region>=3?2:r.region>=1?ri(0,1):0);if(c)ch.push(c);}}
+  if(e.pill!=null){const arr=Array.isArray(e.pill)?e.pill:[e.pill];if(e.pill2)arr.push(e.pill2);for(const p of arr){const c=gainPill(p===1||p===0?rollPill():(p==='@bt'?btPill():p),rT()>=3?2:rT()>=1?ri(0,1):0);if(c)ch.push(c);}}
   if(e.lore){const c=gainLore(e.lore);if(c)ch.push(c);}
   if(e.dao){const g=addDao(e.dao,'ev');if(g)ch.push(chip('☯️','đạo cơ ▲','Đạo cơ vững thêm: quyết định phẩm chất khi đột phá','up'));}
   if(e.flag) r.flags[e.flag]=1;
@@ -104,15 +104,15 @@ function genRelic(tier){
   return {name:pre+' '+base,k:K.k,tier,el,fx:Object.assign({},K.fx),lore};
 }
 function uniqueRelic(id){
-  if(id==='linhthu'){const n=pick(['Tiểu Bạch','Tiểu Hắc','Đoàn Tử','Tiểu Hỏa','Mao Cầu','A Hoàng','Tiểu Tuyết']);return {name:'Linh thú '+n,k:'linhthu',u:'linhthu',tier:G.run.region,el:'vo',fx:{dodge:4,van:2,regenHp:2},lore:'Nhỏ như nắm tay, lúc nào cũng nằm trong ngực áo ngươi. Lúc nguy hiểm, nó cắn trước.'};}
+  if(id==='linhthu'){const n=pick(['Tiểu Bạch','Tiểu Hắc','Đoàn Tử','Tiểu Hỏa','Mao Cầu','A Hoàng','Tiểu Tuyết']);return {name:'Linh thú '+n,k:'linhthu',u:'linhthu',tier:rT(),el:'vo',fx:{dodge:4,van:2,regenHp:2},lore:'Nhỏ như nắm tay, lúc nào cũng nằm trong ngực áo ngươi. Lúc nguy hiểm, nó cắn trước.'};}
   const U0=RELIC_UNIQUE[id];if(!U0)return null;
-  return {name:U0.name,k:U0.k,u:id,tier:Math.min(4,G.run.region),el:U0.el,fx:Object.assign({},U0.fx),lore:U0.lore};
+  return {name:U0.name,k:U0.k,u:id,tier:Math.min(4,rT()),el:U0.el,fx:Object.assign({},U0.fx),lore:U0.lore};
 }
 const FXT={matkP:'🔮 Sát thương phép +{v}%',critDmg:'💥 Sát thương chí mạng +{v}%',hoTam:'🫀 Hộ tâm +{v}',atkP:'⚔️ Sát thương vật lý +{v}%',defP:'🛡️ Thủ +{v}%',hpP:'❤️ Khí huyết +{v}%',mpP:'💧 Linh lực +{v}%',tp:'🌀 Thân pháp +{v}',ngo:'🧠 Ngộ tính +{v}',van:'🍀 Khí vận +{v}',tam:'🪷 Đạo tâm +{v}',crit:'🎯 Tỉ lệ chí mạng +{v}%',dodge:'🍃 Né tránh +{v}%',startBlock:'🛡️ Vào trận được hộ thể {v}% khí huyết',regenMp:'💧 Mỗi lượt hồi {v}% linh lực',regenHp:'❤️ Mỗi lượt hồi {v}% khí huyết',pillP:'⚗️ Đan dược mạnh thêm {v}%',poisonHit:'☠️ Mỗi đòn gây độc',reflect:'🪞 Phản {v}% sát thương nhận vào',tvP:'✨ Tu vi nhận thêm {v}%',stunP:'💫 Đòn đánh thêm {v}% gây choáng',healAfter:'🌿 Thắng trận hồi {v}% khí huyết',blockTurn:'🛡️ Mỗi lượt thêm hộ thể {v}% khí huyết',firstEvade:'🍃 Né {v} đòn đầu mỗi trận',weakStart:'🥀 Địch suy nhược {v} lượt đầu trận',vulnStart:'💔 Địch phá giáp {v} lượt đầu trận',stonesP:'💎 Linh thạch nhận thêm {v}%',pillSlot:'👝 Thêm {v} ô đan dược',shopP:'🏪 Mua rẻ {v}%',tammaRes:'😈 Tâm ma tăng chậm {v}%',execute:'☄️ Đánh kẻ dưới 30% khí huyết +{v}%',drain:'🩸 Hút {v}% sát thương thành khí huyết',mpCost:'💧 Pháp thuật tốn ít hơn {v}%',lifeP:'⏳ Thọ nguyên {v}%'};
 function fxLines(fx,rel){const out=[];for(const[k,v]of Object.entries(fx)){if(k==='elX'){out.push(`${EL[rel.el].c} Hệ ${EL[rel.el].n} +${v}%`);continue;}if(k==='elP'){for(const[e,x]of Object.entries(v))out.push(`${EL[e].c} Hệ ${EL[e].n} +${x}%`);continue;}if(FXT[k])out.push(FXT[k].replace('{v}',k==='mpCost'?Math.abs(v):(k==='poisonHit'?'':v)));}return out;}
 function relicTip(rel){return `${rel.name}\n${GRADE[rel.tier]}\n${fxLines(relicFx(rel),rel).join('\n')}\n\n${rel.lore}`;}
 function rollSkill(tier){
-  const r=G.run;tier=clamp(tier||[1,2,2,3,4][r.region],1,4);
+  const r=G.run;tier=clamp(tier||[1,2,2,3,4][rT()],1,4);
   if(chance(.35))tier=clamp(tier+(chance(.5)?-1:1),1,4);
   let pool=SK_RAW.filter(s=>s[3]===tier);
   const mine=pool.filter(s=>r.root.els.includes(s[2]));
@@ -143,10 +143,10 @@ function skillTip(sk,lv){
   L.push('Độ nặng ×'+String(skRec(sk)).replace('.',','));
   return `${sk.n}${lv>1?' (bậc '+lv+')':''}\n${EL[sk.el].n} hệ, bậc ${sk.t}\n${L.join('\n')}\n\n${sk.f}`;
 }
-function rollPill(){const r=G.run;const pool=['hoixuan','hoixuan','tukhi','baohuyet','kimcang','loiphu','giaidoc','thanhanh','dinhthan','tinhnguyen','linhnhu'];if(chance(.25))pool.push(pick(['homach','tiloi','duongnguyen','nhanhoang','diamach','thiendao','bode']));if(r.region>=1)pool.push('taytuy','khaitri','dientho');if(chance(.12))pool.push(btPill());return pick(pool);}
+function rollPill(){const r=G.run;const pool=['hoixuan','hoixuan','tukhi','baohuyet','kimcang','loiphu','giaidoc','thanhanh','dinhthan','tinhnguyen','linhnhu'];if(chance(.25))pool.push(pick(['homach','tiloi','duongnguyen','nhanhoang','diamach','thiendao','bode']));if(rT()>=1)pool.push('taytuy','khaitri','dientho');if(chance(.12))pool.push(btPill());return pick(pool);}
 function gainPill(id,q){
   const r=G.run,p=PILL[id];if(!p)return null;q=q||0;
-  if(r.pills.length>=S().pillMax){const g=Math.max(1,Math.round(p.p*SC[r.region]*0.4));r.st+=g;return chip(p.i,p.n+' → 💎'+g,'Túi đầy, đã bán đi','');}
+  if(r.pills.length>=S().pillMax){const g=Math.max(1,Math.round(p.p*SC[rT()]*0.4));r.st+=g;return chip(p.i,p.n+' → 💎'+g,'Túi đầy, đã bán đi','');}
   r.pills.push({id,q});return chip(p.i,(q?PQ[q]+' ':'')+p.n,pillTip(id,q),'item');
 }
 function pillX(id,q){const p=PILL[id];const fx=aggFx();return Math.round(p.x*PQM[q||0]*(1+(fx.pillP||0)/100));}

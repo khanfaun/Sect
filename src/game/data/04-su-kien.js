@@ -5,7 +5,7 @@
 // Chọn "Bỏ đi" thì chuỗi khép lại. Tên nhân vật giữ nguyên suốt chuỗi.
 function skChains(){const r=G.run;return r.chainSt||(r.chainSt={});}
 function skNames(roles){const o={};for(const [k,g] of Object.entries(roles||{}))o[k]={ten:genName(g),hn:g==='nu'?'nàng':'hắn',g};return o;}
-function skOkPart(d,s){if(!s||s.end)return false;const r=G.run;if(r.region<d.reg)return false;if(W().t-(s.t||0)<(d.wait||0))return false;
+function skOkPart(d,s){if(!s||s.end)return false;const r=G.run;if(rT()<d.reg)return false;if(W().t-(s.t||0)<(d.wait||0))return false;
   if(d.part==='2'||d.part==='2b')return s.p==='1'&&(d.need||[]).includes(s.c['1']);
   if(d.part==='3')return (s.p==='2'||s.p==='2b');
   if(d.part==='4')return s.p==='3'&&(d.need||[]).includes(s.c['3']);

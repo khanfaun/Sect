@@ -51,7 +51,7 @@ function rememberKill(en){}
 function intentPreview(u){
   const sc=G.run.scene;const me=mainUnit(sc);const it=u.intent;const B=EN_SK[it];if(!B||!B.fx.p)return '';
   const p=B.fx.p;const d=Math.max(1,Math.round(Math.max(u.atk*p*(1+0.12*(u.st.rage||0))*(u.st.weak?0.7:1)*0.25,u.atk*p*(1+0.12*(u.st.rage||0))*(u.st.weak?0.7:1)-me.def*0.7)*(me.st.vuln?1.3:1)));
-  return it==='multi'?d+'×'+(G.run.region>=2?3:2):String(d);
+  return it==='multi'?d+'×'+(rT()>=2?3:2):String(d);
 }
 
 // ---------------- ĐỘT PHÁ: CHUẨN BỊ → XUNG QUAN → THIÊN KIẾP ----------------
@@ -78,7 +78,7 @@ function btRate(slots){
   return clamp(p,0.05,0.97);
 }
 function btChance(){return btRate([]);}
-function canBreak(){const r=G.run;return (lkOn()?(lkTang()>=10||(lkTang()===9&&lkFull())):r.tv>=100)&&(r.realm<4||(r.realm===4&&r.region===4));}
+function canBreak(){const r=G.run;return (lkOn()?(lkTang()>=10||(lkTang()===9&&lkFull())):r.tv>=100)&&r.realm<=4;}
 function openPrep(n){const r=G.run;r.scene={type:'prep',slots:[],back:n.id,id:n.id};}
 function prepToggle(i){
   const sc=G.run.scene;if(!sc||sc.type!=='prep')return;i=+i;
@@ -155,7 +155,7 @@ function addDao(x,src){
 
 // ---------------- THƯỞNG ----------------
 function genPicks(kind){
-  const r=G.run,n=3+U('duyen');const out=[];const reg=r.region;
+  const r=G.run,n=3+U('duyen');const out=[];const reg=rT();
   const relT=clamp(reg+(kind==='boss'?1:0)+(kind==='elite'&&chance(.4)?1:0),0,4);
   for(let i=0;i<n;i++){
     let k;
@@ -179,8 +179,8 @@ function rewardScene(kind,en){
   const picks=(kind!=='normal'||chance(.55))?genPicks(kind):[];
   const text=kind==='boss'?T(['{$e} ngã xuống, đất trời như lặng đi một nhịp. Ngươi đứng giữa chiến trường, gió thổi tung vạt áo.','Đòn cuối cùng. {$e} gục xuống, không còn đứng dậy. Ngươi thở ra một hơi dài, như trút được cả một vùng trời.'],{e:en.n})
     :T(['{$e} không còn động đậy. Ngươi lục lọi chiến trường.','Trận chiến kết thúc. Ngươi chỉnh lại y phục, nhặt nhạnh những gì còn dùng được.','{$e} gục xuống. Bụi lắng, máu thấm vào đất.','Một trận ác chiến. Ngươi thắng, nhưng không vui lắm.','Kết thúc nhanh gọn. {$e} thậm chí chưa kịp kêu.'],{e:en.n});
-  if(kind==='boss'&&r.region>=4){chips.push(chip('☁️','cửa trời mở','Đạt Hóa Thần viên mãn, độ kiếp ở động phủ để phi thăng','item'));const p=gainPill('thiendao',2);if(p)chips.push(p);}
-  if(kind==='boss'&&r.region<4&&!r.passes.includes(r.region+1)){r.passes.push(r.region+1);chips.push(chip('🎫','Lệnh bài thông quan','Trình ở quan ải để sang '+REG[r.region+1].n,'item'));}
+  if(kind==='boss'&&rT()>=4){chips.push(chip('☁️','cửa trời mở','Đạt Hóa Thần viên mãn, độ kiếp ở động phủ để phi thăng','item'));const p=gainPill('thiendao',2);if(p)chips.push(p);}
+  if(false&&kind==='boss'&&r.region<4&&!r.passes.includes(r.region+1)){r.passes.push(r.region+1);chips.push(chip('🎫','Lệnh bài thông quan','Trình ở quan ải để sang '+REG[r.region+1].n,'item'));}
   r.scene={type:'reward',kind,text,chips,picks,taken:-1,back:sceneBack()};
 }
 function takePick(i){

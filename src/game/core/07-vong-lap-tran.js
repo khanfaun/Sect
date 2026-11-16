@@ -137,7 +137,7 @@ function aiAct(sc,u){
   const foes=alive(sc,foeSide(u.side));if(!foes.length){toRecover(sc,u,1);return;}
   const it=u.intent||'atk';const base=EN_SK[it]||EN_SK.atk;
   const sk={id:'_e'+it,n:base.n,el:u.el,t:1,c:0,fx:Object.assign({},base.fx),f:'',rec:base.rec,it};
-  if(it==='multi')sk.fx.h=G.run.region>=2?3:2;
+  if(it==='multi')sk.fx.h=rT()>=2?3:2;
   // chọn mục tiêu: 60% kẻ khí huyết thấp nhất, 40% ngẫu nhiên
   const tgt=chance(.6)?foes.slice().sort((a,b)=>a.hp-b.hp)[0]:pick(foes);
   beginSkill(sc,u,sk,1,tgt.id);
