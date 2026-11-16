@@ -13,9 +13,8 @@ function TheQuan({ c }) {
   const g = PS.geo(), I = PS.hexInfo(c);
   const close = <button className="icb" data-act="unsel" aria-label="Đóng"><Ic n="close" /></button>;
   if (I.sea) return (
-    <div className="dock card nc">
-      <div className="nc-top"><div className="nc-tt"><b>Vô Tận Hải</b><small>biển khơi</small></div>{close}</div>
-      <p className="nc-d">Không có đường bộ. Đi ngang qua tốn gấp sáu lần đồng bằng.</p>
+    <div className="dock card nc ncs">
+      <div className="nc-top"><div className="nc-tt"><b>Vân Hải</b><small>mây biển, không có đường bộ</small></div>{close}</div>
     </div>
   );
   const d = g.dist[c], cells = [];
@@ -28,22 +27,16 @@ function TheQuan({ c }) {
   const lk = kn.length ? Math.round(kn.reduce((a, n) => a + PS.lkOf(n), 0) / kn.length) : 1;
   const luc = kn.find(n => n.type === 'tong') || kn.find(n => n.type === 'thanh') || kn.find(n => n.type === 'tran');
   return (
-    <div className="dock card nc">
+    <div className="dock card nc ncs">
       <div className="nc-top"><div className="nc-tt"><b>{I.dist || 'Vùng vô danh'}</b><small>quận thuộc {I.regName}</small></div>{close}</div>
-      <p className="nc-m">
-        <span className={'nc-g dg' + dg}><i></i>{kn.length ? PS.DTAG[dg] : 'chưa rõ'}</span>
-        <span>linh khí {kn.length ? PS.LK_N[lk].toLowerCase() : 'chưa rõ'}</span>
-        <span>rộng {cells.length} ô</span>
+      <p className="ncs-r">
+        <span className={'nc-g dg' + dg}><i></i>{kn.length ? PS.DTAG[dg] : 'Chưa rõ an nguy'}</span>
+        <span>Linh khí {kn.length ? PS.LK_N[lk].toLowerCase() : 'chưa rõ'}</span>
       </p>
-      <div className="nc-kv">
-        <div><small>Địa thế</small><b>{ter.join(', ')}</b></div>
-        <div><small>Trấn giữ</small><b>{luc ? PS.placeMeta(luc).luc : 'Chưa rõ'}</b></div>
-      </div>
-      <p className="nc-d sm" style={{ WebkitLineClamp: 3 }}>
-        {kn.length ? 'Nơi đã biết (' + kn.length + '/' + all.length + '): ' + kn.map(n => n.name).join(', ')
-          : 'Chưa biết nơi nào trong quận này' + (all.length ? ' (nghe nói có ' + all.length + ' nơi).' : '.')}
+      <p className="ncs-r">
+        <span>Địa thế: <b>{ter.join(', ')}</b></span>
+        <span>Trấn giữ: <b>{luc ? PS.placeMeta(luc).luc : 'chưa rõ'}</b></span>
       </p>
-      <p className="nc-d sm">Ô đang chọn: {I.ter.toLowerCase()}, đi qua tốn {PS.numVN(PS.TER_COST[g.ter[c]])} lần đồng bằng.</p>
     </div>
   );
 }

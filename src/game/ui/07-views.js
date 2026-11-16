@@ -9,9 +9,9 @@ function distCardHTML(c){const g=geo(),I=hexInfo(c),r=G.run;
   const all=regionOf(I.reg).nodes.filter(n=>g.dist[nodeHex(n)]===d);const kn=all.filter(n=>n.fog>=2||n.memory);
   const dg=kn.length?Math.max(...kn.map(dangerTag)):0;const lk=kn.length?Math.round(kn.reduce((a,n)=>a+lkOf(n),0)/kn.length):1;
   const luc=kn.find(n=>n.type==='tong')||kn.find(n=>n.type==='thanh')||kn.find(n=>n.type==='tran');
-  return `<div class="dock card nc"><div class="nc-top"><div class="nc-tt"><b>${esc(I.dist||'Vùng vô danh')}</b><small>quận thuộc ${esc(I.regName)}</small></div><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div>
-   <p class="nc-m"><span class="nc-g dg${dg}"><i></i>${kn.length?DTAG[dg]:'an nguy chưa rõ'}</span><span>linh khí ${kn.length?LK_N[lk].toLowerCase():'chưa rõ'}</span></p>
-   <div class="nc-kv"><div><small>Địa thế</small><b>${esc(ter.join(', '))}</b></div><div><small>Trấn giữ</small><b>${luc?esc(placeMeta(luc).luc):'Chưa rõ'}</b></div></div></div>`;}
+  return `<div class="dock card nc ncs"><div class="nc-top"><div class="nc-tt"><b>${esc(I.dist||'Vùng vô danh')}</b><small>quận thuộc ${esc(I.regName)}</small></div><button class="icb" data-act="unsel" aria-label="Đóng">${ic('close')}</button></div>
+   <p class="ncs-r"><span class="nc-g dg${dg}"><i></i>${kn.length?DTAG[dg]:'Chưa rõ an nguy'}</span><span>Linh khí ${kn.length?LK_N[lk].toLowerCase():'chưa rõ'}</span></p>
+   <p class="ncs-r"><span>Địa thế: <b>${esc(ter.join(', '))}</b></span><span>Trấn giữ: <b>${luc?esc(placeMeta(luc).luc):'chưa rõ'}</b></span></p></div>`;}
 function hudIsOpen(){return G.run&&G.run.scene?!!UI.hudScene:UI.hudOpen;}
 function hudHTML(){
   const r=G.run,s=S(),t=W().t;const left=s.life-r.age;const warn=left<s.life*0.12;const pa=PART[partOf(t)];
