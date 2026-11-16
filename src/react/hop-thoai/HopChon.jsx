@@ -8,7 +8,9 @@ import { Ic, pcs, tah } from '../chung';
 function ungVien(m) {
   const r = PS.run2(), E = PS.eqOf(), k = m.key, ic = PS.ic;
   let title = '', cur = '', C = [], empty = '';
-  const relC = (x, i, act) => ({ t: x.tier || 0, cell: PS.relIcon(x), tip: PS.relTip(x), det: PS.relTip(x), act, arg: i, btn: act === 'eqPut' ? 'Mặc vào' : act === 'ddPutM' ? 'Uẩn dưỡng' : 'Chọn' });
+  // chưa đủ cảnh giới, hoặc nằm trong ô túi trữ vật đang khoá: hiện lý do, khoá nút
+  const relWhy = (x, i) => PS.relicWhy(x) || (PS.unitLocked && PS.unitLocked('r', i) ? 'Món này nằm trong túi trữ vật đang khoá: cần có linh lực mới lấy ra được.' : '');
+  const relC = (x, i, act) => { const why = relWhy(x, i); return { t: x.tier || 0, cell: PS.relIcon(x), tip: PS.relTip(x), det: PS.relTip(x) + (why ? `<p class="hint bad">${PS.esc(why)}</p>` : ''), act, arg: i, btn: act === 'eqPut' ? 'Mặc vào' : act === 'ddPutM' ? 'Uẩn dưỡng' : 'Chọn', dis: !!why }; };
   const byTier = (a, b) => (b.x.tier || 0) - (a.x.tier || 0);
   if (k[0] === 'E') {
     const s = k.slice(1); title = PS.SLOT_N[s.replace(/[123]$/, '')] || 'Trang bị'; const rel = E[s];

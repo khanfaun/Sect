@@ -38,6 +38,11 @@ const TESTS = {
     ok(await ev(b, () => [...document.querySelectorAll('.hint')].some(x => /Túi trữ vật đang khoá/.test(x.innerText))), 'túi khoá: có dòng nhắc');
     const h = await ev(b, () => emoTxt('+130% lịch luyện') + '|' + emoTxt('−20% tu vi'));
     ok(/chev gain c3/.test(h) && /chev gain c1 dn/.test(h) && !/130%<\//.test(h), 'mũi tên: +130% ra 3 mũi xanh, −20% ra 1 mũi đỏ');
+    // vật phẩm chưa đủ cảnh giới: nút Mặc vào khoá, món vừa sức thì dùng được
+    const bt = await ev(b, () => {const r=G.run;r.relics=[];const x=genRelic(2);x.k='kiem';x.req=3;const y=genRelic(0);y.k='kiem';y.req=0;r.relics.push(x,y);ACT.bagOpen();render();
+      const f=q=>{const it=bagItems().find(i=>i.ref.t==='rel'&&r.relics[i.ref.i]===q);UI.modal={k:'item',key:it.key};render();return [...document.querySelectorAll('.imod button')].find(z=>/mặc vào/i.test(z.innerText)).disabled;};
+      return [f(x),f(y)];});
+    ok(bt[0] === true && bt[1] === false, 'món chưa đủ cảnh giới: nút Mặc vào khoá; món vừa sức: dùng được');
     const g = await ev(b, () => {const w=G.meta.world;return txt(w.sects[0].n+' và '+w.rivals[0].ten);});
     ok((g.match(/class="gl"/g) || []).length >= 2, 'tên tông môn và thiên kiêu có chú thích');
   },

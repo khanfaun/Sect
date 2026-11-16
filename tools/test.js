@@ -212,7 +212,7 @@ const TESTS = {
   // lịch luyện nhận nhiều hơn
   llboost() {
     fresh('G.run.pham=0;G.run.base.ngo=-100;G.run.ll=0;G.run.realm=1;G.run.sg=3;');
-    const g = +run('llAdd(2,"thử");G.run.ll'); ok(g >= 2 * 3 * 0.99, `nhận 2 điểm gốc được ${g.toFixed(1)} (gấp ${run('LL_BOOST')} lần)`);
+    const g = +run('llAdd(2,"thử");G.run.ll'); ok(g >= 2 * 3 * +run('llRate()') * 0.99, `nhận 2 điểm gốc được ${g.toFixed(1)} (gấp ${run('LL_BOOST')} lần, nhịp ×${run('llRate()')})`);
   },
   // bế quan: linh lực hồi nhanh hơn khí huyết, không hồi đầy cả hai
   bequanhoi() {

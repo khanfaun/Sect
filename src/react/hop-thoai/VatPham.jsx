@@ -12,13 +12,16 @@ export function XemVatPham({ m }) {
   const dn = PS.DD_N[r.realm], lk = PS.itemLocked(it);
   const rel = it.ref.t === 'rel' ? r.relics[it.ref.i] : null;
   const act = [];
+  // nằm trong ô túi trữ vật đang khoá (hết linh lực hoặc phàm nhân) thì không lấy ra dùng được
+  const tuiWhy = it.locked ? 'Món này nằm trong túi trữ vật đang khoá: cần có linh lực mới lấy ra được.' : '';
   if (rel && rel.k === 'book') {
-    const why = PS.learnWhy(rel), lt = PS.durH(PS.learnTime(rel.art));
+    const why = PS.learnWhy(rel) || tuiWhy, lt = PS.durH(PS.learnTime(rel.art));
     act.push(<button key="l" className="btn pri" data-act="learn" data-arg={it.ref.i} disabled={!!why} {...tip(why || 'Tham ngộ mất ' + lt)}><Ic n="book" /> Học · {lt}</button>);
   } else if (rel) {
-    act.push(<button key="e" className="btn pri" data-act="eqOn" data-arg={it.ref.i}>Mặc vào</button>);
-    if (PS.ddCan(rel)) act.push(<button key="d" className="btn" data-act="ddPut" data-arg={it.ref.i} disabled={r.dd.length >= dn} {...tip(dn ? 'Đưa vào đan điền uẩn dưỡng' : 'Phải đạt Trúc Cơ mới uẩn dưỡng được')}>Uẩn dưỡng</button>);
-  } else if (it.use) act.push(<button key="u" className="btn pri" data-act="bagUse">Dùng{B.n > 1 ? ' ' + B.n : ''}</button>);
+    const rq = PS.relicWhy(rel) || tuiWhy;
+    act.push(<button key="e" className="btn pri" data-act="eqOn" data-arg={it.ref.i} disabled={!!rq} {...tip(rq)}>Mặc vào</button>);
+    if (PS.ddCan(rel)) act.push(<button key="d" className="btn" data-act="ddPut" data-arg={it.ref.i} disabled={r.dd.length >= dn || !!rq} {...tip(rq || (dn ? 'Đưa vào đan điền uẩn dưỡng' : 'Phải đạt Trúc Cơ mới uẩn dưỡng được'))}>Uẩn dưỡng</button>);
+  } else if (it.use) act.push(<button key="u" className="btn pri" data-act="bagUse" disabled={!!tuiWhy} {...tip(tuiWhy)}>Dùng{B.n > 1 ? ' ' + B.n : ''}</button>);
   if (it.ref.t === 'egg') act.push(<button key="p" className="btn" data-act="panel" data-arg="pets">Xem ở Linh thú</button>);
   const n = PS.clamp(B.n || 1, 1, it.cnt); B.n = n;
   const canDrop = it.ref.t !== 'pass';
