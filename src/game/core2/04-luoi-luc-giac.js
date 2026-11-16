@@ -77,7 +77,7 @@ function playerXY(){const r=G.run;const d=playerMapXY();return invXY(r.region,d[
 function snapStop(){const r=G.run,m=r&&r.moving;if(!m||m.seg>=m.path.length-1)return;const hp=hexPath(nodeHex(nodeById(m.path[m.seg])),nodeHex(nodeById(m.path[m.seg+1])));const tot=hp.cum[hp.cum.length-1]||1;const t=m.prog*tot;
   let b=0,bd=1e9;hp.cum.forEach((c,i)=>{if(Math.abs(c-t)<bd){bd=Math.abs(c-t);b=i;}});m.prog=clamp(hp.cum[b]/tot,0.001,0.999);}
 function hexInfo(i){const g=geo();const k=g.reg[i];return {i,sea:k<0,reg:k,regName:k<0?'Vân Hải':REG[k].n,dist:k<0?'':g.dnames[g.dist[i]]||'',ter:TER_N[g.ter[i]],el:g.el[i]};}
-function hexNode(i){const g=geo(),r=G.run;if(!g.nodeAt||g.nodeKey!==r.kiep+':'+W().t){g.nodeAt={};g.nodeKey=r.kiep+':'+W().t;for(const R0 of W().regions)for(const n of R0.nodes){if(n.fog<1)continue;const h=(n.fog>=2||n.memory)?nodeHex(n):hexAt(...nodeShown(n));if(g.nodeAt[h]==null||n.fog>=2)g.nodeAt[h]=n.id;}}
+function hexNode(i){const g=geo(),r=G.run;if(!g.nodeAt||g.nodeKey!==r.kiep+':'+W().t){g.nodeAt={};g.nodeKey=r.kiep+':'+W().t;for(const R0 of W().regions)for(const n of R0.nodes){if(n.fog<1)continue;const h=(n.fog>=2||n.memory)?nodeHex(n):hexAt(...nodeShown(n));if(g.nodeAt[h]==null||n.fog>=2)g.nodeAt[h]=n.id;if((n.fog>=2||n.memory)&&n.cells)for(const c of n.cells)if(g.nodeAt[c]==null)g.nodeAt[c]=n.id;}}
   const id=g.nodeAt[i];return id!=null?nodeById(id):null;}
 
 // thực thể qua lại đi cùng nhịp với người chơi: chậm lại 60 lần, sống lâu hơn 30 lần

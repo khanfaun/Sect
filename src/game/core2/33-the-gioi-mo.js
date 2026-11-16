@@ -30,7 +30,27 @@ function areaOfHex(h){const g=geo();return g.reg[h];}
   for(const n of R0.nodes)if(n.type==='ai'){n.type=pick(reg.types.filter(t=>t!=='tong'));n.name=placeName(n.type);n.danger=Math.min(n.danger,2);}
   // khu nào cũng có ít nhất hai trấn nhỏ để người mới sinh ra ở đó
   for(let q=0;q<2&&R0.nodes.filter(n=>n.type==='tran').length<2;q++){const c=R0.nodes.find(n=>!n.sectFix&&!n.dp&&!['sao','thanh','tran','tong'].includes(n.type));if(!c)break;c.type='tran';c.name=placeName('tran');c.danger=0;}
+  // mỗi đại khu vực 6–8 tông môn, quy mô lớn nhỏ khác nhau
+  {const want=ri(6,8);let have=R0.nodes.filter(n=>n.type==='tong');const used=new Set(w.sects.map(x=>x.n.split(' ')[0]));
+    for(let q=have.length;q<want&&R0.nodes.length<90;q++){let p=null;for(let g=0;g<400&&!p;g++){const c={x:k*1000+ri(40,960),y:ri(40,960)};if(R0.nodes.every(n=>Math.hypot(n.x-c.x,n.y-c.y)>=85))p=c;}if(!p)break;
+      const al=pick(['chinh','chinh','chinh','ma','phat']);let pre,g2=0;do{pre=pick(SECT_PRE[al]);}while(used.has(pre)&&g2++<30);used.add(pre);
+      const kind=al==='ma'?pick(['ma','am']):al==='phat'?'phat':pick(['kiem','dan','dao','tran','khi','phu']);const sc={n:pre+' '+pick(SECT_SFX[kind]),al,kind};w.sects.push(sc);
+      const near=R0.nodes.map(n=>[n,Math.round(Math.hypot(n.x-p.x,n.y-p.y))]).sort((a,b)=>a[1]-b[1]);
+      const n={id:k*100+R0.nodes.length,r:k,x:p.x,y:p.y,type:'tong',name:sc.n,owner:sc.n,sectFix:1,danger:Math.min(1,near[0][0].danger),fog:0,seenT:-1,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0};
+      R0.nodes.push(n);R0.edges.push({a:n.id,b:near[0][0].id,len:near[0][1]});}}
+  for(const n of R0.nodes)if(n.type==='tong'&&!n.quy){const x=R();n.quy=x<0.4?1:x<0.8?2:3;} // 1 tiểu, 2 trung, 3 đại tông
   R0.pass=null;return R0;};}
+// quy mô: số ô lục giác mỗi địa điểm chiếm; ô mọc ra từ tâm, ưu tiên ô kề nhiều ô đã có (thường thành cụm, đôi khi dài ra)
+const QUY_N=['','Tiểu tông','Trung tông','Đại tông'];
+function placeSize(n){const t=n.type;if(t==='tong')return [0,ri(3,4),ri(5,6),ri(7,9)][n.quy||1];if(t==='thanh')return ri(5,7);if(t==='tran')return ri(2,4);if(t==='sao')return 3;if(t==='dong')return ri(1,2);return ri(1,3);}
+function growPlaces(w){const g=geoFor(w);const used=new Set();const all=[];for(const R0 of w.regions)for(const n of R0.nodes){all.push(n);used.add(n.hex);if(n.cells)for(const c of n.cells)used.add(c);}
+  const ok=(c,k)=>!used.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4;
+  all.filter(n=>!n.cells).map(n=>[n,placeSize(n)]).sort((a,b)=>b[1]-a[1]).forEach(([n,sz])=>{const k=Math.floor(n.id/100);const set=[n.hex];const inS=new Set(set);
+    while(set.length<sz){const cand=new Map();for(const c of set)for(const b of hexNb(c))if(!inS.has(b)&&ok(b,k))cand.set(b,(cand.get(b)||0)+1);if(!cand.size)break;
+      const L=[...cand];const b=wpick(L,x=>x[1]*x[1]+0.5)[0];set.push(b);inS.add(b);used.add(b);}
+    n.cells=set;});}
+{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions)growPlaces(w);};}
+function placeCells(n){return n&&n.cells&&n.cells.length?n.cells:n?[nodeHex(n)]:[];}
 function canGoBack(){return false;}
 
 // sinh ra ở bất cứ trấn nào trên bản đồ
