@@ -44,8 +44,12 @@ function render(){
   Map2.resize();Art.fillAll();Map2.invalidate();toastFlush();hideTip();
 }
 function after(){render();saveSoon();}
-function mapTap(n,c){const r=G.run;if(!r||r.scene)return;UI.sel=n?n.id:null;UI.cell=n||c==null?null:(UI.cell===c?null:c);UI.cardMin=false;render();}
-function hexTip(c,x,y){const tip=$('#tip');const n=hexNode(c);const I=hexInfo(c);const shown=n&&!(CFG.hideT||{})[n.type];if(!shown){hideTip();return;}
+function mapTap(n,c,w,zf){const r=G.run;if(!r||r.scene)return;
+  // thu nhỏ hết cỡ: chạm đại khu vực nào thì hiện thẻ mô tả đại khu vực đó (không hiện quận, không chọn địa điểm)
+  if(zf!=null&&zf<0.12){const k=c!=null?geo().reg[c]:-1;UI.sel=null;UI.cell=null;UI.pop=k>=0&&!(UI.pop&&UI.pop.k===k)?{k,wx:w[0],wy:w[1]}:null;render();return;}
+  UI.pop=null;if(zf!=null&&zf<0.5)n=null; // mức thấy quận: icon địa điểm đang ẩn nên chỉ xem quận
+  UI.sel=n?n.id:null;UI.cell=n||c==null?null:(UI.cell===c?null:c);render();}
+function hexTip(c,x,y){const tip=$('#tip');if(Map2.zf<0.5){hideTip();return;}const n=hexNode(c);const I=hexInfo(c);const shown=n&&!(CFG.hideT||{})[n.type];if(!shown){hideTip();return;}
   tip.textContent=n.name+(n.fog>=2||n.memory?'':'?')+' · '+TYPE_NAME[n.type]+'\n'+DTAG[dangerTag(n)]+'\n'+I.regName+(I.dist?' › '+I.dist:'');tip.hidden=false;tipEl=null;
   tip.className='';placeTip(x,y);}
 
@@ -121,10 +125,8 @@ const ACT={
   panel:k=>{UI.panel=UI.panel===k?null:k;UI.code=null;UI.msg=null;UI.confirm=null;UI.chuSel=null;},
   closePanel:()=>{UI.panel=null;UI.code=null;UI.msg=null;},
   modalX:()=>{const m=UI.modal;UI.modal=null;G.bqRoom=false;if(m&&m.k==='bq'&&UI.bqOpened&&G.run&&G.run.scene&&G.run.scene.type==='place'){G.run.scene=null;}UI.bqOpened=false;},
-  unsel:()=>{UI.sel=null;UI.cell=null;},
+  unsel:()=>{UI.sel=null;UI.cell=null;UI.pop=null;},
   gridT:()=>{cfgSet('grid',!CFG.grid);},
-  cardMin:()=>{UI.cardMin=true;},
-  cardMax:()=>{UI.cardMin=false;},
   descTg:()=>{UI.descHide=!UI.descHide;},
   exStat:()=>{UI.modal={k:'explore'};},
   exGo:()=>{UI.modal=null;placeAct('explore');},

@@ -42,16 +42,17 @@ const Map2=(()=>{
   // lưới ô và các đường ranh: dựng một lần thành nét vẽ sẵn, mỗi khung chỉ tô lại
   let HX=null,hov=null,pcam=null,pse=null;
   function hexPaths(){const g=geo();if(HX&&HX.seed===g.seed)return HX;
-    const grid=new Path2D(),macro=new Path2D(),dist=new Path2D(),coast=new Path2D(),dp={};
+    const grid=new Path2D(),macro=new Path2D(),dist=new Path2D(),coast=new Path2D(),dp={},rp=[0,1,2,3,4].map(()=>new Path2D());
     for(let i=0;i<HN;i++){const v=hexVerts(i),a=g.reg[i],c=i%HCOLS,r=(i-c)/HCOLS;
       if(a>=0){grid.moveTo(v[0][0],v[0][1]);for(let k=1;k<6;k++)grid.lineTo(v[k][0],v[k][1]);grid.closePath();
-        const d=g.dist[i],P=dp[d]||(dp[d]=new Path2D());P.moveTo(v[0][0],v[0][1]);for(let k=1;k<6;k++)P.lineTo(v[k][0],v[k][1]);P.closePath();}
+        const d=g.dist[i],P=dp[d]||(dp[d]=new Path2D());P.moveTo(v[0][0],v[0][1]);for(let k=1;k<6;k++)P.lineTo(v[k][0],v[k][1]);P.closePath();
+        if(a<5){const R=rp[a];R.moveTo(v[0][0],v[0][1]);for(let k=1;k<6;k++)R.lineTo(v[k][0],v[k][1]);R.closePath();}}
       // ba cạnh đông, đông nam, tây nam: mỗi cạnh chung chỉ xét một lần
       const nb=[[c+1,r,1,2],[r%2?c+1:c,r+1,2,3],[r%2?c:c-1,r+1,3,4]];
       for(const [x,y,p,q] of nb){const j=x>=0&&x<HCOLS&&y>=0&&y<HROWS?y*HCOLS+x:-1;const b=j<0?-1:g.reg[j];let T=null;
         if(a!==b)T=a>=0&&b>=0?macro:coast;else if(a>=0&&g.dist[i]!==g.dist[j])T=dist;
         if(T){T.moveTo(v[p][0],v[p][1]);T.lineTo(v[q][0],v[q][1]);}}}
-    return HX={seed:g.seed,grid,macro,dist,coast,dp};}
+    return HX={seed:g.seed,grid,macro,dist,coast,dp,rp};}
   function cellAt(sx,sy){return hexAt((sx-W0/2)/cam.z+cam.x,(sy-VCY)/cam.z+cam.y);}
   function hexPoly(i){const v=hexVerts(i);ctx.beginPath();ctx.moveTo(v[0][0],v[0][1]);for(let k=1;k<6;k++)ctx.lineTo(v[k][0],v[k][1]);ctx.closePath();}
   const MOBILE=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
@@ -73,7 +74,8 @@ const Map2=(()=>{
     dpr=Math.min(window.devicePixelRatio||1,CFG.dpr||(MOBILE?[1,1.25,1.5]:[1,1.5,2])[lv]);W0=r.width;H0=r.height;
     const w=Math.round(W0*dpr),h=Math.round(H0*dpr);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}dirty=true;}
   function resetAll(){INK=null;LCV=null;BGK='';for(const k in DTC)delete DTC[k];dtWant='';clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();}
-  let TOPI=0,BOTI=0,VCY=0;
+  let TOPI=0,BOTI=0,VCY=0,wide=false;
+  const AREA_COL=['#d9a441','#58a46f','#4797bb','#9a74c9','#8196b3'];
   // phần bản đồ thật sự nhìn thấy: dưới header (#hud), trên footer (#nav). Thu nhỏ hết cỡ thì cạnh trên bản đồ chạm header, cạnh dưới chạm footer.
   function insets(){if(!cv)return false;const cr=cv.getBoundingClientRect();let t=TOPI,b=BOTI;const vis=e=>e&&!e.hidden&&getComputedStyle(e).display!=='none';
     const h=document.getElementById('hud'),n=document.getElementById('nav');if(vis(h)){t=Math.max(0,Math.round(h.getBoundingClientRect().bottom-cr.top));}
@@ -81,15 +83,18 @@ const Map2=(()=>{
     const ch=t!==TOPI||b!==BOTI;TOPI=t;BOTI=b;VCY=t+(H0-t-b)/2;return ch;}
   function viewH(){return Math.max(60,H0-TOPI-BOTI);}
   function zMin(){return viewH()/WORLD_H;}
-  function clampCam(){cam.z=clamp(cam.z,zMin(),ZMAX);const hw=W0/2/cam.z,hh=viewH()/2/cam.z;const ov=clamp(Math.log(cam.z/zMin())/Math.log(ZMAX/zMin()),0,1);const px=W0*0.42*ov/cam.z,py=viewH()*0.45*ov/cam.z;
+  function zFloor(){return wide?Math.min(W0/WORLD_W,zMin()):zMin();} // lăn chuột chỉ tới zMin; sau khi bấm nút thu nhỏ thì tạm xuống tới mức bản đồ rộng bằng màn hình
+  function zfNow(){return clamp(Math.log(cam.z/zMin())/Math.log(ZMAX/zMin()),0,1);}
+  function worldAt(sx,sy){return [(sx-W0/2)/cam.z+cam.x,(sy-VCY)/cam.z+cam.y];}
+  function clampCam(){if(wide&&cam.z>=zMin()*0.9999)wide=false;cam.z=clamp(cam.z,zFloor(),ZMAX);const hw=W0/2/cam.z,hh=viewH()/2/cam.z;const ov=zfNow();const px=W0*0.42*ov/cam.z,py=viewH()*0.45*ov/cam.z;
     const rx=2*hw>=WORLD_W?[WORLD_W/2,WORLD_W/2]:[hw,WORLD_W-hw],ry=2*hh>=WORLD_H-0.5?[WORLD_H/2,WORLD_H/2]:[hh,WORLD_H-hh];
     cam.x=clamp(cam.x,rx[0]-px,rx[1]+px);cam.y=clamp(cam.y,ry[0]-py,ry[1]+py);} // cho kéo quá mép để điểm sát rìa vẫn kéo ra giữa được
   function center(){const r=G.run;if(!r)return;const w0=playerXY(),p=mapXY(r.region,w0[0],w0[1]);cam.x=p[0];cam.y=p[1];cam.follow=true;cam.reg=r.region;clampCam();dirty=true;}
-  function zAt(f){const m=zMin();return clamp(m*Math.pow(ZMAX/m,f),m,ZMAX);}
-  function zoomOutAll(){cam.z=zMin();cam.follow=false;cam.x=WORLD_W/2;cam.y=WORLD_H/2;clampCam();dirty=true;}
+  function zAt(f){const m=zMin();return clamp(m*Math.pow(ZMAX/m,f),zFloor(),ZMAX);}
+  function zoomOutAll(){wide=true;cam.z=zFloor();cam.follow=false;cam.x=WORLD_W/2;cam.y=WORLD_H/2;clampCam();dirty=true;}
   function locate(){cam.z=zAt(0.53);center();dirty=true;}
   function focus(x,y){const p=mapXY(clamp(Math.floor(x/1000),0,4),x,y);cam.x=p[0];cam.y=p[1];cam.follow=false;clampCam();dirty=true;}
-  function zoom(f,sx,sy){const z0=cam.z;cam.z=clamp(cam.z*f,zMin(),ZMAX);if(sx!=null){const wx=(sx-W0/2)/z0+cam.x,wy=(sy-VCY)/z0+cam.y;cam.x=wx-(sx-W0/2)/cam.z;cam.y=wy-(sy-VCY)/cam.z;cam.follow=false;}clampCam();dirty=true;}
+  function zoom(f,sx,sy){const z0=cam.z;cam.z=clamp(cam.z*f,zFloor(),ZMAX);if(sx!=null){const wx=(sx-W0/2)/z0+cam.x,wy=(sy-VCY)/z0+cam.y;cam.x=wx-(sx-W0/2)/cam.z;cam.y=wy-(sy-VCY)/cam.z;cam.follow=false;}clampCam();dirty=true;}
   const SX=x=>(x-cam.x)*cam.z+W0/2,SY=y=>(y-cam.y)*cam.z+VCY;
 
   // ----- địa hình: vẽ một lần cho mỗi vùng -----
@@ -160,30 +165,46 @@ const Map2=(()=>{
     return o.ok?o.im:null;}
   let LCV=null;function layerCv(){const w=Math.max(1,Math.round(W0*dpr)),h=Math.max(1,Math.round(H0*dpr));if(!LCV)LCV=document.createElement('canvas');if(LCV.width!==w||LCV.height!==h){LCV.width=w;LCV.height=h;}return LCV;}
   // ----- mặt nạ "đã thấy": mỗi ô đã thấy là một vệt mực; ô mới thấy loang dần ra -----
-  let INK=null;const INK_MS=900;
-  function inkBlots(){const L=[];for(let v=0;v<4;v++){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const rnd=mul(hashS('ink'+v));
-      const lob=[];for(let i=0;i<7;i++)lob.push([rnd()*6.283,0.55+rnd()*0.3,0.18+rnd()*0.22]);
-      for(let i=0;i<3;i++){const a=rnd()*6.283,d=8+rnd()*10,r0=18+rnd()*6;const gr=g.createRadialGradient(32+Math.cos(a)*d*0.4,32+Math.sin(a)*d*0.4,0,32,32,r0+8);gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(0.62,'rgba(0,0,0,.95)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.beginPath();
-        for(let s0=0;s0<=48;s0++){const t=s0/48*6.283;let rr=r0;for(const l of lob)rr+=Math.cos(t*3+l[0])*l[2]*4;const x=32+Math.cos(t)*rr*1.08,y=32+Math.sin(t)*rr*1.08;s0?g.lineTo(x,y):g.moveTo(x,y);}g.fill();}
-      L.push(c);}return L;}
-  function inkMask(now){if(!VIS)return null;const lv=gfxLv(),SC=[8,6,4][lv];const key=lv+':'+(G.run.kiep);
+  let INK=null;const INK_MS=1700,INK_ST=8;
+  // Mực loang: mỗi ô có 4 hình × 8 bậc loang, mép là nhiễu nhiều tầng + sợi giấy toả ra, có dải viền mực đậm hơn ở mép đang lan
+  function inkBlots(){const out=[];const S=96;
+    for(let v=0;v<4;v++){const nz=makeNoise(hashS('inkn'+v)),stages=[];
+      for(let st=0;st<INK_ST;st++){const p=(st+1)/INK_ST,R=0.2+0.72*(1-Math.pow(1-p,2));
+        const c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d'),im=g.createImageData(S,S);
+        const rc=document.createElement('canvas');rc.width=rc.height=S;const rg=rc.getContext('2d'),rim=rg.createImageData(S,S);
+        for(let y=0;y<S;y++)for(let x=0;x<S;x++){const dx=(x+.5)/S*2-1,dy=(y+.5)/S*2-1,d=Math.hypot(dx,dy),an=Math.atan2(dy,dx);
+          const u=(x+.5)/S*3.9,w=(y+.5)/S*3.9;
+          const n1=nz(u+v*0.7,w),n2=nz(u*2.6+1.3,w*2.6+0.7),n3=nz(u*6.5+2.1,w*6.5+4.4);
+          const fib=nz(Math.cos(an)*1.9+2,Math.sin(an)*1.9+v+1); // sợi toả theo hướng bán kính
+          const warp=(n1-.5)*.5+(n2-.5)*.3+(n3-.5)*.18+(fib-.5)*.6*(0.3+0.7*p);
+          const f=d-R*(1+warp);const soft=0.04+0.05*(1-p);
+          let a=clamp(0.5-f/soft,0,1);if(f>-0.1)a*=0.78+0.22*n3; // mép ngấm không đều
+          const i4=(y*S+x)*4;im.data[i4+3]=Math.round(a*255);
+          const e=Math.exp(-Math.pow((f+0.012)/0.04,2))*(n2>0.4?1:0.35);rim.data[i4]=74;rim.data[i4+1]=44;rim.data[i4+2]=20;rim.data[i4+3]=Math.round(clamp(e*a*0.9,0,1)*150);}
+        g.putImageData(im,0,0);rg.putImageData(rim,0,0);stages.push({c,rim:rc});}
+      out.push(stages);}
+    return out;}
+  function inkMask(now){if(!VIS)return null;const lv=gfxLv(),SC=[5,3,2][lv];const key=lv+':'+((G.run.rid||'')+G.run.kiep);
     if(!INK||INK.key!==key){const w=Math.ceil(WORLD_W/SC),h=Math.ceil(WORLD_H/SC);const mk=()=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
-      INK={key,SC,w,h,inner:mk(),outer:mk(),ci:mk(),co:mk(),done:new Uint8Array(HN),blots:inkBlots(),n:-1,any:false};}
+      INK={key,SC,w,h,inner:mk(),outer:mk(),ci:mk(),co:mk(),ri:mk(),done:new Uint8Array(HN),blots:(INK&&INK.blots)||inkBlots(),n:-1,any:false};}
     const I=INK,t=performance.now(),gi=I.inner.getContext('2d'),go=I.outer.getContext('2d');const anim=[];
-    const put=(g,i,s,a,k)=>{const p=hexCenter(i),R0=HEXW*k*s/I.SC;g.globalAlpha=a;g.drawImage(I.blots[i&3],p[0]/I.SC-R0,p[1]/I.SC-R0,R0*2,R0*2);};
+    const spr=(i,st)=>I.blots[i&3][st];
+    const put=(g,i,st,a,k,rim)=>{const p=hexCenter(i),R0=HEXW*k/I.SC;g.globalAlpha=a;g.drawImage(rim?spr(i,st).rim:spr(i,st).c,p[0]/I.SC-R0,p[1]/I.SC-R0,R0*2,R0*2);};
     if(I.n!==VIS_N||I.anim){I.n=VIS_N;I.anim=false;
-      for(let i=0;i<HN;i++){if(!VIS[i]||I.done[i])continue;const age=t-(VT[i]||0);if(age>=INK_MS||!VT[i]){I.done[i]=1;I.any=true;put(gi,i,1,1,1.25);put(go,i,1,1,2.3);}else anim.push([i,age/INK_MS]);}
+      for(let i=0;i<HN;i++){if(!VIS[i]||I.done[i])continue;const age=t-(VT[i]||0);if(age>=INK_MS||!VT[i]){I.done[i]=1;I.any=true;put(gi,i,INK_ST-1,1,1.3,0);put(go,i,INK_ST-1,1,2.4,0);}else anim.push([i,age/INK_MS]);}
       gi.globalAlpha=1;go.globalAlpha=1;}
     if(!I.any&&!anim.length)return null;
     if(!anim.length)return {inner:I.inner,outer:I.outer};
-    // ô đang loang: vẽ lên bản sao, lớn dần theo thời gian
-    I.anim=true;soft=true;const ci=I.ci.getContext('2d'),co=I.co.getContext('2d');ci.clearRect(0,0,I.w,I.h);co.clearRect(0,0,I.w,I.h);ci.drawImage(I.inner,0,0);co.drawImage(I.outer,0,0);
-    for(const [i,f] of anim){const e=1-Math.pow(1-f,3);put(co,i,0.4+0.6*e,Math.min(1,f*2),2.3);put(ci,i,0.15+0.85*e,e,1.25);}
-    ci.globalAlpha=1;co.globalAlpha=1;return {inner:I.ci,outer:I.co};}
+    // các ô đang loang: vẽ lên bản sao, mép lan dần, chuyển mượt giữa hai bậc liền kề
+    I.anim=true;soft=true;const ci=I.ci.getContext('2d'),co=I.co.getContext('2d'),cr=I.ri.getContext('2d');ci.clearRect(0,0,I.w,I.h);co.clearRect(0,0,I.w,I.h);cr.clearRect(0,0,I.w,I.h);ci.drawImage(I.inner,0,0);co.drawImage(I.outer,0,0);
+    for(const [i,f] of anim){const e=1-Math.pow(1-f,2.2),q=e*(INK_ST-1),s0=Math.floor(q),fr=q-s0,s1=Math.min(INK_ST-1,s0+1),al=Math.min(1,f*5);
+      for(const [g,k] of [[ci,1.3],[co,2.4]]){put(g,i,s0,al,k,0);if(s1!==s0)put(g,i,s1,fr*al,k,0);}
+      put(cr,i,s0,(1-fr)*(1-f*0.6),1.3,1);if(s1!==s0)put(cr,i,s1,fr*(1-f*0.6),1.3,1);}
+    ci.globalAlpha=1;co.globalAlpha=1;cr.globalAlpha=1;return {inner:I.ci,outer:I.co,rim:I.ri};}
   // vùng đang thấy (sáng): vẽ lại khi tầm nhìn đổi
   let NWC=null,NWK='';
   function nowMask(){if(!VNOW||!INK)return null;const key=VIS_N+':'+INK.key;if(NWC&&NWK===key)return NWC;NWK=key;if(!NWC){NWC=document.createElement('canvas');}NWC.width=INK.w;NWC.height=INK.h;const g=NWC.getContext('2d');
-    for(let i=0;i<HN;i++)if(VNOW[i]){const p=hexCenter(i),R0=HEXW*1.5/INK.SC;g.drawImage(INK.blots[i&3],p[0]/INK.SC-R0,p[1]/INK.SC-R0,R0*2,R0*2);}return NWC;}
+    for(let i=0;i<HN;i++)if(VNOW[i]){const p=hexCenter(i),R0=HEXW*1.5/INK.SC;g.drawImage(INK.blots[i&3][INK_ST-1].c,p[0]/INK.SC-R0,p[1]/INK.SC-R0,R0*2,R0*2);}return NWC;}
   let BGC=null,BGK='';
   function ri2(rnd,a,b){return a+rnd()*(b-a);}
   // ----- sương: lớp phủ bị khoét ở chỗ đã thấy -----
@@ -208,8 +229,8 @@ const Map2=(()=>{
     const r=G.run;if(!r||!ctx||!W0)return;
     if(!C.paper)colors();
     if(insets())clampCam();const reg=r.region,lv=gfxLv(),w=W();visLoad();const imgN=Object.values(MIMG).filter(o=>o.ok).length;
-    if(cam.kz!==r.kiep){cam.kz=r.kiep;cam.reg=reg;cam.z=clamp(zMin()*Math.pow(ZMAX/zMin(),0.62),zMin(),ZMAX);center();pos=null;}
-    const lastR=r.reveal[r.reveal.length-1];const base=lv+':'+CFG.theme+':'+w.seed,fbase=base+':'+r.kiep+':'+r.reveal.length+':'+(lastR?lastR.join(','):'');
+    if(cam.kz!==(r.rid||'')+r.kiep){cam.kz=(r.rid||'')+r.kiep;cam.reg=reg;cam.z=clamp(zMin()*Math.pow(ZMAX/zMin(),0.62),zMin(),ZMAX);center();pos=null;}
+    const lastR=r.reveal[r.reveal.length-1];const base=lv+':'+CFG.theme+':'+w.seed,fbase=base+':'+(r.rid||'')+r.kiep+':'+r.reveal.length+':'+(lastR?lastR.join(','):'');
     // vị trí người chơi được làm mượt giữa các nhịp đồng hồ
     const pw=playerXY(),pp=mapXY(reg,pw[0],pw[1]);if(!pos||Math.hypot(pos[0]-pp[0],pos[1]-pp[1])>120)pos=[pp[0],pp[1]];else{const f=r.moving?1:1-Math.pow(0.002,dt);pos[0]+=(pp[0]-pos[0])*f;pos[1]+=(pp[1]-pos[1])*f;}
     if(cam.follow&&r.moving){cam.x=pos[0];cam.y=pos[1];clampCam();}
@@ -228,6 +249,7 @@ const Map2=(()=>{
             g.globalCompositeOperation='source-over';ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=0.9;ctx.drawImage(L,0,0);ctx.restore();g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);}
           g.globalCompositeOperation='source-over';g.drawImage(bk,X,Y,Wd,Hd);g.globalCompositeOperation='destination-in';g.drawImage(M.inner,X,Y,Wd,Hd);g.globalCompositeOperation='source-over';
           ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(L,0,0);ctx.restore();
+          if(M.rim)ctx.drawImage(M.rim,X,Y,Wd,Hd);
           const NW=nowMask();if(NW){g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);g.globalCompositeOperation='source-over';
             g.drawImage(M.inner,X,Y,Wd,Hd);g.globalCompositeOperation='source-in';g.fillStyle=C.dark?'rgba(0,0,0,1)':'rgba(40,26,12,1)';g.fillRect(SX(0),SY(0),Wd,Hd);
             g.globalCompositeOperation='destination-out';g.drawImage(NW,X,Y,Wd,Hd);g.globalCompositeOperation='source-over';
@@ -242,19 +264,23 @@ const Map2=(()=>{
     {const hx=hexPaths(),g0=geo();ctx.save();ctx.translate(W0/2-cam.x*z,VCY-cam.y*z);ctx.scale(z,z);ctx.lineJoin='round';ctx.lineCap='round';
       if(!bgHit){const BR=C.dark?'#e6d6b4':'#5b3d22'; // nâu mực, hợp màu giấy bản đồ
         const sel=CFG.grid&&!zTop?(UI.cell!=null?UI.cell:hov):null;
+        if(macroA>0.01){for(let k=0;k<5;k++){ctx.fillStyle=hexA(AREA_COL[k],0.2*macroA);ctx.fill(hx.rp[k]);}}
         if(macroA>0.01){ctx.strokeStyle=hexA(BR,0.5*macroA);ctx.lineWidth=1/z;ctx.setLineDash([7/z,5/z]);ctx.stroke(hx.macro);ctx.setLineDash([]);}
-        if(CFG.grid&&distA>0.01){ctx.strokeStyle=hexA(BR,0.62*distA);ctx.lineWidth=1/z;ctx.setLineDash([5/z,4/z]);ctx.stroke(hx.dist);ctx.setLineDash([]);
+        if(CFG.grid&&distA>0.01){ctx.strokeStyle=hexA(C.dark?'#10151b':'#fff4d6',0.6*distA);ctx.lineWidth=2.6/z;ctx.stroke(hx.dist); // viền sáng để ranh quận không chìm vào nền đã khám phá
+          ctx.strokeStyle=hexA(BR,0.85*distA);ctx.lineWidth=1/z;ctx.setLineDash([5/z,4/z]);ctx.stroke(hx.dist);ctx.setLineDash([]);
           const d=sel!=null&&g0.reg[sel]>=0?g0.dist[sel]:-1;
           if(d>=0&&hx.dp[d]){ctx.fillStyle=hexA(C.dark?'#ffffff':'#fff6dc',(C.dark?0.1:0.34)*distA);ctx.fill(hx.dp[d]);ctx.globalCompositeOperation=C.dark?'source-over':'multiply';ctx.strokeStyle=hexA(BR,0.32*distA);ctx.lineWidth=0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(hx.dp[d]);ctx.setLineDash([]);ctx.globalCompositeOperation='source-over';}}
         // địa điểm: tô các ô của nó bằng màu icon (phủ overlay, rất nhạt), nếu bật lưới thì có thêm đường ô mảnh
         {const hn=hov!=null&&showIc?hexNode(hov):null;const L=[];const sn0=UI.sel!=null?nodeById(UI.sel):null;if(sn0&&(sn0.fog>=2||sn0.memory))L.push([sn0,1]);if(hn&&hn!==sn0)L.push([hn,0.65]);
           const DC0=[C.jade,C.gold,C.seal,C.vio];
-          for(const [n,a] of L){const cs=placeCells(n);const cp=new Path2D();
-            for(const c of cs){const v=hexVerts(c);cp.moveTo(v[0][0],v[0][1]);for(let q=1;q<6;q++)cp.lineTo(v[q][0],v[q][1]);cp.closePath();}
+          for(const [n,a] of L){const cs=placeCells(n),set=new Set(cs);const cp=new Path2D(),op=new Path2D();
+            for(const c of cs){const v=hexVerts(c);cp.moveTo(v[0][0],v[0][1]);for(let q=1;q<6;q++)cp.lineTo(v[q][0],v[q][1]);cp.closePath();const [cx,cy]=hexCenter(c);
+              for(let q=0;q<6;q++){const A=v[q],B=v[(q+1)%6];if(!set.has(hexAt(A[0]+B[0]-cx,A[1]+B[1]-cy))){op.moveTo(A[0],A[1]);op.lineTo(B[0],B[1]);}}}
             const sure=n.fog>=2||n.memory;const col=sure?DC0[dangerTag(n)]:C[NODE_CAT[n.type]||'ink'];
-            ctx.globalCompositeOperation='overlay';ctx.fillStyle=hexA(col,0.4*a);ctx.fill(cp);ctx.globalCompositeOperation='source-over';
-            ctx.fillStyle=hexA(col,0.06*a);ctx.fill(cp);
-            if(CFG.grid){ctx.strokeStyle=hexA(BR,0.32*a);ctx.lineWidth=0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(cp);ctx.setLineDash([]);}}
+            ctx.globalCompositeOperation='overlay';ctx.fillStyle=hexA(col,0.7*a);ctx.fill(cp);ctx.globalCompositeOperation='source-over';
+            ctx.fillStyle=hexA(C.dark?'#ffffff':'#fff8e4',0.3*a);ctx.fill(cp);ctx.fillStyle=hexA(col,0.14*a);ctx.fill(cp);
+            if(CFG.grid){ctx.strokeStyle=hexA(BR,0.3*a);ctx.lineWidth=0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(cp);ctx.setLineDash([]);}
+            ctx.strokeStyle=hexA(C.dark?'#fff1d0':mixHex(col,BR,0.5),0.95*a);ctx.lineWidth=1/z;ctx.setLineDash([4/z,3/z]);ctx.stroke(op);ctx.setLineDash([]);}
           if(sel!=null&&showIc&&!hn&&!(UI.sel!=null)){hexPoly(sel);ctx.strokeStyle=hexA(BR,0.6);ctx.lineWidth=0.7/z;ctx.stroke();}}}
       ctx.restore();if(!bgHit){ctx=realCtx;BGK=bgKey;}
       ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(BGC,0,0);ctx.restore();
@@ -327,6 +353,12 @@ const Map2=(()=>{
       const hi=heroImg();if(hi&&hi.complete&&hi.naturalWidth){ctx.save();ctx.beginPath();ctx.arc(x,y,rr,0,6.3);ctx.clip();ctx.drawImage(hi,x-rr,y-rr,rr*2,rr*2);ctx.restore();}
       else{ctx.fillStyle=C.ink;ctx.font=`500 ${Math.round(rr*1.05)}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(avLetter(r.ten),x,y+1);}
 }
+    // thẻ chú thích gắn theo địa điểm / đại khu vực: bám vị trí trên bản đồ, nằm trên icon, hết chỗ thì xuống dưới
+    {const el=document.querySelector('#dock .np');if(el){const ax=+el.dataset.ax,ay=+el.dataset.ay;
+      if(el.dataset.area&&zf>=0.2){el.style.visibility='hidden';}
+      else{const w=el.offsetWidth,h=el.offsetHeight;const cr=cv.getBoundingClientRect(),dr=el.parentElement.getBoundingClientRect();const sx=SX(ax),sy=SY(ay);const ic=el.dataset.area?4:Math.max(10,HEXW*z*0.6);
+        let left=clamp(sx-w/2,6,Math.max(6,W0-w-6)),top=sy-ic-h-8;if(top<TOPI+4)top=sy+ic+8;top=clamp(top,TOPI+4,Math.max(TOPI+4,H0-BOTI-h-4));
+        el.style.left=Math.round(left+cr.left-dr.left)+'px';el.style.top=Math.round(top+cr.top-dr.top)+'px';el.style.visibility='visible';}}}
     if(false&&CFG.showFps){ctx.font='11px monospace';ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillStyle=C.ink2;ctx.fillText(fpsShow+' khung/giây · mức '+['tiết kiệm','cân bằng','đẹp'][lv],8,H0-6);}
   }
   function animating(){const r=G.run;if(!r)return false;const lv=gfxLv();return (!!r.moving&&!r.halt)||(lv>0&&(CFG.fx||CFG.clouds))||(pos&&(()=>{const w0=playerXY(),q=mapXY(r.region,w0[0],w0[1]);return Math.hypot(pos[0]-q[0],pos[1]-q[1])>0.5;})());}
@@ -354,13 +386,13 @@ const Map2=(()=>{
       if(ptr.size===1)drag={x:e.offsetX,y:e.offsetY,cx:cam.x,cy:cam.y,moved:false};
       else if(ptr.size===2){const [a,b]=[...ptr.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),z:cam.z};drag=null;}});
     cv.addEventListener('pointermove',e=>{if(!ptr.has(e.pointerId))return;ptr.set(e.pointerId,[e.offsetX,e.offsetY]);
-      if(pinch&&ptr.size===2){const [a,b]=[...ptr.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);cam.z=clamp(pinch.z*d/Math.max(20,pinch.d),zMin(),ZMAX);cam.follow=false;clampCam();dirty=true;return;}
+      if(pinch&&ptr.size===2){const [a,b]=[...ptr.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);cam.z=clamp(pinch.z*d/Math.max(20,pinch.d),zFloor(),ZMAX);cam.follow=false;clampCam();dirty=true;return;}
       if(drag){const dx=e.offsetX-drag.x,dy=e.offsetY-drag.y;if(Math.abs(dx)+Math.abs(dy)>7)drag.moved=true;if(drag.moved){cam.x=drag.cx-dx/cam.z;cam.y=drag.cy-dy/cam.z;cam.follow=false;clampCam();dirty=true;}}});
-    const up=e=>{const d=drag;ptr.delete(e.pointerId);if(ptr.size<2)pinch=null;if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0&&pos&&Math.abs(SX(pos[0])-e.offsetX)<20&&e.offsetY>SY(pos[1])-44&&e.offsetY<SY(pos[1])+4&&G.run&&!G.run.scene){UI.panel='char';UI.tab.char='base';after();}else if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0){const c=cellAt(e.offsetX,e.offsetY);let n=hexNode(c);if(n&&(CFG.hideT||{})[n.type])n=null;if(!n)n=hit(e.offsetX,e.offsetY);mapTap(n,c);}if(ptr.size===0)drag=null;};
+    const up=e=>{const d=drag;ptr.delete(e.pointerId);if(ptr.size<2)pinch=null;if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0&&pos&&Math.abs(SX(pos[0])-e.offsetX)<20&&e.offsetY>SY(pos[1])-44&&e.offsetY<SY(pos[1])+4&&G.run&&!G.run.scene){UI.panel='char';UI.tab.char='base';after();}else if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0){const c=cellAt(e.offsetX,e.offsetY);let n=hexNode(c);if(n&&(CFG.hideT||{})[n.type])n=null;if(!n)n=hit(e.offsetX,e.offsetY);mapTap(n,c,worldAt(e.offsetX,e.offsetY),zfNow());}if(ptr.size===0)drag=null;};
     cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
     cv.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||drag||!G.run||G.run.scene)return;const c=cellAt(e.offsetX,e.offsetY);if(c!==hov){hov=c;dirty=true;}if(cam.z>=ZMAX*0.97)hideTip();else hexTip(c,e.clientX,e.clientY);});
     cv.addEventListener('pointerleave',()=>{if(hov!=null){hov=null;dirty=true;}hideTip();});
     cv.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.15:1/1.15,e.offsetX,e.offsetY);},{passive:false});
   }
-  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,zoomOutAll,locate,reset:resetAll,get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},get dtc(){return Object.keys(DTC).filter(k=>DTC[k]).length;},get imgOk(){return Object.values(MIMG).filter(o=>o.ok).length;},get ink(){return !!(INK&&INK.any);},get zmax(){return ZMAX;},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
+  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,zoomOutAll,locate,reset:resetAll,get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},get zf(){return zfNow();},worldAt,get wide(){return wide;},get dtc(){return Object.keys(DTC).filter(k=>DTC[k]).length;},get imgOk(){return Object.values(MIMG).filter(o=>o.ok).length;},get ink(){return !!(INK&&INK.any);},get zmax(){return ZMAX;},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
 })();

@@ -100,6 +100,11 @@ const TESTS = {
     const d0 = run('(()=>{G.run.realm=0;let s=0;for(let i=0;i<20;i++)s+=mkEnemy({}).hp;return s;})()'), d3 = run('(()=>{G.run.realm=3;let s=0;for(let i=0;i<20;i++)s+=mkEnemy({}).hp;return s;})()');
     ok(d3 > d0 * 2, `kẻ địch mạnh theo cảnh giới (${Math.round(d0 / 20)} → ${Math.round(d3 / 20)} khí huyết)`);
     ok(run('G.run.realm=2;rT()') === 2, 'bậc độ khó = cảnh giới');
+    // chơi lại từ đầu: vùng đã mở của lượt trước không được giữ
+    const ra = run('(()=>{sense();for(let i=0;i<HN;i++)VIS[i]=1;visSave();return [G.run.rid,VIS.reduce((x,y)=>x+y,0)];})()');
+    fresh('');
+    const rb = run('(()=>{sense();return [G.run.rid,VIS.reduce((x,y)=>x+y,0)];})()');
+    ok(rb[0] !== ra[0] && rb[1] < 800, `chơi lại thì không giữ vùng đã mở (${ra[1]} → ${rb[1]} ô)`);
     const sects = run('W().regions.map(R0=>R0.nodes.filter(n=>n.type==="tong").length).join(",")');
     ok(sects.split(',').every(x => +x >= 6 && +x <= 9), 'mỗi đại khu vực 6–8 tông môn (' + sects + ')');
     const cl = run('(()=>{const g=geo();const all=[];for(const R0 of W().regions)for(const n of R0.nodes)all.push(n);const seen=new Set();let dup=0,bad=0,big=0;for(const n of all){for(const c of n.cells){if(seen.has(c))dup++;seen.add(c);if(!terWalk(g.ter[c]))bad++;}if(n.type==="tong"&&n.quy===3&&n.cells.length>=6)big++;}return [dup,bad,big];})()');

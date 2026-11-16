@@ -1456,3 +1456,16 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
   #sheet{bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 8px)}
   .mbl{bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 16px)}
 }
+
+/* thẻ địa điểm / đại khu vực nổi gần icon trên bản đồ */
+#dock:has(.np){position:absolute;left:0;right:0;top:0;bottom:0;transform:none;width:auto;display:block}
+.dock.card.np{position:absolute;visibility:hidden;width:min(290px,calc(100vw - 20px));max-width:none;max-height:none;overflow:visible;padding:9px 11px 10px;font-size:.86em;line-height:1.3;pointer-events:auto;box-shadow:0 6px 22px rgba(30,24,10,.3)}
+.np-h{display:flex;gap:9px;align-items:center}.np-t{flex:1;min-width:0;display:flex;flex-direction:column}.np-nm{font-size:1.08em;line-height:1.2}.np-t small{color:var(--ink3);font-size:.86em}
+.np-pic{flex:none;width:42px;height:42px;border-radius:4px;overflow:hidden;background:var(--bg2);display:grid;place-items:center;border:1px solid var(--line)}.np-pic img{width:100%;height:100%;object-fit:cover}.np-pic.rum{filter:grayscale(.7);opacity:.8}.np-pic b{position:absolute;color:var(--ink2)}
+.np-pic.area{color:#fff}.np-pic.area b{position:static;font-size:1.25em;text-shadow:none}
+.np-x{display:flex;gap:2px;align-self:flex-start}.np-x .icb{width:26px;height:26px}
+.np-dg{--c:var(--jade);display:inline-flex;align-items:center;gap:6px;margin:7px 0 3px;padding:3px 11px 3px 8px;border-radius:999px;font-weight:700;font-size:1.05em;color:var(--c);background:color-mix(in srgb,var(--c) 15%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent)}
+.np-dg i{width:9px;height:9px;border-radius:50%;background:var(--c)}.np-dg.dg1{--c:var(--gold)}.np-dg.dg2{--c:var(--seal)}.np-dg.dg3{--c:var(--vio)}
+.np-k{margin:3px 0 0;display:flex;gap:7px;align-items:baseline;color:var(--ink)}.np-k small{flex:none;color:var(--ink3);font-size:.82em;letter-spacing:.06em}
+.np-d{margin:4px 0 0;color:var(--ink2);font-size:.92em;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.np .nc-tags{margin:4px 0 0}.np .nc-n{margin:4px 0 0}.np-b{display:flex;gap:6px;margin-top:8px}.np-b .btn{flex:1;padding:6px 10px;font-size:.95em}.go-t{font-weight:400;opacity:.85}

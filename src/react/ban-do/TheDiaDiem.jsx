@@ -1,11 +1,12 @@
-// Thẻ dưới bản đồ: đang đi đường, dừng giữa đường, thẻ một địa điểm (thu gọn / mở rộng), thẻ một quận.
+// Thẻ dưới bản đồ: đang đi đường, dừng giữa đường, thẻ một quận. Thẻ địa điểm và đại khu vực nổi gần icon.
 import { PS } from '../html';
 import { Ic, tip } from '../chung';
 
 function NutDiHoacVao({ n, here }) {
   const r = PS.G.run;
   if (here) return <button className="btn pri" data-act="enter">{PS.ENTER_L[n.type] || 'Vào'}</button>;
-  return <button className="btn pri" data-act="go" data-arg={n.id} disabled={!PS.findPath(r.at, n.id)}>Đi tới</button>;
+  const p = PS.findPath(r.at, n.id);
+  return <button className="btn pri" data-act="go" data-arg={n.id} disabled={!p}>Đi tới{p && <span className="go-t">{' · ' + PS.durH(PS.travelHours(p))}</span>}</button>;
 }
 
 // Thông tin một quận (khi chạm ô đất trống)
@@ -41,41 +42,50 @@ function TheQuan({ c }) {
   );
 }
 
-// Thẻ địa điểm mở rộng
+// Thẻ địa điểm: nổi gần icon trên bản đồ (game tự đặt vị trí theo data-ax/data-ay)
 function TheNoi({ n }) {
   const { G, ASSET } = PS;
   const r = G.run, I = PS.nodeInfo(n), here = n.id === r.at, dg = PS.dangerTag(n);
   const nt = PS.noteOf(n.id), M = I.sure ? PS.placeMeta(n) : null;
-  let mid = null;
-  if (!here) { const p = PS.findPath(r.at, n.id); mid = p ? <span><Ic n="pin" />~{Math.round(PS.pathLen(p))} dặm · {PS.durH(PS.travelHours(p))}</span> : <span>Chưa biết đường</span>; }
-  const eb = [I.info, I.sure ? PS.hexInfo(PS.nodeHex(n)).dist : ''].filter(Boolean).join(' · ');
+  const where = I.sure ? PS.hexInfo(PS.nodeHex(n)).dist : '';
   const pimg = ASSET.place[n.type];
   return (
-    <div className="dock card nc">
-      <div className="nc-head">
-        <div className={'nc-pic' + (I.sure ? '' : ' rum')}>{pimg && <img src={pimg} alt="" />}{!I.sure && <b>?</b>}</div>
-        <div className="nc-info">
-          <small className="nc-eb">{eb}</small>
-          <b className="nc-nm">{n.name + (I.sure ? '' : '?')}</b>
-          <div className="nc-chips">
-            <span className={'nc-g dg' + dg} {...tip(PS.dangerWhy(n))}><i></i>{PS.DTAG[dg]}{I.sure ? '' : '?'}</span>
-            {I.sure && <span>Linh khí {PS.LK_N[PS.lkOf(n)].toLowerCase()}</span>}
-            {mid}
-          </div>
+    <div className="dock card np" data-ax={n.x} data-ay={n.y}>
+      <div className="np-h">
+        <div className={'np-pic' + (I.sure ? '' : ' rum')}>{pimg && <img src={pimg} alt="" />}{!I.sure && <b>?</b>}</div>
+        <div className="np-t">
+          <b className="np-nm">{n.name + (I.sure ? '' : '?')}</b>
+          <small>{[I.info, where].filter(Boolean).join(' · ')}</small>
         </div>
-        <div className="nc-btns">
+        <div className="np-x">
           <button className="icb" data-act="noteEdit" data-arg={n.id} {...tip('Ghi chú: ghim một dòng lên điểm này')} aria-label="Ghi chú"><Ic n="pen" /></button>
-          <button className="icb" data-act="cardMin" {...tip('Thu gọn')} aria-label="Thu gọn"><Ic n="down" /></button>
           <button className="icb" data-act="unsel" aria-label="Đóng"><Ic n="close" /></button>
         </div>
       </div>
+      <div className={'np-dg dg' + dg} {...tip(PS.dangerWhy(n))}><i></i>{PS.DTAG[dg]}{I.sure ? '' : '?'}</div>
       {M ? <>
-        <div className="nc-kv2"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span {...tip('Khoảng ' + PS.placeScale(n).area.toLocaleString('vi-VN') + ' dặm vuông. ' + (M.quy || ''))}>{PS.placeScale(n).txt}</span></div></div>
-        {M.desc && <p className="nc-d">{M.desc}</p>}
-      </> : <p className="nc-d">Mới nghe đồn, chưa tận mắt thấy.</p>}
+        <p className="np-k"><small>Tọa trấn</small>{M.luc}</p>
+        {M.desc && <p className="np-d">{M.desc}</p>}
+      </> : <p className="np-d">Mới nghe đồn, chưa tận mắt thấy.</p>}
       {I.tags.length > 0 && <p className="nc-tags">{I.tags.map((t, i) => <span key={i}>{t}</span>)}</p>}
       {nt && <p className="nc-n"><Ic n="pin" /> {nt}</p>}
-      <div className="nc-b"><NutDiHoacVao n={n} here={here} /></div>
+      <div className="np-b"><NutDiHoacVao n={n} here={here} /></div>
+    </div>
+  );
+}
+
+// Thẻ mô tả một đại khu vực (khi thu nhỏ hết cỡ)
+function TheVung({ pop }) {
+  const R = PS.REG[pop.k], st = PS.areaStat(pop.k), cols = ['#d9a441', '#58a46f', '#4797bb', '#9a74c9', '#8196b3'];
+  return (
+    <div className="dock card np npv" data-area="1" data-ax={pop.wx} data-ay={pop.wy}>
+      <div className="np-h">
+        <div className="np-pic area" style={{ background: cols[pop.k] }}><b>{R.seal}</b></div>
+        <div className="np-t"><b className="np-nm">{R.n}</b><small>{R.sub}</small></div>
+        <div className="np-x"><button className="icb" data-act="unsel" aria-label="Đóng"><Ic n="close" /></button></div>
+      </div>
+      <p className="np-k"><small>Địa thế</small>{st.ter.join(', ')}</p>
+      <p className="np-k"><small>Gồm</small>{st.quan} quận · đã khám phá {st.pct}%</p>
     </div>
   );
 }
@@ -120,18 +130,8 @@ export function TheDiaDiem() {
     );
   }
   const n = UI.sel != null && PS.nodeById(UI.sel);
-  if (n && n.fog >= 1) {
-    if (!UI.cardMin) return <TheNoi n={n} />;
-    const here = n.id === r.at;
-    return (
-      <div className="dock loc">
-        {ASSET.place[n.type] && <span className={'loc-pic' + (n.fog >= 2 || n.memory ? '' : ' rum')}><img src={ASSET.place[n.type]} alt="" /></span>}
-        <span className="lc-n">{n.name}{(n.fog >= 2 || n.memory) && <small className="lc-sc"> · {PS.placeScale(n).txt}</small>}</span>
-        <NutDiHoacVao n={n} here={here} />
-        <button className="icb" data-act="cardMax" {...tip('Mở rộng')} aria-label="Mở rộng"><Ic n="up" /></button>
-      </div>
-    );
-  }
+  if (n && n.fog >= 1) return <TheNoi n={n} />;
+  if (UI.pop) return <TheVung pop={UI.pop} />;
   if (UI.cell != null) return <TheQuan c={UI.cell} />;
   return null;
 }

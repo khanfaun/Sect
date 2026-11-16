@@ -96,7 +96,7 @@ function canGoBack(){return false;}
 // sinh ra ở bất cứ trấn nào trên bản đồ
 function birthNode(){const w=W();const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
   let pool=all.filter(n=>n.type==='tran'&&n.id!==w.lastBirth&&n.state!=='ruin');if(!pool.length)pool=all.filter(n=>n.type==='tran'||n.type==='thanh');return pick(pool);}
-{const _nr=newRun;newRun=function(){const x=_nr.apply(this,arguments);const r=G.run;if(r){r.reveal=[];r.visS='';visReset();sense();
+{const _nr=newRun;newRun=function(){const x=_nr.apply(this,arguments);const r=G.run;if(r){r.rid=Date.now()+'.'+Math.floor(Math.random()*1e6);r.reveal=[];r.visS='';visReset();sense();
   if(r.scene&&r.scene.type==='region')r.scene.text=T(REG[r.region].intro,{que:r.que});dbg('mo.spawn',{at:r.at,area:r.region,ten:r.ten});}return x;};}
 
 // tới một địa điểm: biết mình đang ở đại khu vực nào
@@ -110,9 +110,10 @@ function birthNode(){const w=W();const all=[];for(const R0 of w.regions)for(cons
 // Đứng trên cao nhìn xa hơn.
 const VIS_COST=[0.8,1,1.7,1,0.7,0.65,1.4,1.1];
 let VIS=null,VNOW=null,VT=null,VIS_K='',VIS_N=0;
-function visReset(){VIS=new Uint8Array(HN);VNOW=new Uint8Array(HN);VT=new Float64Array(HN);VIS_K=G.run?G.run.kiep+'':'';VIS_N++;}
+function visKey(){return G.run?(G.run.rid||'')+':'+G.run.kiep:'';}
+function visReset(){VIS=new Uint8Array(HN);VNOW=new Uint8Array(HN);VT=new Float64Array(HN);VIS_K=visKey();VIS_N++;}
 function visNowMs(){return typeof performance!=='undefined'?performance.now():Date.now();}
-function visLoad(){const r=G.run;if(!r)return;if(VIS&&VIS_K===r.kiep+'')return;visReset();
+function visLoad(){const r=G.run;if(!r)return;if(VIS&&VIS_K===visKey())return;visReset();
   const s=r.visS||'';for(let j=0;j<s.length;j++){const v=VIS_A.indexOf(s[j]);if(v<=0)continue;for(let b=0;b<6;b++)if(v&(1<<b)){const i=j*6+b;if(i<HN)VIS[i]=1;}}}
 // ô đã thấy lưu thành chuỗi: mỗi ký tự giữ 6 ô
 const VIS_A='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
@@ -144,3 +145,8 @@ if(typeof loadData==='function'){const _ld=loadData;loadData=function(d){
   const old=d&&d.meta&&d.meta.world&&!d.meta.world.mo;
   if(old){const w0=d.meta.world;const w=genWorld();for(const k of ['t','bangY','legacy','chron','nemesis','rstate','rivals','sects','quoc'])if(w0[k]!=null)w[k]=w0[k];w.ents=[];d.meta.world=w;}
   const x=_ld.apply(this,arguments);if(old)moFixRun();if(G.run){visReset();visLoad();sense();}return x;};}
+
+// thống kê một đại khu vực cho thẻ mô tả: địa thế chính, tỉ lệ đã khám phá, số quận
+function areaStat(k){const g=geo();visLoad();const tc={};let land=0,seen=0;const ds=new Set();
+  for(let i=0;i<HN;i++){if(g.reg[i]!==k)continue;if(g.dist[i]>=0)ds.add(g.dist[i]);if(!terWalk(g.ter[i]))continue;land++;if(VIS&&(VIS[i]||VNOW[i]))seen++;const t=TER_N[g.ter[i]];tc[t]=(tc[t]||0)+1;}
+  return {ter:Object.keys(tc).sort((a,b)=>tc[b]-tc[a]).slice(0,3),pct:land?Math.round(seen*100/land):0,quan:ds.size,land};}
