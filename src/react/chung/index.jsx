@@ -2,6 +2,12 @@
 import { PS } from '../html';
 export { Tabs, Tranh } from '../html';
 
+// Lời kể: mọi đoạn chữ truyện đi qua đây để tự gạch chân từ trong từ điển và tên riêng (rê/chạm xem chú thích)
+export function Ke({ t, as: Tag = 'p', ...rest }) {
+  if (t == null || t === '') return null;
+  return <Tag {...rest} dangerouslySetInnerHTML={{ __html: PS.txt(String(t)) }} />;
+}
+
 // tip('...') → thuộc tính data-tip (game tự hiện ô chú thích), viết hoa chữ đầu như bản cũ.
 export const tip = s => (s ? { 'data-tip': String(s)[0].toUpperCase() + String(s).slice(1) } : {});
 

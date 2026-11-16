@@ -1,4 +1,5 @@
 // Bến Vong Xuyên: tiêu điểm luân hồi, xem lại các kiếp, điển tích, thành tựu.
+import { Ke } from '../chung';
 import { Html, PS, Tabs, Tranh } from '../html';
 
 const TABS = [['upg', 'Khắc vào chân linh'], ['lives', 'Các kiếp'], ['lore', 'Điển tích'], ['ach', 'Thành tựu']];
@@ -26,7 +27,7 @@ function CacKiep({ M }) {
     <details className="life" key={i}>
       <summary><b>{L.ten}</b><small>{PS.kiepName(L.k)} · {L.tuoi} tuổi · {L.realm}</small></summary>
       <p className="ep">{L.ep}</p>
-      {L.lines.map((l, j) => <p key={j}>{l}</p>)}
+      {L.lines.map((l, j) => <Ke key={j} t={l} />)}
     </details>
   ));
 }

@@ -209,7 +209,7 @@ export function TranDau() {
         {head}
         <div className={'cb-end ' + sc.over}>
           <b>{t}</b>
-          {!!sc.llGain && <span className="chip up">⚔ +{PS.llShowGain(sc.llGain / (PS.tvPts(G.run.realm) / 100))}% lịch luyện</span>}
+          {!!sc.llGain && <span className="chip up" dangerouslySetInnerHTML={{ __html: PS.emoIc('⚔') + ' ' + PS.emoTxt('+' + PS.llShowGain(sc.llGain / (PS.tvPts(G.run.realm) / 100)) + '% lịch luyện') }} />}
           <button className="btn pri wide" data-act="cont">Tiếp tục</button>
         </div>
       </section>

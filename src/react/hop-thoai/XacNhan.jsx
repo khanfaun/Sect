@@ -1,7 +1,7 @@
 // Hộp thoại xác nhận trước khi làm một việc: tốn gì, được gì. Gồm việc ở địa điểm, ở trà lâu/khách điếm,
 // làm nhiệm vụ, hủy nhiệm vụ.
 import { PS } from '../html';
-import { Chips, Cost, Ic, tip } from '../chung';
+import { Chips, Cost, Ic, tip, Ke } from '../chung';
 
 // Biểu tượng phần nhận được: chỉ biểu tượng và con số (giống gainHTML())
 export function NhanDuoc({ g }) {
@@ -28,7 +28,7 @@ export function NhanDuoc({ g }) {
 function KhungXacNhan({ title, d, h, st, g, act, arg }) {
   return (
     <div className="mbox pconf">
-      <h3>{title}</h3><p>{d}</p>
+      <h3>{title}</h3><Ke t={d} />
       {(h || st) ? <div className="pc-row"><small>Tốn</small><span className="cost"><Cost h={h} st={st} /></span></div> : null}
       {g && <div className="pc-row"><small>Nhận được</small><NhanDuoc g={g} /></div>}
       <div className="mb-f"><button className="btn" data-act="modalX">Thôi</button><button className="btn pri" data-act={act} data-arg={arg}>Đồng ý</button></div>
@@ -52,7 +52,7 @@ export function XacNhanNoiChon({ m }) {
   if (!o) return null;
   if (m.k === 'vreq') return (
     <div className="mbox pconf">
-      <h3>{o.l}</h3><p>{o.d}</p>
+      <h3>{o.l}</h3><Ke t={o.d} />
       <div className="pc-row bad"><small>Chưa đủ</small><span>{o.lack || o.no}</span></div>
       <div className="mb-f"><button className="btn pri" data-act="modalX">Đã hiểu</button></div>
     </div>
@@ -82,7 +82,7 @@ export function HuyNhiemVu({ m }) {
   const P = PS.questPenalty(q);
   return (
     <div className="mbox pconf">
-      <h3>Hủy nhiệm vụ?</h3><p>{q.text}</p>
+      <h3>Hủy nhiệm vụ?</h3><Ke t={q.text} />
       <p>Đã nhận lời thì phải giữ chữ tín. Bỏ ngang thì phải đền một nửa tiền thưởng và mang tiếng thất hứa.</p>
       <div className="pc-row"><small>Bị phạt</small><span className="gains"><span className="gn st"><i className="rh"></i>−{P.st}</span><span className="gn in">nhân quả {P.karma}</span></span></div>
       <div className="mb-f"><button className="btn" data-act="modalX">Thôi</button><button className="btn pri" data-act="qDropGo" data-arg={q.id}>Hủy nhiệm vụ</button></div>

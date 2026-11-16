@@ -105,7 +105,11 @@ function ic(n,cls){return `<svg class="ic${cls?' '+cls:''}" viewBox="0 0 24 24" 
 // mỗi loại một biểu tượng duy nhất: các biểu tượng cũ dạng emoji trong nhãn được đổi sang bộ biểu tượng nét mảnh
 const EMO_IC={'⏳':'hour','🏺':'ring','❤️':'heart','📖':'book','☯️':'yin','🤝':'people','💧':'drop','✨':'spark','⚗️':'flask','⚔':'sword','⚔️':'sword','🗡️':'sword','😈':'skull','🗺️':'pin','📜':'scroll','🏅':'medal','🎫':'flag','🍃':'clover','🍀':'clover','🌩️':'bolt','☁️':'sun','🛡️':'shield','🌀':'wind','🧠':'brain','🪷':'lotus','🌕':'moon'};
 function emoIc(e){if(e==='?')return '<i class="qmk">?</i>';if(e==='💎')return '<i class="rh"></i>';const k=EMO_IC[e];return k?ic(k):e;}
-function emoTxt(h){return String(h).replace(/💎/g,'<i class="rh"></i>').replace(/⏳/g,ic('hour'));}
+// "+130% lịch luyện", "−20% tu vi" → mũi tên xanh chỉ lên / đỏ chỉ xuống, càng nhiều càng nhiều mũi tên (số thật để ở chú thích khi rê/chạm)
+function gainLv(p){return p>=80?3:p>=30?2:1;}
+function gainArrow(h){return String(h).replace(/([+\-−])\s*(\d+(?:[.,]\d+)?)\s*%\s*(tu vi|lịch luyện)/gi,(m,sg,num,nm)=>{const dn=sg!=='+';const n=gainLv(parseFloat(num.replace(',','.')));
+  return `<span class="chev gain c${n}${dn?' dn':''}" title="${sg}${num}%">${'<svg viewBox="0 0 20 13"><path d="M1 7L10 1L19 7V12L10 6L1 12Z"/></svg>'.repeat(n)}</span> ${nm}`;});}
+function emoTxt(h){return gainArrow(String(h)).replace(/💎/g,'<i class="rh"></i>').replace(/⏳/g,ic('hour'));}
 function chipsHTML(ch){if(!ch||!ch.length)return '';return `<div class="chips">${ch.map(c=>`<span class="chip ${c.c||''}${c.tier!=null?' tq':''}"${c.tier!=null?` style="${pcs(c.tier)}"`:''}${ta(c.tip)}${c.h?` data-tiph="${esc(c.h)}"`:''}>${emoIc(c.i)} ${emoTxt(esc(c.t))}</span>`).join('')}</div>`;}
 function elSeal(e){const E=EL[e]||EL.vo;return `<span class="el el-${e}"${ta('Hệ '+E.n+(KHAC[e]?'\nKhắc '+EL[KHAC[e]].n:''))}>${E.c}</span>`;}
 
@@ -114,7 +118,7 @@ function numVN(x){return String(Math.round(x*10)/10).replace('.',',');}
 
 function win(title,body,o){o=o||{};return `<section class="win ${o.cls||''}"><header class="win-h"><h2>${title}</h2>${o.extra||''}${o.noClose?'':`<button class="xb" data-act="${o.close||'closePanel'}" aria-label="Đóng">${ic('close')}</button>`}</header><div class="win-b">${body}</div>${o.foot?`<footer class="win-f">${o.foot}</footer>`:''}</section>`;}
 function toastFlush(){const L=G.toasts;if(!L||!L.length)return;const box=$('#toast');if(!box)return;
-  for(const t of L){const d=document.createElement('div');d.className='toast '+(t.c||'');d.textContent=t.t;box.appendChild(d);setTimeout(()=>d.remove(),3600);}
+  for(const t of L){const d=document.createElement('div');d.className='toast '+(t.c||'');d.innerHTML=emoTxt(esc(t.t));box.appendChild(d);setTimeout(()=>d.remove(),3600);}
   G.toasts=[];while(box.children.length>3)box.firstChild.remove();}
 
 // ---------- từ điển: thuật ngữ trong lời kể có gạch chân đứt, chạm vào xem giải thích ----------

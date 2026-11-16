@@ -1,6 +1,6 @@
 // Chiến lợi phẩm (chọn một món), phường thị (mua, trị thương), lĩnh ngộ công pháp mới (quên bớt môn cũ).
 import { Html, PS } from '../html';
-import { Chips, Stone, Tabs, pcs, tip } from '../chung';
+import { Chips, Stone, Tabs, pcs, tip, Ke } from '../chung';
 import { Card, ChoiceBtn, GoBtn } from './Khung';
 
 export function ChienLoiPham({ sc }) {
@@ -34,7 +34,7 @@ export function PhuongThi({ sc }) {
   return (
     <Card title="Phường thị" sub={r.place.n} cls="tall" x
       foot={<><span className="grow">Trong túi: <Stone v={r.st} /></span><GoBtn act="next" label="Rời đi" arg="" cls="pri" /></>}>
-      <p className="shop-top">{sc.text}</p>
+      <Ke className="shop-top" t={sc.text} />
       <Tabs k="shop" list={[['buy', 'Mua'], ['svc', 'Việc khác']]} cur={tab} />
       {tab === 'buy' ? <>
         <div className="grid">

@@ -1,6 +1,6 @@
 // Cảnh sự kiện (kỳ ngộ): lời kể / hội thoại, tin đồn, các lựa chọn kèm điều kiện.
 import { Html, PS } from '../html';
-import { Chips, Ic, tip } from '../chung';
+import { Chips, Ic, tip, Ke } from '../chung';
 import { Card, ChoiceBtn, ChoiceExtra, GoBtn, Story } from './Khung';
 
 function CacLuaChon({ sc }) {
@@ -57,7 +57,7 @@ export function GioiThieuVung({ sc }) {
       <div className="in-b">
         <small>{PS.kiepName(r.kiep)}</small><h1>{r.ten}</h1>
         <p className="in-o">{og.n} · quê ở {r.que}</p>
-        <p className="in-t">{sc.text}</p>
+        <Ke className="in-t" t={sc.text} />
         {sc.sub && <p className="hint">{sc.sub}</p>}
         <p className="hint tap">Chạm để lên đường</p>
       </div>

@@ -27,3 +27,13 @@ const TAL_RT=[0.9,1.25,1.7,2.4]; // Phế vật · Bình phàm · Bất phàm ·
 function talLvQ(q){let lv=0;for(const x of TAL_RT)if(q>=x-1e-9)lv++;return lv;}
 {const _pt32=playerTal;playerTal=function(){const t=_pt32();if(!t||!t.lc)return t;return Object.assign({},t,{tier:talLvQ(t.score)});};}
 {const _ut32=unitTal;unitTal=function(u){const t=_ut32(u);if(!t||!u||u.isMain||t.p)return t;return {tier:talLvQ(t.score),score:t.score};};}
+// 7) Phần trăm lịch luyện báo ra không vượt 100% của một tầng/kỳ (tránh "+101%" do làm tròn)
+{const _lsg32=llShowGain;llShowGain=function(x){const v=_lsg32(x);return sgOn()?Math.min(100,v):v;};}
+// 8) Tầng Luyện Khí hẹp hơn kỳ của các cảnh giới sau rất nhiều: lịch luyện nhận được co theo bề rộng tầng,
+//    để mỗi tầng cần chừng ấy công sức như một kỳ (trước đây quen một người là đầy cả tầng).
+const LL_KY_W=100/3;
+function llTangMul(){const r=G.run;if(!r||!sgOn()||r.realm!==0)return 1;return sgW(sgGate())/LL_KY_W;}
+// 9) Nhịp lịch luyện: thắng một trận chỉ chừng 15–20% thanh (phàm nhân, mỗi tầng hay mỗi kỳ)
+const LL_RATE_PHAM=0.5,LL_RATE=0.2;
+function llRate(){return isPham()?LL_RATE_PHAM:LL_RATE;}
+{const _la32=llAdd;llAdd=function(x,why,quiet){return _la32(x>0?x*llTangMul()*llRate():x,why,quiet);};}

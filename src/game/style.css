@@ -1479,3 +1479,6 @@ details.bond .cc-ch{transform:none}details.bond[open]>summary .cc-ch{transform:r
 body,#map,#dock,canvas{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text}
 canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
+
+.chev.gain{flex-direction:column;gap:0;margin:0 2px;line-height:0}.chev.gain svg{width:11px;height:6px}.chev.gain.dn{flex-direction:column-reverse}.chev.dn svg{fill:#c0392b;transform:rotate(180deg)}
+.bc.tlk{opacity:.5;filter:grayscale(.85)}.bc.tlk .lk{position:absolute;inset:auto 3px 3px auto;font-size:1.15em;color:#a33}

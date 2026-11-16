@@ -98,10 +98,10 @@ function CotPhai({ items }) {
     <div className="bscroll">
       <div className="bgrid">
         {V.map(x => (
-          <button key={x.key} className={'bc on' + (B.sel === x.key ? ' sel' : '')} data-act="bagSel" data-arg={x.key} style={pcs(x.tier)} {...tah(PS.itemTip(x))}>
+          <button key={x.key} className={'bc on' + (B.sel === x.key ? ' sel' : '') + (x.locked || x.lockedN > 0 ? ' tlk' : '')} data-act="bagSel" data-arg={x.key} style={pcs(x.tier)} {...tah(PS.itemTip(x))}>
             <Html style={{ display: 'contents' }} h={PS.itemArt(x)} />
             {x.cnt > 1 && <i>{x.cnt}</i>}
-            {(PS.itemLocked(x) || x.locked) && <em className="lk"><Ic n="lock" /></em>}
+            {(PS.itemLocked(x) || x.locked || x.lockedN > 0) && <em className="lk"><Ic n="lock" /></em>}
             <YeuCau x={x} r={r} />
           </button>
         ))}

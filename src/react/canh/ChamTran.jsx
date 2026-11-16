@@ -1,6 +1,6 @@
 // Chạm trán kẻ địch ngoài đường, và sào huyệt thủ lĩnh vùng.
 import { Html, PS } from '../html';
-import { Chips, Stone, tip } from '../chung';
+import { Chips, Stone, tip, Ke } from '../chung';
 import { Card, ChoiceBtn, FoeLine, GoBtn } from './Khung';
 
 export function ChamTran({ sc }) {
@@ -34,7 +34,7 @@ export function SaoHuyet({ sc }) {
   return (
     <Card title="Sào huyệt" sub={r.place.n} foot={<GoBtn act="bossFight" label="Nghênh chiến" />}>
       <FoeLine en={sc.b} big sub={'Thủ lĩnh vùng ' + PS.REG[r.region].n} />
-      <div className="story"><p className="new">{sc.text}</p></div>
+      <div className="story"><Ke className="new" t={sc.text} /></div>
     </Card>
   );
 }

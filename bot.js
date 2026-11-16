@@ -14,7 +14,7 @@ const run=(code)=>vm.runInContext(code,ctx);
 const LIVES=+(process.argv[2]||200);
 const QUIET=process.argv.includes('--quiet');
 const BAD=/[{}\[\]]|undefined|NaN|null/;
-const stats={lives:0,cause:{},maxRegion:[0,0,0,0,0],maxRealm:[0,0,0,0,0,0],errors:[],bad:[],steps:0,crossed:0,tvMinor:0,tvTotal:0,wins:0,fights:0,deadFights:0,bossKills:0,ages:[],years:[]};
+const stats={early:{},lives:0,cause:{},maxRegion:[0,0,0,0,0],maxRealm:[0,0,0,0,0,0],errors:[],bad:[],steps:0,crossed:0,tvMinor:0,tvTotal:0,wins:0,fights:0,deadFights:0,bossKills:0,ages:[],years:[]};
 
 run(`
 var BOT={seen:new Set()};
@@ -141,6 +141,10 @@ const SAME=process.argv.includes('--same-world');const DBG=process.argv.includes
 run(fs.readFileSync(path.join(__dirname,'tools','bot-ext.js'),'utf8'));
 if(process.argv.includes('--smart'))run(fs.readFileSync(path.join(__dirname,'tools','bot-smart.js'),'utf8'));
 run('G={meta:newMeta(),run:null,birth:null,over:null,screen:"title"};');
+// đếm đồ nhận được lúc đầu game (phàm nhân, Luyện Khí): pháp bảo, trang bị, bí tịch
+run(`function botEarlyRel(){const r=G.run;const o={};if(!r)return '{}';const L=r.relics.concat(Object.values(r.eq||{}).filter(Boolean),(r.dd||[]).map(d=>d.rel));
+  for(const x of L){if(!x||x._bs)continue;x._bs=1;if(r._bsInit&&(r.pham||r.realm===0)){const k=x.k==='book'?'bí tịch':(typeof isPB==='function'?isPB(x):slotOf(x)==='phapbao')?'pháp bảo':'trang bị';o[k]=(o[k]||0)+1;if(k==='pháp bảo')o['PB:'+x.name+'|req'+relReq(x)+'|'+(x.cid||x.u||'sinh')]=1;}}
+  r._bsInit=1;return JSON.stringify(o);}`);
 let life=0,stepsLife=0;
 const t0=Date.now();
 while(life<LIVES){
@@ -160,6 +164,7 @@ while(life<LIVES){
     stats.steps++;stepsLife++;
     if(run('!!G.run')){
       scanTexts();
+      {const e=JSON.parse(run('botEarlyRel()'));for(const k in e)stats.early[k]=(stats.early[k]||0)+e[k];}
       const mr=run('G.run.region'),re=run('G.run.realm');stats.maxRegion[mr]=Math.max(1,stats.maxRegion[mr]);
       
     }
@@ -176,6 +181,7 @@ const sz=Buffer.byteLength(run('JSON.stringify({meta:G.meta,run:G.run})'));
 const realmCount={};for(const L of lives){realmCount[L.realm]=(realmCount[L.realm]||0)+1;}
 console.log('Số kiếp:',life,'| bước:',stats.steps,'| thời gian:',((Date.now()-t0)/1000).toFixed(1)+'s');
 console.log('Nguyên nhân chết:',stats.cause);
+console.log('Đồ nhận lúc đầu game (phàm nhân, Luyện Khí), cộng mọi kiếp:',stats.early);
 console.log('Cảnh giới khi chết:',stats.rc);console.log('Vùng xa nhất mỗi kiếp (vùng 1..5):',stats.rg);
 console.log('Vùng xa nhất từng tới:',run('G.meta.lives.length'),'kiếp; vùng có mặt:',stats.maxRegion.map((x,i)=>x?i:null).filter(x=>x!=null).join(','));
 console.log('Tuổi chết trung bình:',(stats.ages.reduce((a,b)=>a+b,0)/Math.max(1,stats.ages.length)).toFixed(1));

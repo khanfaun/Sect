@@ -1,6 +1,6 @@
 // Hộp thoại thông tin ngắn: tử địa, ghi chú bản đồ, kết quả, diễn biến trận, trận dang dở, dev test, nhân sự tông môn.
 import { Html, PS } from '../html';
-import { Chips, Ic } from '../chung';
+import { Chips, Ic, Ke } from '../chung';
 
 export const Nut = {
   thoi: <button className="btn" data-act="modalX">Thôi</button>,
@@ -33,7 +33,7 @@ export function GhiChu({ m }) {
 export function KetQua({ m }) {
   return (
     <div className="mbox">
-      <h3>{m.title}</h3><p>{m.t}</p><Chips list={m.chips} />
+      <h3>{m.title}</h3><Ke t={m.t} /><Chips list={m.chips} />
       <div className="mb-f"><span className="grow"></span><button className="btn pri" data-act="modalX">Tiếp tục</button></div>
     </div>
   );
@@ -44,7 +44,7 @@ export function DienBienTran() {
   return (
     <div className="mbox">
       <h3>Diễn biến trận</h3>
-      <div className="logl">{(sc.log || []).slice().reverse().map((l, i) => <p key={i} className={l.c ? 'lg-' + l.c : ''}>{l.t}</p>)}</div>
+      <div className="logl">{(sc.log || []).slice().reverse().map((l, i) => <Ke key={i} className={l.c ? 'lg-' + l.c : ''} t={l.t} />)}</div>
       <div className="mb-f"><span className="grow"></span><button className="btn pri" data-act="modalX">Đóng</button></div>
     </div>
   );

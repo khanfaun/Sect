@@ -1,6 +1,6 @@
 // Thẻ dưới bản đồ: đang đi đường, dừng giữa đường, thẻ một quận. Thẻ địa điểm và đại khu vực nổi gần icon.
 import { PS } from '../html';
-import { Ic, tip } from '../chung';
+import { Ic, tip, Ke } from '../chung';
 
 function NutDiHoacVao({ n, here }) {
   const r = PS.G.run;
@@ -110,7 +110,7 @@ function TheNoi({ n, hold }) {
       {(!PS.UI.npMin || hold) && <>
         {M ? <>
           <p className="np-k"><small>Tọa trấn</small>{M.luc}</p>
-          {M.desc && <p className="np-d">{M.desc}</p>}
+          <Ke className="np-d" t={M.desc} />
         </> : <p className="np-d">Mới nghe đồn, chưa tận mắt thấy.</p>}
         {I.tags.length > 0 && <p className="nc-tags">{I.tags.map((t, i) => <span key={i}>{t}</span>)}</p>}
         {nt && <p className="nc-n"><Ic n="pin" /> {nt}</p>}

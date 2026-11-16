@@ -1,7 +1,7 @@
 // Màn khí vận sau khi đột phá / xung kích thành công: lóe sáng → (chọn hậu thiên khí vận) → kết quả.
 // Và hộp chọn tiên thiên khí vận sau khi đột phá đại cảnh giới.
 import { Html, PS } from '../html';
-import { tah } from '../chung';
+import { tah, Ke } from '../chung';
 
 // Khung nền; key theo bước để mỗi bước dựng lại từ đầu, hiệu ứng chạy lại như bản cũ
 function Khung({ k, ph, children }) {
@@ -60,7 +60,7 @@ export function KhiVan() {
         {img && <div className="asc-img"><img src={img} alt="" /></div>}
         <small>{a.k === 'bt' ? 'Đột phá thành công' : 'Xung kích thành công'}</small>
         <h2 className="asc-to"><span>{a.to}</span></h2>
-        <div className="asc-st">{PS.ascStory(a).map((t, i) => <p key={i}>{t}</p>)}</div>
+        <div className="asc-st">{PS.ascStory(a).map((t, i) => <Ke key={i} t={t} />)}</div>
         {ht && <p className="asc-ht">Hậu thiên khí vận <span className={'ht-tag r' + ht.r} {...tah(PS.htTipH(ht))}>{ht.n}</span></p>}
         <Html style={{ display: 'contents' }} h={PS.ascDiffHTML(a)} />
         <button className="btn pri big" data-act="ascDone">Tiếp tục</button>
@@ -81,7 +81,7 @@ export function ChonTienThien() {
           return (
             <button key={i} className="kvo" data-act="kvPick" data-arg={i} style={{ '--pc': TT_COL[d.rank] }}>
               <span className="kvh"><b>{d.name}</b><small>{TT_RANK[d.rank]}</small></span>
-              <p>{d.description}</p>
+              <Ke t={d.description} />
               <p className="kvf">{PS.ttFxText(d).map((t, k) => [k > 0 && <br key={'b' + k} />, t])}</p>
             </button>
           );

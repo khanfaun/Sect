@@ -248,6 +248,7 @@ const TESTS = {
     fresh('G.run.pham=0;G.run.realm=0;G.run.sg=1;G.run.tv=LK_TH[1];G.run.ll=LK_TH[1];');
     run('lkXk()'); ok(run('sgGate()') === 2 && Math.abs(run('G.run.ll') - L1) < 1e-6 && run('llShow()') === 0, 'xung kích xong lịch luyện tầng mới về 0%');
     fresh('G.run.pham=1;G.run.tv=100;G.run.ll=100;'); run('phamUp()');
+    ok(run('G.run.asc.diff.map(d=>d.k).join()').includes('maxHp'), 'bảng lên Luyện Khí có cả khí huyết');
     ok(run('!isPham()') && run('G.run.asc&&G.run.asc.k') === 'xk' && run('G.run.ll') === 0, 'phàm nhân lên Luyện Khí: có bảng lên cảnh giới, lịch luyện về 0');
     fresh('G.run.region=1;');
     const pb = JSON.parse(run('(()=>{let n=0,low=0;for(let i=0;i<2000;i++){const x=genRelic(1);if(isPB(x)){n++;if(relReq(x)<2)low++;}}return JSON.stringify({n,low});})()'));
