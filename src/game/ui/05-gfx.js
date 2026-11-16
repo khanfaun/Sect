@@ -72,7 +72,7 @@ const Map2=(()=>{
   function resize(){if(!cv)return;const r=cv.getBoundingClientRect();if(!r.width)return;const lv=gfxLv();
     dpr=Math.min(window.devicePixelRatio||1,CFG.dpr||(MOBILE?[1,1.25,1.5]:[1,1.5,2])[lv]);W0=r.width;H0=r.height;
     const w=Math.round(W0*dpr),h=Math.round(H0*dpr);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}dirty=true;}
-  function resetAll(){INK=null;LCV=null;for(const k in DTC)delete DTC[k];dtWant='';clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();}
+  function resetAll(){INK=null;LCV=null;BGK='';for(const k in DTC)delete DTC[k];dtWant='';clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();}
   function zMin(){return Math.max(W0/WORLD_W,H0/WORLD_H);}
   function clampCam(){cam.z=clamp(cam.z,zMin(),ZMAX);const hw=W0/2/cam.z,hh=H0/2/cam.z;const ov=clamp(Math.log(cam.z/zMin())/Math.log(ZMAX/zMin()),0,1);const px=W0*0.42*ov/cam.z,py=H0*0.45*ov/cam.z;cam.x=clamp(cam.x,hw-px,Math.max(hw,WORLD_W-hw)+px);cam.y=clamp(cam.y,hh-py,Math.max(hh,WORLD_H-hh)+py);} // cho kéo quá mép nửa màn hình để điểm sát rìa vẫn kéo ra giữa được
   function center(){const r=G.run;if(!r)return;const w0=playerXY(),p=mapXY(r.region,w0[0],w0[1]);cam.x=p[0];cam.y=p[1];cam.follow=true;cam.reg=r.region;clampCam();dirty=true;}
@@ -172,6 +172,11 @@ const Map2=(()=>{
   let NWC=null,NWK='';
   function nowMask(){if(!VNOW||!INK)return null;const key=VIS_N+':'+INK.key;if(NWC&&NWK===key)return NWC;NWK=key;if(!NWC){NWC=document.createElement('canvas');}NWC.width=INK.w;NWC.height=INK.h;const g=NWC.getContext('2d');
     for(let i=0;i<HN;i++)if(VNOW[i]){const p=hexCenter(i),R0=HEXW*1.5/INK.SC;g.drawImage(INK.blots[i&3],p[0]/INK.SC-R0,p[1]/INK.SC-R0,R0*2,R0*2);}return NWC;}
+  let BGC=null,BGK='';
+  // lưới: chỉ dựng các ô đang lọt khung nhìn
+  function gridView(z){const g=geo();const x0=cam.x-W0/2/z-HEXW,x1=cam.x+W0/2/z+HEXW,y0=cam.y-H0/2/z-HEXP,y1=cam.y+H0/2/z+HEXP;const P=new Path2D();
+    const r0=Math.max(0,Math.floor(y0/HEXP)),r1=Math.min(HROWS-1,Math.ceil(y1/HEXP)),c0=Math.max(0,Math.floor(x0/HEXW)-1),c1=Math.min(HCOLS-1,Math.ceil(x1/HEXW));
+    for(let r=r0;r<=r1;r++)for(let c=c0;c<=c1;c++){const i=r*HCOLS+c;if(g.reg[i]<0)continue;const v=hexVerts(i);P.moveTo(v[0][0],v[0][1]);for(let k=1;k<6;k++)P.lineTo(v[k][0],v[k][1]);P.closePath();}return P;}
   function ri2(rnd,a,b){return a+rnd()*(b-a);}
   // ----- sương: lớp phủ bị khoét ở chỗ đã thấy -----
   function buildFog(reg){const r=G.run,lv=gfxLv(),S=[384,512,768][lv],k=S/1500,X0=reg*1000,CL=CELL[reg];
@@ -194,14 +199,18 @@ const Map2=(()=>{
   function draw(now,dt){
     const r=G.run;if(!r||!ctx||!W0)return;
     if(!C.paper)colors();
-    const reg=r.region,lv=gfxLv(),w=W();visLoad();
+    const reg=r.region,lv=gfxLv(),w=W();visLoad();const imgN=Object.values(MIMG).filter(o=>o.ok).length;
     if(cam.kz!==r.kiep){cam.kz=r.kiep;cam.reg=reg;cam.z=clamp(zMin()*Math.pow(ZMAX/zMin(),0.62),zMin(),ZMAX);center();pos=null;}
     const lastR=r.reveal[r.reveal.length-1];const base=lv+':'+CFG.theme+':'+w.seed,fbase=base+':'+r.kiep+':'+r.reveal.length+':'+(lastR?lastR.join(','):'');
     // vị trí người chơi được làm mượt giữa các nhịp đồng hồ
     const pw=playerXY(),pp=mapXY(reg,pw[0],pw[1]);if(!pos||Math.hypot(pos[0]-pp[0],pos[1]-pp[1])>120)pos=[pp[0],pp[1]];else{const f=r.moving?1:1-Math.pow(0.002,dt);pos[0]+=(pp[0]-pos[0])*f;pos[1]+=(pp[1]-pos[1])*f;}
     if(cam.follow&&r.moving){cam.x=pos[0];cam.y=pos[1];clampCam();}
     const z=cam.z,X0=reg*1000;
-    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle=C.dark?C.bg2:mixHex(C.paper,C.bg2,0.55);ctx.fillRect(0,0,W0,H0);
+    // nền + lưới chỉ vẽ lại khi camera, tầm nhìn, ô chọn đổi; còn lại (mây, hạt, đi đường) chỉ dán lại ảnh đệm
+    const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,lv,imgN].join('|');
+    const bgHit=BGK===bgKey&&BGC&&!(INK&&INK.anim);const realCtx=ctx;
+    if(!bgHit){if(!BGC)BGC=document.createElement('canvas');const bw=Math.round(W0*dpr),bh=Math.round(H0*dpr);if(BGC.width!==bw||BGC.height!==bh){BGC.width=bw;BGC.height=bh;}ctx=BGC.getContext('2d');}
+    if(!bgHit){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle=C.dark?C.bg2:mixHex(C.paper,C.bg2,0.55);ctx.fillRect(0,0,W0,H0);
     // nền: ảnh "chưa tới" phủ cả bản đồ; chỗ đã đi qua hoặc đang thấy hiện ảnh chi tiết, viền chuyển tiếp là giấy loang mực
     {const hid=mapImg('hid'),bk=mapImg('bk'),tr=mapImg('tr');const X=SX(0),Y=SY(0),Wd=WORLD_W*z,Hd=WORLD_H*z;
       if(!CFG.terrain){if(bk)ctx.drawImage(bk,X,Y,Wd,Hd);}
@@ -216,21 +225,24 @@ const Map2=(()=>{
             g.globalCompositeOperation='destination-out';g.drawImage(NW,X,Y,Wd,Hd);g.globalCompositeOperation='source-over';
             ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=C.dark?0.32:0.2;ctx.drawImage(L,0,0);ctx.restore();
 }}}
-      }
+      }}
     ctx.globalAlpha=1;
     // lưới lục giác, ranh quận, ranh đại khu vực, ô đang rê chuột hoặc đang chọn
     const zf=clamp(Math.log(z/zMin())/Math.log(ZMAX/zMin()),0,1);const showIc=zf>=0.5;const zTop=zf>=0.96;
     const gridA=clamp((zf-0.12)/0.12,0,1),macroA=1-gridA;
     {const hx=hexPaths(),g0=geo();ctx.save();ctx.translate(W0/2-cam.x*z,H0/2-cam.y*z);ctx.scale(z,z);ctx.lineJoin='round';ctx.lineCap='round';
-      const hc=CFG.grid&&!zTop?(UI.cell!=null?UI.cell:hov):null;
+      const hc=CFG.grid&&!zTop?(UI.cell!=null?UI.cell:hov):null;if(!bgHit){const hc0=CFG.grid&&!zTop?(UI.cell!=null?UI.cell:hov):null;
       if(hc!=null&&g0.reg[hc]>=0&&hx.dp[g0.dist[hc]]){ctx.fillStyle=hexA(C.gold,0.09*gridA);ctx.fill(hx.dp[g0.dist[hc]]);}
-      if(CFG.grid&&gridA>0.01){ctx.globalCompositeOperation='overlay';ctx.strokeStyle=hexA(C.dark?'#ffffff':'#2a1a0c',(C.dark?0.5:0.75)*gridA);ctx.lineWidth=0.8/z;ctx.setLineDash([3/z,3/z]);ctx.stroke(hx.grid);ctx.setLineDash([]);
+      if(CFG.grid&&gridA>0.01){ctx.globalCompositeOperation='overlay';ctx.strokeStyle=hexA(C.dark?'#ffffff':'#2a1a0c',(C.dark?0.5:0.75)*gridA);ctx.lineWidth=0.8/z;ctx.setLineDash([3/z,3/z]);ctx.stroke(gridView(z));ctx.setLineDash([]);
         ctx.strokeStyle=hexA(C.dark?'#ffffff':'#2a1a0c',0.85*gridA);ctx.lineWidth=1/z;ctx.setLineDash([5/z,4/z]);ctx.stroke(hx.dist);ctx.setLineDash([]);ctx.globalCompositeOperation='source-over';}
       if(macroA>0.01){ctx.strokeStyle=hexA(C.seal,0.5*macroA);ctx.lineWidth=1.4/z;ctx.setLineDash([7/z,5/z]);ctx.stroke(hx.macro);ctx.setLineDash([]);}
       {const hn=hov!=null?hexNode(hov):null;const L=[];const sn0=UI.sel!=null?nodeById(UI.sel):null;if(sn0&&(sn0.fog>=2||sn0.memory))L.push([sn0,1]);if(hn&&hn!==sn0)L.push([hn,0.6]);
         for(const [n,a] of L){ctx.beginPath();for(const c of placeCells(n)){const v=hexVerts(c);ctx.moveTo(v[0][0],v[0][1]);for(let q=1;q<6;q++)ctx.lineTo(v[q][0],v[q][1]);ctx.closePath();}
           ctx.fillStyle=hexA(C.gold,0.22*a);ctx.fill();ctx.strokeStyle=hexA(C.acc,0.95*a);ctx.lineWidth=1.8/z;ctx.stroke();}
-        if(hc!=null&&!hn&&gridA>0.01){hexPoly(hc);ctx.strokeStyle=hexA(C.acc,0.8*gridA);ctx.lineWidth=1.5/z;ctx.stroke();}}
+        if(hc!=null&&!hn&&gridA>0.01){hexPoly(hc);ctx.strokeStyle=hexA(C.acc,0.8*gridA);ctx.lineWidth=1.5/z;ctx.stroke();}}}
+      ctx.restore();if(!bgHit){ctx=realCtx;BGK=bgKey;}
+      ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(BGC,0,0);ctx.restore();
+      ctx.save();ctx.translate(W0/2-cam.x*z,H0/2-cam.y*z);ctx.scale(z,z);ctx.lineJoin='round';ctx.lineCap='round';
       // đường định đi tới điểm đang chọn
       const sn=UI.sel!=null&&!r.moving&&nodeById(UI.sel);
       if(sn&&sn.id!==r.at&&sn.fog>=1){const hp=hexPath(nodeHex(nodeById(r.at)),hexAt(...mapNode(sn)));ctx.beginPath();hp.cells.forEach((c,i)=>{const p=hexCenter(c);if(i)ctx.lineTo(p[0],p[1]);else ctx.moveTo(p[0],p[1]);});ctx.strokeStyle=hexA(C.acc,0.6);ctx.lineWidth=2.5/z;ctx.setLineDash([2/z,7/z]);ctx.stroke();ctx.setLineDash([]);}
