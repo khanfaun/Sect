@@ -49,6 +49,7 @@
  "data/02-catalog.js",
  "data/03-su_kien-du-lieu.js",
  "data/04-su-kien.js",
+ "core2/32-sua-loi-can-bang.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",

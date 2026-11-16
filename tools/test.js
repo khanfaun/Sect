@@ -164,7 +164,7 @@ const TESTS = {
   },
   // lịch luyện nhận nhiều hơn
   llboost() {
-    fresh('G.run.pham=0;G.run.base.ngo=-100;G.run.ll=0;');
+    fresh('G.run.pham=0;G.run.base.ngo=-100;G.run.ll=0;G.run.realm=1;G.run.sg=3;');
     const g = +run('llAdd(2,"thử");G.run.ll'); ok(g >= 2 * 3 * 0.99, `nhận 2 điểm gốc được ${g.toFixed(1)} (gấp ${run('LL_BOOST')} lần)`);
   },
   // bế quan: linh lực hồi nhanh hơn khí huyết, không hồi đầy cả hai
@@ -190,6 +190,22 @@ const TESTS = {
     run('G.run.mp=S().maxMp;'); ok(+run('G.run.pills.length') === 16 && run('usePill(15,false)') !== false, 'có linh lực lại: dùng được');
     run('G.run.mp=0;G.run.pham=1;'); ok(run('tuiOn()') === false, 'phàm nhân: không mở được túi');
     fresh('G.run.pham=0;G.run.mp=0;'); run('G.run.pills=[];for(let i=0;i<5;i++)G.run.pills.push({id:"hoixuan",q:0});'); ok(run('unitLocked("p",4)') === false, 'chưa đeo túi: không gì bị khoá dù linh lực = 0');
+  },
+  // đợt 32: lịch luyện về 0 theo tầng, chỉ số tăng từng tầng, pháp bảo, bế quan, thiên phú
+  suaLoi32() {
+    const L1 = (fresh(), run('LK_TH[1]'));
+    fresh('G.run.pham=0;G.run.realm=0;G.run.sg=1;G.run.tv=LK_TH[1];G.run.ll=LK_TH[1]-1;');
+    ok(run('llAdd(5,"thử",true);G.run.ll') <= L1 + 1e-6, 'lịch luyện không vượt đỉnh tầng đang mở');
+    const a = run('S().maxHp'); run('G.run.sg=2;G.run.tv=LK_TH[1]+0.1;'); const b = run('S().maxHp');
+    ok(b > a, `lên tầng 2 thì khí huyết tăng (${a} → ${b})`);
+    fresh('G.run.pham=0;G.run.realm=0;G.run.sg=1;G.run.tv=LK_TH[1];G.run.ll=LK_TH[1];');
+    run('lkXk()'); ok(run('sgGate()') === 2 && Math.abs(run('G.run.ll') - L1) < 1e-6 && run('llShow()') === 0, 'xung kích xong lịch luyện tầng mới về 0%');
+    fresh('G.run.pham=1;G.run.tv=100;G.run.ll=100;'); run('phamUp()');
+    ok(run('!isPham()') && run('G.run.asc&&G.run.asc.k') === 'xk' && run('G.run.ll') === 0, 'phàm nhân lên Luyện Khí: có bảng lên cảnh giới, lịch luyện về 0');
+    fresh('G.run.region=1;');
+    const pb = JSON.parse(run('(()=>{let n=0,low=0;for(let i=0;i<2000;i++){const x=genRelic(1);if(isPB(x)){n++;if(relReq(x)<2)low++;}}return JSON.stringify({n,low});})()'));
+    ok(pb.low === 0, 'không có pháp bảo yêu cầu dưới Trúc Cơ'); ok(pb.n < 200, `pháp bảo hiếm (${pb.n}/2000)`);
+    fresh('G.run.pham=0;G.run.realm=1;'); ok(run('Math.abs(playerTal().score-1)<0.3?playerTal().tier:1') === 1, 'lực chiến gần bằng sàn là Bình phàm');
   },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
