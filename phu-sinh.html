@@ -1630,6 +1630,12 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   :root[data-view=scene] .hud-body{display:block}
   #mapui{display:block}
 }
+/* máy tính: thanh tu vi và lịch luyện nằm sát mép dưới màn hình, dưới cả footer */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .hud-tv,.hud-ll{position:fixed!important;left:0!important;height:4px!important;border-radius:0!important;z-index:20}
+  .hud-tv{bottom:4px!important}
+  .hud-ll{bottom:0!important}
+}
 
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function o(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=o(d);fetch(d.href,p)}})();var ni={exports:{}},Us={},ti={exports:{}},te={};/**
