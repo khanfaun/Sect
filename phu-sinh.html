@@ -1587,6 +1587,11 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .ucard .dkv .brow2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .ucard .dkv .brow2:empty{display:none}
 }
+/* máy tính: 4 nút dọc bên trái là ô vuông như bản điện thoại */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .mright .mb{width:42px!important;height:42px!important;min-width:42px;min-height:42px;padding:0!important;border-radius:10px!important;flex:none}
+  .mright .mb .ic{width:21px!important;height:21px!important}
+}
 
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function o(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=o(d);fetch(d.href,p)}})();var ni={exports:{}},Us={},ti={exports:{}},te={};/**

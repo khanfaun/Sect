@@ -1577,3 +1577,8 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .ucard .dkv .brow2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .ucard .dkv .brow2:empty{display:none}
 }
+/* máy tính: 4 nút dọc bên trái là ô vuông như bản điện thoại */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .mright .mb{width:42px!important;height:42px!important;min-width:42px;min-height:42px;padding:0!important;border-radius:10px!important;flex:none}
+  .mright .mb .ic{width:21px!important;height:21px!important}
+}
