@@ -60,13 +60,33 @@ export function TheNguoi({ sc, u, pickMode, compact }) {
       <Html className="fav-in" h={PS.uAvatar(u)} /><H h={PS.phBadge(u)} />{!!u.fpt && <i className="flame"></i>}
     </span>
   );
-  if (compact) return <div {...box}>{av}<b className="u-cn">{u.name}</b>{bars}<H h={PS.stIcons(u.st)} /></div>;
-  return (
-    <div {...box}>
-      {av}
-      <div className="u-b"><div className="u-nm"><b>{u.name}</b><small><H h={PS.elSeal(u.el || 'vo')} /> {sub}</small></div>{bars}<H h={PS.stIcons(u.st)} /></div>
+  const pct = (a, b) => PS.pctOf(a, b);
+  // bản máy tính: cùng kiểu thẻ nhân vật chính (avatar to, tên, từng thanh có biểu tượng)
+  const dk = u.immune ? null : (
+    <div className="dkv">
+      <span className={'u-av' + (foe ? ' fav' : ' al') + (u.fpt ? ' fpt' : '')} {...tip(avTip || u.name + '\n' + sub)}>
+        {foe && <Vong th={th} cls={u.fpt ? 'burn' : th >= 100 ? 'full' : ''} />}
+        <Html className="fav-in" h={PS.uAvatar(u)} /><H h={PS.phBadge(u)} />{!!u.fpt && <i className="flame"></i>}
+      </span>
+      <div className="u-b">
+        <div className="u-nm"><b>{u.name}</b><small><H h={PS.elSeal(u.el || 'vo')} /> {sub}</small></div>
+        <div className="brow" {...tip('Khí huyết')}><span className="bl"><Ic n="heart" /></span><CBar cur={Math.max(0, u.hp)} max={u.max} cls={hpCls(u)} /><b>{pct(Math.max(0, u.hp), u.max)}</b></div>
+        <div className="brow2 mpnl">
+          {u.maxMp > 0 && <span {...tip('Linh lực ' + pct(u.mp, u.maxMp))}><span className="bl"><Ic n="drop" /></span><CBar cur={u.mp} max={u.maxMp} cls="mp" /><b>{pct(u.mp, u.maxMp)}</b></span>}
+          {u.maxNl > 0 && <span {...tip('Niệm lực ' + pct(u.nl || 0, u.maxNl))}><span className="bl"><Ic n="brain" /></span><CBar cur={u.nl || 0} max={u.maxNl} cls="nl" /><b>{pct(u.nl || 0, u.maxNl)}</b></span>}
+        </div>
+        <div className="brow2">
+          {u.tl != null && <span {...tip('Thể lực ' + Math.round(u.tl) + '%')}><span className="bl"><Ic n="run" /></span><CBar cur={u.tl} max={100} cls="tl" /></span>}
+          <span {...tip('Định lực ' + Math.round(dlOf(u)) + '%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}><span className="bl"><Ic n="lotus" /></span><CBar cur={dlOf(u)} max={100} cls="dl" /></span>
+        </div>
+        <H h={PS.stIcons(u.st)} />
+      </div>
     </div>
   );
+  const mb = compact
+    ? <div className="mbv">{av}<b className="u-cn">{u.name}</b>{bars}<H h={PS.stIcons(u.st)} /></div>
+    : <div className="mbv">{av}<div className="u-b"><div className="u-nm"><b>{u.name}</b><small><H h={PS.elSeal(u.el || 'vo')} /> {sub}</small></div>{bars}<H h={PS.stIcons(u.st)} /></div></div>;
+  return <div {...box}>{mb}{dk}</div>;
 }
 
 // Thẻ nhân vật chính: avatar có vòng thần lực (chạm để hiển hóa pháp tướng / tung đòn tối thượng)

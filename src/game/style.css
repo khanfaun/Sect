@@ -1565,3 +1565,15 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   #hud.hud{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--paper)!important}
 }
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){.cb-party{flex-direction:column!important;gap:14px}.cb-party>*{width:100%}.ucard.cmp .u-cn{max-width:calc(100% - 96px)!important}}
+
+.mbv{display:contents}.dkv{display:none}
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .ucard:has(.dkv) .mbv{display:none}
+  .ucard:has(.dkv){display:block;padding:10px 12px;text-align:left}
+  .ucard .dkv{display:flex;gap:12px;align-items:flex-start}
+  .ucard .dkv .u-b{flex:1;min-width:0}
+  .ucard .dkv .u-nm{display:flex;align-items:baseline;gap:8px}
+  .ucard .dkv .u-nm b{color:var(--ink)}.ucard.foe .dkv .u-nm b{color:var(--seal)}
+  .ucard .dkv .brow2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ucard .dkv .brow2:empty{display:none}
+}
