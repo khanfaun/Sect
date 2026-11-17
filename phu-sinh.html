@@ -1508,8 +1508,9 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .nv .ic{width:20px!important;height:20px!important}
   .nv .dot.soft{top:-3px;left:auto;right:-3px}
   /* nút bản đồ: dàn ngang dưới màn hình, chia hai bên, có chữ kế bên */
-  .mright,.mbl{top:auto!important;bottom:14px!important;flex-direction:row!important;gap:6px!important;align-items:center}
-  .mbl{left:12px!important}.mright{right:12px!important;left:auto!important}
+  .mbl{top:auto!important;bottom:14px!important;flex-direction:row!important;gap:6px!important;align-items:center;left:12px!important}
+  .mright{top:auto!important;bottom:68px!important;left:12px!important;right:auto!important;flex-direction:column!important;gap:6px!important;align-items:center}
+  .mright .mb{width:40px!important;padding:0!important;justify-content:center}.mright .mb-l{display:none!important}
   .mright .mb,.mbl .mb{width:auto!important;height:40px!important;margin:0!important;padding:0 13px 0 10px;display:inline-flex;align-items:center;gap:7px;font-size:.84em;letter-spacing:.03em;white-space:nowrap}
   .mright .mb .ic,.mbl .mb .ic{width:19px!important;height:19px!important}
   .nv:hover{border-color:var(--ink3)!important}
@@ -1519,7 +1520,7 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .hud-stats .hs .ic{width:14px!important;height:14px!important}
   .hud-stats .hs.st{margin-left:4px}
   /* chỉ số tách khỏi thẻ, thành dải ngang nổi giữa mép trên */
-  .hud-stats{position:absolute;top:0;left:calc(100% + 10px);margin:0!important;white-space:nowrap;height:40px;padding:0 16px!important;align-items:center;background:var(--paper);border:1px solid var(--line)!important;border-radius:10px;box-shadow:var(--sh);z-index:6}
+  .hud-stats{position:fixed;top:auto;left:auto;right:12px;bottom:14px;margin:0!important;white-space:nowrap;height:40px;padding:0 16px!important;align-items:center;background:var(--paper);border:1px solid var(--line)!important;border-radius:0!important;box-shadow:var(--sh);z-index:6}
   .hud-stats .hs{font-size:.86em!important}
   /* nút bản đồ to hơn, có hiệu ứng rê chuột */
   .mb:hover,.btn:not(:disabled):hover,.ch:not(:disabled):not(.info):hover,.row:not(:disabled):hover,.tabs button:hover{filter:brightness(1.04);border-color:var(--ink3)}
@@ -1536,7 +1537,6 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   #toast{bottom:40px}
   .cb,.birth,.meta{max-width:900px}
 }
-@media (hover:hover) and (pointer:fine) and (min-width:1200px) and (max-width:1599px){.hud-stats{top:calc(100% + 8px)!important;left:0!important}}
 @media (hover:hover) and (pointer:fine) and (min-width:1500px) and (min-height:800px){:root{--dz:1.2}}
 @media (hover:hover) and (pointer:fine) and (min-width:1800px) and (min-height:950px){:root{--dz:1.35}}
 @media (hover:hover) and (pointer:fine) and (min-width:2300px) and (min-height:1250px){:root{--dz:1.75}}
@@ -1544,23 +1544,36 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 @media (hover:hover) and (pointer:fine) and (min-width:3600px) and (min-height:1950px){:root{--dz:2.6}}
 .mb-l{display:none}
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){.mb-l{display:inline}}
-/* trận đấu trên máy tính: tranh lớn bên trái, phe địch + diễn biến cột phải, lệnh ở dưới */
+/* trận đấu trên máy tính: ba cột dàn đều toàn màn hình — ta | sân đấu | địch; hàng dưới: diễn biến | lệnh | nút phụ */
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){
-  .cb{display:grid!important;grid-template-columns:minmax(0,1fr) 360px;grid-template-rows:auto auto auto auto 1fr auto;column-gap:14px;row-gap:10px;max-width:1240px!important;margin:0 auto;padding:16px 20px!important;align-content:start}
-  .cb>*{grid-column:1/-1}
-  .cb>.track{grid-column:1/-1}
-  .cb>.cb-art{grid-column:1;grid-row:2/4;min-height:340px;max-height:none}
-  .cb>.cb-foes{grid-column:2;grid-row:2;flex-direction:column}
-  .cb>.cb-foes>*{flex:none}
-  .cb>.clog{grid-column:2;grid-row:3/5;min-height:8em;overflow:auto}
-  .cb>.cb-ally{grid-column:1;grid-row:4}
-  .cb>.cb-warn{grid-column:1}
-  .cb>.cb-cmd{grid-column:1;grid-row:5}
-  .cb>.cb-bot{grid-column:2;grid-row:5;align-self:start;flex-wrap:wrap}
-  .cb>.cb-end{grid-column:1/-1}
+  #full:has(.cb){padding:0}
+  .cb{display:grid!important;grid-template-columns:minmax(300px,24%) minmax(0,1fr) minmax(300px,24%);grid-template-rows:auto minmax(0,1fr) auto;gap:16px 22px;width:100%;max-width:none!important;height:100%;min-height:100%;margin:0;padding:18px 28px 24px!important;box-sizing:border-box;align-content:stretch}
+  .cb>.track{grid-column:1/-1;grid-row:1}
+  .cb>.cb-ally{grid-column:1;grid-row:2;flex-direction:column;justify-content:center;gap:14px}
+  .cb>.cb-art{grid-column:2;grid-row:2;min-height:0;max-height:none;height:100%;border-radius:0}
+  .cb>.cb-foes{grid-column:3;grid-row:2;flex-direction:column;justify-content:center;gap:14px}
+  .cb>.cb-ally>*,.cb>.cb-foes>*{width:100%;flex:none}
+  .cb>.clog{grid-column:1;grid-row:3;min-height:150px;max-height:200px;overflow:auto;border-radius:0;font-size:.95em}
+  .cb>.cb-cmd{grid-column:2;grid-row:3;min-height:150px}
+  .cb>.cb-bot{grid-column:3;grid-row:3;align-self:stretch;flex-direction:column;justify-content:flex-end;align-items:stretch;gap:8px}
+  .cb>.cb-bot .btn,.cb>.cb-bot .burnw,.cb>.cb-bot .autow{width:100%}
+  .cb>.cb-bot .btn{min-height:42px;justify-content:center}
+  .cb>.cb-warn{grid-column:1/-1;grid-row:3;align-self:start}
+  .cb>.cb-end{grid-column:2;grid-row:3;align-self:center}
+  .cb .ucard,.cb .skills .sk{border-radius:0}
+  .cb .skills{grid-template-columns:repeat(2,1fr);gap:10px}
+  .cb .sk{min-height:62px}
+  /* thanh lượt đi: dài hết chiều ngang */
+  .cb>.track{width:100%}
 }
 .u-cn{display:none}
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){.ucard.cmp .u-cn{display:block;position:absolute;left:12px;top:12px;font-size:1em;color:var(--seal);max-width:calc(100% - 80px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ucard.cmp{position:relative}}
+
+/* máy tính: mọi khối chữ nhật, không bo góc */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  #hud.hud,.nv,.mb,.mright .mb,.mbl .mb{border-radius:0!important}
+  #hud.hud{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--paper)!important}
+}
 
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function o(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=o(d);fetch(d.href,p)}})();var ni={exports:{}},Gs={},ti={exports:{}},ne={};/**
