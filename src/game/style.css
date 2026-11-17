@@ -1498,8 +1498,8 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .nv .ic{width:20px!important;height:20px!important}
   .nv .dot.soft{top:-3px;left:auto;right:-3px}
   /* nút bản đồ: dàn ngang dưới màn hình, chia hai bên, có chữ kế bên */
-  .mbl{top:auto!important;bottom:14px!important;flex-direction:row!important;gap:6px!important;align-items:center;left:12px!important}
-  .mright{top:auto!important;bottom:68px!important;left:12px!important;right:auto!important;flex-direction:column!important;gap:6px!important;align-items:center}
+  .mbl{top:auto!important;bottom:14px!important;flex-direction:row!important;gap:6px!important;align-items:center;left:auto!important;right:12px!important}
+  .mright{top:auto!important;bottom:110px!important;left:12px!important;right:auto!important;flex-direction:column!important;gap:6px!important;align-items:center}
   .mright .mb{width:40px!important;padding:0!important;justify-content:center}.mright .mb-l{display:none!important}
   .mright .mb,.mbl .mb{width:auto!important;height:40px!important;margin:0!important;padding:0 13px 0 10px;display:inline-flex;align-items:center;gap:7px;font-size:.84em;letter-spacing:.03em;white-space:nowrap}
   .mright .mb .ic,.mbl .mb .ic{width:19px!important;height:19px!important}
@@ -1510,7 +1510,7 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .hud-stats .hs .ic{width:14px!important;height:14px!important}
   .hud-stats .hs.st{margin-left:4px}
   /* chỉ số tách khỏi thẻ, thành dải ngang nổi giữa mép trên */
-  .hud-stats{position:fixed;top:auto;left:auto;right:12px;bottom:14px;margin:0!important;white-space:nowrap;height:40px;padding:0 16px!important;align-items:center;background:var(--paper);border:1px solid var(--line)!important;border-radius:0!important;box-shadow:var(--sh);z-index:6}
+  .hud-stats{position:fixed;top:auto;left:12px;right:auto;bottom:14px;margin:0!important;white-space:nowrap;height:40px;padding:0 16px!important;align-items:center;background:var(--paper);border:1px solid var(--line)!important;border-radius:0!important;box-shadow:var(--sh);z-index:6}
   .hud-stats .hs{font-size:.86em!important}
   /* nút bản đồ to hơn, có hiệu ứng rê chuột */
   .mb:hover,.btn:not(:disabled):hover,.ch:not(:disabled):not(.info):hover,.row:not(:disabled):hover,.tabs button:hover{filter:brightness(1.04);border-color:var(--ink3)}
@@ -1581,4 +1581,11 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){
   .mright .mb{width:42px!important;height:42px!important;min-width:42px;min-height:42px;padding:0!important;border-radius:10px!important;flex:none}
   .mright .mb .ic{width:21px!important;height:21px!important}
+}
+
+.hud-ls{display:none}
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .hud-stats .hs.st{display:none!important}
+  /* linh thạch: ô vuông riêng, cao bằng header, nằm bên phải thẻ header, cách một khoảng nhỏ */
+  .hud-ls{display:flex;align-items:center;gap:8px;position:absolute;left:calc(100% + 8px);top:0;height:100%;padding:0 20px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--sh);white-space:nowrap;font-size:1.05em;font-weight:600;color:var(--stn)}
 }

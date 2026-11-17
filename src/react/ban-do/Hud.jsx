@@ -67,6 +67,7 @@ export function Hud() {
       <span className="hs dt" {...tip('Đạo tâm: ' + PS.rateOf('tam', s.tam, 'muc').t + '\nChống ảo cảnh, giúp đột phá')}><Ic n="lotus" /><Rt k="tam" v={s.tam} kind="muc" /></span>
       <span className="hs st" {...tip('Linh thạch')}><i className="rh"></i>{PS.fmtN(r.st)}</span>
     </div>
+    <div className="hud-ls" {...tip('Linh thạch')}><i className="rh"></i>{PS.fmtN(r.st)}</div>
     <i className="hud-tv" style={{ width: clamp(tv, 0, 100) + '%' }} {...tip('Tu vi ' + tv + '%')} />
     <i className="hud-ll" style={{ width: PS.llShow() + '%' }} {...tip('Lịch luyện ' + PS.llShow() + '%')} />
   </>;
