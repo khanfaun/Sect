@@ -1599,6 +1599,10 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   /* linh thạch: ô vuông riêng, cao bằng header, nằm bên phải thẻ header, cách một khoảng nhỏ */
   .hud-ls{display:flex;align-items:center;gap:8px;position:absolute;left:calc(100% + 8px);top:0;height:100%;padding:0 20px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--sh);white-space:nowrap;font-size:1.05em;font-weight:600;color:var(--stn)}
 }
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .hud-ls{font-size:1.7em;gap:12px;padding:0 26px}
+  .hud-ls .rh{width:.72em!important;height:.72em!important;transform:rotate(45deg)!important;margin:0 6px!important}
+}
 
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function o(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=o(d);fetch(d.href,p)}})();var ni={exports:{}},Us={},ti={exports:{}},te={};/**

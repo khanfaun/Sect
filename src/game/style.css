@@ -1589,3 +1589,7 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   /* linh thạch: ô vuông riêng, cao bằng header, nằm bên phải thẻ header, cách một khoảng nhỏ */
   .hud-ls{display:flex;align-items:center;gap:8px;position:absolute;left:calc(100% + 8px);top:0;height:100%;padding:0 20px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--sh);white-space:nowrap;font-size:1.05em;font-weight:600;color:var(--stn)}
 }
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .hud-ls{font-size:1.7em;gap:12px;padding:0 26px}
+  .hud-ls .rh{width:.72em!important;height:.72em!important;transform:rotate(45deg)!important;margin:0 6px!important}
+}
