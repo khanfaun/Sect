@@ -1609,3 +1609,8 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .hud-ls .rh{margin:0 0 2px!important}
   .mleft{top:calc(var(--hudh,84px) + 84px)!important}
 }
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .hud-ls{flex-direction:row!important;gap:5px!important;font-size:1.25em!important;justify-content:center;white-space:nowrap}
+  .hud-ls .rh{width:.62em!important;height:.62em!important;margin:0 3px 0 0!important}
+}
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){.hud-ls{width:auto!important;min-width:54px!important;padding:0 8px!important;box-sizing:border-box}}

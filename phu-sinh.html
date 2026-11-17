@@ -1619,6 +1619,11 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .hud-ls .rh{margin:0 0 2px!important}
   .mleft{top:calc(var(--hudh,84px) + 84px)!important}
 }
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .hud-ls{flex-direction:row!important;gap:5px!important;font-size:1.25em!important;justify-content:center;white-space:nowrap}
+  .hud-ls .rh{width:.62em!important;height:.62em!important;margin:0 3px 0 0!important}
+}
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){.hud-ls{width:auto!important;min-width:54px!important;padding:0 8px!important;box-sizing:border-box}}
 
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function o(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=o(d);fetch(d.href,p)}})();var ni={exports:{}},Us={},ti={exports:{}},te={};/**
