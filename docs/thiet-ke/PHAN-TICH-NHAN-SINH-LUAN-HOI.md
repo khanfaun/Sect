@@ -19,6 +19,8 @@ Cách đọc: Phần 0 là tóm tắt. Phần 1–2 là nền. Phần 3–15 là
 | 8 | Thiên kiếp công bằng | Nghiệp càng nặng → kiếp càng dữ, thêm đạo, đổi sang Nghiệp Hỏa; qua được → thưởng nhiều hơn và tiêu bớt nghiệp. Phúc dày → "công đức hộ thể" che bớt sát thương, thưởng bình thường. |
 | 10 | Tuế biến | Mỗi lần thêm một tuổi, khí vận/thể chất/mệnh cách phù hợp được **tích lũy**, **hao mòn** hoặc gây **biến cố**. Tooltip có dòng "Theo năm tháng" bằng chữ ước lượng. Bảng đủ cho **33 thể chất, 74 khí vận, 18 mệnh cách**. |
 | 11 | Tân thủ | **30 nhiệm vụ tân thủ**, chỉ ở kiếp đầu. 6 cái đầu đi lần lượt, sau đó tối đa 3 cái song song. Có thanh tiến độ, phần thưởng ghi rõ, bấm để dẫn đường, ẩn/hiện, bỏ qua có hỏi lại. |
+| 2 (lần 2) | Tiền tệ | **Năm loại tiền**: linh thạch · bạc (phàm nhân) · cống hiến **riêng từng thế lực** (chỉ tiêu ở đúng thế lực đó) · Thưởng Lệnh (làm nhiệm vụ bảng treo thưởng → đổi hàng ở Thưởng Các) · điểm luân hồi (đã có). Phần 6.1. |
+| 3 (lần 2) | Thời gian luân hồi, đất ma | Khoảng cách giữa hai kiếp **đã có sẵn** (3–30 năm). Đề xuất mở rộng tới 5.000 năm, phụ thuộc nhân quả; 3 kiếp đầu chỉ cách gần. Cần thêm cách "tua thế giới theo thập kỷ" — mức sửa vừa phải, không làm lệch cốt truyện nếu giữ 3 quy tắc. Diệt thế tạm thời = **3 khu thành đất ma**, hồi phục dần theo thế kỷ. Phần 14.8, 14.9. |
 | 13 | Cốt truyện theo xuất thân | Không viết 45 cốt truyện rời. Gom thành **9 Mệnh Tuyến** (đại cốt truyện), mỗi xuất thân gắn một mệnh tuyến + mở đầu riêng. Cốt truyện **kéo chứ không ép**: mỗi bước là một lời mời có hạn; bỏ qua thì thế giới tự diễn tiếp và mệnh tuyến rẽ nhánh, không bao giờ khóa chết. Kết cục xét theo trạng thái lúc kết kiếp nên làm gì cũng có kết cục có nghĩa. Thế giới giữ lại qua các kiếp nên kết cục kiếp này đổi thế giới kiếp sau. |
 
 ---
@@ -38,7 +40,8 @@ Cách đọc: Phần 0 là tóm tắt. Phần 1–2 là nền. Phần 3–15 là
 | Đột phá | Tỉ lệ gốc `BT_BASE` = 62% / 52% / 46% / 40% / 35%. | Dễ so với tinh thần "tu tiên muôn vàn trắc trở". |
 | Hướng dẫn | Chỉ có trợ giúp phàm nhân (`phamHelp`) và chú thích. | Chưa có nhiệm vụ tân thủ. |
 | Nhiệm vụ | Bảng treo thưởng: 2 loại (đến nơi, diệt), có hạn, phạt. Sổ tay có thẻ nhiệm vụ (`TheNhiemVu.jsx`). | Dùng lại được khung thẻ cho nhiệm vụ tân thủ. |
-| Tiền | Chỉ có linh thạch, kể cả phàm nhân mua bánh. | Không tả được "kiếm ngày ba bữa". |
+| Tiền | Chỉ có linh thạch (kể cả phàm nhân mua bánh) và **một số cống hiến chung** `r.ch` không gắn với tông nào (core2/03). | Không tả được "kiếm ngày ba bữa"; cống hiến tông này tiêu được như của tông khác. |
+| Thời gian giữa hai kiếp | Mỗi lần chết, thế giới trôi ngẫu nhiên **3–30 năm** (`afterlife`: `ri(3,30)`), tua bằng `worldCoarse` (chạy **từng tháng**) và `rivalsCoarse`. Sử thế giới `w.chron` giữ 60 dòng. | Tua từng tháng không chịu được khoảng hàng trăm, hàng ngàn năm. |
 | Kết kiếp | Điểm luân hồi tính theo cảnh giới, số kẻ giết, sự kiện; nguyên nhân chết: chiến đấu, kiếp, tọa hóa, tâm ma, quy ẩn, phi thăng. | Đời phàm nhân gần như không có điểm → người chơi sẽ ghét vô linh căn. |
 
 ---
@@ -233,9 +236,19 @@ Kiếp 2+: 55% còn lại chia theo đúng tỉ trọng cũ (5:6:18:30:25:16).
    - Khí vận ép linh căn (Lôi Đình Bá, Băng Tâm Ngọc Cốt, Huyễn Ảnh Phong Thân, Băng Phách, Phong Thần, Lôi Thần Giáng Thế, Hỗn Nguyên Đạo, Ngũ Hành Hợp Nhất) và khí vận "nghiêng về hành" **không tác dụng** khi vô linh căn, chuyển thành **ẩn mệnh**: khi cải tạo thành công, linh căn mới được nắn theo các khí vận này (vd vô linh căn mang Lôi Thần Giáng Thế, cải tạo ra `hau` → thành Biến dị Lôi). Tooltip ghi "Ẩn mệnh: chưa có linh căn để ứng nghiệm".
 5. Nâng cấp luân hồi mới **Túc Căn** (3 bậc, giá 15 / 30 / 50 điểm): mỗi bậc giảm 4 điểm phần trăm vô linh căn; vẫn không xuống dưới 30%.
 
-### 5.3 Giấu linh căn và Trắc linh
+### 5.3 Giấu linh căn và Trắc linh — **đang chờ bạn chốt**
 
-**Lý do:** nếu linh căn hiện trên thẻ, người chơi né được, tỉ lệ cao thành vô nghĩa; giấu đến lúc trắc linh tạo được khoảnh khắc hy vọng → tuyệt vọng (hoặc mừng rỡ) đúng như truyện.
+**Vấn đề, nói đơn giản:** lúc đầu thai, game đang cho chọn 1 trong 3 thẻ nhân vật, và **mỗi thẻ ghi sẵn linh căn của nó**. Dù mỗi thẻ có 45% là vô linh căn, người chơi chỉ việc chọn thẻ nào có linh căn. Cả 3 thẻ cùng vô linh căn chỉ xảy ra khoảng 9% (0,45 × 0,45 × 0,45), có thêm thẻ nhờ nâng cấp thì còn ít hơn. Kết quả: vô linh căn gần như không bao giờ xảy ra, trái với yêu cầu "xác suất khá cao".
+
+**Ba cách xử lý:**
+
+| Cách | Làm gì | Được | Mất |
+|---|---|---|---|
+| **A (đề xuất)** | Từ kiếp 2, linh căn tung **một lần cho cả kiếp**, mọi thẻ dùng chung, và thẻ ghi **"Linh căn: chưa trắc"**. Biết được khi trắc linh trong 1–3 tháng đầu | Tỉ lệ 45% là thật; có khoảnh khắc hồi hộp lúc trắc linh (hy vọng → tuyệt vọng hoặc mừng rỡ), đúng như truyện | Người chơi không chọn được linh căn |
+| B | Tung một lần, mọi thẻ dùng chung, **nhưng hiện rõ** trên thẻ | Tỉ lệ 45% là thật; biết trước để chọn thẻ hợp đời phàm nhân | Mất khoảnh khắc trắc linh |
+| C | Giữ như cũ (mỗi thẻ riêng, hiện rõ), nâng tỉ lệ mỗi thẻ để kết quả cuối vẫn khoảng 45% | Ít sửa nhất | Mỗi thẻ phải ~77% vô linh căn (4 thẻ: ~82%); màn đầu thai toàn thẻ "phế vật" trông rất nặng nề |
+
+Phần dưới viết theo cách A.
 
 - Kiếp 2+, mọi thẻ ghi **"Linh căn: chưa trắc"**. Nâng cấp "Thiên nhãn" (đã có) hoặc khí vận Thiên Lý Nhãn / Quỷ Nhãn / Nhân Quả Đạo cho thêm **một câu gợi ý mơ hồ** trên thẻ: "Bà đỡ nói đứa bé có cốt cách lạ" (có linh căn) / "Thầy bói lắc đầu, không nói gì" (vô linh căn). Gợi ý đúng 85%.
 - Trắc linh xảy ra trong tháng 1–3 của kiếp, theo cách đầu tiên trong các cách sau:
@@ -278,7 +291,7 @@ Mỗi con đường là một chuỗi kỳ ngộ/sự kiện thật, có nơi ch
 
 | # | Tên | Loại | Lấy ở đâu / bằng cách nào | Điều kiện | Kết quả | Cái giá | Đạo Hướng | Nhân Quả |
 |---|---|---|---|---|---|---|---|---|
-| 1 | **Khai Linh Đan** | Đan, Huyền phẩm | Đấu giá ở thành lớn (khởi giá 300 linh thạch ≈ 7.500 lượng bạc); phần thưởng đại sự kiện tông môn; kỳ ngộ cao nhân | Khí huyết ≥ 50% | 60% → `nguy`; 10% → `hau` 2–3 hệ; 30% thất bại | Thất bại: mất 5 năm thọ, thương thế bậc 2 | 0 | 0 |
+| 1 | **Khai Linh Đan** | Đan, Huyền phẩm | Đấu giá ở thành lớn (khởi giá 300 linh thạch ≈ 7.500 lượng bạc); Thưởng Các (250 Thưởng Lệnh, bậc Huyền bài); phần thưởng đại sự kiện tông môn; kỳ ngộ cao nhân | Khí huyết ≥ 50% | 60% → `nguy`; 10% → `hau` 2–3 hệ; 30% thất bại | Thất bại: mất 5 năm thọ, thương thế bậc 2 | 0 | 0 |
 | 2 | **Tẩy Tủy Phạt Mạch Kinh** | Công pháp phàm, Hoàng phẩm | Tàng thư võ phái; ẩn sĩ trong núi (kỳ ngộ); 3% có ở tạp hóa thành lớn giá 120 lượng | Luyện liền 3 năm: mỗi tháng tĩnh tọa đủ 10 ngày; mỗi năm một phép thử đạo tâm, trượt thì năm đó làm lại | 70% → `tan` (1 hệ ngẫu nhiên); 30% → `nguy` | Mỗi năm luyện: khí huyết tối đa −5% vĩnh viễn (tối đa −15%) | Chính +2 | 0 |
 | 3 | **Ngũ Hành Linh Quả** (5 quả Kim, Mộc, Thủy, Hỏa, Thổ, cùng một cây ngàn năm) | Linh dược | Một cây duy nhất mỗi thế giới, ở dược cốc sâu Nam Trạch hoặc Đông Hoang, có yêu thú Trúc Cơ canh; quả chín mùa thu | Ăn trong 10 ngày | Ăn đủ 5 → `nguy` cân bằng 5 hệ (nếu có khí vận nghiêng ngũ hành → `hau` 5 hệ); ăn 3–4 → `tan` | Ăn lẻ 1–2 quả: không gì, quả mất | 0 | Giết yêu thú canh cây: Nghiệp +2 |
 | 4 | **Địa Tâm Linh Tủy** | Linh tủy Thổ | Đào khoáng ở mỏ cấp cao (0,3% mỗi lần), long mạch trong sự kiện | Ngâm 49 ngày trong động phủ hoặc hang kín | 75% → `hau` Thổ; 25% thất bại | Phép thử thể chất mỗi 7 ngày; trượt 3 lần → thương thế bậc 3 | 0 | 0 |
@@ -309,7 +322,7 @@ Và một đường tối: **Làm dược nhân cho ma tông** — tự nguyện
 | Mã đề xuất | Tên | Loại / ô | Phẩm | Nguồn | Giá tham khảo |
 |---|---|---|---|---|---|
 | `trac_linh_thach` | Trắc Linh Thạch | Vật dùng, 1 ô | Phàm | Tạp hóa thành lớn | 30 lượng bạc |
-| `khai_linh_dan` | Khai Linh Đan | Đan | Huyền | Đấu giá, tông môn, kỳ ngộ | 300 linh thạch |
+| `khai_linh_dan` | Khai Linh Đan | Đan | Huyền | Đấu giá, Thưởng Các, tông môn, kỳ ngộ | 300 linh thạch / 250 Thưởng Lệnh |
 | `tay_tuy_phat_mach_kinh` | Tẩy Tủy Phạt Mạch Kinh | Bí tịch (tâm pháp phàm) | Hoàng | Võ phái, ẩn sĩ, tạp hóa hiếm | 120 lượng bạc |
 | `qua_kim`, `qua_moc`, `qua_thuy`, `qua_hoa`, `qua_tho` | Ngũ Hành Linh Quả (Kim/Mộc/Thủy/Hỏa/Thổ) | Linh dược | Địa | Cây ngàn năm | không bán |
 | `tuy_dia_tam`, `tuy_hoa`, `tuy_han`, `tuy_canh_kim`, `tuy_moc` | Địa Tâm Linh Tủy, Hỏa Tủy, Hàn Tủy, Canh Kim Tủy, Mộc Linh Tủy | Linh tủy | Địa | Như bảng 5.5 | đấu giá 200–260 linh thạch |
@@ -328,11 +341,74 @@ Lưu ý trùng tên: game đã có **Tẩy Tủy Đan** (`taytuy`, khí huyết 
 
 Không có phần này thì "bận rộn kiếm ngày ba bữa" chỉ là lời kể. Đây là nền của mọi phàm đạo.
 
-### 6.1 Tiền phàm
-- Đơn vị: **văn** và **lượng bạc**; 1 lượng = 1.000 văn. Hiện: "3 lượng 200 văn".
-- Linh thạch vẫn là tiền của tu sĩ. Đổi ở tiền trang / phường thị: **mua 1 linh thạch = 25 lượng**, **bán 1 linh thạch = 18 lượng**. Quán phàm (trà lâu, khách điếm, tửu phường, tạp hóa thôn) nhận linh thạch quy ra 20 lượng.
-- Quán phàm niêm giá bằng bạc; phường thị, quỷ thị, đấu giá niêm giá bằng linh thạch.
-- Bản lưu cũ: linh thạch đang có giữ nguyên, bạc = 0.
+### 6.1 Năm loại tiền
+
+| Tiền | Ai dùng | Kiếm bằng | Tiêu ở | Đổi được không | Mất khi |
+|---|---|---|---|---|---|
+| **Linh thạch** | tu sĩ (phàm nhân hiếm khi có) | săn yêu, bán linh vật, việc của tu sĩ | phường thị, quỷ thị, đấu giá, dịch vụ tu sĩ | ↔ bạc ở tiền trang | chết |
+| **Bạc** (văn, lượng) | mọi người | làm thuê, phàm đạo, bán đồ phàm | quán phàm, thuế, sính lễ, học phí | ↔ linh thạch ở tiền trang | chết |
+| **Cống hiến** (một sổ riêng cho mỗi thế lực) | thành viên thế lực đó | việc của **chính** thế lực đó | **chỉ** cửa hàng, dịch vụ của **chính** thế lực đó | không đổi ra tiền; không chuyển sang thế lực khác | bị trục xuất / phản bội: mất hết; tự rời: đóng băng; chết: mất |
+| **Thưởng Lệnh** | ai nhận việc ở bảng treo thưởng | xong nhiệm vụ bảng treo thưởng | Thưởng Các | không mua bằng tiền, không đổi | bỏ / trễ nhiệm vụ: −1; chết: mất |
+| **Điểm luân hồi** (đã có) | người chơi, qua mọi kiếp | kết kiếp | Bến Vong Xuyên (nâng cấp) | — | không mất |
+
+Hiển thị: ô **Hầu bao** trên HUD ghi linh thạch + bạc; bấm vào mở bảng có cống hiến từng thế lực và Thưởng Lệnh.
+
+#### 6.1.1 Bạc
+- Đơn vị: **văn** và **lượng**; 1 lượng = 1.000 văn. Hiện: "3 lượng 200 văn".
+- Đổi ở tiền trang / phường thị: **mua 1 linh thạch = 25 lượng**, **bán 1 linh thạch = 18 lượng**. Quán phàm nhận linh thạch quy ra 20 lượng.
+- Quán phàm (trà lâu, khách điếm, tửu phường, tạp hóa thôn) niêm giá bằng bạc; phường thị, quỷ thị, đấu giá niêm giá bằng linh thạch.
+- Bản lưu cũ: linh thạch giữ nguyên, bạc = 0.
+
+#### 6.1.2 Cống hiến theo từng thế lực
+
+| Loại thế lực | Sổ riêng | Tên gọi | Kiếm bằng | Tiêu vào |
+|---|---|---|---|---|
+| Tông môn (mỗi tông trong `world.sects`, cả chính, ma, Phật, trung lập) | mỗi tông một sổ | Cống hiến | Việc tông · nộp nguyên liệu (luật `chGive` đã có) · trấn thủ · đại bỉ · đi trừ ma / bắt người (ma tông) | Công pháp ở Tàng Kinh Các · đan (luật `chTrade` đã có) · vào bí cảnh tông · động phủ có linh mạch · trưởng lão hộ pháp khi đột phá (+8% tỉ lệ) · đổi sư phụ · xin miễn một lần phạt |
+| Triều đình (quan phủ và quân đội của triều đại đang cai trị) | một sổ cho triều đại hiện tại | Công lao | Xử án · thu thuế · tuần tra · đánh trận · bắt kẻ truy nã | Thăng chức · đất phong (ruộng) · miễn thuế · binh khí, giáp, ngựa · giấy thông hành · ân xá một tội |
+| Thương hội (mỗi thương hội, gắn với thương đội trên bản đồ) | mỗi hội một sổ | Tín dự | Giao hàng đúng hạn · hộ tống thương đội · góp vốn | Vay vốn không lãi 3 tháng · giá −10% · chỗ trong thương đội (đi đường an toàn hơn) · thuê kho · đặt hàng hiếm |
+| Võ phái (NPC hoặc của người chơi) | mỗi phái một sổ | Môn công | Luyện võ ở phái · đấu lôi đài nhân danh phái · bảo kê | Bí tịch võ (7.3) · thuốc trị thương · người giúp sức |
+| Cái bang | một sổ | Bang công | Đưa tin · nghe ngóng · giúp người cùng cảnh | Tin tức chính xác · che giấu hành tung · chỗ ngủ · người dẫn đường |
+| Ám lâu (phàm) / Ám Đường (tu sĩ) | mỗi tổ chức một sổ | Huyết ấn | Hợp đồng | Hợp đồng lớn · xoá tên khỏi bảng truy nã · mặt nạ (che giấu thân phận) · độc dược · tin về mục tiêu |
+
+Luật:
+- Cống hiến chỉ tiêu ở đúng thế lực đã trao, kể cả hai tông cùng phe cũng không dùng chung.
+- Mua bằng của cải được nhưng rất đắt: nộp 10 linh thạch vào kho tông = 1 cống hiến; quyên 50 lượng cho triều đình = 1 công lao; góp 30 lượng vào thương hội = 1 tín dự.
+- Tự rời thế lực: sổ đóng băng, quay lại thì dùng tiếp nhưng mất 20%. Bị trục xuất hoặc phản bội: mất hết, thêm tuyến Oán (9.9).
+- Đổi ngôi: công lao với triều cũ mất 50% nếu đã quy thuận triều mới, mất hết nếu từng phò triều cũ chống lại.
+- Hết kiếp: mọi sổ mất (thế lực không nhớ người kiếp trước).
+- Bản lưu cũ: `r.ch` (số chung) chuyển vào sổ của tông đang ở (`sectName`); chưa có tông thì bỏ.
+
+#### 6.1.3 Thưởng Lệnh và Thưởng Các
+- **Thưởng Lệnh**: thẻ tre khắc dấu son của **Thưởng Các** — tổ chức chung của quan phủ và các thương hội đứng sau mọi bảng treo thưởng. Dùng chung ở mọi bảng, mọi khu. Nằm trong hầu bao, **không chiếm ô túi**.
+- **Nhận** theo bậc nhiệm vụ bảng treo (6 bậc của `QST`): 1 / 2 / 3 / 5 / 8 / 12 thẻ. Xong khi mới qua chưa tới nửa thời hạn: +1. Nhiệm vụ truy nã đặc biệt: ×2.
+- **Mất**: bỏ nhiệm vụ −1 (cộng thêm phạt hiện có); trễ hạn −1.
+- Phàm nhân, vô linh căn chỉ nhận nhiệm vụ bậc 1 (tìm người lạc, đưa thư, bắt trộm vặt, đuổi sói, đòi nợ). Thưởng Lệnh là con đường chậm mà chắc để một phàm nhân tích tới Khai Linh Đan.
+- **Bậc Thưởng Các** (tính theo tổng thẻ từng nhận, không giảm khi tiêu): Vô danh (0) → Đồng bài (20) → Ngân bài (60) → Kim bài (150) → Huyền bài (400). Bậc cao mở hàng cao và nhiệm vụ truy nã đặc biệt.
+
+**Cửa hàng Thưởng Các** (ở mọi thành có bảng treo thưởng; giới hạn tính theo từng thành)
+
+| Hàng | Giá (Thưởng Lệnh) | Bậc cần | Giới hạn |
+|---|---|---|---|
+| Lương khô (1 gói) | 1 | Vô danh | không |
+| Hồi Xuân Đan `hoixuan` | 2 | Vô danh | 5 / tháng |
+| Tụ Khí Đan `tukhi` | 2 | Vô danh | 5 / tháng |
+| Giải Độc Đan `giaidoc` | 2 | Vô danh | 5 / tháng |
+| Giấy thông hành trạm dịch (đi một chặng miễn phí) | 2 | Vô danh | 3 / tháng |
+| Trắc Linh Thạch | 3 | Vô danh | 1 / kiếp |
+| Tin tức một thiên kiêu (mở dòng trong Bảng thiên hạ) | 3 | Vô danh | 3 / tháng |
+| Thần Hành Phù `thanhanh` | 4 | Đồng bài | 3 / tháng |
+| Kim Cang Phù `kimcang` | 4 | Đồng bài | 3 / tháng |
+| Chưởng Lôi Phù `loiphu` | 5 | Đồng bài | 3 / tháng |
+| Định Thần Đan `dinhthan` | 6 | Đồng bài | 2 / tháng |
+| Tinh Nguyên Đan `tinhnguyen` | 8 | Ngân bài | 2 / tháng |
+| Lệnh truy nã đặc biệt (mở một nhiệm vụ truy nã kẻ có tên, thưởng ×2) | 10 | Ngân bài | 1 / tháng |
+| Bản đồ kho báu (mở một địa điểm ẩn trên bản đồ) | 12 | Ngân bài | 1 / tháng |
+| Phá Cảnh Đan `phacanh` | 18 | Kim bài | 1 / tháng |
+| Hộ Mạch Đan `homach` | 20 | Kim bài | 1 / tháng |
+| Tị Lôi Phù `tiloi` | 22 | Kim bài | 1 / tháng |
+| Xoá tên khỏi bảng truy nã của một thành | 25 | Kim bài | 1 / năm |
+| Diên Thọ Đan `dientho` | 30 | Kim bài | 1 / năm |
+| Khai Linh Đan | 250 | Huyền bài | 1 / kiếp |
 
 ### 6.2 Bảng giá phàm (dữ liệu thật)
 
@@ -1384,7 +1460,7 @@ Các điểm đếm cần gắn (mỗi điểm một dòng gọi `tutTick(loại
 
 | Lớp | Là gì | Ai sở hữu | Thời gian |
 |---|---|---|---|
-| **Thời cục thế giới** | 12 đại sự diễn ra theo năm của thế giới **dù người chơi có mặt hay không** | Thế giới (`world.chron`) | Kéo dài qua nhiều kiếp |
+| **Thời cục thế giới** | 12 đại sự diễn ra theo năm của thế giới **dù người chơi có mặt hay không** | Thế giới (`world.thoiCuc`; không dùng tên `chron` vì `w.chron` đã là sử thế giới) | Kéo dài qua nhiều kiếp |
 | **Mệnh tuyến** | 9 đại cốt truyện; mỗi xuất thân gắn một mệnh tuyến; mỗi mệnh tuyến 5 hồi | Kiếp hiện tại (`run.arc`) | Một kiếp (riêng "Thế Gia Vạn Đại" nối được qua kiếp) |
 | **Đại Mộng** | Bí ẩn vòng luân hồi: 9 Mộng Ấn, Người Gác Bến, kết thúc thật | Người chơi (`G.meta.mong`) | Toàn bộ game |
 
@@ -1424,7 +1500,7 @@ Mệnh tuyến **bám vào** thời cục: hồi 3 và hồi 5 của mọi mện
 | Mệnh tuyến | Một câu | Hồi 1 | Hồi 2 | Hồi 3 (hội tụ) | Hồi 4 | Hồi 5 (hội tụ) | Kết cục: thành / bại / rẽ / đứng ngoài | Khi vô linh căn |
 |---|---|---|---|---|---|---|---|---|
 | **Phi Thăng Lộ** | Một đứa trẻ có tiên duyên leo từng bậc thang tàn khốc lên trời | Tiên duyên (trắc linh, sư phụ) | Huyết vũ (tranh đoạt, mất người thân thiết đầu tiên, bí cảnh) | Đại Hội Thiên Kiêu hoặc Tông Chiến | Đạo tâm (thiên kiếp, chọn đạo hay người) | Thiên Lộ Mở | Phi thăng / Ngã trước Thiên Lộ / Bỏ trường sinh vì một người / Tọa hóa trong động phủ | Hồi 1 thành "Phế vật cầu tiên": mục tiêu là cải tạo linh căn; không cải tạo được thì kết "Ngước nhìn trời cả đời" |
-| **Diệt Thế Ma Đồ** | Kẻ bị thế gian ruồng bỏ thành tai họa của nó | Bị ruồng bỏ | Ma chủng (ma công, tiếng thì thầm) | Huyết Nguyệt Ma Kiếp | Ma vực (lập thế lực, ra tay với tông chính) | Ma Chủ Phục Sinh | Diệt thế (kiếp sau thế giới thành đất ma) / Bị vây giết / Quay đầu, chết như người thường / Ma chủ một phương | "Ma nô": huyết tế khai mạch |
+| **Diệt Thế Ma Đồ** | Kẻ bị thế gian ruồng bỏ thành tai họa của nó | Bị ruồng bỏ | Ma chủng (ma công, tiếng thì thầm) | Huyết Nguyệt Ma Kiếp | Ma vực (lập thế lực, ra tay với tông chính) | Ma Chủ Phục Sinh | Diệt thế (3 khu thành đất ma, hồi phục dần — 14.9) / Bị vây giết / Quay đầu, chết như người thường / Ma chủ một phương | "Ma nô": huyết tế khai mạch |
 | **Đế Nghiệp** | Từ bùn đất ngồi lên ngai vàng — trong thế giới tu sĩ coi ngai vàng như đồ chơi | Loạn thế (thuế, đói, bắt lính, thi cử) | Lập thân (thăng quan, lập công) | Đổi Ngôi | Tranh thiên hạ (thế gia tu tiên đứng sau các phe) | Đăng cơ và cái giá (tu sĩ đòi cống nạp: giữ dân hay giữ ngôi) | Khai quốc (triều đại mang tên bạn ở kiếp sau) / Bị tru di / Phò minh chủ / Quy ẩn khi thiên hạ loạn | Bản gốc là cho phàm nhân; có linh căn thì thành "Quốc sư hộ quốc" |
 | **Phú Giáp Thiên Hạ** | Đồng tiền mở mọi cửa, trừ cửa trời | Gánh hàng đầu | Thương lộ (đường buôn, cướp, đối thủ) | Hạn Hán Trăm Năm (đầu cơ hay phát chẩn) | Thương minh (đấu thế gia, buôn với tu sĩ) | Mua trường sinh (dùng gia tài mua Khai Linh Đan, Diên Thọ Đan, tiên duyên cho con) | Phú khả địch quốc / Phá sản / Mua được đường tu tiên cho mình / Chết giàu mà cô độc | Hợp nhất với vô linh căn: hồi 5 là đường cải tạo #1 |
 | **Huyết Cừu** | Mối thù đến trước cả khi biết nói | Diệt môn (kẻ ra tay là một thế lực thật trong thế giới) | Truy dấu | Tông Chiến Chính–Ma (kẻ thù đứng ở một phe) | Sự thật (kẻ thù không hẳn ác, hoặc nhà mình từng ác) | Báo hay tha | Báo thù rồi trống rỗng / Chết trước kẻ thù / Hóa giải / Thành kẻ mình căm ghét | Báo thù bằng võ, độc, mưu, hoặc thuê người |
@@ -1476,13 +1552,83 @@ Mỗi xuất thân cần **3 cảnh mở đầu riêng** (tuổi thơ, biến c�
 | Đủ 9 Mộng Ấn nhưng chọn không phi thăng | **Kẻ gác bến mới** | Người chơi thay Người Gác Bến; kết thúc phụ |
 | Diệt thế khi đủ 9 Mộng Ấn | **Phá mộng bằng máu** | Thế giới tan; kết thúc tối |
 
-### 14.8 Dữ liệu cần cho phần cốt truyện
+### 14.8 Thời gian giữa hai kiếp
+
+**Đã có sẵn**: mỗi lần chết, thế giới trôi ngẫu nhiên 3–30 năm; màn Hết kiếp đã báo số năm. Nên "random thời gian luân hồi" không phải tính năng mới, chỉ là **nới rộng** nó.
+
+**Đề xuất phân bố**
+
+| Khoảng | Số năm | Tỉ lệ gốc | Lời ở Bến Vong Xuyên |
+|---|---|---|---|
+| Gần | 3–30 | 55% | "Mấy chục năm trôi qua bên bến." |
+| Vừa | 30–150 | 28% | "Hơn trăm năm trôi qua bên bến." |
+| Xa | 150–800 | 13% | "Mấy trăm năm trôi qua bên bến." |
+| Rất xa | 800–5.000 | 4% | "Ngàn năm nước Vong Xuyên chảy qua chân." |
+
+Điều chỉnh:
+- **3 kiếp đầu chỉ ở khoảng Gần**: người mới kịp thấy mộ mình, kẻ thù và ân nhân kiếp trước, nên hiểu được vòng nhân quả.
+- Bậc Nghiệp −3 / −4: Xa ×2, Rất xa ×3 ("chịu phạt dưới U Minh").
+- Còn tuyến Huyết thù hoặc Duyên sinh tử đang mở: 40% bị kéo về khoảng Gần ("chấp niệm kéo về").
+- Mệnh tuyến Thế Gia Vạn Đại tới hồi 5 và dòng họ còn: 50% về Gần hoặc Vừa.
+- Thêm một lựa chọn ở Bến Vong Xuyên: **"Uống canh, đi ngay"** → chỉ tung trong Gần/Vừa nhưng mất ký ức công pháp kiếp trước; **"Ngồi đợi bên bến"** → tung bình thường, giữ ký ức như hiện tại (lần đầu chọn thì mở Mộng Ấn #1).
+- Thiên Lộ Mở và Ma Chủ Phục Sinh không bị tua qua mà người chơi không biết: sau khoảng cách, Sổ tay có trang **"Sử lược"** kể các đại sự đã xảy ra khi bạn vắng mặt.
+
+**Thế giới thay đổi theo độ dài khoảng cách**
+
+| Thứ | Gần (đến 30 năm) | Vừa (đến 150) | Xa (đến 800) | Rất xa (trên 800) |
+|---|---|---|---|---|
+| Thiên kiêu | già đi như hiện tại | phần lớn đổi thế hệ; ai từ Kết Đan còn sống thành "lão quái" | gần hết đổi; Nguyên Anh trở lên còn (thọ 650 / 1.500 / 3.000) | chỉ Hóa Thần trở lên còn, thành truyền thuyết |
+| Tông môn | như cũ | mỗi thế kỷ 10% một tông suy hoặc diệt, tông mới lập | nhiều tông đổi; tông cũ thành di tích | bản đồ thế lực gần như mới; tông cũ thành phế tích để khám phá |
+| Triều đại | thường giữ | đổi 1–2 lần | đổi nhiều lần (60–120 năm một lần) | sử sách chỉ còn tên |
+| Mộ, đồ chôn | giữ | mộ phủ cỏ; mỗi thế kỷ 10% đồ chôn bị người đào | mộ thành gò; đồ chôn còn 30% | chỉ còn bia ở nơi linh khí; chỉ đồ phẩm Địa trở lên còn (thành "cổ bảo") |
+| Dòng họ | con cái còn sống | cháu chắt; mỗi thế kỷ 20% tuyệt tự | thành thế gia hoặc mất | thành truyền thuyết tổ tiên |
+| Võ phái | còn | mỗi thế kỷ 70% còn | hiếm còn | chỉ còn bí tịch thất truyền |
+| Ân / Oán / Nợ | người đó còn | người phàm đã chết → 50% chuyển sang hậu duệ, còn lại khép | chỉ còn hậu duệ hoặc tông của họ; Huyết thù có thể hóa oán hồn | chỉ còn tuyến với tu sĩ cao cảnh giới còn sống, hoặc oán hồn ngàn năm |
+| 12 đại sự | tua như thường | đại sự đến hạn tự diễn với kết cục mặc định | như Vừa, nhiều lần | như Vừa; Thiên Lộ mở đóng nhiều lần |
+| Đất ma | gần như không đổi | hồi phục theo 14.9 | hồi phục theo 14.9 | hồi phục theo 14.9 |
+
+**Ảnh hưởng tới code**
+
+| Phần | Mức sửa | Lý do |
+|---|---|---|
+| Tung khoảng thời gian | rất ít | Đã có một dòng tung 3–30 năm |
+| Tua thế giới khoảng dài | vừa | Hiện tua **từng tháng**: 5.000 năm = 60.000 vòng, mỗi tháng 3% một nơi đổi chủ → thế giới bị xáo tung và máy chậm. Cần thêm cách tua **theo thập kỷ** cho khoảng Xa / Rất xa (mỗi thập kỷ tính một lần: đổi chủ, tông suy thịnh, triều đại, đại sự) |
+| Thiên kiêu nhiều thế hệ | ít | Đã có; chỉ cần thay người chết nhiều lần thay vì một lần |
+| Ân oán chuyển sang hậu duệ / oán hồn | vừa | Luật mới khi kết kiếp |
+| Sự kiện về kiếp trước (mộ, báo ân, kẻ thù cũ, tin đồn) | ít đến vừa | Lời kể cần hai, ba biến thể theo khoảng cách; không viết cứng số năm |
+| Mệnh tuyến | không ảnh hưởng | Mệnh tuyến nằm trong một kiếp, tính từ năm đầu thai |
+| 12 đại sự | vừa | Phải theo năm tuyệt đối của thế giới, có chu kỳ và có sẵn kết cục mặc định để tự diễn khi tua |
+| Dung lượng bản lưu | ít | Sử thế giới giữ 60 dòng; thêm "Sử lược" gộp theo thế kỷ để không phình |
+
+**Cốt truyện có bị lệch dòng thời gian không?** Không, nếu giữ 3 quy tắc:
+1. Mọi sự kiện đọc **trạng thái hiện tại** của thế giới (ai còn sống, tông nào còn, triều nào cai trị), không giả định năm.
+2. Mỗi đại sự có chu kỳ và có **kết cục mặc định** khi không ai can thiệp.
+3. Lời kể dùng chữ chỉ khoảng cách ("mấy trăm năm trước") thay cho số năm cụ thể.
+
+Khoảng cách xa còn giúp cho chủ đề: quay lại sau 500 năm, tông mình từng phụng sự đã thành phế tích, triều đại mình lập chỉ còn trong sử, kẻ thù cũ đã thành lão quái — đúng tầng "mộng". Đề xuất làm cùng đợt với 12 đại sự (đợt 8); trước đó giữ 3–30 năm.
+
+### 14.9 Đất ma (bản tạm: 3 khu)
+
+- Khi mệnh tuyến Diệt Thế Ma Đồ đạt kết cục "Diệt thế", hoặc đại sự Ma Chủ Phục Sinh tự diễn mà không ai ngăn: **3 khu nhỏ** gần nơi xảy ra hóa **đất ma**, mỗi khu bắt đầu với **ma khí 100**.
+
+| Ma khí | Tên | Ảnh hưởng |
+|---|---|---|
+| 70–100 | Ma vực | Không có thôn trấn; yêu ma từ Kết Đan; tu luyện theo chính đạo −50%, ma đạo +30%; phàm nhân ở lại mỗi ngày 20% nhiễm ma khí (thương thế bậc 1, tâm ma +2) |
+| 40–70 | Đất chết | Vài trại tị nạn; yêu ma Trúc Cơ đến Kết Đan; tu luyện −25% |
+| 15–40 | Hoang địa | Làng mới lác đác; nguy hiểm cao hơn một tầng; có di tích ma vực (sự kiện riêng) |
+| dưới 15 | Phục hồi | Như thường; còn tàn tích và tin đồn |
+
+- Hồi phục: mỗi thế kỷ ma khí −6. Gần đó có tông Phật hoặc chính đạo trấn giữ: nhanh ×2; ma tông chiếm: chậm ×0,5. Trung bình khoảng 500 năm hết ma vực, khoảng 1.000 năm thành hoang địa, khoảng 1.400 năm phục hồi — trở lại sau 5.000 năm thì đã lành hẳn, chỉ còn di tích.
+- Người chơi đẩy nhanh hồi phục: Phật pháp siêu độ, Lôi pháp trừ tà, trận tịnh hóa, trồng linh mộc (mỗi việc ma khí −1 đến −5).
+- "Diệt thế toàn cõi" để dành cho sau này; dữ liệu đã có chỗ (`world.maVuc` lưu theo từng khu).
+
+### 14.10 Dữ liệu cần cho phần cốt truyện
 - Bảng thời cục: 12 đại sự (mã, tên, khoảng năm, chu kỳ, 3 giai đoạn, điều kiện, kết cục mặc định, cờ để lại).
 - Bảng mệnh tuyến: 9 mệnh tuyến × 5 hồi; khoảng **180 nút**; **36 kết cục** + "Một đời vô danh" theo 36 đạo đồ.
 - Bảng chí hướng: 10 mục (mã, tên, điều kiện toại nguyện, mệnh tuyến gợi ý).
 - Cảnh mở đầu: 57 xuất thân × 3 = **171 cảnh**.
 - Mộng Ấn: 9 mảnh + Người Gác Bến 6 hình dạng (lão chèo đò, đứa trẻ ăn mày, ni cô mù, người bán canh, lão đạo ăn xin, bà đỡ) × 2 cảnh.
-- Kỹ thuật: dùng lại hệ chuỗi đang có (`chain.paths`, `waitHours`) và schema sự kiện; thêm `kind: "arc"`; trạng thái ở `run.arc`, `world.chron`, `G.meta.mong`. Kiểm bằng `tools/test.js` (giả lập thời gian, chọn lựa chọn, lỡ hạn) — không cần bot.
+- Kỹ thuật: dùng lại hệ chuỗi đang có (`chain.paths`, `waitHours`) và schema sự kiện; thêm `kind: "arc"`; trạng thái ở `run.arc`, `world.thoiCuc`, `G.meta.mong`. Kiểm bằng `tools/test.js` (giả lập thời gian, chọn lựa chọn, lỡ hạn) — không cần bot.
 
 ---
 
@@ -1508,6 +1654,9 @@ Mỗi xuất thân cần **3 cảnh mở đầu riêng** (tuổi thơ, biến c�
 | `ROOT_FIX` | `content/rules/root-fix.js` | 15 + 3 + 1 | Bảng 5.5 | mới |
 | Vật phẩm linh căn | `content/catalog/` | 19 | Bảng 5.6 | mới |
 | `TT_DEST.vo_can` | `content/characters/tt-dest.js` | 1 | Khôi phục, bỏ dòng xoá ở core2/12 | sửa |
+| `TIEN_TE` | `content/rules/tien-te.js` | 5 loại tiền | Bảng 6.1, tỉ giá, luật mất / đóng băng | mới |
+| `THE_LUC` | `content/rules/the-luc.js` | 6 loại thế lực | 6.1.2: tên sổ, cách kiếm, cửa hàng / dịch vụ từng loại | mới |
+| `THUONG_CAC` | `content/venues/thuong-cac.js` | 20 món + 5 bậc | 6.1.3 | mới |
 | `PHAM_GIA` | `content/rules/pham-gia.js` | 37 dòng | Bảng 6.2 | mới |
 | `AN_UONG` | `content/rules/an-uong.js` | 6 trạng thái + 3 mức | Bảng 6.3 | mới |
 | `VIEC_THUE` | `content/venues/` (dịch vụ) | 14 | Bảng 6.5 | mới |
@@ -1527,6 +1676,8 @@ Mỗi xuất thân cần **3 cảnh mở đầu riêng** (tuổi thơ, biến c�
 | `TUE_CHU` | `content/text/` | thang chữ | 12.2 | mới |
 | `TUT` | `content/rules/tan-thu.js` | 30 | Bảng 13.3 | mới |
 | `THOI_CUC` | `content/world/thoi-cuc.js` | 12 | 14.4 | mới |
+| `LUAN_HOI_GAP` | `content/rules/luan-hoi-gap.js` | 4 khoảng + điều chỉnh | 14.8 | mới |
+| `MA_KHI` | `content/rules/ma-khi.js` | 4 bậc + tốc độ hồi phục | 14.9 | mới |
 | `MENH_TUYEN` | `content/events/arcs/` | 9 × 5 hồi, ~180 nút, 36 kết cục | 14.5 | mới |
 | `CHI_HUONG` | `content/rules/chi-huong.js` | 10 | 14.3 | mới |
 | `MONG_AN` | `content/rules/mong-an.js` | 9 | 14.7 | mới |
@@ -1569,6 +1720,8 @@ Mỗi xuất thân mới cần: mã, tên, biểu tượng, tác dụng (`fx`), 
 | | `rootKnown` | 0/1 (đã trắc linh) | 1 |
 | | `rootFix` | tiến độ cải tạo đang làm | null |
 | | `bac` | số văn | 0 |
+| | `chMap` | { mã thế lực: số cống hiến, cờ đóng băng } | `r.ch` cũ → sổ của tông đang ở |
+| | `thuongLenh`, `thuongTong` | số thẻ đang có, tổng từng nhận (bậc Thưởng Các) | 0, 0 |
 | | `food`, `foodLv`, `hunger` | số | đủ ăn |
 | | `fatigue` | số giờ làm trong ngày | 0 |
 | | `family` | mảng người thân | [] |
@@ -1584,11 +1737,13 @@ Mỗi xuất thân mới cần: mã, tên, biểu tượng, tác dụng (`fx`), 
 | | `gacBen` | số lần nhận ra Người Gác Bến | 0 |
 | | `tuyenCarry` | tuyến mang sang kiếp sau | [] |
 | | `tut25` | cờ tân thủ tốt nghiệp | 0 |
-| `world` | `chron` | trạng thái 12 đại sự | sinh mới theo năm hiện tại |
+| `world` | `thoiCuc` | trạng thái 12 đại sự | sinh mới theo năm hiện tại |
+| | `suLuoc` | sử gộp theo thế kỷ | [] |
+| | `thuongCac` | hàng đã bán trong tháng ở từng thành | {} |
 | | `lineage` | dòng họ của người chơi | [] |
 | | `vophai` | võ phái do người chơi lập | [] |
 | | `dynasty` | triều đại hiện tại và lịch sử | sinh từ `quoc` |
-| | `maVuc` | ô/khu thành ma vực | [] |
+| | `maVuc` | danh sách khu đất ma: { khu, ma khí } | [] |
 
 ### 16.4 Nội dung cần viết (theo schema sự kiện, giọng văn 3.4)
 
@@ -1614,11 +1769,13 @@ Mỗi xuất thân mới cần: mã, tên, biểu tượng, tác dụng (`fx`), 
 ### 16.5 Giao diện cần làm (đều ở `src/react`, màn mới đăng ký trong `main.jsx`)
 - Bảng Nhân vật: dòng **Đạo Hướng** (chữ + thanh hai màu), dòng **Nhân Quả** (chữ), thẻ **Đạo đồ**, dòng "Theo năm tháng" trong tooltip khí vận/thể chất/mệnh cách, linh căn "chưa trắc".
 - Thẻ đầu thai: "Linh căn: chưa trắc" (kiếp 2+), câu gợi ý mơ hồ khi có Thiên nhãn.
-- HUD: tiền bạc bên cạnh linh thạch; trạng thái ăn (biểu tượng bát cơm).
+- HUD: ô **Hầu bao** (linh thạch + bạc; bấm mở bảng cống hiến từng thế lực và Thưởng Lệnh); trạng thái ăn (biểu tượng bát cơm).
+- Cửa hàng **Thưởng Các** ở thẻ địa điểm của thành có bảng treo thưởng; cửa hàng cống hiến riêng của từng thế lực.
+- Sổ tay: trang **Sử lược** (đại sự đã xảy ra khi vắng mặt).
 - Sổ tay: thẻ **Nhân quả**, thẻ **Mệnh thư** (mệnh tuyến + chí hướng + thời cục đang diễn ra).
 - Khung **Tân thủ** (13.2).
 - Màn Hết kiếp: Quả chín, mệnh tuyến, Mộng Ấn, văn bia mới.
-- Bến Vong Xuyên: hội thoại Người Gác Bến, Mộng Ấn đã có.
+- Bến Vong Xuyên: hội thoại Người Gác Bến, Mộng Ấn đã có, hai lựa chọn "Uống canh, đi ngay" / "Ngồi đợi bên bến", lời báo khoảng thời gian bằng chữ.
 - Bảng chuẩn bị đột phá: lời báo kiếp dữ / công đức hộ thể; tỉ lệ bằng chữ.
 - Thẻ địa điểm: nhóm nút "Mưu sinh".
 
@@ -1649,6 +1806,10 @@ Mỗi xuất thân mới cần: mã, tên, biểu tượng, tác dụng (`fx`), 
 | `kiep_nghiep` | Uy lực, số đạo, loại kiếp, thưởng, phần nghiệp tiêu theo bảng 9.7; công đức hộ thể |
 | `tue_bien` | Qua năm chạy đúng một lần mỗi tuổi; trần; Hỏa Linh Chi Thể hồi không vượt đầy; không cộng dồn hai nguồn cùng loại |
 | `com_ao` | Đói theo ngày; chết đói ngày 15; Trúc Cơ tịch cốc |
+| `tien_te` | Cống hiến tông A không tiêu được ở tông B; trục xuất mất hết; tự rời thì đóng băng; bản lưu cũ `r.ch` vào đúng sổ |
+| `thuong_lenh` | Thẻ theo bậc nhiệm vụ; bỏ / trễ −1; bậc Thưởng Các không giảm khi tiêu; giới hạn tháng theo thành |
+| `khoang_luan_hoi` | 3 kiếp đầu chỉ khoảng Gần; khoảng Xa dùng tua theo thập kỷ (không chạy 60.000 vòng); tuyến người phàm đã chết chuyển hậu duệ hoặc khép |
+| `ma_khi` | Đất ma sinh 3 khu; ma khí giảm theo thế kỷ; đổi bậc đúng ngưỡng |
 | `tan_thu` | Chỉ kiếp 1; A tuần tự; B tối đa 3; bỏ qua không có thưởng; tốt nghiệp từ 25 |
 | `luu_cu` | Bản lưu có `karma` chuyển đúng sang Chính khí/Tà khí/Phúc/Nghiệp |
 | `menh_tuyen` | Lỡ hạn → tự diễn → nhánh "Người đứng ngoài", không kẹt; chuyển mệnh tuyến một lần |
@@ -1665,12 +1826,12 @@ Bot chỉ dùng khi người dùng yêu cầu (đo độ khó Phần 4).
 |---|---|---|
 | 1 | Tách `karma` → Đạo Hướng + Nhân Quả, bảng hành vi, chuyển bản lưu, thay mọi chỗ dùng, thiên kiếp công bằng | Mọi phần sau dựa vào hai thước đo này |
 | 2 | Vô linh căn, tung một lần, giấu thẻ, trắc linh, khôi phục Vô Căn; móc "qua năm" + tuế biến | Cốt lõi yêu cầu 1–4, 10 |
-| 3 | Tiền bạc, cái ăn, việc làm thuê, gia đình cơ bản | Cần cho đời vô linh căn |
+| 3 | Năm loại tiền (bạc, cống hiến theo thế lực, Thưởng Lệnh + Thưởng Các), cái ăn, việc làm thuê, gia đình cơ bản | Cần cho đời vô linh căn |
 | 4 | Tân thủ 30 nhiệm vụ | Chỉ dựa vào tính năng đã có + đợt 1 |
 | 5 | Võ đạo + 5 phàm đạo đầu (Nông dân, Ngư dân, Thương nhân, Võ giả, Lang trung) | Cho vô linh căn có đời sống |
 | 6 | 15 đường cải tạo linh căn | Cần đợt 2, 3, 5 |
 | 7 | 12 phàm đạo còn lại; tu đạo và pháp môn theo cụm (kiếm/thần thức → trận/phù → ngự thú/triệu hoán → huyết/hồn/thôn phệ/thi → phật/lôi/nho → cổ/độc/khôi lỗi/âm/huyễn/ẩn sát/thiên cơ) | Khối lớn nhất |
-| 8 | Thời cục 12 đại sự + 2 mệnh tuyến đầy đủ làm mẫu (Phi Thăng Lộ, Thế Gia Vạn Đại), rồi 7 mệnh tuyến còn lại, 12 xuất thân mới, cảnh mở đầu | Cần đạo đồ để vai trò có nghĩa |
+| 8 | Thời gian luân hồi mở rộng + tua theo thập kỷ + đất ma; thời cục 12 đại sự + 2 mệnh tuyến đầy đủ làm mẫu (Phi Thăng Lộ, Thế Gia Vạn Đại), rồi 7 mệnh tuyến còn lại, 12 xuất thân mới, cảnh mở đầu | Cần đạo đồ để vai trò có nghĩa |
 | 9 | Đại Mộng, Mộng Ấn, kết thúc thật, văn bia | Đỉnh của toàn bộ |
 | 10 | Chỉnh độ khó Phần 4 | Chỉ khi người dùng cho chạy bot đo |
 
@@ -1678,9 +1839,14 @@ Bot chỉ dùng khi người dùng yêu cầu (đo độ khó Phần 4).
 
 ## 19. Những điểm cần bạn xác nhận
 
-1. **Giấu linh căn trên thẻ đầu thai từ kiếp 2** (để không né được vô linh căn). Đề xuất: đồng ý.
-2. **Thêm tiền phàm (bạc, văn)** — đổi giá ở mọi quán phàm. Đề xuất: đồng ý, vì không có nó thì không tả được "kiếm ngày ba bữa".
-3. **Phi thăng khi chưa tỉnh mộng vẫn là "Mộng trong mộng"** (kết thúc thật cần 9 Mộng Ấn). Đề xuất: đồng ý — khớp chủ đề "thức tỉnh rồi mới thoát".
-4. **Kết cục Diệt thế làm thế giới các kiếp sau thành đất ma** (rất nặng, nhưng đúng "thế giới nhớ"). Có thể giảm thành "ba khu thành ma vực".
-5. Mức **45%** vô linh căn và khoảng **30–65%**.
-6. Lời giải của Đại Mộng (Mộng Ấn #9: vòng mộng do chấp niệm "không muốn chết" của chúng sinh dệt nên).
+**Đã chốt**
+- Thêm tiền tệ: bạc, cống hiến riêng từng thế lực, Thưởng Lệnh đổi hàng ở Thưởng Các (Phần 6.1).
+- Diệt thế tạm thời = 3 khu thành đất ma, hồi phục dần (14.9).
+- Mức 45% vô linh căn, khoảng 30–65%.
+- Lời giải Đại Mộng (Mộng Ấn #9).
+
+**Còn mở**
+1. Cách xử lý linh căn trên thẻ đầu thai: A (giấu + dùng chung, đề xuất), B (dùng chung nhưng hiện rõ) hay C (giữ như cũ, nâng tỉ lệ mỗi thẻ). Giải thích ở 5.3.
+2. Phi thăng khi chưa đủ 9 Mộng Ấn là "Mộng trong mộng" (vẫn luân hồi). Câu này chưa được trả lời; file tạm giữ đề xuất.
+3. Thời gian luân hồi: khoảng xa nhất 5.000 năm và tỉ lệ 55 / 28 / 13 / 4% (14.8) có được không.
+4. Lựa chọn mới ở Bến Vong Xuyên: "Uống canh, đi ngay" / "Ngồi đợi bên bến" (14.8).
