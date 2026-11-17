@@ -3,10 +3,10 @@
 import { PS } from '../html';
 import { Ic, tip } from '../chung';
 
-function Nut({ act, arg, icon, t, on, dis, cls }) {
+function Nut({ act, arg, icon, t, on, dis, cls, l }) {
   return (
     <button className={'mb' + (on ? ' on' : '') + (cls ? ' ' + cls : '')} data-act={act} data-arg={arg} disabled={!!dis} {...tip(t)}>
-      <Ic n={icon} />
+      <Ic n={icon} />{l && <span className="mb-l">{l}</span>}
     </button>
   );
 }
@@ -36,17 +36,17 @@ export function NutBanDo() {
   return <>
     <div className="mleft wb"><DaiVetThuong />{dev && <Nut act="devOpen" icon="bolt" cls="dev" t="Dev test: thử hiệu ứng" />}</div>
     <div className="mright">
-      <Nut act="gridT" icon="hex" t={CFG.grid ? 'Ẩn lưới ô' : 'Hiện lưới ô'} on={CFG.grid} />
-      <Nut act="legendOpen" icon="list" t="Chú giải ký hiệu trên bản đồ" on={UI.panel === 'more' && UI.tab.more === 'legend'} />
-      {!PS.isPham() && <Nut act="tkUse" icon="eye" on={PS.tkActive()} dis={!!PS.tkWhy() && !PS.tkActive()} t={'Phóng thần thức: tầm nhìn gấp ' + PS.TK_MUL + ' lần trong ' + PS.durH(PS.TK_DUR) + ', tốn ' + PS.TK_MP + '% linh lực, chờ ' + PS.TK_CD + ' ngày mới dùng lại.\nTầm hiện tại: ' + PS.senseR() + (PS.tkWhy() ? '\n' + PS.tkWhy() : '')} />}
-      <Nut act="zoomAll" icon="globe" t="Thu nhỏ hết cỡ: xem cả bản đồ" />
-      <Nut act="center" icon="target" t="Về chỗ ngươi" />
+      <Nut act="gridT" icon="hex" l="Lưới ô" t={CFG.grid ? 'Ẩn lưới ô' : 'Hiện lưới ô'} on={CFG.grid} />
+      <Nut act="legendOpen" icon="list" l="Chú giải" t="Chú giải ký hiệu trên bản đồ" on={UI.panel === 'more' && UI.tab.more === 'legend'} />
+      {!PS.isPham() && <Nut act="tkUse" icon="eye" l="Thần thức" on={PS.tkActive()} dis={!!PS.tkWhy() && !PS.tkActive()} t={'Phóng thần thức: tầm nhìn gấp ' + PS.TK_MUL + ' lần trong ' + PS.durH(PS.TK_DUR) + ', tốn ' + PS.TK_MP + '% linh lực, chờ ' + PS.TK_CD + ' ngày mới dùng lại.\nTầm hiện tại: ' + PS.senseR() + (PS.tkWhy() ? '\n' + PS.tkWhy() : '')} />}
+      <Nut act="zoomAll" icon="globe" l="Toàn đồ" t="Thu nhỏ hết cỡ: xem cả bản đồ" />
+      <Nut act="center" icon="target" l="Về chỗ" t="Về chỗ ngươi" />
     </div>
     <div className="mbl">
-      <Nut act="panel" arg="craft" icon="flask" t="Luyện chế: luyện đan, luyện khí từ vật liệu" on={UI.panel === 'craft'} dis={r.moving} />
-      <Nut act="bagOpen" icon="bag" t="Túi đồ" on={UI.panel === 'char' && UI.tab.char === 'bag'} />
-      <Nut act="hudBq" icon="seat" cls={brk ? 'glow' : ''} dis={bqNo} t={bqNo || (brk ? 'Bế quan · tu vi viên mãn: vào để đột phá' : 'Bế quan tu luyện ngay tại đây')} />
-      <Nut act="cgOpen" icon="yin" on={!!(UI.modal && /cg/.test(UI.modal.k || ''))} t="Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá" />
+      <Nut act="panel" arg="craft" icon="flask" l="Luyện chế" t="Luyện chế: luyện đan, luyện khí từ vật liệu" on={UI.panel === 'craft'} dis={r.moving} />
+      <Nut act="bagOpen" icon="bag" l="Túi đồ" t="Túi đồ" on={UI.panel === 'char' && UI.tab.char === 'bag'} />
+      <Nut act="hudBq" icon="seat" l="Bế quan" cls={brk ? 'glow' : ''} dis={bqNo} t={bqNo || (brk ? 'Bế quan · tu vi viên mãn: vào để đột phá' : 'Bế quan tu luyện ngay tại đây')} />
+      <Nut act="cgOpen" icon="yin" l="Cảnh giới" on={!!(UI.modal && /cg/.test(UI.modal.k || ''))} t="Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá" />
     </div>
   </>;
 }
