@@ -1626,3 +1626,14 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .hud-tv{bottom:4px!important}
   .hud-ll{bottom:0!important}
 }
+
+/* hiệu ứng đột phá / xung kích: ẩn mọi bảng, hộp thoại, thẻ nổi, thông báo — chỉ còn lớp hiệu ứng */
+:root[data-asc] #panel,:root[data-asc] #full,:root[data-asc] #toast,:root[data-asc] #tip,:root[data-asc] #dock,:root[data-asc] #dock *,:root[data-asc] .hud-tv,:root[data-asc] .hud-ll,:root[data-asc] .hud-stats,:root[data-asc] .hud-ls{display:none!important}
+/* màn báo thành công trên máy tính: giãn rộng, chỉ số chia 3-4 cột */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .asc-in.res{width:min(1180px,92vw);padding:40px 48px 44px}
+  .asc-in.res .asc-img{height:210px}
+  .asc-in.res .asc-st{max-width:860px;margin:0 auto 14px}
+  .asc-in.res .asc-diff{grid-template-columns:repeat(4,1fr);gap:10px 28px;margin:22px 0 38px}
+  .asc-in.res .htp{grid-template-columns:repeat(3,1fr)}
+}

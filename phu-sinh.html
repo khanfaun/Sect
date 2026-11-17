@@ -1637,6 +1637,17 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .hud-ll{bottom:0!important}
 }
 
+/* hiệu ứng đột phá / xung kích: ẩn mọi bảng, hộp thoại, thẻ nổi, thông báo — chỉ còn lớp hiệu ứng */
+:root[data-asc] #panel,:root[data-asc] #full,:root[data-asc] #toast,:root[data-asc] #tip,:root[data-asc] #dock,:root[data-asc] #dock *,:root[data-asc] .hud-tv,:root[data-asc] .hud-ll,:root[data-asc] .hud-stats,:root[data-asc] .hud-ls{display:none!important}
+/* màn báo thành công trên máy tính: giãn rộng, chỉ số chia 3-4 cột */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .asc-in.res{width:min(1180px,92vw);padding:40px 48px 44px}
+  .asc-in.res .asc-img{height:210px}
+  .asc-in.res .asc-st{max-width:860px;margin:0 auto 14px}
+  .asc-in.res .asc-diff{grid-template-columns:repeat(4,1fr);gap:10px 28px;margin:22px 0 38px}
+  .asc-in.res .htp{grid-template-columns:repeat(3,1fr)}
+}
+
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function o(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=o(d);fetch(d.href,p)}})();var ni={exports:{}},Us={},ti={exports:{}},te={};/**
  * @license React
@@ -10848,7 +10859,8 @@ function rxv(name){return {rx:name};}
 // Hộp thoại: lớp ngoài cùng. Khí vận (asc) và chọn tiên thiên (kvPick) tự mở; còn lại theo UI.modal.k.
 function modalHTML(){const m=UI.modal,r=G.run;
   const asc=r&&r.asc&&G.screen==='map'&&!(r.scene&&r.scene.type==='combat');
-  if(asc){if(!UI.modal||UI.modal.k!=='asc')UI.modal={k:'asc'};document.documentElement.dataset.asc='1';return {rx:'HopThoai:asc'};}
+  if(asc){if(!UI.modal||UI.modal.k!=='asc')UI.modal={k:'asc'};UI.panel=null;UI.sel=null;UI.cell=null;UI.pop=null;UI.hold=null;UI.confirm=null;UI.menu=null; // đột phá / xung kích: đóng hết bảng và hộp thoại khác trước khi chạy hiệu ứng
+    document.documentElement.dataset.asc='1';return {rx:'HopThoai:asc'};}
   delete document.documentElement.dataset.asc;if(UI.modal&&UI.modal.k==='asc')UI.modal=null;
   if(!UI.modal&&r&&r.kvPick&&(!r.scene||r.scene.type==='place')&&G.screen==='map')return {rx:'HopThoai:kvPick'};
   if(UI.modal&&window.RX&&RX.has('HopThoai:'+UI.modal.k))return {rx:'HopThoai:'+UI.modal.k};
