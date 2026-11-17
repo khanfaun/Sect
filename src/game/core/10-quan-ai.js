@@ -1,58 +1,51 @@
 // ---------------- QUAN ẢI ----------------
 function openPass(n){
   const r=G.run;const k=r.region+1;if(k>4)return;
-  r.scene={type:'pass',id:n.id,back:n.id,k,text:T(['Cửa ải xây bằng đá xanh, cao chín trượng. Lính gác khoanh tay nhìn ngươi từ trên xuống dưới: “Đi đâu? Giấy tờ đâu?”','Quan ải nằm giữa hai vách núi, chỉ một lối đi. Bên kia là {$reg}. Kẻ gác ải không có ý định để ai qua dễ dàng.'],{reg:REG[k].n}),res:null};
+  r.scene={type:'pass',id:n.id,back:n.id,k,text:T([contentText("core_10-quan-ai_js.openPass.001"),contentText("core_10-quan-ai_js.openPass.002")],{reg:REG[k].n}),res:null};
 }
 function passOpts(){
   const r=G.run,sc=r.scene,k=sc.k;const o=[];
   const gp=price(45);const an=r.seeds.findIndex(s=>s.t==='an');
-  o.push({a:'realm',i:'☯️',l:'Lấy tu vi mà qua',ok:r.realm>=k,tip:'Cảnh giới từ '+REALM[k]+' trở lên thì không ai dám cản'});
-  o.push({a:'pass',i:'🎫',l:'Trình lệnh bài thông quan',ok:r.passes.includes(k),tip:'Lệnh bài rơi từ thủ lĩnh vùng, hoặc mua ở đấu giá'});
-  o.push({a:'guide',i:'🧭',l:'Thuê người dẫn đường lén qua',ok:r.st>=gp,tip:'Tốn 💎'+gp,x:'💎'+gp});
-  if(an>=0)o.push({a:'favor',i:'🤝',l:'Nhờ '+r.seeds[an].ten+' dẫn đường',ok:true,tip:'Dùng một ân tình đã gieo'});
-  o.push({a:'fight',i:'⚔️',l:'Liều mạng xông qua',ok:true,tip:'Đánh một trận với kẻ gác ải rất mạnh'});
+  o.push({a:'realm',i:'☯️',l:contentText("core_10-quan-ai_js.passOpts.003"),ok:r.realm>=k,tip:contentText("core_10-quan-ai_js.passOpts.004")+REALM[k]+contentText("core_10-quan-ai_js.passOpts.005")});
+  o.push({a:'pass',i:'🎫',l:contentText("core_10-quan-ai_js.passOpts.006"),ok:r.passes.includes(k),tip:contentText("core_10-quan-ai_js.passOpts.007")});
+  o.push({a:'guide',i:'🧭',l:contentText("core_10-quan-ai_js.passOpts.008"),ok:r.st>=gp,tip:contentText("core_10-quan-ai_js.passOpts.009")+gp,x:'💎'+gp});
+  if(an>=0)o.push({a:'favor',i:'🤝',l:'Nhờ '+r.seeds[an].ten+contentText("core_10-quan-ai_js.passOpts.010"),ok:true,tip:contentText("core_10-quan-ai_js.passOpts.011")});
+  o.push({a:'fight',i:'⚔️',l:contentText("core_10-quan-ai_js.passOpts.012"),ok:true,tip:contentText("core_10-quan-ai_js.passOpts.013")});
   return o;
 }
 function passAct(a){
   const r=G.run,sc=r.scene;if(!sc||sc.type!=='pass')return;const o=passOpts().find(x=>x.a===a);if(!o||!o.ok)return;
   if(a==='guide'){r.st-=price(45);}
   if(a==='favor'){const i=r.seeds.findIndex(s=>s.t==='an');r.seeds.splice(i,1);}
-  if(a==='fight'){startCombat({k:'human',m:1.6,n:'Tướng gác ải',sub:'Kẻ giữ quan ải',elite:1},{kind:'cross',k:sc.k});return;}
+  if(a==='fight'){startCombat({k:'human',m:1.6,n:contentText("core_10-quan-ai_js.passAct.014"),sub:contentText("core_10-quan-ai_js.passAct.015"),elite:1},{kind:'cross',k:sc.k});return;}
   doCross(sc.k,a);
 }
 function doCross(k,how){
   const r=G.run;const mo=CROSS_M[k];
   advanceTime(mo*HM);if(!G.run)return;
   r.region=k;const R0=regionOf(k);r.moving=null;arrive(R0.entry);r.maxRegion=Math.max(r.maxRegion||0,k);
-  log(`Vượt ải, tới ${REG[k].n}.`);bio(`Năm ${Math.floor(r.age)} tuổi, vượt ải tới ${REG[k].n}.`);
-  r.scene={type:'region',text:T(REG[k].intro,baseV()),sub:`Đường đi mất ${mo} tháng`};
+  log(contentText("core_10-quan-ai_js.doCross.016", [REG[k].n]));bio(contentText("core_10-quan-ai_js.doCross.017", [Math.floor(r.age),REG[k].n]));
+  r.scene={type:'region',text:T(REG[k].intro,baseV()),sub:contentText("core_10-quan-ai_js.doCross.018", [mo])};
 }
 
 function forceTamma(){
   const r=G.run;const v=baseV();
-  r.scene={type:'event',id:'tam_ma_xam',v,story:['Tâm ma đã lớn tới mức không thể đè nén. Đêm ấy, nó bước ra khỏi thân thể ngươi, khoác khuôn mặt của ngươi, và mỉm cười.'],cur:['force'],phase:'choose',chips:[],back:r.lastBack!=null?r.lastBack:null};
+  r.scene={type:'event',id:'tam_ma_xam',v,story:[contentText("core_10-quan-ai_js.forceTamma.019")],cur:['force'],phase:'choose',chips:[],back:r.lastBack!=null?r.lastBack:null};
 }
-const ENC_T={
-  thu:['{mo} Bụi cây rung lên. {$e} hiện ra, mắt đăm đăm nhìn ngươi.','Mùi tanh hôi xộc tới trước khi ngươi kịp thấy nó. {$e} chặn ngay giữa lối.','{$canh} Yêu khí ập tới sát bên. {$e} đã theo dấu ngươi từ lâu.','Đàn chim vụt bay. {$e} lao ra từ chỗ tối, nhắm thẳng vào ngươi.','Ngươi giẫm phải lãnh địa của {$e}. Nó không định để ngươi đi.','{$canh} Trên mặt đất có dấu vết còn mới. Rồi {$e} xuất hiện.'],
-  nhan:['“Đứng lại!” {$e} chặn đường, ánh mắt dán vào túi trữ vật của ngươi.','{$e} từ trên cây nhảy xuống, cười nhạt: “Giao đồ ra, ta cho ngươi chết toàn thây.”','Có kẻ bám theo ngươi đã ba ngày. Hôm nay, {$e} không giấu nữa.','{$canh} {$e} ngồi chờ sẵn ở ngã ba, như biết ngươi sẽ đi qua.','“{$p.tt}, giết ngươi cũng chẳng oan đâu.” {$e} nói, giọng như bàn chuyện thời tiết.','{mo} Ngươi vừa dừng chân thì {$e} đã chắn trước mặt, tay đặt lên chuôi binh khí.'],
-  // người không phải phường cướp (đệ tử chính đạo, võ tăng, kiếm khách, đạo sĩ): động thủ vì hiểu lầm, truy bắt hay thử tài, không đòi mãi lộ
-  nhanChinh:['{$e} chặn ngươi lại, mắt nhìn chằm chằm: “Trên người ngươi có mùi huyết khí. Theo ta về tra hỏi!” Chưa kịp phân trần, đòn đã tới.','{mo} {$e} đứng chắn giữa đường, ôm quyền: “Nghe danh đã lâu, xin chỉ giáo vài chiêu.” Ánh mắt kẻ này chẳng có chút gì là nương tay.','{$canh} {$e} đang truy một kẻ bỏ trốn, thấy ngươi liền quát: “Đồng bọn của hắn?” rồi xuất thủ.','{$e} rút binh khí: “Có kẻ lạ phá cấm chế quanh đây mấy hôm nay. Là ngươi?” Không đợi ngươi trả lời, kiếm quang đã lóe lên.'],
-  quy:['Nhiệt độ hạ xuống đột ngột, hơi thở ngươi hóa thành sương. {$e} trôi ra từ bóng tối.','{mo} Tiếng khóc than vẳng tới, càng lúc càng gần. Rồi {$e} hiện ra, ngay sau lưng ngươi.','Đuốc trong tay ngươi tắt phụt. Khi thắp lại, {$e} đã đứng đó.','{$canh} Có tiếng cười khanh khách. {$e} ngồi vắt vẻo trên cành cây chết, nhìn ngươi.'],
-  vat:['Mặt đất rung lên. {$e} từ từ chuyển động, như vừa tỉnh dậy sau giấc ngủ ngàn năm.','Không tiếng động, không dấu hiệu. {$e} đã ở đó, chặn đường ngươi.','{$canh} Từ khe nứt hư không, {$e} chui ra.'],
-};
+// Bảng ENC_T: content/narration/enc-t.js
 function sceneBack(){const r=G.run,sc=r.scene;if(!sc)return null;if(sc.type==='place')return sc.id;return sc.back!=null?sc.back:null;}
 function encounter(o){
   const r=G.run;const back=sceneBack();const en=o.en||mkEnemy({elite:o.type==='elite'});
   const v=baseV();v.e=en.n;
   let text=T(encLawful(en)?ENC_T.nhanChinh:(ENC_T[en.f]||ENC_T.vat),v);
-  if(o.type==='elite')text+=' '+T(['Khí tức của nó đè nặng lên vai ngươi. Kẻ này mạnh hơn hẳn những gì ngươi từng gặp.','Ngươi cảm thấy tử khí. Trận này không dễ.','Uy áp tỏa ra khiến cỏ cây quanh đó rạp xuống.']);
+  if(o.type==='elite')text+=' '+T([contentText("core_10-quan-ai_js.encounter.020"),contentText("core_10-quan-ai_js.encounter.021"),contentText("core_10-quan-ai_js.encounter.022")]);
   r.scene={type:'enc',en,elite:o.type==='elite',text,v,back};
 }
 function encAct(a){
   const r=G.run,sc=r.scene;
   if(a==='fight'){startCombat({pre:sc.en,elite:sc.elite},{kind:'node',quest:sc.quest});return;}
-  if(a==='sneak'){const ok=R()<encSneak(sc);if(ok){sc.res=T(['Ngươi nín thở, lùi vào bóng tối. Nó đi qua, không phát hiện ra.','Ngươi đi vòng qua một quãng xa. Thoát được.','Ngươi ẩn mình sau tảng đá cho tới khi bóng nó khuất hẳn.']);sc.done=1;}else{sc.failSneak=1;encAct('fight');clog(G.run.scene,'Bị phát hiện!','en');}return;}
-  if(a==='pay'){const c=Math.max(1,Math.round(12*SC[rT()]));if(r.st<c)return;r.st-=c;sc.res=T(['Ngươi ném túi linh thạch qua. {$e} cân thử, cười khẩy rồi tránh đường.','“Biết điều đấy.” {$e} cất linh thạch, phẩy tay cho ngươi đi.'],{e:sc.en.n});sc.paid=c;sc.done=1;return;}
+  if(a==='sneak'){const ok=R()<encSneak(sc);if(ok){sc.res=T([contentText("core_10-quan-ai_js.encAct.023"),contentText("core_10-quan-ai_js.encAct.024"),contentText("core_10-quan-ai_js.encAct.025")]);sc.done=1;}else{sc.failSneak=1;encAct('fight');clog(G.run.scene,contentText("core_10-quan-ai_js.encAct.026"),'en');}return;}
+  if(a==='pay'){if(encLawful(sc.en))return false;const c=Math.max(1,Math.round(12*SC[rT()]));if(r.st<c)return;r.st-=c;sc.res=T([contentText("core_10-quan-ai_js.encAct.027"),contentText("core_10-quan-ai_js.encAct.028")],{e:sc.en.n});sc.paid=c;sc.done=1;return;}
 }
 // kẻ chặn đường có phải phường cướp bóc không: đệ tử tông chính đạo, Phật môn, võ tăng, kiếm khách, đạo sĩ thì không
 function encLawful(en){if(!en||en.f!=='nhan')return false;if(['votang','kiemtu','phusu'].includes(en.k))return true;
@@ -69,7 +62,7 @@ function bossFight(){startCombat('boss',{kind:'boss'});}
 function price(base){const fx=aggFx();return Math.max(1,Math.round(base*SC[rT()]*(1-Math.min(40,fx.shopP||0)/100)));}
 function openShop(n){
   const r=G.run;const back=sceneBack();const a=npc('thuong');const v=Object.assign(baseV(),{a});
-  const text=!n?T(['{$a.ten} lật tấm bạt, bày từng món lên mặt hòm: “{$a.goi} xem đi, đường xa nên giá có nhỉnh hơn chút.”','Hàng hóa xếp trên mấy cỗ xe, mùi da thuộc lẫn mùi hương liệu. {$a.ten} gõ gõ nắp hòm: “Món nào cũng có lai lịch.”'],v):T(['{$a.ten}, {$a.look}, xoa tay cười: “{$a.goi} cần gì? Hàng ở đây không giả.”','Tiệm tạp hóa nhỏ, hàng bày lộn xộn. {$a.ten} ngáp dài: “Xem thoải mái. Mua thì trả tiền.”','Chi nhánh Vạn Bảo Thương Hội. Tiểu nhị cúi chào tới tận đất, mắt liếc túi trữ vật của ngươi.','Một tán tu bày sạp ven đường, vừa thấy ngươi đã mời mọc rối rít.','Phường thị đông nghịt. Ngươi chen vào một sạp hàng có tấm biển viết: “Không trả giá.”'],v);
+  const text=!n?T([contentText("core_10-quan-ai_js.openShop.029"),contentText("core_10-quan-ai_js.openShop.030")],v):T([contentText("core_10-quan-ai_js.openShop.031"),contentText("core_10-quan-ai_js.openShop.032"),contentText("core_10-quan-ai_js.openShop.033"),contentText("core_10-quan-ai_js.openShop.034"),contentText("core_10-quan-ai_js.openShop.035")],v);
   const m=Math.floor(W().t/HM);
   if(n&&n.shop&&n.shop.m===m&&n.shop.kiep===r.kiep){r.scene={type:'shop',text,items:n.shop.items,heal:n.shop.heal,back,node:n.id};return;}
   const items=[];
@@ -86,48 +79,38 @@ function buy(i){
   const r=G.run,sc=r.scene;if(sc.type!=='shop')return;const it=sc.items[i];if(!it||it.sold||r.st<it.p)return;
   if(it.k==='pill'&&r.pills.length>=S().pillMax)return;
   r.st-=it.p;it.sold=1;
-  if(it.k==='pill')gainPill(it.id,it.q);else if(it.k==='skill')gainSkill(it.id);else if(it.k==='pass'){if(!r.passes.includes(it.reg))r.passes.push(it.reg);log(`Mua được ${it.n}.`);}else{r.relics.push(it.rel);clampHp();log(`Mua được ${it.rel.name}.`);}
+  if(it.k==='pill')gainPill(it.id,it.q);else if(it.k==='skill')gainSkill(it.id);else if(it.k==='pass'){if(!r.passes.includes(it.reg))r.passes.push(it.reg);log(contentText("core_10-quan-ai_js.buy.036", [it.n]));}else{r.relics.push(it.rel);clampHp();log(contentText("core_10-quan-ai_js.buy.037", [it.rel.name]));}
   if(r.pendingSkill){r.scene={type:'swap',id:r.pendingSkill,back:'shop',shop:sc};}
 }
 function healBuy(){const r=G.run,sc=r.scene;if(r.st<sc.heal)return;r.st-=sc.heal;const s=S();r.hp=s.maxHp;r.mp=s.maxMp;sc.healed=1;}
 
 // ---------------- ĐỘNG PHỦ ----------------
-const REST_T={
-  tinh:['Ngươi ngồi xếp bằng, vận khí một chu thiên. Mệt mỏi tan dần như sương dưới nắng.','Gió nhẹ, lá rơi. Ngươi điều tức nửa ngày, thương thế lành quá nửa.','Một nén nhang, rồi hai nén. Hơi thở ngươi dài ra, chậm lại, hòa vào tiếng côn trùng.'],
-  bqTown:['Ngươi thuê một gian phòng sau khách điếm, cài then, ngồi xếp bằng. Tiếng rao ngoài phố xa dần rồi tắt hẳn.','Ngươi đóng cửa phòng trọ, dặn chủ quán đừng gõ cửa. Ngày tháng trôi qua như nước chảy dưới cầu.','Ngươi mở mắt, bên ngoài đã đổi mùa mấy lượt. Chủ trọ nhìn ngươi như nhìn người từ cõi khác về.','Bế quan lần này ngươi mơ rất nhiều. Tỉnh dậy, ngoài cửa sổ phố xá vẫn ồn ã như chưa từng có ai ngồi đó.'],
-  bq:['Ngươi bố trí cấm chế, ngồi vào chỗ sâu nhất của động phủ. Ngày tháng trôi qua như nước chảy dưới cầu.','Đá phủ rêu, rêu khô rồi lại xanh. Ngươi mở mắt, bên ngoài đã đổi mùa mấy lượt.','Bế quan lần này ngươi mơ rất nhiều. Có giấc mơ là kiếp trước, có giấc mơ là kiếp sau.','Linh khí trong động bị ngươi hút cạn, vách đá bạc trắng như vôi. Ngươi đứng dậy, xương cốt kêu răng rắc.','Ngươi quên cả ngày đêm. Lúc xuất quan, có con chim đã làm tổ trên vai.'],
-  bqint:['Đang ngồi thì có động, đành xuất quan giữa chừng. Có kẻ tới trước chỗ ngươi ngồi.','Cấm chế vỡ tan. Ngươi bừng mắt: kẻ xâm nhập đã đứng ngay cửa động.'],
-  bt:[['Linh khí trong đan điền ngưng tụ thành một đài sen, vững như núi. Đạo cơ đã thành.','Ngươi nghe trong người có tiếng nổ nhẹ như măng mọc. Rồi mọi thứ lắng lại. Trúc Cơ.'],
-      ['Chân nguyên xoay tròn, nén lại, nén nữa, cho đến khi hóa thành một viên kim đan lấp lánh như sao.','Ba ngày ba đêm, đan điền như lò lửa. Sáng ngày thứ tư, một viên đan vàng lặng lẽ thành hình.'],
-      ['Kim đan vỡ ra. Từ trong đó, một hài nhi nhỏ bằng ngón tay mở mắt, giống ngươi như đúc. Nguyên Anh xuất thế.','Đau như xé xác. Rồi một tiếng khóc trẻ thơ vang lên trong đan điền. Ngươi bật cười giữa nước mắt.'],
-      ['Nguyên anh hòa vào thiên địa. Trong một khoảnh khắc, ngươi là gió, là núi, là tất cả. Rồi ngươi lại là ngươi, nhưng không còn như trước.','Thần thức lan ra ngàn dặm. Ngươi nghe được tiếng lá rơi ở một khu rừng chưa từng tới.']],
-  btf:['Linh khí cuộn ngược, kinh mạch như bị dao cắt. Ngươi phun ra một ngụm máu. Đột phá thất bại.','Tới bước cuối cùng thì tâm thần dao động. Một tiếng “phựt” khẽ, công sức tan thành mây khói.','Tâm ma hiện lên đúng lúc then chốt, cười vào mặt ngươi. Ngươi lỡ nhịp. Thất bại.'],
-};
+// Bảng REST_T: content/narration/rest-t.js
 
 // ---------------- KẾT THÚC KIẾP ----------------
 function lifeSummary(cause,info){
   const r=G.run;const age=Math.floor(r.age);
   const lines=r.bio.length>6?[r.bio[0]].concat(r.bio.slice(-5)):r.bio.slice(); // giữ dòng xuất thân và những chuyện gần nhất (cảnh giới cao nhất thường ở cuối)
   let end='';
-  if(cause==='combat')end=`Năm ${age} tuổi, ${r.ten} chết dưới tay ${info.n} ở ${r.place.n}.`;
-  else if(cause==='toahoa')end=`Năm ${age} tuổi, thọ nguyên cạn kiệt, ${r.ten} tọa hóa ở ${r.place.n}.`;
-  else if(cause==='tamma')end=`Năm ${age} tuổi, ${r.ten} tẩu hỏa nhập ma.`;
-  else if(cause==='thanvo')end=`Năm ${age} tuổi, ${r.ten} cưỡng ép lĩnh ngộ trước giờ độ kiếp, thức hải vỡ nát, thần hồn tan biến ở ${r.place.n}.`;
-  else if(cause==='kiep')end=`Năm ${age} tuổi, ${r.ten} tan thành tro bụi dưới thiên kiếp ở ${r.place.n}.`;
-  else if(cause==='quyan')end=`Năm ${age} tuổi, ${r.ten} gác kiếm quy ẩn ở ${r.place.n}, từ đó không hỏi tới chuyện tu hành, sống nốt quãng đời còn lại trong yên lặng.`;
-  else if(cause==='phithang')end=`Năm ${age} tuổi, ${r.ten} vượt Cửu Trùng Lôi Kiếp, phá không phi thăng.`;
-  lines.push(end+(cause==='combat'||cause==='toahoa'?' '+pick(['Một đời tu tiên, như bao người khác.','Không ai kịp nhớ tên.','Người đời nhắc tới vài năm, rồi quên.','Tiên lộ dài, chân người ngắn.']):''));
+  if(cause==='combat')end=contentText("core_10-quan-ai_js.lifeSummary.038", [age,r.ten,info.n,r.place.n]);
+  else if(cause==='toahoa')end=contentText("core_10-quan-ai_js.lifeSummary.039", [age,r.ten,r.place.n]);
+  else if(cause==='tamma')end=contentText("core_10-quan-ai_js.lifeSummary.040", [age,r.ten]);
+  else if(cause==='thanvo')end=contentText("core_10-quan-ai_js.lifeSummary.041", [age,r.ten,r.place.n]);
+  else if(cause==='kiep')end=contentText("core_10-quan-ai_js.lifeSummary.042", [age,r.ten,r.place.n]);
+  else if(cause==='quyan')end=contentText("core_10-quan-ai_js.lifeSummary.043", [age,r.ten,r.place.n]);
+  else if(cause==='phithang')end=contentText("core_10-quan-ai_js.lifeSummary.044", [age,r.ten]);
+  lines.push(end+(cause==='combat'||cause==='toahoa'?' '+pick([contentText("core_10-quan-ai_js.lifeSummary.045"),contentText("core_10-quan-ai_js.lifeSummary.046"),contentText("core_10-quan-ai_js.lifeSummary.047"),contentText("core_10-quan-ai_js.lifeSummary.048")]):''));
   return lines;
 }
 function calcPts(cause){
   const r=G.run;const o=[];
-  o.push(['Cảnh giới',r.maxRealm*12+Math.floor(r.tv/25)]);
-  o.push(['Vùng đất đã qua',rT()*6]);
-  o.push(['Thủ lĩnh bị hạ',r.bossKills*8]);
-  o.push(['Kẻ địch bị hạ',Math.floor(r.kills/3)]);
-  o.push(['Kỳ ngộ đã trải',Math.floor(r.evDone/4)]);
-  if(cause==='phithang')o.push(['Phi thăng',80]);
-  if(cause==='quyan')o.push(['Quy ẩn an lành',4]);
+  o.push([contentText("core_10-quan-ai_js.calcPts.049"),r.maxRealm*12+Math.floor(r.tv/25)]);
+  o.push([contentText("core_10-quan-ai_js.calcPts.050"),rT()*6]);
+  o.push([contentText("core_10-quan-ai_js.calcPts.051"),r.bossKills*8]);
+  o.push([contentText("core_10-quan-ai_js.calcPts.052"),Math.floor(r.kills/3)]);
+  o.push([contentText("core_10-quan-ai_js.calcPts.053"),Math.floor(r.evDone/4)]);
+  if(cause==='phithang')o.push([contentText("core_10-quan-ai_js.calcPts.054"),80]);
+  if(cause==='quyan')o.push([contentText("core_10-quan-ai_js.calcPts.055"),4]);
   return o.filter(x=>x[1]>0);
 }
 function die(cause,info){
@@ -141,8 +124,8 @@ function die(cause,info){
   M.last={grave:cause!=='phithang'?{ten:r.ten,tuoi:Math.floor(r.age),r:r.region}:null,killer:cause==='combat'&&info&&!info.boss&&info.k?{n:info.n,k:info.k,i:info.i,el:info.el,r:r.region}:(cause==='combat'&&info&&info.boss?{n:info.n,k:'boss',i:info.i,el:info.el,r:r.region}:null),ten:r.ten};
   ach('chet1');if(cause==='toahoa')ach('toahoa');if(cause==='quyan')ach('quyan');if(cause==='phithang'){ach('phithang');gainLore('chan_tuong');}
   if(M.nlife>=5)ach('kiep5');
-  G.over={life,pts,cause,title:{combat:'Tử trận',kiep:'Hồn phi phách tán',toahoa:'Tọa hóa',tamma:'Tẩu hỏa nhập ma',quyan:'Quy ẩn',phithang:'Phi thăng'}[cause]};
-  life.y=tYear(W().t);if(r.bossKills)life.hero='hạ '+r.bossKills+' thủ lĩnh';else if(r.bangTop)life.hero='đứng đầu Thiên Kiêu Bảng';
+  G.over={life,pts,cause,title:{combat:contentText("core_10-quan-ai_js.die.056"),kiep:contentText("core_10-quan-ai_js.die.057"),toahoa:contentText("core_10-quan-ai_js.die.058"),tamma:contentText("core_10-quan-ai_js.die.059"),quyan:contentText("core_10-quan-ai_js.die.060"),phithang:contentText("core_10-quan-ai_js.die.061")}[cause]};
+  life.y=tYear(W().t);if(r.bossKills)life.hero='hạ '+r.bossKills+contentText("core_10-quan-ai_js.die.062");else if(r.bangTop)life.hero=contentText("core_10-quan-ai_js.die.063");
   fogToMemory();
   G.run=null;afterlife(r,cause,info);G.over.gap=G.lastGap;G.screen='over';saveSoon();
 }

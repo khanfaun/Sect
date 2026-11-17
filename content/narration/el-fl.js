@@ -1,0 +1,4 @@
+// Nguồn chuẩn: EL_FL. Luật xử lý ở src/game/core2/15-loi-ke-tran-danh.js.
+const EL_FL={kim:['kiếm khí sắc lạnh xé gió lao đi','kim quang lóe lên như chớp giật'],moc:['dây leo linh mộc cuộn trào lao tới','lá xanh hóa thành phi đao bay vút ra'],thuy:['sóng nước cuộn trào ập tới','từng giọt nước hóa thành băng tiễn'],
+ hoa:['hỏa diễm bùng lên rực trời','một con hỏa long gầm thét lao ra'],tho:['đất đá rung chuyển, núi đá ầm ầm đè xuống','cát bụi cuộn thành bão'],loi:['lôi quang chớp lóe, tiếng sấm nổ vang','một đạo thiểm điện giáng xuống'],
+ bang:['hàn khí ngưng thành băng trùy','sương giá phủ trắng một vùng'],phong:['cuồng phong gào thét cuốn tới','gió sắc như dao cắt tới'],am:['âm khí đen kịt cuộn tới','quỷ ảnh rít lên lao ra'],phat:['Phật quang tỏa rạng, kim chưởng giáng xuống','tiếng chuông Phật ngân vang chấn động'],vo:['chân khí cuộn trào','kình lực ầm ầm ập tới']};

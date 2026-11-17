@@ -31,3 +31,9 @@ Người dùng không phải lập trình viên: trả lời ngắn, ít thuật
 - Túi đồ (core2/31): 10 ô mang trên người + túi trữ vật (relic k:'tui' đeo ở ô tuivat) mở thêm ô, ô túi khoá khi linh lực = 0 hoặc phàm nhân. Mỗi pháp bảo/vật liệu/trứng/lệnh bài/viên đan chiếm một ô. Giao diện ô/khoá chưa gắn (dùng `bagLayout()`, `it.locked`/`it.bsrc` của `bagItems()`).
 - Lịch luyện nhận ×`LL_BOOST` (20-ngo-tinh-khi-van.js). Bế quan: linh lực hồi ×`BQ_MP_MUL` nhanh hơn khí huyết, xuất quan không còn hồi đầy cả hai (24-hoi-phuc.js).
 
+
+## Nguồn nội dung sau khi chuẩn hóa
+- Đọc `docs/content/GUIDELINE.md` khi sửa cốt truyện/dữ liệu. Nguồn chính ở `content/`; `archive/` không được nạp.
+- Truyện, dịch vụ, kỳ ngộ, nhiệm vụ: schema trong `content/schemas/`; không sửa tệp dữ liệu tự sinh hoặc HTML.
+- `npm run content:check`, `npm run content:stories`, `npm run content:docs`; bài `content` của test.js không chạy bot.
+- `tools/ghep.js` đọc cả bảng `content/*.js` theo thu-tu.json và biên dịch JSON trước khi ghép.

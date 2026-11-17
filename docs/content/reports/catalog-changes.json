@@ -1,0 +1,2044 @@
+[
+  {
+    "kind": "relics",
+    "id": "pb_thap_moc_tue",
+    "name": "Tháp Mộc Tuế",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_an_bang_tram",
+    "name": "Ấn Băng Trầm",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_khon_tien_thang_co_ra",
+    "name": "Khổn Tiên Thằng Cỏ Rạ",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_lenh_bai_nho_ngay_dong_cua",
+    "name": "Lệnh Bài Huyền Thiết",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_dich_co_nham",
+    "name": "Địch Cổ Nham",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_yeu_nha_hac_gian",
+    "name": "Yêu Nha Hắc Giản",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_chuong_loi_diep",
+    "name": "Chuông Lôi Diệp",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_co_lenh_diem_sa",
+    "name": "Cờ Lệnh Diệm Sa",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_xich_thanh_duc",
+    "name": "Xích Thanh Dực",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_ho_menh_phu_cat_mot_tieng_tho",
+    "name": "Hộ Mệnh Phù Minh Châu",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_kiem_hap_tam_trieu",
+    "name": "Kiếm Hạp Tam Triều",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_khanh_phong_hac",
+    "name": "Khánh Phong Hạc",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_cam_bach_dong",
+    "name": "Cầm Bạch Đống",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_thu_cot_ngung_trieu",
+    "name": "Thú Cốt Ngưng Triều",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_tan_mieu_diem",
+    "name": "Tán Miêu Diệm",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_tieu_de_danh_den_sang",
+    "name": "Tiêu Huyền Quang",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_chau_bach_phan",
+    "name": "Châu Bạch Phạn",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_kinh_sam_mu",
+    "name": "Kính Sấm Mù",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_phien_giay_gio",
+    "name": "Phiên Giấy Gió",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_tinh_binh_mo_dang",
+    "name": "Tịnh Bình Mộ Đăng",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_huyet_ngoc_ne_tam",
+    "name": "Huyết Ngọc Nê Tâm",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_dang_doi_chan_nguoi_ve",
+    "name": "Đăng Cửu Văn",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_ho_lo_lan_giap",
+    "name": "Hồ Lô Lan Giáp",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_ngoc_gian_phong_tang",
+    "name": "Ngọc Giản Phong Tàng",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_thap_sa_nhan",
+    "name": "Tháp Sa Nhận",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_kinh_thuy_liem",
+    "name": "Kính Thủy Liêm",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_co_lenh_dang_tam",
+    "name": "Cờ Lệnh Đăng Tâm",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_phien_dem_theo_khi_xuong_nui",
+    "name": "Phiên Huyền Thiết",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_thu_cot_loi_mach",
+    "name": "Thú Cốt Lôi Mạch",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_xich_tang_nham",
+    "name": "Xích Tầng Nham",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_tinh_binh_mai_ngoi",
+    "name": "Tịnh Bình Mái Ngói",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_kiem_hap_han_tao",
+    "name": "Kiếm Hạp Hàn Tảo",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_ngoc_gian_tinh_tran",
+    "name": "Ngọc Giản Tịnh Trần",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_khon_tien_thang_khong_de_ten",
+    "name": "Khổn Tiên Thằng Tuyết Diệp",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_dang_tram_nham",
+    "name": "Đăng Trầm Nham",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_yeu_nha_phong_lac",
+    "name": "Yêu Nha Phong Lạc",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_dich_bach_phan",
+    "name": "Địch Bạch Phạn",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_chuong_so_son",
+    "name": "Chuông Sổ Sờn",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_an_tan_dang",
+    "name": "Ấn Tàn Đăng",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_chau_giu_dau_chan_sau",
+    "name": "Châu Tử Hà",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_cam_nhu_trieu",
+    "name": "Cầm Nhu Triều",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_huyet_ngoc_hac_nhung",
+    "name": "Huyết Ngọc Hắc Nhung",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_khanh_loi_vi",
+    "name": "Khánh Lôi Vĩ",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_ho_menh_phu_duong_lieu",
+    "name": "Hộ Mệnh Phù Dương Liễu",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_ho_lo_co_nham",
+    "name": "Hồ Lô Cổ Nham",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_tieu_cat_vao_ngay_mua",
+    "name": "Tiêu Sa Liên",
+    "field": "req",
+    "before": 0,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_tan_phat_ke",
+    "name": "Tán Phật Kệ",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_chuong_ngan_sa",
+    "name": "Chuông Ngân Sa",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_cam_da_kien",
+    "name": "Cầm Dạ Kiển",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_yeu_nha_loi_vu",
+    "name": "Yêu Nha Lôi Vũ",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_xich_qua_cua_khi_troi_toi",
+    "name": "Xích Nguyệt Ảnh",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_khanh_phong_lac",
+    "name": "Khánh Phong Lạc",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_an_phong_lac",
+    "name": "Ấn Phong Lạc",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_dich_dien_van",
+    "name": "Địch Điện Vân",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_chau_tinh_huong",
+    "name": "Châu Tịnh Hương",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_tinh_binh_thiet_tam",
+    "name": "Tịnh Bình Thiết Tằm",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_ngoc_gian_do_lay_mua_ret",
+    "name": "Ngọc Giản Tuyết Diệp",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_tieu_tang_chi",
+    "name": "Tiêu Tang Chi",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_lenh_bai_loi_mach",
+    "name": "Lệnh Bài Lôi Mạch",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_ho_menh_phu_bui_trau",
+    "name": "Hộ Mệnh Phù Bụi Trấu",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_xich_tinh_tran",
+    "name": "Xích Tịnh Trần",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_huyet_ngoc_u_tam",
+    "name": "Huyết Ngọc U Tằm",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_yeu_nha_mo_dang",
+    "name": "Yêu Nha Mộ Đăng",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_co_lenh_goi_trong_vat_ao",
+    "name": "Cờ Lệnh Hoàng Sa",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_phien_gio_mong",
+    "name": "Phiên Gió Mỏng",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_dich_ao_toi",
+    "name": "Địch Áo Tơi",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_lenh_bai_chua_kip_qua_cau",
+    "name": "Lệnh Bài Tàn Dương",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "relics",
+    "id": "pb_ho_menh_phu_u_huong",
+    "name": "Hộ Mệnh Phù U Hương",
+    "field": "req",
+    "before": 1,
+    "after": 2,
+    "reason": "Ô pháp bảo đầu tiên chỉ mở ở Trúc Cơ."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_huyetsam",
+    "name": "Huyết Sâm Trăm Năm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_giang_vu",
+    "name": "Linh Hoa Giang Vũ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_bui_trau",
+    "name": "Linh Quả Bụi Trấu",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_huyet_dang",
+    "name": "Linh Diệp Huyết Đăng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_phong_lac",
+    "name": "Chi Nấm Phong Lạc",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_hon_tram",
+    "name": "Linh Chi Hồn Trầm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_tu_dien",
+    "name": "Dược Căn Tử Điện",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_co_nham",
+    "name": "Linh Chủng Cổ Nham",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_bang_ti",
+    "name": "Cỏ Linh Băng Ti",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_lieu_nhung",
+    "name": "Linh Diệp Liễu Nhung",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_man_ke",
+    "name": "Linh Chủng Mạn Kệ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_cuong_mat",
+    "name": "Cỏ Linh Cương Mạt",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_phan_chung",
+    "name": "Linh Quả Phạn Chung",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_co_ra",
+    "name": "Chi Nấm Cỏ Rạ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_da_lun",
+    "name": "Dược Căn Đá Lún",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_thanh_duc",
+    "name": "Linh Chi Thanh Dực",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_loi_vu",
+    "name": "Linh Hoa Lôi Vũ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_anh_sa",
+    "name": "Chi Nấm Ảnh Sa",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_tan_dang",
+    "name": "Dược Căn Tàn Đăng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_giang_tuy",
+    "name": "Linh Hoa Giang Tủy",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_dang_chau",
+    "name": "Linh Chi Đằng Châu",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_bang_ti",
+    "name": "Linh Diệp Băng Ti",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_sat_gieng",
+    "name": "Cỏ Linh Sắt Giếng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_dao_suong",
+    "name": "Linh Quả Đào Sương",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_han_dang",
+    "name": "Linh Chủng Hàn Đăng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_kim_tan",
+    "name": "Linh Quả Kim Tẫn",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_da_liem",
+    "name": "Chi Nấm Dạ Liêm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_vet_son",
+    "name": "Linh Chủng Vết Son",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_loi_mach",
+    "name": "Dược Căn Lôi Mạch",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_sa_kien",
+    "name": "Linh Chi Sa Kiển",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_lien_tich",
+    "name": "Cỏ Linh Liên Tịch",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_tri_chau",
+    "name": "Linh Hoa Trì Châu",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_hac_thoa",
+    "name": "Linh Diệp Hắc Thoa",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_tao_phong",
+    "name": "Linh Chủng Tảo Phong",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_phat_ke",
+    "name": "Dược Căn Phật Kệ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_tam_trieu",
+    "name": "Linh Chi Tam Triều",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_hoa_tuy",
+    "name": "Linh Diệp Hỏa Tủy",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_dia_cot",
+    "name": "Chi Nấm Địa Cốt",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_ngo_dong",
+    "name": "Linh Quả Ngô Đồng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_co_ra",
+    "name": "Cỏ Linh Cỏ Rạ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_phong_duc",
+    "name": "Linh Hoa Phong Dực",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_loi_mach",
+    "name": "Linh Quả Lôi Mạch",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_han_tao",
+    "name": "Linh Chủng Hàn Tảo",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_mac_cot",
+    "name": "Cỏ Linh Mặc Cốt",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_nhuyen_ngan",
+    "name": "Dược Căn Nhuyễn Ngân",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_tuyet_tu",
+    "name": "Linh Chi Tuyết Tụ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_anh_giap",
+    "name": "Chi Nấm Ảnh Giáp",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_truc_cham",
+    "name": "Linh Hoa Trúc Châm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_ngoa_van",
+    "name": "Linh Diệp Ngõa Vân",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_kim_tuoc",
+    "name": "Chi Nấm Kim Tước",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_bach_phan",
+    "name": "Linh Hoa Bạch Phạn",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_tinh_vu",
+    "name": "Linh Chủng Tinh Vũ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_co_ra",
+    "name": "Linh Diệp Cỏ Rạ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_dang_tuy",
+    "name": "Linh Chi Đăng Tủy",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_tia_cam",
+    "name": "Linh Quả Tia Câm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_phong_hac",
+    "name": "Dược Căn Phong Hạc",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_ben_can",
+    "name": "Cỏ Linh Bến Cạn",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_bang_nham",
+    "name": "Linh Chi Băng Nham",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_am_tran",
+    "name": "Linh Hoa Âm Trần",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_tho_vu",
+    "name": "Chi Nấm Thổ Vũ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_tang_chi",
+    "name": "Linh Chủng Tang Chi",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_tro_dao",
+    "name": "Cỏ Linh Tro Đào",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_loi_sa",
+    "name": "Linh Diệp Lôi Sa",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_phong_dang",
+    "name": "Linh Quả Phong Đăng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_tinh_vu",
+    "name": "Dược Căn Tinh Vũ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_kim_hap",
+    "name": "Linh Quả Kim Hạp",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_lien_am",
+    "name": "Linh Chi Liên Âm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_dang_tam",
+    "name": "Linh Hoa Đăng Tâm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_tung_tam",
+    "name": "Chi Nấm Tùng Tâm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_tram_nham",
+    "name": "Linh Chủng Trầm Nham",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_so_son",
+    "name": "Cỏ Linh Sổ Sờn",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_tuyet_tu",
+    "name": "Linh Diệp Tuyết Tụ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_lang_hoi",
+    "name": "Dược Căn Lãng Hồi",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_hoa_phong_truc",
+    "name": "Linh Hoa Phong Trúc",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_chi_nam_thien_cot",
+    "name": "Chi Nấm Thiền Cốt",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_co_linh_loi_sa",
+    "name": "Cỏ Linh Lôi Sa",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_diep_u_tam",
+    "name": "Linh Diệp U Tằm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_duoc_can_xich_dinh",
+    "name": "Dược Căn Xích Đinh",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chi_kim_hap",
+    "name": "Linh Chi Kim Hạp",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_chung_thuy_liem",
+    "name": "Linh Chủng Thủy Liêm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "thao_linh_qua_moc_mien",
+    "name": "Linh Quả Mộc Miên",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_hanthiet",
+    "name": "Hàn Thiết",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_nham_giap",
+    "name": "Tinh Khoáng Nham Giáp",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_u_huong",
+    "name": "Linh Sa U Hương",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_tinh_tran",
+    "name": "Hổ Phách Tịnh Trần",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_tan_tinh",
+    "name": "Linh Nham Tẫn Tinh",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_thiem_quang",
+    "name": "Linh Kim Thiểm Quang",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_tre_tuoc",
+    "name": "Ngọc Phôi Tre Tước",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_dang_chau",
+    "name": "Linh Kim Đằng Châu",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_gio_mong",
+    "name": "Ngọc Phôi Gió Mỏng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_tam_trieu",
+    "name": "Linh Nham Tam Triều",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_tuyet_sa",
+    "name": "Linh Sa Tuyết Sa",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_cuong_mat",
+    "name": "Tinh Khoáng Cương Mạt",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_phong_nha",
+    "name": "Hổ Phách Phong Nha",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_loi_cot",
+    "name": "Linh Kim Lôi Cốt",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_giang_vu",
+    "name": "Ngọc Phôi Giang Vũ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_ngan_sa",
+    "name": "Hổ Phách Ngân Sa",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_bach_ne",
+    "name": "Tinh Khoáng Bạch Nê",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_dem_canh",
+    "name": "Linh Nham Đêm Canh",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_hon_tram",
+    "name": "Linh Sa Hồn Trầm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_o_diem",
+    "name": "Linh Kim Ô Diệm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_kim_ke",
+    "name": "Ngọc Phôi Kim Kệ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_bang_ti",
+    "name": "Linh Nham Băng Ti",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_lieu_nhung",
+    "name": "Hổ Phách Liễu Nhung",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_suong_dong",
+    "name": "Linh Sa Sương Đóng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_u_tam",
+    "name": "Tinh Khoáng U Tằm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_ne_tam",
+    "name": "Linh Nham Nê Tâm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_tan_nham",
+    "name": "Linh Kim Tẫn Nham",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_phan_am",
+    "name": "Hổ Phách Phạn Âm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_tia_cam",
+    "name": "Ngọc Phôi Tia Câm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_vo_du",
+    "name": "Tinh Khoáng Vỏ Du",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_hoa_thiec",
+    "name": "Linh Sa Hoa Thiếc",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_dam_nguyet",
+    "name": "Ngọc Phôi Đầm Nguyệt",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_tre_tuoc",
+    "name": "Hổ Phách Tre Tước",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_tao_phong",
+    "name": "Linh Sa Tảo Phong",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_sam_tat",
+    "name": "Linh Kim Sấm Tắt",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_da_kien",
+    "name": "Linh Nham Dạ Kiển",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_mieu_diem",
+    "name": "Tinh Khoáng Miêu Diệm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_chi_quan",
+    "name": "Linh Nham Chỉ Quán",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_van_chao",
+    "name": "Hổ Phách Vân Chao",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_tuyet_nha",
+    "name": "Tinh Khoáng Tuyết Nha",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_ao_toi",
+    "name": "Ngọc Phôi Áo Tơi",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_moc_mien",
+    "name": "Linh Kim Mộc Miên",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_bach_lang",
+    "name": "Linh Sa Bạch Lãng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_lien_thach",
+    "name": "Tinh Khoáng Liên Thạch",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_bach_cham",
+    "name": "Hổ Phách Bạch Châm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_hac_nhung",
+    "name": "Linh Nham Hắc Nhung",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_truc_tuy",
+    "name": "Ngọc Phôi Trúc Tủy",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_tho_phach",
+    "name": "Linh Kim Thổ Phách",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_thau_bac",
+    "name": "Linh Sa Thau Bạc",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_suong_dong",
+    "name": "Hổ Phách Sương Đóng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_diem_vi",
+    "name": "Linh Sa Diệm Vĩ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_nhu_trieu",
+    "name": "Tinh Khoáng Nhu Triều",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_tinh_huong",
+    "name": "Ngọc Phôi Tịnh Hương",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_phong_truc",
+    "name": "Linh Nham Phong Trúc",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_tia_cam",
+    "name": "Linh Kim Tia Câm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ho_phach_son_nau",
+    "name": "Hổ Phách Sơn Nâu",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_sa_tam_manh",
+    "name": "Linh Sa Tấm Mành",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_nham_phan_chung",
+    "name": "Linh Nham Phạn Chung",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_ngoc_phoi_da_liem",
+    "name": "Ngọc Phôi Dạ Liêm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_linh_kim_han_tinh",
+    "name": "Linh Kim Hàn Tinh",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "khoang_tinh_khoang_ngan_sa",
+    "name": "Tinh Khoáng Ngân Sa",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_langnha",
+    "name": "Nanh Sói Xám",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_da_chuot_vanh_tai_nau",
+    "name": "Da Chuột Vành Tai Nâu",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_xuong_coc_dom_men",
+    "name": "Xương Cóc Đốm Men",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_vay_ca_ro_mat_vang",
+    "name": "Vảy Cá Rô Mắt Váng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_gan_chon_duoi_gio",
+    "name": "Gân Chồn Đuôi Gió",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_vay_ran_song_ngoi",
+    "name": "Vảy Rắn Sống Ngói",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_gan_qua_chan_muc",
+    "name": "Gân Quạ Chân Mực",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_sung_de_sung_quap",
+    "name": "Sừng Dê Sừng Quặp",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_mau_kien_gam_dong",
+    "name": "Máu Kiến Gặm Đồng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_da_ech_reu_co",
+    "name": "Da Ếch Rêu Cổ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_gan_chim_se_chop",
+    "name": "Gân Chim Sẻ Chớp",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_gan_tho_long_bot",
+    "name": "Gân Thỏ Lông Bột",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_xuong_ngong_canh_chua",
+    "name": "Xương Ngỗng Canh Chùa",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_sung_nai_sung_thach",
+    "name": "Sừng Nai Sừng Thạch",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_yeu_dan_ve_lung_manh",
+    "name": "Yêu Đan Ve Lưng Mành",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_xuong_rai_ca_bung_vo",
+    "name": "Xương Rái Cá Bưng Vỏ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_sung_son_duong_chop_sung",
+    "name": "Sừng Sơn Dương Chớp Sừng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_trung_tam_nha_moc",
+    "name": "Trứng Tằm Nhả Mộc",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_long_chim_go_tro",
+    "name": "Lông Chim Gõ Tro",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_nanh_cay_bong_la",
+    "name": "Nanh Cầy Bóng Lá",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_da_rua_vai_bang",
+    "name": "Da Rùa Vai Băng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_nanh_doi_mui_dong",
+    "name": "Nanh Dơi Mũi Đồng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_da_ky_nhong_goc_do",
+    "name": "Da Kỳ Nhông Gốc Dó",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_trung_buom_bui_tram",
+    "name": "Trứng Bướm Bụi Trầm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_nanh_lon_rung_mui_da",
+    "name": "Nanh Lợn Rừng Mũi Đá",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_yeu_dan_cua_go_vach",
+    "name": "Yêu Đan Cua Gõ Vách",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_vay_luon_rau_trieu",
+    "name": "Vảy Lươn Râu Triều",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_vay_ca_duoi_gap_canh",
+    "name": "Vảy Cá Đuối Gấp Cánh",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_trung_bach_tuoc_phun_tro",
+    "name": "Trứng Bạch Tuộc Phun Tro",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_nanh_hai_cau_ngam_tuyet",
+    "name": "Nanh Hải Cẩu Ngậm Tuyết",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_mau_ca_nham_lung_chuong",
+    "name": "Máu Cá Nhám Lưng Chuông",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_nanh_ran_bien_re_noi",
+    "name": "Nanh Rắn Biển Rễ Nổi",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_long_hai_yen_goi_song",
+    "name": "Lông Hải Yến Gối Sóng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_mau_rua_san_ho_chan_nang",
+    "name": "Máu Rùa San Hô Chân Nặng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_yeu_dan_sua_den_tham",
+    "name": "Yêu Đan Sứa Đèn Thẳm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_sung_ky_lan_bien_sung_duc",
+    "name": "Sừng Kỳ Lân Biển Sừng Đục",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_yeu_dan_hau_lung_chim",
+    "name": "Yêu Đan Hàu Lưng Chìm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_long_cho_hoang_tai_khuyet",
+    "name": "Lông Chó Hoang Tai Khuyết",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_xuong_ken_ken_hong_do",
+    "name": "Xương Kền Kền Họng Đỏ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_da_ky_nhong_luoi_han",
+    "name": "Da Kỳ Nhông Lưỡi Hàn",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_yeu_dan_bo_hung_lan_xuong",
+    "name": "Yêu Đan Bọ Hung Lăn Xương",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_sung_de_mat_tro",
+    "name": "Sừng Dê Mắt Tro",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_long_linh_cau_can_sam",
+    "name": "Lông Linh Cẩu Cắn Sấm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_xuong_ca_da_tram",
+    "name": "Xương Cá Da Trầm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_mau_nhen_luoi_re",
+    "name": "Máu Nhện Lưới Rễ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_vay_ran_vay_dung",
+    "name": "Vảy Rắn Vảy Dựng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_gan_cu_mo_gio",
+    "name": "Gân Cú Mở Gió",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_long_lon_nau_da_day",
+    "name": "Lông Lợn Nâu Da Dày",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_mau_tri_vang_canh_mo",
+    "name": "Máu Trĩ Vàng Canh Mộ",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_long_hac_dau_hoi_am",
+    "name": "Lông Hạc Đậu Hồi Âm",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_xuong_huou_sung_tach_may",
+    "name": "Xương Hươu Sừng Tách Mây",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_mau_kinh_may_dom_chop",
+    "name": "Máu Kình Mây Đốm Chớp",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_trung_tam_may_suong",
+    "name": "Trứng Tằm Mây Sương",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_sung_rong_da_chan_ngan",
+    "name": "Sừng Rồng Đá Chân Ngắn",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_trung_chim_lua_mo_den",
+    "name": "Trứng Chim Lửa Mỏ Đen",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_nanh_vuon_go_may",
+    "name": "Nanh Vượn Gõ Mây",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_yeu_dan_ca_bac_boi_tren_mua",
+    "name": "Yêu Đan Cá Bạc Bơi Trên Mưa",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_trung_bo_canh_bac_xoe_muc",
+    "name": "Trứng Bọ Cánh Bạc Xòe Mực",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_vay_mang_mang_vuon",
+    "name": "Vảy Mãng Mang Vườn",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_da_meo_rung_hai_bong",
+    "name": "Da Mèo Rừng Hai Bóng",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mats",
+    "id": "vl_gan_chim_ung_canh_kim",
+    "name": "Gân Chim Ưng Cánh Kim",
+    "field": "use",
+    "reason": "Tên đan trong lời tựa không tự tạo công thức; mô tả lại theo cơ chế gom nhóm."
+  },
+  {
+    "kind": "mounts",
+    "id": "pt_phi_kiem_can_dau",
+    "name": "Phi Kiếm Cán Dâu",
+    "field": "realm",
+    "before": 0,
+    "after": 1,
+    "reason": "Phi kiếm cần người đã có tu vi Trúc Cơ; phàm nhân không tự ngự kiếm."
+  }
+]

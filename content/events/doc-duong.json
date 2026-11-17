@@ -1,0 +1,738 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "lao_gia",
+      "name": "Lão nhân hấp hối",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "road",
+        "places": [
+          "*"
+        ],
+        "levels": [
+          0,
+          1,
+          2
+        ],
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 3,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "gia",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{mo} Bên vệ đường, một lão nhân {$a.look} nằm co ro dưới gốc cây, hơi thở đứt quãng. Thấy ngươi, {$a.hn} gắng nhấc tay: “{$a.goi}… nước…”",
+        "Ngươi suýt vấp phải một người nằm giữa lối. Là một lão nhân {$a.look}, ngực áo loang máu đã thâm đen. Bên hông {$a.hn} là một túi trữ vật thêu chỉ bạc.",
+        "{$canh} Dưới mái đình đổ, có người đang ho ra máu. {$a.ten}, một tán tu {$a.look}, ngẩng lên nhìn ngươi bằng ánh mắt của kẻ biết mình sắp chết."
+      ],
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Đỡ dậy, truyền chút linh lực",
+          "cost": {
+            "mp": "30%"
+          },
+          "o": [
+            {
+              "w": 3,
+              "t": "{$a.hn} nắm chặt tay ngươi, cười khà: “Không ngờ cuối đời còn gặp được người tốt.” {$a.hn} nhét vào tay ngươi một cuốn sách nhàu nát, rồi nhắm mắt. Gió thổi, mái tóc bạc khẽ lay.",
+              "e": {
+                "skill": 1,
+                "karma": 5
+              }
+            },
+            {
+              "w": 2,
+              "t": "{$a.hn} gắng gượng kể về một khe đá sau núi, rồi tắt thở. Ngươi chôn cất tử tế. Theo lời {$a.hn}, ngươi tìm được mấy túi linh thạch giấu kỹ.",
+              "e": {
+                "st": 25,
+                "karma": 5,
+                "tv": 4
+              }
+            },
+            {
+              "w": 1,
+              "t": "Bàn tay khô héo bỗng siết lại như gọng kìm. {$a.hn} ngẩng lên, mắt đỏ ngầu: “Thân thể trẻ thật…” Là ma tu muốn đoạt xá!",
+              "fight": {
+                "k": "matu",
+                "n": "{$a.ten}",
+                "m": 1.1
+              },
+              "win": {
+                "t": "Lão ma tan thành khói đen. Trong túi còn ít linh thạch và một viên đan.",
+                "e": {
+                  "st": 20,
+                  "pill": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "i": "🎒",
+          "l": "Lấy túi trữ vật",
+          "o": [
+            {
+              "w": 2,
+              "t": "Ngươi giật lấy túi. {$a.hn} trợn mắt nhìn ngươi, muốn nói gì đó mà không thành tiếng. Đi xa rồi, ngươi vẫn thấy ánh mắt ấy sau gáy.",
+              "e": {
+                "st": 35,
+                "karma": -8,
+                "tamma": 6
+              }
+            },
+            {
+              "w": 1,
+              "t": "Túi có cấm chế. Vừa chạm vào, một luồng hắc khí xộc lên tay. {$a.hn} cười khàn khàn rồi tắt thở.",
+              "e": {
+                "hp": "-20%",
+                "karma": -5,
+                "st": 15
+              }
+            }
+          ]
+        },
+        {
+          "i": "🚶",
+          "l": "Bước qua",
+          "t": "Ngươi bước qua. Sau lưng có tiếng thở dài, rồi im bặt. Tu tiên giới mỗi ngày đều có người chết như vậy.",
+          "e": {
+            "tamma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "lao_gia_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/12-dong-doi-tam-thoi.js",
+        "ref": "lao_gia",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Lữ hành",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "thuong_doan",
+      "name": "Thương đội gặp nạn",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "road",
+        "places": [
+          "rung",
+          "nui",
+          "hoang",
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "thuong",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{mo} Phía trước có tiếng la hét. Một đoàn xe thương lái bị chặn giữa đường, {$a.ten} đang quỳ lạy một đám người bịt mặt.",
+        "Tiếng ngựa hí, tiếng hàng hóa đổ loảng xoảng. Một thương đội bị cướp chặn đánh, hộ vệ đã ngã quá nửa. {$a.ten}, {$a.look}, co rúm sau bánh xe."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Ra tay tương trợ",
+          "fight": {
+            "k": "sontac"
+          },
+          "win": {
+            "t": "{$a.ten} lạy ngươi như tế sao: “Ân nhân! Ân nhân!” Gã nhất quyết dúi vào tay ngươi một túi linh thạch, hứa sau này gặp lại sẽ báo đáp.",
+            "e": {
+              "st": 30,
+              "karma": 6,
+              "an": [
+                "a",
+                "cứu khỏi tay bọn cướp"
+              ]
+            }
+          }
+        },
+        {
+          "i": "👀",
+          "l": "Đứng xem, chờ ngư ông đắc lợi",
+          "chk": [
+            "tp",
+            10
+          ],
+          "ok": {
+            "t": "Hai bên đánh nhau tan tác. Ngươi lặng lẽ nhặt mấy thứ rơi vãi rồi biến mất trước khi ai kịp để ý.",
+            "e": {
+              "st": 25,
+              "karma": -3,
+              "pill": 1
+            }
+          },
+          "no": {
+            "t": "Một tên cướp phát hiện ra ngươi. “Còn một con chuột!” Cả đám quay sang.",
+            "fight": {
+              "k": "sontac"
+            },
+            "win": {
+              "t": "Bọn cướp chạy tán loạn. Thương đội đã bỏ đi từ lúc nào.",
+              "e": {
+                "st": 10
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Đi đường vòng",
+          "t": "Chuyện của người ta, ngươi không xen vào. Đi vòng mất thêm nửa ngày.",
+          "e": {
+            "h": 36
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "thuong_doan_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/12-dong-doi-tam-thoi.js",
+        "ref": "thuong_doan",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Lữ hành",
+      "setting": {
+        "description": "rung / nui / hoang / song / bien",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "ke_bi_duoi",
+      "name": "Kẻ bị truy sát",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "road",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "tre",
+          "alignment": "context"
+        },
+        "b": {
+          "role": "tre",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Một bóng người lao ra từ bụi rậm, suýt đâm sầm vào ngươi. Là {$a.ten}, {$a.look}, vai cắm một mũi tên. “Cứu… người của {$sect} đang đuổi theo!”",
+        "Có tiếng bước chân dồn dập. {$a.ten} chạy tới, sắc mặt trắng bệch: “{$a.goi}, xin che giấu giúp {$a.xung}! {$sect} muốn giết người diệt khẩu!”"
+      ],
+      "choices": [
+        {
+          "i": "🛡️",
+          "l": "Đứng chắn phía trước",
+          "fight": {
+            "k": "detu",
+            "n": "{$b.ten}"
+          },
+          "win": {
+            "t": "{$a.ten} cúi đầu thật sâu: “Ơn này {$a.xung} khắc cốt.” Trước khi đi, {$a.hn} để lại cho ngươi một viên đan.",
+            "e": {
+              "pill": 1,
+              "karma": 5,
+              "an": [
+                "a",
+                "cứu khỏi tay truy binh"
+              ]
+            }
+          }
+        },
+        {
+          "i": "🌿",
+          "l": "Giấu vào bụi rậm, đánh lạc hướng",
+          "chk": [
+            "tam",
+            10
+          ],
+          "ok": {
+            "t": "Đám đệ tử {$sect} hỏi, ngươi chỉ bừa sang hướng khác, mặt không đổi sắc. Chúng đi rồi, {$a.ten} bò ra, run rẩy cảm tạ.",
+            "e": {
+              "karma": 5,
+              "tv": 3,
+              "an": [
+                "a",
+                "che giấu khỏi truy binh"
+              ]
+            }
+          },
+          "no": {
+            "t": "“Nói dối không chớp mắt nhỉ?” Kẻ cầm đầu cười lạnh, rút kiếm.",
+            "fight": {
+              "k": "detu",
+              "n": "{$b.ten}"
+            },
+            "win": {
+              "t": "Đuổi được bọn chúng, nhưng {$a.ten} đã biến mất, chỉ để lại vệt máu và một miếng ngọc bội.",
+              "e": {
+                "relic": 0
+              }
+            }
+          }
+        },
+        {
+          "i": "👉",
+          "l": "Chỉ chỗ cho kẻ đuổi",
+          "t": "Ngươi chỉ tay. {$a.ten} nhìn ngươi bằng ánh mắt mà ngươi sẽ còn nhớ rất lâu. Đệ tử {$sect} ném cho ngươi túi linh thạch như ném xương cho chó.",
+          "e": {
+            "st": 30,
+            "karma": -8,
+            "tamma": 5,
+            "oan": [
+              "a",
+              "chỉ chỗ cho kẻ thù"
+            ]
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "ke_bi_duoi_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/12-dong-doi-tam-thoi.js",
+        "ref": "ke_bi_duoi",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Lữ hành",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "thi_the",
+      "name": "Thi thể bên đường",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "road",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Một thi thể nằm sấp bên đường, áo đệ tử {$sect} đã bạc màu. Bên hông vẫn còn túi trữ vật.",
+        "Dưới gốc cây có một bộ xương còn mặc đạo bào. Tay xương ôm chặt một hộp gỗ, như sợ ai lấy mất.",
+        "{$canh} Mùi tử khí xộc vào mũi. Một tu sĩ chết chưa lâu, mắt vẫn mở, như đang nhìn thứ gì phía sau ngươi."
+      ],
+      "choices": [
+        {
+          "i": "🔍",
+          "l": "Lục soát",
+          "o": [
+            {
+              "w": 3,
+              "t": "Ngươi tìm được ít linh thạch và một viên đan còn nguyên trong lọ.",
+              "e": {
+                "st": 18,
+                "pill": 1
+              }
+            },
+            {
+              "w": 2,
+              "t": "Trong hộp là một cuộn bí tịch dính máu. Chữ viết run rẩy, như được chép trong cơn hấp hối.",
+              "e": {
+                "skill": 1
+              }
+            },
+            {
+              "w": 1,
+              "t": "Túi có độc. Ngón tay ngươi tím tái lại, phải vận công nửa ngày mới ép ra được.",
+              "e": {
+                "hp": "-15%",
+                "st": 10
+              }
+            },
+            {
+              "w": 1,
+              "t": "Thi thể bỗng co giật, rồi ngồi bật dậy!",
+              "fight": {
+                "k": "cuongthi"
+              },
+              "win": {
+                "t": "Lần này thì nó nằm yên thật. Trong túi còn ít linh thạch.",
+                "e": {
+                  "st": 20
+                }
+              }
+            }
+          ]
+        },
+        {
+          "i": "⚱️",
+          "l": "Chôn cất tử tế",
+          "t": [
+            "Ngươi đào huyệt, đặt thi thể xuống, cắm một cành cây làm bia. Đêm ấy ngươi mơ thấy một người cúi đầu cảm tạ.",
+            "Ngươi khép mắt người chết lại, đắp đất thành nấm. Không biết tên, ngươi khắc lên đá: “Người đi đường”."
+          ],
+          "e": {
+            "karma": 6,
+            "tam": 1,
+            "van": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Không đụng vào",
+          "t": "Người chết rồi, ân oán nên chết theo. Ngươi đi tiếp."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/12-dong-doi-tam-thoi.js",
+        "ref": "thi_the",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Lữ hành",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "bi_cuop",
+      "name": "Cướp đường",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "road",
+        "places": [
+          "rung",
+          "nui",
+          "hoang",
+          "song",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "nam",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "“Núi này ta mở, cây này ta trồng…” Một đám sơn tặc nhảy ra chặn đường, kẻ cầm đầu {$a.look}.",
+        "Dây thừng bật lên từ mặt đất, suýt quật ngã ngươi. Mấy gã đàn ông mặt mũi bặm trợn bước ra từ hai bên đường."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Đánh",
+          "fight": {
+            "k": "sontac",
+            "n": "{$a.ten}"
+          },
+          "win": {
+            "t": "Bọn cướp chạy tán loạn, bỏ lại cả của cướp được.",
+            "e": {
+              "st": 20,
+              "karma": 2
+            }
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Nộp tiền mãi lộ",
+          "cost": {
+            "st": 12
+          },
+          "t": "Bọn chúng cười hô hố, nhường đường. Ngươi nuốt cục tức xuống bụng.",
+          "e": {
+            "tamma": 3
+          }
+        },
+        {
+          "i": "😤",
+          "l": "Tỏa uy áp dọa chúng",
+          "chk": [
+            "tam",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi chỉ hừ một tiếng. Cả bọn quỳ rạp, dập đầu xin tha, còn dâng cả của cướp được.",
+            "e": {
+              "st": 15
+            }
+          },
+          "no": {
+            "t": "Uy áp của ngươi như gió thoảng. Cả bọn cười rồ lên rồi xông vào.",
+            "fight": {
+              "k": "sontac",
+              "n": "{$a.ten}"
+            },
+            "win": {
+              "t": "Lần sau chúng sẽ biết sợ.",
+              "e": {
+                "st": 12
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "bi_cuop_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/12-dong-doi-tam-thoi.js",
+        "ref": "bi_cuop",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Lữ hành",
+      "setting": {
+        "description": "rung / nui / hoang / song / tran",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "yeu_toc",
+      "name": "Yêu tộc chặn đường",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "road",
+        "places": [
+          "bien",
+          "rung",
+          "hoang"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "yeu",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Một đoàn yêu tộc hóa hình chặn đường. Kẻ cầm đầu là {$a.ten}, {$a.look}: “Người tu tiên, đất này của yêu tộc. Nộp mãi lộ, hoặc nộp mạng.”"
+      ],
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Nộp",
+          "cost": {
+            "st": 30
+          },
+          "t": "{$a.ten} nhận, phẩy tay. Đoàn yêu tộc rẽ ra hai bên."
+        },
+        {
+          "i": "⚔️",
+          "l": "Đánh",
+          "fight": {
+            "k": "beast",
+            "elite": 1,
+            "n": "{$a.ten}"
+          },
+          "win": {
+            "t": "Thủ lĩnh ngã, cả đoàn yêu tộc lùi vào rừng.",
+            "e": {
+              "st": 30
+            }
+          }
+        },
+        {
+          "i": "🗣️",
+          "l": "Thuyết phục",
+          "chk": [
+            "ngo",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi kể về Ngũ Tổ, về hòa ước ba nghìn năm giữa người và yêu. {$a.ten} nheo mắt, rồi tránh đường.",
+            "e": {
+              "flag": "yeutoc",
+              "van": 2,
+              "lore": "ngu_to"
+            }
+          },
+          "no": {
+            "t": "“Người các ngươi nói hay lắm.” {$a.ten} nhe nanh.",
+            "fight": {
+              "k": "beast",
+              "n": "{$a.ten}"
+            },
+            "win": {
+              "t": "Lần này ngươi nói bằng nắm đấm.",
+              "e": {
+                "st": 15
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "yeu_toc_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/13-su-kien-2-tong.js",
+        "ref": "yeu_toc",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Lữ hành",
+      "setting": {
+        "description": "bien / rung / hoang",
+        "historyCondition": null
+      }
+    }
+  ]
+}

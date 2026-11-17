@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "service_tea_nghe",
+      "name": "Gọi ấm trà, ngồi nghe chuyện",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tea"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Biết thêm một nơi và nghe tin đồn; lời truyền miệng được tách khỏi sự thật đã xác nhận.",
+      "choices": [
+        {
+          "l": "Gọi ấm trà, ngồi nghe chuyện",
+          "t": "Biết thêm một nơi và nghe tin đồn; lời truyền miệng được tách khỏi sự thật đã xác nhận."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "nghe",
+          "h": 1,
+          "stoneBase": 0,
+          "g": {
+            "info": 1
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "nghe",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_tea_hoi",
+      "name": "Dúi tiền hỏi tiểu nhị đường đi",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tea"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Trả tiền hỏi đường đến hai địa điểm trong vùng.",
+      "choices": [
+        {
+          "l": "Dúi tiền hỏi tiểu nhị đường đi",
+          "t": "Trả tiền hỏi đường đến hai địa điểm trong vùng."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "hoi",
+          "h": 1,
+          "stoneBase": 1,
+          "g": {
+            "info": 2
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "hoi",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_tea_co",
+      "name": "Đánh một ván cờ với khách lạ",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tea"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Chơi cờ giúp tăng lịch luyện và tĩnh tâm; cần ngộ tính.",
+      "choices": [
+        {
+          "l": "Đánh một ván cờ với khách lạ",
+          "t": "Chơi cờ giúp tăng lịch luyện và tĩnh tâm; cần ngộ tính."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "co",
+          "h": 2,
+          "stoneBase": 0,
+          "g": {
+            "ll": 3,
+            "tamma": -2
+          },
+          "req": [
+            "ngo",
+            12,
+            "Ngộ tính"
+          ],
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "co",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_tea_tinh",
+      "name": "Ngồi yên thưởng trà, tĩnh tâm",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tea"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Thưởng trà giúp giảm tâm ma.",
+      "choices": [
+        {
+          "l": "Ngồi yên thưởng trà, tĩnh tâm",
+          "t": "Thưởng trà giúp giảm tâm ma."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "tinh",
+          "h": 2,
+          "stoneBase": 1,
+          "g": {
+            "tamma": -4
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "tinh",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_inn_phong",
+      "name": "Thuê phòng thường, ngủ một đêm",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "inn"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Hồi đầy khí huyết và linh lực sau tám giờ nghỉ.",
+      "choices": [
+        {
+          "l": "Thuê phòng thường, ngủ một đêm",
+          "t": "Hồi đầy khí huyết và linh lực sau tám giờ nghỉ."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "phong",
+          "h": 8,
+          "stoneBase": 4,
+          "g": {
+            "hpFull": true,
+            "mpFull": true,
+            "tamma": -2
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "phong",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_inn_thuong",
+      "name": "Thuê phòng thượng hạng có tụ linh trận",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "inn"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Hồi đầy khí huyết và linh lực, giảm tâm ma và nhận chút tu vi.",
+      "choices": [
+        {
+          "l": "Thuê phòng thượng hạng có tụ linh trận",
+          "t": "Hồi đầy khí huyết và linh lực, giảm tâm ma và nhận chút tu vi."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "thuong",
+          "h": 8,
+          "stoneBase": 10,
+          "g": {
+            "hpFull": true,
+            "mpFull": true,
+            "tamma": -6,
+            "tv": 1
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "thuong",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_inn_an",
+      "name": "Ngồi sảnh dưới ăn một bữa",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "inn"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Hồi tối đa 15% khí huyết, không vượt mức tối đa.",
+      "choices": [
+        {
+          "l": "Ngồi sảnh dưới ăn một bữa",
+          "t": "Hồi tối đa 15% khí huyết, không vượt mức tối đa."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "an",
+          "h": 1,
+          "stoneBase": 1,
+          "g": {
+            "hpPct": 15
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "an",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_inn_chuong",
+      "name": "Hỏi chưởng quầy có chuyện gì lạ",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "inn"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Hỏi tin tức và địa điểm quanh vùng.",
+      "choices": [
+        {
+          "l": "Hỏi chưởng quầy có chuyện gì lạ",
+          "t": "Hỏi tin tức và địa điểm quanh vùng."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "chuong",
+          "h": 1,
+          "stoneBase": 0,
+          "g": {
+            "info": 1
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "chuong",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_tuu_chen",
+      "name": "Uống vài chén, nghe chuyện",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tuu"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Giảm tâm ma, hồi tối đa 10% khí huyết và nghe tin.",
+      "choices": [
+        {
+          "l": "Uống vài chén, nghe chuyện",
+          "t": "Giảm tâm ma, hồi tối đa 10% khí huyết và nghe tin."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "chen",
+          "h": 3,
+          "stoneBase": 2,
+          "g": {
+            "hpPct": 10,
+            "tamma": -4,
+            "info": 1
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "chen",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_tuu_moi",
+      "name": "Mời cả bàn một vò rượu ngon",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tuu"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Mời rượu để kết giao, tăng lịch luyện và nghe tin.",
+      "choices": [
+        {
+          "l": "Mời cả bàn một vò rượu ngon",
+          "t": "Mời rượu để kết giao, tăng lịch luyện và nghe tin."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "moi",
+          "h": 3,
+          "stoneBase": 6,
+          "g": {
+            "tamma": -5,
+            "ll": 3,
+            "info": 1
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "moi",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_tuu_dau",
+      "name": "Đấu rượu với gã tửu khách to con",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tuu"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Cần đạo tâm; thắng cuộc nhận tiền cược và lịch luyện.",
+      "choices": [
+        {
+          "l": "Đấu rượu với gã tửu khách to con",
+          "t": "Cần đạo tâm; thắng cuộc nhận tiền cược và lịch luyện."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "dau",
+          "h": 2,
+          "stoneBase": 0,
+          "g": {
+            "stBase": 5,
+            "ll": 1
+          },
+          "req": [
+            "tam",
+            11,
+            "Đạo tâm"
+          ],
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "dau",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_tuu_ca",
+      "name": "Nghe ca kỹ đàn hát",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tuu"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Nghe đàn giúp giảm tâm ma.",
+      "choices": [
+        {
+          "l": "Nghe ca kỹ đàn hát",
+          "t": "Nghe đàn giúp giảm tâm ma."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "ca",
+          "h": 2,
+          "stoneBase": 3,
+          "g": {
+            "tamma": -8
+          },
+          "req": null,
+          "limited": false
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "ca",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_tea_doicau",
+      "name": "Thi đối câu đối của lão tú tài",
+      "kind": "service",
+      "theme": "Cơ hội trong quán",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tea"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Lão tú tài treo giải: ai đối được vế của lão thì nhận một túi linh thạch.",
+      "choices": [
+        {
+          "l": "Thi đối câu đối của lão tú tài",
+          "t": "Lão tú tài treo giải: ai đối được vế của lão thì nhận một túi linh thạch."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "doicau",
+          "h": 1,
+          "stoneBase": 0,
+          "g": {
+            "st": 12,
+            "ll": 2
+          },
+          "req": [
+            "ngo",
+            14,
+            "Ngộ tính"
+          ],
+          "limited": true,
+          "fight": 0
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "doicau",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_inn_hotong",
+      "name": "Nhận lời hộ tống một thương nhân",
+      "kind": "service",
+      "theme": "Cơ hội trong quán",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "inn"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Một thương nhân đang tìm người hộ tống qua đoạn đường vắng. Trả công hậu, nhưng dễ đụng cướp.",
+      "choices": [
+        {
+          "l": "Nhận lời hộ tống một thương nhân",
+          "t": "Một thương nhân đang tìm người hộ tống qua đoạn đường vắng. Trả công hậu, nhưng dễ đụng cướp."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "hotong",
+          "h": 4,
+          "stoneBase": 0,
+          "g": {
+            "st": 15
+          },
+          "req": null,
+          "limited": true,
+          "fight": 1,
+          "fightSpec": {
+            "k": "sontac",
+            "cnt": 2
+          }
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "hotong",
+        "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_tuu_gaysu",
+      "name": "Dạy cho gã say gây sự một bài học",
+      "kind": "service",
+      "theme": "Cơ hội trong quán",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "tuu"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Một gã say đập bàn, chửi bới, giật đồ của tửu khách. Không ai dám can.",
+      "choices": [
+        {
+          "l": "Dạy cho gã say gây sự một bài học",
+          "t": "Một gã say đập bàn, chửi bới, giật đồ của tửu khách. Không ai dám can."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "gaysu",
+          "h": 1,
+          "stoneBase": 0,
+          "g": {
+            "st": 6,
+            "karma": 1
+          },
+          "req": null,
+          "limited": true,
+          "fight": 1,
+          "fightSpec": {
+            "k": "tantu",
+            "n": "Gã say gây sự",
+            "spar": 1
+          }
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/07-dot-10-tho-nap.js",
+        "ref": "gaysu",
+        "commit": "d9ab301"
+      }
+    }
+  ]
+}

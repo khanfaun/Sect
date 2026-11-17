@@ -1,0 +1,525 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_vach_phan_tren_chuoi_kiem_1",
+      "name": "Kiếm cầm tay nào",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Nữ kiếm đồ",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Kiếm sư",
+          "alignment": "context"
+        }
+      },
+      "text": "Nữ kiếm đồ {$a.ten} xin một thanh kiếm thuận tay trái. Kiếm sư {$b.ten} dùng phấn đánh dấu tay phải lên chuôi, ngay chỗ ngón cái của nàng đặt hụt.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Mua chuôi kiếm thuận tay trái",
+          "t": "Ngươi mua chuôi phù hợp ở xưởng, để nàng thử lại cách cầm. Kiếm sư chưa chịu đổi bài dạy, nhưng nàng đã có thể đặt ngón tay đúng chỗ.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "kiếm cầm tay nào"
+            ]
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "🗣️",
+          "l": "Khuyên nàng học đúng lối truyền trong tông",
+          "t": "{$b.ten} cho ngươi dự buổi dạy riêng. Nàng chép thêm một dòng nhỏ ở cuối bài để nhớ đổi tay.",
+          "e": {
+            "tv": 4
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Nàng xin thầy cho thử cả hai tay rồi mới quyết. Ngươi rời hiên trong lúc hai người còn tranh luận.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vach_phan_tren_chuoi_kiem_1",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "vach_phan_tren_chuoi_kiem",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kiếm tu",
+      "setting": {
+        "description": "Hiên phát kiếm ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "không"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_vach_phan_tren_chuoi_kiem_2",
+      "name": "Nét chéo trên vách",
+      "kind": "story",
+      "tags": [
+        "Ấm áp"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Nữ kiếm đồ",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Nữ kiếm đồ {$a.ten} để lại một vết chéo mà tay phải khó đánh tới. Hai đệ tử đến xem, mỗi người tự cầm một que phấn.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Giúp nàng dạy thế kiếm ấy",
+          "t": "Ngươi dành một buổi giúp nàng chỉ thế kiếm cho hai đệ tử. Một người thuận tay phải phải đổi cách đứng mới làm được. Nàng cười: “Ta cũng đã học bài của các ngươi khó như thế.”",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "nét chéo trên vách"
+            ],
+            "h": 12
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua riêng khẩu quyết của nàng",
+          "t": "Nàng có bạc sửa kiếm. Vết chéo bị trát lại, lớp vôi mới khác màu đá.",
+          "e": {
+            "skill": 1
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Hai đệ tử rời vách, một que phấn đã được bẻ đôi.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vach_phan_tren_chuoi_kiem_2",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "vach_phan_tren_chuoi_kiem",
+        "part": "2",
+        "waitHours": 2160,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Học kiếm",
+      "setting": {
+        "description": "Vách luyện kiếm ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "phần 1 chọn “Mua chuôi kiếm thuận tay trái” · vài tháng sau · vách luyện kiếm"
+      },
+      "emotion": "Ấm áp"
+    },
+    {
+      "id": "ch_vach_phan_tren_chuoi_kiem_2b",
+      "name": "Vết chai lệch",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong",
+          "thanh"
+        ],
+        "levels": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Nữ kiếm đồ",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Kiếm sư",
+          "alignment": "context"
+        }
+      },
+      "text": "Nữ kiếm đồ {$a.ten} ngâm bàn tay phải vào nước thuốc, lòng bàn tay phồng ở chỗ phấn thường in. Kiếm sư {$b.ten} treo kiếm lên để nàng khỏi nhìn thấy chuôi.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Đổi buổi học của ngươi lấy thời gian cho nàng tập tay trái",
+          "t": "Ngươi nhường buổi có người hướng dẫn để nàng thử lại kiếm tay trái. Sau vài lần còn vụng, nàng bắt đúng đường kiếm. Kiếm sư đứng xem hết buổi, chưa nói lời nào.",
+          "e": {
+            "karma": 4,
+            "h": 24,
+            "an": [
+              "a",
+              "vết chai lệch"
+            ]
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua thuốc để nàng tiếp tục bài cũ",
+          "t": "Nàng theo kịp lớp. Lúc ghi tên vào sổ, nàng lặng lẽ dùng tay trái.",
+          "cost": {
+            "st": 13
+          },
+          "e": {
+            "karma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Nước thuốc nguội. Thanh kiếm trên vách vẫn treo chuôi quay vào trong.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vach_phan_tren_chuoi_kiem_2b",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "vach_phan_tren_chuoi_kiem",
+        "part": "2b",
+        "waitHours": 2160,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Học kiếm",
+      "setting": {
+        "description": "Nhà ngâm tay ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "phần 1 chọn “Khuyên nàng học đúng lối truyền trong tông” · vài tháng sau · nhà ngâm tay"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_vach_phan_tren_chuoi_kiem_3",
+      "name": "Lối kiếm qua mái đổ",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "nữ kiếm đồ",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "kiếm sư",
+          "alignment": "context"
+        }
+      },
+      "text": "Đá ép xà xuống ngang vai kiếm sư {$b.ten}. Nếu nữ kiếm đồ {$a.ten} đã tập tay trái, nàng tìm được góc kiếm mở đường. Nếu vẫn học bài cũ, nàng phải đổi tay ngay trong khe đá.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Dùng linh lực chống xà cho nàng cứu người",
+          "t": "Ngươi chống xà tới khi nàng đưa kiếm sư ra được. Đá ép xuống khiến vai ngươi bị thương, nhưng cả hai đã ra khỏi hành lang trước lúc mái sập.",
+          "e": {
+            "karma": 4,
+            "hp": "-10%"
+          },
+          "cost": {
+            "mp": "20%"
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Chỉ nàng cắt xà bằng đường kiếm riêng",
+          "t": "Nàng theo góc ngươi chỉ, cắt xà rồi kéo thầy ra ngoài. Mái đổ xuống nghiền nát giá kiếm chung. Lão nhìn đống gỗ, bảo nàng đừng quay lại nhặt, người còn đủ mới là được.",
+          "e": {
+            "karma": 1,
+            "tv": 3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Nàng bảo lão nhắm mắt. Ngươi nghe kiếm chạm xà một lần rồi im.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vach_phan_tren_chuoi_kiem_3",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "vach_phan_tren_chuoi_kiem",
+        "part": "3",
+        "waitHours": 8640,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cứu người",
+      "setting": {
+        "description": "Hành lang ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · năm sau · hành lang sau trận đá lở"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_vach_phan_tren_chuoi_kiem_4",
+      "name": "Một chuôi chưa sơn",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Nữ kiếm đồ",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "kiếm sư",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu ngươi chống xà, kiếm sư {$b.ten} đặt kiếm cong trên bàn để đo lại chuôi. Nếu xà bị cắt, lão dùng gỗ của giá kiếm vỡ, còn nữ kiếm đồ {$a.ten} đứng chỉ cho lão chỗ khoét.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp công làm chuôi cho cả hai tay",
+          "t": "Từ nay người học được chọn. Lão đặt hộp phấn giữa bàn để khỏi phải chuyền qua ai.",
+          "cost": {
+            "st": 13
+          },
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "một chuôi chưa sơn"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Nhận thanh kiếm được sửa riêng",
+          "t": "Ngươi có một thanh kiếm vừa tay. {$a.ten} giữ phần gỗ thừa, đủ làm nửa chuôi nữa.",
+          "e": {
+            "namedRelic": {
+              "k": "kiem",
+              "name": "Kiếm Chuôi Thuận Tay",
+              "lore": "Ngươi có một thanh kiếm vừa tay. {$a.ten} giữ phần gỗ thừa, đủ làm nửa chuôi nữa."
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão nhờ nàng cầm thử từng chuôi trước khi giao cho đệ tử mới. Ngươi nghe nàng hỏi người đầu tiên thuận tay nào, rồi mới xuống núi.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vach_phan_tren_chuoi_kiem_4",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "vach_phan_tren_chuoi_kiem",
+        "part": "4",
+        "waitHours": 2160,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thầy trò",
+      "setting": {
+        "description": "Sân làm chuôi ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "phần 3 chọn “Dùng linh lực chống xà cho nàng cứu người” hoặc “Chỉ nàng cắt xà bằng đường kiếm riêng” · vài tháng sau · sân làm chuôi"
+      },
+      "emotion": "Lắng dịu"
+    }
+  ]
+}

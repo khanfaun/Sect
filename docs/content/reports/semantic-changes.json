@@ -1,0 +1,521 @@
+[
+  {
+    "id": "sao_roi",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "dt_khi",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "dt_sao",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "lao_gia",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "thuong_doan",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "ke_bi_duoi",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "bi_cuop",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "yeu_toc",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "kh_chung",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "kh_vat",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "kh_dam",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "linh_thao",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "sap_ban",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "thu_con",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "thac_ngo",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "bia_co",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "ao_tran",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "linh_tuyen",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "do_thach",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tra_lau",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "xem_tuong",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "kiem_khach",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "hoa_duyen",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "co_mo",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "loi_moc",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "lo_dan_no",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "nhan_cu",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "chay_rung",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "khach_diem",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "co_tu",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "son_mon",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "dai_bi",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "thuy_quy",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "chuong_xac",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "cho_que",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "hoi_den",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "xin_lam_do",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tuyet_son",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "ga_quay",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tang_kinh",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "linh_mach",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tran_co",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "bi_vu_oan",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "luyen_khi",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "ngu_nhan",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "bao_bien",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "trai_ngoc",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "hang_bang",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tu_binh",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "nai_ha",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "ma_tu_xin_tha",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tinh_ha",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "di_thue",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "co_nhan_mong",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_hon",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_dom",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_trom",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_sao",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_quan",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_lua",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_trang",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_ca",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_mong",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "d_soi",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "m_xuan2",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "m_ha1",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "m_thu2",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "mo_kiep_truoc",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "no_kiep_truoc",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "bao_an",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "bao_oan",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "bao_an_co",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tk_thach",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tk_dong",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tk_tranh",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tk_dau",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tt_vua",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tt_dan",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "td_nan",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "ts_phuc",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "ts_dam",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "ts_bay",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tr_hoi",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tr_bat",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tr_kiem",
+    "change": "Thêm lựa chọn rời đi không nhận thưởng."
+  },
+  {
+    "id": "tra_lau",
+    "change": "Chỉ xuất hiện khi vào tea."
+  },
+  {
+    "id": "khach_diem",
+    "change": "Chỉ xuất hiện khi vào inn."
+  },
+  {
+    "id": "kiem_khach",
+    "change": "Chỉ xuất hiện khi vào tuu."
+  },
+  {
+    "id": "d_quan",
+    "change": "Chỉ xuất hiện khi vào tuu."
+  },
+  {
+    "id": "kh_benh",
+    "change": "Tiêu đúng thuốc chữa thương; thiếu thuốc thì khóa lựa chọn."
+  },
+  {
+    "id": "tr_giup",
+    "change": "Tiêu đúng thuốc chữa thương; thiếu thuốc thì khóa lựa chọn."
+  },
+  {
+    "id": "ch_le_do_nuoc_2b",
+    "choice": 1,
+    "change": "Cần tiền vốn; kết quả trả vốn cộng lãi."
+  },
+  {
+    "id": "ch_tam_phan_danh_cho_khach_3",
+    "choice": 1,
+    "change": "Cần tiền vốn; kết quả trả vốn cộng lãi."
+  },
+  {
+    "id": "ch_vet_man_tren_don_thuoc_2b",
+    "choice": 1,
+    "change": "Cần tiền vốn; kết quả trả vốn cộng lãi."
+  },
+  {
+    "id": "gk_cong_co_trong_be_trung",
+    "choice": 1,
+    "change": "Cần tiền vốn; kết quả trả vốn cộng lãi."
+  },
+  {
+    "id": "gk_con_dau_bun",
+    "choice": 1,
+    "change": "Cần tiền vốn; kết quả trả vốn cộng lãi."
+  },
+  {
+    "id": "ch_buc_tuong_nghe_ten_minh_3",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "ch_chi_bac_tren_ao_chiu_tang_4",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "ch_den_soi_duong_lui_2",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "ch_den_soi_duong_lui_2b",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "ch_hinh_nguoi_nam_ngoai_ao_4",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "ch_nguoi_cho_sau_rem_than_4",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "ch_vach_phan_tren_chuoi_kiem_4",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "ch_vet_khau_duoi_lop_da_2",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "ch_vet_khau_duoi_lop_da_4",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_tam_ao_cu_qua_nam_tram_mua",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_mua_roi_nguoc_trong_long_ban",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_ke_doi_binh_tren_dau",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_cuong_la_ganh_mot_vung_troi",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_mot_vong_quay_doi_gio_com",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_hat_bui_co_tieng_vo",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_cai_mieng_giau_trong_vai",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_nguoi_than_tinh_theo_bai_vi",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_coi_nghien_chu_the",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_con_bui_bo_duoi_chan",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_ban_khe_khong_co_mat_chu",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_vay_cao_duoi_bung_thuyen",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_mat_bien_con_tro",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_vang_bac_theo_trieu_nguoc",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_mai_nha_moc_tren_coc_chet",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_canh_man_trong_chen_mai",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  },
+  {
+    "id": "gk_ban_ve_tren_lung_rua",
+    "choice": 1,
+    "change": "Thưởng đúng loại vật được kể, bỏ đổi thành trang bị bất kỳ."
+  }
+]

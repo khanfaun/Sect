@@ -10,13 +10,17 @@ const path = require('path');
 const args = process.argv.slice(2), LOG = args.includes('--log'), si = args.indexOf('--shot'), SHOT = si >= 0 ? args[si + 1] : null;
 const names = args.filter((a, i) => !a.startsWith('--') && (si < 0 || i !== si + 1));
 let fails = 0;
+let contentTestURL;
+const http = require('node:http'), fs = require('node:fs');
 const ok = (c, m) => { if (!c) fails++; console.log('   ' + (c ? '✓ ' : '✗ ') + m); };
 
 // mở game, sinh nhân vật, vào bản đồ. Trả về trang đã sẵn sàng.
 async function boot(b, w = 400, h = 800) {
   const p = await b.newPage({ viewport: { width: w, height: h } });
   p.errs = []; p.on('pageerror', e => p.errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') p.errs.push(m.text().slice(0, 200)); });
-  await p.goto('file://' + path.join(__dirname, '..', 'phu-sinh.html') + '?debug=1');
+  await p.route(/^https:\/\/fonts\.(googleapis|gstatic)\.com\//,r=>r.fulfill({status:200,contentType:'text/css',body:''}));
+  await p.route('**/favicon.ico',r=>r.fulfill({status:204,body:''}));
+  await p.goto(contentTestURL + '?debug=1');
   await p.waitForTimeout(300);
   await (await p.waitForSelector('[data-act="birth"]')).click();
   await (await p.waitForSelector('[data-act="lifeGo"]', { timeout: 30000 })).click();
@@ -28,6 +32,29 @@ const ev = (p, f, a) => p.evaluate(f, a);
 const shot = async (p, name) => { if (SHOT) await p.screenshot({ path: path.join(SHOT, name + '.png') }); };
 
 const TESTS = {
+  async content(p) {
+    await ev(p, () => {
+      const r=G.run;r.pham=0;r.realm=1;r.st=10000;r.evCount={};r.evRecent=[];r.contentLast={};
+      const n=W().regions.flatMap(x=>x.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');
+      r.at=n.id;r.region=n.r;arrive(n.id);openPlace(n.id);W().t+=((9-tHour(W().t)+24)%24);render();
+    });
+    await p.locator('[data-act="pact"][data-arg="tea"]').click();
+    await p.locator('[data-act="vopt"][data-arg="content-story"]').click();
+    await p.locator('[data-act="vgo"][data-arg="tea:content-story"]').click();
+    await p.waitForTimeout(150);
+    ok(await ev(p, () => G.run.scene.type==='event'&&G.run.scene.id==='tra_lau'), 'vào trà lâu rồi mới mở đúng truyện của quán');
+    ok((await p.locator('.story').innerText()).length>20, 'lời kể mới hiển thị trên giao diện');
+    const item = await ev(p, () => {const r=G.run;r.scene=null;r.pham=1;r.realm=0;r.relics=[];const x=catRelic(CAT.relics.find(x=>slotOf(x)==='phapbao'));r.relics.push(x);ACT.bagOpen();render();const it=bagItems().find(i=>i.ref.t==='rel'&&r.relics[i.ref.i]===x);UI.modal={k:'item',key:it.key};render();return {req:relReq(x),label:relicWhy(x)};});
+    ok(item.req>=2&&/Trúc Cơ/.test(item.label), 'pháp bảo ghi đúng yêu cầu Trúc Cơ');
+    ok(await ev(p, () => [...document.querySelectorAll('.imod button')].filter(b=>/mặc vào/i.test(b.innerText)).every(b=>b.disabled)), 'phàm nhân không mặc được pháp bảo');
+    await ev(p, () => {UI.modal=null;UI.panel=null;const r=G.run;r.realm=3;r.pham=0;r.mp=S().maxMp;r.st=1e6;const n=nodeById(r.at);n.type='ma';r.place={n:n.name,t:'ma'};r.scene=null;startEvent('ch_vet_khau_duoi_lop_da_3');render();});
+    await p.locator('[data-act="choose"][data-arg="0"]').click();
+    ok(await ev(p, () => G.run.scene.type==='combat'), 'lựa chọn giao đấu mở màn chiến đấu thật');
+    await ev(p, () => {G.run.scene.over='win';combatContinue();render();});
+    ok(await ev(p, () => skChains().vet_khau_duoi_lop_da.results['3']===true), 'kết quả thắng lưu vào lịch sử chuỗi');
+    ok(p.errs.length===0, 'không có lỗi JavaScript trong luồng nội dung');
+  },
+
   // túi trữ vật khoá khi hết linh lực; mũi tên tăng/giảm; tên riêng có chú thích
   async dot32(p) {
     const b = p; // trang đã mở sẵn
@@ -138,7 +165,9 @@ const TESTS = {
 
 (async () => {
   if (args.includes('--list')) { console.log(Object.keys(TESTS).join('\n')); return; }
-  const b = await chromium.launch();
+  const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://localhost');const rel=decodeURIComponent(u.pathname).replace(/^\//,'');const file=path.resolve(__dirname,'..',rel);const base=path.resolve(__dirname,'..');if(!file.startsWith(base+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.statusCode=404;res.end();return;}res.setHeader('Content-Type',file.endsWith('.html')?'text/html; charset=utf-8':file.endsWith('.webp')?'image/webp':'application/octet-stream');res.end(fs.readFileSync(file));});
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));contentTestURL=process.env.PS_TEST_URL||'http://127.0.0.1:'+server.address().port+'/phu-sinh.html';
+  const b = await chromium.launch({executablePath:process.env.PS_CHROMIUM || (require('fs').existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
   for (const k of (names.length ? names : Object.keys(TESTS))) {
     if (!TESTS[k]) { console.log('Không có bài: ' + k); fails++; continue; }
     console.log('▶ ' + k); const f0 = fails; let p;
@@ -147,5 +176,5 @@ const TESTS = {
     if (p && (LOG || fails > f0)) { try { console.log('   --- nhật ký ---\n' + (await ev(p, () => NK.dump(20))).split('\n').map(l => '   ' + l).join('\n')); } catch (e) {} }
     if (p) await p.close();
   }
-  await b.close(); console.log(fails ? `\n${fails} lỗi` : '\nTất cả đạt'); process.exit(fails ? 1 : 0);
+  await b.close();server.close(); console.log(fails ? `\n${fails} lỗi` : '\nTất cả đạt'); process.exit(fails ? 1 : 0);
 })();

@@ -17,7 +17,7 @@ function bagLayout(){const slots=[];for(let i=0;i<BAG_BODY;i++)slots.push({i,src
   const over=[];bagUnits().forEach((u,n)=>{if(n<slots.length)slots[n].unit=u;else over.push(u);});
   return {slots,over,on:tuiOn(),cap:slots.length,used:bagUnits().length};}
 function unitLocked(t,v){const L=bagLayout();const s=L.slots.find(x=>x.unit&&x.unit.t===t&&(t==='m'?x.unit.k===v:t==='q'?x.unit.g===v:x.unit.i===v));return !!(s&&s.locked);}
-function bagLockNote(){note('Túi trữ vật bị khoá: không đủ linh lực để mở ra. Đồ vẫn còn nguyên.','dn');}
+function bagLockNote(){note(contentText("core2_31-tui-tru-vat_js.bagLockNote.001"),'dn');}
 // gắn thông tin ô vào từng món của danh sách túi
 {const _bi=bagItems;bagItems=function(){const L=_bi.apply(this,arguments);const ts=tuiSlots();if(!ts)return L;const lay=bagLayout();
   const f=(t,v)=>lay.slots.find(x=>x.unit&&x.unit.t===t&&(t==='m'?x.unit.k===v:t==='q'?x.unit.g===v:x.unit.i===v));

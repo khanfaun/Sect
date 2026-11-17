@@ -1,0 +1,1758 @@
+[
+  {
+    "id": "ch_ben_kia_mot_hoi_tho_1",
+    "before": [
+      "bien",
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Giàn lặn ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_ben_kia_mot_hoi_tho_2",
+    "before": [
+      "bien",
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Buồng đá ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_ben_kia_mot_hoi_tho_3",
+    "before": [
+      "bien",
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Hốc trú ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_ben_kia_mot_hoi_tho_4",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Nhà chờ ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_buc_tuong_nghe_ten_minh_2",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Nhà chứa mạt ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_buc_tuong_nghe_ten_minh_2b",
+    "before": [
+      "ma"
+    ],
+    "after": [
+      "ma",
+      "phe",
+      "dong"
+    ],
+    "reason": "Dãy bia ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_buc_tuong_nghe_ten_minh_4",
+    "before": [
+      "dong",
+      "ma"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Ngách khắc đá ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_cai_ten_bo_khoi_banh_lai_1",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Xưởng tháo tàu ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_cai_ten_bo_khoi_banh_lai_2",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Nhà hội ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_cai_ten_bo_khoi_banh_lai_4",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Xưởng bánh lái ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_cay_dau_khong_bong_1",
+    "before": [
+      "rung"
+    ],
+    "after": [
+      "rung",
+      "tran"
+    ],
+    "reason": "Bờ ruộng ở Phàm Trần"
+  },
+  {
+    "id": "ch_cay_dau_khong_bong_2",
+    "before": [
+      "song"
+    ],
+    "after": [
+      "song",
+      "tran"
+    ],
+    "reason": "Lạch nhuộm ở Phàm Trần"
+  },
+  {
+    "id": "ch_chi_bac_tren_ao_chiu_tang_1",
+    "before": [
+      "nui"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Dốc đưa tang ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_chi_bac_tren_ao_chiu_tang_2",
+    "before": [
+      "tong",
+      "nui",
+      "rung"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Vườn mai ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_chi_bac_tren_ao_chiu_tang_2b",
+    "before": [
+      "nui"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Cửa phát đồ vải ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_chi_bac_tren_ao_chiu_tang_3",
+    "before": [
+      "nui"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Đèo ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_chi_bac_tren_ao_chiu_tang_4",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Xóm dệt ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_cot_gio_khong_co_1",
+    "before": [
+      "tong",
+      "nui",
+      "rung"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Trụ gió ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_cot_gio_khong_co_2",
+    "before": [
+      "tong",
+      "nui",
+      "rung"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Bãi cất cờ ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_cot_gio_khong_co_2b",
+    "before": [
+      "tong",
+      "nui",
+      "rung"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Lối qua suối ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_cot_gio_khong_co_3",
+    "before": [
+      "tong",
+      "nui",
+      "rung"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Bãi đá ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_cot_gio_khong_co_4",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong",
+      "thanh"
+    ],
+    "reason": "Sân dựng trụ ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_den_soi_duong_lui_1",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Trạm đèn ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_den_soi_duong_lui_2",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Sân đổi đường ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_den_soi_duong_lui_2b",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Gờ đá ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_den_soi_duong_lui_3",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Mái đèn ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_den_soi_duong_lui_4",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Bậc đầu Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hinh_nguoi_nam_ngoai_ao_1",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Nơi phát áo ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hinh_nguoi_nam_ngoai_ao_2",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Phòng chờ ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hinh_nguoi_nam_ngoai_ao_2b",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Mái gặp ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hinh_nguoi_nam_ngoai_ao_3",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Ngưỡng cửa ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hinh_nguoi_nam_ngoai_ao_4",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Nhà giữ áo ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hoi_chuong_den_truoc_nguoi_g_1",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Lầu chuông ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hoi_chuong_den_truoc_nguoi_g_2",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Kho chốt ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hoi_chuong_den_truoc_nguoi_g_2b",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Giàn hứng ván ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hoi_chuong_den_truoc_nguoi_g_3",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Mặt cầu ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_hoi_chuong_den_truoc_nguoi_g_4",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Sân đúc ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_le_do_nuoc_1",
+    "before": [
+      "bien",
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Cọc nước ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_le_do_nuoc_2",
+    "before": [
+      "bien",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Sân kê thuyền ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_le_do_nuoc_2b",
+    "before": [
+      "song"
+    ],
+    "after": [
+      "bien",
+      "song"
+    ],
+    "reason": "Bến cá ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_le_do_nuoc_3",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Chợ nổi ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_loi_noi_duoi_phien_da_1",
+    "before": [
+      "tong",
+      "nui",
+      "rung"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Dãy phòng tĩnh tu ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_loi_noi_duoi_phien_da_2",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Kho nước ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_loi_noi_duoi_phien_da_2b",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Dãy bếp ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_loi_noi_duoi_phien_da_3",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong",
+      "thanh"
+    ],
+    "reason": "Sân chuyển nhà ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_loi_noi_duoi_phien_da_4",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong",
+      "thanh"
+    ],
+    "reason": "Nhà hội ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_mot_chu_dung_tren_van_cau_1",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Cầu ván giữa đường ngọc ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_mot_chu_dung_tren_van_cau_2",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Bãi ván ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_mot_chu_dung_tren_van_cau_2b",
+    "before": [
+      "nui",
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Đường rải gỗ ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_mot_chu_dung_tren_van_cau_3",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Nhịp cầu trắng ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_mot_chu_dung_tren_van_cau_4",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Bãi sửa cầu ở Cửu Thiên Cổ Lộ"
+  },
+  {
+    "id": "ch_nguoi_cho_sau_rem_than_1",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Nhà tro ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_nguoi_cho_sau_rem_than_2",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Sân hong củi ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_nguoi_gac_lua_1",
+    "before": [
+      "tran",
+      "rung",
+      "nui",
+      "thanh"
+    ],
+    "after": [
+      "tran",
+      "thanh"
+    ],
+    "reason": "Chòi báo lửa ở Phàm Trần"
+  },
+  {
+    "id": "ch_nguoi_gac_lua_3",
+    "before": [
+      "rung"
+    ],
+    "after": [
+      "rung",
+      "tran"
+    ],
+    "reason": "Gò cỏ ở Phàm Trần"
+  },
+  {
+    "id": "ch_no_mot_mua_toc_bac_2",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Nhà hong khăn ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_no_mot_mua_toc_bac_3",
+    "before": [
+      "dong",
+      "ma"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Ngách truyền thọ ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_no_mot_mua_toc_bac_4",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Bếp giữ lửa ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_nua_dau_tay_2",
+    "before": [
+      "song"
+    ],
+    "after": [
+      "song",
+      "tran"
+    ],
+    "reason": "Bến xay bột ở Phàm Trần"
+  },
+  {
+    "id": "ch_nua_dau_tay_3",
+    "before": [
+      "thanh",
+      "tran"
+    ],
+    "after": [
+      "tran",
+      "thanh"
+    ],
+    "reason": "Kho lương ven quan đạo ở Phàm Trần"
+  },
+  {
+    "id": "ch_tam_phan_danh_cho_khach_1",
+    "before": [
+      "phe",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tran",
+      "thanh"
+    ],
+    "reason": "Xưởng mộc ở Phàm Trần"
+  },
+  {
+    "id": "ch_tam_phan_danh_cho_khach_2b",
+    "before": [
+      "song"
+    ],
+    "after": [
+      "tran",
+      "thanh"
+    ],
+    "reason": "Bến xe bò ở Phàm Trần"
+  },
+  {
+    "id": "ch_vach_phan_tren_chuoi_kiem_1",
+    "before": [
+      "tong",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Hiên phát kiếm ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_vach_phan_tren_chuoi_kiem_2",
+    "before": [
+      "nui",
+      "tong"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Vách luyện kiếm ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_vach_phan_tren_chuoi_kiem_2b",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong",
+      "thanh"
+    ],
+    "reason": "Nhà ngâm tay ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_vach_phan_tren_chuoi_kiem_3",
+    "before": [
+      "nui"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Hành lang ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_vach_phan_tren_chuoi_kiem_4",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Sân làm chuôi ở Linh Sơn Vạn Lĩnh"
+  },
+  {
+    "id": "ch_vet_khau_duoi_lop_da_2",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Kho vải ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_vet_khau_duoi_lop_da_2b",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Sân sai thi ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_vet_khau_duoi_lop_da_3",
+    "before": [
+      "ma"
+    ],
+    "after": [
+      "ma",
+      "phe",
+      "dong"
+    ],
+    "reason": "Hốc lưu cốt ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_vet_khau_duoi_lop_da_4",
+    "before": [
+      "phe",
+      "ma"
+    ],
+    "after": [
+      "ma",
+      "phe",
+      "dong"
+    ],
+    "reason": "Dốc an táng ở Cửu U Ma Vực"
+  },
+  {
+    "id": "ch_vet_man_tren_don_thuoc_1",
+    "before": [
+      "bien",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Nhà chứa muối ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_vet_man_tren_don_thuoc_2",
+    "before": [
+      "bien",
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Trạm nước ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_vet_man_tren_don_thuoc_2b",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Nhà thuốc ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_vet_man_tren_don_thuoc_3",
+    "before": [
+      "bien",
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Bờ dẫn nước ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "ch_vet_man_tren_don_thuoc_4",
+    "before": [
+      "bien",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Sân chia muối ở Đông Hải Yêu Vực"
+  },
+  {
+    "id": "gk_chiec_can_can_mot_buoc_chan",
+    "before": [
+      "thien",
+      "phe",
+      "hoang"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Trạm nghỉ trên đường ngọc"
+  },
+  {
+    "id": "gk_tam_ao_cu_qua_nam_tram_mua",
+    "before": [
+      "thien",
+      "phe",
+      "hoang"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Mái phơi bên đường ngọc"
+  },
+  {
+    "id": "gk_mot_dem_giu_nen_troi",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Bãi ghim thiên quang"
+  },
+  {
+    "id": "gk_doi_chan_cua_tuong_quy",
+    "before": [
+      "tong"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Điện khắc công đức"
+  },
+  {
+    "id": "gk_mua_roi_nguoc_trong_long_ban",
+    "before": [
+      "thien",
+      "phe",
+      "hoang"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Mái nghỉ cuối đường ngọc"
+  },
+  {
+    "id": "gk_ke_doi_binh_tren_dau",
+    "before": [
+      "thien",
+      "phe",
+      "hoang"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Trạm thử thần niệm"
+  },
+  {
+    "id": "gk_hai_bac_nhin_xuong_nha",
+    "before": [
+      "thien",
+      "phe",
+      "hoang"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Thềm ngọc trông về phàm thế"
+  },
+  {
+    "id": "gk_o_cua_nho_hon_tieng_goi",
+    "before": [
+      "nui"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Hành lang của người nghe vọng"
+  },
+  {
+    "id": "gk_tay_vin_du_mot_nguoi_giu",
+    "before": [
+      "thien",
+      "phe",
+      "hoang"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Mép cầu vắng bóng"
+  },
+  {
+    "id": "gk_mot_vong_quay_doi_gio_com",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Bếp có lò chạy ngược"
+  },
+  {
+    "id": "gk_manh_dem_va_ban_ngay",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Cổng chia ngày đêm"
+  },
+  {
+    "id": "gk_nguoi_quet_bui_tren_mat_tran",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Sân phơi ánh trăng"
+  },
+  {
+    "id": "gk_hat_bui_co_tieng_vo",
+    "before": [
+      "thien",
+      "phe",
+      "hoang"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Phòng giữ vật đã mất"
+  },
+  {
+    "id": "gk_san_buoc_qua_mot_lan_noi_gia",
+    "before": [
+      "tong",
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Sân thử kiếm giữa hư không"
+  },
+  {
+    "id": "gk_mot_cai_o_co_hai_cai_bong",
+    "before": [
+      "thien",
+      "phe",
+      "hoang"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Đường có hai vầng sáng"
+  },
+  {
+    "id": "gk_ao_giap_chua_lo_nghe_tim",
+    "before": [
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Xưởng thử giáp trên cổ lộ"
+  },
+  {
+    "id": "gk_phan_troi_mong_hon_mot_dong",
+    "before": [
+      "nui",
+      "tran",
+      "thien",
+      "thanh"
+    ],
+    "after": [
+      "thien"
+    ],
+    "reason": "Sân trải bản đồ trời"
+  },
+  {
+    "id": "gk_giot_dau_khong_ben_lua",
+    "before": [
+      "ma",
+      "hoang",
+      "phe"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Dãy đèn dưới vực"
+  },
+  {
+    "id": "gk_cai_mieng_giau_trong_vai",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Sân chắp xương"
+  },
+  {
+    "id": "gk_gio_am_cua_cho_tro",
+    "before": [
+      "dong",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Lán nghỉ ven đường hầm"
+  },
+  {
+    "id": "gk_muon_tuoi_qua_mua_ret",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Nhà đo tuổi"
+  },
+  {
+    "id": "gk_bat_canh_danh_cho_nguoi_cam",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Hốc bếp trong vách"
+  },
+  {
+    "id": "gk_hai_cot_che_doi_ung",
+    "before": [
+      "ma",
+      "hoang",
+      "phe"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Quầy sửa đồ đi đêm"
+  },
+  {
+    "id": "gk_nut_that_giu_cau_noi_cuoi",
+    "before": [
+      "ma",
+      "hoang",
+      "phe"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Cửa đường tống táng"
+  },
+  {
+    "id": "gk_nap_hom_co_then_ngoai",
+    "before": [
+      "tong",
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Sân phạt của [tông môn ma đạo]"
+  },
+  {
+    "id": "gk_mach_nuoc_khong_nhan_mau",
+    "before": [
+      "ma",
+      "hoang",
+      "phe"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Hõm đá có mạch nước"
+  },
+  {
+    "id": "gk_nguoi_than_tinh_theo_bai_vi",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Nhà giữ đồ thừa kế"
+  },
+  {
+    "id": "gk_hai_chiec_ghe_quay_lung",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Nhà sưởi kín gió"
+  },
+  {
+    "id": "gk_coi_nghien_chu_the",
+    "before": [
+      "ma",
+      "hoang",
+      "phe"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Phường giải khế"
+  },
+  {
+    "id": "gk_mong_tay_tren_cua_luyen_thi",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Nhà luyện thi bỏ lò"
+  },
+  {
+    "id": "gk_ban_khe_khong_co_mat_chu",
+    "before": [
+      "ma",
+      "hoang",
+      "phe"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Sảnh đổi lời thề"
+  },
+  {
+    "id": "gk_dau_kim_tim_duong_ve",
+    "before": [
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Nhà may áo cho oán hồn"
+  },
+  {
+    "id": "gk_mau_phan_thu_giong",
+    "before": [
+      "ma",
+      "hoang",
+      "phe"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Hốc dạy nói"
+  },
+  {
+    "id": "gk_mat_dat_nho_chan_quy",
+    "before": [
+      "tong",
+      "tran",
+      "ma",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Sân sám hối của [tông môn ma đạo]"
+  },
+  {
+    "id": "gk_bep_tro_phia_sau_nha_giam",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "ma"
+    ],
+    "reason": "Xóm nấu ăn sát vách ngục"
+  },
+  {
+    "id": "gk_lo_tho_phia_tren_vach_trieu",
+    "before": [
+      "bien",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Khoang đá dưới chân đảo"
+  },
+  {
+    "id": "gk_cau_thang_cho_nguoi_co_vay",
+    "before": [
+      "song"
+    ],
+    "after": [
+      "bien",
+      "song"
+    ],
+    "reason": "Bến buôn hai loài"
+  },
+  {
+    "id": "gk_khuyen_tai_buoc_neo",
+    "before": [
+      "bien",
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Bờ neo lúc nước rút"
+  },
+  {
+    "id": "gk_muc_tron_khoi_nghien",
+    "before": [
+      "bien",
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Phòng chép hải đồ"
+  },
+  {
+    "id": "gk_mam_com_buoc_phao",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Xóm nhà cọc"
+  },
+  {
+    "id": "gk_luoi_ca_chan_cong_thue",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Cổng cân cá"
+  },
+  {
+    "id": "gk_dinh_bien_rut_luc_trieu_xuon",
+    "before": [
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien",
+      "song"
+    ],
+    "reason": "Mỏm đá ngoài bến"
+  },
+  {
+    "id": "gk_hang_rang_tren_mai_cho",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Mái chợ cá"
+  },
+  {
+    "id": "gk_vang_bac_theo_trieu_nguoc",
+    "before": [
+      "bien",
+      "song",
+      "dong"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Rìa vùng nước sâu"
+  },
+  {
+    "id": "gk_mau_khoa_phia_duoi_boong",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "thanh",
+      "tran"
+    ],
+    "reason": "Xưởng đóng khoang tàu"
+  },
+  {
+    "id": "gk_mai_nha_moc_tren_coc_chet",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Xóm cọc bỏ trống"
+  },
+  {
+    "id": "gk_bong_nguoi_trong_guong_nuoc_",
+    "before": [
+      "bien",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "bien"
+    ],
+    "reason": "Sân hứng mưa trên đảo"
+  },
+  {
+    "id": "gk_tam_dem_duoi_kiem",
+    "before": [
+      "nui",
+      "tong"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Vách tập kiếm của [tông môn]"
+  },
+  {
+    "id": "gk_ghe_da_co_nguoi_dat_truoc",
+    "before": [
+      "tong",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Sân lễ của [tông môn]"
+  },
+  {
+    "id": "gk_dot_tre_o_cua_ngach",
+    "before": [
+      "nui"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Hành lang kín gió"
+  },
+  {
+    "id": "gk_duong_may_nguoc",
+    "before": [
+      "nui",
+      "tong"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Bậc đá giữa hai sơn môn"
+  },
+  {
+    "id": "gk_nguoi_ke_ban_tho",
+    "before": [
+      "tong",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Nhà thờ đệ tử vô danh"
+  },
+  {
+    "id": "gk_dinh_lo_mat_nap",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Sân phơi đan cụ"
+  },
+  {
+    "id": "gk_cua_da_tho_mua_dong",
+    "before": [
+      "nui",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Kho phù dưới dốc"
+  },
+  {
+    "id": "gk_bac_da_chi_mon_mot_ben",
+    "before": [
+      "nui"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Đường vòng lưng núi"
+  },
+  {
+    "id": "gk_nua_qua_can_cua_hai_phai",
+    "before": [
+      "tong",
+      "nui",
+      "rung"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Trạm chia than linh"
+  },
+  {
+    "id": "gk_loi_khac_o_tay_vin",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Hiên chịu phạt"
+  },
+  {
+    "id": "gk_canh_man_trong_chen_mai",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Nhà tập viết phù"
+  },
+  {
+    "id": "gk_nam_hon_da_vao_mua_gio",
+    "before": [
+      "nui"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Hẻm đá dưới sườn núi"
+  },
+  {
+    "id": "gk_mat_ca_trong_ranh_kiem",
+    "before": [
+      "rung",
+      "dong",
+      "tong"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Ruộng bậc thang dưới kiếm đường"
+  },
+  {
+    "id": "gk_ban_ve_tren_lung_rua",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Sân học trận"
+  },
+  {
+    "id": "gk_so_truc_sau_ba_tieng_mo",
+    "before": [
+      "nui",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong",
+      "thanh"
+    ],
+    "reason": "Nhà trực chân núi"
+  },
+  {
+    "id": "gk_vet_cat_tren_thiep_hon",
+    "before": [
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Sân thỉnh giảng"
+  },
+  {
+    "id": "gk_nam_voi_chua_toi",
+    "before": [
+      "nui"
+    ],
+    "after": [
+      "nui",
+      "tong"
+    ],
+    "reason": "Vách núi có vết lở"
+  },
+  {
+    "id": "gk_duong_kim_qua_phu_rach",
+    "before": [
+      "nui",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "cho",
+      "thanh"
+    ],
+    "reason": "Hiên chợ dưới núi"
+  },
+  {
+    "id": "gk_bac_tren_cung_thieu_mot_phie",
+    "before": [
+      "nui",
+      "tong"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Dốc ra sơn môn"
+  },
+  {
+    "id": "gk_soi_day_giua_hai_mai",
+    "before": [
+      "tong",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tong"
+    ],
+    "reason": "Mái nhà kính của [tông môn]"
+  },
+  {
+    "id": "gk_nuoc_qua_bo_thap",
+    "before": [
+      "song",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "song"
+    ],
+    "reason": "Bờ đê giữa hai xóm"
+  },
+  {
+    "id": "gk_mot_nen_duong_do",
+    "before": [
+      "song",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tran",
+      "thanh"
+    ],
+    "reason": "Bếp ăn ở bến củi"
+  },
+  {
+    "id": "gk_hon_da_ke_quan_tai",
+    "before": [
+      "phe",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tran",
+      "thanh"
+    ],
+    "reason": "Xưởng mộc bên đường đất"
+  },
+  {
+    "id": "gk_cai_chan_ke_cao",
+    "before": [
+      "rung",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "tran",
+      "thanh"
+    ],
+    "reason": "Xóm ven đồng"
+  },
+  {
+    "id": "gk_manh_va_tren_buom_giay",
+    "before": [
+      "song",
+      "tran",
+      "thanh"
+    ],
+    "after": [
+      "song",
+      "tran"
+    ],
+    "reason": "Mương làng"
+  }
+]

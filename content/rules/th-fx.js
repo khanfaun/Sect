@@ -1,0 +1,2 @@
+// Nguồn chuẩn: TH_FX. Luật xử lý ở src/game/core2/06-thieu-dot-tho-nguyen.js.
+const TH_FX={kim:['atkP',2,contentText("core2_06-thieu-dot-tho-nguyen_js.007")],moc:['hpP',3,contentText("core2_06-thieu-dot-tho-nguyen_js.008")],thuy:['mpP',4,contentText("core2_06-thieu-dot-tho-nguyen_js.009")],hoa:['matkP',2.5,contentText("core2_06-thieu-dot-tho-nguyen_js.010")],tho:['defP',3,contentText("core2_06-thieu-dot-tho-nguyen_js.011")]};

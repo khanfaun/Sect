@@ -1,0 +1,2 @@
+// Nguồn chuẩn: ART_SFX. Luật xử lý ở src/game/core2/05-tui-do-gom-moi.js.
+const ART_SFX={cp:['Quyết','Kinh','Công',contentText("core2_05-tui-do-gom-moi_js.017"),contentText("core2_05-tui-do-gom-moi_js.018"),contentText("core2_05-tui-do-gom-moi_js.019")],tp:[contentText("core2_05-tui-do-gom-moi_js.020"),contentText("core2_05-tui-do-gom-moi_js.021"),contentText("core2_05-tui-do-gom-moi_js.022"),contentText("core2_05-tui-do-gom-moi_js.023"),contentText("core2_05-tui-do-gom-moi_js.024")]};

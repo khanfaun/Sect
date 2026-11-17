@@ -1,0 +1,2 @@
+// Nguồn chuẩn: SECT_SFX. Luật xử lý ở src/game/core/04-loi-tro-choi.js.
+const SECT_SFX={kiem:['Kiếm Tông','Kiếm Phái','Kiếm Các','Kiếm Sơn Trang'],dan:['Cốc','Đan Tông','Đan Các'],dao:['Tông','Môn','Cung','Phái'],tran:['Trận Tông','Trận Các'],khi:['Khí Tông','Khí Phái'],phu:['Phù Môn','Phù Tông'],ma:['Ma Tông','Ma Giáo','Sát Tông','Huyết Điện'],am:['Âm Phái','Thi Động','Quỷ Tông'],phat:['Tự','Thiền Viện'],thu:['Ngự Thú Môn','Linh Thú Sơn']};

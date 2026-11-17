@@ -56,21 +56,21 @@ function npc(kind){
   const pg=G.run?G.run.g:'nam';
   let g=kind==='nu'?'nu':kind==='nam'?'nam':chance(.5)?'nam':'nu';
   const o={g};
-  if(kind==='gia'){g=o.g=chance(.72)?'nam':'nu';o.ten=pick(NAME.ho)+' '+pick(g==='nam'?NAME.nam:NAME.nu);o.hn=g==='nam'?'lão':'bà';o.xung=g==='nam'?'lão phu':'lão thân';o.goi=pg==='nam'?'tiểu hữu':'nha đầu';o.look=lc1(T('{look_gia_'+g+'}'));}
-  else if(kind==='tang'){o.g='nam';o.ten=tangName();o.hn='vị tăng';o.xung='bần tăng';o.goi='thí chủ';o.look=lc1(T('{look_tang}'));}
-  else if(kind==='dao'){o.g='nam';o.ten=daoName();o.hn='lão đạo';o.xung='bần đạo';o.goi='đạo hữu';o.look=lc1(T('{look_dao}'));}
-  else if(kind==='ma'){o.g=g;o.ten=maName();o.hn=g==='nam'?'hắn':'mụ';o.xung='bản tọa';o.goi='tiểu bối';o.look=lc1(T('{look_ma}'));}
-  else if(kind==='thuong'){o.g='nam';o.ten='chưởng quỹ '+pick(NAME.ho);o.hn='gã';o.xung='tiểu nhân';o.goi='khách quan';o.look=lc1(T('{look_thuong}'));}
-  else if(kind==='hai'){o.ten=biName();o.hn=g==='nam'?'thằng bé':'con bé';o.xung='cháu';o.goi=pg==='nam'?'đại ca':'tỷ tỷ';o.look=lc1(T('{look_hai}'));}
-  else if(kind==='pham'){o.ten=pick(NAME.ho)+' '+pick(NAME.bi3);o.g=/Nương|Tẩu|Bà|Muội/.test(o.ten)?'nu':'nam';o.hn=o.g==='nam'?'gã':'thị';o.xung='tiểu nhân';o.goi='tiên sư';o.look=lc1(T('{look_phamnhan}'));}
-  else if(kind==='yeu'){o.ten=pick(DESC.vo.concat(DESC.am))+' '+pick(['Tộc trưởng','Đại tướng','Yêu sứ','Yêu vương']);o.hn='hắn';o.xung='bổn tọa';o.goi='người tu tiên';o.look='mắt vàng, tai nhọn, nanh dài quá môi';}
-  else {o.ten=genName(g);o.hn=g==='nam'?'hắn':'nàng';o.xung=g==='nam'?'tại hạ':'tiểu nữ';o.goi=chance(.5)?'đạo hữu':(pg==='nam'?'huynh đài':'cô nương');o.look=lc1(T('{look_tre_'+g+'}'));}
+  if(kind==='gia'){g=o.g=chance(.72)?'nam':'nu';o.ten=pick(NAME.ho)+' '+pick(g==='nam'?NAME.nam:NAME.nu);o.hn=g==='nam'?'lão':'bà';o.xung=g==='nam'?contentText("core_04-loi-tro-choi_js.npc.001"):contentText("core_04-loi-tro-choi_js.npc.002");o.goi=pg==='nam'?contentText("core_04-loi-tro-choi_js.npc.003"):contentText("core_04-loi-tro-choi_js.npc.004");o.look=lc1(T('{look_gia_'+g+'}'));}
+  else if(kind==='tang'){o.g='nam';o.ten=tangName();o.hn=contentText("core_04-loi-tro-choi_js.npc.005");o.xung=contentText("core_04-loi-tro-choi_js.npc.006");o.goi=contentText("core_04-loi-tro-choi_js.npc.007");o.look=lc1(T('{look_tang}'));}
+  else if(kind==='dao'){o.g='nam';o.ten=daoName();o.hn=contentText("core_04-loi-tro-choi_js.npc.008");o.xung=contentText("core_04-loi-tro-choi_js.npc.009");o.goi=contentText("core_04-loi-tro-choi_js.npc.010");o.look=lc1(T('{look_dao}'));}
+  else if(kind==='ma'){o.g=g;o.ten=maName();o.hn=g==='nam'?'hắn':'mụ';o.xung=contentText("core_04-loi-tro-choi_js.npc.011");o.goi=contentText("core_04-loi-tro-choi_js.npc.012");o.look=lc1(T('{look_ma}'));}
+  else if(kind==='thuong'){o.g='nam';o.ten=contentText("core_04-loi-tro-choi_js.npc.013")+pick(NAME.ho);o.hn='gã';o.xung=contentText("core_04-loi-tro-choi_js.npc.014");o.goi=contentText("core_04-loi-tro-choi_js.npc.015");o.look=lc1(T('{look_thuong}'));}
+  else if(kind==='hai'){o.ten=biName();o.hn=g==='nam'?contentText("core_04-loi-tro-choi_js.npc.016"):contentText("core_04-loi-tro-choi_js.npc.017");o.xung='cháu';o.goi=pg==='nam'?contentText("core_04-loi-tro-choi_js.npc.018"):'tỷ tỷ';o.look=lc1(T('{look_hai}'));}
+  else if(kind==='pham'){o.ten=pick(NAME.ho)+' '+pick(NAME.bi3);o.g=/Nương|Tẩu|Bà|Muội/.test(o.ten)?'nu':'nam';o.hn=o.g==='nam'?'gã':'thị';o.xung=contentText("core_04-loi-tro-choi_js.npc.019");o.goi=contentText("core_04-loi-tro-choi_js.npc.020");o.look=lc1(T('{look_phamnhan}'));}
+  else if(kind==='yeu'){o.ten=pick(DESC.vo.concat(DESC.am))+' '+pick([contentText("core_04-loi-tro-choi_js.npc.021"),contentText("core_04-loi-tro-choi_js.npc.022"),contentText("core_04-loi-tro-choi_js.npc.023"),contentText("core_04-loi-tro-choi_js.npc.024")]);o.hn='hắn';o.xung=contentText("core_04-loi-tro-choi_js.npc.025");o.goi=contentText("core_04-loi-tro-choi_js.npc.026");o.look=contentText("core_04-loi-tro-choi_js.npc.027");}
+  else {o.ten=genName(g);o.hn=g==='nam'?'hắn':'nàng';o.xung=g==='nam'?contentText("core_04-loi-tro-choi_js.npc.028"):contentText("core_04-loi-tro-choi_js.npc.029");o.goi=chance(.5)?contentText("core_04-loi-tro-choi_js.npc.030"):(pg==='nam'?contentText("core_04-loi-tro-choi_js.npc.031"):contentText("core_04-loi-tro-choi_js.npc.032"));o.look=lc1(T('{look_tre_'+g+'}'));}
   return o;
 }
 
 // ---------------- THẾ GIỚI (bền qua các kiếp) ----------------
-const SECT_PRE={chinh:['Thanh Vân','Huyền Thiên','Thái Ất','Ngọc Hư','Tử Tiêu','Côn Lôn','Thiên Diễn','Lăng Tiêu','Bạch Vân','Ngân Hạc','Thiên Hà','Huyền Vũ','Thái Chung','Thanh Nguyệt','Hàn Chung','Lạc Hà','Đan Hà','Vấn Đạo','Lưu Vân','Thái Hư','Quy Nguyên'],ma:['Huyết Sát','Âm Phong','Vạn Băng','Cửu U','Thiên Ma','Hợp Hoan','Bách Độc','Tàn Ẩn','Phệ Hồn','Huyết Ảnh','Hắc Sát','Thi Âm','Vô Gian','U Minh'],phat:['Kim Cương','Đại Bi','Bồ Đề','Tịnh Thổ','Lạn Kha','Thiền Tâm','Vô Tướng','Bát Nhã'],trung:['Bạch Nguyệt','Thần Hà','Bách Thảo','Vạn Thú','Linh Lung','Thiên Cơ','Phiêu Miểu']};
-const SECT_SFX={kiem:['Kiếm Tông','Kiếm Phái','Kiếm Các','Kiếm Sơn Trang'],dan:['Cốc','Đan Tông','Đan Các'],dao:['Tông','Môn','Cung','Phái'],tran:['Trận Tông','Trận Các'],khi:['Khí Tông','Khí Phái'],phu:['Phù Môn','Phù Tông'],ma:['Ma Tông','Ma Giáo','Sát Tông','Huyết Điện'],am:['Âm Phái','Thi Động','Quỷ Tông'],phat:['Tự','Thiền Viện'],thu:['Ngự Thú Môn','Linh Thú Sơn']};
+// Bảng SECT_PRE: content/characters/sect-pre.js
+// Bảng SECT_SFX: content/characters/sect-sfx.js
 function genWorld(seed){
   seed=seed||Math.floor(Math.random()*1e9);
   return seeded('w'+seed,()=>{const w=genWorld0();w.seed=seed;w.t=0;w.bangY=1010;w.ents=[];w.legacy=[];w.nemesis=null;w.chron=[];w.lastBirth=null;
@@ -80,23 +80,23 @@ function genWorld0(){
   const used=new Set();
   const mk=(al,kind)=>{let p,k=0;do{p=pick(SECT_PRE[al]);}while(used.has(p)&&k++<20);used.add(p);return {n:p+' '+pick(SECT_SFX[kind]),al,kind};};
   const sects=[mk('chinh','kiem'),mk('chinh','dan'),mk('chinh','dao'),mk('chinh',pick(['tran','khi','phu'])),mk('ma','ma'),mk('ma','am'),mk('phat','phat')];
-  if(chance(.5)) sects.push(mk('trung','thu')); else sects.push({n:pick(NAME.ho2)+' Thế Gia',al:'trung',kind:'the'});
+  if(chance(.5)) sects.push(mk('trung','thu')); else sects.push({n:pick(NAME.ho2)+contentText("core_04-loi-tro-choi_js.genWorld0.033"),al:'trung',kind:'the'});
   const rivals=[];const usedN=new Set();
   for(let i=0;i<7;i++){
     const s=sects[i%sects.length];
     let g=s.kind==='phat'?'nam':(chance(.5)?'nam':'nu');
     let ten,k=0;do{ten=s.kind==='phat'?tangName():genName(g,true);}while(usedN.has(ten)&&k++<20);usedN.add(ten);
-    const tt={kiem:g==='nam'?'kiếm tử':'kiếm tiên tử',dan:g==='nam'?'đan tử':'đan tiên tử',phat:'phật tử',ma:g==='nam'?'ma tử':'yêu nữ',am:g==='nam'?'quỷ tử':'âm nữ',the:g==='nam'?'thiếu chủ':'đại tiểu thư',thu:g==='nam'?'thú vương tử':'linh thú tiên tử'}[s.kind]||(g==='nam'?'thánh tử':'thánh nữ');
+    const tt={kiem:g==='nam'?contentText("core_04-loi-tro-choi_js.genWorld0.034"):contentText("core_04-loi-tro-choi_js.genWorld0.035"),dan:g==='nam'?contentText("core_04-loi-tro-choi_js.genWorld0.036"):contentText("core_04-loi-tro-choi_js.genWorld0.037"),phat:contentText("core_04-loi-tro-choi_js.genWorld0.038"),ma:g==='nam'?'ma tử':contentText("core_04-loi-tro-choi_js.genWorld0.039"),am:g==='nam'?contentText("core_04-loi-tro-choi_js.genWorld0.040"):'âm nữ',the:g==='nam'?contentText("core_04-loi-tro-choi_js.genWorld0.041"):contentText("core_04-loi-tro-choi_js.genWorld0.042"),thu:g==='nam'?contentText("core_04-loi-tro-choi_js.genWorld0.043"):contentText("core_04-loi-tro-choi_js.genWorld0.044")}[s.kind]||(g==='nam'?contentText("core_04-loi-tro-choi_js.genWorld0.045"):contentText("core_04-loi-tro-choi_js.genWorld0.046"));
     rivals.push({ten,g,s:i%sects.length,tt,el:pick(['kim','moc','thuy','hoa','tho','loi','bang','phong']),tinh:s.al==='ma'?pick(['hiem','hiem','loi']):pick(['nghia','nghia','loi','hiem']),tal:rnd1(0.85+R()*0.55)});
   }
-  return {quoc:pick(['Lương Quốc','Triệu Quốc','Đại Tề','Tây Lương','Bắc Yến','Nam Chiếu','Đại Hạ','Việt Quốc','Đại Chu']),sects,rivals};
+  return {quoc:pick([contentText("core_04-loi-tro-choi_js.genWorld0.047"),contentText("core_04-loi-tro-choi_js.genWorld0.048"),contentText("core_04-loi-tro-choi_js.genWorld0.049"),contentText("core_04-loi-tro-choi_js.genWorld0.050"),contentText("core_04-loi-tro-choi_js.genWorld0.051"),contentText("core_04-loi-tro-choi_js.genWorld0.052"),contentText("core_04-loi-tro-choi_js.genWorld0.053"),contentText("core_04-loi-tro-choi_js.genWorld0.054"),contentText("core_04-loi-tro-choi_js.genWorld0.055")]),sects,rivals};
 }
 function newMeta(){return {opt:{},v:SAVE_V,pts:0,total:0,upg:{},lives:[],lore:[],ach:[],kills:0,world:genWorld(),last:null,nlife:0};}
 const SAVE_V=3;
 const U = id=>(G.meta&&G.meta.upg[id])||0;
 
 // ---------------- NGƯỜI CHƠI ----------------
-function pView(){const r=G.run;return {ten:r.ten,cn:r.g==='nam'?'công tử':'cô nương',ht:r.g==='nam'?'huynh đài':'cô nương',dh:r.g==='nam'?'huynh':'tỷ',sd:r.g==='nam'?'sư đệ':'sư muội',tt:r.g==='nam'?'tiểu tử':'nha đầu',ong:r.g==='nam'?'ông lão':'bà lão'};}
+function pView(){const r=G.run;return {ten:r.ten,cn:r.g==='nam'?contentText("core_04-loi-tro-choi_js.pView.056"):contentText("core_04-loi-tro-choi_js.pView.057"),ht:r.g==='nam'?contentText("core_04-loi-tro-choi_js.pView.058"):contentText("core_04-loi-tro-choi_js.pView.059"),dh:r.g==='nam'?'huynh':'tỷ',sd:r.g==='nam'?'sư đệ':contentText("core_04-loi-tro-choi_js.pView.060"),tt:r.g==='nam'?contentText("core_04-loi-tro-choi_js.pView.061"):contentText("core_04-loi-tro-choi_js.pView.062"),ong:r.g==='nam'?contentText("core_04-loi-tro-choi_js.pView.063"):contentText("core_04-loi-tro-choi_js.pView.064")};}
 function rootView(r){const R0=ROOT.find(x=>x.id===r.id);return {n:R0.n,els:r.els,m:R0.m};}
 function relicFx(rel){
   const o={};const m=TM[rel.tier||0];
@@ -143,7 +143,7 @@ function realmText(r){r=r||G.run;return REALM[r.realm]+' '+TIEU[r.realm===G.run?
 function realmLabel(){const r=G.run;return qualName(r.realm,(r.quality||[])[r.realm]||0)+' '+TIEU[tieu()];}
 function log(t){const r=G.run;r.log.push({a:Math.floor(r.age),t});if(r.log.length>240)r.log.shift();}
 function bio(t){G.run.bio.push(t);}
-function karmaName(k){return k>=60?'Đại thiện':k>=25?'Thiện':k<=-60?'Ma đầu':k<=-25?'Tà':'Trung dung';}
+function karmaName(k){return k>=60?contentText("core_04-loi-tro-choi_js.karmaName.065"):k>=25?'Thiện':k<=-60?contentText("core_04-loi-tro-choi_js.karmaName.066"):k<=-25?'Tà':'Trung dung';}
 
 // ---------------- ĐẦU THAI ----------------
 function genRoot(){
@@ -181,9 +181,9 @@ function newRun(c){
   if(og.pill2) r.pills.push({id:og.pill2,q:0});
   const s=S();r.hp=s.maxHp;r.mp=s.maxMp;
   G.meta.nlife++;
-  log(`${kiepName(r.kiep)}: ${r.ten}, ${og.n.toLowerCase()}, quê ở ${r.que}.`);
+  log(contentText("core_04-loi-tro-choi_js.newRun.067", [kiepName(r.kiep),r.ten,og.n.toLowerCase(),r.que]));
   bio(T(`${r.ten} ${og.bio}.`,{que:r.que,quoc:G.meta.world.quoc}));
-  for(const L of (G.meta.world.legacy||[]))if(L.feud&&!L.used&&chance(.5)){L.used=1;r.seeds.push({t:'oan',ten:L.ten,hn:L.hn,d:L.d+' (kiếp trước, khi ngươi còn là '+L.who+')',r:0,at:G.meta.world.t-60*HD});}
+  for(const L of (G.meta.world.legacy||[]))if(L.feud&&!L.used&&chance(.5)){L.used=1;r.seeds.push({t:'oan',ten:L.ten,hn:L.hn,d:L.d+contentText("core_04-loi-tro-choi_js.newRun.068")+L.who+')',r:0,at:G.meta.world.t-60*HD});}
   G.birth=null;G.screen='map';G.meta.world.lastBirth=c.at;
   arrive(c.at);
   r.scene={type:'region',text:T(REG[0].intro,{que:r.que})};

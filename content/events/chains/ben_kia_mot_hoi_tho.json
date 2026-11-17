@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_ben_kia_mot_hoi_tho_1",
+      "name": "Dây kéo ở hai đầu",
+      "kind": "story",
+      "tags": [
+        "Lãng mạn"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Nữ thợ lặn",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "ngư nhân",
+          "alignment": "context"
+        }
+      },
+      "text": "Nữ thợ lặn {$a.ten} đứng trên giàn, giữ sợi dây có đầu kia nằm trong tay ngư nhân {$b.ten} dưới nước. Hai lần giật là hỏi, một lần là đáp. Nàng muốn xuống gặp hắn, nhưng không đủ tiền mua bùa thở.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Mua bùa thở giúp nàng xuống gặp",
+          "t": "Ngươi mua bùa ở trạm lặn. Nàng xuống gặp được hắn, trở lên đúng trước khi bùa hết hiệu lực. Gỡ dây xong, nàng vẫn quay lại nhìn mặt nước.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "dây kéo ở hai đầu"
+            ]
+          },
+          "cost": {
+            "st": 16
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua chỗ trên giàn để xuống trước",
+          "t": "Ngươi tới được mạch khí đang mở. Hai người đợi trên và dưới mặt nước, dây nằm ngang qua một vòng phao.",
+          "e": {
+            "tv": 4
+          },
+          "cost": {
+            "st": 16
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Dây giật hai lần. Sau đó chỉ còn một nhịp rất nhẹ.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_ben_kia_mot_hoi_tho_1",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "ben_kia_mot_hoi_tho",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện hai loài",
+      "setting": {
+        "description": "Giàn lặn ở Đông Hải Yêu Vực",
+        "historyCondition": "không"
+      },
+      "emotion": "Lãng mạn"
+    },
+    {
+      "id": "ch_ben_kia_mot_hoi_tho_2",
+      "name": "Chén úp giữ khí",
+      "kind": "story",
+      "tags": [
+        "Dịu dàng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Nữ thợ lặn",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Ngư nhân",
+          "alignment": "context"
+        }
+      },
+      "text": "Hai người tìm một buồng có túi khí đủ lâu để nói chuyện. Ngư nhân {$b.ten} mang xuống hai cái chén, một chiếc úp để giữ chút khí trên bờ.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Gia cố vòm buồng bằng pháp lực",
+          "t": "Ngươi dùng pháp lực gia cố vòm, để túi khí không tan theo sóng lớn. Hai người có chỗ gặp nhau lâu hơn một hơi lặn. Nàng nhờ ngươi dạy cách nhìn vết nứt, lần sau sẽ tự kiểm tra trước khi xuống.",
+          "cost": {
+            "mp": "20%"
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Đổi giờ dùng buồng lấy công dẫn đường",
+          "t": "Họ chỉ ngươi lối đi sâu. Khi ngươi tới buồng, trên tường còn dấu hai chỗ từng treo áo.",
+          "e": {
+            "tv": 3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Nữ thợ lặn {$a.ten} nhấc chén lên, nghe phần khí bên trong thoát ra.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_ben_kia_mot_hoi_tho_2",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "ben_kia_mot_hoi_tho",
+        "part": "2",
+        "waitHours": 2160,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện hai loài",
+      "setting": {
+        "description": "Buồng đá ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 1 chọn “Mua bùa thở giúp nàng xuống gặp” · vài tháng sau · buồng đá dưới triều"
+      },
+      "emotion": "Dịu dàng"
+    },
+    {
+      "id": "ch_ben_kia_mot_hoi_tho_2b",
+      "name": "Vòng phao bỏ trống",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Nữ thợ lặn",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "ngư nhân",
+          "alignment": "context"
+        }
+      },
+      "text": "Giàn đã mục. Nữ thợ lặn {$a.ten} đem vòng phao lên bãi, trên dây ngư nhân {$b.ten} buộc một nút nàng chưa kịp tháo.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Tìm chỗ neo cho hai người gặp lại",
+          "t": "Ngươi trả tiền thuê thuyền, đưa nàng tìm một mỏm đá kín gió, mất trọn ngày dò đường. Người dưới nước nhận ra sợi dây thả xuống, bơi lên đón. Cả hai chọn chỗ ấy làm nơi gặp mới.",
+          "e": {
+            "karma": 4,
+            "h": 24,
+            "an": [
+              "a",
+              "vòng phao bỏ trống"
+            ]
+          },
+          "cost": {
+            "st": 16
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua vòng phao lấy gỗ nhẹ",
+          "t": "Nàng đủ tiền thuê giàn khác một lần. Nút dây còn lại vướng vào tay ngươi lúc cưa gỗ.",
+          "cost": {
+            "st": 16
+          },
+          "e": {
+            "karma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Nàng quấn dây quanh vòng. Đến nút ấy thì dừng.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_ben_kia_mot_hoi_tho_2b",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "ben_kia_mot_hoi_tho",
+        "part": "2b",
+        "waitHours": 2160,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện hai loài",
+      "setting": {
+        "description": "Bãi phao ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 1 chọn “Mua chỗ trên giàn để xuống trước” · vài tháng sau · bãi kéo phao"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_ben_kia_mot_hoi_tho_3",
+      "name": "Nước dồn qua trần thấp",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Nữ thợ lặn",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Triều lớn ép một nhóm người vào hốc đá giữa biển. Nếu ngươi từng gia cố buồng hoặc tìm lại chỗ neo, đôi bạn đã thuộc lối thoát quanh vòm. Nếu chỗ gặp từng đổi lấy quyền dùng riêng hoặc bị bán đi, họ phải dò lại đường giữa dòng nước đục. Nước lên gần sát trần. Nữ thợ lặn {$a.ten} buộc đầu dây vào đá, gọi mọi người xếp hàng.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Căng dây dẫn cả nhóm ra ngoài",
+          "t": "Ngươi cùng nàng kéo dây từ hốc tới mỏm đá. Ngư nhân dẫn từng người bám dây ra khỏi nước, ngươi giữ đầu trong tới lượt cuối. Không còn ai mắc lại.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Giữ túi khí để chờ cứu từ bờ",
+          "t": "Ngươi dùng pháp lực giữ túi khí, để người biết bơi ra bờ gọi thuyền. Tới khi cứu được người cuối, ngươi kiệt khí, phải nhờ đôi bạn dìu lên. Họ đếm lại đủ người rồi mới rời đi.",
+          "cost": {
+            "mp": "20%"
+          },
+          "e": {
+            "karma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Trước khi tiếng người bị nước lấp, dây giật một lần.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_ben_kia_mot_hoi_tho_3",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "ben_kia_mot_hoi_tho",
+        "part": "3",
+        "waitHours": 4320,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Hai loài nương nhau",
+      "setting": {
+        "description": "Hốc trú ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · mùa triều lớn · hốc trú giữa biển"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_ben_kia_mot_hoi_tho_4",
+      "name": "Mặt ghế luôn ướt",
+      "kind": "story",
+      "tags": [
+        "Ấm áp"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu nhóm thoát qua dây, họ mang thừng dựng nhà chờ. Nếu từng đợi người cứu, họ xây thêm một vòm nổi, dưới vòm đặt ghế vừa chìm nửa mặt.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp bùa cho người đi ngang dùng chung",
+          "t": "Ngươi mua bùa thở mới để người qua bến dùng chung. Hai người ngồi ở ghế nửa chìm, mỗi người đặt một cái chén.",
+          "cost": {
+            "st": 16
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Nhận quyền cho thuê nhà chờ",
+          "t": "Ngươi có linh thạch và trả công giữ nhà. Một nửa ghế vẫn được chừa cho người đến từ dưới nước.",
+          "e": {
+            "st": 22
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Đôi bạn gọi ngươi ghé nghỉ lúc quay về. Nàng gõ hai lần xuống bậc ngập nước, hắn nổi lên chào rồi cùng cười vì ngươi vẫn chưa thuộc hiệu dây.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_ben_kia_mot_hoi_tho_4",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "ben_kia_mot_hoi_tho",
+        "part": "4",
+        "waitHours": 8640,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện hai loài",
+      "setting": {
+        "description": "Nhà chờ ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 3 chọn “Căng dây dẫn cả nhóm ra ngoài” hoặc “Giữ túi khí để chờ cứu từ bờ” · một năm sau · nhà chờ thủy triều"
+      },
+      "emotion": "Ấm áp"
+    }
+  ]
+}

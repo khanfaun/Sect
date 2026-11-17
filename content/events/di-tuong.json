@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "bi_canh",
+      "name": "Bí cảnh mở cửa",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:di",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 2
+      },
+      "actors": {},
+      "text": [
+        "Trên trời bỗng mở ra một khe nứt ngũ sắc. Tu sĩ khắp nơi đổ về: bí cảnh trăm năm mới mở một lần!",
+        "Một vòng sáng xoáy giữa khoảng đất trống. Lối vào bí cảnh mở ra, để lộ những bậc đá không thuộc về nơi này."
+      ],
+      "choices": [
+        {
+          "i": "🌀",
+          "l": "Xông vào",
+          "o": [
+            {
+              "w": 2,
+              "t": "Một con thủ hộ thú chặn ngay lối vào.",
+              "fight": {
+                "elite": 1,
+                "k": "ho",
+                "n": "Hổ giữ cửa bí cảnh"
+              },
+              "win": {
+                "t": "Thủ hộ thú gục xuống. Phía sau là một bệ đá, trên đó có bảo vật đang phát sáng.",
+                "e": {
+                  "relic": 1
+                }
+              }
+            },
+            {
+              "w": 2,
+              "t": "Bí cảnh là một vườn thuốc bỏ hoang. Ngươi hái mỏi tay.",
+              "e": {
+                "pill": [
+                  "tinhnguyen",
+                  "hoixuan",
+                  "taytuy"
+                ],
+                "h": 144
+              }
+            },
+            {
+              "w": 1,
+              "t": "Bí cảnh sụp đổ khi ngươi mới vào được nửa đường. Ngươi chạy thục mạng ra ngoài, chỉ kịp vơ lấy một thứ.",
+              "e": {
+                "relic": 0,
+                "hp": "-20%"
+              }
+            }
+          ]
+        },
+        {
+          "i": "⏳",
+          "l": "Chờ ở cửa, cướp kẻ đi ra",
+          "chk": [
+            "tp",
+            11
+          ],
+          "ok": {
+            "t": "Mấy kẻ lảo đảo đi ra, mình đầy thương tích. Ngươi ra tay nhanh gọn.",
+            "e": {
+              "st": 40,
+              "karma": -6
+            }
+          },
+          "no": {
+            "t": "Kẻ đi ra đầu tiên lại là kẻ mạnh nhất.",
+            "fight": {
+              "k": "tantu",
+              "elite": 1
+            },
+            "win": {
+              "t": "Hắn gục. Túi trữ vật của hắn nặng trịch.",
+              "e": {
+                "st": 30,
+                "karma": -3
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Không tham gia",
+          "t": "Nơi nhiều người tranh, thường lắm kẻ chết. Ngươi đi tiếp."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/12-dong-doi-tam-thoi.js",
+        "ref": "bi_canh",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cơ duyên",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "sao_roi",
+      "name": "Sao rơi",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:di",
+        "places": [
+          "nui",
+          "hoang",
+          "rung",
+          "bien",
+          "thien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Đêm qua có sao băng rơi xuống phía tây, đất rung ba lần. Sáng nay khói vẫn còn bốc lên.",
+        "Một quả cầu lửa vạch ngang trời rồi đâm xuống thung lũng gần đó. Tiếng nổ làm chim chóc bay rợp trời."
+      ],
+      "choices": [
+        {
+          "i": "🔥",
+          "l": "Tới xem",
+          "o": [
+            {
+              "w": 2,
+              "t": "Giữa hố sâu là một khối sắt đỏ rực, tỏa ra kiếm khí lạnh buốt.",
+              "e": {
+                "relic": "tinhthiet"
+              }
+            },
+            {
+              "w": 2,
+              "t": "Ngươi tới sau. Đã có kẻ đứng giữa hố.",
+              "fight": {
+                "k": "tantu"
+              },
+              "win": {
+                "t": "Kẻ kia bỏ chạy. Khối sắt sao vẫn nằm đó, còn nóng hổi.",
+                "e": {
+                  "relic": "tinhthiet"
+                }
+              }
+            },
+            {
+              "w": 1,
+              "t": "Thứ rơi xuống không phải sắt. Nó đang cử động.",
+              "fight": {
+                "k": "tinhthu",
+                "m": 1.15
+              },
+              "win": {
+                "t": "Tinh thú tan thành bụi sao. Trong lòng bàn tay ngươi còn đọng lại mấy hạt sáng.",
+                "e": {
+                  "tv": 10,
+                  "st": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "i": "🙅",
+          "l": "Kệ nó",
+          "t": "Trời rơi xuống thứ gì, kệ trời."
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/12-dong-doi-tam-thoi.js",
+        "ref": "sao_roi",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cơ duyên",
+      "setting": {
+        "description": "nui / hoang / rung / bien / thien",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "dau_gia",
+      "name": "Hội đấu giá",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:di",
+        "places": [
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Đại hội đấu giá của Vạn Bảo Thương Hội. Món cuối cùng được bưng ra, phủ khăn đỏ. Người dẫn chương trình mỉm cười: “{$dan}, giá khởi điểm…”",
+        "Ngươi chen được vào hội đấu giá ở {$pl}. Đèn lồng vạn ngọn, người tu tiên ngồi kín ba tầng lầu."
+      ],
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Ra giá món chót",
+          "cost": {
+            "st": 55
+          },
+          "t": "Tiếng búa gõ xuống. Món đồ là của ngươi. Mấy ánh mắt hằm hằm nhìn theo.",
+          "e": {
+            "pill": "@bt",
+            "lore": "van_bao"
+          }
+        },
+        {
+          "i": "🏺",
+          "l": "Mua một món nhỏ hơn",
+          "cost": {
+            "st": 30
+          },
+          "t": "Một món bảo vật không ai để ý. Ngươi mua với giá hời.",
+          "e": {
+            "relic": 0
+          }
+        },
+        {
+          "i": "👀",
+          "l": "Chỉ xem",
+          "t": "Xem người ta tranh nhau, ngươi hiểu ra giá trị thật của mọi thứ trên đời.",
+          "e": {
+            "rumor": 1,
+            "lore": "van_bao"
+          }
+        }
+      ],
+      "logic": {
+        "dk": "daugia"
+      },
+      "origin": {
+        "file": "src/game/core/12-dong-doi-tam-thoi.js",
+        "ref": "dau_gia",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Đấu giá",
+      "setting": {
+        "description": "thanh",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "dt_khi",
+      "name": "Linh khí phun trào",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:di",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Cửa bí cảnh mở hé, linh khí phun ra như suối. Tu sĩ khắp nơi kéo tới."
+      ],
+      "choices": [
+        {
+          "i": "🧘",
+          "l": "Ngồi hấp thu ngay tại chỗ",
+          "t": "Ngươi ngồi suốt một ngày một đêm.",
+          "e": {
+            "h": 24,
+            "tv": 6,
+            "dao": 1
+          }
+        },
+        {
+          "i": "🚪",
+          "l": "Lách vào trong",
+          "fight": {
+            "k": "tantu",
+            "cnt": 2
+          },
+          "win": {
+            "t": "Đánh lui kẻ tranh giành, ngươi vơ được một món.",
+            "e": {
+              "relic": 1,
+              "tv": 6
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "dk": "bicanh"
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "dt_khi",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cơ duyên",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "dt_sao",
+      "name": "Mảnh sao còn nóng",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:di",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Hố sâu còn bốc khói. Giữa hố là một mảnh thiên thạch đỏ rực."
+      ],
+      "choices": [
+        {
+          "i": "🧤",
+          "l": "Nhặt lên",
+          "chk": [
+            "tp",
+            10
+          ],
+          "ok": {
+            "t": "Nóng bỏng tay, nhưng là đồ thật.",
+            "e": {
+              "relic": "tinhthiet"
+            }
+          },
+          "no": {
+            "t": "Bỏng rát cả hai tay.",
+            "e": {
+              "hp": "-20%",
+              "st": 15
+            }
+          }
+        },
+        {
+          "i": "🔍",
+          "l": "Nghiên cứu tinh lực",
+          "t": "Ngươi ngồi bên hố, cảm ngộ tinh lực trời sao.",
+          "e": {
+            "h": 12,
+            "tv": 4,
+            "dao": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "dk": "saoroi"
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "dt_sao",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cơ duyên",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "dt_dau",
+      "name": "Đấu giá trong thành",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:di",
+        "places": [
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Vạn Bảo Thương Hội treo đèn khắp phố. Đấu giá sắp bắt đầu, nghe nói có cả lệnh bài thông quan."
+      ],
+      "choices": [
+        {
+          "i": "🏮",
+          "l": "Vào xem hàng",
+          "t": "Ngươi chen vào phòng đấu giá.",
+          "e": {
+            "shop": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Không có tiền, thôi",
+          "t": "Ngươi đứng ngoài nghe tiếng hô giá."
+        }
+      ],
+      "logic": {
+        "dk": "daugia"
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "dt_dau",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cơ duyên",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

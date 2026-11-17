@@ -7,6 +7,6 @@ function foeBest(u){let b='atk',bp=0;for(const it of u.pat||[]){const k=it==='ch
   if(!u||u.side!=='B'||u.immune||u.kind==='kiep'||u._desp||u.hp<=0||u.hp>u.max*FOE_DESP)return;
   u._desp=1;const sc=G.run&&G.run.scene;
   const heal=(u.pat||[]).includes('heal')&&chance(.5);u.intent=heal?'heal':foeBest(u);
-  if(sc&&sc.type==='combat'){clog(sc,`${u.name} bị dồn vào đường cùng, ${heal?'vận công hồi phục':'dồn sức tung đòn mạnh nhất'}!`,'en');
+  if(sc&&sc.type==='combat'){clog(sc,contentText("core2_26-doi-thu-than-thong_js.001", [u.name,heal?'vận công hồi phục':'dồn sức tung đòn mạnh nhất']),'en');
     if(!u.fpt&&(u.than||0)>=50&&!sc.kiep&&!sc.spar&&typeof foePtStart==='function')foePtStart(sc,u);}
   dbg('foe.desp',{n:u.name,it:u.intent});};}

@@ -1,0 +1,558 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_tam_phan_danh_cho_khach_1",
+      "name": "Gió lùa dưới ván",
+      "kind": "story",
+      "tags": [
+        "Ấm áp"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Thợ mộc",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "học việc",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Thợ mộc {$a.ten} làm tấm phản cho một nhà có người bệnh nằm lâu. Học việc {$b.ten} lắp nhầm một chân ngắn, rồi lẳng lặng cắt ba chân kia theo chân ấy.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp gỗ thay lại bốn chân",
+          "t": "Ngươi mua đủ gỗ cho hắn thay cả bốn chân, bảo hắn tự trình việc cắt sai với thầy. Lão mộc mắng một trận rồi ngồi xuống chỉ lại cách đo. Học việc lần này đo hai lượt mới cưa.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "gió lùa dưới ván"
+            ]
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua tấm phản thấp cho mình",
+          "t": "{$a.ten} có tiền làm tấm khác, nhưng đuổi {$b.ten} vì giấu lỗi. Hắn đem theo mẩu gỗ cắt ra từ chân đầu tiên.",
+          "cost": {
+            "st": 10
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão thợ mộc phát hiện phản thấp quá mức đặt hàng, gọi học trò tới hỏi. Ngươi đi khỏi giữa tiếng hắn lắp bắp nhận lỗi.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_tam_phan_danh_cho_khach_1",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "tam_phan_danh_cho_khach",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện phường nghề",
+      "setting": {
+        "description": "Xưởng mộc ở Phàm Trần",
+        "historyCondition": "không"
+      },
+      "emotion": "Ấm áp"
+    },
+    {
+      "id": "ch_tam_phan_danh_cho_khach_2",
+      "name": "Khóa cửa từ bên trong",
+      "kind": "story",
+      "tags": [
+        "Cảm động"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "thợ mộc",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Học việc",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "người bệnh",
+          "alignment": "context"
+        }
+      },
+      "text": "Người bệnh {$c.ten} đã ngồi dậy được, nhưng then cửa nằm cao quá tầm với. Học việc {$b.ten} lắp một sợi dây kéo then xuống, còn thợ mộc {$a.ten} đứng bên ngoài chờ nghe cửa tự mở.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp sắt làm then mới",
+          "t": "Cửa mở nhẹ và {$c.ten} tự khóa được từ bên trong. {$b.ten} cất sợi dây cũ, trên đầu dây có ba nút đã thắt thử.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "khóa cửa từ bên trong"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Nhận sửa nhà, lấy công sau khi người bệnh bán được",
+          "t": "Ngươi lo việc sửa và tìm người mua, nhận vốn cùng tiền công khi bán xong nhà. Người bệnh được tự chọn phòng thuê gần họ hàng trước ngày dọn đi. Hai thầy trò giúp chuyển đồ tới tận cửa.",
+          "e": {
+            "st": 14
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi vừa qua góc ngõ thì nghe then rơi, tiếp đó là tiếng cười rất nhỏ.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_tam_phan_danh_cho_khach_2",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "tam_phan_danh_cho_khach",
+        "part": "2",
+        "waitHours": 2160,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện chăm bệnh",
+      "setting": {
+        "description": "Xóm trong ở Phàm Trần",
+        "historyCondition": "phần 1 chọn “Góp gỗ thay lại bốn chân” · vài tháng sau · nhà người bệnh"
+      },
+      "emotion": "Cảm động"
+    },
+    {
+      "id": "ch_tam_phan_danh_cho_khach_2b",
+      "name": "Bàn thấp ở bến xe",
+      "kind": "story",
+      "tags": [
+        "Chua chát"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "thợ mộc",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "học việc",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "Người bệnh",
+          "alignment": "context"
+        }
+      },
+      "text": "Học việc {$b.ten} bị đuổi khỏi xưởng, giờ nhận đóng bàn ở bến xe. Người bệnh {$c.ten} thuê hắn làm bàn bán kim chỉ vừa tầm ngồi, nhưng chiếc bào sứt khiến việc chậm mãi. Hắn thấy ngươi, ngập ngừng hỏi có thể xem giúp chân bàn đã đều chưa.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Đặt một chiếc bàn riêng cho {$c.ten}",
+          "t": "{$b.ten} đóng vừa tầm tay người ngồi. Tiền ngươi trả đủ để hắn mua một lưỡi bào có cán liền.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "🗣️",
+          "l": "Gọi thợ mộc {$a.ten} đến nhận lại học trò",
+          "t": "Hai người làm việc cùng nhau, với điều kiện {$b.ten} bù tiền gỗ hỏng bằng tiền công. Hắn buộc lưỡi bào sứt vào hông.",
+          "e": {
+            "karma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$c.ten} kê túi kim chỉ lên đầu gối. Vết lún trên túi sâu thêm một chút.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_tam_phan_danh_cho_khach_2b",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "tam_phan_danh_cho_khach",
+        "part": "2b",
+        "waitHours": 2160,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Sinh kế",
+      "setting": {
+        "description": "Bến xe bò ở Phàm Trần",
+        "historyCondition": "phần 1 chọn “Mua tấm phản thấp cho mình” · vài tháng sau · bến xe bò"
+      },
+      "emotion": "Chua chát"
+    },
+    {
+      "id": "ch_tam_phan_danh_cho_khach_3",
+      "name": "Sân đầy bào vụn",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Thợ mộc",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Học việc",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "người bệnh",
+          "alignment": "context"
+        }
+      },
+      "text": "Học việc {$b.ten} đã biết nghề, đang đóng phản cho lán cứu tế. Thợ mộc {$a.ten} mang gỗ tới, hai người gặp lại sau những lần làm riêng rồi cùng nhận việc. Nếu ngươi từng giúp làm then hoặc đặt bàn, người bệnh {$c.ten} đã tự đến trông lán. Nếu ngươi từng giúp bán nhà hoặc gọi thầy trở lại, người bệnh gửi bạc góp từ xa, nhờ ngươi chuyển lời thăm. Người tới lán mỗi ngày một đông, gỗ và tiền công đều sắp cạn.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp gỗ và giúp làm theo tầm người nằm",
+          "t": "Ngươi góp gỗ, cùng thợ hỏi từng người cần phản cao thấp ra sao. Buổi đầu làm chậm, đến khi đưa vào lán thì không phải sửa lại. Người bệnh tự với được bát nước, cười gọi người nằm bên thử xem.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua trọn mẻ phản để bán lên thành",
+          "t": "Ngươi có lời và hai thợ mộc đủ tiền trả công thợ phụ. Trong lán, một người lót bào vụn dưới chiếu để khỏi nằm trực tiếp trên đất.",
+          "e": {
+            "st": 24
+          },
+          "cost": {
+            "st": 10
+          },
+          "accounting": {
+            "mode": "buy-and-sell",
+            "capital": 10,
+            "profit": 14
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Bào vụn bị gió thổi dồn vào chân người đang đợi. Họ lấy tay giữ cho khỏi bay vào bát.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_tam_phan_danh_cho_khach_3",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "tam_phan_danh_cho_khach",
+        "part": "3",
+        "waitHours": 25920,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Việc thiện",
+      "setting": {
+        "description": "Lán cứu tế ở Phàm Trần",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · vài năm sau · lán cứu tế ven đường"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_tam_phan_danh_cho_khach_4",
+      "name": "Chỗ thừa một gang",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {
+          "season": [
+            "dong"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Thợ mộc",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "Người bệnh",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu phản từng được giữ ở lán, dân đem gỗ tới nhờ hai thầy trò đóng thêm. Nếu phản từng đem bán, khách trong thành đã đặt mẻ mới nhưng lán vẫn thiếu chỗ nằm. Thợ mộc {$a.ten} nhắc học trò chừa mặt phản rộng thêm một gang để đặt bát thuốc. Hắn cười: “Lần này con không cắt bớt đâu.”",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Đổi tiền lời hoặc tiền mua gỗ lấy phản cho lán",
+          "t": "Hai thợ đưa phản sang, mỗi chiếc chừa một gang để đặt bát. Người bệnh {$c.ten} đặt bát đầu tiên xuống mà nước chỉ gợn một vòng.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "chỗ thừa một gang"
+            ]
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Nhận mẻ hàng của khách thành",
+          "t": "Ngươi nhận tiền công thu xếp mẻ hàng mới của khách trong thành. Học việc xin giữ gỗ thừa để sửa phản cho lán, hai bên đồng ý. Chuyến buôn có lời, trong lán cũng được thêm vài chỗ nằm.",
+          "e": {
+            "st": 14
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi chào hai thầy trò. Họ tranh luận thêm một lúc về chiều cao chân phản, rồi cùng khiêng tấm đầu tiên vào lán.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_tam_phan_danh_cho_khach_4",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "tam_phan_danh_cho_khach",
+        "part": "4",
+        "waitHours": 4320,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thầy trò",
+      "setting": {
+        "description": "Kho gỗ ở Phàm Trần",
+        "historyCondition": "phần 3 chọn “Góp gỗ và giúp làm theo tầm người nằm” hoặc “Mua trọn mẻ phản để bán lên thành” · đầu đông · kho gỗ mới"
+      },
+      "emotion": "Lắng dịu"
+    }
+  ]
+}

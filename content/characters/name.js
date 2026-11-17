@@ -1,0 +1,16 @@
+// Nguồn chuẩn: NAME. Luật xử lý ở src/game/core/01-core.js.
+const NAME = {
+  ho: ['Vương','Lý','Trương','Lưu','Trần','Dương','Hoàng','Triệu','Chu','Ngô','Từ','Tôn','Mã','Hồ','Quách','Hà','Cao','Lâm','La','Trịnh','Lương','Tạ','Tống','Đường','Hứa','Hàn','Phùng','Tào','Bành','Tiêu','Điền','Đổng','Viên','Đỗ','Thẩm','Khương','Diệp','Ngụy','Tiết','Dư','Chung','Uông','Nhậm','Phương','Thạch','Diêu','Đàm','Liêu','Hùng','Lục','Khổng','Bạch','Thôi','Mạnh','Tần','Giang','Cố','Hầu','Thiệu','Long','Vạn','Đoàn','Tiền','Doãn','Kiều','Lăng','Ôn','Lạc','Ninh','Yến','Cát','Liễu','Sở','Quan','Ân','Mục','Tô','Bùi','Phó','Tư','Hạ','Lệ','Văn','Tưởng','Tịch','Mộc','Tề','Ứng','Nghiêm','Khúc','Phong','Hoa','Lam','Chử','Thương'],
+  ho2: ['Mộ Dung','Thác Bạt','Độc Cô','Lệnh Hồ','Tư Mã','Âu Dương','Nam Cung','Hạ Hầu','Đoan Mộc','Thượng Quan','Công Tôn','Úy Trì','Hách Liên','Thân Đồ','Gia Cát','Tây Môn','Đông Phương','Hoàng Phủ','Tư Đồ','Vũ Văn','Chung Ly','Bách Lý','Thái Sử','Mộ Hoa','Tông Chính'],
+  nam: ['Triệt','Kiên','Mặc','Hàn','Viễn','Dật','Thương Hải','Tùng Niên','Kinh Lôi','Bắc Quy','Thanh Sơn','Vô Kỵ','Phong','Lăng','Thần','Hạo','Uyên','Tịch','Trầm','Cẩn','Khuyết','Bất Phàm','Trường Sinh','Nhất','Huyền','Cửu','Lưu Vân','Kình','Ưng','Trác','Thừa','Bách','Ngạn','Tranh','Thiên Hành','Tử Ngọc','Trọng','Quân','Liệt','Ẩn','Tuấn','Mạc','Tiêu Dao','Sách','Hoành','Lẫm','Tuyệt','Kiệt','Viêm','Hiên','Khải','Duệ','Tông','Nhai','Diễn','Khanh','Vọng','Từ','Lam Sơn','Hành Chi','Mộ Bạch','Thủ Chuyết','Tri Hành','Vấn Thiên','Cô Hồng','Thất','Nghị','Chiêu','Dực'],
+  nu: ['Linh','Sương','Uyển','Như Ngọc','Thanh Y','Nhu','Tuyết','Ngưng','Yên','Dao','Vân Tâm','Mộng','Nguyệt','Ly','Thủy','Lan','Băng','Huyên','Tố','Nhược','Khinh','Vũ','Tịch Nhan','Bích','Cầm','Đình','Châu','Vãn','Liên','Dung','Kha','Thiền','Hy','Diệu','Tử Yên','Hàm','Mạn','Sênh','Âm','Duyệt','Phù','Oánh','Nghi','Giai','Hiểu','Thi','Nhan','Lạc Anh','Tiêm Tiêm','Tố Tâm','Ngọc Hành','Lăng Ba','Tình','Vi','Hạ','Tuyết Kiến','Lãnh Nguyệt','Bán Hạ','Thanh Ca','Hồng Diệp','U Lan','Tử Uyển','Tâm Duyệt'],
+  tang1: ['Huệ','Minh','Viên','Pháp','Liễu','Tịnh','Không','Giác','Trí','Hư','Đạo','Diệu'],
+  tang2: ['Chân','Nghiêm','Độ','Trần','Giác','Năng','Tâm','Tịnh','Hải','Quang','Duyên','Tĩnh','Thiện','Ngộ','Không','Tuệ'],
+  dao1: ['Thanh Hư','Huyền Cơ','Vô Trần','Tử Dương','Ngọc Đỉnh','Xích Tùng','Bạch Vân','Linh Hư','Thái Nhất','Hạc Minh','Vân Tiêu','Thủy Nguyệt','Tùng Hạc','Thiên Cơ','Hư Tĩnh','Cô Phong','Ngũ Liễu','Thần Tiêu'],
+  dao2: ['Tử','Chân Nhân','Đạo Nhân','Tán Nhân','Thượng Nhân','Lão Đạo','Cư Sĩ','Đạo Trưởng'],
+  ma1: ['Huyết Thủ','Quỷ Ảnh','Độc Thủ','Âm Sát','Bách Cốt','Hắc Sát','Thực Tâm','Vô Diện','Cửu U','Tàn Nguyệt','Ma Nhãn','Huyết Y','Bạch Cốt','Phệ Hồn','Thiên Diện','Hoạt Tử','Lục Chỉ','Song Đầu','Táng Hoa','Tam Mục'],
+  ma2: ['Lão Ma','Tôn Giả','Thư Sinh','Bà Bà','Đồng Tử','Đạo Nhân','Lão Quái','Ma Quân','Tán Nhân','Nương Tử','Hòa Thượng','Tú Tài'],
+  bi1: ['A','Tiểu','A','Tiểu','Lão'],
+  bi2: ['Mãn','Vân','Phúc','Ngưu','Cẩu','Hoa','Tứ','Lục','Thất','Đản','Bảo','Hỷ','Thuận','Ngốc','Hổ','Thạch','Liên','Đào','Mai','Quế','Xuyên','Điền'],
+  bi3: ['Lão Tứ','Tam Nương','Thập Tam Nương','Đại Ca','Nhị Tẩu','Lão Hán','Bà Bà','Tiểu Muội','Lão Cửu','Bát Gia','Đại Nương','Thất Thúc'],
+};

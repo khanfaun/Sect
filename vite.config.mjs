@@ -14,8 +14,8 @@ function phuSinh() {
     name: 'phu-sinh-ghep',
     transformIndexHtml: { order: 'pre', handler() { delete require.cache[ghepPath]; return require(ghepPath).html(); } },
     configureServer(server) {
-      server.watcher.add(path.resolve('src/game'));
-      server.watcher.on('change', f => { if (f.includes(path.join('src', 'game'))) server.ws.send({ type: 'full-reload' }); });
+      server.watcher.add([path.resolve('src/game'),path.resolve('content')]);
+      server.watcher.on('change', f => { if (f.includes(path.join('src', 'game')) || f.includes(path.sep+'content'+path.sep)) server.ws.send({ type: 'full-reload' }); });
     },
   };
 }

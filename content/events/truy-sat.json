@@ -1,0 +1,433 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ts_phuc",
+      "name": "Mai phục",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:truysat",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Gió lạnh sau gáy. {$en} đã bám theo ngươi nhiều ngày, giờ mới ra tay.",
+        "Một mũi tên cắm phập vào thân cây ngay cạnh tai. {$en} bước ra từ bóng tối."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Ứng chiến",
+          "fight": {
+            "k": "satthu",
+            "n": "{$en}",
+            "elite": 1
+          },
+          "win": {
+            "t": "Kẻ truy sát gục xuống. Ngươi lục người hắn, thấy một tờ giấy ghi tên ngươi.",
+            "e": {
+              "tv": 8,
+              "st": 20
+            }
+          }
+        },
+        {
+          "i": "🏃",
+          "l": "Bỏ chạy",
+          "chk": [
+            "tp",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi cắt đuôi được. Nhưng hắn sẽ còn quay lại.",
+            "e": {
+              "h": 4
+            }
+          },
+          "no": {
+            "t": "Không thoát được.",
+            "fight": {
+              "k": "satthu",
+              "n": "{$en}"
+            },
+            "win": {
+              "t": "Thoát chết trong gang tấc.",
+              "e": {
+                "tv": 5
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "ts_phuc",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Ân oán",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "ts_dam",
+      "name": "Kẻ truy sát lên tiếng",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:truysat",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "{$en} đứng chắn giữa đường, không rút binh khí: “Ta nhận tiền để giết ngươi. Nhưng ta muốn nghe ngươi nói trước.”"
+      ],
+      "choices": [
+        {
+          "i": "💬",
+          "l": "Thuyết phục",
+          "chk": [
+            "tam",
+            12
+          ],
+          "ok": {
+            "t": "Hắn nghe hết, im lặng rất lâu, rồi bẻ gãy tờ lệnh.",
+            "e": {
+              "karma": 5,
+              "tamma": -5
+            }
+          },
+          "no": {
+            "t": "“Lý lẽ hay đấy. Nhưng tiền đã nhận rồi.”",
+            "fight": {
+              "k": "satthu",
+              "n": "{$en}"
+            },
+            "win": {
+              "t": "Kết thúc.",
+              "e": {
+                "tv": 6
+              }
+            }
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Trả gấp đôi tiền thuê",
+          "cost": {
+            "st": 40
+          },
+          "t": "Hắn cân túi linh thạch, gật đầu rồi biến mất."
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "ts_dam",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Ân oán",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "ts_doc",
+      "name": "Rượu có độc",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:truysat",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Quán trọ ven đường. Bát rượu bưng lên có mùi lạ. Ở góc quán, {$en} đang nhìn ngươi."
+      ],
+      "choices": [
+        {
+          "i": "👃",
+          "l": "Ngửi kỹ",
+          "chk": [
+            "ngo",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi hất bát rượu vào mặt hắn rồi xông tới.",
+            "fight": {
+              "k": "satthu",
+              "n": "{$en}"
+            },
+            "win": {
+              "t": "Kẻ hạ độc không ngờ bị lộ sớm vậy.",
+              "e": {
+                "tv": 6
+              }
+            }
+          },
+          "no": {
+            "t": "Ngươi uống một ngụm. Ruột gan quặn lại.",
+            "e": {
+              "hp": "-30%"
+            },
+            "fight": {
+              "k": "satthu",
+              "n": "{$en}"
+            },
+            "win": {
+              "t": "Ngươi ép được độc ra, hạ được hắn.",
+              "e": {
+                "tv": 6
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ bát rượu, rời quán",
+          "t": "Ngươi đặt tiền xuống rồi đi. Hắn không theo."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "ts_doc",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Ân oán",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "ts_bay",
+      "name": "Cạm bẫy",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:truysat",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Đất dưới chân sụp xuống. Hố chông! {$en} đứng trên miệng hố, cười."
+      ],
+      "choices": [
+        {
+          "i": "🌀",
+          "l": "Nhảy lên",
+          "chk": [
+            "tp",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi đạp vách hố bật lên, tung đòn trước khi hắn kịp phản ứng.",
+            "fight": {
+              "k": "satthu",
+              "n": "{$en}"
+            },
+            "win": {
+              "t": "Hắn đã chọn sai con mồi.",
+              "e": {
+                "tv": 7
+              }
+            }
+          },
+          "no": {
+            "t": "Chông đâm vào đùi.",
+            "e": {
+              "hp": "-25%"
+            },
+            "fight": {
+              "k": "satthu",
+              "n": "{$en}"
+            },
+            "win": {
+              "t": "Thắng, nhưng phải băng bó lâu.",
+              "e": {
+                "tv": 6
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "ts_bay",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Ân oán",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "ts_dau",
+      "name": "Đấu tay đôi",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:truysat",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "{$en} cắm kiếm xuống đất: “Đuổi ngươi đủ rồi. Hôm nay phân thắng bại.”"
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Nhận lời",
+          "fight": {
+            "k": "kiemtu",
+            "n": "{$en}",
+            "elite": 1
+          },
+          "win": {
+            "t": "Kẻ truy sát gục trước mặt ngươi.",
+            "e": {
+              "tv": 9,
+              "relic": 0
+            }
+          }
+        },
+        {
+          "i": "🏃",
+          "l": "Không đấu",
+          "t": "Ngươi quay lưng đi. Hắn không chém sau lưng.",
+          "e": {
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "ts_dau",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Ân oán",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

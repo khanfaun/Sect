@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "channels": [
+    {
+      "name": "Truyện và tương tác",
+      "type": "authoring",
+      "paths": [
+        "content/events/",
+        "content/venues/services.json"
+      ],
+      "purpose": "403 mục; manifest đăng ký nguồn; schema chung."
+    },
+    {
+      "name": "Danh mục viết sẵn",
+      "type": "authoring",
+      "paths": [
+        "content/catalog/"
+      ],
+      "purpose": "Vật phẩm, chiêu, công pháp, đan, phương tiện, nguyên liệu, loài, xuất thân, vật truyện."
+    },
+    {
+      "name": "Nguyên mẫu/thông tin nền",
+      "type": "authoring",
+      "paths": [
+        "content/characters/",
+        "content/world/",
+        "content/items/",
+        "content/rules/"
+      ],
+      "purpose": "Bảng tên, hồ sơ, loài, ô trang bị, hệ số và luật dữ liệu."
+    },
+    {
+      "name": "Lời kể và thông báo",
+      "type": "authoring",
+      "paths": [
+        "content/narration/",
+        "content/text/",
+        "content/hooks.js"
+      ],
+      "purpose": "Văn theo hệ thống; callback đặc thù tham chiếu scriptText trong mục sự kiện."
+    },
+    {
+      "name": "Luật và trạng thái chơi",
+      "type": "runtime",
+      "paths": [
+        "src/game/core/",
+        "src/game/core2/",
+        "src/game/data/02-catalog.js",
+        "src/game/data/04-su-kien.js",
+        "src/game/data/05-content-runtime.js"
+      ],
+      "purpose": "Sinh thế giới, nhân vật thực, tiến trình, giải quyết lựa chọn và nối dữ liệu."
+    },
+    {
+      "name": "Lớp dữ liệu biên dịch",
+      "type": "generated",
+      "paths": [
+        "src/game/data/00-content-text.js",
+        "src/game/data/01-catalog-du-lieu.js",
+        "src/game/data/03-su_kien-du-lieu.js"
+      ],
+      "purpose": "Sinh bằng tools/content-build.js; không sửa tay."
+    },
+    {
+      "name": "Địa hình kỹ thuật",
+      "type": "generated",
+      "paths": [
+        "src/game/core2/03b-dia-hinh-du-lieu.js",
+        "tools/dia-hinh.py"
+      ],
+      "purpose": "MAPD được sinh từ ảnh bản đồ; là ngoại lệ kỹ thuật, không phải truyện hay hồ sơ để biên tập bằng tay."
+    },
+    {
+      "name": "Giao diện và chú thích",
+      "type": "presentation",
+      "paths": [
+        "src/react/",
+        "src/game/ui/",
+        "src/game/style.css"
+      ],
+      "purpose": "Nhãn, bố cục, biểu tượng, chú thích và hành động. Trạng thái hiển thị đọc từ luật/dữ liệu thật."
+    },
+    {
+      "name": "Hình ảnh",
+      "type": "assets",
+      "paths": [
+        "src/assets/",
+        "src/assets-goc/"
+      ],
+      "purpose": "Ảnh nén và gốc. ASSET trong ui/01-base.js có thể ưu tiên hình minh họa thay thế; dữ liệu chỉ số không gắn trong ảnh."
+    },
+    {
+      "name": "Bản phát hành",
+      "type": "generated",
+      "paths": [
+        "phu-sinh.html",
+        "phu-sinh-thu.html",
+        "vite.config.mjs",
+        "tools/ghep.js",
+        "src/game/thu-tu.json"
+      ],
+      "purpose": "Sản phẩm build và trình tự ghép; không dùng HTML làm nguồn sửa truyện."
+    },
+    {
+      "name": "Bản đọc và báo cáo",
+      "type": "generated-docs",
+      "paths": [
+        "docs/content/",
+        "tools/content-docs.js",
+        "tools/content-export.py"
+      ],
+      "purpose": "Guideline là tài liệu biên tập; danh mục/CSV/XLSX sinh từ nguồn chuẩn."
+    },
+    {
+      "name": "Tư liệu nhập/lịch sử",
+      "type": "archive",
+      "paths": [
+        "archive/",
+        "tools/imports/"
+      ],
+      "purpose": "Excel, Markdown đúng commit và công cụ cũ; không tham gia build."
+    },
+    {
+      "name": "Bản lưu",
+      "type": "runtime-state",
+      "paths": [
+        "src/game/ui/19-main.js",
+        "src/game/core/04-loi-tro-choi.js"
+      ],
+      "purpose": "G.meta/G.run và localStorage là trạng thái thực; không phải kho nội dung do tác giả viết."
+    }
+  ]
+}

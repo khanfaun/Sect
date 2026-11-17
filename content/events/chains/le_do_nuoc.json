@@ -1,0 +1,507 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_le_do_nuoc_1",
+      "name": "Vạch triều bị dời",
+      "kind": "story",
+      "tags": [
+        "Phẫn nộ"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Chủ bến",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Người đo nước",
+          "alignment": "context"
+        }
+      },
+      "text": "Chủ bến {$a.ten} dời vạch triều để thu tiền neo thêm một canh. Người đo nước {$b.ten} cạo thử mặt cọc, tìm thấy đường mực cũ dưới một lớp hà mỏng.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Ghi lại vạch cũ và đứng ra làm chứng",
+          "t": "Ngươi chép vạch cũ lên ván đo của bến, ký tên làm chứng. Chủ bến giữ ngươi lại xét hỏi hết buổi. Người đo nước đem bản chép khác cho thuyền ngoài đảo, trước khi vạch bị cạo mất.",
+          "e": {
+            "karma": 4,
+            "h": 24
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Đổi im lặng lấy quyền neo rẻ",
+          "t": "Ngươi bớt được tiền neo. {$b.ten} phải đục đi đường vạch, mùn gỗ lẫn vào lớp hà.",
+          "e": {
+            "st": 22,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Một người từ xa đặt dây theo vạch mới rồi đứng đợi nước không lên.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_le_do_nuoc_1",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "le_do_nuoc",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thuế bến",
+      "setting": {
+        "description": "Cọc nước ở Đông Hải Yêu Vực",
+        "historyCondition": "không"
+      },
+      "emotion": "Phẫn nộ"
+    },
+    {
+      "id": "ch_le_do_nuoc_2",
+      "name": "Giấy phơi theo sóng",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "người đo nước",
+          "alignment": "context"
+        }
+      },
+      "text": "Người đo nước {$b.ten} chép vạch triều lên nhiều mảnh giấy. Gió thổi từng tờ về phía bến, hắn lấy vỏ sò chặn những tờ còn đọc rõ.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp người canh mực nước",
+          "t": "Ngươi ở lại cùng người đo nước canh đủ một con triều, lỡ chuyến thuyền thuận. Số đo của nhiều người trùng nhau, đủ để đối lại lệ thu tiền. Họ rủ nhau đem giấy tới nhà chủ bến vào sáng mai.",
+          "cost": {
+            "st": 16
+          },
+          "e": {
+            "karma": 4,
+            "h": 12
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Bán bản đo cho bến đối diện",
+          "t": "Ngươi có bạc, bến kia dùng giấy để giành khách. Tờ có nét của {$b.ten} được gấp che tên.",
+          "e": {
+            "st": 22,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Hắn đổi vỏ sò lớn hơn, đến lúc nước lên mới nhớ nhấc giấy.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_le_do_nuoc_2",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "le_do_nuoc",
+        "part": "2",
+        "waitHours": 120,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện bến",
+      "setting": {
+        "description": "Sân kê thuyền ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 1 chọn “Ghi lại vạch cũ và đứng ra làm chứng” · vài ngày sau · sân kê thuyền"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_le_do_nuoc_2b",
+      "name": "Sợi dây neo ngắn",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien",
+          "song"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Người đo nước",
+          "alignment": "context"
+        }
+      },
+      "text": "Người đo nước {$b.ten} bị đuổi sau khi vạch cũ bị xóa. Lão đang giúp dân bến nhỏ nối dây: chủ bến đã bán dây theo mốc sai, tới kỳ triều cao thuyền bị kéo nghiêng. Lão giữ được một vạch đo đúng trên cán dao.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Trả phần tiền đã được bớt cho người neo thuyền",
+          "t": "Ngươi trả lại số tiền neo đã được bớt, giúp họ mua dây đủ dài. Người đo nước tự thử từng sợi trước con triều kế tiếp. Một người hỏi sao trước đây lão không nói, lão đáp rằng đã nói nhưng không ai chịu nghe.",
+          "cost": {
+            "st": 16
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua dây ngắn bán cho bến lớn",
+          "t": "Ngươi có lời mỗi lượt đổi dây. Bến cá treo phần dây thừa lên cho mượn.",
+          "e": {
+            "st": 38,
+            "karma": -3
+          },
+          "cost": {
+            "st": 16
+          },
+          "accounting": {
+            "mode": "buy-and-sell",
+            "capital": 16,
+            "profit": 22
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$b.ten} bện hai đầu thừa với nhau, nút nối to bằng đốt ngón tay.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_le_do_nuoc_2b",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "le_do_nuoc",
+        "part": "2b",
+        "waitHours": 120,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thuế bến",
+      "setting": {
+        "description": "Bến cá ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 1 chọn “Đổi im lặng lấy quyền neo rẻ” · vài ngày sau · bến cá nhỏ"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_le_do_nuoc_3",
+      "name": "Cọc nước ra giữa chợ",
+      "kind": "story",
+      "tags": [
+        "Phẫn nộ"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Chủ bến",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Chủ bến {$a.ten} nhổ cọc nước đem bán cho thuyền ngoại đảo. Nếu ngươi từng góp tiền hoặc góp người, dân đem vạch đo của họ ra. Nếu ngươi từng bán giấy hoặc bán dây, chủ bến đối diện gọi giá trước.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Mua cọc cho người ở cả hai bến cùng đo",
+          "t": "Ngươi mua lại cọc làm mốc chung, nhờ người đo nước kiểm tra từ đầu. Cả hai bến cử người ghi số đo mỗi ngày. Chủ bến không còn được tự dời vạch rồi tính thêm tiền.",
+          "cost": {
+            "st": 16
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Bán lại quyền dùng vạch",
+          "t": "Ngươi lấy được tiền của hai bến. Một đứa bé đặt dấu riêng bằng than trên cọc, ngay chỗ ngập nước.",
+          "e": {
+            "st": 22,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Cọc được nhấc lên. Một đoạn hà rơi đúng chỗ từng ghi giờ nước.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_le_do_nuoc_3",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "le_do_nuoc",
+        "part": "3",
+        "waitHours": 2160,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tranh lệ cảng",
+      "setting": {
+        "description": "Chợ nổi ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · vài tháng sau · chợ nổi"
+      },
+      "emotion": "Phẫn nộ"
+    },
+    {
+      "id": "ch_le_do_nuoc_4",
+      "name": "Dấu vôi ở cửa biển",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Chủ bến",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Người đo nước",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu vạch thuộc cả hai bến, thuyền mới đến dùng chung một lệ. Nếu vạch từng bị bán, thuyền nghèo buộc xa bến, đánh dấu nước bằng vôi trên mái đá.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Chuyển vạch lên vách đá ai cũng nhìn được",
+          "t": "Chủ bến {$a.ten} cắt phần lợi của ngươi hoặc đòi phí dựng mốc. Người đo nước {$b.ten} khắc đủ sâu để vôi phai vẫn thấy đường.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Dùng tiền neo dựng một cầu riêng",
+          "t": "Ngươi giữ mối thu phí và có chỗ trú cho thuyền khách. Người đo nước {$b.ten} để lại một thang mộc cho thuyền nhỏ tự ghé.",
+          "e": {
+            "st": 22,
+            "karma": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi lên thuyền đi tiếp. Những người ở lại bàn dựng thêm mốc trên đá, để lần sau dù cọc bị nhổ vẫn còn chỗ đối chứng.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_le_do_nuoc_4",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "le_do_nuoc",
+        "part": "4",
+        "waitHours": 8640,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện bến",
+      "setting": {
+        "description": "Cửa biển ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 3 chọn “Mua cọc cho người ở cả hai bến cùng đo” hoặc “Bán lại quyền dùng vạch” · năm sau · cửa biển"
+      },
+      "emotion": "Lắng dịu"
+    }
+  ]
+}

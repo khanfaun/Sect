@@ -1,0 +1,540 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "cuop",
+      "name": "Chặn đường nhiệm vụ",
+      "kind": "quest",
+      "tags": [],
+      "trigger": {
+        "source": "quest",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": {
+        "$hook": "quest_cuop_t"
+      },
+      "choices": [
+        {
+          "l": "Rút binh khí nghênh chiến",
+          "fight": 1
+        },
+        {
+          "l": "Bỏ ra ít linh thạch cho qua",
+          "st": 3,
+          "go": {
+            "$hook": "quest_cuop_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "questKinds": [
+          "den",
+          "diet"
+        ]
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "cuop",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.cuop.076": "Bọn chúng đếm tiền, cười khẩy rồi tránh đường."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "mua",
+      "name": "Mưa làm ướt hàng",
+      "kind": "quest",
+      "tags": [],
+      "trigger": {
+        "source": "quest",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": {
+        "$hook": "quest_mua_t"
+      },
+      "choices": [
+        {
+          "l": "Tìm chỗ trú, đợi tạnh hẳn",
+          "h": 24,
+          "go": {
+            "$hook": "quest_mua_c_0_go"
+          }
+        },
+        {
+          "l": "Che tạm, đi tiếp",
+          "go": {
+            "$hook": "quest_mua_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "questKinds": [
+          "den"
+        ]
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "mua",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.mua.077": "Mưa lớn ập tới. Bọc hàng của nhiệm vụ bắt đầu thấm nước.",
+        "event.mua.078": "Ngươi ngồi dưới mái đình hoang cả ngày. Hàng khô ráo, chỉ mất chút thời gian.",
+        "event.mua.079": "Tới chặng sau mới thấy một góc hàng đã ướt sũng. Người nhận chắc sẽ trả ít đi.",
+        "event.mua.080": "thưởng giảm một nửa",
+        "event.mua.081": "Hàng bị hỏng một phần",
+        "event.mua.082": "May mắn, lớp vải dầu che kín. Hàng vẫn nguyên."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "muagia",
+      "name": "Mua chuộc người giao",
+      "kind": "quest",
+      "tags": [],
+      "trigger": {
+        "source": "quest",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": {
+        "$hook": "quest_muagia_t"
+      },
+      "choices": [
+        {
+          "l": "Từ chối, giữ chữ tín",
+          "go": {
+            "$hook": "quest_muagia_c_0_go"
+          }
+        },
+        {
+          "l": "Bán cho hắn",
+          "go": {
+            "$hook": "quest_muagia_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "questKinds": [
+          "den"
+        ]
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "muagia",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.muagia.083": "Một thương nhân áo gấm chặn ngươi lại: “Món hàng đó, ta trả gấp rưỡi. Ai biết đâu mà.”",
+        "event.muagia.084": "Hắn nhún vai bỏ đi. Lòng ngươi thanh thản.",
+        "event.muagia.085": "Linh thạch nặng tay. Nhưng tiếng thất tín sẽ theo ngươi một thời gian.",
+        "event.muagia.086": "Linh thạch"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "doinoi",
+      "name": "Người nhận chuyển chỗ",
+      "kind": "quest",
+      "tags": [],
+      "trigger": {
+        "source": "quest",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": {
+        "$hook": "quest_doinoi_t"
+      },
+      "choices": [
+        {
+          "l": "Hỏi nơi ở mới",
+          "go": {
+            "$hook": "quest_doinoi_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "questKinds": [
+          "den"
+        ]
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "doinoi",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.doinoi.087": "Một người quen của người nhận báo tin: họ đã dọn đi nơi khác.",
+        "event.doinoi.088": "Không ai biết họ đi đâu. Ngươi đành tới chỗ cũ xem sao.",
+        "event.doinoi.089": "Họ đã chuyển tới ",
+        "event.doinoi.090": ". Hạn được nới thêm hai mươi ngày."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "nho",
+      "name": "Gửi thêm gói thuốc",
+      "kind": "quest",
+      "tags": [],
+      "trigger": {
+        "source": "quest",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": {
+        "$hook": "quest_nho_t"
+      },
+      "choices": [
+        {
+          "l": "Nhận lời",
+          "h": 2,
+          "go": {
+            "$hook": "quest_nho_c_0_go"
+          }
+        },
+        {
+          "l": "Từ chối khéo",
+          "go": {
+            "$hook": "quest_nho_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "questKinds": [
+          "den"
+        ]
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "nho",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.nho.091": "Một bà lão nghe nói ngươi đi về phía ấy, nhờ mang thêm một gói thuốc cho cháu.",
+        "event.nho.092": "Bà lão cảm tạ. Người nhận chắc sẽ hậu tạ thêm.",
+        "event.nho.093": "Bà lão gật đầu, không nói gì."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "cam",
+      "name": "Cấm chế trên hàng",
+      "kind": "quest",
+      "tags": [],
+      "trigger": {
+        "source": "quest",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": {
+        "$hook": "quest_cam_t"
+      },
+      "choices": [
+        {
+          "l": "Thử giải cấm chế",
+          "req": [
+            "ngo",
+            12,
+            "Ngộ tính"
+          ],
+          "go": {
+            "$hook": "quest_cam_c_0_go"
+          }
+        },
+        {
+          "l": "Mặc kệ, ngủ tiếp",
+          "go": {
+            "$hook": "quest_cam_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "questKinds": [
+          "den"
+        ]
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "cam",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.cam.094": "Đêm nghỉ chân, bọc hàng của nhiệm vụ bỗng phát ra ánh sáng xanh mờ. Có cấm chế lạ bám trên đó.",
+        "event.cam.095": "Ngươi lần theo trận văn, gỡ từng nút. Cấm chế tan, lòng ngươi lĩnh hội thêm chút ít.",
+        "event.cam.096": "Cả đêm ngươi mơ thấy những tiếng thì thầm."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "manhmoi",
+      "name": "Manh mối mục tiêu",
+      "kind": "quest",
+      "tags": [],
+      "trigger": {
+        "source": "quest",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": {
+        "$hook": "quest_manhmoi_t"
+      },
+      "choices": [
+        {
+          "l": "Ngồi nghe kỹ",
+          "h": 2,
+          "go": {
+            "$hook": "quest_manhmoi_c_0_go"
+          }
+        },
+        {
+          "l": "Cho người ấy ít thuốc",
+          "go": {
+            "$hook": "quest_manhmoi_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "questKinds": [
+          "diet"
+        ]
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "manhmoi",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.manhmoi.097": "Một người sống sót kể lại cách mục tiêu của nhiệm vụ ra tay.",
+        "event.manhmoi.098": "Ngươi ghi nhớ thói quen của nó. Trận tới sẽ chủ động hơn.",
+        "event.manhmoi.099": "Người ấy cảm tạ, chỉ thêm đường tắt."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tho",
+      "name": "Thợ săn hợp sức",
+      "kind": "quest",
+      "tags": [],
+      "trigger": {
+        "source": "quest",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": {
+        "$hook": "quest_tho_t"
+      },
+      "choices": [
+        {
+          "l": "Đồng ý chia đôi",
+          "go": {
+            "$hook": "quest_tho_c_0_go"
+          }
+        },
+        {
+          "l": "Tự làm một mình",
+          "go": {
+            "$hook": "quest_tho_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "questKinds": [
+          "diet"
+        ]
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tho",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.tho.100": "Một thợ săn già cũng đang lùng mục tiêu của nhiệm vụ, muốn chia đôi phần thưởng nếu hợp sức.",
+        "event.tho.101": "Lão chỉ cho ngươi chỗ nó hay lui tới. Thưởng chia đôi, nhưng dễ tìm hơn hẳn.",
+        "event.tho.102": "thưởng giảm một nửa",
+        "event.tho.103": "Chia cho thợ săn",
+        "event.tho.104": "Lão nhún vai: “Tùy ngươi.”"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

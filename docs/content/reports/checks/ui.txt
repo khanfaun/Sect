@@ -1,0 +1,25 @@
+▶ content
+   ✓ vào trà lâu rồi mới mở đúng truyện của quán
+   ✓ lời kể mới hiển thị trên giao diện
+   ✓ pháp bảo ghi đúng yêu cầu Trúc Cơ
+   ✓ phàm nhân không mặc được pháp bảo
+   ✓ lựa chọn giao đấu mở màn chiến đấu thật
+   ✓ kết quả thắng lưu vào lịch sử chuỗi
+   ✓ không có lỗi JavaScript trong luồng nội dung
+   ✓ không có lỗi trang
+▶ dot32
+   ✓ túi khoá: 4 món trong ô túi mờ đi, có ổ khoá
+   ✓ túi khoá: có dòng nhắc
+   ✓ mũi tên: +130% ra 3 mũi xanh, −20% ra 1 mũi đỏ
+   ✓ món chưa đủ cảnh giới: nút Mặc vào khoá; món vừa sức: dùng được
+   ✓ tên tông môn và thiên kiêu có chú thích
+   ✓ không có lỗi trang
+▶ bando
+   ✓ đã tải ảnh bản đồ (3 ảnh)
+   ✓ có lớp "đã thấy" quanh nhân vật
+   ✓ phóng to hết cỡ: không hiện chú thích khi rê chuột
+   ✓ vẽ 5 khung: 2ms
+   ✓ mức Tiết kiệm dùng ảnh nén
+   ✓ không có lỗi trang
+
+Tất cả đạt

@@ -1,7 +1,5 @@
-// ================= DANH MỤC TỪ EXCEL (BẢN THỬ NGHIỆM) =================
-// Nối dữ liệu trong docs/vat-pham.xlsx (đã chuyển thành CATALOG_DATA ở src/data/catalog.js) vào game.
-// Chỉ ráp vào bản thử phu-sinh-thu.html (node tools/build-thu.js). Không sửa luật gốc: mọi thứ đều là
-// lớp bọc quanh hàm sẵn có, bỏ tệp này ra thì game trở lại như cũ.
+// Nối danh mục chuẩn content/catalog/ vào các luật sinh đồ, học và sử dụng.
+// Dữ liệu tự sinh ở 01-catalog-du-lieu.js; không sửa tay tệp dữ liệu đó.
 const CAT=(function(){
   const D=CATALOG_DATA;const by={};
   for(const k of ['relics','skills','arts','pills','mounts','mats','beasts','origins','qitems'])for(const x of D[k])by[x.id]=x;

@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_cai_ten_bo_khoi_banh_lai_1",
+      "name": "Đinh giữ tên",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": [
+          2
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "cựu hải tặc",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "người đòi nợ",
+          "alignment": "context"
+        }
+      },
+      "text": "Tàu hải tặc đã đầu hàng đang được tháo bán. Cựu hải tặc {$a.ten} gỡ tấm tên người cầm lái khỏi bánh lái, đúng lúc người đòi nợ {$b.ten} tới tìm kẻ gây ra vụ mất tàu năm trước. Hắn nắm tấm gỗ, chưa biết nên giấu hay đưa ra.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Giữ người lại để nghe hết chuyện",
+          "t": "Ngươi bảo lãnh cho {$a.ten}. Hắn đặt tấm tên úp xuống, chỗ cạnh gỗ còn rỉ nhựa.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "đinh giữ tên"
+            ]
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Giao tấm tên đổi tiền treo",
+          "t": "Ngươi lấy bạc và hắn bị giữ. Bánh lái vẫn quay được, hở đúng một lỗ đinh.",
+          "e": {
+            "st": 22,
+            "karma": -3,
+            "oan": [
+              "a",
+              "đinh giữ tên"
+            ]
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Tấm tên bị quăng vào đống gỗ tháo, mặt chữ quay lên.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_cai_ten_bo_khoi_banh_lai_1",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "cai_ten_bo_khoi_banh_lai",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện hải tặc",
+      "setting": {
+        "description": "Xưởng tháo tàu ở Đông Hải Yêu Vực",
+        "historyCondition": "không"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_cai_ten_bo_khoi_banh_lai_2",
+      "name": "Những lần đổi tay",
+      "kind": "story",
+      "tags": [
+        "Bi thương"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Cựu hải tặc",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Người đòi nợ",
+          "alignment": "context"
+        }
+      },
+      "text": "Cựu hải tặc {$a.ten} kể mình từng giữ lái cho thuyền chạy thoát, rồi quay lại chở người bị bỏ giữa nước. Người đòi nợ {$b.ten} nhận ra một chuyến trong lời hắn, ngón tay dừng đúng tên cha mình.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Giúp ghi riêng từng chuyến đã chở người",
+          "t": "Ngươi theo hắn tìm người làm chứng cho từng chuyến đã cứu nạn. Có chuyến được xác nhận, có chuyến không ai nhớ. Người đòi nợ đồng ý ghi riêng công cứu người, nhưng nói việc cướp tàu vẫn phải xét đủ.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "những lần đổi tay"
+            ],
+            "h": 24
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Đòi hắn làm công lái thuyền để trả nợ",
+          "t": "Người mất tàu có phần công, ngươi có người dẫn lối. Hắn bọc bánh lái bằng vải để khỏi thấy lỗ đinh.",
+          "e": {
+            "karma": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$b.ten} xin đọc lại đúng một dòng.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_cai_ten_bo_khoi_banh_lai_2",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "cai_ten_bo_khoi_banh_lai",
+        "part": "2",
+        "waitHours": 2160,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Trả nợ hải chiến",
+      "setting": {
+        "description": "Nhà hội ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 1 chọn “Giữ người lại để nghe hết chuyện” · vài tháng sau · nhà hội những người mất tàu"
+      },
+      "emotion": "Bi thương"
+    },
+    {
+      "id": "ch_cai_ten_bo_khoi_banh_lai_2b",
+      "name": "Chỗ tay bấu vào cũi",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Cựu hải tặc",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Người đòi nợ",
+          "alignment": "context"
+        }
+      },
+      "text": "Người đòi nợ {$b.ten} đem cháo đến bè vì nhận ra cựu hải tặc {$a.ten} từng vớt em mình. {$a.ten} đứng ở chỗ thanh cũi đã nhẵn bằng lòng bàn tay.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Dùng tiền treo xin cho hắn ra làm chứng",
+          "t": "Ngươi bỏ tiền bảo lãnh, xin cho hắn ra đối chứng và nhận trách nhiệm đưa trở lại nếu việc chưa rõ. Người đòi nợ dẫn tới gặp người em từng được hắn cứu. Hắn nghe xong mới biết người ấy còn sống.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "chỗ tay bấu vào cũi"
+            ]
+          },
+          "cost": {
+            "st": 16
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Xin cho hắn trả nợ bằng công thay vì giam",
+          "t": "Hắn nhận việc lái những chuyến nguy hiểm. {$b.ten} bỏ thêm một bát cháo vào thúng khi tiễn.",
+          "e": {
+            "karma": 3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Sóng đánh bè nghiêng. Hai người cùng đưa tay giữ bát.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_cai_ten_bo_khoi_banh_lai_2b",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "cai_ten_bo_khoi_banh_lai",
+        "part": "2b",
+        "waitHours": 2160,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện người bị giữ",
+      "setting": {
+        "description": "Bè giam ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 1 chọn “Giao tấm tên đổi tiền treo” · vài tháng sau · bè giam ven đảo"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_cai_ten_bo_khoi_banh_lai_3",
+      "name": "Thuyền trở đầu giữa bãi cạn",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Một tàu chở khách mắc cạn ngoài cảng, phải bỏ hàng mới có thể đón người từ thuyền nhỏ đang vỡ. Nếu cựu hải tặc đã được ra làm chứng, người mất tàu chịu theo hắn đi cứu nạn. Nếu hắn còn làm công trả nợ, người đòi nợ đem lệnh tới để cho hắn rời chuyến hàng đang nhận. Ngươi có mặt trên tàu cứu hộ khi hắn xin quyết ngay việc cắt hàng.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Ứng tiền đền hàng, cho cắt dây cứu người",
+          "t": "Ngươi nhận ứng tiền đền phần hàng phải bỏ. Hắn cắt dây, quay mạn đón từng người từ thuyền nhỏ. Người lên cuối hỏi ai mất hàng, hắn bảo cứ lên cho đủ rồi tính.",
+          "e": {
+            "karma": 4
+          },
+          "cost": {
+            "st": 16
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Cứu tàu bằng cách bỏ lại thuyền nhỏ",
+          "t": "Hàng giữ được, người đi thuyền nhỏ được vớt sau một đêm lạnh. Trên mạn tàu còn hai vết móng.",
+          "e": {
+            "karma": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Tàu quay được nửa vòng rồi mắc lại, mũi hướng về bờ.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_cai_ten_bo_khoi_banh_lai_3",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "cai_ten_bo_khoi_banh_lai",
+        "part": "3",
+        "waitHours": 4320,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cứu nạn",
+      "setting": {
+        "description": "Bãi cạn ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · mùa biển lặng · bãi cạn ngoài cảng"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_cai_ten_bo_khoi_banh_lai_4",
+      "name": "Hàng tên trên mặt gỗ",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Cựu hải tặc",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "người đòi nợ",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu người được đưa qua trước, họ mang đến một tấm gỗ góp làm bánh lái. Nếu hàng từng được giữ, người đi thuyền nhỏ đem tới những mảnh ván đã vớt được và đặt chúng dựa ngoài cửa.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Khắc cả tên người cứu lẫn người chịu thiệt",
+          "t": "Ngươi chịu phần tiền đền hoặc mất phần thưởng còn lại. Cựu hải tặc {$a.ten} khoan lỗ đinh đầu tiên ở mặt trong.",
+          "e": {
+            "karma": 4
+          },
+          "cost": {
+            "st": 16
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua bánh lái và thuê hắn đi chuyến mới",
+          "t": "Ngươi có một tay lái giỏi. Trước khi rời bờ, hắn nhờ người đòi nợ {$b.ten} kiểm lại chỗ thuyền nhỏ đã được buộc.",
+          "cost": {
+            "st": 16
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi từ biệt họ. Cựu hải tặc đặt tấm tên cũ bên bánh lái mới, để ai thuê cũng biết mình từng là ai.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_cai_ten_bo_khoi_banh_lai_4",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "cai_ten_bo_khoi_banh_lai",
+        "part": "4",
+        "waitHours": 8640,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Trách nhiệm và ân oán",
+      "setting": {
+        "description": "Xưởng bánh lái ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 3 chọn “Ứng tiền đền hàng, cho cắt dây cứu người” hoặc “Cứu tàu bằng cách bỏ lại thuyền nhỏ” · một năm sau · nhà đóng bánh lái"
+      },
+      "emotion": "Lắng dịu"
+    }
+  ]
+}

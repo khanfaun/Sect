@@ -1,0 +1,10 @@
+{
+  "markdownLinks": 474,
+  "brokenLinks": [],
+  "excelSheets": 21,
+  "excelEvents": 403,
+  "excelCatalog": 1925,
+  "missingOriginalSceneIds": [],
+  "manuscriptMatchesExactCommit": true,
+  "manuscriptSHA256": "7e0f01c248d5f6f7f6398200848ca5df86e5cc7192ef5c8755828df944126a67"
+}

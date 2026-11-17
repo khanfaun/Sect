@@ -6,8 +6,9 @@ const rd = f => fs.readFileSync(path.join(root, f), 'utf8');
 const order = () => JSON.parse(rd('src/game/thu-tu.json'));
 // nhom: chỉ lấy các nhóm này (vd ['core','core2'] cho phần luật chơi không giao diện)
 function script(nhom) {
-  const files = order().filter(f => !nhom || nhom.includes(f.split('/')[0]));
-  const s = files.map(f => rd('src/game/' + f)).join('\n');
+  require('./content-build').buildContent();
+  const files = order().filter(f => !nhom || nhom.includes(f.split('/')[0]) || (f.startsWith('content/') && nhom.includes('data')));
+  const s = files.map(f => rd(f.startsWith('content/') ? f : 'src/game/' + f)).join('\n');
   if (s.includes('</script')) throw new Error('mã chứa thẻ đóng script');
   return s;
 }

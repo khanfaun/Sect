@@ -1,0 +1,46 @@
+[
+  {
+    "area": "tông môn",
+    "change": "Khóa cả truyện và dịch vụ nội bộ theo đúng tông đã nhập; danh tính tông được lưu riêng."
+  },
+  {
+    "area": "kỷ vật",
+    "change": "Vật cốt truyện có ô túi và chịu khóa; lá thư trên thuyền ma được trao thật."
+  },
+  {
+    "area": "thực thể",
+    "change": "Thiên kiêu và người gặp giữ danh tính qua mở cảnh, kết quả và quan hệ."
+  },
+  {
+    "area": "tin đồn",
+    "change": "Chọn mẫu theo trạng thái sống/chết và tính tình; ghi rõ lời truyền miệng."
+  },
+  {
+    "area": "lựa chọn quá hạn",
+    "change": "Kiểm lại ngữ cảnh sau hai giờ tới cảnh và báo nếu chuyện đã qua."
+  },
+  {
+    "area": "sinh cảnh",
+    "change": "Thú sinh theo môi trường; thêm linh thú du lãng làm dự phòng cùng họ, không đổi thành người."
+  },
+  {
+    "area": "giao tranh",
+    "change": "Từ chối mở cảnh đã hết điều kiện mà không làm lỗi con trỏ scene."
+  },
+  {
+    "area": "độ chính xác tầm nhìn",
+    "change": "Dùng Float64 cho khoảng cách tìm đường/tầm nhìn; tránh lặp cập nhật do làm tròn Float32 ở tầm nhìn cao, được phát hiện qua kiểm tra hồi quy."
+  },
+  {
+    "area": "kiểm tra lặp lại",
+    "change": "Dữ liệu thế giới kiểm tra dùng seed cố định tăng theo fixture; bài gặp giao tranh tới đúng nơi trước khi mở cảnh."
+  },
+  {
+    "area": "kiểm tra giao diện",
+    "change": "Dùng Chromium có sẵn và HTTP cục bộ; font bên ngoài được thay bằng CSS rỗng để kiểm tra không phụ thuộc kết nối font."
+  },
+  {
+    "area": "yêu cầu pháp bảo",
+    "change": "Đối tượng sinh ngẫu nhiên ghi req tối thiểu 2 ngay khi tạo; sửa cả đồ trong đan điền của bản lưu cũ, thay vì chỉ chặn ở giao diện."
+  }
+]

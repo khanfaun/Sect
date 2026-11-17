@@ -1,0 +1,12 @@
+// Nguồn chuẩn: REST_T. Luật xử lý ở src/game/core/10-quan-ai.js.
+const REST_T={
+  tinh:['Ngươi ngồi xếp bằng, vận khí một chu thiên. Mệt mỏi tan dần như sương dưới nắng.','Gió nhẹ, lá rơi. Ngươi điều tức nửa ngày, thương thế lành quá nửa.','Một nén nhang, rồi hai nén. Hơi thở ngươi dài ra, chậm lại, hòa vào tiếng côn trùng.'],
+  bqTown:['Ngươi thuê một gian phòng sau khách điếm, cài then, ngồi xếp bằng. Tiếng rao ngoài phố xa dần rồi tắt hẳn.','Ngươi đóng cửa phòng trọ, dặn chủ quán đừng gõ cửa. Ngày tháng trôi qua như nước chảy dưới cầu.','Ngươi mở mắt, bên ngoài đã đổi mùa mấy lượt. Chủ trọ nhìn ngươi như nhìn người từ cõi khác về.','Bế quan lần này ngươi mơ rất nhiều. Tỉnh dậy, ngoài cửa sổ phố xá vẫn ồn ã như chưa từng có ai ngồi đó.'],
+  bq:['Ngươi bố trí cấm chế, ngồi vào chỗ sâu nhất của động phủ. Ngày tháng trôi qua như nước chảy dưới cầu.','Đá phủ rêu, rêu khô rồi lại xanh. Ngươi mở mắt, bên ngoài đã đổi mùa mấy lượt.','Bế quan lần này ngươi mơ rất nhiều. Có giấc mơ là kiếp trước, có giấc mơ là kiếp sau.','Linh khí trong động bị ngươi hút cạn, vách đá bạc trắng như vôi. Ngươi đứng dậy, xương cốt kêu răng rắc.','Ngươi quên cả ngày đêm. Lúc xuất quan, có con chim đã làm tổ trên vai.'],
+  bqint:['Đang ngồi thì có động, đành xuất quan giữa chừng. Có kẻ tới trước chỗ ngươi ngồi.','Cấm chế vỡ tan. Ngươi bừng mắt: kẻ xâm nhập đã đứng ngay cửa động.'],
+  bt:[['Linh khí trong đan điền ngưng tụ thành một đài sen, vững như núi. Đạo cơ đã thành.','Ngươi nghe trong người có tiếng nổ nhẹ như măng mọc. Rồi mọi thứ lắng lại. Trúc Cơ.'],
+      ['Chân nguyên xoay tròn, nén lại, nén nữa, cho đến khi hóa thành một viên kim đan lấp lánh như sao.','Ba ngày ba đêm, đan điền như lò lửa. Sáng ngày thứ tư, một viên đan vàng lặng lẽ thành hình.'],
+      ['Kim đan vỡ ra. Từ trong đó, một hài nhi nhỏ bằng ngón tay mở mắt, giống ngươi như đúc. Nguyên Anh xuất thế.','Đau như xé xác. Rồi một tiếng khóc trẻ thơ vang lên trong đan điền. Ngươi bật cười giữa nước mắt.'],
+      ['Nguyên anh hòa vào thiên địa. Trong một khoảnh khắc, ngươi là gió, là núi, là tất cả. Rồi ngươi lại là ngươi, nhưng không còn như trước.','Thần thức lan ra ngàn dặm. Ngươi nghe được tiếng lá rơi ở một khu rừng chưa từng tới.']],
+  btf:['Linh khí cuộn ngược, kinh mạch như bị dao cắt. Ngươi phun ra một ngụm máu. Đột phá thất bại.','Tới bước cuối cùng thì tâm thần dao động. Một tiếng “phựt” khẽ, công sức tan thành mây khói.','Tâm ma hiện lên đúng lúc then chốt, cười vào mặt ngươi. Ngươi lỡ nhịp. Thất bại.'],
+};

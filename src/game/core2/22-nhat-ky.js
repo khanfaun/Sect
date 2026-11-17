@@ -6,7 +6,7 @@
 const NK={on:false,max:800,buf:[],seq:0,
   clear(){this.buf.length=0;},
   last(n){return this.buf.slice(-(n||40));},
-  line(e){let d='';try{d=e.d===undefined?'':' '+JSON.stringify(e.d);}catch(x){d=' [không ghi được]';}return `#${e.n} ${e.w} ${e.tag}${d}`;},
+  line(e){let d='';try{d=e.d===undefined?'':' '+JSON.stringify(e.d);}catch(x){d=contentText("core2_22-nhat-ky_js.001");}return `#${e.n} ${e.w} ${e.tag}${d}`;},
   dump(n){return (n?this.buf.slice(-n):this.buf).map(e=>this.line(e)).join('\n');},
   count(tag){return this.buf.filter(e=>e.tag===tag||e.tag.startsWith(tag+'.')).length;}};
 try{if(typeof location!=='undefined'&&/[?&]debug(=1)?(&|$)/.test(location.search))NK.on=true;

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "collections": [
+    "relics",
+    "pre",
+    "base",
+    "skills",
+    "arts",
+    "pills",
+    "mounts",
+    "mats",
+    "beasts",
+    "origins",
+    "qitems"
+  ]
+}

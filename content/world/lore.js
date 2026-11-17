@@ -1,0 +1,20 @@
+// Nguồn chuẩn: LORE. Luật xử lý ở src/game/core/03-dan-duoc-phu-luc.js.
+const LORE = {
+  ngu_to:{n:'Ngũ Tổ chém Yêu Hoàng',t:'Ba vạn năm trước, Yêu Hoàng nuốt mặt trời, thiên hạ chìm trong đêm suốt chín năm. Năm vị tổ sư của năm tông môn liên thủ, chém đầu Yêu Hoàng trên Nam Thiên Môn. Máu nó bắn lên cửa trời, nên đến nay hoàng hôn vẫn đỏ.'},
+  doan_thien:{n:'Đoạn Thiên chính sử',t:'Sử chép rằng thuở xưa người và tiên đi chung một con đường. Rồi có kẻ chặt đứt Thiên Thê, từ đó người tu tiên phải tự mở đường lên trời bằng lôi kiếp. Kẻ chặt Thiên Thê là ai, sử không chép. Trang ấy bị xé mất.'},
+  van_bao:{n:'Vạn Bảo Thương Hội',t:'Không ai biết hội trưởng Vạn Bảo là ai. Thương hội có mặt ở mọi thành trì, mua mọi thứ, bán mọi thứ, kể cả tin tức. Thiên Kiêu Bảng do họ công bố mười năm một lần, chưa từng sai một ai.'},
+  thien_kieu:{n:'Thiên Kiêu Bảng',t:'Mười năm một lần, Vạn Bảo Thương Hội treo bảng xếp hạng những người trẻ đáng sợ nhất thiên hạ. Có tên trên bảng là vinh dự, cũng là bia ngắm.'},
+  linh_can:{n:'Luận về linh căn',t:'Ngũ hành tạp linh căn bị gọi là phế linh căn, vì linh khí vào người như nước vào rổ. Nhưng cổ thư có chép: Ngũ Tổ năm xưa, có một vị là tạp linh căn.'},
+  kim_dan:{n:'Phẩm kim đan',t:'Kim đan chia làm hạ, trung, thượng phẩm. Trên thượng phẩm còn có vô khuyết, vạn người không được một. Người kết vô khuyết kim đan, thiên đạo cũng phải nhường ba phần.'},
+  tam_ma:{n:'Tâm ma',t:'Tâm ma không đến từ bên ngoài. Mỗi lần ngươi làm điều mình biết là sai, nó lớn thêm một chút. Đến khi nó lớn hơn ngươi, nó sẽ là ngươi.'},
+  long_cung:{n:'Long cung chìm',t:'Đông Hải từng có Long Cung, cung điện bằng san hô và ngọc trai dưới đáy biển sâu. Một đêm nọ, cả Long Cung chìm vào vực thẳm. Ngư dân nói những đêm biển lặng, còn nghe tiếng chuông vọng lên.'},
+  ma_vuc:{n:'Cánh cửa Cửu U',t:'Ma vực vốn là Thanh Châu, đất lành chim đậu. Một vị đại năng muốn tìm đường trường sinh, mở cánh cửa thông sang U Minh. Cánh cửa không đóng lại được nữa.'},
+  quy_thi:{n:'Quỷ thị',t:'Ở quỷ thị, thứ người ta trao đổi không phải linh thạch mà là năm tháng. Một năm thọ nguyên đổi một viên đan, mười năm đổi một môn công pháp. Có kẻ đổi hết, rồi chết ngay tại sạp.'},
+  phi_thang:{n:'Kẻ phi thăng cuối cùng',t:'Đã ba nghìn năm không ai phi thăng. Có người nói tiên giới đã đóng cửa. Có người nói tiên giới chưa từng tồn tại. Chỉ có lôi kiếp là vẫn đến đều đặn.'},
+  kiem_trung:{n:'Kiếm trủng',t:'Kiếm tu chết đi, kiếm không chết theo. Những thanh kiếm vô chủ tụ về một nơi, cắm kín một ngọn núi. Chúng chọn người, không phải người chọn chúng.'},
+  luan_hoi:{n:'Luân hồi ấn',t:'Có những linh hồn mang dấu ấn trên trán mà mắt thường không thấy. Họ chết đi, sinh lại, mỗi kiếp nhớ thêm một chút. Cổ thư gọi họ là người đi lại trên Tiên Lộ.'},
+  hu_khong:{n:'Hư không',t:'Bên ngoài trời còn có trời. Giữa các tầng trời là hư không, nơi thời gian và không gian vỡ vụn. Kẻ lạc trong hư không không chết, chỉ quên dần mình là ai.'},
+  thien_dao:{n:'Thiên đạo vô tình',t:'Thiên đạo không thiện, không ác. Nó chỉ cân. Kẻ lấy quá nhiều sẽ bị đòi lại, kẻ cho quá nhiều sẽ được trả lại, sớm hay muộn mà thôi.'},
+  tien_khu:{n:'Tiên khư',t:'Di tích của tiên nhân rơi xuống từ thượng giới. Bên trong có bảo vật, có truyền thừa, và có cả những thứ tiên nhân muốn vứt đi.'},
+  chan_tuong:{n:'Chân tướng Tiên Lộ',t:'Ngươi đứng ở cửa trời và nhìn lại. Vạn kiếp luân hồi trải dài phía sau như một con đường. Mỗi kiếp chết đi không phải thất bại, mà là một viên đá lót đường. Tiên Lộ chưa bao giờ là con đường của một người.'},
+};

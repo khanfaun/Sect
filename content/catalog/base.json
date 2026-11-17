@@ -1,0 +1,256 @@
+{
+  "kiem": [
+    "Trường Kiếm",
+    "Kiếm Thân Hẹp",
+    "Kiếm Mũi Lá",
+    "Kiếm",
+    "Đoản Kiếm",
+    "Cổ Kiếm"
+  ],
+  "holo": [
+    "Tử Kim Hồ Lô",
+    "Hồ Lô Hai Bầu",
+    "Tịnh Bình Cổ Hẹp",
+    "Hồ Lô",
+    "Ngọc Bình",
+    "Tịnh Bình"
+  ],
+  "dao": [
+    "Đao Cán Cong",
+    "Đao Lưng Dày",
+    "Đao",
+    "Trảm Mã Đao",
+    "Đoản Đao"
+  ],
+  "phap": [
+    "Trượng Đầu Vòng",
+    "Trượng Móc Bạc",
+    "Phất Trần Đuôi Dài",
+    "Phất Trần Cán Đốt",
+    "Bảo Châu Lõi Rỗng",
+    "Bảo Châu Hai Lớp",
+    "Pháp Trượng",
+    "Phất Trần",
+    "Bảo Châu"
+  ],
+  "but": [
+    "Bút Ngòi Cứng",
+    "Bút Ống Xương",
+    "Bút",
+    "Nghiên",
+    "Thần Bút"
+  ],
+  "non": [
+    "Quan Cánh Ngắn",
+    "Quan Bọc Vải",
+    "Đấu Lạp Đan Nứa",
+    "Đấu Lạp Quai Dài",
+    "Ngọc Quan Lưng Khum",
+    "Ngọc Quan Chân Thấp",
+    "Quan",
+    "Đấu Lạp",
+    "Ngọc Quan"
+  ],
+  "tram": [
+    "Trâm Đầu Uốn",
+    "Trâm Gài Tóc",
+    "Thoa Chân Kép",
+    "Thoa Đầu Cánh",
+    "Bộ Diêu Tua Hạt",
+    "Bộ Diêu Rủ Chuỗi",
+    "Trâm",
+    "Thoa",
+    "Bộ Diêu"
+  ],
+  "boi": [
+    "Bội Tròn Hai Lỗ",
+    "Bội Mặt Lá",
+    "Quyết Khuyết Nửa Vành",
+    "Quyết Mặt Nhám",
+    "Ngọc Bài Khắc Viền",
+    "Ngọc Bài Mặt Vuông",
+    "Ngọc Bội",
+    "Ngọc Quyết",
+    "Ngọc Bài"
+  ],
+  "hotam": [
+    "Hộ Tâm Phù Gấp Đôi",
+    "Hộ Tâm Phù Bọc Lụa",
+    "Hộ Tâm Ngọc Lưng Lồi",
+    "Hộ Tâm Ngọc Bọc Đai",
+    "Hộ Tâm Kính Mặt Đục",
+    "Hộ Tâm Kính Viền Chỉ",
+    "Hộ Tâm Phù",
+    "Hộ Tâm Ngọc",
+    "Hộ Tâm Kính"
+  ],
+  "gang": [
+    "Hộ Thủ Dây Chéo",
+    "Hộ Thủ Che Mu",
+    "Quyền Sáo Bọc Da",
+    "Quyền Sáo Gờ Ngón",
+    "Thủ Giáp Ghép Mảnh",
+    "Hộ Thủ",
+    "Quyền Sáo",
+    "Thủ Giáp"
+  ],
+  "hoan": [
+    "Hoàn Cổ Tay",
+    "Thủ Trạc Khoen Rời",
+    "Hoàn",
+    "Thủ Trạc",
+    "Kim Hoàn"
+  ],
+  "giap": [
+    "Giáp Xếp Phiến",
+    "Nhuyễn Giáp Bện Tơ",
+    "Giáp",
+    "Nhuyễn Giáp"
+  ],
+  "bao": [
+    "Đạo Bào Cổ Chéo",
+    "Pháp Y Gấu Rộng",
+    "Phi Phong Cài Vai",
+    "Đạo Bào",
+    "Pháp Y",
+    "Phi Phong"
+  ],
+  "nhan": [
+    "Chỉ Hoàn Mặt Lõm",
+    "Ban Chỉ Đầu Ngang",
+    "Nhẫn",
+    "Ban Chỉ"
+  ],
+  "dai": [
+    "Đai Cài Gỗ",
+    "Ngọc Đái Khóa Mây",
+    "Yêu Đái Dây Bện",
+    "Đai",
+    "Ngọc Đái",
+    "Yêu Đái"
+  ],
+  "ngoa": [
+    "Ngoa Đế Nứa",
+    "Vân Hài Thêu Viền",
+    "Đạp Vân Ngoa Gót Thấp",
+    "Ngoa",
+    "Vân Hài",
+    "Đạp Vân Ngoa"
+  ],
+  "linh": [
+    "Chuông Hai Tai",
+    "Khánh Mặt Cong",
+    "Linh",
+    "Chung",
+    "Khánh"
+  ],
+  "phien": [
+    "Phiên Khâu Viền",
+    "Cờ Lệnh Cán Ngắn",
+    "Phiên",
+    "Cờ Lệnh",
+    "Hồn Phiên"
+  ],
+  "chau": [
+    "Châu Nửa Trong",
+    "Châu",
+    "Dạ Minh Châu",
+    "Định Phong Châu"
+  ],
+  "kinh": [
+    "Kính Mặt Bầu",
+    "Kính",
+    "Đồng Kính",
+    "Chiếu Yêu Kính"
+  ],
+  "gian": [
+    "Ngọc Giản Xuyên Lỗ",
+    "Ngọc Giản",
+    "Bí Lục",
+    "Kinh Quyển"
+  ],
+  "an": [
+    "Ấn Tay Tròn",
+    "Ấn",
+    "Phiên Thiên Ấn",
+    "Triện"
+  ],
+  "thap": [
+    "Tháp Đá Ba Mái",
+    "Tháp",
+    "Bảo Tháp",
+    "Linh Lung Tháp"
+  ],
+  "tan": [
+    "Tán Cán Cong",
+    "Tán",
+    "Bảo Tán",
+    "Hoa Cái"
+  ],
+  "cam": [
+    "Cầm Thân Gỗ",
+    "Địch Lỗ Dọc",
+    "Tiêu Bọc Sừng",
+    "Cầm",
+    "Ngọc Địch",
+    "Tiêu"
+  ],
+  "xich": [
+    "Xích Mắt Tròn",
+    "Khổn Tiên Thằng Ba Tao",
+    "Xích",
+    "Khổn Tiên Thằng",
+    "Khốn Tác"
+  ],
+  "lenh": [
+    "Lệnh Bài Viền Đúc",
+    "Lệnh Bài",
+    "Phù Tiết"
+  ],
+  "dang": [
+    "Đăng Chân Dẹt",
+    "Đăng",
+    "Liên Đăng",
+    "Lưu Ly Đăng"
+  ],
+  "cot": [
+    "Yêu Nha Gốc Cong",
+    "Thú Cốt Rỗng Tủy",
+    "Yêu Nha",
+    "Yêu Đan",
+    "Thú Cốt"
+  ],
+  "huyet": [
+    "Huyết Ngọc Mặt Sẫm",
+    "Huyết Ngọc",
+    "Huyết Tinh"
+  ],
+  "phu": [
+    "Hộ Mệnh Phù Nếp Chéo",
+    "Hộ Mệnh Phù",
+    "Phù Lục"
+  ],
+  "hap": [
+    "Kiếm Hạp Nắp Trượt",
+    "Kiếm Hạp"
+  ],
+  "dinh": [
+    "Đỉnh",
+    "Đan Lô",
+    "Lư Hương"
+  ],
+  "tui": [
+    "Càn Khôn Đại",
+    "Trữ Vật Đại"
+  ],
+  "hoa": [
+    "Hỏa Chủng",
+    "Địa Tâm Hỏa",
+    "Thanh Liên Hỏa"
+  ],
+  "tran": [
+    "Trận Bàn",
+    "Trận Kỳ",
+    "Tụ Linh Trận Đồ"
+  ]
+}

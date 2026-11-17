@@ -1,0 +1,2 @@
+// Nguồn chuẩn: LV_N. Luật xử lý ở src/game/core2/05-tui-do-gom-moi.js.
+const LV_N=[contentText("core2_05-tui-do-gom-moi_js.027"),contentText("core2_05-tui-do-gom-moi_js.028"),contentText("core2_05-tui-do-gom-moi_js.029"),contentText("core2_05-tui-do-gom-moi_js.030"),contentText("core2_05-tui-do-gom-moi_js.031"),contentText("core2_05-tui-do-gom-moi_js.032"),contentText("core2_05-tui-do-gom-moi_js.033"),contentText("core2_05-tui-do-gom-moi_js.034"),contentText("core2_05-tui-do-gom-moi_js.035")];

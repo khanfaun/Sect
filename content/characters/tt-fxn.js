@@ -1,0 +1,2 @@
+// Nguồn chuẩn: TT_FXN. Luật xử lý ở src/game/core2/12-dot-24-cac-loai.js.
+const TT_FXN={atkP:'Công vật lý {v}%',matkP:'Công phép {v}%',defP:'Thủ {v}%',hpP:'Khí huyết {v}%',mpP:'Linh lực {v}%',tp:'Thân pháp {v}',than:'Thần thức {v}',ngo:'Ngộ tính {v}',tam:'Đạo tâm {v}',crit:'Chí mạng {v}%',critDmg:'ST chí mạng {v}%',dodge:'Né tránh {v}',hoTam:'Hộ tâm {v}',drain:'Hút máu {v}%',regenHp:'Hồi khí huyết mỗi lượt {v}%',lifeP:'Thọ nguyên {v}%',tvP:'Tu vi nhận thêm {v}%'};

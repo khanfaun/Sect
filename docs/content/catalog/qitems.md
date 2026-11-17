@@ -1,0 +1,1202 @@
+# qitems
+
+Nguồn: `content/catalog/qitems.json`
+
+## Lá thư chưa gửi — `nv_thu_chuadua`
+
+```json
+{
+  "id": "nv_thu_chuadua",
+  "n": "Lá thư chưa gửi",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Lá thư nhặt trên thuyền ma; kỷ vật cốt truyện, chưa có nhiệm vụ gửi thư riêng.",
+  "d": "Phong bì ố vàng, nét chữ run run: \"Gửi mẹ.\"",
+  "status": "active"
+}
+```
+
+## Thư Gấp Hai Nếp — `nv_thu_gap_hai_nep`
+
+```json
+{
+  "id": "nv_thu_gap_hai_nep",
+  "n": "Thư Gấp Hai Nếp",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Lời Nhắn Qua Nước · dùng để tìm Khoen Đồng Của Người Chèo",
+  "d": "Nếp gấp còn đọng bùn.",
+  "status": "reference"
+}
+```
+
+## Khoen Đồng Của Người Chèo — `nv_khoen_dong_cua_nguoi_cheo`
+
+```json
+{
+  "id": "nv_khoen_dong_cua_nguoi_cheo",
+  "n": "Khoen Đồng Của Người Chèo",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Lời Nhắn Qua Nước · hỏi người giữ bến về dấu khoen",
+  "d": "Mép khoen mòn vì buộc dây đò.",
+  "status": "reference"
+}
+```
+
+## Góc Gạch Mòn Gót — `nv_goc_gach_mon_got`
+
+```json
+{
+  "id": "nv_goc_gach_mon_got",
+  "n": "Góc Gạch Mòn Gót",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Viên Gạch Đếm Bước · dùng để tìm Chìa Dưới Bậc Gạch",
+  "d": "Một mặt còn in vân rơm.",
+  "status": "reference"
+}
+```
+
+## Chìa Dưới Bậc Gạch — `nv_chia_duoi_bac_gach`
+
+```json
+{
+  "id": "nv_chia_duoi_bac_gach",
+  "n": "Chìa Dưới Bậc Gạch",
+  "i": "🗝️",
+  "dang": "Chìa khóa",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Viên Gạch Đếm Bước · mở hòm thấp dưới gầm phản",
+  "d": "Răng chìa giữ đất mịn.",
+  "status": "reference"
+}
+```
+
+## Đũa Tre Khía Đôi — `nv_dua_tre_khia_doi`
+
+```json
+{
+  "id": "nv_dua_tre_khia_doi",
+  "n": "Đũa Tre Khía Đôi",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Chén Canh Để Nguội · dùng để tìm Bát Canh Lòng Sứt",
+  "d": "Hai chiếc có vết khía ở cùng một đốt.",
+  "status": "reference"
+}
+```
+
+## Bát Canh Lòng Sứt — `nv_bat_canh_long_sut`
+
+```json
+{
+  "id": "nv_bat_canh_long_sut",
+  "n": "Bát Canh Lòng Sứt",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Chén Canh Để Nguội · đặt bát ở bàn trong cùng quán cũ",
+  "d": "Đáy bát vẫn còn mùi hành.",
+  "status": "reference"
+}
+```
+
+## Mõ Mất Một Tai — `nv_mo_mat_mot_tai`
+
+```json
+{
+  "id": "nv_mo_mat_mot_tai",
+  "n": "Mõ Mất Một Tai",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Tiếng Mõ Lỡ Canh · dùng để tìm Mảnh Giấy Đổi Canh",
+  "d": "Vết xước chạy ngang đầu mõ.",
+  "status": "reference"
+}
+```
+
+## Mảnh Giấy Đổi Canh — `nv_manh_giay_doi_canh`
+
+```json
+{
+  "id": "nv_manh_giay_doi_canh",
+  "n": "Mảnh Giấy Đổi Canh",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Tiếng Mõ Lỡ Canh · trao lại lời dặn cho người gác ca sau",
+  "d": "Mực nhạt ở dòng ghi canh ba.",
+  "status": "reference"
+}
+```
+
+## Sơ Đồ Qua Ba Cọc — `nv_so_do_qua_ba_coc`
+
+```json
+{
+  "id": "nv_so_do_qua_ba_coc",
+  "n": "Sơ Đồ Qua Ba Cọc",
+  "i": "🗺️",
+  "dang": "Bản đồ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Mưa Tắt Trên Đèo · dùng để tìm Thẻ Tre Cọc Cuối",
+  "d": "Đường mực ngắt ngay trên một vết rách.",
+  "status": "reference"
+}
+```
+
+## Thẻ Tre Cọc Cuối — `nv_the_tre_coc_cuoi`
+
+```json
+{
+  "id": "nv_the_tre_coc_cuoi",
+  "n": "Thẻ Tre Cọc Cuối",
+  "i": "🎫",
+  "dang": "Lệnh bài",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Mưa Tắt Trên Đèo · trình thẻ ở lều trạm cuối đèo",
+  "d": "Mép tre mòn thành hình móng tay.",
+  "status": "reference"
+}
+```
+
+## Vành Đồng Giữ Rèm — `nv_vanh_dong_giu_rem`
+
+```json
+{
+  "id": "nv_vanh_dong_giu_rem",
+  "n": "Vành Đồng Giữ Rèm",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Nhà Không Còn Rèm · dùng để tìm Con Suốt Bên Cửa",
+  "d": "Lỗ xỏ chỉ còn một đầu dây.",
+  "status": "reference"
+}
+```
+
+## Con Suốt Bên Cửa — `nv_con_suot_ben_cua`
+
+```json
+{
+  "id": "nv_con_suot_ben_cua",
+  "n": "Con Suốt Bên Cửa",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Nhà Không Còn Rèm · nhờ người dệt nhận ra đường chỉ",
+  "d": "Trục suốt dính một vòng tơ tím.",
+  "status": "reference"
+}
+```
+
+## Giấy Đo Lòng Giếng — `nv_giay_do_long_gieng`
+
+```json
+{
+  "id": "nv_giay_do_long_gieng",
+  "n": "Giấy Đo Lòng Giếng",
+  "i": "🗺️",
+  "dang": "Bản đồ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Giếng Không Soi Người · dùng để tìm Gương Trắng Không Bóng",
+  "d": "Ở bậc thứ sáu có một nét mực đậm.",
+  "status": "reference"
+}
+```
+
+## Gương Trắng Không Bóng — `nv_guong_trang_khong_bong`
+
+```json
+{
+  "id": "nv_guong_trang_khong_bong",
+  "n": "Gương Trắng Không Bóng",
+  "i": "🪞",
+  "dang": "Bảo vật bị nguyền",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Giếng Không Soi Người · đặt gương vào bậc được đánh dấu",
+  "d": "Mặt gương chỉ phản lại miệng giếng.",
+  "status": "reference"
+}
+```
+
+## Chìa Cửa Thừa Một Răng — `nv_chia_cua_thua_mot_rang`
+
+```json
+{
+  "id": "nv_chia_cua_thua_mot_rang",
+  "n": "Chìa Cửa Thừa Một Răng",
+  "i": "🗝️",
+  "dang": "Chìa khóa",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Vá Bản Lề · dùng để tìm Mảnh Ván Cất Lời Dặn",
+  "d": "Răng cuối chưa từng mòn.",
+  "status": "reference"
+}
+```
+
+## Mảnh Ván Cất Lời Dặn — `nv_manh_van_cat_loi_dan`
+
+```json
+{
+  "id": "nv_manh_van_cat_loi_dan",
+  "n": "Mảnh Ván Cất Lời Dặn",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Vá Bản Lề · mang mảnh ván về cho người giữ nhà",
+  "d": "Mặt trái có những vạch cao thấp.",
+  "status": "reference"
+}
+```
+
+## Tờ Hẹn Ghế Thứ Bảy — `nv_to_hen_ghe_thu_bay`
+
+```json
+{
+  "id": "nv_to_hen_ghe_thu_bay",
+  "n": "Tờ Hẹn Ghế Thứ Bảy",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Hàng Ghế Trống · dùng để tìm Túi Trà Cho Khách Muộn",
+  "d": "Dòng cuối viết xiên sang bên.",
+  "status": "reference"
+}
+```
+
+## Túi Trà Cho Khách Muộn — `nv_tui_tra_cho_khach_muon`
+
+```json
+{
+  "id": "nv_tui_tra_cho_khach_muon",
+  "n": "Túi Trà Cho Khách Muộn",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Hàng Ghế Trống · đem trà đến chiếc ghế còn bỏ trống",
+  "d": "Trong túi chỉ đủ một chén.",
+  "status": "reference"
+}
+```
+
+## Vỏ Ấm Nứt Canh Tư — `nv_vo_am_nut_canh_tu`
+
+```json
+{
+  "id": "nv_vo_am_nut_canh_tu",
+  "n": "Vỏ Ấm Nứt Canh Tư",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Đốt Than Cuối · dùng để tìm Than Chờ Nồi Thuốc",
+  "d": "Một vệt ám khói chưa lau.",
+  "status": "reference"
+}
+```
+
+## Than Chờ Nồi Thuốc — `nv_than_cho_noi_thuoc`
+
+```json
+{
+  "id": "nv_than_cho_noi_thuoc",
+  "n": "Than Chờ Nồi Thuốc",
+  "i": "🪞",
+  "dang": "Bảo vật bị nguyền",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Đốt Than Cuối · trả hòn than vào lò thuốc",
+  "d": "Hòn than nóng lên khi nghe ho.",
+  "status": "reference"
+}
+```
+
+## Giấy Dó Lạc Mực — `nv_giay_do_lac_muc`
+
+```json
+{
+  "id": "nv_giay_do_lac_muc",
+  "n": "Giấy Dó Lạc Mực",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Hẹn Dưới Gốc Dó · dùng để tìm Tranh Vẽ Rễ Cây",
+  "d": "Góc tờ giấy còn một mẩu vỏ cây.",
+  "status": "reference"
+}
+```
+
+## Tranh Vẽ Rễ Cây — `nv_tranh_ve_re_cay`
+
+```json
+{
+  "id": "nv_tranh_ve_re_cay",
+  "n": "Tranh Vẽ Rễ Cây",
+  "i": "🗺️",
+  "dang": "Bản đồ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Hẹn Dưới Gốc Dó · tìm hốc cây theo nét rễ",
+  "d": "Đường rễ nhỏ chỉ về phía chân vách.",
+  "status": "reference"
+}
+```
+
+## Thẻ Gỗ Qua Chợ — `nv_the_go_qua_cho`
+
+```json
+{
+  "id": "nv_the_go_qua_cho",
+  "n": "Thẻ Gỗ Qua Chợ",
+  "i": "🎫",
+  "dang": "Lệnh bài",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Sổ Nợ Bạc Màu · dùng để tìm Sổ Nợ Gạch Dòng Cuối",
+  "d": "Lỗ treo đen vì nhiều lượt tay.",
+  "status": "reference"
+}
+```
+
+## Sổ Nợ Gạch Dòng Cuối — `nv_so_no_gach_dong_cuoi`
+
+```json
+{
+  "id": "nv_so_no_gach_dong_cuoi",
+  "n": "Sổ Nợ Gạch Dòng Cuối",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Sổ Nợ Bạc Màu · trả sổ cho người từng giữ sạp",
+  "d": "Tên nhà nợ đã được xóa bằng hai nét.",
+  "status": "reference"
+}
+```
+
+## Chuông Đất Mèo Hoang — `nv_chuong_dat_meo_hoang`
+
+```json
+{
+  "id": "nv_chuong_dat_meo_hoang",
+  "n": "Chuông Đất Mèo Hoang",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Tiếng Gọi Sau Bếp · dùng để tìm Chìa Cửa Liếp Mỏng",
+  "d": "Trong chuông có một sợi lông vàng.",
+  "status": "reference"
+}
+```
+
+## Chìa Cửa Liếp Mỏng — `nv_chia_cua_liep_mong`
+
+```json
+{
+  "id": "nv_chia_cua_liep_mong",
+  "n": "Chìa Cửa Liếp Mỏng",
+  "i": "🗝️",
+  "dang": "Chìa khóa",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Tiếng Gọi Sau Bếp · mở liếp sau bếp lúc chạng vạng",
+  "d": "Răng chìa vương bụi trấu.",
+  "status": "reference"
+}
+```
+
+## Gói Kê Buộc Chỉ Xanh — `nv_goi_ke_buoc_chi_xanh`
+
+```json
+{
+  "id": "nv_goi_ke_buoc_chi_xanh",
+  "n": "Gói Kê Buộc Chỉ Xanh",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Sợi Tóc Trong Gói Kê · dùng để tìm Lược Gỗ Chừa Răng",
+  "d": "Trên nút buộc có một sợi tóc bạc.",
+  "status": "reference"
+}
+```
+
+## Lược Gỗ Chừa Răng — `nv_luoc_go_chua_rang`
+
+```json
+{
+  "id": "nv_luoc_go_chua_rang",
+  "n": "Lược Gỗ Chừa Răng",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Sợi Tóc Trong Gói Kê · trao gói kê cho chủ chiếc lược",
+  "d": "Ngăn giữa giấu một sợi chỉ xanh.",
+  "status": "reference"
+}
+```
+
+## Nan Vó Nứt Mắt — `nv_nan_vo_nut_mat`
+
+```json
+{
+  "id": "nv_nan_vo_nut_mat",
+  "n": "Nan Vó Nứt Mắt",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Vó Rách Chưa Hong · dùng để tìm Chì Neo Móc Gấu Áo",
+  "d": "Cạnh nan còn dấu dây rút.",
+  "status": "reference"
+}
+```
+
+## Chì Neo Móc Gấu Áo — `nv_chi_neo_moc_gau_ao`
+
+```json
+{
+  "id": "nv_chi_neo_moc_gau_ao",
+  "n": "Chì Neo Móc Gấu Áo",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Vó Rách Chưa Hong · hỏi người được cứu ở bãi lau",
+  "d": "Móc chì ghim một dải vải nâu.",
+  "status": "reference"
+}
+```
+
+## Mảnh Tổ Lót Tơ — `nv_manh_to_lot_to`
+
+```json
+{
+  "id": "nv_manh_to_lot_to",
+  "n": "Mảnh Tổ Lót Tơ",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Trứng Nở Bên Thềm · dùng để tìm Vỏ Trứng Mở Vành",
+  "d": "Tơ còn bện quanh một mẩu cỏ non.",
+  "status": "reference"
+}
+```
+
+## Vỏ Trứng Mở Vành — `nv_vo_trung_mo_vanh`
+
+```json
+{
+  "id": "nv_vo_trung_mo_vanh",
+  "n": "Vỏ Trứng Mở Vành",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Trứng Nở Bên Thềm · đặt vỏ ở ô cửa tránh gió",
+  "d": "Một vết nứt chạy ngang vành vỏ.",
+  "status": "reference"
+}
+```
+
+## Hài Cốt Còn Dây Vai — `nv_hai_cot_con_day_vai`
+
+```json
+{
+  "id": "nv_hai_cot_con_day_vai",
+  "n": "Hài Cốt Còn Dây Vai",
+  "i": "💀",
+  "dang": "Đầu lâu / thi thể",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Người Canh Mộ Ngủ Muộn · dùng để tìm Đèn Chôn Sát Bia",
+  "d": "Dây vải chôn cùng đã bạc màu.",
+  "status": "reference"
+}
+```
+
+## Đèn Chôn Sát Bia — `nv_den_chon_sat_bia`
+
+```json
+{
+  "id": "nv_den_chon_sat_bia",
+  "n": "Đèn Chôn Sát Bia",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Người Canh Mộ Ngủ Muộn · an táng hài cốt cạnh ngọn đèn",
+  "d": "Tim đèn cháy ngắn hơn một đốt.",
+  "status": "reference"
+}
+```
+
+## Bản Đường In Tro — `nv_ban_duong_in_tro`
+
+```json
+{
+  "id": "nv_ban_duong_in_tro",
+  "n": "Bản Đường In Tro",
+  "i": "🗺️",
+  "dang": "Bản đồ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Con Đường Tro Đỏ · dùng để tìm Thẻ Đổi Lò",
+  "d": "Đường về có dấu ngón tay đỏ.",
+  "status": "reference"
+}
+```
+
+## Thẻ Đổi Lò — `nv_the_doi_lo`
+
+```json
+{
+  "id": "nv_the_doi_lo",
+  "n": "Thẻ Đổi Lò",
+  "i": "🎫",
+  "dang": "Lệnh bài",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Con Đường Tro Đỏ · trình thẻ để nhận ca trước cửa lò",
+  "d": "Mặt thẻ ám một lớp muội.",
+  "status": "reference"
+}
+```
+
+## Mảnh Áo Để Thừa Chỉ — `nv_manh_ao_de_thua_chi`
+
+```json
+{
+  "id": "nv_manh_ao_de_thua_chi",
+  "n": "Mảnh Áo Để Thừa Chỉ",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Người Lạ Mặc Áo Vá · dùng để tìm Tờ Dặn Vá Lại Vai",
+  "d": "Đường kim dừng ngay dưới cổ.",
+  "status": "reference"
+}
+```
+
+## Tờ Dặn Vá Lại Vai — `nv_to_dan_va_lai_vai`
+
+```json
+{
+  "id": "nv_to_dan_va_lai_vai",
+  "n": "Tờ Dặn Vá Lại Vai",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Người Lạ Mặc Áo Vá · đưa lời dặn cho người thợ ở trạm",
+  "d": "Tờ giấy gấp quanh một cây kim cùn.",
+  "status": "reference"
+}
+```
+
+## Hình Triều Vẽ Trong Bát — `nv_hinh_trieu_ve_trong_bat`
+
+```json
+{
+  "id": "nv_hinh_trieu_ve_trong_bat",
+  "n": "Hình Triều Vẽ Trong Bát",
+  "i": "🗺️",
+  "dang": "Bản đồ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Hai Bờ Đếm Sóng · dùng để tìm Chìa Hộp Gác Mạn",
+  "d": "Nét sóng cao nhất cắt vào mép giấy.",
+  "status": "reference"
+}
+```
+
+## Chìa Hộp Gác Mạn — `nv_chia_hop_gac_man`
+
+```json
+{
+  "id": "nv_chia_hop_gac_man",
+  "n": "Chìa Hộp Gác Mạn",
+  "i": "🗝️",
+  "dang": "Chìa khóa",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Hai Bờ Đếm Sóng · mở hộp dưới ván thuyền khi triều rút",
+  "d": "Thân chìa cong như lưỡi câu.",
+  "status": "reference"
+}
+```
+
+## Hòn Đá Giữ Một Vết — `nv_hon_da_giu_mot_vet`
+
+```json
+{
+  "id": "nv_hon_da_giu_mot_vet",
+  "n": "Hòn Đá Giữ Một Vết",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Người Mài Đá Câm · dùng để tìm Mảnh Giấy Không Nói",
+  "d": "Nửa đá nhẵn nửa còn cát.",
+  "status": "reference"
+}
+```
+
+## Mảnh Giấy Không Nói — `nv_manh_giay_khong_noi`
+
+```json
+{
+  "id": "nv_manh_giay_khong_noi",
+  "n": "Mảnh Giấy Không Nói",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Người Mài Đá Câm · đọc lại lời nhắn trước cửa hàng đá",
+  "d": "Nét chữ khắc bằng cạnh sỏi.",
+  "status": "reference"
+}
+```
+
+## Mảnh Bia Khía Chân Chim — `nv_manh_bia_khia_chan_chim`
+
+```json
+{
+  "id": "nv_manh_bia_khia_chan_chim",
+  "n": "Mảnh Bia Khía Chân Chim",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Tổ Chim Trên Bia · dùng để tìm Xương Cánh Chim Sau Mộ",
+  "d": "Vết móng phủ lên một chữ cũ.",
+  "status": "reference"
+}
+```
+
+## Xương Cánh Chim Sau Mộ — `nv_xuong_canh_chim_sau_mo`
+
+```json
+{
+  "id": "nv_xuong_canh_chim_sau_mo",
+  "n": "Xương Cánh Chim Sau Mộ",
+  "i": "💀",
+  "dang": "Đầu lâu / thi thể",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Tổ Chim Trên Bia · đặt xương về dưới bụi cỏ che bia",
+  "d": "Xương nhẹ đến nỗi gió có thể cuốn.",
+  "status": "reference"
+}
+```
+
+## Chìa Kho Rơi Trong Trấu — `nv_chia_kho_roi_trong_trau`
+
+```json
+{
+  "id": "nv_chia_kho_roi_trong_trau",
+  "n": "Chìa Kho Rơi Trong Trấu",
+  "i": "🗝️",
+  "dang": "Chìa khóa",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Đất Dưới Cối Gạo · dùng để tìm Gáo Gạo Mặt Trong Sáng",
+  "d": "Giữa thân chìa mắc một vỏ hạt.",
+  "status": "reference"
+}
+```
+
+## Gáo Gạo Mặt Trong Sáng — `nv_gao_gao_mat_trong_sang`
+
+```json
+{
+  "id": "nv_gao_gao_mat_trong_sang",
+  "n": "Gáo Gạo Mặt Trong Sáng",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Đất Dưới Cối Gạo · mở cửa kho và trao gáo cho người đong",
+  "d": "Lòng gáo mòn sâu ở một phía.",
+  "status": "reference"
+}
+```
+
+## Bản Đồ Vết Cỏ Cúi — `nv_ban_do_vet_co_cui`
+
+```json
+{
+  "id": "nv_ban_do_vet_co_cui",
+  "n": "Bản Đồ Vết Cỏ Cúi",
+  "i": "🗺️",
+  "dang": "Bản đồ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Lối Mòn Còn Cọc · dùng để tìm Nút Cỏ Từ Cọc Xa",
+  "d": "Dọc lề vẽ những gốc cỏ nghiêng.",
+  "status": "reference"
+}
+```
+
+## Nút Cỏ Từ Cọc Xa — `nv_nut_co_tu_coc_xa`
+
+```json
+{
+  "id": "nv_nut_co_tu_coc_xa",
+  "n": "Nút Cỏ Từ Cọc Xa",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Lối Mòn Còn Cọc · tìm người đánh dấu lối về",
+  "d": "Ngọn cỏ còn quấn sợi chỉ bạc.",
+  "status": "reference"
+}
+```
+
+## Đĩa Gỗ Nửa Mặt Sáng — `nv_dia_go_nua_mat_sang`
+
+```json
+{
+  "id": "nv_dia_go_nua_mat_sang",
+  "n": "Đĩa Gỗ Nửa Mặt Sáng",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Nửa Bánh Để Chờ · dùng để tìm Hộp Cúng Đậy Hờ",
+  "d": "Mặt bên phải mòn vì đặt bánh.",
+  "status": "reference"
+}
+```
+
+## Hộp Cúng Đậy Hờ — `nv_hop_cung_day_ho`
+
+```json
+{
+  "id": "nv_hop_cung_day_ho",
+  "n": "Hộp Cúng Đậy Hờ",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Nửa Bánh Để Chờ · đặt đĩa lên mâm ở nhà bỏ trống",
+  "d": "Nắp không khép vì vướng mẩu dây.",
+  "status": "reference"
+}
+```
+
+## Chìa Cửa Ô Vuông — `nv_chia_cua_o_vuong`
+
+```json
+{
+  "id": "nv_chia_cua_o_vuong",
+  "n": "Chìa Cửa Ô Vuông",
+  "i": "🗝️",
+  "dang": "Chìa khóa",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Cửa Sổ Thấp · dùng để tìm Miếng Vôi In Vân Tay",
+  "d": "Răng chìa ngắn gần hết.",
+  "status": "reference"
+}
+```
+
+## Miếng Vôi In Vân Tay — `nv_mieng_voi_in_van_tay`
+
+```json
+{
+  "id": "nv_mieng_voi_in_van_tay",
+  "n": "Miếng Vôi In Vân Tay",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Cửa Sổ Thấp · mở ô cửa rồi chỉ dấu tay cho người trong nhà",
+  "d": "Trên mặt còn ba vạch ngón nhỏ.",
+  "status": "reference"
+}
+```
+
+## Vòng Gai Chân Chim — `nv_vong_gai_chan_chim`
+
+```json
+{
+  "id": "nv_vong_gai_chan_chim",
+  "n": "Vòng Gai Chân Chim",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Chim Quen Đậu Hiên · dùng để tìm Thư Chỉ Vẽ Mái Ngói",
+  "d": "Vòng được buộc bằng nút tháo một tay.",
+  "status": "reference"
+}
+```
+
+## Thư Chỉ Vẽ Mái Ngói — `nv_thu_chi_ve_mai_ngoi`
+
+```json
+{
+  "id": "nv_thu_chi_ve_mai_ngoi",
+  "n": "Thư Chỉ Vẽ Mái Ngói",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Chim Quen Đậu Hiên · đưa thư đến mái có ô ngói khuyết",
+  "d": "Giữa hình mái ngói có một ô trống.",
+  "status": "reference"
+}
+```
+
+## Bấc Đèn Lẫn Lá Thơm — `nv_bac_den_lan_la_thom`
+
+```json
+{
+  "id": "nv_bac_den_lan_la_thom",
+  "n": "Bấc Đèn Lẫn Lá Thơm",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Ngọn Đèn Qua Nhà Cháy · dùng để tìm Đèn Sáng Về Phía Khói",
+  "d": "Lá sém một mép, vẫn còn thơm.",
+  "status": "reference"
+}
+```
+
+## Đèn Sáng Về Phía Khói — `nv_den_sang_ve_phia_khoi`
+
+```json
+{
+  "id": "nv_den_sang_ve_phia_khoi",
+  "n": "Đèn Sáng Về Phía Khói",
+  "i": "🪞",
+  "dang": "Bảo vật bị nguyền",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Ngọn Đèn Qua Nhà Cháy · dùng đèn tìm lối ra ở gian cháy",
+  "d": "Ngọn lửa nghiêng theo nơi có tro.",
+  "status": "reference"
+}
+```
+
+## Mũi Thuyền Hằn Khoen — `nv_mui_thuyen_han_khoen`
+
+```json
+{
+  "id": "nv_mui_thuyen_han_khoen",
+  "n": "Mũi Thuyền Hằn Khoen",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Thuyền Lật Trước Bến · dùng để tìm Tiền Đồng Mũi Thuyền",
+  "d": "Mặt trong giữ một vệt đồng xanh.",
+  "status": "reference"
+}
+```
+
+## Tiền Đồng Mũi Thuyền — `nv_tien_dong_mui_thuyen`
+
+```json
+{
+  "id": "nv_tien_dong_mui_thuyen",
+  "n": "Tiền Đồng Mũi Thuyền",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Thuyền Lật Trước Bến · trả tiền cho người đóng thuyền",
+  "d": "Một mặt đồng dính nhựa gỗ.",
+  "status": "reference"
+}
+```
+
+## Giấy Nợ Gấp Hình Lá — `nv_giay_no_gap_hinh_la`
+
+```json
+{
+  "id": "nv_giay_no_gap_hinh_la",
+  "n": "Giấy Nợ Gấp Hình Lá",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Món Nợ Sau Cơn Gió · dùng để tìm Thẻ Đổi Ngày Trả",
+  "d": "Lá giấy gấp đủ mười đường.",
+  "status": "reference"
+}
+```
+
+## Thẻ Đổi Ngày Trả — `nv_the_doi_ngay_tra`
+
+```json
+{
+  "id": "nv_the_doi_ngay_tra",
+  "n": "Thẻ Đổi Ngày Trả",
+  "i": "🎫",
+  "dang": "Lệnh bài",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Món Nợ Sau Cơn Gió · trình thẻ ở quán cũ khi có gió bấc",
+  "d": "Ngày trả được khía bằng cạnh đồng.",
+  "status": "reference"
+}
+```
+
+## Sỏi Trắng Nhẵn Hai Đầu — `nv_soi_trang_nhan_hai_dau`
+
+```json
+{
+  "id": "nv_soi_trang_nhan_hai_dau",
+  "n": "Sỏi Trắng Nhẵn Hai Đầu",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Hòn Sỏi Dưới Lưỡi · dùng để tìm Kẹp Than Cong Một Mũi",
+  "d": "Đầu dưới có vết răng cạn.",
+  "status": "reference"
+}
+```
+
+## Kẹp Than Cong Một Mũi — `nv_kep_than_cong_mot_mui`
+
+```json
+{
+  "id": "nv_kep_than_cong_mot_mui",
+  "n": "Kẹp Than Cong Một Mũi",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Hòn Sỏi Dưới Lưỡi · trả kẹp cho người trông lò ngày trước",
+  "d": "Chỗ cong còn dính bụi từ đáy lò.",
+  "status": "reference"
+}
+```
+
+## Giấy Thuốc Viết Ngược — `nv_giay_thuoc_viet_nguoc`
+
+```json
+{
+  "id": "nv_giay_thuoc_viet_nguoc",
+  "n": "Giấy Thuốc Viết Ngược",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Gói Thuốc Hong Trăng · dùng để tìm Hình Mái Hong Dược",
+  "d": "Nét chữ đọc rõ hơn dưới trăng.",
+  "status": "reference"
+}
+```
+
+## Hình Mái Hong Dược — `nv_hinh_mai_hong_duoc`
+
+```json
+{
+  "id": "nv_hinh_mai_hong_duoc",
+  "n": "Hình Mái Hong Dược",
+  "i": "🗺️",
+  "dang": "Bản đồ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Gói Thuốc Hong Trăng · đặt gói thuốc dưới miếng ngói khuyết",
+  "d": "Trên hình có dấu hở một miếng ngói.",
+  "status": "reference"
+}
+```
+
+## Thẻ Gỗ Bến Muộn — `nv_the_go_ben_muon`
+
+```json
+{
+  "id": "nv_the_go_ben_muon",
+  "n": "Thẻ Gỗ Bến Muộn",
+  "i": "🎫",
+  "dang": "Lệnh bài",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Người Đợi Đò Lúc Cạn · dùng để tìm Thi Hài Ôm Mái Chèo",
+  "d": "Mặt thẻ khắc một nét ngang.",
+  "status": "reference"
+}
+```
+
+## Thi Hài Ôm Mái Chèo — `nv_thi_hai_om_mai_cheo`
+
+```json
+{
+  "id": "nv_thi_hai_om_mai_cheo",
+  "n": "Thi Hài Ôm Mái Chèo",
+  "i": "💀",
+  "dang": "Đầu lâu / thi thể",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Người Đợi Đò Lúc Cạn · đưa thi hài trở về bờ đã ghi trên thẻ",
+  "d": "Hai bàn tay khép quanh cán gỗ.",
+  "status": "reference"
+}
+```
+
+## Vành Nong Mực Nhòe — `nv_vanh_nong_muc_nhoe`
+
+```json
+{
+  "id": "nv_vanh_nong_muc_nhoe",
+  "n": "Vành Nong Mực Nhòe",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Sân Phơi Nong Cũ · dùng để tìm Nan Tre Chẻ Dọc",
+  "d": "Ở một đầu còn một nét tên.",
+  "status": "reference"
+}
+```
+
+## Nan Tre Chẻ Dọc — `nv_nan_tre_che_doc`
+
+```json
+{
+  "id": "nv_nan_tre_che_doc",
+  "n": "Nan Tre Chẻ Dọc",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Sân Phơi Nong Cũ · lắp nan vào vành và mang sang sân bên",
+  "d": "Giữa nan giữ một hạt lúa khô.",
+  "status": "reference"
+}
+```
+
+## Tờ Chỉ Lối Vực Tiếng — `nv_to_chi_loi_vuc_tieng`
+
+```json
+{
+  "id": "nv_to_chi_loi_vuc_tieng",
+  "n": "Tờ Chỉ Lối Vực Tiếng",
+  "i": "🗺️",
+  "dang": "Bản đồ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Chỗ Vực Gọi Tên · dùng để tìm Đá Vọng Gọi Người",
+  "d": "Nét đường dừng ở chỗ có hình bàn tay.",
+  "status": "reference"
+}
+```
+
+## Đá Vọng Gọi Người — `nv_da_vong_goi_nguoi`
+
+```json
+{
+  "id": "nv_da_vong_goi_nguoi",
+  "n": "Đá Vọng Gọi Người",
+  "i": "🪞",
+  "dang": "Bảo vật bị nguyền",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Chỗ Vực Gọi Tên · bịt vết rạn bằng đất lấy ở chân vực",
+  "d": "Vết rạn mở ra mỗi lần nghe tên.",
+  "status": "reference"
+}
+```
+
+## Chìa Kho Không Còn Cán — `nv_chia_kho_khong_con_can`
+
+```json
+{
+  "id": "nv_chia_kho_khong_con_can",
+  "n": "Chìa Kho Không Còn Cán",
+  "i": "🗝️",
+  "dang": "Chìa khóa",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Nước Tràn Qua Vách · dùng để tìm Sổ Kho Có Vạch Triều",
+  "d": "Nửa răng đen vì từng ngâm nước.",
+  "status": "reference"
+}
+```
+
+## Sổ Kho Có Vạch Triều — `nv_so_kho_co_vach_trieu`
+
+```json
+{
+  "id": "nv_so_kho_co_vach_trieu",
+  "n": "Sổ Kho Có Vạch Triều",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Nước Tràn Qua Vách · dùng vạch nước để tìm ngăn sổ bị vùi",
+  "d": "Vệt bùn chạy ngang cả hai trang.",
+  "status": "reference"
+}
+```
+
+## Thư Gói Lõi Chỉ — `nv_thu_goi_loi_chi`
+
+```json
+{
+  "id": "nv_thu_goi_loi_chi",
+  "n": "Thư Gói Lõi Chỉ",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Lời Hẹn Bên Trạm · dùng để tìm Ống Chỉ Hẹn Qua Đêm",
+  "d": "Cuộn chỉ để lại một vết tròn trên giấy.",
+  "status": "reference"
+}
+```
+
+## Ống Chỉ Hẹn Qua Đêm — `nv_ong_chi_hen_qua_dem`
+
+```json
+{
+  "id": "nv_ong_chi_hen_qua_dem",
+  "n": "Ống Chỉ Hẹn Qua Đêm",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Lời Hẹn Bên Trạm · gửi ống chỉ cho khách tới trạm sau cùng",
+  "d": "Đầu ống khía một dấu tay.",
+  "status": "reference"
+}
+```
+
+## Mẩu Phấn Dính Rêu — `nv_mau_phan_dinh_reu`
+
+```json
+{
+  "id": "nv_mau_phan_dinh_reu",
+  "n": "Mẩu Phấn Dính Rêu",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Vết Phấn Của Bạn Đường · dùng để tìm Sơ Đồ Vách Phấn",
+  "d": "Đầu còn nguyên có một vệt gãy nhỏ.",
+  "status": "reference"
+}
+```
+
+## Sơ Đồ Vách Phấn — `nv_so_do_vach_phan`
+
+```json
+{
+  "id": "nv_so_do_vach_phan",
+  "n": "Sơ Đồ Vách Phấn",
+  "i": "🗺️",
+  "dang": "Bản đồ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Vết Phấn Của Bạn Đường · nối lại dấu thứ ba trên vách",
+  "d": "Ba dấu phấn đứt ngang một chỗ.",
+  "status": "reference"
+}
+```
+
+## Nút Vò Bọc Lá Khô — `nv_nut_vo_boc_la_kho`
+
+```json
+{
+  "id": "nv_nut_vo_boc_la_kho",
+  "n": "Nút Vò Bọc Lá Khô",
+  "i": "🪢",
+  "dang": "Tín vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Một Vò Rượu Nhạt · dùng để tìm Chén Dùng Sau Cơn Ốm",
+  "d": "Lá đã bạc màu mà vẫn kín mùi.",
+  "status": "reference"
+}
+```
+
+## Chén Dùng Sau Cơn Ốm — `nv_chen_dung_sau_con_om`
+
+```json
+{
+  "id": "nv_chen_dung_sau_con_om",
+  "n": "Chén Dùng Sau Cơn Ốm",
+  "i": "📿",
+  "dang": "Di vật",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Một Vò Rượu Nhạt · rót từ vò cũ và đặt chén cạnh giường",
+  "d": "Lòng chén có một vệt gợn mỏng.",
+  "status": "reference"
+}
+```
+
+## Mẩu Đòn Gánh Sót Vai — `nv_mau_don_ganh_sot_vai`
+
+```json
+{
+  "id": "nv_mau_don_ganh_sot_vai",
+  "n": "Mẩu Đòn Gánh Sót Vai",
+  "i": "🧩",
+  "dang": "Mảnh vỡ",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Đôi Quang Gánh Lệch · dùng để tìm Lời Dặn Đổi Bên Vai",
+  "d": "Mặt gỗ lõm xuống ở một chỗ.",
+  "status": "reference"
+}
+```
+
+## Lời Dặn Đổi Bên Vai — `nv_loi_dan_doi_ben_vai`
+
+```json
+{
+  "id": "nv_loi_dan_doi_ben_vai",
+  "n": "Lời Dặn Đổi Bên Vai",
+  "i": "✉️",
+  "dang": "Thư",
+  "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Đôi Quang Gánh Lệch · trao lời dặn cho người gánh qua chỗ dốc",
+  "d": "Giấy có hai vết buộc dây.",
+  "status": "reference"
+}
+```
+
+## Linh Vật Trong Lò — `story_item_vet_khau_duoi_lop_da_2`
+
+```json
+{
+  "id": "story_item_vet_khau_duoi_lop_da_2",
+  "n": "Linh Vật Trong Lò",
+  "i": "📜",
+  "d": "Ngươi lấy được một vật bị kẹt trong lò. Khi trở về, tay áo ngươi có thêm một đường chỉ ngược.",
+  "use": "Kỷ vật cốt truyện; không cộng chỉ số và không mở tính năng chưa khai báo.",
+  "status": "active"
+}
+```
+
+## Kim Nhận Thi Thức — `story_item_vet_khau_duoi_lop_da_4`
+
+```json
+{
+  "id": "story_item_vet_khau_duoi_lop_da_4",
+  "n": "Kim Nhận Thi Thức",
+  "i": "📜",
+  "d": "Ngươi có một vật thử thi. Người em {$b.ten} xin chỉ một đoạn chỉ, đủ quấn qua ngón tay.",
+  "use": "Kỷ vật cốt truyện; không cộng chỉ số và không mở tính năng chưa khai báo.",
+  "status": "active"
+}
+```
+
+## Đồ Cũ Qua Lò Ngược — `story_item_mot_vong_quay_doi_gio_com`
+
+```json
+{
+  "id": "story_item_mot_vong_quay_doi_gio_com",
+  "n": "Đồ Cũ Qua Lò Ngược",
+  "i": "📜",
+  "d": "Món đồ lành lại, kèm theo cái túi ngươi đã dùng bọc nó lần đầu. Cái túi còn một nắm gạo.",
+  "use": "Kỷ vật cốt truyện; không cộng chỉ số và không mở tính năng chưa khai báo.",
+  "status": "active"
+}
+```
+
+## Khẩu Quyết Lối Cất Đồ — `story_item_cai_mieng_giau_trong_vai`
+
+```json
+{
+  "id": "story_item_cai_mieng_giau_trong_vai",
+  "n": "Khẩu Quyết Lối Cất Đồ",
+  "i": "📜",
+  "d": "Cái miệng nói đúng về một lối cất đồ. Đêm sau nó dùng giọng ngươi gọi từ phía vai.",
+  "use": "Kỷ vật cốt truyện; không cộng chỉ số và không mở tính năng chưa khai báo.",
+  "status": "active"
+}
+```
+
+## Mái San Hô — `story_item_mai_nha_moc_tren_coc_chet`
+
+```json
+{
+  "id": "story_item_mai_nha_moc_tren_coc_chet",
+  "n": "Mái San Hô",
+  "i": "📜",
+  "d": "Mái giữ được linh khí, còn căn nhà kế mất chỗ dựa. Đêm xuống, san hô chạm nhau ngoài mặt nước.",
+  "use": "Kỷ vật cốt truyện; không cộng chỉ số và không mở tính năng chưa khai báo.",
+  "status": "active"
+}
+```

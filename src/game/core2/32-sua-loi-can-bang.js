@@ -23,7 +23,7 @@ function artReqCap(){const r=G.run;return isPham()?0:(r.realm||0)+1;}
   for(let i=0;i<8&&a.req>cap;i++)a=_ga32(type,i<4?tier:Math.max(0,tier-1),sid,o);
   if(a.req>cap){dbg('art.cap',{req:a.req,cap});a=_ga32(type,Math.min(tier,cap+1),sid,{req:cap});}return a;};}
 // 6) Bậc thiên phú: lực chiến bằng người sàn là Bình phàm (trước bị tính là Bất phàm)
-const TAL_RT=[0.9,1.25,1.7,2.4]; // Phế vật · Bình phàm · Bất phàm · Tinh anh · Thiên kiêu
+// Bảng TAL_RT: content/characters/tal-rt.js // Phế vật · Bình phàm · Bất phàm · Tinh anh · Thiên kiêu
 function talLvQ(q){let lv=0;for(const x of TAL_RT)if(q>=x-1e-9)lv++;return lv;}
 {const _pt32=playerTal;playerTal=function(){const t=_pt32();if(!t||!t.lc)return t;return Object.assign({},t,{tier:talLvQ(t.score)});};}
 {const _ut32=unitTal;unitTal=function(u){const t=_ut32(u);if(!t||!u||u.isMain||t.p)return t;return {tier:talLvQ(t.score),score:t.score};};}

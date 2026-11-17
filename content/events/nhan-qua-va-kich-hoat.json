@@ -1,0 +1,807 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "nhan_tinh",
+      "name": "Hồn trong nhẫn",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": [
+        "Chiếc nhẫn cũ nóng rực lên. Lần này giọng nói ấy rõ ràng: “{$p.tt}, ta là {$lao}, ba nghìn năm trước từng đứng đầu một phương. Giờ chỉ còn tàn hồn này. Ngươi giúp ta một việc, ta giúp ngươi một đời.”"
+      ],
+      "choices": [
+        {
+          "i": "🤝",
+          "l": "Đồng ý giúp",
+          "o": [
+            {
+              "w": 2,
+              "t": "Lão chỉ ngươi đến một mộ cổ, lấy lại thứ lão giấu năm xưa. Đổi lại, lão truyền cho ngươi tâm pháp cả đời.",
+              "e": {
+                "skill": 2,
+                "tv": 12
+              }
+            },
+            {
+              "w": 1,
+              "t": "“Việc ấy” là thân thể của ngươi. Thần hồn lão tràn ra từ chiếc nhẫn, muốn đoạt xá!",
+              "fight": {
+                "k": "amhon",
+                "n": "{$lao}",
+                "m": 1.3,
+                "elite": 1
+              },
+              "win": {
+                "t": "Tàn hồn tan biến. Chiếc nhẫn vỡ đôi, nhưng ký ức tu luyện của lão đọng lại trong đầu ngươi.",
+                "e": {
+                  "tv": 18,
+                  "ngo": 3,
+                  "rmRelic": "nhancu"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "i": "🔥",
+          "l": "Luyện hóa tàn hồn",
+          "chk": [
+            "tam",
+            12
+          ],
+          "ok": {
+            "t": "Lão gào thét rồi im bặt. Sức mạnh ba nghìn năm chảy vào kinh mạch ngươi, lạnh và đắng.",
+            "e": {
+              "tv": 18,
+              "tamma": 8,
+              "karma": -6,
+              "rmRelic": "nhancu"
+            }
+          },
+          "no": {
+            "t": "Tàn hồn phản kích, suýt nữa chiếm luôn thức hải của ngươi.",
+            "e": {
+              "hp": "-30%",
+              "tamma": 6
+            }
+          }
+        },
+        {
+          "i": "🙏",
+          "l": "Mời lão đi đầu thai",
+          "t": "Lão im lặng rất lâu. “Ba nghìn năm… cũng mệt rồi.” Ánh sáng tắt. Chiếc nhẫn trở lại là sắt vụn, nhưng ngươi giữ nó lại.",
+          "e": {
+            "karma": 8,
+            "van": 3,
+            "lore": "luan_hoi"
+          }
+        }
+      ],
+      "logic": {
+        "condition": {
+          "$hook": "nhan_tinh_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/12-dong-doi-tam-thoi.js",
+        "ref": "nhan_tinh",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Khám phá",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "mo_kiep_truoc",
+      "name": "Nấm mộ quen",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Giữa rừng thông có một nấm mộ nhỏ, bia gỗ đã mục. Ngươi cúi xuống đọc: “{$g.ten}, hưởng dương {$g.tuoi} tuổi.” Tay ngươi run lên. Cái tên ấy, ngươi biết. Ngươi đã từng là người đó.",
+        "Ngươi dừng lại trước một nấm mồ hoang mà chẳng hiểu vì sao. Cỏ mọc kín, bia ghi tên {$g.ten}. Đêm qua ngươi mơ thấy đúng cái tên này."
+      ],
+      "choices": [
+        {
+          "i": "🙏",
+          "l": "Thắp hương",
+          "t": "Khói hương bay thẳng lên trời. Ngươi có cảm giác ai đó đang mỉm cười.",
+          "e": {
+            "tam": 3,
+            "tamma": -10,
+            "van": 2,
+            "lore": "luan_hoi"
+          }
+        },
+        {
+          "i": "⛏️",
+          "l": "Đào lên",
+          "t": "Trong quan tài chỉ còn bộ xương và vài thứ tùy thân. Ngươi cầm lên, thấy quen như của chính mình.",
+          "e": {
+            "graveItems": 1,
+            "relic": "mocu",
+            "st": 10,
+            "karma": -2,
+            "lore": "luan_hoi"
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "mo_kiep_truoc_v"
+        },
+        "condition": {
+          "$hook": "mo_kiep_truoc_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "mo_kiep_truoc",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.mo_kiep_truoc.001": "vô danh"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Khám phá",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "no_kiep_truoc",
+      "name": "Nợ kiếp trước",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:truysat",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Ngươi gặp {$k} lần đầu tiên trong kiếp này, vậy mà tim lại đập thình thịch như gặp kẻ thù truyền kiếp. Một mảnh ký ức lóe lên: máu, đau, và khuôn mặt này.",
+        "Giấc mơ đêm nào cũng lặp lại: ngươi chết dưới tay một kẻ. Hôm nay, kẻ đó đang đứng trước mặt ngươi. {$k}."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Báo thù kiếp trước",
+          "fight": {
+            "n": "{$k}",
+            "mv": "km",
+            "elite": 1,
+            "nem": 1
+          },
+          "win": {
+            "t": "Nợ cũ đã trả. Ngươi thấy nhẹ hẳn, như vừa đặt xuống một gánh nặng mang từ đời trước.",
+            "e": {
+              "tv": 10,
+              "tamma": -15,
+              "ach": "baothu",
+              "relic": 1,
+              "nemDone": 1
+            }
+          }
+        },
+        {
+          "i": "🌫️",
+          "l": "Buông bỏ",
+          "t": "Kiếp trước là kiếp trước. Ngươi quay đi. {$k} nhìn theo, không hiểu vì sao lại thấy lạnh gáy.",
+          "e": {
+            "tam": 3,
+            "tamma": -5
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "no_kiep_truoc_v"
+        },
+        "condition": {
+          "$hook": "no_kiep_truoc_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "no_kiep_truoc",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Ân oán",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "bao_an",
+      "name": "Người cũ báo ân",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Có người gọi tên ngươi từ phía sau. Quay lại, ngươi mất một lúc mới nhận ra: {$s.ten}, người ngươi từng {$s.d} năm nào. Giờ {$s.hn} đã khác xưa nhiều.",
+        "Một đoàn người dừng lại trước mặt ngươi. Kẻ dẫn đầu xuống ngựa, cúi đầu thật thấp: “Còn nhớ {$s.ten} không? Ơn {$s.d} năm ấy, hôm nay xin trả.”"
+      ],
+      "choices": [
+        {
+          "i": "🤝",
+          "l": "Nhận tấm lòng",
+          "t": "{$s.ten} kể đã tu luyện ra sao, đã qua những gì. Lúc chia tay, {$s.hn} nhất quyết để lại một món quà.",
+          "e": {
+            "relic": 1,
+            "pill": 1,
+            "tv": 6,
+            "ach": "baoan"
+          }
+        },
+        {
+          "i": "🍶",
+          "l": "Chỉ uống một chén rượu",
+          "t": "Hai người cạn chén. Ngươi không nhận gì cả. {$s.ten} nhìn ngươi rất lâu, rồi cười.",
+          "e": {
+            "tam": 3,
+            "van": 3,
+            "tamma": -8,
+            "ach": "baoan"
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "bao_an_v"
+        },
+        "condition": {
+          "$hook": "bao_an_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "bao_an",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Khám phá",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "bao_oan",
+      "name": "Kẻ thù cũ",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:truysat",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "{$s.ten}. Ngươi suýt không nhận ra. Gương mặt ấy giờ đầy sẹo, ánh mắt chỉ còn hận thù. “Nhớ ta không? Năm ấy ngươi {$s.d}.”",
+        "Có kẻ đã chờ ngươi rất lâu. {$s.ten}, người năm xưa bị ngươi {$s.d}, giờ đứng chắn giữa đường, binh khí đã tuốt khỏi vỏ."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Ứng chiến",
+          "fight": {
+            "k": "tantu",
+            "n": "{$s.ten}",
+            "m": 1.2,
+            "elite": 1
+          },
+          "win": {
+            "t": "Ngươi thắng. Nhưng ánh mắt lúc ngã xuống của {$s.ten} khiến ngươi mất ngủ nhiều đêm.",
+            "e": {
+              "tamma": 5,
+              "tv": 8
+            }
+          }
+        },
+        {
+          "i": "🙇",
+          "l": "Xin lỗi",
+          "chk": [
+            "tam",
+            12
+          ],
+          "ok": {
+            "t": "{$s.ten} sững người. Rất lâu sau, {$s.hn} quay đi, không nói một lời.",
+            "e": {
+              "tamma": -15,
+              "karma": 8
+            }
+          },
+          "no": {
+            "t": "“Xin lỗi?” {$s.ten} cười như khóc. “Muộn rồi.”",
+            "fight": {
+              "k": "tantu",
+              "n": "{$s.ten}",
+              "m": 1.2
+            },
+            "win": {
+              "t": "Một mối nợ đã trả bằng máu.",
+              "e": {
+                "tamma": 4
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "bao_oan_v"
+        },
+        "condition": {
+          "$hook": "bao_oan_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "bao_oan",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Ân oán",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tam_ma_xam",
+      "name": "Tâm ma",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Đêm ấy ngươi mơ thấy chính mình đứng cười ở cuối giường. “Mệt không?” Nó hỏi. “Để ta làm thay cho.”",
+        "Đang đi, bóng của ngươi bỗng dừng lại, dù ngươi vẫn bước tiếp."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Đối diện tâm ma",
+          "fight": {
+            "k": "tamma"
+          },
+          "win": {
+            "t": "Nó tan đi như khói. Ngươi đứng một mình giữa đêm, lòng sáng như gương.",
+            "e": {
+              "tamma": -40,
+              "tam": 3,
+              "tv": 8,
+              "lore": "tam_ma"
+            }
+          }
+        },
+        {
+          "i": "🧘",
+          "l": "Tụng tĩnh tâm chú",
+          "chk": [
+            "tam",
+            12
+          ],
+          "ok": {
+            "t": "Câu chú lặp đi lặp lại, cho tới khi tiếng cười kia nhỏ dần rồi tắt.",
+            "e": {
+              "tamma": -20
+            }
+          },
+          "no": {
+            "t": "Càng tụng, tiếng cười càng to.",
+            "e": {
+              "tamma": 10,
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "i": "🌑",
+          "l": "Thuận theo nó",
+          "t": "Một luồng sức mạnh lạnh lẽo tràn vào kinh mạch. Dễ chịu tới đáng sợ.",
+          "e": {
+            "atkP": 10,
+            "tamma": 15,
+            "karma": -10
+          }
+        }
+      ],
+      "logic": {
+        "condition": {
+          "$hook": "tam_ma_xam_cond"
+        },
+        "force": [
+          {
+            "i": "⚔️",
+            "l": "Đối diện tâm ma",
+            "fight": {
+              "k": "tamma"
+            },
+            "win": {
+              "t": "Ngươi đánh bại chính mình. Tâm ma tan đi, để lại một khoảng trống yên tĩnh lạ lùng.",
+              "e": {
+                "tamma": -60,
+                "tam": 4,
+                "lore": "tam_ma"
+              }
+            }
+          }
+        ]
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "tam_ma_xam",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Khám phá",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "bao_an_co",
+      "name": "Người cũ báo ân",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "{$p.role} ở đây là {$p.ten}, tóc đã bạc. Nhìn ngươi rất lâu, {$p.ten} run giọng: “Ngươi… giống hệt {$p.who}. Năm ấy người đó từng {$p.d} ta.”",
+        "Có người đuổi theo ngươi tới tận cửa. Là {$p.ten}, nay đã là {$p.role}. “{$p.who} năm xưa từng {$p.d} ta. Ta nợ người ấy. Nay trả cho ngươi.”"
+      ],
+      "choices": [
+        {
+          "i": "🤝",
+          "l": "Nhận lấy",
+          "t": "{$p.ten} đưa ngươi một túi đồ, dặn dò rất lâu như dặn con cháu.",
+          "e": {
+            "relic": 1,
+            "pill": 1,
+            "tv": 6,
+            "ach": "baoan",
+            "patronDone": 1
+          }
+        },
+        {
+          "i": "🍶",
+          "l": "Chỉ ngồi uống chén trà",
+          "t": "Hai người ngồi tới chiều. {$p.ten} kể về {$p.who}, về những chuyện chính ngươi không còn nhớ.",
+          "e": {
+            "tam": 3,
+            "tamma": -8,
+            "ach": "baoan",
+            "patronDone": 1,
+            "partyP": 30
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "bao_an_co_v"
+        },
+        "condition": {
+          "$hook": "bao_an_co_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "bao_an_co",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.bao_an_co.002": "Một người lạ",
+        "event.bao_an_co.003": "giúp đỡ",
+        "event.bao_an_co.004": "chưởng quỹ"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Khám phá",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "cong_son_mon",
+      "name": "Sơn môn",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "tre",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Sơn môn sừng sững trong mây. Đệ tử nội môn {$a.ten} cùng một sư đệ canh cổng, nhìn ngươi từ đầu tới chân, ánh mắt lạnh nhạt."
+      ],
+      "choices": [
+        {
+          "l": "Chắp tay hỏi bao giờ tông môn thu đồ",
+          "t": "{$a.ten}: “Hừ, tuyển đồ à? Tới kỳ tự khắc có cáo thị dán khắp các thành trấn. Về mà chờ.”",
+          "e": {}
+        },
+        {
+          "l": "Hỏi tông môn thu người ra sao",
+          "t": "{$a.ten}: “Có ba đường. Tới kỳ tuyển đồ thì thi trắc linh thạch hoặc vấn tâm lộ; thiên linh căn hay biến dị linh căn thì miễn thi. Chưa có tên thì dâng lễ vật làm tạp dịch. Còn đại tu sĩ Nguyên Anh trở lên thì xưng danh, tông môn mời làm Trưởng lão.”",
+          "e": {}
+        },
+        {
+          "l": "Dúi vào tay hắn mấy viên linh thạch, hỏi cho rõ",
+          "cost": {
+            "st": 5
+          },
+          "t": "{$a.ten} liếc quanh, hạ giọng: “Trưởng lão chấm thi thích người đạo tâm vững hơn là linh căn đẹp. Vấn tâm lộ dễ qua hơn ngươi tưởng.”",
+          "e": {
+            "tam": 1
+          }
+        },
+        {
+          "l": "Xưng danh, xin gia nhập làm Trưởng lão",
+          "need": {
+            "realm": 3
+          },
+          "t": "Chuông sơn môn điểm chín tiếng. Chưởng môn đích thân ra đón, trao lệnh bài khách khanh.",
+          "e": {
+            "flag": "tongmon",
+            "st": 120
+          }
+        },
+        {
+          "l": "Dâng lễ vật, xin làm tạp dịch",
+          "cost": {
+            "st": 60
+          },
+          "req": {
+            "$hook": "cong_son_mon_c_4_req"
+          },
+          "t": "Ngươi gánh nước bổ củi hai năm, rảnh thì lén nghe giảng đạo. Cuối cùng cũng được ghi tên vào sổ.",
+          "e": {
+            "flag": "tongmon",
+            "tv": 12,
+            "h": 1080
+          }
+        },
+        {
+          "l": "Xin một gian tĩnh thất khách",
+          "need": {
+            "stat": {
+              "tam": 12
+            }
+          },
+          "cost": {
+            "st": 20
+          },
+          "t": "Gian phòng đá nhỏ, cửa sổ nhìn ra biển mây. Ngươi ngồi một đêm, lòng lặng như nước.",
+          "e": {
+            "tamma": -8,
+            "tv": 2
+          }
+        },
+        {
+          "l": "Cáo từ",
+          "t": "Ngươi chắp tay, lui xuống núi.",
+          "e": {}
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "cong_son_mon_v"
+        },
+        "condition": {
+          "$hook": "cong_son_mon_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core2/03-cong-hien-tong-mon.js",
+        "ref": "cong_son_mon",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Khám phá",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

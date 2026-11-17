@@ -1,59 +1,40 @@
 # Phù Sinh
 
-Game tu tiên luân hồi chạy trong một tệp duy nhất: mở `phu-sinh.html` bằng trình duyệt là chơi.
+Game tu tiên luân hồi chạy bằng `phu-sinh.html`. Mở tệp trong trình duyệt để chơi.
 
-- `phu-sinh.html` — bản chơi (được ráp tự động, đừng sửa tay).
-- `src/game/` — mã game, chia thành nhiều tệp nhỏ theo nhóm (tên tệp nói nội dung):
-  - `core/` — luật chơi và kho truyện gốc (thế giới, chiến đấu, đột phá, bản đồ, sự kiện…).
-  - `core2/` — luật bổ sung theo từng đợt: vòng chu thiên, linh thú, luyện chế, bế quan, thế cục…
-  - `data/` — danh mục vật phẩm và sự kiện cốt truyện (sinh tự động từ Excel/markdown).
-  - `ui/` — giao diện: bản đồ canvas, các màn, các bảng, cấu hình. `style.css` — trang trí.
-  - `thu-tu.json` — **thứ tự ghép các tệp**. Thêm tệp mới thì ghi tên vào đây, đúng chỗ.
-- `src/react/` — giao diện viết bằng React (Vite đóng gói vào cùng tệp `phu-sinh.html`):
-  - `man-ngoai/` màn mở đầu, chọn kiếp, hết kiếp, Bến Vong Xuyên · `ban-do/` thanh trạng thái, nút bản đồ, thẻ địa điểm
-  - `canh/` các cảnh (sự kiện, chạm trán, phường thị, địa điểm…) · `hop-thoai/` các hộp thoại · `bang/` các bảng (nhân vật, túi đồ, sổ tay…)
-  - `tran/` màn chiến đấu · `chung/` mảnh dùng chung (biểu tượng, nút, chú thích…)
-  - React đọc dữ liệu game qua `PS.<tên>` (cầu nối ở `src/game/ui/22-cau-noi-react.js`). Bấm nút vẫn đi qua `data-act` như cũ.
-  - Các hàm vẽ bằng chuỗi HTML cũ trong `src/game/ui/` vẫn giữ làm dự phòng: màn nào React lỗi thì tự quay về bản cũ.
-- `old-phu-sinh-2.html`, `phu-sinh-v1.html` — các bản cũ, giữ để đối chiếu.
+## Nội dung và dữ liệu
 
-Sau khi sửa trong `src/`:
+Bắt đầu đọc [mục lục nội dung](docs/content/README.md) và [guideline viết, phân loại, đặt sự kiện](docs/content/GUIDELINE.md).
 
-```bash
-npm install        # lần đầu
-npm run dev        # mở game trên máy để sửa, lưu tệp là tự tải lại
-npm run build      # ra phu-sinh.html (hoặc: node tools/build.js, không cần cài gì)
+**Nguồn chính là `content/`.** Truyện, kỳ ngộ, nhiệm vụ và dịch vụ dùng một schema; vật phẩm, nhân vật, thế giới và lời kể có thư mục riêng. Bản thảo ở commit `8b9c479` đã được phân loại và giữ nguồn đối chiếu. Tài liệu và Excel cũ nằm trong `archive/`, không nạp vào game.
+
+- `content/events/`, `content/venues/`: tương tác và điều kiện xuất hiện.
+- `content/catalog/`, `content/items/`: danh mục viết sẵn, nguyên mẫu và thuộc tính vật phẩm/năng lực.
+- `content/characters/`, `content/world/`, `content/rules/`: nhân vật, tông môn, địa điểm và bảng quy tắc.
+- `content/narration/`, `content/text/`: lời kể, tin đồn và thông báo.
+- `src/game/`: luật xử lý và cầu nối, nạp theo `thu-tu.json`.
+- `src/react/`: giao diện; đọc trạng thái qua `PS`.
+- `docs/content/`: hướng dẫn, toàn bộ danh mục đọc và báo cáo từng ID.
+- `tools/`: build, xuất tài liệu và kiểm tra. `tools/imports/` chỉ để xem lại đầu vào cũ.
+- `archive/`: dữ liệu lịch sử, không phải nguồn đang dùng.
+
+Các tệp dữ liệu tự sinh trong `src/game/data/` và hai bản HTML không sửa tay. Build và dev tự biên dịch JSON trước khi nạp game.
+
+## Làm việc
+
+```sh
+npm install
+npm run dev
+npm run content:check
+npm run content:stories
+npm run test:rules
+npm run content:docs
+npm run build
+npm run build:thu
 ```
 
-Kiểm tra nhanh: `node tools/test.js` (luật chơi), `node tools/test-ui.js` (giao diện, cần build trước), nhật ký gỡ lỗi mở bằng `?debug=1`. Xem thêm `CLAUDE.md`.
+Kiểm tra giao diện sau build: `node tools/test-ui.js content dot32`.
 
-Kiểm tra khác: `node bot.js 80 --quiet` (máy tự chơi 80 kiếp), `node tools/play.js <thư mục ảnh> full` (bấm thử giao diện, chụp ảnh từng màn).
+Xuất Excel để đọc: `python3 tools/content-export.py` (cần Python và `openpyxl`; mặc định lưu trong `work/`). Kiểm tra giao diện cần gói `playwright` và Chromium; có thể chọn trình duyệt qua `PS_CHROMIUM`.
 
-## Gắn ảnh (asset)
-
-Game đã chừa sẵn chỗ cho ảnh. Mở `src/game/ui/01-base.js`, tìm `const ASSET=` và điền đường dẫn ảnh:
-
-- `item`: ảnh vuông PNG không nền cho vật phẩm. Khóa là loại món (`kiem`, `giap`, `nhan`...), đan dược `pill:<mã>`, nguyên liệu `mat:<mã>`.
-- `art`: ảnh vuông cho công pháp, tâm pháp, chiêu thức, theo tên.
-- `hero` (khóa `me`), `npc`, `pet`, `foe`: ảnh hiển thị trong khung tròn.
-- `place`: ảnh ngang cho thẻ địa điểm, theo loại nơi (`tran`, `thanh`, `rung`...).
-
-Chưa có ảnh thì game dùng bộ hình 2D vẽ sẵn bằng vector trong `src/ui/assets.js` (pháp bảo, đan dược, vật liệu, kẻ địch theo họ, chân dung nhân vật nam/nữ, phương tiện, xe ngựa thương đội). Ảnh gắn vào `ASSET` luôn được ưu tiên hơn bộ hình này.
-
-## Danh mục vật phẩm từ Excel và sự kiện cốt truyện
-
-`docs/vat-pham.xlsx` là sổ gốc của mọi vật phẩm, công pháp, chiêu thức, đan dược, linh thú, xuất thân, khí vận, thể chất. Dòng xanh lá là đồ đã có sẵn trong game (cột Ghi chú ghi mã, đừng đổi mã).
-
-Sau khi sửa Excel:
-
-```bash
-python3 tools/excel2game.py
-node tools/build-thu.js
-```
-
-- `tools/excel2game.py` kiểm tra lỗi từng dòng, ghi `src/data/catalog.js` và báo cáo `docs/bao-cao-vat-pham.md`.
-- `tools/build.js` ráp cả danh mục và sự kiện cốt truyện vào bản chính `phu-sinh.html`; `tools/build-thu.js` ráp cùng nội dung ra `phu-sinh-thu.html`.
-- Sự kiện cốt truyện: sửa `docs/nhap/phu-sinh-su-kien.md` hoặc `tools/su_kien_sua.txt`, chạy `python3 tools/su_kien_chuyen.py` rồi `node tools/build.js`.
-- `src/catalog.js` nối danh mục vào luật game bằng các lớp bọc; bỏ tệp này ra là game trở lại như cũ.
-- `tools/nhap_do_cu.py` chép mọi thứ đang có trong code game vào Excel (chạy lại không sinh dòng trùng).
-- Hướng dẫn đầy đủ (luật vật phẩm, công cụ, cách kiểm tra): `tools/HUONG-DAN-DANH-MUC.md`.
+Không chạy bot hoặc bài `smoke` nếu người dùng chưa yêu cầu (xem `CLAUDE.md`). Các lệnh kiểm tra trên không gọi bot.

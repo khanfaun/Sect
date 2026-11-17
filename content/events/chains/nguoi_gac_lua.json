@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_nguoi_gac_lua_1",
+      "name": "Hồi kẻng thứ ba",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0
+        ],
+        "time": {
+          "part": [
+            "dem"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "người gác",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "hào trưởng",
+          "alignment": "context"
+        }
+      },
+      "text": "Người gác {$a.ten} muốn đánh thêm một hồi kẻng vì thấy khói ngoài đê. Hào trưởng {$b.ten} nắm dùi, bảo báo cháy lần nữa thì dân bỏ ruộng chạy về, còn lúa nhà hắn đang phơi kín sân.",
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Đánh kẻng cùng {$a.ten}",
+          "t": "Dân chạy về kịp dập lửa trước khi cháy lan. Cơn mưa tới sau làm ướt số lúa chưa thu, {$b.ten} lập tức đổ lỗi cho người đánh kẻng. Người gác cãi: “Không gọi họ về thì giờ còn nhà đâu mà giữ lúa?”",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Im kẻng và tự ra xem",
+          "t": "Ngươi dập được lửa trước khi bén nhà, tay bị bỏng khi kéo giàn phơi ra khỏi lối. Một dãy rơm đã cháy hết. Người gác chạy tới giúp, bảo lần sau dù ai cản cũng phải báo cho cả xóm.",
+          "e": {
+            "karma": 4,
+            "hp": "-10%"
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi nghe hai hồi kẻng, hồi cuối dội ra từ phía nhà đã bắt lửa.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_gac_lua_1",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nguoi_gac_lua",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Việc làng ban đêm",
+      "setting": {
+        "description": "Chòi báo lửa ở Phàm Trần",
+        "historyCondition": "không"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_nguoi_gac_lua_2",
+      "name": "Tiền mua một tiếng",
+      "kind": "story",
+      "tags": [
+        "Uất ức"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người gác",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Hào trưởng",
+          "alignment": "context"
+        }
+      },
+      "text": "Hào trưởng {$b.ten} bắt người gác {$a.ten} đền lúa ướt. {$a.ten} mang tới một nong thóc mới nhặt, từng hạt đã được vặt mầm bằng tay.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Chia phần đền và xin lập lệ báo cháy",
+          "t": "Ngươi góp một phần đền số lúa ướt, dân góp phần còn lại. Trước mặt cả làng, mọi người lập lệ thấy cháy được đánh kẻng ngay. Hào trưởng buộc phải điểm chỉ vào giấy.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Trả hết rồi đòi giữ dùi kẻng",
+          "t": "{$a.ten} thoát nợ và dân phải qua ngươi để xin báo cháy. Lão quấn giẻ quanh tay mình dù chiếc dùi đã được mang đi.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": -2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão bán nong thóc cho người nấu rượu. Bên đáy nong vẫn còn những chấm trắng mắc vào nan.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_gac_lua_2",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nguoi_gac_lua",
+        "part": "2",
+        "waitHours": 120,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện làng",
+      "setting": {
+        "description": "Sân phơi thóc ở Phàm Trần",
+        "historyCondition": "phần 1 chọn “Đánh kẻng cùng [người gác A]” · vài ngày sau · sân phơi thóc"
+      },
+      "emotion": "Uất ức"
+    },
+    {
+      "id": "ch_nguoi_gac_lua_2b",
+      "name": "Giàn phơi mới",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người gác",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Hào trưởng",
+          "alignment": "context"
+        }
+      },
+      "text": "Dân dựng lại giàn, treo ngay chỗ cũ. Người gác {$a.ten} đem dùi kẻng ra đặt giữa sân và xin tìm một chỗ gác nhìn được cả hai xóm.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp gỗ dựng chòi mới",
+          "t": "Ngươi mua gỗ dựng chòi nhìn được cả hai xóm, giao người gác tự quyết lúc báo động. Lão gọi mấy người trẻ lên học phân biệt khói bếp với khói cháy, không muốn lần sau chỉ mình lão biết.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "giàn phơi mới"
+            ]
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Thuê người thay lão giữ chòi",
+          "t": "Hào trưởng {$b.ten} bằng lòng vì người mới chịu hỏi hắn trước khi đánh. {$a.ten} đặt dùi lên giàn phơi, ở ngay khoảng rơm từng cháy.",
+          "cost": {
+            "st": 10
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Dùi nằm giữa sân tới chiều. Một đứa trẻ nhấc lên thử, hai tay vẫn chưa nhấc nổi đầu dùi.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_gac_lua_2b",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nguoi_gac_lua",
+        "part": "2b",
+        "waitHours": 120,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tái dựng",
+      "setting": {
+        "description": "Xóm phơi rơm ở Phàm Trần",
+        "historyCondition": "phần 1 chọn “Im kẻng và tự ra xem” · vài ngày sau · xóm phơi rơm"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_nguoi_gac_lua_3",
+      "name": "Đêm lửa trườn",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "tran"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Hào trưởng",
+          "alignment": "context"
+        }
+      },
+      "text": "Gió mạnh đẩy lửa qua bãi cỏ khô về phía xóm dưới. Nếu người gác đã được tự đánh kẻng, dân có mặt từ sớm và đang đưa trâu ra đường đất. Nếu quyền báo vẫn phải xin phép, người chạy tin còn đợi trả lời ở nhà hào trưởng. Người gác gọi ngươi giúp mở đường cản lửa; không còn thời gian chờ nữa.",
+      "choices": [
+        {
+          "i": "🗣️",
+          "l": "Dẫn người phá hàng rào làm đường cản lửa",
+          "t": "Ngươi dẫn dân phá rào, dọn cỏ thành dải đất trống. Nhà trong xóm giữ được, ngươi bị tàn lửa làm bỏng tay, còn phải trả phần rào đã phá. Dân nhận giúp chăm vết thương rồi cùng ngươi tính tiền đền.",
+          "e": {
+            "karma": 4,
+            "hp": "-15%"
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Giữ riêng dãy nhà phía trên",
+          "t": "Hào trưởng {$b.ten} thưởng bạc vì nhà hắn thoát lửa. Phía dưới gò chỉ còn những khoanh đất sáng màu nơi từng đặt chum nước.",
+          "e": {
+            "st": 14,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Gió thổi ngược khi trời gần sáng. Trên gò chỉ còn một đoạn rào cắm nghiêng về xóm dưới.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_gac_lua_3",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nguoi_gac_lua",
+        "part": "3",
+        "waitHours": 8640,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Hỏa hoạn",
+      "setting": {
+        "description": "Gò cỏ ở Phàm Trần",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · mùa hanh năm sau · gò cỏ sau xóm"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_nguoi_gac_lua_4",
+      "name": "Dùi treo ngang vai",
+      "kind": "story",
+      "tags": [
+        "Trầm buồn"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người gác",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "hào trưởng",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu đường cản lửa đã mở, dân mang cọc rào cháy tới để chia tiền đền. Nếu dãy nhà trên được giữ, người xóm dưới ngồi ngoài cửa với một cái chum nứt, chờ xem tiền thưởng thuộc về ai.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Nhận phần đền và giao dùi cho cả làng",
+          "t": "Ngươi góp bạc bồi thường cho những nhà chịu thiệt, đề nghị cả làng cùng giữ quyền báo cháy. Sau một hồi tranh luận, họ giao chìa chòi cho ba người ở ba đầu xóm. Từ nay không ai được giữ riêng dùi kẻng.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 6
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Để hào trưởng {$b.ten} giữ quyền báo",
+          "t": "Hắn cấp tiền dựng lại chòi và yêu cầu cất dùi trong hòm khóa. Người gác {$a.ten} đục một lỗ trên vách chòi để nhìn về xóm dưới.",
+          "e": {
+            "st": 14,
+            "karma": -2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Cuộc họp còn kéo dài. Người gác nói sẽ ở lại tới khi có lệ rõ ràng; ngươi chào lão rồi lên đường.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_gac_lua_4",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nguoi_gac_lua",
+        "part": "4",
+        "waitHours": 504,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Lệ làng",
+      "setting": {
+        "description": "Nhà họp ở Phàm Trần",
+        "historyCondition": "phần 3 chọn “Dẫn người phá hàng rào làm đường cản lửa” hoặc “Giữ riêng dãy nhà phía trên” · vài tuần sau · nhà họp ở làng"
+      },
+      "emotion": "Trầm buồn"
+    }
+  ]
+}

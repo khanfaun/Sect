@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "kh_hoiduong",
+      "name": "Hỏi đường",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:khach",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 3,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "pham",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$en} đứng bên ngã ba, tay cầm tấm bản đồ rách. Thấy ngươi, {$a.hn} mừng rỡ: “{$a.goi}, đường nào ra trấn gần nhất?”",
+        "Một bóng người từ trong bụi bước ra, là {$en}. {$a.hn} lúng túng chắp tay hỏi đường."
+      ],
+      "choices": [
+        {
+          "i": "👉",
+          "l": "Chỉ đường cho tử tế",
+          "t": "{$a.ten} cảm ơn rối rít, còn kể cho ngươi nghe chuyện vừa thấy dọc đường.",
+          "e": {
+            "rumor": 1,
+            "karma": 2
+          }
+        },
+        {
+          "i": "🤷",
+          "l": "Bảo không biết",
+          "t": "Ngươi lắc đầu rồi đi tiếp. Sau lưng, {$a.hn} vẫn xoay xoay tấm bản đồ."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "kh_hoiduong_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "kh_hoiduong",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Gặp gỡ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "kh_chung",
+      "name": "Đi chung một quãng",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:khach",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 3,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "pham",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$en} đi cùng hướng với ngươi. Đường dài, {$a.hn} bắt chuyện cho đỡ buồn.",
+        "Trời sắp tối. {$en} đề nghị đốt chung một đống lửa bên đường cho đỡ sợ thú dữ."
+      ],
+      "choices": [
+        {
+          "i": "🔥",
+          "l": "Ngồi cùng nghỉ chân",
+          "t": "Hai người chia nhau miếng lương khô. {$a.ten} kể chuyện quê nhà, ngươi nghe mà lòng nhẹ đi.",
+          "e": {
+            "h": 6,
+            "tamma": -3,
+            "an": [
+              "a",
+              "cùng nghỉ chân bên đường"
+            ]
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Đi trước một mình",
+          "t": "Ngươi chào rồi rảo bước. Tu tiên vốn là đường một người."
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "kh_chung_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "kh_chung",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Gặp gỡ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "kh_benh",
+      "name": "Người ốm bên đường",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:khach",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "gia",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$en} ngồi gục dưới gốc cây, mặt tái mét, thở không ra hơi."
+      ],
+      "choices": [
+        {
+          "i": "💊",
+          "l": "Cho một viên đan hồi khí huyết",
+          "t": "Một lúc sau {$a.ten} hồng hào trở lại, run run lạy ngươi một lạy.",
+          "e": {
+            "karma": 6,
+            "an": [
+              "a",
+              "cứu mạng giữa đường"
+            ]
+          },
+          "cost": {
+            "pillGroup": "healing"
+          }
+        },
+        {
+          "i": "🤲",
+          "l": "Truyền chút chân khí",
+          "cost": {
+            "mp": 8
+          },
+          "t": "Chân khí ấm áp chạy vào kinh mạch người phàm. {$a.ten} đỡ hẳn, cảm kích không thôi.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "truyền chân khí cứu giúp"
+            ]
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Đi qua",
+          "t": "Ngươi không dừng lại. Đi được một quãng vẫn còn nghe tiếng ho khan.",
+          "e": {
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "kh_benh_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "kh_benh",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Gặp gỡ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "kh_cuop",
+      "name": "Kẻ cướp đường",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:khach",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "disguised_bandit",
+          "alignment": "hostile"
+        }
+      },
+      "text": [
+        "Một kẻ mặc áo lữ khách chặn đường ngươi, tự nhận là người cùng đoàn với {$en}. Vừa tới gần, hắn rút dao; hai đồng bọn cũng nhảy khỏi bụi. {$en} lùi lại, rõ ràng không quen chúng."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Ra tay",
+          "fight": {
+            "k": "sontac",
+            "cnt": 2
+          },
+          "win": {
+            "t": "Bọn chúng chạy mất dép, bỏ lại túi tiền cướp được.",
+            "e": {
+              "st": 18
+            }
+          }
+        },
+        {
+          "i": "💨",
+          "l": "Lách người bỏ đi",
+          "chk": [
+            "tp",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi lướt qua như gió. Bọn chúng còn chưa kịp nhìn rõ mặt."
+          },
+          "no": {
+            "t": "Không thoát được, đành bỏ ra ít linh thạch cho xong chuyện.",
+            "e": {
+              "st": -8
+            }
+          }
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "kh_cuop_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "kh_cuop",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Gặp gỡ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "kh_vat",
+      "name": "Đồ đánh rơi",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:khach",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "pham",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Trên đường có một cái túi vải. Phía trước chừng trăm bước, {$en} đang lật đật tìm kiếm thứ gì."
+      ],
+      "choices": [
+        {
+          "i": "🤝",
+          "l": "Trả lại",
+          "t": "{$a.ten} mừng như bắt được vàng, nhất quyết biếu ngươi chút lộ phí.",
+          "e": {
+            "st": 6,
+            "karma": 5
+          }
+        },
+        {
+          "i": "👜",
+          "l": "Giữ lấy",
+          "t": "Trong túi có ít bạc vụn và một lá thư nhà. Ngươi lặng lẽ rẽ sang lối khác.",
+          "e": {
+            "st": 10,
+            "karma": -5
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "kh_vat_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "kh_vat",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Gặp gỡ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "kh_dam",
+      "name": "Đàm đạo",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:khach",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "dao",
+          "alignment": "lawful"
+        }
+      },
+      "text": [
+        "{$en} ngồi nghỉ trên tảng đá, thấy ngươi liền mỉm cười: “{$a.goi} cũng là người tu hành? Ngồi đây nói chuyện một lát.”"
+      ],
+      "choices": [
+        {
+          "i": "🍵",
+          "l": "Ngồi luận đạo",
+          "chk": [
+            "ngo",
+            10
+          ],
+          "ok": {
+            "t": "Một câu nói vu vơ của {$a.ten} chạm đúng chỗ ngươi đang vướng. Chân khí trong người thông suốt hẳn.",
+            "e": {
+              "tv": 4,
+              "h": 3
+            }
+          },
+          "no": {
+            "t": "Hai người nói chuyện trời đất, không thu được gì nhưng lòng thấy thư thái.",
+            "e": {
+              "tamma": -2,
+              "h": 3
+            }
+          }
+        },
+        {
+          "i": "🙏",
+          "l": "Chắp tay rồi đi",
+          "t": "Ngươi cúi chào. {$a.ten} gật đầu, lại nhắm mắt như ngủ."
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "kh_dam_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "kh_dam",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Gặp gỡ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

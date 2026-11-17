@@ -1,0 +1,546 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_nua_dau_tay_1",
+      "name": "Giấy bán thân",
+      "kind": "story",
+      "tags": [
+        "Xót xa"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Người mẹ",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "Chủ nợ",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Cậu bé",
+          "alignment": "context"
+        }
+      },
+      "text": "Người mẹ {$a.ten} nhận trước tiền công hai mùa để nuôi con, nay tới nhà chủ nợ {$c.ten} ký giấy làm trả nợ. Cậu bé {$b.ten} níu tay bà, khiến dấu ngón cái chỉ in được một nửa. Chủ nợ đẩy nghiên mực lại: “Ấn cho rõ, rồi hãy nhận tiền.”",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Chuộc tờ giấy",
+          "t": "Ngươi bỏ bạc cho {$c.ten}. {$a.ten} xé phần giấy có dấu mực và giữ lại một mảnh bằng móng tay.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "giấy bán thân"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Để bà ký và làm chứng",
+          "t": "{$c.ten} gạch bớt một mùa công để có chữ của ngươi. {$b.ten} nhặt giẻ lau ngón tay mẹ, để lại một vệt đen trên tay mình.",
+          "e": {
+            "karma": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Cậu bé bị gỡ tay ra. Lần này dấu ngón cái in trọn dưới giá bạc.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nua_dau_tay_1",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nua_dau_tay",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện gia đình",
+      "setting": {
+        "description": "Cổng nhà giàu ở Phàm Trần",
+        "historyCondition": "không"
+      },
+      "emotion": "Xót xa"
+    },
+    {
+      "id": "ch_nua_dau_tay_2",
+      "name": "Trục nước",
+      "kind": "story",
+      "tags": [
+        "Ấm áp"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "tran"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Người mẹ",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Cậu bé",
+          "alignment": "context"
+        }
+      },
+      "text": "Thoát món nợ cũ, người mẹ {$a.ten} góp tiền công với hàng xóm mua lại cối nước bỏ hoang. Cậu bé {$b.ten} đang học sửa guồng, thấy ngươi liền chạy ra đón: “Cối sắp chạy được rồi!”",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp một trục gỗ mới",
+          "t": "Ngươi mua giúp một trục gỗ đủ già để chịu nước. Cậu bé theo thợ lắp từ sáng đến chiều, khắc dấu nửa vòng ở đầu trục để nhớ chiều quay.",
+          "e": {
+            "karma": 4
+          },
+          "cost": {
+            "st": 10
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Cho họ vay bằng tiền công xay",
+          "t": "Họ mua đủ gỗ, đổi lại phải xay phần thóc của ngươi trước mỗi phiên. {$a.ten} khâu riêng một bao đựng phần ấy.",
+          "e": {
+            "st": 14,
+            "karma": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Cối vẫn chạy bằng trục cũ. Lần cuối ngươi ngoái lại, cậu bé còn ngồi mài cái chốt bị vênh.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nua_dau_tay_2",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nua_dau_tay",
+        "part": "2",
+        "waitHours": 2160,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Sinh kế",
+      "setting": {
+        "description": "Bến xay bột ở Phàm Trần",
+        "historyCondition": "phần 1 chọn “Chuộc tờ giấy” · vài tháng sau · bến xay bột"
+      },
+      "emotion": "Ấm áp"
+    },
+    {
+      "id": "ch_nua_dau_tay_2b",
+      "name": "Hai túi cám",
+      "kind": "story",
+      "tags": [
+        "Uất ức"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Người mẹ",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "Chủ nợ",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Cậu bé",
+          "alignment": "context"
+        }
+      },
+      "text": "Chủ nợ {$c.ten} giữ hết tiền công vì bảo một mùa rét năm ấy dài hơn lệ. Người mẹ {$a.ten} xin hai túi cám đem về, mỗi túi chỉ đầy đến lưng chừng.",
+      "choices": [
+        {
+          "i": "💰",
+          "l": "Đòi trả công theo tờ giấy đã ký",
+          "t": "Ngươi đem tờ giấy làm chứng ra đối lại ngày công. Chủ nợ phải trả đủ, nhưng đuổi hai mẹ con khỏi cối. Người mẹ nhận tiền, nói sẽ sang bến khác tìm việc; cậu bé xin mang theo chiếc trục hỏng để học sửa.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Trả bạc mua lại mùa công còn thiếu",
+          "t": "Hai người được về. Cậu bé {$b.ten} vác cả hai túi cám, đi tới cổng mới nhận ra mình vẫn chưa đặt chúng xuống.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$c.ten} buộc lại hai miệng túi, rút phần dây thừa bỏ vào tay áo.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nua_dau_tay_2b",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nua_dau_tay",
+        "part": "2b",
+        "waitHours": 2160,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện chủ nợ",
+      "setting": {
+        "description": "Sân nhà phơi cám ở Phàm Trần",
+        "historyCondition": "phần 1 chọn “Để bà ký và làm chứng” · vài tháng sau · sân nhà phơi cám"
+      },
+      "emotion": "Uất ức"
+    },
+    {
+      "id": "ch_nua_dau_tay_3",
+      "name": "Bột đọng đáy bao",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "chủ nợ",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Cậu bé",
+          "alignment": "context"
+        }
+      },
+      "text": "Cậu bé {$b.ten} năm xưa đã mở được một kho bột từ tiền xay thuê. Dân mất mùa tới xin mua chịu, còn chủ nợ {$c.ten} trả giá gấp đôi để gom hết hàng. Nếu ngươi từng góp trục, cậu khoe chiếc cối vẫn dùng trục ngươi mua. Nếu ngươi từng cho vay, cậu nói khoản vay đã trả đủ bằng tiền công xay những năm trước. Nếu từng giúp ở sân phơi cám, cậu nhắc hai mẹ con đã dùng tiền công ấy gây dựng lại từ đầu.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Mua bột chia cho dân đói",
+          "t": "Ngươi trả tiền mua một phần bột phát cho dân. Cậu tự góp thêm, chia mỗi nhà đủ ăn vài ngày để kho vẫn còn hàng bán. Chủ nợ thấy không gom trọn được nữa, thu cân bỏ đi.",
+          "e": {
+            "karma": 4
+          },
+          "cost": {
+            "st": 10
+          }
+        },
+        {
+          "i": "🗣️",
+          "l": "Khuyên cậu bán cho {$c.ten}",
+          "t": "Cậu có vốn qua mùa sau và chia tiền môi giới cho ngươi. Cậu mở cửa sau cho người tới quét nền kho, nơi bột còn đọng trong kẽ gạch.",
+          "e": {
+            "st": 14,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Cậu xin dân chờ để tính lại lượng bột. Người mua chịu đứng thành hàng trước kho; không ai muốn về tay không.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nua_dau_tay_3",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nua_dau_tay",
+        "part": "3",
+        "waitHours": 25920,
+        "needs": [],
+        "paths": [
+          [
+            "2:0"
+          ],
+          [
+            "2:1"
+          ],
+          [
+            "2b:0",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cứu đói",
+      "setting": {
+        "description": "Kho lương ven quan đạo ở Phàm Trần",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · vài năm sau · kho lương ven quan đạo"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_nua_dau_tay_4",
+      "name": "Hòn kê dưới ghế",
+      "kind": "story",
+      "tags": [
+        "Trầm buồn"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {
+          "season": [
+            "xuan"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nu",
+          "role": "Người mẹ",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu ngươi từng chia bột cứu đói, dân qua vụ mới đem quà tới cảm ơn hai mẹ con. Nếu bột từng bán cho chủ nợ, cậu đã có vốn mua thóc mới nhưng người nghèo vẫn phải xin mua chịu. Người mẹ {$a.ten} mời ngươi ngồi, lấy đá kê chiếc ghế thấp. Cậu hỏi ngươi có muốn cùng bỏ vốn mở thêm một cối xay.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Đứng tên bảo cho người mua chịu",
+          "t": "Ngươi đặt tiền bảo lãnh cho những nhà chưa trả được ngay. Cậu ghi rõ hạn và số bột từng nhà, mẹ cậu ngồi bên đọc lại để không ai bị tính nhầm.",
+          "cost": {
+            "st": 10
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Nhận tiền công xem giúp sổ sách",
+          "t": "Ngươi kiểm lại sổ thu chi và chỉ cậu cách để riêng tiền mua thóc giống. Hai mẹ con trả công đã thỏa thuận. Khoản giúp dân năm trước được ghi là cho tặng, không tính thành nợ.",
+          "e": {
+            "st": 14
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi chúc cối mới làm ăn khá rồi cáo từ. Cậu tiễn ra cổng, hẹn vụ sau ghé ăn bữa cơm.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nua_dau_tay_4",
+        "commit": "8b9c479",
+        "themeRegion": "pham-tran"
+      },
+      "chain": {
+        "id": "nua_dau_tay",
+        "part": "4",
+        "waitHours": 4320,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Hậu quả nhân tình",
+      "setting": {
+        "description": "Sân nhà mới ở Phàm Trần",
+        "historyCondition": "phần 3 chọn “Mua bột chia cho dân đói” hoặc “Khuyên cậu bán cho [chủ nợ C]” · sang xuân · sân nhà mới"
+      },
+      "emotion": "Trầm buồn"
+    }
+  ]
+}

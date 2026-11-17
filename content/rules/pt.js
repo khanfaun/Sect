@@ -1,0 +1,8 @@
+// Nguồn chuẩn: PT. Luật xử lý ở src/game/core2/06-thieu-dot-tho-nguyen.js.
+const PT={
+  kim:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.020"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.021"),atk:.3,turns:3},moc:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.022"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.023"),def:.2,regen:1,turns:4},
+  thuy:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.024"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.025"),mp:1,atk:.2,turns:3},hoa:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.026"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.027"),atk:.4,def:-.1,turns:3},
+  tho:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.028"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.029"),def:.6,block:.2,turns:4},loi:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.030"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.031"),crit:25,atk:.15,turns:3},
+  bang:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.032"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.033"),def:.4,weak:2,turns:3},phong:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.034"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.035"),evade:2,atk:.2,turns:3},
+  am:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.036"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.037"),atk:.25,drain:10,turns:3},phat:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.038"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.039"),def:.3,regen:1,turns:0},
+  vo:{n:contentText("core2_06-thieu-dot-tho-nguyen_js.040"),d:contentText("core2_06-thieu-dot-tho-nguyen_js.041"),atk:.2,def:.2,turns:0}};

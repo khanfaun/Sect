@@ -1,0 +1,635 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "tp_hoathuong",
+      "name": "Hòa thượng hành cước",
+      "kind": "initiation",
+      "tags": [],
+      "trigger": {
+        "source": "initiation",
+        "places": [
+          "tran",
+          "thanh",
+          "nui",
+          "rung",
+          "tong"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Một hòa thượng gầy gò, bình bát sứt mẻ, đứng chắn giữa đường. Ông chắp tay: “Thí chủ hít thở rối loạn như ngựa hoang. Để bần tăng chỉ cho một cách thở.”",
+      "choices": [
+        {
+          "l": "Theo sư phụ đi một đoạn đường",
+          "cost": "1 tháng",
+          "h": 720,
+          "fx": {
+            "karma": 3,
+            "tamma": -6
+          },
+          "t": "Suốt một tháng ngươi khất thực, ngủ miếu cùng ông. Tối nào ông cũng ngồi thiền, ngươi ngồi theo. Lúc chia tay, ông chỉ nói: “Tâm yên thì khí tự về.”"
+        },
+        {
+          "l": "Xin khẩu quyết rồi đi ngay",
+          "t": "Ông cười hiền, đọc chậm ba lần. Ngươi nhẩm theo tới khi thuộc làu."
+        }
+      ],
+      "logic": {
+        "pop": "Một hòa thượng hành cước ghé xin nước, tiện tay chỉ cho ngươi cách điều hòa hơi thở.",
+        "tp": {
+          "n": [
+            "Tĩnh Tâm Thiền Quyết",
+            "Bát Nhã Điều Tức Pháp",
+            "Thanh Tịnh Tọa Thiền Kinh"
+          ],
+          "el": "vo",
+          "src": "hòa thượng truyền"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_hoathuong",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhập đạo",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tp_ysu",
+      "name": "Nữ y sư giữa làng dịch",
+      "kind": "initiation",
+      "tags": [],
+      "trigger": {
+        "source": "initiation",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Làng bên đường đang có dịch. Một nữ y sư áo xanh chạy đôn chạy đáo giữa các mái nhà. Nàng liếc ngươi: “Thân thể khỏe mạnh mà không có chút linh khí… Phụ ta một tay, ta dạy cho ngươi cách dưỡng khí.”",
+      "choices": [
+        {
+          "l": "Ở lại phụ chữa bệnh",
+          "cost": "10 ngày",
+          "h": 240,
+          "fx": {
+            "karma": 5
+          },
+          "ll": 4,
+          "t": "Mười ngày sắc thuốc, đun nước, khiêng người. Dịch lui, nàng giữ lời, đêm cuối ngồi dạy ngươi từng nhịp thở."
+        },
+        {
+          "l": "Xin học ngay, ta còn đường xa",
+          "t": "Nàng thở dài, vẫn viết cho ngươi bài khẩu quyết: “Học được thì nhớ quay lại giúp người.”",
+          "fx": {
+            "karma": -1
+          }
+        }
+      ],
+      "logic": {
+        "pop": "Một nữ y sư đi ngang, bắt mạch cho ngươi rồi viết lên giấy một bài dưỡng khí quyết.",
+        "tp": {
+          "n": [
+            "Thanh Mộc Dưỡng Sinh Quyết",
+            "Hồi Xuân Dưỡng Khí Thiên",
+            "Bách Thảo Điều Tức Pháp"
+          ],
+          "el": "moc",
+          "src": "y sư truyền"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_ysu",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhập đạo",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tp_xactu",
+      "name": "Xác tu sĩ trong khe núi",
+      "kind": "initiation",
+      "tags": [],
+      "trigger": {
+        "source": "initiation",
+        "places": [
+          "nui",
+          "dong"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Dưới khe núi có một xác người mặc đạo bào đã khô quắt, tay vẫn ôm chặt một quyển sách mỏng trước ngực.",
+      "choices": [
+        {
+          "l": "Chôn cất tử tế rồi mới lấy sách",
+          "cost": "1 ngày",
+          "h": 24,
+          "fx": {
+            "karma": 4,
+            "tamma": -2
+          },
+          "t": "Ngươi đào huyệt, đắp mộ, cắm một cành cây làm bia. Lúc mở sách, trang đầu ghi: “Người chôn ta, sách này tặng ngươi.”"
+        },
+        {
+          "l": "Lấy sách, lục luôn túi áo",
+          "fx": {
+            "$hook": "tp_tp_xactu_5_1_fx"
+          },
+          "t": "Ngươi lấy sách, lại moi được mấy viên linh thạch. Đêm ấy nằm mơ thấy có người đứng nhìn ngươi rất lâu."
+        }
+      ],
+      "logic": {
+        "pop": "Ngươi tình cờ thấy xác một tu sĩ, trong ngực áo còn quyển tâm pháp nhập môn.",
+        "tp": {
+          "n": [
+            "Huyền Môn Nhập Đạo Thiên",
+            "Dẫn Khí Sơ Giải",
+            "Vân Du Tâm Pháp"
+          ],
+          "el": "root",
+          "src": "di vật cổ nhân"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_xactu",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhập đạo",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tp_mong",
+      "name": "Giấc mộng giữa đêm",
+      "kind": "initiation",
+      "tags": [],
+      "trigger": {
+        "source": "initiation",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Đêm ấy ngươi mơ thấy mình ngồi trên đỉnh núi mây. Một bóng người không rõ mặt ngồi đối diện, giọng như tiếng chuông xa: “Nghe cho kỹ, ta chỉ nói một lần.”",
+      "choices": [
+        {
+          "l": "Bật dậy chép lại ngay",
+          "t": "Ngươi thắp đèn, chép một mạch tới sáng. Đọc lại thấy câu nào cũng đúng."
+        },
+        {
+          "l": "Nằm yên, cố mơ tiếp",
+          "cost": "3 ngày",
+          "h": 72,
+          "fx": {
+            "ngo": 1,
+            "tamma": 2
+          },
+          "t": "Ba đêm liền ngươi mơ cùng một giấc mơ. Đêm thứ ba bóng người ấy gật đầu rồi tan đi. Đầu óc ngươi sáng hẳn ra, chỉ là đôi khi giật mình không biết đâu là mộng."
+        }
+      ],
+      "logic": {
+        "pop": "Một đêm nằm mộng, có người không rõ mặt giảng cho ngươi một bài khẩu quyết. Tỉnh dậy vẫn nhớ từng chữ.",
+        "tp": {
+          "n": [
+            "Mộng Trung Dẫn Khí Quyết",
+            "Vân Đỉnh Tâm Kinh",
+            "Thái Hư Mộng Đạo Thiên"
+          ],
+          "el": "root",
+          "src": "mộng truyền"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_mong",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhập đạo",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tp_nguong",
+      "name": "Ngư ông hát chèo",
+      "kind": "initiation",
+      "tags": [],
+      "trigger": {
+        "source": "initiation",
+        "places": [
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Bên sông, một ngư ông buông câu, miệng hát bài chèo nghe rất lạ: hít vào ba nhịp, thở ra chín nhịp, lời hát cứ xoáy vào tai ngươi.",
+      "choices": [
+        {
+          "l": "Ngồi câu cá cùng ông tới tối",
+          "cost": "nửa ngày",
+          "h": 12,
+          "fx": {
+            "tamma": -4
+          },
+          "t": "Tới khi mặt trời lặn, ngươi đã hát theo được cả bài. Ông thu cần: “Hát đúng nhịp thì khí tự theo.”"
+        },
+        {
+          "l": "Hỏi thẳng lời hát là gì",
+          "t": "Ông cười khà: “Hỏi thì ta hát chậm lại.” Hát chậm lại ba lần, ngươi nhớ hết."
+        }
+      ],
+      "logic": {
+        "pop": "Một ngư ông bên sông hát đi hát lại một bài chèo. Nghe mãi ngươi mới biết lời hát là khẩu quyết dẫn khí.",
+        "tp": {
+          "n": [
+            "Thủy Nguyệt Điều Tức Ca",
+            "Ngư Ca Dẫn Khí Quyết",
+            "Trường Giang Tâm Pháp"
+          ],
+          "el": "thuy",
+          "src": "ngư ông truyền"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_nguong",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhập đạo",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tp_tantu",
+      "name": "Tán tu trọng thương",
+      "kind": "initiation",
+      "tags": [],
+      "trigger": {
+        "source": "initiation",
+        "places": [
+          "tran",
+          "nui",
+          "rung",
+          "hoang"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Bên vệ đường một tán tu mình đầy máu, thều thào: “Đưa ta qua núi… người của chúng đang đuổi… ta không có gì ngoài một quyển tâm pháp.”",
+      "choices": [
+        {
+          "l": "Cõng hắn qua núi",
+          "cost": "7 ngày",
+          "h": 168,
+          "fx": {
+            "karma": 4
+          },
+          "ll": 6,
+          "t": "Bảy ngày băng rừng, hai lần suýt bị phát hiện. Qua được núi, hắn dúi quyển sách vào tay ngươi: “Ân này ta nhớ.”"
+        },
+        {
+          "l": "Băng bó rồi đi đường mình",
+          "t": "Hắn nhìn ngươi một lúc, rồi vẫn ném cho ngươi quyển sách: “Cầm lấy, ta sợ chết rồi không ai đọc.”"
+        }
+      ],
+      "logic": {
+        "pop": "Ngươi băng bó cho một tán tu bị thương. Trước khi đi, hắn để lại một quyển tâm pháp nhập môn.",
+        "tp": {
+          "n": [
+            "Liệt Hỏa Luyện Khí Quyết",
+            "Kim Cương Dẫn Khí Thiên",
+            "Phong Lôi Sơ Thức Pháp"
+          ],
+          "el": "root",
+          "src": "tán tu tặng"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_tantu",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhập đạo",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tp_mieuhoang",
+      "name": "Vách khắc trong miếu hoang",
+      "kind": "initiation",
+      "tags": [],
+      "trigger": {
+        "source": "initiation",
+        "places": [
+          "phe"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Mưa to, ngươi chui vào một ngôi miếu hoang trú tạm. Sau tượng thần đổ nát, trên vách đá có khắc chi chít chữ: một bài khẩu quyết dẫn khí.",
+      "choices": [
+        {
+          "l": "Thắp hương rồi mới đọc",
+          "fx": {
+            "karma": 2
+          },
+          "t": "Ngươi dọn sạch bàn thờ, thắp mấy nén hương cỏ. Đọc tới đâu thuộc tới đó."
+        },
+        {
+          "l": "Đọc cả đêm cho thuộc",
+          "cost": "1 ngày",
+          "h": 24,
+          "fx": {
+            "ngo": 1
+          },
+          "t": "Ngươi đọc đi đọc lại tới sáng, còn ngộ ra mấy chỗ người khắc viết sai."
+        }
+      ],
+      "logic": {
+        "pop": "Trú mưa trong miếu hoang, ngươi đọc được bài khẩu quyết dẫn khí khắc sau tượng thần.",
+        "tp": {
+          "n": [
+            "Hậu Thổ Thạch Bích Quyết",
+            "Cổ Miếu Dẫn Khí Văn",
+            "Thạch Khắc Tâm Kinh"
+          ],
+          "el": "tho",
+          "src": "vách khắc cổ"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_mieuhoang",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhập đạo",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tp_tre",
+      "name": "Sách lót chuồng trâu",
+      "kind": "initiation",
+      "tags": [],
+      "trigger": {
+        "source": "initiation",
+        "places": [
+          "tran",
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Đứa bé chăn trâu chìa ra một quyển sách cũ: “Người có bánh không? Đổi cái này. Nhà em lấy lót chuồng, mà chữ đẹp lắm.”",
+      "choices": [
+        {
+          "l": "Đổi bánh lấy sách",
+          "t": "Thằng bé cầm bánh chạy biến. Quyển sách hơi mùi trâu, nhưng chữ vẫn đọc được."
+        },
+        {
+          "l": "Cho thêm ít tiền",
+          "need": {
+            "$hook": "tp_tp_tre_5_1_need"
+          },
+          "fx": {
+            "$hook": "tp_tp_tre_5_1_fx"
+          },
+          "t": "Ngươi dúi thêm cho nó một viên linh thạch. Nó tròn mắt, chạy về khoe cả làng."
+        }
+      ],
+      "logic": {
+        "pop": "Một đứa bé chăn trâu đổi cho ngươi quyển sách lót chuồng. Mở ra mới biết là một bài tâm pháp.",
+        "tp": {
+          "n": [
+            "Dẫn Khí Quyết (bản cũ)",
+            "Mục Đồng Tâm Pháp",
+            "Thanh Ngưu Điều Tức Thiên"
+          ],
+          "el": "vo",
+          "src": "đổi được"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_tre",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.tp_tre.070": "Không có linh thạch"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhập đạo",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tp_kyuc",
+      "name": "Ký ức chợt về",
+      "kind": "initiation",
+      "tags": [],
+      "trigger": {
+        "source": "initiation",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": true,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Vừa dừng chân, ngươi bỗng đứng sững: cảnh này dường như đã từng thấy. Trong đầu vang lên một bài khẩu quyết, như của ai đó, mà cũng như của chính mình.",
+      "choices": [
+        {
+          "l": "Nhắm mắt nhớ lại",
+          "t": "Từng câu hiện lên rõ dần. Ngươi không biết mình đã học nó ở đâu, chỉ biết là đúng."
+        },
+        {
+          "l": "Ngồi bên sông cả ngày",
+          "cost": "1 ngày",
+          "h": 24,
+          "fx": {
+            "tam": 1
+          },
+          "t": "Ngươi ngồi tới khi trăng lên. Bài khẩu quyết đã thuộc, lòng cũng yên hẳn."
+        }
+      ],
+      "logic": {
+        "pop": "Một hôm đi ngang khúc sông quen lạ, trong đầu ngươi bỗng vang lên một bài khẩu quyết từ kiếp nào.",
+        "tp": {
+          "n": [
+            "Túc Tuệ Dẫn Khí Quyết",
+            "Luân Hồi Tâm Ấn",
+            "Vong Xuyên Tàn Thiên"
+          ],
+          "el": "root",
+          "src": "ký ức kiếp trước"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_kyuc",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhập đạo",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}
