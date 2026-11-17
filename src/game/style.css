@@ -1482,3 +1482,39 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 
 .chev.gain{flex-direction:column;gap:0;margin:0 2px;line-height:0}.chev.gain svg{width:11px;height:6px}.chev.gain.dn{flex-direction:column-reverse}.chev.dn svg{fill:#c0392b;transform:rotate(180deg)}
 .bc.tlk{opacity:.5;filter:grayscale(.85)}.bc.tlk .lk{position:absolute;inset:auto 3px 3px auto;font-size:1.15em;color:#a33}
+
+/* ===== MÁY TÍNH (chuột, màn rộng ≥1200px): phóng to giao diện theo độ phân giải tới 4K; không áp cho điện thoại/máy tính bảng ===== */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  :root{--dz:1.05}
+  #hud,#nav,#mapui,#panel,#modal,#full,#sheet,#toast,#dock:not(:has(.np)),#tip{zoom:var(--dz)}
+  .dock.card.np{zoom:var(--dz)}
+  /* thanh dưới: gọn ở giữa thay vì kéo căng cả màn */
+  #nav{left:50%;right:auto;transform:translateX(-50%);width:auto;bottom:10px;height:62px;padding:6px;gap:6px;border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh)}
+  .nv{flex:none;width:96px;font-size:.8em!important;flex-direction:column;gap:3px}
+  .nv .ic{width:22px!important;height:22px!important}
+  .nv:hover{background:var(--paper2);border-color:var(--ink3)}
+  /* hàng chỉ số trên cùng: dồn trái, có khoảng cách */
+  .hud-stats{display:flex!important;justify-content:flex-start!important;gap:26px!important}
+  .hud-stats .hs{font-size:.8em!important;overflow:visible!important;gap:5px!important}
+  .hud-stats .hs .ic{width:14px!important;height:14px!important}
+  .hud-stats .hs.st{margin-left:auto}
+  /* nút bản đồ to hơn, có hiệu ứng rê chuột */
+  .mb:hover,.btn:not(:disabled):hover,.ch:not(:disabled):not(.info):hover,.row:not(:disabled):hover,.tabs button:hover{filter:brightness(1.04);border-color:var(--ink3)}
+  .btn,.ch,.row,.nv,.mb,.tabs button{transition:background .12s,border-color .12s,filter .12s}
+  /* bảng/hộp thoại: rộng vừa đủ, căn giữa, khoảng trống thoáng */
+  #panel{top:calc(var(--hudh,84px) + 12px);bottom:86px;width:min(860px,calc(92vw/var(--dz)))}
+  #panel:has(.win.wide){width:min(1120px,calc(96vw/var(--dz)))}
+  .win-b{padding:12px 22px 22px}
+  .mbox{max-width:480px;padding:20px 24px}
+  .mbox.pick{max-width:540px}.mbox.imod{max-width:420px}
+  #sheet{bottom:86px}
+  #dock:not(:has(.np)){bottom:86px;width:min(560px,calc(60vw/var(--dz)))}
+  .mbl{bottom:96px}
+  #toast{bottom:100px}
+  .cb,.birth,.meta{max-width:900px}
+}
+@media (hover:hover) and (pointer:fine) and (min-width:1500px) and (min-height:800px){:root{--dz:1.2}}
+@media (hover:hover) and (pointer:fine) and (min-width:1800px) and (min-height:950px){:root{--dz:1.35}}
+@media (hover:hover) and (pointer:fine) and (min-width:2300px) and (min-height:1250px){:root{--dz:1.75}}
+@media (hover:hover) and (pointer:fine) and (min-width:3000px) and (min-height:1600px){:root{--dz:2.2}}
+@media (hover:hover) and (pointer:fine) and (min-width:3600px) and (min-height:1950px){:root{--dz:2.6}}
