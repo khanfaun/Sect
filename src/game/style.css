@@ -1614,3 +1614,9 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .hud-ls .rh{width:.62em!important;height:.62em!important;margin:0 3px 0 0!important}
 }
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){.hud-ls{width:auto!important;min-width:54px!important;padding:0 8px!important;box-sizing:border-box}}
+
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  body:has(#sheet .scard.place) .hud{display:block!important}
+  :root[data-view=scene] .hud-body{display:block}
+  #mapui{display:block}
+}

@@ -1625,6 +1625,12 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 }
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){.hud-ls{width:auto!important;min-width:54px!important;padding:0 8px!important;box-sizing:border-box}}
 
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  body:has(#sheet .scard.place) .hud{display:block!important}
+  :root[data-view=scene] .hud-body{display:block}
+  #mapui{display:block}
+}
+
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function o(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=o(d);fetch(d.href,p)}})();var ni={exports:{}},Us={},ti={exports:{}},te={};/**
  * @license React
@@ -10268,7 +10274,8 @@ function render(){
       if(cb)full=rxv('TranDau');
       else{hud=rxv('Hud');nav=rxv('Nav');
         if(!sc||(UI.evMin&&sc.type==='event')){mapui=rxv('NutBanDo');dock=rxv('TheDiaDiem');}
-        else sheet=rxv('Canh:'+sc.type);}
+        else{sheet=rxv('Canh:'+sc.type);if(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine) and (min-width:1200px)').matches)mapui=rxv('NutBanDo');} // máy tính: giữ các nút nổi khi mở bảng
+      }
     }
     if(UI.panel)panel=rxv('Bang:'+UI.panel);
     modal=modalHTML();
