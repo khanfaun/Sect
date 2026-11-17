@@ -1564,3 +1564,4 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   #hud.hud,.nv,.mb,.mright .mb,.mbl .mb{border-radius:0!important}
   #hud.hud{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--paper)!important}
 }
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){.cb-party{flex-direction:column!important;gap:14px}.cb-party>*{width:100%}.ucard.cmp .u-cn{max-width:calc(100% - 96px)!important}}
