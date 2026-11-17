@@ -1596,3 +1596,11 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 
 /* điện thoại: 9 nút nổi trên màn hình vuông góc như máy tính */
 @media (max-width:600px){.mb,.mleft .mb,.mright .mb,.mbl .mb{border-radius:0!important}}
+/* máy tính: bảng cảnh / chi tiết địa điểm hiện bên phải màn hình */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  #sheet,#sheet:has(.scard.place){left:auto!important;right:12px!important;top:76px!important;bottom:70px!important;min-height:0}
+  #sheet>*{max-height:100%;min-height:0}
+}
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  #panel{top:max(76px,calc(var(--hudh,84px) + 24px))!important}
+}

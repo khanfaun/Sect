@@ -1606,6 +1606,14 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 
 /* điện thoại: 9 nút nổi trên màn hình vuông góc như máy tính */
 @media (max-width:600px){.mb,.mleft .mb,.mright .mb,.mbl .mb{border-radius:0!important}}
+/* máy tính: bảng cảnh / chi tiết địa điểm hiện bên phải màn hình */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  #sheet,#sheet:has(.scard.place){left:auto!important;right:12px!important;top:76px!important;bottom:70px!important;min-height:0}
+  #sheet>*{max-height:100%;min-height:0}
+}
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  #panel{top:max(76px,calc(var(--hudh,84px) + 24px))!important}
+}
 
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function o(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=o(d);fetch(d.href,p)}})();var ni={exports:{}},Us={},ti={exports:{}},te={};/**
