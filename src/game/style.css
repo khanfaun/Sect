@@ -1508,6 +1508,9 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .hud-stats .hs{font-size:.76em!important;overflow:visible!important;gap:4px!important}
   .hud-stats .hs .ic{width:14px!important;height:14px!important}
   .hud-stats .hs.st{margin-left:4px}
+  /* chỉ số tách khỏi thẻ, thành dải ngang nổi giữa mép trên */
+  .hud-stats{position:absolute;top:0;left:calc(100% + 10px);margin:0!important;white-space:nowrap;height:40px;padding:0 16px!important;align-items:center;background:var(--paper);border:1px solid var(--line)!important;border-radius:10px;box-shadow:var(--sh);z-index:6}
+  .hud-stats .hs{font-size:.86em!important}
   /* nút bản đồ to hơn, có hiệu ứng rê chuột */
   .mb:hover,.btn:not(:disabled):hover,.ch:not(:disabled):not(.info):hover,.row:not(:disabled):hover,.tabs button:hover{filter:brightness(1.04);border-color:var(--ink3)}
   .btn,.ch,.row,.nv,.mb,.tabs button{transition:background .12s,border-color .12s,filter .12s}
@@ -1523,6 +1526,7 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   #toast{bottom:40px}
   .cb,.birth,.meta{max-width:900px}
 }
+@media (hover:hover) and (pointer:fine) and (min-width:1200px) and (max-width:1599px){.hud-stats{top:calc(100% + 8px)!important;left:0!important}}
 @media (hover:hover) and (pointer:fine) and (min-width:1500px) and (min-height:800px){:root{--dz:1.2}}
 @media (hover:hover) and (pointer:fine) and (min-width:1800px) and (min-height:950px){:root{--dz:1.35}}
 @media (hover:hover) and (pointer:fine) and (min-width:2300px) and (min-height:1250px){:root{--dz:1.75}}
@@ -1530,3 +1534,20 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 @media (hover:hover) and (pointer:fine) and (min-width:3600px) and (min-height:1950px){:root{--dz:2.6}}
 .mb-l{display:none}
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){.mb-l{display:inline}}
+/* trận đấu trên máy tính: tranh lớn bên trái, phe địch + diễn biến cột phải, lệnh ở dưới */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .cb{display:grid!important;grid-template-columns:minmax(0,1fr) 360px;grid-template-rows:auto auto auto auto 1fr auto;column-gap:14px;row-gap:10px;max-width:1240px!important;margin:0 auto;padding:16px 20px!important;align-content:start}
+  .cb>*{grid-column:1/-1}
+  .cb>.track{grid-column:1/-1}
+  .cb>.cb-art{grid-column:1;grid-row:2/4;min-height:340px;max-height:none}
+  .cb>.cb-foes{grid-column:2;grid-row:2;flex-direction:column}
+  .cb>.cb-foes>*{flex:none}
+  .cb>.clog{grid-column:2;grid-row:3/5;min-height:8em;overflow:auto}
+  .cb>.cb-ally{grid-column:1;grid-row:4}
+  .cb>.cb-warn{grid-column:1}
+  .cb>.cb-cmd{grid-column:1;grid-row:5}
+  .cb>.cb-bot{grid-column:2;grid-row:5;align-self:start;flex-wrap:wrap}
+  .cb>.cb-end{grid-column:1/-1}
+}
+.u-cn{display:none}
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){.ucard.cmp .u-cn{display:block;position:absolute;left:12px;top:12px;font-size:1em;color:var(--seal);max-width:calc(100% - 80px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ucard.cmp{position:relative}}

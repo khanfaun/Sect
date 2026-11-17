@@ -1518,6 +1518,9 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .hud-stats .hs{font-size:.76em!important;overflow:visible!important;gap:4px!important}
   .hud-stats .hs .ic{width:14px!important;height:14px!important}
   .hud-stats .hs.st{margin-left:4px}
+  /* chỉ số tách khỏi thẻ, thành dải ngang nổi giữa mép trên */
+  .hud-stats{position:absolute;top:0;left:calc(100% + 10px);margin:0!important;white-space:nowrap;height:40px;padding:0 16px!important;align-items:center;background:var(--paper);border:1px solid var(--line)!important;border-radius:10px;box-shadow:var(--sh);z-index:6}
+  .hud-stats .hs{font-size:.86em!important}
   /* nút bản đồ to hơn, có hiệu ứng rê chuột */
   .mb:hover,.btn:not(:disabled):hover,.ch:not(:disabled):not(.info):hover,.row:not(:disabled):hover,.tabs button:hover{filter:brightness(1.04);border-color:var(--ink3)}
   .btn,.ch,.row,.nv,.mb,.tabs button{transition:background .12s,border-color .12s,filter .12s}
@@ -1533,6 +1536,7 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   #toast{bottom:40px}
   .cb,.birth,.meta{max-width:900px}
 }
+@media (hover:hover) and (pointer:fine) and (min-width:1200px) and (max-width:1599px){.hud-stats{top:calc(100% + 8px)!important;left:0!important}}
 @media (hover:hover) and (pointer:fine) and (min-width:1500px) and (min-height:800px){:root{--dz:1.2}}
 @media (hover:hover) and (pointer:fine) and (min-width:1800px) and (min-height:950px){:root{--dz:1.35}}
 @media (hover:hover) and (pointer:fine) and (min-width:2300px) and (min-height:1250px){:root{--dz:1.75}}
@@ -1540,6 +1544,23 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 @media (hover:hover) and (pointer:fine) and (min-width:3600px) and (min-height:1950px){:root{--dz:2.6}}
 .mb-l{display:none}
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){.mb-l{display:inline}}
+/* trận đấu trên máy tính: tranh lớn bên trái, phe địch + diễn biến cột phải, lệnh ở dưới */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .cb{display:grid!important;grid-template-columns:minmax(0,1fr) 360px;grid-template-rows:auto auto auto auto 1fr auto;column-gap:14px;row-gap:10px;max-width:1240px!important;margin:0 auto;padding:16px 20px!important;align-content:start}
+  .cb>*{grid-column:1/-1}
+  .cb>.track{grid-column:1/-1}
+  .cb>.cb-art{grid-column:1;grid-row:2/4;min-height:340px;max-height:none}
+  .cb>.cb-foes{grid-column:2;grid-row:2;flex-direction:column}
+  .cb>.cb-foes>*{flex:none}
+  .cb>.clog{grid-column:2;grid-row:3/5;min-height:8em;overflow:auto}
+  .cb>.cb-ally{grid-column:1;grid-row:4}
+  .cb>.cb-warn{grid-column:1}
+  .cb>.cb-cmd{grid-column:1;grid-row:5}
+  .cb>.cb-bot{grid-column:2;grid-row:5;align-self:start;flex-wrap:wrap}
+  .cb>.cb-end{grid-column:1/-1}
+}
+.u-cn{display:none}
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){.ucard.cmp .u-cn{display:block;position:absolute;left:12px;top:12px;font-size:1em;color:var(--seal);max-width:calc(100% - 80px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ucard.cmp{position:relative}}
 
 </style>
   <script type="module" crossorigin>(function(){const c=document.createElement("link").relList;if(c&&c.supports&&c.supports("modulepreload"))return;for(const d of document.querySelectorAll('link[rel="modulepreload"]'))h(d);new MutationObserver(d=>{for(const p of d)if(p.type==="childList")for(const f of p.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&h(f)}).observe(document,{childList:!0,subtree:!0});function o(d){const p={};return d.integrity&&(p.integrity=d.integrity),d.referrerPolicy&&(p.referrerPolicy=d.referrerPolicy),d.crossOrigin==="use-credentials"?p.credentials="include":d.crossOrigin==="anonymous"?p.credentials="omit":p.credentials="same-origin",p}function h(d){if(d.ep)return;d.ep=!0;const p=o(d);fetch(d.href,p)}})();var ni={exports:{}},Gs={},ti={exports:{}},ne={};/**
@@ -1611,7 +1632,7 @@ Chưa lên phẩm cao hơn vì: `+p.tcWhy.join(", ")+".":"")):{};return n.jsxs(F
 Trúng đòn thì giảm. Về 0: choáng, mất một lượt.`),children:n.jsx(Un,{cur:ar(c),max:100,cls:"dl"})})]});const b=c.fpt?100:a.clamp(c.than||0,0,100),v=p&&!c.immune?c.fpt?c.fpt.n+`
 Lượt tới nó sẽ tung đòn tối thượng!`:"Thần lực "+Math.round(b)+`%
 Đầy thì hiển hóa pháp tướng, lượt sau tung đòn tối thượng.`:h?c.name+`
-`+j:"",T=n.jsxs("span",{className:"u-av"+(p?" fav":" al")+(c.fpt?" fpt":""),..._(v),children:[p&&!c.immune&&n.jsx(Bu,{th:b,cls:c.fpt?"burn":b>=100?"full":""}),n.jsx(A,{className:"fav-in",h:a.uAvatar(c)}),n.jsx(ts,{h:a.phBadge(c)}),!!c.fpt&&n.jsx("i",{className:"flame"})]});return h?n.jsxs("div",{...C,children:[T,N,n.jsx(ts,{h:a.stIcons(c.st)})]}):n.jsxs("div",{...C,children:[T,n.jsxs("div",{className:"u-b",children:[n.jsxs("div",{className:"u-nm",children:[n.jsx("b",{children:c.name}),n.jsxs("small",{children:[n.jsx(ts,{h:a.elSeal(c.el||"vo")})," ",j]})]}),N,n.jsx(ts,{h:a.stIcons(c.st)})]})]})}function Bm({sc:r,u:c}){const{CFG:o,PT:h,SK:d}=a,p=r.pt?100:a.clamp(c.than||0,0,100),f=p>=100,g=a.readyPlayer(r),j=a.ptPreview(),C=r.pt?"burn":f?"full":"",N=r.kiep?"Trong thiên kiếp không hiển hóa được pháp tướng.":r.pt?r.pt.n+(r.pt.left>0?" · còn "+r.pt.left+" lượt":" · tới hết trận")+`
+`+j:"",T=n.jsxs("span",{className:"u-av"+(p?" fav":" al")+(c.fpt?" fpt":""),..._(v),children:[p&&!c.immune&&n.jsx(Bu,{th:b,cls:c.fpt?"burn":b>=100?"full":""}),n.jsx(A,{className:"fav-in",h:a.uAvatar(c)}),n.jsx(ts,{h:a.phBadge(c)}),!!c.fpt&&n.jsx("i",{className:"flame"})]});return h?n.jsxs("div",{...C,children:[T,n.jsx("b",{className:"u-cn",children:c.name}),N,n.jsx(ts,{h:a.stIcons(c.st)})]}):n.jsxs("div",{...C,children:[T,n.jsxs("div",{className:"u-b",children:[n.jsxs("div",{className:"u-nm",children:[n.jsx("b",{children:c.name}),n.jsxs("small",{children:[n.jsx(ts,{h:a.elSeal(c.el||"vo")})," ",j]})]}),N,n.jsx(ts,{h:a.stIcons(c.st)})]})]})}function Bm({sc:r,u:c}){const{CFG:o,PT:h,SK:d}=a,p=r.pt?100:a.clamp(c.than||0,0,100),f=p>=100,g=a.readyPlayer(r),j=a.ptPreview(),C=r.pt?"burn":f?"full":"",N=r.kiep?"Trong thiên kiếp không hiển hóa được pháp tướng.":r.pt?r.pt.n+(r.pt.left>0?" · còn "+r.pt.left+" lượt":" · tới hết trận")+`
 `+h[r.pt.el].d+(r.pt.sk?`
 
 Chạm để tung đòn tối thượng: `+d[r.pt.sk].n+`

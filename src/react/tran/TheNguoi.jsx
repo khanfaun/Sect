@@ -60,7 +60,7 @@ export function TheNguoi({ sc, u, pickMode, compact }) {
       <Html className="fav-in" h={PS.uAvatar(u)} /><H h={PS.phBadge(u)} />{!!u.fpt && <i className="flame"></i>}
     </span>
   );
-  if (compact) return <div {...box}>{av}{bars}<H h={PS.stIcons(u.st)} /></div>;
+  if (compact) return <div {...box}>{av}<b className="u-cn">{u.name}</b>{bars}<H h={PS.stIcons(u.st)} /></div>;
   return (
     <div {...box}>
       {av}
