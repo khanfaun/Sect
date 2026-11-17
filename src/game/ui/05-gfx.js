@@ -306,7 +306,7 @@ const Map2=(()=>{
     // mây trôi, hạt theo mùa, sắc trời theo buổi
     if(lv>0&&CFG.clouds){if(!cloudSpr)cloudSpr=cloudSprite();if(!clouds.length)for(let i=0;i<[0,9,16][lv];i++)clouds.push({x:Math.random()*(WORLD_W+500)-250,y:Math.random()*2500-250,s:160+Math.random()*220,v:6+Math.random()*10});
       const cA=clamp((0.55-zf)/0.1,0,1);ctx.globalAlpha=(C.dark?0.06:0.5)*cA;if(cA>0.01)for(const c of clouds){c.x+=c.v*dt;if(c.x>WORLD_W+300)c.x=-500;const x=SX(c.x),y=SY(c.y),s=c.s*z*2;if(x+s<0||x>W0||y+s<0||y>H0)continue;ctx.drawImage(cloudSpr,x,y,s,s*0.6);}ctx.globalAlpha=1;}
-    if(fillA>0.02&&fillA<0.98&&cloudSpr){const p=1-fillA,pe=p*p*(3-2*p),a=Math.sin(p*Math.PI)*(C.dark?0.25:0.8),vh=viewH();ctx.save();
+    if(fillA>0.02&&fillA<0.98&&cloudSpr){const p=1-fillA,pe=p*p*(3-2*p),a=Math.sin(p*Math.PI)*(C.dark?0.125:0.4),vh=viewH();ctx.save();
       const rnd=n=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);};
       for(let k=0;k<30;k++){const side=k%2?1:-1,r1=rnd(k+1),r2=rnd(k*3+7),r3=rnd(k*5+2),r4=rnd(k*7+11);
         const w=W0*(0.22+r1*0.5),h=vh*(0.05+r2*0.11),yy=VCY+(r3-0.5)*vh*1.05,dist=W0*(0.05+r4*0.25)+pe*W0*(0.55+r1*0.5);
