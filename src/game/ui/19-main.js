@@ -123,7 +123,7 @@ const ACT={
   pact:a=>{const sc=G.run&&G.run.scene;if(VENUE_N[a]&&sc&&sc.type==='place'){sc.venue=a;UI.plTop=1;return;}
     if(sc&&sc.type==='place'&&!['bq','laibuon','tram','nhansu','conghien','tinhthat','quyan','bt','board','cross'].includes(a)){const A=placeActs(nodeById(sc.id)).find(x=>x.a===a);if(A&&!A.dis&&A.h>0){UI.modal={k:'pconf',a};return;}}
     if(a==='bq'){UI.modal={k:'bq'};return;}if(a==='laibuon'||a==='tram'||a==='nhansu'||a==='conghien'){UI.modal={k:a};return;}if(a==='tinhthat'){G.bqRoom=true;UI.bqOpened=false;UI.modal={k:'bq'};return;}if(a==='quyan'&&UI.confirm!=='quyan'){UI.confirm='quyan';return;}UI.confirm=null;placeAct(a);},
-  leave:()=>leavePlace(),
+  leave:()=>{leavePlace();UI.sel=null;UI.cell=null;UI.pop=null;UI.hold=null;}, // đóng bảng chi tiết: không bật lại thẻ tóm tắt
   pass:a=>passAct(a),
   hud:()=>{if(G.run&&G.run.scene)UI.hudScene=!UI.hudScene;else UI.hudOpen=!UI.hudOpen;},
   cbGo:()=>prepGo(),ppKn:()=>{const sc=G.run&&G.run.scene;const cmp=sc&&sc.units&&sc.units.length>2;UI.ppKn=!(UI.ppKn!=null?UI.ppKn:!cmp);},cbQuick:()=>quickFight(),ccOpen:k=>{const o=UI.ccOpen=UI.ccOpen||{};o[k]=o[k]===false;},cbOpen:()=>{UI.cbOpen=UI.cbOpen===false;},prepKn:()=>{UI.panel='char';UI.tab.char='kn';},prepBag:()=>{UI.panel='char';UI.tab.char='bag';},
@@ -144,7 +144,7 @@ const ACT={
   status:()=>{UI.status=!UI.status;},
   panel:k=>{UI.panel=UI.panel===k?null:k;UI.code=null;UI.msg=null;UI.confirm=null;UI.chuSel=null;},
   closePanel:()=>{UI.panel=null;UI.code=null;UI.msg=null;},
-  modalX:()=>{const m=UI.modal;UI.modal=null;G.bqRoom=false;if(m&&m.k==='bq'&&UI.bqOpened&&G.run&&G.run.scene&&G.run.scene.type==='place'){G.run.scene=null;}UI.bqOpened=false;},
+  modalX:()=>{const m=UI.modal;UI.modal=null;UI.sel=null;G.bqRoom=false;if(m&&m.k==='bq'&&UI.bqOpened&&G.run&&G.run.scene&&G.run.scene.type==='place'){G.run.scene=null;}UI.bqOpened=false;},
   npMin:()=>{UI.npMin=!UI.npMin;},
   goCell:c=>{const n=wpMake(+c);if(!n)return;UI.cell=null;UI.sel=null;ACT.go(n.id);},
   unsel:()=>{UI.mark=null;UI.hold=null;UI.sel=null;UI.cell=null;UI.pop=null;},
@@ -165,7 +165,7 @@ const ACT={
   stage:id=>{UI.modal=null;stageGo(+id);},
   go:id=>{const n=nodeById(+id);if(CFG.confirmDanger&&dangerTag(n)>=3&&n.id!==G.run.at){UI.modal={k:'danger',id:n.id};return;}ACT.goSure(id);},
   goSure:id=>{UI.modal=null;G.run.halt=false;if(travelTo(+id)){G.run.dest=+id;UI.paused=false;UI.cardMin=true;Map2.cam.follow=true;}},
-  enter:()=>{G.run.dest=null;openPlace(G.run.at);},
+  enter:()=>{G.run.dest=null;UI.sel=null;UI.cell=null;UI.pop=null;UI.hold=null;openPlace(G.run.at);},
   stop:()=>{const r=G.run;if(r.moving){r.halt=true;snapStop();}},
   goOn:()=>{G.run.halt=false;UI.paused=false;},
   turnBack:()=>{const r=G.run,m=r.moving;if(!m)return;r.halt=false;const a=m.path[m.seg];if(travelTo(a))r.dest=a;},
