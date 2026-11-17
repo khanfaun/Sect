@@ -1,0 +1,2474 @@
+[
+  {
+    "id": "dan_loi_diep_hoi_mach_dan",
+    "n": "Lôi Diệp Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 39,
+    "p": 33,
+    "reg": 0,
+    "lore": "Lớp áo đan giữ mùi vải sém sau tiếng sét. Qua một nhịp thở, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_sa_tuy_hoi_mach_dan",
+    "n": "Sa Tủy Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 36,
+    "p": 29,
+    "reg": 0,
+    "lore": "Bẻ viên đan sẽ nhận ra vệt phấn đá đục. Uống với nước nguội, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_tinh_dang_hoi_mach_dan",
+    "n": "Tịnh Đăng Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 37,
+    "p": 19,
+    "reg": 0,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_moc_mien_hoi_mach_dan",
+    "n": "Mộc Miên Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 32,
+    "p": 95,
+    "reg": 1,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_mai_ngoi_hoi_mach_dan",
+    "n": "Mái Ngói Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 38,
+    "p": 96,
+    "reg": 1,
+    "lore": "Lớp áo đan giữ mùi nắng trên vải mộc. Qua một nhịp thở, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_hon_dang_hoi_mach_dan",
+    "n": "Hồn Đăng Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 32,
+    "p": 76,
+    "reg": 1,
+    "lore": "Bẻ viên đan sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Uống với nước nguội, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_bach_lang_hoi_mach_dan",
+    "n": "Bạch Lãng Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 46,
+    "p": 176,
+    "reg": 2,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_hoa_tuy_hoi_mach_dan",
+    "n": "Hỏa Tủy Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 38,
+    "p": 194,
+    "reg": 2,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_chim_von_hoi_mach_dan",
+    "n": "Chim Vờn Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 48,
+    "p": 165,
+    "reg": 2,
+    "lore": "Lớp áo đan giữ tiếng lá khô lăn dưới gót. Qua một nhịp thở, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_bang_vu_hoi_mach_dan",
+    "n": "Băng Vũ Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 49,
+    "p": 641,
+    "reg": 3,
+    "lore": "Bẻ viên đan sẽ nhận ra những hạt băng mịn. Uống với nước nguội, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_cuong_mat_hoi_mach_dan",
+    "n": "Cương Mạt Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 42,
+    "p": 831,
+    "reg": 3,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_bach_thuc_hoi_mach_dan",
+    "n": "Bách Thực Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 52,
+    "p": 595,
+    "reg": 3,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_tan_dang_hoi_mach_dan",
+    "n": "Tàn Đăng Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 50,
+    "p": 1815,
+    "reg": 4,
+    "lore": "Lớp áo đan giữ mùi tàn hương vừa tắt. Qua một nhịp thở, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_han_mac_hoi_mach_dan",
+    "n": "Hàn Mặc Hồi Mạch Đan",
+    "i": "🟢",
+    "x": 49,
+    "p": 1389,
+    "reg": 4,
+    "lore": "Bẻ viên đan sẽ nhận ra những hạt băng mịn. Uống với nước nguội, hơi ấm dần trở lại đầu ngón.",
+    "eff": "hoixuan",
+    "w": "any",
+    "d": "Hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_vu_tinh_hoan_linh_dan",
+    "n": "Vũ Tinh Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 38,
+    "p": 21,
+    "reg": 0,
+    "lore": "Bẻ viên đan sẽ nhận ra tiếng giọt rơi vào chum. Uống với nước nguội, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_dien_tuy_hoan_linh_dan",
+    "n": "Điện Tủy Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 38,
+    "p": 29,
+    "reg": 0,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_hon_dang_hoan_linh_dan",
+    "n": "Hồn Đăng Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 27,
+    "p": 30,
+    "reg": 0,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_day_gai_hoan_linh_dan",
+    "n": "Dây Gai Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 34,
+    "p": 62,
+    "reg": 1,
+    "lore": "Lớp áo đan giữ mùi nắng trên vải mộc. Qua một nhịp thở, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_kim_tuoc_hoan_linh_dan",
+    "n": "Kim Tước Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 43,
+    "p": 61,
+    "reg": 1,
+    "lore": "Bẻ viên đan sẽ nhận ra mùi búa mới tôi. Uống với nước nguội, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_suong_dong_hoan_linh_dan",
+    "n": "Sương Đóng Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 32,
+    "p": 66,
+    "reg": 1,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_tan_tinh_hoan_linh_dan",
+    "n": "Tẫn Tinh Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 36,
+    "p": 171,
+    "reg": 2,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_dang_sa_hoan_linh_dan",
+    "n": "Đằng Sa Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 38,
+    "p": 251,
+    "reg": 2,
+    "lore": "Lớp áo đan giữ mùi nhựa vừa rịn. Qua một nhịp thở, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_gio_lua_hoan_linh_dan",
+    "n": "Gió Lùa Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 40,
+    "p": 241,
+    "reg": 2,
+    "lore": "Bẻ viên đan sẽ nhận ra vệt bụi uốn quanh mép. Uống với nước nguội, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_hoang_ngoa_hoan_linh_dan",
+    "n": "Hoàng Ngõa Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 43,
+    "p": 407,
+    "reg": 3,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_phan_chung_hoan_linh_dan",
+    "n": "Phạn Chung Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 49,
+    "p": 607,
+    "reg": 3,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_hoa_lan_hoan_linh_dan",
+    "n": "Hỏa Lân Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 54,
+    "p": 2314,
+    "reg": 4,
+    "lore": "Lớp áo đan giữ mùi tàn hương vừa tắt. Qua một nhịp thở, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_bo_tuyen_hoan_linh_dan",
+    "n": "Bồ Tuyền Hoàn Linh Đan",
+    "i": "🔵",
+    "x": 47,
+    "p": 1521,
+    "reg": 4,
+    "lore": "Bẻ viên đan sẽ nhận ra tiếng mõ ngân rất khẽ. Uống với nước nguội, linh tức từ từ đầy lại dưới rốn.",
+    "eff": "tukhi",
+    "w": "any",
+    "d": "Hồi {x}% linh lực"
+  },
+  {
+    "id": "dan_bach_lang_tan_doc_dan",
+    "n": "Bạch Lãng Tán Độc Đan",
+    "i": "🟤",
+    "x": 26,
+    "p": 36,
+    "reg": 0,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_dao_suong_tan_doc_dan",
+    "n": "Đào Sương Tán Độc Đan",
+    "i": "🟤",
+    "x": 29,
+    "p": 26,
+    "reg": 0,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_luoi_dong_tan_doc_dan",
+    "n": "Lưỡi Đồng Tán Độc Đan",
+    "i": "🟤",
+    "x": 30,
+    "p": 17,
+    "reg": 0,
+    "lore": "Lớp áo đan giữ tiếng đồng ngân dưới mưa. Qua một nhịp thở, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_bang_vu_tan_doc_dan",
+    "n": "Băng Vũ Tán Độc Đan",
+    "i": "🟤",
+    "x": 33,
+    "p": 89,
+    "reg": 1,
+    "lore": "Bẻ viên đan sẽ nhận ra những hạt băng mịn. Uống với nước nguội, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_phong_dang_tan_doc_dan",
+    "n": "Phong Đăng Tán Độc Đan",
+    "i": "🟤",
+    "x": 32,
+    "p": 73,
+    "reg": 1,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_nham_phan_tan_doc_dan",
+    "n": "Nham Phấn Tán Độc Đan",
+    "i": "🟤",
+    "x": 34,
+    "p": 51,
+    "reg": 1,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_tan_dang_tan_doc_dan",
+    "n": "Tàn Đăng Tán Độc Đan",
+    "i": "🟤",
+    "x": 46,
+    "p": 177,
+    "reg": 2,
+    "lore": "Lớp áo đan giữ mùi tàn hương vừa tắt. Qua một nhịp thở, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_day_may_tan_doc_dan",
+    "n": "Dây Mây Tán Độc Đan",
+    "i": "🟤",
+    "x": 37,
+    "p": 237,
+    "reg": 2,
+    "lore": "Bẻ viên đan sẽ nhận ra vệt bụi từ bờ ruộng. Uống với nước nguội, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_thien_thach_tan_doc_dan",
+    "n": "Thiền Thạch Tán Độc Đan",
+    "i": "🟤",
+    "x": 53,
+    "p": 732,
+    "reg": 3,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_tu_dien_tan_doc_dan",
+    "n": "Tử Điện Tán Độc Đan",
+    "i": "🟤",
+    "x": 44,
+    "p": 465,
+    "reg": 3,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_da_liem_tan_doc_dan",
+    "n": "Dạ Liêm Tán Độc Đan",
+    "i": "🟤",
+    "x": 51,
+    "p": 1940,
+    "reg": 4,
+    "lore": "Lớp áo đan giữ mùi hương cũ trong buồng kín. Qua một nhịp thở, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_anh_giap_tan_doc_dan",
+    "n": "Ảnh Giáp Tán Độc Đan",
+    "i": "🟤",
+    "x": 55,
+    "p": 1980,
+    "reg": 4,
+    "lore": "Bẻ viên đan sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Uống với nước nguội, vị chát tan hết thì hơi độc mới lui.",
+    "eff": "giaidoc",
+    "w": "any",
+    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+  },
+  {
+    "id": "dan_vien_am_an_mong_dan",
+    "n": "Viên Âm An Mộng Đan",
+    "i": "🟣",
+    "x": 17,
+    "p": 33,
+    "reg": 0,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_dia_cot_an_mong_dan",
+    "n": "Địa Cốt An Mộng Đan",
+    "i": "🟣",
+    "x": 10,
+    "p": 28,
+    "reg": 0,
+    "lore": "Lớp áo đan giữ mùi đất vỡ sau cơn mưa. Qua một nhịp thở, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_sam_mu_an_mong_dan",
+    "n": "Sấm Mù An Mộng Đan",
+    "i": "🟣",
+    "x": 19,
+    "p": 31,
+    "reg": 0,
+    "lore": "Bẻ viên đan sẽ nhận ra một ánh chớp xanh. Uống với nước nguội, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_tuyet_vi_an_mong_dan",
+    "n": "Tuyết Vĩ An Mộng Đan",
+    "i": "🟣",
+    "x": 16,
+    "p": 71,
+    "reg": 1,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_ngo_dong_an_mong_dan",
+    "n": "Ngô Đồng An Mộng Đan",
+    "i": "🟣",
+    "x": 15,
+    "p": 54,
+    "reg": 1,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_hoa_lan_an_mong_dan",
+    "n": "Hỏa Lân An Mộng Đan",
+    "i": "🟣",
+    "x": 21,
+    "p": 159,
+    "reg": 2,
+    "lore": "Lớp áo đan giữ mùi tàn hương vừa tắt. Qua một nhịp thở, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_tinh_chung_an_mong_dan",
+    "n": "Tinh Chung An Mộng Đan",
+    "i": "🟣",
+    "x": 22,
+    "p": 163,
+    "reg": 2,
+    "lore": "Bẻ viên đan sẽ nhận ra mùi búa mới tôi. Uống với nước nguội, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_da_liem_an_mong_dan",
+    "n": "Dạ Liêm An Mộng Đan",
+    "i": "🟣",
+    "x": 28,
+    "p": 587,
+    "reg": 3,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_phong_tang_an_mong_dan",
+    "n": "Phong Tàng An Mộng Đan",
+    "i": "🟣",
+    "x": 30,
+    "p": 725,
+    "reg": 3,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_vu_tuyen_an_mong_dan",
+    "n": "Vũ Tuyền An Mộng Đan",
+    "i": "🟣",
+    "x": 30,
+    "p": 1755,
+    "reg": 4,
+    "lore": "Lớp áo đan giữ mùi nước mưa đọng trên ngói. Qua một nhịp thở, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_vet_son_an_mong_dan",
+    "n": "Vết Son An Mộng Đan",
+    "i": "🟣",
+    "x": 28,
+    "p": 2108,
+    "reg": 4,
+    "lore": "Bẻ viên đan sẽ nhận ra vệt bụi từ bờ ruộng. Uống với nước nguội, tiếng nói trong mộng xa dần.",
+    "eff": "dinhthan",
+    "w": "any",
+    "d": "Tâm ma −{x}"
+  },
+  {
+    "id": "dan_giay_gio_dan_tu_dan",
+    "n": "Giấy Gió Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 7,
+    "p": 30,
+    "reg": 0,
+    "lore": "Lớp áo đan giữ mùi nắng trên vải mộc. Qua một nhịp thở, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_phong_nha_dan_tu_dan",
+    "n": "Phong Nha Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 8,
+    "p": 20,
+    "reg": 0,
+    "lore": "Bẻ viên đan sẽ nhận ra vệt bụi uốn quanh mép. Uống với nước nguội, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_loi_tue_dan_tu_dan",
+    "n": "Lôi Tuế Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 9,
+    "p": 71,
+    "reg": 1,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_hoa_cat_dan_tu_dan",
+    "n": "Hoa Cát Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 12,
+    "p": 100,
+    "reg": 1,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_nhat_ke_dan_tu_dan",
+    "n": "Nhất Kệ Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 14,
+    "p": 260,
+    "reg": 2,
+    "lore": "Lớp áo đan giữ mùi trầm đọng dưới mái. Qua một nhịp thở, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_tho_vu_dan_tu_dan",
+    "n": "Thổ Vũ Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 14,
+    "p": 222,
+    "reg": 2,
+    "lore": "Bẻ viên đan sẽ nhận ra vệt phấn đá đục. Uống với nước nguội, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_noan_sa_dan_tu_dan",
+    "n": "Noãn Sa Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 18,
+    "p": 477,
+    "reg": 3,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_thuy_liem_dan_tu_dan",
+    "n": "Thủy Liêm Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 15,
+    "p": 661,
+    "reg": 3,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_thiec_reu_dan_tu_dan",
+    "n": "Thiếc Rêu Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 20,
+    "p": 1687,
+    "reg": 4,
+    "lore": "Lớp áo đan giữ tiếng đồng ngân dưới mưa. Qua một nhịp thở, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_bang_ti_dan_tu_dan",
+    "n": "Băng Ti Dẫn Tu Đan",
+    "i": "🟡",
+    "x": 16,
+    "p": 2456,
+    "reg": 4,
+    "lore": "Bẻ viên đan sẽ nhận ra những hạt băng mịn. Uống với nước nguội, một vòng thổ nạp nhẹ như rót nước.",
+    "eff": "tinhnguyen",
+    "w": "any",
+    "d": "Tu vi +{x}%"
+  },
+  {
+    "id": "dan_hoa_cat_boi_huyet_dan",
+    "n": "Hoa Cát Bồi Huyết Đan",
+    "i": "🔴",
+    "x": 4,
+    "p": 594,
+    "reg": 2,
+    "lore": "Bẻ viên đan sẽ nhận ra vệt phấn hoa vàng nhạt. Uống với nước nguội, mạch đập vững thêm sau một canh tĩnh tọa.",
+    "eff": "taytuy",
+    "w": "any",
+    "d": "Khí huyết tối đa +{x}% vĩnh viễn"
+  },
+  {
+    "id": "dan_da_liem_boi_huyet_dan",
+    "n": "Dạ Liêm Bồi Huyết Đan",
+    "i": "🔴",
+    "x": 6,
+    "p": 1770,
+    "reg": 3,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, mạch đập vững thêm sau một canh tĩnh tọa.",
+    "eff": "taytuy",
+    "w": "any",
+    "d": "Khí huyết tối đa +{x}% vĩnh viễn"
+  },
+  {
+    "id": "dan_lang_hoi_boi_huyet_dan",
+    "n": "Lãng Hồi Bồi Huyết Đan",
+    "i": "🔴",
+    "x": 6,
+    "p": 1671,
+    "reg": 3,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, mạch đập vững thêm sau một canh tĩnh tọa.",
+    "eff": "taytuy",
+    "w": "any",
+    "d": "Khí huyết tối đa +{x}% vĩnh viễn"
+  },
+  {
+    "id": "dan_bang_lan_boi_huyet_dan",
+    "n": "Băng Lân Bồi Huyết Đan",
+    "i": "🔴",
+    "x": 7,
+    "p": 5658,
+    "reg": 4,
+    "lore": "Lớp áo đan giữ mùi rơm lẫn trong tuyết. Qua một nhịp thở, mạch đập vững thêm sau một canh tĩnh tọa.",
+    "eff": "taytuy",
+    "w": "any",
+    "d": "Khí huyết tối đa +{x}% vĩnh viễn"
+  },
+  {
+    "id": "dan_dang_tuy_boi_huyet_dan",
+    "n": "Đăng Tủy Bồi Huyết Đan",
+    "i": "🔴",
+    "x": 6,
+    "p": 6897,
+    "reg": 4,
+    "lore": "Bẻ viên đan sẽ nhận ra ánh lửa liếm qua mép. Uống với nước nguội, mạch đập vững thêm sau một canh tĩnh tọa.",
+    "eff": "taytuy",
+    "w": "any",
+    "d": "Khí huyết tối đa +{x}% vĩnh viễn"
+  },
+  {
+    "id": "dan_loi_diep_boi_huyet_dan",
+    "n": "Lôi Diệp Bồi Huyết Đan",
+    "i": "🔴",
+    "x": 8,
+    "p": 5325,
+    "reg": 4,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, mạch đập vững thêm sau một canh tĩnh tọa.",
+    "eff": "taytuy",
+    "w": "any",
+    "d": "Khí huyết tối đa +{x}% vĩnh viễn"
+  },
+  {
+    "id": "dan_co_nham_minh_ngo_dan",
+    "n": "Cổ Nham Minh Ngộ Đan",
+    "i": "⚪",
+    "x": 1,
+    "p": 618,
+    "reg": 2,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, những chữ đã học chợt nối nghĩa với nhau.",
+    "eff": "khaitri",
+    "w": "any",
+    "d": "Ngộ tính +{x}"
+  },
+  {
+    "id": "dan_cot_dong_minh_ngo_dan",
+    "n": "Cốt Đồng Minh Ngộ Đan",
+    "i": "⚪",
+    "x": 2,
+    "p": 2538,
+    "reg": 3,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, những chữ đã học chợt nối nghĩa với nhau.",
+    "eff": "khaitri",
+    "w": "any",
+    "d": "Ngộ tính +{x}"
+  },
+  {
+    "id": "dan_tuyet_cham_minh_ngo_dan",
+    "n": "Tuyết Châm Minh Ngộ Đan",
+    "i": "⚪",
+    "x": 2,
+    "p": 2199,
+    "reg": 3,
+    "lore": "Lớp áo đan giữ mùi rơm lẫn trong tuyết. Qua một nhịp thở, những chữ đã học chợt nối nghĩa với nhau.",
+    "eff": "khaitri",
+    "w": "any",
+    "d": "Ngộ tính +{x}"
+  },
+  {
+    "id": "dan_hac_yem_minh_ngo_dan",
+    "n": "Hắc Yểm Minh Ngộ Đan",
+    "i": "⚪",
+    "x": 3,
+    "p": 3915,
+    "reg": 4,
+    "lore": "Bẻ viên đan sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Uống với nước nguội, những chữ đã học chợt nối nghĩa với nhau.",
+    "eff": "khaitri",
+    "w": "any",
+    "d": "Ngộ tính +{x}"
+  },
+  {
+    "id": "dan_tinh_dang_minh_ngo_dan",
+    "n": "Tịnh Đăng Minh Ngộ Đan",
+    "i": "⚪",
+    "x": 3,
+    "p": 4986,
+    "reg": 4,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, những chữ đã học chợt nối nghĩa với nhau.",
+    "eff": "khaitri",
+    "w": "any",
+    "d": "Ngộ tính +{x}"
+  },
+  {
+    "id": "dan_phat_ke_duong_tho_dan",
+    "n": "Phật Kệ Dưỡng Thọ Đan",
+    "i": "🟠",
+    "x": 6,
+    "p": 453,
+    "reg": 2,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, hơi thở đằm lại như nước xuống giếng.",
+    "eff": "dientho",
+    "w": "any",
+    "d": "Thọ nguyên +{x}%"
+  },
+  {
+    "id": "dan_tao_huyen_duong_tho_dan",
+    "n": "Tảo Huyền Dưỡng Thọ Đan",
+    "i": "🟠",
+    "x": 10,
+    "p": 1998,
+    "reg": 3,
+    "lore": "Lớp áo đan giữ mùi nước mưa đọng trên ngói. Qua một nhịp thở, hơi thở đằm lại như nước xuống giếng.",
+    "eff": "dientho",
+    "w": "any",
+    "d": "Thọ nguyên +{x}%"
+  },
+  {
+    "id": "dan_u_huong_duong_tho_dan",
+    "n": "U Hương Dưỡng Thọ Đan",
+    "i": "🟠",
+    "x": 8,
+    "p": 1452,
+    "reg": 3,
+    "lore": "Bẻ viên đan sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Uống với nước nguội, hơi thở đằm lại như nước xuống giếng.",
+    "eff": "dientho",
+    "w": "any",
+    "d": "Thọ nguyên +{x}%"
+  },
+  {
+    "id": "dan_mai_ngoi_duong_tho_dan",
+    "n": "Mái Ngói Dưỡng Thọ Đan",
+    "i": "🟠",
+    "x": 12,
+    "p": 7638,
+    "reg": 4,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, hơi thở đằm lại như nước xuống giếng.",
+    "eff": "dientho",
+    "w": "any",
+    "d": "Thọ nguyên +{x}%"
+  },
+  {
+    "id": "dan_han_tao_duong_tho_dan",
+    "n": "Hàn Tảo Dưỡng Thọ Đan",
+    "i": "🟠",
+    "x": 14,
+    "p": 4329,
+    "reg": 4,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, hơi thở đằm lại như nước xuống giếng.",
+    "eff": "dientho",
+    "w": "any",
+    "d": "Thọ nguyên +{x}%"
+  },
+  {
+    "id": "dan_tam_trieu_duong_co_dan",
+    "n": "Tam Triều Dưỡng Cơ Đan",
+    "i": "🟡",
+    "x": 1,
+    "p": 570,
+    "reg": 2,
+    "lore": "Lớp áo đan giữ mùi nước mưa đọng trên ngói. Qua một nhịp thở, đạo cơ lắng xuống một tầng như cát dưới chum.",
+    "eff": "linhnhu",
+    "w": "any",
+    "d": "Đạo cơ +{x} (tối đa 4 điểm mỗi cảnh giới từ đan dược)",
+    "dao": 1
+  },
+  {
+    "id": "dan_tung_tam_duong_co_dan",
+    "n": "Tùng Tâm Dưỡng Cơ Đan",
+    "i": "🟡",
+    "x": 2,
+    "p": 1998,
+    "reg": 3,
+    "lore": "Bẻ viên đan sẽ nhận ra vệt phấn hoa vàng nhạt. Uống với nước nguội, đạo cơ lắng xuống một tầng như cát dưới chum.",
+    "eff": "linhnhu",
+    "w": "any",
+    "d": "Đạo cơ +{x} (tối đa 4 điểm mỗi cảnh giới từ đan dược)",
+    "dao": 2
+  },
+  {
+    "id": "dan_chop_dong_duong_co_dan",
+    "n": "Chớp Đọng Dưỡng Cơ Đan",
+    "i": "🟡",
+    "x": 2,
+    "p": 1779,
+    "reg": 3,
+    "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, đạo cơ lắng xuống một tầng như cát dưới chum.",
+    "eff": "linhnhu",
+    "w": "any",
+    "d": "Đạo cơ +{x} (tối đa 4 điểm mỗi cảnh giới từ đan dược)",
+    "dao": 2
+  },
+  {
+    "id": "dan_tuyet_sa_duong_co_dan",
+    "n": "Tuyết Sa Dưỡng Cơ Đan",
+    "i": "🟡",
+    "x": 2,
+    "p": 6750,
+    "reg": 4,
+    "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, đạo cơ lắng xuống một tầng như cát dưới chum.",
+    "eff": "linhnhu",
+    "w": "any",
+    "d": "Đạo cơ +{x} (tối đa 4 điểm mỗi cảnh giới từ đan dược)",
+    "dao": 2
+  },
+  {
+    "id": "phu_phan_am_thuc_huyet_phu",
+    "n": "Phạn Âm Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 2,
+    "p": 38,
+    "reg": 0,
+    "lore": "Đường vẽ cuối trên giấy còn lưu mùi trầm đọng dưới mái. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_bang_ti_thuc_huyet_phu",
+    "n": "Băng Ti Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 2,
+    "p": 28,
+    "reg": 0,
+    "lore": "Dưới đèn, nét phù lộ những hạt băng mịn. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_loi_mach_thuc_huyet_phu",
+    "n": "Lôi Mạch Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 3,
+    "p": 65,
+    "reg": 1,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_bui_trau_thuc_huyet_phu",
+    "n": "Bụi Trấu Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 3,
+    "p": 59,
+    "reg": 1,
+    "lore": "Đường vẽ cuối trên giấy còn lưu mùi khói bếp vương lại. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_phong_mien_thuc_huyet_phu",
+    "n": "Phong Miên Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 4,
+    "p": 79,
+    "reg": 2,
+    "lore": "Dưới đèn, nét phù lộ tiếng lá khô lăn dưới gót. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_diem_nha_thuc_huyet_phu",
+    "n": "Diệm Nha Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 3,
+    "p": 95,
+    "reg": 2,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_hac_trieu_thuc_huyet_phu",
+    "n": "Hắc Triều Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 4,
+    "p": 130,
+    "reg": 3,
+    "lore": "Đường vẽ cuối trên giấy còn lưu vệt bóng mọc về phía sáng. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_dao_suong_thuc_huyet_phu",
+    "n": "Đào Sương Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 4,
+    "p": 120,
+    "reg": 3,
+    "lore": "Dưới đèn, nét phù lộ những thớ gỗ ướt. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_luoi_dong_thuc_huyet_phu",
+    "n": "Lưỡi Đồng Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 4,
+    "p": 191,
+    "reg": 4,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_tram_ba_thuc_huyet_phu",
+    "n": "Trầm Ba Thúc Huyết Phù",
+    "i": "🟥",
+    "x": 5,
+    "p": 129,
+    "reg": 4,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng giọt rơi vào chum. Mực theo đường gân cổ tay, ngực nóng dần lên.",
+    "eff": "baohuyet",
+    "w": "combat",
+    "d": "Cuồng nộ +{x} trong trận"
+  },
+  {
+    "id": "phu_han_tao_ke_giap_phu",
+    "n": "Hàn Tảo Kê Giáp Phù",
+    "i": "🟨",
+    "x": 32,
+    "p": 25,
+    "reg": 0,
+    "lore": "Đường vẽ cuối trên giấy còn lưu những hạt băng mịn. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_thiet_yen_ke_giap_phu",
+    "n": "Thiết Yến Kê Giáp Phù",
+    "i": "🟨",
+    "x": 27,
+    "p": 23,
+    "reg": 0,
+    "lore": "Dưới đèn, nét phù lộ ánh bạc nhạt trên mép. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_son_nau_ke_giap_phu",
+    "n": "Sơn Nâu Kê Giáp Phù",
+    "i": "🟨",
+    "x": 35,
+    "p": 39,
+    "reg": 0,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_da_vu_ke_giap_phu",
+    "n": "Dạ Vũ Kê Giáp Phù",
+    "i": "🟨",
+    "x": 32,
+    "p": 58,
+    "reg": 1,
+    "lore": "Đường vẽ cuối trên giấy còn lưu mùi nước mưa đọng trên ngói. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_loi_tam_ke_giap_phu",
+    "n": "Lôi Tằm Kê Giáp Phù",
+    "i": "🟨",
+    "x": 35,
+    "p": 86,
+    "reg": 1,
+    "lore": "Dưới đèn, nét phù lộ một ánh chớp xanh. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_phong_dang_ke_giap_phu",
+    "n": "Phong Đăng Kê Giáp Phù",
+    "i": "🟨",
+    "x": 39,
+    "p": 49,
+    "reg": 1,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_diem_vi_ke_giap_phu",
+    "n": "Diệm Vĩ Kê Giáp Phù",
+    "i": "🟨",
+    "x": 46,
+    "p": 126,
+    "reg": 2,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng than nổ trong lò. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_hon_tram_ke_giap_phu",
+    "n": "Hồn Trầm Kê Giáp Phù",
+    "i": "🟨",
+    "x": 42,
+    "p": 124,
+    "reg": 2,
+    "lore": "Dưới đèn, nét phù lộ mùi hương cũ trong buồng kín. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_ngo_dong_ke_giap_phu",
+    "n": "Ngô Đồng Kê Giáp Phù",
+    "i": "🟨",
+    "x": 42,
+    "p": 109,
+    "reg": 2,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_ne_tam_ke_giap_phu",
+    "n": "Nê Tâm Kê Giáp Phù",
+    "i": "🟨",
+    "x": 47,
+    "p": 156,
+    "reg": 3,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng cát lọt qua kẽ. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_bo_tuyen_ke_giap_phu",
+    "n": "Bồ Tuyền Kê Giáp Phù",
+    "i": "🟨",
+    "x": 43,
+    "p": 122,
+    "reg": 3,
+    "lore": "Dưới đèn, nét phù lộ vết bụi vàng của hương. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_loi_vi_ke_giap_phu",
+    "n": "Lôi Vĩ Kê Giáp Phù",
+    "i": "🟨",
+    "x": 55,
+    "p": 225,
+    "reg": 4,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_tinh_huong_ke_giap_phu",
+    "n": "Tịnh Hương Kê Giáp Phù",
+    "i": "🟨",
+    "x": 49,
+    "p": 235,
+    "reg": 4,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng mõ ngân rất khẽ. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
+    "eff": "kimcang",
+    "w": "combat",
+    "d": "Hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "phu_dang_sa_khai_an_phu",
+    "n": "Đằng Sa Khai Ấn Phù",
+    "i": "⚡",
+    "x": 217,
+    "p": 25,
+    "reg": 0,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng tơ cọ vào vỏ. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "moc",
+    "d": "Đánh một đòn {x}% công, hệ Mộc"
+  },
+  {
+    "id": "phu_gio_lua_khai_an_phu",
+    "n": "Gió Lùa Khai Ấn Phù",
+    "i": "⚡",
+    "x": 226,
+    "p": 44,
+    "reg": 0,
+    "lore": "Dưới đèn, nét phù lộ ánh chao như cánh chim. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "phong",
+    "d": "Đánh một đòn {x}% công, hệ Phong"
+  },
+  {
+    "id": "phu_giay_gio_khai_an_phu",
+    "n": "Giấy Gió Khai Ấn Phù",
+    "i": "⚡",
+    "x": 252,
+    "p": 44,
+    "reg": 0,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "vo",
+    "d": "Đánh một đòn {x}% công, hệ Vô"
+  },
+  {
+    "id": "phu_tinh_vu_khai_an_phu",
+    "n": "Tinh Vũ Khai Ấn Phù",
+    "i": "⚡",
+    "x": 201,
+    "p": 26,
+    "reg": 0,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng giọt rơi vào chum. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "thuy",
+    "d": "Đánh một đòn {x}% công, hệ Thủy"
+  },
+  {
+    "id": "phu_tuyet_tu_khai_an_phu",
+    "n": "Tuyết Tụ Khai Ấn Phù",
+    "i": "⚡",
+    "x": 320,
+    "p": 55,
+    "reg": 1,
+    "lore": "Dưới đèn, nét phù lộ ánh xanh trên mặt băng. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "bang",
+    "d": "Đánh một đòn {x}% công, hệ Băng"
+  },
+  {
+    "id": "phu_tu_dien_khai_an_phu",
+    "n": "Tử Điện Khai Ấn Phù",
+    "i": "⚡",
+    "x": 242,
+    "p": 74,
+    "reg": 1,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "loi",
+    "d": "Đánh một đòn {x}% công, hệ Lôi"
+  },
+  {
+    "id": "phu_nhat_ke_khai_an_phu",
+    "n": "Nhất Kệ Khai Ấn Phù",
+    "i": "⚡",
+    "x": 256,
+    "p": 76,
+    "reg": 1,
+    "lore": "Đường vẽ cuối trên giấy còn lưu mùi trầm đọng dưới mái. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "phat",
+    "d": "Đánh một đòn {x}% công, hệ Phật"
+  },
+  {
+    "id": "phu_tho_vu_khai_an_phu",
+    "n": "Thổ Vũ Khai Ấn Phù",
+    "i": "⚡",
+    "x": 255,
+    "p": 70,
+    "reg": 1,
+    "lore": "Dưới đèn, nét phù lộ vệt phấn đá đục. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "tho",
+    "d": "Đánh một đòn {x}% công, hệ Thổ"
+  },
+  {
+    "id": "phu_sa_nhan_khai_an_phu",
+    "n": "Sa Nhận Khai Ấn Phù",
+    "i": "⚡",
+    "x": 295,
+    "p": 106,
+    "reg": 2,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "kim",
+    "d": "Đánh một đòn {x}% công, hệ Kim"
+  },
+  {
+    "id": "phu_dang_tuy_khai_an_phu",
+    "n": "Đăng Tủy Khai Ấn Phù",
+    "i": "⚡",
+    "x": 303,
+    "p": 134,
+    "reg": 2,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng than nổ trong lò. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "hoa",
+    "d": "Đánh một đòn {x}% công, hệ Hỏa"
+  },
+  {
+    "id": "phu_u_to_khai_an_phu",
+    "n": "U Tơ Khai Ấn Phù",
+    "i": "⚡",
+    "x": 291,
+    "p": 136,
+    "reg": 2,
+    "lore": "Dưới đèn, nét phù lộ mùi hương cũ trong buồng kín. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "am",
+    "d": "Đánh một đòn {x}% công, hệ Âm"
+  },
+  {
+    "id": "phu_truc_cham_khai_an_phu",
+    "n": "Trúc Châm Khai Ấn Phù",
+    "i": "⚡",
+    "x": 340,
+    "p": 90,
+    "reg": 2,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "moc",
+    "d": "Đánh một đòn {x}% công, hệ Mộc"
+  },
+  {
+    "id": "phu_thanh_duc_khai_an_phu",
+    "n": "Thanh Dực Khai Ấn Phù",
+    "i": "⚡",
+    "x": 397,
+    "p": 130,
+    "reg": 3,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng gió lọt qua khe. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "phong",
+    "d": "Đánh một đòn {x}% công, hệ Phong"
+  },
+  {
+    "id": "phu_u_huong_khai_an_phu",
+    "n": "U Hương Khai Ấn Phù",
+    "i": "⚡",
+    "x": 389,
+    "p": 193,
+    "reg": 3,
+    "lore": "Dưới đèn, nét phù lộ ánh đen lẫn trong khói. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "am",
+    "d": "Đánh một đòn {x}% công, hệ Âm"
+  },
+  {
+    "id": "phu_mai_ngoi_khai_an_phu",
+    "n": "Mái Ngói Khai Ấn Phù",
+    "i": "⚡",
+    "x": 341,
+    "p": 118,
+    "reg": 3,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "vo",
+    "d": "Đánh một đòn {x}% công, hệ Vô"
+  },
+  {
+    "id": "phu_van_tao_khai_an_phu",
+    "n": "Vân Tảo Khai Ấn Phù",
+    "i": "⚡",
+    "x": 438,
+    "p": 182,
+    "reg": 4,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng giọt rơi vào chum. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "thuy",
+    "d": "Đánh một đòn {x}% công, hệ Thủy"
+  },
+  {
+    "id": "phu_thiet_yen_khai_an_phu",
+    "n": "Thiết Yến Khai Ấn Phù",
+    "i": "⚡",
+    "x": 423,
+    "p": 223,
+    "reg": 4,
+    "lore": "Dưới đèn, nét phù lộ ánh bạc nhạt trên mép. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "kim",
+    "d": "Đánh một đòn {x}% công, hệ Kim"
+  },
+  {
+    "id": "phu_tuyet_sa_khai_an_phu",
+    "n": "Tuyết Sa Khai Ấn Phù",
+    "i": "⚡",
+    "x": 375,
+    "p": 132,
+    "reg": 4,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
+    "eff": "loiphu",
+    "w": "combat",
+    "el": "bang",
+    "d": "Đánh một đòn {x}% công, hệ Băng"
+  },
+  {
+    "id": "phu_tu_dien_thoat_dau_phu",
+    "n": "Tử Điện Thoát Dấu Phù",
+    "i": "🟦",
+    "x": 0,
+    "p": 39,
+    "reg": 0,
+    "lore": "Đường vẽ cuối trên giấy còn lưu tiếng rền như dưới nền nhà. Bóng người mắc lại trên lá phù đúng một hơi.",
+    "eff": "thanhanh",
+    "w": "combat",
+    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+  },
+  {
+    "id": "phu_dia_mien_thoat_dau_phu",
+    "n": "Địa Miên Thoát Dấu Phù",
+    "i": "🟦",
+    "x": 0,
+    "p": 37,
+    "reg": 0,
+    "lore": "Dưới đèn, nét phù lộ mùi đất vỡ sau cơn mưa. Bóng người mắc lại trên lá phù đúng một hơi.",
+    "eff": "thanhanh",
+    "w": "combat",
+    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+  },
+  {
+    "id": "phu_thiet_tam_thoat_dau_phu",
+    "n": "Thiết Tằm Thoát Dấu Phù",
+    "i": "🟦",
+    "x": 0,
+    "p": 86,
+    "reg": 1,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Bóng người mắc lại trên lá phù đúng một hơi.",
+    "eff": "thanhanh",
+    "w": "combat",
+    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+  },
+  {
+    "id": "phu_bang_lan_thoat_dau_phu",
+    "n": "Băng Lân Thoát Dấu Phù",
+    "i": "🟦",
+    "x": 0,
+    "p": 78,
+    "reg": 1,
+    "lore": "Đường vẽ cuối trên giấy còn lưu ánh xanh trên mặt băng. Bóng người mắc lại trên lá phù đúng một hơi.",
+    "eff": "thanhanh",
+    "w": "combat",
+    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+  },
+  {
+    "id": "phu_truc_tuy_thoat_dau_phu",
+    "n": "Trúc Tủy Thoát Dấu Phù",
+    "i": "🟦",
+    "x": 0,
+    "p": 105,
+    "reg": 2,
+    "lore": "Dưới đèn, nét phù lộ những thớ gỗ ướt. Bóng người mắc lại trên lá phù đúng một hơi.",
+    "eff": "thanhanh",
+    "w": "combat",
+    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+  },
+  {
+    "id": "phu_ao_toi_thoat_dau_phu",
+    "n": "Áo Tơi Thoát Dấu Phù",
+    "i": "🟦",
+    "x": 0,
+    "p": 132,
+    "reg": 2,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Bóng người mắc lại trên lá phù đúng một hơi.",
+    "eff": "thanhanh",
+    "w": "combat",
+    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+  },
+  {
+    "id": "phu_diem_sa_thoat_dau_phu",
+    "n": "Diệm Sa Thoát Dấu Phù",
+    "i": "🟦",
+    "x": 0,
+    "p": 136,
+    "reg": 3,
+    "lore": "Đường vẽ cuối trên giấy còn lưu ánh lửa liếm qua mép. Bóng người mắc lại trên lá phù đúng một hơi.",
+    "eff": "thanhanh",
+    "w": "combat",
+    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+  },
+  {
+    "id": "phu_tinh_dang_thoat_dau_phu",
+    "n": "Tịnh Đăng Thoát Dấu Phù",
+    "i": "🟦",
+    "x": 0,
+    "p": 146,
+    "reg": 3,
+    "lore": "Dưới đèn, nét phù lộ hơi ấm như hạt cơm mới. Bóng người mắc lại trên lá phù đúng một hơi.",
+    "eff": "thanhanh",
+    "w": "combat",
+    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+  },
+  {
+    "id": "phu_u_huong_thoat_dau_phu",
+    "n": "U Hương Thoát Dấu Phù",
+    "i": "🟦",
+    "x": 0,
+    "p": 226,
+    "reg": 4,
+    "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Bóng người mắc lại trên lá phù đúng một hơi.",
+    "eff": "thanhanh",
+    "w": "combat",
+    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+  },
+  {
+    "id": "bt_u_to_mo_mach_dan",
+    "n": "U Tơ Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 16,
+    "p": 125,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra mùi hương cũ trong buồng kín. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 16
+    },
+    "d": "Đột phá +{x}%"
+  },
+  {
+    "id": "bt_sam_tat_giu_nguyen_tan",
+    "n": "Sấm Tắt Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 81,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra một ánh chớp xanh. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống"
+  },
+  {
+    "id": "bt_tuyet_tuy_lech_kiep_phu",
+    "n": "Tuyết Tủy Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 68,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra ánh xanh trên mặt băng. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi"
+  },
+  {
+    "id": "bt_tich_thien_don_sam_dan",
+    "n": "Tịch Thiền Đón Sấm Đan",
+    "i": "🟣",
+    "x": 19,
+    "p": 123,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra vết bụi vàng của hương. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 19
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "bt_lieu_nhung_mo_mach_dan",
+    "n": "Liễu Nhung Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 20,
+    "p": 74,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra mùi nhựa vừa rịn. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 20
+    },
+    "d": "Đột phá +{x}%"
+  },
+  {
+    "id": "bt_thau_bac_giu_nguyen_tan",
+    "n": "Thau Bạc Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 64,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra mùi búa mới tôi. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống"
+  },
+  {
+    "id": "bt_day_gai_lech_kiep_phu",
+    "n": "Dây Gai Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 81,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra tiếng cửa gỗ bị gió đẩy. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi"
+  },
+  {
+    "id": "bt_phong_trao_don_sam_dan",
+    "n": "Phong Trạo Đón Sấm Đan",
+    "i": "🟣",
+    "x": 19,
+    "p": 114,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra ánh chao như cánh chim. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 19
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết"
+  },
+  {
+    "id": "bt_tram_nham_lap_co_hoan",
+    "n": "Trầm Nham Lập Cơ Hoàn",
+    "i": "🟡",
+    "x": 2,
+    "p": 64,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra mùi đất vỡ sau cơn mưa. Phần thuốc chìm xuống chậm hơn phần nổi, đợi đạo cơ đứng yên mới tan.",
+    "w": "bt",
+    "bt": {
+      "dao": 2
+    },
+    "d": "Phẩm chất: đạo cơ +{x} khi đột phá"
+  },
+  {
+    "id": "bt_tan_tinh_mo_mach_dan",
+    "n": "Tẫn Tinh Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 20,
+    "p": 74,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra ánh lửa liếm qua mép. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 20
+    },
+    "d": "Đột phá +{x}%"
+  },
+  {
+    "id": "bt_thach_tuy_mo_mach_dan",
+    "n": "Thạch Tủy Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 18,
+    "p": 116,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra vệt phấn đá đục. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 18
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 0
+  },
+  {
+    "id": "bt_suong_dong_giu_nguyen_tan",
+    "n": "Sương Đóng Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 91,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra ánh xanh trên mặt băng. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 0
+  },
+  {
+    "id": "bt_phong_lac_lech_kiep_phu",
+    "n": "Phong Lạc Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 99,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra ánh chao như cánh chim. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 0
+  },
+  {
+    "id": "bt_cuong_mat_don_sam_dan",
+    "n": "Cương Mạt Đón Sấm Đan",
+    "i": "🟣",
+    "x": 21,
+    "p": 87,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra tiếng đồng ngân dưới mưa. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 21
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 0
+  },
+  {
+    "id": "bt_chi_quan_mo_mach_dan",
+    "n": "Chỉ Quán Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 22,
+    "p": 111,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra tiếng mõ ngân rất khẽ. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 22
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 0
+  },
+  {
+    "id": "bt_giay_gio_giu_nguyen_tan",
+    "n": "Giấy Gió Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 124,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra tiếng cửa gỗ bị gió đẩy. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 0
+  },
+  {
+    "id": "bt_mo_dang_lech_kiep_phu",
+    "n": "Mộ Đăng Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 126,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra ánh đen lẫn trong khói. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 0
+  },
+  {
+    "id": "bt_loi_tue_don_sam_dan",
+    "n": "Lôi Tuế Đón Sấm Đan",
+    "i": "🟣",
+    "x": 21,
+    "p": 83,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra mùi vải sém sau tiếng sét. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 21
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 0
+  },
+  {
+    "id": "bt_o_diem_lap_co_hoan",
+    "n": "Ô Diệm Lập Cơ Hoàn",
+    "i": "🟡",
+    "x": 2,
+    "p": 114,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra ánh lửa liếm qua mép. Phần thuốc chìm xuống chậm hơn phần nổi, đợi đạo cơ đứng yên mới tan.",
+    "w": "bt",
+    "bt": {
+      "dao": 2
+    },
+    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "realm": 0
+  },
+  {
+    "id": "bt_lan_giap_mo_mach_dan",
+    "n": "Lan Giáp Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 22,
+    "p": 117,
+    "reg": 0,
+    "lore": "Đặt gần tay có thể nhận ra tiếng tơ cọ vào vỏ. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 22
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 0
+  },
+  {
+    "id": "bt_tuyet_tu_mo_mach_dan",
+    "n": "Tuyết Tụ Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 20,
+    "p": 318,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra ánh xanh trên mặt băng. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 20
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 1
+  },
+  {
+    "id": "bt_o_diem_giu_nguyen_tan",
+    "n": "Ô Diệm Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 279,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra tiếng than nổ trong lò. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 1
+  },
+  {
+    "id": "bt_dia_mien_lech_kiep_phu",
+    "n": "Địa Miên Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 322,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra mùi đất vỡ sau cơn mưa. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 1
+  },
+  {
+    "id": "bt_loi_cot_don_sam_dan",
+    "n": "Lôi Cốt Đón Sấm Đan",
+    "i": "🟣",
+    "x": 23,
+    "p": 190,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra một ánh chớp xanh. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 23
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 1
+  },
+  {
+    "id": "bt_sa_nhan_mo_mach_dan",
+    "n": "Sa Nhận Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 24,
+    "p": 290,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra ánh bạc nhạt trên mép. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 24
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 1
+  },
+  {
+    "id": "bt_truc_tuy_giu_nguyen_tan",
+    "n": "Trúc Tủy Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 241,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra những thớ gỗ ướt. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 1
+  },
+  {
+    "id": "bt_phong_truc_lech_kiep_phu",
+    "n": "Phong Trúc Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 269,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra tiếng lá khô lăn dưới gót. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 1
+  },
+  {
+    "id": "bt_phat_ke_don_sam_dan",
+    "n": "Phật Kệ Đón Sấm Đan",
+    "i": "🟣",
+    "x": 23,
+    "p": 185,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra tiếng mõ ngân rất khẽ. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 23
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 1
+  },
+  {
+    "id": "bt_vong_anh_lap_co_hoan",
+    "n": "Vọng Ảnh Lập Cơ Hoàn",
+    "i": "🟡",
+    "x": 3,
+    "p": 293,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra vệt bóng mọc về phía sáng. Phần thuốc chìm xuống chậm hơn phần nổi, đợi đạo cơ đứng yên mới tan.",
+    "w": "bt",
+    "bt": {
+      "dao": 3
+    },
+    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "realm": 1
+  },
+  {
+    "id": "bt_bui_trau_mo_mach_dan",
+    "n": "Bụi Trấu Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 24,
+    "p": 311,
+    "reg": 1,
+    "lore": "Đặt gần tay có thể nhận ra mùi khói bếp vương lại. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 24
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 1
+  },
+  {
+    "id": "bt_truc_cham_mo_mach_dan",
+    "n": "Trúc Châm Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 22,
+    "p": 770,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra những thớ gỗ ướt. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 22
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 2
+  },
+  {
+    "id": "bt_tuyet_tuy_giu_nguyen_tan",
+    "n": "Tuyết Tủy Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 730,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra mùi rơm lẫn trong tuyết. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 2
+  },
+  {
+    "id": "bt_tich_thien_lech_kiep_phu",
+    "n": "Tịch Thiền Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 590,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra tiếng mõ ngân rất khẽ. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 2
+  },
+  {
+    "id": "bt_da_kien_don_sam_dan",
+    "n": "Dạ Kiển Đón Sấm Đan",
+    "i": "🟣",
+    "x": 25,
+    "p": 633,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra vệt bóng mọc về phía sáng. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 25
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 2
+  },
+  {
+    "id": "bt_canh_lau_mo_mach_dan",
+    "n": "Cành Lau Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 26,
+    "p": 633,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra mùi khói bếp vương lại. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 26
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 2
+  },
+  {
+    "id": "bt_bach_lang_giu_nguyen_tan",
+    "n": "Bạch Lãng Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 659,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra mùi nước mưa đọng trên ngói. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 2
+  },
+  {
+    "id": "bt_loi_sa_lech_kiep_phu",
+    "n": "Lôi Sa Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 487,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra một ánh chớp xanh. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 2
+  },
+  {
+    "id": "bt_mieu_diem_don_sam_dan",
+    "n": "Miêu Diệm Đón Sấm Đan",
+    "i": "🟣",
+    "x": 25,
+    "p": 632,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra vệt tro đỏ. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 25
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 2
+  },
+  {
+    "id": "bt_phong_lac_lap_co_hoan",
+    "n": "Phong Lạc Lập Cơ Hoàn",
+    "i": "🟡",
+    "x": 3,
+    "p": 669,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra ánh chao như cánh chim. Phần thuốc chìm xuống chậm hơn phần nổi, đợi đạo cơ đứng yên mới tan.",
+    "w": "bt",
+    "bt": {
+      "dao": 3
+    },
+    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "realm": 2
+  },
+  {
+    "id": "bt_dia_cot_mo_mach_dan",
+    "n": "Địa Cốt Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 26,
+    "p": 590,
+    "reg": 2,
+    "lore": "Đặt gần tay có thể nhận ra mùi đất vỡ sau cơn mưa. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 26
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 2
+  },
+  {
+    "id": "bt_da_vu_mo_mach_dan",
+    "n": "Dạ Vũ Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 24,
+    "p": 1608,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra mùi nước mưa đọng trên ngói. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 24
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 3
+  },
+  {
+    "id": "bt_dem_canh_giu_nguyen_tan",
+    "n": "Đêm Canh Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 1404,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra vệt bụi từ bờ ruộng. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 3
+  },
+  {
+    "id": "bt_dang_sa_lech_kiep_phu",
+    "n": "Đằng Sa Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 1187,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra tiếng tơ cọ vào vỏ. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 3
+  },
+  {
+    "id": "bt_gio_lua_don_sam_dan",
+    "n": "Gió Lùa Đón Sấm Đan",
+    "i": "🟣",
+    "x": 27,
+    "p": 1662,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra ánh chao như cánh chim. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 27
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 3
+  },
+  {
+    "id": "bt_thiem_quang_mo_mach_dan",
+    "n": "Thiểm Quang Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 28,
+    "p": 1448,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra mùi vải sém sau tiếng sét. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 28
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 3
+  },
+  {
+    "id": "bt_xich_dinh_giu_nguyen_tan",
+    "n": "Xích Đinh Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 1571,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra mùi búa mới tôi. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 3
+  },
+  {
+    "id": "bt_am_tran_lech_kiep_phu",
+    "n": "Âm Trần Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 1441,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra vệt bóng mọc về phía sáng. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 3
+  },
+  {
+    "id": "bt_thach_kien_don_sam_dan",
+    "n": "Thạch Kiển Đón Sấm Đan",
+    "i": "🟣",
+    "x": 27,
+    "p": 1470,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra những vết nứt nhỏ như chân chim. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 27
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 3
+  },
+  {
+    "id": "bt_nhat_ke_lap_co_hoan",
+    "n": "Nhất Kệ Lập Cơ Hoàn",
+    "i": "🟡",
+    "x": 4,
+    "p": 1624,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra mùi trầm đọng dưới mái. Phần thuốc chìm xuống chậm hơn phần nổi, đợi đạo cơ đứng yên mới tan.",
+    "w": "bt",
+    "bt": {
+      "dao": 4
+    },
+    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "realm": 3
+  },
+  {
+    "id": "bt_tuyet_nha_mo_mach_dan",
+    "n": "Tuyết Nha Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 28,
+    "p": 1364,
+    "reg": 3,
+    "lore": "Đặt gần tay có thể nhận ra những hạt băng mịn. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 28
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 3
+  },
+  {
+    "id": "bt_hac_nhung_mo_mach_dan",
+    "n": "Hắc Nhung Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 26,
+    "p": 3603,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra tiếng vải lụa sột soạt dưới đèn. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 26
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 4
+  },
+  {
+    "id": "bt_lan_giap_giu_nguyen_tan",
+    "n": "Lan Giáp Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 4184,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra tiếng tơ cọ vào vỏ. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 4
+  },
+  {
+    "id": "bt_loi_cot_lech_kiep_phu",
+    "n": "Lôi Cốt Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 3271,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra tiếng rền như dưới nền nhà. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 4
+  },
+  {
+    "id": "bt_co_nham_don_sam_dan",
+    "n": "Cổ Nham Đón Sấm Đan",
+    "i": "🟣",
+    "x": 29,
+    "p": 2322,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra mùi đất vỡ sau cơn mưa. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 29
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 4
+  },
+  {
+    "id": "bt_thuy_liem_mo_mach_dan",
+    "n": "Thủy Liêm Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 30,
+    "p": 2561,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra tiếng giọt rơi vào chum. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 30
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 4
+  },
+  {
+    "id": "bt_phan_am_giu_nguyen_tan",
+    "n": "Phạn Âm Giữ Nguyên Tán",
+    "i": "🟤",
+    "x": 1,
+    "p": 3599,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra hơi ấm như hạt cơm mới. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
+    "w": "bt",
+    "bt": {
+      "guard": 1
+    },
+    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "realm": 4
+  },
+  {
+    "id": "bt_dong_mua_lech_kiep_phu",
+    "n": "Đồng Mưa Lệch Kiếp Phù",
+    "i": "🪬",
+    "x": 1,
+    "p": 2315,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra những vảy sắt li ti. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
+    "w": "bt",
+    "bt": {
+      "kiepCut": 1
+    },
+    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "realm": 4
+  },
+  {
+    "id": "bt_tuyet_tuy_don_sam_dan",
+    "n": "Tuyết Tủy Đón Sấm Đan",
+    "i": "🟣",
+    "x": 29,
+    "p": 2603,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra mùi rơm lẫn trong tuyết. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
+    "w": "bt",
+    "bt": {
+      "kiepHp": 29
+    },
+    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "realm": 4
+  },
+  {
+    "id": "bt_bui_trau_lap_co_hoan",
+    "n": "Bụi Trấu Lập Cơ Hoàn",
+    "i": "🟡",
+    "x": 4,
+    "p": 4857,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra vệt bụi từ bờ ruộng. Phần thuốc chìm xuống chậm hơn phần nổi, đợi đạo cơ đứng yên mới tan.",
+    "w": "bt",
+    "bt": {
+      "dao": 4
+    },
+    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "realm": 4
+  },
+  {
+    "id": "bt_phong_mien_mo_mach_dan",
+    "n": "Phong Miên Mở Mạch Đan",
+    "i": "🏵️",
+    "x": 30,
+    "p": 3073,
+    "reg": 4,
+    "lore": "Đặt gần tay có thể nhận ra tiếng gió lọt qua khe. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
+    "w": "bt",
+    "bt": {
+      "rate": 30
+    },
+    "d": "Đột phá +{x}%",
+    "realm": 4
+  }
+]

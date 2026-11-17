@@ -1,0 +1,2 @@
+// Nguồn chuẩn: BAG_CAT. Luật xử lý ở src/game/core2/05-tui-do-gom-moi.js.
+const BAG_CAT={all:contentText("core2_05-tui-do-gom-moi_js.001"),eq:contentText("core2_05-tui-do-gom-moi_js.002"),dan:contentText("core2_05-tui-do-gom-moi_js.003"),duoc:contentText("core2_05-tui-do-gom-moi_js.004"),khoang:contentText("core2_05-tui-do-gom-moi_js.005"),vl:contentText("core2_05-tui-do-gom-moi_js.006"),trung:'Trứng',nv:contentText("core2_05-tui-do-gom-moi_js.007")};

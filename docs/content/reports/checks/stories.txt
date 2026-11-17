@@ -1,0 +1,5 @@
+
+> content:stories
+> node tools/kiem-tra-cot-truyen.js
+
+Đạt: 200 cảnh, 20 chuỗi, 328 đường đi đến kết thúc, 100 cách bỏ đi, lưu/tải và các ca sai nhánh.

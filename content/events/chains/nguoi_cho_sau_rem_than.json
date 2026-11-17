@@ -1,0 +1,520 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_nguoi_cho_sau_rem_than_1",
+      "name": "Hai tiếng ho qua rèm",
+      "kind": "story",
+      "tags": [
+        "Lãng mạn"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma"
+        ],
+        "levels": [
+          3
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người giữ lò",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "oán hồn",
+          "alignment": "context"
+        }
+      },
+      "text": "Người giữ lò {$a.ten} trò chuyện với oán hồn {$b.ten} qua tấm rèm than. Nàng đã chết vì lửa, mỗi khi lão cười nàng lại ho, dù cách tấm rèm còn một sải tay.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Cho họ mượn phù giữ hơi lạnh",
+          "t": "Ngươi dùng phù của nhà lò dẫn hơi lạnh qua rèm, hao linh lực giữ nó tới khi hai người nói hết câu. Nàng thôi ho một lúc, hỏi lão có chịu nghỉ lò sớm được một hôm không.",
+          "cost": {
+            "mp": "20%"
+          },
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "hai tiếng ho qua rèm"
+            ]
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Thu tiếng ho để bán làm mồi dẫn hồn",
+          "t": "Ngươi có vật luyện phù. {$a.ten} kéo ghế lại sát rèm, dỏng tai nghe khoảng trống.",
+          "e": {
+            "karma": -3,
+            "pill": 1,
+            "tamma": 3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Nàng ho một tiếng, lão ho lại một tiếng rất khẽ.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_cho_sau_rem_than_1",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "nguoi_cho_sau_rem_than",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện sống chết",
+      "setting": {
+        "description": "Nhà tro ở Cửu U Ma Vực",
+        "historyCondition": "không"
+      },
+      "emotion": "Lãng mạn"
+    },
+    {
+      "id": "ch_nguoi_cho_sau_rem_than_2",
+      "name": "Lò tắt trước giờ hẹn",
+      "kind": "story",
+      "tags": [
+        "Dịu dàng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma"
+        ],
+        "levels": [
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người giữ lò",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Người giữ lò {$a.ten} muốn tắt lửa để đưa nàng ra sân. Lão đã xếp củi thành hai hàng, chừa giữa sân một khoảng trống như lối đi.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Giữ lửa trong đan điền đến khi họ gặp",
+          "t": "Ngươi thu lửa lò vào khí hải, chịu nóng cho tới khi hai người gặp nhau ngoài sân. Nàng đi chậm, lão cũng đi chậm theo. Hết buổi, họ tự quay lại, không để ngươi phải gọi.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "lò tắt trước giờ hẹn"
+            ],
+            "hp": "-10%"
+          },
+          "cost": {
+            "mp": "20%"
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Nhận củi tốt, giúp họ dọn một chỗ nghỉ dưới hiên",
+          "t": "Ngươi nhận phần củi lão trả công, lấy linh lực ép lại thành một viên hỏa đan mang đi. Chỗ dưới hiên đủ mát để hai người ngồi gần nhau, dù nàng chưa bước được ra sân.",
+          "e": {
+            "karma": -2,
+            "pill": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão chừa lối đi tới khi củi nguội hẳn.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_cho_sau_rem_than_2",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "nguoi_cho_sau_rem_than",
+        "part": "2",
+        "waitHours": 2160,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Lời hẹn",
+      "setting": {
+        "description": "Sân hong củi ở Cửu U Ma Vực",
+        "historyCondition": "phần 1 chọn “Cho họ mượn phù giữ hơi lạnh” · vài tháng sau · sân hong củi"
+      },
+      "emotion": "Dịu dàng"
+    },
+    {
+      "id": "ch_nguoi_cho_sau_rem_than_2b",
+      "name": "Người gọi nhầm tiếng",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma"
+        ],
+        "levels": [
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "người giữ lò",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Oán hồn",
+          "alignment": "context"
+        }
+      },
+      "text": "Tiếng ho bị bán dẫn một đoàn hồn lạc vào lò. Oán hồn {$b.ten} đứng lẫn trong đoàn, người giữ lò {$a.ten} đưa tay mời từng người nhưng ghế chỉ có một.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Mua lại tiếng ho và trả vào rèm",
+          "t": "Ngươi trả hơn khoản bán ban đầu để chuộc tiếng ho, đưa về cho nàng. Nàng gọi được tên từng hồn lạc, chỉ họ lối ra khỏi lò. Người giữ lò chờ người cuối đi rồi mới kéo ghế lại.",
+          "cost": {
+            "st": 19
+          },
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "người gọi nhầm tiếng"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Mượn lại tiếng ho để dẫn đoàn hồn tới chỗ nghỉ",
+          "t": "Ngươi xin mượn vật dẫn hồn, đưa cả đoàn rời lò rồi trả vật cho người mua. Nàng vẫn chưa lấy lại tiếng nói. Người giữ lò mang ghế theo, để nàng có chỗ chờ lúc dừng đường.",
+          "e": {
+            "karma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão đặt ghế bên đường. Người ngồi xuống đầu tiên quay mặt sai phía.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_cho_sau_rem_than_2b",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "nguoi_cho_sau_rem_than",
+        "part": "2b",
+        "waitHours": 2160,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Hậu quả luyện phù",
+      "setting": {
+        "description": "Đường khói ở Cửu U Ma Vực",
+        "historyCondition": "phần 1 chọn “Thu tiếng ho để bán làm mồi dẫn hồn” · vài tháng sau · đường khói cũ"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_nguoi_cho_sau_rem_than_3",
+      "name": "Vực có gió làm tắt lửa",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma"
+        ],
+        "levels": [
+          3,
+          4
+        ],
+        "time": {
+          "season": [
+            "dong"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Oán hồn",
+          "alignment": "context"
+        }
+      },
+      "text": "Oán hồn {$b.ten} đã tìm được đường rời ma vực. Nếu nàng chưa từng mất giọng hoặc đã được trả tiếng ho, nàng hỏi người giữ lò có muốn tiễn mình không. Nếu tiếng ho vẫn thuộc người khác, nàng viết lời từ biệt lên lớp tro trên ghế. Lão đọc xong, nhờ ngươi giữ gió bớt lạnh một đoạn để mình theo được nàng.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Giữ luồng gió để họ đi cạnh nhau",
+          "t": "Ngươi dùng pháp lực chắn gió, để lão tiễn nàng tới cuối đoạn đường người sống còn đi được. Hai người tự nói lời từ biệt. Khi nàng đi tiếp, lão đứng nhìn một lúc rồi nhờ ngươi cùng trở lên.",
+          "cost": {
+            "mp": "20%"
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Thu một luồng gió để chữa cơn ho trong hồn",
+          "t": "Nàng lấy lại hơi đủ nói lời cuối, nhưng phải đi một mình. Lão để ghế trống suốt quãng đường lên.",
+          "e": {
+            "karma": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi nghe một tiếng ho lẫn trong gió, lần này rất xa.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_cho_sau_rem_than_3",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "nguoi_cho_sau_rem_than",
+        "part": "3",
+        "waitHours": 4320,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2:1",
+            "2b:0"
+          ],
+          [
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Lời chia tay",
+      "setting": {
+        "description": "Vực gió ở Cửu U Ma Vực",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · mùa lạnh sau · lối xuống vực gió"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_nguoi_cho_sau_rem_than_4",
+      "name": "Lửa nhỏ qua đêm",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma"
+        ],
+        "levels": [
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu lão đã tiễn nàng, lão đặt ghế nhìn ra đường. Nếu nàng rời đi một mình, ghế quay về phía rèm, nhưng lão đã tháo hết những hạt than cũ.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp lửa cho quán đón cả người sống lẫn hồn",
+          "t": "Ngươi để lại một phần khí dưỡng thần. Lão đặt hai cái chén ở hai đầu ghế.",
+          "cost": {
+            "st": 19,
+            "mp": "20%"
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua tấm rèm cũ để giữ hơi của hồn",
+          "t": "Ngươi luyện được một vật che dương khí. Lão treo rèm mới, ngang chỗ cũ còn một vệt tro.",
+          "cost": {
+            "st": 19
+          },
+          "e": {
+            "namedRelic": {
+              "k": "phu",
+              "name": "Phù Rèm Tro",
+              "lore": "Ngươi luyện được một vật che dương khí. Lão treo rèm mới, ngang chỗ cũ còn một vệt tro."
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão gọi ngươi ghé quán lúc trở về. Khách mới tới, lão đứng lên đón, hỏi họ muốn ngồi gần lửa hay ngoài hiên.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_nguoi_cho_sau_rem_than_4",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "nguoi_cho_sau_rem_than",
+        "part": "4",
+        "waitHours": 8640,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện người ở lại",
+      "setting": {
+        "description": "Quán lửa ở Cửu U Ma Vực",
+        "historyCondition": "phần 3 chọn “Giữ luồng gió để họ đi cạnh nhau” hoặc “Thu một luồng gió để chữa cơn ho trong hồn” · năm sau · quán lửa của người đi đường"
+      },
+      "emotion": "Lắng dịu"
+    }
+  ]
+}

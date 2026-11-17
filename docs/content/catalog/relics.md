@@ -1,0 +1,18582 @@
+# relics
+
+Nguồn: `content/catalog/relics.json`
+
+## Đạp Vân Ngoa — `giay_dapvan`
+
+```json
+{
+  "id": "giay_dapvan",
+  "n": "Đạp Vân Ngoa",
+  "k": "ngoa",
+  "el": "phong",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tp": 3,
+    "dodge": 4.3,
+    "mpP": 9.3
+  },
+  "lore": "Đế giày thêu mây, bước nhẹ như không chạm đất.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Điện Trầm — `giay_dap_van_ngoa_dien_tram`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_dien_tram",
+  "n": "Đạp Vân Ngoa Điện Trầm",
+  "k": "ngoa",
+  "el": "loi",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tp": 3,
+    "dodge": 2.9
+  },
+  "lore": "Dọc gót ngoa có thể nhận ra một ánh chớp xanh. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ngoa Tuyết Tụ — `giay_ngoa_tuyet_tu`
+
+```json
+{
+  "id": "giay_ngoa_tuyet_tu",
+  "n": "Ngoa Tuyết Tụ",
+  "k": "ngoa",
+  "el": "bang",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 4
+  },
+  "lore": "Thứ đọng lại trên viền đế gợi mùi rơm lẫn trong tuyết. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Vân Hài Lạc Hà — `giay_van_hai_tra_ve_ben_cu`
+
+```json
+{
+  "id": "giay_van_hai_tra_ve_ben_cu",
+  "n": "Vân Hài Lạc Hà",
+  "k": "ngoa",
+  "el": "hoa",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "tp": 4,
+    "dodge": 3.2
+  },
+  "lore": "Người chở đò để ngửa lòng bàn tay khi nghe tên người chết. Chỗ mũi hài vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện trả lời gọi đò trong sương",
+  "status": "active"
+}
+```
+
+## Ngoa Nhất Kệ — `giay_ngoa_nhat_ke`
+
+```json
+{
+  "id": "giay_ngoa_nhat_ke",
+  "n": "Ngoa Nhất Kệ",
+  "k": "ngoa",
+  "el": "phat",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tp": 3,
+    "dodge": 3
+  },
+  "lore": "Một đường rạn chia viền đế làm hai, bên trong còn giữ hơi ấm như hạt cơm mới.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Thiết Tằm — `giay_dap_van_ngoa_thiet_tam`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_thiet_tam",
+  "n": "Đạp Vân Ngoa Thiết Tằm",
+  "k": "ngoa",
+  "el": "kim",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 3.3
+  },
+  "lore": "Đưa gót ngoa lại gần ngọn đèn sẽ nhận ra mùi búa mới tôi. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Vân Hài Thực Ảnh — `giay_van_hai_thuc_anh`
+
+```json
+{
+  "id": "giay_van_hai_thuc_anh",
+  "n": "Vân Hài Thực Ảnh",
+  "k": "ngoa",
+  "el": "am",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tp": 3,
+    "dodge": 2.7
+  },
+  "lore": "Chạm nhẹ vào mũi hài, có thể nhận ra mùi hương cũ trong buồng kín.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ngoa Đá Lún — `giay_ngoa_da_lun`
+
+```json
+{
+  "id": "giay_ngoa_da_lun",
+  "n": "Ngoa Đá Lún",
+  "k": "ngoa",
+  "el": "tho",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 3.3
+  },
+  "lore": "Úp viền đế về phía đất vẫn nhận ra những vết nứt nhỏ như chân chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Áo Tơi — `giay_dap_van_ngoa_ao_toi`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_ao_toi",
+  "n": "Đạp Vân Ngoa Áo Tơi",
+  "k": "ngoa",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 3.9
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, tiếng cửa gỗ bị gió đẩy còn vương ở gót ngoa.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Vân Hài Thu Thủy — `giay_van_hai_dem_ho_nguoi_xa`
+
+```json
+{
+  "id": "giay_van_hai_dem_ho_nguoi_xa",
+  "n": "Vân Hài Thu Thủy",
+  "k": "ngoa",
+  "el": "phong",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "tp": 4,
+    "dodge": 4,
+    "mpP": 8.8
+  },
+  "lore": "Người giữ gạo đong thiếu một gáo để khách nghèo khỏi ngại. Đến giờ mũi hài còn giữ vệt bụi uốn quanh mép.",
+  "src": "Sự kiện cân lại túi gạo ở kho",
+  "status": "active"
+}
+```
+
+## Ngoa Tảo Huyền — `giay_ngoa_tao_huyen`
+
+```json
+{
+  "id": "giay_ngoa_tao_huyen",
+  "n": "Ngoa Tảo Huyền",
+  "k": "ngoa",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tp": 5,
+    "dodge": 4,
+    "defP": 13.7
+  },
+  "lore": "Trời vừa đổi gió, ghé gần viền đế có thể nhận ra vị mặn đọng trên môi.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Vân Hài Mộc Miên — `giay_van_hai_moc_mien`
+
+```json
+{
+  "id": "giay_van_hai_moc_mien",
+  "n": "Vân Hài Mộc Miên",
+  "k": "ngoa",
+  "el": "moc",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tp": 5,
+    "dodge": 4.8,
+    "mpP": 13.7
+  },
+  "lore": "Đặt cạnh cửa sổ, mũi hài để lộ những thớ gỗ ướt mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Dạ Kiển — `giay_dap_van_ngoa_da_kien`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_da_kien",
+  "n": "Đạp Vân Ngoa Dạ Kiển",
+  "k": "ngoa",
+  "el": "am",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 3.3,
+    "mpP": 8.5
+  },
+  "lore": "Ở gót ngoa có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp vệt bóng mọc về phía sáng.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Vân Hài Lôi Vũ — `giay_van_hai_loi_vu`
+
+```json
+{
+  "id": "giay_van_hai_loi_vu",
+  "n": "Vân Hài Lôi Vũ",
+  "k": "ngoa",
+  "el": "loi",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tp": 5,
+    "dodge": 4.5,
+    "mpP": 13.9
+  },
+  "lore": "Dọc mũi hài có thể nhận ra một ánh chớp xanh. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Bạch Đống — `giay_dap_van_ngoa_bach_dong`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_bach_dong",
+  "n": "Đạp Vân Ngoa Bạch Đống",
+  "k": "ngoa",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tp": 5,
+    "dodge": 5,
+    "mpP": 12.7
+  },
+  "lore": "Thứ đọng lại trên gót ngoa gợi mùi rơm lẫn trong tuyết. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ngoa Ngân Hà — `giay_ngoa_nghe_thay_tieng_ve`
+
+```json
+{
+  "id": "giay_ngoa_nghe_thay_tieng_ve",
+  "n": "Ngoa Ngân Hà",
+  "k": "ngoa",
+  "el": "hoa",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "tp": 4,
+    "dodge": 4,
+    "defP": 9.4
+  },
+  "lore": "{who} gói nắm thóc giống cuối đem qua bờ lũ. Chỗ viền đế vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện đưa thóc giống qua lũ",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Chim Vờn — `giay_dap_van_ngoa_chim_von`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_chim_von",
+  "n": "Đạp Vân Ngoa Chim Vờn",
+  "k": "ngoa",
+  "el": "phong",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 3.6,
+    "mpP": 8.8
+  },
+  "lore": "Một đường rạn chia gót ngoa làm hai, bên trong còn giữ tiếng gió lọt qua khe.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ngoa Mai Trầm — `giay_ngoa_mai_tram`
+
+```json
+{
+  "id": "giay_ngoa_mai_tram",
+  "n": "Ngoa Mai Trầm",
+  "k": "ngoa",
+  "el": "moc",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 3.6,
+    "defP": 10.4
+  },
+  "lore": "Đưa viền đế lại gần ngọn đèn sẽ nhận ra vệt phấn hoa vàng nhạt. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Vân Hài Tấm Mành — `giay_van_hai_tam_manh`
+
+```json
+{
+  "id": "giay_van_hai_tam_manh",
+  "n": "Vân Hài Tấm Mành",
+  "k": "ngoa",
+  "el": "vo",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 5.2,
+    "mpP": 14.6
+  },
+  "lore": "Chạm nhẹ vào mũi hài, có thể nhận ra mùi nắng trên vải mộc.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Vân Hài Trì Châu — `giay_van_hai_tri_chau`
+
+```json
+{
+  "id": "giay_van_hai_tri_chau",
+  "n": "Vân Hài Trì Châu",
+  "k": "ngoa",
+  "el": "thuy",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tp": 7,
+    "dodge": 5.9,
+    "mpP": 18.8
+  },
+  "lore": "Úp mũi hài về phía đất vẫn nhận ra vị mặn đọng trên môi. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Ngoa Tích Thổ — `giay_ngoa_tich_tho`
+
+```json
+{
+  "id": "giay_ngoa_tich_tho",
+  "n": "Ngoa Tích Thổ",
+  "k": "ngoa",
+  "el": "tho",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tp": 6,
+    "dodge": 6.7,
+    "defP": 18.5
+  },
+  "lore": "Lúc chạng vạng trên bến triều, tiếng cát lọt qua kẽ còn vương ở viền đế.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Huyền Quang — `giay_dap_van_ngoa_nhat_sau_hoi_mo`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_nhat_sau_hoi_mo",
+  "n": "Đạp Vân Ngoa Huyền Quang",
+  "k": "ngoa",
+  "el": "kim",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "tp": 5,
+    "dodge": 5.4,
+    "critDmg": 13.2
+  },
+  "lore": "Người cắt tóc chừa một sợi bạc trong lược của mẹ. Đến giờ gót ngoa còn giữ mùi búa mới tôi.",
+  "src": "Sự kiện gỡ sợi tóc khỏi lược gỗ",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Thiền Thạch — `giay_dap_van_ngoa_thien_thach`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_thien_thach",
+  "n": "Đạp Vân Ngoa Thiền Thạch",
+  "k": "ngoa",
+  "el": "phat",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 4.5,
+    "mpP": 13.4
+  },
+  "lore": "Trời vừa đổi gió, ghé gần gót ngoa có thể nhận ra vết bụi vàng của hương.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Ngoa Tử Điện — `giay_ngoa_tu_dien`
+
+```json
+{
+  "id": "giay_ngoa_tu_dien",
+  "n": "Ngoa Tử Điện",
+  "k": "ngoa",
+  "el": "loi",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tp": 7,
+    "dodge": 6.2,
+    "defP": 15.4
+  },
+  "lore": "Đặt cạnh cửa sổ, viền đế để lộ tiếng rền như dưới nền nhà mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Vân Hài Tẫn Nham — `giay_van_hai_tan_nham`
+
+```json
+{
+  "id": "giay_van_hai_tan_nham",
+  "n": "Vân Hài Tẫn Nham",
+  "k": "ngoa",
+  "el": "hoa",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tp": 4,
+    "dodge": 4.8,
+    "mpP": 12.3,
+    "van": 2
+  },
+  "lore": "Ở mũi hài có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp vệt tro đỏ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngoa Mực Nâu — `giay_ngoa_muc_nau`
+
+```json
+{
+  "id": "giay_ngoa_muc_nau",
+  "n": "Ngoa Mực Nâu",
+  "k": "ngoa",
+  "el": "vo",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tp": 5,
+    "dodge": 4.4,
+    "defP": 11.6,
+    "hpP": 9.6
+  },
+  "lore": "Dọc viền đế có thể nhận ra vệt bụi từ bờ ruộng. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Vân Hài Hoàng Sa — `giay_van_hai_ven_mot_goc_rem`
+
+```json
+{
+  "id": "giay_van_hai_ven_mot_goc_rem",
+  "n": "Vân Hài Hoàng Sa",
+  "k": "ngoa",
+  "el": "bang",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "tp": 8,
+    "dodge": 7,
+    "mpP": 19.3,
+    "defP": 16.5
+  },
+  "lore": "{who} buộc dây gai vào chân chim cho nó tìm đúng mái ngói. Dưới mũi hài còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện tháo dây chân chim",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Trúc Tủy — `giay_dap_van_ngoa_truc_tuy`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_truc_tuy",
+  "n": "Đạp Vân Ngoa Trúc Tủy",
+  "k": "ngoa",
+  "el": "moc",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tp": 7,
+    "dodge": 7.6,
+    "mpP": 17.7,
+    "van": 2
+  },
+  "lore": "Người giữ trước từng lau gót ngoa bằng vải ướt. Đến giờ vẫn còn những thớ gỗ ướt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngoa Thổ Phách — `giay_ngoa_tho_phach`
+
+```json
+{
+  "id": "giay_ngoa_tho_phach",
+  "n": "Ngoa Thổ Phách",
+  "k": "ngoa",
+  "el": "tho",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tp": 7,
+    "dodge": 8.6,
+    "defP": 21.6,
+    "hpP": 16.4
+  },
+  "lore": "Một đường rạn chia viền đế làm hai, bên trong còn giữ tiếng cát lọt qua kẽ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Lạch Sương — `giay_dap_van_ngoa_lach_suong`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_lach_suong",
+  "n": "Đạp Vân Ngoa Lạch Sương",
+  "k": "ngoa",
+  "el": "thuy",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tp": 9,
+    "dodge": 7.8,
+    "mpP": 21.8,
+    "van": 2
+  },
+  "lore": "Đưa gót ngoa lại gần ngọn đèn sẽ nhận ra tiếng giọt rơi vào chum. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Vân Hài Vũ Phong — `giay_van_hai_vu_phong`
+
+```json
+{
+  "id": "giay_van_hai_vu_phong",
+  "n": "Vân Hài Vũ Phong",
+  "k": "ngoa",
+  "el": "phong",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tp": 7,
+    "dodge": 8.6,
+    "mpP": 22.4,
+    "van": 3
+  },
+  "lore": "Chạm nhẹ vào mũi hài, có thể nhận ra tiếng lá khô lăn dưới gót.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngoa U Hương — `giay_ngoa_u_huong`
+
+```json
+{
+  "id": "giay_ngoa_u_huong",
+  "n": "Ngoa U Hương",
+  "k": "ngoa",
+  "el": "am",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tp": 6,
+    "dodge": 5.9,
+    "defP": 15.9,
+    "hpP": 11.7
+  },
+  "lore": "Úp viền đế về phía đất vẫn nhận ra ánh đen lẫn trong khói. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Vân Hài Kim Tuyến — `giay_van_hai_goi_trong_vat_ao`
+
+```json
+{
+  "id": "giay_van_hai_goi_trong_vat_ao",
+  "n": "Vân Hài Kim Tuyến",
+  "k": "ngoa",
+  "el": "phat",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "tp": 7,
+    "dodge": 7.9,
+    "mpP": 18,
+    "van": 2
+  },
+  "lore": "{who} viết tên bạn lên cái nong trước ngày phơi mẻ lúa cuối. Thỉnh thoảng mũi hài còn thoảng mùi trầm đọng dưới mái.",
+  "src": "Sự kiện nhấc nong khi trời đổ mưa",
+  "status": "active"
+}
+```
+
+## Kim Tước Đạp Vân Ngoa — `giay_kim_tuoc_dap_van_ngoa`
+
+```json
+{
+  "id": "giay_kim_tuoc_dap_van_ngoa",
+  "n": "Kim Tước Đạp Vân Ngoa",
+  "k": "ngoa",
+  "el": "kim",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tp": 7,
+    "dodge": 7.2,
+    "mpP": 18.3,
+    "critDmg": 17.8
+  },
+  "lore": "Vào giờ sương rơi, ghé gần gót ngoa nhận ra mùi búa mới tôi. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Hoa Thiếc — `giay_dap_van_ngoa_hoa_thiec`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_hoa_thiec",
+  "n": "Đạp Vân Ngoa Hoa Thiếc",
+  "k": "ngoa",
+  "el": "kim",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tp": 9,
+    "dodge": 7.6,
+    "mpP": 23,
+    "defP": 18.2
+  },
+  "lore": "Trời vừa đổi gió, ghé gần gót ngoa có thể nhận ra những vảy sắt li ti.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Liên Tịch Vân Hài — `giay_lien_tich_van_hai`
+
+```json
+{
+  "id": "giay_lien_tich_van_hai",
+  "n": "Liên Tịch Vân Hài",
+  "k": "ngoa",
+  "el": "phat",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tp": 8,
+    "dodge": 8.6,
+    "mpP": 23,
+    "tam": 3
+  },
+  "lore": "Đặt cạnh cửa sổ, mũi hài để lộ vết bụi vàng của hương mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngoa Đêm Canh — `giay_ngoa_dem_canh`
+
+```json
+{
+  "id": "giay_ngoa_dem_canh",
+  "n": "Ngoa Đêm Canh",
+  "k": "ngoa",
+  "el": "vo",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tp": 11,
+    "dodge": 9.1,
+    "defP": 26.7,
+    "hpP": 20.2
+  },
+  "lore": "Ở viền đế có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cửa gỗ bị gió đẩy.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đằng Sa Ngoa — `giay_dang_sa_ngoa`
+
+```json
+{
+  "id": "giay_dang_sa_ngoa",
+  "n": "Đằng Sa Ngoa",
+  "k": "ngoa",
+  "el": "moc",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tp": 9,
+    "dodge": 7.9,
+    "defP": 24.7,
+    "hpP": 18
+  },
+  "lore": "Dọc viền đế có thể nhận ra vệt phấn hoa vàng nhạt. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đạp Vân Ngoa Thanh Liên — `giay_dap_van_ngoa_chua_kip_qua_cau`
+
+```json
+{
+  "id": "giay_dap_van_ngoa_chua_kip_qua_cau",
+  "n": "Đạp Vân Ngoa Thanh Liên",
+  "k": "ngoa",
+  "el": "thuy",
+  "t": 5,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "tp": 12,
+    "dodge": 15.2,
+    "mpP": 39.8,
+    "van": 4,
+    "defP": 33.7
+  },
+  "lore": "Người thổi sáo bỏ ngỏ một lỗ cho đứa trẻ mới học. Dưới gót ngoa còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện vá lại ống sáo ở hiên",
+  "status": "active"
+}
+```
+
+## Tuyết Vĩ Vân Hài — `giay_tuyet_vi_van_hai`
+
+```json
+{
+  "id": "giay_tuyet_vi_van_hai",
+  "n": "Tuyết Vĩ Vân Hài",
+  "k": "ngoa",
+  "el": "bang",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tp": 10,
+    "dodge": 8.8,
+    "mpP": 30.2,
+    "defP": 25.2,
+    "van": 4
+  },
+  "lore": "Người giữ trước từng lau mũi hài bằng vải ướt. Đến giờ vẫn còn tiếng sương đóng lách tách.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Vân Hài Hỏa Lân — `giay_van_hai_hoa_lan`
+
+```json
+{
+  "id": "giay_van_hai_hoa_lan",
+  "n": "Vân Hài Hỏa Lân",
+  "k": "ngoa",
+  "el": "hoa",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tp": 7,
+    "dodge": 8.6,
+    "mpP": 20,
+    "van": 3,
+    "atkP": 14.4
+  },
+  "lore": "Một đường rạn chia mũi hài làm hai, bên trong còn giữ vệt tro đỏ.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Băng Vũ — `giap_nhuyen_giap_bang_vu`
+
+```json
+{
+  "id": "giap_nhuyen_giap_bang_vu",
+  "n": "Nhuyễn Giáp Băng Vũ",
+  "k": "giap",
+  "el": "bang",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 24.8
+  },
+  "lore": "Vào giờ sương rơi, ghé gần đường đan sát sườn nhận ra những hạt băng mịn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Giáp Thạch Diệm — `giap_giap_thach_diem`
+
+```json
+{
+  "id": "giap_giap_thach_diem",
+  "n": "Giáp Thạch Diệm",
+  "k": "giap",
+  "el": "hoa",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 20.3
+  },
+  "lore": "Trời vừa đổi gió, ghé gần miếng che ngực có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Thanh Đồng — `giap_nhuyen_giap_tim_ve_qua_mua`
+
+```json
+{
+  "id": "giap_nhuyen_giap_tim_ve_qua_mua",
+  "n": "Nhuyễn Giáp Thanh Đồng",
+  "k": "giap",
+  "el": "kim",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "defP": 21.4,
+    "blockTurn": 3.6
+  },
+  "lore": "Người cắt tóc chừa một sợi bạc trong lược của mẹ. Chỗ đường đan sát sườn vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện gỡ sợi tóc khỏi lược gỗ",
+  "status": "active"
+}
+```
+
+## Giáp Hồn Trầm — `giap_giap_hon_tram`
+
+```json
+{
+  "id": "giap_giap_hon_tram",
+  "n": "Giáp Hồn Trầm",
+  "k": "giap",
+  "el": "am",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 28.1
+  },
+  "lore": "Ở miếng che ngực có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp vệt bóng mọc về phía sáng.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Tích Thổ — `giap_nhuyen_giap_tich_tho`
+
+```json
+{
+  "id": "giap_nhuyen_giap_tich_tho",
+  "n": "Nhuyễn Giáp Tích Thổ",
+  "k": "giap",
+  "el": "tho",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 18.2
+  },
+  "lore": "Dọc đường đan sát sườn có thể nhận ra vệt phấn đá đục. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Giáp Thiền Thạch — `giap_giap_thien_thach`
+
+```json
+{
+  "id": "giap_giap_thien_thach",
+  "n": "Giáp Thiền Thạch",
+  "k": "giap",
+  "el": "phat",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 21.6
+  },
+  "lore": "Thứ đọng lại trên miếng che ngực gợi mùi trầm đọng dưới mái. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Giáp Phong Mạch — `giap_giap_phong_mach`
+
+```json
+{
+  "id": "giap_giap_phong_mach",
+  "n": "Giáp Phong Mạch",
+  "k": "giap",
+  "el": "phong",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 19.1
+  },
+  "lore": "Người giữ trước từng lau miếng che ngực bằng vải ướt. Đến giờ vẫn còn ánh chao như cánh chim.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Cỏ Rạ — `giap_nhuyen_giap_co_ra`
+
+```json
+{
+  "id": "giap_nhuyen_giap_co_ra",
+  "n": "Nhuyễn Giáp Cỏ Rạ",
+  "k": "giap",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 26.4
+  },
+  "lore": "Một đường rạn chia đường đan sát sườn làm hai, bên trong còn giữ tiếng cửa gỗ bị gió đẩy.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Giáp Tuyết Linh — `giap_giap_giu_cho_ben_hien`
+
+```json
+{
+  "id": "giap_giap_giu_cho_ben_hien",
+  "n": "Giáp Tuyết Linh",
+  "k": "giap",
+  "el": "loi",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "defP": 29.5,
+    "hoTam": 7
+  },
+  "lore": "Người thợ vá áo đếm từng mũi kim theo nhịp chân con. Đến giờ miếng che ngực còn giữ một ánh chớp xanh.",
+  "src": "Sự kiện đem áo vá đến trạm ngựa",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Vũ Tuyền — `giap_nhuyen_giap_vu_tuyen`
+
+```json
+{
+  "id": "giap_nhuyen_giap_vu_tuyen",
+  "n": "Nhuyễn Giáp Vũ Tuyền",
+  "k": "giap",
+  "el": "thuy",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 27.1
+  },
+  "lore": "Chạm nhẹ vào đường đan sát sườn, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Trúc Tủy — `giap_nhuyen_giap_truc_tuy`
+
+```json
+{
+  "id": "giap_nhuyen_giap_truc_tuy",
+  "n": "Nhuyễn Giáp Trúc Tủy",
+  "k": "giap",
+  "el": "moc",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 22.9
+  },
+  "lore": "Úp đường đan sát sườn về phía đất vẫn nhận ra những thớ gỗ ướt. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Giáp Gió Mỏng — `giap_giap_gio_mong`
+
+```json
+{
+  "id": "giap_giap_gio_mong",
+  "n": "Giáp Gió Mỏng",
+  "k": "giap",
+  "el": "phong",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 19.6
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, tiếng gió lọt qua khe còn vương ở miếng che ngực.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Giáp Đồng Mưa — `giap_giap_dong_mua`
+
+```json
+{
+  "id": "giap_giap_dong_mua",
+  "n": "Giáp Đồng Mưa",
+  "k": "giap",
+  "el": "kim",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 19.1,
+    "hpP": 6.5
+  },
+  "lore": "Vào giờ sương rơi, ghé gần miếng che ngực nhận ra mùi búa mới tôi. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Lôi Mạch — `giap_nhuyen_giap_loi_mach`
+
+```json
+{
+  "id": "giap_nhuyen_giap_loi_mach",
+  "n": "Nhuyễn Giáp Lôi Mạch",
+  "k": "giap",
+  "el": "loi",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 24.8,
+    "dodge": 4.2
+  },
+  "lore": "Trời vừa đổi gió, ghé gần đường đan sát sườn có thể nhận ra tiếng rền như dưới nền nhà.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Xuân Sinh — `giap_nhuyen_giap_giau_mot_loi_dan`
+
+```json
+{
+  "id": "giap_nhuyen_giap_giau_mot_loi_dan",
+  "n": "Nhuyễn Giáp Xuân Sinh",
+  "k": "giap",
+  "el": "phat",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "defP": 35.5,
+    "hpP": 10
+  },
+  "lore": "Người chở đò để ngửa lòng bàn tay khi nghe tên người chết. Chỗ đường đan sát sườn vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện trả lời gọi đò trong sương",
+  "status": "active"
+}
+```
+
+## Giáp Mái Ngói — `giap_giap_mai_ngoi`
+
+```json
+{
+  "id": "giap_giap_mai_ngoi",
+  "n": "Giáp Mái Ngói",
+  "k": "giap",
+  "el": "vo",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 28.1,
+    "hpP": 7.7
+  },
+  "lore": "Ở miếng che ngực có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cửa gỗ bị gió đẩy.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Vỏ Du — `giap_nhuyen_giap_vo_du`
+
+```json
+{
+  "id": "giap_nhuyen_giap_vo_du",
+  "n": "Nhuyễn Giáp Vỏ Du",
+  "k": "giap",
+  "el": "moc",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 22.9,
+    "hpP": 8.2
+  },
+  "lore": "Dọc đường đan sát sườn có thể nhận ra vệt phấn hoa vàng nhạt. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Giáp Âm Mạch — `giap_giap_am_mach`
+
+```json
+{
+  "id": "giap_giap_am_mach",
+  "n": "Giáp Âm Mạch",
+  "k": "giap",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 28.8,
+    "hpP": 9.1
+  },
+  "lore": "Thứ đọng lại trên miếng che ngực gợi mùi hương cũ trong buồng kín. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Hỏa Tủy — `giap_nhuyen_giap_hoa_tuy`
+
+```json
+{
+  "id": "giap_nhuyen_giap_hoa_tuy",
+  "n": "Nhuyễn Giáp Hỏa Tủy",
+  "k": "giap",
+  "el": "hoa",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 28.8,
+    "hpP": 9.3
+  },
+  "lore": "Người giữ trước từng lau đường đan sát sườn bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Giáp Trầm Nham — `giap_giap_tram_nham`
+
+```json
+{
+  "id": "giap_giap_tram_nham",
+  "n": "Giáp Trầm Nham",
+  "k": "giap",
+  "el": "tho",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 25.5,
+    "hpP": 8.2
+  },
+  "lore": "Một đường rạn chia miếng che ngực làm hai, bên trong còn giữ tiếng cát lọt qua kẽ.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Giáp Thanh Sương — `giap_giap_quen_cat_vao_nha`
+
+```json
+{
+  "id": "giap_giap_quen_cat_vao_nha",
+  "n": "Giáp Thanh Sương",
+  "k": "giap",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "defP": 31.8,
+    "hpP": 8.8,
+    "startBlock": 18.4
+  },
+  "lore": "Người cất rượu để một vò nhạt cho người bệnh mới khỏi. Đến giờ miếng che ngực còn giữ những hạt băng mịn.",
+  "src": "Sự kiện mở vò rượu dưới tấm phản",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Trì Châu — `giap_nhuyen_giap_tri_chau`
+
+```json
+{
+  "id": "giap_nhuyen_giap_tri_chau",
+  "n": "Nhuyễn Giáp Trì Châu",
+  "k": "giap",
+  "el": "thuy",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 23.6,
+    "dodge": 3.6
+  },
+  "lore": "Chạm nhẹ vào đường đan sát sườn, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Bạch Châm — `giap_nhuyen_giap_bach_cham`
+
+```json
+{
+  "id": "giap_nhuyen_giap_bach_cham",
+  "n": "Nhuyễn Giáp Bạch Châm",
+  "k": "giap",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 33.4,
+    "hpP": 9
+  },
+  "lore": "Úp đường đan sát sườn về phía đất vẫn nhận ra những vảy sắt li ti. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Giáp Vân Chao — `giap_giap_van_chao`
+
+```json
+{
+  "id": "giap_giap_van_chao",
+  "n": "Giáp Vân Chao",
+  "k": "giap",
+  "el": "phong",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 25.5,
+    "hpP": 7.8
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, tiếng gió lọt qua khe còn vương ở miếng che ngực.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Nê Tâm — `giap_nhuyen_giap_ne_tam`
+
+```json
+{
+  "id": "giap_nhuyen_giap_ne_tam",
+  "n": "Nhuyễn Giáp Nê Tâm",
+  "k": "giap",
+  "el": "tho",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 32.4,
+    "hpP": 10.2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần đường đan sát sườn nhận ra vệt phấn đá đục. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Giáp Mộc Tuế — `giap_giap_moc_tue`
+
+```json
+{
+  "id": "giap_giap_moc_tue",
+  "n": "Giáp Mộc Tuế",
+  "k": "giap",
+  "el": "moc",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 24.8,
+    "hpP": 6.8
+  },
+  "lore": "Trời vừa đổi gió, ghé gần miếng che ngực có thể nhận ra những thớ gỗ ướt.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Tinh Sa — `giap_nhuyen_giap_chua_mot_duong_khau`
+
+```json
+{
+  "id": "giap_nhuyen_giap_chua_mot_duong_khau",
+  "n": "Nhuyễn Giáp Tinh Sa",
+  "k": "giap",
+  "el": "phat",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "defP": 25.3,
+    "dodge": 4.7
+  },
+  "lore": "Người thợ bạc khắc một cái tên vào mặt trái trước khi bán. Chỗ đường đan sát sườn vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện tìm lời khắc dưới lớp bạc",
+  "status": "active"
+}
+```
+
+## Giáp Liên Vũ — `giap_giap_lien_vu`
+
+```json
+{
+  "id": "giap_giap_lien_vu",
+  "n": "Giáp Liên Vũ",
+  "k": "giap",
+  "el": "thuy",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 30,
+    "hpP": 8.3
+  },
+  "lore": "Ở miếng che ngực có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh loang như vảy cá.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Giáp Điện Tinh — `giap_giap_dien_tinh`
+
+```json
+{
+  "id": "giap_giap_dien_tinh",
+  "n": "Giáp Điện Tinh",
+  "k": "giap",
+  "el": "loi",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 37.2,
+    "hpP": 13.3
+  },
+  "lore": "Dọc miếng che ngực có thể nhận ra một ánh chớp xanh. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Hàn Tinh — `giap_nhuyen_giap_han_tinh`
+
+```json
+{
+  "id": "giap_nhuyen_giap_han_tinh",
+  "n": "Nhuyễn Giáp Hàn Tinh",
+  "k": "giap",
+  "el": "bang",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 36.7,
+    "hpP": 9.5
+  },
+  "lore": "Thứ đọng lại trên đường đan sát sườn gợi mùi rơm lẫn trong tuyết. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Tẫn Vũ — `giap_nhuyen_giap_tan_vu`
+
+```json
+{
+  "id": "giap_nhuyen_giap_tan_vu",
+  "n": "Nhuyễn Giáp Tẫn Vũ",
+  "k": "giap",
+  "el": "hoa",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 43.2,
+    "hpP": 12.5
+  },
+  "lore": "Người giữ trước từng lau đường đan sát sườn bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Giáp Vọng Ảnh — `giap_giap_vong_anh`
+
+```json
+{
+  "id": "giap_giap_vong_anh",
+  "n": "Giáp Vọng Ảnh",
+  "k": "giap",
+  "el": "am",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 30.9,
+    "hpP": 10.2
+  },
+  "lore": "Một đường rạn chia miếng che ngực làm hai, bên trong còn giữ vệt bóng mọc về phía sáng.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Giáp Trầm Hương — `giap_giap_di_qua_cho_gio_lua`
+
+```json
+{
+  "id": "giap_giap_di_qua_cho_gio_lua",
+  "n": "Giáp Trầm Hương",
+  "k": "giap",
+  "el": "vo",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "defP": 34,
+    "hpP": 10.5,
+    "startBlock": 18.4
+  },
+  "lore": "Người đào giếng để nguyên một bậc đất cho ếch leo lên. Đến giờ miếng che ngực còn giữ vệt bụi từ bờ ruộng.",
+  "src": "Sự kiện đặt lại bậc giếng vỡ",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Sắt Giếng — `giap_nhuyen_giap_sat_gieng`
+
+```json
+{
+  "id": "giap_nhuyen_giap_sat_gieng",
+  "n": "Nhuyễn Giáp Sắt Giếng",
+  "k": "giap",
+  "el": "kim",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 43.2,
+    "hpP": 12.5
+  },
+  "lore": "Chạm nhẹ vào đường đan sát sườn, có thể nhận ra tiếng đồng ngân dưới mưa.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Giáp Vân Nếp — `giap_giap_van_nep`
+
+```json
+{
+  "id": "giap_giap_van_nep",
+  "n": "Giáp Vân Nếp",
+  "k": "giap",
+  "el": "phong",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 38.8,
+    "hpP": 13.2
+  },
+  "lore": "Úp miếng che ngực về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Tịnh Trần — `giap_nhuyen_giap_tinh_tran`
+
+```json
+{
+  "id": "giap_nhuyen_giap_tinh_tran",
+  "n": "Nhuyễn Giáp Tịnh Trần",
+  "k": "giap",
+  "el": "phat",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 45.9,
+    "hpP": 11.5,
+    "dodge": 6.2
+  },
+  "lore": "Lúc chạng vạng trên bến triều, hơi ấm như hạt cơm mới còn vương ở đường đan sát sườn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Giáp Bạch Lãng — `giap_giap_bach_lang`
+
+```json
+{
+  "id": "giap_giap_bach_lang",
+  "n": "Giáp Bạch Lãng",
+  "k": "giap",
+  "el": "thuy",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 34.6,
+    "hpP": 10.4,
+    "tam": 2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần miếng che ngực nhận ra tiếng giọt rơi vào chum. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Miêu Diệm — `giap_nhuyen_giap_mieu_diem`
+
+```json
+{
+  "id": "giap_nhuyen_giap_mieu_diem",
+  "n": "Nhuyễn Giáp Miêu Diệm",
+  "k": "giap",
+  "el": "hoa",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 38.8,
+    "hpP": 13.6,
+    "dodge": 6
+  },
+  "lore": "Trời vừa đổi gió, ghé gần đường đan sát sườn có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Giáp Phong Vũ — `giap_giap_tra_ve_ben_cu`
+
+```json
+{
+  "id": "giap_giap_tra_ve_ben_cu",
+  "n": "Giáp Phong Vũ",
+  "k": "giap",
+  "el": "moc",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "defP": 35.5,
+    "hpP": 9.9,
+    "mpP": 15.1,
+    "hoTam": 9.2
+  },
+  "lore": "{who} đếm mỗi bước qua cầu thay cho người bạn sợ nước. Chỗ miếng che ngực vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện đếm lại bước qua cầu ván",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Đêm Canh — `giap_nhuyen_giap_dem_canh`
+
+```json
+{
+  "id": "giap_nhuyen_giap_dem_canh",
+  "n": "Nhuyễn Giáp Đêm Canh",
+  "k": "giap",
+  "el": "vo",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 49.4,
+    "hpP": 15,
+    "tp": 3
+  },
+  "lore": "Ở đường đan sát sườn có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cửa gỗ bị gió đẩy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Giáp Hàn Đăng — `giap_giap_han_dang`
+
+```json
+{
+  "id": "giap_giap_han_dang",
+  "n": "Giáp Hàn Đăng",
+  "k": "giap",
+  "el": "bang",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 54.9,
+    "hpP": 14.1,
+    "mpP": 21.8
+  },
+  "lore": "Dọc miếng che ngực có thể nhận ra những hạt băng mịn. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Sấm Mù — `giap_nhuyen_giap_sam_mu`
+
+```json
+{
+  "id": "giap_nhuyen_giap_sam_mu",
+  "n": "Nhuyễn Giáp Sấm Mù",
+  "k": "giap",
+  "el": "loi",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 43.2,
+    "dodge": 6.4,
+    "hpP": 12.8
+  },
+  "lore": "Thứ đọng lại trên đường đan sát sườn gợi mùi vải sém sau tiếng sét. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Thạch Kiển — `giap_nhuyen_giap_thach_kien`
+
+```json
+{
+  "id": "giap_nhuyen_giap_thach_kien",
+  "n": "Nhuyễn Giáp Thạch Kiển",
+  "k": "giap",
+  "el": "tho",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 40,
+    "hpP": 14,
+    "dodge": 6.9
+  },
+  "lore": "Người giữ trước từng lau đường đan sát sườn bằng vải ướt. Đến giờ vẫn còn những vết nứt nhỏ như chân chim.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Giáp Hắc Nhung — `giap_giap_hac_nhung`
+
+```json
+{
+  "id": "giap_giap_hac_nhung",
+  "n": "Giáp Hắc Nhung",
+  "k": "giap",
+  "el": "am",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 47.4,
+    "hpP": 14.1,
+    "tam": 3
+  },
+  "lore": "Một đường rạn chia miếng che ngực làm hai, bên trong còn giữ vệt bóng mọc về phía sáng.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Giáp Thúy Vũ — `giap_giap_dem_ho_nguoi_xa`
+
+```json
+{
+  "id": "giap_giap_dem_ho_nguoi_xa",
+  "n": "Giáp Thúy Vũ",
+  "k": "giap",
+  "el": "phat",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "defP": 41.2,
+    "hpP": 11.5,
+    "tam": 2,
+    "hoTam": 11.9
+  },
+  "lore": "Chủ quán vẫn dành bát canh thứ hai cho người khách đã mất. Đến giờ miếng che ngực còn giữ tiếng mõ ngân rất khẽ.",
+  "src": "Sự kiện dọn mâm ở quán đêm",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Tẫn Nham — `giap_nhuyen_giap_tan_nham`
+
+```json
+{
+  "id": "giap_nhuyen_giap_tan_nham",
+  "n": "Nhuyễn Giáp Tẫn Nham",
+  "k": "giap",
+  "el": "hoa",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 53.4,
+    "dodge": 7.6,
+    "hpP": 13.5
+  },
+  "lore": "Chạm nhẹ vào đường đan sát sườn, có thể nhận ra mùi tàn hương vừa tắt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Mực Nâu Giáp — `giap_muc_nau_giap`
+
+```json
+{
+  "id": "giap_muc_nau_giap",
+  "n": "Mực Nâu Giáp",
+  "k": "giap",
+  "el": "vo",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 37.2,
+    "hpP": 14,
+    "atkP": 9.1
+  },
+  "lore": "Úp miếng che ngực về phía đất vẫn nhận ra mùi khói bếp vương lại. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Cốt Đồng — `giap_nhuyen_giap_cot_dong`
+
+```json
+{
+  "id": "giap_nhuyen_giap_cot_dong",
+  "n": "Nhuyễn Giáp Cốt Đồng",
+  "k": "giap",
+  "el": "kim",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 40,
+    "dodge": 7.1,
+    "hpP": 10.3
+  },
+  "lore": "Lúc chạng vạng trên phế trạch, ánh bạc nhạt trên mép còn vương ở đường đan sát sườn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trúc Tủy Giáp — `giap_truc_tuy_giap`
+
+```json
+{
+  "id": "giap_truc_tuy_giap",
+  "n": "Trúc Tủy Giáp",
+  "k": "giap",
+  "el": "moc",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 57,
+    "hpP": 17.4,
+    "mpP": 20.4
+  },
+  "lore": "Vào giờ sương rơi, ghé gần miếng che ngực nhận ra vệt phấn hoa vàng nhạt. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Thực Ảnh — `giap_nhuyen_giap_thuc_anh`
+
+```json
+{
+  "id": "giap_nhuyen_giap_thuc_anh",
+  "n": "Nhuyễn Giáp Thực Ảnh",
+  "k": "giap",
+  "el": "am",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 49.4,
+    "hpP": 14.4,
+    "dodge": 8.2
+  },
+  "lore": "Trời vừa đổi gió, ghé gần đường đan sát sườn có thể nhận ra ánh đen lẫn trong khói.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Hàn Ngọc — `giap_nhuyen_giap_nghe_thay_tieng_ve`
+
+```json
+{
+  "id": "giap_nhuyen_giap_nghe_thay_tieng_ve",
+  "n": "Nhuyễn Giáp Hàn Ngọc",
+  "k": "giap",
+  "el": "phong",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "defP": 62,
+    "dodge": 8.4,
+    "hpP": 15,
+    "blockTurn": 10.1
+  },
+  "lore": "Người xay gạo gõ lên đá ba lần để báo đã hết đêm. Chỗ đường đan sát sườn vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện gõ cối lúc sang canh",
+  "status": "active"
+}
+```
+
+## Giáp Tuyết Tủy — `giap_giap_tuyet_tuy`
+
+```json
+{
+  "id": "giap_giap_tuyet_tuy",
+  "n": "Giáp Tuyết Tủy",
+  "k": "giap",
+  "el": "bang",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "defP": 73.1,
+    "hpP": 18.5,
+    "mpP": 22.2
+  },
+  "lore": "Ở miếng che ngực có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh xanh trên mặt băng.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Tia Câm Giáp — `giap_tia_cam_giap`
+
+```json
+{
+  "id": "giap_tia_cam_giap",
+  "n": "Tia Câm Giáp",
+  "k": "giap",
+  "el": "loi",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "defP": 61.7,
+    "hpP": 21.4,
+    "tam": 4
+  },
+  "lore": "Dọc miếng che ngực có thể nhận ra một ánh chớp xanh. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Tam Triều — `giap_nhuyen_giap_tam_trieu`
+
+```json
+{
+  "id": "giap_nhuyen_giap_tam_trieu",
+  "n": "Nhuyễn Giáp Tam Triều",
+  "k": "giap",
+  "el": "thuy",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "defP": 53.4,
+    "dodge": 7.8,
+    "hpP": 13.5
+  },
+  "lore": "Thứ đọng lại trên đường đan sát sườn gợi mùi nước mưa đọng trên ngói. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bạch Nê Nhuyễn Giáp — `giap_bach_ne_nhuyen_giap`
+
+```json
+{
+  "id": "giap_bach_ne_nhuyen_giap",
+  "n": "Bạch Nê Nhuyễn Giáp",
+  "k": "giap",
+  "el": "tho",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "defP": 58.5,
+    "hpP": 17.7,
+    "dodge": 7.7,
+    "tp": 3
+  },
+  "lore": "Người giữ trước từng lau đường đan sát sườn bằng vải ướt. Đến giờ vẫn còn những vết nứt nhỏ như chân chim.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Giáp Tuyết Sa — `giap_giap_tuyet_sa`
+
+```json
+{
+  "id": "giap_giap_tuyet_sa",
+  "n": "Giáp Tuyết Sa",
+  "k": "giap",
+  "el": "bang",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "defP": 47.4,
+    "hpP": 13.5,
+    "mpP": 22.6,
+    "tam": 3
+  },
+  "lore": "Một đường rạn chia miếng che ngực làm hai, bên trong còn giữ ánh xanh trên mặt băng.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Giáp Bạch Ngọc — `giap_giap_nhat_sau_hoi_mo`
+
+```json
+{
+  "id": "giap_giap_nhat_sau_hoi_mo",
+  "n": "Giáp Bạch Ngọc",
+  "k": "giap",
+  "el": "hoa",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "defP": 79.4,
+    "hpP": 22.7,
+    "atkP": 19,
+    "tam": 4,
+    "hoTam": 18.9
+  },
+  "lore": "Người giữ kho giấu chìa dưới viên gạch trẻ con hay vấp. Đến giờ miếng che ngực còn giữ ánh lửa liếm qua mép.",
+  "src": "Sự kiện tìm chìa kho trong sân",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Trầm Ba — `giap_nhuyen_giap_tram_ba`
+
+```json
+{
+  "id": "giap_nhuyen_giap_tram_ba",
+  "n": "Nhuyễn Giáp Trầm Ba",
+  "k": "giap",
+  "el": "thuy",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "defP": 47.4,
+    "dodge": 8.6,
+    "hpP": 15.3,
+    "tam": 2
+  },
+  "lore": "Chạm nhẹ vào đường đan sát sườn, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Tấm Mành Giáp — `giap_tam_manh_giap`
+
+```json
+{
+  "id": "giap_tam_manh_giap",
+  "n": "Tấm Mành Giáp",
+  "k": "giap",
+  "el": "vo",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "defP": 66.8,
+    "hpP": 17.8,
+    "tam": 3,
+    "atkP": 14.9
+  },
+  "lore": "Úp miếng che ngực về phía đất vẫn nhận ra mùi khói bếp vương lại. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhuyễn Giáp Phong Vũ — `giap_nhuyen_giap_doi_sau_canh`
+
+```json
+{
+  "id": "giap_nhuyen_giap_doi_sau_canh",
+  "n": "Nhuyễn Giáp Phong Vũ",
+  "k": "giap",
+  "el": "moc",
+  "t": 6,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "defP": 89.8,
+    "hpP": 27.1,
+    "dodge": 14.7,
+    "tp": 4,
+    "mpP": 32.1,
+    "blockTurn": 15.5
+  },
+  "lore": "Người hái thuốc để lại một vạch phấn cho bạn tìm đường. Thỉnh thoảng đường đan sát sườn còn thoảng mùi nhựa vừa rịn.",
+  "src": "Sự kiện nối dấu phấn trên vách",
+  "status": "active"
+}
+```
+
+## Thiết Quyền Sáo — `gang_thietquyen`
+
+```json
+{
+  "id": "gang_thietquyen",
+  "n": "Thiết Quyền Sáo",
+  "k": "gang",
+  "el": "kim",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 4.4,
+    "crit": 1.8
+  },
+  "lore": "Sắt nguội đúc vụng, đốt ngón tay còn vết máu khô của chủ cũ.",
+  "src": "Rơi từ sơn tặc",
+  "status": "active"
+}
+```
+
+## Hộ Thủ Liên Tịch — `gang_ho_thu_lien_tich`
+
+```json
+{
+  "id": "gang_ho_thu_lien_tich",
+  "n": "Hộ Thủ Liên Tịch",
+  "k": "gang",
+  "el": "phat",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 5.9,
+    "crit": 3.1
+  },
+  "lore": "Thứ đọng lại trên gờ hộ thủ gợi mùi trầm đọng dưới mái. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Quyền Sáo Hoa Thiếc — `gang_quyen_sao_hoa_thiec`
+
+```json
+{
+  "id": "gang_quyen_sao_hoa_thiec",
+  "n": "Quyền Sáo Hoa Thiếc",
+  "k": "gang",
+  "el": "kim",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 6.5,
+    "crit": 2.7
+  },
+  "lore": "Người giữ trước từng lau đốt ngón bằng vải ướt. Đến giờ vẫn còn những vảy sắt li ti.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hoàn Đằng Sa — `gang_hoan_dang_sa`
+
+```json
+{
+  "id": "gang_hoan_dang_sa",
+  "n": "Hoàn Đằng Sa",
+  "k": "hoan",
+  "el": "moc",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "regenMp": 7.3
+  },
+  "lore": "Một đường rạn chia lòng vòng làm hai, bên trong còn giữ tiếng tơ cọ vào vỏ.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Thủ Trạc Cổ Mộc — `gang_thu_trac_giau_mot_loi_dan`
+
+```json
+{
+  "id": "gang_thu_trac_giau_mot_loi_dan",
+  "n": "Thủ Trạc Cổ Mộc",
+  "k": "hoan",
+  "el": "bang",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "regenMp": 9.4
+  },
+  "lore": "Người bán hạt giống đợi thêm một ngày cho mùa rét qua. Thỉnh thoảng khớp vòng còn thoảng tiếng sương đóng lách tách.",
+  "src": "Sự kiện cất hạt giống trước đợt rét",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Thiểm Quang — `gang_thu_giap_thiem_quang`
+
+```json
+{
+  "id": "gang_thu_giap_thiem_quang",
+  "n": "Thủ Giáp Thiểm Quang",
+  "k": "gang",
+  "el": "loi",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 4.9,
+    "crit": 1.7
+  },
+  "lore": "Chạm nhẹ vào mối chồng giáp, có thể nhận ra mùi vải sém sau tiếng sét.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Thủ Trạc Phong Nha — `gang_thu_trac_phong_nha`
+
+```json
+{
+  "id": "gang_thu_trac_phong_nha",
+  "n": "Thủ Trạc Phong Nha",
+  "k": "hoan",
+  "el": "phong",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "regenMp": 5.5
+  },
+  "lore": "Úp khớp vòng về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hộ Thủ Nhu Triều — `gang_ho_thu_nhu_trieu`
+
+```json
+{
+  "id": "gang_ho_thu_nhu_trieu",
+  "n": "Hộ Thủ Nhu Triều",
+  "k": "gang",
+  "el": "thuy",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 4.2,
+    "crit": 1.8
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, ánh loang như vảy cá còn vương ở gờ hộ thủ.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Quyền Sáo Hắc Nhung — `gang_quyen_sao_hac_nhung`
+
+```json
+{
+  "id": "gang_quyen_sao_hac_nhung",
+  "n": "Quyền Sáo Hắc Nhung",
+  "k": "gang",
+  "el": "am",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 4.5,
+    "crit": 2.1
+  },
+  "lore": "Vào giờ sương rơi, ghé gần đốt ngón nhận ra tiếng vải lụa sột soạt dưới đèn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hoàn Cỏ Rạ — `gang_hoan_co_ra`
+
+```json
+{
+  "id": "gang_hoan_co_ra",
+  "n": "Hoàn Cỏ Rạ",
+  "k": "hoan",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "regenMp": 8.4
+  },
+  "lore": "Trời vừa đổi gió, ghé gần lòng vòng có thể nhận ra mùi khói bếp vương lại.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Mộc Tâm — `gang_thu_giap_quen_cat_vao_nha`
+
+```json
+{
+  "id": "gang_thu_giap_quen_cat_vao_nha",
+  "n": "Thủ Giáp Mộc Tâm",
+  "k": "gang",
+  "el": "tho",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "atkP": 6.6,
+    "crit": 3.2
+  },
+  "lore": "{who} giấu một bát gạo trong vách để dành ngày giỗ. Dưới mối chồng giáp còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện mở hốc vách trong gian bếp",
+  "status": "active"
+}
+```
+
+## Thủ Trạc Noãn Sa — `gang_thu_trac_noan_sa`
+
+```json
+{
+  "id": "gang_thu_trac_noan_sa",
+  "n": "Thủ Trạc Noãn Sa",
+  "k": "hoan",
+  "el": "hoa",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "regenMp": 7.1,
+    "matkP": 7.6
+  },
+  "lore": "Ở khớp vòng có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp vệt tro đỏ.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Liên Âm — `gang_thu_giap_lien_am`
+
+```json
+{
+  "id": "gang_thu_giap_lien_am",
+  "n": "Thủ Giáp Liên Âm",
+  "k": "gang",
+  "el": "phat",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 4.4,
+    "crit": 1.6,
+    "defP": 7.1
+  },
+  "lore": "Dọc mối chồng giáp có thể nhận ra tiếng mõ ngân rất khẽ. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hoàn Nham Giáp — `gang_hoan_nham_giap`
+
+```json
+{
+  "id": "gang_hoan_nham_giap",
+  "n": "Hoàn Nham Giáp",
+  "k": "hoan",
+  "el": "tho",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "regenMp": 7.3,
+    "dodge": 4.3
+  },
+  "lore": "Thứ đọng lại trên lòng vòng gợi mùi đất vỡ sau cơn mưa. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Quyền Sáo Vải Mộc — `gang_quyen_sao_vai_moc`
+
+```json
+{
+  "id": "gang_quyen_sao_vai_moc",
+  "n": "Quyền Sáo Vải Mộc",
+  "k": "gang",
+  "el": "vo",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 6.5,
+    "crit": 3.1,
+    "critDmg": 8.5
+  },
+  "lore": "Người giữ trước từng lau đốt ngón bằng vải ướt. Đến giờ vẫn còn mùi khói bếp vương lại.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Hộ Thủ Vũ Tinh — `gang_ho_thu_vu_tinh`
+
+```json
+{
+  "id": "gang_ho_thu_vu_tinh",
+  "n": "Hộ Thủ Vũ Tinh",
+  "k": "gang",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 8.4,
+    "crit": 2.8,
+    "defP": 13.4
+  },
+  "lore": "Một đường rạn chia gờ hộ thủ làm hai, bên trong còn giữ ánh loang như vảy cá.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Quyền Sáo Đạm Mặc — `gang_quyen_sao_chua_mot_duong_khau`
+
+```json
+{
+  "id": "gang_quyen_sao_chua_mot_duong_khau",
+  "n": "Quyền Sáo Đạm Mặc",
+  "k": "gang",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "atkP": 7.5,
+    "crit": 2.8,
+    "critDmg": 13.1
+  },
+  "lore": "Người thợ hồ chừa một ô cửa thấp để bà nhìn đám trẻ nô đùa. Thỉnh thoảng đốt ngón còn thoảng những vảy sắt li ti.",
+  "src": "Sự kiện mở lại ô cửa bị bít",
+  "status": "active"
+}
+```
+
+## Thủ Trạc Liễu Nhung — `gang_thu_trac_lieu_nhung`
+
+```json
+{
+  "id": "gang_thu_trac_lieu_nhung",
+  "n": "Thủ Trạc Liễu Nhung",
+  "k": "hoan",
+  "el": "moc",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "regenMp": 6.8,
+    "matkP": 7.3
+  },
+  "lore": "Chạm nhẹ vào khớp vòng, có thể nhận ra mùi nhựa vừa rịn.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Phong Hạc — `gang_thu_giap_phong_hac`
+
+```json
+{
+  "id": "gang_thu_giap_phong_hac",
+  "n": "Thủ Giáp Phong Hạc",
+  "k": "gang",
+  "el": "phong",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 8.4,
+    "crit": 2.5,
+    "defP": 12.6
+  },
+  "lore": "Úp mối chồng giáp về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hoàn Huyết Đăng — `gang_hoan_huyet_dang`
+
+```json
+{
+  "id": "gang_hoan_huyet_dang",
+  "n": "Hoàn Huyết Đăng",
+  "k": "hoan",
+  "el": "hoa",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "regenMp": 6.8,
+    "dodge": 3.6
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, vệt tro đỏ còn vương ở lòng vòng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hộ Thủ Lôi Sa — `gang_ho_thu_loi_sa`
+
+```json
+{
+  "id": "gang_ho_thu_loi_sa",
+  "n": "Hộ Thủ Lôi Sa",
+  "k": "gang",
+  "el": "loi",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 7.1,
+    "crit": 2.5,
+    "defP": 13.7
+  },
+  "lore": "Vào giờ sương rơi, ghé gần gờ hộ thủ nhận ra một ánh chớp xanh. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Quyền Sáo Ảnh Sa — `gang_quyen_sao_anh_sa`
+
+```json
+{
+  "id": "gang_quyen_sao_anh_sa",
+  "n": "Quyền Sáo Ảnh Sa",
+  "k": "gang",
+  "el": "am",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 8.4,
+    "crit": 2.9,
+    "critDmg": 13
+  },
+  "lore": "Trời vừa đổi gió, ghé gần đốt ngón có thể nhận ra ánh đen lẫn trong khói.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Thủ Trạc Tuyết Linh — `gang_thu_trac_di_qua_cho_gio_lua`
+
+```json
+{
+  "id": "gang_thu_trac_di_qua_cho_gio_lua",
+  "n": "Thủ Trạc Tuyết Linh",
+  "k": "hoan",
+  "el": "bang",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "regenMp": 8,
+    "mpP": 9.5
+  },
+  "lore": "Người chép sổ chợ xóa nợ của một nhà trước lúc đi xa. Dưới khớp vòng còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện trả lại sổ nợ ở chợ cũ",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Cương Mạt — `gang_thu_giap_cuong_mat`
+
+```json
+{
+  "id": "gang_thu_giap_cuong_mat",
+  "n": "Thủ Giáp Cương Mạt",
+  "k": "gang",
+  "el": "kim",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 6.3,
+    "crit": 2.7,
+    "defP": 7.9
+  },
+  "lore": "Ở mối chồng giáp có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh bạc nhạt trên mép.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Hộ Thủ Tịnh Bào — `gang_ho_thu_tinh_bao`
+
+```json
+{
+  "id": "gang_ho_thu_tinh_bao",
+  "n": "Hộ Thủ Tịnh Bào",
+  "k": "gang",
+  "el": "phat",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 11.5,
+    "crit": 4.3,
+    "tam": 2
+  },
+  "lore": "Dọc gờ hộ thủ có thể nhận ra tiếng mõ ngân rất khẽ. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Hoàn Kim Tẫn — `gang_hoan_kim_tan`
+
+```json
+{
+  "id": "gang_hoan_kim_tan",
+  "n": "Hoàn Kim Tẫn",
+  "k": "hoan",
+  "el": "hoa",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "regenMp": 11,
+    "dodge": 6.9
+  },
+  "lore": "Thứ đọng lại trên lòng vòng gợi mùi tàn hương vừa tắt. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Thủ Trạc Mộc Tuế — `gang_thu_trac_moc_tue`
+
+```json
+{
+  "id": "gang_thu_trac_moc_tue",
+  "n": "Thủ Trạc Mộc Tuế",
+  "k": "hoan",
+  "el": "moc",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "regenMp": 9.1,
+    "mpP": 11.6
+  },
+  "lore": "Người giữ trước từng lau khớp vòng bằng vải ướt. Đến giờ vẫn còn những thớ gỗ ướt.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Hộ Thủ Tử Điện — `gang_ho_thu_tu_dien`
+
+```json
+{
+  "id": "gang_ho_thu_tu_dien",
+  "n": "Hộ Thủ Tử Điện",
+  "k": "gang",
+  "el": "loi",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 6.8,
+    "crit": 2.8,
+    "defP": 13.7
+  },
+  "lore": "Một đường rạn chia gờ hộ thủ làm hai, bên trong còn giữ mạch điện nhói đầu ngón.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Quyền Sáo Long Lân — `gang_quyen_sao_tra_ve_ben_cu`
+
+```json
+{
+  "id": "gang_quyen_sao_tra_ve_ben_cu",
+  "n": "Quyền Sáo Long Lân",
+  "k": "gang",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "atkP": 8.4,
+    "crit": 3,
+    "tp": 2
+  },
+  "lore": "Người may màn cuốn mép lại để muỗi khỏi chui vào chỗ trẻ nằm. Thỉnh thoảng đốt ngón còn thoảng ánh chao như cánh chim.",
+  "src": "Sự kiện buộc lại mép màn trong buồng",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Liên Vũ — `gang_thu_giap_lien_vu`
+
+```json
+{
+  "id": "gang_thu_giap_lien_vu",
+  "n": "Thủ Giáp Liên Vũ",
+  "k": "gang",
+  "el": "thuy",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 10.5,
+    "crit": 3.9,
+    "defP": 17.3
+  },
+  "lore": "Chạm nhẹ vào mối chồng giáp, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Hoàn Tuyết Nha — `gang_hoan_tuyet_nha`
+
+```json
+{
+  "id": "gang_hoan_tuyet_nha",
+  "n": "Hoàn Tuyết Nha",
+  "k": "hoan",
+  "el": "bang",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "regenMp": 14,
+    "dodge": 6.7,
+    "mpP": 17.7
+  },
+  "lore": "Úp lòng vòng về phía đất vẫn nhận ra tiếng sương đóng lách tách. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Hộ Thủ Chỉ Nâu — `gang_ho_thu_chi_nau`
+
+```json
+{
+  "id": "gang_ho_thu_chi_nau",
+  "n": "Hộ Thủ Chỉ Nâu",
+  "k": "gang",
+  "el": "vo",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 7.3,
+    "crit": 2.9,
+    "defP": 15.1,
+    "critDmg": 13.9
+  },
+  "lore": "Lúc chạng vạng trên bến triều, tiếng cửa gỗ bị gió đẩy còn vương ở gờ hộ thủ.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hoàn Hắc Giản — `gang_hoan_hac_gian`
+
+```json
+{
+  "id": "gang_hoan_hac_gian",
+  "n": "Hoàn Hắc Giản",
+  "k": "hoan",
+  "el": "am",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "regenMp": 9.8,
+    "mpP": 12.3,
+    "dodge": 4.4
+  },
+  "lore": "Vào giờ sương rơi, ghé gần lòng vòng nhận ra tiếng vải lụa sột soạt dưới đèn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Sa Tủy — `gang_thu_giap_sa_tuy`
+
+```json
+{
+  "id": "gang_thu_giap_sa_tuy",
+  "n": "Thủ Giáp Sa Tủy",
+  "k": "gang",
+  "el": "tho",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 9.3,
+    "crit": 3.4,
+    "defP": 14.3,
+    "hpP": 10.3
+  },
+  "lore": "Trời vừa đổi gió, ghé gần mối chồng giáp có thể nhận ra những vết nứt nhỏ như chân chim.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Quyền Sáo Huyết Tuyến — `gang_quyen_sao_dem_ho_nguoi_xa`
+
+```json
+{
+  "id": "gang_quyen_sao_dem_ho_nguoi_xa",
+  "n": "Quyền Sáo Huyết Tuyến",
+  "k": "gang",
+  "el": "hoa",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "atkP": 13.6,
+    "crit": 5.6,
+    "critDmg": 20.6,
+    "tp": 3
+  },
+  "lore": "Đứa bé gấp một con cò giấy cho người cha mất tích. Dưới đốt ngón còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện thả cò giấy ở bãi sậy",
+  "status": "active"
+}
+```
+
+## Thủ Trạc Băng Miên — `gang_thu_trac_bang_mien`
+
+```json
+{
+  "id": "gang_thu_trac_bang_mien",
+  "n": "Thủ Trạc Băng Miên",
+  "k": "hoan",
+  "el": "bang",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "regenMp": 11.5,
+    "matkP": 11,
+    "mpP": 17.8
+  },
+  "lore": "Ở khớp vòng có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh xanh trên mặt băng.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Thủ Trạc Vũ Tinh — `gang_thu_trac_vu_tinh`
+
+```json
+{
+  "id": "gang_thu_trac_vu_tinh",
+  "n": "Thủ Trạc Vũ Tinh",
+  "k": "hoan",
+  "el": "thuy",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "regenMp": 16.7,
+    "matkP": 18.4,
+    "mpP": 20.4
+  },
+  "lore": "Dọc khớp vòng có thể nhận ra tiếng giọt rơi vào chum. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Hộ Thủ Sắt Giếng — `gang_ho_thu_sat_gieng`
+
+```json
+{
+  "id": "gang_ho_thu_sat_gieng",
+  "n": "Hộ Thủ Sắt Giếng",
+  "k": "gang",
+  "el": "kim",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "atkP": 11.5,
+    "crit": 3.4,
+    "critDmg": 17.8,
+    "tp": 2
+  },
+  "lore": "Thứ đọng lại trên gờ hộ thủ gợi tiếng đồng ngân dưới mưa. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hoàn Lôi Vũ — `gang_hoan_loi_vu`
+
+```json
+{
+  "id": "gang_hoan_loi_vu",
+  "n": "Hoàn Lôi Vũ",
+  "k": "hoan",
+  "el": "loi",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "regenMp": 11,
+    "dodge": 6.4,
+    "mpP": 16.4
+  },
+  "lore": "Người giữ trước từng lau lòng vòng bằng vải ướt. Đến giờ vẫn còn tiếng rền như dưới nền nhà.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Phong Trạo Quyền Sáo — `gang_phong_trao_quyen_sao`
+
+```json
+{
+  "id": "gang_phong_trao_quyen_sao",
+  "n": "Phong Trạo Quyền Sáo",
+  "k": "gang",
+  "el": "phong",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "atkP": 11.5,
+    "crit": 3.9,
+    "critDmg": 15.9,
+    "tp": 2
+  },
+  "lore": "Một đường rạn chia đốt ngón làm hai, bên trong còn giữ tiếng gió lọt qua khe.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Cô Nguyệt — `gang_thu_giap_nghe_thay_tieng_ve`
+
+```json
+{
+  "id": "gang_thu_giap_nghe_thay_tieng_ve",
+  "n": "Thủ Giáp Cô Nguyệt",
+  "k": "gang",
+  "el": "phat",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "atkP": 14.6,
+    "crit": 6.5,
+    "defP": 22,
+    "hpP": 18.4,
+    "stunP": 20.2
+  },
+  "lore": "{who} chia đôi chiếc bánh cúng rồi cất nửa phần của người đến chậm. Thỉnh thoảng mối chồng giáp còn thoảng vết bụi vàng của hương.",
+  "src": "Sự kiện đặt nửa chiếc bánh lên mâm",
+  "status": "active"
+}
+```
+
+## Mai Trầm Hoàn — `gang_mai_tram_hoan`
+
+```json
+{
+  "id": "gang_mai_tram_hoan",
+  "n": "Mai Trầm Hoàn",
+  "k": "hoan",
+  "el": "moc",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "regenMp": 12.8,
+    "dodge": 6.4,
+    "mpP": 17.8
+  },
+  "lore": "Chạm nhẹ vào lòng vòng, có thể nhận ra mùi nhựa vừa rịn.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Nham Phấn — `gang_thu_giap_nham_phan`
+
+```json
+{
+  "id": "gang_thu_giap_nham_phan",
+  "n": "Thủ Giáp Nham Phấn",
+  "k": "gang",
+  "el": "tho",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "atkP": 14.6,
+    "crit": 4.8,
+    "defP": 21.6,
+    "hpP": 16.4
+  },
+  "lore": "Úp mối chồng giáp về phía đất vẫn nhận ra những vết nứt nhỏ như chân chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## U Tằm Thủ Trạc — `gang_u_tam_thu_trac`
+
+```json
+{
+  "id": "gang_u_tam_thu_trac",
+  "n": "U Tằm Thủ Trạc",
+  "k": "hoan",
+  "el": "am",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "regenMp": 17.7,
+    "matkP": 18.4,
+    "dodge": 7.9
+  },
+  "lore": "Lúc chạng vạng trên thềm đá cổ, vệt bóng mọc về phía sáng còn vương ở khớp vòng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Quyền Sáo Giấy Gió — `gang_quyen_sao_giay_gio`
+
+```json
+{
+  "id": "gang_quyen_sao_giay_gio",
+  "n": "Quyền Sáo Giấy Gió",
+  "k": "gang",
+  "el": "vo",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "atkP": 16.4,
+    "crit": 6.9,
+    "critDmg": 28.5,
+    "tp": 3
+  },
+  "lore": "Vào giờ sương rơi, ghé gần đốt ngón nhận ra vệt bụi từ bờ ruộng. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Tàn Đăng Hộ Thủ — `gang_tan_dang_ho_thu`
+
+```json
+{
+  "id": "gang_tan_dang_ho_thu",
+  "n": "Tàn Đăng Hộ Thủ",
+  "k": "gang",
+  "el": "hoa",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "atkP": 15.2,
+    "crit": 6.5,
+    "defP": 30.2,
+    "critDmg": 26
+  },
+  "lore": "Trời vừa đổi gió, ghé gần gờ hộ thủ có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Quyền Sáo Linh Đằng — `gang_quyen_sao_nhat_sau_hoi_mo`
+
+```json
+{
+  "id": "gang_quyen_sao_nhat_sau_hoi_mo",
+  "n": "Quyền Sáo Linh Đằng",
+  "k": "gang",
+  "el": "bang",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "atkP": 13.1,
+    "crit": 6.6,
+    "critDmg": 24.9,
+    "tp": 3,
+    "mpP": 20.2
+  },
+  "lore": "{who} để một cuộn chỉ cạnh gối cho người sắp lên đường. Dưới đốt ngón còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện gửi cuộn chỉ ở trạm nghỉ",
+  "status": "active"
+}
+```
+
+## Lôi Vĩ Hộ Thủ — `gang_loi_vi_ho_thu`
+
+```json
+{
+  "id": "gang_loi_vi_ho_thu",
+  "n": "Lôi Vĩ Hộ Thủ",
+  "k": "gang",
+  "el": "loi",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "atkP": 18.8,
+    "crit": 6.4,
+    "defP": 24.7,
+    "critDmg": 27.7,
+    "tp": 4
+  },
+  "lore": "Ở gờ hộ thủ có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp mạch điện nhói đầu ngón.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Thủ Giáp Kim Hạp — `gang_thu_giap_kim_hap`
+
+```json
+{
+  "id": "gang_thu_giap_kim_hap",
+  "n": "Thủ Giáp Kim Hạp",
+  "k": "gang",
+  "el": "kim",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "atkP": 13.7,
+    "crit": 5.6,
+    "defP": 18.6,
+    "critDmg": 18.8,
+    "hpP": 14.5
+  },
+  "lore": "Dọc mối chồng giáp có thể nhận ra mùi búa mới tôi. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhất Kệ Thủ Trạc — `gang_nhat_ke_thu_trac`
+
+```json
+{
+  "id": "gang_nhat_ke_thu_trac",
+  "n": "Nhất Kệ Thủ Trạc",
+  "k": "hoan",
+  "el": "phat",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "regenMp": 16.2,
+    "hpP": 17.4,
+    "tam": 3,
+    "mpP": 21.8
+  },
+  "lore": "Thứ đọng lại trên khớp vòng gợi mùi trầm đọng dưới mái. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Hoàn Minh Châu — `gang_hoan_quen_cat_vao_nha`
+
+```json
+{
+  "id": "gang_hoan_quen_cat_vao_nha",
+  "n": "Hoàn Minh Châu",
+  "k": "hoan",
+  "el": "moc",
+  "t": 6,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "regenMp": 24.3,
+    "mpP": 38.6,
+    "dodge": 15.2,
+    "matkP": 29,
+    "tam": 4
+  },
+  "lore": "Người nhổ cỏ chừa một bụi bên mộ để chim khỏi mất tổ. Dưới lòng vòng còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện che tổ chim trong bãi mộ",
+  "status": "active"
+}
+```
+
+## Ngọc Quyết Phong Trạo — `boi_ngoc_quyet_phong_trao`
+
+```json
+{
+  "id": "boi_ngoc_quyet_phong_trao",
+  "n": "Ngọc Quyết Phong Trạo",
+  "k": "boi",
+  "el": "phong",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "mpP": 20.9
+  },
+  "lore": "Úp khe khuyết về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Ngọc Trầm Nham — `boi_ho_tam_ngoc_tram_nham`
+
+```json
+{
+  "id": "boi_ho_tam_ngoc_tram_nham",
+  "n": "Hộ Tâm Ngọc Trầm Nham",
+  "k": "hotam",
+  "el": "tho",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hoTam": 8.4,
+    "defP": 4.8
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, tiếng cát lọt qua kẽ còn vương ở viền ngọc.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Phù Lôi Tằm — `boi_ho_tam_phu_loi_tam`
+
+```json
+{
+  "id": "boi_ho_tam_phu_loi_tam",
+  "n": "Hộ Tâm Phù Lôi Tằm",
+  "k": "hotam",
+  "el": "loi",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hoTam": 8.4,
+    "defP": 5.8
+  },
+  "lore": "Vào giờ sương rơi, ghé gần nếp gấp nhận ra một ánh chớp xanh. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ngọc Bài Trầm Hương — `boi_ngoc_bai_dem_tra_hom_sau`
+
+```json
+{
+  "id": "boi_ngoc_bai_dem_tra_hom_sau",
+  "n": "Ngọc Bài Trầm Hương",
+  "k": "boi",
+  "el": "phat",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "mpP": 18
+  },
+  "lore": "Người đẩy xe chèn bánh bằng một cuốn kinh đã đọc thuộc. Thỉnh thoảng lỗ xỏ dây còn thoảng hơi ấm như hạt cơm mới.",
+  "src": "Sự kiện nhặt cuốn kinh dưới bánh",
+  "status": "active"
+}
+```
+
+## Ngọc Bội Băng Nham — `boi_ngoc_boi_bang_nham`
+
+```json
+{
+  "id": "boi_ngoc_boi_bang_nham",
+  "n": "Ngọc Bội Băng Nham",
+  "k": "boi",
+  "el": "bang",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "mpP": 17.7
+  },
+  "lore": "Đặt cạnh cửa sổ, mặt ngọc để lộ tiếng sương đóng lách tách mỗi khi có người đi ngang.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Kính Đầm Nguyệt — `boi_ho_tam_kinh_dam_nguyet`
+
+```json
+{
+  "id": "boi_ho_tam_kinh_dam_nguyet",
+  "n": "Hộ Tâm Kính Đầm Nguyệt",
+  "k": "hotam",
+  "el": "thuy",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hoTam": 8.6,
+    "defP": 5.9
+  },
+  "lore": "Ở lưng kính có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh loang như vảy cá.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Quyết Ngô Đồng — `boi_ngoc_quyet_ngo_dong`
+
+```json
+{
+  "id": "boi_ngoc_quyet_ngo_dong",
+  "n": "Ngọc Quyết Ngô Đồng",
+  "k": "boi",
+  "el": "moc",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "mpP": 24.8
+  },
+  "lore": "Dọc khe khuyết có thể nhận ra vệt phấn hoa vàng nhạt. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ngọc Bài Đá Kê — `boi_ngoc_bai_da_ke`
+
+```json
+{
+  "id": "boi_ngoc_bai_da_ke",
+  "n": "Ngọc Bài Đá Kê",
+  "k": "boi",
+  "el": "vo",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "mpP": 18.3
+  },
+  "lore": "Thứ đọng lại trên lỗ xỏ dây gợi mùi nắng trên vải mộc. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Bội Tinh Chung — `boi_ngoc_boi_tinh_chung`
+
+```json
+{
+  "id": "boi_ngoc_boi_tinh_chung",
+  "n": "Ngọc Bội Tinh Chung",
+  "k": "boi",
+  "el": "kim",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "mpP": 18.8
+  },
+  "lore": "Người giữ trước từng lau mặt ngọc bằng vải ướt. Đến giờ vẫn còn những vảy sắt li ti.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Ngọc Chu Tước — `boi_ho_tam_ngoc_danh_phan_nguoi_vang`
+
+```json
+{
+  "id": "boi_ho_tam_ngoc_danh_phan_nguoi_vang",
+  "n": "Hộ Tâm Ngọc Chu Tước",
+  "k": "hotam",
+  "el": "hoa",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "hoTam": 6.4,
+    "defP": 4.4
+  },
+  "lore": "Người xay gạo gõ lên đá ba lần để báo đã hết đêm. Dưới viền ngọc còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện gõ cối lúc sang canh",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Phù Ảnh Giáp — `boi_ho_tam_phu_anh_giap`
+
+```json
+{
+  "id": "boi_ho_tam_phu_anh_giap",
+  "n": "Hộ Tâm Phù Ảnh Giáp",
+  "k": "hotam",
+  "el": "am",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hoTam": 6.1,
+    "defP": 4.3,
+    "hpP": 5.3
+  },
+  "lore": "Đưa nếp gấp lại gần ngọn đèn sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Kính Chỉ Nâu — `boi_ho_tam_kinh_chi_nau`
+
+```json
+{
+  "id": "boi_ho_tam_kinh_chi_nau",
+  "n": "Hộ Tâm Kính Chỉ Nâu",
+  "k": "hotam",
+  "el": "vo",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hoTam": 7.1,
+    "defP": 5.1,
+    "mpP": 9.8
+  },
+  "lore": "Chạm nhẹ vào lưng kính, có thể nhận ra mùi nắng trên vải mộc.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Kính Lôi Ảnh — `boi_ho_tam_kinh_loi_anh`
+
+```json
+{
+  "id": "boi_ho_tam_kinh_loi_anh",
+  "n": "Hộ Tâm Kính Lôi Ảnh",
+  "k": "hotam",
+  "el": "loi",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hoTam": 8.4,
+    "defP": 5.4,
+    "hpP": 7.9
+  },
+  "lore": "Úp lưng kính về phía đất vẫn nhận ra tiếng rền như dưới nền nhà. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Bội Nham Giáp — `boi_ngoc_boi_nham_giap`
+
+```json
+{
+  "id": "boi_ngoc_boi_nham_giap",
+  "n": "Ngọc Bội Nham Giáp",
+  "k": "boi",
+  "el": "tho",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "mpP": 30.4,
+    "tam": 2
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, tiếng cát lọt qua kẽ còn vương ở mặt ngọc.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Ngọc Trúc Châm — `boi_ho_tam_ngoc_truc_cham`
+
+```json
+{
+  "id": "boi_ho_tam_ngoc_truc_cham",
+  "n": "Hộ Tâm Ngọc Trúc Châm",
+  "k": "hotam",
+  "el": "moc",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hoTam": 7.8,
+    "defP": 5.4,
+    "hpP": 8.2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần viền ngọc nhận ra vệt phấn hoa vàng nhạt. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Phù Hàn Ngọc — `boi_ho_tam_phu_qua_cua_khi_troi_toi`
+
+```json
+{
+  "id": "boi_ho_tam_phu_qua_cua_khi_troi_toi",
+  "n": "Hộ Tâm Phù Hàn Ngọc",
+  "k": "hotam",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "hoTam": 10,
+    "defP": 8.1,
+    "hpP": 10.7
+  },
+  "lore": "Người coi vườn giữ lại quả chua nhất cho người bỏ nhà đi. Thỉnh thoảng nếp gấp còn thoảng ánh bạc nhạt trên mép.",
+  "src": "Sự kiện hái quả cuối ở vườn cũ",
+  "status": "active"
+}
+```
+
+## Ngọc Bài Tro Đào — `boi_ngoc_bai_tro_dao`
+
+```json
+{
+  "id": "boi_ngoc_bai_tro_dao",
+  "n": "Ngọc Bài Tro Đào",
+  "k": "boi",
+  "el": "hoa",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "mpP": 22.6,
+    "tam": 1
+  },
+  "lore": "Đặt cạnh cửa sổ, lỗ xỏ dây để lộ tiếng than nổ trong lò mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Quyết Băng Miên — `boi_ngoc_quyet_bang_mien`
+
+```json
+{
+  "id": "boi_ngoc_quyet_bang_mien",
+  "n": "Ngọc Quyết Băng Miên",
+  "k": "boi",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "mpP": 31.5,
+    "tam": 2
+  },
+  "lore": "Ở khe khuyết có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh xanh trên mặt băng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Ngọc Bồ Diệp — `boi_ho_tam_ngoc_bo_diep`
+
+```json
+{
+  "id": "boi_ho_tam_ngoc_bo_diep",
+  "n": "Hộ Tâm Ngọc Bồ Diệp",
+  "k": "hotam",
+  "el": "phat",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hoTam": 8.5,
+    "defP": 7.2,
+    "hpP": 7.9
+  },
+  "lore": "Dọc viền ngọc có thể nhận ra tiếng mõ ngân rất khẽ. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Bài Bạch Lãng — `boi_ngoc_bai_bach_lang`
+
+```json
+{
+  "id": "boi_ngoc_bai_bach_lang",
+  "n": "Ngọc Bài Bạch Lãng",
+  "k": "boi",
+  "el": "thuy",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "mpP": 24.8,
+    "tam": 1
+  },
+  "lore": "Thứ đọng lại trên lỗ xỏ dây gợi mùi nước mưa đọng trên ngói. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Phù Phong Trạo — `boi_ho_tam_phu_phong_trao`
+
+```json
+{
+  "id": "boi_ho_tam_phu_phong_trao",
+  "n": "Hộ Tâm Phù Phong Trạo",
+  "k": "hotam",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hoTam": 8.8,
+    "defP": 7.7,
+    "hpP": 10.2
+  },
+  "lore": "Người giữ trước từng lau nếp gấp bằng vải ướt. Đến giờ vẫn còn ánh chao như cánh chim.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Ngọc Bội Thanh Đồng — `boi_ngoc_boi_cho_den_tan_den`
+
+```json
+{
+  "id": "boi_ngoc_boi_cho_den_tan_den",
+  "n": "Ngọc Bội Thanh Đồng",
+  "k": "boi",
+  "el": "am",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "mpP": 21.5,
+    "tam": 1
+  },
+  "lore": "Người đun thuốc thức đến lúc ấm nứt vì đợi tiếng chân về. Dưới mặt ngọc còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện nhặt ấm thuốc ở hiên",
+  "status": "active"
+}
+```
+
+## Ngọc Quyết Phong Đăng — `boi_ngoc_quyet_phong_dang`
+
+```json
+{
+  "id": "boi_ngoc_quyet_phong_dang",
+  "n": "Ngọc Quyết Phong Đăng",
+  "k": "boi",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "mpP": 33.5,
+    "tam": 2
+  },
+  "lore": "Đưa khe khuyết lại gần ngọn đèn sẽ nhận ra vệt bụi uốn quanh mép. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Kính Trì Châu — `boi_ho_tam_kinh_tri_chau`
+
+```json
+{
+  "id": "boi_ho_tam_kinh_tri_chau",
+  "n": "Hộ Tâm Kính Trì Châu",
+  "k": "hotam",
+  "el": "thuy",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hoTam": 8.8,
+    "defP": 8.2,
+    "tam": 2
+  },
+  "lore": "Chạm nhẹ vào lưng kính, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Bội Sấm Mù — `boi_ngoc_boi_sam_mu`
+
+```json
+{
+  "id": "boi_ngoc_boi_sam_mu",
+  "n": "Ngọc Bội Sấm Mù",
+  "k": "boi",
+  "el": "loi",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "mpP": 35.3,
+    "tam": 2
+  },
+  "lore": "Úp mặt ngọc về phía đất vẫn nhận ra tiếng rền như dưới nền nhà. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ngọc Quyết Hồn Trầm — `boi_ngoc_quyet_hon_tram`
+
+```json
+{
+  "id": "boi_ngoc_quyet_hon_tram",
+  "n": "Ngọc Quyết Hồn Trầm",
+  "k": "boi",
+  "el": "am",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "mpP": 32.4,
+    "tam": 2
+  },
+  "lore": "Lúc chạng vạng trên bến triều, vệt bóng mọc về phía sáng còn vương ở khe khuyết.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Kính Kim Tẫn — `boi_ho_tam_kinh_kim_tan`
+
+```json
+{
+  "id": "boi_ho_tam_kinh_kim_tan",
+  "n": "Hộ Tâm Kính Kim Tẫn",
+  "k": "hotam",
+  "el": "hoa",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hoTam": 11.8,
+    "defP": 9.1,
+    "mpP": 15.2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần lưng kính nhận ra ánh lửa liếm qua mép. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Ngọc Thu Thủy — `boi_ho_tam_ngoc_do_lay_mua_ret`
+
+```json
+{
+  "id": "boi_ho_tam_ngoc_do_lay_mua_ret",
+  "n": "Hộ Tâm Ngọc Thu Thủy",
+  "k": "hotam",
+  "el": "bang",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "hoTam": 11.7,
+    "defP": 8.9,
+    "hpP": 11.3
+  },
+  "lore": "Người giữ bến vẫn kê ghế đúng tầm chân vị khách nhỏ tuổi. Thỉnh thoảng viền ngọc còn thoảng ánh xanh trên mặt băng.",
+  "src": "Sự kiện đưa ghế ra bến lặng",
+  "status": "active"
+}
+```
+
+## Ngọc Bài Thạch Kiển — `boi_ngoc_bai_thach_kien`
+
+```json
+{
+  "id": "boi_ngoc_bai_thach_kien",
+  "n": "Ngọc Bài Thạch Kiển",
+  "k": "boi",
+  "el": "tho",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "mpP": 33.8,
+    "tam": 2
+  },
+  "lore": "Đặt cạnh cửa sổ, lỗ xỏ dây để lộ những vết nứt nhỏ như chân chim mỗi khi có người đi ngang.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Phù Cỏ Rạ — `boi_ho_tam_phu_co_ra`
+
+```json
+{
+  "id": "boi_ho_tam_phu_co_ra",
+  "n": "Hộ Tâm Phù Cỏ Rạ",
+  "k": "hotam",
+  "el": "vo",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hoTam": 10.4,
+    "defP": 8.2,
+    "hpP": 9.5,
+    "tam": 2
+  },
+  "lore": "Ở nếp gấp có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cửa gỗ bị gió đẩy.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Ngọc Đằng Châu — `boi_ho_tam_ngoc_dang_chau`
+
+```json
+{
+  "id": "boi_ho_tam_ngoc_dang_chau",
+  "n": "Hộ Tâm Ngọc Đằng Châu",
+  "k": "hotam",
+  "el": "moc",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hoTam": 13.6,
+    "defP": 9.1,
+    "hpP": 13.2,
+    "mpP": 14.9
+  },
+  "lore": "Dọc viền ngọc có thể nhận ra vệt phấn hoa vàng nhạt. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ngọc Bài Sa Nhận — `boi_ngoc_bai_sa_nhan`
+
+```json
+{
+  "id": "boi_ngoc_bai_sa_nhan",
+  "n": "Ngọc Bài Sa Nhận",
+  "k": "boi",
+  "el": "kim",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "mpP": 36.4,
+    "tam": 2,
+    "ngo": 2
+  },
+  "lore": "Thứ đọng lại trên lỗ xỏ dây gợi tiếng đồng ngân dưới mưa. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ngọc Bội Liên Âm — `boi_ngoc_boi_lien_am`
+
+```json
+{
+  "id": "boi_ngoc_boi_lien_am",
+  "n": "Ngọc Bội Liên Âm",
+  "k": "boi",
+  "el": "phat",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "mpP": 27.3,
+    "tam": 2,
+    "ngo": 2
+  },
+  "lore": "Người giữ trước từng lau mặt ngọc bằng vải ướt. Đến giờ vẫn còn vết bụi vàng của hương.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Phù Xích Hỏa — `boi_ho_tam_phu_de_lai_ben_bep`
+
+```json
+{
+  "id": "boi_ho_tam_phu_de_lai_ben_bep",
+  "n": "Hộ Tâm Phù Xích Hỏa",
+  "k": "hotam",
+  "el": "loi",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "hoTam": 14.4,
+    "defP": 11.9,
+    "hpP": 15.2,
+    "tam": 2
+  },
+  "lore": "Người gánh tro giữ một hòn than cho lò sưởi của trẻ nhỏ. Dưới nếp gấp còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện đem than qua sân tuyết",
+  "status": "active"
+}
+```
+
+## Ngọc Quyết Rễ Dó — `boi_ngoc_quyet_re_do`
+
+```json
+{
+  "id": "boi_ngoc_quyet_re_do",
+  "n": "Ngọc Quyết Rễ Dó",
+  "k": "boi",
+  "el": "moc",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "mpP": 50.9,
+    "ngo": 3,
+    "hpP": 15.3
+  },
+  "lore": "Đưa khe khuyết lại gần ngọn đèn sẽ nhận ra vệt phấn hoa vàng nhạt. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Kính Tro Đào — `boi_ho_tam_kinh_tro_dao`
+
+```json
+{
+  "id": "boi_ho_tam_kinh_tro_dao",
+  "n": "Hộ Tâm Kính Tro Đào",
+  "k": "hotam",
+  "el": "hoa",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hoTam": 14.4,
+    "defP": 13,
+    "mpP": 22.4,
+    "tam": 2
+  },
+  "lore": "Chạm nhẹ vào lưng kính, có thể nhận ra mùi tàn hương vừa tắt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Phù Dạ Kiển — `boi_ho_tam_phu_da_kien`
+
+```json
+{
+  "id": "boi_ho_tam_phu_da_kien",
+  "n": "Hộ Tâm Phù Dạ Kiển",
+  "k": "hotam",
+  "el": "am",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hoTam": 12.4,
+    "defP": 10.2,
+    "hpP": 10.3,
+    "dodge": 6.5
+  },
+  "lore": "Úp nếp gấp về phía đất vẫn nhận ra ánh đen lẫn trong khói. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Kính Phong Miên — `boi_ho_tam_kinh_phong_mien`
+
+```json
+{
+  "id": "boi_ho_tam_kinh_phong_mien",
+  "n": "Hộ Tâm Kính Phong Miên",
+  "k": "hotam",
+  "el": "phong",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hoTam": 11,
+    "defP": 9.9,
+    "mpP": 15.9,
+    "dodge": 6.9
+  },
+  "lore": "Lúc chạng vạng trên phế trạch, tiếng gió lọt qua khe còn vương ở lưng kính.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bạch Đống Ngọc Bội — `boi_bach_dong_ngoc_boi`
+
+```json
+{
+  "id": "boi_bach_dong_ngoc_boi",
+  "n": "Bạch Đống Ngọc Bội",
+  "k": "boi",
+  "el": "bang",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "mpP": 50.9,
+    "tam": 3,
+    "ngo": 3
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mặt ngọc nhận ra những hạt băng mịn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Ngọc Xuân Sinh — `boi_ho_tam_ngoc_ven_mot_goc_rem`
+
+```json
+{
+  "id": "boi_ho_tam_ngoc_ven_mot_goc_rem",
+  "n": "Hộ Tâm Ngọc Xuân Sinh",
+  "k": "hotam",
+  "el": "kim",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "hoTam": 16.5,
+    "defP": 14.2,
+    "hpP": 15.9,
+    "tam": 3
+  },
+  "lore": "Người đi núi buộc cỏ lên cọc báo bên kia có đường về. Thỉnh thoảng viền ngọc còn thoảng ánh bạc nhạt trên mép.",
+  "src": "Sự kiện dựng lại cọc ở ngã rẽ",
+  "status": "active"
+}
+```
+
+## Bến Cạn Ngọc Bài — `boi_ben_can_ngoc_bai`
+
+```json
+{
+  "id": "boi_ben_can_ngoc_bai",
+  "n": "Bến Cạn Ngọc Bài",
+  "k": "boi",
+  "el": "vo",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "mpP": 33.8,
+    "hpP": 10.8,
+    "tam": 2
+  },
+  "lore": "Đặt cạnh cửa sổ, lỗ xỏ dây để lộ mùi khói bếp vương lại mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Quyết Dạ Vũ — `boi_ngoc_quyet_da_vu`
+
+```json
+{
+  "id": "boi_ngoc_quyet_da_vu",
+  "n": "Ngọc Quyết Dạ Vũ",
+  "k": "boi",
+  "el": "thuy",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "mpP": 41.8,
+    "ngo": 2,
+    "tam": 2
+  },
+  "lore": "Ở khe khuyết có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh loang như vảy cá.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Liên Thạch Hộ Tâm Phù — `boi_lien_thach_ho_tam_phu`
+
+```json
+{
+  "id": "boi_lien_thach_ho_tam_phu",
+  "n": "Liên Thạch Hộ Tâm Phù",
+  "k": "hotam",
+  "el": "tho",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hoTam": 22.7,
+    "defP": 17.3,
+    "hpP": 20.6,
+    "tam": 3
+  },
+  "lore": "Dọc nếp gấp có thể nhận ra vệt phấn đá đục. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ngọc Bài Chỉ Quán — `boi_ngoc_bai_chi_quan`
+
+```json
+{
+  "id": "boi_ngoc_bai_chi_quan",
+  "n": "Ngọc Bài Chỉ Quán",
+  "k": "boi",
+  "el": "phat",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "mpP": 53.3,
+    "tam": 4,
+    "ngo": 4
+  },
+  "lore": "Thứ đọng lại trên lỗ xỏ dây gợi mùi trầm đọng dưới mái. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Kim Tẫn Hộ Tâm Kính — `boi_kim_tan_ho_tam_kinh`
+
+```json
+{
+  "id": "boi_kim_tan_ho_tam_kinh",
+  "n": "Kim Tẫn Hộ Tâm Kính",
+  "k": "hotam",
+  "el": "hoa",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hoTam": 16.7,
+    "defP": 11.1,
+    "mpP": 23.8,
+    "hpP": 13.5
+  },
+  "lore": "Người giữ trước từng lau lưng kính bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Bội Bích Ba — `boi_ngoc_boi_goi_trong_vat_ao`
+
+```json
+{
+  "id": "boi_ngoc_boi_goi_trong_vat_ao",
+  "n": "Ngọc Bội Bích Ba",
+  "k": "boi",
+  "el": "am",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "mpP": 53.6,
+    "tam": 3,
+    "matkP": 15.6,
+    "ngo": 3
+  },
+  "lore": "Người may màn cuốn mép lại để muỗi khỏi chui vào chỗ trẻ nằm. Dưới mặt ngọc còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện buộc lại mép màn trong buồng",
+  "status": "active"
+}
+```
+
+## Tuyết Tụ Ngọc Quyết — `boi_tuyet_tu_ngoc_quyet`
+
+```json
+{
+  "id": "boi_tuyet_tu_ngoc_quyet",
+  "n": "Tuyết Tụ Ngọc Quyết",
+  "k": "boi",
+  "el": "bang",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "mpP": 52.2,
+    "ngo": 3,
+    "tam": 3,
+    "hpP": 14.1
+  },
+  "lore": "Đưa khe khuyết lại gần ngọn đèn sẽ nhận ra những hạt băng mịn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Hộ Tâm Ngọc Nhu Triều — `boi_ho_tam_ngoc_nhu_trieu`
+
+```json
+{
+  "id": "boi_ho_tam_ngoc_nhu_trieu",
+  "n": "Hộ Tâm Ngọc Nhu Triều",
+  "k": "hotam",
+  "el": "thuy",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hoTam": 15,
+    "defP": 11.6,
+    "hpP": 17.7,
+    "tam": 2,
+    "dodge": 8.2
+  },
+  "lore": "Chạm nhẹ vào viền ngọc, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Vũ Liệp Hộ Tâm Kính — `boi_vu_liep_ho_tam_kinh`
+
+```json
+{
+  "id": "boi_vu_liep_ho_tam_kinh",
+  "n": "Vũ Liệp Hộ Tâm Kính",
+  "k": "hotam",
+  "el": "phong",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hoTam": 21.4,
+    "defP": 14.3,
+    "mpP": 24.7,
+    "dodge": 9,
+    "hpP": 18.9
+  },
+  "lore": "Úp lưng kính về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ngọc Bài Hồng Diệp — `boi_ngoc_bai_danh_phan_nguoi_vang`
+
+```json
+{
+  "id": "boi_ngoc_bai_danh_phan_nguoi_vang",
+  "n": "Ngọc Bài Hồng Diệp",
+  "k": "boi",
+  "el": "loi",
+  "t": 6,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "mpP": 85.2,
+    "tam": 4,
+    "matkP": 25.7,
+    "ngo": 4,
+    "hpP": 23.9
+  },
+  "lore": "{who} để một cuộn chỉ cạnh gối cho người sắp lên đường. Dưới lỗ xỏ dây còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện gửi cuộn chỉ ở trạm nghỉ",
+  "status": "active"
+}
+```
+
+## Đấu Lạp Sương Gió — `non_dauap_suong`
+
+```json
+{
+  "id": "non_dauap_suong",
+  "n": "Đấu Lạp Sương Gió",
+  "k": "non",
+  "el": "vo",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tam": 2,
+    "defP": 6.1
+  },
+  "lore": "Vành nón sứt một góc. Người đội nó đã đi qua mười bảy mùa đông.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Thoa Vỏ Du — `non_thoa_vo_du`
+
+```json
+{
+  "id": "non_thoa_vo_du",
+  "n": "Thoa Vỏ Du",
+  "k": "tram",
+  "el": "moc",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "dodge": 6.8
+  },
+  "lore": "Ở hai mũi thoa có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng tơ cọ vào vỏ.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trâm Mạn Kệ — `non_tram_man_ke`
+
+```json
+{
+  "id": "non_tram_man_ke",
+  "n": "Trâm Mạn Kệ",
+  "k": "tram",
+  "el": "phat",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "dodge": 8.6
+  },
+  "lore": "Dọc chân trâm có thể nhận ra tiếng mõ ngân rất khẽ. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Quan Miêu Diệm — `non_ngoc_quan_mieu_diem`
+
+```json
+{
+  "id": "non_ngoc_quan_mieu_diem",
+  "n": "Ngọc Quan Miêu Diệm",
+  "k": "non",
+  "el": "hoa",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tam": 2,
+    "defP": 8.1
+  },
+  "lore": "Thứ đọng lại trên chân ngọc gợi mùi tàn hương vừa tắt. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đấu Lạp Đạm Mặc — `non_dau_lap_roi_tay_luc_rang_dong`
+
+```json
+{
+  "id": "non_dau_lap_roi_tay_luc_rang_dong",
+  "n": "Đấu Lạp Đạm Mặc",
+  "k": "non",
+  "el": "vo",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "tam": 2,
+    "defP": 5.8
+  },
+  "lore": "Người gánh nước giữ riêng một gàu cho con chó mù. Thỉnh thoảng vành nón còn thoảng vệt bụi từ bờ ruộng.",
+  "src": "Sự kiện múc gàu nước cuối ở bến",
+  "status": "active"
+}
+```
+
+## Bộ Diêu Điện Vân — `non_bo_dieu_dien_van`
+
+```json
+{
+  "id": "non_bo_dieu_dien_van",
+  "n": "Bộ Diêu Điện Vân",
+  "k": "tram",
+  "el": "loi",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "dodge": 8.1
+  },
+  "lore": "Một đường rạn chia chuỗi hạt làm hai, bên trong còn giữ mạch điện nhói đầu ngón.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Quan Băng Nham — `non_quan_bang_nham`
+
+```json
+{
+  "id": "non_quan_bang_nham",
+  "n": "Quan Băng Nham",
+  "k": "non",
+  "el": "bang",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tam": 2,
+    "defP": 6.3
+  },
+  "lore": "Đưa đỉnh quan lại gần ngọn đèn sẽ nhận ra những hạt băng mịn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Bộ Diêu Bạch Châm — `non_bo_dieu_bach_cham`
+
+```json
+{
+  "id": "non_bo_dieu_bach_cham",
+  "n": "Bộ Diêu Bạch Châm",
+  "k": "tram",
+  "el": "kim",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "dodge": 8.6
+  },
+  "lore": "Chạm nhẹ vào chuỗi hạt, có thể nhận ra tiếng đồng ngân dưới mưa.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Quan Mộ Đăng — `non_quan_mo_dang`
+
+```json
+{
+  "id": "non_quan_mo_dang",
+  "n": "Quan Mộ Đăng",
+  "k": "non",
+  "el": "am",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "defP": 7.6
+  },
+  "lore": "Úp đỉnh quan về phía đất vẫn nhận ra ánh đen lẫn trong khói. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Thoa Vân Chao — `non_thoa_van_chao`
+
+```json
+{
+  "id": "non_thoa_van_chao",
+  "n": "Thoa Vân Chao",
+  "k": "tram",
+  "el": "phong",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "dodge": 6.1
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, tiếng gió lọt qua khe còn vương ở hai mũi thoa.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Quan Tử Hà — `non_ngoc_quan_tim_ve_qua_mua`
+
+```json
+{
+  "id": "non_ngoc_quan_tim_ve_qua_mua",
+  "n": "Ngọc Quan Tử Hà",
+  "k": "non",
+  "el": "tho",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "tam": 2,
+    "defP": 6.7
+  },
+  "lore": "{who} buộc dây gai vào chân chim cho nó tìm đúng mái ngói. Dưới chân ngọc còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện tháo dây chân chim",
+  "status": "active"
+}
+```
+
+## Đấu Lạp Liên Vũ — `non_dau_lap_lien_vu`
+
+```json
+{
+  "id": "non_dau_lap_lien_vu",
+  "n": "Đấu Lạp Liên Vũ",
+  "k": "non",
+  "el": "thuy",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tam": 2,
+    "defP": 6.1,
+    "dodge": 2.9
+  },
+  "lore": "Trời vừa đổi gió, ghé gần vành nón có thể nhận ra vị mặn đọng trên môi.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trâm Thổ Vũ — `non_tram_tho_vu`
+
+```json
+{
+  "id": "non_tram_tho_vu",
+  "n": "Trâm Thổ Vũ",
+  "k": "tram",
+  "el": "tho",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "dodge": 7.8,
+    "mpP": 9.8
+  },
+  "lore": "Đặt cạnh cửa sổ, chân trâm để lộ những vết nứt nhỏ như chân chim mỗi khi có người đi ngang.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ngọc Quan Băng Lân — `non_ngoc_quan_bang_lan`
+
+```json
+{
+  "id": "non_ngoc_quan_bang_lan",
+  "n": "Ngọc Quan Băng Lân",
+  "k": "non",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "defP": 9.3,
+    "ngo": 2
+  },
+  "lore": "Ở chân ngọc có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh xanh trên mặt băng.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đấu Lạp Trúc Tủy — `non_dau_lap_truc_tuy`
+
+```json
+{
+  "id": "non_dau_lap_truc_tuy",
+  "n": "Đấu Lạp Trúc Tủy",
+  "k": "non",
+  "el": "moc",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "defP": 7.1,
+    "dodge": 3.4
+  },
+  "lore": "Dọc vành nón có thể nhận ra vệt phấn hoa vàng nhạt. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Quan Thiếc Rêu — `non_quan_thiec_reu`
+
+```json
+{
+  "id": "non_quan_thiec_reu",
+  "n": "Quan Thiếc Rêu",
+  "k": "non",
+  "el": "kim",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "defP": 7.1,
+    "hpP": 6.8
+  },
+  "lore": "Thứ đọng lại trên đỉnh quan gợi tiếng đồng ngân dưới mưa. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Thoa Chu Tước — `non_thoa_giu_cho_ben_hien`
+
+```json
+{
+  "id": "non_thoa_giu_cho_ben_hien",
+  "n": "Thoa Chu Tước",
+  "k": "tram",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "dodge": 11.7,
+    "defP": 13.1
+  },
+  "lore": "Người giữ gạo đong thiếu một gáo để khách nghèo khỏi ngại. Thỉnh thoảng hai mũi thoa còn thoảng tiếng giọt rơi vào chum.",
+  "src": "Sự kiện cân lại túi gạo ở kho",
+  "status": "active"
+}
+```
+
+## Bộ Diêu Vọng Ảnh — `non_bo_dieu_vong_anh`
+
+```json
+{
+  "id": "non_bo_dieu_vong_anh",
+  "n": "Bộ Diêu Vọng Ảnh",
+  "k": "tram",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "dodge": 10.8,
+    "mpP": 15.1
+  },
+  "lore": "Một đường rạn chia chuỗi hạt làm hai, bên trong còn giữ vệt bóng mọc về phía sáng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trâm Tia Câm — `non_tram_tia_cam`
+
+```json
+{
+  "id": "non_tram_tia_cam",
+  "n": "Trâm Tia Câm",
+  "k": "tram",
+  "el": "loi",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "dodge": 6.8,
+    "ngo": 1
+  },
+  "lore": "Đưa chân trâm lại gần ngọn đèn sẽ nhận ra một ánh chớp xanh. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Quan Thiền Cốt — `non_ngoc_quan_thien_cot`
+
+```json
+{
+  "id": "non_ngoc_quan_thien_cot",
+  "n": "Ngọc Quan Thiền Cốt",
+  "k": "non",
+  "el": "phat",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tam": 2,
+    "defP": 8.3,
+    "ngo": 2
+  },
+  "lore": "Chạm nhẹ vào chân ngọc, có thể nhận ra mùi trầm đọng dưới mái.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trâm Diệm Nha — `non_tram_diem_nha`
+
+```json
+{
+  "id": "non_tram_diem_nha",
+  "n": "Trâm Diệm Nha",
+  "k": "tram",
+  "el": "hoa",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "dodge": 7.3,
+    "ngo": 1
+  },
+  "lore": "Úp chân trâm về phía đất vẫn nhận ra tiếng than nổ trong lò. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bộ Diêu Vân Nếp — `non_bo_dieu_van_nep`
+
+```json
+{
+  "id": "non_bo_dieu_van_nep",
+  "n": "Bộ Diêu Vân Nếp",
+  "k": "tram",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "dodge": 10.2,
+    "mpP": 13.7
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, tiếng gió lọt qua khe còn vương ở chuỗi hạt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đấu Lạp Tinh Sa — `non_dau_lap_giau_mot_loi_dan`
+
+```json
+{
+  "id": "non_dau_lap_giau_mot_loi_dan",
+  "n": "Đấu Lạp Tinh Sa",
+  "k": "non",
+  "el": "vo",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "tam": 3,
+    "defP": 7.5,
+    "dodge": 4
+  },
+  "lore": "Người bán trầu rửa chiếc bình một lần nữa trước ngày nghỉ chợ. Dưới vành nón còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện mang bình qua phiên chợ cũ",
+  "status": "active"
+}
+```
+
+## Thoa Miêu Diệm — `non_thoa_mieu_diem`
+
+```json
+{
+  "id": "non_thoa_mieu_diem",
+  "n": "Thoa Miêu Diệm",
+  "k": "tram",
+  "el": "hoa",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "dodge": 9.8,
+    "defP": 13.4
+  },
+  "lore": "Trời vừa đổi gió, ghé gần hai mũi thoa có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Quan U Tằm — `non_quan_u_tam`
+
+```json
+{
+  "id": "non_quan_u_tam",
+  "n": "Quan U Tằm",
+  "k": "non",
+  "el": "am",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "defP": 8.8,
+    "ngo": 2
+  },
+  "lore": "Đặt cạnh cửa sổ, đỉnh quan để lộ ánh đen lẫn trong khói mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trâm Chỉ Quán — `non_tram_chi_quan`
+
+```json
+{
+  "id": "non_tram_chi_quan",
+  "n": "Trâm Chỉ Quán",
+  "k": "tram",
+  "el": "phat",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "dodge": 9.5,
+    "ngo": 2
+  },
+  "lore": "Ở chân trâm có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp hơi ấm như hạt cơm mới.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Quan Tuyết Vĩ — `non_ngoc_quan_tuyet_vi`
+
+```json
+{
+  "id": "non_ngoc_quan_tuyet_vi",
+  "n": "Ngọc Quan Tuyết Vĩ",
+  "k": "non",
+  "el": "bang",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "defP": 8.3,
+    "ngo": 2
+  },
+  "lore": "Dọc chân ngọc có thể nhận ra những hạt băng mịn. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Thoa Bạch Châm — `non_thoa_bach_cham`
+
+```json
+{
+  "id": "non_thoa_bach_cham",
+  "n": "Thoa Bạch Châm",
+  "k": "tram",
+  "el": "kim",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "dodge": 13.6,
+    "defP": 16.4
+  },
+  "lore": "Thứ đọng lại trên hai mũi thoa gợi tiếng đồng ngân dưới mưa. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Quan Ngọc Lộ — `non_quan_quen_cat_vao_nha`
+
+```json
+{
+  "id": "non_quan_quen_cat_vao_nha",
+  "n": "Quan Ngọc Lộ",
+  "k": "non",
+  "el": "tho",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "tam": 4,
+    "defP": 13,
+    "hpP": 13.7,
+    "hoTam": 11.9
+  },
+  "lore": "Người cất rượu để một vò nhạt cho người bệnh mới khỏi. Thỉnh thoảng đỉnh quan còn thoảng vệt phấn đá đục.",
+  "src": "Sự kiện mở vò rượu dưới tấm phản",
+  "status": "active"
+}
+```
+
+## Bộ Diêu Tử Điện — `non_bo_dieu_tu_dien`
+
+```json
+{
+  "id": "non_bo_dieu_tu_dien",
+  "n": "Bộ Diêu Tử Điện",
+  "k": "tram",
+  "el": "loi",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "dodge": 13.6,
+    "tp": 2
+  },
+  "lore": "Một đường rạn chia chuỗi hạt làm hai, bên trong còn giữ mạch điện nhói đầu ngón.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đấu Lạp Lan Giáp — `non_dau_lap_lan_giap`
+
+```json
+{
+  "id": "non_dau_lap_lan_giap",
+  "n": "Đấu Lạp Lan Giáp",
+  "k": "non",
+  "el": "moc",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "defP": 11,
+    "dodge": 7.3,
+    "mpP": 17.3
+  },
+  "lore": "Đưa vành nón lại gần ngọn đèn sẽ nhận ra vệt phấn hoa vàng nhạt. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trâm Liên Vũ — `non_tram_lien_vu`
+
+```json
+{
+  "id": "non_tram_lien_vu",
+  "n": "Trâm Liên Vũ",
+  "k": "tram",
+  "el": "thuy",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "dodge": 8.5,
+    "ngo": 2,
+    "mpP": 14.6
+  },
+  "lore": "Chạm nhẹ vào chân trâm, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Quan Phong Tàng — `non_quan_phong_tang`
+
+```json
+{
+  "id": "non_quan_phong_tang",
+  "n": "Quan Phong Tàng",
+  "k": "non",
+  "el": "phong",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tam": 4,
+    "defP": 12.8,
+    "hpP": 12.1,
+    "ngo": 2
+  },
+  "lore": "Úp đỉnh quan về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đấu Lạp Áo Tơi — `non_dau_lap_ao_toi`
+
+```json
+{
+  "id": "non_dau_lap_ao_toi",
+  "n": "Đấu Lạp Áo Tơi",
+  "k": "non",
+  "el": "vo",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tam": 2,
+    "defP": 8.5,
+    "dodge": 4.5,
+    "tp": 2
+  },
+  "lore": "Lúc chạng vạng trên bến triều, tiếng cửa gỗ bị gió đẩy còn vương ở vành nón.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Thoa Bích Ba — `non_thoa_chua_mot_duong_khau`
+
+```json
+{
+  "id": "non_thoa_chua_mot_duong_khau",
+  "n": "Thoa Bích Ba",
+  "k": "tram",
+  "el": "thuy",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "dodge": 14.7,
+    "van": 2,
+    "defP": 20.4
+  },
+  "lore": "{who} gói nắm thóc giống cuối đem qua bờ lũ. Dưới hai mũi thoa còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện đưa thóc giống qua lũ",
+  "status": "active"
+}
+```
+
+## Bộ Diêu Áo Tơi — `non_bo_dieu_ao_toi`
+
+```json
+{
+  "id": "non_bo_dieu_ao_toi",
+  "n": "Bộ Diêu Áo Tơi",
+  "k": "tram",
+  "el": "vo",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "dodge": 13.6,
+    "tp": 2,
+    "mpP": 15.9
+  },
+  "lore": "Trời vừa đổi gió, ghé gần chuỗi hạt có thể nhận ra mùi khói bếp vương lại.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Quan Sấm Tắt — `non_ngoc_quan_sam_tat`
+
+```json
+{
+  "id": "non_ngoc_quan_sam_tat",
+  "n": "Ngọc Quan Sấm Tắt",
+  "k": "non",
+  "el": "loi",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tam": 5,
+    "defP": 14.4,
+    "ngo": 3,
+    "mpP": 20
+  },
+  "lore": "Đặt cạnh cửa sổ, chân ngọc để lộ tiếng rền như dưới nền nhà mỗi khi có người đi ngang.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đấu Lạp Liễu Nhung — `non_dau_lap_lieu_nhung`
+
+```json
+{
+  "id": "non_dau_lap_lieu_nhung",
+  "n": "Đấu Lạp Liễu Nhung",
+  "k": "non",
+  "el": "moc",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tam": 6,
+    "defP": 16.2,
+    "dodge": 8.4,
+    "tp": 3
+  },
+  "lore": "Ở vành nón có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng tơ cọ vào vỏ.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ngọc Quan Lò Sương — `non_ngoc_quan_lo_suong`
+
+```json
+{
+  "id": "non_ngoc_quan_lo_suong",
+  "n": "Ngọc Quan Lò Sương",
+  "k": "non",
+  "el": "hoa",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tam": 5,
+    "defP": 16.7,
+    "ngo": 3,
+    "mpP": 22.4
+  },
+  "lore": "Dọc chân ngọc có thể nhận ra ánh lửa liếm qua mép. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Thau Bạc Thoa — `non_thau_bac_thoa`
+
+```json
+{
+  "id": "non_thau_bac_thoa",
+  "n": "Thau Bạc Thoa",
+  "k": "tram",
+  "el": "kim",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "dodge": 11,
+    "van": 2,
+    "defP": 17.2
+  },
+  "lore": "Thứ đọng lại trên hai mũi thoa gợi tiếng đồng ngân dưới mưa. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trâm Bạch Hạc — `non_tram_di_qua_cho_gio_lua`
+
+```json
+{
+  "id": "non_tram_di_qua_cho_gio_lua",
+  "n": "Trâm Bạch Hạc",
+  "k": "tram",
+  "el": "bang",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "dodge": 13.9,
+    "ngo": 2,
+    "mpP": 17.5
+  },
+  "lore": "Người trông mộ châm lửa bằng tấm giấy ghi tuổi mình. Thỉnh thoảng chân trâm còn thoảng những hạt băng mịn.",
+  "src": "Sự kiện châm đèn trước ngôi mộ nhỏ",
+  "status": "active"
+}
+```
+
+## Mặc Cốt Quan — `non_mac_cot_quan`
+
+```json
+{
+  "id": "non_mac_cot_quan",
+  "n": "Mặc Cốt Quan",
+  "k": "non",
+  "el": "am",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tam": 4,
+    "defP": 11.5,
+    "ngo": 2,
+    "mpP": 17.8
+  },
+  "lore": "Một đường rạn chia đỉnh quan làm hai, bên trong còn giữ vệt bóng mọc về phía sáng.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bộ Diêu Thạch Tủy — `non_bo_dieu_thach_tuy`
+
+```json
+{
+  "id": "non_bo_dieu_thach_tuy",
+  "n": "Bộ Diêu Thạch Tủy",
+  "k": "tram",
+  "el": "tho",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "dodge": 14.4,
+    "tp": 3,
+    "mpP": 22.4
+  },
+  "lore": "Đưa chuỗi hạt lại gần ngọn đèn sẽ nhận ra vệt phấn đá đục. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Bạch Phạn Trâm — `non_bach_phan_tram`
+
+```json
+{
+  "id": "non_bach_phan_tram",
+  "n": "Bạch Phạn Trâm",
+  "k": "tram",
+  "el": "phat",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "dodge": 18.4,
+    "ngo": 3,
+    "mpP": 23.8
+  },
+  "lore": "Chạm nhẹ vào chân trâm, có thể nhận ra mùi trầm đọng dưới mái.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Quan Phong Đăng — `non_quan_phong_dang`
+
+```json
+{
+  "id": "non_quan_phong_dang",
+  "n": "Quan Phong Đăng",
+  "k": "non",
+  "el": "phong",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tam": 8,
+    "defP": 17.8,
+    "hpP": 16.6,
+    "ngo": 4
+  },
+  "lore": "Úp đỉnh quan về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trì Châu Đấu Lạp — `non_tri_chau_dau_lap`
+
+```json
+{
+  "id": "non_tri_chau_dau_lap",
+  "n": "Trì Châu Đấu Lạp",
+  "k": "non",
+  "el": "thuy",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tam": 6,
+    "defP": 18.4,
+    "dodge": 7.1,
+    "tp": 3
+  },
+  "lore": "Lúc chạng vạng trên thềm đá cổ, ánh loang như vảy cá còn vương ở vành nón.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Bộ Diêu Hắc Thạch — `non_bo_dieu_tra_ve_ben_cu`
+
+```json
+{
+  "id": "non_bo_dieu_tra_ve_ben_cu",
+  "n": "Bộ Diêu Hắc Thạch",
+  "k": "tram",
+  "el": "moc",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "dodge": 24.6,
+    "tp": 4,
+    "mpP": 27.2,
+    "van": 4
+  },
+  "lore": "Người chở đò để ngửa lòng bàn tay khi nghe tên người chết. Dưới chuỗi hạt còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện trả lời gọi đò trong sương",
+  "status": "active"
+}
+```
+
+## Giấy Gió Thoa — `non_giay_gio_thoa`
+
+```json
+{
+  "id": "non_giay_gio_thoa",
+  "n": "Giấy Gió Thoa",
+  "k": "tram",
+  "el": "vo",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "dodge": 21.9,
+    "defP": 26.7,
+    "van": 4,
+    "tp": 4
+  },
+  "lore": "Trời vừa đổi gió, ghé gần hai mũi thoa có thể nhận ra mùi khói bếp vương lại.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Quan Xích Đinh — `non_ngoc_quan_xich_dinh`
+
+```json
+{
+  "id": "non_ngoc_quan_xich_dinh",
+  "n": "Ngọc Quan Xích Đinh",
+  "k": "non",
+  "el": "kim",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tam": 5,
+    "defP": 14.4,
+    "ngo": 3,
+    "mpP": 23.8,
+    "crit": 7.7
+  },
+  "lore": "Đặt cạnh cửa sổ, chân ngọc để lộ những vảy sắt li ti mỗi khi có người đi ngang.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Tử Điện Trâm — `non_tu_dien_tram`
+
+```json
+{
+  "id": "non_tu_dien_tram",
+  "n": "Tử Điện Trâm",
+  "k": "tram",
+  "el": "loi",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "dodge": 18.4,
+    "mpP": 23.8,
+    "tp": 3,
+    "van": 3
+  },
+  "lore": "Ở chân trâm có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp mạch điện nhói đầu ngón.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Quan Thanh Đồng — `non_quan_tim_ve_qua_mua`
+
+```json
+{
+  "id": "non_quan_tim_ve_qua_mua",
+  "n": "Quan Thanh Đồng",
+  "k": "non",
+  "el": "am",
+  "t": 6,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "tam": 11,
+    "defP": 28.8,
+    "hpP": 28.1,
+    "ngo": 4,
+    "mpP": 34.6,
+    "dodge": 14.5,
+    "hoTam": 23.2
+  },
+  "lore": "Người thợ lò nhét hòn sỏi dưới lưỡi để khỏi ngủ quên. Dưới đỉnh quan còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện thay ca trông lò",
+  "status": "active"
+}
+```
+
+## Tháp Mộc Tuế — `pb_thap_moc_tue`
+
+```json
+{
+  "id": "pb_thap_moc_tue",
+  "n": "Tháp Mộc Tuế",
+  "k": "thap",
+  "el": "moc",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 7.2,
+    "blockTurn": 3.8
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, tiếng tơ cọ vào vỏ còn vương ở mái tầng dưới.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ấn Băng Trầm — `pb_an_bang_tram`
+
+```json
+{
+  "id": "pb_an_bang_tram",
+  "n": "Ấn Băng Trầm",
+  "k": "an",
+  "el": "bang",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "stunP": 9.5
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mặt ấn nhận ra những hạt băng mịn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Khổn Tiên Thằng Cỏ Rạ — `pb_khon_tien_thang_co_ra`
+
+```json
+{
+  "id": "pb_khon_tien_thang_co_ra",
+  "n": "Khổn Tiên Thằng Cỏ Rạ",
+  "k": "xich",
+  "el": "vo",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1
+  },
+  "lore": "Trời vừa đổi gió, ghé gần mối bện có thể nhận ra mùi khói bếp vương lại.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Lệnh Bài Huyền Thiết — `pb_lenh_bai_nho_ngay_dong_cua`
+
+```json
+{
+  "id": "pb_lenh_bai_nho_ngay_dong_cua",
+  "n": "Lệnh Bài Huyền Thiết",
+  "k": "lenh",
+  "el": "phat",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "tam": 4,
+    "shopP": 10
+  },
+  "lore": "Người kéo vó cứu được một người, mất cả chiếc vó. Thỉnh thoảng mép lệnh bài còn thoảng tiếng mõ ngân rất khẽ.",
+  "src": "Sự kiện kéo lại vó ở bến vắng",
+  "status": "active"
+}
+```
+
+## Địch Cổ Nham — `pb_dich_co_nham`
+
+```json
+{
+  "id": "pb_dich_co_nham",
+  "n": "Địch Cổ Nham",
+  "k": "cam",
+  "el": "tho",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "weakStart": 1
+  },
+  "lore": "Ở lỗ sáo có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cát lọt qua kẽ.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Yêu Nha Hắc Giản — `pb_yeu_nha_hac_gian`
+
+```json
+{
+  "id": "pb_yeu_nha_hac_gian",
+  "n": "Yêu Nha Hắc Giản",
+  "k": "cot",
+  "el": "am",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "execute": 22
+  },
+  "lore": "Dọc gốc nanh có thể nhận ra tiếng vải lụa sột soạt dưới đèn. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Chuông Lôi Diệp — `pb_chuong_loi_diep`
+
+```json
+{
+  "id": "pb_chuong_loi_diep",
+  "n": "Chuông Lôi Diệp",
+  "k": "linh",
+  "el": "loi",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "startBlock": 13
+  },
+  "lore": "Thứ đọng lại trên miệng chuông gợi mùi vải sém sau tiếng sét. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Cờ Lệnh Diệm Sa — `pb_co_lenh_diem_sa`
+
+```json
+{
+  "id": "pb_co_lenh_diem_sa",
+  "n": "Cờ Lệnh Diệm Sa",
+  "k": "phien",
+  "el": "hoa",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.14
+  },
+  "lore": "Người giữ trước từng lau đường khâu bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Xích Thanh Dực — `pb_xich_thanh_duc`
+
+```json
+{
+  "id": "pb_xich_thanh_duc",
+  "n": "Xích Thanh Dực",
+  "k": "xich",
+  "el": "phong",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1
+  },
+  "lore": "Một đường rạn chia mắt xích làm hai, bên trong còn giữ tiếng gió lọt qua khe.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hộ Mệnh Phù Minh Châu — `pb_ho_menh_phu_cat_mot_tieng_tho`
+
+```json
+{
+  "id": "pb_ho_menh_phu_cat_mot_tieng_tho",
+  "n": "Hộ Mệnh Phù Minh Châu",
+  "k": "phu",
+  "el": "kim",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "hpP": 5.7,
+    "defP": 7.3,
+    "hoTam": 5.4
+  },
+  "lore": "Người tỉa cây khắc dấu lên cành thấp để trẻ khỏi leo quá cao. Dưới đầu mép giấy còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện gỡ dây đánh dấu trên cành",
+  "status": "active"
+}
+```
+
+## Kiếm Hạp Tam Triều — `pb_kiem_hap_tam_trieu`
+
+```json
+{
+  "id": "pb_kiem_hap_tam_trieu",
+  "n": "Kiếm Hạp Tam Triều",
+  "k": "hap",
+  "el": "thuy",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "elX": 24.8
+  },
+  "lore": "Chạm nhẹ vào nắp hạp, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Khánh Phong Hạc — `pb_khanh_phong_hac`
+
+```json
+{
+  "id": "pb_khanh_phong_hac",
+  "n": "Khánh Phong Hạc",
+  "k": "linh",
+  "el": "phong",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "startBlock": 15.7
+  },
+  "lore": "Úp chỗ dây treo về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Cầm Bạch Đống — `pb_cam_bach_dong`
+
+```json
+{
+  "id": "pb_cam_bach_dong",
+  "n": "Cầm Bạch Đống",
+  "k": "cam",
+  "el": "bang",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "weakStart": 1
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, ánh xanh trên mặt băng còn vương ở hốc đàn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Thú Cốt Ngưng Triều — `pb_thu_cot_ngung_trieu`
+
+```json
+{
+  "id": "pb_thu_cot_ngung_trieu",
+  "n": "Thú Cốt Ngưng Triều",
+  "k": "cot",
+  "el": "thuy",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "execute": 21.6
+  },
+  "lore": "Vào giờ sương rơi, ghé gần ống tủy nhận ra tiếng giọt rơi vào chum. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Tán Miêu Diệm — `pb_tan_mieu_diem`
+
+```json
+{
+  "id": "pb_tan_mieu_diem",
+  "n": "Tán Miêu Diệm",
+  "k": "tan",
+  "el": "hoa",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "firstEvade": 1
+  },
+  "lore": "Trời vừa đổi gió, ghé gần sống nan có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Tiêu Huyền Quang — `pb_tieu_de_danh_den_sang`
+
+```json
+{
+  "id": "pb_tieu_de_danh_den_sang",
+  "n": "Tiêu Huyền Quang",
+  "k": "cam",
+  "el": "moc",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "weakStart": 1
+  },
+  "lore": "Người thợ lò nhét hòn sỏi dưới lưỡi để khỏi ngủ quên. Thỉnh thoảng miệng tiêu còn thoảng vệt phấn hoa vàng nhạt.",
+  "src": "Sự kiện thay ca trông lò",
+  "status": "active"
+}
+```
+
+## Châu Bạch Phạn — `pb_chau_bach_phan`
+
+```json
+{
+  "id": "pb_chau_bach_phan",
+  "n": "Châu Bạch Phạn",
+  "k": "chau",
+  "el": "phat",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "regenHp": 2.5
+  },
+  "lore": "Ở giữa lòng châu có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp hơi ấm như hạt cơm mới.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Kính Sấm Mù — `pb_kinh_sam_mu`
+
+```json
+{
+  "id": "pb_kinh_sam_mu",
+  "n": "Kính Sấm Mù",
+  "k": "kinh",
+  "el": "loi",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "reflect": 17.6
+  },
+  "lore": "Dọc lưng kính có thể nhận ra một ánh chớp xanh. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phiên Giấy Gió — `pb_phien_giay_gio`
+
+```json
+{
+  "id": "pb_phien_giay_gio",
+  "n": "Phiên Giấy Gió",
+  "k": "phien",
+  "el": "vo",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.2
+  },
+  "lore": "Thứ đọng lại trên gân vải gợi mùi nắng trên vải mộc. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Tịnh Bình Mộ Đăng — `pb_tinh_binh_mo_dang`
+
+```json
+{
+  "id": "pb_tinh_binh_mo_dang",
+  "n": "Tịnh Bình Mộ Đăng",
+  "k": "holo",
+  "el": "am",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "healAfter": 8.8
+  },
+  "lore": "Người giữ trước từng lau chân bình bằng vải ướt. Đến giờ vẫn còn ánh đen lẫn trong khói.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Huyết Ngọc Nê Tâm — `pb_huyet_ngoc_ne_tam`
+
+```json
+{
+  "id": "pb_huyet_ngoc_ne_tam",
+  "n": "Huyết Ngọc Nê Tâm",
+  "k": "huyet",
+  "el": "tho",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "drain": 10.4
+  },
+  "lore": "Một đường rạn chia lõi ngọc làm hai, bên trong còn giữ tiếng cát lọt qua kẽ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đăng Cửu Văn — `pb_dang_doi_chan_nguoi_ve`
+
+```json
+{
+  "id": "pb_dang_doi_chan_nguoi_ve",
+  "n": "Đăng Cửu Văn",
+  "k": "dang",
+  "el": "kim",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "tam": 2,
+    "tammaRes": 29.2
+  },
+  "lore": "Người thổi sáo bỏ ngỏ một lỗ cho đứa trẻ mới học. Dưới tim đèn còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện vá lại ống sáo ở hiên",
+  "status": "active"
+}
+```
+
+## Hồ Lô Lan Giáp — `pb_ho_lo_lan_giap`
+
+```json
+{
+  "id": "pb_ho_lo_lan_giap",
+  "n": "Hồ Lô Lan Giáp",
+  "k": "holo",
+  "el": "moc",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "healAfter": 13.6
+  },
+  "lore": "Chạm nhẹ vào nút hồ lô, có thể nhận ra mùi nhựa vừa rịn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Giản Phong Tàng — `pb_ngoc_gian_phong_tang`
+
+```json
+{
+  "id": "pb_ngoc_gian_phong_tang",
+  "n": "Ngọc Giản Phong Tàng",
+  "k": "gian",
+  "el": "phong",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tvP": 21.6
+  },
+  "lore": "Úp rãnh khắc về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Tháp Sa Nhận — `pb_thap_sa_nhan`
+
+```json
+{
+  "id": "pb_thap_sa_nhan",
+  "n": "Tháp Sa Nhận",
+  "k": "thap",
+  "el": "kim",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "defP": 9,
+    "blockTurn": 4.9
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, ánh bạc nhạt trên mép còn vương ở mái tầng dưới.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Kính Thủy Liêm — `pb_kinh_thuy_liem`
+
+```json
+{
+  "id": "pb_kinh_thuy_liem",
+  "n": "Kính Thủy Liêm",
+  "k": "kinh",
+  "el": "thuy",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "reflect": 13.2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần lưng kính nhận ra tiếng giọt rơi vào chum. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Cờ Lệnh Đăng Tâm — `pb_co_lenh_dang_tam`
+
+```json
+{
+  "id": "pb_co_lenh_dang_tam",
+  "n": "Cờ Lệnh Đăng Tâm",
+  "k": "phien",
+  "el": "hoa",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.17
+  },
+  "lore": "Trời vừa đổi gió, ghé gần đường khâu có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Phiên Huyền Thiết — `pb_phien_dem_theo_khi_xuong_nui`
+
+```json
+{
+  "id": "pb_phien_dem_theo_khi_xuong_nui",
+  "n": "Phiên Huyền Thiết",
+  "k": "phien",
+  "el": "am",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "poisonHit": 0.15
+  },
+  "lore": "Người xay gạo gõ lên đá ba lần để báo đã hết đêm. Thỉnh thoảng gân vải còn thoảng tiếng vải lụa sột soạt dưới đèn.",
+  "src": "Sự kiện gõ cối lúc sang canh",
+  "status": "active"
+}
+```
+
+## Thú Cốt Lôi Mạch — `pb_thu_cot_loi_mach`
+
+```json
+{
+  "id": "pb_thu_cot_loi_mach",
+  "n": "Thú Cốt Lôi Mạch",
+  "k": "cot",
+  "el": "loi",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "execute": 20.9
+  },
+  "lore": "Ở ống tủy có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp mạch điện nhói đầu ngón.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Xích Tầng Nham — `pb_xich_tang_nham`
+
+```json
+{
+  "id": "pb_xich_tang_nham",
+  "n": "Xích Tầng Nham",
+  "k": "xich",
+  "el": "tho",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1
+  },
+  "lore": "Dọc mắt xích có thể nhận ra vệt phấn đá đục. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Tịnh Bình Mái Ngói — `pb_tinh_binh_mai_ngoi`
+
+```json
+{
+  "id": "pb_tinh_binh_mai_ngoi",
+  "n": "Tịnh Bình Mái Ngói",
+  "k": "holo",
+  "el": "vo",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "healAfter": 10.4
+  },
+  "lore": "Thứ đọng lại trên chân bình gợi mùi nắng trên vải mộc. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Kiếm Hạp Hàn Tảo — `pb_kiem_hap_han_tao`
+
+```json
+{
+  "id": "pb_kiem_hap_han_tao",
+  "n": "Kiếm Hạp Hàn Tảo",
+  "k": "hap",
+  "el": "bang",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "elX": 27.1
+  },
+  "lore": "Người giữ trước từng lau nắp hạp bằng vải ướt. Đến giờ vẫn còn tiếng sương đóng lách tách.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Giản Tịnh Trần — `pb_ngoc_gian_tinh_tran`
+
+```json
+{
+  "id": "pb_ngoc_gian_tinh_tran",
+  "n": "Ngọc Giản Tịnh Trần",
+  "k": "gian",
+  "el": "phat",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tvP": 15.7
+  },
+  "lore": "Một đường rạn chia rãnh khắc làm hai, bên trong còn giữ hơi ấm như hạt cơm mới.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Khổn Tiên Thằng Tuyết Diệp — `pb_khon_tien_thang_khong_de_ten`
+
+```json
+{
+  "id": "pb_khon_tien_thang_khong_de_ten",
+  "n": "Khổn Tiên Thằng Tuyết Diệp",
+  "k": "xich",
+  "el": "kim",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "vulnStart": 1
+  },
+  "lore": "Người đẩy xe chèn bánh bằng một cuốn kinh đã đọc thuộc. Dưới mối bện còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện nhặt cuốn kinh dưới bánh",
+  "status": "active"
+}
+```
+
+## Đăng Trầm Nham — `pb_dang_tram_nham`
+
+```json
+{
+  "id": "pb_dang_tram_nham",
+  "n": "Đăng Trầm Nham",
+  "k": "dang",
+  "el": "tho",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "tam": 2,
+    "tammaRes": 31.3
+  },
+  "lore": "Chạm nhẹ vào tim đèn, có thể nhận ra mùi đất vỡ sau cơn mưa.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Yêu Nha Phong Lạc — `pb_yeu_nha_phong_lac`
+
+```json
+{
+  "id": "pb_yeu_nha_phong_lac",
+  "n": "Yêu Nha Phong Lạc",
+  "k": "cot",
+  "el": "phong",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "execute": 22.9
+  },
+  "lore": "Úp gốc nanh về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Địch Bạch Phạn — `pb_dich_bach_phan`
+
+```json
+{
+  "id": "pb_dich_bach_phan",
+  "n": "Địch Bạch Phạn",
+  "k": "cam",
+  "el": "phat",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "weakStart": 1
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, hơi ấm như hạt cơm mới còn vương ở lỗ sáo.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Chuông Sổ Sờn — `pb_chuong_so_son`
+
+```json
+{
+  "id": "pb_chuong_so_son",
+  "n": "Chuông Sổ Sờn",
+  "k": "linh",
+  "el": "vo",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "startBlock": 13
+  },
+  "lore": "Vào giờ sương rơi, ghé gần miệng chuông nhận ra vệt bụi từ bờ ruộng. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ấn Tàn Đăng — `pb_an_tan_dang`
+
+```json
+{
+  "id": "pb_an_tan_dang",
+  "n": "Ấn Tàn Đăng",
+  "k": "an",
+  "el": "hoa",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "stunP": 10.4
+  },
+  "lore": "Trời vừa đổi gió, ghé gần mặt ấn có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Châu Tử Hà — `pb_chau_giu_dau_chan_sau`
+
+```json
+{
+  "id": "pb_chau_giu_dau_chan_sau",
+  "n": "Châu Tử Hà",
+  "k": "chau",
+  "el": "bang",
+  "t": 0,
+  "req": 2,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "regenHp": 4.2
+  },
+  "lore": "Người nhặt củi cất miếng vỏ cây có dấu răng của đứa trẻ. Thỉnh thoảng giữa lòng châu còn thoảng những hạt băng mịn.",
+  "src": "Sự kiện đưa vỏ cây về nhà cũ",
+  "status": "active"
+}
+```
+
+## Cầm Nhu Triều — `pb_cam_nhu_trieu`
+
+```json
+{
+  "id": "pb_cam_nhu_trieu",
+  "n": "Cầm Nhu Triều",
+  "k": "cam",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "mpP": 6.8
+  },
+  "lore": "Ở hốc đàn có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh loang như vảy cá.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Huyết Ngọc Hắc Nhung — `pb_huyet_ngoc_hac_nhung`
+
+```json
+{
+  "id": "pb_huyet_ngoc_hac_nhung",
+  "n": "Huyết Ngọc Hắc Nhung",
+  "k": "huyet",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "drain": 10.2,
+    "hpP": 8.1
+  },
+  "lore": "Dọc lõi ngọc có thể nhận ra tiếng vải lụa sột soạt dưới đèn. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Khánh Lôi Vĩ — `pb_khanh_loi_vi`
+
+```json
+{
+  "id": "pb_khanh_loi_vi",
+  "n": "Khánh Lôi Vĩ",
+  "k": "linh",
+  "el": "loi",
+  "t": 1,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "startBlock": 12.2,
+    "tam": 1
+  },
+  "lore": "Thứ đọng lại trên chỗ dây treo gợi mùi vải sém sau tiếng sét. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Hộ Mệnh Phù Dương Liễu — `pb_ho_menh_phu_duong_lieu`
+
+```json
+{
+  "id": "pb_ho_menh_phu_duong_lieu",
+  "n": "Hộ Mệnh Phù Dương Liễu",
+  "k": "phu",
+  "el": "moc",
+  "t": 1,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 6.3,
+    "defP": 9.3,
+    "mpP": 9.9
+  },
+  "lore": "Người giữ trước từng lau đầu mép giấy bằng vải ướt. Đến giờ vẫn còn những thớ gỗ ướt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hồ Lô Cổ Nham — `pb_ho_lo_co_nham`
+
+```json
+{
+  "id": "pb_ho_lo_co_nham",
+  "n": "Hồ Lô Cổ Nham",
+  "k": "holo",
+  "el": "tho",
+  "t": 1,
+  "req": 2,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "healAfter": 14,
+    "hpP": 7.2
+  },
+  "lore": "Một đường rạn chia nút hồ lô làm hai, bên trong còn giữ tiếng cát lọt qua kẽ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Tiêu Sa Liên — `pb_tieu_cat_vao_ngay_mua`
+
+```json
+{
+  "id": "pb_tieu_cat_vao_ngay_mua",
+  "n": "Tiêu Sa Liên",
+  "k": "cam",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "weakStart": 1,
+    "dodge": 3.2
+  },
+  "lore": "Người thợ thuyền đặt một đồng tiền dưới mũi thuyền cầu bình an. Dưới miệng tiêu còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện lật mũi thuyền ở vũng cạn",
+  "status": "active"
+}
+```
+
+## Lệnh Bài Tẫn Vũ — `pb_lenh_bai_tan_vu`
+
+```json
+{
+  "id": "pb_lenh_bai_tan_vu",
+  "n": "Lệnh Bài Tẫn Vũ",
+  "k": "lenh",
+  "el": "hoa",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tam": 5,
+    "shopP": 13.4,
+    "van": 2
+  },
+  "lore": "Chạm nhẹ vào mép lệnh bài, có thể nhận ra mùi tàn hương vừa tắt.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Tán Phật Kệ — `pb_tan_phat_ke`
+
+```json
+{
+  "id": "pb_tan_phat_ke",
+  "n": "Tán Phật Kệ",
+  "k": "tan",
+  "el": "phat",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "firstEvade": 1,
+    "dodge": 3.8
+  },
+  "lore": "Úp sống nan về phía đất vẫn nhận ra vết bụi vàng của hương. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Tháp Tuyết Tủy — `pb_thap_tuyet_tuy`
+
+```json
+{
+  "id": "pb_thap_tuyet_tuy",
+  "n": "Tháp Tuyết Tủy",
+  "k": "thap",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 12.3,
+    "blockTurn": 7.6,
+    "mpP": 12.6
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, ánh xanh trên mặt băng còn vương ở mái tầng dưới.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Chuông Ngân Sa — `pb_chuong_ngan_sa`
+
+```json
+{
+  "id": "pb_chuong_ngan_sa",
+  "n": "Chuông Ngân Sa",
+  "k": "linh",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "startBlock": 13.5,
+    "tam": 1
+  },
+  "lore": "Vào giờ sương rơi, ghé gần miệng chuông nhận ra mùi búa mới tôi. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Cầm Dạ Kiển — `pb_cam_da_kien`
+
+```json
+{
+  "id": "pb_cam_da_kien",
+  "n": "Cầm Dạ Kiển",
+  "k": "cam",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "mpP": 10.3
+  },
+  "lore": "Trời vừa đổi gió, ghé gần hốc đàn có thể nhận ra ánh đen lẫn trong khói.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Yêu Nha Lôi Vũ — `pb_yeu_nha_loi_vu`
+
+```json
+{
+  "id": "pb_yeu_nha_loi_vu",
+  "n": "Yêu Nha Lôi Vũ",
+  "k": "cot",
+  "el": "loi",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "execute": 23.6,
+    "atkP": 5.5
+  },
+  "lore": "Đặt cạnh cửa sổ, gốc nanh để lộ tiếng rền như dưới nền nhà mỗi khi có người đi ngang.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Xích Nguyệt Ảnh — `pb_xich_qua_cua_khi_troi_toi`
+
+```json
+{
+  "id": "pb_xich_qua_cua_khi_troi_toi",
+  "n": "Xích Nguyệt Ảnh",
+  "k": "xich",
+  "el": "vo",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "vulnStart": 1,
+    "atkP": 5.8
+  },
+  "lore": "{who} chia đôi chiếc bánh cúng rồi cất nửa phần của người đến chậm. Đến giờ mắt xích còn giữ tiếng cửa gỗ bị gió đẩy.",
+  "src": "Sự kiện đặt nửa chiếc bánh lên mâm",
+  "status": "active"
+}
+```
+
+## Kiếm Hạp Đào Sương — `pb_kiem_hap_dao_suong`
+
+```json
+{
+  "id": "pb_kiem_hap_dao_suong",
+  "n": "Kiếm Hạp Đào Sương",
+  "k": "hap",
+  "el": "moc",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "elX": 34.6,
+    "atkP": 7.6
+  },
+  "lore": "Dọc nắp hạp có thể nhận ra vệt phấn hoa vàng nhạt. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Khánh Phong Lạc — `pb_khanh_phong_lac`
+
+```json
+{
+  "id": "pb_khanh_phong_lac",
+  "n": "Khánh Phong Lạc",
+  "k": "linh",
+  "el": "phong",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "startBlock": 14.1,
+    "mpP": 9.1
+  },
+  "lore": "Thứ đọng lại trên chỗ dây treo gợi tiếng lá khô lăn dưới gót. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ấn Phong Lạc — `pb_an_phong_lac`
+
+```json
+{
+  "id": "pb_an_phong_lac",
+  "n": "Ấn Phong Lạc",
+  "k": "an",
+  "el": "phong",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "stunP": 9.5,
+    "matkP": 8.1
+  },
+  "lore": "Người giữ trước từng lau mặt ấn bằng vải ướt. Đến giờ vẫn còn ánh chao như cánh chim.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Địch Điện Vân — `pb_dich_dien_van`
+
+```json
+{
+  "id": "pb_dich_dien_van",
+  "n": "Địch Điện Vân",
+  "k": "cam",
+  "el": "loi",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "mpP": 9.5
+  },
+  "lore": "Một đường rạn chia lỗ sáo làm hai, bên trong còn giữ mạch điện nhói đầu ngón.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Cờ Lệnh Sổ Sờn — `pb_co_lenh_so_son`
+
+```json
+{
+  "id": "pb_co_lenh_so_son",
+  "n": "Cờ Lệnh Sổ Sờn",
+  "k": "phien",
+  "el": "vo",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.22,
+    "tam": 2
+  },
+  "lore": "Đưa đường khâu lại gần ngọn đèn sẽ nhận ra vệt bụi từ bờ ruộng. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Kính Mặc Ngọc — `pb_kinh_cho_den_tan_den`
+
+```json
+{
+  "id": "pb_kinh_cho_den_tan_den",
+  "n": "Kính Mặc Ngọc",
+  "k": "kinh",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "reflect": 25.3,
+    "tam": 2
+  },
+  "lore": "Người đỡ đẻ hong một tấm khăn qua ba canh tuyết. Chỗ lưng kính vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện trả khăn cho người đỡ đẻ",
+  "status": "active"
+}
+```
+
+## Hồ Lô Nê Tâm — `pb_ho_lo_ne_tam`
+
+```json
+{
+  "id": "pb_ho_lo_ne_tam",
+  "n": "Hồ Lô Nê Tâm",
+  "k": "holo",
+  "el": "tho",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "healAfter": 18.4,
+    "hpP": 7.9
+  },
+  "lore": "Úp nút hồ lô về phía đất vẫn nhận ra những vết nứt nhỏ như chân chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Huyết Ngọc Dạ Liêm — `pb_huyet_ngoc_da_liem`
+
+```json
+{
+  "id": "pb_huyet_ngoc_da_liem",
+  "n": "Huyết Ngọc Dạ Liêm",
+  "k": "huyet",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "drain": 11.8,
+    "hpP": 9.6
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, vệt bóng mọc về phía sáng còn vương ở lõi ngọc.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Tán Băng Trầm — `pb_tan_bang_tram`
+
+```json
+{
+  "id": "pb_tan_bang_tram",
+  "n": "Tán Băng Trầm",
+  "k": "tan",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "firstEvade": 1,
+    "dodge": 4.9
+  },
+  "lore": "Vào giờ sương rơi, ghé gần sống nan nhận ra những hạt băng mịn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Châu Tịnh Hương — `pb_chau_tinh_huong`
+
+```json
+{
+  "id": "pb_chau_tinh_huong",
+  "n": "Châu Tịnh Hương",
+  "k": "chau",
+  "el": "phat",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "regenHp": 4.1,
+    "mpP": 9.1
+  },
+  "lore": "Trời vừa đổi gió, ghé gần giữa lòng châu có thể nhận ra vết bụi vàng của hương.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Tịnh Bình Thiết Tằm — `pb_tinh_binh_thiet_tam`
+
+```json
+{
+  "id": "pb_tinh_binh_thiet_tam",
+  "n": "Tịnh Bình Thiết Tằm",
+  "k": "holo",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "healAfter": 14,
+    "mpP": 9.3
+  },
+  "lore": "Đặt cạnh cửa sổ, chân bình để lộ những vảy sắt li ti mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Giản Tuyết Diệp — `pb_ngoc_gian_do_lay_mua_ret`
+
+```json
+{
+  "id": "pb_ngoc_gian_do_lay_mua_ret",
+  "n": "Ngọc Giản Tuyết Diệp",
+  "k": "gian",
+  "el": "hoa",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "tvP": 20.9,
+    "tam": 1
+  },
+  "lore": "{who} để một cuộn chỉ cạnh gối cho người sắp lên đường. Đến giờ rãnh khắc còn giữ vệt tro đỏ.",
+  "src": "Sự kiện gửi cuộn chỉ ở trạm nghỉ",
+  "status": "active"
+}
+```
+
+## Tiêu Tang Chi — `pb_tieu_tang_chi`
+
+```json
+{
+  "id": "pb_tieu_tang_chi",
+  "n": "Tiêu Tang Chi",
+  "k": "cam",
+  "el": "moc",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "dodge": 3.4
+  },
+  "lore": "Dọc miệng tiêu có thể nhận ra vệt phấn hoa vàng nhạt. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phiên Phong Trúc — `pb_phien_phong_truc`
+
+```json
+{
+  "id": "pb_phien_phong_truc",
+  "n": "Phiên Phong Trúc",
+  "k": "phien",
+  "el": "phong",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.27,
+    "matkP": 9.8
+  },
+  "lore": "Thứ đọng lại trên gân vải gợi tiếng lá khô lăn dưới gót. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đăng Trúc Châm — `pb_dang_truc_cham`
+
+```json
+{
+  "id": "pb_dang_truc_cham",
+  "n": "Đăng Trúc Châm",
+  "k": "dang",
+  "el": "moc",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "tammaRes": 51.9,
+    "mpP": 14.4
+  },
+  "lore": "Người giữ trước từng lau tim đèn bằng vải ướt. Đến giờ vẫn còn những thớ gỗ ướt.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Lệnh Bài Lôi Mạch — `pb_lenh_bai_loi_mach`
+
+```json
+{
+  "id": "pb_lenh_bai_loi_mach",
+  "n": "Lệnh Bài Lôi Mạch",
+  "k": "lenh",
+  "el": "loi",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "shopP": 10.2,
+    "van": 1
+  },
+  "lore": "Một đường rạn chia mép lệnh bài làm hai, bên trong còn giữ mạch điện nhói đầu ngón.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Hộ Mệnh Phù Bụi Trấu — `pb_ho_menh_phu_bui_trau`
+
+```json
+{
+  "id": "pb_ho_menh_phu_bui_trau",
+  "n": "Hộ Mệnh Phù Bụi Trấu",
+  "k": "phu",
+  "el": "vo",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 7.7,
+    "defP": 10.3,
+    "tam": 1
+  },
+  "lore": "Đưa đầu mép giấy lại gần ngọn đèn sẽ nhận ra vệt bụi từ bờ ruộng. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Khổn Tiên Thằng Thanh Phong — `pb_khon_tien_thang_de_lai_ben_bep`
+
+```json
+{
+  "id": "pb_khon_tien_thang_de_lai_ben_bep",
+  "n": "Khổn Tiên Thằng Thanh Phong",
+  "k": "xich",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "vulnStart": 1,
+    "mpP": 14.6
+  },
+  "lore": "Người thợ khắc đảo ngược chữ cuối vì viết cho người dưới mộ. Chỗ mối bện vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện đọc chữ cuối trên bia",
+  "status": "active"
+}
+```
+
+## Thú Cốt Diệm Nha — `pb_thu_cot_diem_nha`
+
+```json
+{
+  "id": "pb_thu_cot_diem_nha",
+  "n": "Thú Cốt Diệm Nha",
+  "k": "cot",
+  "el": "hoa",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "execute": 33.4,
+    "defP": 13.4
+  },
+  "lore": "Úp ống tủy về phía đất vẫn nhận ra tiếng than nổ trong lò. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Xích Tịnh Trần — `pb_xich_tinh_tran`
+
+```json
+{
+  "id": "pb_xich_tinh_tran",
+  "n": "Xích Tịnh Trần",
+  "k": "xich",
+  "el": "phat",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1,
+    "crit": 4
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, hơi ấm như hạt cơm mới còn vương ở mắt xích.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Thú Cốt Thạch Tủy — `pb_thu_cot_thach_tuy`
+
+```json
+{
+  "id": "pb_thu_cot_thach_tuy",
+  "n": "Thú Cốt Thạch Tủy",
+  "k": "cot",
+  "el": "tho",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "execute": 34.6,
+    "hpP": 9.8
+  },
+  "lore": "Vào giờ sương rơi, ghé gần ống tủy nhận ra vệt phấn đá đục. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Huyết Ngọc U Tằm — `pb_huyet_ngoc_u_tam`
+
+```json
+{
+  "id": "pb_huyet_ngoc_u_tam",
+  "n": "Huyết Ngọc U Tằm",
+  "k": "huyet",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "drain": 10.8,
+    "hpP": 7.8
+  },
+  "lore": "Trời vừa đổi gió, ghé gần lõi ngọc có thể nhận ra ánh đen lẫn trong khói.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Tiêu Băng Vũ — `pb_tieu_bang_vu`
+
+```json
+{
+  "id": "pb_tieu_bang_vu",
+  "n": "Tiêu Băng Vũ",
+  "k": "cam",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "mpP": 14.2
+  },
+  "lore": "Đặt cạnh cửa sổ, miệng tiêu để lộ tiếng sương đóng lách tách mỗi khi có người đi ngang.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Hồ Lô Ngọc Tủy — `pb_ho_lo_ven_mot_goc_rem`
+
+```json
+{
+  "id": "pb_ho_lo_ven_mot_goc_rem",
+  "n": "Hồ Lô Ngọc Tủy",
+  "k": "holo",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "healAfter": 17,
+    "hpP": 8.8
+  },
+  "lore": "{who} buộc chuông dưới mái thay lời nhắn đã về tới nhà. Đến giờ nút hồ lô còn giữ ánh loang như vảy cá.",
+  "src": "Sự kiện treo lại chuông dưới mái",
+  "status": "active"
+}
+```
+
+## Chuông Bách Thực — `pb_chuong_bach_thuc`
+
+```json
+{
+  "id": "pb_chuong_bach_thuc",
+  "n": "Chuông Bách Thực",
+  "k": "linh",
+  "el": "moc",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "startBlock": 19.6,
+    "tam": 2
+  },
+  "lore": "Dọc miệng chuông có thể nhận ra vệt phấn hoa vàng nhạt. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Yêu Nha Mộ Đăng — `pb_yeu_nha_mo_dang`
+
+```json
+{
+  "id": "pb_yeu_nha_mo_dang",
+  "n": "Yêu Nha Mộ Đăng",
+  "k": "cot",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "execute": 22,
+    "atkP": 6.3
+  },
+  "lore": "Thứ đọng lại trên gốc nanh gợi mùi hương cũ trong buồng kín. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Tháp Tuyết Tụ — `pb_thap_tuyet_tu`
+
+```json
+{
+  "id": "pb_thap_tuyet_tu",
+  "n": "Tháp Tuyết Tụ",
+  "k": "thap",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "defP": 12.6,
+    "blockTurn": 6.7,
+    "hpP": 10.3
+  },
+  "lore": "Người giữ trước từng lau mái tầng dưới bằng vải ướt. Đến giờ vẫn còn tiếng sương đóng lách tách.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Tán Nê Tâm — `pb_tan_ne_tam`
+
+```json
+{
+  "id": "pb_tan_ne_tam",
+  "n": "Tán Nê Tâm",
+  "k": "tan",
+  "el": "tho",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "firstEvade": 1,
+    "tp": 2
+  },
+  "lore": "Một đường rạn chia sống nan làm hai, bên trong còn giữ tiếng cát lọt qua kẽ.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Tịnh Bình Bồ Tuyền — `pb_tinh_binh_bo_tuyen`
+
+```json
+{
+  "id": "pb_tinh_binh_bo_tuyen",
+  "n": "Tịnh Bình Bồ Tuyền",
+  "k": "holo",
+  "el": "phat",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "healAfter": 18.4,
+    "mpP": 13.7
+  },
+  "lore": "Đưa chân bình lại gần ngọn đèn sẽ nhận ra tiếng mõ ngân rất khẽ. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Cờ Lệnh Hoàng Sa — `pb_co_lenh_goi_trong_vat_ao`
+
+```json
+{
+  "id": "pb_co_lenh_goi_trong_vat_ao",
+  "n": "Cờ Lệnh Hoàng Sa",
+  "k": "phien",
+  "el": "loi",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "poisonHit": 0.19,
+    "tam": 1
+  },
+  "lore": "{who} nhặt củi quanh sơn môn để nấu cháo cho khách vãng lai. Chỗ đường khâu vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện nhóm lại bếp cháo trước cổng",
+  "status": "active"
+}
+```
+
+## Ngọc Giản Lãng Hồi — `pb_ngoc_gian_lang_hoi`
+
+```json
+{
+  "id": "pb_ngoc_gian_lang_hoi",
+  "n": "Ngọc Giản Lãng Hồi",
+  "k": "gian",
+  "el": "thuy",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tvP": 24.8,
+    "ngo": 2
+  },
+  "lore": "Úp rãnh khắc về phía đất vẫn nhận ra vị mặn đọng trên môi. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Cầm Noãn Sa — `pb_cam_noan_sa`
+
+```json
+{
+  "id": "pb_cam_noan_sa",
+  "n": "Cầm Noãn Sa",
+  "k": "cam",
+  "el": "hoa",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "matkP": 9.5
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, vệt tro đỏ còn vương ở hốc đàn.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Phiên Gió Mỏng — `pb_phien_gio_mong`
+
+```json
+{
+  "id": "pb_phien_gio_mong",
+  "n": "Phiên Gió Mỏng",
+  "k": "phien",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.17,
+    "matkP": 8.4
+  },
+  "lore": "Vào giờ sương rơi, ghé gần gân vải nhận ra vệt bụi uốn quanh mép. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Địch Áo Tơi — `pb_dich_ao_toi`
+
+```json
+{
+  "id": "pb_dich_ao_toi",
+  "n": "Địch Áo Tơi",
+  "k": "cam",
+  "el": "vo",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "tam": 1
+  },
+  "lore": "Trời vừa đổi gió, ghé gần lỗ sáo có thể nhận ra mùi khói bếp vương lại.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đăng Thép Gió — `pb_dang_thep_gio`
+
+```json
+{
+  "id": "pb_dang_thep_gio",
+  "n": "Đăng Thép Gió",
+  "k": "dang",
+  "el": "kim",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "tammaRes": 46.4,
+    "mpP": 14.6
+  },
+  "lore": "Đặt cạnh cửa sổ, tim đèn để lộ những vảy sắt li ti mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Lệnh Bài Tàn Dương — `pb_lenh_bai_chua_kip_qua_cau`
+
+```json
+{
+  "id": "pb_lenh_bai_chua_kip_qua_cau",
+  "n": "Lệnh Bài Tàn Dương",
+  "k": "lenh",
+  "el": "hoa",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "tam": 4,
+    "shopP": 10.7,
+    "van": 1
+  },
+  "lore": "Đứa bé gấp một con cò giấy cho người cha mất tích. Đến giờ mép lệnh bài còn giữ vệt tro đỏ.",
+  "src": "Sự kiện thả cò giấy ở bãi sậy",
+  "status": "active"
+}
+```
+
+## Hộ Mệnh Phù U Hương — `pb_ho_menh_phu_u_huong`
+
+```json
+{
+  "id": "pb_ho_menh_phu_u_huong",
+  "n": "Hộ Mệnh Phù U Hương",
+  "k": "phu",
+  "el": "am",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 8.2,
+    "defP": 8.6,
+    "dodge": 3.6
+  },
+  "lore": "Dọc đầu mép giấy có thể nhận ra tiếng vải lụa sột soạt dưới đèn. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Khánh Vân Nếp — `pb_khanh_van_nep`
+
+```json
+{
+  "id": "pb_khanh_van_nep",
+  "n": "Khánh Vân Nếp",
+  "k": "linh",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "startBlock": 19.6,
+    "mpP": 15.1
+  },
+  "lore": "Thứ đọng lại trên chỗ dây treo gợi tiếng lá khô lăn dưới gót. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Kính Thau Bạc — `pb_kinh_thau_bac`
+
+```json
+{
+  "id": "pb_kinh_thau_bac",
+  "n": "Kính Thau Bạc",
+  "k": "kinh",
+  "el": "kim",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "reflect": 27.1,
+    "tam": 2
+  },
+  "lore": "Người giữ trước từng lau lưng kính bằng vải ướt. Đến giờ vẫn còn những vảy sắt li ti.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Kiếm Hạp Bạch Nê — `pb_kiem_hap_bach_ne`
+
+```json
+{
+  "id": "pb_kiem_hap_bach_ne",
+  "n": "Kiếm Hạp Bạch Nê",
+  "k": "hap",
+  "el": "tho",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "elX": 45.9,
+    "atkP": 11.9
+  },
+  "lore": "Một đường rạn chia nắp hạp làm hai, bên trong còn giữ tiếng cát lọt qua kẽ.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Ấn Sơn Nâu — `pb_an_son_nau`
+
+```json
+{
+  "id": "pb_an_son_nau",
+  "n": "Ấn Sơn Nâu",
+  "k": "an",
+  "el": "vo",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "stunP": 15.9,
+    "defP": 17.2
+  },
+  "lore": "Đưa mặt ấn lại gần ngọn đèn sẽ nhận ra vệt bụi từ bờ ruộng. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Khổn Tiên Thằng Cốt Văn — `pb_khon_tien_thang_muon_do_mot_dem`
+
+```json
+{
+  "id": "pb_khon_tien_thang_muon_do_mot_dem",
+  "n": "Khổn Tiên Thằng Cốt Văn",
+  "k": "xich",
+  "el": "bang",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "vulnStart": 1,
+    "tp": 2
+  },
+  "lore": "{who} lấy cánh tay đỡ xà nhà cho người phía dưới bò ra. Chỗ mối bện vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện dỡ xà gãy trong phế trạch",
+  "status": "active"
+}
+```
+
+## Châu Lôi Tằm — `pb_chau_loi_tam`
+
+```json
+{
+  "id": "pb_chau_loi_tam",
+  "n": "Châu Lôi Tằm",
+  "k": "chau",
+  "el": "loi",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "regenHp": 4.5,
+    "mpP": 14.4
+  },
+  "lore": "Úp giữa lòng châu về phía đất vẫn nhận ra tiếng rền như dưới nền nhà. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Phiên Thủy Sa — `pb_phien_thuy_sa`
+
+```json
+{
+  "id": "pb_phien_thuy_sa",
+  "n": "Phiên Thủy Sa",
+  "k": "phien",
+  "el": "thuy",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.36,
+    "mpP": 17.8
+  },
+  "lore": "Lúc chạng vạng trên bến triều, ánh loang như vảy cá còn vương ở gân vải.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Đăng Tùng Mặc — `pb_dang_tung_mac`
+
+```json
+{
+  "id": "pb_dang_tung_mac",
+  "n": "Đăng Tùng Mặc",
+  "k": "dang",
+  "el": "moc",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tam": 3,
+    "tammaRes": 43.1,
+    "mpP": 11.1
+  },
+  "lore": "Vào giờ sương rơi, ghé gần tim đèn nhận ra vệt phấn hoa vàng nhạt. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Giản Phạn Chung — `pb_ngoc_gian_phan_chung`
+
+```json
+{
+  "id": "pb_ngoc_gian_phan_chung",
+  "n": "Ngọc Giản Phạn Chung",
+  "k": "gian",
+  "el": "phat",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tvP": 30,
+    "ngo": 2
+  },
+  "lore": "Trời vừa đổi gió, ghé gần rãnh khắc có thể nhận ra vết bụi vàng của hương.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Xích Hàn Mặc — `pb_xich_han_mac`
+
+```json
+{
+  "id": "pb_xich_han_mac",
+  "n": "Xích Hàn Mặc",
+  "k": "xich",
+  "el": "bang",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1,
+    "crit": 6
+  },
+  "lore": "Đặt cạnh cửa sổ, mắt xích để lộ tiếng sương đóng lách tách mỗi khi có người đi ngang.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Hồ Lô Giang Tủy — `pb_ho_lo_giang_tuy`
+
+```json
+{
+  "id": "pb_ho_lo_giang_tuy",
+  "n": "Hồ Lô Giang Tủy",
+  "k": "holo",
+  "el": "thuy",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "healAfter": 15.5,
+    "hpP": 8.6
+  },
+  "lore": "Ở nút hồ lô có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh loang như vảy cá.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Cầm Hàn Ngọc — `pb_cam_doi_chan_nguoi_ve`
+
+```json
+{
+  "id": "pb_cam_doi_chan_nguoi_ve",
+  "n": "Cầm Hàn Ngọc",
+  "k": "cam",
+  "el": "loi",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "weakStart": 1,
+    "matkP": 9.4
+  },
+  "lore": "{who} viết tên bạn lên cái nong trước ngày phơi mẻ lúa cuối. Dưới hốc đàn còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện nhấc nong khi trời đổ mưa",
+  "status": "active"
+}
+```
+
+## Lệnh Bài Kim Hạp — `pb_lenh_bai_kim_hap`
+
+```json
+{
+  "id": "pb_lenh_bai_kim_hap",
+  "n": "Lệnh Bài Kim Hạp",
+  "k": "lenh",
+  "el": "kim",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tam": 7,
+    "shopP": 19.4,
+    "van": 2
+  },
+  "lore": "Thứ đọng lại trên mép lệnh bài gợi tiếng đồng ngân dưới mưa. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Cờ Lệnh Tịnh Hương — `pb_co_lenh_tinh_huong`
+
+```json
+{
+  "id": "pb_co_lenh_tinh_huong",
+  "n": "Cờ Lệnh Tịnh Hương",
+  "k": "phien",
+  "el": "phat",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.23,
+    "tam": 2
+  },
+  "lore": "Người giữ trước từng lau đường khâu bằng vải ướt. Đến giờ vẫn còn vết bụi vàng của hương.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Tịnh Bình Tảo Phong — `pb_tinh_binh_tao_phong`
+
+```json
+{
+  "id": "pb_tinh_binh_tao_phong",
+  "n": "Tịnh Bình Tảo Phong",
+  "k": "holo",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "healAfter": 16.2,
+    "mpP": 12.3
+  },
+  "lore": "Một đường rạn chia chân bình làm hai, bên trong còn giữ tiếng gió lọt qua khe.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Tiêu Hắc Giản — `pb_tieu_hac_gian`
+
+```json
+{
+  "id": "pb_tieu_hac_gian",
+  "n": "Tiêu Hắc Giản",
+  "k": "cam",
+  "el": "am",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "mpP": 18.3
+  },
+  "lore": "Đưa miệng tiêu lại gần ngọn đèn sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Huyết Ngọc Áo Tơi — `pb_huyet_ngoc_ao_toi`
+
+```json
+{
+  "id": "pb_huyet_ngoc_ao_toi",
+  "n": "Huyết Ngọc Áo Tơi",
+  "k": "huyet",
+  "el": "vo",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "drain": 12.3,
+    "hpP": 9.8
+  },
+  "lore": "Chạm nhẹ vào lõi ngọc, có thể nhận ra mùi nắng trên vải mộc.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Địch Cổ Mộc — `pb_dich_dem_theo_khi_xuong_nui`
+
+```json
+{
+  "id": "pb_dich_dem_theo_khi_xuong_nui",
+  "n": "Địch Cổ Mộc",
+  "k": "cam",
+  "el": "hoa",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "weakStart": 1,
+    "tam": 2
+  },
+  "lore": "Người bị câm viết hết lời dặn trên mặt trong áo khoác. Thỉnh thoảng lỗ sáo còn thoảng ánh lửa liếm qua mép.",
+  "src": "Sự kiện giở mặt trái chiếc áo",
+  "status": "active"
+}
+```
+
+## Châu Thổ Phách — `pb_chau_tho_phach`
+
+```json
+{
+  "id": "pb_chau_tho_phach",
+  "n": "Châu Thổ Phách",
+  "k": "chau",
+  "el": "tho",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "regenHp": 6.4,
+    "mpP": 17.7
+  },
+  "lore": "Lúc chạng vạng trên bến triều, tiếng cát lọt qua kẽ còn vương ở giữa lòng châu.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Tháp Liễu Nhung — `pb_thap_lieu_nhung`
+
+```json
+{
+  "id": "pb_thap_lieu_nhung",
+  "n": "Tháp Liễu Nhung",
+  "k": "thap",
+  "el": "moc",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "defP": 14.4,
+    "blockTurn": 7.3,
+    "hpP": 9.3
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mái tầng dưới nhận ra vệt phấn hoa vàng nhạt. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Khổn Tiên Thằng Ngõa Vân — `pb_khon_tien_thang_ngoa_van`
+
+```json
+{
+  "id": "pb_khon_tien_thang_ngoa_van",
+  "n": "Khổn Tiên Thằng Ngõa Vân",
+  "k": "xich",
+  "el": "tho",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1,
+    "mpP": 11.8
+  },
+  "lore": "Trời vừa đổi gió, ghé gần mối bện có thể nhận ra những vết nứt nhỏ như chân chim.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Yêu Nha Vân Nếp — `pb_yeu_nha_van_nep`
+
+```json
+{
+  "id": "pb_yeu_nha_van_nep",
+  "n": "Yêu Nha Vân Nếp",
+  "k": "cot",
+  "el": "phong",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "execute": 42,
+    "crit": 7.3
+  },
+  "lore": "Đặt cạnh cửa sổ, gốc nanh để lộ ánh chao như cánh chim mỗi khi có người đi ngang.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Tán Tuyết Sa — `pb_tan_tuyet_sa`
+
+```json
+{
+  "id": "pb_tan_tuyet_sa",
+  "n": "Tán Tuyết Sa",
+  "k": "tan",
+  "el": "bang",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "firstEvade": 1,
+    "tp": 2
+  },
+  "lore": "Ở sống nan có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh xanh trên mặt băng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ấn Bạch Lộ — `pb_an_khong_de_ten`
+
+```json
+{
+  "id": "pb_an_khong_de_ten",
+  "n": "Ấn Bạch Lộ",
+  "k": "an",
+  "el": "moc",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "stunP": 17.5,
+    "defP": 20.4
+  },
+  "lore": "{who} dành một khe gió giữa hai tấm liếp cho mèo hoang vào. Dưới mặt ấn còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện nhấc tấm liếp sau bếp",
+  "status": "active"
+}
+```
+
+## Chuông Liên Tịch — `pb_chuong_lien_tich`
+
+```json
+{
+  "id": "pb_chuong_lien_tich",
+  "n": "Chuông Liên Tịch",
+  "k": "linh",
+  "el": "phat",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "startBlock": 28.1,
+    "hpP": 10.8
+  },
+  "lore": "Thứ đọng lại trên miệng chuông gợi mùi trầm đọng dưới mái. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Kiếm Hạp Đêm Canh — `pb_kiem_hap_dem_canh`
+
+```json
+{
+  "id": "pb_kiem_hap_dem_canh",
+  "n": "Kiếm Hạp Đêm Canh",
+  "k": "hap",
+  "el": "kim",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "elX": 36.7,
+    "atkP": 7.6
+  },
+  "lore": "Người giữ trước từng lau nắp hạp bằng vải ướt. Đến giờ vẫn còn mùi khói bếp vương lại.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Thú Cốt Sấm Mù — `pb_thu_cot_sam_mu`
+
+```json
+{
+  "id": "pb_thu_cot_sam_mu",
+  "n": "Thú Cốt Sấm Mù",
+  "k": "cot",
+  "el": "loi",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "execute": 32.4,
+    "defP": 14.6,
+    "critDmg": 13.9
+  },
+  "lore": "Một đường rạn chia ống tủy làm hai, bên trong còn giữ mạch điện nhói đầu ngón.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Khánh Dạ Bạc — `pb_khanh_da_bac`
+
+```json
+{
+  "id": "pb_khanh_da_bac",
+  "n": "Khánh Dạ Bạc",
+  "k": "linh",
+  "el": "am",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "startBlock": 25.5,
+    "tam": 2,
+    "mpP": 16.4
+  },
+  "lore": "Đưa chỗ dây treo lại gần ngọn đèn sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Kính Nhu Triều — `pb_kinh_nhu_trieu`
+
+```json
+{
+  "id": "pb_kinh_nhu_trieu",
+  "n": "Kính Nhu Triều",
+  "k": "kinh",
+  "el": "thuy",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "reflect": 25.5,
+    "tam": 2,
+    "defP": 14.4
+  },
+  "lore": "Chạm nhẹ vào lưng kính, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Hộ Mệnh Phù Thiên Mộc — `pb_ho_menh_phu_giu_dau_chan_sau`
+
+```json
+{
+  "id": "pb_ho_menh_phu_giu_dau_chan_sau",
+  "n": "Hộ Mệnh Phù Thiên Mộc",
+  "k": "phu",
+  "el": "kim",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "hpP": 11.2,
+    "defP": 12.9,
+    "tam": 2,
+    "mpP": 13.2,
+    "hoTam": 9.2
+  },
+  "lore": "Chủ quán vẫn dành bát canh thứ hai cho người khách đã mất. Thỉnh thoảng đầu mép giấy còn thoảng mùi búa mới tôi.",
+  "src": "Sự kiện dọn mâm ở quán đêm",
+  "status": "active"
+}
+```
+
+## Địch Ô Diệm — `pb_dich_o_diem`
+
+```json
+{
+  "id": "pb_dich_o_diem",
+  "n": "Địch Ô Diệm",
+  "k": "cam",
+  "el": "hoa",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "mpP": 13.7,
+    "matkP": 8.3
+  },
+  "lore": "Lúc chạng vạng trên bến triều, vệt tro đỏ còn vương ở lỗ sáo.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Xích Nhất Kệ — `pb_xich_nhat_ke`
+
+```json
+{
+  "id": "pb_xich_nhat_ke",
+  "n": "Xích Nhất Kệ",
+  "k": "xich",
+  "el": "phat",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1,
+    "atkP": 11.2,
+    "crit": 6.9
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mắt xích nhận ra tiếng mõ ngân rất khẽ. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Hồ Lô Vũ Tuyền — `pb_ho_lo_vu_tuyen`
+
+```json
+{
+  "id": "pb_ho_lo_vu_tuyen",
+  "n": "Hồ Lô Vũ Tuyền",
+  "k": "holo",
+  "el": "thuy",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "healAfter": 21,
+    "hpP": 12.8,
+    "mpP": 16.2
+  },
+  "lore": "Trời vừa đổi gió, ghé gần nút hồ lô có thể nhận ra vị mặn đọng trên môi.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Chuông Thổ Vũ — `pb_chuong_tho_vu`
+
+```json
+{
+  "id": "pb_chuong_tho_vu",
+  "n": "Chuông Thổ Vũ",
+  "k": "linh",
+  "el": "tho",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "startBlock": 25.5,
+    "tam": 2,
+    "defP": 18.5
+  },
+  "lore": "Đặt cạnh cửa sổ, miệng chuông để lộ những vết nứt nhỏ như chân chim mỗi khi có người đi ngang.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Lệnh Bài Tảo Phong — `pb_lenh_bai_tao_phong`
+
+```json
+{
+  "id": "pb_lenh_bai_tao_phong",
+  "n": "Lệnh Bài Tảo Phong",
+  "k": "lenh",
+  "el": "phong",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "tam": 6,
+    "shopP": 17.7,
+    "van": 2,
+    "tvP": 10.6
+  },
+  "lore": "Ở mép lệnh bài có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng gió lọt qua khe.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ngọc Giản Tuyết Linh — `pb_ngoc_gian_cat_vao_ngay_mua`
+
+```json
+{
+  "id": "pb_ngoc_gian_cat_vao_ngay_mua",
+  "n": "Ngọc Giản Tuyết Linh",
+  "k": "gian",
+  "el": "vo",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "tvP": 37.4,
+    "ngo": 2,
+    "tam": 2
+  },
+  "lore": "Người chèo đò buộc dây vào cổ tay để đứa trẻ dám qua sông. Dưới rãnh khắc còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện gỡ dây đò qua sông",
+  "status": "active"
+}
+```
+
+## Tán U Tơ — `pb_tan_u_to`
+
+```json
+{
+  "id": "pb_tan_u_to",
+  "n": "Tán U Tơ",
+  "k": "tan",
+  "el": "am",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "firstEvade": 1,
+    "tp": 2,
+    "dodge": 5.1
+  },
+  "lore": "Thứ đọng lại trên sống nan gợi mùi hương cũ trong buồng kín. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Huyết Ngọc Băng Ti — `pb_huyet_ngoc_bang_ti`
+
+```json
+{
+  "id": "pb_huyet_ngoc_bang_ti",
+  "n": "Huyết Ngọc Băng Ti",
+  "k": "huyet",
+  "el": "bang",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "drain": 15.1,
+    "hpP": 9.5,
+    "crit": 4.5
+  },
+  "lore": "Người giữ trước từng lau lõi ngọc bằng vải ướt. Đến giờ vẫn còn tiếng sương đóng lách tách.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Phiên Lôi Mạch — `pb_phien_loi_mach`
+
+```json
+{
+  "id": "pb_phien_loi_mach",
+  "n": "Phiên Lôi Mạch",
+  "k": "phien",
+  "el": "loi",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.3,
+    "matkP": 11.7,
+    "crit": 6.5
+  },
+  "lore": "Một đường rạn chia gân vải làm hai, bên trong còn giữ mạch điện nhói đầu ngón.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Kiếm Hạp Tro Đào — `pb_kiem_hap_tro_dao`
+
+```json
+{
+  "id": "pb_kiem_hap_tro_dao",
+  "n": "Kiếm Hạp Tro Đào",
+  "k": "hap",
+  "el": "hoa",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "elX": 35.5,
+    "atkP": 6.8,
+    "matkP": 9.5
+  },
+  "lore": "Đưa nắp hạp lại gần ngọn đèn sẽ nhận ra ánh lửa liếm qua mép. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Kính Liễu Nhung — `pb_kinh_lieu_nhung`
+
+```json
+{
+  "id": "pb_kinh_lieu_nhung",
+  "n": "Kính Liễu Nhung",
+  "k": "kinh",
+  "el": "moc",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "reflect": 35.6,
+    "tam": 2,
+    "hpP": 13.3
+  },
+  "lore": "Chạm nhẹ vào lưng kính, có thể nhận ra mùi nhựa vừa rịn.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Tiêu Xích Hỏa — `pb_tieu_roi_tay_luc_rang_dong`
+
+```json
+{
+  "id": "pb_tieu_roi_tay_luc_rang_dong",
+  "n": "Tiêu Xích Hỏa",
+  "k": "cam",
+  "el": "kim",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "weakStart": 1,
+    "mpP": 21.1,
+    "dodge": 7
+  },
+  "lore": "{who} giấu một bát gạo trong vách để dành ngày giỗ. Thỉnh thoảng miệng tiêu còn thoảng mùi búa mới tôi.",
+  "src": "Sự kiện mở hốc vách trong gian bếp",
+  "status": "active"
+}
+```
+
+## Khánh Huyết Đăng — `pb_khanh_huyet_dang`
+
+```json
+{
+  "id": "pb_khanh_huyet_dang",
+  "n": "Khánh Huyết Đăng",
+  "k": "linh",
+  "el": "hoa",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "startBlock": 34.6,
+    "mpP": 21.6,
+    "hpP": 14.5
+  },
+  "lore": "Lúc chạng vạng trên phế trạch, vệt tro đỏ còn vương ở chỗ dây treo.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Khổn Tiên Thằng Trầm Nham — `pb_khon_tien_thang_tram_nham`
+
+```json
+{
+  "id": "pb_khon_tien_thang_tram_nham",
+  "n": "Khổn Tiên Thằng Trầm Nham",
+  "k": "xich",
+  "el": "tho",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1,
+    "tp": 3,
+    "mpP": 21
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mối bện nhận ra vệt phấn đá đục. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Châu Mặc Cốt — `pb_chau_mac_cot`
+
+```json
+{
+  "id": "pb_chau_mac_cot",
+  "n": "Châu Mặc Cốt",
+  "k": "chau",
+  "el": "am",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "regenHp": 7.6,
+    "mpP": 19.4,
+    "hpP": 12.1
+  },
+  "lore": "Trời vừa đổi gió, ghé gần giữa lòng châu có thể nhận ra ánh đen lẫn trong khói.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Tháp Lôi Tằm — `pb_thap_loi_tam`
+
+```json
+{
+  "id": "pb_thap_loi_tam",
+  "n": "Tháp Lôi Tằm",
+  "k": "thap",
+  "el": "loi",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 17.2,
+    "blockTurn": 8.8,
+    "hpP": 13.3,
+    "tam": 2
+  },
+  "lore": "Đặt cạnh cửa sổ, mái tầng dưới để lộ tiếng rền như dưới nền nhà mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Thú Cốt Trì Châu — `pb_thu_cot_tri_chau`
+
+```json
+{
+  "id": "pb_thu_cot_tri_chau",
+  "n": "Thú Cốt Trì Châu",
+  "k": "cot",
+  "el": "thuy",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "execute": 50.9,
+    "defP": 19.4,
+    "atkP": 13.5
+  },
+  "lore": "Ở ống tủy có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh loang như vảy cá.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Tịnh Bình Đạm Mặc — `pb_tinh_binh_tim_ve_qua_mua`
+
+```json
+{
+  "id": "pb_tinh_binh_tim_ve_qua_mua",
+  "n": "Tịnh Bình Đạm Mặc",
+  "k": "holo",
+  "el": "vo",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "healAfter": 20.6,
+    "mpP": 20.4,
+    "hpP": 14.5
+  },
+  "lore": "Người hái thuốc để lại một vạch phấn cho bạn tìm đường. Dưới chân bình còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện nối dấu phấn trên vách",
+  "status": "active"
+}
+```
+
+## Hộ Mệnh Phù Phong Tẫn — `pb_ho_menh_phu_phong_tan`
+
+```json
+{
+  "id": "pb_ho_menh_phu_phong_tan",
+  "n": "Hộ Mệnh Phù Phong Tẫn",
+  "k": "phu",
+  "el": "phong",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 13.5,
+    "defP": 19.8,
+    "dodge": 7.4,
+    "tam": 3
+  },
+  "lore": "Thứ đọng lại trên đầu mép giấy gợi tiếng lá khô lăn dưới gót. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đăng Phạn Chung — `pb_dang_phan_chung`
+
+```json
+{
+  "id": "pb_dang_phan_chung",
+  "n": "Đăng Phạn Chung",
+  "k": "dang",
+  "el": "phat",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tam": 4,
+    "tammaRes": 60,
+    "mpP": 18.8,
+    "ngo": 2
+  },
+  "lore": "Người giữ trước từng lau tim đèn bằng vải ướt. Đến giờ vẫn còn vết bụi vàng của hương.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ấn Hắc Thoa — `pb_an_hac_thoa`
+
+```json
+{
+  "id": "pb_an_hac_thoa",
+  "n": "Ấn Hắc Thoa",
+  "k": "an",
+  "el": "kim",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "stunP": 18.3,
+    "defP": 15.2,
+    "critDmg": 15.4
+  },
+  "lore": "Một đường rạn chia mặt ấn làm hai, bên trong còn giữ ánh bạc nhạt trên mép.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Yêu Nha Băng Trầm — `pb_yeu_nha_bang_tram`
+
+```json
+{
+  "id": "pb_yeu_nha_bang_tram",
+  "n": "Yêu Nha Băng Trầm",
+  "k": "cot",
+  "el": "bang",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "execute": 45.9,
+    "crit": 6.7,
+    "atkP": 10.5
+  },
+  "lore": "Đưa gốc nanh lại gần ngọn đèn sẽ nhận ra những hạt băng mịn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Cờ Lệnh Lan Giáp — `pb_co_lenh_lan_giap`
+
+```json
+{
+  "id": "pb_co_lenh_lan_giap",
+  "n": "Cờ Lệnh Lan Giáp",
+  "k": "phien",
+  "el": "moc",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.39,
+    "tam": 3,
+    "matkP": 16.4
+  },
+  "lore": "Chạm nhẹ vào đường khâu, có thể nhận ra mùi nhựa vừa rịn.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Cầm Tử Hà — `pb_cam_giu_cho_ben_hien`
+
+```json
+{
+  "id": "pb_cam_giu_cho_ben_hien",
+  "n": "Cầm Tử Hà",
+  "k": "cam",
+  "el": "tho",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "weakStart": 1,
+    "matkP": 19.9,
+    "mpP": 21.8
+  },
+  "lore": "Người khâu cờ giấu đường chỉ cuối vào góc để lính khỏi nhớ nhà. Thỉnh thoảng hốc đàn còn thoảng vệt phấn đá đục.",
+  "src": "Sự kiện tìm đường chỉ trong cờ rách",
+  "status": "active"
+}
+```
+
+## Cờ Lệnh Trúc Tủy — `pb_co_lenh_truc_tuy`
+
+```json
+{
+  "id": "pb_co_lenh_truc_tuy",
+  "n": "Cờ Lệnh Trúc Tủy",
+  "k": "phien",
+  "el": "moc",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.43,
+    "matkP": 17.4,
+    "crit": 7.2
+  },
+  "lore": "Lúc chạng vạng trên phế trạch, tiếng tơ cọ vào vỏ còn vương ở đường khâu.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Chuông Sấm Tắt — `pb_chuong_sam_tat`
+
+```json
+{
+  "id": "pb_chuong_sam_tat",
+  "n": "Chuông Sấm Tắt",
+  "k": "linh",
+  "el": "loi",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "startBlock": 28.8,
+    "tam": 3,
+    "crit": 6.6
+  },
+  "lore": "Vào giờ sương rơi, ghé gần miệng chuông nhận ra một ánh chớp xanh. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Khổn Tiên Thằng Phong Trúc — `pb_khon_tien_thang_phong_truc`
+
+```json
+{
+  "id": "pb_khon_tien_thang_phong_truc",
+  "n": "Khổn Tiên Thằng Phong Trúc",
+  "k": "xich",
+  "el": "phong",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1,
+    "tp": 3,
+    "mpP": 21
+  },
+  "lore": "Trời vừa đổi gió, ghé gần mối bện có thể nhận ra ánh chao như cánh chim.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Tiêu Diệm Sa — `pb_tieu_diem_sa`
+
+```json
+{
+  "id": "pb_tieu_diem_sa",
+  "n": "Tiêu Diệm Sa",
+  "k": "cam",
+  "el": "hoa",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "mpP": 17.2,
+    "dodge": 6.9
+  },
+  "lore": "Đặt cạnh cửa sổ, miệng tiêu để lộ tiếng than nổ trong lò mỗi khi có người đi ngang.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Tán Băng Miên — `pb_tan_bang_mien`
+
+```json
+{
+  "id": "pb_tan_bang_mien",
+  "n": "Tán Băng Miên",
+  "k": "tan",
+  "el": "bang",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "firstEvade": 1,
+    "tp": 3,
+    "dodge": 7.2
+  },
+  "lore": "Ở sống nan có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh xanh trên mặt băng.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đăng U Hương — `pb_dang_u_huong`
+
+```json
+{
+  "id": "pb_dang_u_huong",
+  "n": "Đăng U Hương",
+  "k": "dang",
+  "el": "am",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tam": 4,
+    "tammaRes": 67.1,
+    "mpP": 18.3,
+    "ngo": 2
+  },
+  "lore": "Dọc tim đèn có thể nhận ra tiếng vải lụa sột soạt dưới đèn. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Huyết Ngọc Tử Trúc — `pb_huyet_ngoc_de_lai_ben_bep`
+
+```json
+{
+  "id": "pb_huyet_ngoc_de_lai_ben_bep",
+  "n": "Huyết Ngọc Tử Trúc",
+  "k": "huyet",
+  "el": "thuy",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "drain": 19.3,
+    "hpP": 14.4,
+    "atkP": 12.3
+  },
+  "lore": "Chủ cũ vẫn quay về gõ máng cám vào giờ cho gà ăn. Chỗ lõi ngọc vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện gõ máng cám lúc canh tư",
+  "status": "active"
+}
+```
+
+## Xích Thau Bạc — `pb_xich_thau_bac`
+
+```json
+{
+  "id": "pb_xich_thau_bac",
+  "n": "Xích Thau Bạc",
+  "k": "xich",
+  "el": "kim",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1,
+    "atkP": 15.1,
+    "crit": 8.2
+  },
+  "lore": "Người giữ trước từng lau mắt xích bằng vải ướt. Đến giờ vẫn còn những vảy sắt li ti.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Sơn Nâu Phiên — `pb_son_nau_phien`
+
+```json
+{
+  "id": "pb_son_nau_phien",
+  "n": "Sơn Nâu Phiên",
+  "k": "phien",
+  "el": "vo",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.32,
+    "matkP": 12.1,
+    "crit": 6.9
+  },
+  "lore": "Một đường rạn chia gân vải làm hai, bên trong còn giữ tiếng cửa gỗ bị gió đẩy.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Ngọc Giản Viên Âm — `pb_ngoc_gian_vien_am`
+
+```json
+{
+  "id": "pb_ngoc_gian_vien_am",
+  "n": "Ngọc Giản Viên Âm",
+  "k": "gian",
+  "el": "phat",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tvP": 30,
+    "ngo": 2,
+    "tam": 2
+  },
+  "lore": "Đưa rãnh khắc lại gần ngọn đèn sẽ nhận ra tiếng mõ ngân rất khẽ. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Ảnh Sa Hộ Mệnh Phù — `pb_anh_sa_ho_menh_phu`
+
+```json
+{
+  "id": "pb_anh_sa_ho_menh_phu",
+  "n": "Ảnh Sa Hộ Mệnh Phù",
+  "k": "phu",
+  "el": "am",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 10.8,
+    "defP": 14.3,
+    "tam": 2,
+    "dodge": 7.2
+  },
+  "lore": "Chạm nhẹ vào đầu mép giấy, có thể nhận ra mùi hương cũ trong buồng kín.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Thú Cốt Hoa Thiếc — `pb_thu_cot_hoa_thiec`
+
+```json
+{
+  "id": "pb_thu_cot_hoa_thiec",
+  "n": "Thú Cốt Hoa Thiếc",
+  "k": "cot",
+  "el": "kim",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "execute": 54.9,
+    "defP": 23,
+    "hpP": 16.2
+  },
+  "lore": "Úp ống tủy về phía đất vẫn nhận ra những vảy sắt li ti. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Kính Sa Liên — `pb_kinh_ven_mot_goc_rem`
+
+```json
+{
+  "id": "pb_kinh_ven_mot_goc_rem",
+  "n": "Kính Sa Liên",
+  "k": "kinh",
+  "el": "bang",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "reflect": 39.3,
+    "defP": 22.4,
+    "hpP": 16.8
+  },
+  "lore": "{who} gửi một nhúm tóc trong gói hạt kê cho người ở xa. Đến giờ lưng kính còn giữ ánh xanh trên mặt băng.",
+  "src": "Sự kiện mở gói kê ở trạm thư",
+  "status": "active"
+}
+```
+
+## Tháp Nham Phấn — `pb_thap_nham_phan`
+
+```json
+{
+  "id": "pb_thap_nham_phan",
+  "n": "Tháp Nham Phấn",
+  "k": "thap",
+  "el": "tho",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "defP": 22.4,
+    "blockTurn": 10,
+    "hpP": 14.1,
+    "tam": 3
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mái tầng dưới nhận ra vệt phấn đá đục. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Giấy Gió Hồ Lô — `pb_giay_gio_ho_lo`
+
+```json
+{
+  "id": "pb_giay_gio_ho_lo",
+  "n": "Giấy Gió Hồ Lô",
+  "k": "holo",
+  "el": "vo",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "healAfter": 23.8,
+    "hpP": 13.2,
+    "defP": 16.7
+  },
+  "lore": "Trời vừa đổi gió, ghé gần nút hồ lô có thể nhận ra mùi khói bếp vương lại.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Lệnh Bài Ngô Đồng — `pb_lenh_bai_ngo_dong`
+
+```json
+{
+  "id": "pb_lenh_bai_ngo_dong",
+  "n": "Lệnh Bài Ngô Đồng",
+  "k": "lenh",
+  "el": "moc",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "tam": 6,
+    "shopP": 18.3,
+    "van": 2,
+    "tvP": 8.7
+  },
+  "lore": "Đặt cạnh cửa sổ, mép lệnh bài để lộ những thớ gỗ ướt mỗi khi có người đi ngang.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Phong Mạch Ấn — `pb_phong_mach_an`
+
+```json
+{
+  "id": "pb_phong_mach_an",
+  "n": "Phong Mạch Ấn",
+  "k": "an",
+  "el": "phong",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "stunP": 18.8,
+    "matkP": 13.2,
+    "defP": 18.5
+  },
+  "lore": "Ở mặt ấn có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng gió lọt qua khe.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Khánh Lôi Cốt — `pb_khanh_loi_cot`
+
+```json
+{
+  "id": "pb_khanh_loi_cot",
+  "n": "Khánh Lôi Cốt",
+  "k": "linh",
+  "el": "loi",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "startBlock": 33.4,
+    "tam": 3,
+    "mpP": 21
+  },
+  "lore": "Dọc chỗ dây treo có thể nhận ra một ánh chớp xanh. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Tịnh Bình Tàn Dương — `pb_tinh_binh_goi_trong_vat_ao`
+
+```json
+{
+  "id": "pb_tinh_binh_goi_trong_vat_ao",
+  "n": "Tịnh Bình Tàn Dương",
+  "k": "holo",
+  "el": "thuy",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "healAfter": 23,
+    "mpP": 20.4,
+    "hpP": 11.9
+  },
+  "lore": "Người cất rượu để một vò nhạt cho người bệnh mới khỏi. Chỗ chân bình vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện mở vò rượu dưới tấm phản",
+  "status": "active"
+}
+```
+
+## Địch Đăng Tủy — `pb_dich_dang_tuy`
+
+```json
+{
+  "id": "pb_dich_dang_tuy",
+  "n": "Địch Đăng Tủy",
+  "k": "cam",
+  "el": "hoa",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "tam": 3,
+    "mpP": 23
+  },
+  "lore": "Người giữ trước từng lau lỗ sáo bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Kim Kệ Kiếm Hạp — `pb_kim_ke_kiem_hap`
+
+```json
+{
+  "id": "pb_kim_ke_kiem_hap",
+  "n": "Kim Kệ Kiếm Hạp",
+  "k": "hap",
+  "el": "phat",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "elX": 54.9,
+    "atkP": 13.4,
+    "matkP": 16.4
+  },
+  "lore": "Một đường rạn chia nắp hạp làm hai, bên trong còn giữ hơi ấm như hạt cơm mới.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Cầm U Tơ — `pb_cam_u_to`
+
+```json
+{
+  "id": "pb_cam_u_to",
+  "n": "Cầm U Tơ",
+  "k": "cam",
+  "el": "am",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "matkP": 18.4,
+    "mpP": 18.2
+  },
+  "lore": "Đưa hốc đàn lại gần ngọn đèn sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Giang Vũ Châu — `pb_giang_vu_chau`
+
+```json
+{
+  "id": "pb_giang_vu_chau",
+  "n": "Giang Vũ Châu",
+  "k": "chau",
+  "el": "thuy",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "regenHp": 9.1,
+    "mpP": 26.7,
+    "tam": 3
+  },
+  "lore": "Chạm nhẹ vào giữa lòng châu, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Yêu Nha Trúc Châm — `pb_yeu_nha_truc_cham`
+
+```json
+{
+  "id": "pb_yeu_nha_truc_cham",
+  "n": "Yêu Nha Trúc Châm",
+  "k": "cot",
+  "el": "moc",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "execute": 68.7,
+    "crit": 9.8,
+    "atkP": 17.7
+  },
+  "lore": "Úp gốc nanh về phía đất vẫn nhận ra những thớ gỗ ướt. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Lệnh Bài Ngân Sa — `pb_lenh_bai_ngan_sa`
+
+```json
+{
+  "id": "pb_lenh_bai_ngan_sa",
+  "n": "Lệnh Bài Ngân Sa",
+  "k": "lenh",
+  "el": "kim",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "tam": 10,
+    "shopP": 27.2,
+    "van": 4,
+    "tvP": 16.5
+  },
+  "lore": "{who} lót bậc thềm bằng rơm cho người mang chân đau. Đến giờ mép lệnh bài còn giữ ánh bạc nhạt trên mép.",
+  "src": "Sự kiện rải rơm ở bậc thềm",
+  "status": "active"
+}
+```
+
+## Xích Tia Câm — `pb_xich_tia_cam`
+
+```json
+{
+  "id": "pb_xich_tia_cam",
+  "n": "Xích Tia Câm",
+  "k": "xich",
+  "el": "loi",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "vulnStart": 1,
+    "atkP": 19.4,
+    "crit": 9.6
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mắt xích nhận ra một ánh chớp xanh. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Thiền Cốt Hộ Mệnh Phù — `pb_thien_cot_ho_menh_phu`
+
+```json
+{
+  "id": "pb_thien_cot_ho_menh_phu",
+  "n": "Thiền Cốt Hộ Mệnh Phù",
+  "k": "phu",
+  "el": "phat",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 21.5,
+    "defP": 22.2,
+    "tam": 3,
+    "mpP": 22.2
+  },
+  "lore": "Trời vừa đổi gió, ghé gần đầu mép giấy có thể nhận ra vết bụi vàng của hương.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Cầm Tuyết Sa — `pb_cam_tuyet_sa`
+
+```json
+{
+  "id": "pb_cam_tuyet_sa",
+  "n": "Cầm Tuyết Sa",
+  "k": "cam",
+  "el": "bang",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "matkP": 18.4,
+    "mpP": 17.4
+  },
+  "lore": "Đặt cạnh cửa sổ, hốc đàn để lộ tiếng sương đóng lách tách mỗi khi có người đi ngang.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Sơn Nâu Hồ Lô — `pb_son_nau_ho_lo`
+
+```json
+{
+  "id": "pb_son_nau_ho_lo",
+  "n": "Sơn Nâu Hồ Lô",
+  "k": "holo",
+  "el": "vo",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "healAfter": 23.7,
+    "hpP": 15,
+    "defP": 21.8
+  },
+  "lore": "Ở nút hồ lô có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cửa gỗ bị gió đẩy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Huyết Ngọc Hỏa Tủy — `pb_huyet_ngoc_hoa_tuy`
+
+```json
+{
+  "id": "pb_huyet_ngoc_hoa_tuy",
+  "n": "Huyết Ngọc Hỏa Tủy",
+  "k": "huyet",
+  "el": "hoa",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "drain": 22.4,
+    "hpP": 15.5,
+    "atkP": 13.9
+  },
+  "lore": "Dọc lõi ngọc có thể nhận ra ánh lửa liếm qua mép. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Khổn Tiên Thằng Phong Lạc — `pb_khon_tien_thang_phong_lac`
+
+```json
+{
+  "id": "pb_khon_tien_thang_phong_lac",
+  "n": "Khổn Tiên Thằng Phong Lạc",
+  "k": "xich",
+  "el": "phong",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "vulnStart": 1,
+    "tp": 3,
+    "mpP": 23
+  },
+  "lore": "Người thợ hồ chừa một ô cửa thấp để bà nhìn đám trẻ nô đùa. Chỗ mối bện vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện mở lại ô cửa bị bít",
+  "status": "active"
+}
+```
+
+## Tán Địa Cốt — `pb_tan_dia_cot`
+
+```json
+{
+  "id": "pb_tan_dia_cot",
+  "n": "Tán Địa Cốt",
+  "k": "tan",
+  "el": "tho",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "firstEvade": 1,
+    "tp": 3,
+    "dodge": 8.1
+  },
+  "lore": "Người giữ trước từng lau sống nan bằng vải ướt. Đến giờ vẫn còn những vết nứt nhỏ như chân chim.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Tùng Mặc Tiêu — `pb_tung_mac_tieu`
+
+```json
+{
+  "id": "pb_tung_mac_tieu",
+  "n": "Tùng Mặc Tiêu",
+  "k": "cam",
+  "el": "moc",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "dodge": 7.6,
+    "mpP": 21.2
+  },
+  "lore": "Một đường rạn chia miệng tiêu làm hai, bên trong còn giữ tiếng tơ cọ vào vỏ.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Địch Nhuyễn Ngân — `pb_dich_nhuyen_ngan`
+
+```json
+{
+  "id": "pb_dich_nhuyen_ngan",
+  "n": "Địch Nhuyễn Ngân",
+  "k": "cam",
+  "el": "kim",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "weakStart": 1,
+    "tam": 3,
+    "mpP": 23
+  },
+  "lore": "Đưa lỗ sáo lại gần ngọn đèn sẽ nhận ra mùi búa mới tôi. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Hoàng Ngõa Ấn — `pb_hoang_ngoa_an`
+
+```json
+{
+  "id": "pb_hoang_ngoa_an",
+  "n": "Hoàng Ngõa Ấn",
+  "k": "an",
+  "el": "tho",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "stunP": 27.5,
+    "defP": 30.2,
+    "matkP": 21.4
+  },
+  "lore": "Chạm nhẹ vào mặt ấn, có thể nhận ra mùi đất vỡ sau cơn mưa.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đăng Thiền Thạch — `pb_dang_thien_thach`
+
+```json
+{
+  "id": "pb_dang_thien_thach",
+  "n": "Đăng Thiền Thạch",
+  "k": "dang",
+  "el": "phat",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tam": 6,
+    "tammaRes": 95.4,
+    "mpP": 28.5,
+    "ngo": 3
+  },
+  "lore": "Úp tim đèn về phía đất vẫn nhận ra vết bụi vàng của hương. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Thú Cốt Ngọc Lộ — `pb_thu_cot_chon_canh_mai_nha`
+
+```json
+{
+  "id": "pb_thu_cot_chon_canh_mai_nha",
+  "n": "Thú Cốt Ngọc Lộ",
+  "k": "cot",
+  "el": "hoa",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "execute": 54.4,
+    "defP": 25.7,
+    "atkP": 12.3,
+    "critDmg": 20.2
+  },
+  "lore": "Người bán trầu rửa chiếc bình một lần nữa trước ngày nghỉ chợ. Đến giờ ống tủy còn giữ vệt tro đỏ.",
+  "src": "Sự kiện mang bình qua phiên chợ cũ",
+  "status": "active"
+}
+```
+
+## Tháp Lôi Vĩ — `pb_thap_loi_vi`
+
+```json
+{
+  "id": "pb_thap_loi_vi",
+  "n": "Tháp Lôi Vĩ",
+  "k": "thap",
+  "el": "loi",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "defP": 28.5,
+    "blockTurn": 13.4,
+    "hpP": 20.8,
+    "tam": 3,
+    "crit": 8.3
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mái tầng dưới nhận ra một ánh chớp xanh. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Vũ Liệp Kiếm Hạp — `pb_vu_liep_kiem_hap`
+
+```json
+{
+  "id": "pb_vu_liep_kiem_hap",
+  "n": "Vũ Liệp Kiếm Hạp",
+  "k": "hap",
+  "el": "phong",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "elX": 71.2,
+    "matkP": 21.4,
+    "atkP": 18.3,
+    "crit": 7.9
+  },
+  "lore": "Trời vừa đổi gió, ghé gần nắp hạp có thể nhận ra ánh chao như cánh chim.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Cờ Lệnh Ảnh Giáp — `pb_co_lenh_anh_giap`
+
+```json
+{
+  "id": "pb_co_lenh_anh_giap",
+  "n": "Cờ Lệnh Ảnh Giáp",
+  "k": "phien",
+  "el": "am",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.52,
+    "tam": 4,
+    "matkP": 21.5,
+    "crit": 10.3
+  },
+  "lore": "Đặt cạnh cửa sổ, đường khâu để lộ ánh đen lẫn trong khói mỗi khi có người đi ngang.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Áo Tơi Tịnh Bình — `pb_ao_toi_tinh_binh`
+
+```json
+{
+  "id": "pb_ao_toi_tinh_binh",
+  "n": "Áo Tơi Tịnh Bình",
+  "k": "holo",
+  "el": "vo",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "healAfter": 36.5,
+    "mpP": 23.7,
+    "hpP": 20.8,
+    "defP": 23.2
+  },
+  "lore": "Ở chân bình có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cửa gỗ bị gió đẩy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Khánh Thủy Liêm — `pb_khanh_thuy_liem`
+
+```json
+{
+  "id": "pb_khanh_thuy_liem",
+  "n": "Khánh Thủy Liêm",
+  "k": "linh",
+  "el": "thuy",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "startBlock": 42.7,
+    "tam": 4,
+    "mpP": 27.5,
+    "hpP": 16.6
+  },
+  "lore": "Dọc chỗ dây treo có thể nhận ra tiếng giọt rơi vào chum. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Chuông Thương Lan — `pb_chuong_chua_nua_bat_com`
+
+```json
+{
+  "id": "pb_chuong_chua_nua_bat_com",
+  "n": "Chuông Thương Lan",
+  "k": "linh",
+  "el": "bang",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "startBlock": 39.8,
+    "tam": 3,
+    "defP": 21.8,
+    "hpP": 17.9
+  },
+  "lore": "Người bán hạt giống đợi thêm một ngày cho mùa rét qua. Chỗ miệng chuông vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện cất hạt giống trước đợt rét",
+  "status": "active"
+}
+```
+
+## Yêu Nha Diệm Sa — `pb_yeu_nha_diem_sa`
+
+```json
+{
+  "id": "pb_yeu_nha_diem_sa",
+  "n": "Yêu Nha Diệm Sa",
+  "k": "cot",
+  "el": "hoa",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "execute": 54.9,
+    "atkP": 13.4,
+    "crit": 8.6,
+    "critDmg": 21.2
+  },
+  "lore": "Người giữ trước từng lau gốc nanh bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Tuyết Tủy Ngọc Giản — `pb_tuyet_tuy_ngoc_gian`
+
+```json
+{
+  "id": "pb_tuyet_tuy_ngoc_gian",
+  "n": "Tuyết Tủy Ngọc Giản",
+  "k": "gian",
+  "el": "bang",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "tvP": 35.5,
+    "ngo": 3,
+    "mpP": 20.4,
+    "tam": 2
+  },
+  "lore": "Một đường rạn chia rãnh khắc làm hai, bên trong còn giữ ánh xanh trên mặt băng.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Kính Điện Tủy — `pb_kinh_dien_tuy`
+
+```json
+{
+  "id": "pb_kinh_dien_tuy",
+  "n": "Kính Điện Tủy",
+  "k": "kinh",
+  "el": "loi",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "reflect": 38.2,
+    "tam": 3,
+    "defP": 22.6,
+    "hpP": 17.4
+  },
+  "lore": "Đưa lưng kính lại gần ngọn đèn sẽ nhận ra một ánh chớp xanh. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Liễu Nhung Châu — `pb_lieu_nhung_chau`
+
+```json
+{
+  "id": "pb_lieu_nhung_chau",
+  "n": "Liễu Nhung Châu",
+  "k": "chau",
+  "el": "moc",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "regenHp": 8.6,
+    "mpP": 23,
+    "hpP": 16.4,
+    "tam": 2
+  },
+  "lore": "Chạm nhẹ vào giữa lòng châu, có thể nhận ra mùi nhựa vừa rịn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Phiên Sa Kiển — `pb_phien_sa_kien`
+
+```json
+{
+  "id": "pb_phien_sa_kien",
+  "n": "Phiên Sa Kiển",
+  "k": "phien",
+  "el": "tho",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "poisonHit": 0.49,
+    "matkP": 17.8,
+    "tam": 4,
+    "hpP": 19.5
+  },
+  "lore": "Úp gân vải về phía đất vẫn nhận ra những vết nứt nhỏ như chân chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Ấn Huyền Quy — `pb_an_bo_quen_duoi_manh`
+
+```json
+{
+  "id": "pb_an_bo_quen_duoi_manh",
+  "n": "Ấn Huyền Quy",
+  "k": "an",
+  "el": "phat",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "stunP": 26.2,
+    "defP": 28,
+    "matkP": 18.5,
+    "critDmg": 31.2
+  },
+  "lore": "Người nhổ cỏ chừa một bụi bên mộ để chim khỏi mất tổ. Đến giờ mặt ấn còn giữ hơi ấm như hạt cơm mới.",
+  "src": "Sự kiện che tổ chim trong bãi mộ",
+  "status": "active"
+}
+```
+
+## Yêu Nha Kim Tước — `pb_yeu_nha_kim_tuoc`
+
+```json
+{
+  "id": "pb_yeu_nha_kim_tuoc",
+  "n": "Yêu Nha Kim Tước",
+  "k": "cot",
+  "el": "kim",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "execute": 71.2,
+    "crit": 10.4,
+    "atkP": 16.4,
+    "critDmg": 27.7
+  },
+  "lore": "Vào giờ sương rơi, ghé gần gốc nanh nhận ra mùi búa mới tôi. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Bến Cạn Tán — `pb_ben_can_tan`
+
+```json
+{
+  "id": "pb_ben_can_tan",
+  "n": "Bến Cạn Tán",
+  "k": "tan",
+  "el": "vo",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "firstEvade": 1,
+    "tp": 3,
+    "dodge": 7.3,
+    "defP": 17.4
+  },
+  "lore": "Trời vừa đổi gió, ghé gần sống nan có thể nhận ra mùi khói bếp vương lại.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Hộ Mệnh Phù Trầm Ba — `pb_ho_menh_phu_tram_ba`
+
+```json
+{
+  "id": "pb_ho_menh_phu_tram_ba",
+  "n": "Hộ Mệnh Phù Trầm Ba",
+  "k": "phu",
+  "el": "thuy",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 16.8,
+    "defP": 19.8,
+    "tam": 3,
+    "mpP": 18.8,
+    "dodge": 7.2
+  },
+  "lore": "Đặt cạnh cửa sổ, đầu mép giấy để lộ vị mặn đọng trên môi mỗi khi có người đi ngang.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Huyết Ngọc Huyền Thiết — `pb_huyet_ngoc_ven_mot_goc_rem`
+
+```json
+{
+  "id": "pb_huyet_ngoc_ven_mot_goc_rem",
+  "n": "Huyết Ngọc Huyền Thiết",
+  "k": "huyet",
+  "el": "am",
+  "t": 6,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "drain": 34,
+    "hpP": 25.3,
+    "critDmg": 30,
+    "atkP": 19.4,
+    "crit": 13.7
+  },
+  "lore": "{who} vùi tàn hương dưới gốc cây trước khi rời {pl}. Đến giờ lõi ngọc còn giữ vệt bóng mọc về phía sáng.",
+  "src": "Sự kiện đào tàn hương dưới gốc cây",
+  "status": "active"
+}
+```
+
+## Ngọc Giản Bạch Lộ — `pb_ngoc_gian_giu_hoi_tay_cu`
+
+```json
+{
+  "id": "pb_ngoc_gian_giu_hoi_tay_cu",
+  "n": "Ngọc Giản Bạch Lộ",
+  "k": "gian",
+  "el": "phong",
+  "t": 6,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "tvP": 40.8,
+    "ngo": 3,
+    "tam": 3,
+    "mpP": 20.8,
+    "van": 3
+  },
+  "lore": "Người chở đò để ngửa lòng bàn tay khi nghe tên người chết. Dưới rãnh khắc còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện trả lời gọi đò trong sương",
+  "status": "active"
+}
+```
+
+## Cờ Lệnh Huyết Tuyến — `pb_co_lenh_goi_ve_tu_ngo`
+
+```json
+{
+  "id": "pb_co_lenh_goi_ve_tu_ngo",
+  "n": "Cờ Lệnh Huyết Tuyến",
+  "k": "phien",
+  "el": "phong",
+  "t": 6,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "poisonHit": 0.52,
+    "tam": 4,
+    "crit": 9.2,
+    "matkP": 19.8,
+    "mpP": 27.7
+  },
+  "lore": "Người hầu trà đếm được sáu chén, vẫn rót sang chén thứ bảy. Chỗ đường khâu vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện rót chén trà thứ bảy",
+  "status": "active"
+}
+```
+
+## Kính Tàn Dương — `pb_kinh_giu_dau_chan_sau`
+
+```json
+{
+  "id": "pb_kinh_giu_dau_chan_sau",
+  "n": "Kính Tàn Dương",
+  "k": "kinh",
+  "el": "phat",
+  "t": 6,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "reflect": 45,
+    "tam": 4,
+    "hpP": 19,
+    "defP": 23.8,
+    "matkP": 19
+  },
+  "lore": "{who} đếm mỗi bước qua cầu thay cho người bạn sợ nước. Thỉnh thoảng lưng kính còn thoảng tiếng mõ ngân rất khẽ.",
+  "src": "Sự kiện đếm lại bước qua cầu ván",
+  "status": "active"
+}
+```
+
+## Nhẫn Nham Phấn — `nhan_nhan_nham_phan`
+
+```json
+{
+  "id": "nhan_nhan_nham_phan",
+  "n": "Nhẫn Nham Phấn",
+  "k": "nhan",
+  "el": "tho",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 3,
+    "crit": 2.8,
+    "critDmg": 7.4
+  },
+  "lore": "Đặt cạnh cửa sổ, lòng nhẫn để lộ những vết nứt nhỏ như chân chim mỗi khi có người đi ngang.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Bạch Châm — `nhan_ban_chi_bach_cham`
+
+```json
+{
+  "id": "nhan_ban_chi_bach_cham",
+  "n": "Ban Chỉ Bạch Châm",
+  "k": "nhan",
+  "el": "kim",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 3,
+    "crit": 2.7,
+    "critDmg": 7.1
+  },
+  "lore": "Ở gờ đỡ ngón có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh bạc nhạt trên mép.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Ngô Đồng — `nhan_ban_chi_ngo_dong`
+
+```json
+{
+  "id": "nhan_ban_chi_ngo_dong",
+  "n": "Ban Chỉ Ngô Đồng",
+  "k": "nhan",
+  "el": "moc",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 2,
+    "crit": 2.9,
+    "critDmg": 7.3
+  },
+  "lore": "Dọc gờ đỡ ngón có thể nhận ra vệt phấn hoa vàng nhạt. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhẫn Tuyết Diệp — `nhan_nhan_ven_mot_goc_rem`
+
+```json
+{
+  "id": "nhan_nhan_ven_mot_goc_rem",
+  "n": "Nhẫn Tuyết Diệp",
+  "k": "nhan",
+  "el": "phat",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "van": 4,
+    "crit": 4.2,
+    "critDmg": 9.5
+  },
+  "lore": "Người gác mõ bỏ một hồi mõ để kẻ trộm đem cơm về cho con. Thỉnh thoảng lòng nhẫn còn thoảng hơi ấm như hạt cơm mới.",
+  "src": "Sự kiện gác mõ thay người cũ",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Băng Trầm — `nhan_ban_chi_bang_tram`
+
+```json
+{
+  "id": "nhan_ban_chi_bang_tram",
+  "n": "Ban Chỉ Băng Trầm",
+  "k": "nhan",
+  "el": "bang",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 4,
+    "crit": 4.1,
+    "critDmg": 8.8
+  },
+  "lore": "Người giữ trước từng lau gờ đỡ ngón bằng vải ướt. Đến giờ vẫn còn tiếng sương đóng lách tách.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Nhẫn Lôi Vĩ — `nhan_nhan_loi_vi`
+
+```json
+{
+  "id": "nhan_nhan_loi_vi",
+  "n": "Nhẫn Lôi Vĩ",
+  "k": "nhan",
+  "el": "loi",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 3,
+    "crit": 2.8,
+    "critDmg": 7.2
+  },
+  "lore": "Một đường rạn chia lòng nhẫn làm hai, bên trong còn giữ mạch điện nhói đầu ngón.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Ảnh Giáp — `nhan_ban_chi_anh_giap`
+
+```json
+{
+  "id": "nhan_ban_chi_anh_giap",
+  "n": "Ban Chỉ Ảnh Giáp",
+  "k": "nhan",
+  "el": "am",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 4,
+    "crit": 4.2,
+    "critDmg": 9.3
+  },
+  "lore": "Đưa gờ đỡ ngón lại gần ngọn đèn sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhẫn Tảo Phong — `nhan_nhan_tao_phong`
+
+```json
+{
+  "id": "nhan_nhan_tao_phong",
+  "n": "Nhẫn Tảo Phong",
+  "k": "nhan",
+  "el": "phong",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 4,
+    "crit": 3.9,
+    "critDmg": 8.8
+  },
+  "lore": "Chạm nhẹ vào lòng nhẫn, có thể nhận ra tiếng lá khô lăn dưới gót.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Đăng Tủy — `nhan_ban_chi_dang_tuy`
+
+```json
+{
+  "id": "nhan_ban_chi_dang_tuy",
+  "n": "Ban Chỉ Đăng Tủy",
+  "k": "nhan",
+  "el": "hoa",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 3,
+    "crit": 2.9,
+    "critDmg": 7.8
+  },
+  "lore": "Úp gờ đỡ ngón về phía đất vẫn nhận ra tiếng than nổ trong lò. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Nhẫn Sa Liên — `nhan_nhan_goi_trong_vat_ao`
+
+```json
+{
+  "id": "nhan_nhan_goi_trong_vat_ao",
+  "n": "Nhẫn Sa Liên",
+  "k": "nhan",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "van": 4,
+    "crit": 3.5,
+    "critDmg": 9.5
+  },
+  "lore": "{who} đếm mỗi bước qua cầu thay cho người bạn sợ nước. Dưới lòng nhẫn còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện đếm lại bước qua cầu ván",
+  "status": "active"
+}
+```
+
+## Nhẫn Lạch Sương — `nhan_nhan_lach_suong`
+
+```json
+{
+  "id": "nhan_nhan_lach_suong",
+  "n": "Nhẫn Lạch Sương",
+  "k": "nhan",
+  "el": "thuy",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 3,
+    "crit": 3.2,
+    "critDmg": 7.4,
+    "tam": 1
+  },
+  "lore": "Vào giờ sương rơi, ghé gần lòng nhẫn nhận ra tiếng giọt rơi vào chum. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Khói Bếp — `nhan_ban_chi_khoi_bep`
+
+```json
+{
+  "id": "nhan_ban_chi_khoi_bep",
+  "n": "Ban Chỉ Khói Bếp",
+  "k": "nhan",
+  "el": "vo",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "van": 4,
+    "crit": 3.5,
+    "critDmg": 10.3,
+    "atkP": 5.6
+  },
+  "lore": "Trời vừa đổi gió, ghé gần gờ đỡ ngón có thể nhận ra mùi khói bếp vương lại.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Tia Câm — `nhan_ban_chi_tia_cam`
+
+```json
+{
+  "id": "nhan_ban_chi_tia_cam",
+  "n": "Ban Chỉ Tia Câm",
+  "k": "nhan",
+  "el": "loi",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "van": 4,
+    "crit": 4.3,
+    "critDmg": 8.3,
+    "atkP": 6.5
+  },
+  "lore": "Đặt cạnh cửa sổ, gờ đỡ ngón để lộ tiếng rền như dưới nền nhà mỗi khi có người đi ngang.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Nhẫn Sắt Giếng — `nhan_nhan_sat_gieng`
+
+```json
+{
+  "id": "nhan_nhan_sat_gieng",
+  "n": "Nhẫn Sắt Giếng",
+  "k": "nhan",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "van": 5,
+    "crit": 4.1,
+    "critDmg": 13.4,
+    "mpP": 12
+  },
+  "lore": "Ở lòng nhẫn có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh bạc nhạt trên mép.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Nhẫn Hồn Đăng — `nhan_nhan_hon_dang`
+
+```json
+{
+  "id": "nhan_nhan_hon_dang",
+  "n": "Nhẫn Hồn Đăng",
+  "k": "nhan",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "van": 5,
+    "crit": 4.9,
+    "critDmg": 11.1,
+    "matkP": 8.6
+  },
+  "lore": "Dọc lòng nhẫn có thể nhận ra tiếng vải lụa sột soạt dưới đèn. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Hàn Ngọc — `nhan_ban_chi_chua_kip_qua_cau`
+
+```json
+{
+  "id": "nhan_ban_chi_chua_kip_qua_cau",
+  "n": "Ban Chỉ Hàn Ngọc",
+  "k": "nhan",
+  "el": "phat",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "van": 6,
+    "crit": 5.7,
+    "critDmg": 14.7,
+    "atkP": 9.4
+  },
+  "lore": "{who} lót bậc thềm bằng rơm cho người mang chân đau. Thỉnh thoảng gờ đỡ ngón còn thoảng hơi ấm như hạt cơm mới.",
+  "src": "Sự kiện rải rơm ở bậc thềm",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Sương Đóng — `nhan_ban_chi_suong_dong`
+
+```json
+{
+  "id": "nhan_ban_chi_suong_dong",
+  "n": "Ban Chỉ Sương Đóng",
+  "k": "nhan",
+  "el": "bang",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "van": 4,
+    "crit": 3.6,
+    "critDmg": 9.1,
+    "atkP": 4.8
+  },
+  "lore": "Người giữ trước từng lau gờ đỡ ngón bằng vải ướt. Đến giờ vẫn còn tiếng sương đóng lách tách.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Nhẫn Liên Thạch — `nhan_nhan_lien_thach`
+
+```json
+{
+  "id": "nhan_nhan_lien_thach",
+  "n": "Nhẫn Liên Thạch",
+  "k": "nhan",
+  "el": "tho",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "van": 3,
+    "crit": 3.6,
+    "critDmg": 10.3,
+    "mpP": 9.1
+  },
+  "lore": "Một đường rạn chia lòng nhẫn làm hai, bên trong còn giữ tiếng cát lọt qua kẽ.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Nhẫn Mai Trầm — `nhan_nhan_mai_tram`
+
+```json
+{
+  "id": "nhan_nhan_mai_tram",
+  "n": "Nhẫn Mai Trầm",
+  "k": "nhan",
+  "el": "moc",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "van": 4,
+    "crit": 3.6,
+    "critDmg": 8.6,
+    "mpP": 10.3
+  },
+  "lore": "Đưa lòng nhẫn lại gần ngọn đèn sẽ nhận ra vệt phấn hoa vàng nhạt. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Diệm Vĩ — `nhan_ban_chi_diem_vi`
+
+```json
+{
+  "id": "nhan_ban_chi_diem_vi",
+  "n": "Ban Chỉ Diệm Vĩ",
+  "k": "nhan",
+  "el": "hoa",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "van": 5,
+    "crit": 4.8,
+    "critDmg": 13.4,
+    "atkP": 7.4
+  },
+  "lore": "Chạm nhẹ vào gờ đỡ ngón, có thể nhận ra mùi tàn hương vừa tắt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Nhẫn Phong Tẫn — `nhan_nhan_phong_tan`
+
+```json
+{
+  "id": "nhan_nhan_phong_tan",
+  "n": "Nhẫn Phong Tẫn",
+  "k": "nhan",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "van": 4,
+    "crit": 5.1,
+    "critDmg": 13.9,
+    "mpP": 13
+  },
+  "lore": "Úp lòng nhẫn về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Cổ Mộc — `nhan_ban_chi_muon_do_mot_dem`
+
+```json
+{
+  "id": "nhan_ban_chi_muon_do_mot_dem",
+  "n": "Ban Chỉ Cổ Mộc",
+  "k": "nhan",
+  "el": "thuy",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "van": 4,
+    "crit": 4.7,
+    "critDmg": 10.4,
+    "hpP": 7.9
+  },
+  "lore": "Người chủ lò gốm giữ chiếc chén méo làm chén uống thuốc. Dưới gờ đỡ ngón còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện nhặt lại chén méo bên lò",
+  "status": "active"
+}
+```
+
+## Nhẫn Đá Kê — `nhan_nhan_da_ke`
+
+```json
+{
+  "id": "nhan_nhan_da_ke",
+  "n": "Nhẫn Đá Kê",
+  "k": "nhan",
+  "el": "vo",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "van": 4,
+    "crit": 3.8,
+    "critDmg": 8.6,
+    "mpP": 9.6
+  },
+  "lore": "Vào giờ sương rơi, ghé gần lòng nhẫn nhận ra vệt bụi từ bờ ruộng. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Tinh Chung — `nhan_ban_chi_tinh_chung`
+
+```json
+{
+  "id": "nhan_ban_chi_tinh_chung",
+  "n": "Ban Chỉ Tinh Chung",
+  "k": "nhan",
+  "el": "kim",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "van": 7,
+    "crit": 6.2,
+    "critDmg": 17.3,
+    "atkP": 9.4
+  },
+  "lore": "Trời vừa đổi gió, ghé gần gờ đỡ ngón có thể nhận ra những vảy sắt li ti.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Thạch Kiển — `nhan_ban_chi_thach_kien`
+
+```json
+{
+  "id": "nhan_ban_chi_thach_kien",
+  "n": "Ban Chỉ Thạch Kiển",
+  "k": "nhan",
+  "el": "tho",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "van": 5,
+    "crit": 4.9,
+    "critDmg": 12,
+    "atkP": 7.8
+  },
+  "lore": "Đặt cạnh cửa sổ, gờ đỡ ngón để lộ những vết nứt nhỏ như chân chim mỗi khi có người đi ngang.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Nhẫn Tịnh Hương — `nhan_nhan_tinh_huong`
+
+```json
+{
+  "id": "nhan_nhan_tinh_huong",
+  "n": "Nhẫn Tịnh Hương",
+  "k": "nhan",
+  "el": "phat",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "van": 5,
+    "crit": 5.1,
+    "critDmg": 11.6,
+    "mpP": 14.2
+  },
+  "lore": "Ở lòng nhẫn có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp hơi ấm như hạt cơm mới.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Nhẫn Điện Tinh — `nhan_nhan_dien_tinh`
+
+```json
+{
+  "id": "nhan_nhan_dien_tinh",
+  "n": "Nhẫn Điện Tinh",
+  "k": "nhan",
+  "el": "loi",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "van": 6,
+    "crit": 6.9,
+    "critDmg": 15.9,
+    "mpP": 16.7
+  },
+  "lore": "Dọc lòng nhẫn có thể nhận ra một ánh chớp xanh. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Địa Văn — `nhan_ban_chi_chon_canh_mai_nha`
+
+```json
+{
+  "id": "nhan_ban_chi_chon_canh_mai_nha",
+  "n": "Ban Chỉ Địa Văn",
+  "k": "nhan",
+  "el": "thuy",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "van": 5,
+    "crit": 5.2,
+    "critDmg": 13.2,
+    "atkP": 8.9
+  },
+  "lore": "Người thợ thuyền đặt một đồng tiền dưới mũi thuyền cầu bình an. Thỉnh thoảng gờ đỡ ngón còn thoảng ánh loang như vảy cá.",
+  "src": "Sự kiện lật mũi thuyền ở vũng cạn",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Diệm Sa — `nhan_ban_chi_diem_sa`
+
+```json
+{
+  "id": "nhan_ban_chi_diem_sa",
+  "n": "Ban Chỉ Diệm Sa",
+  "k": "nhan",
+  "el": "hoa",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "van": 7,
+    "crit": 7.6,
+    "critDmg": 17.3,
+    "atkP": 11.2
+  },
+  "lore": "Người giữ trước từng lau gờ đỡ ngón bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Nhẫn Thanh Dực — `nhan_nhan_thanh_duc`
+
+```json
+{
+  "id": "nhan_nhan_thanh_duc",
+  "n": "Nhẫn Thanh Dực",
+  "k": "nhan",
+  "el": "phong",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "van": 7,
+    "crit": 6.2,
+    "critDmg": 16.7,
+    "mpP": 19.4,
+    "tam": 2
+  },
+  "lore": "Một đường rạn chia lòng nhẫn làm hai, bên trong còn giữ tiếng gió lọt qua khe.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Rễ Dó — `nhan_ban_chi_re_do`
+
+```json
+{
+  "id": "nhan_ban_chi_re_do",
+  "n": "Ban Chỉ Rễ Dó",
+  "k": "nhan",
+  "el": "moc",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "van": 6,
+    "crit": 6.2,
+    "critDmg": 17.2,
+    "atkP": 9.3,
+    "tp": 2
+  },
+  "lore": "Đưa gờ đỡ ngón lại gần ngọn đèn sẽ nhận ra vệt phấn hoa vàng nhạt. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Nhẫn U Hương — `nhan_nhan_u_huong`
+
+```json
+{
+  "id": "nhan_nhan_u_huong",
+  "n": "Nhẫn U Hương",
+  "k": "nhan",
+  "el": "am",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "van": 5,
+    "crit": 4.5,
+    "critDmg": 14.4,
+    "mpP": 12.3,
+    "matkP": 9.3
+  },
+  "lore": "Chạm nhẹ vào lòng nhẫn, có thể nhận ra mùi hương cũ trong buồng kín.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Nhẫn Hàn Phấn — `nhan_nhan_han_phan`
+
+```json
+{
+  "id": "nhan_nhan_han_phan",
+  "n": "Nhẫn Hàn Phấn",
+  "k": "nhan",
+  "el": "bang",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "van": 5,
+    "crit": 4.3,
+    "critDmg": 12.3,
+    "mpP": 14.4,
+    "tam": 2
+  },
+  "lore": "Úp lòng nhẫn về phía đất vẫn nhận ra tiếng sương đóng lách tách. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Hàn Tinh — `nhan_ban_chi_chua_nua_bat_com`
+
+```json
+{
+  "id": "nhan_ban_chi_chua_nua_bat_com",
+  "n": "Ban Chỉ Hàn Tinh",
+  "k": "nhan",
+  "el": "phong",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "van": 9,
+    "crit": 8,
+    "critDmg": 23.8,
+    "atkP": 13.6,
+    "tp": 3
+  },
+  "lore": "Người đào giếng để nguyên một bậc đất cho ếch leo lên. Dưới gờ đỡ ngón còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện đặt lại bậc giếng vỡ",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Hắc Triều — `nhan_ban_chi_hac_trieu`
+
+```json
+{
+  "id": "nhan_ban_chi_hac_trieu",
+  "n": "Ban Chỉ Hắc Triều",
+  "k": "nhan",
+  "el": "am",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "van": 6,
+    "crit": 6.2,
+    "critDmg": 17.7,
+    "atkP": 11.2,
+    "tp": 2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần gờ đỡ ngón nhận ra tiếng vải lụa sột soạt dưới đèn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Nhẫn Tuyết Sa — `nhan_nhan_tuyet_sa`
+
+```json
+{
+  "id": "nhan_nhan_tuyet_sa",
+  "n": "Nhẫn Tuyết Sa",
+  "k": "nhan",
+  "el": "bang",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "van": 8,
+    "crit": 8.2,
+    "critDmg": 23.8,
+    "mpP": 21,
+    "tam": 3
+  },
+  "lore": "Trời vừa đổi gió, ghé gần lòng nhẫn có thể nhận ra tiếng sương đóng lách tách.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Nhẫn Lôi Tằm — `nhan_nhan_loi_tam`
+
+```json
+{
+  "id": "nhan_nhan_loi_tam",
+  "n": "Nhẫn Lôi Tằm",
+  "k": "nhan",
+  "el": "loi",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "van": 7,
+    "crit": 7.8,
+    "critDmg": 20.4,
+    "mpP": 18.2,
+    "tam": 3
+  },
+  "lore": "Đặt cạnh cửa sổ, lòng nhẫn để lộ tiếng rền như dưới nền nhà mỗi khi có người đi ngang.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Đêm Canh — `nhan_ban_chi_dem_canh`
+
+```json
+{
+  "id": "nhan_ban_chi_dem_canh",
+  "n": "Ban Chỉ Đêm Canh",
+  "k": "nhan",
+  "el": "vo",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "van": 6,
+    "crit": 7.1,
+    "critDmg": 15.9,
+    "atkP": 9.9,
+    "tp": 2
+  },
+  "lore": "Ở gờ đỡ ngón có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cửa gỗ bị gió đẩy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Nham Phấn Nhẫn — `nhan_nham_phan_nhan`
+
+```json
+{
+  "id": "nhan_nham_phan_nhan",
+  "n": "Nham Phấn Nhẫn",
+  "k": "nhan",
+  "el": "tho",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "van": 7,
+    "crit": 7.8,
+    "critDmg": 17.4,
+    "mpP": 18.6,
+    "tam": 3
+  },
+  "lore": "Dọc lòng nhẫn có thể nhận ra vệt phấn đá đục. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Tinh Sa — `nhan_ban_chi_bo_quen_duoi_manh`
+
+```json
+{
+  "id": "nhan_ban_chi_bo_quen_duoi_manh",
+  "n": "Ban Chỉ Tinh Sa",
+  "k": "nhan",
+  "el": "thuy",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "van": 7,
+    "crit": 7.5,
+    "critDmg": 20.4,
+    "atkP": 12.9,
+    "tp": 2
+  },
+  "lore": "{who} vùi tàn hương dưới gốc cây trước khi rời {pl}. Thỉnh thoảng gờ đỡ ngón còn thoảng ánh loang như vảy cá.",
+  "src": "Sự kiện đào tàn hương dưới gốc cây",
+  "status": "active"
+}
+```
+
+## Phạn Chung Nhẫn — `nhan_phan_chung_nhan`
+
+```json
+{
+  "id": "nhan_phan_chung_nhan",
+  "n": "Phạn Chung Nhẫn",
+  "k": "nhan",
+  "el": "phat",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "van": 7,
+    "crit": 6.3,
+    "critDmg": 15.4,
+    "mpP": 15.9,
+    "tam": 2
+  },
+  "lore": "Người giữ trước từng lau lòng nhẫn bằng vải ướt. Đến giờ vẫn còn vết bụi vàng của hương.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Mộc Tuế — `nhan_ban_chi_moc_tue`
+
+```json
+{
+  "id": "nhan_ban_chi_moc_tue",
+  "n": "Ban Chỉ Mộc Tuế",
+  "k": "nhan",
+  "el": "moc",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "van": 6,
+    "crit": 7.6,
+    "critDmg": 16.2,
+    "atkP": 10.8,
+    "hpP": 11.7
+  },
+  "lore": "Một đường rạn chia gờ đỡ ngón làm hai, bên trong còn giữ tiếng tơ cọ vào vỏ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đan Tẫn Ban Chỉ — `nhan_dan_tan_ban_chi`
+
+```json
+{
+  "id": "nhan_dan_tan_ban_chi",
+  "n": "Đan Tẫn Ban Chỉ",
+  "k": "nhan",
+  "el": "hoa",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "van": 9,
+    "crit": 8.6,
+    "critDmg": 17.4,
+    "atkP": 11.8,
+    "tp": 3
+  },
+  "lore": "Đưa gờ đỡ ngón lại gần ngọn đèn sẽ nhận ra ánh lửa liếm qua mép. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Nhẫn Tinh Chung — `nhan_nhan_tinh_chung`
+
+```json
+{
+  "id": "nhan_nhan_tinh_chung",
+  "n": "Nhẫn Tinh Chung",
+  "k": "nhan",
+  "el": "kim",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "van": 8,
+    "crit": 7.3,
+    "critDmg": 18.6,
+    "mpP": 19.8,
+    "tam": 3
+  },
+  "lore": "Chạm nhẹ vào lòng nhẫn, có thể nhận ra tiếng đồng ngân dưới mưa.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Điện Tinh Nhẫn — `nhan_dien_tinh_nhan`
+
+```json
+{
+  "id": "nhan_dien_tinh_nhan",
+  "n": "Điện Tinh Nhẫn",
+  "k": "nhan",
+  "el": "loi",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "van": 11,
+    "crit": 7.9,
+    "critDmg": 23.7,
+    "mpP": 23.9,
+    "matkP": 21.5
+  },
+  "lore": "Úp lòng nhẫn về phía đất vẫn nhận ra tiếng rền như dưới nền nhà. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Ban Chỉ Huyền Thiết — `nhan_ban_chi_goi_ve_tu_ngo`
+
+```json
+{
+  "id": "nhan_ban_chi_goi_ve_tu_ngo",
+  "n": "Ban Chỉ Huyền Thiết",
+  "k": "nhan",
+  "el": "bang",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "van": 11,
+    "crit": 10.7,
+    "critDmg": 25.7,
+    "atkP": 18.8,
+    "defP": 31.2,
+    "tp": 4
+  },
+  "lore": "{who} giắt một nhánh mùi tàu để người nhà nhận ra mình trong khói. Dưới gờ đỡ ngón còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện tìm lối qua nhà cháy",
+  "status": "active"
+}
+```
+
+## Tảo Phong Ban Chỉ — `nhan_tao_phong_ban_chi`
+
+```json
+{
+  "id": "nhan_tao_phong_ban_chi",
+  "n": "Tảo Phong Ban Chỉ",
+  "k": "nhan",
+  "el": "phong",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "van": 8,
+    "crit": 7.3,
+    "critDmg": 18.6,
+    "atkP": 14.2,
+    "tp": 3,
+    "defP": 18.2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần gờ đỡ ngón nhận ra vệt bụi uốn quanh mép. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Nhẫn Thủy Liêm — `nhan_nhan_thuy_liem`
+
+```json
+{
+  "id": "nhan_nhan_thuy_liem",
+  "n": "Nhẫn Thủy Liêm",
+  "k": "nhan",
+  "el": "thuy",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "van": 8,
+    "crit": 6.6,
+    "critDmg": 18.6,
+    "mpP": 22.4,
+    "tam": 3,
+    "matkP": 14.1
+  },
+  "lore": "Trời vừa đổi gió, ghé gần lòng nhẫn có thể nhận ra vị mặn đọng trên môi.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Vải Mộc Ban Chỉ — `nhan_vai_moc_ban_chi`
+
+```json
+{
+  "id": "nhan_vai_moc_ban_chi",
+  "n": "Vải Mộc Ban Chỉ",
+  "k": "nhan",
+  "el": "vo",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "van": 8,
+    "crit": 8.8,
+    "critDmg": 28.5,
+    "atkP": 15.4,
+    "tp": 3,
+    "defP": 23.9
+  },
+  "lore": "Đặt cạnh cửa sổ, gờ đỡ ngón để lộ mùi khói bếp vương lại mỗi khi có người đi ngang.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Nhẫn Trúc Châm — `nhan_nhan_truc_cham`
+
+```json
+{
+  "id": "nhan_nhan_truc_cham",
+  "n": "Nhẫn Trúc Châm",
+  "k": "nhan",
+  "el": "moc",
+  "t": 6,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "van": 15,
+    "crit": 12.6,
+    "critDmg": 34,
+    "mpP": 35.5,
+    "tam": 4,
+    "matkP": 22.9,
+    "tvP": 20.2
+  },
+  "lore": "Người giữ bến vẫn kê ghế đúng tầm chân vị khách nhỏ tuổi. Dưới lòng nhẫn còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện đưa ghế ra bến lặng",
+  "status": "active"
+}
+```
+
+## Kiếm Sắt Lò Tro — `vk_kiem_sat_lo_tro`
+
+```json
+{
+  "id": "vk_kiem_sat_lo_tro",
+  "n": "Kiếm Sắt Lò Tro",
+  "k": "kiem",
+  "el": "kim",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 8.1
+  },
+  "lore": "Tro đọng trong lỗ xỏ tua kiếm, lau mãi vẫn ra một vệt đen.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Đao Mẻ Cán Dâu — `vk_dao_me_can_dau`
+
+```json
+{
+  "id": "vk_dao_me_can_dau",
+  "n": "Đao Mẻ Cán Dâu",
+  "k": "dao",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 8.1,
+    "crit": 4.6,
+    "critDmg": 10.5
+  },
+  "lore": "Cán gỗ dâu ngả bóng ở chỗ ngón cái. Vết mẻ trên lưỡi vừa khít một hạt kê.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trượng Rễ Du — `vk_truong_re_du`
+
+```json
+{
+  "id": "vk_truong_re_du",
+  "n": "Trượng Rễ Du",
+  "k": "phap",
+  "el": "moc",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 9.7
+  },
+  "lore": "Lớp vỏ còn nguyên trên thân trượng. Hễ gặp mưa, vết cắt ở chân gỗ lại ứa nhựa.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Phất Trần Đuôi Mã — `vk_phat_tran_duoi_ma`
+
+```json
+{
+  "id": "vk_phat_tran_duoi_ma",
+  "n": "Phất Trần Đuôi Mã",
+  "k": "phap",
+  "el": "phong",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 12.2
+  },
+  "lore": "Túm lông ngựa buộc bằng dây gai, ngày thường tiện phủi bùn khỏi gấu áo.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Châu Nước Rạ — `vk_chau_nuoc_ra`
+
+```json
+{
+  "id": "vk_chau_nuoc_ra",
+  "n": "Châu Nước Rạ",
+  "k": "phap",
+  "el": "thuy",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 9.7
+  },
+  "lore": "Trong hạt châu đọng một giọt nước vàng nhạt, thơm mùi chân ruộng mới gặt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bút Cật Trúc — `vk_but_cat_truc`
+
+```json
+{
+  "id": "vk_but_cat_truc",
+  "n": "Bút Cật Trúc",
+  "k": "but",
+  "el": "vo",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "ngo": 3
+  },
+  "lore": "Cán trúc chỉ vừa hai ngón tay. Kẻ học vẽ phù gặm mất một đốt ở đầu cán.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Kiếm Bọc Vỏ Liễu — `vk_kiem_boc_vo_lieu`
+
+```json
+{
+  "id": "vk_kiem_boc_vo_lieu",
+  "n": "Kiếm Bọc Vỏ Liễu",
+  "k": "kiem",
+  "el": "kim",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 11.1
+  },
+  "lore": "Vỏ liễu nhẹ đến nỗi rơi xuống giếng còn nổi. Lưỡi kiếm được vớt lên sau một mùa cạn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đao Ám Muội — `vk_dao_am_muoi`
+
+```json
+{
+  "id": "vk_dao_am_muoi",
+  "n": "Đao Ám Muội",
+  "k": "dao",
+  "el": "hoa",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 7.3,
+    "crit": 4.6,
+    "critDmg": 12.9
+  },
+  "lore": "Mặt đao ám muội lò. Đem sưởi lửa một chốc, lưỡi đao đỏ trước cả than.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trượng Nện Đất — `vk_truong_nen_dat`
+
+```json
+{
+  "id": "vk_truong_nen_dat",
+  "n": "Trượng Nện Đất",
+  "k": "phap",
+  "el": "tho",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 10.8
+  },
+  "lore": "Chân trượng bọc đất nung. Chủ trước gõ một tiếng để gọi gà, hai tiếng để đuổi khách.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Phất Trần Cước Gai — `vk_phat_tran_cuoc_gai`
+
+```json
+{
+  "id": "vk_phat_tran_cuoc_gai",
+  "n": "Phất Trần Cước Gai",
+  "k": "phap",
+  "el": "phat",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 9.2
+  },
+  "lore": "Sợi gai cứa vào kẽ tay người cầm. Nút dây quấn quanh cán vừa đủ mười vòng niệm.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Châu Váng Sương — `vk_chau_vang_suong`
+
+```json
+{
+  "id": "vk_chau_vang_suong",
+  "n": "Châu Váng Sương",
+  "k": "phap",
+  "el": "bang",
+  "t": 0,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "matkP": 13.7
+  },
+  "lore": "Lớp sương trên hạt châu lặng lẽ dày lên mỗi khi có người thở dài.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bút Rêu Vách — `vk_but_reu_vach`
+
+```json
+{
+  "id": "vk_but_reu_vach",
+  "n": "Bút Rêu Vách",
+  "k": "but",
+  "el": "moc",
+  "t": 0,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "ngo": 4
+  },
+  "lore": "Lông bút ngậm màu rêu. Chữ viết trên gỗ mục qua một đêm sẽ mọc viền xanh.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Kiếm Treo Bên Vại — `vk_kiem_treo_ben_vai`
+
+```json
+{
+  "id": "vk_kiem_treo_ben_vai",
+  "n": "Kiếm Treo Bên Vại",
+  "k": "kiem",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "atkP": 13.5
+  },
+  "lore": "Chuôi kiếm có khắc từng vạch đo chiều cao trẻ nhỏ. Vạch trên cùng dừng ngang miệng vại.",
+  "src": "Sự kiện trả kiếm cho người giữ vườn",
+  "status": "active"
+}
+```
+
+## Đao Sống Đồng — `vk_dao_song_dong`
+
+```json
+{
+  "id": "vk_dao_song_dong",
+  "n": "Đao Sống Đồng",
+  "k": "dao",
+  "el": "kim",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 8.9,
+    "crit": 5.7,
+    "critDmg": 10.5,
+    "tp": 1
+  },
+  "lore": "Một đường đồng đỏ chạy dọc sống đao. Bẻ ngược tay chém, mép đồng kêu thanh như đồng tiền rơi.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trượng Sa Tâm — `vk_truong_sa_tam`
+
+```json
+{
+  "id": "vk_truong_sa_tam",
+  "n": "Trượng Sa Tâm",
+  "k": "phap",
+  "el": "tho",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 13.7,
+    "defP": 9.9
+  },
+  "lore": "Cát mịn trong đầu trượng rơi rào rạo. Dựng thẳng chân trượng, tiếng cát lập tức im.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Phất Trần Tơ Vỏ Dó — `vk_phat_tran_to_vo_do`
+
+```json
+{
+  "id": "vk_phat_tran_to_vo_do",
+  "n": "Phất Trần Tơ Vỏ Dó",
+  "k": "phap",
+  "el": "moc",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "matkP": 13,
+    "mpP": 9.9
+  },
+  "lore": "Tơ róc từ vỏ dó hút sương đến nặng trĩu, phẩy một cái lại nhẹ như lúc mới hong.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Châu Tàng Lôi — `vk_chau_tang_loi`
+
+```json
+{
+  "id": "vk_chau_tang_loi",
+  "n": "Châu Tàng Lôi",
+  "k": "phap",
+  "el": "loi",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "matkP": 19.8,
+    "crit": 5.4
+  },
+  "lore": "Một đốm lôi quang nằm kẹt giữa hai lớp vỏ. Hễ sét đánh xa, nó lại nhích gần mặt châu.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bút Mực Khói — `vk_but_muc_khoi`
+
+```json
+{
+  "id": "vk_but_muc_khoi",
+  "n": "Bút Mực Khói",
+  "k": "but",
+  "el": "am",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "ngo": 4,
+    "matkP": 7.2
+  },
+  "lore": "Ngòi bút chấm vào khói đèn, viết lên giấy được một hàng chữ lạnh tay.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Phiến Phong Kiếm — `vk_phien_phong_kiem`
+
+```json
+{
+  "id": "vk_phien_phong_kiem",
+  "n": "Phiến Phong Kiếm",
+  "k": "kiem",
+  "el": "phong",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 10.5,
+    "tp": 1
+  },
+  "lore": "Mũi kiếm mài mỏng như vảy hành. Khi rút khỏi vỏ, chiếc lá dưới chân luôn lật mặt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đao Băng Nứt — `vk_dao_bang_nut`
+
+```json
+{
+  "id": "vk_dao_bang_nut",
+  "n": "Đao Băng Nứt",
+  "k": "dao",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 9.7,
+    "crit": 6.5,
+    "critDmg": 17.6,
+    "defP": 12.6
+  },
+  "lore": "Một khe nứt kéo từ sống xuống lưỡi. Ban đêm băng hàn bò ra khỏi khe, đóng trắng cả giá gỗ.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trượng Vùi Than — `vk_truong_vui_than`
+
+```json
+{
+  "id": "vk_truong_vui_than",
+  "n": "Trượng Vùi Than",
+  "k": "phap",
+  "el": "hoa",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "matkP": 19.8,
+    "critDmg": 12.6
+  },
+  "lore": "Đầu trượng còn hằn dấu kẹp của thợ lò. Than vùi trong lõi cháy qua ba lượt thay cán.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Phất Trần Mượn Áo Tơi — `vk_phat_tran_muon_ao_toi`
+
+```json
+{
+  "id": "vk_phat_tran_muon_ao_toi",
+  "n": "Phất Trần Mượn Áo Tơi",
+  "k": "phap",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "matkP": 18,
+    "mpP": 16.4
+  },
+  "lore": "Sợi phất đan từ áo tơi {who} bỏ lại ở bến. Giũ ba lần, lòng bàn tay còn hơi ấm của người mặc.",
+  "src": "Sự kiện tìm áo tơi ở bến lũ",
+  "status": "active"
+}
+```
+
+## Châu Tằm Triều — `vk_chau_tam_trieu`
+
+```json
+{
+  "id": "vk_chau_tam_trieu",
+  "n": "Châu Tằm Triều",
+  "k": "phap",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 17.1,
+    "mpP": 15.1
+  },
+  "lore": "Sợi tơ trong lòng châu cuộn theo nhịp nước lên. Đến giờ triều xuống, nó nhả từng vòng.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bút Kinh Ốc — `vk_but_kinh_oc`
+
+```json
+{
+  "id": "vk_but_kinh_oc",
+  "n": "Bút Kinh Ốc",
+  "k": "but",
+  "el": "phat",
+  "t": 1,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "ngo": 4,
+    "tam": 2
+  },
+  "lore": "Cán bút ghép từ vỏ ốc vỡ. Chép kinh đến chữ cuối, trong cán vọng ra tiếng sóng vỗ.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Kiếm Trúc Tàng Nhận — `vk_kiem_truc_tang_nhan`
+
+```json
+{
+  "id": "vk_kiem_truc_tang_nhan",
+  "n": "Kiếm Trúc Tàng Nhận",
+  "k": "kiem",
+  "el": "moc",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 15.3,
+    "crit": 5.4
+  },
+  "lore": "Lõi thép giấu dưới ba lớp nan trúc. Vỏ trúc bung ra thì lưỡi kiếm mới chịu lộ.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đao Dẫn Lôi Văn — `vk_dao_dan_loi_van`
+
+```json
+{
+  "id": "vk_dao_dan_loi_van",
+  "n": "Đao Dẫn Lôi Văn",
+  "k": "dao",
+  "el": "loi",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 11.3,
+    "crit": 7.9,
+    "critDmg": 15.3,
+    "matkP": 9.9
+  },
+  "lore": "Những đường lôi văn tụ quanh một cái đinh sắt. Chạm nhầm đinh, răng hàm tê đến sáng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trượng Xương Kình — `vk_truong_xuong_kinh`
+
+```json
+{
+  "id": "vk_truong_xuong_kinh",
+  "n": "Trượng Xương Kình",
+  "k": "phap",
+  "el": "thuy",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 18.9,
+    "mpP": 13.9
+  },
+  "lore": "Hốc tủy thông từ đầu đến chân trượng. Gió lùa qua nghe tựa hơi thở nặng dưới mặt nước.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Hàn Tảo — `vk_phat_tran_han_tao`
+
+```json
+{
+  "id": "vk_phat_tran_han_tao",
+  "n": "Phất Trần Hàn Tảo",
+  "k": "phap",
+  "el": "bang",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 26.9,
+    "mpP": 14.6
+  },
+  "lore": "Từng sợi tảo trắng tự tìm hơi nước mà vươn, chạm bát trà liền bám băng vào miệng bát.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Châu Đèn Dưới Nước — `vk_chau_den_duoi_nuoc`
+
+```json
+{
+  "id": "vk_chau_den_duoi_nuoc",
+  "n": "Châu Đèn Dưới Nước",
+  "k": "phap",
+  "el": "thuy",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "matkP": 25.7,
+    "tam": 2,
+    "regenMp": 11.9
+  },
+  "lore": "Giữa lòng châu cháy một tim đèn. Người nhà vẫn thắp đèn trên bờ mỗi đêm, chờ người thợ lặn mang ngọn kia về.",
+  "src": "Sự kiện tìm đèn của thợ lặn",
+  "status": "active"
+}
+```
+
+## Bút Sa Vỏ Trai — `vk_but_sa_vo_trai`
+
+```json
+{
+  "id": "vk_but_sa_vo_trai",
+  "n": "Bút Sa Vỏ Trai",
+  "k": "but",
+  "el": "kim",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "ngo": 5,
+    "matkP": 9.9
+  },
+  "lore": "Ngòi bút rắc bột trai thành nét mảnh. Chữ vừa ráo mực có thể khía đứt sợi tóc.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Kiếm Vết Băng Rút — `vk_kiem_vet_bang_rut`
+
+```json
+{
+  "id": "vk_kiem_vet_bang_rut",
+  "n": "Kiếm Vết Băng Rút",
+  "k": "kiem",
+  "el": "bang",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 16.8,
+    "critDmg": 13.9
+  },
+  "lore": "Sương bám thành vệt dài ở chỗ lưỡi kiếm từng mắc dưới tảng băng. Rút ra rồi, vệt ấy cứ lùi dần về phía chuôi.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đao Cất Dưới Mâm — `vk_dao_cat_duoi_mam`
+
+```json
+{
+  "id": "vk_dao_cat_duoi_mam",
+  "n": "Đao Cất Dưới Mâm",
+  "k": "dao",
+  "el": "am",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "atkP": 15.5,
+    "crit": 12.4,
+    "critDmg": 26.7,
+    "tp": 2
+  },
+  "lore": "Nhà ngư phủ giấu đao dưới mâm cơm suốt ba đời. Hôm người con út trở về một mình, lưỡi đao dính đầy vảy cá.",
+  "src": "Sự kiện dọn mâm cúng thuyền đắm",
+  "status": "active"
+}
+```
+
+## Trượng Gốc San Hô — `vk_truong_goc_san_ho`
+
+```json
+{
+  "id": "vk_truong_goc_san_ho",
+  "n": "Trượng Gốc San Hô",
+  "k": "phap",
+  "el": "moc",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 17.1,
+    "mpP": 15.1
+  },
+  "lore": "Các nhánh nhỏ còn bám bột vỏ sò. Vùi chân trượng trong cát ướt, một mầm mới nhú đúng chỗ từng bị chặt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phất Trần Tách Khói — `vk_phat_tran_tach_khoi`
+
+```json
+{
+  "id": "vk_phat_tran_tach_khoi",
+  "n": "Phất Trần Tách Khói",
+  "k": "phap",
+  "el": "phong",
+  "t": 2,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 22.2,
+    "tp": 2
+  },
+  "lore": "Một đường phẩy xẻ khói đen làm đôi. Đặt xuống đất, sợi phất lại chậm rãi kéo khói về.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Bút Giấy Vàng — `vk_but_giay_vang`
+
+```json
+{
+  "id": "vk_but_giay_vang",
+  "n": "Bút Giấy Vàng",
+  "k": "but",
+  "el": "am",
+  "t": 2,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "ngo": 7,
+    "matkP": 13.5
+  },
+  "lore": "Mực đọng thành hạt ở đầu ngòi. Hạt nào rơi lên giấy vàng, chữ dưới chỗ ấy tự lộn mặt.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Kiếm Chẻ Triều — `vk_kiem_che_trieu`
+
+```json
+{
+  "id": "vk_kiem_che_trieu",
+  "n": "Kiếm Chẻ Triều",
+  "k": "kiem",
+  "el": "thuy",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 22.8,
+    "tp": 2,
+    "critDmg": 17.8
+  },
+  "lore": "Khi triều vừa đứng, lưỡi kiếm gợn một đường sóng chạy ngược về chuôi.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đao Phơi Muối — `vk_dao_phoi_muoi`
+
+```json
+{
+  "id": "vk_dao_phoi_muoi",
+  "n": "Đao Phơi Muối",
+  "k": "dao",
+  "el": "hoa",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 14.2,
+    "crit": 9.4,
+    "critDmg": 23.8,
+    "matkP": 12.9,
+    "tp": 2
+  },
+  "lore": "Muối đóng váng trên sống đao. Qua một đường chém, hạt nào văng ra cũng nổ như tàn than.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trượng Vân Băng — `vk_truong_van_bang`
+
+```json
+{
+  "id": "vk_truong_van_bang",
+  "n": "Trượng Vân Băng",
+  "k": "phap",
+  "el": "bang",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 26.9,
+    "mpP": 17.8,
+    "crit": 5.7
+  },
+  "lore": "Trong lớp băng quanh cán có những quầng mây trắng. Mỗi lần gõ xuống đất, một quầng tan ra.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Dệt Giờ Mão — `vk_phat_tran_det_gio_mao`
+
+```json
+{
+  "id": "vk_phat_tran_det_gio_mao",
+  "n": "Phất Trần Dệt Giờ Mão",
+  "k": "phap",
+  "el": "phat",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 22.2,
+    "tam": 2,
+    "mpP": 17
+  },
+  "lore": "Từng sợi lộ màu vàng vào giờ mão. Qua giờ ấy, chúng bạc đi như mái tóc người thức trắng.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Châu Dạ Tủy — `vk_chau_da_tuy`
+
+```json
+{
+  "id": "vk_chau_da_tuy",
+  "n": "Châu Dạ Tủy",
+  "k": "phap",
+  "el": "am",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 24.6,
+    "hpP": 12.9,
+    "critDmg": 17
+  },
+  "lore": "Tủy trong hạt châu thẫm lại sau mỗi vết thương. Đặt sát tai nghe rõ tiếng nuốt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bút Chép Mộ Rỗng — `vk_but_chep_mo_rong`
+
+```json
+{
+  "id": "vk_but_chep_mo_rong",
+  "n": "Bút Chép Mộ Rỗng",
+  "k": "but",
+  "el": "tho",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "ngo": 9,
+    "matkP": 16.8,
+    "tam": 3
+  },
+  "lore": "Ngòi bút mòn vì chép tên lên bia của những ngôi mộ rỗng. {who} vẫn chừa một tấm bia trắng cạnh cửa nhà.",
+  "src": "Sự kiện dựng bia cho người mất xác",
+  "status": "active"
+}
+```
+
+## Đao Trảm Thạch Văn — `vk_dao_tram_thach_van`
+
+```json
+{
+  "id": "vk_dao_tram_thach_van",
+  "n": "Đao Trảm Thạch Văn",
+  "k": "dao",
+  "el": "kim",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "atkP": 16.2,
+    "crit": 11.4,
+    "critDmg": 19.8,
+    "tp": 2,
+    "defP": 15.4
+  },
+  "lore": "Hoa sắt nổi thành lớp mỏng như vân đá. Vết chém để lại trên vách một đường sáng tới hôm sau.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trượng Chốt Thiên Lôi — `vk_truong_chot_thien_loi`
+
+```json
+{
+  "id": "vk_truong_chot_thien_loi",
+  "n": "Trượng Chốt Thiên Lôi",
+  "k": "phap",
+  "el": "loi",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 33.7,
+    "crit": 7.9,
+    "critDmg": 23.8
+  },
+  "lore": "Một chốt đồng ghim chéo qua thân trượng. Mỗi lần thay chốt, người thợ phải lấy tay che mắt.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Lông Sậy Tía — `vk_phat_tran_long_say_tia`
+
+```json
+{
+  "id": "vk_phat_tran_long_say_tia",
+  "n": "Phất Trần Lông Sậy Tía",
+  "k": "phap",
+  "el": "moc",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 22.2,
+    "mpP": 18.6,
+    "hpP": 11.7
+  },
+  "lore": "Túm lông sậy sẫm tím vì mọc trên bãi lầy. Gặp máu, chúng lập tức dựng thẳng như lúc đón gió.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Châu Tiếng Gõ Cửa — `vk_chau_tieng_go_cua`
+
+```json
+{
+  "id": "vk_chau_tieng_go_cua",
+  "n": "Châu Tiếng Gõ Cửa",
+  "k": "phap",
+  "el": "phong",
+  "t": 3,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "matkP": 29.1,
+    "dodge": 9.4,
+    "mpP": 21.8
+  },
+  "lore": "Lần nào hạt châu nổi khỏi lòng bàn tay, cánh cửa gần nhất cũng rung lên ba tiếng. Đó là ám hiệu người gác cổng dùng để gọi con về ăn cơm.",
+  "src": "Sự kiện canh cửa phế trạch",
+  "status": "active"
+}
+```
+
+## Kiếm Đúc Vân Sắt — `vk_kiem_duc_van_sat`
+
+```json
+{
+  "id": "vk_kiem_duc_van_sat",
+  "n": "Kiếm Đúc Vân Sắt",
+  "k": "kiem",
+  "el": "kim",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "atkP": 29,
+    "crit": 8.6,
+    "critDmg": 21.8
+  },
+  "lore": "Vân sắt xô về một phía trên mặt kiếm như mây gặp bão. Chỉ lúc tra vỏ, chúng mới chịu nằm yên.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đao Lằn Huyết Khô — `vk_dao_lan_huyet_kho`
+
+```json
+{
+  "id": "vk_dao_lan_huyet_kho",
+  "n": "Đao Lằn Huyết Khô",
+  "k": "dao",
+  "el": "am",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "atkP": 20.7,
+    "crit": 12.6,
+    "critDmg": 30.2,
+    "hpP": 17.6,
+    "tp": 3
+  },
+  "lore": "Mỗi lần máu chạm lưỡi đao, một đường gỉ đỏ trên sống lại ngắn đi. Chủ cũ dùng nó để đếm số người mình còn nợ.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trượng Nén Núi — `vk_truong_nen_nui`
+
+```json
+{
+  "id": "vk_truong_nen_nui",
+  "n": "Trượng Nén Núi",
+  "k": "phap",
+  "el": "tho",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 33.7,
+    "defP": 23.8,
+    "hpP": 15.3
+  },
+  "lore": "Đầu trượng nặng đến nỗi cỏ dưới bóng nó rạp sát đất. Chỗ cỏ ấy qua xuân mới ngẩng lên.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Gác Chuông Câm — `vk_phat_tran_gac_chuong_cam`
+
+```json
+{
+  "id": "vk_phat_tran_gac_chuong_cam",
+  "n": "Phất Trần Gác Chuông Câm",
+  "k": "phap",
+  "el": "phat",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "matkP": 30.6,
+    "tam": 4,
+    "mpP": 22.8
+  },
+  "lore": "Người giữ chuông bứt từng sợi phất buộc vào quả lắc để giặc qua sân khỏi nghe tiếng động. Sợi ngắn nhất vẫn quấn quanh một cái răng sữa.",
+  "src": "Sự kiện tháo dây ở gác chuông",
+  "status": "active"
+}
+```
+
+## Châu Lôi Giác — `vk_chau_loi_giac`
+
+```json
+{
+  "id": "vk_chau_loi_giac",
+  "n": "Châu Lôi Giác",
+  "k": "phap",
+  "el": "loi",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "matkP": 45.4,
+    "crit": 9.9,
+    "critDmg": 30.2
+  },
+  "lore": "Vỏ châu có một mấu nhỏ như sừng non. Lúc trời quang, sét trên mấu còn bò được tới cổ tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bút Hồng Tẫn — `vk_but_hong_tan`
+
+```json
+{
+  "id": "vk_but_hong_tan",
+  "n": "Bút Hồng Tẫn",
+  "k": "but",
+  "el": "hoa",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "ngo": 8,
+    "matkP": 17.6,
+    "critDmg": 21.8
+  },
+  "lore": "Chữ hiện ra bằng tàn lửa rồi chìm vào mặt giấy. Người nhặt giấy sau đó chỉ thấy một lớp tro đỏ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Kiếm Chừa Một Bậc — `vk_kiem_chua_mot_bac`
+
+```json
+{
+  "id": "vk_kiem_chua_mot_bac",
+  "n": "Kiếm Chừa Một Bậc",
+  "k": "kiem",
+  "el": "phong",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "atkP": 33.1,
+    "tp": 5,
+    "dodge": 11.2
+  },
+  "lore": "Trên bậc cuối đường đá còn một vết kiếm nằm ngang. {who} để lại thanh kiếm ở đó cho người lên sau có chỗ bám.",
+  "src": "Sự kiện vượt bậc đá gãy",
+  "status": "active"
+}
+```
+
+## Châu Sương Đáy Trời — `vk_chau_suong_day_troi`
+
+```json
+{
+  "id": "vk_chau_suong_day_troi",
+  "n": "Châu Sương Đáy Trời",
+  "k": "phap",
+  "el": "bang",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "matkP": 29.1,
+    "mpP": 23.8,
+    "dodge": 7.9
+  },
+  "lore": "Bên trong hạt châu là một quầng sáng trắng đục. Ai thổi hơi vào mặt châu sẽ thấy bóng mình chìm xuống đáy.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Bút Ký Mạch Ngầm — `vk_but_ky_mach_ngam`
+
+```json
+{
+  "id": "vk_but_ky_mach_ngam",
+  "n": "Bút Ký Mạch Ngầm",
+  "k": "but",
+  "el": "thuy",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "ngo": 8,
+    "matkP": 15.3,
+    "mpP": 23.8
+  },
+  "lore": "Ngòi bút tự nghiêng về chỗ có nước dưới nền đá. Mỗi nét ghi xuống, lòng giếng xa lại vang một tiếng.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Kiếm Băng Chìm Vân — `vk_kiem_bang_chim_van`
+
+```json
+{
+  "id": "vk_kiem_bang_chim_van",
+  "n": "Kiếm Băng Chìm Vân",
+  "k": "kiem",
+  "el": "bang",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "atkP": 29,
+    "crit": 8.6,
+    "critDmg": 23.8,
+    "mpP": 18.8
+  },
+  "lore": "Một tảng mây mắc trong lưỡi kiếm. Cứ đến tiết xuân phân, mây ấy lại đổ tuyết xuống trong vỏ.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đao Chín Lớp Tro — `vk_dao_chin_lop_tro`
+
+```json
+{
+  "id": "vk_dao_chin_lop_tro",
+  "n": "Đao Chín Lớp Tro",
+  "k": "dao",
+  "el": "hoa",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "atkP": 25.9,
+    "crit": 18.6,
+    "critDmg": 37.8,
+    "matkP": 21.7,
+    "hpP": 18.9,
+    "tp": 4
+  },
+  "lore": "Qua chín lớp tro bọc, cán đao vẫn nóng. Người đúc nó từng vùi lưỡi vào tường để sưởi cho cả một gian nhà.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trượng Đo Bóng Mẹ — `vk_truong_do_bong_me`
+
+```json
+{
+  "id": "vk_truong_do_bong_me",
+  "n": "Trượng Đo Bóng Mẹ",
+  "k": "phap",
+  "el": "phat",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "matkP": 39.7,
+    "tam": 5,
+    "hpP": 23.6,
+    "defP": 27.7
+  },
+  "lore": "Người con dùng trượng đo bóng mẹ mỗi sáng, đến khi bóng ngắn hơn gang tay thì thôi lên núi. Vạch cuối còn dính bột gạo từ tay bà.",
+  "src": "Sự kiện đưa tro cốt qua đèo",
+  "status": "active"
+}
+```
+
+## Phất Trần Vờn Hạt Kiếp — `vk_phat_tran_von_hat_kiep`
+
+```json
+{
+  "id": "vk_phat_tran_von_hat_kiep",
+  "n": "Phất Trần Vờn Hạt Kiếp",
+  "k": "phap",
+  "el": "moc",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "matkP": 32.1,
+    "mpP": 22.8,
+    "hpP": 15.3,
+    "tvP": 13.2
+  },
+  "lore": "Sợi phất đan bằng rễ non mọc giữa hai lần sét kiếp. Mỗi khi vuốt thẳng, đầu rễ lại nhú một mầm xanh.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Châu Phơi Tang — `vk_chau_phoi_tang`
+
+```json
+{
+  "id": "vk_chau_phoi_tang",
+  "n": "Châu Phơi Tang",
+  "k": "phap",
+  "el": "am",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "matkP": 47.2,
+    "mpP": 29,
+    "hpP": 23.6,
+    "critDmg": 26.5,
+    "tam": -3,
+    "drain": 25.2
+  },
+  "lore": "Trong châu mắc một mẩu khăn tang, càng gần đèn càng trắng. Suốt bốn chín đêm ở {pl}, người canh linh đường chỉ trông thấy bóng của kẻ đã khuất.",
+  "src": "Sự kiện khép cửa linh đường vào đêm cuối",
+  "status": "active"
+}
+```
+
+## Bút Trả Nét Cho Tro — `vk_but_tra_net_cho_tro`
+
+```json
+{
+  "id": "vk_but_tra_net_cho_tro",
+  "n": "Bút Trả Nét Cho Tro",
+  "k": "but",
+  "el": "loi",
+  "t": 6,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "ngo": 15,
+    "matkP": 30.4,
+    "tam": 4,
+    "mpP": 33.7,
+    "tvP": 22.8,
+    "elX": 77.4
+  },
+  "lore": "Khi kho sách của {sect} cháy, {who} nhặt tro từng trang để viết lại những dòng còn nhớ. Đến trang cuối, mưa rơi ngược lên và tro tụ quanh ngòi bút.",
+  "src": "Sự kiện tìm trang cuối trong kho sách cháy",
+  "status": "active"
+}
+```
+
+## Kiếm Đinh Cửa — `vk_kiem_dinh_cua`
+
+```json
+{
+  "id": "vk_kiem_dinh_cua",
+  "n": "Kiếm Đinh Cửa",
+  "k": "kiem",
+  "el": "kim",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 12.4
+  },
+  "lore": "Lưỡi kiếm rèn từ đinh tháo ở cửa cũ. Đêm có gió, chuôi kiếm rung y như cánh cửa năm nào.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đao Bạt Bờ — `vk_dao_bat_bo`
+
+```json
+{
+  "id": "vk_dao_bat_bo",
+  "n": "Đao Bạt Bờ",
+  "k": "dao",
+  "el": "tho",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 7.6,
+    "crit": 4.8,
+    "critDmg": 10.3
+  },
+  "lore": "Dọc lưng đao còn một lớp đất sét cứng. Thợ đào mương lấy sống đao gạt bùn khỏi dép.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trượng Mắt Gỗ — `vk_truong_mat_go`
+
+```json
+{
+  "id": "vk_truong_mat_go",
+  "n": "Trượng Mắt Gỗ",
+  "k": "phap",
+  "el": "moc",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 13
+  },
+  "lore": "Trên thân trượng có ba mắt gỗ đen. Người cầm quen đặt ngón trỏ lên mắt thứ hai để khỏi trượt tay.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Phất Trần Tơ Dại — `vk_phat_tran_to_dai`
+
+```json
+{
+  "id": "vk_phat_tran_to_dai",
+  "n": "Phất Trần Tơ Dại",
+  "k": "phap",
+  "el": "phong",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 12.2
+  },
+  "lore": "Sợi tơ quệt ngang mạng nhện sẽ cuốn cả nhện vào cán. Chủ quán dặn trả nhện về xà nhà trước khi đi.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Châu Đọng Mưa Hiên — `vk_chau_dong_mua_hien`
+
+```json
+{
+  "id": "vk_chau_dong_mua_hien",
+  "n": "Châu Đọng Mưa Hiên",
+  "k": "phap",
+  "el": "thuy",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 13
+  },
+  "lore": "Mỗi khi mưa tạt vào hiên, trong châu lại có thêm một giọt. Giọt đọng từ mùa trước vẫn còn vị ngói nung.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Bút Son Mẻ — `vk_but_son_me`
+
+```json
+{
+  "id": "vk_but_son_me",
+  "n": "Bút Son Mẻ",
+  "k": "but",
+  "el": "hoa",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "ngo": 3
+  },
+  "lore": "Cán bút sứt ở chỗ tựa nghiên. Nét son khô đến đâu, mép giấy ấm đến đó.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Kiếm Gác Trên Xe Cỏ — `vk_kiem_gac_tren_xe_co`
+
+```json
+{
+  "id": "vk_kiem_gac_tren_xe_co",
+  "n": "Kiếm Gác Trên Xe Cỏ",
+  "k": "kiem",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "atkP": 15.2
+  },
+  "lore": "{who} chèn thanh kiếm dưới bánh xe cho lũ trẻ ngủ qua đêm trên dốc. Đến sáng, lưỡi đã cong đúng theo vành gỗ.",
+  "src": "Sự kiện đẩy xe qua dốc",
+  "status": "active"
+}
+```
+
+## Đao Vớt Bóng — `vk_dao_vot_bong`
+
+```json
+{
+  "id": "vk_dao_vot_bong",
+  "n": "Đao Vớt Bóng",
+  "k": "dao",
+  "el": "am",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 6.7,
+    "crit": 4.3,
+    "critDmg": 9.1
+  },
+  "lore": "Thả đao xuống ao lúc chạng vạng, bóng lưỡi sẽ nằm lại trên mặt nước cho đến khi có người đi ngang.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Trượng Gõ Bát — `vk_truong_go_bat`
+
+```json
+{
+  "id": "vk_truong_go_bat",
+  "n": "Trượng Gõ Bát",
+  "k": "phap",
+  "el": "phat",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 15.3
+  },
+  "lore": "Chân trượng bọc một mảnh bát đồng. Người hành cước gõ một tiếng trước cổng, chó dữ trong sân thôi sủa.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Phất Trần Se Sương — `vk_phat_tran_se_suong`
+
+```json
+{
+  "id": "vk_phat_tran_se_suong",
+  "n": "Phất Trần Se Sương",
+  "k": "phap",
+  "el": "bang",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 16.3
+  },
+  "lore": "Sợi phất chải qua mặt lá đọng sương thì kết thành từng dúm nhỏ. Đem hơ lửa, chúng rụng lộp độp như hạt đậu.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Châu Mạch Giếng — `vk_chau_mach_gieng`
+
+```json
+{
+  "id": "vk_chau_mach_gieng",
+  "n": "Châu Mạch Giếng",
+  "k": "phap",
+  "el": "tho",
+  "t": 0,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "matkP": 21.6
+  },
+  "lore": "Châu nhỏ bằng móng tay, nặng như hòn đá chặn miệng giếng. Bên trong có một đường đất mảnh chạy ngoằn ngoèo.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Kiếm Xem Gió — `vk_kiem_xem_gio`
+
+```json
+{
+  "id": "vk_kiem_xem_gio",
+  "n": "Kiếm Xem Gió",
+  "k": "kiem",
+  "el": "phong",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 10.8,
+    "tp": 1
+  },
+  "lore": "Lá khô đậu ngang sống kiếm tự xoay cuống về phía gió. Người rèn cất kiếm trên gác để xem hôm nào nên phơi thóc.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đao Màu Gạch Già — `vk_dao_mau_gach_gia`
+
+```json
+{
+  "id": "vk_dao_mau_gach_gia",
+  "n": "Đao Màu Gạch Già",
+  "k": "dao",
+  "el": "hoa",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "atkP": 8.8,
+    "crit": 5.4,
+    "critDmg": 13.6,
+    "tp": 1
+  },
+  "lore": "Hai mặt đao đỏ sẫm như gạch lấy từ đáy lò. Khi mài, lưỡi chỉ chịu sắc ở phía quay về lửa.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trượng Nhặt Tiếng Mõ — `vk_truong_nhat_tieng_mo`
+
+```json
+{
+  "id": "vk_truong_nhat_tieng_mo",
+  "n": "Trượng Nhặt Tiếng Mõ",
+  "k": "phap",
+  "el": "phat",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 16.3,
+    "tam": 1
+  },
+  "lore": "Đầu trượng rỗng ruột, cất một tiếng mõ ngắn. Kề tai vào đó vẫn nghe tiếng mưa rơi sau hồi mõ.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Tơ Đồng — `vk_phat_tran_to_dong`
+
+```json
+{
+  "id": "vk_phat_tran_to_dong",
+  "n": "Phất Trần Tơ Đồng",
+  "k": "phap",
+  "el": "kim",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 15.7,
+    "tam": 1
+  },
+  "lore": "Từng sợi đồng mảnh được kéo đến khi uốn quanh ngón tay. Hễ phẩy mạnh, chúng xòe thành một vành sáng vàng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Châu Vết Ngón Tay — `vk_chau_vet_ngon_tay`
+
+```json
+{
+  "id": "vk_chau_vet_ngon_tay",
+  "n": "Châu Vết Ngón Tay",
+  "k": "phap",
+  "el": "vo",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "matkP": 12.5,
+    "hpP": 5
+  },
+  "lore": "Mặt châu có một chỗ lõm vừa đầu ngón cái. Đám trẻ chuyền tay nhau xem, đứa nào cũng bảo vết lõm do mình ấn.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Bút Lục Bì — `vk_but_luc_bi`
+
+```json
+{
+  "id": "vk_but_luc_bi",
+  "n": "Bút Lục Bì",
+  "k": "but",
+  "el": "moc",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "ngo": 4,
+    "matkP": 7.8
+  },
+  "lore": "Vỏ cây bọc quanh cán mỗi năm bong một lớp. Người bán bút cân phần vỏ rụng để tính tuổi của cây.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Kiếm Bật Tia Lam — `vk_kiem_bat_tia_lam`
+
+```json
+{
+  "id": "vk_kiem_bat_tia_lam",
+  "n": "Kiếm Bật Tia Lam",
+  "k": "kiem",
+  "el": "loi",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 13.2,
+    "crit": 4
+  },
+  "lore": "Tia lửa lam chỉ bật ra lúc kiếm chạm vành đá. Giữa trời mưa, từ sống kiếm bốc lên mùi dây gai cháy.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đao Tạ Một Bữa Cơm — `vk_dao_ta_mot_bua_com`
+
+```json
+{
+  "id": "vk_dao_ta_mot_bua_com",
+  "n": "Đao Tạ Một Bữa Cơm",
+  "k": "dao",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "atkP": 11.7,
+    "crit": 8.6,
+    "critDmg": 15.9,
+    "defP": 13.2
+  },
+  "lore": "Chủ cũ khắc một vạch lên cán sau mỗi bữa được cho ăn. Hôm đem đao cầm để mua gạo trả ơn, cán đã ken kín vạch.",
+  "src": "Sự kiện chuộc đao ở quán cơm",
+  "status": "active"
+}
+```
+
+## Trượng Ống Trúc Rót Mưa — `vk_truong_ong_truc_rot_mua`
+
+```json
+{
+  "id": "vk_truong_ong_truc_rot_mua",
+  "n": "Trượng Ống Trúc Rót Mưa",
+  "k": "phap",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "matkP": 19.1,
+    "mpP": 14.4
+  },
+  "lore": "Nước trong ống chỉ trào lên khi đầu trượng chúi xuống. Phơi ba ngày giữa nắng, nó vẫn rỏ từng giọt lên nền.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Dệt Tóc Đêm — `vk_phat_tran_det_toc_dem`
+
+```json
+{
+  "id": "vk_phat_tran_det_toc_dem",
+  "n": "Phất Trần Dệt Tóc Đêm",
+  "k": "phap",
+  "el": "am",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "matkP": 15.3,
+    "dodge": 3.2
+  },
+  "lore": "Sợi phất tối và mảnh đến nỗi dưới đèn dầu chỉ trông thấy cái cán. Treo qua đêm, chúng rũ xuống ngang mặt người nằm.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Châu Giếng Tuyết — `vk_chau_gieng_tuyet`
+
+```json
+{
+  "id": "vk_chau_gieng_tuyet",
+  "n": "Châu Giếng Tuyết",
+  "k": "phap",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "matkP": 21.6,
+    "mpP": 13.9
+  },
+  "lore": "Trong châu có một hố nhỏ trắng đục, nhìn càng lâu càng tưởng sâu. Khi áp vào má, có thể nghe tuyết lở dưới đáy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Bút In Nếp Đá — `vk_but_in_nep_da`
+
+```json
+{
+  "id": "vk_but_in_nep_da",
+  "n": "Bút In Nếp Đá",
+  "k": "but",
+  "el": "tho",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "ngo": 4,
+    "defP": 10.2
+  },
+  "lore": "Ngòi bút bằng đá vỡ, để lại một gờ mỏng trên giấy. Người nắn chữ thường lần gờ ấy bằng móng tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Bút Lông Cò Gãy — `vk_but_long_co_gay`
+
+```json
+{
+  "id": "vk_but_long_co_gay",
+  "n": "Bút Lông Cò Gãy",
+  "k": "but",
+  "el": "phat",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "ngo": 4,
+    "tam": 1
+  },
+  "lore": "Ống lông cò gãy ở gốc được nối bằng một vòng chỉ vàng. Chép kinh xong, sợi chỉ tự nới ra một vòng.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Kiếm Xếp Vảy Sắt — `vk_kiem_xep_vay_sat`
+
+```json
+{
+  "id": "vk_kiem_xep_vay_sat",
+  "n": "Kiếm Xếp Vảy Sắt",
+  "k": "kiem",
+  "el": "kim",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 15,
+    "crit": 4.8
+  },
+  "lore": "Lưỡi kiếm ghép từ những vảy sắt mỏng chồng lên nhau. Vảy sát chuôi còn in một dấu búa dập hụt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đao Liệng Qua Khe — `vk_dao_lieng_qua_khe`
+
+```json
+{
+  "id": "vk_dao_lieng_qua_khe",
+  "n": "Đao Liệng Qua Khe",
+  "k": "dao",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "atkP": 11.4,
+    "crit": 6.8,
+    "critDmg": 15.8,
+    "tp": 2
+  },
+  "lore": "Sống đao uốn về một phía, lưỡi đưa ra phía kia. Khi chém qua khe đá hẹp, tiếng gió vọng về sau tiếng đao.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trượng Chờ Qua Bãi Lở — `vk_truong_cho_qua_bai_lo`
+
+```json
+{
+  "id": "vk_truong_cho_qua_bai_lo",
+  "n": "Trượng Chờ Qua Bãi Lở",
+  "k": "phap",
+  "el": "tho",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "matkP": 15.6,
+    "defP": 11.1,
+    "startBlock": 14
+  },
+  "lore": "Dưới lớp đất quánh còn bàn tay in bằng vôi. {who} dựng trượng bên mép bãi để đoàn người lần lượt vịn qua.",
+  "src": "Sự kiện đào lối qua bãi lở",
+  "status": "active"
+}
+```
+
+## Phất Trần Bông Mộc Miên — `vk_phat_tran_bong_moc_mien`
+
+```json
+{
+  "id": "vk_phat_tran_bong_moc_mien",
+  "n": "Phất Trần Bông Mộc Miên",
+  "k": "phap",
+  "el": "moc",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "matkP": 15.7,
+    "mpP": 8.3
+  },
+  "lore": "Mỗi sợi bông mang một hạt mộc miên lép. Gặp mưa xuân, những hạt lép vẫn nhú ra đầu rễ trắng.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Châu Than Hồng Dưới Triều — `vk_chau_than_hong_duoi_trieu`
+
+```json
+{
+  "id": "vk_chau_than_hong_duoi_trieu",
+  "n": "Châu Than Hồng Dưới Triều",
+  "k": "phap",
+  "el": "hoa",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 17.6,
+    "critDmg": 11.1
+  },
+  "lore": "Hạt châu vớt lên giữa nước ròng có một mặt cháy xém. Áp tai vào vết xém, nghe tiếng than nổ dưới nước.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bút Mực Bọt Triều — `vk_but_muc_bot_trieu`
+
+```json
+{
+  "id": "vk_but_muc_bot_trieu",
+  "n": "Bút Mực Bọt Triều",
+  "k": "but",
+  "el": "thuy",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "ngo": 7,
+    "matkP": 13.2
+  },
+  "lore": "Mực trong ngòi sủi bọt lúc nước lên. Mấy nét cuối thường nhạt vì bọt tan trước khi kịp nhấc tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Kiếm Tróc Tuyết — `vk_kiem_troc_tuyet`
+
+```json
+{
+  "id": "vk_kiem_troc_tuyet",
+  "n": "Kiếm Tróc Tuyết",
+  "k": "kiem",
+  "el": "bang",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 17.3,
+    "critDmg": 11.6
+  },
+  "lore": "Khi lưỡi rời vỏ, một lớp tuyết mỏng tróc xuống. Nhặt lên mới biết đấy là vụn sắt lạnh.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đao Đồng Rền — `vk_dao_dong_ren`
+
+```json
+{
+  "id": "vk_dao_dong_ren",
+  "n": "Đao Đồng Rền",
+  "k": "dao",
+  "el": "loi",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 13.6,
+    "crit": 9.4,
+    "critDmg": 20.4,
+    "matkP": 12.5
+  },
+  "lore": "Dưới khoen đồng ở cán còn mắc một mẩu dây bị sét đánh. Khi khoen gõ vào sống đao, tiếng rền nảy từ nền đá lên.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trượng Ống Xương Rỗng — `vk_truong_ong_xuong_rong`
+
+```json
+{
+  "id": "vk_truong_ong_xuong_rong",
+  "n": "Trượng Ống Xương Rỗng",
+  "k": "phap",
+  "el": "am",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 28.1,
+    "critDmg": 17.8
+  },
+  "lore": "Có ai gọi sát chân trượng, đầu kia sẽ vọng lại bằng giọng già hơn. Những người lái đò bọc giẻ quanh hai đầu xương.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phất Trần Tơ Cánh Ve — `vk_phat_tran_to_canh_ve`
+
+```json
+{
+  "id": "vk_phat_tran_to_canh_ve",
+  "n": "Phất Trần Tơ Cánh Ve",
+  "k": "phap",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 17.6,
+    "dodge": 4.9
+  },
+  "lore": "Gió lùa qua sợi phất kêu ran như ve gặp nắng. Kéo rèm che ánh mặt trời, tiếng ấy dịu dần.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Bút Chép Kinh Cho Cá — `vk_but_chep_kinh_cho_ca`
+
+```json
+{
+  "id": "vk_but_chep_kinh_cho_ca",
+  "n": "Bút Chép Kinh Cho Cá",
+  "k": "but",
+  "el": "phat",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "ngo": 6,
+    "tam": 2
+  },
+  "lore": "Chữ đầu trên cán là một nét khắc dở. Người chép kinh chết đuối rồi, cá trong lạch vẫn nổi lên chờ nét sau.",
+  "src": "Sự kiện thả trang kinh xuống lạch",
+  "status": "active"
+}
+```
+
+## Kiếm Rẽ Mạch Mặn — `vk_kiem_re_mach_man`
+
+```json
+{
+  "id": "vk_kiem_re_mach_man",
+  "n": "Kiếm Rẽ Mạch Mặn",
+  "k": "kiem",
+  "el": "thuy",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 18.6,
+    "tp": 2,
+    "critDmg": 17.8
+  },
+  "lore": "Đường mạch trong kiếm đục như nước pha muối. Mỗi lần vung, nước mặn rịn ra ở chỗ tra kiếm vào chuôi.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đao Mép Vỏ Hến — `vk_dao_mep_vo_hen`
+
+```json
+{
+  "id": "vk_dao_mep_vo_hen",
+  "n": "Đao Mép Vỏ Hến",
+  "k": "dao",
+  "el": "kim",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "atkP": 12.5,
+    "crit": 8.6,
+    "critDmg": 15,
+    "defP": 11.6,
+    "tp": 2
+  },
+  "lore": "Lưỡi đao vồng như mép vỏ hến, bên trong loáng một lớp xà cừ. Dấu chém trên gỗ có màu trắng sữa.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trượng Vụn Tuyết Mặn — `vk_truong_vun_tuyet_man`
+
+```json
+{
+  "id": "vk_truong_vun_tuyet_man",
+  "n": "Trượng Vụn Tuyết Mặn",
+  "k": "phap",
+  "el": "bang",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 20.3,
+    "defP": 13.4,
+    "critDmg": 12.6
+  },
+  "lore": "Rắc tuyết trên đầu trượng xuống nước sẽ thấy một lớp băng bò ngược chiều sóng. Lấy lửa hơ, hơi băng lại có mùi muối.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Bện Dây Neo — `vk_phat_tran_ben_day_neo`
+
+```json
+{
+  "id": "vk_phat_tran_ben_day_neo",
+  "n": "Phất Trần Bện Dây Neo",
+  "k": "phap",
+  "el": "moc",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "matkP": 24.3,
+    "mpP": 17.5,
+    "tam": 2,
+    "regenMp": 11.9
+  },
+  "lore": "Sợi phất ngả xanh vì rút từ đoạn dây neo buộc chiếc thuyền cuối. Chủ bến chừa một bện thừa, phòng khi có người quay lại nối dây.",
+  "src": "Sự kiện gỡ neo thuyền mắc cạn",
+  "status": "active"
+}
+```
+
+## Châu Dưới Mang Kình — `vk_chau_duoi_mang_kinh`
+
+```json
+{
+  "id": "vk_chau_duoi_mang_kinh",
+  "n": "Châu Dưới Mang Kình",
+  "k": "phap",
+  "el": "thuy",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "matkP": 24.8,
+    "mpP": 18.8,
+    "hpP": 12.5
+  },
+  "lore": "Mặt châu hiện vết mang khi đem nhúng nước. Lúc ấy người cầm có thể nhìn rõ từng hạt cát chìm dưới đáy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bút Lông Từ Áo Liệm — `vk_but_long_tu_ao_liem`
+
+```json
+{
+  "id": "vk_but_long_tu_ao_liem",
+  "n": "Bút Lông Từ Áo Liệm",
+  "k": "but",
+  "el": "am",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "ngo": 8,
+    "matkP": 15,
+    "critDmg": 20.4
+  },
+  "lore": "Một nhúm tơ áo liệm buộc quanh ngòi. Viết đến tên người chết, mực thấm loang như vải vừa ướt.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đao Đỏ Sau Canh Ba — `vk_dao_do_sau_canh_ba`
+
+```json
+{
+  "id": "vk_dao_do_sau_canh_ba",
+  "n": "Đao Đỏ Sau Canh Ba",
+  "k": "dao",
+  "el": "hoa",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "atkP": 19.6,
+    "crit": 11.6,
+    "critDmg": 25.5,
+    "matkP": 15.3,
+    "tp": 3
+  },
+  "lore": "Đao lạnh ngắt suốt ngày. Qua canh ba, lưỡi ửng đỏ từ phía có người đứng nhìn.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trượng Chồng Gạch Cũ — `vk_truong_chong_gach_cu`
+
+```json
+{
+  "id": "vk_truong_chong_gach_cu",
+  "n": "Trượng Chồng Gạch Cũ",
+  "k": "phap",
+  "el": "tho",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 28.1,
+    "defP": 17.2,
+    "hpP": 12.8
+  },
+  "lore": "Ở đầu trượng có một miếng gạch còn dính vôi trắng. Mỗi khi dựng trượng lên, đất dưới chân dồn vào một phía như đắp tường.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Gió Ngược Lối — `vk_phat_tran_gio_nguoc_loi`
+
+```json
+{
+  "id": "vk_phat_tran_gio_nguoc_loi",
+  "n": "Phất Trần Gió Ngược Lối",
+  "k": "phap",
+  "el": "phong",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 22,
+    "tp": 2,
+    "dodge": 5.9
+  },
+  "lore": "Quét phất trần từ trái sang phải, bụi dưới đất cuộn về tay trái. Thợ dệt sợi từng dùng nó để gom lông rụng trên sàn.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Châu Chờ Tắt Lò — `vk_chau_cho_tat_lo`
+
+```json
+{
+  "id": "vk_chau_cho_tat_lo",
+  "n": "Châu Chờ Tắt Lò",
+  "k": "phap",
+  "el": "am",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "matkP": 39.8,
+    "critDmg": 24.6,
+    "hpP": 19,
+    "drain": 20.2
+  },
+  "lore": "Giữa châu có bóng người thợ quay lưng che cửa lò. Lửa tắt đã lâu, bóng ấy vẫn nhích chân để nhường lối ra.",
+  "src": "Sự kiện đón người ở cửa lò",
+  "status": "active"
+}
+```
+
+## Kiếm Nợ Người Mài — `vk_kiem_no_nguoi_mai`
+
+```json
+{
+  "id": "vk_kiem_no_nguoi_mai",
+  "n": "Kiếm Nợ Người Mài",
+  "k": "kiem",
+  "el": "vo",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "atkP": 24.4,
+    "tp": 2,
+    "crit": 7.5
+  },
+  "lore": "Người mài mù để riêng một hòn đá cho thanh kiếm của {who}. Đến khi chuôi kiếm lỏng ra, trong cán mới lộ món tiền công đã cất từ lâu.",
+  "src": "Sự kiện trả tiền công mài kiếm",
+  "status": "active"
+}
+```
+
+## Đao Chém Mùi Máu — `vk_dao_chem_mui_mau`
+
+```json
+{
+  "id": "vk_dao_chem_mui_mau",
+  "n": "Đao Chém Mùi Máu",
+  "k": "dao",
+  "el": "am",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "atkP": 14.7,
+    "crit": 11.3,
+    "critDmg": 23,
+    "hpP": 12.5,
+    "dodge": 6
+  },
+  "lore": "Lưỡi đao dựng lên, mùi máu trong sân bỗng dồn về một góc. Chỗ lưỡi đao hạ xuống chỉ còn mùi đất ẩm.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trượng Giữ Tro Hương — `vk_truong_giu_tro_huong`
+
+```json
+{
+  "id": "vk_truong_giu_tro_huong",
+  "n": "Trượng Giữ Tro Hương",
+  "k": "phap",
+  "el": "phat",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 35.5,
+    "tam": 3,
+    "defP": 21.2
+  },
+  "lore": "Tro hương rải theo đường trượng có thể đứng thẳng thành vách mỏng. Qua một đêm, chân vách đầy dấu chân chuột.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Rễ Quấn Chuông — `vk_phat_tran_re_quan_chuong`
+
+```json
+{
+  "id": "vk_phat_tran_re_quan_chuong",
+  "n": "Phất Trần Rễ Quấn Chuông",
+  "k": "phap",
+  "el": "moc",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 23.6,
+    "mpP": 15.4,
+    "tam": 2
+  },
+  "lore": "Rễ non bám quanh cán tự siết lại mỗi khi nghe tiếng chuông. Đem về chỗ yên, chúng nới ra chậm như bàn tay người ngủ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Châu Ngậm Hơi Cuối — `vk_chau_ngam_hoi_cuoi`
+
+```json
+{
+  "id": "vk_chau_ngam_hoi_cuoi",
+  "n": "Châu Ngậm Hơi Cuối",
+  "k": "phap",
+  "el": "bang",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "matkP": 30.9,
+    "mpP": 19.4,
+    "crit": 7.9
+  },
+  "lore": "Trong châu đọng một quầng hơi trắng. Hễ có tiếng thở gấp, quầng hơi xô vào vỏ như muốn bật ra ngoài.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Bút Mực Sét Khô — `vk_but_muc_set_kho`
+
+```json
+{
+  "id": "vk_but_muc_set_kho",
+  "n": "Bút Mực Sét Khô",
+  "k": "but",
+  "el": "loi",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "ngo": 9,
+    "matkP": 17.7,
+    "critDmg": 21.8
+  },
+  "lore": "Ngòi bút đóng một lớp mực khô sáng như đồng. Mỗi nét kéo dài qua ba tấc giấy sẽ nổ nhỏ một tiếng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Kiếm Đường Rèn Đứt Quãng — `vk_kiem_duong_ren_dut_quang`
+
+```json
+{
+  "id": "vk_kiem_duong_ren_dut_quang",
+  "n": "Kiếm Đường Rèn Đứt Quãng",
+  "k": "kiem",
+  "el": "kim",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "atkP": 24.7,
+    "crit": 7.1,
+    "critDmg": 21
+  },
+  "lore": "Thợ rèn rời búa bảy lần giữa chừng, để lại bảy quãng vân sắt hụt. Lúc kiếm va nhau, mỗi quãng kêu một âm khác.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Châu Lăn Qua Thành Cổ — `vk_chau_lan_qua_thanh_co`
+
+```json
+{
+  "id": "vk_chau_lan_qua_thanh_co",
+  "n": "Châu Lăn Qua Thành Cổ",
+  "k": "phap",
+  "el": "tho",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "matkP": 40.1,
+    "defP": 25.5,
+    "hpP": 18
+  },
+  "lore": "Đem châu lăn qua đống gạch vụn, những viên từng nằm cạnh nhau tự dịch lại gần. Viên gạch móng luôn trở về cuối cùng.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Bút Ghi Mực Lũ — `vk_but_ghi_muc_lu`
+
+```json
+{
+  "id": "vk_but_ghi_muc_lu",
+  "n": "Bút Ghi Mực Lũ",
+  "k": "but",
+  "el": "thuy",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "ngo": 11,
+    "mpP": 27.2,
+    "matkP": 24.6
+  },
+  "lore": "Trong trận lũ, người giữ kho ghi tên từng người qua cửa bằng nét mực ngang tầm nước. Cán bút còn một vệt nâu ở đúng chỗ nước chạm tới cổ.",
+  "src": "Sự kiện hong sổ cứu nạn",
+  "status": "active"
+}
+```
+
+## Kiếm Gác Mộ Trước Canh Gà — `vk_kiem_gac_mo_truoc_canh_ga`
+
+```json
+{
+  "id": "vk_kiem_gac_mo_truoc_canh_ga",
+  "n": "Kiếm Gác Mộ Trước Canh Gà",
+  "k": "kiem",
+  "el": "am",
+  "t": 5,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "atkP": 23,
+    "crit": 7.7,
+    "critDmg": 19.4,
+    "dodge": 7.6,
+    "drain": 15.8
+  },
+  "lore": "Người canh mộ chôn kiếm thẳng đứng để lưỡi kiếm thức thay mình. Vào canh cuối, chuôi kiếm vẫn gõ hai tiếng lên tấm ván kê đầu.",
+  "src": "Sự kiện nhận ca canh mộ cuối",
+  "status": "active"
+}
+```
+
+## Đao Lôi Ẩn Dưới Da — `vk_dao_loi_an_duoi_da`
+
+```json
+{
+  "id": "vk_dao_loi_an_duoi_da",
+  "n": "Đao Lôi Ẩn Dưới Da",
+  "k": "dao",
+  "el": "loi",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "atkP": 16.9,
+    "crit": 12.6,
+    "critDmg": 29.2,
+    "tp": 3,
+    "matkP": 14.5,
+    "hpP": 16.4
+  },
+  "lore": "Lôi quang chạy trong lưỡi đao thành những mạch mảnh như gân tay. Một khi chạm nước, các mạch ấy chớp cùng nhịp.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trượng Đặt Lại Nền Núi — `vk_truong_dat_lai_nen_nui`
+
+```json
+{
+  "id": "vk_truong_dat_lai_nen_nui",
+  "n": "Trượng Đặt Lại Nền Núi",
+  "k": "phap",
+  "el": "tho",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "matkP": 35.5,
+    "defP": 28.5,
+    "hpP": 20.6,
+    "mpP": 25.2
+  },
+  "lore": "Khi chân trượng lún xuống, đá nứt quanh chân núi tự khép theo từng lớp. Đến lượt đất mềm khép lại, người cầm đã mỏi cả hai tay.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Phất Trần Hong Lá Thư — `vk_phat_tran_hong_la_thu`
+
+```json
+{
+  "id": "vk_phat_tran_hong_la_thu",
+  "n": "Phất Trần Hong Lá Thư",
+  "k": "phap",
+  "el": "phong",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "matkP": 49.1,
+    "tp": 4,
+    "dodge": 11.1,
+    "tam": 4
+  },
+  "lore": "{who} treo thư lên đầu sợi phất cho mực mau khô, hẹn gió thuận thì gửi. Năm sau sợi phất đã dài qua bậu cửa, lá thư vẫn đợi một ngày gió.",
+  "src": "Sự kiện mở cửa đón gió",
+  "status": "active"
+}
+```
+
+## Bút Chấm Bụi Sáng — `vk_but_cham_bui_sang`
+
+```json
+{
+  "id": "vk_but_cham_bui_sang",
+  "n": "Bút Chấm Bụi Sáng",
+  "k": "but",
+  "el": "phat",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "ngo": 10,
+    "tam": 4,
+    "matkP": 22.7,
+    "mpP": 22.2
+  },
+  "lore": "Nét bút để qua đêm hóa thành hạt bụi sáng. Quét những hạt ấy vào nghiên, người chép kinh lại đủ mực cho một trang.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Châu Nhớ Tiếng Nước Chảy — `vk_chau_nho_tieng_nuoc_chay`
+
+```json
+{
+  "id": "vk_chau_nho_tieng_nuoc_chay",
+  "n": "Châu Nhớ Tiếng Nước Chảy",
+  "k": "phap",
+  "el": "thuy",
+  "t": 6,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "matkP": 31.8,
+    "mpP": 24.4,
+    "hpP": 16.8,
+    "crit": 8.9,
+    "tam": 3,
+    "reflect": 37.8
+  },
+  "lore": "Ngày giếng cạn ở {pl}, {who} hứng giọt nước cuối vào hạt châu. Áp tai vào châu sẽ nghe nước chảy dưới đáy giếng, lẫn tiếng gà gọi ngoài bờ.",
+  "src": "Sự kiện thả gàu xuống giếng cạn",
+  "status": "active"
+}
+```
+
+## Thanh Vân Đạo Bào — `ao_thanhvan_daobao`
+
+```json
+{
+  "id": "ao_thanhvan_daobao",
+  "n": "Thanh Vân Đạo Bào",
+  "k": "bao",
+  "el": "moc",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 18.2,
+    "mpP": 15.1
+  },
+  "lore": "Vải dệt từ tơ tằm ăn lá trúc trên đỉnh núi, mặc vào mát như gió sớm.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Phi Phong Phong Đăng — `ao_phi_phong_phong_dang`
+
+```json
+{
+  "id": "ao_phi_phong_phong_dang",
+  "n": "Phi Phong Phong Đăng",
+  "k": "bao",
+  "el": "phong",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 10.6
+  },
+  "lore": "Một đường rạn chia góc vai làm hai, bên trong còn giữ tiếng gió lọt qua khe.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Pháp Y Chỉ Quán — `ao_phap_y_chi_quan`
+
+```json
+{
+  "id": "ao_phap_y_chi_quan",
+  "n": "Pháp Y Chỉ Quán",
+  "k": "bao",
+  "el": "phat",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 17.3
+  },
+  "lore": "Đưa gấu tay lại gần ngọn đèn sẽ nhận ra tiếng mõ ngân rất khẽ. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đạo Bào Hồn Trầm — `ao_dao_bao_hon_tram`
+
+```json
+{
+  "id": "ao_dao_bao_hon_tram",
+  "n": "Đạo Bào Hồn Trầm",
+  "k": "bao",
+  "el": "am",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 15.3
+  },
+  "lore": "Chạm nhẹ vào trái cổ áo, có thể nhận ra mùi hương cũ trong buồng kín.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phi Phong Thanh Đồng — `ao_phi_phong_di_qua_cho_gio_lua`
+
+```json
+{
+  "id": "ao_phi_phong_di_qua_cho_gio_lua",
+  "n": "Phi Phong Thanh Đồng",
+  "k": "bao",
+  "el": "hoa",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "hpP": 12.9
+  },
+  "lore": "Người hầu trà đếm được sáu chén, vẫn rót sang chén thứ bảy. Thỉnh thoảng góc vai còn thoảng ánh lửa liếm qua mép.",
+  "src": "Sự kiện rót chén trà thứ bảy",
+  "status": "active"
+}
+```
+
+## Đạo Bào Đá Kê — `ao_dao_bao_da_ke`
+
+```json
+{
+  "id": "ao_dao_bao_da_ke",
+  "n": "Đạo Bào Đá Kê",
+  "k": "bao",
+  "el": "vo",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 12.2
+  },
+  "lore": "Lúc chạng vạng trên sân gạch, tiếng cửa gỗ bị gió đẩy còn vương ở trái cổ áo.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Pháp Y Tử Điện — `ao_phap_y_tu_dien`
+
+```json
+{
+  "id": "ao_phap_y_tu_dien",
+  "n": "Pháp Y Tử Điện",
+  "k": "bao",
+  "el": "loi",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 14.5
+  },
+  "lore": "Vào giờ sương rơi, ghé gần gấu tay nhận ra một ánh chớp xanh. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Pháp Y Địa Miên — `ao_phap_y_dia_mien`
+
+```json
+{
+  "id": "ao_phap_y_dia_mien",
+  "n": "Pháp Y Địa Miên",
+  "k": "bao",
+  "el": "tho",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 14.1
+  },
+  "lore": "Trời vừa đổi gió, ghé gần gấu tay có thể nhận ra những vết nứt nhỏ như chân chim.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Đạo Bào Dương Liễu — `ao_dao_bao_duong_lieu`
+
+```json
+{
+  "id": "ao_dao_bao_duong_lieu",
+  "n": "Đạo Bào Dương Liễu",
+  "k": "bao",
+  "el": "moc",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 17.3
+  },
+  "lore": "Đặt cạnh cửa sổ, trái cổ áo để lộ những thớ gỗ ướt mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phi Phong Vũ Tuyền — `ao_phi_phong_vu_tuyen`
+
+```json
+{
+  "id": "ao_phi_phong_vu_tuyen",
+  "n": "Phi Phong Vũ Tuyền",
+  "k": "bao",
+  "el": "thuy",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 10.6
+  },
+  "lore": "Ở góc vai có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh loang như vảy cá.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đạo Bào Thương Lan — `ao_dao_bao_tra_ve_ben_cu`
+
+```json
+{
+  "id": "ao_dao_bao_tra_ve_ben_cu",
+  "n": "Đạo Bào Thương Lan",
+  "k": "bao",
+  "el": "kim",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "hpP": 13.3
+  },
+  "lore": "{who} nhặt củi quanh sơn môn để nấu cháo cho khách vãng lai. Dưới trái cổ áo còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện nhóm lại bếp cháo trước cổng",
+  "status": "active"
+}
+```
+
+## Pháp Y Tuyết Châm — `ao_phap_y_tuyet_cham`
+
+```json
+{
+  "id": "ao_phap_y_tuyet_cham",
+  "n": "Pháp Y Tuyết Châm",
+  "k": "bao",
+  "el": "bang",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 11.8,
+    "matkP": 5.7
+  },
+  "lore": "Thứ đọng lại trên gấu tay gợi mùi rơm lẫn trong tuyết. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Phi Phong Trúc Châm — `ao_phi_phong_truc_cham`
+
+```json
+{
+  "id": "ao_phi_phong_truc_cham",
+  "n": "Phi Phong Trúc Châm",
+  "k": "bao",
+  "el": "moc",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 16.3,
+    "dodge": 3.4
+  },
+  "lore": "Người giữ trước từng lau góc vai bằng vải ướt. Đến giờ vẫn còn những thớ gỗ ướt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Pháp Y Tảo Huyền — `ao_phap_y_tao_huyen`
+
+```json
+{
+  "id": "ao_phap_y_tao_huyen",
+  "n": "Pháp Y Tảo Huyền",
+  "k": "bao",
+  "el": "thuy",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 20.9,
+    "matkP": 10.4
+  },
+  "lore": "Một đường rạn chia gấu tay làm hai, bên trong còn giữ ánh loang như vảy cá.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đạo Bào Tia Câm — `ao_dao_bao_tia_cam`
+
+```json
+{
+  "id": "ao_dao_bao_tia_cam",
+  "n": "Đạo Bào Tia Câm",
+  "k": "bao",
+  "el": "loi",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 16.3,
+    "tam": 1
+  },
+  "lore": "Đưa trái cổ áo lại gần ngọn đèn sẽ nhận ra một ánh chớp xanh. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phi Phong Thiền Cốt — `ao_phi_phong_thien_cot`
+
+```json
+{
+  "id": "ao_phi_phong_thien_cot",
+  "n": "Phi Phong Thiền Cốt",
+  "k": "bao",
+  "el": "phat",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 16.9,
+    "tp": 2
+  },
+  "lore": "Chạm nhẹ vào góc vai, có thể nhận ra mùi trầm đọng dưới mái.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Pháp Y Thanh Liên — `ao_phap_y_dem_ho_nguoi_xa`
+
+```json
+{
+  "id": "ao_phap_y_dem_ho_nguoi_xa",
+  "n": "Pháp Y Thanh Liên",
+  "k": "bao",
+  "el": "phong",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "hpP": 15.6,
+    "matkP": 9.1
+  },
+  "lore": "{who} nhốt tiếng khóc trong một gian nhà để trẻ ngoài sân yên giấc. Thỉnh thoảng gấu tay còn thoảng vệt bụi uốn quanh mép.",
+  "src": "Sự kiện mở cửa căn buồng kín",
+  "status": "active"
+}
+```
+
+## Phi Phong Thiết Yến — `ao_phi_phong_thiet_yen`
+
+```json
+{
+  "id": "ao_phi_phong_thiet_yen",
+  "n": "Phi Phong Thiết Yến",
+  "k": "bao",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 20.3,
+    "dodge": 4.2
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, ánh bạc nhạt trên mép còn vương ở góc vai.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đạo Bào Tuyết Sa — `ao_dao_bao_tuyet_sa`
+
+```json
+{
+  "id": "ao_dao_bao_tuyet_sa",
+  "n": "Đạo Bào Tuyết Sa",
+  "k": "bao",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 17.6,
+    "mpP": 14.2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần trái cổ áo nhận ra những hạt băng mịn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đạo Bào Đêm Canh — `ao_dao_bao_dem_canh`
+
+```json
+{
+  "id": "ao_dao_bao_dem_canh",
+  "n": "Đạo Bào Đêm Canh",
+  "k": "bao",
+  "el": "vo",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 16.7,
+    "mpP": 8.5
+  },
+  "lore": "Trời vừa đổi gió, ghé gần trái cổ áo có thể nhận ra mùi khói bếp vương lại.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Phi Phong Ảnh Sa — `ao_phi_phong_anh_sa`
+
+```json
+{
+  "id": "ao_phi_phong_anh_sa",
+  "n": "Phi Phong Ảnh Sa",
+  "k": "bao",
+  "el": "am",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 15.7,
+    "tp": 1
+  },
+  "lore": "Đặt cạnh cửa sổ, góc vai để lộ ánh đen lẫn trong khói mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Pháp Y Nham Phấn — `ao_phap_y_nham_phan`
+
+```json
+{
+  "id": "ao_phap_y_nham_phan",
+  "n": "Pháp Y Nham Phấn",
+  "k": "bao",
+  "el": "tho",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 19.1,
+    "mpP": 13.7
+  },
+  "lore": "Ở gấu tay có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cát lọt qua kẽ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Phi Phong Hắc Thạch — `ao_phi_phong_nghe_thay_tieng_ve`
+
+```json
+{
+  "id": "ao_phi_phong_nghe_thay_tieng_ve",
+  "n": "Phi Phong Hắc Thạch",
+  "k": "bao",
+  "el": "hoa",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "hpP": 16,
+    "tp": 1
+  },
+  "lore": "Người gánh nước giữ riêng một gàu cho con chó mù. Dưới góc vai còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện múc gàu nước cuối ở bến",
+  "status": "active"
+}
+```
+
+## Pháp Y Tàn Đăng — `ao_phap_y_tan_dang`
+
+```json
+{
+  "id": "ao_phap_y_tan_dang",
+  "n": "Pháp Y Tàn Đăng",
+  "k": "bao",
+  "el": "hoa",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 17.3,
+    "matkP": 8.6
+  },
+  "lore": "Thứ đọng lại trên gấu tay gợi mùi tàn hương vừa tắt. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đạo Bào Hắc Thoa — `ao_dao_bao_hac_thoa`
+
+```json
+{
+  "id": "ao_dao_bao_hac_thoa",
+  "n": "Đạo Bào Hắc Thoa",
+  "k": "bao",
+  "el": "kim",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 19.6,
+    "mpP": 12.3
+  },
+  "lore": "Người giữ trước từng lau trái cổ áo bằng vải ướt. Đến giờ vẫn còn những vảy sắt li ti.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phi Phong Lôi Tuế — `ao_phi_phong_loi_tue`
+
+```json
+{
+  "id": "ao_phi_phong_loi_tue",
+  "n": "Phi Phong Lôi Tuế",
+  "k": "bao",
+  "el": "loi",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 20.9,
+    "tp": 2
+  },
+  "lore": "Một đường rạn chia góc vai làm hai, bên trong còn giữ mạch điện nhói đầu ngón.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Đạo Bào Mực Nâu — `ao_dao_bao_muc_nau`
+
+```json
+{
+  "id": "ao_dao_bao_muc_nau",
+  "n": "Đạo Bào Mực Nâu",
+  "k": "bao",
+  "el": "vo",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 17.6,
+    "mpP": 14.2
+  },
+  "lore": "Đưa trái cổ áo lại gần ngọn đèn sẽ nhận ra vệt bụi từ bờ ruộng. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Pháp Y Dạ Liêm — `ao_phap_y_da_liem`
+
+```json
+{
+  "id": "ao_phap_y_da_liem",
+  "n": "Pháp Y Dạ Liêm",
+  "k": "bao",
+  "el": "am",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 22.9,
+    "mpP": 15.2
+  },
+  "lore": "Chạm nhẹ vào gấu tay, có thể nhận ra mùi hương cũ trong buồng kín.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phi Phong Thanh Liên — `ao_phi_phong_nhat_sau_hoi_mo`
+
+```json
+{
+  "id": "ao_phi_phong_nhat_sau_hoi_mo",
+  "n": "Phi Phong Thanh Liên",
+  "k": "bao",
+  "el": "moc",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "hpP": 30.4,
+    "tp": 2
+  },
+  "lore": "Người nhổ cỏ chừa một bụi bên mộ để chim khỏi mất tổ. Thỉnh thoảng góc vai còn thoảng vệt phấn hoa vàng nhạt.",
+  "src": "Sự kiện che tổ chim trong bãi mộ",
+  "status": "active"
+}
+```
+
+## Pháp Y Phong Dực — `ao_phap_y_phong_duc`
+
+```json
+{
+  "id": "ao_phap_y_phong_duc",
+  "n": "Pháp Y Phong Dực",
+  "k": "bao",
+  "el": "phong",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 22.9,
+    "matkP": 13.2
+  },
+  "lore": "Lúc chạng vạng trên bến triều, tiếng gió lọt qua khe còn vương ở gấu tay.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đạo Bào Thủy Liêm — `ao_dao_bao_thuy_liem`
+
+```json
+{
+  "id": "ao_dao_bao_thuy_liem",
+  "n": "Đạo Bào Thủy Liêm",
+  "k": "bao",
+  "el": "thuy",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 20.3,
+    "mpP": 13.7,
+    "tam": 2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần trái cổ áo nhận ra tiếng giọt rơi vào chum. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Pháp Y Băng Ti — `ao_phap_y_bang_ti`
+
+```json
+{
+  "id": "ao_phap_y_bang_ti",
+  "n": "Pháp Y Băng Ti",
+  "k": "bao",
+  "el": "bang",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 26.4,
+    "mpP": 17.2,
+    "matkP": 13.6
+  },
+  "lore": "Trời vừa đổi gió, ghé gần gấu tay có thể nhận ra tiếng sương đóng lách tách.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Phi Phong Tịnh Đăng — `ao_phi_phong_tinh_dang`
+
+```json
+{
+  "id": "ao_phi_phong_tinh_dang",
+  "n": "Phi Phong Tịnh Đăng",
+  "k": "bao",
+  "el": "phat",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 23.6,
+    "tp": 2,
+    "dodge": 6.4
+  },
+  "lore": "Đặt cạnh cửa sổ, góc vai để lộ vết bụi vàng của hương mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đạo Bào Thổ Phách — `ao_dao_bao_tho_phach`
+
+```json
+{
+  "id": "ao_dao_bao_tho_phach",
+  "n": "Đạo Bào Thổ Phách",
+  "k": "bao",
+  "el": "tho",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 19.6,
+    "mpP": 12.3,
+    "tam": 2
+  },
+  "lore": "Ở trái cổ áo có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cát lọt qua kẽ.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đạo Bào Hàn Ngọc — `ao_dao_bao_giu_hoi_tay_cu`
+
+```json
+{
+  "id": "ao_dao_bao_giu_hoi_tay_cu",
+  "n": "Đạo Bào Hàn Ngọc",
+  "k": "bao",
+  "el": "thuy",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "hpP": 30.4,
+    "tam": 2,
+    "mpP": 17.5
+  },
+  "lore": "Người chủ lò gốm giữ chiếc chén méo làm chén uống thuốc. Dưới trái cổ áo còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện nhặt lại chén méo bên lò",
+  "status": "active"
+}
+```
+
+## Pháp Y Bạch Đống — `ao_phap_y_bach_dong`
+
+```json
+{
+  "id": "ao_phap_y_bach_dong",
+  "n": "Pháp Y Bạch Đống",
+  "k": "bao",
+  "el": "bang",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 22.9,
+    "matkP": 13.2,
+    "mpP": 19.4
+  },
+  "lore": "Thứ đọng lại trên gấu tay gợi mùi rơm lẫn trong tuyết. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phi Phong Hắc Triều — `ao_phi_phong_hac_trieu`
+
+```json
+{
+  "id": "ao_phi_phong_hac_trieu",
+  "n": "Phi Phong Hắc Triều",
+  "k": "bao",
+  "el": "am",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 30.9,
+    "tp": 3,
+    "dodge": 8.4
+  },
+  "lore": "Người giữ trước từng lau góc vai bằng vải ướt. Đến giờ vẫn còn ánh đen lẫn trong khói.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đạo Bào Tấm Mành — `ao_dao_bao_tam_manh`
+
+```json
+{
+  "id": "ao_dao_bao_tam_manh",
+  "n": "Đạo Bào Tấm Mành",
+  "k": "bao",
+  "el": "vo",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 26.4,
+    "tam": 2,
+    "mpP": 17.8
+  },
+  "lore": "Một đường rạn chia trái cổ áo làm hai, bên trong còn giữ tiếng cửa gỗ bị gió đẩy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Pháp Y Liên Tịch — `ao_phap_y_lien_tich`
+
+```json
+{
+  "id": "ao_phap_y_lien_tich",
+  "n": "Pháp Y Liên Tịch",
+  "k": "bao",
+  "el": "phat",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 35.5,
+    "mpP": 23.8,
+    "matkP": 15
+  },
+  "lore": "Đưa gấu tay lại gần ngọn đèn sẽ nhận ra tiếng mõ ngân rất khẽ. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trầm Nham Phi Phong — `ao_tram_nham_phi_phong`
+
+```json
+{
+  "id": "ao_tram_nham_phi_phong",
+  "n": "Trầm Nham Phi Phong",
+  "k": "bao",
+  "el": "tho",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 36.7,
+    "tp": 3,
+    "dodge": 8.1
+  },
+  "lore": "Chạm nhẹ vào góc vai, có thể nhận ra mùi đất vỡ sau cơn mưa.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phi Phong Tàn Dương — `ao_phi_phong_nho_ngay_dong_cua`
+
+```json
+{
+  "id": "ao_phi_phong_nho_ngay_dong_cua",
+  "n": "Phi Phong Tàn Dương",
+  "k": "bao",
+  "el": "loi",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "hpP": 37.6,
+    "tp": 4,
+    "dodge": 9.1
+  },
+  "lore": "{who} gói nắm thóc giống cuối đem qua bờ lũ. Thỉnh thoảng góc vai còn thoảng một ánh chớp xanh.",
+  "src": "Sự kiện đưa thóc giống qua lũ",
+  "status": "active"
+}
+```
+
+## Bạch Châm Đạo Bào — `ao_bach_cham_dao_bao`
+
+```json
+{
+  "id": "ao_bach_cham_dao_bao",
+  "n": "Bạch Châm Đạo Bào",
+  "k": "bao",
+  "el": "kim",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 30.9,
+    "mpP": 22.4,
+    "tam": 2
+  },
+  "lore": "Lúc chạng vạng trên phế trạch, ánh bạc nhạt trên mép còn vương ở trái cổ áo.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Pháp Y Bách Thực — `ao_phap_y_bach_thuc`
+
+```json
+{
+  "id": "ao_phap_y_bach_thuc",
+  "n": "Pháp Y Bách Thực",
+  "k": "bao",
+  "el": "moc",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 23.6,
+    "matkP": 13.2,
+    "mpP": 15.2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần gấu tay nhận ra vệt phấn hoa vàng nhạt. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Tàn Đăng Đạo Bào — `ao_tan_dang_dao_bao`
+
+```json
+{
+  "id": "ao_tan_dang_dao_bao",
+  "n": "Tàn Đăng Đạo Bào",
+  "k": "bao",
+  "el": "hoa",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 28.8,
+    "tam": 3,
+    "mpP": 22.4
+  },
+  "lore": "Trời vừa đổi gió, ghé gần trái cổ áo có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Pháp Y Phong Mạch — `ao_phap_y_phong_mach`
+
+```json
+{
+  "id": "ao_phap_y_phong_mach",
+  "n": "Pháp Y Phong Mạch",
+  "k": "bao",
+  "el": "phong",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 35.5,
+    "mpP": 30.2,
+    "matkP": 21.9
+  },
+  "lore": "Đặt cạnh cửa sổ, gấu tay để lộ ánh chao như cánh chim mỗi khi có người đi ngang.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Thạch Kiển Phi Phong — `ao_thach_kien_phi_phong`
+
+```json
+{
+  "id": "ao_thach_kien_phi_phong",
+  "n": "Thạch Kiển Phi Phong",
+  "k": "bao",
+  "el": "tho",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 37,
+    "tp": 3,
+    "defP": 23.9
+  },
+  "lore": "Ở góc vai có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cát lọt qua kẽ.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đạo Bào Hoàng Sa — `ao_dao_bao_cat_mot_tieng_tho`
+
+```json
+{
+  "id": "ao_dao_bao_cat_mot_tieng_tho",
+  "n": "Đạo Bào Hoàng Sa",
+  "k": "bao",
+  "el": "bang",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "hpP": 37.6,
+    "tam": 4,
+    "mpP": 21.4,
+    "ngo": 3
+  },
+  "lore": "Người chép sổ chợ xóa nợ của một nhà trước lúc đi xa. Dưới trái cổ áo còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện trả lại sổ nợ ở chợ cũ",
+  "status": "active"
+}
+```
+
+## Phong Dực Pháp Y — `ao_phong_duc_phap_y`
+
+```json
+{
+  "id": "ao_phong_duc_phap_y",
+  "n": "Phong Dực Pháp Y",
+  "k": "bao",
+  "el": "phong",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 33.4,
+    "mpP": 21.6,
+    "matkP": 17.3,
+    "dodge": 8.2
+  },
+  "lore": "Thứ đọng lại trên gấu tay gợi tiếng lá khô lăn dưới gót. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Phi Phong Đăng Tủy — `ao_phi_phong_dang_tuy`
+
+```json
+{
+  "id": "ao_phi_phong_dang_tuy",
+  "n": "Phi Phong Đăng Tủy",
+  "k": "bao",
+  "el": "hoa",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 35.5,
+    "tp": 3,
+    "dodge": 7.1,
+    "mpP": 18.2
+  },
+  "lore": "Người giữ trước từng lau góc vai bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Tang Chi Phi Phong — `ao_tang_chi_phi_phong`
+
+```json
+{
+  "id": "ao_tang_chi_phi_phong",
+  "n": "Tang Chi Phi Phong",
+  "k": "bao",
+  "el": "moc",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 43.8,
+    "dodge": 9.8,
+    "tp": 4,
+    "mpP": 25.2
+  },
+  "lore": "Một đường rạn chia góc vai làm hai, bên trong còn giữ tiếng tơ cọ vào vỏ.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đạo Bào Bụi Trấu — `ao_dao_bao_bui_trau`
+
+```json
+{
+  "id": "ao_dao_bao_bui_trau",
+  "n": "Đạo Bào Bụi Trấu",
+  "k": "bao",
+  "el": "vo",
+  "t": 6,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "hpP": 51.9,
+    "tam": 4,
+    "mpP": 33,
+    "defP": 33.7,
+    "tvP": 23.8
+  },
+  "lore": "Người xay gạo gõ lên đá ba lần để báo đã hết đêm. Dưới trái cổ áo còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện gõ cối lúc sang canh",
+  "status": "active"
+}
+```
+
+## Yêu Đái Da Lang — `dai_dalang`
+
+```json
+{
+  "id": "dai_dalang",
+  "n": "Yêu Đái Da Lang",
+  "k": "dai",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 8.1,
+    "tp": 1
+  },
+  "lore": "Da sói thuộc vụng, còn hôi mùi núi.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Yêu Đái Phong Tẫn — `dai_yeu_dai_phong_tan`
+
+```json
+{
+  "id": "dai_yeu_dai_phong_tan",
+  "n": "Yêu Đái Phong Tẫn",
+  "k": "dai",
+  "el": "phong",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 5.1,
+    "tp": 1
+  },
+  "lore": "Chạm nhẹ vào đầu dây, có thể nhận ra tiếng lá khô lăn dưới gót.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Phạn Chung — `dai_ngoc_dai_phan_chung`
+
+```json
+{
+  "id": "dai_ngoc_dai_phan_chung",
+  "n": "Ngọc Đái Phạn Chung",
+  "k": "dai",
+  "el": "phat",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 7.3,
+    "tp": 1
+  },
+  "lore": "Úp mặt khóa về phía đất vẫn nhận ra vết bụi vàng của hương. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đai Nguyệt Ảnh — `dai_dai_do_lay_mua_ret`
+
+```json
+{
+  "id": "dai_dai_do_lay_mua_ret",
+  "n": "Đai Nguyệt Ảnh",
+  "k": "dai",
+  "el": "loi",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "hpP": 6.6,
+    "tp": 1
+  },
+  "lore": "Người đỡ đẻ hong một tấm khăn qua ba canh tuyết. Chỗ nút buộc vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện trả khăn cho người đỡ đẻ",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Thạch Kiển — `dai_ngoc_dai_thach_kien`
+
+```json
+{
+  "id": "dai_ngoc_dai_thach_kien",
+  "n": "Ngọc Đái Thạch Kiển",
+  "k": "dai",
+  "el": "tho",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 6.1,
+    "tp": 1
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mặt khóa nhận ra vệt phấn đá đục. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Đai Hàn Lãng — `dai_dai_han_lang`
+
+```json
+{
+  "id": "dai_dai_han_lang",
+  "n": "Đai Hàn Lãng",
+  "k": "dai",
+  "el": "bang",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 7.6,
+    "tp": 1
+  },
+  "lore": "Trời vừa đổi gió, ghé gần nút buộc có thể nhận ra tiếng sương đóng lách tách.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Yêu Đái Mực Nâu — `dai_yeu_dai_muc_nau`
+
+```json
+{
+  "id": "dai_yeu_dai_muc_nau",
+  "n": "Yêu Đái Mực Nâu",
+  "k": "dai",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 6.6,
+    "tp": 1
+  },
+  "lore": "Đặt cạnh cửa sổ, đầu dây để lộ mùi khói bếp vương lại mỗi khi có người đi ngang.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Yêu Đái Đằng Châu — `dai_yeu_dai_dang_chau`
+
+```json
+{
+  "id": "dai_yeu_dai_dang_chau",
+  "n": "Yêu Đái Đằng Châu",
+  "k": "dai",
+  "el": "moc",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 7.7,
+    "tp": 1
+  },
+  "lore": "Ở đầu dây có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng tơ cọ vào vỏ.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Đăng Tủy — `dai_ngoc_dai_dang_tuy`
+
+```json
+{
+  "id": "dai_ngoc_dai_dang_tuy",
+  "n": "Ngọc Đái Đăng Tủy",
+  "k": "dai",
+  "el": "hoa",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "hpP": 6.3,
+    "tp": 1
+  },
+  "lore": "Dọc mặt khóa có thể nhận ra ánh lửa liếm qua mép. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đai Thiên Mộc — `dai_dai_de_lai_ben_bep`
+
+```json
+{
+  "id": "dai_dai_de_lai_ben_bep",
+  "n": "Đai Thiên Mộc",
+  "k": "dai",
+  "el": "am",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "hpP": 6.4,
+    "tp": 1,
+    "defP": 8.6
+  },
+  "lore": "Người đan dép để thừa một quai cho khách có chân sưng. Đến giờ nút buộc còn giữ mùi hương cũ trong buồng kín.",
+  "src": "Sự kiện mang đôi dép đến nhà khách",
+  "status": "active"
+}
+```
+
+## Đai Đồng Mưa — `dai_dai_dong_mua`
+
+```json
+{
+  "id": "dai_dai_dong_mua",
+  "n": "Đai Đồng Mưa",
+  "k": "dai",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 9.1,
+    "tp": 2,
+    "defP": 13
+  },
+  "lore": "Người giữ trước từng lau nút buộc bằng vải ướt. Đến giờ vẫn còn những vảy sắt li ti.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Tảo Huyền — `dai_ngoc_dai_tao_huyen`
+
+```json
+{
+  "id": "dai_ngoc_dai_tao_huyen",
+  "n": "Ngọc Đái Tảo Huyền",
+  "k": "dai",
+  "el": "thuy",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 8.6,
+    "tp": 1,
+    "mpP": 10.4
+  },
+  "lore": "Một đường rạn chia mặt khóa làm hai, bên trong còn giữ ánh loang như vảy cá.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Yêu Đái U Hương — `dai_yeu_dai_u_huong`
+
+```json
+{
+  "id": "dai_yeu_dai_u_huong",
+  "n": "Yêu Đái U Hương",
+  "k": "dai",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 9.5,
+    "tp": 2,
+    "dodge": 4.8
+  },
+  "lore": "Đưa đầu dây lại gần ngọn đèn sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Yêu Đái Cành Lau — `dai_yeu_dai_canh_lau`
+
+```json
+{
+  "id": "dai_yeu_dai_canh_lau",
+  "n": "Yêu Đái Cành Lau",
+  "k": "dai",
+  "el": "vo",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 7.3,
+    "tp": 1,
+    "defP": 9.6
+  },
+  "lore": "Chạm nhẹ vào đầu dây, có thể nhận ra mùi nắng trên vải mộc.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đai Tùng Tâm — `dai_dai_tung_tam`
+
+```json
+{
+  "id": "dai_dai_tung_tam",
+  "n": "Đai Tùng Tâm",
+  "k": "dai",
+  "el": "moc",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 7.3,
+    "tp": 1,
+    "defP": 10.4
+  },
+  "lore": "Úp nút buộc về phía đất vẫn nhận ra những thớ gỗ ướt. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Bạch Ngọc — `dai_ngoc_dai_ven_mot_goc_rem`
+
+```json
+{
+  "id": "dai_ngoc_dai_ven_mot_goc_rem",
+  "n": "Ngọc Đái Bạch Ngọc",
+  "k": "dai",
+  "el": "phong",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "hpP": 10,
+    "tp": 2,
+    "defP": 15.6,
+    "hoTam": 9.2
+  },
+  "lore": "Người giữ bến vẫn kê ghế đúng tầm chân vị khách nhỏ tuổi. Chỗ mặt khóa vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện đưa ghế ra bến lặng",
+  "status": "active"
+}
+```
+
+## Yêu Đái Hỏa Tủy — `dai_yeu_dai_hoa_tuy`
+
+```json
+{
+  "id": "dai_yeu_dai_hoa_tuy",
+  "n": "Yêu Đái Hỏa Tủy",
+  "k": "dai",
+  "el": "hoa",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 6.8,
+    "tp": 1,
+    "dodge": 3.2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần đầu dây nhận ra ánh lửa liếm qua mép. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Liên Thạch — `dai_ngoc_dai_lien_thach`
+
+```json
+{
+  "id": "dai_ngoc_dai_lien_thach",
+  "n": "Ngọc Đái Liên Thạch",
+  "k": "dai",
+  "el": "tho",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 7.3,
+    "tp": 1,
+    "mpP": 8.5
+  },
+  "lore": "Trời vừa đổi gió, ghé gần mặt khóa có thể nhận ra những vết nứt nhỏ như chân chim.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Đai Viên Âm — `dai_dai_vien_am`
+
+```json
+{
+  "id": "dai_dai_vien_am",
+  "n": "Đai Viên Âm",
+  "k": "dai",
+  "el": "phat",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "hpP": 9.8,
+    "tp": 2,
+    "defP": 12.7
+  },
+  "lore": "Đặt cạnh cửa sổ, nút buộc để lộ vết bụi vàng của hương mỗi khi có người đi ngang.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đai Sấm Mù — `dai_dai_sam_mu`
+
+```json
+{
+  "id": "dai_dai_sam_mu",
+  "n": "Đai Sấm Mù",
+  "k": "dai",
+  "el": "loi",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 12.8,
+    "tp": 2,
+    "defP": 15.2
+  },
+  "lore": "Ở nút buộc có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp mạch điện nhói đầu ngón.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Yêu Đái Trì Châu — `dai_yeu_dai_tri_chau`
+
+```json
+{
+  "id": "dai_yeu_dai_tri_chau",
+  "n": "Yêu Đái Trì Châu",
+  "k": "dai",
+  "el": "thuy",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 11.7,
+    "tp": 2,
+    "dodge": 7.6
+  },
+  "lore": "Dọc đầu dây có thể nhận ra tiếng giọt rơi vào chum. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Liệt Diễm — `dai_ngoc_dai_goi_trong_vat_ao`
+
+```json
+{
+  "id": "dai_ngoc_dai_goi_trong_vat_ao",
+  "n": "Ngọc Đái Liệt Diễm",
+  "k": "dai",
+  "el": "bang",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "hpP": 10,
+    "tp": 2,
+    "mpP": 15.9
+  },
+  "lore": "Đứa trẻ nuôi một con cá trong cái bát mẻ dành cho khách. Đến giờ mặt khóa còn giữ mùi rơm lẫn trong tuyết.",
+  "src": "Sự kiện đưa bát cá ra bờ sông",
+  "status": "active"
+}
+```
+
+## Yêu Đái Xích Đinh — `dai_yeu_dai_xich_dinh`
+
+```json
+{
+  "id": "dai_yeu_dai_xich_dinh",
+  "n": "Yêu Đái Xích Đinh",
+  "k": "dai",
+  "el": "kim",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 10.8,
+    "tp": 2,
+    "dodge": 6.7
+  },
+  "lore": "Người giữ trước từng lau đầu dây bằng vải ướt. Đến giờ vẫn còn những vảy sắt li ti.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đai Nhu Triều — `dai_dai_nhu_trieu`
+
+```json
+{
+  "id": "dai_dai_nhu_trieu",
+  "n": "Đai Nhu Triều",
+  "k": "dai",
+  "el": "thuy",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 9.1,
+    "tp": 2,
+    "defP": 14.6
+  },
+  "lore": "Một đường rạn chia nút buộc làm hai, bên trong còn giữ ánh loang như vảy cá.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Hắc Nhung — `dai_ngoc_dai_hac_nhung`
+
+```json
+{
+  "id": "dai_ngoc_dai_hac_nhung",
+  "n": "Ngọc Đái Hắc Nhung",
+  "k": "dai",
+  "el": "am",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 9.8,
+    "tp": 2,
+    "mpP": 13.4,
+    "defP": 14.4
+  },
+  "lore": "Đưa mặt khóa lại gần ngọn đèn sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Yêu Đái Dương Liễu — `dai_yeu_dai_duong_lieu`
+
+```json
+{
+  "id": "dai_yeu_dai_duong_lieu",
+  "n": "Yêu Đái Dương Liễu",
+  "k": "dai",
+  "el": "moc",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "hpP": 13.3,
+    "tp": 2,
+    "dodge": 7.6,
+    "mpP": 17.8
+  },
+  "lore": "Chạm nhẹ vào đầu dây, có thể nhận ra mùi nhựa vừa rịn.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Hạ Viêm — `dai_ngoc_dai_di_qua_cho_gio_lua`
+
+```json
+{
+  "id": "dai_ngoc_dai_di_qua_cho_gio_lua",
+  "n": "Ngọc Đái Hạ Viêm",
+  "k": "dai",
+  "el": "phat",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "hpP": 9.7,
+    "tp": 2,
+    "mpP": 15.9,
+    "defP": 12.3,
+    "hoTam": 9.2
+  },
+  "lore": "Người chở đò để ngửa lòng bàn tay khi nghe tên người chết. Dưới mặt khóa còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện trả lời gọi đò trong sương",
+  "status": "active"
+}
+```
+
+## Đai Lôi Diệp — `dai_dai_loi_diep`
+
+```json
+{
+  "id": "dai_dai_loi_diep",
+  "n": "Đai Lôi Diệp",
+  "k": "dai",
+  "el": "loi",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 12.4,
+    "tp": 2,
+    "defP": 18.8,
+    "dodge": 6
+  },
+  "lore": "Lúc chạng vạng trên phế trạch, mạch điện nhói đầu ngón còn vương ở nút buộc.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Yêu Đái Hàn Tinh — `dai_yeu_dai_han_tinh`
+
+```json
+{
+  "id": "dai_yeu_dai_han_tinh",
+  "n": "Yêu Đái Hàn Tinh",
+  "k": "dai",
+  "el": "bang",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 17.3,
+    "tp": 3,
+    "dodge": 7.8,
+    "defP": 17.4
+  },
+  "lore": "Vào giờ sương rơi, ghé gần đầu dây nhận ra những hạt băng mịn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đai Thép Gió — `dai_dai_thep_gio`
+
+```json
+{
+  "id": "dai_dai_thep_gio",
+  "n": "Đai Thép Gió",
+  "k": "dai",
+  "el": "kim",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 16.2,
+    "tp": 3,
+    "defP": 19.8,
+    "dodge": 6.8
+  },
+  "lore": "Trời vừa đổi gió, ghé gần nút buộc có thể nhận ra những vảy sắt li ti.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Vải Mộc — `dai_ngoc_dai_vai_moc`
+
+```json
+{
+  "id": "dai_ngoc_dai_vai_moc",
+  "n": "Ngọc Đái Vải Mộc",
+  "k": "dai",
+  "el": "vo",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 17.7,
+    "tp": 2,
+    "mpP": 23,
+    "defP": 19.8
+  },
+  "lore": "Đặt cạnh cửa sổ, mặt khóa để lộ mùi khói bếp vương lại mỗi khi có người đi ngang.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Yêu Đái Thổ Phách — `dai_yeu_dai_tho_phach`
+
+```json
+{
+  "id": "dai_yeu_dai_tho_phach",
+  "n": "Yêu Đái Thổ Phách",
+  "k": "dai",
+  "el": "tho",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 11.8,
+    "tp": 2,
+    "dodge": 6.7,
+    "defP": 15.4
+  },
+  "lore": "Ở đầu dây có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cát lọt qua kẽ.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Tuyết Linh — `dai_ngoc_dai_tra_ve_ben_cu`
+
+```json
+{
+  "id": "dai_ngoc_dai_tra_ve_ben_cu",
+  "n": "Ngọc Đái Tuyết Linh",
+  "k": "dai",
+  "el": "phong",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "hpP": 15.2,
+    "tp": 2,
+    "mpP": 18,
+    "defP": 19.4,
+    "hoTam": 11.9
+  },
+  "lore": "Người đào giếng để nguyên một bậc đất cho ếch leo lên. Thỉnh thoảng mặt khóa còn thoảng ánh chao như cánh chim.",
+  "src": "Sự kiện đặt lại bậc giếng vỡ",
+  "status": "active"
+}
+```
+
+## Lò Sương Đai — `dai_lo_suong_dai`
+
+```json
+{
+  "id": "dai_lo_suong_dai",
+  "n": "Lò Sương Đai",
+  "k": "dai",
+  "el": "hoa",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "hpP": 11,
+    "tp": 2,
+    "defP": 15.4,
+    "tam": 2
+  },
+  "lore": "Thứ đọng lại trên nút buộc gợi mùi tàn hương vừa tắt. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đai Huyết Đăng — `dai_dai_huyet_dang`
+
+```json
+{
+  "id": "dai_dai_huyet_dang",
+  "n": "Đai Huyết Đăng",
+  "k": "dai",
+  "el": "hoa",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 17.8,
+    "tp": 4,
+    "defP": 23.7,
+    "dodge": 9.3
+  },
+  "lore": "Người giữ trước từng lau nút buộc bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Tịnh Trần Yêu Đái — `dai_tinh_tran_yeu_dai`
+
+```json
+{
+  "id": "dai_tinh_tran_yeu_dai",
+  "n": "Tịnh Trần Yêu Đái",
+  "k": "dai",
+  "el": "phat",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 15.5,
+    "tp": 3,
+    "dodge": 7.1,
+    "defP": 17.4
+  },
+  "lore": "Một đường rạn chia đầu dây làm hai, bên trong còn giữ hơi ấm như hạt cơm mới.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Ngọc Đái Bến Cạn — `dai_ngoc_dai_ben_can`
+
+```json
+{
+  "id": "dai_ngoc_dai_ben_can",
+  "n": "Ngọc Đái Bến Cạn",
+  "k": "dai",
+  "el": "vo",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 21.4,
+    "tp": 3,
+    "mpP": 26.7,
+    "defP": 27
+  },
+  "lore": "Đưa mặt khóa lại gần ngọn đèn sẽ nhận ra vệt bụi từ bờ ruộng. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trầm Ba Ngọc Đái — `dai_tram_ba_ngoc_dai`
+
+```json
+{
+  "id": "dai_tram_ba_ngoc_dai",
+  "n": "Trầm Ba Ngọc Đái",
+  "k": "dai",
+  "el": "thuy",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 17.3,
+    "tp": 2,
+    "mpP": 21.6,
+    "defP": 17.4
+  },
+  "lore": "Chạm nhẹ vào mặt khóa, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Yêu Đái Vân Văn — `dai_yeu_dai_dem_ho_nguoi_xa`
+
+```json
+{
+  "id": "dai_yeu_dai_dem_ho_nguoi_xa",
+  "n": "Yêu Đái Vân Văn",
+  "k": "dai",
+  "el": "kim",
+  "t": 5,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "hpP": 26,
+    "tp": 4,
+    "dodge": 13.6,
+    "defP": 34.6,
+    "atkP": 22.4
+  },
+  "lore": "Người thợ thuyền đặt một đồng tiền dưới mũi thuyền cầu bình an. Dưới đầu dây còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện lật mũi thuyền ở vũng cạn",
+  "status": "active"
+}
+```
+
+## Băng Nham Đai — `dai_bang_nham_dai`
+
+```json
+{
+  "id": "dai_bang_nham_dai",
+  "n": "Băng Nham Đai",
+  "k": "dai",
+  "el": "bang",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 19.1,
+    "tp": 4,
+    "defP": 30.2,
+    "mpP": 28.7,
+    "dodge": 9.9
+  },
+  "lore": "Lúc chạng vạng trên thềm đá cổ, ánh xanh trên mặt băng còn vương ở nút buộc.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đai Tùng Mặc — `dai_dai_tung_mac`
+
+```json
+{
+  "id": "dai_dai_tung_mac",
+  "n": "Đai Tùng Mặc",
+  "k": "dai",
+  "el": "moc",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "hpP": 17.3,
+    "tp": 3,
+    "defP": 23,
+    "mpP": 18.8,
+    "dodge": 6.3
+  },
+  "lore": "Vào giờ sương rơi, ghé gần nút buộc nhận ra vệt phấn hoa vàng nhạt. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Thanh Liên Hỏa — `hoa_thanhlien`
+
+```json
+{
+  "id": "hoa_thanhlien",
+  "n": "Thanh Liên Hỏa",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 1,
+  "fx": {
+    "craftP": 13.6,
+    "matkP": 12.6,
+    "critDmg": 16.5
+  },
+  "lore": "Ngọn lửa xanh hình hoa sen, cháy mà không nóng tay người được nó chọn.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Linh Hỏa Đan Tẫn — `hoa_linh_hoa_dan_tan`
+
+```json
+{
+  "id": "hoa_linh_hoa_dan_tan",
+  "n": "Linh Hỏa Đan Tẫn",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "craftP": 7.8
+  },
+  "lore": "Trời vừa đổi gió, ghé gần tim lửa có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Thú Hỏa Tuyết Nha — `hoa_thu_hoa_tuyet_nha`
+
+```json
+{
+  "id": "hoa_thu_hoa_tuyet_nha",
+  "n": "Thú Hỏa Tuyết Nha",
+  "k": "hoa",
+  "el": "bang",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "craftP": 5.5
+  },
+  "lore": "Đặt cạnh cửa sổ, mép than để lộ tiếng sương đóng lách tách mỗi khi có người đi ngang.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Địa Tâm Hỏa Noãn Sa — `hoa_dia_tam_hoa_noan_sa`
+
+```json
+{
+  "id": "hoa_dia_tam_hoa_noan_sa",
+  "n": "Địa Tâm Hỏa Noãn Sa",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "craftP": 6.1
+  },
+  "lore": "Ở lõi đá có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp vệt tro đỏ.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Hỏa Chủng Ngọc Lộ — `hoa_hoa_chung_doi_chan_nguoi_ve`
+
+```json
+{
+  "id": "hoa_hoa_chung_doi_chan_nguoi_ve",
+  "n": "Hỏa Chủng Ngọc Lộ",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "craftP": 8.6
+  },
+  "lore": "{who} để một cuộn chỉ cạnh gối cho người sắp lên đường. Thỉnh thoảng giữa tàn tro còn thoảng tiếng than nổ trong lò.",
+  "src": "Sự kiện gửi cuộn chỉ ở trạm nghỉ",
+  "status": "active"
+}
+```
+
+## Hỏa Chủng Diệm Sa — `hoa_hoa_chung_diem_sa`
+
+```json
+{
+  "id": "hoa_hoa_chung_diem_sa",
+  "n": "Hỏa Chủng Diệm Sa",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "craftP": 7.1
+  },
+  "lore": "Thứ đọng lại trên giữa tàn tro gợi mùi tàn hương vừa tắt. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Thú Hỏa Sa Tủy — `hoa_thu_hoa_sa_tuy`
+
+```json
+{
+  "id": "hoa_thu_hoa_sa_tuy",
+  "n": "Thú Hỏa Sa Tủy",
+  "k": "hoa",
+  "el": "tho",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "craftP": 6.1,
+    "matkP": 6.5
+  },
+  "lore": "Người giữ trước từng lau mép than bằng vải ướt. Đến giờ vẫn còn những vết nứt nhỏ như chân chim.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Địa Tâm Hỏa Tro Đào — `hoa_dia_tam_hoa_tro_dao`
+
+```json
+{
+  "id": "hoa_dia_tam_hoa_tro_dao",
+  "n": "Địa Tâm Hỏa Tro Đào",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "craftP": 8.5,
+    "defP": 12.3
+  },
+  "lore": "Một đường rạn chia lõi đá làm hai, bên trong còn giữ vệt tro đỏ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Linh Hỏa Tịch Thiền — `hoa_linh_hoa_tich_thien`
+
+```json
+{
+  "id": "hoa_linh_hoa_tich_thien",
+  "n": "Linh Hỏa Tịch Thiền",
+  "k": "hoa",
+  "el": "phat",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "craftP": 8.6,
+    "mpP": 8.5
+  },
+  "lore": "Đưa tim lửa lại gần ngọn đèn sẽ nhận ra tiếng mõ ngân rất khẽ. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Địa Tâm Hỏa Liễu Nhung — `hoa_dia_tam_hoa_lieu_nhung`
+
+```json
+{
+  "id": "hoa_dia_tam_hoa_lieu_nhung",
+  "n": "Địa Tâm Hỏa Liễu Nhung",
+  "k": "hoa",
+  "el": "moc",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "craftP": 10.2,
+    "defP": 15.1
+  },
+  "lore": "Chạm nhẹ vào lõi đá, có thể nhận ra mùi nhựa vừa rịn.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Hỏa Chủng Phi Vũ — `hoa_hoa_chung_dem_theo_khi_xuong_nui`
+
+```json
+{
+  "id": "hoa_hoa_chung_dem_theo_khi_xuong_nui",
+  "n": "Hỏa Chủng Phi Vũ",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "craftP": 7.5,
+    "matkP": 8.9
+  },
+  "lore": "{who} giấu một bát gạo trong vách để dành ngày giỗ. Dưới giữa tàn tro còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện mở hốc vách trong gian bếp",
+  "status": "active"
+}
+```
+
+## Linh Hỏa Chớp Đọng — `hoa_linh_hoa_chop_dong`
+
+```json
+{
+  "id": "hoa_linh_hoa_chop_dong",
+  "n": "Linh Hỏa Chớp Đọng",
+  "k": "hoa",
+  "el": "loi",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "craftP": 7.3,
+    "matkP": 7.3
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, mạch điện nhói đầu ngón còn vương ở tim lửa.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Thú Hỏa Âm Mạch — `hoa_thu_hoa_am_mach`
+
+```json
+{
+  "id": "hoa_thu_hoa_am_mach",
+  "n": "Thú Hỏa Âm Mạch",
+  "k": "hoa",
+  "el": "am",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "craftP": 10.4,
+    "matkP": 9.5
+  },
+  "lore": "Vào giờ sương rơi, ghé gần mép than nhận ra tiếng vải lụa sột soạt dưới đèn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Địa Tâm Hỏa Mặc Cốt — `hoa_dia_tam_hoa_mac_cot`
+
+```json
+{
+  "id": "hoa_dia_tam_hoa_mac_cot",
+  "n": "Địa Tâm Hỏa Mặc Cốt",
+  "k": "hoa",
+  "el": "am",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "craftP": 9.5,
+    "defP": 12.7
+  },
+  "lore": "Trời vừa đổi gió, ghé gần lõi đá có thể nhận ra ánh đen lẫn trong khói.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Thú Hỏa Mai Trầm — `hoa_thu_hoa_mai_tram`
+
+```json
+{
+  "id": "hoa_thu_hoa_mai_tram",
+  "n": "Thú Hỏa Mai Trầm",
+  "k": "hoa",
+  "el": "moc",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "craftP": 13.2,
+    "matkP": 12.4
+  },
+  "lore": "Đặt cạnh cửa sổ, mép than để lộ những thớ gỗ ướt mỗi khi có người đi ngang.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Hỏa Chủng Kim Tẫn — `hoa_hoa_chung_kim_tan`
+
+```json
+{
+  "id": "hoa_hoa_chung_kim_tan",
+  "n": "Hỏa Chủng Kim Tẫn",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "craftP": 9.1,
+    "matkP": 10.4
+  },
+  "lore": "Ở giữa tàn tro có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp vệt tro đỏ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Linh Hỏa Sa Liên — `hoa_linh_hoa_khong_de_ten`
+
+```json
+{
+  "id": "hoa_linh_hoa_khong_de_ten",
+  "n": "Linh Hỏa Sa Liên",
+  "k": "hoa",
+  "el": "phat",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "craftP": 10,
+    "matkP": 11.3,
+    "mpP": 14
+  },
+  "lore": "Người chăn ngỗng gõ nhịp bằng cây gậy thay lời xin đường. Thỉnh thoảng tim lửa còn thoảng vết bụi vàng của hương.",
+  "src": "Sự kiện dẫn đàn ngỗng qua đường hẹp",
+  "status": "active"
+}
+```
+
+## Hỏa Chủng Đan Tẫn — `hoa_hoa_chung_dan_tan`
+
+```json
+{
+  "id": "hoa_hoa_chung_dan_tan",
+  "n": "Hỏa Chủng Đan Tẫn",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "craftP": 11,
+    "matkP": 11.8,
+    "tam": 2
+  },
+  "lore": "Thứ đọng lại trên giữa tàn tro gợi mùi tàn hương vừa tắt. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Thú Hỏa Kim Tẫn — `hoa_thu_hoa_kim_tan`
+
+```json
+{
+  "id": "hoa_thu_hoa_kim_tan",
+  "n": "Thú Hỏa Kim Tẫn",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "craftP": 12.4,
+    "matkP": 11.8,
+    "critDmg": 17.3
+  },
+  "lore": "Người giữ trước từng lau mép than bằng vải ướt. Đến giờ vẫn còn tiếng than nổ trong lò.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Linh Hỏa Ô Diệm — `hoa_linh_hoa_o_diem`
+
+```json
+{
+  "id": "hoa_linh_hoa_o_diem",
+  "n": "Linh Hỏa Ô Diệm",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "craftP": 11.8,
+    "mpP": 18.8,
+    "matkP": 12.8
+  },
+  "lore": "Một đường rạn chia tim lửa làm hai, bên trong còn giữ vệt tro đỏ.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Địa Tâm Hỏa Tẫn Nham — `hoa_dia_tam_hoa_tan_nham`
+
+```json
+{
+  "id": "hoa_dia_tam_hoa_tan_nham",
+  "n": "Địa Tâm Hỏa Tẫn Nham",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "craftP": 16.2,
+    "defP": 22.4,
+    "matkP": 14.5
+  },
+  "lore": "Đưa lõi đá lại gần ngọn đèn sẽ nhận ra ánh lửa liếm qua mép. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Lôi Vĩ Thú Hỏa — `hoa_loi_vi_thu_hoa`
+
+```json
+{
+  "id": "hoa_loi_vi_thu_hoa",
+  "n": "Lôi Vĩ Thú Hỏa",
+  "k": "hoa",
+  "el": "loi",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "craftP": 16.2,
+    "matkP": 16.4,
+    "crit": 7.9
+  },
+  "lore": "Chạm nhẹ vào mép than, có thể nhận ra mùi vải sém sau tiếng sét.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Linh Hỏa Ảnh Nguyệt — `hoa_linh_hoa_giu_dau_chan_sau`
+
+```json
+{
+  "id": "hoa_linh_hoa_giu_dau_chan_sau",
+  "n": "Linh Hỏa Ảnh Nguyệt",
+  "k": "hoa",
+  "el": "bang",
+  "t": 4,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "craftP": 25.3,
+    "mpP": 36.4,
+    "matkP": 27.8
+  },
+  "lore": "Người trồng lan xoay chậu mỗi sáng để nhìn rõ vết cào của mèo. Dưới tim lửa còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện đưa chậu lan xuống mái",
+  "status": "active"
+}
+```
+
+## Cổ Nham Địa Tâm Hỏa — `hoa_co_nham_dia_tam_hoa`
+
+```json
+{
+  "id": "hoa_co_nham_dia_tam_hoa",
+  "n": "Cổ Nham Địa Tâm Hỏa",
+  "k": "hoa",
+  "el": "tho",
+  "t": 4,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "craftP": 17.3,
+    "defP": 20,
+    "matkP": 16.4
+  },
+  "lore": "Lúc chạng vạng trên thềm đá cổ, tiếng cát lọt qua kẽ còn vương ở lõi đá.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Hỏa Chủng Lò Sương — `hoa_hoa_chung_lo_suong`
+
+```json
+{
+  "id": "hoa_hoa_chung_lo_suong",
+  "n": "Hỏa Chủng Lò Sương",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "craftP": 20,
+    "matkP": 18.5,
+    "critDmg": 22.2,
+    "mpP": 28.7
+  },
+  "lore": "Vào giờ sương rơi, ghé gần giữa tàn tro nhận ra ánh lửa liếm qua mép. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Diệm Sa Thú Hỏa — `hoa_diem_sa_thu_hoa`
+
+```json
+{
+  "id": "hoa_diem_sa_thu_hoa",
+  "n": "Diệm Sa Thú Hỏa",
+  "k": "hoa",
+  "el": "hoa",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "craftP": 22.7,
+    "matkP": 21.5,
+    "critDmg": 23.9,
+    "mpP": 23.9
+  },
+  "lore": "Trời vừa đổi gió, ghé gần mép than có thể nhận ra tiếng than nổ trong lò.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Đồng Đỉnh Ba Chân — `dinh_dongdinh_cu`
+
+```json
+{
+  "id": "dinh_dongdinh_cu",
+  "n": "Đồng Đỉnh Ba Chân",
+  "k": "dinh",
+  "el": "tho",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "pillP": 31.3,
+    "tam": 1
+  },
+  "lore": "Thân đỉnh xanh rỉ, đáy còn vết cháy của ngàn lò đan.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Đan Lô Thiết Tằm — `dinh_dan_lo_thiet_tam`
+
+```json
+{
+  "id": "dinh_dan_lo_thiet_tam",
+  "n": "Đan Lô Thiết Tằm",
+  "k": "dinh",
+  "el": "kim",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "pillP": 35.5
+  },
+  "lore": "Đưa nắp lò lại gần ngọn đèn sẽ nhận ra mùi búa mới tôi. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Đỉnh Vũ Tuyền — `dinh_dinh_vu_tuyen`
+
+```json
+{
+  "id": "dinh_dinh_vu_tuyen",
+  "n": "Đỉnh Vũ Tuyền",
+  "k": "dinh",
+  "el": "thuy",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "pillP": 29.4
+  },
+  "lore": "Chạm nhẹ vào chân đỉnh, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Lư Hương Phong Dực — `dinh_lu_huong_phong_duc`
+
+```json
+{
+  "id": "dinh_lu_huong_phong_duc",
+  "n": "Lư Hương Phong Dực",
+  "k": "dinh",
+  "el": "phong",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "pillP": 37.2
+  },
+  "lore": "Úp lỗ thoát khói về phía đất vẫn nhận ra ánh chao như cánh chim. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đỉnh Ô Kim — `dinh_dinh_roi_trong_lan_chia_tay`
+
+```json
+{
+  "id": "dinh_dinh_roi_trong_lan_chia_tay",
+  "n": "Đỉnh Ô Kim",
+  "k": "dinh",
+  "el": "moc",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "pillP": 30
+  },
+  "lore": "Người đẩy xe chèn bánh bằng một cuốn kinh đã đọc thuộc. Thỉnh thoảng chân đỉnh còn thoảng mùi nhựa vừa rịn.",
+  "src": "Sự kiện nhặt cuốn kinh dưới bánh",
+  "status": "active"
+}
+```
+
+## Đan Lô Vải Mộc — `dinh_dan_lo_vai_moc`
+
+```json
+{
+  "id": "dinh_dan_lo_vai_moc",
+  "n": "Đan Lô Vải Mộc",
+  "k": "dinh",
+  "el": "vo",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "pillP": 32.4
+  },
+  "lore": "Vào giờ sương rơi, ghé gần nắp lò nhận ra vệt bụi từ bờ ruộng. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Lư Hương Tịnh Đăng — `dinh_lu_huong_tinh_dang`
+
+```json
+{
+  "id": "dinh_lu_huong_tinh_dang",
+  "n": "Lư Hương Tịnh Đăng",
+  "k": "dinh",
+  "el": "phat",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "pillP": 38.3,
+    "tam": 1
+  },
+  "lore": "Trời vừa đổi gió, ghé gần lỗ thoát khói có thể nhận ra vết bụi vàng của hương.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đỉnh Tia Câm — `dinh_dinh_tia_cam`
+
+```json
+{
+  "id": "dinh_dinh_tia_cam",
+  "n": "Đỉnh Tia Câm",
+  "k": "dinh",
+  "el": "loi",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "pillP": 39.7,
+    "defP": 9.8
+  },
+  "lore": "Đặt cạnh cửa sổ, chân đỉnh để lộ tiếng rền như dưới nền nhà mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đan Lô Băng Miên — `dinh_dan_lo_bang_mien`
+
+```json
+{
+  "id": "dinh_dan_lo_bang_mien",
+  "n": "Đan Lô Băng Miên",
+  "k": "dinh",
+  "el": "bang",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "pillP": 43.1,
+    "mpP": 14.2
+  },
+  "lore": "Ở nắp lò có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh xanh trên mặt băng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Lư Hương Diệm Nha — `dinh_lu_huong_diem_nha`
+
+```json
+{
+  "id": "dinh_lu_huong_diem_nha",
+  "n": "Lư Hương Diệm Nha",
+  "k": "dinh",
+  "el": "hoa",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "pillP": 38.3,
+    "tam": 1
+  },
+  "lore": "Dọc lỗ thoát khói có thể nhận ra ánh lửa liếm qua mép. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Lư Hương Tuyết Diệp — `dinh_lu_huong_cho_thuyen_don`
+
+```json
+{
+  "id": "dinh_lu_huong_cho_thuyen_don",
+  "n": "Lư Hương Tuyết Diệp",
+  "k": "dinh",
+  "el": "am",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "pillP": 56.5,
+    "ngo": 2
+  },
+  "lore": "Người đỡ đẻ hong một tấm khăn qua ba canh tuyết. Dưới lỗ thoát khói còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện trả khăn cho người đỡ đẻ",
+  "status": "active"
+}
+```
+
+## Đan Lô Thạch Tủy — `dinh_dan_lo_thach_tuy`
+
+```json
+{
+  "id": "dinh_dan_lo_thach_tuy",
+  "n": "Đan Lô Thạch Tủy",
+  "k": "dinh",
+  "el": "tho",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "pillP": 53.2,
+    "mpP": 14.2
+  },
+  "lore": "Người giữ trước từng lau nắp lò bằng vải ướt. Đến giờ vẫn còn những vết nứt nhỏ như chân chim.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Đỉnh Liên Tịch — `dinh_dinh_lien_tich`
+
+```json
+{
+  "id": "dinh_dinh_lien_tich",
+  "n": "Đỉnh Liên Tịch",
+  "k": "dinh",
+  "el": "phat",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "pillP": 38.3,
+    "ngo": 1
+  },
+  "lore": "Một đường rạn chia chân đỉnh làm hai, bên trong còn giữ hơi ấm như hạt cơm mới.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Lư Hương Lôi Tằm — `dinh_lu_huong_loi_tam`
+
+```json
+{
+  "id": "dinh_lu_huong_loi_tam",
+  "n": "Lư Hương Lôi Tằm",
+  "k": "dinh",
+  "el": "loi",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "pillP": 50,
+    "ngo": 2
+  },
+  "lore": "Đưa lỗ thoát khói lại gần ngọn đèn sẽ nhận ra một ánh chớp xanh. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đỉnh Hàn Đăng — `dinh_dinh_han_dang`
+
+```json
+{
+  "id": "dinh_dinh_han_dang",
+  "n": "Đỉnh Hàn Đăng",
+  "k": "dinh",
+  "el": "bang",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "pillP": 63,
+    "defP": 17.2
+  },
+  "lore": "Chạm nhẹ vào chân đỉnh, có thể nhận ra mùi rơm lẫn trong tuyết.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đan Lô Giấy Gió — `dinh_dan_lo_giay_gio`
+
+```json
+{
+  "id": "dinh_dan_lo_giay_gio",
+  "n": "Đan Lô Giấy Gió",
+  "k": "dinh",
+  "el": "vo",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "pillP": 46.4,
+    "ngo": 2
+  },
+  "lore": "Úp nắp lò về phía đất vẫn nhận ra mùi khói bếp vương lại. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đan Lô Bạch Lộ — `dinh_dan_lo_chon_duoi_them`
+
+```json
+{
+  "id": "dinh_dan_lo_chon_duoi_them",
+  "n": "Đan Lô Bạch Lộ",
+  "k": "dinh",
+  "el": "am",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "pillP": 77.2,
+    "mpP": 17.5,
+    "ngo": 2
+  },
+  "lore": "Người vá nồi để nguyên vết rạn mà người mẹ dùng đếm ngày. Thỉnh thoảng nắp lò còn thoảng mùi hương cũ trong buồng kín.",
+  "src": "Sự kiện tìm mảnh nồi ở bếp sau",
+  "status": "active"
+}
+```
+
+## Lư Hương Xích Đinh — `dinh_lu_huong_xich_dinh`
+
+```json
+{
+  "id": "dinh_lu_huong_xich_dinh",
+  "n": "Lư Hương Xích Đinh",
+  "k": "dinh",
+  "el": "kim",
+  "t": 3,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "pillP": 58.2,
+    "tam": 2,
+    "mpP": 16.7
+  },
+  "lore": "Vào giờ sương rơi, ghé gần lỗ thoát khói nhận ra mùi búa mới tôi. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đỉnh Giang Tủy — `dinh_dinh_giang_tuy`
+
+```json
+{
+  "id": "dinh_dinh_giang_tuy",
+  "n": "Đỉnh Giang Tủy",
+  "k": "dinh",
+  "el": "thuy",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "pillP": 68.9,
+    "defP": 16.4,
+    "mpP": 16.2
+  },
+  "lore": "Trời vừa đổi gió, ghé gần chân đỉnh có thể nhận ra vị mặn đọng trên môi.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Đỉnh Phong Mạch — `dinh_dinh_phong_mach`
+
+```json
+{
+  "id": "dinh_dinh_phong_mach",
+  "n": "Đỉnh Phong Mạch",
+  "k": "dinh",
+  "el": "phong",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "pillP": 82.4,
+    "defP": 21,
+    "ngo": 2
+  },
+  "lore": "Đặt cạnh cửa sổ, chân đỉnh để lộ ánh chao như cánh chim mỗi khi có người đi ngang.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Lư Hương Lan Giáp — `dinh_lu_huong_lan_giap`
+
+```json
+{
+  "id": "dinh_lu_huong_lan_giap",
+  "n": "Lư Hương Lan Giáp",
+  "k": "dinh",
+  "el": "moc",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "pillP": 64.7,
+    "tam": 2,
+    "mpP": 16.7
+  },
+  "lore": "Ở lỗ thoát khói có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng tơ cọ vào vỏ.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Cổ Nham Đan Lô — `dinh_co_nham_dan_lo`
+
+```json
+{
+  "id": "dinh_co_nham_dan_lo",
+  "n": "Cổ Nham Đan Lô",
+  "k": "dinh",
+  "el": "tho",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "pillP": 76.4,
+    "mpP": 18.6,
+    "tam": 3
+  },
+  "lore": "Dọc nắp lò có thể nhận ra vệt phấn đá đục. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Đỉnh Cô Nguyệt — `dinh_dinh_dua_qua_may_ban_do`
+
+```json
+{
+  "id": "dinh_dinh_dua_qua_may_ban_do",
+  "n": "Đỉnh Cô Nguyệt",
+  "k": "dinh",
+  "el": "hoa",
+  "t": 4,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "pillP": 146.3,
+    "defP": 36.4,
+    "ngo": 4
+  },
+  "lore": "Người hầu trà đếm được sáu chén, vẫn rót sang chén thứ bảy. Dưới chân đỉnh còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện rót chén trà thứ bảy",
+  "status": "active"
+}
+```
+
+## Vết Son Lư Hương — `dinh_vet_son_lu_huong`
+
+```json
+{
+  "id": "dinh_vet_son_lu_huong",
+  "n": "Vết Son Lư Hương",
+  "k": "dinh",
+  "el": "vo",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "pillP": 113.4,
+    "tam": 4,
+    "ngo": 3
+  },
+  "lore": "Người giữ trước từng lau lỗ thoát khói bằng vải ướt. Đến giờ vẫn còn mùi khói bếp vương lại.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Đan Lô Phạn Âm — `dinh_dan_lo_phan_am`
+
+```json
+{
+  "id": "dinh_dan_lo_phan_am",
+  "n": "Đan Lô Phạn Âm",
+  "k": "dinh",
+  "el": "phat",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "pillP": 87.7,
+    "mpP": 23.8,
+    "ngo": 3,
+    "tam": 3
+  },
+  "lore": "Một đường rạn chia nắp lò làm hai, bên trong còn giữ hơi ấm như hạt cơm mới.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Sa Tủy Đỉnh — `dinh_sa_tuy_dinh`
+
+```json
+{
+  "id": "dinh_sa_tuy_dinh",
+  "n": "Sa Tủy Đỉnh",
+  "k": "dinh",
+  "el": "tho",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "pillP": 80.1,
+    "ngo": 2,
+    "tam": 2,
+    "mpP": 19.8
+  },
+  "lore": "Đưa chân đỉnh lại gần ngọn đèn sẽ nhận ra vệt phấn đá đục. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Tụ Linh Trận Đồ — `tran_tulinh_do`
+
+```json
+{
+  "id": "tran_tulinh_do",
+  "n": "Tụ Linh Trận Đồ",
+  "k": "tran",
+  "el": "vo",
+  "t": 2,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "bqP": 9.8,
+    "bqSafe": 18,
+    "defP": 10.3
+  },
+  "lore": "Trải ra, linh khí quanh mười trượng chậm rãi xoáy về.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trận Kỳ Noãn Sa — `tran_tran_ky_noan_sa`
+
+```json
+{
+  "id": "tran_tran_ky_noan_sa",
+  "n": "Trận Kỳ Noãn Sa",
+  "k": "tran",
+  "el": "hoa",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "bqSafe": 13.6,
+    "bqP": 7.2
+  },
+  "lore": "Ở chân cán có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp vệt tro đỏ.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trận Đồ Thủy Liêm — `tran_tran_do_thuy_liem`
+
+```json
+{
+  "id": "tran_tran_do_thuy_liem",
+  "n": "Trận Đồ Thủy Liêm",
+  "k": "tran",
+  "el": "thuy",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "bqP": 9.5,
+    "bqSafe": 18
+  },
+  "lore": "Dọc nét mực ngoài có thể nhận ra tiếng giọt rơi vào chum. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trận Bàn Nham Giáp — `tran_tran_ban_nham_giap`
+
+```json
+{
+  "id": "tran_tran_ban_nham_giap",
+  "n": "Trận Bàn Nham Giáp",
+  "k": "tran",
+  "el": "tho",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "bqP": 10.4,
+    "bqSafe": 18
+  },
+  "lore": "Thứ đọng lại trên thớ bàn gợi mùi đất vỡ sau cơn mưa. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trận Kỳ Nguyệt Ảnh — `tran_tran_ky_giu_dau_chan_sau`
+
+```json
+{
+  "id": "tran_tran_ky_giu_dau_chan_sau",
+  "n": "Trận Kỳ Nguyệt Ảnh",
+  "k": "tran",
+  "el": "moc",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "bqSafe": 16.6,
+    "bqP": 7.2
+  },
+  "lore": "{who} quấn tay bằng rơm để bế đứa trẻ khỏi bị lạnh. Thỉnh thoảng chân cán còn thoảng vệt phấn hoa vàng nhạt.",
+  "src": "Sự kiện đưa đứa trẻ qua sân tuyết",
+  "status": "active"
+}
+```
+
+## Trận Bàn Tịnh Đăng — `tran_tran_ban_tinh_dang`
+
+```json
+{
+  "id": "tran_tran_ban_tinh_dang",
+  "n": "Trận Bàn Tịnh Đăng",
+  "k": "tran",
+  "el": "phat",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "bqP": 7.3,
+    "bqSafe": 13.5
+  },
+  "lore": "Một đường rạn chia thớ bàn làm hai, bên trong còn giữ hơi ấm như hạt cơm mới.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trận Đồ Bụi Trấu — `tran_tran_do_bui_trau`
+
+```json
+{
+  "id": "tran_tran_do_bui_trau",
+  "n": "Trận Đồ Bụi Trấu",
+  "k": "tran",
+  "el": "vo",
+  "t": 1,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "bqP": 8.8,
+    "bqSafe": 18,
+    "ngo": 1
+  },
+  "lore": "Đưa nét mực ngoài lại gần ngọn đèn sẽ nhận ra vệt bụi từ bờ ruộng. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trận Bàn Điện Tủy — `tran_tran_ban_dien_tuy`
+
+```json
+{
+  "id": "tran_tran_ban_dien_tuy",
+  "n": "Trận Bàn Điện Tủy",
+  "k": "tran",
+  "el": "loi",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "bqP": 8.5,
+    "bqSafe": 18,
+    "tam": 1
+  },
+  "lore": "Chạm nhẹ vào thớ bàn, có thể nhận ra mùi vải sém sau tiếng sét.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trận Kỳ Thau Bạc — `tran_tran_ky_thau_bac`
+
+```json
+{
+  "id": "tran_tran_ky_thau_bac",
+  "n": "Trận Kỳ Thau Bạc",
+  "k": "tran",
+  "el": "kim",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "bqSafe": 26.4,
+    "bqP": 12.6,
+    "tam": 2
+  },
+  "lore": "Úp chân cán về phía đất vẫn nhận ra những vảy sắt li ti. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trận Đồ Bạch Đống — `tran_tran_do_bach_dong`
+
+```json
+{
+  "id": "tran_tran_do_bach_dong",
+  "n": "Trận Đồ Bạch Đống",
+  "k": "tran",
+  "el": "bang",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "bqP": 10.8,
+    "bqSafe": 18,
+    "ngo": 1
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, ánh xanh trên mặt băng còn vương ở nét mực ngoài.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trận Bàn Huyền Thiết — `tran_tran_ban_cat_vao_ngay_mua`
+
+```json
+{
+  "id": "tran_tran_ban_cat_vao_ngay_mua",
+  "n": "Trận Bàn Huyền Thiết",
+  "k": "tran",
+  "el": "phong",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "bqP": 9.7,
+    "bqSafe": 18,
+    "mpP": 10.4
+  },
+  "lore": "{who} lót bậc thềm bằng rơm cho người mang chân đau. Dưới thớ bàn còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện rải rơm ở bậc thềm",
+  "status": "active"
+}
+```
+
+## Trận Kỳ Mặc Cốt — `tran_tran_ky_mac_cot`
+
+```json
+{
+  "id": "tran_tran_ky_mac_cot",
+  "n": "Trận Kỳ Mặc Cốt",
+  "k": "tran",
+  "el": "am",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "bqSafe": 22.9,
+    "bqP": 12.6,
+    "tvP": 7.7
+  },
+  "lore": "Trời vừa đổi gió, ghé gần chân cán có thể nhận ra ánh đen lẫn trong khói.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trận Đồ Phong Lạc — `tran_tran_do_phong_lac`
+
+```json
+{
+  "id": "tran_tran_do_phong_lac",
+  "n": "Trận Đồ Phong Lạc",
+  "k": "tran",
+  "el": "phong",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "bqP": 14.2,
+    "bqSafe": 23.4,
+    "ngo": 2
+  },
+  "lore": "Đặt cạnh cửa sổ, nét mực ngoài để lộ ánh chao như cánh chim mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trận Đồ Sổ Sờn — `tran_tran_do_so_son`
+
+```json
+{
+  "id": "tran_tran_do_so_son",
+  "n": "Trận Đồ Sổ Sờn",
+  "k": "tran",
+  "el": "vo",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "bqP": 18.3,
+    "bqSafe": 29.7,
+    "ngo": 2
+  },
+  "lore": "Ở nét mực ngoài có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cửa gỗ bị gió đẩy.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trận Kỳ Băng Nham — `tran_tran_ky_bang_nham`
+
+```json
+{
+  "id": "tran_tran_ky_bang_nham",
+  "n": "Trận Kỳ Băng Nham",
+  "k": "tran",
+  "el": "bang",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "bqSafe": 27.1,
+    "bqP": 12.6,
+    "defP": 12
+  },
+  "lore": "Dọc chân cán có thể nhận ra những hạt băng mịn. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Trận Bàn Bạch Châm — `tran_tran_ban_bach_cham`
+
+```json
+{
+  "id": "tran_tran_ban_bach_cham",
+  "n": "Trận Bàn Bạch Châm",
+  "k": "tran",
+  "el": "kim",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "bqP": 16.4,
+    "bqSafe": 29.7,
+    "mpP": 17.2
+  },
+  "lore": "Thứ đọng lại trên thớ bàn gợi tiếng đồng ngân dưới mưa. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trận Đồ Tàn Dương — `tran_tran_do_roi_tay_luc_rang_dong`
+
+```json
+{
+  "id": "tran_tran_do_roi_tay_luc_rang_dong",
+  "n": "Trận Đồ Tàn Dương",
+  "k": "tran",
+  "el": "hoa",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "bqP": 13.6,
+    "bqSafe": 23.4,
+    "ngo": 2,
+    "tam": 2
+  },
+  "lore": "Người bán trầu rửa chiếc bình một lần nữa trước ngày nghỉ chợ. Thỉnh thoảng nét mực ngoài còn thoảng ánh lửa liếm qua mép.",
+  "src": "Sự kiện mang bình qua phiên chợ cũ",
+  "status": "active"
+}
+```
+
+## Trận Kỳ Hắc Nhung — `tran_tran_ky_hac_nhung`
+
+```json
+{
+  "id": "tran_tran_ky_hac_nhung",
+  "n": "Trận Kỳ Hắc Nhung",
+  "k": "tran",
+  "el": "am",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "bqSafe": 22.9,
+    "bqP": 12.6,
+    "tam": 2,
+    "defP": 13
+  },
+  "lore": "Một đường rạn chia chân cán làm hai, bên trong còn giữ vệt bóng mọc về phía sáng.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Trận Bàn Nhất Kệ — `tran_tran_ban_nhat_ke`
+
+```json
+{
+  "id": "tran_tran_ban_nhat_ke",
+  "n": "Trận Bàn Nhất Kệ",
+  "k": "tran",
+  "el": "phat",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "bqP": 17.2,
+    "bqSafe": 29.7,
+    "mpP": 15.2,
+    "tam": 2
+  },
+  "lore": "Đưa thớ bàn lại gần ngọn đèn sẽ nhận ra tiếng mõ ngân rất khẽ. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Trận Kỳ Lôi Vĩ — `tran_tran_ky_loi_vi`
+
+```json
+{
+  "id": "tran_tran_ky_loi_vi",
+  "n": "Trận Kỳ Lôi Vĩ",
+  "k": "tran",
+  "el": "loi",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "bqSafe": 38.2,
+    "bqP": 19.8,
+    "tam": 3,
+    "tvP": 13.9
+  },
+  "lore": "Chạm nhẹ vào chân cán, có thể nhận ra mùi vải sém sau tiếng sét.",
+  "src": "Đấu giá",
+  "status": "active"
+}
+```
+
+## Trận Bàn Lãng Hồi — `tran_tran_ban_lang_hoi`
+
+```json
+{
+  "id": "tran_tran_ban_lang_hoi",
+  "n": "Trận Bàn Lãng Hồi",
+  "k": "tran",
+  "el": "thuy",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "bqP": 16.4,
+    "bqSafe": 29.7,
+    "mpP": 17.2,
+    "tam": 2
+  },
+  "lore": "Úp thớ bàn về phía đất vẫn nhận ra vị mặn đọng trên môi. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Đằng Châu Trận Đồ — `tran_dang_chau_tran_do`
+
+```json
+{
+  "id": "tran_dang_chau_tran_do",
+  "n": "Đằng Châu Trận Đồ",
+  "k": "tran",
+  "el": "moc",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "bqP": 23.8,
+    "bqSafe": 37.8,
+    "ngo": 3,
+    "tam": 2
+  },
+  "lore": "Lúc chạng vạng trên phế trạch, tiếng tơ cọ vào vỏ còn vương ở nét mực ngoài.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trận Kỳ Kim Tuyến — `tran_tran_ky_tim_ve_qua_mua`
+
+```json
+{
+  "id": "tran_tran_ky_tim_ve_qua_mua",
+  "n": "Trận Kỳ Kim Tuyến",
+  "k": "tran",
+  "el": "tho",
+  "t": 4,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "bqSafe": 68.5,
+    "bqP": 30.6,
+    "tam": 4,
+    "tvP": 23.8
+  },
+  "lore": "{who} giắt một nhánh mùi tàu để người nhà nhận ra mình trong khói. Dưới chân cán còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện tìm lối qua nhà cháy",
+  "status": "active"
+}
+```
+
+## Phạn Âm Trận Đồ — `tran_phan_am_tran_do`
+
+```json
+{
+  "id": "tran_phan_am_tran_do",
+  "n": "Phạn Âm Trận Đồ",
+  "k": "tran",
+  "el": "phat",
+  "t": 4,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "bqP": 26.7,
+    "bqSafe": 46.8,
+    "ngo": 4,
+    "tam": 3
+  },
+  "lore": "Trời vừa đổi gió, ghé gần nét mực ngoài có thể nhận ra vết bụi vàng của hương.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trận Bàn Trúc Châm — `tran_tran_ban_truc_cham`
+
+```json
+{
+  "id": "tran_tran_ban_truc_cham",
+  "n": "Trận Bàn Trúc Châm",
+  "k": "tran",
+  "el": "moc",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "bqP": 27.5,
+    "bqSafe": 46.8,
+    "mpP": 29.2,
+    "tam": 3,
+    "defP": 27
+  },
+  "lore": "Đặt cạnh cửa sổ, thớ bàn để lộ những thớ gỗ ướt mỗi khi có người đi ngang.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Khói Bếp Trận Kỳ — `tran_khoi_bep_tran_ky`
+
+```json
+{
+  "id": "tran_khoi_bep_tran_ky",
+  "n": "Khói Bếp Trận Kỳ",
+  "k": "tran",
+  "el": "vo",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "bqSafe": 35.5,
+    "bqP": 19.8,
+    "tam": 3,
+    "defP": 21.8,
+    "mpP": 20.4
+  },
+  "lore": "Ở chân cán có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp tiếng cửa gỗ bị gió đẩy.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Túi Vải Thô Thêu Chỉ — `tui_vaithoi`
+
+```json
+{
+  "id": "tui_vaithoi",
+  "n": "Túi Vải Thô Thêu Chỉ",
+  "k": "tui",
+  "el": "vo",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 23.4
+  },
+  "lore": "Đường chỉ vụng về, chắc là mẹ ai đó khâu cho.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Càn Khôn Đại Phong Mạch — `tui_can_khon_dai_phong_mach`
+
+```json
+{
+  "id": "tui_can_khon_dai_phong_mach",
+  "n": "Càn Khôn Đại Phong Mạch",
+  "k": "tui",
+  "el": "phong",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "stonesP": 20.9,
+    "pillSlot": 2
+  },
+  "lore": "Người giữ trước từng lau đáy túi bằng vải ướt. Đến giờ vẫn còn ánh chao như cánh chim.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trữ Vật Giới Liên Vũ — `tui_tru_vat_gioi_lien_vu`
+
+```json
+{
+  "id": "tui_tru_vat_gioi_lien_vu",
+  "n": "Trữ Vật Giới Liên Vũ",
+  "k": "tui",
+  "el": "thuy",
+  "t": 0,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "stonesP": 19.6,
+    "pillSlot": 2
+  },
+  "lore": "Một đường rạn chia viền giới chỉ làm hai, bên trong còn giữ ánh loang như vảy cá.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trữ Vật Đại Thiên Ti — `tui_tru_vat_dai_nhat_sau_hoi_mo`
+
+```json
+{
+  "id": "tui_tru_vat_dai_nhat_sau_hoi_mo",
+  "n": "Trữ Vật Đại Thiên Ti",
+  "k": "tui",
+  "el": "moc",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 1,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 23.4
+  },
+  "lore": "Người thợ nề vạch dấu tay trẻ con trước khi phủ vôi tường. Chỗ miệng túi vừa mòn, như thể có người vẫn thường đưa tay vuốt.",
+  "src": "Sự kiện cạo một vạt vôi tường",
+  "status": "active"
+}
+```
+
+## Trữ Vật Giới Kim Kệ — `tui_tru_vat_gioi_kim_ke`
+
+```json
+{
+  "id": "tui_tru_vat_gioi_kim_ke",
+  "n": "Trữ Vật Giới Kim Kệ",
+  "k": "tui",
+  "el": "phat",
+  "t": 0,
+  "req": 1,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "stonesP": 28.1,
+    "pillSlot": 2
+  },
+  "lore": "Chạm nhẹ vào viền giới chỉ, có thể nhận ra mùi trầm đọng dưới mái.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Càn Khôn Đại Hàn Tinh — `tui_can_khon_dai_han_tinh`
+
+```json
+{
+  "id": "tui_can_khon_dai_han_tinh",
+  "n": "Càn Khôn Đại Hàn Tinh",
+  "k": "tui",
+  "el": "bang",
+  "t": 1,
+  "req": 0,
+  "reg": 0,
+  "u": 0,
+  "fx": {
+    "stonesP": 19.1,
+    "pillSlot": 2,
+    "mpP": 7.3
+  },
+  "lore": "Úp đáy túi về phía đất vẫn nhận ra tiếng sương đóng lách tách. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trữ Vật Đại U Tơ — `tui_tru_vat_dai_u_to`
+
+```json
+{
+  "id": "tui_tru_vat_dai_u_to",
+  "n": "Trữ Vật Đại U Tơ",
+  "k": "tui",
+  "el": "am",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 23.4,
+    "van": 1
+  },
+  "lore": "Lúc chạng vạng trên sườn núi, vệt bóng mọc về phía sáng còn vương ở miệng túi.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Càn Khôn Đại Diệm Sa — `tui_can_khon_dai_diem_sa`
+
+```json
+{
+  "id": "tui_can_khon_dai_diem_sa",
+  "n": "Càn Khôn Đại Diệm Sa",
+  "k": "tui",
+  "el": "hoa",
+  "t": 1,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 30.6,
+    "van": 2
+  },
+  "lore": "Vào giờ sương rơi, ghé gần đáy túi nhận ra ánh lửa liếm qua mép. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Mua ở tiệm",
+  "status": "active"
+}
+```
+
+## Trữ Vật Đại Long Lân — `tui_tru_vat_dai_ven_mot_goc_rem`
+
+```json
+{
+  "id": "tui_tru_vat_dai_ven_mot_goc_rem",
+  "n": "Trữ Vật Đại Long Lân",
+  "k": "tui",
+  "el": "tho",
+  "t": 1,
+  "req": 1,
+  "reg": 1,
+  "u": 1,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 23.4,
+    "van": 1
+  },
+  "lore": "Người trông mộ châm lửa bằng tấm giấy ghi tuổi mình. Thỉnh thoảng miệng túi còn thoảng tiếng cát lọt qua kẽ.",
+  "src": "Sự kiện châm đèn trước ngôi mộ nhỏ",
+  "status": "active"
+}
+```
+
+## Trữ Vật Giới Bụi Trấu — `tui_tru_vat_gioi_bui_trau`
+
+```json
+{
+  "id": "tui_tru_vat_gioi_bui_trau",
+  "n": "Trữ Vật Giới Bụi Trấu",
+  "k": "tui",
+  "el": "vo",
+  "t": 2,
+  "req": 2,
+  "reg": 1,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 30.6,
+    "van": 2
+  },
+  "lore": "Đặt cạnh cửa sổ, viền giới chỉ để lộ mùi khói bếp vương lại mỗi khi có người đi ngang.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trữ Vật Giới Sắt Giếng — `tui_tru_vat_gioi_sat_gieng`
+
+```json
+{
+  "id": "tui_tru_vat_gioi_sat_gieng",
+  "n": "Trữ Vật Giới Sắt Giếng",
+  "k": "tui",
+  "el": "kim",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "stonesP": 37.2,
+    "pillSlot": 2,
+    "van": 2
+  },
+  "lore": "Ở viền giới chỉ có một chỗ nhẵn như vừa qua nhiều lượt tay. Người nhặt lên bắt gặp ánh bạc nhạt trên mép.",
+  "src": "Rơi từ thủ lĩnh",
+  "status": "active"
+}
+```
+
+## Càn Khôn Đại Lôi Vũ — `tui_can_khon_dai_loi_vu`
+
+```json
+{
+  "id": "tui_can_khon_dai_loi_vu",
+  "n": "Càn Khôn Đại Lôi Vũ",
+  "k": "tui",
+  "el": "loi",
+  "t": 2,
+  "req": 3,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "stonesP": 38.8,
+    "pillSlot": 2,
+    "mpP": 19.4
+  },
+  "lore": "Dọc đáy túi có thể nhận ra một ánh chớp xanh. Đến sáng, chỗ ấy vẫn lạnh tay.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Trữ Vật Đại Huyết Đăng — `tui_tru_vat_dai_huyet_dang`
+
+```json
+{
+  "id": "tui_tru_vat_dai_huyet_dang",
+  "n": "Trữ Vật Đại Huyết Đăng",
+  "k": "tui",
+  "el": "hoa",
+  "t": 2,
+  "req": 2,
+  "reg": 2,
+  "u": 0,
+  "fx": {
+    "stonesP": 33.4,
+    "pillSlot": 2,
+    "van": 2
+  },
+  "lore": "Thứ đọng lại trên miệng túi gợi mùi tàn hương vừa tắt. Chủ cũ lấy đó làm dấu để tìm trong tối.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Càn Khôn Đại Mộc Tâm — `tui_can_khon_dai_chua_mot_duong_khau`
+
+```json
+{
+  "id": "tui_can_khon_dai_chua_mot_duong_khau",
+  "n": "Càn Khôn Đại Mộc Tâm",
+  "k": "tui",
+  "el": "tho",
+  "t": 3,
+  "req": 2,
+  "reg": 2,
+  "u": 1,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 30.6,
+    "van": 2,
+    "tam": 2
+  },
+  "lore": "{who} lót bậc thềm bằng rơm cho người mang chân đau. Đến giờ đáy túi còn giữ những vết nứt nhỏ như chân chim.",
+  "src": "Sự kiện rải rơm ở bậc thềm",
+  "status": "active"
+}
+```
+
+## Trữ Vật Giới Mặc Cốt — `tui_tru_vat_gioi_mac_cot`
+
+```json
+{
+  "id": "tui_tru_vat_gioi_mac_cot",
+  "n": "Trữ Vật Giới Mặc Cốt",
+  "k": "tui",
+  "el": "am",
+  "t": 3,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 39.6,
+    "van": 2,
+    "mpP": 16.2
+  },
+  "lore": "Một đường rạn chia viền giới chỉ làm hai, bên trong còn giữ vệt bóng mọc về phía sáng.",
+  "src": "Luyện khí",
+  "status": "active"
+}
+```
+
+## Trữ Vật Đại Viên Âm — `tui_tru_vat_dai_vien_am`
+
+```json
+{
+  "id": "tui_tru_vat_dai_vien_am",
+  "n": "Trữ Vật Đại Viên Âm",
+  "k": "tui",
+  "el": "phat",
+  "t": 3,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 50.4,
+    "van": 3,
+    "tam": 2
+  },
+  "lore": "Đưa miệng túi lại gần ngọn đèn sẽ nhận ra tiếng mõ ngân rất khẽ. Người chủ trước thường lấy vải che chỗ ấy.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Trữ Vật Giới Trì Châu — `tui_tru_vat_gioi_tri_chau`
+
+```json
+{
+  "id": "tui_tru_vat_gioi_tri_chau",
+  "n": "Trữ Vật Giới Trì Châu",
+  "k": "tui",
+  "el": "thuy",
+  "t": 4,
+  "req": 3,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 39.6,
+    "van": 2,
+    "mpP": 17.3
+  },
+  "lore": "Chạm nhẹ vào viền giới chỉ, có thể nhận ra mùi nước mưa đọng trên ngói.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Tùng Mặc Trữ Vật Đại — `tui_tung_mac_tru_vat_dai`
+
+```json
+{
+  "id": "tui_tung_mac_tru_vat_dai",
+  "n": "Tùng Mặc Trữ Vật Đại",
+  "k": "tui",
+  "el": "moc",
+  "t": 4,
+  "req": 4,
+  "reg": 3,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 50.4,
+    "tvP": 13.9,
+    "mpP": 17.4
+  },
+  "lore": "Úp miệng túi về phía đất vẫn nhận ra những thớ gỗ ướt. Chỗ đặt xuống có một vệt hình bán nguyệt.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```
+
+## Càn Khôn Đại Ngọc Lộ — `tui_can_khon_dai_danh_phan_nguoi_vang`
+
+```json
+{
+  "id": "tui_can_khon_dai_danh_phan_nguoi_vang",
+  "n": "Càn Khôn Đại Ngọc Lộ",
+  "k": "tui",
+  "el": "phong",
+  "t": 4,
+  "req": 6,
+  "reg": 4,
+  "u": 1,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 77.4,
+    "mpP": 34,
+    "van": 4
+  },
+  "lore": "Người đun thuốc thức đến lúc ấm nứt vì đợi tiếng chân về. Dưới đáy túi còn dính bụi từ ngày ấy.",
+  "src": "Sự kiện nhặt ấm thuốc ở hiên",
+  "status": "active"
+}
+```
+
+## Hàn Mặc Trữ Vật Đại — `tui_han_mac_tru_vat_dai`
+
+```json
+{
+  "id": "tui_han_mac_tru_vat_dai",
+  "n": "Hàn Mặc Trữ Vật Đại",
+  "k": "tui",
+  "el": "bang",
+  "t": 5,
+  "req": 5,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 63,
+    "van": 3,
+    "mpP": 26,
+    "defP": 23.9
+  },
+  "lore": "Vào giờ sương rơi, ghé gần miệng túi nhận ra những hạt băng mịn. Tới lúc gà gáy mới tan hẳn.",
+  "src": "Rơi từ yêu thú",
+  "status": "active"
+}
+```
+
+## Càn Khôn Đại Hắc Thoa — `tui_can_khon_dai_hac_thoa`
+
+```json
+{
+  "id": "tui_can_khon_dai_hac_thoa",
+  "n": "Càn Khôn Đại Hắc Thoa",
+  "k": "tui",
+  "el": "kim",
+  "t": 5,
+  "req": 4,
+  "reg": 4,
+  "u": 0,
+  "fx": {
+    "pillSlot": 2,
+    "stonesP": 50.4,
+    "mpP": 18.6,
+    "van": 3,
+    "tvP": 11.6
+  },
+  "lore": "Trời vừa đổi gió, ghé gần đáy túi có thể nhận ra những vảy sắt li ti.",
+  "src": "Bí cảnh",
+  "status": "active"
+}
+```

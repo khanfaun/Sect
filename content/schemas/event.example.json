@@ -1,0 +1,58 @@
+{
+  "id": "example_nguoi_va_luoi",
+  "name": "Mắt lưới vừa khép",
+  "kind": "event",
+  "theme": "Sinh kế",
+  "emotion": "Ấm áp",
+  "tags": [
+    "doi-song"
+  ],
+  "trigger": {
+    "source": "explore",
+    "places": [
+      "tran",
+      "song"
+    ],
+    "levels": [
+      0
+    ],
+    "time": {
+      "part": [
+        "sang",
+        "chieu"
+      ]
+    },
+    "once": true,
+    "special": false,
+    "weight": 1
+  },
+  "actors": {},
+  "setting": {
+    "description": "Bến nhỏ nơi người dân vá lưới"
+  },
+  "text": [
+    "Một người dân đang kéo tấm lưới rách lên bến. Họ nhờ ngươi giữ một đầu để vá chỗ mắc đá."
+  ],
+  "choices": [
+    {
+      "i": "🤲",
+      "l": "Ở lại giữ lưới",
+      "t": "Ngươi giữ lưới cho họ vá xong. Trước khi rời bến, cả hai cùng kéo thử các nút mới.",
+      "e": {
+        "h": 2,
+        "karma": 2
+      }
+    },
+    {
+      "i": "🚶",
+      "l": "Xin lỗi rồi đi tiếp",
+      "t": "Ngươi chào rồi rời bến. Người vá lưới buộc đầu còn lại vào cọc, tiếp tục công việc."
+    }
+  ],
+  "logic": {},
+  "origin": {
+    "file": "mẫu, không nạp vào manifest",
+    "ref": "example_nguoi_va_luoi",
+    "commit": "example"
+  }
+}

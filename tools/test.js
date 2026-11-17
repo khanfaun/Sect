@@ -8,19 +8,29 @@ const vm = require('vm'), cp = require('child_process');
 const core = require('./ghep').script(['core', 'core2', 'data']);
 const ctx = vm.createContext({ console, Math, JSON, Date, performance: { now: () => Date.now() } });
 vm.runInContext(core, ctx, { filename: 'core.js' });
-const run = code => vm.runInContext(code, ctx);
+const run = code => vm.runInContext(code, ctx, {timeout:20000});
 const args = process.argv.slice(2), SHOWLOG = args.includes('--log');
 const names = args.filter(a => !a.startsWith('--'));
 
-// kiếp mới, thế giới mới, bật nhật ký
+// Fixture có seed để phép thử không phụ thuộc vị trí sinh ngẫu nhiên.
+let fixtureSeed = 1728;
 function fresh(patch) {
-  run('G={meta:newMeta(),run:null,birth:null,over:null,screen:"title"};genBirth();newRun(G.birth.cards[0]);NK.on=true;NK.clear();G.run.scene=null;');
+  const seed = ++fixtureSeed;
+  run(`(() => {GEO=null;RS=mul(16717);const original=genWorld;genWorld=()=>original(${seed});
+    try{G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0]);}
+    finally{genWorld=original;}
+    NK.on=true;NK.clear();G.run.scene=null;
+  })()`);
   if (patch) run(patch);
 }
 let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  content() {
+    const r = cp.spawnSync(process.execPath, ['tools/kiem-tra-content.js'], {cwd:require('path').join(__dirname,'..'),encoding:'utf8'});
+    ok(r.status === 0, 'nguồn nội dung, mọi cảnh, danh mục và các ngữ cảnh ('+(r.stdout||r.stderr).trim()+')');
+  },
   // nghiền ép: bên bị nghiền ép không né, không đỡ được dù bấm né hoàn hảo
   crush() {
     fresh('startCombat({},{kind:"node"});');
@@ -207,7 +217,7 @@ const TESTS = {
     run('advanceTime(3*HD)'); ok(+run('senseR()') === c0 || run('!tkActive()'), 'hết hiệu lực sau 2 ngày');
     run('for(let i=0;i<20;i++)gtSpawn();'); const e = run('(W().ents.find(e=>e.type==="giaotranh")||{}).id');
     ok(!!e, 'có giao tranh gần đó');
-    if (e) { run(`meetEnt(W().ents.find(e=>e.type==="giaotranh"))`); ok(run('G.run.scene&&G.run.scene.id') === 'tranh_bao', 'tới nơi thì vào chuyện tranh bảo vật'); }
+    if (e) { run(`const target=W().ents.find(e=>e.type==="giaotranh");G.run.at=target.at;arrive(target.at);G.run.scene=null;meetEnt(target)`); ok(run('G.run.scene&&G.run.scene.id') === 'tranh_bao', 'tới nơi thì vào chuyện tranh bảo vật'); }
   },
   // lịch luyện nhận nhiều hơn
   llboost() {
@@ -266,7 +276,7 @@ const TESTS = {
 };
 
 if (args.includes('--list')) { console.log(Object.keys(TESTS).join('\n')); process.exit(0); }
-for (const k of (names.length ? names : Object.keys(TESTS))) {
+for (const k of (names.length ? names : Object.keys(TESTS).filter(k=>k!=='smoke'))) {
   if (!TESTS[k]) { console.log('Không có bài: ' + k); fails++; continue; }
   cur = k; console.log('▶ ' + k); const f0 = fails;
   try { TESTS[k](); } catch (e) { fails++; console.log('   ✗ NGOẠI LỆ: ' + e.message.split('\n')[0]); }

@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "delivery_1",
+      "name": "Người nhận vắng nhà",
+      "kind": "quest-door",
+      "tags": [],
+      "trigger": {
+        "source": "quest-door",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Người nhận vắng nhà. Hàng xóm bảo chiều mai mới về. Ngươi đành đợi một ngày.",
+      "choices": [],
+      "logic": {
+        "questKinds": [
+          "den"
+        ],
+        "run": {
+          "$hook": "q_QDOOR_0_go"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "delivery_1",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "delivery_2",
+      "name": "Kẻ lạ đòi hàng",
+      "kind": "quest-door",
+      "tags": [],
+      "trigger": {
+        "source": "quest-door",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Ngay trước cửa nhà người nhận, một gã lạ mặt chặn ngươi lại, đòi món hàng.",
+      "choices": [],
+      "logic": {
+        "questKinds": [
+          "den"
+        ],
+        "run": {
+          "$hook": "q_QDOOR_1_go"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "delivery_2",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "delivery_3",
+      "name": "Bữa cơm cảm tạ",
+      "kind": "quest-door",
+      "tags": [],
+      "trigger": {
+        "source": "quest-door",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Người nhận mừng rỡ, nhất quyết giữ ngươi lại ăn bữa cơm, dúi thêm quà.",
+      "choices": [],
+      "logic": {
+        "questKinds": [
+          "den"
+        ],
+        "run": {
+          "$hook": "q_QDOOR_2_go"
+        }
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "delivery_3",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao nhiệm vụ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

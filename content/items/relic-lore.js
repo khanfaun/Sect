@@ -1,0 +1,4 @@
+// Nguồn chuẩn: RELIC_LORE. Luật xử lý ở src/game/core/02-tin-don-giang-ho.js.
+const RELIC_LORE = [
+  'Tương truyền là di vật của {$who}, {$sect}.','Trên thân khắc một hàng chữ nhỏ đã mờ: “{motto}”.','Có vết nứt chạy dọc, như từng đỡ một đòn rất nặng.','Cầm lên thấy ấm, như vẫn còn hơi người.','Do thợ rèn {$who} ở {$pl} luyện trong bốn mươi chín ngày.','Nghe nói từng qua tay bảy chủ nhân, không ai sống quá trăm tuổi.','Khi trăng tròn, nó khẽ ngân lên như hát.','Đáy có con dấu của Vạn Bảo Thương Hội.','Bị chôn dưới đất trăm năm, gỉ sét chỉ phủ một lớp mỏng.','Lúc chạm vào, ngươi thoáng nghe tiếng ai thở dài.','Hoa văn mây cuộn, tay nghề ấy nay không còn ai làm được.','Người bán thề sống thề chết là đồ thượng cổ. Ngươi bán tín bán nghi.','Có dính một vệt máu khô, lau mãi không sạch.','Mùi trầm hương thoang thoảng, không biết từ đâu ra.'
+];

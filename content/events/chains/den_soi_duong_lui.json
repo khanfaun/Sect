@@ -1,0 +1,493 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_den_soi_duong_lui_1",
+      "name": "Bấc quay về phía thấp",
+      "kind": "story",
+      "tags": [
+        "Trầm buồn"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "người giữ đèn",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "tu sĩ",
+          "alignment": "context"
+        }
+      },
+      "text": "Người giữ đèn {$a.ten} châm một ngọn soi xuống đường lui, trong khi tu sĩ {$b.ten} cần cả bình dầu để tìm lối lên. Bấc cong sẵn về phía thấp, trên đầu có một đốm than.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp dầu để giữ cả hai lối",
+          "t": "Ngươi mua thêm dầu giữ cả đèn lên lẫn đèn xuống. Người giữ đèn thắp thử hai ngọn, tu sĩ nhìn rõ đường rồi mới khởi hành. Lão dặn hắn nhớ vị trí ngọn đèn thấp, đi xa còn biết chỗ quay về.",
+          "e": {
+            "karma": 4
+          },
+          "cost": {
+            "st": 22
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Đổ dầu vào đèn đi lên",
+          "t": "Ngươi và {$b.ten} thấy rõ đường. Sau lưng, {$a.ten} ép bấc tắt xuống đĩa.",
+          "e": {
+            "karma": -2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Có người từ trên cao gõ ba tiếng vào lan can, phía dưới không đáp.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_den_soi_duong_lui_1",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "den_soi_duong_lui",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chọn đường tu",
+      "setting": {
+        "description": "Trạm đèn ở Cửu Thiên Cổ Lộ",
+        "historyCondition": "không"
+      },
+      "emotion": "Trầm buồn"
+    },
+    {
+      "id": "ch_den_soi_duong_lui_2",
+      "name": "Người mang đèn bằng hai tay",
+      "kind": "story",
+      "tags": [
+        "Cảm động"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Tu sĩ",
+          "alignment": "context"
+        }
+      },
+      "text": "Tu sĩ {$b.ten} quay lại vì muốn xuống thăm người nhà. Hắn chưa biết đèn soi lối lui phải cầm thấp, ngọn lửa đang quệt vào tay áo.",
+      "choices": [
+        {
+          "i": "🗣️",
+          "l": "Dẫn hắn xuống đoạn đầu",
+          "t": "Ngươi dẫn hắn xuống đoạn đầu, lỡ cửa lên mở trong ngày. Tới chỗ tự nhận ra đường, hắn hạ đèn, cảm tạ rồi đi tiếp. Người giữ đèn rủ ngươi về trạm chờ lượt sau.",
+          "e": {
+            "karma": 4,
+            "h": 24,
+            "an": [
+              "a",
+              "người mang đèn bằng hai tay"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Đổi đường về riêng lấy ngọn đèn chung",
+          "t": "Ngươi chỉ cho hắn một lối riêng về nhà, nhận ngọn đèn của trạm làm vật dẫn đường. Hắn có thể đi, nhưng khách tới sau không còn đèn dùng chung. Người giữ đèn đứng chờ ngươi trả, ngươi không hẹn ngày.",
+          "e": {
+            "karma": -1,
+            "namedRelic": {
+              "k": "dang",
+              "name": "Đèn Dẫn Đường Chung",
+              "lore": "Ngươi chỉ cho hắn một lối riêng về nhà, nhận ngọn đèn của trạm làm vật dẫn đường. Hắn có thể đi, nhưng khách tới sau không còn đèn dùng chung. Người giữ đèn đứng chờ ngươi trả, ngươi không hẹn ngày."
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Hắn chậm rãi hạ tay. Vết cháy trên áo còn bốc một sợi khói.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_den_soi_duong_lui_2",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "den_soi_duong_lui",
+        "part": "2",
+        "waitHours": 2160,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chọn đường tu",
+      "setting": {
+        "description": "Sân đổi đường ở Cửu Thiên Cổ Lộ",
+        "historyCondition": "phần 1 chọn “Góp dầu để giữ cả hai lối” · vài tháng sau · sân đổi đường"
+      },
+      "emotion": "Cảm động"
+    },
+    {
+      "id": "ch_den_soi_duong_lui_2b",
+      "name": "Lối xuống ở trong tay",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Tu sĩ",
+          "alignment": "context"
+        }
+      },
+      "text": "Tu sĩ {$b.ten} muốn xuống nhưng chỉ nhớ hướng ngọn lửa từng tắt. Hắn vạch đường lên lòng bàn tay, nét cuối cùng quặp vào ngón cái.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Chia lửa hộ thân cho hắn thử lại",
+          "t": "Ngươi truyền linh hỏa vào nét đường hắn đã vạch. Hơi lạnh phản lại làm ngực đau nhói, ngươi vẫn giữ tới khi hắn tìm được lối thật. Hắn gọi thêm người theo xuống, còn ngươi ở lại dưỡng khí.",
+          "e": {
+            "karma": 4,
+            "hp": "-10%"
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Bán cho hắn một lối xuống riêng",
+          "t": "Hắn trả bằng vật đã lấy ở tầng trên. Người theo sau hỏi đường, ngươi chỉ thấy bàn tay hắn khép lại.",
+          "e": {
+            "karma": -3,
+            "relic": 0
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Hắn đặt lòng bàn tay lên đá, chờ hơi ấm vạch đường.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_den_soi_duong_lui_2b",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "den_soi_duong_lui",
+        "part": "2b",
+        "waitHours": 2160,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chọn đường tu",
+      "setting": {
+        "description": "Gờ đá ở Cửu Thiên Cổ Lộ",
+        "historyCondition": "phần 1 chọn “Đổ dầu vào đèn đi lên” · vài tháng sau · gờ đá trên cao"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_den_soi_duong_lui_3",
+      "name": "Đường cho người đã đi xa",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người giữ đèn",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "tu sĩ",
+          "alignment": "context"
+        }
+      },
+      "text": "Một đoàn tu sĩ muốn quay xuống sau khi cửa lên khép. Nếu từng có đèn hoặc lửa chia, tu sĩ {$b.ten} biết đưa người xuống từng tốp. Nếu ngươi từng giữ đèn hoặc bán đường riêng, họ đứng chờ ngươi mở lối.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Đốt một phần đạo hạnh dựng đường lui chung",
+          "t": "Ngươi dùng một phần tu vi mở đường lui cho cả đoàn. Người biết lối xuống đi trước dẫn đường, người khỏe dìu người yếu. Khi đường khép, tu sĩ cuối đã về tới trạm; ngươi ngồi xuống dưỡng thần.",
+          "e": {
+            "karma": 4,
+            "tv": -4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Gom lễ vật rồi mở đường theo lượt",
+          "t": "Ngươi có linh thạch, chỉ người trả đủ được qua trước khi ánh tắt. Bên mép đá còn một túi vải rỗng.",
+          "e": {
+            "st": 30,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Người giữ đèn {$a.ten} nhấc một đĩa không dầu. Đám người vẫn dạt sang hai bên cho lão qua.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_den_soi_duong_lui_3",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "den_soi_duong_lui",
+        "part": "3",
+        "waitHours": 8640,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Đường lui",
+      "setting": {
+        "description": "Mái đèn ở Cửu Thiên Cổ Lộ",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · một năm sau · mái đèn bỏ trống"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_den_soi_duong_lui_4",
+      "name": "Một đốm lửa nhìn từ dưới",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "người giữ đèn",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Tu sĩ",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu từng mở đường chung, người về góp dầu đặt đèn mới. Nếu từng thu lễ, tu sĩ {$b.ten} lấy dầu riêng đốt ở bậc đầu. Người đứng đợi vẫn giữ những túi đã từng đem lên.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Trao phần dầu hoặc lễ vật cho người giữ đèn {$a.ten}",
+          "t": "Lão giữ lửa cho người đi hai chiều. Bấc cắt thành hai đầu, đầu quay xuống cháy trước.",
+          "e": {
+            "karma": 4
+          },
+          "cost": {
+            "st": 22
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Dựng lối có người trông bằng phí qua đường",
+          "t": "Đường giữ được lâu và ngươi có phần thu. {$b.ten} chừa dưới đèn một bậc cho người chưa trả nghỉ chân.",
+          "e": {
+            "st": 30
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi chào người giữ đèn rồi đi tiếp. Sau lưng, hai ngọn đèn vẫn cháy; người lên và người xuống đã biết tự nhường đường cho nhau.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_den_soi_duong_lui_4",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "den_soi_duong_lui",
+        "part": "4",
+        "waitHours": 25920,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện người quay về",
+      "setting": {
+        "description": "Bậc đầu Cửu Thiên Cổ Lộ",
+        "historyCondition": "phần 3 chọn “Đốt một phần đạo hạnh dựng đường lui chung” hoặc “Gom lễ vật rồi mở đường theo lượt” · vài năm sau · bậc đầu cổ lộ"
+      },
+      "emotion": "Lắng dịu"
+    }
+  ]
+}

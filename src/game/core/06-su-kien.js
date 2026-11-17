@@ -8,13 +8,13 @@ function chkChance(chk){
   const val=s[k]!=null?s[k]:0;const d=dc+rT()*2;
   return clamp(0.5+(val-d)*0.05+s.van*0.004+((s.fx.chkP||0)/100),0.08,0.95);
 }
-const CHKN={tp:'Thân pháp',ngo:'Ngộ tính',tam:'Đạo tâm',van:'Khí vận',root:'Linh căn'};
-const CHKI={tp:'🌀',ngo:'🧠',tam:'🪷',van:'🍀',root:'💠'};
-function costOk(c){if(!c)return true;const r=G.run,s=S();if(c.st&&r.st<Math.max(1,Math.round(c.st*SC[rT()])))return false;if(c.mp&&r.mp<Math.round(s.maxMp*parseFloat(c.mp)/100))return false;return true;}
+// Bảng CHKN: content/items/chkn.js
+// Bảng CHKI: content/items/chki.js
+function costOk(c){if(!c)return true;const r=G.run,s=S();if(c.st&&r.st<Math.max(1,Math.round(c.st*SC[rT()])))return false;if(c.mp&&(s.maxMp<=0||r.mp<Math.round(s.maxMp*parseFloat(c.mp)/100)))return false;return true;}
 function costChips(c){const r=G.run,s=S(),o=[];if(!c)return o;
-  if(c.st){const d=Math.max(1,Math.round(c.st*SC[rT()]));r.st-=d;o.push(chip('💎','−'+d,'Linh thạch','dn'));}
-  if(c.mp){const d=Math.round(s.maxMp*parseFloat(c.mp)/100);r.mp-=d;o.push(chip('💧','−'+d,'Linh lực','dn'));}
-  if(c.hp){const d=Math.round(s.maxHp*parseFloat(c.hp)/100);r.hp=Math.max(1,r.hp-d);o.push(chip('❤️','−'+d,'Khí huyết','dn'));}
+  if(c.st){const d=Math.max(1,Math.round(c.st*SC[rT()]));r.st-=d;o.push(chip('💎','−'+d,contentText("core_06-su-kien_js.costChips.006"),'dn'));}
+  if(c.mp){const d=Math.round(s.maxMp*parseFloat(c.mp)/100);r.mp-=d;o.push(chip('💧','−'+d,contentText("core_06-su-kien_js.costChips.007"),'dn'));}
+  if(c.hp){const d=Math.round(s.maxHp*parseFloat(c.hp)/100);r.hp=Math.max(1,r.hp-d);o.push(chip('❤️','−'+d,contentText("core_06-su-kien_js.costChips.008"),'dn'));}
   return o;}
 function whenOk(e){if(!e.when)return true;const t=W().t;if(e.when.part&&!e.when.part.includes(partOf(t)))return false;if(e.when.season&&!e.when.season.includes(seasonOf(t)))return false;return true;}
 function srcOk(e,src){const s=e.src||'explore';if(!src)return true;if(s===src)return true;if(src==='explore'&&!ENT_ON&&s.startsWith('ent:'))return true;return false;}
@@ -78,26 +78,27 @@ function doOutcome(out,path,pre){
 }
 
 // ---------------- KẺ ĐỊCH ----------------
-const GIAI=['Nhất','Nhị','Tam','Tứ','Ngũ','Lục','Thất'];
+// Bảng GIAI: content/items/giai.js
 function mkEnemy(spec,v){
   const r=G.run,reg=rTv();spec=spec||{};
-  if(spec.k==='tamma'){const s=S();return {n:'Tâm Ma',sub:'Bóng tối trong lòng ngươi',i:'🌑',el:'am',f:'vat',hp:Math.round(s.maxHp*0.85),max:Math.round(s.maxHp*0.85),atk:Math.round(s.atk*0.9),def:Math.round(s.def*0.9),pat:['drain','weak','atk','charge','heavy','rage'],pi:0,st:{}};}
+  if(spec.k==='tamma'){const s=S();return {n:contentText("core_06-su-kien_js.mkEnemy.009"),sub:contentText("core_06-su-kien_js.mkEnemy.010"),i:'🌑',el:'am',f:'vat',hp:Math.round(s.maxHp*0.85),max:Math.round(s.maxHp*0.85),atk:Math.round(s.atk*0.9),def:Math.round(s.def*0.9),pat:['drain','weak','atk','charge','heavy','rage'],pi:0,st:{}};}
   let k=spec.k;
   if(spec.nem&&v){k=v.kk;spec=Object.assign({},spec,{i:v.ki});}
-  const famPick=f=>{let pool=REG_EN[reg].filter(x=>EN[x].f===f);if(!pool.length)pool=Object.keys(EN).filter(x=>EN[x].f===f);return pick(pool);};
+  const habitat=x=>{const t=tAs(r.place&&r.place.t);return EN[x].pl.includes('*')||EN[x].pl.includes(t);};
+  const famPick=f=>{let pool=REG_EN[reg].filter(x=>EN[x].f===f&&habitat(x));if(!pool.length)pool=Object.keys(EN).filter(x=>EN[x].f===f&&habitat(x));return pool.length?pick(pool):null;};
   if(k==='beast')k=famPick('thu');else if(k==='human')k=famPick('nhan');else if(k==='quy')k=famPick('quy');
-  if(!k||!EN[k]){const t=r.place&&r.place.t;let pool=REG_EN[reg].filter(x=>EN[x].pl.includes('*')||EN[x].pl.includes(t));if(!pool.length)pool=REG_EN[reg];k=pick(pool);}
+  if(!k||!EN[k]){const t=r.place&&r.place.t;let pool=REG_EN[reg].filter(x=>EN[x].pl.includes('*')||EN[x].pl.includes(t));if(!pool.length)pool=Object.keys(EN).filter(habitat);k=pick(pool);}
   const ty=EN[k];
   const m=(spec.mv?((v&&v[spec.mv])||1):(spec.m||1))*(1+curDanger()*0.1);
   let el=spec.el||(ty.el?pick(ty.el):(ty.ma?(chance(.6)?'am':pick(NGUHANH)):pick(NGUHANH)));
   let n,sub;
-  if(ty.f==='thu'){n=pick(DESC[el]||DESC.vo)+' '+pick(ty.nb);sub='Yêu thú '+GIAI[reg+(spec.elite?1:0)].toLowerCase()+' giai';}
+  if(ty.f==='thu'){n=pick(DESC[el]||DESC.vo)+' '+pick(ty.nb);sub=contentText("core_06-su-kien_js.mkEnemy.011")+GIAI[reg+(spec.elite?1:0)].toLowerCase()+' giai';}
   else if(ty.f==='nhan'){
     n=spec.n?T(spec.n,v):(ty.noname?pick(ty.t):(ty.ma?maName():ty.tang?tangName():ty.dao?daoName():genName(chance(.65)?'nam':'nu')));
     sub=T(pick(ty.t),Object.assign({sect:pick(G.meta.world.sects).n},v||{}));
     if(ty.noname){sub=REG[reg].n;}
   } else {
-    n=(chance(.35)?pick(['Bách Niên','Thiên Niên','Huyết','Hắc','Bạch','Cổ'])+' ':'')+pick(ty.nb);sub=ty.f==='quy'?'Âm vật':'Dị vật';
+    n=(chance(.35)?pick([contentText("core_06-su-kien_js.mkEnemy.012"),contentText("core_06-su-kien_js.mkEnemy.013"),'Huyết','Hắc','Bạch','Cổ'])+' ':'')+pick(ty.nb);sub=ty.f==='quy'?contentText("core_06-su-kien_js.mkEnemy.014"):contentText("core_06-su-kien_js.mkEnemy.015");
   }
   if(spec.n&&ty.f!=='nhan')n=T(spec.n,v);
   if(spec.sub)sub=T(spec.sub,v);
@@ -106,7 +107,7 @@ function mkEnemy(spec,v){
   return {n:up1(n),sub,i:spec.i||ty.i,el,f:ty.f,k,hp,max:hp,atk:Math.round(EA[reg]*ty.atk*m*aM),def:Math.round(ED[reg]*ty.def*m),pat:ty.pat.slice(),pi:ri(0,ty.pat.length-1),st:{},elite:!!spec.elite};
 }
 function mkBoss(){
-  const r=G.run,b=r.bossDef;const reg=rT();const v=baseV();v.ten=genName(chance(.7)?'nam':'nu');v.trai=pick(['Hắc Phong Trại','Huyết Đao Trại','Thiết Cốt Trại','Lang Nha Trại']);
+  const r=G.run,b=r.bossDef;const reg=rT();const v=baseV();v.ten=genName(chance(.7)?'nam':'nu');v.trai=pick([contentText("core_06-su-kien_js.mkBoss.016"),contentText("core_06-su-kien_js.mkBoss.017"),contentText("core_06-su-kien_js.mkBoss.018"),contentText("core_06-su-kien_js.mkBoss.019")]);
   const n=T(b.n,Object.assign(v,r.bossV||{}));const sub=T(b.sub,Object.assign(v,r.bossV||{}));
   const m=1.3;
   const hp=Math.round(EH[reg]*b.hp*m*[0.72,0.9,1,1,1][reg]);
@@ -115,25 +116,15 @@ function mkBoss(){
 
 // ---------------- CHIẾN ĐẤU: THANH HÀNH ĐỘNG ----------------
 // Thanh dài 100: chạy 0→50 theo thân pháp, ra lệnh ở 50, tụ lực đứng ở 75, hồi 50/75→100 theo hồi phục, chạm 100 về 0.
-const VERB={
-  thu:{atk:['{e} vồ tới','{e} cắn xé','{e} quật mạnh','{e} lao thẳng tới'],multi:['{e} cào liên tiếp','{e} tấn công tới tấp'],heavy:['{e} dồn toàn lực húc tới','{e} gầm lên, tung đòn chí mạng']},
-  nhan:{atk:['{e} vung binh khí chém xuống','{e} tung một chưởng','{e} điểm ra một chỉ','{e} phóng phi kiếm'],multi:['{e} xuất liền mấy chiêu','{e} kiếm ảnh chồng chất'],heavy:['{e} dồn hết chân nguyên vào một kích','{e} quát lớn, tung sát chiêu']},
-  quy:{atk:['{e} lướt xuyên qua','{e} cào móng vuốt lạnh buốt','{e} rít lên chói tai'],multi:['{e} ẩn hiện liên hồi'],heavy:['{e} hóa thành luồng âm phong ập tới']},
-  vat:{atk:['{e} giáng một đòn','{e} va mạnh tới'],multi:['{e} công kích liên hoàn'],heavy:['{e} phát ra một kích kinh thiên']},
-  boss:{atk:['{e} ra tay','{e} vung tay áo, kình phong ập tới','{e} đánh ra một đòn nặng như núi'],multi:['{e} công kích như mưa bão'],heavy:['{e} tung đòn sát thủ','Trời đất tối sầm, {e} dồn toàn lực']}
-};
-const VERB2={charge:'{e} hít sâu một hơi, bắt đầu tụ lực…',block:'{e} thu chiêu thủ thế, cảnh giác nhìn ngươi',rage:'{e} gầm lên, sát khí bốc ngùn ngụt',poison:'{e} phun ra một làn độc vụ',burn:'{e} phun ra một luồng lửa',weak:'{e} tỏa ra âm khí lạnh thấu xương',vuln:'{e} vung móng xé toạc hộ thể',drain:'{e} há miệng hút lấy sinh khí',heal:'{e} vận công, vết thương dần khép lại',stun:'{e} giáng xuống một luồng uy áp'};
+// Bảng VERB: content/narration/verb.js
+// Bảng VERB2: content/narration/verb2.js
 // đòn của kẻ địch theo ý định cũ
-const EN_SK={
-  atk:{n:'Tấn công',fx:{p:1},rec:1},multi:{n:'Liên kích',fx:{p:.5,h:2},rec:1.1},heavy:{n:'Trọng kích',fx:{p:2.2,charge:true},rec:1.2},
-  block:{n:'Phòng thủ',fx:{eblock:1.3},rec:.8},rage:{n:'Cuồng nộ',fx:{rage:1},rec:.8},poison:{n:'Phun độc',fx:{p:.5,epoison:.45},rec:1},burn:{n:'Thiêu đốt',fx:{p:.6,eburn:.6},rec:1},
-  weak:{n:'Làm suy yếu',fx:{p:.5,weak:2},rec:1},vuln:{n:'Phá giáp',fx:{p:.5,vuln:2},rec:1},drain:{n:'Hút máu',fx:{p:.9,edrain:60},rec:1},heal:{n:'Hồi phục',fx:{eheal:10},rec:.9},stun:{n:'Trấn áp',fx:{p:.7,stun:30},rec:1}
-};
+// Bảng EN_SK: content/items/en-sk.js
 const PHAT=75; // mốc phát lực: điểm cuối của tụ lực và của thế đỡ
 const TL_DODGE=25,TL_BLOCK=30,TL_REGEN=20,BLOCK_CUT=0.6;
-const BLOCK_SK={id:'_block',n:'Đỡ đòn',el:'vo',t:0,c:0,fx:{stance:1,steady:true},f:'',rec:.8};
-const WAIT_SK={id:'_wait',n:'Qua lượt',el:'vo',t:0,c:0,fx:{},f:'',rec:.7};
-const GUARD_SK={id:'_guard',n:'Vận khí',el:'vo',t:0,c:0,fx:{guard:1},f:'',rec:.8};
+// Bảng BLOCK_SK: content/items/block-sk.js
+// Bảng WAIT_SK: content/items/wait-sk.js
+// Bảng GUARD_SK: content/items/guard-sk.js
 const STUN_S=2,CHARGE_MAX=12;
 function skRec(sk){if(sk.rec)return sk.rec;if(sk.fx&&sk.fx.rec)return sk.fx.rec;return [0.8,0.9,1.0,1.2,1.4][sk.t||0];}
 function U_(sc,id){return sc.units.find(u=>u.id===id);}
@@ -161,11 +152,11 @@ function startCombat(spec,after){
   const me=playerUnit();sc.units.push(me);
   if(!(spec&&spec.kiep))for(const p of (r.party||[]).slice(0,2)){const u=partyUnit(p,sc.nid++);if(u)sc.units.push(u);}
   if(spec&&spec.kiep){
-    const k={id:sc.nid++,side:'B',ctrl:'ai',kind:'kiep',immune:true,name:'Kiếp vân',icon:'🌩️',el:'loi',f:'vat',hp:1,max:1,mp:0,maxMp:0,atk:0,def:0,tp:0,cx:99,ne:0,hoi:10,crit:0,skills:[],st:{},pos:0,phase:'run',pending:null,waitSet:[],stunT:0,rec:1,chargeT:0};
+    const k={id:sc.nid++,side:'B',ctrl:'ai',kind:'kiep',immune:true,name:contentText("core_06-su-kien_js.startCombat.075"),icon:'🌩️',el:'loi',f:'vat',hp:1,max:1,mp:0,maxMp:0,atk:0,def:0,tp:0,cx:99,ne:0,hoi:10,crit:0,skills:[],st:{},pos:0,phase:'run',pending:null,waitSet:[],stunT:0,rec:1,chargeT:0};
     sc.units.push(k);sc.kiep={n:spec.kiep.n,waves:spec.kiep.waves||1,wave:1,done:0,uy:1,cut:spec.kiep.cut||0};
-    sc.en={n:'Lôi kiếp',k:'kiep',i:'🌩️',el:'loi',boss:true};
+    sc.en={n:contentText("core_06-su-kien_js.startCombat.076"),k:'kiep',i:'🌩️',el:'loi',boss:true};
     if(spec.kiep.block)me.st.block=Math.round(me.max*spec.kiep.block/100);
-    clog(sc,`Mây kiếp vần vũ. ${capS(numVi(spec.kiep.n))} đạo lôi${sc.kiep.waves>1?', chia làm '+numVi(sc.kiep.waves)+' đợt,':''} sắp giáng xuống.`,'en');
+    clog(sc,contentText("core_06-su-kien_js.startCombat.077", [capS(numVi(spec.kiep.n)),sc.kiep.waves>1?', chia làm '+numVi(sc.kiep.waves)+' đợt,':'']),'en');
   } else {
     let ens=[];
     if(spec==='boss')ens=[mkBoss()];
@@ -175,7 +166,7 @@ function startCombat(spec,after){
     const n=ens.length;const f=[1,1.6,2.1][n-1]/n; // ngân sách chia đều
     ens.forEach(e=>sc.units.push(enemyUnit(e,sc.nid++,n>1?f:1)));
     sc.en={n:ens[0].n,k:ens[0].k,i:ens[0].i,el:ens[0].el,boss:!!ens[0].boss,elite:!!ens[0].elite,sub:ens[0].sub};
-    clog(sc,ens.map(e=>`${e.i} ${e.n}`).join(', ')+' xuất hiện.');
+    clog(sc,ens.map(e=>`${e.i} ${e.n}`).join(', ')+contentText("core_06-su-kien_js.startCombat.078"));
   }
   // trung bình thân pháp và hồi phục, tính một lần lúc vào trận
   const L=sc.units.filter(u=>!u.immune);

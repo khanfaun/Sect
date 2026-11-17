@@ -1,0 +1,978 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "doitho",
+      "name": "Lão nhân đổi thọ",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Bên vách đá có lão nhân tóc bạc ngồi đánh cờ một mình. Lão ngẩng lên: “Ngươi có muốn thông tuệ hơn người? Ta lấy của ngươi tám năm thọ.”",
+      "choices": [
+        {
+          "l": "Đổi tám năm thọ lấy ngộ tính",
+          "cost": "−8 năm thọ nguyên",
+          "go": {
+            "$hook": "ky_doitho_c_0_go"
+          }
+        },
+        {
+          "l": "Cúi chào rồi đi",
+          "go": {
+            "$hook": "ky_doitho_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": true,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "doitho",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.doitho.005": "Lão chạm hai ngón tay lên trán ngươi. Đầu óc bỗng sáng như gương. Lúc tỉnh lại, lão đã biến mất, tóc mai ngươi điểm bạc.",
+        "event.doitho.006": "Lão cười khà, tiếp tục ván cờ dang dở."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "huyette",
+      "name": "Huyết tế bảo vật",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "phe",
+          "ma",
+          "dong"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Một tế đàn cổ phủ rêu, trên khắc: “Hiến một bảo vật, đổi lấy một bảo vật.” Rãnh máu vẫn còn ướt.",
+      "choices": [
+        {
+          "l": "Hiến một món trang bị trong ô túi mở",
+          "cost": "mất một món trang bị ngẫu nhiên",
+          "need": {
+            "$hook": "ky_huyette_c_0_need"
+          },
+          "go": {
+            "$hook": "ky_huyette_c_0_go"
+          }
+        },
+        {
+          "l": "Không dám, rời đi",
+          "go": {
+            "$hook": "ky_huyette_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": true,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "huyette",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.huyette.007": "Không có trang bị trong ô túi mở",
+        "event.huyette.008": " tan vào tế đàn. Khói đỏ cuộn lên, rồi một bảo vật khác từ từ hiện ra.",
+        "event.huyette.009": "Đã hiến",
+        "event.huyette.010": "Ngươi lùi lại. Sau lưng như có tiếng ai thở dài."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "linhtuyen",
+      "name": "Linh tuyền cấm địa",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "nui",
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Giữa hẻm núi có một dòng suối xanh biếc, linh khí đặc quánh. Nhưng nước lạnh thấu xương, ngấm vào là tổn kinh mạch.",
+      "choices": [
+        {
+          "l": "Ngâm mình trong linh tuyền",
+          "cost": "khí huyết tối đa −10% vĩnh viễn",
+          "go": {
+            "$hook": "ky_linhtuyen_c_0_go"
+          }
+        },
+        {
+          "l": "Chỉ vốc một ngụm",
+          "go": {
+            "$hook": "ky_linhtuyen_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": true,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "linhtuyen",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.linhtuyen.011": "Ngươi run lên từng cơn. Khi bước ra, linh lực trong người dồi dào gấp bội, còn thân thể thì yếu đi trông thấy.",
+        "event.linhtuyen.012": "Một ngụm nước lạnh buốt. Tinh thần tỉnh táo hẳn."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "mataam",
+      "name": "Ma tâm kinh",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "rung",
+          "phe"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Trong hốc cây cháy đen có cuốn sách da người. Chữ trong đó như đang bò, thì thầm hứa hẹn sức mạnh.",
+      "choices": [
+        {
+          "l": "Đọc hết cuốn sách",
+          "cost": "đạo tâm −3 vĩnh viễn, tâm ma +15",
+          "go": {
+            "$hook": "ky_mataam_c_0_go"
+          }
+        },
+        {
+          "l": "Đốt nó đi",
+          "go": {
+            "$hook": "ky_mataam_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": true,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "mataam",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.mataam.013": "Từng chữ khắc vào xương. Ngươi thấy mình mạnh lên, nhưng giấc ngủ không còn yên.",
+        "event.mataam.014": "Lửa bén vào, sách kêu lên như người. Lòng ngươi thanh thản."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "cuoc",
+      "name": "Đánh cược với tiên nhân",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "tran",
+          "thanh",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Một gã say mặc đạo bào rách, tay cầm hồ lô: “Cược không? Ngươi đặt một nửa linh thạch, ta đặt một viên đan đột phá.”",
+      "choices": [
+        {
+          "l": "Đặt cược một nửa linh thạch",
+          "cost": "mất một nửa linh thạch đang có",
+          "need": {
+            "$hook": "ky_cuoc_c_0_need"
+          },
+          "go": {
+            "$hook": "ky_cuoc_c_0_go"
+          }
+        },
+        {
+          "l": "Lắc đầu đi tiếp",
+          "go": {
+            "$hook": "ky_cuoc_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": true,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "cuoc",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.cuoc.015": "Không đủ linh thạch",
+        "event.cuoc.016": "Linh thạch",
+        "event.cuoc.017": "Gã lắc hồ lô, đổ ra ba hạt xúc xắc. Ngươi thắng. Gã cười ha hả, ném viên đan qua.",
+        "event.cuoc.018": "Ba hạt xúc xắc lăn tròn. Ngươi thua. Gã cười, ôm túi linh thạch, biến vào mây.",
+        "event.cuoc.019": "Gã nhún vai, ngửa cổ tu một ngụm."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "saoroi",
+      "name": "Sao rơi trước mặt",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "rung",
+          "hoang",
+          "nui"
+        ],
+        "levels": null,
+        "time": {
+          "part": [
+            "dem"
+          ]
+        },
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Đêm ấy một vệt sáng rạch trời, rơi ngay bãi cỏ trước mặt ngươi. Trong hố còn ấm, một món đồ đang tỏa quang.",
+      "choices": [
+        {
+          "l": "Nhặt lên",
+          "go": {
+            "$hook": "ky_saoroi_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "saoroi",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.saoroi.020": "Là một bảo vật, còn vương hơi nóng của trời cao. Hữu duyên mới gặp."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "mongtien",
+      "name": "Tiên nhân báo mộng",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {
+          "part": [
+            "dem"
+          ]
+        },
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Trong giấc ngủ, ngươi thấy mình đứng giữa biển mây. Một bóng người áo trắng giảng một đoạn kinh rồi tan biến.",
+      "choices": [
+        {
+          "l": "Ngồi dậy ghi nhớ",
+          "go": {
+            "$hook": "ky_mongtien_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "mongtien",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.mongtien.021": "Lời kinh vẫn còn văng vẳng. Ngươi ngộ ra thêm đôi điều."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "linhchi",
+      "name": "Linh chi ngàn năm",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "rung",
+          "duoc"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Dưới gốc cây cổ thụ đổ, một cây linh chi to bằng chiếc nón lá, vân đỏ như máu.",
+      "choices": [
+        {
+          "l": "Hái và ăn ngay",
+          "go": {
+            "$hook": "ky_linhchi_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "linhchi",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.linhchi.022": "Vị đắng chát, rồi một luồng ấm chạy khắp thân. Ngươi thấy mình trẻ ra."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "lakhach",
+      "name": "Kiếm khách vô danh",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Một kiếm khách lướt qua, dừng lại nhìn ngươi hồi lâu: “Căn cốt không tệ.” Rồi múa một đường kiếm cho ngươi xem.",
+      "choices": [
+        {
+          "l": "Chăm chú xem",
+          "go": {
+            "$hook": "ky_lakhach_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "lakhach",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.lakhach.023": "Đường kiếm như nước chảy. Ngươi nhìn mà thấy tay mình ngứa ngáy."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "bikip",
+      "name": "Bí kíp gia truyền",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Một gã mặt mũi bí hiểm kéo ngươi vào góc: “Bí kíp tuyệt thế của tổ tiên ta. Thấy ngươi có duyên, chỉ lấy ba linh thạch.”",
+      "choices": [
+        {
+          "l": "Mua ngay kẻo lỡ",
+          "need": {
+            "$hook": "ky_bikip_c_0_need"
+          },
+          "go": {
+            "$hook": "ky_bikip_c_0_go"
+          }
+        },
+        {
+          "l": "Mỉm cười từ chối",
+          "go": {
+            "$hook": "ky_bikip_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": true,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "bikip",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.bikip.024": "Không đủ linh thạch",
+        "event.bikip.025": "Về mở ra đọc: “Món kho cá ngon nhất làng.” Trang cuối còn ghi: “Thêm chút đường.” Ngươi bật cười, lòng nhẹ hẳn.",
+        "event.bikip.026": "Linh thạch",
+        "event.bikip.027": "Gã lắc đầu tiếc rẻ rồi chạy sang mời người khác."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tiendan",
+      "name": "Tiên đan giá rẻ",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Đạo sĩ dạo bày bán “Cửu Chuyển Kim Đan, uống vào thành tiên”, giá chỉ năm linh thạch một viên. Đan đen bóng, mùi hơi lạ.",
+      "choices": [
+        {
+          "l": "Mua một viên, uống thử",
+          "need": {
+            "$hook": "ky_tiendan_c_0_need"
+          },
+          "go": {
+            "$hook": "ky_tiendan_c_0_go"
+          }
+        },
+        {
+          "l": "Hỏi đan làm từ gì",
+          "go": {
+            "$hook": "ky_tiendan_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": true,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tiendan",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.tiendan.028": "Không đủ linh thạch",
+        "event.tiendan.029": "Uống xong ngươi đau bụng cả buổi chiều. Tới lúc nhìn kỹ viên thứ hai mới nhận ra: là phân dê vo tròn, lăn qua bột than.",
+        "event.tiendan.030": "Linh thạch",
+        "event.tiendan.031": "Khí huyết",
+        "event.tiendan.032": "Đạo sĩ ấp úng, thu sạp chạy mất."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "anmay",
+      "name": "Cao nhân ăn mày",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Lão ăn mày rách rưới nắm áo ngươi: “Ta là ẩn thế cao nhân. Cúi đầu lại gần, ta truyền công cho.”",
+      "choices": [
+        {
+          "l": "Cúi đầu lại gần",
+          "go": {
+            "$hook": "ky_anmay_c_0_go"
+          }
+        },
+        {
+          "l": "Cho lão cái bánh rồi đi",
+          "go": {
+            "$hook": "ky_anmay_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": true,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "anmay",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.anmay.033": "Lão vỗ “bốp” một cái lên trán ngươi, hét: “Ngộ chưa!” Ngươi còn đang choáng thì lão đã cắp túi linh thạch chạy biến.",
+        "event.anmay.034": "Bị móc túi",
+        "event.anmay.035": "Lão nhai ngấu nghiến, gật gù: “Hậu sinh khả úy.”"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "thanbinh",
+      "name": "Thần binh dưới bùn",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "song",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Dưới đáy ao cạn, một thanh binh khí cắm thẳng, quanh chuôi như có ánh sáng mờ.",
+      "choices": [
+        {
+          "l": "Lội xuống rút lên",
+          "go": {
+            "$hook": "ky_thanbinh_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": true,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "thanbinh",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.thanbinh.036": "Dao phay rỉ sét",
+        "event.thanbinh.037": "Rút mãi mới ra. Ánh sáng là do mặt trời phản chiếu. Chuôi còn khắc chữ “Hàng thịt chợ Đông”."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "khobau",
+      "name": "Kho báu dưới gốc đa",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Ngươi nhặt được tấm bản đồ rách, đánh dấu chữ thập đỏ dưới gốc đa đầu làng: “Kho báu ở đây.”",
+      "choices": [
+        {
+          "l": "Đào suốt đêm",
+          "h": 8,
+          "go": {
+            "$hook": "ky_khobau_c_0_go"
+          }
+        },
+        {
+          "l": "Vứt bản đồ đi",
+          "go": {
+            "$hook": "ky_khobau_c_1_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": true,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "khobau",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.khobau.038": "Gần sáng, xẻng chạm vào một cái hũ. Mở ra: dưa muối, còn khá ngon. Dưới đáy hũ có mảnh giấy: “Bà để dành cho cháu.”",
+        "event.khobau.039": "Thời gian trôi qua",
+        "event.khobau.040": "Gió thổi tấm bản đồ bay mất. Có lẽ là duyên chưa tới, hoặc là may."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tp_cothu",
+      "name": "Thạch thất cổ nhân",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "opportunity",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 4320
+      },
+      "actors": {},
+      "text": "Mưa lở một mảng vách núi, lộ ra thạch thất của cổ nhân. Trên bàn đá có một quyển sách lụa, chữ vẫn còn rõ.",
+      "choices": [
+        {
+          "l": "Cất quyển sách",
+          "go": {
+            "$hook": "ky_tp_cothu_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": false
+      },
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "tp_cothu",
+        "commit": "d9ab301"
+      },
+      "scriptText": {
+        "event.tp_cothu.046": "Trang đầu ghi: “Người hữu duyên tự học.” Ngươi cẩn thận gói lại."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỳ ngộ",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

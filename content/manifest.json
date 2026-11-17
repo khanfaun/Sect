@@ -1,0 +1,1873 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "d9ab301",
+  "storyCommit": "8b9c479",
+  "tables": [
+    {
+      "symbols": [
+        "NAME"
+      ],
+      "file": "content/characters/name.js",
+      "category": "characters",
+      "original": "src/game/core/01-core.js",
+      "line": 2
+    },
+    {
+      "symbols": [
+        "PLACE"
+      ],
+      "file": "content/world/place.js",
+      "category": "world",
+      "original": "src/game/core/01-core.js",
+      "line": 18
+    },
+    {
+      "symbols": [
+        "TYPE_NAME"
+      ],
+      "file": "content/world/type-name.js",
+      "category": "world",
+      "original": "src/game/core/01-core.js",
+      "line": 37
+    },
+    {
+      "symbols": [
+        "P"
+      ],
+      "file": "content/narration/p.js",
+      "category": "narration",
+      "original": "src/game/core/01-core.js",
+      "line": 39
+    },
+    {
+      "symbols": [
+        "RUMOR"
+      ],
+      "file": "content/narration/rumor.js",
+      "category": "narration",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 2
+    },
+    {
+      "symbols": [
+        "EL"
+      ],
+      "file": "content/rules/el.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 11
+    },
+    {
+      "symbols": [
+        "KHAC"
+      ],
+      "file": "content/rules/khac.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 15
+    },
+    {
+      "symbols": [
+        "NGUHANH"
+      ],
+      "file": "content/rules/nguhanh.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 16
+    },
+    {
+      "symbols": [
+        "REALM"
+      ],
+      "file": "content/rules/realm.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 18
+    },
+    {
+      "symbols": [
+        "TIEU"
+      ],
+      "file": "content/rules/tieu.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 19
+    },
+    {
+      "symbols": [
+        "LIFE"
+      ],
+      "file": "content/rules/life.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 20
+    },
+    {
+      "symbols": [
+        "TAB"
+      ],
+      "file": "content/rules/tab.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 21
+    },
+    {
+      "symbols": [
+        "ROOT"
+      ],
+      "file": "content/characters/root.js",
+      "category": "characters",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 32
+    },
+    {
+      "symbols": [
+        "ORIGIN"
+      ],
+      "file": "content/characters/origin.js",
+      "category": "characters",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 41
+    },
+    {
+      "symbols": [
+        "TRAIT"
+      ],
+      "file": "content/characters/trait.js",
+      "category": "characters",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 59
+    },
+    {
+      "symbols": [
+        "SK_RAW"
+      ],
+      "file": "content/items/sk-raw.js",
+      "category": "items",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 81
+    },
+    {
+      "symbols": [
+        "SK_PHYS"
+      ],
+      "file": "content/items/sk-phys.js",
+      "category": "items",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 127
+    },
+    {
+      "symbols": [
+        "SK_CHARGE"
+      ],
+      "file": "content/items/sk-charge.js",
+      "category": "items",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 128
+    },
+    {
+      "symbols": [
+        "SK_AOE"
+      ],
+      "file": "content/items/sk-aoe.js",
+      "category": "items",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 129
+    },
+    {
+      "symbols": [
+        "SK_DAO"
+      ],
+      "file": "content/items/sk-dao.js",
+      "category": "items",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 130
+    },
+    {
+      "symbols": [
+        "BASIC"
+      ],
+      "file": "content/rules/basic.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 135
+    },
+    {
+      "symbols": [
+        "RELIC_K"
+      ],
+      "file": "content/items/relic-k.js",
+      "category": "items",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 138
+    },
+    {
+      "symbols": [
+        "RELIC_PRE"
+      ],
+      "file": "content/items/relic-pre.js",
+      "category": "items",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 171
+    },
+    {
+      "symbols": [
+        "GRADE"
+      ],
+      "file": "content/rules/grade.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 179
+    },
+    {
+      "symbols": [
+        "TM"
+      ],
+      "file": "content/rules/tm.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 180
+    },
+    {
+      "symbols": [
+        "RELIC_LORE"
+      ],
+      "file": "content/items/relic-lore.js",
+      "category": "items",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 181
+    },
+    {
+      "symbols": [
+        "RELIC_UNIQUE"
+      ],
+      "file": "content/items/relic-unique.js",
+      "category": "items",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 184
+    },
+    {
+      "symbols": [
+        "PILL"
+      ],
+      "file": "content/items/pill.js",
+      "category": "items",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 2
+    },
+    {
+      "symbols": [
+        "PQ"
+      ],
+      "file": "content/items/pq.js",
+      "category": "items",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 29
+    },
+    {
+      "symbols": [
+        "PQM"
+      ],
+      "file": "content/items/pqm.js",
+      "category": "items",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 30
+    },
+    {
+      "symbols": [
+        "DESC"
+      ],
+      "file": "content/characters/desc.js",
+      "category": "characters",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 33
+    },
+    {
+      "symbols": [
+        "EN"
+      ],
+      "file": "content/characters/en.js",
+      "category": "characters",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 39
+    },
+    {
+      "symbols": [
+        "REG_EN"
+      ],
+      "file": "content/characters/reg-en.js",
+      "category": "characters",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 76
+    },
+    {
+      "symbols": [
+        "INTENT"
+      ],
+      "file": "content/rules/intent.js",
+      "category": "rules",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 83
+    },
+    {
+      "symbols": [
+        "BOSS"
+      ],
+      "file": "content/characters/boss.js",
+      "category": "characters",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 88
+    },
+    {
+      "symbols": [
+        "REG"
+      ],
+      "file": "content/world/reg.js",
+      "category": "world",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 127
+    },
+    {
+      "symbols": [
+        "UPG"
+      ],
+      "file": "content/rules/upg.js",
+      "category": "rules",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 140
+    },
+    {
+      "symbols": [
+        "ACH"
+      ],
+      "file": "content/rules/ach.js",
+      "category": "rules",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 155
+    },
+    {
+      "symbols": [
+        "LORE"
+      ],
+      "file": "content/world/lore.js",
+      "category": "world",
+      "original": "src/game/core/03-dan-duoc-phu-luc.js",
+      "line": 166
+    },
+    {
+      "symbols": [
+        "SECT_PRE"
+      ],
+      "file": "content/characters/sect-pre.js",
+      "category": "characters",
+      "original": "src/game/core/04-loi-tro-choi.js",
+      "line": 72
+    },
+    {
+      "symbols": [
+        "SECT_SFX"
+      ],
+      "file": "content/characters/sect-sfx.js",
+      "category": "characters",
+      "original": "src/game/core/04-loi-tro-choi.js",
+      "line": 73
+    },
+    {
+      "symbols": [
+        "FXT"
+      ],
+      "file": "content/items/fxt.js",
+      "category": "items",
+      "original": "src/game/core/05-thoi-gian-the-gioi.js",
+      "line": 111
+    },
+    {
+      "symbols": [
+        "QNAME"
+      ],
+      "file": "content/rules/qname.js",
+      "category": "rules",
+      "original": "src/game/core/08-loi-kiep.js",
+      "line": 58
+    },
+    {
+      "symbols": [
+        "QPRE"
+      ],
+      "file": "content/rules/qpre.js",
+      "category": "rules",
+      "original": "src/game/core/08-loi-kiep.js",
+      "line": 59
+    },
+    {
+      "symbols": [
+        "QMUL",
+        "QLIFE"
+      ],
+      "file": "content/rules/qmul.js",
+      "category": "rules",
+      "original": "src/game/core/08-loi-kiep.js",
+      "line": 60
+    },
+    {
+      "symbols": [
+        "BT_BASE"
+      ],
+      "file": "content/rules/bt-base.js",
+      "category": "rules",
+      "original": "src/game/core/08-loi-kiep.js",
+      "line": 61
+    },
+    {
+      "symbols": [
+        "NODE_IC"
+      ],
+      "file": "content/world/node-ic.js",
+      "category": "world",
+      "original": "src/game/core/09-ban-do.js",
+      "line": 8
+    },
+    {
+      "symbols": [
+        "DANGER"
+      ],
+      "file": "content/world/danger.js",
+      "category": "world",
+      "original": "src/game/core/09-ban-do.js",
+      "line": 9
+    },
+    {
+      "symbols": [
+        "ENC_T"
+      ],
+      "file": "content/narration/enc-t.js",
+      "category": "narration",
+      "original": "src/game/core/10-quan-ai.js",
+      "line": 35
+    },
+    {
+      "symbols": [
+        "REST_T"
+      ],
+      "file": "content/narration/rest-t.js",
+      "category": "narration",
+      "original": "src/game/core/10-quan-ai.js",
+      "line": 95
+    },
+    {
+      "symbols": [
+        "ENT_T"
+      ],
+      "file": "content/world/ent-t.js",
+      "category": "world",
+      "original": "src/game/core/11-doi-cong-phap.js",
+      "line": 16
+    },
+    {
+      "symbols": [
+        "MEET_SOFT"
+      ],
+      "file": "content/world/meet-soft.js",
+      "category": "world",
+      "original": "src/game/core/11-doi-cong-phap.js",
+      "line": 26
+    },
+    {
+      "symbols": [
+        "KHACH_K"
+      ],
+      "file": "content/characters/khach-k.js",
+      "category": "characters",
+      "original": "src/game/core/11-doi-cong-phap.js",
+      "line": 27
+    },
+    {
+      "symbols": [
+        "DI_K"
+      ],
+      "file": "content/world/di-k.js",
+      "category": "world",
+      "original": "src/game/core/11-doi-cong-phap.js",
+      "line": 28
+    },
+    {
+      "symbols": [
+        "RUMOR_KIEP"
+      ],
+      "file": "content/narration/rumor-kiep.js",
+      "category": "narration",
+      "original": "src/game/core/12-dong-doi-tam-thoi.js",
+      "line": 55
+    },
+    {
+      "symbols": [
+        "MAT"
+      ],
+      "file": "content/items/mat.js",
+      "category": "items",
+      "original": "src/game/core2/01-core2.js",
+      "line": 87
+    },
+    {
+      "symbols": [
+        "CRAFT"
+      ],
+      "file": "content/items/craft.js",
+      "category": "items",
+      "original": "src/game/core2/01-core2.js",
+      "line": 88
+    },
+    {
+      "symbols": [
+        "NEWT"
+      ],
+      "file": "content/world/newt.js",
+      "category": "world",
+      "original": "src/game/core2/02-dia-diem-mo-rong.js",
+      "line": 58
+    },
+    {
+      "symbols": [
+        "NAME_PRE"
+      ],
+      "file": "content/world/name-pre.js",
+      "category": "world",
+      "original": "src/game/core2/02-dia-diem-mo-rong.js",
+      "line": 66
+    },
+    {
+      "symbols": [
+        "DTAG"
+      ],
+      "file": "content/world/dtag.js",
+      "category": "world",
+      "original": "src/game/core2/02-dia-diem-mo-rong.js",
+      "line": 91
+    },
+    {
+      "symbols": [
+        "SETTLE"
+      ],
+      "file": "content/world/settle.js",
+      "category": "world",
+      "original": "src/game/core2/02-dia-diem-mo-rong.js",
+      "line": 92
+    },
+    {
+      "symbols": [
+        "MOUNT"
+      ],
+      "file": "content/world/mount.js",
+      "category": "world",
+      "original": "src/game/core2/02-dia-diem-mo-rong.js",
+      "line": 121
+    },
+    {
+      "symbols": [
+        "WOUND"
+      ],
+      "file": "content/rules/wound.js",
+      "category": "rules",
+      "original": "src/game/core2/03-cong-hien-tong-mon.js",
+      "line": 86
+    },
+    {
+      "symbols": [
+        "REGEN_REALM"
+      ],
+      "file": "content/world/regen-realm.js",
+      "category": "world",
+      "original": "src/game/core2/03-cong-hien-tong-mon.js",
+      "line": 98
+    },
+    {
+      "symbols": [
+        "HEAL_PILL"
+      ],
+      "file": "content/rules/heal-pill.js",
+      "category": "rules",
+      "original": "src/game/core2/03-cong-hien-tong-mon.js",
+      "line": 99
+    },
+    {
+      "symbols": [
+        "PHAM"
+      ],
+      "file": "content/items/pham.js",
+      "category": "items",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 92
+    },
+    {
+      "symbols": [
+        "PHAM_M"
+      ],
+      "file": "content/items/pham-m.js",
+      "category": "items",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 93
+    },
+    {
+      "symbols": [
+        "SLOTS"
+      ],
+      "file": "content/items/slots.js",
+      "category": "items",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 100
+    },
+    {
+      "symbols": [
+        "SPEC"
+      ],
+      "file": "content/items/spec.js",
+      "category": "items",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 103
+    },
+    {
+      "symbols": [
+        "KSLOT"
+      ],
+      "file": "content/items/kslot.js",
+      "category": "items",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 104
+    },
+    {
+      "symbols": [
+        "SLOT_N"
+      ],
+      "file": "content/items/slot-n.js",
+      "category": "items",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 105
+    },
+    {
+      "symbols": [
+        "DD_N"
+      ],
+      "file": "content/items/dd-n.js",
+      "category": "items",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 115
+    },
+    {
+      "symbols": [
+        "PAS"
+      ],
+      "file": "content/items/pas.js",
+      "category": "items",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 27
+    },
+    {
+      "symbols": [
+        "FX_N"
+      ],
+      "file": "content/items/fx-n.js",
+      "category": "items",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 36
+    },
+    {
+      "symbols": [
+        "VENUE_N"
+      ],
+      "file": "content/venues/venue-n.js",
+      "category": "venues",
+      "original": "src/game/core2/07-dot-10-tho-nap.js",
+      "line": 49
+    },
+    {
+      "symbols": [
+        "VENUE_IN"
+      ],
+      "file": "content/venues/venue-in.js",
+      "category": "venues",
+      "original": "src/game/core2/07-dot-10-tho-nap.js",
+      "line": 50
+    },
+    {
+      "symbols": [
+        "VEH_T"
+      ],
+      "file": "content/world/veh-t.js",
+      "category": "world",
+      "original": "src/game/core2/08-dot-13-tram-dich.js",
+      "line": 4
+    },
+    {
+      "symbols": [
+        "QGRADE"
+      ],
+      "file": "content/rules/qgrade.js",
+      "category": "rules",
+      "original": "src/game/core2/08-dot-13-tram-dich.js",
+      "line": 33
+    },
+    {
+      "symbols": [
+        "QAMB_T"
+      ],
+      "file": "content/narration/qamb-t.js",
+      "category": "narration",
+      "original": "src/game/core2/08-dot-13-tram-dich.js",
+      "line": 97
+    },
+    {
+      "symbols": [
+        "TP_ORIGIN"
+      ],
+      "file": "content/characters/tp-origin.js",
+      "category": "characters",
+      "original": "src/game/core2/10-pham-nhan-chua-dan.js",
+      "line": 47
+    },
+    {
+      "symbols": [
+        "LS_OG"
+      ],
+      "file": "content/characters/ls-og.js",
+      "category": "characters",
+      "original": "src/game/core2/11-dot-22-do-khoi.js",
+      "line": 20
+    },
+    {
+      "symbols": [
+        "LS_TR"
+      ],
+      "file": "content/characters/ls-tr.js",
+      "category": "characters",
+      "original": "src/game/core2/11-dot-22-do-khoi.js",
+      "line": 41
+    },
+    {
+      "symbols": [
+        "LS_TPG"
+      ],
+      "file": "content/characters/ls-tpg.js",
+      "category": "characters",
+      "original": "src/game/core2/11-dot-22-do-khoi.js",
+      "line": 50
+    },
+    {
+      "symbols": [
+        "KIEP"
+      ],
+      "file": "content/rules/kiep.js",
+      "category": "rules",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 10
+    },
+    {
+      "symbols": [
+        "KIEP_EL"
+      ],
+      "file": "content/rules/kiep-el.js",
+      "category": "rules",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 18
+    },
+    {
+      "symbols": [
+        "TT_PHYS"
+      ],
+      "file": "content/characters/tt-phys.js",
+      "category": "characters",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 40
+    },
+    {
+      "symbols": [
+        "TT_DEST"
+      ],
+      "file": "content/characters/tt-dest.js",
+      "category": "characters",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 341
+    },
+    {
+      "symbols": [
+        "TT_TRAITS"
+      ],
+      "file": "content/characters/tt-traits.js",
+      "category": "characters",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 457
+    },
+    {
+      "symbols": [
+        "TT_MAP"
+      ],
+      "file": "content/characters/tt-map.js",
+      "category": "characters",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 477
+    },
+    {
+      "symbols": [
+        "TT_ELD"
+      ],
+      "file": "content/characters/tt-eld.js",
+      "category": "characters",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 480
+    },
+    {
+      "symbols": [
+        "TT_FXN"
+      ],
+      "file": "content/characters/tt-fxn.js",
+      "category": "characters",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 485
+    },
+    {
+      "symbols": [
+        "TT_EXTRA"
+      ],
+      "file": "content/characters/tt-extra.js",
+      "category": "characters",
+      "original": "src/game/core2/13-dot-26-do-don.js",
+      "line": 45
+    },
+    {
+      "symbols": [
+        "MC_REN"
+      ],
+      "file": "content/characters/mc-ren.js",
+      "category": "characters",
+      "original": "src/game/core2/13-dot-26-do-don.js",
+      "line": 60
+    },
+    {
+      "symbols": [
+        "TT_MERGE"
+      ],
+      "file": "content/characters/tt-merge.js",
+      "category": "characters",
+      "original": "src/game/core2/13-dot-26-do-don.js",
+      "line": 91
+    },
+    {
+      "symbols": [
+        "MC_NERF"
+      ],
+      "file": "content/characters/mc-nerf.js",
+      "category": "characters",
+      "original": "src/game/core2/13-dot-26-do-don.js",
+      "line": 102
+    },
+    {
+      "symbols": [
+        "EL_FL"
+      ],
+      "file": "content/narration/el-fl.js",
+      "category": "narration",
+      "original": "src/game/core2/15-loi-ke-tran-danh.js",
+      "line": 2
+    },
+    {
+      "symbols": [
+        "ATK_P"
+      ],
+      "file": "content/narration/atk-p.js",
+      "category": "narration",
+      "original": "src/game/core2/15-loi-ke-tran-danh.js",
+      "line": 5
+    },
+    {
+      "symbols": [
+        "ATK_PHAM"
+      ],
+      "file": "content/narration/atk-pham.js",
+      "category": "narration",
+      "original": "src/game/core2/15-loi-ke-tran-danh.js",
+      "line": 7
+    },
+    {
+      "symbols": [
+        "TS"
+      ],
+      "file": "content/rules/ts.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 13
+    },
+    {
+      "symbols": [
+        "EH"
+      ],
+      "file": "content/rules/eh.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 16
+    },
+    {
+      "symbols": [
+        "EA"
+      ],
+      "file": "content/rules/ea.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 17
+    },
+    {
+      "symbols": [
+        "ED"
+      ],
+      "file": "content/rules/ed.js",
+      "category": "rules",
+      "original": "src/game/core/02-tin-don-giang-ho.js",
+      "line": 18
+    },
+    {
+      "symbols": [
+        "CHKN"
+      ],
+      "file": "content/items/chkn.js",
+      "category": "items",
+      "original": "src/game/core/06-su-kien.js",
+      "line": 11
+    },
+    {
+      "symbols": [
+        "CHKI"
+      ],
+      "file": "content/items/chki.js",
+      "category": "items",
+      "original": "src/game/core/06-su-kien.js",
+      "line": 12
+    },
+    {
+      "symbols": [
+        "GIAI"
+      ],
+      "file": "content/items/giai.js",
+      "category": "items",
+      "original": "src/game/core/06-su-kien.js",
+      "line": 81
+    },
+    {
+      "symbols": [
+        "VERB"
+      ],
+      "file": "content/narration/verb.js",
+      "category": "narration",
+      "original": "src/game/core/06-su-kien.js",
+      "line": 118
+    },
+    {
+      "symbols": [
+        "VERB2"
+      ],
+      "file": "content/narration/verb2.js",
+      "category": "narration",
+      "original": "src/game/core/06-su-kien.js",
+      "line": 125
+    },
+    {
+      "symbols": [
+        "EN_SK"
+      ],
+      "file": "content/items/en-sk.js",
+      "category": "items",
+      "original": "src/game/core/06-su-kien.js",
+      "line": 127
+    },
+    {
+      "symbols": [
+        "BLOCK_SK"
+      ],
+      "file": "content/items/block-sk.js",
+      "category": "items",
+      "original": "src/game/core/06-su-kien.js",
+      "line": 134
+    },
+    {
+      "symbols": [
+        "WAIT_SK"
+      ],
+      "file": "content/items/wait-sk.js",
+      "category": "items",
+      "original": "src/game/core/06-su-kien.js",
+      "line": 135
+    },
+    {
+      "symbols": [
+        "GUARD_SK"
+      ],
+      "file": "content/items/guard-sk.js",
+      "category": "items",
+      "original": "src/game/core/06-su-kien.js",
+      "line": 136
+    },
+    {
+      "symbols": [
+        "MONTH"
+      ],
+      "file": "content/narration/month.js",
+      "category": "narration",
+      "original": "src/game/core/08-loi-kiep.js",
+      "line": 199
+    },
+    {
+      "symbols": [
+        "CHI"
+      ],
+      "file": "content/narration/chi.js",
+      "category": "narration",
+      "original": "src/game/core/08-loi-kiep.js",
+      "line": 200
+    },
+    {
+      "symbols": [
+        "PART"
+      ],
+      "file": "content/narration/part.js",
+      "category": "narration",
+      "original": "src/game/core/08-loi-kiep.js",
+      "line": 201
+    },
+    {
+      "symbols": [
+        "SEASON"
+      ],
+      "file": "content/narration/season.js",
+      "category": "narration",
+      "original": "src/game/core/08-loi-kiep.js",
+      "line": 202
+    },
+    {
+      "symbols": [
+        "SENSE"
+      ],
+      "file": "content/rules/sense.js",
+      "category": "rules",
+      "original": "src/game/core/09-ban-do.js",
+      "line": 2
+    },
+    {
+      "symbols": [
+        "WALK"
+      ],
+      "file": "content/rules/walk.js",
+      "category": "rules",
+      "original": "src/game/core/09-ban-do.js",
+      "line": 3
+    },
+    {
+      "symbols": [
+        "CROSS_M"
+      ],
+      "file": "content/rules/cross-m.js",
+      "category": "rules",
+      "original": "src/game/core/09-ban-do.js",
+      "line": 4
+    },
+    {
+      "symbols": [
+        "WILD"
+      ],
+      "file": "content/rules/wild.js",
+      "category": "rules",
+      "original": "src/game/core/09-ban-do.js",
+      "line": 5
+    },
+    {
+      "symbols": [
+        "BQ_Y"
+      ],
+      "file": "content/rules/bq-y.js",
+      "category": "rules",
+      "original": "src/game/core/09-ban-do.js",
+      "line": 150
+    },
+    {
+      "symbols": [
+        "SINH"
+      ],
+      "file": "content/rules/sinh.js",
+      "category": "rules",
+      "original": "src/game/core2/01-core2.js",
+      "line": 14
+    },
+    {
+      "symbols": [
+        "QUY"
+      ],
+      "file": "content/rules/quy.js",
+      "category": "rules",
+      "original": "src/game/core2/01-core2.js",
+      "line": 15
+    },
+    {
+      "symbols": [
+        "CHU_N"
+      ],
+      "file": "content/rules/chu-n.js",
+      "category": "rules",
+      "original": "src/game/core2/01-core2.js",
+      "line": 16
+    },
+    {
+      "symbols": [
+        "PET_FX"
+      ],
+      "file": "content/rules/pet-fx.js",
+      "category": "rules",
+      "original": "src/game/core2/01-core2.js",
+      "line": 58
+    },
+    {
+      "symbols": [
+        "AFF_CAT"
+      ],
+      "file": "content/rules/aff-cat.js",
+      "category": "rules",
+      "original": "src/game/core2/01-core2.js",
+      "line": 135
+    },
+    {
+      "symbols": [
+        "WILD2"
+      ],
+      "file": "content/rules/wild2.js",
+      "category": "rules",
+      "original": "src/game/core2/02-dia-diem-mo-rong.js",
+      "line": 3
+    },
+    {
+      "symbols": [
+        "PA2"
+      ],
+      "file": "content/rules/pa2.js",
+      "category": "rules",
+      "original": "src/game/core2/02-dia-diem-mo-rong.js",
+      "line": 30
+    },
+    {
+      "symbols": [
+        "LK_N",
+        "LK_M"
+      ],
+      "file": "content/rules/lk-n.js",
+      "category": "rules",
+      "original": "src/game/core2/02-dia-diem-mo-rong.js",
+      "line": 80
+    },
+    {
+      "symbols": [
+        "CH_GIVE"
+      ],
+      "file": "content/rules/ch-give.js",
+      "category": "rules",
+      "original": "src/game/core2/03-cong-hien-tong-mon.js",
+      "line": 3
+    },
+    {
+      "symbols": [
+        "STAT_N"
+      ],
+      "file": "content/rules/stat-n.js",
+      "category": "rules",
+      "original": "src/game/core2/03-cong-hien-tong-mon.js",
+      "line": 8
+    },
+    {
+      "symbols": [
+        "MAPD"
+      ],
+      "file": "content/rules/mapd.js",
+      "category": "rules",
+      "original": "src/game/core2/03b-dia-hinh-du-lieu.js",
+      "line": 2
+    },
+    {
+      "symbols": [
+        "CELL"
+      ],
+      "file": "content/rules/cell.js",
+      "category": "rules",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 8
+    },
+    {
+      "symbols": [
+        "TER_N"
+      ],
+      "file": "content/rules/ter-n.js",
+      "category": "rules",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 21
+    },
+    {
+      "symbols": [
+        "TER_COST"
+      ],
+      "file": "content/rules/ter-cost.js",
+      "category": "rules",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 23
+    },
+    {
+      "symbols": [
+        "QUAN_N"
+      ],
+      "file": "content/rules/quan-n.js",
+      "category": "rules",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 26
+    },
+    {
+      "symbols": [
+        "PB_SLOTS",
+        "PB_REQ"
+      ],
+      "file": "content/rules/pb-slots.js",
+      "category": "rules",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 101
+    },
+    {
+      "symbols": [
+        "BAG_BASE",
+        "BAG_TUI",
+        "BAG_MAX"
+      ],
+      "file": "content/rules/bag-base.js",
+      "category": "rules",
+      "original": "src/game/core2/04-luoi-luc-giac.js",
+      "line": 129
+    },
+    {
+      "symbols": [
+        "BAG_CAT"
+      ],
+      "file": "content/rules/bag-cat.js",
+      "category": "rules",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 2
+    },
+    {
+      "symbols": [
+        "CAT_N",
+        "CAT_MAX"
+      ],
+      "file": "content/rules/cat-n.js",
+      "category": "rules",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 24
+    },
+    {
+      "symbols": [
+        "ART_SFX"
+      ],
+      "file": "content/items/art-sfx.js",
+      "category": "items",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 25
+    },
+    {
+      "symbols": [
+        "EL_FX"
+      ],
+      "file": "content/rules/el-fx.js",
+      "category": "rules",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 26
+    },
+    {
+      "symbols": [
+        "ART_REQ"
+      ],
+      "file": "content/items/art-req.js",
+      "category": "items",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 32
+    },
+    {
+      "symbols": [
+        "ART_LINES"
+      ],
+      "file": "content/items/art-lines.js",
+      "category": "items",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 33
+    },
+    {
+      "symbols": [
+        "LV_N"
+      ],
+      "file": "content/rules/lv-n.js",
+      "category": "rules",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 34
+    },
+    {
+      "symbols": [
+        "STAGE_FX"
+      ],
+      "file": "content/rules/stage-fx.js",
+      "category": "rules",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 35
+    },
+    {
+      "symbols": [
+        "FX_CAP"
+      ],
+      "file": "content/items/fx-cap.js",
+      "category": "items",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 39
+    },
+    {
+      "symbols": [
+        "ART_MAX",
+        "ART_CAP"
+      ],
+      "file": "content/items/art-max.js",
+      "category": "items",
+      "original": "src/game/core2/05-tui-do-gom-moi.js",
+      "line": 86
+    },
+    {
+      "symbols": [
+        "BURN"
+      ],
+      "file": "content/rules/burn.js",
+      "category": "rules",
+      "original": "src/game/core2/06-thieu-dot-tho-nguyen.js",
+      "line": 5
+    },
+    {
+      "symbols": [
+        "TH_N",
+        "TH_EL",
+        "TH_MAX"
+      ],
+      "file": "content/rules/th-n.js",
+      "category": "rules",
+      "original": "src/game/core2/06-thieu-dot-tho-nguyen.js",
+      "line": 20
+    },
+    {
+      "symbols": [
+        "TH_FX"
+      ],
+      "file": "content/rules/th-fx.js",
+      "category": "rules",
+      "original": "src/game/core2/06-thieu-dot-tho-nguyen.js",
+      "line": 21
+    },
+    {
+      "symbols": [
+        "PT"
+      ],
+      "file": "content/rules/pt.js",
+      "category": "rules",
+      "original": "src/game/core2/06-thieu-dot-tho-nguyen.js",
+      "line": 59
+    },
+    {
+      "symbols": [
+        "TC_BIAS"
+      ],
+      "file": "content/rules/tc-bias.js",
+      "category": "rules",
+      "original": "src/game/core2/06-thieu-dot-tho-nguyen.js",
+      "line": 90
+    },
+    {
+      "symbols": [
+        "TC_N"
+      ],
+      "file": "content/rules/tc-n.js",
+      "category": "rules",
+      "original": "src/game/core2/06-thieu-dot-tho-nguyen.js",
+      "line": 91
+    },
+    {
+      "symbols": [
+        "TVP"
+      ],
+      "file": "content/rules/tvp.js",
+      "category": "rules",
+      "original": "src/game/core2/06-thieu-dot-tho-nguyen.js",
+      "line": 136
+    },
+    {
+      "symbols": [
+        "LL_T",
+        "LL_BT",
+        "LL_MAX",
+        "LL_CAPE"
+      ],
+      "file": "content/rules/ll-t.js",
+      "category": "rules",
+      "original": "src/game/core2/07-dot-10-tho-nap.js",
+      "line": 14
+    },
+    {
+      "symbols": [
+        "QST"
+      ],
+      "file": "content/rules/qst.js",
+      "category": "rules",
+      "original": "src/game/core2/08-dot-13-tram-dich.js",
+      "line": 51
+    },
+    {
+      "symbols": [
+        "QCOL"
+      ],
+      "file": "content/rules/qcol.js",
+      "category": "rules",
+      "original": "src/game/core2/09-dot-17-bang-treo.js",
+      "line": 24
+    },
+    {
+      "symbols": [
+        "KY_P"
+      ],
+      "file": "content/rules/ky-p.js",
+      "category": "rules",
+      "original": "src/game/core2/09-dot-17-bang-treo.js",
+      "line": 44
+    },
+    {
+      "symbols": [
+        "TU_M",
+        "TP_Y"
+      ],
+      "file": "content/rules/tu-m.js",
+      "category": "rules",
+      "original": "src/game/core2/10-pham-nhan-chua-dan.js",
+      "line": 23
+    },
+    {
+      "symbols": [
+        "START_IT"
+      ],
+      "file": "content/items/start-it.js",
+      "category": "items",
+      "original": "src/game/core2/11-dot-22-do-khoi.js",
+      "line": 4
+    },
+    {
+      "symbols": [
+        "LS_EL"
+      ],
+      "file": "content/characters/ls-el.js",
+      "category": "characters",
+      "original": "src/game/core2/11-dot-22-do-khoi.js",
+      "line": 21
+    },
+    {
+      "symbols": [
+        "LS_ELN"
+      ],
+      "file": "content/characters/ls-eln.js",
+      "category": "characters",
+      "original": "src/game/core2/11-dot-22-do-khoi.js",
+      "line": 25
+    },
+    {
+      "symbols": [
+        "BT_ROOT",
+        "BT_LK"
+      ],
+      "file": "content/rules/bt-root.js",
+      "category": "rules",
+      "original": "src/game/core2/11-dot-22-do-khoi.js",
+      "line": 76
+    },
+    {
+      "symbols": [
+        "TT_RW"
+      ],
+      "file": "content/rules/tt-rw.js",
+      "category": "rules",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 41
+    },
+    {
+      "symbols": [
+        "TT_RANK",
+        "TT_COL"
+      ],
+      "file": "content/rules/tt-rank.js",
+      "category": "rules",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 42
+    },
+    {
+      "symbols": [
+        "TT_FORCE"
+      ],
+      "file": "content/rules/tt-force.js",
+      "category": "rules",
+      "original": "src/game/core2/12-dot-24-cac-loai.js",
+      "line": 45
+    },
+    {
+      "symbols": [
+        "REL_X",
+        "REL_M"
+      ],
+      "file": "content/items/rel-x.js",
+      "category": "items",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 12
+    },
+    {
+      "symbols": [
+        "REL_POOL"
+      ],
+      "file": "content/items/rel-pool.js",
+      "category": "items",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 13
+    },
+    {
+      "symbols": [
+        "NT_KEYS"
+      ],
+      "file": "content/items/nt-keys.js",
+      "category": "items",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 27
+    },
+    {
+      "symbols": [
+        "NT_NAME"
+      ],
+      "file": "content/items/nt-name.js",
+      "category": "items",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 38
+    },
+    {
+      "symbols": [
+        "RATE_T"
+      ],
+      "file": "content/rules/rate-t.js",
+      "category": "rules",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 64
+    },
+    {
+      "symbols": [
+        "RATE_W"
+      ],
+      "file": "content/rules/rate-w.js",
+      "category": "rules",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 65
+    },
+    {
+      "symbols": [
+        "RATE_COL"
+      ],
+      "file": "content/rules/rate-col.js",
+      "category": "rules",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 67
+    },
+    {
+      "symbols": [
+        "RATE_TK"
+      ],
+      "file": "content/rules/rate-tk.js",
+      "category": "rules",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 69
+    },
+    {
+      "symbols": [
+        "NUM_VI"
+      ],
+      "file": "content/narration/num-vi.js",
+      "category": "narration",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 108
+    },
+    {
+      "symbols": [
+        "LK_TH",
+        "LK_MUL"
+      ],
+      "file": "content/rules/lk-th.js",
+      "category": "rules",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 125
+    },
+    {
+      "symbols": [
+        "LK_BON"
+      ],
+      "file": "content/rules/lk-bon.js",
+      "category": "rules",
+      "original": "src/game/core2/14-sua-lai-pham-khong.js",
+      "line": 141
+    },
+    {
+      "symbols": [
+        "SG_TH"
+      ],
+      "file": "content/rules/sg-th.js",
+      "category": "rules",
+      "original": "src/game/core2/15-loi-ke-tran-danh.js",
+      "line": 71
+    },
+    {
+      "symbols": [
+        "TT_AVG"
+      ],
+      "file": "content/rules/tt-avg.js",
+      "category": "rules",
+      "original": "src/game/core2/16-lich-luyen-hien-theo.js",
+      "line": 11
+    },
+    {
+      "symbols": [
+        "TAL_N"
+      ],
+      "file": "content/characters/tal-n.js",
+      "category": "characters",
+      "original": "src/game/core2/16-lich-luyen-hien-theo.js",
+      "line": 14
+    },
+    {
+      "symbols": [
+        "TAL_T"
+      ],
+      "file": "content/characters/tal-t.js",
+      "category": "characters",
+      "original": "src/game/core2/16-lich-luyen-hien-theo.js",
+      "line": 15
+    },
+    {
+      "symbols": [
+        "TAL_RL"
+      ],
+      "file": "content/characters/tal-rl.js",
+      "category": "characters",
+      "original": "src/game/core2/16-lich-luyen-hien-theo.js",
+      "line": 16
+    },
+    {
+      "symbols": [
+        "KV_GRP"
+      ],
+      "file": "content/characters/kv-grp.js",
+      "category": "characters",
+      "original": "src/game/core2/16-lich-luyen-hien-theo.js",
+      "line": 39
+    },
+    {
+      "symbols": [
+        "FXG_K"
+      ],
+      "file": "content/rules/fxg-k.js",
+      "category": "rules",
+      "original": "src/game/core2/16-lich-luyen-hien-theo.js",
+      "line": 51
+    },
+    {
+      "symbols": [
+        "TAL_W"
+      ],
+      "file": "content/characters/tal-w.js",
+      "category": "characters",
+      "original": "src/game/core2/16-lich-luyen-hien-theo.js",
+      "line": 75
+    },
+    {
+      "symbols": [
+        "TC_DAO"
+      ],
+      "file": "content/rules/tc-dao.js",
+      "category": "rules",
+      "original": "src/game/core2/16-lich-luyen-hien-theo.js",
+      "line": 108
+    },
+    {
+      "symbols": [
+        "NGO_BB"
+      ],
+      "file": "content/rules/ngo-bb.js",
+      "category": "rules",
+      "original": "src/game/core2/17-chi-so-khi-len.js",
+      "line": 42
+    },
+    {
+      "symbols": [
+        "HT_RANK"
+      ],
+      "file": "content/characters/ht-rank.js",
+      "category": "characters",
+      "original": "src/game/core2/17-chi-so-khi-len.js",
+      "line": 98
+    },
+    {
+      "symbols": [
+        "HT_RW"
+      ],
+      "file": "content/characters/ht-rw.js",
+      "category": "characters",
+      "original": "src/game/core2/17-chi-so-khi-len.js",
+      "line": 99
+    },
+    {
+      "symbols": [
+        "HTKV"
+      ],
+      "file": "content/characters/htkv.js",
+      "category": "characters",
+      "original": "src/game/core2/17-chi-so-khi-len.js",
+      "line": 100
+    },
+    {
+      "symbols": [
+        "ASC_K"
+      ],
+      "file": "content/rules/asc-k.js",
+      "category": "rules",
+      "original": "src/game/core2/18-ghi-lai-truoc-sau.js",
+      "line": 2
+    },
+    {
+      "symbols": [
+        "TAP_P"
+      ],
+      "file": "content/rules/tap-p.js",
+      "category": "rules",
+      "original": "src/game/core2/18-ghi-lai-truoc-sau.js",
+      "line": 23
+    },
+    {
+      "symbols": [
+        "MI_N"
+      ],
+      "file": "content/characters/mi-n.js",
+      "category": "characters",
+      "original": "src/game/core2/18-ghi-lai-truoc-sau.js",
+      "line": 33
+    },
+    {
+      "symbols": [
+        "FAV_N"
+      ],
+      "file": "content/characters/fav-n.js",
+      "category": "characters",
+      "original": "src/game/core2/18-ghi-lai-truoc-sau.js",
+      "line": 51
+    },
+    {
+      "symbols": [
+        "ELDER_T"
+      ],
+      "file": "content/rules/elder-t.js",
+      "category": "rules",
+      "original": "src/game/core2/18-ghi-lai-truoc-sau.js",
+      "line": 84
+    },
+    {
+      "symbols": [
+        "REL_T"
+      ],
+      "file": "content/characters/rel-t.js",
+      "category": "characters",
+      "original": "src/game/core2/18-ghi-lai-truoc-sau.js",
+      "line": 93
+    },
+    {
+      "symbols": [
+        "WT_LV"
+      ],
+      "file": "content/rules/wt-lv.js",
+      "category": "rules",
+      "original": "src/game/core2/23-thuong-the.js",
+      "line": 4
+    },
+    {
+      "symbols": [
+        "WT_NAME",
+        "WT_DIE",
+        "WT_PERM"
+      ],
+      "file": "content/rules/wt-name.js",
+      "category": "rules",
+      "original": "src/game/core2/23-thuong-the.js",
+      "line": 5
+    },
+    {
+      "symbols": [
+        "WT_SCAR"
+      ],
+      "file": "content/rules/wt-scar.js",
+      "category": "rules",
+      "original": "src/game/core2/23-thuong-the.js",
+      "line": 16
+    },
+    {
+      "symbols": [
+        "AREA"
+      ],
+      "file": "content/world/area.js",
+      "category": "world",
+      "original": "src/game/core2/33-the-gioi-mo.js",
+      "line": 13
+    },
+    {
+      "symbols": [
+        "SIZE_T"
+      ],
+      "file": "content/world/size-t.js",
+      "category": "world",
+      "original": "src/game/core2/33-the-gioi-mo.js",
+      "line": 47
+    },
+    {
+      "symbols": [
+        "TONG_SZ"
+      ],
+      "file": "content/world/tong-sz.js",
+      "category": "world",
+      "original": "src/game/core2/33-the-gioi-mo.js",
+      "line": 48
+    },
+    {
+      "symbols": [
+        "VIS_COST"
+      ],
+      "file": "content/world/vis-cost.js",
+      "category": "world",
+      "original": "src/game/core2/33-the-gioi-mo.js",
+      "line": 111
+    },
+    {
+      "symbols": [
+        "WP0",
+        "WP_TY",
+        "WP_BASE"
+      ],
+      "file": "content/rules/wp0.js",
+      "category": "rules",
+      "original": "src/game/core2/33-the-gioi-mo.js",
+      "line": 156
+    },
+    {
+      "symbols": [
+        "TAL_RT"
+      ],
+      "file": "content/characters/tal-rt.js",
+      "category": "characters",
+      "original": "src/game/core2/32-sua-loi-can-bang.js",
+      "line": 26
+    }
+  ]
+}

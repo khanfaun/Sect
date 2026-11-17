@@ -1,0 +1,508 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_vet_khau_duoi_lop_da_1",
+      "name": "Mũi chỉ bắt đầu từ đâu",
+      "kind": "story",
+      "tags": [
+        "Bất an"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma"
+        ],
+        "levels": [
+          3
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "người luyện thi",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Người em",
+          "alignment": "context"
+        }
+      },
+      "text": "Trước lúc khép lò, người luyện thi {$a.ten} thấy một mũi kim chọc từ trong ngực xác ra ngoài. Người em {$b.ten} nhận ra cách cầm kim của người anh đã chết, xin lão dừng tay. Người luyện thi hỏi ai sẽ trả tiền phôi nếu bỏ mẻ này.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Ngừng luyện và giữ kim để hỏi",
+          "t": "Ngươi bù phí phôi. Mũi chỉ tự rút một nửa rồi dừng.",
+          "e": {
+            "karma": 4,
+            "tamma": -3
+          },
+          "cost": {
+            "st": 19
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Cho luyện tiếp để đổi bí quyết",
+          "t": "Ngươi có khẩu quyết giữ thi. {$b.ten} đem theo cái kim mà không ai nghĩ tới việc đòi lại.",
+          "e": {
+            "karma": -3,
+            "tamma": 4,
+            "skill": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lò khép. Ở mép nắp còn lòi ra một đầu chỉ.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_khau_duoi_lop_da_1",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "vet_khau_duoi_lop_da",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Luyện thi",
+      "setting": {
+        "description": "Bàn khâu ở Cửu U Ma Vực",
+        "historyCondition": "không"
+      },
+      "emotion": "Bất an"
+    },
+    {
+      "id": "ch_vet_khau_duoi_lop_da_2",
+      "name": "Cái túi khâu phía trong",
+      "kind": "story",
+      "tags": [
+        "Kinh dị"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma"
+        ],
+        "levels": [
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Người em",
+          "alignment": "context"
+        }
+      },
+      "text": "Thi thể tự khâu một cái túi vào vải liệm. Người em {$b.ten} nhét thử hạt ngô vào. Đầu kia túi có người đẩy ra một nút áo cũ.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Cho thi thể chọn vật mang theo",
+          "t": "Ngươi giữ thi thức thêm một đêm, để nó tự chọn đồ mang theo. Nó bỏ hạt ngô ra, cất nút áo vào túi rồi khâu miệng túi lại. Người em nói đó là nút áo mẹ từng đơm cho anh.",
+          "e": {
+            "karma": 4,
+            "tamma": -3,
+            "h": 24
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Dùng túi để chuyển linh vật qua vách",
+          "t": "Ngươi lấy được một vật bị kẹt trong lò. Khi trở về, tay áo ngươi có thêm một đường chỉ ngược.",
+          "e": {
+            "karma": -2,
+            "tamma": 3,
+            "item": "story_item_vet_khau_duoi_lop_da_2"
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$b.ten} sờ cái túi đến khi nút áo ấm lên.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_khau_duoi_lop_da_2",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "vet_khau_duoi_lop_da",
+        "part": "2",
+        "waitHours": 120,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Luyện thi",
+      "setting": {
+        "description": "Kho vải ở Cửu U Ma Vực",
+        "historyCondition": "phần 1 chọn “Ngừng luyện và giữ kim để hỏi” · vài ngày sau · kho vải liệm"
+      },
+      "emotion": "Kinh dị"
+    },
+    {
+      "id": "ch_vet_khau_duoi_lop_da_2b",
+      "name": "Vết kim quanh cổ",
+      "kind": "story",
+      "tags": [
+        "Phẫn nộ"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma"
+        ],
+        "levels": [
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "người em",
+          "alignment": "context"
+        }
+      },
+      "text": "Thi thể vâng lệnh mọi người, riêng khi người em {$b.ten} gọi thì quay cổ ngược hướng. Vết chỉ trên gáy đã thành một vòng kín.",
+      "choices": [
+        {
+          "i": "💰",
+          "l": "Thuyết phục người luyện thi tháo phù chủ",
+          "t": "Ngươi nhắc thi thể vẫn nhận ra người nhà, ở lại nói tới khi lão chịu tháo phù chủ. Nó quay đúng về phía người em, đưa tay đòi chiếc kim. Người em đứng im một lúc mới dám trao.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua quyền ra lệnh cho nó",
+          "t": "Nó theo ngươi, đổi lại {$b.ten} xin được tự mang kim theo. Mỗi lúc nghỉ, nó ngồi quay mặt về phía tiếng kim chạm đá.",
+          "e": {
+            "karma": -4,
+            "tamma": 4
+          },
+          "cost": {
+            "st": 19
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Người luyện thi gọi tiếp. Bàn chân thi thể quay trước, cổ quay sau.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_khau_duoi_lop_da_2b",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "vet_khau_duoi_lop_da",
+        "part": "2b",
+        "waitHours": 120,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Luyện thi",
+      "setting": {
+        "description": "Sân sai thi ở Cửu U Ma Vực",
+        "historyCondition": "phần 1 chọn “Cho luyện tiếp để đổi bí quyết” · vài ngày sau · sân sai thi"
+      },
+      "emotion": "Phẫn nộ"
+    },
+    {
+      "id": "ch_vet_khau_duoi_lop_da_3",
+      "name": "Đường chỉ qua mạch cốt",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma",
+          "phe",
+          "dong"
+        ],
+        "levels": [
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "người luyện thi",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Thi thể khâu mình vào vách để khỏi bị mang đi. Nếu từng được lựa chọn, nó để lại một đầu chỉ cho em. Nếu từng bị sai khiến hoặc đem dùng, chỉ xuyên qua cổ tay, không chừa đầu.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Cắt chỉ và chống thi trận của người luyện thi {$a.ten}",
+          "fight": {
+            "k": "luyenthi",
+            "n": "{$a.ten}"
+          },
+          "win": {
+            "t": "Ngươi tháo trận, để thi thể tự rút những mũi chỉ cuối rồi chọn nơi nằm.",
+            "e": {
+              "karma": 4
+            }
+          },
+          "lose": {
+            "t": "Thua, ngươi bị trận đánh bật, chỉ cắt được một vòng; người em phải giữ cổ tay còn mắc trong vách để nó không bị kéo sâu thêm."
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Thương lượng để người luyện thi rút trận",
+          "t": "Lão đồng ý rút trận nếu được giữ phần cốt dùng tụ linh khí. Người em nhận lời để cứu anh khỏi vách, nhưng bàn tay thi thể nhẹ đi rõ rệt. Nó vẫn giữ được chiếc kim.",
+          "e": {
+            "karma": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Từng mũi chỉ chìm sâu, mặt đá khép lại ở chỗ sau cùng.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_khau_duoi_lop_da_3",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "vet_khau_duoi_lop_da",
+        "part": "3",
+        "waitHours": 2160,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao đấu",
+      "setting": {
+        "description": "Hốc lưu cốt ở Cửu U Ma Vực",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · vài tháng sau · hốc lưu cốt"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_vet_khau_duoi_lop_da_4",
+      "name": "Kim nằm dưới gối đá",
+      "kind": "story",
+      "tags": [
+        "Bi thương"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "ma",
+          "phe",
+          "dong"
+        ],
+        "levels": [
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Người em",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu ngươi đã thắng thi trận, thi thể tự đi tới dốc an táng theo sau người em. Nếu ngươi từng thua trận, người em nhờ người tháo dần vòng chỉ còn lại rồi đưa anh tới đây. Nếu ngươi từng thương lượng rút trận, người em mang thi thể thiếu phần cốt tụ linh tới dốc. Nó đặt kim bên gối đá, chờ người em chọn chỗ chôn.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Chôn cả kim lẫn phần cốt còn lại",
+          "t": "Ngươi cùng người em chôn cả kim và bộ cốt, canh tới khi thi khí tan hết. Hắn kể xong chuyện nhà, xin ngươi để mình ở lại thêm một lúc.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Giữ kim để nhận ra thi thức còn sống",
+          "t": "Ngươi có một vật thử thi. Người em {$b.ten} xin chỉ một đoạn chỉ, đủ quấn qua ngón tay.",
+          "e": {
+            "karma": -1,
+            "item": "story_item_vet_khau_duoi_lop_da_4"
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi lui ra khỏi dốc. Người em ngồi cạnh gối đá, kể tiếp câu chuyện đang dang dở.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_khau_duoi_lop_da_4",
+        "commit": "8b9c479",
+        "themeRegion": "cuu-u"
+      },
+      "chain": {
+        "id": "vet_khau_duoi_lop_da",
+        "part": "4",
+        "waitHours": 8640,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0:ok"
+          ],
+          [
+            "3:0:no"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện anh em",
+      "setting": {
+        "description": "Dốc an táng ở Cửu U Ma Vực",
+        "historyCondition": "phần 3 chọn một cách can dự · một năm sau · dốc an táng"
+      },
+      "emotion": "Bi thương"
+    }
+  ]
+}

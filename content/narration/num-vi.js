@@ -1,0 +1,2 @@
+// Nguồn chuẩn: NUM_VI. Luật xử lý ở src/game/core2/14-sua-lai-pham-khong.js.
+const NUM_VI=['không','một','hai','ba','bốn','năm','sáu','bảy','tám','chín','mười',contentText("core2_14-sua-lai-pham-khong_js.048"),contentText("core2_14-sua-lai-pham-khong_js.049"),contentText("core2_14-sua-lai-pham-khong_js.050"),contentText("core2_14-sua-lai-pham-khong_js.051"),contentText("core2_14-sua-lai-pham-khong_js.052")];

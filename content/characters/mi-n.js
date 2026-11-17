@@ -1,0 +1,2 @@
+// Nguồn chuẩn: MI_N. Luật xử lý ở src/game/core2/18-ghi-lai-truoc-sau.js.
+const MI_N=[[25,contentText("core2_18-ghi-lai-truoc-sau_js.013")],[20,contentText("core2_18-ghi-lai-truoc-sau_js.014")],[15,contentText("core2_18-ghi-lai-truoc-sau_js.015")],[10,contentText("core2_18-ghi-lai-truoc-sau_js.016")],[5,contentText("core2_18-ghi-lai-truoc-sau_js.017")],[-99,contentText("core2_18-ghi-lai-truoc-sau_js.018")]];

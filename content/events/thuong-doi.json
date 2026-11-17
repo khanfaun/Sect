@@ -1,0 +1,520 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "td_mua",
+      "name": "Thương đội dừng chân",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thuong",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 3,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "thuong",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Tiếng chuông lạc đà leng keng. {$en} dừng lại bên đường, {$a.ten} vẫy tay gọi ngươi: “{$a.goi}, xem hàng không? Rẻ hơn trong thành.”",
+        "Đoàn xe của {$en} nghỉ chân dưới gốc cây. Hàng hóa bày ra trên tấm vải bạt, có cả thứ ngươi chưa thấy bao giờ."
+      ],
+      "choices": [
+        {
+          "i": "🏪",
+          "l": "Xem hàng",
+          "t": "{$a.ten} mở từng hòm, vừa mở vừa kể lai lịch từng món.",
+          "e": {
+            "shop": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Chào rồi đi tiếp",
+          "t": "Ngươi gật đầu chào. Đoàn xe lại lục tục lên đường."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "td_mua_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "td_mua",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao thương",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "td_hotong",
+      "name": "Thuê hộ tống",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thuong",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "thuong",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$a.ten}, chủ {$en}, chặn ngươi lại: “Đoạn đường trước mặt có cướp. Đi cùng chúng ta một quãng, trả công hậu hĩnh.”"
+      ],
+      "choices": [
+        {
+          "i": "🛡️",
+          "l": "Nhận lời",
+          "o": [
+            {
+              "w": 3,
+              "t": "Một ngày một đêm, không có chuyện gì. {$a.ten} trả đủ công, còn dúi thêm một viên đan.",
+              "e": {
+                "h": 24,
+                "st": 22,
+                "pill": 1,
+                "an": [
+                  "a",
+                  "hộ tống qua đoạn đường nguy hiểm"
+                ]
+              }
+            },
+            {
+              "w": 2,
+              "t": "Đúng như lời đồn, bọn cướp xông ra giữa đường.",
+              "fight": {
+                "k": "sontac",
+                "cnt": 2
+              },
+              "win": {
+                "t": "Bọn cướp tháo chạy. {$a.ten} vái ngươi ba vái, trả gấp đôi tiền công.",
+                "e": {
+                  "st": 40,
+                  "karma": 4,
+                  "an": [
+                    "a",
+                    "đánh lui bọn cướp"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "i": "✋",
+          "l": "Từ chối",
+          "t": "Ngươi lắc đầu. {$a.ten} thở dài, cho đoàn xe đi vòng."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "td_hotong_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "td_hotong",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao thương",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "td_tin",
+      "name": "Tin từ phương xa",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thuong",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "thuong",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Người dắt lạc đà của {$en} là kẻ lắm mồm. Chưa hỏi đã kể, kể không ngừng."
+      ],
+      "choices": [
+        {
+          "i": "🍵",
+          "l": "Mời một chén trà, nghe kể",
+          "cost": {
+            "st": 2
+          },
+          "t": "Gã kể chuyện khắp nơi, thật có giả có.",
+          "e": {
+            "rumor": 2,
+            "h": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi đi tiếp, sau lưng vẫn còn tiếng gã kể."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "td_tin_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "td_tin",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao thương",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "td_doi",
+      "name": "Đổi hàng",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thuong",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "thuong",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$a.ten} để mắt tới túi trữ vật của ngươi: “Có đan dược dư không? Ta đổi linh thạch, giá tốt.”"
+      ],
+      "choices": [
+        {
+          "i": "⚖️",
+          "l": "Bán một viên đan thường rẻ nhất trong túi",
+          "t": "Gã chọn viên đan thường rẻ nhất ngươi đang có, soi dưới nắng rồi trả đúng giá thu mua.",
+          "e": {
+            "soldPillValue": 1
+          },
+          "cost": {
+            "pillGroup": "any"
+          }
+        },
+        {
+          "i": "💬",
+          "l": "Mặc cả đủ thứ",
+          "chk": [
+            "van",
+            10
+          ],
+          "ok": {
+            "t": "Mặc cả một hồi, gã tặng thêm ngươi một món cho xong chuyện.",
+            "e": {
+              "pill": 1
+            }
+          },
+          "no": {
+            "t": "Gã cười: “{$a.goi} ăn nói khéo thật, nhưng ta không ngu.”"
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Không đổi",
+          "t": "Ngươi lắc đầu."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "td_doi_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "td_doi",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao thương",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "td_lua",
+      "name": "Món hàng lạ",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thuong",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "thuong",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$a.ten} lén kéo ngươi ra sau xe, mở một hộp gỗ: “Đồ thượng cổ, chỉ bán cho người có duyên.”"
+      ],
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Mua",
+          "cost": {
+            "st": 30
+          },
+          "o": [
+            {
+              "w": 1,
+              "t": "Đồ thật. Ngươi không ngờ vận may lại tới dễ như vậy.",
+              "e": {
+                "relic": 1
+              }
+            },
+            {
+              "w": 2,
+              "t": "Về tới chỗ nghỉ mới biết là đồ giả, sơn còn chưa khô.",
+              "e": {
+                "tamma": 3
+              }
+            }
+          ]
+        },
+        {
+          "i": "👁️",
+          "l": "Soi kỹ",
+          "chk": [
+            "ngo",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi chỉ ra chỗ giả. Gã đỏ mặt, đành tặng ngươi một viên đan để bịt miệng.",
+            "e": {
+              "pill": 1
+            }
+          },
+          "no": {
+            "t": "Ngươi không nhìn ra gì. Gã cất hộp đi, mặt hơi tiếc."
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Đồ tốt không ai bán sau xe ngựa."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "td_lua_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "td_lua",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao thương",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "td_nan",
+      "name": "Thương đội bị yêu thú vây",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thuong",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "thuong",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Tiếng ngựa hí thất thanh. {$en} bị một bầy yêu thú vây giữa đường, hộ vệ đã ngã mấy người."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Xông vào cứu",
+          "fight": {
+            "k": "beast",
+            "cnt": 2
+          },
+          "win": {
+            "t": "Bầy thú tan tác. {$a.ten} quỳ xuống cảm tạ, dâng cả túi linh thạch.",
+            "e": {
+              "st": 35,
+              "karma": 6,
+              "an": [
+                "a",
+                "cứu khỏi bầy yêu thú"
+              ]
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Đứng xa nhìn",
+          "t": "Ngươi không xen vào. Lúc ngươi đi, tiếng kêu cứu đã tắt.",
+          "e": {
+            "tamma": 4,
+            "karma": -2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "td_nan_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "td_nan",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Giao thương",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

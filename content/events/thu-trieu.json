@@ -1,0 +1,531 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "tt_chan",
+      "name": "Thú triều ập tới",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thutrieu",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 3,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Mặt đất rung lên. {$en} tràn tới như nước vỡ bờ, mắt đỏ rực, nhắm thẳng hướng thôn trấn gần nhất.",
+        "Bụi mù che kín trời. {$en} đang lao qua, cây cối đổ rạp theo từng bước chạy."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Chặn thú triều lại",
+          "fight": {
+            "k": "beast",
+            "cnt": 3
+          },
+          "win": {
+            "t": "Con đầu đàn ngã xuống, cả bầy tan rã. Thôn trấn phía sau sẽ không bao giờ biết mình vừa thoát nạn.",
+            "e": {
+              "entGone": 1,
+              "tv": 8,
+              "karma": 8,
+              "st": 20
+            }
+          }
+        },
+        {
+          "i": "🏃",
+          "l": "Tránh đường",
+          "t": "Ngươi nép vào vách đá cho tới khi bầy thú chạy qua. Phía trước có ai đó sẽ không may.",
+          "e": {
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tt_chan",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thú triều",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tt_vua",
+      "name": "Thú vương dẫn đàn",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thutrieu",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Giữa {$en} có một con thú to gấp ba con khác, sừng như cây khô. Nó dừng lại, nhìn ngươi."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Giết con đầu đàn",
+          "fight": {
+            "k": "beast",
+            "cnt": 2,
+            "elite": 1,
+            "m": 1.1
+          },
+          "win": {
+            "t": "Thú vương gục xuống. Bầy thú hoảng loạn, chạy về núi.",
+            "e": {
+              "entGone": 1,
+              "tv": 12,
+              "relic": 0
+            }
+          }
+        },
+        {
+          "i": "👁️",
+          "l": "Nhìn thẳng vào mắt nó",
+          "chk": [
+            "tam",
+            12
+          ],
+          "ok": {
+            "t": "Rất lâu sau, thú vương quay đầu. Cả bầy theo nó rút về rừng.",
+            "e": {
+              "entGone": 1,
+              "tam": 1,
+              "karma": 4
+            }
+          },
+          "no": {
+            "t": "Nó gầm lên, lao tới.",
+            "fight": {
+              "k": "beast",
+              "cnt": 3
+            },
+            "win": {
+              "t": "Ngươi đứng giữa xác thú, thở dốc.",
+              "e": {
+                "entGone": 1,
+                "tv": 8
+              }
+            }
+          }
+        },
+        {
+          "i": "🏃",
+          "l": "Lùi lại",
+          "t": "Ngươi lùi từng bước. Nó không đuổi theo."
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tt_vua",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thú triều",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tt_dan",
+      "name": "Dân chạy loạn",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thutrieu",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "pham",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Một đoàn người già trẻ chạy ngược lại, gánh gồng lỉnh kỉnh. {$a.ten} hét lên: “Thú triều! Chạy đi!”"
+      ],
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Hộ tống dân chạy nạn",
+          "t": "Ngươi dẫn họ đi đường tắt qua núi. Đi tới đâu, người ta lạy tới đó.",
+          "e": {
+            "h": 12,
+            "karma": 8,
+            "an": [
+              "a",
+              "cứu cả nhà khỏi thú triều"
+            ]
+          }
+        },
+        {
+          "i": "⚔️",
+          "l": "Quay lại chặn thú",
+          "fight": {
+            "k": "beast",
+            "cnt": 3
+          },
+          "win": {
+            "t": "Ngươi chặn được thú triều. Đám dân quay lại, mang theo rượu và gà.",
+            "e": {
+              "entGone": 1,
+              "tv": 8,
+              "karma": 6,
+              "st": 15
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Mặc kệ",
+          "t": "Ngươi đi tiếp. Tiếng trẻ con khóc mãi sau lưng.",
+          "e": {
+            "tamma": 3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tt_dan_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tt_dan",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thú triều",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tt_bay",
+      "name": "Đặt bẫy trước thú triều",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thutrieu",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "{$en} còn cách nửa ngày đường. Đủ thời gian cho một kẻ biết làm bẫy."
+      ],
+      "choices": [
+        {
+          "i": "🪤",
+          "l": "Bày trận bẫy",
+          "chk": [
+            "ngo",
+            11
+          ],
+          "ok": {
+            "t": "Bầy thú lao vào hố chông, con trước đè con sau. Phần còn lại tan tác.",
+            "e": {
+              "entGone": 1,
+              "tv": 6,
+              "st": 25,
+              "h": 6
+            }
+          },
+          "no": {
+            "t": "Bẫy sụp quá sớm. Bầy thú vòng qua, lao về phía ngươi.",
+            "fight": {
+              "k": "beast",
+              "cnt": 2
+            },
+            "win": {
+              "t": "Đánh tan được cả đàn, mệt muốn đứt hơi.",
+              "e": {
+                "entGone": 1,
+                "tv": 6
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Một mình ngươi không ngăn nổi trời."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tt_bay",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thú triều",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tt_cuu",
+      "name": "Đứa trẻ giữa đường",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thutrieu",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "hai",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$en} sắp tràn qua. Giữa đường có một đứa trẻ ngồi khóc, {$a.look}."
+      ],
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Ôm đứa trẻ chạy",
+          "chk": [
+            "tp",
+            10
+          ],
+          "ok": {
+            "t": "Ngươi chạy như bay, bầy thú sượt qua sau lưng. Đứa bé ôm cổ ngươi không buông.",
+            "e": {
+              "karma": 10,
+              "an": [
+                "a",
+                "cứu giữa thú triều"
+              ]
+            }
+          },
+          "no": {
+            "t": "Chậm một bước. Bầy thú cắn xé, ngươi che cho đứa bé bằng chính lưng mình.",
+            "e": {
+              "hp": "-35%",
+              "karma": 10,
+              "an": [
+                "a",
+                "cứu giữa thú triều"
+              ]
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Không kịp nữa",
+          "t": "Ngươi quay mặt đi.",
+          "e": {
+            "tamma": 8
+          }
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tt_cuu_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tt_cuu",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thú triều",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tt_tron",
+      "name": "Theo dấu thú triều",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thutrieu",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": [
+        "Dấu chân của {$en} còn mới. Thú chạy loạn thường bỏ lại thứ gì đó."
+      ],
+      "choices": [
+        {
+          "i": "🔍",
+          "l": "Lần theo nhặt nhạnh",
+          "o": [
+            {
+              "w": 2,
+              "t": "Ngươi nhặt được mấy viên yêu đan rơi vãi.",
+              "e": {
+                "st": 20,
+                "h": 4
+              }
+            },
+            {
+              "w": 1,
+              "t": "Một con thú tụt lại, quay đầu cắn ngươi.",
+              "fight": {
+                "k": "beast"
+              },
+              "win": {
+                "t": "Thêm một viên yêu đan.",
+                "e": {
+                  "st": 12
+                }
+              }
+            }
+          ]
+        },
+        {
+          "i": "🚶",
+          "l": "Tránh xa",
+          "t": "Ngươi đi đường khác."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tt_tron",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thú triều",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

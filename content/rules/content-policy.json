@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "userLevels": [
+    "Phàm nhân",
+    "Luyện Khí",
+    "Trúc Cơ",
+    "Kết Đan",
+    "Nguyên Anh",
+    "Hóa Thần",
+    "Độ Kiếp"
+  ],
+  "realmIndexOffset": 1,
+  "minimumSlotUserLevel": {
+    "phapbao": 2
+  },
+  "maxSkillTierWithoutAvatar": 2,
+  "sources": [
+    "explore",
+    "road",
+    "ent:thuong",
+    "ent:khach",
+    "ent:thutrieu",
+    "ent:tuantra",
+    "ent:thienkieu",
+    "ent:truysat",
+    "ent:di",
+    "venue",
+    "opportunity",
+    "system",
+    "initiation",
+    "quest",
+    "quest-door"
+  ],
+  "places": [
+    "tran",
+    "thanh",
+    "rung",
+    "nui",
+    "song",
+    "phe",
+    "dong",
+    "tong",
+    "bien",
+    "hoang",
+    "ma",
+    "thien",
+    "linhdia",
+    "khoang",
+    "duoc",
+    "cho",
+    "ancu",
+    "dam"
+  ],
+  "retiredFeatures": [
+    "pass",
+    "region-gates"
+  ],
+  "rules": {
+    "rumorIsNotFact": true,
+    "chainNamesPersist": true,
+    "chainResultsPersist": true,
+    "physicalPlaceRequired": true,
+    "noLocationFallback": true,
+    "noRandomPillForHealing": true
+  }
+}

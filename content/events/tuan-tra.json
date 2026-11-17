@@ -1,0 +1,556 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "tr_hoi",
+      "name": "Bị hỏi han",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:tuantra",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 3,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "tre",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$en} chặn ngươi lại. Kẻ cầm đầu, {$a.ten}, hỏi: “Từ đâu tới? Tới đây làm gì?”"
+      ],
+      "choices": [
+        {
+          "i": "🙇",
+          "l": "Trả lời tử tế",
+          "t": "{$a.ten} gật đầu, ghi vào sổ rồi cho qua. Trước khi đi còn chỉ đường giúp ngươi.",
+          "e": {
+            "rumor": 1
+          }
+        },
+        {
+          "i": "😤",
+          "l": "Đáp xấc",
+          "chk": [
+            "tam",
+            11
+          ],
+          "ok": {
+            "t": "Bị ngươi nhìn chằm chằm, {$a.ten} ngượng ngùng tránh đường.",
+            "e": {
+              "tam": 1
+            }
+          },
+          "no": {
+            "t": "“Láo!” {$a.ten} rút kiếm.",
+            "fight": {
+              "k": "detu",
+              "n": "{$a.ten}",
+              "spar": 1
+            },
+            "win": {
+              "t": "Đánh bại đệ tử tuần tra. Ngươi biết từ nay sơn môn đó sẽ nhớ mặt ngươi.",
+              "e": {
+                "tv": 4,
+                "oan": [
+                  "a",
+                  "làm nhục giữa đường"
+                ]
+              }
+            },
+            "lose": {
+              "t": "Bị đánh một trận, ngươi biết điều hơn.",
+              "e": {
+                "tv": 2
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tr_hoi_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tr_hoi",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tông môn",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tr_luan",
+      "name": "Luận võ với đệ tử tuần tra",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:tuantra",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "tre",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$a.ten} của {$en} nhìn ngươi đầy hứng thú: “Đạo hữu có vẻ không tầm thường. Thử vài chiêu chứ?”"
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Luận võ",
+          "fight": {
+            "k": "detu",
+            "n": "{$a.ten}",
+            "spar": 1
+          },
+          "win": {
+            "t": "{$a.ten} chắp tay phục. Hai người trao đổi tâm đắc tới tận chiều.",
+            "e": {
+              "tv": 6,
+              "an": [
+                "a",
+                "chỉ điểm võ nghệ"
+              ]
+            }
+          },
+          "lose": {
+            "t": "{$a.ten} thu kiếm, cười: “Đạo hữu còn non.”",
+            "e": {
+              "tv": 3
+            }
+          }
+        },
+        {
+          "i": "🙇",
+          "l": "Từ chối",
+          "t": "Ngươi chắp tay xin kiếu."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tr_luan_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tr_luan",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tông môn",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tr_bat",
+      "name": "Truy bắt",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:tuantra",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 3,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "tre",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "{$en} vây kín bốn phía. {$a.ten} giơ lên một tờ cáo thị: “Kẻ này, đúng là ngươi.”"
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Phá vây",
+          "fight": {
+            "k": "detu",
+            "cnt": 2
+          },
+          "win": {
+            "t": "Ngươi phá vây mà đi. Lệnh truy nã sẽ còn dán khắp nơi.",
+            "e": {
+              "tv": 6,
+              "karma": -3
+            }
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Đút lót",
+          "cost": {
+            "st": 30
+          },
+          "t": "{$a.ten} nhìn túi linh thạch, quay mặt đi. “Hôm nay không thấy ai cả.”",
+          "e": {
+            "karma": -2
+          }
+        },
+        {
+          "i": "🙇",
+          "l": "Chịu phạt",
+          "t": "Ngươi bị giữ lại ba ngày, chép kinh sám hối.",
+          "e": {
+            "h": 72,
+            "karma": 6,
+            "tamma": -4
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tr_bat_v"
+        },
+        "condition": {
+          "$hook": "tr_bat_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tr_bat",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tông môn",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tr_giup",
+      "name": "Đệ tử bị thương",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:tuantra",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "tre",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Trong nhóm {$en} có một người bị thương nặng. {$a.ten} hỏi ngươi có thuốc không."
+      ],
+      "choices": [
+        {
+          "i": "💊",
+          "l": "Cho một viên đan hồi khí huyết",
+          "t": "Thương thế ổn lại. {$a.ten} nói muốn đi cùng ngươi một đoạn để trả ơn.",
+          "e": {
+            "karma": 5,
+            "party": {
+              "k": "a",
+              "days": 20
+            }
+          },
+          "cost": {
+            "pillGroup": "healing"
+          }
+        },
+        {
+          "i": "🤲",
+          "l": "Truyền linh lực giúp",
+          "cost": {
+            "mp": "40%"
+          },
+          "t": "Người kia tỉnh lại. {$a.ten} cúi đầu cảm tạ.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "cứu sư huynh đệ"
+            ]
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Không giúp",
+          "t": "Ngươi đi qua."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tr_giup_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tr_giup",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tông môn",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tr_moi",
+      "name": "Lời mời của sơn môn",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:tuantra",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "gia",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "Đi cùng {$en} có một trưởng lão, {$a.look}. {$a.hn} nhìn ngươi hồi lâu: “Căn cốt không tệ. Có muốn về núi không?”"
+      ],
+      "choices": [
+        {
+          "i": "⛩️",
+          "l": "Theo về sơn môn",
+          "t": "Ngươi được nhận làm đệ tử ngoại môn. Từ nay vào được Tàng Kinh Các.",
+          "e": {
+            "flag": "tongmon",
+            "relic": "lenhtong",
+            "h": 48
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Từ chối",
+          "t": "Ngươi quen một mình rồi.",
+          "e": {
+            "tam": 1
+          }
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tr_moi_v"
+        },
+        "condition": {
+          "$hook": "tr_moi_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tr_moi",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tông môn",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tr_kiem",
+      "name": "Khám xét",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:tuantra",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "a": {
+          "role": "tre",
+          "alignment": "context"
+        }
+      },
+      "text": [
+        "“Gần đây có kẻ trộm bảo vật của bổn môn.” {$a.ten} nhìn túi trữ vật của ngươi. “Mở ra.”"
+      ],
+      "choices": [
+        {
+          "i": "🎒",
+          "l": "Cho khám",
+          "t": "Không tìm thấy gì. {$a.ten} xin lỗi rồi cho ngươi đi.",
+          "e": {
+            "h": 1
+          }
+        },
+        {
+          "i": "🏃",
+          "l": "Chạy",
+          "chk": [
+            "tp",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi chạy mất dạng.",
+            "e": {
+              "karma": -2
+            }
+          },
+          "no": {
+            "t": "Bị đuổi kịp.",
+            "fight": {
+              "k": "detu",
+              "cnt": 2
+            },
+            "win": {
+              "t": "Thoát được, nhưng giờ thì thật sự là kẻ thù.",
+              "e": {
+                "karma": -4
+              }
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tr_kiem_v"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tr_kiem",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tông môn",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,753 @@
+{
+  "removed": [
+    {
+      "kind": "TT_PHYS",
+      "id": "tien_thien_dao_thai",
+      "field": "attributeChangePercent.msRegen",
+      "value": 15,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "tien_thien_dao_thai",
+      "field": "attributeChangePercent.mpRegen",
+      "value": 15,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "cuu_khieu_linh_lung",
+      "field": "attributeChangePercent.accuracy",
+      "value": 15,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "thai_duong_the",
+      "field": "attributeChangePercent.resFire",
+      "value": 15,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "thai_am_the",
+      "field": "attributeChangePercent.dmgWater",
+      "value": 15,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "thai_am_the",
+      "field": "attributeChangePercent.resWater",
+      "value": 15,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "loi_dinh_chien_the",
+      "field": "attributeChangePercent.resLightning",
+      "value": 15,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "duoc_linh_thanh_the",
+      "field": "attributeChangePercent.resWood",
+      "value": 15,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "bang_co_ngoc_cot",
+      "field": "attributeChangePercent.resIce",
+      "value": 10,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "cuu_duong_chi_the",
+      "field": "attributeChangePercent.resFire",
+      "value": 8,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "huyen_am_chi_the",
+      "field": "attributeChangePercent.dmgWater",
+      "value": 8,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "huyen_am_chi_the",
+      "field": "attributeChangePercent.resWater",
+      "value": 8,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "mu_mau",
+      "field": "attributeChangePercent.accuracy",
+      "value": 2,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thuong_long_at_moc",
+      "field": "attributeChangePercent.spRegen",
+      "value": 5,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "bang_tam_ngoc_cot",
+      "field": "attributeChangePercent.resIce",
+      "value": 10,
+      "reason": "Trường của game nguồn; bộ chuyển Phù Sinh không thực thi."
+    }
+  ],
+  "descriptions": [
+    {
+      "kind": "TT_PHYS",
+      "id": "hon_don_the",
+      "name": "Hỗn Độn Đạo Thể",
+      "description": "Công vật lý tăng mạnh; Công phép tăng mạnh; Thủ tăng rất mạnh; Thân pháp tăng mạnh; Thần thức tăng rất mạnh; Ngộ tính tăng rất mạnh; Chí mạng tăng khá; ST chí mạng tăng mạnh; Né tránh tăng rất mạnh; Hộ tâm tăng mạnh; Khí huyết tăng mạnh; Linh lực tăng mạnh; Đạo tâm tăng mạnh; Thọ nguyên tăng mạnh; Tu vi nhận thêm tăng mạnh."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "hoang_co_thanh_the",
+      "name": "Hoang Cổ Thánh Thể",
+      "description": "Thủ tăng rất mạnh; Công vật lý tăng mạnh; ST chí mạng tăng mạnh; Hộ tâm tăng rất mạnh; Khí huyết tăng rất mạnh; Tu vi nhận thêm tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "tien_thien_dao_thai",
+      "name": "Tiên Thiên Đạo Thai",
+      "description": "Công phép tăng mạnh; Thần thức tăng rất mạnh; Ngộ tính tăng rất mạnh; Linh lực tăng mạnh; Đạo tâm tăng rất mạnh; Tu vi nhận thêm tăng mạnh."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "van_co_ma_the",
+      "name": "Vạn Cổ Ma Thể",
+      "description": "Công vật lý tăng rất mạnh; Công phép tăng mạnh; Chí mạng tăng mạnh; ST chí mạng tăng rất mạnh; Thủ giảm khá; Hút máu tăng nhẹ; Đạo tâm giảm mạnh."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "cuu_khieu_linh_lung",
+      "name": "Cửu Khiếu Linh Lung Thể",
+      "description": "Thần thức tăng rất mạnh; Ngộ tính tăng rất mạnh; Đạo tâm tăng rất mạnh."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "thuong_thien_ba_the",
+      "name": "Thương Thiên Bá Thể",
+      "description": "Công vật lý tăng mạnh; Thủ tăng mạnh; Chí mạng tăng khá; Khí huyết tăng mạnh."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "thai_duong_the",
+      "name": "Thái Dương Thần Thể",
+      "description": "Công phép tăng khá; Công vật lý tăng khá; Sát thương hệ Hỏa tăng mạnh; Linh lực tăng mạnh."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "thai_am_the",
+      "name": "Thái Âm Ngọc Thể",
+      "description": "Công phép tăng khá; Thần thức tăng mạnh; Linh lực tăng mạnh."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "thien_yeu_the",
+      "name": "Thiên Yêu Hoàng Thể",
+      "description": "Thân pháp tăng mạnh; Thủ tăng khá; Né tránh tăng rất mạnh; Hồi khí huyết mỗi lượt tăng nhẹ; Khí huyết tăng mạnh."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "loi_dinh_chien_the",
+      "name": "Lôi Đình Chiến Thể",
+      "description": "Công vật lý tăng khá; Công phép tăng khá; ST chí mạng tăng mạnh; Thân pháp tăng khá; Sát thương hệ Lôi tăng mạnh."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "hu_khong_chi_the",
+      "name": "Hư Không Chi Thể",
+      "description": "Thân pháp tăng mạnh; Thần thức tăng mạnh; Né tránh tăng rất mạnh; Khí huyết giảm nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "duoc_linh_thanh_the",
+      "name": "Dược Linh Thánh Thể",
+      "description": "Thủ tăng khá; Hồi khí huyết mỗi lượt tăng nhẹ; Khí huyết tăng mạnh; Thọ nguyên tăng mạnh; Tu vi nhận thêm tăng khá."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "ngu_hanh_linh_the",
+      "name": "Ngũ Hành Linh Thể",
+      "description": "Ngộ tính tăng khá; Công phép tăng khá; Tu vi nhận thêm tăng khá."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "vo_cau_kiem_the",
+      "name": "Vô Cấu Kiếm Thể",
+      "description": "Công vật lý tăng khá; ST chí mạng tăng khá; Thân pháp tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "huyet_sat_ma_the",
+      "name": "Huyết Sát Ma Thể",
+      "description": "Công vật lý tăng khá; Chí mạng tăng nhẹ; Hút máu tăng nhẹ; Đạo tâm giảm khá."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "bang_co_ngoc_cot",
+      "name": "Băng Cơ Ngọc Cốt",
+      "description": "Thủ tăng khá; Thần thức tăng mạnh; Sát thương hệ Băng tăng khá."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "tat_phong_linh_the",
+      "name": "Tật Phong Linh Thể",
+      "description": "Thân pháp tăng mạnh; Né tránh tăng mạnh; Sát thương hệ Phong tăng khá."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "cuu_duong_chi_the",
+      "name": "Cửu Dương Chi Thể",
+      "description": "Công phép tăng khá; Công vật lý tăng nhẹ; Sát thương hệ Hỏa tăng khá."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "huyen_am_chi_the",
+      "name": "Huyền Âm Chi Thể",
+      "description": "Công phép tăng khá; Thần thức tăng khá."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "kim_cuong_bat_hoai",
+      "name": "Kim Cương Bất Hoại",
+      "description": "Thủ tăng khá."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "moc_linh_chi_the",
+      "name": "Mộc Linh Chi Thể",
+      "description": "Thủ tăng nhẹ; Khí huyết tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "am_sat_the",
+      "name": "Ám Sát Thể",
+      "description": "Thân pháp tăng nhẹ; Chí mạng tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "cuong_chien_the",
+      "name": "Cuồng Chiến Thể",
+      "description": "Công vật lý tăng nhẹ; Thủ tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "tho_linh_the",
+      "name": "Thổ Linh Chi Thể",
+      "description": "Thủ tăng nhẹ; Khí huyết tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "thuy_linh_the",
+      "name": "Thủy Linh Chi Thể",
+      "description": "Công phép tăng nhẹ; Linh lực tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "hoa_linh_the",
+      "name": "Hỏa Linh Chi Thể",
+      "description": "Công phép tăng nhẹ; Chí mạng tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "kim_linh_the",
+      "name": "Kim Linh Chi Thể",
+      "description": "Công vật lý tăng nhẹ; Thủ tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "man_luc_the",
+      "name": "Man Hoang Lực Thể",
+      "description": "Công vật lý tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "thong_tue_the",
+      "name": "Thông Tuệ Thể",
+      "description": "Ngộ tính tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "kien_nhan_the",
+      "name": "Kiên Nhan Thể",
+      "description": "Khí huyết tăng nhẹ; Đạo tâm tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "linh_cam_the",
+      "name": "Linh Cảm Thể",
+      "description": "Thần thức tăng khá."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "truong_tho_the",
+      "name": "Trường Thọ Thể",
+      "description": "Thọ nguyên tăng nhẹ; Khí huyết tăng nhẹ."
+    },
+    {
+      "kind": "TT_PHYS",
+      "id": "pham_the",
+      "name": "Phàm Thể",
+      "description": "Công vật lý tăng nhẹ; Công phép tăng nhẹ; Thủ tăng nhẹ; Thân pháp tăng nhẹ; Thần thức tăng nhẹ; Ngộ tính tăng nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "than_the_khoe_manh",
+      "name": "Thân Thể Khỏe Mạnh",
+      "description": "Thủ tăng nhẹ; Khí huyết tăng nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "tinh_than_minh_man",
+      "name": "Tinh Thần Minh Mẫn",
+      "description": "Thần thức tăng nhẹ; Đạo tâm tăng nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "khi_luc_doi_dao",
+      "name": "Khí Lực Dồi Dào",
+      "description": "Thân pháp tăng nhẹ; Khí huyết tăng nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "gia_canh_kha_gia",
+      "name": "Gia Cảnh Khá Giả",
+      "description": "Đầu thai mang thêm 3–6 linh thạch."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "ke_ngoc",
+      "name": "Kẻ Ngốc",
+      "description": "Ngộ tính giảm nhẹ; Thủ tăng nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "yeu_menh",
+      "name": "Yểu Mệnh",
+      "description": "Ngộ tính tăng khá; Thọ nguyên giảm khá; Khí huyết giảm nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "mu_mau",
+      "name": "Mù Màu",
+      "description": "Thần thức giảm nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "tay_chan_long_ngong",
+      "name": "Tay Chân Lóng Ngóng",
+      "description": "Thân pháp giảm nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "so_do_cao",
+      "name": "Sợ Độ Cao",
+      "description": "Đạo tâm giảm nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "ngu_hanh_khuyet_moc",
+      "name": "Ngũ Hành Khuyết Mộc",
+      "description": "Linh căn nghiêng về Mộc (khuyết)."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "vo_can",
+      "name": "Vô Căn",
+      "description": "Ngộ tính giảm nhẹ; Công phép giảm nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thien_luong_chi_nhan",
+      "name": "Thiện Lương Chi Nhân",
+      "description": "Thiên về thiện."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "tieu_nhan_bi_oi",
+      "name": "Tiểu Nhân Bỉ Ổi",
+      "description": "Mua đồ rẻ tăng nhẹ; Thiên về ác."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "sat_phat_qua_duyet",
+      "name": "Sát Phạt Quả Quyết",
+      "description": "Công vật lý tăng nhẹ; Chí mạng tăng nhẹ; Sát thương lên kẻ dưới khí huyết tăng mạnh · rất mạnh."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "linh_khi_than_hoa",
+      "name": "Linh Khí Thân Hòa",
+      "description": "Công phép tăng nhẹ; Linh lực tăng khá; Linh lực tiêu hao giảm khá."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thien_co_thong_minh",
+      "name": "Thiên Tư Thông Minh",
+      "description": "Ngộ tính tăng nhẹ; Tu vi nhận thêm tăng khá."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "da_day_hon_sat",
+      "name": "Da Dày Hơn Sắt",
+      "description": "Thủ tăng nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "benh_tat_quan_than",
+      "name": "Bệnh Tật Quấn Thân",
+      "description": "Thần thức tăng khá; Công phép tăng nhẹ; Khí huyết giảm nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "duyen_voi_nuoc",
+      "name": "Duyên Với Nước",
+      "description": "Linh căn nghiêng về Thủy."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thich_lua",
+      "name": "Thích Lửa",
+      "description": "Linh căn nghiêng về Hỏa."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "yeu_cay_co",
+      "name": "Yêu Cây Cỏ",
+      "description": "Linh căn nghiêng về Mộc."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "cung_dau",
+      "name": "Cứng Đầu",
+      "description": "Thủ tăng nhẹ; Linh căn nghiêng về Thổ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "sac_ben",
+      "name": "Sắc Bén",
+      "description": "Công vật lý tăng nhẹ; Linh căn nghiêng về Kim."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thu_sinh",
+      "name": "Thư Sinh",
+      "description": "Thần thức tăng khá; Công vật lý giảm nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "hanh_hiep_truong_nghia",
+      "name": "Hành Hiệp Trượng Nghĩa",
+      "description": "Công vật lý tăng nhẹ; Thiên về thiện."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "tu_loi_vi_ban",
+      "name": "Tư Lợi Vi Bản",
+      "description": "Ngộ tính tăng nhẹ; Mua đồ rẻ tăng nhẹ; Thiên về ác."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thien_ly_nhan",
+      "name": "Thiên Lý Nhãn",
+      "description": "Thần thức tăng khá; Phép thử tăng khá."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "phong_hanh_giả",
+      "name": "Phong Hành Giả",
+      "description": "Thân pháp tăng khá."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "dai_khi_van",
+      "name": "Đại Khí Vận",
+      "description": "Chí mạng tăng nhẹ; Khí vận tăng khá."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "van_du_thien_ha",
+      "name": "Vân Du Thiên Hạ",
+      "description": "Thân pháp tăng nhẹ; Thần thức tăng nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "cuu_duong",
+      "name": "Cửu Dương",
+      "description": "Đòn đánh gây thiêu; Sát thương hệ Hỏa tăng khá; Linh căn nghiêng về Hỏa."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "nhuoc_thuy",
+      "name": "Nhược Thủy",
+      "description": "Linh căn nghiêng về Thủy."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "at_moc",
+      "name": "Ất Mộc",
+      "description": "Linh căn nghiêng về Mộc."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "canh_kim",
+      "name": "Canh Kim",
+      "description": "Linh căn nghiêng về Kim."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "hau_tho",
+      "name": "Hậu Thổ",
+      "description": "Linh căn nghiêng về Thổ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "vo_si",
+      "name": "Võ Sĩ",
+      "description": "Công vật lý tăng nhẹ; Thân pháp tăng nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "kiem_phach",
+      "name": "Kiếm Phách",
+      "description": "Công vật lý tăng nhẹ; Sát thương hệ Kim tăng khá; Linh căn nghiêng về Kim."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "duoc_dong",
+      "name": "Dược Đồng",
+      "description": "Thần thức tăng khá; Linh căn nghiêng về Mộc, Hỏa."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "mi_cot",
+      "name": "Mị Cốt",
+      "description": "Thần thức tăng khá; Mua đồ rẻ tăng khá."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "tam_nhu_chi_thuy",
+      "name": "Tâm Như Chỉ Thủy",
+      "description": "Đạo tâm tăng mạnh; Kháng tâm ma tăng mạnh; Thiên về thiện."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "tam_ma_xam_thuc",
+      "name": "Tâm Ma Xâm Thực",
+      "description": "Thần thức tăng khá; Đạo tâm giảm nhẹ; Thiên về ác."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "dai_tri_nhuoc_ngu",
+      "name": "Đại Trí Nhược Ngu",
+      "description": "Ngộ tính tăng khá; Tu vi nhận thêm tăng khá."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "cuong_vong_tu_dai",
+      "name": "Cuồng Vọng Tự Đại",
+      "description": "Công vật lý tăng khá; ST chí mạng tăng khá; Thủ giảm nhẹ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "dao_ma_chuyen_the",
+      "name": "Đạo Ma Chuyển Thế",
+      "description": "Công vật lý tăng khá; Công phép tăng khá; Thủ tăng khá."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "hon_nguyen_dao",
+      "name": "Hỗn Nguyên Đạo",
+      "description": "Linh căn nghiêng về ngũ hành; Ép thành Cực linh căn."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "chinh_khi_lam_nhiet",
+      "name": "Chính Khí Lẫm Liệt",
+      "description": "Thủ tăng khá; Thiên về thiện."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "ma_tinh_tham_tang",
+      "name": "Ma Tính Thâm Tàng",
+      "description": "Chí mạng tăng nhẹ; Thần thức tăng khá; Thiên về ác."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "quy_nhan",
+      "name": "Quỷ Nhãn",
+      "description": "Thần thức tăng mạnh; Thiên về ác."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "phat_tu",
+      "name": "Phật Tử",
+      "description": "Đạo tâm tăng khá; Thiên về thiện."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "huyet_ma",
+      "name": "Huyết Ma",
+      "description": "Công vật lý tăng khá; Thiên về ác."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "diet_ma_chi_tam",
+      "name": "Diệt Ma Chi Tâm",
+      "description": "Thân pháp tăng nhẹ; Thiên về thiện."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "nhan_qua_dao",
+      "name": "Nhân Quả Đạo",
+      "description": "Thần thức tăng mạnh."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "son_ha_xa_tac",
+      "name": "Sơn Hà Xã Tắc",
+      "description": "Thủ tăng khá; Khí huyết tăng khá; Linh căn nghiêng về Thổ, Mộc."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "kiem_khi_truong_giang",
+      "name": "Kiếm Khí Trường Giang",
+      "description": "Công vật lý tăng khá; Công phép tăng khá; Linh căn nghiêng về Kim, Thủy."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thuong_long_at_moc",
+      "name": "Thương Long Ất Mộc",
+      "description": "Thần thức tăng mạnh; Hồi khí huyết mỗi lượt tăng nhẹ; Linh lực tăng khá; Khí huyết tăng nhẹ; Linh căn nghiêng về Thủy, Mộc."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "chu_tuoc_phan_thien",
+      "name": "Chu Tước Phần Thiên",
+      "description": "Công phép tăng khá; Chí mạng tăng khá; Sát thương hệ Hỏa tăng khá; Linh căn nghiêng về Mộc, Hỏa."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "dia_tam_hoa_lien",
+      "name": "Địa Tâm Hỏa Liên",
+      "description": "Thủ tăng mạnh; Linh căn nghiêng về Hỏa, Thổ."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "tuyet_vuc_bang_tam",
+      "name": "Tuyết Vực Băng Tâm",
+      "description": "Thần thức tăng mạnh; Hộ tâm tăng mạnh; Đạo tâm tăng mạnh; Linh căn nghiêng về Thủy, Kim."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "phuong_hoang_niet_ban",
+      "name": "Phượng Hoàng Niết Bàn",
+      "description": "Công phép tăng khá; Thân pháp tăng khá; Hồi khí huyết mỗi lượt tăng nhẹ; Thọ nguyên tăng mạnh; Linh căn nghiêng về Hỏa."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "loi_dinh_ba",
+      "name": "Lôi Đình Bá",
+      "description": "Công vật lý tăng khá; ST chí mạng tăng mạnh; Sát thương hệ Lôi tăng khá; Linh căn hóa Lôi (biến dị)."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "bang_tam_ngoc_cot",
+      "name": "Băng Tâm Ngọc Cốt",
+      "description": "Công phép tăng khá; Thủ tăng khá; Linh căn hóa Băng (biến dị)."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "huyen_anh_phong_than",
+      "name": "Huyễn Ảnh Phong Thân",
+      "description": "Thân pháp tăng mạnh; Né tránh tăng rất mạnh; Linh căn hóa Phong (biến dị)."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "bang_phach",
+      "name": "Băng Phách",
+      "description": "Công phép tăng khá; Sát thương hệ Băng tăng khá; Linh căn hóa Băng (biến dị)."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "phong_than",
+      "name": "Phong Thần",
+      "description": "Thân pháp tăng khá; Sát thương hệ Phong tăng khá; Linh căn hóa Phong (biến dị)."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thien_sat_co_tinh",
+      "name": "Thiên Sát Cô Tinh",
+      "description": "Công vật lý tăng mạnh; Thủ giảm khá; Chí mạng tăng khá; Thọ nguyên tăng khá."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "hao_nhien_chinh_khi",
+      "name": "Hạo Nhiên Chính Khí",
+      "description": "Thủ tăng khá; Thần thức tăng mạnh; Hộ tâm tăng mạnh; Thiên về thiện."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "vo_tinh_sat_dao",
+      "name": "Vô Tình Sát Đạo",
+      "description": "ST chí mạng tăng mạnh; Công vật lý tăng mạnh; Thiên về ác."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "ta_than_nghich_tu",
+      "name": "Tà Thần Nghịch Tử",
+      "description": "Công phép tăng mạnh; Hút máu tăng nhẹ; Thiên về ác."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thien_menh_chi_tu",
+      "name": "Thiên Mệnh Chi Tử",
+      "description": "Công vật lý tăng mạnh; Công phép tăng mạnh; Thủ tăng rất mạnh; Thân pháp tăng mạnh; Thần thức tăng rất mạnh; Ngộ tính tăng rất mạnh; Tu vi nhận thêm tăng khá; Linh căn nghiêng về ngũ hành."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "ngu_hanh_hop_nhat",
+      "name": "Ngũ Hành Hợp Nhất",
+      "description": "Công phép tăng mạnh; Ngộ tính tăng rất mạnh; Linh căn nghiêng về ngũ hành; Ép thành Cực linh căn."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "loi_than_giang_the",
+      "name": "Lôi Thần Giáng Thế",
+      "description": "Công vật lý tăng mạnh; ST chí mạng tăng rất mạnh; Thân pháp tăng khá; Sát thương hệ Lôi tăng mạnh; Linh căn hóa Lôi (biến dị)."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "van_khi_nghich_thien",
+      "name": "Vận Khí Nghịch Thiên",
+      "description": "Chí mạng tăng mạnh; Né tránh tăng rất mạnh; Khí vận tăng mạnh."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "nguoi_xuyen_viet",
+      "name": "Người Xuyên Việt",
+      "description": "Ngộ tính tăng rất mạnh; Thần thức tăng rất mạnh; Đạo tâm tăng rất mạnh."
+    },
+    {
+      "kind": "TT_DEST",
+      "id": "thien_ma_hang_the",
+      "name": "Thiên Ma Hàng Thế",
+      "description": "Công phép tăng mạnh; Thần thức tăng rất mạnh; Hút máu tăng khá; Công vật lý tăng khá; Thiên về ác."
+    }
+  ]
+}

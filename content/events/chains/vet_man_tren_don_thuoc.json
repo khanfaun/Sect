@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_vet_man_tren_don_thuoc_1",
+      "name": "Tay nếm muối",
+      "kind": "story",
+      "tags": [
+        "Bất an"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": [
+          2
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Diêm dân",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Chủ ruộng",
+          "alignment": "context"
+        }
+      },
+      "text": "Diêm dân {$a.ten} nếm muối mà chỉ thấy vị sắt. Chủ ruộng {$b.ten} nhờ ngươi xác nhận mẻ hàng tốt, hạt muối trên tay hắn có một chấm xám ở giữa.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Giữ mẻ muối lại để xét nước",
+          "t": "Ngươi yêu cầu giữ mẻ muối, ở lại cùng diêm dân xem nguồn nước. Chủ ruộng giục giao hàng, ngươi không ký xác nhận. Người mua đành chờ kết quả thay vì mang muối lạ về bán.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Cho bán và lấy tiền hoa hồng",
+          "t": "Ngươi có bạc. {$a.ten} dùng nước rửa tay ba lần, chấm xám vẫn còn dưới móng.",
+          "e": {
+            "st": 22,
+            "karma": -3,
+            "tamma": 3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Thúng muối được nâng lên, một nhúm xám rơi ra sau chót.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_man_tren_don_thuoc_1",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "vet_man_tren_don_thuoc",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Sinh kế",
+      "setting": {
+        "description": "Nhà chứa muối ở Đông Hải Yêu Vực",
+        "historyCondition": "không"
+      },
+      "emotion": "Bất an"
+    },
+    {
+      "id": "ch_vet_man_tren_don_thuoc_2",
+      "name": "Chum đứng ở đầu dòng",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Diêm dân",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Chủ ruộng",
+          "alignment": "context"
+        }
+      },
+      "text": "Diêm dân {$a.ten} tìm thấy nước rửa quặng chảy vào ruộng qua chum lắng. Chủ ruộng {$b.ten} đặt nắp mới lên chum, vệt xám đã lên tới miệng.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp tiền dẫn dòng rửa quặng sang bể kín",
+          "t": "Ngươi góp tiền xây bể kín nhận nước rửa quặng, tách hẳn khỏi dòng vào ruộng muối. Thợ thử nước xong mới tháo ván chặn. Diêm dân nhờ thầy thuốc kiểm thêm mẻ muối sau, chưa dám đem bán ngay.",
+          "cost": {
+            "st": 16
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Bán tung tích cho người tranh ruộng với chủ",
+          "t": "Ngươi có bạc và ruộng bị đóng. Dân tới xin việc đứng bên chum đã cạn.",
+          "e": {
+            "st": 22,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$a.ten} rút nắp. Nước bên trong trong đến thấy đáy, cặn xám bám cả thành.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_man_tren_don_thuoc_2",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "vet_man_tren_don_thuoc",
+        "part": "2",
+        "waitHours": 504,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Ô uế biển",
+      "setting": {
+        "description": "Trạm nước ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 1 chọn “Giữ mẻ muối lại để xét nước” · vài tuần sau · trạm chia nước"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_vet_man_tren_don_thuoc_2b",
+      "name": "Đầu lưỡi ngậm sắt",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Diêm dân",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Chủ ruộng",
+          "alignment": "context"
+        }
+      },
+      "text": "Diêm dân {$a.ten} đưa đơn thuốc có chữ nhòe. Người mua muối xếp hàng ngoài cửa, mỗi người cầm một cái bát để thử xem còn nếm được nước thuốc.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Dùng tiền hoa hồng bù phí thuốc",
+          "t": "Ngươi đem tiền hoa hồng trả phí thuốc, để thầy thuốc ghi rõ nguồn muối vào đơn. Người bệnh nhẹ dần, nhưng vẫn còn người chưa trở lại làm được. Diêm dân nhờ ngươi cùng họ đòi xét nguồn nước.",
+          "e": {
+            "karma": 4
+          },
+          "cost": {
+            "st": 16
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua hết đơn có nhắc mẻ muối",
+          "t": "Chủ ruộng {$b.ten} trả ngươi khoản lớn hơn. Người xếp cuối cầm bát đi hỏi tên thuốc.",
+          "e": {
+            "st": 40,
+            "karma": -5,
+            "tamma": 4
+          },
+          "cost": {
+            "st": 16
+          },
+          "accounting": {
+            "mode": "buy-and-sell",
+            "capital": 16,
+            "profit": 24
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$a.ten} liếm mép bát rồi đậy nắp. Nước thuốc vẫn còn nguyên.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_man_tren_don_thuoc_2b",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "vet_man_tren_don_thuoc",
+        "part": "2b",
+        "waitHours": 504,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Bệnh nghề",
+      "setting": {
+        "description": "Nhà thuốc ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 1 chọn “Cho bán và lấy tiền hoa hồng” · vài tuần sau · nhà phát thuốc"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_vet_man_tren_don_thuoc_3",
+      "name": "Ô ruộng giữ nước riêng",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "chủ ruộng",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu nước từng được dẫn đi hoặc thuốc có ghi nguồn, dân đã tụ lại đòi một dòng sạch. Nếu ngươi từng bán tin hoặc mua đơn, chủ ruộng {$b.ten} đòi ngươi chứng một mẻ mới trước khi mở lại.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Chia dòng sạch cho từng ô dân góp công",
+          "t": "Ngươi trả phí dựng bờ, chia nước sạch theo phần ruộng và công dân đã góp. Mẻ đầu ít vì phải rửa lại nền, nhưng không còn vị sắt. Mọi người thống nhất chưa đem bán cho tới khi thử thêm một mẻ.",
+          "cost": {
+            "st": 16
+          },
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Dành nước sạch cho một ô bán đắt",
+          "t": "Ngươi có lời và đủ tiền mua thuốc cho người làm ô ấy. Các ô bên cạnh chỉ phơi được bùn.",
+          "e": {
+            "st": 22,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Nước lên trong mương, chảy tới chỗ tấm ván chắn rồi quay ngược.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_man_tren_don_thuoc_3",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "vet_man_tren_don_thuoc",
+        "part": "3",
+        "waitHours": 4320,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Sinh kế",
+      "setting": {
+        "description": "Bờ dẫn nước ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · mùa muối kế · bờ dẫn nước"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_vet_man_tren_don_thuoc_4",
+      "name": "Muối chia bằng tay",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": [
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Diêm dân",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu nước đã chia, dân mang nắm đầu mùa tới bỏ chung vào rổ. Nếu chỉ một ô sạch, diêm dân {$a.ten} đem bát thuốc đã rửa tới đong phần muối mình được mua.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Để dân giữ quyền coi mương",
+          "t": "Ngươi nhường phần lợi lâu dài. {$a.ten} dùng bát thuốc múc một bát cho người cuối hàng.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Giữ quyền bán và trả đủ tiền chữa bệnh",
+          "t": "Người đã bệnh nhận được bạc, ô sạch vẫn thuộc ngươi. Dưới đáy rổ xuất hiện một vệt trắng rất mỏng.",
+          "e": {
+            "karma": 1
+          },
+          "cost": {
+            "st": 16
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi chào người coi mương rồi đi. Trên sân, dân đang tranh luận giá muối vụ mới, lần này không phải xếp hàng đợi phát thuốc.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_vet_man_tren_don_thuoc_4",
+        "commit": "8b9c479",
+        "themeRegion": "dong-hai"
+      },
+      "chain": {
+        "id": "vet_man_tren_don_thuoc",
+        "part": "4",
+        "waitHours": 8640,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Trả nợ cũ",
+      "setting": {
+        "description": "Sân chia muối ở Đông Hải Yêu Vực",
+        "historyCondition": "phần 3 chọn “Chia dòng sạch cho từng ô dân góp công” hoặc “Dành nước sạch cho một ô bán đắt” · năm sau · sân chia muối"
+      },
+      "emotion": "Lắng dịu"
+    }
+  ]
+}

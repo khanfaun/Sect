@@ -1,0 +1,22 @@
+// Nguồn chuẩn: HTKV. Luật xử lý ở src/game/core2/17-chi-so-khi-len.js.
+const HTKV=[
+ {id:'ht_kiemy',r:1,n:contentText("core2_17-chi-so-khi-len_js.036"),fx:{atkP:6,crit:1},d:contentText("core2_17-chi-so-khi-len_js.037"),st:contentText("core2_17-chi-so-khi-len_js.038")},
+ {id:'ht_kimcot',r:1,n:contentText("core2_17-chi-so-khi-len_js.039"),fx:{defP:7,hpP:3},d:contentText("core2_17-chi-so-khi-len_js.040"),st:contentText("core2_17-chi-so-khi-len_js.041")},
+ {id:'ht_linhtuyen',r:1,n:contentText("core2_17-chi-so-khi-len_js.042"),fx:{mpP:8},d:contentText("core2_17-chi-so-khi-len_js.043"),st:contentText("core2_17-chi-so-khi-len_js.044")},
+ {id:'ht_khinhthan',r:1,n:contentText("core2_17-chi-so-khi-len_js.045"),fx:{tp:2,dodge:2},d:contentText("core2_17-chi-so-khi-len_js.046"),st:contentText("core2_17-chi-so-khi-len_js.047")},
+ {id:'ht_tinhtam',r:1,n:contentText("core2_17-chi-so-khi-len_js.048"),fx:{tam:1,tammaRes:15},d:contentText("core2_17-chi-so-khi-len_js.049"),st:contentText("core2_17-chi-so-khi-len_js.050")},
+ {id:'ht_tuluc',r:1,n:contentText("core2_17-chi-so-khi-len_js.051"),fx:{tvP:6},d:contentText("core2_17-chi-so-khi-len_js.052"),st:contentText("core2_17-chi-so-khi-len_js.053")},
+ {id:'ht_lohoa',r:2,n:contentText("core2_17-chi-so-khi-len_js.054"),fx:{matkP:10,mpP:4},d:contentText("core2_17-chi-so-khi-len_js.055"),st:contentText("core2_17-chi-so-khi-len_js.056")},
+ {id:'ht_banthach',r:2,n:contentText("core2_17-chi-so-khi-len_js.057"),fx:{defP:10,hpP:8},d:contentText("core2_17-chi-so-khi-len_js.058"),st:contentText("core2_17-chi-so-khi-len_js.059")},
+ {id:'ht_thanthuc',r:2,n:contentText("core2_17-chi-so-khi-len_js.060"),fx:{than:6,ngo:1},d:contentText("core2_17-chi-so-khi-len_js.061"),st:contentText("core2_17-chi-so-khi-len_js.062")},
+ {id:'ht_trudiem',r:2,n:contentText("core2_17-chi-so-khi-len_js.063"),fx:{lifeP:8,hpP:4},d:contentText("core2_17-chi-so-khi-len_js.064"),st:contentText("core2_17-chi-so-khi-len_js.065")},
+ {id:'ht_phong',r:2,n:contentText("core2_17-chi-so-khi-len_js.066"),fx:{tp:4,dodge:3},d:contentText("core2_17-chi-so-khi-len_js.067"),st:contentText("core2_17-chi-so-khi-len_js.068")},
+ {id:'ht_satkhi',r:2,n:contentText("core2_17-chi-so-khi-len_js.069"),fx:{atkP:9,critDmg:15},d:contentText("core2_17-chi-so-khi-len_js.070"),st:contentText("core2_17-chi-so-khi-len_js.071")},
+ {id:'ht_ngodao',r:3,n:contentText("core2_17-chi-so-khi-len_js.072"),fx:{ngo:2,tvP:10},d:contentText("core2_17-chi-so-khi-len_js.073"),st:contentText("core2_17-chi-so-khi-len_js.074")},
+ {id:'ht_hutien',r:3,n:contentText("core2_17-chi-so-khi-len_js.075"),fx:{atkP:8,defP:8,hpP:8,mpP:8},d:contentText("core2_17-chi-so-khi-len_js.076"),st:contentText("core2_17-chi-so-khi-len_js.077")},
+ {id:'ht_thanthong',r:3,n:contentText("core2_17-chi-so-khi-len_js.078"),fx:{than:12,crit:3},d:contentText("core2_17-chi-so-khi-len_js.079"),st:contentText("core2_17-chi-so-khi-len_js.080")},
+ {id:'ht_bathu',r:3,n:contentText("core2_17-chi-so-khi-len_js.081"),fx:{tam:2,tammaRes:30,lifeP:6},d:contentText("core2_17-chi-so-khi-len_js.082"),st:contentText("core2_17-chi-so-khi-len_js.083")},
+ {id:'ht_lucdao',r:4,n:contentText("core2_17-chi-so-khi-len_js.084"),fx:{atkP:14,defP:12,hpP:12,mpP:12,tvP:8},d:contentText("core2_17-chi-so-khi-len_js.085"),st:contentText("core2_17-chi-so-khi-len_js.086")},
+ {id:'ht_thienco',r:4,n:contentText("core2_17-chi-so-khi-len_js.087"),fx:{ngo:3,than:15,crit:4},d:contentText("core2_17-chi-so-khi-len_js.088"),st:contentText("core2_17-chi-so-khi-len_js.089")},
+ {id:'ht_vanco',r:4,n:contentText("core2_17-chi-so-khi-len_js.090"),fx:{lifeP:20,hpP:15,tammaRes:25},d:contentText("core2_17-chi-so-khi-len_js.091"),st:contentText("core2_17-chi-so-khi-len_js.092")},
+];

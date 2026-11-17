@@ -1,0 +1,1745 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "gk_tam_dem_duoi_kiem",
+      "name": "Tấm đệm dưới kiếm",
+      "kind": "story",
+      "tags": [
+        "Ấm áp"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Kiếm tu",
+          "alignment": "context"
+        }
+      },
+      "text": "“Kiếm mới phát, đừng vội đem thử đá.” Kiếm tu {$a.ten} vừa nói vừa cột đệm lên vách tập. Một đệ tử thấp bé nhìn chỗ đệm quá cao, rồi nhìn thanh kiếm của mình.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp da làm thêm một tấm",
+          "t": "Ngươi mua thêm da cho hắn làm tấm đệm thấp. Đệ tử nhỏ tuổi thử một kiếm, trúng giữa tấm rồi quay lại chắp tay cảm tạ. Người dạy kiếm gật đầu: “Đúng tầm rồi.”",
+          "e": {
+            "karma": 4
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Xin thử đường kiếm trên đá trần",
+          "t": "Kiếm mẻ, ngươi hiểu chỗ nào mình thường hạ cổ tay. {$a.ten} nhặt mảnh thép và gói bằng góc đệm.",
+          "e": {
+            "tv": 4,
+            "karma": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Kiếm tu gọi người mới xếp hàng, nhắc từng người đứng cho vững. Tiếng tập kiếm rộn lên sau lưng ngươi.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_tam_dem_duoi_kiem",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kiếm tu",
+      "setting": {
+        "description": "Vách tập kiếm của [tông môn]",
+        "historyCondition": null
+      },
+      "emotion": "Ấm áp"
+    },
+    {
+      "id": "gk_ghe_da_co_nguoi_dat_truoc",
+      "name": "Ghế đá có người đặt trước",
+      "kind": "story",
+      "tags": [
+        "Cẩu huyết"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Thiếu gia",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Quản sự",
+          "alignment": "context"
+        }
+      },
+      "text": "Thiếu gia {$a.ten} đuổi khách khỏi ghế đá vì trên chân ghế khắc họ nhà hắn. Quản sự {$b.ten} lật chiếc ghế lại, chỗ vết khắc đen ấy còn dính một mẩu lá dùng chà cho cũ.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Xin lấy nước rửa mặt ghế",
+          "t": "Ngươi xin chậu nước, rửa lớp mực làm cũ trên chân ghế. Nét khắc còn mới nguyên. {$b.ten} hỏi ai cho phép tự chiếm chỗ của tông môn, thiếu gia đành đứng dậy giữa tiếng xì xào.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Đứng về phía hắn để đổi một lời giới thiệu",
+          "t": "Hắn dẫn ngươi vào hàng khách danh dự, dúi thêm linh thạch cảm tạ đã bênh mình. Những người bị đuổi phải đặt đồ lễ xuống đất. Quản sự nhìn thấy khoản tiền, ghi cả tên ngươi vào sổ xét việc.",
+          "e": {
+            "karma": -4,
+            "st": 10,
+            "tamma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$b.ten} kê ghế nghiêng. {$a.ten} ngồi xuống, vừa đúng bên thấp.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_ghe_da_co_nguoi_dat_truoc",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Gia thế",
+      "setting": {
+        "description": "Sân lễ của [tông môn]",
+        "historyCondition": null
+      },
+      "emotion": "Cẩu huyết"
+    },
+    {
+      "id": "gk_dot_tre_o_cua_ngach",
+      "name": "Đốt tre ở cửa ngách",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "đệ tử",
+          "alignment": "context"
+        }
+      },
+      "text": "Đệ tử {$a.ten} đã tháo một đoạn ống thông khí của phòng bế quan để sắc thuốc, giờ nối lại không khít. Trong phòng có người ho, cửa lại đang phong kín bằng trận pháp. Hắn níu tay ngươi: “Xin đạo hữu cứu trước, chuyện phạt để sau.”",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Dùng linh lực giữ khí qua chỗ ống gãy",
+          "t": "Ngươi dẫn khí qua chỗ nối cho tới khi quản sự mở được trận. Người trong phòng tỉnh lại, ngươi bị luồng khí ngược làm đau ngực. Đệ tử tự tới nhận lỗi, không nhờ ngươi giấu nữa.",
+          "e": {
+            "karma": 4,
+            "hp": "-5%"
+          },
+          "cost": {
+            "mp": "20%"
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Nộp ống hỏng làm chứng",
+          "t": "Phòng được mở khẩn cấp, ngươi được thưởng, còn {$a.ten} bị cấm làm việc. Nồi thuốc của hắn sôi khô ngoài cửa.",
+          "e": {
+            "st": 18,
+            "karma": -3,
+            "oan": [
+              "a",
+              "đốt tre ở cửa ngách"
+            ]
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi đi báo người coi phòng. Khi quay đầu, đệ tử vẫn áp tay giữ đoạn ống, không dám buông.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_dot_tre_o_cua_ngach",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Việc trong tông",
+      "setting": {
+        "description": "Hành lang kín gió",
+        "historyCondition": null
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "gk_duong_may_nguoc",
+      "name": "Đường may ngược",
+      "kind": "story",
+      "tags": [
+        "Lãng mạn"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "đệ tử",
+          "alignment": "context"
+        }
+      },
+      "text": "Đệ tử {$a.ten} đến trả áo cho đệ tử {$b.ten} đúng giờ đổi người gác. Chỗ tà áo rách đã vá ngược mặt để mũi chỉ đẹp nằm sát da.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Đổi ca để hai người tự gặp",
+          "t": "Ngươi nhận đứng thay một ca gác, để họ gặp nhau lúc đổi người. Người nhận áo xem đường vá, nói nhỏ: “Lần sau rách nữa, ta còn nhờ được không?” Người kia gật đầu, giục hắn mặc vào kẻo lạnh.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "đường may ngược"
+            ]
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Đòi trả công để giữ kín",
+          "t": "Hai người trả bằng phần linh thạch họ góp mua áo mới. Từ lần sau, vết rách chỉ được gập vào trong.",
+          "e": {
+            "st": 18,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Họ đổi áo trên bậc giữa. Bậc đá ướt mà gói áo khô nguyên.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_duong_may_nguoc",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện hai phái",
+      "setting": {
+        "description": "Bậc đá giữa hai sơn môn",
+        "historyCondition": null
+      },
+      "emotion": "Lãng mạn"
+    },
+    {
+      "id": "gk_nguoi_ke_ban_tho",
+      "name": "Người kê bàn thờ",
+      "kind": "story",
+      "tags": [
+        "Bi thương"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Quản sự",
+          "alignment": "context"
+        }
+      },
+      "text": "Quản sự {$a.ten} đang kê lại bàn thờ những đệ tử chết khi vận đá dựng điện. Bài vị đông quá, vài tấm phải xếp khuất phía sau. Ngươi hỏi vì sao điện mới khang trang mà nhà thờ họ lại nhỏ, lão lặng đi một lúc.",
+      "choices": [
+        {
+          "i": "🤲",
+          "l": "Góp công sửa bàn thờ và khắc lại danh sách",
+          "t": "Ngươi bỏ buổi nghe giảng, cùng lão làm lại giá đặt bài vị và chép đủ tên lên vách. Người tới thắp hương từ nay tìm được tên người nhà, không phải xin dỡ từng hàng xuống.",
+          "e": {
+            "karma": 4,
+            "h": 6,
+            "an": [
+              "a",
+              "người kê bàn thờ"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Nộp gỗ tốt để đổi quyền đặt bài vị của mình",
+          "t": "Ngươi có chỗ trước hàng đầu. Những bài vị rơi được gom vào một ngăn, vừa khít chiều dài ngón tay.",
+          "e": {
+            "karma": -2,
+            "van": 1
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão tiếp tục chép tên, nhờ ngươi gặp người nhà ai thì báo họ có thể tới nhận di vật.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_nguoi_ke_ban_tho",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện trong tông",
+      "setting": {
+        "description": "Nhà thờ đệ tử vô danh",
+        "historyCondition": null
+      },
+      "emotion": "Bi thương"
+    },
+    {
+      "id": "gk_dinh_lo_mat_nap",
+      "name": "Đỉnh lò mất nắp",
+      "kind": "story",
+      "tags": [
+        "Hài hước"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "linh viên",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "đệ tử",
+          "alignment": "context"
+        }
+      },
+      "text": "Lò đan sắp tới giờ giữ lửa mà nắp lại nằm trong tay linh viên {$a.ten} trên xà nhà. Đệ tử {$b.ten} đọc giới luật dọa phạt, nó vẫn thản nhiên gặm hạt. Chỉ khi hắn nhắc tới phần quả được chia, nó mới ngẩng đầu.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Mua quả đổi lấy nắp lò",
+          "t": "Ngươi mua ít quả chín, đặt xuống đất rồi lùi ra. Linh viên mang nắp xuống đổi, còn chỉ tay đòi ngươi thêm một quả cho công leo xà. Đệ tử vội ôm nắp chạy về lò.",
+          "e": {
+            "karma": 2
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Cho {$b.ten} mượn nắp nồi",
+          "t": "Hắn cứu được mẻ đan, nồi cơm của ngươi từ đó phảng phất mùi thuốc tẩy tủy.",
+          "e": {
+            "karma": 3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi vừa ra cổng, đệ tử đã bỏ quyển luật xuống đi tìm quả. Có lẽ hắn cũng nhận ra phải nói đúng chuyện linh viên muốn nghe.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_dinh_lo_mat_nap",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện luyện khí",
+      "setting": {
+        "description": "Sân phơi đan cụ",
+        "historyCondition": null
+      },
+      "emotion": "Hài hước"
+    },
+    {
+      "id": "gk_cua_da_tho_mua_dong",
+      "name": "Cửa đá thở mùa đông",
+      "kind": "story",
+      "tags": [
+        "Kinh dị"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {
+          "season": [
+            "dong"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Khe cửa kho thở ra hơi ấm dù phù giữ nhiệt đã hết. Bên trong không có tiếng người, chỉ có dấu bàn tay tụ sương in dần trên mặt cửa phía ngoài.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Tháo từng lá phù khỏi khung",
+          "t": "Ngươi tháo phù cũ theo thứ tự ngược với trận giữ kho. Hơi ấm tắt hẳn; một bàn tay lạnh túm cổ tay ngươi rồi tan khi lá phù cuối rời cửa. Ngươi bị thương nhẹ, phải đứng ngoài vận khí hồi lâu mới dám mở kho.",
+          "e": {
+            "karma": 4,
+            "hp": "-10%",
+            "tamma": -3
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Hứng hơi ấm vào bình",
+          "t": "Ngươi lấy được một bình khí âm luyện phù. Lúc mở nắp, chiếc bình hít vào trước.",
+          "e": {
+            "pill": 1,
+            "tamma": 4
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Đến khi ngươi xuống dốc, cả dấu tay đã mờ, riêng ngón cái vẫn nóng đỏ.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_cua_da_tho_mua_dong",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Mùa đông",
+      "setting": {
+        "description": "Kho phù dưới dốc",
+        "historyCondition": null
+      },
+      "emotion": "Kinh dị"
+    },
+    {
+      "id": "gk_bac_da_chi_mon_mot_ben",
+      "name": "Bậc đá chỉ mòn một bên",
+      "kind": "story",
+      "tags": [
+        "Trầm tĩnh"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui",
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        }
+      },
+      "text": "Bậc đá quanh núi chỉ mòn về phía vực. Đệ tử {$a.ten} gánh nước đi qua, đặt chân phía trong cho người ngược chiều có chỗ bám vách.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Gánh cùng hắn một chuyến",
+          "t": "Ngươi nhận một bên gánh, theo hắn đi hết đường núi. Đến đoạn hẹp, hắn nhắc hạ vai thay vì ghì tay; ngươi làm theo, nước không sóng ra nữa. Một việc nhỏ mà sửa được cả thói quen dùng lực.",
+          "e": {
+            "tv": 4,
+            "h": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Dùng khinh thân thuật đi mép ngoài",
+          "t": "Ngươi luyện được một bước đổi chân giữa không trung. Nước trong thùng hắn sóng ra, để lại vết sạch trên bậc mòn.",
+          "e": {
+            "tv": 3,
+            "karma": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi nhường đường rồi tiếp tục lên núi. Hắn gọi với theo đoạn trên có đá lở, dặn ngươi đi sát vách.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_bac_da_chi_mon_mot_ben",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Ngộ đạo",
+      "setting": {
+        "description": "Đường vòng lưng núi",
+        "historyCondition": null
+      },
+      "emotion": "Trầm tĩnh"
+    },
+    {
+      "id": "gk_nua_qua_can_cua_hai_phai",
+      "name": "Nửa quả cân của hai phái",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui",
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "đệ tử",
+          "alignment": "context"
+        }
+      },
+      "text": "Hai phái dùng chung kho than, mỗi bên giữ nửa quả cân chuẩn. Đệ tử {$a.ten} mang phần cân của mình tới, vết gãy còn sắc như vừa bị mài.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Cân lại bằng linh thạch của ngươi",
+          "t": "Ngươi bỏ linh thạch cùng cỡ lên cân làm đối chứng. Hai nửa quả cân ghép lại đã nhẹ hơn trước, đôi bên phải kiểm sổ rồi chia lại than. Ngươi để lại số linh thạch ấy cho tới khi việc đối chứng xong.",
+          "e": {
+            "karma": 4
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Nhận linh thạch để xác nhận cách cân cũ",
+          "t": "Ngươi lấy linh thạch, ký xác nhận mà không cân lại. Bên bị hụt than phải nhóm lò bằng gỗ ướt, kéo nhau tới đòi xem chữ ký. Phái trả tiền bảo ngươi đã nhận thì tự ra giải thích.",
+          "e": {
+            "st": 18,
+            "karma": -3
+          }
+        },
+        {
+          "i": "⚔️",
+          "l": "Thách {$a.ten} đỡ một kiếm trên đòn cân",
+          "fight": {
+            "k": "detu",
+            "n": "{$a.ten}",
+            "spar": 1
+          },
+          "win": {
+            "t": "Ngươi gạt được kiếm hắn mà cân vẫn đứng, hai bên chịu dùng quả cân của ngươi.",
+            "e": {
+              "karma": 4
+            }
+          },
+          "lose": {
+            "t": "Thua, ngươi phải trả cả phần than văng khỏi đĩa.",
+            "e": {
+              "st": -10
+            }
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Mỗi phái đem nửa quả cân về. Đĩa cân trống đong đưa đến tối.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_nua_qua_can_cua_hai_phai",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tranh chấp tông môn",
+      "setting": {
+        "description": "Trạm chia than linh",
+        "historyCondition": null
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "gk_loi_khac_o_tay_vin",
+      "name": "Lời khắc ở tay vịn",
+      "kind": "story",
+      "tags": [
+        "Phẫn nộ"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "quản sự",
+          "alignment": "context"
+        }
+      },
+      "text": "Người sửa hiên định thay thanh tay vịn có khắc lời kêu oan của các đệ tử từng chịu phạt. Quản sự {$a.ten} bảo đem đốt trước ngày đón khách. Ngươi nhìn thấy dưới một cái tên còn ghi ngày xin xét lại, tới nay đã qua ba năm.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Tháo thanh gỗ để đưa cho người từng chịu phạt",
+          "t": "Ngươi bị giữ lại giải trình. Tới khi được thả, họ đã mang thanh gỗ đặt ngay ngưỡng cửa của {$sect}.",
+          "e": {
+            "karma": 4,
+            "h": 24
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Bán thanh gỗ cho {$a.ten}",
+          "t": "Ngươi nhận bạc để bỏ qua việc thay gỗ. Lửa nhà bếp bén ở chữ cuối, nơi có nhiều mạt gỗ nhất.",
+          "e": {
+            "st": 18,
+            "karma": -3,
+            "tamma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Thợ mộc gói thanh gỗ, chưa đem vào bếp. Hắn hỏi người bên cạnh có biết ai trong số những cái tên ấy còn ở tông môn không.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_loi_khac_o_tay_vin",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện tông môn",
+      "setting": {
+        "description": "Hiên chịu phạt",
+        "historyCondition": null
+      },
+      "emotion": "Phẫn nộ"
+    },
+    {
+      "id": "gk_canh_man_trong_chen_mai",
+      "name": "Cành mận trong chén mài",
+      "kind": "story",
+      "tags": [
+        "Cảm động"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Phù sư",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "học trò",
+          "alignment": "context"
+        }
+      },
+      "text": "Phù sư {$a.ten} nhúng cành mận vào nước mài mực để học trò {$b.ten} lần theo nét khi mắt mờ. Những lá bùa cuối ngày đều có mùi hoa rất nhạt.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Mài lại phiến đá cho nét mực dày",
+          "t": "Ngươi dành một buổi mài lại nghiên, để mực giữ thành nét nổi khi khô. Học trò lần tay đọc được lá phù mình vừa viết. Phù sư bảo hắn thử thêm một tờ, giọng vui hơn hẳn.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "cành mận trong chén mài"
+            ],
+            "h": 12
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua lại bút cũ của {$b.ten}",
+          "t": "Hắn có bạc đi chữa mắt, còn ngươi lấy được bút từng ăn nhiều linh lực. Cành mận vẫn đặt trong chén, chúc xuống.",
+          "e": {
+            "karma": 1,
+            "namedRelic": {
+              "k": "but",
+              "name": "Bút Cành Mận",
+              "lore": "Hắn có bạc đi chữa mắt, còn ngươi lấy được bút từng ăn nhiều linh lực. Cành mận vẫn đặt trong chén, chúc xuống."
+            }
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Hai thầy trò vẫn chậm rãi tập từng nét. Ngươi khép cửa giúp họ để gió khỏi làm xô giấy.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_canh_man_trong_chen_mai",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Tình thầy trò",
+      "setting": {
+        "description": "Nhà tập viết phù",
+        "historyCondition": null
+      },
+      "emotion": "Cảm động"
+    },
+    {
+      "id": "gk_nam_hon_da_vao_mua_gio",
+      "name": "Năm hòn đá vào mùa gió",
+      "kind": "story",
+      "tags": [
+        "Hồi hộp"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui",
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {
+          "season": [
+            "thu"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người kéo cầu",
+          "alignment": "context"
+        }
+      },
+      "text": "Gió đầu thu thổi ngang hẻm, rồi đột ngột đổi chiều giữa hai vách. Người kéo cầu {$a.ten} đặt đá giữ dây, mỗi lần quay lưng lại mất một hòn. Người qua lại bàn tán: “Gió lấy thứ chưa buộc tên.” “Hôm qua nó trả lại một hòn có rêu mặt dưới.”",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Xuống hẻm buộc lại dây vào gốc đá",
+          "t": "Ngươi xuống hẻm buộc dây cầu vào gốc đá. Gió cắt đứt sợi dây kéo phụ, làm ngươi va vào vách, nhưng cầu đã được neo chắc. Leo lên tới bờ, ngươi mới thở ra được.",
+          "e": {
+            "karma": 4,
+            "hp": "-10%"
+          }
+        },
+        {
+          "i": "💰",
+          "l": "Thu luồng gió vào hồ lô",
+          "t": "Ngươi có khí nhẹ để luyện thân pháp. Cầu mất một nhịp dây, người qua phải đi nghiêng đến hết thu.",
+          "e": {
+            "tv": 4,
+            "karma": -3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi chọn đường vòng tránh hẻm. Người kéo cầu đóng lối cũ, gọi mọi người chờ gió lặng rồi mới qua.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_nam_hon_da_vao_mua_gio",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thiên tượng đầu thu",
+      "setting": {
+        "description": "Hẻm đá dưới sườn núi",
+        "historyCondition": null
+      },
+      "emotion": "Hồi hộp"
+    },
+    {
+      "id": "gk_mat_ca_trong_ranh_kiem",
+      "name": "Mắt cá trong rãnh kiếm",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Nông phu",
+          "alignment": "context"
+        }
+      },
+      "text": "Dư khí từ kiếm đường đọng trong rãnh nước, giữ cá con đứng im suốt một ngày. Nông phu {$a.ten} múc chúng lên, con nào cũng còn sống, mắt nhìn về phía nước.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Đục rãnh vòng qua kiếm đường",
+          "t": "Ngươi đục lối nước vòng qua nơi dư khí đọng lại, làm hết buổi còn bị kiếm khí cứa tay. Cá vừa vào dòng mới đã bơi đi. Nông phu xin tông môn từ nay xả nước sau giờ luyện, ngươi nhận giúp chuyển lời.",
+          "e": {
+            "karma": 4,
+            "h": 12,
+            "an": [
+              "a",
+              "mắt cá trong rãnh kiếm"
+            ],
+            "hp": "-10%"
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Luyện kiếm bằng luồng dư khí",
+          "t": "Kiếm ngươi bén thêm, cá chết hết trước khi mặt trời lặn. {$a.ten} chôn chúng dưới gốc mạ mới cấy.",
+          "e": {
+            "tv": 5,
+            "karma": -4,
+            "tamma": 3
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão đặt gáo nghiêng để cá còn nhìn thấy nước.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_mat_ca_trong_ranh_kiem",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cơ duyên",
+      "setting": {
+        "description": "Ruộng bậc thang dưới kiếm đường",
+        "historyCondition": null
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "gk_ban_ve_tren_lung_rua",
+      "name": "Bản vẽ trên lưng rùa",
+      "kind": "story",
+      "tags": [
+        "Hài hước"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Linh quy",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "đệ tử",
+          "alignment": "context"
+        }
+      },
+      "text": "Linh quy {$a.ten} ngủ trên bản vẽ của đệ tử {$b.ten}. Hắn chép theo những nét lộ ra quanh mai, đến lúc dựng trận mới thấy cửa ra nằm đúng dưới bụng rùa.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Dụ rùa đi bằng rau non",
+          "t": "Ngươi hái rau non dẫn rùa khỏi giấy, đệ tử vội chép nốt cửa trận. Nó ăn xong lại nằm vào giữa. Hắn thở dài: “Mai ta phải trải hai tờ, cho nó riêng một tờ.”",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua bản trận dựng nhầm",
+          "t": "Ngươi có một trận giữ chân khá chắc. Khi thử thu trận, ngươi phải bước ra trước rồi mới cúi xuống nhặt đồ.",
+          "e": {
+            "namedRelic": {
+              "k": "tran",
+              "name": "Trận Bàn Mai Rùa",
+              "lore": "Ngươi có một trận giữ chân khá chắc. Khi thử thu trận, ngươi phải bước ra trước rồi mới cúi xuống nhặt đồ."
+            }
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi nhắc hắn thử nhấc cả tờ giấy lên. Hắn ngẩn ra, rồi gọi thêm hai người tới khiêng rùa.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_ban_ve_tren_lung_rua",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Linh thú",
+      "setting": {
+        "description": "Sân học trận",
+        "historyCondition": null
+      },
+      "emotion": "Hài hước"
+    },
+    {
+      "id": "gk_so_truc_sau_ba_tieng_mo",
+      "name": "Sổ trực sau ba tiếng mõ",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong",
+          "thanh"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {
+          "part": [
+            "dem"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        }
+      },
+      "text": "Đệ tử {$a.ten} muốn ngươi ký thay để hắn xuống núi nhìn mặt cha lần cuối. Qua tiếng mõ thứ ba, người kiểm trực sẽ khép sổ, đầu bút đã gác trên nghiên.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Xin nhận ca trực bằng tên ngươi",
+          "t": "Ngươi xin ghi tên nhận ca trực thay, để hắn kịp xuống núi. Trở về, hắn cảm tạ rồi đứng cạnh ngươi tới hết ca, kể cha đã tỉnh được một lúc để nhận ra mình.",
+          "e": {
+            "karma": 4,
+            "h": 12,
+            "an": [
+              "a",
+              "sổ trực sau ba tiếng mõ"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Ký tên hắn và giữ tiền cảm tạ",
+          "t": "Hắn kịp đi. Khi bút tích lộ ra, hắn nhận cả lỗi, còn chữ giả vẫn đen hơn mọi chữ khác trong sổ.",
+          "e": {
+            "st": 10,
+            "karma": -2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi khuyên hắn trình thẳng việc nhà với người kiểm trực. Hắn cầm đơn đi tới bàn; ngươi không biết có được cho phép hay không.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_so_truc_sau_ba_tieng_mo",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Hạn chót ban đêm",
+      "setting": {
+        "description": "Nhà trực chân núi",
+        "historyCondition": null
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "gk_vet_cat_tren_thiep_hon",
+      "name": "Vết cắt trên thiệp hôn",
+      "kind": "story",
+      "tags": [
+        "Cẩu huyết"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Thiếu chủ",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nu",
+          "role": "Cô gái",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "trưởng lão",
+          "alignment": "context"
+        }
+      },
+      "text": "Thiếu chủ {$a.ten} đem thiệp hôn ra xé trước khi cô gái {$b.ten} bước lên thềm. Nàng cúi nhặt, trên nửa thiệp rơi phía ngươi có lời nhà hắn xin hoãn khoản nợ đan dược.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Đọc nốt nửa thiệp trước mặt trưởng lão {$c.ten}",
+          "t": "Nhà hắn phải nhận lại món nợ. {$b.ten} tự xé nửa thiệp của mình, giữ riêng mảnh ghi ngày trả.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua lại khoản nợ đan dược của nhà hắn",
+          "t": "Ngươi trả tiền cho chủ nợ để nhận giấy nợ của nhà thiếu chủ, kiểm đủ dấu trước mặt trưởng lão. Cô gái xin lại phần thiệp mang tên mình, tuyên bố từ nay việc nợ nần của nhà hắn không liên quan tới nàng.",
+          "e": {
+            "st": 25
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Hộ tống nàng rời sân",
+          "t": "Ngươi hộ tống nàng xuống núi, lỡ buổi thỉnh giảng. Đi được một đoạn, nàng tự gấp thiệp cất đi: “Đạo hữu đưa tới đây được rồi. Đường sau ta tự đi.”",
+          "e": {
+            "karma": 4,
+            "h": 12,
+            "an": [
+              "a",
+              "vết cắt trên thiệp hôn"
+            ]
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$a.ten} giẫm lên tờ thiệp đã xé. Một góc giấy dính dưới đế giày hắn.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_vet_cat_tren_thiep_hon",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Từ hôn",
+      "setting": {
+        "description": "Sân thỉnh giảng",
+        "historyCondition": null
+      },
+      "emotion": "Cẩu huyết"
+    },
+    {
+      "id": "gk_nam_voi_chua_toi",
+      "name": "Nắm vôi chưa tôi",
+      "kind": "story",
+      "tags": [
+        "Bất an"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui",
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Thợ đá",
+          "alignment": "context"
+        }
+      },
+      "text": "Thợ trát vôi lên vết nứt rồi giăng vải che lễ mở cổng. Thợ đá {$a.ten} bóp một nắm vôi trong tay, kẽ ngón tay rỉ ra nước trắng.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Yêu cầu dừng lễ và cạo vôi kiểm tra",
+          "t": "Ngươi buộc người coi lễ cho thợ cạo lớp vôi. Vết nứt chạy sâu vào chân cổng, phải gia cố ngay. Dù bị gạt khỏi hàng khách vì làm chậm lễ, ngươi thấy đoàn người đã được chuyển sang lối an toàn.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Dùng linh lực cố vách tới hết lễ",
+          "t": "Ngươi kiệt sức và được trả công. Sau khi người cuối cùng qua, trên vôi xuất hiện lại một đường chân tóc.",
+          "e": {
+            "st": 12,
+            "karma": 2
+          },
+          "cost": {
+            "mp": "20%"
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Một nắm vôi rơi xuống trước đám rước, tròn như vừa được bóp.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_nam_voi_chua_toi",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện xây sơn môn",
+      "setting": {
+        "description": "Vách núi có vết lở",
+        "historyCondition": null
+      },
+      "emotion": "Bất an"
+    },
+    {
+      "id": "gk_duong_kim_qua_phu_rach",
+      "name": "Đường kim qua phù rách",
+      "kind": "story",
+      "tags": [
+        "Xót xa"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "cho",
+          "thanh"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Thợ vá",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        }
+      },
+      "text": "Thợ vá {$a.ten} vá phù hộ thân cũ bằng chỉ tơ. Đệ tử {$b.ten} đem phù của mẹ tới, nếp rách trùng đúng đường linh lực chạy qua tim phù.",
+      "choices": [
+        {
+          "i": "💎",
+          "l": "Mua chỉ tơ linh giúp vá phù",
+          "t": "Ngươi mua đúng loại tơ dẫn linh lực. Thợ vá lần theo nét phù cũ, giữ được thêm một lần hộ thân cho người mang. Đệ tử hỏi kỹ cách bảo quản rồi mới cất vào ngực.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "đường kim qua phù rách"
+            ]
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua lại phù để lấy phần giấy còn tốt",
+          "t": "{$b.ten} dùng tiền mua thuốc. Đường chỉ cắt ra, hắn xin giữ rồi quấn quanh cổ tay.",
+          "e": {
+            "karma": 1,
+            "pill": 1
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi nhường chỗ cho người tới nhận đồ. Người thợ vẫn cặm cụi vá, đệ tử ngồi bên kể chuyện mẹ mình đã giữ lá phù bao năm.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_duong_kim_qua_phu_rach",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Sinh kế",
+      "setting": {
+        "description": "Hiên chợ dưới núi",
+        "historyCondition": null
+      },
+      "emotion": "Xót xa"
+    },
+    {
+      "id": "gk_bac_tren_cung_thieu_mot_phie",
+      "name": "Bậc trên cùng thiếu một phiến",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        }
+      },
+      "text": "Đệ tử {$a.ten} xin rời {$sect} khi tuổi đã cao. Lão mang theo đúng một phiến đá đã mài để thay bậc lỏng, trên vai áo phủ đầy bụi trắng.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Giúp lão kê phiến đá rồi tiễn xuống",
+          "t": "Ngươi giúp lão kê lại phiến đá, lỡ giờ nghe giảng. Lão dẫm thử cho chắc rồi từ biệt sơn môn: “Ở đây mấy chục năm, ít ra cũng để lại được một bậc lành.”",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "bậc trên cùng thiếu một phiến"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Xin bản chú giải và nhận giúp việc kê đá",
+          "t": "Lão trao ngươi trang kinh đã chép, nhờ ngươi học xong nhớ chuyển cho người cần. Ngươi nhận phiến đá, để lại cạnh bậc lỏng chờ người tới giúp kê.",
+          "e": {
+            "tv": 5,
+            "h": 6
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão tự kê xong bậc đá rồi xuống núi. Ngươi đứng tránh bên đường, chắp tay tiễn lão.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_bac_tren_cung_thieu_mot_phie",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Rời tông",
+      "setting": {
+        "description": "Dốc ra sơn môn",
+        "historyCondition": null
+      },
+      "emotion": "Lắng dịu"
+    },
+    {
+      "id": "gk_soi_day_giua_hai_mai",
+      "name": "Sợi dây giữa hai mái",
+      "kind": "story",
+      "tags": [
+        "Lãng mạn"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "người giữ mái",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Người giữ mái",
+          "alignment": "context"
+        }
+      },
+      "text": "Người giữ mái {$a.ten} căng dây hong găng sang mái đối diện. Người giữ mái {$b.ten} buộc thêm một chiếc găng tay phải, chiếc của {$a.ten} đã mất ngón cái.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Trông mái để hai người xuống uống trà",
+          "t": "Ngươi nhận trông mái hết cơn mưa cho họ xuống uống trà. Trở lên, hai người mang thêm cho ngươi một ấm nóng, đứng kể chuyện sửa mái tới khi trời tạnh.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "sợi dây giữa hai mái"
+            ],
+            "h": 6
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Tháo dây lấy sợi tơ chống sét",
+          "t": "Ngươi có tơ luyện phù, hai đôi găng rơi vào hai sân khác nhau. Mãi tối họ mới tìm được chiếc thiếu ngón.",
+          "e": {
+            "pill": 1,
+            "karma": -2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Gió thổi hai chiếc găng sát vào nhau. Cái ngón nguyên chui qua chỗ cái kia đã rách.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "gk_soi_day_giua_hai_mai",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện phường nghề",
+      "setting": {
+        "description": "Mái nhà kính của [tông môn]",
+        "historyCondition": null
+      },
+      "emotion": "Lãng mạn"
+    }
+  ]
+}

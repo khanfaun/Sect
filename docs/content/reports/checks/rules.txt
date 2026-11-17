@@ -1,0 +1,137 @@
+
+> test:rules
+> node tools/test.js crush camngo skillonce ngovan themo thuongthe hoiphuc tinhtoa doithu tamma rotcanh chegiau thanthuc llboost bequanhoi tuitruvat suaLoi32 content
+
+▶ crush
+   ✓ nghiền ép: 30/30 đòn đều trúng (né hoàn hảo cũng vô dụng)
+   ✓ đối chứng ngang sức: né hoàn hảo né được 30/30
+   ✓ nhật ký ghi combat.crushed
+▶ camngo
+   ✓ 4 lần thất bại: tỉ lệ 0.97 (chưa chắc chắn)
+   ✓ 5 lần thất bại: tỉ lệ 1 (chắc chắn)
+   ✓ bảng tỉ lệ có dòng Cảm ngộ khi đầy
+▶ skillonce
+   ✓ chiêu một lần mặc định khoá
+   ✓ chiêu thường mặc định không khoá
+   ✓ bấm ổ khoá thì mở
+   ✓ tới lượt người chơi
+   ✓ dùng được chiêu một lần
+   ✓ dùng xong chiêu biến mất khỏi danh sách
+   ✓ chiêu thường vẫn còn
+   ✓ nhật ký ghi skill.once.consumed
+   ✓ đồng bộ chiêu từ công pháp không trả lại chiêu đã dùng
+   ✓ chiêu thường vẫn còn sau đồng bộ
+▶ ngovan
+   ✓ ngộ tính thấp: hệ số 1
+   ✓ ngộ tính cao: hệ số 1.48 (tối đa 1.5)
+   ✓ llAdd có tác dụng (ll=32)
+   ✓ khí vận thấp: ×0.88
+   ✓ khí vận cao: ×3.00
+   ✓ khí vận thấp: kỳ ngộ lớn đóng
+   ✓ khí vận cao: kỳ ngộ lớn mở
+▶ themo
+   ✓ thế giới đã chuyển sang bản đồ liền
+   ✓ mọi địa điểm nằm trên đất đi được, đúng đại khu vực
+   ✓ không còn quan ải
+   ✓ sinh ra ngẫu nhiên khắp bản đồ (5 đại khu vực)
+   ✓ tên năm đại khu vực
+   ✓ đường đi không lội qua hồ, vân hải (0 ô)
+   ✓ lên núi tốn thời gian hơn
+   ✓ đi bộ sang đại khu vực khác (1 → 2)
+   ✓ mỗi quận nằm trọn trong một đại khu vực
+   ✓ đi tới ô đất bất kỳ: đến đúng ô, có thời gian, không thành icon địa điểm [true,true,true,1]
+   ✓ núi chặn tầm nhìn (đồng bằng 154 ô, kẹt giữa núi 75 ô)
+   ✓ lưu và đọc lại vùng đã thấy (1183 ô)
+   ✓ kẻ địch mạnh theo cảnh giới (53 → 564 khí huyết)
+   ✓ bậc độ khó = cảnh giới
+   ✓ chơi lại thì không giữ vùng đã mở (9086 → 98 ô)
+   ✓ mỗi đại khu vực 6–8 tông môn (8,8,8,6,7)
+   ✓ ô của các địa điểm không chồng nhau, đều trên đất (0,0,8)
+   ✓ đại tông chiếm nhiều ô (8 đại tông ≥ 6 ô)
+   ✓ các địa điểm cách nhau ít nhất một ô trống (0 chỗ sát nhau)
+   ✓ bấm vào bất cứ ô nào của địa điểm đều chọn đúng nó (170 địa điểm)
+   ✓ mỗi đại khu vực ít nhất 3 thành (3,3,3,4,3)
+   ✓ mỗi quận ít nhất 2 trấn (ít nhất 2 trong 30 quận)
+   ✓ hang động chỉ 1–2 ô [1,2]
+   ✓ tông môn nhiều ô [3,9]
+   ✓ trấn nhỏ hơn thành
+   ✓ có chữ quy mô theo số ô
+   ✓ bấm ô phụ cũng chọn đúng địa điểm
+▶ thuongthe
+   ✓ thương nhẹ thua vẫn sống
+   ✓ nguy kịch thua là chết
+   ✓ thương nặng thua: chết 11/30 lần (khoảng 40%)
+   ✓ gãy xương là thương nặng
+▶ hoiphuc
+   ✓ một tháng hồi được 1 khí huyết
+   ✓ cộng dồn tăng theo tháng: 4
+   ✓ bị thương thì cộng dồn về 0
+   ✓ trôi 40 năm: không treo, không vượt tối đa
+   ✓ phàm nhân trong trận 0,5%/lượt
+▶ tinhtoa
+   ✓ tĩnh toạ 6 tháng
+   ✓ tu vi gần như không đổi (chỉ thổ nạp tự nhiên): +0.0
+   ✓ tuổi tăng nửa năm
+   ✓ khí huyết hồi: 22
+   ✓ vượt thọ nguyên thì có cảnh báo
+▶ doithu
+   ✓ máu thấp thì chọn chiêu mạnh nhất (heavy)
+   ✓ chỉ liều mạng một lần
+▶ tamma
+   ✓ đạo tâm thấp 0.024 > đạo tâm cao 0.000
+   ✓ chống được: đạo tâm +1, tâm ma −6
+   ✓ nghe theo: nhân quả xấu đi
+   ✓ không lẫn vào kỳ ngộ ngẫu nhiên
+▶ rotcanh
+   ✓ Kết Đan sống được tới 309
+   ✓ rớt xuống Trúc Cơ, thọ còn 134
+   ✓ hiện lựa chọn thọ cạn
+   ✓ chọn sống tạm
+   ✓ sau 3 tháng khí huyết tối đa giảm: 208 → 184
+   ✓ cạn khí huyết thì chết
+   ✓ Luyện Khí rớt về phàm nhân
+▶ chegiau
+   ✓ che xuống Trúc Cơ, cảnh giới thật vẫn Kết Đan
+   ✓ kẻ địch coi thường, ra tay trước (+50)
+   ✓ thẻ trong trận hiện Trúc Cơ (ẩn)
+   ✓ kẻ thần thức cao nhìn thấu: không được ra tay trước
+   ✓ bấm tiếp thì thôi che giấu
+▶ thanthuc
+   ✓ thần thức cao nhìn xa hơn: 124 → 240
+   ✓ phóng thần thức
+   ✓ tầm nhìn tăng khi phóng: 432
+   ✓ đang chờ thì không dùng lại được
+   ✓ hết hiệu lực sau 2 ngày
+   ✓ có giao tranh gần đó
+   ✓ tới nơi thì vào chuyện tranh bảo vật
+▶ llboost
+   ✓ nhận 2 điểm gốc được 1.7 (gấp 3 lần, nhịp ×0.2)
+▶ bequanhoi
+   ✓ bế quan chạy được
+   ✓ khí huyết không hồi đầy: 17/82
+   ✓ linh lực hồi nhanh hơn khí huyết: 60% so với 21%
+▶ tuitruvat
+   ✓ chưa có túi: 10 ô mang trên người
+   ✓ đeo túi bậc 0: thêm 10 ô → 20
+   ✓ ô túi chứa 6 viên (16 viên − 10 ô người), đánh dấu src:tui
+   ✓ còn linh lực: không ô nào khoá
+   ✓ linh lực = 0: viên nằm trong ô túi bị khoá
+   ✓ viên trên người không bị khoá
+   ✓ không uống được viên bị khoá, đồ không mất
+   ✓ có linh lực lại: dùng được
+   ✓ phàm nhân: không mở được túi
+   ✓ chưa đeo túi: không gì bị khoá dù linh lực = 0
+▶ suaLoi32
+   ✓ lịch luyện không vượt đỉnh tầng đang mở
+   ✓ lên tầng 2 thì khí huyết tăng (80 → 83)
+   ✓ xung kích xong lịch luyện tầng mới về 0%
+   ✓ bảng lên Luyện Khí có cả khí huyết
+   ✓ phàm nhân lên Luyện Khí: có bảng lên cảnh giới, lịch luyện về 0
+   ✓ không có pháp bảo yêu cầu dưới Trúc Cơ
+   ✓ pháp bảo hiếm (93/2000)
+   ✓ Luyện Khí không gặp bí tịch Kết Đan
+   ✓ lực chiến gần bằng sàn là Bình phàm
+▶ content
+   ✓ nguồn nội dung, mọi cảnh, danh mục và các ngữ cảnh (Đạt content: {"events":403,"renderedEvents":349,"scriptedChoices":68,"catalogEntries":1925,"storyBattleCases":24,"chains":20})
+
+Tất cả đạt

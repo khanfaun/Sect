@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phu-sinh:event-v1",
+  "title": "Mục nội dung Phù Sinh v1",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "kind",
+    "trigger",
+    "actors",
+    "text",
+    "choices",
+    "logic",
+    "origin"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "event",
+        "story",
+        "opportunity",
+        "initiation",
+        "quest",
+        "quest-door",
+        "service"
+      ]
+    },
+    "theme": {
+      "type": "string"
+    },
+    "emotion": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "required": [
+        "source",
+        "places",
+        "levels",
+        "time",
+        "once",
+        "special",
+        "weight"
+      ],
+      "properties": {
+        "source": {
+          "enum": [
+            "explore",
+            "road",
+            "ent:thuong",
+            "ent:khach",
+            "ent:thutrieu",
+            "ent:tuantra",
+            "ent:thienkieu",
+            "ent:truysat",
+            "ent:di",
+            "venue",
+            "opportunity",
+            "system",
+            "initiation",
+            "quest",
+            "quest-door"
+          ]
+        },
+        "places": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "venues": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "tea",
+              "inn",
+              "tuu"
+            ]
+          }
+        },
+        "levels": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4
+          }
+        },
+        "time": {
+          "type": "object",
+          "properties": {
+            "part": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "sang",
+                  "chieu",
+                  "toi",
+                  "dem"
+                ]
+              }
+            },
+            "season": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "xuan",
+                  "ha",
+                  "thu",
+                  "dong"
+                ]
+              }
+            }
+          }
+        },
+        "once": {
+          "type": "boolean"
+        },
+        "special": {
+          "type": "boolean"
+        },
+        "weight": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "cooldownHours": {
+          "type": "number",
+          "minimum": 0
+        },
+        "membership": {
+          "enum": [
+            "own",
+            "any"
+          ]
+        },
+        "minUserLevel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "geography": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "requiresItem": {
+          "type": "string"
+        }
+      }
+    },
+    "actors": {
+      "type": "object"
+    },
+    "text": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "$ref": "#/$defs/hook"
+        }
+      ]
+    },
+    "choices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/choice"
+      }
+    },
+    "chain": {
+      "type": "object",
+      "required": [
+        "id",
+        "part",
+        "waitHours",
+        "needs",
+        "paths"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "part": {
+          "enum": [
+            "1",
+            "2",
+            "2b",
+            "3",
+            "4"
+          ]
+        },
+        "waitHours": {
+          "type": "number",
+          "minimum": 0
+        },
+        "needs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "paths": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(1|2|2b|3):[0-9]+(:(ok|no))?$"
+            }
+          }
+        }
+      }
+    },
+    "logic": {
+      "type": "object"
+    },
+    "scriptText": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "origin": {
+      "type": "object",
+      "required": [
+        "file",
+        "ref",
+        "commit"
+      ]
+    },
+    "setting": {
+      "type": "object"
+    },
+    "review": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "hook": {
+      "type": "object",
+      "required": [
+        "$hook"
+      ],
+      "properties": {
+        "$hook": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_]+$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "choice": {
+      "type": "object",
+      "required": [
+        "l"
+      ],
+      "properties": {
+        "i": {
+          "type": "string"
+        },
+        "l": {
+          "type": "string"
+        },
+        "t": {
+          "type": "string"
+        },
+        "cost": {
+          "type": [
+            "object",
+            "string"
+          ]
+        },
+        "e": {
+          "type": "object"
+        },
+        "chk": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "ok": {
+          "type": "object"
+        },
+        "no": {
+          "type": "object"
+        },
+        "fight": {
+          "type": [
+            "object",
+            "integer"
+          ]
+        },
+        "win": {
+          "type": "object"
+        },
+        "lose": {
+          "type": "object"
+        },
+        "o": {
+          "type": "array"
+        },
+        "c": {
+          "type": "array"
+        },
+        "leave": {
+          "enum": [
+            1,
+            true
+          ]
+        },
+        "req": {
+          "oneOf": [
+            {
+              "type": "array"
+            },
+            {
+              "$ref": "#/$defs/hook"
+            }
+          ]
+        },
+        "need": {
+          "type": [
+            "object",
+            "array"
+          ]
+        },
+        "go": {
+          "$ref": "#/$defs/hook"
+        }
+      }
+    }
+  }
+}

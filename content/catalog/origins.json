@@ -1,0 +1,665 @@
+[
+  {
+    "id": "xt_con_nha_va_luoi",
+    "n": "Con nhà vá lưới",
+    "i": "🪢",
+    "fx": {
+      "tp": 2,
+      "mpP": 5
+    },
+    "d": "Thân pháp +2, Linh lực +5%",
+    "bio": "lớn lên bên bến {$que}, học thắt nút qua những đêm đợi người ra khơi",
+    "st": 8,
+    "pill": "hoixuan",
+    "ls": [
+      "{ten} lớn lên ở bến {que}, tối nào cũng ngồi giữ đầu lưới cho mẹ vá. Hôm thuyền về muộn, hai mẹ con cứ vá thêm một mắt rồi lại ngẩng lên nhìn sông.",
+      "Ngày rời nhà, {ten} buộc một đoạn dây lưới vào quai tay nải. Đến bến lạ, vừa sờ thấy nút dây đã biết mình nên hỏi thăm ai trước."
+    ],
+    "tinh": [
+      "Thận trọng",
+      "Nhân hậu"
+    ]
+  },
+  {
+    "id": "xt_tre_giu_ngua_tram",
+    "n": "Trẻ giữ ngựa trạm",
+    "i": "🐎",
+    "fx": {
+      "tp": 3
+    },
+    "d": "Thân pháp +3",
+    "bio": "từng giữ ngựa cho trạm dịch ở {$que}, nghe tiếng vó là biết khách nào đã tới",
+    "st": 12,
+    "age": 1,
+    "pill": "hoixuan",
+    "ls": [
+      "Ở trạm dịch {que}, việc đầu tiên của {ten} là nhặt đinh rơi trong sân để ngựa khỏi giẫm phải. Về sau, nghe một tiếng vó lệch nhịp cũng biết con nào sắp mất móng.",
+      "Hôm được giao đưa con ngựa già về đồng cỏ, {ten} xin đi thêm một trạm. Người coi trạm đưa cho một túi cỏ khô, bảo đường còn dài thì cứ dắt nó đi thong thả."
+    ],
+    "tinh": [
+      "Thận trọng",
+      "Tự do"
+    ]
+  },
+  {
+    "id": "xt_nguoi_chep_so_thoc",
+    "n": "Người chép sổ thóc",
+    "i": "📜",
+    "fx": {
+      "ngo": 2,
+      "van": 1
+    },
+    "d": "Ngộ tính +2, Khí vận +1",
+    "bio": "quen đếm thóc ở kho {$que}, đến năm đói vẫn nhớ nhà nào còn một đấu",
+    "st": 18,
+    "karma": 1,
+    "ls": [
+      "{ten} tập viết trên miệng bao rỗng ở kho thóc {que}. Hễ chép sai tên một nhà, ông giữ kho bắt đến tận cửa hỏi xem nhà ấy có mấy miệng ăn.",
+      "Năm mất mùa, {ten} gạch tên nhà mình khỏi lượt lĩnh cuối để đong đủ cho nhà có trẻ ốm. Qua vụ gặt sau, {ten} giao lại sổ rồi theo chuyến xe thóc ra khỏi làng."
+    ],
+    "tinh": [
+      "Chính trực",
+      "Thông tuệ"
+    ],
+    "tp": 0,
+    "tpc": "Khi bàn giao chìa khóa kho, ông nội dặn {ten} giữ lại {n}, bài điều tức mà họ {ho} vẫn tập trước mỗi phiên mở cửa kho."
+  },
+  {
+    "id": "xt_con_nha_ham_than",
+    "n": "Con nhà hầm than",
+    "i": "🪵",
+    "fx": {
+      "hpP": 7,
+      "defP": 7
+    },
+    "d": "Khí huyết +7%, Thủ +7%",
+    "bio": "học phân biệt gỗ cháy bằng mùi khói khi theo người nhà vào núi ở {$que}",
+    "st": 5,
+    "ls": [
+      "Từ bé, {ten} theo nhà họ {ho} lên hầm than trên núi {que}. Mẹ dạy ngửi khói để biết lúc nào phải lấp cửa lò, vì có hôm nhìn lửa cũng chẳng thấy gì.",
+      "Trước chuyến đi xa, {ten} đợi mẻ than cuối nguội hẳn rồi mới gùi xuống chợ. Tiền bán than đủ mua đôi giày, còn bọc cơm mẹ gói thì đến quá đèo mới mở."
+    ],
+    "tinh": [
+      "Thận trọng",
+      "Thực dụng"
+    ]
+  },
+  {
+    "id": "xt_dua_tre_nhat_o_bac_cua",
+    "n": "Đứa trẻ nhặt ở bậc cửa",
+    "i": "🚪",
+    "fx": {
+      "van": 3,
+      "tam": 1
+    },
+    "d": "Khí vận +3, Đạo tâm +1",
+    "bio": "được nhặt trước bậc cửa ở {$que} vào ngày tuyết tan, gói trong một tấm áo người lớn",
+    "karma": 4,
+    "pill": "hoixuan",
+    "ls": [
+      "{ten} được nhặt trên bậc cửa một nhà ở {que} khi tuyết vừa tan. Chiếc áo bọc đứa trẻ rộng đến mức người mở cửa tưởng ai bỏ quên một bọc củi.",
+      "Lớn lên, mỗi đêm trở rét {ten} vẫn đặt một bát nước ấm ngoài bậc. Hôm lên đường, người nuôi {ten} gấp chiếc áo cũ vào tay nải và bảo nếu mỏi thì về."
+    ],
+    "tinh": [
+      "Nhân hậu",
+      "Tự do"
+    ]
+  },
+  {
+    "id": "xt_ke_tung_vac_bia",
+    "n": "Kẻ từng vác bia",
+    "i": "🪨",
+    "fx": {
+      "defP": 12,
+      "hpP": 6
+    },
+    "d": "Thủ +12%, Khí huyết +6%",
+    "bio": "vác bia thuê qua nhiều ngõ ở {$que}, nhớ được vài cái tên trên đường về",
+    "st": 14,
+    "karma": -1,
+    "age": 2,
+    "ls": [
+      "{ten} từng theo người nhà họ {ho} đến các sân mộ quanh {que}, ngồi nhặt vụn đá khi người lớn đục bia. Tên nào khó đọc thì nhờ người khắc đọc chậm lại.",
+      "Sau hai năm vác thuê, {ten} đem tấm bia cuối đặt trước mộ người từng dạy mình đọc chữ. Đặt xong mới quay về buộc lại đòn gánh, lần này chỉ gánh đồ của mình ra khỏi làng."
+    ],
+    "tinh": [
+      "Lạnh lùng",
+      "Thận trọng"
+    ]
+  },
+  {
+    "id": "xt_con_nguoi_det_chieu",
+    "n": "Con người dệt chiếu",
+    "i": "🌾",
+    "fx": {
+      "mpP": 6,
+      "ngo": 1
+    },
+    "d": "Linh lực +6%, Ngộ tính +1",
+    "bio": "từng ngồi giữ mép chiếu ở {$que}, học đếm nhịp bằng tiếng tay đập cói",
+    "st": 10,
+    "karma": 1,
+    "ls": [
+      "Hồi bé, {ten} giữ mép chiếu cho cha mẹ đập cói ở {que}. Dệt tới chỗ màu nhuộm bị thiếu, {ten} đổi nhịp tay để vệt lỗi nằm đúng vào đường viền.",
+      "Mẻ chiếu đầu tiên tự dệt được đem trải cho một đoàn khách ngủ nhờ. Sáng ra, {ten} cuộn phần cói còn thừa bỏ vào tay nải, theo họ qua bến đò."
+    ],
+    "tinh": [
+      "Thông tuệ",
+      "Nhân hậu"
+    ]
+  },
+  {
+    "id": "xt_dong_tu_dun_tra",
+    "n": "Đồng tử đun trà",
+    "i": "🍵",
+    "fx": {
+      "tam": 2,
+      "regenMp": 2
+    },
+    "d": "Đạo tâm +2, Hồi linh lực mỗi lượt +2%",
+    "bio": "thường đun trà ở {$que}, để ý chén người khách nào nguội trước",
+    "st": 15,
+    "karma": 2,
+    "pill": "tukhi",
+    "ls": [
+      "{ten} lớn lên bên bếp một đạo quán ở {que}, kiễng chân mãi mới nhấc nổi ấm đồng. Đến lúc rót được trà, {ten} đã biết vị khách nào cần chén nước nóng trước khi cần hỏi chuyện.",
+      "Một sáng, đạo trưởng nhờ {ten} đem ấm trà xuống chân núi cho người phu mở đường. Người phu uống xong mời đi cùng một quãng, {ten} trở lên xin phép thầy rồi xuống núi với chiếc ấm nhỏ của mình."
+    ],
+    "tinh": [
+      "Thận trọng",
+      "Nhân hậu"
+    ],
+    "tp": 0,
+    "tpc": "Đạo trưởng trao {n} cho {ten} khi trả lại chiếc ấm nhỏ. Hồi còn ở họ {ho}, thầy cũng từng học bài ấy bên một bếp lửa."
+  },
+  {
+    "id": "xt_nguoi_giu_mieu_nho",
+    "n": "Người giữ miếu nhỏ",
+    "i": "🪔",
+    "fx": {
+      "tam": 3,
+      "tammaRes": 12
+    },
+    "d": "Đạo tâm +3, Giảm tâm ma tăng +12%",
+    "bio": "giữ ngọn đèn trong miếu {$que} qua ba mùa nước lên, ngủ ngay trên bậc cửa",
+    "st": 4,
+    "karma": 3,
+    "age": 1,
+    "ls": [
+      "Miếu nhỏ ở {que} thấp hơn bờ đê, nước dâng là nền gạch ướt trước sân. {ten} còn bé đã biết kê chân bàn thờ bằng bốn viên gạch, mỗi mùa lũ lại thêm một viên.",
+      "Qua trận nước thứ ba, {ten} chỉ người giữ miếu mới chỗ treo đèn để gió sông khỏi tạt. Khi thấy đèn tự tay người ấy châm đã cháy đều, {ten} mới xách dép xuống bến."
+    ],
+    "tinh": [
+      "Chính trực",
+      "Thận trọng"
+    ],
+    "tp": 0,
+    "tpc": "Bà của {ten} gỡ {n} khỏi mặt sau khung đèn. Họ {ho} truyền bài ấy cho người thức canh miếu để biết giữ hơi thở qua đêm dài."
+  },
+  {
+    "id": "xt_ke_bo_truong_thi",
+    "n": "Kẻ bỏ trường thi",
+    "i": "🖌️",
+    "fx": {
+      "ngo": 3,
+      "tam": -1
+    },
+    "d": "Ngộ tính +3, Đạo tâm -1, tâm ma đầu +3",
+    "bio": "bỏ trường thi ở {$quoc} khi nghe tin nhà dột, mang về cả xấp giấy chưa viết",
+    "st": 20,
+    "tamma": 3,
+    "age": 3,
+    "ls": [
+      "Ở {que}, {ten} học chữ dưới mái dột nhà họ {ho}, bên cạnh chiếc chậu hứng mưa. Có đêm nước đầy chậu hai lần mới chép xong một trang.",
+      "Sắp vào trường thi, {ten} nghe tin mái nhà sập mất một góc nên ôm giấy trắng quay về. Đến khi thay xong đòn tay, {ten} đem số giấy còn khô theo mình lên đường tìm thầy khác."
+    ],
+    "tinh": [
+      "Thông tuệ",
+      "Tự do"
+    ]
+  },
+  {
+    "id": "xt_con_nha_ganh_muoi",
+    "n": "Con nhà gánh muối",
+    "i": "🧂",
+    "fx": {
+      "tp": 2,
+      "hpP": 5
+    },
+    "d": "Thân pháp +2, Khí huyết +5%",
+    "bio": "quen gánh muối qua lối đồi ở {$que}, từng về nhà bằng đúng đường muối rơi",
+    "st": 22,
+    "ls": [
+      "{ten} còn nhỏ đã theo người lớn gánh muối qua đồi {que}. Có bận thủng bao, cả nhà lần theo những hạt trắng trên đất để đón {ten} lúc trời sắp mưa.",
+      "Hôm tự nhận chuyến hàng đi xa, {ten} khâu lại từng mép bao rồi mới buộc vào đòn. Qua dốc đầu, quay nhìn chỉ thấy dấu dép mình trên đất ướt."
+    ],
+    "tinh": [
+      "Thực dụng",
+      "Hào sảng"
+    ]
+  },
+  {
+    "id": "xt_nguoi_hoc_khac_khuon",
+    "n": "Người học khắc khuôn",
+    "i": "🪵",
+    "fx": {
+      "craftP": 5,
+      "ngo": 1
+    },
+    "d": "Tỉ lệ luyện thành +5%, Ngộ tính +1",
+    "bio": "giữ những mảnh gỗ thừa ở {$que} để khắc lại hình con vật mình gặp dọc đường",
+    "st": 17,
+    "age": 1,
+    "ls": [
+      "Mỗi lần người nhà họ {ho} làm xong khuôn, {ten} nhặt gỗ vụn khắc dấu chân thú thấy quanh {que}. Có dấu phải đợi tới mùa mưa năm sau mới nhìn lại được cho rõ.",
+      "Một người lái buôn đặt khuôn in hình con vật mà cả làng chưa từng thấy. {ten} gói dao khắc vào vải dầu, theo xe hàng đi xem tận mắt rồi mới chịu nhận việc."
+    ],
+    "tinh": [
+      "Thông tuệ",
+      "Quái gở"
+    ]
+  },
+  {
+    "id": "xt_ke_cheo_do_ban_dem",
+    "n": "Kẻ chèo đò ban đêm",
+    "i": "🛶",
+    "fx": {
+      "mpP": 8,
+      "tam": 1
+    },
+    "d": "Linh lực +8%, Đạo tâm +1, tâm ma đầu +2",
+    "bio": "từng chèo đò lúc canh ba ở {$que}, phân biệt khách qua cách họ đặt chân lên ván",
+    "st": 18,
+    "karma": 2,
+    "tamma": 2,
+    "age": 1,
+    "ls": [
+      "{ten} tập chống sào ở bến {que} bằng cách đưa chiếc đò rỗng sang sông rồi chèo về. Lúc được chở khách canh ba, {ten} đã nhận ra ai vừa lên đò qua tiếng ván nghiêng.",
+      "Đêm cuối ở bến, {ten} chở một người khách qua sông, buộc đò bên cọc rồi đi tiếp cùng người ấy. Dưới ghế lái có để lại tiền đò cho chuyến sáng của mẹ."
+    ],
+    "tinh": [
+      "Lạnh lùng",
+      "Thận trọng"
+    ]
+  },
+  {
+    "id": "xt_con_nha_boc_thuoc",
+    "n": "Con nhà bốc thuốc",
+    "i": "🌿",
+    "fx": {
+      "regenHp": 2,
+      "ngo": 1
+    },
+    "d": "Hồi khí huyết mỗi lượt +2%, Ngộ tính +1",
+    "bio": "lớn lên cạnh giỏ thuốc ở {$que}, từng chép tên từng vị lên mặt trong nắp giỏ",
+    "st": 12,
+    "karma": 3,
+    "pill": "giaidoc",
+    "ls": [
+      "Khi mới học chữ, {ten} chép tên cây thuốc lên mặt trong nắp giỏ của nhà họ {ho} ở {que}. Vị nào dễ nhầm thì bà ngoại bắt bóp một lá rồi ngửi trước khi ghi.",
+      "Gặp năm thuốc cạn, {ten} xin theo người hái dược lên núi tìm cây thay thế. Đến lúc buộc quai giỏ, bà ngoại kiểm lại từng gói thuốc và nhét thêm đôi tất khô."
+    ],
+    "tinh": [
+      "Nhân hậu",
+      "Thông tuệ"
+    ],
+    "tp": 0,
+    "tpc": "Bà ngoại chỉ cho {ten} ngăn đáy đựng {n}. Người hái thuốc họ {ho} vẫn dùng bài ấy để điều hơi khi leo dốc dài."
+  },
+  {
+    "id": "xt_dua_tre_lon_sau_bep",
+    "n": "Đứa trẻ lớn sau bếp",
+    "i": "🍚",
+    "fx": {
+      "hpP": 8,
+      "tam": 1
+    },
+    "d": "Khí huyết +8%, Đạo tâm +1",
+    "bio": "lớn sau bếp nhà trọ ở {$que}, được chủ quán để riêng phần cơm sát đáy nồi",
+    "st": 3,
+    "karma": 1,
+    "pill": "hoixuan",
+    "ls": [
+      "{ten} lớn lên sau bếp một nhà trọ ở {que}, học đoán nồi sắp cạn qua tiếng sôi. Chủ quán hay để lại phần cơm cháy và giao cho {ten} chia với đứa rửa bát.",
+      "Hôm một toán khách trả phòng mà quên gói cơm, {ten} chạy ra tận cổng đuổi theo. Khi trở lại lấy tay nải, chủ quán đã gói sẵn thêm một phần đủ ăn tới chợ bên."
+    ],
+    "tinh": [
+      "Nhân hậu",
+      "Thực dụng"
+    ]
+  },
+  {
+    "id": "xt_tho_cao_voi_tuong",
+    "n": "Thợ cạo vôi tường",
+    "i": "🪨",
+    "fx": {
+      "defP": 9,
+      "tp": 1
+    },
+    "d": "Thủ +9%, Thân pháp +1",
+    "bio": "từng cạo vôi cho những nhà cũ ở {$que}, nhặt lại nhiều mảnh tranh người ta đã phủ đi",
+    "st": 11,
+    "age": 1,
+    "ls": [
+      "Theo thợ cạo vôi ở {que}, {ten} học được chỗ tường nào ẩm chỉ cần gõ một tiếng. Dưới lớp trắng cũ, có khi lộ ra bàn tay trẻ con in bằng đất đỏ.",
+      "Trước ngày theo phường thợ sang làng khác, {ten} ghé căn nhà đầu tiên mình từng cạo. Người chủ cho gỡ một mảnh vữa có hình con cá, vừa đủ bọc trong khăn đem theo."
+    ],
+    "tinh": [
+      "Thận trọng",
+      "Quái gở"
+    ]
+  },
+  {
+    "id": "xt_nguoi_boi_giay_do",
+    "n": "Người bồi giấy dó",
+    "i": "📄",
+    "fx": {
+      "mpP": 7,
+      "ngo": 2
+    },
+    "d": "Linh lực +7%, Ngộ tính +2",
+    "bio": "biết pha nước bồi giấy từ nhỏ ở {$que}, có lần giữ được thư nhà qua một đêm mưa",
+    "st": 16,
+    "karma": 1,
+    "ls": [
+      "Hồi nhỏ ở {que}, {ten} hay bị giao giữ góc giấy dó trong lúc người nhà quét hồ. Chỉ một lần lỡ tay làm rách thư, {ten} tập bồi mặt sau đến khi soi đèn mới nhận ra mối nối.",
+      "Hôm đưa lá thư đã hong khô cho người sang sông, {ten} nhận lời theo đến tận nơi giao tận tay. Mẹ rút một xấp giấy từ đáy hòm để {ten} viết tin về dọc đường."
+    ],
+    "tinh": [
+      "Thận trọng",
+      "Nhân hậu"
+    ]
+  },
+  {
+    "id": "xt_ke_tron_no_qua_deo",
+    "n": "Kẻ trốn nợ qua đèo",
+    "i": "🏔️",
+    "fx": {
+      "tp": 3,
+      "van": 2
+    },
+    "d": "Thân pháp +3, Khí vận +2, tâm ma đầu +6",
+    "bio": "rời {$que} qua đường đèo lúc đêm, từng đếm từng bước để quên tiếng người gọi dưới chân",
+    "st": -8,
+    "karma": -5,
+    "tamma": 6,
+    "age": 1,
+    "ls": [
+      "Thuở nhỏ, {ten} đã thuộc đường lên đèo sau {que} vì hay đi đón người nhà về muộn. Mỗi cột đá trên dốc được đánh dấu bằng một vết gạch dễ sờ trong tối.",
+      "Khi người đòi nợ tới đóng dấu lên cửa, {ten} đợi qua canh mới lách ra sau vườn. Đi hết những cột đá quen, {ten} cứ men theo dốc mà đi, sợ dừng chân sẽ nghe tiếng gọi vọng lên."
+    ],
+    "tinh": [
+      "Thực dụng",
+      "Thận trọng"
+    ]
+  },
+  {
+    "id": "xt_con_nha_nung_men",
+    "n": "Con nhà nung men",
+    "i": "🏺",
+    "fx": {
+      "craftP": 6,
+      "hpP": 5
+    },
+    "d": "Tỉ lệ luyện thành +6%, Khí huyết +5%",
+    "bio": "lớn quanh lò gốm ở {$que}, nhận ra mẻ men ngon nhờ tiếng nứt khi lò nguội",
+    "st": 20,
+    "ls": [
+      "{ten} lớn lên cạnh lò gốm họ {ho} ở {que}. Mỗi khi mở lò, {ten} ngồi đợi nghe tiếng men nứt để đoán chiếc bát nào còn lành.",
+      "Một mẻ hỏng hết, chỉ còn chiếc bát nhỏ màu tro. {ten} mang nó theo đoàn buôn đi hỏi cách pha men, hẹn đem về một cái lành cùng màu để mẹ dùng."
+    ],
+    "tinh": [
+      "Thông tuệ",
+      "Thận trọng"
+    ]
+  },
+  {
+    "id": "xt_nguoi_lam_thue_o_mo",
+    "n": "Người làm thuê ở mỏ",
+    "i": "⛏️",
+    "fx": {
+      "defP": 11,
+      "hpP": 7
+    },
+    "d": "Thủ +11%, Khí huyết +7%, tâm ma đầu +2",
+    "bio": "từng nhặt đá ở mỏ bên {$que}, luôn buộc một sợi chỉ ở tay để nhớ giờ ra ngoài",
+    "st": 8,
+    "karma": -1,
+    "tamma": 2,
+    "age": 2,
+    "pill": "hoixuan",
+    "ls": [
+      "{ten} theo người nhặt đá tới mỏ ở {que} khi còn chưa đẩy nổi xe đầy. Mỗi lần mặt trời khuất khỏi miệng hầm, người trên kéo nhẹ sợi dây buộc cổ tay để gọi về.",
+      "Sau vụ sập đường lò, {ten} nhận tháng công cuối rồi đem chia tiền cho người từng kéo mình ra. Sáng sau, {ten} cuộn sợi chỉ quanh cán cuốc và tìm đường về phía đồng trống."
+    ],
+    "tinh": [
+      "Thận trọng",
+      "Lạnh lùng"
+    ]
+  },
+  {
+    "id": "xt_ke_viet_thu_ho",
+    "n": "Kẻ viết thư hộ",
+    "i": "✉️",
+    "fx": {
+      "ngo": 3,
+      "van": 1
+    },
+    "d": "Ngộ tính +3, Khí vận +1",
+    "bio": "kiếm sống bằng nghề viết thư ở {$que}, thuộc nhiều lời từ biệt hơn lời mời về",
+    "st": 25,
+    "karma": 4,
+    "age": 2,
+    "ls": [
+      "Thuở nhỏ, {ten} học viết bằng cách chép địa chỉ lên thư thuê ở chợ {que}. Người đến đọc thư có khi xin nghe lại đúng một câu rồi cất giấy đi.",
+      "Khi một lá thư gửi ba mùa vẫn bị trả về, {ten} đem những lá còn lại giao cho bạn cùng sạp. Lá chưa tới tay người nhận được cất riêng để {ten} tự mang qua đèo."
+    ],
+    "tinh": [
+      "Nhân hậu",
+      "Thông tuệ"
+    ]
+  },
+  {
+    "id": "xt_hau_due_nguoi_coi_an",
+    "n": "Hậu duệ người coi ấn",
+    "i": "🪪",
+    "fx": {
+      "mpP": 8,
+      "van": 2
+    },
+    "d": "Linh lực +8%, Khí vận +2",
+    "bio": "được dạy cách bọc ấn từ nhỏ ở {$que}, đến lúc đi xa còn giữ tấm vải lót đã bạc màu",
+    "st": 45,
+    "karma": 2,
+    "ls": [
+      "{ten} học bọc ấn ở nhà họ {ho} tại {que}, tập trên một hòn đá có cạnh sắc bằng đúng chiếc ấn thật. Bọc lệch một góc thì lúc mở ra sẽ thấy vải xô ngay.",
+      "Ngày người trong họ trao việc coi ấn cho em, {ten} gấp lại tấm vải đã bạc màu rồi xin rời nhà. Người nhận ấn tiễn tới bến, vẫn bọc ấn bằng nút thắt {ten} dạy."
+    ],
+    "tinh": [
+      "Chính trực",
+      "Thận trọng"
+    ],
+    "tp": 1,
+    "tpc": "Tấm vải bọc ấn có may một ngăn nhỏ đựng {n}. Cha dặn {ten} người họ {ho} đi xa cũng được giữ phép điều tức của nhà."
+  },
+  {
+    "id": "xt_nguoi_hoc_bo_xuong",
+    "n": "Người học bó xương",
+    "i": "🦴",
+    "fx": {
+      "regenHp": 2,
+      "hpP": 6
+    },
+    "d": "Hồi khí huyết mỗi lượt +2%, Khí huyết +6%",
+    "bio": "từng bó xương cho dân đi núi ở {$que}, nhớ ai đã khỏi qua tiếng bước chân họ",
+    "st": 14,
+    "karma": 5,
+    "age": 1,
+    "pill": "giaidoc",
+    "ls": [
+      "Hồi nhỏ, {ten} đứng giữ thau nước cho người bó xương ở {que}. Học lâu nhất là cách hỏi người bệnh đau ở đâu mà tay họ vẫn chịu buông lỏng.",
+      "Ngày đã tự tay nẹp được một cẳng chân, {ten} theo người khỏi bệnh qua đèo để thăm những nhà xa. Lúc chia tay, thầy đưa thêm mấy thanh nẹp vừa tay trẻ nhỏ."
+    ],
+    "tinh": [
+      "Nhân hậu",
+      "Thận trọng"
+    ]
+  },
+  {
+    "id": "xt_ke_lon_len_ben_vach_da",
+    "n": "Kẻ lớn lên bên vách đá",
+    "i": "🧗",
+    "fx": {
+      "tp": 3,
+      "dodge": 4
+    },
+    "d": "Thân pháp +3, Né tránh +4%",
+    "bio": "từng lội theo những đường khe cạn ở {$que}, tối về phơi giày trên vách gần bếp",
+    "age": 1,
+    "ls": [
+      "Ở {que}, {ten} hay trốn ra khe cạn sau vách đá, lần theo rêu để tìm chỗ đặt mũi chân. Đôi giày ướt phải phơi gần bếp mới kịp khô trước sáng.",
+      "Sau một mùa đường làng bị đá chặn, {ten} dò được lối đi qua khe lên tận sống núi. Chỉ đường cho người nhà xong, {ten} xỏ đôi giày còn ẩm và đi xem bên kia dốc có gì."
+    ],
+    "tinh": [
+      "Tự do",
+      "Thận trọng"
+    ]
+  },
+  {
+    "id": "xt_con_nha_giu_kho_duong",
+    "n": "Con nhà giữ kho đường",
+    "i": "🍯",
+    "fx": {
+      "hpP": 7,
+      "van": 2
+    },
+    "d": "Khí huyết +7%, Khí vận +2",
+    "bio": "lớn gần kho đường ở {$que}, ngày lạnh thường chia cho bạn mấy cục vụn dưới đáy hũ",
+    "st": 36,
+    "karma": 1,
+    "ls": [
+      "{ten} sống ở gian cạnh kho đường họ {ho} tại {que}. Mùa lạnh, {ten} nhặt những cục đường vụn đem chia ở bậc cửa, để khách đi rồi mới quét sân.",
+      "Lần đầu được đi theo chuyến hàng dài ngày, {ten} xin lĩnh tiền công bằng một hũ đường nhỏ. Qua dốc tuyết, hũ ấy đã vơi phân nửa vì đem pha nước cho bạn đường."
+    ],
+    "tinh": [
+      "Hào sảng",
+      "Nhân hậu"
+    ]
+  },
+  {
+    "id": "xt_nguoi_bi_tra_ve_tu_bien_ai",
+    "n": "Người bị trả về từ biên ải",
+    "i": "🏮",
+    "fx": {
+      "atkP": 9,
+      "defP": 8
+    },
+    "d": "Công vật lý +9%, Thủ +8%, tâm ma đầu +4",
+    "bio": "từng giữ cửa ải của {$quoc}, về {$que} vẫn thức đúng lúc có tiếng trống đổi ca",
+    "st": 14,
+    "karma": -3,
+    "tamma": 4,
+    "age": 3,
+    "pill": "hoixuan",
+    "ls": [
+      "Còn nhỏ ở {que}, {ten} ngủ cạnh trống canh và thuộc giờ đổi phiên trước cả đám lính mới. Lúc lớn hơn, {ten} theo một người cùng họ ra biên ải để học giữ cửa.",
+      "Bị trả về sau một đêm bỏ phiên đi cõng người bị thương, {ten} ở nhà thêm ba mùa mưa. Lần rời quê sau đó, {ten} chọn chuyến xe xuất phát đúng giờ đổi canh cũ."
+    ],
+    "tinh": [
+      "Chính trực",
+      "Lạnh lùng"
+    ]
+  },
+  {
+    "id": "xt_tre_an_duoi_san_dan",
+    "n": "Trẻ ẩn dưới sàn đan",
+    "i": "🧺",
+    "fx": {
+      "dodge": 5,
+      "tam": 2
+    },
+    "d": "Né tránh +5%, Đạo tâm +2, tâm ma đầu +1",
+    "bio": "lớn lên dưới sàn đan ở {$que}, đoán được ai đến nhà bằng cách họ giũ dép",
+    "st": 6,
+    "karma": 1,
+    "tamma": 1,
+    "ls": [
+      "Lúc người lạ gõ cửa nhà ở {que}, {ten} thường chui dưới sàn đan theo lời mẹ. Dần dần, nghe tiếng giũ dép là đủ biết người nào đã tới và họ đang vội hay thong thả.",
+      "Một hôm mẹ giũ dép hai lần để báo đường trống. {ten} bò ra bằng lối sau, mang theo tấm phên nhỏ để sửa lại bậc cửa nếu có ngày trở về."
+    ],
+    "tinh": [
+      "Thận trọng",
+      "Tự do"
+    ]
+  },
+  {
+    "id": "xt_ke_mang_tro_ve_que",
+    "n": "Kẻ mang tro về quê",
+    "i": "🕯️",
+    "fx": {
+      "tam": 3,
+      "hpP": 5
+    },
+    "d": "Đạo tâm +3, Khí huyết +5%, tâm ma đầu +3",
+    "bio": "về lại {$que} cùng một hũ tro, đi suốt một ngày để tìm chỗ người mất từng ngồi",
+    "st": 5,
+    "karma": 4,
+    "tamma": 3,
+    "age": 2,
+    "ls": [
+      "Hồi bé, {ten} theo người nhà họ {ho} bán đèn ở chợ {que}. Mỗi khi hết buổi, hai người ngồi nép cạnh bậc giếng đếm tim đèn còn dư.",
+      "Lúc mang hũ tro về, {ten} tìm được bậc giếng nhờ một vết sáp trên đá. Sáng hôm sau, {ten} gửi chìa khóa sạp cho người nhà rồi cầm một ngọn đèn mới lên đường."
+    ],
+    "tinh": [
+      "Nhân hậu",
+      "Lạnh lùng"
+    ]
+  },
+  {
+    "id": "xt_nguoi_thua_ke_sap_bac",
+    "n": "Người thừa kế sạp bạc",
+    "i": "🪙",
+    "fx": {
+      "shopP": 6,
+      "van": 2
+    },
+    "d": "Giảm giá mua +6%, Khí vận +2",
+    "bio": "được để lại một sạp bạc ở {$que}, lấy mấy đồng méo cuối cùng làm tiền lên đường",
+    "st": 65,
+    "karma": -1,
+    "ls": [
+      "{ten} lớn lên sau sạp bạc của họ {ho} ở {que}, sớm quen nhận ra đồng bị cắt mép chỉ bằng tiếng rơi. Cha vẫn bắt cân lại trước mặt khách, dù hai bên đã mua bán nhiều năm.",
+      "Đến lúc nhận sạp, {ten} bán nốt số bạc nguyên để trả công người coi quầy. Mấy đồng méo được xâu vào quai túi, cứ đi một bước lại khẽ chạm nhau."
+    ],
+    "tinh": [
+      "Thực dụng",
+      "Thông tuệ"
+    ]
+  },
+  {
+    "id": "xt_nguoi_hoc_dao_sau_mua_lu",
+    "n": "Người học đạo sau mùa lũ",
+    "i": "🌧️",
+    "fx": {
+      "mpP": 10,
+      "ngo": 3
+    },
+    "d": "Linh lực +10%, Ngộ tính +3, tâm ma đầu +1",
+    "bio": "chỉ bắt đầu nhập đạo sau khi dọn lại nhà ở {$que}, giữ tấm ván cửa làm bàn chép kinh",
+    "st": 4,
+    "karma": 2,
+    "tamma": 1,
+    "age": 5,
+    "pill": "tukhi",
+    "ls": [
+      "Từ bé, {ten} hay cất sách lên xà ngang vì nhà họ {ho} ở chỗ trũng của {que}. Năm lũ lớn, nước vẫn lên tới xà, chỉ còn tấm ván cửa trôi mắc trong cây.",
+      "Dọn nhà xong, {ten} kê tấm ván làm bàn, chép lại từng câu kinh nhớ được. Mấy năm sau, {ten} mang bản chép đã ráo mực lên núi tìm người chỉ phần còn thiếu."
+    ],
+    "tinh": [
+      "Thận trọng",
+      "Thông tuệ"
+    ],
+    "tp": 1,
+    "tpc": "Trước khi {ten} lên núi, mẹ lật mặt dưới tấm ván cho xem {n}. Tổ họ {ho} từng khắc bản tâm pháp vào đó sau một mùa lũ trước."
+  }
+]

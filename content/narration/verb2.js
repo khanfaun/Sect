@@ -1,0 +1,2 @@
+// Nguồn chuẩn: VERB2. Luật xử lý ở src/game/core/06-su-kien.js.
+const VERB2={charge:contentText("core_06-su-kien_js.050"),block:contentText("core_06-su-kien_js.051"),rage:contentText("core_06-su-kien_js.052"),poison:contentText("core_06-su-kien_js.053"),burn:contentText("core_06-su-kien_js.054"),weak:contentText("core_06-su-kien_js.055"),vuln:contentText("core_06-su-kien_js.056"),drain:contentText("core_06-su-kien_js.057"),heal:contentText("core_06-su-kien_js.058"),stun:contentText("core_06-su-kien_js.059")};

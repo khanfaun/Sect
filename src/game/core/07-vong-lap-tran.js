@@ -11,7 +11,7 @@ function combatStep(dt){
     if(u.stunT>0){u.stunT=Math.max(0,u.stunT-dt);continue;}
     if(u.phase==='run')u.pos+=vRun(sc,u)*dt;
     else if(u.phase==='recover'){u.pos+=vRec(sc,u)*dt;if(u.pos>=100){u.pos=0;u.phase='run';onZero(sc,u);if(sc.over)return;}}
-    else if(u.phase==='charge'||u.phase==='guard'){u.pos=Math.min(PHAT,u.pos+vRec(sc,u)*dt*CHG_SLOW);u.chargeT+=dt;if(u.phase==='guard'&&u.pos>=PHAT)endStance(sc,u,(u.ctrl==='player'?'Ngươi':u.name)+' không phải đỡ đòn nào, buông thế.');}
+    else if(u.phase==='charge'||u.phase==='guard'){u.pos=Math.min(PHAT,u.pos+vRec(sc,u)*dt*CHG_SLOW);u.chargeT+=dt;if(u.phase==='guard'&&u.pos>=PHAT)endStance(sc,u,(u.ctrl==='player'?'Ngươi':u.name)+contentText("core_07-vong-lap-tran_js.combatStep.001"));}
   }
   // người đang tụ lực: đủ điều kiện thì tung chiêu
   const ch=sc.units.find(u=>u.phase==='charge'&&u.hp>0&&u.pos>=PHAT);
@@ -48,7 +48,7 @@ function onZero(sc,u){
   let d=0;
   if(u.st.poison>0){if(isP&&fx.poisonImm)u.st.poison=0;else{d+=u.st.poison;u.st.poison=Math.floor(u.st.poison*0.75);}}
   if(u.st.burn>0){d+=u.st.burn;u.st.burn=Math.floor(u.st.burn*0.5);}
-  if(d){u.hp-=d;clog(sc,(u.isMain?'Ngươi':u.name)+' '+T(['bị độc hỏa gặm nhấm kinh mạch','bị độc khí và lửa thiêu hành hạ','bị độc hỏa làm khí huyết hao mòn'])+'.','dot');if(u.hp<=0){down(sc,u);checkEnd(sc);return;}}
+  if(d){u.hp-=d;clog(sc,(u.isMain?'Ngươi':u.name)+' '+T([contentText("core_07-vong-lap-tran_js.onZero.002"),contentText("core_07-vong-lap-tran_js.onZero.003"),contentText("core_07-vong-lap-tran_js.onZero.004")])+'.','dot');if(u.hp<=0){down(sc,u);checkEnd(sc);return;}}
   if(isP&&typeof regenTurn==='function'){regenTurn(u,fx);} // hồi phục mỗi lượt của người chơi: xem core2/24-hoi-phuc.js
   else{
   let reg=(fx.regenHp||0)+(u.st.regen>0?6:0);if(u.st.regen>0)u.st.regen--;
@@ -61,19 +61,19 @@ function onZero(sc,u){
 }
 function down(sc,u){
   if(u.immune)return;
-  if(u.isMain&&!sc.spar&&U('hoi')&&!G.run.revived){G.run.revived=true;u.hp=Math.round(u.max*0.3);clog(sc,'🕯️ Hồi quang phản chiếu! Ngươi gượng đứng dậy.','me');return;}
+  if(u.isMain&&!sc.spar&&U('hoi')&&!G.run.revived){G.run.revived=true;u.hp=Math.round(u.max*0.3);clog(sc,contentText("core_07-vong-lap-tran_js.down.005"),'me');return;}
   u.hp=0;u.phase='down';u.pending=null;u.waitSet=[];doneAct(sc,u);
   // gỡ khỏi mọi waitSet ngay khi gục
   for(const x of sc.units)x.waitSet=x.waitSet.filter(i=>i!==u.id);
-  clog(sc,u.isMain?'Ngươi ngã xuống, trước mắt tối sầm.':pick(u.f==='vat'?[`${u.name} vỡ vụn, không còn động đậy.`,`${u.name} đổ sập xuống, linh quang trên thân tắt hẳn.`]:u.f==='quy'?[`${u.name} rú lên một tiếng rồi tan thành làn khói đen.`,`Âm khí quanh ${u.name} tan hết, chỉ còn lại một nắm tro lạnh.`]:[`${u.name} đổ gục xuống, không gượng dậy nổi.`,`${u.name} ngã xuống, hơi thở tắt dần.`,`${u.name} lảo đảo mấy bước rồi gục hẳn.`]),u.side==='A'?'en':'win');
+  clog(sc,u.isMain?contentText("core_07-vong-lap-tran_js.down.006"):pick(u.f==='vat'?[contentText("core_07-vong-lap-tran_js.down.007", [u.name]),contentText("core_07-vong-lap-tran_js.down.008", [u.name])]:u.f==='quy'?[contentText("core_07-vong-lap-tran_js.down.009", [u.name]),contentText("core_07-vong-lap-tran_js.down.010", [u.name])]:[contentText("core_07-vong-lap-tran_js.down.011", [u.name]),contentText("core_07-vong-lap-tran_js.down.012", [u.name]),contentText("core_07-vong-lap-tran_js.down.013", [u.name])]),u.side==='A'?'en':'win');
 }
 function checkEnd(sc){
   if(sc.over)return;const me=mainUnit(sc);
   if(me.hp<=0){
-    if(sc.spar){me.hp=1;sc.over='lose';clog(sc,'Ngươi gục xuống. Trận đấu kết thúc.','en');}
+    if(sc.spar){me.hp=1;sc.over='lose';clog(sc,contentText("core_07-vong-lap-tran_js.checkEnd.014"),'en');}
     else sc.over='dead';
     finishCombat(sc);return;}
-  if(sc.kiep){const k=sc.kiep;if(k.done>=k.n){if(k.wave<k.waves){k.wave++;k.done=0;me.hp=Math.min(me.max,me.hp+Math.round(me.max*0.3));clog(sc,`Đợt lôi thứ ${numVi(k.wave)} kéo tới. Ngươi kịp hồi lại một hơi.`,'en');}else{sc.over='win';clog(sc,'Mây kiếp tan. Ngươi vẫn đứng đó.','win');finishCombat(sc);}}return;}
+  if(sc.kiep){const k=sc.kiep;if(k.done>=k.n){if(k.wave<k.waves){k.wave++;k.done=0;me.hp=Math.min(me.max,me.hp+Math.round(me.max*0.3));clog(sc,contentText("core_07-vong-lap-tran_js.checkEnd.015", [numVi(k.wave)]),'en');}else{sc.over='win';clog(sc,contentText("core_07-vong-lap-tran_js.checkEnd.016"),'win');finishCombat(sc);}}return;}
   if(!alive(sc,'B').length){sc.over='win';finishCombat(sc);}
 }
 function finishCombat(sc){
@@ -83,7 +83,7 @@ function finishCombat(sc){
   for(const u of sc.units)if(u.ally!=null){const p=(r.party||[]).find(x=>x.id===u.ally);if(p)p.hp=Math.max(0,u.hp);}
   if(r.party)r.party=r.party.filter(p=>p.hp>0);
   if(sc.over==='win'&&!sc.kiep){r.kills+=sc.units.filter(u=>u.side==='B').length;G.meta.kills+=1;if(G.meta.kills>=100)ach('tram');
-    clog(sc,pick(['Bụi đất lắng xuống. Trận chiến đã ngã ngũ.','Sát khí tan dần. Ngươi vẫn đứng vững giữa chiến trường.']),'win');
+    clog(sc,pick([contentText("core_07-vong-lap-tran_js.finishCombat.017"),contentText("core_07-vong-lap-tran_js.finishCombat.018")]),'win');
     const fx=aggFx();if(fx.healAfter){const s=S();r.hp=Math.min(s.maxHp,r.hp+Math.round(s.maxHp*fx.healAfter/100));}
     if(sc.after&&sc.after.nemesis)ach('baothu');}
 }
@@ -105,7 +105,7 @@ function consumeOnceSkill(sc,id){const r=G.run;if(!r||!SK[id]||!SK[id].once)retu
   r.skills=(r.skills||[]).filter(k=>k.id!==id);if(r.atkSlots)r.atkSlots=r.atkSlots.filter(x=>x!==id);
   if(r.kn)for(const k of ['atk','move','def','ult'])if(Array.isArray(r.kn[k]))r.kn[k]=r.kn[k].filter(x=>x!==id);
   r.skUsed=r.skUsed||{};r.skUsed[id]=1; // syncSkills dựng lại chiêu từ công pháp, nên phải nhớ chiêu đã tiêu hao
-  if(r.skLock)delete r.skLock[id];clog(sc,`${SK[id].n} chỉ dùng được một lần, giờ đã tan biến khỏi người ngươi.`,'me');}
+  if(r.skLock)delete r.skLock[id];clog(sc,contentText("core_07-vong-lap-tran_js.consumeOnceSkill.019", [SK[id].n]),'me');}
 function playerAct(id,tid){
   const sc=G.run.scene;const u=readyPlayer(sc);if(!u)return false;
   const p=pSkill(id);if(!p)return false;const sk=p.sk;const cost=skillCost(sk);if(u.mp<cost)return false;
@@ -117,12 +117,12 @@ function playerAct(id,tid){
 function playerPillAct(idx){
   const sc=G.run.scene;const u=readyPlayer(sc);if(!u)return false;
   syncMain(sc);const m=usePill(idx,true);if(!m)return false;
-  runAct(sc,()=>{u.hp=G.run.hp;u.mp=G.run.mp;clog(sc,'Ngươi nuốt vội '+m+', dược lực lan khắp kinh mạch.','me');toRecover(sc,u,0.8);doneAct(sc,u);});return true;
+  runAct(sc,()=>{u.hp=G.run.hp;u.mp=G.run.mp;clog(sc,contentText("core_07-vong-lap-tran_js.playerPillAct.020")+m+contentText("core_07-vong-lap-tran_js.playerPillAct.021"),'me');toRecover(sc,u,0.8);doneAct(sc,u);});return true;
 }
 function playerFlee(){
   const sc=G.run.scene;const u=readyPlayer(sc);if(!u||sc.boss||sc.kiep||sc.noFlee)return false;
   const s=S();let p=clamp(0.35+s.tp*0.02,0.2,0.85);if(sc.elite)p*=0.6;if(sc.fleeSure)p=1;
-  runAct(sc,()=>{if(chance(p)){sc.over='flee';clog(sc,'Ngươi chớp thời cơ rút lui, thoát khỏi vòng chiến.','me');finishCombat(sc);}else{clog(sc,'Ngươi định rút lui nhưng bị chặn đường!','me');toRecover(sc,u,1);doneAct(sc,u);}});return true;
+  runAct(sc,()=>{if(chance(p)){sc.over='flee';clog(sc,contentText("core_07-vong-lap-tran_js.playerFlee.022"),'me');finishCombat(sc);}else{clog(sc,contentText("core_07-vong-lap-tran_js.playerFlee.023"),'me');toRecover(sc,u,1);doneAct(sc,u);}});return true;
 }
 // đỡ đòn: giảm khoảng 20–30%, tùy chênh lệch cảnh giới và lực chiến hai bên
 function power(u){return Math.sqrt(Math.max(1,u.max)*Math.max(1,(u.atk+(u.matk||u.atk))/2+(u.def||0)));}
@@ -150,13 +150,13 @@ function beginSkill(sc,u,sk,lv,tid){
   if(sk.fx.stance){
     // đỡ đòn: chạy dần từ mốc ra chiêu tới mốc phát lực; trong quãng đó bị đánh thì đỡ được một lần
     u.phase='guard';u.pos=50;u.rec=1;u.chargeT=0;u.pending=null;u.st.stance=1;u._blk=0;u.waitSet=[];
-    clog(sc,(u.ctrl==='player'?'Ngươi':u.name)+' thu thế, vận khí hộ thân chờ đối phương ra tay.',u.side==='A'?'me':'en');doneAct(sc,u);return;
+    clog(sc,(u.ctrl==='player'?'Ngươi':u.name)+contentText("core_07-vong-lap-tran_js.beginSkill.024"),u.side==='A'?'me':'en');doneAct(sc,u);return;
   }
   if(sk.fx.charge){
     // vào tụ lực: nhảy tới 75, chờ mọi kẻ địch còn sống hành động xong
     // tụ lực: chạy dần từ mốc ra chiêu tới mốc phát lực, tới nơi thì tung chiêu
     u.phase='charge';u.pos=50;u.rec=1;u.chargeT=0;u.pending={sk,lv,tid};u.waitSet=[];
-    clog(sc,u.ctrl==='player'?'Ngươi hít sâu một hơi, linh lực cuồn cuộn dồn về, chuẩn bị tung '+sk.n+'…':u.name+' hít sâu một hơi, linh lực cuồn cuộn dồn về, chuẩn bị tung một đòn sát thủ…',u.side==='A'?'me':'en');
+    clog(sc,u.ctrl==='player'?contentText("core_07-vong-lap-tran_js.beginSkill.025")+sk.n+'…':u.name+contentText("core_07-vong-lap-tran_js.beginSkill.026"),u.side==='A'?'me':'en');
     doneAct(sc,u); // bước vào tụ lực cũng tính là đã hành động
     return;
   }
@@ -183,7 +183,7 @@ function hasDmg(sk){return !!sk.fx.p;}
 function doSkill(sc,u,sk,lv,tid,qm){
   const f=sk.fx;
   const tg=hasDmg(sk)?pickTargets(sc,u,sk,tid):[];
-  if(hasDmg(sk)&&!tg.length){clog(sc,(u.ctrl==='player'?'Ngươi':u.name)+' đánh vào khoảng không, chiêu thức tan biến.',u.side==='A'?'me':'en');finishAct(sc,u,sk);return;}
+  if(hasDmg(sk)&&!tg.length){clog(sc,(u.ctrl==='player'?'Ngươi':u.name)+contentText("core_07-vong-lap-tran_js.doSkill.027"),u.side==='A'?'me':'en');finishAct(sc,u,sk);return;}
   const me=mainUnit(sc);
   const autoD=G.meta.opt&&G.meta.opt.autoDodge;
   // nhắm vào nhân vật người chơi: hiện vòng né
@@ -244,7 +244,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         if(t.isMain&&d>0){const fx2=S().fx;if(fx2.reflect){u.hp-=Math.round(d*fx2.reflect/100);if(u.hp<=0)down(sc,u);}}
         if(isP){if(fx.poisonHit)t.st.poison=(t.st.poison||0)+Math.round(u.atk*fx.poisonHit);if(fx.burnHit)t.st.burn=(t.st.burn||0)+Math.round(u.atk*fx.burnHit);}
         // phá tụ lực
-        if(t.phase==='charge'&&d>=t.max*0.15&&!(t.pending&&t.pending.sk.fx.steady)){clog(sc,`Thế tụ lực của ${t.isMain?'ngươi':t.name} bị đánh tan!`,t.side==='A'?'en':'me');toRecover(sc,t,1);t.pos=75;doneAct(sc,t);}
+        if(t.phase==='charge'&&d>=t.max*0.15&&!(t.pending&&t.pending.sk.fx.steady)){clog(sc,contentText("core_07-vong-lap-tran_js.resolveSkill.028", [t.isMain?'ngươi':t.name]),t.side==='A'?'en':'me');toRecover(sc,t,1);t.pos=75;doneAct(sc,t);}
         if(t.hp<=0){down(sc,t);checkEnd(sc);if(sc.over)break;}
       }
       if(sc.over)break;
@@ -258,14 +258,14 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         if(f.vuln)t.st.vuln=Math.max(t.st.vuln||0,f.vuln);
         const stunC=(f.stun||0)+(isP?(fx.stunP||0):0);
         if(stunC&&chance(stunC/100*(t.boss?0.5:1))){t.stunT=STUN_S;stunL.push(t.isMain?'ngươi':t.name);
-          if(t.phase==='charge'&&!(t.pending&&t.pending.sk.fx.steady)){toRecover(sc,t,1);t.pos=75;clog(sc,`${t.isMain?'Ngươi':t.name} choáng váng, linh lực đang tụ tản mát hết.`,'fl');}
+          if(t.phase==='charge'&&!(t.pending&&t.pending.sk.fx.steady)){toRecover(sc,t,1);t.pos=75;clog(sc,contentText("core_07-vong-lap-tran_js.resolveSkill.029", [t.isMain?'Ngươi':t.name]),'fl');}
           doneAct(sc,t);}
       }
     }
     for(const t of tg)if(t.st.stance&&t.phase==='guard'&&t._blk&&t.hp>0)endStance(sc,t,null);
     if(total&&(f.drain||(isP&&fx.drain)))u.hp=Math.min(u.max,u.hp+Math.round(total*((f.drain||0)+(isP?fx.drain||0:0))/100));
     if(total&&f.edrain)u.hp=Math.min(u.max,u.hp+Math.round(total*f.edrain/100));
-    if(sc.kiep&&total){const k=sc.kiep;const me=mainUnit(sc);const cut=Math.min(0.25,total/me.max*0.5);k.uy=Math.max(0.3,k.uy-cut);msg+=', kiếp uy yếu bớt';}
+    if(sc.kiep&&total){const k=sc.kiep;const me=mainUnit(sc);const cut=Math.min(0.25,total/me.max*0.5);k.uy=Math.max(0.3,k.uy-cut);msg+=contentText("core_07-vong-lap-tran_js.resolveSkill.030");}
   }
   // tự thân
   const hp0=u.hp;

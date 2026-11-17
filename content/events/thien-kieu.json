@@ -1,0 +1,589 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "thien_kieu",
+      "name": "Gặp thiên kiêu",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thienkieu",
+        "places": [
+          "*"
+        ],
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "rv": {
+          "role": "rival",
+          "alignment": "world-record",
+          "identity": "entity.data.rv"
+        }
+      },
+      "text": [
+        "Trên đường có người chặn lại. {$rv.ten}, {$rv.tt} của {$rv.sect}, cảnh giới {$rv.realm}. “Nghe nói gần đây có kẻ khá lắm. Là ngươi?”",
+        "Ngươi dừng chân bên suối thì thấy {$rv.ten} đang rửa kiếm. {$rv.hn} ngẩng lên, ánh mắt sắc như dao: “Ngươi là ai?”",
+        "Cả quán rượu im bặt khi {$rv.ten} bước vào. {$rv.tt} của {$rv.sect}. {$rv.hn} nhìn quanh, rồi ngồi xuống đúng bàn của ngươi."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Luận võ",
+          "fight": {
+            "k": "kiemtu",
+            "n": "{$rv.ten}",
+            "mv": "rvm",
+            "spar": 1,
+            "sub": "{$rv.tt} {$rv.sect}"
+          },
+          "win": {
+            "t": "Thiên kiêu bại dưới tay ngươi. {$rv.ten} im lặng hồi lâu, rồi cười: “Nhớ tên ngươi rồi.”",
+            "e": {
+              "tv": 10,
+              "van": 2,
+              "rival": 1
+            }
+          },
+          "lose": {
+            "t": "{$rv.ten} thu chiêu: “Còn non lắm.” Nhưng ánh mắt {$rv.hn} đã khác.",
+            "e": {
+              "tv": 5
+            }
+          }
+        },
+        {
+          "i": "🍵",
+          "l": "Kết giao",
+          "chk": [
+            "tam",
+            10
+          ],
+          "ok": {
+            "t": "Hai người nói chuyện tới khuya, từ kiếm pháp tới chuyện nhà. Lúc chia tay, {$rv.hn} tặng ngươi một viên đan.",
+            "e": {
+              "rival": 1,
+              "pill": 1
+            }
+          },
+          "no": {
+            "t": "{$rv.ten} lạnh nhạt đứng dậy: “Ta không kết giao với kẻ vô danh.”",
+            "e": {
+              "tamma": 2
+            }
+          }
+        },
+        {
+          "i": "🙇",
+          "l": "Tránh mặt",
+          "t": "Ngươi cúi đầu đi qua. Thiên kiêu không thèm nhìn ngươi lấy một cái."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "thien_kieu_v"
+        },
+        "condition": {
+          "$hook": "thien_kieu_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/14-thien-lo.js",
+        "ref": "thien_kieu",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thiên kiêu",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tk_ruou",
+      "name": "Thiên kiêu uống rượu",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thienkieu",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "rv": {
+          "role": "rival",
+          "alignment": "world-record",
+          "identity": "entity.data.rv"
+        }
+      },
+      "text": [
+        "{$rv.ten} ngồi một mình trong quán ven đường, rượu đã cạn ba bình. Thấy ngươi, {$rv.hn} vẫy tay: “Ngồi đi. Một mình uống buồn lắm.”"
+      ],
+      "choices": [
+        {
+          "i": "🍶",
+          "l": "Ngồi uống cùng",
+          "t": "{$rv.ten} kể về {$rv.sect}, về những kẻ ganh ghét, về áp lực của danh hiệu thiên kiêu. Lúc chia tay, cả hai đều đã say.",
+          "e": {
+            "rival": 1,
+            "tam": 1,
+            "h": 6
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Từ chối",
+          "t": "Ngươi chắp tay rồi đi."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tk_ruou_v"
+        },
+        "condition": {
+          "$hook": "tk_ruou_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tk_ruou",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thiên kiêu",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tk_thach",
+      "name": "Lời thách đấu",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thienkieu",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "rv": {
+          "role": "rival",
+          "alignment": "world-record",
+          "identity": "entity.data.rv"
+        }
+      },
+      "text": [
+        "{$rv.ten} chặn ngươi giữa đường: “Nghe nói ngươi muốn chen chân vào Thiên Kiêu Bảng? Qua được ta đã.”"
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Nhận lời",
+          "fight": {
+            "k": "kiemtu",
+            "n": "{$rv.ten}",
+            "mv": "rvm",
+            "spar": 1,
+            "sub": "{$rv.tt} {$rv.sect}"
+          },
+          "win": {
+            "t": "Thiên kiêu bại trận. Tin này sẽ lan khắp nơi.",
+            "e": {
+              "tv": 10,
+              "van": 2,
+              "rival": -1,
+              "rumor": 1
+            }
+          },
+          "lose": {
+            "t": "Ngươi thua. {$rv.ten} quay lưng bỏ đi, không thèm nói một lời.",
+            "e": {
+              "tv": 4,
+              "tamma": 3
+            }
+          }
+        },
+        {
+          "i": "🙇",
+          "l": "Nhường",
+          "t": "Ngươi tránh đường. {$rv.ten} cười khẩy.",
+          "e": {
+            "tamma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tk_thach_v"
+        },
+        "condition": {
+          "$hook": "tk_thach_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tk_thach",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thiên kiêu",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tk_dong",
+      "name": "Thiên kiêu rủ đồng hành",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thienkieu",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "rv": {
+          "role": "rival",
+          "alignment": "world-record",
+          "identity": "entity.data.rv"
+        }
+      },
+      "text": [
+        "{$rv.ten} nhận ra ngươi từ xa: “Lại gặp rồi! Ta đang tới chỗ dị tượng, đi cùng không?”"
+      ],
+      "choices": [
+        {
+          "i": "🤝",
+          "l": "Đi cùng",
+          "t": "Có thiên kiêu bên cạnh, đường đi bớt cô độc.",
+          "e": {
+            "partyRv": 20,
+            "rival": 1
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Để lần khác",
+          "t": "{$rv.ten} nhún vai, đi trước."
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tk_dong_v"
+        },
+        "condition": {
+          "$hook": "tk_dong_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tk_dong",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thiên kiêu",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tk_tranh",
+      "name": "Tranh bảo với thiên kiêu",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thienkieu",
+        "places": [
+          "rung",
+          "nui",
+          "phe",
+          "dong",
+          "bien",
+          "hoang",
+          "thien",
+          "ma"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 2,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "rv": {
+          "role": "rival",
+          "alignment": "world-record",
+          "identity": "entity.data.rv"
+        }
+      },
+      "text": [
+        "Một gốc linh dược vừa chín. Cùng lúc ngươi tới thì {$rv.ten} cũng tới."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Tranh",
+          "fight": {
+            "k": "kiemtu",
+            "n": "{$rv.ten}",
+            "mv": "rvm",
+            "spar": 1,
+            "sub": "{$rv.tt} {$rv.sect}"
+          },
+          "win": {
+            "t": "Linh dược về tay ngươi.",
+            "e": {
+              "pill": "tinhnguyen",
+              "rival": -1
+            }
+          },
+          "lose": {
+            "t": "{$rv.ten} cầm linh dược đi mất.",
+            "e": {
+              "tv": 3
+            }
+          }
+        },
+        {
+          "i": "🤝",
+          "l": "Chia đôi",
+          "chk": [
+            "tam",
+            11
+          ],
+          "ok": {
+            "t": "{$rv.ten} ngẩn ra, rồi bật cười đồng ý.",
+            "e": {
+              "tv": 4,
+              "rival": 1
+            }
+          },
+          "no": {
+            "t": "“Chia đôi?” {$rv.hn} cười lạnh, lấy cả gốc đi.",
+            "e": {
+              "tamma": 2
+            }
+          }
+        },
+        {
+          "i": "🙇",
+          "l": "Nhường lại",
+          "t": "Ngươi để lại cho {$rv.hn}.",
+          "e": {
+            "rival": 1,
+            "karma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tk_tranh_v"
+        },
+        "condition": {
+          "$hook": "tk_tranh_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tk_tranh",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thiên kiêu",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tk_dau",
+      "name": "Thiên kiêu bị vây",
+      "kind": "event",
+      "tags": [],
+      "trigger": {
+        "source": "ent:thienkieu",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {
+        "rv": {
+          "role": "rival",
+          "alignment": "world-record",
+          "identity": "entity.data.rv"
+        }
+      },
+      "text": [
+        "{$rv.ten} đang bị mấy tên ma tu vây đánh, áo đã nhuộm máu."
+      ],
+      "choices": [
+        {
+          "i": "⚔️",
+          "l": "Ra tay giúp",
+          "fight": {
+            "k": "matu",
+            "cnt": 2
+          },
+          "win": {
+            "t": "{$rv.ten} thở dốc: “Ơn này, {$rv.sect} sẽ nhớ.”",
+            "e": {
+              "rival": 2,
+              "tv": 6,
+              "karma": 4
+            }
+          }
+        },
+        {
+          "i": "👀",
+          "l": "Chờ xem",
+          "t": "{$rv.ten} tự phá vây được, nhưng đã thấy ngươi đứng xem.",
+          "e": {
+            "rival": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Cáo từ, tiếp tục lên đường",
+          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+        }
+      ],
+      "logic": {
+        "variables": {
+          "$hook": "tk_dau_v"
+        },
+        "condition": {
+          "$hook": "tk_dau_cond"
+        }
+      },
+      "origin": {
+        "file": "src/game/core/15-thu-trieu.js",
+        "ref": "tk_dau",
+        "commit": "d9ab301"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Thiên kiêu",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,533 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_loi_noi_duoi_phien_da_1",
+      "name": "Nêm cửa phòng kín",
+      "kind": "story",
+      "tags": [
+        "Bất an"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui",
+          "tong"
+        ],
+        "levels": [
+          1
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "b": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        },
+        "a": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "giám luật",
+          "alignment": "context"
+        }
+      },
+      "text": "Đệ tử {$b.ten} bị phạt nhốt trong phòng tĩnh tu, bình nước đã cạn từ sáng. Đệ tử {$a.ten} chèn nêm giữ khe cửa để đưa thêm nước, vừa rót được nửa bình thì giám luật {$c.ten} tới. Lão hỏi ai cho phép mở cửa.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Nhận là ngươi đặt nêm",
+          "t": "Ngươi chịu một đêm tĩnh tu thay. {$a.ten} lấy vạt áo thấm nốt phần nước tràn.",
+          "e": {
+            "karma": 4,
+            "h": 12,
+            "tamma": -2
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Rút nêm rồi trả bình",
+          "t": "Ngươi được {$c.ten} cho qua. Từ bên trong có người đưa ra một cái chén còn khô.",
+          "e": {
+            "karma": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Chiếc nêm bị đá sang góc. {$a.ten} nhặt nó lên bằng chân trần.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_loi_noi_duoi_phien_da_1",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "loi_noi_duoi_phien_da",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Kỷ luật trong tông",
+      "setting": {
+        "description": "Dãy phòng tĩnh tu ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "không"
+      },
+      "emotion": "Bất an"
+    },
+    {
+      "id": "ch_loi_noi_duoi_phien_da_2",
+      "name": "Chén nước đã nguội",
+      "kind": "story",
+      "tags": [
+        "Cảm động"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui",
+          "tong"
+        ],
+        "levels": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "b": {
+          "gender": "nam",
+          "role": "đệ tử",
+          "alignment": "context"
+        },
+        "a": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Đệ tử {$b.ten} ra khỏi phòng kín với cổ họng rớm máu. Đệ tử {$a.ten} dùng móng tay đục vạch thấp trong bình để người kế tiếp biết chỗ đủ uống.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Giúp họ ghi lại người đã chịu phạt",
+          "t": "Ngươi cùng họ ghi tên những người từng bị cắt nước khi chịu phạt. Chuyện tới tai giám luật, ngươi bị cấm mượn sách một kỳ. Danh sách đã được chép thành nhiều bản, không còn giấu dưới bình nữa.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "chén nước đã nguội"
+            ]
+          }
+        },
+        {
+          "i": "🗣️",
+          "l": "Đưa đan dược để {$b.ten} khỏi phải nói",
+          "t": "Hắn dưỡng được giọng, còn danh sách nằm dưới bình. Khi nhấc bình lên, trên giấy có một vòng tròn sẫm.",
+          "e": {
+            "pill": 1,
+            "karma": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "{$a.ten} đổi chén lớn hơn, đặt bên cạnh bình.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_loi_noi_duoi_phien_da_2",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "loi_noi_duoi_phien_da",
+        "part": "2",
+        "waitHours": 120,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện trong tông",
+      "setting": {
+        "description": "Kho nước ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "phần 1 chọn “Nhận là ngươi đặt nêm” · vài ngày sau · kho nước"
+      },
+      "emotion": "Cảm động"
+    },
+    {
+      "id": "ch_loi_noi_duoi_phien_da_2b",
+      "name": "Bình úp mặt",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui",
+          "tong"
+        ],
+        "levels": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "b": {
+          "gender": "nam",
+          "role": "đệ tử",
+          "alignment": "context"
+        },
+        "a": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Đệ tử {$a.ten} bị bắt úp hết bình nước không dùng. Hắn úp riêng một bình lên khăn ướt, dưới khăn giấu một mẩu giấy của đệ tử {$b.ten}.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Đọc mẩu giấy trước mặt người làm bếp",
+          "t": "Ngươi đọc lời kể của đệ tử bị nhốt cho mọi người trong bếp nghe. Họ nhận ra không chỉ một người từng bị bỏ khát. Giám luật ghi tên ngươi, nhưng lần này đã có nhiều người đứng lại làm chứng.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "bình úp mặt"
+            ]
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Trả tiền giữ kín và mua nước cho người trong phòng",
+          "t": "Nước được đưa vào mỗi tối. Người mang nước xin thêm tiền để mua một cái chén không sứt.",
+          "cost": {
+            "st": 13
+          },
+          "e": {
+            "karma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Khăn khô dần và giấy cong lên, đẩy miệng bình nhích khỏi bàn.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_loi_noi_duoi_phien_da_2b",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "loi_noi_duoi_phien_da",
+        "part": "2b",
+        "waitHours": 120,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện trong tông",
+      "setting": {
+        "description": "Dãy bếp ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "phần 1 chọn “Rút nêm rồi trả bình” · vài ngày sau · dãy bếp"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_loi_noi_duoi_phien_da_3",
+      "name": "Dời phòng xuống thấp",
+      "kind": "story",
+      "tags": [
+        "Phẫn nộ"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong",
+          "thanh"
+        ],
+        "levels": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "Giám luật",
+          "alignment": "context"
+        }
+      },
+      "text": "Giám luật {$c.ten} dời phòng phạt xuống dưới đất. Nếu lời chứng đã được chia sẻ, đệ tử đến mang theo giấy. Nếu ngươi từng giúp kín, người bị nhốt mang ra một hàng chén rồi đứng lại.",
+      "choices": [
+        {
+          "i": "💰",
+          "l": "Đòi giám luật mở phòng cho mọi người xem",
+          "t": "Ngươi đòi mở phòng mới cho mọi người kiểm tra, bị gạch tên khỏi buổi nghị sự trong tông. Người tới xem phát hiện khe thông khí quá hẹp, đồng loạt yêu cầu sửa trước khi nhốt người.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "💎",
+          "l": "Mua quyền trông việc nước",
+          "t": "Người trong phòng có nước đều. Mỗi tháng ngươi nhận một phần lương kèm chìa khóa dài hơn chìa khóa cũ.",
+          "e": {
+            "st": 20,
+            "karma": 1
+          },
+          "cost": {
+            "st": 13
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Phiến đá được hạ xuống. Mấy chiếc chén trên sân cùng rung.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_loi_noi_duoi_phien_da_3",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "loi_noi_duoi_phien_da",
+        "part": "3",
+        "waitHours": 720,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Cải lệ",
+      "setting": {
+        "description": "Sân chuyển nhà ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · sang tháng · sân chuyển nhà"
+      },
+      "emotion": "Phẫn nộ"
+    },
+    {
+      "id": "ch_loi_noi_duoi_phien_da_4",
+      "name": "Nêm mới của cửa cũ",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tong",
+          "thanh"
+        ],
+        "levels": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "b": {
+          "gender": "nam",
+          "role": "đệ tử",
+          "alignment": "context"
+        },
+        "a": {
+          "gender": "nam",
+          "role": "Đệ tử",
+          "alignment": "context"
+        },
+        "c": {
+          "gender": "nam",
+          "role": "giám luật",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu phòng đã mở công khai, giám luật {$c.ten} mang tới tờ đề nghị bỏ lệ đóng cửa. Nếu ngươi giữ chìa, đệ tử {$b.ten} đem nộp sổ nước, trong đó có cột ghi những đêm chỉ mở cửa bằng tiền.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Ủng hộ bỏ cửa khóa kín",
+          "t": "Ngươi phải trả chìa hoặc mất phần tiếng nói còn lại trong nhà luật. Đệ tử {$a.ten} đem cái nêm cũ kê cửa phòng họp.",
+          "e": {
+            "karma": 4
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Giữ phòng và buộc có người chứng kiến",
+          "t": "Người trong phòng luôn được gặp người ngoài, còn {$c.ten} tiếp tục giữ cửa. Lão làm một cái ghế cho người chứng kiến, quay mặt thẳng vào khe.",
+          "e": {
+            "karma": 2
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi không dự việc quyết định của họ. Khi ra ngoài, ngươi nghe hai bên bắt đầu bàn hạn phạt và người được quyền tới thăm.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_loi_noi_duoi_phien_da_4",
+        "commit": "8b9c479",
+        "themeRegion": "linh-son"
+      },
+      "chain": {
+        "id": "loi_noi_duoi_phien_da",
+        "part": "4",
+        "waitHours": 8640,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Chuyện trong tông",
+      "setting": {
+        "description": "Nhà hội ở Linh Sơn Vạn Lĩnh",
+        "historyCondition": "phần 3 chọn “Đòi giám luật mở phòng cho mọi người xem” hoặc “Mua quyền trông việc nước” · năm sau · nhà hội đệ tử"
+      },
+      "emotion": "Lắng dịu"
+    }
+  ]
+}

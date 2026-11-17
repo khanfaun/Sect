@@ -5,7 +5,7 @@ const CN_MAX=5;
 function camNgo(){const r=G.run;return r?Math.max(0,r.btFail||0):0;}
 function camNgoFull(){return camNgo()>=CN_MAX;}
 // hiển thị trong bảng "Khả năng thành công"
-{const _bp=btParts;btParts=function(slots){const L=_bp(slots);if(camNgoFull())L.push({t:'Cảm ngộ đã đầy ('+CN_MAX+'/'+CN_MAX+')',v:100,tip:'Thất bại đủ nhiều lần, lần này chắc chắn qua.'});return L;};}
+{const _bp=btParts;btParts=function(slots){const L=_bp(slots);if(camNgoFull())L.push({t:contentText("core2_19-cam-ngo_js.001")+CN_MAX+'/'+CN_MAX+')',v:100,tip:contentText("core2_19-cam-ngo_js.002")});return L;};}
 {const _br=btRate;btRate=function(slots){return camNgoFull()?1:_br(slots);};}
 // thành công thì xoá cảm ngộ (trước đây không bao giờ xoá, cộng dồn sang cả cảnh giới sau)
 {const _bf=btFinish;btFinish=function(){const x=_bf.apply(this,arguments);if(G.run)G.run.btFail=0;return x;};}

@@ -10,18 +10,7 @@ function rT(){const r=G.run;return r?clamp(r.realm||0,0,4):0;}
 function rTv(){const t=rT();const x=R();return clamp(t+(x<0.1?1:x<0.2?-1:0),0,4);}
 
 // ---- năm đại khu vực ----
-const AREA=[
-  {n:'Trung Châu',seal:'中',sub:'Đất giữa thiên hạ, sông lớn chảy qua',types:['tran','thanh','rung','song','tong','phe'],
-    intro:['Ngươi rời {$que} vào một sớm sương mù. Trung Châu rộng lớn, sông dài uốn khúc giữa đồng lúa. Đường tiên dài lắm, nhưng bước đầu tiên chỉ cần một bước.','Người trong làng tiễn ngươi ra tới bến sông. Trung Châu đông người, lắm chợ, lắm tông môn. Ngươi không ngoảnh lại.']},
-  {n:'Đông Hoang',seal:'東',sub:'Đồi thấp, rừng sâu, sương mù quanh năm',types:['rung','hoang','dong','nui','phe','thanh'],
-    intro:['Ngươi rời {$que}. Phía đông là đồi nối đồi, rừng già chen kín, sương chẳng bao giờ tan hẳn.','Đông Hoang ít người ở. Tiếng thú gầm vọng qua thung, khói bếp thưa như sao buổi sớm.']},
-  {n:'Nam Trạch',seal:'南',sub:'Sông nhánh, đầm lầy, đồng nước',types:['song','bien','rung','dong','tran','thanh'],
-    intro:['Ngươi rời {$que}. Nam Trạch nước nhiều hơn đất, thuyền nan len giữa lau sậy, cá quẫy dưới chân cầu.','Gió nồm thổi ẩm. Ở Nam Trạch, đường đi tính bằng con nước, không tính bằng dặm.']},
-  {n:'Tây Lĩnh',seal:'西',sub:'Vạn núi chen nhau, mây phủ đỉnh',types:['nui','dong','tong','rung','thanh','ma'],
-    intro:['Ngươi rời {$que}. Tây Lĩnh núi nối núi, mỗi ngọn là một sơn môn, mỗi hang là một bí mật.','Đường đá dốc đứng, mây lưng chừng núi. Người tu tiên ở Tây Lĩnh nhìn nhau bằng ánh mắt dò xét.']},
-  {n:'Bắc Nhạc',seal:'北',sub:'Đỉnh cao chạm trời, gió lạnh thấu xương',types:['nui','thien','phe','hoang','dong','ma'],
-    intro:['Ngươi rời {$que}. Phía bắc, những đỉnh núi đâm thẳng vào mây, tuyết trên cao không bao giờ tan.','Bắc Nhạc lạnh và vắng. Di cốt của kẻ đi trước rải rác ven đường đá cổ.']},
-];
+// Bảng AREA: content/world/area.js
 for(let k=0;k<5;k++)if(REG[k])Object.assign(REG[k],AREA[k]);
 function areaOfHex(h){const g=geo();return g.reg[h];}
 
@@ -44,15 +33,15 @@ function areaOfHex(h){const g=geo();return g.reg[h];}
 // Quy ước: một ô lục giác rộng ~25 dặm (≈ 12 km), diện tích ~540 dặm² (≈ 135 km², cỡ một huyện nhỏ). Cả bản đồ ≈ 2.960 × 1.670 dặm.
 // Địa điểm nào cũng chiếm tối thiểu 1 ô dù thực tế bé hơn nhiều (một cái hang chỉ vài chục trượng vẫn là 1 ô).
 const HEX_DAM=25,HEX_DAM2=Math.round(HEX_DAM*HEX_DAM*0.866);
-const SIZE_T={tran:[2,4],thanh:[4,7],dong:[1,2],khoang:[1,2],duoc:[1,2],ancu:[1,1],cho:[1,2],phe:[1,3],ma:[2,4],sao:[2,3],rung:[3,6],nui:[3,6],song:[2,4],bien:[3,6],hoang:[4,7],thien:[3,5],linhdia:[2,4],dam:[2,4]};
-const TONG_SZ=[null,[3,4],[5,6],[7,8],[9,10]];
+// Bảng SIZE_T: content/world/size-t.js
+// Bảng TONG_SZ: content/world/tong-sz.js
 function placeSize(n){const t=n.type;if(t==='tong'){const z=TONG_SZ[n.quy||1];return ri(z[0],z[1]);}const z=SIZE_T[t]||[1,3];return ri(z[0],z[1]);}
 // từ ngữ do hệ thống tính theo loại và số ô thật sự chiếm được
 function scaleWord(n,c){const t=n.type;
-  if(t==='tong')return c<=4?'Khá đồ sộ':c<=6?'Đồ sộ':c<=8?'Khổng lồ':'Bao la';
-  if(t==='thanh')return c<=5?'Tầm trung':'Lớn';
+  if(t==='tong')return c<=4?contentText("core2_33-the-gioi-mo_js.scaleWord.021"):c<=6?'Đồ sộ':c<=8?contentText("core2_33-the-gioi-mo_js.scaleWord.022"):'Bao la';
+  if(t==='thanh')return c<=5?contentText("core2_33-the-gioi-mo_js.scaleWord.023"):'Lớn';
   if(t==='tran')return c<=2?'Nhỏ':'Trung';
-  return c<=1?'Rất nhỏ':c===2?'Nhỏ':c===3?'Vừa':c===4?'Khá rộng':c<=6?'Rộng':'Mênh mông';}
+  return c<=1?contentText("core2_33-the-gioi-mo_js.scaleWord.024"):c===2?'Nhỏ':c===3?'Vừa':c===4?contentText("core2_33-the-gioi-mo_js.scaleWord.025"):c<=6?'Rộng':contentText("core2_33-the-gioi-mo_js.scaleWord.026");}
 function placeScale(n){const c=placeCells(n).length;return {c,w:scaleWord(n,c),txt:scaleWord(n,c)+' · '+c+' ô',area:c*HEX_DAM2};}
 function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô -> địa điểm đang chiếm
   for(const R0 of w.regions)for(const n of R0.nodes){all.push(n);own.set(n.hex,n.id);if(n.cells)for(const c of n.cells)own.set(c,n.id);}
@@ -102,13 +91,13 @@ function birthNode(){const w=W();const all=[];for(const R0 of w.regions)for(cons
 // tới một địa điểm: biết mình đang ở đại khu vực nào
 {const _ar=arrive;arrive=function(id){const r=G.run;const k=Math.floor(id/100);const was=r.region;r.region=k;r.maxRegion=Math.max(r.maxRegion||0,k);
   const x=_ar.apply(this,arguments);
-  if(was!==k&&r.areas&&!r.areas.includes(k)){r.areas.push(k);if(typeof note==='function')note('Đặt chân vào '+REG[k].n+': '+REG[k].sub.toLowerCase()+'.');dbg('mo.area',{from:was,to:k});}
+  if(was!==k&&r.areas&&!r.areas.includes(k)){r.areas.push(k);if(typeof note==='function')note(contentText("core2_33-the-gioi-mo_js.027")+REG[k].n+': '+REG[k].sub.toLowerCase()+'.');dbg('mo.area',{from:was,to:k});}
   if(!r.areas)r.areas=[k];return x;};}
 
 // ---- tầm nhìn theo địa hình ----
 // Đồng bằng nhìn bình thường, sông hồ và vân hải nhìn xa hơn, rừng đồi che bớt, núi cao chặn hẳn (thấy núi nhưng không thấy sau núi).
 // Đứng trên cao nhìn xa hơn.
-const VIS_COST=[0.8,1,1.7,1,0.7,0.65,1.4,1.1];
+// Bảng VIS_COST: content/world/vis-cost.js
 let VIS=null,VNOW=null,VT=null,VIS_K='',VIS_N=0;
 function visKey(){return G.run?(G.run.rid||'')+':'+G.run.kiep:'';}
 function visReset(){VIS=new Uint8Array(HN);VNOW=new Uint8Array(HN);VT=new Float64Array(HN);VIS_K=visKey();VIS_N++;}
@@ -119,7 +108,7 @@ function visLoad(){const r=G.run;if(!r)return;if(VIS&&VIS_K===visKey())return;vi
 const VIS_A='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 function visSave(){const r=G.run;if(!r||!VIS)return;let s='';for(let j=0;j*6<HN;j++){let v=0;for(let b=0;b<6;b++)if(VIS[j*6+b])v|=1<<b;s+=VIS_A[v];}r.visS=s;}
 function visCells(h,R){const g=geo();const e0=g.el[h];R*=1+Math.min(0.6,e0*0.07);
-  const D=new Float32Array(HN).fill(1e9);D[h]=0;const out=[h];const hp=[[0,h]];
+  const D=new Float64Array(HN).fill(1e9);D[h]=0;const out=[h];const hp=[[0,h]];
   const push=x=>{hp.push(x);let i=hp.length-1;while(i>0){const p=(i-1)>>1;if(hp[p][0]<=hp[i][0])break;[hp[p],hp[i]]=[hp[i],hp[p]];i=p;}};
   const pop=()=>{const t=hp[0],l=hp.pop();if(hp.length){hp[0]=l;let i=0;for(;;){let m=i;const x=2*i+1,y=x+1;if(x<hp.length&&hp[x][0]<hp[m][0])m=x;if(y<hp.length&&hp[y][0]<hp[m][0])m=y;if(m===i)break;[hp[m],hp[i]]=[hp[i],hp[m]];i=m;}}return t;};
   while(hp.length){const [d,u]=pop();if(d>D[u])continue;
@@ -153,13 +142,13 @@ function areaStat(k){const g=geo();visLoad();const tc={};let land=0,seen=0;const
 
 // ================= ĐI TỚI Ô ĐẤT BẤT KỲ =================
 // Điểm dừng tạm ("điểm hoang"): nút ngoài danh sách địa điểm, id = khu*100 + 90..99, lưu ở w.wp. Máy chạy y như một địa điểm hoang bình thường.
-const WP0=90,WP_TY=[null,'hoang','rung','nui','song',null,'hoang','hoang'],WP_BASE=[0,0,1,2,1,0,1,1];
+// Bảng WP0, WP_TY, WP_BASE: content/rules/wp0.js
 {const _nb=nodeById;nodeById=function(id){if(id%100>=WP0){const w=W();return w&&w.wp&&w.wp[id]||undefined;}return _nb(id);};}
 function wpGC(){const r=G.run,w=W();if(!r||!w||!w.wp)return;const keep=new Set([r.at,r.dest]);if(r.moving)for(const id of r.moving.path)keep.add(id);for(const id in w.wp)if(!keep.has(+id))delete w.wp[id];}
 function wpDraft(c){const g=geo(),k=g.reg[c],t=g.ter[c];if(k<0||!terWalk(t))return null;
   let nd=null,bd=1e9;const [cx,cy]=hexCenter(c);for(const n of regionOf(k).nodes){const p=mapXY(k,n.x,n.y),d=Math.hypot(p[0]-cx,p[1]-cy);if(d<bd){bd=d;nd=n;}}
   const dg=clamp(Math.round((WP_BASE[t]+(nd?nd.danger:1))/2),0,3);
-  return {id:-1,r:k,wp:1,hex:c,type:WP_TY[t],name:TER_N[t]+' vô danh',danger:dg,fog:3,seenT:W().t,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0,x:invXY(k,cx,cy)[0],y:invXY(k,cx,cy)[1]};}
+  return {id:-1,r:k,wp:1,hex:c,type:WP_TY[t],name:TER_N[t]+contentText("core2_33-the-gioi-mo_js.wpDraft.028"),danger:dg,fog:3,seenT:W().t,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0,x:invXY(k,cx,cy)[0],y:invXY(k,cx,cy)[1]};}
 function wpMake(c){const w=W();wpGC();w.wp=w.wp||{};for(const id in w.wp)if(w.wp[id].hex===c)return w.wp[id];
   const d=wpDraft(c);if(!d)return null;let s=0;while(w.wp[d.r*100+WP0+s]&&s<9)s++;d.id=d.r*100+WP0+s;w.wp[d.id]=d;return d;}
 function cellHours(c){const r=G.run;const a=nodeById(r.at);if(!a)return null;const h=nodeHex(a);if(h===c)return 0;const L=hexPath(h,c).len;return L/walkSpeed();}

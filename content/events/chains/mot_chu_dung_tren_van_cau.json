@@ -1,0 +1,491 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ch_mot_chu_dung_tren_van_cau_1",
+      "name": "Tên đường ở mặt dưới",
+      "kind": "story",
+      "tags": [
+        "Trầm buồn"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người khắc cầu",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Người khắc cầu {$a.ten} chỉ cho ngươi tên những người đã đổi mạng để giữ cầu. Chữ nằm dưới ván nên mỗi lần qua, người ta giẫm đúng lên chỗ lưng chữ.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Giúp lão lật một tấm ván để đọc",
+          "t": "Ngươi lỡ lượt qua để giúp lão lật ván đọc tên người giữ cầu đã mất. Lão kể rõ người ấy đã giữ nhịp cho dân thoát thế nào. Ngươi nhớ được cả việc lẫn tên, đặt ván lại rồi mới đi.",
+          "e": {
+            "karma": 4,
+            "h": 12
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Mượn tên dưới ván để bước nhanh hơn",
+          "t": "Cầu nâng bước ngươi. Ở đầu kia, một chữ đã mờ một nửa dù lão chưa hề chạm đục.",
+          "e": {
+            "karma": -2,
+            "tp": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Lão áp tai dưới ván, đợi tiếng chân chấm dứt rồi đọc tiếp.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_mot_chu_dung_tren_van_cau_1",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "mot_chu_dung_tren_van_cau",
+        "part": "1",
+        "waitHours": 0,
+        "needs": [],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhân quả",
+      "setting": {
+        "description": "Cầu ván giữa đường ngọc ở Cửu Thiên Cổ Lộ",
+        "historyCondition": "không"
+      },
+      "emotion": "Trầm buồn"
+    },
+    {
+      "id": "ch_mot_chu_dung_tren_van_cau_2",
+      "name": "Người không biết tên mình còn đó",
+      "kind": "story",
+      "tags": [
+        "Cảm động"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Hồn người giữ cầu",
+          "alignment": "context"
+        }
+      },
+      "text": "Hồn người giữ cầu {$b.ten} nhớ tiếng ván nứt mà quên tên. Nó chỉ nhận ra cái tên ngươi đọc khi đặt chân vào đúng chỗ ván cong.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Kể cả cái tên lẫn việc nó đã làm",
+          "t": "Ngươi dành một đêm kể cho hồn nghe tên và việc giữ cầu của nó. Đến sáng, nó tự nhắc lại được mà không cần ngươi đọc trước. Người khắc cầu xin ghi tên lên mặt trên, để người sau cũng nhớ.",
+          "e": {
+            "karma": 4,
+            "h": 24,
+            "an": [
+              "a",
+              "người không biết tên mình còn đó"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Đổi tên lấy cách giữ cầu của nó",
+          "t": "Ngươi học được cách phân lực lên nhiều nhịp. Khi lặp lại tên mình, hồn nói hụt ở chữ cuối.",
+          "e": {
+            "skill": 1,
+            "karma": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Nó đi một vòng quanh tấm ván, đợi tên tự trở lại.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_mot_chu_dung_tren_van_cau_2",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "mot_chu_dung_tren_van_cau",
+        "part": "2",
+        "waitHours": 2160,
+        "needs": [
+          0
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Người đã khuất",
+      "setting": {
+        "description": "Bãi ván ở Cửu Thiên Cổ Lộ",
+        "historyCondition": "phần 1 chọn “Giúp lão lật một tấm ván để đọc” · vài tháng sau · bãi ván nổi"
+      },
+      "emotion": "Cảm động"
+    },
+    {
+      "id": "ch_mot_chu_dung_tren_van_cau_2b",
+      "name": "Tiếng chân của người đã mượn",
+      "kind": "story",
+      "tags": [
+        "Day dứt"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người khắc cầu",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "Hồn người giữ cầu",
+          "alignment": "context"
+        }
+      },
+      "text": "Hồn người giữ cầu {$b.ten} theo tiếng chân ngươi vì nghe tên mình trong mỗi bước. Người khắc cầu {$a.ten} muốn lấy lại nửa chữ còn thiếu, lão đã mài sẵn đầu đục rất mỏng.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Để lão gỡ nửa chữ khỏi dấu chân",
+          "t": "Ngươi để lão gỡ nét tên đã nhập vào dấu chân, trả lại cho hồn. Bước đi mất phần nhẹ trước đó, nhưng tiếng chân phía sau cũng dừng. Hồn tự đọc được trọn tên mình rồi cúi chào ngươi.",
+          "e": {
+            "karma": 4,
+            "tp": -1,
+            "an": [
+              "a",
+              "tiếng chân của người đã mượn"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Giữ nửa chữ và mời hồn cùng đi",
+          "t": "Hồn thấy thêm nhiều chỗ trên cổ lộ, đổi lại phải theo tốc độ của ngươi. Đến chỗ nghỉ, nó vẫn đứng ngay sau gót.",
+          "e": {
+            "karma": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Nó bước đúng lên dấu cuối ngươi để lại. Dấu ấy sâu thêm.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_mot_chu_dung_tren_van_cau_2b",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "mot_chu_dung_tren_van_cau",
+        "part": "2b",
+        "waitHours": 2160,
+        "needs": [
+          1
+        ],
+        "paths": null
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhân quả",
+      "setting": {
+        "description": "Đường rải gỗ ở Cửu Thiên Cổ Lộ",
+        "historyCondition": "phần 1 chọn “Mượn tên dưới ván để bước nhanh hơn” · vài tháng sau · đường rải gỗ mục"
+      },
+      "emotion": "Day dứt"
+    },
+    {
+      "id": "ch_mot_chu_dung_tren_van_cau_3",
+      "name": "Cầu chờ người cuối",
+      "kind": "story",
+      "tags": [
+        "Căng thẳng"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "Người khắc cầu",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Một nhịp cầu mới chưa chịu nhận người qua. Nếu hồn đã được kể lại tên hoặc được trả nét tên, nó tự đứng vào chỗ ván cong, nhớ mình từng giữ cầu ra sao. Nếu tên đã đổi lấy phép hoặc vẫn đi theo ngươi, nó chờ bên chân ngươi, không biết phải đứng ở đâu. Người khắc cầu xin ngươi giúp trước khi đoàn khách tới.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Viết tên ngươi xuống để đỡ nhịp cầu cùng hồn",
+          "t": "Ngươi viết tên mình cạnh tên hồn, để lại một phần thần niệm cùng đỡ cầu. Cả đoàn qua hết, hồn vẫn đứng vững tại nhịp giữa. Lão khắc cầu hứa sẽ coi phần tên ngươi để lại.",
+          "e": {
+            "karma": 4,
+            "tv": -3
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Nhờ hồn chia phép giữ cầu vào nhiều tấm ván",
+          "t": "Cầu chịu được đoàn người, nhưng các tên cũ mờ đi. Người khắc cầu {$a.ten} đặt đục xuống ngay giữa một chữ.",
+          "e": {
+            "karma": -1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Hồn bước ra thử. Nhịp ván hạ xuống vừa đủ chạm đầu ngón chân.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_mot_chu_dung_tren_van_cau_3",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "mot_chu_dung_tren_van_cau",
+        "part": "3",
+        "waitHours": 4320,
+        "needs": [],
+        "paths": [
+          [
+            "2:0",
+            "2b:0"
+          ],
+          [
+            "2:1",
+            "2b:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhân quả",
+      "setting": {
+        "description": "Nhịp cầu trắng ở Cửu Thiên Cổ Lộ",
+        "historyCondition": "phần 2 hoặc 2b đã chọn một cách can dự · mùa sau · đầu nhịp ván trắng"
+      },
+      "emotion": "Căng thẳng"
+    },
+    {
+      "id": "ch_mot_chu_dung_tren_van_cau_4",
+      "name": "Tên ở phía người nhìn",
+      "kind": "story",
+      "tags": [
+        "Lắng dịu"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thien"
+        ],
+        "levels": [
+          4
+        ],
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {
+        "a": {
+          "gender": "nam",
+          "role": "người khắc cầu",
+          "alignment": "context"
+        },
+        "b": {
+          "gender": "nam",
+          "role": "story_person",
+          "alignment": "context"
+        }
+      },
+      "text": "Nếu ngươi đã để tên, một người qua cầu đọc nó rồi hỏi tới tên đứng cạnh. Nếu tên cũ mờ đi, người khắc cầu {$a.ten} đem từng tấm ván xuống cho người còn nhớ đến chạm tay.",
+      "choices": [
+        {
+          "i": "✋",
+          "l": "Khắc lại những tên còn nhớ ở phía trên",
+          "t": "Ngươi giúp lão dò lại những tên còn nhớ, khắc trên mặt ván để người qua đọc được. Hồn chỉ đúng chỗ tên mình rồi đứng tránh sang bên. Lần đầu nó được nghe người lạ gọi tên mà không phải xin.",
+          "e": {
+            "karma": 4,
+            "an": [
+              "a",
+              "tên ở phía người nhìn"
+            ]
+          }
+        },
+        {
+          "i": "✋",
+          "l": "Xin hồn truyền phép giữ cầu để dùng ở những nơi khác",
+          "t": "Nhiều nhịp mới đứng được. Mỗi nơi ngươi chừa một tấm ván trắng cho người địa phương tự khắc.",
+          "e": {
+            "skill": 1
+          }
+        },
+        {
+          "i": "🚶",
+          "l": "Bỏ đi",
+          "t": "Ngươi chào hồn giữ cầu trước khi đi. Nó đáp lời, đứng lại nhận phần việc đã chọn.",
+          "leave": 1
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "src/game/data/03-su_kien-du-lieu.js",
+        "ref": "ch_mot_chu_dung_tren_van_cau_4",
+        "commit": "8b9c479",
+        "themeRegion": "co-lo"
+      },
+      "chain": {
+        "id": "mot_chu_dung_tren_van_cau",
+        "part": "4",
+        "waitHours": 25920,
+        "needs": [
+          0,
+          1
+        ],
+        "paths": [
+          [
+            "3:0"
+          ],
+          [
+            "3:1"
+          ]
+        ]
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Nhân quả",
+      "setting": {
+        "description": "Bãi sửa cầu ở Cửu Thiên Cổ Lộ",
+        "historyCondition": "phần 3 chọn “Viết tên ngươi xuống để đỡ nhịp cầu cùng hồn” hoặc “Nhờ hồn chia phép giữ cầu vào nhiều tấm ván” · vài năm sau · bãi sửa cầu"
+      },
+      "emotion": "Lắng dịu"
+    }
+  ]
+}

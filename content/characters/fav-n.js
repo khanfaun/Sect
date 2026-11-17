@@ -1,0 +1,2 @@
+// Nguồn chuẩn: FAV_N. Luật xử lý ở src/game/core2/18-ghi-lai-truoc-sau.js.
+const FAV_N=[[85,contentText("core2_18-ghi-lai-truoc-sau_js.021"),'al'],[60,contentText("core2_18-ghi-lai-truoc-sau_js.022"),'tk'],[35,contentText("core2_18-ghi-lai-truoc-sau_js.023"),'th'],[10,contentText("core2_18-ghi-lai-truoc-sau_js.024"),'qb'],[-19,'Xa lạ','xl'],[-49,contentText("core2_18-ghi-lai-truoc-sau_js.025"),'gb'],[-79,contentText("core2_18-ghi-lai-truoc-sau_js.026"),'td'],[-101,contentText("core2_18-ghi-lai-truoc-sau_js.027"),'tu']];

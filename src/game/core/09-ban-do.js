@@ -1,12 +1,12 @@
 // ---------------- BẢN ĐỒ ----------------
-const SENSE=[120,200,320,500,800,800];
-const WALK=[24,36,70,200,800,800]; // phàm nhân, Luyện Khí đi chừng 4 dặm mỗi ngày (trước chỉ hơn 1 dặm, 78 dặm mất 2 tháng)
-const CROSS_M=[0,1,2,4,6];
-const WILD=['rung','nui','song','bien','hoang'];
-TYPE_NAME.ai='quan ải';TYPE_NAME.sao='sào huyệt';
-PLACE.sfx.ai=['Quan','Ải','Quan Ải','Quan'];PLACE.sfx.sao=['Sào Huyệt','Trại','Hang Ổ','Ma Quật'];
-const NODE_IC={tran:'🏘️',thanh:'🏯',rung:'🌲',nui:'⛰️',song:'🌊',phe:'🏚️',dong:'🕳️',tong:'⛩️',bien:'🐚',hoang:'🏜️',ma:'💀',thien:'☁️',ai:'🚧',sao:'☠️'};
-const DANGER=['Yên bình','Có nguy','Hiểm địa','Tử địa'];
+// Bảng SENSE: content/rules/sense.js
+// Bảng WALK: content/rules/walk.js // phàm nhân, Luyện Khí đi chừng 4 dặm mỗi ngày (trước chỉ hơn 1 dặm, 78 dặm mất 2 tháng)
+// Bảng CROSS_M: content/rules/cross-m.js
+// Bảng WILD: content/rules/wild.js
+TYPE_NAME.ai=contentText("core_09-ban-do_js.001");TYPE_NAME.sao=contentText("core_09-ban-do_js.002");
+PLACE.sfx.ai=['Quan','Ải',contentText("core_09-ban-do_js.003"),'Quan'];PLACE.sfx.sao=[contentText("core_09-ban-do_js.004"),'Trại',contentText("core_09-ban-do_js.005"),contentText("core_09-ban-do_js.006")];
+// Bảng NODE_IC: content/world/node-ic.js
+// Bảng DANGER: content/world/danger.js
 function genRegion(k,w){
   const reg=REG[k],X0=k*1000;
   const pts=[{x:ri(60,170),y:ri(400,600)}];
@@ -45,7 +45,7 @@ function genRegion(k,w){
     else n.name=placeName(n.type);
   }
   // không trùng tên trong vùng
-  const seen=new Set();for(const n of nodes){let g2=0;while(seen.has(n.name)&&g2++<8)n.name=n.type==='tong'?n.name+' Biệt Viện':placeName(n.type);seen.add(n.name);}
+  const seen=new Set();for(const n of nodes){let g2=0;while(seen.has(n.name)&&g2++<8)n.name=n.type==='tong'?n.name+contentText("core_09-ban-do_js.genRegion.007"):placeName(n.type);seen.add(n.name);}
   // địa hình nền
   const terr=[];for(let i=0;i<ri(4,7);i++)terr.push({k:'m',x:X0+ri(60,940),y:ri(60,940),s:ri(40,90)});
   const rv=[];let x=X0+ri(100,900),y=0;rv.push([x,y]);while(y<1000){y+=ri(80,160);x=clamp(x+ri(-120,120),X0+30,X0+970);rv.push([x,Math.min(1000,y)]);}
@@ -131,7 +131,7 @@ function roadRoll(a,b){
   const r=G.run;const dg=Math.max(nodeById(a).danger,nodeById(b).danger);
   let p=0.08+0.06*dg;if(partOf(W().t)==='dem')p*=1.5;
   if(!chance(p))return;
-  r.place={n:'đường tới '+nodeById(b).name,t:nodeById(b).type};
+  r.place={n:contentText("core_09-ban-do_js.roadRoll.008")+nodeById(b).name,t:nodeById(b).type};
   if(chance(.55)){const id=pickEvent(nodeById(b).type,'road');if(id){startEvent(id);r.scene.back=null;r.scene.road=1;return;}}
   encounter({type:dg>=3&&chance(.3)?'elite':'combat'});r.scene.back=null;
 }
@@ -147,7 +147,7 @@ function nodeShown(n){return [n.x,n.y];} // nơi nghe đồn hiện đúng vị 
 function nodeDanger(n){return n.fog>=2?n.danger:(n.memory?n.danger:(n.rd!=null?n.rd:n.danger));}
 
 // ---------------- ĐỊA ĐIỂM ----------------
-const BQ_Y=[8,16,30,50,80,80]; // số năm bế quan cho 100% tu vi theo cảnh giới
+// Bảng BQ_Y: content/rules/bq-y.js // số năm bế quan cho 100% tu vi theo cảnh giới
 function openPlace(id){const r=G.run;const n=nodeById(id==null?r.at:id);r.place={n:n.name,t:n.type};r.scene={type:'place',id:n.id,msg:[],chips:[],intro:placeIntro(n)};}
 function placeIntro(n){
   const t=W().t;let s=T('{canh_'+(P['canh_'+n.type]?n.type:(n.type==='ai'?'nui':n.type==='sao'?'phe':'tran'))+'}');
@@ -156,7 +156,7 @@ function placeIntro(n){
   const fit=L=>(L||[]).filter(x=>(town||!/khói bếp|đèn lồng|chó sủa|mái ngói|nước giếng|lúa chín|cơm mới/i.test(x))&&(!(pt==='dem'||pt==='toi')||!/nắng|chim én|ve kêu|nhạn bay|mây trắng/i.test(x)));
   const pp=fit(P['buoi_'+pt]),ss=fit(P['mua_'+seasonOf(t)]);
   if(pp&&pp.length)s+=' '+T(pp);if(SEASON_ON&&ss&&ss.length&&chance(.5))s+=' '+T(ss);
-  if(n.state==='ruin')s+=' '+T(['Nhà cửa đổ nát, xác thú và tro tàn còn ngổn ngang. Chẳng còn ai buôn bán gì.','Nơi này đã thành hoang tàn. Vài người sống sót ngồi thẫn thờ bên đống gạch vỡ.']);
+  if(n.state==='ruin')s+=' '+T([contentText("core_09-ban-do_js.placeIntro.009"),contentText("core_09-ban-do_js.placeIntro.010")]);
   return s;
 }
 function svcOpen(k){if(!HOURS_ON)return true;const h=tHour(W().t);const H={shop:[5,21],tea:[7,23],ghost:[21,5]}[k];if(!H)return true;return H[0]<H[1]?(h>=H[0]&&h<H[1]):(h>=H[0]||h<H[1]);}
@@ -164,29 +164,29 @@ let HOURS_ON=false;
 function placeActs(n){
   const r=G.run,t=n.type,ruin=n.state==='ruin',L=[];
   const add=(a,i,l,h,tip,dis,x)=>L.push({a,i,l,h,tip,dis:!!dis,x});
-  if(t==='ai'){add('cross','🚧','Vượt ải',0,'Sang vùng đất kế tiếp');return L;}
-  if(t==='sao'){const done=r.bossDone[r.region];add('boss','☠️',done?'Sào huyệt đã trống':'Khiêu chiến thủ lĩnh',1,'Thủ lĩnh của vùng này. Hạ được thì có lệnh bài thông quan.',done);add('explore','🔍','Thăm dò',2,'Lục soát quanh sào huyệt. Rất nguy hiểm.');return L;}
-  add('explore','🔍','Thăm dò',2,'Tìm cơ duyên, gặp chuyện.'+(n.danger>=2?'\nNơi nguy hiểm, dễ gặp kẻ địch.':''));
+  if(t==='ai'){add('cross','🚧',contentText("core_09-ban-do_js.placeActs.011"),0,contentText("core_09-ban-do_js.placeActs.012"));return L;}
+  if(t==='sao'){const done=r.bossDone[r.region];add('boss','☠️',done?contentText("core_09-ban-do_js.placeActs.013"):contentText("core_09-ban-do_js.placeActs.014"),1,contentText("core_09-ban-do_js.placeActs.015"),done);add('explore','🔍',contentText("core_09-ban-do_js.placeActs.016"),2,contentText("core_09-ban-do_js.placeActs.017"));return L;}
+  add('explore','🔍',contentText("core_09-ban-do_js.placeActs.018"),2,contentText("core_09-ban-do_js.placeActs.019")+(n.danger>=2?contentText("core_09-ban-do_js.placeActs.020"):''));
   if((t==='tran'||t==='thanh')&&!ruin){
-    add('inn','🛏️','Nghỉ ở khách điếm',8,'Hồi đầy khí huyết và linh lực',r.st<price(4),'💎'+price(4));
-    add('tea','🍵','Nghe tin ở trà lâu',1,'Nghe ngóng tin tức quanh vùng'+(svcOpen('tea')?'':'\nTrà lâu mở từ giờ Mão tới giờ Tý'),!svcOpen('tea'));
-    if(QUEST_ON)add('board','📜','Bảng treo thưởng',0,'Nhận việc có hạn chót');
+    add('inn','🛏️',contentText("core_09-ban-do_js.placeActs.021"),8,contentText("core_09-ban-do_js.placeActs.022"),r.st<price(4),'💎'+price(4));
+    add('tea','🍵',contentText("core_09-ban-do_js.placeActs.023"),1,contentText("core_09-ban-do_js.placeActs.024")+(svcOpen('tea')?'':contentText("core_09-ban-do_js.placeActs.025")),!svcOpen('tea'));
+    if(QUEST_ON)add('board','📜',contentText("core_09-ban-do_js.placeActs.026"),0,contentText("core_09-ban-do_js.placeActs.027"));
   }
-  if(t==='thanh'&&!ruin)add('shop','🏪','Phường thị',1,'Mua đan dược, bí tịch, pháp bảo'+(svcOpen('shop')?'':'\nChợ chỉ họp từ giờ Mão tới giờ Hợi'),!svcOpen('shop'));
-  if(HOURS_ON&&(t==='thanh'||t==='ma')&&!ruin)add('ghost','🏮','Quỷ thị',1,'Chợ đêm của kẻ không dám ra ánh sáng.\nChỉ họp từ giờ Hợi tới giờ Dần',!svcOpen('ghost'));
-  if(t==='tong'){if(!r.flags.tongmon)add('join','⛩️','Xin bái nhập',2,'Sơn môn tuyển đồ');else add('lib','📚','Tàng Kinh Các',2,'Đệ tử được vào đọc kinh thư');}
-  if(WILD.includes(t)||n.dp||t==='tong')add('tinh','🧘','Tĩnh tọa',6,'Hồi 45% khí huyết, đầy linh lực');
+  if(t==='thanh'&&!ruin)add('shop','🏪',contentText("core_09-ban-do_js.placeActs.028"),1,contentText("core_09-ban-do_js.placeActs.029")+(svcOpen('shop')?'':contentText("core_09-ban-do_js.placeActs.030")),!svcOpen('shop'));
+  if(HOURS_ON&&(t==='thanh'||t==='ma')&&!ruin)add('ghost','🏮',contentText("core_09-ban-do_js.placeActs.031"),1,contentText("core_09-ban-do_js.placeActs.032"),!svcOpen('ghost'));
+  if(t==='tong'){if(!r.flags.tongmon)add('join','⛩️',contentText("core_09-ban-do_js.placeActs.033"),2,contentText("core_09-ban-do_js.placeActs.034"));else add('lib','📚',contentText("core_09-ban-do_js.placeActs.035"),2,contentText("core_09-ban-do_js.placeActs.036"));}
+  if(WILD.includes(t)||n.dp||t==='tong')add('tinh','🧘',contentText("core_09-ban-do_js.placeActs.037"),6,contentText("core_09-ban-do_js.placeActs.038"));
   if(n.dp){
     const s=S(),bqm=1+(s.fx.bqP||0)/100;
-    add('heal','🩹','Dưỡng thương',HM,'Hồi đầy, giảm tâm ma');
-    add('bq1','📿','Bế quan ngắn',3*HM,'Tu vi tăng, hồi đầy',false,'✨+'+Math.round(bqGain(0.25)*bqm)+'%');
-    add('bq3','⛰️','Bế quan dài',2*HY,'Tu vi tăng nhiều, có thể bị quấy nhiễu',false,'✨+'+Math.round(bqGain(2)*bqm)+'%');
-    if(canBreak())add('bt','🌕',r.realm>=4?'Độ kiếp phi thăng':'Đột phá '+REALM[r.realm+1],HM,'Cần ở động phủ, tu vi viên mãn.\nChuẩn bị vật phẩm, xung quan, rồi vượt thiên kiếp nếu có.',false,'🌕'+btWord(btChance()));
-    add('quyan','🍃','Gác kiếm quy ẩn',0,'Kết thúc kiếp này trong yên bình');
+    add('heal','🩹',contentText("core_09-ban-do_js.placeActs.039"),HM,contentText("core_09-ban-do_js.placeActs.040"));
+    add('bq1','📿',contentText("core_09-ban-do_js.placeActs.041"),3*HM,contentText("core_09-ban-do_js.placeActs.042"),false,'✨+'+Math.round(bqGain(0.25)*bqm)+'%');
+    add('bq3','⛰️',contentText("core_09-ban-do_js.placeActs.043"),2*HY,contentText("core_09-ban-do_js.placeActs.044"),false,'✨+'+Math.round(bqGain(2)*bqm)+'%');
+    if(canBreak())add('bt','🌕',r.realm>=4?contentText("core_09-ban-do_js.placeActs.045"):contentText("core_09-ban-do_js.placeActs.046")+REALM[r.realm+1],HM,contentText("core_09-ban-do_js.placeActs.047"),false,'🌕'+btWord(btChance()));
+    add('quyan','🍃',contentText("core_09-ban-do_js.placeActs.048"),0,contentText("core_09-ban-do_js.placeActs.049"));
   }
-  if(CACHE_ON&&WILD.concat(['phe','dong','ma','thien']).includes(t))add('bury','⚱️','Chôn đồ',1,'Chôn vật phẩm cho kiếp sau');
-  if(n.grave&&GRAVE_ON)add('grave','🪦','Viếng mộ',1,'Một nấm mộ quen');
-  if(n.patron&&GRAVE_ON)add('patron','🤝','Tìm cố nhân',1,'Người cũ của kiếp trước');
+  if(CACHE_ON&&WILD.concat(['phe','dong','ma','thien']).includes(t))add('bury','⚱️',contentText("core_09-ban-do_js.placeActs.050"),1,contentText("core_09-ban-do_js.placeActs.051"));
+  if(n.grave&&GRAVE_ON)add('grave','🪦',contentText("core_09-ban-do_js.placeActs.052"),1,contentText("core_09-ban-do_js.placeActs.053"));
+  if(n.patron&&GRAVE_ON)add('patron','🤝',contentText("core_09-ban-do_js.placeActs.054"),1,contentText("core_09-ban-do_js.placeActs.055"));
   return L;
 }
 let QUEST_ON=false,CACHE_ON=false,GRAVE_ON=false;
@@ -196,26 +196,26 @@ function placeAct(a){
   const r=G.run,sc=r.scene;if(!sc||sc.type!=='place')return;
   const n=nodeById(sc.id),s=S();let ch=[];sc.msg=[];sc.chips=[];
   const act=placeActs(n).find(x=>x.a===a);if(!act||act.dis)return;
-  const tick=(h)=>{const o=advanceTime(h);if(!G.run)return false;if(h>48&&o.length)sc.msg.push('Trong lúc ấy: '+o.slice(-2).join(' '));return true;};
+  const tick=(h)=>{const o=advanceTime(h);if(!G.run)return false;if(h>48&&o.length)sc.msg.push(contentText("core_09-ban-do_js.placeAct.056")+o.slice(-2).join(' '));return true;};
   switch(a){
     case 'explore':{
       if(!tick(2))return;
       const m=Math.floor(W().t/HM);if(n.exploreT!==m){n.exploreT=m;n.explore=0;}n.explore++;
-      if(n.explore>=4){sc.msg.unshift(T(['Ngươi đi một vòng nữa. Không còn gì mới.','Chỗ này ngươi đã lục tung cả rồi. Không còn gì mới.','Mọi ngóc ngách đều đã quen mặt. Không còn gì mới.']));sc.chips=[chip('⏳','2 giờ','Thời gian trôi qua','')];return;}
+      if(n.explore>=4){sc.msg.unshift(T([contentText("core_09-ban-do_js.placeAct.057"),contentText("core_09-ban-do_js.placeAct.058"),contentText("core_09-ban-do_js.placeAct.059")]));sc.chips=[chip('⏳','2 giờ',contentText("core_09-ban-do_js.placeAct.060"),'')];return;}
       if(CACHE_ON&&n.cache&&n.cache.items&&n.cache.items.length){findCache(n);return;}
       if(questExplore(n))return;
       const fp=[0.04,0.14,0.26,0.4][n.danger]+(['phe','ma'].includes(n.type)?0.08:0)+(n.type==='sao'?0.3:0);
       if(chance(fp)){encounter({type:n.danger>=3&&chance(.35)?'elite':'combat'});return;}
       const id=pickEvent(n.type,'explore');startEvent(id);return;}
-    case 'inn':{r.st-=price(4);if(!tick(8))return;const s1=S();r.hp=s1.maxHp;r.mp=s1.maxMp;ch=[chip('💎','−'+price(4),'Linh thạch','dn'),chip('❤️','hồi đầy','Khí huyết, linh lực','up')].concat(applyE({tamma:-2}));sc.msg.unshift(T(['Phòng chật nhưng sạch, chăn có mùi nắng. Ngươi ngủ một giấc tới sáng.','Tiểu nhị mang lên một bát canh nóng. Ngươi ăn xong, ngủ say như chết.','Đêm ấy mưa rơi trên mái ngói. Ngươi ngủ ngon hơn mọi đêm.']));break;}
+    case 'inn':{r.st-=price(4);if(!tick(8))return;const s1=S();r.hp=s1.maxHp;r.mp=s1.maxMp;ch=[chip('💎','−'+price(4),contentText("core_09-ban-do_js.placeAct.061"),'dn'),chip('❤️',contentText("core_09-ban-do_js.placeAct.062"),contentText("core_09-ban-do_js.placeAct.063"),'up')].concat(applyE({tamma:-2}));sc.msg.unshift(T([contentText("core_09-ban-do_js.placeAct.064"),contentText("core_09-ban-do_js.placeAct.065"),contentText("core_09-ban-do_js.placeAct.066")]));break;}
     case 'tea':{if(!tick(1))return;ch=teaHouse(n);break;}
     case 'shop':{if(!tick(1))return;openShop(n);return;}
     case 'ghost':{if(!tick(1))return;startEvent('quy_thi');return;}
     case 'board':{openBoard(n);return;}
     case 'join':{if(!tick(2))return;startEvent('son_mon');return;}
     case 'lib':{if(!tick(2))return;startEvent('tang_kinh');return;}
-    case 'tinh':{if(!tick(6))return;const s1=S();r.hp=Math.min(s1.maxHp,r.hp+Math.round(s1.maxHp*0.45));r.mp=s1.maxMp;sc.msg.unshift(T(REST_T.tinh));ch=[chip('❤️','hồi','Khí huyết hồi 45%','up'),chip('⏳','6 giờ','Thời gian trôi qua','')].concat(applyE({tv:2,tamma:-4}));break;}
-    case 'heal':{if(!tick(HM))return;const s1=S();r.hp=s1.maxHp;r.mp=s1.maxMp;sc.msg.unshift(T(['Ngươi nằm trong động suốt một tháng, uống nước suối, ăn quả rừng. Vết thương lành dần.','Một tháng tĩnh dưỡng. Xương cốt lại liền, kinh mạch lại thông.']));ch=[chip('❤️','hồi đầy','Khí huyết, linh lực','up'),chip('⏳','1 tháng','Thời gian trôi qua','')].concat(applyE({tamma:-8}));break;}
+    case 'tinh':{if(!tick(6))return;const s1=S();r.hp=Math.min(s1.maxHp,r.hp+Math.round(s1.maxHp*0.45));r.mp=s1.maxMp;sc.msg.unshift(T(REST_T.tinh));ch=[chip('❤️','hồi',contentText("core_09-ban-do_js.placeAct.067"),'up'),chip('⏳','6 giờ',contentText("core_09-ban-do_js.placeAct.068"),'')].concat(applyE({tv:2,tamma:-4}));break;}
+    case 'heal':{if(!tick(HM))return;const s1=S();r.hp=s1.maxHp;r.mp=s1.maxMp;sc.msg.unshift(T([contentText("core_09-ban-do_js.placeAct.069"),contentText("core_09-ban-do_js.placeAct.070")]));ch=[chip('❤️',contentText("core_09-ban-do_js.placeAct.071"),contentText("core_09-ban-do_js.placeAct.072"),'up'),chip('⏳',contentText("core_09-ban-do_js.placeAct.073"),contentText("core_09-ban-do_js.placeAct.074"),'')].concat(applyE({tamma:-8}));break;}
     case 'bq1':case 'bq3':{
       const y=a==='bq1'?0.25:2;const g=bqGain(y)*(1+(s.fx.bqP||0)/100);
       sc.msg.unshift(T(bqText()));
@@ -224,7 +224,7 @@ function placeAct(a){
         ch=applyE({tv:g*0.5,tvMajor:1,tamma:-3});sc.chips=ch;
         startCombat({},{kind:'place',msg:sc.msg.slice()});return;}
       if(!tick(y*HY))return;
-      ch=[chip('⏳',durH(y*HY),'Thời gian trôi qua','')].concat(applyE({tv:g,tvMajor:1,tamma:-6}));if(!G.run)return;const s1=S();r.hp=s1.maxHp;r.mp=s1.maxMp;break;}
+      ch=[chip('⏳',durH(y*HY),contentText("core_09-ban-do_js.placeAct.075"),'')].concat(applyE({tv:g,tvMajor:1,tamma:-6}));if(!G.run)return;const s1=S();r.hp=s1.maxHp;r.mp=s1.maxMp;break;}
     case 'bt':{openPrep(n);return;}
     case 'boss':{if(!tick(1))return;bossIntro();return;}
     case 'cross':{openPass(n);return;}
@@ -238,11 +238,11 @@ function placeAct(a){
 function teaHouse(n){
   const r=G.run,ch=[];const msg=[];
   const cand=regionOf(r.region).nodes.filter(x=>x.fog===0).sort((a,b)=>Math.hypot(a.x-n.x,a.y-n.y)-Math.hypot(b.x-n.x,b.y-n.y)).slice(0,4);
-  if(cand.length){const x=pick(cand);hearOf(x);msg.push(T(['Bàn bên có người kể về {$pl}, {$t}, cách đây không xa.','Lão kể chuyện gõ quạt: “Ai từng tới {$pl} chưa? Nghe nói là {$t}.”','Tiểu nhị rỉ tai: đi thêm một quãng là tới {$pl}, {$t}.'],{pl:x.name,t:TYPE_NAME[x.type]}));ch.push(chip('🗺️',x.name+'?','Đã ghi lên bản đồ, vị trí chưa chắc','up'));}
+  if(cand.length){const x=pick(cand);hearOf(x);msg.push(T([contentText("core_09-ban-do_js.teaHouse.076"),contentText("core_09-ban-do_js.teaHouse.077"),contentText("core_09-ban-do_js.teaHouse.078")],{pl:x.name,t:TYPE_NAME[x.type]}));ch.push(chip('🗺️',x.name+'?',contentText("core_09-ban-do_js.teaHouse.079"),'up'));}
   if(typeof teaEnt==='function'){const m=teaEnt();if(m)msg.push(m);}
-  const rv=pick(r.rivals);const pool=chance(.5)?RUMOR.the:RUMOR[pick(['tien','tien','ma','tu'])];const t=T(pool,rumorV(rv));pushNews(t);msg.push(t);
-  G.run.scene.msg=msg.length?msg:['Trà nhạt, chuyện cũng nhạt.'];
-  ch.push(chip('⏳','1 giờ','Thời gian trôi qua',''));
+  const t=contentRumor();pushNews(t);msg.push(t);
+  G.run.scene.msg=msg.length?msg:[contentText("core_09-ban-do_js.teaHouse.080")];
+  ch.push(chip('⏳','1 giờ',contentText("core_09-ban-do_js.teaHouse.081"),''));
   return ch;
 }
 function endScene(){
