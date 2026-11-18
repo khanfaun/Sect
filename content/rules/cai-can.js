@@ -60,5 +60,20 @@ const CAI_CAN={
       {b:'gain',vt:[['ho_mach_tan',3]]},
       {b:'rite',l:'Uống Tái Mạch Đan, bảy ngày tĩnh dưỡng',ngay:7,ok:0.75,out:{id:'tap',q:'thuong'},
         fail:{hpP:-5,flag:'seo_mach'},vt:[['ho_mach_tan',3]],
-        okT:'Bảy ngày sau, kinh mạch bỗng ấm lên. Năm luồng hơi mỏng như sợi tóc tìm được đường đi.',failT:'Đan tan mà mạch không mở. Một vết sẹo âm ỉ nằm lại trong kinh mạch.'}]}
+        okT:'Bảy ngày sau, kinh mạch bỗng ấm lên. Năm luồng hơi mỏng như sợi tóc tìm được đường đi.',failT:'Đan tan mà mạch không mở. Một vết sẹo âm ỉ nằm lại trong kinh mạch.'}]},
+  CC03:{n:'Ngũ Hành Dưỡng Căn Pháp',noi:{loc:'LOC01',t:['tran'],re:/Thôn|Khê/},mode:'vo',hoi:null,tuoi:6,
+    clue:'Ở {{0}} có gia phả ghi một pháp dưỡng căn: năm năm nuôi năm vị vật liệu trong một khu vườn, không cần một chút linh lực nào.',
+    steps:[
+      {b:'proof',L:[{id:'gia_pha',l:'Đối chiếu bản khuyết với bia mộ tổ',ngay:10},{id:'kiem_duoc',l:'Thử năm vật liệu theo quyển kiểm dược',ngay:3,bac:50}],
+        lua:{l:'Mua bản chép "Dưỡng Căn Pháp" của thầy đồ dạo',bac:400}},
+      {b:'tranh',t:'Địa chủ trong vùng đang đòi khu vườn cũ để làm ruộng, dân thôn không ai dám cãi.',
+        L:[{id:'thuong',l:'Thương lượng, xin thôn giữ vườn',p:0.6,nang:'thuong',t:'Địa chủ chịu lùi một bước khi cả thôn đứng sau ngươi.'},
+           {id:'tien',l:'Bỏ tiền chuộc lại quyền dùng vườn',bac:1500,t:'Tờ khế chuộc vườn có dấu lý trưởng.'},
+           {id:'nhuong',kq:'nhuong',l:'Bỏ khu vườn cho địa chủ'}]},
+      {b:'serve',l:'Sửa kênh, chăm vườn công cho thôn',ngay:120,chunk:30},
+      {b:'gain',vt:[['kim_sa',1],['moc_tam',1],['thuy_chau',1],['hoa_nham',1],['tho_tuy',1]]},
+      {b:'grow',l:'Về chăm vườn dưỡng căn',nam:5,ngay:3},
+      {b:'rite',l:'Thu vườn, theo pháp mà dưỡng căn ba ngày',ngay:3,ok:0.9,out:{id:'tap',q:'khuyet'},
+        fail:{tam:{nam:1,fx:{hpP:-15}}},vt:[['kim_sa',1],['moc_tam',1],['thuy_chau',1],['hoa_nham',1],['tho_tuy',1]],
+        okT:'Năm năm mồ hôi đổ xuống một mảnh đất. Hôm nay năm luồng hơi nhạt từ vườn chảy vào người ngươi.',failT:'Vụ dược hỏng ngay đêm cuối. Ngươi ốm một năm, khu vườn trơ lại đất.'}]}
 };
