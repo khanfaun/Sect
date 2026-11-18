@@ -22,6 +22,9 @@ const THUONG_CAC=[
   {id:'tiloi',k:'pill',p:22,bac:3,lim:[1,'thang']},
   {id:'xoa_truy_na',k:'tin',n:'Xoá tên khỏi bảng truy nã của một thành',p:25,bac:3,lim:[1,'nam'],an:1},
   {id:'dientho',k:'pill',p:30,bac:3,lim:[1,'nam']},
+  {id:'luanhoi',k:'pill',p:40,bac:3,lim:[1,'kiep']}, // Sửa-C.6: nguồn lượt chọn lá số
+  {id:'luan_hoi_kinh',k:'qi',p:35,bac:3,lim:[1,'kiep']},
+  {id:'luan_hoi_ngoc',k:'qi',p:55,bac:4,lim:[1,'kiep']},
   {id:'manh_moi_co_duyen',k:'tin',n:'Manh mối cơ duyên',p:60,bac:4,lim:[1,'kiep'],an:1},
 ];
 // bậc Thưởng Các theo tổng thẻ từng nhận (không giảm khi tiêu)

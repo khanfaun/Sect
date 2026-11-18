@@ -11,6 +11,7 @@ const PILL = {
   tinhnguyen:{n:'Tinh Nguyên Đan',i:'✨',x:12,d:'Tu vi +{x}%',w:'any',p:45},
   taytuy:{dao:1,n:'Tẩy Tủy Đan',i:'💠',x:6,d:'Khí huyết tối đa +{x}% vĩnh viễn',w:'any',p:60},
   khaitri:{dao:1,n:'Khai Trí Đan',i:'🧿',x:2,d:'Ngộ tính +{x}',w:'any',p:55},
+  luanhoi:{n:'Luân Hồi Đan',i:'🌀',x:0,d:'Uống rồi thì kiếp sau được chọn lá số đầu thai',w:'any',p:120},
   dientho:{n:'Diên Thọ Đan',i:'🍑',x:8,d:'Thọ nguyên +{x}%',w:'any',p:70},
   phacanh:{n:'Phá Cảnh Đan',i:'🌕',x:15,d:'Đặt vào ô chuẩn bị: đột phá +{x}%',w:'bt',p:55,bt:{rate:15}},
   homach:{n:'Hộ Mạch Đan',i:'🛡️',x:0,d:'Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống',w:'bt',p:70,bt:{guard:1}},

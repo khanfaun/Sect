@@ -3,7 +3,7 @@ import { Html, PS } from '../html';
 
 export function ManChonKiep() {
   const { G, ORIGIN, TRAIT, ROOT } = PS;
-  const hide = PS.feat('vo') && (G.meta.nlife || 0) > 0;
+  const hide = PS.feat('vo'); // Sửa-C.6: linh căn luôn ẩn tới khi trắc, kể cả kiếp đầu
   return (
     <div className="birth">
       <h2>Chọn một kiếp</h2>

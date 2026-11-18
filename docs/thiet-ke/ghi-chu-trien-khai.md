@@ -224,3 +224,14 @@ Luật: `src/game/core2/44-no-nha.js`; bảng `NO`, `NHA` ở `content/rules/no-
   - **nặng** `p:5, g:5` — 24 chỗ: mất từ 10% khí huyết, tổn tu vi, thọ nguyên, thể phách.
   - `tt_vua` (thu-trieu.json, chỉ có `hd`) giữ nguyên.
 - Kết quả từng chỗ: `docs/thiet-ke/karma-muc-giup.csv`. Bài kiểm mới `hd_muc`.
+
+### C.6 — đầu thai và lượt chọn lá số (câu 6)
+- Đầu thai mặc định ngẫu nhiên (như cũ). **Được chọn 1 trong 3 lá số** (thêm một lượt `G.meta.pick`, tối đa một lượt mỗi lần chết) khi lúc chết có một trong các điều (bảng `DT_PICK`, `content/rules/sua-c.js`; hàm `dtPickWhy`):
+  - đã tu công pháp **Luân Hồi Kinh** (học từ vật "Luân Hồi Kinh (bản chép)", dùng trong túi → tâm pháp bậc 1);
+  - đã uống **Luân Hồi Đan** (đan mới, `PILL.luanhoi`, ghi `r.dtUsed`);
+  - mang theo **Định Mệnh Châu** hoặc **Luân Hồi Ngọc Bội** (vật mới; mất khi dùng).
+- Nguồn: Thưởng Các (bậc Kim/Huyền: đan 40, kinh 35, ngọc 55 Thưởng Lệnh, mỗi kiếp một lần); chợ phiên tu sĩ 8% mỗi đợt hàng bày một trong ba món (đan 120, kinh 110, ngọc 160 linh thạch). Phàm nhân không thấy ở chợ.
+- Thiên mệnh kiểu mới (Đ2.5, kiếp chia hết cho 4 / 3) giữ nguyên. Pháp bảo/trang bị luân hồi riêng chưa làm (hệ pháp bảo nằm trong danh mục tự sinh) — Ngọc Bội tạm đóng vai "vật đặc biệt".
+- **Linh căn luôn ẩn tới khi trắc, kể cả kiếp đầu** (`rootKnown=0` mọi kiếp); màn chọn lá số luôn ghi "Chưa trắc". Bản lưu cũ đang chơi giữ nguyên trạng thái (`_rkV1`).
+- Bài kiểm: mới `dt_chon`; sửa `trac_linh` (kiếp đầu cũng chưa trắc). `fresh()` đặt `rootKnown=1` để bài cũ như đã trắc.
+- Sửa bài lúc đạt lúc trượt gặp khi chạy: `tien_thuong` (15% phục kích ở cửa nhiệm vụ "đến nơi" — chặn bằng `ambDoor=1`), `tien_bac` (mức tiền "thường" vẫn ghi 500–1.500 của Đ3, Sửa-B đã đổi 300–700 × hoàn cảnh).

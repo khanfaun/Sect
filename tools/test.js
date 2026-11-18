@@ -19,7 +19,8 @@ function fresh(patch) {
   run(`(() => {GEO=null;RS=mul(16717);const original=genWorld;genWorld=()=>original(${seed});
     try{G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0]);}
     finally{genWorld=original;}
-    NK.on=true;NK.clear();G.run.scene=null;FEAT.an=0;FEAT.nc=0;FEAT.no=0;FEAT.nha=0; // nợ/nhà ở (Sửa-B) tắt, bài no_nha bật lại; ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
+    NK.on=true;NK.clear();G.run.scene=null;G.run.rootKnown=1; // Sửa-C.6: linh căn luôn ẩn tới khi trắc; bài cũ coi như đã trắc
+    FEAT.an=0;FEAT.nc=0;FEAT.no=0;FEAT.nha=0; // nợ/nhà ở (Sửa-B) tắt, bài no_nha bật lại; ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
   })()`);
   if (patch) run(patch);
 }
@@ -473,8 +474,11 @@ const TESTS = {
   },
   trac_linh() {
     fresh();
-    ok(run('G.run.kiep')===1&&run('G.run.rootKnown')===1, 'kiếp đầu biết ngay linh căn');
-    ok(run("rootLabel(G.run)")!=='Chưa trắc', 'kiếp đầu hiện tên linh căn: '+run("rootLabel(G.run)"));
+    // Sửa-C.6: kiếp đầu cũng phải chờ trắc
+    run("G.meta.nlife=0;genBirth();newRun(G.birth.cards[0]);G.run.scene=null;G.screen='map'");
+    ok(run('G.run.kiep')===1&&run('G.run.rootKnown')===0, 'kiếp đầu cũng chưa trắc');
+    ok(run("rootLabel(G.run)")==='Chưa trắc', 'kiếp đầu: nhãn Chưa trắc');
+    run("G.run.rootKnown=1");ok(run("rootLabel(G.run)")!=='Chưa trắc', 'trắc rồi thì hiện tên: '+run("rootLabel(G.run)"));
     run("G.meta.nlife=1;genBirth();newRun(G.birth.cards[0]);G.run.scene=null;G.screen='map';NK.clear()");
     ok(run('G.run.kiep')===2&&run('G.run.rootKnown')===0, 'kiếp 2: chưa trắc');
     ok(run("rootLabel(G.run)")==='Chưa trắc', 'nhãn hiển thị: Chưa trắc');
@@ -495,6 +499,21 @@ const TESTS = {
     run("G.meta.pick=0;G.meta.nlife=4;genBirth();newRun(G.birth.cards[0])");ok(run('G.meta.pick')===0, 'kiếp 5 thì không');
     run("G.meta.pick=0;G.meta.upg.menh=2;G.meta.nlife=2;genBirth();newRun(G.birth.cards[0])");ok(run('G.meta.pick')===1, 'bậc 2: kiếp 3 được chọn');
     ok(run("(()=>{G.meta.nlife=1;let n=0;for(let i=0;i<50;i++)n+=ttRoll([]).length;return n/50<=2.2})()"), 'Thiên mệnh không còn rút thêm khí vận');
+  },
+  // Sửa-C.6: chỉ được chọn lá số khi đã tu/uống/mang vật luân hồi
+  dt_chon() {
+    fresh("G.meta.pick=0;G.meta.upg.menh=0;G.run.qitems=[]");
+    run("die('combat',{n:'thử'})");ok(run('G.meta.pick')===0, 'chết bình thường: không được chọn');
+    run("genBirth();newRun(G.birth.cards[0]);G.run.pills=[{id:'luanhoi',q:0}];usePill(0)");ok(run("(G.run.dtUsed||[]).includes('luanhoi')"), 'uống Luân Hồi Đan: ghi lại');
+    run("die('combat',{n:'thử'})");ok(run('G.meta.pick')===1, 'uống Luân Hồi Đan rồi chết: được chọn');
+    run("G.meta.pick=0;genBirth();newRun(G.birth.cards[0]);G.run.qitems=['luan_hoi_kinh']");ok(run("!!bagItems().find(x=>x.key==='vluan_hoi_kinh'&&x.use)"), 'Luân Hồi Kinh dùng được trong túi');
+    run("bagUse('vluan_hoi_kinh',1)");ok(run("G.run.arts.some(a=>a.n==='Luân Hồi Kinh')"), 'học được Luân Hồi Kinh');
+    run("die('combat',{n:'thử'})");ok(run('G.meta.pick')===1, 'đã tu Luân Hồi Kinh: được chọn');
+    run("G.meta.pick=0;genBirth();newRun(G.birth.cards[0]);G.run.qitems=['luan_hoi_ngoc','dinh_menh_chau']");run("die('combat',{n:'thử'})");
+    ok(run('G.meta.pick')===1, 'mang hai vật cùng lúc: chỉ một lượt');
+    ok(run("THUONG_CAC.some(x=>x.id==='luanhoi')&&THUONG_CAC.some(x=>x.id==='luan_hoi_kinh')&&THUONG_CAC.some(x=>x.id==='luan_hoi_ngoc')"), 'Thưởng Các bày ba nguồn');
+    run("genBirth()");ok(run("G.birth.cards.length")===3, 'ba lá số');
+    run("newRun(G.birth.cards[0])");ok(run("G.run.rootKnown")===0, 'kiếp mới chưa trắc');
   },
   quen_sach() {
     fresh();
@@ -549,7 +568,7 @@ const TESTS = {
     ok(run("fmtBacS(3200)")==='3,2 lượng'&&run("fmtBacS(25000)")==='2,5 vàng'&&run("fmtBacS(12)")==='12 xu', 'fmtBacS: '+run("fmtBacS(3200)")+' / '+run("fmtBacS(25000)"));
     const st=o=>run(`(()=>{genBirth();const k=Object.assign({},G.birth.cards[0],{origin:'${o}',hc:null});newRun(k);return JSON.stringify({st:G.run.st,bac:G.run.bac})})()`);
     run("G.meta.upg={}");
-    let a=JSON.parse(st('nong'));ok(a.st===0&&a.bac>=500&&a.bac<=1500, 'con nhà nông: 0 linh thạch, bạc thường '+JSON.stringify(a));
+    let a=JSON.parse(st('nong'));ok(a.st===0&&a.bac>=225&&a.bac<=875, 'con nhà nông (Sửa-B: thường 300–700 xu × hoàn cảnh 0,75–1,25): 0 linh thạch '+JSON.stringify(a));
     a=JSON.parse(st('khat'));ok(a.st===0&&a.bac<=300, 'khất cái: khốn khó '+JSON.stringify(a));
     a=JSON.parse(st('thegia'));ok(a.st>=1&&a.st<=2&&a.bac>=5000, 'con thế gia: 1–2 linh thạch, khá giả '+JSON.stringify(a));
     a=JSON.parse(st('xt_nguoi_thua_ke_sap_bac'));ok(a.bac>=5000, 'xuất thân danh mục nhóm khá giả nhận đúng nhóm '+JSON.stringify(a));
@@ -686,7 +705,7 @@ const TESTS = {
     ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='thuongcac')"), 'thành có bảng treo thì có Thưởng Các');
     run("openBoard(nodeById(G.run.at));takeQuest(0)");const q=JSON.parse(run("JSON.stringify(G.run.quests[0])"));ok(q.t0!=null, 'ghi lúc nhận việc');
     const g=run("tlQuest(G.run.quests[0])");run("G.run.thuongLenh=0;G.run.thuongTong=0");
-    if(q.kind==='den')run(`G.run.at=G.run.quests[0].node;openPlace(G.run.at);questDo(G.run.quests[0].id)`);else run(`questWin(G.run.quests[0].id)`);
+    if(q.kind==='den')run(`G.run.quests[0].ambDoor=1;G.run.at=G.run.quests[0].node;openPlace(G.run.at);questDo(G.run.quests[0].id)`) /* Sửa-C: chặn 15% phục kích ở cửa (ngẫu nhiên làm bài lúc đạt lúc trượt) */;else run(`questWin(G.run.quests[0].id)`);
     run(`G.run.at=${JSON.stringify(nid)};openPlace(G.run.at)`);
     ok(run("G.run.thuongLenh")===g&&g>=2, 'xong sớm: nhận '+g+' thẻ (bậc + 1)');
     run("openBoard(nodeById(G.run.at));const b=nodeById(G.run.at).board;b.list.forEach(x=>x.taken=false);takeQuest(1)");const t1=run("G.run.thuongLenh");

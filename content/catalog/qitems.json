@@ -778,6 +778,24 @@
     "status": "active"
   },
   {
+    "id": "luan_hoi_kinh",
+    "n": "Luân Hồi Kinh (bản chép)",
+    "i": "📕",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi để học tâm pháp Luân Hồi Kinh. Đã tu thì kiếp sau được chọn lá số.",
+    "d": "Quyển kinh mỏng, chữ cuối trang trùng với chữ đầu trang.",
+    "status": "active"
+  },
+  {
+    "id": "luan_hoi_ngoc",
+    "n": "Luân Hồi Ngọc Bội",
+    "i": "🧿",
+    "dang": "Vật dùng",
+    "use": "Mang theo lúc chết: kiếp sau được tự chọn lá số đầu thai.",
+    "d": "Ngọc bội hình vòng khuyết, đeo lâu thì lạnh như nước giếng.",
+    "status": "active"
+  },
+  {
     "id": "dinh_menh_chau",
     "n": "Định Mệnh Châu",
     "i": "🔮",
