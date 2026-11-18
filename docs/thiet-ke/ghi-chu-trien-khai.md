@@ -122,3 +122,8 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 7. **Tốt nghiệp**: đủ 22 nhiệm vụ **đã nhận thưởng** (bỏ qua không tính) → +5 điểm luân hồi, dòng "Tân thủ tốt nghiệp" trong `calcPts`.
 8. **Bản lưu cũ**: không tạo `r.tut` (chỉ kiếp mới bắt đầu sau bản này); bản có `tut` thiếu trường thì bổ sung (`_v1`). Kiếp 2 trở đi không có khung.
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
+
+## TIẾN ĐỘ (điểm dừng để làm tiếp)
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5.1, Đ5.2, Đ5.3.
+- Còn: Đ5.4 (năng lực hỗ trợ ST23, Opus), Đ5.5 (rà chéo đợt 5, Opus), rồi Đ6 trở đi.
+- Có 15 câu hỏi chờ người dùng chốt (Đ1: 5, Đ2: 3, Đ3: 4, Đ4: 3), xem các mục trên.
