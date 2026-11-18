@@ -268,6 +268,7 @@
  "core2/35b-danh-tieng.js",
  "core2/36-thien-kiep-nghiep.js",
  "core2/36b-qua-chin.js",
+ "core2/36c-hoan-canh.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
