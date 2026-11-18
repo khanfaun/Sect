@@ -9,7 +9,7 @@
 //  Bị Phong: gió cắt rút thể lực, khó thủ thế đỡ đòn · Âm Hàn: rút linh lực
 // Bảng KIEP: content/rules/kiep.js
 // Bảng KIEP_EL: content/rules/kiep-el.js
-function kiepKind(){const r=G.run;if(feat('nq')?ngB(r)>=15:(r.karma||0)<=-30)return 'nghiep';if(r.root.els.includes('loi'))return 'tutieu';if(r.root.els.length>=5)return 'nguhanh';return KIEP_EL[r.root.els[0]]||'loi';}
+function kiepKind(){const r=G.run;if(feat('nq')?ngBacB(r)>=2:(r.karma||0)<=-30)return 'nghiep';if(r.root.els.includes('loi'))return 'tutieu';if(r.root.els.length>=5)return 'nguhanh';return KIEP_EL[r.root.els[0]]||'loi';}
 btStages=function(to){if(isPham())return [];const k=kiepKind();
   return to===1?[]:to===2?['tamma']:to===3?[{n:6,kind:k}]:to===4?[{n:9,kind:k},'tamma']:[{n:6,kind:'hoa'},{n:6,kind:'phong'},{n:4,waves:9,kind:'cuu'}];};
 function stageName(x){if(x==='tamma')return contentText("core2_12-dot-24-cac-loai_js.stageName.001");const K=KIEP[x.kind||'loi'];return K.n+' · '+(x.waves>1?x.waves+contentText("core2_12-dot-24-cac-loai_js.stageName.002")+x.n+' đạo':x.n+' đạo');}

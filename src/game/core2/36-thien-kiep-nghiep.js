@@ -7,4 +7,4 @@ function nqKiepBonus(){return NQ_BAC_KBON[ngBacB()]||0;}   // thưởng khi vư�
     r2.bon.hpP+=x;r2.bon.atkP+=x;r2.bon.defP+=x;const sc=r2.scene;if(sc&&sc.chips)sc.chips.push(chip('🔥',contentText('nq.kiep.bon'),contentText('nq.kiep.bonTip'),'up'));dbg('nq.kiepBon',{to,x});}}
   return res;};}
 // lời báo trước kiếp (không số)
-function nqKiepWarn(){return feat('nq')&&ngB()>=15?contentText('nq.kiep.warn'):'';}
+function nqKiepWarn(){return feat('nq')&&ngBacB()>=2?contentText('nq.kiep.warn'):'';}

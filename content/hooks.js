@@ -74,7 +74,7 @@ const CONTENT_HOOKS={
 "tt_cuu_v":()=>({a:npc('hai')}),
 "tr_hoi_v":()=>({a:npc('tre')}),
 "tr_luan_v":()=>({a:npc('tre')}),
-"tr_bat_cond":r=>hdLvIdx(r)>=3||ngB(r)>=15,
+"tr_bat_cond":r=>hdLvIdx(r)>=3||ngBacB(r)>=2,
 "tr_bat_v":()=>({a:npc('tre')}),
 "tr_giup_v":()=>({a:npc('tre')}),
 "tr_moi_cond":r=>!r.flags.tongmon,

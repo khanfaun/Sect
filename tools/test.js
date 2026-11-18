@@ -369,16 +369,25 @@ const TESTS = {
   kiep_nghiep() {
     fresh('G.run.ng.B=0');
     ok(run("nqK()")===1 && run("nqKiepBonus()")===0, 'không nghiệp: kiếp thường');
-    run("G.run.ng.B=100");
-    ok(run("nqK()")===1.4 && run("nqKiepBonus()")===0.1, 'B=100: sức kiếp ×1.4, thưởng 10%');
-    run("G.run.ng.B=120");ok(run("nqK()")===1.4, 'cùng bậc thì như nhau');
-    run("G.run.ng.B=15");ok(run("kiepKind()")==='nghiep' && run("nqKiepWarn()").length>5 && !/\d/.test(run("nqKiepWarn()")), 'B≥15: Nghiệp Hỏa, có lời báo không số');
+    run("G.run.ng.B=120"); // Sửa-C.1: mốc bậc 4 dời từ 100 lên 120
+    ok(run("nqK()")===1.4 && run("nqKiepBonus()")===0.1, 'B=120: sức kiếp ×1.4, thưởng 10%');
+    run("G.run.ng.B=200");ok(run("nqK()")===1.4, 'cùng bậc thì như nhau');
+    run("G.run.ng.B=20");ok(run("kiepKind()")==='nghiep' && run("nqKiepWarn()").length>5 && !/\d/.test(run("nqKiepWarn()")), 'B≥20 (bậc 2): Nghiệp Hỏa, có lời báo không số');
     const once=()=>run(`(()=>{const r=G.run;r.pham=0;r.realm=0;r.tv=1e9;r.bt={to:1,dao:5,stages:[],hpLeft:1};r.scene={type:'bt',chips:[]};try{btFinish();}catch(e){return 'ERR '+e.message;}return G.run?G.run.bon.hpP:'chet';})()`);
-    run("G.run.ng.B=100");const h0=run("G.run.bon.hpP");const h1=once();
+    run("G.run.ng.B=120");const h0=run("G.run.bon.hpP");const h1=once();
     ok(typeof h1==='number' && h1>=h0+10, 'vượt kiếp nghiệp: khí huyết +10% ('+h0+' → '+h1+')');
     const h2=run(`(()=>{const r=G.run;r.realm=0;r.bt={to:1,dao:5,stages:[],hpLeft:1};r.scene={type:'bt',chips:[]};const b=r.bon.hpP;btFinish();return G.run.bon.hpP-b;})()`);
     ok(h2<10, 'cùng cảnh giới chỉ thưởng một lần');
     ok(run("NK.count('nq.kiepBon')")===1, 'nhật ký nq.kiepBon');
+  },
+  // Sửa-C.1: mốc bậc nghiệp — một lần lỡ tay chưa tuyệt vọng, tái phạm mới nặng
+  nq_moc() {
+    fresh('G.run.ng.B=0;G.run.ng.G=0');
+    run("deed('giet_vo_toi')");const b1=run("ngB()");ok(run("ngBacB()")===1, 'giết một người vô tội: bậc 1 ('+b1+')');
+    run("deed('giet_vo_toi')");ok(run("ngBacB()")===2&&run("kiepKind()")==='nghiep', 'tái phạm: bậc 2, Nghiệp Hỏa ('+run("ngB()")+')');
+    run("G.run.ng.G=0;deed('cuu_nguoi',{ai:'a'})");ok(run("ngBacG()")===1, 'cứu một người: bậc 1 thiện duyên');
+    run("deed('cuu_nguoi',{ai:'b'});deed('cuu_nguoi',{ai:'c'})");ok(run("ngBacG()")===2, 'cứu ba người: bậc 2 ('+run("ngG()")+')');
+    ok(run("NQ_BAC.join()")==='0,5,20,60,120,250', 'bảng mốc');
   },
   qua_chin() {
     fresh('G.run.qc=[]');
@@ -399,12 +408,12 @@ const TESTS = {
   hoancanh() {
     fresh();
     const rate=n=>run(`(()=>{let b=0,k=0;for(let i=0;i<${n};i++){genBirth();for(const c of G.birth.cards){k++;if(c.hc==='bap')b++;}}return b/k})()`);
-    run("G.meta.lastNq={B:200,G:0}");
+    run("G.meta.lastNq={B:250,G:0}"); // Sửa-C.1: bậc 5 từ 250
     const a=rate(200);ok(a>=0.6&&a<=0.75, 'nghiệp nặng: tỉ lệ bấp bênh '+a.toFixed(2));
     ok(run("G.birth.cards.filter(c=>c.hc==='bap').every(c=>ORIGIN.find(o=>o.id===c.origin).grp==='kho')"), 'bấp bênh thì xuất thân khốn khó');
     run("G.meta.lastNq={B:0,G:200}");
     const b=rate(100);ok(b<=0.15, 'thiện duyên dày: ít bấp bênh '+b.toFixed(2));
-    run("G.meta.lastNq={B:110,G:0}");const c1=run("hcRate().bap");run("G.meta.lastNq={B:190,G:0}");
+    run("G.meta.lastNq={B:130,G:0}");const c1=run("hcRate().bap");run("G.meta.lastNq={B:240,G:0}");
     ok(run("hcRate().bap")===c1, 'cùng bậc thì như nhau');
     run("delete G.meta.lastNq");ok(run("hcRate().bap")===0.25, 'bản lưu cũ: hoàn cảnh thường');
     run("G.meta.lastNq={B:200,G:0};genBirth()");const card=run("JSON.stringify(G.birth.cards.find(c=>c.hc==='bap')||null)");

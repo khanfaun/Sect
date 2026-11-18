@@ -208,3 +208,10 @@ Luật: `src/game/core2/44-no-nha.js`; bảng `NO`, `NHA` ở `content/rules/no-
 ### Còn dở
 - Bot chưa biết vay, thuê nhà (chưa được phép chạy bot).
 - Chưa có sự kiện kể riêng cảnh quan phủ, làm công (chỉ thông báo + nhật ký); chưa có cách xoá truy nã ngoài danh tiếng.
+
+## Sửa-C — các câu 1, 2, 6, 8, 11, 14, 18, 19
+
+### C.1 — mốc bậc nghiệp (câu 1)
+- `NQ_BAC` đổi `[0,3,15,50,100,200]` → **`[0,5,20,60,120,250]`** (cùng mốc cho nhãn `NQ_LV_G/B`). Một lần giết người vô tội (15) chỉ tới bậc 1 "Vướng nợ trần duyên"; tái phạm (30) mới bậc 2 và kiếp đổi Nghiệp Hỏa. Cứu một người (8) bậc 1, cứu ba người (24) bậc 2. Bậc 5 cần 250 (≈ 17 mạng người) nên chỉ kẻ ác thật mới "nghiệp hải".
+- Các ngưỡng viết cứng 15/50 (Nghiệp Hỏa, lời báo kiếp, tuần tra bắt, thành tựu Thiện nhân/Ma đầu) nay đọc theo bậc (`ngBacB()>=2`, `>=3`).
+- Bài kiểm: mới `nq_moc`; sửa `kiep_nghiep`, `hoancanh` theo mốc mới (B=100→120, 15→20, 200→250).
