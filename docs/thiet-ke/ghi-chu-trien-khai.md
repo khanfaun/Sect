@@ -295,3 +295,18 @@ Sửa ở `src/game/core2/47-ra-cheo-d5.js` (trừ chỗ ghi khác).
 4. **test:rules** trước thiếu các bài `ctxt vo_dao nghe nghe_pham` (đều qua) — đã thêm cùng `nang`, `ra_cheo5`.
 5. Đã rà, không phải sửa: võ học không tốn tiền (luyện võ, lôi đài); bí tịch võ ở tạp hóa thành bán bằng xu, không tính vào giới hạn đồ tu sĩ; tiền công nghề cộng qua `bacAdd` nên tự trừ nợ; việc nghề kiểm `bacCan` (có mua chịu) cho chi phí thường; HD13 tính cả luyện võ (`tick:'train'`), HD17 tính nghề / võ học (`tutRole`); kiếp mới đặt lại `paths`, `vo`, `voSk`, `voHoc`, `nang`; già (Sửa-C.8) chỉ giảm chỉ số chiến đấu, không đụng năng lực; chuỗi bọc `chkChance` (18 → 46) và `choose` (18 tạm thay `chkChance` rồi trả lại) vẫn đúng thứ tự.
 6. Còn dở: bot chưa biết năng lực/nghề mới (chưa được chạy bot); năng lực chưa ảnh hưởng giá mua bán (thương lượng) — để đợt cân bằng sau; dịch vụ quán vẫn không theo nhu cầu (như Sửa-A).
+
+## NGƯỜI DÙNG CHỐT ĐỢT 2 (câu 16–24) — làm trước Đ6
+16. Nhu cầu KHÔNG áp vào giá quán (trọ, ăn, trà).
+17. Cầm đồ trả quá thấp: vũ khí phàm ~10 lượng bạc; pháp bảo/đồ tu sĩ định giá bằng linh thạch (không ra tiền phàm rẻ mạt). Rà lại hiệu cầm đồ/giá bán đồ.
+18. Nguồn linh thạch phẩm cao:
+   - Tông môn: sự kiện lớn của tông (thi đấu/đoạt giải) → tối đa Trung phẩm.
+   - Bí cảnh: chủ yếu Hạ/Trung; Thượng rất hiếm; Cực rất rất hiếm.
+   - Đấu giá thường: bán đồ lấy Hạ/Trung.
+   - Hội đấu giá ngầm/"Quỷ thị đấu giá" (tên kiểu tiên hiệp, tự chọn; nối với quỷ thị/chợ đen có sẵn): đổi vật lấy thứ mình muốn, có thể yêu cầu Thượng/Cực phẩm.
+   - Cực phẩm nhiều nhất trong kỳ ngộ cơ duyên.
+19. Đói: trong lúc hấp thụ linh khí (bế quan) đói chậm hơn; sau bế quan có hiệu ứng đói chậm trong X thời gian (tự chọn). Tĩnh toạ thì không. Thêm Tích Cốc Đan cho tu sĩ Trúc Cơ trở lên (no trong X thời gian). LƯU Ý: Sửa-A/Đ3 đang cho Trúc Cơ+ không cần ăn — đổi lại: Trúc Cơ+ vẫn đói nhưng rất chậm (tự cân), để Tích Cốc Đan có ý nghĩa; ghi rõ lựa chọn.
+20. Cho trả trước một phần nợ ở người cho vay.
+21. Giữ Địa linh căn (2 hệ tương sinh, ×1.5).  22. Giữ.
+23. Năng lực thương lượng giảm giá tiệm ít: vật 100 xu giảm ~3–5 xu (tối đa ~5%).
+24. Người dùng hỏi "năng lực gì" → đã giải thích (8 năng lực hỗ trợ ST23); chờ trả lời, tạm giữ hiện bằng chữ.
