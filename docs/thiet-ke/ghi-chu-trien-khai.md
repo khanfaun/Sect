@@ -363,3 +363,7 @@ Luật `48-sua-e.js`; bảng `SUAE.ltRoll`, `SUAE.dg`, `SUAE.am`. Hiệu ứng s
 2. **Tích Cốc Đan** (`tich_coc_dan`, vật dùng trong túi): chỉ Trúc Cơ trở lên dùng được (phàm nhân, Luyện Khí bị từ chối, giữ lại viên đan). Dùng thì hết đói ngay và **no 1.095 ngày (3 năm)**, cộng dồn nếu dùng tiếp (`r.tichCoc` = giờ hết no; bản lưu cũ không có thì coi như 0). Trong thời gian no nhịp đói = 0.
 3. Bày ở nơi bán đồ tu sĩ: chợ phiên tu sĩ, phường thị trong thành, bảo khố tông mình — 2 viên mỗi lần bày, giá `price(8)` linh thạch Hạ phẩm × nhu cầu (vùng 1 ≈ 3 viên). Không bán bằng tiền phàm. Mua vật trong túi bằng linh thạch là đường mới (bọc `buy`).
 4. Bài: `tich_coc`.
+
+### E.20 — trả trước một phần khoản vay
+- Ở "Người cho vay", khi đang có khoản vay: thêm các lựa chọn "Trả trước một phần" 200 xu, 1 lượng, 3 lượng (chỉ mức nhỏ hơn số còn phải trả) và **một nửa** số còn lại. Phải có đủ tiền thật (không mua chịu). Số phải trả giảm đúng số đã trả; lãi đã tính và hạn **giữ nguyên** (không giảm lãi khi trả sớm). Vẫn còn nút trả hết như cũ. Bảng `SUAE.traTruoc`.
+- Bản lưu cũ: khoản vay cũ `r.vay` dùng được ngay. Bài: `vay_tt`.

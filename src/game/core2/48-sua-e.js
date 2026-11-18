@@ -85,3 +85,12 @@ function tcCon(r){r=r||G.run;return r&&(r.tichCoc||0)>W().t?Math.ceil((r.tichCoc
 {const _bu=bagUse;bagUse=function(key,n){const id=String(key).slice(1);if(key[0]!=='v'||id!==SUAE.tc.id)return _bu.apply(this,arguments);const r=G.run;
   if(r.pham||(r.realm||0)<1){note(contentText('tc.khong'),'dn');return 0;}const i=(r.qitems||[]).indexOf(id);if(i<0)return 0;r.qitems.splice(i,1);
   r.tichCoc=Math.max(r.tichCoc||0,W().t)+SUAE.tc.ngay*HD;if(typeof anFed==='function')anFed(r,'tichcoc');r.anPart=0;log(contentText('tc.dung'));dbg('tc.dung',{den:r.tichCoc});return 1;};}
+
+// ---------- câu 20: trả trước một phần khoản vay ----------
+function vayTtList(r){r=r||G.run;const V=r&&r.vay;if(!V||!(V.tra>1))return [];const S2=new Set(SUAE.traTruoc.filter(x=>x<V.tra));const h=Math.floor(V.tra/2);if(h>0)S2.add(h);return [...S2].sort((a,b)=>a-b);}
+{const _vo=venueOpts;venueOpts=function(n,v){const L=_vo.apply(this,arguments);if(v!=='vay'||!G.run||!G.run.vay)return L;const r=G.run;const i=L.findIndex(x=>x.id==='tra');
+  const add=vayTtList(r).map(x=>({id:'tt:'+x,l:contentText('no.ttL',[fmtBac(x)]),d:contentText('no.ttD',[fmtBac(r.vay.tra-x)]),h:0,st:0,g:{txt:fmtBac(x)},no:(r.bac||0)>=x?'':contentText('no.khongDu')}));
+  L.splice(i<0?0:i+1,0,...add);return L;};}
+{const _vd=venueDo;venueDo=function(v,id){if(v!=='vay'||!String(id).startsWith('tt:'))return _vd.apply(this,arguments);const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place'||!r.vay)return false;
+  const x=+id.slice(3);if(!vayTtList(r).includes(x)||(r.bac||0)<x)return false;bacAdd(-x,'vay.tt');r.vay.tra-=x;dbg('no.vayTt',{x,con:r.vay.tra});
+  sc.msg=[contentText('no.traXong',[fmtBac(x)])];sc.chips=[bacChip(-x)];sc.venue=null;sc.seq=(sc.seq||0)+1;saveSoon();return true;};}

@@ -738,6 +738,17 @@ const TESTS = {
     run("G.run.realm=0;G.run.qitems=['tich_coc_dan']");ok(run("bagUse('vtich_coc_dan')")===0&&run("hasItem('tich_coc_dan')"), 'Luyện Khí không dùng được');
     run("delete G.run.tichCoc");ok(run("tcCon()")===0, 'bản lưu cũ (không có tichCoc) chạy được');
   },
+  // Sửa-E câu 20: trả trước một phần khoản vay
+  vay_tt() {
+    fresh("(()=>{const r=G.run;r.moving=null;r.bac=0;r.noTra=null;r.vay=null;FEAT.no=1;const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin'&&n.id!==r.queAt);r.at=n.id;openPlace(n.id);})()");
+    ok(run("venueDo('vay','v1')")&&run("G.run.vay.tra")===1180, 'vay 1 lượng (trả 1.180)');
+    run("openPlace(G.run.at)");const L=JSON.parse(run("JSON.stringify(venueOpts(nodeById(G.run.at),'vay').filter(o=>o.id.startsWith('tt:')).map(o=>o.id))"));
+    ok(JSON.stringify(L)==='["tt:200","tt:590","tt:1000"]', 'các mức trả trước: '+L.join(', '));
+    const han=run("G.run.vay.han");ok(run("venueDo('vay','tt:200')")&&run("G.run.vay.tra")===980&&run("G.run.bac")===800&&run("G.run.vay.han")===han, 'trả trước 200 xu: còn 980, hạn giữ nguyên');
+    run("openPlace(G.run.at);G.run.bac=100");ok(!run("venueDo('vay','tt:200')")&&run("G.run.vay.tra")===980, 'không đủ tiền thật: không trả được');
+    run("openPlace(G.run.at);G.run.bac=980");ok(run("venueDo('vay','tra')")&&!run("G.run.vay")&&run("G.run.bac")===0, 'trả nốt phần còn lại thì xong');
+    run("G.run.vay={id:'v1',goc:1000,tra:1180,han:W().t+HM,bao:0}");ok(run("vayTtList().length")>0, 'bản lưu cũ (khoản vay cũ) vẫn trả trước được');
+  },
   // Sửa-A (câu 9): bốn phẩm linh thạch, bản lưu cũ
   lt_pham() {
     fresh();

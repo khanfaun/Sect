@@ -26,3 +26,5 @@ Object.assign(SUAE,{
 // câu 19 — Tích Cốc Đan (vật dùng trong túi, chỉ Trúc Cơ trở lên): no trong `ngay` ngày (không đói, hết đói ngay), giá `st` linh thạch Hạ phẩm (× hệ số vùng price()),
 //   bày ở nơi bán đồ tu sĩ: chợ phiên tu sĩ, phường thị trong thành, bảo khố tông mình; `qty` viên mỗi lần bày.
 SUAE.tc={id:'tich_coc_dan',ngay:1095,st:8,qty:2,noi:['cho','thanh','tong']};
+// câu 20 — trả trước một phần khoản vay ở người cho vay: các mức (xu) nhỏ hơn số còn phải trả, và "một nửa". Không giảm lãi đã tính, không đổi hạn.
+SUAE.traTruoc=[200,1000,3000];
