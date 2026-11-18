@@ -154,3 +154,29 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
     - Độ hiếm: Địa linh căn ~1/1000 người; Thiên linh căn cực hiếm (~1/100.000, "nghìn năm có một"). Rà lại bảng tỉ lệ linh căn (content/rules/root-rate.js) cho khớp.
     - Khi vừa bấm trắc ra Địa/Thiên: ẩn hết hộp thoại, chân trang, biểu tượng → chạy hiệu ứng toàn màn (tham khảo hiệu ứng tăng tiềm chất có sẵn). Địa: màu tím. Thiên: cam vàng, rất sáng, mạnh hơn Địa nhiều lần.
     - Khung cảnh kiểu truyện tiên hiệp: hào quang phóng thẳng lên trời, thiên địa dị tượng, ánh sáng chiếu khắp nơi, chuông tông môn gõ vang hàng chục tiếng, trưởng lão kinh động… Lời kể riêng cho Địa và Thiên (Thiên hoành tráng hơn hẳn), sau hiệu ứng mới hiện lại hộp thoại kết quả. Áp dụng cho mọi cách trắc linh (tông môn, sự kiện, vật phẩm).
+
+## Sửa-A — làm lại tiền tệ (câu 9) và đổi phẩm linh thạch, nhu cầu (câu 17)
+Luật: `src/game/core2/39-tien-te.js` (đơn vị, bỏ đổi tự động, bỏ tiền trang) và `src/game/core2/43-tien-te-2.js` (mọi phần mới); bảng `TIEN`, `TIEN2` ở `content/rules/tien.js`; chữ `content/text/tien-te.json`.
+
+### Số liệu đã chọn
+1. **Đơn vị**: `r.bac` tính bằng xu. 1 lượng bạc = 1.000 xu, 1 lượng vàng = 10.000 xu. Hiển thị dài "2 lượng vàng 5 lượng bạc 30 xu", ngắn trên HUD "3,2 lượng" / "2,5 vàng". Không còn "quan", "đồng".
+2. **Bản lưu cũ** (`_xuV1`): bạc cũ tính bằng đồng → 1 đồng = 1 xu nên số giữ nguyên (giá trị cũ 1 quan = 1 lượng bạc, khớp ý người dùng); linh thạch cũ (`r.st`) là Hạ phẩm; thêm `r.lt=[Trung,Thượng,Cực]`.
+3. **Linh thạch 4 phẩm**: `r.st` vẫn là Hạ phẩm (mọi giá cũ tính bằng Hạ phẩm, không phải sửa hàng trăm chỗ); Trung/Thượng/Cực ở `r.lt`. Giá trị quy ước 1 Hạ ≈ 100 lượng vàng (`TIEN.lt`, chỉ để đọc).
+4. **Không đổi trực tiếp**: bỏ tự đổi một viên linh thạch khi thiếu bạc; bỏ tiền trang mua/bán linh thạch. Kênh gián tiếp hiếm: **Hiệu cầm đồ** ở thành và chợ tu sĩ — nhận đồ tu sĩ (pháp khí/đan), không nhận linh thạch, mỗi nơi 1 món/tháng, trả 200 xu cho mỗi "linh thạch giá bán" của món đó × nhu cầu (vd pháp khí bán 8 linh thạch → ~1,6 lượng bạc).
+5. **Đổi phẩm** (nơi "Đổi linh thạch"): chợ phiên tu sĩ (`cho`), phường thị (`thanh`, chỉ tới Thượng phẩm), tông môn mình (`tong`).
+   - Đổi xuống 1 viên phẩm trên → Hạ/Trung/Thượng: chợ 97/93/89, tông 99/95/91, phường thị 94/90/86 viên; kẹp 80–101.
+   - Đổi lên 100 viên → 1 viên phẩm trên phải trả ×: chợ 1,06/1,12/1,22, tông 1,05/1,10/1,18, phường thị 1,10/1,18/1,30 (tối thiểu 101 viên).
+   - Mỗi nơi lệch thêm ±2 viên / ±2% theo mã nút; giới hạn số lần đổi lên mỗi tháng mỗi nơi: chợ 6/3/1, tông 5/2/1, phường thị 4/1/0.
+6. **Nhu cầu** (`ncGet(nút, món)`): nền dao động ±12% quanh 1, đổi mốc mỗi 3 tháng (nội suy, tính từ băm nên không lưu); người chơi mua 1 lần +0,04, bán −0,04 (đổi linh thạch: phẩm nhận ±0,04, phẩm đưa ∓0,02); phần đẩy phai ×0,7 mỗi tháng, kẹp ±0,4; nhu cầu kẹp 0,7–1,4. Lưu `W().nc[nút][món]=[đẩy,tháng]`, tự xoá khi gần 0. Áp vào: giá hàng tiệm (lúc bày hàng và sau mỗi lần mua), giá bán đồ ở tiệm, đổi phẩm linh thạch, cầm đồ. **Chưa áp** vào dịch vụ quán (trọ, ăn, trà) và Thưởng Các (trả Thưởng Lệnh) — đó là dịch vụ/điểm thưởng, không phải hàng hoá. Món: `dan:<mã đan>`, `sk`, `pb`, `sach`, `qi:<mã>`, `lt0..lt3`, `cam`.
+7. **Cửa hàng**: tạp hóa thôn trấn giữ tối đa 1 món đồ tu sĩ, phường thị trong thành tối đa 2 (đồ có giá xu như bản chép tay tâm pháp, Trắc Linh Thạch, bí tịch võ không tính); luôn bày đồ phàm bằng xu: Kim sang dược 120 xu (hồi 30% khí huyết, dùng trong túi), Hương an thần 60 xu (tâm ma −5), Lương khô 70 xu. Chợ phiên tu sĩ giữ nguyên đầy đủ. Thêm **Bảo khố tông môn** (nút tạp hóa ở tông mình): hàng thường + 1 pháp khí cao hơn một phẩm + 1 loại đan.
+8. **Sự kiện cho phàm nhân**: `tools/ra-su-kien-pham.js` rà 258 mục phàm nhân gặp được (levels có 0, không đòi ghi danh); chấm điểm từ ngữ tu sĩ; rà tay thêm 10 và gỡ 5 mục máy bắt nhầm (lý do ghi trong công cụ). Kết quả `content/rules/pham-su-kien.js`: **13 sự kiện phàm nhân không gặp** (bí cảnh, đấu giá tu sĩ, thi thể tu sĩ, tranh bảo, đổ thạch, động phủ tiền bối, mạch linh thạch, ngư nhân, cứu tù binh, ma tu xin tha, cược đan đột phá, tu sĩ đánh nhau vì gà, tu sĩ thuê trồng linh điền). **101 sự kiện** có giá linh thạch còn lại: luật tự đổi — giá/lợi 1 linh thạch (sau hệ số vùng) = 100 xu (`TIEN.evXu`, bằng `TIEN.qBac`); tỉ lệ "%" tính trên xu; lời kể đổi "viên linh thạch" → "đồng bạc", "linh thạch" → "bạc" (trừ Trắc Linh Thạch). Sự kiện mới tự được đổi; muốn chặn thì thêm vào `THEM_CAM` rồi `node tools/ra-su-kien-pham.js --write`.
+
+### Bài kiểm
+- Mới: `lt_pham`, `lt_doi`, `nhu_cau`, `shop_pham`, `su_kien_pham` (test.js, đã thêm vào `test:rules`); test-ui `tien_trang` viết lại (Đổi linh thạch + Hiệu cầm đồ).
+- Sửa theo luật mới: `tien_bac` (fmtBac xu/lượng; không còn tự đổi linh thạch), `tien_quan` (thiếu xu có linh thạch: không đổi), `tien_trang` (bỏ tiền trang → cầm đồ); test-ui `tien_hud` ("3,2 lượng"), `tien_quan` ("12 xu"), `muusinh` ("xu").
+- `fresh()` đặt `FEAT.nc=0` (giá cố định cho bài cũ); `nhu_cau` bật lại.
+
+### Còn dở / chưa làm
+- Bot chưa biết đổi phẩm linh thạch, cầm đồ (chưa được phép chạy bot); chưa thêm vào `COV_FN`/`MANAGE`.
+- Đấu giá (`di` daugia) và quỷ thị vẫn như cũ (trả linh thạch Hạ phẩm); chưa có nơi nào sinh Trung/Thượng/Cực phẩm ngoài đổi — phần thưởng phẩm cao chờ đợt sau.
+- Ô 🪙 trên các nút quán vẫn chưa hiện nhu cầu (dịch vụ không theo nhu cầu).
