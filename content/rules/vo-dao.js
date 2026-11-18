@@ -14,7 +14,7 @@ const VO_BAC=[
 // 14 bí tịch: need = bậc cần; sk = chiêu (trong SK_RAW, cờ fx.vo); fx = tác dụng bị động khi đủ bậc
 // noiP: nội lực tối đa +%; lifeY: thọ +năm; bac: giá ở tạp hóa thành (chỉ hai quyển đầu của võ quán)
 const VO_HOC=[
-  {id:'truong_quyen',n:'Trường Quyền Nhập Môn',loai:'quyền',need:1,sk:'vo_truongquyen',fx:{atkP:5},bac:600},
+  {id:'truong_quyen',n:'Trường Quyền Nhập Môn',loai:'quyền',need:1,sk:'vo_truongquyen',fx:{atkP:5},bac:6000},
   {id:'ngu_ho_dao',n:'Ngũ Hổ Đoạn Môn Đao',loai:'đao',need:2,sk:'vo_nguho'},
   {id:'that_tinh_kiem',n:'Thất Tinh Kiếm Pháp',loai:'kiếm',need:2,sk:'vo_thattinh',fx:{crit:5}},
   {id:'thiet_bo_sam',n:'Thiết Bố Sam',loai:'ngạnh công',need:2,sk:'vo_thietbo',fx:{defP:15,hpP:5}},
@@ -26,7 +26,7 @@ const VO_HOC=[
   {id:'kim_chung_trao',n:'Kim Chung Tráo',loai:'ngạnh công',need:5,sk:'vo_kimchung'},
   {id:'pha_ngoc_quyen',n:'Phá Ngọc Quyền',loai:'cương quyền',need:5,sk:'vo_phangoc'},
   {id:'doan_thuy_kiem',n:'Đoạn Thủy Kiếm Ý',loai:'kiếm ý',need:6,sk:'vo_doanthuy'},
-  {id:'hon_nguyen',n:'Hỗn Nguyên Nhất Khí Công',loai:'nội công',need:1,fx:{noiP:20},bac:900},
+  {id:'hon_nguyen',n:'Hỗn Nguyên Nhất Khí Công',loai:'nội công',need:1,fx:{noiP:20},bac:9000},
   {id:'quy_tuc',n:'Quy Tức Công',loai:'nội công',need:2,fx:{lifeY:2}},
 ];
 // h: giờ một buổi luyện (một "ngày luyện"); tu: hệ số của tu sĩ (một nửa); hoi: nội lực hồi đầy sau số giờ này

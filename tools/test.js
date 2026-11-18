@@ -691,10 +691,13 @@ const TESTS = {
     ok(L.length===4&&L.some(o=>o.id==='q:0'&&/10 lượng|lượng/.test(o.g.txt))&&!L.some(o=>o.id==='q:3'), 'nhận binh khí, thuốc, bí tịch; không nhận Trắc Linh Thạch: '+L.map(o=>o.g.txt).join(' | '));
     ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===10000&&!run("hasItem('vk_thiet_kiem')"), 'binh khí phàm: 10 lượng bạc ('+run("fmtBac(G.run.bac)")+')');
     run("openPlace(G.run.at)");ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===10060, 'kim sang dược 60 xu (nửa giá mua), đồ phàm không giới hạn tháng');
-    run("openPlace(G.run.at)");ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===10360, 'bí tịch võ: nửa giá (300 xu)');
-    run("openPlace(G.run.at)");const p=run("sellList()[0].p");const g=run("camLt(nodeById(G.run.at),sellList()[0])");ok(run("venueDo('camdo','r:0')")&&run("G.run.st")===g&&g>=1&&g<p&&run("G.run.bac")===10360, 'pháp khí: '+g+' linh thạch (tiệm tu sĩ '+p+'), không trả tiền phàm');
+    run("openPlace(G.run.at)");ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===13060, 'bí tịch võ: nửa giá (3.000 xu)');
+    run("openPlace(G.run.at)");const p=run("sellList()[0].p");const g=run("camLt(nodeById(G.run.at),sellList()[0])");ok(run("venueDo('camdo','r:0')")&&run("G.run.st")===g&&g>=1&&g<p&&run("G.run.bac")===13060, 'pháp khí: '+g+' linh thạch (tiệm tu sĩ '+p+'), không trả tiền phàm');
     run("G.run.qitems=[]");const a0=run("S().atk");run("G.run.pham=1;G.run.qitems=[]");const a1=run("S().atk");run("G.run.qitems=['vk_thiet_kiem']");ok(run("S().atk")>a1, 'phàm nhân mang thiết kiếm thì công tăng ('+a1+' → '+run("S().atk")+')');
     run("nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");ok(run("G.run.scene.items.some(x=>x.k==='qi'&&SUAE.vk[x.id]&&x.bac>=10000)"), 'tạp hóa thành bày một binh khí phàm');
+    // Sửa-F câu 25: bí tịch võ đắt hơn nhiều, bậc cao đắt hơn bậc thấp, vẫn rẻ hơn binh khí phàm; cầm đồ ≈ nửa giá
+    ok(run("VO_HOC.find(h=>h.id==='truong_quyen').bac")===6000&&run("VO_HOC.find(h=>h.id==='hon_nguyen').bac")===9000, 'giá bí tịch: Trường Quyền 6.000, Hỗn Nguyên 9.000 xu');
+    ok(run("camPhamGia('bt_hon_nguyen')")===4500&&run("camPhamGia('bt_truong_quyen')")===3000&&run("VO_HOC.filter(h=>h.bac).every(h=>h.bac<SUAE.vk.vk_cuong_dao.bac)"), 'cầm bí tịch: 3.000 / 4.500; mọi bí tịch rẻ hơn binh khí phàm');
   },
   // Sửa-E câu 18: nguồn linh thạch Trung/Thượng/Cực
   lt_nguon() {

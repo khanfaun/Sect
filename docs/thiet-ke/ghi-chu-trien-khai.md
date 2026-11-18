@@ -424,3 +424,9 @@ Luật: `src/game/core2/49-cai-can.js` (số 41 đã dùng cho võ đạo nên l
 ## YÊU CẦU MỚI: bước Đ9.0 — GPT viết nội dung Đ9 thay Claude
 Thứ tự Đ9: Đ9.1 (Claude làm bộ máy tuyến + schema + công cụ kiểm) → Đ9.0 (Claude viết file hướng dẫn cho GPT) → GPT viết 45 tuyến + nội dung 9 đại lộ theo lô → Claude chạy kiểm tự động + rà mẫu, sửa/ghép.
 File hướng dẫn (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) phải có: định dạng tệp chính xác (schema JSON, tên khoá, mã hợp lệ), danh sách mã được phép dùng (địa điểm LOC, NPC, thế lực, mã deed nghiệp, điều kiện/hiệu ứng có thật, đơn vị tiền mới), 1–2 tuyến mẫu hoàn chỉnh đúng chuẩn, giọng văn/độ dài, điều cấm (không tạo NPC/nơi mới, không hồi sinh người chết, không hiện số nghiệp…), cách chia lô (mỗi lần 3 tuyến), và lệnh kiểm `npm run content:check` + lệnh kiểm riêng cho tuyến mà GPT/người dùng chạy được để biết sai chỗ nào.
+
+## Sửa-F — câu 25, 27 (đợt 3)
+### F.25 — giá bí tịch võ
+- Chỉ hai bí tịch có bán ở tạp hóa thành (`bac` trong `content/rules/vo-dao.js`): **Trường Quyền Nhập Môn 600 → 6.000 xu** (công +5%), **Hỗn Nguyên Nhất Khí Công 900 → 9.000 xu** (nội lực +20%, bậc cao hơn nên đắt hơn). Binh khí phàm giữ 14.000 (thiết kiếm) / 12.000 (cương đao): bí tịch bằng khoảng nửa đến ba phần tư, rẻ hơn binh khí.
+- Cầm đồ vẫn `btPer` = ½ giá mua: **3.000 / 4.500 xu**. Mua rồi cầm lại lỗ nửa.
+- Bài `cam_e` sửa theo (bí tịch cầm 3.000 xu) và thêm hai ý kiểm giá + cầm.
