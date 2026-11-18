@@ -126,7 +126,7 @@ Mọi tầng dùng chung **15 địa điểm, 30 nhân vật, 10 thế lực** c
   - Túc Tuệ Đăng: nhớ lại một công pháp hoặc một nghề.
   - Một số công pháp Phật, Thiên cơ, Hồn tu luyện tới tầng cuối.
 - Những thứ không phải ký ức thì vẫn còn: nghiệp (quyết định mình sinh ra sướng hay khổ), người đời nhớ mình, mộ, đồ đã chôn, dòng họ, thế giới đã đổi.
-- **Kiếp đầu vẫn cho chọn nhân vật** để người mới làm quen (tôi tự quyết; bạn muốn bỏ thì bảo).
+- **Kiếp đầu cũng ngẫu nhiên**, không được chọn (bạn đã chốt). Kiếp đầu vẫn luôn có linh căn.
 - Phải sửa một ít thứ đang có trong game:
   - Nâng cấp "Thiên mệnh" đổi thành "vài kiếp được chọn một lần".
   - Bỏ hai nâng cấp mang công pháp sang kiếp sau, trả lại điểm cho người đang chơi.
@@ -138,4 +138,4 @@ Mọi tầng dùng chung **15 địa điểm, 30 nhân vật, 10 thế lực** c
 
 ## 10. Còn lại
 
-Tất cả câu hỏi trước đã chốt. Chỉ còn một điểm tôi tự quyết, bạn có thể đổi: kiếp đầu vẫn được chọn nhân vật.
+Tất cả câu hỏi đã chốt. Lộ trình làm game ở `LO-TRINH-PHAT-TRIEN.md`.

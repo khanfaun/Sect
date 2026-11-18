@@ -375,7 +375,7 @@ Luật ghép:
 
 Đã chốt hết các câu hỏi trước: thưởng thiên kiếp 10% (A.5), linh thạch 100 lượng (A.7), đầu thai ngẫu nhiên và quên sạch (A.16), thời gian luân hồi 5.000 năm (A.17), Người Gác Bến (A.10).
 
-Còn một điểm Claude tự quyết, người dùng có thể đổi: **kiếp đầu tiên vẫn được chọn nhân vật** (A.16, mục 2).
+Không còn điểm nào chờ chốt. Kiếp đầu cũng ngẫu nhiên (A.16, mục 2).
 
 ---
 
@@ -383,7 +383,8 @@ Còn một điểm Claude tự quyết, người dùng có thể đổi: **kiế
 
 **Luật (người dùng chốt):**
 1. Từ kiếp 2, **không có màn chọn thẻ**. Game sinh ngẫu nhiên một nhân vật: tên, giới tính, xuất thân, quê, mệnh cách, khí vận, thể chất, linh căn (linh căn vẫn "chưa trắc" tới lúc trắc linh, giữ khoảnh khắc hồi hộp).
-2. **Kiếp đầu** (Claude tự quyết): vẫn cho chọn 1 trong 3 thẻ như hiện nay, vì kiếp đầu chưa phải "luân hồi" và người mới cần làm quen. Muốn kiếp đầu cũng ngẫu nhiên thì chỉ cần bỏ màn chọn.
+2. **Kiếp đầu cũng ngẫu nhiên, không cho chọn** (người dùng chốt). Kiếp đầu vẫn bảo đảm có linh căn và hiện kết quả linh căn ngay (để người mới hiểu); từ kiếp 2 linh căn chờ trắc linh.
+   - *Hiện trạng đã kiểm trong mã*: nút "Luân hồi" / "Nhập thế" (`ACT.birth` ở `src/game/ui/19-main.js`) **đã** bốc ngẫu nhiên một thẻ rồi vào game luôn; màn chọn thẻ `ManChonKiep` hiện không được gọi tới. Vì vậy luật này gần như có sẵn, chỉ cần giữ nguyên và dùng màn chọn thẻ cho trường hợp ngoại lệ (Định Mệnh Châu…).
 3. Khi đầu thai **quên sạch**: không mang công pháp, chiêu thức, kỹ năng, ký ức, tri thức nào của kiếp trước.
 4. Những thứ **không phải ký ức** vẫn theo người chơi vì chúng nằm ở thế giới hoặc ở sổ luân hồi, không nằm trong đầu nhân vật: Nghiệp Duyên (quyết định hoàn cảnh sinh ra), nhân quả tuyến (người khác nhớ mình chứ mình không nhớ họ), mộ, đồ đã chôn, dòng họ, thế giới đã đổi, điểm luân hồi, Mộng Ấn đã nhặt (xem mục 7).
 
