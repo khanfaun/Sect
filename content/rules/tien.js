@@ -1,10 +1,10 @@
 // Nguồn chuẩn: TIEN, TIEN2. Luật xử lý ở src/game/core2/39-tien-te.js và 43-tien-te-2.js.
 // Sửa-A (người dùng chốt câu 9): tiền phàm tính bằng XU (r.bac). 1 lượng bạc = 1.000 xu; 1 lượng vàng = 10.000 xu.
 // Bản lưu cũ ghi "đồng": 1 đồng = 1 xu, nên số giữ nguyên. Không còn "quan".
-// grpBac: tiền khởi đầu (xu) theo nhóm xuất thân khi xuất thân không ghi riêng `bac`.
+// grpBac: tiền khởi đầu (xu) theo nhóm xuất thân khi xuất thân không ghi riêng `bac`. Sửa-B: bỏ cơm nhà nên tiền đầu chỉ đủ ăn 1–4 tuần (ăn thường 20 xu/ngày).
 // quan: giữ tên cũ cho mã cũ, nay là 1 lượng bạc. lt: giá trị quy ước của 1 linh thạch hạ phẩm (100 lượng vàng) — chỉ để đọc, KHÔNG đổi trực tiếp.
 const TIEN={quan:1000,luong:1000,vang:10000,lt:1000000,
-  grpBac:{kho:[0,300],thuong:[500,1500],kha:[5000,20000]},
+  grpBac:{kho:[150,300],thuong:[300,700],kha:[5000,20000]},
   hc:{bap:0.75,nang:1.25},
   tpBac:800,tlBac:9900,qBac:100,yBac:150,evXu:100};
 // tpBac: bản chép tay tâm pháp ở tạp hóa; tlBac: Trắc Linh Thạch; yBac: thầy lang ở phường thị (đều là xu)

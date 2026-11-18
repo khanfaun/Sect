@@ -4,7 +4,7 @@ const ORIGIN = [
   {id:'tran',grp:'thuong',n:'Con nhà trận sư',i:'🔯',fx:{ngo:2,tam:1},d:'Ngộ tính +2, đạo tâm +1',bio:'vốn là con nhà trận sư sa sút, lớn lên ở {$que}'},
   {id:'dote',grp:'thuong',n:'Con nhà đồ tể',i:'🔪',fx:{atkP:8,tam:-1},d:'Công +8%, đạo tâm −1',bio:'là con nhà đồ tể ở {$que}, từ nhỏ đã quen mùi máu'},
   {id:'thusinh',grp:'thuong',n:'Thư sinh nghèo',i:'📜',fx:{ngo:3,hpP:-5},d:'Ngộ tính +3, khí huyết −5%',bio:'là thư sinh nghèo ở {$que}, thi ba lần không đỗ'},
-  {id:'khat',grp:'kho',bac:[0,30],n:'Tiểu khất cái',i:'🥣',fx:{van:2,tp:2},st:-10,d:'Khí vận +2, thân pháp +2, không xu dính túi',bio:'là đứa trẻ ăn xin ở {$que}, không cha không mẹ'},
+  {id:'khat',grp:'kho',bac:[60,120],n:'Tiểu khất cái',i:'🥣',fx:{van:2,tp:2},st:-10,d:'Khí vận +2, thân pháp +2, không xu dính túi',bio:'là đứa trẻ ăn xin ở {$que}, không cha không mẹ'},
   {id:'thegia',grp:'kha',lt:[1,2],bac:[10000,20000],n:'Con thứ thế gia',i:'🏯',st:45,pill:'hoixuan',d:'Thêm linh thạch và một viên đan',bio:'là con thứ của một thế gia ở {$que}, không được ai coi trọng'},
   {id:'mieu',grp:'kho',n:'Đứa trẻ bị bỏ ở miếu',i:'🛕',fx:{tam:3},karma:5,d:'Đạo tâm +3',bio:'bị bỏ trước cửa miếu hoang ở {$que}, được lão từ giữ đền nuôi lớn'},
   {id:'ren',grp:'thuong',n:'Con nhà thợ rèn',i:'⚒️',fx:{defP:15},d:'Thủ +15%',bio:'là con nhà thợ rèn ở {$que}, tay chai từ năm lên tám'},

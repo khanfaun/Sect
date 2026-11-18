@@ -93,9 +93,8 @@ function anFoodMul(r){let m=1;if(typeof tueSrc==='function')for(const x of tueSr
 function anCost(r){r=r||G.run;return Math.round(anMuc(r).bac*anFoodMul(r));}
 function anAtQuan(r){const n=nodeById(r.at);return !!n&&AN.quan.includes(n.type)&&n.state!=='ruin'&&!r.moving;}
 function anAtSect(r){const n=nodeById(r.at);return !!n&&n.type==='tong'&&!!r.flags.tongmon&&typeof contentOwnSect==='function'&&contentOwnSect();}
-// ở quê, còn người nhà thì ăn cơm nhà (r.queAt ghi lúc đầu thai; r.family ở Đ3.8)
-function anHasFamily(r){if(Array.isArray(r.family))return r.family.some(x=>x.song);const og=ORIGIN.find(o=>o.id===r.origin);return !!og&&(og.grp||'thuong')!=='kho';}
-function anAtHome(r){return r.queAt!=null&&r.at===r.queAt&&!r.moving&&anHasFamily(r);}
+// Sửa-B: bỏ cơm nhà. Ở quê (r.queAt) mua cơm như ở quán, được mua chịu (core2/44-no-nha.js)
+function anAtHome(r){return r.queAt!=null&&r.at===r.queAt&&!r.moving;}
 function anLkEat(r){if((r.anLk||0)>0){r.anLk--;return true;}const i=(r.qitems||[]).indexOf('luong_kho');if(i<0)return false;r.qitems.splice(i,1);r.anLk=AN.lkNgay-1;dbg('an.lk',{left:(r.qitems||[]).filter(x=>x==='luong_kho').length});return true;}
 function anFed(r,how){if((r.doi||0)>=AN.doi.doi)dbg('an.het',{doi:r.doi,how});r.no=100;r.doi=0;}
 // một ngày: ăn ở quán (trả bạc theo mức), ở sơn môn mình (cơm tông), không thì lương khô, không có gì thì đói
@@ -104,8 +103,7 @@ function anDay(){const r=G.run;if(!r||!feat('an'))return;if(!needFood(r)){r.doi=
   if(!r.pham&&r.realm===0){r.anHalf=!r.anHalf;if(r.anHalf)return;} // Luyện Khí: nửa phần (mỗi hai ngày một phần)
   r.anDays=(r.anDays||0)+1;
   if(anAtSect(r)){anFed(r,'tong');}
-  else if(anAtHome(r)){anFed(r,'nha');}
-  else if(anAtQuan(r)&&r.anTu!==0&&(r.bac||0)>=anCost(r)){bacAdd(-anCost(r),'an');anFed(r,'quan');if(anMuc(r).tm&&r.anDays%30===0)r.tamma=Math.max(0,(r.tamma||0)-anMuc(r).tm);}
+  else if((anAtQuan(r)||anAtHome(r))&&r.anTu!==0&&bacCan(anCost(r))){bacPay(anCost(r),'an');anFed(r,'quan');if(anMuc(r).tm&&r.anDays%30===0)r.tamma=Math.max(0,(r.tamma||0)-anMuc(r).tm);}
   else if(anLkEat(r)){anFed(r,'lk');}
   else{r.doi=(r.doi||0)+1;r.no=Math.max(0,(r.no==null?100:r.no)-60);dbg('an.doi',{doi:r.doi});
     if(r.doi===AN.doi.doi)note(contentText('an.noteDoi'),'dn');else if(r.doi===AN.doi.la){note(contentText('an.noteLa'),'dn');clampHp();}else if(r.doi===AN.doi.kiet)note(contentText('an.noteKiet'),'dn');
@@ -113,9 +111,10 @@ function anDay(){const r=G.run;if(!r||!feat('an'))return;if(!needFood(r)){r.doi=
   if((r.doi||0)>=AN.doi.chet&&!(r.scene&&r.scene.type==='combat')){dbg('an.chet',{doi:r.doi});die('doi');}}
 // gộp một tháng (phần vượt AN.maxNgay ngày): đủ tiền thì trả cả tháng, có lương khô thì ăn, không thì đói
 function anMonthBulk(){const r=G.run;if(!r||!needFood(r))return;const half=!r.pham&&r.realm===0;const d=half?15:30;
-  if(anAtSect(r)||anAtHome(r)){anFed(r,'tong');return;}
-  const c=anCost(r)*d;if(anAtQuan(r)&&r.anTu!==0&&(r.bac||0)>=c){bacAdd(-c,'an.thang');anFed(r,'quan');return;}
-  let n=0;while(n<d&&anLkEat(r))n++;if(n>=d){anFed(r,'lk');return;}
+  if(anAtSect(r)){anFed(r,'tong');return;}
+  const c=anCost(r)*d;if((anAtQuan(r)||anAtHome(r))&&r.anTu!==0&&bacCan(c)){bacPay(c,'an.thang');anFed(r,'quan');return;}
+  let n=0;if((anAtQuan(r)||anAtHome(r))&&r.anTu!==0)while(n<d&&bacCan(anCost(r))){bacPay(anCost(r),'an');n++;}
+  while(n<d&&anLkEat(r))n++;if(n>=d){anFed(r,'lk');return;}
   r.doi=(r.doi||0)+(d-n);if(r.doi>=AN.doi.chet&&!(r.scene&&r.scene.type==='combat'))die('doi');}
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(!r||!feat('an')||!(h>0))return o;
   r.anAcc=(r.anAcc||0)+h;let days=Math.floor(r.anAcc/24);if(days<=0)return o;r.anAcc-=days*24;

@@ -10,7 +10,7 @@ const TUT=[
  {id:'HD03',g:'A',n:'Có ăn mới có ngày mai',d:'Mở túi, xem mình còn gì mang theo.',need:1,tick:'bag',go:{modal:'bag'},rw:{pill:[['hoixuan',1]]}},
  {id:'HD04',g:'A',n:'Hỏi một người còn chịu trả lời',d:'Hỏi việc kiếm bữa ăn quanh đây.',need:1,tick:'jobs.open',go:{place:['tran','thanh','cho','tong'],act:'muusinh'},rw:{bac:300}},
  {id:'HD05',g:'A',n:'Đổi một ngày lấy một ngày',d:'Làm trọn một việc có trả công.',need:1,tick:'job',go:{place:['tran','thanh','cho','tong'],act:'muusinh'},rw:{item:[['luong_kho',2]]}},
- {id:'HD06',g:'A',n:'Khép mắt khi còn nơi nằm',d:'Nghỉ một đêm ở khách điếm, hoặc tĩnh tọa một lượt.',need:1,tick:'rest',go:{place:['tran','thanh'],act:'inn'},rw:{pill:[['hoixuan',1]]}},
+ {id:'HD06',g:'A',n:'Khép mắt khi còn nơi nằm',d:'Nghỉ một đêm ở khách điếm hoặc dưới mái nhà mình, hoặc tĩnh tọa một lượt.',need:1,tick:'rest',go:{place:['tran','thanh'],act:'inn'},rw:{pill:[['hoixuan',1]]}},
  {id:'HD07',g:'B',n:'Đường đi có giá',d:'Đi tới một địa điểm lân cận.',need:1,tick:'arrive',go:{place:'*'},rw:{relic:'non_dauap_suong'}},
  {id:'HD08',g:'B',n:'Đếm trước khi trao',d:'Mua hoặc bán một món.',need:1,tick:'trade',go:{place:['tran','thanh','cho'],act:'taphoa'},rw:{bac:500}},
  {id:'HD09',g:'B',n:'Đừng chỉ trông vào may',d:'Học một môn công pháp hoặc một tâm pháp.',need:1,tick:'learn',st:'tutHasLearn',go:{place:['tran','thanh','cho'],act:'taphoa'},rw:{pill:[['tukhi',1]]}},

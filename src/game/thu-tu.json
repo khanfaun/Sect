@@ -287,6 +287,8 @@
  "core2/42-nghe.js",
  "content/rules/pham-su-kien.js",
  "core2/43-tien-te-2.js",
+ "content/rules/no-nha.js",
+ "core2/44-no-nha.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",

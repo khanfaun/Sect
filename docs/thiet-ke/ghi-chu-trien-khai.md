@@ -182,3 +182,29 @@ Luật: `src/game/core2/39-tien-te.js` (đơn vị, bỏ đổi tự động, b�
 - Ô 🪙 trên các nút quán vẫn chưa hiện nhu cầu (dịch vụ không theo nhu cầu).
 19. Trắc ra Địa/Thiên linh căn ở tông môn/thế lực → tăng thiện cảm (giao tình) của người trong tông với nhân vật chính (Thiên tăng nhiều hơn Địa). Chọn ngẫu nhiên vài người trong cao tầng và vài đệ tử; ưu tiên người cùng phe chính/tà với tông (tông chính đạo → ưu tiên người chính đạo; tông ma đạo → ưu tiên người ma đạo). Làm cùng mục 18.
 20. Mỗi khi NPC tăng/giảm thiện cảm: hiện chữ nhỏ ở GÓC TRÁI DƯỚI màn hình (nằm ngay phía trên footer, không chạm/đè footer), không khung/nền, biến mất nhanh. Nội dung: tên NPC + mũi tên kiểu chevron chồng (như ảnh người dùng gửi: 1–3 chữ V ngược xếp chồng). Tăng: mũi tên lên màu xanh (giống màu chỉ số tăng); giảm: mũi tên xuống màu đỏ (giống chỉ số giảm). Ít → 1 mũi tên, vừa → 2, nhiều → 3 (tự chọn ngưỡng). Nhiều NPC cùng lúc thì xếp dòng, không đè nhau. Làm ở đợt Sửa-D (giao diện).
+
+## Sửa-B — bỏ cơm nhà, mua chịu, nợ, vay, nhà ở (câu 10)
+Luật: `src/game/core2/44-no-nha.js`; bảng `NO`, `NHA` ở `content/rules/no-nha.js`; chữ `no.*`, `nha.*` trong `content/text/tien-te.json`. `39-tien-te.js` bỏ cơm nhà (ở quê mua cơm như ở quán).
+
+### Số liệu đã chọn
+1. **Tiền khởi đầu** (ăn thường 20 xu/ngày): khốn khó 150–300 xu, thường 300–700, khá giả giữ 5.000–20.000; khất cái 60–120. Đủ ăn khoảng 1–4 tuần, sau đó mua chịu ở quê hoặc làm thuê.
+2. **Mua chịu**: chỉ ở nút quê (`r.queAt`), mọi khoản trả bằng `bacPay` (cơm, tạp hóa, quán) được chịu tới **−600 xu** (≈ 1 tháng cơm). Đã bị quan phủ phạt hoặc bị truy nã ở quê thì không ai cho chịu nữa. Tiền âm hiện "-50 xu", trên HUD tô đỏ. Có thu nhập thì tự trừ vào nợ.
+3. **Sổ nợ** (`r.noTra`): mở khi tiền xuống dưới 0, hạn **60 ngày**, báo trước **10 ngày**. Quá hạn:
+   - nợ dưới 3 lượng bạc: lần 1 đánh 20 hèo (−25% khí huyết tối đa, Ngoại thương); lần 2 đánh 40 hèo (−45%, Gãy xương) và **truy nã** (danh tiếng khu quê đẩy xuống −60, tức mức thị trấn ghét của Đ1.4); lần 3 bắt làm công.
+   - nợ từ 3 lượng: lần 1 truy nã + hèo nhẹ; lần 2 bắt làm công.
+   - Mỗi lần phạt gia hạn **45 ngày**. Làm công: **2 năm** (nợ dưới 8 lượng) hoặc **3 năm**; thời gian trôi, được ăn ở, không lạnh; ra thì nợ, khoản vay, nhà thuê đều xoá.
+   - Tu sĩ (không phải ăn): quan phủ chỉ truy nã.
+4. **Vay** (nút "Người cho vay" ở trấn, thành; nhóm Sự vụ): 1 lượng/6 tháng, 3 lượng/6 tháng (lãi 3%/tháng, trả 1.180 / 3.540 xu), 10 lượng/12 tháng (2,5%/tháng, trả 13.000). Một khoản một lúc; đang nợ hoặc bị truy nã thì không vay được; xuất thân khốn khó chỉ vay món nhỏ nhất. Báo trước 15 ngày; quá hạn thì toàn bộ số phải trả chuyển thành nợ (vào sổ nợ ở trên, bắt đầu lại 60 ngày).
+5. **Nhà ở** (`r.nha`): có nhà ở quê trừ GD.none, nhóm khốn khó, đạo đồng, cựu binh, gánh hát. Nút "Nhà ở" (nhóm Nghỉ chân) ở quê (nếu có nhà) và ở trấn/thành: thuê **150 xu/tháng (trấn), 300 (thành)**, tự trả đầu tháng, thiếu tiền thì mất nhà; "Nghỉ ở nhà" 8 giờ hồi 30% khí huyết và tính cho HD06. Ngủ ở khách điếm (phòng/giường) tính có chỗ ngủ tới hôm sau; tông mình, bế quan, đang làm thuê có cơm cũng vậy.
+6. **Ngủ ngoài trời**: từ 8 đêm/tháng thì bị lạnh (−8% khí huyết tối đa × số đêm/30), và bệnh với xác suất 15% + 35% × số đêm/30 (thêm −15%, tâm ma +5). Không bao giờ làm chết (khí huyết tối thiểu 1). Chỉ tính cho người phải ăn (phàm nhân, Luyện Khí).
+7. **Bản lưu cũ** (`_nhaV1`): gán `r.nha` theo xuất thân; không có sổ nợ.
+8. HUD: chú thích hầu bao thêm dòng nợ/hạn, khoản vay/hạn, nhà ở.
+
+### Bài kiểm
+- Mới: `no_nha` (test.js, đã thêm vào `test:rules`), test-ui `no_nha`.
+- Sửa theo luật mới: `com_ao` (bỏ hai ý cơm nhà → mua chịu ở quê tới −600 xu rồi đói); test-ui `tinhtoa` cho 5.000 xu (tĩnh toạ dài ngày mà không cơm nhà thì chết đói); `tan_thu` mua món đầu tiên là đan hoặc vật phàm (thêm hai nơi chọn việc làm đổi lượt ngẫu nhiên nên tạp hóa có khi không bày đan).
+- `fresh()` đặt `FEAT.no=0; FEAT.nha=0`; bài `no_nha` bật lại.
+
+### Còn dở
+- Bot chưa biết vay, thuê nhà (chưa được phép chạy bot).
+- Chưa có sự kiện kể riêng cảnh quan phủ, làm công (chỉ thông báo + nhật ký); chưa có cách xoá truy nã ngoài danh tiếng.

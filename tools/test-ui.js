@@ -93,7 +93,7 @@ const TESTS = {
   },
   // tĩnh toạ: thẻ riêng trong hộp bế quan, bấm thì hồi máu và thời gian trôi
   async tinhtoa(p) {
-    await ev(p, () => { G.run.hp = 1; openPlace(G.run.at); UI.modal = { k: 'bq', tab: 'tt' }; render(); });
+    await ev(p, () => { G.run.hp = 1; G.run.bac = 5000; /* Sửa-B: bỏ cơm nhà, tĩnh toạ dài ngày phải có tiền ăn */ openPlace(G.run.at); UI.modal = { k: 'bq', tab: 'tt' }; render(); });
     await p.waitForTimeout(400);
     ok(await ev(p, () => [...document.querySelectorAll('.mbox h3')].some(h => h.textContent === 'Tĩnh toạ')), 'có thẻ Tĩnh toạ');
     const b = await p.$('[data-act="ttGo"]'); ok(!!b, 'có nút Tĩnh toạ');
@@ -251,6 +251,23 @@ const TESTS = {
     const t = await ev(p, () => (document.querySelector('.venue')||{}).innerText||'');
     ok(/Hạ phẩm/.test(t) && /Trung phẩm/.test(t) && /nhu cầu/i.test(t), 'danh sách đổi phẩm có nhu cầu: '+t.slice(90,260).replace(/\s+/g,' '));
     await ev(p, () => {G.run.scene=null;render();});
+  },
+  // Sửa-B: nút Người cho vay / Nhà ở ở thẻ thành, tiền âm trên HUD, chọn vay trong hộp nơi chọn việc
+  async no_nha(p) {
+    await ev(p, () => {FEAT.no=1;FEAT.nha=1;const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.bac=0;G.run.vay=null;G.run.noTra=null;UI.modal=null;UI.panel=null;openPlace(n.id);render();});
+    await p.waitForTimeout(200);
+    const pl = await ev(p, () => (document.querySelector('.place')||document.body).innerText);
+    ok(/Người cho vay/.test(pl) && /Nhà ở/.test(pl), 'thẻ thành có Người cho vay và Nhà ở');
+    await ev(p, () => {G.run.scene.venue='vay';render();});
+    await p.waitForTimeout(150);
+    const t = await ev(p, () => (document.querySelector('.venue')||{}).innerText||'');
+    ok(/Vay 1 lượng bạc/.test(t) && /1 lượng bạc 180 xu/.test(t), 'danh sách vay: '+t.slice(0,160).replace(/\s+/g,' '));
+    await ev(p, () => {G.run.scene=null;G.run.bac=-50;G.run.noTra={t0:W().t,han:W().t+20*HD,lan:0,bao:0};render();});
+    await p.waitForTimeout(150);
+    const h = await ev(p, () => [...document.querySelectorAll('.hs-bac')].map(e=>e.innerText+(e.classList.contains('no')?'!':'')).join('|'));
+    ok(/-50 xu!/.test(h), 'HUD hiện tiền âm, tô đỏ: '+h);
+    ok(await ev(p, () => /Nợ: 50 xu · hạn còn 20 ngày/.test(noTip(G.run)) && /Nhà:/.test(noTip(G.run))), 'chú thích hầu bao có nợ, hạn, nhà ở');
+    await ev(p, () => {G.run.bac=0;G.run.noTra=null;G.run.scene=null;render();});
   },
   // Đ3.5: hộp thoại Thưởng Các
   async thuongcac(p) {

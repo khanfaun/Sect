@@ -19,7 +19,7 @@ function fresh(patch) {
   run(`(() => {GEO=null;RS=mul(16717);const original=genWorld;genWorld=()=>original(${seed});
     try{G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0]);}
     finally{genWorld=original;}
-    NK.on=true;NK.clear();G.run.scene=null;FEAT.an=0;FEAT.nc=0; // ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
+    NK.on=true;NK.clear();G.run.scene=null;FEAT.an=0;FEAT.nc=0;FEAT.no=0;FEAT.nha=0; // nợ/nhà ở (Sửa-B) tắt, bài no_nha bật lại; ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
   })()`);
   if (patch) run(patch);
 }
@@ -697,11 +697,58 @@ const TESTS = {
     fr();run("G.run.pham=0;G.run.realm=0;advanceTime(4*24)");ok(run("G.run.doi")===2, 'Luyện Khí ăn nửa phần: bốn ngày đói hai ('+run("G.run.doi")+')');
     fr();run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.bac=100;G.run.anMuc='thuong'})();advanceTime(3*24)");
     ok(run("G.run.doi")===0&&run("G.run.bac")===40, 'ở thành có bạc: tự mua cơm 20 đồng một ngày ('+run("G.run.bac")+')');
-    fr();run("G.run.at=G.run.queAt;G.run.origin='nong';G.run.family=[{qh:'me',song:1}];advanceTime(20*24)");ok(run("G.run.doi")===0, 'ở quê còn người nhà: ăn cơm nhà');
-    run("G.run.family[0].song=0;advanceTime(24)");ok(run("G.run.doi")===1, 'người nhà không còn: hết cơm nhà');
+    // Sửa-B: bỏ cơm nhà (người dùng chốt câu 10) — ở quê không tiền thì mua chịu tới mức NO.chiu, hết chịu thì đói
+    fr();run("FEAT.no=1;G.run.at=G.run.queAt;G.run.noTra=null;G.run.origin='nong';G.run.family=[{qh:'me',song:1}];advanceTime(20*24)");ok(run("G.run.doi")===0&&run("G.run.bac")===-400, 'ở quê không tiền: mua chịu cơm, còn nợ '+run("fmtBac(G.run.bac)"));
+    run("advanceTime(11*24)");ok(run("G.run.doi")===1&&run("G.run.bac")===-600, 'hết mức chịu 600 xu: đói ('+run("G.run.doi")+')');run("FEAT.no=0");
     fr();const qa=run("G.run.queAt");run("delete G.run._anV1;delete G.run.no;delete G.run.anTu;delete G.run.queAt;run2()");ok(run("G.run.no")===100&&run("G.run.anTu")===1, 'bản lưu cũ: no đủ, tự lo cơm');
     ok(run("G.run.queAt")===qa, 'bản lưu cũ: tìm lại nút quê theo tên');
     fr();run("G.run.anAcc=0;advanceTime(800*24)");ok(!run("G.run")&&run("G.over.cause")==='doi', 'nhảy dài 800 ngày không ăn: chết đói, không treo');
+  },
+  // Sửa-B (câu 10): mua chịu ở quê, nợ quá hạn → quan phủ (hèo, truy nã, làm công), vay có lãi, nhà ở / thuê nhà / ngủ ngoài trời
+  no_nha() {
+    const que="(()=>{const r=G.run;r.at=r.queAt;r.moving=null;r.bac=0;r.noTra=null;r.vay=null;r.thue=null;r.hp=S().maxHp;r.birthAge=16;FEAT.no=1;FEAT.nha=1;})()";
+    fresh(que);
+    ok(run("nhaCo({origin:'nong'})")===1&&run("nhaCo({origin:'khat'})")===0&&run("nhaCo({origin:'daodong'})")===0&&run("nhaCo({origin:'thegia'})")===1, 'nhà ở theo xuất thân (nông có, khất cái/đạo đồng không)');
+    ok(run("fmtBac(-50)")==='-50 xu'&&run("fmtBacS(-50)")==='-50 xu', 'hiển thị tiền âm: -50 xu');
+    ok(run("bacPay(100,'t')")&&run("G.run.bac")===-100&&!!run("G.run.noTra"), 'ở quê: mua chịu được, mở sổ nợ');
+    ok(!run("bacPay(600,'t')")&&run("G.run.bac")===-100, 'mua chịu quá 600 xu: không được');
+    run("bacAdd(30,'cong')");ok(run("G.run.bac")===-70, 'có thu nhập thì trả dần nợ');
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin'&&n.id!==G.run.queAt);G.run.at=n.id;})()");ok(!run("bacPay(10,'t')"), 'xa quê: không mua chịu');
+    run("G.run.at=G.run.queAt;bacAdd(70,'tra')");ok(run("G.run.bac")===0&&!run("G.run.noTra")&&run("NK.count('no.xong')")===1, 'trả đủ: đóng sổ nợ');
+    // nợ ít: báo trước, hèo lần 1 (ngoại thương), lần 2 (gãy xương + truy nã), lần 3 làm công 2 năm
+    run("bacPay(200,'t');G.run.noTra.han=W().t+5*HD");run("advanceTime(24)");ok(run("NK.count('no.bao')")===1, 'báo trước khi tới hạn nợ');
+    const hp0=run("G.run.hp");run("advanceTime(5*24)");
+    ok(run("G.run.hp")<hp0&&run("wounds().some(x=>x.k==='ngoai')")&&run("G.run.bac")===-200&&run("G.run.noTra.lan")===1, 'quá hạn lần 1: đánh hèo, ngoại thương, vẫn nợ');
+    ok(run("noDays(G.run.noTra.han)")===45&&!run("noChiuOk()"), 'được gia hạn 45 ngày; không cho chịu thêm');
+    run("G.run.hp=S().maxHp;G.run.noTra.han=W().t+HD;advanceTime(2*24)");ok(run("wounds().some(x=>x.k==='gay')")&&run("noTruy()")&&run("G.run.noTra.lan")===2, 'quá hạn lần 2: gãy xương, bị truy nã ở quê');
+    const t0=run("W().t");run("G.run.noTra.han=W().t+HD;advanceTime(2*24)");
+    ok(!!run("G.run")&&run("G.run.bac")===0&&!run("G.run.noTra")&&run("W().t")-t0>=2*8640, 'quá hạn lần 3: làm công trả nợ 2 năm, nợ xoá');
+    // nợ nhiều: lần đầu truy nã + hèo, lần sau bắt làm công 3 năm (từ 8.000 xu)
+    fresh(que);run("NO_CHIU=1;bacAdd(-9000,'t');NO_CHIU=0;G.run.noTra.han=W().t+HD;advanceTime(2*24)");ok(run("noTruy()")&&run("G.run.noTra.lan")===1, 'nợ nhiều quá hạn lần 1: truy nã + hèo');
+    const t1=run("W().t");run("G.run.noTra.han=W().t+HD;advanceTime(2*24)");ok(run("G.run.bac")===0&&run("W().t")-t1>=3*8640, 'nợ nhiều lần 2: làm công 3 năm');
+    // tu sĩ: quan phủ chỉ truy nã
+    fresh(que);run("G.run.pham=0;G.run.realm=1;NO_CHIU=1;bacAdd(-100,'t');NO_CHIU=0;G.run.noTra.han=W().t+HD;advanceTime(2*24)");ok(run("noTruy()")&&!run("wounds().length"), 'tu sĩ mắc nợ: chỉ bị truy nã');
+    // vay có lãi ở thành
+    fresh(que);run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='vay')&&placeActs(nodeById(G.run.at)).some(a=>a.a==='nha')"), 'thành có người cho vay và nhà cho thuê');
+    ok(run("venueDo('vay','v1')")&&run("G.run.bac")===1000&&run("G.run.vay.tra")===1180, 'vay 1 lượng, 6 tháng sau trả 1.180 xu');
+    ok(!run("venueDo('vay','v3')"), 'đang vay: không vay thêm');
+    run("bacAdd(180,'t')");ok(run("venueDo('vay','tra')")&&run("G.run.bac")===0&&!run("G.run.vay"), 'trả khoản vay');
+    run("venueDo('vay','v1');G.run.bac=0;G.run.vay.han=W().t+10*HD;advanceTime(24)");ok(run("NK.count('no.bao')")===0&&!!run("G.run.vay.bao"), 'báo trước hạn vay');
+    run("advanceTime(10*24)");ok(!run("G.run.vay")&&run("G.run.bac")===-1180&&!!run("G.run.noTra"), 'vay quá hạn: chuyển thành nợ');
+    // thuê nhà
+    fresh(que);run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin'&&n.id!==G.run.queAt);G.run.at=n.id;openPlace(n.id);G.run.bac=700;G.run.ngoai=0;G.run.nguD=0;})()");
+    ok(run("venueDo('nha','thue')")&&run("G.run.bac")===400&&run("nhaOk(G.run)"), 'thuê nhà ở thành 300 xu/tháng, có chỗ ngủ');
+    run("advanceTime(31*24)");ok(run("G.run.bac")===100&&!!run("G.run.thue")&&run("NK.count('nha.lanh')")===0, 'đầu tháng tự trả tiền thuê, không bị lạnh');
+    run("advanceTime(30*24)");ok(!run("G.run.thue")&&run("NK.count('nha.het')")===1, 'hết tiền: mất nhà thuê');
+    // ngủ ngoài trời
+    fresh(que);run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&!n.dp);G.run.at=n.id;G.run.ngoai=0;G.run.nguD=0;G.run.hp=S().maxHp;})()");
+    const hp1=run("G.run.hp");run("advanceTime(30*24)");ok(run("G.run.hp")<hp1&&run("NK.count('nha.lanh')")===1, 'ngủ ngoài trời cả tháng: bị lạnh, mất khí huyết');
+    fresh(que);run("G.run.nha=1;G.run.ngoai=0;G.run.nguD=0;advanceTime(30*24)");ok(run("NK.count('nha.lanh')")===0, 'ở nhà mình ở quê: không bị lạnh');
+    run("openPlace(G.run.queAt)");ok(run("venueOpts(nodeById(G.run.at),'nha').some(o=>o.id==='nghi')")&&run("venueDo('nha','nghi')"), 'nghỉ ở nhà mình');
+    // bản lưu cũ
+    fresh();run("G.run.origin='khat';delete G.run._nhaV1;delete G.run.nha;run2()");ok(run("G.run.nha")===0&&run("G.run._nhaV1")===1, 'bản lưu cũ: gán nhà theo xuất thân');
+    run("FEAT.no=0;FEAT.nha=0");
   },
   // Đ3.7 việc làm thuê: việc hợp nơi, tiền công bằng bạc, giới hạn 12 giờ mỗi ngày, điều kiện, nhật ký viec.xong
   viec_thue() {
@@ -832,7 +879,7 @@ const TESTS = {
     ok(run("!!G.run.tut.ready.HD07"), 'tới nơi khác xong HD07');
     // mua bán
     run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);G.run.bac=99999;G.run.st=999;placeAct('taphoa')})()");
-    run("(()=>{const sc=G.run.scene;if(sc&&sc.items){const i=sc.items.findIndex(x=>!x.sold&&x.k==='pill');if(i>=0)buy(i);}})()");
+    run("(()=>{const sc=G.run.scene;if(sc&&sc.items){const i=sc.items.findIndex(x=>!x.sold&&(x.k==='pill'||x.k==='qi'));if(i>=0)buy(i);}})()");
     ok(run("!!G.run.tut.ready.HD08"), 'mua một món xong HD08 ('+run("G.run.scene&&G.run.scene.type")+')');
     run("tutClaim('HD07');tutClaim('HD08')");ok(run("G.run.relics.some(x=>x.cid==='non_dauap_suong')"), 'HD07 thưởng nón');
     ok(run("G.run.tut.open.length")===3, 'vẫn ba cái: '+run("G.run.tut.open.join(',')"));

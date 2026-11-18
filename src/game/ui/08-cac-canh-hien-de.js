@@ -10,7 +10,7 @@ function itemView(p){
   if(p.k==='pass')return {ic:'🎫',n:p.n,sub:'Lệnh bài thông quan',tip:'Trình ở quan ải để sang '+REG[p.reg].n,t:2};
   return {ic:'💎',n:p.n+' linh thạch',sub:'',tip:''};}
 
-const PGROUP=[['Sự vụ',['board','thuongcac']],['Tông môn',['congmon','join','lib','nhansu','tongviec','conghien','tinhthat']],['Mua bán',['laibuon','taphoa','shop','doilt','camdo','ghost']],['Mưu sinh',['muusinh']],['Nghỉ chân',['tea','inn','tuu','tinh','heal']],['Đi lại',['tram','goback']],['Tu luyện',['khaiphu','thinhgiao']],['Hoang dã',['sanyeu','haithuoc','daokhoang']],['Việc khác',['grave','patron','bury','quyan']]];
+const PGROUP=[['Sự vụ',['board','thuongcac','vay']],['Tông môn',['congmon','join','lib','nhansu','tongviec','conghien','tinhthat']],['Mua bán',['laibuon','taphoa','shop','doilt','camdo','ghost']],['Mưu sinh',['muusinh']],['Nghỉ chân',['nha','tea','inn','tuu','tinh','heal']],['Đi lại',['tram','goback']],['Tu luyện',['khaiphu','thinhgiao']],['Hoang dã',['sanyeu','haithuoc','daokhoang']],['Việc khác',['grave','patron','bury','quyan']]];
 const PNOW=['boss','cross','bt','xk'];
 const GRP_IC={'Sự vụ':'scroll','Mưu sinh':'bag','Tông môn':'gate','Mua bán':'bag','Nghỉ chân':'tea','Đi lại':'cart','Tu luyện':'seat','Hoang dã':'tree','Việc khác':'more'};
 const PL_N={tea:'Trà lâu',inn:'Khách điếm',shop:'Phường thị',board:'Bảng treo thưởng',ghost:'Quỷ thị',join:'Sơn môn',lib:'Tàng Kinh Các',tinh:'Tĩnh tọa',heal:'Dưỡng thương'};
