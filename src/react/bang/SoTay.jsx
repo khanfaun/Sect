@@ -4,7 +4,7 @@ import { Tabs } from '../chung';
 import { Win } from './Khung';
 import { TheNhiemVu } from '../chung/TheNhiemVu';
 
-const TABS = [['quest', 'Nhiệm vụ'], ['log', 'Đời này'], ['aff', 'Thiên hạ'], ['news', 'Tin đồn'], ['chron', 'Biên niên']];
+const TABS = [['quest', 'Nhiệm vụ'], ['log', 'Đời này'], ['aff', 'Thiên hạ'], ['news', 'Tin đồn'], ['nq', 'Nghiệp duyên'], ['chron', 'Biên niên']];
 
 // Danh sách chuyện thiên hạ, lọc theo loại; chạm một dòng để xem trên bản đồ
 export function ThienHa() {
@@ -47,6 +47,10 @@ export function SoTay() {
       {r.news.length ? r.news.slice().reverse().map((l, i) => <Dong key={i} a={l.a + ' tuổi'} t={l.t} />) : <p className="empty">Chưa nghe được gì. Ghé trà lâu mà hỏi.</p>}
     </div>
   );
+  if (tab === 'nq') {
+    const L = PS.nqSo(80);
+    body = L.length ? <div className="logl nq-so">{L.map((l, i) => <Dong key={i} a={l.y + ' tuổi'} t={l.t + ' — ' + l.k} />)}</div> : <p className="empty">Sổ còn trắng. Chưa có ai mang ơn, cũng chưa ai mang oán.</p>;
+  }
   if (tab === 'chron') {
     const C = w.chron.slice().reverse();
     body = C.length ? <div className="logl">{C.map((l, i) => <Dong key={i} a={'năm ' + l.y} t={l.t} />)}</div> : <p className="empty">Thế gian còn yên ả.</p>;

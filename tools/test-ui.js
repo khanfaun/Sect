@@ -25,6 +25,8 @@ async function boot(b, w = 400, h = 800) {
   await (await p.waitForSelector('[data-act="birth"]')).click();
   await (await p.waitForSelector('[data-act="lifeGo"]', { timeout: 30000 })).click();
   await p.waitForTimeout(1200);
+  // chờ hết hiệu ứng chuyển màn (mực loang) và đã vào bản đồ; bấm lại nếu cú bấm đầu rơi vào lúc chưa sẵn sàng
+  for (let i = 0; i < 25 && await p.evaluate(() => G.screen !== 'map' || UI.inkBusy); i++) { const b = await p.$('[data-act="lifeGo"]'); if (b) await b.click().catch(() => {}); await p.waitForTimeout(400); }
   await p.evaluate(() => { G.run.scene = null; });
   return p;
 }
@@ -167,6 +169,18 @@ const TESTS = {
       ok(!!r && r[1].length>2 && !/\d/.test(r[1]), n+': '+(r?r[1]:'không thấy'));
     }
     ok(!rows.some(x=>x[0].includes('Nhân quả')), 'không còn dòng Nhân quả');
+    ok(p.errs.length===0, 'không lỗi JavaScript');
+  },
+  // Đ1.7 + Đ1.4: thẻ Nghiệp duyên trong sổ tay; danh tiếng ở thẻ địa điểm
+  async nghiepduyen(p) {
+    await ev(p, () => {deed('cuu_nguoi');UI.modal=null;UI.panel='journal';UI.tab.journal='nq';render();});
+    await p.waitForTimeout(150);
+    const t = await ev(p, () => (document.querySelector('.nq-so')||{}).innerText||'');
+    ok(/Cứu người/.test(t) && /thiện duyên/.test(t), 'sổ nghiệp duyên liệt kê việc: '+t.slice(0,60));
+    await ev(p, () => {UI.panel=null;const n=W().regions.flatMap(x=>x.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;G.run.region=n.r;arrive(n.id);openPlace(n.id);render();});
+    await p.waitForTimeout(150);
+    const k = await ev(p, () => (document.querySelector('.pl-kv')||{}).innerText||'');
+    ok(/danh tiếng nơi này/i.test(k), 'thẻ địa điểm có danh tiếng: '+k.replace(/\s+/g,' ').slice(0,80));
     ok(p.errs.length===0, 'không lỗi JavaScript');
   },
   async nhatky(p) {

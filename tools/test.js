@@ -379,6 +379,37 @@ const TESTS = {
     ok(h2<10, 'cùng cảnh giới chỉ thưởng một lần');
     ok(run("NK.count('nq.kiepBon')")===1, 'nhật ký nq.kiepBon');
   },
+  qua_chin() {
+    fresh('G.run.qc=[]');
+    run("deed('cuu_nguoi',{ai:'lão'})");
+    ok(run("G.run.qc.length")===1, 'việc có quả chín gieo một hạt');
+    ok(run("(()=>{const s=G.run.qc[0];return s.due>W().t+5*HM&&s.due<=W().t+18*HM})()"), 'hạn chín trong 6–18 tháng');
+    run("G.run.qc[0].due=W().t;G.run.scene=null;advanceTime(HM+1)");
+    ok(run("!!G.run") && run("G.run.qc.length")===0, 'đến hạn thì chín');
+    ok(run("NK.count('nq.qc')")===1, 'nhật ký nq.qc');
+    const so=run("nqSo(5)");
+    ok(so.length>0 && so.every(x=>x.t&&!/\d/.test(x.t+x.k)), 'sổ nghiệp duyên có chữ, không số: '+(so[0]&&so[0].t));
+    run("deed('giet_vo_toi')");
+    run("die('combat',{n:'thử'})");
+    ok(run("G.over&&G.over.qc&&G.over.qc.length")===1, 'màn hết kiếp có hạt chưa chín');
+    ok(run("(W().qcLeft||[]).some(x=>x.qc===1&&x.id==='giet_vo_toi')"), 'hạt chưa chín chép sang kiếp sau');
+  },
+  hoancanh() {
+    fresh();
+    const rate=n=>run(`(()=>{let b=0,k=0;for(let i=0;i<${n};i++){genBirth();for(const c of G.birth.cards){k++;if(c.hc==='bap')b++;}}return b/k})()`);
+    run("G.meta.lastNq={B:200,G:0}");
+    const a=rate(200);ok(a>=0.6&&a<=0.75, 'nghiệp nặng: tỉ lệ bấp bênh '+a.toFixed(2));
+    ok(run("G.birth.cards.filter(c=>c.hc==='bap').every(c=>ORIGIN.find(o=>o.id===c.origin).grp==='kho')"), 'bấp bênh thì xuất thân khốn khó');
+    run("G.meta.lastNq={B:0,G:200}");
+    const b=rate(100);ok(b<=0.15, 'thiện duyên dày: ít bấp bênh '+b.toFixed(2));
+    run("G.meta.lastNq={B:110,G:0}");const c1=run("hcRate().bap");run("G.meta.lastNq={B:190,G:0}");
+    ok(run("hcRate().bap")===c1, 'cùng bậc thì như nhau');
+    run("delete G.meta.lastNq");ok(run("hcRate().bap")===0.25, 'bản lưu cũ: hoàn cảnh thường');
+    run("G.meta.lastNq={B:200,G:0};genBirth()");const card=run("JSON.stringify(G.birth.cards.find(c=>c.hc==='bap')||null)");
+    if(card!=='null'){const st0=run(`(()=>{const c=${card};c.hc=null;newRun(c);return G.run.st})()`);const st1=run(`(()=>{newRun(${card});return G.run.st})()`);
+      ok(st1<st0||st0<=2, 'bấp bênh: ít tiền khởi đầu hơn ('+st0+' → '+st1+')');}
+    fresh();run("die('combat',{n:'thử'})");ok(run("!!G.meta.lastNq"), 'lúc chết ghi lại nghiệp duyên');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });
