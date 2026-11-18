@@ -285,6 +285,19 @@ const TESTS = {
     ok(await ev(p, () => G.run.bac||0) > b0, 'làm bốc vác: có tiền công ('+b0+' → '+await ev(p, () => G.run.bac)+')');
     await ev(p, () => {UI.modal=null;G.run.scene=null;render();});
   },
+  // Đ5.1: nút luyện võ trong nhóm Tu luyện; phàm nhân thấy "Nội lực"; bảng nhân vật có dòng Võ học
+  async vodao(p) {
+    await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.pham=1;voOf(G.run).bac=1;UI.panel=null;UI.modal=null;openPlace(n.id);render();});
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => !!document.querySelector('[data-act="pact"][data-arg="luyenvo"]') && !!document.querySelector('[data-act="pact"][data-arg="loidai"]')), 'thẻ thành có nút Luyện võ, Đấu lôi đài');
+    await ev(p, () => {ACT.pact('luyenvo');render();});await p.waitForTimeout(100);
+    if (await ev(p, () => UI.modal&&UI.modal.k==='pconf')) { await ev(p, () => {const a=UI.modal.a;UI.modal=null;placeAct(a);render();}); }
+    ok(await ev(p, () => G.run.vo.xp>=1), 'luyện võ một buổi');
+    await ev(p, () => {G.run.scene=null;UI.panel='char';UI.tab.char='base';render();});await p.waitForTimeout(150);
+    const t = await ev(p, () => (document.querySelector('.panel')||document.body).innerText);
+    ok(/Nội lực/.test(t) && /Võ học/.test(t) && /Tam lưu/.test(t), 'bảng nhân vật: Nội lực, Võ học Tam lưu');
+    await ev(p, () => {UI.panel=null;G.run.pham=0;render();});
+  },
   // Đ3.8: bảng Giao tình có mục Người nhà
   async gia_dinh(p) {
     await ev(p, () => {G.run.family=[{ten:'Lâm Đại Hữu',qh:'cha',tuoi:48,suc:'khoe',thai:'thuong',song:1,lc:0}];UI.modal=null;G.run.scene=null;UI.panel='bonds';UI.tab.bonds='an';render();});

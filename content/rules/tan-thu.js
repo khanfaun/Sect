@@ -17,7 +17,7 @@ const TUT=[
  {id:'HD10',g:'C',n:'Trước khi bước vào bụi tối',d:'Mang một món binh khí và một viên đan cầm máu.',need:2,tick:'prep',st:'tutPrep',go:{modal:'bag'},rw:{relic:'giap_giap_thach_diem'}},
  {id:'HD11',g:'C',n:'Đối mặt, rồi còn trở về',d:'Săn yêu thú vừa sức và thắng năm lần.',need:5,tick:'hunt',go:{place:'*',act:'sanyeu'},rw:{bac:1000,pill:[['hoixuan',2]]}},
  {id:'HD12',g:'C',n:'Thân này không tự lành',d:'Chữa lành một vết thương.',need:1,tick:'heal',st:'tutHealthy',go:{place:'*',act:'heal'},rw:{pill:[['giaidoc',2]]}},
- {id:'HD13',g:'D',n:'Một hơi thở cũng tốn đời',d:'Tĩnh tọa một lượt.',need:1,tick:'train',go:{place:'*',act:'tinh'},rw:{pill:[['tinhnguyen',1]]}},
+ {id:'HD13',g:'D',n:'Một hơi thở cũng tốn đời',d:'Tĩnh tọa hoặc luyện võ một lượt.',need:1,tick:'train',go:{place:'*',act:'tinh'},rw:{pill:[['tinhnguyen',1]]}},
  {id:'HD14',g:'D',n:'Giữ lấy thứ còn sửa được',d:'Luyện chế một món.',need:1,tick:'craft',go:{panel:'craft'},rw:{pill:[['dinhthan',1]]}},
  {id:'HD15',g:'D',n:'Có người nhớ mặt',d:'Tặng lễ hoặc kết một mối quan hệ.',need:1,tick:'bond',go:{panel:'bonds'},rw:{bac:500}},
  {id:'HD16',g:'E',n:'Việc đã làm còn để lại gì',d:'Đọc lại sổ nghiệp duyên.',need:1,tick:'nqlog',go:{panel:'journal',tab:'nq'},rw:{bac:300}},

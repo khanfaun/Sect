@@ -803,5 +803,131 @@
     "use": "Tự ăn khi đói và không có quán: một gói đủ năm ngày.",
     "d": "Gói bánh khô và thịt muối bọc lá, cứng như gỗ nhưng no lâu.",
     "status": "active"
+  },
+  {
+    "id": "bt_truong_quyen",
+    "n": "Trường Quyền Nhập Môn",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tam lưu).",
+    "d": "Bí tịch võ phàm, môn quyền. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_ngu_ho_dao",
+    "n": "Ngũ Hổ Đoạn Môn Đao",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+    "d": "Bí tịch võ phàm, môn đao. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_that_tinh_kiem",
+    "n": "Thất Tinh Kiếm Pháp",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+    "d": "Bí tịch võ phàm, môn kiếm. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_thiet_bo_sam",
+    "n": "Thiết Bố Sam",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+    "d": "Bí tịch võ phàm, môn ngạnh công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_thao_thuong_phi",
+    "n": "Thảo Thượng Phi",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+    "d": "Bí tịch võ phàm, môn khinh công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_bat_quai_chuong",
+    "n": "Bát Quái Chưởng",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+    "d": "Bí tịch võ phàm, môn chưởng. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_lien_chau_tien",
+    "n": "Liên Châu Tiễn Pháp",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+    "d": "Bí tịch võ phàm, môn cung. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_ung_trao_cong",
+    "n": "Ưng Trảo Công",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+    "d": "Bí tịch võ phàm, môn trảo. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_thai_cuc",
+    "n": "Thái Cực Hóa Kình",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Hậu thiên đỉnh phong).",
+    "d": "Bí tịch võ phàm, môn nội gia. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_kim_chung_trao",
+    "n": "Kim Chung Tráo",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tiên thiên).",
+    "d": "Bí tịch võ phàm, môn ngạnh công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_pha_ngoc_quyen",
+    "n": "Phá Ngọc Quyền",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tiên thiên).",
+    "d": "Bí tịch võ phàm, môn cương quyền. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_doan_thuy_kiem",
+    "n": "Đoạn Thủy Kiếm Ý",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tông sư).",
+    "d": "Bí tịch võ phàm, môn kiếm ý. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_hon_nguyen",
+    "n": "Hỗn Nguyên Nhất Khí Công",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tam lưu).",
+    "d": "Bí tịch võ phàm, môn nội công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_quy_tuc",
+    "n": "Quy Tức Công",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+    "d": "Bí tịch võ phàm, môn nội công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
   }
 ]

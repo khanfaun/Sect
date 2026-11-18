@@ -643,6 +643,37 @@ const TESTS = {
     const t1=run("W().t");ok(run("vtDo('tap_dich')")&&run("G.run.bac")===330&&run("W().t")-t1===720&&run("G.run.doi")===0, 'tạp dịch ngoại môn ba mươi ngày: một lượng, được ăn ở');
     run("FEAT.an=0");
   },
+  // Đ5.1 võ học: vô căn luyện võ lên bậc, nội lực, bí tịch, chiêu võ không mất khi syncSkills, chặn pháp thuật, lôi đài, kỳ ngộ bậc 5
+  vo_dao() {
+    fresh("G.run.root={id:'vo',els:[]};G.run.pham=1;G.run._voV1=0;run2();(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    ok(run("!!G.run.vo&&G.run.vo.bac===0"), 'vô căn có r.vo');
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='luyenvo')"), 'có nút luyện võ');
+    const hp0=run("S().maxHp"),atk0=run("S().atk");ok(run("S().maxMp")===0, 'chưa nhập lưu: không có nội lực');
+    run("G.run.vo.xp=59");const t0=run("W().t");run("placeAct('luyenvo')");
+    ok(run("W().t")-t0===6&&run("G.run.vo.bac")===1, 'luyện đủ sáu mươi ngày: Tam lưu ('+run("G.run.vo.bac")+')');
+    ok(run("S().maxMp")>0&&run("S().atk")>=atk0&&run("S().maxHp")>hp0, 'Tam lưu: có nội lực, công và khí huyết tăng ('+[atk0,run("S().atk"),hp0,run("S().maxHp"),run("S().maxMp")]+')');
+    ok(run("mpName()")==='Nội lực', 'thanh gọi là Nội lực');
+    ok(run("NK.count('vo.up')")===1, 'nhật ký vo.up');
+    run("G.run.qitems=['bt_truong_quyen'];G.run.skills=[];bagUse('vbt_truong_quyen')");
+    ok(run("G.run.voSk.includes('vo_truongquyen')")&&!run("G.run.qitems.includes('bt_truong_quyen')"), 'đọc bí tịch: học Trường Quyền');
+    run("syncSkills()");ok(run("G.run.skills.some(k=>k.id==='vo_truongquyen')")&&run("G.run.kn.atk.includes('vo_truongquyen')"), 'syncSkills không xoá chiêu võ');
+    ok(run("SK_RAW.every(x=>!x[5].vo)")&&run("SK.vo_truongquyen.dt")==='vl', 'chiêu võ không lọt vào kho chiêu ngẫu nhiên');
+    run("G.run.skills.push({id:'hoacau',lv:1})");ok(run("pSkill('hoacau')")===null&&!!run("pSkill('vo_truongquyen')"), 'vô căn không dùng được pháp thuật, dùng được chiêu võ');
+    run("G.run.qitems=['bt_doan_thuy_kiem'];bagUse('vbt_doan_thuy_kiem')");ok(run("G.run.qitems.includes('bt_doan_thuy_kiem')")&&!run("G.run.voSk.includes('vo_doanthuy')"), 'chưa đủ bậc: không học được kiếm ý');
+    // lôi đài và trận thắng
+    run("placeAct('loidai')");ok(run("G.run.scene&&G.run.scene.type")==='combat'&&run("G.run.scene.spar&&G.run.scene.after.voLoi"), 'lôi đài mở trận tỉ thí');
+    run("(()=>{const sc=G.run.scene;sc.over='win';finishCombat(sc);finishCombat(sc);G.run.scene=null;})()");ok(run("G.run.vo.loi")===1&&run("G.run.vo.win")===1, 'thắng lôi đài đếm một lần');
+    run("G.run.vo.xp=400;G.run.vo.win=3;openPlace(G.run.at);placeAct('luyenvo')");ok(run("G.run.vo.bac")===2, 'một năm luyện + ba trận thắng: Nhị lưu');
+    run("openPlace(G.run.at);placeAct('luyenvo')");ok(run("G.run.vo.bac")===3, 'đã thắng lôi đài: Nhất lưu');
+    run("G.run.vo.xp=3700;openPlace(G.run.at);placeAct('luyenvo')");ok(run("G.run.vo.bac")===4, 'mười năm luyện: Hậu thiên đỉnh phong');
+    run("openPlace(G.run.at);placeAct('luyenvo')");ok(run("G.run.scene&&G.run.scene.type")==='kyngo'&&run("G.run.scene.ev")==='vo_nham_doc', 'đủ điều kiện Tiên thiên: mở kỳ ngộ Đả thông nhâm đốc');
+    run("(()=>{const k=voKyRoll;voKyRoll=()=>1;try{kyPick(0)}finally{voKyRoll=k}})()");ok(run("G.run.vo.bac")===5, 'qua phép thử: Tiên thiên');
+    run("G.run.scene=null");
+    // tu sĩ: nửa phần
+    fresh("G.run.pham=0;(()=>{const n=W().regions[G.run.region].nodes[0];G.run.at=n.id;openPlace(n.id);})()");run("placeAct('luyenvo')");ok(run("G.run.vo.xp")===0.5, 'tu sĩ luyện võ được nửa phần');
+    // bản lưu cũ
+    fresh();run("delete G.run.vo;delete G.run.voSk;delete G.run._voV1;run2();syncSkills();S()");ok(run("Array.isArray(G.run.voSk)")&&run("!G.run.vo||G.run.vo.bac===0"), 'bản lưu cũ chạy được');
+  },
   // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
   tan_thu() {
     fresh();

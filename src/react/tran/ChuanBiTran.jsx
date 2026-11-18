@@ -32,7 +32,7 @@ function DongNguoi({ u, me }) {
         <div className="pp-row2">
           <div className="pp-bars">
             <span {...tip('Khí huyết')}><Ic n="heart" /><CBar cur={hp} max={mh} cls={'hp' + (hp < mh * 0.3 ? ' low' : hp < mh * 0.6 ? ' mid' : '')} /></span>
-            <span {...tip(mm ? 'Linh lực' : 'Chưa có linh lực')}><Ic n="drop" /><CBar cur={mp} max={mm || 1} cls="mp" /></span>
+            <span {...tip(mm ? PS.mpName() : 'Chưa có ' + PS.mpName().toLowerCase())}><Ic n="drop" /><CBar cur={mp} max={mm || 1} cls="mp" /></span>
           </div>
           {/* thiên kiếp không so lực chiến như một đối thủ */}
           <div className="pp-lc" {...tip(foe ? 'Lực chiến của kẻ này, so với người ở cảnh giới của ngươi' : 'Lực chiến so với người cùng cảnh giới')}>

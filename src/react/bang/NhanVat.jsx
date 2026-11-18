@@ -86,6 +86,7 @@ function CanCo() {
         <Kv n="Tâm ma" v={`<span class="${['rt3', 'rt3', 'rt2', 'bad', 'bad'][Math.min(4, Math.floor((r.tamma || 0) / 20))]}">${PS.tmWord(r.tamma)}</span>`} t="Tâm ma đầy thì phải đối mặt với chính mình" cls={r.tamma >= 60 ? 'bad' : ''} />
         <Kv n="Thần thức" v={RT('than', s.than, 'luc')} t={'Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'} />
         <Kv n="Niệm lực" v={RT('nl', s.nl, 'luc')} t={'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm, tế pháp bảo, đòn thần thức đều tốn niệm lực.'} />
+        {r.vo && <Kv n="Võ học" v={PS.voBacN(r.vo.bac | 0) + ' · ' + PS.voNgayTxt(r)} t={'Bậc võ phàm. Luyện võ ở bất cứ đâu, thắng trận và lôi đài để lên bậc.' + ((r.voHoc || []).length ? '\nĐã học: ' + r.voHoc.map(id => (PS.voHocBy(id) || {}).n).join(', ') : '')} />}
         <Kv n="Thân pháp" v={RT('tp', s.tp, 'toc')} t="Nhanh nhẹn. Trong trận là tốc độ chạy trên nửa đầu thanh hành động; ngoài trận đi lại cũng nhanh hơn." />
       </HopGon>
       <details className="sgbox cbstat" open={cbOpen}>
@@ -93,7 +94,7 @@ function CanCo() {
         <div className="kvl">
           <Kv n="Lực chiến" v={RT('lc', PS.lucChien(), 'luc')} t="Lực chiến: tính từ chỉ số chiến đấu và trang bị" cls="lcrow" />
           <Kv n="Khí huyết" v={RT('maxHp', s.maxHp, 'ben')} t="Khí huyết tối đa dày hay mỏng. Về 0 là chết" />
-          <Kv n="Linh lực" v={RT('maxMp', s.maxMp, 'ben')} t="Thi triển pháp thuật" />
+          <Kv n={PS.mpName()} v={RT('maxMp', s.maxMp, 'ben')} t={PS.isPham() ? 'Nội lực luyện từ khí huyết, dùng ra chiêu võ' : 'Thi triển pháp thuật'} />
           <Kv n="Công vật lý" v={RT('atk', s.atk)} t="Dùng cho đánh thường và kiếm pháp, quyền cước" />
           <Kv n="Công phép" v={RT('matk', s.matk)} t="Dùng cho pháp thuật" />
           <Kv n="Chí mạng" v={RT('crit', s.crit, 'muc')} t="Tỉ lệ chí mạng" />

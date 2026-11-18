@@ -47,7 +47,7 @@ export function Hud() {
   return <>
     <div className="hud-top">
       <button className={'hud-av hud-av2' + PS.talCls(tal)} data-act="panel" data-arg="char" aria-label="Nhân vật"
-        {...tip('Khí huyết ' + PS.pctOf(r.hp, s.maxHp) + ' (nửa trên)\nLinh lực ' + (s.maxMp ? PS.pctOf(r.mp, s.maxMp) : 'chưa có') + ' (nửa dưới)\nChạm để mở nhân vật')}>
+        {...tip('Khí huyết ' + PS.pctOf(r.hp, s.maxHp) + ' (nửa trên)\n' + PS.mpName() + ' ' + (s.maxMp ? PS.pctOf(r.mp, s.maxMp) : 'chưa có') + ' (nửa dưới)\nChạm để mở nhân vật')}>
         <Vong hp={hp} mp={mp} />
         <Html className="hud-avi" h={PS.assetImg('hero', 'me', `<span class="av-txt">${PS.esc((r.ten.split(' ').pop() || '?')[0])}</span>`)} />
         {tal && tal.tier >= 0 && <Html className="tfr" h={PS.talFrameSVG(tal, 'hudtf')} />}
