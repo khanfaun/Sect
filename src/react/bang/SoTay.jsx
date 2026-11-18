@@ -4,7 +4,22 @@ import { Tabs } from '../chung';
 import { Win } from './Khung';
 import { TheNhiemVu } from '../chung/TheNhiemVu';
 
-const TABS = [['quest', 'Nhiệm vụ'], ['log', 'Đời này'], ['aff', 'Thiên hạ'], ['news', 'Tin đồn'], ['nq', 'Nghiệp duyên'], ['chron', 'Biên niên']];
+const TABS0 = [['quest', 'Nhiệm vụ'], ['log', 'Đời này'], ['aff', 'Thiên hạ'], ['news', 'Tin đồn'], ['nq', 'Nghiệp duyên'], ['chron', 'Biên niên']];
+// Thẻ "Cơ duyên" (Đ6 cải căn) chỉ hiện khi đã nghe dấu vết hoặc đang lần theo
+const ccCo = () => { const v = PS.ccView && PS.ccView(); return !!v && (v.act || v.heard.length || v.ok); };
+
+// Cơ duyên: đường cải căn đang lần theo, bước hiện tại và lời gợi ý; các dấu vết đã nghe
+function CoDuyen() {
+  const v = PS.ccView(), T = PS.contentText;
+  return <div className="cc-so">
+    {v.ok && <p className="hint">{T('cc.vOk')}</p>}
+    {v.act && <><h4>{T('cc.vHead')}</h4>
+      <div className="row cc-act"><span className="r-i">🌱</span><span className="r-t"><b>{v.act.n}</b><small>{v.act.noi} · {v.act.buoc}</small><small>{v.act.goi}</small></span></div></>}
+    {v.vt.length > 0 && <><h4>{T('cc.vVt')}</h4><p>{v.vt.map(x => x.n + ' ×' + x.k).join(', ')}</p></>}
+    <h4>{T('cc.vNghe')}</h4>
+    {v.heard.length ? <div className="rows">{v.heard.map(x => <div key={x.id} className="row cc-nghe"><span className="r-t"><b>{x.n}</b><small>{x.noi} · {x.t}</small></span></div>)}</div> : <p className="empty">{T('cc.vRong')}</p>}
+  </div>;
+}
 
 // Danh sách chuyện thiên hạ, lọc theo loại; chạm một dòng để xem trên bản đồ
 export function ThienHa() {
@@ -34,7 +49,8 @@ const Dong = ({ a, t }) => <p><span>{a}</span>{t}</p>;
 
 export function SoTay() {
   const { G, UI } = PS;
-  const r = G.run, w = PS.W(), tab = UI.tab.journal || 'quest';
+  const r = G.run, w = PS.W(), TABS = ccCo() ? TABS0.concat([['cc', 'Cơ duyên']]) : TABS0;
+  let tab = UI.tab.journal || 'quest'; if (!TABS.some(t => t[0] === tab)) tab = 'quest';
   let body = null;
   if (tab === 'aff') body = <ThienHa />;
   if (tab === 'log') body = <div className="logl">{r.log.slice().reverse().map((l, i) => <Dong key={i} a={l.a + ' tuổi'} t={l.t} />)}</div>;
@@ -51,6 +67,7 @@ export function SoTay() {
     const L = PS.nqSo(80);
     body = L.length ? <div className="logl nq-so">{L.map((l, i) => <Dong key={i} a={l.y + ' tuổi'} t={l.t + ' — ' + l.k} />)}</div> : <p className="empty">Sổ còn trắng. Chưa có ai mang ơn, cũng chưa ai mang oán.</p>;
   }
+  if (tab === 'cc') body = <CoDuyen />;
   if (tab === 'chron') {
     const C = w.chron.slice().reverse();
     body = C.length ? <div className="logl">{C.map((l, i) => <Dong key={i} a={'năm ' + l.y} t={l.t} />)}</div> : <p className="empty">Thế gian còn yên ả.</p>;
