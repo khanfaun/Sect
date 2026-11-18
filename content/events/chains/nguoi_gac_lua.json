@@ -45,7 +45,7 @@
           "l": "Đánh kẻng cùng {$a.ten}",
           "t": "Dân chạy về kịp dập lửa trước khi cháy lan. Cơn mưa tới sau làm ướt số lúa chưa thu, {$b.ten} lập tức đổ lỗi cho người đánh kẻng. Người gác cãi: “Không gọi họ về thì giờ còn nhà đâu mà giữ lúa?”",
           "e": {
-            "karma": 4
+            "deed": "cuu_nguoi"
           }
         },
         {
@@ -53,7 +53,7 @@
           "l": "Im kẻng và tự ra xem",
           "t": "Ngươi dập được lửa trước khi bén nhà, tay bị bỏng khi kéo giàn phơi ra khỏi lối. Một dãy rơm đã cháy hết. Người gác chạy tới giúp, bảo lần sau dù ai cản cũng phải báo cho cả xóm.",
           "e": {
-            "karma": 4,
+            "deed": "cuu_nguoi",
             "hp": "-10%"
           }
         },
@@ -143,7 +143,12 @@
             "st": 10
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -154,7 +159,9 @@
             "st": 10
           },
           "e": {
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -245,7 +252,12 @@
             "st": 10
           },
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "giàn phơi mới"
@@ -345,7 +357,7 @@
           "l": "Dẫn người phá hàng rào làm đường cản lửa",
           "t": "Ngươi dẫn dân phá rào, dọn cỏ thành dải đất trống. Nhà trong xóm giữ được, ngươi bị tàn lửa làm bỏng tay, còn phải trả phần rào đã phá. Dân nhận giúp chăm vết thương rồi cùng ngươi tính tiền đền.",
           "e": {
-            "karma": 4,
+            "deed": "cuu_nguoi",
             "hp": "-15%"
           }
         },
@@ -355,7 +367,7 @@
           "t": "Hào trưởng {$b.ten} thưởng bạc vì nhà hắn thoát lửa. Phía dưới gò chỉ còn những khoanh đất sáng màu nơi từng đặt chum nước.",
           "e": {
             "st": 14,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -453,7 +465,7 @@
             "st": 10
           },
           "e": {
-            "karma": 6
+            "deed": "hanh_hiep"
           }
         },
         {
@@ -462,7 +474,9 @@
           "t": "Hắn cấp tiền dựng lại chòi và yêu cầu cất dùi trong hòm khóa. Người gác {$a.ten} đục một lỗ trên vách chòi để nhìn về xóm dưới.",
           "e": {
             "st": 14,
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           }
         },
         {

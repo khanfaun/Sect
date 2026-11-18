@@ -40,7 +40,12 @@
           "l": "Giúp lão lật một tấm ván để đọc",
           "t": "Ngươi lỡ lượt qua để giúp lão lật ván đọc tên người giữ cầu đã mất. Lão kể rõ người ấy đã giữ nhịp cho dân thoát thế nào. Ngươi nhớ được cả việc lẫn tên, đặt ván lại rồi mới đi.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "h": 12
           }
         },
@@ -49,7 +54,9 @@
           "l": "Mượn tên dưới ván để bước nhanh hơn",
           "t": "Cầu nâng bước ngươi. Ở đầu kia, một chữ đã mờ một nửa dù lão chưa hề chạm đục.",
           "e": {
-            "karma": -2,
+            "hd": {
+              "t": 1
+            },
             "tp": 1
           }
         },
@@ -131,7 +138,12 @@
           "l": "Kể cả cái tên lẫn việc nó đã làm",
           "t": "Ngươi dành một đêm kể cho hồn nghe tên và việc giữ cầu của nó. Đến sáng, nó tự nhắc lại được mà không cần ngươi đọc trước. Người khắc cầu xin ghi tên lên mặt trên, để người sau cũng nhớ.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "h": 24,
             "an": [
               "a",
@@ -145,7 +157,9 @@
           "t": "Ngươi học được cách phân lực lên nhiều nhịp. Khi lặp lại tên mình, hồn nói hụt ở chữ cuối.",
           "e": {
             "skill": 1,
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -228,7 +242,12 @@
           "l": "Để lão gỡ nửa chữ khỏi dấu chân",
           "t": "Ngươi để lão gỡ nét tên đã nhập vào dấu chân, trả lại cho hồn. Bước đi mất phần nhẹ trước đó, nhưng tiếng chân phía sau cũng dừng. Hồn tự đọc được trọn tên mình rồi cúi chào ngươi.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "tp": -1,
             "an": [
               "a",
@@ -241,7 +260,12 @@
           "l": "Giữ nửa chữ và mời hồn cùng đi",
           "t": "Hồn thấy thêm nhiều chỗ trên cổ lộ, đổi lại phải theo tốc độ của ngươi. Đến chỗ nghỉ, nó vẫn đứng ngay sau gót.",
           "e": {
-            "karma": 1
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -324,7 +348,12 @@
           "l": "Viết tên ngươi xuống để đỡ nhịp cầu cùng hồn",
           "t": "Ngươi viết tên mình cạnh tên hồn, để lại một phần thần niệm cùng đỡ cầu. Cả đoàn qua hết, hồn vẫn đứng vững tại nhịp giữa. Lão khắc cầu hứa sẽ coi phần tên ngươi để lại.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "tv": -3
           }
         },
@@ -333,7 +362,9 @@
           "l": "Nhờ hồn chia phép giữ cầu vào nhiều tấm ván",
           "t": "Cầu chịu được đoàn người, nhưng các tên cũ mờ đi. Người khắc cầu {$a.ten} đặt đục xuống ngay giữa một chữ.",
           "e": {
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -423,7 +454,12 @@
           "l": "Khắc lại những tên còn nhớ ở phía trên",
           "t": "Ngươi giúp lão dò lại những tên còn nhớ, khắc trên mặt ván để người qua đọc được. Hồn chỉ đúng chỗ tên mình rồi đứng tránh sang bên. Lần đầu nó được nghe người lạ gọi tên mà không phải xin.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "tên ở phía người nhìn"

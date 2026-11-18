@@ -43,7 +43,12 @@
             "mp": "20%"
           },
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "hai tiếng ho qua rèm"
@@ -55,7 +60,7 @@
           "l": "Thu tiếng ho để bán làm mồi dẫn hồn",
           "t": "Ngươi có vật luyện phù. {$a.ten} kéo ghế lại sát rèm, dỏng tai nghe khoảng trống.",
           "e": {
-            "karma": -3,
+            "deed": "lua_loi",
             "pill": 1,
             "tamma": 3
           }
@@ -139,7 +144,12 @@
           "l": "Giữ lửa trong đan điền đến khi họ gặp",
           "t": "Ngươi thu lửa lò vào khí hải, chịu nóng cho tới khi hai người gặp nhau ngoài sân. Nàng đi chậm, lão cũng đi chậm theo. Hết buổi, họ tự quay lại, không để ngươi phải gọi.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "lò tắt trước giờ hẹn"
@@ -155,7 +165,9 @@
           "l": "Nhận củi tốt, giúp họ dọn một chỗ nghỉ dưới hiên",
           "t": "Ngươi nhận phần củi lão trả công, lấy linh lực ép lại thành một viên hỏa đan mang đi. Chỗ dưới hiên đủ mát để hai người ngồi gần nhau, dù nàng chưa bước được ra sân.",
           "e": {
-            "karma": -2,
+            "hd": {
+              "t": 1
+            },
             "pill": 1
           }
         },
@@ -243,7 +255,12 @@
             "st": 19
           },
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "người gọi nhầm tiếng"
@@ -255,7 +272,12 @@
           "l": "Mượn lại tiếng ho để dẫn đoàn hồn tới chỗ nghỉ",
           "t": "Ngươi xin mượn vật dẫn hồn, đưa cả đoàn rời lò rồi trả vật cho người mua. Nàng vẫn chưa lấy lại tiếng nói. Người giữ lò mang ghế theo, để nàng có chỗ chờ lúc dừng đường.",
           "e": {
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -346,7 +368,12 @@
             "mp": "20%"
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -354,7 +381,9 @@
           "l": "Thu một luồng gió để chữa cơn ho trong hồn",
           "t": "Nàng lấy lại hơi đủ nói lời cuối, nhưng phải đi một mình. Lão để ghế trống suốt quãng đường lên.",
           "e": {
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -449,7 +478,12 @@
             "mp": "20%"
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {

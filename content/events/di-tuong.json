@@ -75,7 +75,12 @@
             "t": "Mấy kẻ lảo đảo đi ra, mình đầy thương tích. Ngươi ra tay nhanh gọn.",
             "e": {
               "st": 40,
-              "karma": -6
+              "hd": {
+                "t": 3
+              },
+              "ng": {
+                "b": 3
+              }
             }
           },
           "no": {
@@ -88,7 +93,12 @@
               "t": "Hắn gục. Túi trữ vật của hắn nặng trịch.",
               "e": {
                 "st": 30,
-                "karma": -3
+                "hd": {
+                  "t": 3
+                },
+                "ng": {
+                  "b": 3
+                }
               }
             }
           }
