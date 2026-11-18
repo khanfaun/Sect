@@ -46,3 +46,21 @@ let BAC_PAID=0;
 {const _by=buy;buy=function(i){const sc=G.run&&G.run.scene;const it=sc&&sc.items&&sc.items[i];if(!it||it.sold||!it.bac||!feat('tien'))return _by.apply(this,arguments);
   if(it.k==='qi'){if(!bacPay(it.bac,'shop'))return;const r=G.run;(r.qitems=r.qitems||[]).push(it.id);it.sold=1;log(contentText('tien.muaVat',[CAT.byId[it.id].n]));dbg('tien.qi',{id:it.id});return;}
   if(!bacPay(it.bac,'shop'))return;it.p=0;_by.apply(this,arguments);if(G.run&&!it.sold)bacAdd(it.bac,'hoan');};}
+
+// ---------- Đ3.3: tiền trang ở thành, chợ ----------
+// Dùng khung "nơi chọn việc" (VENUE_N): hai việc mua / bán một linh thạch; mỗi tiền trang đổi tối đa TIEN.ttMax viên mỗi tháng (W().tientrang[nút]={m,n}).
+VENUE_N.tientrang=contentText('tien.tt');VENUE_IN.tientrang=[contentText('tien.ttIn1'),contentText('tien.ttIn2')];
+function ttLeft(n){const w=W();const m=Math.floor(w.t/HM);const T=(w.tientrang=w.tientrang||{});const x=T[n.id];return (!x||x.m!==m)?TIEN.ttMax:Math.max(0,TIEN.ttMax-x.n);}
+function ttUse(n){const w=W();const m=Math.floor(w.t/HM);const T=(w.tientrang=w.tientrang||{});if(!T[n.id]||T[n.id].m!==m)T[n.id]={m,n:0};T[n.id].n++;}
+{const _vo=venueOpts;venueOpts=function(n,v){if(v!=='tientrang')return _vo.apply(this,arguments);const r=G.run,left=ttLeft(n);
+  const L=[{id:'mua',l:contentText('tien.ttMua'),d:contentText('tien.ttMuaD',[fmtBac(TIEN.mua)]),h:0,st:0,bac:TIEN.mua,g:{st:1}},
+           {id:'ban',l:contentText('tien.ttBan'),d:contentText('tien.ttBanD',[fmtBac(TIEN.ban)]),h:0,st:1,g:{txt:fmtBac(TIEN.ban)}}];
+  for(const o of L){o.no=!left?contentText('tien.ttHet'):o.id==='mua'?((r.bac||0)<TIEN.mua?contentText('tien.khongDu'):''):((r.st||0)<1?contentText('tien.ttKhongLt'):'');}
+  return L;};}
+{const _vd=venueDo;venueDo=function(v,id){if(v!=='tientrang')return _vd.apply(this,arguments);const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;
+  const n=nodeById(sc.id);const o=venueOpts(n,v).find(x=>x.id===id);if(!o||o.no)return false;let ch;
+  if(id==='mua'){bacAdd(-TIEN.mua,'tientrang');r.st+=1;ch=[bacChip(-TIEN.mua),chip('💎','+1',contentText('tien.ttLt'),'up')];}
+  else{r.st-=1;bacAdd(TIEN.ban,'tientrang');ch=[chip('💎','−1',contentText('tien.ttLt'),'dn'),bacChip(TIEN.ban)];}
+  ttUse(n);sc.msg=[contentText(id==='mua'?'tien.ttMuaXong':'tien.ttBanXong')];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;dbg('tien.tt',{id,left:ttLeft(n)});saveSoon();return true;};}
+{const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(feat('tien')&&(n.type==='thanh'||n.type==='cho')&&n.state!=='ruin'&&!L.some(x=>x.a==='tientrang'))
+  L.push({a:'tientrang',i:'🏦',l:contentText('tien.tt'),h:0,tip:contentText('tien.ttTip'),dis:false,x:''});return L;};}

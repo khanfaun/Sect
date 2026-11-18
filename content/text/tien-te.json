@@ -7,5 +7,18 @@
   "tien.chipTip": "Bạc",
   "tien.doiTuDong": "Thiếu bạc: đổi một viên linh thạch lấy {{0}}.",
   "tien.khongDu": "Không đủ tiền",
-  "tien.muaVat": "Mua {{0}}."
+  "tien.muaVat": "Mua {{0}}.",
+  "tien.tt": "Tiền trang",
+  "tien.ttTip": "Đổi bạc lấy linh thạch hoặc ngược lại; mỗi tháng chỉ đổi được vài viên",
+  "tien.ttIn1": "Sau quầy gỗ lim, lão chưởng quỹ gõ bàn tính, mắt không rời cân tiểu ly.",
+  "tien.ttIn2": "Tiền trang đóng cửa sắt dày; người ra vào đều được hai gã hộ viện nhìn kỹ từ đầu tới chân.",
+  "tien.ttMua": "Mua một viên linh thạch",
+  "tien.ttMuaD": "Trả {{0}} lấy một viên linh thạch hạ phẩm.",
+  "tien.ttBan": "Bán một viên linh thạch",
+  "tien.ttBanD": "Đưa một viên linh thạch, nhận về {{0}}.",
+  "tien.ttHet": "Tháng này tiền trang đã hết linh thạch để đổi",
+  "tien.ttKhongLt": "Không có linh thạch",
+  "tien.ttLt": "Linh thạch",
+  "tien.ttMuaXong": "Chưởng quỹ đếm bạc ba lần rồi mới mở hộp gỗ, đặt một viên linh thạch vào tay ngươi.",
+  "tien.ttBanXong": "Chưởng quỹ soi viên linh thạch dưới đèn, gật đầu, rồi đẩy mấy thỏi bạc qua quầy."
 }

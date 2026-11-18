@@ -240,6 +240,17 @@ const TESTS = {
     ok(/12 đồng/.test(t) && /6 đồng/.test(t), 'khách điếm: phòng 12 đồng, giường 6 đồng');
     await ev(p, () => {G.run.scene=null;render();});
   },
+  // Đ3.3: tiền trang ở thành, nhóm Mua bán
+  async tien_trang(p) {
+    await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;UI.modal=null;UI.panel=null;openPlace(n.id);render();});
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => /Tiền trang/.test((document.querySelector('.place')||document.body).innerText)), 'thẻ thành có nút Tiền trang');
+    await ev(p, () => {G.run.scene.venue='tientrang';render();});
+    await p.waitForTimeout(150);
+    const t = await ev(p, () => (document.querySelector('.venue')||{}).innerText||'');
+    ok(/Mua một viên linh thạch/.test(t) && /110 quan/.test(t), 'danh sách đổi có giá 110 quan: '+t.slice(0,80).replace(/\s+/g,' '));
+    await ev(p, () => {G.run.scene=null;render();});
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

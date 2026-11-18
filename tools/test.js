@@ -554,6 +554,17 @@ const TESTS = {
     ok(k>=0&&run(`G.run.scene.items[${k}].bac`)===9900, 'chưa trắc linh: phường thị bán Trắc Linh Thạch 9.900 đồng');
     run(`buy(${k})`);ok(run("G.run.qitems.includes('trac_linh_thach')")&&run("G.run.bac")===100, 'mua Trắc Linh Thạch bằng bạc');
   },
+  // Đ3.3 tiền trang: mua 110 quan, bán 90 quan, tối đa ba viên mỗi tháng
+  tien_trang() {
+    fresh();
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='tientrang')"), 'thành có tiền trang');
+    run("G.run.bac=300000;G.run.st=0");ok(run("venueDo('tientrang','mua')")&&run("G.run.st")===1&&run("G.run.bac")===190000, 'mua một viên: trừ 110 quan');
+    ok(run("venueDo('tientrang','ban')")&&run("G.run.st")===0&&run("G.run.bac")===280000, 'bán một viên: nhận 90 quan');
+    ok(run("venueDo('tientrang','mua')")&&!run("venueDo('tientrang','mua')")&&run("G.run.st")===1, 'tối đa ba viên mỗi tháng');
+    run("advanceTime(HM)");ok(run("venueDo('tientrang','ban')"), 'sang tháng đổi lại được');
+    run("G.run.bac=1000");ok(!run("venueDo('tientrang','mua')"), 'không đủ bạc thì không mua');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });
