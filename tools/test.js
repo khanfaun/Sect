@@ -621,6 +621,22 @@ const TESTS = {
     fr();run("delete G.run._anV1;delete G.run.no;delete G.run.anTu;run2()");ok(run("G.run.no")===100&&run("G.run.anTu")===1, 'bản lưu cũ: no đủ, tự lo cơm');
     fr();run("G.run.anAcc=0;advanceTime(800*24)");ok(!run("G.run")&&run("G.over.cause")==='doi', 'nhảy dài 800 ngày không ăn: chết đói, không treo');
   },
+  // Đ3.7 việc làm thuê: việc hợp nơi, tiền công bằng bạc, giới hạn 12 giờ mỗi ngày, điều kiện, nhật ký viec.xong
+  viec_thue() {
+    fresh();
+    ok(run("VIEC_THUE.length")===14, 'đủ mười bốn việc');
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);G.run.bac=0;})()");
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='muusinh')"), 'thành có nút tìm việc');
+    const L=JSON.parse(run("JSON.stringify(vtList(nodeById(G.run.at)).map(x=>x.id))"));ok(L.includes('boc_vac')&&L.includes('phu_khuan')&&!L.includes('dao_mo'), 'việc hợp nơi: '+L.join(','));
+    run("G.run.lamNgay=null");const t0=run("W().t");ok(run("vtDo('phu_khuan')")&&run("G.run.bac")>=23&&run("W().t")-t0===8, 'khiêng kiệu tám giờ: công '+run("G.run.bac")+' đồng');
+    ok(run("NK.count('viec.xong')")===1, 'nhật ký viec.xong');
+    ok(!run("vtDo('phu_khuan')"), 'đã làm tám giờ: không làm thêm tám giờ trong ngày');
+    run("G.run.lamNgay=null;G.run.base.ngo=1;G.run.bon.ngo=-50");ok(!!run("vtList(nodeById(G.run.at)).find(x=>x.id==='chep_sach').why"), 'chép sách cần ngộ tính');
+    run("G.run.bon.ngo=0");
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tong');G.run.at=n.id;openPlace(n.id);G.run.bac=0;FEAT.an=1;G.run.doi=0;})()");
+    const t1=run("W().t");ok(run("vtDo('tap_dich')")&&run("G.run.bac")===330&&run("W().t")-t1===720&&run("G.run.doi")===0, 'tạp dịch ngoại môn ba mươi ngày: một lượng, được ăn ở');
+    run("FEAT.an=0");
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });

@@ -99,6 +99,7 @@ function tcBuy(i){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return f
 {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(feat('tien')&&L.some(x=>x.a==='board')&&!L.some(x=>x.a==='thuongcac'))
   L.push({a:'thuongcac',i:'🎋',l:contentText('tl.cac'),h:0,tip:contentText('tl.cacTip'),dis:false,x:''});return L;};}
 
+let VT_AN=0; // đang làm việc có cơm (Đ3.7)
 // ---------- Đ3.6: ăn uống (bảng AN: content/rules/an-uong.js) ----------
 // r.no 0–100, r.doi số ngày đói liên tiếp, r.anMuc dam|thuong|kha, r.anTu tự lo cơm (mặc định bật), r.anAcc giờ dồn, r.anLk ngày còn của gói lương khô đã mở
 FEAT.an=1;
@@ -115,6 +116,7 @@ function anLkEat(r){if((r.anLk||0)>0){r.anLk--;return true;}const i=(r.qitems||[
 function anFed(r,how){if((r.doi||0)>=AN.doi.doi)dbg('an.het',{doi:r.doi,how});r.no=100;r.doi=0;}
 // một ngày: ăn ở quán (trả bạc theo mức), ở sơn môn mình (cơm tông), không thì lương khô, không có gì thì đói
 function anDay(){const r=G.run;if(!r||!feat('an'))return;if(!needFood(r)){r.doi=0;r.no=100;return;}
+  if(VT_AN||r.anFree){if(!VT_AN)r.anFree=0;anFed(r,'viec');return;}
   if(!r.pham&&r.realm===0){r.anHalf=!r.anHalf;if(r.anHalf)return;} // Luyện Khí: nửa phần (mỗi hai ngày một phần)
   r.anDays=(r.anDays||0)+1;
   if(anAtSect(r)){anFed(r,'tong');}
@@ -146,3 +148,27 @@ function anState(r){r=r||G.run;const d=(r&&r.doi)||0;if(!r||!needFood(r))return 
 {const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._anV1){r._anV1=1;if(r.no==null)r.no=100;if(r.doi==null)r.doi=0;if(!r.anMuc)r.anMuc='thuong';if(r.anTu==null)r.anTu=1;}return r;};}
 // tạp hóa bán lương khô bằng bạc
 {const _se=shopExtra;shopExtra=function(items,n){_se.apply(this,arguments);if(feat('an')&&G.run&&needFood(G.run))items.push({k:'qi',id:'luong_kho',bac:AN.lkBac,p:0,qty:AN.lkQty});};}
+
+// ---------- Đ3.7: việc làm thuê (bảng VIEC_THUE: content/venues/viec-thue.js) ----------
+function vtDay(){return Math.floor(W().t/HD);}
+function vtUsed(r){const L=r.lamNgay;return L&&L.d===vtDay()?L.h:0;}
+function vtWhy(v,n){const r=G.run,s=S();if(!n||!v.noi.includes(n.type)||n.state==='ruin')return contentText('vt.khongNoi');
+  for(const k in (v.dk||{}))if((s[k]||0)<v.dk[k])return contentText('vt.can',[STAT_N[k]||k,v.dk[k]]);
+  if(v.mua&&!v.mua.includes(seasonOf(W().t)))return contentText('vt.traiMua');
+  if(!v.cam&&vtUsed(r)+v.h>VT_NGAY)return contentText('vt.met');
+  if(r.scene&&r.scene.type==='combat')return contentText('vt.ban');return '';}
+function vtList(n){return VIEC_THUE.filter(v=>v.noi.includes(n.type)).map(v=>({id:v.id,n:v.n,h:v.h,cong:v.cong,an:!!v.an,ngu:!!v.ngu,rui:!!v.ruiRo,why:vtWhy(v,n)}));}
+function vtDo(id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);const v=VIEC_THUE.find(x=>x.id===id);if(!v||vtWhy(v,n))return false;
+  const d0=vtDay(),u0=vtUsed(r);if(v.an)VT_AN=1;try{advanceTime(v.h);}finally{VT_AN=0;}if(!G.run)return true;
+  if(!v.cam){const d=vtDay();r.lamNgay=d===d0?{d,h:u0+v.h}:{d,h:Math.max(0,u0+v.h-24*(d-d0))};}
+  let c=ri(v.cong[0],v.cong[1]);if(typeof anState==='function'&&['la','kiet'].includes(anState(r)))c=Math.round(c*0.7);
+  bacAdd(c,'viec:'+id);const ch=[bacChip(c),chip('⏳',durH(v.h),contentText('vt.gio'),'')];const msg=[contentText('vt.xong',[v.n.toLowerCase()])];
+  if(v.an){r.anFree=1;anFed(r,'viec');}
+  if(v.ngu){const s=S();const g=Math.min(s.maxHp-r.hp,Math.round(s.maxHp*v.ngu/100));if(g>0){r.hp+=g;ch.push(chip('❤️','+'+g,contentText('vt.ngu'),'up'));}}
+  if(v.ruiRo&&chance(v.ruiRo.p)){const H=v.ruiRo.hau||{};const s=S();
+    if(H.wound)addWound(H.wound,'viec');if(H.hpLoss)r.hp=Math.max(1,r.hp-Math.round(s.maxHp*H.hpLoss/100));if(H.bacLoss)bacAdd(-Math.round((r.bac||0)*H.bacLoss/100),'mat');
+    msg.push(contentText('vt.rui.'+id));dbg('viec.rui',{id});}
+  const s2=G.run.scene;if(s2===sc){sc.msg=msg;sc.chips=ch;sc.seq=(sc.seq||0)+1;}
+  dbg('viec.xong',{id,c});saveSoon();return true;}
+{const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(feat('tien')&&VIEC_THUE.some(v=>v.noi.includes(n.type))&&n.state!=='ruin'&&!L.some(x=>x.a==='muusinh'))
+  L.push({a:'muusinh',i:'🧺',l:contentText('vt.act'),h:0,tip:contentText('vt.tip'),dis:false,x:''});return L;};}

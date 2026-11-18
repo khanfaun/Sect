@@ -271,6 +271,20 @@ const TESTS = {
     ok(await ev(p, () => G.run.anMuc==='kha'), 'chạm đổi mức ăn');
     await ev(p, () => {G.run.doi=0;G.run.anMuc='thuong';render();});
   },
+  // Đ3.7: nhóm Mưu sinh và hộp thoại việc làm thuê
+  async muusinh(p) {
+    await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.lamNgay=null;UI.panel=null;UI.modal=null;openPlace(n.id);render();});
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => /Mưu sinh/.test((document.querySelector('.place')||document.body).innerText)), 'thẻ thành có nhóm Mưu sinh');
+    await ev(p, () => {ACT.pact('muusinh');render();});
+    await p.waitForTimeout(150);
+    const t = await ev(p, () => (document.querySelector('.mmsinh')||{}).innerText||'');
+    ok(/Bốc vác/.test(t) && /đồng/.test(t), 'hộp thoại việc làm: '+t.slice(0,70).replace(/\s+/g,' '));
+    const b0 = await ev(p, () => G.run.bac||0);
+    await ev(p, () => {ACT.vtGo('boc_vac');render();});
+    ok(await ev(p, () => G.run.bac||0) > b0, 'làm bốc vác: có tiền công ('+b0+' → '+await ev(p, () => G.run.bac)+')');
+    await ev(p, () => {UI.modal=null;G.run.scene=null;render();});
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

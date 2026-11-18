@@ -39,5 +39,19 @@
   "an.la": "Đói lả",
   "an.kiet": "Kiệt sức",
   "an.tich": "Tịch cốc",
-  "an.mucDoi": "Mức ăn: {{0}} ({{1}} mỗi ngày)."
+  "an.mucDoi": "Mức ăn: {{0}} ({{1}} mỗi ngày).",
+  "vt.act": "Tìm việc làm thuê",
+  "vt.tip": "Làm công lấy tiền: bốc vác, gánh nước, chép sách… mỗi ngày làm tối đa mười hai giờ",
+  "vt.khongNoi": "Ở đây không có việc này",
+  "vt.can": "Cần {{0}} {{1}}",
+  "vt.traiMua": "Không đúng mùa",
+  "vt.met": "Hôm nay đã làm đủ, phải nghỉ",
+  "vt.ban": "Đang bận",
+  "vt.gio": "Thời gian",
+  "vt.ngu": "Ngủ nhờ",
+  "vt.xong": "Ngươi {{0}} cho hết buổi, lĩnh tiền công rồi đi.",
+  "vt.rui.chat_cui": "Lúc vác củi về, một con sói lao ra từ bụi rậm; ngươi đuổi được nó nhưng bị cào rách tay.",
+  "vt.rui.hai_rau": "Một cây nấm lạ lẫn vào giỏ; ăn thử một miếng, bụng quặn lên từng cơn.",
+  "vt.rui.dao_mo": "Vách đá sụt, một tảng rơi trúng chân ngươi.",
+  "vt.rui.canh_dem": "Nửa đêm có kẻ trộm trèo tường; ngươi vật lộn đuổi được nhưng bị đánh mấy gậy."
 }
