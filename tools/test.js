@@ -696,6 +696,31 @@ const TESTS = {
     run("G.run.qitems=[]");const a0=run("S().atk");run("G.run.pham=1;G.run.qitems=[]");const a1=run("S().atk");run("G.run.qitems=['vk_thiet_kiem']");ok(run("S().atk")>a1, 'phàm nhân mang thiết kiếm thì công tăng ('+a1+' → '+run("S().atk")+')');
     run("nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");ok(run("G.run.scene.items.some(x=>x.k==='qi'&&SUAE.vk[x.id]&&x.bac>=10000)"), 'tạp hóa thành bày một binh khí phàm');
   },
+  // Sửa-E câu 18: nguồn linh thạch Trung/Thượng/Cực
+  lt_nguon() {
+    fresh("G.run.pham=0");
+    const roll=(name,n)=>JSON.parse(run(`(()=>{const c=[0,0,0,0];for(let i=0;i<${n};i++){G.run.lt=[0,0,0];const o=ltRollDo('${name}');c[0]+=o.st;for(let k=1;k<4;k++)c[k]+=G.run.lt[k-1]?1:0;}G.run.lt=[0,0,0];return JSON.stringify(c);})()`));
+    const db=roll('daibi',400);ok(db[1]>60&&db[2]===0&&db[3]===0, 'đại bỉ: tối đa Trung phẩm ('+db.join('/')+')');
+    const bc=roll('bicanh',4000);ok(bc[0]>0&&bc[1]>bc[2]&&bc[2]>bc[3]&&bc[2]>20&&bc[3]<40, 'bí cảnh: Hạ/Trung chính, Thượng hiếm, Cực rất hiếm ('+bc.join('/')+')');
+    const cd=roll('coduyen',4000);ok(cd[3]>bc[3]*4&&cd[3]>60, 'kỳ ngộ cơ duyên: Cực phẩm nhiều nhất ('+cd.join('/')+')');
+    run("G.run.pham=1");ok(run("ltRollDo('bicanh').ch.length")===0&&run("ltRollDo('bicanh').st")===0, 'phàm nhân không nhận');run("G.run.pham=0");
+    // hiệu ứng trong sự kiện
+    run("G.run.lt=[0,0,0];G.run.st=0");const ch=run("JSON.stringify(applyE({ltRoll:'daibi',lt:[0,2,0]}))");ok(run("G.run.lt[1]")===2&&run("G.run.st")>0&&/Thượng/.test(ch), 'hiệu ứng lt và ltRoll trong sự kiện');
+    ok(run("CONTENT_EVENTS.find(d=>d.id==='dai_bi').choices[0].win.e.ltRoll")==='daibi'&&run("CONTENT_EVENTS.find(d=>d.id==='bi_canh').choices[0].o[1].e.ltRoll")==='bicanh', 'đại bỉ, bí cảnh có ltRoll');
+    // đấu giá thường: gửi bán lấy Hạ/Trung
+    run("G.run.lt=[0,0,0];G.run.st=0;G.run.pills=[];G.run.relics=[genRelic(4)]");const v=run("Math.round(sellList()[0].p0*SUAE.dg.nhan)");run("applyE({dgBan:1})");
+    ok(run("G.run.relics.length")===0&&run("G.run.st+G.run.lt[0]*100")===v&&run("G.run.lt[1]")===Math.min(5,Math.floor(v/100)), 'đấu giá: gửi bán thu '+v+' Hạ quy ra Trung ('+run("ltTxt()")+')');
+    ok(run("CONTENT_EVENTS.find(d=>d.id==='dau_gia').choices.some(c=>c.e&&c.e.dgBan)"), 'hội đấu giá có lựa chọn gửi bán');
+    // U Minh Ám Hội
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);})()");
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='amhoi')"), 'canh ba ở thành: có U Minh Ám Hội');
+    run("G.run.relics=[genRelic(4),genRelic(1)];G.run.lt=[0,0,0]");const L=JSON.parse(run("JSON.stringify(venueOpts(nodeById(G.run.at),'amhoi'))"));
+    ok(L.some(o=>o.id==='bao:0:2')&&L.some(o=>o.id==='bao:0:3')&&!L.some(o=>o.id.startsWith('bao:1'))&&L.find(o=>o.id==='mua:2').no, 'đòi Thượng/Cực bằng pháp bảo phẩm cao; thiếu linh thạch thì khoá');
+    ok(run("venueDo('amhoi','bao:0:3')")&&run("G.run.lt[2]")===1&&run("G.run.relics.length")===1, 'giao Tiên phẩm lấy 1 Cực phẩm');
+    run("openPlace(G.run.at);G.run.lt=[0,5,0]");ok(!run("venueDo('amhoi','mua:2')"), 'mỗi tháng một lần');
+    run("W().t+=HM;openPlace(G.run.at);G.run.lt=[0,5,0]");const n0=run("G.run.relics.length");ok(run("venueDo('amhoi','mua:2')")&&run("G.run.lt[1]")===2&&run("G.run.relics.length")===n0+1, 'tháng sau: 3 Thượng phẩm đổi một pháp bảo');
+    run("G.run.pham=1");ok(!run("placeActs(nodeById(G.run.at)).some(a=>a.a==='amhoi')"), 'phàm nhân không vào được');
+  },
   // Sửa-A (câu 9): bốn phẩm linh thạch, bản lưu cũ
   lt_pham() {
     fresh();

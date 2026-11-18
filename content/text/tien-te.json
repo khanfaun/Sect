@@ -123,5 +123,22 @@
   "nha.coNha": "Đã có nhà ở quê",
   "an.noteThieu": "Thiếu ăn đã một tuần: bụng lúc nào cũng cồn cào. Nên tìm quán, mua lương khô hoặc săn hái.",
   "an.noteCanh": "Sắp chết đói: chỉ còn chừng một tháng nữa là gục. Ăn ngay bất cứ thứ gì!",
-  "cam.dPham": "Đồ phàm: trả bạc theo giá chợ."
+  "cam.dPham": "Đồ phàm: trả bạc theo giá chợ.",
+  "am.n": "U Minh Ám Hội",
+  "am.tip": "Hội đấu giá ngầm trong quỷ thị: không ai hỏi danh tính, đổi vật lấy vật, đòi được cả Thượng phẩm, Cực phẩm linh thạch",
+  "am.in1": "Sau tấm rèm đen của quỷ thị là một gian hầm thắp đèn xanh. Kẻ ngồi đầu bàn đeo mặt nạ không mắt: ở đây không đấu bằng giá, chỉ đổi vật lấy vật.",
+  "am.in2": "Ám Hội chỉ mở lúc canh ba. Tu sĩ khoác áo trùm đầu ngồi quanh bàn đá, ai cũng giấu tên.",
+  "am.giao": "Giao {{0}}, đòi {{1}}",
+  "am.giaoD": "Món phẩm cao thì đòi được linh thạch phẩm cao. Kẻ đeo mặt nạ không mặc cả.",
+  "am.mua": "Đưa {{0}}, lấy {{1}}",
+  "am.muaD": "Đổi linh thạch phẩm cao lấy thứ ngươi cần.",
+  "am.baoMoi": "một pháp bảo cao phẩm",
+  "am.danMoi": "{{0}} viên đan quý",
+  "am.het": "Tháng này Ám Hội đã giao dịch với ngươi rồi",
+  "am.khong": "Không có món nào đủ phẩm để đem ra Ám Hội",
+  "am.thieu": "Không đủ linh thạch",
+  "am.xong": "Kẻ đeo mặt nạ gật đầu. Món đồ đổi tay trong im lặng.",
+  "dg.khong": "Ngươi chẳng có món gì đáng đem gửi bán.",
+  "dg.ban": "Gửi bán {{0}} ở hội đấu giá.",
+  "lt.chip": "Linh thạch"
 }

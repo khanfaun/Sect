@@ -24,3 +24,47 @@ camDo=function(n,id){const r=G.run;const [k,is]=id.split(':');
   return o;};}
 function vkAtkP(r){r=r||G.run;if(!r||!r.pham)return 0;let b=0;for(const id of r.qitems||[])if(SUAE.vk[id])b=Math.max(b,SUAE.vk[id].atkP);return b;}
 {const _S=S;S=function(){const s=_S.apply(this,arguments);const b=vkAtkP();if(b)s.atk=Math.round(s.atk*(1+b/100));return s;};}
+
+// ---------- câu 18: nguồn linh thạch Trung/Thượng/Cực ----------
+function ltChip(k,x){return chip('💠',(x>0?'+':'')+x+' '+ltName(k),contentText('lt.chip'),x>0?'up':'dn');}
+// lăn bảng SUAE.ltRoll[tên]; Hạ phẩm trả qua hiệu ứng st (nhân hệ số vùng), phẩm cao cộng thẳng vào r.lt
+function ltRollDo(name,why){const T=SUAE.ltRoll[name];const r=G.run;if(!T||!r||r.pham)return {st:0,ch:[]};const ch=[];let st=0;
+  for(const [k,p,a,b] of T){if(R()>=p)continue;const x=a+Math.floor(R()*(b-a+1));if(k===0)st+=x;else{ltAdd(k,x,why||name);ch.push(ltChip(k,x));}}
+  dbg('lt.roll',{name,st,lt:ltArr(r).slice()});return st?{st,ch}:{st:0,ch};}
+{const _ae=applyE;applyE=function(e,v){if(!e||(e.ltRoll==null&&e.dgBan==null&&e.lt==null))return _ae.apply(this,arguments);const e2=Object.assign({},e);delete e2.ltRoll;delete e2.dgBan;delete e2.lt;
+  let extra=[];
+  if(e.ltRoll){const o=ltRollDo(e.ltRoll);if(o.st)e2.st=(e2.st||0)+o.st;extra=extra.concat(o.ch);}
+  if(Array.isArray(e.lt))e.lt.forEach((x,i)=>{if(x){const d=ltAdd(i+1,x,'ev');if(d)extra.push(ltChip(i+1,d));}});
+  if(e.dgBan)extra=extra.concat(dgBan());
+  return _ae.call(this,e2,v).concat(extra);};}
+// đấu giá thường: gửi bán món giá trị nhất, thu Hạ/Trung phẩm
+function dgBan(){const r=G.run;const L=sellList();if(!L.length){note(contentText('dg.khong'),'');return [];}
+  const it=L.reduce((a,b)=>(b.p0!=null?b.p0:b.p)>(a.p0!=null?a.p0:a.p)?b:a);const v=Math.round((it.p0!=null?it.p0:it.p)*SUAE.dg.nhan);
+  const trung=Math.min(SUAE.dg.trungMax,Math.floor(v/100)),ha=v-trung*100;
+  if(it.k==='r'){const rel=r.relics[it.i];r.relics.splice(it.i,1);const c=run2().chu;for(let j=0;j<8;j++)if(c[j]&&c[j].k==='r'&&c[j].n===rel.name)c[j]=null;clampHp();}else r.pills.splice(it.i,1);
+  const ch=[];if(ha){ltAdd(0,ha,'daugia');ch.push(ltChip(0,ha));}if(trung){ltAdd(1,trung,'daugia');ch.push(ltChip(1,trung));}
+  log(contentText('dg.ban',[it.n]));dbg('dg.ban',{n:it.n,v,ha,trung});return ch;}
+// kỳ ngộ: cơ duyên lớn có thể ra Cực phẩm (nơi ra nhiều nhất)
+{const _kp=kyPick;kyPick=function(i){const r=G.run,sc=r&&r.scene;const ok0=sc&&sc.type==='kyngo'&&!sc.res;const ev=ok0&&KYNGO.find(x=>x.id===sc.ev);const res=_kp.apply(this,arguments);
+  if(ev&&!ev.joke&&!ev.sp&&G.run&&G.run===r&&sc.res&&!r.pham){const o=ltRollDo(ev.paid?'coduyen':'huuduyen','kyngo');if(o.ch.length)sc.chips=(sc.chips||[]).concat(o.ch);}
+  return res;};}
+// U Minh Ám Hội: trong quỷ thị (thành, ma tu) lúc quỷ thị mở
+VENUE_N.amhoi=contentText('am.n');VENUE_IN.amhoi=[contentText('am.in1'),contentText('am.in2')];
+function amOpen(n){return !!n&&(n.type==='thanh'||n.type==='ma')&&n.state!=='ruin'&&G.run&&!G.run.pham&&(typeof svcOpen!=='function'||svcOpen('ghost'));}
+function amLeft(n){const w=W(),m=ncMonth();const T=(w.amhoi=w.amhoi||{})[n.id];return Math.max(0,SUAE.am.thang-(T&&T.m===m?T.n:0));}
+{const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(amOpen(n)&&!L.some(x=>x.a==='amhoi'))L.push({a:'amhoi',i:'🎭',l:contentText('am.n'),h:1,tip:contentText('am.tip'),dis:false,x:''});return L;};}
+function amOpts(n){const r=G.run,A=SUAE.am;const left=amLeft(n);const L=[];
+  r.relics.forEach((x,i)=>{const t=x.tier||0;if(t<A.minT)return;
+    L.push({id:'bao:'+i+':2',l:contentText('am.giao',[x.name,(t-1)+' '+ltName(2)]),d:contentText('am.giaoD'),h:1,st:0,g:{txt:'+'+(t-1)+' '+ltName(2)},no:left?'':contentText('am.het')});
+    if(t>=A.cucT)L.push({id:'bao:'+i+':3',l:contentText('am.giao',[x.name,'1 '+ltName(3)]),d:contentText('am.giaoD'),h:1,st:0,g:{txt:'+1 '+ltName(3)},no:left?'':contentText('am.het')});});
+  L.push({id:'mua:2',l:contentText('am.mua',[A.thuong+' '+ltName(2),contentText('am.baoMoi')]),d:contentText('am.muaD'),h:1,st:0,g:{txt:GRADE[clamp(rT()+A.len,0,4)]},no:!left?contentText('am.het'):ltGet(2)<A.thuong?contentText('am.thieu'):''});
+  L.push({id:'mua:3',l:contentText('am.mua',['1 '+ltName(3),contentText('am.danMoi',[A.cucDan])]),d:contentText('am.muaD'),h:1,st:0,g:{txt:A.cucDan+' 💊'},no:!left?contentText('am.het'):ltGet(3)<1?contentText('am.thieu'):''});
+  return L;}
+function amDo(n,id){const o=amOpts(n).find(x=>x.id===id);if(!o||o.no)return false;const r=G.run,A=SUAE.am;const p=id.split(':');let ch=[];
+  if(p[0]==='bao'){const i=+p[1],k=+p[2];const rel=r.relics[i];if(!rel)return false;const x=k===3?1:(rel.tier||0)-1;r.relics.splice(i,1);const c=run2().chu;for(let j=0;j<8;j++)if(c[j]&&c[j].k==='r'&&c[j].n===rel.name)c[j]=null;clampHp();ltAdd(k,x,'amhoi');ch=[chip('🏺','−'+rel.name,'Pháp bảo','dn'),ltChip(k,x)];}
+  else if(p[1]==='2'){ltAdd(2,-A.thuong,'amhoi');ch=[ltChip(2,-A.thuong)].concat(applyE({relic:clamp(rT()+A.len,0,4)}));}
+  else{ltAdd(3,-1,'amhoi');ch=[ltChip(3,-1)];for(let j=0;j<A.cucDan;j++)ch=ch.concat(applyE({pill:['taytuy','phacanh']}));}
+  const w=W(),m=ncMonth();const T=(w.amhoi=w.amhoi||{});if(!T[n.id]||T[n.id].m!==m)T[n.id]={m,n:0};T[n.id].n++;dbg('am.do',{id});return ch;}
+{const _vo=venueOpts;venueOpts=function(n,v){if(v!=='amhoi')return _vo.apply(this,arguments);return amOpts(n);};}
+{const _vd=venueDo;venueDo=function(v,id){if(v!=='amhoi')return _vd.apply(this,arguments);const sc=G.run&&G.run.scene;if(!sc||sc.type!=='place')return false;
+  const n=nodeById(sc.id);if(!amOpen(n))return false;const ch=amDo(n,id);if(!ch)return false;sc.msg=[contentText('am.xong')];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;saveSoon();return true;};}

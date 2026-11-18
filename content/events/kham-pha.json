@@ -3190,7 +3190,8 @@
             "t": "Ngươi thắng liền ba trận, tiếng hò reo vang dội. Phần thưởng là một lượt vào Tàng Kinh Các.",
             "e": {
               "skill": 2,
-              "st": 20
+              "st": 20,
+              "ltRoll": "daibi"
             }
           },
           "lose": {

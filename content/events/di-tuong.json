@@ -38,7 +38,8 @@
               "win": {
                 "t": "Thủ hộ thú gục xuống. Phía sau là một bệ đá, trên đó có bảo vật đang phát sáng.",
                 "e": {
-                  "relic": 1
+                  "relic": 1,
+                  "ltRoll": "bicanh"
                 }
               }
             },
@@ -51,7 +52,8 @@
                   "hoixuan",
                   "taytuy"
                 ],
-                "h": 144
+                "h": 144,
+                "ltRoll": "bicanh"
               }
             },
             {
@@ -283,6 +285,14 @@
           "t": "Một món bảo vật không ai để ý. Ngươi mua với giá hời.",
           "e": {
             "relic": 0
+          }
+        },
+        {
+          "i": "🏷️",
+          "l": "Gửi bán một món",
+          "t": "Ngươi giao món đồ quý nhất cho thương hội. Tiếng búa gõ, giá cao hơn tiệm thường.",
+          "e": {
+            "dgBan": 1
           }
         },
         {

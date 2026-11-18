@@ -345,3 +345,15 @@ Luật `src/game/core2/48-sua-e.js` (ghi đè `camDo` và danh sách cầm của
 3. **Binh khí phàm mới** (vật trong túi, `content/catalog/qitems.json`): Thiết kiếm (công +10% cho phàm nhân đang mang), Cương đao (+8%); chỉ món tốt nhất tính; tu sĩ không được gì. Tạp hóa thành bày 1 món mỗi tháng (giá 14.000 / 12.000 xu × nhu cầu) — mua rồi cầm lại lỗ ~30%.
 4. Rà món phàm khác: giá mua ở tiệm giữ nguyên (thuốc 60–120 xu, bí tịch 600–900 xu, Trắc Linh Thạch 9.900); giá cầm lấy khoảng nửa giá mua, binh khí là món đắt nhất của người phàm. **Hỏi lại**: bí tịch võ 600–900 xu có rẻ quá so với binh khí 10 lượng không.
 5. Bài: mới `cam_e`; sửa `tien_trang` (cầm pháp khí ra linh thạch); `nhu_cau` đẩy nhu cầu 0,4 thay 0,2 cho khỏi lệch do làm tròn giá nhỏ.
+
+### E.18 — nguồn linh thạch Trung / Thượng / Cực
+Luật `48-sua-e.js`; bảng `SUAE.ltRoll`, `SUAE.dg`, `SUAE.am`. Hiệu ứng sự kiện mới: `ltRoll:'<bảng>'` (lăn bảng), `lt:[Trung,Thượng,Cực]` (cộng thẳng), `dgBan:1` (gửi bán ở đấu giá) — đã thêm vào bộ kiểm nội dung. Phàm nhân không nhận linh thạch từ các nguồn này.
+1. **Tông môn đại bỉ** (`dai_bi`, thắng): thêm 10–30 Hạ (× hệ số vùng) và 40% được 1 Trung phẩm. Không bao giờ ra Thượng/Cực.
+2. **Bí cảnh** (`bi_canh`, hai kết quả thắng thủ hộ thú / vườn thuốc): 15–50 Hạ; 35% 1–3 Trung; 3% 1 Thượng; 0,3% 1 Cực. (đo 4.000 lần: 1.411 lần có Trung, 105 Thượng, 13 Cực)
+3. **Kỳ ngộ**: cơ duyên lớn (trả giá) 35% 1–3 Trung, 12% 1–2 Thượng, **4% 1 Cực** (nơi ra Cực nhiều nhất); hữu duyên 15% / 4% / 1%. Kỳ ngộ vớ vẩn và hộp thoại `sp` không tính. Cộng sau khi chọn (bọc `kyPick`).
+4. **Đấu giá thường** (`dau_gia`): lựa chọn mới "Gửi bán một món" — bán món giá trị nhất trong túi được 1,5 × giá tiệm tu sĩ, cứ đủ 100 Hạ thì trả bằng 1 Trung (tối đa 5 Trung). Không có gì thì chỉ báo.
+5. **U Minh Ám Hội** (hội đấu giá ngầm trong quỷ thị): nút ở nhóm Mua bán, chỉ ở thành / thành ma tu, lúc quỷ thị mở (21h–5h), tu sĩ mới vào. Mỗi tháng mỗi nơi 1 giao dịch, đổi vật lấy vật:
+   - giao pháp bảo phẩm t ≥ Bảo phẩm → đòi (t − 1) Thượng phẩm; Tiên phẩm → có thể đòi 1 Cực phẩm;
+   - đưa 3 Thượng phẩm → 1 pháp bảo cao hơn vùng 2 phẩm; đưa 1 Cực phẩm → 2 viên đan quý (Tẩy tủy / Phá cảnh).
+6. Khung tối thiểu, còn dở: chưa có sự kiện kể riêng cho Ám Hội (chỉ lời vào cửa), chưa nối với sự kiện `quy_thi` (đổi thọ nguyên giữ nguyên); đấu giá chỉ ra Trung khi món đáng ≥ 100 Hạ (đồ vùng thấp thường chỉ ra Hạ).
+7. Bài: `lt_nguon`.
