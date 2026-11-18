@@ -337,3 +337,11 @@ Luật: `src/game/core2/39-tien-te.js` (phần Đ3.6); bảng `AN` ở `content/
 ## Sửa-E — câu 16, 17, 18, 19, 20, 23 (đợt 2)
 ### E.16 — giá quán không theo nhu cầu
 - Đã kiểm: dịch vụ quán (khách điếm, trà lâu) lấy giá cố định `bac` trong `content/venues/services.json` (39-tien-te.js), không gọi `ncGet`. Giữ nguyên. Bài mới `quan_nc`: ép nhu cầu ×1,4 thì giá quán vẫn y nguyên.
+
+### E.17 — hiệu cầm đồ, giá bán đồ
+Luật `src/game/core2/48-sua-e.js` (ghi đè `camDo` và danh sách cầm của 43-tien-te-2.js); bảng `SUAE.cam`, `SUAE.vk` ở `content/rules/sua-e.js`.
+1. **Đồ phàm trả xu** (không giới hạn số món/tháng), × nhu cầu `cam` của nơi đó: Thiết kiếm 10.000 xu (10 lượng bạc), Cương đao 9.000; Kim sang dược 60 (mua 120), Hương an thần 30 (mua 60), Lương khô 35 (mua 70); bí tịch võ phàm = ½ giá mua ở tạp hóa (Trường Quyền 300, Hỗn Nguyên 450). Trắc Linh Thạch, kỷ vật truyện không nhận.
+2. **Đồ tu sĩ (pháp khí, đan) trả linh thạch Hạ phẩm** = 0,6 × giá bán ở tiệm tu sĩ × nhu cầu, tối thiểu 1 viên; vẫn 1 món/tháng/nơi. Không còn trả tiền phàm rẻ mạt (trước 200 xu/linh thạch). Linh thạch vẫn không đổi ra tiền phàm, hiệu không nhận linh thạch.
+3. **Binh khí phàm mới** (vật trong túi, `content/catalog/qitems.json`): Thiết kiếm (công +10% cho phàm nhân đang mang), Cương đao (+8%); chỉ món tốt nhất tính; tu sĩ không được gì. Tạp hóa thành bày 1 món mỗi tháng (giá 14.000 / 12.000 xu × nhu cầu) — mua rồi cầm lại lỗ ~30%.
+4. Rà món phàm khác: giá mua ở tiệm giữ nguyên (thuốc 60–120 xu, bí tịch 600–900 xu, Trắc Linh Thạch 9.900); giá cầm lấy khoảng nửa giá mua, binh khí là món đắt nhất của người phàm. **Hỏi lại**: bí tịch võ 600–900 xu có rẻ quá so với binh khí 10 lượng không.
+5. Bài: mới `cam_e`; sửa `tien_trang` (cầm pháp khí ra linh thạch); `nhu_cau` đẩy nhu cầu 0,4 thay 0,2 cho khỏi lệch do làm tròn giá nhỏ.

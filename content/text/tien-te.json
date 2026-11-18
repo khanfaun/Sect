@@ -58,13 +58,13 @@
   "nc.thap": "thấp",
   "nc.vua": "vừa",
   "cam.n": "Hiệu cầm đồ",
-  "cam.tip": "Thương nhân phàm thu đồ tu sĩ với giá rẻ mạt, mỗi tháng nhận rất ít",
+  "cam.tip": "Đồ phàm trả bạc; đồ tu sĩ chỉ trả bằng linh thạch (ít hơn tiệm tu sĩ), mỗi tháng nhận rất ít",
   "cam.in1": "Hiệu cầm đồ tối om, mùi long não. Lão chủ nheo mắt nhìn món đồ lạ.",
   "cam.in2": "Gã chủ hiệu xoa tay: đồ của tiên sư thì tiểu nhân trả được ít thôi.",
   "cam.l": "Cầm {{0}}",
-  "cam.d": "Đồ của tu sĩ, người phàm khó dùng nên chỉ trả rẻ.",
+  "cam.d": "Đồ tu sĩ: hiệu không trả tiền phàm mà trả linh thạch, thấp hơn giá tiệm tu sĩ.",
   "cam.het": "Tháng này hiệu đã nhận đủ đồ tu sĩ",
-  "cam.khong": "Không có đồ tu sĩ để cầm",
+  "cam.khong": "Không có món nào để cầm",
   "cam.xong": "Lão chủ gói món đồ vào vải dầu, đếm tiền đưa sang.",
   "bk.n": "Bảo khố tông môn",
   "bk.tip": "Kho của tông: đan dược, công pháp, pháp khí cho đệ tử",
@@ -122,5 +122,6 @@
   "nha.dangThue": "Đang thuê ở đây",
   "nha.coNha": "Đã có nhà ở quê",
   "an.noteThieu": "Thiếu ăn đã một tuần: bụng lúc nào cũng cồn cào. Nên tìm quán, mua lương khô hoặc săn hái.",
-  "an.noteCanh": "Sắp chết đói: chỉ còn chừng một tháng nữa là gục. Ăn ngay bất cứ thứ gì!"
+  "an.noteCanh": "Sắp chết đói: chỉ còn chừng một tháng nữa là gục. Ăn ngay bất cứ thứ gì!",
+  "cam.dPham": "Đồ phàm: trả bạc theo giá chợ."
 }

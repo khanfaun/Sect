@@ -965,5 +965,23 @@
     "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
     "d": "Bí tịch võ phàm, môn nội công. Không cần linh căn, chỉ cần khổ luyện.",
     "status": "active"
+  },
+  {
+    "id": "vk_thiet_kiem",
+    "n": "Thiết kiếm",
+    "i": "🗡️",
+    "dang": "Binh khí phàm",
+    "use": "Mang theo: người phàm đánh mạnh hơn. Hiệu cầm đồ trả khoảng 10 lượng bạc.",
+    "d": "Thanh kiếm sắt rèn kỹ, lưỡi sáng, chuôi quấn da. Với tu sĩ chỉ là sắt vụn.",
+    "status": "active"
+  },
+  {
+    "id": "vk_cuong_dao",
+    "n": "Cương đao",
+    "i": "🔪",
+    "dang": "Binh khí phàm",
+    "use": "Mang theo: người phàm đánh mạnh hơn. Hiệu cầm đồ trả khoảng 9 lượng bạc.",
+    "d": "Đao thép bản dày của tiêu cục, chém củi chém người đều bén.",
+    "status": "active"
   }
 ]
