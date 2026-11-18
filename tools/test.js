@@ -799,13 +799,13 @@ const TESTS = {
     const wild="(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&!n.dp);G.run.at=n.id;G.run.scene=null;G.run.moving=null;G.run.bac=0;G.run.st=0;G.run.qitems=[];G.run.anAcc=0;G.run.doi=0;G.run.hp=S().maxHp;})()";
     const wild0=wild;const fr=()=>{fresh(wild0);run('FEAT.an=1');};
     fr();ok(run("needFood(G.run)"), 'phàm nhân phải ăn');
-    // Sửa lỗi đói: thang cũ chết ở ngày 15 → nay thieu 7 / doi 30 / la 90 / kiet 180 / canh 330 / chết 365 ngày
+    // Sửa lỗi đói: thang cũ chết ở ngày 15 → nay thieu 30 / doi 60 / la 150 / kiet 300 / canh 630 / chết 660 ngày
     run("for(let i=0;i<14;i++)advanceTime(24)");ok(!!run("G.run")&&run("G.run.doi")===14&&run("anState()")==='no', '14 ngày không ăn: còn sống, mới thiếu ăn ('+run("G.run&&G.run.doi")+')');
     ok(run("NK.count('an.doi')")===14&&run("G.run.no")<100, 'đếm từng ngày thiếu ăn, có báo một tuần');
-    run("advanceTime(16*24)");ok(run("anState()")==='doi'&&run("anRgMul()")<1, '30 ngày: đói, hồi phục chậm');
-    run("advanceTime(60*24)");ok(run("anState()")==='la'&&run("S().maxHp")<run("(()=>{const d=G.run.doi;G.run.doi=0;const m=S().maxHp;G.run.doi=d;return m})()"), '90 ngày: đói lả, khí huyết tối đa giảm');
-    run("advanceTime(274*24)");ok(!!run("G.run")&&run("G.run.doi")===364&&run("anState()")==='kiet', '364 ngày: kiệt sức nhưng còn sống');
-    run("advanceTime(24)");ok(!run("G.run")&&run("G.over&&G.over.cause")==='doi'&&run("G.over.title")==='Chết đói', 'ngày 365: chết đói');
+    run("advanceTime(46*24)");ok(run("anState()")==='doi'&&run("anRgMul()")<1, '60 ngày: đói, hồi phục chậm');
+    run("advanceTime(90*24)");ok(run("anState()")==='la'&&run("S().maxHp")<run("(()=>{const d=G.run.doi;G.run.doi=0;const m=S().maxHp;G.run.doi=d;return m})()"), '150 ngày: đói lả, khí huyết tối đa giảm');
+    run("advanceTime(509*24)");ok(!!run("G.run")&&run("G.run.doi")===659&&run("anState()")==='kiet', '659 ngày: kiệt sức nhưng còn sống');
+    run("advanceTime(24)");ok(!run("G.run")&&run("G.over&&G.over.cause")==='doi'&&run("G.over.title")==='Chết đói', 'ngày 660: chết đói');
     fr();run("G.run.pham=0;G.run.realm=1");run("for(let i=0;i<100;i++)advanceTime(24)");ok(!!run("G.run")&&run("G.run.doi")<=2&&run("anState()")==='tich', 'Trúc Cơ trôi 100 ngày: đói rất chậm (thiếu '+run("G.run.doi")+' bữa), vẫn tịch cốc');
     fr();run("G.run.qitems=['luong_kho'];advanceTime(5*24)");ok(run("G.run.doi")===0&&!run("G.run.qitems.includes('luong_kho')"), 'một gói lương khô đủ năm ngày');
     run("advanceTime(24)");ok(run("G.run.doi")===1, 'hết lương khô thì đói');
@@ -832,8 +832,8 @@ const TESTS = {
       const t0=W().t;let tries=0;while(G.run&&r.at!==n.id&&tries++<6){r.scene=null;travelTo(n.id);let q=0;while(G.run&&r.moving&&q++<4000){if(r.scene)r.scene=null;travelTick(6);}}r.bac=0;r.anCov=0;out.push(Math.round((W().t-t0)/HD));}return out;})()`);
     ok(!!run("G.run")&&run("G.run.doi")<run("AN.doi.chet"), 'đi bộ ba chặng ('+legs.join(', ')+' ngày) không tiền: còn sống');
     fresh("FEAT.an=1;"+"(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&!n.dp);G.run.at=n.id;G.run.bac=0;G.run.qitems=[];G.run.anCov=0})()");
-    run("for(let i=0;i<120;i++)advanceTime(24)");ok(!!run("G.run")&&run("anState()")==='la', '4 tháng ở hoang không ăn: sống, đói lả');
-    ok(run("NK.count('an.doi')")===120, 'mỗi ngày thiếu ăn đều ghi');
+    run("for(let i=0;i<160;i++)advanceTime(24)");ok(!!run("G.run")&&run("anState()")==='la', '5 tháng rưỡi ở hoang không ăn: sống, đói lả');
+    ok(run("NK.count('an.doi')")===160, 'mỗi ngày thiếu ăn đều ghi');
     run("G.run.qitems=['luong_kho'];advanceTime(24)");ok(run("G.run.doi")===0, 'ăn được một bữa thì hết đói');
   },
   // Sửa-B (câu 10): mua chịu ở quê, nợ quá hạn → quan phủ (hèo, truy nã, làm công), vay có lãi, nhà ở / thuê nhà / ngủ ngoài trời

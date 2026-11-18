@@ -281,7 +281,7 @@ const TESTS = {
   },
   // Đ3.6: HUD báo đói, chạm đổi mức ăn
   async an_hud(p) {
-    await ev(p, () => {G.run.pham=1;G.run.doi=90; // Sửa lỗi đói: mốc đói lả 3 → 90 ngày
+    await ev(p, () => {G.run.pham=1;G.run.doi=150; // Sửa lỗi đói: mốc đói lả 3 → 90 ngày
     G.run.anMuc='thuong';UI.modal=null;UI.panel=null;G.run.scene=null;render();});
     await p.waitForTimeout(150);
     const t = await ev(p, () => [...document.querySelectorAll('.hs.an')].map(e=>e.innerText).join('|'));

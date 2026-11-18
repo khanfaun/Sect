@@ -331,3 +331,5 @@ Luật: `src/game/core2/39-tien-te.js` (phần Đ3.6); bảng `AN` ở `content/
 - `com_ao` viết lại theo mốc mới (14 ngày sống, 30 đói, 90 lả, 364 sống, 365 chết; Trúc Cơ 100 ngày ≤ 2 bữa; mua cả tháng; bế quan ×⅓; sau bế quan ×½; bản lưu cũ). Bài mua chịu đổi từ số cứng 20 xu/ngày sang `anCost` (hệ số thể chất làm giá 23 xu).
 - Mới `doi_dai` (thêm vào `test:rules`): khốn khó không tiền đi bộ 3 chặng (141, 88, 100 ngày) vẫn sống; 4 tháng ở hoang → đói lả, còn sống; ăn một bữa hết đói.
 - test-ui `an_hud`: đặt `doi=90` (mốc đói lả mới thay cho 3).
+
+- Chỉnh theo người dùng ("vẫn hơi khó"): mốc đói giãn ra — thiếu ăn (cảnh báo đầu) 30, đói 60, đói lả 150, kiệt sức 300, báo sắp chết 630, chết 660 ngày.
