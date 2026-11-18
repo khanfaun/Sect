@@ -150,3 +150,7 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 16. Thêm: giao diện desktop — tooltip ở tab Căn cơ (bấm vào chỉ số) hiện lệch xa; kiểm tra và sửa vị trí tooltip.
 17. Đổi phẩm linh thạch không hai chiều ngang giá: phẩm cao hiếm hơn. Đổi lên (100 Hạ → 1 Trung) phải bù thêm, phẩm càng cao càng khó đổi và phần bù càng lớn; đổi xuống (1 Trung → ~80–101 Hạ) tùy nơi (chợ đen, Vạn Bảo Lầu…), mỗi nơi tỉ giá khác nhau nhưng chênh ít.
     Thêm chỉ số mới "NHU CẦU" theo từng nơi và từng vật phẩm (kể cả từng phẩm linh thạch): nhu cầu tăng thì giá tăng, giảm thì giá giảm; áp dụng cho mọi mua/bán. Nhu cầu nên dao động theo thời gian và bị tác động khi người chơi mua/bán nhiều. Số trong ví dụ chỉ là minh hoạ, tự cân.
+18. TRẮC LINH CĂN Thiên/Địa phải "wow" (hiện quá bình thường):
+    - Độ hiếm: Địa linh căn ~1/1000 người; Thiên linh căn cực hiếm (~1/100.000, "nghìn năm có một"). Rà lại bảng tỉ lệ linh căn (content/rules/root-rate.js) cho khớp.
+    - Khi vừa bấm trắc ra Địa/Thiên: ẩn hết hộp thoại, chân trang, biểu tượng → chạy hiệu ứng toàn màn (tham khảo hiệu ứng tăng tiềm chất có sẵn). Địa: màu tím. Thiên: cam vàng, rất sáng, mạnh hơn Địa nhiều lần.
+    - Khung cảnh kiểu truyện tiên hiệp: hào quang phóng thẳng lên trời, thiên địa dị tượng, ánh sáng chiếu khắp nơi, chuông tông môn gõ vang hàng chục tiếng, trưởng lão kinh động… Lời kể riêng cho Địa và Thiên (Thiên hoành tráng hơn hẳn), sau hiệu ứng mới hiện lại hộp thoại kết quả. Áp dụng cho mọi cách trắc linh (tông môn, sự kiện, vật phẩm).
