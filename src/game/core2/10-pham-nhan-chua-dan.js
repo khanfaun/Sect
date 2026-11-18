@@ -46,8 +46,7 @@ function tpSect(){const r=G.run;if(r.flags.sectTp)return null;r.flags.sectTp=1;c
 // bỏ tâm pháp tự cấp cho mọi kiếp; xuất thân gia truyền, ký ức kiếp trước
 // Bảng TP_ORIGIN: content/characters/tp-origin.js
 for(const id in TP_ORIGIN){const o=ORIGIN.find(x=>x.id===id);if(o)o.d+=contentText("core2_10-pham-nhan-chua-dan_js.019");}
-UPG.push({id:'kytp',n:contentText("core2_10-pham-nhan-chua-dan_js.020"),i:'🪷',max:2,c:[12,28],d:contentText("core2_10-pham-nhan-chua-dan_js.021")});
-{const _die21=die;die=function(cause,info){const r=G.run;if(r&&r.arts){const a=tuOf(arts());if(a)G.meta.tpMem={n:a.n,tier:a.tier,el:a.el};}return _die21(cause,info);};}
+// (Đ2.6) bỏ nâng cấp Ký ức tâm pháp: đầu thai quên sạch (HN A.16). Điểm đã mua được hoàn ở migrateX (core2/37).
 {const _nr21=newRun;newRun=function(c){const res=_nr21(c);const r=G.run;if(!r||!r.pham)return res;run2();
   const old=r.arts.filter(a=>a.start).map(a=>a.u);r.arts=r.arts.filter(a=>!a.start);for(let j=0;j<8;j++)if(r.chu[j]&&old.includes(r.chu[j].u))r.chu[j]=null;
   const og=TP_ORIGIN[r.origin];const mem=G.meta.tpMem,k=U('kytp');

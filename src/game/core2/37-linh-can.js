@@ -75,3 +75,12 @@ function tlCheck(){const r=G.run;if(!r||rootKnown(r)||!tlFree())return;const m=M
 {const _d=die;die=function(){const r=G.run;if(r&&G.meta&&feat('vo')&&(r.qitems||[]).includes('dinh_menh_chau')){r.qitems.splice(r.qitems.indexOf('dinh_menh_chau'),1);G.meta.pick=(G.meta.pick||0)+1;dbg('dt.chau',{pick:G.meta.pick});}return _d.apply(this,arguments);};}
 {const _nr=newRun;newRun=function(c){const res=_nr.apply(this,arguments);const r=G.run;const u=U('menh');
   if(r&&G.meta&&feat('vo')&&u>0&&r.kiep%(u>=2?3:4)===0){G.meta.pick=(G.meta.pick||0)+1;dbg('dt.menh',{kiep:r.kiep,pick:G.meta.pick});}return res;};}
+// ---------- Đ2.6: quên sạch — bỏ Ký ức công pháp / tâm pháp, hoàn điểm; chỉ Túc Tuệ Đăng giữ lại một tâm pháp ----------
+const QS_REFUND={ky:[10,26],kytp:[12,28]};
+{const _mx=migrateX;migrateX=function(d){d=_mx.apply(this,arguments);const M=d&&d.meta;if(!M||!M.upg)return d;let back=0;
+  for(const [k,c] of Object.entries(QS_REFUND)){const lv=M.upg[k]||0;for(let i=0;i<Math.min(lv,c.length);i++)back+=c[i];delete M.upg[k];}
+  if(back){M.pts=(M.pts||0)+back;dbg('qs.refund',{back});}delete M.tpMem;return d;};}
+{const _d=die;die=function(){const r=G.run;if(r&&G.meta&&(r.qitems||[]).includes('tuc_tue_dang')){const a=r.arts&&tuOf(arts());
+  if(a){G.meta.mem={kind:'art',n:a.n,tier:a.tier,el:a.el};r.qitems.splice(r.qitems.indexOf('tuc_tue_dang'),1);dbg('qs.mem',{n:a.n});}}return _d.apply(this,arguments);};}
+{const _nr=newRun;newRun=function(c){const res=_nr.apply(this,arguments);const r=G.run;const m=G.meta&&G.meta.mem;
+  if(r&&m&&m.kind==='art'){delete G.meta.mem;tpLearn(0,{n:m.n,el:m.el,src:contentText('qs.src')});syncSkills();dbg('qs.learn',{n:m.n});}return res;};}

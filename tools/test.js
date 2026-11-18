@@ -472,6 +472,22 @@ const TESTS = {
     run("G.meta.pick=0;G.meta.upg.menh=2;G.meta.nlife=2;genBirth();newRun(G.birth.cards[0])");ok(run('G.meta.pick')===1, 'bậc 2: kiếp 3 được chọn');
     ok(run("(()=>{G.meta.nlife=1;let n=0;for(let i=0;i<50;i++)n+=ttRoll([]).length;return n/50<=2.2})()"), 'Thiên mệnh không còn rút thêm khí vận');
   },
+  quen_sach() {
+    fresh();
+    ok(run("!UPG.find(u=>u.id==='ky'||u.id==='kytp')"), 'không còn nâng cấp Ký ức công pháp / tâm pháp');
+    const d=run(`JSON.stringify((()=>{const d={meta:{upg:{ky:2,kytp:1,hp:1},pts:5,tpMem:{n:'x',tier:1,el:'kim'}}};migrateX(d);return d.meta})())`);
+    const M=JSON.parse(d);ok(M.upg.ky==null&&M.upg.kytp==null&&M.upg.hp===1, 'bản lưu cũ: xoá khoá ky, kytp, giữ nâng cấp khác');
+    ok(M.pts===5+36+12, 'hoàn điểm đã mua (ky 36, kytp 12): '+M.pts);
+    ok(!M.tpMem, 'xoá ký ức tâm pháp cũ');
+    run("G.meta.upg={};G.meta.tpMem={n:'Cũ',tier:2,el:'kim'};genBirth();newRun(G.birth.cards[0])");
+    ok(run("!G.run.skills.some(k=>k.src==='ky')"), 'kiếp mới không có chiêu ký ức');
+    ok(run("!G.run.arts.some(a=>a.n==='Cũ')"), 'kiếp mới không mang tâm pháp cũ');
+    // Túc Tuệ Đăng
+    run("tpLearn(1,{n:'Đèn Thử Tâm Pháp',el:'kim'});G.run.qitems=['tuc_tue_dang'];die('combat',{n:'thử'})");
+    ok(run("G.meta.mem&&G.meta.mem.n")==='Đèn Thử Tâm Pháp', 'chết mang Túc Tuệ Đăng: nhớ tâm pháp');
+    run("genBirth();newRun(G.birth.cards[0])");
+    ok(run("G.run.arts.some(a=>a.n==='Đèn Thử Tâm Pháp'&&a.tier===0)")&&run("!G.meta.mem"), 'kiếp sau học lại tâm pháp ở bậc thấp nhất');
+  },
   deed_su_kien() {
     fresh();
     const bad=run(`(()=>{const out=[];const walk=(x,id)=>{if(Array.isArray(x))return x.forEach(y=>walk(y,id));if(!x||typeof x!=='object')return;for(const k in x){if(k==='karma')out.push('karma@'+id);if(k==='deed'&&!DEED[x[k]])out.push(x[k]+'@'+id);walk(x[k],id);}};for(const e of CONTENT_EVENTS)walk(e,e.id);return out})()`);

@@ -785,5 +785,14 @@
     "use": "Mang theo lúc chết: kiếp sau được tự chọn lá số đầu thai.",
     "d": "Viên châu đục, nhìn lâu thấy bóng người lạ trong đó.",
     "status": "active"
+  },
+  {
+    "id": "tuc_tue_dang",
+    "n": "Túc Tuệ Đăng",
+    "i": "🪔",
+    "dang": "Vật dùng",
+    "use": "Mang theo lúc chết: kiếp sau nhớ lại tâm pháp đang tu (ở bậc thấp nhất).",
+    "d": "Ngọn đèn nhỏ, bấc cháy mãi không tàn.",
+    "status": "active"
   }
 ]

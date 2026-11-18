@@ -212,6 +212,11 @@ const TESTS = {
     const bt = await ev(p, () => (document.querySelector('.birth')||{}).innerText||('NO .birth '+G.screen+' '+!!G.run));
     ok(/Chưa trắc/.test(bt), 'thẻ ghi linh căn Chưa trắc: '+bt.slice(0,120).replace(/\s+/g,' '));
   },
+  // Đ2.6: bản lưu có Ký ức công pháp được hoàn điểm khi tải
+  async quen_sach(p) {
+    const r = await ev(p, () => {const d=JSON.parse(JSON.stringify({meta:G.meta,run:G.run,screen:'map'}));d.meta.upg.ky=2;const p0=d.meta.pts||0;loadData(d);return {ky:G.meta.upg.ky,dp:G.meta.pts-p0};});
+    ok(r.ky == null && r.dp === 36, 'tải bản lưu: bỏ ky, hoàn 36 điểm ('+JSON.stringify(r)+')');
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');
