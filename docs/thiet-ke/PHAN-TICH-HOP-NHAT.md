@@ -22,6 +22,11 @@ Quyết định của người dùng đã áp dụng:
 - Bí ẩn luân hồi: **cốt của GPT + Mộng Ấn của Claude**.
 - Cốt truyện: **45 tuyến xuất thân của GPT + biến cố thế giới của Claude + ghép 9 cốt truyện của Claude** (cách ghép ở A.9).
 - Tiền tệ năm loại; diệt thế tạm thời làm 3 khu đất ma.
+- Phần thưởng khi vượt thiên kiếp khó: tối đa **+10%**.
+- Tiền phàm dùng đồng và quan; **1 linh thạch = 100 lượng bạc (100 quan)**.
+- Luân hồi: **không được chọn nhân vật hay xuất thân**, tất cả ngẫu nhiên; **quên sạch** khi đầu thai. Chỉ ngoại lệ khi có vật phẩm, công pháp hoặc kỹ năng cho phép (A.16).
+- Thời gian giữa hai kiếp tối đa 5.000 năm, với điều kiện không làm hỏng cốt truyện (đã kiểm ở A.17).
+- Người Gác Bến: để Claude tự quyết (A.10).
 
 ---
 
@@ -34,7 +39,7 @@ Quyết định của người dùng đã áp dụng:
 | 3 | Tham khảo tác phẩm | [B] + [C] | Giữ cả hai danh sách | B §2, C §4 |
 | 4 | Độ khó | [B] + [C] | Chỉ tiêu tỉ lệ đạt cảnh giới, hệ số đột phá của B; nguyên tắc của C: khó vì thiếu tiền, thuốc, tin, thời gian, không vì nút bấm chết ngẫu nhiên; luôn có do thám, chuẩn bị, rút lui; thua không mặc định chết. **Thiên kiếp dùng bảng sáu cửa TK01–TK06 của C** (có cả kiếp Luyện Khí → Trúc Cơ, đúng hướng "khó hơn") | B §4, C §5.4–5.5 |
 | 5 | Linh căn | [A] | Bảng 8 loại + **phẩm chất 4 bậc** (Khuyết / Thường / Thuần / Viên Mãn) của C; tỉ lệ 45% đã chốt (A.2) | A.2 |
-| 6 | Giấu linh căn trên thẻ đầu thai | [B] | Vẫn chờ người dùng chọn A/B/C | B §5.3 |
+| 6 | Màn đầu thai | [A] | **Không còn chọn thẻ**: nhân vật kiếp mới sinh ngẫu nhiên; linh căn vẫn "chưa trắc" tới lúc trắc linh. Câu hỏi A/B/C ở B §5.3 không còn cần (A.16) | A.16 |
 | 7 | Vô linh căn bị khóa những gì | [C] | Luật khóa của C chặt hơn và rõ hơn: khóa cả thể tu, huyết thuật, hồn thuật, thần thức thuật; võ học phàm không được đổi tên để vượt khóa. Phần bù đắp cho vô căn của B vẫn giữ | C §5.1, B §5.4 |
 | 8 | Cải tạo linh căn | [A] | 8 đường chính thức CC01–CC08 của C + 10 đường bổ sung của B không trùng (A.3) | A.3 |
 | 9 | Chính tà / nhân quả / danh tiếng | [A] | Ba thước đo của C (Hành Đạo, Nghiệp Duyên, Danh tiếng) với cơ chế của C, cộng phần "làm trái hướng thì đạo tâm dao động" và bảng hành vi của B (A.4) | A.4 |
@@ -153,7 +158,7 @@ Dùng công thức của C (C §5.4 "Tái sinh và thiên kiếp"), sửa một 
 |---|---|---|
 | Sức kiếp K | 1 + min(0,60; 0,004 × B) | giữ |
 | Sát thương kiếp | 1 + 0,75 × (K − 1) | giữ |
-| Thưởng khi vượt | 1 + min(0,20; 0,0015 × B) | **1 + min(0,40; 0,003 × B)** — yêu cầu gốc nói "qua được sẽ nhận nhiều hơn"; ở B = 100: kiếp mạnh hơn 40%, thưởng hơn 30% |
+| Thưởng khi vượt | 1 + min(0,20; 0,0015 × B) | **1 + min(0,10; 0,0015 × B)** — người dùng chốt trần 10%. Ở B ≈ 67 đã chạm trần; ở B = 100: kiếp mạnh hơn 40%, thưởng hơn 10%. Nghiệp nặng vì thế chủ yếu là **rủi ro**, phần thưởng chỉ đủ để không thấy vô ích |
 | Nghiệp Hỏa | Thay Âm Hàn ở cửa TK04 khi B ≥ 15 | giữ, và áp cho mọi cửa có lôi |
 | Người nhiều Thiện duyên | Không có hệ số thiên vị; được người mang ơn tới hộ trận, cho thuốc, báo tin | giữ, **bỏ "công đức hộ thể" của B** |
 | Phàm nhân | Không có thiên kiếp | Giữ thêm **Nhân kiếp** của B (tai ương phàm trần khi nghiệp nặng) |
@@ -181,7 +186,8 @@ Dùng công thức của C (C §5.4 "Tái sinh và thiên kiếp"), sửa một 
 | Đơn vị tiền phàm | Của C: **đồng** và **quan** (1 quan = 1.000 đồng). Thay "văn / lượng" của B |
 | Bảng giá phàm | Của C: 40 món BT01–BT40, chỗ ở HS01–HS06, chi tiêu hộ gia đình (C §12 B.2–B.3). **Bỏ bảng giá B §6.2** |
 | Tiền công làm thuê của B (B §6.5) | Chia 3 để khớp mặt bằng giá của C (vd bốc vác bến 60 → 20 đồng/ngày) |
-| Linh thạch ↔ bạc | Tiền trang ở phường thị mua vào khoảng **8 quan**, bán ra khoảng **6 quan** một linh thạch, dao động theo vùng; mỗi tiền trang chỉ đổi được số linh thạch có hạn mỗi tháng. C không đặt tỉ giá cố định để không biến linh thạch thành hàng mua đứt |
+| Linh thạch ↔ bạc | **1 linh thạch = 100 quan (100 lượng bạc)** theo người dùng chốt. Tiền trang ở phường thị bán ra khoảng **110 quan**, mua vào khoảng **90 quan** một linh thạch, dao động theo vùng; mỗi tiền trang chỉ đổi số linh thạch có hạn mỗi tháng. So với giá của C (một người lớn ăn 13 đồng/ngày), một viên linh thạch bằng khoảng 20 năm cơm của một người: phàm nhân gần như không bao giờ cầm được linh thạch, đúng ý "hai thế giới" |
+| Giá bạc trong Phần B | Mọi giá tính bằng "lượng / văn" còn sót trong Phần B (Trắc Linh Thạch, sính lễ, học võ, mua chức…) quy đổi: **1 lượng của B = 330 đồng** để khớp mặt bằng của C; giá tính bằng linh thạch giữ nguyên. Tích Cốc Đan: 1 linh thạch |
 | Cống hiến theo thế lực | Của B (B §6.1.2); sổ gắn với 10 thế lực FA01–FA10 của C và các tông trong `world.sects` |
 | Thưởng Lệnh, Thưởng Các | Của B (B §6.1.3), giá giữ nguyên, trừ Khai Linh Đan (xem A.3) |
 | Cái ăn, đói | Thanh "no / khát" có số của C (C §12 B.3, B.7); các mốc chết đói, tịch cốc từ Trúc Cơ của B |
@@ -292,7 +298,13 @@ Luật ghép:
 | TRI03 "Cửa có thể chọn" | #7 Vết nứt trên trời (CLK12, CLK14) | Thử mô hình ở LOC15, hồ sơ Ngũ Tổ |
 
 - Mộng Ấn **#9 "Người dệt mộng" của B bỏ**: sự thật về vòng luân hồi giờ là lõi của C.
-- **Người Gác Bến** của B giữ: người giữ ký ức nằm ngoài vòng, mỗi kiếp hiện một lần dưới hình dạng khác. Đề xuất cho khớp với C: đây là phần ký ức mà Yêu Hoàng lưu ra ngoài hệ.
+- **Người Gác Bến** của B giữ: mỗi kiếp hiện một lần dưới hình dạng khác.
+- **Đã quyết: Người Gác Bến là mảnh ký ức Yêu Hoàng lưu ra ngoài vòng luân hồi** (điển tích có sẵn của game: "Ngũ Tổ chém Yêu Hoàng"; C: "Yêu Hoàng lưu một phần ký ức ngoài hệ"). Kiểm ảnh hưởng:
+  - *Không phá cốt truyện của C*: C vốn viết rằng ai tự nhận hiểu chân tướng cũng chỉ giữ từng mảnh và có người dùng mảnh thật để dựng lời dối. Người Gác Bến đúng là một kẻ như vậy: nói thật từng phần, giấu lý do mình bị chém.
+  - *Thêm động cơ ẩn*: mảnh ký ức này muốn người chơi đi tới **END07 Người chặt vòng**, vì vòng bị chặt thì nó được tan hẳn. Nó sẽ khuyên ngăn END05 (giữ vòng mà sửa). Người chơi không nên tin trọn.
+  - *Nối với nhân vật của C*: NP12 Dã Tâm (sứ thú của Yêu Hoàng) nhận ra Người Gác Bến; cần thêm 2 cảnh: cảnh NP12 gặp Người Gác Bến, cảnh lộ thân phận.
+  - *Không ảnh hưởng luật tri thức*: lời của Người Gác Bến chỉ tính là **một** nguồn chứng (Mộng Ấn #2), nên vẫn cần nguồn độc lập thứ hai như C yêu cầu.
+  - *Với bản Claude*: Mộng Ấn #1, #2 và đại lộ Tỉnh Mộng giữ nguyên; chỉ thêm lớp "người dẫn đường có mục đích riêng".
 - **Phi thăng khi chưa đủ ba tri thức** = "**Mộng trong mộng**" của B: vượt kiếp, lên tới nơi rồi thấy một bến Vong Xuyên khác, vẫn luân hồi. END04 thật chỉ mở khi đủ ba tri thức.
 - **Diệt thế**: END08 của C là kết hành trình (khép cả game) và cần đủ tri thức + nghi thức ở LOC15. Một đời ma đầu "diệt thế" **khi chưa đủ** điều kiện END08 chỉ làm **3 khu thành đất ma** (B §14.9).
 
@@ -345,7 +357,7 @@ Luật ghép:
 | Đợt | Nội dung |
 |---|---|
 | 1 | Hành Đạo + Nghiệp Duyên + Danh tiếng, sổ hành động, chuyển bản lưu; thiên kiếp theo A.5 |
-| 2 | Linh căn mới (A.2), vô căn và luật khóa, trắc linh; mốc "qua năm" + tuế biến (A.6) |
+| 2 | Linh căn mới (A.2), vô căn và luật khóa, trắc linh; đầu thai ngẫu nhiên + quên sạch, sửa nâng cấp luân hồi (A.16); mốc "qua năm" + tuế biến (A.6) |
 | 3 | Tiền tệ (A.7), ăn ở, chỗ ở, hộ gia đình, việc làm thuê |
 | 4 | 27 nhiệm vụ tân thủ |
 | 5 | Bộ nền của C (thuộc tính ST23, trạng thái, thương bệnh, chế tạo, đối thủ) + võ học phàm + 5 nghề phàm đầu |
@@ -359,13 +371,69 @@ Luật ghép:
 
 ---
 
-## A.15 Còn chờ người dùng chốt
+## A.15 Trạng thái các câu hỏi
 
-1. Linh căn trên thẻ đầu thai: cách A / B / C (giải thích ở Phần B §5.3).
-2. Thời gian giữa hai kiếp dài nhất 5.000 năm, tỉ lệ 55 / 28 / 13 / 4% (Phần B §14.8).
-3. Hai lựa chọn mới ở bến Vong Xuyên: "Uống canh, đi ngay" / "Ngồi đợi bên bến" (Phần B §14.8).
-4. Người Gác Bến chính là phần ký ức Yêu Hoàng lưu ra ngoài vòng — có muốn chốt như vậy không.
-5. Phần thưởng thiên kiếp nâng trần lên 40% (A.5) thay vì 20% của GPT.
+Đã chốt hết các câu hỏi trước: thưởng thiên kiếp 10% (A.5), linh thạch 100 lượng (A.7), đầu thai ngẫu nhiên và quên sạch (A.16), thời gian luân hồi 5.000 năm (A.17), Người Gác Bến (A.10).
+
+Còn một điểm Claude tự quyết, người dùng có thể đổi: **kiếp đầu tiên vẫn được chọn nhân vật** (A.16, mục 2).
+
+---
+
+## A.16 Đầu thai ngẫu nhiên và quên sạch
+
+**Luật (người dùng chốt):**
+1. Từ kiếp 2, **không có màn chọn thẻ**. Game sinh ngẫu nhiên một nhân vật: tên, giới tính, xuất thân, quê, mệnh cách, khí vận, thể chất, linh căn (linh căn vẫn "chưa trắc" tới lúc trắc linh, giữ khoảnh khắc hồi hộp).
+2. **Kiếp đầu** (Claude tự quyết): vẫn cho chọn 1 trong 3 thẻ như hiện nay, vì kiếp đầu chưa phải "luân hồi" và người mới cần làm quen. Muốn kiếp đầu cũng ngẫu nhiên thì chỉ cần bỏ màn chọn.
+3. Khi đầu thai **quên sạch**: không mang công pháp, chiêu thức, kỹ năng, ký ức, tri thức nào của kiếp trước.
+4. Những thứ **không phải ký ức** vẫn theo người chơi vì chúng nằm ở thế giới hoặc ở sổ luân hồi, không nằm trong đầu nhân vật: Nghiệp Duyên (quyết định hoàn cảnh sinh ra), nhân quả tuyến (người khác nhớ mình chứ mình không nhớ họ), mộ, đồ đã chôn, dòng họ, thế giới đã đổi, điểm luân hồi, Mộng Ấn đã nhặt (xem mục 7).
+
+**Ngoại lệ — chỉ qua vật phẩm, công pháp, kỹ năng:**
+
+| Loại | Tên đề xuất | Lấy ở đâu | Tác dụng ở kiếp sau |
+|---|---|---|---|
+| Vật phẩm | **Định Mệnh Châu** | Đấu giá hiếm, kho Huyền Cơ Trận Các (LOC05), phần thưởng END-tuyến cao | Mang trên người lúc chết → kiếp sau được **chọn 1 trong 3 nhân vật** ngẫu nhiên (linh căn vẫn chưa trắc). Dùng một lần |
+| Vật phẩm | **Túc Tuệ Đăng** | Lạn Kha Tự (LOC12), sự kiện tháp tro | Mang lúc chết → kiếp sau **nhớ một công pháp hoặc một nghề** đã chọn (học lại nhanh, bắt đầu từ bậc thấp nhất). Dùng một lần. Đây cũng là cách có **Di Vật Ký Ức** (CC-VT23) cho đường cải căn CC08 |
+| Công pháp | **Luân Hồi Chuyển Thế Kinh** (Phật tu / Thiên cơ sư, mở rộng) | Phật môn, Thiên Cơ các | Luyện tới tầng cuối: mỗi lần chết được chọn 1 trong 3 nhân vật |
+| Công pháp | **Bất Muội Linh Quang Quyết** (Hồn tu TU04 / Thần thức tu TU05) | Huyền Cơ Trận Các | Luyện tới tầng cuối: giữ lại một ký ức kỹ năng mỗi lần chết |
+| Kỹ năng | **Túc Mạng Thông** (thần thông Phật pháp) | Phật tu từ Kết Đan | Kiếp sau thỉnh thoảng nhớ lại một mảnh (giảm một nửa thời gian học lại kỹ năng đã có) |
+| Kỹ năng | **Khuy Mệnh** (Thiên cơ thuật) | Thiên cơ sư từ Nguyên Anh | Trước khi chết, xem trước 3 nhân vật có thể thành; được chọn 1; tốn 10 năm thọ |
+
+**Những thứ phải sửa vì luật mới:**
+
+| Chỗ | Hiện tại / bản cũ | Sửa |
+|---|---|---|
+| Màn đầu thai `ManChonKiep` (game) | Chọn 1 trong 3+ thẻ | Kiếp 2+: hiện một nhân vật đã sinh; chỉ hiện màn chọn khi có ngoại lệ ở bảng trên |
+| Nâng cấp luân hồi **Thiên mệnh** (`UPG.menh`, game) | Thêm thẻ để chọn | Đổi thành: mỗi bậc giảm số kiếp phải chờ để được **một lần chọn** (bậc 1: mỗi 4 kiếp một lần; bậc 2: mỗi 3 kiếp) |
+| Nâng cấp **Ký ức công pháp** (`UPG.ky`) và **ký ức tâm pháp** (`UPG.kytp`, `G.meta.tpMem`) của game | Kiếp sau mang công pháp / tâm pháp | **Bỏ** khỏi luân hồi; hoàn lại điểm đã tiêu cho bản lưu cũ. Thay bằng Túc Tuệ Đăng và Bất Muội Linh Quang Quyết |
+| Xuất thân "Tiểu đạo đồng" (`skill:1`) | Biết sẵn một pháp thuật | Giữ: đây là thứ học ở kiếp này, không phải ký ức |
+| B §14.8: hai lựa chọn "Uống canh, đi ngay" / "Ngồi đợi bên bến" | Đề xuất | **Bỏ** |
+| B §14.7 Mộng Ấn #1 "Bát canh không đáy" | Cần chọn "ngồi đợi" | Nhặt khi chết lần đầu và nghe hết lời Người Gác Bến ở bến |
+| C: "Di Vật Ký Ức nhận từ Bến Vong Xuyên khi có ký ức kỹ năng được chọn mang theo" (CC-VT23); hồ sơ "Chân linh" có "pháp môn nhớ được" | Mang ký ức tự do | Chỉ có khi kiếp trước dùng Túc Tuệ Đăng hoặc Bất Muội Linh Quang Quyết; mặc định trống |
+| C: TRI01 "xác minh một ký ức của bản thân trùng một dấu đời trước"; KV11 Mộng Tỉnh Sớm "nối một ký ức truyền đời" | Giả định có ký ức | "Ký ức" ở đây hiểu là **mảnh mộng chợt hiện** (cảm giác đã từng, do sự kiện gợi ra: thấy mộ mình, nghe vở tuồng), không phải ký ức giữ lại. Không mâu thuẫn với "quên sạch" |
+| B §5.3 (giấu linh căn A/B/C) | Chờ chọn | Hết cần: không chọn thẻ thì không né được vô căn |
+
+**Mục 7 — Mộng Ấn có phải "giữ ký ức" không?** Không. Mộng Ấn ghi vào **sổ luân hồi của người chơi**, nhân vật kiếp mới không biết gì. Nó chỉ có tác dụng khi nhân vật mới tự gặp lại dấu vết (mộ, tượng, vở tuồng) — lúc đó game cho nhân vật "nhận ra" nhanh hơn. Như vậy vẫn đúng luật quên sạch, mà người chơi vẫn tiến dần tới kết thúc thật.
+
+---
+
+## A.17 Kiểm tra: thời gian luân hồi tới 5.000 năm có làm hỏng cốt truyện không?
+
+Đã soát cả cốt truyện của Claude và của GPT. **Kết luận: không hỏng, nếu thêm 5 luật dưới đây.**
+
+| Phần cốt truyện | Rủi ro khi cách nhau rất lâu | Luật giữ an toàn |
+|---|---|---|
+| 45 tuyến xuất thân của C | Tuyến gắn với nhân vật cố định NP01–NP30; sau 500 năm người đó đã chết | **Luật 1:** mỗi NP là một **vai** có người kế nhiệm (C đã có ý này: "vai trò mẹ nuôi hoặc người giữ ấn có thể…"). Tuyến đọc người đang giữ vai lúc đầu thai; vai mất người kế thì dùng "người hoặc vật chứng thay thế" mà C bắt mọi nút phải có |
+| 15 địa điểm neo của C | Bị phá, đổi chủ nhiều lần | C đã viết sẵn trạng thái khi bị phá cho từng địa điểm (LOC01 thành trại tị nạn rồi di tích…). **Luật 2:** khi tua, địa điểm chỉ đi theo đúng các trạng thái đã viết |
+| 6 đồng hồ của C + 8 đại sự của B | Chu kỳ ngắn hơn khoảng cách (vd thú triều 25 năm, khoảng cách 500 năm) | **Luật 3:** tua theo thập kỷ; những lần xảy ra khi vắng mặt chỉ ghi tóm tắt vào Sử lược với kết quả mặc định; chỉ lần **đang diễn ra** lúc đầu thai mới thành chuyện chơi được |
+| Đêm Dài (CLK06) | Sợ tua lâu thì tự leo tới mức diệt thế | C đã viết: Đêm Dài **chỉ tăng vì hành động** (phá phong ấn, diệt hồn, lạm dụng trục), không tăng vì thời gian hay số kiếp → an toàn. Đất ma của B hồi phục theo thế kỷ → càng lâu càng lành |
+| Nguồn cải căn CC01–CC08 | Nguồn có lịch hồi phục (CC02 120 năm, CC04 30 năm) | Tua lâu thì nguồn hồi đúng lịch; nguồn độc nhất (CC05) đã lấy thì mất mãi. Không lỗi |
+| 9 Đại lộ của B | Đế Nghiệp, Thế Gia dựa vào triều đại / dòng họ | **Luật 4:** kết quả cũ (triều đã lập, dòng họ) ghi vào sử; đại lộ kiếp sau đọc trạng thái hiện tại (triều còn hay đã đổ, dòng họ còn hay đã tuyệt), không giả định nó còn |
+| Nhân quả tuyến xuyên kiếp | Người mang ơn / mang oán đã chết | Theo B §14.8: chuyển sang hậu duệ, hoặc hóa oán hồn với huyết thù, hoặc khép |
+| Mộng Ấn, ba tri thức | Bia, mộ, vở tuồng bị mất sau ngàn năm | **Luật 5:** mỗi tri thức có ít nhất hai nguồn độc lập (luật của C), và ít nhất một nguồn là nơi không thể mất (LOC05, LOC12, LOC15 đều có phần lõi còn lại khi bị phá) → luôn còn đường tới kết thúc thật |
+| Sự kiện "kiếp trước" có sẵn trong game (mộ quen, người cũ báo ân, nợ kiếp trước, tin đồn kiếp trước) | Văn viết như chuyện vừa xảy ra | Viết 2–3 bản lời kể theo khoảng cách; không viết số năm cứng |
+| 3 kiếp đầu | Người mới chưa hiểu vòng nhân quả | Giữ: 3 kiếp đầu chỉ cách 3–30 năm |
+
+Ảnh hưởng mã: như đã ghi ở B §14.8 (mức vừa, chủ yếu là cách tua theo thập kỷ). Không cần sửa nội dung đã viết của C, chỉ cần tuân 5 luật trên khi nhập dữ liệu.
 
 
 

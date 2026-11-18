@@ -39,7 +39,7 @@ Game xét **ý định và điều mình biết lúc chọn**:
 - Cõng bà lão rồi bị bà trộm tiền → mình không có lỗi, lỗi thuộc về kẻ trộm. Mình có thể truy tìm để đòi lại.
 - Giết hổ để cứu bầy hươu → không bị coi là ma đạo.
 
-Làm ác vẫn có lợi ngay: tiền, quyền, sức mạnh. Nhưng nghiệp nặng thì thiên kiếp dữ hơn; **qua được thì nhận thêm chỉ số**. Người nhiều ân nghĩa thì có người mang ơn tới giúp lúc độ kiếp.
+Làm ác vẫn có lợi ngay: tiền, quyền, sức mạnh. Nhưng nghiệp nặng thì thiên kiếp dữ hơn (mạnh hơn tới 60%); **qua được thì nhận thêm chỉ số, tối đa thêm 10%**. Người nhiều ân nghĩa thì có người mang ơn tới giúp lúc độ kiếp.
 
 ---
 
@@ -61,7 +61,7 @@ Làm ác vẫn có lợi ngay: tiền, quyền, sức mạnh. Nhưng nghiệp n�
 - Phải ăn mỗi ngày, cần chỗ ngủ, có gia đình, có thể mắc nợ. Mọi thứ đều có giá cụ thể, như gạo, củi, thuốc, nhà trọ.
 - **Năm loại tiền:**
   1. **Linh thạch** của tu sĩ.
-  2. **Bạc** của phàm nhân, tính bằng đồng và quan (1 quan = 1.000 đồng).
+  2. **Bạc** của phàm nhân, tính bằng đồng và quan (1 quan = 1.000 đồng). **1 linh thạch = 100 lượng bạc**, bằng khoảng 20 năm cơm của một người, nên phàm nhân gần như không bao giờ có linh thạch.
   3. **Cống hiến**: mỗi thế lực một sổ riêng, chỉ tiêu ở đúng thế lực đó.
   4. **Thưởng Lệnh**: làm nhiệm vụ bảng treo thưởng để đổi hàng.
   5. **Điểm luân hồi**.
@@ -117,17 +117,25 @@ Mọi tầng dùng chung **15 địa điểm, 30 nhân vật, 10 thế lực** c
 
 ---
 
-## 9. Bạn còn cần trả lời
+## 9. Đầu thai: ngẫu nhiên và quên sạch
 
-1. **Linh căn trên thẻ đầu thai:**
-   - A (tôi khuyên): giấu đi, vài tháng sau mới biết.
-   - B: hiện rõ, nhưng cả 3 thẻ giống nhau.
-   - C: giữ như cũ.
-2. Thời gian giữa hai kiếp dài nhất 5.000 năm. Được không?
-3. Thêm lựa chọn ở bến Vong Xuyên:
-   - "Đi ngay": đầu thai sớm, nhưng quên công pháp kiếp trước.
-   - "Ngồi đợi": đầu thai bình thường, giữ ký ức như hiện tại.
+- Từ kiếp 2, **không được chọn** nhân vật hay xuất thân; game sinh ngẫu nhiên. Linh căn vẫn giấu tới lúc trắc linh.
+- Khi đầu thai **quên sạch**: không mang công pháp, kỹ năng hay ký ức nào của kiếp trước.
+- Chỉ có ngoại lệ khi kiếp trước có vật phẩm, công pháp hoặc kỹ năng đặc biệt:
+  - Định Mệnh Châu: được chọn 1 trong 3 nhân vật.
+  - Túc Tuệ Đăng: nhớ lại một công pháp hoặc một nghề.
+  - Một số công pháp Phật, Thiên cơ, Hồn tu luyện tới tầng cuối.
+- Những thứ không phải ký ức thì vẫn còn: nghiệp (quyết định mình sinh ra sướng hay khổ), người đời nhớ mình, mộ, đồ đã chôn, dòng họ, thế giới đã đổi.
+- **Kiếp đầu vẫn cho chọn nhân vật** để người mới làm quen (tôi tự quyết; bạn muốn bỏ thì bảo).
+- Phải sửa một ít thứ đang có trong game:
+  - Nâng cấp "Thiên mệnh" đổi thành "vài kiếp được chọn một lần".
+  - Bỏ hai nâng cấp mang công pháp sang kiếp sau, trả lại điểm cho người đang chơi.
+- Thời gian giữa hai kiếp tới 5.000 năm: đã kiểm tra, **không làm hỏng cốt truyện**. Điều kiện:
+  - Nhân vật trong truyện là "vai" có người nối tiếp.
+  - Biến cố xảy ra khi vắng mặt chỉ ghi vào sử.
+  - Mỗi bí mật luôn có ít nhất một nơi không thể mất.
+- Người Gác Bến chính là mảnh ký ức của Yêu Hoàng (bị Ngũ Tổ chém). Ông ta nói thật từng phần nhưng có mục đích riêng: muốn người chơi chặt đứt vòng luân hồi. Đừng tin trọn.
 
-   Có muốn thêm không?
-4. Người Gác Bến chính là phần ký ức mà Yêu Hoàng (một nhân vật cổ trong thế giới của GPT) cất giữ bên ngoài vòng luân hồi. Chốt như vậy không?
-5. Phần thưởng khi vượt thiên kiếp khó: tối đa thêm 40% (tôi đề) hay 20% (GPT đề)?
+## 10. Còn lại
+
+Tất cả câu hỏi trước đã chốt. Chỉ còn một điểm tôi tự quyết, bạn có thể đổi: kiếp đầu vẫn được chọn nhân vật.
