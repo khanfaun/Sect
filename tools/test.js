@@ -643,6 +643,51 @@ const TESTS = {
     const t1=run("W().t");ok(run("vtDo('tap_dich')")&&run("G.run.bac")===330&&run("W().t")-t1===720&&run("G.run.doi")===0, 'tạp dịch ngoại môn ba mươi ngày: một lượng, được ăn ở');
     run("FEAT.an=0");
   },
+  // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
+  tan_thu() {
+    fresh();
+    ok(run("!!G.run.tut&&G.run.kiep===1"), 'kiếp 1 có tân thủ');
+    ok(run("JSON.stringify(G.run.tut.open)")==='["HD01"]', 'mở đầu chỉ HD01');
+    ok(!run("tutClaim('HD01')"), 'chưa xong thì không nhận');
+    run("tutTick('panel:char')");const b0=run("(G.run.qitems||[]).filter(x=>x==='luong_kho').length");
+    ok(!!run("tutClaim('HD01')")&&run("(G.run.qitems||[]).filter(x=>x==='luong_kho').length")===b0+2, 'HD01 nhận hai gói lương khô');
+    ok(run("JSON.stringify(G.run.tut.open)")==='["HD02"]', 'sau HD01 là HD02');
+    run("tutTick('panel:char');tutTick('panel:char')");ok(run("tutDoneN()")===1, 'đếm lặp không nhận thêm');
+    const bac0=run("G.run.bac");run("tutTick('rootinfo');tutClaim('HD02')");ok(run("G.run.bac")===bac0+200, 'HD02 thưởng 200 đồng');
+    const p0=run("G.run.pills.length");run("tutSkip('HD03')");ok(run("G.run.pills.length")===p0&&run("!!G.run.tut.skip.HD03"), 'bỏ qua HD03 không có thưởng');
+    ok(run("G.run.tut.open[0]")==='HD04', 'bỏ xong mở HD04');
+    run("['HD04','HD05','HD06'].forEach(id=>tutSkip(id))");
+    ok(run("G.run.tut.open.length")===3&&run("G.run.tut.open[0]")==='HD07', 'hết nhóm A mở ba cái: '+run("G.run.tut.open.join(',')"));
+    // điểm đếm thật: đi tới nơi khác
+    const nb=run("(()=>{const r=G.run;const n=W().regions[r.region].nodes.find(x=>x.id!==r.at&&x.id!==r.tut.at0);arrive(n.id);return n.id})()");
+    ok(run("!!G.run.tut.ready.HD07"), 'tới nơi khác xong HD07');
+    // mua bán
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);G.run.bac=99999;G.run.st=999;placeAct('taphoa')})()");
+    run("(()=>{const sc=G.run.scene;if(sc&&sc.items){const i=sc.items.findIndex(x=>!x.sold&&x.k==='pill');if(i>=0)buy(i);}})()");
+    ok(run("!!G.run.tut.ready.HD08"), 'mua một món xong HD08 ('+run("G.run.scene&&G.run.scene.type")+')');
+    run("tutClaim('HD07');tutClaim('HD08')");ok(run("G.run.relics.some(x=>x.cid==='non_dauap_suong')"), 'HD07 thưởng nón');
+    ok(run("G.run.tut.open.length")===3, 'vẫn ba cái: '+run("G.run.tut.open.join(',')"));
+    // săn yêu: chỉ tính thắng trận khởi từ săn yêu, một trận đếm một lần
+    run("(()=>{const T=G.run.tut;T.open=['HD11'];})()");
+    run("(()=>{G.run.scene={type:'enc',en:{n:'x',_tutH:1}};startCombat({},{kind:'node'});const sc=G.run.scene;sc.over='win';finishCombat(sc);finishCombat(sc);})()");
+    ok(run("G.run.tut.prog.HD11")===1, 'một trận thắng đếm một lần');
+    run("(()=>{G.run.scene=null;startCombat({},{kind:'node'});const sc=G.run.scene;sc.over='win';finishCombat(sc);G.run.scene=null;})()");
+    ok(run("G.run.tut.prog.HD11")===1, 'trận không phải săn yêu không đếm');
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>placeActs(n).some(a=>a.a==='sanyeu'));G.run.at=n.id;openPlace(n.id);placeAct('sanyeu');})()");
+    ok(run("!!(G.run.scene&&G.run.scene.en&&G.run.scene.en._tutH)"), 'săn yêu đánh dấu trận để đếm');
+    run("G.run.scene=null;G.run.tut.open=['HD13'];(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>placeActs(n).some(a=>a.a==='tinh'));G.run.at=n.id;openPlace(n.id);placeAct('tinh');G.run.scene=null;})()");
+    ok(run("!!G.run.tut.ready.HD13"), 'tĩnh tọa một lượt xong HD13');
+    // nguyện vọng, trạng thái tự tính
+    run("G.run.tut.open=['HD18','HD19']");run("wishSet('du_song')");ok(run("!!G.run.tut.ready.HD18")&&run("G.run.wish")==='du_song', 'chọn nguyện vọng xong HD18');
+    run("G.run.pham=0;tutEval()");ok(run("!!G.run.tut.ready.HD19"), 'không còn phàm nhân: HD19 tự xong');
+    ok(run("tutView().length")===2&&run("tutView()[0].rw.length")>0, 'tutView có phần thưởng');
+    // tốt nghiệp
+    run("TUT.forEach(t=>G.run.tut.done[t.id]=1)");ok(run("calcPts('combat').some(x=>x[1]===TUT_GRAD_PTS&&x[0]===contentText('tut.grad'))"), 'đủ mốc: thêm điểm tốt nghiệp');
+    ok(run("NK.count('tut')")>0, 'nhật ký tut');
+    // kiếp 2 không có
+    run("(()=>{G.meta.nlife=1;genBirth();newRun(G.birth.cards[0]);})()");
+    ok(run("G.run.kiep")===2&&!run("G.run.tut"), 'kiếp 2 không có tân thủ');
+  },
   // Đ3.8 gia đình cơ bản: cha mẹ, anh chị em theo xuất thân; mồ côi thì không; người già có thể mất mỗi năm
   gia_dinh() {
     fresh();

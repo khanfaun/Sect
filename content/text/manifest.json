@@ -45,6 +45,7 @@
     "content/text/runtime-extra.json",
     "content/text/nghiep.json",
     "content/text/linh-can.json",
-    "content/text/tien-te.json"
+    "content/text/tien-te.json",
+    "content/text/tan-thu.json"
   ]
 }
