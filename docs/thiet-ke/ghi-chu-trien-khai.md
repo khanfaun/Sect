@@ -333,3 +333,7 @@ Luật: `src/game/core2/39-tien-te.js` (phần Đ3.6); bảng `AN` ở `content/
 - test-ui `an_hud`: đặt `doi=90` (mốc đói lả mới thay cho 3).
 
 - Chỉnh theo người dùng ("vẫn hơi khó"): mốc đói giãn ra — thiếu ăn (cảnh báo đầu) 30, đói 60, đói lả 150, kiệt sức 300, báo sắp chết 630, chết 660 ngày.
+
+## Sửa-E — câu 16, 17, 18, 19, 20, 23 (đợt 2)
+### E.16 — giá quán không theo nhu cầu
+- Đã kiểm: dịch vụ quán (khách điếm, trà lâu) lấy giá cố định `bac` trong `content/venues/services.json` (39-tien-te.js), không gọi `ncGet`. Giữ nguyên. Bài mới `quan_nc`: ép nhu cầu ×1,4 thì giá quán vẫn y nguyên.

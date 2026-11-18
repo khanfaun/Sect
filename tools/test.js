@@ -709,6 +709,15 @@ const TESTS = {
     ok(n===run('TIEN2.doi.thanh.lenThang[0]')-1, 'giới hạn số lần đổi lên mỗi tháng: '+n);
     run("G.run.st=5;openPlace(G.run.at)");ok(run("venueOpts(nodeById(G.run.at),'doilt').find(o=>o.id==='len:0').no")!=='', 'không đủ thì khóa');
   },
+  // Sửa-E câu 16: nhu cầu KHÔNG áp vào giá quán (trọ, ăn, trà)
+  quan_nc() {
+    fresh("FEAT.nc=1");
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    const vs=run("JSON.stringify(['inn','tea','tavern'].filter(v=>venueOpts(nodeById(G.run.at),v).some(o=>o.bac)))");
+    const giá=()=>run("JSON.stringify(['inn','tea','tavern'].map(v=>venueOpts(nodeById(G.run.at),v).map(o=>o.bac||o.st||0)))");
+    const a=giá();run("_ncG=ncGet;ncGet=()=>1.4");const b=giá();run("ncGet=_ncG");
+    ok(JSON.parse(vs).length>=1&&a===b, 'giá quán không đổi theo nhu cầu ('+vs+')');
+  },
   // Sửa-A (câu 17): nhu cầu theo nơi × vật phẩm
   nhu_cau() {
     fresh("FEAT.nc=1");
