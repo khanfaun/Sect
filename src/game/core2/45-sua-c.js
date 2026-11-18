@@ -54,3 +54,32 @@ function sbLeft(n){const r=G.run;const y=Math.floor(W().t/HY);const c=n.sb&&n.sb
   if(chance(SAN.thao)){run2().mats.thao+=1;ch.push(chip(MAT.thao.i,'+1 '+MAT.thao.n.toLowerCase(),'','up'));}
   ch.push(chip('⏳',SAN.h+' giờ','',''));sc.msg=[pick([contentText('sb.m1'),contentText('sb.m2'),contentText('sb.m3')])];sc.chips=ch;
   if(typeof tutTick==='function')tutTick('sanbat');dbg('sb.do',{n:n.id,left:sbLeft(n),d});};}
+
+// ---------- C.18–19: trắc ra Địa / Thiên linh căn — dị tượng toàn màn, tông môn kinh động ----------
+function tlFxKind(root){return root&&(root.id==='thien'||root.id==='dia')?root.id:null;}
+// tông nơi trắc: đang đứng ở sơn môn; hoặc sơn môn tuyển đồ thì lấy sơn môn gần nhất
+function tlSectIdx(cach){const r=G.run;const w=W();const here=nodeById(r.at);const idx=n=>w.sects.findIndex(s=>s.n===(n.owner||n.name));
+  if(here&&here.type==='tong'&&here.state!=='ruin'){const i=idx(here);if(i>=0)return i;}
+  if(cach!=='tuyendo'||!here)return -1;let best=null,bh=Infinity;
+  for(const n of w.regions.flatMap(R=>R.nodes||[]))if(n.type==='tong'&&n.state!=='ruin'){const h=travelHours([here.id,n.id]);if(h<bh){bh=h;best=n;}}
+  return best?idx(best):-1;}
+function tlPhe(al){return al==='ma'?'ta':(al==='chinh'||al==='phat')?'chinh':'';}
+function tlNpcPhe(n){const w=W();const rv=(w.rivals||[]).find(x=>x.ten===n);if(rv)return rv.tinh==='hiem'?'ta':rv.tinh==='nghia'?'chinh':'';
+  const o=npcs()[favKey(n)];return o&&o.al?tlPhe(o.al):'';}
+// chọn người: ưu tiên cùng phe với tông, trong mỗi nhóm thì ngẫu nhiên
+function tlPickPpl(L,k,phe,pheOf){const a=shuffle(L.slice()),same=a.filter(x=>phe&&pheOf(x)===phe),rest=a.filter(x=>!(phe&&pheOf(x)===phe));return same.concat(rest).slice(0,k);}
+function tlSectFav(i,kind){const w=W();const s=w.sects[i];const T=TL_FX[kind];if(!s||!T)return [];const phe=tlPhe(s.al);const out=[];
+  const E=tlPickPpl(sectElders(i),T.eld,phe,()=>phe);for(const e of E){const key='@'+i+':'+e.t;favAdd(key,T.fe);out.push(e.ten);}
+  const dis=()=>sectDisciples(i).filter(n=>!String(n).startsWith('@'));let D=dis();
+  for(let g=0;D.length<T.de&&g<T.de;g++){const sx=chance(.5)?'nam':'nu';const ten=genName(sx);npcRec(ten,{type:'khach',g:sx,sect:i,al:s.al});D=dis();}
+  for(const n of tlPickPpl(D,T.de,phe,tlNpcPhe)){favAdd(n,T.fd);out.push(n);}
+  sectFavAdd(i,T.sect);dbg('tl.sectFav',{i,kind,n:out.length,phe});return out;}
+{const _tr=tlResult;tlResult=function(cach){const r=G.run;const res=_tr.apply(this,arguments);if(!r||G.run!==r)return res;const k=tlFxKind(r.root);
+  if(k){r.tlFx={k,id:Date.now()+Math.floor(Math.random()*1e3),cach};const si=tlSectIdx(cach);
+    if(si>=0){const ppl=tlSectFav(si,k);r.tlFx.sect=W().sects[si].n;r.tlFx.ppl=ppl;
+      res.ch=(res.ch||[]).concat([chip('🔔',contentText('tlfx.sectChip',[W().sects[si].n]),contentText('tlfx.sectTip',[ppl.join(', ')]),'up')]);}
+    log(contentText('tlfx.log.'+k));if(typeof bio==='function')bio(contentText('tlfx.bio.'+k,[Math.floor(r.age),r.ten]));dbg('tl.fx',{k,cach,sect:si});}
+  return res;};}
+// lời kể dị tượng (giao diện đọc)
+function tlFxLines(fx){const L=[];for(let i=1;i<=12;i++){const key='tlfx.'+fx.k+'.'+i;if(CONTENT_TEXT[key]==null)break;L.push(contentText(key));}
+  if(fx.sect)L.push(contentText('tlfx.'+fx.k+'.tong',[fx.sect]));return L;}

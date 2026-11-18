@@ -366,6 +366,23 @@ const TESTS = {
     ok(await ev(p, () => G.run.wish==='du_song' && !UI.modal), 'chọn nguyện vọng');
         await ev(p, () => {G.run.tut.hide=1;UI.sel=null;UI.tutFlash=null;render();});
   },
+  // Sửa-C.18: trắc ra Thiên linh căn — ẩn mọi thứ, dị tượng toàn màn, sau đó mới hiện kết quả; Sửa-C.11: nút săn bắt ở hoang dã
+  async tlfx(p) {
+    await ev(p, () => {CFG.anim=true;const r=G.run;r.root={id:'thien',els:['hoa'],q:'thuong'};r.rootKnown=0;r.scene=null;UI.modal=null;tlOpen('tl_thach');render();});
+    await p.locator('[data-act="kyPick"][data-arg="0"], .kyngo [data-arg="0"]').first().click();
+    await p.waitForTimeout(400);
+    await p.waitForTimeout(2200);await shot(p,'tlfx');
+    ok(await p.locator('.tlfx.tlfx-thien').count()===1, 'hiện dị tượng Thiên linh căn');
+    ok(await ev(p, () => document.documentElement.dataset.tlfx==='thien'&&getComputedStyle(document.getElementById('hud')).visibility==='hidden'&&getComputedStyle(document.getElementById('sheet')).visibility==='hidden'), 'ẩn thanh trên, hộp thoại kỳ ngộ');
+    ok(await ev(p, () => getComputedStyle(document.getElementById('dock')).visibility==='hidden'), 'ẩn chân trang');
+    ok(/Thiên linh căn/.test(await p.locator('.tlfx').innerText()), 'có lời kể');
+    await p.waitForTimeout(11500);
+    ok(await p.locator('.tlfx').count()===0&&await ev(p, () => !G.run.tlFx&&!document.documentElement.dataset.tlfx), 'hết hiệu ứng thì đóng');
+    ok(await ev(p, () => getComputedStyle(document.getElementById('hud')).visibility!=='hidden'&&G.run.rootKnown===1), 'hiện lại giao diện và kết quả');
+    await ev(p, () => {const r=G.run;r.scene=null;const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&n.state!=='ruin');r.at=n.id;r.region=n.r;arrive(n.id);openPlace(n.id);render();});
+    ok(await p.locator('[data-act="pact"][data-arg="sanbat"]').count()===1, 'hoang dã có nút săn bắt, hái lượm');
+    ok(p.errs.length===0, 'không có lỗi trang: '+p.errs.join(' | '));
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

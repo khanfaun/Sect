@@ -1666,3 +1666,30 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 .wishrow{width:100%;background:none;border:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
 .tut-flash{animation:tutfl .5s ease-in-out infinite alternate;outline:2px solid var(--gold);outline-offset:1px}
 @keyframes tutfl{from{box-shadow:0 0 0 0 color-mix(in srgb,var(--gold) 0%,transparent)}to{box-shadow:0 0 0 5px color-mix(in srgb,var(--gold) 60%,transparent)}}
+/* ===== Sửa-C.18: dị tượng trắc linh — Địa (tím), Thiên (cam vàng, chói hơn nhiều) ===== */
+:root[data-tlfx] #full,:root[data-tlfx] #panel,:root[data-tlfx] #toast,:root[data-tlfx] #tip,:root[data-tlfx] #hnote,:root[data-tlfx] #fx,:root[data-tlfx] .tut-box{visibility:hidden}
+:root[data-tlfx=dia] #app{animation:ascShk .5s ease-in-out 3}
+:root[data-tlfx=thien] #app{animation:ascShk2 .55s ease-in-out 8}
+.tlfx{position:fixed;inset:0;z-index:80;overflow:hidden;display:grid;place-items:center;--c1:#b07cff;--c2:#6a2fd0;--c3:rgba(150,90,255,.55);--gl:#e8d8ff}
+.tlfx-thien{--c1:#ffd76a;--c2:#ff8a1c;--c3:rgba(255,190,60,.75);--gl:#fff6d8}
+.tlfx-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,var(--c3) 0%,rgba(20,8,40,.92) 60%,#05020c 100%);animation:tlbg var(--tlms) ease-out both}
+.tlfx-thien .tlfx-bg{background:radial-gradient(ellipse at 50% 60%,#fffbe8 0%,var(--c1) 25%,var(--c2) 55%,#3a1400 100%)}
+@keyframes tlbg{0%{opacity:0}8%{opacity:1}88%{opacity:1}100%{opacity:0}}
+.tlfx-beam{position:absolute;left:50%;bottom:0;width:120px;height:100%;margin-left:-60px;background:linear-gradient(to top,var(--gl),var(--c1) 40%,transparent);filter:blur(6px);transform-origin:bottom;animation:tlbeam var(--tlms) cubic-bezier(.2,.7,.3,1) both}
+.tlfx-thien .tlfx-beam{width:260px;margin-left:-130px;filter:blur(10px) brightness(1.6);box-shadow:0 0 120px 60px rgba(255,220,120,.8)}
+@keyframes tlbeam{0%{transform:scaleY(0) scaleX(.2);opacity:0}10%{transform:scaleY(1) scaleX(1);opacity:1}80%{opacity:.95}100%{opacity:0;transform:scaleY(1) scaleX(1.6)}}
+.tlfx-rays{position:absolute;left:50%;top:60%;width:0;height:0}
+.tlfx-rays i{position:absolute;left:0;top:0;width:3px;height:120vmax;margin-left:-1.5px;background:linear-gradient(to top,var(--gl),transparent 80%);transform-origin:top;transform:rotate(var(--a));opacity:0;animation:tlray calc(var(--tlms)*.5) ease-out var(--d) infinite}
+.tlfx-thien .tlfx-rays i{width:6px;filter:brightness(1.8)}
+@keyframes tlray{0%{opacity:0}30%{opacity:.9}100%{opacity:0}}
+.tlfx-ring{position:absolute;left:50%;top:60%;width:60px;height:60px;margin:-30px;border-radius:50%;border:3px solid var(--c1);box-shadow:0 0 30px var(--c1);opacity:0;animation:tlring 2.4s ease-out infinite}
+.tlfx-ring.r2{animation-delay:.8s}.tlfx-ring.r3{animation-delay:.4s;border-width:5px}.tlfx-ring.r4{animation-delay:1.2s;border-width:5px}
+.tlfx-thien .tlfx-ring{animation-duration:1.6s;box-shadow:0 0 60px 10px var(--c1)}
+@keyframes tlring{0%{transform:scale(.3);opacity:1}100%{transform:scale(22);opacity:0}}
+.tlfx-in{position:relative;max-width:min(560px,92vw);text-align:center;color:#fff;text-shadow:0 0 12px var(--c2),0 0 2px #000;padding:16px;animation:tlbg var(--tlms) ease-out both}
+.tlfx-in small{letter-spacing:.35em;text-transform:uppercase;color:var(--gl);font-size:.8em}
+.tlfx-in h2{font-size:2.4em;margin:.2em 0 .6em;letter-spacing:.12em;color:var(--gl);animation:tltitle 1.4s ease-out both}
+.tlfx-thien .tlfx-in h2{font-size:clamp(2em,10vw,3em);color:#fff;text-shadow:0 0 18px #fff3c0,0 0 40px #ffb020,0 0 80px #ff7a00}
+.tlfx-thien .tlfx-in{color:#3a1600;text-shadow:0 0 10px #fff6d0,0 0 3px #fff}
+@keyframes tltitle{0%{opacity:0;transform:scale(2.4);filter:blur(8px)}100%{opacity:1;transform:none;filter:none}}
+.tlfx-in p{margin:.45em 0;line-height:1.6;opacity:0;animation:lux .9s ease-out both}

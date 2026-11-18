@@ -6,6 +6,7 @@ import { HopChon } from './HopChon';
 import { BeQuan } from './BeQuan';
 import { LinhNgoGap, LinhNgoThem } from './LinhNgoGap';
 import { KhiVan, ChonTienThien } from './KhiVan';
+import { TracLinh } from './TracLinh';
 import { XemVatPham, XemCongPhap, CacPham, TieuHuyet } from './VatPham';
 import { XacNhanViec, XacNhanNoiChon, LamNhiemVu, HuyNhiemVu } from './XacNhan';
 import { ThuongCac } from './ThuongCac';
@@ -35,6 +36,7 @@ export const HOP_THOAI = {
   bbLearn: LinhNgoGap,
   bbLearn2: LinhNgoThem,
   asc: KhiVan,
+  tlfx: TracLinh,
   kvPick: ChonTienThien,
   item: XemVatPham,
   art: XemCongPhap,

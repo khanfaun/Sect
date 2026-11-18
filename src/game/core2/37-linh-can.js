@@ -9,7 +9,7 @@ function voRate(){const L=(G.meta&&G.meta.lastNq)||{B:0,G:0};let x=VO_BASE+(VO_B
 {const _g0=genRoot;genRoot=function(){if(!feat('vo'))return _g0();const first=((G.meta&&G.meta.nlife)||0)===0;
   if(!first&&chance(voRate()/100)){dbg('vo.root',{vo:1});return {id:'vo',els:[],q:null};}
   const ids=Object.keys(ROOT_W1).filter(k=>ROOT.some(x=>x.id===k));const id=wpick(ids,k=>ROOT_W1[k]);let els;
-  if(id==='bien')els=[pick(['loi','bang','phong'])];else if(id==='cuc')els=NGUHANH.slice();
+  if(id==='bien')els=[pick(['loi','bang','phong'])];else if(id==='cuc')els=NGUHANH.slice();else if(id==='dia')els=pick([['kim','thuy'],['thuy','moc'],['moc','hoa'],['hoa','tho'],['tho','kim']]).slice(); // Địa: một cặp tương sinh
   else els=shuffle(NGUHANH.slice()).slice(0,ROOT.find(x=>x.id===id).k);
   const q=wpick(ROOT_Q,x=>x.w).id;return {id,els,q};};}
 function rootQ(root){return root&&ROOT_Q.find(q=>q.id===root.q)||null;}
@@ -46,7 +46,7 @@ function voKnown(r){r=r||G.run;return isVo(r)&&rootKnown(r);}
 function rootLabel(r,root){r=r||G.run;root=root||(r&&r.root);if(!root)return '';if(r&&!rootKnown(r))return contentText('tl.chua');
   const Q=rootQ(root);const n=rootView(root).n;return Q&&root.id!=='vo'?n+' · '+contentText('tl.pham',[Q.n]):n;}
 function rootElsLabel(r){r=r||G.run;if(!rootKnown(r)||isVo(r))return '';return r.root.els.map(e=>EL[e]?EL[e].n:e).join(', ');}
-function tlCat(root){if(!root||root.id==='vo')return 'vo';return ['song','thien','bien','cuc'].includes(root.id)?'tot':'thuong';}
+function tlCat(root){if(!root||root.id==='vo')return 'vo';return ['song','thien','dia','bien','cuc'].includes(root.id)?'tot':'thuong';}
 function tlResult(cach){const r=G.run;if(!r)return {t:''};const cat=tlCat(r.root);r.rootKnown=1;
   dbg('tl.done',{cach,root:r.root.id});log(contentText('tl.log',[rootLabel(r)]));
   return {t:contentText('event.tl_'+cach+'.'+cat),ch:[chip(cat==='vo'?'🪨':'🌱',rootLabel(r),contentText('tl.chipTip'),cat==='vo'?'dn':'up')]};}

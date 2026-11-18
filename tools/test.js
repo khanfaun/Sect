@@ -562,6 +562,30 @@ const TESTS = {
     ok(run("TUT.filter(t=>t.st).every(t=>t.need===1||t.id==='HD10')"), 'nhiệm vụ trạng thái đều một bước (trừ HD10 hai món)');
     ok(run("TUT.filter(t=>t.need>1&&t.id!=='HD10').every(t=>!t.st)"), 'nhiệm vụ đếm số lần không tự tính');
   },
+  // Sửa-C.18–19: Địa ~1/1000, Thiên ~1/100.000; dị tượng; tông môn kinh động
+  tl_hiem() {
+    fresh();
+    const c=JSON.parse(run("(()=>{G.meta.nlife=0;const c={};for(let i=0;i<200000;i++){const id=genRoot().id;c[id]=(c[id]||0)+1;}return JSON.stringify(c)})()"));
+    ok((c.dia||0)>=120&&(c.dia||0)<=300, 'Địa linh căn ~1/1000: '+(c.dia||0)+'/200000');
+    ok((c.thien||0)<=12, 'Thiên linh căn cực hiếm: '+(c.thien||0)+'/200000');
+    ok(run("(()=>{for(let i=0;i<2000;i++){const x=genRoot();if(x.id==='dia')return x.els.length===2;}return true})()"), 'Địa: hai hệ');
+    // trắc ra Địa ở sơn môn
+    const si=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tong'&&n.state!=='ruin');G.run.at=n.id;return W().sects.findIndex(s=>s.n===(n.owner||n.name))})()");
+    ok(si>=0, 'có sơn môn để thử');
+    run("G.run.root={id:'dia',els:['kim','thuy'],q:'thuong'};G.run.rootKnown=0;G.run.sfav={}");const f0=run(`sectFav(${si})`);
+    const res=JSON.parse(run("JSON.stringify(tlResult('tuyendo'))"));
+    ok(run("G.run.tlFx&&G.run.tlFx.k")==='dia', 'đặt hiệu ứng Địa');
+    ok(run(`sectFav(${si})`)>f0, 'tông kinh động: hảo cảm tông tăng '+f0+' → '+run(`sectFav(${si})`));
+    ok(run("NK.count('tl.sectFav')")===1&&res.ch.some(x=>/kinh động/.test(JSON.stringify(x))), 'chip tông môn kinh động');
+    ok(run("tlFxLines(G.run.tlFx).length")>=5, 'lời kể dị tượng Địa');
+    const dPpl=JSON.parse(run('JSON.stringify(G.run.tlFx.ppl)'));ok(dPpl.length===run('TL_FX.dia.eld+TL_FX.dia.de'), 'một cao tầng + hai đệ tử tăng thiện cảm: '+dPpl.join(', '));
+    run("G.run.tlFx=null;G.run.root={id:'thien',els:['hoa'],q:'thuong'};G.run.rootKnown=0");const f1=run(`sectFav(${si})`);run("tlResult('dusi')");
+    ok(run("G.run.tlFx.k")==='thien'&&run("tlFxLines(G.run.tlFx).length")>run("TL_FX.thien.eld")+4, 'Thiên: lời kể dài hơn');
+    ok(run(`sectFav(${si})`)-f1>run(`(()=>0)()`)&&run("TL_FX.thien.fe")>run("TL_FX.dia.fe"), 'Thiên tăng nhiều hơn Địa');
+    run("G.run.tlFx=null;G.run.root={id:'tam',els:['kim','moc','thuy'],q:'thuong'};G.run.rootKnown=0;tlResult('dusi')");ok(!run("G.run.tlFx"), 'linh căn thường: không có dị tượng');
+    // ưu tiên cùng phe
+    ok(run("(()=>{const L=['a','b','c','d'];const P={a:'ta',b:'chinh',c:'chinh',d:'ta'};const x=tlPickPpl(L,2,'chinh',n=>P[n]);return x.every(n=>P[n]==='chinh')})()"), 'ưu tiên người cùng phe với tông');
+  },
   quen_sach() {
     fresh();
     ok(run("!UPG.find(u=>u.id==='ky'||u.id==='kytp')"), 'không còn nâng cấp Ký ức công pháp / tâm pháp');
