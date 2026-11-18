@@ -971,6 +971,31 @@ const TESTS = {
     run("(()=>{G.run.scene=null;G.run.lamNgay=null;G.run.paths={thuong:{xp:70,bac:1,last:W().t}};G.run.bac=5000;const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='cho'&&n.state!=='ruin')||W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
     ok(run("vtDo('ng:thuong:mua_ban')")&&run("G.run.bac")!==5000&&run("NK.count('nghe.lam')")>0, 'mua rẻ bán đắt: vốn đi rồi về ('+run("G.run.bac")+')');
   },
+  // Đ5.4 năng lực hỗ trợ ST23: gốc 10, phép thử nang.*, rèn qua việc, bản lưu cũ
+  nang() {
+    fresh("G._ngNoEv=1;G.run.pham=1;G.run.paths={}");
+    ok(run("NANG_K.every(k=>G.run.nang[k]===10)")&&run("NANG_K.length")===8, 'kiếp mới: tám năng lực gốc 10');
+    ok(run("CHKN['nang.thuong']")==='Thương lượng', 'tên phép thử nang.thuong');
+    const c0=run("chkChance(['nang.thuong',10])");run("G.run.nang.thuong=30");const c1=run("chkChance(['nang.thuong',10])");
+    ok(c1>c0&&c1<=0.95, 'năng lực cao: dễ qua hơn ('+c0.toFixed(2)+' → '+c1.toFixed(2)+')');
+    run("G.run.realm=3;G.run.pham=0");ok(Math.abs(run("chkChance(['nang.thuong',10])")-c1)<1e-9, 'không phụ thuộc cảnh giới');run("G.run.realm=0;G.run.pham=1");
+    ok(run("EVS.filter(e=>JSON.stringify(e).includes('\"nang.')).length")>=10, 'sự kiện nghề dùng phép thử năng lực');
+    // phép thử trong sự kiện rèn năng lực
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    const ev=run("(()=>{G.run.paths.y={xp:1,bac:0,last:W().t};const e=EVS.find(e=>e.id==='ng_y_thu_thuoc');startEvent(e.id);const L=resolveP(EVMAP[e.id],G.run.scene.cur);return L.findIndex(c=>c.chk&&c.chk[0]==='nang.duoc')})()");
+    ok(ev>=0, 'ng_y_thu_thuoc có lựa chọn nhận dược');
+    const d0=run("G.run.nang.duoc");run(`choose(${ev})`);const d1=run("G.run.nang.duoc");
+    ok(d1===d0+1||d1===d0+0.5, 'qua phép thử: nhận dược '+d0+' → '+d1);
+    ok(run("NK.count('nang.chk')")===1, 'nhật ký nang.chk');
+    // việc nghề
+    run("G.run.scene=null;G.run.lamNgay=null;voOf(G.run).bac=1;G.run.base.ngo=20;(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    const k0=run("G.run.nang.duoc");ok(run("vtDo('ng:y:boc_thuoc')")&&run("G.run.nang.duoc")>k0, 'bốc thuốc rèn nhận dược');
+    run("applyE({nang:{giao:5}})");ok(run("G.run.nang.giao")===15, 'hiệu ứng sự kiện nang:{giao:5}');
+    run("G.run.nang.giao=99.9;nangAdd('giao',5)");ok(run("G.run.nang.giao")===100, 'trần 100');
+    ok(run("nangView().length")===8&&run("nangView()[0].n")==='Giác quan'&&run("nangView()[0].muc")==='Tầm thường'&&!/\\d/.test(run("nangView().map(x=>x.muc).join()")), 'nangView: mức bằng chữ ('+run("nangView()[0].muc")+')');
+    run("delete G.run.nang;run2()");ok(run("NANG_K.every(k=>G.run.nang[k]===10)"), 'bản lưu cũ: tạo gốc 10');
+    run("G.run.nang={giac:'x',tu:150};run2()");ok(run("G.run.nang.giac")===10&&run("G.run.nang.tu")===100, 'giá trị hỏng được sửa');
+  },
   // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
   tan_thu() {
     fresh();

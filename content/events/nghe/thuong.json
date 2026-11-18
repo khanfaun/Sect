@@ -168,7 +168,7 @@
           "l": "Không đưa, đòi lên huyện",
           "i": "⚖️",
           "chk": [
-            "tam",
+            "nang.tu",
             10
           ],
           "ok": {
@@ -465,7 +465,7 @@
           "l": "Nhận chuyến",
           "i": "🧂",
           "chk": [
-            "tp",
+            "nang.canh",
             10
           ],
           "ok": {
@@ -712,7 +712,7 @@
           "l": "Góp vốn",
           "i": "🏦",
           "chk": [
-            "ngo",
+            "nang.thuong",
             12
           ],
           "ok": {

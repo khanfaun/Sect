@@ -33,7 +33,7 @@
           "l": "Gánh nước từ suối lên, suốt đêm",
           "i": "🪣",
           "chk": [
-            "tam",
+            "nang.nhan",
             8
           ],
           "ok": {
@@ -101,7 +101,7 @@
           "l": "Ra bờ mương nói phải trái",
           "i": "🗣️",
           "chk": [
-            "tam",
+            "nang.giao",
             9
           ],
           "ok": {
@@ -246,7 +246,7 @@
           "l": "Xin khất tới mùa sau",
           "i": "🙏",
           "chk": [
-            "tam",
+            "nang.giao",
             10
           ],
           "ok": {
@@ -616,7 +616,7 @@
           "l": "Gieo riêng một góc ruộng",
           "i": "🌱",
           "chk": [
-            "ngo",
+            "nang.khao",
             11
           ],
           "ok": {

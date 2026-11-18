@@ -222,7 +222,7 @@
           "l": "Đi tìm kẻ mạo danh",
           "i": "🔎",
           "chk": [
-            "ngo",
+            "nang.giac",
             9
           ],
           "ok": {
@@ -289,7 +289,7 @@
           "l": "Vận khí uống thử một ngụm",
           "i": "🍶",
           "chk": [
-            "tam",
+            "nang.canh",
             11
           ],
           "ok": {

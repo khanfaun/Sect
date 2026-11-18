@@ -327,6 +327,7 @@ const TESTS = {
     await ev(p, () => {G.run.scene=null;UI.modal=null;UI.panel='char';UI.tab.char='dao';render();});await p.waitForTimeout(150);
     const d = await ev(p, () => (document.querySelector('.daodo')||{}).innerText||'');
     ok(/Nông dân/.test(d) && /Làm thuê/.test(d) && !/\d/.test(d), 'thẻ Đạo đồ: '+d.replace(/\s+/g,' ').slice(0,60));
+    ok(/Năng lực/.test(d) && /Thương lượng/.test(d) && /Nhẫn nại/.test(d), 'Đạo đồ có năng lực hỗ trợ (bằng chữ)');
     await ev(p, () => {UI.panel=null;render();});
   },
   // Đ3.8: bảng Giao tình có mục Người nhà

@@ -237,7 +237,7 @@
           "l": "Mặc cả",
           "i": "🗣️",
           "chk": [
-            "ngo",
+            "nang.thuong",
             9
           ],
           "ok": {
@@ -307,7 +307,7 @@
           "l": "Giữ bình tĩnh, gỡ tay nó ra",
           "i": "🫁",
           "chk": [
-            "tam",
+            "nang.tu",
             10
           ],
           "ok": {
@@ -510,7 +510,7 @@
           "l": "Cạy ra xem",
           "i": "📦",
           "chk": [
-            "ngo",
+            "nang.khao",
             10
           ],
           "ok": {
@@ -626,7 +626,7 @@
           "l": "Chèo lại gần",
           "i": "🌕",
           "chk": [
-            "tam",
+            "nang.tu",
             12
           ],
           "ok": {

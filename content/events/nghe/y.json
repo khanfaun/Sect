@@ -83,7 +83,7 @@
           "l": "Tự uống thử",
           "i": "🧪",
           "chk": [
-            "tam",
+            "nang.duoc",
             9
           ],
           "ok": {
@@ -149,7 +149,7 @@
           "l": "Nói thẳng là bệnh, không phải ma",
           "i": "🗣️",
           "chk": [
-            "ngo",
+            "nang.giao",
             9
           ],
           "ok": {
@@ -579,7 +579,7 @@
           "l": "Tìm vị thuốc phàm thay thế",
           "i": "🌿",
           "chk": [
-            "ngo",
+            "nang.duoc",
             12
           ],
           "ok": {
