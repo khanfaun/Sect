@@ -721,6 +721,23 @@ const TESTS = {
     run("W().t+=HM;openPlace(G.run.at);G.run.lt=[0,5,0]");const n0=run("G.run.relics.length");ok(run("venueDo('amhoi','mua:2')")&&run("G.run.lt[1]")===2&&run("G.run.relics.length")===n0+1, 'tháng sau: 3 Thượng phẩm đổi một pháp bảo');
     run("G.run.pham=1");ok(!run("placeActs(nodeById(G.run.at)).some(a=>a.a==='amhoi')"), 'phàm nhân không vào được');
   },
+  // Sửa-E câu 19: bế quan đói chậm, sau bế quan đói chậm, tĩnh toạ không; Tích Cốc Đan cho Trúc Cơ+
+  tich_coc() {
+    fresh("FEAT.an=1;G.run.pham=0;G.run.realm=1;G.run.doi=0;G.run.anPart=0;G.run.anCov=0;G.run.tichCoc=0;G.run.anCham=0");
+    ok(run("anRate(G.run)")===run("AN.nhip.tc"), 'Trúc Cơ: vẫn đói rất chậm (1/60)');
+    run("G.run._inBq=1");ok(Math.abs(run("anRate(G.run)")-run("AN.nhip.tc*AN.nhip.bq"))<1e-9, 'đang bế quan: ×⅓');run("G.run._inBq=0");
+    run("G.run.anCham=W().t+HD*10");ok(Math.abs(run("anRate(G.run)")-run("AN.nhip.tc*AN.nhip.sauBq"))<1e-9, 'sau bế quan: ×½');run("G.run.anCham=0");
+    ok(!/_inBq|anCham/.test(run("String(typeof tinhToa==='function'?tinhToa:'')")), 'tĩnh toạ không đụng nhịp đói');
+    // mua ở chợ tu sĩ bằng linh thạch
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;n.shop=null;G.run.st=1000;openShop(n);})()");
+    const k=run("G.run.scene.items.findIndex(x=>x.k==='qi'&&x.id==='tich_coc_dan')");ok(k>=0&&run(`G.run.scene.items[${k}].p`)>0&&!run(`G.run.scene.items[${k}].bac`), 'phường thị bán Tích Cốc Đan bằng linh thạch ('+run(`G.run.scene.items[${k}].p`)+')');
+    const p=run(`G.run.scene.items[${k}].p`);run(`buy(${k})`);ok(run("hasItem('tich_coc_dan')")&&run("G.run.st")===1000-p, 'mua được, trừ linh thạch');
+    run("G.run.scene=null;G.run.doi=200");ok(run("bagUse('vtich_coc_dan')")===1&&run("G.run.doi")===0&&run("tcCon()")===run("SUAE.tc.ngay"), 'dùng: hết đói, no '+run("SUAE.tc.ngay")+' ngày');
+    run("advanceTime(HD*400)");ok(run("G.run.doi")===0&&run("anRate(G.run)")===0, '400 ngày sau vẫn no');
+    run("G.run.tichCoc=W().t-1");ok(run("anRate(G.run)")>0, 'hết hạn thì đói lại như thường');
+    run("G.run.realm=0;G.run.qitems=['tich_coc_dan']");ok(run("bagUse('vtich_coc_dan')")===0&&run("hasItem('tich_coc_dan')"), 'Luyện Khí không dùng được');
+    run("delete G.run.tichCoc");ok(run("tcCon()")===0, 'bản lưu cũ (không có tichCoc) chạy được');
+  },
   // Sửa-A (câu 9): bốn phẩm linh thạch, bản lưu cũ
   lt_pham() {
     fresh();

@@ -357,3 +357,9 @@ Luật `48-sua-e.js`; bảng `SUAE.ltRoll`, `SUAE.dg`, `SUAE.am`. Hiệu ứng s
    - đưa 3 Thượng phẩm → 1 pháp bảo cao hơn vùng 2 phẩm; đưa 1 Cực phẩm → 2 viên đan quý (Tẩy tủy / Phá cảnh).
 6. Khung tối thiểu, còn dở: chưa có sự kiện kể riêng cho Ám Hội (chỉ lời vào cửa), chưa nối với sự kiện `quy_thi` (đổi thọ nguyên giữ nguyên); đấu giá chỉ ra Trung khi món đáng ≥ 100 Hạ (đồ vùng thấp thường chỉ ra Hạ).
 7. Bài: `lt_nguon`.
+
+### E.19 — đói khi bế quan, Tích Cốc Đan
+1. Đã kiểm (có sẵn từ "Sửa lỗi đói", 39-tien-te.js): đang bế quan nhịp đói ×⅓; xuất quan ×½ trong 90 ngày (`r.anCham`); tĩnh toạ không giảm. Trúc Cơ+ vẫn đói nhưng rất chậm (1/60 bữa mỗi ngày) — giữ lựa chọn này.
+2. **Tích Cốc Đan** (`tich_coc_dan`, vật dùng trong túi): chỉ Trúc Cơ trở lên dùng được (phàm nhân, Luyện Khí bị từ chối, giữ lại viên đan). Dùng thì hết đói ngay và **no 1.095 ngày (3 năm)**, cộng dồn nếu dùng tiếp (`r.tichCoc` = giờ hết no; bản lưu cũ không có thì coi như 0). Trong thời gian no nhịp đói = 0.
+3. Bày ở nơi bán đồ tu sĩ: chợ phiên tu sĩ, phường thị trong thành, bảo khố tông mình — 2 viên mỗi lần bày, giá `price(8)` linh thạch Hạ phẩm × nhu cầu (vùng 1 ≈ 3 viên). Không bán bằng tiền phàm. Mua vật trong túi bằng linh thạch là đường mới (bọc `buy`).
+4. Bài: `tich_coc`.

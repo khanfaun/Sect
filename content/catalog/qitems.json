@@ -983,5 +983,14 @@
     "use": "Mang theo: người phàm đánh mạnh hơn. Hiệu cầm đồ trả khoảng 9 lượng bạc.",
     "d": "Đao thép bản dày của tiêu cục, chém củi chém người đều bén.",
     "status": "active"
+  },
+  {
+    "id": "tich_coc_dan",
+    "n": "Tích Cốc Đan",
+    "i": "💊",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi (Trúc Cơ trở lên): no bụng ba năm, không cần ăn.",
+    "d": "Viên đan màu vàng đất, ngậm vào thấy vị ngũ cốc. Tu sĩ bế quan lâu ngày đều mang theo.",
+    "status": "active"
   }
 ]

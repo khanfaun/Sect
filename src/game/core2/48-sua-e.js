@@ -68,3 +68,20 @@ function amDo(n,id){const o=amOpts(n).find(x=>x.id===id);if(!o||o.no)return fals
 {const _vo=venueOpts;venueOpts=function(n,v){if(v!=='amhoi')return _vo.apply(this,arguments);return amOpts(n);};}
 {const _vd=venueDo;venueDo=function(v,id){if(v!=='amhoi')return _vd.apply(this,arguments);const sc=G.run&&G.run.scene;if(!sc||sc.type!=='place')return false;
   const n=nodeById(sc.id);if(!amOpen(n))return false;const ch=amDo(n,id);if(!ch)return false;sc.msg=[contentText('am.xong')];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;saveSoon();return true;};}
+
+// ---------- câu 19: Tích Cốc Đan (Trúc Cơ+) — no trong SUAE.tc.ngay ngày ----------
+// bế quan ×⅓, sau bế quan ×½ (39-tien-te.js, đã có); tĩnh toạ không giảm. r.tichCoc = thời điểm hết no (giờ thế giới).
+function tcCon(r){r=r||G.run;return r&&(r.tichCoc||0)>W().t?Math.ceil((r.tichCoc-W().t)/HD):0;}
+{const _ar=anRate;anRate=function(r){if(tcCon(r))return 0;return _ar.apply(this,arguments);};}
+{const _os=openShop;openShop=function(n){const o=_os.apply(this,arguments);const sc=G.run&&G.run.scene;const C=SUAE.tc;
+  if(sc&&sc.type==='shop'&&n&&feat('an')&&C.noi.includes(n.type)&&!sc._tc&&(n.type!=='tong'||(G.run.flags.tongmon&&typeof contentOwnSect==='function'&&contentOwnSect(n)))){sc._tc=1;
+    if(!sc.items.some(x=>x.k==='qi'&&x.id===C.id)){const it={k:'qi',id:C.id,bac:0,p:price(C.st),qty:C.qty,nc:'qi:'+C.id};it.p0=it.p;shopPrice(n.id,it);sc.items.push(it);}}
+  return o;};}
+// mua vật trong túi bằng linh thạch (vật có p, không có bac)
+{const _by=buy;buy=function(i){const r=G.run,sc=r&&r.scene;const it=sc&&sc.items&&sc.items[i];if(!it||it.k!=='qi'||it.bac||!it.p||it.sold)return _by.apply(this,arguments);
+  if((r.st||0)<it.p)return;r.st-=it.p;(r.qitems=r.qitems||[]).push(it.id);if(it.qty!=null){it.qty--;if(it.qty<=0)it.sold=1;}else it.sold=1;
+  log(contentText('tien.muaVat',[CAT.byId[it.id].n]));if(it.nc){const nid=sc.node!=null?sc.node:r.at;ncPush(nid,it.nc,TIEN2.nc.day);shopPrice(nid,it);}dbg('tc.mua',{id:it.id,p:it.p});};}
+{const _bi=bagItems;bagItems=function(){const L=_bi.apply(this,arguments);for(const it of L)if(it.ref&&it.ref.t==='qi'&&it.ref.id===SUAE.tc.id)it.use=1;return L;};}
+{const _bu=bagUse;bagUse=function(key,n){const id=String(key).slice(1);if(key[0]!=='v'||id!==SUAE.tc.id)return _bu.apply(this,arguments);const r=G.run;
+  if(r.pham||(r.realm||0)<1){note(contentText('tc.khong'),'dn');return 0;}const i=(r.qitems||[]).indexOf(id);if(i<0)return 0;r.qitems.splice(i,1);
+  r.tichCoc=Math.max(r.tichCoc||0,W().t)+SUAE.tc.ngay*HD;if(typeof anFed==='function')anFed(r,'tichcoc');r.anPart=0;log(contentText('tc.dung'));dbg('tc.dung',{den:r.tichCoc});return 1;};}
