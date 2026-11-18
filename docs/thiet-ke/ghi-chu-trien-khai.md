@@ -260,3 +260,17 @@ Luật: `src/game/core2/44-no-nha.js`; bảng `NO`, `NHA` ở `content/rules/no-
 - Lời kể riêng (`content/text/sua-c.json`, `tlfx.dia.*` 5 dòng, `tlfx.thien.*` 7 dòng), có thêm dòng tông môn khi trắc ở sơn môn (trưởng lão kinh động; Thiên: chưởng môn phá quan, chuông 36 hồi). Ghi nhật ký + tiểu sử.
 - **Câu 19 — tông kinh động** (`tlSectFav`, bảng `TL_FX`): khi đang đứng ở sơn môn, hoặc trắc qua "Sơn môn tuyển đồ" (lấy sơn môn gần nhất). Địa: 1 cao tầng +15, 2 đệ tử +10, hảo cảm chung tông +5. Thiên: 3 cao tầng +30, 4 đệ tử +20, tông +12. Ưu tiên người cùng phe với tông (tông chính/Phật → đệ tử tính "nghĩa"; tông ma → tính "hiểm"; tông trung lập không ưu tiên), cùng nhóm thì ngẫu nhiên. Tông chưa đủ đệ tử có tên thì sinh thêm đệ tử mới (bản ghi NPC thuộc tông). Thêm chip "… kinh động" (chú thích ghi tên người).
 - Bài kiểm: mới `tl_hiem` (test.js), `tlfx` (test-ui: ẩn giao diện, lời kể, tự đóng, hiện lại; kèm nút săn bắt của C.11).
+
+## Sửa-D — giao diện (câu 16, 20) và bài tien_bac
+
+### D.1 — chú thích lệch ở máy tính (câu 16)
+- **Nguyên nhân**: trên máy tính `#tip` bị phóng bằng CSS `zoom:var(--dz)` (1,05–2,2 theo độ phân giải) nhưng `left/top` vẫn gán theo toạ độ chuột thật; vì `left/top` của phần tử đã phóng bị nhân thêm `dz` nên chú thích lệch `(dz−1)` × toạ độ (càng xa góc trên trái càng lệch; mọi tab dùng chung `tip()` đều bị, tab Căn cơ lộ rõ nhất).
+- **Sửa** (`ui/20-chu-thich.js`): đo kích thước bằng `getBoundingClientRect` (khung nhìn thật), gán `left/top` chia cho hệ số zoom (`tipSet`). Chạm và chuột dùng chung nên cùng được sửa.
+- Bài kiểm test-ui `tooltip_vitri` (1440×900, 1920×1080, 1280×720): chú thích cách con trỏ ≤ 40px, không tràn màn, kiểu chạm cách phần tử < 40px, các tab Túi/Sổ học cũng đạt (trước sửa trượt 5 ý).
+
+### D.2 — chữ nhỏ báo thiện cảm (câu 20)
+- `ui/29-thien-cam-chu-nho.js` (`favPop`): bọc `favAdd` (cửa chung của thiện cảm NPC) + đối thủ (`rv.rel` trong `applyE`, ×10 như `favOf`). Chữ không khung/nền ở góc trái dưới, nằm ngay trên chân trang (tính từ mép trên `#nav`/`#dock` thật), tan sau ~1,95 giây, tối đa 5 dòng xếp chồng. Mũi tên dùng lớp `.chev` có sẵn (xanh `#2f9a4e` tăng, đỏ `#c0392b` giảm).
+- **Ngưỡng** (theo độ lớn thay đổi thật sau khi chặn −100…100): 1–3 điểm = 1 mũi, 4–9 = 2 mũi, từ 10 = 3 mũi. Nhật ký `thiencam.hien`. Bài test-ui `thiencam_chu`.
+
+### D.3 — tien_bac
+- Bài đã ghi mức khởi đầu Sửa-B (nông 225–875 xu, khất cái ≤ 300, thế gia ≥ 5.000) từ đợt Sửa-C; chạy riêng 28 lần đều đạt, không phải sửa thêm.

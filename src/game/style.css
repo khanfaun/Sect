@@ -1693,3 +1693,10 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 .tlfx-thien .tlfx-in{color:#3a1600;text-shadow:0 0 10px #fff6d0,0 0 3px #fff}
 @keyframes tltitle{0%{opacity:0;transform:scale(2.4);filter:blur(8px)}100%{opacity:1;transform:none;filter:none}}
 .tlfx-in p{margin:.45em 0;line-height:1.6;opacity:0;animation:lux .9s ease-out both}
+
+/* chữ nhỏ báo thiện cảm đổi: góc trái dưới, trên chân trang, không khung nền, tan sau chừng 2 giây */
+#favpop{position:fixed;left:12px;bottom:120px;z-index:30;display:flex;flex-direction:column;gap:3px;pointer-events:none}
+#favpop .favrow{display:flex;align-items:center;gap:5px;font-size:.86em;color:var(--ink);text-shadow:0 0 3px var(--paper),0 0 6px var(--paper);animation:favin .2s ease-out;transition:opacity .45s,transform .45s}
+#favpop .favrow b{font-weight:600}#favpop .favrow.out{opacity:0;transform:translateY(-6px)}
+@keyframes favin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+:root[data-asc] #favpop,:root[data-tlfx] #favpop{display:none!important}

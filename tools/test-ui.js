@@ -415,6 +415,22 @@ const TESTS = {
       ok(d >= 0 && d < 40, 'tab ' + tb + ': chú thích sát chỗ rê (' + Math.round(d) + 'px)');
     }
   },
+  // Sửa-D (câu 20): chữ nhỏ báo thiện cảm đổi, góc trái dưới, trên chân trang
+  async thiencam_chu(p) {
+    await ev(p, () => { G.run.scene = null; UI.modal = null; UI.panel = null; render(); NK.clear(); });
+    await p.waitForTimeout(200);
+    await ev(p, () => { favAdd('Lý Mặc', 2); favAdd('Tô Vân', 6); favAdd('Hàn Phong', 15); favAdd('Kẻ Địch', -12); });
+    const a = await ev(p, () => [...document.querySelectorAll('#favpop .favrow')].map(e => ({ t: e.innerText, up: e.classList.contains('up'), n: e.querySelectorAll('svg').length, col: getComputedStyle(e.querySelector('svg')).fill, bg: getComputedStyle(e).backgroundColor, bd: getComputedStyle(e).borderTopWidth })));
+    ok(a.length === 4, 'bốn dòng cùng lúc xếp dòng (' + a.length + ')');
+    ok(a[0].n === 1 && a[1].n === 2 && a[2].n === 3 && a[3].n === 3, 'số mũi tên theo mức: ' + a.map(x => x.n).join(','));
+    ok(a[0].up && !a[3].up && a[0].col === 'rgb(47, 154, 78)' && a[3].col === 'rgb(192, 57, 43)', 'tăng xanh, giảm đỏ: ' + a[0].col + ' / ' + a[3].col);
+    ok(/Lý Mặc/.test(a[0].t) && a.every(x => x.bg === 'rgba(0, 0, 0, 0)' && x.bd === '0px'), 'có tên NPC, không nền không khung');
+    const g = await ev(p, () => { const b = document.getElementById('favpop').getBoundingClientRect(), rs = [...document.querySelectorAll('#favpop .favrow')].map(e => e.getBoundingClientRect()); const nv = document.getElementById('nav').getBoundingClientRect(); return { bottom: b.bottom, navTop: nv.top, left: b.left, ov: rs.some((r, i) => rs.some((s, j) => j > i && r.bottom > s.top + 1)) }; });
+    ok(g.bottom <= g.navTop && g.left < 30 && !g.ov, 'nằm trên chân trang, sát trái, không đè nhau ' + JSON.stringify(g));
+    ok(await ev(p, () => NK.count('thiencam') === 4), 'nhật ký thiencam.hien đủ 4 dòng');
+    await p.waitForTimeout(2300);
+    ok(await ev(p, () => document.querySelectorAll('#favpop .favrow').length === 0), 'biến mất sau chừng 2 giây');
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');
