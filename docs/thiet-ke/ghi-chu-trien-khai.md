@@ -180,3 +180,4 @@ Luật: `src/game/core2/39-tien-te.js` (đơn vị, bỏ đổi tự động, b�
 - Bot chưa biết đổi phẩm linh thạch, cầm đồ (chưa được phép chạy bot); chưa thêm vào `COV_FN`/`MANAGE`.
 - Đấu giá (`di` daugia) và quỷ thị vẫn như cũ (trả linh thạch Hạ phẩm); chưa có nơi nào sinh Trung/Thượng/Cực phẩm ngoài đổi — phần thưởng phẩm cao chờ đợt sau.
 - Ô 🪙 trên các nút quán vẫn chưa hiện nhu cầu (dịch vụ không theo nhu cầu).
+19. Trắc ra Địa/Thiên linh căn ở tông môn/thế lực → tăng thiện cảm (giao tình) của người trong tông với nhân vật chính (Thiên tăng nhiều hơn Địa). Chọn ngẫu nhiên vài người trong cao tầng và vài đệ tử; ưu tiên người cùng phe chính/tà với tông (tông chính đạo → ưu tiên người chính đạo; tông ma đạo → ưu tiên người ma đạo). Làm cùng mục 18.
