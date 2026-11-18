@@ -52,7 +52,9 @@ function ccNext(){const r=G.run;r.cc.s++;r.cc.t0=W().t;r.cc.h=0;r.cc.care=0;r.cc
 // bước tự xong (đã đủ vật tư từ trước)
 function ccAuto(){const r=G.run,st=ccStep(r);if(!st)return;if(st.b==='gain'&&st.vt.every(([v,n])=>ccHave(v)>=n))ccNext();
   else if(st.b==='grow'&&W().t-r.cc.t0>=st.nam*HY&&r.cc.care>=st.nam){note(contentText('cc.growXong'),'up');ccNext();}}
-function ccTime(h,an){if(!(h>0))return;if(an)VT_AN=1;try{advanceTime(h);}finally{VT_AN=0;}}
+// việc dài ngày: nơi bao cơm thì no; không thì tự trả tiền ăn theo ngày (đủ tiền thì ăn ở chỗ làm, thiếu thì như thường — có thể đói)
+function ccAnGia(h){const r=G.run;if(!feat('an')||!(h>=HD)||typeof anCost!=='function')return 0;return Math.round(anCost(r)*h/HD);}
+function ccTime(h,an){if(!(h>0))return;const c=an?0:ccAnGia(h);if(c&&bacCan(c)){bacPay(c,'an.caican');an=1;}if(an)VT_AN=1;try{advanceTime(h);}finally{VT_AN=0;}}
 function ccStart(id){const r=ccSt();if(ccWhyStart(id))return false;r.cc={id,s:0,t0:W().t,pf:{},h:0,care:0};r.ccHeard[id]=1;
   log(contentText('cc.batLog',[CAI_CAN[id].n]));dbg('cc.start',{id});ccAuto();return true;}
 function ccStop(why){const r=G.run;if(!r||!r.cc)return;const id=r.cc.id;r.ccFail[id]=1;r.cc=null;dbg('cc.bo',{id,why:why||''});}
@@ -111,7 +113,7 @@ function ccOpts(n){const r=ccSt();const L=[];if(!r||!n)return L;
       if(st.lua&&!r.cc.lua)L.push({id:'lua',l:st.lua.l,d:contentText('cc.luaD'),h:2,st:0,bac:st.lua.bac,no:bacCan(st.lua.bac)?'':contentText('tien.khongDu')});}
     if(st.b==='tranh'){st.L.forEach((x,i)=>{let no='';if(x.bac&&!bacCan(x.bac))no=contentText('tien.khongDu');if(x.st&&ltGet(0)<x.st)no=contentText('cc.thieuSt');if((r.cc.wait||0)>W().t&&x.p)no=contentText('cc.doiThang');
       L.push({id:'tr:'+i,l:x.l,d:st.t+(x.p?' '+contentText('cc.trRui',[ccOdds(Math.min(0.95,x.p+(x.vo?0.1*voBac(r):0)))]):'')+(x.deed?' '+contentText('cc.leNghiep'):''),h:(x.ngay||0.1)*HD,st:x.st||0,bac:x.bac||0,no});});}
-    if(st.b==='serve'){const tot=ccServeH(st);L.push({id:'sv',l:contentText('cc.sv',[st.l]),d:contentText('cc.svD',[durH(Math.max(0,tot-r.cc.h))])+(st.an?' '+contentText('cc.svAn'):''),h:Math.min(st.chunk*HD,Math.max(1,tot-r.cc.h)),st:0});
+    if(st.b==='serve'){const tot=ccServeH(st);L.push({id:'sv',l:contentText('cc.sv',[st.l]),d:contentText('cc.svD',[durH(Math.max(0,tot-r.cc.h))])+(st.an?' '+contentText('cc.svAn'):ccAnGia(st.chunk*HD)?' '+contentText('cc.tuAn',[fmtBac(ccAnGia(st.chunk*HD))]):''),h:Math.min(st.chunk*HD,Math.max(1,tot-r.cc.h)),st:0});
       if(st.alt&&!r.cc.alt)L.push({id:'svAlt',l:st.alt.l,d:contentText('cc.svAltD'),h:1,st:0,bac:st.alt.bac,no:bacCan(st.alt.bac)?'':contentText('tien.khongDu')});}
     if(st.b==='grow'){const need=ccGrowNeed(st);if(r.cc.care<need)L.push({id:'cham',l:st.l,d:contentText('cc.growD',[st.nam,r.cc.care]),h:st.ngay*HD,st:0});}
     if(st.b==='rite'){let no='';if(st.vt&&!st.vt.every(([v,k])=>ccHave(v)>=k))no=contentText('cc.leThieu');

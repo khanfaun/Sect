@@ -331,6 +331,22 @@ const TESTS = {
     ok(/Năng lực/.test(d) && /Thương lượng/.test(d) && /Nhẫn nại/.test(d), 'Đạo đồ có năng lực hỗ trợ (bằng chữ)');
     await ev(p, () => {UI.panel=null;render();});
   },
+  // Đ6: nút Cơ duyên ở nơi neo, hộp lựa chọn, thẻ Cơ duyên trong Sổ tay (chữ, không số)
+  async cai_can(p) {
+    await ev(p, () => {const r=G.run;r.pham=1;r.root={id:'vo',els:[],q:null};r.rootKnown=1;r.bac=50000;r.scene=null;UI.modal=null;UI.panel=null;
+      const id=ccSrc('CC01').node;r.at=id;openPlace(id);render();});
+    await p.waitForTimeout(150);
+    const t = await ev(p, () => document.body.innerText);
+    ok(/Cơ duyên/.test(t), 'thẻ địa điểm có nút Cơ duyên');
+    await ev(p, () => {ACT.pact('coduyen');render();});await p.waitForTimeout(100);
+    ok(/Hỏi chuyện lạ/.test(await ev(p, () => (document.querySelector('.venue')||{}).innerText||'')), 'hộp Cơ duyên: hỏi chuyện lạ');
+    await ev(p, () => {ACT.vgo('coduyen:hoi');render();});await p.waitForTimeout(100);
+    ok(await ev(p, () => !!G.run.ccHeard.CC01), 'hỏi xong: nghe dấu vết Tái Mạch Đan');
+    await ev(p, () => {ccStart('CC01');G.run.scene=null;UI.modal=null;UI.panel='journal';UI.tab.journal='cc';render();});await p.waitForTimeout(150);
+    const d = await ev(p, () => (document.querySelector('.cc-so')||{}).innerText||'');
+    ok(/Tái Mạch Đan/.test(d) && /Kiểm chứng/.test(d) && !/\d/.test(d), 'Sổ tay thẻ Cơ duyên: '+d.replace(/\s+/g,' ').slice(0,70));
+    await ev(p, () => {UI.panel=null;G.run.cc=null;render();});
+  },
   // Đ3.8: bảng Giao tình có mục Người nhà
   async gia_dinh(p) {
     await ev(p, () => {G.run.family=[{ten:'Lâm Đại Hữu',qh:'cha',tuoi:48,suc:'khoe',thai:'thuong',song:1,lc:0}];UI.modal=null;G.run.scene=null;UI.panel='bonds';UI.tab.bonds='an';render();});

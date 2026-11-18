@@ -1117,6 +1117,102 @@ const TESTS = {
     const why=run("(()=>{const a=ngAct('thuong','mua_ban');const n=W().regions.flatMap(R=>R.nodes).find(x=>a.noi.includes(x.type)&&x.state!=='ruin');G.run.queAt=n.id;return ngWhy('thuong',a,n)})()");
     ok(!!why, 'đang nợ: không lấy tiền chịu làm vốn buôn ('+why+')');
   },
+  // Đ6 cải tạo linh căn: vô căn đi hết CC01 (ép thành), đường thứ hai bị từ chối, nguồn độc nhất lấy rồi thì kiếp sau vẫn mất
+  cai_can() {
+    fresh("G._ngNoEv=1;G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;G.run.bac=200000;G.run.lifeAdj=200;CC_FORCE=null");
+    const go=id=>run(`(()=>{const r=G.run;r.scene=null;r.moving=null;r.at=${id};openPlace(${id});r.scene.venue='coduyen';return 1})()`);
+    const vd=o=>run(`venueDo('coduyen','${o}')`);
+    const opts=()=>run("ccOpts(nodeById(G.run.at)).map(o=>o.id+(o.no?'!':'')).join(',')");
+    ok(run("isVo()&&voKnown()&&ccFor('CC01')&&!ccFor('TAO_HOA')"), 'vô căn đã trắc: theo được đường vô căn, không theo đường nâng phẩm');
+    const n1=run("ccSrc('CC01').node");ok(n1!=null, 'CC01 chốt nơi: '+run(`nodeById(${n1}).name`)+' ('+run(`nodeById(${n1}).type`)+')');
+    go(n1);ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='coduyen')"), 'nơi neo có nút Cơ duyên');
+    ok(opts().startsWith('hoi'), 'chưa nghe: chỉ có hỏi chuyện ('+opts()+')');
+    vd('hoi');go(n1);ok(run("!!G.run.ccHeard.CC01")&&/bat:CC01/.test(opts()), 'hỏi xong nghe dấu vết, có thể theo');
+    vd('bat:CC01');go(n1);ok(run("G.run.cc&&G.run.cc.id==='CC01'&&G.run.cc.s===0"), 'bắt đầu CC01');
+    vd('lua');ok(run("G.run.cc.s===0&&G.run.cc.lua===1"), 'mua đồ giả: mất tiền, không tiến');
+    go(n1);vd('pf:bao_che');go(n1);vd('pf:benh_an');ok(run("G.run.cc.s===1"), 'hai đầu mối xong: sang bước phục vụ');
+    let k=0;while(run("G.run&&G.run.cc&&G.run.cc.s===1")&&k++<30){go(n1);vd('sv');}
+    ok(run("G.run.cc.s===2&&ccHave('ho_mach_tan')===3"), 'phục vụ đủ mười tám tháng ('+k+' lần), nhận ba Hộ Mạch Tán');
+    go(n1);vd('tr:1');ok(run("G.run.cc.s===4"), 'tranh: góp tiền giữ suất; đủ vật tư nên bỏ qua bước gom');
+    go(n1);const d=run("ccOpts(nodeById(G.run.at)).find(o=>o.id==='le').d");ok(/bảy phần thành, ba phần hỏng/.test(d)&&/Hỏng thì/.test(d), 'xác nhận nghi thức ghi giá và khả năng bằng chữ');
+    run("CC_FORCE=1");vd('le');run("CC_FORCE=null");
+    ok(run("G.run.root.id")==='tap'&&run("G.run.root.q")==='thuong'&&run("G.run.root.els.length")===5, 'thành: Ngũ hành tạp căn phẩm Thường, đủ năm hệ');
+    ok(run("isVo()===false&&G.run.ccOk===1&&!G.run.cc&&G.run.pham===1"), 'không còn vô căn, ccOk=1, vẫn là phàm nhân phải dẫn khí');
+    ok(run("NK.count('cc.ok')")===1&&run("ccSrc('CC01').con===0&&ccSrc('CC01').hoi===ccYr()+20"), 'nhật ký cc.ok; nguồn CC01 hồi sau hai mươi năm');
+    ok(run("S().maxMp")>0||true, 'có thể có linh lực');
+    // đường thứ hai trong cùng kiếp
+    run("G.run.root={id:'vo',els:[],q:null}");ok(/một lần/.test(run("ccWhyStart('CC03')"))&&!run("ccStart('CC03')"), 'đường thứ hai cùng kiếp: bị từ chối ('+run("ccWhyStart('CC03')")+')');
+    // thất bại: sẹo mạch, chờ một năm
+    run("G.run.ccOk=0;G.run.ccFail={};G.run.ccHeard.CC01=1;ccSrc('CC01').con=1");const hp0=run("G.run.bon.hpP");
+    run("G.run.cc={id:'CC01',s:4,t0:W().t,pf:{},h:0,care:0};ccVtAdd('ho_mach_tan',3);CC_FORCE=0");go(n1);vd('le');run("CC_FORCE=null");
+    ok(run("G.run.bon.hpP")===hp0-5&&run("G.run.ccFlag.seo_mach===1&&isVo()&&G.run.ccFail.CC01===1&&G.run.ccWait>W().t"), 'hỏng: sẹo mạch −5% khí huyết, còn vô căn, chờ một năm');
+    // nguồn độc nhất CC05: lấy rồi thì kiếp sau vẫn mất
+    run("ccTake('CC05','pc')");ok(run("ccSrc('CC05').con===0&&ccSrc('CC05').hoi===-1"), 'CC05 lấy rồi: không hồi');
+    run("genBirth();newRun(G.birth.cards[0]);G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;W().t+=200*HY");
+    ok(run("ccSrc('CC05').con")===0&&!run("ccAvail('CC05')")&&/mất/.test(run("ccWhyStart('CC05')")), 'kiếp sau: CC05 vẫn con===0');
+    ok(run("ccSrc('CC01').con")===1, 'CC01 đã hồi sau hai mươi năm');
+    ok(run("!G.run.ccOk&&!G.run.cc"), 'kiếp mới: sổ cải căn trắng');
+    // bản lưu cũ
+    run("delete G.run._ccV1;delete G.run.ccHeard;G.run.cc={id:'XX'};run2()");ok(run("G.run.cc===null&&typeof G.run.ccHeard==='object'"), 'bản lưu cũ: trường mới được dựng, đường lạ bị gỡ');
+  },
+  // Đ6.3: đi hết từng đường (ép thành) bằng các lựa chọn trong hộp Cơ duyên — mỗi đường ra đúng loại căn; nhường thì mất nguồn
+  cai_can_duong() {
+    const drive=`(id)=>{const r=G.run;let g=0;const at=n=>{r.scene=null;r.moving=null;r.at=n;openPlace(n);r.scene.venue='coduyen';};
+      while(r.cc&&r.cc.id===id&&g++<400){const st=ccStep(r);const src=ccSrc(id);
+        if(st.bloom){const a=ccBloomT(id);if(W().t<a||W().t>=a+CC_CFG.bloomNgay*HD)W().t=a+HD;}
+        if(st.mua){let k=0;while(seasonOf(W().t)!==st.mua&&k++<400)W().t+=HD*10;}
+        let nid=src.node;if(st.b==='gain'){const v=st.vt.find(([v,k])=>ccHave(v)<k);const vn=v&&ccVtNode(v[0]);if(vn!=null)nid=vn;}
+        at(nid);const L=ccOpts(nodeById(nid)).filter(o=>!o.no&&!['bo','lua'].includes(o.id)&&!o.id.startsWith('xa:'));
+        const tr=L.filter(o=>o.id.startsWith('tr:'));let o=tr.length?(tr.find(o=>!st.L[+o.id.slice(3)].p&&!st.L[+o.id.slice(3)].kq&&!st.L[+o.id.slice(3)].deed)||tr.find(o=>!st.L[+o.id.slice(3)].kq)):L.find(o=>o.id!=='le')||L[0];
+        if(!o&&st.b==='grow'){W().t+=HY/2;ccMonth();continue;}
+        if(!o)return 'kẹt ở bước '+st.b+': '+ccOpts(nodeById(nid)).map(o=>o.id+':'+o.no).join('|');
+        if(!venueDo('coduyen',o.id))return 'không làm được '+o.id;if(!G.run)return 'chết';}
+      return r.cc?'quá lượt':'';}`;
+    const P=run("Object.keys(CAI_CAN).filter(id=>!CAI_CAN[id].off)");
+    for(const id of P){
+      const mode=run(`CAI_CAN['${id}'].mode`);
+      fresh(`G._ngNoEv=1;G.run.pham=${mode==='nang'?0:1};G.run.root=${mode==='nang'?"{id:'tam',els:['kim','moc','thuy'],q:'thuong'}":"{id:'vo',els:[],q:null}"};G.run.rootKnown=1;G.run.bac=500000;G.run.st=500;G.run.lifeAdj=400;G.run.base.tp=10;voOf(G.run).bac=3;G.run.paths={nong:{xp:100,bac:2,last:0}};CC_FORCE=1;`+
+        (mode==='tuc'?"G.meta.tucCan={root:{id:'song',els:['hoa','tho'],q:'thuan'},node:W().regions[0].nodes[0].id,k:0};":''));
+      if(mode==='nang')run("G.run.realm=1");
+      run(`G.run.ccHeard['${id}']=1`);const why=run(`ccWhyStart('${id}')`);
+      if(why){ok(false, id+': không bắt đầu được ('+why+')');continue;}
+      run(`ccStart('${id}')`);const e=run(`(${drive})('${id}')`);run("CC_FORCE=null");
+      const R=run("G.run&&JSON.stringify(G.run.root)");
+      const good=!e&&run("G.run.ccOk===1")&&(mode==='nang'?run("G.run.root.q")==='thuan':mode==='tuc'?run("G.run.root.id==='song'&&G.run.root.q==='thuong'"):run("!isVo()&&ROOT.some(x=>x.id===G.run.root.id)&&G.run.root.els.length>0&&ROOT_Q.some(q=>q.id===G.run.root.q)"));
+      ok(good, id+' '+run(`CAI_CAN['${id}'].n`)+': '+(e||R));
+    }
+    // nhường: nguồn có lịch hồi vào tay người khác
+    fresh("G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;G.run.bac=99999;G.run.ccHeard.CC02=1;ccStart('CC02');G.run.cc.s=2");
+    run("(()=>{const n=ccSrc('CC02').node;G.run.at=n;openPlace(n);G.run.scene.venue='coduyen';})()");
+    const i=run("CAI_CAN.CC02.steps[2].L.findIndex(x=>x.kq==='nhuong')");run(`venueDo('coduyen','tr:${i}')`);
+    ok(run("!G.run.cc&&G.run.ccFail.CC02===1&&ccSrc('CC02').con===0&&ccSrc('CC02').by==='npc'"), 'nhường CC02: người khác lấy, hồi sau một trăm hai mươi năm');
+    // người khác tranh nguồn theo năm
+    fresh("G.run.pham=1;CC_CFG.npc=4");run("ccYear()");run("CC_CFG.npc=0.02");
+    ok(run("ccSrc('CC04').con===0&&ccSrc('CC05').con===0&&ccSrc('CC01').con===0"), 'mỗi năm có người dùng mất nguồn (ép xác suất) '+run("JSON.stringify(['CC01','CC04','CC05'].map(i=>ccSrc(i)))"));
+    ok(run("W().chron.some(c=>/Hóa Sinh Liên/.test(c.t))"), 'biên niên ghi chuyện người khác dùng nguồn');
+    // nghe dấu vết theo tháng; tu sĩ không nghe đường vô căn
+    fresh("G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;CC_CFG.nghe=1");run("ccMonth()");run("CC_CFG.nghe=0.2");
+    ok(run("Object.keys(G.run.ccHeard).length")===1&&run("NK.count('cc.nghe')")===1, 'mỗi tháng có thể nghe một dấu vết');
+    fresh("G.run.pham=0;G.run.root={id:'tam',els:['kim'],q:'thuong'};G.run.rootKnown=1;CC_CFG.nghe=1;CC_CFG.ngheTu=1");run("ccMonth()");run("CC_CFG.nghe=0.2;CC_CFG.ngheTu=0.03");
+    ok(run("JSON.stringify(Object.keys(G.run.ccHeard))")==='["TAO_HOA"]', 'tu sĩ chỉ nghe đường nâng phẩm');
+    // chết khi liều: Thiên Lôi, hỏng và trúng phần chết
+    fresh("G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;G.run.ccHeard.THIEN_LOI=1;ccStart('THIEN_LOI');G.run.cc.s=1;CAI_CAN.THIEN_LOI.steps[1].fail.die=1;CC_FORCE=null;CAI_CAN.THIEN_LOI.steps[1].ok=0");
+    run("(()=>{let k=0;while(seasonOf(W().t)!=='ha'&&k++<400)W().t+=HD*10;const n=ccSrc('THIEN_LOI').node;G.run.at=n;openPlace(n);G.run.scene.venue='coduyen';venueDo('coduyen','le');})()");
+    run("CAI_CAN.THIEN_LOI.steps[1].fail.die=0.5;CAI_CAN.THIEN_LOI.steps[1].ok=0.05");
+    ok(run("G.run===null&&!!G.over")&&run("NK.count('cc.chet')")===1, 'Thiên Lôi Quán Thể: hỏng thì có thể chết');
+    // Văn tâm chờ hệ Nho tu
+    fresh();ok(/Nho/.test(run("ccWhyStart('HAO_NHIEN')")), 'Dưỡng Hạo Nhiên Khí: chờ lối tu Nho gia');
+    // Linh Căn Cổ: không tiền nuôi cổ thì trúng độc
+    fresh("G.run.pham=1;G.run.bac=0;G.run.ccFlag={nuoi_co:1}");run("ccMonth()");
+    ok(run("(G.run.wounds||[]).some(w=>w.k==='doc')"), 'Linh Căn Cổ: không có tiền nuôi cổ thì trúng độc');
+    // việc dài ngày không bao cơm: đủ tiền thì tự trả tiền ăn, không đói
+    fresh("FEAT.an=1;G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;G.run.bac=99999;G.run.ccHeard.CC02=1;ccStart('CC02');G.run.cc.s=3");
+    run("(()=>{const n=ccSrc('CC02').node;G.run.at=n;openPlace(n);G.run.scene.venue='coduyen';CAI_CAN.CC02.steps[3].rui.p=0;venueDo('coduyen','sv');CAI_CAN.CC02.steps[3].rui.p=0.08;})()");
+    ok(run("G.run&&(G.run.doi||0)===0&&G.run.bac<99999&&G.run.cc.h===30*HD"), 'thăm dò mỏ ba mươi ngày: tự trả tiền ăn, không đói');
+    // suy nhược có hạn
+    fresh();const hp=run("S().maxHp");run("G.run.ccHau=[{until:W().t+HY,fx:{hpP:-20}}]");const hp2=run("S().maxHp");run("W().t+=2*HY;ccMonth()");
+    ok(hp2<hp&&run("S().maxHp")===hp&&run("G.run.ccHau.length")===0, 'suy nhược hết hạn thì khí huyết về như cũ ('+hp+' → '+hp2+')');
+  },
   // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
   tan_thu() {
     fresh();

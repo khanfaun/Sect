@@ -124,8 +124,8 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
-- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5); các đợt sửa theo 15 câu người dùng chốt: Sửa-A, Sửa-B, Sửa-C, Sửa-D.
-- Còn: Đ6 trở đi.
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-E.
+- Còn: Đ7 trở đi.
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
 ## NGƯỜI DÙNG CHỐT 15 CÂU (việc phải làm lại/bổ sung trước khi làm Đ5.4)
@@ -376,3 +376,51 @@ Luật `48-sua-e.js`; bảng `SUAE.ltRoll`, `SUAE.dg`, `SUAE.am`. Hiệu ứng s
 - `npm run test:rules`: tất cả đạt (604 dòng ✓, sau E.23); `npm run build` rồi `node tools/test-ui.js`: tất cả đạt (150 dòng ✓). Bài mới: `quan_nc cam_e lt_nguon tich_coc vay_tt mac_ca` (đã thêm vào `test:rules`).
 - Giữ nguyên theo câu 21, 22, 24: Địa linh căn 2 hệ ×1,5; nhiệm vụ "có công pháp" tự xong; năng lực hiện bằng chữ.
 - Còn dở: bot chưa biết cầm đồ mới, Ám Hội, Tích Cốc Đan, trả trước (không được chạy bot); Ám Hội chưa có sự kiện kể riêng.
+
+## Đ6 — cải tạo linh căn (HN A.3, C §5.3)
+Luật: `src/game/core2/49-cai-can.js` (số 41 đã dùng cho võ đạo nên lấy số tiếp theo); bảng `CAI_CAN`, `CC_VT`, `CC_CFG` ở `content/rules/cai-can.js`; chữ `content/text/cai-can.json`; Sổ tay thẻ "Cơ duyên" ở `src/react/bang/SoTay.jsx`.
+
+### Bộ máy (Đ6.1)
+- Mỗi đường là chuỗi bước: `proof` (kiểm chứng đủ các đầu mối; có lựa chọn "mua của kẻ bán ngoài chợ" là đồ giả: mất tiền, không tiến) · `tranh` (người tranh giành: thương lượng/trả tiền/liều/cưỡng đoạt có nghiệp, hoặc nhường) · `gain` (gom vật tư: mua, làm công đổi, hoặc tự chế theo công thức phụ) · `serve` (phục vụ/khổ luyện từng tháng; có thể bao cơm, có rủi ro, có thể trả tiền thay) · `grow` (vườn CC03: năm năm, mỗi năm phải về chăm một lần) · `rite` (nghi thức).
+- Mọi việc làm ở hộp **Cơ duyên** (venue `coduyen`, nhóm "Việc khác") tại nơi neo. Nơi neo chốt **một lần cho cả thế giới** (`W().ccSrc[id].node`): nút có `anchor===LOC..` nếu Đ8 đã gắn; chưa có thì chọn ngẫu nhiên theo loại nút ưu tiên (và tên nút, vd chùa có chữ "Tự") — không dùng "nút gần nhất" vì nó đổi theo chỗ người chơi đứng. Vật tư ở nơi khác (Mảnh Sao Hạ ở LOC04, Mảnh Sao Thượng ở LOC15) có nút riêng `W().ccVtN`.
+- `r.cc={id,s,t0,pf,h,care,lua,wait,alt}`; mỗi lúc một đường; `r.ccOk=1` sau một lần thành (cả đường nâng phẩm cũng tính); `r.ccFail[id]` đường đã hỏng/bỏ/nhường trong kiếp; hỏng xong chờ `CC_CFG.cho`=1 năm mới bắt đầu đường khác.
+- Nguồn thế giới `W().ccSrc[id]={con,hoi,node,el,bloomY,by}`: lấy xong (người chơi, nhường, hay người khác) `con=0`, `hoi`=năm hồi hoặc −1 (độc nhất). Mỗi năm mỗi nguồn còn có 2% bị người khác dùng mất (nguồn độc nhất 0,5%), ghi vào biên niên. Thế giới sống qua các kiếp nên chết đi không làm nguồn sinh lại. CC06 chốt hệ của linh thú, CC08 chốt loại sao (Băng/Phong/Lôi) lúc tạo nguồn.
+- Nghe dấu vết: mỗi tháng người vô căn **đã trắc** 20% nghe một đường (tu sĩ 3% nghe đường nâng phẩm), hoặc tự tới nơi "Hỏi chuyện lạ quanh đây" (2 giờ). Túc căn: có vật bản mệnh thì nghe ngay (giấc mơ).
+- Trước nghi thức, hộp xác nhận ghi bằng chữ: được gì, khả năng ("bảy phần thành, ba phần hỏng" — làm tròn xuống), cái giá (thọ, suy nhược, nghiệp), hỏng thì sao, vật liệu chính mất; thọ còn lại không đủ thì **cảnh báo, không chặn** (HN C: không tự từ chối quyền mạo hiểm đã giải thích). Được bỏ đường bất cứ lúc nào trước nghi thức.
+- Thành: `r.root={id,els,q}`, `rootKnown=1`, `r.pham` giữ nguyên (vẫn phải dẫn khí), `dbg('cc.ok')`. Hỏng: hậu quả theo bảng (`bon.hpP` vĩnh viễn, `r.ccHau` suy nhược có hạn cộng vào `aggFx`, mất thọ qua `lifeAdj`, thương thế, chết `die('caican')`, mất một bậc nghề/võ).
+- Sổ tay thẻ "Cơ duyên" chỉ hiện khi đã nghe dấu vết: đường đang theo, bước, lời gợi ý (chữ; chỉ thời gian còn lại là số), vật tư đang có, các dấu vết đã nghe. Bot: `ccStart/ccDo/ccRite` vào `COV_FN`, thêm `MANAGE.caican` (chưa chạy bot).
+
+### Quyết định tự chọn
+1. **Giá chia ba** so với giá "đồng" của HN, giống thu nhập nghề (nghe.js ghi "đã chia ba"): Hộ Mạch Tán 400 xu, Mạch Thảo 100, Cam Thạch Phấn 70, năm vật dưỡng mạch 700 (hoặc 30 ngày làm công), Bộ Chống Sập 4.000, đội thợ 20.000 (hoặc 120 ngày làm công rủ cộng sự), Hộ Tâm Cao 700, Bộ Cách Nhiệt 2.000, giữ lửa 1.700 (hoặc 60 ngày làm lò), khế 7.000, bộ cấy 10.000 + thầy 13.000, mảnh sao trung 5.000 (hoặc 60 ngày chép sổ), vận hành trận 17.000. Bếp thuốc 33 xu/ngày. Tạo Hóa Thần Dịch 20 linh thạch Hạ phẩm (đường của tu sĩ).
+2. **Hai đường người lao động**: CC01 (18 tháng cứu dịch, bao cơm, viện cấp ba Hộ Mạch Tán khi xong — người không tiền vẫn đi được); CC03 (120 ngày sửa kênh đổi quyền dùng vườn, năm vật dưỡng mạch mua hoặc làm công, nuôi năm năm phải về chăm mỗi năm). Không đòi đánh thắng tu sĩ.
+3. "Thể lực 40/100" của HN đổi thành thể phách ≥ 4 (gốc là 5) và không trọng thương; "luyện thể bền bỉ" (CC04) = võ học bậc 1; Tẩy Tủy cũng cần võ học bậc 1.
+4. Kết quả theo bảng linh căn A.2: LC01=tap, LC04=song, LC05=thien (một hệ), LC06=bien. CC07 (vay căn) không có người cho cụ thể nên rút ngẫu nhiên tạp/tứ/tam/song phẩm Thường.
+5. CC08 "di vật ký ức" chưa có (Bến Vong Xuyên chưa có ký ức kỹ năng): đổi thành điều kiện **có một nghề hoặc võ học từ bậc một**; hỏng thì mất một bậc nghề cao nhất (không có thì một bậc võ).
+6. **Dưỡng Hạo Nhiên Khí (Văn tâm)** có trong bảng nhưng `off:'nho'` — chờ hệ Nho tu (Đ7). Không thêm loại căn "Văn tâm" vào `ROOT` lúc này.
+7. **Túc căn kiếp trước**: người có căn đã trắc được "Chôn một vật bản mệnh" ở quê (300 xu, một ngày) → `G.meta.tucCan`; kiếp sau nếu vô căn thì nghe ngay, đào đúng chỗ, 90% nhận lại căn cũ hạ một bậc phẩm. Dùng (thành hay hỏng) thì mất.
+8. Huyết Tế, Làm dược nhân, Thiên Lôi: có phần chết. Huyết tế ghi nghiệp `huyet_te_nguoi`; CC07 nhánh giết người `doat_can`, nhánh mua không hỏi `ban_nguoi`, nhánh chăm người hiến `cuu_nguoi`; CC04 chiếm hồ, CC05 cướp bản đồ `hiep_dao`; CC06 ép thú `tra_tan`, chăm thú `phong_sinh`; CC01 cứu dịch `cuu_dich`.
+9. Cờ `r.ccFlag`: `seo_mach` (đã tính vào khí huyết), `bong_mach`, `huyet_can`, `di_nguyen` — ba cờ sau **chưa có tác dụng** (chờ hệ hồi linh lực/huyết thuật/tuyến Di nguyện). `nuoi_co`: mỗi tháng trả 100 xu nuôi cổ, không có thì trúng độc.
+11. Việc dài ngày không bao cơm (thăm dò mỏ, làm công đổi vật tư, 360 ngày tịnh dưỡng CC07…): đủ tiền thì tự trả tiền ăn theo ngày ở chỗ làm; thiếu tiền thì như thường (có thể đói). Nơi chốn chọn bằng băm, không rút số ngẫu nhiên, để mở nơi chốn không làm lệch chuỗi ngẫu nhiên.
+10. Hóa Sinh Liên (CC04): năm nở đầu tiên rút trong 1–12 năm tới khi tạo nguồn, sau đó 30 năm một lần; nở từ đầu tháng năm, giữ 60 ngày; lỡ kỳ thì người giữ hồ nhận, đợi kỳ sau.
+
+### Bài kiểm
+- `cai_can` (đúng Đ6.4): vô căn đi hết CC01 qua hộp Cơ duyên (hỏi chuyện → theo đường → đồ giả → hai đầu mối → 18 tháng → tranh → nghi thức ép thành) → `tap`/Thường đủ năm hệ, `isVo()===false`, `ccOk===1`; đường thứ hai bị từ chối; ép hỏng → sẹo mạch, chờ một năm; CC05 lấy rồi → kiếp sau `con===0`; CC01 hồi sau 20 năm; bản lưu cũ.
+- Số bài: luật 653 dấu ✓ (mốc cũ 604), giao diện 155 (mốc 150).
+- `cai_can_duong`: đi hết **mười bảy đường** (trừ Văn tâm) bằng chính các lựa chọn trong hộp, ép thành, kiểm loại căn; nhường thì nguồn về tay người khác; người khác dùng nguồn theo năm (biên niên); nghe dấu vết theo tháng; tu sĩ chỉ nghe đường nâng phẩm; Thiên Lôi có thể chết; Văn tâm chờ Nho; nuôi cổ; suy nhược hết hạn.
+- test-ui `cai_can`: nút Cơ duyên ở nơi neo, hộp lựa chọn, thẻ Cơ duyên trong Sổ tay không có chữ số.
+
+### Còn dở
+- Thưởng Các "Manh mối cơ duyên" (A.3) chưa thêm vào cửa hàng Thưởng Các.
+- Sự kiện chữ dài cho từng bước (S/high) mới ở mức một câu/bước trong bảng; chưa có sự kiện ngẫu nhiên dọc đường (vd bệnh nhân CC01 nhờ việc).
+- Vật tư cải căn nằm trong `r.ccVt` (sổ riêng, hiện ở thẻ Cơ duyên), chưa chiếm ô túi đồ.
+- Chưa chạy bot (chờ người dùng cho phép).
+
+## NGƯỜI DÙNG CHỐT ĐỢT 3 (câu 25–28) — làm sau Đ6 (Sửa-F)
+25. Nâng giá bí tịch võ lên nhiều (tự quyết, hợp lý so với binh khí phàm ~10–14 lượng).
+26. Tích Cốc Đan giữ nguyên.
+27. Vay: tổng phải trả CỐ ĐỊNH thỏa thuận từ đầu (vd vay 5000 xu, lãi 500 → luôn trả 5500 dù trả sớm hay đúng hạn). Đổi từ lãi theo tháng sang lãi trọn gói lúc vay; trả trước một phần chỉ trừ vào tổng cố định. Quá hạn thì vẫn theo chuỗi nợ/phạt.
+28. Giữ tên "U Minh Ám Hội" (tạm).
+
+## YÊU CẦU MỚI: bước Đ9.0 — GPT viết nội dung Đ9 thay Claude
+Thứ tự Đ9: Đ9.1 (Claude làm bộ máy tuyến + schema + công cụ kiểm) → Đ9.0 (Claude viết file hướng dẫn cho GPT) → GPT viết 45 tuyến + nội dung 9 đại lộ theo lô → Claude chạy kiểm tự động + rà mẫu, sửa/ghép.
+File hướng dẫn (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) phải có: định dạng tệp chính xác (schema JSON, tên khoá, mã hợp lệ), danh sách mã được phép dùng (địa điểm LOC, NPC, thế lực, mã deed nghiệp, điều kiện/hiệu ứng có thật, đơn vị tiền mới), 1–2 tuyến mẫu hoàn chỉnh đúng chuẩn, giọng văn/độ dài, điều cấm (không tạo NPC/nơi mới, không hồi sinh người chết, không hiện số nghiệp…), cách chia lô (mỗi lần 3 tuyến), và lệnh kiểm `npm run content:check` + lệnh kiểm riêng cho tuyến mà GPT/người dùng chạy được để biết sai chỗ nào.
