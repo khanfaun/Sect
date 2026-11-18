@@ -365,6 +365,20 @@ const TESTS = {
     run("G.run.hd.log=[{p:0,t:24}];G.run.hd.lv=null;G.run.ng.B=60;G.meta.ach=G.meta.ach.filter(x=>x!=='ma');deed('giet_vo_toi')");
     ok(run("G.meta.ach.includes('ma')"), 'thành tựu Ma đầu theo Hành Đạo + nghiệp');
   },
+  kiep_nghiep() {
+    fresh('G.run.ng.B=0');
+    ok(run("nqK()")===1 && run("nqKiepBonus()")===0, 'không nghiệp: kiếp thường');
+    run("G.run.ng.B=100");
+    ok(run("nqK()")===1.4 && run("nqKiepBonus()")===0.1, 'B=100: sức kiếp ×1.4, thưởng 10%');
+    run("G.run.ng.B=120");ok(run("nqK()")===1.4, 'cùng bậc thì như nhau');
+    run("G.run.ng.B=15");ok(run("kiepKind()")==='nghiep' && run("nqKiepWarn()").length>5 && !/\d/.test(run("nqKiepWarn()")), 'B≥15: Nghiệp Hỏa, có lời báo không số');
+    const once=()=>run(`(()=>{const r=G.run;r.pham=0;r.realm=0;r.tv=1e9;r.bt={to:1,dao:5,stages:[],hpLeft:1};r.scene={type:'bt',chips:[]};try{btFinish();}catch(e){return 'ERR '+e.message;}return G.run?G.run.bon.hpP:'chet';})()`);
+    run("G.run.ng.B=100");const h0=run("G.run.bon.hpP");const h1=once();
+    ok(typeof h1==='number' && h1>=h0+10, 'vượt kiếp nghiệp: khí huyết +10% ('+h0+' → '+h1+')');
+    const h2=run(`(()=>{const r=G.run;r.realm=0;r.bt={to:1,dao:5,stages:[],hpLeft:1};r.scene={type:'bt',chips:[]};const b=r.bon.hpP;btFinish();return G.run.bon.hpP-b;})()`);
+    ok(h2<10, 'cùng cảnh giới chỉ thưởng một lần');
+    ok(run("NK.count('nq.kiepBon')")===1, 'nhật ký nq.kiepBon');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });

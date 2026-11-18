@@ -24,7 +24,7 @@ export function ChuanBiDotPha({ sc }) {
   return (
     <Card title={ph ? 'Xung kích Luyện Khí tầng 1' : to === 5 ? 'Độ kiếp phi thăng' : 'Đột phá ' + PS.REALM[to]} sub={r.place.n} cls="tall"
       foot={<><button className="btn" data-act="next">Để sau</button><span className="grow"></span><button className="btn pri" data-act="prepGo">Bắt đầu</button></>}>
-      <div className="story"><p>{ph ? 'Ngồi yên, theo tâm pháp dẫn sợi linh khí đầu tiên vào thân. Thành thì bước vào Luyện Khí; bại thì tổn thương kinh mạch, mất một phần tu vi.' : 'Chọn tối đa năm vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.'}</p></div>
+      <div className="story"><p>{ph ? 'Ngồi yên, theo tâm pháp dẫn sợi linh khí đầu tiên vào thân. Thành thì bước vào Luyện Khí; bại thì tổn thương kinh mạch, mất một phần tu vi.' : 'Chọn tối đa năm vật phẩm đặt vào ô chuẩn bị. Vật phẩm bị tiêu hao khi bắt đầu, dù thành hay bại.'}</p>{PS.nqKiepWarn() && <p className="bad nq-warn">{PS.nqKiepWarn()}</p>}</div>
       <div className="slots">
         {[0, 1, 2, 3, 4].map(k => {
           const i = sc.slots[k], it = i != null && r.pills[i];
