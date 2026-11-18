@@ -1,0 +1,478 @@
+id,đường_dẫn_lựa_chọn,giá_trị_karma,nhãn_lựa_chọn
+ch_ben_kia_mot_hoi_tho_1,choices[0].e.karma,4,Mua bùa thở giúp nàng xuống gặp
+ch_ben_kia_mot_hoi_tho_2,choices[0].e.karma,4,Gia cố vòm buồng bằng pháp lực
+ch_ben_kia_mot_hoi_tho_2b,choices[0].e.karma,4,Tìm chỗ neo cho hai người gặp lại
+ch_ben_kia_mot_hoi_tho_2b,choices[1].e.karma,2,Mua vòng phao lấy gỗ nhẹ
+ch_ben_kia_mot_hoi_tho_3,choices[0].e.karma,4,Căng dây dẫn cả nhóm ra ngoài
+ch_ben_kia_mot_hoi_tho_3,choices[1].e.karma,2,Giữ túi khí để chờ cứu từ bờ
+ch_ben_kia_mot_hoi_tho_4,choices[0].e.karma,4,Góp bùa cho người đi ngang dùng chung
+ch_buc_tuong_nghe_ten_minh_1,choices[1].e.karma,-1,Gọi tên {$a.ten} trước
+ch_buc_tuong_nghe_ten_minh_2,choices[0].e.karma,4,Nói nốt câu mà ngày ấy ngươi đã nuốt
+ch_buc_tuong_nghe_ten_minh_2b,choices[0].e.karma,4,Giữ tay lão và đòi nghe tên thật
+ch_buc_tuong_nghe_ten_minh_2b,choices[1].e.karma,-2,Mua cái tên đã lấy để qua cổng vực
+ch_buc_tuong_nghe_ten_minh_3,choices[0].e.karma,4,Đọc tên đang mang và dìu lão qua
+ch_buc_tuong_nghe_ten_minh_3,choices[1].e.karma,-4,Cắt một sợi dây có tiếng vọng
+ch_buc_tuong_nghe_ten_minh_4,choices[0].e.karma,4,Nói lại lời cũ hoặc khắc lại nửa tên đã mất
+ch_cai_ten_bo_khoi_banh_lai_1,choices[0].e.karma,4,Giữ người lại để nghe hết chuyện
+ch_cai_ten_bo_khoi_banh_lai_1,choices[1].e.karma,-3,Giao tấm tên đổi tiền treo
+ch_cai_ten_bo_khoi_banh_lai_2,choices[0].e.karma,4,Giúp ghi riêng từng chuyến đã chở người
+ch_cai_ten_bo_khoi_banh_lai_2,choices[1].e.karma,-1,Đòi hắn làm công lái thuyền để trả nợ
+ch_cai_ten_bo_khoi_banh_lai_2b,choices[0].e.karma,4,Dùng tiền treo xin cho hắn ra làm chứng
+ch_cai_ten_bo_khoi_banh_lai_2b,choices[1].e.karma,3,Xin cho hắn trả nợ bằng công thay vì giam
+ch_cai_ten_bo_khoi_banh_lai_3,choices[0].e.karma,4,"Ứng tiền đền hàng, cho cắt dây cứu người"
+ch_cai_ten_bo_khoi_banh_lai_3,choices[1].e.karma,-1,Cứu tàu bằng cách bỏ lại thuyền nhỏ
+ch_cai_ten_bo_khoi_banh_lai_4,choices[0].e.karma,4,Khắc cả tên người cứu lẫn người chịu thiệt
+ch_cay_dau_khong_bong_1,choices[0].e.karma,4,Giữ thang cho {$a.ten} đưa rổ
+ch_cay_dau_khong_bong_1,choices[1].e.karma,-2,Mua cây dâu rồi thu lá cả hai bên
+ch_cay_dau_khong_bong_2,choices[0].e.karma,4,Giữ chỗ ở bến xe cho cả hai
+ch_cay_dau_khong_bong_2,choices[1].e.karma,2,Khuyên họ ở lại nói chuyện với hai nhà
+ch_cay_dau_khong_bong_2b,choices[0].e.karma,4,Trả lại cây dâu cho hai người trông
+ch_cay_dau_khong_bong_3,choices[0].e.karma,4,Thuê đất ấm cho họ giâm cành
+ch_cay_dau_khong_bong_3,choices[1].e.karma,4,Mua cành sống với giá cao
+ch_cay_dau_khong_bong_4,choices[0].e.karma,4,Nhường phần lá và góp giống cho hai nhà
+ch_chi_bac_tren_ao_chiu_tang_1,choices[0].e.karma,4,Nhận cuộn chỉ là của ngươi
+ch_chi_bac_tren_ao_chiu_tang_1,choices[1].e.karma,-2,Để họ xem cổ áo
+ch_chi_bac_tren_ao_chiu_tang_2,choices[0].e.karma,4,Cho họ dùng nhà mái kín qua một buổi
+ch_chi_bac_tren_ao_chiu_tang_2,choices[1].e.karma,-1,Nhờ họ trao đổi tin hai phái để trả ơn
+ch_chi_bac_tren_ao_chiu_tang_2b,choices[0].e.karma,4,Đứng tên cho hai người nhận chung một việc ngoài núi
+ch_chi_bac_tren_ao_chiu_tang_2b,choices[1].e.karma,-2,Đổi việc ấy lấy phần thưởng cho mình
+ch_chi_bac_tren_ao_chiu_tang_3,choices[0].e.karma,4,Bảo lãnh cho cả hai cùng mở lối
+ch_chi_bac_tren_ao_chiu_tang_3,choices[1].e.karma,-3,Bán lệnh đi qua cho người chịu trả
+ch_chi_bac_tren_ao_chiu_tang_4,choices[0].e.karma,4,Trả lại tiền lệnh hoặc góp vải mở nhà trú đèo
+ch_cot_gio_khong_co_1,choices[0].e.karma,4,Góp tiền mua dây treo cờ riêng
+ch_cot_gio_khong_co_1,choices[1].e.karma,-3,Cho lấy dây cầu để được vào đoàn đón khách
+ch_cot_gio_khong_co_2,choices[0].e.karma,4,Cho hắn giữ phần dây cứng
+ch_cot_gio_khong_co_2b,choices[0].e.karma,4,Mua dây mới bằng tiền đã nhận
+ch_cot_gio_khong_co_2b,choices[1].e.karma,-3,Mở đường vòng thu phí
+ch_cot_gio_khong_co_3,choices[0].e.karma,4,"Cắt dây cờ, neo lại cầu"
+ch_cot_gio_khong_co_3,choices[1].e.karma,-2,Đỡ trụ cờ và gọi người đi vòng
+ch_cot_gio_khong_co_4,choices[0].e.karma,4,Dành trụ mới để phơi dây và vải cầu
+ch_cot_gio_khong_co_4,choices[1].e.karma,2,Treo lại cờ và đặt quỹ sửa cầu
+ch_den_soi_duong_lui_1,choices[0].e.karma,4,Góp dầu để giữ cả hai lối
+ch_den_soi_duong_lui_1,choices[1].e.karma,-2,Đổ dầu vào đèn đi lên
+ch_den_soi_duong_lui_2,choices[0].e.karma,4,Dẫn hắn xuống đoạn đầu
+ch_den_soi_duong_lui_2,choices[1].e.karma,-1,Đổi đường về riêng lấy ngọn đèn chung
+ch_den_soi_duong_lui_2b,choices[0].e.karma,4,Chia lửa hộ thân cho hắn thử lại
+ch_den_soi_duong_lui_2b,choices[1].e.karma,-3,Bán cho hắn một lối xuống riêng
+ch_den_soi_duong_lui_3,choices[0].e.karma,4,Đốt một phần đạo hạnh dựng đường lui chung
+ch_den_soi_duong_lui_3,choices[1].e.karma,-3,Gom lễ vật rồi mở đường theo lượt
+ch_den_soi_duong_lui_4,choices[0].e.karma,4,Trao phần dầu hoặc lễ vật cho người giữ đèn {$a.ten}
+ch_hinh_nguoi_nam_ngoai_ao_1,choices[0].e.karma,4,Mua cho hắn áo mới để tự học dáng đi
+ch_hinh_nguoi_nam_ngoai_ao_1,choices[1].e.karma,-1,Thuê hắn mặc áo của người đã mất
+ch_hinh_nguoi_nam_ngoai_ao_2,choices[0].e.karma,4,Dạy hắn ngồi theo dáng của chính hắn
+ch_hinh_nguoi_nam_ngoai_ao_2,choices[1].e.karma,-1,Dạy hắn giả dáng một khách quen
+ch_hinh_nguoi_nam_ngoai_ao_2b,choices[0].e.karma,4,Kể cho người ấy nghe chiếc áo đã mượn từ đâu
+ch_hinh_nguoi_nam_ngoai_ao_2b,choices[1].e.karma,1,Để hắn ở lại qua một bữa cơm
+ch_hinh_nguoi_nam_ngoai_ao_3,choices[0].e.karma,4,Đặt tên hắn dưới chính cái bóng ấy
+ch_hinh_nguoi_nam_ngoai_ao_3,choices[1].e.karma,-2,Dùng chiếc áo để cả hai qua nhanh
+ch_hinh_nguoi_nam_ngoai_ao_4,choices[0].e.karma,4,Góp gỗ làm chỗ treo áo cho khách
+ch_hoi_chuong_den_truoc_nguoi_g_1,choices[0].e.karma,4,Tin tiếng chuông và cho mọi người rời cầu
+ch_hoi_chuong_den_truoc_nguoi_g_1,choices[1].e.karma,-3,Ép chuông im để đoàn qua trước
+ch_hoi_chuong_den_truoc_nguoi_g_2,choices[0].e.karma,4,Giữ cầu đóng tới khi thay đủ chốt
+ch_hoi_chuong_den_truoc_nguoi_g_2,choices[1].e.karma,-2,Mua giờ báo trước để đi lối ngắn
+ch_hoi_chuong_den_truoc_nguoi_g_2b,choices[0].e.karma,5,Dùng phần tiền chuyến hàng sửa nhịp cầu
+ch_hoi_chuong_den_truoc_nguoi_g_2b,choices[1].e.karma,-3,Bán riêng tin chuông báo sập lần tới
+ch_hoi_chuong_den_truoc_nguoi_g_3,choices[0].e.karma,4,Tự lên cầu giữ người rồi ra lệnh tháo nhịp
+ch_hoi_chuong_den_truoc_nguoi_g_3,choices[1].e.karma,-1,Nhờ người giữ chuông {$a.ten} canh từng lượt qua
+ch_hoi_chuong_den_truoc_nguoi_g_4,choices[0].e.karma,4,Đúc chuông báo cho mọi đầu cầu
+ch_le_do_nuoc_1,choices[0].e.karma,4,Ghi lại vạch cũ và đứng ra làm chứng
+ch_le_do_nuoc_1,choices[1].e.karma,-3,Đổi im lặng lấy quyền neo rẻ
+ch_le_do_nuoc_2,choices[0].e.karma,4,Góp người canh mực nước
+ch_le_do_nuoc_2,choices[1].e.karma,-3,Bán bản đo cho bến đối diện
+ch_le_do_nuoc_2b,choices[0].e.karma,4,Trả phần tiền đã được bớt cho người neo thuyền
+ch_le_do_nuoc_2b,choices[1].e.karma,-3,Mua dây ngắn bán cho bến lớn
+ch_le_do_nuoc_3,choices[0].e.karma,4,Mua cọc cho người ở cả hai bến cùng đo
+ch_le_do_nuoc_3,choices[1].e.karma,-3,Bán lại quyền dùng vạch
+ch_le_do_nuoc_4,choices[0].e.karma,4,Chuyển vạch lên vách đá ai cũng nhìn được
+ch_le_do_nuoc_4,choices[1].e.karma,1,Dùng tiền neo dựng một cầu riêng
+ch_loi_noi_duoi_phien_da_1,choices[0].e.karma,4,Nhận là ngươi đặt nêm
+ch_loi_noi_duoi_phien_da_1,choices[1].e.karma,-1,Rút nêm rồi trả bình
+ch_loi_noi_duoi_phien_da_2,choices[0].e.karma,4,Giúp họ ghi lại người đã chịu phạt
+ch_loi_noi_duoi_phien_da_2,choices[1].e.karma,1,Đưa đan dược để {$b.ten} khỏi phải nói
+ch_loi_noi_duoi_phien_da_2b,choices[0].e.karma,4,Đọc mẩu giấy trước mặt người làm bếp
+ch_loi_noi_duoi_phien_da_2b,choices[1].e.karma,2,Trả tiền giữ kín và mua nước cho người trong phòng
+ch_loi_noi_duoi_phien_da_3,choices[0].e.karma,4,Đòi giám luật mở phòng cho mọi người xem
+ch_loi_noi_duoi_phien_da_3,choices[1].e.karma,1,Mua quyền trông việc nước
+ch_loi_noi_duoi_phien_da_4,choices[0].e.karma,4,Ủng hộ bỏ cửa khóa kín
+ch_loi_noi_duoi_phien_da_4,choices[1].e.karma,2,Giữ phòng và buộc có người chứng kiến
+ch_mot_chu_dung_tren_van_cau_1,choices[0].e.karma,4,Giúp lão lật một tấm ván để đọc
+ch_mot_chu_dung_tren_van_cau_1,choices[1].e.karma,-2,Mượn tên dưới ván để bước nhanh hơn
+ch_mot_chu_dung_tren_van_cau_2,choices[0].e.karma,4,Kể cả cái tên lẫn việc nó đã làm
+ch_mot_chu_dung_tren_van_cau_2,choices[1].e.karma,-1,Đổi tên lấy cách giữ cầu của nó
+ch_mot_chu_dung_tren_van_cau_2b,choices[0].e.karma,4,Để lão gỡ nửa chữ khỏi dấu chân
+ch_mot_chu_dung_tren_van_cau_2b,choices[1].e.karma,1,Giữ nửa chữ và mời hồn cùng đi
+ch_mot_chu_dung_tren_van_cau_3,choices[0].e.karma,4,Viết tên ngươi xuống để đỡ nhịp cầu cùng hồn
+ch_mot_chu_dung_tren_van_cau_3,choices[1].e.karma,-1,Nhờ hồn chia phép giữ cầu vào nhiều tấm ván
+ch_mot_chu_dung_tren_van_cau_4,choices[0].e.karma,4,Khắc lại những tên còn nhớ ở phía trên
+ch_nguoi_cho_sau_rem_than_1,choices[0].e.karma,4,Cho họ mượn phù giữ hơi lạnh
+ch_nguoi_cho_sau_rem_than_1,choices[1].e.karma,-3,Thu tiếng ho để bán làm mồi dẫn hồn
+ch_nguoi_cho_sau_rem_than_2,choices[0].e.karma,4,Giữ lửa trong đan điền đến khi họ gặp
+ch_nguoi_cho_sau_rem_than_2,choices[1].e.karma,-2,"Nhận củi tốt, giúp họ dọn một chỗ nghỉ dưới hiên"
+ch_nguoi_cho_sau_rem_than_2b,choices[0].e.karma,4,Mua lại tiếng ho và trả vào rèm
+ch_nguoi_cho_sau_rem_than_2b,choices[1].e.karma,2,Mượn lại tiếng ho để dẫn đoàn hồn tới chỗ nghỉ
+ch_nguoi_cho_sau_rem_than_3,choices[0].e.karma,4,Giữ luồng gió để họ đi cạnh nhau
+ch_nguoi_cho_sau_rem_than_3,choices[1].e.karma,-1,Thu một luồng gió để chữa cơn ho trong hồn
+ch_nguoi_cho_sau_rem_than_4,choices[0].e.karma,4,Góp lửa cho quán đón cả người sống lẫn hồn
+ch_nguoi_gac_lua_1,choices[0].e.karma,4,Đánh kẻng cùng {$a.ten}
+ch_nguoi_gac_lua_1,choices[1].e.karma,4,Im kẻng và tự ra xem
+ch_nguoi_gac_lua_2,choices[0].e.karma,4,Chia phần đền và xin lập lệ báo cháy
+ch_nguoi_gac_lua_2,choices[1].e.karma,-2,Trả hết rồi đòi giữ dùi kẻng
+ch_nguoi_gac_lua_2b,choices[0].e.karma,4,Góp gỗ dựng chòi mới
+ch_nguoi_gac_lua_3,choices[0].e.karma,4,Dẫn người phá hàng rào làm đường cản lửa
+ch_nguoi_gac_lua_3,choices[1].e.karma,-3,Giữ riêng dãy nhà phía trên
+ch_nguoi_gac_lua_4,choices[0].e.karma,6,Nhận phần đền và giao dùi cho cả làng
+ch_nguoi_gac_lua_4,choices[1].e.karma,-2,Để hào trưởng {$b.ten} giữ quyền báo
+ch_no_mot_mua_toc_bac_1,choices[0].e.karma,4,Bù phần thiếu bằng thọ nguyên của ngươi
+ch_no_mot_mua_toc_bac_1,choices[1].e.karma,-3,Mua nửa món nợ của {$c.ten}
+ch_no_mot_mua_toc_bac_2,choices[0].e.karma,4,Góp lửa để hai người qua mùa
+ch_no_mot_mua_toc_bac_2,choices[1].e.karma,1,Dạy hắn kiếm linh thạch bằng bùa tuổi
+ch_no_mot_mua_toc_bac_2b,choices[0].e.karma,4,Hủy phần nợ của ngươi và kéo dài hạn
+ch_no_mot_mua_toc_bac_2b,choices[1].e.karma,-3,Mua nốt món nợ để tự định hạn
+ch_no_mot_mua_toc_bac_3,choices[0].e.karma,4,Buộc lão trả hết giấy cầm trước khi truyền tuổi
+ch_no_mot_mua_toc_bac_3,choices[1].e.karma,-4,Mua chỗ tuổi còn dư sau khi cứu lão
+ch_no_mot_mua_toc_bac_4,choices[0].e.karma,4,Trao phần tuổi ngươi còn giữ hoặc bù bằng tuổi mình
+ch_no_mot_mua_toc_bac_4,choices[1].e.karma,1,Giữ tuổi và trả bằng linh thạch
+ch_nua_dau_tay_1,choices[0].e.karma,4,Chuộc tờ giấy
+ch_nua_dau_tay_1,choices[1].e.karma,1,Để bà ký và làm chứng
+ch_nua_dau_tay_2,choices[0].e.karma,4,Góp một trục gỗ mới
+ch_nua_dau_tay_2,choices[1].e.karma,-1,Cho họ vay bằng tiền công xay
+ch_nua_dau_tay_2b,choices[0].e.karma,4,Đòi trả công theo tờ giấy đã ký
+ch_nua_dau_tay_2b,choices[1].e.karma,4,Trả bạc mua lại mùa công còn thiếu
+ch_nua_dau_tay_3,choices[0].e.karma,4,Mua bột chia cho dân đói
+ch_nua_dau_tay_3,choices[1].e.karma,-3,Khuyên cậu bán cho {$c.ten}
+ch_nua_dau_tay_4,choices[0].e.karma,4,Đứng tên bảo cho người mua chịu
+ch_tam_phan_danh_cho_khach_1,choices[0].e.karma,4,Góp gỗ thay lại bốn chân
+ch_tam_phan_danh_cho_khach_2,choices[0].e.karma,4,Góp sắt làm then mới
+ch_tam_phan_danh_cho_khach_2b,choices[0].e.karma,4,Đặt một chiếc bàn riêng cho {$c.ten}
+ch_tam_phan_danh_cho_khach_2b,choices[1].e.karma,2,Gọi thợ mộc {$a.ten} đến nhận lại học trò
+ch_tam_phan_danh_cho_khach_3,choices[0].e.karma,4,Góp gỗ và giúp làm theo tầm người nằm
+ch_tam_phan_danh_cho_khach_4,choices[0].e.karma,4,Đổi tiền lời hoặc tiền mua gỗ lấy phản cho lán
+ch_vach_phan_tren_chuoi_kiem_1,choices[0].e.karma,4,Mua chuôi kiếm thuận tay trái
+ch_vach_phan_tren_chuoi_kiem_2,choices[0].e.karma,4,Giúp nàng dạy thế kiếm ấy
+ch_vach_phan_tren_chuoi_kiem_2b,choices[0].e.karma,4,Đổi buổi học của ngươi lấy thời gian cho nàng tập tay trái
+ch_vach_phan_tren_chuoi_kiem_2b,choices[1].e.karma,2,Mua thuốc để nàng tiếp tục bài cũ
+ch_vach_phan_tren_chuoi_kiem_3,choices[0].e.karma,4,Dùng linh lực chống xà cho nàng cứu người
+ch_vach_phan_tren_chuoi_kiem_3,choices[1].e.karma,1,Chỉ nàng cắt xà bằng đường kiếm riêng
+ch_vach_phan_tren_chuoi_kiem_4,choices[0].e.karma,4,Góp công làm chuôi cho cả hai tay
+ch_vet_khau_duoi_lop_da_1,choices[0].e.karma,4,Ngừng luyện và giữ kim để hỏi
+ch_vet_khau_duoi_lop_da_1,choices[1].e.karma,-3,Cho luyện tiếp để đổi bí quyết
+ch_vet_khau_duoi_lop_da_2,choices[0].e.karma,4,Cho thi thể chọn vật mang theo
+ch_vet_khau_duoi_lop_da_2,choices[1].e.karma,-2,Dùng túi để chuyển linh vật qua vách
+ch_vet_khau_duoi_lop_da_2b,choices[0].e.karma,4,Thuyết phục người luyện thi tháo phù chủ
+ch_vet_khau_duoi_lop_da_2b,choices[1].e.karma,-4,Mua quyền ra lệnh cho nó
+ch_vet_khau_duoi_lop_da_3,choices[0].win.e.karma,4,Cắt chỉ và chống thi trận của người luyện thi {$a.ten}
+ch_vet_khau_duoi_lop_da_3,choices[1].e.karma,1,Thương lượng để người luyện thi rút trận
+ch_vet_khau_duoi_lop_da_4,choices[0].e.karma,4,Chôn cả kim lẫn phần cốt còn lại
+ch_vet_khau_duoi_lop_da_4,choices[1].e.karma,-1,Giữ kim để nhận ra thi thức còn sống
+ch_vet_man_tren_don_thuoc_1,choices[0].e.karma,4,Giữ mẻ muối lại để xét nước
+ch_vet_man_tren_don_thuoc_1,choices[1].e.karma,-3,Cho bán và lấy tiền hoa hồng
+ch_vet_man_tren_don_thuoc_2,choices[0].e.karma,4,Góp tiền dẫn dòng rửa quặng sang bể kín
+ch_vet_man_tren_don_thuoc_2,choices[1].e.karma,-3,Bán tung tích cho người tranh ruộng với chủ
+ch_vet_man_tren_don_thuoc_2b,choices[0].e.karma,4,Dùng tiền hoa hồng bù phí thuốc
+ch_vet_man_tren_don_thuoc_2b,choices[1].e.karma,-5,Mua hết đơn có nhắc mẻ muối
+ch_vet_man_tren_don_thuoc_3,choices[0].e.karma,4,Chia dòng sạch cho từng ô dân góp công
+ch_vet_man_tren_don_thuoc_3,choices[1].e.karma,-3,Dành nước sạch cho một ô bán đắt
+ch_vet_man_tren_don_thuoc_4,choices[0].e.karma,4,Để dân giữ quyền coi mương
+ch_vet_man_tren_don_thuoc_4,choices[1].e.karma,1,Giữ quyền bán và trả đủ tiền chữa bệnh
+bi_canh,choices[1].ok.e.karma,-6,"Chờ ở cửa, cướp kẻ đi ra"
+bi_canh,choices[1].no.win.e.karma,-3,"Chờ ở cửa, cướp kẻ đi ra"
+lao_gia,choices[0].o[0].e.karma,5,"Đỡ dậy, truyền chút linh lực"
+lao_gia,choices[0].o[1].e.karma,5,"Đỡ dậy, truyền chút linh lực"
+lao_gia,choices[1].o[0].e.karma,-8,Lấy túi trữ vật
+lao_gia,choices[1].o[1].e.karma,-5,Lấy túi trữ vật
+thuong_doan,choices[0].win.e.karma,6,Ra tay tương trợ
+thuong_doan,choices[1].ok.e.karma,-3,"Đứng xem, chờ ngư ông đắc lợi"
+ke_bi_duoi,choices[0].win.e.karma,5,Đứng chắn phía trước
+ke_bi_duoi,choices[1].ok.e.karma,5,"Giấu vào bụi rậm, đánh lạc hướng"
+ke_bi_duoi,choices[2].e.karma,-8,Chỉ chỗ cho kẻ đuổi
+thi_the,choices[1].e.karma,6,Chôn cất tử tế
+bi_cuop,choices[0].win.e.karma,2,Đánh
+kh_hoiduong,choices[0].e.karma,2,Chỉ đường cho tử tế
+kh_benh,choices[0].e.karma,6,Cho một viên đan hồi khí huyết
+kh_benh,choices[1].e.karma,4,Truyền chút chân khí
+kh_vat,choices[0].e.karma,5,Trả lại
+kh_vat,choices[1].e.karma,-5,Giữ lấy
+tranh_bao,choices[0].ok.e.karma,-3,Đợi cả hai kiệt sức rồi ra tay
+sap_ban,choices[2].ok.e.karma,2,Vạch trần đồ giả
+thu_con,choices[0].e.karma,4,Cứu và nuôi nó
+thu_con,choices[1].e.karma,-5,Lấy yêu đan
+thu_con,choices[2].o[0].e.karma,4,Đưa về hang
+bia_co,choices[2].e.karma,-4,Đập bia lấy linh thạch bên trong
+hac_diem,choices[0].ok.win.e.karma,4,"Uống rượu, nghỉ đêm"
+hac_diem,choices[1].win.e.karma,3,Ra tay trước
+cao_thi,choices[0].win.e.karma,5,Bóc cáo thị
+an_may,choices[0].o[0].e.karma,3,Cho tiền mua đồ ăn
+an_may,choices[0].o[1].e.karma,4,Cho tiền mua đồ ăn
+tre_ban_hoa,choices[0].e.karma,6,Cho linh thạch
+tre_ban_hoa,choices[1].e.karma,8,Theo về xem bệnh
+hoa_duyen,choices[0].e.karma,3,Bố thí
+hoa_duyen,choices[2].win.e.karma,-2,Thử bản lĩnh vị tăng
+co_mo,choices[1].e.karma,3,Lấp cửa mộ lại
+dong_phu_cu,choices[1].o[0].e.karma,2,Vái ba vái rồi mới vào
+lo_dan_no,choices[0].e.karma,3,Giúp dập lửa
+lo_dan_no,choices[1].ok.e.karma,-2,Nhặt đan dược văng ra
+hon_phien,choices[0].e.karma,-8,Nhổ lấy
+hon_phien,choices[1].win.e.karma,10,"Thiêu hủy, siêu độ vong hồn"
+thu_khan,choices[0].ok.e.karma,3,Nhận đưa thư
+tho_san,choices[1].e.karma,5,Mua con hươu rồi thả
+chay_rung,choices[0].e.karma,10,Dập lửa cứu người
+chay_rung,choices[1].e.karma,-5,Tranh thủ hái linh dược
+chay_rung,choices[2].win.e.karma,6,Tìm kẻ phóng hỏa
+yeu_quai_lang,choices[0].o[0].win.e.karma,8,Đêm nay canh gác
+yeu_quai_lang,choices[0].o[1].c[0].win.e.karma,10,Đêm nay canh gác
+yeu_quai_lang,choices[0].o[1].c[1].win.e.karma,-8,Đêm nay canh gác
+yeu_quai_lang,choices[1].e.karma,-2,Đòi thù lao trước
+thuy_quy,choices[0].win.e.karma,6,Diệt thủy quỷ
+thuy_quy,choices[1].ok.e.karma,8,Thả đèn cầu siêu
+thuy_quy,choices[1].no.win.e.karma,4,Thả đèn cầu siêu
+hoa_bi,choices[0].ok.win.e.karma,8,Điều tra
+hoa_bi,choices[0].no.win.e.karma,6,Điều tra
+lao_ngu,choices[0].e.karma,5,Mua lại rồi thả
+lao_ngu,choices[1].e.karma,-3,Mua về nấu
+chuong_xac,choices[1].win.e.karma,6,Chặn lại xem xét
+xin_lam_do,choices[0].e.karma,4,Nhận làm đệ tử
+xin_lam_do,choices[1].e.karma,1,Cho ít tiền rồi khuyên về
+tuyet_son,choices[1].e.karma,3,Đốt lửa sưởi cho người ấy
+bat_nat,choices[0].win.e.karma,6,Can ngăn
+bat_nat,choices[1].ok.e.karma,5,Lấy danh nghĩa sư huynh quát lui
+bat_nat,choices[1].no.win.e.karma,4,Lấy danh nghĩa sư huynh quát lui
+duoc_vien,choices[0].ok.e.karma,-4,Lén hái
+duoc_vien,choices[0].no.win.e.karma,-4,Lén hái
+tang_kinh,choices[2].ok.e.karma,-3,Lẻn vào ban đêm
+tang_kinh,choices[2].no.win.e.karma,-3,Lẻn vào ban đêm
+linh_mach,choices[0].ok.e.karma,-3,Khai thác lén
+linh_mach,choices[1].e.karma,3,Báo cho {$sect}
+bi_vu_oan,choices[0].ok.e.karma,2,Tự biện hộ
+ngu_nhan,choices[1].win.e.karma,-5,Cướp
+ngu_nhan,choices[2].e.karma,3,Tặng quà làm quen
+dao_hoang,choices[0].o[0].e.karma,4,Ghé vào
+trai_ngoc,choices[2].e.karma,2,Để yên
+thuyen_ma,choices[0].o[1].e.karma,3,Lên thuyền
+thuyen_ma,choices[1].e.karma,3,Đốt thuyền
+huyet_tri,choices[0].e.karma,-10,Ngâm mình
+huyet_tri,choices[1].win.e.karma,10,Thanh tẩy huyết trì
+tu_binh,choices[0].win.e.karma,8,Cứu người
+tu_binh,choices[1].ok.e.karma,8,Lén mở lồng
+tu_binh,choices[1].no.win.e.karma,6,Lén mở lồng
+van_thi,choices[1].e.karma,8,Hỏa táng
+ma_chung,choices[0].e.karma,-15,Nhận
+ma_chung,choices[1].win.e.karma,6,Giết hắn
+ma_tu_xin_tha,choices[0].o[0].e.karma,5,Tha
+ma_tu_xin_tha,choices[1].e.karma,2,Trừ ma
+di_thue,choices[1].win.e.karma,-3,Lấy pháp bảo trên người
+d_hon,choices[0].ok.e.karma,6,Tụng kinh siêu độ
+d_trom,choices[0].ok.c[0].e.karma,6,Chộp tay
+d_trom,choices[0].ok.c[1].e.karma,-2,Chộp tay
+d_trom,choices[1].e.karma,2,"Giả ngủ, xem hắn làm gì"
+d_lua,choices[0].o[0].e.karma,-2,Đuổi theo
+m_ha2,choices[0].e.karma,10,Dùng linh lực gọi mưa
+m_thu1,choices[0].e.karma,4,Gặt giúp
+m_dong2,choices[0].e.karma,6,Cởi áo khoác cho
+nhan_tinh,choices[1].ok.e.karma,-6,Luyện hóa tàn hồn
+nhan_tinh,choices[2].e.karma,8,Mời lão đi đầu thai
+mo_kiep_truoc,choices[1].e.karma,-2,Đào lên
+bao_oan,choices[1].ok.e.karma,8,Xin lỗi
+tam_ma_xam,choices[2].e.karma,-10,Thuận theo nó
+tp_hoathuong,choices[0].fx.karma,3,Theo sư phụ đi một đoạn đường
+tp_ysu,choices[0].fx.karma,5,Ở lại phụ chữa bệnh
+tp_ysu,choices[1].fx.karma,-1,"Xin học ngay, ta còn đường xa"
+tp_xactu,choices[0].fx.karma,4,Chôn cất tử tế rồi mới lấy sách
+tp_tantu,choices[0].fx.karma,4,Cõng hắn qua núi
+tp_mieuhoang,choices[0].fx.karma,2,Thắp hương rồi mới đọc
+gk_chiec_can_can_mot_buoc_chan,choices[1].e.karma,-1,Ép cân bằng bằng thần niệm
+gk_tam_ao_cu_qua_nam_tram_mua,choices[0].e.karma,4,Dùng thần niệm hứng giọt nước cuối
+gk_tam_ao_cu_qua_nam_tram_mua,choices[1].e.karma,-2,Mua vạt áo ướt để giữ một khoảnh khắc
+gk_loi_chao_dung_lai_ngoai_cua,choices[0].e.karma,4,Để lại một lời chào của chính mình
+gk_mot_dem_giu_nen_troi,choices[0].e.karma,4,Dùng pháp lực giữ thiên quang cho thợ đóng lại ghim
+gk_mot_dem_giu_nen_troi,choices[1].e.karma,-3,Hứng thiên quang rồi gọi người lùi về bóng tối
+gk_doi_chan_cua_tuong_quy,choices[0].e.karma,4,Gọi người làm mẫu {$b.ten} tới nhận tiền còn thiếu
+gk_doi_chan_cua_tuong_quy,choices[1].e.karma,-3,Đổi im lặng lấy chỗ khắc tên ngươi
+gk_mua_roi_nguoc_trong_long_ban,choices[0].e.karma,4,Dùng thần niệm giữ một giọt mưa nối hai tầng đường
+gk_mua_roi_nguoc_trong_long_ban,choices[1].e.karma,-3,Lấy giọt mưa luyện pháp khí nghịch lưu
+gk_ke_doi_binh_tren_dau,choices[0].e.karma,2,Dạy hắn đỡ đáy bình bằng một tay
+gk_mep_bong_muon_cua_nguoi_sau,choices[0].win.e.karma,4,Giao đấu với {$a.ten} bằng vật giữ thần
+gk_mep_bong_muon_cua_nguoi_sau,choices[1].e.karma,2,Dùng thần niệm tạo bóng thay thế
+gk_hai_bac_nhin_xuong_nha,choices[0].e.karma,4,Đổi phần nhìn của hai người bằng thần niệm
+gk_hai_bac_nhin_xuong_nha,choices[1].e.karma,-1,Ghi cảnh quê lão vào pháp khí để đổi lấy tin đường
+gk_o_cua_nho_hon_tieng_goi,choices[0].e.karma,4,Mở ô bằng một phần thọ nguyên
+gk_tay_vin_du_mot_nguoi_giu,choices[0].e.karma,4,Đi lùi để nhường tay vịn đang có cho {$a.ten}
+gk_tay_vin_du_mot_nguoi_giu,choices[1].e.karma,2,Mua lượt để kéo cả hai qua
+gk_cuong_la_ganh_mot_vung_troi,choices[1].e.karma,-2,Cắt cành thẳng để lấy linh mộc
+gk_mot_vong_quay_doi_gio_com,choices[0].e.karma,2,Đứng giữ một mốc giờ cho lão
+gk_manh_dem_va_ban_ngay,choices[0].e.karma,4,Khâu bằng bóng của ngươi
+gk_manh_dem_va_ban_ngay,choices[1].e.karma,-3,Hứng phần ban ngày rỉ ra vào bình
+gk_nguoi_quet_bui_tren_mat_tran,choices[0].e.karma,4,Gánh giúp một lượt bụi trăng
+gk_hat_bui_co_tieng_vo,choices[0].e.karma,4,Dùng thần niệm nghe từng hạt cùng lão
+gk_san_buoc_qua_mot_lan_noi_gia,choices[0].win.e.karma,4,Đấu với kiếm ảnh do cơn giận của ngươi sinh ra
+gk_mot_cai_o_co_hai_cai_bong,choices[0].e.karma,4,Chia bớt một phần thọ nguyên để giữ ô thẳng
+gk_mot_cai_o_co_hai_cai_bong,choices[1].e.karma,-1,Đổi chiếc ô lấy đường tắt
+gk_ao_giap_chua_lo_nghe_tim,choices[0].e.karma,4,Dùng linh lực giúp thợ đặt vòng chắn gió quanh khe
+gk_ao_giap_chua_lo_nghe_tim,choices[1].e.karma,-1,Bịt lỗ và lấy công rèn
+gk_phan_troi_mong_hon_mot_dong,choices[0].e.karma,4,Đi ngược đường đặt lại dấu chân
+gk_phan_troi_mong_hon_mot_dong,choices[1].e.karma,-3,Cắt phần giấy sắp rách làm phù qua đường
+gk_giot_dau_khong_ben_lua,choices[0].e.karma,4,Đổi dầu rồi đốt lại từ đèn của ngươi
+gk_cai_mieng_giau_trong_vai,choices[0].e.karma,4,Rút đốt hàm và trả về phần cốt
+gk_gio_am_cua_cho_tro,choices[0].e.karma,4,Góp phần linh hỏa dưỡng thân
+gk_gio_am_cua_cho_tro,choices[1].e.karma,-2,Đổi tro tốt lấy một chỗ nằm gần lò
+gk_muon_tuoi_qua_mua_ret,choices[0].e.karma,4,Trả một phần thọ nguyên để hủy lãi
+gk_muon_tuoi_qua_mua_ret,choices[1].e.karma,-5,Mua món nợ để thu vào mùa sau
+gk_bat_canh_danh_cho_nguoi_cam,choices[0].e.karma,4,Đọc vệt tay và đưa nó tìm hài cốt
+gk_bat_canh_danh_cho_nguoi_cam,choices[1].e.karma,-2,Hỏi đường tắt đổi lấy bát canh của mình
+gk_hai_cot_che_doi_ung,choices[0].e.karma,2,Đổi một chiếc ủng của ngươi cho hắn thử
+gk_hai_cot_che_doi_ung,choices[1].e.karma,1,Đổi hai chân cho vừa ủng
+gk_nut_that_giu_cau_noi_cuoi,choices[0].e.karma,4,Dùng thần niệm giúp nàng nghe rõ lời cuối
+gk_nut_that_giu_cau_noi_cuoi,choices[1].e.karma,1,Mua nút để dùng vào thuật truyền âm
+gk_nap_hom_co_then_ngoai,choices[0].win.e.karma,4,Phá then và giao đấu với {$a.ten}
+gk_nap_hom_co_then_ngoai,choices[1].e.karma,4,Đổi pháp khí lấy quyền mở hòm
+gk_mach_nuoc_khong_nhan_mau,choices[1].e.karma,-3,Giữ mạch nước để luyện công pháp khắc huyết
+gk_nguoi_than_tinh_theo_bai_vi,choices[0].e.karma,4,Xin người quét nhà tự dâng hương
+gk_nguoi_than_tinh_theo_bai_vi,choices[1].e.karma,-4,Đổi thứ tự bài vị để nhận phần gia sản
+gk_huong_dot_tu_dau_chan,choices[0].e.karma,4,Bẻ hương và đưa cả hai cùng ra
+gk_huong_dot_tu_dau_chan,choices[1].e.karma,2,Để hương cháy hết rồi giữ người đứng sau
+gk_hai_chiec_ghe_quay_lung,choices[0].e.karma,4,Đốt đá ấm cho họ ngồi đối diện
+gk_hai_chiec_ghe_quay_lung,choices[1].e.karma,-1,Đổi đá ấm lấy một đoạn công pháp
+gk_coi_nghien_chu_the,choices[0].e.karma,4,Giữ tay quay để hắn nghe hết lời thề
+gk_coi_nghien_chu_the,choices[1].e.karma,-3,Thu mực để viết lời thề mới
+gk_con_bui_bo_duoi_chan,choices[0].e.karma,4,Dùng linh lực mở một đường nước chảy
+gk_con_bui_bo_duoi_chan,choices[1].e.karma,-1,Dồn bụi về phía kho trống để thu linh tro
+gk_mong_tay_tren_cua_luyen_thi,choices[0].win.e.karma,4,Đánh lui thi khôi để người trong nhà thoát ra
+gk_mong_tay_tren_cua_luyen_thi,choices[1].e.karma,2,Đập khóa và trả xương tay
+gk_ban_khe_khong_co_mat_chu,choices[0].e.karma,4,Đặt khế vào lửa trước khi câu nói dứt
+gk_dau_kim_tim_duong_ve,choices[0].e.karma,4,Cho mượn hướng về {$que}
+gk_dau_kim_tim_duong_ve,choices[1].e.karma,-3,Bán cho nó một đường về bất kỳ
+gk_mau_phan_thu_giong,choices[0].e.karma,2,Chỉ nó thở chậm qua một lỗ sáo
+gk_mau_phan_thu_giong,choices[1].e.karma,-1,Thu tiếng nấc vào một lá phù xua ngủ
+gk_mat_dat_nho_chan_quy,choices[0].e.karma,4,Buộc {$a.ten} gọi tên chính hắn
+gk_mat_dat_nho_chan_quy,choices[1].e.karma,-2,Lấy đất lõm luyện phù ép người
+gk_bep_tro_phia_sau_nha_giam,choices[0].e.karma,4,Mua củi cho xóm khỏi dùng tro ngục
+gk_lo_tho_phia_tren_vach_trieu,choices[0].e.karma,4,Dùng khí hộ thể giữ khô khoang
+gk_lo_tho_phia_tren_vach_trieu,choices[1].e.karma,1,Mở nhanh từ phía nước nông
+gk_cau_thang_cho_nguoi_co_vay,choices[0].e.karma,4,Góp ván làm hai lối
+gk_cau_thang_cho_nguoi_co_vay,choices[1].e.karma,-3,Đổi bậc thành lối dốc rồi thu phí
+gk_khuyen_tai_buoc_neo,choices[0].e.karma,4,Giữ thuyền một lát để họ nói chuyện
+gk_khuyen_tai_buoc_neo,choices[1].e.karma,-1,Mang chiếc khuyên sang chuyến kế
+gk_chan_cua_thue_theo_ngay,choices[0].e.karma,2,Trả thêm bằng cá khô
+gk_muc_tron_khoi_nghien,choices[0].e.karma,4,Dẫn đàn mực về vùng biển chúng đã vẽ
+gk_mam_com_buoc_phao,choices[0].e.karma,4,Mua ván bắc lại nhịp cầu
+gk_mam_com_buoc_phao,choices[1].e.karma,4,Thuê thuyền mang cơm mỗi tối
+gk_con_song_biet_cho,choices[1].e.karma,-1,Dùng pháp lực ép nước rẽ đôi
+gk_luoi_ca_chan_cong_thue,choices[0].e.karma,4,Bắt cân số cá thực nộp
+gk_luoi_ca_chan_cong_thue,choices[1].e.karma,-3,Đổi lấy quyền mua cá thuế
+gk_vay_cao_duoi_bung_thuyen,choices[0].e.karma,4,Kê thuyền và soi vào vệt cạo
+gk_ban_tay_dat_o_mui_thuyen,choices[0].e.karma,4,Đỡ buồm để hai người rút từng mũi
+gk_ban_tay_dat_o_mui_thuyen,choices[1].e.karma,1,Mua thuyền nguyên buồm
+gk_to_khe_ngam_trong_mang,choices[0].e.karma,4,Đọc khế cho người đang tập nghe
+gk_to_khe_ngam_trong_mang,choices[1].e.karma,-3,Nhận phần lợi để chứng khế cho hắn
+gk_cong_co_trong_be_trung,choices[0].e.karma,4,Mua nước sạch cứu bể trứng
+gk_cong_co_trong_be_trung,choices[1].e.karma,-1,Mua ổ trứng trước khi bể khô
+gk_dinh_bien_rut_luc_trieu_xuon,choices[0].e.karma,4,Dùng thanh sắt ở bờ làm đòn bẩy
+gk_dinh_bien_rut_luc_trieu_xuon,choices[1].e.karma,2,Rút kìm để giữ mạng người trước
+gk_mat_bien_con_tro,choices[0].e.karma,4,Giúp tách tro bằng linh lực
+gk_hang_rang_tren_mai_cho,choices[0].e.karma,2,Trải chiếu hứng giúp hắn
+gk_hang_rang_tren_mai_cho,choices[1].e.karma,-3,Thu tiền người muốn đứng chờ
+gk_tang_da_che_mua_nang,choices[0].e.karma,4,Gọi người đổi hướng tảng đá
+gk_tang_da_che_mua_nang,choices[1].e.karma,3,Mua chỗ nằm khác cho lão
+gk_vang_bac_theo_trieu_nguoc,choices[0].e.karma,4,Phá một đường dẫn chim về bờ
+gk_vang_bac_theo_trieu_nguoc,choices[1].e.karma,-3,Thu váng để bọc pháp khí
+gk_mau_khoa_phia_duoi_boong,choices[0].e.karma,4,Giữ lẫy và dẫn người xét hàng tới
+gk_mau_khoa_phia_duoi_boong,choices[1].e.karma,-4,Tháo lẫy để bán lấy tin hành trình
+gk_mau_khoa_phia_duoi_boong,choices[2].win.e.karma,4,Giao đấu với {$b.ten} để giành khoang
+gk_mai_nha_moc_tren_coc_chet,choices[0].e.karma,2,Giúp dân nhường bãi cọc cho san hô
+gk_mai_nha_moc_tren_coc_chet,choices[1].e.karma,-2,Mua một mái mới để dưỡng pháp khí
+gk_bong_nguoi_trong_guong_nuoc_,choices[0].e.karma,4,Giữ mưa trong thau đến hết đêm
+gk_bong_nguoi_trong_guong_nuoc_,choices[1].e.karma,-1,Dùng mặt nước gửi lời mình trước
+gk_tam_dem_duoi_kiem,choices[0].e.karma,4,Góp da làm thêm một tấm
+gk_tam_dem_duoi_kiem,choices[1].e.karma,-1,Xin thử đường kiếm trên đá trần
+gk_ghe_da_co_nguoi_dat_truoc,choices[0].e.karma,4,Xin lấy nước rửa mặt ghế
+gk_ghe_da_co_nguoi_dat_truoc,choices[1].e.karma,-4,Đứng về phía hắn để đổi một lời giới thiệu
+gk_dot_tre_o_cua_ngach,choices[0].e.karma,4,Dùng linh lực giữ khí qua chỗ ống gãy
+gk_dot_tre_o_cua_ngach,choices[1].e.karma,-3,Nộp ống hỏng làm chứng
+gk_duong_may_nguoc,choices[0].e.karma,4,Đổi ca để hai người tự gặp
+gk_duong_may_nguoc,choices[1].e.karma,-3,Đòi trả công để giữ kín
+gk_nguoi_ke_ban_tho,choices[0].e.karma,4,Góp công sửa bàn thờ và khắc lại danh sách
+gk_nguoi_ke_ban_tho,choices[1].e.karma,-2,Nộp gỗ tốt để đổi quyền đặt bài vị của mình
+gk_dinh_lo_mat_nap,choices[0].e.karma,2,Mua quả đổi lấy nắp lò
+gk_dinh_lo_mat_nap,choices[1].e.karma,3,Cho {$b.ten} mượn nắp nồi
+gk_cua_da_tho_mua_dong,choices[0].e.karma,4,Tháo từng lá phù khỏi khung
+gk_bac_da_chi_mon_mot_ben,choices[1].e.karma,-1,Dùng khinh thân thuật đi mép ngoài
+gk_nua_qua_can_cua_hai_phai,choices[0].e.karma,4,Cân lại bằng linh thạch của ngươi
+gk_nua_qua_can_cua_hai_phai,choices[1].e.karma,-3,Nhận linh thạch để xác nhận cách cân cũ
+gk_nua_qua_can_cua_hai_phai,choices[2].win.e.karma,4,Thách {$a.ten} đỡ một kiếm trên đòn cân
+gk_loi_khac_o_tay_vin,choices[0].e.karma,4,Tháo thanh gỗ để đưa cho người từng chịu phạt
+gk_loi_khac_o_tay_vin,choices[1].e.karma,-3,Bán thanh gỗ cho {$a.ten}
+gk_canh_man_trong_chen_mai,choices[0].e.karma,4,Mài lại phiến đá cho nét mực dày
+gk_canh_man_trong_chen_mai,choices[1].e.karma,1,Mua lại bút cũ của {$b.ten}
+gk_nam_hon_da_vao_mua_gio,choices[0].e.karma,4,Xuống hẻm buộc lại dây vào gốc đá
+gk_nam_hon_da_vao_mua_gio,choices[1].e.karma,-3,Thu luồng gió vào hồ lô
+gk_mat_ca_trong_ranh_kiem,choices[0].e.karma,4,Đục rãnh vòng qua kiếm đường
+gk_mat_ca_trong_ranh_kiem,choices[1].e.karma,-4,Luyện kiếm bằng luồng dư khí
+gk_ban_ve_tren_lung_rua,choices[0].e.karma,4,Dụ rùa đi bằng rau non
+gk_so_truc_sau_ba_tieng_mo,choices[0].e.karma,4,Xin nhận ca trực bằng tên ngươi
+gk_so_truc_sau_ba_tieng_mo,choices[1].e.karma,-2,Ký tên hắn và giữ tiền cảm tạ
+gk_vet_cat_tren_thiep_hon,choices[0].e.karma,4,Đọc nốt nửa thiệp trước mặt trưởng lão {$c.ten}
+gk_vet_cat_tren_thiep_hon,choices[2].e.karma,4,Hộ tống nàng rời sân
+gk_nam_voi_chua_toi,choices[0].e.karma,4,Yêu cầu dừng lễ và cạo vôi kiểm tra
+gk_nam_voi_chua_toi,choices[1].e.karma,2,Dùng linh lực cố vách tới hết lễ
+gk_duong_kim_qua_phu_rach,choices[0].e.karma,4,Mua chỉ tơ linh giúp vá phù
+gk_duong_kim_qua_phu_rach,choices[1].e.karma,1,Mua lại phù để lấy phần giấy còn tốt
+gk_bac_tren_cung_thieu_mot_phie,choices[0].e.karma,4,Giúp lão kê phiến đá rồi tiễn xuống
+gk_soi_day_giua_hai_mai,choices[0].e.karma,4,Trông mái để hai người xuống uống trà
+gk_soi_day_giua_hai_mai,choices[1].e.karma,-2,Tháo dây lấy sợi tơ chống sét
+gk_tro_giu_am,choices[0].e.karma,4,Mua cho hắn một lá bùa giữ nhiệt
+gk_tro_giu_am,choices[1].e.karma,-3,Đòi một nửa tiền bán
+gk_nuoc_qua_bo_thap,choices[0].e.karma,4,Kéo xe bò đi và mở cống
+gk_nuoc_qua_bo_thap,choices[1].e.karma,4,Lấy ván kho đắp bờ tạm
+gk_rang_roi_tren_them,choices[0].e.karma,4,Đưa chiếc răng cho quản gia {$b.ten} xem
+gk_rang_roi_tren_them,choices[1].e.karma,-3,Nhận tiền để nhận lỗi
+gk_hu_muc_mua_thu,choices[0].e.karma,4,Mua công một buổi của những đứa đã nghỉ
+gk_hu_muc_mua_thu,choices[1].e.karma,-2,Thuê {$a.ten} chép sách cho ngươi
+gk_tieng_dep_trong_chum,choices[0].e.karma,4,Úp chum lên một đôi dép khô
+gk_tieng_dep_trong_chum,choices[1].e.karma,-3,Niêm chum để bán cho người thu tà vật
+gk_manh_truc_quay_vao,choices[0].e.karma,4,Gõ cửa hỏi {$a.ten}
+gk_manh_truc_quay_vao,choices[1].e.karma,-1,Mua tấm mành
+gk_mot_nen_duong_do,choices[0].e.karma,4,Góp một túi gạo và ngồi ăn
+gk_mot_nen_duong_do,choices[1].e.karma,4,Mua cả nồi mang đi
+gk_hon_da_ke_quan_tai,choices[0].e.karma,4,Sửa lại chân giá
+gk_hon_da_ke_quan_tai,choices[1].e.karma,4,Mua hòm tốt hơn cho nhà có tang
+gk_can_muoi_dau_cho,choices[0].e.karma,4,Hong khô muối ngay trước mặt dân chợ
+gk_can_muoi_dau_cho,choices[1].e.karma,4,Đứng ra nộp thay
+gk_con_dau_bun,choices[0].e.karma,4,Dẫn hắn tới xin miễn cho người nhà đang bệnh
+gk_con_dau_bun,choices[1].e.karma,-1,Mua con dấu để đem bán
+gk_da_trong_cuoi_nam,choices[0].e.karma,4,Mua da mới thay mặt trống
+gk_da_trong_cuoi_nam,choices[1].e.karma,-3,Đánh theo nhịp vọng bên trong
+gk_duong_kien_qua_nong,choices[1].e.karma,-2,Chặn đường kiến để thử đổi dòng khí
+gk_gio_dong_cua_ai,choices[0].e.karma,4,Dùng giấy của ngươi đưa lão qua trước
+gk_gio_dong_cua_ai,choices[1].e.karma,4,Trả bạc xin kéo cửa thêm
+gk_gio_dong_cua_ai,choices[2].win.e.karma,4,Thách người giữ ải {$b.ten} đấu gậy để đổi một lượt qua
+gk_cai_bong_o_chan_coi,choices[0].e.karma,4,Đục viên đá vỡ ra
+gk_cai_bong_o_chan_coi,choices[1].e.karma,-3,Kê cối lại và giữ cái bóng làm việc
+gk_mot_dot_den_gianh_lai,choices[0].e.karma,4,Bù tiền sáp và đặt hai cha con làm một mẻ nến
+gk_mot_dot_den_gianh_lai,choices[1].e.karma,-3,Đem nến thiếu tới gặp chủ lò
+gk_duoi_vach_voi,choices[0].e.karma,4,Đào tìm chân mốc cũ
+gk_duoi_vach_voi,choices[1].e.karma,3,Mua phần đất sát bếp
+gk_cai_chan_ke_cao,choices[0].e.karma,4,Cùng dân bịt ổ và kê lại chạn
+gk_cai_chan_ke_cao,choices[1].e.karma,1,Lấy tiền đặt bùa đuổi chuột riêng cho nhà lão
+gk_manh_va_tren_buom_giay,choices[0].e.karma,4,Mua giấy dai gấp lại thuyền
+gk_ao_cung_may_do,choices[0].e.karma,4,Giữ một vạt để hỏi tin dọc đường
+gk_ao_cung_may_do,choices[1].e.karma,4,Mua vải cho họ may áo mới
+gk_mai_ra_dem_ngoi,choices[0].e.karma,4,Đưa ngói lên và ở lại buộc lạt
+gk_mai_ra_dem_ngoi,choices[1].e.karma,1,Trả công cho {$a.ten} làm trọn việc
+tk_tranh,choices[2].e.karma,2,Nhường lại
+tk_dau,choices[0].win.e.karma,4,Ra tay giúp
+tt_chan,choices[0].win.e.karma,8,Chặn thú triều lại
+tt_vua,choices[1].ok.e.karma,4,Nhìn thẳng vào mắt nó
+tt_dan,choices[0].e.karma,8,Hộ tống dân chạy nạn
+tt_dan,choices[1].win.e.karma,6,Quay lại chặn thú
+tt_cuu,choices[0].ok.e.karma,10,Ôm đứa trẻ chạy
+tt_cuu,choices[0].no.e.karma,10,Ôm đứa trẻ chạy
+td_hotong,choices[0].o[1].win.e.karma,4,Nhận lời
+td_nan,choices[0].win.e.karma,6,Xông vào cứu
+td_nan,choices[1].e.karma,-2,Đứng xa nhìn
+ts_dam,choices[0].ok.e.karma,5,Thuyết phục
+tr_bat,choices[0].win.e.karma,-3,Phá vây
+tr_bat,choices[1].e.karma,-2,Đút lót
+tr_bat,choices[2].e.karma,6,Chịu phạt
+tr_giup,choices[0].e.karma,5,Cho một viên đan hồi khí huyết
+tr_giup,choices[1].e.karma,4,Truyền linh lực giúp
+tr_kiem,choices[1].ok.e.karma,-2,Chạy
+tr_kiem,choices[1].no.win.e.karma,-4,Chạy
