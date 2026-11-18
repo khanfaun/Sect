@@ -37,7 +37,7 @@ btNextStage=function(){const r=G.run;const b=r.bt;if(!b)return;const st=b.stages
 // hoặc Cực linh căn (đủ ngũ hành, tương sinh); Ngũ Hành Khuyết Mộc thì không cảm được Mộc khí.
 // Thể chất tiên thiên: suy ra từ linh căn (tỉ lệ hành), khí vận, nhân quả (chính tà) và tính tình (theo xuất thân, mệnh cách), lấy tối đa ba cái phẩm cao nhất,
 // không khớp gì thì là Phàm Thể. Tất cả đều cộng vào chỉ số.
-delete TT_DEST.vo_can; // không có linh căn thì không tu được: bỏ
+// (Đ2.2) khí vận Vô Căn được khôi phục: đi kèm vô linh căn từ kiếp 2.
 // Bảng TT_RW: content/rules/tt-rw.js
 // Bảng TT_RANK, TT_COL: content/rules/tt-rank.js
 function ttRoll(){const n=wpick([1,2,3],x=>[40,45,15][x-1]);const L=[];const all=Object.values(TT_DEST);

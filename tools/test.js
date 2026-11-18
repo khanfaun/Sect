@@ -277,7 +277,7 @@ const TESTS = {
   },
   nen() {
     fresh();
-    ok(run("feat('nq')")===true && run("feat('vo')")===false, 'feat(nq) bật từ Đ1, feat(vo) còn tắt');
+    ok(run("feat('nq')")===true && run("feat('vo')")===true, 'feat(nq) bật từ Đ1, feat(vo) bật từ Đ2');
     ok(run("typeof migrateX")==='function', 'có migrateX');
     ok(run("(()=>{const d={meta:{}};migrateX(d);return !!d.meta.v2})()"), 'migrateX thêm meta.v2 cho bản lưu cũ');
     ok(run("ageY()")===run("Math.floor(G.run.age)"), 'ageY = năm nguyên');
@@ -408,9 +408,32 @@ const TESTS = {
     ok(run("hcRate().bap")===c1, 'cùng bậc thì như nhau');
     run("delete G.meta.lastNq");ok(run("hcRate().bap")===0.25, 'bản lưu cũ: hoàn cảnh thường');
     run("G.meta.lastNq={B:200,G:0};genBirth()");const card=run("JSON.stringify(G.birth.cards.find(c=>c.hc==='bap')||null)");
-    if(card!=='null'){const st0=run(`(()=>{const c=${card};c.hc=null;newRun(c);return G.run.st})()`);const st1=run(`(()=>{newRun(${card});return G.run.st})()`);
+    if(card!=='null'){const seeded=f=>`(()=>{const mr=Math.random,rs=RS;RS=mul(4242);let i=0;Math.random=()=>((i++*0.6180339)%1);try{${f}}finally{Math.random=mr;RS=rs;}return G.run.st})()`;
+      const st0=run(seeded(`const c=${card};c.hc=null;newRun(c);`));const st1=run(seeded(`newRun(${card});`));
       ok(st1<st0||st0<=2, 'bấp bênh: ít tiền khởi đầu hơn ('+st0+' → '+st1+')');}
     fresh();run("die('combat',{n:'thử'})");ok(run("!!G.meta.lastNq"), 'lúc chết ghi lại nghiệp duyên');
+  },
+  vo_kiep1() {
+    fresh();
+    const n=run(`(()=>{G.meta.nlife=0;let v=0;for(let i=0;i<1000;i++)if(genRoot().id==='vo')v++;return v})()`);
+    ok(n===0, 'kiếp đầu không có vô linh căn ('+n+'/1000)');
+    ok(run(`(()=>{G.meta.nlife=0;for(let i=0;i<300;i++){if(ttRoll([]).includes('vo_can'))return false;}return true})()`), 'kiếp đầu không rút khí vận Vô Căn');
+    ok(run(`(()=>{const q={};for(let i=0;i<2000;i++){const x=genRoot();q[x.q]=(q[x.q]||0)+1;}return q.thuong>q.khuyet&&q.khuyet>q.thuan&&!q.undefined})()`), 'linh căn có phẩm chất, Thường nhiều nhất');
+    ok(run(`(()=>{const a=rootView({id:'tam',els:['kim','moc','thuy']}).m,b=rootView({id:'tam',els:['kim','moc','thuy'],q:'thuan'}).m;return b>a&&a===1})()`), 'phẩm Thuần tu nhanh hơn, bản lưu cũ không phẩm như cũ');
+  },
+  vo_kiep2() {
+    fresh();
+    const rate=(B,Gv)=>run(`(()=>{G.meta.nlife=3;G.meta.lastNq={B:${B},G:${Gv}};let v=0;for(let i=0;i<2000;i++)if(genRoot().id==='vo')v++;return v/2000})()`);
+    const a=rate(0,0);ok(a>=0.40&&a<=0.50, 'kiếp 4, nghiệp trung bình: vô căn '+a.toFixed(2));
+    const b=rate(100,0);ok(b<=0.65&&b>a, 'nghiệp chướng nặng: '+b.toFixed(2)+' (trần 65%)');
+    const c=rate(0,100);ok(c>=0.26&&c<a, 'thiện duyên dày: '+c.toFixed(2)+' (sàn 30%)');
+    ok(run("G.meta.lastNq={B:60,G:0};const x=voRate();G.meta.lastNq={B:190,G:0};x===voRate()"), 'cùng bậc nghiệp thì tỉ lệ như nhau');
+    ok(run("delete G.meta.lastNq;voRate()")===45, 'bản lưu cũ: tỉ lệ gốc');
+    const same=run(`(()=>{G.meta.nlife=2;G.meta.lastNq={B:0,G:0};for(let i=0;i<40;i++){genBirth();const C=G.birth.cards;if(!C.every(c=>c.root.id===C[0].root.id&&c.root.els.join()===C[0].root.els.join()))return 'khác';
+      for(const c of C){if((c.root.id==='vo')!==c.kv.includes('vo_can'))return 'kv';}}return 'ok'})()`);
+    ok(same==='ok', 'kiếp 3: mọi thẻ cùng linh căn, Vô Căn đi kèm vô linh căn ('+same+')');
+    run("G.meta.nlife=2;genBirth();const c=G.birth.cards[0];c.root={id:'vo',els:[],q:null};c.trait='loithan';newRun(c)");
+    ok(run("isVo()&&G.run.root.els.length===0"), 'vô căn không được mệnh cách thêm hệ');
   },
   deed_su_kien() {
     fresh();

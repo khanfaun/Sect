@@ -96,7 +96,7 @@ function relicLorePool(name){const soft=/Phất Trần|Trượng|Phiến|Quạt|
 function genRelic(tier){
   const r=G.run;const K=pick(RELIC_K);
   let el,base;
-  if(K.k==='hap'){el=chance(.7)?pick(r.root.els):pick(['kim','moc','thuy','hoa','tho','loi']);base={kim:contentText("core_05-thoi-gian-the-gioi_js.genRelic.054"),moc:contentText("core_05-thoi-gian-the-gioi_js.genRelic.055"),thuy:contentText("core_05-thoi-gian-the-gioi_js.genRelic.056"),hoa:'Phiến',tho:contentText("core_05-thoi-gian-the-gioi_js.genRelic.057"),loi:contentText("core_05-thoi-gian-the-gioi_js.genRelic.058"),bang:contentText("core_05-thoi-gian-the-gioi_js.genRelic.059"),phong:'Phong Linh'}[el];}
+  if(K.k==='hap'){el=chance(.7)&&r.root.els.length?pick(r.root.els):pick(['kim','moc','thuy','hoa','tho','loi']);base={kim:contentText("core_05-thoi-gian-the-gioi_js.genRelic.054"),moc:contentText("core_05-thoi-gian-the-gioi_js.genRelic.055"),thuy:contentText("core_05-thoi-gian-the-gioi_js.genRelic.056"),hoa:'Phiến',tho:contentText("core_05-thoi-gian-the-gioi_js.genRelic.057"),loi:contentText("core_05-thoi-gian-the-gioi_js.genRelic.058"),bang:contentText("core_05-thoi-gian-the-gioi_js.genRelic.059"),phong:'Phong Linh'}[el];}
   else {el=chance(.45)?'vo':pick(NGUHANH);base=pick(K.b);}
   const pre=pick(RELIC_PRE[el]||RELIC_PRE.vo);
   const who=genName(chance(.5)?'nam':'nu');
