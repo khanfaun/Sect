@@ -274,6 +274,7 @@
  "content/rules/tue-bien.js",
  "core2/38-tue-bien.js",
  "content/rules/tien.js",
+ "content/venues/thuong-cac.js",
  "core2/39-tien-te.js",
  "ui/01-base.js",
  "ui/02-assets.js",
@@ -298,5 +299,6 @@
  "ui/21-thong-bao-nho-duoi.js",
  "ui/22-cau-noi-react.js",
  "ui/24-dau-thai.js",
+ "ui/25-tien-te.js",
  "ui/23-chu-thich-ten.js"
 ]

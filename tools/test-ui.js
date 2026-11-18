@@ -251,6 +251,16 @@ const TESTS = {
     ok(/Mua một viên linh thạch/.test(t) && /110 quan/.test(t), 'danh sách đổi có giá 110 quan: '+t.slice(0,80).replace(/\s+/g,' '));
     await ev(p, () => {G.run.scene=null;render();});
   },
+  // Đ3.5: hộp thoại Thưởng Các
+  async thuongcac(p) {
+    await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.thuongLenh=7;UI.panel=null;openPlace(n.id);ACT.pact('thuongcac');render();});
+    await p.waitForTimeout(200);
+    const t = await ev(p, () => (document.querySelector('.tcac')||{}).innerText||'');
+    ok(/Thưởng Các/.test(t) && /7/.test(t) && /Hồi Xuân Đan/.test(t) && /Vô danh/.test(t), 'hộp thoại Thưởng Các: '+t.slice(0,80).replace(/\s+/g,' '));
+    await ev(p, () => {ACT.tcBuy(THUONG_CAC.findIndex(x=>x.id==='hoixuan'));render();});
+    ok(await ev(p, () => G.run.thuongLenh===5), 'đổi Hồi Xuân Đan trừ hai thẻ');
+    await ev(p, () => {UI.modal=null;G.run.scene=null;render();});
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

@@ -580,6 +580,27 @@ const TESTS = {
     run(`G.run.flags.tongmon=1;G.run.chMap=null;delete G.run._chV1;G.run.ch=30;run2()`);
     ok(run(`G.run.chMap['sect:'+${JSON.stringify(T[0].s)}].v`)===30&&run("G.run.ch===undefined"), 'bản lưu cũ r.ch=30 → sổ tông hiện tại 30');
   },
+  // Đ3.5 Thưởng Lệnh: nhận theo bậc nhiệm vụ, bỏ/trễ −1, bậc Thưởng Các, cửa hàng có giới hạn theo thành
+  tien_thuong() {
+    fresh();
+    const nid=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);return n.id})()");
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='thuongcac')"), 'thành có bảng treo thì có Thưởng Các');
+    run("openBoard(nodeById(G.run.at));takeQuest(0)");const q=JSON.parse(run("JSON.stringify(G.run.quests[0])"));ok(q.t0!=null, 'ghi lúc nhận việc');
+    const g=run("tlQuest(G.run.quests[0])");run("G.run.thuongLenh=0;G.run.thuongTong=0");
+    if(q.kind==='den')run(`G.run.at=G.run.quests[0].node;openPlace(G.run.at);questDo(G.run.quests[0].id)`);else run(`questWin(G.run.quests[0].id)`);
+    run(`G.run.at=${JSON.stringify(nid)};openPlace(G.run.at)`);
+    ok(run("G.run.thuongLenh")===g&&g>=2, 'xong sớm: nhận '+g+' thẻ (bậc + 1)');
+    run("openBoard(nodeById(G.run.at));const b=nodeById(G.run.at).board;b.list.forEach(x=>x.taken=false);takeQuest(1)");const t1=run("G.run.thuongLenh");
+    run("questCancel(G.run.quests.find(x=>x.state==='open').id)");ok(run("G.run.thuongLenh")===t1-1, 'bỏ nhiệm vụ: −1');
+    run("G.run.quests=[];nodeById(G.run.at).board=null;openBoard(nodeById(G.run.at));takeQuest(0)");const t2=run("G.run.thuongLenh");run("G.run.qfix14=1;G.run.quests.find(x=>x.state==='open').due=W().t+1;advanceTime(5)");ok(run("G.run.thuongLenh")===Math.max(0,t2-1), 'trễ hạn: −1');
+    run("G.run.thuongTong=19");ok(run("tcBac()")===0, 'mười chín thẻ: Vô danh');run("G.run.thuongTong=20");ok(run("tcBac()")===1, 'hai mươi thẻ: Đồng bài');
+    run("G.run.thuongTong=0;G.run.thuongLenh=100;G.run.pills=[];openPlace(G.run.at)");
+    const i=run("THUONG_CAC.findIndex(x=>x.id==='kimcang')");ok(!run(`tcBuy(${i})`), 'Kim Cang Phù cần Đồng bài');
+    const j=run("THUONG_CAC.findIndex(x=>x.id==='hoixuan')");let n=0;for(let k=0;k<6;k++)if(run(`tcBuy(${j})`))n++;
+    ok(n===5&&run("G.run.thuongLenh")===90, 'Hồi Xuân Đan tối đa năm viên mỗi tháng ('+n+')');
+    ok(run("tcList(nodeById(G.run.at)).every(x=>x.id!=='khai_linh_dan')")&&run("THUONG_CAC.some(x=>x.id==='manh_moi_co_duyen'&&x.p===60&&x.bac===4)"), 'bỏ Khai Linh Đan, có Manh mối cơ duyên');
+    const lk=run("THUONG_CAC.findIndex(x=>x.id==='luong_kho')");run(`tcBuy(${lk})`);ok(run("G.run.qitems.includes('luong_kho')"), 'đổi lương khô');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });

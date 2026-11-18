@@ -69,3 +69,32 @@ function ttUse(n){const w=W();const m=Math.floor(w.t/HM);const T=(w.tientrang=w.
 // bản lưu cũ: r.ch là một số chung → sổ của tông đang thuộc
 {const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._chV1){r._chV1=1;r.chMap=r.chMap||{};
   if(r.ch!=null){const nm=r.flags&&r.flags.tongmon?contentSectName():null;if(nm&&r.ch>0){const k='sect:'+nm;r.chMap[k]={v:(r.chMap[k]&&r.chMap[k].v||0)+r.ch,dong:0};}delete r.ch;}}return r;};}
+
+// ---------- Đ3.5: Thưởng Lệnh và Thưởng Các (bảng THUONG_CAC, TC_BAC, TL_QST: content/venues/thuong-cac.js) ----------
+// r.thuongLenh: thẻ đang có (tiêu được); r.thuongTong: tổng thẻ từng nhận (tính bậc, không giảm)
+function tlAdd(x,why){const r=G.run;if(!r||!x)return 0;const v0=r.thuongLenh||0;r.thuongLenh=Math.max(0,v0+x);if(x>0)r.thuongTong=(r.thuongTong||0)+x;dbg('tl.add',{x,why:why||'',v:r.thuongLenh});return r.thuongLenh-v0;}
+function tcBac(r){r=r||G.run;const t=(r&&r.thuongTong)||0;let b=0;for(let i=0;i<TC_BAC.length;i++)if(t>=TC_BAC[i].v)b=i;return b;}
+function tlQuest(q){let g=questGrade(q);g=clamp(g,0,TL_QST.length-1);let n=TL_QST[g];if(q.t0!=null&&q.due!=null&&W().t-q.t0<(q.due-q.t0)/2)n+=1;return n;}
+function tlChip(x){return chip('🎋',(x<0?'−':'+')+Math.abs(x),contentText('tl.chip'),x<0?'dn':'up');}
+// ghi lúc nhận việc để tính thưởng "xong trước nửa hạn"
+{const _tq=takeQuest;takeQuest=function(i){const r=G.run;const k=r?r.quests.length:0;const o=_tq.apply(this,arguments);if(G.run&&G.run.quests.length>k){const q=G.run.quests[G.run.quests.length-1];if(q.t0==null)q.t0=W().t;}return o;};}
+function tlOpenQ(){const r=G.run;return r?r.quests.filter(q=>q.state==='open'):[];}
+// mọi lối xong nhiệm vụ bảng treo đều qua questGive (core2/08)
+{const _qg=questGive;questGive=function(q){const ch=_qg.apply(this,arguments);if(!G.run||!q)return ch;const n=tlQuest(q);tlAdd(n,'quest');return (ch||[]).concat([tlChip(n)]);};}
+{const _qc=questCancel;questCancel=function(id){const o=_qc.apply(this,arguments);if(o&&G.run)tlAdd(-1,'bo');return o;};}
+{const _th=timeHooks;timeHooks=function(h){const L=tlOpenQ();const o=_th.apply(this,arguments);if(!G.run)return o;for(const q of L)if(q.state==='fail'&&!q.dropped)tlAdd(-1,'tre');return o;};}
+// giới hạn mua tính theo từng thành: W().thuongCac[nút][mã]={k,n} với k là khóa kỳ (tháng / năm / kiếp)
+function tcPeriod(lim){const w=W(),r=G.run;if(!lim)return null;return lim[1]==='thang'?'m'+Math.floor(w.t/HM):lim[1]==='nam'?'y'+Math.floor(w.t/HY):'k'+r.kiep;}
+function tcLeft(n,it){if(!it.lim)return Infinity;const w=W();const T=((w.thuongCac=w.thuongCac||{})[n.id]=w.thuongCac[n.id]||{});const x=T[it.id];const k=tcPeriod(it.lim);return (!x||x.k!==k)?it.lim[0]:Math.max(0,it.lim[0]-x.n);}
+function tcItemName(it){if(it.n)return it.n;if(it.k==='pill')return PILL[it.id].n;return (CAT.byId[it.id]||{}).n||it.id;}
+function tcList(n){const r=G.run;return THUONG_CAC.filter(it=>!it.an).map((it,i)=>{const left=tcLeft(n,it);
+  const why=tcBac(r)<it.bac?contentText('tl.canBac',[TC_BAC[it.bac].n]):!left?contentText('tl.het'):(r.thuongLenh||0)<it.p?contentText('tl.thieu'):(it.k==='pill'&&r.pills.length>=S().pillMax)?contentText('tl.day'):'';
+  return {i:THUONG_CAC.indexOf(it),id:it.id,k:it.k,n:tcItemName(it),p:it.p,bac:it.bac,left,why};});}
+function tcBuy(i){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);const it=THUONG_CAC[+i];if(!it||it.an)return false;
+  const v=tcList(n).find(x=>x.i===+i);if(!v||v.why)return false;
+  tlAdd(-it.p,'mua:'+it.id);if(it.k==='pill')gainPill(it.id,0);else (r.qitems=r.qitems||[]).push(it.id);
+  if(it.lim){const T=W().thuongCac[n.id];const k=tcPeriod(it.lim);if(!T[it.id]||T[it.id].k!==k)T[it.id]={k,n:0};T[it.id].n++;}
+  log(contentText('tl.muaLog',[tcItemName(it),it.p]));dbg('tl.mua',{id:it.id,left:r.thuongLenh});saveSoon();return true;}
+// nút Thưởng Các cạnh bảng treo thưởng
+{const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(feat('tien')&&L.some(x=>x.a==='board')&&!L.some(x=>x.a==='thuongcac'))
+  L.push({a:'thuongcac',i:'🎋',l:contentText('tl.cac'),h:0,tip:contentText('tl.cacTip'),dis:false,x:''});return L;};}

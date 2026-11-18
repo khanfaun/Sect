@@ -8,6 +8,7 @@ import { LinhNgoGap, LinhNgoThem } from './LinhNgoGap';
 import { KhiVan, ChonTienThien } from './KhiVan';
 import { XemVatPham, XemCongPhap, CacPham, TieuHuyet } from './VatPham';
 import { XacNhanViec, XacNhanNoiChon, LamNhiemVu, HuyNhiemVu } from './XacNhan';
+import { ThuongCac } from './ThuongCac';
 
 export const HOP_THOAI = {
   danger: TuDia,
@@ -37,4 +38,5 @@ export const HOP_THOAI = {
   art: XemCongPhap,
   pham: CacPham,
   th: TieuHuyet,
+  thuongcac: ThuongCac,
 };

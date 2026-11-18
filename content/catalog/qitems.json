@@ -794,5 +794,14 @@
     "use": "Mang theo lúc chết: kiếp sau nhớ lại tâm pháp đang tu (ở bậc thấp nhất).",
     "d": "Ngọn đèn nhỏ, bấc cháy mãi không tàn.",
     "status": "active"
+  },
+  {
+    "id": "luong_kho",
+    "n": "Lương khô",
+    "i": "🍙",
+    "dang": "Vật dùng",
+    "use": "Tự ăn khi đói và không có quán: một gói đủ năm ngày.",
+    "d": "Gói bánh khô và thịt muối bọc lá, cứng như gỗ nhưng no lâu.",
+    "status": "active"
   }
 ]

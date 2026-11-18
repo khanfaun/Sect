@@ -20,5 +20,13 @@
   "tien.ttKhongLt": "Không có linh thạch",
   "tien.ttLt": "Linh thạch",
   "tien.ttMuaXong": "Chưởng quỹ đếm bạc ba lần rồi mới mở hộp gỗ, đặt một viên linh thạch vào tay ngươi.",
-  "tien.ttBanXong": "Chưởng quỹ soi viên linh thạch dưới đèn, gật đầu, rồi đẩy mấy thỏi bạc qua quầy."
+  "tien.ttBanXong": "Chưởng quỹ soi viên linh thạch dưới đèn, gật đầu, rồi đẩy mấy thỏi bạc qua quầy.",
+  "tl.chip": "Thưởng Lệnh",
+  "tl.cac": "Thưởng Các",
+  "tl.cacTip": "Đổi Thưởng Lệnh lấy đan dược, phù lục, vật dụng",
+  "tl.canBac": "Cần bậc {{0}}",
+  "tl.het": "Đã hết hàng kỳ này",
+  "tl.thieu": "Không đủ Thưởng Lệnh",
+  "tl.day": "Túi đan đã đầy",
+  "tl.muaLog": "Đổi {{1}} Thưởng Lệnh lấy {{0}} ở Thưởng Các."
 }
