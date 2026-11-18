@@ -274,6 +274,14 @@ const TESTS = {
     const s = run(`contentText(${JSON.stringify(k)},["A1","A2","A3","A4","A5","A6"])`);
     ok(!s.includes('{{0}}') && s.includes('A1'), 'tham số được điền: ' + s.slice(0, 60));
   },
+  nen() {
+    fresh();
+    ok(run("feat('nq')")===false, 'feat(nq) tắt');
+    ok(run("typeof migrateX")==='function', 'có migrateX');
+    ok(run("(()=>{const d={meta:{}};migrateX(d);return !!d.meta.v2})()"), 'migrateX thêm meta.v2 cho bản lưu cũ');
+    ok(run("ageY()")===run("Math.floor(G.run.age)"), 'ageY = năm nguyên');
+    ok(run("(()=>{const n=anchorNode('LOC01');return n&&n.type})()")==='tran', 'anchorNode(LOC01) là trấn');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });
