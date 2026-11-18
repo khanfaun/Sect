@@ -28,3 +28,12 @@ function rootQ(root){return root&&ROOT_Q.find(q=>q.id===root.q)||null;}
   dbg('vo.birth',{root:cards[0]&&cards[0].root.id});return res;};}
 // mệnh cách Lôi Thần thêm hệ lôi: vô căn thì không
 {const _nr=newRun;newRun=function(c){const res=_nr.apply(this,arguments);const r=G.run;if(r&&isVo(r))r.root.els=[];return res;};}
+// ---------- Đ2.3: vô căn không tu luyện được ----------
+{const _pu=phamUp;phamUp=function(){if(isVo())return;return _pu.apply(this,arguments);};}
+{const _at=addTv;addTv=function(x){const r=G.run;if(r&&isVo(r)&&x>0){if(r.vo&&typeof r.vo==='object')r.vo.xp=(r.vo.xp||0)+x*0.5;dbg('vo.tv',{x});return;}return _at.apply(this,arguments);};}
+{const _bq=bqReal;bqReal=function(){if(isVo())return 0;return _bq.apply(this,arguments);};}
+{const _S=S;S=function(){const s=_S.apply(this,arguments);if(isVo())s.maxMp=0;return s;};}
+{const _cb=canBreak;canBreak=function(){if(isVo())return false;return _cb.apply(this,arguments);};}
+// tu vi từ sự kiện: vô căn không nhận, thay bằng một chip
+{const _ae=applyE;applyE=function(e,v){if(!(e&&e.tv>0&&isVo()))return _ae.apply(this,arguments);const e2=Object.assign({},e);delete e2.tv;delete e2.tvMajor;
+  const ch=[chip('🌫️',contentText('vo.noTv'),contentText('vo.noTvTip'),'')];const rest=_ae.call(this,e2,v);return ch.concat(rest||[]);};}

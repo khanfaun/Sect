@@ -76,7 +76,7 @@ function CanCo() {
       <HopGon k="tu" icon="yin" name="Tu luyện">
         <Kv n="Cảnh giới" v={esc(PS.realmLabel()) + ` <span class="qhelp" data-act="cgOpen" data-tip="Mở hệ thống cảnh giới">?</span>`} t={tvTip} />
         {!PS.isPham() && PS.G.run.realm >= 1 && <Kv n="Che giấu tu vi" v={`<button class="btn sm" data-act="hideCycle">${PS.hideOn() ? 'Hiện như ' + PS.shownName() : 'Không che'}</button>`} t={'Người ngoài thấy cảnh giới thấp hơn thật. Sức mạnh không đổi. Kẻ địch không nhìn thấu thì coi thường, ngươi ra tay trước. Kẻ có thần thức cao hơn nhìn xuyên được.\nBấm để hạ thêm một bậc, hạ tới phàm nhân thì bấm nữa để thôi.'} />}
-        <Thanh n="Tu vi" v={PS.tvShow()} cls="tv" />
+        {PS.isVo() ? <div className="vo-note">Vô linh căn — chưa thể tu luyện</div> : <Thanh n="Tu vi" v={PS.tvShow()} cls="tv" />}
         <Kv n="Tốc độ tu" v={RT('bq', PS.bqReal(), 'toc')} t={'Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.'} />
         <Kv n="Thổ nạp" v={RT('thonap', PS.thonapPct(), 'toc')} t={'Thân thể tự hít thở linh khí: không cần bế quan, tu vi vẫn tự tăng theo thời gian, kể cả lúc đi đường hay bế quan.\nRất ít, chừng 5% tốc độ bế quan. Theo linh căn, tư chất, ngộ tính, công pháp, tâm pháp, trang bị, mệnh cách và linh khí nơi đang đứng.'} />
         <Kv n="Hiệu suất tu" v={`<span class="${hs[0]}">${hs[1]}</span>`} t={'Phần tu vi thực nhận so với lẽ ra được nhận, do chênh lệch tu vi và lịch luyện.\nTu vi càng bỏ xa lịch luyện thì nhận càng ít, tới mức bình cảnh gần như đứng yên.\nLịch luyện cao hơn tu vi thì được ngộ đạo, nhận thêm một ít.'} />

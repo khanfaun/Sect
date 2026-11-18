@@ -59,7 +59,8 @@ UPG.push({id:'kytp',n:contentText("core2_10-pham-nhan-chua-dan_js.020"),i:'🪷'
   items.unshift({k:'relic',rel:bookOf(a),p:price(15)});};}
 // cao nhân, tự ngộ, lão nhân: kỳ ngộ riêng, không rơi vào vòng ngẫu nhiên
 // Kỳ ngộ/hộp thoại: content/events/opportunities/.
-{const _adv21=advanceTime;advanceTime=function(h){const o=_adv21(h);const r=G.run;if(!r||!r.pham||!(h>0))return o;if(hasTp()){r.tpAcc=0;return o;}
+{const _adv21=advanceTime;advanceTime=function(h){const o=_adv21(h);const r=G.run;if(!r||!r.pham||!(h>0)||isVo(r))return o; // vô căn: không có tâm pháp bảo đảm (Đ2.3)
+ if(hasTp()){r.tpAcc=0;return o;}
   r.tpAcc=(r.tpAcc||0)+h;const y=r.age-r.birthAge;const free=()=>!r.scene&&G.screen==='map';
   if(y>=TP_Y-0.5&&free()){kyStart(tpGuarPick());r.tpAcc=0;return o;}
   while(r.tpAcc>=HM&&G.run&&!hasTp()){r.tpAcc-=HM;

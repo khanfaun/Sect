@@ -435,6 +435,18 @@ const TESTS = {
     run("G.meta.nlife=2;genBirth();const c=G.birth.cards[0];c.root={id:'vo',els:[],q:null};c.trait='loithan';newRun(c)");
     ok(run("isVo()&&G.run.root.els.length===0"), 'vô căn không được mệnh cách thêm hệ');
   },
+  vo_khoa() {
+    fresh("G.run.root={id:'vo',els:[]};G.run.arts=G.run.arts.filter(a=>a.k!=='tp'&&!a.start);G.screen='map';");
+    const tv0=run('G.run.tv');run('addTv(50)');ok(run('G.run.tv')===tv0, 'vô căn: tu vi không tăng');
+    ok(run('canBreak()')===false, 'không đột phá được');
+    ok(run('S().maxMp')===0, 'không có linh lực');
+    ok(run('bqReal()')===0, 'bế quan không có tác dụng');
+    run('G.run.tv=100;G.run.ll=500;phamUp()');ok(run('G.run.pham')===1, 'không dẫn khí nhập thể được');
+    const ch=run("JSON.stringify(applyE({tv:20}))");ok(/Không cảm được linh khí/.test(ch), 'sự kiện cho tu vi: chip không cảm được linh khí');
+    const n0=run("G.run.arts.length");
+    run("for(let i=0;i<(TP_Y+1)*12;i++){G.run.scene=null;G.screen='map';advanceTime(HM);if(!G.run)break;}");
+    ok(run("!!G.run")&&run("G.run.arts.length")===n0, 'qua '+(run('TP_Y')+1)+' năm không có tâm pháp mới');
+  },
   deed_su_kien() {
     fresh();
     const bad=run(`(()=>{const out=[];const walk=(x,id)=>{if(Array.isArray(x))return x.forEach(y=>walk(y,id));if(!x||typeof x!=='object')return;for(const k in x){if(k==='karma')out.push('karma@'+id);if(k==='deed'&&!DEED[x[k]])out.push(x[k]+'@'+id);walk(x[k],id);}};for(const e of CONTENT_EVENTS)walk(e,e.id);return out})()`);
