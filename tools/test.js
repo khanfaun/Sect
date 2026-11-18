@@ -751,6 +751,13 @@ const TESTS = {
     run("openPlace(G.run.at);G.run.bac=100");ok(!run("venueDo('vay','tt:200')")&&run("G.run.vay.tra")===980, 'không đủ tiền thật: không trả được');
     run("openPlace(G.run.at);G.run.bac=980");ok(run("venueDo('vay','tra')")&&!run("G.run.vay")&&run("G.run.bac")===0, 'trả nốt phần còn lại thì xong');
     run("G.run.vay={id:'v1',goc:1000,tra:1180,han:W().t+HM,bao:0}");ok(run("vayTtList().length")>0, 'bản lưu cũ (khoản vay cũ) vẫn trả trước được');
+    // Sửa-F câu 27: lãi trọn gói cố định lúc vay
+    run("G.run.vay=null;G.run.bac=0;G.run.origin=ORIGIN.find(o=>(o.grp||'thuong')!=='kho').id;openPlace(G.run.at)");run("venueDo('vay','v3')");
+    ok(run("G.run.vay.tong")===3540&&run("G.run.vay.tra")===3540&&run("G.run.bac")===3000, 'vay 3 lượng: tổng cố định 3.540 chốt lúc vay');
+    run("advanceTime(24*90)");ok(run("G.run.vay.tra")===3540&&run("G.run.vay.tong")===3540, 'qua 3 tháng tổng phải trả không đổi (không cộng lãi theo tháng)');
+    const dv=run("JSON.stringify(venueOpts(nodeById(G.run.at),'vay').filter(o=>o.id==='v10')[0])");ok(/13 lượng|13\.000|trả trọn/.test(dv)&&/Lãi trọn gói/.test(dv), 'danh sách vay hiện rõ tổng phải trả và lãi trọn gói');
+    run("G.run.bac=3540;openPlace(G.run.at)");ok(run("venueDo('vay','tra')")&&run("G.run.bac")===0&&!run("G.run.vay"), 'trả sớm: vẫn đúng 3.540, không giảm lãi cũng không thêm');
+    run("G.run.vay={id:'v1',goc:1000,tra:700,han:W().t+HM,bao:0};run2(G.run)");ok(run("G.run.vay.tong")===1180&&run("G.run.vay.tra")===700, 'bản lưu cũ đang vay: chốt tổng 1.180, phần còn lại giữ nguyên');
   },
   // Sửa-E câu 23: thương lượng giảm giá tiệm ít (tối đa ~5%)
   mac_ca() {
@@ -953,7 +960,7 @@ const TESTS = {
     // vay có lãi ở thành
     fresh(que);run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
     ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='vay')&&placeActs(nodeById(G.run.at)).some(a=>a.a==='nha')"), 'thành có người cho vay và nhà cho thuê');
-    ok(run("venueDo('vay','v1')")&&run("G.run.bac")===1000&&run("G.run.vay.tra")===1180, 'vay 1 lượng, 6 tháng sau trả 1.180 xu');
+    ok(run("venueDo('vay','v1')")&&run("G.run.bac")===1000&&run("G.run.vay.tra")===1180&&run("G.run.vay.tong")===1180, 'vay 1 lượng, 6 tháng sau trả trọn 1.180 xu');
     ok(!run("venueDo('vay','v3')"), 'đang vay: không vay thêm');
     run("bacAdd(180,'t')");ok(run("venueDo('vay','tra')")&&run("G.run.bac")===0&&!run("G.run.vay"), 'trả khoản vay');
     run("venueDo('vay','v1');G.run.bac=0;G.run.vay.han=W().t+10*HD;advanceTime(24)");ok(run("NK.count('no.bao')")===0&&!!run("G.run.vay.bao"), 'báo trước hạn vay');

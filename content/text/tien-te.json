@@ -83,12 +83,12 @@
   "no.vayTip": "Vay tiền có lãi, trả nợ",
   "no.vayIn1": "Một lão chủ hiệu gầy gò lật cuốn sổ dày, ngước nhìn qua cặp kính.",
   "no.vayIn2": "\"Vay thì dễ, trả mới khó. Ký vào đây.\"",
-  "no.vayL": "Vay {{0}}, {{1}} tháng sau trả {{2}}",
-  "no.vayD": "Lãi {{0}}% mỗi tháng. Quá hạn thì món nợ chuyển thành nợ quan phủ đòi.",
+  "no.vayL": "Vay {{0}}, sau {{1}} tháng trả trọn {{2}}",
+  "no.vayD": "Lãi trọn gói {{0}}, định sẵn từ lúc vay: tổng phải trả luôn là {{1}}, trả sớm hay đúng hạn đều vậy, không tính thêm theo tháng. Quá hạn thì món nợ chuyển thành nợ quan phủ đòi.",
   "no.vayDang": "Đang còn một khoản vay",
   "no.vayCam": "Đang mắc nợ, không ai cho vay",
   "no.vayKho": "Người như ngươi chỉ vay được món nhỏ",
-  "no.vayXong": "Nhận {{0}}. Hạn trả còn {{1}} ngày.",
+  "no.vayXong": "Nhận {{0}}. Tổng phải trả cố định {{2}}, hạn còn {{1}} ngày.",
   "no.traL": "Trả khoản vay: {{0}}",
   "no.traD": "Hạn còn {{0}} ngày",
   "no.traNoL": "Trả nợ cũ: {{0}}",
@@ -145,5 +145,5 @@
   "tc.khong": "Tích Cốc Đan chỉ tu sĩ Trúc Cơ trở lên mới luyện hóa được.",
   "tc.con": "Tích cốc: còn {{0}} ngày no",
   "no.ttL": "Trả trước một phần: {{0}}",
-  "no.ttD": "Còn phải trả {{0}} sau khi trả, hạn giữ nguyên"
+  "no.ttD": "Trừ vào tổng cố định, còn phải trả {{0}}; hạn giữ nguyên"
 }

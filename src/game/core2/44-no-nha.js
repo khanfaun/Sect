@@ -1,7 +1,7 @@
 // Sửa-B (người dùng chốt câu 10): bỏ cơm nhà; mua chịu ở quê (tiền âm), nợ và quan phủ, vay có lãi, nhà ở / thuê nhà / ngủ ngoài trời.
 // Bảng NO, NHA: content/rules/no-nha.js. Chữ: content/text/tien-te.json (no.*, nha.*).
 // r.bac < 0 là đang nợ. r.noTra={t0,han,lan,bao}: nợ bắt đầu lúc t0, hạn han (giờ thế giới), lan = số lần đã bị phạt, bao = đã báo trước.
-// r.vay={id,goc,tra,han,bao}: khoản vay. r.nha=1: có nhà ở quê (r.queAt). r.thue={at,gia,den}: nhà thuê, đã trả tới giờ den.
+// r.vay={id,goc,tong,tra,han,bao}: khoản vay; tong = tổng cố định (gốc + lãi trọn gói) chốt lúc vay, tra = còn phải trả (trả trước chỉ trừ vào tra). r.nha=1: có nhà ở quê (r.queAt). r.thue={at,gia,den}: nhà thuê, đã trả tới giờ den.
 // r.ngoai: số đêm ngủ ngoài trời trong tháng đang tính; r.nguD: số ngày đã tính trong tháng đó.
 FEAT.no=1;FEAT.nha=1;
 let NO_CHIU=0,NO_BUSY=0,NGU_OK=0;
@@ -80,9 +80,9 @@ function nhaGia(n){return n&&NHA.thue[n.type]||0;}
 function noVayOpts(n){const r=G.run,L=[];
   if(r.vay)L.push({id:'tra',l:contentText('no.traL',[fmtBac(r.vay.tra)]),d:contentText('no.traD',[noDays(r.vay.han)]),h:0,st:0,g:{txt:fmtBac(r.vay.tra)},no:(r.bac||0)>=r.vay.tra?'':contentText('no.khongDu')});
   const og=ORIGIN.find(o=>o.id===r.origin)||{};const kho=(og.grp||'thuong')==='kho';
-  NO.vay.forEach((V,i)=>{const tra=Math.round(V.goc*(1+V.lai*V.thang));
+  NO.vay.forEach((V,i)=>{const tra=V.tong;
     const why=r.vay?contentText('no.vayDang'):(r.bac<0||noTruy(r))?contentText('no.vayCam'):(kho&&i>=NO.khoVay)?contentText('no.vayKho'):'';
-    L.push({id:V.id,l:contentText('no.vayL',[fmtBac(V.goc),V.thang,fmtBac(tra)]),d:contentText('no.vayD',[Math.round(V.lai*1000)/10]),h:0,st:0,g:{txt:'+'+fmtBac(V.goc)},no:why});});
+    L.push({id:V.id,l:contentText('no.vayL',[fmtBac(V.goc),V.thang,fmtBac(tra)]),d:contentText('no.vayD',[fmtBac(tra-V.goc),fmtBac(tra)]),h:0,st:0,g:{txt:'+'+fmtBac(V.goc)},no:why});});
   return L;}
 function nhaOpts(n){const r=G.run,L=[];const home=r.nha&&n.id===r.queAt;
   if(home||(r.thue&&r.thue.at===n.id))L.push({id:'nghi',l:contentText('nha.nghiL',[NHA.nghiH]),d:contentText('nha.nghiD'),h:NHA.nghiH,st:0,no:''});
@@ -93,7 +93,7 @@ function nhaOpts(n){const r=G.run,L=[];const home=r.nha&&n.id===r.queAt;
 function noVenueDo(v,id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);
   const o=venueOpts(n,v).find(x=>x.id===id);if(!o||o.no)return false;let msg,ch=[];
   if(v==='vay'){if(id==='tra'){const x=r.vay.tra;bacAdd(-x,'vay.tra');r.vay=null;msg=contentText('no.traXong',[fmtBac(x)]);ch=[bacChip(-x)];}
-    else{const V=NO.vay.find(x=>x.id===id);const tra=Math.round(V.goc*(1+V.lai*V.thang));r.vay={id:V.id,goc:V.goc,tra,han:W().t+V.thang*HM,bao:0};bacAdd(V.goc,'vay');msg=contentText('no.vayXong',[fmtBac(V.goc),V.thang*30]);ch=[bacChip(V.goc)];}
+    else{const V=NO.vay.find(x=>x.id===id);const tra=V.tong;r.vay={id:V.id,goc:V.goc,tong:tra,tra,han:W().t+V.thang*HM,bao:0};bacAdd(V.goc,'vay');msg=contentText('no.vayXong',[fmtBac(V.goc),V.thang*30,fmtBac(tra)]);ch=[bacChip(V.goc)];}
     dbg('no.vay',{id,vay:r.vay});}
   else if(id==='thue'){const g=nhaGia(n);bacAdd(-g,'thue');r.thue={at:n.id,gia:g,den:W().t+HM};msg=contentText('nha.thueXong',[n.name]);ch=[bacChip(-g)];dbg('nha.thueMoi',{at:n.id,g});}
   else if(id==='tra'){r.thue=null;msg=contentText('nha.traXong');}
@@ -106,4 +106,6 @@ function noTip(r){r=r||G.run;if(!r)return '';const L=[];if(r.bac<0&&r.noTra)L.pu
   return L.length?'\n'+L.join('\n'):'';}
 // kiếp mới: nhà theo xuất thân; bản lưu cũ cũng vậy
 {const _nr=newRun;newRun=function(){const res=_nr.apply(this,arguments);const r=G.run;if(r){r.nha=nhaCo(r);r._nhaV1=1;}return res;};}
+// Sửa-F câu 27: bản lưu cũ đang vay (lãi theo tháng): chốt tổng cố định = gốc + lãi tính tới hạn theo luật cũ (đã nằm sẵn trong tra lúc vay)
+{const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&r.vay&&r.vay.tong==null){const V=r.vay,d=NO.vay.find(x=>x.id===V.id);V.tong=d?d.tong:V.tra;dbg('no.vayMigrate',{tong:V.tong,tra:V.tra});}return r;};}
 {const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._nhaV1){r._nhaV1=1;r.nha=nhaCo(r);if(r.ngoai==null)r.ngoai=0;}return r;};}

@@ -430,3 +430,17 @@ File hướng dẫn (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) phải có: đị
 - Chỉ hai bí tịch có bán ở tạp hóa thành (`bac` trong `content/rules/vo-dao.js`): **Trường Quyền Nhập Môn 600 → 6.000 xu** (công +5%), **Hỗn Nguyên Nhất Khí Công 900 → 9.000 xu** (nội lực +20%, bậc cao hơn nên đắt hơn). Binh khí phàm giữ 14.000 (thiết kiếm) / 12.000 (cương đao): bí tịch bằng khoảng nửa đến ba phần tư, rẻ hơn binh khí.
 - Cầm đồ vẫn `btPer` = ½ giá mua: **3.000 / 4.500 xu**. Mua rồi cầm lại lỗ nửa.
 - Bài `cam_e` sửa theo (bí tịch cầm 3.000 xu) và thêm hai ý kiểm giá + cầm.
+
+### F.27 — vay lãi trọn gói
+- Bảng `NO.vay` (content/rules/no-nha.js) đổi `lai` theo tháng → **`tong` cố định**: vay 1 lượng (6 tháng) trả trọn 1.180 xu (lãi 180); 3 lượng (6 tháng) trả 3.540 (lãi 540); 10 lượng (12 tháng) trả 13.000 (lãi 3.000). Số trả giữ nguyên các mức cũ; lãi chỉ còn là một số cố định ghi từ lúc vay, không cộng theo tháng.
+- `r.vay={id,goc,tong,tra,han,bao}`: `tong` không bao giờ đổi, `tra` là phần còn lại; trả trước một phần (tt:…) và trả nốt chỉ trừ vào `tra`, hạn giữ nguyên. Quá hạn: toàn bộ `tra` chuyển thành nợ, vào chuỗi nợ/phạt như cũ (60 ngày, hèo, truy nã, làm công).
+- Hộp chọn khoản vay hiện "Vay X, sau N tháng trả trọn Y" kèm "Lãi trọn gói Z … tổng phải trả luôn là Y"; thông báo nhận tiền ghi tổng cố định.
+- Bản lưu cũ đang vay (`run2`, đọc `tong==null`): chốt `tong` theo bảng (= gốc + lãi tính tới hạn theo luật cũ, đã nằm sẵn trong `tra` lúc vay); phần `tra` còn lại giữ nguyên.
+- Bài: `vay_tt` thêm 5 ý (tổng chốt lúc vay, qua 3 tháng không đổi, hộp hiện lãi trọn gói, trả sớm đúng tổng, bản lưu cũ); `no_nha` kiểm thêm `tong`; test-ui `no_nha` kiểm chữ "trả trọn"/"Lãi trọn gói".
+
+## NGƯỜI DÙNG CHỐT ĐỢT 4 (câu 29–31)
+29. CHỐT: KHÔNG ổn. Mọi vật phẩm/thuốc/vật tư liên quan cải căn là vật QUÝ HIẾM, là cơ duyên "chỉ gặp không thể cầu", có tiền chưa chắc mua được. Rà TOÀN BỘ hệ cải căn (content/rules/cai-can.js, sự kiện, cửa hàng): bỏ mua thẳng ở tiệm; nguồn chỉ qua cơ duyên/kỳ ngộ, phần thưởng phục vụ (cứu dịch…), tự chế từ nguyên liệu hiếm (nguyên liệu cũng hiếm), đấu giá/U Minh Ám Hội hiếm khi xuất hiện và giá rất cao, người giữ đồ có thể không chịu bán. Hai đường cho người lao động (cứu dịch, vườn thuốc) vẫn phải đi được bằng công sức, nhưng phần thưởng là thứ hiếm chứ không mua được. Làm ở Sửa-G cùng câu 31.
+30. Văn tâm (Dưỡng Hạo Nhiên Khí) CHỜ Đ7 — khi làm Đ7 (Nho tu) phải bật lại đường này.
+31. Vật tư cải căn PHẢI nằm trong túi đồ (chiếm ô như vật phẩm thường; bỏ sổ riêng r.ccVt, chuyển bản lưu cũ vào túi). Làm ở Sửa-G.
+- THỨ TỰ CHỐT: Sửa-F → Sửa-G → Đ7 → Đ8 → (Đ9.1 bộ máy + schema + công cụ kiểm) → viết file hướng dẫn GPT (Đ9.0) → GPT viết nội dung. Sau Sửa-F: DỪNG, chờ người dùng bảo "tiếp tục".
+- Kết quả đợt Sửa-F: `npm run test:rules` 660 ý đạt (653 + 2 bí tịch + 5 vay); `node tools/test-ui.js` 155 đạt.

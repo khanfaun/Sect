@@ -261,7 +261,7 @@ const TESTS = {
     await ev(p, () => {G.run.scene.venue='vay';render();});
     await p.waitForTimeout(150);
     const t = await ev(p, () => (document.querySelector('.venue')||{}).innerText||'');
-    ok(/Vay 1 lượng bạc/.test(t) && /1 lượng bạc 180 xu/.test(t), 'danh sách vay: '+t.slice(0,160).replace(/\s+/g,' '));
+    ok(/Vay 1 lượng bạc/.test(t) && /trả trọn 1 lượng bạc 180 xu/.test(t) && await ev(p, () => /Lãi trọn gói 180 xu/.test(venueOpts(nodeById(G.run.at),'vay')[0].d)), 'danh sách vay: '+t.slice(0,160).replace(/\s+/g,' '));
     await ev(p, () => {G.run.scene=null;G.run.bac=-50;G.run.noTra={t0:W().t,han:W().t+20*HD,lan:0,bao:0};render();});
     await p.waitForTimeout(150);
     const h = await ev(p, () => [...document.querySelectorAll('.hs-bac')].map(e=>e.innerText+(e.classList.contains('no')?'!':'')).join('|'));
