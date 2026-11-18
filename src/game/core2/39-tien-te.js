@@ -97,36 +97,40 @@ function anAtSect(r){const n=nodeById(r.at);return !!n&&n.type==='tong'&&!!r.fla
 function anAtHome(r){return r.queAt!=null&&r.at===r.queAt&&!r.moving;}
 function anLkEat(r){if((r.anLk||0)>0){r.anLk--;return true;}const i=(r.qitems||[]).indexOf('luong_kho');if(i<0)return false;r.qitems.splice(i,1);r.anLk=AN.lkNgay-1;dbg('an.lk',{left:(r.qitems||[]).filter(x=>x==='luong_kho').length});return true;}
 function anFed(r,how){if((r.doi||0)>=AN.doi.doi)dbg('an.het',{doi:r.doi,how});r.no=100;r.doi=0;}
-// một ngày: ăn ở quán (trả bạc theo mức), ở sơn môn mình (cơm tông), không thì lương khô, không có gì thì đói
-function anDay(){const r=G.run;if(!r||!feat('an'))return;if(!needFood(r)){r.doi=0;r.no=100;return;}
-  if(VT_AN||r.anFree){if(!VT_AN)r.anFree=0;anFed(r,'viec');return;}
-  if(!r.pham&&r.realm===0){r.anHalf=!r.anHalf;if(r.anHalf)return;} // Luyện Khí: nửa phần (mỗi hai ngày một phần)
+// Sửa lỗi đói: mọi người đều đói, nhưng theo nhịp (phần ăn mỗi ngày) — phàm 1, Luyện Khí ½, Trúc Cơ+ rất chậm; bế quan chậm hơn, sau bế quan chậm một thời gian
+function anRate(r){let k=r.pham?1:r.realm===0?AN.nhip.lk:AN.nhip.tc;if(r._inBq)k*=AN.nhip.bq;else if((r.anCham||0)>W().t)k*=AN.nhip.sauBq;return k;}
+function anShow(r){r=r||G.run;return !!r&&(needFood(r)||(r.doi||0)>=AN.doi.thieu);}
+function anStarve(r){r.doi=(r.doi||0)+1;r.no=Math.max(0,100-Math.round(r.doi*100/AN.doi.la));dbg('an.doi',{doi:r.doi});const D=AN.doi;
+  if(r.doi===D.thieu)note(contentText('an.noteThieu'),'dn');else if(r.doi===D.doi)note(contentText('an.noteDoi'),'dn');else if(r.doi===D.la){note(contentText('an.noteLa'),'dn');clampHp();}else if(r.doi===D.kiet){note(contentText('an.noteKiet'),'dn');clampHp();}else if(r.doi===D.canh)note(contentText('an.noteCanh'),'dn');
+  if(r.doi>=D.kiet){const s=S();r.hp=Math.max(1,r.hp-Math.max(1,Math.round(s.maxHp*AN.kietHp)));}}
+// một bữa (một ngày ăn): việc có cơm, sơn môn mình, lương thực đã mua, quán/quê (đủ tiền thật thì mua cả tháng), lương khô, không thì đói
+function anMeal(r){
   r.anDays=(r.anDays||0)+1;
-  if(anAtSect(r)){anFed(r,'tong');}
-  else if((anAtQuan(r)||anAtHome(r))&&r.anTu!==0&&bacCan(anCost(r))){bacPay(anCost(r),'an');anFed(r,'quan');if(anMuc(r).tm&&r.anDays%30===0)r.tamma=Math.max(0,(r.tamma||0)-anMuc(r).tm);}
-  else if(anLkEat(r)){anFed(r,'lk');}
-  else{r.doi=(r.doi||0)+1;r.no=Math.max(0,(r.no==null?100:r.no)-60);dbg('an.doi',{doi:r.doi});
-    if(r.doi===AN.doi.doi)note(contentText('an.noteDoi'),'dn');else if(r.doi===AN.doi.la){note(contentText('an.noteLa'),'dn');clampHp();}else if(r.doi===AN.doi.kiet)note(contentText('an.noteKiet'),'dn');
-    if(r.doi>=AN.doi.kiet){const s=S();r.hp=Math.max(1,r.hp-Math.round(s.maxHp*AN.kietHp));}}
-  if((r.doi||0)>=AN.doi.chet&&!(r.scene&&r.scene.type==='combat')){dbg('an.chet',{doi:r.doi});die('doi');}}
-// gộp một tháng (phần vượt AN.maxNgay ngày): đủ tiền thì trả cả tháng, có lương khô thì ăn, không thì đói
-function anMonthBulk(){const r=G.run;if(!r||!needFood(r))return;const half=!r.pham&&r.realm===0;const d=half?15:30;
   if(anAtSect(r)){anFed(r,'tong');return;}
-  const c=anCost(r)*d;if((anAtQuan(r)||anAtHome(r))&&r.anTu!==0&&bacCan(c)){bacPay(c,'an.thang');anFed(r,'quan');return;}
-  let n=0;if((anAtQuan(r)||anAtHome(r))&&r.anTu!==0)while(n<d&&bacCan(anCost(r))){bacPay(anCost(r),'an');n++;}
-  while(n<d&&anLkEat(r))n++;if(n>=d){anFed(r,'lk');return;}
-  r.doi=(r.doi||0)+(d-n);if(r.doi>=AN.doi.chet&&!(r.scene&&r.scene.type==='combat'))die('doi');}
+  if((r.anCov||0)>0){r.anCov--;anFed(r,'cov');return;}
+  if((anAtQuan(r)||anAtHome(r))&&r.anTu!==0){const c=anCost(r),cm=c*AN.thang;
+    if((r.bac||0)>=cm&&bacCan(cm)){bacPay(cm,'an.thang');r.anCov=AN.thang-1;anFed(r,'quan');dbg('an.thang',{c:cm});if(anMuc(r).tm)r.tamma=Math.max(0,(r.tamma||0)-anMuc(r).tm);return;}
+    if(bacCan(c)){bacPay(c,'an');anFed(r,'quan');if(anMuc(r).tm&&r.anDays%30===0)r.tamma=Math.max(0,(r.tamma||0)-anMuc(r).tm);return;}}
+  if(anLkEat(r)){anFed(r,'lk');return;}
+  anStarve(r);}
+function anDay(){const r=G.run;if(!r||!feat('an'))return;
+  if(VT_AN||r.anFree){if(!VT_AN)r.anFree=0;anFed(r,'viec');return;}
+  r.anPart=(r.anPart||0)+anRate(r);
+  while(r.anPart>=1-1e-9&&G.run){r.anPart-=1;anMeal(r);}
+  if((r.doi||0)>=AN.doi.chet&&!(r.scene&&r.scene.type==='combat')){dbg('an.chet',{doi:r.doi});die('doi');}}
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(!r||!feat('an')||!(h>0))return o;
   r.anAcc=(r.anAcc||0)+h;let days=Math.floor(r.anAcc/24);if(days<=0)return o;r.anAcc-=days*24;
-  if(!needFood(r)){r.doi=0;r.no=100;return o;}
-  while(days>AN.maxNgay&&G.run){anMonthBulk();days-=30;}
   for(let i=0;i<days&&G.run;i++)anDay();return o;};}
-// tác dụng: hồi phục theo mức ăn và cơn đói; đói lả giảm khí huyết tối đa
-function anRgMul(){const r=G.run;if(!r||!feat('an')||!needFood(r))return 1;let m=1+(anMuc(r).rg||0);if((r.doi||0)>=AN.doi.doi)m+=AN.rgDoi;return Math.max(0,m);}
+// câu 19: xuất quan thì đói chậm thêm AN.sauBqNgay ngày
+{const _b=bqCustom;bqCustom=function(){const o=_b.apply(this,arguments);const r=G.run;if(r&&feat('an'))r.anCham=W().t+AN.sauBqNgay*HD;return o;};}
+// tác dụng: hồi phục theo mức ăn và cơn đói; đói lả / kiệt sức giảm khí huyết tối đa
+function anRgMul(){const r=G.run;if(!r||!feat('an'))return 1;let m=1+(needFood(r)?(anMuc(r).rg||0):0);const d=r.doi||0;if(d>=AN.doi.kiet)m+=AN.rgKiet;else if(d>=AN.doi.doi)m+=AN.rgDoi;return Math.max(0,m);}
 {const _m=rgMonthRate;rgMonthRate=function(){return _m.apply(this,arguments)*anRgMul();};}
 {const _t=rgTurnRate;rgTurnRate=function(){return _t.apply(this,arguments)*anRgMul();};}
-{const _S=S;S=function(){const s=_S.apply(this,arguments);const r=G.run;if(r&&feat('an')&&(r.doi||0)>=AN.doi.la&&needFood(r))s.maxHp=Math.max(1,Math.round(s.maxHp*(1+AN.hpLa)));return s;};}
-function anState(r){r=r||G.run;const d=(r&&r.doi)||0;if(!r||!needFood(r))return 'tich';return d>=AN.doi.kiet?'kiet':d>=AN.doi.la?'la':d>=AN.doi.doi?'doi':'no';}
+{const _S=S;S=function(){const s=_S.apply(this,arguments);const r=G.run;const d=(r&&r.doi)||0;if(r&&feat('an')&&d>=AN.doi.la)s.maxHp=Math.max(1,Math.round(s.maxHp*(1+(d>=AN.doi.kiet?AN.hpKiet:AN.hpLa))));return s;};}
+function anState(r){r=r||G.run;const d=(r&&r.doi)||0;if(!r)return 'tich';if(!needFood(r)&&d<AN.doi.doi)return 'tich';return d>=AN.doi.kiet?'kiet':d>=AN.doi.la?'la':d>=AN.doi.doi?'doi':'no';}
+// Sửa lỗi đói: bản lưu cũ (thang 15 ngày) đang đói thì nới về mức an toàn
+{const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._anV2){r._anV2=1;if((r.doi||0)>0)dbg('an.migrate',{doi:r.doi});r.doi=0;r.anPart=0;if(r.no!=null)r.no=Math.max(r.no,100);}return r;};}
 // bản lưu cũ: no đủ, tự lo cơm
 {const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._anV1){r._anV1=1;if(r.queAt==null&&r.que&&W()&&W().regions){const h=W().regions.flatMap(R=>R.nodes||[]).find(n=>n.name===r.que);if(h)r.queAt=h.id;}if(r.no==null)r.no=100;if(r.doi==null)r.doi=0;if(!r.anMuc)r.anMuc='thuong';if(r.anTu==null)r.anTu=1;}return r;};}
 // tạp hóa bán lương khô bằng bạc

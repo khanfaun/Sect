@@ -309,4 +309,25 @@ Sửa ở `src/game/core2/47-ra-cheo-d5.js` (trừ chỗ ghi khác).
 20. Cho trả trước một phần nợ ở người cho vay.
 21. Giữ Địa linh căn (2 hệ tương sinh, ×1.5).  22. Giữ.
 23. Năng lực thương lượng giảm giá tiệm ít: vật 100 xu giảm ~3–5 xu (tối đa ~5%).
-24. Người dùng hỏi "năng lực gì" → đã giải thích (8 năng lực hỗ trợ ST23); chờ trả lời, tạm giữ hiện bằng chữ.
+24. CHỐT: năng lực giữ hiện bằng chữ (7 mức).
+
+## Sửa lỗi đói — chết đói quá nhanh (người dùng báo: vào game đi 2 bước đã chết)
+Luật: `src/game/core2/39-tien-te.js` (phần Đ3.6); bảng `AN` ở `content/rules/an-uong.js`; chữ `an.*` trong `content/text/tien-te.json`; HUD `src/react/ban-do/Hud.jsx`.
+
+### Nguyên nhân
+- Phàm nhân đi bộ rất chậm (`walkSpeed` ≈ 0,16–0,18 ô/giờ): nút gần nhất cách quê **35–85 ngày** đường (đo 3 kiếp mới: 844, 2.069, 1.406 giờ).
+- Đang đi đường (`r.moving`) thì không mua được cơm dù có tiền (chỉ ăn ở quán/quê khi đứng yên).
+- Mốc cũ chết đói ở **ngày 15** → chưa tới nút đầu tiên đã chết. Tiền/mua chịu không sai.
+
+### Số liệu mới (đếm theo "bữa" = một ngày ăn bỏ lỡ liên tiếp, `r.doi`)
+- 7: báo thiếu ăn (chưa ảnh hưởng). 30: **Đói** (hồi phục −25%). 90: **Đói lả** (khí huyết tối đa −15%). 180: **Kiệt sức** (−30%, hồi phục −50%, mất 0,5% khí huyết/ngày nhưng không chết vì thế). 330: báo **sắp chết đói**. **365: chết đói** (≈ 1 năm nhịn hoàn toàn).
+- Nhịp đói (phần ăn mỗi ngày): phàm 1; Luyện Khí ½; **Trúc Cơ+ 1/60** (vẫn đói nhưng rất chậm — đổi so với Sửa-A "không cần ăn"; HUD chỉ hiện khi đã thiếu ≥ 7 bữa). Bế quan ×⅓; xuất quan đói ×½ trong **90 ngày** (`r.anCham`). Tĩnh toạ không giảm.
+- Chi phí theo tháng: ở quán/quê có đủ tiền thật thì mua một lần lương thực **cả tháng** (30 × giá ngày: đạm bạc 360, thường 600, khá 1.200 xu), mang theo người (`r.anCov`) nên đi đường vẫn ăn. Không đủ tiền thì mua từng ngày; mua chịu ở quê vẫn tính từng ngày tới −600 xu. Lương khô, săn hái giữ nguyên.
+- Bỏ gộp tháng `anMonthBulk` (lặp từng ngày đủ nhanh); `AN.maxNgay` chỉ còn dùng cho nhà ở.
+- Bản lưu cũ (`_anV2`): đang đói thì đặt `doi=0`, `anPart=0`.
+- Tích Cốc Đan: chưa làm (để Sửa-E).
+
+### Bài kiểm
+- `com_ao` viết lại theo mốc mới (14 ngày sống, 30 đói, 90 lả, 364 sống, 365 chết; Trúc Cơ 100 ngày ≤ 2 bữa; mua cả tháng; bế quan ×⅓; sau bế quan ×½; bản lưu cũ). Bài mua chịu đổi từ số cứng 20 xu/ngày sang `anCost` (hệ số thể chất làm giá 23 xu).
+- Mới `doi_dai` (thêm vào `test:rules`): khốn khó không tiền đi bộ 3 chặng (141, 88, 100 ngày) vẫn sống; 4 tháng ở hoang → đói lả, còn sống; ăn một bữa hết đói.
+- test-ui `an_hud`: đặt `doi=90` (mốc đói lả mới thay cho 3).
