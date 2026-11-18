@@ -282,6 +282,19 @@ const TESTS = {
     ok(run("ageY()")===run("Math.floor(G.run.age)"), 'ageY = năm nguyên');
     ok(run("(()=>{const n=anchorNode('LOC01');return n&&n.type})()")==='tran', 'anchorNode(LOC01) là trấn');
   },
+  deed_bang() {
+    fresh();
+    ok(run("HD_LV.length")===5 && run("HD_W.lon")===8, 'HD_LV đủ 5 bậc');
+    ok(run("NQ_MUC.mang")===15 && run("NQ_TN.dung_xem")===0, 'bảng nghiệp');
+    ok(run("Object.keys(DEED).length")>=54, 'DEED đủ mục: '+run("Object.keys(DEED).length"));
+    const J=x=>JSON.stringify(run('DEED.'+x));
+    ok(J('cuu_nguoi')==='{"p":"vua","g":8,"seed":1}', 'cuu_nguoi đúng mẫu');
+    ok(J('giet_vo_toi')==='{"t":"lon","b":15,"seed":1,"tuyen":"huyet_thu"}', 'giet_vo_toi đúng mẫu');
+    ok(J('tha_ke_ac')==='{"p":"vua","seed":1}', 'tha_ke_ac đúng mẫu');
+    ok(J('hiep_dao')==='{"p":"nho","t":"vua","g":3,"b":1}', 'hiep_dao đúng mẫu');
+    ok(J('sam_hoi')==='{"p":"nho","bPct":-10}', 'sam_hoi đúng mẫu');
+    ok(run("Object.values(DEED).every(d=>(!d.p||HD_W[d.p])&&(!d.t||HD_W[d.t])&&(!d.g||[1,3,8,15].includes(d.g))&&(!d.b||[1,3,8,15].includes(d.b)))"), 'mọi mục dùng mức hợp lệ');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });

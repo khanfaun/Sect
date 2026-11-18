@@ -10,7 +10,7 @@
     "content:check": "node tools/kiem-tra-content.js --report",
     "content:stories": "node tools/kiem-tra-cot-truyen.js",
     "content:docs": "node tools/content-docs.js",
-    "test:rules": "node tools/test.js crush camngo skillonce ngovan themo thuongthe hoiphuc tinhtoa doithu tamma rotcanh chegiau thanthuc llboost bequanhoi tuitruvat suaLoi32 content nen"
+    "test:rules": "node tools/test.js crush camngo skillonce ngovan themo thuongthe hoiphuc tinhtoa doithu tamma rotcanh chegiau thanthuc llboost bequanhoi tuitruvat suaLoi32 content nen deed_bang"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
