@@ -1,17 +1,16 @@
 // ĐỢT 3: Tiền tệ (HN A.7, B §6.1). Bảng TIEN: content/rules/tien.js
-// r.bac: bạc tính bằng đồng (1 quan = 1.000 đồng; 1 linh thạch = 100 quan). Linh thạch vẫn ở r.st.
+// r.bac: tiền phàm tính bằng xu (Sửa-A). Linh thạch hạ phẩm ở r.st, phẩm cao ở r.lt (43-tien-te-2.js).
 FEAT.tien=1;
-function fmtBac(d){d=Math.max(0,Math.round(d||0));const q=Math.floor(d/TIEN.quan),m=d%TIEN.quan;
-  if(!q)return contentText('tien.dong',[m]);return m?contentText('tien.quanDong',[q,m]):contentText('tien.quan',[q]);}
+// Sửa-A: xu / lượng bạc (1.000 xu) / lượng vàng (10.000 xu); bỏ "quan", "đồng"
+function fmtBac(d){d=Math.max(0,Math.round(d||0));const v=Math.floor(d/TIEN.vang),b=Math.floor((d%TIEN.vang)/TIEN.luong),x=d%TIEN.luong;const L=[];
+  if(v)L.push(contentText('tien.vang',[v]));if(b)L.push(contentText('tien.luong',[b]));if(x||!L.length)L.push(contentText('tien.xu',[x]));return L.join(' ');}
 // dạng ngắn cho HUD
-function fmtBacS(d){d=Math.max(0,Math.round(d||0));if(d<TIEN.quan)return contentText('tien.dongS',[d]);const q=d/TIEN.quan;return contentText('tien.quanS',[q>=100?Math.floor(q):String(Math.floor(q*10)/10).replace('.',',')]);}
+function fmtBacS(d){d=Math.max(0,Math.round(d||0));const f=q=>q>=100?String(Math.floor(q)):String(Math.floor(q*10)/10).replace('.',',');
+  if(d<TIEN.luong)return contentText('tien.xuS',[d]);if(d<TIEN.vang)return contentText('tien.luongS',[f(d/TIEN.luong)]);return contentText('tien.vangS',[f(d/TIEN.vang)]);}
 function bacAdd(d,why){const r=G.run;if(!r)return 0;const b0=r.bac||0;r.bac=Math.max(0,b0+Math.round(d||0));const x=r.bac-b0;dbg('tien.bac',{d:x,why:why||'',bac:r.bac});return x;}
-// trả được không (kể cả đổi tự động một linh thạch)
-function bacCan(d){const r=G.run;if(!r)return false;const b=r.bac||0;return b>=d||((r.st||0)>=1&&b+TIEN.ban>=d);}
-// trả d đồng; thiếu thì đổi một linh thạch ra TIEN.ban đồng (giá bán vào tiền trang) kèm lời báo. Trả về false nếu không đủ.
-function bacPay(d,why){const r=G.run;if(!r||!(d>0))return !!r;if(!bacCan(d))return false;
-  if((r.bac||0)<d){r.st-=1;bacAdd(TIEN.ban,'doi');note(contentText('tien.doiTuDong',[fmtBac(TIEN.ban)]),'');dbg('tien.doi',{auto:1});}
-  bacAdd(-d,why);return true;}
+// Sửa-A: linh thạch không còn tự đổi ra tiền phàm
+function bacCan(d){const r=G.run;if(!r)return false;return (r.bac||0)>=d;}
+function bacPay(d,why){const r=G.run;if(!r||!(d>0))return !!r;if(!bacCan(d))return false;bacAdd(-d,why);return true;}
 function bacChip(d){return chip('🪙',(d<0?'−':'+')+fmtBac(Math.abs(d)),contentText('tien.chipTip'),d<0?'dn':'up');}
 function bacRange(og){if(og&&Array.isArray(og.bac))return og.bac;return TIEN.grpBac[(og&&og.grp)||'thuong']||TIEN.grpBac.thuong;}
 // tiền khởi đầu: bạc theo xuất thân; linh thạch của phàm nhân về 0 (trừ xuất thân có `lt`); nâng cấp luân hồi "st" vẫn cộng
@@ -47,24 +46,7 @@ let BAC_PAID=0;
   if(it.k==='qi'){if(!bacPay(it.bac,'shop'))return;const r=G.run;(r.qitems=r.qitems||[]).push(it.id);if(it.qty!=null){it.qty--;if(it.qty<=0)it.sold=1;}else it.sold=1;log(contentText('tien.muaVat',[CAT.byId[it.id].n]));dbg('tien.qi',{id:it.id});return;}
   if(!bacPay(it.bac,'shop'))return;it.p=0;_by.apply(this,arguments);if(G.run&&!it.sold)bacAdd(it.bac,'hoan');};}
 
-// ---------- Đ3.3: tiền trang ở thành, chợ ----------
-// Dùng khung "nơi chọn việc" (VENUE_N): hai việc mua / bán một linh thạch; mỗi tiền trang đổi tối đa TIEN.ttMax viên mỗi tháng (W().tientrang[nút]={m,n}).
-VENUE_N.tientrang=contentText('tien.tt');VENUE_IN.tientrang=[contentText('tien.ttIn1'),contentText('tien.ttIn2')];
-function ttLeft(n){const w=W();const m=Math.floor(w.t/HM);const T=(w.tientrang=w.tientrang||{});const x=T[n.id];return (!x||x.m!==m)?TIEN.ttMax:Math.max(0,TIEN.ttMax-x.n);}
-function ttUse(n){const w=W();const m=Math.floor(w.t/HM);const T=(w.tientrang=w.tientrang||{});if(!T[n.id]||T[n.id].m!==m)T[n.id]={m,n:0};T[n.id].n++;}
-{const _vo=venueOpts;venueOpts=function(n,v){if(v!=='tientrang')return _vo.apply(this,arguments);const r=G.run,left=ttLeft(n);
-  const L=[{id:'mua',l:contentText('tien.ttMua'),d:contentText('tien.ttMuaD',[fmtBac(TIEN.mua)]),h:0,st:0,bac:TIEN.mua,g:{st:1}},
-           {id:'ban',l:contentText('tien.ttBan'),d:contentText('tien.ttBanD',[fmtBac(TIEN.ban)]),h:0,st:1,g:{txt:fmtBac(TIEN.ban)}}];
-  for(const o of L){o.no=!left?contentText('tien.ttHet'):o.id==='mua'?((r.bac||0)<TIEN.mua?contentText('tien.khongDu'):''):((r.st||0)<1?contentText('tien.ttKhongLt'):'');}
-  return L;};}
-{const _vd=venueDo;venueDo=function(v,id){if(v!=='tientrang')return _vd.apply(this,arguments);const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;
-  const n=nodeById(sc.id);const o=venueOpts(n,v).find(x=>x.id===id);if(!o||o.no)return false;let ch;
-  if(id==='mua'){bacAdd(-TIEN.mua,'tientrang');r.st+=1;ch=[bacChip(-TIEN.mua),chip('💎','+1',contentText('tien.ttLt'),'up')];}
-  else{r.st-=1;bacAdd(TIEN.ban,'tientrang');ch=[chip('💎','−1',contentText('tien.ttLt'),'dn'),bacChip(TIEN.ban)];}
-  ttUse(n);sc.msg=[contentText(id==='mua'?'tien.ttMuaXong':'tien.ttBanXong')];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;dbg('tien.tt',{id,left:ttLeft(n)});saveSoon();return true;};}
-{const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(feat('tien')&&(n.type==='thanh'||n.type==='cho')&&n.state!=='ruin'&&!L.some(x=>x.a==='tientrang'))
-  L.push({a:'tientrang',i:'🏦',l:contentText('tien.tt'),h:0,tip:contentText('tien.ttTip'),dis:false,x:''});return L;};}
-
+// ---------- Đ3.3: tiền trang — Sửa-A đã bỏ (linh thạch không đổi trực tiếp sang tiền phàm); xem 43-tien-te-2.js ----------
 // ---------- Đ3.4: cống hiến theo thế lực (hàm chKey/chGet/chAdd ở core2/03) ----------
 // bản lưu cũ: r.ch là một số chung → sổ của tông đang thuộc
 {const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._chV1){r._chV1=1;r.chMap=r.chMap||{};

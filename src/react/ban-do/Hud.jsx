@@ -67,9 +67,9 @@ export function Hud() {
       <span className={'hs tm' + (tm >= 60 ? ' hi' : '')} {...tip('Tâm ma: ' + PS.tmWord(tm).toLowerCase() + '\nĐầy sẽ phải đối mặt với chính mình')}><Ic n="skull" />{PS.tmWord(tm)}</span>
       <span className="hs dt" {...tip('Đạo tâm: ' + PS.rateOf('tam', s.tam, 'muc').t + '\nChống ảo cảnh, giúp đột phá')}><Ic n="lotus" /><Rt k="tam" v={s.tam} kind="muc" /></span>
       {PS.needFood && PS.needFood(r) && <button className={'hs an' + (PS.anState(r) !== 'no' ? ' hi' : '')} data-act="anMuc" {...tip('Cái ăn: ' + PS.contentText('an.' + PS.anState(r)) + (r.doi ? ' (' + r.doi + ' ngày chưa ăn)' : '') + '\nMức ăn: ' + PS.anMuc(r).n + ' · ' + PS.fmtBac(PS.anCost(r)) + '/ngày\nChạm để đổi mức ăn')}>🍚{PS.anState(r) !== 'no' ? PS.contentText('an.' + PS.anState(r)) : ''}</button>}
-      <span className="hs st" {...tip('Hầu bao\nLinh thạch: ' + PS.fmtN(r.st) + '\nBạc: ' + PS.fmtBac(r.bac || 0) + '\nThưởng Lệnh: ' + (r.thuongLenh || 0))}><i className="rh"></i>{PS.fmtN(r.st)}<small className="hs-bac"><i className="sep"> · </i>{PS.fmtBacS(r.bac || 0)}</small></span>
+      <span className="hs st" {...tip('Hầu bao\nLinh thạch: ' + PS.ltTxt(r) + '\nTiền phàm: ' + PS.fmtBac(r.bac || 0) + '\nThưởng Lệnh: ' + (r.thuongLenh || 0))}><i className="rh"></i>{PS.fmtN(r.st)}<small className="hs-bac"><i className="sep"> · </i>{PS.fmtBacS(r.bac || 0)}</small></span>
     </div>
-    <div className="hud-ls" {...tip('Hầu bao\nLinh thạch: ' + PS.fmtN(r.st) + '\nBạc: ' + PS.fmtBac(r.bac || 0) + '\nThưởng Lệnh: ' + (r.thuongLenh || 0))}><i className="rh"></i>{PS.fmtN(r.st)}<small className="hs-bac"><i className="sep"> · </i>{PS.fmtBacS(r.bac || 0)}</small></div>
+    <div className="hud-ls" {...tip('Hầu bao\nLinh thạch: ' + PS.ltTxt(r) + '\nTiền phàm: ' + PS.fmtBac(r.bac || 0) + '\nThưởng Lệnh: ' + (r.thuongLenh || 0))}><i className="rh"></i>{PS.fmtN(r.st)}<small className="hs-bac"><i className="sep"> · </i>{PS.fmtBacS(r.bac || 0)}</small></div>
     <i className="hud-tv" style={{ width: PS.voKnown() ? 0 : clamp(tv, 0, 100) + '%' }} {...tip(PS.voKnown() ? 'Vô linh căn — chưa thể tu luyện' : !PS.rootKnown() ? 'Chưa biết mình có tiên duyên hay không' : 'Tu vi ' + tv + '%')} />
     <i className="hud-ll" style={{ width: PS.llShow() + '%' }} {...tip('Lịch luyện ' + PS.llShow() + '%')} />
     <TanThu />

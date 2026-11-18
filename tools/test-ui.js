@@ -230,25 +230,26 @@ const TESTS = {
     await ev(p, () => {G.run.bac=3200;G.run.st=1;UI.modal=null;UI.panel=null;render();});
     await p.waitForTimeout(150);
     const t = await ev(p, () => [...document.querySelectorAll('.hs-bac')].map(e=>e.innerText).join('|'));
-    ok(/3,2 quan/.test(t), 'HUD hiện bạc: '+t);
+    ok(/3,2 lượng/.test(t), 'HUD hiện tiền phàm (Sửa-A: lượng bạc thay quan): '+t);
   },
   // Đ3.2: khách điếm ghi giá bằng bạc
   async tien_quan(p) {
     await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'||n.type==='thanh');G.run.at=n.id;G.run.bac=500;UI.modal=null;UI.panel=null;openPlace(n.id);G.run.scene.venue='inn';render();});
     await p.waitForTimeout(200);
     const t = await ev(p, () => (document.querySelector('.venue')||{}).innerText||'');
-    ok(/12 đồng/.test(t) && /6 đồng/.test(t), 'khách điếm: phòng 12 đồng, giường 6 đồng');
+    ok(/12 xu/.test(t) && /6 xu/.test(t), 'khách điếm: phòng 12 xu, giường 6 xu (Sửa-A)');
     await ev(p, () => {G.run.scene=null;render();});
   },
-  // Đ3.3: tiền trang ở thành, nhóm Mua bán
+  // Sửa-A: tiền trang bỏ; thành có đổi linh thạch và hiệu cầm đồ (nhóm Mua bán)
   async tien_trang(p) {
-    await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;UI.modal=null;UI.panel=null;openPlace(n.id);render();});
+    await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.st=500;UI.modal=null;UI.panel=null;openPlace(n.id);render();});
     await p.waitForTimeout(200);
-    ok(await ev(p, () => /Tiền trang/.test((document.querySelector('.place')||document.body).innerText)), 'thẻ thành có nút Tiền trang');
-    await ev(p, () => {G.run.scene.venue='tientrang';render();});
+    const pl = await ev(p, () => (document.querySelector('.place')||document.body).innerText);
+    ok(!/Tiền trang/.test(pl) && /Đổi linh thạch/.test(pl) && /Hiệu cầm đồ/.test(pl), 'thẻ thành: không còn Tiền trang, có Đổi linh thạch + Hiệu cầm đồ');
+    await ev(p, () => {G.run.scene.venue='doilt';render();});
     await p.waitForTimeout(150);
     const t = await ev(p, () => (document.querySelector('.venue')||{}).innerText||'');
-    ok(/Mua một viên linh thạch/.test(t) && /110 quan/.test(t), 'danh sách đổi có giá 110 quan: '+t.slice(0,80).replace(/\s+/g,' '));
+    ok(/Hạ phẩm/.test(t) && /Trung phẩm/.test(t) && /nhu cầu/i.test(t), 'danh sách đổi phẩm có nhu cầu: '+t.slice(90,260).replace(/\s+/g,' '));
     await ev(p, () => {G.run.scene=null;render();});
   },
   // Đ3.5: hộp thoại Thưởng Các
@@ -279,7 +280,7 @@ const TESTS = {
     await ev(p, () => {ACT.pact('muusinh');render();});
     await p.waitForTimeout(150);
     const t = await ev(p, () => (document.querySelector('.mmsinh')||{}).innerText||'');
-    ok(/Bốc vác/.test(t) && /đồng/.test(t), 'hộp thoại việc làm: '+t.slice(0,70).replace(/\s+/g,' '));
+    ok(/Bốc vác/.test(t) && /xu/.test(t), 'hộp thoại việc làm: '+t.slice(0,70).replace(/\s+/g,' '));
     const b0 = await ev(p, () => G.run.bac||0);
     await ev(p, () => {ACT.vtGo('boc_vac');render();});
     ok(await ev(p, () => G.run.bac||0) > b0, 'làm bốc vác: có tiền công ('+b0+' → '+await ev(p, () => G.run.bac)+')');

@@ -805,6 +805,24 @@
     "status": "active"
   },
   {
+    "id": "kim_sang_duoc",
+    "n": "Kim sang dược",
+    "i": "🩹",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi: hồi ba phần mười khí huyết. Thuốc của người phàm, ai cũng dùng được.",
+    "d": "Gói bột thuốc vàng nâu, rắc lên vết thương thì cầm máu.",
+    "status": "active"
+  },
+  {
+    "id": "huong_an_than",
+    "n": "Hương an thần",
+    "i": "🪔",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi: đốt một nén cho lòng lắng lại, giảm tâm ma.",
+    "d": "Nén hương trầm của tiệm tạp hóa, mùi dịu và lâu tan.",
+    "status": "active"
+  },
+  {
     "id": "bt_truong_quyen",
     "n": "Trường Quyền Nhập Môn",
     "i": "📕",

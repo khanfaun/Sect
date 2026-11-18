@@ -118,7 +118,7 @@ export function TuiDo() {
   const r = PS.run2(), items = PS.bagItems();
   return <>
     <div className="bagtop">
-      <div className="bst" {...tip('Linh thạch: tiền tệ của giới tu tiên')}><span><small>Linh thạch</small><Stone v={r.st} /></span></div>
+      <div className="bst" {...tip('Linh thạch: tiền tệ của giới tu tiên\n' + PS.ltTxt(r) + '\nĐổi phẩm ở phường thị, chợ tu sĩ, tông môn mình')}><span><small>Linh thạch</small><Stone v={r.st} />{[1, 2, 3].some(k => PS.ltGet(k, r)) && <small> {PS.ltTxt(r)}</small>}</span></div>
       <div className="bcap" {...tip('Sức chứa tăng theo cảnh giới và túi trữ vật đang đeo.\nTối đa ' + PS.BAG_MAX + ' ô.')}><small>Túi đồ</small><b>{items.length} / {PS.bagCap()} ô</b></div>
       <button className="icb" data-act="phamHelp" aria-label="Các phẩm" {...tip('Bảng màu các phẩm')}>?</button>
     </div>

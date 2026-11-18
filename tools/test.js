@@ -19,7 +19,7 @@ function fresh(patch) {
   run(`(() => {GEO=null;RS=mul(16717);const original=genWorld;genWorld=()=>original(${seed});
     try{G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0]);}
     finally{genWorld=original;}
-    NK.on=true;NK.clear();G.run.scene=null;FEAT.an=0; // ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại
+    NK.on=true;NK.clear();G.run.scene=null;FEAT.an=0;FEAT.nc=0; // ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
   })()`);
   if (patch) run(patch);
 }
@@ -522,15 +522,18 @@ const TESTS = {
   // Đ3.1 bạc: đơn vị đồng/quan, tiền khởi đầu theo xuất thân, linh thạch phàm nhân về 0, bản lưu cũ
   tien_bac() {
     fresh();
-    ok(run("fmtBac(3200)")==='3 quan 200 đồng'&&run("fmtBac(200)")==='200 đồng'&&run("fmtBac(5000)")==='5 quan', 'fmtBac: '+run("fmtBac(3200)"));
+    // Sửa-A (người dùng chốt câu 9): xu / lượng bạc / lượng vàng, bỏ quan và đồng
+    ok(run("fmtBac(3200)")==='3 lượng bạc 200 xu'&&run("fmtBac(200)")==='200 xu'&&run("fmtBac(5000)")==='5 lượng bạc'&&run("fmtBac(25030)")==='2 lượng vàng 5 lượng bạc 30 xu', 'fmtBac: '+run("fmtBac(25030)"));
+    ok(run("fmtBacS(3200)")==='3,2 lượng'&&run("fmtBacS(25000)")==='2,5 vàng'&&run("fmtBacS(12)")==='12 xu', 'fmtBacS: '+run("fmtBacS(3200)")+' / '+run("fmtBacS(25000)"));
     const st=o=>run(`(()=>{genBirth();const k=Object.assign({},G.birth.cards[0],{origin:'${o}',hc:null});newRun(k);return JSON.stringify({st:G.run.st,bac:G.run.bac})})()`);
     run("G.meta.upg={}");
     let a=JSON.parse(st('nong'));ok(a.st===0&&a.bac>=500&&a.bac<=1500, 'con nhà nông: 0 linh thạch, bạc thường '+JSON.stringify(a));
     a=JSON.parse(st('khat'));ok(a.st===0&&a.bac<=300, 'khất cái: khốn khó '+JSON.stringify(a));
     a=JSON.parse(st('thegia'));ok(a.st>=1&&a.st<=2&&a.bac>=5000, 'con thế gia: 1–2 linh thạch, khá giả '+JSON.stringify(a));
     a=JSON.parse(st('xt_nguoi_thua_ke_sap_bac'));ok(a.bac>=5000, 'xuất thân danh mục nhóm khá giả nhận đúng nhóm '+JSON.stringify(a));
-    run("G.run.bac=0;G.run.st=2;NK.clear()");ok(run("bacPay(500,'thu')")&&run("G.run.st")===1&&run("G.run.bac")===89500, 'thiếu bạc: tự đổi một linh thạch ra chín mươi quan');
-    ok(run("NK.count('tien.bac')")>=2, 'nhật ký tien.bac');
+    // Sửa-A: linh thạch không còn tự đổi ra tiền phàm (trước đây đổi một viên ra 90 quan)
+    run("G.run.bac=0;G.run.st=2;NK.clear()");ok(!run("bacPay(500,'thu')")&&run("G.run.st")===2&&run("G.run.bac")===0, 'thiếu xu mà có linh thạch: không tự đổi');
+    run("G.run.bac=600");ok(run("bacPay(500,'thu')")&&run("G.run.bac")===100&&run("NK.count('tien.bac')")>=1, 'trả 500 xu, nhật ký tien.bac');
     run("G.run.bac=10;G.run.st=0");ok(!run("bacPay(500,'thu')")&&run("G.run.bac")===10, 'không đủ: không trừ');
     run("delete G.run.bac;delete G.run._bacV1;G.run.st=7;run2()");ok(run("G.run.bac")===0&&run("G.run.st")===7, 'bản lưu cũ: bạc 0, giữ linh thạch');
     fresh("G.run.trait='none';G.run.the=[];G.run.kv=['gia_canh_kha_gia'];G.run.tue=null;tueInit(G.run);G.run.bac=0;G.run.st=0;");
@@ -546,7 +549,7 @@ const TESTS = {
     run("G.run.bac=100;G.run.st=0;G.run.hp=1");ok(run("venueDo('inn','an')")&&run("G.run.bac")===87, 'ăn một bữa: trừ 13 đồng ('+run("G.run.bac")+')');
     run("openPlace(G.run.at);G.run.bac=5;G.run.st=0");const no=run("venueOpts(nodeById(G.run.scene.id),'inn').find(x=>x.id==='phong').no");
     ok(no==='Không đủ tiền'&&!run("venueDo('inn','phong')")&&run("G.run.bac")===5, 'không tiền: khóa với chữ "Không đủ tiền"');
-    run("openPlace(G.run.at);G.run.bac=0;G.run.st=1");ok(run("venueDo('inn','phong')")&&run("G.run.st")===0&&run("G.run.bac")===90000-12, 'thiếu bạc mà có linh thạch: đổi tự động');
+    run("openPlace(G.run.at);G.run.bac=0;G.run.st=1");ok(!run("venueDo('inn','phong')")&&run("G.run.st")===1, 'Sửa-A: thiếu xu mà có linh thạch: không đổi tự động');
     run("G.run.arts=(G.run.arts||[]).filter(a=>a.type!=='tp');G.run.relics=G.run.relics.filter(x=>!(x.k==='book'&&x.art&&x.art.type==='tp'));G.run.bac=1000;G.run.st=0;nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");
     const it=JSON.parse(run("JSON.stringify(G.run.scene.items[0])"));ok(it.bac===800, 'tạp hóa: bản chép tay tâm pháp giá 800 đồng ('+it.bac+')');
     run("buy(0)");ok(run("G.run.scene.items[0].sold")&&run("G.run.bac")===200, 'phàm nhân kiếp đầu mua được tâm pháp bằng bạc');
@@ -555,16 +558,89 @@ const TESTS = {
     ok(k>=0&&run(`G.run.scene.items[${k}].bac`)===9900, 'chưa trắc linh: phường thị bán Trắc Linh Thạch 9.900 đồng');
     run(`buy(${k})`);ok(run("G.run.qitems.includes('trac_linh_thach')")&&run("G.run.bac")===100, 'mua Trắc Linh Thạch bằng bạc');
   },
-  // Đ3.3 tiền trang: mua 110 quan, bán 90 quan, tối đa ba viên mỗi tháng
+  // Đ3.3 tiền trang — Sửa-A (câu 9): không còn đổi linh thạch ↔ tiền phàm; thay bằng hiệu cầm đồ
   tien_trang() {
     fresh();
     run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
-    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='tientrang')"), 'thành có tiền trang');
-    run("G.run.bac=300000;G.run.st=0");ok(run("venueDo('tientrang','mua')")&&run("G.run.st")===1&&run("G.run.bac")===190000, 'mua một viên: trừ 110 quan');
-    ok(run("venueDo('tientrang','ban')")&&run("G.run.st")===0&&run("G.run.bac")===280000, 'bán một viên: nhận 90 quan');
-    ok(run("venueDo('tientrang','mua')")&&!run("venueDo('tientrang','mua')")&&run("G.run.st")===1, 'tối đa ba viên mỗi tháng');
-    run("advanceTime(HM)");ok(run("venueDo('tientrang','ban')"), 'sang tháng đổi lại được');
-    run("G.run.bac=1000");ok(!run("venueDo('tientrang','mua')"), 'không đủ bạc thì không mua');
+    ok(!run("placeActs(nodeById(G.run.at)).some(a=>a.a==='tientrang')"), 'thành không còn tiền trang đổi linh thạch');
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='camdo')"), 'thành có hiệu cầm đồ');
+    run("G.run.bac=0;G.run.st=5;G.run.pills=[];G.run.relics=[genRelic(1)];G.run.chu=null");
+    const L=JSON.parse(run("JSON.stringify(venueOpts(nodeById(G.run.at),'camdo'))"));ok(L.length===1&&L[0].id==='r:0'&&!L[0].no, 'cầm đồ: chỉ nhận đồ tu sĩ, không nhận linh thạch');
+    const g=run("camGia(nodeById(G.run.at),sellList()[0])");ok(run("venueDo('camdo','r:0')")&&run("G.run.bac")===g&&run("G.run.relics.length")===0&&run("G.run.st")===5, 'cầm pháp khí ra '+g+' xu, linh thạch giữ nguyên');
+    run("openPlace(G.run.at);G.run.relics=[genRelic(1)]");ok(!run("venueDo('camdo','r:0')"), 'mỗi tháng chỉ nhận một món');
+    run("advanceTime(HM);openPlace(G.run.at)");ok(run("venueDo('camdo','r:0')"), 'sang tháng nhận tiếp');
+  },
+  // Sửa-A (câu 9): bốn phẩm linh thạch, bản lưu cũ
+  lt_pham() {
+    fresh();
+    ok(run("JSON.stringify(G.run.lt)")==='[0,0,0]'&&run("G.run._xuV1")===1, 'nhân vật mới có r.lt');
+    run("G.run.st=7;G.run.bac=3200;delete G.run.lt;delete G.run._xuV1;run2()");
+    ok(run("G.run.st")===7&&run("JSON.stringify(G.run.lt)")==='[0,0,0]'&&run("G.run.bac")===3200, 'bản lưu cũ: linh thạch cũ thành Hạ phẩm, bạc cũ (đồng) = xu');
+    run("ltAdd(1,2);ltAdd(3,1)");ok(run("ltGet(1)")===2&&run("ltGet(3)")===1&&/Trung/.test(run("ltTxt()")), 'thêm Trung, Cực phẩm: '+run("ltTxt()"));
+    ok(run("ltAdd(2,-5)")===0&&run("ltGet(2)")===0, 'không âm');
+  },
+  // Sửa-A (câu 17): đổi phẩm không ngang giá, tùy nơi, phẩm cao khó đổi lên
+  lt_doi() {
+    fresh();
+    const N=JSON.parse(run("JSON.stringify(W().regions.flatMap(R=>R.nodes).filter(n=>n.type==='thanh'&&n.state!=='ruin').slice(0,2).map(n=>n.id))"));
+    run(`G.run.at=${N[0]};openPlace(G.run.at)`);
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='doilt')"), 'phường thị có chỗ đổi linh thạch');
+    const n0=`nodeById(${N[0]})`,n1=`nodeById(${N[1]})`;
+    const up=[0,1].map(k=>run(`ltLen(${n0},${k})`)),dn=[0,1].map(k=>run(`ltXuong(${n0},${k})`));
+    ok(up[0]>100&&up[1]>up[0], 'đổi lên phải bù, phẩm cao bù nhiều hơn: '+up.join(' / '));
+    ok(dn.every(x=>x>=80&&x<=101)&&dn[1]<dn[0], 'đổi xuống 80–101, phẩm cao mất nhiều hơn: '+dn.join(' / '));
+    ok(run(`ltLen(${n0},0)`)!==run(`ltLen(${n1},0)`)||run(`ltXuong(${n0},0)`)!==run(`ltXuong(${n1},0)`)||run(`ltLech(${n0})`)!==run(`ltLech(${n1})`), 'mỗi nơi lệch một ít');
+    ok(!run(`venueOpts(${n0},'doilt').some(o=>o.id==='len:2')`), 'phường thị không đổi lên Cực phẩm');
+    run("G.run.st=1000;G.run.lt=[0,0,0]");const c=up[0];ok(run("venueDo('doilt','len:0')")&&run("ltGet(1)")===1&&run("G.run.st")===1000-c, 'gom '+c+' Hạ lấy 1 Trung');
+    run("openPlace(G.run.at)");const g=run(`ltXuong(${n0},0)`);ok(run("venueDo('doilt','xuong:0')")&&run("ltGet(1)")===0&&run("G.run.st")===1000-c+g, 'đổi 1 Trung lại được '+g+' Hạ (mất phần chênh)');
+    run("openPlace(G.run.at);G.run.st=99999");let n=0;for(let i=0;i<8;i++){run("openPlace(G.run.at)");if(run("venueDo('doilt','len:0')"))n++;}
+    ok(n===run('TIEN2.doi.thanh.lenThang[0]')-1, 'giới hạn số lần đổi lên mỗi tháng: '+n);
+    run("G.run.st=5;openPlace(G.run.at)");ok(run("venueOpts(nodeById(G.run.at),'doilt').find(o=>o.id==='len:0').no")!=='', 'không đủ thì khóa');
+  },
+  // Sửa-A (câu 17): nhu cầu theo nơi × vật phẩm
+  nhu_cau() {
+    fresh("FEAT.nc=1");
+    const nid=run("W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh').id");
+    const d0=run(`ncGet(${nid},'lt1')`);ok(d0>=0.85&&d0<=1.15, 'nhu cầu nền quanh 1: '+d0.toFixed(3));
+    const ds=[];for(let m=0;m<24;m++)ds.push(run(`ncBase('${nid}','dan:x',${m})`));ok(Math.max(...ds)-Math.min(...ds)>0.03, 'dao động theo thời gian');
+    ok(run(`ncGet(${nid},'lt1')`)!==run(`ncGet(${nid},'lt2')`), 'mỗi món một nhu cầu');
+    for(let i=0;i<5;i++)run(`ncPush(${nid},'lt1',TIEN2.nc.day)`);const d1=run(`ncGet(${nid},'lt1')`);ok(d1>d0+0.15, 'mua nhiều đẩy nhu cầu lên: '+d1.toFixed(3));
+    run("advanceTime(HM*6)");const d2=run(`ncGet(${nid},'lt1')`);ok(Math.abs(run(`ncPushNow(${nid},'lt1')`))<0.05, 'phai dần theo tháng: '+d2.toFixed(3));
+    run("advanceTime(HM*12)");ok(!run(`W().nc&&W().nc[${nid}]`), 'phai hết thì xoá khỏi bản lưu');
+    for(let i=0;i<30;i++)run(`ncPush(${nid},'pb',-TIEN2.nc.day)`);ok(run(`ncGet(${nid},'pb')>=TIEN2.nc.min`), 'kẹp trong khoảng');
+    // áp vào giá cửa hàng
+    run(`G.run.at=${nid};openPlace(${nid});nodeById(${nid}).shop=null;G.run.bac=1e6;G.run.st=1e4;openShop(nodeById(${nid}))`);
+    const k=run("G.run.scene.items.findIndex(x=>x.k==='qi'&&x.id==='kim_sang_duoc')");const b0=run(`G.run.scene.items[${k}].bac`);
+    ok(b0===Math.max(1,Math.round(120*run(`ncGet(${nid},'qi:kim_sang_duoc')`))), 'giá tiệm theo nhu cầu: '+b0+' xu');
+    run(`buy(${k});buy(${k})`);ok(run(`G.run.scene.items[${k}].bac`)>b0, 'mua hai gói thì giá lên: '+run(`G.run.scene.items[${k}].bac`));
+    run(`W().nc={};G.run.relics=[genRelic(3)]`);const p0=run("sellList()[0].p");run(`ncPush(${nid},'pb',0.2)`);ok(run("sellList()[0].p")>p0, 'bán: nhu cầu cao thì được giá hơn');
+    ok(run("JSON.stringify(W().nc).length")<400, 'dữ liệu gọn: '+run("JSON.stringify(W().nc).length")+' ký tự');
+  },
+  // Sửa-A (câu 9): tạp hóa thành trấn chủ yếu đồ phàm; tông môn có bảo khố
+  shop_pham() {
+    fresh();
+    for(const t of ['tran','thanh']){
+      run(`(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='${t}'&&n.state!=='ruin');G.run.at=n.id;n.shop=null;openShop(n);})()`);
+      const tu=run("G.run.scene.items.filter(shopCultivator).length");ok(tu<=(t==='tran'?1:2), t+': đồ tu sĩ ≤ '+(t==='tran'?1:2)+' ('+tu+')');
+      ok(run("G.run.scene.items.some(x=>x.k==='qi'&&x.id==='kim_sang_duoc'&&x.bac===120)"), t+': bán Kim sang dược 120 xu');}
+    run("G.run.hp=1;G.run.qitems=['kim_sang_duoc']");ok(run("bagUse('vkim_sang_duoc',1)")===1&&run("G.run.hp")>1&&!run("G.run.qitems.length"), 'dùng Kim sang dược hồi khí huyết');
+    const T=run("W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tong').id");
+    run(`G.run.at=${T};G.run.flags.tongmon=0`);ok(!run(`placeActs(nodeById(${T})).some(a=>a.a==='taphoa')`), 'người ngoài: không có bảo khố');
+    run(`G.run.flags.tongmon=1;G.run.sectName=nodeById(${T}).owner||nodeById(${T}).name`);ok(run(`placeActs(nodeById(${T})).some(a=>a.a==='taphoa')`)&&run(`placeActs(nodeById(${T})).some(a=>a.a==='doilt')`), 'đệ tử: có bảo khố và đổi linh thạch');
+    run(`nodeById(${T}).shop=null;openShop(nodeById(${T}))`);ok(run("G.run.scene.items.filter(shopCultivator).length")>=5, 'bảo khố nhiều đồ tu sĩ: '+run("G.run.scene.items.filter(shopCultivator).length"));
+  },
+  // Sửa-A (câu 9): sự kiện — phàm nhân không gặp chuyện tu sĩ; sự kiện phàm đổi giá sang xu
+  su_kien_pham() {
+    fresh("G.run.pham=1");
+    ok(run("PHAM_SK.cam.length")>=8&&run("PHAM_SK.cam.includes('bi_canh')"), 'có danh sách sự kiện phàm không gặp ('+run("PHAM_SK.cam.length")+')');
+    ok(!run("contentTriggerOk(EVMAP.bi_canh.content)")&&!run("contentPoolOk(EVMAP.bi_canh,null,'explore',false)"), 'phàm nhân không gặp Bí cảnh');
+    run("G.run.pham=0");ok(run("PHAM_SK.cam.includes('bi_canh')")&&!run("phamCam('bi_canh')"), 'tu sĩ thì không bị chặn');run("G.run.pham=1");
+    const x=run("evXu(10)");ok(x===run('Math.max(1,Math.round(10*SC[rT()]))*TIEN.evXu'), 'giá 10 linh thạch → '+x+' xu');
+    run("G.run.bac=0;G.run.st=50");ok(!run("costOk({st:10})"), 'phàm nhân: có linh thạch mà không có xu thì không trả được');
+    run(`G.run.bac=${x}`);ok(run("costOk({st:10})"), 'đủ xu thì trả được');const ch=run("costChips({st:10})");ok(run("G.run.bac")===0&&run("G.run.st")===50&&ch[0].i==='🪙', 'trả bằng xu, giữ linh thạch');
+    run("applyE({st:3})");ok(run("G.run.bac")===run("evXu(3)")&&run("G.run.st")===50, 'phần thưởng linh thạch → xu');
+    ok(run("phamLtTxt('Ngươi đưa ba viên linh thạch, Linh thạch quý lắm. Trắc Linh Thạch')")==='Ngươi đưa ba đồng bạc, Bạc quý lắm. Trắc Linh Thạch', 'lời kể đổi chữ: '+run("phamLtTxt('ba viên linh thạch')"));
+    run("G.run.pham=0;G.run.bac=0;G.run.st=50");run("costChips({st:10})");ok(run("G.run.st")<50&&run("G.run.bac")===0, 'tu sĩ vẫn trả linh thạch');
   },
   // Đ3.4 cống hiến theo thế lực: sổ tông A không dùng ở tông B; bản lưu cũ r.ch → sổ tông hiện tại
   tien_te() {
