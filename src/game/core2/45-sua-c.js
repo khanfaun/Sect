@@ -52,7 +52,7 @@ function sbLeft(n){const r=G.run;const y=Math.floor(W().t/HY);const c=n.sb&&n.sb
   sc.msg=[];sc.chips=[];advanceTime(SAN.h);if(!G.run||G.run.scene!==sc)return;
   const d=ri(SAN.an[0],SAN.an[1]);G.run.anLk=(G.run.anLk||0)+d;const ch=[chip('🍖',contentText('sb.chip',[d]),contentText('sb.chipTip'),'up')];
   if(chance(SAN.thao)){run2().mats.thao+=1;ch.push(chip(MAT.thao.i,'+1 '+MAT.thao.n.toLowerCase(),'','up'));}
-  ch.push(chip('⏳',SAN.h+' giờ','',''));sc.msg=[pick([contentText('sb.m1'),contentText('sb.m2'),contentText('sb.m3')])];sc.chips=ch;
+  ch.push(chip('⏳',durH(SAN.h),'',''));sc.msg=[pick([contentText('sb.m1'),contentText('sb.m2'),contentText('sb.m3')])];sc.chips=ch;
   if(typeof tutTick==='function')tutTick('sanbat');dbg('sb.do',{n:n.id,left:sbLeft(n),d});};}
 
 // ---------- C.18–19: trắc ra Địa / Thiên linh căn — dị tượng toàn màn, tông môn kinh động ----------

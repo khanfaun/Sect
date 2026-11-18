@@ -124,9 +124,9 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
-- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5.1, Đ5.2, Đ5.3.
-- Còn: Đ5.4 (năng lực hỗ trợ ST23, Opus), Đ5.5 (rà chéo đợt 5, Opus), rồi Đ6 trở đi.
-- Có 15 câu hỏi chờ người dùng chốt (Đ1: 5, Đ2: 3, Đ3: 4, Đ4: 3), xem các mục trên.
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5); các đợt sửa theo 15 câu người dùng chốt: Sửa-A, Sửa-B, Sửa-C, Sửa-D.
+- Còn: Đ6 trở đi.
+- Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
 ## NGƯỜI DÙNG CHỐT 15 CÂU (việc phải làm lại/bổ sung trước khi làm Đ5.4)
 1. Mốc bậc nghiệp: tự quyết, không quá dễ, không tuyệt vọng (rà lại mốc cho cân).
@@ -274,3 +274,24 @@ Luật: `src/game/core2/44-no-nha.js`; bảng `NO`, `NHA` ở `content/rules/no-
 
 ### D.3 — tien_bac
 - Bài đã ghi mức khởi đầu Sửa-B (nông 225–875 xu, khất cái ≤ 300, thế gia ≥ 5.000) từ đợt Sửa-C; chạy riêng 28 lần đều đạt, không phải sửa thêm.
+
+## Đ5 — võ học, khung nghề, năm nghề phàm, năng lực hỗ trợ ST23
+
+### Đ5.4 — năng lực hỗ trợ ST23
+Luật `src/game/core2/46-nang.js`; bảng `NANG_K`, `NANG_GOC`, `NANG_MAX`, `NANG_MUC`, `NANG_NGHE`, `NANG_GAIN` ở `content/rules/nang.js`; chữ `content/text/nang.json`.
+1. `r.nang={giac,giao,thuong,canh,duoc,khao,tu,nhan}` thước 0–100, gốc 10, không theo cảnh giới, không truyền kiếp. "Tự nhận thức" (ST23G) gọi ngắn là **Tự chủ**.
+2. **Phép thử**: `chk:['nang.<khoá>',độ khó]`, cùng thang với tp/ngo/tam: 0,5 + (năng lực − độ khó) × 0,05 (+ khí vận), kẹp 0,08–0,95; không cộng độ khó theo cảnh giới. Tên ở `CHKN['nang.<khoá>']`.
+3. **Rèn**: qua phép thử +1 (hỏng +0,5); mỗi việc nghề +0,3 cho năng lực của nghề (nông: nhẫn nại; ngư: nhẫn nại, giác quan; thương: thương lượng, giao tế; võ gia: cảnh giác; y: nhận dược, khảo vật); săn hái +0,3 giác quan, +0,21 nhận dược; mua ở tiệm / bán đồ +0,2 thương lượng; tĩnh tọa +0,3 tự chủ; tặng lễ +0,4 giao tế. Hiệu ứng sự kiện `nang:{khoá:số}`.
+4. **Hiện bằng chữ** (không hiện số, theo câu 5): Vụng / Tầm thường / Khá / Thạo / Lão luyện / Xuất chúng / Đăng phong tạo cực (ngưỡng 0, 8, 20, 35, 55, 75, 95). Danh sách ở thẻ Đạo đồ của bảng nhân vật; lên mức thì báo nhỏ.
+5. 16 lựa chọn trong sự kiện năm nghề đổi từ tp/ngo/tam sang năng lực hợp nghĩa (mặc cả → thương lượng, nói phải trái → giao tế, tự uống thử thuốc → nhận dược…). Nhẫn nại, tự chủ gốc 10 nên độ khó giữ nguyên.
+6. Bản lưu cũ: thiếu/hỏng thì tạo gốc 10, kẹp 0–100.
+7. Bài: `nang` (test.js), test-ui `nghe` thêm dòng Đạo đồ có năng lực.
+
+### Đ5.5 — rà chéo đợt 5
+Sửa ở `src/game/core2/47-ra-cheo-d5.js` (trừ chỗ ghi khác).
+1. **Tặng lễ của phàm nhân** trước đòi linh thạch (phàm nhân không có): nay trả xu = giá linh thạch × `TIEN.evXu` (cùng quy đổi với sự kiện phàm), không mua chịu; tu sĩ vẫn trả linh thạch. Chú thích nút Tặng lễ (ui/17) ghi đúng loại tiền (`giftTxt`).
+2. **Vốn buôn** (nghề thương, việc có vốn): trước có thể lấy tiền mua chịu ở quê làm vốn, khi đang nợ thì vốn âm và "lãi" làm nợ tăng. Nay phải có đủ tiền thật (`ngWhy`).
+3. **Tân thủ**: nút đi tới nhiệm vụ không chặn khi đang trong kỳ ngộ (loại cảnh là `kyngo`, trước chỉ kiểm `ky`) — đã thêm. Chữ viết cứng ở ui/26-tan-thu.js chuyển vào `content/text/tan-thu.json` (`tut.title`, `tut.ban`, `tut.khongNoi`); chip giờ săn hái dùng `durH`.
+4. **test:rules** trước thiếu các bài `ctxt vo_dao nghe nghe_pham` (đều qua) — đã thêm cùng `nang`, `ra_cheo5`.
+5. Đã rà, không phải sửa: võ học không tốn tiền (luyện võ, lôi đài); bí tịch võ ở tạp hóa thành bán bằng xu, không tính vào giới hạn đồ tu sĩ; tiền công nghề cộng qua `bacAdd` nên tự trừ nợ; việc nghề kiểm `bacCan` (có mua chịu) cho chi phí thường; HD13 tính cả luyện võ (`tick:'train'`), HD17 tính nghề / võ học (`tutRole`); kiếp mới đặt lại `paths`, `vo`, `voSk`, `voHoc`, `nang`; già (Sửa-C.8) chỉ giảm chỉ số chiến đấu, không đụng năng lực; chuỗi bọc `chkChance` (18 → 46) và `choose` (18 tạm thay `chkChance` rồi trả lại) vẫn đúng thứ tự.
+6. Còn dở: bot chưa biết năng lực/nghề mới (chưa được chạy bot); năng lực chưa ảnh hưởng giá mua bán (thương lượng) — để đợt cân bằng sau; dịch vụ quán vẫn không theo nhu cầu (như Sửa-A).

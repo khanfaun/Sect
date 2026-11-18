@@ -996,6 +996,20 @@ const TESTS = {
     run("delete G.run.nang;run2()");ok(run("NANG_K.every(k=>G.run.nang[k]===10)"), 'bản lưu cũ: tạo gốc 10');
     run("G.run.nang={giac:'x',tu:150};run2()");ok(run("G.run.nang.giac")===10&&run("G.run.nang.tu")===100, 'giá trị hỏng được sửa');
   },
+  // Đ5.5 rà chéo đợt 5: tặng lễ của phàm nhân trả xu; vốn buôn không mua chịu
+  ra_cheo5() {
+    fresh("G.run.pham=1;G.run.st=0;G.run.bac=5000");
+    const n="'Lão Trương'";const c=run(`giftXu(${n})`);
+    ok(c===run(`giftCost(${n})*TIEN.evXu`)&&run(`giftTxt(${n})`).indexOf('linh thạch')<0, 'phàm nhân: giá tặng lễ bằng xu ('+run(`giftTxt(${n})`)+')');
+    ok(run(`favGift(${n})`)===''&&run("G.run.bac")===5000-c&&run("G.run.st")===0, 'tặng lễ trừ xu, không đụng linh thạch');
+    ok(run("NK.count('nang.add')")>=1, 'tặng lễ rèn giao tế');
+    run("G.run.bac=10");ok(run(`favGift(${n})`)!=='', 'thiếu xu: không tặng được');
+    run("G.run.pham=0;G.run.st=100");const s0=run("G.run.st");ok(run(`favGift(${n})`)===''&&run("G.run.st")===s0-run(`giftCost(${n})`), 'tu sĩ vẫn trả linh thạch');
+    // vốn buôn
+    run("G.run.pham=1;FEAT.no=1;G.run.paths={thuong:{xp:70,bac:1,last:W().t}};G.run.bac=-100");
+    const why=run("(()=>{const a=ngAct('thuong','mua_ban');const n=W().regions.flatMap(R=>R.nodes).find(x=>a.noi.includes(x.type)&&x.state!=='ruin');G.run.queAt=n.id;return ngWhy('thuong',a,n)})()");
+    ok(!!why, 'đang nợ: không lấy tiền chịu làm vốn buôn ('+why+')');
+  },
   // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
   tan_thu() {
     fresh();

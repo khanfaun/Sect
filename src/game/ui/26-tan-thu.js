@@ -1,6 +1,6 @@
 // Đ4: hành động của khung tân thủ (luật ở core2/40-tan-thu.js; giao diện src/react/chung/TanThu.jsx)
 ACT.tutHide=()=>{const r=G.run;if(r&&r.tut)r.tut.hide=r.tut.hide?0:1;};
-ACT.tutClaim=id=>{const ch=tutClaim(id);if(ch){const t=tutById(id);UI.modal={k:'res',title:'Tân thủ',t:contentText('tut.claimLog',[t.n]),chips:ch};}};
+ACT.tutClaim=id=>{const ch=tutClaim(id);if(ch){const t=tutById(id);UI.modal={k:'res',title:contentText('tut.title'),t:contentText('tut.claimLog',[t.n]),chips:ch};}};
 ACT.tutSkip=id=>{if(tutById(id))UI.modal={k:'tutSkip',id};};
 ACT.tutSkipGo=id=>{UI.modal=null;tutSkip(id);};
 ACT.wishOpen=()=>{UI.modal={k:'wish'};};
@@ -15,13 +15,13 @@ function tutFindNode(go){const r=G.run,w=W();const me=nodeById(r.at);const [x0,y
   if(!L.length&&go.act)L=all.filter(n=>has(n,go.act));
   return pick(L);}
 ACT.tutGo=id=>{const t=tutById(id),r=G.run;if(!t||!r)return;const go=t.go||{};const sc=r.scene;
-  if(sc&&(sc.type==='combat'||sc.type==='event'||sc.type==='enc'||sc.type==='ky')){note('Xong việc trước mắt đã.');return;}
+  if(sc&&(sc.type==='combat'||sc.type==='event'||sc.type==='enc'||sc.type==='ky'||sc.type==='kyngo')){note(contentText('tut.ban'));return;}
   dbg('tut.go',{id});
   if(go.panel){UI.modal=null;UI.panel=go.panel;if(go.tab)UI.tab[go.panel]=go.tab;return;}
   if(go.modal==='bag'){UI.modal=null;ACT.bagOpen();return;}
   if(go.modal){UI.modal={k:go.modal};return;}
   if(go.hud&&ACT[go.hud]){UI.panel=null;ACT[go.hud]();return;}
-  if(go.place){const n=tutFindNode(go);if(!n){note('Chưa biết nơi nào như thế quanh đây.');return;}
+  if(go.place){const n=tutFindNode(go);if(!n){note(contentText('tut.khongNoi'));return;}
     if(sc&&sc.type==='place'&&sc.id===n.id){}else{if(sc&&sc.type==='place')r.scene=null;ACT.noteGo(n.id);}
     if(go.act)UI.tutFlash={sel:'[data-act="pact"][data-arg="'+go.act+'"]',until:Date.now()+3000};}};
 // đếm các việc chỉ xảy ra ở giao diện (mở bảng, mở túi, xem sổ nghiệp duyên, mở Mưu sinh), và nhấp nháy nút được dẫn tới
