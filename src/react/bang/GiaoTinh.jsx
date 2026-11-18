@@ -15,7 +15,14 @@ function NhanMach({ R, w }) {
   const known = Object.values(N).filter(o => !B[o.n] && !/^@/.test(o.n) && o.met).slice(-20).reverse()
     .map(o => PS.bondRow(o.n, o.g, o.type && ENT_T[o.type] ? ENT_T[o.type].n : 'Người quen', '', [], false)).join('');
   const seed = (s, cls) => PS.bondRow(s.ten, null, cls === 'an' ? 'Chịu ơn ngươi' : 'Mang thù với ngươi', '', [['Chuyện cũ', s.d], ['Vùng', REG[s.r || 0].n]]);
+  const F = r.family || [], GD = PS.GD;
   return <>
+    <h4 className="sgrp">Người nhà <small>{F.filter(m => m.song).length}</small></h4>
+    {F.length ? <div className="rows gd">{F.map((m, i) => (
+      <div key={i} className={'row' + (m.song ? '' : ' dim')}>
+        <span className="r-i">{m.qh === 'cha' || m.qh === 'anh' || (m.qh === 'em' && m.g === 'nam') ? '👨' : '👩'}</span>
+        <span className="r-t"><b>{m.ten}</b><small>{GD.qh[m.qh]} · {m.song ? m.tuoi + ' tuổi · ' + GD.suc[m.suc] + ' · ' + GD.thaiN[m.thai] : 'đã mất'}</small></span>
+      </div>))}</div> : <p className="hint">Không còn người thân nào.</p>}
     <h4 className="sgrp">Quan hệ <small>{Object.keys(B).length}</small></h4>
     {rel ? <Rows h={rel} /> : <p className="hint">Chưa kết nghĩa, bái sư hay kết đạo lữ với ai.</p>}
     <h4 className="sgrp">Quen biết</h4>

@@ -285,6 +285,14 @@ const TESTS = {
     ok(await ev(p, () => G.run.bac||0) > b0, 'làm bốc vác: có tiền công ('+b0+' → '+await ev(p, () => G.run.bac)+')');
     await ev(p, () => {UI.modal=null;G.run.scene=null;render();});
   },
+  // Đ3.8: bảng Giao tình có mục Người nhà
+  async gia_dinh(p) {
+    await ev(p, () => {G.run.family=[{ten:'Lâm Đại Hữu',qh:'cha',tuoi:48,suc:'khoe',thai:'thuong',song:1,lc:0}];UI.modal=null;G.run.scene=null;UI.panel='bonds';UI.tab.bonds='an';render();});
+    await p.waitForTimeout(200);
+    const t = await ev(p, () => document.body.innerText);
+    ok(/Người nhà/.test(t) && /Lâm Đại Hữu/.test(t) && /48 tuổi/.test(t), 'mục Người nhà có cha');
+    await ev(p, () => {UI.panel=null;render();});
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

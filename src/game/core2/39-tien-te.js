@@ -172,3 +172,25 @@ function vtDo(id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return f
   dbg('viec.xong',{id,c});saveSoon();return true;}
 {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(feat('tien')&&VIEC_THUE.some(v=>v.noi.includes(n.type))&&n.state!=='ruin'&&!L.some(x=>x.a==='muusinh'))
   L.push({a:'muusinh',i:'🧺',l:contentText('vt.act'),h:0,tip:contentText('vt.tip'),dis:false,x:''});return L;};}
+
+// ---------- Đ3.8: gia đình cơ bản (bảng GD: content/rules/gia-dinh.js) ----------
+// r.family=[{ten,qh,tuoi,suc,thai,song,lc}]; mỗi năm (từ tueYear) thêm tuổi, người già có thể mất
+function gdHo(ten){const w=(ten||'').split(' ');const h2=w.length>2&&NAME.ho2.includes(w[0]+' '+w[1]);return h2?w.slice(0,2).join(' '):w[0];}
+function gdName(g,ho){const t=genName(g);const w=t.split(' ');const h0=gdHo(t);const rest=w.slice(h0.split(' ').length).join(' ')||w[w.length-1];return ho?ho+' '+rest:t;}
+function gdThai(){const x=R();const T=GD.thai;return x<T.thuong?'thuong':x<T.thuong+T.lanh?'lanh':'ghet';}
+function gdMake(r){if(GD.none.includes(r.origin))return [];const ho=gdHo(r.ten),a=ageY(r),L=[];
+  const pa=a+ri(GD.chaMe[0],GD.chaMe[1]),ma=Math.max(a+18,pa-ri(0,6));
+  L.push({ten:gdName('nam',ho),qh:'cha',tuoi:pa,suc:'khoe',thai:gdThai(),song:1,lc:chance(GD.pLc)?1:0});
+  L.push({ten:gdName('nu'),qh:'me',tuoi:ma,suc:'khoe',thai:chance(.9)?'thuong':'lanh',song:1,lc:chance(GD.pLc)?1:0});
+  const n=ri(GD.anhEm[0],GD.anhEm[1]);for(let i=0;i<n;i++){const old=chance(.5);const g=chance(.5)?'nam':'nu';const t=old?a+ri(1,8):Math.max(1,a-ri(1,10));
+    L.push({ten:gdName(g,ho),qh:old?(g==='nam'?'anh':'chi'):'em',g,tuoi:t,suc:'khoe',thai:gdThai(),song:1,lc:chance(GD.pLc)?1:0});}
+  for(const m of L)if(m.tuoi>=GD.yeu&&chance(.3))m.suc='yeu';return L;}
+{const _nr=newRun;newRun=function(c){const res=_nr.apply(this,arguments);const r=G.run;if(r){r.family=gdMake(r);dbg('gd.sinh',{n:r.family.length});}return res;};}
+function gdYear(){const r=G.run;if(!r||!Array.isArray(r.family))return;
+  for(const m of r.family){if(!m.song)continue;m.tuoi++;
+    if(m.tuoi>=GD.yeu&&m.suc==='khoe'&&chance(GD.pYeu))m.suc='yeu';else if(m.suc==='yeu'&&chance(GD.pBenh))m.suc='benh';
+    if(m.tuoi>GD.gia&&chance(GD.pChet*(m.suc==='benh'?2:1))){m.song=0;m.mat=Math.floor(W().t);
+      log(contentText('gd.tang',[GD.qh[m.qh].toLowerCase(),m.ten,m.tuoi]));note(contentText('gd.tang',[GD.qh[m.qh].toLowerCase(),m.ten,m.tuoi]),'dn');dbg('gd.tang',{qh:m.qh,tuoi:m.tuoi});}}}
+{const _ty=tueYear;tueYear=function(age){const o=_ty.apply(this,arguments);if(G.run)gdYear();return o;};}
+// bản lưu cũ: sinh người nhà theo tuổi hiện tại; ai đã quá tám mươi lăm thì coi như đã mất
+{const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._gdV1&&r.ten){r._gdV1=1;if(!Array.isArray(r.family)){r.family=gdMake(r);for(const m of r.family)if(m.tuoi>85)m.song=0;}}return r;};}

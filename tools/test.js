@@ -637,6 +637,19 @@ const TESTS = {
     const t1=run("W().t");ok(run("vtDo('tap_dich')")&&run("G.run.bac")===330&&run("W().t")-t1===720&&run("G.run.doi")===0, 'tạp dịch ngoại môn ba mươi ngày: một lượng, được ăn ở');
     run("FEAT.an=0");
   },
+  // Đ3.8 gia đình cơ bản: cha mẹ, anh chị em theo xuất thân; mồ côi thì không; người già có thể mất mỗi năm
+  gia_dinh() {
+    fresh();
+    const mk=o=>run(`(()=>{genBirth();const c=Object.assign({},G.birth.cards[0],{origin:'${o}',hc:null});newRun(c);return JSON.stringify(G.run.family)})()`);
+    const F=JSON.parse(mk('nong'));ok(F.some(x=>x.qh==='cha')&&F.some(x=>x.qh==='me')&&F.length<=5, 'con nhà nông có cha mẹ: '+F.map(x=>x.qh+' '+x.tuoi).join(', '));
+    const ho=run("gdHo(G.run.ten)");ok(F.find(x=>x.qh==='cha').ten.startsWith(ho), 'cha cùng họ');
+    ok(JSON.parse(mk('khat')).length===0, 'khất cái: không người nhà');
+    ok(JSON.parse(mk('mieu')).length===0, 'bị bỏ ở miếu: không người nhà');
+    run("G.run.family=[{ten:'A',qh:'cha',tuoi:70,suc:'benh',thai:'thuong',song:1,lc:0},{ten:'B',qh:'em',tuoi:10,suc:'khoe',thai:'thuong',song:1,lc:0}];NK.clear()");
+    run("G.run.lifeAdj=500;advanceTime(30*HY)");ok(run("G.run.family[1].tuoi")===40, 'mỗi năm thêm một tuổi ('+run("G.run.family[1].tuoi")+')');
+    ok(run("G.run.family[0].song")===0&&run("NK.count('gd.tang')")>=1, 'người già mất, có tin tang');
+    run("delete G.run.family;delete G.run._gdV1;run2()");ok(run("Array.isArray(G.run.family)"), 'bản lưu cũ: có danh sách người nhà');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });
