@@ -264,6 +264,7 @@
  "content/rules/hanh-dao.js",
  "content/rules/nghiep.js",
  "content/rules/deed.js",
+ "core2/35-hanh-dao-nghiep.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",

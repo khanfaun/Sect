@@ -128,7 +128,7 @@ function timeHooks(h){
   const r=G.run,w=W();if(!r)return;
   if(h<=48)entsStep(h);
   if(w.t-(w.dirT||0)>=HD){w.dirT=w.t;director();}
-  for(const q of r.quests){if(q.state==='open'&&w.t>q.due){q.state='fail';r.karma=clamp(r.karma-4,-100,100);log(contentText("core_11-doi-cong-phap_js.timeHooks.010", [q.text]));note(contentText("core_11-doi-cong-phap_js.timeHooks.011")+q.text+contentText("core_11-doi-cong-phap_js.timeHooks.012"),'dn');}}
+  for(const q of r.quests){if(q.state==='open'&&w.t>q.due){q.state='fail';if(feat('nq'))deed('that_hua',{why:q.text});else r.karma=clamp(r.karma-4,-100,100);log(contentText("core_11-doi-cong-phap_js.timeHooks.010", [q.text]));note(contentText("core_11-doi-cong-phap_js.timeHooks.011")+q.text+contentText("core_11-doi-cong-phap_js.timeHooks.012"),'dn');}}
   if(r.quests.length>12)r.quests=r.quests.filter(q=>q.state==='open').concat(r.quests.filter(q=>q.state!=='open').slice(-4));
   if(r.party&&r.party.length){const b=r.party.length;r.party=r.party.filter(p=>p.until>w.t&&p.hp>0);if(r.party.length<b)log(contentText("core_11-doi-cong-phap_js.timeHooks.013"));}
   // kẻ địch tự tìm tới khi đứng yên
@@ -162,14 +162,14 @@ function takeQuest(i){
 }
 function questArrive(id){
   const r=G.run;for(const q of r.quests){if(q.state!=='open'||q.node!==id)continue;
-    if(q.kind==='den'){q.state='done';const ch=applyE({st:q.reward.st,tv:q.reward.tv,karma:2});log(contentText("core_11-doi-cong-phap_js.questArrive.021", [q.text]));pushNews(contentText("core_11-doi-cong-phap_js.questArrive.022")+q.text,true);r.qdone=(r.qdone||[]).concat(ch).slice(-4);}
+    if(q.kind==='den'){q.state='done';const ch=applyE(feat('nq')?{st:q.reward.st,tv:q.reward.tv,deed:'giu_loi'}:{st:q.reward.st,tv:q.reward.tv,karma:2});log(contentText("core_11-doi-cong-phap_js.questArrive.021", [q.text]));pushNews(contentText("core_11-doi-cong-phap_js.questArrive.022")+q.text,true);r.qdone=(r.qdone||[]).concat(ch).slice(-4);}
   }
 }
 function questExplore(n){
   const r=G.run;const q=r.quests.find(q=>q.state==='open'&&q.kind==='diet'&&q.node===n.id);if(!q)return false;
   encounter({type:n.danger>=3?'elite':'combat'});r.scene.quest=q.id;r.scene.text=contentText("core_11-doi-cong-phap_js.questExplore.023")+r.scene.text;return true;
 }
-function questWin(qid){const r=G.run;const q=r.quests.find(x=>x.id===qid&&x.state==='open');if(!q)return [];q.state='done';log(contentText("core_11-doi-cong-phap_js.questWin.024", [q.text]));return applyE({st:q.reward.st,tv:q.reward.tv,karma:2});}
+function questWin(qid){const r=G.run;const q=r.quests.find(x=>x.id===qid&&x.state==='open');if(!q)return [];q.state='done';log(contentText("core_11-doi-cong-phap_js.questWin.024", [q.text]));return applyE(feat('nq')?{st:q.reward.st,tv:q.reward.tv,deed:'giu_loi'}:{st:q.reward.st,tv:q.reward.tv,karma:2});}
 
 // ---------------- MỘ, CHÔN ĐỒ, CỐ NHÂN ----------------
 function visitGrave(n){

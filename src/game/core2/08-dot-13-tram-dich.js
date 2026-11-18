@@ -30,9 +30,9 @@ function shopResetIn(){return HM-(W().t%HM);}
 function questGrade(q){if(q.grade!=null)return q.grade;const n=nodeById(q.node);return clamp((n?n.danger:0)+(q.kind==='diet'?1:0),0,4);}
 {const _ob13=openBoard;openBoard=function(n){_ob13(n);if(n&&n.board)for(const q of n.board.list)if(q.grade==null){q.grade=questGrade(q);q.reward.st=Math.round(q.reward.st*(1+q.grade*0.25));}};}
 {const _tq13=takeQuest;takeQuest=function(i){const r=G.run,sc=r.scene;const n=sc&&nodeById(sc.id);const b=n&&n.board&&n.board.list[+i];const k=r.quests.length;_tq13(i);if(b&&r.quests.length>k){const q=r.quests[r.quests.length-1];q.grade=questGrade(b);q.d=b.kind==='diet'?contentText("core2_08-dot-13-tram-dich_js.005"):contentText("core2_08-dot-13-tram-dich_js.006");}};}
-function questPenalty(q){return {st:Math.round((q.reward.st||0)*0.5),karma:-2};}
+function questPenalty(q){const st=Math.round((q.reward.st||0)*0.5);return feat('nq')?{st,deed:'that_hua'}:{st,karma:-2};}
 function questCancel(id){const r=G.run;const q=r.quests.find(x=>x.id===id&&x.state==='open');if(!q)return false;const P=questPenalty(q);
-  q.state='fail';q.dropped=1;r.st=Math.max(0,r.st-P.st);applyE({karma:P.karma});log(contentText("core2_08-dot-13-tram-dich_js.questCancel.007", [q.text,P.st]));
+  q.state='fail';q.dropped=1;r.st=Math.max(0,r.st-P.st);applyE(P.deed?{deed:P.deed}:{karma:P.karma});log(contentText("core2_08-dot-13-tram-dich_js.questCancel.007", [q.text,P.st]));
   const fn=nodeById(q.from);if(fn&&fn.board){const b=fn.board.list.find(x=>x.id===q.id);if(b)b.taken=false;}return true;}
 // ----- nhiệm vụ: hạn chót đủ rộng -----
 // Hạn cũ chỉ bằng thời gian đi đường cộng 3–8 ngày nên gần như luôn trễ. Nay: gấp rưỡi thời gian đi đường cộng 15–40 ngày.
@@ -69,7 +69,7 @@ function questRewardChips(q){const R0=questRewardOf(q);const L=[chip('💎','+'+
 function questGive(q){const r=G.run;const R0=questRewardOf(q);const ch=[];r.st+=R0.st;ch.push(chip('💎','+'+R0.st,contentText("core2_08-dot-13-tram-dich_js.questGive.018"),'up'));
   for(const x of R0.it){if(x.k==='pill'){const c=gainPill(x.id,x.q);if(c)ch.push(c);}else if(x.k==='mat'){run2().mats[x.m]=(run2().mats[x.m]||0)+x.n;ch.push(chip(MAT[x.m].i,'+'+x.n+' '+MAT[x.m].n.toLowerCase(),contentText("core2_08-dot-13-tram-dich_js.questGive.019"),'up'));}
     else if(x.k==='relic'){const rel=genRelic(x.tier);r.relics.push(rel);clampHp();ch.push(chip('🏺',rel.name,relicTip(rel),'item',rel.tier));}}
-  llChipMerge(ch,llAdd(R0.ll,null,true));applyE({karma:2});return ch;}
+  llChipMerge(ch,llAdd(R0.ll,null,true));applyE(feat('nq')?{deed:'giu_loi'}:{karma:2});return ch;}
 function qPop(kind,q,ch){G.qpop=G.qpop||[];G.qpop.push({kind,text:q.text,grade:questGrade(q),ch:ch||[]});}
 // tới nơi: chỉ báo, không tự xong
 questArrive=function(id){const r=G.run;for(const q of r.quests)if(q.state==='open'&&q.node===id&&!q.arrNote){q.arrNote=1;note(contentText("core2_08-dot-13-tram-dich_js.020"));}};
@@ -82,7 +82,7 @@ function questDo(id){const r=G.run,sc=r.scene;const q=r.quests.find(x=>x.id===id
 // thắng: xong (phần thưởng mới); thua hay chạy: thất bại
 questWin=function(qid){const r=G.run;const q=r.quests.find(x=>x.id===qid&&x.state==='open');if(!q)return [];q.state='done';log(contentText("core2_08-dot-13-tram-dich_js.027", [q.text]));const ch=questGive(q);qPop('done',q,ch);return ch;};
 {const _cc15=combatContinue;combatContinue=function(){const sc=G.run&&G.run.scene;const qid=sc&&sc.after&&sc.after.quest;const res=sc&&sc.over;
-  if(qid&&(res==='lose'||res==='flee')){const q=G.run.quests.find(x=>x.id===qid&&x.state==='open');if(q){q.state='fail';q.lost=1;G.run.karma=clamp(G.run.karma-2,-100,100);log(contentText("core2_08-dot-13-tram-dich_js.028")+q.text);qPop('fail',q,[]);}}
+  if(qid&&(res==='lose'||res==='flee')){const q=G.run.quests.find(x=>x.id===qid&&x.state==='open');if(q){q.state='fail';q.lost=1;if(feat('nq'))deed('that_hua',{why:q.text});else G.run.karma=clamp(G.run.karma-2,-100,100);log(contentText("core2_08-dot-13-tram-dich_js.028")+q.text);qPop('fail',q,[]);}}
   return _cc15();};}
 // quá hạn: thất hứa
 {const _adv15=advanceTime;advanceTime=function(h){const r=G.run;const open=r&&r.quests?r.quests.filter(q=>q.state==='open'):[];const o=_adv15(h);if(G.run)for(const q of open)if(q.state==='fail'&&!q.dropped&&!q.lost&&!q.popd){q.popd=1;qPop('late',q,[]);}return o;};}

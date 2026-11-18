@@ -295,6 +295,52 @@ const TESTS = {
     ok(J('sam_hoi')==='{"p":"nho","bPct":-10}', 'sam_hoi đúng mẫu');
     ok(run("Object.values(DEED).every(d=>(!d.p||HD_W[d.p])&&(!d.t||HD_W[d.t])&&(!d.g||[1,3,8,15].includes(d.g))&&(!d.b||[1,3,8,15].includes(d.b)))"), 'mọi mục dùng mức hợp lệ');
   },
+  nq_hd() {
+    fresh();
+    const L=run("HD_LV.map(x=>x.n)");
+    ok(L.includes(run("hdName()")), 'hdName là một trong 5 nhãn: '+run("hdName()"));
+    run("for(let i=0;i<5;i++)deed('cuu_nguoi')");
+    ok(/chính/i.test(run("hdName()")), 'sau 5 lần cứu người nhãn có "chính": '+run("hdName()"));
+    ok(typeof run("G.run.karma")==='number' && run("G.run.karma")>0, 'gương karma là số dương');
+    fresh();
+    run("for(let i=0;i<24;i++)deed('giet_vo_toi');deed('cuu_nguoi')");
+    ok(run("hdName()")==='Tà niệm ăn sâu', 'vẫn Tà niệm ăn sâu: '+run("hdName()"));
+    ok(run("G.run.hd.log.length")===24, 'sổ chỉ giữ 24 quyết định');
+    const t0=run("G.run.tamma=0;G.run.tamma");run("deed('cuu_nguoi')");
+    ok(run("G.run.tamma")>t0, 'làm trái hướng khi Tà niệm ăn sâu: tâm ma tăng');
+    ok(run("NK.count('nq.deed')")>0, 'có nhật ký nq.deed');
+  },
+  nq_ng() {
+    fresh();
+    run("for(let i=0;i<24;i++)deed('giet_vo_toi')");
+    ok(run("ngB()")>=15*24*0.99, 'ngB tích đủ: '+run("ngB()"));
+    ok(run("ngName('B')")==='Nghiệp hải trùng trùng', 'nhãn nghiệp chướng');
+    fresh('G.run.ng.G=0;G.run.ng.B=0');
+    run("deed('giet_vo_toi',{yd:'tai_nan'})");
+    ok(Math.abs(run("ngB()")-15*0.25)<1e-6, 'ý định tai nạn giảm nghiệp');
+    run("deed('sam_hoi')");
+    ok(Math.abs(run("ngB()")-15*0.25*0.9)<1e-6, 'sám hối trừ 10%');
+    ok(run("deed('khong_co')").length===0 && run("NK.count('nq.deed.missing')")>0, 'mã lạ không lỗi');
+    ok(run("G.run.ng.so.every(x=>typeof x.v==='number'&&'why' in x)"), 'sổ có đủ trường');
+  },
+  nq_legacy() {
+    fresh();
+    run("FEAT.nq=1");
+    try {
+      const ch=run("applyE({karma:5})");
+      ok(Array.isArray(ch) && ch.some(c=>c.i==='☯️'), 'applyE karma cũ ra chip');
+      ok(typeof run("G.run.karma")==='number' && run("NK.count('nq.hd')")>0, 'bút toán tạm ghi Hành Đạo');
+      const ch2=run("applyE({deed:'cuu_nguoi',hp:5})");
+      ok(ch2.length>=1 && ch2[0].i==='☯️', 'applyE deed giữ chip');
+      run("applyE({hd:{p:3},ng:{g:3,why:'x'}})");
+      ok(run("ngG()")>0, 'applyE hd/ng');
+      fresh('delete G.run.hd;delete G.run.ng;G.run.karma=-70;G.run._nqV1=0;run2();');
+      ok(run("ngB()")>0, 'bản lưu cũ có nghiệp chướng');
+      ok(/tà/i.test(run("hdName()")), 'bản lưu cũ nhãn tà: '+run("hdName()"));
+      ok(run("G.run.karma")===-70, 'gương giữ đúng karma cũ');
+      ok(run("questPenalty({reward:{st:10}}).deed")==='that_hua', 'phạt hủy nhiệm vụ là thất hứa');
+    } finally { run("FEAT.nq=0"); }
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });
