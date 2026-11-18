@@ -77,3 +77,33 @@ Hành Đạo vốn đã theo bậc (5 nhãn, `HD_LV`), giữ nguyên. Danh tiế
 - Chuỗi bọc: `newRun` (37: vô căn bỏ hệ → trắc linh → lượt chọn → Túc Tuệ Đăng; 38: khởi tạo tuế biến), `die` (Định Mệnh Châu, Túc Tuệ Đăng chạy trước khi ghi `lastNq`), `advanceTime` (tâm pháp bảo đảm bỏ qua vô căn; trắc linh; tuế biến) — đều kiểm lại `G.run` sau khi gọi gốc.
 - Bản lưu cũ: `rootKnown` thiếu → coi như đã biết (cờ `_rkV1`); `r.tue` thiếu → bắt đầu từ tuổi hiện tại, không áp lại năm cũ; `root.q` thiếu → hệ số cũ; `upg.ky/kytp` → hoàn điểm.
 - Bot (`tools/bot-ext.js`, `bot-smart.js`) **chưa sửa** cho vô căn (L16) vì chưa được phép chạy bot.
+
+## Đ3 — Tiền tệ, ăn uống, việc làm thuê, gia đình cơ bản
+
+Toàn bộ luật Đ3 nằm ở `src/game/core2/39-tien-te.js`; bảng: `content/rules/tien.js` (TIEN), `content/venues/thuong-cac.js` (THUONG_CAC, TC_BAC, TL_QST), `content/rules/an-uong.js` (AN), `content/venues/viec-thue.js` (VIEC_THUE), `content/rules/gia-dinh.js` (GD); chữ ở `content/text/tien-te.json`; giao diện `ui/25-tien-te.js`, `src/react/hop-thoai/ThuongCac.jsx`, `MuuSinh.jsx`.
+
+### Quyết định đã chọn (phương án an toàn)
+1. **Đơn vị**: `r.bac` tính bằng đồng; 1 quan = 1.000 đồng; 1 linh thạch = 100 quan. Giá "lượng" còn sót trong Phần B quy đổi **1 lượng = 330 đồng** (HN A.7): Trắc Linh Thạch 30 lượng = 9.900 đồng; tạp dịch tông môn 1 lượng/tháng = 330 đồng; tuế biến Gia Cảnh Khá Giả 5–10 lượng = 1.650–3.300 đồng, Đại Khí Vận / Vận Khí Nghịch Thiên 2–5 lượng = 660–1.650, Mị Cốt và Phúc Tinh 1–3 lượng = 330–990. "Tiền +3%" (Tiểu Nhân, Tư Lợi) tính trên bạc khi là phàm nhân/vô căn.
+2. **Tiền khởi đầu**: xuất thân có `bac:[a,b]` thì theo đó, không thì theo nhóm (khốn khó 0–300, thường 500–1.500, khá giả 5.000–20.000); hoàn cảnh bấp bênh ×0,75, nâng đỡ ×1,25. Linh thạch về 0, trừ con thế gia 1–2; **nâng cấp luân hồi "st" vẫn cộng linh thạch** như cũ để điểm đã mua không mất tác dụng.
+3. Sửa lỗi có sẵn: `data/02-catalog.js` không chép `grp` của 30 xuất thân danh mục nên mọi xuất thân danh mục đều thành nhóm "thường"; nay chép `grp`, `bac`, `lt`.
+4. **Quán phàm** (`services.json` trường `bac`): trà 5, hỏi đường 10, tĩnh tâm 8, phòng trọ 12, giường tập thể 6 (dịch vụ mới), bữa ăn 13, chén rượu 15, mời cả bàn 120, nghe hát 30 đồng. Phòng thượng hạng có tụ linh trận vẫn trả linh thạch. Phần thưởng dịch vụ (hộ tống, đối câu, đấu rượu…) vẫn là linh thạch (chưa đổi).
+5. Thiếu bạc mà có linh thạch: `bacPay` đổi đúng một viên ra 90 quan rồi trả, có lời báo; không có gì thì nút ghi "Không đủ tiền". Tạp hóa: bản chép tay tâm pháp 800 đồng; chưa trắc linh thì phường thị bày Trắc Linh Thạch (9.900 đồng); có lương khô 70 đồng một gói (5 gói mỗi đợt hàng). Thầy lang ở phường thị cho phàm nhân: 150 đồng.
+6. **Thưởng nhiệm vụ của phàm nhân trả bằng bạc**: mỗi "linh thạch" ghi trên bảng = 100 đồng (`TIEN.qBac`), bảng treo ghi đúng như vậy. Lý do: phàm nhân làm một nhiệm vụ đưa thư mà được vài linh thạch (vài trăm quan) thì phá "hai thế giới". Tu sĩ vẫn nhận linh thạch.
+7. **Tiền trang**: dùng khung "nơi chọn việc" (VENUE_N) nên không cần hộp thoại mới; giá cố định 110/90 quan (chưa dao động theo vùng).
+8. **Cống hiến**: khóa sổ là **tông đang đứng** (nếu đứng ở một sơn môn), không thì tông mình thuộc. Nhờ vậy cống hiến tông A không dùng được ở tông B (hành động thành viên vốn đã chỉ hiện ở tông mình qua `contentOwnSect`). `chLeave(k,expel)` có sẵn nhưng **game chưa có chỗ rời tông** (không sự kiện nào tắt cờ `tongmon`), nên chưa gọi.
+9. **Thưởng Lệnh**: cộng ở `questGive` (mọi lối xong nhiệm vụ của core2/08 đều qua đây, thay cho `questArrive`/`questWin` cũ); xong trước nửa thời hạn +1 (ghi `q.t0` lúc nhận; nhiệm vụ nhận trước Đ3 không có thưởng này). Bỏ −1, trễ hạn −1. Nhiệm vụ truy nã ×2 và "phàm nhân chỉ nhận bậc 1" chưa làm.
+10. **Thưởng Các**: bày 14 món có hệ đi kèm; 6 món ẩn (`an:1`) vì hệ chưa có: giấy thông hành trạm dịch, tin tức thiên kiêu, lệnh truy nã, bản đồ kho báu, xoá truy nã, **Manh mối cơ duyên** (chờ Đ6 cải căn). Không có Khai Linh Đan.
+11. **Ăn uống**: giá mỗi ngày đạm bạc 12 / thường 20 / khá 40 đồng (theo mặt bằng C, không theo "văn" của B); Man Lực Thể ăn ×1,15. Thứ tự lo cái ăn mỗi ngày: đang làm việc có cơm → **cơm nhà ở quê khi còn người nhà** → cơm tông (đứng ở tông mình) → quán (thôn trấn, thành, chợ; tự lo cơm bật; đủ bạc) → lương khô → đói. Không "săn/hái tại chỗ" (bài `com_ao` đòi ở hoang dã không có gì thì đói). Đói lả còn giảm công làm thuê 30%. Mức Khá giảm tâm ma 1 mỗi 30 ngày ăn. Đang trong trận thì hoãn chết đói tới ngày sau.
+   - Cơm nhà là thêm ngoài lộ trình, để phàm nhân mới đầu thai (bạc ít) không chết đói ngay tháng thứ hai.
+   - `tools/test.js`: `fresh()` đặt `FEAT.an=0` để các bài cũ (trôi nhiều năm) không chết đói; `com_ao` bật lại.
+   - Chạm ô 🍚 trên HUD để đổi mức ăn (ô chỉ hiện với người phải ăn).
+12. **Việc làm thuê**: "biết chữ" (viết thư hộ) tạm đổi thành ngộ tính 8; "gặp sói" khi chặt củi là thương nhẹ + mất khí huyết, không mở trận. Tạp dịch ngoại môn cam kết 30 ngày, ai đứng ở sơn môn cũng làm được, được ăn.
+13. **Gia đình**: không người nhà với khất cái, bị bỏ ở miếu, nhặt ở bậc cửa, lớn sau bếp, mang tro về quê. Bản lưu cũ sinh người nhà theo tuổi hiện tại (ai quá 85 coi như đã mất). Tin tang chỉ là một dòng nhật ký + thông báo (Đ9 viết sự kiện).
+
+### Đ3.9 — rà chéo
+- Chuỗi bọc mới (đều ở 39, chạy sau mọi lớp cũ): `newRun` (bạc + linh thạch, quê, người nhà), `run2` (`_bacV1`, `_chV1`, `_anV1`, `_gdV1`), `advanceTime` (ăn theo ngày), `venueOpts`/`venueDo` (giá bạc, tiền trang), `placeActs` (tiền trang, Thưởng Các, mưu sinh), `shopExtra`/`buy`/`openShop`/`healBuy`, `takeQuest`/`questGive`/`questCancel`/`timeHooks`/`questRewardChips`, `rgMonthRate`/`rgTurnRate`/`S` (đói), `tueEv`/`tueYear`. Mọi lớp kiểm lại `G.run` sau khi gọi gốc.
+- **Hai lỗi trùng tên toàn cục** gặp khi làm (đã đổi tên): `tlOpen` (trắc linh, Đ2) và `tcName` (tư chất). Đã rà mọi tên hàm mới của 39 với toàn bộ mã.
+- Thử bản lưu tạo bằng mã Đ2.8 (đang trong tông, `r.ch=25`): tải được, giữ linh thạch, bạc 0, sổ cống hiến 25 ở đúng tông, có người nhà, ở quê không đói, mọi nút mới hiện.
+- Sửa thêm: tuổi già (Đ2.7) giảm khí huyết tối đa mà không kẹp khí huyết hiện có (bài `hoiphuc` lúc đạt lúc trượt); `36c-hoan-canh.js` dùng `Math.random` nên bài kiểm phụ thuộc may rủi, nay dùng bộ sinh số có hạt giống; bài `tinhtoa` bỏ tâm pháp gia truyền khỏi nhân vật thử.
+- Bài `hoiphuc` có điều kiện "dưới 5 giây" — máy bận có thể trượt; chạy lại thì đạt.
+- Bot chưa sửa cho tiền bạc / ăn uống (chưa được phép chạy bot).

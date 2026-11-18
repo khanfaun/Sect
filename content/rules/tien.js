@@ -5,4 +5,6 @@
 const TIEN={quan:1000,lt:100000,mua:110000,ban:90000,ttMax:3,
   grpBac:{kho:[0,300],thuong:[500,1500],kha:[5000,20000]},
   hc:{bap:0.75,nang:1.25},
-  tpBac:800,tlBac:9900}; // tpBac: bản chép tay tâm pháp ở tạp hóa; tlBac: Trắc Linh Thạch (đồng)
+  tpBac:800,tlBac:9900,qBac:100,yBac:150};
+// tpBac: bản chép tay tâm pháp ở tạp hóa; tlBac: Trắc Linh Thạch; yBac: thầy lang ở phường thị (đều là đồng)
+// qBac: phàm nhân nhận thưởng nhiệm vụ bảng treo bằng bạc, mỗi linh thạch ghi trên bảng = qBac đồng

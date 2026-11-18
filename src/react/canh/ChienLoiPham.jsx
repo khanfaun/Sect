@@ -53,10 +53,10 @@ export function PhuongThi({ sc }) {
         <p className="hint">Chạm giữ một món để xem công dụng. Chạm để mua. Hàng mới sau {PS.durH(PS.shopResetIn())}.</p>
       </> : (
         <div className="rows">
-          <button className="row" data-act="heal" disabled={!!(sc.healed || r.st < sc.heal)} {...tip('Hồi đầy khí huyết và linh lực')}>
+          <button className="row" data-act="heal" disabled={!!(sc.healed || (sc.healBac ? !PS.bacCan(sc.healBac) : r.st < sc.heal))} {...tip('Hồi đầy khí huyết và linh lực')}>
             <span className="r-i">🩹</span>
             <span className="r-t"><b>Mời y sư trị thương</b><small>Hồi đầy khí huyết, linh lực</small></span>
-            <span className="r-x">{sc.healed ? 'xong' : <Stone v={sc.heal} />}</span>
+            <span className="r-x">{sc.healed ? 'xong' : sc.healBac ? <span className="cost-b">🪙{PS.fmtBac(sc.healBac)}</span> : <Stone v={sc.heal} />}</span>
           </button>
         </div>
       )}

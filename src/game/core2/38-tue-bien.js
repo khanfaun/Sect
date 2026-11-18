@@ -45,7 +45,7 @@ function tueEv(E,id,D){const r=G.run;const s=S();
 // tuổi già (HN B §12.6)
 function tueOld(r,age,s){const T=tueInit(r);T.sum.hpOld=Math.max(TUE_OLD.hpFloor,(T.sum.hpOld||0)+TUE_OLD.hpP);
   if(age%TUE_OLD.tpEvery===0)T.sum.tpOld=Math.max(TUE_OLD.tpFloor,(T.sum.tpOld||0)-1);
-  if(r.age>=s.life*TUE_OLD.sick&&chance(TUE_OLD.pSick))addWound('ngoai','gia');}
+  if(r.age>=s.life*TUE_OLD.sick&&chance(TUE_OLD.pSick))addWound('ngoai','gia');clampHp();} // khí huyết tối đa giảm thì khí huyết hiện có không được vượt
 {const _nr=newRun;newRun=function(c){const res=_nr.apply(this,arguments);const r=G.run;if(r){r.tue=null;tueInit(r);}return res;};}
 // mốc "qua năm": đúng một lần cho mỗi tuổi, kể cả khi nhảy nhiều năm; chết giữa chừng thì dừng
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);if(!G.run||!feat('tue'))return o;tueInit(G.run);let guard=0;

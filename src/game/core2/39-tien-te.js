@@ -80,7 +80,9 @@ function tlChip(x){return chip('🎋',(x<0?'−':'+')+Math.abs(x),contentText('t
 {const _tq=takeQuest;takeQuest=function(i){const r=G.run;const k=r?r.quests.length:0;const o=_tq.apply(this,arguments);if(G.run&&G.run.quests.length>k){const q=G.run.quests[G.run.quests.length-1];if(q.t0==null)q.t0=W().t;}return o;};}
 function tlOpenQ(){const r=G.run;return r?r.quests.filter(q=>q.state==='open'):[];}
 // mọi lối xong nhiệm vụ bảng treo đều qua questGive (core2/08)
-{const _qg=questGive;questGive=function(q){const ch=_qg.apply(this,arguments);if(!G.run||!q)return ch;const n=tlQuest(q);tlAdd(n,'quest');return (ch||[]).concat([tlChip(n)]);};}
+// phàm nhân: tiền thưởng nhiệm vụ trả bằng bạc (mỗi "linh thạch" của bảng thưởng = TIEN.qBac đồng), giữ hai thế giới tiền tách bạch
+{const _qg=questGive;questGive=function(q){const r=G.run;const st0=r?r.st:0;let ch=_qg.apply(this,arguments);if(!G.run||!q)return ch;
+  if(feat('tien')&&isPham()){const d=G.run.st-st0;if(d>0){G.run.st-=d;const b=d*TIEN.qBac;bacAdd(b,'quest');const k=(ch||[]).findIndex(c=>c&&c.i==='💎');if(k>=0)ch[k]=bacChip(b);else ch=(ch||[]).concat([bacChip(b)]);}}const n=tlQuest(q);tlAdd(n,'quest');return (ch||[]).concat([tlChip(n)]);};}
 {const _qc=questCancel;questCancel=function(id){const o=_qc.apply(this,arguments);if(o&&G.run)tlAdd(-1,'bo');return o;};}
 {const _th=timeHooks;timeHooks=function(h){const L=tlOpenQ();const o=_th.apply(this,arguments);if(!G.run)return o;for(const q of L)if(q.state==='fail'&&!q.dropped)tlAdd(-1,'tre');return o;};}
 // giới hạn mua tính theo từng thành: W().thuongCac[nút][mã]={k,n} với k là khóa kỳ (tháng / năm / kiếp)
@@ -124,7 +126,7 @@ function anDay(){const r=G.run;if(!r||!feat('an'))return;if(!needFood(r)){r.doi=
   else if(anAtQuan(r)&&r.anTu!==0&&(r.bac||0)>=anCost(r)){bacAdd(-anCost(r),'an');anFed(r,'quan');if(anMuc(r).tm&&r.anDays%30===0)r.tamma=Math.max(0,(r.tamma||0)-anMuc(r).tm);}
   else if(anLkEat(r)){anFed(r,'lk');}
   else{r.doi=(r.doi||0)+1;r.no=Math.max(0,(r.no==null?100:r.no)-60);dbg('an.doi',{doi:r.doi});
-    if(r.doi===AN.doi.doi)note(contentText('an.noteDoi'),'dn');else if(r.doi===AN.doi.la)note(contentText('an.noteLa'),'dn');else if(r.doi===AN.doi.kiet)note(contentText('an.noteKiet'),'dn');
+    if(r.doi===AN.doi.doi)note(contentText('an.noteDoi'),'dn');else if(r.doi===AN.doi.la){note(contentText('an.noteLa'),'dn');clampHp();}else if(r.doi===AN.doi.kiet)note(contentText('an.noteKiet'),'dn');
     if(r.doi>=AN.doi.kiet){const s=S();r.hp=Math.max(1,r.hp-Math.round(s.maxHp*AN.kietHp));}}
   if((r.doi||0)>=AN.doi.chet&&!(r.scene&&r.scene.type==='combat')){dbg('an.chet',{doi:r.doi});die('doi');}}
 // gộp một tháng (phần vượt AN.maxNgay ngày): đủ tiền thì trả cả tháng, có lương khô thì ăn, không thì đói
@@ -145,7 +147,7 @@ function anRgMul(){const r=G.run;if(!r||!feat('an')||!needFood(r))return 1;let m
 {const _S=S;S=function(){const s=_S.apply(this,arguments);const r=G.run;if(r&&feat('an')&&(r.doi||0)>=AN.doi.la&&needFood(r))s.maxHp=Math.max(1,Math.round(s.maxHp*(1+AN.hpLa)));return s;};}
 function anState(r){r=r||G.run;const d=(r&&r.doi)||0;if(!r||!needFood(r))return 'tich';return d>=AN.doi.kiet?'kiet':d>=AN.doi.la?'la':d>=AN.doi.doi?'doi':'no';}
 // bản lưu cũ: no đủ, tự lo cơm
-{const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._anV1){r._anV1=1;if(r.no==null)r.no=100;if(r.doi==null)r.doi=0;if(!r.anMuc)r.anMuc='thuong';if(r.anTu==null)r.anTu=1;}return r;};}
+{const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._anV1){r._anV1=1;if(r.queAt==null&&r.que&&W()&&W().regions){const h=W().regions.flatMap(R=>R.nodes||[]).find(n=>n.name===r.que);if(h)r.queAt=h.id;}if(r.no==null)r.no=100;if(r.doi==null)r.doi=0;if(!r.anMuc)r.anMuc='thuong';if(r.anTu==null)r.anTu=1;}return r;};}
 // tạp hóa bán lương khô bằng bạc
 {const _se=shopExtra;shopExtra=function(items,n){_se.apply(this,arguments);if(feat('an')&&G.run&&needFood(G.run))items.push({k:'qi',id:'luong_kho',bac:AN.lkBac,p:0,qty:AN.lkQty});};}
 
@@ -194,3 +196,9 @@ function gdYear(){const r=G.run;if(!r||!Array.isArray(r.family))return;
 {const _ty=tueYear;tueYear=function(age){const o=_ty.apply(this,arguments);if(G.run)gdYear();return o;};}
 // bản lưu cũ: sinh người nhà theo tuổi hiện tại; ai đã quá tám mươi lăm thì coi như đã mất
 {const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._gdV1&&r.ten){r._gdV1=1;if(!Array.isArray(r.family)){r.family=gdMake(r);for(const m of r.family)if(m.tuoi>85)m.song=0;}}return r;};}
+
+// phường thị: phàm nhân mời thầy lang trả bằng bạc
+{const _os=openShop;openShop=function(n){const o=_os.apply(this,arguments);const sc=G.run&&G.run.scene;if(sc&&sc.type==='shop'&&feat('tien')&&isPham())sc.healBac=TIEN.yBac;return o;};}
+{const _hb=healBuy;healBuy=function(){const r=G.run,sc=r&&r.scene;if(!sc||!sc.healBac||!feat('tien'))return _hb.apply(this,arguments);if(sc.healed||!bacPay(sc.healBac,'heal'))return;const s=S();r.hp=s.maxHp;r.mp=s.maxMp;sc.healed=1;};}
+{const _qr=questRewardChips;questRewardChips=function(q){const L=_qr.apply(this,arguments);if(!feat('tien')||!isPham())return L;const R0=questRewardOf(q);
+  return L.map(c=>c&&c.i==='💎'?bacChip(R0.st*TIEN.qBac):c).concat([tlChip(tlQuest(q))]);};}

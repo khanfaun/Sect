@@ -158,7 +158,7 @@ const TESTS = {
     run('advanceTime(3*HM)'); ok(+run('G.run.rgStreak') >= 3, 'cộng dồn tăng theo tháng: ' + run('G.run.rgStreak'));
     run('addWound("ngoai")'); ok(+run('G.run.rgStreak') === 0, 'bị thương thì cộng dồn về 0');
     run('cureWound(["ngoai"]);G.run.hp=S().maxHp;G.run._hpLast=G.run.hp;');
-    const t0 = Date.now(); run('advanceTime(40*HY)'); ok(Date.now() - t0 < 5000 && +run('G.run?G.run.hp:0') <= +run('G.run?S().maxHp:1'), 'trôi 40 năm: không treo, không vượt tối đa');
+    const t0 = Date.now(); run('advanceTime(40*HY)'); ok(Date.now() - t0 < 5000 && +run('G.run?G.run.hp:0') <= +run('G.run?S().maxHp:1'), 'trôi 40 năm: không treo, không vượt tối đa ('+(Date.now()-t0)+'ms, '+run('G.run?Math.round(G.run.hp)+"/"+S().maxHp:"chết"')+')');
     fresh(); ok(run('rgTurnRate()') === 0.5, 'phàm nhân trong trận 0,5%/lượt');
   },
   // tĩnh toạ: không tăng tu vi, hồi nhanh hơn để yên
@@ -550,6 +550,7 @@ const TESTS = {
     run("G.run.arts=(G.run.arts||[]).filter(a=>a.type!=='tp');G.run.relics=G.run.relics.filter(x=>!(x.k==='book'&&x.art&&x.art.type==='tp'));G.run.bac=1000;G.run.st=0;nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");
     const it=JSON.parse(run("JSON.stringify(G.run.scene.items[0])"));ok(it.bac===800, 'tạp hóa: bản chép tay tâm pháp giá 800 đồng ('+it.bac+')');
     run("buy(0)");ok(run("G.run.scene.items[0].sold")&&run("G.run.bac")===200, 'phàm nhân kiếp đầu mua được tâm pháp bằng bạc');
+    run("G.run.hp=1;G.run.bac=1000;G.run.st=0;G.run.scene.healed=0");ok(run("G.run.scene.healBac")===150, 'thầy lang cho phàm nhân: 150 đồng');run("healBuy()");ok(run("G.run.hp===S().maxHp&&G.run.bac===850"), 'trả bạc mời thầy lang');
     run("G.run.rootKnown=0;G.run.bac=10000;G.run.qitems=[];nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");const k=run("G.run.scene.items.findIndex(x=>x.k==='qi'&&x.id==='trac_linh_thach')");
     ok(k>=0&&run(`G.run.scene.items[${k}].bac`)===9900, 'chưa trắc linh: phường thị bán Trắc Linh Thạch 9.900 đồng');
     run(`buy(${k})`);ok(run("G.run.qitems.includes('trac_linh_thach')")&&run("G.run.bac")===100, 'mua Trắc Linh Thạch bằng bạc');
@@ -593,6 +594,10 @@ const TESTS = {
     run("openBoard(nodeById(G.run.at));const b=nodeById(G.run.at).board;b.list.forEach(x=>x.taken=false);takeQuest(1)");const t1=run("G.run.thuongLenh");
     run("questCancel(G.run.quests.find(x=>x.state==='open').id)");ok(run("G.run.thuongLenh")===t1-1, 'bỏ nhiệm vụ: −1');
     run("G.run.quests=[];nodeById(G.run.at).board=null;openBoard(nodeById(G.run.at));takeQuest(0)");const t2=run("G.run.thuongLenh");run("G.run.qfix14=1;G.run.quests.find(x=>x.state==='open').due=W().t+1;advanceTime(5)");ok(run("G.run.thuongLenh")===Math.max(0,t2-1), 'trễ hạn: −1');
+    // phàm nhân: thưởng nhiệm vụ bằng bạc
+    run("G.run.pham=1;G.run.quests=[];nodeById(G.run.at).board=null;openBoard(nodeById(G.run.at));takeQuest(0);G.run.st=0;G.run.bac=0");const q2=JSON.parse(run("JSON.stringify(G.run.quests[0])"));
+    run("questGive(G.run.quests[0])");ok(run("G.run.st")===0&&run("G.run.bac")===run("questRewardOf(G.run.quests[0]).st*TIEN.qBac"), 'phàm nhân nhận thưởng bằng bạc ('+run("G.run.bac")+' đồng)');
+    ok(run("questRewardChips(G.run.quests[0]).some(c=>c.i==='🪙')"), 'bảng treo ghi thưởng bằng bạc cho phàm nhân');
     run("G.run.thuongTong=19");ok(run("tcBac()")===0, 'mười chín thẻ: Vô danh');run("G.run.thuongTong=20");ok(run("tcBac()")===1, 'hai mươi thẻ: Đồng bài');
     run("G.run.thuongTong=0;G.run.thuongLenh=100;G.run.pills=[];openPlace(G.run.at)");
     const i=run("THUONG_CAC.findIndex(x=>x.id==='kimcang')");ok(!run(`tcBuy(${i})`), 'Kim Cang Phù cần Đồng bài');
@@ -618,7 +623,8 @@ const TESTS = {
     ok(run("G.run.doi")===0&&run("G.run.bac")===40, 'ở thành có bạc: tự mua cơm 20 đồng một ngày ('+run("G.run.bac")+')');
     fr();run("G.run.at=G.run.queAt;G.run.origin='nong';G.run.family=[{qh:'me',song:1}];advanceTime(20*24)");ok(run("G.run.doi")===0, 'ở quê còn người nhà: ăn cơm nhà');
     run("G.run.family[0].song=0;advanceTime(24)");ok(run("G.run.doi")===1, 'người nhà không còn: hết cơm nhà');
-    fr();run("delete G.run._anV1;delete G.run.no;delete G.run.anTu;run2()");ok(run("G.run.no")===100&&run("G.run.anTu")===1, 'bản lưu cũ: no đủ, tự lo cơm');
+    fr();const qa=run("G.run.queAt");run("delete G.run._anV1;delete G.run.no;delete G.run.anTu;delete G.run.queAt;run2()");ok(run("G.run.no")===100&&run("G.run.anTu")===1, 'bản lưu cũ: no đủ, tự lo cơm');
+    ok(run("G.run.queAt")===qa, 'bản lưu cũ: tìm lại nút quê theo tên');
     fr();run("G.run.anAcc=0;advanceTime(800*24)");ok(!run("G.run")&&run("G.over.cause")==='doi', 'nhảy dài 800 ngày không ăn: chết đói, không treo');
   },
   // Đ3.7 việc làm thuê: việc hợp nơi, tiền công bằng bạc, giới hạn 12 giờ mỗi ngày, điều kiện, nhật ký viec.xong
