@@ -1,0 +1,10 @@
+{
+  "tien.dong": "{{0}} đồng",
+  "tien.quan": "{{0}} quan",
+  "tien.quanDong": "{{0}} quan {{1}} đồng",
+  "tien.dongS": "{{0}} đồng",
+  "tien.quanS": "{{0}} quan",
+  "tien.chipTip": "Bạc",
+  "tien.doiTuDong": "Thiếu bạc: đổi một viên linh thạch lấy {{0}}.",
+  "tien.khongDu": "Không đủ tiền"
+}

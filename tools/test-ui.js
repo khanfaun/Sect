@@ -225,6 +225,13 @@ const TESTS = {
     ok(L.length >= 2, 'tooltip có dòng Theo năm tháng ('+L.length+')');
     ok(L.every(t => t && !/\d/.test(t)), 'dòng tuế biến không có chữ số: '+L.join(' | ').slice(0,120));
   },
+  // Đ3.1: hầu bao trên HUD có linh thạch và bạc
+  async tien_hud(p) {
+    await ev(p, () => {G.run.bac=3200;G.run.st=1;UI.modal=null;UI.panel=null;render();});
+    await p.waitForTimeout(150);
+    const t = await ev(p, () => [...document.querySelectorAll('.hs-bac')].map(e=>e.innerText).join('|'));
+    ok(/3,2 quan/.test(t), 'HUD hiện bạc: '+t);
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

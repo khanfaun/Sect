@@ -65,9 +65,9 @@ export function Hud() {
       <span className="hs tu" {...tip('Tốc độ tu luyện khi bế quan ở đây: ' + PS.rateOf('bq', PS.bqReal(), 'toc').t + '\nThổ nạp: ' + PS.rateOf('thonap', PS.thonapPct(), 'toc').t)}><Ic n="seat" /><Rt k="bq" v={PS.bqReal()} kind="toc" /></span>
       <span className={'hs tm' + (tm >= 60 ? ' hi' : '')} {...tip('Tâm ma: ' + PS.tmWord(tm).toLowerCase() + '\nĐầy sẽ phải đối mặt với chính mình')}><Ic n="skull" />{PS.tmWord(tm)}</span>
       <span className="hs dt" {...tip('Đạo tâm: ' + PS.rateOf('tam', s.tam, 'muc').t + '\nChống ảo cảnh, giúp đột phá')}><Ic n="lotus" /><Rt k="tam" v={s.tam} kind="muc" /></span>
-      <span className="hs st" {...tip('Linh thạch')}><i className="rh"></i>{PS.fmtN(r.st)}</span>
+      <span className="hs st" {...tip('Hầu bao\nLinh thạch: ' + PS.fmtN(r.st) + '\nBạc: ' + PS.fmtBac(r.bac || 0))}><i className="rh"></i>{PS.fmtN(r.st)}<small className="hs-bac"><i className="sep"> · </i>{PS.fmtBacS(r.bac || 0)}</small></span>
     </div>
-    <div className="hud-ls" {...tip('Linh thạch')}><i className="rh"></i>{PS.fmtN(r.st)}</div>
+    <div className="hud-ls" {...tip('Hầu bao\nLinh thạch: ' + PS.fmtN(r.st) + '\nBạc: ' + PS.fmtBac(r.bac || 0))}><i className="rh"></i>{PS.fmtN(r.st)}<small className="hs-bac"><i className="sep"> · </i>{PS.fmtBacS(r.bac || 0)}</small></div>
     <i className="hud-tv" style={{ width: PS.voKnown() ? 0 : clamp(tv, 0, 100) + '%' }} {...tip(PS.voKnown() ? 'Vô linh căn — chưa thể tu luyện' : !PS.rootKnown() ? 'Chưa biết mình có tiên duyên hay không' : 'Tu vi ' + tv + '%')} />
     <i className="hud-ll" style={{ width: PS.llShow() + '%' }} {...tip('Lịch luyện ' + PS.llShow() + '%')} />
   </>;

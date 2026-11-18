@@ -408,7 +408,7 @@ const TESTS = {
     ok(run("hcRate().bap")===c1, 'cùng bậc thì như nhau');
     run("delete G.meta.lastNq");ok(run("hcRate().bap")===0.25, 'bản lưu cũ: hoàn cảnh thường');
     run("G.meta.lastNq={B:200,G:0};genBirth()");const card=run("JSON.stringify(G.birth.cards.find(c=>c.hc==='bap')||null)");
-    if(card!=='null'){const seeded=f=>`(()=>{const mr=Math.random,rs=RS;RS=mul(4242);let i=0;Math.random=()=>((i++*0.6180339)%1);try{${f}}finally{Math.random=mr;RS=rs;}return G.run.st})()`;
+    if(card!=='null'){const seeded=f=>`(()=>{const mr=Math.random,rs=RS;RS=mul(4242);let i=0;Math.random=()=>((i++*0.6180339)%1);try{${f}}finally{Math.random=mr;RS=rs;}return G.run.bac})()`;
       const st0=run(seeded(`const c=${card};c.hc=null;newRun(c);`));const st1=run(seeded(`newRun(${card});`));
       ok(st1<st0||st0<=2, 'bấp bênh: ít tiền khởi đầu hơn ('+st0+' → '+st1+')');}
     fresh();run("die('combat',{n:'thử'})");ok(run("!!G.meta.lastNq"), 'lúc chết ghi lại nghiệp duyên');
@@ -518,6 +518,23 @@ const TESTS = {
     const n=run(`(()=>{let n=0;const walk=x=>{if(Array.isArray(x))return x.forEach(walk);if(!x||typeof x!=='object')return;for(const k in x){if(k==='deed'||k==='hd'||k==='ng')n++;walk(x[k]);}};CONTENT_EVENTS.forEach(walk);return n})()`);
     ok(n>=477, 'đủ chỗ đã chuyển: '+n);
     const ch=run("applyE({deed:'cuu_nguoi',st:1})");ok(ch.some(c=>c.i==='☯️'), 'hiệu ứng sự kiện ra chip nghiệp duyên');
+  },
+  // Đ3.1 bạc: đơn vị đồng/quan, tiền khởi đầu theo xuất thân, linh thạch phàm nhân về 0, bản lưu cũ
+  tien_bac() {
+    fresh();
+    ok(run("fmtBac(3200)")==='3 quan 200 đồng'&&run("fmtBac(200)")==='200 đồng'&&run("fmtBac(5000)")==='5 quan', 'fmtBac: '+run("fmtBac(3200)"));
+    const st=o=>run(`(()=>{genBirth();const k=Object.assign({},G.birth.cards[0],{origin:'${o}',hc:null});newRun(k);return JSON.stringify({st:G.run.st,bac:G.run.bac})})()`);
+    run("G.meta.upg={}");
+    let a=JSON.parse(st('nong'));ok(a.st===0&&a.bac>=500&&a.bac<=1500, 'con nhà nông: 0 linh thạch, bạc thường '+JSON.stringify(a));
+    a=JSON.parse(st('khat'));ok(a.st===0&&a.bac<=300, 'khất cái: khốn khó '+JSON.stringify(a));
+    a=JSON.parse(st('thegia'));ok(a.st>=1&&a.st<=2&&a.bac>=5000, 'con thế gia: 1–2 linh thạch, khá giả '+JSON.stringify(a));
+    a=JSON.parse(st('xt_nguoi_thua_ke_sap_bac'));ok(a.bac>=5000, 'xuất thân danh mục nhóm khá giả nhận đúng nhóm '+JSON.stringify(a));
+    run("G.run.bac=0;G.run.st=2;NK.clear()");ok(run("bacPay(500,'thu')")&&run("G.run.st")===1&&run("G.run.bac")===89500, 'thiếu bạc: tự đổi một linh thạch ra chín mươi quan');
+    ok(run("NK.count('tien.bac')")>=2, 'nhật ký tien.bac');
+    run("G.run.bac=10;G.run.st=0");ok(!run("bacPay(500,'thu')")&&run("G.run.bac")===10, 'không đủ: không trừ');
+    run("delete G.run.bac;delete G.run._bacV1;G.run.st=7;run2()");ok(run("G.run.bac")===0&&run("G.run.st")===7, 'bản lưu cũ: bạc 0, giữ linh thạch');
+    fresh("G.run.trait='none';G.run.the=[];G.run.kv=['gia_canh_kha_gia'];G.run.tue=null;tueInit(G.run);G.run.bac=0;G.run.st=0;");
+    run("advanceTime(HY)");ok(run("G.run.bac")>=1650&&run("G.run.st")===0, 'tuế biến Gia Cảnh Khá Giả: phàm nhân nhận bạc, không nhận linh thạch ('+run("G.run.bac")+')');
   },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {

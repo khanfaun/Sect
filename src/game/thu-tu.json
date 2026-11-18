@@ -273,6 +273,8 @@
  "core2/37-linh-can.js",
  "content/rules/tue-bien.js",
  "core2/38-tue-bien.js",
+ "content/rules/tien.js",
+ "core2/39-tien-te.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",

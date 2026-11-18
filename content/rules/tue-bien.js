@@ -2,7 +2,7 @@
 // Mỗi mục là một mã trong TT_PHYS (thể chất), TT_DEST (khí vận) hoặc TRAIT (mệnh cách); khí vận "mc_<mã>" dùng mục của mệnh cách <mã>.
 // y: cộng mỗi năm vào chỉ số (khóa như aggFx: hpP, defP, atkP, matkP, mpP, tvP, elP_<hệ> là %; ngo, tam, than, tp, crit, dodge là điểm; lifeY là năm thọ)
 // every: n năm mới cộng một lần (số, hoặc {khóa:n}); capY: tối đa bao nhiêu lần cộng; cap: {khóa: trần riêng của nguồn này} (số âm = sàn)
-// ev: biến cố mỗi năm (một hoặc mảng) {p, season, minAge, maxAge, ifKill, tamma:[a,b], healHp:[a,b], healMp:[a,b], tvPct, st:[a,b], stPct,
+// ev: biến cố mỗi năm (một hoặc mảng) {p, season, minAge, maxAge, ifKill, tamma:[a,b], healHp:[a,b], healMp:[a,b], tvPct, st:[a,b], bac:[a,b] (đồng, thay st cho phàm nhân khi có tiền bạc Đ3), stPct (phàm nhân: % bạc),
 //      cure (khỏi thương thế nhẹ), wound (mã thương thế), hpLoss (% khí huyết hiện có), add:{khóa:v} (cộng dồn có trần cap), hd:{p,t}, alt:[ev,ev], sp}
 // same: cùng loại với mục khác → không cộng dồn, xác suất biến cố ×1.1. txt: dòng "Theo năm tháng" (không có chữ số).
 const TUE={
@@ -43,7 +43,7 @@ const TUE={
   than_the_khoe_manh:{y:{hpP:0.2},cap:{hpP:4},txt:'Ít ốm vặt; khí huyết nhích thêm một chút.'},
   tinh_than_minh_man:{y:{than:1},every:5,cap:{than:3},txt:'Đầu óc sáng thêm một chút.'},
   khi_luc_doi_dao:{y:{tp:1},every:6,cap:{tp:3},txt:'Sức bền thêm một chút.'},
-  gia_canh_kha_gia:{ev:{p:1,maxAge:30,st:[2,4]},txt:'Nhà thỉnh thoảng gửi tiền, đến khi thành người lớn hẳn.'},
+  gia_canh_kha_gia:{ev:{p:1,maxAge:30,st:[2,4],bac:[1650,3300]},txt:'Nhà thỉnh thoảng gửi tiền, đến khi thành người lớn hẳn.'},
   ke_ngoc:{y:{defP:0.2},txt:'Khỏe thêm một chút.'},
   yeu_menh:{ev:[{p:0.10,add:{hpP:-1}},{p:0.05,minAge:30,wound:'noi'}],cap:{hpP:-8},txt:'Thân thể yếu: thỉnh thoảng ốm, khí huyết hao dần; lớn tuổi hiếm khi phát bệnh nặng.'},
   tay_chan_long_ngong:{ev:{p:0.10,hpLoss:5},txt:'Hiếm khi vụng về tự làm mình đau.'},
@@ -60,11 +60,11 @@ const TUE={
   tu_loi_vi_ban:{ev:{p:0.15,stPct:3,hd:{t:1}},txt:'Thỉnh thoảng kiếm thêm chút lợi.'},
   thien_ly_nhan:{y:{than:1},every:6,cap:{than:3},txt:'Mắt tinh thêm một chút.'},
   'phong_hanh_giả':{y:{tp:1},every:6,cap:{tp:3},txt:'Chân nhẹ thêm một chút.'},
-  dai_khi_van:{ev:{p:0.20,st:[3,8]},txt:'Thỉnh thoảng gặp may.'},
+  dai_khi_van:{ev:{p:0.20,st:[3,8],bac:[660,1650]},txt:'Thỉnh thoảng gặp may.'},
   cuu_duong:{ev:{p:0.20,tamma:[2,2],healHp:[15,15]},txt:'Thỉnh thoảng nóng ruột, khí huyết hồi lại một ít.'},
   vo_si:{y:{atkP:0.2},cap:{atkP:5},txt:'Gân cốt rắn thêm một chút.'},
   kiem_phach:{ev:{p:0.10,add:{crit:0.5}},cap:{crit:3},txt:'Hiếm khi ngộ ra một đường kiếm.'},
-  mi_cot:{ev:{p:0.15,alt:[{st:[1,1]},{tamma:[2,2]}]},txt:'Thỉnh thoảng được người để ý — lúc là quà, lúc là phiền.'},
+  mi_cot:{ev:{p:0.15,alt:[{st:[1,1],bac:[330,990]},{tamma:[2,2]}]},txt:'Thỉnh thoảng được người để ý — lúc là quà, lúc là phiền.'},
   tam_nhu_chi_thuy:{ev:{p:1,tamma:[-3,-3],quiet:1},txt:'Lòng lắng bớt theo năm tháng.'},
   tam_ma_xam_thuc:{y:{than:1},every:4,cap:{than:5},ev:{p:1,tamma:[3,6],quiet:1},txt:'Mỗi năm tâm ma chao đảo thêm, nhưng tinh thần cũng mạnh lên.'},
   dai_tri_nhuoc_ngu:{ev:{p:0.15,tvPct:5},txt:'Thỉnh thoảng đốn ngộ.'},
@@ -92,7 +92,7 @@ const TUE={
   ta_than_nghich_tu:{ev:{p:0.25,hd:{t:2},tvPct:3,tamma:[3,3]},txt:'Thường nghịch: tu vi tiến, lòng loạn.'},
   ngu_hanh_hop_nhat:{y:{tvP:0.3},cap:{tvP:6},txt:'Tu luyện nhanh thêm một ít.'},
   loi_than_giang_the:{ev:{p:0.25,season:'ha',healHp:[30,30],add:{elP_loi:0.8}},cap:{elP_loi:12},txt:'Thường có năm lôi khí cuồn cuộn, hồi phần lớn khí huyết.'},
-  van_khi_nghich_thien:{ev:{p:0.35,st:[3,8]},txt:'Gần như năm nào cũng gặp may.'},
+  van_khi_nghich_thien:{ev:{p:0.35,st:[3,8],bac:[660,1650]},txt:'Gần như năm nào cũng gặp may.'},
   thien_ma_hang_the:{ev:{p:0.25,tamma:[4,4],add:{matkP:0.4},hd:{t:2}},cap:{matkP:10},txt:'Thường có năm ma chủ thức tỉnh trong người.'},
   // ----- mệnh cách (HN B §12.5); khí vận mc_<mã> dùng chung mục này -----
   kiemtam:{y:{elP_kim:0.3},cap:{elP_kim:6},txt:'Kiếm tâm sáng thêm một ít.'},
@@ -101,7 +101,7 @@ const TUE={
   chithuy:{ev:{p:1,tamma:[-2,-2],quiet:1},txt:'Lòng lắng bớt theo năm.'},
   yeuhuyet:{ev:{p:0.15,tamma:[2,2],add:{hpP:0.3}},cap:{hpP:6},txt:'Thỉnh thoảng yêu huyết sôi trong đêm trăng; thân thể mạnh thêm.'},
   thiendo:{y:{ngo:1},every:5,cap:{ngo:3},ev:{p:0.10,wound:'ngoai'},txt:'Thông minh thêm; hiếm khi trời ghen.'},
-  phuctinh:{ev:{p:0.25,st:[1,3]},txt:'Thường gặp may.'},
+  phuctinh:{ev:{p:0.25,st:[1,3],bac:[330,990]},txt:'Thường gặp may.'},
   hoalinh:{same:'hoa_linh_the',ev:{p:0.30,tamma:[3,6],healHp:[15,25]},y:{elP_hoa:0.2},cap:{elP_hoa:5},txt:'Như Hỏa Linh Chi Thể: tính khí nóng nảy, nhưng khí huyết cũng sôi trào.'},
   bangco:{y:{defP:0.2},ev:{p:0.20,season:'dong',tamma:[-3,-3]},txt:'Cốt cứng thêm; đông về lòng lắng bớt.'},
   truongtho:{same:'truong_tho_the',y:{lifeY:0.2},cap:{lifeY:8},oldMul:1.1,txt:'Già chậm hơn người.'},
