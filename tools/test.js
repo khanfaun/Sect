@@ -215,9 +215,10 @@ const TESTS = {
     const c0 = +run('senseR()'); ok(run('tkUse()') === true, 'phóng thần thức'); ok(+run('senseR()') > c0, 'tầm nhìn tăng khi phóng: ' + run('senseR()'));
     ok(run('tkUse()') === false, 'đang chờ thì không dùng lại được');
     run('advanceTime(3*HD)'); ok(+run('senseR()') === c0 || run('!tkActive()'), 'hết hiệu lực sau 2 ngày');
+    // điều kiện nơi chốn/độ khó của sự kiện tùy chỗ sinh ngẫu nhiên nên bỏ qua khi gặp giao tranh
     run('for(let i=0;i<20;i++)gtSpawn();'); const e = run('(W().ents.find(e=>e.type==="giaotranh")||{}).id');
     ok(!!e, 'có giao tranh gần đó');
-    if (e) { run(`const target=W().ents.find(e=>e.type==="giaotranh");G.run.at=target.at;arrive(target.at);G.run.scene=null;meetEnt(target)`); ok(run('G.run.scene&&G.run.scene.id') === 'tranh_bao', 'tới nơi thì vào chuyện tranh bảo vật'); }
+    if (e) { run(`const target=W().ents.find(e=>e.type==="giaotranh");G.run.at=target.at;arrive(target.at);G.run.scene=null;const _ct=contentTriggerOk;contentTriggerOk=()=>true;try{meetEnt(target);}finally{contentTriggerOk=_ct;}`); ok(run('G.run.scene&&G.run.scene.id') === 'tranh_bao', 'tới nơi thì vào chuyện tranh bảo vật '+run('G.run.scene&&(G.run.scene.id+"/"+G.run.scene.type)')); }
   },
   // lịch luyện nhận nhiều hơn
   llboost() {
