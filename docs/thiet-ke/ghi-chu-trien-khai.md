@@ -247,3 +247,8 @@ Luật: `src/game/core2/44-no-nha.js`; bảng `NO`, `NHA` ở `content/rules/no-
 - Nút mới **"Săn bắt, hái lượm"** ở mọi nút hoang dã (nhóm Hoang dã): 4 giờ, được **1–3 ngày lương thực** (cộng vào `r.anLk`, ăn dần như lương khô khi không có quán), 25% nhặt thêm 1 thảo dược. Mỗi nút **6 lượt mỗi năm** (`SAN.hai`), hồi lại đầu năm (đếm `n.sb={y,k,c}` theo năm và kiếp); hết thì nút mờ "hết năm nay".
 - Săn yêu thú vốn đã giới hạn 3 lượt/nút/năm; nay đọc từ `SAN.san` (vẫn 3). Hái thuốc / đào khoáng giữ 2 lượt/tháng (vật liệu, không phải cái ăn).
 - Bài kiểm mới `san_bat`.
+
+### C.14 — tân thủ: trạng thái tự xong, thao tác phải làm (câu 14)
+- Nhiệm vụ **sở hữu / đạt trạng thái** (có `st`, đã có thì "Nhận thưởng" ngay khi mở): HD09 (có công pháp/tâm pháp — bỏ so với số lúc sinh), HD10 (binh khí + đan cầm máu), HD15 (có một mối quan hệ — thêm), HD17 (đã có vai), HD18 (đã có nguyện vọng), HD19 (đã Luyện Khí), HD21 (đầy lịch luyện), HD24 (có linh thú — thêm, lời đổi "Có một linh thú bên mình"), HD27 (đã Trúc Cơ).
+- **Thao tác cốt lõi / đếm số lần** (chỉ `tick`, chỉ đếm sau khi nhiệm vụ mở): mọi nhiệm vụ còn lại; HD12 chữa thương bỏ phần tự tính (trước tính "từng bị thương rồi lành") — phải chữa thật; HD11 săn 5 lần, HD23 bế quan 30 ngày đếm lại từ đầu.
+- Bài kiểm mới `tut_loai`.

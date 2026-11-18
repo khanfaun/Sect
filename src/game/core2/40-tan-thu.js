@@ -7,7 +7,9 @@ function tutById(id){return TUT.find(x=>x.id===id);}
 function tutOn(){const r=G.run;return !!(r&&r.tut&&feat('tut'));}
 function tutNew(r){return {open:[],done:{},skip:{},prog:{},ready:{},hide:0,at0:r.at,reg0:r.region,art0:(r.arts||[]).length,hurt:0,wn:0};}
 // hàm trạng thái (go st:) — trả true/false hoặc số tiến độ
-function tutHasLearn(r){return (r.arts||[]).length>(r.tut.art0||0);}
+function tutHasLearn(r){return (r.arts||[]).length>0;} // Sửa-C.14: đã có công pháp là xong (trạng thái sở hữu)
+function tutHasBond(r){return Object.keys(r.bonds||{}).length>0;}
+function tutHasPet(r){return (r.pets||[]).length>0;}
 function tutPrep(r){const E=r.eq||{};return (E.vukhi?1:0)+((r.pills||[]).some(p=>HEAL_PILL.includes(p.id))?1:0);}
 function tutHealthy(r){return !!r.tut.hurt&&!wounds().some(x=>!x.perm);}
 function tutRole(r){return !!(r.flags&&r.flags.tongmon);}

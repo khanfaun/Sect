@@ -547,6 +547,21 @@ const TESTS = {
     const town=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran');return n.id})()");
     ok(!run(`placeActs(nodeById(${JSON.stringify(town)})).some(a=>a.a==='sanbat')`), 'thôn trấn không có');
   },
+  // Sửa-C.14: tân thủ — sở hữu/trạng thái tự xong; thao tác/đếm phải làm thật
+  tut_loai() {
+    fresh();
+    ok(run("G.run.tut&&G.run.kiep===1")!==false, 'kiếp đầu có tân thủ');
+    const st=id=>run(`(()=>{const T=G.run.tut;T.open=[${JSON.stringify(id)}];T.prog={};T.ready={};tutEval();return !!T.ready[${JSON.stringify(id)}]})()`);
+    run("if(!G.run.arts.length)tpLearn(0,{n:'Thử'})");ok(st('HD09'), 'HD09 đã có công pháp: tự xong');
+    run("G.run.bonds={'a':'kn'}");ok(st('HD15'), 'HD15 đã có mối quan hệ: tự xong');
+    run("G.run.pets=[{n:'mèo'}]");ok(st('HD24'), 'HD24 đã có linh thú: tự xong');
+    run("G.run.pham=0");ok(st('HD19'), 'HD19 đã Luyện Khí: tự xong');
+    ok(!st('HD12'), 'HD12 chữa thương: không tự xong khi đang lành');
+    ok(!st('HD11'), 'HD11 săn năm lần: không tự xong');
+    run("G.run.tut.open=['HD11'];G.run.tut.prog={};tutTick('hunt',3)");ok(run("G.run.tut.prog.HD11")===3&&!run("G.run.tut.ready.HD11"), 'đếm từ lúc mở: 3/5');
+    ok(run("TUT.filter(t=>t.st).every(t=>t.need===1||t.id==='HD10')"), 'nhiệm vụ trạng thái đều một bước (trừ HD10 hai món)');
+    ok(run("TUT.filter(t=>t.need>1&&t.id!=='HD10').every(t=>!t.st)"), 'nhiệm vụ đếm số lần không tự tính');
+  },
   quen_sach() {
     fresh();
     ok(run("!UPG.find(u=>u.id==='ky'||u.id==='kytp')"), 'không còn nâng cấp Ký ức công pháp / tâm pháp');
