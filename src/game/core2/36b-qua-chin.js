@@ -14,7 +14,7 @@ function qcRipen(s){const r=G.run;if(!r||!s)return;const ev=(typeof KYNGO!=='und
     if(G.run&&G.run.qc)G.run.qc=G.run.qc.filter(s=>!s.done);}
   return o;};}
 // sổ nghiệp duyên cho giao diện: mới nhất trước, không có số
-function nqSo(n){const r=G.run;if(!r)return [];nqInit(r);return r.ng.so.slice().reverse().slice(0,n||80).map(x=>({y:x.y,t:deedName(x.id)||x.why||deedName('legacy'),k:contentText('nq.so.'+(x.k==='G'?'G':'B'))}));}
+function nqSo(n){const r=G.run;if(!r)return [];nqInit(r);return r.ng.so.slice().reverse().slice(0,n||80).map(x=>({y:x.y,t:deedName(x.id)||deedName(x.why)||(x.why&&!/^[a-z_]+$/.test(x.why)?x.why:'')||deedName('ev'),k:contentText('nq.so.'+(x.k==='G'?'G':'B'))}));}
 // khi chết: hạt chưa chín sang kiếp sau (W().qcLeft) và hiện trên màn hết kiếp
 {const _d=die;die=function(){const r=G.run;let L=[];if(r){L=qcLeft(r).map(s=>({id:s.id,ai:s.ai,qc:1,who:r.ten}));const w=W();w.qcLeft=(w.qcLeft||[]).concat(L).slice(-20);}
   const res=_d.apply(this,arguments);if(G.over)G.over.qc=L.map(x=>deedName(x.id)||x.id);return res;};}

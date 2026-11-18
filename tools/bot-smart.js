@@ -25,7 +25,7 @@ function weak(){const r=G.run;return hpR()<0.5;}
 function scoreE(e){let s=0;if(!e)return 0;
   for(const k in e){const v=e[k];
     if(k==='relic')s+=6;else if(k==='pill')s+=4*(typeof v==='number'?v:1);else if(k==='st')s+=(+v||0)*0.04;else if(k==='tv')s+=(+v||0)*(isPham()?1.3:0.35);
-    else if(k==='lore'||k==='skill')s+=3;else if(k==='karma')s+=(+v||0)*0.4;else if(k==='oan')s-=2;else if(k==='an')s+=2;
+    else if(k==='lore'||k==='skill')s+=3;else if(k==='karma')s+=(+v||0)*0.4;else if(k==='hd'&&v)s+=((v.p||0)-(v.t||0))*0.4;else if(k==='deed'&&typeof DEED!=='undefined'&&DEED[v]){const D=DEED[v];s+=((D.p?HD_W[D.p]:0)-(D.t?HD_W[D.t]:0))*0.4;}else if(k==='oan')s-=2;else if(k==='an')s+=2;
     else if(k==='tamma')s-=(+v||0)*0.15;else if(k==='hp'||k==='hpP'){const x=parseFloat(v);if(x)s+=x*(k==='hpP'?0.05:0.08);}
     else if(k==='ngo'||k==='van'||k==='tam'||k==='tp')s+=(+v||0)*2;}
   return s;}

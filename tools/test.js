@@ -390,6 +390,7 @@ const TESTS = {
     ok(run("NK.count('nq.qc')")===1, 'nhật ký nq.qc');
     const so=run("nqSo(5)");
     ok(so.length>0 && so.every(x=>x.t&&!/\d/.test(x.t+x.k)), 'sổ nghiệp duyên có chữ, không số: '+(so[0]&&so[0].t));
+    run("applyE({ng:{g:1,why:'chi_duong'}})");ok(!/_/.test(run('nqSo(1)[0].t')), 'sổ không hiện mã thô: '+run('nqSo(1)[0].t'));
     run("deed('giet_vo_toi')");
     run("die('combat',{n:'thử'})");
     ok(run("G.over&&G.over.qc&&G.over.qc.length")===1, 'màn hết kiếp có hạt chưa chín');
