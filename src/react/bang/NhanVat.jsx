@@ -68,7 +68,9 @@ function CanCo() {
         <Kv n="Đạo tâm" v={RT('tam', s.tam, 'muc')} t="Chống ảo cảnh, đột phá" />
         <Kv n="Khí vận" v={RT('van', s.van, 'muc')} t={"Chí mạng, may mắn. Khí vận cao thì dễ gặp kỳ ngộ; kỳ ngộ lớn chỉ mở khi khí vận từ " + PS.KY_BIG_VAN + " trở lên."} />
         <Kv n="Mị lực" v={`<span class="mi-v">${PS.miName()}</span>`} t={'Dung mạo, phong thái. Ảnh hưởng giá mua bán, các phép thử thuyết phục, ấn tượng ban đầu của người lạ, việc kết giao, bái sư, kết đạo lữ.\nQuá nổi bật đôi khi cũng chuốc lấy ghen ghét.'} />
-        <Kv n="Nhân quả" v={PS.karmaName(r.karma)} t="Thiện ác đều có báo" />
+        <Kv n="Hành đạo" v={PS.hdName()} t={PS.hdTip()} />
+        <Kv n="Thiện duyên" v={PS.ngName('G')} t="Những người còn nhớ ơn ngươi." />
+        <Kv n="Nghiệp chướng" v={PS.ngName('B')} t="Những món nợ còn chưa trả." />
         <Kv n="Tuổi" v={Math.floor(r.age) + ' · còn ' + left + ' năm'} t={'Thọ nguyên ' + s.life + '. Hết thọ nguyên là tọa hóa'} />
       </HopGon>
       <HopGon k="tu" icon="yin" name="Tu luyện">

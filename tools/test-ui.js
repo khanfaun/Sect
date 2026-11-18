@@ -157,6 +157,18 @@ const TESTS = {
     ok(await ev(p, () => NK.count('mo.migrate') === 1), 'nhật ký ghi mo.migrate');
   },
   // cấu hình: nút nhật ký gỡ lỗi
+  // Đ1.3: bảng nhân vật hiện Hành đạo / Thiện duyên / Nghiệp chướng bằng chữ, không có chữ số
+  async hanhdao(p) {
+    await ev(p, () => {deed('cuu_nguoi');deed('giet_vo_toi');UI.modal=null;UI.panel='char';UI.tab.char='base';render();});
+    await p.waitForTimeout(150);
+    const rows = await ev(p, () => [...document.querySelectorAll('.kr')].map(e=>[e.querySelector('span').innerText.trim(),e.querySelector('b').innerText.trim()]));
+    for (const n of ['Hành đạo','Thiện duyên','Nghiệp chướng']) {
+      const r = rows.find(x=>x[0].includes(n));
+      ok(!!r && r[1].length>2 && !/\d/.test(r[1]), n+': '+(r?r[1]:'không thấy'));
+    }
+    ok(!rows.some(x=>x[0].includes('Nhân quả')), 'không còn dòng Nhân quả');
+    ok(p.errs.length===0, 'không lỗi JavaScript');
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

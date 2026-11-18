@@ -52,3 +52,9 @@ function nqFromLegacy(r,k){if(!r)return;nqInit(r);k=clamp(+k||0,-100,100);const 
 {const _nr=newRun;newRun=function(){const res=_nr.apply(this,arguments);const r=G.run;if(r){nqFromLegacy(r,r.karma||0);r._nqV1=1;}return res;};}
 // bản lưu cũ
 {const _r=run2;run2=function(){const r=_r();if(r&&!r._nqV1){r._nqV1=1;if(!r.hd)nqFromLegacy(r,r.karma||0);else nqInit(r);}return r;};}
+// Bật hệ: giao diện đã đọc hdName/ngName (Đ1.3)
+FEAT.nq=1;
+// bậc của một giá trị nghiệp duyên (0..5)
+function ngBac(v){let i=0;for(let k=0;k<NQ_BAC.length;k++)if((v||0)>=NQ_BAC[k])i=k;return i;}
+function ngBacB(r){return ngBac(ngB(r));}
+function ngBacG(r){return ngBac(ngG(r));}

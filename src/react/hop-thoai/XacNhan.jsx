@@ -84,7 +84,7 @@ export function HuyNhiemVu({ m }) {
     <div className="mbox pconf">
       <h3>Hủy nhiệm vụ?</h3><Ke t={q.text} />
       <p>Đã nhận lời thì phải giữ chữ tín. Bỏ ngang thì phải đền một nửa tiền thưởng và mang tiếng thất hứa.</p>
-      <div className="pc-row"><small>Bị phạt</small><span className="gains"><span className="gn st"><i className="rh"></i>−{P.st}</span><span className="gn in">nhân quả {P.karma}</span></span></div>
+      <div className="pc-row"><small>Bị phạt</small><span className="gains"><span className="gn st"><i className="rh"></i>−{P.st}</span><span className="gn in">thất hứa</span></span></div>
       <div className="mb-f"><button className="btn" data-act="modalX">Thôi</button><button className="btn pri" data-act="qDropGo" data-arg={q.id}>Hủy nhiệm vụ</button></div>
     </div>
   );
