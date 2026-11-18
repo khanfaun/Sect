@@ -148,10 +148,10 @@
           "t": "Ngươi dạy hắn tự tìm thế ngồi vững, không cần bắt chước dáng ai. Hắn thử vài lần mới được, vui đến mức đứng bật dậy khoe. Ngươi phải nhắc bài hôm nay là ngồi im.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "tv": 4
           }
@@ -247,10 +247,10 @@
           "t": "Ngươi kể rõ áo thuộc về ai, người đang mặc là ai. Người ấy im lặng rồi xin giữ lại áo cũ, mời thiên ma ngồi bên như một vị khách. Hắn lần đầu được hỏi chính mình muốn ăn gì.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",

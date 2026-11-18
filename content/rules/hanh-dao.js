@@ -8,3 +8,6 @@ const HD_LV=[
   {min:0,   n:'Tà niệm ăn sâu',       d:'Thế công dữ dội, thương tổn khó lành.'}];
 const HD_W={nho:1,vua:3,lon:8}; // trọng số quyết định
 const HD_HYS=0.03, HD_KEEP=24;
+// Sửa-C.2: mức giúp đỡ trong truyện (không phải DEED): nhẹ (một lời, một tay, chút pháp lực/thì giờ) < vừa (bỏ tiền, chịu trách, lỡ việc dài)
+// < nặng (đổ máu, tổn tu vi/thọ nguyên). Cứu mạng thật dùng DEED cuu_nguoi / cuu_nguoi_hy_sinh. Danh sách: docs/thiet-ke/karma-muc-giup.csv
+const HD_GIUP={nhe:{hd:{p:1},ng:{g:1}},vua:{hd:{p:3},ng:{g:3}},nang:{hd:{p:5},ng:{g:5}}};

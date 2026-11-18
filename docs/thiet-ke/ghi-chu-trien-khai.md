@@ -215,3 +215,12 @@ Luật: `src/game/core2/44-no-nha.js`; bảng `NO`, `NHA` ở `content/rules/no-
 - `NQ_BAC` đổi `[0,3,15,50,100,200]` → **`[0,5,20,60,120,250]`** (cùng mốc cho nhãn `NQ_LV_G/B`). Một lần giết người vô tội (15) chỉ tới bậc 1 "Vướng nợ trần duyên"; tái phạm (30) mới bậc 2 và kiếp đổi Nghiệp Hỏa. Cứu một người (8) bậc 1, cứu ba người (24) bậc 2. Bậc 5 cần 250 (≈ 17 mạng người) nên chỉ kẻ ác thật mới "nghiệp hải".
 - Các ngưỡng viết cứng 15/50 (Nghiệp Hỏa, lời báo kiếp, tuần tra bắt, thành tựu Thiện nhân/Ma đầu) nay đọc theo bậc (`ngBacB()>=2`, `>=3`).
 - Bài kiểm: mới `nq_moc`; sửa `kiep_nghiep`, `hoancanh` theo mốc mới (B=100→120, 15→20, 200→250).
+
+### C.2 — chính đạo chia mức (câu 2)
+- DEED vốn đã chia theo loại việc: bố thí / phóng sinh / an táng = nhẹ (Hành Đạo 1, thiện duyên 1) < cứu người = vừa (3, 8) < cứu người phải hy sinh = nặng (8, 8). Giữ nguyên.
+- 214 chỗ +4 cũ: 28 chỗ đã là `cuu_nguoi`/`cuu_nguoi_hy_sinh` (giữ); 185 chỗ còn lại chia theo **hy sinh/nguy hiểm thật** (bảng `HD_GIUP` ở `content/rules/hanh-dao.js`):
+  - **nhẹ** `hd:{p:1}, ng:{g:1}` — 59 chỗ: một lời, một tay, chút pháp lực (20%), nửa ngày.
+  - **vừa** `p:3, g:3` — 102 chỗ: bỏ từ 8 linh thạch, mất trọn ngày, chịu trách/bảo lãnh/bị phạt/mất quyền lợi; cùng 5 chỗ máy chấm nhẹ nhưng thật ra là giải cứu người (mở khoá cho người bị nhốt, ghìm kiếm, thú vương lui bầy…).
+  - **nặng** `p:5, g:5` — 24 chỗ: mất từ 10% khí huyết, tổn tu vi, thọ nguyên, thể phách.
+  - `tt_vua` (thu-trieu.json, chỉ có `hd`) giữ nguyên.
+- Kết quả từng chỗ: `docs/thiet-ke/karma-muc-giup.csv`. Bài kiểm mới `hd_muc`.

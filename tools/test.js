@@ -389,6 +389,19 @@ const TESTS = {
     run("deed('cuu_nguoi',{ai:'b'});deed('cuu_nguoi',{ai:'c'})");ok(run("ngBacG()")===2, 'cứu ba người: bậc 2 ('+run("ngG()")+')');
     ok(run("NQ_BAC.join()")==='0,5,20,60,120,250', 'bảng mốc');
   },
+  // Sửa-C.2: chính đạo chia mức theo loại việc; 214 chỗ +4 cũ phân nhẹ/vừa/nặng
+  hd_muc() {
+    fresh();
+    ok(run("HD_W[DEED.bo_thi.p]<HD_W[DEED.cuu_nguoi.p]&&DEED.bo_thi.g<DEED.cuu_nguoi.g"), 'bố thí (mua đồ ăn cho kẻ ăn xin) nhẹ hơn cứu người');
+    ok(run("HD_W[DEED.cuu_nguoi.p]<HD_W[DEED.cuu_nguoi_hy_sinh.p]"), 'cứu người phải hy sinh nặng hơn cứu người');
+    const fs=require('fs'),path=require('path'),glob=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?glob(path.join(d,x.name)):x.name.endsWith('.json')?[path.join(d,x.name)]:[]);
+    const ev={};for(const f of glob(path.join(__dirname,'../content/events'))){const d=JSON.parse(fs.readFileSync(f,'utf8'));for(const e of d.events||[])ev[e.id]=e;}
+    const rows=fs.readFileSync(path.join(__dirname,'../docs/thiet-ke/karma-muc-giup.csv'),'utf8').trim().split('\n').slice(1).map(l=>l.split(','));
+    const V={nhe:1,vua:3,nang:5};let bad=0;const n={nhe:0,vua:0,nang:0};
+    for(const [id,p,k] of rows){let o=ev[id];for(const m of p.matchAll(/(\w+)(?:\[(\d+)\])?/g)){o=o&&o[m[1]];if(m[2]!=null)o=o&&o[+m[2]];}const E=o&&(o.e||o.fx);n[k]++;if(!E||!E.hd||E.hd.p!==V[k]||E.ng.g!==V[k])bad++;}
+    ok(bad===0&&rows.length>=180, 'các lựa chọn giúp đỡ đã chia mức: '+JSON.stringify(n));
+    ok(n.nhe>20&&n.nang>10, 'có đủ ba mức');
+  },
   qua_chin() {
     fresh('G.run.qc=[]');
     run("deed('cuu_nguoi',{ai:'lão'})");

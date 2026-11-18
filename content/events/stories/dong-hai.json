@@ -36,10 +36,10 @@
           "t": "Ngươi dùng khí hộ thể ép nước khỏi khoang, giữ tới khi họ đục thông lối ra. Linh lực tiêu hao quá mức làm đan điền đau nhói. Người cuối cùng dìu ngươi lên bờ, liên tục gọi để ngươi đừng ngất.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "hp": "-15%",
             "tv": -3
@@ -766,10 +766,10 @@
           "t": "Ngươi kê cao thuyền, dùng đèn của xưởng soi vào khe. Một con vật không mắt bò ra, đuổi theo ánh sáng tới tận mép biển. Ngươi ném đèn xuống nước; tiếng cạo dứt ngay khi lửa tắt.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "tamma": -3
           }
@@ -860,10 +860,10 @@
           "t": "Ngươi giúp hạ và đỡ buồm, để họ tháo nguyên bàn tay vải. Họ lỡ phiên bán nhưng không còn phải cắt nó ra. Người con nhờ thợ khâu may vào áo đi biển của mình.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -961,10 +961,10 @@
           "t": "Ngươi đọc rõ khế: dòng họ ấy chỉ được coi cống, không có quyền thu tiền bãi tập. Người đang tập yêu cầu dỡ biển. Yêu tu cãi thêm vài câu rồi mang biển đi, không tìm được chỗ nào trong khế để chỉ lại.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           }
         },
@@ -1233,10 +1233,10 @@
           },
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -1407,10 +1407,10 @@
           "t": "Ngươi gọi dân xoay tảng đá sang phía bãi trống, tự bỏ công dọn chỗ neo đang vướng đường. Mọi người có nắng phơi cá, lão vẫn được nằm trong bóng. Lão bảo lúc đầu chỉ cần hỏi nhau một tiếng là xong.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -1501,10 +1501,10 @@
           "t": "Ngươi dùng kiếm khí phá một đường qua lớp váng, đánh tới khi tay tê dại. Đàn chim thoát về bờ trước khi khe khép lại. Người giữ phao vội đánh dấu vùng nước, ngăn thuyền sau đi vào.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "hp": "-10%"
           }
@@ -1802,10 +1802,10 @@
           },
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",

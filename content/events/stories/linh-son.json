@@ -129,10 +129,10 @@
           "t": "Ngươi xin chậu nước, rửa lớp mực làm cũ trên chân ghế. Nét khắc còn mới nguyên. {$b.ten} hỏi ai cho phép tự chiếm chỗ của tông môn, thiếu gia đành đứng dậy giữa tiếng xì xào.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           }
         },
@@ -309,10 +309,10 @@
           "t": "Ngươi nhận đứng thay một ca gác, để họ gặp nhau lúc đổi người. Người nhận áo xem đường vá, nói nhỏ: “Lần sau rách nữa, ta còn nhờ được không?” Người kia gật đầu, giục hắn mặc vào kẻo lạnh.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -396,10 +396,10 @@
           "t": "Ngươi bỏ buổi nghe giảng, cùng lão làm lại giá đặt bài vị và chép đủ tên lên vách. Người tới thắp hương từ nay tìm được tên người nhà, không phải xin dỡ từng hàng xuống.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "h": 6,
             "an": [
@@ -582,10 +582,10 @@
           "t": "Ngươi tháo phù cũ theo thứ tự ngược với trận giữ kho. Hơi ấm tắt hẳn; một bàn tay lạnh túm cổ tay ngươi rồi tan khi lá phù cuối rời cửa. Ngươi bị thương nhẹ, phải đứng ngoài vận khí hồi lâu mới dám mở kho.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "hp": "-10%",
             "tamma": -3
@@ -952,10 +952,10 @@
           "t": "Ngươi dành một buổi mài lại nghiên, để mực giữ thành nét nổi khi khô. Học trò lần tay đọc được lá phù mình vừa viết. Phù sư bảo hắn thử thêm một tờ, giọng vui hơn hẳn.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -1057,10 +1057,10 @@
           "t": "Ngươi xuống hẻm buộc dây cầu vào gốc đá. Gió cắt đứt sợi dây kéo phụ, làm ngươi va vào vách, nhưng cầu đã được neo chắc. Leo lên tới bờ, ngươi mới thở ra được.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "hp": "-10%"
           }
@@ -1146,10 +1146,10 @@
           "t": "Ngươi đục lối nước vòng qua nơi dư khí đọng lại, làm hết buổi còn bị kiếm khí cứa tay. Cá vừa vào dòng mới đã bơi đi. Nông phu xin tông môn từ nay xả nước sau giờ luyện, ngươi nhận giúp chuyển lời.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "h": 12,
             "an": [
@@ -1241,10 +1241,10 @@
           "t": "Ngươi hái rau non dẫn rùa khỏi giấy, đệ tử vội chép nốt cửa trận. Nó ăn xong lại nằm vào giữa. Hắn thở dài: “Mai ta phải trải hai tờ, cho nó riêng một tờ.”",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           }
         },
@@ -1335,10 +1335,10 @@
           "t": "Ngươi xin ghi tên nhận ca trực thay, để hắn kịp xuống núi. Trở về, hắn cảm tạ rồi đứng cạnh ngươi tới hết ca, kể cha đã tỉnh được một lúc để nhận ra mình.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "h": 12,
             "an": [
@@ -1433,10 +1433,10 @@
           "t": "Nhà hắn phải nhận lại món nợ. {$b.ten} tự xé nửa thiệp của mình, giữ riêng mảnh ghi ngày trả.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           }
         },
@@ -1457,10 +1457,10 @@
           "t": "Ngươi hộ tống nàng xuống núi, lỡ buổi thỉnh giảng. Đi được một đoạn, nàng tự gấp thiệp cất đi: “Đạo hữu đưa tới đây được rồi. Đường sau ta tự đi.”",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "h": 12,
             "an": [
@@ -1732,10 +1732,10 @@
           "t": "Ngươi giúp lão kê lại phiến đá, lỡ giờ nghe giảng. Lão dẫm thử cho chắc rồi từ biệt sơn môn: “Ở đây mấy chục năm, ít ra cũng để lại được một bậc lành.”",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -1824,10 +1824,10 @@
           "t": "Ngươi nhận trông mái hết cơn mưa cho họ xuống uống trà. Trở lên, hai người mang thêm cho ngươi một ấm nóng, đứng kể chuyện sửa mái tới khi trời tạnh.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",

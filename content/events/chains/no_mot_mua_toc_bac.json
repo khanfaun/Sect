@@ -46,10 +46,10 @@
           "t": "{$b.ten} nhận lại tuổi. {$a.ten} nhặt sợi tóc, lặng lẽ gài sau tai mình.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "lifeCut": 4,
             "an": [
@@ -269,10 +269,10 @@
           "t": "Ngươi hủy phần nợ mình giữ, buộc chủ khế ghi lại số tuổi và hạn còn lại. Hai anh em có thêm thời gian xoay xở. Người em giữ bản đối chiếu, không còn giao cả giấy cho một mình chủ khế.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           }
         },
@@ -374,10 +374,10 @@
           "t": "Ngươi yêu cầu lão trả khế trước, rồi giúp giữ mạch lúc truyền tuổi. Luồng khí đứt quãng khiến ngươi bị thương, nhưng lão qua được cơn nguy. Người em kiểm đủ giấy của anh mình rồi mới nhận lời dừng truyền.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "hp": "-10%"
           }
@@ -489,10 +489,10 @@
           "t": "Ma tu {$a.ten} có thêm một mùa bên em. Trên bếp vẫn còn một tờ chưa cháy hết.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "lifeCut": 3
           }

@@ -125,10 +125,10 @@
           "t": "Ngươi nói trọn điều ngày trước không dám nhận. Khuôn miệng vỡ, Nguyên Anh đau nhói khiến ngươi phải dưỡng một đêm. Người khắc tên không hỏi chuyện ấy; lão chỉ lấy nước cho ngươi.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "an": [
               "a",
@@ -329,10 +329,10 @@
           "t": "Ngươi đọc rõ tên đang mang, dìu lão qua từng bước. Dây cầu siết cổ tay tới bật máu rồi lỏng ra. Sang bờ, ngươi bảo lão tự gọi lại tên mình; lần này tiếng đáp từ hẻm không đổi thành tên người khác.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "hp": "-10%"
           }
@@ -435,10 +435,10 @@
           "t": "Ngươi phải nghe trọn lời cũ trước khi đặt đục xuống. Lão chừa khoảng trống đúng chỗ chữ vừa khép.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "tamma": -3
           }

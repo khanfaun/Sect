@@ -36,10 +36,10 @@
           "t": "Ngươi thay dầu rồi truyền lửa sang, giữ phù quanh bóng cho tới khi nó khớp lại với người. Lão cầm đèn đi thử vài bước, không còn ai thổi nữa. Ngươi hao pháp lực, phải ngồi lại dưỡng khí trước khi đi.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "tamma": -3
           },
@@ -123,10 +123,10 @@
           "t": "Ngươi dùng phù ở bàn khâu giữ thi thể nằm yên, giúp lão rút phần hàm trả về đúng bộ cốt. Tiếng gọi tắt. Lão xin chôn riêng bộ cốt, rồi tự thu dọn bàn, không nhận thêm việc trong hôm ấy.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "tamma": -3
           }
@@ -210,10 +210,10 @@
           "t": "Ngươi góp linh hỏa giữ lò ấm thêm một canh. Người trong lán dời ra cho khách mới vào, gọi ngươi ngồi ăn chút gì nóng. Đứa bé tỉnh giấc đòi nghe tiếp chuyện lúc nãy, cả lán lại có tiếng nói cười.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -304,10 +304,10 @@
           "t": "Ngươi chuyển một phần thọ nguyên để xóa số lãi hai mẹ con còn thiếu, bắt chủ nợ trả bản khế đã sửa. Người mẹ đọc lại ngày hết nợ hai lần rồi mới dám nhận. Ngươi thấy mình già thêm, cần ngồi xuống một lát.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "lifeCut": 3,
             "an": [
@@ -577,10 +577,10 @@
           "t": "Ngươi giữ tiếng trong thần niệm, đọc lại cho nàng nghe trọn lời dặn về chỗ cất chum trong nhà. Nàng nghe thêm lần nữa rồi tự tháo nút. Khi nàng chào, ngươi biết nàng đã sẵn sàng trở về.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -684,10 +684,10 @@
             "t": "Ngươi đưa {$b.ten} ra và lấy lại phù giữ hồn.",
             "e": {
               "hd": {
-                "p": 3
+                "p": 1
               },
               "ng": {
-                "g": 3
+                "g": 1
               }
             }
           },
@@ -867,10 +867,10 @@
           "t": "Ngươi mời người quét nhà dâng hương. Sáu bài vị cùng quay về phía y, thiếu chủ cuống quýt thu gia phả. Ma tu bảo cả hai ở lại đối chứng, riêng ngươi được mời một chén trà vì đã ngăn việc nhận nhầm.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           }
         },
@@ -955,10 +955,10 @@
           "t": "Ngươi bẻ hương, giữ ký ức chưa tràn về hết để cả hai có một canh nói chuyện. Người đứng sau phải tự nhận việc đã làm, không còn núp sau lưng ngươi. Oán hồn nghe xong mới quyết có theo hắn ra ngoài hay không.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "tamma": -3
           }
@@ -1050,10 +1050,10 @@
           "t": "Ngươi dùng linh lực làm ấm đá, thay cho phần khí người kia phải truyền liên tục. Hai người xoay ghế nhìn nhau. Nàng im lặng một lúc rồi bật cười: “Hóa ra ngươi nói chuyện cứ hay cau mày.”",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -1147,10 +1147,10 @@
           "t": "Ngươi giữ tay quay, chịu cơn đau của khế để người phu xe nghe hết lời vợ. Nàng chỉ dặn hắn đừng vì lời hẹn cũ mà sống một mình mãi. Hắn xin người giải khế xay tiếp, tự tay đỡ lấy phần giấy đã hết chữ.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "an": [
               "a",
@@ -1241,10 +1241,10 @@
           "t": "Ngươi dẫn nước từ khe đá qua lối đi. Tro gặp nước hạ xuống, cả đoàn bám theo rãnh mà qua, không ai được chạy trước. Ra khỏi vùng bụi, ngươi phải nghỉ dưỡng khí; người dẫn đường nhận chờ cùng.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           },
           "cost": {
@@ -1515,10 +1515,10 @@
           "t": "Ngươi cho hồn mượn ký ức đường về quê mình. Nó theo chỉ ra khỏi ma vực, còn ngươi phải ngồi nhớ lại từng ngã rẽ đã cho đi. Người thợ may ở lại cùng ngươi tới khi ngươi tự nhắc được tên quê.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -1694,10 +1694,10 @@
           "t": "Ngươi buộc giám lễ gọi chính tên hắn. Đất kéo hắn quỳ xuống, cũng kéo ngươi ngã vì đứng trong trận. Khi hai người đứng dậy, người chờ chịu lễ đồng loạt hỏi ai đã đặt luật này.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "hp": "-10%"
           }

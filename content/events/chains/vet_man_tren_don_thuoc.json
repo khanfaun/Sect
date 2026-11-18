@@ -42,10 +42,10 @@
           "t": "Ngươi yêu cầu giữ mẻ muối, ở lại cùng diêm dân xem nguồn nước. Chủ ruộng giục giao hàng, ngươi không ký xác nhận. Người mua đành chờ kết quả thay vì mang muối lạ về bán.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           }
         },
@@ -470,10 +470,10 @@
           "t": "Ngươi nhường phần lợi lâu dài. {$a.ten} dùng bát thuốc múc một bát cho người cuối hàng.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           }
         },

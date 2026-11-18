@@ -117,10 +117,10 @@
           "t": "Ngươi dùng thần niệm hứng giọt nước cuối khỏi vạt áo. Áo khô, lão sờ thử rồi gấp lại, nói lần này sẽ tự đi tìm người đã hẹn. Ngươi hao khí giữ giọt nước tới khi nó tan, rồi chúc lão thuận đường.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -210,10 +210,10 @@
           "t": "Ngươi để lại một lời chào, giọng khàn đi sau khi rút thần niệm khỏi bình. Một khách mới bước vào, nghe tiếng ngươi thì ngẩng đầu đáp lễ. Người giữ trạm kê thêm ghế, mời cả hai uống trà.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -300,10 +300,10 @@
           "t": "Ngươi ép dải sáng đứng yên, để người đóng ghim tìm và lắp lại mũ chốt. Khi nàng ra hiệu đã chắc, ngươi mới thu tay, hao gần hết phần khí đang dưỡng. Dân dưới bãi được rời đi trước khi ánh sáng lại quét qua.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -400,10 +400,10 @@
           "t": "Ngươi mời người làm mẫu tới đối lại tiền công và nét khắc dưới bệ. Tu sĩ hết đường nhận tượng là cha mình, người coi điện cũng phải trả khoản còn thiếu. Thợ xin ghi đúng tên người làm mẫu trước rồi mới khắc lời ca tụng.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             }
           }
         },
@@ -488,10 +488,10 @@
           "t": "Ngươi giữ giọt mưa đứng lại giữa hai tầng, hao khí cho tới khi người phía dưới hiện rõ. Họ chạm được tay qua giọt nước, nói xong lời hẹn gặp. Nàng tự thu tay trước khi ngươi không giữ nổi nữa.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -676,10 +676,10 @@
             "t": "Ngươi lấy lại hai cái bóng và đẩy hắn khỏi đường.",
             "e": {
               "hd": {
-                "p": 3
+                "p": 1
               },
               "ng": {
-                "g": 3
+                "g": 1
               }
             }
           },
@@ -771,10 +771,10 @@
           "t": "Ngươi đổi phần nhìn bằng thần niệm, để mỗi người thấy quê mình một lát. Lão bật cười khi thấy cây trước sân đã lớn hơn mái nhà. Ngươi ngồi lại tới khi phép khép, không ai giục ai nói.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -860,10 +860,10 @@
           "t": "Ngươi đổi một phần thọ nguyên để mở rộng ô cửa. Sau đó chỉ có phòng trống và chiếc nôi lật; tiếng gọi tiếp tục già đi, cho tới khi một người già hỏi con đã về chưa. Ngươi khép cửa, hiểu mình không thể bước vào đúng thời người ấy chờ.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "lifeCut": 3,
             "tamma": -3
@@ -945,10 +945,10 @@
           "t": "Ngươi đi lùi, dẫn phần tay vịn cầu dành cho mình tới chỗ tu sĩ đang ngã. Y bám được, sang bờ rồi cúi đầu cảm tạ. Ngươi phải chờ cầu trở lại, nhưng có thêm một người ngồi đợi cùng.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "h": 12,
             "an": [
@@ -1205,10 +1205,10 @@
           "t": "Ngươi dẫn bóng mình qua mép thủng, giữ hai phía khép lại cho người coi cổng khâu xong. Thần niệm hao nhiều, bóng dưới chân còn hở một đoạn vai. Lão chỉ ngươi cách dưỡng lại bóng, dặn đừng qua cổng khác trước khi lành.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "tam": 1
           },
@@ -1298,10 +1298,10 @@
           "t": "Ngươi gánh một lượt bụi trăng tới bờ sân, mỗi bước nặng thêm cho tới sáng. Lão mời ngươi ngồi ngắm trăng hạ xuống, kể dấu chân nhỏ là của người con từng chạy chơi ở đây. Hôm nay lão kể mà đã có thể cười.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",
@@ -1388,10 +1388,10 @@
           "t": "Ngươi cùng lão nghe từng hạt bụi tới tê tai. Tìm được tiếng chén vỡ, cả hai còn nghe tiếng mẹ lão mắng vì chân trần chạy vào nhặt. Lão cười rất lâu rồi xin giữ riêng hạt ấy, không tìm nữa.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "an": [
               "a",
@@ -1577,10 +1577,10 @@
           "t": "Ngươi chia một phần thọ nguyên để hai luồng sáng dưới ô cân lại. Hai người đi cùng tốc độ được một đoạn, vui vẻ cảm tạ ngươi. Tới ngã rẽ, họ tự chọn đường còn có thể đi chung, không xin ngươi chia thêm tuổi.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "lifeCut": 3,
             "an": [
@@ -1671,10 +1671,10 @@
           "t": "Ngươi giữ linh lực cho thợ khắc một vòng chắn gió riêng, để khe vẫn truyền tiếng tim. Tu sĩ mặc thử, nghe được nhịp mình mà không còn gió lọt. Hắn hỏi kỹ cách bảo dưỡng rồi mới nhận giáp.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",

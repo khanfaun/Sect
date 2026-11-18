@@ -41,10 +41,10 @@
           "t": "Ngươi lỡ lượt qua để giúp lão lật ván đọc tên người giữ cầu đã mất. Lão kể rõ người ấy đã giữ nhịp cho dân thoát thế nào. Ngươi nhớ được cả việc lẫn tên, đặt ván lại rồi mới đi.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "h": 12
           }
@@ -243,10 +243,10 @@
           "t": "Ngươi để lão gỡ nét tên đã nhập vào dấu chân, trả lại cho hồn. Bước đi mất phần nhẹ trước đó, nhưng tiếng chân phía sau cũng dừng. Hồn tự đọc được trọn tên mình rồi cúi chào ngươi.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "tp": -1,
             "an": [
@@ -349,10 +349,10 @@
           "t": "Ngươi viết tên mình cạnh tên hồn, để lại một phần thần niệm cùng đỡ cầu. Cả đoàn qua hết, hồn vẫn đứng vững tại nhịp giữa. Lão khắc cầu hứa sẽ coi phần tên ngươi để lại.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "tv": -3
           }
@@ -455,10 +455,10 @@
           "t": "Ngươi giúp lão dò lại những tên còn nhớ, khắc trên mặt ván để người qua đọc được. Hồn chỉ đúng chỗ tên mình rồi đứng tránh sang bên. Lần đầu nó được nghe người lạ gọi tên mà không phải xin.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 1
             },
             "ng": {
-              "g": 3
+              "g": 1
             },
             "an": [
               "a",

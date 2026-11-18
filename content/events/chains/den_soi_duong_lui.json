@@ -248,10 +248,10 @@
           "t": "Ngươi truyền linh hỏa vào nét đường hắn đã vạch. Hơi lạnh phản lại làm ngực đau nhói, ngươi vẫn giữ tới khi hắn tìm được lối thật. Hắn gọi thêm người theo xuống, còn ngươi ở lại dưỡng khí.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "hp": "-10%"
           }
@@ -346,10 +346,10 @@
           "t": "Ngươi dùng một phần tu vi mở đường lui cho cả đoàn. Người biết lối xuống đi trước dẫn đường, người khỏe dìu người yếu. Khi đường khép, tu sĩ cuối đã về tới trạm; ngươi ngồi xuống dưỡng thần.",
           "e": {
             "hd": {
-              "p": 3
+              "p": 5
             },
             "ng": {
-              "g": 3
+              "g": 5
             },
             "tv": -4
           }
