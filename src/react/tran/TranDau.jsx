@@ -81,7 +81,7 @@ function BangLenh({ sc, me, rp, pickMode }) {
   );
   if (m === 'def') return (
     <div className="skills">
-      <button className="sk" data-act="skill" data-arg="_block" disabled={me.tl < PS.TL_BLOCK} {...tip('Đỡ đòn: thủ thế, chạy dần từ mốc ra chiêu tới mốc phát lực.\nTrong quãng đó bị đánh thì đỡ được một lần: giảm khoảng 20–30% sát thương, tốn 30% thể lực.\nKhông ai đánh thì không có gì xảy ra.')}>
+      <button className="sk" data-act="skill" data-arg="_block" disabled={me.tl < PS.tlB(me)} {...tip('Đỡ đòn: thủ thế, chạy dần từ mốc ra chiêu tới mốc phát lực.\nTrong quãng đó bị đánh thì đỡ được một lần: giảm khoảng 20–30% sát thương, tốn 30% thể lực.\nKhông ai đánh thì không có gì xảy ra.')}>
         <span className="el">Đỡ</span><span className="sn">Đỡ đòn<small>30% thể lực</small></span>
       </button>
       <NutChieu id="_guard" sk={PS.GUARD_SK} lv={1} t={'Vận khí thủ thế\nĐược hộ thể và hồi 30% linh lực'} me={me} />

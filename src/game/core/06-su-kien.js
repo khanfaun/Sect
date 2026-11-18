@@ -122,6 +122,7 @@ function mkBoss(){
 // Bảng EN_SK: content/items/en-sk.js
 const PHAT=75; // mốc phát lực: điểm cuối của tụ lực và của thế đỡ
 const TL_DODGE=25,TL_BLOCK=30,TL_REGEN=20,BLOCK_CUT=0.6;
+function tlD(u){return TL_DODGE;} function tlB(u){return TL_BLOCK;} // thể lực né / đỡ (Sửa-C.8: người già tốn thêm, bọc ở core2/45)
 // Bảng BLOCK_SK: content/items/block-sk.js
 // Bảng WAIT_SK: content/items/wait-sk.js
 // Bảng GUARD_SK: content/items/guard-sk.js

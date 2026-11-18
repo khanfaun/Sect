@@ -8,7 +8,7 @@ function kiepStrike(sc,k){
 function kiepHit(sc,k,off){
   const K=sc.kiep,me=mainUnit(sc);const i=K.done+1;
   let d=Math.round(me.max*(0.18+0.035*i)*K.uy);K.uy=1;
-  if(me.st.stance&&me.tl>=TL_BLOCK){me.tl-=TL_BLOCK;d=Math.round(d*(1-0.25));}
+  if(me.st.stance&&me.tl>=tlB(me)){me.tl-=tlB(me);d=Math.round(d*(1-0.25));}
   if(me.st.stance&&me.phase==='guard')endStance(sc,me,null);
   let red=0;if(off==='auto')red=0.25*0.6;else if(off!=null&&Math.abs(off)<=0.09)red=0.5;else if(off!=null&&Math.abs(off)<=0.25)red=0.25;
   d=Math.round(d*(1-red));d=absorb(me.st,d);me.hp-=d;K.done++;

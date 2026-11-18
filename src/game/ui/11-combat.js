@@ -75,7 +75,7 @@ function dodgePress(){
   const d=UI.dg;if(!d)return;const now=performance.now();if(now<d.t0)return;
   let k=Math.round((now-d.t0)/d.T)-1;k=clamp(k,0,d.n-1);
   if(d.pressed)return;d.pressed=1;
-  {const me=mainUnit(G.run.scene);const used=d.offs.filter(x=>x!=null).length;if(!d.lit&&!d.blk&&me&&me.tl-used*TL_DODGE<TL_DODGE){const b=$('#dodgeBtn');if(b)b.textContent='Kiệt sức';return;}}
+  {const me=mainUnit(G.run.scene);const used=d.offs.filter(x=>x!=null).length;if(!d.lit&&!d.blk&&me&&me.tl-used*tlD(me)<tlD(me)){const b=$('#dodgeBtn');if(b)b.textContent='Kiệt sức';return;}}
   d.offs[k]=(now-(d.t0+(k+1)*d.T))/1000;
   const b=$('#dodgeBtn');if(b){b.classList.add('hit');const a=Math.abs(d.offs[k]);b.textContent=a<=0.09?'Chuẩn!':a<=0.25?'Khá':'Hụt';}
 }

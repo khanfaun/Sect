@@ -515,6 +515,23 @@ const TESTS = {
     run("genBirth()");ok(run("G.birth.cards.length")===3, 'ba lá số');
     run("newRun(G.birth.cards[0])");ok(run("G.run.rootKnown")===0, 'kiếp mới chưa trắc');
   },
+  // Sửa-C.8: già theo tỉ lệ tuổi/thọ
+  gia() {
+    fresh("G.run.the=[];G.run.kv=[];G.run.tue=null;tueInit(G.run)");
+    const s0=JSON.parse(run("JSON.stringify(S())"));const life=s0.life;
+    ok(!run("giaOn()"), 'còn trẻ: chưa già');
+    run(`G.run.birthAge=Math.ceil(${life}*0.72)+1-(W().t-G.run.bornT)/HY;G.run.age=G.run.birthAge+(W().t-G.run.bornT)/HY;advanceTime(1)`);
+    const s1=JSON.parse(run("JSON.stringify(S())"));
+    ok(run("giaOn()")&&s1.gia===1, 'quá 70% thọ: già (tuổi '+Math.floor(run('G.run.age'))+'/'+life+')');
+    ok(Math.abs(s1.maxHp-Math.round(s0.maxHp*0.9))<=1, 'khí huyết tối đa −10%: '+s0.maxHp+' → '+s1.maxHp);
+    ok(s1.atk<=s0.atk&&Math.abs(s1.ne-s0.ne*0.99)<0.01&&Math.abs(s1.crit-s0.crit*0.995)<0.01, 'công/né −1%, bạo kích −0,5%: né '+s0.ne+' → '+s1.ne);
+    ok(s1.ngo===s0.ngo&&s1.maxMp===s0.maxMp, 'ngộ tính, linh lực không giảm');
+    ok(run("G.run.hp")<=s1.maxHp, 'khí huyết hiện có không vượt tối đa');
+    ok(run("NK.count('gia.on')")===1, 'báo một lần');
+    run("startCombat({},{kind:'node'})");ok(run("tlD(mainUnit(G.run.scene))")===run("TL_DODGE")+5&&run("tlB(mainUnit(G.run.scene))")===run("TL_BLOCK")+5, 'né/đỡ tốn thêm 5 thể lực');
+    ok(run("tlD(G.run.scene.units.find(u=>u.side==='B'))")===run("TL_DODGE"), 'kẻ địch không bị');
+    ok(run("(()=>{const r=G.run;r.tue.sum.hpOld=-8;r.tue.sum.tpOld=-2;delete r._giaV1;run2();return r.tue.sum.hpOld==null&&r.tue.sum.tpOld==null})()"), 'bản lưu cũ: bỏ già dần kiểu cũ');
+  },
   quen_sach() {
     fresh();
     ok(run("!UPG.find(u=>u.id==='ky'||u.id==='kytp')"), 'không còn nâng cấp Ký ức công pháp / tâm pháp');

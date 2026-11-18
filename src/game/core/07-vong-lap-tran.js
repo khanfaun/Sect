@@ -193,7 +193,7 @@ function doSkill(sc,u,sk,lv,tid,qm){
     const n=Math.min(3,f.h||1);
     sc.dodge={id:(sc.did=(sc.did||0)+1),uid:u.id,sk,lv,tids:tg.map(x=>x.id),qm,n,T:u.phase==='charge'?1.1:0.8,lit:false};sc.rev++;return;
   }
-  let ao=autoD?'auto':null;if(ao&&tg.includes(me)&&u.side==='B'){if(me.tl>=TL_DODGE)me.tl-=TL_DODGE;else ao=[];}
+  let ao=autoD?'auto':null;if(ao&&tg.includes(me)&&u.side==='B'){if(me.tl>=tlD(me))me.tl-=tlD(me);else ao=[];}
   resolveSkill(sc,u,sk,lv,tg,qm,ao);
 }
 // offs: mảng độ lệch (giây) cho tối đa 3 nhát đầu; null = không nhấn
@@ -202,7 +202,7 @@ function dodgeResolve(offs){
   const u=U_(sc,d.uid);
   runAct(sc,()=>{
     if(d.kiep){kiepHit(sc,u,offs&&offs[0]);return;}
-    const me=mainUnit(sc);if(Array.isArray(offs))offs=offs.map(o=>{if(o==null)return null;if(me.tl>=TL_DODGE){me.tl-=TL_DODGE;return o;}return null;});
+    const me=mainUnit(sc);if(Array.isArray(offs))offs=offs.map(o=>{if(o==null)return null;if(me.tl>=tlD(me)){me.tl-=tlD(me);return o;}return null;});
     const tg=d.tids.map(i=>U_(sc,i)).filter(x=>x&&x.hp>0);
     if(!tg.length){finishAct(sc,u,d.sk);return;}
     resolveSkill(sc,u,d.sk,d.lv,tg,d.qm,offs||[]);
@@ -239,7 +239,7 @@ function resolveSkill(sc,u,sk,lv,tg,qm,offs){
         const magic=(sk.dt?sk.dt==='phep':(!isP&&(u.f==='quy'||u.f==='vat')));const av=magic?(u.matk||u.atk):u.atk;
         const crit=u._critF!=null?u._critF:chance(((u.crit||5)+(f.crit||0))/100);if(crit){mult*=Math.max(1.1,((u.critDmg||150)-(t.hoTam||0))/100);crits++;}
         let d=dmgCalc(av,u.st.rage,u.st.weak,t.def,t.st.vuln,f.p,mult,f.pierce);d=crushD(u,t,d);
-        if(t.st.stance&&!crushed){if(!t._blk){if((t.tl==null?100:t.tl)>=TL_BLOCK){if(t.tl!=null)t.tl-=TL_BLOCK;t._blk=1;blk++;}else t._blk=2;}if(t._blk===1)d=Math.max(1,Math.round(d*(1-blockCut(u,t))));}
+        if(t.st.stance&&!crushed){if(!t._blk){if((t.tl==null?100:t.tl)>=tlB(t)){if(t.tl!=null)t.tl-=tlB(t);t._blk=1;blk++;}else t._blk=2;}if(t._blk===1)d=Math.max(1,Math.round(d*(1-blockCut(u,t))));}
         d=absorb(t.st,d);t.hp-=d;total+=d;hits++;onHit(sc,u,t,d,crit,t._blk===1,sk);
         if(t.isMain&&d>0){const fx2=S().fx;if(fx2.reflect){u.hp-=Math.round(d*fx2.reflect/100);if(u.hp<=0)down(sc,u);}}
         if(isP){if(fx.poisonHit)t.st.poison=(t.st.poison||0)+Math.round(u.atk*fx.poisonHit);if(fx.burnHit)t.st.burn=(t.st.burn||0)+Math.round(u.atk*fx.burnHit);}

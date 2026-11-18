@@ -25,3 +25,20 @@ function dtPickWhy(r){r=r||G.run;if(!r)return [];const L=[];
 {const _se=shopExtra;shopExtra=function(items,n){const res=_se.apply(this,arguments);
   if(G.run&&!isPham()&&n&&n.type==='cho'&&Array.isArray(items)&&chance(0.08)){const id=pick(['luanhoi','luan_hoi_kinh','luan_hoi_ngoc']);
     if(id==='luanhoi')items.push({k:'pill',id,p:PILL.luanhoi.p});else items.push({k:'qi',id,p:id==='luan_hoi_ngoc'?160:110});dbg('dt.shop',{id});}return res;};}
+
+// ---------- C.8: già theo tỉ lệ tuổi / thọ nguyên ----------
+// Từ GIA.tu × thọ (Trường thọ: muộn 10%) là già: khí huyết tối đa −10%, chỉ số chiến đấu −0,5–1% tùy loại, né/đỡ tốn thêm thể lực.
+// Thay cho tuổi già dần từng năm của Đ2.7 (hpOld/tpOld); bệnh già từ TUE_OLD.sick × thọ vẫn giữ.
+function giaAt(r,life){let at=life*GIA.tu;if(typeof tueSrc==='function'&&tueSrc(r).some(x=>{const D=tueDef(x.id)[1];return D&&D.oldMul;}))at*=1.1;return at;}
+function giaOn(r,s){r=r||G.run;if(!r||!feat('gia'))return false;const life=s?s.life:S().life;return life>0&&r.age>=giaAt(r,life);}
+FEAT.gia=1;
+tueOldAt=function(r,s){return giaAt(r,s.life);};
+tueOld=function(r,age,s){if(r.age>=s.life*TUE_OLD.sick&&chance(TUE_OLD.pSick))addWound('ngoai','gia');clampHp();};
+{const _S=S;S=function(){const s=_S.apply(this,arguments);const r=G.run;if(r&&giaOn(r,s)){s.gia=1;s.maxHp=Math.round(s.maxHp*(1-GIA.hp));
+    for(const [k,v] of Object.entries(GIA.cs))if(typeof s[k]==='number')s[k]=['ne','crit'].includes(k)?+(s[k]*(1-v)).toFixed(3):Math.round(s[k]*(1-v));}return s;};}
+{const _d=tlD;tlD=function(u){return _d(u)+(u&&u.isMain&&G.run&&giaOn(G.run)?GIA.st:0);};}
+{const _b=tlB;tlB=function(u){return _b(u)+(u&&u.isMain&&G.run&&giaOn(G.run)?GIA.st:0);};}
+// vừa bước vào tuổi già: báo một lần, kẹp khí huyết
+{const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(r&&!r.giaN&&giaOn(r)){r.giaN=1;clampHp();log(contentText('gia.log'));note(contentText('gia.note'),'dn');dbg('gia.on',{age:Math.floor(r.age)});}return o;};}
+// bản lưu cũ: bỏ phần già dần của Đ2.7
+{const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._giaV1){r._giaV1=1;const T=r.tue&&r.tue.sum;if(T){delete T.hpOld;delete T.tpOld;}}return r;};}

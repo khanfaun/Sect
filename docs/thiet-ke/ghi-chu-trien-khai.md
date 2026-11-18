@@ -235,3 +235,10 @@ Luật: `src/game/core2/44-no-nha.js`; bảng `NO`, `NHA` ở `content/rules/no-
 - **Linh căn luôn ẩn tới khi trắc, kể cả kiếp đầu** (`rootKnown=0` mọi kiếp); màn chọn lá số luôn ghi "Chưa trắc". Bản lưu cũ đang chơi giữ nguyên trạng thái (`_rkV1`).
 - Bài kiểm: mới `dt_chon`; sửa `trac_linh` (kiếp đầu cũng chưa trắc). `fresh()` đặt `rootKnown=1` để bài cũ như đã trắc.
 - Sửa bài lúc đạt lúc trượt gặp khi chạy: `tien_thuong` (15% phục kích ở cửa nhiệm vụ "đến nơi" — chặn bằng `ambDoor=1`), `tien_bac` (mức tiền "thường" vẫn ghi 500–1.500 của Đ3, Sửa-B đã đổi 300–700 × hoàn cảnh).
+
+### C.8 — tuổi già theo tỉ lệ (câu 8)
+- Già khi tuổi ≥ **70% thọ nguyên** (`GIA.tu`; có tuế biến Trường thọ thì muộn 10%) — mọi người như nhau, bỏ mốc "phàm nhân/vô căn từ 50 tuổi" của Đ2.7. Thọ nguyên tăng (đột phá, Diên Thọ Đan) thì có thể hết già.
+- Tác hại (bảng `GIA`): khí huyết tối đa **−10%**; công, pháp công, né **−1%**; phòng, bạo kích **−0,5%**; **không giảm** linh lực, thân pháp gốc, ngộ tính, tâm cảnh, khí vận, thần thức. Trong trận né và đỡ tốn thêm **5 thể lực** (chỉ nhân vật chính; `tlD(u)`/`tlB(u)` thay hằng số `TL_DODGE/TL_BLOCK` ở 07, 08, ui/11, TranDau.jsx).
+- Bỏ "già dần" từng năm của Đ2.7 (khí huyết −1%/năm, thân pháp −1/3 năm); bệnh già từ 85% thọ vẫn giữ. Bản lưu cũ (`_giaV1`) xoá `tue.sum.hpOld/tpOld`.
+- Vừa già: một dòng nhật ký + thông báo (`gia.on`).
+- Bài kiểm mới `gia`.

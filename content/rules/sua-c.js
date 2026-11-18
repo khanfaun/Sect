@@ -5,7 +5,7 @@ const DT_PICK={art:['Luân Hồi Kinh'],pill:['luanhoi'],qi:['dinh_menh_chau','l
 // GIA: già theo tỉ lệ tuổi / thọ nguyên (câu 8). tu: từ tỉ lệ này coi là già. hp: khí huyết tối đa giảm.
 //   cs: chỉ số chiến đấu giảm (tỉ lệ, theo khóa S()); khóa không có trong bảng thì không giảm (ngộ tính, linh lực, thần thức…).
 //   st: né / đỡ trong trận tốn thêm bấy nhiêu thể lực.
-const GIA={tu:0.7,hp:0.10,cs:{atk:0.01,spd:0.01,dodge:0.01,def:0.005,crit:0.005},st:5};
+const GIA={tu:0.7,hp:0.10,cs:{atk:0.01,matk:0.01,ne:0.01,def:0.005,crit:0.005},st:5}; // không giảm: linh lực, thân pháp gốc, ngộ tính, tâm cảnh, khí vận, thần thức
 // SAN: săn bắt / hái lượm ở hoang dã có hạn mỗi ô, hồi lại đầu mỗi năm (câu 11).
 //   hai: số lượt hái lượm (thức ăn) mỗi nút hoang dã mỗi năm; san: số lượt săn yêu thú mỗi nút mỗi năm.
 //   an: hái/săn được một lượt thì đủ ăn bấy nhiêu ngày (thay cho mua cơm) khi đứng ở hoang dã.
