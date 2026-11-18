@@ -1645,3 +1645,23 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 .hs-bac .sep{font-style:normal}
 .cost-b{white-space:nowrap;color:var(--ink2);margin-left:6px}
 .hs.an{background:none;border:0;padding:0;font:inherit;color:var(--ink2);cursor:pointer;display:flex;align-items:center;gap:2px}.hs.an.hi{color:var(--seal)}
+/* Đ4 tân thủ */
+.tut{position:absolute;right:0;top:calc(100% + 6px);width:min(270px,calc(100vw - 32px));display:flex;flex-direction:column;align-items:flex-end;gap:4px;pointer-events:none}
+.tut>*{pointer-events:auto}
+.tut-tg{font-size:.8em;padding:3px 9px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink2);cursor:pointer}
+.tut-tg.hi{border-color:var(--gold);color:var(--ink);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 35%,transparent)}
+.tut-l{width:100%;max-height:52vh;overflow-y:auto;display:flex;flex-direction:column;gap:5px}
+.tut-c{border:1px solid var(--line);background:var(--paper);border-radius:var(--r);padding:6px 8px;box-shadow:inset 3px 0 0 var(--jade)}
+.tut-c.ok{box-shadow:inset 3px 0 0 var(--gold);border-color:var(--gold)}
+.tut-go{display:flex;flex-direction:column;align-items:stretch;gap:2px;width:100%;text-align:left;background:none;border:0;padding:0;color:inherit;cursor:pointer;font:inherit}
+.tut-go b{font-size:.92em;color:var(--ink)}
+.tut-d{font-size:.8em;color:var(--ink2)}
+.tut-rw{font-size:.75em;color:var(--ink3)}
+.tut-bar{position:relative;display:block;height:12px;border-radius:6px;background:var(--paper2);overflow:hidden;margin:2px 0}
+.tut-bar i{position:absolute;left:0;top:0;bottom:0;background:var(--jade);opacity:.7}
+.tut-bar em{position:relative;display:block;text-align:center;font-size:.68em;line-height:12px;font-style:normal;color:var(--ink)}
+.tut-f{display:flex;justify-content:flex-end;margin-top:3px}
+.tut-sk{background:none;border:0;padding:0 2px;font-size:.72em;color:var(--ink3);text-decoration:underline;cursor:pointer}
+.wishrow{width:100%;background:none;border:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
+.tut-flash{animation:tutfl .5s ease-in-out infinite alternate;outline:2px solid var(--gold);outline-offset:1px}
+@keyframes tutfl{from{box-shadow:0 0 0 0 color-mix(in srgb,var(--gold) 0%,transparent)}to{box-shadow:0 0 0 5px color-mix(in srgb,var(--gold) 60%,transparent)}}

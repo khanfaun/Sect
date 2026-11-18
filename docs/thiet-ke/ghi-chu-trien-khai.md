@@ -107,3 +107,18 @@ Toàn bộ luật Đ3 nằm ở `src/game/core2/39-tien-te.js`; bảng: `content
 - Sửa thêm: tuổi già (Đ2.7) giảm khí huyết tối đa mà không kẹp khí huyết hiện có (bài `hoiphuc` lúc đạt lúc trượt); `36c-hoan-canh.js` dùng `Math.random` nên bài kiểm phụ thuộc may rủi, nay dùng bộ sinh số có hạt giống; bài `tinhtoa` bỏ tâm pháp gia truyền khỏi nhân vật thử.
 - Bài `hoiphuc` có điều kiện "dưới 5 giây" — máy bận có thể trượt; chạy lại thì đạt.
 - Bot chưa sửa cho tiền bạc / ăn uống (chưa được phép chạy bot).
+
+## Đ4 — 27 nhiệm vụ tân thủ (chỉ kiếp đầu)
+
+Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); bảng `content/rules/tan-thu.js` (TUT, TUT_WISH, TUT_GRAD, TUT_MAX); chữ `content/text/tan-thu.json`; hành động `src/game/ui/26-tan-thu.js` (25 đã dùng); giao diện `src/react/chung/TanThu.jsx` (khung dưới HUD, hộp xác nhận bỏ qua, hộp chọn nguyện vọng).
+
+### Quyết định đã chọn (phương án an toàn)
+1. **Thứ tự mở**: sáu nhiệm vụ nhóm A làm từng cái một; hết A thì lấy theo thứ tự bảng, tối đa ba cùng lúc (chữ cái nhóm B–H chỉ để đọc, không khoá theo nhóm). Bỏ qua cũng tính là đã đóng.
+2. **Tự xong (`st`)**: nhiệm vụ có hàm trạng thái mà đã đạt thì hiện "Nhận thưởng" ngay khi mở. Để không cho thưởng không: HD09 so với số công pháp lúc sinh (`tut.art0`), HD12 chỉ tính khi đã từng bị thương (`tut.hurt`) rồi hết thương. HD10 tính tiến độ 0–2 (có binh khí trên ô vũ khí, có Hồi Xuân/Bạo Huyết Đan trong túi).
+3. **Khớp hệ có thật** (đổi so với lộ trình): HD02 đếm khi chạm dòng Linh căn ở bảng nhân vật (`data-tut`, bọc `showTip`); HD03 = mở thẻ Túi của bảng nhân vật (game không có hộp "túi" riêng); HD06 = ngủ ở khách điếm (dịch vụ phòng/giường) hoặc tĩnh tọa; HD13 chỉ tĩnh tọa (chưa có luyện võ — chờ Đ5); HD14 = luyện chế một món (chưa có sửa đồ); HD15 = tặng lễ hoặc kết quan hệ; HD16 mở thẻ Nghiệp duyên của Sổ tay; HD17 = vào tông hoặc nhận tạp dịch ngoại môn (học việc / đầu quân / võ quán chờ Đ5); HD18 dẫn thẳng tới hộp chọn nguyện vọng (10 mục HN A.9.3, `r.wish`, chỉ là lời ghi, đổi được, có dòng ở bảng nhân vật); HD19 dẫn tới nút bế quan; HD26–27 dẫn tới nút đột phá trên HUD (`hudBt`); HD25 tìm nút có hành động `tram` (thôn trấn) — đại khu vực mới tính khi `r.region` khác lúc sinh.
+4. **Dẫn đường**: tìm trong mọi nút **đã thấy** (`fog>=1`) nút gần nhất có đúng hành động trong `placeActs` (không chỉ dựa vào loại nút); không có thì báo "Chưa biết nơi nào như thế quanh đây." (L13). Nút được dẫn tới nhấp nháy ba giây (`.tut-flash`).
+5. **Chống đếm trùng (L14)**: "tới nơi" đếm theo mã nút một lần (`tut.seen`); săn yêu đánh dấu trận (`_tutH`) và mỗi trận chỉ đếm một lần (`_tutC`), trận không khởi từ săn yêu không tính. Các việc ở giao diện (mở bảng…) đếm trong bọc `render` nhưng nhiệm vụ đã xong thì không cộng thêm.
+6. **Bỏ qua**: luôn mở hộp xác nhận (không dùng `UI.confirm` bấm hai lần) — "Bỏ qua" / "Giữ lại".
+7. **Tốt nghiệp**: đủ 22 nhiệm vụ **đã nhận thưởng** (bỏ qua không tính) → +5 điểm luân hồi, dòng "Tân thủ tốt nghiệp" trong `calcPts`.
+8. **Bản lưu cũ**: không tạo `r.tut` (chỉ kiếp mới bắt đầu sau bản này); bản có `tut` thiếu trường thì bổ sung (`_v1`). Kiếp 2 trở đi không có khung.
+9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).

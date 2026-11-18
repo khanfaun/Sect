@@ -7,9 +7,9 @@ import { TuiDo } from './TuiDo';
 import { SoHoc, KyNang } from './SoHoc';
 
 // Một dòng tên — giá trị (giống kvRow()). v là chuỗi HTML (mức đánh giá có màu…)
-function Kv({ n, v, t, cls }) {
+function Kv({ n, v, t, cls, tut }) {
   return (
-    <div className={'kr ' + (cls || '')} {...tip(t)}>
+    <div className={'kr ' + (cls || '')} {...tip(t)} data-tut={tut}>
       <span><Html style={{ display: 'contents' }} h={PS.sib(n)} />{n}</span>
       <Html as="b" h={String(v)} />
     </div>
@@ -58,8 +58,9 @@ function CanCo() {
     <div className="basegrid">
       <HopGon k="than" icon="flag" name="Thân thế">
         <Kv n="Xuất thân" v={esc(og.n)} t={og.d} />
+        <button className="kr wishrow" data-act="wishOpen" {...tip('Điều ta muốn ở kiếp này. Chỉ là lời ghi, đổi lúc nào cũng được.')}><span>Nguyện vọng</span><b>{r.wish ? ((PS.TUT_WISH || []).find(x => x[0] === r.wish) || [0, ''])[1] : 'Chưa ghi'}</b></button>
         {tr && tr.id !== 'none' && <Kv n="Mệnh cách" v={esc(tr.n)} t={tr.d + (PS.tueTxt(tr.id) ? '\n' + PS.tueTxt(tr.id) : '')} />}
-        <Kv n="Linh căn" v={lcV} t={!rk ? 'Chưa trắc linh: chưa biết mình có linh căn hay không.' : R1.d + (PS.rootQ(r.root) ? '\nPhẩm ' + PS.rootQ(r.root).n + '.' : '') + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R0.m) + ').'} />
+        <Kv n="Linh căn" tut="rootinfo" v={lcV} t={!rk ? 'Chưa trắc linh: chưa biết mình có linh căn hay không.' : R1.d + (PS.rootQ(r.root) ? '\nPhẩm ' + PS.rootQ(r.root).n + '.' : '') + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R0.m) + ').'} />
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên khí vận', (r.kv || []).map(k => TT_DEST[k]), 'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.')} />
         <Html style={{ display: 'contents' }} h={PS.htRow()} />
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên thể chất', (r.the || []).map(PS.ttPhysOf), 'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.')} />

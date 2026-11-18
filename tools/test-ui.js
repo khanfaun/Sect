@@ -293,6 +293,35 @@ const TESTS = {
     ok(/Người nhà/.test(t) && /Lâm Đại Hữu/.test(t) && /48 tuổi/.test(t), 'mục Người nhà có cha');
     await ev(p, () => {UI.panel=null;render();});
   },
+  // Đ4: khung tân thủ — hiện, bỏ qua hỏi lại, bấm thẻ dẫn đúng chỗ, ẩn/hiện
+  async tanthu(p) {
+    await ev(p, () => {G.run.scene=null;UI.modal=null;UI.panel=null;G.run.tut=tutNew(G.run);tutFill();render();});
+    await p.waitForTimeout(150);
+    ok(await ev(p, () => !!document.querySelector('.tut .tut-c') && /Biết mình còn gì/.test(document.querySelector('.tut').innerText)), 'khung tân thủ hiện HD01');
+    await p.locator('.tut-sk').first().click();await p.waitForTimeout(100);
+    const t = await ev(p, () => (document.querySelector('.mbox')||{}).innerText||'');
+    ok(/Bỏ qua nhiệm vụ\?/.test(t) && /Bỏ qua «Biết mình còn gì» thì sẽ không nhận lại phần thưởng/.test(t), 'hộp xác nhận đúng chữ');
+    await p.locator('.mbox [data-act="modalX"]').click();await p.waitForTimeout(100);
+    ok(await ev(p, () => !G.run.tut.skip.HD01 && !UI.modal), 'Giữ lại: chưa bỏ');
+    await p.locator('.tut-go').first().click();await p.waitForTimeout(150);
+    ok(await ev(p, () => UI.panel==='char' && !!G.run.tut.ready.HD01), 'bấm HD01 mở bảng nhân vật và xong việc');
+    await ev(p, () => {UI.panel=null;render();});await p.waitForTimeout(100);
+    await p.locator('.tut [data-act="tutClaim"]').click();await p.waitForTimeout(100);
+    ok(await ev(p, () => !!G.run.tut.done.HD01 && G.run.tut.open[0]==='HD02'), 'nhận thưởng HD01, mở HD02');
+    await ev(p, () => {UI.modal=null;render();});
+    await p.locator('.tut-tg').click();await p.waitForTimeout(100);
+    ok(await ev(p, () => !document.querySelector('.tut-c') && !!document.querySelector('.tut-tg')), 'nút ẩn làm khung biến mất, nút còn');
+    await p.locator('.tut-tg').click();await p.waitForTimeout(100);
+    ok(await ev(p, () => !!document.querySelector('.tut-c')), 'bấm lại hiện khung');
+    // dẫn tới nơi có nút: HD04 tìm việc
+    await ev(p, () => {const T=G.run.tut;T.open=['HD04'];W().regions.flatMap(R=>R.nodes).forEach(n=>{if(n.type==='thanh')n.fog=Math.max(n.fog,1);});render();});
+    await p.locator('.tut-go').first().click();await p.waitForTimeout(150);
+    ok(await ev(p, () => UI.sel!=null && !!UI.tutFlash && /muusinh/.test(UI.tutFlash.sel)), 'HD04 chọn nơi có Mưu sinh và nhấp nháy nút');
+    await ev(p, () => {UI.modal={k:'wish'};render();});await p.waitForTimeout(100);
+    await p.locator('[data-act="wishSet"][data-arg="du_song"]').click();await p.waitForTimeout(100);
+    ok(await ev(p, () => G.run.wish==='du_song' && !UI.modal), 'chọn nguyện vọng');
+        await ev(p, () => {G.run.tut.hide=1;UI.sel=null;UI.tutFlash=null;render();});
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

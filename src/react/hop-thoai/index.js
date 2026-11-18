@@ -10,6 +10,7 @@ import { XemVatPham, XemCongPhap, CacPham, TieuHuyet } from './VatPham';
 import { XacNhanViec, XacNhanNoiChon, LamNhiemVu, HuyNhiemVu } from './XacNhan';
 import { ThuongCac } from './ThuongCac';
 import { MuuSinh } from './MuuSinh';
+import { BoQuaTanThu, NguyenVong } from '../chung/TanThu';
 
 export const HOP_THOAI = {
   danger: TuDia,
@@ -41,4 +42,6 @@ export const HOP_THOAI = {
   th: TieuHuyet,
   thuongcac: ThuongCac,
   muusinh: MuuSinh,
+  tutSkip: BoQuaTanThu,
+  wish: NguyenVong,
 };
