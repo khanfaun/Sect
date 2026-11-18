@@ -740,7 +740,9 @@
           "stoneBase": 0,
           "g": {
             "st": 6,
-            "karma": 1
+            "hd": {
+              "p": 1
+            }
           },
           "req": null,
           "limited": true,

@@ -83,12 +83,12 @@ function venueDo(v,id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')ret
   if(lead)sc.msg.unshift(lead);
   if(g.hp>0)r.hp=Math.min(S().maxHp,r.hp+g.hp);if(g.mp>0)r.mp=Math.min(S().maxMp,r.mp+g.mp);if(g.hp>0)ch.push(chip('❤️','+'+g.hp,contentText("core2_07-dot-10-tho-nap_js.venueDo.080"),'up'));
   if(g.tamma<0&&r.tamma<=0)sc.msg.push(contentText("core2_07-dot-10-tho-nap_js.venueDo.081"));
-  const e={};if(g.tamma)e.tamma=g.tamma;if(g.st)e.st=g.st;if(g.karma)e.karma=g.karma;if(g.tv)e.tv=g.tv;ch=ch.concat(applyE(e));
+  const e={};if(g.tamma)e.tamma=g.tamma;if(g.st)e.st=g.st;if(g.karma)e.karma=g.karma;for(const k of ['deed','deedO','hd','ng'])if(g[k])e[k]=g[k];if(g.tv)e.tv=g.tv;ch=ch.concat(applyE(e));
   if(g.ll){const d=llAdd(g.ll,null,true);llChipMerge(ch,d);}
   if(!sc.msg.length)sc.msg=[contentText("core2_07-dot-10-tho-nap_js.venueDo.082")];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;return true;}
 // chuyện đặc biệt có đánh nhau: thắng thì nhận công
 {const _cc12b=combatContinue;combatContinue=function(){const sc0=G.run&&G.run.scene;const vw=sc0&&sc0.venueWin;const win=sc0&&sc0.over==='win';const res=_cc12b();
-  if(vw&&win&&G.run&&G.run.scene){const ps=G.run.scene;const ch=applyE({st:vw.st||0,karma:vw.karma||0});ps.chips=(ps.chips||[]).concat(ch);}return res;};}
+  if(vw&&win&&G.run&&G.run.scene){const ps=G.run.scene;const e={st:vw.st||0,karma:vw.karma||0};for(const k of ['deed','deedO','hd','ng'])if(vw[k])e[k]=vw[k];const ch=applyE(e);ps.chips=(ps.chips||[]).concat(ch);}return res;};}
 // khách điếm, tửu phường giờ có nhiều lựa chọn giá khác nhau: không khóa ô vì thiếu tiền
 {const _pa12=placeActs;placeActs=function(n){const L=_pa12(n);const r=G.run;for(const a of L){if(a.a==='inn'||a.a==='tuu'){a.dis=false;a.x='';a.h=0;}if(a.a==='tea')a.h=0;}return L;};}
 {const _pa12b=placeAct;placeAct=function(a){if(VENUE_N[a]){const sc=G.run&&G.run.scene;if(sc)sc.venue=a;return;}return _pa12b(a);};}
