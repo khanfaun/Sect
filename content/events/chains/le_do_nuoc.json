@@ -40,7 +40,12 @@
           "l": "Ghi lại vạch cũ và đứng ra làm chứng",
           "t": "Ngươi chép vạch cũ lên ván đo của bến, ký tên làm chứng. Chủ bến giữ ngươi lại xét hỏi hết buổi. Người đo nước đem bản chép khác cho thuyền ngoài đảo, trước khi vạch bị cạo mất.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "h": 24
           }
         },
@@ -50,7 +55,7 @@
           "t": "Ngươi bớt được tiền neo. {$b.ten} phải đục đi đường vạch, mùn gỗ lẫn vào lớp hà.",
           "e": {
             "st": 22,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -136,7 +141,12 @@
             "st": 16
           },
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "h": 12
           }
         },
@@ -146,7 +156,7 @@
           "t": "Ngươi có bạc, bến kia dùng giấy để giành khách. Tờ có nét của {$b.ten} được gấp che tên.",
           "e": {
             "st": 22,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -235,7 +245,12 @@
             "st": 16
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -244,7 +259,7 @@
           "t": "Ngươi có lời mỗi lượt đổi dây. Bến cá treo phần dây thừa lên cho mượn.",
           "e": {
             "st": 38,
-            "karma": -3
+            "deed": "lua_loi"
           },
           "cost": {
             "st": 16
@@ -341,7 +356,12 @@
             "st": 16
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -350,7 +370,7 @@
           "t": "Ngươi lấy được tiền của hai bến. Một đứa bé đặt dấu riêng bằng than trên cọc, ngay chỗ ngập nước.",
           "e": {
             "st": 22,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -442,7 +462,12 @@
           "l": "Chuyển vạch lên vách đá ai cũng nhìn được",
           "t": "Chủ bến {$a.ten} cắt phần lợi của ngươi hoặc đòi phí dựng mốc. Người đo nước {$b.ten} khắc đủ sâu để vôi phai vẫn thấy đường.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -451,7 +476,12 @@
           "t": "Ngươi giữ mối thu phí và có chỗ trú cho thuyền khách. Người đo nước {$b.ten} để lại một thang mộc cho thuyền nhỏ tự ghé.",
           "e": {
             "st": 22,
-            "karma": 1
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {

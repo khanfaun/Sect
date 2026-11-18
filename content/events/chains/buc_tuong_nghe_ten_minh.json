@@ -44,7 +44,9 @@
           "l": "Gọi tên {$a.ten} trước",
           "t": "Vách nín một lúc rồi bật ra tên khác. Lão bấu tay lên chỗ chưa khắc.",
           "e": {
-            "karma": -1,
+            "hd": {
+              "t": 1
+            },
             "tamma": 2
           }
         },
@@ -122,7 +124,12 @@
           "l": "Nói nốt câu mà ngày ấy ngươi đã nuốt",
           "t": "Ngươi nói trọn điều ngày trước không dám nhận. Khuôn miệng vỡ, Nguyên Anh đau nhói khiến ngươi phải dưỡng một đêm. Người khắc tên không hỏi chuyện ấy; lão chỉ lấy nước cho ngươi.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "vết đục hình miệng"
@@ -220,7 +227,12 @@
           "l": "Giữ tay lão và đòi nghe tên thật",
           "t": "Ngươi giữ tay lão, nghe lão đọc tên thật và lý do phải trốn. Ngươi không nhận giữ kín thay lão, chỉ nhắc tên người chết phải trả lại. Lão bỏ đục xuống, lần đầu đọc được trọn tên trên bia.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "tên bị mài mất nửa"
@@ -232,7 +244,9 @@
           "l": "Mua cái tên đã lấy để qua cổng vực",
           "t": "Ngươi có tên dùng một lần. Lão chỉ ngươi chỗ khắc, để tránh đục lên nửa chữ cũ.",
           "e": {
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           },
           "cost": {
             "st": 19
@@ -314,7 +328,12 @@
           "l": "Đọc tên đang mang và dìu lão qua",
           "t": "Ngươi đọc rõ tên đang mang, dìu lão qua từng bước. Dây cầu siết cổ tay tới bật máu rồi lỏng ra. Sang bờ, ngươi bảo lão tự gọi lại tên mình; lần này tiếng đáp từ hẻm không đổi thành tên người khác.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "hp": "-10%"
           }
         },
@@ -323,7 +342,12 @@
           "l": "Cắt một sợi dây có tiếng vọng",
           "t": "Ngươi mang được một đoạn dây luyện phù. Những người sau phải bò qua cầu, tai sát mặt ván.",
           "e": {
-            "karma": -4,
+            "hd": {
+              "t": 3
+            },
+            "ng": {
+              "b": 1
+            },
             "namedMat": "story_mat_buc_tuong_nghe_ten_minh_3"
           }
         },
@@ -410,7 +434,12 @@
           "l": "Nói lại lời cũ hoặc khắc lại nửa tên đã mất",
           "t": "Ngươi phải nghe trọn lời cũ trước khi đặt đục xuống. Lão chừa khoảng trống đúng chỗ chữ vừa khép.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "tamma": -3
           }
         },

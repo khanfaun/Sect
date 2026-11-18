@@ -40,7 +40,7 @@
           "l": "Tin tiếng chuông và cho mọi người rời cầu",
           "t": "Ngươi cho người rời cầu, lỡ giờ qua cửa. Thợ cầu xuống kiểm tra, phát hiện chốt neo đã nứt. Hắn xin đóng cầu sửa ngay, không ai còn hỏi chuông vì sao tự kêu.",
           "e": {
-            "karma": 4
+            "deed": "cuu_nguoi"
           }
         },
         {
@@ -48,7 +48,12 @@
           "l": "Ép chuông im để đoàn qua trước",
           "t": "Người và hàng qua được. Một cái chốt bắn ra, rơi đúng chỗ {$a.ten} vừa đặt chân.",
           "e": {
-            "karma": -3,
+            "hd": {
+              "t": 3
+            },
+            "ng": {
+              "b": 1
+            },
             "tamma": 3
           }
         },
@@ -130,7 +135,12 @@
           "l": "Giữ cầu đóng tới khi thay đủ chốt",
           "t": "Ngươi trả phí cho đoàn hàng ở lại, giữ cầu đóng tới khi thay đủ chốt. Sửa xong, thợ cho xe nhẹ thử trước rồi mới mở. Chiếc chốt nứt được giữ lại bên đồng hồ làm lời nhắc.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 22
@@ -141,7 +151,9 @@
           "l": "Mua giờ báo trước để đi lối ngắn",
           "t": "Ngươi mua riêng một lượt theo dõi đồng hồ, kịp chọn đường ngắn trước khi cầu đóng. Người giữ chuông ghi tên từng người đã mua lượt; những người khác vẫn phải đợi tin ngoài cổng.",
           "e": {
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           },
           "cost": {
             "st": 22
@@ -227,7 +239,7 @@
           "l": "Dùng phần tiền chuyến hàng sửa nhịp cầu",
           "t": "Ngươi góp tiền thuê thợ sửa lại nhịp đã đổ. Người đi sau được mở lối khi công việc xong, thợ cầu xin ghi cả ngày sập lẫn ngày sửa lên bảng để không ai quên.",
           "e": {
-            "karma": 5
+            "deed": "hanh_hiep"
           },
           "cost": {
             "st": 22
@@ -239,7 +251,7 @@
           "t": "Ngươi giữ chốt cong làm dấu đối chiếu với đồng hồ, bán riêng tin báo sớm cho khách đủ tiền. Những người còn lại phải đợi ngoài giàn. Người giữ chuông hỏi nếu lần tới nó gọi tên một người không trả tiền thì ngươi tính sao.",
           "e": {
             "st": 30,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -322,7 +334,7 @@
           "l": "Tự lên cầu giữ người rồi ra lệnh tháo nhịp",
           "t": "Ngươi lên cầu giữ thợ khỏi rơi, dùng một phần tu vi chống nhịp trong lúc mọi người rút đi. Người giữ chuông cho tháo cầu sau khi đủ người lên bờ. Ngươi bị thương, thợ cầu ở lại giúp dưỡng khí.",
           "e": {
-            "karma": 4,
+            "deed": "cuu_nguoi_hy_sinh",
             "hp": "-15%",
             "tv": -4
           }
@@ -332,7 +344,9 @@
           "l": "Nhờ người giữ chuông {$a.ten} canh từng lượt qua",
           "t": "Người qua đủ, nhưng {$b.ten} gãy tay khi tự cắt dây. Hồi chuông dừng đúng lúc sợi dây chạm đá.",
           "e": {
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -422,7 +436,12 @@
           "l": "Đúc chuông báo cho mọi đầu cầu",
           "t": "Ngươi góp tiền đúc chuông, yêu cầu người trông mỗi đầu cầu đều được biết cách nghe và báo. Thợ cầu thử tiếng đầu tiên, người bên kia đáp lại. Từ nay không phải mua riêng giờ báo trước mới được biết.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 22

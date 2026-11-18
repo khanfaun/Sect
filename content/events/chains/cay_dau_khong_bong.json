@@ -41,7 +41,12 @@
           "l": "Giữ thang cho {$a.ten} đưa rổ",
           "t": "Ngươi giữ thang, nàng chuyển được rổ lá sang. Chàng trai giấu một cuộn tơ mới vào rổ trả lại, lí nhí nhờ nàng may khăn. Nàng nhận, chưa kịp đáp thì trong nhà có tiếng gọi.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "cành qua bờ"
@@ -53,7 +58,9 @@
           "l": "Mua cây dâu rồi thu lá cả hai bên",
           "t": "Ngươi mua được lá rẻ vì hai nhà muốn dứt tranh cãi. Chàng trai đến xin hái lá sót, còn cô gái rút chiếc rổ về.",
           "e": {
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           },
           "cost": {
             "st": 10
@@ -142,7 +149,12 @@
           "l": "Giữ chỗ ở bến xe cho cả hai",
           "t": "Ngươi đặt bạc trước và để họ tự quyết. Họ kịp rời làng trước khi nhà nàng khóa cổng, mỗi người mang một túi nhỏ.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "tấm vải ướt"
@@ -157,7 +169,12 @@
           "l": "Khuyên họ ở lại nói chuyện với hai nhà",
           "t": "Họ chia lá và tiền tơ ngay trên bờ lạch. Hai nhà chịu nghe, song chiếc túi của nàng bị mẹ giữ lại dưới chậu giặt.",
           "e": {
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -245,7 +262,12 @@
           "l": "Trả lại cây dâu cho hai người trông",
           "t": "Ngươi trả quyền hái lá cho hai người cùng trông coi, chịu mất khoản đã mua. Họ bàn ngay việc chia công tưới cây, rồi mới nhận ra chưa ai nói lời cảm ơn ngươi.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -341,7 +363,12 @@
           "l": "Thuê đất ấm cho họ giâm cành",
           "t": "Ngươi trả tiền thuê một khoảnh đất khuất gió đủ vài năm. Họ tự lo giâm cành và dựng giàn, hẹn khi cây bén rễ sẽ báo ngươi biết.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 10
@@ -355,7 +382,12 @@
             "st": 10
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -452,7 +484,12 @@
           "l": "Nhường phần lá và góp giống cho hai nhà",
           "t": "Ngươi để họ dùng trọn lá mùa này, mua thêm cành giống cho hai nhà cùng trồng. Chàng trai cười bảo lần này sẽ trồng hẳn một hàng, khỏi chuyền rổ qua tường.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 10

@@ -40,7 +40,12 @@
           "l": "Mua bùa thở giúp nàng xuống gặp",
           "t": "Ngươi mua bùa ở trạm lặn. Nàng xuống gặp được hắn, trở lên đúng trước khi bùa hết hiệu lực. Gỡ dây xong, nàng vẫn quay lại nhìn mặt nước.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "dây kéo ở hai đầu"
@@ -144,7 +149,12 @@
             "mp": "20%"
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -237,7 +247,12 @@
           "l": "Tìm chỗ neo cho hai người gặp lại",
           "t": "Ngươi trả tiền thuê thuyền, đưa nàng tìm một mỏm đá kín gió, mất trọn ngày dò đường. Người dưới nước nhận ra sợi dây thả xuống, bơi lên đón. Cả hai chọn chỗ ấy làm nơi gặp mới.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "h": 24,
             "an": [
               "a",
@@ -256,7 +271,12 @@
             "st": 16
           },
           "e": {
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -341,7 +361,7 @@
           "l": "Căng dây dẫn cả nhóm ra ngoài",
           "t": "Ngươi cùng nàng kéo dây từ hốc tới mỏm đá. Ngư nhân dẫn từng người bám dây ra khỏi nước, ngươi giữ đầu trong tới lượt cuối. Không còn ai mắc lại.",
           "e": {
-            "karma": 4
+            "deed": "cuu_nguoi"
           }
         },
         {
@@ -352,7 +372,7 @@
             "mp": "20%"
           },
           "e": {
-            "karma": 2
+            "deed": "cuu_nguoi_hy_sinh"
           }
         },
         {
@@ -448,7 +468,12 @@
             "st": 16
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
