@@ -46,7 +46,8 @@ function CanCo() {
   const r = G.run, s = PS.S();
   const og = ORIGIN.find(o => o.id === r.origin), tr = TRAIT.find(t => t.id === r.trait), R0 = PS.rootView(r.root);
   const R1 = ROOT.find(x => x.id === r.root.id), tc = s.tuchat, left = Math.max(0, Math.floor(s.life - r.age));
-  const lcV = `<span class="lc2"><small>${esc(R0.n)}</small><span class="lc-els">${r.root.els.map(PS.elSeal).join('')}</span></span>`;
+  const rk = PS.rootKnown(r);
+  const lcV = `<span class="lc2"><small>${esc(PS.rootLabel(r))}</small><span class="lc-els">${rk ? r.root.els.map(PS.elSeal).join('') : ''}</span></span>`;
   const tvTip = 'Tu vi ' + PS.tvShow() + '%' + (PS.dinhPhong() ? (PS.dvm() ? '\nĐại viên mãn: khí huyết, linh lực, công, thủ +5%.' : '\nChưa đại viên mãn: ' + PS.dvmWhy() + '.\n(Cần: không trọng thương, tâm ma dưới ' + PS.DVM_TAMMA + ', đạo tâm từ ' + PS.DVM_TAM + ')') : '')
     + (PS.bbKind() ? '\nBán bộ ' + REALM[r.realm + 1] + ': dùng được đồ, công pháp, tâm pháp của ' + REALM[r.realm + 1] + '; chỉ số vẫn như cũ.' : '');
   const e = PS.llEff(r.tv);
@@ -58,7 +59,7 @@ function CanCo() {
       <HopGon k="than" icon="flag" name="Thân thế">
         <Kv n="Xuất thân" v={esc(og.n)} t={og.d} />
         {tr && tr.id !== 'none' && <Kv n="Mệnh cách" v={esc(tr.n)} t={tr.d} />}
-        <Kv n="Linh căn" v={lcV} t={R1.d + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R1.m) + ').'} />
+        <Kv n="Linh căn" v={lcV} t={!rk ? 'Chưa trắc linh: chưa biết mình có linh căn hay không.' : R1.d + (PS.rootQ(r.root) ? '\nPhẩm ' + PS.rootQ(r.root).n + '.' : '') + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R0.m) + ').'} />
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên khí vận', (r.kv || []).map(k => TT_DEST[k]), 'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.')} />
         <Html style={{ display: 'contents' }} h={PS.htRow()} />
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên thể chất', (r.the || []).map(PS.ttPhysOf), 'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.')} />
@@ -76,7 +77,7 @@ function CanCo() {
       <HopGon k="tu" icon="yin" name="Tu luyện">
         <Kv n="Cảnh giới" v={esc(PS.realmLabel()) + ` <span class="qhelp" data-act="cgOpen" data-tip="Mở hệ thống cảnh giới">?</span>`} t={tvTip} />
         {!PS.isPham() && PS.G.run.realm >= 1 && <Kv n="Che giấu tu vi" v={`<button class="btn sm" data-act="hideCycle">${PS.hideOn() ? 'Hiện như ' + PS.shownName() : 'Không che'}</button>`} t={'Người ngoài thấy cảnh giới thấp hơn thật. Sức mạnh không đổi. Kẻ địch không nhìn thấu thì coi thường, ngươi ra tay trước. Kẻ có thần thức cao hơn nhìn xuyên được.\nBấm để hạ thêm một bậc, hạ tới phàm nhân thì bấm nữa để thôi.'} />}
-        {PS.isVo() ? <div className="vo-note">Vô linh căn — chưa thể tu luyện</div> : <Thanh n="Tu vi" v={PS.tvShow()} cls="tv" />}
+        {PS.voKnown() ? <div className="vo-note">Vô linh căn — chưa thể tu luyện</div> : !PS.rootKnown() ? <div className="vo-note">Chưa biết mình có tiên duyên hay không</div> : <Thanh n="Tu vi" v={PS.tvShow()} cls="tv" />}
         <Kv n="Tốc độ tu" v={RT('bq', PS.bqReal(), 'toc')} t={'Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.'} />
         <Kv n="Thổ nạp" v={RT('thonap', PS.thonapPct(), 'toc')} t={'Thân thể tự hít thở linh khí: không cần bế quan, tu vi vẫn tự tăng theo thời gian, kể cả lúc đi đường hay bế quan.\nRất ít, chừng 5% tốc độ bế quan. Theo linh căn, tư chất, ngộ tính, công pháp, tâm pháp, trang bị, mệnh cách và linh khí nơi đang đứng.'} />
         <Kv n="Hiệu suất tu" v={`<span class="${hs[0]}">${hs[1]}</span>`} t={'Phần tu vi thực nhận so với lẽ ra được nhận, do chênh lệch tu vi và lịch luyện.\nTu vi càng bỏ xa lịch luyện thì nhận càng ít, tới mức bình cảnh gần như đứng yên.\nLịch luyện cao hơn tu vi thì được ngộ đạo, nhận thêm một ít.'} />

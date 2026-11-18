@@ -166,5 +166,10 @@ const CONTENT_HOOKS={
 "quest_manhmoi_c_1_go":q=>({t:contentText("event.manhmoi.099"),e:{hd:{p:1},ng:{g:1,why:'chi_duong'}}}),
 "quest_tho_t":q=>contentText("event.tho.100"),
 "quest_tho_c_0_go":q=>{qCut(q,0.5);q.helper=1;return {t:contentText("event.tho.101"),ll:2,ch:[chip('📜',contentText("event.tho.102"),contentText("event.tho.103"),'dn')]};},
-"quest_tho_c_1_go":q=>({t:contentText("event.tho.104")})
+"quest_tho_c_1_go":q=>({t:contentText("event.tho.104")}),
+"ky_tl_tuyendo_c_0_go":()=>tlResult("tuyendo"),
+"ky_tl_dusi_c_0_go":()=>tlResult("dusi"),
+"ky_tl_thach_c_0_go":()=>tlResult("thach"),
+"ky_tl_tubiet_c_0_go":()=>tlResult("tubiet"),
+"ky_tl_laodao_c_0_go":()=>tlResult("laodao")
 };

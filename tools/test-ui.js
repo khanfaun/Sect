@@ -185,12 +185,21 @@ const TESTS = {
   },
   // Đ2.3: vô linh căn — không có nút bế quan, bảng nhân vật báo chưa thể tu luyện
   async vo_hud(p) {
-    await ev(p, () => {G.run.root={id:'vo',els:[]};UI.modal=null;UI.panel=null;render();});
+    await ev(p, () => {G.run.root={id:'vo',els:[]};G.run.rootKnown=1;UI.modal=null;UI.panel=null;render();});
     await p.waitForTimeout(150);
     ok(await ev(p, () => !document.querySelector('.mbl [data-act="hudBq"]')), 'ẩn nút bế quan');
     await ev(p, () => {UI.panel='char';UI.tab.char='base';render();});
     await p.waitForTimeout(150);
     ok(await ev(p, () => /Vô linh căn — chưa thể tu luyện/.test(document.body.innerText)), 'bảng nhân vật: chưa thể tu luyện');
+  },
+  // Đ2.4: chưa trắc linh thì bảng nhân vật không lộ linh căn
+  async traclinh(p) {
+    await ev(p, () => {G.run.rootKnown=0;UI.modal=null;UI.panel='char';UI.tab.char='base';render();});
+    await p.waitForTimeout(150);
+    const t = await ev(p, () => document.body.innerText);
+    ok(/Chưa trắc/.test(t) && /Chưa biết mình có tiên duyên/.test(t), 'hiện Chưa trắc');
+    const nm = await ev(p, () => rootView(G.run.root).n);
+    ok(!t.includes(nm), 'không lộ tên linh căn');
   },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');

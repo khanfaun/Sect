@@ -447,6 +447,23 @@ const TESTS = {
     run("for(let i=0;i<(TP_Y+1)*12;i++){G.run.scene=null;G.screen='map';advanceTime(HM);if(!G.run)break;}");
     ok(run("!!G.run")&&run("G.run.arts.length")===n0, 'qua '+(run('TP_Y')+1)+' năm không có tâm pháp mới');
   },
+  trac_linh() {
+    fresh();
+    ok(run('G.run.kiep')===1&&run('G.run.rootKnown')===1, 'kiếp đầu biết ngay linh căn');
+    ok(run("rootLabel(G.run)")!=='Chưa trắc', 'kiếp đầu hiện tên linh căn: '+run("rootLabel(G.run)"));
+    run("G.meta.nlife=1;genBirth();newRun(G.birth.cards[0]);G.run.scene=null;G.screen='map';NK.clear()");
+    ok(run('G.run.kiep')===2&&run('G.run.rootKnown')===0, 'kiếp 2: chưa trắc');
+    ok(run("rootLabel(G.run)")==='Chưa trắc', 'nhãn hiển thị: Chưa trắc');
+    run("for(let i=0;i<4*30&&G.run;i++){if(G.run.scene&&G.run.scene.type==='kyngo'){kyPick(0);G.run.scene=null;}G.screen='map';G.run.moving=null;advanceTime(HD);}if(G.run.scene&&G.run.scene.type==='kyngo')kyPick(0);");
+    ok(run('G.run.rootKnown')===1, 'sau bốn tháng đã trắc linh');
+    ok(run('NK.count("tl.done")')===1, 'trắc linh đúng một lần ('+run('NK.count("tl.done")')+')');
+    // Trắc Linh Thạch
+    run("G.meta.nlife=1;genBirth();newRun(G.birth.cards[0]);G.run.scene=null;G.screen='map';NK.clear();G.run.qitems=['trac_linh_thach']");
+    ok(run("!!bagItems().find(x=>x.key==='vtrac_linh_thach'&&x.use)"), 'Trắc Linh Thạch dùng được trong túi');
+    run("bagUse('vtrac_linh_thach',1)");ok(run("G.run.scene&&G.run.scene.ev")==='tl_thach', 'dùng đá mở trắc linh thạch');
+    run("kyPick(0)");ok(run('G.run.rootKnown')===1&&run("G.run.qitems.length")===0, 'đá vỡ, đã biết linh căn');
+    ok(run("(()=>{const r=G.run;delete r.rootKnown;delete r._rkV1;run2();return r.rootKnown})()")===1, 'bản lưu cũ: coi như đã biết');
+  },
   deed_su_kien() {
     fresh();
     const bad=run(`(()=>{const out=[];const walk=(x,id)=>{if(Array.isArray(x))return x.forEach(y=>walk(y,id));if(!x||typeof x!=='object')return;for(const k in x){if(k==='karma')out.push('karma@'+id);if(k==='deed'&&!DEED[x[k]])out.push(x[k]+'@'+id);walk(x[k],id);}};for(const e of CONTENT_EVENTS)walk(e,e.id);return out})()`);

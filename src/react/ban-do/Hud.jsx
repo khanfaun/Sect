@@ -53,7 +53,7 @@ export function Hud() {
       </button>
       <div className="hud-id">
         <span className="nmrow"><b className="nm">{r.ten}</b><NhanDotPha /></span>
-        <span className="rl" {...tip(PS.realmLabel() + (PS.isVo() ? '\nVô linh căn — chưa thể tu luyện\n' : '\nTu vi ' + tv + '%\n') + PS.rootView(r.root).n + ': ' + r.root.els.map(e => PS.EL[e].n).join(', '))}><TenCanhGioi /></span>
+        <span className="rl" {...tip(PS.realmLabel() + (PS.voKnown() ? '\nVô linh căn — chưa thể tu luyện\n' : !PS.rootKnown() ? '\nChưa biết mình có tiên duyên hay không\n' : '\nTu vi ' + tv + '%\n') + 'Linh căn: ' + PS.rootLabel(r) + (PS.rootElsLabel(r) ? ': ' + PS.rootElsLabel(r) : ''))}><TenCanhGioi /></span>
         <small className={warn ? 'bad' : ''} {...tip('Tuổi / thọ nguyên ' + s.life + (warn ? '\nThọ nguyên sắp cạn!' : ''))}>
           {Math.floor(r.age)} tuổi · còn {Math.max(0, Math.floor(left))} năm{hurt && <> · <b className="bad">{hurt}</b></>}
         </small>
@@ -68,7 +68,7 @@ export function Hud() {
       <span className="hs st" {...tip('Linh thạch')}><i className="rh"></i>{PS.fmtN(r.st)}</span>
     </div>
     <div className="hud-ls" {...tip('Linh thạch')}><i className="rh"></i>{PS.fmtN(r.st)}</div>
-    <i className="hud-tv" style={{ width: PS.isVo() ? 0 : clamp(tv, 0, 100) + '%' }} {...tip(PS.isVo() ? 'Vô linh căn — chưa thể tu luyện' : 'Tu vi ' + tv + '%')} />
+    <i className="hud-tv" style={{ width: PS.voKnown() ? 0 : clamp(tv, 0, 100) + '%' }} {...tip(PS.voKnown() ? 'Vô linh căn — chưa thể tu luyện' : !PS.rootKnown() ? 'Chưa biết mình có tiên duyên hay không' : 'Tu vi ' + tv + '%')} />
     <i className="hud-ll" style={{ width: PS.llShow() + '%' }} {...tip('Lịch luyện ' + PS.llShow() + '%')} />
   </>;
 }

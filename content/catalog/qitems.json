@@ -767,5 +767,14 @@
     "d": "Mái giữ được linh khí, còn căn nhà kế mất chỗ dựa. Đêm xuống, san hô chạm nhau ngoài mặt nước.",
     "use": "Kỷ vật cốt truyện; không cộng chỉ số và không mở tính năng chưa khai báo.",
     "status": "active"
+  },
+  {
+    "id": "trac_linh_thach",
+    "n": "Trắc Linh Thạch",
+    "i": "🪨",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi để tự trắc linh căn.",
+    "d": "Viên đá xám trơn nhẵn, nắm chặt thì biết có linh căn hay không.",
+    "status": "active"
   }
 ]
