@@ -383,6 +383,38 @@ const TESTS = {
     ok(await p.locator('[data-act="pact"][data-arg="sanbat"]').count()===1, 'hoang dã có nút săn bắt, hái lượm');
     ok(p.errs.length===0, 'không có lỗi trang: '+p.errs.join(' | '));
   },
+  // Sửa-D: chú thích nằm sát chỗ rê/bấm ở cỡ máy tính (trước đây lệch vì #tip bị zoom --dz mà left/top không chia lại)
+  async tooltip_vitri(p) {
+    for (const [w, h] of [[1440, 900], [1920, 1080], [1280, 720]]) {
+      await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(300);
+      await ev(p, () => { G.run.scene = null; UI.modal = null; UI.panel = 'char'; UI.tab.char = 'base'; render(); });
+      await p.waitForTimeout(300);
+      const els = await p.$$('#panel [data-tip]');
+      ok(els.length >= 5, w + 'x' + h + ': tab Căn cơ có ' + els.length + ' chỗ có chú thích');
+      let bad = 0, worst = 0;
+      for (const el of els.slice(0, 12)) {
+        const bb = await el.boundingBox(); if (!bb) continue;
+        const cx = bb.x + Math.min(bb.width / 2, 40), cy = bb.y + bb.height / 2;
+        await p.mouse.move(cx - 3, cy - 3); await p.mouse.move(cx, cy); await p.waitForTimeout(60);
+        const r = await ev(p, () => { const t = document.querySelector('#tip'); if (t.hidden) return null; const b = t.getBoundingClientRect(); return { l: b.left, t: b.top, r: b.right, b: b.bottom, W: innerWidth, H: innerHeight }; });
+        if (!r) { continue; }
+        const dx = Math.max(r.l - cx, 0, cx - r.r), dy = Math.max(r.t - cy, 0, cy - r.b), d = Math.hypot(dx, dy);
+        worst = Math.max(worst, d);
+        if (d > 40 || r.l < 0 || r.t < 0 || r.r > r.W || r.b > r.H) bad++;
+      }
+      ok(bad === 0, w + 'x' + h + ': chú thích sát con trỏ (xa nhất ' + Math.round(worst) + 'px) và không tràn màn, lỗi ' + bad);
+      const q = await ev(p, () => { const el = document.querySelector('#panel [data-tip]'); showTip(el, false); const e = el.getBoundingClientRect(), t = document.querySelector('#tip').getBoundingClientRect(); hideTip(); return Math.max(e.top - t.bottom, t.top - e.bottom, 0) + Math.max(e.left - t.right, t.left - e.right, 0); });
+      ok(q < 40, w + 'x' + h + ': chú thích kiểu chạm cách phần tử ' + Math.round(q) + 'px');
+    }
+    for (const tb of ['bag', 'hoc', 'kn']) {
+      await ev(p, k => { UI.panel = 'char'; UI.tab.char = k; render(); }, tb); await p.waitForTimeout(200);
+      const el = await p.$('#panel [data-tip]'); if (!el) continue;
+      const bb = await el.boundingBox(); const cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2;
+      await p.mouse.move(cx - 3, cy - 3); await p.mouse.move(cx, cy); await p.waitForTimeout(60);
+      const d = await ev(p, ([cx, cy]) => { const t = document.querySelector('#tip'); if (t.hidden) return -1; const b = t.getBoundingClientRect(); return Math.hypot(Math.max(b.left - cx, 0, cx - b.right), Math.max(b.top - cy, 0, cy - b.bottom)); }, [cx, cy]);
+      ok(d >= 0 && d < 40, 'tab ' + tb + ': chú thích sát chỗ rê (' + Math.round(d) + 'px)');
+    }
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

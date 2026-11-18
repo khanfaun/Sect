@@ -2,11 +2,15 @@
 let tipT=null,tipEl=null;
 // đặt chú thích cạnh con trỏ; chạm mép phải/dưới thì lật sang phía bên kia
 // cảm ứng: đặt ngay phía trên đầu ngón tay (không che chỗ chạm), không đủ chỗ thì ngay phía dưới; căn giữa theo ngón tay
-function placeTipTouch(x,y){const tip=$('#tip');const tw=tip.offsetWidth,th=tip.offsetHeight,W=window.innerWidth,H=window.innerHeight;
-  let L=Math.max(8,Math.min(W-tw-8,x-tw/2)),T=y-th-22;if(T<8)T=Math.min(H-th-8,y+28);tip.style.left=L+'px';tip.style.top=T+'px';}
-function placeTip(x,y){const tip=$('#tip');const tw=tip.offsetWidth,th=tip.offsetHeight,W=window.innerWidth,H=window.innerHeight;
+// #tip có thể bị phóng (zoom --dz trên máy tính): left/top tính theo đơn vị đã phóng nên phải chia cho hệ số, còn kích thước đo bằng khung nhìn thật
+function tipZ(tip){return parseFloat(getComputedStyle(tip).zoom)||1;}
+function tipSet(tip,L,T){const z=tipZ(tip);tip.style.left=(L/z)+'px';tip.style.top=(T/z)+'px';}
+function tipSize(tip){const r=tip.getBoundingClientRect();return [r.width,r.height];}
+function placeTipTouch(x,y){const tip=$('#tip');const [tw,th]=tipSize(tip),W=window.innerWidth,H=window.innerHeight;
+  let L=Math.max(8,Math.min(W-tw-8,x-tw/2)),T=y-th-22;if(T<8)T=Math.min(H-th-8,y+28);tipSet(tip,L,T);}
+function placeTip(x,y){const tip=$('#tip');const [tw,th]=tipSize(tip),W=window.innerWidth,H=window.innerHeight;
   let L=x+14,T=y+16;if(L+tw>W-6)L=x-tw-12;if(L<6)L=Math.max(6,Math.min(W-tw-6,x-tw/2));if(T+th>H-6)T=y-th-12;if(T<6)T=Math.max(6,Math.min(H-th-6,y+16));
-  tip.style.left=L+'px';tip.style.top=T+'px';}
+  tipSet(tip,L,T);}
 function showTip(el,toggle,xy,touch){
   const tip=$('#tip');const txt=el.dataset.tip;if(!txt)return;
   if(toggle&&tipEl===el&&!tip.hidden){hideTip();return;}
@@ -14,10 +18,10 @@ function showTip(el,toggle,xy,touch){
   if(xy&&touch){placeTipTouch(xy[0],xy[1]);return;}
   if(xy){placeTip(xy[0],xy[1]);return;}
   // chạm (không có con trỏ): đặt trên phần tử, không đủ chỗ thì xuống dưới
-  const r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;
+  const r=el.getBoundingClientRect(),[tw,th]=tipSize(tip);
   let x=r.left+Math.min(r.width/2,60)-tw/2;x=Math.max(6,Math.min(window.innerWidth-tw-6,x));
   let y=r.top-th-8;if(y<6)y=Math.min(window.innerHeight-th-6,r.bottom+8);
-  tip.style.left=x+'px';tip.style.top=y+'px';
+  tipSet(tip,x,y);
 }
 function hideTip(){const t=$('#tip');if(t){t.hidden=true;}tipEl=null;}
 document.addEventListener('pointerover',e=>{if(e.pointerType!=='mouse')return;const t=e.target.closest('[data-tip]');if(t){if(t!==tipEl)showTip(t,false,[e.clientX,e.clientY]);}else if(tipEl)hideTip();});
