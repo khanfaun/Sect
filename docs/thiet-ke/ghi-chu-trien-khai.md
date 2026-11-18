@@ -373,6 +373,6 @@ Luật `48-sua-e.js`; bảng `SUAE.ltRoll`, `SUAE.dg`, `SUAE.am`. Hiệu ứng s
 - Năng lực vẫn hiện bằng chữ (câu 24). Bài: `mac_ca`.
 
 ### E — kiểm và còn dở
-- `npm run test:rules`: tất cả đạt (sau E.23). Bài mới: `quan_nc cam_e lt_nguon tich_coc vay_tt mac_ca` (đã thêm vào `test:rules`).
+- `npm run test:rules`: tất cả đạt (604 dòng ✓, sau E.23); `npm run build` rồi `node tools/test-ui.js`: tất cả đạt (150 dòng ✓). Bài mới: `quan_nc cam_e lt_nguon tich_coc vay_tt mac_ca` (đã thêm vào `test:rules`).
 - Giữ nguyên theo câu 21, 22, 24: Địa linh căn 2 hệ ×1,5; nhiệm vụ "có công pháp" tự xong; năng lực hiện bằng chữ.
 - Còn dở: bot chưa biết cầm đồ mới, Ám Hội, Tích Cốc Đan, trả trước (không được chạy bot); Ám Hội chưa có sự kiện kể riêng.
