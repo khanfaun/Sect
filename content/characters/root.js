@@ -7,3 +7,4 @@ const ROOT = [
   {id:'tu',n:'Tứ linh căn',m:0.85,w:25,k:4,d:'Bốn hệ. Tu luyện chậm, học được nhiều hệ.'},
   {id:'tap',n:'Ngũ hành tạp linh căn',m:0.7,w:16,k:5,d:'Đủ năm hệ. Người đời gọi là phế linh căn.'},
 ];
+ROOT.push({id:'vo',n:'Vô linh căn',m:0,w:0,k:0,d:'Không có linh căn. Không thể dẫn khí nhập thể.'});
