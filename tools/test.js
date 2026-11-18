@@ -678,7 +678,7 @@ const TESTS = {
   nghe() {
     const toTran="(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()";
     const toMua=m=>`(()=>{let k=0;while(seasonOf(W().t)!=='${m}'&&k++<400)W().t+=HD;})()`;
-    fresh("ngEvent=()=>false;G.run.origin='thusinh';G.run.paths={};G.run.pham=1;"+toMua('xuan')+";"+toTran);
+    fresh("G._ngNoEv=1;G.run.origin='thusinh';G.run.paths={};G.run.pham=1;"+toMua('xuan')+";"+toTran);
     const L=JSON.parse(run("JSON.stringify(vtList(nodeById(G.run.at)).map(x=>x.id+'|'+x.why))"));
     ok(L.includes('ng:nong:gieo|'), 'mùa xuân ở thôn trấn: có việc gieo mạ ('+L.filter(x=>x.startsWith('ng:')).join(',')+')');
     ok(L.some(x=>x.startsWith('ng:nong:gat|')&&x.split('|')[1]), 'gặt lúa trái mùa bị khoá');
@@ -708,6 +708,33 @@ const TESTS = {
     const b0=run("G.run.bac");run("applyE({bac:50,nxp:['nong',5]})");ok(run("G.run.bac")===b0+50&&run("G.run.paths.nong.xp")>30, 'hiệu ứng bac, nxp');
     // bản lưu cũ
     run("delete G.run.paths;delete G.run._ngV1;run2()");ok(run("JSON.stringify(G.run.paths)")==='{}', 'bản lưu cũ: paths rỗng');
+  },
+  // Đ5.3 năm nghề phàm đầu: đủ sáu bậc, việc làm được ở nơi hợp, mười hai sự kiện mỗi nghề chia ba tầng, sự kiện chỉ hiện khi theo nghề
+  nghe_pham() {
+    fresh("G._ngNoEv=1;G.run.pham=1;G.run.paths={}");
+    const M=['nong','ngu','thuong','vo_gia','y'];
+    ok(M.every(m=>run(`NGHE.${m}.ranks.length===6&&NGHE.${m}.xp.length===6&&NGHE.${m}.acts.length>=4`)), 'năm nghề đủ sáu bậc và bốn việc');
+    for(const m of M){const c=JSON.parse(run(`JSON.stringify([0,1,2].map(k=>EVS.filter(e=>e.content&&(e.content.tags||[]).includes('nghe:${m}')&&e.content.tags.includes('nghe-tang:'+k)).length))`));
+      ok(c.join()==='4,4,4', m+': mười hai sự kiện, bốn mỗi tầng ('+c+')');}
+    ok(run("KYNGO.filter(x=>/^ng_(nong|ngu|thuong|vo_gia|y)_[1-5]$/.test(x.id)).length")===25&&run("KYNGO.filter(x=>/^ng_/.test(x.id)).every(x=>!/\\{\\{/.test(x.t)&&x.t.length>20)"), 'hai mươi lăm kỳ ngộ thăng bậc có lời riêng');
+    const ev="EVS.find(e=>e.id==='ng_y_khong_tien')";
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    ok(!run(`contentTriggerOk(${ev}.content)`), 'chưa theo nghề y: không gặp sự kiện y');
+    run("G.run.paths.y={xp:1,bac:0,last:W().t}");ok(run(`contentTriggerOk(${ev}.content)`), 'theo nghề y bậc đầu: gặp sự kiện nhập môn');
+    run("G.run.paths.y.bac=4");ok(!run(`contentTriggerOk(${ev}.content)`), 'bậc cao: không gặp lại sự kiện nhập môn');
+    run("G.run.paths.y.phai=1;G.run.paths.y.bac=0");ok(!run(`contentTriggerOk(${ev}.content)`), 'đường đã phai: không gặp');
+    // mỗi nghề làm được một việc ở nơi hợp
+    const cases=[['nong','tran','dan','dong'],['ngu','song','cau',null],['thuong','tran','ganh',null],['vo_gia','tran','hanh_hiep',null],['y','thanh','boc_thuoc',null]];
+    for(const [m,t,a,mua] of cases){
+      run(`(()=>{G.run.scene=null;G.run.lamNgay=null;G.run.paths={};G.run.base.ngo=20;voOf(G.run).bac=1;${mua?`let k=0;while(seasonOf(W().t)!=='${mua}'&&k++<400)W().t+=HD;`:''}const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='${t}'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()`);
+      const why=run(`(vtList(nodeById(G.run.at)).find(x=>x.id==='ng:${m}:${a}')||{why:'không có'}).why`);
+      ok(!why&&run(`vtDo('ng:${m}:${a}')`)&&run(`G.run.paths.${m}.xp`)>0, m+': làm '+a+' ở '+t+(why?' ('+why+')':''));
+    }
+    run("G.run.scene=null;voOf(G.run).bac=0;(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    ok(/võ học/i.test(run("vtList(nodeById(G.run.at)).find(x=>x.id==='ng:vo_gia:hanh_hiep').why")), 'chưa nhập lưu võ: chưa làm được việc giang hồ');
+    // buôn có vốn: trừ vốn, hoàn vốn cộng lãi hoặc lỗ
+    run("(()=>{G.run.scene=null;G.run.lamNgay=null;G.run.paths={thuong:{xp:70,bac:1,last:W().t}};G.run.bac=5000;const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='cho'&&n.state!=='ruin')||W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    ok(run("vtDo('ng:thuong:mua_ban')")&&run("G.run.bac")!==5000&&run("NK.count('nghe.lam')")>0, 'mua rẻ bán đắt: vốn đi rồi về ('+run("G.run.bac")+')');
   },
   // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
   tan_thu() {

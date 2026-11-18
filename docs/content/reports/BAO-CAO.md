@@ -3,8 +3,8 @@
 ## Phạm vi và xuất xứ
 
 - Luật nền d9ab301; truyện và sửa tính liên tục lấy đúng 8b9c479.
-- 403 mục tương tác: `{"story":200,"event":149,"initiation":9,"opportunity":19,"quest-door":3,"quest":8,"service":15}`.
-- 205 bảng nền, 1925 mục danh mục có ID, 42 nhóm lời kể hệ thống.
+- 469 mục tương tác: `{"story":200,"event":209,"initiation":9,"opportunity":24,"quest-door":3,"quest":8,"service":16}`.
+- 205 bảng nền, 1943 mục danh mục có ID, 48 nhóm lời kể hệ thống.
 
 ## Các sửa đã thực hiện
 

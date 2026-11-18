@@ -1,0 +1,786 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_nong_han",
+      "name": "Mùa hạn",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {
+          "season": [
+            "ha"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nắng như đổ lửa suốt tháng. Ruộng nứt nẻ từng đường to bằng ngón tay, mạ non rũ xuống.",
+      "choices": [
+        {
+          "l": "Gánh nước từ suối lên, suốt đêm",
+          "i": "🪣",
+          "chk": [
+            "tam",
+            8
+          ],
+          "ok": {
+            "t": "Ngươi gánh tới lúc vai rớm máu. Sáng ra, mấy luống mạ đầu bờ đã ngẩng lên.",
+            "e": {
+              "nxp": [
+                "nong",
+                10
+              ],
+              "h": 8
+            }
+          },
+          "no": {
+            "t": "Gánh được nửa đêm thì ngươi ngã quỵ bên bờ ruộng. Mạ vẫn héo.",
+            "e": {
+              "hp": "-10%",
+              "nxp": [
+                "nong",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Bỏ ruộng, đi làm thuê chỗ khác ít hôm",
+          "i": "🚶",
+          "t": "Ngươi khoá cửa, theo người ta xuống trấn bốc vác. Ruộng thì phó mặc cho trời.",
+          "e": {
+            "bac": 30
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_han",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_tranh_nuoc",
+      "name": "Tranh nước với làng bên",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Con mương chung cạn tới đáy. Người làng bên đã đắp bờ chặn dòng từ đêm qua, mấy gã trai cầm gậy đứng canh.",
+      "choices": [
+        {
+          "l": "Ra bờ mương nói phải trái",
+          "i": "🗣️",
+          "chk": [
+            "tam",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi đứng nói tới trưa. Cuối cùng họ chịu chia nước mỗi bên một nửa ngày.",
+            "e": {
+              "nxp": [
+                "nong",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Lời qua tiếng lại thành xô đẩy. Ngươi về nhà với một bên mắt sưng.",
+            "e": {
+              "hp": "-10%"
+            }
+          }
+        },
+        {
+          "l": "Nhường họ, đợi mưa",
+          "i": "🤝",
+          "t": "Ngươi lặng lẽ về. Ba hôm sau trời đổ mưa rào, ruộng hai làng cùng xanh.",
+          "e": {
+            "nxp": [
+              "nong",
+              3
+            ]
+          }
+        },
+        {
+          "l": "Đêm xuống, phá bờ của họ",
+          "i": "🌙",
+          "t": "Nước chảy về ruộng ngươi suốt đêm. Sáng ra làng bên chửi đổng, không ai biết là ai.",
+          "e": {
+            "nxp": [
+              "nong",
+              8
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_tranh_nuoc",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_trau_om",
+      "name": "Trâu ốm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Con trâu mượn của nhà bên nằm bẹp trong chuồng, mũi khô, không chịu ăn cỏ.",
+      "choices": [
+        {
+          "l": "Thức đêm sắc lá cho nó uống",
+          "i": "🌿",
+          "t": "Ngươi ngồi bên chuồng ba đêm liền. Sáng thứ tư con trâu đứng dậy, rống một tiếng dài.",
+          "e": {
+            "h": 24,
+            "nxp": [
+              "nong",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Mời thầy lang thú",
+          "i": "🧑‍⚕️",
+          "t": "Thầy lang bốc cho mấy thang thuốc, lấy tiền không rẻ. Trâu khỏi.",
+          "e": {
+            "bac": -60,
+            "nxp": [
+              "nong",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_trau_om",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_tang_to",
+      "name": "Địa chủ tăng tô",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Quản gia nhà địa chủ đi từng nhà, gõ thước vào cửa: năm nay tô lên thêm một phần, ai không nộp thì trả ruộng.",
+      "choices": [
+        {
+          "l": "Cắn răng nộp",
+          "i": "🪙",
+          "t": "Ngươi đếm từng đồng đưa ra. Quản gia ghi sổ, không ngẩng mặt.",
+          "e": {
+            "bac": -80,
+            "nxp": [
+              "nong",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Xin khất tới mùa sau",
+          "i": "🙏",
+          "chk": [
+            "tam",
+            10
+          ],
+          "ok": {
+            "t": "Quản gia nhìn ngươi hồi lâu rồi gật. \"Mùa sau nộp đủ, thiếu một hạt là trả ruộng.\"",
+            "e": {
+              "nxp": [
+                "nong",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Hắn cười khẩy, sai người dắt luôn con gà mái trong sân để trừ nợ.",
+            "e": {
+              "bac": -120
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_tang_to",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_duoc_mua",
+      "name": "Được mùa",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {
+          "season": [
+            "thu"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Năm nay mưa thuận gió hoà. Lúa trĩu bông, gặt tới đâu kho đầy tới đó. Lái buôn đã đứng chờ ở đầu làng.",
+      "choices": [
+        {
+          "l": "Bán ngay cho lái buôn",
+          "i": "🌾",
+          "t": "Giá không cao nhưng tiền về tay ngay. Ngươi đếm xong, thở ra nhẹ nhõm.",
+          "e": {
+            "bac": 200,
+            "nxp": [
+              "nong",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Giữ thóc, đợi giá lên",
+          "i": "📦",
+          "chk": [
+            "ngo",
+            10
+          ],
+          "ok": {
+            "t": "Qua tết giá thóc lên gấp đôi. Ngươi bán vừa đúng lúc.",
+            "e": {
+              "bac": 400,
+              "nxp": [
+                "nong",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Thóc ẩm, mọt vào nửa kho. Bán được chẳng bao nhiêu.",
+            "e": {
+              "bac": 60,
+              "nxp": [
+                "nong",
+                4
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_duoc_mua",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_binh_luong",
+      "name": "Quan thu binh lương",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lính huyện về làng, trống đánh dồn. Mỗi nhà phải nộp thêm một phần thóc làm lương cho quân ngoài biên.",
+      "choices": [
+        {
+          "l": "Nộp đủ",
+          "i": "🪙",
+          "t": "Ngươi khiêng thóc ra đình. Lính ghi tên, đóng dấu đỏ vào sổ.",
+          "e": {
+            "bac": -150,
+            "nxp": [
+              "nong",
+              4
+            ]
+          }
+        },
+        {
+          "l": "Giấu bớt thóc dưới hầm",
+          "i": "🕳️",
+          "chk": [
+            "tp",
+            10
+          ],
+          "ok": {
+            "t": "Lính chọc giáo khắp sân mà không thấy nắp hầm. Ngươi giữ được nửa kho.",
+            "e": {
+              "nxp": [
+                "nong",
+                5
+              ]
+            }
+          },
+          "no": {
+            "t": "Một tên lính đạp trúng nắp hầm. Ngươi bị đánh mấy roi, thóc bị tịch thu sạch.",
+            "e": {
+              "bac": -300,
+              "hp": "-10%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_binh_luong",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_trom_lua",
+      "name": "Trộm lúa đêm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nửa đêm có tiếng sột soạt ngoài ruộng. Một bóng người đang tuốt lúa bỏ vào bao.",
+      "choices": [
+        {
+          "l": "Đuổi theo",
+          "i": "🏃",
+          "chk": [
+            "tp",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi tóm được hắn ở bờ tre, lấy lại bao lúa. Hắn quỳ xuống xin tha.",
+            "e": {
+              "nxp": [
+                "nong",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Hắn chạy nhanh như sóc. Ngươi vấp bờ ruộng, trẹo chân.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "l": "Lại gần thì thấy là đứa trẻ, để nó đi",
+          "i": "🍚",
+          "t": "Đứa bé gầy giơ xương, ôm bao lúa run cầm cập. Ngươi bảo nó mang về, mai đừng tới nữa.",
+          "e": {
+            "bac": -20,
+            "deed": "bo_thi"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_trom_lua",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_de_vo",
+      "name": "Đê vỡ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mưa ba ngày ba đêm. Tiếng mõ dồn dập: đê đầu làng vỡ một đoạn, nước đỏ ngầu tràn vào ruộng.",
+      "choices": [
+        {
+          "l": "Cùng cả làng đắp đê",
+          "i": "⛏️",
+          "t": "Ngươi vác đất suốt đêm, ngâm mình trong nước tới ngực. Sáng ra đoạn đê đã được chặn.",
+          "e": {
+            "h": 24,
+            "nxp": [
+              "nong",
+              12
+            ],
+            "hp": "-10%",
+            "deed": "cuu_nguoi"
+          }
+        },
+        {
+          "l": "Chạy về be bờ ruộng nhà mình",
+          "i": "🏠",
+          "t": "Ruộng ngươi giữ được. Mấy nhà cuối làng thì mất trắng.",
+          "e": {
+            "nxp": [
+              "nong",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_de_vo",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_linh_dien",
+      "name": "Tu sĩ thuê người trồng linh điền",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một tu sĩ áo xanh dừng ở đầu làng, cần người biết làm ruộng giỏi theo lên núi trồng linh điền hai ngày. Trả công hậu.",
+      "choices": [
+        {
+          "l": "Theo lên núi",
+          "i": "⛰️",
+          "t": "Linh điền nhỏ như cái sân nhưng đất mềm như bông. Tu sĩ trả công rồi tiễn ngươi xuống núi, không nói thêm câu nào.",
+          "e": {
+            "h": 48,
+            "bac": 600,
+            "nxp": [
+              "nong",
+              15
+            ]
+          }
+        },
+        {
+          "l": "Ruộng nhà còn việc, từ chối",
+          "i": "✋",
+          "t": "Tu sĩ gật đầu, đi sang làng khác."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_linh_dien",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_hat_la",
+      "name": "Hạt giống lạ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Trong bao giống mua ở chợ lẫn mấy hạt màu vàng óng, cầm lên thấy ấm tay.",
+      "choices": [
+        {
+          "l": "Gieo riêng một góc ruộng",
+          "i": "🌱",
+          "chk": [
+            "ngo",
+            11
+          ],
+          "ok": {
+            "t": "Mấy cây lúa lạ trổ bông thơm ngát. Hạt nấu lên ăn, người nhẹ hẳn đi.",
+            "e": {
+              "pill": "tinhnguyen",
+              "nxp": [
+                "nong",
+                15
+              ]
+            }
+          },
+          "no": {
+            "t": "Mầm lên được ít hôm thì héo rũ. Ngươi tiếc mãi.",
+            "e": {
+              "nxp": [
+                "nong",
+                5
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đem lên trấn bán cho người biết hàng",
+          "i": "🪙",
+          "t": "Người mua ngắm hạt giống hồi lâu, trả một món tiền khiến ngươi giật mình.",
+          "e": {
+            "bac": 300
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_hat_la",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_heo_yeu",
+      "name": "Heo rừng thành yêu",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đêm nào cũng có một con heo rừng to như con nghé xuống phá ruộng. Mắt nó đỏ, nanh dài, người làng không ai dám ra.",
+      "choices": [
+        {
+          "l": "Cầm đinh ba ra đuổi",
+          "i": "🔱",
+          "chk": [
+            "tp",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi đâm trúng vai nó. Con heo rống lên rồi chạy vào núi, không quay lại nữa. Làng góp tiền tạ ơn.",
+            "e": {
+              "bac": 100,
+              "nxp": [
+                "nong",
+                15
+              ],
+              "deed": "giet_thu_cuu_sinh"
+            }
+          },
+          "no": {
+            "t": "Nó húc ngươi văng xuống mương. Ngươi nằm liệt mấy ngày.",
+            "e": {
+              "hp": "-30%"
+            }
+          }
+        },
+        {
+          "l": "Góp tiền thuê thợ săn",
+          "i": "🏹",
+          "t": "Thợ săn đặt bẫy ba đêm thì bắt được. Ngươi góp phần lớn nhất.",
+          "e": {
+            "bac": -200,
+            "nxp": [
+              "nong",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_heo_yeu",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_nong_nam_doi",
+      "name": "Năm đói, dân bỏ làng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:nong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Hai năm mất mùa liền. Người làng gánh con bỏ đi tha phương. Kho thóc nhà ngươi là kho duy nhất còn đầy.",
+      "choices": [
+        {
+          "l": "Mở kho chia thóc cho người ở lại",
+          "i": "🍚",
+          "t": "Hàng người xếp trước cửa nhà ngươi. Có bà lão vừa nhận thóc vừa khóc.",
+          "e": {
+            "bac": -300,
+            "nxp": [
+              "nong",
+              10
+            ],
+            "deed": "phat_chan"
+          }
+        },
+        {
+          "l": "Bán thóc với giá năm đói",
+          "i": "💰",
+          "t": "Tiền đổ về như nước. Người mua không ai nhìn mặt ngươi.",
+          "e": {
+            "bac": 800,
+            "nxp": [
+              "nong",
+              6
+            ],
+            "deed": "ep_ta_dien"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/nong.json",
+        "ref": "ng_nong_nam_doi",
+        "commit": "d5.3"
+      }
+    }
+  ]
+}

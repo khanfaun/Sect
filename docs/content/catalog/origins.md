@@ -8,6 +8,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_con_nha_va_luoi",
   "n": "Con nhà vá lưới",
+  "grp": "thuong",
   "i": "🪢",
   "fx": {
     "tp": 2,
@@ -34,6 +35,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_tre_giu_ngua_tram",
   "n": "Trẻ giữ ngựa trạm",
+  "grp": "thuong",
   "i": "🐎",
   "fx": {
     "tp": 3
@@ -60,6 +62,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_nguoi_chep_so_thoc",
   "n": "Người chép sổ thóc",
+  "grp": "thuong",
   "i": "📜",
   "fx": {
     "ngo": 2,
@@ -88,6 +91,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_con_nha_ham_than",
   "n": "Con nhà hầm than",
+  "grp": "thuong",
   "i": "🪵",
   "fx": {
     "hpP": 7,
@@ -113,6 +117,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_dua_tre_nhat_o_bac_cua",
   "n": "Đứa trẻ nhặt ở bậc cửa",
+  "grp": "kho",
   "i": "🚪",
   "fx": {
     "van": 3,
@@ -139,6 +144,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_ke_tung_vac_bia",
   "n": "Kẻ từng vác bia",
+  "grp": "thuong",
   "i": "🪨",
   "fx": {
     "defP": 12,
@@ -166,6 +172,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_con_nguoi_det_chieu",
   "n": "Con người dệt chiếu",
+  "grp": "thuong",
   "i": "🌾",
   "fx": {
     "mpP": 6,
@@ -192,6 +199,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_dong_tu_dun_tra",
   "n": "Đồng tử đun trà",
+  "grp": "thuong",
   "i": "🍵",
   "fx": {
     "tam": 2,
@@ -221,6 +229,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_nguoi_giu_mieu_nho",
   "n": "Người giữ miếu nhỏ",
+  "grp": "thuong",
   "i": "🪔",
   "fx": {
     "tam": 3,
@@ -250,6 +259,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_ke_bo_truong_thi",
   "n": "Kẻ bỏ trường thi",
+  "grp": "thuong",
   "i": "🖌️",
   "fx": {
     "ngo": 3,
@@ -277,6 +287,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_con_nha_ganh_muoi",
   "n": "Con nhà gánh muối",
+  "grp": "thuong",
   "i": "🧂",
   "fx": {
     "tp": 2,
@@ -302,6 +313,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_nguoi_hoc_khac_khuon",
   "n": "Người học khắc khuôn",
+  "grp": "thuong",
   "i": "🪵",
   "fx": {
     "craftP": 5,
@@ -328,6 +340,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_ke_cheo_do_ban_dem",
   "n": "Kẻ chèo đò ban đêm",
+  "grp": "thuong",
   "i": "🛶",
   "fx": {
     "mpP": 8,
@@ -356,6 +369,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_con_nha_boc_thuoc",
   "n": "Con nhà bốc thuốc",
+  "grp": "thuong",
   "i": "🌿",
   "fx": {
     "regenHp": 2,
@@ -385,6 +399,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_dua_tre_lon_sau_bep",
   "n": "Đứa trẻ lớn sau bếp",
+  "grp": "kho",
   "i": "🍚",
   "fx": {
     "hpP": 8,
@@ -412,6 +427,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_tho_cao_voi_tuong",
   "n": "Thợ cạo vôi tường",
+  "grp": "thuong",
   "i": "🪨",
   "fx": {
     "defP": 9,
@@ -438,6 +454,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_nguoi_boi_giay_do",
   "n": "Người bồi giấy dó",
+  "grp": "thuong",
   "i": "📄",
   "fx": {
     "mpP": 7,
@@ -464,6 +481,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_ke_tron_no_qua_deo",
   "n": "Kẻ trốn nợ qua đèo",
+  "grp": "kho",
   "i": "🏔️",
   "fx": {
     "tp": 3,
@@ -492,6 +510,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_con_nha_nung_men",
   "n": "Con nhà nung men",
+  "grp": "thuong",
   "i": "🏺",
   "fx": {
     "craftP": 6,
@@ -517,6 +536,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_nguoi_lam_thue_o_mo",
   "n": "Người làm thuê ở mỏ",
+  "grp": "kho",
   "i": "⛏️",
   "fx": {
     "defP": 11,
@@ -546,6 +566,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_ke_viet_thu_ho",
   "n": "Kẻ viết thư hộ",
+  "grp": "thuong",
   "i": "✉️",
   "fx": {
     "ngo": 3,
@@ -573,6 +594,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_hau_due_nguoi_coi_an",
   "n": "Hậu duệ người coi ấn",
+  "grp": "kha",
   "i": "🪪",
   "fx": {
     "mpP": 8,
@@ -601,6 +623,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_nguoi_hoc_bo_xuong",
   "n": "Người học bó xương",
+  "grp": "thuong",
   "i": "🦴",
   "fx": {
     "regenHp": 2,
@@ -629,6 +652,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_ke_lon_len_ben_vach_da",
   "n": "Kẻ lớn lên bên vách đá",
+  "grp": "thuong",
   "i": "🧗",
   "fx": {
     "tp": 3,
@@ -654,6 +678,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_con_nha_giu_kho_duong",
   "n": "Con nhà giữ kho đường",
+  "grp": "thuong",
   "i": "🍯",
   "fx": {
     "hpP": 7,
@@ -680,6 +705,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_nguoi_bi_tra_ve_tu_bien_ai",
   "n": "Người bị trả về từ biên ải",
+  "grp": "thuong",
   "i": "🏮",
   "fx": {
     "atkP": 9,
@@ -709,6 +735,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_tre_an_duoi_san_dan",
   "n": "Trẻ ẩn dưới sàn đan",
+  "grp": "kho",
   "i": "🧺",
   "fx": {
     "dodge": 5,
@@ -736,6 +763,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_ke_mang_tro_ve_que",
   "n": "Kẻ mang tro về quê",
+  "grp": "kho",
   "i": "🕯️",
   "fx": {
     "tam": 3,
@@ -764,6 +792,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_nguoi_thua_ke_sap_bac",
   "n": "Người thừa kế sạp bạc",
+  "grp": "kha",
   "i": "🪙",
   "fx": {
     "shopP": 6,
@@ -790,6 +819,7 @@ Nguồn: `content/catalog/origins.json`
 {
   "id": "xt_nguoi_hoc_dao_sau_mua_lu",
   "n": "Người học đạo sau mùa lũ",
+  "grp": "thuong",
   "i": "🌧️",
   "fx": {
     "mpP": 10,

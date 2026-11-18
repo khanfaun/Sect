@@ -19,7 +19,7 @@ Thợ mộc {$a.ten} làm tấm phản cho một nhà có người bệnh nằm 
 - **1. Góp gỗ thay lại bốn chân**
   Ngươi mua đủ gỗ cho hắn thay cả bốn chân, bảo hắn tự trình việc cắt sai với thầy. Lão mộc mắng một trận rồi ngồi xuống chỉ lại cách đo. Học việc lần này đo hai lượt mới cưa.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4,"an":["a","gió lùa dưới ván"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","gió lùa dưới ván"]}`
 - **2. Mua tấm phản thấp cho mình**
   {$a.ten} có tiền làm tấm khác, nhưng đuổi {$b.ten} vì giấu lỗi. Hắn đem theo mẩu gỗ cắt ra từ chân đầu tiên.
   - `cost`: `{"st":10}`
@@ -55,7 +55,7 @@ Người bệnh {$c.ten} đã ngồi dậy được, nhưng then cửa nằm cao
 - **1. Góp sắt làm then mới**
   Cửa mở nhẹ và {$c.ten} tự khóa được từ bên trong. {$b.ten} cất sợi dây cũ, trên đầu dây có ba nút đã thắt thử.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4,"an":["a","khóa cửa từ bên trong"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","khóa cửa từ bên trong"]}`
 - **2. Nhận sửa nhà, lấy công sau khi người bệnh bán được**
   Ngươi lo việc sửa và tìm người mua, nhận vốn cùng tiền công khi bán xong nhà. Người bệnh được tự chọn phòng thuê gần họ hàng trước ngày dọn đi. Hai thầy trò giúp chuyển đồ tới tận cửa.
   - `e`: `{"st":14}`
@@ -93,10 +93,10 @@ Học việc {$b.ten} bị đuổi khỏi xưởng, giờ nhận đóng bàn ở
 - **1. Đặt một chiếc bàn riêng cho {$c.ten}**
   {$b.ten} đóng vừa tầm tay người ngồi. Tiền ngươi trả đủ để hắn mua một lưỡi bào có cán liền.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Gọi thợ mộc {$a.ten} đến nhận lại học trò**
   Hai người làm việc cùng nhau, với điều kiện {$b.ten} bù tiền gỗ hỏng bằng tiền công. Hắn buộc lưỡi bào sứt vào hông.
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   {$c.ten} kê túi kim chỉ lên đầu gối. Vết lún trên túi sâu thêm một chút.
 
@@ -131,7 +131,7 @@ Học việc {$b.ten} đã biết nghề, đang đóng phản cho lán cứu t�
 - **1. Góp gỗ và giúp làm theo tầm người nằm**
   Ngươi góp gỗ, cùng thợ hỏi từng người cần phản cao thấp ra sao. Buổi đầu làm chậm, đến khi đưa vào lán thì không phải sửa lại. Người bệnh tự với được bát nước, cười gọi người nằm bên thử xem.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua trọn mẻ phản để bán lên thành**
   Ngươi có lời và hai thợ mộc đủ tiền trả công thợ phụ. Trong lán, một người lót bào vụn dưới chiếu để khỏi nằm trực tiếp trên đất.
   - `cost`: `{"st":10}`
@@ -178,7 +178,7 @@ Nếu phản từng được giữ ở lán, dân đem gỗ tới nhờ hai th�
 - **1. Đổi tiền lời hoặc tiền mua gỗ lấy phản cho lán**
   Hai thợ đưa phản sang, mỗi chiếc chừa một gang để đặt bát. Người bệnh {$c.ten} đặt bát đầu tiên xuống mà nước chỉ gợn một vòng.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4,"an":["a","chỗ thừa một gang"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","chỗ thừa một gang"]}`
 - **2. Nhận mẻ hàng của khách thành**
   Ngươi nhận tiền công thu xếp mẻ hàng mới của khách trong thành. Học việc xin giữ gỗ thừa để sửa phản cho lán, hai bên đồng ý. Chuyến buôn có lời, trong lán cũng được thêm vài chỗ nằm.
   - `e`: `{"st":14}`

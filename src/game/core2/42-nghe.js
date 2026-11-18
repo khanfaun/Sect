@@ -56,7 +56,7 @@ function ngDo(ma,aid){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')retu
   if(typeof tutTick==='function')tutTick('job');
   const s2=G.run.scene;if(s2===sc){sc.msg=msg;sc.chips=ch;sc.seq=(sc.seq||0)+1;}
   dbg('nghe.lam',{ma,id:aid,c,von});
-  if(G.run&&G.run.scene===sc){if(!ngCheck(ma)&&chance(NG_EV_P))ngEvent(ma);}
+  if(G.run&&G.run.scene===sc){if(!ngCheck(ma)&&!G._ngNoEv&&chance(NG_EV_P))ngEvent(ma);}
   saveSoon();return true;}
 {const _vd=vtDo;vtDo=function(id){if(typeof id==='string'&&id.startsWith('ng:')){const [,ma,aid]=id.split(':');return ngDo(ma,aid);}return _vd.apply(this,arguments);};}
 {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(feat('nghe')&&feat('tien')&&n&&n.state!=='ruin'&&!L.some(x=>x.a==='muusinh')&&ngList(n).length)

@@ -19,10 +19,10 @@ Nguồn chuẩn: `content/events/stories/linh-son.json`. Bản đọc tự sinh.
 - **1. Góp da làm thêm một tấm**
   Ngươi mua thêm da cho hắn làm tấm đệm thấp. Đệ tử nhỏ tuổi thử một kiếm, trúng giữa tấm rồi quay lại chắp tay cảm tạ. Người dạy kiếm gật đầu: “Đúng tầm rồi.”
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Xin thử đường kiếm trên đá trần**
   Kiếm mẻ, ngươi hiểu chỗ nào mình thường hạ cổ tay. {$a.ten} nhặt mảnh thép và gói bằng góc đệm.
-  - `e`: `{"tv":4,"karma":-1}`
+  - `e`: `{"tv":4,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Kiếm tu gọi người mới xếp hàng, nhắc từng người đứng cho vững. Tiếng tập kiếm rộn lên sau lưng ngươi.
 
@@ -42,10 +42,10 @@ Thiếu gia {$a.ten} đuổi khách khỏi ghế đá vì trên chân ghế kh�
 
 - **1. Xin lấy nước rửa mặt ghế**
   Ngươi xin chậu nước, rửa lớp mực làm cũ trên chân ghế. Nét khắc còn mới nguyên. {$b.ten} hỏi ai cho phép tự chiếm chỗ của tông môn, thiếu gia đành đứng dậy giữa tiếng xì xào.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Đứng về phía hắn để đổi một lời giới thiệu**
   Hắn dẫn ngươi vào hàng khách danh dự, dúi thêm linh thạch cảm tạ đã bênh mình. Những người bị đuổi phải đặt đồ lễ xuống đất. Quản sự nhìn thấy khoản tiền, ghi cả tên ngươi vào sổ xét việc.
-  - `e`: `{"karma":-4,"st":10,"tamma":2}`
+  - `e`: `{"deed":"lua_loi","st":10,"tamma":2}`
 - **3. Bỏ đi**
   {$b.ten} kê ghế nghiêng. {$a.ten} ngồi xuống, vừa đúng bên thấp.
 
@@ -66,10 +66,10 @@ Thiếu gia {$a.ten} đuổi khách khỏi ghế đá vì trên chân ghế kh�
 - **1. Dùng linh lực giữ khí qua chỗ ống gãy**
   Ngươi dẫn khí qua chỗ nối cho tới khi quản sự mở được trận. Người trong phòng tỉnh lại, ngươi bị luồng khí ngược làm đau ngực. Đệ tử tự tới nhận lỗi, không nhờ ngươi giấu nữa.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"hp":"-5%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"hp":"-5%"}`
 - **2. Nộp ống hỏng làm chứng**
   Phòng được mở khẩn cấp, ngươi được thưởng, còn {$a.ten} bị cấm làm việc. Nồi thuốc của hắn sôi khô ngoài cửa.
-  - `e`: `{"st":18,"karma":-3,"oan":["a","đốt tre ở cửa ngách"]}`
+  - `e`: `{"st":18,"deed":"lua_loi","oan":["a","đốt tre ở cửa ngách"]}`
 - **3. Bỏ đi**
   Ngươi đi báo người coi phòng. Khi quay đầu, đệ tử vẫn áp tay giữ đoạn ống, không dám buông.
 
@@ -89,10 +89,10 @@ Thiếu gia {$a.ten} đuổi khách khỏi ghế đá vì trên chân ghế kh�
 
 - **1. Đổi ca để hai người tự gặp**
   Ngươi nhận đứng thay một ca gác, để họ gặp nhau lúc đổi người. Người nhận áo xem đường vá, nói nhỏ: “Lần sau rách nữa, ta còn nhờ được không?” Người kia gật đầu, giục hắn mặc vào kẻo lạnh.
-  - `e`: `{"karma":4,"an":["a","đường may ngược"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","đường may ngược"]}`
 - **2. Đòi trả công để giữ kín**
   Hai người trả bằng phần linh thạch họ góp mua áo mới. Từ lần sau, vết rách chỉ được gập vào trong.
-  - `e`: `{"st":18,"karma":-3}`
+  - `e`: `{"st":18,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Họ đổi áo trên bậc giữa. Bậc đá ướt mà gói áo khô nguyên.
 
@@ -112,11 +112,11 @@ Quản sự {$a.ten} đang kê lại bàn thờ những đệ tử chết khi v�
 
 - **1. Góp công sửa bàn thờ và khắc lại danh sách**
   Ngươi bỏ buổi nghe giảng, cùng lão làm lại giá đặt bài vị và chép đủ tên lên vách. Người tới thắp hương từ nay tìm được tên người nhà, không phải xin dỡ từng hàng xuống.
-  - `e`: `{"karma":4,"h":6,"an":["a","người kê bàn thờ"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":6,"an":["a","người kê bàn thờ"]}`
 - **2. Nộp gỗ tốt để đổi quyền đặt bài vị của mình**
   Ngươi có chỗ trước hàng đầu. Những bài vị rơi được gom vào một ngăn, vừa khít chiều dài ngón tay.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":-2,"van":1}`
+  - `e`: `{"hd":{"t":1},"van":1}`
 - **3. Bỏ đi**
   Lão tiếp tục chép tên, nhờ ngươi gặp người nhà ai thì báo họ có thể tới nhận di vật.
 
@@ -137,10 +137,10 @@ Lò đan sắp tới giờ giữ lửa mà nắp lại nằm trong tay linh viê
 - **1. Mua quả đổi lấy nắp lò**
   Ngươi mua ít quả chín, đặt xuống đất rồi lùi ra. Linh viên mang nắp xuống đổi, còn chỉ tay đòi ngươi thêm một quả cho công leo xà. Đệ tử vội ôm nắp chạy về lò.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **2. Cho {$b.ten} mượn nắp nồi**
   Hắn cứu được mẻ đan, nồi cơm của ngươi từ đó phảng phất mùi thuốc tẩy tủy.
-  - `e`: `{"karma":3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **3. Bỏ đi**
   Ngươi vừa ra cổng, đệ tử đã bỏ quyển luật xuống đi tìm quả. Có lẽ hắn cũng nhận ra phải nói đúng chuyện linh viên muốn nghe.
 
@@ -160,7 +160,7 @@ Khe cửa kho thở ra hơi ấm dù phù giữ nhiệt đã hết. Bên trong k
 
 - **1. Tháo từng lá phù khỏi khung**
   Ngươi tháo phù cũ theo thứ tự ngược với trận giữ kho. Hơi ấm tắt hẳn; một bàn tay lạnh túm cổ tay ngươi rồi tan khi lá phù cuối rời cửa. Ngươi bị thương nhẹ, phải đứng ngoài vận khí hồi lâu mới dám mở kho.
-  - `e`: `{"karma":4,"hp":"-10%","tamma":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"hp":"-10%","tamma":-3}`
 - **2. Hứng hơi ấm vào bình**
   Ngươi lấy được một bình khí âm luyện phù. Lúc mở nắp, chiếc bình hít vào trước.
   - `e`: `{"pill":1,"tamma":4}`
@@ -186,7 +186,7 @@ Bậc đá quanh núi chỉ mòn về phía vực. Đệ tử {$a.ten} gánh nư
   - `e`: `{"tv":4,"h":4}`
 - **2. Dùng khinh thân thuật đi mép ngoài**
   Ngươi luyện được một bước đổi chân giữa không trung. Nước trong thùng hắn sóng ra, để lại vết sạch trên bậc mòn.
-  - `e`: `{"tv":3,"karma":-1}`
+  - `e`: `{"tv":3,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Ngươi nhường đường rồi tiếp tục lên núi. Hắn gọi với theo đoạn trên có đá lở, dặn ngươi đi sát vách.
 
@@ -207,14 +207,14 @@ Hai phái dùng chung kho than, mỗi bên giữ nửa quả cân chuẩn. Đệ
 - **1. Cân lại bằng linh thạch của ngươi**
   Ngươi bỏ linh thạch cùng cỡ lên cân làm đối chứng. Hai nửa quả cân ghép lại đã nhẹ hơn trước, đôi bên phải kiểm sổ rồi chia lại than. Ngươi để lại số linh thạch ấy cho tới khi việc đối chứng xong.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Nhận linh thạch để xác nhận cách cân cũ**
   Ngươi lấy linh thạch, ký xác nhận mà không cân lại. Bên bị hụt than phải nhóm lò bằng gỗ ướt, kéo nhau tới đòi xem chữ ký. Phái trả tiền bảo ngươi đã nhận thì tự ra giải thích.
-  - `e`: `{"st":18,"karma":-3}`
+  - `e`: `{"st":18,"deed":"lua_loi"}`
 - **3. Thách {$a.ten} đỡ một kiếm trên đòn cân**
   - `fight`: `{"k":"detu","n":"{$a.ten}","spar":1}`
   - **Thắng trận**: Ngươi gạt được kiếm hắn mà cân vẫn đứng, hai bên chịu dùng quả cân của ngươi.
-    `{"e":{"karma":4}}`
+    `{"e":{"hd":{"p":3},"ng":{"g":3}}}`
   - **Thua trận**: Thua, ngươi phải trả cả phần than văng khỏi đĩa.
     `{"e":{"st":-10}}`
 - **4. Bỏ đi**
@@ -236,10 +236,10 @@ Người sửa hiên định thay thanh tay vịn có khắc lời kêu oan củ
 
 - **1. Tháo thanh gỗ để đưa cho người từng chịu phạt**
   Ngươi bị giữ lại giải trình. Tới khi được thả, họ đã mang thanh gỗ đặt ngay ngưỡng cửa của {$sect}.
-  - `e`: `{"karma":4,"h":24}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":24}`
 - **2. Bán thanh gỗ cho {$a.ten}**
   Ngươi nhận bạc để bỏ qua việc thay gỗ. Lửa nhà bếp bén ở chữ cuối, nơi có nhiều mạt gỗ nhất.
-  - `e`: `{"st":18,"karma":-3,"tamma":2}`
+  - `e`: `{"st":18,"deed":"lua_loi","tamma":2}`
 - **3. Bỏ đi**
   Thợ mộc gói thanh gỗ, chưa đem vào bếp. Hắn hỏi người bên cạnh có biết ai trong số những cái tên ấy còn ở tông môn không.
 
@@ -259,11 +259,11 @@ Phù sư {$a.ten} nhúng cành mận vào nước mài mực để học trò {$
 
 - **1. Mài lại phiến đá cho nét mực dày**
   Ngươi dành một buổi mài lại nghiên, để mực giữ thành nét nổi khi khô. Học trò lần tay đọc được lá phù mình vừa viết. Phù sư bảo hắn thử thêm một tờ, giọng vui hơn hẳn.
-  - `e`: `{"karma":4,"an":["a","cành mận trong chén mài"],"h":12}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","cành mận trong chén mài"],"h":12}`
 - **2. Mua lại bút cũ của {$b.ten}**
   Hắn có bạc đi chữa mắt, còn ngươi lấy được bút từng ăn nhiều linh lực. Cành mận vẫn đặt trong chén, chúc xuống.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":1,"namedRelic":{"k":"but","name":"Bút Cành Mận","lore":"Hắn có bạc đi chữa mắt, còn ngươi lấy được bút từng ăn nhiều linh lực. Cành mận vẫn đặt trong chén, chúc xuống."}}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"namedRelic":{"k":"but","name":"Bút Cành Mận","lore":"Hắn có bạc đi chữa mắt, còn ngươi lấy được bút từng ăn nhiều linh lực. Cành mận vẫn đặt trong chén, chúc xuống."}}`
 - **3. Bỏ đi**
   Hai thầy trò vẫn chậm rãi tập từng nét. Ngươi khép cửa giúp họ để gió khỏi làm xô giấy.
 
@@ -283,10 +283,10 @@ Gió đầu thu thổi ngang hẻm, rồi đột ngột đổi chiều giữa ha
 
 - **1. Xuống hẻm buộc lại dây vào gốc đá**
   Ngươi xuống hẻm buộc dây cầu vào gốc đá. Gió cắt đứt sợi dây kéo phụ, làm ngươi va vào vách, nhưng cầu đã được neo chắc. Leo lên tới bờ, ngươi mới thở ra được.
-  - `e`: `{"karma":4,"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"hp":"-10%"}`
 - **2. Thu luồng gió vào hồ lô**
   Ngươi có khí nhẹ để luyện thân pháp. Cầu mất một nhịp dây, người qua phải đi nghiêng đến hết thu.
-  - `e`: `{"tv":4,"karma":-3}`
+  - `e`: `{"tv":4,"hd":{"t":3},"ng":{"b":1}}`
 - **3. Bỏ đi**
   Ngươi chọn đường vòng tránh hẻm. Người kéo cầu đóng lối cũ, gọi mọi người chờ gió lặng rồi mới qua.
 
@@ -306,10 +306,10 @@ Dư khí từ kiếm đường đọng trong rãnh nước, giữ cá con đứn
 
 - **1. Đục rãnh vòng qua kiếm đường**
   Ngươi đục lối nước vòng qua nơi dư khí đọng lại, làm hết buổi còn bị kiếm khí cứa tay. Cá vừa vào dòng mới đã bơi đi. Nông phu xin tông môn từ nay xả nước sau giờ luyện, ngươi nhận giúp chuyển lời.
-  - `e`: `{"karma":4,"h":12,"an":["a","mắt cá trong rãnh kiếm"],"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":12,"an":["a","mắt cá trong rãnh kiếm"],"hp":"-10%"}`
 - **2. Luyện kiếm bằng luồng dư khí**
   Kiếm ngươi bén thêm, cá chết hết trước khi mặt trời lặn. {$a.ten} chôn chúng dưới gốc mạ mới cấy.
-  - `e`: `{"tv":5,"karma":-4,"tamma":3}`
+  - `e`: `{"tv":5,"deed":"giet_thu_vo_hai","tamma":3}`
 - **3. Bỏ đi**
   Lão đặt gáo nghiêng để cá còn nhìn thấy nước.
 
@@ -329,7 +329,7 @@ Linh quy {$a.ten} ngủ trên bản vẽ của đệ tử {$b.ten}. Hắn chép 
 
 - **1. Dụ rùa đi bằng rau non**
   Ngươi hái rau non dẫn rùa khỏi giấy, đệ tử vội chép nốt cửa trận. Nó ăn xong lại nằm vào giữa. Hắn thở dài: “Mai ta phải trải hai tờ, cho nó riêng một tờ.”
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua bản trận dựng nhầm**
   Ngươi có một trận giữ chân khá chắc. Khi thử thu trận, ngươi phải bước ra trước rồi mới cúi xuống nhặt đồ.
   - `cost`: `{"st":13}`
@@ -353,10 +353,10 @@ Linh quy {$a.ten} ngủ trên bản vẽ của đệ tử {$b.ten}. Hắn chép 
 
 - **1. Xin nhận ca trực bằng tên ngươi**
   Ngươi xin ghi tên nhận ca trực thay, để hắn kịp xuống núi. Trở về, hắn cảm tạ rồi đứng cạnh ngươi tới hết ca, kể cha đã tỉnh được một lúc để nhận ra mình.
-  - `e`: `{"karma":4,"h":12,"an":["a","sổ trực sau ba tiếng mõ"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":12,"an":["a","sổ trực sau ba tiếng mõ"]}`
 - **2. Ký tên hắn và giữ tiền cảm tạ**
   Hắn kịp đi. Khi bút tích lộ ra, hắn nhận cả lỗi, còn chữ giả vẫn đen hơn mọi chữ khác trong sổ.
-  - `e`: `{"st":10,"karma":-2}`
+  - `e`: `{"st":10,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Ngươi khuyên hắn trình thẳng việc nhà với người kiểm trực. Hắn cầm đơn đi tới bàn; ngươi không biết có được cho phép hay không.
 
@@ -376,14 +376,14 @@ Thiếu chủ {$a.ten} đem thiệp hôn ra xé trước khi cô gái {$b.ten} b
 
 - **1. Đọc nốt nửa thiệp trước mặt trưởng lão {$c.ten}**
   Nhà hắn phải nhận lại món nợ. {$b.ten} tự xé nửa thiệp của mình, giữ riêng mảnh ghi ngày trả.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua lại khoản nợ đan dược của nhà hắn**
   Ngươi trả tiền cho chủ nợ để nhận giấy nợ của nhà thiếu chủ, kiểm đủ dấu trước mặt trưởng lão. Cô gái xin lại phần thiệp mang tên mình, tuyên bố từ nay việc nợ nần của nhà hắn không liên quan tới nàng.
   - `cost`: `{"st":13}`
   - `e`: `{"st":25}`
 - **3. Hộ tống nàng rời sân**
   Ngươi hộ tống nàng xuống núi, lỡ buổi thỉnh giảng. Đi được một đoạn, nàng tự gấp thiệp cất đi: “Đạo hữu đưa tới đây được rồi. Đường sau ta tự đi.”
-  - `e`: `{"karma":4,"h":12,"an":["a","vết cắt trên thiệp hôn"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":12,"an":["a","vết cắt trên thiệp hôn"]}`
 - **4. Bỏ đi**
   {$a.ten} giẫm lên tờ thiệp đã xé. Một góc giấy dính dưới đế giày hắn.
 
@@ -403,11 +403,11 @@ Thợ trát vôi lên vết nứt rồi giăng vải che lễ mở cổng. Thợ
 
 - **1. Yêu cầu dừng lễ và cạo vôi kiểm tra**
   Ngươi buộc người coi lễ cho thợ cạo lớp vôi. Vết nứt chạy sâu vào chân cổng, phải gia cố ngay. Dù bị gạt khỏi hàng khách vì làm chậm lễ, ngươi thấy đoàn người đã được chuyển sang lối an toàn.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Dùng linh lực cố vách tới hết lễ**
   Ngươi kiệt sức và được trả công. Sau khi người cuối cùng qua, trên vôi xuất hiện lại một đường chân tóc.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"st":12,"karma":2}`
+  - `e`: `{"st":12,"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Một nắm vôi rơi xuống trước đám rước, tròn như vừa được bóp.
 
@@ -428,11 +428,11 @@ Thợ vá {$a.ten} vá phù hộ thân cũ bằng chỉ tơ. Đệ tử {$b.ten}
 - **1. Mua chỉ tơ linh giúp vá phù**
   Ngươi mua đúng loại tơ dẫn linh lực. Thợ vá lần theo nét phù cũ, giữ được thêm một lần hộ thân cho người mang. Đệ tử hỏi kỹ cách bảo quản rồi mới cất vào ngực.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":4,"an":["a","đường kim qua phù rách"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","đường kim qua phù rách"]}`
 - **2. Mua lại phù để lấy phần giấy còn tốt**
   {$b.ten} dùng tiền mua thuốc. Đường chỉ cắt ra, hắn xin giữ rồi quấn quanh cổ tay.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":1,"pill":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"pill":1}`
 - **3. Bỏ đi**
   Ngươi nhường chỗ cho người tới nhận đồ. Người thợ vẫn cặm cụi vá, đệ tử ngồi bên kể chuyện mẹ mình đã giữ lá phù bao năm.
 
@@ -452,7 +452,7 @@ Thợ vá {$a.ten} vá phù hộ thân cũ bằng chỉ tơ. Đệ tử {$b.ten}
 
 - **1. Giúp lão kê phiến đá rồi tiễn xuống**
   Ngươi giúp lão kê lại phiến đá, lỡ giờ nghe giảng. Lão dẫm thử cho chắc rồi từ biệt sơn môn: “Ở đây mấy chục năm, ít ra cũng để lại được một bậc lành.”
-  - `e`: `{"karma":4,"an":["a","bậc trên cùng thiếu một phiến"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","bậc trên cùng thiếu một phiến"]}`
 - **2. Xin bản chú giải và nhận giúp việc kê đá**
   Lão trao ngươi trang kinh đã chép, nhờ ngươi học xong nhớ chuyển cho người cần. Ngươi nhận phiến đá, để lại cạnh bậc lỏng chờ người tới giúp kê.
   - `e`: `{"tv":5,"h":6}`
@@ -475,9 +475,9 @@ Người giữ mái {$a.ten} căng dây hong găng sang mái đối diện. Ngư
 
 - **1. Trông mái để hai người xuống uống trà**
   Ngươi nhận trông mái hết cơn mưa cho họ xuống uống trà. Trở lên, hai người mang thêm cho ngươi một ấm nóng, đứng kể chuyện sửa mái tới khi trời tạnh.
-  - `e`: `{"karma":4,"an":["a","sợi dây giữa hai mái"],"h":6}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","sợi dây giữa hai mái"],"h":6}`
 - **2. Tháo dây lấy sợi tơ chống sét**
   Ngươi có tơ luyện phù, hai đôi găng rơi vào hai sân khác nhau. Mãi tối họ mới tìm được chiếc thiếu ngón.
-  - `e`: `{"pill":1,"karma":-2}`
+  - `e`: `{"pill":1,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Gió thổi hai chiếc găng sát vào nhau. Cái ngón nguyên chui qua chỗ cái kia đã rách.

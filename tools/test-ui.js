@@ -300,7 +300,7 @@ const TESTS = {
   },
   // Đ5.2: hộp Mưu sinh có việc của nghề hợp mùa; bảng nhân vật có thẻ Đạo đồ
   async nghe(p) {
-    await ev(p, () => {ngEvent=()=>false;let k=0;while(seasonOf(W().t)!=='xuan'&&k++<400)W().t+=HD;const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;G.run.lamNgay=null;G.run.paths={};UI.panel=null;UI.modal=null;openPlace(n.id);ACT.pact('muusinh');render();});
+    await ev(p, () => {G._ngNoEv=1;let k=0;while(seasonOf(W().t)!=='xuan'&&k++<400)W().t+=HD;const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;G.run.lamNgay=null;G.run.paths={};UI.panel=null;UI.modal=null;openPlace(n.id);ACT.pact('muusinh');render();});
     await p.waitForTimeout(150);
     const t = await ev(p, () => (document.querySelector('.mmsinh')||{}).innerText||'');
     ok(/Gieo mạ · Nông dân/.test(t), 'Mưu sinh có việc Gieo mạ của nghề nông');

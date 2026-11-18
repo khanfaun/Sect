@@ -21,7 +21,7 @@ Chiếc cân ở trạm nghiêng mỗi khi ngươi định bước. Người tr�
   - `e`: `{"tv":5,"tam":1}`
 - **2. Ép cân bằng bằng thần niệm**
   Ngươi có một bước vượt xa. Khi dừng lại, bụi từ bước đầu mới theo tới và phủ lên mu bàn chân.
-  - `e`: `{"tv":3,"karma":-1}`
+  - `e`: `{"tv":3,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Ngươi đi tiếp, không đợi cân đứng yên. Người trông trạm cũng xách hành trang lên, nói đứng mãi ở đây chưa chắc hiểu thêm.
 
@@ -42,11 +42,11 @@ Tu sĩ {$a.ten} treo áo mỗi lần có gió, vì người từng mặc đã h�
 - **1. Dùng thần niệm hứng giọt nước cuối**
   Ngươi dùng thần niệm hứng giọt nước cuối khỏi vạt áo. Áo khô, lão sờ thử rồi gấp lại, nói lần này sẽ tự đi tìm người đã hẹn. Ngươi hao khí giữ giọt nước tới khi nó tan, rồi chúc lão thuận đường.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","tấm áo cũ qua năm trăm mùa"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","tấm áo cũ qua năm trăm mùa"]}`
 - **2. Mua vạt áo ướt để giữ một khoảnh khắc**
   Ngươi có vật luyện phép trì hoãn. {$a.ten} gấp nửa áo còn lại, lúc gấp vẫn chừa phần vạt đã bán.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":-2,"namedMat":"story_mat_tam_ao_cu_qua_nam_tram_mua"}`
+  - `e`: `{"deed":"lua_loi","namedMat":"story_mat_tam_ao_cu_qua_nam_tram_mua"}`
 - **3. Bỏ đi**
   Lão dịch móc áo sang phía có gió. Chỗ móc cũ chưa kịp khô.
 
@@ -66,7 +66,7 @@ Tu sĩ {$a.ten} treo áo mỗi lần có gió, vì người từng mặc đã h�
 
 - **1. Để lại một lời chào của chính mình**
   Ngươi để lại một lời chào, giọng khàn đi sau khi rút thần niệm khỏi bình. Một khách mới bước vào, nghe tiếng ngươi thì ngẩng đầu đáp lễ. Người giữ trạm kê thêm ghế, mời cả hai uống trà.
-  - `e`: `{"karma":4,"an":["a","lời chào đứng lại ngoài cửa"],"tam":1}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","lời chào đứng lại ngoài cửa"],"tam":1}`
 - **2. Mua một lời chào để gửi về {$que}**
   Một tiếng người về được tới quê. Lúc mở, {$a.ten} đưa ngươi cái bình còn vương hơi trà.
   - `cost`: `{"st":22}`
@@ -91,10 +91,10 @@ Dải sáng sà thấp, người bên dưới già đi mỗi khi ánh lướt qu
 - **1. Dùng pháp lực giữ thiên quang cho thợ đóng lại ghim**
   Ngươi ép dải sáng đứng yên, để người đóng ghim tìm và lắp lại mũ chốt. Khi nàng ra hiệu đã chắc, ngươi mới thu tay, hao gần hết phần khí đang dưỡng. Dân dưới bãi được rời đi trước khi ánh sáng lại quét qua.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","một đêm giữ nền trời"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","một đêm giữ nền trời"]}`
 - **2. Hứng thiên quang rồi gọi người lùi về bóng tối**
   Ngươi dưỡng được phần linh lực lớn. {$a.ten} cắt bỏ lọn tóc bạc trước khi đội mũ.
-  - `e`: `{"tv":4,"karma":-3}`
+  - `e`: `{"tv":4,"hd":{"t":3},"ng":{"b":1}}`
 - **3. Bỏ đi**
   Bãi tối đi khi dải sáng dịch qua, người cuối cùng đưa tay sờ lại gáy.
 
@@ -114,10 +114,10 @@ Tu sĩ {$a.ten} tự nhận bức tượng trong điện dựng theo dáng cha m
 
 - **1. Gọi người làm mẫu {$b.ten} tới nhận tiền còn thiếu**
   Ngươi mời người làm mẫu tới đối lại tiền công và nét khắc dưới bệ. Tu sĩ hết đường nhận tượng là cha mình, người coi điện cũng phải trả khoản còn thiếu. Thợ xin ghi đúng tên người làm mẫu trước rồi mới khắc lời ca tụng.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Đổi im lặng lấy chỗ khắc tên ngươi**
   Ngươi có một hàng công đức sáng. Bên dưới bệ, tờ giấy thuê người vẫn bị một cái gót đá đè lên.
-  - `e`: `{"karma":-3,"van":1}`
+  - `e`: `{"deed":"lua_loi","van":1}`
 - **3. Bỏ đi**
   Thợ khắc ghi thêm chữ “tương truyền”. {$a.ten} ngồi đợi lão mài lại đục.
 
@@ -138,10 +138,10 @@ Nữ tu {$a.ten} đón nước mưa đang rơi ngược để giữ lời hẹn 
 - **1. Dùng thần niệm giữ một giọt mưa nối hai tầng đường**
   Ngươi giữ giọt mưa đứng lại giữa hai tầng, hao khí cho tới khi người phía dưới hiện rõ. Họ chạm được tay qua giọt nước, nói xong lời hẹn gặp. Nàng tự thu tay trước khi ngươi không giữ nổi nữa.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","mưa rơi ngược trong lòng bàn tay"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","mưa rơi ngược trong lòng bàn tay"]}`
 - **2. Lấy giọt mưa luyện pháp khí nghịch lưu**
   Nàng nhận linh thạch rồi rời mái. Về sau, chiếc nhẫn khắc hình ngón tay nhỏ luôn quay mặt khắc vào trong.
-  - `e`: `{"karma":-3,"namedRelic":{"k":"nhan","name":"Nhẫn Giọt Mưa","lore":"Nàng nhận linh thạch rồi rời mái. Về sau, chiếc nhẫn khắc hình ngón tay nhỏ luôn quay mặt khắc vào trong."}}`
+  - `e`: `{"deed":"lua_loi","namedRelic":{"k":"nhan","name":"Nhẫn Giọt Mưa","lore":"Nàng nhận linh thạch rồi rời mái. Về sau, chiếc nhẫn khắc hình ngón tay nhỏ luôn quay mặt khắc vào trong."}}`
 - **3. Bỏ đi**
   Mưa ngừng từ dưới lên. Nàng vẫn giữ hai tay khép hờ.
 
@@ -161,7 +161,7 @@ Thiên ma {$a.ten} đã học được dáng người, đang tập đội bình 
 
 - **1. Dạy hắn đỡ đáy bình bằng một tay**
   Ngươi chỉ hắn giữ bình bằng một tay, cúi vừa đủ rồi đứng thẳng. Hắn qua được trạm, sung sướng định cúi tạ ơn lần nữa. Ngươi kịp nhắc hắn đặt bình xuống trước.
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **2. Mua cái bình biết cúi**
   Nó giữ được thần niệm tản ra. Lúc ngươi giận, nó cúi chào người đứng gần nhất.
   - `cost`: `{"st":22}`
@@ -186,12 +186,12 @@ Bóng ngươi chậm một nhịp, còn bóng của người trước ngươi đ
 - **1. Giao đấu với {$a.ten} bằng vật giữ thần**
   - `fight`: `{"k":"thienma","n":"{$a.ten}"}`
   - **Thắng trận**: Ngươi lấy lại hai cái bóng và đẩy hắn khỏi đường.
-    `{"e":{"karma":4}}`
+    `{"e":{"hd":{"p":3},"ng":{"g":3}}}`
   - **Thua trận**: Thua, ngươi phải rút lui, cái bóng bước trước ngươi đúng một nhịp.
 - **2. Dùng thần niệm tạo bóng thay thế**
   Ngươi dựng bóng giả, để thiên ma tưởng đã lấy đủ mà thả hai người. Qua khỏi đoạn đường, ngươi mới tán bóng, hao một phần khí giữ thần. Nó nhận ra thì cả hai đã đi xa.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":2,"tamma":-2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"tamma":-2}`
 - **3. Bỏ đi**
   Người đứng trước bước tiếp. Bóng của y còn đợi thêm một bước mới chịu theo.
 
@@ -211,10 +211,10 @@ Tu sĩ {$a.ten} chỉ nhìn thấy {$que} khi đứng ở bậc thấp. Ngươi 
 
 - **1. Đổi phần nhìn của hai người bằng thần niệm**
   Ngươi đổi phần nhìn bằng thần niệm, để mỗi người thấy quê mình một lát. Lão bật cười khi thấy cây trước sân đã lớn hơn mái nhà. Ngươi ngồi lại tới khi phép khép, không ai giục ai nói.
-  - `e`: `{"karma":4,"an":["a","hai bậc nhìn xuống nhà"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","hai bậc nhìn xuống nhà"]}`
 - **2. Ghi cảnh quê lão vào pháp khí để đổi lấy tin đường**
   Ngươi biết một lối ngắn. Lão ôm pháp khí xem, lấy tay che riêng mái nhà đã sập.
-  - `e`: `{"karma":-1,"tv":2}`
+  - `e`: `{"hd":{"t":1},"tv":2}`
 - **3. Bỏ đi**
   Ngươi kể lão nghe mái nhà mình đang thấy, rồi nhờ lão tả lại quê ngươi. Đứng thêm một lúc, hai người cùng xuống thềm.
 
@@ -234,7 +234,7 @@ Tiếng trẻ con lọt qua một ô cửa vừa bằng đồng tiền. Người
 
 - **1. Mở ô bằng một phần thọ nguyên**
   Ngươi đổi một phần thọ nguyên để mở rộng ô cửa. Sau đó chỉ có phòng trống và chiếc nôi lật; tiếng gọi tiếp tục già đi, cho tới khi một người già hỏi con đã về chưa. Ngươi khép cửa, hiểu mình không thể bước vào đúng thời người ấy chờ.
-  - `e`: `{"karma":4,"lifeCut":3,"tamma":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"lifeCut":3,"tamma":-3}`
 - **2. Dùng ô cửa nghe một lời sắp tới**
   Ngươi tránh được một lần sập lối. Sau đó, ở đầu giường ngươi có tiếng một người tập nói.
   - `e`: `{"van":1,"tamma":3}`
@@ -257,11 +257,11 @@ Tiếng trẻ con lọt qua một ô cửa vừa bằng đồng tiền. Người
 
 - **1. Đi lùi để nhường tay vịn đang có cho {$a.ten}**
   Ngươi đi lùi, dẫn phần tay vịn cầu dành cho mình tới chỗ tu sĩ đang ngã. Y bám được, sang bờ rồi cúi đầu cảm tạ. Ngươi phải chờ cầu trở lại, nhưng có thêm một người ngồi đợi cùng.
-  - `e`: `{"karma":4,"h":12,"an":["a","tay vịn đủ một người giữ"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":12,"an":["a","tay vịn đủ một người giữ"]}`
 - **2. Mua lượt để kéo cả hai qua**
   Hai người an toàn, kẻ bán lượt treo thêm bảng ở đầu cầu. {$a.ten} gấp tiền lẻ còn lại vào vạt áo rách.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   {$a.ten} bò tiếp, thẻ lượt vẫn đung đưa ngang đầu.
 
@@ -284,7 +284,7 @@ Cây nhỏ chịu sức nặng của cả mái trời, cuống lá nào cũng co
   - `e`: `{"tv":5}`
 - **2. Cắt cành thẳng để lấy linh mộc**
   Ngươi có đoạn mộc chịu sức ép lớn. Cành bên cạnh cong xuống thêm, {$a.ten} kê giỏ cao hơn.
-  - `e`: `{"karma":-2,"namedMat":"story_mat_cuong_la_ganh_mot_vung_troi"}`
+  - `e`: `{"hd":{"t":1},"namedMat":"story_mat_cuong_la_ganh_mot_vung_troi"}`
 - **3. Bỏ đi**
   Chiếc lá đầu tiên rơi, lão nhấc giỏ lệch sang một chút.
 
@@ -304,7 +304,7 @@ Người giữ bếp {$a.ten} quay lò ngược một vòng, cơm khê trở l�
 
 - **1. Đứng giữ một mốc giờ cho lão**
   Ngươi giữ mốc bằng thần niệm, bảo lão dừng đúng lúc cơm vừa chín. Cả quán được ăn, bát cũng còn nguyên. Lão mời ngươi phần cơm đầu, quyết định từ mai nấu bằng lò thường.
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **2. Mua lò để sửa một món vừa hỏng**
   Món đồ lành lại, kèm theo cái túi ngươi đã dùng bọc nó lần đầu. Cái túi còn một nắm gạo.
   - `cost`: `{"st":22}`
@@ -329,10 +329,10 @@ Một lỗ thủng để ban ngày chảy sang phía đêm. Người coi cổng 
 - **1. Khâu bằng bóng của ngươi**
   Ngươi dẫn bóng mình qua mép thủng, giữ hai phía khép lại cho người coi cổng khâu xong. Thần niệm hao nhiều, bóng dưới chân còn hở một đoạn vai. Lão chỉ ngươi cách dưỡng lại bóng, dặn đừng qua cổng khác trước khi lành.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"tam":1}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tam":1}`
 - **2. Hứng phần ban ngày rỉ ra vào bình**
   Ngươi có ánh dùng trong lúc bế quan. {$a.ten} rút kim, dưới kia có người dập đèn quá sớm.
-  - `e`: `{"tv":4,"karma":-3,"tamma":2}`
+  - `e`: `{"tv":4,"hd":{"t":3},"ng":{"b":1},"tamma":2}`
 - **3. Bỏ đi**
   Lão kéo vạt áo che lỗ, tay áo sáng lên ở đường chỉ.
 
@@ -352,7 +352,7 @@ Người quét sân {$a.ten} quét dấu giày khỏi mặt trăng trước khi 
 
 - **1. Gánh giúp một lượt bụi trăng**
   Ngươi gánh một lượt bụi trăng tới bờ sân, mỗi bước nặng thêm cho tới sáng. Lão mời ngươi ngồi ngắm trăng hạ xuống, kể dấu chân nhỏ là của người con từng chạy chơi ở đây. Hôm nay lão kể mà đã có thể cười.
-  - `e`: `{"karma":4,"an":["a","người quét bụi trên mặt trăng"],"h":12}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","người quét bụi trên mặt trăng"],"h":12}`
 - **2. Mua dấu chân để luyện pháp bước không dấu**
   Ngươi có thêm một phép ẩn bước. Lão vẫn quét vòng qua chỗ ấy, dù nền đã sạch.
   - `cost`: `{"st":22}`
@@ -376,7 +376,7 @@ Mỗi hạt bụi giữ một tiếng của vật vỡ ra. Người giữ phòng
 
 - **1. Dùng thần niệm nghe từng hạt cùng lão**
   Ngươi cùng lão nghe từng hạt bụi tới tê tai. Tìm được tiếng chén vỡ, cả hai còn nghe tiếng mẹ lão mắng vì chân trần chạy vào nhặt. Lão cười rất lâu rồi xin giữ riêng hạt ấy, không tìm nữa.
-  - `e`: `{"karma":4,"an":["a","hạt bụi có tiếng vỡ"],"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","hạt bụi có tiếng vỡ"],"hp":"-10%"}`
 - **2. Gom cả vỉ làm pháp khí phá âm**
   Ngươi có vật chặn một tiếng lớn. Đêm ấy, bên trong nó có một tiếng cười theo sau tiếng chén rơi.
   - `e`: `{"tamma":3,"namedRelic":{"k":"linh","name":"Chuông Chặn Âm","lore":"Ngươi có vật chặn một tiếng lớn. Đêm ấy, bên trong nó có một tiếng cười theo sau tiếng chén rơi."}}`
@@ -400,7 +400,7 @@ Một thanh kiếm dựng đứng, mỗi lần ngươi nhớ tới người mìn
 - **1. Đấu với kiếm ảnh do cơn giận của ngươi sinh ra**
   - `fight`: `{"k":"kiemlinh","n":"Kiếm ảnh của cơn giận"}`
   - **Thắng trận**: Ngươi ghìm được mũi kiếm trước khi nó tìm người kia.
-    `{"e":{"karma":4}}`
+    `{"e":{"hd":{"p":3},"ng":{"g":3}}}`
   - **Thua trận**: Thua, thần thức rách một đường, ngươi lùi khỏi sân với vị sắt trong miệng.
 - **2. Hạ một vỏ xuống và đợi cơn giận nguội**
   Ngươi hạ vỏ kiếm, ngồi chờ tới khi nghĩ được chuyện khác ngoài người mình giận. Kiếm vào vỏ, cơ hội luyện kiếm khí cũng qua. Người thu kiếm hỏi ngươi có tiếc không; ngươi nhận kiếm rồi lên đường.
@@ -424,10 +424,10 @@ Tu sĩ {$a.ten} đi dưới ô với tu sĩ {$b.ten}, hai cái bóng theo hai ch
 
 - **1. Chia bớt một phần thọ nguyên để giữ ô thẳng**
   Ngươi chia một phần thọ nguyên để hai luồng sáng dưới ô cân lại. Hai người đi cùng tốc độ được một đoạn, vui vẻ cảm tạ ngươi. Tới ngã rẽ, họ tự chọn đường còn có thể đi chung, không xin ngươi chia thêm tuổi.
-  - `e`: `{"karma":4,"lifeCut":3,"an":["a","một cái ô có hai cái bóng"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"lifeCut":3,"an":["a","một cái ô có hai cái bóng"]}`
 - **2. Đổi chiếc ô lấy đường tắt**
   Họ dùng đường tắt rời tầng sáng. Chiếc ô của ngươi từ đó chỉ che được một bên vai.
-  - `e`: `{"karma":-1}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Người đi chậm đổi tay giữ cán. Một cái bóng vẫn dừng lại đợi.
 
@@ -448,10 +448,10 @@ Bộ giáp ngăn cả gió hư không lẫn tiếng động, người mặc lâu
 - **1. Dùng linh lực giúp thợ đặt vòng chắn gió quanh khe**
   Ngươi giữ linh lực cho thợ khắc một vòng chắn gió riêng, để khe vẫn truyền tiếng tim. Tu sĩ mặc thử, nghe được nhịp mình mà không còn gió lọt. Hắn hỏi kỹ cách bảo dưỡng rồi mới nhận giáp.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","áo giáp chừa lỗ nghe tim"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","áo giáp chừa lỗ nghe tim"]}`
 - **2. Bịt lỗ và lấy công rèn**
   Ngươi giúp bịt khe, nhận công rèn. Giáp kín, nhưng tu sĩ phải tự dừng lại kiểm mạch sau mỗi đoạn đường dài. Hắn nghe ngươi dặn hết rồi mới rời xưởng.
-  - `e`: `{"st":24,"karma":-1}`
+  - `e`: `{"st":24,"hd":{"t":1}}`
 - **3. Bỏ đi**
   {$a.ten} đặt miếng bịt vào lỗ. Tới lúc người mặc hít vào mới nhấc ra.
 
@@ -471,9 +471,9 @@ Bản đồ cổ lộ mỏng dần ở nơi ít người quay lại. Người ca
 
 - **1. Đi ngược đường đặt lại dấu chân**
   Ngươi quay lại trạm cũ, chậm mất một lượt mở đường lên. Có người thấy dấu chân mới cũng ghé vào nghỉ, nét bản đồ dày trở lại. Người coi trạm hỏi ngươi có ở lâu không, ngươi bảo đủ một ấm trà.
-  - `e`: `{"karma":4,"h":24}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":24}`
 - **2. Cắt phần giấy sắp rách làm phù qua đường**
   Ngươi mở được một lối đi nhanh. Chỗ từng là trạm nghỉ chỉ còn hai vòng bát, dính sát vào nhau.
-  - `e`: `{"karma":-3,"pill":1}`
+  - `e`: `{"hd":{"t":3},"ng":{"b":1},"pill":1}`
 - **3. Bỏ đi**
   {$a.ten} ép một đồng xuống mép giấy. Gió thổi, đồng tiền không nhúc nhích, còn một bát đã mờ.

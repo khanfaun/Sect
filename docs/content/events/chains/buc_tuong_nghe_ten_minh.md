@@ -21,7 +21,7 @@ Vách đá đáp lại tên người vừa đi qua bằng giọng của chính h
   - `e`: `{"tv":3,"tamma":-4}`
 - **2. Gọi tên {$a.ten} trước**
   Vách nín một lúc rồi bật ra tên khác. Lão bấu tay lên chỗ chưa khắc.
-  - `e`: `{"karma":-1,"tamma":2}`
+  - `e`: `{"hd":{"t":1},"tamma":2}`
 - **3. Bỏ đi**
   Ngươi không thử gọi tên. Vừa quay đi, ngươi nghe tiếng mình từ trong đá hỏi tại sao không dám.
 
@@ -53,7 +53,7 @@ Người khắc tên {$a.ten} đổ mạt đá thành một khuôn miệng. Khu�
 
 - **1. Nói nốt câu mà ngày ấy ngươi đã nuốt**
   Ngươi nói trọn điều ngày trước không dám nhận. Khuôn miệng vỡ, Nguyên Anh đau nhói khiến ngươi phải dưỡng một đêm. Người khắc tên không hỏi chuyện ấy; lão chỉ lấy nước cho ngươi.
-  - `e`: `{"karma":4,"an":["a","vết đục hình miệng"],"hp":"-15%","tamma":-6}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","vết đục hình miệng"],"hp":"-15%","tamma":-6}`
 - **2. Mua khuôn để cất câu cũ**
   Từ nay ngươi nói dễ hơn. Đến lúc im lặng, trong tay áo mới bắt đầu có tiếng.
   - `cost`: `{"st":19}`
@@ -91,11 +91,11 @@ Người khắc tên {$a.ten} thú nhận lão lấy tên một người đã ch
 
 - **1. Giữ tay lão và đòi nghe tên thật**
   Ngươi giữ tay lão, nghe lão đọc tên thật và lý do phải trốn. Ngươi không nhận giữ kín thay lão, chỉ nhắc tên người chết phải trả lại. Lão bỏ đục xuống, lần đầu đọc được trọn tên trên bia.
-  - `e`: `{"karma":4,"an":["a","tên bị mài mất nửa"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","tên bị mài mất nửa"]}`
 - **2. Mua cái tên đã lấy để qua cổng vực**
   Ngươi có tên dùng một lần. Lão chỉ ngươi chỗ khắc, để tránh đục lên nửa chữ cũ.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":-2}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Mưa phủ lên bia. Nửa chữ đọc được đổi màu trước.
 
@@ -129,10 +129,10 @@ Cầu gọi người đi qua bằng những tên họ từng bỏ lại. Nếu n
 
 - **1. Đọc tên đang mang và dìu lão qua**
   Ngươi đọc rõ tên đang mang, dìu lão qua từng bước. Dây cầu siết cổ tay tới bật máu rồi lỏng ra. Sang bờ, ngươi bảo lão tự gọi lại tên mình; lần này tiếng đáp từ hẻm không đổi thành tên người khác.
-  - `e`: `{"karma":4,"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"hp":"-10%"}`
 - **2. Cắt một sợi dây có tiếng vọng**
   Ngươi mang được một đoạn dây luyện phù. Những người sau phải bò qua cầu, tai sát mặt ván.
-  - `e`: `{"karma":-4,"namedMat":"story_mat_buc_tuong_nghe_ten_minh_3"}`
+  - `e`: `{"hd":{"t":3},"ng":{"b":1},"namedMat":"story_mat_buc_tuong_nghe_ten_minh_3"}`
 - **3. Bỏ đi**
   Tiếng gọi theo đến đầu cầu, rồi gọi tiếp một người chưa tới.
 
@@ -173,7 +173,7 @@ Nếu lão tự đọc tên, lão mở chỗ khắc bài vị cho người khôn
 
 - **1. Nói lại lời cũ hoặc khắc lại nửa tên đã mất**
   Ngươi phải nghe trọn lời cũ trước khi đặt đục xuống. Lão chừa khoảng trống đúng chỗ chữ vừa khép.
-  - `e`: `{"karma":4,"tamma":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tamma":-3}`
 - **2. Xin giữ một phiến đá chưa có tên**
   Ngươi có vật giữ lời tự nhắc. Khi cầm lên, mặt đá ấm ngang miệng.
   - `e`: `{"tam":1}`

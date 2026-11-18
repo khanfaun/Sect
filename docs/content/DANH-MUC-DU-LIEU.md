@@ -1,6 +1,6 @@
 # Danh mục dữ liệu viết sẵn
 
-Các số đã được đọc từ nguồn chuẩn; hiệu ứng thực tế còn chịu luật phẩm/cảnh giới và trang bị đang hoạt động. Có 1925 mục có ID. Không tính tiền tố/tên ghép là vật phẩm riêng.
+Các số đã được đọc từ nguồn chuẩn; hiệu ứng thực tế còn chịu luật phẩm/cảnh giới và trang bị đang hoạt động. Có 1943 mục có ID. Không tính tiền tố/tên ghép là vật phẩm riêng.
 
 ## relics
 
@@ -614,6 +614,6 @@ Nguồn: `content/catalog/origins.json`. Số mục: 30.
 
 ## qitems
 
-Nguồn: `content/catalog/qitems.json`. Số mục: 86.
+Nguồn: `content/catalog/qitems.json`. Số mục: 104.
 
 [Đọc đầy đủ từng mục](catalog/qitems.md).

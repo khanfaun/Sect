@@ -19,10 +19,10 @@ Người giữ lò {$a.ten} trò chuyện với oán hồn {$b.ten} qua tấm r�
 - **1. Cho họ mượn phù giữ hơi lạnh**
   Ngươi dùng phù của nhà lò dẫn hơi lạnh qua rèm, hao linh lực giữ nó tới khi hai người nói hết câu. Nàng thôi ho một lúc, hỏi lão có chịu nghỉ lò sớm được một hôm không.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","hai tiếng ho qua rèm"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","hai tiếng ho qua rèm"]}`
 - **2. Thu tiếng ho để bán làm mồi dẫn hồn**
   Ngươi có vật luyện phù. {$a.ten} kéo ghế lại sát rèm, dỏng tai nghe khoảng trống.
-  - `e`: `{"karma":-3,"pill":1,"tamma":3}`
+  - `e`: `{"deed":"lua_loi","pill":1,"tamma":3}`
 - **3. Bỏ đi**
   Nàng ho một tiếng, lão ho lại một tiếng rất khẽ.
 
@@ -55,10 +55,10 @@ Người giữ lò {$a.ten} muốn tắt lửa để đưa nàng ra sân. Lão �
 - **1. Giữ lửa trong đan điền đến khi họ gặp**
   Ngươi thu lửa lò vào khí hải, chịu nóng cho tới khi hai người gặp nhau ngoài sân. Nàng đi chậm, lão cũng đi chậm theo. Hết buổi, họ tự quay lại, không để ngươi phải gọi.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","lò tắt trước giờ hẹn"],"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","lò tắt trước giờ hẹn"],"hp":"-10%"}`
 - **2. Nhận củi tốt, giúp họ dọn một chỗ nghỉ dưới hiên**
   Ngươi nhận phần củi lão trả công, lấy linh lực ép lại thành một viên hỏa đan mang đi. Chỗ dưới hiên đủ mát để hai người ngồi gần nhau, dù nàng chưa bước được ra sân.
-  - `e`: `{"karma":-2,"pill":1}`
+  - `e`: `{"hd":{"t":1},"pill":1}`
 - **3. Bỏ đi**
   Lão chừa lối đi tới khi củi nguội hẳn.
 
@@ -93,10 +93,10 @@ Tiếng ho bị bán dẫn một đoàn hồn lạc vào lò. Oán hồn {$b.ten
 - **1. Mua lại tiếng ho và trả vào rèm**
   Ngươi trả hơn khoản bán ban đầu để chuộc tiếng ho, đưa về cho nàng. Nàng gọi được tên từng hồn lạc, chỉ họ lối ra khỏi lò. Người giữ lò chờ người cuối đi rồi mới kéo ghế lại.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":4,"an":["a","người gọi nhầm tiếng"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","người gọi nhầm tiếng"]}`
 - **2. Mượn lại tiếng ho để dẫn đoàn hồn tới chỗ nghỉ**
   Ngươi xin mượn vật dẫn hồn, đưa cả đoàn rời lò rồi trả vật cho người mua. Nàng vẫn chưa lấy lại tiếng nói. Người giữ lò mang ghế theo, để nàng có chỗ chờ lúc dừng đường.
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Lão đặt ghế bên đường. Người ngồi xuống đầu tiên quay mặt sai phía.
 
@@ -131,10 +131,10 @@ Oán hồn {$b.ten} đã tìm được đường rời ma vực. Nếu nàng ch�
 - **1. Giữ luồng gió để họ đi cạnh nhau**
   Ngươi dùng pháp lực chắn gió, để lão tiễn nàng tới cuối đoạn đường người sống còn đi được. Hai người tự nói lời từ biệt. Khi nàng đi tiếp, lão đứng nhìn một lúc rồi nhờ ngươi cùng trở lên.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Thu một luồng gió để chữa cơn ho trong hồn**
   Nàng lấy lại hơi đủ nói lời cuối, nhưng phải đi một mình. Lão để ghế trống suốt quãng đường lên.
-  - `e`: `{"karma":-1}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Ngươi nghe một tiếng ho lẫn trong gió, lần này rất xa.
 
@@ -176,7 +176,7 @@ Nếu lão đã tiễn nàng, lão đặt ghế nhìn ra đường. Nếu nàng 
 - **1. Góp lửa cho quán đón cả người sống lẫn hồn**
   Ngươi để lại một phần khí dưỡng thần. Lão đặt hai cái chén ở hai đầu ghế.
   - `cost`: `{"st":19,"mp":"20%"}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua tấm rèm cũ để giữ hơi của hồn**
   Ngươi luyện được một vật che dương khí. Lão treo rèm mới, ngang chỗ cũ còn một vệt tro.
   - `cost`: `{"st":19}`

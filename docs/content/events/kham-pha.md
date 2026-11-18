@@ -56,7 +56,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Đợi cả hai kiệt sức rồi ra tay**
   - `chk`: `["tp",11]`
   - **Thành công**: Lúc cả hai cùng thở dốc, ngươi lao ra chộp lấy hộp ngọc rồi độn thổ. Sau lưng là tiếng chửi rủa vang trời.
-    `{"e":{"relic":0,"karma":-3,"oan":["a","cướp bảo vật trước mắt"]}}`
+    `{"e":{"relic":0,"hd":{"t":3},"ng":{"b":1},"oan":["a","cướp bảo vật trước mắt"]}}`
   - **Thất bại**: Cả hai đều quay lại nhìn ngươi. Có lẽ đó là lần duy nhất họ đồng lòng.
     `{"fight":{"k":"tantu","m":1.2},"win":{"t":"Ngươi đánh lui cả hai. Bảo vật về tay ngươi, dù cái giá không nhỏ.","e":{"relic":0}}}`
 - **2. Giúp {$a.ten}**
@@ -106,7 +106,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **3. Vạch trần đồ giả**
   - `chk`: `["ngo",10]`
   - **Thành công**: Ngươi chỉ ra từng vết keo dán. Đám đông cười ồ, gã phải bồi thường cho mấy người bị lừa trước đó, lại dúi cho ngươi chút tiền để im miệng.
-    `{"e":{"st":15,"karma":2}}`
+    `{"e":{"st":15,"hd":{"p":1},"ng":{"g":1}}}`
   - **Thất bại**: Ngươi nói sai. Món đó là thật. Cả chợ cười ngươi.
     `{"e":{"tamma":2}}`
 - **4. Cáo từ, tiếp tục lên đường**
@@ -141,12 +141,12 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Cứu và nuôi nó**
   Ngươi ôm nó lên, lau sạch bùn đất, băng chỗ bị thương. Con thú nhỏ liếm tay ngươi rồi chui vào ngực áo, từ đó không chịu rời.
   - `req`: `{"$hook":"thu_con_c_0_req"}`
-  - `e`: `{"petNew":"holy","karma":4}`
+  - `e`: `{"petNew":"holy","deed":"phong_sinh"}`
 - **2. Lấy yêu đan**
   Ngươi xuống tay dứt khoát. Yêu đan nhỏ như hạt đậu, vẫn còn ấm.
-  - `e`: `{"tv":6,"karma":-5,"tamma":3}`
+  - `e`: `{"tv":6,"deed":"giet_thu_vo_hai","tamma":3}`
 - **3. Đưa về hang**
-  - **Khả năng 1**: Ngươi đặt nó trước cửa hang. Một con thú lớn hiện ra, nhìn ngươi rất lâu, rồi đẩy ra một viên ngọc sáng. `{"w":2,"e":{"relic":0,"karma":4}}`
+  - **Khả năng 1**: Ngươi đặt nó trước cửa hang. Một con thú lớn hiện ra, nhìn ngươi rất lâu, rồi đẩy ra một viên ngọc sáng. `{"w":2,"e":{"relic":0,"deed":"phong_sinh"}}`
   - **Khả năng 2**: Thú mẹ tưởng ngươi bắt con nó, gầm lên lao tới! `{"w":1,"fight":{"k":"beast"},"win":{"t":"Ngươi đánh lui thú mẹ. Hai mẹ con chạy vào rừng sâu. Ngươi đứng đó, không biết nên vui hay buồn.","e":{"tv":3}}}`
 - **4. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
@@ -209,7 +209,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
   - `e`: `{"st":18,"h":36}`
 - **3. Đập bia lấy linh thạch bên trong**
   Bia vỡ. Trong lõi đá quả có linh thạch, nhưng ngươi có cảm giác vừa làm một chuyện không nên làm.
-  - `e`: `{"st":35,"karma":-4}`
+  - `e`: `{"st":35,"deed":"dao_mo"}`
 - **4. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -339,13 +339,13 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Uống rượu, nghỉ đêm**
   - `chk`: `["ngo",10]`
   - **Thành công**: Rượu có mùi lạ. Ngươi vờ uống, đợi nửa đêm cả bọn mò vào thì…
-    `{"fight":{"k":"sontac","n":"Chủ quán đen"},"win":{"t":"Hắc điếm bị dẹp. Dưới hầm có cả đống đồ của khách bị hại.","e":{"st":30,"karma":4,"pill":1}}}`
+    `{"fight":{"k":"sontac","n":"Chủ quán đen"},"win":{"t":"Hắc điếm bị dẹp. Dưới hầm có cả đống đồ của khách bị hại.","e":{"st":30,"deed":"giet_cuop_dang_ac","pill":1}}}`
   - **Thất bại**: Tỉnh dậy, ngươi nằm ngoài bãi tha ma, túi trữ vật nhẹ bẫng, đầu đau như búa bổ.
     `{"e":{"st":"-30%","hp":"-10%"}}`
 - **2. Ra tay trước**
   - `fight`: `{"k":"sontac","n":"Chủ quán đen"}`
   - **Thắng trận**: Ngươi đoán không sai. Dưới hầm toàn xương người. Ngươi phóng hỏa đốt quán, mang theo số tiền chúng cướp được.
-    `{"e":{"st":28,"karma":3}}`
+    `{"e":{"st":28,"deed":"giet_cuop_dang_ac"}}`
 - **3. Ngủ ngoài trời**
   Ngươi gác kiếm ngủ dưới gốc cây. Nửa đêm nghe tiếng bước chân lảng vảng, rồi xa dần.
   - `e`: `{"hp":"15%"}`
@@ -400,7 +400,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Bóc cáo thị**
   - `fight`: `{"k":"matu","n":"{$a.ten}","m":1.15}`
   - **Thắng trận**: Ngươi mang đầu {$a.ten} về phủ nha. Quan phủ thưởng linh thạch theo lệ, dân chúng đốt pháo mừng.
-    `{"e":{"st":45,"karma":5,"tv":4}}`
+    `{"e":{"st":45,"deed":"giet_cuop_dang_ac","tv":4}}`
 - **2. Không phải việc của ta**
   Ngươi đi qua. Phía sau có người thở dài: “Lại một tu sĩ chẳng quan tâm.”
 
@@ -472,8 +472,8 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 
 - **1. Cho tiền mua đồ ăn**
   - `cost`: `{"st":8}`
-  - **Khả năng 1**: {$a.hn} ăn ngấu nghiến, xong chùi tay vào áo, móc từ trong ngực ra một cuốn sách nhàu nát: “Giấy lau tay, cho ngươi.” Ngươi lật vài trang, tay run lên. `{"w":2,"e":{"skill":1,"karma":3}}`
-  - **Khả năng 2**: {$a.hn} cảm tạ rối rít, chúc ngươi sống lâu. Chỉ vậy thôi. Nhưng ngươi thấy vui. `{"w":3,"e":{"karma":4,"van":1}}`
+  - **Khả năng 1**: {$a.hn} ăn ngấu nghiến, xong chùi tay vào áo, móc từ trong ngực ra một cuốn sách nhàu nát: “Giấy lau tay, cho ngươi.” Ngươi lật vài trang, tay run lên. `{"w":2,"e":{"skill":1,"deed":"bo_thi"}}`
+  - **Khả năng 2**: {$a.hn} cảm tạ rối rít, chúc ngươi sống lâu. Chỉ vậy thôi. Nhưng ngươi thấy vui. `{"w":3,"e":{"deed":"bo_thi","van":1}}`
 - **2. Mời rượu, ngồi nói chuyện**
   Hai người uống tới khuya. {$a.hn} kể chuyện trên trời dưới đất, có mấy câu nghe như khẩu quyết. Sáng ra, {$a.hn} biến mất.
   - `cost`: `{"st":12}`
@@ -510,11 +510,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Cho linh thạch**
   Ngươi đặt linh thạch vào tay đứa trẻ. {$a.hn} sững sờ, rồi òa khóc, rồi chạy biến đi. Ngươi không biết nó có mua được thuốc không.
   - `cost`: `{"st":12}`
-  - `e`: `{"karma":6,"an":["a","cho tiền mua thuốc"]}`
+  - `e`: `{"deed":"bo_thi","an":["a","cho tiền mua thuốc"]}`
 - **2. Theo về xem bệnh**
   Người bệnh bị âm khí xâm thể. Ngươi truyền linh lực đẩy âm khí ra ngoài. Người đỡ dần, cả nhà quỳ lạy ngươi.
   - `cost`: `{"mp":"30%"}`
-  - `e`: `{"karma":8,"tv":3,"an":["a","chữa bệnh cho người nhà"]}`
+  - `e`: `{"deed":"cuu_nguoi","tv":3,"an":["a","chữa bệnh cho người nhà"]}`
 - **3. Thế gian khổ nhiều, giúp không xuể**
   Ngươi bước đi. Tiếng rao non nớt đuổi theo mãi một đoạn đường.
   - `e`: `{"tamma":2}`
@@ -589,7 +589,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Bố thí**
   Vị tăng nhận, rồi đặt tay lên đỉnh đầu ngươi. Một luồng ấm áp lan xuống, những ý nghĩ đen tối trong lòng tan như sương.
   - `cost`: `{"st":6}`
-  - `e`: `{"tamma":-12,"karma":3}`
+  - `e`: `{"tamma":-12,"deed":"bo_thi"}`
 - **2. Hỏi đạo**
   - `chk`: `["ngo",10]`
   - **Thành công**: “Thí chủ hỏi trường sinh để làm gì?” Ngươi á khẩu. Vị tăng cười, đọc cho ngươi một đoạn kinh. Về sau ngươi mới hiểu, đó là tâm pháp.
@@ -598,7 +598,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **3. Thử bản lĩnh vị tăng**
   - `fight`: `{"k":"votang","n":"{$a.ten}","spar":1}`
   - **Thắng trận**: Vị tăng thu tay, mỉm cười: “Thí chủ võ công cao, chỉ tiếc tâm còn nóng.”
-    `{"e":{"tv":6,"karma":-2}}`
+    `{"e":{"tv":6,"hd":{"t":1}}}`
   - **Thua trận**: “Thí chủ, nóng giận hại thân.” Vị tăng đỡ ngươi dậy, phủi bụi cho ngươi.
     `{"e":{"tamma":-5,"tv":3}}`
 - **4. Cáo từ, tiếp tục lên đường**
@@ -687,7 +687,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
       - `e`: `{"tam":2,"tv":8,"lore":"thien_dao"}`
 - **2. Lấp cửa mộ lại**
   Người chết cần yên nghỉ. Ngươi lăn tảng đá chặn cửa, vái ba vái.
-  - `e`: `{"karma":3,"van":1}`
+  - `e`: `{"deed":"an_tang","van":1}`
 - **3. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -724,7 +724,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
   - **Thất bại**: Cấm chế phản phệ, một đạo kiếm quang bắn ra sượt qua vai ngươi.
     `{"e":{"hp":"-20%"}}`
 - **2. Vái ba vái rồi mới vào**
-  - **Khả năng 1**: Cấm chế tự tan như đáp lễ. Trên bàn đá có một ngọc giản, bên trong là truyền thừa của chủ nhân. `{"w":2,"e":{"skill":1,"karma":2}}`
+  - **Khả năng 1**: Cấm chế tự tan như đáp lễ. Trên bàn đá có một ngọc giản, bên trong là truyền thừa của chủ nhân. `{"w":2,"e":{"skill":1,"hd":{"p":1}}}`
   - **Khả năng 2**: Không có chuyện gì xảy ra. Có lẽ chủ nhân đã đi quá lâu. Ngươi vào lấy vài thứ còn dùng được. `{"w":1,"e":{"st":20}}`
 - **3. Rời đi**
   Động phủ của người khác, ngươi không đụng vào.
@@ -773,11 +773,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 
 - **1. Giúp dập lửa**
   Lửa tắt. {$a.ten} cảm kích, tặng ngươi mấy viên đan còn sót lại sau vụ nổ.
-  - `e`: `{"pill":["hoixuan","tukhi"],"karma":3,"an":["a","giúp dập lửa lò đan"]}`
+  - `e`: `{"pill":["hoixuan","tukhi"],"deed":"cuu_nguoi","an":["a","giúp dập lửa lò đan"]}`
 - **2. Nhặt đan dược văng ra**
   - `chk`: `["tp",9]`
   - **Thành công**: Ngươi nhanh tay vơ được mấy viên lăn lóc ngoài đường.
-    `{"e":{"pill":[1,1],"karma":-2}}`
+    `{"e":{"pill":[1,1],"hd":{"t":1}}}`
   - **Thất bại**: Một viên đan cháy dở nổ ngay trong tay ngươi.
     `{"e":{"hp":"-15%"}}`
 - **3. Chỉ ra chỗ sai trong phối dược**
@@ -816,11 +816,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 
 - **1. Nhổ lấy**
   Cán cờ lạnh như băng. Tiếng khóc im bặt, như chờ chủ nhân mới ra lệnh.
-  - `e`: `{"relic":"honphien","karma":-8,"tamma":8}`
+  - `e`: `{"relic":"honphien","deed":"luyen_hon_nguoi","tamma":8}`
 - **2. Thiêu hủy, siêu độ vong hồn**
   - `fight`: `{"k":"amhon","m":1.1}`
   - **Thắng trận**: Lá cờ cháy rụi. Trăm luồng khói trắng bay lên, khẽ cúi đầu với ngươi rồi tan vào trời.
-    `{"e":{"karma":10,"tv":6,"tam":2}}`
+    `{"e":{"deed":"sieu_do","tv":6,"tam":2}}`
 - **3. Tránh xa**
   Thứ này không nên đụng vào.
 
@@ -865,7 +865,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Nhận đưa thư**
   - `chk`: `["tp",8]`
   - **Thành công**: Ba ngày ba đêm không ngủ, tới cổng phủ thì hai bàn chân ngươi rộp cả. Thư tới kịp, quan phủ thưởng linh thạch theo lệ.
-    `{"e":{"st":30,"karma":3}}`
+    `{"e":{"st":30,"deed":"giu_loi"}}`
   - **Thất bại**: Ngươi tới trễ nửa ngày. Quan phủ lắc đầu, chỉ thưởng chút ít.
     `{"e":{"st":8}}`
 - **2. Không rảnh**
@@ -904,7 +904,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **2. Mua con hươu rồi thả**
   Con hươu nhìn ngươi một cái rồi nhảy vào rừng. Sừng ngọc của nó lấp lánh như sao.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":5,"van":2}`
+  - `e`: `{"deed":"phong_sinh","van":2}`
 - **3. Đi tiếp**
   Ngươi gật đầu chào rồi đi.
 
@@ -935,14 +935,14 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Dập lửa cứu người**
   Ngươi dốc hết linh lực gọi mưa, lửa tắt dần. Mấy người hái thuốc quỳ xuống lạy ngươi như lạy thần.
   - `cost`: `{"mp":"50%"}`
-  - `e`: `{"karma":10,"tv":4,"an":["a","cứu khỏi đám cháy"]}`
+  - `e`: `{"deed":"cuu_nguoi_hy_sinh","tv":4,"an":["a","cứu khỏi đám cháy"]}`
 - **2. Tranh thủ hái linh dược**
   Lửa lan nhanh, ngươi vơ vội được mấy gốc linh thảo quý. Tiếng kêu cứu sau lưng nhỏ dần.
-  - `e`: `{"pill":["tinhnguyen","hoixuan"],"karma":-5}`
+  - `e`: `{"pill":["tinhnguyen","hoixuan"],"hd":{"t":3},"ng":{"b":1}}`
 - **3. Tìm kẻ phóng hỏa**
   - `fight`: `{"k":"matu"}`
   - **Thắng trận**: Kẻ phóng hỏa là ma tu cần tro linh thảo để luyện độc. Hắn không còn cơ hội luyện nữa.
-    `{"e":{"karma":6,"st":20}}`
+    `{"e":{"deed":"giet_ma_dau","st":20}}`
 - **4. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -1143,11 +1143,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 ### Lựa chọn
 
 - **1. Đêm nay canh gác**
-  - **Khả năng 1**: Nửa đêm, gió lạnh thổi tắt mọi ngọn đèn. Nó tới. `{"w":2,"fight":{"k":"quy","m":1.1},"win":{"t":"Yêu vật gục ngã. Dân làng mổ lợn ăn mừng ba ngày liền.","e":{"st":25,"karma":8,"tv":6}}}`
-  - **Khả năng 2**: Thứ xuất hiện là một con hồ ly già. Nó không tấn công, chỉ dẫn ngươi tới cái giếng cuối làng. Dưới đáy giếng có ánh lửa. Hóa ra nó mới là kẻ bảo vệ thôn. `{"w":1,"c":[{"i":"⚔️","l":"Xuống giếng","fight":{"k":"luyenthi","m":1.15},"win":{"t":"Tên luyện thi nhân chết dưới đáy giếng. Con hồ ly ngồi trên miệng giếng nhìn ngươi, rồi lặng lẽ bỏ đi.","e":{"st":30,"karma":10,"tv":8}}},{"i":"🦊","l":"Nghi ngờ con hồ ly","fight":{"k":"holy"},"win":{"t":"Ngươi giết con hồ ly. Đêm hôm sau, lại có người mất tích.","e":{"karma":-8,"tamma":8}}}]}`
+  - **Khả năng 1**: Nửa đêm, gió lạnh thổi tắt mọi ngọn đèn. Nó tới. `{"w":2,"fight":{"k":"quy","m":1.1},"win":{"t":"Yêu vật gục ngã. Dân làng mổ lợn ăn mừng ba ngày liền.","e":{"st":25,"deed":"hanh_hiep","tv":6}}}`
+  - **Khả năng 2**: Thứ xuất hiện là một con hồ ly già. Nó không tấn công, chỉ dẫn ngươi tới cái giếng cuối làng. Dưới đáy giếng có ánh lửa. Hóa ra nó mới là kẻ bảo vệ thôn. `{"w":1,"c":[{"i":"⚔️","l":"Xuống giếng","fight":{"k":"luyenthi","m":1.15},"win":{"t":"Tên luyện thi nhân chết dưới đáy giếng. Con hồ ly ngồi trên miệng giếng nhìn ngươi, rồi lặng lẽ bỏ đi.","e":{"st":30,"deed":"giet_ma_dau","tv":8}}},{"i":"🦊","l":"Nghi ngờ con hồ ly","fight":{"k":"holy"},"win":{"t":"Ngươi giết con hồ ly. Đêm hôm sau, lại có người mất tích.","e":{"hd":{"t":3},"ng":{"b":8,"yd":"tai_nan"},"tamma":8}}}]}`
 - **2. Đòi thù lao trước**
   {$a.ten} gom góp được ít linh thạch, run run đưa cho ngươi. Đêm ấy, nó tới.
-  - `e`: `{"st":12,"karma":-2}`
+  - `e`: `{"st":12,"hd":{"t":1}}`
   - `fight`: `{"k":"quy"}`
   - **Thắng trận**: Việc đã xong. Dân làng không ăn mừng, chỉ đóng cửa im lặng.
     `{"e":{"tv":5}}`
@@ -1184,13 +1184,13 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Diệt thủy quỷ**
   - `fight`: `{"k":"thuyquy"}`
   - **Thắng trận**: Mặt nước lặng dần. Lái đò quỳ lạy ngươi, nước mắt giàn giụa.
-    `{"e":{"karma":6,"st":15}}`
+    `{"e":{"deed":"giet_ma_dau","st":15}}`
 - **2. Thả đèn cầu siêu**
   - `chk`: `["tam",9]`
   - **Thành công**: Ngọn đèn hoa sen trôi đi. Mặt nước lặng dần. Từ đó bến đò không còn ai chết đuối.
-    `{"e":{"karma":8,"tam":1}}`
+    `{"e":{"deed":"sieu_do","tam":1}}`
   - **Thất bại**: Đèn bị một bàn tay dìm xuống. Nó không muốn đi.
-    `{"fight":{"k":"thuyquy"},"win":{"t":"Nó đi rồi. Lần này thì thật.","e":{"karma":4}}}`
+    `{"fight":{"k":"thuyquy"},"win":{"t":"Nó đi rồi. Lần này thì thật.","e":{"deed":"sieu_do"}}}`
 - **3. Tìm chỗ khác qua sông**
   - `chk`: `["tp",8]`
   - **Thành công**: Ngươi tìm được chỗ cạn, lội qua an toàn.
@@ -1228,9 +1228,9 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Điều tra**
   - `chk`: `["ngo",10]`
   - **Thành công**: Ngươi tìm thấy tấm da người treo trong tủ. Đêm ấy, cô dâu không có da để mặc.
-    `{"fight":{"k":"hoabi"},"win":{"t":"Họa bì cháy thành tro. Nhà phú hộ tạ ơn hậu hĩnh.","e":{"karma":8,"st":30,"relic":0}}}`
+    `{"fight":{"k":"hoabi"},"win":{"t":"Họa bì cháy thành tro. Nhà phú hộ tạ ơn hậu hĩnh.","e":{"deed":"giet_ma_dau","st":30,"relic":0}}}`
   - **Thất bại**: Ngươi không tìm ra gì. Đêm ấy, chính ngươi suýt bị moi tim.
-    `{"fight":{"k":"hoabi","m":1.2},"win":{"t":"Nguy hiểm thật. Ngươi chạm tay lên ngực, tim vẫn còn đập.","e":{"karma":6,"st":15}}}`
+    `{"fight":{"k":"hoabi","m":1.2},"win":{"t":"Nguy hiểm thật. Ngươi chạm tay lên ngực, tim vẫn còn đập.","e":{"deed":"giet_ma_dau","st":15}}}`
 - **2. Không xen vào**
   Chuyện nhà người ta. Nhưng nụ cười ấy đi theo ngươi vào giấc ngủ.
   - `e`: `{"tamma":2}`
@@ -1252,11 +1252,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Mua lại rồi thả**
   Ngươi thả cá xuống sông. Nó quẫy đuôi ba lần như lạy rồi lặn mất. Đêm ấy, có viên ngọc trai sáng rực đặt ở đầu giường ngươi.
   - `cost`: `{"st":15}`
-  - `e`: `{"relic":0,"karma":5,"van":2}`
+  - `e`: `{"relic":0,"deed":"phong_sinh","van":2}`
 - **2. Mua về nấu**
   Thịt cá ngọt như mật, ăn vào nóng rực cả người. Nửa đêm, ngươi mơ thấy có ai đứng khóc ở cửa.
   - `cost`: `{"st":10}`
-  - `e`: `{"hpP":4,"tv":6,"karma":-3}`
+  - `e`: `{"hpP":4,"tv":6,"deed":"giet_thu_vo_hai"}`
 - **3. Đi qua**
   Ông lão xách con cá ra chợ. Ngươi không ngoảnh lại.
 
@@ -1292,7 +1292,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **2. Chặn lại xem xét**
   - `fight`: `{"k":"luyenthi"}`
   - **Thắng trận**: Hóa ra đây là luyện thi nhân bắt người sống luyện thi. Ngươi chôn cất bảy cái xác.
-    `{"e":{"karma":6,"st":20}}`
+    `{"e":{"deed":"giet_ma_dau","st":20}}`
 - **3. Lấy cái chuông**
   Chuông nằm trong tay ngươi, không còn kêu nữa. Nhưng đêm nào ngươi cũng nghe thấy nó.
   - `e`: `{"relic":0,"tamma":4}`
@@ -1393,11 +1393,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 
 - **1. Nhận làm đệ tử**
   Nửa năm dạy nó luyện khí. Lúc chia tay, nó khóc như mưa, hứa sau này nổi danh sẽ đi tìm ngươi.
-  - `e`: `{"karma":4,"tam":2,"h":288,"an":["a","nhận làm đệ tử"]}`
+  - `e`: `{"deed":"nhan_nuoi","tam":2,"h":288,"an":["a","nhận làm đệ tử"]}`
 - **2. Cho ít tiền rồi khuyên về**
   Nó cầm tiền, cúi đầu đi. Có lẽ làm phàm nhân yên ổn cũng là một cái phúc.
   - `cost`: `{"st":5}`
-  - `e`: `{"karma":1}`
+  - `e`: `{"deed":"bo_thi"}`
 - **3. Mắng cho về**
   Nó đứng dậy, mắt đỏ hoe. Ngươi biết nó sẽ không quên ngày hôm nay.
   - `e`: `{"oan":["a","đuổi đi như đuổi chó"]}`
@@ -1463,7 +1463,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
   - `e`: `{"dao":2,"tv":14,"tam":2,"h":720}`
 - **2. Đốt lửa sưởi cho người ấy**
   Ngọn lửa cháy tới sáng. Người ấy không động đậy, nhưng tuyết trên vai đã tan.
-  - `e`: `{"karma":3,"tamma":-5}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"tamma":-5}`
 - **3. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -1525,14 +1525,14 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Can ngăn**
   - `fight`: `{"k":"detu","n":"{$b.ten}"}`
   - **Thắng trận**: {$b.ten} ôm mặt bỏ chạy, buông một câu: “Ngươi chờ đấy!” {$a.ten} lén nhìn ngươi, mắt sáng lên như sao.
-    `{"e":{"karma":6,"an":["a","cứu khỏi trận đòn"],"oan":["b","đánh cho mất mặt"]}}`
+    `{"e":{"deed":"hanh_hiep","an":["a","cứu khỏi trận đòn"],"oan":["b","đánh cho mất mặt"]}}`
 - **2. Lấy danh nghĩa sư huynh quát lui**
   - `req`: `{"$hook":"bat_nat_c_1_req"}`
   - `chk`: `["tam",9]`
   - **Thành công**: Ngươi chỉ đứng đó, giơ lệnh bài lên. Cả đám tản đi như chim vỡ tổ.
-    `{"e":{"karma":5,"an":["a","giải vây"]}}`
+    `{"e":{"deed":"hanh_hiep","an":["a","giải vây"]}}`
   - **Thất bại**: Chúng cười vào mặt ngươi. “Sư huynh nào? Ta chưa nghe tên.”
-    `{"fight":{"k":"detu","n":"{$b.ten}"},"win":{"t":"Giờ thì chúng nghe tên rồi.","e":{"karma":4}}}`
+    `{"fight":{"k":"detu","n":"{$b.ten}"},"win":{"t":"Giờ thì chúng nghe tên rồi.","e":{"deed":"hanh_hiep"}}}`
 - **3. Làm ngơ**
   Ngươi đi qua. Tiếng roi vụt đuổi theo một quãng dài.
   - `e`: `{"tamma":3}`
@@ -1566,9 +1566,9 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Lén hái**
   - `chk`: `["tp",11]`
   - **Thành công**: Ngươi vào ra như gió. Trong túi đã có mấy gốc linh thảo thượng hạng.
-    `{"e":{"thao":8,"karma":-4}}`
+    `{"e":{"thao":8,"hd":{"t":3},"ng":{"b":1}}}`
   - **Thất bại**: Lão già mở mắt. Hóa ra lão chỉ giả ngủ.
-    `{"fight":{"k":"votang","n":"Lão canh vườn","m":1.1},"win":{"t":"Ngươi chạy thoát, trên tay còn kịp nhổ một gốc.","e":{"thao":2,"karma":-4}}}`
+    `{"fight":{"k":"votang","n":"Lão canh vườn","m":1.1},"win":{"t":"Ngươi chạy thoát, trên tay còn kịp nhổ một gốc.","e":{"thao":2,"hd":{"t":3},"ng":{"b":1}}}}`
 - **2. Xin làm thuê**
   Nửa năm nhổ cỏ tưới cây, ngươi học được cách phân biệt trăm loại linh thảo. Lão canh vườn trả công bằng thuốc.
   - `e`: `{"st":20,"pill":"hoixuan","tv":5,"h":288}`
@@ -1602,9 +1602,9 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **3. Lẻn vào ban đêm**
   - `chk`: `["tp",12]`
   - **Thành công**: Ngươi chép vội một quyển rồi chuồn ra trước khi trời sáng.
-    `{"e":{"skill":2,"karma":-3}}`
+    `{"e":{"skill":2,"hd":{"t":3},"ng":{"b":1}}}`
   - **Thất bại**: Cấm chế réo lên như chuông. Đệ tử tuần đêm ập tới.
-    `{"fight":{"k":"detu","m":1.2},"win":{"t":"Ngươi chạy thoát, tay trắng.","e":{"karma":-3}}}`
+    `{"fight":{"k":"detu","m":1.2},"win":{"t":"Ngươi chạy thoát, tay trắng.","e":{"hd":{"t":3},"ng":{"b":1}}}}`
 - **4. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -1692,12 +1692,12 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Khai thác lén**
   - `chk`: `["tp",10]`
   - **Thành công**: Ngươi đào suốt đêm, túi trữ vật nặng trĩu.
-    `{"e":{"st":50,"karma":-3}}`
+    `{"e":{"st":50,"hd":{"t":3},"ng":{"b":1}}}`
   - **Thất bại**: Đệ tử tuần núi phát hiện ra ngươi.
     `{"fight":{"k":"detu"},"win":{"t":"Ngươi mang được nửa số đã đào.","e":{"st":25}}}`
 - **2. Báo cho {$sect}**
   Tông môn thưởng cho ngươi một phần theo lệ, còn ghi tên ngươi vào sổ khách quý.
-  - `e`: `{"st":20,"karma":3}`
+  - `e`: `{"st":20,"hd":{"p":1},"ng":{"g":1}}`
 - **3. Ngồi tu luyện cạnh mạch**
   Linh khí đặc quánh. Ngươi ngồi nửa năm, như ngồi trong lò luyện.
   - `e`: `{"tv":12,"h":360}`
@@ -1786,7 +1786,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Tự biện hộ**
   - `chk`: `["ngo",11]`
   - **Thành công**: Ngươi chỉ ra vết tro trên giày {$a.ten}, thứ tro chỉ có trong kho đan. Trưởng lão biến sắc, phạt hắn ba năm diện bích, bồi thường cho ngươi.
-    `{"e":{"karma":2,"st":25,"oan":["a","vạch mặt trước trưởng lão"]}}`
+    `{"e":{"hd":{"p":1},"st":25,"oan":["a","vạch mặt trước trưởng lão"]}}`
   - **Thất bại**: Không ai tin ngươi. Ngươi bị phạt nộp linh thạch và quét tàng kinh các ba tháng.
     `{"e":{"st":"-30%","tamma":6}}`
 - **2. Thách đấu sinh tử**
@@ -1864,11 +1864,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **2. Cướp**
   - `fight`: `{"k":"ngunhan"}`
   - **Thắng trận**: Ngươi gom hết trân châu. Mặt biển im lặng một cách đáng sợ.
-    `{"e":{"st":40,"karma":-5}}`
+    `{"e":{"st":40,"hd":{"t":3},"ng":{"b":3}}}`
 - **3. Tặng quà làm quen**
   Ngư nhân nhận quà, vẫy đuôi chào. Từ đó, sóng biển quanh ngươi êm hơn một chút.
   - `cost`: `{"st":10}`
-  - `e`: `{"van":2,"karma":3,"flag":"ngunhan"}`
+  - `e`: `{"van":2,"hd":{"p":1},"ng":{"g":1},"flag":"ngunhan"}`
 - **4. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -1887,7 +1887,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 ### Lựa chọn
 
 - **1. Ghé vào**
-  - **Khả năng 1**: Là {$a.ten}, một tu sĩ đắm thuyền, mắc kẹt đã ba năm. {$a.hn} mừng phát khóc, tặng ngươi toàn bộ tài sản còn lại. `{"w":2,"e":{"st":35,"karma":4,"an":["a","cứu khỏi đảo hoang"]}}`
+  - **Khả năng 1**: Là {$a.ten}, một tu sĩ đắm thuyền, mắc kẹt đã ba năm. {$a.hn} mừng phát khóc, tặng ngươi toàn bộ tài sản còn lại. `{"w":2,"e":{"st":35,"deed":"cuu_nguoi","an":["a","cứu khỏi đảo hoang"]}}`
   - **Khả năng 2**: Lửa là bẫy. Hải tặc từ trong rừng ùa ra. `{"w":1,"fight":{"k":"sontac","m":1.1},"win":{"t":"Sào huyệt hải tặc còn đầy của cải.","e":{"st":40}}}`
 - **2. Đi tiếp**
   Biển rộng, ai cũng phải tự cứu mình.
@@ -2009,7 +2009,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
     `{"e":{"relic":0}}`
 - **3. Để yên**
   Nghìn năm mới có một viên ngọc. Để nó tiếp tục sáng.
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1}}`
 - **4. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -2029,10 +2029,10 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 
 - **1. Lên thuyền**
   - **Khả năng 1**: Cả đoàn thủy thủ vẫn còn đó, chỉ là không còn thịt. `{"w":2,"fight":{"k":"kholau"},"win":{"t":"Khoang thuyền đầy hàng hóa trăm năm trước.","e":{"st":40,"relic":0}}}`
-  - **Khả năng 2**: Trên thuyền chỉ có một bức thư chưa gửi, đề tên một người ở {$que}. Ngươi cất đi. `{"w":1,"e":{"tam":2,"karma":3,"item":"nv_thu_chuadua"}}`
+  - **Khả năng 2**: Trên thuyền chỉ có một bức thư chưa gửi, đề tên một người ở {$que}. Ngươi cất đi. `{"w":1,"e":{"tam":2,"hd":{"p":1},"ng":{"g":1},"item":"nv_thu_chuadua"}}`
 - **2. Đốt thuyền**
   Lửa bùng lên trong sương. Có tiếng thở phào rất khẽ.
-  - `e`: `{"karma":3}`
+  - `e`: `{"deed":"sieu_do"}`
 - **3. Tránh xa**
   Chiếc thuyền trôi qua, đèn trên boong tắt dần.
 
@@ -2109,11 +2109,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 
 - **1. Ngâm mình**
   Máu nóng như dung nham, chui vào từng lỗ chân lông. Sáng ra, ngươi mạnh lên thấy rõ. Và khát.
-  - `e`: `{"atkP":10,"hpP":8,"karma":-10,"tamma":12}`
+  - `e`: `{"atkP":10,"hpP":8,"hd":{"t":8},"ng":{"b":3},"tamma":12}`
 - **2. Thanh tẩy huyết trì**
   - `fight`: `{"k":"oanlinh","m":1.15}`
   - **Thắng trận**: Huyết trì cạn dần, lộ ra đáy toàn xương trắng. Ngươi chôn cất từng mảnh.
-    `{"e":{"karma":10,"tv":10}}`
+    `{"e":{"deed":"sieu_do","tv":10}}`
 - **3. Đi tiếp**
   Thứ sức mạnh ấy, ngươi không cần.
 
@@ -2134,13 +2134,13 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Cứu người**
   - `fight`: `{"k":"matu","elite":1}`
   - **Thắng trận**: {$a.ten} được thả ra, quỳ xuống trước mặt ngươi. “Mạng này là của ân nhân.”
-    `{"e":{"karma":8,"st":20,"an":["a","cứu khỏi lồng sắt ma tu"]}}`
+    `{"e":{"deed":"cuu_nguoi","st":20,"an":["a","cứu khỏi lồng sắt ma tu"]}}`
 - **2. Lén mở lồng**
   - `chk`: `["tp",12]`
   - **Thành công**: Hai tên canh say mềm. Ngươi mở khóa, cõng người chạy suốt đêm.
-    `{"e":{"karma":8,"an":["a","cứu khỏi lồng sắt ma tu"]}}`
+    `{"e":{"deed":"cuu_nguoi","an":["a","cứu khỏi lồng sắt ma tu"]}}`
   - **Thất bại**: Then cửa kêu cót két.
-    `{"fight":{"k":"matu"},"win":{"t":"Người đã được cứu. Ngươi mệt lả.","e":{"karma":6,"an":["a","cứu khỏi lồng sắt ma tu"]}}}`
+    `{"fight":{"k":"matu"},"win":{"t":"Người đã được cứu. Ngươi mệt lả.","e":{"deed":"cuu_nguoi","an":["a","cứu khỏi lồng sắt ma tu"]}}}`
 - **3. Mặc kệ**
   Ngươi đi qua. Tiếng kêu cứu bị gió cuốn đi.
   - `e`: `{"tamma":5}`
@@ -2178,7 +2178,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **2. Hỏa táng**
   Lửa cháy ba ngày ba đêm. Khói đen bay lên, rồi trắng dần.
   - `cost`: `{"mp":"50%"}`
-  - `e`: `{"karma":8,"tamma":-8}`
+  - `e`: `{"deed":"an_tang","tamma":-8}`
 - **3. Bịt mũi đi qua**
   Mùi tử khí bám vào áo ngươi suốt mấy ngày.
 
@@ -2222,11 +2222,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 
 - **1. Nhận**
   Hạt giống chui vào bụng ngươi như con rắn nhỏ. Sức mạnh dâng lên. Và có tiếng thì thầm rất khẽ.
-  - `e`: `{"atkP":15,"defP":10,"karma":-15,"tamma":20}`
+  - `e`: `{"atkP":15,"defP":10,"hd":{"t":8},"tamma":20}`
 - **2. Giết hắn**
   - `fight`: `{"k":"matu","elite":1,"n":"{$a.ten}"}`
   - **Thắng trận**: Hạt giống rơi xuống đất, mọc thành một cây gai đen rồi khô héo.
-    `{"e":{"karma":6,"tv":8}}`
+    `{"e":{"deed":"giet_ma_dau","tv":8}}`
 - **3. Từ chối**
   “Ngươi sẽ quay lại.” Giọng {$a.hn} đuổi theo ngươi.
 
@@ -2281,11 +2281,11 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 ### Lựa chọn
 
 - **1. Tha**
-  - **Khả năng 1**: {$a.hn} giữ lời. Chỗ giấu có một món bảo vật. `{"w":2,"e":{"karma":5,"relic":0}}`
+  - **Khả năng 1**: {$a.hn} giữ lời. Chỗ giấu có một món bảo vật. `{"w":2,"e":{"deed":"tha_ke_ac","relic":0}}`
   - **Khả năng 2**: Ngươi vừa quay lưng, một con dao găm đã cắm vào vai. `{"w":1,"e":{"hp":"-15%"},"fight":{"k":"matu","n":"{$a.ten}"},"win":{"t":"Lần này ngươi không quay lưng nữa.","e":{"tamma":3}}}`
 - **2. Trừ ma**
   Ma tu là ma tu. Ngươi không để lời van xin làm mềm tay.
-  - `e`: `{"karma":2,"tv":6,"st":15}`
+  - `e`: `{"deed":"giet_ma_dau","tv":6,"st":15}`
 - **3. Tra hỏi trước**
   - `chk`: `["ngo",10]`
   - **Thành công**: Ngươi bắt {$a.hn} dẫn tới tận nơi rồi mới quyết.
@@ -2352,7 +2352,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **2. Lấy pháp bảo trên người**
   - `fight`: `{"k":"khoiloi","elite":1}`
   - **Thắng trận**: Khôi lỗi canh giữ đổ sập. Pháp bảo của tiên nhân là của ngươi.
-    `{"e":{"relic":2,"karma":-3}}`
+    `{"e":{"relic":2,"deed":"dao_mo"}}`
 - **3. Tham ngộ đạo vận còn sót**
   - `chk`: `["ngo",13]`
   - **Thành công**: Đạo vận chảy vào thức hải như nước tràn đê.
@@ -2486,7 +2486,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Tụng kinh siêu độ**
   - `chk`: `["tam",10]`
   - **Thành công**: Nàng mỉm cười, tan thành sương.
-    `{"e":{"karma":6,"tam":1}}`
+    `{"e":{"deed":"sieu_do","tam":1}}`
   - **Thất bại**: Nàng gào lên, mặt biến dạng.
     `{"fight":{"k":"quy"},"win":{"t":"Hồn ma tan biến.","e":{"tv":4}}}`
 - **2. Đóng cửa**
@@ -2534,12 +2534,12 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Chộp tay**
   - `chk`: `["tp",9]`
   - **Thành công**: Là {$a.ten}, gầy trơ xương. Nhà có mẹ già đang ốm.
-    `{"c":[{"i":"💎","l":"Cho ít linh thạch","cost":{"st":8},"t":"Gã khóc rồi đi.","e":{"karma":6,"an":["a","tha tội và cho tiền"]}},{"i":"👮","l":"Giao cho quan","t":"Gã bị lôi đi.","e":{"karma":-2}}]}`
+    `{"c":[{"i":"💎","l":"Cho ít linh thạch","cost":{"st":8},"t":"Gã khóc rồi đi.","e":{"deed":"bo_thi","an":["a","tha tội và cho tiền"]}},{"i":"👮","l":"Giao cho quan","t":"Gã bị lôi đi.","e":{"hd":{"t":1}}}]}`
   - **Thất bại**: Kẻ trộm chạy mất, mang theo ít linh thạch.
     `{"e":{"st":"-15%"}}`
 - **2. Giả ngủ, xem hắn làm gì**
   Hắn lấy mấy viên linh thạch rồi đi. Ngươi để yên.
-  - `e`: `{"st":"-8%","karma":2}`
+  - `e`: `{"st":"-8%","deed":"bo_thi"}`
 - **3. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -2626,7 +2626,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 ### Lựa chọn
 
 - **1. Đuổi theo**
-  - **Khả năng 1**: Lửa dừng lại trên một nấm mộ cổ. Dưới đó có đồ tùy táng. `{"w":1,"e":{"relic":0,"karma":-2}}`
+  - **Khả năng 1**: Lửa dừng lại trên một nấm mộ cổ. Dưới đó có đồ tùy táng. `{"w":1,"e":{"relic":0,"hd":{"t":1}}}`
   - **Khả năng 2**: Lửa hóa thành một bộ xương. `{"w":1,"fight":{"k":"kholau"},"win":{"t":"Xương vụn rải đầy cỏ.","e":{"st":10}}}`
 - **2. Khấn rồi đi**
   Lửa tắt.
@@ -2822,7 +2822,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 - **1. Dùng linh lực gọi mưa**
   Mây kéo tới, mưa lất phất. Cả làng quỳ lạy.
   - `cost`: `{"mp":"60%"}`
-  - `e`: `{"karma":10,"an":["a","gọi mưa cứu làng"]}`
+  - `e`: `{"deed":"cuu_dich","an":["a","gọi mưa cứu làng"]}`
 - **2. Không giúp được**
   Ngươi đi qua.
 
@@ -2852,7 +2852,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 
 - **1. Gặt giúp**
   Một ngày mồ hôi. Tối đó được ăn cơm mới.
-  - `e`: `{"h":12,"karma":4,"hp":"30%","an":["a","gặt lúa giúp"]}`
+  - `e`: `{"h":12,"hd":{"p":3},"ng":{"g":3},"hp":"30%","an":["a","gặt lúa giúp"]}`
 - **2. Từ chối**
   Ngươi bận việc.
 
@@ -2928,7 +2928,7 @@ Nguồn chuẩn: `content/events/kham-pha.json`. Bản đọc tự sinh. Cú ph�
 
 - **1. Cởi áo khoác cho**
   Đứa bé ôm chặt chiếc áo.
-  - `e`: `{"karma":6,"tamma":-3,"an":["a","cho áo giữa đêm đông"]}`
+  - `e`: `{"deed":"bo_thi","tamma":-3,"an":["a","cho áo giữa đêm đông"]}`
 - **2. Đi qua**
   Sáng hôm sau, ngươi nghe nói có đứa bé chết rét.
   - `e`: `{"tamma":5}`

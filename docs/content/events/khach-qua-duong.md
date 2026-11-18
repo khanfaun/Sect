@@ -20,7 +20,7 @@ Nguồn chuẩn: `content/events/khach-qua-duong.json`. Bản đọc tự sinh. 
 
 - **1. Chỉ đường cho tử tế**
   {$a.ten} cảm ơn rối rít, còn kể cho ngươi nghe chuyện vừa thấy dọc đường.
-  - `e`: `{"rumor":1,"karma":2}`
+  - `e`: `{"rumor":1,"hd":{"p":1},"ng":{"g":1}}`
 - **2. Bảo không biết**
   Ngươi lắc đầu rồi đi tiếp. Sau lưng, {$a.hn} vẫn xoay xoay tấm bản đồ.
 
@@ -85,11 +85,11 @@ Nguồn chuẩn: `content/events/khach-qua-duong.json`. Bản đọc tự sinh. 
 - **1. Cho một viên đan hồi khí huyết**
   Một lúc sau {$a.ten} hồng hào trở lại, run run lạy ngươi một lạy.
   - `cost`: `{"pillGroup":"healing"}`
-  - `e`: `{"karma":6,"an":["a","cứu mạng giữa đường"]}`
+  - `e`: `{"deed":"cuu_nguoi","an":["a","cứu mạng giữa đường"]}`
 - **2. Truyền chút chân khí**
   Chân khí ấm áp chạy vào kinh mạch người phàm. {$a.ten} đỡ hẳn, cảm kích không thôi.
   - `cost`: `{"mp":8}`
-  - `e`: `{"karma":4,"an":["a","truyền chân khí cứu giúp"]}`
+  - `e`: `{"deed":"cuu_nguoi","an":["a","truyền chân khí cứu giúp"]}`
 - **3. Đi qua**
   Ngươi không dừng lại. Đi được một quãng vẫn còn nghe tiếng ho khan.
   - `e`: `{"tamma":2}`
@@ -154,10 +154,10 @@ Nguồn chuẩn: `content/events/khach-qua-duong.json`. Bản đọc tự sinh. 
 
 - **1. Trả lại**
   {$a.ten} mừng như bắt được vàng, nhất quyết biếu ngươi chút lộ phí.
-  - `e`: `{"st":6,"karma":5}`
+  - `e`: `{"st":6,"deed":"giu_loi"}`
 - **2. Giữ lấy**
   Trong túi có ít bạc vụn và một lá thư nhà. Ngươi lặng lẽ rẽ sang lối khác.
-  - `e`: `{"st":10,"karma":-5}`
+  - `e`: `{"st":10,"deed":"trom_ngheo","deedO":{"yd":"phot_lo"}}`
 - **3. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 

@@ -1,0 +1,753 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_thuong_cuop",
+      "name": "Hàng bị cướp",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đường vắng, hai gã bịt mặt nhảy ra từ bụi rậm, giật lấy gánh hàng của ngươi.",
+      "choices": [
+        {
+          "l": "Bỏ hàng, giữ mạng",
+          "i": "🏃",
+          "t": "Ngươi chạy một mạch. Gánh hàng coi như mất.",
+          "e": {
+            "bac": -80
+          }
+        },
+        {
+          "l": "Giằng lại",
+          "i": "✊",
+          "chk": [
+            "tp",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi quật được một gã. Gã kia bỏ chạy.",
+            "e": {
+              "nxp": [
+                "thuong",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi bị đánh ngã, mất cả hàng lẫn tiền.",
+            "e": {
+              "hp": "-20%",
+              "bac": -120
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_cuop",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_mua",
+      "name": "Mưa hỏng hàng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Cơn mưa bất chợt làm ướt sũng mấy bao hàng khô. Mùi mốc bốc lên.",
+      "choices": [
+        {
+          "l": "Bán tháo ngay",
+          "i": "🪙",
+          "t": "Người mua ép giá, ngươi đành gật.",
+          "e": {
+            "bac": 10,
+            "nxp": [
+              "thuong",
+              2
+            ]
+          }
+        },
+        {
+          "l": "Phơi lại, bán dần",
+          "i": "☀️",
+          "t": "Phơi ba hôm, lựa ra được quá nửa còn dùng được.",
+          "e": {
+            "h": 12,
+            "bac": 40,
+            "nxp": [
+              "thuong",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_mua",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_lot_tay",
+      "name": "Quan đòi lót tay",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Tên sai nha chặn quầy hàng, gõ gõ cán roi: hàng của ngươi \"chưa có giấy\".",
+      "choices": [
+        {
+          "l": "Dúi cho hắn ít tiền",
+          "i": "🪙",
+          "t": "Hắn nhét tiền vào tay áo, đi sang quầy khác.",
+          "e": {
+            "bac": -60,
+            "nxp": [
+              "thuong",
+              4
+            ]
+          }
+        },
+        {
+          "l": "Không đưa, đòi lên huyện",
+          "i": "⚖️",
+          "chk": [
+            "tam",
+            10
+          ],
+          "ok": {
+            "t": "Hắn chột dạ, chửi vài câu rồi bỏ đi.",
+            "e": {
+              "nxp": [
+                "thuong",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Hắn tịch thu nửa gánh hàng, bảo ngươi lên huyện mà đòi.",
+            "e": {
+              "bac": -150
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_lot_tay",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_hang_gia",
+      "name": "Hàng giả",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lô hàng mới mua về toàn đồ giả: sâm làm bằng rễ cây tẩm mật.",
+      "choices": [
+        {
+          "l": "Bán cho khách lạ qua đường",
+          "i": "🤫",
+          "t": "Bán hết trong hai ngày. Ngươi không dám ngẩng đầu khi có khách quen.",
+          "e": {
+            "bac": 150,
+            "deed": "lua_loi"
+          }
+        },
+        {
+          "l": "Đốt bỏ",
+          "i": "🔥",
+          "t": "Lỗ một khoản. Nhưng tiếng ngươi trong chợ vẫn sạch.",
+          "e": {
+            "bac": -50,
+            "nxp": [
+              "thuong",
+              5
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_hang_gia",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_tu_si",
+      "name": "Tu sĩ mua hàng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một người áo trắng đứng trước quầy, chỉ vào mấy món đồ cổ, đặt xuống một viên đá sáng như ngọc.",
+      "choices": [
+        {
+          "l": "Nhận viên linh thạch",
+          "i": "💎",
+          "t": "Viên đá ấm trong tay. Người kia đi rồi, quanh quầy còn phảng phất mùi trầm.",
+          "e": {
+            "st": 1,
+            "nxp": [
+              "thuong",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Xin trả bằng bạc",
+          "i": "🪙",
+          "t": "Hắn nhíu mày, rồi cũng đặt xuống một túi bạc.",
+          "e": {
+            "bac": 300,
+            "nxp": [
+              "thuong",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_tu_si",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_phan",
+      "name": "Bạn hàng phản",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Người cùng góp vốn đã ôm tiền lẫn hàng trốn đi trong đêm.",
+      "choices": [
+        {
+          "l": "Kiện lên quan",
+          "i": "⚖️",
+          "chk": [
+            "ngo",
+            10
+          ],
+          "ok": {
+            "t": "Ngươi đem đủ giấy tờ. Quan xử cho ngươi đòi lại được một phần.",
+            "e": {
+              "h": 24,
+              "bac": 300,
+              "nxp": [
+                "thuong",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Giấy tờ thiếu dấu, kiện không thành, còn mất tiền lót.",
+            "e": {
+              "h": 24,
+              "bac": -100
+            }
+          }
+        },
+        {
+          "l": "Coi như học phí",
+          "i": "😮‍💨",
+          "t": "Ngươi ghi tên hắn vào trong lòng, rồi làm lại từ đầu.",
+          "e": {
+            "tamma": 5,
+            "nxp": [
+              "thuong",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_phan",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_con_no",
+      "name": "Con nợ chết",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Người nợ ngươi một khoản lớn vừa chết. Vợ con hắn quỳ trước cửa, xin khất.",
+      "choices": [
+        {
+          "l": "Đòi bằng được",
+          "i": "📜",
+          "t": "Họ bán nhà trả nợ. Ngươi nhận tiền, cả xóm nhìn ngươi khác đi.",
+          "e": {
+            "bac": 200,
+            "deed": "ep_ta_dien"
+          }
+        },
+        {
+          "l": "Xé giấy nợ",
+          "i": "✂️",
+          "t": "Bà vợ lạy ngươi ba lạy. Tiếng ngươi trong xóm tốt lên.",
+          "e": {
+            "nxp": [
+              "thuong",
+              4
+            ],
+            "deed": "bo_thi"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_con_no",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_muoi_lau",
+      "name": "Buôn muối lậu",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một gã đội nón lá kéo ngươi vào góc: có chuyến muối lậu cần người chở qua trạm, lãi gấp mấy lần buôn thường.",
+      "choices": [
+        {
+          "l": "Nhận chuyến",
+          "i": "🧂",
+          "chk": [
+            "tp",
+            10
+          ],
+          "ok": {
+            "t": "Ngươi qua trạm trót lọt. Tiền công dày cộp.",
+            "e": {
+              "bac": 500,
+              "nxp": [
+                "thuong",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Trạm khám xe, ngươi bị phạt nặng, bị đánh mấy gậy.",
+            "e": {
+              "bac": -300,
+              "hp": "-20%"
+            }
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "✋",
+          "t": "Gã nhổ bọt, đi tìm người khác."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_muoi_lau",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_dau_co",
+      "name": "Đầu cơ năm đói",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mất mùa khắp vùng. Kho thóc của ngươi đủ cho cả trấn ăn một tháng.",
+      "choices": [
+        {
+          "l": "Đóng kho, đợi giá",
+          "i": "🔒",
+          "t": "Giá thóc lên từng ngày. Ngươi bán ra từng đấu, tiền đầy rương.",
+          "e": {
+            "bac": 1500,
+            "nxp": [
+              "thuong",
+              10
+            ],
+            "deed": "ep_ta_dien"
+          }
+        },
+        {
+          "l": "Bán giá thường",
+          "i": "⚖️",
+          "t": "Lãi không nhiều, nhưng người trấn nhớ tên ngươi.",
+          "e": {
+            "bac": 300,
+            "nxp": [
+              "thuong",
+              12
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_dau_co",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_vu_cao",
+      "name": "Đối thủ vu cáo",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "cho",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lái buôn nhà bên đưa đơn lên huyện, tố ngươi bán hàng cấm.",
+      "choices": [
+        {
+          "l": "Lo lót quan trên",
+          "i": "🪙",
+          "t": "Đơn bị bác. Tiền thì đi một khoản lớn.",
+          "e": {
+            "bac": -400,
+            "nxp": [
+              "thuong",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Lên công đường đối chất",
+          "i": "⚖️",
+          "chk": [
+            "ngo",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi chỉ ra từng chỗ vô lý trong đơn. Kẻ vu cáo bị phạt.",
+            "e": {
+              "nxp": [
+                "thuong",
+                15
+              ]
+            }
+          },
+          "no": {
+            "t": "Quan không tin. Ngươi nộp phạt, cửa hàng đóng mấy hôm.",
+            "e": {
+              "bac": -600
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_vu_cao",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_yeu_thu",
+      "name": "Thương đội gặp yêu thú",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Trên đường buôn xa, một con sói to như ngựa chặn trước đoàn xe. Phu xe run lẩy bẩy.",
+      "choices": [
+        {
+          "l": "Bỏ lại một xe hàng cho nó",
+          "i": "🐺",
+          "t": "Con sói xé tan xe hàng. Cả đoàn lặng lẽ đi vòng.",
+          "e": {
+            "bac": -500,
+            "nxp": [
+              "thuong",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Trả tiền cho tiêu sư liều đánh",
+          "i": "⚔️",
+          "t": "Tiêu sư bị thương nhưng đuổi được nó. Ngươi trả công gấp đôi.",
+          "e": {
+            "bac": -200,
+            "nxp": [
+              "thuong",
+              10
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_yeu_thu",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_thuong_tien_trang",
+      "name": "Mở tiền trang",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:thuong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mấy lái buôn lớn rủ ngươi góp vốn mở một tiền trang trong thành.",
+      "choices": [
+        {
+          "l": "Góp vốn",
+          "i": "🏦",
+          "chk": [
+            "ngo",
+            12
+          ],
+          "ok": {
+            "t": "Tiền trang làm ăn khấm khá. Cuối năm ngươi nhận lãi.",
+            "e": {
+              "bac": 3000,
+              "nxp": [
+                "thuong",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Một chủ hàng lớn vỡ nợ, kéo theo cả tiền trang.",
+            "e": {
+              "bac": -1500,
+              "nxp": [
+                "thuong",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Thôi, giữ vốn",
+          "i": "✋",
+          "t": "Ngươi cười, rót rượu mời họ rồi từ chối."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/thuong.json",
+        "ref": "ng_thuong_tien_trang",
+        "commit": "d5.3"
+      }
+    }
+  ]
+}

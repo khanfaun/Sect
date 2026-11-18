@@ -10,7 +10,8 @@ Nguồn: `content/venues/venue-n.js`
 {
   "tea": "Trà lâu",
   "inn": "Khách điếm",
-  "tuu": "Tửu phường"
+  "tuu": "Tửu phường",
+  "tientrang": "Tiền trang"
 }
 ```
 
@@ -31,6 +32,10 @@ Nguồn: `content/venues/venue-in.js`
   "tuu": [
     "Tửu phường nồng mùi rượu và mồ hôi. Giữa phòng có người đang vỗ bàn ca hát.",
     "Vò rượu xếp chồng tận trần. Tửu khách nhìn ngươi từ đầu tới chân."
+  ],
+  "tientrang": [
+    "Sau quầy gỗ lim, lão chưởng quỹ gõ bàn tính, mắt không rời cân tiểu ly.",
+    "Tiền trang đóng cửa sắt dày; người ra vào đều được hai gã hộ viện nhìn kỹ từ đầu tới chân."
   ]
 }
 ```

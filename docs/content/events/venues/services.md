@@ -31,7 +31,8 @@ Biết thêm một nơi và nghe tin đồn; lời truyền miệng được tá
       "info": 1
     },
     "req": null,
-    "limited": false
+    "limited": false,
+    "bac": 5
   }
 }
 ```
@@ -65,7 +66,8 @@ Trả tiền hỏi đường đến hai địa điểm trong vùng.
       "info": 2
     },
     "req": null,
-    "limited": false
+    "limited": false,
+    "bac": 10
   }
 }
 ```
@@ -138,7 +140,8 @@ Thưởng trà giúp giảm tâm ma.
       "tamma": -4
     },
     "req": null,
-    "limited": false
+    "limited": false,
+    "bac": 8
   }
 }
 ```
@@ -174,7 +177,43 @@ Hồi đầy khí huyết và linh lực sau tám giờ nghỉ.
       "tamma": -2
     },
     "req": null,
-    "limited": false
+    "limited": false,
+    "bac": 12
+  }
+}
+```
+
+<a id="service_inn_giuong"></a>
+## Ngủ giường tập thể một đêm — `service_inn_giuong`
+
+- Loại: service; nguồn: Trong quán; chủ đề: Dịch vụ địa điểm; cảm xúc: không gắn nhãn.
+- Nơi: thôn trấn, thành trì, chợ phiên tu sĩ / Khách điếm.
+- Điều kiện: mọi tầng.
+- Bối cảnh tác giả: .
+- Vai: `{}`.
+- Xuất xứ: `Đ3.2` / `content/venues/services.json`.
+
+Trải chiếu cạnh mấy người khách nghèo; ngủ được, nhưng giữ chặt hầu bao.
+
+### Lựa chọn
+
+- **1. Ngủ giường tập thể một đêm**
+  Trải chiếu cạnh mấy người khách nghèo; ngủ được, nhưng giữ chặt hầu bao.
+
+### Nối cơ chế
+
+```json
+{
+  "service": {
+    "id": "giuong",
+    "h": 8,
+    "stoneBase": 0,
+    "g": {
+      "hpPct": 55
+    },
+    "req": null,
+    "limited": false,
+    "bac": 6
   }
 }
 ```
@@ -245,7 +284,8 @@ Hồi tối đa 15% khí huyết, không vượt mức tối đa.
       "hpPct": 15
     },
     "req": null,
-    "limited": false
+    "limited": false,
+    "bac": 13
   }
 }
 ```
@@ -315,7 +355,8 @@ Giảm tâm ma, hồi tối đa 10% khí huyết và nghe tin.
       "info": 1
     },
     "req": null,
-    "limited": false
+    "limited": false,
+    "bac": 15
   }
 }
 ```
@@ -351,7 +392,8 @@ Mời rượu để kết giao, tăng lịch luyện và nghe tin.
       "info": 1
     },
     "req": null,
-    "limited": false
+    "limited": false,
+    "bac": 120
   }
 }
 ```
@@ -424,7 +466,8 @@ Nghe đàn giúp giảm tâm ma.
       "tamma": -8
     },
     "req": null,
-    "limited": false
+    "limited": false,
+    "bac": 30
   }
 }
 ```
@@ -535,7 +578,9 @@ Một gã say đập bàn, chửi bới, giật đồ của tửu khách. Không
     "stoneBase": 0,
     "g": {
       "st": 6,
-      "karma": 1
+      "hd": {
+        "p": 1
+      }
     },
     "req": null,
     "limited": true,

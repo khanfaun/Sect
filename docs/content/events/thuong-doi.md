@@ -50,7 +50,7 @@ Nguồn chuẩn: `content/events/thuong-doi.json`. Bản đọc tự sinh. Cú p
 
 - **1. Nhận lời**
   - **Khả năng 1**: Một ngày một đêm, không có chuyện gì. {$a.ten} trả đủ công, còn dúi thêm một viên đan. `{"w":3,"e":{"h":24,"st":22,"pill":1,"an":["a","hộ tống qua đoạn đường nguy hiểm"]}}`
-  - **Khả năng 2**: Đúng như lời đồn, bọn cướp xông ra giữa đường. `{"w":2,"fight":{"k":"sontac","cnt":2},"win":{"t":"Bọn cướp tháo chạy. {$a.ten} vái ngươi ba vái, trả gấp đôi tiền công.","e":{"st":40,"karma":4,"an":["a","đánh lui bọn cướp"]}}}`
+  - **Khả năng 2**: Đúng như lời đồn, bọn cướp xông ra giữa đường. `{"w":2,"fight":{"k":"sontac","cnt":2},"win":{"t":"Bọn cướp tháo chạy. {$a.ten} vái ngươi ba vái, trả gấp đôi tiền công.","e":{"st":40,"deed":"giet_cuop_dang_ac","an":["a","đánh lui bọn cướp"]}}}`
 - **2. Từ chối**
   Ngươi lắc đầu. {$a.ten} thở dài, cho đoàn xe đi vòng.
 
@@ -184,10 +184,10 @@ Nguồn chuẩn: `content/events/thuong-doi.json`. Bản đọc tự sinh. Cú p
 - **1. Xông vào cứu**
   - `fight`: `{"k":"beast","cnt":2}`
   - **Thắng trận**: Bầy thú tan tác. {$a.ten} quỳ xuống cảm tạ, dâng cả túi linh thạch.
-    `{"e":{"st":35,"karma":6,"an":["a","cứu khỏi bầy yêu thú"]}}`
+    `{"e":{"st":35,"deed":"cuu_nguoi","an":["a","cứu khỏi bầy yêu thú"]}}`
 - **2. Đứng xa nhìn**
   Ngươi không xen vào. Lúc ngươi đi, tiếng kêu cứu đã tắt.
-  - `e`: `{"tamma":4,"karma":-2}`
+  - `e`: `{"tamma":4,"hd":{"t":1}}`
 - **3. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 

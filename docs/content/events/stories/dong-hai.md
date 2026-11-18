@@ -19,10 +19,10 @@ Tiếng đục dồn dập vọng ra từ khoang đá dưới chân đảo. Th�
 - **1. Dùng khí hộ thể giữ khô khoang**
   Ngươi dùng khí hộ thể ép nước khỏi khoang, giữ tới khi họ đục thông lối ra. Linh lực tiêu hao quá mức làm đan điền đau nhói. Người cuối cùng dìu ngươi lên bờ, liên tục gọi để ngươi đừng ngất.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"hp":"-15%","tv":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"hp":"-15%","tv":-3}`
 - **2. Mở nhanh từ phía nước nông**
   Thợ thoát, phần nước mới làm chìm dụng cụ và đập vỡ chiếc thuyền lương. Một cái đục nổi lên nhờ cán rỗng.
-  - `e`: `{"karma":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Tiếng gõ chuyển lên cao dần, đến sát lỗ thở.
 
@@ -43,10 +43,10 @@ Thợ cả {$a.ten} đóng bậc cầu cho người đi bộ, còn ngư nhân {$
 - **1. Góp ván làm hai lối**
   Ngươi mua thêm ván để thợ làm cả bậc lẫn lối dốc. Bến mở lại, ngư nhân tự kéo được hàng lên, người già cũng có chỗ đi chắc chân. Thợ cả nhìn người qua một buổi rồi chỉnh thêm tay vịn.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4,"an":["a","cầu thang cho người có vây"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","cầu thang cho người có vây"]}`
 - **2. Đổi bậc thành lối dốc rồi thu phí**
   Ngư nhân lên bến dễ hơn, người già trên đảo phải thuê người kéo. Trên tay vịn, một sợi dây buộc thấp dần.
-  - `e`: `{"st":22,"karma":-3}`
+  - `e`: `{"st":22,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Thợ cả hỏi ngư nhân cách làm dốc cho khỏi trơn. Ngươi nghe họ bàn giá gỗ rồi tiếp tục ra bến.
 
@@ -66,10 +66,10 @@ Chuyến thuyền sắp rời bến. Người lái thuyền {$a.ten} không dám
 
 - **1. Giữ thuyền một lát để họ nói chuyện**
   Ngươi giữ thuyền đợi thêm một lát, lỡ con nước thuận. Người lái thuyền cuối cùng cũng nói được lời hẹn, tự tay đeo khuyên cho người ở lại. Chủ thuyền thúc lần nữa, lần này hắn mới chịu lên.
-  - `e`: `{"karma":4,"an":["a","khuyên tai buộc neo"],"h":6}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","khuyên tai buộc neo"],"h":6}`
 - **2. Mang chiếc khuyên sang chuyến kế**
   Họ gửi ngươi tiền công. Lúc tới nơi, ngươi thấy người nhận đã đeo một chiếc khuyên gỗ cùng cỡ.
-  - `e`: `{"st":12,"karma":-1}`
+  - `e`: `{"st":12,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Ngươi lên đường, để họ tự nói chuyện. Khi dây neo được kéo lên, chiếc khuyên đã ở lại trên bờ.
 
@@ -90,7 +90,7 @@ Chuyến thuyền sắp rời bến. Người lái thuyền {$a.ten} không dám
 - **1. Trả thêm bằng cá khô**
   Ngươi mua cá khô trả thêm, nó nhận kéo thuyền lên tận bãi cứng. Xong việc, nó chia cá thành tám phần, nhìn hai càng hồi lâu rồi tự gom lại ăn hết.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **2. Thuê nó kéo bằng đúng số chân đã trả**
   Nó làm đúng lời, nhưng mất nửa buổi vì để hai càng khoanh trước ngực. Trên cát chỉ có sáu hàng dấu.
   - `cost`: `{"st":16}`
@@ -113,7 +113,7 @@ Bản hải đồ mỗi ngày mất một nét bờ. Người chép đồ {$a.te
 
 - **1. Dẫn đàn mực về vùng biển chúng đã vẽ**
   Ngươi bỏ chuyến thuận triều, đưa đàn mực về đúng vùng biển trên bản đồ. Chúng nhả nét mực xuống nước; cùng lúc ấy, bờ đảo hiện lại trên giấy. Chỉ chỗ đẻ trứng của chúng vẫn không có trên hải đồ.
-  - `e`: `{"karma":4,"tamma":-3,"h":24}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tamma":-3,"h":24}`
 - **2. Mượn một con để sửa đường trên hải đồ**
   Ngươi tìm được luồng nước mới. Đêm ấy, trong bát nước của ngươi nổi lên một nét bờ khác.
   - `e`: `{"tv":3,"tamma":3}`
@@ -137,11 +137,11 @@ Người đầu bếp {$a.ten} buộc mâm cơm vào phao cho bà cụ {$b.ten} 
 - **1. Mua ván bắc lại nhịp cầu**
   Ngươi mua ván, cùng dân nối lại đoạn cầu. Bà cụ tự sang bếp, vừa đi vừa mắng người đầu bếp lần sau đừng nấu canh nhạt. Hắn cười bảo từ nay bà cứ tới nếm trước.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4,"an":["a","mâm cơm buộc phao"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","mâm cơm buộc phao"]}`
 - **2. Thuê thuyền mang cơm mỗi tối**
   Cơm còn nóng khi tới, người chèo đò có công. Đêm đầu thuyền nghỉ, bà vẫn đặt một sợi dây ở bậc cửa.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **3. Bỏ đi**
   Người đầu bếp kéo phao về, rửa bát cho bữa sau. Bà cụ bên kia gọi vọng sang hỏi mai có cá không.
 
@@ -164,7 +164,7 @@ Hai con sóng chen vào khe rồi đẩy nhau trở lại. Nữ thợ lặn {$a.
   - `e`: `{"tv":5,"h":12}`
 - **2. Dùng pháp lực ép nước rẽ đôi**
   Ngươi tìm ra lối bổ sóng mạnh. {$a.ten} phải đi nhặt rổ ốc ở phía bên kia.
-  - `e`: `{"tv":4,"karma":-1}`
+  - `e`: `{"tv":4,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Ngươi rời vũng đá theo đường khô. Thợ lặn đã xuống nước, không còn ai trên bờ.
 
@@ -184,10 +184,10 @@ Quan bến {$a.ten} tính thuế theo số mắt lưới, mặc người đánh 
 
 - **1. Bắt cân số cá thực nộp**
   Ngươi bảo lãnh cho dân nộp theo cá thực có, chịu để hàng của mình bị giữ tới khi đối sổ. Người đan lưới đếm từng giỏ ngay trước mặt quan bến. Hàng chờ rất lâu, nhưng không ai chịu bỏ về.
-  - `e`: `{"karma":4,"h":12}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":12}`
 - **2. Đổi lấy quyền mua cá thuế**
   Ngươi nhận mua cá thuế giá thấp rồi bán lại cho thuyền buôn, có lời ngay trong phiên. Dân vẫn phải nộp theo tấm lưới rách. Người đan lưới nhận ra ngươi đứng bên cân, quay đi không chào.
-  - `e`: `{"st":22,"karma":-3}`
+  - `e`: `{"st":22,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Người đan lưới thắt nút quanh chỗ rách, tới chiều còn một mảnh nhỏ như bàn tay.
 
@@ -207,7 +207,7 @@ Dưới thuyền úp có tiếng ai cạo vảy. Thợ trét thuyền {$a.ten} c
 
 - **1. Kê thuyền và soi vào vệt cạo**
   Ngươi kê cao thuyền, dùng đèn của xưởng soi vào khe. Một con vật không mắt bò ra, đuổi theo ánh sáng tới tận mép biển. Ngươi ném đèn xuống nước; tiếng cạo dứt ngay khi lửa tắt.
-  - `e`: `{"karma":4,"tamma":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tamma":-3}`
 - **2. Hứng vảy để tôi giáp**
   Ngươi gom vảy, đổi cho thợ giáp lấy một món hộ thân đã tôi cùng loại. Khi đeo thử, da vai bị cứa thành những vệt rớm máu dù mặt trong giáp nhẵn. Thợ bảo ngươi có thể trả lại, nhưng ngươi vẫn giữ.
   - `e`: `{"tamma":4,"hp":"-5%","namedRelic":{"k":"giap","name":"Giáp Vảy Giao","lore":"Ngươi gom vảy, đổi cho thợ giáp lấy một món hộ thân đã tôi cùng loại. Khi đeo thử, da vai bị cứa thành những vệt rớm máu dù mặt trong giáp nhẵn. Thợ bảo ngươi có thể trả lại, nhưng ngươi vẫn giữ."}}`
@@ -230,11 +230,11 @@ Người con {$b.ten} sắp bán chiếc thuyền của cha để trả nợ. Tr
 
 - **1. Đỡ buồm để hai người rút từng mũi**
   Ngươi giúp hạ và đỡ buồm, để họ tháo nguyên bàn tay vải. Họ lỡ phiên bán nhưng không còn phải cắt nó ra. Người con nhờ thợ khâu may vào áo đi biển của mình.
-  - `e`: `{"karma":4,"an":["a","bàn tay đặt ở mũi thuyền"],"h":12}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","bàn tay đặt ở mũi thuyền"],"h":12}`
 - **2. Mua thuyền nguyên buồm**
   Họ đủ tiền trả nợ bến. Mỗi khi có gió ngược, bàn tay vải quệt một lần lên mặt ngươi.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":1,"tamma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"tamma":2}`
 - **3. Bỏ đi**
   {$b.ten} cắt quanh cổ tay, chừa lại một vành vải tròn trên buồm.
 
@@ -254,10 +254,10 @@ Yêu tu {$a.ten} nói tất cả con nước dưới chân đảo thuộc dòng 
 
 - **1. Đọc khế cho người đang tập nghe**
   Ngươi đọc rõ khế: dòng họ ấy chỉ được coi cống, không có quyền thu tiền bãi tập. Người đang tập yêu cầu dỡ biển. Yêu tu cãi thêm vài câu rồi mang biển đi, không tìm được chỗ nào trong khế để chỉ lại.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Nhận phần lợi để chứng khế cho hắn**
   Hắn chia tiền thu bãi, cho ngươi dùng riêng một khoảng nước để đổi việc chứng khế. Người sửa cống tới đòi đọc giấy gốc, hắn bảo chữ của ngươi đã đủ làm bằng. Mọi người quay sang chờ ngươi trả lời.
-  - `e`: `{"st":22,"karma":-3}`
+  - `e`: `{"st":22,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Nước lên, {$b.ten} ngậm khế lại. Tấm biển thu tiền nổi mất chữ đầu.
 
@@ -278,11 +278,11 @@ Nữ thợ chăm bể {$a.ten} cắm một cọng cỏ để biết dòng nướ
 - **1. Mua nước sạch cứu bể trứng**
   Ngươi mua thùng nước dự trữ của thuyền buôn, dẫn qua bể cho trứng khỏi ngạt. Người chăm bể gọi thêm người giúp chuyển trứng sang trạm khác, không muốn phải chờ kẻ thuê nàng mở nước nữa.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4,"an":["a","cọng cỏ trong bể trứng"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","cọng cỏ trong bể trứng"]}`
 - **2. Mua ổ trứng trước khi bể khô**
   Ngươi giữ được ổ ở một bể riêng và bán được con giống. {$a.ten} lấy cọng cỏ trồng bên bể trống.
   - `cost`: `{"st":16}`
-  - `e`: `{"st":38,"karma":-1}`
+  - `e`: `{"st":38,"hd":{"t":1}}`
   - `accounting`: `{"mode":"buy-and-sell","capital":16,"profit":22}`
 - **3. Bỏ đi**
   Nàng đi gọi những người còn giữ nước ở gần trạm. Ngươi rời bến khi họ đang gánh từng thùng tới.
@@ -303,10 +303,10 @@ Nước chỉ rút tới chân đê này một lần trong năm. Thợ rèn {$a.
 
 - **1. Dùng thanh sắt ở bờ làm đòn bẩy**
   Ngươi hạ người bẩy đinh bằng thanh sắt của đội sửa đê. Đinh bật ra trước khi nước dâng, ngươi cùng lão chạy lên bậc cuối. Lão thở hổn hển, vẫn nhớ giữ kìm khỏi rơi xuống biển.
-  - `e`: `{"karma":4,"an":["a","đinh biển rút lúc triều xuống"]}`
+  - `e`: `{"deed":"cuu_nguoi","an":["a","đinh biển rút lúc triều xuống"]}`
 - **2. Rút kìm để giữ mạng người trước**
   {$a.ten} lên bờ an toàn, đê phải chống thêm qua một mùa. Lão dành tối đó mài lại kìm.
-  - `e`: `{"karma":2}`
+  - `e`: `{"deed":"cuu_nguoi"}`
 - **3. Bỏ đi**
   Khi ngươi lên bờ, chuôi kìm đã ở ngang mặt nước.
 
@@ -327,7 +327,7 @@ Gió thổi tro buồm về bờ. Người nhặt tro {$a.ten} rây từng gáo 
 - **1. Giúp tách tro bằng linh lực**
   Ngươi dùng linh lực tách sợi vải còn sót khỏi tro, giúp họ đối với mảnh buồm giữ ở nhà. Có nhà nhận ra tàu của người thân, có nhà vẫn chưa biết. Người nhặt tro nhờ ngươi đừng vội gộp phần chưa rõ vào chung.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","mặt biển còn tro"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","mặt biển còn tro"]}`
 - **2. Mua phần tro có tơ linh**
   Ngươi luyện được mực chịu nước. Lúc mở túi, một nút chỉ nhỏ rơi ra còn nguyên hai vòng.
   - `cost`: `{"st":16}`
@@ -351,10 +351,10 @@ Giao yêu {$a.ten} thay răng đúng ngày chợ họp, mỗi lần hắt hơi l
 
 - **1. Trải chiếu hứng giúp hắn**
   Ngươi trải chiếu giúp, nhận một chiếc răng cũ làm công. Giao yêu dặn không được nói nó thay răng mất một bên trước. Dưới chợ đã có người nghe thấy, nó đành ngậm miệng bay đi.
-  - `e`: `{"karma":2,"pill":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"pill":1}`
 - **2. Thu tiền người muốn đứng chờ**
   Ngươi kiếm được ít bạc, {$a.ten} bay đi trước lần hắt hơi cuối. Đám người dưới mái chỉ hứng được một cục vảy.
-  - `e`: `{"st":22,"karma":-3}`
+  - `e`: `{"st":22,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Giao yêu gọi người dọn hàng tránh ra, hắt hơi nốt rồi mới bay. Chợ cá trở lại ồn ào, chẳng ai còn mặc cả chuyện chiếc răng.
 
@@ -374,11 +374,11 @@ Dân đảo đẩy một tảng đá để lấy nắng phơi cá. Lão ngư nh�
 
 - **1. Gọi người đổi hướng tảng đá**
   Ngươi gọi dân xoay tảng đá sang phía bãi trống, tự bỏ công dọn chỗ neo đang vướng đường. Mọi người có nắng phơi cá, lão vẫn được nằm trong bóng. Lão bảo lúc đầu chỉ cần hỏi nhau một tiếng là xong.
-  - `e`: `{"karma":4,"an":["a","tảng đá che mùa nắng"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","tảng đá che mùa nắng"]}`
 - **2. Mua chỗ nằm khác cho lão**
   Lão có mái che. Hôm đầu, lão vẫn lội về bãi cũ để nhặt phần rong đã phơi dở.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **3. Bỏ đi**
   Tảng đá dịch qua khỏi vệt ẩm trên cát. Lão chờ bóng mới rồi mới đứng dậy.
 
@@ -398,10 +398,10 @@ Mặt nước dựng váng bạc, phủ kín nơi chim biển vẫn đậu. Ngư
 
 - **1. Phá một đường dẫn chim về bờ**
   Ngươi dùng kiếm khí phá một đường qua lớp váng, đánh tới khi tay tê dại. Đàn chim thoát về bờ trước khi khe khép lại. Người giữ phao vội đánh dấu vùng nước, ngăn thuyền sau đi vào.
-  - `e`: `{"karma":4,"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"hp":"-10%"}`
 - **2. Thu váng để bọc pháp khí**
   Ngươi có vật liệu cứng. Lũ chim đổi bãi, trên đảo thiếu phân bón suốt một mùa.
-  - `e`: `{"karma":-3,"namedMat":"story_mat_vang_bac_theo_trieu_nguoc"}`
+  - `e`: `{"hd":{"t":3},"ng":{"b":1},"namedMat":"story_mat_vang_bac_theo_trieu_nguoc"}`
 - **3. Bỏ đi**
   Một con chim vỗ cánh ba lần rồi bỏ chiếc lông lại.
 
@@ -421,14 +421,14 @@ Thợ đóng tàu {$a.ten} giấu lẫy mở trong khoang hàng, vừa tầm ng�
 
 - **1. Giữ lẫy và dẫn người xét hàng tới**
   Ngươi giữ lại lẫy mở, dẫn người xét hàng tới xưởng. Những người bị nhốt được đưa lên, có người đứng không vững vì nằm quá lâu. Chủ thuyền nhìn ngươi đầy căm tức khi bị giữ lại hỏi tội.
-  - `e`: `{"karma":4,"oan":["a","mấu khóa phía dưới boong"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"oan":["a","mấu khóa phía dưới boong"]}`
 - **2. Tháo lẫy để bán lấy tin hành trình**
   Chủ thuyền trả linh thạch cùng bản ghi đường qua đá ngầm để ngươi tháo lẫy. Ngươi nhận đủ rồi rời xưởng. Tiếng người gõ đúng chỗ lẫy cũ còn theo ra tới cổng.
-  - `e`: `{"st":16,"karma":-4,"tamma":3}`
+  - `e`: `{"st":16,"deed":"lua_loi","tamma":3}`
 - **3. Giao đấu với {$b.ten} để giành khoang**
   - `fight`: `{"k":"sontac","n":"{$b.ten}"}`
   - **Thắng trận**: Ngươi lấy chìa và đưa người lên boong.
-    `{"e":{"karma":4}}`
+    `{"e":{"hd":{"p":3},"ng":{"g":3}}}`
   - **Thua trận**: Thua, ngươi bị đẩy xuống triền tàu, trên tay vẫn nắm một mẩu lẫy.
 - **4. Bỏ đi**
   {$a.ten} nhét một mẩu gỗ thay vào, tay làm rất chậm.
@@ -449,11 +449,11 @@ Mỗi khi nhà bỏ trống, san hô leo lên cọc rồi trổ mái mới. Ngư
 
 - **1. Giúp dân nhường bãi cọc cho san hô**
   Ngươi giúp tháo những tấm ván còn dùng được trước đợt triều cao. San hô nối liền quanh chân cọc cũ, dân chuyển nhà lên nền đá. Người giữ đất thôi cắm biển bán những căn đã không còn ở được.
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **2. Mua một mái mới để dưỡng pháp khí**
   Mái giữ được linh khí, còn căn nhà kế mất chỗ dựa. Đêm xuống, san hô chạm nhau ngoài mặt nước.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":-2,"item":"story_item_mai_nha_moc_tren_coc_chet"}`
+  - `e`: `{"hd":{"t":1},"item":"story_item_mai_nha_moc_tren_coc_chet"}`
 - **3. Bỏ đi**
   Ngươi tránh bãi cọc khi nước lên. Người giữ đất cũng gỡ biển, đứng nhìn hồi lâu rồi mang về.
 
@@ -474,9 +474,9 @@ Nữ tu vẽ bùa {$a.ten} ngồi bên thau hứng mưa để người đi biể
 - **1. Giữ mưa trong thau đến hết đêm**
   Ngươi giữ mặt nước bằng linh lực đến hết đêm, không còn đủ khí dưỡng vết thương ngay. Hai người hỏi nhau những chuyện rất thường: ăn gì, ngủ ở đâu, bao giờ về. Trời sáng, nàng tự nghiêng thau khép phép rồi cảm tạ ngươi.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","bóng người trong gương nước mưa"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","bóng người trong gương nước mưa"]}`
 - **2. Dùng mặt nước gửi lời mình trước**
   Lời ngươi đi xa và nàng mất một buổi đợi. Chiếc ghế còn lại vẫn phủ áo.
-  - `e`: `{"tv":3,"karma":-1}`
+  - `e`: `{"tv":3,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Mưa ngớt, nàng nghiêng thau để giữ mặt người ấy thêm một lát.
