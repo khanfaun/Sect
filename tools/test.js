@@ -276,7 +276,7 @@ const TESTS = {
   },
   nen() {
     fresh();
-    ok(run("feat('nq')")===false, 'feat(nq) tắt');
+    ok(run("feat('nq')")===true && run("feat('vo')")===false, 'feat(nq) bật từ Đ1, feat(vo) còn tắt');
     ok(run("typeof migrateX")==='function', 'có migrateX');
     ok(run("(()=>{const d={meta:{}};migrateX(d);return !!d.meta.v2})()"), 'migrateX thêm meta.v2 cho bản lưu cũ');
     ok(run("ageY()")===run("Math.floor(G.run.age)"), 'ageY = năm nguyên');
@@ -325,8 +325,7 @@ const TESTS = {
   },
   nq_legacy() {
     fresh();
-    run("FEAT.nq=1");
-    try {
+    {
       const ch=run("applyE({karma:5})");
       ok(Array.isArray(ch) && ch.some(c=>c.i==='☯️'), 'applyE karma cũ ra chip');
       ok(typeof run("G.run.karma")==='number' && run("NK.count('nq.hd')")>0, 'bút toán tạm ghi Hành Đạo');
@@ -339,7 +338,32 @@ const TESTS = {
       ok(/tà/i.test(run("hdName()")), 'bản lưu cũ nhãn tà: '+run("hdName()"));
       ok(run("G.run.karma")===-70, 'gương giữ đúng karma cũ');
       ok(run("questPenalty({reward:{st:10}}).deed")==='that_hua', 'phạt hủy nhiệm vụ là thất hứa');
-    } finally { run("FEAT.nq=0"); }
+    }
+  },
+  danh() {
+    fresh();
+    const id=run("(()=>{const n=W().regions.flatMap(x=>x.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;return n.id})()");
+    ok(run(`danhOf(nodeById(${JSON.stringify(id)}))`)===0, 'danh tiếng ban đầu bằng không');
+    run("for(let i=0;i<3;i++)deed('giet_vo_toi',{lo:1})");
+    const v=run(`danhOf(nodeById(${JSON.stringify(id)}))`);
+    ok(v<=-25, 'giết người bị lộ: tiếng xấu '+v);
+    ok(run(`dangerTag(nodeById(${JSON.stringify(id)}))`)===2, 'thị trấn thù địch mức 2');
+    ok(!/\d/.test(run(`danhName(nodeById(${JSON.stringify(id)}))`)), 'tên danh tiếng không có số');
+    run("for(let i=0;i<3;i++)deed('giet_vo_toi',{lo:0})");
+    ok(run(`danhOf(nodeById(${JSON.stringify(id)}))`)===v, 'việc kín không đổi danh tiếng');
+    ok(run("NK.count('danh')")>0, 'có nhật ký danh');
+  },
+  nq_doc() {
+    fresh('G.run.ng.B=0');
+    ok(run("kiepKind()")!=='nghiep', 'không nghiệp: kiếp thường');
+    run("G.run.ng.B=20");
+    ok(run("kiepKind()")==='nghiep', 'nghiệp chướng từ 15: Nghiệp Hỏa kiếp');
+    run("G.run.hd.log=[{p:0,t:20}];G.run.hd.lv=null");
+    ok(run("(()=>{const r=G.run;delete r.hd;r.karma=-80;ttPhys(r);return hdLvIdx(r)})()")===4, 'ttPhys dựng Hành Đạo từ karma khi thiếu');
+    const need=run("(()=>{const r=G.run;r.hd.log=[{p:20,t:0}];r.hd.lv=null;return needList({need:{karma:10}}).find(x=>/chính/i.test(x.t))})()");
+    ok(need && need.ok===true, 'điều kiện tông theo Hành Đạo: '+(need&&need.t));
+    run("G.run.hd.log=[{p:0,t:24}];G.run.hd.lv=null;G.run.ng.B=60;G.meta.ach=G.meta.ach.filter(x=>x!=='ma');deed('giet_vo_toi')");
+    ok(run("G.meta.ach.includes('ma')"), 'thành tựu Ma đầu theo Hành Đạo + nghiệp');
   },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {

@@ -14,7 +14,7 @@ function needList(c){const r=G.run,s=S(),L=[];if(!c)return L;
     for(const k in (n.stat||{}))L.push({ok:s[k]>=n.stat[k],t:STAT_N[k]+' ≥ '+n.stat[k]});
     if(n.item)L.push({ok:r.pills.some(p=>p.id===n.item),t:contentText("core2_03-cong-hien-tong-mon_js.needList.008")+PILL[n.item].n});
     if(n.mat)for(const k in n.mat)L.push({ok:(r.mats&&r.mats[k]||0)>=n.mat[k],t:n.mat[k]+' '+MAT[k].n.toLowerCase()});
-    if(n.karma!=null)L.push({ok:n.karma>=0?r.karma>=n.karma:r.karma<=n.karma,t:n.karma>=0?contentText("core2_03-cong-hien-tong-mon_js.needList.009"):contentText("core2_03-cong-hien-tong-mon_js.needList.010")});
+    if(n.karma!=null&&feat('nq')){const L0=hdLvIdx(r);L.push(n.karma>=0?{ok:L0<=1,t:HD_LV[1].n.toLowerCase()}:{ok:L0>=3,t:HD_LV[3].n.toLowerCase()});}else if(n.karma!=null)L.push({ok:n.karma>=0?r.karma>=n.karma:r.karma<=n.karma,t:n.karma>=0?contentText("core2_03-cong-hien-tong-mon_js.needList.009"):contentText("core2_03-cong-hien-tong-mon_js.needList.010")});
     if(n.member)L.push({ok:!!r.flags.tongmon,t:contentText("core2_03-cong-hien-tong-mon_js.needList.011")});
     if(n.ch)L.push({ok:(r.ch||0)>=n.ch,t:contentText("core2_03-cong-hien-tong-mon_js.needList.012")+n.ch});}
   return L;}

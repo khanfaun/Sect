@@ -58,3 +58,6 @@ FEAT.nq=1;
 function ngBac(v){let i=0;for(let k=0;k<NQ_BAC.length;k++)if((v||0)>=NQ_BAC[k])i=k;return i;}
 function ngBacB(r){return ngBac(ngB(r));}
 function ngBacG(r){return ngBac(ngG(r));}
+// thành tựu Thiện nhân / Ma đầu theo hệ mới (Đ1.5)
+function nqAch(){const r=G.run;if(!r||!r.hd||typeof ach!=='function')return;const L=hdLvIdx(r);if(L===0&&ngG(r)>=50)ach('thien');if(L===4&&ngB(r)>=50)ach('ma');}
+{const _d=deed;deed=function(){const ch=_d.apply(this,arguments);nqAch();return ch;};}
