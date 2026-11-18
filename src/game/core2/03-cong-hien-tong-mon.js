@@ -1,8 +1,15 @@
 // ----- cống hiến tông môn -----
 const CH_YEAR=10;
+// Đ3.4: cống hiến theo từng thế lực: r.chMap={'sect:<tên tông>':{v,dong}}. Khóa là tông đang đứng (nếu đứng ở sơn môn), không thì tông mình thuộc.
+function chSectOf(n){return n&&n.type==='tong'?(n.owner||n.name):null;}
+function chKey(){const r=G.run;if(!r)return null;const h=chSectOf(nodeById(r.at));const nm=h||contentSectName();return nm?'sect:'+nm:null;}
+function chGet(k){const r=G.run;if(!r||!k)return 0;const e=(r.chMap||{})[k];if(!e)return 0;if(e.dong&&!(r.flags.tongmon&&'sect:'+contentSectName()===k))return 0;return e.v||0;}
+function chAdd(k,x){const r=G.run;if(!r||!k||!x)return 0;const m=r.chMap||(r.chMap={});const e=m[k]||(m[k]={v:0,dong:0});const v0=e.v||0;e.v=Math.max(0,v0+x);dbg('ch.add',{k,x,v:e.v});return e.v-v0;}
+// rời tông: tự nguyện thì sổ đóng lại (giữ số), bị trục xuất thì xóa sổ
+function chLeave(k,expel){const r=G.run;if(!r||!k||!r.chMap||!r.chMap[k])return;if(expel)delete r.chMap[k];else r.chMap[k].dong=1;dbg('ch.leave',{k,expel:!!expel});}
 // Bảng CH_GIVE: content/rules/ch-give.js
-function chGive(k){const r=run2();if(!r.flags.tongmon||!r.mats[k])return;r.mats[k]--;r.ch=(r.ch||0)+CH_GIVE[k];}
-function chTrade(){const r=run2();if((r.ch||0)<15||r.pills.length>=S().pillMax)return;r.ch-=15;const id=rollPill();gainPill(id,1);note(contentText("core2_03-cong-hien-tong-mon_js.chTrade.001")+PILL[id].n+'.','up');}
+function chGive(k){const r=run2();if(!r.flags.tongmon||!r.mats[k])return;r.mats[k]--;chAdd(chKey(),CH_GIVE[k]);}
+function chTrade(){const r=run2();if(chGet(chKey())<15||r.pills.length>=S().pillMax)return;chAdd(chKey(),-15);const id=rollPill();gainPill(id,1);note(contentText("core2_03-cong-hien-tong-mon_js.chTrade.001")+PILL[id].n+'.','up');}
 
 // ----- lựa chọn có điều kiện: đủ thì sáng, thiếu thì mờ kèm lý do -----
 // Bảng STAT_N: content/rules/stat-n.js
@@ -16,11 +23,11 @@ function needList(c){const r=G.run,s=S(),L=[];if(!c)return L;
     if(n.mat)for(const k in n.mat)L.push({ok:(r.mats&&r.mats[k]||0)>=n.mat[k],t:n.mat[k]+' '+MAT[k].n.toLowerCase()});
     if(n.karma!=null&&feat('nq')){const L0=hdLvIdx(r);L.push(n.karma>=0?{ok:L0<=1,t:HD_LV[1].n.toLowerCase()}:{ok:L0>=3,t:HD_LV[3].n.toLowerCase()});}else if(n.karma!=null)L.push({ok:n.karma>=0?r.karma>=n.karma:r.karma<=n.karma,t:n.karma>=0?contentText("core2_03-cong-hien-tong-mon_js.needList.009"):contentText("core2_03-cong-hien-tong-mon_js.needList.010")});
     if(n.member)L.push({ok:!!r.flags.tongmon,t:contentText("core2_03-cong-hien-tong-mon_js.needList.011")});
-    if(n.ch)L.push({ok:(r.ch||0)>=n.ch,t:contentText("core2_03-cong-hien-tong-mon_js.needList.012")+n.ch});}
+    if(n.ch)L.push({ok:chGet(chKey())>=n.ch,t:contentText("core2_03-cong-hien-tong-mon_js.needList.012")+n.ch});}
   return L;}
 function needOk(c){return needList(c).every(x=>x.ok);}
 {const _ch=choose;choose=function(i){const r=G.run,sc=r.scene,e=EVMAP[sc.id];const c=(resolveP(e,sc.cur)||[])[i];if(!c||!needOk(c))return;
-  const n=c.need;if(n){if(n.item&&n.use){const k=r.pills.findIndex(p=>p.id===n.item);if(k>=0)r.pills.splice(k,1);}if(n.mat&&n.use)for(const k in n.mat)r.mats[k]-=n.mat[k];if(n.ch)r.ch-=n.ch;}
+  const n=c.need;if(n){if(n.item&&n.use){const k=r.pills.findIndex(p=>p.id===n.item);if(k>=0)r.pills.splice(k,1);}if(n.mat&&n.use)for(const k in n.mat)r.mats[k]-=n.mat[k];if(n.ch)chAdd(chKey(),-n.ch);}
   _ch(i);};}
 // cổng sơn môn: một đoạn hội thoại mẫu dùng đủ các loại điều kiện
 // Nội dung sự kiện: content/events/ (tra ID cong_son_mon).
@@ -30,8 +37,8 @@ function needOk(c){return needList(c).every(x=>x.ok);}
   if(n.type==='tong'){add('congmon',contentText("core2_03-cong-hien-tong-mon_js.013"),1,contentText("core2_03-cong-hien-tong-mon_js.014"));
     if(r.flags.tongmon){const m=Math.floor(W().t/HM);const done=n.tv&&n.tv.m===m&&n.tv.k===r.kiep;
       add('tongviec',contentText("core2_03-cong-hien-tong-mon_js.015"),10*HD,contentText("core2_03-cong-hien-tong-mon_js.016"),done,done?contentText("core2_03-cong-hien-tong-mon_js.017"):contentText("core2_03-cong-hien-tong-mon_js.018"));
-      add('conghien',contentText("core2_03-cong-hien-tong-mon_js.019"),0,contentText("core2_03-cong-hien-tong-mon_js.020"),false,contentText("core2_03-cong-hien-tong-mon_js.021")+(r.ch||0));
-      add('tinhthat',contentText("core2_03-cong-hien-tong-mon_js.022"),0,contentText("core2_03-cong-hien-tong-mon_js.023")+CH_YEAR+contentText("core2_03-cong-hien-tong-mon_js.024"),(r.ch||0)<CH_YEAR/4,CH_YEAR+contentText("core2_03-cong-hien-tong-mon_js.025"));}}
+      add('conghien',contentText("core2_03-cong-hien-tong-mon_js.019"),0,contentText("core2_03-cong-hien-tong-mon_js.020"),false,contentText("core2_03-cong-hien-tong-mon_js.021")+chGet(chKey()));
+      add('tinhthat',contentText("core2_03-cong-hien-tong-mon_js.022"),0,contentText("core2_03-cong-hien-tong-mon_js.023")+CH_YEAR+contentText("core2_03-cong-hien-tong-mon_js.024"),chGet(chKey())<CH_YEAR/4,CH_YEAR+contentText("core2_03-cong-hien-tong-mon_js.025"));}}
   if(n.type==='cho'){add('taphoa',contentText("core2_03-cong-hien-tong-mon_js.026"),1,contentText("core2_03-cong-hien-tong-mon_js.027"));add('laibuon',contentText("core2_03-cong-hien-tong-mon_js.028"),0,contentText("core2_03-cong-hien-tong-mon_js.029"));add('tea',contentText("core2_03-cong-hien-tong-mon_js.030"),1,contentText("core2_03-cong-hien-tong-mon_js.031"));}
   if(n.type==='ancu'){const m=Math.floor(W().t/HM);const done=n.tg&&n.tg.m===m&&n.tg.k===r.kiep;add('thinhgiao',contentText("core2_03-cong-hien-tong-mon_js.032"),HD,contentText("core2_03-cong-hien-tong-mon_js.033"),done,done?contentText("core2_03-cong-hien-tong-mon_js.034"):'');}
   if(isWild(n)&&!n.dp)add('khaiphu',contentText("core2_03-cong-hien-tong-mon_js.035"),HM,contentText("core2_03-cong-hien-tong-mon_js.036"),dangerTag(n)>=3,dangerTag(n)>=3?contentText("core2_03-cong-hien-tong-mon_js.037"):'');
@@ -41,7 +48,7 @@ function needOk(c){return needList(c).every(x=>x.ok);}
   if(!sc||sc.type!=='place')return;const n=nodeById(sc.id);const act=placeActs(n).find(x=>x.a===a);if(!act||act.dis)return;sc.msg=[];sc.chips=[];
   if(a==='congmon'){advanceTime(1);if(G.run&&G.run.scene===sc)startEvent('cong_son_mon');return;}
   const m=Math.floor(W().t/HM);
-  if(a==='tongviec'){n.tv={m,k:r.kiep};advanceTime(10*HD);if(!G.run||G.run.scene!==sc)return;r.ch=(r.ch||0)+6;sc.msg=[contentText("core2_03-cong-hien-tong-mon_js.038")];sc.chips=[chip('🏅',contentText("core2_03-cong-hien-tong-mon_js.039"),contentText("core2_03-cong-hien-tong-mon_js.040"),'up'),chip('⏳',contentText("core2_03-cong-hien-tong-mon_js.041"),contentText("core2_03-cong-hien-tong-mon_js.042"),'')];return;}
+  if(a==='tongviec'){n.tv={m,k:r.kiep};advanceTime(10*HD);if(!G.run||G.run.scene!==sc)return;chAdd(chKey(),6);sc.msg=[contentText("core2_03-cong-hien-tong-mon_js.038")];sc.chips=[chip('🏅',contentText("core2_03-cong-hien-tong-mon_js.039"),contentText("core2_03-cong-hien-tong-mon_js.040"),'up'),chip('⏳',contentText("core2_03-cong-hien-tong-mon_js.041"),contentText("core2_03-cong-hien-tong-mon_js.042"),'')];return;}
   if(a==='thinhgiao'){n.tg={m,k:r.kiep};advanceTime(HD);if(!G.run||G.run.scene!==sc)return;sc.msg=[pick([contentText("core2_03-cong-hien-tong-mon_js.043"),contentText("core2_03-cong-hien-tong-mon_js.044")])];sc.chips=[chip('⏳',contentText("core2_03-cong-hien-tong-mon_js.045"),contentText("core2_03-cong-hien-tong-mon_js.046"),'')].concat(applyE({tv:3,tamma:-6,dao:chance(.25)?1:0}));return;}
 };}
 // thăm dò ở nơi có người: hàng hóa chắc chắn có và thứ chỉ gặp khi có duyên

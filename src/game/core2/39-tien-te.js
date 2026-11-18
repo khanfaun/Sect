@@ -64,3 +64,8 @@ function ttUse(n){const w=W();const m=Math.floor(w.t/HM);const T=(w.tientrang=w.
   ttUse(n);sc.msg=[contentText(id==='mua'?'tien.ttMuaXong':'tien.ttBanXong')];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;dbg('tien.tt',{id,left:ttLeft(n)});saveSoon();return true;};}
 {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(feat('tien')&&(n.type==='thanh'||n.type==='cho')&&n.state!=='ruin'&&!L.some(x=>x.a==='tientrang'))
   L.push({a:'tientrang',i:'🏦',l:contentText('tien.tt'),h:0,tip:contentText('tien.ttTip'),dis:false,x:''});return L;};}
+
+// ---------- Đ3.4: cống hiến theo thế lực (hàm chKey/chGet/chAdd ở core2/03) ----------
+// bản lưu cũ: r.ch là một số chung → sổ của tông đang thuộc
+{const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._chV1){r._chV1=1;r.chMap=r.chMap||{};
+  if(r.ch!=null){const nm=r.flags&&r.flags.tongmon?contentSectName():null;if(nm&&r.ch>0){const k='sect:'+nm;r.chMap[k]={v:(r.chMap[k]&&r.chMap[k].v||0)+r.ch,dong:0};}delete r.ch;}}return r;};}

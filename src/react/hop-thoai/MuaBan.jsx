@@ -7,7 +7,7 @@ export function DienCongHien() {
   return (
     <div className="mbox">
       <h3>Điện cống hiến</h3>
-      <p className="hint">Đang có <b>{r.ch || 0}</b> cống hiến.</p>
+      <p className="hint">Đang có <b>{PS.chGet(PS.chKey())}</b> cống hiến.</p>
       <h4 className="sgrp">Nộp vật liệu</h4>
       <div className="rows">
         {Object.keys(CH_GIVE).map(k => (
@@ -20,7 +20,7 @@ export function DienCongHien() {
       </div>
       <h4 className="sgrp">Đổi thưởng</h4>
       <div className="rows">
-        <button className="row" data-act="chTrade" disabled={(r.ch || 0) < 15 || r.pills.length >= PS.S().pillMax}>
+        <button className="row" data-act="chTrade" disabled={PS.chGet(PS.chKey()) < 15 || r.pills.length >= PS.S().pillMax}>
           <span className="r-t"><b>Một viên đan trung phẩm</b><small>ngẫu nhiên</small></span><span className="r-x">15 cống hiến</span>
         </button>
       </div>

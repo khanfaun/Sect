@@ -565,6 +565,21 @@ const TESTS = {
     run("advanceTime(HM)");ok(run("venueDo('tientrang','ban')"), 'sang tháng đổi lại được');
     run("G.run.bac=1000");ok(!run("venueDo('tientrang','mua')"), 'không đủ bạc thì không mua');
   },
+  // Đ3.4 cống hiến theo thế lực: sổ tông A không dùng ở tông B; bản lưu cũ r.ch → sổ tông hiện tại
+  tien_te() {
+    fresh();
+    const T=JSON.parse(run("JSON.stringify(W().regions.flatMap(R=>R.nodes).filter(n=>n.type==='tong').slice(0,2).map(n=>({id:n.id,s:n.owner||n.name})))"));
+    ok(T.length===2&&T[0].s!==T[1].s, 'có hai sơn môn khác nhau: '+T.map(x=>x.s).join(' / '));
+    run(`G.run.flags.tongmon=1;G.run.sectName=${JSON.stringify(T[0].s)};G.run.at=${JSON.stringify(T[0].id)};chAdd(chKey(),30)`);
+    ok(run("chGet(chKey())")===30, 'đứng ở tông A: có 30 cống hiến');
+    run(`G.run.at=${JSON.stringify(T[1].id)}`);ok(run("chGet(chKey())")===0, 'đứng ở tông B: không dùng được cống hiến tông A');
+    ok(!run("needOk({need:{ch:10}})"), 'lựa chọn đòi cống hiến bị khóa ở tông B');
+    run(`G.run.at=${JSON.stringify(T[0].id)}`);ok(run("needOk({need:{ch:10}})"), 'về tông A thì mở');
+    run(`chLeave('sect:'+${JSON.stringify(T[0].s)});G.run.flags.tongmon=0`);ok(run("chGet(chKey())")===0&&run(`G.run.chMap['sect:'+${JSON.stringify(T[0].s)}].v`)===30, 'rời tông tự nguyện: sổ đóng, giữ số');
+    run(`chLeave('sect:'+${JSON.stringify(T[0].s)},1)`);ok(run(`!G.run.chMap['sect:'+${JSON.stringify(T[0].s)}]`), 'bị trục xuất: xóa sổ');
+    run(`G.run.flags.tongmon=1;G.run.chMap=null;delete G.run._chV1;G.run.ch=30;run2()`);
+    ok(run(`G.run.chMap['sect:'+${JSON.stringify(T[0].s)}].v`)===30&&run("G.run.ch===undefined"), 'bản lưu cũ r.ch=30 → sổ tông hiện tại 30');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });

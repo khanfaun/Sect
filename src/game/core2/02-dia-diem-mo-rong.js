@@ -123,11 +123,11 @@ function bqRisk(y){if(G.bqRoom)return 0;const n=curNode();if(y<1)return 0;return
 function bqCan(){const r=G.run;if(!r||r.moving)return contentText("core2_02-dia-diem-mo-rong_js.bqCan.090");if(dangerTag(curNode())>=3)return contentText("core2_02-dia-diem-mo-rong_js.bqCan.091");return '';}
 function bqInfo(){const r=G.run,s=S();const rate=bqRate();const left=Math.max(0,s.life-r.age);
   const need=Math.max(0,100-r.tv)/rate;let maxY=Math.max(0.25,Math.min(20,Math.floor(left*4)/4));
-  if(G.bqRoom)maxY=Math.max(0.25,Math.min(maxY,Math.floor((r.ch||0)/CH_YEAR*4)/4));
+  if(G.bqRoom)maxY=Math.max(0.25,Math.min(maxY,Math.floor(chGet(chKey())/CH_YEAR*4)/4));
   return {rate,left,need:Math.max(0.25,Math.ceil(need*4)/4),maxY,full:r.tv>=100};}
 function bqCustom(y){const r=G.run;if(!r||bqCan())return false;if(!r.scene)openPlace(r.at);const sc=r.scene;if(!sc||sc.type!=='place')return false;
   const I=bqInfo();y=clamp(Math.round(y*4)/4,0.25,I.maxY);const room=!!G.bqRoom;
-  if(room){const c=Math.ceil(y*CH_YEAR);if((r.ch||0)<c){G.bqRoom=false;return false;}r.ch-=c;}
+  if(room){const c=Math.ceil(y*CH_YEAR);if(chGet(chKey())<c){G.bqRoom=false;return false;}chAdd(chKey(),-c);}
   const g=bqRate()*y*(y<1?0.9:1);const risk=bqRisk(y);G.bqRoom=false;sc.msg=[T(bqText())];sc.chips=[];
   if(chance(risk)){advanceTime(y*HY*0.5);if(!G.run)return true;sc.msg.push(T(REST_T.bqint));
     sc.chips=applyE({tv:g*0.5,tvMajor:1,tamma:-3});if(!G.run)return true;startCombat({},{kind:'place',msg:sc.msg.slice()});return true;}

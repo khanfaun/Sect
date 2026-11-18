@@ -31,7 +31,7 @@ const MANAGE={
   craft(){const r=run2();if(!free()||r.scene)return false;const L=CRAFT.filter(c=>craftOk(c));if(!L.length)return false;return !!craft(rr(L).id);},
   sell(){const L=sellList();if(!L.length||!chance(.4))return false;const it=rr(L);sellItem(it.k,it.i);return true;},
   mount(){const m=MOUNT.filter(x=>G.run.mount!==x.id&&G.run.st>=price(x.p)&&G.run.realm>=(x.realm||0));if(!m.length||!chance(.3))return false;buyMount(rr(m).id);return true;},
-  tong(){const r=run2();if(!r.flags||!r.flags.tongmon)return false;const k=Object.keys(r.mats||{}).find(x=>r.mats[x]>0);if((r.ch||0)>=15&&chance(.5)){chTrade();return true;}if(k){chGive(k);return true;}return false;},
+  tong(){const r=run2();if(!r.flags||!r.flags.tongmon)return false;const k=Object.keys(r.mats||{}).find(x=>r.mats[x]>0);if(chGet(chKey())>=15&&chance(.5)){chTrade();return true;}if(k){chGive(k);return true;}return false;},
   lock(){const r=G.run;if(!r.skills.length)return false;skLockToggle(rr(r.skills).id);return true;},
   meta(){const M=G.meta;const u=UPG.filter(x=>(M.upg[x.id]||0)<x.max&&M.pts>=x.c[M.upg[x.id]||0]);if(!u.length)return false;buyUpg(rr(u).id);return true;},
 };
