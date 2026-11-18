@@ -106,7 +106,7 @@ export function DiaDiem({ sc }) {
         {n.type !== 'ai' && <button className="btn" data-act="exStat" {...tip('Xem nơi này có gì: yêu ma, vật liệu, tỉ lệ')}>Thăm dò</button>}
         <span className="grow"></span><button className="btn" data-act="leave">Rời đi</button>
       </>}>
-      {M && <div className="pl-kv"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div></div>}
+      {M && <div className="pl-kv"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div>{PS.SETTLE.includes(n.type) && <div><small>Danh tiếng nơi này</small><span>{PS.danhName(n)}</span></div>}</div>}
       {sc.venue && VENUE_N[sc.venue] && <NoiChonViec n={n} v={sc.venue} />}
       <LoiKe sc={sc} />
       {qs.length > 0 && <>
