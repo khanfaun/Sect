@@ -25,11 +25,11 @@ export function NhanDuoc({ g }) {
   );
 }
 
-function KhungXacNhan({ title, d, h, st, g, act, arg }) {
+function KhungXacNhan({ title, d, h, st, bac, g, act, arg }) {
   return (
     <div className="mbox pconf">
       <h3>{title}</h3><Ke t={d} />
-      {(h || st) ? <div className="pc-row"><small>Tốn</small><span className="cost"><Cost h={h} st={st} /></span></div> : null}
+      {(h || st || bac) ? <div className="pc-row"><small>Tốn</small><span className="cost"><Cost h={h} st={st} bac={bac} /></span></div> : null}
       {g && <div className="pc-row"><small>Nhận được</small><NhanDuoc g={g} /></div>}
       <div className="mb-f"><button className="btn" data-act="modalX">Thôi</button><button className="btn pri" data-act={act} data-arg={arg}>Đồng ý</button></div>
     </div>
@@ -57,7 +57,7 @@ export function XacNhanNoiChon({ m }) {
       <div className="mb-f"><button className="btn pri" data-act="modalX">Đã hiểu</button></div>
     </div>
   );
-  return <KhungXacNhan title={o.l} d={o.d} h={o.h} st={o.st} g={o.fight ? { st: o.g.st, txt: 'phải đánh một trận' } : o.g} act="vgo" arg={m.v + ':' + m.id} />;
+  return <KhungXacNhan title={o.l} d={o.d} h={o.h} st={o.st} bac={o.bac} g={o.fight ? { st: o.g.st, txt: 'phải đánh một trận' } : o.g} act="vgo" arg={m.v + ':' + m.id} />;
 }
 
 export function LamNhiemVu({ m }) {

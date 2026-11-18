@@ -40,7 +40,8 @@
             "info": 1
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 5
         }
       },
       "origin": {
@@ -88,7 +89,8 @@
             "info": 2
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 10
         }
       },
       "origin": {
@@ -189,7 +191,8 @@
             "tamma": -4
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 8
         }
       },
       "origin": {
@@ -239,13 +242,63 @@
             "tamma": -2
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 12
         }
       },
       "origin": {
         "file": "src/game/core2/07-dot-10-tho-nap.js",
         "ref": "phong",
         "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_inn_giuong",
+      "name": "Ngủ giường tập thể một đêm",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "inn"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Trải chiếu cạnh mấy người khách nghèo; ngủ được, nhưng giữ chặt hầu bao.",
+      "choices": [
+        {
+          "l": "Ngủ giường tập thể một đêm",
+          "t": "Trải chiếu cạnh mấy người khách nghèo; ngủ được, nhưng giữ chặt hầu bao."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "giuong",
+          "h": 8,
+          "stoneBase": 0,
+          "g": {
+            "hpPct": 55
+          },
+          "req": null,
+          "limited": false,
+          "bac": 6
+        }
+      },
+      "origin": {
+        "file": "content/venues/services.json",
+        "ref": "giuong",
+        "commit": "Đ3.2"
       }
     },
     {
@@ -338,7 +391,8 @@
             "hpPct": 15
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 13
         }
       },
       "origin": {
@@ -436,7 +490,8 @@
             "info": 1
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 15
         }
       },
       "origin": {
@@ -486,7 +541,8 @@
             "info": 1
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 120
         }
       },
       "origin": {
@@ -587,7 +643,8 @@
             "tamma": -8
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 30
         }
       },
       "origin": {

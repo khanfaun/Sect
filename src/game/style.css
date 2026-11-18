@@ -1643,3 +1643,4 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 /* Đ3.1: bạc cạnh linh thạch trong hầu bao */
 .hs-bac{color:var(--ink2);font-weight:500;font-size:.85em;margin-left:2px;white-space:nowrap}
 .hs-bac .sep{font-style:normal}
+.cost-b{white-space:nowrap;color:var(--ink2);margin-left:6px}

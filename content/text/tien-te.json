@@ -6,5 +6,6 @@
   "tien.quanS": "{{0}} quan",
   "tien.chipTip": "Bạc",
   "tien.doiTuDong": "Thiếu bạc: đổi một viên linh thạch lấy {{0}}.",
-  "tien.khongDu": "Không đủ tiền"
+  "tien.khongDu": "Không đủ tiền",
+  "tien.muaVat": "Mua {{0}}."
 }

@@ -163,7 +163,7 @@ const TESTS = {
   },
   // tĩnh toạ: không tăng tu vi, hồi nhanh hơn để yên
   tinhtoa() {
-    fresh('G.run.hp=1;G.run._hpLast=1;'); const tv = +run('G.run.tv'); const a0 = +run('G.run.age');
+    fresh('G.run.hp=1;G.run._hpLast=1;G.run.arts=(G.run.arts||[]).filter(a=>a.type!=="tp");'); const tv = +run('G.run.tv'); const a0 = +run('G.run.age');
     ok(run('tinhToa(6)') === true, 'tĩnh toạ 6 tháng'); ok(+run('G.run.tv') - tv < 5, 'tu vi gần như không đổi (chỉ thổ nạp tự nhiên): +' + (+run('G.run.tv') - tv).toFixed(1));
     ok(+run('G.run.age') - a0 >= 0.49, 'tuổi tăng nửa năm'); ok(+run('G.run.hp') > 1 + 6, 'khí huyết hồi: ' + run('G.run.hp'));
     ok(run('ttPreview(ttLeftM()+5).over') === true, 'vượt thọ nguyên thì có cảnh báo');
@@ -408,7 +408,7 @@ const TESTS = {
     ok(run("hcRate().bap")===c1, 'cùng bậc thì như nhau');
     run("delete G.meta.lastNq");ok(run("hcRate().bap")===0.25, 'bản lưu cũ: hoàn cảnh thường');
     run("G.meta.lastNq={B:200,G:0};genBirth()");const card=run("JSON.stringify(G.birth.cards.find(c=>c.hc==='bap')||null)");
-    if(card!=='null'){const seeded=f=>`(()=>{const mr=Math.random,rs=RS;RS=mul(4242);let i=0;Math.random=()=>((i++*0.6180339)%1);try{${f}}finally{Math.random=mr;RS=rs;}return G.run.bac})()`;
+    if(card!=='null'){const seeded=f=>`(()=>{const mr=Math.random,rs=RS;RS=()=>0.5;Math.random=()=>0.5;try{${f}}finally{Math.random=mr;RS=rs;}return G.run.bac})()`;
       const st0=run(seeded(`const c=${card};c.hc=null;newRun(c);`));const st1=run(seeded(`newRun(${card});`));
       ok(st1<st0||st0<=2, 'bấp bênh: ít tiền khởi đầu hơn ('+st0+' → '+st1+')');}
     fresh();run("die('combat',{n:'thử'})");ok(run("!!G.meta.lastNq"), 'lúc chết ghi lại nghiệp duyên');
@@ -535,6 +535,24 @@ const TESTS = {
     run("delete G.run.bac;delete G.run._bacV1;G.run.st=7;run2()");ok(run("G.run.bac")===0&&run("G.run.st")===7, 'bản lưu cũ: bạc 0, giữ linh thạch');
     fresh("G.run.trait='none';G.run.the=[];G.run.kv=['gia_canh_kha_gia'];G.run.tue=null;tueInit(G.run);G.run.bac=0;G.run.st=0;");
     run("advanceTime(HY)");ok(run("G.run.bac")>=1650&&run("G.run.st")===0, 'tuế biến Gia Cảnh Khá Giả: phàm nhân nhận bạc, không nhận linh thạch ('+run("G.run.bac")+')');
+  },
+  // Đ3.2 quán phàm trả bạc; tâm pháp chép tay ở tạp hóa bán bằng bạc
+  tien_quan() {
+    fresh();
+    const nid=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'||n.type==='thanh');G.run.at=n.id;openPlace(n.id);return n.id})()");
+    const o=JSON.parse(run("JSON.stringify(venueOpts(nodeById(G.run.scene.id),'inn').find(x=>x.id==='phong'))"));
+    ok(o.bac===12&&o.st===0, 'phòng trọ: 12 đồng, không tốn linh thạch '+JSON.stringify({bac:o.bac,st:o.st}));
+    ok(run("venueOpts(nodeById(G.run.scene.id),'inn').some(x=>x.id==='giuong'&&x.bac===6)"), 'có giường tập thể 6 đồng');
+    run("G.run.bac=100;G.run.st=0;G.run.hp=1");ok(run("venueDo('inn','an')")&&run("G.run.bac")===87, 'ăn một bữa: trừ 13 đồng ('+run("G.run.bac")+')');
+    run("openPlace(G.run.at);G.run.bac=5;G.run.st=0");const no=run("venueOpts(nodeById(G.run.scene.id),'inn').find(x=>x.id==='phong').no");
+    ok(no==='Không đủ tiền'&&!run("venueDo('inn','phong')")&&run("G.run.bac")===5, 'không tiền: khóa với chữ "Không đủ tiền"');
+    run("openPlace(G.run.at);G.run.bac=0;G.run.st=1");ok(run("venueDo('inn','phong')")&&run("G.run.st")===0&&run("G.run.bac")===90000-12, 'thiếu bạc mà có linh thạch: đổi tự động');
+    run("G.run.arts=(G.run.arts||[]).filter(a=>a.type!=='tp');G.run.relics=G.run.relics.filter(x=>!(x.k==='book'&&x.art&&x.art.type==='tp'));G.run.bac=1000;G.run.st=0;nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");
+    const it=JSON.parse(run("JSON.stringify(G.run.scene.items[0])"));ok(it.bac===800, 'tạp hóa: bản chép tay tâm pháp giá 800 đồng ('+it.bac+')');
+    run("buy(0)");ok(run("G.run.scene.items[0].sold")&&run("G.run.bac")===200, 'phàm nhân kiếp đầu mua được tâm pháp bằng bạc');
+    run("G.run.rootKnown=0;G.run.bac=10000;G.run.qitems=[];nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");const k=run("G.run.scene.items.findIndex(x=>x.k==='qi'&&x.id==='trac_linh_thach')");
+    ok(k>=0&&run(`G.run.scene.items[${k}].bac`)===9900, 'chưa trắc linh: phường thị bán Trắc Linh Thạch 9.900 đồng');
+    run(`buy(${k})`);ok(run("G.run.qitems.includes('trac_linh_thach')")&&run("G.run.bac")===100, 'mua Trắc Linh Thạch bằng bạc');
   },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {

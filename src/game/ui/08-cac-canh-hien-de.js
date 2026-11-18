@@ -6,6 +6,7 @@ function itemView(p){
   if(p.k==='relic')return {ic:relIcon(p.rel),n:p.rel.name,sub:GRADE[p.rel.tier],tip:relicTip(p.rel),t:p.rel.tier||0};
   if(p.k==='skill'){const sk=SK[p.id];const h=G.run.skills.find(x=>x.id===p.id);return {ic:elSeal(sk.el),n:sk.n,sub:'Bí tịch công pháp · '+PHAM[sk.t],tip:skillTip(sk,h?h.lv+1:1),t:sk.t};}
   if(p.k==='pill')return {ic:PILL[p.id].i,n:(p.q?PQ[p.q]+' ':'')+PILL[p.id].n,sub:PILL[p.id].d.replace('{x}',pillX(p.id,p.q)),tip:pillTip(p.id,p.q),t:p.q||0};
+  if(p.k==='qi'){const x=CAT.byId[p.id]||{};return {ic:x.i||'🪨',n:x.n||p.id,sub:x.dang||'',tip:[x.d,x.use].filter(Boolean).join('\n'),t:2};}
   if(p.k==='pass')return {ic:'🎫',n:p.n,sub:'Lệnh bài thông quan',tip:'Trình ở quan ải để sang '+REG[p.reg].n,t:2};
   return {ic:'💎',n:p.n+' linh thạch',sub:'',tip:''};}
 

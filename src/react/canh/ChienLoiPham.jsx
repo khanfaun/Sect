@@ -33,18 +33,18 @@ export function PhuongThi({ sc }) {
   const r = G.run, tab = UI.tab.shop || 'buy';
   return (
     <Card title="Phường thị" sub={r.place.n} cls="tall" x
-      foot={<><span className="grow">Trong túi: <Stone v={r.st} /></span><GoBtn act="next" label="Rời đi" arg="" cls="pri" /></>}>
+      foot={<><span className="grow">Trong túi: <Stone v={r.st} /> <span className="cost-b">🪙{PS.fmtBac(r.bac || 0)}</span></span><GoBtn act="next" label="Rời đi" arg="" cls="pri" /></>}>
       <Ke className="shop-top" t={sc.text} />
       <Tabs k="shop" list={[['buy', 'Mua'], ['svc', 'Việc khác']]} cur={tab} />
       {tab === 'buy' ? <>
         <div className="grid">
           {sc.items.map((it, i) => {
-            const v = PS.itemView(it), no = it.sold || r.st < it.p;
+            const v = PS.itemView(it), no = it.sold || (it.bac ? !PS.bacCan(it.bac) : r.st < it.p);
             return (
               <button key={i} className={'cell qc' + (it.sold ? ' sold' : '')} data-act="buy" data-arg={i} disabled={!!no} style={v.t != null ? pcs(v.t) : undefined} {...tip(v.tip || v.n)}>
                 <Html className="c-i" h={v.ic} />
                 <span className={'c-n' + (v.t != null ? ' qt' : '')}>{v.n}</span>
-                <span className="c-p">{it.sold ? 'hết hàng' : <Stone v={it.p} />}</span>
+                <span className="c-p">{it.sold ? 'hết hàng' : it.bac ? <span className="cost-b">🪙{PS.fmtBac(it.bac)}</span> : <Stone v={it.p} />}</span>
                 {!it.sold && it.qty != null && <span className="c-q">còn {it.qty}</span>}
               </button>
             );

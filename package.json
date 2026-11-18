@@ -10,7 +10,7 @@
     "content:check": "node tools/kiem-tra-content.js --report",
     "content:stories": "node tools/kiem-tra-cot-truyen.js",
     "content:docs": "node tools/content-docs.js",
-    "test:rules": "node tools/test.js crush camngo skillonce ngovan themo thuongthe hoiphuc tinhtoa doithu tamma rotcanh chegiau thanthuc llboost bequanhoi tuitruvat suaLoi32 content nen deed_bang nq_hd nq_ng nq_legacy danh nq_doc kiep_nghiep qua_chin hoancanh deed_su_kien vo_kiep1 vo_kiep2 vo_khoa trac_linh dau_thai_luat quen_sach tue_bien tien_bac"
+    "test:rules": "node tools/test.js crush camngo skillonce ngovan themo thuongthe hoiphuc tinhtoa doithu tamma rotcanh chegiau thanthuc llboost bequanhoi tuitruvat suaLoi32 content nen deed_bang nq_hd nq_ng nq_legacy danh nq_doc kiep_nghiep qua_chin hoancanh deed_su_kien vo_kiep1 vo_kiep2 vo_khoa trac_linh dau_thai_luat quen_sach tue_bien tien_bac tien_quan"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",

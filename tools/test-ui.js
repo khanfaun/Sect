@@ -232,6 +232,14 @@ const TESTS = {
     const t = await ev(p, () => [...document.querySelectorAll('.hs-bac')].map(e=>e.innerText).join('|'));
     ok(/3,2 quan/.test(t), 'HUD hiện bạc: '+t);
   },
+  // Đ3.2: khách điếm ghi giá bằng bạc
+  async tien_quan(p) {
+    await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'||n.type==='thanh');G.run.at=n.id;G.run.bac=500;UI.modal=null;UI.panel=null;openPlace(n.id);G.run.scene.venue='inn';render();});
+    await p.waitForTimeout(200);
+    const t = await ev(p, () => (document.querySelector('.venue')||{}).innerText||'');
+    ok(/12 đồng/.test(t) && /6 đồng/.test(t), 'khách điếm: phòng 12 đồng, giường 6 đồng');
+    await ev(p, () => {G.run.scene=null;render();});
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

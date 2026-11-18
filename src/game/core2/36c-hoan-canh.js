@@ -5,7 +5,7 @@ function hcRate(){const L=(G.meta&&G.meta.lastNq)||{B:0,G:0};const net=clamp(ngB
   const s=bap+nang;if(s>0.9){bap*=0.9/s;nang*=0.9/s;}return {bap,nang,net};}
 function hcPickOrigin(grp){const L=ORIGIN.filter(o=>(o.grp||'thuong')===grp);return L.length?pick(L):null;}
 {const _gb=genBirth;genBirth=function(){const res=_gb.apply(this,arguments);if(!feat('nq')||!G.birth)return res;const R=hcRate();
-  for(const c of G.birth.cards){const x=Math.random();c.hc=x<R.bap?'bap':x<R.bap+R.nang?'nang':'binh';
+  for(const c of G.birth.cards){const x=RS?RS():Math.random();c.hc=x<R.bap?'bap':x<R.bap+R.nang?'nang':'binh';
     const grp=c.hc==='bap'?'kho':c.hc==='nang'?'kha':'thuong';const og=ORIGIN.find(o=>o.id===c.origin);
     if(!og||(og.grp||'thuong')!==grp){const o2=hcPickOrigin(grp);if(o2)c.origin=o2.id;}}
   dbg('nq.hc',{net:R.net,bap:R.bap,cards:G.birth.cards.map(c=>c.hc).join(',')});return res;};}
