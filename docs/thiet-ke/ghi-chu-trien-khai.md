@@ -127,3 +127,24 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 - Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5.1, Đ5.2, Đ5.3.
 - Còn: Đ5.4 (năng lực hỗ trợ ST23, Opus), Đ5.5 (rà chéo đợt 5, Opus), rồi Đ6 trở đi.
 - Có 15 câu hỏi chờ người dùng chốt (Đ1: 5, Đ2: 3, Đ3: 4, Đ4: 3), xem các mục trên.
+
+## NGƯỜI DÙNG CHỐT 15 CÂU (việc phải làm lại/bổ sung trước khi làm Đ5.4)
+1. Mốc bậc nghiệp: tự quyết, không quá dễ, không tuyệt vọng (rà lại mốc cho cân).
+2. Đúng hướng. Chính đạo chia nhiều mức theo loại hành động (mua đồ ăn cho bé ăn xin < cứu bé khỏi sói). Rà lại để 214 chỗ +4 phân mức theo mức hy sinh/nguy hiểm thật.
+3. Giữ (tông ma nhìn ngược).  4. Giữ (thị trấn ghét mức 3 khi truy nã).
+5. Giữ ghi tuổi; "tuổi" thuộc danh sách chỉ số được hiện số.
+6. Đầu thai không được chọn, TRỪ khi trước khi chết đã tu công pháp/kỹ năng, uống đan, hoặc dùng vật phẩm/trang bị/pháp bảo đặc biệt → hệ thống tạo 3 nhân vật ngẫu nhiên, chọn 1. Linh căn (kể cả vô linh căn) luôn ẩn cho tới khi trắc (tông môn/thế lực, sự kiện, vật phẩm trắc linh). Kiểm lại: kiếp đầu cũng phải ẩn tới khi trắc.
+7. Tạm giữ Thiên mệnh kiểu mới.
+8. "Già" tính theo tỉ lệ tuổi hiện tại / tuổi thọ (không theo số tuổi). Tác hại: khí huyết giảm 10%; chỉ số chiến đấu giảm 0.5–1% tùy loại, có loại không giảm (tự chọn); trong trận né và đỡ tốn thêm ~5 thể lực.
+9. LÀM LẠI TIỀN TỆ, bỏ "quan":
+   - 1 xu = 1 đồng tiền; 1 lượng bạc = 1.000 xu; 1 lượng vàng = 10.000 xu.
+   - Linh thạch: Hạ phẩm (giá trị ~100 lượng vàng), Trung = 100 Hạ, Thượng = 100 Trung, Cực = 100 Thượng.
+   - LƯU Ý: linh thạch KHÔNG đổi trực tiếp sang vàng (giá trị chỉ là quy ước; bỏ/giới hạn tiền trang đổi trực tiếp — chỉ còn kênh gián tiếp hiếm như bán đồ tu sĩ ở chợ đen/đấu giá, tự thiết kế an toàn).
+   - Phàm nhân dùng xu/bạc/vàng; tu sĩ dùng linh thạch.
+   - Sự kiện: (a) phàm nhân KHÔNG gặp sự kiện đòi linh thạch hoặc thuộc chuyện tu sĩ; (b) sự kiện phàm nhân dùng được thì đổi giá sang tiền phàm.
+   - Cửa hàng: tạp hóa thành trấn chủ yếu bán đồ phàm (tiền phàm), đồ tu sĩ rất ít; đồ tu sĩ nhiều ở tông môn/thế lực, chợ đen, đấu giá, cửa hàng Thưởng Các.
+10. BỎ "cơm nhà". Khởi đầu có ít xu đủ chống đói. Ở quê được mua chịu (tiền âm, ví dụ -50 xu). Nợ: ít mà lâu → quan phủ đánh hèo (mất máu/trọng thương), vẫn nợ, gia hạn; lần sau không trả phạt nặng hơn, có thể truy nã; nợ nhiều và lâu → truy nã/lên quan phủ/bắt làm công trả nợ 2–3 năm. Thêm vay tiền có lãi. Nhà ở: xuất thân có nhà thì có sẵn nhà ở quê; không có thì phải thuê, ngủ ngoài → bệnh, lạnh, mất máu mỗi tháng.
+11. Có săn bắt/hái lượm ở hoang dã, số lượng có hạn, hồi lại mỗi năm (lượt săn yêu thú cũng vậy).
+12. Chưa chạy bot.  13. Giữ.  15. Mở sẵn.
+14. Nhiệm vụ tân thủ: loại "sở hữu/đạt trạng thái" (có thảo dược X, đạt Luyện Khí tầng 1) thì tự xong nếu đã có; loại thao tác cốt lõi hoặc đếm số lần (săn 5 lần…) phải làm lại thật.
+16. Thêm: giao diện desktop — tooltip ở tab Căn cơ (bấm vào chỉ số) hiện lệch xa; kiểm tra và sửa vị trí tooltip.
