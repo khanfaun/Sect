@@ -148,3 +148,5 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 12. Chưa chạy bot.  13. Giữ.  15. Mở sẵn.
 14. Nhiệm vụ tân thủ: loại "sở hữu/đạt trạng thái" (có thảo dược X, đạt Luyện Khí tầng 1) thì tự xong nếu đã có; loại thao tác cốt lõi hoặc đếm số lần (săn 5 lần…) phải làm lại thật.
 16. Thêm: giao diện desktop — tooltip ở tab Căn cơ (bấm vào chỉ số) hiện lệch xa; kiểm tra và sửa vị trí tooltip.
+17. Đổi phẩm linh thạch không hai chiều ngang giá: phẩm cao hiếm hơn. Đổi lên (100 Hạ → 1 Trung) phải bù thêm, phẩm càng cao càng khó đổi và phần bù càng lớn; đổi xuống (1 Trung → ~80–101 Hạ) tùy nơi (chợ đen, Vạn Bảo Lầu…), mỗi nơi tỉ giá khác nhau nhưng chênh ít.
+    Thêm chỉ số mới "NHU CẦU" theo từng nơi và từng vật phẩm (kể cả từng phẩm linh thạch): nhu cầu tăng thì giá tăng, giảm thì giá giảm; áp dụng cho mọi mua/bán. Nhu cầu nên dao động theo thời gian và bị tác động khi người chơi mua/bán nhiều. Số trong ví dụ chỉ là minh hoạ, tự cân.
