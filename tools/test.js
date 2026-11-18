@@ -674,6 +674,41 @@ const TESTS = {
     // bản lưu cũ
     fresh();run("delete G.run.vo;delete G.run.voSk;delete G.run._voV1;run2();syncSkills();S()");ok(run("Array.isArray(G.run.voSk)")&&run("!G.run.vo||G.run.vo.bac===0"), 'bản lưu cũ chạy được');
   },
+  // Đ5.2 khung nghề: việc đúng mùa ở Mưu sinh, kinh nghiệm, kỳ ngộ thăng bậc, sai mùa khoá, ba đường — đường thứ tư làm đường cũ nhất phai
+  nghe() {
+    const toTran="(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()";
+    const toMua=m=>`(()=>{let k=0;while(seasonOf(W().t)!=='${m}'&&k++<400)W().t+=HD;})()`;
+    fresh("ngEvent=()=>false;G.run.origin='thusinh';G.run.paths={};G.run.pham=1;"+toMua('xuan')+";"+toTran);
+    const L=JSON.parse(run("JSON.stringify(vtList(nodeById(G.run.at)).map(x=>x.id+'|'+x.why))"));
+    ok(L.includes('ng:nong:gieo|'), 'mùa xuân ở thôn trấn: có việc gieo mạ ('+L.filter(x=>x.startsWith('ng:')).join(',')+')');
+    ok(L.some(x=>x.startsWith('ng:nong:gat|')&&x.split('|')[1]), 'gặt lúa trái mùa bị khoá');
+    let n=0;for(let i=0;i<9;i++){run("G.run.lamNgay=null");if(run("vtDo('ng:nong:gieo')"))n++;}
+    ok(n===9&&run("G.run.paths.nong.xp")===54&&run("G.run.paths.nong.bac")===0, 'gieo chín buổi: kinh nghiệm '+run("G.run.paths.nong.xp"));
+    ok(run("NK.count('nghe.lam')")===9&&run("G.run.bac")>=9*24, 'nhật ký nghe.lam, có tiền công '+run("G.run.bac"));
+    run("G.run.scene=null;"+toTran+";G.run.lamNgay=null;vtDo('ng:nong:gieo')");
+    ok(run("G.run.scene&&G.run.scene.type")==='kyngo'&&run("G.run.scene.ev")==='ng_nong_1', 'đủ kinh nghiệm: mở kỳ ngộ thăng bậc');
+    ok(run("G.run.paths.nong.bac")===0, 'chưa qua kỳ ngộ thì chưa lên bậc');
+    run("kyPick(0)");ok(run("G.run.paths.nong.bac")===1, 'qua kỳ ngộ: Tá điền');
+    ok(run("ngView()[0].rank")==='Tá điền'&&!/\\d/.test(run("ngView()[0].txt")), 'Đạo đồ: danh vị, tiến độ bằng chữ ('+run("ngView()[0].txt")+')');
+    ok(run("tutRole(G.run)"), 'theo một nghề tính là đã nhận vai (HD17)');
+    run("G.run.scene=null;"+toMua('ha')+";"+toTran);ok(!!run("vtList(nodeById(G.run.at)).find(x=>x.id==='ng:nong:gieo').why"), 'sang hạ: gieo mạ khoá');
+    // ba đường; đường thứ tư làm đường cũ nhất phai
+    run("NGHE._a={n:'A',ranks:['a','b'],xp:[0,9],thu:[1,1],acts:[]};NGHE._b={n:'B',ranks:['a','b'],xp:[0,9],thu:[1,1],acts:[]};NGHE._c={n:'C',ranks:['a','b'],xp:[0,9],thu:[1,1],acts:[]}");
+    run("G.run.paths.nong.last=W().t-100;ngXp('_a',1);G.run.paths._a.last=W().t-50;ngXp('_b',1)");
+    ok(run("ngActive().length")===3, 'ba đường cùng lúc');
+    run("ngXp('_c',1)");ok(run("G.run.paths.nong.phai")===1&&run("ngActive().length")===3, 'đường thứ tư: đường lâu không làm nhất phai');
+    const x0=run("G.run.paths._c.xp");run("ngXp('nong',1)");ok(run("!G.run.paths.nong.phai")&&run("G.run.paths._a.phai")===1, 'làm lại đường đã phai: đường cũ khác phai thay');
+    run("delete NGHE._a;delete NGHE._b;delete NGHE._c");
+    // hệ số: vô căn ×1,2, tu sĩ ×0,7
+    run("G.run.root={id:'vo',els:[]};G.run.paths={}");ok(run("ngXp('nong',10)")===12, 'vô căn ×1,2');
+    run("G.run.root={id:'x',els:['kim']};G.run.pham=0;G.run.paths={}");ok(run("ngXp('nong',10)")===7, 'tu sĩ ×0,7');
+    // xuất thân vào nghề sẵn; sự kiện cộng bạc và kinh nghiệm
+    run("(()=>{genBirth();const c=Object.assign({},G.birth.cards[0],{origin:'nong',hc:null});newRun(c);})()");ok(run("!!G.run.paths.nong&&G.run.paths.nong.xp>0"), 'con nhà nông: vào nghề nông sẵn');
+    ok(!run("tutRole(G.run)"), 'chưa làm việc gì thì HD17 chưa xong');
+    const b0=run("G.run.bac");run("applyE({bac:50,nxp:['nong',5]})");ok(run("G.run.bac")===b0+50&&run("G.run.paths.nong.xp")>30, 'hiệu ứng bac, nxp');
+    // bản lưu cũ
+    run("delete G.run.paths;delete G.run._ngV1;run2()");ok(run("JSON.stringify(G.run.paths)")==='{}', 'bản lưu cũ: paths rỗng');
+  },
   // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
   tan_thu() {
     fresh();

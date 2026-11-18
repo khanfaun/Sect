@@ -21,7 +21,7 @@ const TUT=[
  {id:'HD14',g:'D',n:'Giữ lấy thứ còn sửa được',d:'Luyện chế một món.',need:1,tick:'craft',go:{panel:'craft'},rw:{pill:[['dinhthan',1]]}},
  {id:'HD15',g:'D',n:'Có người nhớ mặt',d:'Tặng lễ hoặc kết một mối quan hệ.',need:1,tick:'bond',go:{panel:'bonds'},rw:{bac:500}},
  {id:'HD16',g:'E',n:'Việc đã làm còn để lại gì',d:'Đọc lại sổ nghiệp duyên.',need:1,tick:'nqlog',go:{panel:'journal',tab:'nq'},rw:{bac:300}},
- {id:'HD17',g:'E',n:'Chọn việc, chưa cần chọn cả đời',d:'Nhận một vai: vào tông, hoặc làm tạp dịch ngoại môn.',need:1,tick:'role',st:'tutRole',go:{place:['tong'],act:'join'},rw:{pill:[['tukhi',2]]}},
+ {id:'HD17',g:'E',n:'Chọn việc, chưa cần chọn cả đời',d:'Nhận một vai: vào tông, làm tạp dịch, theo một nghề hoặc nhập lưu võ học.',need:1,tick:'role',st:'tutRole',go:{place:['tong'],act:'join'},rw:{pill:[['tukhi',2]]}},
  {id:'HD18',g:'E',n:'Viết một điều mình muốn',d:'Chọn một nguyện vọng cho kiếp này.',need:1,tick:'wish',st:'tutWish',go:{modal:'wish'},rw:{pill:[['kimcang',1]]}},
  {id:'HD19',g:'F',n:'Dẫn khí nhập thể',d:'Bước vào Luyện Khí.',need:1,tick:'phamup',st:'tutNotPham',go:{hud:'hudBq'},rw:{pill:[['hoixuan',2],['tukhi',2]]}},
  {id:'HD20',g:'F',n:'Bảng treo thưởng',d:'Xong một nhiệm vụ bảng treo thưởng.',need:1,tick:'quest',go:{place:['tran','thanh'],act:'board'},rw:{lenh:3}},

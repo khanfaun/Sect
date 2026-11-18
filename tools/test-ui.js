@@ -298,6 +298,19 @@ const TESTS = {
     ok(/Nội lực/.test(t) && /Võ học/.test(t) && /Tam lưu/.test(t), 'bảng nhân vật: Nội lực, Võ học Tam lưu');
     await ev(p, () => {UI.panel=null;G.run.pham=0;render();});
   },
+  // Đ5.2: hộp Mưu sinh có việc của nghề hợp mùa; bảng nhân vật có thẻ Đạo đồ
+  async nghe(p) {
+    await ev(p, () => {ngEvent=()=>false;let k=0;while(seasonOf(W().t)!=='xuan'&&k++<400)W().t+=HD;const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;G.run.lamNgay=null;G.run.paths={};UI.panel=null;UI.modal=null;openPlace(n.id);ACT.pact('muusinh');render();});
+    await p.waitForTimeout(150);
+    const t = await ev(p, () => (document.querySelector('.mmsinh')||{}).innerText||'');
+    ok(/Gieo mạ · Nông dân/.test(t), 'Mưu sinh có việc Gieo mạ của nghề nông');
+    await ev(p, () => {ACT.vtGo('ng:nong:gieo');render();});
+    ok(await ev(p, () => !!G.run.paths.nong && G.run.paths.nong.xp>0), 'làm việc nghề: có kinh nghiệm');
+    await ev(p, () => {G.run.scene=null;UI.modal=null;UI.panel='char';UI.tab.char='dao';render();});await p.waitForTimeout(150);
+    const d = await ev(p, () => (document.querySelector('.daodo')||{}).innerText||'');
+    ok(/Nông dân/.test(d) && /Làm thuê/.test(d) && !/\d/.test(d), 'thẻ Đạo đồ: '+d.replace(/\s+/g,' ').slice(0,60));
+    await ev(p, () => {UI.panel=null;render();});
+  },
   // Đ3.8: bảng Giao tình có mục Người nhà
   async gia_dinh(p) {
     await ev(p, () => {G.run.family=[{ten:'Lâm Đại Hữu',qh:'cha',tuoi:48,suc:'khoe',thai:'thuong',song:1,lc:0}];UI.modal=null;G.run.scene=null;UI.panel='bonds';UI.tab.bonds='an';render();});

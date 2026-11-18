@@ -110,7 +110,19 @@ function CanCo() {
   </>;
 }
 
-const TABS = [['base', 'Căn cơ'], ['bag', 'Túi đồ'], ['hoc', 'Sở học'], ['kn', 'Kỹ năng']];
+const TABS = [['base', 'Căn cơ'], ['bag', 'Túi đồ'], ['hoc', 'Sở học'], ['kn', 'Kỹ năng'], ['dao', 'Đạo đồ']];
+
+// Đ5.2: Đạo đồ — các đường đời đang theo (nghề phàm), danh vị và tiến độ bằng chữ; võ học
+function DaoDo() {
+  const r = PS.G.run, L = PS.ngView();
+  return (
+    <div className="kvl daodo">
+      {!L.length && !r.vo && <p className="hint">Chưa theo con đường nào. Tìm việc ở Mưu sinh hoặc luyện võ để bắt đầu.</p>}
+      {L.map(x => <Kv key={x.ma} n={x.n} v={(x.phai ? '<span class="bad">' : '') + x.rank + ' · ' + x.txt + (x.phai ? '</span>' : '')} t={x.phai ? 'Đường này đang phai: đã theo đủ ba đường khác. Làm lại việc của nghề thì nối lại.' : 'Danh vị trong nghề ' + x.n.toLowerCase()} />)}
+      {r.vo && <Kv n="Võ học" v={PS.voBacN(r.vo.bac | 0) + ' · ' + PS.voNgayTxt(r)} t="Võ đạo phàm nhân" />}
+    </div>
+  );
+}
 
 export function NhanVat() {
   const { G, UI } = PS;
@@ -123,6 +135,7 @@ export function NhanVat() {
       {tab === 'bag' && <TuiDo />}
       {tab === 'hoc' && <SoHoc />}
       {tab === 'kn' && <KyNang />}
+      {tab === 'dao' && <DaoDo />}
     </Win>
   );
 }
