@@ -71,3 +71,7 @@ function tlCheck(){const r=G.run;if(!r||rootKnown(r)||!tlFree())return;const m=M
 {const _bi=bagItems;bagItems=function(){const L=_bi.apply(this,arguments);for(const it of L)if(it.ref&&it.ref.t==='qi'&&it.ref.id==='trac_linh_thach')it.use=1;return L;};}
 {const _bu=bagUse;bagUse=function(key,n){if(key==='vtrac_linh_thach'){const r=G.run;const i=(r.qitems||[]).indexOf('trac_linh_thach');if(i<0)return 0;
   r.qitems.splice(i,1);if(rootKnown(r)){note(contentText('tl.daBiet'),'');return 1;}tlOpen('tl_thach');return 1;}return _bu.apply(this,arguments);};}
+// ---------- Đ2.5: lượt tự chọn lá số (G.meta.pick) ----------
+{const _d=die;die=function(){const r=G.run;if(r&&G.meta&&feat('vo')&&(r.qitems||[]).includes('dinh_menh_chau')){r.qitems.splice(r.qitems.indexOf('dinh_menh_chau'),1);G.meta.pick=(G.meta.pick||0)+1;dbg('dt.chau',{pick:G.meta.pick});}return _d.apply(this,arguments);};}
+{const _nr=newRun;newRun=function(c){const res=_nr.apply(this,arguments);const r=G.run;const u=U('menh');
+  if(r&&G.meta&&feat('vo')&&u>0&&r.kiep%(u>=2?3:4)===0){G.meta.pick=(G.meta.pick||0)+1;dbg('dt.menh',{kiep:r.kiep,pick:G.meta.pick});}return res;};}

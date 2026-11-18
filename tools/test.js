@@ -464,6 +464,14 @@ const TESTS = {
     run("kyPick(0)");ok(run('G.run.rootKnown')===1&&run("G.run.qitems.length")===0, 'đá vỡ, đã biết linh căn');
     ok(run("(()=>{const r=G.run;delete r.rootKnown;delete r._rkV1;run2();return r.rootKnown})()")===1, 'bản lưu cũ: coi như đã biết');
   },
+  dau_thai_luat() {
+    fresh("G.meta.pick=0;G.run.qitems=['dinh_menh_chau']");
+    run("die('combat',{n:'thử'})");ok(run('G.meta.pick')===1, 'chết mang Định Mệnh Châu: thêm một lượt chọn');
+    run("G.meta.pick=0;G.meta.upg.menh=1;G.meta.nlife=3;genBirth();newRun(G.birth.cards[0])");ok(run('G.run.kiep')===4&&run('G.meta.pick')===1, 'Thiên mệnh bậc 1: kiếp 4 được chọn');
+    run("G.meta.pick=0;G.meta.nlife=4;genBirth();newRun(G.birth.cards[0])");ok(run('G.meta.pick')===0, 'kiếp 5 thì không');
+    run("G.meta.pick=0;G.meta.upg.menh=2;G.meta.nlife=2;genBirth();newRun(G.birth.cards[0])");ok(run('G.meta.pick')===1, 'bậc 2: kiếp 3 được chọn');
+    ok(run("(()=>{G.meta.nlife=1;let n=0;for(let i=0;i<50;i++)n+=ttRoll([]).length;return n/50<=2.2})()"), 'Thiên mệnh không còn rút thêm khí vận');
+  },
   deed_su_kien() {
     fresh();
     const bad=run(`(()=>{const out=[];const walk=(x,id)=>{if(Array.isArray(x))return x.forEach(y=>walk(y,id));if(!x||typeof x!=='object')return;for(const k in x){if(k==='karma')out.push('karma@'+id);if(k==='deed'&&!DEED[x[k]])out.push(x[k]+'@'+id);walk(x[k],id);}};for(const e of CONTENT_EVENTS)walk(e,e.id);return out})()`);

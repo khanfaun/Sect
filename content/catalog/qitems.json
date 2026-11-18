@@ -776,5 +776,14 @@
     "use": "Dùng trong túi để tự trắc linh căn.",
     "d": "Viên đá xám trơn nhẵn, nắm chặt thì biết có linh căn hay không.",
     "status": "active"
+  },
+  {
+    "id": "dinh_menh_chau",
+    "n": "Định Mệnh Châu",
+    "i": "🔮",
+    "dang": "Vật dùng",
+    "use": "Mang theo lúc chết: kiếp sau được tự chọn lá số đầu thai.",
+    "d": "Viên châu đục, nhìn lâu thấy bóng người lạ trong đó.",
+    "status": "active"
   }
 ]

@@ -64,7 +64,7 @@ TRAIT.push({id:'none',n:'Không',i:'',fx:{},d:''});
 {const _ft28=ttFxText;ttFxText=function(def){if(def&&def.mc){const t=TRAIT.find(x=>x.id===def.mc);return t?[t.d]:[];}return _ft28(def);};}
 // thêm lượt rút khí vận nhờ nâng cấp Thiên mệnh ở Bến Vong Xuyên
 {const u=UPG.find(x=>x.id==='menh');if(u){u.n=contentText("core2_13-dot-26-do-don_js.038");u.d=contentText("core2_13-dot-26-do-don_js.039");}}
-{const _tr28=ttRoll;ttRoll=function(){const L=_tr28();const all=Object.values(TT_DEST);for(let i=0;i<U('menh');i++){const rk=wpick([1,2,3,4,5,6],x=>TT_RW[x]);const pool=all.filter(d=>d.rank===rk&&!L.includes(d.id));if(pool.length)L.push(pick(pool).id);}return L;};}
+{const _tr28=ttRoll;ttRoll=function(){const L=_tr28();const all=Object.values(TT_DEST);for(let i=0;i<(feat('vo')?0:U('menh'));i++){const rk=wpick([1,2,3,4,5,6],x=>TT_RW[x]);const pool=all.filter(d=>d.rank===rk&&!L.includes(d.id));if(pool.length)L.push(pick(pool).id);}return L;};}
 {const _gb28=genBirth;genBirth=function(){_gb28();for(const c of G.birth.cards)c.trait='none';};}
 // tính tình (xét thể chất) lấy từ xuất thân và khí vận gốc mệnh cách
 {const _tp28=ttPhys;ttPhys=function(r){const keep=r.trait;const mc=(r.kv||[]).map(k=>TT_DEST[k]&&(TT_DEST[k].mc||TT_DEST[k].tr)).filter(Boolean);

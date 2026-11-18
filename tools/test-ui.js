@@ -201,6 +201,17 @@ const TESTS = {
     const nm = await ev(p, () => rootView(G.run.root).n);
     ok(!t.includes(nm), 'không lộ tên linh căn');
   },
+  // Đ2.5: đầu thai ngẫu nhiên, còn lượt chọn thì hiện màn chọn lá số
+  async dau_thai(p) {
+    await ev(p, () => {G.meta.pick=0;ACT.birth();render();});
+    ok(await ev(p, () => G.screen!=='birth' && !!G.run), 'không có lượt chọn: vào thẳng kiếp mới ('+await ev(p, () => G.screen)+')');
+    await ev(p, () => {G.run=null;G.meta.pick=1;G.meta.nlife=Math.max(1,G.meta.nlife);ACT.birth();render();});
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => G.screen==='birth' && G.meta.pick===0), 'có lượt chọn: hiện màn chọn, trừ lượt');
+    for (let i = 0; i < 20 && !(await p.$('.birth')); i++) { await ev(p, () => render()); await p.waitForTimeout(200); }
+    const bt = await ev(p, () => (document.querySelector('.birth')||{}).innerText||('NO .birth '+G.screen+' '+!!G.run));
+    ok(/Chưa trắc/.test(bt), 'thẻ ghi linh căn Chưa trắc: '+bt.slice(0,120).replace(/\s+/g,' '));
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');
