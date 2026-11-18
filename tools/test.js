@@ -266,6 +266,14 @@ const TESTS = {
     fresh('G.run.pham=0;G.run.realm=0;'); ok(run('(()=>{let m=0;for(let i=0;i<300;i++){m=Math.max(m,genArt("cp",3).req,genArt("tp",3).req);}return m;})()') <= 1, 'Luyện Khí không gặp bí tịch Kết Đan');
     fresh('G.run.pham=0;G.run.realm=1;'); ok(run('Math.abs(playerTal().score-1)<0.3?playerTal().tier:1') === 1, 'lực chiến gần bằng sàn là Bình phàm');
   },
+  // chữ có tham số: {{n}} phải được điền, không còn sót
+  ctxt() {
+    fresh();
+    const k = run('Object.keys(CONTENT_TEXT).find(k=>CONTENT_TEXT[k].includes("{{0}}"))');
+    ok(!!k, 'có khóa chữ dùng tham số');
+    const s = run(`contentText(${JSON.stringify(k)},["A1","A2","A3","A4","A5","A6"])`);
+    ok(!s.includes('{{0}}') && s.includes('A1'), 'tham số được điền: ' + s.slice(0, 60));
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });
