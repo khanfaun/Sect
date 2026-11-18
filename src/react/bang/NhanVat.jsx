@@ -58,7 +58,7 @@ function CanCo() {
     <div className="basegrid">
       <HopGon k="than" icon="flag" name="Thân thế">
         <Kv n="Xuất thân" v={esc(og.n)} t={og.d} />
-        {tr && tr.id !== 'none' && <Kv n="Mệnh cách" v={esc(tr.n)} t={tr.d} />}
+        {tr && tr.id !== 'none' && <Kv n="Mệnh cách" v={esc(tr.n)} t={tr.d + (PS.tueTxt(tr.id) ? '\n' + PS.tueTxt(tr.id) : '')} />}
         <Kv n="Linh căn" v={lcV} t={!rk ? 'Chưa trắc linh: chưa biết mình có linh căn hay không.' : R1.d + (PS.rootQ(r.root) ? '\nPhẩm ' + PS.rootQ(r.root).n + '.' : '') + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R0.m) + ').'} />
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên khí vận', (r.kv || []).map(k => TT_DEST[k]), 'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.')} />
         <Html style={{ display: 'contents' }} h={PS.htRow()} />

@@ -8,5 +8,7 @@
   "tl.chipTip": "Kết quả trắc linh",
   "tl.daBiet": "Ngươi đã biết linh căn của mình; viên đá vỡ vụn vô ích.",
   "tl.hud": "Chưa biết mình có tiên duyên hay không",
-  "qs.src": "Túc Tuệ Đăng"
+  "qs.src": "Túc Tuệ Đăng",
+  "tue.log": "Theo năm tháng, {{1}} có chuyển biến.",
+  "tue.tip": "Theo năm tháng: {{0}}"
 }

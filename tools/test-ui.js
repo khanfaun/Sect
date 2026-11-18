@@ -217,6 +217,14 @@ const TESTS = {
     const r = await ev(p, () => {const d=JSON.parse(JSON.stringify({meta:G.meta,run:G.run,screen:'map'}));d.meta.upg.ky=2;const p0=d.meta.pts||0;loadData(d);return {ky:G.meta.upg.ky,dp:G.meta.pts-p0};});
     ok(r.ky == null && r.dp === 36, 'tải bản lưu: bỏ ky, hoàn 36 điểm ('+JSON.stringify(r)+')');
   },
+  // Đ2.7: tooltip thể chất / khí vận có dòng Theo năm tháng, không có chữ số
+  async tuebien(p) {
+    await ev(p, () => {G.run.the=['hoa_linh_the'];G.run.kv=['than_the_khoe_manh'];UI.modal=null;UI.panel='char';UI.tab.char='base';render();});
+    await p.waitForTimeout(200);
+    const L = await ev(p, () => [...document.querySelectorAll('[data-tiph]')].map(e=>e.getAttribute('data-tiph')).filter(h=>/Theo năm tháng/.test(h)).map(h=>{const d=document.createElement('div');d.innerHTML=h;const t=d.querySelector('.tue');return t?t.innerText:'';}));
+    ok(L.length >= 2, 'tooltip có dòng Theo năm tháng ('+L.length+')');
+    ok(L.every(t => t && !/\d/.test(t)), 'dòng tuế biến không có chữ số: '+L.join(' | ').slice(0,120));
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

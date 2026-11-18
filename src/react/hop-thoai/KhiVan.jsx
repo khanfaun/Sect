@@ -83,6 +83,7 @@ export function ChonTienThien() {
               <span className="kvh"><b>{d.name}</b><small>{TT_RANK[d.rank]}</small></span>
               <Ke t={d.description} />
               <p className="kvf">{PS.ttFxText(d).map((t, k) => [k > 0 && <br key={'b' + k} />, t])}</p>
+              {PS.tueTxt(id) && <p className="kvf tue"><i>{PS.tueTxt(id)}</i></p>}
             </button>
           );
         })}

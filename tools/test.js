@@ -488,6 +488,27 @@ const TESTS = {
     run("genBirth();newRun(G.birth.cards[0])");
     ok(run("G.run.arts.some(a=>a.n==='Đèn Thử Tâm Pháp'&&a.tier===0)")&&run("!G.meta.mem"), 'kiếp sau học lại tâm pháp ở bậc thấp nhất');
   },
+  tue_bien() {
+    const setup=the=>fresh(`G.run.the=${JSON.stringify(the)};G.run.kv=[];G.run.trait='none';G.run.lifeAdj=500;G.run.tue=null;tueInit(G.run);NK.clear();`);
+    setup(['man_luc_the']);
+    const hp0=run('S().maxHp');
+    run('advanceTime(10*HY)');ok(run('G.run.tue.sum.hpP')===5, 'Man Lực Thể: mười năm khí huyết +5% ('+run('G.run.tue.sum.hpP')+')');
+    ok(run('S().maxHp')>hp0, 'khí huyết tối đa thật sự tăng (khóa đúng): '+hp0+' → '+run('S().maxHp'));
+    run('advanceTime(40*HY)');ok(run('G.run.tue.sum.hpP')<=0.5*25+1e-9, 'trần hai mươi lăm năm: '+run('G.run.tue.sum.hpP'));
+    setup(['hoa_linh_the']);
+    run('G.run.hp=1;const rs=RS;RS=()=>0.001;try{advanceTime(HY);}finally{RS=rs;}');
+    ok(run('G.run.hp>1&&G.run.hp<=S().maxHp'), 'Hỏa Linh Chi Thể: biến cố hồi khí huyết ('+run('G.run.hp')+')');
+    setup([]);
+    run('advanceTime(30*HY)');ok(run('NK.count("tue.year")')===30, 'nhảy ba mươi năm: đủ ba mươi mốc ('+run('NK.count("tue.year")')+')');
+    run('(()=>{const x=JSON.parse(JSON.stringify(G.run));G.run=x;NK.clear();advanceTime(1);})()');ok(run('NK.count("tue.year")')===0, 'tải lại không áp lại năm cũ');
+    setup(['thong_tue_the']);run('advanceTime(40*HY)');ok(run('G.run.tue.sum.ngo')===4, 'Thông Tuệ Thể: ngộ tính tối đa +4');
+    ok(run("Object.keys(TUE).every(k=>TT_PHYS.some(p=>p.id===k)||TT_DEST[k]||TRAIT.some(t=>t.id===k))"), 'mọi mã trong TUE đều có thật');
+    ok(run("Object.values(TUE).every(d=>!/\\d/.test(d.txt||''))"), 'lời theo năm tháng không có chữ số');
+    const keys=run("JSON.stringify([...new Set(Object.values(TUE).flatMap(d=>Object.keys(d.y||{}).concat([].concat(d.ev||[]).flatMap(e=>Object.keys(e.add||{}).concat((e.alt||[]).flatMap(a=>Object.keys(a.add||{})))))))])");
+    const okKeys=['hpP','defP','atkP','matkP','mpP','tvP','ngo','tam','than','tp','crit','dodge','lifeY'];
+    ok(JSON.parse(keys).every(k=>okKeys.includes(k)||/^elP_(kim|moc|thuy|hoa|tho|loi|bang|phong)$/.test(k)), 'mọi khóa chỉ số đều có người đọc: '+keys);
+    setup(['man_luc_the']);run('G.run.root={id:"vo",els:[]};G.run.the=["thai_am_the"];advanceTime(5*HY)');ok(!run('G.run.tue.sum.mpP'), 'vô căn: tuế biến linh lực ngủ');
+  },
   deed_su_kien() {
     fresh();
     const bad=run(`(()=>{const out=[];const walk=(x,id)=>{if(Array.isArray(x))return x.forEach(y=>walk(y,id));if(!x||typeof x!=='object')return;for(const k in x){if(k==='karma')out.push('karma@'+id);if(k==='deed'&&!DEED[x[k]])out.push(x[k]+'@'+id);walk(x[k],id);}};for(const e of CONTENT_EVENTS)walk(e,e.id);return out})()`);
