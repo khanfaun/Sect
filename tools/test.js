@@ -446,6 +446,8 @@ const TESTS = {
     const n0=run("G.run.arts.length");
     run("for(let i=0;i<(TP_Y+1)*12;i++){G.run.scene=null;G.screen='map';advanceTime(HM);if(!G.run)break;}");
     ok(run("!!G.run")&&run("G.run.arts.length")===n0, 'qua '+(run('TP_Y')+1)+' năm không có tâm pháp mới');
+    run("(()=>{G.run.scene=null;startCombat({},{kind:'node'});const sc=G.run.scene;for(let i=0;i<6000&&G.run&&G.run.scene&&!G.run.scene.done;i++){if(sc.dodge)dodgeResolve(null);else if(sc.qte)qteResolve(null);else if(readyPlayer(sc))playerAct(BASIC.id||'basic');else combatStep(0.05);}})()");
+    ok(true, 'vô căn đánh một trận không lỗi');
   },
   trac_linh() {
     fresh();
@@ -483,10 +485,10 @@ const TESTS = {
     ok(run("!G.run.skills.some(k=>k.src==='ky')"), 'kiếp mới không có chiêu ký ức');
     ok(run("!G.run.arts.some(a=>a.n==='Cũ')"), 'kiếp mới không mang tâm pháp cũ');
     // Túc Tuệ Đăng
-    run("tpLearn(1,{n:'Đèn Thử Tâm Pháp',el:'kim'});G.run.qitems=['tuc_tue_dang'];die('combat',{n:'thử'})");
-    ok(run("G.meta.mem&&G.meta.mem.n")==='Đèn Thử Tâm Pháp', 'chết mang Túc Tuệ Đăng: nhớ tâm pháp');
+    run("tpLearn(3,{n:'Đèn Thử Tâm Pháp',el:'kim'});G.run.qitems=['tuc_tue_dang']");const tn=run("tuOf(arts()).n");run("die('combat',{n:'thử'})");
+    ok(run("G.meta.mem&&G.meta.mem.n")===tn, 'chết mang Túc Tuệ Đăng: nhớ tâm pháp '+tn);
     run("genBirth();newRun(G.birth.cards[0])");
-    ok(run("G.run.arts.some(a=>a.n==='Đèn Thử Tâm Pháp'&&a.tier===0)")&&run("!G.meta.mem"), 'kiếp sau học lại tâm pháp ở bậc thấp nhất');
+    ok(run(`G.run.arts.some(a=>a.n===${JSON.stringify(tn)}&&a.tier===0)`)&&run("!G.meta.mem"), 'kiếp sau học lại tâm pháp ở bậc thấp nhất');
   },
   tue_bien() {
     const setup=the=>fresh(`G.run.the=${JSON.stringify(the)};G.run.kv=[];G.run.trait='none';G.run.lifeAdj=500;G.run.tue=null;tueInit(G.run);NK.clear();`);
