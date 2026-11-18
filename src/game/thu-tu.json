@@ -279,6 +279,7 @@
  "content/venues/viec-thue.js",
  "content/rules/gia-dinh.js",
  "core2/39-tien-te.js",
+ "content/rules/tan-thu.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
