@@ -154,7 +154,12 @@
             "t": "Lúc cả hai cùng thở dốc, ngươi lao ra chộp lấy hộp ngọc rồi độn thổ. Sau lưng là tiếng chửi rủa vang trời.",
             "e": {
               "relic": 0,
-              "karma": -3,
+              "hd": {
+                "t": 3
+              },
+              "ng": {
+                "b": 1
+              },
               "oan": [
                 "a",
                 "cướp bảo vật trước mắt"
@@ -315,7 +320,12 @@
             "t": "Ngươi chỉ ra từng vết keo dán. Đám đông cười ồ, gã phải bồi thường cho mấy người bị lừa trước đó, lại dúi cho ngươi chút tiền để im miệng.",
             "e": {
               "st": 15,
-              "karma": 2
+              "hd": {
+                "p": 1
+              },
+              "ng": {
+                "g": 1
+              }
             }
           },
           "no": {
@@ -393,7 +403,7 @@
           "t": "Ngươi ôm nó lên, lau sạch bùn đất, băng chỗ bị thương. Con thú nhỏ liếm tay ngươi rồi chui vào ngực áo, từ đó không chịu rời.",
           "e": {
             "petNew": "holy",
-            "karma": 4
+            "deed": "phong_sinh"
           }
         },
         {
@@ -402,7 +412,7 @@
           "t": "Ngươi xuống tay dứt khoát. Yêu đan nhỏ như hạt đậu, vẫn còn ấm.",
           "e": {
             "tv": 6,
-            "karma": -5,
+            "deed": "giet_thu_vo_hai",
             "tamma": 3
           }
         },
@@ -415,7 +425,7 @@
               "t": "Ngươi đặt nó trước cửa hang. Một con thú lớn hiện ra, nhìn ngươi rất lâu, rồi đẩy ra một viên ngọc sáng.",
               "e": {
                 "relic": 0,
-                "karma": 4
+                "deed": "phong_sinh"
               }
             },
             {
@@ -620,7 +630,7 @@
           "t": "Bia vỡ. Trong lõi đá quả có linh thạch, nhưng ngươi có cảm giác vừa làm một chuyện không nên làm.",
           "e": {
             "st": 35,
-            "karma": -4
+            "deed": "dao_mo"
           }
         },
         {
@@ -1037,7 +1047,7 @@
               "t": "Hắc điếm bị dẹp. Dưới hầm có cả đống đồ của khách bị hại.",
               "e": {
                 "st": 30,
-                "karma": 4,
+                "deed": "giet_cuop_dang_ac",
                 "pill": 1
               }
             }
@@ -1061,7 +1071,7 @@
             "t": "Ngươi đoán không sai. Dưới hầm toàn xương người. Ngươi phóng hỏa đốt quán, mang theo số tiền chúng cướp được.",
             "e": {
               "st": 28,
-              "karma": 3
+              "deed": "giet_cuop_dang_ac"
             }
           }
         },
@@ -1233,7 +1243,7 @@
             "t": "Ngươi mang đầu {$a.ten} về phủ nha. Quan phủ thưởng linh thạch theo lệ, dân chúng đốt pháo mừng.",
             "e": {
               "st": 45,
-              "karma": 5,
+              "deed": "giet_cuop_dang_ac",
               "tv": 4
             }
           }
@@ -1432,14 +1442,14 @@
               "t": "{$a.hn} ăn ngấu nghiến, xong chùi tay vào áo, móc từ trong ngực ra một cuốn sách nhàu nát: “Giấy lau tay, cho ngươi.” Ngươi lật vài trang, tay run lên.",
               "e": {
                 "skill": 1,
-                "karma": 3
+                "deed": "bo_thi"
               }
             },
             {
               "w": 3,
               "t": "{$a.hn} cảm tạ rối rít, chúc ngươi sống lâu. Chỉ vậy thôi. Nhưng ngươi thấy vui.",
               "e": {
-                "karma": 4,
+                "deed": "bo_thi",
                 "van": 1
               }
             }
@@ -1527,7 +1537,7 @@
           },
           "t": "Ngươi đặt linh thạch vào tay đứa trẻ. {$a.hn} sững sờ, rồi òa khóc, rồi chạy biến đi. Ngươi không biết nó có mua được thuốc không.",
           "e": {
-            "karma": 6,
+            "deed": "bo_thi",
             "an": [
               "a",
               "cho tiền mua thuốc"
@@ -1542,7 +1552,7 @@
           },
           "t": "Người bệnh bị âm khí xâm thể. Ngươi truyền linh lực đẩy âm khí ra ngoài. Người đỡ dần, cả nhà quỳ lạy ngươi.",
           "e": {
-            "karma": 8,
+            "deed": "cuu_nguoi",
             "tv": 3,
             "an": [
               "a",
@@ -1734,7 +1744,7 @@
           "t": "Vị tăng nhận, rồi đặt tay lên đỉnh đầu ngươi. Một luồng ấm áp lan xuống, những ý nghĩ đen tối trong lòng tan như sương.",
           "e": {
             "tamma": -12,
-            "karma": 3
+            "deed": "bo_thi"
           }
         },
         {
@@ -1767,7 +1777,9 @@
             "t": "Vị tăng thu tay, mỉm cười: “Thí chủ võ công cao, chỉ tiếc tâm còn nóng.”",
             "e": {
               "tv": 6,
-              "karma": -2
+              "hd": {
+                "t": 1
+              }
             }
           },
           "lose": {
@@ -2000,7 +2012,7 @@
           "l": "Lấp cửa mộ lại",
           "t": "Người chết cần yên nghỉ. Ngươi lăn tảng đá chặn cửa, vái ba vái.",
           "e": {
-            "karma": 3,
+            "deed": "an_tang",
             "van": 1
           }
         },
@@ -2093,7 +2105,9 @@
               "t": "Cấm chế tự tan như đáp lễ. Trên bàn đá có một ngọc giản, bên trong là truyền thừa của chủ nhân.",
               "e": {
                 "skill": 1,
-                "karma": 2
+                "hd": {
+                  "p": 1
+                }
               }
             },
             {
@@ -2268,7 +2282,7 @@
               "hoixuan",
               "tukhi"
             ],
-            "karma": 3,
+            "deed": "cuu_nguoi",
             "an": [
               "a",
               "giúp dập lửa lò đan"
@@ -2289,7 +2303,9 @@
                 1,
                 1
               ],
-              "karma": -2
+              "hd": {
+                "t": 1
+              }
             }
           },
           "no": {
@@ -2384,7 +2400,7 @@
           "t": "Cán cờ lạnh như băng. Tiếng khóc im bặt, như chờ chủ nhân mới ra lệnh.",
           "e": {
             "relic": "honphien",
-            "karma": -8,
+            "deed": "luyen_hon_nguoi",
             "tamma": 8
           }
         },
@@ -2398,7 +2414,7 @@
           "win": {
             "t": "Lá cờ cháy rụi. Trăm luồng khói trắng bay lên, khẽ cúi đầu với ngươi rồi tan vào trời.",
             "e": {
-              "karma": 10,
+              "deed": "sieu_do",
               "tv": 6,
               "tam": 2
             }
@@ -2540,7 +2556,7 @@
             "t": "Ba ngày ba đêm không ngủ, tới cổng phủ thì hai bàn chân ngươi rộp cả. Thư tới kịp, quan phủ thưởng linh thạch theo lệ.",
             "e": {
               "st": 30,
-              "karma": 3
+              "deed": "giu_loi"
             }
           },
           "no": {
@@ -2633,7 +2649,7 @@
           },
           "t": "Con hươu nhìn ngươi một cái rồi nhảy vào rừng. Sừng ngọc của nó lấp lánh như sao.",
           "e": {
-            "karma": 5,
+            "deed": "phong_sinh",
             "van": 2
           }
         },
@@ -2706,7 +2722,7 @@
           },
           "t": "Ngươi dốc hết linh lực gọi mưa, lửa tắt dần. Mấy người hái thuốc quỳ xuống lạy ngươi như lạy thần.",
           "e": {
-            "karma": 10,
+            "deed": "cuu_nguoi_hy_sinh",
             "tv": 4,
             "an": [
               "a",
@@ -2723,7 +2739,12 @@
               "tinhnguyen",
               "hoixuan"
             ],
-            "karma": -5
+            "hd": {
+              "t": 3
+            },
+            "ng": {
+              "b": 1
+            }
           }
         },
         {
@@ -2735,7 +2756,7 @@
           "win": {
             "t": "Kẻ phóng hỏa là ma tu cần tro linh thảo để luyện độc. Hắn không còn cơ hội luyện nữa.",
             "e": {
-              "karma": 6,
+              "deed": "giet_ma_dau",
               "st": 20
             }
           }
@@ -3355,7 +3376,7 @@
                 "t": "Yêu vật gục ngã. Dân làng mổ lợn ăn mừng ba ngày liền.",
                 "e": {
                   "st": 25,
-                  "karma": 8,
+                  "deed": "hanh_hiep",
                   "tv": 6
                 }
               }
@@ -3375,7 +3396,7 @@
                     "t": "Tên luyện thi nhân chết dưới đáy giếng. Con hồ ly ngồi trên miệng giếng nhìn ngươi, rồi lặng lẽ bỏ đi.",
                     "e": {
                       "st": 30,
-                      "karma": 10,
+                      "deed": "giet_ma_dau",
                       "tv": 8
                     }
                   }
@@ -3389,7 +3410,13 @@
                   "win": {
                     "t": "Ngươi giết con hồ ly. Đêm hôm sau, lại có người mất tích.",
                     "e": {
-                      "karma": -8,
+                      "hd": {
+                        "t": 3
+                      },
+                      "ng": {
+                        "b": 8,
+                        "yd": "tai_nan"
+                      },
                       "tamma": 8
                     }
                   }
@@ -3404,7 +3431,9 @@
           "t": "{$a.ten} gom góp được ít linh thạch, run run đưa cho ngươi. Đêm ấy, nó tới.",
           "e": {
             "st": 12,
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           },
           "fight": {
             "k": "quy"
@@ -3494,7 +3523,7 @@
           "win": {
             "t": "Mặt nước lặng dần. Lái đò quỳ lạy ngươi, nước mắt giàn giụa.",
             "e": {
-              "karma": 6,
+              "deed": "giet_ma_dau",
               "st": 15
             }
           }
@@ -3509,7 +3538,7 @@
           "ok": {
             "t": "Ngọn đèn hoa sen trôi đi. Mặt nước lặng dần. Từ đó bến đò không còn ai chết đuối.",
             "e": {
-              "karma": 8,
+              "deed": "sieu_do",
               "tam": 1
             }
           },
@@ -3521,7 +3550,7 @@
             "win": {
               "t": "Nó đi rồi. Lần này thì thật.",
               "e": {
-                "karma": 4
+                "deed": "sieu_do"
               }
             }
           }
@@ -3620,7 +3649,7 @@
             "win": {
               "t": "Họa bì cháy thành tro. Nhà phú hộ tạ ơn hậu hĩnh.",
               "e": {
-                "karma": 8,
+                "deed": "giet_ma_dau",
                 "st": 30,
                 "relic": 0
               }
@@ -3635,7 +3664,7 @@
             "win": {
               "t": "Nguy hiểm thật. Ngươi chạm tay lên ngực, tim vẫn còn đập.",
               "e": {
-                "karma": 6,
+                "deed": "giet_ma_dau",
                 "st": 15
               }
             }
@@ -3710,7 +3739,7 @@
           "t": "Ngươi thả cá xuống sông. Nó quẫy đuôi ba lần như lạy rồi lặn mất. Đêm ấy, có viên ngọc trai sáng rực đặt ở đầu giường ngươi.",
           "e": {
             "relic": 0,
-            "karma": 5,
+            "deed": "phong_sinh",
             "van": 2
           }
         },
@@ -3724,7 +3753,7 @@
           "e": {
             "hpP": 4,
             "tv": 6,
-            "karma": -3
+            "deed": "giet_thu_vo_hai"
           }
         },
         {
@@ -3806,7 +3835,7 @@
           "win": {
             "t": "Hóa ra đây là luyện thi nhân bắt người sống luyện thi. Ngươi chôn cất bảy cái xác.",
             "e": {
-              "karma": 6,
+              "deed": "giet_ma_dau",
               "st": 20
             }
           }
@@ -4116,7 +4145,7 @@
           "l": "Nhận làm đệ tử",
           "t": "Nửa năm dạy nó luyện khí. Lúc chia tay, nó khóc như mưa, hứa sau này nổi danh sẽ đi tìm ngươi.",
           "e": {
-            "karma": 4,
+            "deed": "nhan_nuoi",
             "tam": 2,
             "h": 288,
             "an": [
@@ -4133,7 +4162,7 @@
           },
           "t": "Nó cầm tiền, cúi đầu đi. Có lẽ làm phàm nhân yên ổn cũng là một cái phúc.",
           "e": {
-            "karma": 1
+            "deed": "bo_thi"
           }
         },
         {
@@ -4294,7 +4323,12 @@
           "l": "Đốt lửa sưởi cho người ấy",
           "t": "Ngọn lửa cháy tới sáng. Người ấy không động đậy, nhưng tuyết trên vai đã tan.",
           "e": {
-            "karma": 3,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "tamma": -5
           }
         },
@@ -4482,7 +4516,7 @@
           "win": {
             "t": "{$b.ten} ôm mặt bỏ chạy, buông một câu: “Ngươi chờ đấy!” {$a.ten} lén nhìn ngươi, mắt sáng lên như sao.",
             "e": {
-              "karma": 6,
+              "deed": "hanh_hiep",
               "an": [
                 "a",
                 "cứu khỏi trận đòn"
@@ -4507,7 +4541,7 @@
           "ok": {
             "t": "Ngươi chỉ đứng đó, giơ lệnh bài lên. Cả đám tản đi như chim vỡ tổ.",
             "e": {
-              "karma": 5,
+              "deed": "hanh_hiep",
               "an": [
                 "a",
                 "giải vây"
@@ -4523,7 +4557,7 @@
             "win": {
               "t": "Giờ thì chúng nghe tên rồi.",
               "e": {
-                "karma": 4
+                "deed": "hanh_hiep"
               }
             }
           }
@@ -4599,7 +4633,12 @@
             "t": "Ngươi vào ra như gió. Trong túi đã có mấy gốc linh thảo thượng hạng.",
             "e": {
               "thao": 8,
-              "karma": -4
+              "hd": {
+                "t": 3
+              },
+              "ng": {
+                "b": 1
+              }
             }
           },
           "no": {
@@ -4613,7 +4652,12 @@
               "t": "Ngươi chạy thoát, trên tay còn kịp nhổ một gốc.",
               "e": {
                 "thao": 2,
-                "karma": -4
+                "hd": {
+                  "t": 3
+                },
+                "ng": {
+                  "b": 1
+                }
               }
             }
           }
@@ -4738,7 +4782,12 @@
             "t": "Ngươi chép vội một quyển rồi chuồn ra trước khi trời sáng.",
             "e": {
               "skill": 2,
-              "karma": -3
+              "hd": {
+                "t": 3
+              },
+              "ng": {
+                "b": 1
+              }
             }
           },
           "no": {
@@ -4750,7 +4799,12 @@
             "win": {
               "t": "Ngươi chạy thoát, tay trắng.",
               "e": {
-                "karma": -3
+                "hd": {
+                  "t": 3
+                },
+                "ng": {
+                  "b": 1
+                }
               }
             }
           }
@@ -5007,7 +5061,12 @@
             "t": "Ngươi đào suốt đêm, túi trữ vật nặng trĩu.",
             "e": {
               "st": 50,
-              "karma": -3
+              "hd": {
+                "t": 3
+              },
+              "ng": {
+                "b": 1
+              }
             }
           },
           "no": {
@@ -5029,7 +5088,12 @@
           "t": "Tông môn thưởng cho ngươi một phần theo lệ, còn ghi tên ngươi vào sổ khách quý.",
           "e": {
             "st": 20,
-            "karma": 3
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -5274,7 +5338,9 @@
           "ok": {
             "t": "Ngươi chỉ ra vết tro trên giày {$a.ten}, thứ tro chỉ có trong kho đan. Trưởng lão biến sắc, phạt hắn ba năm diện bích, bồi thường cho ngươi.",
             "e": {
-              "karma": 2,
+              "hd": {
+                "p": 1
+              },
               "st": 25,
               "oan": [
                 "a",
@@ -5485,7 +5551,12 @@
             "t": "Ngươi gom hết trân châu. Mặt biển im lặng một cách đáng sợ.",
             "e": {
               "st": 40,
-              "karma": -5
+              "hd": {
+                "t": 3
+              },
+              "ng": {
+                "b": 3
+              }
             }
           }
         },
@@ -5498,7 +5569,12 @@
           "t": "Ngư nhân nhận quà, vẫy đuôi chào. Từ đó, sóng biển quanh ngươi êm hơn một chút.",
           "e": {
             "van": 2,
-            "karma": 3,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "flag": "ngunhan"
           }
         },
@@ -5567,7 +5643,7 @@
               "t": "Là {$a.ten}, một tu sĩ đắm thuyền, mắc kẹt đã ba năm. {$a.hn} mừng phát khóc, tặng ngươi toàn bộ tài sản còn lại.",
               "e": {
                 "st": 35,
-                "karma": 4,
+                "deed": "cuu_nguoi",
                 "an": [
                   "a",
                   "cứu khỏi đảo hoang"
@@ -5974,7 +6050,9 @@
           "l": "Để yên",
           "t": "Nghìn năm mới có một viên ngọc. Để nó tiếp tục sáng.",
           "e": {
-            "karma": 2
+            "hd": {
+              "p": 1
+            }
           }
         },
         {
@@ -6055,7 +6133,12 @@
               "t": "Trên thuyền chỉ có một bức thư chưa gửi, đề tên một người ở {$que}. Ngươi cất đi.",
               "e": {
                 "tam": 2,
-                "karma": 3,
+                "hd": {
+                  "p": 1
+                },
+                "ng": {
+                  "g": 1
+                },
                 "item": "nv_thu_chuadua"
               }
             }
@@ -6066,7 +6149,7 @@
           "l": "Đốt thuyền",
           "t": "Lửa bùng lên trong sương. Có tiếng thở phào rất khẽ.",
           "e": {
-            "karma": 3
+            "deed": "sieu_do"
           }
         },
         {
@@ -6311,7 +6394,12 @@
           "e": {
             "atkP": 10,
             "hpP": 8,
-            "karma": -10,
+            "hd": {
+              "t": 8
+            },
+            "ng": {
+              "b": 3
+            },
             "tamma": 12
           }
         },
@@ -6325,7 +6413,7 @@
           "win": {
             "t": "Huyết trì cạn dần, lộ ra đáy toàn xương trắng. Ngươi chôn cất từng mảnh.",
             "e": {
-              "karma": 10,
+              "deed": "sieu_do",
               "tv": 10
             }
           }
@@ -6398,7 +6486,7 @@
           "win": {
             "t": "{$a.ten} được thả ra, quỳ xuống trước mặt ngươi. “Mạng này là của ân nhân.”",
             "e": {
-              "karma": 8,
+              "deed": "cuu_nguoi",
               "st": 20,
               "an": [
                 "a",
@@ -6417,7 +6505,7 @@
           "ok": {
             "t": "Hai tên canh say mềm. Ngươi mở khóa, cõng người chạy suốt đêm.",
             "e": {
-              "karma": 8,
+              "deed": "cuu_nguoi",
               "an": [
                 "a",
                 "cứu khỏi lồng sắt ma tu"
@@ -6432,7 +6520,7 @@
             "win": {
               "t": "Người đã được cứu. Ngươi mệt lả.",
               "e": {
-                "karma": 6,
+                "deed": "cuu_nguoi",
                 "an": [
                   "a",
                   "cứu khỏi lồng sắt ma tu"
@@ -6526,7 +6614,7 @@
           },
           "t": "Lửa cháy ba ngày ba đêm. Khói đen bay lên, rồi trắng dần.",
           "e": {
-            "karma": 8,
+            "deed": "an_tang",
             "tamma": -8
           }
         },
@@ -6675,7 +6763,9 @@
           "e": {
             "atkP": 15,
             "defP": 10,
-            "karma": -15,
+            "hd": {
+              "t": 8
+            },
             "tamma": 20
           }
         },
@@ -6690,7 +6780,7 @@
           "win": {
             "t": "Hạt giống rơi xuống đất, mọc thành một cây gai đen rồi khô héo.",
             "e": {
-              "karma": 6,
+              "deed": "giet_ma_dau",
               "tv": 8
             }
           }
@@ -6845,7 +6935,7 @@
               "w": 2,
               "t": "{$a.hn} giữ lời. Chỗ giấu có một món bảo vật.",
               "e": {
-                "karma": 5,
+                "deed": "tha_ke_ac",
                 "relic": 0
               }
             },
@@ -6873,7 +6963,7 @@
           "l": "Trừ ma",
           "t": "Ma tu là ma tu. Ngươi không để lời van xin làm mềm tay.",
           "e": {
-            "karma": 2,
+            "deed": "giet_ma_dau",
             "tv": 6,
             "st": 15
           }
@@ -7060,7 +7150,7 @@
             "t": "Khôi lỗi canh giữ đổ sập. Pháp bảo của tiên nhân là của ngươi.",
             "e": {
               "relic": 2,
-              "karma": -3
+              "deed": "dao_mo"
             }
           }
         },
@@ -7498,7 +7588,7 @@
           "ok": {
             "t": "Nàng mỉm cười, tan thành sương.",
             "e": {
-              "karma": 6,
+              "deed": "sieu_do",
               "tam": 1
             }
           },
@@ -7691,7 +7781,7 @@
                 },
                 "t": "Gã khóc rồi đi.",
                 "e": {
-                  "karma": 6,
+                  "deed": "bo_thi",
                   "an": [
                     "a",
                     "tha tội và cho tiền"
@@ -7703,7 +7793,9 @@
                 "l": "Giao cho quan",
                 "t": "Gã bị lôi đi.",
                 "e": {
-                  "karma": -2
+                  "hd": {
+                    "t": 1
+                  }
                 }
               }
             ]
@@ -7721,7 +7813,7 @@
           "t": "Hắn lấy mấy viên linh thạch rồi đi. Ngươi để yên.",
           "e": {
             "st": "-8%",
-            "karma": 2
+            "deed": "bo_thi"
           }
         },
         {
@@ -7968,7 +8060,9 @@
               "t": "Lửa dừng lại trên một nấm mộ cổ. Dưới đó có đồ tùy táng.",
               "e": {
                 "relic": 0,
-                "karma": -2
+                "hd": {
+                  "t": 1
+                }
               }
             },
             {
@@ -8650,7 +8744,7 @@
           },
           "t": "Mây kéo tới, mưa lất phất. Cả làng quỳ lạy.",
           "e": {
-            "karma": 10,
+            "deed": "cuu_dich",
             "an": [
               "a",
               "gọi mưa cứu làng"
@@ -8727,7 +8821,12 @@
           "t": "Một ngày mồ hôi. Tối đó được ăn cơm mới.",
           "e": {
             "h": 12,
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "hp": "30%",
             "an": [
               "a",
@@ -8960,7 +9059,7 @@
           "l": "Cởi áo khoác cho",
           "t": "Đứa bé ôm chặt chiếc áo.",
           "e": {
-            "karma": 6,
+            "deed": "bo_thi",
             "tamma": -3,
             "an": [
               "a",

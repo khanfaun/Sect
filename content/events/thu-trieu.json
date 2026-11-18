@@ -36,7 +36,7 @@
             "e": {
               "entGone": 1,
               "tv": 8,
-              "karma": 8,
+              "deed": "cuu_nguoi_hy_sinh",
               "st": 20
             }
           }
@@ -125,7 +125,9 @@
             "e": {
               "entGone": 1,
               "tam": 1,
-              "karma": 4
+              "hd": {
+                "p": 3
+              }
             }
           },
           "no": {
@@ -210,7 +212,7 @@
           "t": "Ngươi dẫn họ đi đường tắt qua núi. Đi tới đâu, người ta lạy tới đó.",
           "e": {
             "h": 12,
-            "karma": 8,
+            "deed": "cuu_nguoi",
             "an": [
               "a",
               "cứu cả nhà khỏi thú triều"
@@ -229,7 +231,7 @@
             "e": {
               "entGone": 1,
               "tv": 8,
-              "karma": 6,
+              "deed": "cuu_nguoi",
               "st": 15
             }
           }
@@ -394,7 +396,7 @@
           "ok": {
             "t": "Ngươi chạy như bay, bầy thú sượt qua sau lưng. Đứa bé ôm cổ ngươi không buông.",
             "e": {
-              "karma": 10,
+              "deed": "cuu_nguoi_hy_sinh",
               "an": [
                 "a",
                 "cứu giữa thú triều"
@@ -405,7 +407,7 @@
             "t": "Chậm một bước. Bầy thú cắn xé, ngươi che cho đứa bé bằng chính lưng mình.",
             "e": {
               "hp": "-35%",
-              "karma": 10,
+              "deed": "cuu_nguoi_hy_sinh",
               "an": [
                 "a",
                 "cứu giữa thú triều"

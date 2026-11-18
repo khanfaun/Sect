@@ -411,6 +411,14 @@ const TESTS = {
       ok(st1<st0||st0<=2, 'bấp bênh: ít tiền khởi đầu hơn ('+st0+' → '+st1+')');}
     fresh();run("die('combat',{n:'thử'})");ok(run("!!G.meta.lastNq"), 'lúc chết ghi lại nghiệp duyên');
   },
+  deed_su_kien() {
+    fresh();
+    const bad=run(`(()=>{const out=[];const walk=(x,id)=>{if(Array.isArray(x))return x.forEach(y=>walk(y,id));if(!x||typeof x!=='object')return;for(const k in x){if(k==='karma')out.push('karma@'+id);if(k==='deed'&&!DEED[x[k]])out.push(x[k]+'@'+id);walk(x[k],id);}};for(const e of CONTENT_EVENTS)walk(e,e.id);return out})()`);
+    ok(bad.length===0, 'sự kiện không còn karma cũ, mã deed đều có: '+bad.slice(0,5).join(','));
+    const n=run(`(()=>{let n=0;const walk=x=>{if(Array.isArray(x))return x.forEach(walk);if(!x||typeof x!=='object')return;for(const k in x){if(k==='deed'||k==='hd'||k==='ng')n++;walk(x[k]);}};CONTENT_EVENTS.forEach(walk);return n})()`);
+    ok(n>=477, 'đủ chỗ đã chuyển: '+n);
+    const ch=run("applyE({deed:'cuu_nguoi',st:1})");ok(ch.some(c=>c.i==='☯️'), 'hiệu ứng sự kiện ra chip nghiệp duyên');
+  },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });

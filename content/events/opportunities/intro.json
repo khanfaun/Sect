@@ -29,7 +29,12 @@
           "cost": "1 tháng",
           "h": 720,
           "fx": {
-            "karma": 3,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 1
+            },
             "tamma": -6
           },
           "t": "Suốt một tháng ngươi khất thực, ngủ miếu cùng ông. Tối nào ông cũng ngồi thiền, ngươi ngồi theo. Lúc chia tay, ông chỉ nói: “Tâm yên thì khí tự về.”"
@@ -97,7 +102,7 @@
           "cost": "10 ngày",
           "h": 240,
           "fx": {
-            "karma": 5
+            "deed": "cuu_dich"
           },
           "ll": 4,
           "t": "Mười ngày sắc thuốc, đun nước, khiêng người. Dịch lui, nàng giữ lời, đêm cuối ngồi dạy ngươi từng nhịp thở."
@@ -106,7 +111,9 @@
           "l": "Xin học ngay, ta còn đường xa",
           "t": "Nàng thở dài, vẫn viết cho ngươi bài khẩu quyết: “Học được thì nhớ quay lại giúp người.”",
           "fx": {
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         }
       ],
@@ -169,7 +176,7 @@
           "cost": "1 ngày",
           "h": 24,
           "fx": {
-            "karma": 4,
+            "deed": "an_tang",
             "tamma": -2
           },
           "t": "Ngươi đào huyệt, đắp mộ, cắm một cành cây làm bia. Lúc mở sách, trang đầu ghi: “Người chôn ta, sách này tặng ngươi.”"
@@ -378,7 +385,7 @@
           "cost": "7 ngày",
           "h": 168,
           "fx": {
-            "karma": 4
+            "deed": "cuu_nguoi"
           },
           "ll": 6,
           "t": "Bảy ngày băng rừng, hai lần suýt bị phát hiện. Qua được núi, hắn dúi quyển sách vào tay ngươi: “Ân này ta nhớ.”"
@@ -444,7 +451,12 @@
         {
           "l": "Thắp hương rồi mới đọc",
           "fx": {
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           },
           "t": "Ngươi dọn sạch bàn thờ, thắp mấy nén hương cỏ. Đọc tới đâu thuộc tới đó."
         },

@@ -66,7 +66,7 @@
             "e": {
               "tv": 18,
               "tamma": 8,
-              "karma": -6,
+              "deed": "luyen_hon_nguoi",
               "rmRelic": "nhancu"
             }
           },
@@ -83,7 +83,7 @@
           "l": "Mời lão đi đầu thai",
           "t": "Lão im lặng rất lâu. “Ba nghìn năm… cũng mệt rồi.” Ánh sáng tắt. Chiếc nhẫn trở lại là sắt vụn, nhưng ngươi giữ nó lại.",
           "e": {
-            "karma": 8,
+            "deed": "sieu_do",
             "van": 3,
             "lore": "luan_hoi"
           }
@@ -158,7 +158,7 @@
             "graveItems": 1,
             "relic": "mocu",
             "st": 10,
-            "karma": -2,
+            "deed": "dao_mo",
             "lore": "luan_hoi"
           }
         },
@@ -421,7 +421,7 @@
             "t": "{$s.ten} sững người. Rất lâu sau, {$s.hn} quay đi, không nói một lời.",
             "e": {
               "tamma": -15,
-              "karma": 8
+              "deed": "hoa_giai"
             }
           },
           "no": {
@@ -542,7 +542,9 @@
           "e": {
             "atkP": 10,
             "tamma": 15,
-            "karma": -10
+            "hd": {
+              "t": 8
+            }
           }
         }
       ],

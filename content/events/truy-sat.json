@@ -128,7 +128,7 @@
           "ok": {
             "t": "Hắn nghe hết, im lặng rất lâu, rồi bẻ gãy tờ lệnh.",
             "e": {
-              "karma": 5,
+              "deed": "hoa_giai",
               "tamma": -5
             }
           },

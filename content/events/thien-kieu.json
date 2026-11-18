@@ -458,7 +458,12 @@
           "t": "Ngươi để lại cho {$rv.hn}.",
           "e": {
             "rival": 1,
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -537,7 +542,7 @@
             "e": {
               "rival": 2,
               "tv": 6,
-              "karma": 4
+              "deed": "cuu_nguoi"
             }
           }
         },

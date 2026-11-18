@@ -125,7 +125,7 @@
                 "t": "Bọn cướp tháo chạy. {$a.ten} vái ngươi ba vái, trả gấp đôi tiền công.",
                 "e": {
                   "st": 40,
-                  "karma": 4,
+                  "deed": "giet_cuop_dang_ac",
                   "an": [
                     "a",
                     "đánh lui bọn cướp"
@@ -466,7 +466,7 @@
             "t": "Bầy thú tan tác. {$a.ten} quỳ xuống cảm tạ, dâng cả túi linh thạch.",
             "e": {
               "st": 35,
-              "karma": 6,
+              "deed": "cuu_nguoi",
               "an": [
                 "a",
                 "cứu khỏi bầy yêu thú"
@@ -480,7 +480,9 @@
           "t": "Ngươi không xen vào. Lúc ngươi đi, tiếng kêu cứu đã tắt.",
           "e": {
             "tamma": 4,
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
