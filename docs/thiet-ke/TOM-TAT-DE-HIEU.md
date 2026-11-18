@@ -1,135 +1,133 @@
-# Phù Sinh — Tóm tắt dễ hiểu
+# Phù Sinh — Tóm tắt dễ hiểu (bản hợp nhất Claude + GPT)
 
-Bản rút gọn của file `PHAN-TICH-NHAN-SINH-LUAN-HOI.md`. Đọc cái này trước; cần chi tiết thì mở file lớn.
+Bản rút gọn của `PHAN-TICH-HOP-NHAT.md`. Đọc cái này trước; cần chi tiết thì mở file lớn.
 
 ---
 
 ## 1. Game này là gì?
 
-Không phải game "tu tiên cho mạnh". Đây là game **sống nhiều đời người**.
-- Kiếp này có thể là đứa ăn mày chết đói năm 30 tuổi.
-- Kiếp sau là thiên tài tu tiên.
-- Kiếp sau nữa là ma đầu ai cũng sợ.
+Không phải game "tu tiên cho mạnh". Đây là game **sống nhiều đời người** trong một thế giới tu tiên u tối.
+- Có đời chỉ mong đủ ăn, có đời làm vua, có đời làm ma đầu, có đời đuổi theo trường sinh.
+- Đời phàm nhân **không bị coi là thua**: một ngư dân trả xong nợ để con không bị bán cũng là một đời trọn vẹn.
+- Thế giới buồn, nhưng vẫn có người giữ lời, có bữa cơm ấm. Không phải việc tốt nào cũng bị phản bội — vì thế khi bị phản mới đau.
 
-Không khí: buồn, u tối, tuyệt vọng. Ai cũng chết rồi đầu thai lại, lặp mãi như một giấc mộng. Muốn thoát chỉ có cách **tỉnh mộng và phi thăng**.
-
-Tu luyện sẽ **khó hơn hiện giờ nhiều**: đột phá dễ thất bại, quái mạnh hơn, đồ đắt hơn. Phần lớn người chơi chỉ tới Trúc Cơ, rất ít người tới Nguyên Anh.
+Tu luyện khó hơn hiện giờ nhiều. Cái khó đến từ thiếu tiền, thiếu thuốc, thiếu thầy, thiếu tin tức và thời gian, không phải từ việc bấm nút rồi chết bất ngờ. Trước nguy hiểm luôn có cách dò tin, chuẩn bị hoặc rút lui. Thua chưa chắc đã chết, có thể chỉ mất đồ, mắc nợ hay bị thương.
 
 ---
 
 ## 2. Vô linh căn ("phế vật")
 
-- Vô linh căn = **không tu tiên được**.
-- **Kiếp đầu luôn có linh căn.** Từ kiếp 2, khoảng **45%** là vô linh căn. Kiếp trước làm ác nhiều thì dễ gặp hơn, làm thiện nhiều thì ít hơn.
-- Vô linh căn bị coi thường: tông môn đuổi về, bị từ hôn, bị gia đình gạt ra.
-- Bù lại: tu sĩ ít để ý tới, không có tâm ma do tu luyện, học nghề và học võ nhanh hơn.
-- **Cách đổi đời:** gặp kỳ ngộ hoặc tìm được vật quý (đan dược, linh quả, linh tủy, cổ trùng, được cao nhân truyền công…). Có **15 cách**, cách nào cũng có cái giá: mất tuổi thọ, bị thương, mang nợ, hoặc phải làm điều ác.
+- **Kiếp đầu luôn có linh căn.** Từ kiếp 2, khoảng **45%** là vô linh căn. Kiếp trước gây hại cho người khác nhiều thì dễ gặp hơn, nhiều ân nghĩa thì ít hơn, luôn trong khoảng 30–65%.
+- Vô linh căn không tu tiên được, kể cả luyện thể, huyết thuật, hồn thuật. Vẫn học võ, làm nghề, làm quan, lập võ phái, thậm chí làm vua.
+- Người đời gọi là "phế vật", nhưng game không coi đời ấy thấp hơn.
+- **18 cách đổi đời** (cải tạo linh căn). Mỗi cách gắn với một nơi có thật trên bản đồ, có người tranh giành, có cái giá phải trả. Mỗi kiếp chỉ thành công được một lần. Có ít nhất hai cách mà người lao động bình thường làm được bằng sức mình:
+  - phục vụ chữa dịch 18 tháng để được một viên đan;
+  - chăm một vườn thuốc suốt 5 năm.
+- Linh căn giờ có thêm **phẩm chất**: Khuyết, Thường, Thuần, Viên Mãn.
 
 ---
 
-## 3. Muốn sống thế nào cũng được ("Đại đạo ba ngàn")
+## 3. Ba thứ đo con người (không hiện con số)
 
-Không chọn nghề lúc đầu. **Làm việc gì nhiều thì thành người đó.**
-- **Phàm nhân (17 nghề):** nông dân, tiều phu, ngư dân, thợ săn, thợ thủ công, thương nhân, quan, lính, võ giả, mở võ phái, tiêu sư, sát thủ, đạo chích, lang trung, thầy đồ, ăn mày, gánh hát.
-- **Võ công cho phàm nhân:** 6 bậc, cao nhất là Tông sư, chỉ ngang tu sĩ mới vào nghề.
-- **Tu sĩ (19 con đường):** đệ tử chính đạo, ma tu, tán tu, sát thủ, trận pháp, luyện đan, luyện khí, vẽ bùa, nuôi thú, triệu hồi, con rối, nuôi cổ, kiếm tu, Phật tu, luyện thi, buôn bán, bói toán, Nho tu…
-- **Cách đánh và tu (22 loại):** huyết thuật, luyện hồn, thần thức, triệu hoán, kiếm, lôi pháp… Mỗi loại có chiêu riêng và cái giá riêng.
-
-Mỗi nghề có cấp bậc, việc làm hằng ngày, chuyện xảy ra trên đường đời và kết cục riêng.
-
----
-
-## 4. Chính – tà và Nhân quả (hai thứ khác nhau)
-
-| | **Chính – tà** | **Nhân quả** |
+| Tên | Đo cái gì | Ảnh hưởng |
 |---|---|---|
-| Đo cái gì | **Cách** bạn làm, người đời nhìn bạn ra sao | Việc bạn làm **thật sự gây ra** điều gì |
-| Ảnh hưởng | Kiếp này (được gì, mất gì) | Kiếp sau, và độ khó của thiên kiếp |
-| Hiện ra | Bằng chữ: Hạo Nhiên … Tùy Tâm … Vô Gian | Bằng chữ: Công Đức Vô Lượng … Thanh Tịnh … Nghiệp Chướng Ngập Trời |
+| **Hành Đạo** (chính – tà) | **Cách** mình làm việc trong đời này | Nghiêng chính thì che chở giỏi hơn; nghiêng tà thì ra đòn mạnh hơn nhưng khó lành thương |
+| **Nghiệp Duyên** (ân – oán) | Việc mình làm **thật sự gây ra** cho người khác | Kiếp sau sinh ra khổ hay sướng, tỉ lệ vô linh căn, thiên kiếp dữ hay hiền |
+| **Danh tiếng** | Người đời **tin** gì về mình (có thể bị vu oan) | Giá cả, tông môn có nhận không, có bị truy nã không |
 
-Không có con số nào hiện ra cho người chơi.
+Game xét **ý định và điều mình biết lúc chọn**:
+- Cõng bà lão rồi bị bà trộm tiền → mình không có lỗi, lỗi thuộc về kẻ trộm. Mình có thể truy tìm để đòi lại.
+- Giết hổ để cứu bầy hươu → không bị coi là ma đạo.
 
-**Ví dụ:**
-- Cõng bà lão xuống núi → người ta khen là chính. Nhưng bà lão lấy trộm tiền của bạn.
-- Giết con hổ → trông như sát sinh. Nhưng nhờ vậy cả bầy hươu sống sót, nên nhân quả lại tốt.
-
-Hậu quả **thường đến muộn**. Lúc chết mới mở ra đủ "Sổ Nhân Quả".
-
-**Thiên kiếp công bằng:** làm ác nhiều thì kiếp dữ hơn, dễ chết hơn, nhưng **qua được thì được thưởng nhiều hơn**. Làm thiện nhiều thì có ánh sáng công đức che bớt sét đánh.
-
-Game không bảo bạn phải tốt hay xấu. Thiện có thể bị thiệt, ác có thể được lợi.
+Làm ác vẫn có lợi ngay: tiền, quyền, sức mạnh. Nhưng nghiệp nặng thì thiên kiếp dữ hơn; **qua được thì nhận thêm chỉ số**. Người nhiều ân nghĩa thì có người mang ơn tới giúp lúc độ kiếp.
 
 ---
 
-## 5. Theo năm tháng
+## 4. Theo năm tháng
 
-Mỗi năm qua đi, thể chất và khí vận làm bạn thay đổi một chút. Ví dụ:
-- Man Hoang Lực Thể: mỗi năm khỏe thêm một chút.
-- Hỏa Linh Thể: hay nóng nảy, đạo tâm lung lay, nhưng máu nóng giúp hồi lại một ít khí huyết.
-
-Phần chú thích của từng thể chất, khí vận chỉ ghi bằng chữ như "một chút", "thỉnh thoảng", không ghi số.
-
----
-
-## 6. Cơm áo và tiền bạc
-
-Phàm nhân phải ăn mỗi ngày. Nhịn đói lâu sẽ yếu đi, có thể chết đói. Mùa đông không có áo ấm thì dễ ốm. Tu sĩ từ Trúc Cơ thì không cần ăn.
-
-**Năm loại tiền:**
-1. **Linh thạch:** tiền của tu sĩ.
-2. **Bạc:** tiền của phàm nhân. Đổi qua lại với linh thạch ở tiền trang.
-3. **Cống hiến:** mỗi tông môn hay thế lực có một sổ riêng, chỉ tiêu được ở đúng chỗ đó.
-4. **Thưởng Lệnh:** làm nhiệm vụ ở bảng treo thưởng để nhận thẻ, rồi đổi đồ ở cửa hàng Thưởng Các.
-5. **Điểm luân hồi:** như hiện có.
-
-Ngoài ra có việc làm thuê, gia đình, cưới vợ gả chồng, sinh con. Con cái cũng có thể có linh căn.
+- Giữ nguyên các thể chất, khí vận đang có trong game, mỗi năm chúng làm mình thay đổi một chút. Ví dụ:
+  - Man Hoang Thể: khỏe dần lên, nhưng ăn nhiều hơn.
+  - Hỏa Linh Thể: hay nóng nảy, nhưng máu nóng giúp hồi lại một ít khí huyết.
+- Thêm vài cái mới hay của GPT, ví dụ:
+  - Khổ Mạch Thể: chỉ khỏe lên khi đủ ăn và chịu làm lụng.
+  - Vãn Thành Chi Mệnh: già mới khôn.
+  - Bần Hàn Dưỡng Chí: nghèo khó rèn nên chí khí.
+- Phần chú thích chỉ ghi bằng chữ ("một chút", "thỉnh thoảng"), không ghi số.
 
 ---
 
-## 7. Hướng dẫn người mới (chỉ ở kiếp đầu)
+## 5. Cơm áo, tiền bạc, nghề
 
-- Có **30 nhiệm vụ nhỏ**. 6 cái đầu làm lần lượt từng cái, sau đó mỗi lúc có tối đa 3 cái.
-- Mỗi nhiệm vụ có thanh tiến độ và ghi rõ phần thưởng.
-- **Bấm vào nhiệm vụ thì game dẫn bạn tới đúng chỗ cần làm.**
+- Phải ăn mỗi ngày, cần chỗ ngủ, có gia đình, có thể mắc nợ. Mọi thứ đều có giá cụ thể, như gạo, củi, thuốc, nhà trọ.
+- **Năm loại tiền:**
+  1. **Linh thạch** của tu sĩ.
+  2. **Bạc** của phàm nhân, tính bằng đồng và quan (1 quan = 1.000 đồng).
+  3. **Cống hiến**: mỗi thế lực một sổ riêng, chỉ tiêu ở đúng thế lực đó.
+  4. **Thưởng Lệnh**: làm nhiệm vụ bảng treo thưởng để đổi hàng.
+  5. **Điểm luân hồi**.
+- **21 nghề phàm nhân** (nông, ngư, tiều, mỏ, rèn, buôn, lính, quan, sát thủ, đạo chích, gánh hát, chèo đò, thợ săn, tiêu sư, ăn mày…).
+- **16 nghề tu chính** (kiếm, thể, huyết, hồn, thần thức, triệu hoán, ngự thú, trận, đan, dược, luyện khí, phù, khôi lỗi, độc, âm luật, ám sát). Làm sau thêm: cổ, thi, Phật, Nho, bói toán, buôn bán tu tiên.
+- Chính đạo, ma đạo, tán tu là **phe**, không phải nghề.
+
+---
+
+## 6. Người mới (chỉ kiếp đầu)
+
+- Có **27 nhiệm vụ**.
+- Bắt đầu từ chuyện sống: biết mình còn gì, ăn, hỏi việc, kiếm một ngày công, tìm chỗ ngủ. Sau đó mới tới đi đường, mua bán, học, săn, chữa thương, kết quen. Cuối cùng là tu tiên: dẫn khí, bế quan, đột phá Trúc Cơ.
+- 6 nhiệm vụ đầu làm lần lượt từng cái; sau đó mỗi lúc có 3 cái.
+- Bấm vào nhiệm vụ thì game dẫn bạn tới đúng chỗ cần làm.
 - Ẩn hoặc hiện lúc nào cũng được.
 - Bỏ qua được, nhưng sẽ không nhận lại phần thưởng (game hỏi lại trước khi bỏ).
 - Không có thời hạn, không bị phạt.
 
 ---
 
-## 8. Cốt truyện lớn
+## 7. Cốt truyện: ba tầng
 
-- Gom thành **9 câu chuyện lớn**, ví dụ: Phi thăng, Diệt thế, Làm vua, Làm giàu, Báo thù, Võ lâm, Dựng gia tộc, Thầy thuốc, Tỉnh mộng.
-- Mỗi xuất thân gắn với một câu chuyện.
-- **Không ép đi theo.** Câu chuyện tự tìm đến bạn: có thư gửi tới, có người tìm đến tận nơi, có tin đồn. Bỏ qua thì thế giới vẫn tự diễn tiếp và câu chuyện rẽ sang hướng khác. Không bao giờ bị kẹt.
-- Thế giới có **12 biến cố lớn** xảy ra theo năm dù bạn có mặt hay không: chiến tranh, đổi vua, đại dịch, ma kiếp…
-- Làm gì cũng có kết cục riêng, kể cả sống một đời vô danh.
-- **Thế giới nhớ:** kiếp này bạn lập triều đại, thì kiếp sau triều đại đó vẫn còn.
+1. **Chuyện xuất thân** (của GPT): mỗi xuất thân trong 45 xuất thân có một chuyện riêng gồm 5 mốc và 3 kết. Ví dụ con nhà nông gặp mùa đói, đê hỏng, bị tranh ruộng.
+2. **Đại lộ** (9 cốt truyện của Claude): con đường đời lớn mà ai cũng đi được, như làm vua, làm giàu, báo thù, võ lâm, dựng gia tộc, thầy thuốc, phi thăng, ma đầu, tỉnh mộng. Đại lộ thường mở ra sau khi chuyện xuất thân khép lại.
+3. **Biến cố thế giới** (14 cái): đói kém, chiến tranh, đổi ngôi, thú triều, đại dịch, Đêm Dài… xảy ra dù mình có mặt hay không.
 
-**Kết thúc thật của game:** gom đủ 9 mảnh ký ức "Mộng Ấn" qua nhiều kiếp, rồi phi thăng. Phi thăng mà chưa đủ thì chỉ là "mộng trong mộng" và vẫn phải luân hồi tiếp.
+Mọi tầng dùng chung **15 địa điểm, 30 nhân vật, 10 thế lực** cố định. **Không ép đi theo**: bỏ qua thì thế giới tự diễn tiếp. Người chết không sống lại để giao nhiệm vụ.
 
----
-
-## 9. Thời gian giữa hai kiếp
-
-- Hiện game đã có sẵn: mỗi lần chết, thế giới trôi qua 3–30 năm.
-- Đề xuất nới rộng: đôi khi trôi qua hàng trăm, thậm chí hàng ngàn năm.
-- Quay lại sau lâu như vậy, mọi thứ đã khác: tông môn cũ thành phế tích, kẻ thù cũ thành lão quái.
-- 3 kiếp đầu luôn chỉ cách gần, để người mới kịp hiểu chuyện nhân quả.
-- Nếu ma đầu diệt thế: 3 vùng thành đất ma, vài trăm đến hơn ngàn năm sau mới dần lành lại.
+**Ghép 9 cốt truyện của Claude ảnh hưởng gì?**
+- Phải viết thêm khoảng 150–180 đoạn chuyện.
+- Phải tránh kể lặp với chuyện xuất thân: nếu chuyện xuất thân đã kể phần mở đầu thì đại lộ bắt đầu từ phần thứ hai.
+- Không phải tạo người hay nơi mới, vì dùng lại người và nơi của GPT.
 
 ---
 
-## 10. Bạn cần trả lời 4 câu
+## 8. Bí mật luân hồi và kết thúc
+
+- Thế giới tên là **Cổ Giới**. Năm vị tổ lập ra vòng luân hồi để cứu thế giới. Nay vòng ấy sống bằng **ký ức của chúng sinh**.
+- Muốn tỉnh mộng phải tìm ra **3 điều bí mật**. Cách tìm là nhặt **Mộng Ấn** qua các kiếp (ví dụ viếng mộ của chính mình kiếp trước, xem vở tuồng kể đời mình) và khảo sát các nơi cổ.
+- **Người Gác Bến** xuất hiện mỗi kiếp một lần dưới dạng khác nhau. Người này biết sự thật.
+- **8 kết thúc:**
+  1. Sống trọn một đời.
+  2. Làm vua.
+  3. Làm ma chủ.
+  4. Phi thăng tỉnh mộng.
+  5. Giữ vòng luân hồi nhưng sửa nó.
+  6. Truyền nghề cho đời sau.
+  7. Chặt đứt vòng luân hồi.
+  8. Diệt thế.
+- Phi thăng khi chưa biết đủ 3 bí mật thì chỉ là "**mộng trong mộng**", vẫn phải luân hồi tiếp.
+- Ma đầu diệt thế khi chưa đủ điều kiện thì chỉ làm **3 vùng thành đất ma**, vài trăm đến hơn ngàn năm sau mới lành lại.
+
+---
+
+## 9. Bạn còn cần trả lời
 
 1. **Linh căn trên thẻ đầu thai:**
    - A (tôi khuyên): giấu đi, vài tháng sau mới biết.
    - B: hiện rõ, nhưng cả 3 thẻ giống nhau.
    - C: giữ như cũ.
-2. Phi thăng mà chưa đủ 9 Mộng Ấn thì vẫn phải luân hồi tiếp. Đồng ý không?
-3. Thời gian giữa hai kiếp dài nhất 5.000 năm. Được không?
-4. Thêm lựa chọn ở bến Vong Xuyên:
+2. Thời gian giữa hai kiếp dài nhất 5.000 năm. Được không?
+3. Thêm lựa chọn ở bến Vong Xuyên:
    - "Đi ngay": đầu thai sớm, nhưng quên công pháp kiếp trước.
    - "Ngồi đợi": đầu thai bình thường, giữ ký ức như hiện tại.
 
    Có muốn thêm không?
+4. Người Gác Bến chính là phần ký ức mà Yêu Hoàng (một nhân vật cổ trong thế giới của GPT) cất giữ bên ngoài vòng luân hồi. Chốt như vậy không?
+5. Phần thưởng khi vượt thiên kiếp khó: tối đa thêm 40% (tôi đề) hay 20% (GPT đề)?
