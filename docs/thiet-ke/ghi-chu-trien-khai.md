@@ -367,3 +367,12 @@ Luật `48-sua-e.js`; bảng `SUAE.ltRoll`, `SUAE.dg`, `SUAE.am`. Hiệu ứng s
 ### E.20 — trả trước một phần khoản vay
 - Ở "Người cho vay", khi đang có khoản vay: thêm các lựa chọn "Trả trước một phần" 200 xu, 1 lượng, 3 lượng (chỉ mức nhỏ hơn số còn phải trả) và **một nửa** số còn lại. Phải có đủ tiền thật (không mua chịu). Số phải trả giảm đúng số đã trả; lãi đã tính và hạn **giữ nguyên** (không giảm lãi khi trả sớm). Vẫn còn nút trả hết như cũ. Bảng `SUAE.traTruoc`.
 - Bản lưu cũ: khoản vay cũ `r.vay` dùng được ngay. Bài: `vay_tt`.
+
+### E.23 — thương lượng giảm giá tiệm
+- Giá hàng tiệm (tạp hóa, phường thị, chợ, bảo khố; cả giá xu lẫn linh thạch) × (1 − giảm), giảm = 5% × (thương lượng − 10) / 90, kẹp 0–5% (`SUAE.mac`). Gốc 10: không giảm; Thạo (35) ≈ 1,4%; Lão luyện (55) 2,5%; Xuất chúng (75) ≈ 3,6%; 100: 5% (vật 120 xu còn 114). Tính lại mỗi lần mở tiệm. Không áp vào quán, cầm đồ, đổi linh thạch.
+- Năng lực vẫn hiện bằng chữ (câu 24). Bài: `mac_ca`.
+
+### E — kiểm và còn dở
+- `npm run test:rules`: tất cả đạt (sau E.23). Bài mới: `quan_nc cam_e lt_nguon tich_coc vay_tt mac_ca` (đã thêm vào `test:rules`).
+- Giữ nguyên theo câu 21, 22, 24: Địa linh căn 2 hệ ×1,5; nhiệm vụ "có công pháp" tự xong; năng lực hiện bằng chữ.
+- Còn dở: bot chưa biết cầm đồ mới, Ám Hội, Tích Cốc Đan, trả trước (không được chạy bot); Ám Hội chưa có sự kiện kể riêng.

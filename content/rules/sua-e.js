@@ -28,3 +28,5 @@ Object.assign(SUAE,{
 SUAE.tc={id:'tich_coc_dan',ngay:1095,st:8,qty:2,noi:['cho','thanh','tong']};
 // câu 20 — trả trước một phần khoản vay ở người cho vay: các mức (xu) nhỏ hơn số còn phải trả, và "một nửa". Không giảm lãi đã tính, không đổi hạn.
 SUAE.traTruoc=[200,1000,3000];
+// câu 23 — thương lượng giảm giá tiệm: giảm = max × (năng lực − tu) / (100 − tu), kẹp 0..max. Gốc 10 không giảm; "Lão luyện" (55) ≈ 2,5%; tối đa 5% ở 100.
+SUAE.mac={max:0.05,tu:10};

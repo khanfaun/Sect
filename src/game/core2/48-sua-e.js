@@ -94,3 +94,11 @@ function vayTtList(r){r=r||G.run;const V=r&&r.vay;if(!V||!(V.tra>1))return [];co
 {const _vd=venueDo;venueDo=function(v,id){if(v!=='vay'||!String(id).startsWith('tt:'))return _vd.apply(this,arguments);const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place'||!r.vay)return false;
   const x=+id.slice(3);if(!vayTtList(r).includes(x)||(r.bac||0)<x)return false;bacAdd(-x,'vay.tt');r.vay.tra-=x;dbg('no.vayTt',{x,con:r.vay.tra});
   sc.msg=[contentText('no.traXong',[fmtBac(x)])];sc.chips=[bacChip(-x)];sc.venue=null;sc.seq=(sc.seq||0)+1;saveSoon();return true;};}
+
+// ---------- câu 23: thương lượng giảm giá hàng tiệm một chút (tối đa ~5%) ----------
+function macGiam(){const r=G.run;if(!r||typeof nangV!=='function')return 0;const M=SUAE.mac;return clamp(M.max*(nangV('thuong')-M.tu)/(100-M.tu),0,M.max);}
+{const _sp=shopPrice;shopPrice=function(nid,it){_sp.apply(this,arguments);const g=macGiam();if(!g)return;
+  if(it.bac)it.bac=Math.max(1,Math.round(it.bac*(1-g)));else if(it.p)it.p=Math.max(1,Math.round(it.p*(1-g)));};}
+// mỗi lần mở tiệm tính lại theo năng lực hiện tại
+{const _os=openShop;openShop=function(n){const o=_os.apply(this,arguments);const sc=G.run&&G.run.scene;if(sc&&sc.type==='shop'&&Array.isArray(sc.items)){const nid=n?n.id:G.run.at;
+  for(const it of sc.items)if(it.nc!=null&&!it.sold&&(it.b0||it.p0))shopPrice(nid,it);dbg('mac.giam',{g:Math.round(macGiam()*1000)/10});}return o;};}

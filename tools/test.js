@@ -749,6 +749,17 @@ const TESTS = {
     run("openPlace(G.run.at);G.run.bac=980");ok(run("venueDo('vay','tra')")&&!run("G.run.vay")&&run("G.run.bac")===0, 'trả nốt phần còn lại thì xong');
     run("G.run.vay={id:'v1',goc:1000,tra:1180,han:W().t+HM,bao:0}");ok(run("vayTtList().length")>0, 'bản lưu cũ (khoản vay cũ) vẫn trả trước được');
   },
+  // Sửa-E câu 23: thương lượng giảm giá tiệm ít (tối đa ~5%)
+  mac_ca() {
+    fresh();
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;n.shop=null;G.run.bac=1e6;})()");
+    const gia=v=>{run(`nangOf().thuong=${v};openShop(nodeById(G.run.at))`);return run("G.run.scene.items.find(x=>x.k==='qi'&&x.id==='kim_sang_duoc').bac");};
+    const g10=gia(10),g55=gia(55),g100=gia(100);
+    ok(g10===120, 'năng lực gốc: không giảm ('+g10+' xu)');
+    ok(g55<g10&&g55>=g10*0.96, 'Lão luyện: giảm chút ít ('+g55+')');
+    ok(g100===114, 'tối đa: 120 xu còn 114 (−5%)');
+    ok(Math.abs(run("(nangOf().thuong=100,macGiam())")-0.05)<1e-9&&run("(nangOf().thuong=200,macGiam())")<=0.05, 'giảm kẹp ở 5%');
+  },
   // Sửa-A (câu 9): bốn phẩm linh thạch, bản lưu cũ
   lt_pham() {
     fresh();
