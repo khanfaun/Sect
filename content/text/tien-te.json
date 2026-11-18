@@ -28,5 +28,16 @@
   "tl.het": "Đã hết hàng kỳ này",
   "tl.thieu": "Không đủ Thưởng Lệnh",
   "tl.day": "Túi đan đã đầy",
-  "tl.muaLog": "Đổi {{1}} Thưởng Lệnh lấy {{0}} ở Thưởng Các."
+  "tl.muaLog": "Đổi {{1}} Thưởng Lệnh lấy {{0}} ở Thưởng Các.",
+  "an.die": "Chết đói",
+  "an.lifeEnd": "Năm {{0}} tuổi, {{1}} gục xuống ở {{2}} sau nửa tháng không có miếng ăn.",
+  "an.noteDoi": "Bụng đói cồn cào: cả ngày chưa có gì bỏ bụng.",
+  "an.noteLa": "Đói lả: chân tay bủn rủn, người gầy rộc đi.",
+  "an.noteKiet": "Kiệt sức vì đói: mỗi ngày khí huyết một hao. Phải tìm cái ăn ngay.",
+  "an.no": "No đủ",
+  "an.doi": "Đói",
+  "an.la": "Đói lả",
+  "an.kiet": "Kiệt sức",
+  "an.tich": "Tịch cốc",
+  "an.mucDoi": "Mức ăn: {{0}} ({{1}} mỗi ngày)."
 }

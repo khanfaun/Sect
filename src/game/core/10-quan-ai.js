@@ -99,6 +99,7 @@ function lifeSummary(cause,info){
   else if(cause==='kiep')end=contentText("core_10-quan-ai_js.lifeSummary.042", [age,r.ten,r.place.n]);
   else if(cause==='quyan')end=contentText("core_10-quan-ai_js.lifeSummary.043", [age,r.ten,r.place.n]);
   else if(cause==='phithang')end=contentText("core_10-quan-ai_js.lifeSummary.044", [age,r.ten]);
+  else if(cause==='doi')end=contentText("an.lifeEnd", [age,r.ten,r.place.n]);
   lines.push(end+(cause==='combat'||cause==='toahoa'?' '+pick([contentText("core_10-quan-ai_js.lifeSummary.045"),contentText("core_10-quan-ai_js.lifeSummary.046"),contentText("core_10-quan-ai_js.lifeSummary.047"),contentText("core_10-quan-ai_js.lifeSummary.048")]):''));
   return lines;
 }
@@ -124,7 +125,7 @@ function die(cause,info){
   M.last={grave:cause!=='phithang'?{ten:r.ten,tuoi:Math.floor(r.age),r:r.region}:null,killer:cause==='combat'&&info&&!info.boss&&info.k?{n:info.n,k:info.k,i:info.i,el:info.el,r:r.region}:(cause==='combat'&&info&&info.boss?{n:info.n,k:'boss',i:info.i,el:info.el,r:r.region}:null),ten:r.ten};
   ach('chet1');if(cause==='toahoa')ach('toahoa');if(cause==='quyan')ach('quyan');if(cause==='phithang'){ach('phithang');gainLore('chan_tuong');}
   if(M.nlife>=5)ach('kiep5');
-  G.over={life,pts,cause,title:{combat:contentText("core_10-quan-ai_js.die.056"),kiep:contentText("core_10-quan-ai_js.die.057"),toahoa:contentText("core_10-quan-ai_js.die.058"),tamma:contentText("core_10-quan-ai_js.die.059"),quyan:contentText("core_10-quan-ai_js.die.060"),phithang:contentText("core_10-quan-ai_js.die.061")}[cause]};
+  G.over={life,pts,cause,title:{combat:contentText("core_10-quan-ai_js.die.056"),kiep:contentText("core_10-quan-ai_js.die.057"),toahoa:contentText("core_10-quan-ai_js.die.058"),tamma:contentText("core_10-quan-ai_js.die.059"),quyan:contentText("core_10-quan-ai_js.die.060"),phithang:contentText("core_10-quan-ai_js.die.061"),doi:contentText("an.die")}[cause]};
   life.y=tYear(W().t);if(r.bossKills)life.hero='hạ '+r.bossKills+contentText("core_10-quan-ai_js.die.062");else if(r.bangTop)life.hero=contentText("core_10-quan-ai_js.die.063");
   fogToMemory();
   G.run=null;afterlife(r,cause,info);G.over.gap=G.lastGap;G.screen='over';saveSoon();

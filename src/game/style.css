@@ -1644,3 +1644,4 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 .hs-bac{color:var(--ink2);font-weight:500;font-size:.85em;margin-left:2px;white-space:nowrap}
 .hs-bac .sep{font-style:normal}
 .cost-b{white-space:nowrap;color:var(--ink2);margin-left:6px}
+.hs.an{background:none;border:0;padding:0;font:inherit;color:var(--ink2);cursor:pointer;display:flex;align-items:center;gap:2px}.hs.an.hi{color:var(--seal)}

@@ -261,6 +261,16 @@ const TESTS = {
     ok(await ev(p, () => G.run.thuongLenh===5), 'đổi Hồi Xuân Đan trừ hai thẻ');
     await ev(p, () => {UI.modal=null;G.run.scene=null;render();});
   },
+  // Đ3.6: HUD báo đói, chạm đổi mức ăn
+  async an_hud(p) {
+    await ev(p, () => {G.run.pham=1;G.run.doi=3;G.run.anMuc='thuong';UI.modal=null;UI.panel=null;G.run.scene=null;render();});
+    await p.waitForTimeout(150);
+    const t = await ev(p, () => [...document.querySelectorAll('.hs.an')].map(e=>e.innerText).join('|'));
+    ok(/Đói lả/.test(t), 'HUD hiện Đói lả: '+t);
+    await ev(p, () => {ACT.anMuc();render();});
+    ok(await ev(p, () => G.run.anMuc==='kha'), 'chạm đổi mức ăn');
+    await ev(p, () => {G.run.doi=0;G.run.anMuc='thuong';render();});
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

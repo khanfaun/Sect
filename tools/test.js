@@ -19,7 +19,7 @@ function fresh(patch) {
   run(`(() => {GEO=null;RS=mul(16717);const original=genWorld;genWorld=()=>original(${seed});
     try{G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0]);}
     finally{genWorld=original;}
-    NK.on=true;NK.clear();G.run.scene=null;
+    NK.on=true;NK.clear();G.run.scene=null;FEAT.an=0; // ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại
   })()`);
   if (patch) run(patch);
 }
@@ -600,6 +600,26 @@ const TESTS = {
     ok(n===5&&run("G.run.thuongLenh")===90, 'Hồi Xuân Đan tối đa năm viên mỗi tháng ('+n+')');
     ok(run("tcList(nodeById(G.run.at)).every(x=>x.id!=='khai_linh_dan')")&&run("THUONG_CAC.some(x=>x.id==='manh_moi_co_duyen'&&x.p===60&&x.bac===4)"), 'bỏ Khai Linh Đan, có Manh mối cơ duyên');
     const lk=run("THUONG_CAC.findIndex(x=>x.id==='luong_kho')");run(`tcBuy(${lk})`);ok(run("G.run.qitems.includes('luong_kho')"), 'đổi lương khô');
+  },
+  // Đ3.6 ăn uống: phàm nhân không tiền, không lương khô ở hoang dã: 14 ngày còn sống, ngày 15 chết đói; Trúc Cơ tịch cốc
+  com_ao() {
+    const wild="(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&!n.dp);G.run.at=n.id;G.run.scene=null;G.run.moving=null;G.run.bac=0;G.run.st=0;G.run.qitems=[];G.run.anAcc=0;G.run.doi=0;G.run.hp=S().maxHp;})()";
+    const wild0=wild;const fr=()=>{fresh(wild0);run('FEAT.an=1');};
+    fr();ok(run("needFood(G.run)"), 'phàm nhân phải ăn');
+    run("for(let i=0;i<14;i++)advanceTime(24)");ok(!!run("G.run")&&run("G.run.doi")===14, 'trôi 14 ngày: còn sống, đói 14 ngày ('+run("G.run&&G.run.doi")+')');
+    ok(run("S().maxHp")<run("(()=>{const d=G.run.doi;G.run.doi=0;const m=S().maxHp;G.run.doi=d;return m})()"), 'đói lả: khí huyết tối đa giảm');
+    ok(run("anRgMul()")<1, 'đang đói: hồi phục chậm');
+    run("advanceTime(24)");ok(!run("G.run")&&run("G.over&&G.over.cause")==='doi'&&run("G.over.title")==='Chết đói', 'ngày 15: chết đói');
+    fr();run("G.run.pham=0;G.run.realm=1");run("for(let i=0;i<100;i++)advanceTime(24)");ok(!!run("G.run")&&run("G.run.doi")===0, 'Trúc Cơ trôi 100 ngày: không đói');
+    fr();run("G.run.qitems=['luong_kho'];advanceTime(5*24)");ok(run("G.run.doi")===0&&!run("G.run.qitems.includes('luong_kho')"), 'một gói lương khô đủ năm ngày');
+    run("advanceTime(24)");ok(run("G.run.doi")===1, 'hết lương khô thì đói');
+    fr();run("G.run.pham=0;G.run.realm=0;advanceTime(4*24)");ok(run("G.run.doi")===2, 'Luyện Khí ăn nửa phần: bốn ngày đói hai ('+run("G.run.doi")+')');
+    fr();run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.bac=100;G.run.anMuc='thuong'})();advanceTime(3*24)");
+    ok(run("G.run.doi")===0&&run("G.run.bac")===40, 'ở thành có bạc: tự mua cơm 20 đồng một ngày ('+run("G.run.bac")+')');
+    fr();run("G.run.at=G.run.queAt;G.run.origin='nong';G.run.family=[{qh:'me',song:1}];advanceTime(20*24)");ok(run("G.run.doi")===0, 'ở quê còn người nhà: ăn cơm nhà');
+    run("G.run.family[0].song=0;advanceTime(24)");ok(run("G.run.doi")===1, 'người nhà không còn: hết cơm nhà');
+    fr();run("delete G.run._anV1;delete G.run.no;delete G.run.anTu;run2()");ok(run("G.run.no")===100&&run("G.run.anTu")===1, 'bản lưu cũ: no đủ, tự lo cơm');
+    fr();run("G.run.anAcc=0;advanceTime(800*24)");ok(!run("G.run")&&run("G.over.cause")==='doi', 'nhảy dài 800 ngày không ăn: chết đói, không treo');
   },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {
