@@ -242,3 +242,8 @@ Luật: `src/game/core2/44-no-nha.js`; bảng `NO`, `NHA` ở `content/rules/no-
 - Bỏ "già dần" từng năm của Đ2.7 (khí huyết −1%/năm, thân pháp −1/3 năm); bệnh già từ 85% thọ vẫn giữ. Bản lưu cũ (`_giaV1`) xoá `tue.sum.hpOld/tpOld`.
 - Vừa già: một dòng nhật ký + thông báo (`gia.on`).
 - Bài kiểm mới `gia`.
+
+### C.11 — săn bắt, hái lượm có hạn (câu 11)
+- Nút mới **"Săn bắt, hái lượm"** ở mọi nút hoang dã (nhóm Hoang dã): 4 giờ, được **1–3 ngày lương thực** (cộng vào `r.anLk`, ăn dần như lương khô khi không có quán), 25% nhặt thêm 1 thảo dược. Mỗi nút **6 lượt mỗi năm** (`SAN.hai`), hồi lại đầu năm (đếm `n.sb={y,k,c}` theo năm và kiếp); hết thì nút mờ "hết năm nay".
+- Săn yêu thú vốn đã giới hạn 3 lượt/nút/năm; nay đọc từ `SAN.san` (vẫn 3). Hái thuốc / đào khoáng giữ 2 lượt/tháng (vật liệu, không phải cái ăn).
+- Bài kiểm mới `san_bat`.

@@ -532,6 +532,21 @@ const TESTS = {
     ok(run("tlD(G.run.scene.units.find(u=>u.side==='B'))")===run("TL_DODGE"), 'kẻ địch không bị');
     ok(run("(()=>{const r=G.run;r.tue.sum.hpOld=-8;r.tue.sum.tpOld=-2;delete r._giaV1;run2();return r.tue.sum.hpOld==null&&r.tue.sum.tpOld==null})()"), 'bản lưu cũ: bỏ già dần kiểu cũ');
   },
+  // Sửa-C.11: săn bắt/hái lượm có hạn, hồi mỗi năm; săn yêu cũng vậy
+  san_bat() {
+    fresh();
+    const nid=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);return n.id})()");
+    const act=()=>run("JSON.stringify(placeActs(nodeById(G.run.at)).find(a=>a.a==='sanbat')||null)");
+    ok(JSON.parse(act())&&!JSON.parse(act()).dis, 'hoang dã có nút săn bắt, hái lượm');
+    run("G.run.anLk=0");run("placeAct('sanbat')");ok(run("G.run.anLk")>=1&&run("G.run.anLk")<=3, 'một lượt được 1–3 ngày lương thực ('+run("G.run.anLk")+')');
+    run(`for(let i=0;i<10;i++){G.run.scene=null;openPlace(${JSON.stringify(nid)});placeAct('sanbat');}`);
+    ok(run("sbLeft(nodeById(G.run.at))")===0&&JSON.parse(act()).dis, 'hết '+run('SAN.hai')+' lượt thì khoá');
+    ok(run("NK.count('sb.do')")===run('SAN.hai'), 'đếm đúng số lượt');
+    run("advanceTime(HY)");run(`G.run.scene=null;openPlace(${JSON.stringify(nid)})`);ok(run("sbLeft(nodeById(G.run.at))")===run('SAN.hai'), 'sang năm hồi lại');
+    ok(run("placeActs(nodeById(G.run.at)).find(a=>a.a==='sanyeu').l").includes('còn '+run('SAN.san')), 'săn yêu: '+run('SAN.san')+' lượt mỗi năm');
+    const town=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran');return n.id})()");
+    ok(!run(`placeActs(nodeById(${JSON.stringify(town)})).some(a=>a.a==='sanbat')`), 'thôn trấn không có');
+  },
   quen_sach() {
     fresh();
     ok(run("!UPG.find(u=>u.id==='ky'||u.id==='kytp')"), 'không còn nâng cấp Ký ức công pháp / tâm pháp');

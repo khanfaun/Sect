@@ -7,9 +7,9 @@ const DT_PICK={art:['Luân Hồi Kinh'],pill:['luanhoi'],qi:['dinh_menh_chau','l
 //   st: né / đỡ trong trận tốn thêm bấy nhiêu thể lực.
 const GIA={tu:0.7,hp:0.10,cs:{atk:0.01,matk:0.01,ne:0.01,def:0.005,crit:0.005},st:5}; // không giảm: linh lực, thân pháp gốc, ngộ tính, tâm cảnh, khí vận, thần thức
 // SAN: săn bắt / hái lượm ở hoang dã có hạn mỗi ô, hồi lại đầu mỗi năm (câu 11).
-//   hai: số lượt hái lượm (thức ăn) mỗi nút hoang dã mỗi năm; san: số lượt săn yêu thú mỗi nút mỗi năm.
-//   an: hái/săn được một lượt thì đủ ăn bấy nhiêu ngày (thay cho mua cơm) khi đứng ở hoang dã.
-const SAN={hai:6,san:5,an:1,noi:['rung','hoang','song','bien','nui','thien','duoc']};
+//   hai: số lượt hái lượm (thức ăn) mỗi nút hoang dã mỗi năm; san: số lượt săn yêu thú mỗi nút mỗi năm (như cũ: 3).
+//   an: một lượt được bấy nhiêu ngày lương thực (cộng vào r.anLk như lương khô); h: số giờ; thao: xác suất nhặt thêm 1 thảo dược.
+const SAN={hai:6,san:3,an:[1,3],h:4,thao:0.25};
 // TL_FX: trắc ra Địa / Thiên linh căn (câu 18, 19). ms: thời gian hiệu ứng (mili giây).
 //   eld/de: số cao tầng / đệ tử được tăng thiện cảm; fe/fd: mức tăng; sect: hảo cảm chung của tông.
 const TL_FX={dia:{ms:6500,eld:1,de:2,fe:15,fd:10,sect:5},thien:{ms:11000,eld:3,de:4,fe:30,fd:20,sect:12}};

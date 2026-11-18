@@ -42,3 +42,15 @@ tueOld=function(r,age,s){if(r.age>=s.life*TUE_OLD.sick&&chance(TUE_OLD.pSick))ad
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(r&&!r.giaN&&giaOn(r)){r.giaN=1;clampHp();log(contentText('gia.log'));note(contentText('gia.note'),'dn');dbg('gia.on',{age:Math.floor(r.age)});}return o;};}
 // bản lưu cũ: bỏ phần già dần của Đ2.7
 {const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._giaV1){r._giaV1=1;const T=r.tue&&r.tue.sum;if(T){delete T.hpOld;delete T.tpOld;}}return r;};}
+
+// ---------- C.11: săn bắt / hái lượm ở hoang dã — có hạn mỗi nút, hồi đầu mỗi năm ----------
+function sbLeft(n){const r=G.run;const y=Math.floor(W().t/HY);const c=n.sb&&n.sb.y===y&&n.sb.k===r.kiep?n.sb.c:0;return Math.max(0,SAN.hai-c);}
+{const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(G.run&&n&&isWild(n)&&n.state!=='ruin'){const left=sbLeft(n);
+    L.push({a:'sanbat',i:'',l:left>0?contentText('sb.l',[left]):contentText('sb.het'),h:SAN.h,tip:contentText('sb.tip'),dis:left<=0,x:left<=0?contentText('sb.hetTip'):''});}return L;};}
+{const _p=placeAct;placeAct=function(a){if(a!=='sanbat')return _p.apply(this,arguments);const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return;
+  const n=nodeById(sc.id);if(!n||!isWild(n)||sbLeft(n)<=0)return;const y=Math.floor(W().t/HY);if(!n.sb||n.sb.y!==y||n.sb.k!==r.kiep)n.sb={y,k:r.kiep,c:0};n.sb.c++;
+  sc.msg=[];sc.chips=[];advanceTime(SAN.h);if(!G.run||G.run.scene!==sc)return;
+  const d=ri(SAN.an[0],SAN.an[1]);G.run.anLk=(G.run.anLk||0)+d;const ch=[chip('🍖',contentText('sb.chip',[d]),contentText('sb.chipTip'),'up')];
+  if(chance(SAN.thao)){run2().mats.thao+=1;ch.push(chip(MAT.thao.i,'+1 '+MAT.thao.n.toLowerCase(),'','up'));}
+  ch.push(chip('⏳',SAN.h+' giờ','',''));sc.msg=[pick([contentText('sb.m1'),contentText('sb.m2'),contentText('sb.m3')])];sc.chips=ch;
+  if(typeof tutTick==='function')tutTick('sanbat');dbg('sb.do',{n:n.id,left:sbLeft(n),d});};}

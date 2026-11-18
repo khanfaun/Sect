@@ -22,7 +22,7 @@ function exploreStats(n){const fp=[0.04,0.14,0.26,0.4][n.danger]+(['phe','ma'].i
   if(isWild(n)){
     if(!n.dp)add('khaiphu','',contentText("core2_02-dia-diem-mo-rong_js.012"),HM,contentText("core2_02-dia-diem-mo-rong_js.013"),n.danger>=3,n.danger>=3?contentText("core2_02-dia-diem-mo-rong_js.014"):'');
     const y=Math.floor(w.t/HY);const hc=n.hunt&&n.hunt.y===y&&n.hunt.k===r.kiep?n.hunt.c:0;
-    add('sanyeu','',hc>=3?contentText("core2_02-dia-diem-mo-rong_js.015"):contentText("core2_02-dia-diem-mo-rong_js.016")+(3-hc)+' lần',2,contentText("core2_02-dia-diem-mo-rong_js.017"),hc>=3);
+    add('sanyeu','',hc>=SAN.san?contentText("core2_02-dia-diem-mo-rong_js.015"):contentText("core2_02-dia-diem-mo-rong_js.016")+(SAN.san-hc)+' lần',2,contentText("core2_02-dia-diem-mo-rong_js.017"),hc>=SAN.san); // Sửa-C.11: số lượt săn yêu mỗi năm theo SAN.san
     const m=Math.floor(w.t/HM);const gc=n.gath&&n.gath.m===m&&n.gath.k===r.kiep?n.gath.c:0;const mt=n.type==='duoc'?'thao':n.type==='khoang'?'khoang':exploreStats(n).mat; // dược cốc luôn hái thuốc, mỏ luôn đào khoáng
     if(mt==='thao')add('haithuoc','',contentText("core2_02-dia-diem-mo-rong_js.018"),6,contentText("core2_02-dia-diem-mo-rong_js.019"),gc>=2);
     if(mt==='khoang')add('daokhoang','',contentText("core2_02-dia-diem-mo-rong_js.020"),6,contentText("core2_02-dia-diem-mo-rong_js.021"),gc>=2);}
