@@ -355,7 +355,7 @@
           "alignment": "context"
         }
       },
-      "text": "Một tàu chở khách mắc cạn ngoài cảng, phải bỏ hàng mới có thể đón người từ thuyền nhỏ đang vỡ. Nếu cựu hải tặc đã được ra làm chứng, người mất tàu chịu theo hắn đi cứu nạn. Nếu hắn còn làm công trả nợ, người đòi nợ đem lệnh tới để cho hắn rời chuyến hàng đang nhận. Ngươi có mặt trên tàu cứu hộ khi hắn xin quyết ngay việc cắt hàng.",
+      "text": "Một tàu khách mắc cạn ngoài cảng. Tàu cứu hộ phải bỏ bớt hàng mới đón được người từ chiếc thuyền nhỏ sắp vỡ. Nếu cựu hải tặc từng được làm chứng, những người mất tàu chịu theo hắn đi cứu. Nếu hắn còn làm công trả nợ, chính người đòi nợ đến cho hắn rời chuyến hàng. Đứng trên tàu cứu hộ, hắn hỏi ngươi có chịu đền cho số hàng phải bỏ không.",
       "choices": [
         {
           "i": "✋",
@@ -461,7 +461,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu người được đưa qua trước, họ mang đến một tấm gỗ góp làm bánh lái. Nếu hàng từng được giữ, người đi thuyền nhỏ đem tới những mảnh ván đã vớt được và đặt chúng dựa ngoài cửa.",
+      "text": "Nếu tàu cứu hộ đã bỏ hàng để đón người, những người được cứu góp một tấm gỗ làm bánh lái. Nếu tàu giữ hàng và bỏ lại thuyền nhỏ, người đi thuyền mang những mảnh ván vớt được tới, dựng chúng ngoài cửa.",
       "choices": [
         {
           "i": "✋",

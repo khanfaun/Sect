@@ -374,7 +374,7 @@
       "text": "Lính huyện về làng, trống đánh dồn. Mỗi nhà phải nộp thêm một phần thóc làm lương cho quân ngoài biên.",
       "choices": [
         {
-          "l": "Nộp đủ",
+          "l": "Nộp đủ phần thóc lính đòi",
           "i": "🪙",
           "t": "Ngươi khiêng thóc ra đình. Lính ghi tên, đóng dấu đỏ vào sổ.",
           "e": {
@@ -563,7 +563,7 @@
       "text": "Một tu sĩ áo xanh dừng ở đầu làng, cần người biết làm ruộng giỏi theo lên núi trồng linh điền hai ngày. Trả công hậu.",
       "choices": [
         {
-          "l": "Theo lên núi",
+          "l": "Lên núi làm ruộng cho tu sĩ trong hai ngày",
           "i": "⛰️",
           "t": "Linh điền nhỏ như cái sân nhưng đất mềm như bông. Tu sĩ trả công rồi tiễn ngươi xuống núi, không nói thêm câu nào.",
           "e": {

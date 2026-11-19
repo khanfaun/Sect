@@ -357,7 +357,7 @@
           "alignment": "context"
         }
       },
-      "text": "Hai phái đóng đèo giữa lúc dân chở vải lên. Nếu ngươi từng mở chỗ gặp, hai đệ tử đến cùng nhau. Nếu ngươi từng lấy tin hoặc tiền thưởng, họ đến từ hai đầu đèo, mỗi người cầm một lệnh riêng.",
+      "text": "Hai phái chặn đèo đúng lúc dân chuyển vải qua. Nếu ngươi từng giúp hai đệ tử gặp nhau, họ tới cùng xin mở đường. Nếu ngươi từng bán tin hoặc nhận thưởng, hai người đến từ hai đầu đèo, mỗi người cầm lệnh của phái mình.",
       "choices": [
         {
           "i": "✋",
@@ -465,11 +465,11 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu lối từng mở cho mọi người, hai đệ tử đã rời phái và cùng giữ đường vải. Nếu lệnh qua từng được bán, họ vẫn giữ hai bậc gác, lâu lâu cùng đem áo xuống giặt.",
+      "text": "Nếu ngươi giúp mở đèo cho dân, hai đệ tử đã rời phái và cùng coi đường chở vải. Nếu ngươi bán giấy qua đèo, họ vẫn đứng gác ở hai phía, thỉnh thoảng mới gặp nhau lúc xuống suối giặt áo.",
       "choices": [
         {
           "i": "💎",
-          "l": "Trả lại tiền lệnh hoặc góp vải mở nhà trú đèo",
+          "l": "Trả tiền giấy qua đèo hoặc góp dựng chỗ trú",
           "t": "Người gánh vải có chỗ nghỉ, hai người đặt chung một hòm kim. Nắp hòm để mở, bên trong có sợi chỉ bạc đã xỉn.",
           "cost": {
             "st": 13
@@ -485,7 +485,7 @@
         },
         {
           "i": "💎",
-          "l": "Đặt họ làm áo hộ thân cho ngươi",
+          "l": "Thuê hai người may áo hộ thân cho ngươi",
           "t": "Ngươi có áo chịu gió kiếm, họ có tiền sống qua mùa. Phần chỉ bạc cuối dùng để viền một chiếc túi nhỏ bên trong.",
           "e": {
             "namedRelic": {

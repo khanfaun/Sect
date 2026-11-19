@@ -339,7 +339,7 @@
       "text": "Một người lạ trả tiền thuê ngươi giả làm sứ giả trong một ngày.",
       "choices": [
         {
-          "l": "Nhận",
+          "l": "Nhận tiền đóng giả sứ giả",
           "i": "🎭",
           "chk": [
             "nang.tu",
@@ -543,7 +543,7 @@
         "cooldownHours": 720
       },
       "actors": {},
-      "text": "Ngươi biết sự thật về một vụ án oan. Không ai nghe một kép hát nói, trừ khi ngươi diễn nó lên.",
+      "text": "Ngươi biết một người bị xử oan. Quan không chịu nghe lời một kép hát, nhưng dân ngoài chợ có thể nghe nếu ngươi đưa vụ án lên sân khấu.",
       "choices": [
         {
           "l": "Dựng vở, diễn giữa chợ",

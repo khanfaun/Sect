@@ -46,7 +46,7 @@
         "commit": "d9ab301"
       },
       "scriptText": {
-        "event.doitho.005": "Lão chạm hai ngón tay lên trán ngươi. Đầu óc bỗng sáng như gương. Lúc tỉnh lại, lão đã biến mất, tóc mai ngươi điểm bạc.",
+        "event.doitho.005": "Lão đặt hai ngón tay lên trán ngươi. Đầu óc ngươi sáng ra, nhưng tuổi thọ đã bớt đi như lời giao kèo. Khi tỉnh lại, lão đã biến mất và tóc mai ngươi đã bạc.",
         "event.doitho.006": "Lão cười khà, tiếp tục ván cờ dang dở."
       },
       "review": {
@@ -89,7 +89,7 @@
       "text": "Một tế đàn cổ phủ rêu, trên khắc: “Hiến một bảo vật, đổi lấy một bảo vật.” Rãnh máu vẫn còn ướt.",
       "choices": [
         {
-          "l": "Hiến một món trang bị trong ô túi mở",
+          "l": "Hiến một món trang bị từ túi đang mở",
           "cost": "mất một món trang bị ngẫu nhiên",
           "need": {
             "$hook": "ky_huyette_c_0_need"
@@ -116,7 +116,7 @@
         "commit": "d9ab301"
       },
       "scriptText": {
-        "event.huyette.007": "Không có trang bị trong ô túi mở",
+        "event.huyette.007": "Túi đang mở không có món trang bị nào để hiến.",
         "event.huyette.008": " tan vào tế đàn. Khói đỏ cuộn lên, rồi một bảo vật khác từ từ hiện ra.",
         "event.huyette.009": "Đã hiến",
         "event.huyette.010": "Ngươi lùi lại. Sau lưng như có tiếng ai thở dài."
@@ -324,7 +324,7 @@
         "event.cuoc.016": "Linh thạch",
         "event.cuoc.017": "Gã lắc hồ lô, đổ ra ba hạt xúc xắc. Ngươi thắng. Gã cười ha hả, ném viên đan qua.",
         "event.cuoc.018": "Ba hạt xúc xắc lăn tròn. Ngươi thua. Gã cười, ôm túi linh thạch, biến vào mây.",
-        "event.cuoc.019": "Gã nhún vai, ngửa cổ tu một ngụm."
+        "event.cuoc.019": "Gã nhún vai, ngửa cổ uống một ngụm rượu."
       },
       "review": {
         "checks": [
@@ -489,7 +489,7 @@
       "text": "Dưới gốc cây cổ thụ đổ, một cây linh chi to bằng chiếc nón lá, vân đỏ như máu.",
       "choices": [
         {
-          "l": "Hái và ăn ngay",
+          "l": "Hái cây linh chi và ăn ngay tại chỗ",
           "go": {
             "$hook": "ky_linhchi_c_0_go"
           }
@@ -506,7 +506,7 @@
         "commit": "d9ab301"
       },
       "scriptText": {
-        "event.linhchi.022": "Vị đắng chát, rồi một luồng ấm chạy khắp thân. Ngươi thấy mình trẻ ra."
+        "event.linhchi.022": "Linh chi đắng chát. Nuốt xong, ngươi thấy hơi ấm lan khắp người và sức lực trở lại như thời còn trẻ."
       },
       "review": {
         "checks": [

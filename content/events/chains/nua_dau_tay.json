@@ -381,7 +381,7 @@
           "alignment": "context"
         }
       },
-      "text": "Cậu bé {$b.ten} năm xưa đã mở được một kho bột từ tiền xay thuê. Dân mất mùa tới xin mua chịu, còn chủ nợ {$c.ten} trả giá gấp đôi để gom hết hàng. Nếu ngươi từng góp trục, cậu khoe chiếc cối vẫn dùng trục ngươi mua. Nếu ngươi từng cho vay, cậu nói khoản vay đã trả đủ bằng tiền công xay những năm trước. Nếu từng giúp ở sân phơi cám, cậu nhắc hai mẹ con đã dùng tiền công ấy gây dựng lại từ đầu.",
+      "text": "{$b.ten} nay đã mở được kho bột bằng tiền xay thuê. Dân mất mùa xin mua chịu, còn chủ nợ {$c.ten} trả gấp đôi để gom hết hàng. Nếu ngươi từng góp trục, cậu chỉ chiếc cối vẫn dùng trục ấy. Nếu ngươi từng cho vay, cậu nhắc khoản nợ đã trả bằng tiền xay. Nếu ngươi từng giúp ở sân phơi cám, cậu nói chính tiền công ở đó đã giúp hai mẹ con làm lại.",
       "choices": [
         {
           "i": "💎",

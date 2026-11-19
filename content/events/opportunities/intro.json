@@ -3,7 +3,7 @@
   "events": [
     {
       "id": "tp_hoathuong",
-      "name": "Hòa thượng hành cước",
+      "name": "Hòa thượng đi qua làng",
       "kind": "initiation",
       "tags": [],
       "trigger": {
@@ -596,7 +596,7 @@
       "text": "Vừa dừng chân, ngươi bỗng đứng sững: cảnh này dường như đã từng thấy. Trong đầu vang lên một bài khẩu quyết, như của ai đó, mà cũng như của chính mình.",
       "choices": [
         {
-          "l": "Nhắm mắt nhớ lại",
+          "l": "Nhắm mắt nhớ lại khẩu quyết",
           "t": "Từng câu hiện lên rõ dần. Ngươi không biết mình đã học nó ở đâu, chỉ biết là đúng."
         },
         {

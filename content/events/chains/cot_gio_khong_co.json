@@ -340,7 +340,7 @@
           "alignment": "context"
         }
       },
-      "text": "Trụ cờ bị gió bẻ nghiêng, dây chằng của nó mắc vào neo cầu. Nếu ngươi từng để dây lại sửa cầu hoặc mua dây mới, đệ tử {$b.ten} đã giữ được tay vịn để đưa khách lên bờ. Nếu dây bị cất kho hoặc chỉ có đường vòng thu phí, người chưa qua được đang dồn ở đầu cầu. Trụ sắp đổ; giữ trụ thì phải bỏ lối cầu, cắt dây cờ thì cứu được neo.",
+      "text": "Gió quật nghiêng trụ cờ. Dây chằng trụ mắc vào dây neo cầu, kéo cả cầu theo. Nếu ngươi từng để dây lại sửa cầu hoặc mua dây mới, đệ tử {$b.ten} có tay vịn để đưa người lên bờ. Nếu dây đã cất kho hoặc khách chỉ có đường vòng mất phí, họ vẫn chen ở đầu cầu. Muốn cứu cầu, phải cắt dây giữ trụ cờ.",
       "choices": [
         {
           "i": "✋",
@@ -448,11 +448,11 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu cờ từng cứu cầu, dân đem vải tới vá lại. Nếu trụ từng được cứu, trưởng lão {$a.ten} mang lá cờ nguyên tới, còn đệ tử {$b.ten} đem dây cầu đã tuột.",
+      "text": "Nếu ngươi cắt dây cờ để giữ cầu, dân mang vải đến vá lá cờ. Nếu ngươi giữ trụ, trưởng lão {$a.ten} mang lá cờ nguyên tới, còn đệ tử {$b.ten} chỉ đem được sợi dây đã tuột khỏi cầu.",
       "choices": [
         {
           "i": "✋",
-          "l": "Dành trụ mới để phơi dây và vải cầu",
+          "l": "Dùng trụ mới để phơi dây và vải sửa cầu",
           "t": "Ngươi đề nghị chuyển cột mới sang sân phơi dây cầu, chịu bị gạt khỏi lễ đón khách. Người coi cầu nhận việc hong và kiểm dây mỗi tuần. Đệ tử xin học cùng, nói mình đã biết một sợi dây hỏng có thể làm khổ bao nhiêu người.",
           "e": {
             "hd": {

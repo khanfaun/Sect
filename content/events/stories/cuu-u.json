@@ -206,7 +206,7 @@
       "choices": [
         {
           "i": "🤲",
-          "l": "Góp phần linh hỏa dưỡng thân",
+          "l": "Góp linh hỏa sưởi ấm người trong lán",
           "t": "Ngươi góp linh hỏa giữ lò ấm thêm một canh. Người trong lán dời ra cho khách mới vào, gọi ngươi ngồi ăn chút gì nóng. Đứa bé tỉnh giấc đòi nghe tiếp chuyện lúc nãy, cả lán lại có tiếng nói cười.",
           "e": {
             "hd": {
@@ -300,7 +300,7 @@
       "choices": [
         {
           "i": "💎",
-          "l": "Trả một phần thọ nguyên để hủy lãi",
+          "l": "Dùng tuổi thọ của mình trả phần lãi",
           "t": "Ngươi chuyển một phần thọ nguyên để xóa số lãi hai mẹ con còn thiếu, bắt chủ nợ trả bản khế đã sửa. Người mẹ đọc lại ngày hết nợ hai lần rồi mới dám nhận. Ngươi thấy mình già thêm, cần ngồi xuống một lát.",
           "e": {
             "hd": {
@@ -451,7 +451,7 @@
     },
     {
       "id": "gk_hai_cot_che_doi_ung",
-      "name": "Hài cốt chê đôi ủng",
+      "name": "Đôi ủng không vừa chân trái",
       "kind": "story",
       "tags": [
         "Hài hước"
@@ -1417,7 +1417,7 @@
       "choices": [
         {
           "i": "💎",
-          "l": "Đặt khế vào lửa trước khi câu nói dứt",
+          "l": "Đốt khế trước khi nàng nói dứt câu",
           "t": "Ngươi thả khế vào lửa trước khi lời nàng làm sáng hết mặt giấy. Để chặn khế phản lại người giữ, ngươi dùng thần niệm chịu một lần giằng xé. Nàng cảm tạ, không giải thích thêm chuyện người nhà; ngươi cũng không hỏi.",
           "e": {
             "hd": {
@@ -1511,7 +1511,7 @@
       "choices": [
         {
           "i": "🤲",
-          "l": "Cho mượn hướng về {$que}",
+          "l": "Cho hồn mượn đường về {$que}",
           "t": "Ngươi cho hồn mượn ký ức đường về quê mình. Nó theo chỉ ra khỏi ma vực, còn ngươi phải ngồi nhớ lại từng ngã rẽ đã cho đi. Người thợ may ở lại cùng ngươi tới khi ngươi tự nhắc được tên quê.",
           "e": {
             "hd": {
@@ -1797,7 +1797,7 @@
         },
         {
           "i": "✋",
-          "l": "Đổi tro lấy ít khí âm",
+          "l": "Lấy khí âm từ tro bếp ngục",
           "t": "Ngươi luyện được một mẻ mực. Lão nướng khoai bằng củi sống, khói bám vào từng đường rãnh trên vỏ.",
           "e": {
             "pill": 1,

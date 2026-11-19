@@ -327,7 +327,7 @@
           "alignment": "context"
         }
       },
-      "text": "Chuông báo thợ cầu {$b.ten} sẽ rơi, gọi đúng tên hắn. Nếu ngươi từng giữ cầu hoặc góp sửa, dân lập tức dừng chân. Nếu từng mua hay bán giờ báo, họ quay về phía ngươi hỏi còn bao lâu.",
+      "text": "Chuông gọi đúng tên thợ cầu {$b.ten} và báo hắn sắp ngã. Nếu ngươi từng góp sửa cầu, người qua thấy chuông vang liền dừng bước. Nếu ngươi từng mua hoặc bán quyền nghe tiếng báo trước, họ quay sang hỏi ngươi còn bao lâu trước khi hắn ngã.",
       "choices": [
         {
           "i": "✋",
@@ -429,7 +429,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu nhịp đã tháo, người qua cầu góp đồng đúc chuông mới. Nếu mọi người qua theo lượt, thợ cầu {$b.ten} tới thử chuông bằng bàn tay còn cứng, mỗi lần gõ chỉ nhấc được hai ngón.",
+      "text": "Nếu nhịp cầu nguy hiểm đã tháo, dân qua cầu góp đồng đúc chuông mới. Nếu họ từng qua từng tốp theo tiếng chuông, thợ cầu {$b.ten} trở lại thử chuông, tay vẫn cứng tới mức mỗi lần gõ chỉ nhấc được hai ngón.",
       "choices": [
         {
           "i": "✋",

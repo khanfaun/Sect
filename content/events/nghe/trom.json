@@ -558,7 +558,7 @@
       "text": "Quan đầu tỉnh giữ sổ nợ của nửa thành. Đốt nó, cả thành thoát nợ.",
       "choices": [
         {
-          "l": "Đột nhập lấy sổ",
+          "l": "Lấy sổ để dân có cơ hội thoát nợ",
           "i": "📒",
           "chk": [
             "nang.canh",

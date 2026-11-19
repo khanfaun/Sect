@@ -172,7 +172,7 @@
         "cooldownHours": 720
       },
       "actors": {},
-      "text": "Trong giỏ có một con cá chép vảy vàng như dát, mắt nó nhìn ngươi như biết khóc.",
+      "text": "Trong giỏ có một con cá chép vảy vàng như dát vàng. Nó ngước nhìn ngươi, mắt long lanh như sắp khóc.",
       "choices": [
         {
           "l": "Thả nó về",
@@ -763,7 +763,7 @@
           }
         },
         {
-          "l": "Lại ra nước, kiếm thêm mùa này",
+          "l": "Tiếp tục ra khơi kiếm thêm trong mùa này",
           "i": "⛵",
           "t": "Người ở bến vẫy tay. Thuyền ngươi xa dần.",
           "e": {

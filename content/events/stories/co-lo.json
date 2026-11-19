@@ -32,7 +32,7 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Thử đi mà bỏ ý đến đích",
+          "l": "Thử bước mà không nghĩ tới đích",
           "t": "Ngươi thử thu thần niệm lại, chỉ lo bước hiện tại. Đĩa cân trở về ngang, chân cũng nhẹ hơn. Người trông trạm hỏi ngươi định tới đâu, ngươi cười bảo để qua trạm rồi tính.",
           "e": {
             "tv": 5,
@@ -41,7 +41,7 @@
         },
         {
           "i": "✋",
-          "l": "Ép cân bằng bằng thần niệm",
+          "l": "Dùng thần niệm ép hai đĩa cân ngang nhau",
           "t": "Ngươi có một bước vượt xa. Khi dừng lại, bụi từ bước đầu mới theo tới và phủ lên mu bàn chân.",
           "e": {
             "tv": 3,
@@ -767,7 +767,7 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Đổi phần nhìn của hai người bằng thần niệm",
+          "l": "Dùng thần niệm đổi cảnh hai người nhìn thấy",
           "t": "Ngươi đổi phần nhìn bằng thần niệm, để mỗi người thấy quê mình một lát. Lão bật cười khi thấy cây trước sân đã lớn hơn mái nhà. Ngươi ngồi lại tới khi phép khép, không ai giục ai nói.",
           "e": {
             "hd": {
@@ -937,7 +937,7 @@
           "alignment": "context"
         }
       },
-      "text": "Đường chỉ nâng tay vịn cho ai đã đi qua một lần. Tu sĩ {$a.ten} ngã giữa cầu lần đầu, phía trước người khác giơ một tấm bài đổi lượt qua.",
+      "text": "Tay vịn trên cầu chỉ hiện cho người đã từng qua. Tu sĩ {$a.ten} đi lần đầu nên không có chỗ bám và ngã giữa cầu. Người đứng phía trước giơ tấm bài, ra giá bán một lượt qua.",
       "choices": [
         {
           "i": "✋",
@@ -1116,7 +1116,7 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Đứng giữ một mốc giờ cho lão",
+          "l": "Giúp người giữ bếp dừng lò đúng lúc cơm chín",
           "t": "Ngươi giữ mốc bằng thần niệm, bảo lão dừng đúng lúc cơm vừa chín. Cả quán được ăn, bát cũng còn nguyên. Lão mời ngươi phần cơm đầu, quyết định từ mai nấu bằng lò thường.",
           "e": {
             "hd": {
@@ -1201,7 +1201,7 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Khâu bằng bóng của ngươi",
+          "l": "Dùng bóng mình vá chỗ ngày đêm rò qua nhau",
           "t": "Ngươi dẫn bóng mình qua mép thủng, giữ hai phía khép lại cho người coi cổng khâu xong. Thần niệm hao nhiều, bóng dưới chân còn hở một đoạn vai. Lão chỉ ngươi cách dưỡng lại bóng, dặn đừng qua cổng khác trước khi lành.",
           "e": {
             "hd": {
@@ -1759,7 +1759,7 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Đi ngược đường đặt lại dấu chân",
+          "l": "Quay lại trạm nghỉ để đường hiện rõ trên bản đồ",
           "t": "Ngươi quay lại trạm cũ, chậm mất một lượt mở đường lên. Có người thấy dấu chân mới cũng ghé vào nghỉ, nét bản đồ dày trở lại. Người coi trạm hỏi ngươi có ở lâu không, ngươi bảo đủ một ấm trà.",
           "e": {
             "hd": {

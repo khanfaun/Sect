@@ -352,7 +352,7 @@
       "text": "Nhà phú hộ có tang, nhờ viết bài văn tế ca ngợi người chết. Ai cũng biết lão là kẻ ác.",
       "choices": [
         {
-          "l": "Viết cho hay",
+          "l": "Viết lời ca ngợi theo ý nhà phú hộ",
           "i": "✍️",
           "t": "Bài văn tế được khen. Ngươi cầm tiền về mà thấy nặng tay.",
           "e": {
@@ -365,7 +365,7 @@
           }
         },
         {
-          "l": "Viết cho thật",
+          "l": "Viết đúng những gì ngươi biết về người chết",
           "i": "📜",
           "chk": [
             "nang.giao",

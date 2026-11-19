@@ -163,7 +163,7 @@
           }
         },
         {
-          "l": "Bán cho hắn",
+          "l": "Bán món hàng đang nhận giao",
           "go": {
             "$hook": "quest_muagia_c_1_go"
           }
@@ -352,7 +352,7 @@
       },
       "choices": [
         {
-          "l": "Thử giải cấm chế",
+          "l": "Thử tháo cấm chế trên món hàng",
           "req": [
             "ngo",
             12,
@@ -380,8 +380,8 @@
         "commit": "d9ab301"
       },
       "scriptText": {
-        "event.cam.094": "Đêm nghỉ chân, bọc hàng của nhiệm vụ bỗng phát ra ánh sáng xanh mờ. Có cấm chế lạ bám trên đó.",
-        "event.cam.095": "Ngươi lần theo trận văn, gỡ từng nút. Cấm chế tan, lòng ngươi lĩnh hội thêm chút ít.",
+        "event.cam.094": "Đêm nghỉ chân, món hàng ngươi đang nhận giao bỗng phát ánh xanh. Có người đã đặt một cấm chế lên bọc hàng.",
+        "event.cam.095": "Ngươi lần theo những nét trận trên bọc hàng. Khi tháo được cấm chế, ngươi cũng hiểu thêm cách nó được dựng.",
         "event.cam.096": "Cả đêm ngươi mơ thấy những tiếng thì thầm."
       },
       "review": {
@@ -447,7 +447,7 @@
         "commit": "d9ab301"
       },
       "scriptText": {
-        "event.manhmoi.097": "Một người sống sót kể lại cách mục tiêu của nhiệm vụ ra tay.",
+        "event.manhmoi.097": "Một người sống sót kể kẻ ngươi đang truy tìm thường ra tay thế nào.",
         "event.manhmoi.098": "Ngươi ghi nhớ thói quen của nó. Trận tới sẽ chủ động hơn.",
         "event.manhmoi.099": "Người ấy cảm tạ, chỉ thêm đường tắt."
       },

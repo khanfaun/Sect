@@ -164,7 +164,7 @@
       "text": "Một người dân quỳ trước cổng nha môn kêu oan, lính đuổi đi.",
       "choices": [
         {
-          "l": "Ra nghe",
+          "l": "Ra cổng nghe người dân trình bày",
           "i": "👂",
           "t": "Ngươi ghi lại đơn, trình lên trên.",
           "e": {
@@ -337,7 +337,7 @@
         "cooldownHours": 720
       },
       "actors": {},
-      "text": "Tết đến, các nhà giàu gửi phong bì tới nhà ngươi.",
+      "text": "Tết đến, mấy nhà giàu gửi tiền tới nhà ngươi dưới danh nghĩa biếu lễ. Họ đều có việc đang chờ nha môn xét.",
       "choices": [
         {
           "l": "Nhận hết",

@@ -588,7 +588,7 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Chờ đúng lúc rồi dẫn khí qua đan điền",
+          "l": "Canh nhịp sóng rồi dẫn khí qua đan điền",
           "t": "Ngươi đợi hai luồng nước rút rồi thử dẫn khí theo nhịp bọt thứ ba. Khí qua đan điền êm hơn trước, chẳng cần thêm sức. Đến khi đứng dậy, chuyến tàu đã đi; thợ lặn bảo mai còn chuyến khác.",
           "e": {
             "tv": 5,
@@ -674,7 +674,7 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Bắt cân số cá thực nộp",
+          "l": "Yêu cầu tính thuế theo số cá bắt được",
           "t": "Ngươi bảo lãnh cho dân nộp theo cá thực có, chịu để hàng của mình bị giữ tới khi đối sổ. Người đan lưới đếm từng giỏ ngay trước mặt quan bến. Hàng chờ rất lâu, nhưng không ai chịu bỏ về.",
           "e": {
             "hd": {
@@ -762,7 +762,7 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Kê thuyền và soi vào vệt cạo",
+          "l": "Kê thuyền lên để xem thứ đang cạo vảy",
           "t": "Ngươi kê cao thuyền, dùng đèn của xưởng soi vào khe. Một con vật không mắt bò ra, đuổi theo ánh sáng tới tận mép biển. Ngươi ném đèn xuống nước; tiếng cạo dứt ngay khi lửa tắt.",
           "e": {
             "hd": {
@@ -1153,7 +1153,7 @@
         },
         {
           "i": "✋",
-          "l": "Rút kìm để giữ mạng người trước",
+          "l": "Bỏ chiếc đinh để cứu thợ rèn trước",
           "t": "{$a.ten} lên bờ an toàn, đê phải chống thêm qua một mùa. Lão dành tối đó mài lại kìm.",
           "e": {
             "deed": "cuu_nguoi"

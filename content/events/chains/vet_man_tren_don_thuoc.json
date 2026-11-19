@@ -352,7 +352,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu nước từng được dẫn đi hoặc thuốc có ghi nguồn, dân đã tụ lại đòi một dòng sạch. Nếu ngươi từng bán tin hoặc mua đơn, chủ ruộng {$b.ten} đòi ngươi chứng một mẻ mới trước khi mở lại.",
+      "text": "Nếu ngươi từng đổi đường nước bẩn hoặc ghi rõ nguyên nhân bệnh trong đơn thuốc, dân đã tụ lại đòi có nước sạch làm muối. Nếu ngươi bán tin hoặc mua lại đơn thuốc, chủ ruộng {$b.ten} muốn ngươi đứng ra xác nhận mẻ mới đủ sạch trước khi mở ruộng.",
       "choices": [
         {
           "i": "🤲",
@@ -462,11 +462,11 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu nước đã chia, dân mang nắm đầu mùa tới bỏ chung vào rổ. Nếu chỉ một ô sạch, diêm dân {$a.ten} đem bát thuốc đã rửa tới đong phần muối mình được mua.",
+      "text": "Nếu nước sạch đã chia cho nhiều ruộng, dân đem muối đầu mùa tới đổ chung vào rổ. Nếu chỉ một ruộng có nước sạch, diêm dân {$a.ten} mang chiếc bát thuốc đã rửa tới đong phần muối mình mua được.",
       "choices": [
         {
           "i": "✋",
-          "l": "Để dân giữ quyền coi mương",
+          "l": "Giao dân quyền coi mương nước sạch",
           "t": "Ngươi nhường phần lợi lâu dài. {$a.ten} dùng bát thuốc múc một bát cho người cuối hàng.",
           "e": {
             "hd": {

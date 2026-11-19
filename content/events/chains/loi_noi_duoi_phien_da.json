@@ -378,7 +378,7 @@
           "alignment": "context"
         }
       },
-      "text": "Giám luật {$c.ten} dời phòng phạt xuống dưới đất. Nếu lời chứng đã được chia sẻ, đệ tử đến mang theo giấy. Nếu ngươi từng giúp kín, người bị nhốt mang ra một hàng chén rồi đứng lại.",
+      "text": "Giám luật {$c.ten} dời phòng giam xuống dưới đất. Nếu lời chứng đã được đưa ra, các đệ tử mang bản chép tới đòi xem phòng. Nếu ngươi từng lén đưa nước, người bị giam bày những chiếc chén đã dùng để cho mọi người thấy.",
       "choices": [
         {
           "i": "💰",
@@ -395,7 +395,7 @@
         },
         {
           "i": "💎",
-          "l": "Mua quyền trông việc nước",
+          "l": "Mua quyền coi việc phát nước cho người bị giam",
           "t": "Người trong phòng có nước đều. Mỗi tháng ngươi nhận một phần lương kèm chìa khóa dài hơn chìa khóa cũ.",
           "e": {
             "st": 20,
@@ -499,7 +499,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu phòng đã mở công khai, giám luật {$c.ten} mang tới tờ đề nghị bỏ lệ đóng cửa. Nếu ngươi giữ chìa, đệ tử {$b.ten} đem nộp sổ nước, trong đó có cột ghi những đêm chỉ mở cửa bằng tiền.",
+      "text": "Nếu phòng giam đã mở để mọi người xem, giám luật {$c.ten} mang tới đề nghị bỏ lệ khóa kín cửa. Nếu ngươi giữ chìa, đệ tử {$b.ten} đem sổ phát nước nộp cho ngươi, trong đó ghi cả những đêm người bị giam phải trả tiền để được mở cửa.",
       "choices": [
         {
           "i": "✋",

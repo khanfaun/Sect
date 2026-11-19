@@ -366,7 +366,7 @@
           "alignment": "context"
         }
       },
-      "text": "Chủ khế {$c.ten} bị thương nặng, cần thọ nguyên để sống qua đêm. Nếu ngươi từng giúp hai anh em, người em tự tới đề nghị đổi một phần tuổi lấy việc trả khế. Nếu ngươi từng giữ quyền thu nợ, chủ khế tìm ngươi thương lượng bán cả số khế còn lại để mua tuổi cứu mình. Lần này chính lão phải chờ người khác ra giá.",
+      "text": "Chủ khế {$c.ten} bị thương nặng và cần thêm thọ nguyên mới sống qua đêm. Nếu ngươi từng giúp hai anh em, người em tự tới đề nghị nhường một phần tuổi thọ để lấy lại giấy cầm. Nếu ngươi từng giữ quyền thu nợ, chủ khế tìm ngươi để bán số khế còn lại lấy tiền mua thọ nguyên.",
       "choices": [
         {
           "i": "✋",
@@ -384,7 +384,7 @@
         },
         {
           "i": "💎",
-          "l": "Mua chỗ tuổi còn dư sau khi cứu lão",
+          "l": "Mua phần thọ nguyên còn dư sau khi cứu lão",
           "t": "Sau khi cứu lão, người em bán một phần tuổi để lấy tiền chuộc nốt cho anh. Ngươi nhận mua, thêm thọ nguyên; hắn giữ lại đủ tuổi mình cần, không nghe lời ngươi trả giá cao hơn.",
           "e": {
             "deed": "lua_loi",

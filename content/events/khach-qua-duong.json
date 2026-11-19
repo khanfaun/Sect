@@ -106,7 +106,7 @@
       "choices": [
         {
           "i": "🔥",
-          "l": "Ngồi cùng nghỉ chân",
+          "l": "Nghỉ chân cùng người đi đường",
           "t": "Hai người chia nhau miếng lương khô. {$a.ten} kể chuyện quê nhà, ngươi nghe mà lòng nhẹ đi.",
           "e": {
             "h": 6,
@@ -124,8 +124,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -277,7 +277,7 @@
       "choices": [
         {
           "i": "⚔️",
-          "l": "Ra tay",
+          "l": "Chống lại kẻ cướp",
           "fight": {
             "k": "sontac",
             "cnt": 2
@@ -384,8 +384,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -471,8 +471,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {

@@ -338,7 +338,7 @@
           "alignment": "context"
         }
       },
-      "text": "Một đoàn tu sĩ muốn quay xuống sau khi cửa lên khép. Nếu từng có đèn hoặc lửa chia, tu sĩ {$b.ten} biết đưa người xuống từng tốp. Nếu ngươi từng giữ đèn hoặc bán đường riêng, họ đứng chờ ngươi mở lối.",
+      "text": "Cửa dẫn lên đã đóng. Một đoàn tu sĩ muốn trở xuống. Nếu trước đây có đèn chung hoặc mọi người đã chia lửa, tu sĩ {$b.ten} biết đường đưa họ xuống từng tốp. Nếu ngươi giữ đèn hoặc bán đường riêng, cả đoàn phải đợi ngươi mở lối.",
       "choices": [
         {
           "i": "✋",
@@ -448,7 +448,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu từng mở đường chung, người về góp dầu đặt đèn mới. Nếu từng thu lễ, tu sĩ {$b.ten} lấy dầu riêng đốt ở bậc đầu. Người đứng đợi vẫn giữ những túi đã từng đem lên.",
+      "text": "Nếu ngươi từng mở đường cho mọi người, những người trở về góp dầu đặt đèn mới. Nếu ngươi từng thu lễ, tu sĩ {$b.ten} phải lấy dầu của mình thắp ở bậc đầu. Những người đứng chờ vẫn mang theo túi lễ đã chuẩn bị.",
       "choices": [
         {
           "i": "✋",

@@ -139,7 +139,7 @@
           "alignment": "context"
         }
       },
-      "text": "Hai người tìm một buồng có túi khí đủ lâu để nói chuyện. Ngư nhân {$b.ten} mang xuống hai cái chén, một chiếc úp để giữ chút khí trên bờ.",
+      "text": "Hai người tìm một hốc đá có túi khí để nàng thợ lặn thở và trò chuyện. Ngư nhân {$b.ten} mang hai cái chén xuống. Hắn úp một chiếc để giữ chút không khí từ mặt nước.",
       "choices": [
         {
           "i": "✋",
@@ -354,7 +354,7 @@
           "alignment": "context"
         }
       },
-      "text": "Triều lớn ép một nhóm người vào hốc đá giữa biển. Nếu ngươi từng gia cố buồng hoặc tìm lại chỗ neo, đôi bạn đã thuộc lối thoát quanh vòm. Nếu chỗ gặp từng đổi lấy quyền dùng riêng hoặc bị bán đi, họ phải dò lại đường giữa dòng nước đục. Nước lên gần sát trần. Nữ thợ lặn {$a.ten} buộc đầu dây vào đá, gọi mọi người xếp hàng.",
+      "text": "Nước triều dồn một nhóm người vào hốc đá, đã lên gần sát trần. Nếu ngươi từng gia cố buồng lặn hoặc tìm lại chỗ neo, đôi bạn biết lối thoát quanh vòm. Nếu nơi gặp cũ đã bị bán hoặc dành riêng cho một người, họ phải dò lại đường trong nước đục. Nữ thợ lặn {$a.ten} buộc dây vào đá, gọi mọi người đứng thành hàng.",
       "choices": [
         {
           "i": "✋",
@@ -458,7 +458,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu nhóm thoát qua dây, họ mang thừng dựng nhà chờ. Nếu từng đợi người cứu, họ xây thêm một vòm nổi, dưới vòm đặt ghế vừa chìm nửa mặt.",
+      "text": "Nếu cả nhóm từng thoát nhờ dây, họ đem sợi thừng ấy về dựng chỗ chờ cứu hộ. Nếu họ từng phải đợi người từ bờ đến cứu, họ dựng một vòm nổi để người mắc nạn lần sau có chỗ ngồi trên mặt nước.",
       "choices": [
         {
           "i": "🤲",
