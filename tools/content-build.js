@@ -20,6 +20,9 @@ function buildContent(){
  // đợt GPT-2: quả chín, nghề phàm, cải căn dọc đường, cảnh kể — kiểm rồi mới ghép.
  const n2=require('./kiem-tra-noi-dung-2').kiemNoiDung2();if(n2.loi.length)throw Error('Nội dung đợt hai sai (chạy npm run content:gpt để xem):\n'+n2.loi.join('\n'));
  write('src/game/data/07-noi-dung-2-du-lieu.js','// SINH TỰ ĐỘNG từ content/qua-chin, content/nghe-pham, content/cai-can, content/canh. Không sửa tệp này.\nconst ND2_DATA='+JSON.stringify(n2.data)+';\n');
+ // Đ10: lời văn Đại Mộng (content/dai-mong/**) — kiểm rồi mới ghép; thiếu tệp thì game dùng lời dự phòng.
+ const dm=require('./kiem-tra-dai-mong').kiemDaiMong();if(dm.loi.length)throw Error('Lời văn Đại Mộng sai (chạy npm run content:mong để xem):\n'+dm.loi.join('\n'));
+ write('src/game/data/08-dai-mong-du-lieu.js','// SINH TỰ ĐỘNG từ content/dai-mong/**. Không sửa tệp này.\nconst DM_DATA='+JSON.stringify(dm.data)+';\n');
  return {events:events.length,stories:story.length,catalog:cat,tuyen:ty.tuyen.length};
 }
 module.exports={buildContent};if(require.main===module){const r=buildContent();console.log('Content:',r.events,'mục sự kiện;',r.stories,'cảnh truyện.');}

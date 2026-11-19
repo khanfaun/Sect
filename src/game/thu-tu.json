@@ -327,6 +327,9 @@
  "core2/65-dat-dai-xay-pha.js",
  "content/rules/truy-na.js",
  "core2/66-truy-na.js",
+ "data/08-dai-mong-du-lieu.js",
+ "content/rules/dai-mong.js",
+ "core2/67-dai-mong.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
@@ -357,5 +360,6 @@
  "ui/23-chu-thich-ten.js",
  "ui/29-thien-cam-chu-nho.js",
  "ui/30-am-hoi.js",
- "ui/31-tam-giu.js"
+ "ui/31-tam-giu.js",
+ "ui/32-dai-mong.js"
 ]
