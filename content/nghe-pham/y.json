@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "y",
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Sổ bệnh bên bếp ấm",
+      "t": "Ngươi mất, học trò tiếp tục mở hiệu và đọc cả những trang ghi ca từng vượt sức ngươi. Người làng góp củi giữ chỗ chờ, mỗi nhà cử một người trông hộ. Một bệnh nhân cũ đem tới chiếc bát lần đầu họ uống thuốc ở đó.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Chìa tủ trong tay người mua",
+      "t": "Sau tang lễ, chủ nợ mua lại chìa tủ thuốc. Người nhà của một bệnh nhân mang biên nhận tới, hỏi vì sao họ từng phải đợi dù tủ còn đầy. Học trò mở sổ phí và để họ xem dòng ngươi đã ký.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Bàn khám gửi người sau",
+      "t": "Khi ngươi nằm xuống, người từng phụ bốc thuốc kê lại bàn khám cho khỏi cập kênh. Họ tiếp tục chữa những bệnh quen, ca nặng thì đưa tới chỗ có người nhận. Một bà cụ giữ toa cũ để nhắc hôm ngươi chịu ngồi nghe bà nói hết.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Túi lá và cối thuốc",
+      "t": "Gia đình giữ chiếc cối ngươi dùng từ hồi học bốc thuốc. Sau ngày chôn cất, một người hàng xóm đến xin mượn để giã lá cho con. Họ mang trả trước tối và nhắc ngươi từng thức đêm trông đứa trẻ ấy."
+    }
+  ]
+}
