@@ -816,3 +816,9 @@ THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuy�
 - Bot chưa biết đặt danh sách/nhận đề nghị ở Ám Hội, chưa biết cất đồ tạm giữ (không chạy bot).
 - Mỗi câu 47/48 chung một commit vì sửa cùng chỗ.
 
+
+## NGƯỜI DÙNG CHỐT ĐỢT 9 (câu 52–55) — làm ở Sửa-M
+52. A: tạm giữ không giới hạn số món.
+53. B: không tự cất; người chơi tự chọn món nào cất vào túi (giữ nút "Cất vào túi" từng món).
+54. A: áp tạm giữ cho cả vật liệu chồng theo loại (loại mới khi túi đầy → tạm giữ; cùng loại đã có ô thì chồng vào như cũ).
+55. A: khi NPC bán ở Ám Hội, NPC khác cũng được đề nghị đổi vật khác (người bán NPC xét theo nhu cầu của mình).
