@@ -714,3 +714,16 @@ Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm th
    - ĐẾM NGƯỢC: mỗi lần có người đưa giá, đồng hồ đếm 10 giây (thời gian thật, hiện trên hộp thoại); nếu 10 giây không ai trả cao hơn thì món thuộc người đó. Có người trả mới thì đếm lại từ 10. NPC ra giá trong khoảng đếm (độ trễ ngẫu nhiên). Bài kiểm phải chạy được không chờ thật (cho phép tua đồng hồ trong test).
 Việc cần làm (Sửa-J): câu 42, 42b, 43, 44.
 Gói gửi GPT: docs/content/GUI-GPT/ (0-loi-nhan, 1-huong-dan, 2-thiet-ke-45-tuyen). TẠM DỪNG — chờ người dùng.
+
+## YÊU CẦU MỚI (chưa làm, đã xếp lịch)
+A. Ô ĐẤT theo địa điểm (xếp: đợt mới "Đ8b Đất đai", làm sau Đ9 bộ máy, trước Đ10):
+   - Mỗi địa điểm có N ô đất; mỗi ô mang 1 công trình → mở đúng 1 mục trong modal địa điểm (vd thành A 3 ô: tửu lầu, trạm dịch, tạp hoá → modal chỉ có 3 mục đó). Thay cách hiện nút cố định theo loại nơi (PGROUP) bằng nút sinh từ công trình trên ô.
+   - Hoang dã: ô sinh ngẫu nhiên theo địa hình (hang động, hồ nước, trận pháp…). Công trình tự nhiên: không xây được, nhưng phá được. Được xây trận pháp, động phủ trên đất hoang không chủ.
+   - Ô có chủ (NPC/thế lực Đ8): xây/phá → giảm thiện cảm chủ, có thể bị truy đuổi đánh nhau; ở thành/trấn ảnh hưởng nặng, có thể truy nã (nối danh tiếng Đ1.4).
+   - Sau này: mua nhà/đất → người chơi chủ động xây/phá công trình trên ô mình sở hữu.
+   - Bản lưu cũ: sinh ô cho các nơi hiện có sao cho giữ đủ các dịch vụ đang có (không mất quán/chợ của người chơi cũ).
+B. TRUY ĐUỔI (xếp: Sửa-K, ngay sau Sửa-J):
+   - Sự kiện gặp địch (sơn tặc…) → chọn chạy → địch có thể truy đuổi trong thời gian X (theo loại địch).
+   - Còn thời hạn truy đuổi: cứ mỗi khoảng ngẫu nhiên có xác suất bị tấn công, kể cả ĐANG DI CHUYỂN trên đường (chặng đi dài trong hạn truy vẫn có thể bị chặn giữa đường).
+   - Hết hạn / giết được / tới nơi an toàn có thể cắt đuôi (tự thiết kế); nối hệ giao tranh/thần thức/che giấu tu vi (core2/23–30) để có cách né.
+THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuyến GPT) → Đ8b Đất đai → Đ10 → Đ11 → Đ12.
