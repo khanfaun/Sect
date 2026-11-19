@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "tho",
+  "len": [
+    "Người coi xưởng giao một món cho ngươi làm từ đầu đến cuối. Khi khách đến, ngươi tự chỉ chỗ đã chỉnh lại.",
+    "Thợ mới bắt đầu mang đồ tới nhờ ngươi xem trước khi giao. Ngươi dành một góc bàn cho những món chưa qua lần thử.",
+    "Ngươi nhận xưởng và sổ tiền công. Đúng lúc khách giục lấy hàng, thợ phụ tới hỏi có thể về chăm con một hôm không.",
+    "Mẫu của ngươi có người từ xa tới xem. Ngươi đặt cả món còn vết lỗi ra cạnh món tốt và nói chỗ phải sửa.",
+    "Những xưởng khác gửi thợ tới học một mùa. Ngươi cho họ tự làm mẫu và giữ riêng phần công của người đã giúp."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Bàn nghề đủ chỗ",
+      "t": "Sau khi ngươi mất, học trò giữ một bàn trống cho người mới. Bên cạnh mẫu tốt còn có những món ngươi từng bảo đừng bán khi chưa sửa. Một khách cũ mang chiếc hộp đã dùng nhiều năm tới, xin đặt xuống lúc đưa tang.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Tên thợ bị xóa khỏi nhãn",
+      "t": "Xưởng vẫn bán được hàng sau ngày ngươi mất. Những người làm thuê đòi chép lại tên mình vào sổ, vì trên món hàng chỉ có dấu chủ xưởng. Một người mang mẫu từng bị lấy công tới làm chứng.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Hộp gỗ theo mùa",
+      "t": "Người từng nhờ ngươi chỉnh cái hộp giữ nó qua nhiều mùa ẩm. Ngày nghe ngươi mất, họ đem về xưởng để thợ mới đo lại bản lề. Thợ dùng vết mòn cũ chỉ ra chỗ được sửa vừa tay.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Mảnh mẫu trong giỏ",
+      "t": "Ngươi không để lại xưởng, chỉ có giỏ đồ và một vài mảnh mẫu. Người từng làm chung xin giữ một mảnh để chỉ cho trẻ cách thử đồ trước khi giao. Gia đình dùng chiếc giỏ cũ đựng hương."
+    }
+  ]
+}
