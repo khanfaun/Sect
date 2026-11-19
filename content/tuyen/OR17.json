@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "id": "OR17",
+  "loai": "xuat_than",
+  "ten": "Tiếng vó trong tuyết",
+  "xuatThan": "xt_tre_giu_ngua_tram",
+  "goiYDaiLo": [
+    "de_nghiep"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Ngựa quỵ dưới máng",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Con ngựa ở {LOC13} đã bị quất đến kiệt, ngã ngay khi chạm mõm vào máng. {NP26} chỉ những vết roi dưới bờm. Túi thư buộc phía yên còn nguyên dấu trạm.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Chăm ngựa và ghi nguồn vết roi",
+          "t": "Ngươi giữ ấm chân ngựa và đánh dấu người đã giao nó sau chuyến đêm.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Đổi ngựa rồi giữ dây cương cũ",
+          "t": "Ngươi mượn con khỏe từ trạm và giữ dây cương có thẻ chuyến bị ép giờ.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin người chăn giữ ngựa nghỉ",
+          "t": "Ngươi nhận trực thay để người chăn đưa ngựa ra khỏi chuồng thay phiên.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Ngựa bị loại khỏi phiên trực, túi thư giao sang tay người khác.",
+        "su": "Ngựa bị loại khỏi phiên trực, túi thư giao sang tay người khác.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Hai giờ trên cùng một túi",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Hai túi ở {LOC13} đóng dấu giao trái giờ. Tờ trực ghi một túi đợi trong chuồng dù còn ngựa khỏe. Người cầm roi tối ấy ký ngay dưới giờ bị bỏ trống.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối hai túi trước bàn trạm",
+          "t": "Ngươi chép hai giờ cạnh nhau và xác định người giữ túi đã cho chuyến đợi.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ phiếu người chấp nhận mua giờ",
+          "t": "Ngươi nhận ra một người hỏi giá cho mỗi canh thư nằm lại sát máng.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi đường thồ ngoài quân",
+          "t": "Ngươi hỏi người đưa hàng về lối trạm dân có thể đi khi cửa quân đóng.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Túi chậm nhập sổ chung, giờ ngựa còn khỏe bị xóa.",
+        "su": "Túi chậm nhập sổ chung, giờ ngựa còn khỏe bị xóa.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Tờ lệnh tới tay chỉ huy",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "{NP25} từng nhận lệnh rút sau lúc tuyết phủ lối ra {LOC13}. Người đưa túi còn sống, cạnh yên có thẻ con ngựa chở nó đã chết. Cả hai dấu nối về cùng trạm.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Nối thẻ chuyến với lệnh rút",
+          "t": "Ngươi lấy thẻ ngựa đối giờ {NP25} nhận, thấy lệnh thật đã bị giữ giữa đường.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin người đưa thư đứng chứng",
+          "t": "Ngươi giúp người chuyển túi cất một bản có giờ thật và ghi tên nơi trú.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Dọn lối cho đội trạm rời đi",
+          "t": "Ngươi hỏi từng người có muốn theo đường dân hay ở lại trực dưới dấu quân.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người đưa túi đổi phiên, lệnh rút muộn vẫn được tính như tới đúng giờ.",
+        "su": "Người đưa túi đổi phiên, lệnh rút muộn vẫn được tính như tới đúng giờ.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Ai mang túi qua gió",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Trước đợt tuyết, bộ chỉ huy còn chờ bản xác nhận giờ thật. Kẻ mua chậm giờ đã giữ tiền trong áo. Người giữ ngựa xin ngươi chọn ai mang thư và chỗ họ được đổi ngựa.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao bản thật qua người đã đứng chứng",
+          "t": "Ngươi xếp một chỗ đổi ngựa và đi hộ tống tới lúc chỉ huy ký nhận bản thật.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Bán một canh chậm thư",
+          "t": "Ngươi chọn người đã chịu giá, cho người ấy đổi ngựa và giữ quyền giao giờ tại trạm.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đưa người và ngựa ra đường dân",
+          "t": "Ngươi đón người tự nguyện và ngựa được trả, rồi nhận đơn thồ đầu ngoài cửa ải.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Xin ca trực bảo vệ người mang",
+          "t": "Ngươi đi cùng túi thư tới đầu dốc, đợi người chuyển có chỗ trú mới quay.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Túi đi theo phiên cũ, chưa ai nhận việc bảo vệ người mang.",
+        "su": "Túi đi theo phiên cũ, chưa ai nhận việc bảo vệ người mang.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Chuông trên dây cương",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Bảng đổi ngựa {LOC13} chừa chỗ cho việc đi trạm tiếp. Ngựa đã khỏi đứng sát những con người dân trả về. Ngoài cửa có người muốn biết ai sẽ giữ giờ thư từ mùa sau.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Mở trạm đổi ngựa khỏe",
+          "t": "Ngươi chia phiên nghỉ và treo chuông tên trên dây cương của từng chuyến có người nhận.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ quyền định giờ giao",
+          "t": "Ngươi giữ ấn trạm và để người mua nhận lợi từ canh giờ đã bán.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Mở đường thồ ngoài quân tịch",
+          "t": "Ngươi trả thẻ quân và giao phiếu chở hàng cho người, ngựa đã rời cửa ải.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Trạm giữ bảng cũ, người chăn tự thay ngựa theo sức còn lại.",
+        "su": "Trạm giữ bảng cũ, người chăn tự thay ngựa theo sức còn lại.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Thư tới trước tuyết",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Bản thật đến tay chỉ huy trước khi tuyết khóa đường. Đội ngoài ải có thể rút theo lệnh đúng, còn trạm giữ đủ ngựa khỏe cho chuyến sau. Người chăn khắc tên những người giữ giờ lên chuông dây cương.",
+      "su": "{LOC13} nhận lệnh đúng giờ và tổ chức lượt đổi ngựa có ca nghỉ.",
+      "dauVong": "chuông ngựa còn tên người từng đưa thư tới trước tuyết."
+    },
+    {
+      "id": "B",
+      "ten": "Người bán một canh giờ",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Một canh giờ đủ cho phe mua dời người trước khi lệnh tới. Sau đó ngươi vẫn cầm ấn trạm, còn người chờ thư phải tự hỏi mất giờ ở đoạn nào. Có người đến tìm phong thư qua nhiều mùa tuyết.",
+      "su": "Quyền trạm giữ dưới tay {ten} sau vụ bán giờ thư.",
+      "dauVong": "người ở cửa ải còn tìm phong thư từng tới muộn một canh."
+    },
+    {
+      "id": "C",
+      "ten": "Vó ngựa không quân tịch",
+      "dk": {
+        "dau": [
+          "moc_2_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Người và ngựa nhận công theo chuyến hàng thay vì dấu quân. Một người từng trực đêm đem máng cũ tới kê ở đầu đường mới. Từ đó ai mang hàng cũng có thể dừng cho ngựa uống trước khi lên dốc.",
+      "su": "Người và ngựa rời quân tịch, nhận việc trên đường dân sự.",
+      "dauVong": "trạm dân còn chiếc máng do người giữ ngựa cũ đem tới."
+    }
+  ],
+  "ngoai": "Trạm giữ bảng cũ, người chăn tự thay ngựa theo sức còn lại."
+}
