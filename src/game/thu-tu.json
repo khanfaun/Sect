@@ -325,6 +325,8 @@
  "content/rules/dat-dai.js",
  "core2/64-dat-dai.js",
  "core2/65-dat-dai-xay-pha.js",
+ "content/rules/truy-na.js",
+ "core2/66-truy-na.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",

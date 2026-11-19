@@ -52,7 +52,7 @@ const CONG_TRINH={
 //   them = [xác suất, tối đa] thêm công trình tự nhiên (mỗi công trình cấp một nút đã có ở nơi đó) — chỉ thêm cho đẹp, không mở thêm dịch vụ
 //   phat: hậu quả khi xây/phá trên ô có chủ. fav = thiện cảm chủ (vai NPC) · fa = điểm quan hệ thế lực (r.faQh, ×2 khi tính thang) ·
 //         danh = danh tiếng khu (thôn trấn / thành) · truy = xác suất bị chủ hoặc người của họ truy đuổi (hệ Sửa-K, loại cuop) ·
-//         na = xác suất bị quan phủ truy nã ở thôn trấn / thành (truy loại quan, danh tiếng khu xuống mức truy nã naDanh)
+//         đất của dân: truy nã đi qua hệ truy nã (Sửa-O, content/rules/truy-na.js: nhân chứng theo loại nơi, tội pha_dat)
 //   moc = [ít, nhiều] số năm một công trình tự nhiên bị phá tự mọc lại (Sửa-O câu 76; ô đã xây gì lên thì không mọc)
 //   hu = số tháng một công trình cốt lõi ở nơi neo bị phá thì chỉ hư tạm (dựng lại sau ngần ấy)
 const DAT={
@@ -72,7 +72,7 @@ const DAT={
   phat:{
     vai:{fav:-15,fa:-3,truy:0.3},
     fa:{fa:-4,truy:0.25},
-    dan:{danh:{tran:-12,thanh:-20},na:{tran:0.3,thanh:0.6},naDanh:-60},
+    dan:{danh:{tran:-12,thanh:-20}},
     tong:{danh:-15,truy:0.4}},
   moc:[20,40],
   hu:3};

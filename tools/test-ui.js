@@ -578,7 +578,7 @@ const TESTS = {
     await p.waitForTimeout(150);
     const md = await ev(p, () => (document.querySelector('.mbox')||{}).innerText||'');
     ok(/nói xấu/.test(md) && /truy nã/.test(md), 'hộp xác nhận ghi rõ hậu quả trước khi phá');
-    await ev(p, () => {DAT.phat.dan.na.tran=0;});
+    await ev(p, () => {TNA.chung.tran=0;});
     await p.locator('[data-act="vgo"]').click();
     await p.waitForTimeout(200);
     ok(await ev(p, () => !W().dat[DT.id].o[0].ct && !document.querySelector('[data-act="pact"][data-arg="tuu"]')), 'phá xong: mất tửu lầu trên hộp địa điểm');
@@ -596,7 +596,36 @@ const TESTS = {
     await p.waitForTimeout(200);
     ok(await ev(p, () => DH.dp===1 && W().dat[DH.id].o.some(c=>c.ct==='dong_phu'&&c.chu&&c.chu.k==='ta')), 'dựng được động phủ, ô thành của ngươi');
     ok(await ev(p, () => NK.count('dat') > 0), 'có nhật ký dat.*');
-    await ev(p, () => {DAT.phat.dan.na.tran=0.3;G.run.scene=null;render();});
+    await ev(p, () => {TNA.chung.tran=0.5;G.run.scene=null;render();});
+    ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
+  },
+  // Sửa-O câu 77: truy nã — biểu tượng chữ trên bản đồ, nhân chứng mở hộp lựa chọn, Quan phủ trong hộp địa điểm
+  async truy_na(p) {
+    await ev(p, () => {FEAT.truy=1;FEAT.tna=1;const r=G.run;r.pham=0;r.realm=1;r.scene=null;UI.modal=null;UI.panel=null;r.truy=null;r.tna={};
+      const n=W().regions.flatMap(x=>x.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');window.TN=n;r.at=n.id;r.region=n.r;r.moving=null;
+      tnaBao(n.r,1,{noTruy:1});render();});
+    await p.waitForTimeout(150);
+    const tp = await ev(p, () => {const e=document.querySelector('.wi.na');return e?e.getAttribute('data-tip')+'|'+e.innerText:'';});
+    ok(/Bị truy nã/.test(tp) && !/\d/.test(tp), 'biểu tượng truy nã trên bản đồ, chú thích bằng chữ, không số');
+    await ev(p, () => {TNA_UB=JSON.stringify(TNA);TNA.chung.tran=1;TNA.chung.chac=1.01;tnaToi('pha_dat');render();});
+    await p.waitForTimeout(150);
+    ok(await ev(p, () => G.run.scene&&G.run.scene.ev==='tna_chung'), 'nhân chứng: mở hộp lựa chọn');
+    const kt = await ev(p, () => document.body.innerText);
+    ok(/Diệt khẩu/.test(kt) && /Mặc kệ/.test(kt), 'hộp nhân chứng hiện các lựa chọn');
+    await ev(p, () => {kyPick(3);G.run.scene=null;Object.assign(TNA,JSON.parse(TNA_UB));G.run.truy=null;openPlace(TN.id);render();});
+    await p.waitForTimeout(150);
+    ok(await ev(p, () => !!document.querySelector('[data-act="pact"][data-arg="quanphu"]')), 'hộp địa điểm có nút Quan phủ');
+    await p.locator('[data-act="pact"][data-arg="quanphu"]').click();
+    await p.waitForTimeout(150);
+    const opts = await p.locator('[data-act="vopt"]').allInnerTexts();
+    ok(opts.length >= 3 && opts.some(x => /Nộp phạt/.test(x)) && opts.some(x => /Ngồi tù/.test(x)), 'mục Quan phủ: nộp phạt, làm công, ngồi tù ' + JSON.stringify(opts));
+    await ev(p, () => {G.run.bac=G.run.tna[TN.r].tien+1;render();});
+    await p.locator('[data-act="vopt"][data-arg="nop"]').click();
+    await p.waitForTimeout(150);
+    await p.locator('[data-act="vgo"]').click();
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => !G.run.tna[TN.r] && !document.querySelector('.wi.na')), 'nộp phạt xong: hết truy nã, mất biểu tượng');
+    await ev(p, () => {G.run.scene=null;render();});
     ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
   },
   async truy(p) {

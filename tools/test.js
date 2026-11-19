@@ -20,7 +20,7 @@ function fresh(patch) {
     try{G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0]);}
     finally{genWorld=original;}
     NK.on=true;NK.clear();G.run.scene=null;G.run.rootKnown=1; // Sửa-C.6: linh căn luôn ẩn tới khi trắc; bài cũ coi như đã trắc
-    FEAT.an=0;FEAT.nc=0;FEAT.no=0;FEAT.nha=0;FEAT.truy=0; // nợ/nhà ở (Sửa-B) tắt, bài no_nha bật lại; ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
+    FEAT.an=0;FEAT.nc=0;FEAT.no=0;FEAT.nha=0;FEAT.truy=0;FEAT.tna=0; // nợ/nhà ở (Sửa-B) tắt, bài no_nha bật lại; ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
   })()`);
   if (patch) run(patch);
 }
@@ -30,7 +30,7 @@ const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else
 const TESTS = {
   dat_dai() {
     // Đ8b: ô đất, công trình, xây/phá, chủ đất, nơi neo, bản lưu cũ
-    fresh("FEAT.truy=1;G.screen='map';G.run.pham=0;G.run.realm=1;DAT_BK=JSON.stringify(DAT)");
+    fresh("FEAT.truy=1;FEAT.tna=1;G.screen='map';G.run.pham=0;G.run.realm=1;DAT_BK=JSON.stringify(DAT);TNA_BK0=JSON.stringify(TNA)");
     try {
     const all = "W().regions.flatMap(R0=>R0.nodes)";
     ok(run(`(()=>{let bad=[];for(const n of ${all}){DAT_RAW_ON=1;const A=placeActs(n).map(a=>a.a);DAT_RAW_ON=0;const B=placeActs(n).map(a=>a.a);for(const a of A)if(!B.includes(a))bad.push(n.type+':'+a);}return bad.length===0})()`), 'mọi nơi: sinh ô xong vẫn đủ mọi nút như trước');
@@ -65,11 +65,11 @@ const TESTS = {
     ok(run("DDX_H.dp===1&&G.run.st===70&&W().dat[DDX_H.id].o[DDX_J].chu.k==='ta'"), 'động phủ: nơi đó thành động phủ, trừ 30 linh thạch, ô thành của ngươi');
     ok(run("placeActs(DDX_H).some(a=>a.a==='tinh')&&!G.run.truy"), 'có tĩnh tọa ở động phủ; đất không chủ thì không bị phạt');
     // phạt khi có chủ: đất của dân ở thôn trấn → tiếng xấu, có thể bị truy nã
-    run(`DDX_T2=${all}.find(n=>n.type==='tran'&&!n.anchor&&n.state!=='ruin'&&n.id!==DDX_T.id);placeActs(DDX_T2);DDX_K=W().dat[DDX_T2.id].o.findIndex(c=>c.ct==='tuu_lau');DAT.phat.dan.na.tran=1;G.run.truy=null;DDX_D0=danhGet('reg:'+DDX_T2.r)`);
+    run(`DDX_T2=${all}.find(n=>n.type==='tran'&&!n.anchor&&n.state!=='ruin'&&n.id!==DDX_T.id);placeActs(DDX_T2);DDX_K=W().dat[DDX_T2.id].o.findIndex(c=>c.ct==='tuu_lau');TNA.chung.tran=1;G.run.truy=null;DDX_D0=danhGet('reg:'+DDX_T2.r)`);
     const op = JSON.parse(run("JSON.stringify(datOpts(DDX_T2).find(o=>o.id==='pha:'+DDX_K))"));
     ok(op && /nói xấu/.test(op.d) && /truy nã/.test(op.d), 'hộp xác nhận ghi rõ hậu quả (tiếng xấu, truy nã)');
     ok(!!run("datPha(DDX_T2,DDX_K)"), 'phá tửu lầu của dân');
-    ok(run("danhGet('reg:'+DDX_T2.r)<=DAT.phat.dan.naDanh&&G.run.truy&&G.run.truy.k==='quan'"), 'bị quan phủ truy nã: danh tiếng khu xuống mức truy nã, bị truy đuổi (loại quan)');
+    ok(run("danhGet('reg:'+DDX_T2.r)<=TNA.danh&&G.run.truy&&G.run.truy.k==='quan'&&tnaMuc(DDX_T2.r)>=1"), 'bị quan phủ truy nã (hệ truy nã): danh tiếng khu xuống mức truy nã, quan sai đuổi theo');
     ok(run("!placeActs(DDX_T2).some(a=>a.a==='tuu')"), 'tửu lầu không còn');
     // Sửa-O câu 79: ở thôn trấn / thành chỉ xây sau khi đã mua đất
     run("G.run.st=500;G.run.pham=0");const xo=JSON.parse(run("JSON.stringify(datOpts(DDX_T2).find(o=>/^xay:/.test(o.id))||null)"));
@@ -109,7 +109,80 @@ const TESTS = {
     ok(run("JSON.parse(JSON.stringify(W())).dat[DDX_OLD.id].o.length===W().dat[DDX_OLD.id].o.length"), 'ô đất lưu được (qua JSON)');
     // để sẵn sở hữu
     ok(run("datSoHuu(DDX_OLD,0)&&datCuaTa().some(x=>x.node===DDX_OLD.id&&x.i===0)&&datPhat(DDX_OLD,W().dat[DDX_OLD.id].o[0],false).length===0"), 'ô của ngươi: không bị phạt (để sẵn cho mua đất)');
-    } finally { run("Object.assign(DAT,JSON.parse(DAT_BK))"); }
+    } finally { run("Object.assign(DAT,JSON.parse(DAT_BK));Object.assign(TNA,JSON.parse(TNA_BK0))"); }
+  },
+  // Sửa-O câu 77: hệ truy nã kiểu thế giới mở — nhân chứng, mức theo vùng, mất dấu, treo thưởng, thợ săn, quan phủ, gộp nợ / đất / danh tiếng
+  truy_na() {
+    fresh("FEAT.truy=1;FEAT.tna=1;G.screen='map';G.run.pham=0;G.run.realm=1;G.run.kyT=W().t;G.run.tmT=W().t;TNA_BK=JSON.stringify(TNA);TRUY_BK2=JSON.stringify(TRUY)");
+    try {
+    const all = "W().regions.flatMap(R0=>R0.nodes)";
+    const goTo = q => run(`(()=>{const n=${all}.find(n=>${q}&&n.state!=='ruin');G.run.at=n.id;G.run.region=n.r;G.run.moving=null;G.run.scene=null;G.run.truy=null;return n.id})()`);
+    const th = goTo("n.type==='thanh'");run(`TN_TH=nodeById(${th});TN_R=TN_TH.r`);
+    // thành: gần như chắc bị báo quan ngay
+    run("TNA.chung.thanh=1");ok(run("tnaToi('pha_dat')")===2, 'phạm tội trong thành: bị báo quan ngay');
+    ok(run("tnaMuc(TN_R)")===2&&run("G.run.tna[TN_R].tien")===run("TNA.tien.xu*2*TNA.tien.thanh"), 'mức truy nã theo vùng, tiền treo thưởng (thành gấp đôi)');
+    ok(run("danhGet('reg:'+TN_R)<=TNA.danh&&danhName(TN_TH)===contentText('danh.4')"), 'nối danh tiếng Đ1.4: khu bị kéo xuống "Bị truy nã"');
+    ok(run("G.run.truy&&G.run.truy.k==='quan'"), 'quan sai lần theo (truy đuổi loại quan)');
+    ok(run("Object.keys(G.run.tna).length")===1, 'tội không lan sang vùng khác');
+    const hud=JSON.parse(run("JSON.stringify(tnaHud())"));ok(hud&&hud.t&&/Bị truy nã/.test(hud.tip)&&!/\d/.test(hud.tip), 'biểu tượng HUD: chữ + biểu tượng, không số');
+    run("tnaToi('pha_dat')");ok(run("tnaMuc(TN_R)")===4, 'thêm tội: mức tăng');
+    // trấn: tùy nhân chứng
+    run("G.run.tna={};G.run.truy=null");const tr=goTo("n.type==='tran'");run(`TN_T=nodeById(${tr})`);
+    run("TNA.chung.tran=0");ok(run("tnaToi('pha_dat')")===0&&!run("G.run.tna[TN_T.r]"), 'không ai thấy: không bị truy nã');
+    run("TNA.chung.tran=1;TNA.chung.chac=1.01");ok(run("tnaToi('pha_dat')")===1&&run("G.run.scene&&G.run.scene.ev")==='tna_chung', 'ở trấn có nhân chứng: hộp lựa chọn (chưa báo quan)');
+    ok(!run("G.run.tna[TN_T.r]")&&JSON.parse(run("JSON.stringify(kyOpts(G.run.scene).map(o=>o.l))")).length===4, 'bốn lựa chọn: chặn, mua chuộc, diệt khẩu, mặc kệ');
+    run("G.run.bac=5000;TNA.mua.p=1;kyPick(1)");ok(!run("G.run.tna[TN_T.r]")&&run("G.run.bac")===5000-run("TNA.mua.xu*TNA.toi.pha_dat")&&!run("G.run.tnaCh"), 'mua chuộc được: mất tiền, không bị truy nã');
+    run("G.run.scene=null;TNA.ngan={goc:0,tp:0,max:0};tnaToi('pha_dat');kyPick(0)");ok(run("tnaMuc(TN_T.r)")===2&&run("G.run.tna[TN_T.r].tien")===run("TNA.tien.xu*2"), 'chặn không kịp: bị báo quan (trấn không nhân đôi treo thưởng)');
+    run("G.run.tna={};G.run.scene=null;TNA.giet.lo=0;NK.clear();tnaToi('pha_dat');kyPick(2)");ok(!run("G.run.tna[TN_T.r]")&&run("NK.count('nq.deed')")>0, 'diệt khẩu không lộ: không bị truy nã nhưng mang nghiệp');
+    run("G.run.scene=null;TNA.giet.lo=1;tnaToi('pha_dat');kyPick(2)");ok(run("tnaMuc(TN_T.r)")===4&&run("G.run.tna[TN_T.r].ly.includes('giet_chung')"), 'diệt khẩu bị lộ: tội nặng hơn hẳn');
+    run("G.run.tna={};G.run.scene=null;tnaToi('pha_dat');kyPick(3)");ok(run("tnaMuc(TN_T.r)")===2, 'mặc kệ: bị báo quan');
+    run("G.run.tna={};G.run.scene={type:'event'};tnaToi('pha_dat')");ok(run("G.run.scene.type==='event'&&!!G.run.tnaCh"), 'đang bận cảnh khác: nhân chứng chờ');
+    run("G.run.scene=null;advanceTime(1)");ok(run("G.run.scene&&G.run.scene.ev")==='tna_chung', 'rảnh ra: hộp nhân chứng hiện');
+    run("kyPick(3);G.run.scene=null");
+    // cải trang / che giấu tu vi
+    run("TNA.chung.chac=0.9;TNA.chung.tran=0.5");const p0=run("TNA.chung.tran*(tnaChe()?TNA.chung.che:1)");
+    ok(run("placeActs(TN_T).some(a=>a.a==='caitrang')"), 'đang bị truy nã: thôn trấn có nút cải trang');
+    run("G.run.scene=null;openPlace(TN_T.id);placeAct('caitrang')");ok(run("tnaChe()&&G.run.caiT>W().t"), 'cải trang: khó bị nhận ra trong một thời gian');
+    ok(run("TNA.chung.tran*(tnaChe()?TNA.chung.che:1)")<p0, 'cải trang: nhân chứng ít hơn');
+    run("G.run.caiT=0;G.run.realm=3;G.run.hide=1");ok(run("tnaChe()"), 'che giấu tu vi cũng giúp né');run("G.run.hide=null;G.run.realm=1;G.run.scene=null");
+    // bị nhận ra khi tới thôn trấn trong vùng
+    run("TNA.nhan=[0,1,1,1,1,1];G.run.truy=null;G.run.tna[TN_T.r].t=W().t-5*HD;arrive(TN_T.id)");ok(run("G.run.truy&&G.run.truy.k==='quan'&&G.run.tna[TN_T.r].t===W().t"), 'tới trấn trong vùng: bị nhận ra, quan sai đuổi');
+    run("G.run.truy=null;G.run.caiT=W().t+HM;TNA.nhan=[0,0,0,0,0,0];arrive(TN_T.id)");ok(run("!G.run.truy"), 'khả năng bị nhận ra thấp (cải trang): không bị đuổi');run("G.run.caiT=0");
+    // mất dấu hạ dần
+    run("G.run.tna[TN_T.r].m=3;G.run.tna[TN_T.r].t=W().t-TNA.matDau[3]*HD-1;advanceTime(1)");ok(run("tnaMuc(TN_T.r)")===2, 'lâu không bị thấy: hạ một mức');
+    run("G.run.region=(TN_T.r+1)%5;G.run.tna[TN_T.r].t=W().t-TNA.matDau[2]*HD*TNA.ngoai-1;advanceTime(1)");ok(run("tnaMuc(TN_T.r)")===1&&run("danhGet('reg:'+TN_T.r)")>run("TNA.danh"), 'ra khỏi vùng: mất dấu nhanh hơn; dưới mức truy bắt thì danh tiếng hết "Bị truy nã"');
+    run("G.run.tna[TN_T.r].t=W().t-TNA.matDau[1]*HD-1;advanceTime(1)");ok(!run("G.run.tna[TN_T.r]"), 'mất dấu hẳn: hết truy nã');
+    run("G.run.region=TN_T.r");
+    // rất nặng thì lan
+    run("tnaBao(TN_T.r,5,{noTruy:1})");ok(run("W().regions.every((_,i)=>tnaMuc(i)>=(i===TN_T.r?5:TNA.lanM))"), 'tội rất nặng (Tử tội): lan sang mọi vùng ở mức thấp hơn');
+    // thợ săn tiền thưởng
+    run("G.run.tna={};tnaBao(TN_T.r,2,{noTruy:1});G.run.tna[TN_T.r].tien=TNA.san.min;TNA.san.p=1;G.run.truy=null;G.run.tnaSan=Math.floor(W().t/HM)-1;advanceTime(1)");ok(run("G.run.truy&&G.run.truy.k==='san'"), 'treo thưởng lớn: thợ săn tiền thưởng lần theo');
+    ok(run("TRUY.loai.san&&TRUY.an.thanh.san==='giam'"), 'thợ săn không sợ thành (chỉ chùn bước)');
+    // chống cự
+    run("G.run.truy=null;truyStart('quan',{n:'Bộ khoái',ek:'sontac',d:0});truyFight();G.run.scene.over='win';combatContinue()");ok(run("tnaMuc(TN_T.r)")===3, 'đánh thắng quan sai: tội chống người thi hành công vụ, mức tăng');
+    // quan phủ: nộp phạt, làm công, ngồi tù
+    run("G.run.scene=null;G.run.truy=null");ok(run("placeActs(TN_T).some(a=>a.a==='quanphu')"), 'trấn trong vùng bị truy nã: có Quan phủ');
+    ok(run("!placeActs(nodeById("+th+")).some(a=>a.a==='quanphu')||nodeById("+th+").r===TN_T.r"), 'vùng không bị truy nã: không có Quan phủ');
+    run("openPlace(TN_T.id);G.run.bac=0");let Q=JSON.parse(run("JSON.stringify(venueOpts(TN_T,'quanphu'))"));
+    ok(Q.map(o=>o.id).join()==='nop,nopLt,cong,tu'&&Q[0].no, 'quan phủ: nộp phạt (tiền / linh thạch), làm công, ngồi tù; thiếu tiền thì khoá');
+    run("G.run.bac=G.run.tna[TN_T.r].tien+10;TN_B0=G.run.bac");ok(!!run("venueDo('quanphu','nop')")&&!run("G.run.tna[TN_T.r]")&&run("G.run.bac")===10, 'nộp phạt: xoá truy nã ở vùng này');
+    ok(run("danhGet('reg:'+TN_T.r)")>run("TNA.danh")&&!run("placeActs(TN_T).some(a=>a.a==='quanphu')"), 'hết truy nã: danh tiếng khu không còn "Bị truy nã", hết mục Quan phủ');
+    run("tnaBao(TN_T.r,3,{noTruy:1});G.run.scene=null;openPlace(TN_T.id);TN_TT=W().t;venueDo('quanphu','tu')");ok(!run("G.run.tna[TN_T.r]")&&run("W().t-TN_TT")>=run("TNA.tu[3]*HM"), 'ngồi tù: qua thời gian án, sạch tội');
+    run("tnaBao(TN_T.r,5,{noTruy:1,lan:1});G.run.scene=null;openPlace(TN_T.id);G.run.bac=1e9");Q=JSON.parse(run("JSON.stringify(venueOpts(TN_T,'quanphu'))"));
+    ok(Q[0].no&&!Q.some(o=>o.id==='cong'), 'tử tội: không nộp phạt, không làm công được (chỉ ngồi tù)');
+    run("G.run.scene=null;G.run.truy=null;truyStart('quan',{n:'Bộ khoái',ek:'sontac',d:0});truyFight();G.run.scene.over='lose';combatContinue()");ok(!run("G.run.tna[TN_T.r]")&&run("NK.count('tna.giam')")>0, 'thua quan sai: bị giải về ngồi tù, xoá tội');
+    // gộp nợ (Sửa-B)
+    run("G.run.tna={};G.run.scene=null;G.run.truy=null;FEAT.no=1;G.run.queAt=TN_T.id;G.run.bac=-5000;G.run.noTra={t0:W().t,han:W().t+HM,lan:1};noTruyNa(G.run)");
+    ok(run("tnaMuc(TN_T.r)>=1&&G.run.tna[TN_T.r].ly.includes('no')&&noTruy()&&G.run.truy&&G.run.truy.k==='no'"), 'truy nã vì nợ: vào hệ truy nã, quan sai đòi nợ lần theo');
+    run("G.run.bac=0;G.run.noTra=null;advanceTime(1)");ok(!run("G.run.tna[TN_T.r]"), 'trả hết nợ: hết truy nã vì nợ');run("FEAT.no=0");
+    // gộp việc làm trong sổ nghiệp
+    run("TNA.chung.tran=1;TNA.chung.chac=0.9;G.run.scene=null;deed('trom_ngheo',{})");ok(run("tnaMuc(TN_T.r)")>=1, 'trộm của người nghèo ở trấn (bị thấy): truy nã');
+    run("G.run.tna={};deed('trom_ngheo',{lo:0})");ok(!run("G.run.tna[TN_T.r]"), 'việc làm kín (không lộ): không truy nã');
+    // gộp danh tiếng (Đ1.4) + bản lưu cũ
+    run("G.run.tna=undefined;delete G.run.tnaV;danhPut('reg:'+TN_T.r,-100);advanceTime(1)");ok(run("tnaMuc(TN_T.r)")===2&&run("NK.count('tna.cu')")>0, 'bản lưu cũ: khu đang "Bị truy nã" (danh tiếng) thành truy nã mức truy bắt');
+    run("G=JSON.parse(JSON.stringify(G))");ok(run("tnaMuc(TN_T.r)")===2, 'lưu – tải giữ mức truy nã');
+    ok(run("NK.count('tna.bao')")>0, 'có nhật ký tna.*');
+    } finally { run("Object.assign(TNA,JSON.parse(TNA_BK));Object.assign(TRUY,JSON.parse(TRUY_BK2));FEAT.no=0"); }
   },
   // Sửa-K: truy đuổi — chạy thoát thì bị bám theo, bị chặn kể cả giữa chặng đi dài, cắt đuôi bằng hết hạn/thắng/nơi an toàn, lựa chọn khi bị chặn
   nd2_kiem() {

@@ -934,3 +934,37 @@ Luật: `core2/64-dat-dai.js` (sinh ô, lọc nút), `core2/65-dat-dai-xay-pha.j
 ### O.79 — thôn trấn / thành: mua đất rồi mới xây
 - `datCanMua(n,c)` (core2/65): ở nơi có dân (tran, thanh, cho, ancu) ô chưa phải của ngươi (`chu.k!=='ta'`) thì lựa chọn xây khoá với lý do `dat.canMua`, `datXay` từ chối (nhật ký `dat.canMua`). Tông môn giữ luật cũ (không có gì xây được).
 - Mua đất vẫn chưa mở (`datMua` trả false), nên hiện chưa xây được gì trong thôn trấn / thành; `datSoHuu` dùng trong bài kiểm.
+### O.77 — hệ truy nã kiểu thế giới mở
+Luật: `core2/66-truy-na.js` · bảng: `content/rules/truy-na.js` (TNA) · chữ: `content/text/truy-na.json` (tna.*) · cờ `FEAT.tna` (bật; test.js `fresh` tắt, bài `truy_na` và `dat_dai` bật lại).
+- Dữ liệu: `r.tna[vùng] = {m, tien, t, ly}` — mức 1..5 (chỉ trong máy), tiền treo thưởng (xu), lần sau cùng bị nhận ra, các loại tội. Mỗi đại khu vực riêng; `r.tnaCh` nhân chứng đang chờ; `r.caiT` cải trang tới lúc nào.
+- Mức bằng chữ + biểu tượng: Bị nghi 👁 · Bị truy bắt 📜 · Bị truy nã ⛓ · Trọng phạm 🔥 · Tử tội ☠. Tiền treo thưởng cũng bằng chữ (ít / khá / lớn / rất lớn). HUD: biểu tượng `na` ở dải vết thương (`tnaHud`), không số.
+- Phạm tội `tnaToi(loại)`: xác suất có nhân chứng theo loại nơi (thành 0,95, trấn / chợ 0,5, ẩn cư 0,25, tông 0,6, hoang 0,08; cải trang / che tu vi ×0,6). Thành (≥ 0,9, không cải trang): báo quan ngay. Nơi khác: hộp `tna_chung` (KYNGO sp:1) — đuổi chặn (0,35 + 0,015×thân pháp, tối đa 0,85), mua chuộc (300 xu hoặc 3 linh thạch × sức tội, giữ lời 0,85), diệt khẩu (nghiệp `diet_khau`; lộ 0,35 → cộng tội giết nhân chứng +2), mặc kệ. Đang bận cảnh khác thì hộp chờ lúc rảnh.
+- Sức tội: phá đất dân 2, nợ 2, chống quan sai 1, giết nhân chứng 2, danh tiếng tụt tới mức truy nã 2; việc làm trong sổ nghiệp ở nơi có dân (`TNA.deed`: giết người vô tội / diệt khẩu / giết đoạt bảo / luyện hồn 3, đầu độc / bán người / huyết tế 2, trộm / hiệp đạo / lừa / đào mộ / tham ô 1) — việc làm kín (`lo:0`) không tính.
+- Báo quan `tnaBao`: mức += sức tội (tối đa 5), treo thưởng += 500 xu × sức tội (thành ×2); từ mức 2 danh tiếng khu kéo xuống −60 (= "Bị truy nã" của Đ1.4); quan sai (truy loại quan, chênh = mức − 2) đuổi theo. Mức 5 lan sang mọi vùng khác ở mức 2; dưới đó không lan.
+- Quan sai lùng: tới thôn trấn / thành / chợ trong vùng có xác suất bị nhận ra theo mức (0,15 … 0,9; cải trang ×0,6) → quan sai đuổi, đồng hồ mất dấu tính lại. Chống cự: đánh thắng quan sai / thợ săn → +1 mức; thua → bị giải về ngồi tù.
+- Mất dấu: không bị nhận ra 20 / 45 / 90 / 180 / 365 ngày (theo mức; đang ở vùng khác ×0,5) → hạ một mức; dưới mức 2 thì danh tiếng khu nâng lên −45 (vẫn bị ghét, hết "Bị truy nã"); về 0 thì xoá.
+- Thợ săn tiền thưởng: mỗi tháng, vùng có treo thưởng từ 2.000 xu thì 25% có thợ săn (truy loại `san` mới: 180–540 ngày, dò 10–30 ngày, chặn 0,35; đánh / chạy / thương lượng; vào thành chỉ rút hạn) — đi theo qua mọi vùng.
+- Xoá: mục "Quan phủ" (nhóm Sự vụ) ở thôn trấn / thành của vùng đang bị truy nã: nộp phạt = tiền treo thưởng (hoặc linh thạch = xu / 200), làm công 2 / 6 / 12 / 24 tháng, ngồi tù 1 / 3 / 6 / 12 / 36 tháng; Tử tội không nộp phạt, không làm công. Cải trang: nút ở thôn trấn / thành / chợ khi đang bị truy nã ở đâu đó, 300 xu, 30 ngày.
+- Gộp: nợ (`noTruyNa` → tội `no` ở vùng quê, quan sai đòi nợ vẫn là truy loại `no`; trả hết nợ thì hết truy nã vì nợ; `noTruy` đọc cả hệ mới); phá đất dân (`datPhat` bỏ `DAT.phat.dan.na/naDanh`, gọi `tnaToi('pha_dat')`, hộp xác nhận vẫn báo "có thể bị truy nã"); danh tiếng khu ≤ −60 mà chưa có truy nã thì thành truy nã mức 2 (bản lưu cũ chuyển một lần, nhật ký `tna.cu`).
+- Nhật ký: tna.bao, tna.khong, tna.chung, tna.chon, tna.nhan, tna.ha, tna.xoa, tna.san, tna.giam, tna.cai, tna.cu.
+- Bài: luật `truy_na` (45 ý, đã thêm vào `test:rules`), `dat_dai` sửa theo luật mới; giao diện `truy_na` (6 ý), `dat_dai` sửa.
+
+| mức | chữ | biểu tượng | bị nhận ra khi vào trấn / thành | ngày mất dấu | ngồi tù (tháng) | làm công (tháng) | nộp phạt |
+|---|---|---|---|---|---|---|---|
+| 1 | Bị nghi | 👁 | 0,15 | 20 | 1 | 2 | được |
+| 2 | Bị truy bắt | 📜 | 0,3 | 45 | 3 | 6 | được |
+| 3 | Bị truy nã | ⛓ | 0,5 | 90 | 6 | 12 | được |
+| 4 | Trọng phạm | 🔥 | 0,7 | 180 | 12 | 24 | được |
+| 5 | Tử tội (lan mọi vùng) | ☠ | 0,9 | 365 | 36 | không | không |
+
+### Sửa-O — kết quả
+| bộ | trước | nay |
+|---|---|---|
+| luật (`npm run test:rules`) | 1141 | 1205 |
+| giao diện (`node tools/test-ui.js`) | 209 | 217 |
+
+### Còn dở
+- Mua đất chưa mở → ở thôn trấn / thành hiện chưa xây được gì (câu 79); trận pháp hộ thân vẫn chỉ tĩnh tọa (câu 78).
+- Chưa có hành động "cướp" / "trộm" riêng của người chơi; tội trộm, giết… chỉ tới từ sổ nghiệp (việc làm trong sự kiện) và phá đất.
+- Bot chưa thử Quan phủ, cải trang, hộp nhân chứng (đã thêm tên hàm vào COV_FN, chưa chạy bot).
+- Nhân chứng chưa phải NPC có tên (không vào "Người đã gặp").

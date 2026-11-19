@@ -78,4 +78,4 @@ function truyPick(o){const r=G.run,T=r.truy;if(!T)return {t:''};const t=W().t;db
   else if(a==='giam'&&!T.giam){T.giam=1;const t=W().t;T.until=t+(T.until-t)*TRUY.an.giam;note(contentText('truy.anGiam',[n.name,T.n]));dbg('truy.an',{a,k:T.k,n:n.type});}
   return o;};}
 // quan phủ truy nã vì nợ (Sửa-B): sai dịch lần theo
-{const _tn=noTruyNa;noTruyNa=function(r){const o=_tn.apply(this,arguments);if(feat('truy'))truyStart('no',{n:contentText('truy.noTen'),i:'👮',ek:'sontac',d:0});return o;};}
+{const _tn=noTruyNa;noTruyNa=function(r){const o=_tn.apply(this,arguments);if(typeof tnaOn==='function'&&tnaOn())tnaNo(r);else if(feat('truy'))truyStart('no',{n:contentText('truy.noTen'),i:'👮',ek:'sontac',d:0});return o;};} // Sửa-O: gộp vào hệ truy nã

@@ -23,8 +23,8 @@ function datPhat(n,c,apply){const chu=c&&c.chu;const L=[];if(!chu||chu.k==='ta')
   const k=datLoai(n),D=P.dan;
   if(!apply){L.push(contentText(k==='thanh'?'dat.hDanThanh':'dat.hDan'));L.push(contentText('dat.hNa'));return L;}
   const reg='reg:'+(n.r!=null?n.r:(r.region||0));danhPut(reg,D.danh[k]);
-  if(R()<D.na[k]){const cur=danhGet(reg);if(cur>D.naDanh)danhPut(reg,D.naDanh-cur);
-    if(typeof truyStart==='function')truyStart('quan',{n:contentText('dat.quanTen'),i:'👮',ek:'sontac',d:0});L.push(contentText('dat.biNa'));dbg('dat.truyNa',{id:n.id});}
+  // Sửa-O (câu 77): truy nã đi qua hệ truy nã — trong thành gần như chắc bị báo quan, ở trấn tùy nhân chứng
+  const na=typeof tnaToi==='function'?tnaToi('pha_dat',{node:n}):0;if(na===2)L.push(contentText('dat.biNa'));else if(na===1)L.push(contentText('dat.coChung'));if(na)dbg('dat.truyNa',{id:n.id,na});
   return L;}
 function datHauText(n,c,cuaCt){const H=[];if(cuaCt&&cuaCt.hau)H.push(cuaCt.hau);H.push(...datPhat(n,c,false));return H.join('\n');}
 // các lựa chọn trong mục Đất đai
