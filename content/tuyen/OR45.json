@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 1,
+  "id": "OR45",
+  "loai": "xuat_than",
+  "ten": "Vạch nước trên bậc",
+  "xuatThan": "xt_nguoi_hoc_dao_sau_mua_lu",
+  "goiYDaiLo": [
+    "phi_thang"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Người còn sau lũ",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Ở {LOC01}, vạch bùn cao hơn chỗ treo đèn. Mấy hộ đọc tên người còn sống và đồ mất trước khi đi tìm mái {LOC12}. Người tới sau cần một bản để biết nên tìm ai trên đường.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi người còn rồi đưa tới chỗ trú",
+          "t": "Ngươi đọc từng tên, ghi đồ không còn và dẫn nhóm tới mái ở {LOC12}.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Chép dấu nước cùng ngày nhà chìm",
+          "t": "Ngươi ghi vạch cao, hỏi người sống ngày nước đổi để so khi tra trụ.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tìm chỗ ở và công phàm sau lũ",
+          "t": "Ngươi xin mái trú, nhận một lượt làm khô giấy đủ nuôi mình qua kỳ đầu.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Nhóm trú đi về {LOC12}, tên người thất lạc chưa đủ trong bản kê.",
+        "su": "Nhóm trú đi về {LOC12}, tên người thất lạc chưa đủ trong bản kê.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Lịch trụ trái mực nước",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC05"
+      },
+      "mo": "Dấu bùn ở {LOC01} khớp ngày bản mở trụ {LOC05} ghi đổi dòng. Phía không nhận nhánh mới có dấu mưa nhưng ít bùn hơn. Người giữ bản cho xem phần nước đi trước khi trời mưa.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Khảo hai bờ và đối lịch mở",
+          "t": "Ngươi chứng được nhánh đổi làm nước dồn, tách phần ấy khỏi mưa tự nhiên.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi điều kiện nhận khóa trụ",
+          "t": "Ngươi ghi người có thể giao khóa và vùng phải dời nếu giữ nhánh ngày cũ.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Vẽ lũ thành tờ thủy chí",
+          "t": "Ngươi chép vạch, ngày và nhánh vào cùng trang để người không biết trận đọc.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lịch trụ cất lại, các hộ chỉ còn vạch nước để tự đối ngày.",
+        "su": "Lịch trụ cất lại, các hộ chỉ còn vạch nước để tự đối ngày.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Học nét có đầu có cuối",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC12"
+      },
+      "mo": "Tại {LOC12}, người đọc trận đặt hai bản sửa cạnh nhau. Một bản dựa vào nguồn đá, bản kia đòi người dẫn. Họ bảo người vô căn vẫn có thể học đọc, còn lượt vận hành phải do người có nghề nhận.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đọc phương sửa dùng nguồn đá",
+          "t": "Ngươi nhờ người biết trận đối bản và xác nhận cách giữ nhánh không dùng người.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin thợ đứng tên vận hành thử",
+          "t": "Ngươi học vạch kiểm và để thợ giữ việc cần linh lực, chỉ nhận trách nhiệm điều phối.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Chép nguyên nhân và cách đọc phàm",
+          "t": "Ngươi ghi bản nào đòi người, dùng lời dễ đọc để giải thích nước theo lịch.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hai bản trở vào hòm, phần đòi người chưa được tra cùng lịch.",
+        "su": "Hai bản trở vào hòm, phần đòi người chưa được tra cùng lịch.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Lối đi trước ngày đổi dòng",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Các hộ {LOC01} đặt gánh tại chỗ khô trước ngày thợ làm việc. Một số nhà sẽ phải bỏ đất nếu trụ chạy lại theo nhánh cũ. Người coi trụ xin biết ai đã đồng ý và ai còn ở dưới.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Cho thợ sửa dòng và giao lượt kiểm",
+          "t": "Ngươi dùng nguồn đá đã đối, đếm người rút rồi giao hộ theo dõi nhánh an toàn.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận khóa với thợ vận hành",
+          "t": "Ngươi cho đưa hộ khỏi nền thấp, nhận quyền trụ và thử một lượt bằng nguồn đá dự trữ.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Dời người rồi lưu bản lũ",
+          "t": "Ngươi giúp hộ lên mái khô, chép nguyên nhân vào thủy chí và tìm tiếp công phàm.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Các hộ tự lên nền cao, người coi trụ giữ nguyên lịch trong phiên.",
+        "su": "Các hộ tự lên nền cao, người coi trụ giữ nguyên lịch trong phiên.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Một bữa cơm trên nền cao",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Bếp trên nền cao ở {LOC01} đã đỏ lửa. Người giữ nhánh mang mốc đo, còn người coi trụ mang giấy nhắc vùng bỏ đất. Tại chỗ trú, người làm công đang kê lịch nhận việc sau lũ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giữ đạo coi nước cùng các hộ",
+          "t": "Ngươi giao lịch lâu dài và khắc vạch nước cho hộ tới lượt kiểm nhánh.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ quyền trụ, để thợ vận hành",
+          "t": "Ngươi đối lượt đã thử và nhận giấy vùng chuyển nước trước khi giữ chìa.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Sống bằng công phàm và giao thủy chí",
+          "t": "Ngươi nhận công đã chọn, gửi người ở mái trú bản giải thích nhánh gây lũ.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cơm được chia theo hộ, bản nhánh và vạch lũ do người ở lại cất.",
+        "su": "Cơm được chia theo hộ, bản nhánh và vạch lũ do người ở lại cất.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Học để nước có đường",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Dòng đi qua nhánh đã sửa, hộ đổi lượt đứng xem vạch mỗi ngày mưa. Khi thợ rời đi, người giữ thủy biết gọi ai xem lại chỗ nước lên. Mốc cao khắc cả ngày nhà phải dỡ và ngày dòng thôi dồn.",
+      "su": "{LOC01} có nhánh nước an toàn và lịch coi nước do các hộ giữ.",
+      "dauVong": "mốc nước cao có nét khắc ngày dòng đổi trước lũ."
+    },
+    {
+      "id": "B",
+      "ten": "Đạo trên nơi nhà chìm",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Trụ chạy hết lượt thử với nguồn đã chọn và người có nghề giữ việc cần linh lực. Ngươi nhận được quyền điều phối cùng danh sách hộ mất đất. Bản đồ để mở trên bàn mỗi khi có người xin đổi nhánh.",
+      "su": "Quyền trụ về tay {ten} sau lượt chạy thử, trách nhiệm dời hộ có bản kê.",
+      "dauVong": "bản đồ ghi vùng chịu nước khi trụ chuyển dòng."
+    },
+    {
+      "id": "C",
+      "ten": "Sau lũ vẫn ăn cơm",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Lịch làm công nuôi ngươi qua kỳ sau. Người ở mái trú có thể đọc nguyên nhân lũ từ cuốn thủy chí mà không phải học vận trận. Trong bữa cơm đầu nhà mới, ngươi đọc lại đúng tên những người còn.",
+      "su": "Người ghi thủy chí giữ nghề phàm và lưu nguyên nhân lũ ở chỗ trú.",
+      "dauVong": "quyển thủy chí ghi nhánh gây lũ bằng lời người thường có thể đọc."
+    }
+  ],
+  "ngoai": "Cơm được chia theo hộ, bản nhánh và vạch lũ do người ở lại cất."
+}
