@@ -20,7 +20,7 @@ function fresh(patch) {
     try{G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0]);}
     finally{genWorld=original;}
     NK.on=true;NK.clear();G.run.scene=null;G.run.rootKnown=1; // Sửa-C.6: linh căn luôn ẩn tới khi trắc; bài cũ coi như đã trắc
-    FEAT.an=0;FEAT.nc=0;FEAT.no=0;FEAT.nha=0; // nợ/nhà ở (Sửa-B) tắt, bài no_nha bật lại; ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
+    FEAT.an=0;FEAT.nc=0;FEAT.no=0;FEAT.nha=0;FEAT.truy=0; // nợ/nhà ở (Sửa-B) tắt, bài no_nha bật lại; ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
   })()`);
   if (patch) run(patch);
 }
@@ -28,6 +28,65 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Sửa-K: truy đuổi — chạy thoát thì bị bám theo, bị chặn kể cả giữa chặng đi dài, cắt đuôi bằng hết hạn/thắng/nơi an toàn, lựa chọn khi bị chặn
+  truy() {
+    fresh("FEAT.truy=1;G.screen='map';G.run.pham=0;G.run.realm=1;G.run.kyT=W().t;G.run.tmT=W().t;TRUY_BK=JSON.stringify(TRUY)");
+    try {
+    run("TRUY.loai.tac.p=1;startCombat({k:'sontac'},{kind:'node'});G.run.scene.over='flee';combatContinue()");
+    ok(run("G.run.truy&&G.run.truy.k")==='tac', 'chạy thoát sơn tặc: bị truy (loại tac)');
+    ok(run("G.run.truy.until>W().t&&G.run.truy.nx>W().t"), 'có hạn truy và lần dò tới');
+    run("G.run.truy=null;G.run.scene=null;TRUY.loai.thu.p=1;startCombat({k:'lang'},{kind:'node'});G.run.scene.over='flee';combatContinue()");
+    ok(run("G.run.truy&&G.run.truy.k")==='thu', 'chạy thoát yêu thú: loại thu');
+    run("G.run.truy=null;G.run.scene=null;TRUY.loai.thu.p=0;startCombat({k:'lang'},{kind:'node'});G.run.scene.over='flee';combatContinue()");
+    ok(run("!G.run.truy"), 'xác suất bám theo 0: không bị đuổi');
+    run("G.run.scene=null");
+    ok(run("truyStart('tu',{d:-2})")===null, 'địch kém hai cảnh giới: không đuổi');
+    run("TRUY.loai.tu.ngay=[5,5];G.run.truy=null;truyStart('tu',{d:0});TK_A=G.run.truy.until-W().t;G.run.truy=null;truyStart('tu',{d:3});TK_B=G.run.truy.until-W().t");
+    ok(Math.abs(run("TK_B/TK_A")-2.5)<1e-6, 'địch mạnh hơn ba bậc: đuổi dai gấp 2,5 lần');
+    ok(run("truyP({k:'tu',d:3})>truyP({k:'tu',d:0})"), 'địch mạnh hơn: dễ chặn được hơn');
+    run("G.run.realm=2;G.run.hide=null");const p0=run("truyP({k:'tu',d:0})");run("G.run.hide=1");
+    ok(run("hideOn()")&&run("truyP({k:'tu',d:0})")<p0, 'che giấu tu vi: khó bị chặn hơn');
+    run("G.run.hide=null;G.run.realm=1");
+    const tip=run("truyTip()");ok(/Bị truy đuổi/.test(tip)&&!/\d/.test(tip), 'chú thích bằng chữ, không có số');
+    run("W().t=G.run.truy.until+1;advanceTime(1)");ok(run("!G.run.truy"), 'hết hạn: tự cắt đuôi');
+    // chặng đi dài: bị chặn giữa chặng
+    const far=run(`(()=>{const r=G.run;const a=nodeById(r.at);let best=null,bh=0;for(const R0 of W().regions)for(const n of R0.nodes){if(n.id===r.at)continue;n.fog=Math.max(n.fog||0,1);const p=findPath(r.at,n.id);if(!p||p.length<2)continue;const h=edgeLen(p[0],p[1])/walkSpeed();if(h>bh&&h<24*40){bh=h;best=n.id;}}return best;})()`);
+    ok(far!=null&&run(`edgeLen(G.run.at,${far})/walkSpeed()`)>24, 'tìm được chặng đi dài (hơn một ngày đường)');
+    run(`TRUY.loai.tac.chan=1;TRUY.manh.chan=0;G.run.scene=null;G.run.halt=false;travelTo(${far});G.run.dest=${far};TK_S=edgeLen(G.run.moving.path[0],G.run.moving.path[1])/walkSpeed();truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});G.run.truy.nx=W().t+TK_S*0.5;G.run.truy.until=W().t+999*HD;G.run.kyT=W().t;G.run.tmT=W().t;TK_T0=W().t`);
+    run("travelTick(TK_S*20)");
+    ok(run("G.run.scene&&G.run.scene.type==='kyngo'&&G.run.scene.ev==='truy_chan'"), 'đang đi chặng dài thì bị chặn (hộp lựa chọn)');
+    ok(run("!!G.run.moving&&G.run.moving.prog>0&&G.run.moving.prog<1&&G.run.halt===true"), 'dừng giữa chặng, không nhảy về nút ('+run("G.run.moving&&G.run.moving.prog")+')');
+    ok(run("W().t-TK_T0<TK_S"), 'bị chặn trước khi đi hết chặng đầu');
+    ok(run("NK.count('truy.chan')")>0, 'có nhật ký truy.chan');
+    const L=JSON.parse(run("JSON.stringify(kyOpts(G.run.scene).map(o=>o.l))"));
+    ok(L.length===4&&L.includes('Chạy tiếp')&&L.includes('Thương lượng')&&L.includes('Nộp của cho yên'), 'sơn tặc: đánh / chạy tiếp / nộp của / thương lượng');
+    run("TRUY.chay.goc=1;kyPick(1)");ok(run("!!G.run.truy&&G.run.truy.nx>W().t"), 'chạy tiếp thành công: vẫn bị bám, lần dò lùi lại');
+    run("G.run.scene=null;truyChan()");run("kyPick(0)");
+    ok(run("G.run.scene.type==='combat'&&G.run.scene.truyCh===1"), 'chọn đánh: vào trận thật');
+    run("G.run.scene.over='win';combatContinue()");ok(run("!G.run.truy"), 'đánh thắng: dứt truy đuổi');
+    ok(run("!!G.run.moving"), 'sau trận vẫn đứng giữa đường, có thể đi tiếp');
+    // nộp của
+    run("G.run.scene=null;truyStart('tac',{n:'Sơn tặc',ek:'sontac'});G.run.st=100;truyChan()");
+    run("kyPick(kyOpts(G.run.scene).findIndex(o=>o.l==='Nộp của cho yên'))");ok(run("!G.run.truy&&G.run.st===75"), 'nộp của: mất một phần linh thạch, hết bị đuổi');
+    // biết trước nhờ thần thức
+    run("G.run.scene=null;truyStart('thu',{n:'Yêu Lang',ek:'lang'});G.run.tkUntil=W().t+99;truyChan()");
+    ok(run("kyOpts(G.run.scene)[0].l")==='Lẩn đi trước khi bị thấy'&&/Thần thức báo trước/.test(run("G.run.scene.text")), 'phóng thần thức: biết trước, có lựa chọn lẩn đi');
+    ok(run("kyOpts(G.run.scene).length")===3, 'yêu thú không nộp của hay thương lượng');
+    run("G.run.tkUntil=0;G.run.scene=null");
+    // bị chặn trong trận / trong địa điểm thì không mở chồng
+    run("startCombat({k:'sontac'},{kind:'node'});G.run.truy.nx=W().t;truyCheck()");ok(run("G.run.scene.type==='combat'"), 'đang trong trận: không chặn chồng, hoãn dò');
+    run("G.run.scene=null");
+    // nơi an toàn
+    const th=run("W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin').id");
+    run(`G.run.truy=null;truyStart('tac',{n:'Sơn tặc'});arrive(${th})`);ok(run("!G.run.truy"), 'sơn tặc không dám theo vào thành');
+    run(`G.run.truy=null;truyStart('tu',{n:'Tán tu'});G.run.truy.until=W().t+10*HD;arrive(${th})`);ok(run("G.run.truy&&Math.abs(G.run.truy.until-W().t-5*HD)<1e-6"), 'tu sĩ: vào thành chỉ rút hạn còn một nửa');
+    // nợ: quan phủ truy nã → sai dịch lần theo; trả hết nợ thì thôi
+    run("G.run.truy=null;FEAT.no=1;G.run.bac=-5000;G.run.noTra={t0:W().t,han:W().t+HM,lan:1};noTruyNa(G.run)");ok(run("G.run.truy&&G.run.truy.k")==='no', 'truy nã vì nợ: sai dịch truy đuổi');
+    run("G.run.bac=0;G.run.noTra=null;truyCheck()");ok(run("!G.run.truy"), 'trả hết nợ: sai dịch thôi đuổi');
+    // bản lưu cũ
+    run("delete G.run.truy;G.run.scene=null;advanceTime(5)");ok(run("!G.run.truy&&truyOn()===false&&truyTip()===''"), 'bản lưu cũ (không có r.truy): chạy bình thường');
+    } finally { run("Object.assign(TRUY,JSON.parse(TRUY_BK));FEAT.truy=0;FEAT.no=0"); }
+  },
   // Đ8.6: đất ma — ba khu, bậc, hồi theo thế kỷ, nguy hiểm, thôn trấn biến mất, tu luyện, nhiễm ma khí
   // Đ9.1: bộ máy tuyến — đi hết OR01 (Con nhà nông), lỡ hạn thì tự diễn, vai mất dùng người/vật thay, bản lưu cũ, khoảng luân hồi dài, đại lộ mở từ hồi 2 và đổi một lần
   // Sửa-J câu 44: lời mời chưa trả lời nằm trong Sổ tay (Mệnh thư), mở lại được trước hạn

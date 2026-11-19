@@ -522,6 +522,29 @@ const TESTS = {
     await p.waitForTimeout(2300);
     ok(await ev(p, () => document.querySelectorAll('#favpop .favrow').length === 0), 'biến mất sau chừng 2 giây');
   },
+  // Sửa-K: đang bị truy đuổi — biểu tượng trên bản đồ có chú thích chữ, không số; bị chặn giữa đường mở hộp lựa chọn, chọn đánh vào trận
+  async truy(p) {
+    await ev(p, () => {FEAT.truy=1;const r=G.run;r.pham=0;r.realm=1;r.scene=null;UI.modal=null;UI.panel=null;r.truy=null;truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});render();});
+    await p.waitForTimeout(150);
+    const tp = await ev(p, () => {const e=[...document.querySelectorAll('.wi.truy')][0];return e?e.getAttribute('data-tip')+'|'+e.innerText:'';});
+    ok(/Bị truy đuổi/.test(tp) && /Sơn tặc/.test(tp), 'biểu tượng bị truy đuổi trên bản đồ, chú thích bằng chữ');
+    ok(!/\d/.test(tp), 'không hiện con số');
+    await ev(p, () => {const r=G.run;const far=W().regions.flatMap(R=>R.nodes).filter(n=>n.id!==r.at).sort((a,b)=>edgeLen(r.at,b.id)-edgeLen(r.at,a.id))[0];far.fog=Math.max(far.fog||0,1);r.halt=false;travelTo(far.id);r.dest=far.id;
+      TRUY.loai.tac.chan=1;r.truy.until=W().t+999*HD;r.truy.nx=W().t+edgeLen(r.moving.path[0],r.moving.path[1])/walkSpeed()*0.4;r.kyT=W().t;r.tmT=W().t;travelTick(9999);render();});
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => G.run.scene&&G.run.scene.ev==='truy_chan'&&G.run.moving&&G.run.moving.prog>0&&G.run.moving.prog<1), 'bị chặn giữa chặng đi dài, đứng lại giữa đường');
+    const bt = await p.locator('[data-act="kyPick"]').allInnerTexts();
+    ok(bt.length===4 && bt.some(x=>/Chạy tiếp/.test(x)) && bt.some(x=>/Nộp của/.test(x)), 'hộp chặn đường có các lựa chọn ' + JSON.stringify(bt));
+    await p.locator('[data-act="kyPick"][data-arg="0"]').click();
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => G.run.scene&&G.run.scene.type==='combat'&&G.run.scene.truyCh===1), 'chọn đánh: vào trận');
+    await ev(p, () => {G.run.scene.over='win';combatContinue();render();});
+    await p.waitForTimeout(150);
+    ok(await ev(p, () => !G.run.truy && !document.querySelector('.wi.truy')), 'thắng: hết bị truy, biểu tượng tắt');
+    ok(await ev(p, () => NK.count('truy') > 0), 'có nhật ký truy.*');
+    await ev(p, () => {TRUY.loai.tac.chan=0.4;});
+    ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
+  },
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');

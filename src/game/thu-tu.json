@@ -315,6 +315,8 @@
  "core2/58-am-hoi.js",
  "data/06-tuyen-du-lieu.js",
  "core2/59-menh-tuyen.js",
+ "content/rules/truy.js",
+ "core2/60-truy-duoi.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",

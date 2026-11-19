@@ -741,6 +741,30 @@ Luật `core2/58-am-hoi.js` (viết lại), `core2/59-menh-tuyen.js` (thêm); b�
 - Túi người nhận đầy (12 món) thì món nhận thêm bị mất (có `dbg amh.tran`) — hiếm.
 - Bot chưa biết ngồi Ám Hội mới (không chạy bot).
 
+## Sửa-K — truy đuổi (yêu cầu mới B)
+Luật: `src/game/core2/60-truy-duoi.js` · bảng: `content/rules/truy.js` (TRUY) · chữ: `content/text/truy.json` (truy.*) · cờ `FEAT.truy` (bật; test.js `fresh` tắt, bài `truy` bật lại).
+- Chạy thoát khỏi trận (`combatContinue` với `flee`) → tung `p` theo loại địch; trúng thì `r.truy={k,n,i,ek,el,d,t0,until,nx}` (một kẻ bám theo một lúc; kẻ mới đuổi dai hơn mới thay). Không đuổi: thiên kiếp, luận bàn, ảo giác tâm ma, boss, bí cảnh (bt), quan ải, khôi lỗi/vật (f:'vat'), địch kém từ 2 cảnh giới.
+- Loại: f:'thu' → thu; f:'quy' → quy; sontac → tac; người khác → tu; kẻ thù kiếp trước / kẻ truy sát (after.nemesis, ent) → ke; quan phủ truy nã vì nợ (`noTruyNa`, Sửa-B) → no; `cuop` có sẵn trong bảng, gọi `truyStart('cuop',…)` (chưa có hành động cướp nào gọi).
+- Dò: mỗi `gian` giờ ngẫu nhiên tung `chan`. Đang đi: `travelTick` được chia tới đúng lúc dò, bị chặn thì `snapStop()` (tâm ô gần nhất giữa chặng) + `r.halt`, mở KYNGO `truy_chan` (sp:1); xong bấm "Đi tiếp". Đang có cảnh khác / bế quan / ngoài bản đồ: hoãn nửa khoảng, không chồng.
+- Cắt đuôi: hết hạn; thắng trận chặn (thua cũng dứt); vào thành (huỷ với thu/tac/quy, rút nửa hạn còn lại với tu/ke/cuop một lần, quan sai không sợ thành); tông môn mình huỷ; trả hết nợ thì sai dịch thôi; nộp của / thương lượng / lẩn đi thành công.
+- Né / biết trước: che giấu tu vi (×hide, trừ yêu thú), thần thức hơn địch (đang phóng thần thức hoặc địch kém cảnh giới) ×than và có thêm lựa chọn "Lẩn đi".
+- HUD: biểu tượng `truy` ở dải vết thương (chữ nhỏ "đuổi"), chú thích chữ "vẫn bám riết / sắp mất dấu…", không số. Nhật ký: truy.bat, truy.do, truy.chan, truy.chon, truy.danh, truy.an, truy.het, truy.khong.
+
+| loại | p bám | ngày truy | giờ giữa 2 lần dò | chặn mỗi lần | lựa chọn |
+|---|---|---|---|---|---|
+| thu yêu thú | 0,45 | 1–4 | 6–18 | 0,35 | đánh, chạy |
+| tac sơn tặc | 0,6 | 3–8 | 8–24 | 0,4 | đánh, chạy, nộp, thương lượng |
+| tu tu sĩ | 0,5 | 5–15 | 12–36 | 0,35 | đánh, chạy, thương lượng |
+| ke kẻ thù | 0,8 | 15–40 | 24–72 | 0,3 | đánh, chạy, thương lượng |
+| quy quỷ vật | 0,3 | 1–2 | 4–12 | 0,4 | đánh, chạy |
+| no quan sai | 1 | 20–45 | 24–96 | 0,3 | đánh, chạy, nộp, thương lượng |
+| cuop kẻ bị cướp | 0,7 | 7–20 | 12–48 | 0,35 | đánh, chạy, nộp, thương lượng |
+
+Hệ số khác: địch hơn mỗi bậc (tối đa 3) hạn ×(1+0,5), chặn +0,08 · che tu vi ×0,6 · thần thức hơn ×0,8 · lẩn đi 0,6 · chạy tiếp 0,4 + 0,015×thân pháp (tối đa 0,85), thành công lùi lần dò 12–24 giờ · nộp của 25% linh thạch (ít nhất 5) hoặc 30% tiền phàm · thương lượng 0,3 + 0,01×đạo tâm (tối đa 0,7) · vào thành rút hạn ×0,5.
+
+Bài kiểm: test.js `truy` (29 ý, có bài bị chặn giữa chặng đi dài hơn một ngày đường); test-ui.js `truy`.
+Còn dở: chưa có hành động "cướp" của người chơi để dùng loại cuop; truy đuổi chưa nối ô đất (Đ8b); bot chưa có lựa chọn riêng (dùng chung kyPick).
+
 ## YÊU CẦU MỚI (chưa làm, đã xếp lịch)
 A. Ô ĐẤT theo địa điểm (xếp: đợt mới "Đ8b Đất đai", làm sau Đ9 bộ máy, trước Đ10):
    - Mỗi địa điểm có N ô đất; mỗi ô mang 1 công trình → mở đúng 1 mục trong modal địa điểm (vd thành A 3 ô: tửu lầu, trạm dịch, tạp hoá → modal chỉ có 3 mục đó). Thay cách hiện nút cố định theo loại nơi (PGROUP) bằng nút sinh từ công trình trên ô.
@@ -753,3 +777,8 @@ B. TRUY ĐUỔI (xếp: Sửa-K, ngay sau Sửa-J):
    - Còn thời hạn truy đuổi: cứ mỗi khoảng ngẫu nhiên có xác suất bị tấn công, kể cả ĐANG DI CHUYỂN trên đường (chặng đi dài trong hạn truy vẫn có thể bị chặn giữa đường).
    - Hết hạn / giết được / tới nơi an toàn có thể cắt đuôi (tự thiết kế); nối hệ giao tranh/thần thức/che giấu tu vi (core2/23–30) để có cách né.
 THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuyến GPT) → Đ8b Đất đai → Đ10 → Đ11 → Đ12.
+
+## NGƯỜI DÙNG CHỐT ĐỢT 8 (câu 47–49) — làm ở Sửa-L (sau Sửa-K)
+47. B: khi người chơi đưa đồ ra bán ở Ám Hội, được tự chọn danh sách vật muốn nhận (tên + số lượng) trước khi đấu; linh thạch là một lựa chọn trong danh sách nếu muốn.
+48. B: tạm dừng đồng hồ 10 giây khi người chơi đang mở phần Thương lượng (giới hạn vài giây, tránh lạm dụng).
+49. Túi đầy (NPC lẫn nhân vật chính): đồ nhận thêm vào "tạm giữ bên người" (ngoài các ô túi); sau 365 ngày không dọn chỗ để cất vào túi thì mất. Áp chung cho mọi nguồn nhận đồ (Ám Hội, đấu giá, nhặt, phần thưởng…), thống nhất với cơ chế gửi tại chỗ của Sửa-G (xem có nên gộp).

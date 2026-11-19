@@ -23,7 +23,8 @@ function DaiVetThuong() {
   }
   if (r.tamma >= 60) L.push({ k: 'ma', t: PS.tmWord(r.tamma), tip: 'Tâm ma dày\nĐủ 100 sẽ phải đối mặt với chính mình. Tĩnh tọa, dưỡng thương, bế quan để giảm.', cls: '' });
   if (s.life - r.age < s.life * 0.12) L.push({ k: 'tho', t: PS.durShort(Math.max(0, s.life - r.age) * PS.HY), tip: 'Thọ nguyên sắp cạn\nĐột phá để sống lâu hơn.', cls: 'crit' });
-  if (PS.entsHere(r.region).some(e => e.type === 'truysat')) L.push({ k: 'truy', t: '', tip: 'Bị truy đuổi\nCó kẻ đang lần theo dấu ngươi.', cls: '' });
+  if (PS.truyOn && PS.truyOn()) L.push({ k: 'truy', t: 'đuổi', tip: PS.truyTip(), cls: 'truy' });
+  else if (PS.entsHere(r.region).some(e => e.type === 'truysat')) L.push({ k: 'truy', t: '', tip: 'Bị truy đuổi\nCó kẻ đang lần theo dấu ngươi.', cls: '' });
   return L.map((x, i) => (
     <div key={i} className={'wi ' + x.cls} {...tip(x.tip)}><svg viewBox="0 0 24 24"><path d={WICON[x.k]} /></svg><small>{x.t}</small></div>
   ));
