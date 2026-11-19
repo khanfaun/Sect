@@ -1,4 +1,4 @@
-// Sửa-I câu 39 + Sửa-J câu 42/42b: U Minh Ám Hội — lần lượt từng món trên bàn, đấu nhiều vòng, đếm ngược thời gian thật.
+// Sửa-I câu 39 + Sửa-J câu 42/42b/43 (người ngồi bàn hóa trang, che tu vi): U Minh Ám Hội — lần lượt từng món trên bàn, đấu nhiều vòng, đếm ngược thời gian thật.
 // Dữ liệu do amView() (core2/58-am-hoi.js) dựng sẵn; đồng hồ chạy bằng amTick() mỗi phần tư giây.
 import { useEffect, useState } from 'react';
 import { PS } from '../html';
@@ -16,6 +16,9 @@ export function AmHoi() {
   const head = <span className="am-luot">{V.luot}</span>;
   return (
     <Card title={T('amh.n')} sub={V.ltTxt} head={head} cls="amhoi">
+      {V.ban.length > 0 && (
+        <div className="am-ban"><small>{T('amh.banHead')}: {V.ban.map((b, i) => <span key={i} className="am-khach">{i ? ' · ' : ''}{b.an}{b.ten ? ' (' + b.ten + ')' : ''} — <i>{b.cg}</i></span>)}</small></div>
+      )}
       {V.lo && (
         <div className="am-lo">
           <p className="am-ai">{V.lo.ai}</p>

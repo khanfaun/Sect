@@ -372,6 +372,8 @@ const TESTS = {
     ok(/U Minh Ám Hội/.test(t) && /Lượt \d+\/\d+/.test(t) && /Giá trị/.test(t), 'hộp Ám Hội: lượt, món, giá trị theo nhu cầu');
     ok(/muốn nhận/.test(t) && /Trả \d+ /.test(t), 'hiện danh sách vật người bán muốn nhận + nút trả');
     ok(/Gõ búa sau (9|10) giây/.test(t), 'đếm ngược hiện trên hộp thoại');
+    const ban = await ev(p, () => (document.querySelector('.amhoi .am-ban')||{}).innerText||'');
+    ok(/Quanh bàn/.test(ban) && /Khách đeo/.test(ban) && (/tu vi bị che/.test(ban) || /\(là /.test(ban)), 'người ngồi bàn hóa trang, che tu vi: '+ban.slice(0,90));
     await shot(p, 'am_hoi');
     await p.waitForTimeout(1300);
     t = await ev(p, () => (document.querySelector('.amhoi .am-dem')||{}).innerText||'');

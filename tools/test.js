@@ -1581,7 +1581,7 @@ const TESTS = {
     const n=run("W().regions.flatMap(R=>R.nodes).find(n=>(n.type==='thanh'||n.type==='ma')&&n.state!=='ruin').id");
     run(`(()=>{const r=G.run;r.at=${n};W().t=Math.floor(W().t/HD)*HD+HD+23;CC_FORCE=1;amStart(nodeById(${n}));CC_FORCE=null;})()`);
     const lo=run("JSON.stringify(G.run.scene.q.find(l=>l.it.id==='cc_tao_hoa_dich')||null)");
-    ok(lo!=='null'&&run("G.run.scene.ppl.some(p=>p.k==='khach'&&p.tui.some(x=>x.id==='cc_tao_hoa_dich'))"), 'Ám Hội: khách vô danh mang Tạo Hóa Thần Dịch trong túi, đem ra bàn ('+(lo!=='null'&&JSON.parse(lo).v)+' Hạ)');
+    ok(lo!=='null'&&run("G.run.scene.ppl.some((p,i)=>(p.k==='vai'||p.k==='tk')&&amTui(G.run.scene,i).some(x=>x.id==='cc_tao_hoa_dich'))"), 'Ám Hội: một NPC thật ngồi bàn mang Tạo Hóa Thần Dịch trong túi, đem ra bàn ('+(lo!=='null'&&JSON.parse(lo).v)+' Hạ)');
     run("CC_FORCE=null");ok(run(`W().regions.flatMap(R=>R.nodes).filter(n=>!ccAmVt(n)).length>0`), 'không phải lúc nào Ám Hội cũng có');
   },
   // Sửa-H câu 36 + 32: đồ cải căn có phẩm (tạp/tứ → tam → song → Địa → Thiên), đồ dởm, cộng dồn sau thất bại, lô ở đấu giá thường
@@ -1599,9 +1599,18 @@ const TESTS = {
     const snap=()=>run("JSON.stringify(Object.keys(VAI_NP).map(ma=>vaiTui(ma).map(x=>x.u).join(',')))");const s0=snap();
     ok(run("venueDo('amhoi','vao')")&&run("G.run.scene.type")==='amhoi', 'ngồi vào bàn: mở hộp thoại Ám Hội');
     const sc=()=>JSON.parse(run("JSON.stringify(G.run.scene)"));let S=sc();
-    ok(S.q.every(L=>{const p=S.ppl[L.own];const T=p.k==='vai'?JSON.parse(run(`JSON.stringify(vaiTui('${p.ma}'))`)):p.tui;return T.some(x=>x.u===L.u);}), 'mọi món trên bàn là đồ đang nằm trong túi người đưa (không tạo mới)');
+    ok(run("G.run.scene.q.every(L=>amTui(G.run.scene,L.own).some(x=>x.u===L.u))"), 'mọi món trên bàn là đồ đang nằm trong túi người đưa (không tạo mới)');
+    // Sửa-J câu 43: người ngồi bàn chỉ là NPC thật, hóa trang, che tu vi
+    ok(S.ppl.length>=2&&S.ppl.every(p=>p.k==='vai'||p.k==='tk')&&S.ppl.some(p=>p.k==='tk'), 'quanh bàn chỉ có NPC thật: '+S.ppl.filter(p=>p.k==='vai').length+' người giữ vai, '+S.ppl.filter(p=>p.k==='tk').length+' thiên kiêu (không khách vô danh)');
+    ok(run("G.run.scene.ppl.every(p=>p.k!=='vai'||(vaiNow(p.ma).song&&VAI_NP[p.ma].tu>=1))&&G.run.scene.ppl.every(p=>p.k!=='tk'||G.run.rivals[p.i].alive)"), 'người giữ vai là tu sĩ còn sống; thiên kiêu còn sống');
+    ok(run("G.run.scene.ppl.every((p,i)=>p.nhan||(amTen(G.run.scene,i)===p.an&&!amTen(G.run.scene,i).includes(amThat(p).ten)))")&&run("amView().ban.every(b=>b.ten||b.cg==='tu vi bị che')"), 'chưa nhận ra: chỉ thấy tên hóa trang, tu vi bị che');
     ok(S.q.every((L,i)=>i===0||S.q[i-1].v<=L.v), 'vật quý xếp về cuối buổi');
     ok(snap()===s0, 'mở hội không làm đổi túi NPC');
+    run("G.run.nang={khao:100,duoc:0};G.run.rivals.forEach(x=>x.rel=100);G.run.realm=5");
+    ok(run("G.run.scene.ppl.every(p=>amNhanP(p)>AM_HOI.nhan.goc)")&&run("amNhanP({k:'tk',i:0})")>run("(G.run.nang={khao:0,duoc:0},G.run.rivals.forEach(x=>x.rel=0),amNhanP({k:'tk',i:0}))"), 'khảo vật, giao tình, thần thức làm dễ nhận ra người hóa trang hơn');
+    run("G.run.realm=2;G.run.nang={khao:0,duoc:0}");
+    ok(run("(()=>{const sc=G.run.scene;const p=sc.ppl[0];const o=p.nhan;p.nhan=1;const t=amTen(sc,0),b=amView().ban[0];p.nhan=o;return t.includes(amThat(p).ten)&&b.ten.length>0&&REALM.includes(b.cg);})()"), 'nhận ra: hiện tên thật và tu vi');
+    const ppl0=run("JSON.stringify(G.run.scene.ppl.map(p=>p.k+(p.ma||p.i)))");
     ok(!run("venueDo('amhoi','vao')"), 'đang ngồi bàn thì không mở lần nữa');
     // danh sách vật muốn nhận
     ok(S.ph==='lot'&&S.lot.muon.length>=1&&S.lot.muon[0].key.startsWith('lt:')&&S.lot.muon.every(m=>m.sl>=1&&m.n), 'người bán nêu danh sách vật muốn nhận (tên + số lượng): '+S.lot.muon.map(m=>m.sl+' '+m.n).join(' / '));
@@ -1651,6 +1660,7 @@ const TESTS = {
       ok(run("G.run.relics.length+G.run.pills.length+G.run.qitems.length")===nr+1&&!JSON.parse(run(`JSON.stringify(amTui(G.run.scene,${own}))`)).some(x=>x.u===L.u), 'món đấu rời túi người bán, vào túi ngươi');
     } else ok(false,'không có lô để thử thắng');
     run("AM_HOI.nhu=AM_HOI._nhu");
+    ok(run("JSON.stringify(G.run.scene.ppl.map(p=>p.k+(p.ma||p.i)))")===ppl0&&run("G.run.scene.ppl.every((p,i)=>amTui(G.run.scene,i)&&(p.k!=='vai'||vaiNow(p.ma).song))"), 'qua nhiều món: không ai biến mất giữa buổi, không ai mới ngồi vào');
     // tới lượt mình: đưa đồ của mình ra
     run("(()=>{const sc=G.run.scene;let g=0;while(sc.ph!=='chon'&&sc.ph!=='xong'&&g++<40){if(sc.ph==='lot'&&sc.q[sc.i].own==='me')amAct('rut');else amAct('bo');}})()");
     if(run("G.run.scene.ph")==='xong'){run("amAct('xong');W().t+=HM;openPlace(G.run.at);venueDo('amhoi','vao')");}
@@ -1673,12 +1683,12 @@ const TESTS = {
     // rời bàn giữa chừng không mất gì
     run("venueDo('amhoi','vao');G.run.lt=[0,0,500]");const tt=run("amLtTot()");run("amAct('tra=0');amAct('roi')");ok(run("amLtTot()")===tt&&!run("G.run.scene"), 'rời bàn khi đang dẫn: chưa gõ búa thì không mất gì');
     // đồ dởm: khách có thể đem đồ cải căn giả; khảo vật cao dễ nhận ra
-    run("AM_HOI._g=AM_HOI.gia;AM_HOI.gia=1;G.run.nang={khao:100,duoc:100}");let fk=null;
-    for(let m=0;m<6&&!fk;m++){run("W().t+=HM;openPlace(G.run.at);G.run.scene.venue=null;venueDo('amhoi','vao')");fk=run("JSON.stringify(G.run.scene.q.find(l=>/^ccg_/.test(l.it.id))||null)");if(fk==='null')fk=null;if(!fk)run("amAct('roi')");}
-    ok(!!fk, 'người ngồi bàn có thể đem đồ cải căn dởm trong túi ra bàn');
+    run("G.run.nang={khao:100,duoc:100};Object.keys(VAI_NP).filter(m=>VAI_NP[m].tu>=1).forEach(m=>{const T=vaiTui(m);if(T.length>=12)T.shift();T.push({u:amUid(),id:'ccg_2',n:CC_DO[2].n});})");
+    run("W().t+=HM;openPlace(G.run.at);venueDo('amhoi','vao')");const fk=run("G.run.scene.q.some(l=>/^ccg_/.test(l.it.id))");
+    ok(!!fk, 'người ngồi bàn mang đồ cải căn dởm trong túi thì đem ra bàn (muốn tống đi)');
     const nghi=run("(()=>{const sc=G.run.scene;const L=sc.q.find(l=>/^ccg_/.test(l.it.id));if(!L)return -1;let g=0;while((sc.q[sc.i]!==L||sc.ph==='chon')&&g++<40){if(sc.ph==='chon')amAct('khong');else if(sc.q[sc.i].own==='me')amAct('rut');else amAct('bo');}return sc.q[sc.i]===L?L.nghi:-2;})()");
     ok(nghi===1, 'khảo vật / nhận dược cao: đồ dởm hiện "nghi đồ giả" ('+nghi+')');
-    run("AM_HOI.gia=AM_HOI._g;amAct('roi')");
+    run("amAct('roi')");
     ok(run("(G.run.nang={khao:0,duoc:0},ccNhanP())")===0, 'khảo vật / nhận dược thấp: không nhìn ra đồ dởm');
     run("(()=>{const ma=Object.keys(VAI_NP).find(m=>VAI_NP[m].tu>=1);const v=W().vai[ma];v.tui=[];delete v.tuiS;})()");ok(run("(()=>{const ma=Object.keys(VAI_NP).find(m=>VAI_NP[m].tu>=1);return vaiTui(ma).length>0&&W().vai[ma].tuiS===1;})()"), 'bản lưu cũ: túi NPC tu sĩ được lập khi tải');
     run("G.run.pham=1");ok(!run("placeActs(nodeById(G.run.at)).some(a=>a.a==='amhoi')"), 'phàm nhân không vào được');
@@ -1852,7 +1862,7 @@ if (args.includes('--list')) { console.log(Object.keys(TESTS).join('\n')); proce
 for (const k of (names.length ? names : Object.keys(TESTS).filter(k=>k!=='smoke'))) {
   if (!TESTS[k]) { console.log('Không có bài: ' + k); fails++; continue; }
   cur = k; console.log('▶ ' + k); const f0 = fails;
-  try { TESTS[k](); } catch (e) { fails++; console.log('   ✗ NGOẠI LỆ: ' + e.message.split('\n')[0]); }
+  try { TESTS[k](); } catch (e) { fails++; console.log('   ✗ NGOẠI LỆ: ' + e.message.split('\n')[0]); if(process.env.STK)console.log(e.stack); }
   if (SHOWLOG || fails > f0) { try { console.log('   --- nhật ký ---\n' + run('NK.dump(25)').split('\n').map(l => '   ' + l).join('\n')); } catch (e) {} }
 }
 console.log(fails ? `\n${fails} lỗi` : '\nTất cả đạt'); process.exit(fails ? 1 : 0);

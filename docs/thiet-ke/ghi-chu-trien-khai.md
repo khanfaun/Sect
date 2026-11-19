@@ -124,7 +124,7 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
-- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-I.
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-J.
 - Xong thêm: Đ9.1 (bộ máy tuyến, schema, công cụ kiểm `npm run content:tuyen`, tuyến mẫu OR01, bài `menh_tuyen`) và Đ9.0 (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) — xem mục Đ9.1 cuối tệp.
 - Tiếp theo: người dùng đưa GPT viết theo lô (lô 1: OR02–OR04), Claude kiểm + rà mẫu, ghép. Thẻ "Mệnh thư" trong Sổ tay (giao diện) chưa làm.
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
@@ -714,6 +714,32 @@ Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm th
    - ĐẾM NGƯỢC: mỗi lần có người đưa giá, đồng hồ đếm 10 giây (thời gian thật, hiện trên hộp thoại); nếu 10 giây không ai trả cao hơn thì món thuộc người đó. Có người trả mới thì đếm lại từ 10. NPC ra giá trong khoảng đếm (độ trễ ngẫu nhiên). Bài kiểm phải chạy được không chờ thật (cho phép tua đồng hồ trong test).
 Việc cần làm (Sửa-J): câu 42, 42b, 43, 44.
 Gói gửi GPT: docs/content/GUI-GPT/ (0-loi-nhan, 1-huong-dan, 2-thiet-ke-45-tuyen). TẠM DỪNG — chờ người dùng.
+
+## Sửa-J — câu 42, 42b, 43, 44 (đợt 7)
+Luật `core2/58-am-hoi.js` (viết lại), `core2/59-menh-tuyen.js` (thêm); bảng `AM_HOI` (`content/rules/am-hoi.js`); chữ `amh.*`, `ty.*`; giao diện `src/react/canh/AmHoi.jsx`, `src/react/bang/SoTay.jsx`.
+### J.42 + 42b — Ám Hội định giá theo nhu cầu, đấu nhiều vòng
+- Giá trị mọi vật = giá gốc × `ncGet(nơi họp, khoá)` (`amVal`). Giá gốc: pháp bảo `40×3^phẩm` (chỉ còn là giá gốc), đan theo giá đan, đồ/vật tư cải căn như cũ, linh thạch phẩm k = 100^k Hạ. Linh thạch cũng là một vật (`lt:k`, khoá nhu cầu `lt0..lt3`).
+- Người bán nêu danh sách (`lot.muon`): linh thạch phẩm vừa tầm + tối đa `muonN`=2 loại đan người bán chưa có, xếp theo nhu cầu nơi họp (thứ thế giới đang thiếu) + băm; số lượng mỗi món vừa đủ giá mở (`gia0`=0,6 × giá trị), tối đa `slMax`=12. Lô của người chơi chỉ nêu linh thạch.
+- Trả giá: (a) một món trong danh sách, số lượng tối thiểu = max(số nêu, đủ vượt mức dẫn); (b) Thương lượng: chọn vật trong túi + số lượng (−5/−1/+1/+5); người bán định giá = giá trị × số lượng × độ hợp (trong danh sách 1; linh thạch phẩm khác 1; cùng loại 0,8; pháp bảo 0,6; vật khác 0,4 < `hopMin` 0,5 → không nhận). Đồ dởm người bán nhìn ra (40%) = 0.
+- Mỗi lần trả phải ≥ mức dẫn + `buoc`×giá trị (10%). Đang dẫn không tự trả đè. Bỏ cuộc → `lot.bo.me`, không trả lại trong món đó; bỏ cuộc thì tua nhanh tới lúc gõ búa (khỏi ngồi chờ).
+- NPC: mỗi lần có giá mới, mỗi NPC còn trong cuộc được hẹn một lúc ngẫm `tre` 1,5–8 giây (băm); tới lúc thì trả mức tối thiểu nếu còn dưới mức chịu (`giá trị × nhu 0,75–1,35`, túi chưa đầy, có đủ vật/linh thạch trong túi/của cải thật; ưu tiên đan trong túi, rồi linh thạch, đếm bằng phẩm thấp hơn cho vừa), không thì bỏ cuộc. Nên có nhiều vòng NPC–NPC–người chơi.
+- Đếm ngược `dem`=10 giây thời gian thật (`amNow()` = Date.now + `AM_LECH`); trả mới thì đếm lại. Hết giờ: người dẫn thắng, `amResolve` chuyển vật trả từ người dẫn sang người bán và món đấu sang người dẫn (túi người chơi / túi vai / túi thiên kiêu / của cải). Không ai trả: món về chủ. Lô của người chơi: "Gõ búa" bán ngay cho người dẫn, "Rút lại".
+- Đồng hồ: `amTick()` chạy mỗi 250 ms trong hộp (React) và trước mỗi hành động; bài kiểm tua bằng `amTua(ms)`. Hộp hiện "Gõ búa sau N giây".
+- Bỏ: đổi vật kiểu cũ, "Đòi thêm", "Đổi lấy" (thay bằng danh sách + thương lượng).
+- `dbg`: `amh.lo`, `amh.tra`, `amh.mua`, `amh.ban`, `amh.npc`, `amh.tran` (túi người nhận đầy, mất món), cùng các khoá cũ.
+### J.43 — chỉ NPC thật ngồi bàn
+- Người ngồi bàn: tới `vai`=3 người giữ vai (tu sĩ còn sống, có đồ) + tới `tk`=2 thiên kiêu còn sống (`G.run.rivals`, túi `rv.tui`/`rv.cua` lập một lần theo hạt giống khi cần — bản lưu cũ chịu được). Bỏ khách vô danh. Danh sách cố định suốt buổi (thời gian không trôi trong hộp), không ai mới vào/biến mất.
+- Hóa trang: ai cũng hiện "Khách đeo …", tu vi "bị che". Nhận ra (`amNhanP`, băm theo buổi): gốc 5% + thần thức (0,02×(thần−10), tối đa 30%; đang mở thần thức +35%; chỉ khi tu vi họ không cao hơn mình) + khảo vật ×0,3 + giao tình thiên kiêu ≥30 thì +40%; tối đa 90%. Nhận ra thì hiện "Khách đeo … (là Tên)" + cảnh giới.
+- Vật tư cải căn đang thiếu (`ccAmVt`) được đặt vào túi một người ngồi bàn lúc mở hội nếu chưa ai có (coi như họ mang tới); NPC đưa vật tư cải căn trước, rồi đồ dởm (muốn tống đi).
+### J.44 — Mệnh thư trong Sổ tay
+- `tuyenView()` thêm `cho` (lời mời đã đưa, chưa trả lời, chưa quá hạn), `moLai`, `moNo` (tin đồn phải tới nơi hẹn). `tuyenMoLai(id)` mở lại hộp lời mời (không tính số lần tự nhắc). Thẻ "Mệnh thư" trong Sổ tay (hiện khi có tuyến): tên tuyến, mốc, nơi, hạn bằng chữ, nút "Mở lại lời mời" (`ACT.tyMoLai`).
+### Bài kiểm
+- Luật: `am_hoi` viết lại (50 ý: nhu cầu, danh sách, đếm ngược tua được, nhiều vòng, thương lượng, bỏ cuộc, chuyển túi thật, NPC thật hóa trang); mới `menh_thu` (7 ý, đã thêm vào `test:rules`); `cai_can_hiem` sửa theo túi NPC thật. Giao diện: `am_hoi` viết lại, mới `menh_thu`.
+- Kết quả: `npm run test:rules` 938 ý đạt (mốc 906); giao diện 178 ý đạt (mốc 168); `content:check` đạt.
+### Còn dở
+- NPC chưa tự bổ sung túi/của cải theo thời gian (chỉ đổi qua Ám Hội); NPC trả bằng đan/linh thạch trong danh sách, chưa tự thương lượng bằng vật khác. Người chơi bán chỉ nêu linh thạch.
+- Túi người nhận đầy (12 món) thì món nhận thêm bị mất (có `dbg amh.tran`) — hiếm.
+- Bot chưa biết ngồi Ám Hội mới (không chạy bot).
 
 ## YÊU CẦU MỚI (chưa làm, đã xếp lịch)
 A. Ô ĐẤT theo địa điểm (xếp: đợt mới "Đ8b Đất đai", làm sau Đ9 bộ máy, trước Đ10):

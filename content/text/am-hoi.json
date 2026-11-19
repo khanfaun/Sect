@@ -2,7 +2,6 @@
   "amh.vao": "Ngồi vào bàn",
   "amh.vaoD": "Buổi họp kín: mỗi người đưa một vật đang có ra, nêu thứ muốn nhận; cả bàn đấu nhiều vòng. Mỗi tháng mỗi nơi một lần.",
   "amh.n": "U Minh Ám Hội",
-  "amh.khach": "Khách vô danh",
   "amh.mat": "mặt nạ đồng|mặt nạ gỗ mun|nón trùm lụa đen|mặt nạ ngọc vỡ|khăn che xám",
   "amh.khachTen": "Khách đeo {{0}}",
   "amh.me": "Ngươi",
@@ -42,5 +41,9 @@
   "amh.dem": "Gõ búa sau {{0}} giây",
   "amh.log.mo": "{{0}} đưa {{1}} ra, muốn nhận: {{2}}.",
   "amh.log.kemHon": "Người bán lắc đầu: {{0}} chưa hơn mức đang dẫn.",
-  "amh.log.boCuoc": "{{0}} bỏ cuộc món này."
+  "amh.log.boCuoc": "{{0}} bỏ cuộc món này.",
+  "amh.tk": "thiên kiêu",
+  "amh.nhanTen": "{{0}} (là {{1}})",
+  "amh.che": "tu vi bị che",
+  "amh.banHead": "Quanh bàn"
 }

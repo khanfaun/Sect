@@ -51,27 +51,44 @@ function amTuiLap(h,n,t,opt){const L=[];const PI=Object.keys(PILL).filter(k=>PIL
     const A=AM_HOI.vaiTui;const n=A[0]+Math.floor(h(0)*(A[1]-A[0]+1));AM_W=w;try{v.tui=amTuiLap(h,n,clamp(P.tu-1,0,4),{fake:h(1)<0.15}).slice(0,VAI_TUI_MAX);}finally{AM_W=null;}
     v.cua=(v.cua||0)+Math.round(AM_HOI.vaiCua*Math.pow(4,clamp(P.tu,0,5))*(0.5+h(2)));}
   return V;};}
-// ---------- người ngồi bàn ----------
-function amTui(sc,pi){const p=sc.ppl[pi];if(!p)return [];return p.k==='vai'?vaiTui(p.ma):p.tui;}
-function amCua(sc,pi,d){const p=sc.ppl[pi];if(!p)return 0;const o=p.k==='vai'?(vaiInit(W())[p.ma]||{}):p;if(d)o.cua=Math.max(0,(o.cua||0)+Math.round(d));return o.cua||0;}
-function amTen(sc,pi){if(pi==='me')return contentText('amh.me');const p=sc.ppl[pi];if(!p)return '?';if(p.k==='vai'){const v=vaiNow(p.ma);return v&&v.song?v.ten+' ('+v.vai+')':contentText('amh.khach');}return p.ten;}
-function amTuiDay(sc,pi){const p=sc.ppl[pi];return p&&p.k==='vai'?vaiTui(p.ma).length>=VAI_TUI_MAX:(amTui(sc,pi).length>=AM_HOI.toiDa+4);}
+// ---------- người ngồi bàn (Sửa-J câu 43): chỉ NPC thật — người giữ vai (tu sĩ) và thiên kiêu còn sống; hóa trang, che tu vi ----------
+// p={k:'vai',ma}|{k:'tk',i (chỉ số trong G.run.rivals)}, an: tên hóa trang, nhan: 1 nếu người chơi nhận ra
+function amRv(p){return p&&p.k==='tk'?(G.run.rivals||[])[p.i]:null;}
+// túi thiên kiêu: lập một lần theo hạt giống thế giới (bản lưu cũ lập khi cần)
+function amRvTui(rv,i){if(!rv)return [];if(!rv.tuiS){rv.tuiS=1;const w=W();const h=k=>wRnd(w,'amtk|'+i+'|'+k);const A=AM_HOI.tkTui;const n=A[0]+Math.floor(h(0)*(A[1]-A[0]+1));
+    rv.tui=amTuiLap(h,n,clamp(rv.realm||0,0,4),{fake:h(1)<AM_HOI.gia,that:1}).slice(0,VAI_TUI_MAX);rv.cua=(rv.cua||0)+Math.round(AM_HOI.vaiCua*Math.pow(4,clamp((rv.realm||0)+1,0,5))*(0.5+h(2)));}
+  return rv.tui||(rv.tui=[]);}
+function amTui(sc,pi){const p=sc.ppl[pi];if(!p)return [];if(p.k==='vai')return vaiTui(p.ma);if(p.k==='tk')return amRvTui(amRv(p),p.i);return p.tui||[];}
+function amCua(sc,pi,d){const p=sc.ppl[pi];if(!p)return 0;const o=p.k==='vai'?(vaiInit(W())[p.ma]||{}):p.k==='tk'?(amRvTui(amRv(p),p.i),amRv(p)||{}):p;if(d)o.cua=Math.max(0,(o.cua||0)+Math.round(d));return o.cua||0;}
+function amThat(p){if(p.k==='vai'){const v=vaiNow(p.ma);return {ten:v&&v.song?v.ten:'?',sub:v?v.vai:'',cg:REALM[clamp(VAI_NP[p.ma].tu,0,5)]};}
+  const rv=amRv(p),wr=rv&&W().rivals[rv.i];return {ten:wr?wr.ten:'?',sub:contentText('amh.tk'),cg:REALM[clamp(rv?rv.realm:0,0,5)]};}
+function amTen(sc,pi){if(pi==='me')return contentText('amh.me');const p=sc.ppl[pi];if(!p)return '?';if(!p.nhan)return p.an;const t=amThat(p);return contentText('amh.nhanTen',[p.an,t.ten]);}
+function amTuiDay(sc,pi){return amTui(sc,pi).length>=VAI_TUI_MAX;}
+// khả năng nhận ra người hóa trang: thần thức (chỉ khi tu vi người kia không cao hơn), khảo vật, giao tình với thiên kiêu
+function amNhanP(p){const r=G.run,C=AM_HOI.nhan;const cg=p.k==='vai'?VAI_NP[p.ma].tu:(amRv(p)||{}).realm||0;let x=C.goc;
+  if(cg<=(r.realm||0)){x+=clamp(((S().than||10)-10)*C.than,0,C.thanMax);if(typeof tkActive==='function'&&tkActive())x+=C.tk;}
+  x+=nangV('khao')/100*C.khao;const rv=amRv(p);if(rv&&(rv.rel||0)>=C.gt)x+=C.gtCong;return clamp(x,0,C.max);}
 function amStart(n){const r=G.run;if(!amOpen(n)||!amLeft(n))return false;const w=W(),m=ncMonth();const seed='am|'+n.id+'|'+m+'|'+(w.seed||0);const h=k=>wHash(seed+'|'+k);
   const ppl=[];const V=vaiInit(w);
   const cand=Object.keys(VAI_NP).filter(ma=>VAI_NP[ma].tu>=1&&V[ma]&&V[ma].song&&!VAI_NP[ma].bat&&vaiTui(ma).length).sort((a,b)=>h('v'+a)-h('v'+b)).slice(0,AM_HOI.vai);
   for(const ma of cand)ppl.push({k:'vai',ma});
-  const K=AM_HOI.khach;const nk=K[0]+Math.floor(h('nk')*(K[1]-K[0]+1));const MAT=contentText('amh.mat').split('|');const vt=typeof ccAmVt==='function'?ccAmVt(n):null;
-  for(let j=0;j<nk;j++){const x=k=>h('k'+j+'|'+k);const A=AM_HOI.khachTui;const ni=A[0]+Math.floor(x(0)*(A[1]-A[0]+1));
-    const C=AM_HOI.khachCua;const cua=Math.round((C[0]+x(1)*(C[1]-C[0]))*SC[rT()]/SC[0]);
-    ppl.push({k:'khach',ten:contentText('amh.khachTen',[MAT[(Math.floor(h('mat')*MAT.length)+j)%MAT.length]]),cua,tui:amTuiLap(x,ni,clamp(rT(),0,4),{fake:x(2)<AM_HOI.gia,that:1,vt:j===0?vt:null})});}
+  const tk=(r.rivals||[]).map((rv,i)=>({rv,i})).filter(x=>x.rv&&x.rv.alive).sort((a,b)=>h('t'+a.i)-h('t'+b.i)).slice(0,AM_HOI.tk);
+  for(const x of tk)ppl.push({k:'tk',i:x.i});
+  const MAT=contentText('amh.mat').split('|');const m0=Math.floor(h('mat')*MAT.length);
+  ppl.forEach((p,j)=>{p.an=contentText('amh.khachTen',[MAT[(m0+j)%MAT.length]]);p.nhan=h('nhan'+j)<amNhanP(p)?1:0;});
   const sc={type:'amhoi',node:n.id,seed,ppl,q:[],i:0,meAt:0,meDone:0,ph:'',lot:null,tl:null,log:[]};
-  // mỗi người đưa một món (món vật tư cải căn ra trước tiên); vật quý về cuối buổi
-  ppl.forEach((p,pi)=>{const T=amTui(sc,pi);if(!T.length)return;let it=T.find(x=>String(x.id).startsWith('cc_'))||(p.k==='khach'&&T.find(x=>/^ccg_/.test(x.id)))||T[Math.floor(h('o'+pi)*T.length)%T.length];
+  // Sửa-G: vật tư cải căn đang thiếu nằm trong túi một người ngồi bàn (họ mang tới, không tạo trên bàn)
+  const vt=typeof ccAmVt==='function'?ccAmVt(n):null;
+  if(vt&&ppl.length&&!ppl.some((p,pi)=>amTui(sc,pi).some(x=>x.id==='cc_'+vt))){const pi=Math.floor(h('vt')*ppl.length)%ppl.length;const T=amTui(sc,pi);if(T.length>=VAI_TUI_MAX)T.shift();T.push({u:amUid(),id:'cc_'+vt,n:CC_VT[vt].n});}
+  // mỗi người đưa một món (vật tư cải căn trước, rồi đồ dởm muốn tống đi); vật quý về cuối buổi
+  ppl.forEach((p,pi)=>{const T=amTui(sc,pi);if(!T.length)return;let it=T.find(x=>String(x.id).startsWith('cc_'))||T.find(x=>/^ccg_/.test(x.id))||T[Math.floor(h('o'+pi)*T.length)%T.length];
     sc.q.push({own:pi,u:it.u,it:JSON.parse(JSON.stringify(it)),v:amVal(it,0,n.id)});});
   sc.q.sort((a,b)=>a.v-b.v);sc.meAt=Math.floor(sc.q.length/2);
   if(!w.amhoi)w.amhoi={};if(!w.amhoi[n.id]||w.amhoi[n.id].m!==m)w.amhoi[n.id]={m,n:0};w.amhoi[n.id].n++;
   sc.log.push(contentText('amh.ngoi',[ppl.map((p,i)=>amTen(sc,i)).join(', ')]));
-  r.scene=sc;amNext(sc);dbg('amh.mo',{n:n.id,ppl:ppl.length,lo:sc.q.length,vai:cand.length});return true;}
+  r.scene=sc;amNext(sc);dbg('amh.mo',{n:n.id,ppl:ppl.length,lo:sc.q.length,vai:cand.length,tk:tk.length,nhan:ppl.filter(p=>p.nhan).length});return true;}
+// danh sách người ngồi bàn cho hộp thoại: tên hóa trang; nhận ra thì hiện tên thật + tu vi, không thì "tu vi bị che"
+function amBan(sc){return sc.ppl.map((p,pi)=>{const t=amThat(p);return {an:p.an,ten:p.nhan?t.ten+' · '+t.sub:'',cg:p.nhan?t.cg:contentText('amh.che')};});}
 function amLog(sc,k,a){sc.log.push(contentText('amh.log.'+k,a));if(sc.log.length>10)sc.log.shift();}
 function amStep(L){return Math.max(1,Math.round(L.v*AM_HOI.buoc));}
 // ---------- của cải theo từng người: chồng vật {key,id,n,ic,sl,it} ----------
@@ -101,7 +118,7 @@ function amLay(sc,who,key,sl){key=String(key);if(amHas(sc,who,key)<sl)return nul
   return out;}
 function amDat(sc,who,recs){for(const x of recs||[]){
   if(x.lt!=null){if(who==='me')ltAdd(x.lt,x.sl,'amhoi');else amCua(sc,who,x.sl*AMV[x.lt]);continue;}
-  if(who==='me')amGiveMe(x);else{const p=sc.ppl[who];if(p.k==='vai'){if(!vaiTuiAdd(p.ma,x))dbg('amh.tran',{ma:p.ma,n:x.n});}else p.tui.push(x);}}}
+  if(who==='me')amGiveMe(x);else{const T=amTui(sc,who);if(T.length<VAI_TUI_MAX)T.push(x);else dbg('amh.tran',{ai:amTen(sc,who),n:x.n});}}}
 // ---------- danh sách vật người bán muốn nhận ----------
 // linh thạch phẩm vừa tầm + 1–2 thứ người bán đang cần (đan / vật tư thế giới đang thiếu, người bán chưa có), số lượng đủ giá mở
 function amMuon(sc,L){const nid=sc.node,mo=Math.max(1,Math.round(L.v*AM_HOI.gia0));const out=[];
@@ -215,7 +232,7 @@ function amAct(a){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='amhoi')return f
   if(ok)saveSoon();return ok;}
 // ---------- dữ liệu cho hộp thoại ----------
 function amView(){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='amhoi')return null;const L=sc.q[sc.i],lot=sc.lot;
-  const V={ph:sc.ph,luot:contentText('amh.luot',[Math.min(sc.i+1,sc.q.length),sc.q.length]),log:sc.log.slice(-6),ltTxt:ltTxt(),btn:[],mine:[],muon:[],tl:null,con:null};
+  const V={ph:sc.ph,luot:contentText('amh.luot',[Math.min(sc.i+1,sc.q.length),sc.q.length]),log:sc.log.slice(-6),ltTxt:ltTxt(),ban:amBan(sc),btn:[],mine:[],muon:[],tl:null,con:null};
   const btn=(a,l,no)=>V.btn.push({a,l,no:no||''});
   if(L&&lot&&sc.ph==='lot'){const me=L.own==='me',dan=lot.lead&&lot.lead.who==='me',bo=!!lot.bo.me;
     V.con=Math.max(0,Math.ceil((lot.hen-amNow())/1000));
