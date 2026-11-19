@@ -362,17 +362,32 @@ const TESTS = {
     ok(/Tái Mạch Đan/.test(d) && /Kiểm chứng/.test(d) && !/\d/.test(d), 'Sổ tay thẻ Cơ duyên: '+d.replace(/\s+/g,' ').slice(0,70));
     await ev(p, () => {UI.panel=null;G.run.cc=null;render();});
   },
-  // Sửa-I câu 39: hộp thoại U Minh Ám Hội — lượt, món, giá, nút trả giá / bỏ qua / đưa đồ của mình
+  // Sửa-I câu 39 + Sửa-J 42b: hộp thoại U Minh Ám Hội — món, danh sách vật muốn nhận, đếm ngược, trả giá, thương lượng, bỏ cuộc
   async am_hoi(p) {
-    await ev(p, () => {const r=G.run;r.pham=0;r.realm=Math.max(1,r.realm||0);r.lt=[0,0,50];r.scene=null;UI.modal=null;UI.panel=null;
+    await ev(p, () => {const r=G.run;r.pham=0;r.realm=Math.max(1,r.realm||0);r.lt=[0,0,50];r.st=20000;r.scene=null;UI.modal=null;UI.panel=null;AM_LECH=0;
       const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');r.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);
       if(W().amhoi)delete W().amhoi[n.id];r.scene.venue='amhoi';venueDo('amhoi','vao');render();});
     await p.waitForTimeout(150);
     let t = await ev(p, () => (document.querySelector('.amhoi')||{}).innerText||'');
-    ok(/U Minh Ám Hội/.test(t) && /Lượt \d+\/\d+/.test(t) && /Giá hiện tại/.test(t), 'hộp Ám Hội: lượt, món, giá hiện tại');
+    ok(/U Minh Ám Hội/.test(t) && /Lượt \d+\/\d+/.test(t) && /Giá trị/.test(t), 'hộp Ám Hội: lượt, món, giá trị theo nhu cầu');
+    ok(/muốn nhận/.test(t) && /Trả \d+ /.test(t), 'hiện danh sách vật người bán muốn nhận + nút trả');
+    ok(/Gõ búa sau (9|10) giây/.test(t), 'đếm ngược hiện trên hộp thoại');
     await shot(p, 'am_hoi');
-    ok(/Bỏ qua|Gõ búa/.test(t) && /Trả giá|Gõ búa/.test(t) && /Đổi vật|Gõ búa/.test(t), 'có nút trả giá / đổi vật / bỏ qua');
-    await ev(p, () => {const sc=G.run.scene;let g=0;while(sc.ph!=='chon'&&sc.ph!=='xong'&&g++<30)amAct('bo');G.run.relics.push(Object.assign(genRelic(2),{name:'Thử Ấn Bày'}));render();});
+    await p.waitForTimeout(1300);
+    t = await ev(p, () => (document.querySelector('.amhoi .am-dem')||{}).innerText||'');
+    ok(/Gõ búa sau [5-9] giây/.test(t), 'đồng hồ chạy theo thời gian thật ('+t+')');
+    ok(/thương lượng/i.test(await ev(p, () => document.querySelector('.amhoi').innerText)), 'có phần thương lượng (chọn vật trong túi)');
+    await ev(p, () => {const b=document.querySelector('.amhoi .am-tui [data-arg^="tl="]');if(b)b.click();});await p.waitForTimeout(120);
+    t = await ev(p, () => (document.querySelector('.amhoi .am-tl')||{}).innerText||'');
+    ok(/định giá/.test(t) && /\+1/.test(t) && /Đưa giá thương lượng/i.test(t), 'chọn vật thương lượng: chỉnh số lượng, người bán định giá');
+    await ev(p, () => {const b=document.querySelector('.amhoi .am-tl [data-arg="tl="]');if(b)b.click();});await p.waitForTimeout(80);
+    const tra = await ev(p, () => {const b=document.querySelector('.amhoi .am-muon [data-arg="tra=0"]');if(b&&!b.disabled){b.click();return 1;}return 0;});
+    await p.waitForTimeout(120);
+    ok(tra && await ev(p, () => G.run.scene.lot.lead&&G.run.scene.lot.lead.who==='me'), 'bấm trả: ngươi đang dẫn');
+    t = await ev(p, () => (document.querySelector('.amhoi')||{}).innerText||'');
+    ok(/đang dẫn: Ngươi/.test(t), 'hộp hiện người đang dẫn');
+    await ev(p, () => {const sc=G.run.scene;amTua(AM_HOI.dem+50);let g=0;while(sc.ph==='lot'&&g++<30){if(sc.q[sc.i].own==='me')amAct('rut');else amAct('bo');}
+      G.run.relics.push(Object.assign(genRelic(2),{name:'Thử Ấn Bày'}));render();});
     await p.waitForTimeout(120);
     t = await ev(p, () => (document.querySelector('.amhoi')||{}).innerText||'');
     ok(/Tới lượt ngươi/.test(t) && /Thử Ấn Bày/.test(t), 'tới lượt ngươi: hiện đồ trong túi để đưa ra');
