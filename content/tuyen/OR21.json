@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "id": "OR21",
+  "loai": "xuat_than",
+  "ten": "Mảnh bia giữa đường",
+  "xuatThan": "xt_ke_tung_vac_bia",
+  "goiYDaiLo": [
+    "vo_lam"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Nét đục mặt dưới",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Mảnh bia nằm bên lối chở cuối ở {LOC14}, mặt chữ úp vào bùn. Ngươi nhận ra sức nặng ấy khi nhấc lên. Một nét tên bị đục giữa đường vẫn còn nửa chân chữ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Nhặt mảnh có chân chữ",
+          "t": "Ngươi rửa bùn rồi chép nửa chữ, giữ mảnh đá trên tấm vải khô.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi người từng cùng vác bia",
+          "t": "Ngươi tìm được đoạn đường xe dừng lần cuối và lời người đã nghe tiếng đục.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Đo mép vỡ để ghép mảnh",
+          "t": "Ngươi vẽ lại mép mảnh và giữ dấu chỗ nó từng khớp với mặt bia.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mảnh bia bị bỏ dưới mái, bùn khô bám kín chân chữ.",
+        "su": "Mảnh bia bị bỏ dưới mái, bùn khô bám kín chân chữ.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Lệnh khắc bỏ một dòng",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC12"
+      },
+      "mo": "{NP24} giữ lệnh khắc ở {LOC12}, còn danh sách quân do {NP25} coi có thêm một dòng. Dòng đó vừa đúng khoảng trống trên đá. Bản lệnh đem đặt lại ghi thiếu chính đoạn chữ còn trên mảnh.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối lệnh khắc với tên quân",
+          "t": "Ngươi sao hai dòng lệch, ghim bản in mảnh đá vào tên người bị loại.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin bảng giá của xưởng",
+          "t": "Ngươi hỏi ai trả công từng hàng và biết ai đang giữ quyền nhận đơn.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Chép cả danh sách quân",
+          "t": "Ngươi giữ bản đầy đủ để nếu bia biến mất, gia quyến vẫn tra được tên.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lệnh khắc được khóa, một dòng quân vẫn vắng trên đá.",
+        "su": "Lệnh khắc được khóa, một dòng quân vẫn vắng trên đá.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Người đứng sau tên mất",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Một gia quyến tới {LOC14} với phiếu phát công cho người có tên bị đục. Lệnh sửa bia dùng dấu của người muốn ghi chiến công cho mình. Mảnh đá còn vết đục từ trước ngày lệnh được nhập.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi lời gia quyến và lý do gạch tên",
+          "t": "Ngươi đối phiếu để chứng người ấy đã có mặt trước lúc kẻ giữ lệnh nhận công.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận đơn khắc danh khác lấy bạc",
+          "t": "Ngươi nhận một lượng bạc để ghi một người vắng trận vào hàng quân công.",
+          "dau": [
+            "moc_3_2"
+          ],
+          "e": {
+            "bac": 1000
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đặt danh sách công khai trước bia",
+          "t": "Ngươi treo bản đủ tên trên thềm và ghi ai đã lấy phần công trên lệnh.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Gia quyến mang phiếu về, người coi bia giữ lệnh sửa trong hòm.",
+        "su": "Gia quyến mang phiếu về, người coi bia giữ lệnh sửa trong hòm.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Bia còn để đứng hay nằm",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Mặt bia ở {LOC14} đã kê lên đòn. Gia quyến muốn nhận một bản chứng, người trả tiền hỏi khi nào tên mới có mặt. Người làm đường tới xem có thể dùng mảnh đá nào.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Dựng bia đã sửa và trao chứng",
+          "t": "Ngươi khắc lại tên theo phiếu rồi giao gia quyến bản in có người chứng.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Khắc danh giả và nhận xưởng",
+          "t": "Ngươi giao hàng chữ đã mua; người trả bạc trao quyền nhận đơn thay mình.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Hạ bia giả, chia đá cho đường",
+          "t": "Ngươi hạ tấm bia giả sau khi công bố đủ tên, giao đá cho người đắp lối.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Gửi mảnh cũ cho người giữ giấy",
+          "t": "Ngươi chuyển mảnh đá tới chỗ có phiếu quân để người tra sau còn gặp.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Đòn vác để lại dưới mái, mặt bia chưa ai dựng.",
+        "su": "Đòn vác để lại dưới mái, mặt bia chưa ai dựng.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Nét khắc còn lại",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Ở {LOC14}, thợ đến nhận khuôn mẫu cho đợt khắc sau. Một nhà không đủ tiền đứng ngoài. Người làm đường để lại ảnh dập chỗ chữ cũ vừa nằm dưới chân cầu.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Mở bàn khắc có hai người chứng",
+          "t": "Ngươi mở sổ có phiếu quân và lời nhà, để thợ khác kiểm từng hàng.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Bán hàng bia theo giá xưởng",
+          "t": "Ngươi giữ quyền nhận đơn, để người không đủ bạc phải đợi ngoài sổ.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Rời nghề và trao lại mảnh chữ",
+          "t": "Ngươi giao mảnh còn nét cho gia quyến rồi đi trên lối đã lát đá cũ.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Các đơn khắc tiếp tục theo giá cũ, mảnh đá còn chờ người nhận.",
+        "su": "Các đơn khắc tiếp tục theo giá cũ, mảnh đá còn chờ người nhận.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Bia có tên thật",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người nhà tới đọc hàng chữ được khắc lại rồi đem bản in về. Trên đường đi, họ gặp người cũng đang tra phiếu công và chỉ cho họ bàn có người chứng. Mảnh cũ vẫn giữ được nửa chân chữ.",
+      "su": "{LOC14} dựng bia đã sửa và trao bản chứng cho gia quyến.",
+      "dauVong": "bản in còn nét đục cũ bên tên đã được đặt lại."
+    },
+    {
+      "id": "B",
+      "ten": "Một hàng chữ một giá",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Mỗi hàng có giá riêng, và người đã trả bạc đứng trước bia nghe đọc danh giả. Nhà ít tiền không tìm thấy tên người mình dù phiếu quân còn nguyên. Họ giữ chỗ ở bên lề sổ để về sau hỏi lại.",
+      "su": "Xưởng khắc dưới tay {ten} đã nhận bạc để đặt danh giả.",
+      "dauVong": "một nhà còn phiếu quân mà chưa mua nổi hàng chữ."
+    },
+    {
+      "id": "C",
+      "ten": "Đá để người sống bước",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Bản tên đủ vẫn treo khi bia giả được hạ. Những viên đá lớn xuống chân cầu, còn gia quyến cầm mảnh nhỏ có chữ. Qua mùa nước, người qua cầu thấy nửa hàng cũ hiện ra dưới bùn.",
+      "su": "Bia giả hạ xuống và đá được dùng làm đường sau khi công bố tên.",
+      "dauVong": "chân cầu còn một nét chữ của tấm bia chiến công cũ."
+    }
+  ],
+  "ngoai": "Các đơn khắc tiếp tục theo giá cũ, mảnh đá còn chờ người nhận."
+}
