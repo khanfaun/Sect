@@ -560,6 +560,45 @@ const TESTS = {
     ok(await ev(p, () => document.querySelectorAll('#favpop .favrow').length === 0), 'biến mất sau chừng 2 giây');
   },
   // Sửa-K: đang bị truy đuổi — biểu tượng trên bản đồ có chú thích chữ, không số; bị chặn giữa đường mở hộp lựa chọn, chọn đánh vào trận
+  async dat_dai(p) {
+    // Đ8b: hộp địa điểm chỉ hiện mục theo công trình trên ô đất; phá / xây qua mục Đất đai, hộp xác nhận ghi hậu quả
+    await ev(p, () => {const r=G.run;r.pham=0;r.realm=1;r.st=1000;UI.modal=null;UI.panel=null;r.truy=null;
+      const n=W().regions.flatMap(x=>x.nodes).find(n=>n.type==='tran'&&!n.anchor&&n.state!=='ruin');window.DT=n;
+      datStore()[n.id]={v:1,o:[{ct:'tuu_lau',chu:{k:'dan'},goc:1},{ct:'tram_dich',chu:{k:'dan'},goc:1},{ct:'tap_hoa',chu:{k:'dan'},goc:1}],pha:{}};
+      r.at=n.id;r.region=n.r;r.scene=null;openPlace(n.id);render();});
+    await p.waitForTimeout(150);
+    const acts = await ev(p, () => [...document.querySelectorAll('[data-act="pact"]')].map(b=>b.getAttribute('data-arg')).filter(a=>DAT_TIED[a]).sort());
+    ok(acts.join() === 'taphoa,tram,tuu', 'trấn ba ô: hộp địa điểm chỉ có tửu lầu, trạm dịch, tạp hóa (' + acts.join() + ')');
+    ok(await ev(p, () => !!document.querySelector('[data-act="pact"][data-arg="datdai"]')), 'có nút Đất đai');
+    await p.locator('[data-act="pact"][data-arg="datdai"]').click();
+    await p.waitForTimeout(150);
+    const opts = await p.locator('[data-act="vopt"]').allInnerTexts();
+    ok(opts.length === 3 && opts.every(x => /phá/.test(x)), 'mục Đất đai liệt kê ba ô để phá ' + JSON.stringify(opts));
+    await p.locator('[data-act="vopt"][data-arg="pha:0"]').click();
+    await p.waitForTimeout(150);
+    const md = await ev(p, () => (document.querySelector('.mbox')||{}).innerText||'');
+    ok(/nói xấu/.test(md) && /truy nã/.test(md), 'hộp xác nhận ghi rõ hậu quả trước khi phá');
+    await ev(p, () => {DAT.phat.dan.na.tran=0;});
+    await p.locator('[data-act="vgo"]').click();
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => !W().dat[DT.id].o[0].ct && !document.querySelector('[data-act="pact"][data-arg="tuu"]')), 'phá xong: mất tửu lầu trên hộp địa điểm');
+    // xây động phủ trên đất hoang không chủ
+    await ev(p, () => {const r=G.run;r.scene=null;const n=W().regions.flatMap(x=>x.nodes).find(n=>isWild(n)&&!n.anchor&&!n.dp&&n.state!=='ruin'&&(placeActs(n),W().dat[n.id].o.some(c=>!c.ct&&!c.chu)));window.DH=n;
+      r.at=n.id;r.region=n.r;openPlace(n.id);render();});
+    await p.waitForTimeout(150);
+    await p.locator('[data-act="pact"][data-arg="datdai"]').click();
+    await p.waitForTimeout(150);
+    const xid = await ev(p, () => {const o=venueOpts(DH,'datdai').find(o=>/:dong_phu$/.test(o.id));return o&&o.id;});
+    ok(!!xid, 'đất hoang: có lựa chọn xây động phủ');
+    await p.locator(`[data-act="vopt"][data-arg="${xid}"]`).click();
+    await p.waitForTimeout(150);
+    await p.locator('[data-act="vgo"]').click();
+    await p.waitForTimeout(200);
+    ok(await ev(p, () => DH.dp===1 && W().dat[DH.id].o.some(c=>c.ct==='dong_phu'&&c.chu&&c.chu.k==='ta')), 'dựng được động phủ, ô thành của ngươi');
+    ok(await ev(p, () => NK.count('dat') > 0), 'có nhật ký dat.*');
+    await ev(p, () => {DAT.phat.dan.na.tran=0.3;G.run.scene=null;render();});
+    ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
+  },
   async truy(p) {
     await ev(p, () => {FEAT.truy=1;const r=G.run;r.pham=0;r.realm=1;r.scene=null;UI.modal=null;UI.panel=null;r.truy=null;truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});render();});
     await p.waitForTimeout(150);

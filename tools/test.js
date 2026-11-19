@@ -28,6 +28,79 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  dat_dai() {
+    // Đ8b: ô đất, công trình, xây/phá, chủ đất, nơi neo, bản lưu cũ
+    fresh("FEAT.truy=1;G.screen='map';G.run.pham=0;G.run.realm=1;DAT_BK=JSON.stringify(DAT)");
+    try {
+    const all = "W().regions.flatMap(R0=>R0.nodes)";
+    ok(run(`(()=>{let bad=[];for(const n of ${all}){DAT_RAW_ON=1;const A=placeActs(n).map(a=>a.a);DAT_RAW_ON=0;const B=placeActs(n).map(a=>a.a);for(const a of A)if(!B.includes(a))bad.push(n.type+':'+a);}return bad.length===0})()`), 'mọi nơi: sinh ô xong vẫn đủ mọi nút như trước');
+    ok(run(`${all}.filter(n=>n.type!=='ai'&&n.type!=='sao').every(n=>W().dat[n.id]&&W().dat[n.id].o.length>0)`), 'mọi nơi (trừ sào huyệt) đều có ô đất');
+    ok(run(`${all}.filter(n=>n.type==='thanh'||n.type==='tran').every(n=>placeActs(n).some(a=>a.a==='datdai'))`), 'thôn trấn / thành có mục Đất đai');
+    // ổn định theo hạt giống
+    run(`DDX_W=${all}.find(n=>isWild(n)&&!n.anchor&&n.type!=='sao');DDX_A=JSON.stringify(W().dat[DDX_W.id].o);delete W().dat[DDX_W.id];placeActs(DDX_W)`);
+    ok(run("JSON.stringify(W().dat[DDX_W.id].o)===DDX_A"), 'sinh lại ô hoang dã: y hệt (theo hạt giống thế giới)');
+    // ví dụ: thôn trấn chỉ có ba ô tửu lầu, trạm dịch, tạp hóa → chỉ ba mục đó
+    run(`DDX_T=${all}.find(n=>n.type==='tran'&&!n.anchor&&n.state!=='ruin');W().dat[DDX_T.id]={v:1,o:[{ct:'tuu_lau',chu:{k:'dan'},goc:1},{ct:'tram_dich',chu:{k:'dan'},goc:1},{ct:'tap_hoa',chu:{k:'dan'},goc:1}],pha:{}}`);
+    const L = JSON.parse(run("JSON.stringify(placeActs(DDX_T).map(a=>a.a).filter(a=>DAT_TIED[a]))"));
+    ok(L.sort().join() === 'taphoa,tram,tuu', 'trấn ba ô (tửu lầu, trạm dịch, tạp hóa): chỉ ba mục đó (' + L.join() + ')');
+    ok(run("!placeActs(DDX_T).some(a=>['inn','tea','board','vay'].includes(a.a))"), 'không còn khách điếm, trà lâu, bảng thưởng, tiền trang');
+    // phá công trình tự nhiên
+    run(`DDX_N=${all}.find(n=>isWild(n)&&!n.anchor&&n.state!=='ruin'&&placeActs(n).some(a=>a.a==='sanbat')&&W().dat[n.id].o.filter(c=>c.ct&&CONG_TRINH[c.ct].acts.includes('sanbat')).length===1);DDX_I=W().dat[DDX_N.id].o.findIndex(c=>c.ct&&CONG_TRINH[c.ct].acts.includes('sanbat'));DDX_C=W().dat[DDX_N.id].o[DDX_I].ct`);
+    ok(run("CONG_TRINH[DDX_C].tu===1&&!CONG_TRINH[DDX_C].xay"), 'công trình săn bắt ở hoang dã là tự nhiên, không xây được ('+run('DDX_C')+')');
+    const t0 = run("W().t");
+    ok(!!run("datPha(DDX_N,DDX_I)"), 'phá được công trình tự nhiên');
+    ok(run("!placeActs(DDX_N).some(a=>a.a==='sanbat')&&W().dat[DDX_N.id].pha[DDX_C]===1"), 'phá xong: mất nút săn bắt, có ghi đã phá');
+    ok(run("W().t") > t0 && run("NK.count('dat.pha')") > 0, 'phá tốn thời gian, có nhật ký dat.pha');
+    // xây động phủ trên đất hoang không chủ
+    run(`DDX_H=${all}.find(n=>isWild(n)&&!n.anchor&&!n.dp&&n.state!=='ruin'&&n.id!==DDX_N.id&&W().dat[n.id]&&W().dat[n.id].o.some(c=>!c.ct&&!c.chu));DDX_J=W().dat[DDX_H.id].o.findIndex(c=>!c.ct&&!c.chu)`);
+    ok(run("!!DDX_H"), 'có nơi hoang dã còn đất hoang không chủ');
+    run("G.run.pham=1;G.run.st=100");ok(!run("datXay(DDX_H,DDX_J,'dong_phu')"), 'phàm nhân không dựng được động phủ');
+    run("G.run.pham=0;G.run.st=10");ok(!run("datXay(DDX_H,DDX_J,'dong_phu')"), 'thiếu linh thạch: không dựng được');
+    run("G.run.st=100;DDX_F=JSON.stringify(G.run.danh||{})");ok(!!run("datXay(DDX_H,DDX_J,'dong_phu')"), 'tu sĩ đủ linh thạch: dựng được động phủ');
+    ok(run("DDX_H.dp===1&&G.run.st===70&&W().dat[DDX_H.id].o[DDX_J].chu.k==='ta'"), 'động phủ: nơi đó thành động phủ, trừ 30 linh thạch, ô thành của ngươi');
+    ok(run("placeActs(DDX_H).some(a=>a.a==='tinh')&&!G.run.truy"), 'có tĩnh tọa ở động phủ; đất không chủ thì không bị phạt');
+    // phạt khi có chủ: đất của dân ở thôn trấn → tiếng xấu, có thể bị truy nã
+    run(`DDX_T2=${all}.find(n=>n.type==='tran'&&!n.anchor&&n.state!=='ruin'&&n.id!==DDX_T.id);placeActs(DDX_T2);DDX_K=W().dat[DDX_T2.id].o.findIndex(c=>c.ct==='tuu_lau');DAT.phat.dan.na.tran=1;G.run.truy=null;DDX_D0=danhGet('reg:'+DDX_T2.r)`);
+    const op = JSON.parse(run("JSON.stringify(datOpts(DDX_T2).find(o=>o.id==='pha:'+DDX_K))"));
+    ok(op && /nói xấu/.test(op.d) && /truy nã/.test(op.d), 'hộp xác nhận ghi rõ hậu quả (tiếng xấu, truy nã)');
+    ok(!!run("datPha(DDX_T2,DDX_K)"), 'phá tửu lầu của dân');
+    ok(run("danhGet('reg:'+DDX_T2.r)<=DAT.phat.dan.naDanh&&G.run.truy&&G.run.truy.k==='quan'"), 'bị quan phủ truy nã: danh tiếng khu xuống mức truy nã, bị truy đuổi (loại quan)');
+    ok(run("!placeActs(DDX_T2).some(a=>a.a==='tuu')"), 'tửu lầu không còn');
+    // vai NPC làm chủ ở nơi neo: chỉ hư tạm, thiện cảm giảm, có thể bị truy đuổi
+    run(`DDX_V=null;DDX_VI=-1;for(const n of ${all}){if(!n.anchor||LOC_LOI.includes(n.anchor))continue;placeActs(n);const i=W().dat[n.id].o.findIndex(c=>c.ct&&c.chu&&c.chu.k==='vai'&&CONG_TRINH[c.ct].pha);if(i>=0){DDX_V=n;DDX_VI=i;break;}}`);
+    ok(run("!!DDX_V"), 'có ô của người giữ vai ở nơi neo');
+    run("DDX_VC=W().dat[DDX_V.id].o[DDX_VI];DDX_VT=vaiNow(DDX_VC.chu.id).ten;DDX_FV=favOf(DDX_VT);DAT.phat.vai.truy=1;G.run.truy=null");
+    ok(!!run("datPha(DDX_V,DDX_VI)"), 'phá công trình của người giữ vai');
+    ok(run("favOf(DDX_VT)<DDX_FV"), 'thiện cảm của chủ giảm');
+    ok(run("G.run.truy&&G.run.truy.k==='cuop'"), 'chủ đuổi theo đòi đánh (truy loại cuop)');
+    ok(run("DDX_VC.ct&&DDX_VC.hu>W().t"), 'nơi neo: công trình cốt lõi chỉ hư tạm');
+    const a1 = JSON.parse(run("JSON.stringify(placeActs(DDX_V).find(a=>CONG_TRINH[DDX_VC.ct].acts.includes(a.a))||null)"));
+    ok(a1 && a1.dis, 'đang hư: nút vẫn hiện nhưng không dùng được');
+    run("W().t=DDX_VC.hu+1");ok(run("placeActs(DDX_V).some(a=>CONG_TRINH[DDX_VC.ct].acts.includes(a.a)&&!a.dis)"), 'quá hạn: đã dựng lại');
+    // nơi lõi: không phá được
+    run("DDX_L=anchorNode('LOC05');placeActs(DDX_L);DDX_LI=W().dat[DDX_L.id].o.findIndex(c=>c.goc&&c.ct&&CONG_TRINH[c.ct].pha)");
+    if (run("DDX_LI") >= 0) {
+      ok(run("!!datOpts(DDX_L).find(o=>o.id==='pha:'+DDX_LI).no"), 'nơi lõi LOC05: lựa chọn phá bị khoá (có lý do)');
+      ok(!run("datPha(DDX_L,DDX_LI)") && run("!!W().dat[DDX_L.id].o[DDX_LI].ct"), 'nơi lõi LOC05: không phá được công trình cốt lõi');
+    } else ok(true, 'nơi lõi LOC05 không có công trình phá được');
+    // sơn môn điện không phá được
+    run(`DDX_S=${all}.find(n=>n.type==='tong');placeActs(DDX_S)`);
+    ok(run("!datOpts(DDX_S).some(o=>/^pha:/.test(o.id))"), 'sơn môn điện không phá được');
+    // mục Đất đai qua giao diện chọn việc
+    run("G.run.scene=null;G.run.at=DDX_T2.id;openPlace(DDX_T2.id);placeAct('datdai')");
+    ok(run("G.run.scene&&G.run.scene.venue==='datdai'&&venueOpts(nodeById(G.run.scene.id),'datdai').length>0"), 'mở mục Đất đai: có danh sách việc');
+    // bản lưu cũ: chưa có W().dat → sinh khi tải, giữ quán, chợ, nhà, thầy, Ám Hội
+    run("delete W().dat;G.run.scene=null");
+    run(`DDX_OLD=${all}.find(n=>n.type==='thanh'&&n.state!=='ruin')`);
+    const old = JSON.parse(run("JSON.stringify(placeActs(DDX_OLD).map(a=>a.a))"));
+    ok(['inn','tea','tuu','shop','board','tram','camdo','ghost','amhoi','doilt'].every(a => old.includes(a)), 'bản lưu cũ: thành vẫn đủ quán, chợ, trạm, quỷ thị, Ám Hội ('+old.join()+')');
+    ok(run("!!W().dat&&!!W().dat[DDX_OLD.id]"), 'bản lưu cũ: ô đất sinh khi cần');
+    run("FEAT.no=1;FEAT.nha=1;delete W().dat");ok(run("(()=>{const L=placeActs(DDX_OLD).map(a=>a.a);return L.includes('vay')&&L.includes('nha')})()"), 'bản lưu cũ (bật nợ, nhà ở): vẫn có người cho vay và nhà ở');run("FEAT.no=0;FEAT.nha=0");
+    ok(run("JSON.parse(JSON.stringify(W())).dat[DDX_OLD.id].o.length===W().dat[DDX_OLD.id].o.length"), 'ô đất lưu được (qua JSON)');
+    // để sẵn sở hữu
+    ok(run("datSoHuu(DDX_OLD,0)&&datCuaTa().some(x=>x.node===DDX_OLD.id&&x.i===0)&&datPhat(DDX_OLD,W().dat[DDX_OLD.id].o[0],false).length===0"), 'ô của ngươi: không bị phạt (để sẵn cho mua đất)');
+    } finally { run("Object.assign(DAT,JSON.parse(DAT_BK))"); }
+  },
   // Sửa-K: truy đuổi — chạy thoát thì bị bám theo, bị chặn kể cả giữa chặng đi dài, cắt đuôi bằng hết hạn/thắng/nơi an toàn, lựa chọn khi bị chặn
   nd2_kiem() {
     // công cụ kiểm nội dung đợt hai báo lỗi đúng tệp/dòng/khoá
