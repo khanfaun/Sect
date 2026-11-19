@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "pha_phong_an",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Đèn tắt quanh ngõ",
+      "t": "Từ ngày ngươi phá phong ấn, mỗi khi gió từ phế tích thổi lại thì đèn đầu ngõ tắt. Một nhà đã chuyển trẻ sang ngủ nhờ. Người giữ miếu muốn ngươi chỉ chính xác chỗ vết nứt để họ căng dây báo nguy.",
+      "c": [
+        {
+          "id": "chi",
+          "l": "Dẫn người giữ miếu tới ngoài vết nứt",
+          "t": "Ngươi chỉ chỗ mình đã phá rồi giúp treo biển báo ở lối dân hay qua, bên ngoài vùng nguy hiểm.",
+          "e": {
+            "h": 4
+          }
+        },
+        {
+          "id": "bao",
+          "l": "Báo việc đã xảy ra cho các hộ",
+          "t": "Ngươi kể đúng việc mình làm và lúc đèn bắt đầu tắt. Các hộ tự chia phiên đưa trẻ đi."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Người còn thức sau khuya",
+      "t": "Một người gác đường nhận ra ngươi từng mở phong ấn. Sau lần ấy có thứ theo tiếng chân về tới làng, khiến họ phải bỏ việc đêm. Hôm nay họ hỏi có thể nhờ ngươi đứng cùng họ tới sáng không.",
+      "c": [
+        {
+          "id": "truc",
+          "l": "Ở cùng người gác tới khi trời sáng",
+          "t": "Ngươi mang đèn ra ngồi cạnh. Khi nghe tiếng lạ, hai người gọi người trong nhà thay vì đi theo.",
+          "e": {
+            "h": 8
+          }
+        },
+        {
+          "id": "gop",
+          "l": "Góp tiền thay đèn quanh lối",
+          "t": "Ngươi giao tiền dầu cho người gác. Họ giữ đủ cho đêm nay và chia phần thừa cho nhà cuối dốc.",
+          "dk": {
+            "bacTu": 90
+          },
+          "e": {
+            "bac": -90
+          }
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Tờ bùa bị trả về",
+      "t": "Người ở chân núi trả ngươi tờ bùa nhặt được gần chỗ phong ấn vỡ. Họ không biết đọc nhưng nhớ sau ngày ngươi tới, gia súc không còn dám đến giếng. Họ muốn đem giấy tới thợ trận để hỏi.",
+      "c": [
+        {
+          "id": "dua",
+          "l": "Cùng họ đem giấy đi hỏi thợ trận",
+          "t": "Ngươi đi với họ và nhận việc đã phá ấn. Thợ trận nghe xong đánh dấu vùng cần tránh.",
+          "e": {
+            "h": 5
+          }
+        },
+        {
+          "id": "de",
+          "l": "Để họ giữ giấy và ghi đường tìm thợ",
+          "t": "Ngươi chép chỗ tìm người hiểu ấn. Họ đi trước khi trời tối, kẹp giấy trong tấm vải."
+        }
+      ]
+    }
+  ]
+}
