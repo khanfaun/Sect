@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "loai": "canh",
+  "nhom": "truy",
+  "canh": {
+    "thu": [
+      {
+        "t": "{ke} bước ra khỏi cỏ cao và hạ thấp đầu. Bùn trên chân nó đã khô thành vảy. Nó men nửa vòng quanh ngươi rồi nằm phục ngay ở khoảng đất trống duy nhất."
+      },
+      {
+        "t": "Cành khô gãy rắc phía sau. {ke} đã bám theo tới đây, hơi thở phả trắng dưới tán cây. Nó dừng sát bờ đá, nhìn chằm chằm vào ngươi và gầm một tiếng ngắn."
+      },
+      {
+        "t": "Một đàn chim vụt khỏi bụi. {ke} vừa ló ra trên mô đất, lông còn ướt như đã bơi qua suối để theo dấu. Nó bước ngang mỗi khi ngươi đổi hướng."
+      }
+    ],
+    "tac": [
+      {
+        "t": "{ke} đẩy một thân cây đã mục ra chắn lối rồi bước khỏi bóng lau. Bùn còn dính trên gấu áo. Hắn nhận ra ngươi và gọi đám đi cùng ra khỏi hai bên đường."
+      },
+      {
+        "t": "{ke} ngồi trên tảng đá, tay giữ túi lương còn mở. Thấy ngươi, hắn buộc miệng túi lại, đứng dậy hỏi món hôm trước định để tới bao giờ mới tính."
+      },
+      {
+        "t": "Ngọn đèn dầu dưới mái nghỉ đã tắt. {ke} từ phía sau cột bước tới, ngón tay còn đen vì vừa bóp bấc. Hắn hỏi lần này ngươi có chịu đứng lại nghe hắn nói không."
+      }
+    ],
+    "tu": [
+      {
+        "t": "{ke} thu phi kiếm về tay, đáp trước mặt ngươi. Áo ngoài còn dính bụi đường. Người ấy nhắc đoạn hai bên gặp nhau lần trước và muốn ngươi trả lời ngay tại đây."
+      },
+      {
+        "t": "Ánh bùa vừa tắt trên mặt tảng đá thì {ke} đã hiện ra bên cạnh. Người ấy kẹp lá bùa vào tay áo, nói đã hỏi qua mấy trạm mới tìm được ngươi."
+      },
+      {
+        "t": "{ke} đứng cạnh giếng bỏ, đang rửa bụi khỏi cổ tay. Người ấy thấy ngươi thì đặt gáo lên miệng giếng và đưa tay về chuôi kiếm, chừa đủ chỗ để nghe một lời."
+      }
+    ],
+    "ke": [
+      {
+        "t": "{ke} bước ra, gọi ngươi bằng cái tên rất ít người còn nhớ. Trong tay họ có vạt áo giữ từ lần gặp trước. Họ hỏi đến khi nào ngươi chịu nói về việc đã xảy ra."
+      },
+      {
+        "t": "{ke} để một món đồ cũ lên tảng đá giữa hai người. Mép vải còn sờn đúng chỗ ngươi từng nắm. Họ bảo đã mang nó theo suốt nhiều chặng để hỏi cho ra lẽ."
+      },
+      {
+        "t": "{ke} đứng dưới cành cây thấp, đôi giày bết bùn. Họ chỉ hỏi ngươi có nhớ người từng nằm lại hôm ấy không, rồi đặt chiếc túi đã sờn bên chân."
+      }
+    ],
+    "quy": [
+      {
+        "t": "Ngọn đèn xanh đi sát mặt đất rồi đứng yên. {ke} từ bên trong ánh ấy hiện ra, áo rũ thẳng dù gió thổi qua. Bên tai ngươi có tiếng cào rất nhỏ."
+      },
+      {
+        "t": "{ke} chờ dưới mái hiên bỏ trống. Nước từ tay áo nhỏ từng giọt, nhưng đất nơi nó đứng vẫn khô. Khi ngươi nhìn lại, nó đã quay mặt theo hướng ngươi định đi."
+      },
+      {
+        "t": "Tiếng kéo dép từ phía sau bỗng im. {ke} hiện trước mặt ngươi, chẳng để lại dấu chân nào trên đất ướt. Nó giơ tay chỉ về phía ngươi vừa rời khỏi."
+      }
+    ],
+    "no": [
+      {
+        "t": "{ke} giở tờ cáo thị trước mặt ngươi, chỉ dấu son và dòng nợ quá hạn. Một góc giấy đã ướt vì mưa. Người ấy bảo nếu đã trả thì đưa biên nhận ra xem."
+      },
+      {
+        "t": "{ke} mang theo cuốn sổ bọc vải, mở đúng trang có tên ngươi. Bên cạnh khoản nợ còn ghi ngày họ đi tìm. Người ấy hỏi ngươi định về phủ hay thanh toán tại đây."
+      },
+      {
+        "t": "{ke} trao tận tay ngươi bản chép giấy đòi nợ. Họ giữ bản có dấu dưới tay áo và đợi ngươi đọc hết, rồi mới hỏi nhà nào đã từng nhận tiền thay."
+      }
+    ],
+    "cuop": [
+      {
+        "t": "{ke} nhận ra sợi dây buộc trên túi ngươi và gọi đúng món đồ từng bị lấy. Người ấy giữ lại tờ mua đã nhòe, hỏi ngươi còn định để họ đi tìm bao lâu nữa."
+      },
+      {
+        "t": "{ke} tới cùng một người từng thấy vụ cướp. Họ chỉ dấu trên chiếc hòm vẫn còn nhớ rõ, yêu cầu ngươi tự mở trước mặt cả hai để xem đồ đã đi đâu."
+      },
+      {
+        "t": "{ke} đặt chiếc vỏ rỗng của món bị cướp trước mặt ngươi. Người ấy kể đã phải về tay không và muốn nghe ngươi sẽ trả lại gì trước khi họ quay về."
+      }
+    ]
+  }
+}
