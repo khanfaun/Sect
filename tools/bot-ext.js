@@ -6,7 +6,7 @@
 var COV={};
 function covInc(k){COV[k]=(COV[k]||0)+1;}
 // bọc hàm để đếm số lần gọi (chỉ quan sát)
-const COV_FN=['equip','unequip','bagUse','usePill','learnBook','studyArt','dropArt','artStash','artUnstash','petHatch','petFeed','petSet','petFree','craft','sellItem','buyUpg','buyMount','chGive','chTrade','ddPut','ddTake','chuAuto','knSet','stageGo','meetEnt','venueDo','questDo','takeQuest','kyPick','qevPick','btFinish','btFail','doCross','doGoBack','lkXk','bqCustom','playerAct','playerPillAct','playerFlee','playerYield','playerDD','playerMind','playerUlt','playerBurn','kvChoose','htChoose','skLockToggle','bossFight','encAct','retire','sellItem','passAct','buy','takePick','rewardContinue','combatContinue','choose','tamMaChon','hoatAnh','ccStart','ccDo','ccRite'];
+const COV_FN=['equip','unequip','bagUse','usePill','learnBook','studyArt','dropArt','artStash','artUnstash','petHatch','petFeed','petSet','petFree','craft','sellItem','buyUpg','buyMount','chGive','chTrade','ddPut','ddTake','chuAuto','knSet','stageGo','meetEnt','venueDo','questDo','takeQuest','kyPick','qevPick','btFinish','btFail','doCross','doGoBack','lkXk','bqCustom','playerAct','playerPillAct','playerFlee','playerYield','playerDD','playerMind','playerUlt','playerBurn','kvChoose','htChoose','skLockToggle','bossFight','encAct','retire','sellItem','passAct','buy','takePick','rewardContinue','combatContinue','choose','tamMaChon','hoatAnh','ccStart','ccDo','ccRite','tuHoc','tuHd','tuTang','tuDoiPhu'];
 for(const n of COV_FN){const f=globalThis[n];if(typeof f!=='function')continue;globalThis[n]=function(){covInc(n);return f.apply(this,arguments);};}
 {const f=placeAct;placeAct=function(a){covInc('placeAct:'+a);return f.apply(this,arguments);};}
 {const f=venueDo;venueDo=function(v,id){covInc('venue:'+v+':'+id);return f.apply(this,arguments);};}
@@ -34,6 +34,7 @@ const MANAGE={
   tong(){const r=run2();if(!r.flags||!r.flags.tongmon)return false;const k=Object.keys(r.mats||{}).find(x=>r.mats[x]>0);if(chGet(chKey())>=15&&chance(.5)){chTrade();return true;}if(k){chGive(k);return true;}return false;},
   lock(){const r=G.run;if(!r.skills.length)return false;skLockToggle(rr(r.skills).id);return true;},
   // Đ6 cải căn: vô căn đã nghe dấu vết thì thử bắt đầu một đường (các bước làm ở hộp Cơ duyên tại nơi neo)
+  nghetu(){const r=G.run;if(typeof tuOpts!=='function'||!r||r.pham)return false;const n=nodeById(r.at);const L=tuOpts(n).filter(o=>!o.no);if(!L.length)return false;const o=rr(L);return !!tuDo(n,o.id);},
   caican(){const r=G.run;if(typeof ccStart!=='function'||!r||r.cc||r.ccOk||!r.ccHeard)return false;const L=Object.keys(r.ccHeard).filter(id=>!ccWhyStart(id));if(!L.length)return false;return ccStart(rr(L));},
   meta(){const M=G.meta;const u=UPG.filter(x=>(M.upg[x.id]||0)<x.max&&M.pts>=x.c[M.upg[x.id]||0]);if(!u.length)return false;buyUpg(rr(u).id);return true;},
 };

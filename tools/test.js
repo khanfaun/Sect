@@ -28,6 +28,50 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Đ7.2: học công pháp nghề tu, hợp đồng, tầng, tài nguyên riêng (core2/51-nghe-tu.js)
+  tu_hoc() {
+    fresh("G._ngNoEv=1;G._tuNoRui=1;G.run.pham=1;G.run.st=999");
+    ok(!!run("tuWhyHoc('TU01',0)"), 'phàm nhân chưa dẫn khí: không học được');
+    run("G.run.pham=0;G.run.root={id:'vo',els:[],q:null}");ok(/linh căn/.test(run("tuWhyHoc('TU01',0)")), 'vô linh căn: không vận được công pháp');
+    run("G.run.root={id:'tap',els:['kim','moc'],q:'thuong'};G.run.rootKnown=1;var tuLk=lkTang;lkTang=()=>1");
+    const nd=run("tuNode('TU01')");ok(nd!=null&&run(`tuNode('TU01')===${nd}`)&&run("tuNode('TU02')")===nd, 'nơi thầy dạy chốt một lần (TU01, TU02 cùng LOC13)');
+    run(`(()=>{const r=G.run;r.scene=null;r.at=${nd};openPlace(${nd});})()`);
+    ok(run(`placeActs(nodeById(${nd})).some(a=>a.a==='tumon')`), 'nơi thầy dạy có nút Pháp môn');
+    const t0=run("W().t");run("placeAct('tumon')");ok(run("venueDo('tumon','hoc:TU01')"), 'bái học Dư Phong Kiếm Lục');
+    ok(run("G.run.st")===979&&run("W().t-"+t0)>=run("30*HD"), 'trả 20 linh thạch, mất ba mươi ngày');
+    ok(run("G.run.tu.chinh")==='TU01'&&run("!!tuArtOf('TU01')"), 'thành chuyên môn chính, có công pháp');
+    run("syncSkills()");ok(run("G.run.skills.some(k=>k.id==='sk01a')")&&!run("G.run.skills.some(k=>k.id==='sk01b')"), 'tầng một mở Thử Phong, chưa có Gạt Lưỡi');
+    ok(run("SK_RAW.every(s=>!/^sk\\d\\d[abc]$/.test(s[0]))")&&run("CAT.arts.every(a=>!a.tu)"), 'chiêu, công pháp nghề tu không lọt vào kho ngẫu nhiên');
+    ok(run("artFxList(tuArtOf('TU01')).find(x=>x.k==='atkP').v")===6&&/Công vật lý/.test(run("artLines(tuArtOf('TU01')).join('|')")), 'dòng nội tại tính đúng số thật (công vật lý +6%), hiện bằng chữ');
+    // hợp đồng
+    const tn=run("W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin').id");
+    run(`(()=>{const r=G.run;r.scene=null;r.at=${tn};openPlace(${tn});placeAct('tumon');})()`);
+    ok(!!run("venueOpts(nodeById(G.run.at),'tumon').find(o=>o.id==='hd:TU01'&&!o.no)"), 'nhận được hợp đồng hộ tống ở thôn trấn');
+    run("venueDo('tumon','hd:TU01')");ok(run("G.run.tu.k.TU01.xp")===10&&run("G.run.st")===982, 'hợp đồng xong: +10 tay nghề, lãi 3 linh thạch');
+    run("venueDo('tumon','hd:TU01')");ok(run("G.run.tu.k.TU01.xp")===10&&run("G.run.st")===985, 'cùng việc trong ba mươi ngày: vẫn có công, không thêm tay nghề');
+    // tầng hai
+    ok(/Tay nghề/.test(run("lkTang=()=>6;tuWhyTang('TU01')")), 'tầng hai cần tay nghề');
+    run("G.run.tu.k.TU01.xp=100;lkTang=()=>1");ok(/Luyện Khí tầng 6/.test(run("tuWhyTang('TU01')")), 'tầng hai cần Luyện Khí tầng sáu');
+    run("lkTang=()=>6");ok(run("tuWhyTang('TU01')")==='', 'đủ điều kiện tầng hai');
+    run("venueDo('tumon','tang:TU01')");ok(run("tuArtOf('TU01').lv")===4&&run("G.run.skills.some(k=>k.id==='sk01b')"), 'tầng hai mở Gạt Lưỡi');
+    ok(/hợp đồng/.test(run("G.run.tu.k.TU01.xp=300;G.run.realm=1;tuWhyTang('TU01')")), 'mỗi tầng cần một hợp đồng kiểm chứng');
+    run("G.run.realm=0");
+    // chuyên môn phụ, ghép
+    run(`(()=>{const r=G.run;r.scene=null;const n=tuNode('TU05');r.at=n;openPlace(n);})()`);run("venueDo('tumon','hoc:TU05')");
+    ok(run("G.run.tu.phu")==='TU05', 'học thêm Thần thức tu làm chuyên môn phụ');
+    ok(/hai chuyên môn/.test(run("tuWhyHoc('TU02',0)")), 'đường thứ ba bị từ chối');
+    ok(run("tuLoiOn('TU01')")&&run("tuLoiOn('TU05')"), 'Kiếm tu + Thần thức: ghép có lợi');
+    run("tuXp('TU05',10)");ok(run("G.run.tu.k.TU05.xp")===5, 'chuyên môn phụ nhận một nửa tay nghề');
+    run("venueDo('tumon','doiphu')");ok(run("G.run.tu.phu")===null&&run("!!tuArtOf('TU05')"), 'gác chuyên môn phụ: giữ công pháp, trống chỗ');
+    // tài nguyên riêng trong trận
+    run("G.run.tuRes={TU01:4};startCombat({},{kind:'node'});var tuSc=G.run.scene,tuMe=mainUnit(tuSc),tuFoe=alive(tuSc,'B')[0];tuFoe.hp=tuFoe.max=99999");
+    ok(run("tuMe.tuRes.TU01")===4&&run("tuResView(tuMe)[0].n")==='Kiếm ý', 'vào trận mang theo kiếm ý');
+    run("resolveSkill(tuSc,tuMe,SK.sk01a,1,[tuFoe],1,'auto')");ok(run("tuMe.tuRes.TU01")===5, 'ra chiêu kiếm: kiếm ý +1');
+    run("resolveSkill(tuSc,tuMe,SK.sk01a,1,[tuFoe],1,'auto')");ok(run("tuMe.tuRes.TU01")===0&&run("NK.count('tu.res')")>=1, 'đủ năm thì dồn vào một đòn');
+    run("tuMe.tuRes.TU01=3;tuSc.over='win';finishCombat(tuSc)");ok(run("G.run.tuRes.TU01")===1, 'ra trận còn một nửa');
+    run("lkTang=tuLk");
+    fresh();run("delete G.run.tu");ok(run("tuSt().chinh")===null, 'bản lưu cũ không có r.tu vẫn chạy');
+  },
   // Đ7.1: từ vựng hiệu ứng chiêu mới (core2/50-fx-moi.js)
   fx_moi() {
     fresh("G.run.pham=0;G.run.root={id:'tap',els:['kim','moc'],q:'thuong'};startCombat({},{kind:'node'});G.run.scene.skipDodge=1");

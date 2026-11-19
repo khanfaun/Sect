@@ -79,6 +79,7 @@ export function TheNguoi({ sc, u, pickMode, compact }) {
           {u.tl != null && <span {...tip('Thể lực ' + Math.round(u.tl) + '%')}><span className="bl"><Ic n="run" /></span><CBar cur={u.tl} max={100} cls="tl" /></span>}
           <span {...tip('Định lực ' + Math.round(dlOf(u)) + '%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}><span className="bl"><Ic n="lotus" /></span><CBar cur={dlOf(u)} max={100} cls="dl" /></span>
         </div>
+        {u.isMain && PS.tuResView && PS.tuResView(u).map(x => <div key={x.id} className="brow tures" {...tip(x.n + ' ' + x.v + '/' + x.max)}><span className="bl">✦</span><CBar cur={x.v} max={x.max} cls="tu" /><b>{x.n}</b></div>)}
         <H h={PS.stIcons(u.st)} />
       </div>
     </div>
@@ -117,6 +118,7 @@ export function TheMinh({ sc, u }) {
           <span {...tip('Thể lực ' + Math.round(u.tl) + '%\nNé tốn 25%, đỡ được đòn tốn 30%.\nHồi 20% mỗi khi về mốc đầu')}><span className="bl"><Ic n="run" /></span><CBar cur={u.tl} max={100} cls="tl" /></span>
           <span {...tip('Định lực ' + Math.round(dlOf(u)) + '%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt, rồi hồi đầy.')}><span className="bl"><Ic n="lotus" /></span><CBar cur={dlOf(u)} max={100} cls="dl" /></span>
         </div>
+        {PS.tuResView && PS.tuResView(u).map(x => <div key={x.id} className="brow tures" {...tip(x.n + ' ' + x.v + '/' + x.max + '\nRa chiêu của nghề thì tích thêm; đủ thì dồn vào một đòn mạnh hơn.')}><span className="bl">✦</span><CBar cur={x.v} max={x.max} cls="tu" /><b>{x.n}</b></div>)}
         <H h={PS.stIcons(u.st)} />
       </div>
     </div>

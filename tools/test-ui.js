@@ -332,6 +332,21 @@ const TESTS = {
     await ev(p, () => {UI.panel=null;render();});
   },
   // Đ6: nút Cơ duyên ở nơi neo, hộp lựa chọn, thẻ Cơ duyên trong Sổ tay (chữ, không số)
+  // Đ7.2: nghề tu — hộp Pháp môn, thanh tài nguyên riêng trong trận, Đạo đồ
+  async nghe_tu(p) {
+    await ev(p, () => {const r=G.run;r.pham=0;r.root={id:'tap',els:['kim','moc'],q:'thuong'};r.rootKnown=1;r.st=999;r.scene=null;UI.modal=null;UI.panel=null;
+      const id=tuNode('TU01');r.at=id;openPlace(id);render();});
+    await p.waitForTimeout(150);
+    ok(/Pháp môn/.test(await ev(p, () => document.body.innerText)), 'nơi thầy dạy có nút Pháp môn');
+    await ev(p, () => {ACT.pact('tumon');render();});await p.waitForTimeout(100);
+    ok(/Dư Phong Kiếm Lục/.test(await ev(p, () => (document.querySelector('.venue')||{}).innerText||'')), 'hộp Pháp môn có Dư Phong Kiếm Lục');
+    await ev(p, () => {if(typeof lkTang==='function'){window._lk=lkTang;lkTang=()=>1;}ACT.vgo('tumon:hoc:TU01');if(window._lk)lkTang=window._lk;G.run.scene=null;UI.panel='char';UI.tab.char='dao';render();});await p.waitForTimeout(150);
+    ok(/Kiếm tu/.test(await ev(p, () => document.body.innerText)), 'Đạo đồ có nghề Kiếm tu');
+    await ev(p, () => {UI.panel=null;UI.modal=null;G.run.tuRes={TU01:3};openPlace(G.run.at);startCombat({cnt:1},{kind:'node'});CFG.autoFight=0;render();});
+    await p.waitForTimeout(400); await p.click('[data-act="cbGo"]'); await p.waitForSelector('.cb-ally', { timeout: 8000 }).catch(() => {});
+    ok(await ev(p, () => !!document.querySelector('.tures')) && /Kiếm ý/.test(await ev(p, () => (document.querySelector('.tures')||{}).innerText||'')), 'trong trận có thanh Kiếm ý');
+    await ev(p, () => {G.run.scene=null;UI.modal=null;render();});
+  },
   async cai_can(p) {
     await ev(p, () => {const r=G.run;r.pham=1;r.root={id:'vo',els:[],q:null};r.rootKnown=1;r.bac=50000;r.scene=null;UI.modal=null;UI.panel=null;
       const id=ccSrc('CC01').node;r.at=id;openPlace(id);render();});

@@ -58,5 +58,6 @@
   "fxm.tip.trap": "Đặt trận: kẻ địch đánh cận chiến dính {{0}}% công phép, giữ {{1}} lượt",
   "fxm.tip.breakAll": "Dừng mọi tụ lực đang diễn ra, cả phe mình",
   "fxm.tip.dispel": "Xoá hộ thể và khí thế của mọi kẻ địch",
+  "fxm.tip.pillBoost": "Uống một viên đan hồi khí huyết trong túi, lượng hồi thêm {{0}}%",
   "fxm.tip.cd": "Phải chờ {{0}} lần ra tay mới dùng lại"
 }

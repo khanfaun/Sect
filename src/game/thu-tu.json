@@ -299,6 +299,8 @@
  "content/rules/cai-can.js",
  "core2/49-cai-can.js",
  "core2/50-fx-moi.js",
+ "content/rules/nghe-tu.js",
+ "core2/51-nghe-tu.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",

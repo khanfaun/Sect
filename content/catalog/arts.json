@@ -11423,5 +11423,853 @@
     ],
     "d": "Người chữa mắt hong thuốc trên mái bằng hơi thở. Lời dặn ở cuối quyển vẫn còn đọc được.",
     "dang": "Thanh tâm"
+  },
+  {
+    "id": "cp_tu01",
+    "type": "cp",
+    "tu": "TU01",
+    "n": "Dư Phong Kiếm Lục",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "atkP",
+        "v": 6,
+        "req": 0,
+        "raw": 1,
+        "d": "Công vật lý +{v}%"
+      },
+      {
+        "sk": "sk01a",
+        "req": 0
+      },
+      {
+        "fx": "cx",
+        "v": 4,
+        "req": 0,
+        "raw": 1,
+        "d": "Chính xác +{v}"
+      },
+      {
+        "sk": "sk01b",
+        "req": 0
+      },
+      {
+        "fx": "pierceAdd",
+        "v": 10,
+        "req": 1,
+        "raw": 1,
+        "d": "Phá giáp +{v} phần trăm"
+      },
+      {
+        "sk": "sk01c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Sửa kiếm tốn ít nguyên liệu hơn (chờ hệ chế tạo)"
+      }
+    ],
+    "d": "Kiếm pháp của người hộ tống đường rừng: chặt nhịp trước khi đối phương ra đòn.",
+    "dang": "Kiếm tu"
+  },
+  {
+    "id": "cp_tu02",
+    "type": "cp",
+    "tu": "TU02",
+    "n": "Trầm Cốt Công",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "hpP",
+        "v": 8,
+        "req": 0,
+        "raw": 1,
+        "d": "Khí huyết +{v}%"
+      },
+      {
+        "sk": "sk02a",
+        "req": 0
+      },
+      {
+        "fx": "defP",
+        "v": 6,
+        "req": 0,
+        "raw": 1,
+        "d": "Thủ +{v}%"
+      },
+      {
+        "sk": "sk02b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Khi thủ thế, đòn vật lý nhẹ đi (chờ hệ luyện thể)"
+      },
+      {
+        "sk": "sk02c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Điều dưỡng thương cơ nhanh hơn khi đủ thuốc (chờ hệ chữa thương)"
+      }
+    ],
+    "d": "Hơi thở chìm vào xương, thân người nặng như đá ướt.",
+    "dang": "Thể tu"
+  },
+  {
+    "id": "cp_tu03",
+    "type": "cp",
+    "tu": "TU03",
+    "n": "Huyết Triều Nội Kinh",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "drainRel",
+        "v": 10,
+        "req": 0,
+        "raw": 1,
+        "d": "Hút sinh lực hiệu quả hơn {v}%"
+      },
+      {
+        "sk": "sk03a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Kháng chảy máu (chờ trạng thái chảy máu)"
+      },
+      {
+        "sk": "sk03b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Hút sinh lực có trần riêng cho từng chiêu"
+      },
+      {
+        "sk": "sk03c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Nghi thức tự nguyện tốn ít huyết hơn"
+      }
+    ],
+    "d": "Máu là sông, người tu giữ đê chứ không phá đê.",
+    "dang": "Huyết tu"
+  },
+  {
+    "id": "cp_tu04",
+    "type": "cp",
+    "tu": "TU04",
+    "n": "Tồn Danh Hồn Chương",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "than",
+        "v": 1,
+        "req": 0,
+        "raw": 1,
+        "d": "Thần thức +{v}"
+      },
+      {
+        "sk": "sk04a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Kháng hồn (chờ kênh hồn riêng)"
+      },
+      {
+        "sk": "sk04b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Một ô khế ước hồn (chờ hệ khế hồn)"
+      },
+      {
+        "sk": "sk04c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Giải phóng hồn bằng thương lượng, không phá khế đã xong"
+      }
+    ],
+    "d": "Gọi đúng tên một hồn là trả lại cho nó một nửa con người.",
+    "dang": "Hồn tu"
+  },
+  {
+    "id": "cp_tu05",
+    "type": "cp",
+    "tu": "TU05",
+    "n": "Tĩnh Hải Quán Tâm Pháp",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "mpP",
+        "v": 8,
+        "req": 0,
+        "raw": 1,
+        "d": "Linh lực +{v}%"
+      },
+      {
+        "sk": "sk05a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Kháng nhiễu loạn (chờ trạng thái nhiễu thần)"
+      },
+      {
+        "sk": "sk05b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Dò thêm một ý đồ của đối phương khi giao tranh"
+      },
+      {
+        "sk": "sk05c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Nghiên cứu chứng cứ nhanh hơn"
+      }
+    ],
+    "d": "Biển trong lòng lặng thì mới thấy được đáy.",
+    "dang": "Thần thức tu"
+  },
+  {
+    "id": "cp_tu06",
+    "type": "cp",
+    "tu": "TU06",
+    "n": "Khế Môn Dẫn Ấn",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "mpP",
+        "v": 6,
+        "req": 0,
+        "raw": 1,
+        "d": "Linh lực +{v}%"
+      },
+      {
+        "sk": "sk06a",
+        "req": 0
+      },
+      {
+        "fx": "sumT",
+        "v": 1,
+        "req": 0,
+        "raw": 1,
+        "d": "Linh ảnh ở lại thêm {v} lượt"
+      },
+      {
+        "sk": "sk06b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Chỉ một thực thể triệu hồi cùng lúc"
+      },
+      {
+        "sk": "sk06c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Khế ấn tốn ít vật liệu hơn (chờ hệ vật tư)"
+      }
+    ],
+    "d": "Cửa mở phải có ngày khép; người gọi phải trả lại kẻ được gọi.",
+    "dang": "Triệu hoán sư"
+  },
+  {
+    "id": "cp_tu07",
+    "type": "cp",
+    "tu": "TU07",
+    "n": "Đồng Tức Ngự Thú Quyển",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "petHeal",
+        "v": 15,
+        "req": 0,
+        "raw": 1,
+        "d": "Chữa thú hiệu quả hơn {v}%"
+      },
+      {
+        "sk": "sk07a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Thú không mất tin cậy khi được nghỉ đủ"
+      },
+      {
+        "sk": "sk07b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Điều khiển linh thú ở xa hơn"
+      },
+      {
+        "sk": "sk07c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Thú ăn tiết kiệm hơn, vẫn phải ăn"
+      }
+    ],
+    "d": "Thở cùng nhịp với con thú trước khi bắt nó nghe lời.",
+    "dang": "Ngự thú sư"
+  },
+  {
+    "id": "cp_tu08",
+    "type": "cp",
+    "tu": "TU08",
+    "n": "Bố Tinh Trận Yếu",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "trapP",
+        "v": 10,
+        "req": 0,
+        "raw": 1,
+        "d": "Trận đặt trong giao tranh mạnh hơn {v}%"
+      },
+      {
+        "sk": "sk08a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Một ô chuẩn bị trận ngoài trận"
+      },
+      {
+        "sk": "sk08b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Duy trì một trận suốt giao tranh"
+      },
+      {
+        "sk": "sk08c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Tháo trận thu hồi được vật liệu"
+      }
+    ],
+    "d": "Mỗi hạt sao chôn xuống là một lời hứa với mặt đất.",
+    "dang": "Trận pháp sư"
+  },
+  {
+    "id": "cp_tu09",
+    "type": "cp",
+    "tu": "TU09",
+    "n": "Thanh Hỏa Đan Lý",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Chế đan dễ thành hơn (chờ hệ luyện đan)"
+      },
+      {
+        "sk": "sk09a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Nhìn ra tạp chất trước khi dùng đan"
+      },
+      {
+        "sk": "sk09b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Mỗi mùa một mẻ đan được nâng một bậc phẩm"
+      },
+      {
+        "sk": "sk09c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Luyện đan tốn ít nhiên liệu hơn"
+      }
+    ],
+    "d": "Lửa xanh không vội; vội thì đan cháy, người cũng cháy.",
+    "dang": "Đan sư"
+  },
+  {
+    "id": "cp_tu10",
+    "type": "cp",
+    "tu": "TU10",
+    "n": "Sinh Tức Bách Thảo Kinh",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Vườn dược cho nhiều hơn (chờ hệ linh điền)"
+      },
+      {
+        "sk": "sk10a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Nhận ra cây độc cùng phẩm"
+      },
+      {
+        "sk": "sk10b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Dược liệu giữ được lâu hơn"
+      },
+      {
+        "sk": "sk10c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Trị bệnh tốn ít dược hơn, vẫn phải chẩn đoán"
+      }
+    ],
+    "d": "Cây cũng thở; người trồng phải biết nghe.",
+    "dang": "Dược sư tu luyện"
+  },
+  {
+    "id": "cp_tu11",
+    "type": "cp",
+    "tu": "TU11",
+    "n": "Định Chất Luyện Khí Thiên",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Đồ tự chế bền hơn (chờ hệ chế tạo)"
+      },
+      {
+        "sk": "sk11a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Nhìn thấy một dòng hỏng ẩn sau khi kiểm"
+      },
+      {
+        "sk": "sk11b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Sửa pháp khí không mất thuộc tính"
+      },
+      {
+        "sk": "sk11c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Tháo món tự làm thu lại được phôi"
+      }
+    ],
+    "d": "Định được chất của kim loại thì mới định được hình.",
+    "dang": "Luyện khí sư"
+  },
+  {
+    "id": "cp_tu12",
+    "type": "cp",
+    "tu": "TU12",
+    "n": "Nhất Nét Phù Kinh",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Viết phù dễ thành hơn (chờ hệ phù)"
+      },
+      {
+        "sk": "sk12a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Mang thêm một phù chuẩn bị"
+      },
+      {
+        "sk": "sk12b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Nạp sẵn một phù ngoài trận"
+      },
+      {
+        "sk": "sk12c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Giấy mực tốn ít hơn"
+      }
+    ],
+    "d": "Một nét đặt xuống không được sửa; nét sai thì đốt cả tờ.",
+    "dang": "Phù sư"
+  },
+  {
+    "id": "cp_tu13",
+    "type": "cp",
+    "tu": "TU13",
+    "n": "Mộc Cốt Khôi Kinh",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "sumHp",
+        "v": 10,
+        "req": 0,
+        "raw": 1,
+        "d": "Khôi lỗi bền hơn {v}%"
+      },
+      {
+        "sk": "sk13a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Sửa khôi nhanh hơn"
+      },
+      {
+        "sk": "sk13b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Một khôi chủ động ngoài trận"
+      },
+      {
+        "sk": "sk13c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Tháo khôi thu lại gỗ và kim loại"
+      }
+    ],
+    "d": "Khớp gỗ ăn khớp với nhau như người hiểu nhau.",
+    "dang": "Khôi lỗi sư"
+  },
+  {
+    "id": "cp_tu14",
+    "type": "cp",
+    "tu": "TU14",
+    "n": "Phân Dược Độc Luận",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "poiRes",
+        "v": 10,
+        "req": 0,
+        "raw": 1,
+        "d": "Độc nhận nhẹ đi {v}%"
+      },
+      {
+        "sk": "sk14a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Nhận ra độc sau khi quan sát"
+      },
+      {
+        "sk": "sk14b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Chế được giải dược đúng họ đã nghiên cứu"
+      },
+      {
+        "sk": "sk14c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Phơi nhiễm ít rủi ro hơn khi đủ bảo hộ"
+      }
+    ],
+    "d": "Độc và thuốc khác nhau ở liều và ở người cầm.",
+    "dang": "Độc tu"
+  },
+  {
+    "id": "cp_tu15",
+    "type": "cp",
+    "tu": "TU15",
+    "n": "Tịch Thanh Phổ",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "mpP",
+        "v": 6,
+        "req": 0,
+        "raw": 1,
+        "d": "Linh lực +{v}%"
+      },
+      {
+        "sk": "sk15a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Kháng hoảng loạn (chờ trạng thái hoảng loạn)"
+      },
+      {
+        "sk": "sk15b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Âm luật tác động được đồng đội còn nghe"
+      },
+      {
+        "sk": "sk15c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Biểu diễn dễ ổn định lòng người hơn"
+      }
+    ],
+    "d": "Khúc nhạc hay nhất có chỗ lặng đúng lúc.",
+    "dang": "Âm luật tu"
+  },
+  {
+    "id": "cp_tu16",
+    "type": "cp",
+    "tu": "TU16",
+    "n": "Tàng Ảnh Hành Chương",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "dodge",
+        "v": 8,
+        "req": 0,
+        "raw": 1,
+        "d": "Né +{v}"
+      },
+      {
+        "sk": "sk16a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Do thám tốn ít thời gian hơn"
+      },
+      {
+        "sk": "sk16b",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 1,
+        "raw": 1,
+        "d": "Đòn từ chỗ ẩn có giới hạn tăng sát thương"
+      },
+      {
+        "sk": "sk16c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Rút khỏi hợp đồng trước khi ra tay chịu nửa phí phạt"
+      }
+    ],
+    "d": "Bóng đi trước người; người khéo thì bóng cũng không để lại.",
+    "dang": "Ảnh sát tu"
   }
 ]

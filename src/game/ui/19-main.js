@@ -181,7 +181,7 @@ const ACT={
   pactGo:a=>{UI.modal=null;UI.confirm=null;const sc=G.run.scene;const A=sc&&sc.type==='place'&&placeActs(nodeById(sc.id)).find(x=>x.a===a);UI.lastQ=PL_N[a]||(A&&A.l)||null;placeAct(a);UI.plTop=1;},
   vclose:()=>{const sc=G.run&&G.run.scene;if(sc)sc.venue=null;},
   vopt:id=>{const sc=G.run&&G.run.scene;if(!sc||!sc.venue)return;const o=venueOpts(nodeById(sc.id),sc.venue).find(x=>x.id===id);if(!o)return;UI.modal={k:o.lack||o.no?'vreq':'vconf',v:sc.venue,id};},
-  vgo:x=>{const [v,id]=x.split(':');UI.modal=null;const sc=G.run.scene;const o=sc&&venueOpts(nodeById(sc.id),v).find(z=>z.id===id);UI.lastQ=o?VENUE_N[v]+': '+o.l:null;venueDo(v,id);UI.plTop=1;},
+  vgo:x=>{const ix=x.indexOf(':'),v=x.slice(0,ix),id=x.slice(ix+1);UI.modal=null;const sc=G.run.scene;const o=sc&&venueOpts(nodeById(sc.id),v).find(z=>z.id===id);UI.lastQ=o?VENUE_N[v]+': '+o.l:null;venueDo(v,id);UI.plTop=1;},
   kvPick:i=>{kvChoose(+i);},
   xkGo:()=>{UI.modal=null;const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')placeAct('xk');},
   bqSet:y=>{if(UI.modal&&UI.modal.k==='bq'){UI.modal.y=+y;UI.modal.ok=0;const c=bqCapY();UI.modal.warn=c!=null&&+y>c?1:0;}},

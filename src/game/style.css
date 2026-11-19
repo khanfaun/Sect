@@ -481,7 +481,7 @@ span.el[class*=el-]{background:var(--ec);border-color:var(--ec);color:#fffaf0!im
 /* ===== chiến đấu: thẻ nhân vật, thanh chỉ số, thần lực, pháp tướng, hiệu ứng ===== */
 :root{--xf:"Charm","Noto Serif","Source Serif 4",Georgia,serif}
 .cbar{flex:1;min-width:0;height:9px;border-radius:5px;background:var(--paper2);border:1px solid var(--line);overflow:hidden}.cbar i{display:block;height:100%;border-radius:5px;transition:width .25s ease-out,background-color .25s}
-.cbar.hp i{background:#3f9463}.cbar.hp.mid i{background:#d1a521}.cbar.hp.low i{background:#c23a2b}.cbar.mp i{background:#4f86b8}.cbar.tl i{background:#e0b020}.cbar.dl i{background:var(--ink)}
+.cbar.hp i{background:#3f9463}.cbar.hp.mid i{background:#d1a521}.cbar.hp.low i{background:#c23a2b}.cbar.mp i{background:#4f86b8}.cbar.tl i{background:#e0b020}.cbar.dl i{background:var(--ink)}.cbar.tu i{background:#9b5fc0}
 .brow{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:.78em}.brow b{font-variant-numeric:tabular-nums;font-weight:600;min-width:4.6em;text-align:right;white-space:nowrap}.brow.thin .cbar{height:5px}.brow.thin{margin-top:3px}
 .bl{display:grid;place-items:center;width:1.2em;color:var(--ink2)}.bl .ic{width:13px;height:13px}
 .brow2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:5px}.brow2>span{display:flex;align-items:center;gap:5px;min-width:0}.brow2 .cbar{height:6px}.bt{font-style:normal;font-size:.68em;color:var(--ink3);white-space:nowrap}

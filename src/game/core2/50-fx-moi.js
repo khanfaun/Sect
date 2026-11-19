@@ -119,7 +119,7 @@ function fxmAfter(sc,u,sk,tg,pre){const f=sk.fx||{};const isP=u.isMain;const t=t
   fxmAfter(sc,u,sk,tg,pre);finishAct(sc,u,sk);};}
 // ---------- lời chú thích chiêu ----------
 {const _st=skillTip;skillTip=function(sk,lv){let s=_st.apply(this,arguments);const f=(sk&&sk.fx)||{};const L=[];
-  for(const k of ['vsCharge','fOnly','fromHide','needTrap','pierceBlock','hpDmg','breakCharge','mark','markWeak','slow','backlash','selfWeak','blockH','blockM','cutT','curePoi','poiStop','hide','cxT','fleeUp','cover','allyCover','sumCover','allyRage','allyHeal','summon','unsummon','trap','breakAll','dispel'])
+  for(const k of ['vsCharge','fOnly','fromHide','needTrap','pierceBlock','hpDmg','breakCharge','mark','markWeak','slow','backlash','selfWeak','blockH','blockM','cutT','curePoi','poiStop','hide','cxT','fleeUp','cover','allyCover','sumCover','allyRage','allyHeal','summon','unsummon','trap','breakAll','dispel','pillBoost'])
     if(f[k]!=null&&f[k]!==0){const v=f[k];const a=Array.isArray(v)?v.map(x=>Math.round(x*100)/100):[typeof v==='number'?(v<1&&v>0?Math.round(v*100):v):''];
       if(k==='summon')L.push(fxmT('tip.summon',[fxmT('sum.'+v.k),v.n||3]));else L.push(fxmT('tip.'+k,k==='cutT'?[Math.round(v[0]*100),v[1]]:k==='trap'?[Math.round(v[0]*100),v[1]]:a));}
   if(f.cd>1)L.push(fxmT('tip.cd',[f.cd-1]));

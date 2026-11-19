@@ -51,3 +51,60 @@ Hiệu ứng chưa có hệ trong game (đan, phù, độ bền, chế tạo, kh
 ## Chưa làm (chờ hệ sau)
 - Vật tư dùng trong chiêu (đan hồi có thật, bó dược, phù giấy, liều độc, lõi khôi): chiêu chỉ tốn linh lực, chưa trừ vật tư (P.5 chưa nhập).
 - Kháng hồn (ST07-Hồn), chảy máu, độ bền trang bị trong trận: chưa có kênh riêng, dùng `cutT` / `cleanse` thay.
+
+## Đ7.2 — 48 chiêu nghề tu lõi đã chép
+
+Mã viết thường `sk01a`…`sk16c`; A, B bậc 1, C bậc 2 (không phải thần thông; C mở ở tầng ba công pháp, cần Trúc Cơ). Chiêu công vật lý (A của C) ghi trong `SK_PHYS`: sk01a, sk01c, sk02a, sk14a, sk16b.
+
+| Mã | Tên | fx | Ghi chú lệch so với C |
+|---|---|---|---|
+| sk01a | Thử Phong | p 1,15 · vsCharge 15 | |
+| sk01b | Gạt Lưỡi | block 0,7 | chưa có "địch suy nhược khi hấp thụ đòn cận chiến" |
+| sk01c | Đoạn Nhịp | p 1,6 · breakCharge | dùng được cả khi địch không tụ (chỉ sát thương) |
+| sk02a | Chấn Cốt | p 1 · hpDmg 0,02 | chưa kẹp tổng 1,4 A |
+| sk02b | Trầm Tức | blockH 0,08 | chưa giảm tốc bản thân |
+| sk02c | Gánh Sơn | cover 0,5 | |
+| sk03a | Huyết Ti | p 1,35 phép · drain 10 · selfHp 3 | hút cả trên khôi/xác |
+| sk03b | Khóa Mạch | cleanse | |
+| sk03c | Triều Huyết | p 2,2 · selfHp 8 · selfWeak 1 | |
+| sk04a | Vấn Danh | p 0,9 · mark | |
+| sk04b | Lưu Danh | cutT [0,25; 2] | kháng hồn quy về giảm sát thương nhận |
+| sk04c | Tống Ảnh | p 2 · fOnly quỷ | |
+| sk05a | Quán Niệm | tgt · mark | |
+| sk05b | Trấn Hải | cleanse | |
+| sk05c | Phá Tưởng | p 1,7 · markWeak 2 · backlash 5 | |
+| sk06a | Mở Khế | summon linh (0,18 H, 0,4 M, 3 lượt) | |
+| sk06b | Hoàn Khế | unsummon · mpBack 0,3 | |
+| sk06c | Đồng Môn | sumCover (dư 20% về chủ) | |
+| sk07a | Dẫn Tức | allyRage 1 | linh thú đồng hành (f thú) hoặc linh ảnh |
+| sk07b | Chung Mạch | allyHeal 15 · selfHp 3 | |
+| sk07c | Hộ Chủ | allyCover 0,4 | chưa có độ tin cậy thú |
+| sk08a | Chôn Tinh | trap [0,6; 2] | |
+| sk08b | Chuyển Vị | fleeUp 20 | |
+| sk08c | Khép Bàn | p 3 (≈1,8 mỗi mục tiêu) · aoe · needTrap | chưa giới hạn ba mục tiêu |
+| sk09a | Dẫn Dược | pillBoost 15 | dùng một viên Hồi Xuân / Bổ Huyết trong túi |
+| sk09b | Phân Tạp | curePoi 0,5 | |
+| sk09c | Khóa Độc Tức | poiStop 2 | |
+| sk10a | Phục Diệp | heal 8 | chưa trừ bó dược |
+| sk10b | Cầm Huyết | cleanse | |
+| sk10c | Giữ Mầm | blockH 0,12 · lowHp 0,25 | chỉ lên bản thân |
+| sk11a | Thử Chất | p 1 · mark | |
+| sk11b | Chống Nứt | cutT [0,1; 3] | độ bền trang bị chưa có trong trận |
+| sk11c | Rút Chốt | p 1,6 · weak 1 | |
+| sk12a | Nét Chặn | blockM 0,7 | chưa trừ phù giấy |
+| sk12b | Nét Phá | p 1,5 · pierceBlock 0,2 | |
+| sk12c | Nét Tịch | tgt all · dispel | xoá hộ thể/khí thế địch thay cho xoá trận |
+| sk13a | Khởi Cốt | summon khôi (0,25 H, 0,35 M, 5 lượt) | chưa cần khôi/lõi sở hữu |
+| sk13b | Giật Dây | allyRage 3 (khôi) | |
+| sk13c | Tháo Lõi | unsummon khôi · blockH 0,1 | |
+| sk14a | Điểm Độc | p 0,7 · poison 0,6 | chưa trừ liều độc |
+| sk14b | Hồi Chất | cleanse | |
+| sk14c | Tản Chướng | p 1,33 · aoe · weak 2 · poison 0,2 | chưa có độc lan sang đồng minh |
+| sk15a | Gõ Nhịp | cleanse · cxT 5 | |
+| sk15b | Lạc Thanh | p 1,1 · slow 15 | |
+| sk15c | Tịch Khúc | tgt all · breakAll | |
+| sk16a | Lệch Bóng | evade 1 · hide 2 | |
+| sk16b | Chạm Gáy | p 1,7 · fromHide 0,65 | |
+| sk16c | Đoạn Truy | fleeUp 25 | chưa bỏ lại vật mồi |
+
+Mọi chiêu có `cd` theo cột hồi chiêu của C.

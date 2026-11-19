@@ -120,6 +120,7 @@ function DaoDo() {
       {!L.length && !r.vo && <p className="hint">Chưa theo con đường nào. Tìm việc ở Mưu sinh hoặc luyện võ để bắt đầu.</p>}
       {L.map(x => <Kv key={x.ma} n={x.n} v={(x.phai ? '<span class="bad">' : '') + x.rank + ' · ' + x.txt + (x.phai ? '</span>' : '')} t={x.phai ? 'Đường này đang phai: đã theo đủ ba đường khác. Làm lại việc của nghề thì nối lại.' : 'Danh vị trong nghề ' + x.n.toLowerCase()} />)}
       {r.vo && <Kv n="Võ học" v={PS.voBacN(r.vo.bac | 0) + ' · ' + PS.voNgayTxt(r)} t="Võ đạo phàm nhân" />}
+      {PS.tuView && PS.tuView().map(x => <Kv key={x.id} n={x.n} v={x.bac + ' · ' + x.cp + ' ' + x.tang} t={x.vai + ': nghề tu, tay nghề tăng qua hợp đồng đúng nghề'} />)}
       {PS.nangView && <><h4>{PS.contentText('nang.head')}</h4>
         {PS.nangView().map(x => <Kv key={'n' + x.k} n={x.n} v={x.muc} t={x.t} />)}</>}
     </div>
