@@ -160,6 +160,16 @@ function amNpcBid(sc,L,lot,pi){const cap=amCap(sc,L,pi);const need=amNeed(L,lot)
   if(L.own==='me'&&L.muon&&L.muon.length){for(const m of lot.muon)if(amLoai(m.key)==='lt')M.push(m.key);}
   else if(lt)for(let k=+lt.key.slice(3);k>=0;k--)M.push('lt:'+k); // linh thạch: phẩm nêu, hoặc đếm bằng phẩm thấp hơn cho vừa giá
   for(const key of M){const m={key};const sl=amSlCan(sc,L,lot,pi,m.key);if(!isFinite(sl)||amHas(sc,pi,m.key)<sl)continue;const v=amBidVal(sc,L,lot,pi,m.key,sl);if(v>=need&&v<=cap*1.15)return {key:m.key,sl,v};}
+  return L.own!=='me'?amNpcDoi(sc,L,lot,pi,cap,need):null;}
+// Sửa-M câu 55: người bán là NPC → NPC khác cũng được đề nghị đổi bằng vật khác (ngoài danh sách người bán nêu).
+// Người bán xét theo nhu cầu của mình: độ hợp nhu cầu >= hopMin và giá trị (đã nhân độ hợp) vượt mức đang dẫn thì mới nhận; lời đề nghị đi vào đấu giá như một lần trả giá (nhiều vòng, đếm ngược)
+function amNpcDoi(sc,L,lot,pi,cap,need){let best=null,tu=null;
+  for(const h of amHold(sc,pi)){if(h.cua||lot.muon.some(m=>m.key===h.key))continue;const hop=amHop(sc,lot,h.key);
+    if(hop<AM_HOI.hopMin){if(!tu)tu=h;continue;}
+    const sl=amSlCan(sc,L,lot,pi,h.key);if(!isFinite(sl)||sl>h.sl)continue;const v=amBidVal(sc,L,lot,pi,h.key,sl);
+    if(v>=need&&v<=cap*1.15&&(!best||v<best.v))best={key:h.key,sl,v,n:h.n};}
+  if(best){amLog(sc,'deNpc',[amTen(sc,pi),best.sl+' '+best.n,amTen(sc,L.own)]);dbg('amh.deNpc',{ai:amTen(sc,pi),key:best.key,sl:best.sl,v:best.v});return best;}
+  if(tu&&!(lot.deTu=lot.deTu||{})[pi]){lot.deTu[pi]=1;amLog(sc,'deTu',[amTen(sc,L.own),tu.n,amTen(sc,pi)]);dbg('amh.deTu',{ai:amTen(sc,pi),key:tu.key});}
   return null;}
 function amPlan(sc,L,lot){lot.plan={};const T=AM_HOI.tre;sc.ppl.forEach((p,pi)=>{if(pi===L.own||lot.bo[pi]||(lot.lead&&lot.lead.who===pi))return;
   lot.plan[pi]=lot.t0+Math.round(T[0]+amH(sc,'tre|'+L.u+'|'+pi+'|'+lot.nb)*(T[1]-T[0]));});}

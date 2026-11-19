@@ -57,5 +57,7 @@
   "amh.nhanDe": "Nhận đề nghị của {{0}}: {{1}}",
   "amh.deHead": "Không có thứ ngươi đòi, có người đề nghị đổi vật khác:",
   "amh.log.de": "{{0}} không có thứ ngươi đòi, đề nghị đổi bằng {{1}}.",
+  "amh.log.deNpc": "{{0}} không có thứ {{2}} đòi, đề nghị đổi bằng {{1}}.",
+  "amh.log.deTu": "{{0}} chê {{1}} của {{2}}: không hợp nhu cầu.",
   "amh.dung": "Đồng hồ tạm dừng khi ngươi thương lượng (còn {{0}} giây)"
 }

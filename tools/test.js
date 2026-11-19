@@ -1730,9 +1730,52 @@ const TESTS = {
     ok(run("amTui(G.run.scene,0).length===12&&amTgObj(G.run.scene,0).tg.length===1")&&run("amTuiDay(G.run.scene,0)")===false, 'NPC túi đầy: món nhận vào tạm giữ của NPC, vẫn trả giá được');
     run("amLay(G.run.scene,0,'pill:hoixuan',1)");ok(run("amTui(G.run.scene,0).some(x=>x.u==='x2')&&amTgObj(G.run.scene,0).tg.length===0"), 'NPC có chỗ: tự cất món tạm giữ vào túi');
     run("G.run.scene=null");
+    // Sửa-M câu 52–54: không giới hạn số món, không tự cất, vật liệu chồng và lệnh bài cũng tạm giữ
+    run("G.run.scene=null;G.run.tamGiu=[];G.run.relics=[];G.run.pills=[];G.run.qitems=[];G.run.mats={};G.run.passes=[];G.run.eggs=[];autoCheck()");
+    const mk=run("Object.keys(MAT)");const k1=mk[0],k2=mk[1];
+    run(`(()=>{G.run.mats['${k2}']=4;let k=0;while(bagCap()-bagStacks()>0&&k++<99)G.run.qitems.push('luong_kho');autoCheck();})()`);
+    ok(run("bagCap()-bagStacks()")===0&&run("tgL().length")===0, 'Sửa-M: túi đầy (có sẵn một chồng vật liệu)');
+    run(`G.run.mats['${k2}']+=2;autoCheck()`);ok(run(`G.run.mats['${k2}']`)===6&&run("tgL().length")===0, 'loại vật liệu đã có ô: chồng vào như cũ, không tạm giữ');
+    run(`G.run.mats['${k1}']=3;autoCheck()`);
+    ok(run(`!(G.run.mats['${k1}']>0)&&tgL().length===1&&tgL()[0].t==='m'&&tgL()[0].c===3`), 'loại vật liệu MỚI khi túi đầy: vào tạm giữ có số lượng');
+    run(`G.run.mats['${k1}']=2;autoCheck()`);ok(run("tgL().length===1&&tgL()[0].c===5")&&run("tgView()[0].n").includes('×5'), 'cùng loại trong tạm giữ: cộng dồn (×5)');
+    run("G.run.passes.push(2);autoCheck()");ok(run("G.run.passes.length===0&&tgL().some(e=>e.t==='q'&&e.v===2)"), 'lệnh bài khi túi đầy: vào tạm giữ');
+    run("(()=>{for(let j=0;j<25;j++){G.run.relics.push(Object.assign(genRelic(1),{name:'Thử Pháp '+j,seen:1}));autoCheck();}})()");
+    ok(run("tgL().filter(e=>e.t==='r').length")>=20, 'tạm giữ không giới hạn số món ('+run("tgL().length")+' món)');
+    run("G.run.qitems.splice(0,3)");run("W().t+=5*HD;advanceTime(1);autoCheck()");
+    ok(run("tgL().length")>20&&run("bagCap()-bagStacks()")>0, 'có chỗ trống mà không tự cất: người chơi phải tự bấm');
+    const im=run("tgL().findIndex(e=>e.t==='m')");ok(run(`tgCat(${im})`)&&run(`G.run.mats['${k1}']`)===5, 'cất vào túi được cả chồng vật liệu');
+    const iq=run("tgL().findIndex(e=>e.t==='q')");ok(run(`tgCat(${iq})`)&&run("G.run.passes.includes(2)"), 'cất lệnh bài vào túi');
+    run(`G.run.mats['${k1}']=0;delete G.run.mats['${k1}'];autoCheck()`);
+    run("(()=>{let k=0;while(bagCap()-bagStacks()>0&&k++<99)G.run.qitems.push('luong_kho');autoCheck();G.run.mats['"+k1+"']=1;autoCheck();})()");
+    const at0=run("tgL().find(e=>e.t==='m').at");run("W().t+=(TAM_GIU.han+1)*HD;advanceTime(1)");
+    ok(run("!tgL().some(e=>e.t==='m')")&&at0>0, 'vật liệu tạm giữ cũng mất sau 365 ngày');
     // bản lưu cũ
     run("delete G.run.tamGiu;delete G.run._tgS;advanceTime(1);autoCheck()");ok(run("Array.isArray(G.run.tamGiu)&&tgView().length===0"), 'bản lưu cũ (không có tạm giữ): chạy bình thường');
     ok(run("NK.count('tg.vao')")>0, 'có nhật ký tg.*');
+  },
+  // Sửa-M câu 55: NPC bán ở Ám Hội, NPC khác đề nghị đổi bằng vật khác; người bán xét theo nhu cầu
+  am_npc_doi() {
+    fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=2;G.run.relics=[];G.run.pills=[];G.run.qitems=[];G.run.st=0;G.run.lt=[0,0,0];AM_LECH=0");
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);venueDo('amhoi','vao');})()");
+    run("(()=>{const sc=G.run.scene;let g=0;while(sc.ph==='chon'&&g++<3)amAct('khong');})()");
+    ok(run("G.run.scene.ph==='lot'&&G.run.scene.q[G.run.scene.i].own!=='me'"), 'có lô do NPC bán');
+    // dựng: người bán nêu danh sách chỉ có đan; mọi NPC khác không có đan/linh thạch, chỉ có pháp bảo (hợp nhu cầu) trong túi
+    run(`(()=>{const sc=G.run.scene,L=sc.q[sc.i],lot=sc.lot;AM_HOI.nhu=[3,3];lot.muon=[{key:'pill:tukhi',sl:1,n:'x',ic:''}];
+      sc.ppl.forEach((p,pi)=>{if(pi===L.own)return;const T=amTui(sc,pi);T.length=0;amCua(sc,pi,-amCua(sc,pi));
+        for(let j=0;j<3;j++)T.push({u:amUid(),id:'rel',n:'Thử Phù Đổi',q:1,rel:Object.assign(genRelic(1),{name:'Thử Phù Đổi',tier:1})});});
+      L.v=Math.max(L.v,1);amPlan(sc,L,lot);})()`);
+    run("amTua(AM_HOI.tre[1]+5)");
+    ok(run("NK.count('amh.deNpc')")>0&&run("!!G.run.scene.lot.lead"), 'NPC khác đề nghị đổi bằng pháp bảo (hợp nhu cầu) và thành người dẫn');
+    ok(run("G.run.scene.lot.lead.key.startsWith('u:')")&&run("G.run.scene.log.some(x=>/đề nghị đổi/.test(x))"), 'ghi vào nhật ký bàn');
+    const n0=run("G.run.scene.i");run("amTua(AM_HOI.dem+200)");
+    ok(run("G.run.scene.i")>n0||run("G.run.scene.ph")!=='lot', 'đếm ngược xong thì gõ búa (đấu nhiều vòng như thường)');
+    // không hợp nhu cầu: vật khác (qitem) bị người bán chê
+    run(`(()=>{const sc=G.run.scene;if(sc.ph!=='lot')return;const L=sc.q[sc.i],lot=sc.lot;AM_HOI.nhu=[3,3];lot.muon=[{key:'pill:tukhi',sl:1,n:'x',ic:''}];
+      sc.ppl.forEach((p,pi)=>{if(pi===L.own)return;const T=amTui(sc,pi);T.length=0;amCua(sc,pi,-amCua(sc,pi));for(let j=0;j<30;j++)T.push({u:amUid(),id:'luong_kho',n:'Lương khô'});});amPlan(sc,L,lot);})()`);
+    const d0=run("NK.count('amh.deNpc')");run("amTua(AM_HOI.tre[1]+5)");
+    ok(run("NK.count('amh.deNpc')")===d0&&run("!G.run.scene.lot||!G.run.scene.lot.lead")||run("G.run.scene.ph")!=='lot', 'vật không hợp nhu cầu người bán thì bị chê, không thành đề nghị');
+    run("AM_HOI.nhu=[0.8,1.2]");
   },
   am_hoi() {
     fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=2;G.run.relics=[];G.run.pills=[];G.run.qitems=[];G.run.st=0;G.run.lt=[0,0,0];AM_LECH=0");

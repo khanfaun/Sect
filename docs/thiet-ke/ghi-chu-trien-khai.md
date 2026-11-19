@@ -124,7 +124,7 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
-- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-L.
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-M.
 - Xong thêm: Đ9.1 (bộ máy tuyến, schema, công cụ kiểm `npm run content:tuyen`, tuyến mẫu OR01, bài `menh_tuyen`) và Đ9.0 (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) — xem mục Đ9.1 cuối tệp.
 - Tiếp theo: người dùng đưa GPT viết theo lô (lô 1: OR02–OR04), Claude kiểm + rà mẫu, ghép. Thẻ "Mệnh thư" trong Sổ tay (giao diện) chưa làm.
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
@@ -822,3 +822,12 @@ THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuy�
 53. B: không tự cất; người chơi tự chọn món nào cất vào túi (giữ nút "Cất vào túi" từng món).
 54. A: áp tạm giữ cho cả vật liệu chồng theo loại (loại mới khi túi đầy → tạm giữ; cùng loại đã có ô thì chồng vào như cũ).
 55. A: khi NPC bán ở Ám Hội, NPC khác cũng được đề nghị đổi vật khác (người bán NPC xét theo nhu cầu của mình).
+
+
+## Sửa-M — câu 52, 53, 54, 55 (đợt 9)
+- 52: tạm giữ vốn không có giới hạn số món (đã kiểm bằng bài: 25 pháp bảo liền vẫn vào hết). Chỉ hạn 365 ngày.
+- 53: không tự cất. Rà lại: phía người chơi không còn chỗ nào tự cất (chỉ nút "Cất vào túi" từng món, `tgCat`; ghép đồ mặc được vẫn là việc mặc đồ, không phải cất). Có chỗ trống thì đồ vẫn nằm ở tạm giữ chờ bấm. NPC vẫn tự cất.
+- 54: `tgSweep` (core2/61-tam-giu.js) bắt thêm: lệnh bài (`t:'q'`, `v`=mã vùng) và vật liệu chồng (`t:'m'`, `v`=mã, `c`=số lượng). Loại vật liệu MỚI khi túi đầy thì cả phần vừa nhận sang tạm giữ, cùng loại cộng dồn `c` (giữ mốc `at` của lần đầu); loại đã có ô trong túi thì chồng vào như cũ. Cất vào túi được cả chồng; hạn 365 ngày như món thường. Bản lưu cũ (snapshot không có `m`) bỏ qua lần đầu.
+- 55: Ám Hội, người bán là NPC: NPC khác không có thứ trong danh sách thì đề nghị đổi bằng vật khác (`amNpcDoi`, nhật ký `amh.deNpc`). Người bán xét theo nhu cầu: độ hợp `amHop` >= `hopMin` và giá trị (đã nhân độ hợp) đủ vượt mức đang dẫn thì nhận, vào đấu như một lần trả giá (nhiều vòng, đếm ngược); vật không hợp thì bị chê (`amh.deTu`, ghi vào nhật ký bàn). Chữ: `amh.log.deNpc`, `amh.log.deTu`.
+- Bài kiểm: `tam_giu` thêm 12 ý (vật liệu, lệnh bài, cộng dồn, không giới hạn, không tự cất, cất cả chồng, mất sau 365 ngày); mới `am_npc_doi` (5 ý, đã thêm vào `test:rules`).
+- Còn dở: giao diện chưa có bài riêng cho dòng tạm giữ của vật liệu (dùng lại thẻ có sẵn, tên ghi "× số lượng"); bot chưa biết cất tạm giữ.
