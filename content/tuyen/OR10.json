@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "id": "OR10",
+  "loai": "xuat_than",
+  "ten": "Người về sau lệnh chết",
+  "xuatThan": "linh",
+  "goiYDaiLo": [
+    "de_nghiep"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Giấy nhận quân công",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Kỳ phát công tại {LOC13} diễn ra dưới mái kho lạnh. {NP25} cho kê những người trở về, {NP26} ghi ai đổi ngựa giữa đường. Phần của đơn vị ngươi nằm cạnh tờ từ chối có dấu của người báo cả đội đã chết.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đòi phần công và ghi người sống",
+          "t": "Ngươi lĩnh phần được công nhận rồi chép tên người có mặt sau buổi phát.",
+          "dau": [
+            "moc_1_1"
+          ],
+          "e": {
+            "bac": 600
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Lấy giấy từ chối làm chứng",
+          "t": "Ngươi mang tờ từ chối có dấu, rồi nhờ người giữ ngựa xác nhận ai còn đi trạm.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tìm đồng đội ở trại trở về",
+          "t": "Ngươi theo dấu người bó xương tới trại và ghi đúng tên người đã nhận chăn.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Danh sách phát công khép lại, vài tên người còn sống chưa được ghi.",
+        "su": "Danh sách phát công khép lại, vài tên người còn sống chưa được ghi.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Dấu cùn trên lệnh rút",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Lệnh từ {LOC13} ghi đơn vị rút khi đường lương còn thông. Ở {LOC14}, {NP28} giữ con dấu dùng lúc phát lệnh thật. Dấu trên tờ đưa quân đi thiếu một góc, còn ấn cất ở trại không có góc vỡ ấy.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối dấu trước người giữ ấn",
+          "t": "Ngươi in dấu thật bên dấu trên lệnh, rồi để nhân chứng ghi ngày bản giả đi trạm.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Chép đường đi của lệnh",
+          "t": "Ngươi lần tờ lệnh qua trạm và tìm ra giờ giấy đi trước lúc điểm quân.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi người chỉ nhận lệnh",
+          "t": "Ngươi xin người trực hôm ấy ký tên, để tách người chuyển giấy khỏi người ban giấy.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người coi ấn cất dấu, tờ lệnh rút tiếp tục nằm trong hồ sơ trận vong.",
+        "su": "Người coi ấn cất dấu, tờ lệnh rút tiếp tục nằm trong hồ sơ trận vong.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Chỗ lương đổi chủ",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Sổ kho ở {LOC03} ghi đúng số lương đơn vị ngươi đã chờ. Tiền về tay người duyệt lệnh, còn người đánh xe chỉ có phiếu công chở hàng. Trên bậu cửa vẫn để một sổ phần lương chưa sang tay.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giữ biên nhận tiền bán lương",
+          "t": "Ngươi chép người duyệt lệnh và người lĩnh bạc, kẹp riêng phiếu của người đánh xe.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ phần lương chưa sang tay",
+          "t": "Ngươi cùng người đánh xe trình phiếu, nhận giữ số lương đủ cấp qua kỳ trực.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Đưa phiếu công về trại",
+          "t": "Ngươi nộp phiếu cho người ghi dân trở về, để người chở hàng có lời đối chứng.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người nhận tiền dời bản chính, người đánh xe giữ phiếu công trong áo.",
+        "su": "Người nhận tiền dời bản chính, người đánh xe giữ phiếu công trong áo.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Nơi cho người đi theo",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Người ở {LOC14} hỏi nếu theo ngươi thì cả nhà sẽ ngủ đâu. Mấy mái trại còn khô, trong khi cửa ải thiếu người giữ kho. Một người từ kinh đến xin mang bản lệnh đi xét cùng sổ tiền.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Chia mái và ghi đủ tên đơn vị",
+          "t": "Ngươi lấy danh sách người sống đối với trại, giao mỗi nhóm một mái và phần lương.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_1_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Lập bộ chỉ huy có kho và chỗ ở",
+          "t": "Ngươi giao phần lương đã giữ cho đội trực có người coi kho, xếp gia đình tại trại.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Gửi án lệnh giả đi xét",
+          "t": "Ngươi ghép dấu giả với biên nhận tiền, rồi gửi bản có chứng về nơi xét lệnh.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Để dân tự chọn mái trú",
+          "t": "Ngươi treo bản kê mái khô để mỗi hộ tự nhận chỗ, giữ lại một lối đi chung.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Trại tự chia mái, người từ kinh rời đi khi chưa nhận bản lệnh.",
+        "su": "Trại tự chia mái, người từ kinh rời đi khi chưa nhận bản lệnh.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Trước kỳ đổi cờ",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Trạm ngựa {LOC13} báo kỳ kiểm lương đã đến. Dân trại muốn có giấy định cư, đội trực đòi xem số lương còn lại. Dưới thẻ lệnh có một ô trống dành cho lời đáp từ nơi xét án.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Rời quân, trao sổ cư trú",
+          "t": "Ngươi giao sổ có đủ tên cho dân trại, rồi trả thẻ quân trước buổi điểm người.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ ải bằng lương đã dành",
+          "t": "Đội dưới quyền ngươi nhận đủ lương qua kỳ kiểm và giữ được cổng khi đổi trực.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đọc án ra trước trạm",
+          "t": "Ngươi công bố lệnh giả và án xét, buộc đổi cách bổ nhiệm người duyệt lương.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Trả thẻ quân và giữ bản sao",
+          "t": "Ngươi trả thẻ trực, đưa người giữ trạm một bản giấy để còn dò được lệnh.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cờ cũ còn trên cổng, các mái trại tự lo phần lương còn lại.",
+        "su": "Cờ cũ còn trên cổng, các mái trại tự lo phần lương còn lại.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Đưa đủ tên về",
+      "dk": {
+        "dau": [
+          "moc_1_3",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Những mái trại đón đủ người đã ghi tên, kể cả người chỉ về được sau đợt phát quân công. Tờ sổ cư trú đặt cạnh danh sách trận vong để ai đi tìm người còn biết nên nhìn ở đâu trước.",
+      "su": "{LOC14} thành chỗ định cư của những người trở về đã được ghi tên.",
+      "dauVong": "danh sách đơn vị tại trại còn ghi cả những người về muộn."
+    },
+    {
+      "id": "B",
+      "ten": "Cờ trên cổng cũ",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Qua kỳ lương, đội trực vẫn giữ cổng và tự đối sổ phần cấp. Người nhận cờ sau ngươi chỉ được nhận chìa kho khi đứng trước đội thề rằng người gác và nhà họ có tên trong cùng bản cấp phát.",
+      "su": "{LOC13} có bộ chỉ huy tự giữ cổng và cấp đủ lương qua kỳ kiểm.",
+      "dauVong": "người giữ cổng còn đọc lời thề quân kèm điều khoản cấp lương cho nhà lính."
+    },
+    {
+      "id": "C",
+      "ten": "Lệnh cuối gửi về kinh",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Sổ bổ nhiệm phải để lại cả người kiểm kho và người duyệt lệnh, thay cho một dấu gửi từ xa. Bản xét án không bỏ trang ghi phần công của người đánh xe, cũng không gỡ dòng ghi số bạc mà phe thắng giữ lại.",
+      "su": "Án lệnh giả được công bố và cách xét người duyệt lương thay đổi.",
+      "dauVong": "hồ sơ xét lệnh còn ghi khoản bạc phe thắng giữ lại."
+    }
+  ],
+  "ngoai": "Cờ cũ còn trên cổng, các mái trại tự lo phần lương còn lại."
+}
