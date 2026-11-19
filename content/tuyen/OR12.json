@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 1,
+  "id": "OR12",
+  "loai": "xuat_than",
+  "ten": "Những người dưới mặt nước",
+  "xuatThan": "chai",
+  "goiYDaiLo": [
+    "the_gia"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Lưới nhấc lên nhẹ",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Ở {LOC09}, lưới nhà ngươi nhấc lên nhẹ dù chưa tới mùa cá đẻ. {NP17} chỉ những vảy đục dính ở mạn. {NP16} muốn xem mang cá trước khi người bán đổ hết mẻ lên bờ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi mùa và xem mang cá",
+          "t": "Ngươi đối mẻ cá với lịch bãi giống. Mang đục xuất hiện sớm hơn mùa cá rời bến.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Vá lưới rồi dò luồng cá chết",
+          "t": "Ngươi đi dọc luồng theo người lái đò, ghi nơi lưới bắt đầu vướng cá chết.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Nhờ thú y ghi dấu trên mang",
+          "t": "Ngươi giữ một con cho người biết bệnh xem rồi xin tờ ghi dấu ở mang.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mẻ cá chết bị dạt vào bãi lau, ngày nước đổi màu không ai ghi.",
+        "su": "Mẻ cá chết bị dạt vào bãi lau, ngày nước đổi màu không ai ghi.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Hai vò nước ở chân lò",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Vò từ {LOC09} đổi màu giống vò lấy dưới rãnh {LOC11}. Sổ trực ghi ai cho mở cửa xả hôm cá nổi. Bên dưới là khế cho đánh vượt mùa, còn ngày đóng bãi bị gạch.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối mẫu và lấy tên người lệnh xả",
+          "t": "Ngươi đặt hai vò trước người trực, sao dòng lệnh và phần đánh vượt mùa.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Đo luồng để tìm đường dời dân",
+          "t": "Ngươi ghi một lối nước sạch bên ngoài vùng xả và nơi hộ chài có thể lên bờ.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ giấy đánh vượt mùa",
+          "t": "Ngươi chép điều khoản mở bãi sớm và hỏi tên người thu phần cá vượt mùa.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Rãnh lò đổi lượt xả, hai vò không còn được đặt cạnh nhau.",
+        "su": "Rãnh lò đổi lượt xả, hai vò không còn được đặt cạnh nhau.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Giá giữ vò nước kín",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Người từ {FA08} đem tờ cấp tiền tới {LOC09}, còn người của {FA06} mang lời đề nghị giữ bãi giống. Mấy hộ nằm sát rãnh xả hỏi nơi nào còn nước uống. Hai vò nước đặt giữa chiếu.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Buộc dừng xả và giao bãi cho người giữ",
+          "t": "Ngươi đem lệnh xả ra đối, hai bên ký dừng nguồn và cấp người canh bãi giống.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Sắp nơi định cư ngoài luồng xả",
+          "t": "Ngươi nhận chỗ neo và nền dựng nhà ở bến sạch, giao giấy nhận tới các hộ.",
+          "dau": [
+            "moc_3_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Nhận tiền và giữ kín mẫu",
+          "t": "Ngươi nhận hai lượng bạc, giao vò về lò. Nước vẫn đục vào ngày từng ghi.",
+          "dau": [
+            "moc_3_3"
+          ],
+          "e": {
+            "bac": 2000
+          }
+        }
+      ],
+      "tuDien": {
+        "t": "Mấy hộ tự dời chỗ lấy nước, cửa xả vẫn mở theo sổ lò.",
+        "su": "Mấy hộ tự dời chỗ lấy nước, cửa xả vẫn mở theo sổ lò.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Tên mắc trên lưới",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Lưới chắn ở {LOC09} giữ lại một người đã mất cùng mảnh giấy phép bến. Kẻ thu phí muốn chép xác vào mục hàng vướng. Người coi đò hỏi tên nhà nào thường vá lưới bằng loại chỉ ghim trên áo.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Trả tên rồi giữ bãi giống trọn kỳ",
+          "t": "Ngươi báo hộ nhận áo và giao người giữ luồng sổ canh đủ một kỳ.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận quyền cấp phép sau buổi đối",
+          "t": "Ngươi ghi tên người mất nhưng giữ giấy phép trong hòm thu phí, nhận quyền duyệt mới.",
+          "dau": [
+            "moc_4_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Trả thẻ bến cho hộ người mất",
+          "t": "Ngươi đưa áo và giấy phép về đúng hộ. Họ xin sang tên chỗ neo trước khi dời.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mảnh giấy phép được nộp, tên người mắc lưới vẫn bỏ trống.",
+        "su": "Mảnh giấy phép được nộp, tên người mắc lưới vẫn bỏ trống.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Phiên nước sau",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Đến phiên đổi giấy ở {LOC09}, những người giữ bãi đem sổ canh tới. Hộ chài đã xếp đồ trên bờ, còn người thu phí đếm tên sẽ được vào luồng. Từ xa vẫn nghe tiếng nước qua rãnh.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đặt luật giữ mùa sinh cá",
+          "t": "Ngươi đối sổ canh rồi cắm mốc nghỉ chài tại luồng đã ngừng nhận nước xả.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Thu phí một mùa dưới giấy mới",
+          "t": "Ngươi duyệt thẻ theo tiền nộp. Một hộ thiếu phí phải bỏ lưới dù nước vẫn đục.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3",
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Kết toán thuyền rồi dời nhà",
+          "t": "Ngươi ghi ai giữ mỗi phần thuyền, dẫn nhóm nhà tới chỗ neo đã nhận.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Trả giấy và ghi phần bến tranh chấp",
+          "t": "Ngươi để giấy trên bàn, chép rõ chỗ neo còn hai người nhận quyền.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bến tự chia phiên nước, những hộ đã xếp đồ tìm chỗ neo khác.",
+        "su": "Bến tự chia phiên nước, những hộ đã xếp đồ tìm chỗ neo khác.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Mùa cá trở lại",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Qua kỳ giữ bãi, những lứa cá nhỏ lại lấp lánh sát lau. Nhà đã nhận người mắc lưới đến giúp buộc mốc, để chỗ giăng lưới và chỗ cá sinh có hai dấu riêng. Mốc còn thêm vết nút của nhà ngươi.",
+      "su": "Luồng {LOC09} phục hồi sau khi dừng xả và giữ bãi qua một kỳ.",
+      "dauVong": "mốc nghỉ chài ở {LOC09} còn ký hiệu buộc lưới của nhà {ten}."
+    },
+    {
+      "id": "B",
+      "ten": "Chủ bến nước đen",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Người giữ quầy đặt giấy phép lên cao để khỏi vấy bùn. Hộ bị đuổi khỏi luồng mang lưới đi phơi lần cuối, còn tiền phí vẫn về đủ qua mùa nước đen. Họ nhớ người duyệt thẻ hơn cả tên người giữ rãnh lò.",
+      "su": "{LOC09} thu phí dưới một đầu giấy phép dù nguồn xả còn hoạt động.",
+      "dauVong": "một hộ phải rời luồng giữ tờ thẻ bị bác vì thiếu phí."
+    },
+    {
+      "id": "C",
+      "ten": "Thuyền không quay đầu",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_5_3"
+        ]
+      },
+      "t": "Nhóm nhà dỡ gánh ở chỗ đã nhận và treo lưới lên mái mới. Ai còn phần thuyền đều có một dòng đã đối trước khi rời bến. Ở bến cũ, người ở lại tự cử người chia lượt nước, không chờ thuyền ngươi quay về.",
+      "su": "Nhóm nhà của {ten} định cư ở chỗ neo mới sau khi chia quyền thuyền.",
+      "dauVong": "mảnh lưới từ {LOC09} nằm trên mái nhà phía ngoài luồng cũ."
+    }
+  ],
+  "ngoai": "Bến tự chia phiên nước, những hộ đã xếp đồ tìm chỗ neo khác."
+}

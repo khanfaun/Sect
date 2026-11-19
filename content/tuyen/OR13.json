@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 1,
+  "id": "OR13",
+  "loai": "xuat_than",
+  "ten": "Phương thuốc giữ lại một người",
+  "xuatThan": "duoc",
+  "goiYDaiLo": [
+    "y_gia"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Bát nước đầu giường",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Một người hái thuốc nằm lạnh ở {LOC10}. {NP19} nhờ ngươi ghi cơn run và {NP20} đem sổ phí tới. Tên người trả tiền nằm khác tên người bệnh, cùng một dấu đã xuất hiện bên giường sát cửa.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi triệu chứng và người ứng phí",
+          "t": "Ngươi ghi giờ run, màu nước và tên hộ đã ứng tiền thuốc cho người hái.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi người bệnh lấy nước ở đâu",
+          "t": "Ngươi chép giếng họ dùng và người đem tiền tới, rồi đặt bát riêng bên giường.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Trông cơn sốt và ghi tiền nộp",
+          "t": "Ngươi thay khăn tới sáng, giữ tờ phí để người nhà còn đối tiền đã nộp.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Ca bệnh được ghi thiếu người trả phí, bát nước đầu giường chưa đổi.",
+        "su": "Ca bệnh được ghi thiếu người trả phí, bát nước đầu giường chưa đổi.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Vệt cặn cùng màu",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Mẫu từ {LOC10} và nhánh nước qua {LOC11} để lại cùng một vệt cặn. Người không uống ở nhánh ấy ít có cơn run hơn. Sổ lò ghi ca xả trước ngày các bệnh nhân đầu tới giường.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối nhiều ca với mẫu và khóa nhánh",
+          "t": "Ngươi đối sổ ca rồi cùng người cấp nước khóa nhánh có cặn và mở nguồn sạch.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ghi riêng nhóm có triệu chứng khác",
+          "t": "Ngươi tách những ca không khớp với nước nhánh, giữ phần chưa rõ trong sổ.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Đưa sổ mẫu cho người giữ lò",
+          "t": "Ngươi yêu cầu họ ký nhận ngày xả và chép nguồn thay thế cho các hộ.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hai mẫu bị đổ khi dọn sân, sổ lò không được đối với ngày phát bệnh.",
+        "su": "Hai mẫu bị đổ khi dọn sân, sổ lò không được đối với ngày phát bệnh.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Thuốc chờ bên cửa lạnh",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Kho {LOC10} có đan phương giữ riêng và một thang phàm để giảm cơn run. Hồ sơ còn nhắc một huyết phương cần người hiến. Trước cửa, người bệnh hỏi thang nào có thể dùng khi chưa đổi được nước.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Lấy thang phàm và thử dưới tay thầy",
+          "t": "Ngươi ghi nguồn thảo dược và theo dõi người uống, thấy cơn run giảm khi đổi nước sạch.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận quyền giữ đan phương",
+          "t": "Ngươi nhận bản đóng niêm từ người giữ kho và ghi từng phần nguyên liệu dự trữ.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Niêm huyết phương, ghi giới hạn thuốc",
+          "t": "Ngươi kê phần đòi người hiến và cất riêng, rồi báo nhà bệnh thuốc chỉ giảm đau.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Kho chỉ cấp thang giảm chứng theo giá cũ, người nhà đợi ngoài cửa.",
+        "su": "Kho chỉ cấp thang giảm chứng theo giá cũ, người nhà đợi ngoài cửa.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Ai nhận phần đầu",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Mâm phát thuốc ở {LOC10} chỉ đủ đưa vài bát một lượt. Các hộ chờ theo giấy phí, người hộ tống mang danh sách riêng. Ở giường sát cửa, người hái thuốc xin gặp người nhà trước tối.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Cấp theo cơn nặng và góp công mở bệnh xá",
+          "t": "Ngươi cấp thang đã thử theo mức nặng, ghi lịch góp công để giữ giường qua đêm.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận bảo trợ và cấp theo danh sách",
+          "t": "Ngươi đổi quyền ưu tiên lấy kho và tiền từ người giữ ấn. Người ngoài danh sách phải đợi.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Chăm đến lúc người nhà tới",
+          "t": "Ngươi giữ ấm và đọc thật giới hạn thuốc, để người nhà kịp nghe lời từ biệt.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Thuốc tiếp tục phát theo giấy phí, nhà bệnh phải đợi hết lượt.",
+        "su": "Thuốc tiếp tục phát theo giấy phí, nhà bệnh phải đợi hết lượt.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Cửa kho sau canh cuối",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Sau canh cuối, {LOC10} cần quyết ai được giữ chìa kho. Có người xin chép phương, có người mang giấy cấp riêng, người nhà đem một trang bệnh án đã khô mực. Ngọn đèn cạnh bát vẫn cháy.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Công bố thang thuốc và mở giường góp công",
+          "t": "Ngươi giao bản thang đã thử cho các hộ và mở giường theo lịch góp công.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Khóa quyền pha thuốc theo giấy bảo trợ",
+          "t": "Ngươi giao chìa theo giấy cấp riêng. Từ nay người giữ ấn gọi tên trước người coi bệnh.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Lưu bệnh án thật và hủy huyết phương",
+          "t": "Ngươi giữ trang ghi ca không qua khỏi, hủy bản nguy hiểm và để người nhà ký nhận.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Kho tiếp tục phát theo sổ cũ, hồ sơ ca nặng cất cùng tờ phí.",
+        "su": "Kho tiếp tục phát theo sổ cũ, hồ sơ ca nặng cất cùng tờ phí.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Bệnh xá qua đêm",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Nguồn sạch được dẫn tới dưới mái, còn người góp công xếp lịch ngồi cùng bệnh nhân qua đêm. Thang đã thử có trang ghi lúc dùng và lúc dừng. Một người từng run tay trở lại, nhận phần phơi thuốc cho ca mới.",
+      "su": "{LOC10} giữ giường góp công với nguồn nước sạch và thang đã thử.",
+      "dauVong": "người từng chữa ở {LOC10} còn chỉ được chỗ treo lịch trông bệnh."
+    },
+    {
+      "id": "B",
+      "ten": "Một phương đổi một thành",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Bản niêm đi theo người giữ ấn, còn người biết pha chỉ nhận nguyên liệu khi có giấy. Một hộ ngoài danh sách nghe tên mình bị bỏ qua dù hôm trước đã mang củi tới. Điều khoản cấp thuốc được sao thêm vào bản bảo trợ.",
+      "su": "Giấy bảo trợ trao quyền ưu tiên và giữ đan phương cho một đầu mối.",
+      "dauVong": "bản cấp thuốc ghi cả những hộ từng phải đứng ngoài danh sách."
+    },
+    {
+      "id": "C",
+      "ten": "Thuốc không giữ được người",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Người nhà đem trang đối chứng về cùng tấm khăn ngươi từng thay. Bản còn lại ghi thuốc đã làm được gì, cơn đau giảm lúc nào và khi nào bệnh vượt quá sức chữa. Học trò sau được đọc cả lời từ biệt.",
+      "su": "Hồ sơ ca nặng tại {LOC10} giữ nguyên giới hạn thuốc cùng lời gia đình.",
+      "dauVong": "trang bệnh án cho phép người học đọc lại một ca không qua khỏi."
+    }
+  ],
+  "ngoai": "Kho tiếp tục phát theo sổ cũ, hồ sơ ca nặng cất cùng tờ phí."
+}
