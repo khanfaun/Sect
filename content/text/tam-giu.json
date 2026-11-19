@@ -1,0 +1,16 @@
+{
+  "tg.vao": "Túi đầy: {{0}} tạm giữ bên người (chưa dùng được, cất vào túi trong vòng một năm kẻo mất)",
+  "tg.vaoLog": "Túi đầy, {{0}} món nhận thêm phải tạm giữ bên người: {{1}}.",
+  "tg.bao": "{{0}} tạm giữ bên người sắp rơi mất, mau dọn túi để cất vào.",
+  "tg.mat": "{{0}} tạm giữ quá lâu, đã rơi mất.",
+  "tg.cat": "Cất {{0}} vào túi.",
+  "tg.head": "Tạm giữ bên người",
+  "tg.d": "Túi đầy nên các món này mang tạm ngoài túi: chưa dùng được, phải dọn chỗ rồi cất vào. Để quá một năm thì mất.",
+  "tg.catBtn": "Cất vào túi",
+  "tg.bo": "Bỏ",
+  "tg.day": "túi còn đầy",
+  "tg.conNgay": "còn {{0}} ngày",
+  "tg.conThang": "còn chừng {{0}} tháng",
+  "tg.sapMat": "sắp mất",
+  "tg.chip": "→ tạm giữ (túi đầy)"
+}

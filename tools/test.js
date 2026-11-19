@@ -84,15 +84,18 @@ const TESTS = {
     run("G.run.truy=null;FEAT.no=1;G.run.bac=-5000;G.run.noTra={t0:W().t,han:W().t+HM,lan:1};noTruyNa(G.run)");ok(run("G.run.truy&&G.run.truy.k")==='no', 'truy nã vì nợ: sai dịch truy đuổi');
     run("G.run.bac=0;G.run.noTra=null;truyCheck()");ok(run("!G.run.truy"), 'trả hết nợ: sai dịch thôi đuổi');
     // bản lưu cũ
+    let TK_DBG='';
     // Sửa-L câu 50: hạn truy tính bằng năm, dò thưa
     run("Object.assign(TRUY,JSON.parse(TRUY_BK));G.run.truy=null;G.run.scene=null;truyStart('ke',{n:'Kẻ thù',d:0})");
     ok(run("(G.run.truy.until-W().t)/HD")>=365*5, 'kẻ thù: truy ít nhất năm năm');
     ok(run("TRUY.loai.thu.ngay[0]")>=365&&run("TRUY.loai.ke.ngay[1]")>=365*9, 'yêu thú tối thiểu một năm, kẻ thù tới cả chục năm');
     ok(run("Object.values(TRUY.loai).every(L=>L.gian[0]>=240)"), 'mỗi lần dò cách nhau ít nhất mười ngày');
+    const far2=run(`(()=>{const r=G.run;const a=nodeById(r.at);let best=null,bh=0;for(const R0 of W().regions)for(const n of R0.nodes){if(n.id===r.at)continue;n.fog=Math.max(n.fog||0,1);const p=findPath(r.at,n.id);if(!p||p.length<2)continue;const h=edgeLen(p[0],p[1])/walkSpeed();if(h>bh&&h<24*40){bh=h;best=n.id;}}return best;})()`);
     // Sửa-L câu 51: bị chặn giữa đường, đánh thắng/chạy tiếp xong vẫn đứng yên tới khi bấm Đi tiếp
-    run(`G.run.truy=null;G.run.scene=null;G.run.halt=false;travelTo(${far});G.run.dest=${far};TK_S=edgeLen(G.run.moving.path[0],G.run.moving.path[1])/walkSpeed();truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});TRUY.loai.tac.chan=1;G.run.truy.nx=W().t+TK_S*0.5;G.run.kyT=W().t;G.run.tmT=W().t;travelTick(TK_S*20)`);
+    run(`G.run.truy=null;G.run.scene=null;G.run.halt=false;travelTo(${far2});G.run.dest=${far2};TK_S=edgeLen(G.run.moving.path[0],G.run.moving.path[1])/walkSpeed();truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});TRUY.loai.tac.chan=1;G.run.truy.nx=W().t+TK_S*0.5;G.run.kyT=W().t;G.run.tmT=W().t;travelTick(TK_S*20)`);
+    TK_DBG=run(`JSON.stringify([G.run.at,${far2},!!G.run.moving&&G.run.moving.path.length,G.run.moving&&G.run.moving.prog,G.run.scene&&G.run.scene.ev,G.run.halt])`);
     run("TRUY.chay.goc=1;TRUY.chay.max=1;kyPick(1);G.run.scene=null;if(G.run.moving)G.run.moving.halt=0;advanceTime(1)");
-    ok(run("G.run.halt===true&&!!G.run.moving"), 'chạy tiếp xong: vẫn đứng yên giữa đường (chờ bấm Đi tiếp)');
+    ok(run("G.run.halt===true&&!!G.run.moving"), 'chạy tiếp xong: vẫn đứng yên giữa đường (chờ bấm Đi tiếp) '+TK_DBG+run("JSON.stringify([G.run.halt,!!G.run.moving,G.run.scene&&G.run.scene.type,NK.count('truy.chan'),G.run.at])"));
     run("G.run.scene=null;truyChan();kyPick(0);G.run.scene.over='win';combatContinue();G.run.scene=null");
     ok(run("G.run.halt===true&&!!G.run.moving"), 'đánh thắng xong: vẫn đứng yên giữa đường');
     run("delete G.run.truy;G.run.scene=null;advanceTime(5)");ok(run("!G.run.truy&&truyOn()===false&&truyTip()===''"), 'bản lưu cũ (không có r.truy): chạy bình thường');
@@ -1699,6 +1702,38 @@ const TESTS = {
     run("AM_HOI.nhu=AM_HOI._nhu");
     ok(run("NK.count('amh.de')")>0&&run("NK.count('amh.dung')")>0, 'có nhật ký amh.de, amh.dung');
   },
+  // Sửa-L câu 49: túi đầy → tạm giữ bên người (mọi nguồn nhận đồ), 365 ngày chưa cất thì mất; NPC cũng vậy
+  tam_giu() {
+    fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=1;G.run.relics=[];G.run.pills=[];G.run.qitems=[];autoCheck()");
+    run("(()=>{let k=0;while(bagCap()-bagStacks()>0&&k++<99)G.run.qitems.push('luong_kho');for(let j=0;j<5;j++)G.run.pills.push({id:'hoixuan',q:0});autoCheck();})()");
+    ok(run("bagCap()-bagStacks()")===0&&run("S().pillMax-G.run.pills.length")===0&&run("tgL().length")===0, 'túi vừa đầy: chưa có gì tạm giữ');
+    const st0=run("G.run.st");run("gainPill('tukhi',0)");
+    ok(run("G.run.st")===st0&&run("tgL().length===1&&tgL()[0].t==='p'&&tgL()[0].v.id==='tukhi'"), 'nhận đan khi túi đầy: vào tạm giữ (không đổi ra linh thạch)');
+    run("G.run.relics.push(Object.assign(genRelic(1),{name:'Thử Kiếm Nhặt',seen:1}));autoCheck()");
+    ok(run("tgL().some(e=>e.t==='r'&&e.n==='Thử Kiếm Nhặt')")&&!run("G.run.relics.some(x=>x.name==='Thử Kiếm Nhặt')"), 'nhặt pháp bảo khi túi đầy (nguồn bất kỳ): vào tạm giữ');
+    run("G.run.qitems.push('luong_kho');saveSoon()");ok(run("tgL().filter(e=>e.t==='qi').length")===1, 'phần thưởng vật phẩm khi túi đầy: vào tạm giữ');
+    ok(!run("bagItems().some(x=>/Thử Kiếm Nhặt/.test(x.n))")&&run("tgView().length")===3, 'đồ tạm giữ nằm ngoài ô túi, không dùng được');
+    ok(run("tgView().every(v=>/còn chừng \\d+ tháng/.test(v.con)&&v.no)"), 'hạn ghi bằng chữ; túi đầy thì chưa cất được ('+run("tgView()[0].con")+')');
+    ok(!run("tgCat(1)"), 'túi đầy: không cất được');
+    run("G.run.qitems.splice(0,1)");const i=run("tgL().findIndex(e=>e.n==='Thử Kiếm Nhặt')");
+    ok(run(`tgCat(${i})`)&&run("G.run.relics.some(x=>x.name==='Thử Kiếm Nhặt')"), 'dọn chỗ: cất vào túi được, dùng như thường');
+    // hết hạn: báo trước rồi mất
+    run("W().t+=(TAM_GIU.han-TAM_GIU.bao+1)*HD;advanceTime(1)");
+    ok(run("tgL().length===2&&tgL().every(e=>e.bao)")&&run("tgView().every(v=>v.sap&&/còn \\d+ ngày/.test(v.con))")&&run("NK.count('tg.bao')")>0, 'sắp hết một năm: báo trước');
+    run("W().t+=TAM_GIU.bao*HD;advanceTime(1)");ok(run("tgL().length")===0&&run("NK.count('tg.mat')")>=2, 'quá một năm chưa cất: mất');
+    // Ám Hội: túi đầy vẫn trả giá; NPC túi đầy thì món nhận vào tạm giữ của NPC, có chỗ thì tự cất
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);venueDo('amhoi','vao');})()");
+    ok(run("G.run.scene&&G.run.scene.type==='amhoi'")&&run("amRoom()"), 'túi đầy vẫn ngồi bàn trả giá được');
+    run("G.run.qitems.push('luong_kho');saveSoon();amDat(G.run.scene,'me',[{u:'x1',id:'rel',n:'Thử Ấn Đấu',q:1,rel:Object.assign(genRelic(1),{name:'Thử Ấn Đấu',seen:1})}])");
+    ok(run("tgL().some(e=>e.n==='Thử Ấn Đấu')"), 'thắng đấu giá khi túi đầy: món vào tạm giữ');
+    run("(()=>{const sc=G.run.scene;const T=amTui(sc,0);while(T.length<12)T.push({u:amUid(),id:'pill:hoixuan',n:'x',q:0});amDat(sc,0,[{u:'x2',id:'pill:tukhi',n:'Tụ Khí',q:0}]);})()");
+    ok(run("amTui(G.run.scene,0).length===12&&amTgObj(G.run.scene,0).tg.length===1")&&run("amTuiDay(G.run.scene,0)")===false, 'NPC túi đầy: món nhận vào tạm giữ của NPC, vẫn trả giá được');
+    run("amLay(G.run.scene,0,'pill:hoixuan',1)");ok(run("amTui(G.run.scene,0).some(x=>x.u==='x2')&&amTgObj(G.run.scene,0).tg.length===0"), 'NPC có chỗ: tự cất món tạm giữ vào túi');
+    run("G.run.scene=null");
+    // bản lưu cũ
+    run("delete G.run.tamGiu;delete G.run._tgS;advanceTime(1);autoCheck()");ok(run("Array.isArray(G.run.tamGiu)&&tgView().length===0"), 'bản lưu cũ (không có tạm giữ): chạy bình thường');
+    ok(run("NK.count('tg.vao')")>0, 'có nhật ký tg.*');
+  },
   am_hoi() {
     fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=2;G.run.relics=[];G.run.pills=[];G.run.qitems=[];G.run.st=0;G.run.lt=[0,0,0];AM_LECH=0");
     const nid=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);return n.id;})()");
@@ -1892,17 +1927,21 @@ const TESTS = {
     // túi đầy
     run("(()=>{let k=0;while(ccBagFree()>0&&k++<99)G.run.qitems.push('luong_kho');})()");ok(run("ccBagFree()")===0, 'túi đầy');
     const at=run("G.run.at");run("ccVtAdd('mach_thao',1)");
-    ok(run("ccHave('mach_thao')")===0&&run(`G.run.ccGui.length===1&&G.run.ccGui[0].at===${at}`), 'túi đầy: vật tư gửi lại ở nơi đang đứng, không mất');
-    ok(run("ccView().vt.some(x=>/Mạch Thảo/.test(x.n)&&/gửi ở/.test(x.n))"), 'Sổ tay ghi món đang gửi và nơi gửi');
+    ok(run("ccHave('mach_thao')")===0&&run("G.run.tamGiu.length===1&&G.run.tamGiu[0].v==='cc_mach_thao'")&&run("G.run.ccGui.length")===0, 'túi đầy (Sửa-L gộp): vật tư vào tạm giữ bên người, không gửi tại chỗ, chưa dùng được');
+    run("G.run.qitems.splice(G.run.qitems.indexOf('luong_kho'),1);tgCat(0)");
+    ok(run("ccHave('mach_thao')")===1&&run("G.run.tamGiu.length")===0, 'dọn túi xong cất vào túi được');
+    // bản lưu cũ có món đã gửi tại chỗ (Sửa-G): vẫn lấy lại được ở nơi gửi
+    run(`G.run.ccGui=[{vt:'mach_thao',at:${at}}];G.run.qitems.push('luong_kho')`);
+    ok(run("ccView().vt.some(x=>/Mạch Thảo/.test(x.n)&&/gửi ở/.test(x.n))"), 'Sổ tay ghi món đang gửi và nơi gửi (bản lưu cũ)');
     run(`(()=>{const r=G.run;r.scene=null;openPlace(${at});r.scene.venue='coduyen';})()`);
     ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='coduyen')")&&!!run("ccOpts(nodeById(G.run.at)).find(o=>o.id==='lay:mach_thao'&&o.no)"), 'nút lấy lại có, nhưng khoá khi túi đầy');
-    run("G.run.qitems.splice(G.run.qitems.indexOf('luong_kho'),1)");run("venueDo('coduyen','lay:mach_thao')");
-    ok(run("ccHave('mach_thao')")===1&&run("G.run.ccGui.length")===0, 'dọn túi xong lấy lại được');
+    run("G.run.qitems.splice(G.run.qitems.indexOf('luong_kho'),1);G.run.qitems.splice(G.run.qitems.indexOf('luong_kho'),1)");run("venueDo('coduyen','lay:mach_thao')");
+    ok(run("ccHave('mach_thao')")===2&&run("G.run.ccGui.length")===0, 'dọn túi xong lấy lại được');
     // bản lưu cũ
     fresh("G.run.ccVt={ho_mach_tan:2,kim_sa:1};G.run.qitems=(G.run.qitems||[]).filter(x=>!/^cc_/.test(x))");run("run2()");
     ok(run("G.run.ccVt===undefined&&ccHave('ho_mach_tan')===2&&ccHave('kim_sa')===1"), 'bản lưu cũ: r.ccVt chuyển vào túi');
     fresh("(()=>{let k=0;while(ccBagFree()>0&&k++<99)G.run.qitems.push('luong_kho');})();G.run.ccVt={kim_sa:2}");run("run2()");
-    ok(run("G.run.ccVt===undefined&&ccHave('kim_sa')===0&&G.run.ccGui.filter(g=>g.vt==='kim_sa').length===2"), 'bản lưu cũ, túi đầy: gửi lại tại chỗ, không mất');
+    ok(run("G.run.ccVt===undefined&&ccHave('kim_sa')===0&&G.run.tamGiu.filter(g=>g.v==='cc_kim_sa').length===2"), 'bản lưu cũ, túi đầy: vào tạm giữ, không mất');
   },
   // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
   tan_thu() {

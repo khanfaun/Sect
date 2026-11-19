@@ -317,6 +317,8 @@
  "core2/59-menh-tuyen.js",
  "content/rules/truy.js",
  "core2/60-truy-duoi.js",
+ "content/rules/tam-giu.js",
+ "core2/61-tam-giu.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
@@ -346,5 +348,6 @@
  "ui/28-trac-linh-fx.js",
  "ui/23-chu-thich-ten.js",
  "ui/29-thien-cam-chu-nho.js",
- "ui/30-am-hoi.js"
+ "ui/30-am-hoi.js",
+ "ui/31-tam-giu.js"
 ]

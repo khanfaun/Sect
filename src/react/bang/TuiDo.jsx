@@ -114,6 +114,25 @@ function CotPhai({ items }) {
   </>;
 }
 
+// Sửa-L câu 49: đồ nhận khi túi đầy nằm ở "tạm giữ bên người", ngoài các ô túi; hạn ghi bằng chữ
+function TamGiu() {
+  const L = PS.tgView ? PS.tgView() : [];
+  if (!L.length) return null;
+  const T = PS.contentText;
+  return (
+    <div className="tam-giu">
+      <p><b>{T('tg.head')}</b> <small>{T('tg.d')}</small></p>
+      {L.map(e => (
+        <div key={e.i} className="tg-mon">
+          <span>{e.n}</span> <small className={e.sap ? 'no' : ''}>{e.sap ? T('tg.sapMat') + ', ' : ''}{e.con}</small>
+          <button className={'btn' + (e.no ? '' : ' pri')} data-act="tgCat" data-arg={e.i} disabled={!!e.no}>{T('tg.catBtn')}{e.no ? ' (' + e.no + ')' : ''}</button>
+          <button className="btn" data-act="tgBo" data-arg={e.i}>{T('tg.bo')}</button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function TuiDo() {
   const r = PS.run2(), items = PS.bagItems();
   return <>
@@ -124,7 +143,7 @@ export function TuiDo() {
     </div>
     <div className="bagwrap">
       <div className="bagL"><CotTrai /></div>
-      <div className="bagR"><CotPhai items={items} /><p className="hint">Chạm một món để xem và dùng. Ô trang bị: chạm để chọn đồ, dấu × ở góc để tháo.</p></div>
+      <div className="bagR"><CotPhai items={items} /><p className="hint">Chạm một món để xem và dùng. Ô trang bị: chạm để chọn đồ, dấu × ở góc để tháo.</p><TamGiu /></div>
     </div>
   </>;
 }

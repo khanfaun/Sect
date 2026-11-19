@@ -363,6 +363,19 @@ const TESTS = {
     await ev(p, () => {UI.panel=null;G.run.cc=null;render();});
   },
   // Sửa-I câu 39 + Sửa-J 42b: hộp thoại U Minh Ám Hội — món, danh sách vật muốn nhận, đếm ngược, trả giá, thương lượng, bỏ cuộc
+  // Sửa-L câu 49: túi đầy → mục "Tạm giữ bên người" trong túi đồ, hạn bằng chữ, cất vào khi có chỗ
+  async tam_giu(p) {
+    await ev(p, () => {const r=G.run;r.scene=null;UI.modal=null;r.tamGiu=[{t:'qi',v:'luong_kho',n:'Lương khô thử',at:W().t}];
+      UI.panel='char';UI.tab.char='bag';render();});
+    await p.waitForTimeout(200);
+    const t = await ev(p, () => (document.querySelector('#panel .tam-giu')||{}).innerText||'');
+    ok(/Tạm giữ bên người/.test(t) && /Lương khô thử/.test(t) && /còn chừng \d+ tháng/.test(t) && /Cất vào túi/i.test(t), 'túi đồ hiện mục tạm giữ, hạn bằng chữ: '+t.replace(/\s+/g,' ').slice(-90));
+    await ev(p, () => {const r=G.run;while(bagCap()-bagStacks()<=0&&r.qitems.length)r.qitems.pop();render();});await p.waitForTimeout(120);
+    await ev(p, () => {const b=document.querySelector('#panel .tam-giu [data-act="tgCat"]');if(b)b.click();});await p.waitForTimeout(150);
+    ok(await ev(p, () => G.run.tamGiu.length===0&&G.run.qitems.includes('luong_kho')&&!document.querySelector('#panel .tam-giu')), 'bấm cất: món vào túi, mục tạm giữ ẩn đi');
+    await ev(p, () => {UI.panel=null;render();});
+    ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
+  },
   async am_hoi(p) {
     await ev(p, () => {const r=G.run;r.pham=0;r.realm=Math.max(1,r.realm||0);r.lt=[0,0,50];r.st=20000;r.scene=null;UI.modal=null;UI.panel=null;AM_LECH=0;
       const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');r.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);
