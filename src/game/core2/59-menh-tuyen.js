@@ -110,5 +110,11 @@ function tuyenGap(force){const r=G.run;if(!r||(r.scene&&!force))return false;con
 // Sổ tay / giao diện: nút đang mở + hạn bằng chữ (không số nghiệp)
 function tuyenView(){const r=G.run;if(!r)return [];const T=tySt(r);const L=[];
   for(const S of [T.xt,T.dl]){if(!S||!TUYEN[S.id])continue;const A=TUYEN[S.id];const N=tyNut(S);
-    L.push({id:A.id,loai:A.loai,ten:A.ten,nut:N?tyT(N.ten):'',han:N&&S.han!=null?contentText(S.han-W().t>6*HM?'ty.hanXa':'ty.hanGan'):'',noi:N&&N.loiMoi&&N.loiMoi.noi&&N.loiMoi.noi!=='here'?locName(N.loiMoi.noi):'',ket:S.ket?(S.ket==='ngoai'?contentText('ty.ngoaiTen'):tyT(A.ket.find(k=>k.id===S.ket).ten)):''});}
+    L.push({id:A.id,loai:A.loai,ten:A.ten,nut:N?tyT(N.ten):'',han:N&&S.han!=null?contentText(S.han-W().t>6*HM?'ty.hanXa':'ty.hanGan'):'',noi:N&&N.loiMoi&&N.loiMoi.noi&&N.loiMoi.noi!=='here'?locName(N.loiMoi.noi):'',cho:tyChoMoi(S)?1:0,moLai:tyChoMoi(S)&&tyHereOk(N)?1:0,moNo:tyChoMoi(S)&&!tyHereOk(N)?contentText('ty.moXa'):'',ket:S.ket?(S.ket==='ngoai'?contentText('ty.ngoaiTen'):tyT(A.ket.find(k=>k.id===S.ket).ten)):''});}
   return L;}
+// Sửa-J câu 44: lời mời mốc tuyến chưa trả lời vẫn nằm trong Sổ tay (thẻ Mệnh thư); người chơi tự mở lại trước khi hết hạn.
+// lời mời còn chờ = nút đang mở, đã đưa lời mời (hoặc đang chờ chọn kết), chưa quá hạn
+function tyChoMoi(S){const o=tyCho(S);if(!o)return false;if(o.ket)return true;return !!S.moi&&(S.han==null||W().t<=S.han);}
+function tuyenMoLai(id){const r=G.run;if(!r)return false;const T=tySt(r);const S=[T.xt,T.dl].find(x=>x&&x.id===id);if(!S||!tyChoMoi(S))return false;
+  const o=tyCho(S);if(!o.ket&&!tyHereOk(o.N))return false;if(r.scene&&r.scene.type!=='place')return false;r.scene=null;
+  kyStart(tyKy(S,o.ket?null:o.N));dbg('tuyen.moLai',{id:S.id,nut:o.N?o.N.id:'ket'});return true;}

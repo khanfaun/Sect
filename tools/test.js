@@ -30,6 +30,24 @@ const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else
 const TESTS = {
   // Đ8.6: đất ma — ba khu, bậc, hồi theo thế kỷ, nguy hiểm, thôn trấn biến mất, tu luyện, nhiễm ma khí
   // Đ9.1: bộ máy tuyến — đi hết OR01 (Con nhà nông), lỡ hạn thì tự diễn, vai mất dùng người/vật thay, bản lưu cũ, khoảng luân hồi dài, đại lộ mở từ hồi 2 và đổi một lần
+  // Sửa-J câu 44: lời mời chưa trả lời nằm trong Sổ tay (Mệnh thư), mở lại được trước hạn
+  menh_thu() {
+    fresh("G._ngNoEv=1;G.run.origin='nong';G.run.bac=20000;delete G.run.arc");
+    run("tuyenTick();W().t+=HM;tuyenTick()");
+    let V=JSON.parse(run("JSON.stringify(tuyenView())"));
+    ok(V.length===1&&V[0].id==='OR01'&&V[0].nut&&V[0].han&&!V[0].cho, 'Mệnh thư: tuyến đang đi, mốc hiện tại, hạn bằng chữ ('+V[0].han+')');
+    ok(!/\d/.test(V[0].han+V[0].nut), 'hạn và tên mốc không có con số');
+    run("G.run.scene=null;tuyenGap(true);kyPick(kyOpts(G.run.scene).length-1);G.run.scene=null");
+    V=JSON.parse(run("JSON.stringify(tuyenView())"));
+    ok(V[0].cho===1&&V[0].moLai===1, '"Để sau": lời mời vẫn nằm trong Sổ tay, có nút mở lại');
+    ok(run("tuyenMoLai('OR01')")&&run("G.run.scene.ev")==='tuyen:OR01:N1', 'mở lại từ Sổ tay: hiện lại đúng lời mời N1');
+    run("G.run.scene=null");
+    for(let k=0;k<5;k++)run("tuyenGap(true);kyPick(kyOpts(G.run.scene).length-1);G.run.scene=null");
+    ok(run("tuyenMoLai('OR01')"), 'gác nhiều lần (quá số lần tự nhắc) vẫn mở lại được');
+    run("G.run.scene=null;W().t=G.run.arc.xt.han+1");
+    ok(!run("tuyenMoLai('OR01')")&&!JSON.parse(run("JSON.stringify(tuyenView())"))[0].moLai, 'quá hạn: không mở lại được');
+    ok(!run("tuyenMoLai('OR99')"), 'tuyến không có: không lỗi');
+  },
   menh_tuyen() {
     fresh("G._ngNoEv=1;G.run.origin='nong';G.run.bac=20000;delete G.run.arc");
     ok(run("!!TUYEN.OR01&&TUYEN_XT.nong==='OR01'&&CAT.byId.vt_or01_mau_da&&1"), 'tuyến OR01 nạp từ content/tuyen, vật truyện vào danh mục');

@@ -45,13 +45,29 @@ export function ThienHa() {
   </>;
 }
 
+// Sửa-J câu 44: thẻ "Mệnh thư" — tuyến đang đi, mốc hiện tại, hạn bằng chữ, mở lại lời mời chưa trả lời
+function MenhThu() {
+  const T = PS.contentText, L = (PS.tuyenView && PS.tuyenView()) || [];
+  if (!L.length) return <p className="empty">{T('ty.rong')}</p>;
+  return <div className="rows menh-thu">{L.map(x => (
+    <div key={x.id} className="row ty-the">
+      <span className="r-i">📜</span>
+      <span className="r-t"><b>{x.ten}</b>
+        {x.ket ? <small>{x.ket}</small> : <small>{[x.nut, x.noi, x.han, x.cho ? T('ty.choTraLoi') : ''].filter(Boolean).join(' · ')}</small>}
+        {x.moNo && <small className="no">{x.moNo}</small>}
+      </span>
+      {x.moLai ? <button className="btn sm pri" data-act="tyMoLai" data-arg={x.id}>{T('ty.moLaiNut')}</button> : null}
+    </div>))}</div>;
+}
+
 const Dong = ({ a, t }) => <p><span>{a}</span>{t}</p>;
 
 export function SoTay() {
   const { G, UI } = PS;
   const r = G.run, w = PS.W();
   // Đ8: Sử lược (chuyện lớn của thế giới, kể cả khi người chơi vắng mặt) — chỉ hiện khi đã có
-  const TABS = TABS0.concat(ccCo() ? [['cc', 'Cơ duyên']] : [], (w.suLuoc || []).length ? [['su', 'Sử lược']] : []);
+  const TY = (PS.tuyenView && PS.tuyenView()) || [];
+  const TABS = TABS0.concat(TY.length ? [['ty', PS.contentText('ty.the')]] : [], ccCo() ? [['cc', 'Cơ duyên']] : [], (w.suLuoc || []).length ? [['su', 'Sử lược']] : []);
   let tab = UI.tab.journal || 'quest'; if (!TABS.some(t => t[0] === tab)) tab = 'quest';
   let body = null;
   if (tab === 'aff') body = <ThienHa />;
@@ -70,6 +86,7 @@ export function SoTay() {
     body = L.length ? <div className="logl nq-so">{L.map((l, i) => <Dong key={i} a={l.y + ' tuổi'} t={l.t + ' — ' + l.k} />)}</div> : <p className="empty">Sổ còn trắng. Chưa có ai mang ơn, cũng chưa ai mang oán.</p>;
   }
   if (tab === 'cc') body = <CoDuyen />;
+  if (tab === 'ty') body = <MenhThu />;
   if (tab === 'su') {
     const C = (w.suLuoc || []).slice().reverse(), A = (PS.clkView && PS.clkView()) || [];
     body = <div className="su-luoc">

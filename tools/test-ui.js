@@ -383,6 +383,18 @@ const TESTS = {
     await p.waitForTimeout(120);
     ok(await ev(p, () => !G.run.scene || G.run.scene.type!=='amhoi'), 'rời bàn: đóng hộp thoại');
   },
+  // Sửa-J câu 44: Sổ tay thẻ Mệnh thư — lời mời chưa trả lời, mở lại trước hạn
+  async menh_thu(p) {
+    await ev(p, () => {const r=G.run;r.origin='nong';delete r.arc;r.scene=null;UI.modal=null;tuyenTick();W().t+=HM;tuyenTick();tuyenGap(true);kyPick(kyOpts(r.scene).length-1);r.scene=null;
+      UI.panel='journal';UI.tab.journal='ty';render();});
+    await p.waitForTimeout(150);
+    const d = await ev(p, () => (document.querySelector('.menh-thu')||{}).innerText||'');
+    ok(/mở lại lời mời/i.test(d) && /chưa trả lời/.test(d), 'Sổ tay thẻ Mệnh thư: '+d.replace(/\s+/g,' ').slice(0,160));
+    await ev(p, () => {const b=document.querySelector('.menh-thu [data-act="tyMoLai"]');if(b)b.click();});
+    await p.waitForTimeout(150);
+    ok(await ev(p, () => !!G.run.scene&&/^tuyen:/.test(G.run.scene.ev||'')&&!UI.panel), 'bấm mở lại: hiện lời mời, đóng Sổ tay');
+    await ev(p, () => {G.run.scene=null;delete G.run.arc;render();});
+  },
   // Đ8: Sổ tay thẻ Sử lược — chuyện thế giới khi vắng mặt, đồng hồ đang diễn ra
   async su_luoc(p) {
     await ev(p, () => {const w=W();w.suLuoc=[{y:1200,t:'Thế kỷ thứ ba: chuyện cũ.',k:'gop'},{y:1250,t:'Lương Kinh thất thủ; triều mới do một phe lập.',k:'clk'}];const s=w.thoiCuc.CLK07;s.pha=2;s.tPha=tYear(w.t);
