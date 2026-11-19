@@ -16,5 +16,13 @@
   "tg.locPha": "{{0}}: {{1}}.",
   "tg.locLanh": "{{0}} được dựng lại.",
   "tg.tuThay": "Người dạy ở đây: {{0}}, {{1}}.",
-  "tg.tuThayTrong": "Người dạy cũ đã mất; chỉ còn {{0}} để tự học theo."
+  "tg.tuThayTrong": "Người dạy cũ đã mất; chỉ còn {{0}} để tự học theo.",
+  "tc.batDau": "{{0}}: {{1}}.",
+  "tc.demDai": "Đêm Dài dâng lên: {{0}}.",
+  "tc.demDaiLui": "Đêm Dài lùi lại.",
+  "tc.quoc": "Quốc hiệu mới là {{0}}.",
+  "tc.dich": "{{0}} người giữ việc cũ chết trong dịch.",
+  "tc.tong": "{{0}} về tay {{1}}.",
+  "tc.long": "Long mạch {{0}} đứt.",
+  "tc.lan": "(nhiều lần trong mười năm)"
 }

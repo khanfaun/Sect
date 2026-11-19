@@ -28,6 +28,38 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Đ8.4: mười bốn đồng hồ thế giới
+  thoi_cuc() {
+    fresh();
+    run("var vyRun=(n,o)=>{const w=W();for(let i=0;i<n;i++){w.t+=HY;worldYearsTo(w,o);}}");
+    ok(run("Object.keys(W().thoiCuc).length")===14, 'mười bốn đồng hồ');
+    const q0=run("W().quoc");run("vyRun(400)");
+    const S=JSON.parse(run("JSON.stringify(W().thoiCuc)"));
+    const thieu=Object.keys(S).filter(id=>id!=='CLK06'&&!S[id].lan);
+    ok(!thieu.length, 'bốn trăm năm: mọi đồng hồ theo thời gian đều đã diễn ít nhất một lần'+(thieu.length?' — thiếu '+thieu:''));
+    ok(S.CLK12.lan===1&&S.CLK12.tNext===null, 'Tiên Nhân Hạ Phàm chỉ một lần');
+    ok(S.CLK06.lan===0&&S.CLK06.muc===0, 'Đêm Dài không tăng vì thời gian');
+    ok(S.CLK07.lan>=12, 'Đại Hội Thiên Kiêu mỗi ba mươi năm ('+S.CLK07.lan+' lần)');
+    ok(run("W().quoc")!==q0&&run("W().trieu.length")>=2, 'Đổi Ngôi: quốc hiệu mới ('+q0+' → '+run("W().quoc")+')');
+    ok(run("/người thay/.test(vaiNow('NP04').qh||'')||!vaiNow('NP04').song||W().vai.NP04.ke.some(x=>x.ly==='doi_ngoi')"), 'Đổi Ngôi: vua cũ mất ngôi, người thay giữ vai quân chủ');
+    ok(run("W().suLuoc.some(x=>x.k==='clk')"), 'kết quả mặc định ghi Sử lược');
+    ok(Object.keys(S).every(id=>S[id].ketQua.every(k=>k.md===1)), 'không ai can thiệp: mọi kết quả là mặc định');
+    // can thiệp
+    run("(()=>{const s=W().thoiCuc.CLK07;s.pha=0;s.tNext=tYear(W().t)+1;})()");run("vyRun(1)");
+    ok(run("W().thoiCuc.CLK07.pha")>0&&run("clkView().some(x=>x.id==='CLK07')"), 'đồng hồ đang diễn ra hiện trong clkView');
+    ok(run("clkCanThiep('CLK07','Ngươi đoạt khôi thủ.')")&&!run("clkCanThiep('CLK13','x')||false")===!run("W().thoiCuc.CLK13.pha>0"), 'chỉ can thiệp được đồng hồ đang diễn ra');
+    run("vyRun(3)");ok(run("W().thoiCuc.CLK07.ketQua.slice(-1)[0].md")===0&&run("W().thoiCuc.CLK07.ketQua.slice(-1)[0].kq")==='Ngươi đoạt khôi thủ.', 'có can thiệp thì không áp mặc định');
+    // Đêm Dài chỉ tăng vì hành động
+    run("demDaiTang(4,'test')");ok(run("W().thoiCuc.CLK06.pha")===3, 'phá phong ấn: Đêm Dài lên nấc Ma chủ tỉnh');
+    run("vyRun(6)");ok(run("W().thoiCuc.CLK06.lan")===1&&run("W().thoiCuc.CLK06.muc")===2, 'năm năm không ai ngăn: Đêm Dài diễn kết quả mặc định rồi lùi về nấc hai');
+    // Luật 2, Luật 5
+    run("locHu('LOC12',W(),tYear(W().t),5)");ok(run("anchorNode('LOC12').state")==='ok'&&run("locPhaT('LOC12')")===run("LOC_NEO.LOC12.pha[0]"), 'Lạn Kha Tự bị phá: đi theo trạng thái đã viết, phần lõi không hoang');
+    run("locHu('LOC01',W(),tYear(W().t),5)");ok(run("anchorNode('LOC01').state")==='ruin'||run("G.run.at")===run("anchorNode('LOC01').id"), 'Thanh Khê Thôn bị phá thành '+run("locPhaT('LOC01')"));
+    // Long Mạch Đứt: tu luyện chậm ở khu đó
+    run("(()=>{const r=G.run;r.scene=null;const n=W().regions[0].nodes.find(n=>n.type==='linhdia')||W().regions[0].nodes[0];r.at=n.id;})()");
+    run("W().lkMod={}");const b0=run("bqRate()");run("W().lkMod={0:0.7}");ok(run("lkModAt(curNode())")===0.7&&(b0===0||Math.abs(run("bqRate()")/b0-0.7)<1e-6), 'long mạch đứt: bế quan ở khu đó ×0,7');
+    run("W().lkMod={}");
+  },
   // Đ8.2: vai NPC có người kế; Đ8.3: mười thế lực, sổ cống hiến theo thế lực
   vai() {
     fresh();

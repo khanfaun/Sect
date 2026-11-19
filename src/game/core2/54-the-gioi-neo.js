@@ -49,7 +49,7 @@ function vaiInit(w){w=w||W();if(!w)return null;const V=w.vai||(w.vai={});
   for(const ma in VAI_NP)if(!V[ma]){const P=VAI_NP[ma];V[ma]={ten:P.ten,g:P.g,tuoi:P.tuoi,tho:vaiTho(w,P,ma+'.1',P.tuoi),song:1,doi:1,qh:null,ke:[],noi:P.noi,the:P.fa||null};}
   return V;}
 function vaiTenMoi(w,P,v,key){const g=wRnd(w,'g:'+key)<0.5?'nam':'nu';const ten0=v.ke.length?v.ke[v.ke.length-1].ten:v.ten;
-  const ho=P.ke==='con'&&ten0?ten0.split(' ')[0]:NAME.ho[Math.floor(wRnd(w,'ho:'+key)*NAME.ho.length)];
+  const ho=(v.keThay?'thay':P.ke)==='con'&&ten0?ten0.split(' ')[0]:NAME.ho[Math.floor(wRnd(w,'ho:'+key)*NAME.ho.length)];
   const L=g==='nu'?NAME.nu:NAME.nam;let ten=ho+' '+L[Math.floor(wRnd(w,'ten:'+key)*L.length)];
   if(ten===ten0)ten=ho+' '+L[(Math.floor(wRnd(w,'ten:'+key)*L.length)+1)%L.length];return {ten,g};}
 // người giữ vai mất: ghi người trước, chờ một hai năm rồi có người kế (thế lực đã tan thì vai trống tới khi có người dựng lại)
@@ -59,7 +59,7 @@ function vaiMat(ma,ly,w){w=w||W();const V=vaiInit(w),v=V[ma],P=VAI_NP[ma];if(!v|
   v.song=0;v.ten=null;v.cho=tYear(w.t)+1+Math.floor(wRnd(w,'cho:'+ma+v.doi)*2);dbg('vai.mat',{ma,ly:ly||'tho'});return true;}
 function vaiKe(ma,w){const V=w.vai,v=V[ma],P=VAI_NP[ma];const key=ma+'.'+(v.doi+1);const nm=vaiTenMoi(w,P,v,key);const truoc=v.ke.length?v.ke[v.ke.length-1].ten:null;
   const x=wRnd(w,'tuoi:'+key);const tuoi=P.tu<1?(P.ke==='con'?18+Math.floor(x*18):22+Math.floor(x*20)):Math.round(P.tuoi*(0.35+0.4*x));
-  Object.assign(v,{ten:nm.ten,g:nm.g,tuoi,tho:vaiTho(w,P,key,tuoi),song:1,doi:v.doi+1,qh:truoc?contentText('tg.vaiQh.'+P.ke,[truoc]):null,cho:null});
+  Object.assign(v,{ten:nm.ten,g:nm.g,tuoi,tho:vaiTho(w,P,key,tuoi),song:1,doi:v.doi+1,qh:truoc?contentText('tg.vaiQh.'+(v.keThay?'thay':P.ke),[truoc]):null,cho:null,keThay:0});
   const n=anchorOf(w,P.noi);if(P.lead)suLuocAdd(contentText('tg.vaiKe',[v.ten,v.qh||P.vai,P.vai,n?n.name:LOC_NEO[P.noi].n]),'vai',w);dbg('vai.ke',{ma,doi:v.doi});}
 function vaiYear(w,y,n){const V=vaiInit(w);n=n||1;
   for(const ma in V){const v=V[ma],P=VAI_NP[ma];if(!P||P.bat)continue;
