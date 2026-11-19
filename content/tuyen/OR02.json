@@ -1,0 +1,412 @@
+{
+  "schemaVersion": 1,
+  "id": "OR02",
+  "loai": "xuat_than",
+  "xuatThan": "tran",
+  "goiYDaiLo": [
+    "phi_thang"
+  ],
+  "ten": "Những tên người dưới trận đồ",
+  "tomTat": "Bản sửa của người giữ trục đời trước đã lấy sinh lực thay linh mạch. Lời khai của học đồ nối bản sửa với ba ngôi mộ.",
+  "mo": {
+    "tuoiTu": 16
+  },
+  "vatTruyen": [
+    {
+      "id": "vt_or02_manh_do",
+      "n": "Mảnh trận đồ nhà",
+      "i": "📜",
+      "d": "Mảnh giấy gấp tư, có một nét mực đi ngược chiều những đường trận còn lại."
+    }
+  ],
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Nét mực đi ngược",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "nguoi",
+        "noi": "LOC05",
+        "vai": "NP09"
+      },
+      "mo": "{NP09} mang tới một mảnh trận đồ tìm thấy trong hòm nghề nhà ngươi. Ở góc giấy có dấu giao bản của gia đình. Một nét sửa quặt xuống chân trục, nơi bản chính ở {LOC05} đã bị cạo trắng. \"Muốn biết ai sửa thì phải xem nét tay.\"",
+      "thayThe": "Mảnh trận đồ nhà ngươi nằm kẹp trong bản nghề ở phòng lõi {LOC05}. Mép giấy còn dấu giao bản của gia đình, còn nét sửa đột ngột quặt xuống chân trục. Bên dưới là tập nghiệm thu có chữ ký của người giữ trục đời trước.",
+      "cach": [
+        {
+          "id": "so_net",
+          "l": "Đối chiếu nét sửa với sổ nghiệm thu",
+          "t": "Ngươi đặt mảnh giấy cạnh chữ ký trong sổ nghiệm thu. Cả hai có một vết dừng ở chỗ đổi chiều, đúng nét tay của người giữ trục đời trước. Ngươi gấp bản nhà lại để dành cho buổi đối chất.",
+          "dau": [
+            "biet_tac_gia"
+          ],
+          "e": {
+            "vatPham": "vt_or02_manh_do"
+          }
+        },
+        {
+          "id": "xin_xac_nhan",
+          "l": "Xin đối chứng trước người giữ bản nghề",
+          "t": "Mấy người giữ bản lần lượt chỉ vào nét móc riêng của người giữ trục đời trước. Họ chịu điểm chỉ vào biên bản, nhưng giữ bản giấy trong kho.",
+          "dau": [
+            "biet_tac_gia",
+            "co_doi_chung"
+          ]
+        },
+        {
+          "id": "giu_ban_nha",
+          "l": "Cất mảnh đồ, giữ chuyện trong nhà",
+          "t": "Ngươi gói tờ giấy bằng vải khô. Dấu giao bản vẫn mang tiếng là dấu của người đã sửa trận, và ngươi chưa có lời nào để gỡ tiếng ấy.",
+          "e": {
+            "vatPham": "vt_or02_manh_do"
+          }
+        }
+      ],
+      "tuDien": {
+        "t": "Mảnh đồ được nhập lại vào hồ sơ dưới tên nhà giao giấy, còn nét sửa bị bỏ trống mục tác giả.",
+        "su": "Hồ sơ trận ở {LOC05} tiếp tục quy bản sửa về nhà giao giấy.",
+        "dau": [
+          "tac_gia_bo_trong"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Mạch dưới thềm miếu",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Dưới thềm {LOC04}, lá khô cứ giật lên dù gió đã tắt. Người giữ miếu cho ngươi đối chiếu vạch đo nước cũ với các vạch còn nguyên ở {LOC05}. Một đường có nhịp giống hơi thở, đường kia rền đều trong đá.",
+      "cach": [
+        {
+          "id": "do_hai_mach",
+          "l": "Đo cả hai mạch, tìm nguồn nuôi trận",
+          "t": "Ống chính hụt nhịp đúng khi người trong phòng dẫn ngất đi, còn mạch đá vẫn đều. Thợ trận đánh dấu một nguồn đủ sức nuôi trục nếu có bộ lọc thay thế.",
+          "dau": [
+            "biet_vat_dan_song",
+            "co_mach_da"
+          ],
+          "e": {
+            "h": 24
+          }
+        },
+        {
+          "id": "thu_nguon_du",
+          "l": "Đo bình dự trữ qua một phiên",
+          "t": "Bình đủ nuôi trục một kỳ, nhưng sổ nạp ghi rõ đó là sinh lực rút từ những người đưa vào phòng dẫn. Ngươi lấy phấn gạch ngang mực cần cho phiên sau.",
+          "dau": [
+            "biet_vat_dan_song",
+            "co_binh_du"
+          ]
+        },
+        {
+          "id": "ve_loi_ra",
+          "l": "Đo đường rút khỏi vùng trận che",
+          "t": "Ngươi đo đến đoạn mạch tắt bên {LOC04}, rồi đi ngược về {LOC05} theo đường ấy. Mấy hộ ở sát chân trận xin ngươi chép cho họ một bản.",
+          "dau": [
+            "co_loi_rut"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Trận lại đổi phiên trong đêm, còn vạch đo ở thềm miếu bị nước mưa xóa mất một đoạn.",
+        "su": "Ở {LOC04}, dấu mạch dưới thềm mờ sau một đợt mưa.",
+        "dau": [
+          "mat_vach_do"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Ba nấm đất",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "thu",
+        "noi": "LOC05",
+        "vai": "NP10"
+      },
+      "mo": "{NP10} gửi một tờ giấy bọc trong vải dầu. Lời khai gọi ba người mất tích bằng số giường vì bảng tên còn bị khóa ở {LOC05}. Ở {LOC04}, ba nấm đất đều có dấu giường khắc ở chân bia.",
+      "thayThe": "Bản sao bảng người bị hiến rơi ra từ sau một tờ trận đồ bị bong mép gỗ. Ba dòng đầu có số giường và dấu chỉ tới {LOC04}. Ngươi tìm thấy ba dấu ấy dưới ba tấm bia chỉ ghi ngày chôn.",
+      "cach": [
+        {
+          "id": "xin_mo_bang",
+          "l": "Thương lượng mở bảng trước người giữ miếu",
+          "t": "Ngươi giao bản chép lời khai cho người giữ miếu làm đối chứng. Người giữ kho chịu mở bảng với điều kiện che tên người chuyển lời. Ba tên được đọc trước ba nấm đất.",
+          "dau": [
+            "co_bang_ten",
+            "giau_nguoi_khai"
+          ]
+        },
+        {
+          "id": "sao_bang",
+          "l": "Sao bảng gốc kèm nét bút sửa",
+          "t": "Ngươi đưa mảnh đồ nhà ra để xin xem mục đối ứng. Nét sửa lặp lại nét móc của người giữ trục đời trước. Ngươi sao cả ba tên để đối với dấu giường trên bia.",
+          "dau": [
+            "co_bang_ten",
+            "co_net_chung"
+          ],
+          "dk": {
+            "dau": [
+              "biet_tac_gia"
+            ],
+            "vatPham": [
+              "vt_or02_manh_do"
+            ]
+          }
+        },
+        {
+          "id": "lay_bang",
+          "l": "Lẻn vào lấy bảng rồi đối chiếu mộ",
+          "t": "Ngươi mang bảng khỏi phòng cất hồ sơ trước buổi kiểm kho. Ba tên khớp ba dấu giường ở {LOC04}. Đến tối, những người còn quanh trục bị giữ lại để tra hỏi.",
+          "dau": [
+            "co_bang_ten",
+            "kho_bi_tra"
+          ],
+          "e": {
+            "fa": {
+              "FA03": -1
+            }
+          }
+        }
+      ],
+      "tuDien": {
+        "t": "Bảng tên bị chuyển sang hòm kín, còn người giữ miếu đặt ba chén nước trước ba bia chỉ có ngày chôn.",
+        "su": "Ba mộ ở {LOC04} có người thắp hương mà chưa có tên.",
+        "dau": [
+          "bang_bi_cat"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Nguồn cho một kỳ trận",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 8
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC05"
+      },
+      "mo": "Trước kỳ đổi phiên, người quanh {LOC05} nghe tiếng trục hụt dưới nền đá. Thợ trận đặt rổ đá lọc cạnh cửa, còn người giữ kho kiểm lại các bình dự trữ. Những hộ ở chân trận đã xếp gánh bên vách.",
+      "cach": [
+        {
+          "id": "thay_nguon",
+          "l": "Dẫn mạch đá qua bộ lọc mới",
+          "t": "Ngươi gánh đủ đá lọc cho thợ trận lắp theo vạch đo. Trục chạy trọn lượt thử bằng mạch đá, và thợ tháo các ống dẫn từ buồng người.",
+          "dau": [
+            "nguon_vo_sinh"
+          ],
+          "dk": {
+            "dau": [
+              "co_mach_da",
+              "biet_vat_dan_song"
+            ]
+          },
+          "e": {
+            "h": 48
+          }
+        },
+        {
+          "id": "nhan_khoa",
+          "l": "Nắm khóa trục, cấp bình cho cả kỳ",
+          "t": "Ngươi kiểm từng bình theo sổ đo và niêm đủ phần dùng cho cả kỳ. Người giữ kho giao khóa để đổi lấy cam kết giữ trận sáng. Dưới niêm mới, sổ nạp cũ vẫn ghi những người bị rút sức.",
+          "dau": [
+            "co_khoa",
+            "du_mot_ky"
+          ],
+          "dk": {
+            "dau": [
+              "co_binh_du"
+            ]
+          }
+        },
+        {
+          "id": "dua_dan",
+          "l": "Đưa các hộ chân trục ra ngoài đường mạch",
+          "t": "Ngươi men lối đã đo, đưa nhóm hộ sát chân trục tới thềm {LOC04}. Người giữ miếu đếm lại từng người, từ trẻ nhỏ tới người đi chậm, rồi mới hạ gánh nước.",
+          "dau": [
+            "da_so_tan"
+          ],
+          "dk": {
+            "dau": [
+              "co_loi_rut"
+            ]
+          },
+          "e": {
+            "deed": "cuu_nguoi"
+          }
+        },
+        {
+          "id": "giu_tran_cu",
+          "l": "Để người giữ kho cấp nguồn như cũ",
+          "t": "Ngươi nhận việc kiểm đèn ngoài hành lang. Người giữ kho cấp đủ bình cũ cho lượt tới rồi khóa cửa buồng dẫn. Đèn còn sáng, nhưng trong sổ có thêm một ca nằm buồng.",
+          "dau": [
+            "giu_nguon_cu"
+          ],
+          "e": {
+            "fa": {
+              "FA03": 1
+            }
+          }
+        }
+      ],
+      "tuDien": {
+        "t": "Người giữ kho dùng hết phần dự trữ ngắn hạn, còn các hộ chân trục tản đi lẻ tẻ, không ai kiểm đủ người.",
+        "su": "Trục {LOC05} cháy yếu qua phiên đổi bình.",
+        "dau": [
+          "truc_chay_yeu"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Tên dưới cửa phòng lõi",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 8
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC05"
+      },
+      "mo": "Tới ngày xét lại bản sửa, người ta kê một bàn gỗ trước lối vào phòng lõi {LOC05}. Trên bàn có sổ nghiệm thu, hồ sơ buồng dẫn và một hòm niêm rỗng. Ngoài cửa, người từ {LOC04} mang tới ba chén nước.",
+      "cach": [
+        {
+          "id": "mo_ho_so",
+          "l": "Công bố bảng tên và tước quyền giấu bản",
+          "t": "Ngươi ghi rõ người đã sửa trận và phần việc của những người duy trì nó. Các học đồ sao bảng tên lẫn bản lọc mới ngay trước cửa, rồi giao một bản sang {LOC04}.",
+          "dau": [
+            "ho_so_cong_khai"
+          ],
+          "dk": {
+            "dau": [
+              "biet_tac_gia",
+              "co_bang_ten",
+              "nguon_vo_sinh"
+            ]
+          },
+          "e": {
+            "fa": {
+              "FA03": -3
+            }
+          }
+        },
+        {
+          "id": "niem_ho_so",
+          "l": "Niêm trách nhiệm dưới ấn giữ trục",
+          "t": "Hết kỳ, trục vẫn sáng nhờ phần bình ngươi đã khóa sổ. Những người coi trận nhận lệnh đổi phiên từ tay ngươi. Ngươi niêm hồ sơ trách nhiệm và sổ nạp cũ dưới ấn mới.",
+          "dau": [
+            "da_giu_truc"
+          ],
+          "dk": {
+            "dau": [
+              "co_khoa",
+              "du_mot_ky"
+            ]
+          },
+          "e": {
+            "fa": {
+              "FA03": 2
+            }
+          }
+        },
+        {
+          "id": "pha_loi",
+          "l": "Xác nhận dân đã ra rồi phá lõi",
+          "t": "Ngươi đợi tin nhóm hộ đã tới đủ rồi cùng thợ trận phá lõi. Mái phòng trục sụm xuống. Bản ghi ở cửa để riêng tên người chịu trách nhiệm và tên người đã được đưa đi.",
+          "dau": [
+            "loi_da_pha"
+          ],
+          "dk": {
+            "dau": [
+              "da_so_tan"
+            ]
+          },
+          "e": {
+            "fa": {
+              "FA03": -5
+            }
+          }
+        },
+        {
+          "id": "ghi_loi_rieng",
+          "l": "Nộp lời khai và rời bàn xét",
+          "t": "Ngươi để lại một trang ghi những gì tận mắt thấy, gạch trống chỗ còn thiếu chứng. Người coi sổ nhận giấy rồi trả chìa hòm về chỗ cũ.",
+          "dau": [
+            "loi_khai_rieng"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người coi trận khóa hòm và hoãn buổi xét, còn ba chén nước nguội dần trước cửa phòng lõi.",
+        "su": "Buổi xét bản sửa ở {LOC05} qua đi mà hồ sơ chưa được mở.",
+        "dau": [
+          "hoan_xet_tran"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Trận không nuốt tên",
+      "dk": {
+        "dau": [
+          "nguon_vo_sinh",
+          "ho_so_cong_khai"
+        ]
+      },
+      "t": "Trục chạy đều bằng mạch đá, còn buồng dẫn cũ được dùng để hong giấy chép. Người nhà của ba người nằm dưới bia được đọc tên họ giữa ban ngày. Người ngoài {FA03} có thể xách bản sửa về qua cửa kho đang mở.",
+      "su": "Nguồn đá thay buồng dẫn ở {LOC05}, còn bảng tên được lưu công khai tại {LOC04}.",
+      "dauVong": "một học đồ ở {LOC05} giữ bản lọc có chép tên ba người dưới bia."
+    },
+    {
+      "id": "B",
+      "ten": "Người giữ trục",
+      "dk": {
+        "dau": [
+          "co_khoa",
+          "da_giu_truc"
+        ]
+      },
+      "t": "Trận sáng qua một kỳ và những người coi trận chờ lệnh có dấu của ngươi mới đổi phiên. Đến lần kiểm kho sau, họ đem cả sổ nạp tới trình. Dưới từng bình đã cạn là một khoản sinh lực mà người giữ trục sẽ phải trả lời.",
+      "su": "{ten} giữ khóa trục qua kỳ đổi phiên, cùng hòm hồ sơ về nguồn sinh lực.",
+      "dauVong": "sổ nạp ở {LOC05} còn dấu lệnh của {ten} cạnh những món nợ vật dẫn chưa khép."
+    },
+    {
+      "id": "C",
+      "ten": "Đập cột trời cũ",
+      "dk": {
+        "dau": [
+          "da_so_tan",
+          "loi_da_pha"
+        ]
+      },
+      "t": "Phòng lõi thành một lòng đá đổ, mưa xuống không còn bị hất ngược lên mái. Những hộ đã tới {LOC04} thắp đèn dưới mái miếu và gọi nhau theo từng gánh đồ đem được. Họ nhớ ngày trời tối cùng nỗi lo cho những nhà nằm ngoài cuộc dời đi.",
+      "su": "Lõi {LOC05} thành phế trận sau khi nhóm hộ chân trục sang tới {LOC04}.",
+      "dauVong": "ở {LOC04} còn người kể về ngày trời tối và những gánh đồ dưới mái miếu."
+    }
+  ],
+  "ngoai": "Hồ sơ trận ở {LOC05} còn trong tay người coi kho, mỗi lần đổi phiên lại có người hỏi về ba ngôi mộ."
+}

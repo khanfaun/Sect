@@ -1,0 +1,411 @@
+{
+  "schemaVersion": 1,
+  "id": "OR03",
+  "loai": "xuat_than",
+  "xuatThan": "dote",
+  "goiYDaiLo": [
+    "diet_the"
+  ],
+  "ten": "Con dao biết tên chủ",
+  "tomTat": "Một lô thịt giao qua thương hội chứa dấu hồn của người sống; khế gia súc giúp người môi giới vận người từ thôn ra bến.",
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Quả cân có hai vạch",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "nguoi",
+        "noi": "LOC01",
+        "vai": "NP01"
+      },
+      "mo": "{NP01} tới lấy thịt như mọi bữa, nhưng đặt tiền xuống rồi vẫn đứng bên thớt. Vết mẻ trên sống dao khớp dấu chặt trên thẻ lô giao {FA02}. Thẻ ghi nặng hơn sổ cha mẹ chép. Quả cân dùng hôm đó nằm dưới bàn.",
+      "thayThe": "Trong sổ hộ của {LOC01} còn biên nhận mua thịt kẹp bên thẻ giao hàng. Nét chặt trên thẻ khớp vết mẻ trên sống dao nhà ngươi. Sổ cha mẹ ghi cân nhẹ hơn biên nhận lô giao {FA02}.",
+      "cach": [
+        {
+          "id": "thu_can",
+          "l": "Thử quả cân với cân chợ",
+          "t": "Quả cân kéo đĩa xuống quá vạch dù mang cùng một dấu. Ngươi chép lại phần cân bị độn và ký hiệu chuyến ra bến.",
+          "dau": [
+            "biet_can_sua",
+            "co_ky_hieu_chuyen"
+          ]
+        },
+        {
+          "id": "so_dao",
+          "l": "So dấu dao với sổ cân nhà",
+          "t": "Ngươi áp sống dao lên vết chặt rồi dò trang cùng ngày trong sổ. Dòng sửa cân phủ ngang dấu giao nhận, còn ký hiệu chuyến ở mép giấy vẫn nguyên.",
+          "dau": [
+            "biet_can_sua",
+            "co_ky_hieu_chuyen"
+          ]
+        },
+        {
+          "id": "ghi_no_rieng",
+          "l": "Tách khoản lệch khỏi tiền công lò",
+          "t": "Ngươi chép riêng phần cân lệch để người nhà khỏi chia lầm tiền công. Tờ thẻ giao bến vẫn nằm dưới quả cân khi ngươi dọn bàn.",
+          "dau": [
+            "co_so_cong"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Biên nhận lô hàng bị cuộn chung với giấy gói, còn quả cân sai lại được đặt lên bàn cân.",
+        "su": "Lô thịt chênh cân ở {LOC01} qua kỳ đối sổ mà chưa ai tra.",
+        "dau": [
+          "can_sai_con_dung"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Hàng biết gọi nhau",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 5
+      },
+      "loiMoi": {
+        "cach": "thu",
+        "noi": "LOC09",
+        "vai": "NP17"
+      },
+      "mo": "{NP17} nhắn ngươi tới {LOC09} xem chuyến hàng từ {LOC01}. Sổ ghi chở gia súc, nhưng bên thúng thịt còn một khoang nhốt kín. Mỗi khi có tiếng ho dưới khoang, miếng thịt có dấu trên thúng giật nhẹ.",
+      "thayThe": "Bảng khắc thuyền ở {LOC09} ghi một chuyến từ {LOC01} có số gia súc nhiều hơn số lồng. Người bốc hàng chỉ cho ngươi chuyến mới dùng lại mã ấy. Mỗi lần có tiếng người dưới khoang, miếng thịt có dấu trên thúng lại giật.",
+      "cach": [
+        {
+          "id": "doi_the",
+          "l": "Đối chiếu ký hiệu lô hàng với khế bến",
+          "t": "Ngươi tách được lô gia súc có lồng thật khỏi lô ghi thêm một người vá lưới và một chị quẩy nước. Người giữ bến giao ngươi tờ khế gốc có hai tên bị chuyển thành dấu cầm.",
+          "dau": [
+            "biet_khe_nguoi",
+            "co_giay_goc"
+          ],
+          "dk": {
+            "dau": [
+              "co_ky_hieu_chuyen"
+            ]
+          }
+        },
+        {
+          "id": "nghe_ten",
+          "l": "Hỏi tên người dưới khoang qua vách",
+          "t": "Hai người tự xưng tên. Người bốc hàng đưa ngươi xem phần khế ghi họ như gia súc, kẹp với dấu hồn trên miếng thịt. Ngươi ghi lại đủ hai tên.",
+          "dau": [
+            "biet_khe_nguoi"
+          ]
+        },
+        {
+          "id": "ghi_gio",
+          "l": "Ghi chuyến hàng và giờ sang tay",
+          "t": "Ngươi ghi lại kiện thịt mang dấu và giờ người môi giới tới nhận. Người dưới khoang vẫn gọi nhau từng tiếng ngắt quãng.",
+          "dau": [
+            "co_gio_giao"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chuyến hàng được dỡ lên bến dưới tên gia súc và chờ người môi giới đến định lại giá.",
+        "su": "Sổ {LOC09} nhập một chuyến từ {LOC01} mà không đếm người dưới khoang.",
+        "dau": [
+          "khau_giao_khep"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Giá của hai chỗ trống",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 4
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Người môi giới kê cân cạnh bảng khắc thuyền ở {LOC09}. Người vá lưới và chị quẩy nước bị giữ riêng, mỗi người có một dấu hồn gắn với phần thịt trên cân. Dưới ghế gã là một túi tiền và tập khế chưa ghi chủ mới.",
+      "cach": [
+        {
+          "id": "dua_ra",
+          "l": "Đưa cả hai người ra khỏi tay môi giới",
+          "t": "Ngươi gọi người bốc hàng tới đối mặt với gã và đọc to hai tên. Họ đưa người vá lưới và chị quẩy nước lên khỏi khoang, giữ cả hai miếng dấu để làm chứng.",
+          "dau": [
+            "hai_nguoi_thoat",
+            "giu_hai_dau"
+          ],
+          "dk": {
+            "dau": [
+              "biet_khe_nguoi"
+            ]
+          },
+          "e": {
+            "deed": "cuu_nguoi"
+          }
+        },
+        {
+          "id": "lay_bac",
+          "l": "Nhận bạc và để chuyến hàng đi",
+          "t": "Ngươi nhận một lượng bạc để gã khỏi phải giải thích sổ cân. Người vá lưới bị chuyển sang chuyến sau, còn chị quẩy nước bị đưa khỏi bến mà giấy giao nhận bỏ trống.",
+          "dau": [
+            "thoat_khong_ro",
+            "da_nhan_bac"
+          ],
+          "e": {
+            "bac": 1000
+          }
+        },
+        {
+          "id": "nhan_moi",
+          "l": "Nhận mối hàng và hai tờ khế",
+          "t": "Ngươi ký vào sổ cân đã sửa để nhận đầu mối. Người vá lưới bị chuyển cho bên mua tại bến. Chị quẩy nước bị giữ lại theo tờ khế đứng tên ngươi.",
+          "dau": [
+            "nam_duong_day",
+            "giu_khe_chi"
+          ],
+          "dk": {
+            "dau": [
+              "biet_khe_nguoi"
+            ]
+          },
+          "e": {
+            "deed": "ban_nguoi",
+            "fa": {
+              "FA02": 1
+            }
+          }
+        },
+        {
+          "id": "giu_nhan_chung",
+          "l": "Ghi lời người khuân hàng trước khi rời bến",
+          "t": "Ngươi mời người khuân hàng điểm chỉ vào lời chứng. Khi ngươi trở lại, người vá lưới đã bị chuyển đi, còn chị quẩy nước vẫn bị giữ chờ sang tay.",
+          "dau": [
+            "co_loi_khuan",
+            "hai_nguoi_chua_thoat"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người vá lưới bị chuyển theo chuyến nước xuống, còn chị quẩy nước biến mất trước khi bảng bến được sửa.",
+        "su": "Hai người rời sổ hàng ở {LOC09}, chỉ một chuyến được ghi đích đến.",
+        "dau": [
+          "mot_chuyen_mat_dau"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Tên nằm trên miếng dấu",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Tin về khế gia súc theo người mua thịt về {LOC01}. Mấy hộ mở sổ hộ ngay bên thớt, chừa chỗ để ai có chứng thì ghi. Một người biết tháo dấu hồn nhận tới giúp nếu miếng dấu còn nguyên.",
+      "cach": [
+        {
+          "id": "huy_khe",
+          "l": "Lấy sổ hộ và khế gốc để trả tên",
+          "t": "Ngươi đặt giấy gốc bên sổ hộ, để cả hai người tự đọc tên trước các hộ. Khi giao dịch bị bác, họ xé phần nhận chủ trên khế. Hai miếng dấu nguội đi trên thớt.",
+          "dau": [
+            "tra_hai_ten"
+          ],
+          "dk": {
+            "dau": [
+              "hai_nguoi_thoat",
+              "giu_hai_dau",
+              "co_giay_goc"
+            ]
+          },
+          "e": {
+            "fa": {
+              "FA02": -2
+            }
+          }
+        },
+        {
+          "id": "nho_thao_dau",
+          "l": "Nhờ tháo dấu rồi ghi lại hai tên",
+          "t": "Ngươi giữ đèn cho người biết nghề tháo từng dấu. Người vá lưới và chị quẩy nước vẫn run tay khi điểm chỉ vào sổ hộ. Lần này họ được giữ trang có tên mình.",
+          "dau": [
+            "tra_hai_ten"
+          ],
+          "dk": {
+            "dau": [
+              "hai_nguoi_thoat",
+              "giu_hai_dau"
+            ]
+          },
+          "e": {
+            "h": 12
+          }
+        },
+        {
+          "id": "giu_khe",
+          "l": "Buộc khế của chị quẩy nước về tên mình",
+          "t": "Ngươi xuất tờ giao nhận và giữ dấu hồn làm vật giữ khế. Chị quẩy nước đòi bỏ khoản nợ ghi thay giá mua, nhưng người coi sổ ghi khế vẫn hiệu lực.",
+          "dau": [
+            "khe_cuong_con"
+          ],
+          "dk": {
+            "dau": [
+              "nam_duong_day",
+              "giu_khe_chi"
+            ]
+          },
+          "e": {
+            "tamma": 3
+          }
+        },
+        {
+          "id": "de_loi_chung",
+          "l": "Ghi cách nhận diện dấu cho các hộ",
+          "t": "Ngươi để một bản nhận diện thẻ hàng mang dấu hồn cạnh sổ hộ. Người đi chợ có thứ để đối chiếu khi gặp một chuyến khác.",
+          "dau": [
+            "co_ban_nhan_dau"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Các hộ gấp sổ khi chợ tan, để trống phần ghi người vì chẳng ai đối chứng với khế.",
+        "su": "Buổi đối sổ tại {LOC01} qua đi mà những khế đang giữ vẫn còn hiệu lực.",
+        "dau": [
+          "so_ho_bo_trong"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Việc của con dao",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 8
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Người mua tới cửa lò ở {LOC01} đòi xem hàng vào từ đâu. Mấy người làm công chờ biết mùa tới còn việc gì. Nhà có thể bán thịt qua cân kiểm hoặc giao nồi cho các hộ góp gạo. Bên cửa sau người của mối bến vẫn hỏi lò có nhận chuyến mới hay không.",
+      "cach": [
+        {
+          "id": "mo_lo_kiem",
+          "l": "Mở lò có cân và sổ nguồn hàng công khai",
+          "t": "Ngươi chỉ nhận súc vật có người đứng tên và cho khách thử cân trước khi chặt. Hết kỳ chợ, tiền bán đủ mua lứa sau và trả thợ. Hai người được trả tên đến xem sổ treo ngay cửa.",
+          "dau": [
+            "lo_song_co_kiem"
+          ],
+          "dk": {
+            "dau": [
+              "hai_nguoi_thoat",
+              "tra_hai_ten"
+            ]
+          },
+          "e": {
+            "bac": 300,
+            "fa": {
+              "FA04": 2
+            }
+          }
+        },
+        {
+          "id": "doi_sang_bep",
+          "l": "Giải tán lò và giữ bếp qua mùa đói",
+          "t": "Ngươi giao nồi và vốn lò cho các hộ góp gạo, đổi việc của thợ sang nấu và chia phần. Qua tháng đói cuối, bếp vẫn đủ gạo mở cửa. Chị đứng đầu hàng xin khắc tên dưới chiếc bát đầu tiên.",
+          "dau": [
+            "bep_qua_doi"
+          ],
+          "e": {
+            "fa": {
+              "FA04": 2
+            }
+          }
+        },
+        {
+          "id": "nhan_chuyen_moi",
+          "l": "Mở chuyến mới dưới quyền giữ khế",
+          "t": "Ngươi dùng lò làm chỗ nhận dấu và giữ mối vận chuyển qua một kỳ giao. Chị quẩy nước vẫn bị trói bằng khế cũ, nay phải theo chuyến do ngươi duyệt.",
+          "dau": [
+            "mang_mua_ten"
+          ],
+          "dk": {
+            "dau": [
+              "nam_duong_day",
+              "khe_cuong_con"
+            ]
+          },
+          "e": {
+            "bac": 2000,
+            "fa": {
+              "FA02": 2
+            },
+            "tamma": 3
+          }
+        }
+      ],
+      "tuDien": {
+        "t": "Người làm công chia nốt tiền lò rồi đi tìm việc khác, để lại con dao khô trên thớt.",
+        "su": "Lò nhà {ten} ở {LOC01} tắt lửa sau phiên trả công cuối.",
+        "dau": [
+          "lo_tu_tat"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Cửa lò sáng đèn",
+      "dk": {
+        "dau": [
+          "tra_hai_ten",
+          "lo_song_co_kiem"
+        ]
+      },
+      "t": "Mỗi lứa hàng qua cửa lò đều có người giao chịu đứng cạnh cân. Người vá lưới đem sợi gai tới thay dây treo quả cân đã mục, còn chị quẩy nước tự ghi tên khi mua chịu. Khi trao dao cho người học việc, ngươi chỉ chỗ ghi người giao bên chỗ ghi tiền công.",
+      "su": "{LOC01} có nguồn thịt qua cân kiểm và sổ ghi người giao đứng tên.",
+      "dauVong": "người học việc ở {LOC01} giữ con dao mẻ và lời dặn phải đọc tên trên sổ trước khi cân."
+    },
+    {
+      "id": "B",
+      "ten": "Dao không còn giá",
+      "dk": {
+        "dau": [
+          "bep_qua_doi"
+        ]
+      },
+      "t": "Bếp đứng được qua mùa đói, sau đó nhận nấu thuê để dành lại gạo cho những bữa chung. Người từng chặt thịt học nhóm lửa bằng củi ẩm, người từng xách nước lo chia phần. Bên thớt cũ chỉ còn chồng bát, chiếc dưới cùng có tên người ăn bữa đầu.",
+      "su": "Bếp ở {LOC01} qua mùa đói và cho thợ lò cũ một việc mới.",
+      "dauVong": "chiếc bát gỗ đầu tiên còn tên người ăn dưới đáy và vết than từ bếp cũ."
+    },
+    {
+      "id": "C",
+      "ten": "Người mua tên",
+      "dk": {
+        "dau": [
+          "khe_cuong_con",
+          "mang_mua_ten"
+        ]
+      },
+      "t": "Người môi giới tới sau học cách nhìn dấu của ngươi trước khi hỏi giá. Chị quẩy nước để lại lời nhờ truy khế trên bảng bến, cạnh dòng ghi chuyến của người vá lưới. Khi mối hàng đổi tay lần nữa, sổ vẫn chỉ rõ ai từng nắm dấu của chị.",
+      "su": "Đường buôn dấu từ {LOC01} ra {LOC09} tiếp tục dưới tên {ten}, cùng một khế cưỡng ép còn hiệu lực.",
+      "dauVong": "một người ở {LOC09} lần theo khế của chị quẩy nước và biết nơi còn có thể chuộc lại tên trên dấu."
+    }
+  ],
+  "ngoai": "Các hộ ở {LOC01} nhớ lô thịt chênh cân, còn người mất tên vẫn phải chờ ai đem khế ra đối chứng."
+}
