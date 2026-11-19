@@ -42,6 +42,7 @@ export function ManHetKiep() {
           {!!o.gap && <p className="hint gap-loi">{PS.gapLoi(o.gap)} Thế gian vẫn tiếp tục. Nay là năm {PS.tYear(PS.W().t)}.</p>}
           <Html as="div" className="kvl" h={rows} />
           {o.ends && o.ends.length > 0 && <div className="dm-ends"><h4>Kết lớn của đời này</h4><ul>{PS.dmEndsName(o.ends).map((t, i) => <li key={i}>{t}</li>)}</ul></div>}
+          {o.ketCanh && <div className="dm-ket1">{o.ketCanh.split('\n\n').map((t, i) => <p key={i} className={i ? 'ep' : ''}>{t}</p>)}</div>}
           {o.end01 === 'chua' && <p className="hint dm-chua">Đời chưa kịp gọi tên.</p>}
           {o.ngHong && <p className="hint">{o.ngHong}</p>}
           {o.ngKet && <div className="ng-ket"><h4>{PS.contentText('nd2.ngKet')}: {o.ngKet.n} — {o.ngKet.bac}</h4><p><b>{o.ngKet.ten}</b></p><p>{o.ngKet.t}</p></div>}

@@ -191,7 +191,7 @@ function dmTick(){const r=G.run;if(!r||!W())return;const NG=W().ng;
 {const _d=die;die=function(cause){const r=G.run;if(!r)return _d.apply(this,arguments);dmM();
   const e1=dmEnd01(r,cause);const end4=cause==='phithang'&&!!r.ng01&&tri3();const ends=(r.ends||[]).slice();const ten=r.ten,kiep=r.kiep||1,ng01=!!r.ng01;
   const x=_d.apply(this,arguments);const o=G.over;if(!o)return x;
-  if(e1==='END01'){ends.push('END01');dmKetGhi('END01',ten,kiep);}
+  if(e1==='END01'){ends.push('END01');dmKetGhi('END01',ten,kiep);const x1=(dmD().ket||{}).END01;o.ketCanh=(x1&&x1.canh?dmT(dmPick(x1.canh,'e1'+kiep),ten)+'\n\n':'')+KET_THUC.END01.cau;}
   o.ends=ends;o.end01=e1;if(o.life){o.life.ends=ends;if(e1==='chua')o.life.chuaTen=1;}
   if(end4){dmKetHet('END04',o.life);return x;}
   if(cause==='phithang')o.mim=1;

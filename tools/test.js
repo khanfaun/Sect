@@ -2465,6 +2465,7 @@ const TESTS = {
     run("venueDo('daisu','truyen')");ok(run("G.run&&G.run.ends.includes('END06')"), 'END06 sau một năm dạy');
     // END01 lúc chết
     run("G.run.family=[{ten:'A',qh:'con',tuoi:20,song:1}];die('quyan')");ok(run("G.over.end01")==='END01'&&run("G.over.ends.join()")==='END02,END03,END06,END01', 'chết: một đời đã sống (END01), màn hết kiếp liệt kê kết lớn');
+    ok(/Bếp nguội dần/.test(run("G.over.ketCanh")), 'màn hết kiếp có câu kết của END01');
     fresh(base+"G.run.age=20;G.run.family=[];G.run.party=[]");run("die('combat',{n:'x'})");ok(run("G.over.end01")==='chua'&&run("G.over.life.chuaTen")===1, 'chết trẻ: "Đời chưa kịp gọi tên"');
     // phi thăng thiếu tri thức → mộng trong mộng
     fresh(base);run("G.run.ng01=1;die('phithang')");ok(run("G.screen")==='over'&&run("G.over.mim")===1&&!run("G.meta.ketHet"), 'phi thăng thiếu ba tri thức: mộng trong mộng, vẫn luân hồi');
