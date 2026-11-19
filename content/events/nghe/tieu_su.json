@@ -1,0 +1,796 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_tieu_su_tieu_dau",
+      "name": "Chuyến tiêu đầu tiên",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Chuyến tiêu đầu tiên của ngươi chỉ là mấy rương vải. Tiêu đầu dặn mắt phải luôn mở.",
+      "choices": [
+        {
+          "l": "Thức canh cả đêm",
+          "i": "👁️",
+          "chk": [
+            "nang.canh",
+            8
+          ],
+          "ok": {
+            "t": "Đêm ấy ngươi phát hiện kẻ rình rương hàng.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi ngủ gật, mất một rương.",
+            "e": {
+              "bac": -40
+            }
+          }
+        },
+        {
+          "l": "Ngủ theo phiên",
+          "i": "😴",
+          "t": "Chuyến đi êm.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_tieu_dau",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_son_trai",
+      "name": "Sơn trại đầu đèo",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui",
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đầu đèo có sơn trại, cờ tiêu cục phải được chào đúng lệ.",
+      "choices": [
+        {
+          "l": "Hô tiêu hiệu, nộp lễ",
+          "i": "🚩",
+          "chk": [
+            "nang.giao",
+            8
+          ],
+          "ok": {
+            "t": "Sơn trại mở đường.",
+            "e": {
+              "bac": -30,
+              "nxp": [
+                "tieu_su",
+                7
+              ]
+            }
+          },
+          "no": {
+            "t": "Hô sai lệ, sơn trại cho người chặn đường.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "l": "Đi đường vòng",
+          "i": "↩️",
+          "t": "Mất thêm hai ngày.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_son_trai",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_hang_la",
+      "name": "Rương hàng lạ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một rương hàng chủ hàng dặn không được mở, nặng bất thường, có tiếng động bên trong.",
+      "choices": [
+        {
+          "l": "Không mở, giữ lệ",
+          "i": "📦",
+          "t": "Rương tới nơi nguyên niêm.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              6
+            ],
+            "deed": "giu_loi"
+          }
+        },
+        {
+          "l": "Lén mở xem",
+          "i": "🔓",
+          "t": "Bên trong là một đứa trẻ bị bịt miệng. Ngươi thả nó.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              4
+            ],
+            "deed": "cuu_nguoi"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_hang_la",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_ngua_qua",
+      "name": "Ngựa què",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Giữa đường, một con ngựa kéo hàng bị què.",
+      "choices": [
+        {
+          "l": "Chia hàng sang ngựa khác",
+          "i": "🐴",
+          "t": "Đoàn đi chậm nhưng đủ hàng.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              4
+            ]
+          }
+        },
+        {
+          "l": "Bỏ bớt hàng rẻ",
+          "i": "📦",
+          "t": "Chủ hàng trừ tiền.",
+          "e": {
+            "bac": -20,
+            "nxp": [
+              "tieu_su",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_ngua_qua",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_cuop_vay",
+      "name": "Bị vây",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui",
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đoàn tiêu bị cướp vây trong khe núi.",
+      "choices": [
+        {
+          "l": "Đánh mở đường",
+          "i": "⚔️",
+          "chk": [
+            "nang.canh",
+            12
+          ],
+          "ok": {
+            "t": "Cướp tan, hàng nguyên vẹn.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                16
+              ]
+            }
+          },
+          "no": {
+            "t": "Hai tiêu sư chết, hàng mất một nửa.",
+            "e": {
+              "hp": "-25%",
+              "nxp": [
+                "tieu_su",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Thương lượng nộp một phần",
+          "i": "🤝",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Cướp lấy ba rương, để đoàn đi.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Cướp đòi hết.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_cuop_vay",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_chu_hang_lua",
+      "name": "Chủ hàng lừa",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Tới nơi, chủ hàng chối không trả nửa tiền còn lại, bảo hàng thiếu.",
+      "choices": [
+        {
+          "l": "Đem sổ ra đối chất",
+          "i": "📒",
+          "chk": [
+            "nang.khao",
+            11
+          ],
+          "ok": {
+            "t": "Chủ hàng trả đủ.",
+            "e": {
+              "bac": 100,
+              "nxp": [
+                "tieu_su",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Không ai đứng về phía ngươi.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                3
+              ]
+            }
+          }
+        },
+        {
+          "l": "Giữ lại một rương làm tin",
+          "i": "📦",
+          "t": "Chủ hàng đành trả.",
+          "e": {
+            "bac": 100,
+            "nxp": [
+              "tieu_su",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_chu_hang_lua",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_ket_nghia",
+      "name": "Kết nghĩa sơn trại",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Trại chủ sơn trại mời ngươi kết nghĩa, từ nay tiêu cục qua đèo khỏi nộp lễ.",
+      "choices": [
+        {
+          "l": "Kết nghĩa",
+          "i": "🍶",
+          "t": "Đường đèo thông suốt. Quan phủ để ý tới ngươi.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              12
+            ]
+          }
+        },
+        {
+          "l": "Từ chối khéo",
+          "i": "🙇",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Trại chủ vẫn nể.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Trại chủ phật ý.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_ket_nghia",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_nguoi_bi_thuong",
+      "name": "Người bị thương bên đường",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Giữa đường gặp một người bị cướp đánh trọng thương. Dừng lại thì trễ hạn giao hàng.",
+      "choices": [
+        {
+          "l": "Dừng lại cứu",
+          "i": "🩹",
+          "t": "Người ấy sống. Đoàn trễ hạn một ngày, bị phạt.",
+          "e": {
+            "bac": -50,
+            "nxp": [
+              "tieu_su",
+              8
+            ],
+            "deed": "cuu_nguoi"
+          }
+        },
+        {
+          "l": "Đi tiếp",
+          "i": "🚶",
+          "t": "Đoàn giao hàng đúng hạn.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              4
+            ],
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_nguoi_bi_thuong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_tieu_lon",
+      "name": "Chuyến tiêu lớn",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một chuyến tiêu chở bạc cứu tế ra vùng đói, ai cũng biết, cướp nào cũng thèm.",
+      "choices": [
+        {
+          "l": "Tự mình áp tiêu",
+          "i": "🛡️",
+          "chk": [
+            "nang.canh",
+            16
+          ],
+          "ok": {
+            "t": "Bạc tới tay người đói, không thiếu một lạng.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                25
+              ],
+              "deed": "cuu_nguoi_hy_sinh"
+            }
+          },
+          "no": {
+            "t": "Bị phục kích, mất một phần bạc, ngươi trọng thương.",
+            "e": {
+              "hp": "-35%",
+              "nxp": [
+                "tieu_su",
+                10
+              ]
+            }
+          }
+        },
+        {
+          "l": "Chia nhỏ đi nhiều đường",
+          "i": "🗺️",
+          "chk": [
+            "ngo",
+            12
+          ],
+          "ok": {
+            "t": "Cướp không biết đường nào là thật.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Một đường bị cướp.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                8
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_tieu_lon",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_chu_tieu_cuc",
+      "name": "Lập tiêu cục",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi đủ danh để mở tiêu cục riêng.",
+      "choices": [
+        {
+          "l": "Mở",
+          "i": "🏯",
+          "t": "Cờ hiệu nhà ngươi bay trên các con đường.",
+          "e": {
+            "bac": -800,
+            "nxp": [
+              "tieu_su",
+              20
+            ]
+          }
+        },
+        {
+          "l": "Ở lại tiêu cục cũ",
+          "i": "🤝",
+          "t": "Ngươi làm phó cho đến già.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_chu_tieu_cuc",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_tieu_phan",
+      "name": "Tiêu sư phản",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi biết một tiêu sư đang ngầm báo tin cho cướp.",
+      "choices": [
+        {
+          "l": "Bắt hắn giao quan",
+          "i": "📜",
+          "t": "Tiêu cục sạch nội gián.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              14
+            ]
+          }
+        },
+        {
+          "l": "Gọi riêng, cho hắn đi",
+          "i": "🚪",
+          "chk": [
+            "nang.giao",
+            14
+          ],
+          "ok": {
+            "t": "Hắn quỳ xuống, khai hết bọn cướp.",
+            "e": {
+              "nxp": [
+                "tieu_su",
+                16
+              ],
+              "deed": "tha_ke_ac"
+            }
+          },
+          "no": {
+            "t": "Hắn đi, rồi dẫn cướp tới.",
+            "e": {
+              "hp": "-20%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_tieu_phan",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_su_truyen_co",
+      "name": "Truyền cờ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu_su",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi già. Cờ tiêu cục cần người cầm tiếp.",
+      "choices": [
+        {
+          "l": "Giao cho đứa trung thành nhất",
+          "i": "🚩",
+          "t": "Tiêu cục giữ được chữ tín.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              16
+            ]
+          }
+        },
+        {
+          "l": "Giao cho con trai",
+          "i": "👨‍👦",
+          "t": "Con trai ngươi giỏi buôn hơn giỏi võ.",
+          "e": {
+            "nxp": [
+              "tieu_su",
+              8
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu_su.json",
+        "ref": "ng_tieu_su_truyen_co",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

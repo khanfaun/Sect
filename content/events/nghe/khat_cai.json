@@ -1,0 +1,796 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_khat_cai_bat_com",
+      "name": "Bát cơm thừa",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một quán cơm đổ cơm thừa ra sau bếp. Đám ăn mày tranh nhau.",
+      "choices": [
+        {
+          "l": "Chen vào giành",
+          "i": "🍚",
+          "t": "Ngươi được nửa bát.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              3
+            ]
+          }
+        },
+        {
+          "l": "Nhường đứa nhỏ",
+          "i": "🧒",
+          "t": "Đứa nhỏ nhìn ngươi rồi ăn ngấu nghiến.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              4
+            ],
+            "deed": "bo_thi",
+            "hp": "-5%"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_bat_com",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_mieu_hoang",
+      "name": "Ngủ ở miếu hoang",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "phe"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đêm lạnh, ngươi trú trong miếu hoang. Có một bóng người nằm sẵn ở góc.",
+      "choices": [
+        {
+          "l": "Hỏi chuyện",
+          "i": "🗣️",
+          "chk": [
+            "nang.giao",
+            8
+          ],
+          "ok": {
+            "t": "Là một lão ăn mày cũ, chỉ cho ngươi mấy chỗ xin ăn tốt.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Lão quát đuổi ngươi.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                1
+              ]
+            }
+          }
+        },
+        {
+          "l": "Nằm góc khác",
+          "i": "😶",
+          "t": "Hai người ngủ tới sáng.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_mieu_hoang",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_bi_xua",
+      "name": "Bị xua đuổi",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lính gác cổng xua đám ăn mày ra khỏi phố chính.",
+      "choices": [
+        {
+          "l": "Lùi vào hẻm",
+          "i": "🏃",
+          "t": "Ngươi tìm được chỗ ngồi mới.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              3
+            ]
+          }
+        },
+        {
+          "l": "Cãi lại",
+          "i": "😠",
+          "t": "Ngươi ăn một gậy.",
+          "e": {
+            "hp": "-10%"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_bi_xua",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_tin_don",
+      "name": "Nghe lỏm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngồi dưới hiên trà quán, ngươi nghe lỏm hai người bàn chuyện mua bán ngầm.",
+      "choices": [
+        {
+          "l": "Bán tin cho người cần",
+          "i": "🪙",
+          "chk": [
+            "nang.giac",
+            8
+          ],
+          "ok": {
+            "t": "Có kẻ trả tiền cho tin ấy.",
+            "e": {
+              "bac": 20,
+              "nxp": [
+                "khat_cai",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi nghe nhầm, tin vô giá trị.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                2
+              ]
+            }
+          }
+        },
+        {
+          "l": "Giữ kín",
+          "i": "🤐",
+          "t": "Biết nhiều không phải lúc nào cũng tốt.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_tin_don",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_dia_ban",
+      "name": "Giành địa bàn",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một nhóm ăn mày từ nơi khác tới chiếm cổng chùa.",
+      "choices": [
+        {
+          "l": "Gom anh em đuổi đi",
+          "i": "✊",
+          "chk": [
+            "nang.canh",
+            11
+          ],
+          "ok": {
+            "t": "Cổng chùa lại là của mình.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Bị đánh tơi tả.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "l": "Chia nhau ngày chẵn ngày lẻ",
+          "i": "🤝",
+          "chk": [
+            "nang.giao",
+            11
+          ],
+          "ok": {
+            "t": "Hai nhóm sống yên.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Bên kia không chịu.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_dia_ban",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_dua_tin_mat",
+      "name": "Đưa tin mật",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một người lạ thuê ngươi đưa một mảnh giấy tới cửa sau nhà quan.",
+      "choices": [
+        {
+          "l": "Đưa",
+          "i": "📨",
+          "t": "Ba ngày sau nhà quan bị bắt.",
+          "e": {
+            "bac": 50,
+            "nxp": [
+              "khat_cai",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Đọc trước rồi mới quyết",
+          "i": "👁️",
+          "chk": [
+            "ngo",
+            8
+          ],
+          "ok": {
+            "t": "Là tin báo có người ám hại quan. Ngươi đưa đến nơi kịp.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                10
+              ],
+              "deed": "cuu_nguoi"
+            }
+          },
+          "no": {
+            "t": "Chữ nghĩa ngươi không đọc nổi.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_dua_tin_mat",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_tre_bo_roi",
+      "name": "Đứa trẻ bị bỏ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Có người bỏ một đứa trẻ sơ sinh ở cửa miếu nơi đám ăn mày ngủ.",
+      "choices": [
+        {
+          "l": "Nuôi nó",
+          "i": "👶",
+          "t": "Cả đám ăn mày chia nhau từng ngụm cháo cho nó.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              8
+            ],
+            "deed": "nhan_nuoi"
+          }
+        },
+        {
+          "l": "Đem tới chùa",
+          "i": "🏯",
+          "t": "Sư cô nhận nuôi.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              5
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_tre_bo_roi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_ke_buon_nguoi",
+      "name": "Kẻ buôn người",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một kẻ trả tiền cho ngươi để chỉ chỗ mấy đứa trẻ ăn mày mồ côi.",
+      "choices": [
+        {
+          "l": "Đuổi hắn đi",
+          "i": "🙅",
+          "t": "Hắn chửi ngươi rồi bỏ đi.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Báo cho anh em canh giữ",
+          "i": "📢",
+          "chk": [
+            "nang.giao",
+            11
+          ],
+          "ok": {
+            "t": "Cả nhóm canh chừng. Kẻ buôn người không dám quay lại.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                10
+              ],
+              "deed": "cuu_nguoi"
+            }
+          },
+          "no": {
+            "t": "Hắn vẫn bắt được một đứa.",
+            "e": {
+              "tamma": 3
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_ke_buon_nguoi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_cai_bang",
+      "name": "Cái bang chiêu mộ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Trưởng lão Cái bang thấy ngươi có uy với đám ăn mày, mời ngươi giữ chức đà chủ.",
+      "choices": [
+        {
+          "l": "Nhận",
+          "i": "🥢",
+          "t": "Ngươi có trong tay mạng lưới tai mắt khắp thành.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              20
+            ]
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Ngươi vẫn làm ăn mày tự do.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              5
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_cai_bang",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_nan_doi",
+      "name": "Nạn đói",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mất mùa, ăn mày đông gấp ba. Nhà giàu đóng cửa.",
+      "choices": [
+        {
+          "l": "Dẫn anh em tới xin trước phủ quan",
+          "i": "✊",
+          "chk": [
+            "nang.giao",
+            15
+          ],
+          "ok": {
+            "t": "Quan mở kho phát cháo.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                20
+              ],
+              "deed": "cuu_nguoi"
+            }
+          },
+          "no": {
+            "t": "Lính dẹp, mấy người bị thương.",
+            "e": {
+              "hp": "-15%",
+              "nxp": [
+                "khat_cai",
+                8
+              ]
+            }
+          }
+        },
+        {
+          "l": "Chia đều phần xin được",
+          "i": "🍚",
+          "t": "Ai cũng đói, nhưng không ai chết.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              14
+            ],
+            "deed": "bo_thi"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_nan_doi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_tinh_mong",
+      "name": "Tỉnh mộng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một đêm nằm dưới gầm cầu, ngươi nhớ ra mình từng là ai trước khi rơi vào cảnh này.",
+      "choices": [
+        {
+          "l": "Đứng dậy làm lại",
+          "i": "🌅",
+          "chk": [
+            "nang.tu",
+            14
+          ],
+          "ok": {
+            "t": "Ngươi bỏ bát, đi tìm việc.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                10
+              ],
+              "tamma": -5
+            }
+          },
+          "no": {
+            "t": "Đứng dậy được vài hôm rồi lại ngồi xuống.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Ở lại với anh em",
+          "i": "🤝",
+          "t": "Ngươi chọn cái nghèo có người thân.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              12
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_tinh_mong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_khat_cai_bang_chu",
+      "name": "Ghế bang chủ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:khat_cai",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Bang chủ Cái bang mất. Các đà chủ tranh nhau.",
+      "choices": [
+        {
+          "l": "Ra tranh, hứa giữ luật không trộm nhà nghèo",
+          "i": "🏆",
+          "chk": [
+            "nang.giao",
+            17
+          ],
+          "ok": {
+            "t": "Ngươi thành bang chủ.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                25
+              ]
+            }
+          },
+          "no": {
+            "t": "Đà chủ khác được bầu.",
+            "e": {
+              "nxp": [
+                "khat_cai",
+                8
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đứng ngoài",
+          "i": "🧍",
+          "t": "Bang chia năm xẻ bảy.",
+          "e": {
+            "nxp": [
+              "khat_cai",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/khat_cai.json",
+        "ref": "ng_khat_cai_bang_chu",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

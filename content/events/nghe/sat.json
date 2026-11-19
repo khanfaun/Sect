@@ -1,0 +1,801 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_sat_muc_tieu_dau",
+      "name": "Mục tiêu đầu tiên",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lâu giao cho ngươi mục tiêu đầu tiên: một lão chủ hiệu cầm đồ. Người thuê nói lão ép nợ chết ba nhà.",
+      "choices": [
+        {
+          "l": "Điều tra trước",
+          "i": "🔍",
+          "chk": [
+            "nang.giac",
+            8
+          ],
+          "ok": {
+            "t": "Ngươi theo lão ba ngày. Chuyện ép nợ là thật.",
+            "e": {
+              "nxp": [
+                "sat",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi theo lộ liễu, lão đổi đường về.",
+            "e": {
+              "nxp": [
+                "sat",
+                2
+              ]
+            }
+          }
+        },
+        {
+          "l": "Từ chối hợp đồng",
+          "i": "🙅",
+          "t": "Lâu ghi tên ngươi vào sổ kẻ nhát tay.",
+          "e": {
+            "nxp": [
+              "sat",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_muc_tieu_dau",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_bi_theo",
+      "name": "Bị theo dấu",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi có cảm giác có người theo mình từ đầu phố.",
+      "choices": [
+        {
+          "l": "Rẽ vào chợ, cắt đuôi",
+          "i": "🌀",
+          "chk": [
+            "nang.canh",
+            8
+          ],
+          "ok": {
+            "t": "Ngươi lẩn vào dòng người, kẻ kia mất dấu.",
+            "e": {
+              "nxp": [
+                "sat",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Kẻ kia vẫn bám, tới tận nhà trọ.",
+            "e": {
+              "tamma": 2
+            }
+          }
+        },
+        {
+          "l": "Quay lại đối mặt",
+          "i": "👁️",
+          "t": "Là một đứa bé được trả tiền để theo ngươi.",
+          "e": {
+            "nxp": [
+              "sat",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_bi_theo",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_ngon_doc",
+      "name": "Thuốc mê",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi học cách pha thuốc mê từ một gã bán thuốc dạo.",
+      "choices": [
+        {
+          "l": "Học kỹ",
+          "i": "⚗️",
+          "chk": [
+            "nang.duoc",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi pha được thuốc mê không màu không mùi.",
+            "e": {
+              "nxp": [
+                "sat",
+                7
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi tự làm mình mê man nửa ngày.",
+            "e": {
+              "h": 12
+            }
+          }
+        },
+        {
+          "l": "Mua sẵn",
+          "i": "🪙",
+          "t": "Gã bán thuốc lấy giá cắt cổ.",
+          "e": {
+            "bac": -30,
+            "nxp": [
+              "sat",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_ngon_doc",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_tre_thay",
+      "name": "Đứa trẻ nhìn thấy",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lúc rời nhà mục tiêu, ngươi chạm mắt một đứa trẻ đứng bên cửa sổ.",
+      "choices": [
+        {
+          "l": "Đi thẳng",
+          "i": "🚶",
+          "t": "Đứa trẻ không kêu. Ngươi cũng không ngoái lại.",
+          "e": {
+            "nxp": [
+              "sat",
+              4
+            ],
+            "tamma": 2
+          }
+        },
+        {
+          "l": "Quay lại dỗ nó im",
+          "i": "🤫",
+          "t": "Ngươi cho nó một nắm kẹo. Nó nhìn ngươi rất lâu.",
+          "e": {
+            "nxp": [
+              "sat",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_tre_thay",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_hd_oan",
+      "name": "Hợp đồng oan",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Điều tra xong, ngươi biết mục tiêu vô tội. Kẻ thuê mới là người có tội.",
+      "choices": [
+        {
+          "l": "Huỷ hợp đồng, chịu phạt",
+          "i": "✂️",
+          "t": "Lâu phạt ngươi nặng. Mục tiêu không bao giờ biết mình được tha.",
+          "e": {
+            "bac": -300,
+            "nxp": [
+              "sat",
+              10
+            ],
+            "deed": "tha_ke_ac"
+          }
+        },
+        {
+          "l": "Làm cho xong",
+          "i": "🗡️",
+          "t": "Ngươi lĩnh tiền. Đêm ấy ngươi uống say.",
+          "e": {
+            "bac": 400,
+            "nxp": [
+              "sat",
+              10
+            ],
+            "deed": "giet_vo_toi",
+            "tamma": 6
+          }
+        },
+        {
+          "l": "Báo cho mục tiêu trốn",
+          "i": "📨",
+          "chk": [
+            "nang.canh",
+            12
+          ],
+          "ok": {
+            "t": "Mục tiêu trốn thoát. Lâu không biết ai báo.",
+            "e": {
+              "nxp": [
+                "sat",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Lâu biết. Ngươi phải trốn một thời gian.",
+            "e": {
+              "hp": "-20%",
+              "nxp": [
+                "sat",
+                4
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_hd_oan",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_dong_bai",
+      "name": "Thăng đồng bài",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lâu cho ngươi đeo bài đồng, kèm điều kiện: phải giết một kẻ phản lâu.",
+      "choices": [
+        {
+          "l": "Nhận",
+          "i": "🥉",
+          "t": "Kẻ phản là người từng dạy ngươi.",
+          "e": {
+            "nxp": [
+              "sat",
+              14
+            ],
+            "deed": "diet_khau",
+            "tamma": 4
+          }
+        },
+        {
+          "l": "Xin việc khác",
+          "i": "🙇",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Lâu chủ cười, giao cho người khác.",
+            "e": {
+              "nxp": [
+                "sat",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Lâu chủ cho rằng ngươi có ý phản.",
+            "e": {
+              "tamma": 3
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_dong_bai",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_ke_ac",
+      "name": "Kẻ ác có tiếng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Hợp đồng lần này là một tên ác bá cả vùng ghét. Không ai trả nhiều, chỉ góp được ít tiền.",
+      "choices": [
+        {
+          "l": "Nhận",
+          "i": "🗡️",
+          "t": "Tên ác bá chết. Làng đốt pháo suốt đêm.",
+          "e": {
+            "bac": 50,
+            "nxp": [
+              "sat",
+              12
+            ],
+            "deed": "giet_cuop_dang_ac"
+          }
+        },
+        {
+          "l": "Chê ít tiền",
+          "i": "🙅",
+          "t": "Tên ác bá sống thêm nhiều năm.",
+          "e": {
+            "nxp": [
+              "sat",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_ke_ac",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_loi_the",
+      "name": "Lời thề của sát thủ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi phải tự chọn một lời thề cho nghề: không giết trẻ con, không giết người vô tội, hay không thề gì cả.",
+      "choices": [
+        {
+          "l": "Không giết người vô tội",
+          "i": "🤞",
+          "t": "Ngươi khắc lời thề vào chuôi dao.",
+          "e": {
+            "nxp": [
+              "sat",
+              10
+            ],
+            "deed": "giu_loi"
+          }
+        },
+        {
+          "l": "Không thề gì",
+          "i": "😶",
+          "t": "Nghề nào thì dao nấy.",
+          "e": {
+            "nxp": [
+              "sat",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_loi_the",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_lau_chu",
+      "name": "Ghế lâu chủ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lâu chủ già yếu. Ngươi và một kẻ khác tranh ghế.",
+      "choices": [
+        {
+          "l": "Ám sát đối thủ",
+          "i": "🗡️",
+          "chk": [
+            "nang.canh",
+            16
+          ],
+          "ok": {
+            "t": "Ghế lâu chủ về tay ngươi.",
+            "e": {
+              "nxp": [
+                "sat",
+                22
+              ],
+              "deed": "ket_lieu_dong_doi"
+            }
+          },
+          "no": {
+            "t": "Hắn đỡ được. Ngươi mang thương chạy.",
+            "e": {
+              "hp": "-30%",
+              "nxp": [
+                "sat",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Thương lượng chia lâu",
+          "i": "🤝",
+          "chk": [
+            "nang.giao",
+            16
+          ],
+          "ok": {
+            "t": "Hai người chia hai vùng.",
+            "e": {
+              "nxp": [
+                "sat",
+                18
+              ]
+            }
+          },
+          "no": {
+            "t": "Hắn không chịu, cả lâu chia phe.",
+            "e": {
+              "nxp": [
+                "sat",
+                6
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_lau_chu",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_pha_mang",
+      "name": "Phá mạng sát lệnh",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi có trong tay sổ hợp đồng của cả lâu. Đốt nó là cả mạng sát lệnh tan rã.",
+      "choices": [
+        {
+          "l": "Đốt sổ, giải tán lâu",
+          "i": "🔥",
+          "t": "Không ai còn giao hợp đồng cho ai. Nhiều kẻ muốn đầu ngươi.",
+          "e": {
+            "nxp": [
+              "sat",
+              25
+            ],
+            "deed": "hoa_giai"
+          }
+        },
+        {
+          "l": "Giữ sổ, nắm lâu",
+          "i": "📒",
+          "t": "Ngươi có trong tay cả một mạng lưới.",
+          "e": {
+            "bac": 1000,
+            "nxp": [
+              "sat",
+              15
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_pha_mang",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_bao_thu",
+      "name": "Kẻ báo thù",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Con trai một mục tiêu cũ tìm tới, rút dao.",
+      "choices": [
+        {
+          "l": "Đỡ đòn, không đánh trả",
+          "i": "🛡️",
+          "chk": [
+            "nang.tu",
+            15
+          ],
+          "ok": {
+            "t": "Hắn đâm hụt rồi bật khóc. Ngươi để hắn đi.",
+            "e": {
+              "nxp": [
+                "sat",
+                12
+              ],
+              "deed": "hoa_giai"
+            }
+          },
+          "no": {
+            "t": "Lưỡi dao trúng vai.",
+            "e": {
+              "hp": "-25%",
+              "nxp": [
+                "sat",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Giết nốt",
+          "i": "🗡️",
+          "t": "Ngươi lau dao.",
+          "e": {
+            "nxp": [
+              "sat",
+              8
+            ],
+            "deed": "diet_khau",
+            "tamma": 5
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_bao_thu",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_sat_rua_tay",
+      "name": "Rửa tay gác kiếm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:sat",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi muốn bỏ nghề. Lâu không cho ai rời đi dễ dàng.",
+      "choices": [
+        {
+          "l": "Trả giá để đi",
+          "i": "💰",
+          "t": "Ngươi nộp nửa gia sản, đổi lấy cái gật đầu.",
+          "e": {
+            "bac": -800,
+            "nxp": [
+              "sat",
+              10
+            ],
+            "tamma": -4
+          }
+        },
+        {
+          "l": "Ở lại",
+          "i": "🗡️",
+          "t": "Ngươi lại nhận hợp đồng mới.",
+          "e": {
+            "nxp": [
+              "sat",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/sat.json",
+        "ref": "ng_sat_rua_tay",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

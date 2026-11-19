@@ -1,0 +1,798 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_chuong_do_de_dau",
+      "name": "Đồ đệ đầu tiên",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Võ quán mới mở, chỉ có một đứa trai làng gầy gò xin học, không có tiền nộp.",
+      "choices": [
+        {
+          "l": "Nhận nó",
+          "i": "🥋",
+          "t": "Nó tập chăm chỉ, sáng nào cũng quét sân trước khi ngươi dậy.",
+          "e": {
+            "nxp": [
+              "chuong",
+              6
+            ],
+            "deed": "nhan_nuoi"
+          }
+        },
+        {
+          "l": "Đợi đứa có tiền",
+          "i": "🪙",
+          "t": "Võ quán vắng thêm một tháng.",
+          "e": {
+            "nxp": [
+              "chuong",
+              1
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_do_de_dau",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_khieu_khich",
+      "name": "Kẻ khiêu khích",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một gã võ phu tới đá biển võ quán, thách ngươi đấu.",
+      "choices": [
+        {
+          "l": "Nhận đấu",
+          "i": "👊",
+          "chk": [
+            "nang.canh",
+            8
+          ],
+          "ok": {
+            "t": "Gã ngã sấp mặt. Hôm sau có năm người xin học.",
+            "e": {
+              "nxp": [
+                "chuong",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi thua, biển hiệu bị đá văng.",
+            "e": {
+              "hp": "-20%",
+              "nxp": [
+                "chuong",
+                3
+              ]
+            }
+          }
+        },
+        {
+          "l": "Mời gã uống trà",
+          "i": "🍵",
+          "chk": [
+            "nang.giao",
+            9
+          ],
+          "ok": {
+            "t": "Gã ngồi xuống, cuối cùng xin làm đồ đệ.",
+            "e": {
+              "nxp": [
+                "chuong",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Gã cười khẩy, đá biển rồi đi.",
+            "e": {
+              "nxp": [
+                "chuong",
+                2
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_khieu_khich",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_san_tap",
+      "name": "Sân tập lầy",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mưa liền mấy ngày, sân tập thành bãi bùn.",
+      "choices": [
+        {
+          "l": "Tập trong bùn",
+          "i": "🌧️",
+          "t": "Đồ đệ trụ vững hơn hẳn.",
+          "e": {
+            "nxp": [
+              "chuong",
+              5
+            ]
+          }
+        },
+        {
+          "l": "Thuê người lát đá",
+          "i": "🪨",
+          "t": "Sân mới khang trang.",
+          "e": {
+            "bac": -80,
+            "nxp": [
+              "chuong",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_san_tap",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_do_de_danh_nguoi",
+      "name": "Đồ đệ đánh người",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một đồ đệ ỷ võ đánh người ngoài chợ.",
+      "choices": [
+        {
+          "l": "Phạt nặng trước mặt mọi người",
+          "i": "🪵",
+          "t": "Đồ đệ khác nhìn mà sợ. Dân chợ khen võ quán có phép.",
+          "e": {
+            "nxp": [
+              "chuong",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Bao che",
+          "i": "🙈",
+          "t": "Người bị đánh tới quan kiện.",
+          "e": {
+            "bac": -50,
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_do_de_danh_nguoi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_bao_tro",
+      "name": "Lời bảo trợ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một nhà quyền thế muốn bảo trợ võ quán, đổi lại đồ đệ phải làm gia đinh khi cần.",
+      "choices": [
+        {
+          "l": "Nhận",
+          "i": "🤝",
+          "t": "Võ quán giàu lên. Đồ đệ thỉnh thoảng phải đi đánh thuê cho nhà kia.",
+          "e": {
+            "bac": 400,
+            "nxp": [
+              "chuong",
+              10
+            ],
+            "tamma": 2
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Nhà kia tiếc nhưng nể.",
+            "e": {
+              "nxp": [
+                "chuong",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Nhà kia làm khó, võ quán mất nhiều đồ đệ.",
+            "e": {
+              "nxp": [
+                "chuong",
+                4
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_bao_tro",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_tranh_dia_ban",
+      "name": "Tranh địa bàn",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một võ phái khác mở quán ngay đầu phố, kéo đồ đệ của ngươi đi.",
+      "choices": [
+        {
+          "l": "Hẹn đấu lôi đài",
+          "i": "🏟️",
+          "chk": [
+            "nang.canh",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi thắng, đối phương rút đi.",
+            "e": {
+              "nxp": [
+                "chuong",
+                14
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi thua, mất nửa đồ đệ.",
+            "e": {
+              "hp": "-20%",
+              "nxp": [
+                "chuong",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Mở lớp miễn phí cho trẻ nghèo",
+          "i": "🧒",
+          "t": "Đồ đệ ít tiền nhưng đông, trung thành.",
+          "e": {
+            "bac": -100,
+            "nxp": [
+              "chuong",
+              12
+            ],
+            "deed": "bo_thi"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_tranh_dia_ban",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_bi_kip_mat",
+      "name": "Mất bí kíp",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Cuốn bí kíp của môn phái biến mất. Nghi ngờ rơi vào một đồ đệ mới.",
+      "choices": [
+        {
+          "l": "Tra hỏi đồ đệ mới",
+          "i": "🔍",
+          "chk": [
+            "nang.khao",
+            11
+          ],
+          "ok": {
+            "t": "Hóa ra là chuột tha giấy làm tổ. Đồ đệ mới được minh oan.",
+            "e": {
+              "nxp": [
+                "chuong",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi đuổi oan nó.",
+            "e": {
+              "tamma": 3
+            }
+          }
+        },
+        {
+          "l": "Viết lại từ trí nhớ",
+          "i": "✍️",
+          "chk": [
+            "ngo",
+            9
+          ],
+          "ok": {
+            "t": "Bản mới còn đầy đủ hơn.",
+            "e": {
+              "nxp": [
+                "chuong",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Bản mới thiếu mấy chiêu.",
+            "e": {
+              "nxp": [
+                "chuong",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_bi_kip_mat",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_dai_hoi",
+      "name": "Đại hội võ lâm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đại hội võ lâm mở ở châu thành. Võ phái nào cũng cử người dự.",
+      "choices": [
+        {
+          "l": "Dẫn đồ đệ đi dự",
+          "i": "🏆",
+          "chk": [
+            "nang.canh",
+            13
+          ],
+          "ok": {
+            "t": "Đồ đệ giỏi nhất của ngươi vào tới vòng cuối. Tên môn phái được nhắc khắp nơi.",
+            "e": {
+              "bac": -150,
+              "nxp": [
+                "chuong",
+                16
+              ]
+            }
+          },
+          "no": {
+            "t": "Đồ đệ thua ngay vòng đầu.",
+            "e": {
+              "bac": -150,
+              "nxp": [
+                "chuong",
+                5
+              ]
+            }
+          }
+        },
+        {
+          "l": "Ở nhà",
+          "i": "🏠",
+          "t": "Võ quán yên ổn.",
+          "e": {
+            "nxp": [
+              "chuong",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_dai_hoi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_truyen_vi",
+      "name": "Truyền vị",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi đã già. Hai đại đệ tử, một giỏi võ mà nóng tính, một võ kém mà nhân hậu.",
+      "choices": [
+        {
+          "l": "Truyền cho người giỏi võ",
+          "i": "⚔️",
+          "t": "Môn phái mạnh lên, cũng nhiều thù hơn.",
+          "e": {
+            "nxp": [
+              "chuong",
+              16
+            ]
+          }
+        },
+        {
+          "l": "Truyền cho người nhân hậu",
+          "i": "🕊️",
+          "t": "Môn phái nhỏ đi, nhưng không ai ghét.",
+          "e": {
+            "nxp": [
+              "chuong",
+              18
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_truyen_vi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_trieu_dinh_mo",
+      "name": "Triều đình chiêu mộ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Triều đình muốn biên chế môn phái vào quân, ngươi được phong tướng.",
+      "choices": [
+        {
+          "l": "Nhận",
+          "i": "🎖️",
+          "t": "Môn phái thành một đạo quân.",
+          "e": {
+            "bac": 800,
+            "nxp": [
+              "chuong",
+              15
+            ]
+          }
+        },
+        {
+          "l": "Từ chối, giữ môn nhỏ",
+          "i": "🙅",
+          "chk": [
+            "nang.giao",
+            16
+          ],
+          "ok": {
+            "t": "Triều đình để yên.",
+            "e": {
+              "nxp": [
+                "chuong",
+                16
+              ]
+            }
+          },
+          "no": {
+            "t": "Triều đình nghi ngờ, cấm võ quán một năm.",
+            "e": {
+              "nxp": [
+                "chuong",
+                5
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_trieu_dinh_mo",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_tu_si_den",
+      "name": "Tu sĩ ghé quán",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một tu sĩ ghé võ quán, nói võ phàm không đáng để học.",
+      "choices": [
+        {
+          "l": "Mời hắn thử một chiêu",
+          "i": "👊",
+          "chk": [
+            "nang.tu",
+            15
+          ],
+          "ok": {
+            "t": "Hắn đỡ được nhưng phải lùi nửa bước. Hắn cúi chào rồi đi.",
+            "e": {
+              "nxp": [
+                "chuong",
+                18
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi văng ra giữa sân.",
+            "e": {
+              "hp": "-30%"
+            }
+          }
+        },
+        {
+          "l": "Lặng im tiễn khách",
+          "i": "🙇",
+          "t": "Đồ đệ nhìn ngươi băn khoăn.",
+          "e": {
+            "nxp": [
+              "chuong",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_tu_si_den",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chuong_mon_quy",
+      "name": "Môn quy",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chuong",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi muốn khắc môn quy lên bia trước cổng: không ỷ mạnh hiếp yếu, không làm tay sai cho kẻ ác.",
+      "choices": [
+        {
+          "l": "Khắc bia",
+          "i": "🪨",
+          "t": "Đồ đệ đời sau còn đọc.",
+          "e": {
+            "nxp": [
+              "chuong",
+              14
+            ],
+            "deed": "giu_loi"
+          }
+        },
+        {
+          "l": "Chỉ dặn miệng",
+          "i": "🗣️",
+          "t": "Lời dặn phai dần qua mấy đời.",
+          "e": {
+            "nxp": [
+              "chuong",
+              5
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chuong.json",
+        "ref": "ng_chuong_mon_quy",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

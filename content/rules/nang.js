@@ -6,6 +6,8 @@ const NANG_GOC=10, NANG_MAX=100;
 // mức hiện bằng chữ (không hiện số): ngưỡng dưới của từng mức nang.m.0 … nang.m.6
 const NANG_MUC=[0,8,20,35,55,75,95];
 // mỗi việc của nghề rèn năng lực nào (mỗi việc cộng NANG_GAIN.nghe cho từng khoá)
-const NANG_NGHE={nong:['nhan'],ngu:['nhan','giac'],thuong:['thuong','giao'],vo_gia:['canh'],y:['duoc','khao']};
+const NANG_NGHE={nong:['nhan'],ngu:['nhan','giac'],thuong:['thuong','giao'],vo_gia:['canh'],y:['duoc','khao'],
+  tieu:['nhan','giac'],mo:['nhan','khao'],ren:['khao','nhan'],tho:['khao','nhan'],chep:['khao','giao'],tram:['nhan','canh'],binh:['canh','nhan'],sat:['canh','giac'],
+  trom:['giac','canh'],hat:['giao','tu'],quan:['giao','thuong'],do:['giac','nhan'],chuong:['giao','canh'],san:['giac','canh'],tieu_su:['canh','giao'],khat_cai:['giao','giac']};
 // mức tăng: phép thử nang.* đạt / hỏng; việc nghề; săn hái; mua bán; tĩnh tọa; tặng lễ
 const NANG_GAIN={ok:1,no:0.5,nghe:0.3,san:0.3,mua:0.2,toa:0.3,tang:0.4};

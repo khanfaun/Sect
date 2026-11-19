@@ -28,6 +28,29 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Đ7.3: mười sáu nghề phàm còn lại
+  nghe_pham2() {
+    fresh("G._ngNoEv=1;G.run.pham=1;G.run.paths={};G.run.base.ngo=20;G.run.bac=99999");
+    const M=['tieu','mo','ren','tho','chep','tram','binh','sat','trom','hat','quan','do','chuong','san','tieu_su','khat_cai'];
+    ok(M.every(m=>run(`!!NGHE.${m}&&NGHE.${m}.ranks.length>=6&&NGHE.${m}.xp.length===NGHE.${m}.ranks.length&&NGHE.${m}.thu.length===NGHE.${m}.ranks.length&&NGHE.${m}.acts.length>=3`)), 'mười sáu nghề đủ bậc, ngưỡng, hệ số và việc');
+    ok(run("Object.keys(NGHE).length")===21&&M.every(m=>run(`(NANG_NGHE.${m}||[]).length>0`)), 'tổng hai mươi mốt nghề phàm, nghề nào cũng rèn năng lực');
+    for(const m of M){const c=JSON.parse(run(`JSON.stringify([0,1,2].map(k=>EVS.filter(e=>e.content&&(e.content.tags||[]).includes('nghe:${m}')&&e.content.tags.includes('nghe-tang:'+k)).length))`));
+      if(c.join()!=='4,4,4')ok(false, m+': mười hai sự kiện ('+c+')');}
+    ok(true, 'mỗi nghề mười hai sự kiện, bốn mỗi tầng');
+    ok(M.every(m=>run(`NGHE.${m}.ranks.slice(1).every((_,i)=>KYNGO.some(x=>x.id==='ng_${m}_'+(i+1)))`)), 'mỗi bậc có kỳ ngộ thăng bậc');
+    const bad=[];
+    for(const m of M){const r=run(`(()=>{const N=NGHE.${m};const a=N.acts.find(a=>!a.min&&!a.mua);if(!a)return 'không có việc nhập môn';G.run.scene=null;G.run.lamNgay=null;voOf(G.run).bac=3;
+        const n=W().regions.flatMap(R=>R.nodes).find(n=>n.state!=='ruin'&&ngNoi(a,n));if(!n)return 'không có nơi '+a.noi;G.run.at=n.id;openPlace(n.id);
+        const w=(vtList(n).find(x=>x.id==='ng:${m}:'+a.id)||{why:'không hiện'}).why;if(w)return w;if(!vtDo('ng:${m}:'+a.id))return 'không làm được';return G.run.paths.${m}&&G.run.paths.${m}.xp>0?'':'không có kinh nghiệm';})()`);
+      if(r)bad.push(m+': '+r);run("G.run.paths={}");}
+    ok(!bad.length, 'mỗi nghề làm được việc nhập môn ở nơi hợp'+(bad.length?' — '+bad.join('; '):''));
+    run("(()=>{G.run.scene=null;G.run.lamNgay=null;voOf(G.run).bac=0;const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    ok(/võ/i.test(run("(vtList(nodeById(G.run.at)).find(x=>x.id==='ng:tieu_su:tham_duong')||vtList(nodeById(G.run.at)).find(x=>x.id==='ng:chuong:thu_do')||{why:'võ'}).why")), 'tiêu sư, chưởng môn cần võ học');
+    run("NK.clear();G.run.lamNgay=null;G.run.paths={}");const d0=run("JSON.stringify(G.run.nq||{})");
+    run("vtDo('ng:trom:moc_tui')");ok(run("NK.count('nghe.deed')")===1, 'móc túi ghi vào Nghiệp Duyên');
+    ok(run("ngNoi({noi:['song']},{type:'dam'})")&&!run("ngNoi({noi:['song']},{type:'tran'})"), 'việc ven sông làm được ở đầm lầy (loại gốc sông hồ)');
+    ok(run("NGHE.khat_cai.og.includes('khat')")&&run("NGHE.binh.og.includes('linh')")&&run("NGHE.hat.og.includes('hat')"), 'xuất thân khất cái, cựu binh, gánh hát vào nghề sẵn');
+  },
   // Đ7.2: học công pháp nghề tu, hợp đồng, tầng, tài nguyên riêng (core2/51-nghe-tu.js)
   tu_hoc() {
     fresh("G._ngNoEv=1;G._tuNoRui=1;G.run.pham=1;G.run.st=999");

@@ -1,0 +1,809 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_san_bay_trung",
+      "name": "Bẫy trúng thú con",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Bẫy kẹp trúng một con hươu non. Hươu mẹ đứng cách đó mấy chục bước.",
+      "choices": [
+        {
+          "l": "Thả nó",
+          "i": "🦌",
+          "t": "Hươu con khập khiễng chạy về phía mẹ.",
+          "e": {
+            "nxp": [
+              "san",
+              4
+            ],
+            "deed": "phong_sinh"
+          }
+        },
+        {
+          "l": "Mang về bán",
+          "i": "🪙",
+          "t": "Thịt hươu non được giá.",
+          "e": {
+            "bac": 25,
+            "nxp": [
+              "san",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_bay_trung",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_dau_vet",
+      "name": "Dấu vết lạ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Dấu chân thú trên tuyết to bất thường, có vết móng kéo dài.",
+      "choices": [
+        {
+          "l": "Lần theo",
+          "i": "🐾",
+          "chk": [
+            "nang.giac",
+            8
+          ],
+          "ok": {
+            "t": "Ngươi tìm được hang một con báo, nhớ chỗ để tránh.",
+            "e": {
+              "nxp": [
+                "san",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi lạc giữa rừng tới đêm.",
+            "e": {
+              "hp": "-10%",
+              "h": 8
+            }
+          }
+        },
+        {
+          "l": "Tránh xa",
+          "i": "🚶",
+          "t": "Ngươi đặt bẫy chỗ khác.",
+          "e": {
+            "nxp": [
+              "san",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_dau_vet",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_cung_gay",
+      "name": "Cung gãy",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Dây cung đứt giữa lúc giương.",
+      "choices": [
+        {
+          "l": "Tự bện dây mới",
+          "i": "🧶",
+          "chk": [
+            "nang.nhan",
+            8
+          ],
+          "ok": {
+            "t": "Dây mới chắc hơn dây cũ.",
+            "e": {
+              "nxp": [
+                "san",
+                5
+              ]
+            }
+          },
+          "no": {
+            "t": "Dây bện lỏng, tên bay lệch cả ngày.",
+            "e": {
+              "nxp": [
+                "san",
+                1
+              ]
+            }
+          }
+        },
+        {
+          "l": "Mua dây ở chợ",
+          "i": "🪙",
+          "t": "Hai mươi xu một dây.",
+          "e": {
+            "bac": -20,
+            "nxp": [
+              "san",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_cung_gay",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_tho_san_gia",
+      "name": "Lão thợ săn già",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lão thợ săn già trong bản kể chuyện rừng, ai nghe thì lão chỉ cho mấy mẹo.",
+      "choices": [
+        {
+          "l": "Ngồi nghe tới khuya",
+          "i": "🔥",
+          "t": "Ngươi biết thêm cách đọc gió.",
+          "e": {
+            "nxp": [
+              "san",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Không rảnh",
+          "i": "🏃",
+          "t": "Lão lắc đầu.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_tho_san_gia",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_heo_rung",
+      "name": "Heo rừng phá ruộng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đàn heo rừng phá ruộng làng. Lý trưởng treo thưởng.",
+      "choices": [
+        {
+          "l": "Đi săn",
+          "i": "🏹",
+          "chk": [
+            "nang.canh",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi hạ con đầu đàn. Làng thưởng thóc.",
+            "e": {
+              "bac": 80,
+              "nxp": [
+                "san",
+                12
+              ]
+            }
+          },
+          "no": {
+            "t": "Con đầu đàn húc ngươi ngã.",
+            "e": {
+              "hp": "-20%",
+              "nxp": [
+                "san",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đặt bẫy quanh ruộng",
+          "i": "🪤",
+          "t": "Bẫy được hai con nhỏ.",
+          "e": {
+            "bac": 30,
+            "nxp": [
+              "san",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_heo_rung",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_khach_quy",
+      "name": "Khách săn nhà quan",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Công tử nhà quan thuê ngươi dẫn đi săn, muốn hạ một con hổ cho oai.",
+      "choices": [
+        {
+          "l": "Dẫn đi, giữ an toàn",
+          "i": "🛡️",
+          "chk": [
+            "nang.canh",
+            12
+          ],
+          "ok": {
+            "t": "Công tử hạ được hổ, ai cũng toàn mạng. Trả hậu.",
+            "e": {
+              "bac": 200,
+              "nxp": [
+                "san",
+                12
+              ]
+            }
+          },
+          "no": {
+            "t": "Hổ vồ hụt công tử, vồ trúng ngươi.",
+            "e": {
+              "hp": "-30%",
+              "bac": 100
+            }
+          }
+        },
+        {
+          "l": "Dẫn đi vòng, không gặp hổ",
+          "i": "🌀",
+          "t": "Công tử chán, trả nửa tiền.",
+          "e": {
+            "bac": 80,
+            "nxp": [
+              "san",
+              5
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_khach_quy",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_rung_cam",
+      "name": "Rừng cấm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Khu rừng phía bắc nhiều thú lớn, nhưng là đất cấm của một tông môn.",
+      "choices": [
+        {
+          "l": "Lén vào săn",
+          "i": "🤫",
+          "chk": [
+            "nang.canh",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi mang về tấm da quý.",
+            "e": {
+              "bac": 200,
+              "nxp": [
+                "san",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Đệ tử tông môn bắt gặp, đánh ngươi trọng thương.",
+            "e": {
+              "hp": "-35%"
+            }
+          }
+        },
+        {
+          "l": "Không vào",
+          "i": "🙅",
+          "t": "Ngươi săn quanh bìa rừng.",
+          "e": {
+            "nxp": [
+              "san",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_rung_cam",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_thu_bi_thuong",
+      "name": "Thú bị thương",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một con sói mắc bẫy của kẻ khác, chân gãy, nhìn ngươi gầm gừ.",
+      "choices": [
+        {
+          "l": "Cứu nó",
+          "i": "🐺",
+          "chk": [
+            "nang.nhan",
+            11
+          ],
+          "ok": {
+            "t": "Con sói được thả, đi theo ngươi một quãng rồi biến mất.",
+            "e": {
+              "nxp": [
+                "san",
+                8
+              ],
+              "deed": "phong_sinh"
+            }
+          },
+          "no": {
+            "t": "Nó cắn trúng tay ngươi.",
+            "e": {
+              "hp": "-15%",
+              "deed": "phong_sinh"
+            }
+          }
+        },
+        {
+          "l": "Kết liễu",
+          "i": "🔪",
+          "t": "Ngươi lột da đem bán.",
+          "e": {
+            "bac": 40,
+            "nxp": [
+              "san",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_thu_bi_thuong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_yeu_thu",
+      "name": "Yêu thú xuống núi",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một con yêu thú cấp thấp xuống núi bắt gia súc. Tu sĩ không ai đoái hoài.",
+      "choices": [
+        {
+          "l": "Dẫn phường săn đi diệt",
+          "i": "⚔️",
+          "chk": [
+            "nang.canh",
+            16
+          ],
+          "ok": {
+            "t": "Yêu thú gục dưới mưa tên. Cả vùng gọi ngươi là săn yêu nhân.",
+            "e": {
+              "bac": 400,
+              "nxp": [
+                "san",
+                22
+              ],
+              "deed": "cuu_nguoi"
+            }
+          },
+          "no": {
+            "t": "Ba người trong phường chết.",
+            "e": {
+              "hp": "-30%",
+              "nxp": [
+                "san",
+                8
+              ],
+              "tamma": 4
+            }
+          }
+        },
+        {
+          "l": "Dời làng tạm",
+          "i": "🏃",
+          "t": "Làng tạm dời lên núi bên.",
+          "e": {
+            "nxp": [
+              "san",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_yeu_thu",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_than_tien",
+      "name": "Mũi tên ba dặm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Người ta đồn có thợ săn bắn được con chim ưng ngoài ba dặm. Ngươi muốn thử.",
+      "choices": [
+        {
+          "l": "Tập suốt mùa đông",
+          "i": "🏹",
+          "chk": [
+            "tp",
+            12
+          ],
+          "ok": {
+            "t": "Mũi tên của ngươi rơi trúng chim ưng giữa trời.",
+            "e": {
+              "nxp": [
+                "san",
+                22
+              ]
+            }
+          },
+          "no": {
+            "t": "Vai ngươi rã rời, không làm được.",
+            "e": {
+              "nxp": [
+                "san",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Thôi",
+          "i": "🤷",
+          "t": "Ngươi biết giới hạn của mình.",
+          "e": {
+            "nxp": [
+              "san",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_than_tien",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_giu_rung",
+      "name": "Giữ rừng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Thú trong rừng thưa dần vì săn quá tay. Ngươi đứng đầu phường săn.",
+      "choices": [
+        {
+          "l": "Cấm săn mùa sinh sản",
+          "i": "📜",
+          "chk": [
+            "nang.giao",
+            14
+          ],
+          "ok": {
+            "t": "Ba năm sau thú trở lại đông như cũ.",
+            "e": {
+              "nxp": [
+                "san",
+                20
+              ],
+              "deed": "phong_sinh"
+            }
+          },
+          "no": {
+            "t": "Thợ săn trẻ không nghe, bỏ phường.",
+            "e": {
+              "nxp": [
+                "san",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Kệ",
+          "i": "🤷",
+          "t": "Rừng vắng dần tiếng thú.",
+          "e": {
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_giu_rung",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_san_bao_thu_hổ",
+      "name": "Con hổ ăn thịt người",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:san",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Con hổ đã giết cha ngươi năm xưa vẫn sống, nay già, quay lại gần bản.",
+      "choices": [
+        {
+          "l": "Đi săn một mình",
+          "i": "🐯",
+          "chk": [
+            "nang.canh",
+            17
+          ],
+          "ok": {
+            "t": "Con hổ già gục xuống. Ngươi ngồi bên xác nó rất lâu.",
+            "e": {
+              "nxp": [
+                "san",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Nó vẫn còn đủ sức. Ngươi thoát chết trong gang tấc.",
+            "e": {
+              "hp": "-35%"
+            }
+          }
+        },
+        {
+          "l": "Để nó chết già",
+          "i": "🍂",
+          "t": "Ngươi buông được một mối hận.",
+          "e": {
+            "nxp": [
+              "san",
+              8
+            ],
+            "tamma": -4
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/san.json",
+        "ref": "ng_san_bao_thu_hổ",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

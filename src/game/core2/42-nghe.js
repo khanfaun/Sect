@@ -27,8 +27,10 @@ for(const ma in NGHE){const N=NGHE[ma];for(let k=1;k<N.ranks.length;k++){const i
   KYNGO.push({id,n:contentText('ng.upN',[N.ranks[k]]),t,sp:1,c:[{l:contentText('ng.upOk'),go:()=>ngUp(ma,k)},{l:contentText('ng.upLui'),go:()=>{const p=ngPaths()[ma];if(p)p.wait=W().t+HM;return {t:contentText('ng.upLuiT')};}}]});}}
 
 // ----- việc của nghề: hiện trong hộp Mưu sinh -----
+// loại nút của việc: so cả loại gốc (vd đầm lầy tính là sông hồ) — Đ7.3
+function ngNoi(a,n){return !!n&&(a.noi.includes(n.type)||(typeof tAs==='function'&&a.noi.includes(tAs(n.type))));}
 function ngAct(ma,aid){const N=NGHE[ma];return N&&N.acts.find(a=>a.id===aid);}
-function ngWhy(ma,a,n){const r=G.run,s=S(),N=NGHE[ma];if(!n||!a.noi.includes(n.type)||n.state==='ruin')return contentText('vt.khongNoi');
+function ngWhy(ma,a,n){const r=G.run,s=S(),N=NGHE[ma];if(!n||!ngNoi(a,n)||n.state==='ruin')return contentText('vt.khongNoi');
   if(N.dk&&N.dk.vo&&voBac(r)<N.dk.vo)return contentText('ng.can',[voBacN(N.dk.vo)]);
   if(a.min&&ngheBac(ma)<a.min)return contentText('ng.canBac',[N.ranks[a.min]]);
   for(const k in (a.stat||{}))if((s[k]||0)<a.stat[k])return contentText('vt.can',[STAT_N[k]||k,a.stat[k]]);
@@ -37,7 +39,7 @@ function ngWhy(ma,a,n){const r=G.run,s=S(),N=NGHE[ma];if(!n||!a.noi.includes(n.t
   if(a.von&&!bacCan(a.von[0]))return contentText('tien.khongDu');
   if(r.scene&&r.scene.type==='combat')return contentText('vt.ban');return '';}
 function ngCong(ma,a){const t=NGHE[ma].thu[ngheBac(ma)]||1;return [Math.round(a.cong[0]*t),Math.round(a.cong[1]*t)];}
-function ngList(n){const L=[];if(!n||!feat('nghe'))return L;for(const ma in NGHE){const N=NGHE[ma];for(const a of N.acts){if(!a.noi.includes(n.type))continue;if(a.min&&ngheBac(ma)<a.min-1)continue;
+function ngList(n){const L=[];if(!n||!feat('nghe'))return L;for(const ma in NGHE){const N=NGHE[ma];for(const a of N.acts){if(!ngNoi(a,n))continue;if(a.min&&ngheBac(ma)<a.min-1)continue;
   L.push({id:'ng:'+ma+':'+a.id,ma,n:a.l+' · '+N.n,h:a.h,cong:a.von?[0,0]:ngCong(ma,a),von:a.von||null,an:!!a.an,ngu:false,rui:!!a.ruiRo,why:ngWhy(ma,a,n)});}}return L;}
 {const _vl=vtList;vtList=function(n){const L=_vl.apply(this,arguments);return L.concat(ngList(n));};}
 function ngDo(ma,aid){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);const a=ngAct(ma,aid);if(!a||ngWhy(ma,a,n))return false;
