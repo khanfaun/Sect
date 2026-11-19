@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "cuu_nguoi",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Bát cháo nóng",
+      "t": "Chiều muộn, gió lùa qua mái tranh. Một người đàn bà gầy gò chặn ngươi ở đầu ngõ, tay bưng bát cháo còn bốc khói. Nàng không nói gì lâu lắm, chỉ nhìn. Rồi nàng bảo: năm ấy nếu không có ngươi kéo lên khỏi dòng nước, giờ này nàng đã là nắm xương dưới đáy sông. Đứa con nàng ôm trên lưng ngủ say, má đỏ vì lạnh. Bát cháo loãng, có mấy lát gừng. Ở cái đất này, đó là thứ quý nhất nàng có.",
+      "c": [
+        {
+          "id": "an_chao",
+          "l": "Ngồi xuống bậc cửa, ăn hết bát cháo",
+          "t": "Cháo nhạt, gừng cay nơi đầu lưỡi. Ngươi ăn chậm, nàng đứng nhìn, thỉnh thoảng lau mắt. Khi ngươi trả bát, nàng cúi đầu thật thấp rồi bế con đi vào bóng tối. Trong người ấm lên một chút, không hẳn vì cháo.",
+          "e": {"hp": "5%", "tamma": -2}
+        },
+        {
+          "id": "gui_lai",
+          "l": "Đẩy bát cháo về phía đứa nhỏ",
+          "t": "Ngươi bảo để phần cho đứa bé. Nàng lắc đầu, rồi lại gật, rồi khóc không thành tiếng. Đứa nhỏ tỉnh dậy, húp từng ngụm, hai mắt tròn xoe nhìn ngươi như nhìn một bức tượng trong miếu. Đời này có những món nợ trả bằng một bát cháo, và có những món nợ chẳng ai muốn đòi.",
+          "e": {"deed": "bo_thi"}
+        },
+        {
+          "id": "hoi_chuyen",
+          "l": "Hỏi nàng giờ sống ra sao",
+          "t": "Nàng kể chồng mất mùa lũ, nàng đi giặt thuê cho mấy nhà trên trấn, đêm về đan rổ. Không than, chỉ kể. Trước khi đi, nàng dặn ngươi tránh con đường ven rừng phía bắc mấy hôm nay: có người lạ hay lảng vảng ở đó. Một lời dặn nhỏ, nhưng là của người từng suýt chết.",
+          "e": {"nang": {"giao": 1}}
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "dk": {"pham": false},
+      "ten": "Người đứng đợi bên đường",
+      "t": "Một gã thợ săn đứng chờ bên gốc cây khô, áo da sờn rách, cung đeo sau lưng. Ngươi nhận ra hắn chậm hơn hắn nhận ra ngươi: kẻ năm nào bị thú dữ vồ, được ngươi lôi ra khỏi hang. Giờ hắn biết ngươi đã bước lên đường tu, biết người như ngươi chẳng cần gì của kẻ phàm. Vậy mà hắn vẫn đợi, tay nắm một gói lá nhỏ, nói đó là cây thuốc mọc trên vách đá cao, hắn trèo ba ngày mới hái được.",
+      "c": [
+        {
+          "id": "nhan",
+          "l": "Nhận gói lá, cảm ơn hắn",
+          "t": "Gói lá còn ướt sương. Hắn cười, lộ hàm răng sứt, bảo vậy là hắn yên lòng rồi. Ngươi nhìn bóng hắn khuất sau rặng cây, chợt nghĩ con đường tu dài như thế, mà thứ khiến lòng người nhẹ đi đôi khi chỉ là chuyện của một ngày cũ.",
+          "e": {"tamma": -3}
+        },
+        {
+          "id": "tu_choi",
+          "l": "Bảo hắn giữ lại mà bán lấy tiền",
+          "t": "Hắn cau mày, như bị xúc phạm, rồi thở dài. Cuối cùng hắn nhét gói lá vào túi áo mình, bảo sẽ đem bán đổi gạo cho mẹ già. Trước khi đi hắn ngoái lại, nói một câu ngươi nhớ rất lâu: người được cứu cũng muốn được trả ơn, đừng tước của họ điều đó."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Cái tên trong sổ chùa",
+      "t": "Qua một ngôi chùa nhỏ ven đường, ngươi dừng xin ngụm nước. Lão sư trụ trì lật cuốn sổ công đức cũ, chỉ cho ngươi xem một dòng mực đã phai: có người khắc tên ngươi lên tấm bia nhỏ sau chùa, cầu cho ân nhân bình an. Người khắc là kẻ ngươi từng cứu, nay đã đi xa, không để lại lời nào ngoài dòng chữ ấy. Gió lay chuông gió, tiếng leng keng lạc lõng giữa trưa hè.",
+      "c": [
+        {
+          "id": "thap_huong",
+          "l": "Thắp một nén hương trước tấm bia",
+          "t": "Khói hương bay thẳng rồi tan. Ngươi đứng lâu hơn mình định. Tấm bia nhỏ, chữ khắc vụng, có chỗ sai nét. Nhưng nó vẫn đứng đó qua mấy mùa mưa, như một lời nhắc rằng việc ngươi làm từng có người nhớ.",
+          "e": {"tamma": -2, "h": 2}
+        },
+        {
+          "id": "cung_chua",
+          "l": "Để lại ít tiền cúng chùa",
+          "t": "Lão sư nhận, không đếm, bỏ vào ống tre. Lão bảo tiền này sẽ mua dầu thắp đèn cho khách lỡ đường. Ngươi đi, phía sau tiếng mõ đều đều vọng theo, như ai đó vẫn đang đếm những ngày bình an.",
+          "dk": {"bacTu": 100},
+          "e": {"bac": -100, "deed": "bo_thi"}
+        },
+        {
+          "id": "di_tiep",
+          "l": "Gật đầu rồi đi tiếp",
+          "t": "Ngươi trả lại bát nước, cảm ơn lão sư rồi bước ra cổng. Có những điều không cần dừng lại lâu mới thấm. Con đường trước mặt vẫn bụi, nhưng bước chân không còn nặng như lúc sáng."
+        }
+      ]
+    }
+  ]
+}

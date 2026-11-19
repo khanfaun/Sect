@@ -17,6 +17,9 @@ function buildContent(){
  // Đ9.1: tuyến (content/tuyen/*.json) — kiểm rồi mới ghép; lỗi thì dừng build.
  const ty=require('./kiem-tra-tuyen').kiemTuyen();if(ty.loi.length)throw Error('Tuyến sai (chạy npm run content:tuyen để xem):\n'+ty.loi.join('\n'));
  write('src/game/data/06-tuyen-du-lieu.js','// SINH TỰ ĐỘNG từ content/tuyen/*.json. Không sửa tệp này.\nconst TUYEN_DATA='+JSON.stringify(ty.tuyen)+';\n');
+ // đợt GPT-2: quả chín, nghề phàm, cải căn dọc đường, cảnh kể — kiểm rồi mới ghép.
+ const n2=require('./kiem-tra-noi-dung-2').kiemNoiDung2();if(n2.loi.length)throw Error('Nội dung đợt hai sai (chạy npm run content:gpt để xem):\n'+n2.loi.join('\n'));
+ write('src/game/data/07-noi-dung-2-du-lieu.js','// SINH TỰ ĐỘNG từ content/qua-chin, content/nghe-pham, content/cai-can, content/canh. Không sửa tệp này.\nconst ND2_DATA='+JSON.stringify(n2.data)+';\n');
  return {events:events.length,stories:story.length,catalog:cat,tuyen:ty.tuyen.length};
 }
 module.exports={buildContent};if(require.main===module){const r=buildContent();console.log('Content:',r.events,'mục sự kiện;',r.stories,'cảnh truyện.');}

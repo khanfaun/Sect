@@ -149,7 +149,7 @@ function kiemTuyen(files){const B=bang();const seen={id:{},xt:{},vt:{}};const lo
   const xt=tuyen.filter(a=>a.loai==='xuat_than'),dl=tuyen.filter(a=>a.loai==='dai_lo');
   for(const d of dl)d.nut.forEach((N,i)=>{for(const x of xt)x.nut.forEach(M=>{const a=N.loiMoi||{},b=M.loiMoi||{};if(a.vai&&a.vai===b.vai&&a.noi===b.noi)cb.push('content/tuyen/'+d.id+'.json nút '+N.id+': cùng người '+a.vai+' và cùng nơi với '+x.id+'.'+M.id+' — kiểm "khacVoi" có nói rõ mục tiêu khác không.');});});
   return {loi,cb,tuyen};}
-module.exports={kiemTuyen,parseJ,DAI_LO};
+module.exports={kiemTuyen,parseJ,DAI_LO,bang,TEN_DUNG};
 // in đoạn thiết kế của các tuyến (để dán cho người viết): node tools/kiem-tra-tuyen.js --de OR02 OR03 OR04
 function deTuyen(ids){const s=fs.readFileSync(path.join(ROOT,'docs/thiet-ke/PHAN-TICH-HOP-NHAT.md'),'utf8');const out=[];
   for(const id of ids){const i=s.indexOf('**'+id+' — ');if(i<0){out.push(id+': không thấy trong PHAN-TICH-HOP-NHAT.md');continue;}const rest=s.slice(i+4);const m=/\n\*\*OR\d\d — |\n#{2,5} /.exec(rest);out.push(s.slice(i,m?i+4+m.index:i+4000).trim());}

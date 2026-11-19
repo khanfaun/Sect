@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "CC01",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "ban_bao_che_cu",
+      "ten": "Bản bào chế cũ",
+      "t": "Ngươi đang lần tìm dấu vết viên đan thì gặp một ông lão bán thuốc rong ngồi nghỉ dưới gốc đa. Nghe ngươi hỏi chuyện dược viện, lão cười khẩy, móc trong tay nải ra một tờ giấy vàng úa, bảo đó là bản chép lại phương thuốc năm xưa. Mép giấy cháy sém, chữ như gà bới. Lão không đòi tiền, chỉ đòi ngươi nghe lão kể chuyện đứa con trai chết vì dịch, năm viện còn chưa có lò đan ấy.",
+      "c": [
+        {
+          "id": "nghe_ke",
+          "l": "Ngồi xuống nghe lão kể hết",
+          "t": "Lão kể rất lâu, có chỗ lặp lại, có chỗ quên tên người. Khi trời ngả chiều, lão gấp tờ giấy đưa cho ngươi xem kỹ: phương thuốc sai mất mấy vị, nhưng nét chữ ở góc dưới đúng là dấu của dược viện. Ngươi biết mình không tìm nhầm chỗ. Lão đứng dậy, phủi đít quần, bảo cứu được ai thì cứu, đừng để ai chết như con lão.",
+          "e": {"h": 4, "nang": {"duoc": 1}}
+        },
+        {
+          "id": "hoi_thang",
+          "l": "Hỏi thẳng tờ giấy từ đâu ra",
+          "t": "Lão sầm mặt, bảo người trẻ bây giờ chẳng biết nghe ai nói hết câu. Nhưng rồi lão cũng chỉ: tờ giấy nhặt được ở bãi rác sau viện, cùng mấy tấm vải liệm cũ. Ngươi cảm ơn rồi đi, trong lòng vẫn vướng câu chuyện chưa nghe hết.",
+          "e": {"nang": {"khao": 1}}
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "dua_tre_sot",
+      "ten": "Đứa trẻ lên cơn sốt",
+      "t": "Đêm thứ mấy trong đoàn cứu dịch ngươi cũng không còn nhớ. Mùi lá ngải khét lẹt lẫn mùi người ốm. Một đứa bé chừng sáu tuổi trong lều cuối cứ lên cơn co giật, mẹ nó ôm chặt mà khóc không ra tiếng. Thầy thuốc trực đêm đã ngủ gục bên nồi thuốc. Thuốc hạ sốt chỉ còn một gói, theo lệ phải để dành cho người lớn khoẻ, những người còn gánh nước, còn đào huyệt cho cả trại.",
+      "c": [
+        {
+          "id": "cho_tre",
+          "l": "Sắc gói thuốc cuối cho đứa trẻ",
+          "t": "Ngươi ngồi quạt lửa tới khi nước thuốc sánh lại. Đứa bé uống được nửa bát, nôn mất một ít, rồi ngủ thiếp đi trong lòng mẹ. Sáng ra trưởng đoàn biết chuyện, mắng ngươi một trận, bắt ngươi gánh thêm nước cả ngày. Lưng ngươi rã rời, nhưng tiếng trẻ con ho trong lều cuối nghe đã đỡ khàn.",
+          "e": {"deed": "cuu_nguoi", "hp": "-5%"}
+        },
+        {
+          "id": "giu_le",
+          "l": "Giữ đúng lệ, đánh thức thầy thuốc",
+          "t": "Thầy thuốc dụi mắt, xem mạch đứa bé rồi lắc đầu. Ông lấy khăn ướt đắp trán nó, dặn người mẹ chườm suốt đêm. Gói thuốc vẫn nằm trong rương. Đến gần sáng, cơn sốt tự lui. Không ai biết là may hay là số. Ngươi chỉ biết mình đã không phải chọn thay ai."
+        },
+        {
+          "id": "ngoi_canh",
+          "l": "Ngồi canh cùng người mẹ tới sáng",
+          "t": "Ngươi thay khăn, thổi lửa, kể vài chuyện vô thưởng vô phạt cho người mẹ đỡ sợ. Trời hửng sáng thì cơn sốt lui. Người mẹ ngủ gục bên con, tay vẫn nắm gấu áo ngươi. Mệt, nhưng trong lòng có chỗ yên.",
+          "e": {"nang": {"nhan": 1}, "tamma": -1}
+        }
+      ]
+    },
+    {
+      "buoc": 2,
+      "id": "gia_nhan_cong_tu",
+      "ten": "Gã gia nhân đưa thư",
+      "t": "Trước khi viện chủ định đoạt chuyện viên đan, một gã gia nhân mặc áo lụa tìm tới chỗ ngươi nghỉ. Hắn nói công tử nhà hắn biết ngươi đã khổ công nhiều tháng, nên sẵn lòng đền bù: một túi bạc nặng tay, đủ cho người như ngươi sống mấy năm không phải làm thuê. Đổi lại, ngươi chỉ cần không nhắc gì với viện chủ nữa. Hắn đặt túi bạc lên chiếu, mắt không rời mặt ngươi.",
+      "c": [
+        {
+          "id": "day_lai",
+          "l": "Đẩy túi bạc trả lại",
+          "t": "Gã gia nhân nhún vai, cất túi bạc, bảo công tử sẽ không vui. Hắn đi rồi, ngươi ngồi lại một mình rất lâu. Mười tám tháng qua hiện lên từng mảnh: những cái lều, những tấm chiếu cuốn người, đứa bé lên cơn sốt. Ngươi biết mình không đổi chúng lấy bạc.",
+          "e": {"tamma": -2}
+        },
+        {
+          "id": "nhan_bac",
+          "l": "Nhận một nửa, coi như tiền công",
+          "t": "Ngươi nhận một phần, bảo phần còn lại cứ đem về. Gã gia nhân cười nhạt, như đã quá quen loại người này. Đêm ấy ngươi trằn trọc, nghe tiếng chuột chạy trên mái. Túi bạc nằm cạnh gối, lạnh hơn ngươi tưởng.",
+          "e": {"bac": 800, "tamma": 3}
+        }
+      ]
+    },
+    {
+      "buoc": 3,
+      "id": "goi_thuoc_bi_am",
+      "ten": "Gói thuốc bị ẩm",
+      "t": "Mưa dầm suốt mấy hôm, kho thuốc của viện dột một góc. Khi ngươi tới nhận phần Hộ Mạch Tán, người giữ kho mặt tái mét: mấy gói bị nước thấm, bột vón lại như đất sét. Lão quỳ xuống xin ngươi đừng báo viện chủ, nhà lão còn ba đứa nhỏ, mất việc thì cả nhà đói. Phía ngoài, tiếng mưa vẫn rơi lộp độp trên tàu lá chuối.",
+      "c": [
+        {
+          "id": "giup_phoi",
+          "l": "Giúp lão đem thuốc ra hong bên bếp",
+          "t": "Hai người ngồi bên bếp lửa suốt đêm, trở từng gói thuốc. Đến sáng, phần lớn đã khô, mùi hơi khét nhưng vẫn dùng được. Lão giữ kho rót cho ngươi chén rượu nhạt, tay còn run. Không ai nhắc chuyện này với ai nữa.",
+          "e": {"h": 8, "nang": {"duoc": 1}}
+        },
+        {
+          "id": "bao_vien",
+          "l": "Báo với viện chủ cho đúng phép",
+          "t": "Viện chủ nghe xong, không mắng ai, chỉ bảo sửa mái kho trước khi mưa lớn. Lão giữ kho bị phạt nửa tháng công, nhưng không mất việc. Lúc đi ngang ngươi, lão không nhìn lên. Ngươi không biết mình đã làm đúng hay chỉ làm cho yên lòng mình."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "nong",
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Người giữ kho thóc của làng",
+      "dk": {"bacNgheTu": 4, "nghiep": "thien"},
+      "t": "Năm đói lớn, ngươi mở kho phát thóc, không ghi nợ ai. Ruộng nhà ngươi sau này chia nhỏ cho những người từng cấy thuê, mỗi nhà một mảnh. Khi ngươi nằm xuống, người trong thôn khiêng quan tài đi chậm qua cánh đồng, dừng lại ở từng bờ ruộng như để ngươi xem lần cuối. Kho thóc cũ thành nơi cả làng gửi giống, gọi là kho chung, cửa không bao giờ khoá."
+    },
+    {
+      "id": "B",
+      "ten": "Văn tự trong rương gỗ",
+      "dk": {"bacNgheTu": 4},
+      "t": "Ngươi chết giữa những rương văn tự. Con cháu chia nhau ruộng đất trước khi tang lễ xong, cãi nhau to tới mức quan huyện phải sai người tới. Những kẻ cấy thuê đứng ngoài cổng nhìn vào, không ai khóc. Mấy năm sau, ruộng nhà ngươi về tay một nhà giàu khác, và người ta lại cấy, lại nộp tô, như chưa từng có ngươi."
+    },
+    {
+      "id": "C",
+      "ten": "Mảnh ruộng bên bờ mương",
+      "dk": {"bacNgheTu": 2},
+      "t": "Mảnh ruộng nhỏ cạnh bờ mương vẫn ở đó, giờ con ngươi cấy. Đời ngươi không giàu, không nghèo, vài lần mất mùa, vài lần được mùa, đủ cho nhà khỏi đói. Người ta chôn ngươi ở góc ruộng, dưới gốc gạo già. Mùa xuân hoa gạo đỏ rơi đầy mặt nước, đứa cháu nhỏ hay ra nhặt về chơi."
+    },
+    {
+      "id": "D",
+      "ten": "Kẻ làm thuê không tên",
+      "t": "Ngươi cấy ruộng người khác cả đời, lưng còng xuống theo từng mùa gặt. Không có mảnh đất nào mang tên ngươi. Khi ngươi chết, chủ ruộng cho mấy đấu thóc làm ma, coi như trả công những năm cũ. Nhưng mấy đứa trẻ chăn trâu trong thôn vẫn nhớ người đàn ông hay chỉ chúng cách bắt cá trong ruộng ngập, và đôi khi, lúc trời chiều, chúng còn hát lại câu hò ngươi dạy."
+    }
+  ]
+}
