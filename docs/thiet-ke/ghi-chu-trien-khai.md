@@ -707,5 +707,9 @@ Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm th
 46. A: GPT được tạo vật truyện riêng mã vt_<tuyến>_.
 42. CHỐT giá Ám Hội: người bán A đưa vật B ra và nêu thứ muốn nhận C (linh thạch hoặc vật phẩm, theo thứ A đang cần). Định giá B và C bằng bảng NHU CẦU của thế giới (logic nhu cầu đã có ở cửa hàng, theo nơi/vật, dao động theo thời gian). Trao đổi khi giá trị + độ quý hiếm tương đương. Bỏ công thức cố định 40×3^phẩm (chỉ dùng làm giá gốc nếu cần, nhân theo nhu cầu).
 43. CHỐT khách Ám Hội: mọi thành viên đều là NPC THẬT có dữ liệu thật trong thế giới (không sinh mới tại chỗ, không biến mất giữa chừng); họ hóa trang che thân phận và che tu vi khi dự hội (người chơi thấy tên giả/áo choàng; có thể nhận ra qua thần thức/khảo vật/giao tình — tự thiết kế nhẹ). Bỏ "khách vô danh sinh lúc hội mở".
-Việc cần làm (Sửa-J): câu 42, 43, 44.
+42b. BỔ SUNG luật Ám Hội:
+   - Người bán đưa vật B kèm DANH SÁCH vật mong muốn (tên + số lượng X mỗi món); chấp nhận 1 trong các món đó. Người trả giá chọn 1 món trong danh sách nếu túi họ có đủ số lượng. Giá trị giao dịch = giá trị món (theo nhu cầu) × số lượng.
+   - Nếu không có món nào trong danh sách: nút "Thương lượng" — tự chọn vật trong túi + số lượng Y; hệ thống xét hợp nhu cầu người bán + tổng giá trị tương đương thì được tính là một lần trả giá hợp lệ.
+   - Đây là ĐẤU GIÁ nhiều vòng: A trả mức 1, B trả mức 2 (phải hấp dẫn/giá trị hơn), A có thể trả tiếp mức 3… cho tới khi mọi người khác bỏ cuộc; người còn lại với mức cao nhất thắng. Ai đã bỏ cuộc thì không được trả giá lại trong vòng của món đó (sang món khác thì được). NPC cũng tham gia trả giá nhiều vòng theo nhu cầu + của cải/túi của họ.
+Việc cần làm (Sửa-J): câu 42, 42b, 43, 44.
 Gói gửi GPT: docs/content/GUI-GPT/ (0-loi-nhan, 1-huong-dan, 2-thiet-ke-45-tuyen). TẠM DỪNG — chờ người dùng.
