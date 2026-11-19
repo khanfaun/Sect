@@ -3,7 +3,7 @@
 // ngẫu nhiên lại tung xác suất bị chặn đánh, kể cả đang đi giữa chặng (dừng ở tâm ô gần nhất trên đường).
 // loai[k]: p = xác suất bám theo sau khi bị ngươi chạy thoát · ngay = [ít, nhiều] số ngày truy · gian = [ít, nhiều] số giờ giữa hai lần dò
 //          chan = xác suất chặn được mỗi lần dò · opt = lựa chọn khi bị chặn (danh: đánh, chay: chạy tiếp, nop: nộp của, tl: thương lượng)
-//   thu: yêu thú · tac: sơn tặc · tu: tu sĩ, tán tu, ma tu · ke: kẻ thù kiếp trước / kẻ thù truy sát · quy: quỷ vật · no: quan sai đòi nợ · cuop: kẻ bị ngươi cướp
+//   thu: yêu thú · tac: sơn tặc · tu: tu sĩ, tán tu, ma tu · ke: kẻ thù kiếp trước / kẻ thù truy sát · quy: quỷ vật · no: quan sai đòi nợ · cuop: kẻ bị ngươi cướp (Đ8b: cả chủ đất bị ngươi xây / phá trên đất họ) · quan: quan phủ truy nã vì phá đất ở thôn trấn / thành (Đ8b)
 // Sửa-L (câu 50): hạn truy tính bằng năm (yêu thú/quỷ 1–2 năm … kẻ thù 6–10 năm), dò thưa (10–90 ngày một lần) để không bị chặn liên tục.
 // manh: địch hơn ngươi mỗi một cảnh giới thì hạn truy ×(1 + ngay), chan + chan (tính tối đa `max` bậc). Kém hơn từ 2 bậc trở lên thì không đuổi.
 // an: tới nơi an toàn. thanh = thành có thủ vệ, tong = tông môn của mình: 'huy' cắt đuôi hẳn, 'giam' rút hạn còn lại × giam, 0 = không có tác dụng.
@@ -19,9 +19,10 @@ const TRUY={
     ke:{p:0.8,ngay:[2190,3650],gian:[480,1440],chan:0.35,opt:['danh','chay','tl']},
     quy:{p:0.3,ngay:[365,730],gian:[240,720],chan:0.35,opt:['danh','chay']},
     no:{p:1,ngay:[1460,2920],gian:[720,2160],chan:0.3,opt:['danh','chay','nop','tl']},
-    cuop:{p:0.7,ngay:[1095,2555],gian:[480,1440],chan:0.3,opt:['danh','chay','nop','tl']}},
+    cuop:{p:0.7,ngay:[1095,2555],gian:[480,1440],chan:0.3,opt:['danh','chay','nop','tl']},
+    quan:{p:1,ngay:[730,1460],gian:[720,2160],chan:0.3,opt:['danh','chay','nop','tl']}},
   manh:{ngay:0.25,chan:0.08,max:3},
-  an:{thanh:{thu:'huy',tac:'huy',quy:'huy',tu:'giam',ke:'giam',cuop:'giam',no:0},tong:'huy',giam:0.5},
+  an:{thanh:{thu:'huy',tac:'huy',quy:'huy',tu:'giam',ke:'giam',cuop:'giam',no:0,quan:0},tong:'huy',giam:0.5},
   che:{hide:0.6,than:0.8,lan:0.6},
   chay:{goc:0.4,tp:0.015,max:0.85,lui:[12,24]},
   nop:{st:0.25,stMin:5,bac:0.3},
