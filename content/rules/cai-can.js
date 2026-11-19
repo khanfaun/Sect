@@ -1,4 +1,4 @@
-// Nguồn chuẩn: CAI_CAN, CC_VT, CC_CFG. Luật xử lý ở src/game/core2/49-cai-can.js.
+// Nguồn chuẩn: CAI_CAN, CC_VT, CC_CFG, CC_DO, CC_LV. Luật xử lý ở src/game/core2/49-cai-can.js.
 // Cải tạo linh căn (HN A.3; Phần C §5.3 CC01–CC08 và vật tư CC-VT01–23; mười đường bổ sung của B viết lại theo khuôn C).
 // Giá: phàm dùng xu (giá đồng của HN chia ba như thu nhập nghề ở content/rules/nghe.js); đường của tu sĩ dùng linh thạch Hạ phẩm (st).
 // noi: {loc: mã neo LOC, t: loại nút ưu tiên (theo thứ tự), re: lọc theo tên nút (nếu có)} — nút được chốt một lần cho cả thế giới.
@@ -55,6 +55,29 @@ const CC_VT={
   sao_thuong:{n:'Mảnh Sao Thượng',loc:'LOC15',cong:{ngay:30,l:'Giúp gia đình giữ kho kỷ vật phân xử quyền sở hữu'}},
   co_trung:{n:'Linh cổ non',gia:1000},
   tao_hoa_dich:{n:'Tạo Hóa Thần Dịch',st:20}
+};
+// Sửa-H (câu 36): đồ cải căn dùng thẳng (một viên/quả, chiếm một ô túi). Luật ở src/game/core2/53-cai-can-do.js.
+//   p: phẩm 1–5 · to: loại căn cải ra (pick: chọn ngẫu nhiên) · lv: mức tối đa cải tới (so với CC_LV của căn đang có; căn đã bằng/cao hơn thì vô dụng)
+//   ok: tỉ lệ thành (phẩm càng cao càng dễ hỏng) · fail: hậu quả khi hỏng (như CAI_CAN) · st: giá khởi điểm ở đấu giá (linh thạch Hạ phẩm)
+//   dg: khả năng có một lô ở mỗi buổi đấu giá (băm theo nơi + tháng) · ky: tỉ trọng khi gặp kỳ ngộ đồ cải căn
+//   Đồ dởm (bị lừa): mang cùng tên, không có tác dụng gì; chỉ biết khi dùng hoặc nhờ thẩm định; khảo vật / nhận dược cao thì nhìn ra ngay.
+const CC_LV={vo:0,tap:1,tu:1.5,tam:2,song:3,bien:3,dia:4,cuc:4,thien:5};
+const CC_DO={
+  1:{n:'Tẩy Mạch Đan',i:'💊',to:{pick:['tap','tap','tu']},lv:1.5,ok:0.75,st:60,dg:0.3,ky:60,fail:{tam:{nam:0.5,fx:{hpP:-10}}}},
+  2:{n:'Tam Nguyên Dịch Căn Đan',i:'💊',to:{id:'tam'},lv:2,ok:0.6,st:180,dg:0.12,ky:28,fail:{tam:{nam:1,fx:{hpP:-15}}}},
+  3:{n:'Lưỡng Nghi Tạo Căn Đan',i:'🔮',to:{id:'song'},lv:3,ok:0.42,st:600,dg:0.04,ky:10,fail:{tam:{nam:1,fx:{hpP:-20,atkP:-10}},wound:'noi'}},
+  4:{n:'Địa Nguyên Hóa Căn Lộ',i:'🏺',to:{id:'dia'},lv:4,ok:0.22,st:3000,dg:0.004,ky:1.8,fail:{tam:{nam:2,fx:{hpP:-25,atkP:-15}},wound:'noi',life:-3}},
+  5:{n:'Thiên Đạo Hóa Căn Quả',i:'🍑',to:{id:'thien'},lv:5,ok:0.08,st:15000,dg:0.0002,ky:0.2,fail:{tam:{nam:3,fx:{hpP:-30,atkP:-20}},wound:'nguy',life:-10,die:0.15}}
+};
+const CC_DOCFG={
+  bon:0.05,        // mỗi lần cải căn hỏng (đồ hay đường): lần sau +5% thành
+  bonMax:0.25,     // trần cộng dồn
+  ky:0.002,        // mỗi tháng (đã biết căn, chưa cải thành): khả năng kỳ ngộ được một món đồ cải căn thật
+  nhan:0.25,       // khảo vật / nhận dược từ mức này (0–100) bắt đầu có khả năng nhìn ra đồ dởm lúc nhận
+  nhanMax:0.9,     // trần khả năng nhìn ra
+  tdBac:300,       // nhờ thẩm định ở thành / trấn: phàm trả xu
+  tdSt:3,          //   tu sĩ trả linh thạch Hạ phẩm
+  luaP:[50,30,15,4,1] // đồ kẻ bán dạo rao (dởm): tỉ trọng phẩm "rao" theo phẩm 1–5
 };
 const CAI_CAN={
   // ---------- tám đường chính thức (HN C §5.3) ----------

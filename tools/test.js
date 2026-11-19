@@ -1383,6 +1383,51 @@ const TESTS = {
     ok(run("ltGet(0)")===s0-ao.st&&(run("ccHave('tao_hoa_dich')")===1||run("ccStep().b")==='rite'), 'đổi được ở Ám Hội, trừ linh thạch');
     run("CC_FORCE=null");ok(run(`W().regions.flatMap(R=>R.nodes).filter(n=>!ccAmVt(n)).length>0`), 'không phải lúc nào Ám Hội cũng có');
   },
+  // Sửa-H câu 36 + 32: đồ cải căn có phẩm (tạp/tứ → tam → song → Địa → Thiên), đồ dởm, cộng dồn sau thất bại, lô ở đấu giá thường
+  cai_can_do() {
+    ok(run("[1,2,3,4,5].every(p=>!CC_DO[p+1]||(CC_DO[p+1].ok<CC_DO[p].ok&&CC_DO[p+1].lv>CC_DO[p].lv&&CC_DO[p+1].dg<CC_DO[p].dg&&CC_DO[p+1].st>CC_DO[p].st))"), 'phẩm càng cao: cải được tới mức cao hơn, dễ hỏng hơn, hiếm hơn, đắt hơn');
+    ok(run("CC_DO[4].to.id==='dia'&&CC_DO[5].to.id==='thien'&&CC_DO[3].to.id==='song'&&CC_DO[2].to.id==='tam'"), 'phẩm 2–5 ra tam / song / Địa / Thiên');
+    ok(run("CC_DO[5].dg*CC_DO[5].ok")<1e-4, 'đồ cải ra Thiên cực hiếm (một buổi đấu giá: '+run("CC_DO[5].dg*CC_DO[5].ok")+')');
+    fresh("G._ngNoEv=1;G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;G.run.bac=100000;CC_FORCE=null");
+    run("ccDoAdd(1,0)");ok(run("bagItems().some(it=>it.key==='vccd_1'&&it.use&&it.n==='Tẩy Mạch Đan')"), 'đồ cải căn nằm trong túi, dùng được');
+    run("CC_FORCE=1");ok(run("bagUse('vccd_1',1)")===1, 'dùng Tẩy Mạch Đan');run("CC_FORCE=null");
+    ok(['tap','tu'].includes(run("G.run.root.id"))&&run("G.run.ccOk===1&&!isVo()&&NK.count('ccd.ok')===1"), 'vô căn → '+run("G.run.root.id")+', ccOk=1');
+    run("ccDoAdd(2,0)");ok(run("bagUse('vccd_2',1)")===0&&run("G.run.qitems.includes('ccd_2')"), 'đã cải thành trong kiếp: món thứ hai bị từ chối, không mất đồ');
+    // thất bại: chờ một năm, cộng dồn có trần, mất đồ
+    run("G.run.ccOk=0;G.meta.ccBon=0;CC_FORCE=0");run("bagUse('vccd_2',1)");run("CC_FORCE=null");
+    ok(run("G.run.root.id")!=='tam'&&run("!G.run.qitems.includes('ccd_2')&&G.run.ccWait>W().t&&G.meta.ccBon===CC_DOCFG.bon"), 'hỏng: mất đồ, chờ một năm, lần sau +'+run("CC_DOCFG.bon*100")+'%');
+    run("ccDoAdd(2,0)");ok(run("bagUse('vccd_2',1)")===0&&/năm/.test(run("ccDoWhy(2)")), 'đang chờ một năm: không dùng được ('+run("ccDoWhy(2)")+')');
+    run("for(let i=0;i<20;i++)ccBonFail()");ok(run("ccBon()")===run("CC_DOCFG.bonMax")&&Math.abs(run("ccOkP(CC_DO[3].ok)")-run("CC_DO[3].ok+CC_DOCFG.bonMax"))<1e-9, 'cộng dồn có trần '+run("CC_DOCFG.bonMax*100")+'%');
+    run("G.run.ccWait=0;G.run.root={id:'tu',els:['kim','moc','thuy','hoa'],q:'thuong'};CC_FORCE=1");run("bagUse('vccd_2',1)");run("CC_FORCE=null");
+    ok(run("G.run.root.id")==='tam'&&run("G.run.root.els.length")===3&&run("G.meta.ccBon")===0, 'tứ → tam; thành rồi phần cộng dồn về 0');
+    run("G.run.ccOk=0;ccDoAdd(1,0)");ok(/bằng hoặc hơn/.test(run("ccDoWhy(1)"))&&run("bagUse('vccd_1',1)")===0, 'căn đã cao hơn mức của đồ: vô dụng, bị từ chối');
+    // đồ dởm
+    run("G.meta.ccBon=0;G.run.nang={khao:0,duoc:0};ccDoAdd(3,1)");const root0=run("JSON.stringify(G.run.root)");
+    ok(run("bagItems().find(it=>it.key==='vccg_3').n===bagItems().find(it=>it.key==='vccd_1').n.replace('Tẩy Mạch Đan','Lưỡng Nghi Tạo Căn Đan')"), 'đồ dởm mang cùng tên đồ thật');
+    run("bagUse('vccg_3',1)");ok(run("JSON.stringify(G.run.root)")===root0&&run("!G.run.qitems.includes('ccg_3')&&!(G.run.ccWait>W().t)&&G.meta.ccBon===0&&!G.run.ccOk&&NK.count('ccd.dom')===1"), 'dùng đồ dởm: không tác dụng, mất đồ, không tính là hỏng');
+    run("G.run.nang={khao:100,duoc:10};ccDoAdd(3,1)");ok(run("G.run.qitems.includes('ccx_3')&&bagItems().find(it=>it.key==='vccx_3').use!==1"), 'khảo vật cao: nhìn ra đồ giả ngay lúc nhận');
+    run("G.run.nang={khao:0,duoc:0};ccDoAdd(3,1);ccDoAdd(4,0)");
+    const tn=run("W().regions.flatMap(R=>R.nodes).find(n=>ccTdOk(n)).id");
+    run(`(()=>{const r=G.run;r.scene=null;r.moving=null;r.at=${tn};openPlace(${tn});})()`);
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='coduyen')")&&run("ccOpts(nodeById(G.run.at)).some(o=>o.id==='td:3')"), 'thành / trấn có nút nhờ thẩm định');
+    run(`(()=>{G.run.scene.venue='coduyen';venueDo('coduyen','td:3');})()`);run(`(()=>{const r=G.run;r.scene=null;r.at=${tn};openPlace(${tn});G.run.scene.venue='coduyen';venueDo('coduyen','td:4');})()`);
+    ok(run("G.run.qitems.includes('ccx_3')&&!G.run.qitems.includes('ccg_3')&&G.run.qitems.includes('cct_4')"), 'thẩm định: đồ giả lộ ra, đồ thật ghi "đã thẩm định"');
+    // kẻ bán đồ giả ở bước kiểm chứng trao một món dởm
+    fresh("G._ngNoEv=1;G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;G.run.bac=100000;G.run.nang={khao:0,duoc:0};G.run.ccHeard.CC01=1;ccStart('CC01')");
+    const n1=run("ccSrc('CC01').node");run(`(()=>{const r=G.run;r.scene=null;r.at=${n1};openPlace(${n1});r.scene.venue='coduyen';venueDo('coduyen','lua');})()`);
+    ok(run("G.run.cc.s===0&&G.run.qitems.some(q=>/^ccg_/.test(q))"), 'mua của kẻ rao ngoài chợ: được một món dởm trông như thật');
+    // nghi thức của đường cũng được cộng dồn
+    run("G.meta.ccBon=0.2");ok(/chín phần thành/.test(run("ccRiteD(CAI_CAN.CC01,CAI_CAN.CC01.steps[4])")), 'nghi thức đường CC01 (75%) + 20% cộng dồn: ghi "chín phần thành" (kẹp 95%)');
+    run("G.run.cc={id:'CC01',s:4,t0:W().t,pf:{},h:0,care:0};ccVtAdd('ho_mach_tan',3);G.meta.ccBon=0;CC_FORCE=0");
+    run(`(()=>{const r=G.run;r.scene=null;r.at=${n1};openPlace(${n1});r.scene.venue='coduyen';venueDo('coduyen','le');})()`);run("CC_FORCE=null");
+    ok(run("G.meta.ccBon")===run("CC_DOCFG.bon"), 'đường hỏng cũng cộng dồn cho lần sau');
+    // Địa linh căn: dị tượng, tông môn kinh động
+    fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=1;G.run.root={id:'tam',els:['kim','moc','thuy'],q:'thuong'};G.run.rootKnown=1");
+    const sn=run("W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tong'&&n.state!=='ruin'&&W().sects.some(s=>s.n===(n.owner||n.name))).id");
+    run(`G.run.at=${sn};G.run.sfav={};ccDoAdd(4,0);CC_FORCE=1`);run("bagUse('vccd_4',1)");run("CC_FORCE=null");
+    ok(run("G.run.root.id")==='dia'&&run("G.run.root.els.length")===2&&run("!!G.run.tlFx&&G.run.tlFx.k==='dia'&&G.run.tlFx.cach==='caican'"), 'tam → Địa linh căn (một cặp tương sinh), có dị tượng trắc linh');
+    ok(run("Object.values(G.run.sfav||{}).some(v=>v>0)")&&run("NK.count('cc.fx')")===1, 'tông môn kinh động: thiện cảm tăng');
+  },
   // Sửa-G câu 31: vật tư cải căn chiếm ô túi đồ; túi đầy thì gửi lại tại chỗ; bản lưu cũ r.ccVt chuyển vào túi
   cai_can_tui() {
     fresh("G._ngNoEv=1;G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1");
