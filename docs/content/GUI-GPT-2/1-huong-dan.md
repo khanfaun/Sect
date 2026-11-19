@@ -9,13 +9,13 @@
 | A. Quả chín | `content/qua-chin/<mã việc làm>.json` | 6–18 tháng sau khi nhân vật làm việc ấy, hộp kỳ ngộ "quả chín" hiện ra (chọn một biến thể hợp điều kiện) | một dòng nhật ký chung |
 | B. Nghề phàm | `content/nghe-pham/<mã nghề>.json` | `len`: lúc lên bậc nghề; `ket`: ở màn hết kiếp, cho nghề chính (bậc cao nhất) | lời chung "Người trong nghề bắt đầu gọi ngươi là …"; không có kết cục |
 | C. Cải căn dọc đường | `content/cai-can/<mã đường>.json` | lúc người chơi vừa bước vào một bước của đường cải căn (hiện khi rảnh, không chen vào trận/hộp khác) | chỉ có một câu mỗi bước như cũ |
-| D. Cảnh kể | `content/canh/truy-duoi.json` | kẻ truy đuổi chặn đường (theo loại kẻ đuổi) | lời chung cũ |
+| D. Cảnh kể | `content/canh/truy.json` | kẻ truy đuổi chặn đường (theo loại kẻ đuổi) | lời chung cũ |
 
 Bốn tệp mẫu Claude đã viết, chạy được trong game — ĐỌC KỸ và bám theo: `content/qua-chin/cuu_nguoi.json`, `content/nghe-pham/nong.json`, `content/cai-can/CC01.json`, `content/canh/quan-phu.json`. Không sửa bốn tệp mẫu.
 
 ## 2. Được sửa và không được sửa
 
-- CHỈ tạo/sửa tệp `.json` trong: `content/qua-chin/`, `content/nghe-pham/`, `content/cai-can/`, `content/canh/truy-duoi.json`.
+- CHỈ tạo/sửa tệp `.json` trong: `content/qua-chin/`, `content/nghe-pham/`, `content/cai-can/`, `content/canh/truy.json`.
 - KHÔNG sửa mã (`src/`, `tools/`), không sửa `content/rules`, `content/text`, `content/tuyen`, không sửa tệp tự sinh `src/game/data/*`, không sửa `phu-sinh.html`, không sửa tài liệu.
 - Tên tệp = mã (ví dụ `content/qua-chin/bo_thi.json`, `content/nghe-pham/tieu.json`, `content/cai-can/CC02.json`).
 - JSON chuẩn: ngoặc kép, không dấu phẩy thừa, không xuống dòng giữa chuỗi, UTF-8.
@@ -169,7 +169,7 @@ Bốn tệp mẫu Claude đã viết, chạy được trong game — ĐỌC KỸ
 | 11 | cải căn | `CC06.json`, `CC07.json`, `CC08.json`, `TAY_TUY.json` |
 | 12 | cải căn | `QUAN_DINH.json`, `HUYET_TE.json`, `LINH_CO.json`, `THIEN_LOI.json` |
 | 13 | cải căn | `XA_LOI.json`, `TUC_CAN.json`, `DUOC_NHAN.json`, `TAO_HOA.json` |
-| 14 | cảnh kể | `content/canh/truy-duoi.json` (7 khoá × ≥ 3) — rồi chạy kiểm đủ `--du` |
+| 14 | cảnh kể | `content/canh/truy.json` (7 khoá × ≥ 3) — rồi chạy kiểm đủ `--du` |
 
 Tổng: 16 quả chín (+ 1 mẫu), 20 nghề (+ 1 mẫu), 16 đường cải căn (+ 1 mẫu), 1 tệp cảnh kể (+ 1 mẫu).
 

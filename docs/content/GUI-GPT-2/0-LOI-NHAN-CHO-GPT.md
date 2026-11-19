@@ -8,7 +8,7 @@ Bốn tệp mẫu chạy được trong game, bám theo chúng: `content/qua-chi
 
 Quy tắc làm việc:
 1. Tạo nhánh `codex/phu-sinh-noi-dung-2` TỪ nhánh `claude/busy-cray-fctc4p`: `git fetch origin && git checkout -b codex/phu-sinh-noi-dung-2 origin/claude/busy-cray-fctc4p`. Lần đầu chạy `npm install`.
-2. Chỉ tạo/sửa tệp nội dung được phép: `content/qua-chin/*.json`, `content/nghe-pham/*.json`, `content/cai-can/*.json`, `content/canh/truy-duoi.json`. Không sửa mã, không sửa tệp mẫu, không sửa tệp tự sinh, không sửa `phu-sinh.html`.
+2. Chỉ tạo/sửa tệp nội dung được phép: `content/qua-chin/*.json`, `content/nghe-pham/*.json`, `content/cai-can/*.json`, `content/canh/truy.json`. Không sửa mã, không sửa tệp mẫu, không sửa tệp tự sinh, không sửa `phu-sinh.html`.
 3. Làm lần lượt từng lô theo bảng ở mục 7 của `1-huong-dan.md` (lô 1 tới lô 14).
 4. Sau mỗi lô chạy `npm run content:gpt`; có lỗi thì sửa đúng tệp/dòng/khoá được báo rồi chạy lại cho tới khi in "Đạt". Rồi chạy `npm run content:check` và `node tools/test.js noi_dung_2 nd2_kiem content` (phải đạt hết).
 5. Commit từng lô riêng (chỉ các tệp của lô), ví dụ `Nội dung đợt hai: lô 1 (quả chín cứu người…)`.

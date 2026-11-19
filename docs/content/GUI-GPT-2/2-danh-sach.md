@@ -214,7 +214,7 @@ Người vô căn (hoặc tu sĩ muốn nâng căn) theo một "đường" nhi�
 ## D. Cảnh kể — `content/canh/…` (mỗi khoá ≥ 3 biến thể)
 
 - `content/canh/quan-phu.json` (ĐÃ CÓ — mẫu): heo1 (lần đầu đánh hai mươi hèo vì quỵt nợ), heo2 (lần hai, bốn mươi hèo, gãy xương), truyNa (quan phủ dán cáo thị truy nã), lamCong (bị bắt làm công trả nợ hai–ba năm), raTu (ngày được thả, nợ đã xoá).
-- `content/canh/truy-duoi.json` (cần viết): kẻ đang truy đuổi đuổi kịp, chặn trước mặt. Gọi tên kẻ đuổi bằng `{ke}`. Game tự nối thêm câu "dừng chân giữa đường" / "thần thức báo trước" nên KHÔNG viết những câu đó. Lựa chọn (đánh/chạy/nộp/thương lượng) do game thêm — chỉ viết đoạn kể.
+- `content/canh/truy.json` (cần viết): kẻ đang truy đuổi đuổi kịp, chặn trước mặt. Gọi tên kẻ đuổi bằng `{ke}`. Game tự nối thêm câu "dừng chân giữa đường" / "thần thức báo trước" nên KHÔNG viết những câu đó. Lựa chọn (đánh/chạy/nộp/thương lượng) do game thêm — chỉ viết đoạn kể.
 
 | khoá | kẻ đuổi | khi nào bám theo | lựa chọn game thêm |
 |---|---|---|---|
