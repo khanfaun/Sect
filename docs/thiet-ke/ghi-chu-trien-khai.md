@@ -705,5 +705,7 @@ Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm th
 44. B: lời mời mốc tuyến vẫn nằm trong Sổ tay (thẻ Mệnh thư), người chơi tự mở lại trước khi hết hạn (cần làm trong bộ máy + thẻ Mệnh thư).
 45. A: mỗi mốc ≥3 lựa chọn thật, "Để sau" không tính (hướng dẫn GPT đã ghi 3–5).
 46. A: GPT được tạo vật truyện riêng mã vt_<tuyến>_.
-42–43 (giá pháp bảo Ám Hội, khách lạ quay lại): CHƯA trả lời.
+42. CHỐT giá Ám Hội: người bán A đưa vật B ra và nêu thứ muốn nhận C (linh thạch hoặc vật phẩm, theo thứ A đang cần). Định giá B và C bằng bảng NHU CẦU của thế giới (logic nhu cầu đã có ở cửa hàng, theo nơi/vật, dao động theo thời gian). Trao đổi khi giá trị + độ quý hiếm tương đương. Bỏ công thức cố định 40×3^phẩm (chỉ dùng làm giá gốc nếu cần, nhân theo nhu cầu).
+43. CHỐT khách Ám Hội: mọi thành viên đều là NPC THẬT có dữ liệu thật trong thế giới (không sinh mới tại chỗ, không biến mất giữa chừng); họ hóa trang che thân phận và che tu vi khi dự hội (người chơi thấy tên giả/áo choàng; có thể nhận ra qua thần thức/khảo vật/giao tình — tự thiết kế nhẹ). Bỏ "khách vô danh sinh lúc hội mở".
+Việc cần làm (Sửa-J): câu 42, 43, 44.
 Gói gửi GPT: docs/content/GUI-GPT/ (0-loi-nhan, 1-huong-dan, 2-thiet-ke-45-tuyen). TẠM DỪNG — chờ người dùng.
