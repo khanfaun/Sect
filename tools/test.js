@@ -29,6 +29,63 @@ const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else
 
 const TESTS = {
   // Đ8.6: đất ma — ba khu, bậc, hồi theo thế kỷ, nguy hiểm, thôn trấn biến mất, tu luyện, nhiễm ma khí
+  // Đ9.1: bộ máy tuyến — đi hết OR01 (Con nhà nông), lỡ hạn thì tự diễn, vai mất dùng người/vật thay, bản lưu cũ, khoảng luân hồi dài, đại lộ mở từ hồi 2 và đổi một lần
+  menh_tuyen() {
+    fresh("G._ngNoEv=1;G.run.origin='nong';G.run.bac=20000;delete G.run.arc");
+    ok(run("!!TUYEN.OR01&&TUYEN_XT.nong==='OR01'&&CAT.byId.vt_or01_mau_da&&1"), 'tuyến OR01 nạp từ content/tuyen, vật truyện vào danh mục');
+    run("tuyenTick()");ok(run("G.run.arc.xt&&G.run.arc.xt.id==='OR01'&&G.run.arc.xt.han==null"), 'mở tuyến xuất thân theo r.origin, nút đầu chờ một tháng');
+    run("W().t+=HM;tuyenTick()");ok(run("G.run.arc.xt.han>W().t"), 'tới lúc: N1 mở, có hạn mềm');
+    const ten1=run("vaiNow('NP01').ten");run("G.run.scene=null;tuyenGap(true)");
+    ok(run("G.run.scene&&G.run.scene.type==='kyngo'&&G.run.scene.ev==='tuyen:OR01:N1'")&&run("G.run.scene.text").includes(ten1), 'lời mời hiện bằng hộp kỳ ngộ, gọi người giữ vai NP01 ('+ten1+')');
+    ok(!/\{|\d/.test(run("G.run.scene.text")), 'chữ đã thay mã, không còn {…} hay con số');
+    ok(run("kyOpts(G.run.scene).length")===4&&run("kyOpts(G.run.scene)[3].l")==='Để sau', 'ba lựa chọn + "Để sau" (không ép)');
+    run("kyPick(0);G.run.scene=null");ok(run("G.run.arc.xt.i===1&&G.run.arc.xt.dau.so_that===1&&G.run.arc.xt.lich[0].c==='doi_chieu'"), 'chọn: đặt dấu, ghi sổ, sang N2');
+    ok(run("NK.count('nq')")>0||run("JSON.stringify(G.run.nq||{})").length>2, 'việc làm ghi vào sổ nghiệp (deed), không hiện số');
+    // N2: tin đồn — chỉ gặp khi tới nơi
+    run("W().t+=2*HM;tuyenTick()");const loc=run("anchorNode('LOC01').id");
+    run(`G.run.at=(${loc}===G.run.at?W().regions[0].nodes.find(n=>n.id!==${loc}).id:G.run.at);G.run.scene=null`);ok(!run("tuyenGap()"), 'tin đồn: chưa tới {LOC01} thì chưa gặp');
+    run(`G.run.at=${loc};G.run.scene=null`);ok(run("tuyenGap()")&&run("G.run.scene.ev")==='tuyen:OR01:N2', 'tới nơi thì gặp N2');
+    const b0=run("G.run.bac");run("kyPick(2);G.run.scene=null");ok(run("G.run.arc.xt.dau.de_sua===1&&G.run.bac")===b0-3000, 'đắp lại đê: trừ đúng ba lượng bạc (xu)');
+    ok(run("hasItem('vt_or01_mau_da')")===false, 'không chọn lấy mẫu thì không có mẫu đá');
+    // "Để sau" rồi lỡ hạn N3: thế giới tự diễn, không kẹt
+    run("W().t+=3*HM;tuyenTick();G.run.scene=null;tuyenGap(true)");run("kyPick(kyOpts(G.run.scene).length-1);G.run.scene=null");
+    ok(run("G.run.arc.xt.i===2&&G.run.arc.xt.moi===1"), '"Để sau": nút vẫn mở, chờ');
+    ok(!run("tuyenGap()"), 'vừa gác thì chưa nhắc lại ngay');
+    const sl0=run("(W().suLuoc||[]).length");run("W().t+=7*HM;tuyenTick()");
+    ok(run("G.run.arc.xt.i===3&&G.run.arc.xt.dau.thon_vang===1&&G.run.arc.xt.lich[2].c==='~'&&G.run.arc.xt.ngoai===1"), 'lỡ hạn N3: tự diễn, đặt dấu, đi tiếp N4');
+    ok(run("(W().suLuoc||[]).length")>sl0&&/giáp hạt/.test(run("W().suLuoc.slice(-1)[0].t")), 'tự diễn ghi Sử lược');
+    // bản lưu cũ / lưu giữa tuyến
+    run("G=JSON.parse(JSON.stringify(G))");ok(run("G.run.arc.xt.i")===3, 'lưu – tải giữa tuyến giữ tiến độ');
+    // N4: NP02 đã mất → dùng thayThe, không hồi sinh
+    const ten2=run("vaiNow('NP02').ten");run("vaiGiet('NP02','test');W().t+=4*HM;tuyenTick();G.run.scene=null;tuyenGap(true)");
+    ok(run("G.run.scene.ev")==='tuyen:OR01:N4'&&!run("G.run.scene.text").includes(ten2)&&/quân dịch/.test(run("G.run.scene.text")), 'người giữ vai NP02 đã mất: kể qua vật chứng thay, không gọi '+ten2);
+    ok(run("vaiNow('NP02').song")===false, 'không hồi sinh người chết');
+    run("kyPick(1);G.run.scene=null");
+    // N5 → kết A
+    run("W().t+=6*HM;tuyenTick();G.run.scene=null;tuyenGap(true)");ok(run("kyOpts(G.run.scene)[1].no")!=='', 'kết đường khác: "thu tô" khoá vì chưa có ruộng mua');
+    run("kyPick(0);G.run.scene=null");
+    ok(run("G.run.arc.xt.xong===1&&G.run.arc.xt.ket==='A'"), 'đủ kho chung + đê sửa: kết A "Đèn còn trong thôn"');
+    ok(run("W().tuyenVong.slice(-1)[0].id==='OR01'&&W().tuyenVong.slice(-1)[0].ket==='A'")&&/bia người giữ giống/.test(run("W().suLuoc.slice(-1)[0].t")), 'kết ghi Sử lược + dấu vọng cho kiếp sau');
+    ok(run("G.run.arc.dl===null"), 'chưa có tệp đại lộ the_gia: không mở gì, không lỗi');
+    run("const n=W().suLuoc.length;tuyenTick();tuyenTick();G._n=n");ok(run("W().suLuoc.length===G._n"), 'xong rồi thì không ghi lặp');
+    // kiếp sau, cách hai trăm năm: dấu vọng còn, tuyến mới từ đầu
+    run("W().t+=200*HY;G.run.kiep=(G.run.kiep||1)+1;G.run.arc=null;G.run.log=[];tuyenTick()");
+    ok(/Người ta còn nhắc/.test(run("JSON.stringify(G.run.log)")), 'khoảng luân hồi dài: kiếp sau nghe dấu vọng');
+    ok(run("G.run.arc.xt.id==='OR01'&&G.run.arc.xt.i===0"), 'kiếp mới mở tuyến lại từ đầu');
+    // bỏ hết: nhảy năm mươi năm rồi chạy từng tháng — tự diễn tới cuối, kết "đứng ngoài", không kẹt
+    run("W().t+=50*HY;for(let i=0;i<80;i++){W().t+=HM;tuyenTick();}");
+    ok(run("G.run.arc.xt.xong===1&&G.run.arc.xt.ket==='ngoai'&&G.run.arc.xt.ngoai===5"), 'bỏ qua cả năm nút: thế giới tự diễn hết, kết "người đứng ngoài"');
+    // bản lưu cũ không có r.arc, đang ở giữa đời
+    fresh("G.run.origin='nong';delete G.run.arc");run("W().t+=HM;advanceTime(HM)");ok(run("!!G.run.arc&&G.run.arc.xt.id==='OR01'"), 'bản lưu cũ không có r.arc: tháng kế dựng lại');
+    // đại lộ: mở từ hồi 2 khi tuyến xuất thân đã kết, đổi được một lần
+    run(`(()=>{const mk=(id,d)=>{const A=JSON.parse(JSON.stringify(TUYEN.OR01));A.id=id;A.loai='dai_lo';A.daiLo=d;delete A.xuatThan;A.nut[0].boQuaNeuXuatThan=true;TUYEN[id]=A;(TUYEN_DL[d]=TUYEN_DL[d]||[]).push(id);};mk('DL07','the_gia');mk('DL03','de_nghiep');})()`);
+    run("G.run.arc.xt.xong=1;G.run.arc.xt.ket='A';tyDlTuMo()");ok(run("G.run.arc.dl&&G.run.arc.dl.id==='DL07'&&G.run.arc.dl.i===1"), 'đại lộ gợi ý mở sau tuyến xuất thân, bắt đầu từ hồi 2');
+    ok(run("tuyenMoDaiLo('de_nghiep')")&&run("G.run.arc.dl.id")==='DL03', 'đổi đại lộ lần một: được');
+    ok(!run("tuyenMoDaiLo('the_gia')"), 'đổi lần hai: không được');
+    ok(run("tuyenView().length")===2, 'tuyenView: Sổ tay đọc được hai tuyến');
+    run("delete TUYEN.DL07;delete TUYEN.DL03;delete TUYEN_DL.the_gia;delete TUYEN_DL.de_nghiep");
+    run("tuyenTick();tuyenGap(true)");ok(run("tuyenView().length")===1, 'bản lưu trỏ tới tuyến đã gỡ: bỏ qua, không lỗi');
+  },
   dat_ma() {
     fresh();
     run("var vyRun=(n)=>{const w=W();for(let i=0;i<n;i++){w.t+=HY;worldYearsTo(w);}}");
