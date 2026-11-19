@@ -12,9 +12,19 @@ function gapVaiChu(s,how){if(typeof s!=='string')return;for(const m of s.matchAl
 {const _t=tuThay;tuThay=function(n){const s=_t.apply(this,arguments);const ma=n&&n.anchor&&TU_THAY[n.anchor];if(s&&ma&&G.run&&G.run.at===n.id)gapVai(ma,'thay');return s;};}
 // Sửa-N (câu 71): mọi NPC có tên mà người chơi từng tiếp xúc gần đều vào "Người đã gặp", không cần thiện cảm cao.
 // r.gapNg={tên:{ten,y,how}} cho người không giữ vai NP; người đang giữ vai NP thì ghi vào r.gapVai như cũ. how: noi, dau, cung, tk, amhoi, tang...
+// Sửa-O (câu 75): người "thoáng qua" lâu không gặp lại thì tự xoá; đạt ngưỡng quen biết thì giữ mãi.
+//   Mỗi mục thêm c = số lần tiếp xúc (mỗi ngày tính một lần), t = lần gặp sau cùng, q = 1 đã quen (giữ vĩnh viễn).
+//   Quen khi: c ≥ GAP_NG.quen lần, hoặc tiếp xúc sâu (GAP_NG.sau: đi cùng, tặng lễ, thiên kiêu), hoặc thiện cảm |fav| ≥ GAP_NG.fav.
+//   Chưa quen mà quá GAP_NG.nam năm không gặp lại → xoá (dọn lúc ghi người mới và lúc mở Sổ tay). Người giữ vai NP (r.gapVai) không bị xoá.
+const GAP_NG={quen:3,sau:['cung','le','tk'],fav:20,nam:3};
+function gapQuen(o){if(o.q)return true;if((o.c||1)>=GAP_NG.quen||GAP_NG.sau.includes(o.how)||Math.abs(favOf(o.ten)||0)>=GAP_NG.fav)o.q=1;return !!o.q;}
+function gapDon(){const r=G.run;const M=r&&r.gapNg;if(!M||!W())return;const t=W().t;
+  for(const k in M){const o=M[k];if(o.t==null)o.t=t;if(gapQuen(o))continue;if(t-o.t>GAP_NG.nam*HY){delete M[k];dbg('vai.gapXoa',{ten:k});}}}
 function gapNguoi(ten,how){const r=G.run;if(!r||!ten||typeof ten!=='string'||ten==='???'||ten.charAt(0)==='@'||!W())return false;
   for(const ma in VAI_NP){const v=vaiNow(ma);if(v&&v.song&&v.ten===ten)return gapVai(ma,how);}
-  const M=r.gapNg||(r.gapNg={});if(M[ten])return false;M[ten]={ten,y:tYear(W().t),how:how||'noi'};dbg('vai.gapNg',{ten,how:how||''});return true;}
+  const M=r.gapNg||(r.gapNg={});const t=W().t;const o=M[ten];
+  if(o){if(o.t==null||Math.floor(t/HD)>Math.floor(o.t/HD))o.c=(o.c||1)+1;o.t=t;if(how&&GAP_NG.sau.includes(how))o.q=1;gapQuen(o);return false;}
+  gapDon();M[ten]={ten,y:tYear(t),how:how||'noi',c:1,t};gapQuen(M[ten]);dbg('vai.gapNg',{ten,how:how||''});return true;}
 {const _fa=favAdd;favAdd=function(n,d,why){const x=_fa.apply(this,arguments);if(n&&d)gapNguoi(n,'noi');return x;};}
 {const _fg=favGift;favGift=function(n){const x=_fg.apply(this,arguments);if(x===''&&n)gapNguoi(n,'le');return x;};}
 {const _me=meetEnt;meetEnt=function(e){if(e&&e.name&&['khach','tuantra','thuong','thienkieu','truysat'].includes(e.type)&&G.run)gapNguoi(e.name,e.type==='truysat'?'dau':'noi');return _me.apply(this,arguments);};}
@@ -25,7 +35,7 @@ function gapNguoi(ten,how){const r=G.run;if(!r||!ten||typeof ten!=='string'||ten
 {const _as=amStart;amStart=function(n){const o=_as.apply(this,arguments);const sc=G.run&&G.run.scene;if(o&&sc&&sc.type==='amhoi')for(const p of sc.ppl)if(p.nhan){if(p.k==='vai')gapVai(p.ma,'amhoi');else{const t=amThat(p);if(t&&t.ten&&t.ten!=='?')gapNguoi(t.ten,'amhoi');}}return o;};}
 // người giữ vai bị ta ra tay (tuyến) → ghi nợ cho thế lực của người ấy (câu 72)
 {const _vg=vaiGiet;vaiGiet=function(ma,ly){const P=VAI_NP[ma],v=vaiNow(ma),ok=v&&v.song;const res=_vg.apply(this,arguments);if(res&&ok&&P&&P.fa&&G.run){const H=G.run.faHai||(G.run.faHai={});H[P.fa]=(H[P.fa]||0)+1;}return res;};}
-function soVaiView(){const r=G.run;if(!r)return [];const M=r.gapVai||{};const L=[];
+function soVaiView(){const r=G.run;if(!r)return [];gapDon();const M=r.gapVai||{};const L=[];
   for(const ma of Object.keys(M).sort()){const o=M[ma],v=vaiNow(ma),P=VAI_NP[ma];if(!v||!P)continue;const cung=v.doi===o.doi;
     const fv=v.song?favLv(favOf(v.ten))[1]:'';
     L.push({ma,ten:v.song?v.ten:o.ten,vai:P.vai,noi:v.noiTen,song:cung?v.song:false,

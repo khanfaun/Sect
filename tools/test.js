@@ -338,6 +338,15 @@ const TESTS = {
     const nm=run("vaiNow('NP03').ten");run("gapNguoi("+JSON.stringify(nm)+",'noi')");
     ok(run("!!G.run.gapVai.NP03&&!(G.run.gapNg||{})["+JSON.stringify(nm)+"]"), 'người đang giữ vai NP: ghi vào gapVai, không trùng gapNg');
     run("delete G.run.gapNg;G=JSON.parse(JSON.stringify(G))");ok(run("soVaiView().length>=1"), 'bản lưu cũ (không gapNg) chạy được');
+    // Sửa-O câu 75: thoáng qua lâu không gặp thì xoá, đã quen thì giữ mãi
+    run("gapNguoi('Khách Qua Đường','noi');gapNguoi('Bạn Cũ','noi');W().t+=HD;gapNguoi('Bạn Cũ','noi');W().t+=HD;gapNguoi('Bạn Cũ','noi');gapNguoi('Người Tặng','le')");
+    ok(run("!G.run.gapNg['Khách Qua Đường'].q&&G.run.gapNg['Bạn Cũ'].q===1&&G.run.gapNg['Người Tặng'].q===1"), 'gặp ba ngày khác nhau / tặng lễ: thành quen biết');
+    run("gapNguoi('Bạn Cũ','noi')");ok(run("G.run.gapNg['Bạn Cũ'].c")===3, 'cùng ngày gặp lại không tính thêm lần');
+    run("W().t+=(GAP_NG.nam-1)*HY");ok(run("soVaiView().some(v=>v.ten==='Khách Qua Đường')"), 'thoáng qua, chưa quá hạn: vẫn còn');
+    run("W().t+=2*HY");const V2=JSON.parse(run("JSON.stringify(soVaiView().map(v=>v.ten))"));
+    ok(!V2.includes('Khách Qua Đường')&&V2.includes('Bạn Cũ')&&V2.includes('Người Tặng'), 'quá '+run('GAP_NG.nam')+' năm không gặp: người thoáng qua bị xoá, người quen còn');
+    run("W().t+=50*HY");ok(run("soVaiView().some(v=>v.ten==='Bạn Cũ')"), 'người quen giữ vĩnh viễn');
+    run("G.run.gapNg['Cũ']={ten:'Cũ',y:1,how:'noi'};soVaiView()");ok(run("G.run.gapNg['Cũ']&&G.run.gapNg['Cũ'].t===W().t"), 'mục cũ (không c/t): bắt đầu đếm từ lúc tải, không xoá ngay');
   },
   // Sửa-N câu 72: thang quan hệ thế lực 7 mức, Đồng minh là cờ riêng
   fa_thang() {

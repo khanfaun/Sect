@@ -923,3 +923,8 @@ Luật: `core2/64-dat-dai.js` (sinh ô, lọc nút), `core2/65-dat-dai-xay-pha.j
 - Thành viên = mọi người giữ vai NP thuộc thế lực còn sống; trọng số: người đứng đầu ×3, có tu vi ×2, phàm / đệ tử ×1; người chưa gặp (không có trong `r.gapVai` cùng đời) tính trung tính. Thiện cảm −100..100 → −1..1.
 - Việc làm: tuyến (`r.faQh`×2) + tiếng ở căn cứ (×0,15) + cống hiến (/5, tối đa 15) − người của họ bị giết (`r.faHai`×10).
 - Chí giao cần thêm cống hiến lớn: `faCong(id)` ≥ `FA_QH.chiCong` = 200; thiếu thì dừng ở Thân thiết. Chỉ việc làm (không ai trong thế lực quý / ghét) thì tối đa Thân thiết / thấp nhất Thù địch.
+### O.75 — người thoáng qua tự xoá
+- `r.gapNg[tên]` thêm `c` (số lần tiếp xúc, mỗi ngày tính một lần), `t` (lần gặp sau cùng), `q` (đã quen, giữ vĩnh viễn). Bảng `GAP_NG` (core2/63).
+- Ngưỡng quen biết (tự chọn): gặp ở 3 ngày khác nhau, hoặc tiếp xúc sâu (đi cùng, tặng lễ, thiên kiêu), hoặc thiện cảm |fav| ≥ 20.
+- Chưa quen mà 3 năm không gặp lại → xoá (`gapDon`, chạy khi ghi người mới và khi mở Sổ tay). Người giữ vai NP (`r.gapVai`) không bao giờ bị xoá.
+- Bản lưu cũ: mục không có `t` bắt đầu đếm từ lúc tải.
