@@ -498,3 +498,7 @@ File hướng dẫn (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) phải có: đị
 - Nhiều nội tại tầng 3–4 (chế tạo, đan, phù, khế hồn…) mới ghi chữ, chưa có hệ để cộng số.
 - Việc nhập học của P.2 (hộ tống cho NP25, trả tên ba hài cốt…) gộp vào phí + hợp đồng kiểm chứng; chưa có sự kiện riêng của từng thầy (chờ NPC ở Đ8).
 - Lời riêng cho kỳ ngộ thăng bậc của 16 nghề phàm mới; 4 kết cục từng nghề (B) chưa làm.
+
+## NGƯỜI DÙNG CHỐT ĐỢT 5 (câu 32–33) — làm sau Đ7 (Sửa-H)
+32. CÓ đưa đồ cải căn lên đấu giá thường. Thứ tự lô: đồ càng quý/phẩm càng cao càng xếp về cuối buổi đấu giá ("vật áp trục" xuất hiện sau cùng).
+33. (người dùng chưa hiểu câu hỏi tỉ lệ — đã giải thích lại; chờ trả lời, tạm giữ số hiện tại)

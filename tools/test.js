@@ -34,7 +34,7 @@ const TESTS = {
     ok(run("Object.keys(TU_NGHE).length")===16&&run("Object.keys(TU_ART).length")===16, 'mười sáu nghề tu, mười sáu công pháp');
     ok(run("Object.keys(TU_NGHE).every(id=>TU_ART[id].lines.filter(x=>x.sk).map(x=>x.sk).join()===['a','b','c'].map(c=>'sk'+id.slice(2)+c).join()&&['a','b','c'].every(c=>!!SK['sk'+id.slice(2)+c]))"), 'mỗi công pháp mở đúng ba chiêu A, B, C');
     run(`(()=>{const r=G.run;r.scene=null;const n=tuNode('TU01');r.at=n;openPlace(n);})()`);run("venueDo('tumon','hoc:TU01')");
-    run("const k=G.run.tu.k.TU01;tuHd('TU01');k.xp=300;tuTang('TU01');G.run.realm=1;tuHd('TU01');tuTang('TU01');syncSkills()");
+    run("G.run.tu.k.TU01.xp=0;tuHd('TU01');G.run.tu.k.TU01.xp=300;tuTang('TU01');G.run.realm=1;tuHd('TU01');tuTang('TU01');syncSkills()");
     ok(run("tuArtOf('TU01').lv")===6&&['sk01a','sk01b','sk01c'].every(id=>run(`G.run.skills.some(k=>k.id==='${id}')`)), 'học CP01 tới tầng ba: có SK01A–SK01C sau syncSkills');
     run("syncSkills();syncSkills()");ok(run("G.run.skills.filter(k=>/^sk01/.test(k.id)).length")===3, 'dựng lại chiêu nhiều lần không mất chiêu nghề tu');
     // luật ghép: Phật pháp (pháp môn mở rộng Đ11) với Huyết thuật bị từ chối
