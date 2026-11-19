@@ -1,7 +1,7 @@
 // ĐỢT 6: cải tạo linh căn (HN A.3; C §5.3). Bảng CAI_CAN, CC_VT, CC_CFG: content/rules/cai-can.js; chữ: content/text/cai-can.json
 // Người chơi: r.cc={id,s:bước,t0:lúc vào bước,pf:{đầu mối đã kiểm},h:giờ đã phục vụ,care:số năm đã chăm,lua} — chỉ một đường đang làm.
 //   r.ccHeard={id:1} dấu vết đã nghe · r.ccOk=1 đã cải căn thành công trong kiếp (mỗi kiếp một lần) · r.ccFail={id:1} đường đã hỏng/bỏ trong kiếp
-//   r.ccWait thời điểm hết chờ sau thất bại · r.ccVt={vật tư:số} · r.ccHau=[{until,fx}] suy nhược có hạn · r.ccFlag={seo_mach,bong_mach,huyet_can,nuoi_co,di_nguyen}
+//   r.ccWait thời điểm hết chờ sau thất bại · vật tư nằm trong túi (r.qitems 'cc_'+mã, Sửa-G) · r.ccGui=[{vt,at}] món gửi lại khi túi đầy · r.ccHau=[{until,fx}] suy nhược có hạn · r.ccFlag={seo_mach,bong_mach,huyet_can,nuoi_co,di_nguyen}
 // Thế giới: W().ccSrc[id]={con:1|0,hoi:năm hồi (-1 không hồi),node,el,bloomY} — nguồn có thật, người khác có thể dùng mất; chết đi không sinh lại.
 // G.meta.tucCan={root,node} vật bản mệnh chôn ở kiếp trước.
 FEAT.cc=1;
@@ -27,9 +27,26 @@ function ccSrc(id){const w=W();w.ccSrc=w.ccSrc||{};let s=w.ccSrc[id];const P=CAI
 function ccVtNode(vt){const V=CC_VT[vt];if(!V||!V.loc)return null;const w=W();w.ccVtN=w.ccVtN||{};
   if(w.ccVtN[vt]==null||!nodeById(w.ccVtN[vt])){const n=anchorNode(V.loc);w.ccVtN[vt]=n?n.id:null;}return w.ccVtN[vt];}
 function ccSt(r){r=r||G.run;if(!r)return null;if(!r.ccHeard||typeof r.ccHeard!=='object')r.ccHeard={};if(!r.ccFail||typeof r.ccFail!=='object')r.ccFail={};
-  if(!r.ccVt||typeof r.ccVt!=='object')r.ccVt={};if(!Array.isArray(r.ccHau))r.ccHau=[];if(!r.ccFlag||typeof r.ccFlag!=='object')r.ccFlag={};return r;}
-function ccHave(vt){const r=ccSt();return r.ccVt[vt]|0;}
-function ccVtAdd(vt,n){const r=ccSt();r.ccVt[vt]=Math.max(0,(r.ccVt[vt]|0)+n);if(!r.ccVt[vt])delete r.ccVt[vt];dbg('cc.vt',{vt,n});}
+  if(!Array.isArray(r.ccHau))r.ccHau=[];if(!r.ccFlag||typeof r.ccFlag!=='object')r.ccFlag={};if(!Array.isArray(r.qitems))r.qitems=[];if(!Array.isArray(r.ccGui))r.ccGui=[];
+  // Sửa-G (câu 31): bản lưu cũ có sổ riêng r.ccVt → chuyển vào túi đồ; túi đầy thì gửi lại ở nơi đang đứng (r.ccGui)
+  if(r.ccVt&&typeof r.ccVt==='object'&&r===G.run){const old=r.ccVt;delete r.ccVt;for(const v in old)if(CC_VT[v]&&(old[v]|0)>0)ccVtAdd(v,old[v]|0,'cu');}
+  return r;}
+// Sửa-G (câu 31): vật tư cải căn là vật trong túi (r.qitems, mã 'cc_'+vật), mỗi món một ô như vật phẩm thường
+for(const v in CC_VT)CAT.byId['cc_'+v]={id:'cc_'+v,n:CC_VT[v].n,i:'📦',d:contentText('cc.vtTip'),use:contentText('cc.vtUse')};
+function ccQid(vt){return 'cc_'+vt;}
+function ccHave(vt){const r=ccSt();const q=ccQid(vt);return r.qitems.filter(x=>x===q).length;}
+function ccBagFree(){return Math.max(0,bagCap()-bagStacks());}
+function ccVtAdd(vt,n,why){const r=ccSt();const q=ccQid(vt);let gui=0;
+  if(n>0)for(let i=0;i<n;i++){if(ccBagFree()>0)r.qitems.push(q);else{r.ccGui.push({vt,at:r.at!=null?r.at:r.queAt});gui++;}}
+  else for(let i=0;i<-n;i++){const j=r.qitems.indexOf(q);if(j<0)break;r.qitems.splice(j,1);}
+  if(gui){const nd=nodeById(r.at!=null?r.at:r.queAt);note(contentText('cc.guiNote',[CC_VT[vt].n,nd?nd.name:'']),'dn');log(contentText('cc.guiLog',[CC_VT[vt].n,gui,nd?nd.name:'']));}
+  dbg('cc.vt',{vt,n,gui,why:why||''});}
+// lấy lại món đã gửi ở nơi này (khi túi có chỗ)
+function ccGuiOpts(n){const r=G.run;const L=[];const seen={};for(const g of r.ccGui||[]){if(g.at!==n.id||seen[g.vt])continue;seen[g.vt]=1;
+  const k=r.ccGui.filter(x=>x.at===n.id&&x.vt===g.vt).length;
+  L.push({id:'lay:'+g.vt,l:contentText('cc.lay',[CC_VT[g.vt].n]),d:contentText('cc.layD',[k]),h:0,st:0,no:ccBagFree()>0?'':contentText('cc.tuiDay')});}return L;}
+function ccLay(n,vt){const r=G.run;const i=r.ccGui.findIndex(g=>g.at===n.id&&g.vt===vt);if(i<0||ccBagFree()<=0)return false;r.ccGui.splice(i,1);r.qitems.push(ccQid(vt));dbg('cc.lay',{vt});
+  if(r.cc)ccAuto();return ccRes(contentText('cc.layT',[CC_VT[vt].n]),[chip('📦',CC_VT[vt].n,contentText('cc.vtTip'),'up')]);}
 function ccOdds(p){if(p>=1)return contentText('cc.chac');const k=Math.floor(p*10+1e-9);if(k<=0)return contentText('cc.oddsIt');return contentText('cc.odds',[CC_SO[k],CC_SO[10-k]]);}
 function ccNodeName(id){const s=ccSrc(id);const n=s&&nodeById(s.node);return n?n.name:contentText('cc.noiLa');}
 // ai được theo: người vô căn đã trắc (vo), tu sĩ có căn chưa Viên Mãn (nang), có vật bản mệnh kiếp trước (tuc)
@@ -116,7 +133,7 @@ function ccOutTxt(o){if(o.nang)return contentText('cc.kqNang');if(o.tuc)return c
 function ccFailTxt(f){const L=[];if(f.die)L.push(contentText('cc.hChet'));if(f.hpP)L.push(contentText('cc.hHp'));if(f.tam)L.push(contentText('cc.hYeu',[f.tam.nam>=1?f.tam.nam+' năm':Math.round(f.tam.nam*12)+' tháng']));
   if(f.life)L.push(contentText('cc.hTho',[-f.life]));if(f.wound)L.push(contentText('cc.hThuong',[WOUND[f.wound]?WOUND[f.wound].n.toLowerCase():'']));if(f.ngheDown)L.push(contentText('cc.hNghe'));
   return L.length?L.join(', '):contentText('cc.hKhong');}
-function ccOpts(n){const r=ccSt();const L=[];if(!r||!n)return L;
+function ccOpts(n){const r=ccSt();const L=[];if(!r||!n)return L;L.push(...ccGuiOpts(n));
   if(!r.cc){const here=ccHereIds(n).filter(id=>ccFor(id,r));
     if(here.some(id=>!r.ccHeard[id]))L.push({id:'hoi',l:contentText('cc.hoi'),d:contentText('cc.hoiD'),h:2,st:0});
     for(const id of here.filter(id=>r.ccHeard[id])){const P=CAI_CAN[id];L.push({id:'bat:'+id,l:contentText('cc.bat',[P.n]),d:P.clue.replace('{{0}}',n.name)+' '+contentText('cc.batD'),h:0,st:0,no:ccWhyStart(id)});}
@@ -148,6 +165,7 @@ function ccDo(n,oid){const r=ccSt();const o=ccOpts(n).find(x=>x.id===oid);if(!o|
     return ccRes(L.map(id=>CAI_CAN[id].clue.replace('{{0}}',n.name)).join(' '));}
   if(p[0]==='bat'){ccStart(p[1]);return ccRes(contentText('cc.batT',[CAI_CAN[p[1]].n]));}
   if(p[0]==='chon')return ccChon(n);
+  if(p[0]==='lay')return ccLay(n,p[1]);
   const id=r.cc.id,P=CAI_CAN[id],st=ccStep(r);
   if(p[0]==='bo'){ccStop('bo');log(contentText('cc.boLog',[P.n]));return ccRes(contentText('cc.boT'));}
   if(p[0]==='tim'){const o2=ccVtDo('tim',p[1]);if(!o2)return false;return o2===true?ccRes(''):ccRes(o2.t,o2.ch);}
@@ -248,7 +266,10 @@ function ccYear(){const r=G.run;for(const id in CAI_CAN){const P=CAI_CAN[id];if(
 function ccView(){const r=ccSt();if(!r)return null;const cur=r.cc&&CAI_CAN[r.cc.id];
   const heard=Object.keys(r.ccHeard).filter(id=>CAI_CAN[id]&&!(r.cc&&r.cc.id===id)).map(id=>({id,n:CAI_CAN[id].n,noi:ccNodeName(id),t:r.ccFail[id]?contentText('cc.vHong'):!ccAvail(id)?contentText('cc.matNguon'):ccFor(id,r)?contentText('cc.vCo'):contentText('cc.khongHop.'+CAI_CAN[id].mode)}));
   let act=null;if(cur){const st=ccStep(r);act={id:r.cc.id,n:cur.n,noi:ccNodeName(r.cc.id),buoc:contentText('cc.b.'+st.b),goi:ccHint(st)};}
-  return {ok:!!r.ccOk,act,heard,vt:Object.keys(r.ccVt).map(v=>({n:CC_VT[v]?CC_VT[v].n:v,k:r.ccVt[v]}))};}
+  return {ok:!!r.ccOk,act,heard,vt:ccVtList(r)};}
+function ccVtList(r){const L=[];for(const v in CC_VT){const k=ccHave(v);const g=r.ccGui.filter(x=>x.vt===v);
+  if(k)L.push({n:CC_VT[v].n,k});const by={};for(const x of g)by[x.at]=(by[x.at]||0)+1;
+  for(const at in by){const nd=nodeById(+at);L.push({n:CC_VT[v].n+' '+contentText('cc.guiO',[nd?nd.name:'']),k:by[at]});}}return L;}
 function ccHint(st){const r=G.run;if(st.b==='proof')return contentText('cc.g.proof',[CC_SO[Object.keys(r.cc.pf).length]||'',CC_SO[st.L.length]]);
   if(st.b==='gain')return contentText('cc.g.gain',[st.vt.filter(([v,k])=>ccHave(v)<k).map(([v])=>CC_VT[v].n+(CC_VT[v].loc&&ccVtNode(v)!=null?' ('+nodeById(ccVtNode(v)).name+')':'')).join(', ')]);
   if(st.b==='serve')return contentText('cc.g.serve',[st.l.toLowerCase(),durH(Math.max(0,ccServeH(st)-r.cc.h))]);
@@ -257,7 +278,7 @@ function ccHint(st){const r=G.run;if(st.b==='proof')return contentText('cc.g.pro
   if(st.b==='rite'){if(st.bloom&&!ccBloomOpen(r.cc.id))return contentText('cc.leChoNo',[durH(Math.max(HD,ccBloomT(r.cc.id)-W().t))]);if(st.mua&&seasonOf(W().t)!==st.mua)return contentText('cc.leMua.'+st.mua);return contentText('cc.g.rite');}
   return '';}
 // ---------- bản lưu cũ ----------
-{const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._ccV1){r._ccV1=1;ccSt(r);if(r.cc&&!CAI_CAN[r.cc.id])r.cc=null;}return r;};}
+{const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&r.ccVt)ccSt(r);if(r&&!r._ccV1){r._ccV1=1;ccSt(r);if(r.cc&&!CAI_CAN[r.cc.id])r.cc=null;}return r;};}
 {const _mx=migrateX;migrateX=function(d){d=_mx.apply(this,arguments);const w=d&&d.meta&&d.meta.world;if(w&&w.ccSrc&&typeof w.ccSrc!=='object')w.ccSrc={};return d;};}
 // ---------- Sửa-G: U Minh Ám Hội đôi khi có một món cải căn đang thiếu, giá rất cao ----------
 function ccAmVt(n){const r=G.run;if(!r||!r.cc||!n)return null;const T=ccThieu();if(!T.length)return null;const m=ncMonth();

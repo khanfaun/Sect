@@ -141,5 +141,13 @@
   "cc.kyLog": "Cơ duyên tình cờ: ngươi có được {{0}}.",
   "cc.kyNote": "Kỳ ngộ: được {{0}}",
   "cc.amMua": "Đổi lấy {{0}} ({{1}})",
-  "cc.amMuaD": "Hiếm khi có món này ở Ám Hội; kẻ bán biết ngươi cần nên hét giá cắt cổ."
+  "cc.amMuaD": "Hiếm khi có món này ở Ám Hội; kẻ bán biết ngươi cần nên hét giá cắt cổ.",
+  "cc.vtUse": "Vật tư cải tạo linh căn, quý hiếm. Chiếm một ô túi; nghi thức chỉ dùng món mang trong túi.",
+  "cc.guiNote": "Túi đầy: {{0}} gửi lại ở {{1}}",
+  "cc.guiLog": "Túi đã đầy, ngươi gửi lại {{1}} {{0}} ở {{2}}; dọn túi rồi quay về lấy.",
+  "cc.lay": "Lấy lại {{0}} đã gửi",
+  "cc.layD": "Đang gửi ở đây: {{0}} món.",
+  "cc.tuiDay": "Túi đã đầy, bỏ bớt đồ trước.",
+  "cc.layT": "Đã lấy lại {{0}}.",
+  "cc.guiO": "(gửi ở {{0}})"
 }

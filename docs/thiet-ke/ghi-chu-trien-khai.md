@@ -124,7 +124,7 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
-- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-E.
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-G.
 - Còn: Đ7 trở đi.
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
@@ -412,7 +412,7 @@ Luật: `src/game/core2/49-cai-can.js` (số 41 đã dùng cho võ đạo nên l
 ### Còn dở
 - Thưởng Các "Manh mối cơ duyên" (A.3) chưa thêm vào cửa hàng Thưởng Các.
 - Sự kiện chữ dài cho từng bước (S/high) mới ở mức một câu/bước trong bảng; chưa có sự kiện ngẫu nhiên dọc đường (vd bệnh nhân CC01 nhờ việc).
-- Vật tư cải căn nằm trong `r.ccVt` (sổ riêng, hiện ở thẻ Cơ duyên), chưa chiếm ô túi đồ.
+- ~~Vật tư cải căn nằm trong `r.ccVt`~~ → đã chuyển vào túi đồ ở Sửa-G.
 - Chưa chạy bot (chờ người dùng cho phép).
 
 ## NGƯỜI DÙNG CHỐT ĐỢT 3 (câu 25–28) — làm sau Đ6 (Sửa-F)
@@ -444,3 +444,21 @@ File hướng dẫn (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) phải có: đị
 31. Vật tư cải căn PHẢI nằm trong túi đồ (chiếm ô như vật phẩm thường; bỏ sổ riêng r.ccVt, chuyển bản lưu cũ vào túi). Làm ở Sửa-G.
 - THỨ TỰ CHỐT: Sửa-F → Sửa-G → Đ7 → Đ8 → (Đ9.1 bộ máy + schema + công cụ kiểm) → viết file hướng dẫn GPT (Đ9.0) → GPT viết nội dung. Sau Sửa-F: DỪNG, chờ người dùng bảo "tiếp tục".
 - Kết quả đợt Sửa-F: `npm run test:rules` 660 ý đạt (653 + 2 bí tịch + 5 vay); `node tools/test-ui.js` 155 đạt.
+
+## Sửa-G — câu 29, 31 (đợt 4)
+### G.29 — vật tư cải căn quý hiếm, "chỉ gặp không thể cầu"
+- Rà: không tiệm/hộp nào khác bán vật tư cải căn (grep tên vật tư chỉ thấy ở `content/rules/cai-can.js`, `49-cai-can.js`). Bỏ nút **Mua** thẳng trong hộp Cơ duyên; `CC_VT.mua` đổi thành `gia` (giá trị khi gặp người chịu nhượng), `st` (linh thạch) giữ nghĩa tương tự.
+- Nguồn còn lại: làm công (`cong`), tự chế (`che`, nguyên liệu Cam Thạch Phấn / Dầu Lạc Kim cũng chỉ dò hỏi được), phần thưởng phục vụ (`cho`, vd CC01 cứu dịch được ba Hộ Mạch Tán), và ba đường mới:
+  1. **Dò hỏi người giữ** (`tim:<vật>`, 3 ngày, mỗi vật một lần/tháng): `CC_CFG.tim`=35% dò ra, `ban`=50% chịu nhượng (không thì "có tiền cũng không bán"); chịu thì có nút nhượng trong tháng đó, giá ×`hiemX`=3. Vật chỉ có ở một nơi (Mảnh Sao Hạ/Thượng) không dò hỏi.
+  2. **Kỳ ngộ**: mỗi tháng đang ở bước gom, `CC_CFG.ky`=4% được một món còn thiếu (kể cả nguyên liệu tự chế); `dbg('cc.ky')`.
+  3. **U Minh Ám Hội**: mỗi tháng mỗi nơi `CC_CFG.am`=25% (băm, không rút số) có một món đang thiếu, giá ×`amX`=5, tính vào lượt giao dịch của Ám Hội. Phàm nhân không vào Ám Hội nên đường của người phàm dựa vào dò hỏi/làm công/kỳ ngộ.
+- Hai đường người lao động: CC01 vẫn đi bằng 18 tháng cứu dịch (thưởng ba Hộ Mạch Tán); CC03 năm vật dưỡng mạch đổi bằng làm công. Bài `cai_can_duong` (ép CC_FORCE=1: dò hỏi luôn ra và chịu bán) vẫn đi hết 17 đường.
+- Chưa làm: lô cải căn ở **đấu giá thường** (sự kiện `dau_gia` chỉ có gửi bán) — hỏi lại có cần không.
+- Bài mới `cai_can_hiem`.
+
+### G.31 — vật tư cải căn nằm trong túi đồ
+- Vật tư là vật trong túi `r.qitems` mã `cc_<vật>` (đăng ký vào `CAT.byId` lúc nạp), mỗi món một ô như vật phẩm thường (`bagStacks`, `bagItems`, vứt được). Bỏ sổ `r.ccVt`; nghi thức chỉ tính món mang trong túi.
+- **Túi đầy**: món mới nhận được **gửi lại ở nơi đang đứng** (`r.ccGui=[{vt,at}]`, có báo và nhật ký); hộp Cơ duyên ở nơi đó có nút "Lấy lại … đã gửi" (khoá khi túi còn đầy). Chọn cách này thay vì để ở nhà vì không phải ai cũng có nhà (r.nha) và nơi nhận vật luôn có hộp Cơ duyên. Sổ tay thẻ Cơ duyên ghi cả món đang gửi và nơi gửi.
+- Bản lưu cũ: `r.ccVt` chuyển vào túi lúc nạp (bọc `run2`, cần `G.run` để biết số ô trống nên không làm trong `migrateX`); túi đầy thì gửi lại tại chỗ.
+- Bài mới `cai_can_tui`.
+- Kết quả: `npm run test:rules` 683 ý đạt (660 + 12 hiếm + 11 túi); `node tools/test-ui.js` 155 đạt.

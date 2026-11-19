@@ -1254,6 +1254,29 @@ const TESTS = {
     ok(run("ltGet(0)")===s0-ao.st&&(run("ccHave('tao_hoa_dich')")===1||run("ccStep().b")==='rite'), 'đổi được ở Ám Hội, trừ linh thạch');
     run("CC_FORCE=null");ok(run(`W().regions.flatMap(R=>R.nodes).filter(n=>!ccAmVt(n)).length>0`), 'không phải lúc nào Ám Hội cũng có');
   },
+  // Sửa-G câu 31: vật tư cải căn chiếm ô túi đồ; túi đầy thì gửi lại tại chỗ; bản lưu cũ r.ccVt chuyển vào túi
+  cai_can_tui() {
+    fresh("G._ngNoEv=1;G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1");
+    const s0=run("bagStacks()");run("ccVtAdd('ho_mach_tan',2)");
+    ok(run("bagStacks()")===s0+2&&run("ccHave('ho_mach_tan')")===2&&run("G.run.qitems.filter(x=>x==='cc_ho_mach_tan').length")===2, 'mỗi món vật tư chiếm một ô túi ('+s0+' → '+run("bagStacks()")+')');
+    ok(run("bagItems().some(it=>it.key==='vcc_ho_mach_tan'&&it.n==='Hộ Mạch Tán')"), 'hiện trong danh sách túi đồ');
+    ok(run("G.run.ccVt===undefined"), 'không còn sổ riêng r.ccVt');
+    run("bagDrop('vcc_ho_mach_tan',1)");ok(run("ccHave('ho_mach_tan')")===1, 'vứt được như vật phẩm thường');
+    // túi đầy
+    run("(()=>{let k=0;while(ccBagFree()>0&&k++<99)G.run.qitems.push('luong_kho');})()");ok(run("ccBagFree()")===0, 'túi đầy');
+    const at=run("G.run.at");run("ccVtAdd('mach_thao',1)");
+    ok(run("ccHave('mach_thao')")===0&&run(`G.run.ccGui.length===1&&G.run.ccGui[0].at===${at}`), 'túi đầy: vật tư gửi lại ở nơi đang đứng, không mất');
+    ok(run("ccView().vt.some(x=>/Mạch Thảo/.test(x.n)&&/gửi ở/.test(x.n))"), 'Sổ tay ghi món đang gửi và nơi gửi');
+    run(`(()=>{const r=G.run;r.scene=null;openPlace(${at});r.scene.venue='coduyen';})()`);
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='coduyen')")&&!!run("ccOpts(nodeById(G.run.at)).find(o=>o.id==='lay:mach_thao'&&o.no)"), 'nút lấy lại có, nhưng khoá khi túi đầy');
+    run("G.run.qitems.splice(G.run.qitems.indexOf('luong_kho'),1)");run("venueDo('coduyen','lay:mach_thao')");
+    ok(run("ccHave('mach_thao')")===1&&run("G.run.ccGui.length")===0, 'dọn túi xong lấy lại được');
+    // bản lưu cũ
+    fresh("G.run.ccVt={ho_mach_tan:2,kim_sa:1};G.run.qitems=(G.run.qitems||[]).filter(x=>!/^cc_/.test(x))");run("run2()");
+    ok(run("G.run.ccVt===undefined&&ccHave('ho_mach_tan')===2&&ccHave('kim_sa')===1"), 'bản lưu cũ: r.ccVt chuyển vào túi');
+    fresh("(()=>{let k=0;while(ccBagFree()>0&&k++<99)G.run.qitems.push('luong_kho');})();G.run.ccVt={kim_sa:2}");run("run2()");
+    ok(run("G.run.ccVt===undefined&&ccHave('kim_sa')===0&&G.run.ccGui.filter(g=>g.vt==='kim_sa').length===2"), 'bản lưu cũ, túi đầy: gửi lại tại chỗ, không mất');
+  },
   // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
   tan_thu() {
     fresh();
