@@ -98,7 +98,8 @@ function tyKy(S,N){const A=TUYEN[S.id];const id=tyKyId(S,N);let ev=KYNGO.find(x=
   ev.c.push({l:contentText('ty.deSau'),go:()=>{const S2=tyFind(S.id)||S;S2.moi=1;S2.nhac=W().t;S2.nn=(S2.nn||0)+1;return {t:contentText('ty.deSauT'),ch:[]};}});
   return ev;}
 // đưa lời mời ra (khi đang ở ngoài bản đồ, không có cảnh khác). trả true nếu mở hộp thoại.
-function tuyenGap(force){const r=G.run;if(!r||(r.scene&&!force))return false;const T=tySt(r);
+// không chen khi đang có hộp thoại/trận, hay đang đi giữa đường (đợi dừng chân / tới nơi)
+function tuyenGap(force){const r=G.run;if(!r||(r.scene&&!force))return false;const T=tySt(r);if(!force&&r.moving&&!r.halt){T.hoan=1;return false;}T.hoan=0;
   for(const S of [T.xt,T.dl]){const o=tyCho(S);if(!o)continue;
     if(o.ket){kyStart(tyKy(S,null));return true;}
     if(!tyHereOk(o.N))continue;if(S.moi&&!force&&(W().t-S.nhac<TY_CFG.nhac*HM||(S.nn||0)>=TY_CFG.nhacMax))continue;
@@ -107,6 +108,8 @@ function tuyenGap(force){const r=G.run;if(!r||(r.scene&&!force))return false;con
 // tin đồn có dấu: lời mời dạng 'tin' chỉ mở khi tới nơi; nhắc bằng một dòng nhật ký khi nút mở
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(!r||!G.meta||!W())return o;
   const m=Math.floor(W().t/HM);const T=tySt(r);if(T.m==null||T.m<m){T.m=m;tuyenTick();if(G.run&&!r.scene&&G.screen==='map')tuyenGap();}return o;};}
+// tới nơi: đưa lời mời đã hoãn lúc đi đường
+{const _ar=arrive;arrive=function(){const o=_ar.apply(this,arguments);const r=G.run;if(r&&r.arc&&r.arc.hoan&&!r.scene&&!r.moving&&G.screen==='map'&&W())tuyenGap();return o;};}
 // Sổ tay / giao diện: nút đang mở + hạn bằng chữ (không số nghiệp)
 function tuyenView(){const r=G.run;if(!r)return [];const T=tySt(r);const L=[];
   for(const S of [T.xt,T.dl]){if(!S||!TUYEN[S.id])continue;const A=TUYEN[S.id];const N=tyNut(S);

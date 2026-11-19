@@ -153,6 +153,7 @@ const TESTS = {
     ok(run("vaiNow('NP02').song")===false, 'không hồi sinh người chết');
     run("kyPick(1);G.run.scene=null");
     // N5 → kết A
+    run("globalThis.__dlBk=JSON.stringify(TUYEN_DL);for(const k in TUYEN_DL)delete TUYEN_DL[k]"); // bài không phụ thuộc tuyến thật có hay không
     run("W().t+=6*HM;tuyenTick();G.run.scene=null;tuyenGap(true)");ok(run("kyOpts(G.run.scene)[1].no")!=='', 'kết đường khác: "thu tô" khoá vì chưa có ruộng mua');
     run("kyPick(0);G.run.scene=null");
     ok(run("G.run.arc.xt.xong===1&&G.run.arc.xt.ket==='A'"), 'đủ kho chung + đê sửa: kết A "Đèn còn trong thôn"');
@@ -169,6 +170,7 @@ const TESTS = {
     // bản lưu cũ không có r.arc, đang ở giữa đời
     fresh("G.run.origin='nong';delete G.run.arc");run("W().t+=HM;advanceTime(HM)");ok(run("!!G.run.arc&&G.run.arc.xt.id==='OR01'"), 'bản lưu cũ không có r.arc: tháng kế dựng lại');
     // đại lộ: mở từ hồi 2 khi tuyến xuất thân đã kết, đổi được một lần
+    run("globalThis.__tyBk={DL07:TUYEN.DL07,DL03:TUYEN.DL03};for(const k in TUYEN_DL)delete TUYEN_DL[k]");
     run(`(()=>{const mk=(id,d)=>{const A=JSON.parse(JSON.stringify(TUYEN.OR01));A.id=id;A.loai='dai_lo';A.daiLo=d;delete A.xuatThan;A.nut[0].boQuaNeuXuatThan=true;TUYEN[id]=A;(TUYEN_DL[d]=TUYEN_DL[d]||[]).push(id);};mk('DL07','the_gia');mk('DL03','de_nghiep');})()`);
     run("G.run.arc.xt.xong=1;G.run.arc.xt.ket='A';tyDlTuMo()");ok(run("G.run.arc.dl&&G.run.arc.dl.id==='DL07'&&G.run.arc.dl.i===1"), 'đại lộ gợi ý mở sau tuyến xuất thân, bắt đầu từ hồi 2');
     ok(run("tuyenMoDaiLo('de_nghiep')")&&run("G.run.arc.dl.id")==='DL03', 'đổi đại lộ lần một: được');
@@ -176,6 +178,7 @@ const TESTS = {
     ok(run("tuyenView().length")===2, 'tuyenView: Sổ tay đọc được hai tuyến');
     run("delete TUYEN.DL07;delete TUYEN.DL03;delete TUYEN_DL.the_gia;delete TUYEN_DL.de_nghiep");
     run("tuyenTick();tuyenGap(true)");ok(run("tuyenView().length")===1, 'bản lưu trỏ tới tuyến đã gỡ: bỏ qua, không lỗi');
+    run("for(const k in globalThis.__tyBk)if(globalThis.__tyBk[k])TUYEN[k]=globalThis.__tyBk[k];for(const k in TUYEN_DL)delete TUYEN_DL[k];Object.assign(TUYEN_DL,JSON.parse(globalThis.__dlBk))");
   },
   dat_ma() {
     fresh();
