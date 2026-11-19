@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "sat",
+  "len": [
+    "Người coi việc đặt thẻ đồng lên bàn. Trước khi lấy, ngươi được đọc tên người thuê và lý do họ ghi trên giấy.",
+    "Thẻ bạc đem tới những đơn có nhiều tiền hơn. Một người đưa tin xin ngươi kiểm lại tên trước khi nhận việc.",
+    "Người giữ cửa nhận ra thẻ vàng và để ngươi vào bàn xét đơn. Trên bàn có một tờ đã bị trả lại vì thiếu chứng.",
+    "Kẻ giao thẻ huyết xin ngươi giữ kín cả tên người thuê. Một người mới đến muốn biết có quyền từ chối hay không.",
+    "Khi nhận chỗ lâu chủ, ngươi tìm thấy các đơn còn mở. Có người xin trả thẻ và hỏi bao giờ được rời khỏi cửa."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Hòm đơn đã trả",
+      "t": "Khi ngươi mất, người giữ hòm tìm thấy những đơn ngươi từng trả lại vì tên bị ghi sai. Họ gửi bản cho gia đình người thoát nạn, rồi thôi nhận việc dưới dấu của ngươi. Một người mới tự đặt thẻ xuống trước cửa.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Thẻ để lại trên án",
+      "t": "Ngươi qua đời, người tranh ghế tới lấy hòm đơn trước khi áo tang được cắt. Một người từng mất cha đem tới nửa tờ thuê có dấu của ngươi. Người mới cầm quyền nhận cả tờ ấy lẫn việc phải trả lời.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Người trả thẻ bạc",
+      "t": "Sau ngày chôn ngươi, một người từng đưa tin mang thẻ bạc bỏ vào hòm chung. Họ nhớ có lần ngươi trả một đơn vì chưa được nghe phía còn lại. Từ đó họ hỏi tên người thuê trước khi nhận thư.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Bậc cửa không tên",
+      "t": "Ngươi mất ở chỗ trọ, tên thật không ghi trên thẻ. Chủ trọ đem chôn ngươi và gửi lại tiền phòng còn dư cho người quen. Người ấy chỉ nhớ ngươi từng ngồi ăn chậm để chờ họ về."
+    }
+  ]
+}

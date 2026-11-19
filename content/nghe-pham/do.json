@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "do",
+  "len": [
+    "Chủ đò giao mái chèo cho ngươi tự đưa khách sang. Người lên đầu tiên hỏi có thể đặt gánh xuống đâu cho khỏi ướt.",
+    "Ngươi có đò của mình và phải lo cả phần vá. Người từng chở cùng hỏi có thể nhận một lượt chèo khi ngươi nghỉ không.",
+    "Dân bến đưa bảng lượt cho ngươi giữ. Một người về muộn muốn biết còn chuyến cuối hay phải đợi qua đêm.",
+    "Các lái đò hỏi ai được chở hàng qua lúc nước lên. Ngươi phải ghi riêng chỗ cho người đi khám và người bán hàng.",
+    "Người từ nhiều bến đem sổ tới xin ngươi định phí. Họ để chỗ trống cho nhà còn chưa qua được sau mùa nước."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Đèn cho chuyến muộn",
+      "t": "Sau khi ngươi mất, người giữ bến vẫn dặn để một thuyền chờ khách về muộn. Họ giữ mái chỗ ngồi cho người không qua được ngay. Một nhà sống sót qua lũ đem dầu tới thắp đèn hôm đưa tang.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Bến có người đứng thu",
+      "t": "Người thừa kế nhận cọc bến và tờ ghi mức phí. Sau lễ tang, một người từng bị giữ hàng vì thiếu tiền đến đòi lại biên nhận. Sổ vẫn có tên họ dưới dấu ngươi, cùng giá tăng hôm nước lớn.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Mái chèo dưới sạp",
+      "t": "Chiếc đò vào tay người từng chèo thay khi ngươi ốm. Họ đặt mái chèo dự phòng ngay dưới sạp và dùng lối ngươi từng chỉ lúc nước xoáy. Khách qua bến vẫn hỏi thăm nhà ngươi sau ngày tang.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Cọc buộc trước bình minh",
+      "t": "Ngươi sống bằng công từng lượt đò. Khi ngươi qua đời, người lên đò đầu tiên hôm ấy tự buộc lại dây cho chủ bến. Họ nhớ ngươi hay chờ một lát để người gánh nặng kịp xuống."
+    }
+  ]
+}

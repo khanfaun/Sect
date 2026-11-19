@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "hat",
+  "len": [
+    "Bầu gánh giao ngươi một vai có lời. Người nhắc tuồng ngồi sát màn để ngươi còn nghe khẽ khi quên câu.",
+    "Khách đã tới để xem vai chính của ngươi. Sau buổi, người kéo màn hỏi bao giờ được tập thay một đoạn.",
+    "Ngươi nhận sổ công và lịch diễn. Cùng ngày có người xin nghỉ vì đau chân và một chủ sân muốn mua thêm buổi.",
+    "Tiếng hát của ngươi được mời sang phủ khác. Một học trò gấp áo diễn giúp và hỏi có được học đoạn khó nhất không.",
+    "Người ở xa đem bản tuồng đến đối lời. Ngươi giữ cả câu đã từng bị cấm để người sau biết nó bị bỏ ở đâu."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Đèn sân có người nối",
+      "t": "Khi ngươi mất, học trò treo chiếc đèn cũ rồi chia công như đã học. Họ diễn một vở từng có người xin giữ nguyên lời ở chợ. Sau buổi, người kéo màn được gọi ra trước sân để mọi người cảm ơn.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Giấy diễn để trong hòm",
+      "t": "Đoàn còn tiền sau khi chôn ngươi, nhưng mọi lời phải qua bên giữ ấn. Một người từng xin hát chuyện nhà mình giữ trang đã bị gạch. Người kế đoàn cất trang ấy cạnh giấy cho diễn riêng.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Vai cũ còn người nhắc",
+      "t": "Sau tang lễ, người từng nhắc tuồng mở tập giấy ngươi gập ở đoạn khó. Họ dạy vai ấy cho một người đứng sân mới, kể vì sao ngươi thường dừng lại để nghe khán giả còn thở hay không.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Dây màn buộc lại",
+      "t": "Ngươi qua đời ở nơi đoàn ghé qua. Người kéo màn dùng dây đã vá để buộc hòm đồ, rồi đặt phần công còn lại vào tay người nhà. Trong một buổi diễn sau, họ nhắc đúng câu ngươi từng sợ quên."
+    }
+  ]
+}
