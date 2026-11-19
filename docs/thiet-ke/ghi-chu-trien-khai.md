@@ -127,6 +127,7 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 - Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-M.
 - Xong thêm: Đ9.1 (bộ máy tuyến, schema, công cụ kiểm `npm run content:tuyen`, tuyến mẫu OR01, bài `menh_tuyen`) và Đ9.0 (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) — xem mục Đ9.1 cuối tệp.
 - Xong Đ9 (Đ9.1–Đ9.4): 45 tuyến xuất thân + 9 đại lộ (GPT viết) đã ghép và rà bằng mô phỏng; thẻ Mệnh thư, Người đã gặp, Thế lực trong Sổ tay; bài `menh_tuyen_d94`, `tuyen_ra_soat`, `so_tay_nv` — xem mục "Đ9.2–Đ9.4" cuối tệp.
+- Xong Đ8b (đất đai: ô đất, công trình, xây/phá, chủ đất) — xem mục "Đ8b" cuối tệp.
 - Tiếp theo: Đ10. GPT sửa lời văn theo docs/content/GUI-GPT/sua-sau-ra-soat.md (không gấp).
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
@@ -860,3 +861,52 @@ Việc cần làm (Sửa-N, làm cùng/ trước Đ8b): câu 71, 72.
 - 71: `gapNguoi(ten,how)` (core2/63) ghi mọi NPC có tên từng tiếp xúc: nói chuyện / thiện cảm đổi (`favAdd`), gặp trên đường (`meetEnt`), tặng lễ (`favGift`), giao đấu mọi kết quả (`finishCombat`, người lạ "???" chỉ ghi khi đã biết tên), đi cùng (`addParty`), gặp thiên kiêu có tương tác (`applyE` rival), Ám Hội (người đã nhận ra). Người đang giữ vai NP vẫn vào `r.gapVai`; người khác vào `r.gapNg={tên:{ten,y,how}}`. Khoá nội bộ `@…` bỏ qua. Bản lưu cũ chạy được. Chưa có: cửa hàng có chủ là vai (hiện chưa có cửa hàng nào gắn người cụ thể), quest bảng (vô danh).
 - 72: `faQhBac(id)` 0..6 = Tử thù, Thù địch, Bất hòa, Xa lạ, Giao hảo, Thân thiết, Chí giao; điểm ngầm = lựa chọn tuyến (`r.faQh`×2) + tiếng ở căn cứ (×0.15) + cống hiến (/5, tối đa 15) + thiện cảm người thế lực đã gặp (±10) − người của họ bị ta giết qua tuyến (`r.faHai`, ×10). Ngưỡng `FA_QH_NGUONG` = −40, −20, −6, 6, 20, 40 (chỉnh ở một chỗ). Không hiện số. "Đồng minh": `faKetMinh(id,on)` / `faMinh(id)` (cờ `r.faMinh`), chỉ hiện khi có; hiện chưa có cách kết minh, để Đ10/sau gọi.
 - Bài: luật `gap_nguoi`, `fa_thang` (thêm vào `test:rules`), `so_tay_nv` sửa; giao diện `so_tay_nv` thêm ý.
+
+## Đ8b — Đất đai (yêu cầu mới A)
+Luật: `core2/64-dat-dai.js` (sinh ô, lọc nút), `core2/65-dat-dai-xay-pha.js` (mục Đất đai, xây/phá, chủ đất, hậu quả, để sẵn sở hữu). Bảng: `content/rules/dat-dai.js` (CONG_TRINH, DAT). Chữ: `content/text/dat-dai.json` (dat.*). Cờ `FEAT.dat` (bật). Truy loại mới `quan` (quan phủ truy nã vì phá đất) trong `content/rules/truy.js`.
+- Dữ liệu `W().dat[id nút] = {v, o:[{ct, chu, goc, hu}], pha}` lưu theo thế giới (qua các kiếp). Ô sinh lần đầu khi nút được hỏi tới, nên bản lưu cũ tự có ô khi tải.
+- Nút hiện ở hộp địa điểm: nút nào có trong `CONG_TRINH[x].acts` thì chỉ hiện khi có ô mang công trình đó (hư tạm thì hiện mờ "đang hư hại"). Nút không gắn công trình (thăm dò, bế quan, xung kích, dưỡng thương, quy ẩn, chôn giấu, mộ, mưu sinh, luyện võ, nhà mình, cơ duyên, pháp môn, khai phủ, về vùng cũ) hiện như cũ. PGROUP (ui/08) giữ làm bảng nút → nhóm; thêm `datdai` vào "Việc khác".
+- Sinh ô: `DAT.goc[loại]` (công trình cốt lõi theo loại nơi) + mọi nút gắn công trình đang có ở nơi đó (để không mất dịch vụ nào, kể cả bản lưu cũ) + với hoang dã: săn bắt, săn yêu, (tĩnh tọa nếu WILD hoặc động phủ), hái thuốc / đào khoáng theo vật liệu nơi đó, kể cả khi nơi đó đang hoang tàn. Công trình tự nhiên chọn theo địa hình nút + 6 ô kề (`DAT.hoang`, trọng số theo TER_N) và `wRnd` (ổn định qua tải lại); có thể thêm một công trình tự nhiên thứ hai (`DAT.them`); thêm 0–2 ô trống.
+- Chủ đất: tông môn → sơn môn; nơi neo ở thôn trấn/thành → trạm dịch, tiền trang, bảng thưởng thuộc thế lực của neo, các công trình khác lần lượt thuộc người giữ vai ở neo đó (`{k:'vai',id:'NPxx'}`, đọc người đang giữ vai qua `vaiNow`, không lưu tên), còn lại là "dân nơi này"; hoang dã không chủ, trừ nơi neo (thế lực của neo).
+- Hậu quả (DAT.phat) khi xây/phá trên ô có chủ: vai → thiện cảm −15, quan hệ thế lực của họ −3 (`r.faQh`), 30% bị truy (loại cuop); thế lực → −4, 25% truy; tông → danh tiếng tông −15, 40% truy; dân → danh tiếng khu −12 (trấn) / −20 (thành), 30% / 60% bị truy nã (danh tiếng khu xuống −60 như Sửa-B, truy loại quan). Hộp xác nhận (vconf) ghi đủ hậu quả trước khi làm.
+- Nơi neo: công trình cốt lõi (goc) chỉ hư tạm `DAT.hu` = 3 tháng; nơi lõi LOC05/12/15: không phá được (lựa chọn khoá, ghi lý do). Sơn môn điện không phá được.
+- Xây: động phủ (30 linh thạch, 30 ngày; đặt `n.dp=1`) và trận pháp hộ thân (50 linh thạch, 10 ngày) trên ô trống; phải là tu sĩ. Đất hoang không chủ → ô thành của ngươi (`{k:'ta'}`). Khai phủ cũ (`khaiphu`) xong cũng đặt động phủ lên ô trống. Phá động phủ thì `n.dp=0`.
+- Để sẵn mua nhà/đất: `datSoHuu(n,i,chu)`, `datCuaTa()`, `datMua()` (chưa mở, trả false). Ô của mình xây/phá không bị phạt. Đợt sau: giá theo chủ, cho xây quán/tiệm trên ô của mình (thêm loại nơi vào `xay.noi`).
+- Bài: luật `dat_dai` (36 ý), giao diện `dat_dai` (10 ý).
+
+### Bảng công trình (CONG_TRINH)
+| Mã | Tên | Nhóm | Tự nhiên | Nút | Xây | Phá (giờ) |
+|---|---|---|---|---|---|---|
+| khach_diem | Khách điếm | Nghỉ chân | không | inn | – | 6 |
+| tra_lau | Trà lâu | Nghỉ chân | không | tea | – | 4 |
+| tuu_lau | Tửu lầu | Nghỉ chân | không | tuu | – | 4 |
+| bang_thuong | Bảng treo thưởng | Sự vụ | không | board | – | 1 |
+| thuong_cac | Thưởng Các | Sự vụ | không | thuongcac | – | 4 |
+| tien_trang | Tiền trang | Sự vụ | không | vay | – | 6 |
+| tap_hoa | Tạp hóa | Mua bán | không | taphoa | – | 3 |
+| lai_buon | Bến hàng lái buôn | Mua bán | không | laibuon | – | 3 |
+| phuong_thi | Phường thị | Mua bán | không | shop | – | 8 |
+| quy_thi | Quỷ thị | Mua bán | không | ghost | – | 6 |
+| am_hoi | Hầm Ám Hội | Mua bán | không | amhoi | – | 6 |
+| doi_lt | Ngân phường | Mua bán | không | doilt | – | 6 |
+| cam_do | Hiệu cầm đồ | Mua bán | không | camdo | – | 3 |
+| tram_dich | Trạm dịch | Đi lại | không | tram | – | 6 |
+| loi_dai | Lôi đài | Tu luyện | không | loidai | – | 4 |
+| thao_lu | Thảo lư ẩn sĩ | Tu luyện | không | thinhgiao | – | 2 |
+| son_mon | Sơn môn điện | Tông môn | không | cả nhóm Tông môn + tĩnh tọa | – | không |
+| bai_san / ho_ca | Bãi săn / Hồ cá | Hoang dã | có | sanbat | – | 12 / 24 |
+| hang_yeu / dam_yeu | Hang yêu thú / Đầm yêu | Hoang dã | có | sanyeu | – | 12 / 24 |
+| rung_thuoc / bai_thao | Rừng thuốc / Bãi linh thảo | Hoang dã | có | haithuoc | – | 12 / 8 |
+| mo_khoang | Mỏ khoáng | Hoang dã | có | daokhoang | – | 24 |
+| hang_dong, linh_tuyen, co_thu, ho_nuoc, tran_co | Hang động, Linh tuyền, Cổ thụ, Hồ nước, Trận pháp cổ | Nghỉ chân | có | tinh | – | 24/24/12/24/12 |
+| dong_phu | Động phủ | Nghỉ chân | không | tinh (+ n.dp) | hoang dã, 30 LT, 720 giờ, tu sĩ | 12 |
+| tran_phap | Trận pháp hộ thân | Nghỉ chân | không | tinh | hoang dã + trấn/thành, 50 LT, 240 giờ, tu sĩ | 6 |
+
+### Còn dở
+- Chưa mua bán đất; trận pháp hộ thân chưa có tác dụng riêng (chỉ mở tĩnh tọa).
+- Phá công trình tự nhiên chưa rơi vật liệu; công trình bị phá ở nơi thường không tự mọc lại.
+- Bot chưa thử mục Đất đai (chưa được chạy bot); đã thêm tên hàm vào COV_FN.
+
+## NGƯỜI DÙNG CHỐT (câu 74–75) — làm ở Sửa-O (sau Đ8b)
+74. B: Chí giao khó hơn (cần thêm cống hiến lớn). Đồng thời 60–70% điểm quan hệ thế lực đến từ quan hệ (thiện cảm) của ĐẠI ĐA SỐ thành viên thế lực với nhân vật chính, có trọng số theo vai: cao tầng nặng hơn, đệ tử nhẹ hơn. 30–40% còn lại từ tuyến/danh tiếng/cống hiến/giết-giúp.
+75. A: ghi tất cả, nhưng: người chưa tương tác đủ ("thoáng qua") mà lâu không gặp lại thì tự xoá; người đã tương tác đủ (đạt ngưỡng quen biết) thì giữ vĩnh viễn, không bao giờ bị tự xoá nữa. Tự chọn ngưỡng/thời gian, ghi chú.
