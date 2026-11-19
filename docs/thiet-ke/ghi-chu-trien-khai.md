@@ -124,7 +124,7 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
-- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-J.
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-L.
 - Xong thêm: Đ9.1 (bộ máy tuyến, schema, công cụ kiểm `npm run content:tuyen`, tuyến mẫu OR01, bài `menh_tuyen`) và Đ9.0 (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) — xem mục Đ9.1 cuối tệp.
 - Tiếp theo: người dùng đưa GPT viết theo lô (lô 1: OR02–OR04), Claude kiểm + rà mẫu, ghép. Thẻ "Mệnh thư" trong Sổ tay (giao diện) chưa làm.
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
@@ -784,3 +784,35 @@ THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuy�
 49. Túi đầy (NPC lẫn nhân vật chính): đồ nhận thêm vào "tạm giữ bên người" (ngoài các ô túi); sau 365 ngày không dọn chỗ để cất vào túi thì mất. Áp chung cho mọi nguồn nhận đồ (Ám Hội, đấu giá, nhặt, phần thưởng…), thống nhất với cơ chế gửi tại chỗ của Sửa-G (xem có nên gộp).
 50. Truy đuổi: TĂNG hạn truy lên vài năm tới cả chục năm (tùy loại địch, mạnh/thù sâu thì lâu hơn); chỉnh tần suất chặn cho hợp hạn dài (không bị chặn liên tục). Làm ở Sửa-L.
 51. A: bị chặn giữa đường xong thì đứng yên, người chơi tự bấm "Đi tiếp".
+
+## Sửa-L — câu 47, 48, 49, 50, 51 (đợt 8)
+### L.47 — người chơi tự đặt danh sách vật muốn nhận khi bán ở Ám Hội
+- Chọn món đưa ra bàn → bước "đặt danh sách" (`sc.ph='dat'`, `sc.dua`): thêm tối đa `AM_HOI.datN`=3 món từ linh thạch bốn phẩm, đan có giá, vật tư cải căn (`amDatCand`); mỗi món chỉnh số lượng −5/−1/+1/+5 (1–`datSl`=99, mặc định vừa đủ giá mở), bỏ món. Không đặt gì thì như cũ (người mua trả linh thạch).
+- NPC chỉ trả bằng món trong danh sách người chơi đặt (linh thạch cũng chỉ đúng phẩm đã nêu). NPC không có món nào trong danh sách mà muốn mua thì **đề nghị đổi bằng vật khác** trong túi họ (`lot.de`, `amNpcDe`, nhật ký `amh.de`): người chơi thấy "Nhận đề nghị của …" kèm giá trị; nhận thì người ấy dẫn, rồi gõ búa như thường. Không nhận thì thôi.
+### L.48 — đồng hồ dừng khi thương lượng
+- Chọn một vật ở phần Thương lượng (món của người khác) → đồng hồ gõ búa và lúc NPC ngẫm cùng dừng (`lot.dung`), tối đa `AM_HOI.dung`=15 giây mỗi món (`lot.dungDa`); đưa giá, trả theo danh sách, chọn vật khác hay bỏ cuộc thì đồng hồ chạy lại. Hộp hiện "Đồng hồ tạm dừng … (còn N giây)". Bài kiểm tua bằng `amTua`.
+### L.49 — tạm giữ bên người (core2/61-tam-giu.js, bảng TAM_GIU, chữ tg.*)
+- `r.tamGiu=[{t,v,n,at,bao}]`. Bắt chung cho mọi nguồn: `tgSweep` chạy trong autoCheck, saveSoon, advanceTime, sau gõ búa Ám Hội, khi nhận đan, khi nhận vật tư cải căn; so với lần đếm trước (`r._tgS`), loại nào vừa tăng mà túi vượt sức chứa thì món mới nhất sang tạm giữ (pháp bảo mặc được thì mặc trước). Đan không còn đổi ra linh thạch khi túi đầy. Ám Hội: túi đầy vẫn trả giá được.
+- Đồ tạm giữ không nằm trong ô túi (không dùng/bán/đem ra bàn); túi đồ có mục "Tạm giữ bên người": tên, hạn bằng chữ ("còn chừng N tháng", "sắp mất, còn N ngày"), nút "Cất vào túi" (khoá khi túi đầy), "Bỏ". Quá `han`=365 ngày thì mất; trước `bao`=30 ngày báo một lần.
+- NPC (người giữ vai, thiên kiêu): túi 12 món đầy thì món nhận vào `o.tg`, tự cất khi túi có chỗ, quá hạn thì mất; NPC túi đầy vẫn trả giá.
+- **Quyết định gộp với Sửa-G**: vật tư cải căn nhận khi túi đầy giờ cũng vào tạm giữ (không gửi lại tại chỗ nữa) cho thống nhất một cơ chế; món đã gửi tại chỗ trong bản lưu cũ (`r.ccGui`) vẫn lấy lại được ở nơi gửi như trước.
+- Chưa bắt: vật liệu chồng theo loại (`r.mats`) và lệnh bài; đồ tràn vì túi nhỏ đi (tháo túi trữ vật) vẫn giữ như cũ.
+### L.50 + L.51 — truy đuổi nhiều năm, đứng yên sau khi bị chặn
+| loại | ngày truy (trước → nay) | giờ giữa 2 lần dò (trước → nay) | chặn mỗi lần |
+|---|---|---|---|
+| thu yêu thú | 1–4 → 365–730 (1–2 năm) | 6–18 → 240–720 (10–30 ngày) | 0,35 → 0,3 |
+| tac sơn tặc | 3–8 → 730–1460 (2–4 năm) | 8–24 → 360–1080 (15–45 ngày) | 0,4 → 0,35 |
+| tu tu sĩ | 5–15 → 1095–2190 (3–6 năm) | 12–36 → 480–1440 (20–60 ngày) | 0,35 → 0,3 |
+| ke kẻ thù | 15–40 → 2190–3650 (6–10 năm) | 24–72 → 480–1440 (20–60 ngày) | 0,3 → 0,35 |
+| quy quỷ vật | 1–2 → 365–730 (1–2 năm) | 4–12 → 240–720 (10–30 ngày) | 0,4 → 0,35 |
+| no quan sai | 20–45 → 1460–2920 (4–8 năm) | 24–96 → 720–2160 (30–90 ngày) | 0,3 |
+| cuop kẻ bị cướp | 7–20 → 1095–2555 (3–7 năm) | 12–48 → 480–1440 (20–60 ngày) | 0,35 → 0,3 |
+- Địch mạnh hơn mỗi bậc: hạn ×(1+0,25) (trước 0,5), tối đa 3 bậc → kẻ thù mạnh có thể tới khoảng 17 năm. Trung bình bị chặn chừng 2–4 tháng một lần: chặng đi vài tuần vẫn có nguy cơ thật, không bị chặn liên tục.
+- 51: đã đúng từ Sửa-K (`r.halt`); thêm bài kiểm: sau khi chạy tiếp / đánh thắng vẫn đứng giữa đường, có nút "Đi tiếp".
+### Bài kiểm
+- Luật: mới `am_dat` (16 ý: danh sách, đề nghị đổi, đồng hồ dừng), `tam_giu` (16 ý); `truy` thêm 6 ý; `am_hoi`, `cai_can_tui` sửa theo luật mới. Giao diện: `am_hoi` thêm bước đặt danh sách + đồng hồ dừng; mới `tam_giu`; `truy` thêm nút Đi tiếp.
+- Kết quả: `npm run test:rules` 1005 ý đạt (mốc 967); giao diện 195 ý đạt (mốc 187); `content:check` đạt.
+### Còn dở
+- Bot chưa biết đặt danh sách/nhận đề nghị ở Ám Hội, chưa biết cất đồ tạm giữ (không chạy bot).
+- Mỗi câu 47/48 chung một commit vì sửa cùng chỗ.
+
