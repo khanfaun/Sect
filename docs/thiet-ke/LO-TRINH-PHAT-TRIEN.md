@@ -817,6 +817,8 @@ Lỡ hạn → tự diễn → nhánh đứng ngoài, không kẹt; người gia
 
 ### Đ10 — Mộng Ấn, ba tri thức, nghi thức, tám kết thúc
 
+**Đã làm** (xem docs/thiet-ke/ghi-chu-trien-khai.md mục "Đ10").
+
 Thiết kế: HN A.10; Phần C §6 "Thức tỉnh và tám kiểu kết thúc lớn", §9 (nghi thức); Phần B §14.7.
 
 - `G.meta.mong=[mã Mộng Ấn]`; `G.meta.tri={TRI01:[nguồn…]}` — tri thức đạt khi có **hai nguồn độc lập** (HN A.10 bảng).

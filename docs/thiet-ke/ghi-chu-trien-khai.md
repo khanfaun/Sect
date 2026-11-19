@@ -128,7 +128,8 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 - Xong thêm: Đ9.1 (bộ máy tuyến, schema, công cụ kiểm `npm run content:tuyen`, tuyến mẫu OR01, bài `menh_tuyen`) và Đ9.0 (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) — xem mục Đ9.1 cuối tệp.
 - Xong Đ9 (Đ9.1–Đ9.4): 45 tuyến xuất thân + 9 đại lộ (GPT viết) đã ghép và rà bằng mô phỏng; thẻ Mệnh thư, Người đã gặp, Thế lực trong Sổ tay; bài `menh_tuyen_d94`, `tuyen_ra_soat`, `so_tay_nv` — xem mục "Đ9.2–Đ9.4" cuối tệp.
 - Xong Đ8b (đất đai: ô đất, công trình, xây/phá, chủ đất) — xem mục "Đ8b" cuối tệp.
-- Tiếp theo: Đ10. GPT sửa lời văn theo docs/content/GUI-GPT/sua-sau-ra-soat.md (không gấp).
+- Xong Đ10 (Đ10.1–Đ10.5): Mộng Ấn, ba tri thức, Người Gác Bến, Bến Vong Xuyên, nghi thức, tám kết thúc, màn kết, gói GPT lần 3 — xem mục "Đ10" cuối tệp.
+- Tiếp theo: gửi GPT gói docs/content/GUI-GPT-3/ (lời văn Đại Mộng + sửa chữ 54 tuyến); rồi Đ11.
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
 ## NGƯỜI DÙNG CHỐT 15 CÂU (việc phải làm lại/bổ sung trước khi làm Đ5.4)
@@ -968,3 +969,26 @@ Luật: `core2/66-truy-na.js` · bảng: `content/rules/truy-na.js` (TNA) · ch�
 - Chưa có hành động "cướp" / "trộm" riêng của người chơi; tội trộm, giết… chỉ tới từ sổ nghiệp (việc làm trong sự kiện) và phá đất.
 - Bot chưa thử Quan phủ, cải trang, hộp nhân chứng (đã thêm tên hàm vào COV_FN, chưa chạy bot).
 - Nhân chứng chưa phải NPC có tên (không vào "Người đã gặp").
+
+## Đ10 — Mộng Ấn, ba tri thức, Người Gác Bến, Bến Vong Xuyên, nghi thức, tám kết thúc
+Luật: `core2/67-dai-mong.js` · bảng: `content/rules/dai-mong.js` (MONG_AN, TRI_THUC, DM_VIEC, GAC_BEN, KET_THUC, NGHI_THUC, NG_NOI, DM_CFG) · chữ: `content/text/dai-mong.json` (dm.*, cũng là lời dự phòng) · lời văn GPT: `content/dai-mong/**` → `src/game/data/08-dai-mong-du-lieu.js` (DM_DATA), kiểm `tools/kiem-tra-dai-mong.js` (`npm run content:mong`, đã gộp vào `content:check` và build) · giao diện: `ui/32-dai-mong.js`, `ManHetKiep.jsx` (bến), `ManKet.jsx` (màn kết, `G.screen='ket'`), thẻ "Đại Mộng" ở Bến Vong Xuyên (`ManBenVongXuyen.jsx`). Cờ `FEAT.mong` (bật; test.js `fresh` tắt, các bài Đ10 bật lại; test-ui `boot` đặt `gbXong=1`).
+- Sổ luân hồi (G.meta, giữ qua kiếp — ngoại lệ của quên sạch): `mong`, `mongK` (Mộng Ấn mỗi kiếp), `tri {TRI0x:[nguồn]}`, `gb {n,kiep,nk,np1,np2}`, `tkGap`, `ends`, `ketHet`, `daTinh`, `endsCu`. Đời: `gbHen/gbXong/gbDang/gbTruoc`, `dmKhao`, `ends`, `ng01`, `dietThieu`. Thế giới: `W().ng` (NG02 mô hình/bộ tụ/chạy thử, NG03 xác minh/chốt/hẹn giờ, quyền khoá) — công trình có thật nên qua kiếp vẫn còn. Bản lưu cũ: `dmM()` dựng sổ khi thiếu; màn hết kiếp cũ không có `ben` thì hiện như trước.
+- Mộng Ấn (8, bỏ #9): MA01 bến (ngồi đợi nghe tới cuối) · MA02 nhận ra Gác Bến ở 3 kiếp · MA03 viếng mộ kiếp trước (`visitGrave`) · MA04 xem tuồng ở LOC09 (đã có một đời trước) · MA05 xin quẻ ở LOC12 (từ kiếp 2) · MA06 thiên kiêu gặp ở kiếp trước gặp lại (`gapNguoi`) · MA07 nhìn trời ở LOC15 khi CLK12/CLK14 đang diễn · MA08 qua DL09 N4 (`tyDong`). Mỗi kiếp tối đa một (`DM_CFG.mongMoiKiep`).
+- Tri thức: đủ 2 nguồn khác mã. Khảo sát ở nơi lõi (mục "Đại sự", 30 ngày, có giá bạc): LOC05 TRI01/02/03, LOC12 TRI01/02, LOC15 TRI02/03; tri thức sau cần biết tri thức trước; **mỗi nơi một nguồn mỗi kiếp** → không Mộng Ấn thì ít nhất ba kiếp mới đủ ba điều (Luật 5: luôn còn đường dù NPC chết hết).
+- Người Gác Bến: kỳ ngộ `dm_gacben` (sp:1), hẹn 3–30 tháng sau đầu kiếp, mỗi kiếp một lần, dạng xoay vòng 6 dạng. Lựa chọn "Ta đã gặp ngươi" chỉ khi đã gặp ở kiếp trước. Lời theo bậc lộ = số kiếp nhận ra (tối đa 3) + 1 nếu đã có cảnh NP12 lộ thân phận; đủ ba tri thức thì thêm lời khuyên ngăn sửa vòng. Hai cảnh NP12 ở LOC06 (np12a khi đã nhận ra ≥1 lần; np12b khi đã có cảnh một và biết ≥2 điều).
+- Bến Vong Xuyên (câu 41): sau `die` màn hết kiếp có "Uống canh, đi ngay" (đi luôn) / "Ngồi đợi" (thế gian trôi thêm 3–12 năm bằng `worldGap`, cộng vào khoảng luân hồi Đ8.5; nghe từng đoạn; nghe tới cuối lần đầu → MA01). Nút "Luân hồi" chỉ hiện sau khi chọn.
+- Kết thúc: END01 kiểm lúc chết (từ 40 tuổi hoặc quy ẩn + sinh kế/người thân/mục đích; không thì "Đời chưa kịp gọi tên"). END02 (LOC02), END03 (LOC07), END06 (truyền nghề ở thôn trấn/thành/nơi neo) ghi theo đời, đời vẫn tiếp. Kết minh (`faKetMinh`, Sửa-N) ở nơi neo khi quan hệ Thân thiết. END04: chuẩn bị cửa NG01 ở LOC15 (đủ ba tri thức, Hóa Thần, 500 linh thạch) rồi phi thăng; **phi thăng thiếu → mộng trong mộng** (vẫn luân hồi, lời ở bến). END05 NG02, END07 NG03 (hẹn 7 ngày; tới giờ thiếu chốt thì hỏng), END08 NG04 (2/3 quyền khoá, 1.000 linh thạch, khí huyết > 1/2, ba xung mỗi xung 15%). **Cưỡng mở Diệt Thế thiếu điều kiện** (từ Kết Đan, 300 linh thạch, mỗi kiếp một lần): `maVucTao(null,3)` → 3 khu đất ma, Đêm Dài +1, không kết. Bốn kết khép hành trình → `G.meta.ketHet`, màn kết (cảnh + câu kết của C + hậu truyện), không đầu thai tiếp; "Tân Mộng" (`dmTanMong`) mở hồ sơ mới giữ `daTinh`, `endsCu`.
+- Quyết định tự chọn (đơn giản hoá C §9): vật tư nghi thức (BT11–13, VT-TU04/12, nhịp lõi) đổi thành linh thạch + số ngày; "Độ Kiếp viên mãn" = vượt thiên kiếp phi thăng; "đã xác minh đường tản" = việc 2 ngày ở mỗi nơi; quyền khoá = việc 7 ngày (cần TRI02); "chiếm được trục" của END08 chưa làm (chỉ đường đủ ba tri thức); đội chống trả của các thế lực trong NG04 chưa làm. "Uống canh" không đổi khoảng luân hồi đã tung (khoảng tung lúc chết như Đ8.5). Chưa có "Nhặt hai Mộng Ấn" (kết Tỉnh Mộng của B).
+- Nhật ký: dm.tri, dm.triDat, dm.mong, dm.mongDay, dm.gb, dm.gbChon, dm.lam, dm.ket, dm.ben, dm.benChon, dm.xung, dm.dietThieu, dm.ngat, dm.tanMong, dm.loi.
+- Bài: luật `dai_mong` (32 ý), `ket_thuc` (41), `ben_vong_xuyen` (10), `nhieu_kiep` (7 — mô phỏng ba kiếp góp tri thức rồi tới từng kết khép hành trình, đường Mộng Ấn), `dm_kiem` (11); giao diện `dai_mong` (13). Thêm vào `test:rules`. Bot: đã thêm tên hàm vào COV_FN (chưa chạy bot).
+- Gói GPT lần 3 (câu 73): `docs/content/GUI-GPT-3/` — 13 lô: 8 lô lời văn Đại Mộng (27 tệp, 6 mẫu Claude viết) + 5 lô sửa chữ 54 tuyến theo `GUI-GPT/sua-sau-ra-soat.md`; `npm run content:chu` (`tools/kiem-tra-chi-sua-chu.js`) bắt mọi thay đổi ngoài chữ.
+
+| bộ | trước | nay |
+|---|---|---|
+| luật (`npm run test:rules`) | 1205 | 1306 |
+| giao diện (`node tools/test-ui.js`) | 217 | 230 |
+
+### Còn dở
+- Lời văn 27 tệp Đại Mộng chờ GPT (đang dùng lời dự phòng ngắn trong dm.*). Kết theo đời END02/03/06 chưa có hậu quả thế giới riêng (đổi chủ Lương triều, ma quốc…), chỉ ghi Sử lược + sổ.
+- Mộng Ấn "nhận ra Người Gác Bến" mới qua kỳ ngộ; sự kiện "Mộng du tiên cảnh" (B) chưa nối. Tuyến DL02 "Diệt Thế Ma Đồ" chưa gọi cưỡng mở Diệt Thế khi kết.
+- Bot chưa thử mục Đại sự / bến (chưa được chạy bot).
