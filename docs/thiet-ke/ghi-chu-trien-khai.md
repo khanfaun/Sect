@@ -124,8 +124,8 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
-- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-H.
-- Tiếp theo: Đ8 (thế giới neo, đồng hồ, thời gian luân hồi, đất ma), rồi Đ9.1 (bộ máy tuyến + schema + công cụ kiểm) và file hướng dẫn GPT (Đ9.0).
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-H.
+- Tiếp theo: Sửa-I (câu 37–39), Đ9.1 (bộ máy tuyến + schema + công cụ kiểm), rồi file hướng dẫn GPT (Đ9.0) dùng BẢNG MÃ ở mục Đ8.
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
 ## NGƯỜI DÙNG CHỐT 15 CÂU (việc phải làm lại/bổ sung trước khi làm Đ5.4)
@@ -542,3 +542,123 @@ Luật `src/game/core2/53-cai-can-do.js`; bảng `CC_DO`, `CC_LV`, `CC_DOCFG` �
 37. HẠ kết quả 4 đường cũ (Huyết Tế, Xá Lợi, Tẩy Tủy, Huyết Mạch Khế): không ra Thiên linh căn đại trà (Thiên chỉ qua đồ phẩm 5/cơ duyên cực hiếm).
 38. Cộng dồn % sau thất bại CHỈ tính trong 1 kiếp (đầu thai về 0).
 39. U Minh Ám Hội làm lại: là buổi họp kín nhiều người (NPC + nhân vật chính) thay phiên nhau đưa VẬT MÌNH ĐANG SỞ HỮU ra đấu giá/trao đổi. Người A đưa vật X, cả nhóm trả giá; tới lượt nhân vật chính cũng đưa đồ trong túi ra. Đồ trên bàn là đồ NPC/người chơi thật sự có trong túi (NPC có túi đồ riêng), KHÔNG phải hệ thống tạo mới tại chỗ. Áp cùng nguyên tắc cho đồ cải căn ở Ám Hội (có thể có đồ dởm nếu NPC đem đồ giả ra).
+
+## Đ8 — thế giới neo, vai NPC, thế lực, đồng hồ, thời gian luân hồi, đất ma (HN A.9.2, A.17; C §6–§7; B §14.8–§14.9)
+Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm thế giới), `55-thoi-cuc.js` (đồng hồ), `56-luan-hoi.js` (khoảng luân hồi, tua thập kỷ), `57-dat-ma.js`. Bảng: `content/world/the-gioi-neo.js` (LOC_NEO, LOC_DUONG, LOC_LOI, VAI_NP, THE_LUC, TU_THAY), `content/world/thoi-cuc.js` (THOI_CUC, QUOC_MOI), `content/rules/luan-hoi.js`, `content/rules/dat-ma.js`; chữ `content/text/the-gioi.json` (tg.*, tc.*, lh.*, ma.*).
+
+### Hàm cho người viết cốt truyện (Đ9 dùng)
+- `anchorNode('LOCxx')` / `locNode` / `locName` (tên hiện tại trên bản đồ) / `locPhaT` (trạng thái hư hại đang có).
+- `vaiNow('NPxx')` → `{ten,g,tuoi,song,doi,qh,vai,noi,noiTen,the,thay,truoc,muc}`; vai trống thì `song:false` và `thay` là người/vật chứng thay thế. **Không lưu tên cứng** (L25). `vaiGiet(ma,ly)` khi người chơi giết người giữ vai.
+- Túi đồ NPC (cho Sửa-I, Ám Hội): `w.vai[ma].tui` (≤12 món `{id,n,q}`), `cua`; `vaiTui/vaiTuiAdd/vaiTuiBo`. Người kế là con/học trò nhận lại túi, người thay thì không.
+- `faNow('FAxx')`, `faAlive`, `faAdj(id,d,ly)`; sổ cống hiến khoá `'fa:FAxx'` (`faCong`).
+- `clkView()` (đồng hồ đang diễn ra), `clkCanThiep(id,kq)` (chỉ khi đang diễn ra; có thì không áp mặc định), `demDaiTang/demDaiGiam`, `thienLoMo()`, `biCanhMo()`.
+- `suLuocAdd(t,k)`; `maVucTao(nodeId,k)`, `maAt(n)`, `maTinhHoa(n,k)`; `gapLoi(y)`.
+
+### Quyết định tự chọn
+- Neo chọn **nút có sẵn**, đúng đại khu, theo loại ưu tiên; **không dùng sơn môn** (tên nút sơn môn là tên tông, đổi tên sẽ vỡ tông). Neo có đường neo tới neo đã đặt thì chọn nút gần nhất. Đặt neo trong `snapWorld` (sau `ensureCounts` vốn đổi tên nút). Bản lưu cũ: đặt neo khi tải, chốt lại nơi thầy dạy / nguồn cải căn / vật tư theo neo. Đường neo: bản đồ một mảnh liền, đi theo ô nên không cần thêm cạnh.
+- Mọi ngẫu nhiên của hệ thế giới mới dùng băm theo hạt giống (`wRnd`), không động `R()` (không lệch các bài cũ). Riêng `gapRoll`, tua thập kỷ dùng `R()` như trước.
+- Vai: phàm thọ 60–80, tu sĩ theo `LIFE` cảnh giới ×0,8–1; người mất thì 1–2 năm sau có người kế (con / học trò / người thay theo bảng); thế lực đã tan thì vai đứng đầu bỏ trống tới khi có người dựng lại. NP30 Tịch Âm không già. Đổi Ngôi: người giữ NP04 tiếp theo là "người thay".
+- Thế lực: sức duy trì kéo về mức gốc 3%/năm + `lai` + nhiễu ±2; dưới 30 suy, phải lên 40 mới tính hồi (tránh ghi Sử lược lặp), 0 thì tan; tan đủ `phuc` năm thì mỗi năm 5% có người dựng lại.
+- Đồng hồ: CLK07 Hạn Hán của B gộp vào CLK01 (15% lần đói là bản toàn cõi). Huyết Nguyệt và Ma Chủ Phục Sinh là nấc 1–3 của Đêm Dài (CLK06), **chỉ tăng vì hành động**; nấc 4+ để năm năm không ai ngăn → 3 khu đất ma rồi lùi về nấc 2. Tông chiến / Tiên nhân: **đổi chủ một sơn môn** thay vì xoá tông khỏi `world.sects` (xoá sẽ vỡ đệ tử, thiên kiêu). Long Mạch Đứt: bế quan khu đó ×0,7 (sàn 0,4), hồi 0,0005/năm. Kết quả mặc định ghi Sử lược; chỉ khi đang chơi mới ghi thêm biên niên.
+- Luân hồi: ba kiếp đầu giữ đúng `ri(3,30)`; sau đó 55/28/13/4% (Gần/Vừa/Xa/Rất xa), bậc nghiệp chướng ≥3: Xa ×2, Rất xa ×3; còn ân oán / duyên mở 40% kéo về Gần. Trên 60 năm tua theo thập kỷ (lẻ chạy từng tháng). Ân oán sau trên 60 năm: 50% chuyển "hậu duệ của …", còn lại khép; huyết thù trên 150 năm thành oán hồn (`L.oanHon`). Màn hết kiếp đổi sang lời ở bến + năm hiện tại.
+- Đất ma hồi **−6 mỗi thế kỷ** theo B §14.9 (lộ trình ghi "mỗi thập kỷ" là nhầm: sẽ hết trong ~170 năm, trái với "~500 năm hết Ma vực"). Phật/chính tông trong bán kính gần ×2, ma tông ×0,5 (ma tông thắng).
+- Luật 5: LOC05, LOC12, LOC15 có phần lõi — không bao giờ hoang (`flipNode`, `locHu`), không bị đất ma nuốt; tri thức Đ10 phải có một nguồn ở đây.
+- Sử lược: 60 dòng, tối đa 20 dòng gộp theo thế kỷ (mỗi dòng gộp giữ hai chuyện quan trọng nhất: đồng hồ > thế lực > nơi neo > vai).
+- Nối Đ7: hộp Pháp môn ghi tên người dạy là người đang giữ vai (TU_THAY); sự kiện nhập học riêng vẫn chờ Đ9.
+
+### Kiểm
+- Luật: `neo` (10), `vai` (19), `thoi_cuc` (17), `khoang_luan_hoi` (16), `dat_ma` (12). Tổng luật 847 ý đạt (mốc 773); giao diện 162 ý đạt (mốc 160; thêm `su_luoc`). Sửa kèm: `qpc` (màu thẻ nhiệm vụ) bị dính vào dòng chú thích ở core2/09 nên không được định nghĩa — lộ ra ở bài giao diện tinhtoa.
+
+### Còn dở
+- Lựa chọn ở Bến Vong Xuyên ("Uống canh, đi ngay" / "Ngồi đợi") và Mộng Ấn #1: để Đ10.
+- Mộ / đồ chôn mục theo thế kỷ (B §14.8) chưa làm; tông môn suy/diệt theo thế kỷ chỉ qua đổi chủ sơn môn.
+- Lịch thường lệ của NPC (ngày/đêm) mới là chữ trong bảng, chưa có NPC đi lại trên bản đồ; chưa có màn "Nhân vật" riêng.
+- Đồng hồ chưa có sự kiện chơi được (chỉ trạng thái + kết quả mặc định); Đ9 viết sự kiện, gọi `clkCanThiep`.
+
+### BẢNG MÃ (dùng cho file hướng dẫn GPT)
+#### Địa điểm neo LOC
+| Mã | Tên | Đại khu | Loại nút được chọn | Thế lực | Công dụng | Khi bị phá (Luật 2) | Lõi |
+|---|---|---|---|---|---|---|---|
+| LOC01 | Thanh Khê Thôn | Trung Châu | tran | FA04 | Ruộng, nhà hộ dân, đê, kho thóc, chợ. | trại tị nạn → di tích |  |
+| LOC02 | Lương Kinh | Trung Châu | thanh | FA01 | Triều đình, trường thi, ngục, sổ thuế, sân khấu. | kinh thành đổi chủ → kinh thành dưới luật mới |  |
+| LOC03 | Vạn Bảo Hội Quán | Trung Châu | cho, thanh, tran | FA02 | Hợp đồng, thương đội, bảo quản, đấu giá. | hội quán cháy, sổ nợ còn bản sao trong thương đội → nền hội quán cũ |  |
+| LOC04 | Cổ Miếu Vô Danh | Đông Hoang | phe, ancu, tran | — | Trú ẩn, bia tên người mất, dấu mộng. | miếu đổ, bia vỡ còn mảnh chữ đọc được → nền miếu giữa cỏ |  |
+| LOC05 | Huyền Cơ Trận Các | Đông Hoang | linhdia, dong, phe, thanh | FA03 | Trận đồ, trục quan trắc, hồ sơ Ngũ Tổ. | các sụp, còn phòng lõi nguy hiểm có thể khảo sát → phòng lõi giữa đá đổ | có |
+| LOC06 | Đoạn Tùng Lâm | Đông Hoang | rung, nui, dam, linhdia, dong | — | Gỗ, dược phàm, thú, đất chôn. | rừng cháy, lộ nền đá cổ → rừng non mọc trên nền đá cổ |  |
+| LOC07 | Huyết Sát Cốc | Nam Trạch | ma, dong, sao, dam | FA05 | Huyết tộc, huyết trì, pháp ước, tranh quyền. | cốc vắng, còn ấn và hồ sơ bị nguyền → huyết trì khô |  |
+| LOC08 | Vạn Thú Môn | Nam Trạch | rung, sao, linhdia, dong | FA06 | Chuồng thú, trại cứu thương, sổ khế ước, cửa gọi linh. | chuồng bỏ ngỏ, thú thả ra thành bầy thật → trại cũ giữa bầy thú |  |
+| LOC09 | Tịch Chiếu Bến | Nam Trạch | song, dam, tran | — | Đò, lưới, chợ nước, sân hát, xác tàu. | lũ đổi lối vào, lời khai nằm trên bảng khắc thuyền → bến mới bên dòng cũ |  |
+| LOC10 | Bách Thảo Cốc | Tây Lĩnh | duoc, linhdia, rung | FA07 | Ruộng thuốc, bệnh xá, hồ sơ dịch, bàn luyện đan. | vườn bị đốt, hạt giống còn trong kho lạnh → vườn mọc lại từ kho lạnh |  |
+| LOC11 | Hàn Thiết Lô | Tây Lĩnh | khoang, nui, dong, tran | FA08 | Mỏ, lò, xưởng giấy và khuôn. | mỏ đóng, còn đường hầm, bảng công và lô kim loại cuối → đường hầm bỏ hoang |  |
+| LOC12 | Lạn Kha Tự | Tây Lĩnh | ancu, phe, linhdia, nui, dong | FA09 | Thư khố, nhà tạm trú, tháp tro, văn bia. | chùa đổ, văn bản tản mát ở người hành hương → tháp tro còn đứng | có |
+| LOC13 | Bắc Phong Ải | Bắc Nhạc | thanh, tran | FA10 | Quân doanh, trường luyện, trạm ngựa, kho. | ải thất thủ thành chiến địa, tuyến tiếp tế lưu vong → chiến địa cũ |  |
+| LOC14 | Táng Cốt Nguyên | Bắc Nhạc | phe, hoang, dong, tran | — | Mồ tập thể, bia trận vong, trại người trở về, xưởng dựng bia. | trại bỏ hoang, dấu linh hồn còn đọc được → đồng mộ không người |  |
+| LOC15 | Hồi Thanh Đài | Bắc Nhạc | thien, linhdia, nui, dong, phe | — | Điểm nghe ký ức, quan trắc Đêm Dài và cửa kết thúc. | nền đá nứt, lõi đài còn nghe được → nền đá | có |
+
+Đường neo: LOC01–LOC02, LOC02–LOC03, LOC01–LOC04, LOC04–LOC05, LOC04–LOC06, LOC06–LOC08, LOC08–LOC07, LOC08–LOC09, LOC09–LOC03 (thủy), LOC03–LOC11 (thương lộ), LOC11–LOC10, LOC10–LOC12, LOC11–LOC13, LOC13–LOC14, LOC14–LOC15 (sơn), LOC12–LOC15 (sơn).
+
+#### Vai NPC NP (tên là người giữ vai thời mở đầu; luôn gọi `vaiNow`)
+| Mã | Tên (người mở đầu) | Vai | Nơi | Thế lực | Cảnh giới | Nối vai | Vật chứng thay |
+|---|---|---|---|---|---|---|---|
+| NP01 | Lý Thổ | đại diện hộ nông (đứng đầu) | LOC01 Thanh Khê Thôn | FA04 | phàm | con cái | sổ hộ và bia người giữ giống |
+| NP02 | Mộc Nghi | dân binh | LOC01 Thanh Khê Thôn | FA04 | phàm | người thay | danh sách quân dịch ở trạm |
+| NP03 | Tạ Văn Kính | thư lại | LOC02 Lương Kinh | FA01 | phàm | học trò | bản sổ thuế có nét sửa |
+| NP04 | Lương Hạo | quân chủ (đứng đầu) | LOC02 Lương Kinh | FA01 | phàm | con cái | chiếu chỉ và ấn triều |
+| NP05 | Thẩm Cửu | chưởng quỹ (đứng đầu) | LOC03 Vạn Bảo Hội Quán | FA02 | phàm | học trò | sổ nợ bản sao trong thương đội |
+| NP06 | Lạc Tín | người dẫn thương đội | LOC03 Vạn Bảo Hội Quán | FA02 | phàm | người thay | khế cầm cố người nhà |
+| NP07 | Vô Đăng | người giữ miếu | LOC04 Cổ Miếu Vô Danh | — | phàm | học trò | bia tên người mất trong miếu |
+| NP08 | Mạc Liên | người dò phả hệ | LOC04 Cổ Miếu Vô Danh | — | phàm | người thay | tập chép bia |
+| NP09 | Hứa Triều | trận sư (đứng đầu) | LOC05 Huyền Cơ Trận Các | FA03 | Kết Đan | học trò | trận đồ ở phòng lõi |
+| NP10 | Diệp Vân | học đồ trận | LOC05 Huyền Cơ Trận Các | FA03 | Luyện Khí | học trò | bản sao bảng người bị hiến |
+| NP11 | Đỗ Lộc | tiều phu | LOC06 Đoạn Tùng Lâm | FA04 | phàm | con cái | dấu khắc trên cây mẹ |
+| NP12 | Dã Tâm | sứ thú của Yêu Hoàng | LOC06 Đoạn Tùng Lâm | — | Nguyên Anh | người thay | hiệp ước sinh cảnh khắc trên đá |
+| NP13 | Tần Huyết Lăng | chủ huyết cốc (đứng đầu) | LOC07 Huyết Sát Cốc | FA05 | Nguyên Anh | con cái | ấn huyết cốc và hồ sơ bị nguyền |
+| NP14 | A Túc | người giữ huyết phả | LOC07 Huyết Sát Cốc | FA05 | Luyện Khí | người thay | huyết phả |
+| NP15 | Bạch Kỳ | người quản thú (đứng đầu) | LOC08 Vạn Thú Môn | FA06 | Kết Đan | học trò | sổ khế ước thú |
+| NP16 | Kỷ Vũ | thú y | LOC08 Vạn Thú Môn | FA06 | Luyện Khí | học trò | phương thuốc thú |
+| NP17 | Giang Mộ | lái đò | LOC09 Tịch Chiếu Bến | — | phàm | con cái | bảng khắc thuyền |
+| NP18 | Ninh Ca | chủ gánh hát | LOC09 Tịch Chiếu Bến | — | phàm | học trò | vở tuồng chép tay |
+| NP19 | Tô Bán Hạ | y sư (đứng đầu) | LOC10 Bách Thảo Cốc | FA07 | Trúc Cơ | học trò | hồ sơ dịch và hạt giống kho lạnh |
+| NP20 | Hà Tề | dược đồng | LOC10 Bách Thảo Cốc | FA07 | phàm | học trò | mẫu nước và sổ ghi bệnh |
+| NP21 | Cố Chùy | chủ lò (đứng đầu) | LOC11 Hàn Thiết Lô | FA08 | phàm | con cái | bảng công thợ mỏ |
+| NP22 | La Men | thợ khuôn và giấy | LOC11 Hàn Thiết Lô | FA08 | phàm | học trò | khuôn ấn giả |
+| NP23 | Trí Viễn | người giữ thư khố (đứng đầu) | LOC12 Lạn Kha Tự | FA09 | Trúc Cơ | học trò | thư khố Lạn Kha |
+| NP24 | Sầm Tro | người khắc bia | LOC12 Lạn Kha Tự | FA09 | phàm | học trò | văn bia đã khắc |
+| NP25 | Đường Bắc Quy | chỉ huy (đứng đầu) | LOC13 Bắc Phong Ải | FA10 | Luyện Khí | người thay | bản đồ quân doanh |
+| NP26 | A Mãn | giữ ngựa trạm | LOC13 Bắc Phong Ải | FA10 | phàm | người thay | sổ trạm ngựa |
+| NP27 | Mạnh Cốt | thầy bó xương | LOC14 Táng Cốt Nguyên | — | phàm | học trò | sổ tên người được cứu |
+| NP28 | Bùi Ấn | cựu coi ấn | LOC14 Táng Cốt Nguyên | — | phàm | con cái | ấn thật được giấu |
+| NP29 | Kha Vọng | người nghe ký ức | LOC15 Hồi Thanh Đài | — | Kết Đan | học trò | nền đá ghi lời nghe được |
+| NP30 | Tịch Âm | ký ức kết tụ | LOC15 Hồi Thanh Đài | — | phàm | không già, không người kế | tiếng vọng ở nền đá |
+
+#### Thế lực FA
+| Mã | Tên | Căn cứ | Đứng đầu (vai) | Giữ | Nợ / cần |
+|---|---|---|---|---|---|
+| FA01 | Lương triều | LOC02 Lương Kinh | NP04 | thuế và ngôi | FA02, FA10 |
+| FA02 | Vạn Bảo Thương Hội | LOC03 Vạn Bảo Hội Quán | NP05 | hợp đồng, độc quyền vận chuyển | FA08, FA05 |
+| FA03 | Huyền Cơ Trận Các | LOC05 Huyền Cơ Trận Các | NP09 | hệ trận Ngũ Tổ | FA09 |
+| FA04 | Thanh Khê Liên Thôn | LOC01 Thanh Khê Thôn | NP01 | đất, nước, an táng | FA01 |
+| FA05 | Huyết Sát Cốc | LOC07 Huyết Sát Cốc | NP13 | huyết hệ và quyền tự trị | FA02 |
+| FA06 | Vạn Thú Môn | LOC08 Vạn Thú Môn | NP15 | nơi sống, khế ước và nguồn thú | FA04 |
+| FA07 | Bách Thảo Cốc | LOC10 Bách Thảo Cốc | NP19 | cứu chữa và đan phương | FA01 |
+| FA08 | Hàn Thiết Hội | LOC11 Hàn Thiết Lô | NP21 | lò và quyền thợ | FA02 |
+| FA09 | Lạn Kha Tự | LOC12 Lạn Kha Tự | NP23 | ký ức người chết | FA03 |
+| FA10 | Bắc Phong Quân | LOC13 Bắc Phong Ải | NP25 | biên ải và lương quân | FA01 |
+
+#### Đồng hồ thế giới CLK
+| Mã | Đồng hồ | Nhịp | Nơi |
+|---|---|---|---|
+| CLK01 | Mùa đói Thanh Khê | 6–14 năm | LOC01 |
+| CLK02 | Nợ của triều đình | 8–15 năm | LOC02 |
+| CLK03 | Biên ải | 10–20 năm | LOC13 |
+| CLK04 | Huyết ước | 3–3 năm | LOC07 |
+| CLK05 | Thú triều | 22–28 năm | LOC08 |
+| CLK06 | Đêm Dài trở lại | chỉ tăng vì hành động | LOC15 |
+| CLK07 | Đại Hội Thiên Kiêu | 30–30 năm | LOC02 |
+| CLK08 | Tông Chiến Chính–Ma | 150–150 năm | — |
+| CLK09 | Đổi Ngôi | 60–120 năm | LOC02 |
+| CLK10 | Đại Dịch | 80–160 năm | LOC10 |
+| CLK11 | Bí Cảnh Thượng Cổ Mở | 50–50 năm | — |
+| CLK12 | Tiên Nhân Hạ Phàm | một lần | LOC15 |
+| CLK13 | Long Mạch Đứt | 300–600 năm | — |
+| CLK14 | Thiên Lộ Mở | 300–300 năm | LOC15 |

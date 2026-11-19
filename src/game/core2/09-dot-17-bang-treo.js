@@ -21,7 +21,8 @@ function questRewardChipsHidden(q){const R0=questRewardOf(q);const L=questReward
   return L;}
 
 // màu phẩm nhiệm vụ: Dễ xám, Thường lục, Khó lam, Hiểm tím, Tử nạn cam, Tuyệt cảnh đỏ
-// Bảng QCOL: content/rules/qcol.jsfunction qpc(g){return '--pc:'+QCOL[clamp(g||0,0,5)];}
+// Bảng QCOL: content/rules/qcol.js
+function qpc(g){return '--pc:'+QCOL[clamp(g||0,0,5)];}
 
 // ================= ĐỢT 18: KỲ NGỘ HIẾM =================
 // Hai loại, xác suất rất thấp, mỗi ngày trong game gieo một lần (cách nhau ít nhất nửa năm):
