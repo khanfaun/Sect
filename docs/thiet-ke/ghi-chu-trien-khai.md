@@ -125,7 +125,8 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
 - Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-I.
-- Tiếp theo: Đ9.1 (bộ máy tuyến + schema + công cụ kiểm), rồi file hướng dẫn GPT (Đ9.0) dùng BẢNG MÃ ở mục Đ8.
+- Xong thêm: Đ9.1 (bộ máy tuyến, schema, công cụ kiểm `npm run content:tuyen`, tuyến mẫu OR01, bài `menh_tuyen`) và Đ9.0 (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) — xem mục Đ9.1 cuối tệp.
+- Tiếp theo: người dùng đưa GPT viết theo lô (lô 1: OR02–OR04), Claude kiểm + rà mẫu, ghép. Thẻ "Mệnh thư" trong Sổ tay (giao diện) chưa làm.
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
 ## NGƯỜI DÙNG CHỐT 15 CÂU (việc phải làm lại/bổ sung trước khi làm Đ5.4)
@@ -691,3 +692,11 @@ Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm th
 | CLK14 | Thiên Lộ Mở | 300–300 năm | LOC15 |
 
 40. CHỐT: màn xem NPC đã gặp + thế lực trong Sổ tay để làm ở Đ9.  41. CHỐT: hai lựa chọn ở Bến Vong Xuyên làm ở Đ10 cùng Mộng Ấn.
+
+## Đ9.1 + Đ9.0 — bộ máy tuyến, công cụ kiểm, tuyến mẫu, hướng dẫn GPT
+- Dữ liệu: `content/tuyen/<id>.json` (OR01–OR45, DL01–DL09), schema `content/schemas/tuyen.schema.json`. `tools/content-build.js` gọi `tools/kiem-tra-tuyen.js` rồi sinh `src/game/data/06-tuyen-du-lieu.js` (`TUYEN_DATA`); tuyến sai thì build dừng.
+- Luật: `core2/59-menh-tuyen.js`. `r.arc={xt,dl,doi,vong,m}`; mỗi tuyến `{id,i,mT,han,moi,nhac,nn,dau,lich,ngoai,ket,xong}`. Hằng tháng (`advanceTime` → `tuyenTick`): mở tuyến xuất thân theo `r.origin`, mở nút sau `cho`, lỡ `han` → `tuDien` (dấu, Sử lược, CLK) rồi đi tiếp. `tuyenGap(force)` đưa lời mời bằng kỳ ngộ `sp:1` (id `tuyen:<OR>:<N>`), tự thêm "Để sau" (nhắc lại sau 3 tháng, tối đa 4 lần); kiểu `tin` chỉ gặp khi đứng ở nơi LOC. Vai đã mất → đoạn `thayThe`; `{NPxx}` của người đã mất đọc "người từng là …". Xong N5: một kết → nhận, nhiều kết → người chơi chọn, không kết → "người đứng ngoài". Kết ghi Sử lược + `W().tuyenVong` (dấu vọng, kiếp sau đọc một dòng nhật ký). Xuất thân kết → mở đại lộ theo `goiYDaiLo` (hồi 1 bỏ qua nếu `boQuaNeuXuatThan`); `tuyenMoDaiLo(d)` đổi một lần mỗi kiếp. `tuyenView()` cho Sổ tay. Tuyến đã gỡ khỏi content mà bản lưu còn trỏ tới: bỏ qua.
+- Hiệu ứng tuyến (riêng, không dùng `e` của sự kiện cũ): `bac` (xu), `linhThach` {ha,trung,thuong,cuc} (chỉ khi `pham:false`), `deed`, `vatPham/boVatPham`, `fa`, `clk` (→`clkCanThiep`), `giet` (→`vaiGiet`), `hp`, `h`, `tamma`. Điều kiện: `dau/khongDau/pham/canhGioiTu/tuoiTu/tuoiDen/bacTu/linhThachTu/vatPham/vaiSong/vaiMat/faSong/faDiet/clkDang/khoa`. Vật truyện riêng tuyến (`vatTruyen`, id `vt_<or>_…`) nạp vào `CAT`.
+- Bộ kiểm (`npm run content:tuyen`, nằm trong `content:check`): JSON có dòng, khoá lạ, mã LOC/NP/FA/CLK/deed/xuất thân/vật có thật, 5 nút N1–N5, 3–5 lựa chọn (một cái không điều kiện), `tuDien` mọi nút, `thayThe` không gọi vai đã mất, 3 kết A/B/C đòi dấu có người đặt, văn không chữ số (trừ tuổi), không tên cứng NP/LOC/FA, không điểm nghiệp, tiền đúng đơn vị, không trùng id; đại lộ: `khacVoi` hồi 2–5, hồi 3/5 chạm CLK. Cảnh báo: tên riêng lạ, văn ngắn/dài, "hồi sinh", trùng người + nơi giữa đại lộ và xuất thân. `--de OR02 OR03` in đoạn thiết kế để dán cho GPT.
+- Bài: `menh_tuyen` (33 ý), sửa `cai_can_do` (ép trúng xác suất nhìn ra đồ dởm — trước đó phụ thuộc thứ tự chạy).
+- Còn dở: thẻ "Mệnh thư" trong Sổ tay (giao diện React) chưa vẽ, `tuyenView` đã có; chưa có sự kiện đồng hồ chơi được ngoài tuyến; bộ kiểm chưa so mục tiêu nút đại lộ với xuất thân bằng nghĩa (chỉ cảnh báo cùng người + nơi).
