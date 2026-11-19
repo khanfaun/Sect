@@ -28,6 +28,37 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Đ7.1: từ vựng hiệu ứng chiêu mới (core2/50-fx-moi.js)
+  fx_moi() {
+    fresh("G.run.pham=0;G.run.root={id:'tap',els:['kim','moc'],q:'thuong'};startCombat({},{kind:'node'});G.run.scene.skipDodge=1");
+    run("var fxSc=G.run.scene,fxMe=mainUnit(fxSc),fxFoe=alive(fxSc,'B')[0];fxFoe.hp=fxFoe.max=99999;var fxMk=(id,fx,dt)=>({id,n:id,el:'vo',t:1,c:0,fx,f:'',dt:dt||'vl'})");
+    run("resolveSkill(fxSc,fxMe,fxMk('t1',{p:1,mark:1,hpDmg:.02}),1,[fxFoe],1,'auto')");
+    ok(run("fxFoe.st.mark>0")&&run("NK.count('fx.hpDmg')")>0, 'đánh dấu và sát thương theo khí huyết');
+    run("fxMe.st.block=0;resolveSkill(fxSc,fxMe,fxMk('t2',{blockH:.08}),1,[],1,null)");
+    ok(run("fxMe.st.block")===run("Math.round(fxMe.max*.08)"), 'hộ thể theo khí huyết tối đa');
+    run("fxMe.st.block=0;resolveSkill(fxSc,fxMe,fxMk('t3',{blockH:.9}),1,[],1,null)");
+    ok(run("fxMe.st.block<=Math.round(fxMe.max*0.3)"), 'hộ thể nguồn mới không quá 30% khí huyết');
+    run("resolveSkill(fxSc,fxMe,fxMk('t4',{summon:{k:'linh',hp:.18,atk:.4,n:3}}),1,[],1,null)");
+    ok(run("!!fxmSum(fxSc,fxMe,'linh')"), 'gọi được linh ảnh vào phe mình');
+    run("resolveSkill(fxSc,fxMe,fxMk('t5',{sumCover:1}),1,[],1,null)");
+    const hp0=run("fxMe.hp");run("absorb(fxMe.st,100)");
+    ok(run("!fxmSum(fxSc,fxMe)")&&run("fxMe.hp")===hp0, 'linh ảnh gánh trọn một đòn rồi tan');
+    run("resolveSkill(fxSc,fxMe,fxMk('t6',{summon:{k:'khoi',hp:.25,atk:.35,n:2}}),1,[],1,null);var fxK=fxmSum(fxSc,fxMe,'khoi');onZero(fxSc,fxK);onZero(fxSc,fxK)");
+    ok(run("fxK.gone===1&&!alive(fxSc,'A').includes(fxK)"), 'khôi lỗi hết lượt thì tan');
+    run("resolveSkill(fxSc,fxMe,fxMk('t7',{trap:[.6,2]}),1,[],1,null);var fxFh=fxFoe.hp");
+    ok(run("!!fxSc.trap"), 'đặt trận');
+    run("resolveSkill(fxSc,fxFoe,{id:'_e',n:'x',el:'vo',t:1,c:0,fx:{p:1},f:''},1,[fxMe],1,'auto')");
+    ok(run("fxFoe.hp<fxFh")&&run("NK.count('fx.trapNo')")===1&&run("!fxSc.trap"), 'kẻ địch cận chiến dính trận một lần');
+    run("fxFoe.phase='charge';fxFoe.pending={sk:{fx:{}}};resolveSkill(fxSc,fxMe,fxMk('t8',{p:.5,breakCharge:1}),1,[fxFoe],1,'auto')");
+    ok(run("fxFoe.phase")==='recover', 'cắt đứt tụ lực');
+    run("fxFoe.st.mark=0;doSkill(fxSc,fxMe,fxMk('t9',{tgt:1,mark:1}),1,fxFoe.id,1)");
+    ok(run("fxFoe.st.mark>0"), 'chiêu không sát thương vẫn nhắm được mục tiêu');
+    run("fxSc._cd={x:2};finishAct(fxSc,fxMe,{id:'y',fx:{cd:3}})");
+    ok(run("fxSc._cd.x")===1&&run("fxSc._cd.y")===2&&run("skLocked('y')"), 'hồi chiêu tính theo lần ra tay, tự đánh bỏ qua chiêu đang hồi');
+    run("fxMe.st.poison=40;resolveSkill(fxSc,fxMe,fxMk('ta',{poiStop:2}),1,[],1,null);var fxHpb=fxMe.hp;onZero(fxSc,fxMe)");
+    ok(run("fxMe.st.poison")===40&&run("fxMe.hp>=fxHpb"), 'khoá độc: độc ngừng phát tác');
+    ok(/Hộ thể bằng/.test(run("skillTip(fxMk('tb',{blockH:.1,cd:3}),1)"))&&/chờ 2 lần/.test(run("skillTip(fxMk('tb',{blockH:.1,cd:3}),1)")), 'chú thích chiêu có hiệu ứng mới');
+  },
   content() {
     const r = cp.spawnSync(process.execPath, ['tools/kiem-tra-content.js'], {cwd:require('path').join(__dirname,'..'),encoding:'utf8'});
     ok(r.status === 0, 'nguồn nội dung, mọi cảnh, danh mục và các ngữ cảnh ('+(r.stdout||r.stderr).trim()+')');
