@@ -28,6 +28,24 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Đ8.1: 15 địa điểm neo — đủ, khác nhau, đúng đại khu, không phải sơn môn; bản lưu cũ đặt neo khi tải và chốt lại nơi thầy dạy / nguồn cải căn
+  neo() {
+    fresh();
+    const L=JSON.parse(run("JSON.stringify(Object.keys(LOC_NEO).map(c=>{const n=anchorNode(c);return n&&[c,n.id,Math.floor(n.id/100)===LOC_NEO[c].kv,n.type,n.name===LOC_NEO[c].n,n.anchor===c];}))"));
+    ok(L.length===15&&L.every(x=>x), 'đủ mười lăm nút neo');
+    ok(new Set(L.map(x=>x[1])).size===15, 'mười lăm nút khác nhau');
+    ok(L.every(x=>x[2]&&x[4]&&x[5]), 'mỗi neo đúng đại khu, đúng tên');
+    ok(L.every(x=>x[3]!=='tong'), 'không neo vào sơn môn (giữ tên tông)');
+    ok(run("anchorNode('LOC01').type")==='tran'&&run("anchorNode('LOC02').type")==='thanh', 'Thanh Khê Thôn là thôn trấn, Lương Kinh là thành');
+    ok(run("locName('LOC12')")==='Lạn Kha Tự', 'locName đọc tên trên bản đồ');
+    // bản lưu cũ: chưa có neo, nơi thầy dạy đã chốt theo loại nút
+    run("(()=>{const w=W();for(const R0 of w.regions)for(const n of R0.nodes)if(n.anchor){n.name=n.name0;delete n.anchor;delete n.sectFix;}delete w.anchorsV1;w.tuSrc={LOC10:0};ccSrc('CC01');w.ccSrc.CC01.node=0;})()");
+    ok(!run("W().regions.some(R=>R.nodes.some(n=>n.anchor))"), 'giả bản lưu cũ: không còn neo');
+    run("snapWorld(W())");
+    ok(run("W().anchorsV1")===1&&run("W().regions.flatMap(R=>R.nodes).filter(n=>n.anchor).length")===15, 'tải lại: đặt đủ neo');
+    ok(run("W().tuSrc.LOC10===anchorNode('LOC10').id&&W().ccSrc.CC01.node===anchorNode('LOC10').id"), 'nơi thầy dạy, nguồn cải căn chốt lại theo neo');
+    run("snapWorld(W())");ok(run("W().regions.flatMap(R=>R.nodes).filter(n=>n.anchor).length")===15, 'tải lần nữa không đặt thêm');
+  },
   // Đ7.4: kiểm nghề tu — đủ ba chiêu sau syncSkills, luật không ghép, thần thông chỉ qua pháp tướng, 48 chiêu chạy được trong trận
   nghe_tu() {
     fresh("G._ngNoEv=1;G._tuNoRui=1;G.run.pham=0;G.run.root={id:'tap',els:['kim','moc'],q:'thuong'};G.run.rootKnown=1;G.run.st=9999;var ntLk=lkTang;lkTang=()=>9");
