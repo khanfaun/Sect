@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "tha_ke_ac",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Dây buộc thay chuôi đao",
+      "t": "Kẻ từng quỳ xin tha nay đứng trong hàng người vá mái sau bão. Ngươi nhận ra vết mẻ trên chiếc đao hắn đã nộp, giờ dùng để chẻ lạt. Một chủ nhà từng bị hắn lấy của vẫn đứng ngoài nhìn.",
+      "c": [
+        {
+          "id": "hoi_chu",
+          "l": "Hỏi chủ nhà có muốn nói chuyện",
+          "t": "Ngươi đợi chủ nhà đồng ý mới dẫn hắn tới. Người ấy chỉ đòi trả chiếc rương đã mất.",
+          "e": {
+            "nang": {
+              "giao": 1
+            }
+          }
+        },
+        {
+          "id": "thoi",
+          "l": "Để họ tự quyết việc gặp nhau",
+          "t": "Ngươi rời sân. Hắn tiếp tục vá mái, còn chủ nhà giữ khoảng cách và không bị ai giục tha thứ."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Lời cảnh báo trước phiên chợ",
+      "t": "Người ngươi từng tha đợi ở quán nước. Hắn báo đám cũ sắp tới đòi tiền những sạp từng nộp cho chúng. Hắn muốn nói trước với dân nhưng sợ họ nhìn thấy mặt mình rồi đóng cửa.",
+      "c": [
+        {
+          "id": "bao_chung",
+          "l": "Đi cùng hắn để báo các sạp",
+          "t": "Ngươi đi cùng. Dân đem tiền hàng về nhà trước tối, còn hắn phải nghe một người nhắc lại khoản đã cướp.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "de_kin",
+          "l": "Chuyển lời mà giấu tên người báo",
+          "t": "Ngươi chỉ nói điều mình nghe được. Họ chuẩn bị cất hàng, nhưng vẫn chưa biết ai trong nhóm cũ đã đổi ý."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Chiếc bọc đựng tiền trả",
+      "t": "Ngươi gặp kẻ từng đầu hàng bên một chiếc bọc khâu lại nhiều lần. Hắn bán công ở bến, dành được ít bạc trả người bị hại. Hắn hỏi có thể mượn ngươi làm chứng cho số tiền giao hôm nay không.",
+      "c": [
+        {
+          "id": "chung",
+          "l": "Đứng chứng lúc hắn trả tiền",
+          "t": "Ngươi đếm cùng hai bên rồi để họ tự ký. Người nhận ghi phần đã trả và phần còn thiếu.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "gui",
+          "l": "Bảo hắn tìm người nhận rồi tự giao",
+          "t": "Hắn cất bọc vào áo. Khi gặp người ấy, hắn tự đọc món nợ, không mượn tên ngươi để xin bỏ qua."
+        }
+      ]
+    }
+  ]
+}
