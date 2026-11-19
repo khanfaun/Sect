@@ -36,9 +36,12 @@ function locName(code){const n=locNode(code);return n?n.name:(LOC_NEO[code]?LOC_
 // ---------- Sử lược: những chuyện lớn của thế giới (kể cả khi người chơi vắng mặt). Giữ 60 dòng, cũ thì gộp theo thế kỷ (L20) ----------
 const SL_MAX=60;
 function suLuocAdd(t,k,w){w=w||W();if(!w)return;const L=w.suLuoc||(w.suLuoc=[]);L.push({y:tYear(w.t),t,k:k||''});
-  while(L.length>SL_MAX){const c0=Math.floor(L[0].y/100);let j=0;while(j<L.length-SL_MAX/2&&Math.floor(L[j].y/100)===c0)j++;
-    if(j<2){L.shift();continue;}const grp=L.splice(0,j);const n=grp.reduce((s,x)=>s+(x.gop||1),0);
-    L.unshift({y:c0*100,t:contentText('tg.slGop',[c0-9,n,grp.filter(x=>x.k!=='gop').slice(0,2).map(x=>x.t).join(' ')]),k:'gop',gop:n});}
+  while(L.length>SL_MAX){let i=0;while(i<L.length&&L[i].k==='gop')i++;
+    if(i>=SL_MAX/3||i>=L.length-1){L.shift();continue;} // giữ tối đa hai mươi dòng gộp (hai mươi thế kỷ gần nhất có chuyện)
+    const c0=Math.floor(L[i].y/100);let j=i;while(j<L.length-1&&L[j].k!=='gop'&&Math.floor(L[j].y/100)===c0)j++;
+    const grp=L.splice(i,Math.max(1,j-i));const P=i>0&&L[i-1].y===c0*100?L[i-1]:null;
+    const g=P||{y:c0*100,k:'gop',gop:0,s:[]};g.gop+=grp.length;const PR={clk:0,fa:1,loc:2,vai:3};g.s=(g.s||[]).concat(grp.slice().sort((x,y)=>(PR[x.k]??4)-(PR[y.k]??4)).map(x=>x.t)).slice(0,2);
+    g.t=contentText('tg.slGop',[c0-9,g.gop,g.s.join(' ')]);if(!P)L.splice(i,0,g);}
   dbg('su.luoc',{k:k||'',t:String(t).slice(0,40)});}
 
 // ---------- Đ8.2: vai NPC có người kế (Luật 1 HN A.17) ----------
@@ -47,7 +50,13 @@ function vaiTho(w,P,key,tuoi){if(P.bat)return null;const x=wRnd(w,'tho:'+key);
   const t=P.tu<0?60+Math.floor(x*21):Math.round(LIFE[clamp(P.tu,0,5)]*(0.8+0.2*x));return Math.max(t,Math.floor(tuoi)+5+Math.floor(x*10));}
 function vaiInit(w){w=w||W();if(!w)return null;const V=w.vai||(w.vai={});
   for(const ma in VAI_NP)if(!V[ma]){const P=VAI_NP[ma];V[ma]={ten:P.ten,g:P.g,tuoi:P.tuoi,tho:vaiTho(w,P,ma+'.1',P.tuoi),song:1,doi:1,qh:null,ke:[],noi:P.noi,the:P.fa||null};}
+  for(const ma in V){const v=V[ma];if(!Array.isArray(v.tui))v.tui=[];if(!(v.cua>=0))v.cua=0;} // túi đồ nhỏ gọn của NPC (Sửa-I: Ám Hội đưa đồ đang sở hữu ra đấu giá)
   return V;}
+// túi đồ NPC: [{id,n,q?}] tối đa 12 món; cua = của cải (linh thạch Hạ phẩm quy đổi). Người kế là con / học trò thì nhận lại túi, người thay thì không.
+const VAI_TUI_MAX=12;
+function vaiTui(ma){const V=vaiInit(W());return V[ma]?V[ma].tui:[];}
+function vaiTuiAdd(ma,it){const L=vaiTui(ma);if(!it||L.length>=VAI_TUI_MAX)return false;L.push(it);return true;}
+function vaiTuiBo(ma,id){const L=vaiTui(ma);const i=L.findIndex(x=>x.id===id);return i<0?null:L.splice(i,1)[0];}
 function vaiTenMoi(w,P,v,key){const g=wRnd(w,'g:'+key)<0.5?'nam':'nu';const ten0=v.ke.length?v.ke[v.ke.length-1].ten:v.ten;
   const ho=(v.keThay?'thay':P.ke)==='con'&&ten0?ten0.split(' ')[0]:NAME.ho[Math.floor(wRnd(w,'ho:'+key)*NAME.ho.length)];
   const L=g==='nu'?NAME.nu:NAME.nam;let ten=ho+' '+L[Math.floor(wRnd(w,'ten:'+key)*L.length)];
@@ -59,7 +68,7 @@ function vaiMat(ma,ly,w){w=w||W();const V=vaiInit(w),v=V[ma],P=VAI_NP[ma];if(!v|
   v.song=0;v.ten=null;v.cho=tYear(w.t)+1+Math.floor(wRnd(w,'cho:'+ma+v.doi)*2);dbg('vai.mat',{ma,ly:ly||'tho'});return true;}
 function vaiKe(ma,w){const V=w.vai,v=V[ma],P=VAI_NP[ma];const key=ma+'.'+(v.doi+1);const nm=vaiTenMoi(w,P,v,key);const truoc=v.ke.length?v.ke[v.ke.length-1].ten:null;
   const x=wRnd(w,'tuoi:'+key);const tuoi=P.tu<1?(P.ke==='con'?18+Math.floor(x*18):22+Math.floor(x*20)):Math.round(P.tuoi*(0.35+0.4*x));
-  Object.assign(v,{ten:nm.ten,g:nm.g,tuoi,tho:vaiTho(w,P,key,tuoi),song:1,doi:v.doi+1,qh:truoc?contentText('tg.vaiQh.'+(v.keThay?'thay':P.ke),[truoc]):null,cho:null,keThay:0});
+  if(v.keThay||P.ke==='thay'){v.tui=[];v.cua=Math.floor((v.cua||0)/3);}Object.assign(v,{ten:nm.ten,g:nm.g,tuoi,tho:vaiTho(w,P,key,tuoi),song:1,doi:v.doi+1,qh:truoc?contentText('tg.vaiQh.'+(v.keThay?'thay':P.ke),[truoc]):null,cho:null,keThay:0});
   const n=anchorOf(w,P.noi);if(P.lead)suLuocAdd(contentText('tg.vaiKe',[v.ten,v.qh||P.vai,P.vai,n?n.name:LOC_NEO[P.noi].n]),'vai',w);dbg('vai.ke',{ma,doi:v.doi});}
 function vaiYear(w,y,n){const V=vaiInit(w);n=n||1;
   for(const ma in V){const v=V[ma],P=VAI_NP[ma];if(!P||P.bat)continue;
@@ -77,7 +86,7 @@ function vaiGiet(ma,ly){return vaiMat(ma,ly||'giet');}
 // w.fa[FAxx]={tien,quan,dan,suc,chu,trang:'song'|'suy'|'diet',tDiet,lap}. Sức duy trì kéo về mức gốc, cộng lai mỗi năm, nhiễu nhỏ; đồng hồ thế giới đẩy lên / xuống.
 function faInit(w){w=w||W();if(!w)return null;const F=w.fa||(w.fa={});
   for(const id in THE_LUC)if(!F[id]){const D=THE_LUC[id];F[id]={tien:D.tien,quan:D.quan,dan:D.dan,suc:D.suc,chu:D.chu,trang:'song',tDiet:null,lap:1};}return F;}
-function faTrang(f){return f.suc<=0?'diet':f.suc<30?'suy':'song';}
+function faTrang(f){return f.suc<=0?'diet':f.suc<30?'suy':f.trang==='suy'&&f.suc<40?'suy':'song';} // hồi phải lên 40 mới tính là vững lại
 function faSet(id,f,w,y){const D=THE_LUC[id],t0=f.trang,t1=t0==='diet'?'diet':faTrang(f);if(t0===t1)return;f.trang=t1;const n=anchorOf(w,D.noi);const nt=n?n.name:LOC_NEO[D.noi].n;
   if(t1==='diet'){f.tDiet=y;f.suc=0;suLuocAdd(contentText('tg.faDiet',[D.n,nt]),'fa',w);
     for(const ma in VAI_NP)if(VAI_NP[ma].fa===id&&VAI_NP[ma].lead&&w.vai&&w.vai[ma]&&w.vai[ma].song)vaiMat(ma,'fa',w);}

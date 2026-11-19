@@ -15,7 +15,7 @@ export function ManHetKiep() {
         <div className="sc-b">
           <p>{L.lines[L.lines.length - 1]}</p>
           <p className="ep">{L.ep}</p>
-          {!!o.gap && <p className="hint">{o.gap} năm sau, thế gian vẫn tiếp tục. Nay là năm {PS.tYear(PS.W().t)}.</p>}
+          {!!o.gap && <p className="hint gap-loi">{PS.gapLoi(o.gap)} Thế gian vẫn tiếp tục. Nay là năm {PS.tYear(PS.W().t)}.</p>}
           <Html as="div" className="kvl" h={rows} />
           {o.qc && o.qc.length > 0 && <div className="qc-left"><h4>{PS.contentText('nq.qc.title')}</h4><p className="hint">{PS.contentText('nq.qc.hint')}</p><ul>{o.qc.map((t, i) => <li key={i}>{t}</li>)}</ul></div>}
         </div>

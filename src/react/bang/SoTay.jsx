@@ -49,7 +49,9 @@ const Dong = ({ a, t }) => <p><span>{a}</span>{t}</p>;
 
 export function SoTay() {
   const { G, UI } = PS;
-  const r = G.run, w = PS.W(), TABS = ccCo() ? TABS0.concat([['cc', 'Cơ duyên']]) : TABS0;
+  const r = G.run, w = PS.W();
+  // Đ8: Sử lược (chuyện lớn của thế giới, kể cả khi người chơi vắng mặt) — chỉ hiện khi đã có
+  const TABS = TABS0.concat(ccCo() ? [['cc', 'Cơ duyên']] : [], (w.suLuoc || []).length ? [['su', 'Sử lược']] : []);
   let tab = UI.tab.journal || 'quest'; if (!TABS.some(t => t[0] === tab)) tab = 'quest';
   let body = null;
   if (tab === 'aff') body = <ThienHa />;
@@ -68,6 +70,13 @@ export function SoTay() {
     body = L.length ? <div className="logl nq-so">{L.map((l, i) => <Dong key={i} a={l.y + ' tuổi'} t={l.t + ' — ' + l.k} />)}</div> : <p className="empty">Sổ còn trắng. Chưa có ai mang ơn, cũng chưa ai mang oán.</p>;
   }
   if (tab === 'cc') body = <CoDuyen />;
+  if (tab === 'su') {
+    const C = (w.suLuoc || []).slice().reverse(), A = (PS.clkView && PS.clkView()) || [];
+    body = <div className="su-luoc">
+      {A.length > 0 && <><h4>Đang diễn ra</h4><div className="rows">{A.map(x => <div key={x.id} className="row"><span className="r-t"><b>{x.n}</b><small>{x.giai}</small></span></div>)}</div></>}
+      <div className="logl">{C.map((l, i) => <Dong key={i} a={l.k === 'gop' ? 'thế kỷ' : 'năm ' + l.y} t={l.t} />)}</div>
+    </div>;
+  }
   if (tab === 'chron') {
     const C = w.chron.slice().reverse();
     body = C.length ? <div className="logl">{C.map((l, i) => <Dong key={i} a={'năm ' + l.y} t={l.t} />)}</div> : <p className="empty">Thế gian còn yên ả.</p>;

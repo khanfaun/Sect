@@ -362,6 +362,14 @@ const TESTS = {
     ok(/Tái Mạch Đan/.test(d) && /Kiểm chứng/.test(d) && !/\d/.test(d), 'Sổ tay thẻ Cơ duyên: '+d.replace(/\s+/g,' ').slice(0,70));
     await ev(p, () => {UI.panel=null;G.run.cc=null;render();});
   },
+  // Đ8: Sổ tay thẻ Sử lược — chuyện thế giới khi vắng mặt, đồng hồ đang diễn ra
+  async su_luoc(p) {
+    await ev(p, () => {const w=W();w.suLuoc=[{y:1200,t:'Thế kỷ thứ ba: chuyện cũ.',k:'gop'},{y:1250,t:'Lương Kinh thất thủ; triều mới do một phe lập.',k:'clk'}];const s=w.thoiCuc.CLK07;s.pha=2;s.tPha=tYear(w.t);
+      G.run.scene=null;UI.modal=null;UI.panel='journal';UI.tab.journal='su';render();});await p.waitForTimeout(150);
+    const d = await ev(p, () => (document.querySelector('.su-luoc')||{}).innerText||'');
+    ok(/Lương Kinh thất thủ/.test(d) && /Đang diễn ra/.test(d) && /Đại Hội Thiên Kiêu/.test(d) && /thế kỷ/.test(d), 'Sổ tay thẻ Sử lược: '+d.replace(/\s+/g,' ').slice(0,80));
+    await ev(p, () => {UI.panel=null;const s=W().thoiCuc.CLK07;s.pha=0;render();});
+  },
   // Đ3.8: bảng Giao tình có mục Người nhà
   async gia_dinh(p) {
     await ev(p, () => {G.run.family=[{ten:'Lâm Đại Hữu',qh:'cha',tuoi:48,suc:'khoe',thai:'thuong',song:1,lc:0}];UI.modal=null;G.run.scene=null;UI.panel='bonds';UI.tab.bonds='an';render();});

@@ -28,6 +28,59 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Đ8.6: đất ma — ba khu, bậc, hồi theo thế kỷ, nguy hiểm, thôn trấn biến mất, tu luyện, nhiễm ma khí
+  dat_ma() {
+    fresh();
+    run("var vyRun=(n)=>{const w=W();for(let i=0;i<n;i++){w.t+=HY;worldYearsTo(w);}}");
+    run("demDaiTang(4,'test')");run("vyRun(6)");
+    ok(run("(W().maVuc||[]).length")===3, 'Đêm Dài không ai ngăn: ba khu thành đất ma');
+    ok(run("W().maVuc.every(z=>z.ma>95&&z.bac===0)"), 'mới hóa: Ma vực');
+    ok(run("W().suLuoc.some(x=>x.k==='ma')"), 'Sử lược ghi đất ma');
+    ok(run("W().maVuc.every(z=>z.nut.every(id=>{const n=nodeById(id);return !(n.anchor&&LOC_NEO[n.anchor].loi);}))"), 'nơi lõi không bị nuốt');
+    ok(run("W().maVuc.flatMap(z=>z.nut).map(nodeById).filter(n=>n.type==='tran'||n.type==='thanh').every(n=>n.state==='ruin'||n.id===G.run.at)"), 'Ma vực: thôn trấn biến mất');
+    ok(run("W().maVuc.flatMap(z=>z.nut).map(nodeById).every(n=>n.danger>=Math.min(3,n.dangerGoc+2))"), 'Ma vực: nguy hiểm cao hơn');
+    // tu luyện chính đạo −50%
+    run("(()=>{const z=W().maVuc[0];G.run.scene=null;G.run.at=z.tam;})()");ok(run("maLk(curNode())")===0.5, 'tu luyện chính đạo ở Ma vực ×0,5');
+    // phàm nhân nhiễm ma khí
+    run("(()=>{const r=G.run;r.pham=1;r.wounds=[];r.maT=W().t;const t0=r.tamma||0;W().t+=20*HD;timeHooks(20*HD);})()");
+    ok(run("wounds().length")>0&&run("NK.count('ma.nhiem')")>0, 'phàm nhân ở Ma vực hai mươi ngày: nhiễm ma khí (thương, tâm ma)');
+    // hồi theo thế kỷ
+    run("vyRun(600)");ok(run("W().maVuc.length")===0||run("W().maVuc.every(z=>z.bac>=1)"), 'sáu trăm năm: hết Ma vực');
+    run("vyRun(2900)");ok(run("W().maVuc.length")===0, 'vài ngàn năm (dù có ma tông gần làm chậm): đất đã lành');
+    ok(run("W().regions.flatMap(R=>R.nodes).every(n=>n.maLv==null&&!n.maRuin)"), 'lành hẳn: không còn dấu ma trên nút');
+    // tịnh hóa
+    run("maVucTao(anchorNode('LOC07').id,1)");const m0=run("maAt(anchorNode('LOC07')).ma");run("maTinhHoa(anchorNode('LOC07'),5)");
+    ok(run("maAt(anchorNode('LOC07')).ma")===m0-5, 'siêu độ / tịnh hóa: ma khí −5');
+  },
+  // Đ8.5: thời gian luân hồi + tua theo thập kỷ
+  khoang_luan_hoi() {
+    fresh();
+    const g=JSON.parse(run("JSON.stringify([1,2,3].flatMap(k=>{const L=[];for(let i=0;i<200;i++)L.push(gapRoll({kiep:k,seeds:[]}));return L;}))"));
+    ok(g.every(y=>y>=3&&y<=30), 'ba kiếp đầu: khoảng luân hồi 3–30 năm');
+    const h=JSON.parse(run("JSON.stringify((()=>{const L=[];for(let i=0;i<4000;i++)L.push(gapRoll({kiep:9,seeds:[]}));return L;})())"));
+    const fr=k=>h.filter(y=>y<=k).length/h.length;
+    ok(fr(30)>0.48&&fr(30)<0.62&&fr(800)<0.995&&Math.max(...h)<=5000&&Math.max(...h)>800, 'kiếp sau: phần lớn Gần, có Vừa, Xa, Rất xa (Gần '+Math.round(fr(30)*100)+'%, tối đa '+Math.max(...h)+' năm)');
+    const hn=JSON.parse(run("JSON.stringify((()=>{const o=ngBacB;ngBacB=()=>4;const L=[];for(let i=0;i<4000;i++)L.push(gapRoll({kiep:9,seeds:[]}));ngBacB=o;return L;})())"));
+    ok(hn.filter(y=>y>150).length>h.filter(y=>y>150).length*1.5, 'nghiệp chướng nặng: khoảng Xa, Rất xa nhiều hơn');
+    ok(run("gapLoi(12)")===run("LH_KHOANG[0].loi")&&run("gapLoi(3000)")===run("LH_KHOANG[3].loi")&&!/\d/.test(run("gapLoi(500)")), 'lời ở bến theo khoảng, không ghi số năm');
+    // ép khoảng ba ngàn năm
+    run("(()=>{const w=W();w.legacy=[{t:'an',ten:'Lão Ngư',d:'cứu',who:'X'},{t:'oan',ten:'Hắc Lang',d:'giết',who:'X',feud:1},{t:'oan',ten:'Ác Bá',d:'cướp',who:'X'}];w.suLuoc=[];})()");
+    const y0=run("tYear(W().t)");const t0=Date.now();run("G.run=null;worldGap(3000)");const ms=Date.now()-t0;
+    ok(ms<2000, 'ép khoảng ba ngàn năm chạy dưới hai giây ('+ms+' ms)');
+    ok(run("tYear(W().t)")-y0===3000, 'thế giới trôi đúng ba ngàn năm');
+    ok(run("W().suLuoc.length")>0&&run("W().suLuoc.length")<=60, 'Sử lược có chuyện, không quá sáu mươi dòng ('+run("W().suLuoc.length")+')');
+    ok(run("W().suLuoc.some(x=>x.k==='gop')"), 'chuyện cũ gộp theo thế kỷ');
+    ok(run("W().rstate.every(s=>!s.alive||s.age<=LIFE[s.realm]*0.95+1)"), 'không còn thiên kiêu nào quá thọ mà vẫn sống');
+    ok(run("Object.keys(VAI_NP).every(m=>{const x=vaiNow(m);return x.song?(W().vai[m].tho==null||x.tuoi<W().vai[m].tho):!!x.thay;})"), 'mọi vai có người giữ trong thọ hoặc có vật chứng thay');
+    ok(run("Object.keys(LOC_NEO).every(c=>!!anchorNode(c))")&&run("LOC_LOI.every(c=>anchorNode(c).state!=='ruin')"), 'mười lăm nơi neo còn; nơi lõi (LOC05, LOC12, LOC15) không hoang (bí mật luôn còn chỗ không thể mất)');
+    ok(run("W().legacy.find(L=>L.ten0==='Hắc Lang'||L.ten==='Hắc Lang').oanHon")===1, 'huyết thù ba ngàn năm thành oán hồn');
+    ok(run("W().legacy.filter(L=>L.ten0==='Lão Ngư'||L.ten0==='Ác Bá').every(L=>/hậu duệ/.test(L.ten))||W().legacy.some(L=>L.done)"), 'ân oán với người phàm: chuyển hậu duệ hoặc khép');
+    ok(run("Object.keys(THOI_CUC).filter(id=>id!=='CLK06').every(id=>W().thoiCuc[id].lan>0)"), 'đồng hồ đã tự diễn trong lúc vắng mặt');
+    // chết thật ở kiếp thứ chín: màn hết kiếp có số năm, thế giới chạy tiếp
+    fresh("G.run.kiep=9");const g9=run("(()=>{const r=G.run;die('toahoa');return G.over.gap;})()");
+    ok(g9>=3&&g9<=5000&&run("G.screen")==='over', 'kết kiếp thứ chín: khoảng '+g9+' năm, vào màn hết kiếp');
+    fresh();const g1=run("(()=>{die('toahoa');return G.over.gap;})()");ok(g1>=3&&g1<=30, 'kết kiếp đầu: khoảng 3–30 năm');
+  },
   // Đ8.4: mười bốn đồng hồ thế giới
   thoi_cuc() {
     fresh();
@@ -85,6 +138,8 @@ const TESTS = {
     // bản lưu cũ
     run("(()=>{const w=W();delete w.vai;delete w.fa;delete w.yLast;delete w.suLuoc;snapWorld(w);})()");
     ok(run("Object.keys(W().vai).length")===30&&run("Object.keys(W().fa).length")===10&&run("W().yLast")===run("tYear(W().t)"), 'bản lưu cũ: dựng vai, thế lực khi tải');
+    ok(run("vaiTuiAdd('NP05',{id:'x1',n:'Ngọc bội'})&&vaiTui('NP05').length===1&&vaiTuiBo('NP05','x1').n==='Ngọc bội'"), 'NPC có túi đồ nhỏ (thêm, lấy ra)');
+    run("delete W().vai.NP05.tui");ok(run("Array.isArray(vaiTui('NP05'))"), 'bản lưu cũ không có túi NPC vẫn đọc được');
     // nối Đ7: hộp Pháp môn ghi người dạy đang giữ vai
     run("(()=>{const n=anchorNode('LOC10');G.run.at=n.id;})()");
     ok(run("tuThay(anchorNode('LOC10'))").includes(run("vaiNow('NP19').ten")), 'Bách Thảo Cốc: người dạy là người đang giữ vai NP19');

@@ -35,8 +35,8 @@ function afterlife(r,cause,info){
   // kẻ đã giết người chơi
   if(cause==='combat'&&info&&!info.boss&&info.k&&info.k!=='kiep'){const old=w.nemesis&&w.nemesis.n===info.n?w.nemesis.lv:0;w.nemesis={n:info.n,k:info.k,i:info.i,el:info.el,r:r.region,lv:old+1,kiep:r.kiep,who:r.ten};}
   // 5. năm tháng trôi qua
-  const yrs=ri(3,30);G.lastGap=yrs;
-  worldCoarse(yrs*12);rivalsCoarse(yrs*12);
+  const yrs=gapRoll(r);G.lastGap=yrs;
+  worldGap(yrs); // Đ8.5: khoảng dài thì tua theo thập kỷ (core2/56-luan-hoi.js)
   // 6. thế hệ
   for(let i=0;i<w.rstate.length;i++){if(!w.rstate[i].alive)newRival(i,true);}
   const keep=[];
