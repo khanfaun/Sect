@@ -382,6 +382,7 @@ const TESTS = {
     await ev(p, () => {const b=document.querySelector('.amhoi .am-tui [data-arg^="tl="]');if(b)b.click();});await p.waitForTimeout(120);
     t = await ev(p, () => (document.querySelector('.amhoi .am-tl')||{}).innerText||'');
     ok(/định giá/.test(t) && /\+1/.test(t) && /Đưa giá thương lượng/i.test(t), 'chọn vật thương lượng: chỉnh số lượng, người bán định giá');
+    ok(/Đồng hồ tạm dừng/.test(await ev(p, () => document.querySelector('.amhoi').innerText)), 'mở Thương lượng: hiện đồng hồ tạm dừng (câu 48)');
     await ev(p, () => {const b=document.querySelector('.amhoi .am-tl [data-arg="tl="]');if(b)b.click();});await p.waitForTimeout(80);
     const tra = await ev(p, () => {const b=document.querySelector('.amhoi .am-muon [data-arg="tra=0"]');if(b&&!b.disabled){b.click();return 1;}return 0;});
     await p.waitForTimeout(120);
@@ -395,7 +396,14 @@ const TESTS = {
     ok(/Tới lượt ngươi/.test(t) && /Thử Ấn Bày/.test(t), 'tới lượt ngươi: hiện đồ trong túi để đưa ra');
     const btn = await ev(p, () => {const b=[...document.querySelectorAll('.amhoi [data-act="am"]')].find(x=>/Thử Ấn Bày/.test(x.innerText));if(b)b.click();return !!b;});
     await p.waitForTimeout(150);
-    ok(btn && await ev(p, () => G.run.scene&&G.run.scene.q.some(l=>l.own==='me')), 'bấm món: món của ngươi lên bàn');
+    t = await ev(p, () => (document.querySelector('.amhoi')||{}).innerText||'');
+    ok(btn && /Chọn thứ ngươi muốn nhận/.test(t) && /Thêm vào danh sách/.test(t) && /Thượng phẩm/.test(t), 'bấm món: bước đặt danh sách vật muốn nhận (câu 47)');
+    await ev(p, () => {const b=document.querySelector('.amhoi .am-dat-cand [data-arg="dthem=lt:1"]');if(b)b.click();});await p.waitForTimeout(100);
+    await ev(p, () => {const b=document.querySelector('.amhoi .am-dat-mon [data-arg="dsl=0,5"]');if(b)b.click();});await p.waitForTimeout(100);
+    t = await ev(p, () => (document.querySelector('.amhoi .am-dat')||{}).innerText||'');
+    ok(/Ngươi muốn nhận/.test(t) && /\d+ Trung phẩm/.test(t) && await ev(p, () => G.run.scene.dua.muon[0].key==='lt:1'), 'danh sách hiện tên + số lượng, chỉnh được: '+t.replace(/\s+/g,' ').slice(0,80));
+    await ev(p, () => {const b=[...document.querySelectorAll('.amhoi [data-act="am"]')].find(x=>/Đưa ra bàn với danh sách/.test(x.innerText));if(b)b.click();});await p.waitForTimeout(150);
+    ok(await ev(p, () => G.run.scene&&G.run.scene.q.some(l=>l.own==='me'&&l.muon&&l.muon[0].key==='lt:1')), 'đưa ra bàn: món của ngươi lên bàn với danh sách đã đặt');
     await ev(p, () => {const b=[...document.querySelectorAll('.amhoi [data-act="am"]')].find(x=>/Rời bàn/.test(x.innerText));if(b)b.click();});
     await p.waitForTimeout(120);
     ok(await ev(p, () => !G.run.scene || G.run.scene.type!=='amhoi'), 'rời bàn: đóng hộp thoại');

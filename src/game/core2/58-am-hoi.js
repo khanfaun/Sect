@@ -122,6 +122,7 @@ function amDat(sc,who,recs){for(const x of recs||[]){
 // ---------- danh sách vật người bán muốn nhận ----------
 // linh thạch phẩm vừa tầm + 1–2 thứ người bán đang cần (đan / vật tư thế giới đang thiếu, người bán chưa có), số lượng đủ giá mở
 function amMuon(sc,L){const nid=sc.node,mo=Math.max(1,Math.round(L.v*AM_HOI.gia0));const out=[];
+  if(L.own==='me'&&Array.isArray(L.muon)&&L.muon.length){for(const m of L.muon){const it={id:m.key};out.push({key:m.key,sl:m.sl,n:amName(it),ic:amIcon(it),dat:1});}return out;}
   let k=0;for(let j=3;j>=0;j--)if(amVal('lt:'+j,0,nid)<=mo){k=j;break;}const u=amVal('lt:'+k,0,nid);out.push({key:'lt:'+k,sl:Math.max(1,Math.ceil(mo/u))});
   if(L.own!=='me'){const co=new Set(amTui(sc,L.own).map(x=>x.id));
     const PI=Object.keys(PILL).filter(id=>PILL[id].p&&!co.has('pill:'+id)).map(id=>{const key='pill:'+id;const uv=amVal(key,0,nid);return {key,uv,s:ncGet(nid,amNcKey(key))+amH(sc,'muon|'+L.u+'|'+id)*0.5};})
@@ -156,7 +157,8 @@ function amCap(sc,L,pi){if(amTuiDay(sc,pi))return 0;const fake=amFake(L.it)&&amH
 // lựa cách trả của NPC: món trong danh sách họ có đủ (ưu tiên vật trong túi, rồi linh thạch)
 function amNpcBid(sc,L,lot,pi){const cap=amCap(sc,L,pi);const need=amNeed(L,lot);if(cap<need)return null;
   const M=lot.muon.filter(m=>amLoai(m.key)!=='lt').map(m=>m.key);const lt=lot.muon.find(m=>amLoai(m.key)==='lt');
-  if(lt)for(let k=+lt.key.slice(3);k>=0;k--)M.push('lt:'+k); // linh thạch: phẩm nêu, hoặc đếm bằng phẩm thấp hơn cho vừa giá
+  if(L.own==='me'&&L.muon&&L.muon.length){for(const m of lot.muon)if(amLoai(m.key)==='lt')M.push(m.key);}
+  else if(lt)for(let k=+lt.key.slice(3);k>=0;k--)M.push('lt:'+k); // linh thạch: phẩm nêu, hoặc đếm bằng phẩm thấp hơn cho vừa giá
   for(const key of M){const m={key};const sl=amSlCan(sc,L,lot,pi,m.key);if(!isFinite(sl)||amHas(sc,pi,m.key)<sl)continue;const v=amBidVal(sc,L,lot,pi,m.key,sl);if(v>=need&&v<=cap*1.15)return {key:m.key,sl,v};}
   return null;}
 function amPlan(sc,L,lot){lot.plan={};const T=AM_HOI.tre;sc.ppl.forEach((p,pi)=>{if(pi===L.own||lot.bo[pi]||(lot.lead&&lot.lead.who===pi))return;
@@ -164,11 +166,11 @@ function amPlan(sc,L,lot){lot.plan={};const T=AM_HOI.tre;sc.ppl.forEach((p,pi)=>
 function amBid(sc,L,lot,who,key,sl,v,t){const it=amItOf(sc,who,key)||{id:key};lot.lead={who,key,sl,v,n:amName(it)};lot.nb++;lot.t0=t!=null?t:amNow();lot.hen=lot.t0+AM_HOI.dem;
   amLog(sc,'tra',[amTen(sc,who),sl+' '+amName(it)]);dbg('amh.tra',{ai:who==='me'?'me':amTen(sc,who),key,sl,v});amPlan(sc,L,lot);}
 // chạy đồng hồ tới bây giờ: NPC tới lượt thì trả hoặc bỏ cuộc; hết giờ thì gõ búa. trả true nếu có gì đổi.
-function amTick(){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='amhoi')return false;let ch=false,g=0;
+function amTick(){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='amhoi')return false;let ch=false,g=0;if(sc.lot&&sc.lot.dung)amDung(sc.lot,amNow());
   while(sc.ph==='lot'&&sc.lot&&g++<200){const L=sc.q[sc.i],lot=sc.lot,now=amNow();
     let pi=null,ta=Infinity;for(const k in lot.plan)if(lot.plan[k]<ta){ta=lot.plan[k];pi=+k;}
     if(pi!=null&&ta<=now&&ta<=lot.hen){delete lot.plan[pi];const b=amNpcBid(sc,L,lot,pi);
-      if(b)amBid(sc,L,lot,pi,b.key,b.sl,b.v,ta);else{lot.bo[pi]=1;}ch=true;continue;}
+      if(b)amBid(sc,L,lot,pi,b.key,b.sl,b.v,ta);else{lot.bo[pi]=1;if(L.own==='me')amNpcDe(sc,L,lot,pi);}ch=true;continue;}
     if(now>=lot.hen){amResolve(sc,L,lot);ch=true;if(sc.lot)sc.lot.t0=now,sc.lot.hen=now+AM_HOI.dem,amPlan(sc,sc.q[sc.i],sc.lot);continue;}
     break;}
   if(ch)saveSoon();return ch;}
@@ -181,6 +183,26 @@ function amResolve(sc,L,lot){const nm=amName(L.it);const ld=lot.lead;
       amLog(sc,'ban',[amTen(sc,ld.who),nm,ld.sl+' '+ld.n]);dbg(ld.who==='me'?'amh.mua':L.own==='me'?'amh.ban':'amh.npc',{n:L.it.n,key:ld.key,sl:ld.sl,v:ld.v,gia:amFake(L.it)?1:0});}
     else{if(pay)amDat(sc,ld.who,pay);if(item)amDat(sc,L.own,item);amLog(sc,'e',[nm]);}}
   sc.i++;amNext(sc);}
+
+// ---------- Sửa-L câu 48: đồng hồ tạm dừng khi người chơi mở Thương lượng (tối đa AM_HOI.dung ms mỗi món) ----------
+// lot.dung={l: mốc đã tính tới}, lot.dungDa: số ms đã dừng trong món này
+function amDungCon(lot){return Math.max(0,AM_HOI.dung-(lot.dungDa||0));}
+function amDung(lot,now){const D=lot.dung;if(!D)return;const upto=Math.min(now,D.l+amDungCon(lot));const d=upto-D.l;
+  if(d>0){lot.hen+=d;lot.t0+=d;for(const k in lot.plan)lot.plan[k]+=d;D.l=upto;lot.dungDa=(lot.dungDa||0)+d;}
+  if(amDungCon(lot)<=0){lot.dung=null;dbg('amh.dungHet',{});}}
+function amDungMo(lot){if(lot.dung||amDungCon(lot)<=0)return;lot.dung={l:amNow()};dbg('amh.dung',{con:amDungCon(lot)});}
+function amDungTat(lot){if(!lot||!lot.dung)return;amDung(lot,amNow());lot.dung=null;}
+// ---------- Sửa-L câu 47: NPC không có vật trong danh sách ngươi đặt thì có thể đề nghị đổi bằng vật khác (ngươi tự quyết nhận hay không) ----------
+// lot.de[pi]={key,sl,v,n}: đề nghị, v = giá trị theo nhu cầu nơi họp (ngươi tự xét)
+function amNpcDe(sc,L,lot,pi){const cap=amCap(sc,L,pi);const need=amNeed(L,lot);if(cap<need)return;let best=null;
+  for(const h of amHold(sc,pi)){if(h.cua||lot.muon.some(m=>m.key===h.key))continue;const one=amVal(h.it,0,sc.node);if(one<=0||amFake(h.it))continue;
+    const sl=Math.ceil(need/one-1e-9);if(sl>h.sl)continue;const v=one*sl;if(v>cap*1.15)continue;if(!best||v<best.v)best={key:h.key,sl,v,n:h.n};}
+  if(!best)return;(lot.de=lot.de||{})[pi]=best;amLog(sc,'de',[amTen(sc,pi),best.sl+' '+best.n]);dbg('amh.de',{ai:amTen(sc,pi),key:best.key,sl:best.sl});}
+// ---------- Sửa-L câu 47: danh sách vật người chơi muốn nhận khi đưa đồ ra bán ----------
+// lựa chọn: linh thạch các phẩm, đan dược có giá, vật tư cải căn; sc.dua={key,it,v,muon:[{key,sl}]}
+function amDatCand(){const L=[];for(let k=0;k<4;k++)L.push('lt:'+k);for(const id in PILL)if(PILL[id].p)L.push('pill:'+id);
+  if(typeof CC_VT!=='undefined')for(const v in CC_VT)L.push('cc_'+v);return L;}
+function amDatSl0(sc,key,v){const one=amVal({id:key},0,sc.node);return clamp(Math.ceil(Math.max(1,Math.round(v*AM_HOI.gia0))/Math.max(1,one)),1,AM_HOI.datSl);}
 // ---------- vật trong túi người chơi ----------
 function amMine(){const r=G.run;const L=[];
   r.relics.forEach((x,i)=>L.push({key:'r:'+i,it:{id:'rel',n:x.name,q:x.tier||0}}));
@@ -216,14 +238,22 @@ function amAct(a){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='amhoi')return f
   amTick();const L=sc.q[sc.i],lot=sc.lot;
   if(sc.ph==='chon'){
     if(k==='khong'){sc.meDone=1;ok=true;}
-    else if(k==='chon'){const M=amMine().find(x=>x.key===arg);if(M){sc.meDone=1;const lo={own:'me',u:'me',it:M.it,v:M.v};const rest=sc.q.slice(sc.i).concat([lo]).sort((x,y)=>x.v-y.v);sc.q=sc.q.slice(0,sc.i).concat(rest);ok=true;dbg('amh.dua',{n:M.n,v:M.v});}}
+    else if(k==='chon'){const M=amMine().find(x=>x.key===arg);if(M){sc.dua={key:M.key,it:M.it,v:M.v,muon:[]};sc.ph='dat';if(saveSoon)saveSoon();return true;}}
     if(ok)amNext(sc);}
+  else if(sc.ph==='dat'&&sc.dua){const D=sc.dua;
+    if(k==='dthem'){if(D.muon.length<AM_HOI.datN&&!D.muon.some(m=>m.key===arg)&&amDatCand().includes(arg)){D.muon.push({key:arg,sl:amDatSl0(sc,arg,D.v)});ok=true;}}
+    else if(k==='dsl'){const [i,d]=arg.split(',').map(Number);const m=D.muon[i];if(m){m.sl=clamp(m.sl+(d||0),1,AM_HOI.datSl);ok=true;}}
+    else if(k==='dxoa'){if(D.muon[+arg]){D.muon.splice(+arg,1);ok=true;}}
+    else if(k==='dthoi'){sc.dua=null;sc.ph='chon';ok=true;}
+    else if(k==='dgo'){const M=amMine().find(x=>x.key===D.key);if(M){sc.meDone=1;const lo={own:'me',u:'me',it:M.it,v:M.v,muon:D.muon.map(m=>({key:m.key,sl:m.sl}))};const rest=sc.q.slice(sc.i).concat([lo]).sort((x,y)=>x.v-y.v);sc.q=sc.q.slice(0,sc.i).concat(rest);
+      sc.dua=null;dbg('amh.dua',{n:M.n,v:M.v,muon:lo.muon.map(m=>m.key+'×'+m.sl).join(',')});amNext(sc);ok=true;}}}
   else if(sc.ph==='lot'&&L&&lot){
-    if(k==='tra'){const m=lot.muon[+arg];if(m){const sl=amSlCan(sc,L,lot,'me',m.key);ok=amMeBid(sc,L,lot,m.key,sl)===true;}}
-    else if(k==='tl'){sc.tl=arg?{key:arg,sl:Math.min(amHas(sc,'me',arg),Math.max(1,isFinite(amSlCan(sc,L,lot,'me',arg))?amSlCan(sc,L,lot,'me',arg):1))}:null;ok=true;}
+    if(k==='tra'){const m=lot.muon[+arg];if(m){const sl=amSlCan(sc,L,lot,'me',m.key);ok=amMeBid(sc,L,lot,m.key,sl)===true;if(ok){sc.tl=null;amDungTat(lot);}}}
+    else if(k==='tl'){if(arg&&L.own!=='me')amDungMo(lot);else amDungTat(lot);sc.tl=arg?{key:arg,sl:Math.min(amHas(sc,'me',arg),Math.max(1,isFinite(amSlCan(sc,L,lot,'me',arg))?amSlCan(sc,L,lot,'me',arg):1))}:null;ok=true;}
     else if(k==='tlsl'&&sc.tl){sc.tl.sl=clamp(sc.tl.sl+(+arg||0),1,Math.max(1,amHas(sc,'me',sc.tl.key)));ok=true;}
-    else if(k==='tlgo'&&sc.tl){ok=amMeBid(sc,L,lot,sc.tl.key,sc.tl.sl)===true;if(ok)sc.tl=null;}
-    else if(k==='bo'&&L.own!=='me'&&!(lot.lead&&lot.lead.who==='me')){lot.bo.me=1;sc.tl=null;amLog(sc,'boCuoc',[amTen(sc,'me')]);
+    else if(k==='tlgo'&&sc.tl){ok=amMeBid(sc,L,lot,sc.tl.key,sc.tl.sl)===true;if(ok){sc.tl=null;amDungTat(lot);}}
+    else if(k==='nhan'&&L.own==='me'&&lot.de&&lot.de[arg]){const d=lot.de[arg];delete lot.de[arg];if(d.v>=amNeed(L,lot)&&amHas(sc,+arg,d.key)>=d.sl){amBid(sc,L,lot,+arg,d.key,d.sl,d.v);dbg('amh.nhanDe',{key:d.key,sl:d.sl});ok=true;}}
+    else if(k==='bo'&&L.own!=='me'&&!(lot.lead&&lot.lead.who==='me')){lot.bo.me=1;sc.tl=null;amDungTat(lot);amLog(sc,'boCuoc',[amTen(sc,'me')]);
       // ngồi xem tới khi gõ búa (tua nhanh phần còn lại của món này)
       const i0=sc.i;let g=0;while(sc.ph==='lot'&&sc.i===i0&&g++<400){const t=Math.min(...Object.values(sc.lot.plan),sc.lot.hen);AM_LECH+=Math.max(0,t-amNow())+1;amTick();}ok=true;}
     else if(k==='go'&&L.own==='me'&&lot.lead){amResolve(sc,L,lot);ok=true;}
@@ -232,7 +262,7 @@ function amAct(a){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='amhoi')return f
   if(ok)saveSoon();return ok;}
 // ---------- dữ liệu cho hộp thoại ----------
 function amView(){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='amhoi')return null;const L=sc.q[sc.i],lot=sc.lot;
-  const V={ph:sc.ph,luot:contentText('amh.luot',[Math.min(sc.i+1,sc.q.length),sc.q.length]),log:sc.log.slice(-6),ltTxt:ltTxt(),ban:amBan(sc),btn:[],mine:[],muon:[],tl:null,con:null};
+  const V={ph:sc.ph,luot:contentText('amh.luot',[Math.min(sc.i+1,sc.q.length),sc.q.length]),log:sc.log.slice(-6),ltTxt:ltTxt(),ban:amBan(sc),btn:[],mine:[],muon:[],tl:null,con:null,de:[],dat:null,dung:null};
   const btn=(a,l,no)=>V.btn.push({a,l,no:no||''});
   if(L&&lot&&sc.ph==='lot'){const me=L.own==='me',dan=lot.lead&&lot.lead.who==='me',bo=!!lot.bo.me;
     V.con=Math.max(0,Math.ceil((lot.hen-amNow())/1000));
@@ -245,9 +275,15 @@ function amView(){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='amhoi')return n
       if(sc.tl){const h=amHold(sc,'me').find(x=>x.key===sc.tl.key);const v=h?amBidVal(sc,L,lot,'me',sc.tl.key,sc.tl.sl):0;const hop=amHop(sc,lot,sc.tl.key);
         V.tl={n:h?h.n:'?',ic:h?h.ic:'',sl:sc.tl.sl,max:h?h.sl:0,gia:amFmt(v),can:amFmt(amNeed(L,lot)),no:no0||(hop<AM_HOI.hopMin?contentText('amh.khongHop'):v<amNeed(L,lot)?contentText('amh.chuaDu'):'')};}
       else V.mine=amHold(sc,'me').map(h=>({key:h.key,ic:h.ic,n:h.n+' ×'+h.sl,a:'tl='+h.key,no:amHop(sc,lot,h.key)<AM_HOI.hopMin?contentText('amh.khongHop'):''}));}
+    if(lot.dung)V.dung=Math.ceil(amDungCon(lot)/1000);
+    if(me&&lot.de)V.de=Object.keys(lot.de).map(pi=>{const d=lot.de[pi];return {a:'nhan='+pi,l:contentText('amh.nhanDe',[amTen(sc,+pi),d.sl+' '+d.n]),gia:amFmt(d.v),no:d.v<amNeed(L,lot)?contentText('amh.chuaDu'):''};});
     if(me){if(lot.lead)btn('go',contentText('amh.goBan',[amTen(sc,lot.lead.who),lot.lead.sl+' '+lot.lead.n]));btn('rut',contentText('amh.rut'));}
     else if(!bo&&!dan)btn('bo',contentText('amh.boCuoc'));}
   if(sc.ph==='chon'){V.hoi=contentText('amh.luotMe');V.mine=amMine().map(M=>({key:M.key,n:M.n,ic:M.ic,a:'chon='+M.key,no:''}));btn('khong',contentText('amh.khongDua'));}
+  if(sc.ph==='dat'&&sc.dua){const D=sc.dua;V.hoi=contentText('amh.datHoi',[amName(D.it),amFmt(D.v)]);
+    V.dat={n:amName(D.it),ic:amIcon(D.it),list:D.muon.map((m,i)=>({i,n:amName({id:m.key}),ic:amIcon({id:m.key}),sl:m.sl,gia:amFmt(amVal({id:m.key},0,sc.node)*m.sl)})),
+      cand:amDatCand().filter(k=>!D.muon.some(m=>m.key===k)).map(k=>({a:'dthem='+k,n:amName({id:k}),ic:amIcon({id:k}),no:D.muon.length>=AM_HOI.datN?'-':''}))};
+    btn('dgo',contentText(D.muon.length?'amh.datGo':'amh.datGoLt'));btn('dthoi',contentText('amh.datThoi'));}
   if(sc.ph==='xong')btn('xong',contentText('amh.roi'));
   return V;}
 // ---------- nối vào hộp U Minh Ám Hội cũ ----------

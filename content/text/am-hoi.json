@@ -45,5 +45,17 @@
   "amh.tk": "thiên kiêu",
   "amh.nhanTen": "{{0}} (là {{1}})",
   "amh.che": "tu vi bị che",
-  "amh.banHead": "Quanh bàn"
+  "amh.banHead": "Quanh bàn",
+  "amh.datHoi": "Đưa {{0}} ra bàn (giá trị {{1}}). Chọn thứ ngươi muốn nhận (tên + số lượng), người trả giá chỉ được trả bằng các thứ ấy:",
+  "amh.datThem": "Thêm vào danh sách:",
+  "amh.datDs": "Ngươi muốn nhận (một trong các món):",
+  "amh.datGia": "đáng {{0}}",
+  "amh.datXoa": "Bỏ",
+  "amh.datGo": "Đưa ra bàn với danh sách này",
+  "amh.datGoLt": "Đưa ra bàn, để người mua trả linh thạch",
+  "amh.datThoi": "Chọn món khác",
+  "amh.nhanDe": "Nhận đề nghị của {{0}}: {{1}}",
+  "amh.deHead": "Không có thứ ngươi đòi, có người đề nghị đổi vật khác:",
+  "amh.log.de": "{{0}} không có thứ ngươi đòi, đề nghị đổi bằng {{1}}.",
+  "amh.dung": "Đồng hồ tạm dừng khi ngươi thương lượng (còn {{0}} giây)"
 }
