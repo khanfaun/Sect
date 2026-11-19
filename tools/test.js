@@ -187,6 +187,70 @@ const TESTS = {
     ok(!run("tuyenMoLai('OR01')")&&!JSON.parse(run("JSON.stringify(tuyenView())"))[0].moLai, 'quá hạn: không mở lại được');
     ok(!run("tuyenMoLai('OR99')"), 'tuyến không có: không lỗi');
   },
+  // Đ9.4: kiểm bộ máy tuyến trên dữ liệu thật, không dựa vào lời văn: lỡ hạn → tự diễn → đứng ngoài, không kẹt (cả 45 xuất thân);
+  // người giao việc chết → đoạn người / vật thay thế; đại lộ mở từ hồi 2 và đổi tối đa một lần mỗi kiếp; hạn cộng đường đi; tới nơi hẹn thì gặp ngay
+  menh_tuyen_d94() {
+    fresh("G._ngNoEv=1;G.run.bac=5e6;delete G.run.arc");
+    run("for(const A of TUYEN_DATA){TUYEN[A.id]=A;if(A.loai==='dai_lo'){const L=TUYEN_DL[A.daiLo]||(TUYEN_DL[A.daiLo]=[]);if(!L.includes(A.id))L.push(A.id);}}"); // bài khác có thể đã gỡ tạm tuyến
+    const xt=JSON.parse(run("JSON.stringify(Object.keys(TUYEN_XT))"));
+    ok(xt.length===45&&run("Object.keys(TUYEN_DL).length")===9, 'đủ 45 tuyến xuất thân và 9 đại lộ đã nạp');
+    let ket=0,ke=[];
+    for(const o of xt){const x=run(`(()=>{const r=G.run;r.arc=null;r.origin=${JSON.stringify(o)};r.birthAge=(r.birthAge||16)-30;tuyenTick();const S=r.arc.xt;if(!S)return 'không mở';
+        for(let k=0;k<400&&!S.xong;k++){W().t+=HM;tuyenTick();}return S.xong&&S.lich.length===5&&S.lich.every(l=>l.c==='~')&&S.ngoai===5?S.ket:'kẹt ở nút '+S.i;})()`);
+      if(x==='ngoai')ket++;else ke.push(o+':'+x);}
+    ok(ket===45, 'bỏ mặc cả 45 tuyến xuất thân: mỗi nút tự diễn, tới cuối là "người đứng ngoài", không kẹt'+(ke.length?' — '+ke.join(', '):''));
+    // người giao việc chết: OR02 N1 do NP09 gọi
+    fresh("G._ngNoEv=1;delete G.run.arc;G.run.origin='tran';G.run.birthAge=(G.run.birthAge||16)-30");
+    run("tuyenTick();W().t+=HM;tuyenTick()");const N=JSON.parse(run("JSON.stringify(TUYEN.OR02.nut[0])"));const ten=run(`vaiNow(${JSON.stringify(N.loiMoi.vai)}).ten`);
+    run(`vaiGiet(${JSON.stringify(N.loiMoi.vai)},'test');G.run.scene=null;tuyenGap(true)`);
+    ok(run("G.run.scene.text")===run(`tyT(TUYEN.OR02.nut[0].thayThe)`)&&!run("G.run.scene.text").includes(ten), 'người giao việc đã mất: hiện đoạn thay thế, không gọi tên người chết');
+    ok(run(`vaiNow(${JSON.stringify(N.loiMoi.vai)}).song`)===false&&run("kyOpts(G.run.scene).length")>=4, 'không hồi sinh; vẫn đủ lựa chọn để đi tiếp');
+    run("kyPick(0);G.run.scene=null");ok(run("G.run.arc.xt.i")===1, 'chọn ở đoạn thay thế: tuyến đi tiếp');
+    // hạn cộng thời gian đi đường tới nơi hẹn ở xa
+    fresh("G._ngNoEv=1;delete G.run.arc;G.run.origin='nong'");run("tuyenTick();W().t+=HM;tuyenTick();G.run.arc.xt.i=1;G.run.arc.xt.han=null;G.run.arc.xt.mT=W().t");
+    run("G.run.at=anchorNode('LOC15').id;tuyenTick()");
+    ok(run("G.run.arc.xt.han-W().t")>run("tyHanT(TUYEN.OR01.nut[1])")&&run("G.run.arc.xt.han-W().t")<=run("tyHanT(TUYEN.OR01.nut[1])+TY_CFG.duongMax*HM"), 'tin đồn ở nơi xa: hạn mềm cộng thời gian đi bộ (có trần)');
+    run("G.run.arc.xt.han=null;G.run.at=anchorNode('LOC01').id;tuyenTick()");ok(run("G.run.arc.xt.han-W().t")===run("tyHanT(TUYEN.OR01.nut[1])"), 'đang đứng ở nơi hẹn: hạn không cộng thêm');
+    // tới nơi hẹn thì gặp ngay, không chờ sang tháng
+    run("G.run.at=anchorNode('LOC15').id;G.run.scene=null;G.screen='map';arrive(anchorNode('LOC01').id)");
+    ok(run("G.run.scene&&G.run.scene.ev")==='tuyen:OR01:N2', 'vừa tới nơi hẹn của tin đồn: lời mời hiện ngay');
+    run("G.run.scene=null;G.screen='title'");
+    ok(run("tuyenView()[0].moLai===1"), 'đang đứng ở nơi hẹn: Mệnh thư có nút mở lại');
+    // đại lộ: mở từ hồi 2 sau kết thật, đổi tối đa một lần mỗi kiếp; kiếp mới đổi lại được
+    run("G.run.arc.xt.xong=1;G.run.arc.xt.ket='A';G.run.arc.dl=null;tyDlTuMo()");
+    const d0=run("G.run.arc.dl&&G.run.arc.dl.id");ok(!!d0&&run("TUYEN[G.run.arc.dl.id].daiLo")==='the_gia'&&run("G.run.arc.dl.i")===1, 'xuất thân có kết: đại lộ gợi ý mở từ hồi 2 ('+d0+')');
+    ok(!run("tuyenMoDaiLo('the_gia')"), 'chọn lại đúng đại lộ đang đi: không tính là đổi');
+    ok(run("tuyenMoDaiLo('y_gia')")&&run("TUYEN[G.run.arc.dl.id].daiLo")==='y_gia', 'đổi đại lộ lần một: được');
+    ok(!run("tuyenMoDaiLo('vo_lam')")&&run("TUYEN[G.run.arc.dl.id].daiLo")==='y_gia', 'đổi lần hai trong cùng kiếp: không được');
+    run("G.run.arc.xt.ket='ngoai';G.run.arc.dl=null;G.run.arc.doi=0;tyDlTuMo()");ok(run("G.run.arc.dl.i")===0, 'xuất thân đứng ngoài: đại lộ kể từ hồi 1');
+    run("G.run.kiep=(G.run.kiep||1)+1;G.run.arc=null;tuyenTick();G.run.arc.dl={id:'DL07',i:1,xong:0,dau:{},lich:[]}");ok(run("tuyenMoDaiLo('vo_lam')"), 'kiếp mới: lại được đổi một lần');
+  },
+  // Đ9 rà soát: mô phỏng mọi tuyến tới đủ kết bằng bộ máy thật (tools/mo-phong-tuyen.js)
+  tuyen_ra_soat() {
+    const r=require('./mo-phong-tuyen').moPhong();
+    ok(r.tk.tuyen===54, 'rà đủ 54 tuyến');
+    ok(r.tk.ketToi===r.tk.ket, 'mọi kết đều có đường tới ('+r.tk.ketToi+'/'+r.tk.ket+')');
+    ok(r.tk.chayOk===r.tk.chay, 'chạy thật mọi đường mẫu không kẹt ('+r.tk.chayOk+'/'+r.tk.chay+')');
+    ok(!r.loi.length, 'không lỗi'+(r.loi.length?': '+r.loi.slice(0,3).join(' | '):''));
+  },
+  // Đ9 câu 40: Sổ tay — người đã gặp, mười thế lực (không số nghiệp)
+  so_tay_nv() {
+    fresh("G._ngNoEv=1;delete G.run.arc;delete G.run.gapVai;G.run.origin='nong'");
+    ok(run("soVaiView().length")===0, 'chưa gặp ai: danh sách rỗng (bản lưu cũ không có r.gapVai)');
+    run("tuyenTick();W().t+=HM;tuyenTick();G.run.scene=null;tuyenGap(true)");
+    let V=JSON.parse(run("JSON.stringify(soVaiView())"));const v=V.find(x=>x.ma==='NP01');
+    ok(!!v&&v.ten===run("vaiNow('NP01').ten")&&v.song&&v.noi===run("locName('LOC01')")&&v.qh, 'lời mời tuyến: người gọi vào danh sách — tên hiện tại, nơi, thiện cảm bằng chữ');
+    ok(!/[-+]?\d/.test(v.qh+v.tinh), 'thiện cảm, tình trạng bằng chữ (không số)');
+    run("vaiGiet('NP01','test')");V=JSON.parse(run("JSON.stringify(soVaiView())"));let x=V.find(x=>x.ma==='NP01');
+    ok(x&&!x.song&&x.ke&&x.ten===v.ten, 'người đã gặp mất: ghi đã mất, chưa có người kế');
+    run("(()=>{const w=W();for(let i=0;i<4;i++){w.t+=HY;worldYearsTo(w);}})()");x=JSON.parse(run("JSON.stringify(soVaiView())")).find(x=>x.ma==='NP01');
+    ok(x&&!x.song&&x.ke.includes(run("vaiNow('NP01').ten")), 'có người kế: hiện tên người kế');
+    const F=JSON.parse(run("JSON.stringify(soFaView())"));
+    ok(F.length===10&&F.every(f=>f.n&&f.trang&&f.cong&&f.qh), 'đủ mười thế lực: tên, tình trạng, quan hệ, sổ cống hiến');
+    run("faAdj('FA07',-200,'test');tyE({fa:{FA04:5}},G.run.arc.xt);chAdd&&chAdd('fa:FA04',12)");const F2=JSON.parse(run("JSON.stringify(soFaView())"));
+    ok(F2.find(f=>f.id==='FA07').diet===1&&F2.find(f=>f.id==='FA04').qh===run("contentText('so.faGiup')"), 'thế lực tan ghi đã tan; góp sức qua tuyến ghi quan hệ');
+    ok(!JSON.stringify(F2).match(/nghiệp/), 'không hiện nghiệp');
+  },
   menh_tuyen() {
     fresh("G._ngNoEv=1;G.run.origin='nong';G.run.bac=20000;delete G.run.arc");
     ok(run("!!TUYEN.OR01&&TUYEN_XT.nong==='OR01'&&CAT.byId.vt_or01_mau_da&&1"), 'tuyến OR01 nạp từ content/tuyen, vật truyện vào danh mục');

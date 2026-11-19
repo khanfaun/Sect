@@ -8,7 +8,7 @@ const TUYEN={};const TUYEN_XT={};const TUYEN_DL={};
 for(const A of (typeof TUYEN_DATA!=='undefined'?TUYEN_DATA:[])){TUYEN[A.id]=A;if(A.loai==='xuat_than')TUYEN_XT[A.xuatThan]=A.id;else (TUYEN_DL[A.daiLo]||(TUYEN_DL[A.daiLo]=[])).push(A.id);
   for(const v of A.vatTruyen||[])if(!CAT.byId[v.id]){const x={id:v.id,n:v.n,i:v.i||'📜',d:v.d||'',use:v.use||'',status:'active'};CAT.byId[v.id]=x;CAT.qitems.push(x);}}
 const DAI_LO={phi_thang:'Phi Thăng Lộ',diet_the:'Diệt Thế Ma Đồ',de_nghiep:'Đế Nghiệp',phu_giap:'Phú Giáp Thiên Hạ',huyet_cuu:'Huyết Cừu',vo_lam:'Võ Lâm Chí Tôn',the_gia:'Thế Gia Vạn Đại',y_gia:'Y Giả Độ Thế',tinh_mong:'Tỉnh Mộng'};
-const TY_CFG={nhac:3,nhacMax:4}; // nhắc lại lời mời sau 3 tháng; tối đa 4 lần (không ép)
+const TY_CFG={nhac:3,nhacMax:4,duongMax:36}; // nhắc lại lời mời sau 3 tháng; tối đa 4 lần (không ép)
 const LT_KEY={ha:0,trung:1,thuong:2,cuc:3};
 function tySt(r){r=r||G.run;if(!r)return null;if(!r.arc||typeof r.arc!=='object')r.arc={xt:null,dl:null,doi:0,vong:0};return r.arc;}
 // ---------- chữ: {ten} {que} {NPxx} {NPxx.vai} {NPxx.noi} {LOCxx} {FAxx} ----------
@@ -53,7 +53,10 @@ function tyHanT(N){const h=N.han||{};return ((h.nam||0)*12+(h.thang||0)||12)*HM;
 function tyChoT(N){const c=N.cho||{};return ((c.nam||0)*12+(c.thang||0))*HM;}
 // nút đang mở (đã tới lúc) ?
 function tyMoNut(S){const N=tyNut(S);if(!N||S.han!=null)return;const t=W().t;if(t<S.mT)return;if(N.dk&&tyDk(N.dk,S)){if(t>S.mT+tyHanT(N))tyTuDien(S);return;}
-  S.han=t+tyHanT(N);S.moi=0;S.nhac=t;S.nn=0;dbg('tuyen.mo',{id:S.id,nut:N.id});}
+  const di=tyDuongT(N);S.han=t+tyHanT(N)+di;S.moi=0;S.nhac=t;S.nn=0;dbg('tuyen.mo',{id:S.id,nut:N.id,di:Math.round(di/HD)});}
+// Đ9 rà soát: lời mời có nơi hẹn ở xa → hạn mềm cộng thời gian đi bộ tới đó (bản đồ lớn: hai nơi neo kề nhau có khi đi cả năm). Tối đa TY_CFG.duongMax tháng.
+function tyDuongT(N){const L=N.loiMoi||{};const r=G.run;if(!r||!L.noi||L.noi==='here')return 0;const n=anchorNode(L.noi);if(!n||r.at==null||n.id===r.at)return 0;
+  let h=0;try{h=travelHours([r.at,n.id]);}catch(e){h=0;}return isFinite(h)&&h>0?Math.min(h,TY_CFG.duongMax*HM):0;}
 function tyDong(S,c,how){const A=TUYEN[S.id],N=A.nut[S.i];S.lich.push({n:N.id,c,y:tYear(W().t)});S.i++;S.han=null;S.moi=0;
   if(S.i>=A.nut.length){tyKetMo(S);return;}S.mT=W().t+tyChoT(A.nut[S.i]);dbg('tuyen.dong',{id:S.id,nut:N.id,c,how});}
 // tự diễn khi lỡ hạn
@@ -98,8 +101,8 @@ function tyKy(S,N){const A=TUYEN[S.id];const id=tyKyId(S,N);let ev=KYNGO.find(x=
   ev.c.push({l:contentText('ty.deSau'),go:()=>{const S2=tyFind(S.id)||S;S2.moi=1;S2.nhac=W().t;S2.nn=(S2.nn||0)+1;return {t:contentText('ty.deSauT'),ch:[]};}});
   return ev;}
 // đưa lời mời ra (khi đang ở ngoài bản đồ, không có cảnh khác). trả true nếu mở hộp thoại.
-// không chen khi đang có hộp thoại/trận, hay đang đi giữa đường (đợi dừng chân / tới nơi)
-function tuyenGap(force){const r=G.run;if(!r||(r.scene&&!force))return false;const T=tySt(r);if(!force&&r.moving&&!r.halt){T.hoan=1;return false;}T.hoan=0;
+// không chen khi đang có hộp thoại/trận (thẻ địa điểm thì được), hay đang đi giữa đường (đợi dừng chân / tới nơi)
+function tuyenGap(force){const r=G.run;if(!r||(r.scene&&r.scene.type!=='place'&&!force))return false;const T=tySt(r);if(!force&&r.moving&&!r.halt){T.hoan=1;return false;}T.hoan=0;
   for(const S of [T.xt,T.dl]){const o=tyCho(S);if(!o)continue;
     if(o.ket){kyStart(tyKy(S,null));return true;}
     if(!tyHereOk(o.N))continue;if(S.moi&&!force&&(W().t-S.nhac<TY_CFG.nhac*HM||(S.nn||0)>=TY_CFG.nhacMax))continue;
@@ -107,17 +110,21 @@ function tuyenGap(force){const r=G.run;if(!r||(r.scene&&!force))return false;con
   return false;}
 // tin đồn có dấu: lời mời dạng 'tin' chỉ mở khi tới nơi; nhắc bằng một dòng nhật ký khi nút mở
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(!r||!G.meta||!W())return o;
-  const m=Math.floor(W().t/HM);const T=tySt(r);if(T.m==null||T.m<m){T.m=m;tuyenTick();if(G.run&&!r.scene&&G.screen==='map')tuyenGap();}return o;};}
-// tới nơi: đưa lời mời đã hoãn lúc đi đường
-{const _ar=arrive;arrive=function(){const o=_ar.apply(this,arguments);const r=G.run;if(r&&r.arc&&r.arc.hoan&&!r.scene&&!r.moving&&G.screen==='map'&&W())tuyenGap();return o;};}
+  const m=Math.floor(W().t/HM);const T=tySt(r);if(T.m==null||T.m<m){T.m=m;tuyenTick();if(G.run&&(!r.scene||r.scene.type==='place')&&G.screen==='map')tuyenGap();}return o;};}
+// tới nơi (điểm cuối của chặng): đưa lời mời đã hoãn lúc đi đường, và lời mời tin đồn ở đúng nơi này (Đ9 rà soát: trước đây chỉ gặp khi sang tháng mà đang đứng yên → hay lỡ).
+// Lúc travelTick gọi arrive ở điểm cuối, r.moving vẫn còn (seg đã ở cuối) → coi là đã dừng.
+{const _ar=arrive;arrive=function(id){const o=_ar.apply(this,arguments);const r=G.run;if(!r||r.scene||G.screen!=='map'||!W())return o;const mv=r.moving;
+  if(mv&&mv.seg<mv.path.length-1)return o;r.moving=null;try{if(tuyenGap())dbg('tuyen.toiNoi',{at:id});}finally{if(G.run&&!G.run.moving&&mv)G.run.moving=mv;}return o;};}
 // Sổ tay / giao diện: nút đang mở + hạn bằng chữ (không số nghiệp)
 function tuyenView(){const r=G.run;if(!r)return [];const T=tySt(r);const L=[];
   for(const S of [T.xt,T.dl]){if(!S||!TUYEN[S.id])continue;const A=TUYEN[S.id];const N=tyNut(S);
-    L.push({id:A.id,loai:A.loai,ten:A.ten,nut:N?tyT(N.ten):'',han:N&&S.han!=null?contentText(S.han-W().t>6*HM?'ty.hanXa':'ty.hanGan'):'',noi:N&&N.loiMoi&&N.loiMoi.noi&&N.loiMoi.noi!=='here'?locName(N.loiMoi.noi):'',cho:tyChoMoi(S)?1:0,moLai:tyChoMoi(S)&&tyHereOk(N)?1:0,moNo:tyChoMoi(S)&&!tyHereOk(N)?contentText('ty.moXa'):'',ket:S.ket?(S.ket==='ngoai'?contentText('ty.ngoaiTen'):tyT(A.ket.find(k=>k.id===S.ket).ten)):''});}
+    L.push({id:A.id,loai:A.loai,ten:A.ten,nut:N?tyT(N.ten):'',han:N&&S.han!=null?contentText(S.han-W().t>6*HM?'ty.hanXa':'ty.hanGan'):'',noi:N&&N.loiMoi&&N.loiMoi.noi&&N.loiMoi.noi!=='here'?locName(N.loiMoi.noi):'',cho:tyChoMoi(S)?1:0,moLai:tyMoDuoc(S)&&(!N||tyHereOk(N))?1:0,moNo:tyMoDuoc(S)&&N&&!tyHereOk(N)?contentText('ty.moXa'):'',ket:S.ket?(S.ket==='ngoai'?contentText('ty.ngoaiTen'):tyT(A.ket.find(k=>k.id===S.ket).ten)):''});}
   return L;}
 // Sửa-J câu 44: lời mời mốc tuyến chưa trả lời vẫn nằm trong Sổ tay (thẻ Mệnh thư); người chơi tự mở lại trước khi hết hạn.
 // lời mời còn chờ = nút đang mở, đã đưa lời mời (hoặc đang chờ chọn kết), chưa quá hạn
 function tyChoMoi(S){const o=tyCho(S);if(!o)return false;if(o.ket)return true;return !!S.moi&&(S.han==null||W().t<=S.han);}
-function tuyenMoLai(id){const r=G.run;if(!r)return false;const T=tySt(r);const S=[T.xt,T.dl].find(x=>x&&x.id===id);if(!S||!tyChoMoi(S))return false;
+// nút đang mở, chưa quá hạn (đã đưa lời mời hay chưa — tin đồn chưa tới nơi thì chưa đưa) → mở được từ Sổ tay khi đứng đúng nơi
+function tyMoDuoc(S){const o=tyCho(S);if(!o)return false;if(o.ket)return true;return S.han==null||W().t<=S.han;}
+function tuyenMoLai(id){const r=G.run;if(!r)return false;const T=tySt(r);const S=[T.xt,T.dl].find(x=>x&&x.id===id);if(!S||!tyMoDuoc(S))return false;
   const o=tyCho(S);if(!o.ket&&!tyHereOk(o.N))return false;if(r.scene&&r.scene.type!=='place')return false;r.scene=null;
-  kyStart(tyKy(S,o.ket?null:o.N));dbg('tuyen.moLai',{id:S.id,nut:o.N?o.N.id:'ket'});return true;}
+  kyStart(tyKy(S,o.ket?null:o.N));if(!o.ket&&!S.moi){S.moi=1;S.nhac=W().t;}dbg('tuyen.moLai',{id:S.id,nut:o.N?o.N.id:'ket'});return true;}
