@@ -537,3 +537,8 @@ Luật `src/game/core2/53-cai-can-do.js`; bảng `CC_DO`, `CC_LV`, `CC_DOCFG` �
 ### Còn dở / hỏi lại
 - Các đường cũ vẫn giữ kết quả của HN (vd Huyết Tế, Xá Lợi, Tẩy Tủy, Huyết Mạch Khế ra **Thiên** linh căn phẩm Khuyết/Thường, nguồn không giới hạn) — có nên hạ xuống cho khớp luật "Thiên cực hiếm" không?
 - Đồ cải căn chưa có ở Ám Hội / dò hỏi; chưa có bài giao diện riêng cho đồ cải căn; bot chưa biết dùng (không chạy bot).
+
+## NGƯỜI DÙNG CHỐT ĐỢT 6 (câu 37–39) — làm sau Đ8 (Sửa-I)
+37. HẠ kết quả 4 đường cũ (Huyết Tế, Xá Lợi, Tẩy Tủy, Huyết Mạch Khế): không ra Thiên linh căn đại trà (Thiên chỉ qua đồ phẩm 5/cơ duyên cực hiếm).
+38. Cộng dồn % sau thất bại CHỈ tính trong 1 kiếp (đầu thai về 0).
+39. U Minh Ám Hội làm lại: là buổi họp kín nhiều người (NPC + nhân vật chính) thay phiên nhau đưa VẬT MÌNH ĐANG SỞ HỮU ra đấu giá/trao đổi. Người A đưa vật X, cả nhóm trả giá; tới lượt nhân vật chính cũng đưa đồ trong túi ra. Đồ trên bàn là đồ NPC/người chơi thật sự có trong túi (NPC có túi đồ riêng), KHÔNG phải hệ thống tạo mới tại chỗ. Áp cùng nguyên tắc cho đồ cải căn ở Ám Hội (có thể có đồ dởm nếu NPC đem đồ giả ra).
