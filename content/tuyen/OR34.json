@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 1,
+  "id": "OR34",
+  "loai": "xuat_than",
+  "ten": "Màu men sau cơn run",
+  "xuatThan": "xt_con_nha_nung_men",
+  "goiYDaiLo": [
+    "phu_giap"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Mẻ men trên tay run",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Mẻ mới ở {LOC11} ra màu đều, nhưng người giữ bột không nhấc nổi bát sau lượt pha. Sổ công ghi cơn run từ mẻ cùng màu tháng trước. Phần nước thừa theo rãnh xuống khỏi chân lò.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối ca run với mẻ men",
+          "t": "Ngươi chép ngày nung và giữ mẫu từ mẻ khiến người giữ bột phải nghỉ.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tính khoản lương khi thợ phải dừng",
+          "t": "Ngươi ghi mỗi lượt thợ mất công và hỏi ai nhận phần đền nếu lò đóng.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Cất mẫu cuối còn nguyên màu",
+          "t": "Ngươi lấy mẫu thử khỏi giỏ giao, ghi người đã pha mẻ ấy bên ngày thử đất.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mẻ được giao, người giữ bột nghỉ một lượt rồi lại bị gọi.",
+        "su": "Mẻ được giao, người giữ bột nghỉ một lượt rồi lại bị gọi.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Nước từ rãnh tới bờ",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Vệt nước từ {LOC11} trùng mẫu nơi cá chết ở {LOC09}. Một tờ ghi ca tại {LOC10} đánh dấu người từng uống bên luồng. Người hái thuốc và người vá lưới sẵn lòng đối ngày.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối mẫu và tên người chịu hại",
+          "t": "Ngươi nối ngày xả với cá chết và các ca có cùng dấu, rồi kê phần đền.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Chép bờ nước còn đục",
+          "t": "Ngươi giữ bức vẽ màu rãnh và ngày một hộ mất mẻ cá đầu dưới chân cầu.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tìm nơi nhận người rời lò",
+          "t": "Ngươi hỏi việc ngoài men, giữ lời nhận thợ trước lúc quyết đóng.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Vệt màu tan dọc luồng, sổ ca giữ ngày uống của từng nhà.",
+        "su": "Vệt màu tan dọc luồng, sổ ca giữ ngày uống của từng nhà.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Đơn nghi khí có lời dặn",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC05"
+      },
+      "mo": "Đơn nghi khí của {FA03} tại {LOC05} dặn người mua tránh chạm nước còn từ mẻ. Phụ lục giao nhà lò tự lo chỗ xả. Chữ ký bên mua có trước ngày người giữ bột lâm bệnh.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Buộc bên mua xác nhận phần đã biết",
+          "t": "Ngươi chỉ lời dặn có trước cơn run và lấy giấy họ cùng chịu tiền bồi.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ hợp đồng với điều khoản kín",
+          "t": "Ngươi nhận lệnh tiếp tục giao mẻ quý, biết riêng rãnh xả vẫn sẽ mở.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin chứng để kết thúc hợp đồng",
+          "t": "Ngươi chép phụ lục nguy hiểm rồi hỏi cách bàn giao hàng còn và trả lò.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Đơn trở về kho, phụ lục xả thải chưa có người đối.",
+        "su": "Đơn trở về kho, phụ lục xả thải chưa có người đối.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Rãnh còn thông",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Ở {LOC11}, khay nước thử đặt cạnh cửa xả. Người mua đợi mẻ quý, còn người giữ bột đã xếp đồ đi. Các hộ chờ xem phần bồi có giao trước khi quyết dùng dấu nhà.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đổi men, thử nước và giao tiền bồi",
+          "t": "Ngươi cùng thợ thử mẻ ít hại dưới kiểm chứng rồi giao phần bồi đã ký.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giấu nguồn và nung theo đơn cũ",
+          "t": "Ngươi giữ giá mẻ quý trong khi nước xả vẫn đục dưới cửa lò sau mỗi lượt mở.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Dừng lò, bàn giao phần còn nguy hiểm",
+          "t": "Ngươi nhờ người coi lò thu giữ phần dư an toàn rồi đưa thợ tới chỗ nhận.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lò giữ rãnh cũ, thợ bệnh chờ nghe ngày nhận phần hẹn.",
+        "su": "Lò giữ rãnh cũ, thợ bệnh chờ nghe ngày nhận phần hẹn.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ai còn dùng dấu men",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Dấu gỗ gia đình đặt cạnh mẫu cuối ở {LOC11}. Người đã nhận tiền bồi nhìn khay thử, người mua mở giấy giao, còn người giữ bột về lấy thẻ trước ngày chuyển sang chỗ mới.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Trao dấu cho xưởng đạt thử",
+          "t": "Ngươi cho đóng dấu khi khay thử và khoản bồi đã qua lượt đối công khai.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ dấu và giao mẻ quý tiếp",
+          "t": "Ngươi giao đủ đơn, để hộ mất cá chỉ còn dấu men trên mảnh bát.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Bỏ dấu khỏi lò, giao mẫu cuối cho thợ",
+          "t": "Ngươi trả dấu về nhà và đưa người giữ bột mẫu cuối cùng với giấy việc mới.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Dấu cất trong hòm, lò chưa đổi điều kiện dùng tên nhà.",
+        "su": "Dấu cất trong hòm, lò chưa đổi điều kiện dùng tên nhà.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Men không nhuộm sông",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Sau mẻ thử, nước không còn mang vệt từ rãnh cũ. Những nhà có tên trong bản bồi nhận đủ phần đã ký. Người giữ bột chọn một chiếc bình mới để lúc ai hỏi còn chỉ được mẻ nào đã đổi.",
+      "su": "Lò đổi men sau lượt thử và trả đủ phần bồi đã cam kết.",
+      "dauVong": "một bình men mới được giữ cùng giấy đã trả phần bồi."
+    },
+    {
+      "id": "B",
+      "ten": "Sắc quý trong nước đen",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Người mua nhận đủ màu đã hẹn và trả theo giá cũ. Dưới bờ, hộ mất cá lượm một mảnh bát cùng sắc để đặt cạnh phiếu ngày nước đổi. Tên xưởng còn dưới đáy bát dù nguồn xả không được công bố.",
+      "su": "Lò giữ hợp đồng quý và tiếp tục xả sau khi biết hậu quả.",
+      "dauVong": "mảnh bát trong nhà mất cá còn dấu xưởng nung mẻ quý."
+    },
+    {
+      "id": "C",
+      "ten": "Đập lò giữ tay",
+      "dk": {
+        "dau": [
+          "moc_2_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Chất còn trong lò được người coi thu giữ trước lúc thợ mang đồ đi. Mẻ cùng màu không còn được bán dưới dấu nhà. Người giữ bột đem mẫu cuối tới nơi làm mới và chỉ cầm nó khi tay đã thôi run.",
+      "su": "Lò đóng an toàn, thợ chuyển việc và giữ một mẫu cuối.",
+      "dauVong": "mẫu men cuối nằm dưới thẻ việc mới của người từng pha bột."
+    }
+  ],
+  "ngoai": "Dấu cất trong hòm, lò chưa đổi điều kiện dùng tên nhà."
+}
