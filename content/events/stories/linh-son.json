@@ -32,7 +32,7 @@
       "choices": [
         {
           "i": "🤲",
-          "l": "Góp da làm thêm một tấm",
+          "l": "Góp da làm tấm đệm thấp hơn",
           "t": "Ngươi mua thêm da cho hắn làm tấm đệm thấp. Đệ tử nhỏ tuổi thử một kiếm, trúng giữa tấm rồi quay lại chắp tay cảm tạ. Người dạy kiếm gật đầu: “Đúng tầm rồi.”",
           "e": {
             "hd": {
@@ -948,7 +948,7 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Mài lại phiến đá cho nét mực dày",
+          "l": "Mài nghiên để học trò nhìn rõ nét mực",
           "t": "Ngươi dành một buổi mài lại nghiên, để mực giữ thành nét nổi khi khô. Học trò lần tay đọc được lá phù mình vừa viết. Phù sư bảo hắn thử thêm một tờ, giọng vui hơn hẳn.",
           "e": {
             "hd": {
@@ -1161,7 +1161,7 @@
         },
         {
           "i": "✋",
-          "l": "Luyện kiếm bằng luồng dư khí",
+          "l": "Dùng khí đọng trong rãnh để luyện kiếm",
           "t": "Kiếm ngươi bén thêm, cá chết hết trước khi mặt trời lặn. {$a.ten} chôn chúng dưới gốc mạ mới cấy.",
           "e": {
             "tv": 5,
@@ -1546,7 +1546,7 @@
         },
         {
           "i": "✋",
-          "l": "Dùng linh lực cố vách tới hết lễ",
+          "l": "Dùng linh lực giữ vách đến hết lễ",
           "t": "Ngươi kiệt sức và được trả công. Sau khi người cuối cùng qua, trên vôi xuất hiện lại một đường chân tóc.",
           "e": {
             "st": 12,

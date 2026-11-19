@@ -358,7 +358,7 @@
           "alignment": "context"
         }
       },
-      "text": "Oán hồn {$b.ten} đã tìm được đường rời ma vực. Nếu nàng chưa từng mất giọng hoặc đã được trả tiếng ho, nàng hỏi người giữ lò có muốn tiễn mình không. Nếu tiếng ho vẫn thuộc người khác, nàng viết lời từ biệt lên lớp tro trên ghế. Lão đọc xong, nhờ ngươi giữ gió bớt lạnh một đoạn để mình theo được nàng.",
+      "text": "Oán hồn {$b.ten} đã tìm được lối rời ma vực. Nếu vẫn còn giọng hoặc đã được trả tiếng ho, nàng hỏi người giữ lò có muốn tiễn mình không. Nếu tiếng ho vẫn nằm trong tay người khác, nàng viết lời từ biệt lên tro trên ghế. Lão nhờ ngươi chắn gió lạnh một quãng để theo tiễn nàng.",
       "choices": [
         {
           "i": "✋",
@@ -467,7 +467,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu lão đã tiễn nàng, lão đặt ghế nhìn ra đường. Nếu nàng rời đi một mình, ghế quay về phía rèm, nhưng lão đã tháo hết những hạt than cũ.",
+      "text": "Nếu lão đã tiễn nàng, lão xoay ghế ra đường. Nếu nàng đi một mình, ghế vẫn quay về phía tấm rèm đã tháo hết than, nơi họ từng nói chuyện.",
       "choices": [
         {
           "i": "🤲",

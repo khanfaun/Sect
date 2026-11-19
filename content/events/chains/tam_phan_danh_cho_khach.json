@@ -377,11 +377,11 @@
           "alignment": "context"
         }
       },
-      "text": "Học việc {$b.ten} đã biết nghề, đang đóng phản cho lán cứu tế. Thợ mộc {$a.ten} mang gỗ tới, hai người gặp lại sau những lần làm riêng rồi cùng nhận việc. Nếu ngươi từng giúp làm then hoặc đặt bàn, người bệnh {$c.ten} đã tự đến trông lán. Nếu ngươi từng giúp bán nhà hoặc gọi thầy trở lại, người bệnh gửi bạc góp từ xa, nhờ ngươi chuyển lời thăm. Người tới lán mỗi ngày một đông, gỗ và tiền công đều sắp cạn.",
+      "text": "Người học việc {$b.ten} đang đóng phản cho lán cứu tế. Thợ mộc {$a.ten} đem gỗ tới, hai thầy trò lại làm cùng nhau. Nếu ngươi từng giúp làm then thấp hoặc đặt chiếc bàn vừa tầm, người bệnh {$c.ten} có thể tự đến trông lán. Nếu trước đây nhà đã bán hoặc thầy được gọi trở lại, người ấy gửi bạc và lời thăm từ xa. Lán đang thiếu cả gỗ lẫn tiền công.",
       "choices": [
         {
           "i": "🤲",
-          "l": "Góp gỗ và giúp làm theo tầm người nằm",
+          "l": "Góp gỗ đóng phản theo tầm người bệnh",
           "t": "Ngươi góp gỗ, cùng thợ hỏi từng người cần phản cao thấp ra sao. Buổi đầu làm chậm, đến khi đưa vào lán thì không phải sửa lại. Người bệnh tự với được bát nước, cười gọi người nằm bên thử xem.",
           "cost": {
             "st": 10

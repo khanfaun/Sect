@@ -356,7 +356,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu hai người từng rời làng, ngươi gặp họ trở về bán lứa tơ đầu sau một năm tự lập. Nếu họ từng ở lại giảng hòa, hai nhà đã chịu chia lá nhưng vẫn tính toán từng phần công. Nếu họ từng nhận trông cây cho ngươi, họ đem tiền bán tơ tới và báo cây dâu đã chết vì sương muối. Họ giữ được một cành còn mầm sống, đang tìm đất ấm để giâm.",
+      "text": "Nếu hai người từng rời làng, họ đã tự nuôi tằm và nay trở về bán lứa tơ đầu. Nếu họ ở lại giảng hòa, hai nhà chịu chia lá dâu nhưng vẫn tranh tiền công. Nếu họ từng nhận trông cây cho ngươi, họ đem tiền bán tơ tới và báo cây chết vì sương muối. Chỉ còn một cành sống, họ đang tìm đất ấm để giâm.",
       "choices": [
         {
           "i": "💎",
@@ -477,7 +477,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu ngươi từng thuê đất giúp họ, cây dâu đã lớn đủ cho hai người ngồi nghỉ dưới tán. Nếu ngươi từng mua cành, cây đang được họ chăm trong vườn thuê để trả phần lá đã hẹn. Cô gái {$a.ten} gọi ngươi vào xem tấm vải mới. Ngoài sân, người hai nhà đang cùng sửa hàng rào.",
+      "text": "Nếu ngươi từng thuê đất giúp họ, hai người đã có thể ngồi dưới tán cây mới. Nếu ngươi mua cành dâu, họ chăm nó trong vườn thuê để trả phần lá đã hẹn. Cô gái {$a.ten} gọi ngươi vào xem tấm vải mới. Ngoài sân, người hai nhà cùng sửa hàng rào.",
       "choices": [
         {
           "i": "🤲",

@@ -65,7 +65,7 @@
         },
         {
           "i": "🐍",
-          "l": "Chờ thủ hộ thú lộ diện",
+          "l": "Chờ con thú canh linh thảo xuất hiện",
           "fight": {
             "k": "mang"
           },
@@ -79,8 +79,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -266,7 +266,7 @@
       "choices": [
         {
           "i": "🎲",
-          "l": "Mua đại một món",
+          "l": "Chọn mua một món bất kỳ",
           "cost": {
             "st": 22
           },
@@ -337,8 +337,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -445,8 +445,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -539,8 +539,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -594,7 +594,7 @@
       "choices": [
         {
           "i": "👁️",
-          "l": "Tham ngộ",
+          "l": "Đọc chữ trên bia để ngộ đạo",
           "chk": [
             "ngo",
             11
@@ -635,8 +635,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -692,7 +692,7 @@
       "choices": [
         {
           "i": "🪷",
-          "l": "Giữ vững bản tâm",
+          "l": "Giữ tỉnh táo trước cảnh do trận dựng",
           "chk": [
             "tam",
             10
@@ -736,8 +736,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -810,7 +810,7 @@
         },
         {
           "i": "🏺",
-          "l": "Đóng vào bình",
+          "l": "Lấy nước linh tuyền vào bình",
           "t": "Ngươi đổ đầy hai bình. Thứ nước này luyện đan rất tốt.",
           "e": {
             "pill": [
@@ -821,8 +821,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -911,7 +911,7 @@
         },
         {
           "i": "💰",
-          "l": "Chơi lớn",
+          "l": "Mua khối đá lớn",
           "cost": {
             "st": 40
           },
@@ -973,8 +973,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -1175,8 +1175,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -1233,7 +1233,7 @@
       "choices": [
         {
           "i": "📜",
-          "l": "Bóc cáo thị",
+          "l": "Nhận việc truy nã trên cáo thị",
           "fight": {
             "k": "matu",
             "n": "{$a.ten}",
@@ -1250,7 +1250,7 @@
         },
         {
           "i": "🚶",
-          "l": "Không phải việc của ta",
+          "l": "Đi tiếp, không nhận việc",
           "t": "Ngươi đi qua. Phía sau có người thở dài: “Lại một tu sĩ chẳng quan tâm.”"
         }
       ],
@@ -1369,8 +1369,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -1631,7 +1631,7 @@
       "choices": [
         {
           "i": "⚔️",
-          "l": "Nhận lời",
+          "l": "Nhận lời so kiếm",
           "fight": {
             "k": "kiemtu",
             "n": "{$a.ten}",
@@ -1673,8 +1673,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -1737,7 +1737,7 @@
       "choices": [
         {
           "i": "🙏",
-          "l": "Bố thí",
+          "l": "Bố thí cho vị tăng",
           "cost": {
             "st": 6
           },
@@ -1767,7 +1767,7 @@
         },
         {
           "i": "⚔️",
-          "l": "Thử bản lĩnh vị tăng",
+          "l": "Thử xem vị tăng có thực tài không",
           "fight": {
             "k": "votang",
             "n": "{$a.ten}",
@@ -1792,8 +1792,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -1881,7 +1881,7 @@
         },
         {
           "i": "👁️",
-          "l": "Vạch mặt yêu tinh",
+          "l": "Vạch trần thân phận yêu hồ",
           "fight": {
             "k": "holy",
             "n": "Hồ yêu {$a.ten}"
@@ -2018,8 +2018,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -2215,8 +2215,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -2338,8 +2338,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -2396,7 +2396,7 @@
       "choices": [
         {
           "i": "✊",
-          "l": "Nhổ lấy",
+          "l": "Nhổ lá hồn phiên mang theo",
           "t": "Cán cờ lạnh như băng. Tiếng khóc im bặt, như chờ chủ nhân mới ra lệnh.",
           "e": {
             "relic": "honphien",
@@ -2490,8 +2490,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -2763,8 +2763,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -2875,8 +2875,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -2996,8 +2996,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -3053,12 +3053,12 @@
       },
       "text": [
         "{$sectC} mở sơn môn thu nhận đệ tử. Thiếu niên khắp nơi nô nức kéo về, xếp hàng dài dưới chân núi. Đệ tử canh cổng {$a.ten} mặt lạnh như tiền.",
-        "Cáo thị dán khắp thành trấn: {$sectC} tuyển đồ. Ba đường vào cửa: trắc linh thạch, vấn tâm lộ, hoặc dâng lễ làm tạp dịch."
+        "Cáo thị của {$sectC} dán khắp thành trấn. Người muốn nhập môn có thể thử linh căn bằng trắc linh thạch, đi qua ảo cảnh trên Vấn Tâm Lộ, hoặc dâng lễ để vào làm tạp dịch."
       ],
       "choices": [
         {
           "i": "💠",
-          "l": "Thi trắc linh thạch",
+          "l": "Dùng trắc linh thạch để thử linh căn",
           "chk": [
             "root",
             0
@@ -3080,7 +3080,7 @@
         },
         {
           "i": "🪜",
-          "l": "Đi vấn tâm lộ",
+          "l": "Vượt các ảo cảnh trên Vấn Tâm Lộ",
           "chk": [
             "tam",
             11
@@ -3116,8 +3116,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -3152,7 +3152,7 @@
     },
     {
       "id": "dai_bi",
-      "name": "Tông môn đại bỉ",
+      "name": "Đại hội so tài của tông môn",
       "kind": "event",
       "tags": [],
       "trigger": {
@@ -3211,8 +3211,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -3263,7 +3263,7 @@
       "choices": [
         {
           "i": "🥊",
-          "l": "Lên đài",
+          "l": "Lên đài so tài",
           "fight": {
             "k": "human",
             "spar": 1,
@@ -3575,8 +3575,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -3637,7 +3637,7 @@
       "choices": [
         {
           "i": "🔍",
-          "l": "Điều tra",
+          "l": "Điều tra những cái chết trong nhà",
           "chk": [
             "ngo",
             10
@@ -3852,8 +3852,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -3920,8 +3920,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -4002,8 +4002,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -4179,8 +4179,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -4335,8 +4335,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -4444,8 +4444,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -4625,7 +4625,7 @@
       "choices": [
         {
           "i": "🌿",
-          "l": "Lén hái",
+          "l": "Lén hái linh thảo",
           "chk": [
             "tp",
             11
@@ -4751,7 +4751,7 @@
         },
         {
           "i": "🧹",
-          "l": "Giúp lão quét sân",
+          "l": "Giúp người giữ các quét sân",
           "o": [
             {
               "w": 2,
@@ -4812,8 +4812,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -5108,8 +5108,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -5199,8 +5199,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -5375,8 +5375,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -5444,7 +5444,7 @@
       "choices": [
         {
           "i": "🔨",
-          "l": "Nhờ luyện một món",
+          "l": "Nhờ thợ rèn một món pháp bảo",
           "cost": {
             "st": 45
           },
@@ -5476,8 +5476,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -5581,8 +5581,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -5959,7 +5959,7 @@
         },
         {
           "i": "🌊",
-          "l": "Nổi lên",
+          "l": "Bơi lên mặt nước",
           "t": "Có những thứ nên để yên dưới đáy biển.",
           "e": {
             "lore": "long_cung"
@@ -6058,8 +6058,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -6253,8 +6253,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -6540,8 +6540,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -6596,7 +6596,7 @@
       "choices": [
         {
           "i": "🔍",
-          "l": "Xuống lấy",
+          "l": "Xuống hố nhặt vật phát sáng",
           "fight": {
             "k": "cuongthi"
           },
@@ -6609,7 +6609,7 @@
         },
         {
           "i": "🔥",
-          "l": "Hỏa táng",
+          "l": "Hỏa táng những thi thể trong hố",
           "cost": {
             "mp": "50%"
           },
@@ -6759,7 +6759,7 @@
       "choices": [
         {
           "i": "🖤",
-          "l": "Nhận",
+          "l": "Nhận hạt giống và gieo vào đan điền",
           "t": "Hạt giống chui vào bụng ngươi như con rắn nhỏ. Sức mạnh dâng lên. Và có tiếng thì thầm rất khẽ.",
           "e": {
             "atkP": 15,
@@ -6863,7 +6863,7 @@
         },
         {
           "i": "⏳",
-          "l": "Để lại năm tháng",
+          "l": "Đổi một phần tuổi thọ để qua sông",
           "t": "Ngươi thấy tóc mình bạc đi vài sợi. Bờ bên kia có hoa nở đỏ rực.",
           "e": {
             "lifeCut": 6,
@@ -6872,8 +6872,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -6989,8 +6989,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -7080,8 +7080,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -7109,7 +7109,7 @@
     },
     {
       "id": "di_thue",
-      "name": "Di thuế tiên nhân",
+      "name": "Thi thể tiên nhân để lại",
       "kind": "event",
       "tags": [],
       "trigger": {
@@ -7127,7 +7127,7 @@
       },
       "actors": {},
       "text": [
-        "Một bộ xác ngồi xếp bằng trên đài ngọc, da thịt vẫn hồng hào. Đây là tiên nhân di thuế, cái xác một bậc tiền bối để lại khi phi thăng."
+        "Một thi thể ngồi xếp bằng trên đài ngọc, da vẫn hồng hào. Đó là di thuế của một vị tiền bối, tức thân xác vị ấy để lại khi phi thăng."
       ],
       "choices": [
         {
@@ -7157,13 +7157,13 @@
         },
         {
           "i": "🧘",
-          "l": "Tham ngộ đạo vận còn sót",
+          "l": "Cảm nhận đạo vận tiên nhân để lại",
           "chk": [
             "ngo",
             13
           ],
           "ok": {
-            "t": "Đạo vận chảy vào thức hải như nước tràn đê.",
+            "t": "Dư âm phép tu của vị tiền bối tràn vào thức hải. Ngươi hiểu thêm đôi điều về con đường người ấy đã đi.",
             "e": {
               "dao": 2,
               "tv": 20,
@@ -7180,8 +7180,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -7516,8 +7516,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -7581,7 +7581,7 @@
       "choices": [
         {
           "i": "🙏",
-          "l": "Tụng kinh siêu độ",
+          "l": "Tụng kinh giúp hồn ma siêu thoát",
           "chk": [
             "tam",
             10
@@ -7616,8 +7616,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -7705,8 +7705,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -7819,8 +7819,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -7910,8 +7910,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -7976,7 +7976,7 @@
       "choices": [
         {
           "i": "🍶",
-          "l": "Ngồi cùng",
+          "l": "Ngồi lại với khách trong quán",
           "t": "Hai người uống tới khuya, kể chuyện giang hồ.",
           "e": {
             "rumor": 2,
@@ -7993,8 +7993,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -8091,8 +8091,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -8146,7 +8146,7 @@
       "choices": [
         {
           "i": "🧘",
-          "l": "Ngồi trấn tâm",
+          "l": "Ngồi xuống giữ tâm trí tỉnh táo",
           "chk": [
             "tam",
             11
@@ -8181,8 +8181,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -8273,8 +8273,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -8353,8 +8353,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -8453,8 +8453,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -8576,7 +8576,7 @@
       "choices": [
         {
           "i": "🌿",
-          "l": "Hái",
+          "l": "Hái linh thảo",
           "t": "Ngươi hái được một gùi linh thảo, đủ để luyện mấy lò đan.",
           "e": {
             "thao": 5,
@@ -8594,8 +8594,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -8678,8 +8678,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -8918,8 +8918,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -9057,7 +9057,7 @@
       "choices": [
         {
           "i": "🧥",
-          "l": "Cởi áo khoác cho",
+          "l": "Cởi áo khoác cho người đang rét",
           "t": "Đứa bé ôm chặt chiếc áo.",
           "e": {
             "deed": "bo_thi",

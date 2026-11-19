@@ -14,7 +14,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Quả cân có hai vạch",
+      "ten": "Lô thịt bị sửa cân",
       "cho": {
         "thang": 1
       },
@@ -26,7 +26,7 @@
         "noi": "LOC01",
         "vai": "NP01"
       },
-      "mo": "{NP01} tới lấy thịt như mọi bữa, nhưng đặt tiền xuống rồi vẫn đứng bên thớt. Vết mẻ trên sống dao khớp dấu chặt trên thẻ lô giao {FA02}. Thẻ ghi nặng hơn sổ cha mẹ chép. Quả cân dùng hôm đó nằm dưới bàn.",
+      "mo": "{NP01} đặt tiền mua thịt xuống nhưng vẫn đứng cạnh thớt. Thẻ của một lô giao {FA02} ghi nặng hơn sổ của cha mẹ ngươi. Dấu chặt trên thẻ khớp vết mẻ trên dao nhà.",
       "thayThe": "Trong sổ hộ của {LOC01} còn biên nhận mua thịt kẹp bên thẻ giao hàng. Nét chặt trên thẻ khớp vết mẻ trên sống dao nhà ngươi. Sổ cha mẹ ghi cân nhẹ hơn biên nhận lô giao {FA02}.",
       "cach": [
         {
@@ -58,7 +58,7 @@
       ],
       "tuDien": {
         "t": "Biên nhận lô hàng bị cuộn chung với giấy gói, còn quả cân sai lại được đặt lên bàn cân.",
-        "su": "Lô thịt chênh cân ở {LOC01} qua kỳ đối sổ mà chưa ai tra.",
+        "su": "Lô thịt chênh cân ở {LOC01} qua kỳ kiểm sổ mà chưa ai tra.",
         "dau": [
           "can_sai_con_dung"
         ]
@@ -66,7 +66,7 @@
     },
     {
       "id": "N2",
-      "ten": "Hàng biết gọi nhau",
+      "ten": "Người bị chở dưới tên gia súc",
       "cho": {
         "thang": 1
       },
@@ -78,7 +78,7 @@
         "noi": "LOC09",
         "vai": "NP17"
       },
-      "mo": "{NP17} nhắn ngươi tới {LOC09} xem chuyến hàng từ {LOC01}. Sổ ghi chở gia súc, nhưng bên thúng thịt còn một khoang nhốt kín. Mỗi khi có tiếng ho dưới khoang, miếng thịt có dấu trên thúng giật nhẹ.",
+      "mo": "{NP17} nhắn ngươi ra {LOC09} xem hàng từ {LOC01}. Sổ ghi chở gia súc, nhưng dưới khoang kín có tiếng người. Mỗi khi ai đó ho, dấu trên một miếng thịt lại giật lên.",
       "thayThe": "Bảng khắc thuyền ở {LOC09} ghi một chuyến từ {LOC01} có số gia súc nhiều hơn số lồng. Người bốc hàng chỉ cho ngươi chuyến mới dùng lại mã ấy. Mỗi lần có tiếng người dưới khoang, miếng thịt có dấu trên thúng lại giật.",
       "cach": [
         {
@@ -122,7 +122,7 @@
     },
     {
       "id": "N3",
-      "ten": "Giá của hai chỗ trống",
+      "ten": "Người môi giới muốn mua sự im lặng",
       "cho": {
         "thang": 1
       },
@@ -133,7 +133,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Người môi giới kê cân cạnh bảng khắc thuyền ở {LOC09}. Người vá lưới và chị quẩy nước bị giữ riêng, mỗi người có một dấu hồn gắn với phần thịt trên cân. Dưới ghế gã là một túi tiền và tập khế chưa ghi chủ mới.",
+      "mo": "Ở {LOC09}, người môi giới giữ riêng người vá lưới và chị quẩy nước. Dấu hồn của họ nằm trên hai miếng thịt. Gã đặt cạnh cân một túi bạc và hai tờ khế chưa ghi chủ mới.",
       "cach": [
         {
           "id": "dua_ra",
@@ -166,7 +166,7 @@
         },
         {
           "id": "nhan_moi",
-          "l": "Nhận mối hàng và hai tờ khế",
+          "l": "Nhận đường dây buôn người và hai tờ khế",
           "t": "Ngươi ký vào sổ cân đã sửa để nhận đầu mối. Người vá lưới bị chuyển cho bên mua tại bến. Chị quẩy nước bị giữ lại theo tờ khế đứng tên ngươi.",
           "dau": [
             "nam_duong_day",
@@ -204,7 +204,7 @@
     },
     {
       "id": "N4",
-      "ten": "Tên nằm trên miếng dấu",
+      "ten": "Tháo dấu hồn, trả lại tên",
       "cho": {
         "thang": 2
       },
@@ -215,7 +215,7 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Tin về khế gia súc theo người mua thịt về {LOC01}. Mấy hộ mở sổ hộ ngay bên thớt, chừa chỗ để ai có chứng thì ghi. Một người biết tháo dấu hồn nhận tới giúp nếu miếng dấu còn nguyên.",
+      "mo": "Các hộ ở {LOC01} mở sổ để nghe người bị giữ tự khai tên. Một người biết tháo dấu hồn nhận giúp nếu dấu còn nguyên. Kẻ cầm khế cũng có thể mang giấy ra đòi giữ người.",
       "cach": [
         {
           "id": "huy_khe",
@@ -256,7 +256,7 @@
         },
         {
           "id": "giu_khe",
-          "l": "Buộc khế của chị quẩy nước về tên mình",
+          "l": "Giữ dấu hồn để buộc chị quẩy nước ở lại",
           "t": "Ngươi xuất tờ giao nhận và giữ dấu hồn làm vật giữ khế. Chị quẩy nước đòi bỏ khoản nợ ghi thay giá mua, nhưng người coi sổ ghi khế vẫn hiệu lực.",
           "dau": [
             "khe_cuong_con"
@@ -274,7 +274,7 @@
         {
           "id": "de_loi_chung",
           "l": "Ghi cách nhận diện dấu cho các hộ",
-          "t": "Ngươi để một bản nhận diện thẻ hàng mang dấu hồn cạnh sổ hộ. Người đi chợ có thứ để đối chiếu khi gặp một chuyến khác.",
+          "t": "Ngươi để một giấy xác nhận diện thẻ hàng mang dấu hồn cạnh sổ hộ. Người đi chợ có thứ để đối chiếu khi gặp một chuyến khác.",
           "dau": [
             "co_ban_nhan_dau"
           ]
@@ -282,7 +282,7 @@
       ],
       "tuDien": {
         "t": "Các hộ gấp sổ khi chợ tan, để trống phần ghi người vì chẳng ai đối chứng với khế.",
-        "su": "Buổi đối sổ tại {LOC01} qua đi mà những khế đang giữ vẫn còn hiệu lực.",
+        "su": "Buổi kiểm sổ tại {LOC01} qua đi mà những khế đang giữ vẫn còn hiệu lực.",
         "dau": [
           "so_ho_bo_trong"
         ]
@@ -290,7 +290,7 @@
     },
     {
       "id": "N5",
-      "ten": "Việc của con dao",
+      "ten": "Giữ lò mổ hay đổi nghề?",
       "cho": {
         "thang": 6
       },
@@ -301,7 +301,7 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Người mua tới cửa lò ở {LOC01} đòi xem hàng vào từ đâu. Mấy người làm công chờ biết mùa tới còn việc gì. Nhà có thể bán thịt qua cân kiểm hoặc giao nồi cho các hộ góp gạo. Bên cửa sau người của mối bến vẫn hỏi lò có nhận chuyến mới hay không.",
+      "mo": "Khách ở {LOC01} đòi biết thịt nhập từ đâu. Thợ lò hỏi mùa sau còn việc không. Mấy hộ muốn góp gạo mở bếp chung, còn người giao hàng ở bến đang chờ ngươi nhận chuyến mới.",
       "cach": [
         {
           "id": "mo_lo_kiem",

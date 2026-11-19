@@ -301,7 +301,7 @@
       "choices": [
         {
           "i": "💎",
-          "l": "Mua công một buổi của những đứa đã nghỉ",
+          "l": "Trả công một buổi để trẻ trở lại lớp",
           "t": "Ngươi trả công một buổi để bọn trẻ được về lớp. Chúng chen nhau đọc lại bài cũ, đứa nhớ đứa quên. {$a.ten} cười, chấm thêm nước vào nghiên: “Đọc chậm thôi, hôm nay không ai giành việc của các con.”",
           "cost": {
             "st": 10
@@ -797,7 +797,7 @@
         },
         {
           "i": "💎",
-          "l": "Đứng ra nộp thay",
+          "l": "Đứng ra nộp thuế thay người gánh muối",
           "t": "Muối được đem bán trước giờ đóng chợ. Hôm sau, {$a.ten} đặt cân ngay dưới chỗ dột.",
           "cost": {
             "st": 10

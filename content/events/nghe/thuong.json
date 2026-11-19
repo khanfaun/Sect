@@ -361,7 +361,7 @@
           }
         },
         {
-          "l": "Coi như học phí",
+          "l": "Chấp nhận mất vốn, không kiện",
           "i": "😮‍💨",
           "t": "Ngươi ghi tên hắn vào trong lòng, rồi làm lại từ đầu.",
           "e": {
@@ -526,7 +526,7 @@
       "text": "Mất mùa khắp vùng. Kho thóc của ngươi đủ cho cả trấn ăn một tháng.",
       "choices": [
         {
-          "l": "Đóng kho, đợi giá",
+          "l": "Giữ thóc trong kho để chờ giá lên",
           "i": "🔒",
           "t": "Giá thóc lên từng ngày. Ngươi bán ra từng đấu, tiền đầy rương.",
           "e": {

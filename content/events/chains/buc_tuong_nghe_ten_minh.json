@@ -28,7 +28,7 @@
           "alignment": "context"
         }
       },
-      "text": "Vách đá đáp lại tên người vừa đi qua bằng giọng của chính họ. Người khắc tên {$a.ten} bảo ngươi gọi thử, lão đã đục sẵn một chỗ ngang miệng.",
+      "text": "Vách đá gọi tên người vừa đi qua bằng chính giọng của họ. Người khắc tên {$a.ten} chỉ một hốc đá ngang miệng người. Lão mời ngươi đứng đó xưng tên để nghe vách đáp.",
       "choices": [
         {
           "i": "👁️",
@@ -321,7 +321,7 @@
           "alignment": "context"
         }
       },
-      "text": "Cầu gọi người đi qua bằng những tên họ từng bỏ lại. Nếu ngươi đã nói thật, tiếng gọi chỉ níu người khắc tên {$a.ten}. Nếu đã mua khuôn hoặc tên, nó vọng lên từ cả dây ngươi đang nắm.",
+      "text": "Cầu gọi người qua bằng những cái tên họ từng bỏ. Nếu ngươi đã nói thật về tên mình, tiếng gọi chỉ níu người khắc tên {$a.ten} lại. Nếu ngươi mua khuôn hoặc tên của người khác, sợi dây ngươi đang nắm cũng cất tiếng gọi.",
       "choices": [
         {
           "i": "✋",
@@ -427,7 +427,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu lão tự đọc tên, lão mở chỗ khắc bài vị cho người không có ai nhớ. Nếu cầu bị cắt, lão nhặt tiếng rơi từ hẻm, viết mỗi tiếng lên một phiến đá nhỏ.",
+      "text": "Nếu lão đã tự xưng tên, lão mở một chỗ khắc bài vị cho những người chết không ai nhớ. Nếu ngươi đã cắt dây cầu, lão xuống hẻm nghe lại từng tiếng vọng rồi khắc những cái tên còn nghe được lên đá.",
       "choices": [
         {
           "i": "✋",

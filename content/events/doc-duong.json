@@ -112,7 +112,7 @@
         },
         {
           "i": "🚶",
-          "l": "Bước qua",
+          "l": "Đi tiếp, không giúp",
           "t": "Ngươi bước qua. Sau lưng có tiếng thở dài, rồi im bặt. Tu tiên giới mỗi ngày đều có người chết như vậy.",
           "e": {
             "tamma": 2
@@ -120,8 +120,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -203,7 +203,7 @@
         },
         {
           "i": "👀",
-          "l": "Đứng xem, chờ ngư ông đắc lợi",
+          "l": "Đợi hai bên kiệt sức rồi kiếm lợi",
           "chk": [
             "tp",
             10
@@ -241,8 +241,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -374,8 +374,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -600,8 +600,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -666,7 +666,7 @@
       "choices": [
         {
           "i": "💎",
-          "l": "Nộp",
+          "l": "Nộp tiền để được qua",
           "cost": {
             "st": 30
           },
@@ -674,7 +674,7 @@
         },
         {
           "i": "⚔️",
-          "l": "Đánh",
+          "l": "Giao đấu với đoàn yêu tộc",
           "fight": {
             "k": "beast",
             "elite": 1,
@@ -689,7 +689,7 @@
         },
         {
           "i": "🗣️",
-          "l": "Thuyết phục",
+          "l": "Nhắc lại hòa ước giữa người và yêu",
           "chk": [
             "ngo",
             12
@@ -718,8 +718,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {

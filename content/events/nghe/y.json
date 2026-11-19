@@ -333,7 +333,7 @@
       "text": "Phủ quan cho người tới mời: lão thái gia bệnh nặng, chữa khỏi có thưởng lớn.",
       "choices": [
         {
-          "l": "Nhận lời",
+          "l": "Đến phủ quan chữa bệnh cho lão thái gia",
           "i": "🏯",
           "chk": [
             "ngo",
@@ -702,7 +702,7 @@
       "text": "Học trò xin ngươi chép lại những gì đã học cả đời.",
       "choices": [
         {
-          "l": "Viết lại y thư",
+          "l": "Chép kinh nghiệm chữa bệnh thành y thư",
           "i": "📖",
           "t": "Một tháng ngồi viết. Ngươi nhận ra mình đã biết nhiều hơn mình tưởng.",
           "e": {

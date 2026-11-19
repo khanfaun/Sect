@@ -140,7 +140,7 @@
           "alignment": "context"
         }
       },
-      "text": "Thiên ma {$a.ten} học ngồi im nhưng chỉ giữ được nửa người, vạt áo kia liên tục đứng dậy. Người coi cửa {$b.ten} kê thêm một ghế để nó có chỗ ngồi riêng.",
+      "text": "Thiên ma {$a.ten} thử ngồi yên bằng dáng thật. Hắn ngồi xuống được, nhưng chiếc áo mượn vẫn tự đứng dậy như có người mặc. Người coi cửa {$b.ten} kê thêm một ghế cho nó.",
       "choices": [
         {
           "i": "✋",
@@ -344,7 +344,7 @@
           "alignment": "context"
         }
       },
-      "text": "Cửa soi bóng để nhận khách, không chỉ nhìn hình áo. Nếu thiên ma từng học ngồi theo dáng mình hoặc được nói rõ thân phận, hắn đứng ra khỏi chiếc áo, tự xin qua. Nếu hắn vẫn quen mượn dáng người khác, hắn tìm lại nếp áo cũ, sợ bị gọi đúng tên mình. Người coi cửa cho cả hai một lượt thử.",
+      "text": "Cửa nhận người qua bằng bóng của họ, chứ không nhìn quần áo. Nếu thiên ma đã tập giữ dáng thật hoặc từng nói rõ thân phận, hắn có thể bỏ áo và tự xin qua. Nếu vẫn quen mượn dáng người chết, hắn lại tìm chiếc áo vì sợ phải xưng tên thật. Người coi cửa cho thử cả hai cách.",
       "choices": [
         {
           "i": "💎",
@@ -449,7 +449,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu từng qua bằng tên mình, thiên ma {$a.ten} trông áo cho khách. Nếu từng qua nhờ áo, hắn làm việc ở mép cửa và tháo áo mỗi lúc có người gọi một cái tên cũ.",
+      "text": "Nếu thiên ma {$a.ten} đã qua bằng tên thật, hắn nay trông áo cho khách qua cửa. Nếu từng mượn áo để qua, hắn vẫn làm việc ở mép cửa và tháo áo mỗi khi có người gọi tên chủ cũ.",
       "choices": [
         {
           "i": "🤲",

@@ -531,7 +531,7 @@
     },
     {
       "id": "ng_tieu_su_tieu_lon",
-      "name": "Chuyến tiêu lớn",
+      "name": "Hộ tống bạc cứu tế",
       "kind": "event",
       "theme": "Sinh kế",
       "tags": [
@@ -551,10 +551,10 @@
         "cooldownHours": 720
       },
       "actors": {},
-      "text": "Một chuyến tiêu chở bạc cứu tế ra vùng đói, ai cũng biết, cướp nào cũng thèm.",
+      "text": "Tiêu cục nhận chở bạc cứu tế tới vùng đói. Tin về chuyến hàng đã lan ra. Bọn cướp cũng biết có bạc trên đường.",
       "choices": [
         {
-          "l": "Tự mình áp tiêu",
+          "l": "Đích thân hộ tống cả chuyến bạc",
           "i": "🛡️",
           "chk": [
             "nang.canh",

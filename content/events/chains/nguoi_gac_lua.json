@@ -455,11 +455,11 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu đường cản lửa đã mở, dân mang cọc rào cháy tới để chia tiền đền. Nếu dãy nhà trên được giữ, người xóm dưới ngồi ngoài cửa với một cái chum nứt, chờ xem tiền thưởng thuộc về ai.",
+      "text": "Nếu dân đã dỡ rào để chặn lửa, họ mang cọc cháy tới kê phần cần bồi thường. Nếu chỉ dãy nhà trên được giữ, dân xóm dưới đem một cái chum nứt tới làm chứng họ cũng chịu thiệt và hỏi số tiền thưởng sẽ giao cho ai.",
       "choices": [
         {
           "i": "💎",
-          "l": "Nhận phần đền và giao dùi cho cả làng",
+          "l": "Nhận tiền bồi thường và giao dùi kẻng cho làng",
           "t": "Ngươi góp bạc bồi thường cho những nhà chịu thiệt, đề nghị cả làng cùng giữ quyền báo cháy. Sau một hồi tranh luận, họ giao chìa chòi cho ba người ở ba đầu xóm. Từ nay không ai được giữ riêng dùi kẻng.",
           "cost": {
             "st": 10

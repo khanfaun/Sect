@@ -356,7 +356,7 @@
       "text": "Một người lạ thuê ngươi đưa một mảnh giấy tới cửa sau nhà quan.",
       "choices": [
         {
-          "l": "Đưa",
+          "l": "Giao thư mà không mở",
           "i": "📨",
           "t": "Ba ngày sau nhà quan bị bắt.",
           "e": {
@@ -547,7 +547,7 @@
         "cooldownHours": 720
       },
       "actors": {},
-      "text": "Trưởng lão Cái bang thấy ngươi có uy với đám ăn mày, mời ngươi giữ chức đà chủ.",
+      "text": "Trưởng lão Cái bang thấy người ăn xin trong vùng tin ngươi. Lão mời ngươi làm đà chủ, đứng ra trông việc của một nhánh trong bang.",
       "choices": [
         {
           "l": "Nhận",

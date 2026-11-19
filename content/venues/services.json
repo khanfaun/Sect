@@ -52,7 +52,7 @@
     },
     {
       "id": "service_tea_hoi",
-      "name": "Dúi tiền hỏi tiểu nhị đường đi",
+      "name": "Cho tiểu nhị ít tiền để hỏi đường",
       "kind": "service",
       "theme": "Dịch vụ địa điểm",
       "tags": [],
@@ -76,7 +76,7 @@
       "text": "Trả tiền hỏi đường đến hai địa điểm trong vùng.",
       "choices": [
         {
-          "l": "Dúi tiền hỏi tiểu nhị đường đi",
+          "l": "Cho tiểu nhị ít tiền để hỏi đường",
           "t": "Trả tiền hỏi đường đến hai địa điểm trong vùng."
         }
       ],
@@ -655,7 +655,7 @@
     },
     {
       "id": "service_tea_doicau",
-      "name": "Thi đối câu đối của lão tú tài",
+      "name": "Thi đối câu với lão tú tài",
       "kind": "service",
       "theme": "Cơ hội trong quán",
       "tags": [],
@@ -679,7 +679,7 @@
       "text": "Lão tú tài treo giải: ai đối được vế của lão thì nhận một túi linh thạch.",
       "choices": [
         {
-          "l": "Thi đối câu đối của lão tú tài",
+          "l": "Thi đối câu với lão tú tài",
           "t": "Lão tú tài treo giải: ai đối được vế của lão thì nhận một túi linh thạch."
         }
       ],

@@ -161,7 +161,7 @@
       "text": "Ngươi học cách pha thuốc mê từ một gã bán thuốc dạo.",
       "choices": [
         {
-          "l": "Học kỹ",
+          "l": "Học cách pha thay vì mua sẵn",
           "i": "⚗️",
           "chk": [
             "nang.duoc",
@@ -367,10 +367,10 @@
         "cooldownHours": 720
       },
       "actors": {},
-      "text": "Lâu cho ngươi đeo bài đồng, kèm điều kiện: phải giết một kẻ phản lâu.",
+      "text": "Người đứng đầu tổ chức sát thủ cho ngươi lên bậc đồng bài. Muốn nhận thẻ đồng, ngươi phải nhận việc giết một người đã phản lại tổ chức.",
       "choices": [
         {
-          "l": "Nhận",
+          "l": "Nhận thẻ đồng và nhận việc",
           "i": "🥉",
           "t": "Kẻ phản là người từng dạy ngươi.",
           "e": {
@@ -547,7 +547,7 @@
         "cooldownHours": 720
       },
       "actors": {},
-      "text": "Lâu chủ già yếu. Ngươi và một kẻ khác tranh ghế.",
+      "text": "Lâu chủ đã già yếu. Ngươi và một sát thủ khác đều muốn nắm quyền cai quản tổ chức.",
       "choices": [
         {
           "l": "Ám sát đối thủ",
@@ -578,7 +578,7 @@
           }
         },
         {
-          "l": "Thương lượng chia lâu",
+          "l": "Thương lượng chia quyền cai quản",
           "i": "🤝",
           "chk": [
             "nang.giao",

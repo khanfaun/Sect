@@ -95,7 +95,7 @@
           }
         },
         {
-          "l": "Nghe theo",
+          "l": "Nghe theo lời tâm ma",
           "cost": "nhân quả xấu đi, tâm ma tăng",
           "go": {
             "$hook": "ky_tm_du_c_1_go"
@@ -170,7 +170,7 @@
           }
         },
         {
-          "l": "Đón nhận",
+          "l": "Chấp nhận sức mạnh tâm ma hứa cho",
           "cost": "nhân quả xấu đi, tâm ma tăng",
           "go": {
             "$hook": "ky_tm_quyen_c_1_go"
@@ -358,7 +358,7 @@
       "text": "Một tu sĩ áo bạc màu dừng chân bên quán nước, nhìn ngươi hồi lâu. “Lại đây, để ta xem cốt cách.” Bàn tay khô gầy đặt lên cổ tay ngươi.",
       "choices": [
         {
-          "l": "Chìa tay cho y xem",
+          "l": "Đưa tay cho tu sĩ xem linh căn",
           "go": {
             "$hook": "ky_tl_dusi_c_0_go"
           }
@@ -456,7 +456,7 @@
     },
     {
       "id": "tl_tubiet",
-      "name": "Tự biết",
+      "name": "Tự cảm nhận linh căn",
       "kind": "opportunity",
       "tags": [],
       "trigger": {
@@ -491,9 +491,9 @@
         "commit": "d2"
       },
       "scriptText": {
-        "event.tl_tubiet.vo": "Khí trời đất đi qua người như gió qua lưới rách. Không một sợi nào ở lại. Ngươi đã hiểu, chỉ là chưa muốn tin.",
+        "event.tl_tubiet.vo": "Ngươi thử giữ chút linh khí trong người, nhưng khí trôi qua như gió qua lưới rách. Không một sợi nào ở lại. Đến lúc ấy ngươi hiểu mình không có linh căn.",
         "event.tl_tubiet.thuong": "Giữa đêm, một sợi khí mát chạy qua ngực rồi tan. Mỏng manh, nhưng là thật. Ngươi có linh căn.",
-        "event.tl_tubiet.tot": "Linh khí ùa vào như nước vỡ bờ, chạy khắp tứ chi. Ngươi mở mắt, trời đất như rõ hơn một tầng."
+        "event.tl_tubiet.tot": "Linh khí ùa vào và chạy khắp tay chân. Khi mở mắt, ngươi vẫn cảm được luồng khí chưa tan. Linh căn của ngươi có thể giữ được nhiều linh khí."
       },
       "review": {
         "checks": [
@@ -532,7 +532,7 @@
       "text": "Một lão đạo rách rưới gõ cửa xin bát cơm. Ăn xong, lão không đi, cầm lấy bàn tay ngươi lật qua lật lại, mắt đục như nước sông.",
       "choices": [
         {
-          "l": "Để lão xem",
+          "l": "Để lão đạo xem linh căn",
           "go": {
             "$hook": "ky_tl_laodao_c_0_go"
           }

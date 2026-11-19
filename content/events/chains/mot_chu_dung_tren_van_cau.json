@@ -341,11 +341,11 @@
           "alignment": "context"
         }
       },
-      "text": "Một nhịp cầu mới chưa chịu nhận người qua. Nếu hồn đã được kể lại tên hoặc được trả nét tên, nó tự đứng vào chỗ ván cong, nhớ mình từng giữ cầu ra sao. Nếu tên đã đổi lấy phép hoặc vẫn đi theo ngươi, nó chờ bên chân ngươi, không biết phải đứng ở đâu. Người khắc cầu xin ngươi giúp trước khi đoàn khách tới.",
+      "text": "Phép giữ nhịp cầu mới chưa hoạt động. Nếu hồn người giữ cầu đã nhớ lại tên hoặc được trả phần chữ còn thiếu, nó nhớ mình phải tự đứng vào chỗ ván cong để giữ cầu. Nếu tên đã bị đổi lấy phép hoặc hồn vẫn bám theo ngươi, nó chỉ đứng bên chân ngươi. Người khắc cầu xin giúp trước khi khách tới.",
       "choices": [
         {
           "i": "✋",
-          "l": "Viết tên ngươi xuống để đỡ nhịp cầu cùng hồn",
+          "l": "Khắc tên mình để cùng hồn giữ nhịp cầu",
           "t": "Ngươi viết tên mình cạnh tên hồn, để lại một phần thần niệm cùng đỡ cầu. Cả đoàn qua hết, hồn vẫn đứng vững tại nhịp giữa. Lão khắc cầu hứa sẽ coi phần tên ngươi để lại.",
           "e": {
             "hd": {
@@ -447,7 +447,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu ngươi đã để tên, một người qua cầu đọc nó rồi hỏi tới tên đứng cạnh. Nếu tên cũ mờ đi, người khắc cầu {$a.ten} đem từng tấm ván xuống cho người còn nhớ đến chạm tay.",
+      "text": "Nếu ngươi khắc tên mình để giúp hồn giữ cầu, khách qua đọc được tên ngươi và hỏi tên người ở bên cạnh. Nếu tên cũ đã mờ, người khắc cầu {$a.ten} tháo từng tấm ván cho những ai còn nhớ tới xem và chạm vào nét khắc.",
       "choices": [
         {
           "i": "✋",

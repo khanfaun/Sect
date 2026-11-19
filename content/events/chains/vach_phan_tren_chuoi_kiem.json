@@ -357,7 +357,7 @@
           "alignment": "context"
         }
       },
-      "text": "Đá ép xà xuống ngang vai kiếm sư {$b.ten}. Nếu nữ kiếm đồ {$a.ten} đã tập tay trái, nàng tìm được góc kiếm mở đường. Nếu vẫn học bài cũ, nàng phải đổi tay ngay trong khe đá.",
+      "text": "Đá đè xà xuống ngang vai kiếm sư {$b.ten}, chặn đường ra. Nếu nữ kiếm đồ {$a.ten} đã tập kiếm tay trái, nàng biết cách đưa kiếm vào khe hẹp. Nếu trước giờ vẫn tập tay phải, lần này nàng phải đổi tay ngay trong khe đá.",
       "choices": [
         {
           "i": "✋",
@@ -468,7 +468,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu ngươi chống xà, kiếm sư {$b.ten} đặt kiếm cong trên bàn để đo lại chuôi. Nếu xà bị cắt, lão dùng gỗ của giá kiếm vỡ, còn nữ kiếm đồ {$a.ten} đứng chỉ cho lão chỗ khoét.",
+      "text": "Nếu ngươi chống xà cho nàng cứu người, kiếm sư {$b.ten} dùng thanh kiếm đã cong để đo lại chuôi. Nếu nàng cắt xà, nữ kiếm đồ {$a.ten} chỉ cho lão cách làm chuôi mới vừa tay trái bằng gỗ từ giá kiếm đã vỡ.",
       "choices": [
         {
           "i": "🤲",

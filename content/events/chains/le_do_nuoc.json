@@ -346,7 +346,7 @@
           "alignment": "context"
         }
       },
-      "text": "Chủ bến {$a.ten} nhổ cọc nước đem bán cho thuyền ngoại đảo. Nếu ngươi từng góp tiền hoặc góp người, dân đem vạch đo của họ ra. Nếu ngươi từng bán giấy hoặc bán dây, chủ bến đối diện gọi giá trước.",
+      "text": "Chủ bến {$a.ten} nhổ chiếc cọc ghi mực triều để bán cho thuyền ngoài đảo. Nếu ngươi từng góp tiền hoặc người để giữ số đo, dân mang bản họ đã chép ra. Nếu ngươi bán giấy đo hoặc dây neo, chủ bến bên kia ra giá mua trước.",
       "choices": [
         {
           "i": "💎",
@@ -366,7 +366,7 @@
         },
         {
           "i": "💰",
-          "l": "Bán lại quyền dùng vạch",
+          "l": "Bán quyền dùng vạch đo mực triều",
           "t": "Ngươi lấy được tiền của hai bến. Một đứa bé đặt dấu riêng bằng than trên cọc, ngay chỗ ngập nước.",
           "e": {
             "st": 22,
@@ -455,7 +455,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu vạch thuộc cả hai bến, thuyền mới đến dùng chung một lệ. Nếu vạch từng bị bán, thuyền nghèo buộc xa bến, đánh dấu nước bằng vôi trên mái đá.",
+      "text": "Nếu cả hai bến cùng giữ số đo, thuyền mới tới được tính tiền neo theo một lệ. Nếu số đo đã bị bán, thuyền nghèo phải buộc xa bến và tự đánh dấu mực triều bằng vôi trên đá.",
       "choices": [
         {
           "i": "✋",
