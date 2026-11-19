@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "TAY_TUY",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "trang_thieu",
+      "ten": "Bản kinh chép thiếu trang",
+      "t": "Một võ sư ở {LOC12} đặt bản kinh ngoài chợ cạnh bản mà ông từng đọc. Bản bán bỏ hết lời nhắc phải nghỉ. Ngoài hiên, có người đang khoe chỉ cần luyện hết một mùa là mọi mạch sẽ mở.",
+      "c": [
+        {
+          "id": "doc",
+          "l": "Nhờ võ sư chỉ chỗ bị bỏ",
+          "t": "Ông đọc lời dặn về lúc dừng. Ngươi sao phần ấy để không nhầm lời rao với bản kinh.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Hỏi người từng tận mắt xem buổi luyện",
+          "t": "Họ chỉ kể việc đã thấy, không nhận biết kết quả cuối. Ngươi ghi cả chỗ họ không dám chắc."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "san_lanh",
+      "ten": "Buổi thở bên sân lạnh",
+      "t": "Trong đợt khổ luyện ở {LOC12}, một người tập cùng ngươi ngồi lại bên bậc vì quá mệt. Họ sợ nghỉ một buổi sẽ bị coi là bỏ cuộc. Người coi sân đem nước tới và hỏi ai chịu đổi phiên.",
+      "c": [
+        {
+          "id": "doi",
+          "l": "Đổi phiên để họ nghỉ",
+          "t": "Ngươi báo người coi sân và nhận buổi sau. Người tập ngồi uống nước tới khi tay hết run.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "ngoi",
+          "l": "Ngồi cùng và gọi người xem giúp",
+          "t": "Ngươi chờ bên bậc tới khi người coi sân lại gần. Họ tự kể đã mệt từ lúc nào."
+        }
+      ]
+    }
+  ]
+}
