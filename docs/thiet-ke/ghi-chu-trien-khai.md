@@ -700,3 +700,10 @@ Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm th
 - Bộ kiểm (`npm run content:tuyen`, nằm trong `content:check`): JSON có dòng, khoá lạ, mã LOC/NP/FA/CLK/deed/xuất thân/vật có thật, 5 nút N1–N5, 3–5 lựa chọn (một cái không điều kiện), `tuDien` mọi nút, `thayThe` không gọi vai đã mất, 3 kết A/B/C đòi dấu có người đặt, văn không chữ số (trừ tuổi), không tên cứng NP/LOC/FA, không điểm nghiệp, tiền đúng đơn vị, không trùng id; đại lộ: `khacVoi` hồi 2–5, hồi 3/5 chạm CLK. Cảnh báo: tên riêng lạ, văn ngắn/dài, "hồi sinh", trùng người + nơi giữa đại lộ và xuất thân. `--de OR02 OR03` in đoạn thiết kế để dán cho GPT.
 - Bài: `menh_tuyen` (33 ý), sửa `cai_can_do` (ép trúng xác suất nhìn ra đồ dởm — trước đó phụ thuộc thứ tự chạy).
 - Còn dở: thẻ "Mệnh thư" trong Sổ tay (giao diện React) chưa vẽ, `tuyenView` đã có; chưa có sự kiện đồng hồ chơi được ngoài tuyến; bộ kiểm chưa so mục tiêu nút đại lộ với xuất thân bằng nghĩa (chỉ cảnh báo cùng người + nơi).
+
+## NGƯỜI DÙNG CHỐT ĐỢT 7 (câu 44–46)
+44. B: lời mời mốc tuyến vẫn nằm trong Sổ tay (thẻ Mệnh thư), người chơi tự mở lại trước khi hết hạn (cần làm trong bộ máy + thẻ Mệnh thư).
+45. A: mỗi mốc ≥3 lựa chọn thật, "Để sau" không tính (hướng dẫn GPT đã ghi 3–5).
+46. A: GPT được tạo vật truyện riêng mã vt_<tuyến>_.
+42–43 (giá pháp bảo Ám Hội, khách lạ quay lại): CHƯA trả lời.
+Gói gửi GPT: docs/content/GUI-GPT/ (0-loi-nhan, 1-huong-dan, 2-thiet-ke-45-tuyen). TẠM DỪNG — chờ người dùng.
