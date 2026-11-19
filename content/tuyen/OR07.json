@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "id": "OR07",
+  "loai": "xuat_than",
+  "ten": "Tên trên lưng tượng",
+  "xuatThan": "mieu",
+  "goiYDaiLo": [
+    "tinh_mong"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Mũi khâu trong vạt áo",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "thu",
+        "noi": "LOC04",
+        "vai": "NP07"
+      },
+      "mo": "{NP07} đặt mảnh áo lên thềm miếu {LOC04} nơi ngươi từng ngủ. Mũi khâu xéo đánh dấu tên cũ của đứa trẻ bọc trong áo. Mũi cuối bị rút chỉ, để lại lỗ kim mà người nuôi ngươi vẫn nhớ.",
+      "thayThe": "Sau bia tên người mất ở {LOC04} còn mảnh áo gói trong vải khô. Mẩu giấy kèm chỉ cách đọc mũi khâu xéo; lỗ kim cuối còn nguyên dù sợi chỉ đã được rút mất.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Học đọc đường chỉ xéo",
+          "t": "Ngươi lần từng mũi ra một dấu tên và chép lại cả chỗ sợi cuối đã bị rút.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Vẽ mũi khâu lên giấy",
+          "t": "Ngươi chép hình mũi khâu và nơi tìm thấy áo, để người đọc bia đối lại.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ áo cho người từng nuôi mình",
+          "t": "Ngươi gói áo lại cùng một mẩu giấy ghi bữa cháo đầu tiên dưới mái miếu.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mảnh áo được cất lại dưới bia, đường chỉ xéo vẫn nguyên.",
+        "su": "Mảnh áo được cất lại dưới bia, đường chỉ xéo vẫn nguyên.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Một dòng ở hai mái trú",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "thu",
+        "noi": "LOC12",
+        "vai": "NP08"
+      },
+      "mo": "{NP08} nhắn rằng tập chép bia {LOC04} khớp một dòng trong danh sách trú ở {LOC12}. Cả hai đều có dấu khâu xéo, nhưng giấy ở thư khố còn ghi tên người đến nhận đứa trẻ. Mực ở chính tên ấy đã nhòe.",
+      "thayThe": "Tập chép bia có một mũi xéo giống vết trên áo trẻ. Mục lục ở {LOC12} chỉ tới danh sách trú cùng mùa, dưới mục người đến nhận còn một vệt mực nhòe.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối chiếu bia và danh sách trú",
+          "t": "Ngươi chép dòng bia bên dòng trú, giữ lại dấu tới nhận dù chữ đã nhòe.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi người giữ bản trú",
+          "t": "Ngươi tìm được bản có dấu nhận trẻ và xin họ giữ nguyên cả chỗ bị xóa.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ bản chép bia ở miếu",
+          "t": "Ngươi bồi bản sao cho khỏi ẩm rồi cất tại miếu để người tới sau còn tra.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bản trú được chuyển vào bó giấy cất, dấu khâu còn trên tập chép bia.",
+        "su": "Bản trú được chuyển vào bó giấy cất, dấu khâu còn trên tập chép bia.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Dòng nhường chỗ",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC05"
+      },
+      "mo": "Trong hồ sơ trận ở {LOC05}, một dòng tên trẻ bị cạo khỏi sổ tế rồi chép sang phiếu thả. Cạnh đấy là phần ghi người được cứu khi hai tên đổi chỗ. Tên còn đọc được thuộc một đứa bé đã được thả khỏi buồng chờ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối hồ sơ với dấu áo",
+          "t": "Ngươi tìm dấu chỉ xéo dưới dòng cạo. Phiếu kèm xác nhận đứa bé được thả nhờ đổi tên.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Chép hai trang rồi trả hồ sơ",
+          "t": "Ngươi giữ bản chép dòng tên cạo và phiếu thả, để vẫn tra được ai đã ra khỏi buồng.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi ai giữ quyền sửa tên",
+          "t": "Ngươi chép dấu quyền trên sổ tế hiện tại và tên vai chịu trách nhiệm mỗi lần sửa.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Sổ tế được cuộn lại, tên đứa bé đã thả vẫn nằm trên phiếu riêng.",
+        "su": "Sổ tế được cuộn lại, tên đứa bé đã thả vẫn nằm trên phiếu riêng.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Di thư dưới chân bia",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Một mảnh di thư nằm ép dưới chân bia {LOC04}, kể cha mẹ xin xóa tên con khỏi sổ tế. Giấy không ghi họ cao sang nào. Người coi miếu đặt thư cạnh mảnh áo và chừa một trang trắng để ngươi chọn tên.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Tự ghi tên trước người làm chứng",
+          "t": "Ngươi ghi tên do mình chọn và để người coi miếu xác nhận bằng dấu tay.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Từ lời nhận họ để giữ miếu",
+          "t": "Ngươi giữ di thư trong hộp bia và nhận ca coi mái trú qua mùa nước.",
+          "dau": [
+            "moc_4_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Công khai dòng đã bị tráo",
+          "t": "Ngươi đọc dòng đã bị tráo trước người coi miếu, rồi yêu cầu giao quyền sửa sổ tế.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        }
+      ],
+      "tuDien": {
+        "t": "Di thư được kẹp lại dưới bia, trang ghi tên mới còn trắng.",
+        "su": "Di thư được kẹp lại dưới bia, trang ghi tên mới còn trắng.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Trang cuối sổ hiến",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Mưa đập vào mái {LOC04}, làm chân bia ẩm tới mép chữ. Sổ hiến và cuốn ghi người xin trú nằm cùng bàn. Người tìm chỗ ngủ đêm nay muốn biết mình phải ghi tên vào cuốn nào mới được qua cửa.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Hủy quyền cưỡng ép trong sổ hiến",
+          "t": "Ngươi cùng nhân chứng hủy phần cưỡng chuyển tên, rồi mở trang tự nguyện của miếu.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ mái trú và hong lại bia",
+          "t": "Qua đợt mưa, ngươi giữ người trú trên nền khô, rồi đặt bản chép bia lại trong hòm.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Dùng quyền sổ hiến đổi tên người khác",
+          "t": "Ngươi lấy sổ khỏi tay người coi cũ và ép người xin trú nhận tên chịu phần tế.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người trú ghé thềm qua đêm, sổ hiến được dời khỏi chỗ dột.",
+        "su": "Người trú ghé thềm qua đêm, sổ hiến được dời khỏi chỗ dột.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Một tên tự đặt",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người tới miếu có thể viết tên họ tự chọn trước khi nhận chiếu. Dòng buộc đổi tên đã bị gỡ khỏi sổ hiến. Ngươi nhìn lại mũi khâu trên áo rồi tự tay khắc cái tên đã ghi khi có người chứng.",
+      "su": "{LOC04} giữ sổ tên tự nguyện sau khi hủy quyền cưỡng chuyển tên.",
+      "dauVong": "trên bia miếu có tên do {ten} tự đặt."
+    },
+    {
+      "id": "B",
+      "ten": "Người giữ miếu",
+      "dk": {
+        "dau": [
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Sau trận mưa, những người từng nằm chen dưới thềm quay lại thay phần mái đã hở. Bản chép bia được hong khô rồi cất cùng di thư. Người từng được miếu nhận vẫn biết mang chăn tới đâu khi có kẻ lỡ đường.",
+      "su": "Mái trú tại {LOC04} qua mùa nước, các tên trên bia còn bản chép.",
+      "dauVong": "một người từng ngủ dưới mái miếu còn nhớ ai đã giữ cửa mở."
+    },
+    {
+      "id": "C",
+      "ten": "Tên trả bằng tên",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Người coi sổ đời sau biết nhận lệnh từ chỗ ngươi ngồi. Kẻ đến xin một chỗ ngủ mất tên cũ ngay trong đêm ấy, còn trang ghi phần tế chỉ thay dấu của người có quyền. Miếng áo cũ nằm cạnh sổ để nhắc phần quyền ấy bắt đầu ở đâu.",
+      "su": "Sổ hiến tại {LOC04} tiếp tục đổi tên người dưới quyền {ten}.",
+      "dauVong": "một người mang tên bị tráo còn giữ lời chứng về đêm xin trú."
+    }
+  ],
+  "ngoai": "Người trú ghé thềm qua đêm, sổ hiến được dời khỏi chỗ dột."
+}

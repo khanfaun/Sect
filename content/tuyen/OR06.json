@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 1,
+  "id": "OR06",
+  "loai": "xuat_than",
+  "ten": "Chỗ ngồi không dành cho mình",
+  "xuatThan": "thegia",
+  "goiYDaiLo": [
+    "huyet_cuu"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Phần đất ở mép phả",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "thu",
+        "noi": "LOC02",
+        "vai": "NP03"
+      },
+      "mo": "{NP03} đặt bản ghi sinh cạnh gia phả để ngươi tự đọc. Phần đất nuôi người con thứ nằm ở mép cũ, còn bản sao dùng trong nhà chuyển nó lên dòng trưởng. Hai tờ giấy dùng hai màu mực.",
+      "thayThe": "Bản ghi sinh kẹp sau sổ hộ ở {LOC02} vẫn còn dấu tay bà đỡ. Đối với gia phả, ngươi thấy phần đất nuôi người con thứ bị dời lên dòng trưởng.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Chép hai dòng đối chứng",
+          "t": "Ngươi sao dòng ghi sinh và dòng nhận đất, chừa chỗ để đối chiếu phần bị lấy.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi người giữ giấy sinh",
+          "t": "Ngươi xin lời xác nhận ngày ghi sinh và phần được cấp trước khi mực đổi màu.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Nhận phần cấp còn lại",
+          "t": "Ngươi lấy đúng số gạo còn ghi tên mình, để người nhà ký giấy đã nhận.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Phần đất ghi bên mép phả được nhập vào sổ người trưởng.",
+        "su": "Phần đất ghi bên mép phả được nhập vào sổ người trưởng.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Chữ ký dưới khoản nợ",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "thu",
+        "noi": "LOC03",
+        "vai": "NP05"
+      },
+      "mo": "{NP05} cho xem khoản nợ đã tất toán ở {LOC03}. Tờ phụ ghi bên cho vay chỉ xóa nợ sau khi đổi người thừa kế. Chữ ký của người giữ chìa nhà nằm dưới dòng đã sửa.",
+      "thayThe": "Bản sao sổ nợ theo thương đội về {LOC03}. Tờ phụ ghi khoản xóa nợ đổi lấy việc chuyển quyền thừa kế, dưới cùng còn dấu của người từng giữ chìa nhà.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Lấy bản giao dịch có chữ ký",
+          "t": "Ngươi sao điều kiện xóa nợ và chỉ ra người giữ chìa nhà ký ở hai bản đối chứng.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Đối chất bằng ngày tất toán",
+          "t": "Ngươi buộc người giữ nợ đọc ngày đổi tên ngay trước người ký nhận phần đất.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi người có thể làm chứng",
+          "t": "Ngươi xin địa chỉ người giao giấy, để lúc cần còn biết gọi ai tới bàn đối sổ.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Tờ phụ bị nhập cùng sổ nợ đã tất toán, giao dịch chưa được tra lại.",
+        "su": "Tờ phụ bị nhập cùng sổ nợ đã tất toán, giao dịch chưa được tra lại.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Tiền công ngoài cửa nhà",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Ở {LOC09} còn việc chở hàng và chép phiếu bến. Người làm cùng chỉ chia công theo chuyến, dù gia phả viết ngươi ở hàng nào. Một gia nhân cũ cũng tới tìm việc ở bến.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Chép phiếu bến lấy công",
+          "t": "Ngươi giao đủ phiếu cho chuyến nước lên, nhận tiền công và được hẹn chuyến sau.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "e": {
+            "bac": 500
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Làm thuê với gia nhân cũ",
+          "t": "Ngươi khuân chung một chuyến rồi chia công đều. Gia nhân cũ xin tự góp vốn làm tiếp.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Nhận lời bảo chứng của bạn nghề",
+          "t": "Ngươi làm đủ lượt kiểm hàng để người ở bến chịu làm chứng cho thu nhập riêng.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chuyến hàng được giao cho người khác, gia nhân cũ ngủ lại ngoài bến.",
+        "su": "Chuyến hàng được giao cho người khác, gia nhân cũ ngủ lại ngoài bến.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Ghế trống trong nhà",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Đến lúc kê lại phần đất ở {LOC02}, người trưởng kéo ghế ra giữa gian. Gia nhân hỏi có phải theo phần đất sang chủ mới. Trên bàn có tờ tách hộ, giấy định người giữ nhà và sổ nợ phải trả.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đòi quyền gia chủ qua buổi đối phả",
+          "t": "Ngươi đem tờ giao dịch ra xét cùng giấy sinh. Người trưởng chịu ký chuyển quyền, gia nhân được ở đến buổi chia.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Tách hộ với người tự nguyện góp công",
+          "t": "Ngươi lập hộ mới bằng phần công ngoài bến. Gia nhân cũ ký tên làm bạn nghề theo ý mình.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin giải thể phần sở hữu chung",
+          "t": "Ngươi đối chất chữ ký và xin đình quyền của người trưởng. Người làm được giữ giấy kê công chờ chia.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Xin hoãn chia để kê tiền công",
+          "t": "Ngươi xin để riêng tiền công đến hạn và đưa người làm một bản kê trước buổi chia.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người trưởng khóa sổ đất, người làm tiếp tục chịu phần công cũ.",
+        "su": "Người trưởng khóa sổ đất, người làm tiếp tục chịu phần công cũ.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Chìa khóa giao cho ai",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Ngày chia tài sản, chùm chìa cũ được đặt cạnh sổ những người lệ thuộc. Có người xin nhận lương bằng gạo để rời nhà trước mùa lạnh. Người trông bếp muốn biết ai còn giữ quyền đòi công của mình.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao quyền coi kho cho các hộ",
+          "t": "Ngươi nhận chức rồi giao quyền kiểm kho cho các hộ. Họ tự duyệt và lĩnh gạo trong phiên đầu.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Chia tài sản tách hộ theo vốn góp",
+          "t": "Ngươi giao lại chìa cũ, ghi vốn góp và tiền công theo thỏa thuận mới với bạn nghề.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Trả công rồi chia phần nhà cũ",
+          "t": "Ngươi giao kho thóc cho người còn nợ công, nhà cho các hộ góp tiền và hủy sổ lệ thuộc.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bàn chia đóng lại, sổ người làm vẫn mắc dưới chùm chìa cũ.",
+        "su": "Bàn chia đóng lại, sổ người làm vẫn mắc dưới chùm chìa cũ.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Gia chủ không đầu bàn",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Ngươi giữ quyền gọi họp, còn kho có người do các hộ cử mở. Người trông bếp lần đầu được lĩnh phần gạo đã tự đối sổ. Chỗ đầu bàn để trống khi họ chia quyền cho lượt sau.",
+      "su": "Nhà ở {LOC02} đổi luật coi kho và các hộ đã thi hành trong phiên chia đầu.",
+      "dauVong": "người trông bếp từng được cấp gạo theo sổ do các hộ kiểm."
+    },
+    {
+      "id": "B",
+      "ten": "Họ mới bên đường",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Mỗi chuyến đến bến, ngươi và bạn nghề đều ghi tiền công trước khi chia vốn. Đến ngày kê bàn thờ, hai người chỉ ghi tên những ai đã đưa mình qua mùa thiếu việc. Tờ tách hộ nằm trong hòm phiếu bến.",
+      "su": "Một hộ mới sống bằng việc bến và giữ thỏa thuận tự nguyện của người góp công.",
+      "dauVong": "bàn thờ của hộ mới ghi tên người đã giúp mà không xếp thứ bậc."
+    },
+    {
+      "id": "C",
+      "ten": "Tro của đại trạch",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Sổ lệ thuộc được hủy trước những người có tên trong đó. Các hộ mang giấy nhận nhà đi, người làm mang gạo, còn gia phả cũ mất một nhánh đứng tên chung. Người từng trông bếp giữ biên nhận thay cho chìa khóa.",
+      "su": "Tài sản nhà cũ đã chia cho các hộ góp tiền và người còn nợ công.",
+      "dauVong": "một người từng trông bếp giữ tờ nhận gạo từ buổi tan nhà."
+    }
+  ],
+  "ngoai": "Bàn chia đóng lại, sổ người làm vẫn mắc dưới chùm chìa cũ."
+}
