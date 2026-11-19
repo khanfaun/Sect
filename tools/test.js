@@ -1613,7 +1613,8 @@ const TESTS = {
     run("G.run.ccBon=0;G.run.nang={khao:0,duoc:0};ccDoAdd(3,1)");const root0=run("JSON.stringify(G.run.root)");
     ok(run("bagItems().find(it=>it.key==='vccg_3').n===bagItems().find(it=>it.key==='vccd_1').n.replace('Tẩy Mạch Đan','Lưỡng Nghi Tạo Căn Đan')"), 'đồ dởm mang cùng tên đồ thật');
     run("bagUse('vccg_3',1)");ok(run("JSON.stringify(G.run.root)")===root0&&run("!G.run.qitems.includes('ccg_3')&&!(G.run.ccWait>W().t)&&G.run.ccBon===0&&!G.run.ccOk&&NK.count('ccd.dom')===1"), 'dùng đồ dởm: không tác dụng, mất đồ, không tính là hỏng');
-    run("G.run.nang={khao:100,duoc:10};ccDoAdd(3,1)");ok(run("G.run.qitems.includes('ccx_3')&&bagItems().find(it=>it.key==='vccx_3').use!==1"), 'khảo vật cao: nhìn ra đồ giả ngay lúc nhận');
+    run("G.run.nang={khao:100,duoc:10};(()=>{const o=RS;RS=()=>0;try{ccDoAdd(3,1)}finally{RS=o}})()");ok(run("ccNhanP()")>0,'khảo vật cao: có cơ nhìn ra đồ giả ('+run("ccNhanP()")+')'); // ép trúng xác suất để bài không phụ thuộc thứ tự chạy
+    ok(run("G.run.qitems.includes('ccx_3')&&bagItems().find(it=>it.key==='vccx_3').use!==1"), 'khảo vật cao: nhìn ra đồ giả ngay lúc nhận');
     run("G.run.nang={khao:0,duoc:0};ccDoAdd(3,1);ccDoAdd(4,0)");
     const tn=run("W().regions.flatMap(R=>R.nodes).find(n=>ccTdOk(n)).id");
     run(`(()=>{const r=G.run;r.scene=null;r.moving=null;r.at=${tn};openPlace(${tn});})()`);
