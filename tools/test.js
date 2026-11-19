@@ -106,14 +106,14 @@ const TESTS = {
     // công cụ kiểm nội dung đợt hai báo lỗi đúng tệp/dòng/khoá
     const fs=require('fs'),path=require('path');const K=require('./kiem-tra-noi-dung-2');const f=path.join(__dirname,'../content/qua-chin/giet_vo_toi.json');
     const bad={schemaVersion:1,loai:'qua_chin',deed:'giet_vo_toi',bien:[{id:'a',ten:'Món nợ máu',t:'Gã Lý Thiết Ngưu chặn đường ngươi, đòi 30 lượng bạc. '.repeat(4),c:[{id:'x',l:'Trả',t:'Ngươi trả tiền cho xong chuyện, lòng nặng như đá, bước đi không ngoái lại, trời đổ mưa.',e:{bac:-3.5,deed:'khong_co'}}]}]};
-    let r;try{fs.writeFileSync(f,JSON.stringify(bad,null,2));r=K.kiemNoiDung2([f]);}finally{fs.unlinkSync(f);}
+    const goc=fs.existsSync(f)?fs.readFileSync(f):null;let r;try{fs.writeFileSync(f,JSON.stringify(bad,null,2));r=K.kiemNoiDung2([f]);}finally{if(goc)fs.writeFileSync(f,goc);else fs.unlinkSync(f);}
     const L=r.loi.join('\n');
     ok(/giet_vo_toi\.json dòng \d+, khoá bien\[0\]\.t: có con số "30"/.test(L), 'báo con số trong lời văn, đúng tệp/dòng/khoá');
     ok(/tên riêng mới "Lý Thiết Ngưu"/.test(L), 'báo tên người mới');
     ok(/khoá bien\[0\]\.c\[0\]\.e\.bac: tiền phàm là số nguyên xu/.test(L), 'báo tiền sai đơn vị');
     ok(/mã việc làm "khong_co" không có/.test(L), 'báo mã việc làm không có');
     ok(/cần ít nhất 3 biến thể/.test(L)&&/cần 2–4 lựa chọn/.test(L), 'báo thiếu số lượng');
-    ok(K.kiemNoiDung2([],{du:true}).loi.some(x=>/content\/qua-chin\/bo_thi\.json: chưa có tệp/.test(x)), '--du: báo tệp còn thiếu');
+    {const fb=path.join(__dirname,'../content/qua-chin/bo_thi.json'),tm=fb+'.tam';const co=fs.existsSync(fb);if(co)fs.renameSync(fb,tm);let ld;try{ld=K.kiemNoiDung2([],{du:true}).loi;}finally{if(co)fs.renameSync(tm,fb);}ok(ld.some(x=>/content\/qua-chin\/bo_thi\.json: chưa có tệp/.test(x)), '--du: báo tệp còn thiếu');}
     ok(K.kiemNoiDung2().loi.length===0, 'các tệp mẫu đều đạt');
   },
   noi_dung_2() {
@@ -128,12 +128,12 @@ const TESTS = {
     run("kyPick(0)");ok(run("!!G.run.scene.res"), 'chọn một lựa chọn: có kết quả');
     run("G.run.scene=null;G.run.moving={path:[G.run.at,G.run.at],seg:0,prog:0};nqSeed('cuu_nguoi');(()=>{const s=G.run.qc[G.run.qc.length-1];s.due=W().t;qcRipen(s)})()");
     ok(run("!G.run.scene&&G.run.qc[G.run.qc.length-1].done===0"), 'đang đi đường: hạt chờ lúc dừng chân');
-    run("G.run.moving=null;G.run.scene=null;G.run.log=[];nqSeed('an_tang');(()=>{const s=G.run.qc[G.run.qc.length-1];s.due=W().t;qcRipen(s)})()");
+    run("delete ND2.qc.an_tang;G.run.moving=null;G.run.scene=null;G.run.log=[];nqSeed('an_tang');(()=>{const s=G.run.qc[G.run.qc.length-1];s.due=W().t;qcRipen(s)})()");
     ok(run("!G.run.scene&&G.run.qc[G.run.qc.length-1].done===1")&&run("JSON.stringify(G.run.log)").includes(run("deedName('an_tang')")), 'việc chưa có nội dung: vẫn dùng dòng nhật ký cũ');
     // (b) nghề phàm: thăng bậc riêng, lời chung khi thiếu
     run("G.run.scene=null;ND2.nghe.tieu={len:['Lão chủ rừng ném cho {ten} chiếc rìu cán gụ.','b','c','d','e']};ngPaths().tieu={bac:0,xp:100};ngCheck('tieu')");
     ok(run("G.run.scene&&G.run.scene.ev")==='ng_tieu_1'&&run("G.run.scene.text")===run("'Lão chủ rừng ném cho '+G.run.ten+' chiếc rìu cán gụ.'"), 'tiều phu lên bậc một: lời thăng bậc riêng (thay {ten})');
-    run("G.run.scene=null;delete ND2.nghe.tieu;delete ngPaths().tieu;ngPaths().mo={bac:0,xp:100};ngCheck('mo')");
+    run("G.run.scene=null;delete ND2.nghe.tieu;delete ND2.nghe.mo;delete ngPaths().tieu;ngPaths().mo={bac:0,xp:100};ngCheck('mo')");
     ok(run("G.run.scene.text")===run("contentText('ng.upT',[NGHE.mo.ranks[1]])"), 'nghề chưa có nội dung: lời chung cũ');
     run("G.run.scene=null;ngPaths().nong={bac:0,xp:100};ngCheck('nong')");ok(run("G.run.scene.text")===run("contentText('ng.nong.up1')"), 'nông dân không viết len: giữ lời thăng bậc đã có');
     run("G.run.scene=null;delete ngPaths().mo;nqInit(G.run);G.run.ng.G=20;G.run.ng.B=0;ngPaths().nong={bac:4,xp:2000}");
@@ -144,14 +144,14 @@ const TESTS = {
     ok(!/\{|\d/.test(run("ngKet().t")), 'kết cục không có con số hay mã');
     run("ngPaths().nong.bac=4;G.run.ng.G=20;G.run.ng.B=0;G.run.scene=null;die('old')");
     ok(run("G.over&&G.over.ngKet&&G.over.ngKet.id")==='A'&&run("G.over.ngKet.n")==='Nông dân', 'hết kiếp: màn hết kiếp có kết cục nghề chính');
-    fresh("G.screen='map';G.run.kyT=W().t;G.run.tmT=W().t;ngPaths().ngu={bac:3,xp:900}");ok(run("ngKet()")===null, 'nghề chính chưa có nội dung: không có kết cục (không lỗi)');
+    fresh("G.screen='map';G.run.kyT=W().t;G.run.tmT=W().t;ngPaths().ngu={bac:3,xp:900};delete ND2.nghe.ngu");ok(run("ngKet()")===null, 'nghề chính chưa có nội dung: không có kết cục (không lỗi)');
     // (c) cải căn dọc đường
     run("G.run.cc={id:'CC01',s:0,t0:W().t,pf:{},h:0,care:0};ccEvHen()");
     ok(run("G.run.ccEvQ&&G.run.ccEvQ.v")==='ban_bao_che_cu', 'CC01 bước kiểm chứng: hẹn sự kiện dọc đường');
     run("G.run.scene=null;ccEvMo()");ok(run("G.run.scene&&G.run.scene.ev")==='cc_ev'&&!/\{|\d/.test(run("G.run.scene.text")), 'lúc rảnh: sự kiện hiện ra');
     run("kyPick(0);G.run.scene=null;ccNext()");ok(run("G.run.cc.s===1&&G.run.ccEvQ&&G.run.ccEvQ.v")==='dua_tre_sot', 'sang bước phục vụ: hẹn sự kiện của bước đó');
     run("G.run.scene=null;ccEvMo();kyPick(0)");ok(run("NK.count('nq.deed')")>0, 'lựa chọn có việc làm: ghi vào sổ nghiệp');
-    run("G.run.scene=null;G.run.cc={id:'CC02',s:0,t0:W().t,pf:{},h:0,care:0};G.run.ccEvQ=null;ccEvHen()");ok(run("G.run.ccEvQ")===null, 'đường chưa có nội dung: không có gì (một câu mỗi bước như cũ)');
+    run("G.run.scene=null;G.run.cc={id:'CC02',s:0,t0:W().t,pf:{},h:0,care:0};G.run.ccEvQ=null;delete ND2.cc.CC02;ccEvHen()");ok(run("G.run.ccEvQ")===null, 'đường chưa có nội dung: không có gì (một câu mỗi bước như cũ)');
     run("G.run.cc={id:'CC01',s:0,t0:W().t,pf:{},h:0,care:0};ccEvHen();G.run.cc=null;G.run.scene=null;ccEvMo()");ok(run("!G.run.scene&&!G.run.ccEvQ"), 'bỏ đường rồi: sự kiện đã hẹn huỷ');
     // (d) cảnh kể: quan phủ
     run("G.run.cc=null;FEAT.no=1;G.run.bac=-500;G.run.scene=null;noHeo(G.run,0)");ok(run("G.run.ndKe.length")===1, 'đánh hèo: hẹn cảnh kể');
