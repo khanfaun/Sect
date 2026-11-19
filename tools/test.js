@@ -1223,6 +1223,37 @@ const TESTS = {
     fresh();const hp=run("S().maxHp");run("G.run.ccHau=[{until:W().t+HY,fx:{hpP:-20}}]");const hp2=run("S().maxHp");run("W().t+=2*HY;ccMonth()");
     ok(hp2<hp&&run("S().maxHp")===hp&&run("G.run.ccHau.length")===0, 'suy nhược hết hạn thì khí huyết về như cũ ('+hp+' → '+hp2+')');
   },
+  // Sửa-G câu 29: vật tư cải căn quý hiếm — không mua thẳng; dò hỏi (có thể không thấy / không bán), kỳ ngộ, Ám Hội giá rất cao
+  cai_can_hiem() {
+    ok(run("Object.values(CC_VT).every(V=>V.mua==null)"), 'bảng vật tư không còn giá mua thẳng');
+    ok(run("Object.keys(CC_VT).every(v=>CC_VT[v].cong||CC_VT[v].che||ccHiem(v)||Object.values(CAI_CAN).some(P=>P.steps.some(s=>(s.cho||[]).some(([x])=>x===v))))"), 'mỗi vật tư đều có ít nhất một nguồn (làm công, tự chế, dò hỏi, phần thưởng phục vụ)');
+    fresh("G._ngNoEv=1;G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;G.run.bac=500000;G.run.base.tp=10;G.run.ccHeard.CC02=1;ccStart('CC02');G.run.cc.s=1;CC_FORCE=null");
+    const go=n=>run(`(()=>{const r=G.run;r.scene=null;r.moving=null;r.at=${n};openPlace(${n});r.scene.venue='coduyen';return 1})()`);
+    const n2=run("ccSrc('CC02').node");go(n2);
+    const ids=()=>run("ccOpts(nodeById(G.run.at)).map(o=>o.id+(o.no?'!':'')).join(',')");
+    ok(run("ccStep().b")==='gain'&&!/mua:/.test(ids())&&/tim:bo_chong_sap/.test(ids()), 'bước gom: không có nút mua, chỉ dò hỏi / làm công ('+ids()+')');
+    run("CC_FORCE=0");run("venueDo('coduyen','tim:bo_chong_sap')");run("CC_FORCE=null");go(n2);
+    ok(/tim:bo_chong_sap!/.test(ids())&&!/mua:bo_chong_sap/.test(ids())&&run("NK.count('cc.tim')")===1, 'dò hỏi không ra (hoặc không bán): tháng này không hỏi lại, không mua được');
+    run("W().t+=HM;CC_FORCE=1");go(n2);run("venueDo('coduyen','tim:bo_chong_sap')");run("CC_FORCE=null");go(n2);
+    const o=run("ccOpts(nodeById(G.run.at)).find(o=>o.id==='mua:bo_chong_sap')");
+    ok(!!o&&o.bac===run("CC_VT.bo_chong_sap.gia*CC_CFG.hiemX"), 'người giữ chịu nhượng: giá gấp '+run("CC_CFG.hiemX")+' lần ('+(o&&o.bac)+' xu)');
+    const b0=run("G.run.bac");run("venueDo('coduyen','mua:bo_chong_sap')");
+    ok(run("ccHave('bo_chong_sap')")===1&&run("G.run.bac")===b0-o.bac, 'nhượng xong: có Bộ Chống Sập, trừ đúng tiền');
+    go(n2);ok(!/mua:bo_chong_sap/.test(ids()), 'lời nhượng dùng một lần');
+    run("W().t+=3*HM");go(n2);ok(!/mua:/.test(ids()), 'lời nhượng hết hạn khi sang tháng');
+    // kỳ ngộ: đang gom thì đôi khi được một món còn thiếu
+    run("CC_CFG.ky=1");const h0=run("ccHave('doi_mo')");run("ccMonth()");run("CC_CFG.ky=0.04");
+    ok(run("NK.count('cc.ky')")===1&&run("ccHave('doi_mo')")===h0+1, 'kỳ ngộ khi đang gom: được món còn thiếu');
+    // Ám Hội: tu sĩ đường Tạo Hóa, món đang thiếu được đem ra, giá ×amX
+    fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=1;G.run.root={id:'tam',els:['kim','moc','thuy'],q:'thuong'};G.run.rootKnown=1;G.run.st=500;G.run.ccHeard.TAO_HOA=1;ccStart('TAO_HOA')");
+    run("(()=>{while(G.run.cc&&ccStep().b!=='gain')ccNext();})()");
+    const n=run("W().regions.flatMap(R=>R.nodes).find(n=>(n.type==='thanh'||n.type==='ma')&&n.state!=='ruin').id");
+    run("CC_FORCE=1");const ao=run(`amOpts(nodeById(${n})).find(o=>o.id==='cc:tao_hoa_dich')`);
+    ok(!!ao&&ao.st===run("CC_VT.tao_hoa_dich.st*CC_CFG.amX"), 'Ám Hội có Tạo Hóa Thần Dịch, giá '+(ao&&ao.st)+' linh thạch');
+    const s0=run("ltGet(0)");run(`amDo(nodeById(${n}),'cc:tao_hoa_dich')`);run("CC_FORCE=null");
+    ok(run("ltGet(0)")===s0-ao.st&&(run("ccHave('tao_hoa_dich')")===1||run("ccStep().b")==='rite'), 'đổi được ở Ám Hội, trừ linh thạch');
+    run("CC_FORCE=null");ok(run(`W().regions.flatMap(R=>R.nodes).filter(n=>!ccAmVt(n)).length>0`), 'không phải lúc nào Ám Hội cũng có');
+  },
   // Đ4 tân thủ: chỉ kiếp đầu; nhóm A tuần tự; sau đó ba cái; bỏ qua không thưởng; điểm đếm thật
   tan_thu() {
     fresh();

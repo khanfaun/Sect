@@ -19,30 +19,41 @@ const CC_CFG={
   bloomNgay:60,    // Hóa Sinh Liên giữ trên cây 60 ngày
   coThang:100,     // Linh Căn Cổ: tiền nuôi cổ mỗi tháng (xu)
   bep:33,          // thuê bếp thuốc mỗi ngày khi tự chế (xu)
-  chon:300         // chôn vật bản mệnh ở quê (hộp gỗ, giấy dầu, một ngày) — xu
+  chon:300,        // chôn vật bản mệnh ở quê (hộp gỗ, giấy dầu, một ngày) — xu
+  // Sửa-G (câu 29): vật tư cải căn là vật quý hiếm, "chỉ gặp không thể cầu" — không bày ở tiệm.
+  timNgay:3,       // dò hỏi người giữ vật (mỗi vật một lần mỗi tháng): mất bấy nhiêu ngày
+  tim:0.35,        // khả năng dò ra người đang giữ vật
+  ban:0.5,         // khả năng người giữ chịu nhượng lại (không thì từ chối, tháng sau hỏi lại)
+  hiemX:3,         // giá người giữ đòi = gia × hiemX (xu) hoặc st × hiemX (linh thạch Hạ phẩm); lời đề nghị giữ trong tháng
+  ky:0.04,         // mỗi tháng đang gom vật tư: khả năng gặp kỳ ngộ được một món còn thiếu
+  am:0.25,         // U Minh Ám Hội: mỗi tháng mỗi nơi, khả năng có một món cải căn đang thiếu được đem ra
+  amX:5            // giá ở Ám Hội = gia × amX (xu) hoặc st × amX (linh thạch Hạ phẩm)
 };
+// CC_VT: gia = giá trị (xu) khi gặp người chịu nhượng; st = giá trị bằng linh thạch Hạ phẩm (vật của tu sĩ).
+//   Không có chỗ mua thẳng. Nguồn: cong (làm công đổi lấy), che (tự chế từ nguyên liệu cũng hiếm), cho của bước phục vụ,
+//   dò hỏi người giữ (CC_CFG.tim/ban, giá ×hiemX), kỳ ngộ khi đang gom (CC_CFG.ky), U Minh Ám Hội (CC_CFG.am, giá ×amX).
 const CC_VT={
-  ho_mach_tan:{n:'Hộ Mạch Tán',mua:400,che:{can:[['mach_thao',2],['cam_thach_phan',1]],ngay:2}},
-  mach_thao:{n:'Mạch Thảo',mua:100,cong:{ngay:2,l:'Hái Mạch Thảo ở bãi dược'}},
-  cam_thach_phan:{n:'Cam Thạch Phấn',mua:70},
-  dau_lac_kim:{n:'Dầu Lạc Kim',mua:170},
-  ho_tam_cao:{n:'Hộ Tâm Cao',mua:700,che:{can:[['mach_thao',2],['dau_lac_kim',1]],ngay:3}},
-  bo_chong_sap:{n:'Bộ Chống Sập',mua:4000},
-  doi_mo:{n:'Đội thợ mỏ ba người',mua:20000,cong:{ngay:120,l:'Làm công cho phường mỏ, rủ ba cộng sự chia lợi'}},
-  kim_sa:{n:'Kim Sa Dưỡng Mạch',mua:700,cong:{ngay:30,l:'Đãi cát ở khúc suối'}},
-  moc_tam:{n:'Mộc Tâm Dưỡng Mạch',mua:700,cong:{ngay:30,l:'Chăm vườn cổ thụ đổi cành tỉa'}},
-  thuy_chau:{n:'Thủy Châu Dưỡng Mạch',mua:700,cong:{ngay:30,l:'Làm công giữ ao nuôi trai'}},
-  hoa_nham:{n:'Hỏa Nham Dưỡng Mạch',mua:700,cong:{ngay:30,l:'Làm lò cho thợ tuyển đá'}},
-  tho_tuy:{n:'Thổ Tủy Dưỡng Mạch',mua:700,cong:{ngay:30,l:'Nhào đất cho lò gốm'}},
-  bo_cach_nhiet:{n:'Bộ Cách Nhiệt',mua:2000},
-  giu_lua:{n:'Người giữ lửa',mua:1700,cong:{ngay:60,l:'Làm lò sáu mươi ngày đổi công giữ lửa'}},
-  khe_huyet:{n:'Khế Huyết Song Sinh',mua:7000},
-  bo_cay_can:{n:'Bộ Hộ Mạch Cấy Căn',mua:10000},
-  thay_cay:{n:'Công thầy cấy căn',mua:13000},
+  ho_mach_tan:{n:'Hộ Mạch Tán',gia:400,che:{can:[['mach_thao',2],['cam_thach_phan',1]],ngay:2}},
+  mach_thao:{n:'Mạch Thảo',gia:100,cong:{ngay:2,l:'Hái Mạch Thảo ở bãi dược'}},
+  cam_thach_phan:{n:'Cam Thạch Phấn',gia:70},
+  dau_lac_kim:{n:'Dầu Lạc Kim',gia:170},
+  ho_tam_cao:{n:'Hộ Tâm Cao',gia:700,che:{can:[['mach_thao',2],['dau_lac_kim',1]],ngay:3}},
+  bo_chong_sap:{n:'Bộ Chống Sập',gia:4000},
+  doi_mo:{n:'Đội thợ mỏ ba người',gia:20000,cong:{ngay:120,l:'Làm công cho phường mỏ, rủ ba cộng sự chia lợi'}},
+  kim_sa:{n:'Kim Sa Dưỡng Mạch',gia:700,cong:{ngay:30,l:'Đãi cát ở khúc suối'}},
+  moc_tam:{n:'Mộc Tâm Dưỡng Mạch',gia:700,cong:{ngay:30,l:'Chăm vườn cổ thụ đổi cành tỉa'}},
+  thuy_chau:{n:'Thủy Châu Dưỡng Mạch',gia:700,cong:{ngay:30,l:'Làm công giữ ao nuôi trai'}},
+  hoa_nham:{n:'Hỏa Nham Dưỡng Mạch',gia:700,cong:{ngay:30,l:'Làm lò cho thợ tuyển đá'}},
+  tho_tuy:{n:'Thổ Tủy Dưỡng Mạch',gia:700,cong:{ngay:30,l:'Nhào đất cho lò gốm'}},
+  bo_cach_nhiet:{n:'Bộ Cách Nhiệt',gia:2000},
+  giu_lua:{n:'Người giữ lửa',gia:1700,cong:{ngay:60,l:'Làm lò sáu mươi ngày đổi công giữ lửa'}},
+  khe_huyet:{n:'Khế Huyết Song Sinh',gia:7000},
+  bo_cay_can:{n:'Bộ Hộ Mạch Cấy Căn',gia:10000},
+  thay_cay:{n:'Công thầy cấy căn',gia:13000},
   sao_ha:{n:'Mảnh Sao Hạ',loc:'LOC04',cong:{ngay:1,l:'Thả dây xuống đáy giếng cũ'}},
-  sao_trung:{n:'Mảnh Sao Trung',mua:5000,cong:{ngay:60,l:'Sao chép sổ thiên tượng sáu mươi ngày'}},
+  sao_trung:{n:'Mảnh Sao Trung',gia:5000,cong:{ngay:60,l:'Sao chép sổ thiên tượng sáu mươi ngày'}},
   sao_thuong:{n:'Mảnh Sao Thượng',loc:'LOC15',cong:{ngay:30,l:'Giúp gia đình giữ kho kỷ vật phân xử quyền sở hữu'}},
-  co_trung:{n:'Linh cổ non',mua:1000},
+  co_trung:{n:'Linh cổ non',gia:1000},
   tao_hoa_dich:{n:'Tạo Hóa Thần Dịch',st:20}
 };
 const CAI_CAN={

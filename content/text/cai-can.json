@@ -129,5 +129,17 @@
   "cc.vNghe": "Dấu vết đã nghe",
   "cc.vVt": "Vật tư đang có",
   "cc.vOk": "Kiếp này đã cải căn một lần.",
-  "cc.vRong": "Chưa nghe được dấu vết nào."
+  "cc.vRong": "Chưa nghe được dấu vết nào.",
+  "cc.muaGiu": "Nhượng lại {{0}} từ người giữ",
+  "cc.muaGiuD": "Người giữ đã gật đầu, nhưng đòi giá rất cao; lời hứa chỉ giữ trong tháng này.",
+  "cc.tim": "Dò hỏi ai còn giữ {{0}}",
+  "cc.timD": "Vật quý, tiệm không bày bán. Phải hỏi dò mấy ngày, chưa chắc tìm ra, tìm ra chưa chắc người ta chịu nhượng.",
+  "cc.timRoi": "Tháng này đã dò hỏi rồi, đợi tháng sau.",
+  "cc.timKhong": "Hỏi khắp nơi mấy ngày, không ai biết {{0}} còn trong tay ai.",
+  "cc.timTuChoi": "Tìm ra người còn giữ {{0}}, nhưng họ lắc đầu: vật này có tiền cũng không bán.",
+  "cc.timDuoc": "Tìm ra người còn giữ {{0}}. Họ chịu nhượng lại, nhưng giá đòi rất cao.",
+  "cc.kyLog": "Cơ duyên tình cờ: ngươi có được {{0}}.",
+  "cc.kyNote": "Kỳ ngộ: được {{0}}",
+  "cc.amMua": "Đổi lấy {{0}} ({{1}})",
+  "cc.amMuaD": "Hiếm khi có món này ở Ám Hội; kẻ bán biết ngươi cần nên hét giá cắt cổ."
 }

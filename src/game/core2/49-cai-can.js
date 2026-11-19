@@ -70,20 +70,37 @@ function ccBloomOpen(id){const t=W().t,a=ccBloomT(id);return t>=a&&t<a+CC_CFG.bl
 function ccVtOpts(vt,need,n,L){const V=CC_VT[vt];if(!V)return;const have=ccHave(vt);if(have>=need)return;const vn=ccVtNode(vt);
   const here=vn!=null?n.id===vn:n.id===ccSrc(G.run.cc.id).node;
   if(!here){if(vn!=null&&n.id===ccSrc(G.run.cc.id).node)L.push({id:'xa:'+vt,l:contentText('cc.oNoi',[V.n,nodeById(vn)?nodeById(vn).name:'']),d:'',h:0,st:0,no:contentText('cc.oNoiNo')});return;}
-  const lbl=contentText('cc.co',[V.n,have,need]);
-  if(V.mua)L.push({id:'mua:'+vt,l:contentText('cc.mua',[V.n]),d:lbl,h:1,st:0,bac:V.mua,no:bacCan(V.mua)?'':contentText('tien.khongDu')});
-  if(V.st)L.push({id:'mua:'+vt,l:contentText('cc.mua',[V.n]),d:lbl,h:1,st:V.st,no:ltGet(0)>=V.st?'':contentText('cc.thieuSt')});
+  const lbl=contentText('cc.co',[V.n,have,need]);const of=ccOf(vt),m=ncMonth();
+  // Sửa-G (câu 29): không mua thẳng — chỉ khi đã dò ra người giữ và họ chịu nhượng (trong tháng)
+  if(of&&of.m===m&&of.ok){const g=ccGia(vt,CC_CFG.hiemX);L.push({id:'mua:'+vt,l:contentText('cc.muaGiu',[V.n]),d:lbl+' '+contentText('cc.muaGiuD'),h:1,st:g.st||0,bac:g.bac||0,no:ccGiaCan(g)?'':g.st?contentText('cc.thieuSt'):contentText('tien.khongDu')});}
   if(V.cong)L.push({id:'cong:'+vt,l:V.cong.l,d:lbl,h:V.cong.ngay*HD,st:0});
   if(V.che){const ok=V.che.can.every(([x,k])=>ccHave(x)>=k);const b=CC_CFG.bep*V.che.ngay;
     L.push({id:'che:'+vt,l:contentText('cc.che',[V.n]),d:contentText('cc.cheD',[V.che.can.map(([x,k])=>k+' '+CC_VT[x].n).join(', ')]),h:V.che.ngay*HD,st:0,bac:b,
       no:!ok?contentText('cc.cheThieu'):bacCan(b)?'':contentText('tien.khongDu')});
-    for(const [x,k] of V.che.can)if(!L.some(o=>o.id.endsWith(':'+x)))ccVtOpts(x,k*Math.max(1,need-have),n,L);}}
+    for(const [x,k] of V.che.can)if(!L.some(o=>o.id.endsWith(':'+x)))ccVtOpts(x,k*Math.max(1,need-have),n,L);}
+  if(ccHiem(vt)&&!(of&&of.m===m&&of.ok))L.push({id:'tim:'+vt,l:contentText('cc.tim',[V.n]),d:lbl+' '+contentText('cc.timD'),h:CC_CFG.timNgay*HD,st:0,no:of&&of.m===m?contentText('cc.timRoi'):''});}
+// vật quý có giá (gặp người chịu nhượng); vật chỉ có ở một nơi (sao_ha, sao_thuong) thì không dò hỏi được
+function ccHiem(vt){const V=CC_VT[vt];return !!V&&!V.loc&&!!(V.gia||V.st);}
+function ccOf(vt){const r=G.run;r.ccOf=r.ccOf&&typeof r.ccOf==='object'?r.ccOf:{};return r.ccOf[vt]||null;}
+function ccGia(vt,x){const V=CC_VT[vt];return V.st?{st:Math.ceil(V.st*x)}:{bac:Math.round((V.gia||0)*x)};}
+function ccGiaCan(g){return g.st?ltGet(0)>=g.st:bacCan(g.bac);}
+function ccGiaPay(g,why){if(g.st){if(ltGet(0)<g.st)return false;ltAdd(0,-g.st,why);return true;}return bacPay(g.bac,why);}
+function ccGiaChip(g){return g.st?ltChip(0,-g.st):bacChip(-g.bac);}
 function ccVtDo(kind,vt){const V=CC_VT[vt];if(!V)return false;
-  if(kind==='mua'){if(V.st){if(ltGet(0)<V.st)return false;ltAdd(0,-V.st,'caican');ccTime(1);}else{if(!bacPay(V.mua,'caican'))return false;ccTime(1);}if(!G.run)return true;ccVtAdd(vt,1);return [chip('📦',V.n,contentText('cc.vtTip'),'up')];}
+  if(kind==='tim'){const r=G.run,m=ncMonth();ccTime(CC_CFG.timNgay*HD);if(!G.run)return true;
+    const f=CC_FORCE===1?true:CC_FORCE===0?false:chance(CC_CFG.tim);const ok=f&&(CC_FORCE===1?true:CC_FORCE===0?false:chance(CC_CFG.ban));
+    r.ccOf[vt]={m,ok:ok?1:0};dbg('cc.tim',{vt,thay:f?1:0,ban:ok?1:0});
+    return {t:contentText(!f?'cc.timKhong':!ok?'cc.timTuChoi':'cc.timDuoc',[V.n]),ch:[]};}
+  if(kind==='mua'){const of=ccOf(vt);if(!of||of.m!==ncMonth()||!of.ok)return false;const g=ccGia(vt,CC_CFG.hiemX);if(!ccGiaPay(g,'caican'))return false;
+    delete G.run.ccOf[vt];ccTime(1);if(!G.run)return true;ccVtAdd(vt,1);return [ccGiaChip(g),chip('📦',V.n,contentText('cc.vtTip'),'up')];}
   if(kind==='cong'){ccTime(V.cong.ngay*HD,1);if(!G.run)return true;ccVtAdd(vt,1);return [chip('📦',V.n,contentText('cc.vtTip'),'up')];}
   if(kind==='che'){const b=CC_CFG.bep*V.che.ngay;if(!V.che.can.every(([x,k])=>ccHave(x)>=k)||!bacPay(b,'caican'))return false;for(const [x,k] of V.che.can)ccVtAdd(x,-k);
     ccTime(V.che.ngay*HD);if(!G.run)return true;ccVtAdd(vt,1);return [chip('⚗️',V.n,contentText('cc.vtTip'),'up')];}
   return false;}
+// vật tư còn thiếu ở bước gom hiện tại (kể cả nguyên liệu để tự chế), chỉ những món quý có thể gặp ở nơi khác
+function ccThieu(){const r=G.run,st=ccStep(r);if(!st||st.b!=='gain')return [];const out=[];
+  const add=(v,k)=>{if(ccHave(v)>=k)return;if(ccHiem(v)&&!out.includes(v))out.push(v);const V=CC_VT[v];if(V&&V.che)for(const [x,q] of V.che.can)add(x,q);};
+  for(const [v,k] of st.vt)add(v,k);return out;}
 // ---------- lựa chọn tại nơi (venue "coduyen") ----------
 function ccHereIds(n){if(!n)return [];return Object.keys(CAI_CAN).filter(id=>{const P=CAI_CAN[id];if(P.off)return false;const s=ccSrc(id);return s&&s.node===n.id;});}
 function ccRiteD(P,st){const r=G.run,s=S();const L=[contentText('cc.leKq',[ccOutTxt(st.out)]),contentText('cc.leOdds',[ccOdds(st.ok)])];
@@ -133,6 +150,7 @@ function ccDo(n,oid){const r=ccSt();const o=ccOpts(n).find(x=>x.id===oid);if(!o|
   if(p[0]==='chon')return ccChon(n);
   const id=r.cc.id,P=CAI_CAN[id],st=ccStep(r);
   if(p[0]==='bo'){ccStop('bo');log(contentText('cc.boLog',[P.n]));return ccRes(contentText('cc.boT'));}
+  if(p[0]==='tim'){const o2=ccVtDo('tim',p[1]);if(!o2)return false;return o2===true?ccRes(''):ccRes(o2.t,o2.ch);}
   if(['mua','cong','che'].includes(p[0])){const ch=ccVtDo(p[0],p[1]);if(!ch)return false;if(G.run&&G.run.cc)ccAuto();return ccRes(contentText('cc.vtT',[CC_VT[p[1]].n]),ch===true?[]:ch);}
   if(p[0]==='pf'){const x=st.L.find(z=>z.id===p[1]);if(x.bac&&!bacPay(x.bac,'caican'))return false;ccTime(x.ngay*HD);if(!G.run)return ccRes('');
     r.cc.pf[x.id]=1;dbg('cc.pf',{id,pf:x.id});const done=st.L.every(z=>r.cc.pf[z.id]);if(done)ccNext();
@@ -212,6 +230,8 @@ function ccMonth(){const r=ccSt();if(!r)return;const t=W().t;
     const tuc=L.find(id=>CAI_CAN[id].mode==='tuc');if(tuc)ccHear(tuc);
     else if(L.length){const vo=L.filter(id=>CAI_CAN[id].mode==='vo'),na=L.filter(id=>CAI_CAN[id].mode==='nang');
       if(vo.length&&chance(CC_CFG.nghe))ccHear(pick(vo));else if(na.length&&chance(CC_CFG.ngheTu))ccHear(pick(na));}}
+  // Sửa-G: đang gom vật tư thì đôi khi gặp kỳ ngộ được một món còn thiếu (chỉ gặp, không cầu)
+  if(r.cc){const T=ccThieu();if(T.length&&chance(CC_CFG.ky)){const v=pick(T);ccVtAdd(v,1);log(contentText('cc.kyLog',[CC_VT[v].n]));note(contentText('cc.kyNote',[CC_VT[v].n]),'up');dbg('cc.ky',{vt:v});ccAuto();}}
   if(r.ccFlag.nuoi_co){if(!bacPay(CC_CFG.coThang,'nuoi_co')){addWound('doc','caican');note(contentText('cc.coDoi'),'dn');dbg('cc.co',{doi:1});}}
   // kỳ nở CC04 trôi qua không ai hái: người giữ hồ nhận đài sen, đợi kỳ sau
   for(const id in (W().ccSrc||{})){const s=W().ccSrc[id];if(s.bloomY!=null&&t>=ccBloomT(id)+CC_CFG.bloomNgay*HD){s.bloomY+=30;dbg('cc.no',{id,y:s.bloomY});}}}
@@ -239,3 +259,13 @@ function ccHint(st){const r=G.run;if(st.b==='proof')return contentText('cc.g.pro
 // ---------- bản lưu cũ ----------
 {const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._ccV1){r._ccV1=1;ccSt(r);if(r.cc&&!CAI_CAN[r.cc.id])r.cc=null;}return r;};}
 {const _mx=migrateX;migrateX=function(d){d=_mx.apply(this,arguments);const w=d&&d.meta&&d.meta.world;if(w&&w.ccSrc&&typeof w.ccSrc!=='object')w.ccSrc={};return d;};}
+// ---------- Sửa-G: U Minh Ám Hội đôi khi có một món cải căn đang thiếu, giá rất cao ----------
+function ccAmVt(n){const r=G.run;if(!r||!r.cc||!n)return null;const T=ccThieu();if(!T.length)return null;const m=ncMonth();
+  const h=ncHash('am|'+n.id+'|'+m+'|'+r.cc.id);if(CC_FORCE!==1&&h>=CC_CFG.am)return null;return T[Math.floor(ncHash('amv|'+n.id+'|'+m)*T.length)%T.length];}
+{const _ao=amOpts;amOpts=function(n){const L=_ao.apply(this,arguments);const v=ccAmVt(n);if(!v)return L;const left=amLeft(n);const g=ccGia(v,CC_CFG.amX);
+  L.push({id:'cc:'+v,l:contentText('cc.amMua',[CC_VT[v].n,g.st?g.st+' '+ltName(0):fmtBac(g.bac)]),d:contentText('cc.amMuaD'),h:1,st:g.st||0,bac:g.bac||0,
+    no:!left?contentText('am.het'):ccGiaCan(g)?'':g.st?contentText('cc.thieuSt'):contentText('tien.khongDu')});return L;};}
+{const _ad=amDo;amDo=function(n,id){if(!String(id).startsWith('cc:'))return _ad.apply(this,arguments);const o=amOpts(n).find(x=>x.id===id);if(!o||o.no)return false;
+  const v=id.slice(3);const g=ccGia(v,CC_CFG.amX);if(!ccGiaPay(g,'amhoi'))return false;ccVtAdd(v,1);
+  const w=W(),m=ncMonth();const T=(w.amhoi=w.amhoi||{});if(!T[n.id]||T[n.id].m!==m)T[n.id]={m,n:0};T[n.id].n++;dbg('cc.am',{vt:v});if(G.run.cc)ccAuto();
+  return [ccGiaChip(g),chip('📦',CC_VT[v].n,contentText('cc.vtTip'),'up')];};}
