@@ -25,5 +25,22 @@
   "ty.the": "Mệnh thư",
   "ty.moLaiNut": "Mở lại lời mời",
   "ty.choTraLoi": "lời mời chưa trả lời",
-  "ty.rong": "Hiện chưa có lời mời nào trong Mệnh thư."
+  "ty.rong": "Hiện chưa có lời mời nào trong Mệnh thư.",
+  "so.theNg": "Người đã gặp",
+  "so.theFa": "Thế lực",
+  "so.vSong": "còn sống",
+  "so.vMat": "đã mất",
+  "so.vThay": "người thay",
+  "so.vKe": "nay {{0}} ({{1}}) giữ việc này",
+  "so.vChuaKe": "chưa có người kế; còn lại {{0}}",
+  "so.vGap": "gặp năm {{0}}",
+  "so.vRong": "Chưa quen ai trong thiên hạ. Người ngươi gặp qua các mốc mệnh thư hay thầy dạy ở nơi danh tiếng sẽ được ghi ở đây.",
+  "so.faGiup": "ngươi từng góp sức",
+  "so.faHai": "ngươi từng làm tổn hại",
+  "so.faChua": "chưa dính dáng",
+  "so.faCong": "sổ cống hiến: {{0}} điểm",
+  "so.faCong0": "sổ cống hiến: chưa có",
+  "so.faChu": "đứng đầu: {{0}}",
+  "so.faKhongChu": "chưa ai đứng đầu",
+  "so.faDanh": "tiếng ở căn cứ: {{0}}"
 }
