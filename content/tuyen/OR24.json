@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 1,
+  "id": "OR24",
+  "loai": "xuat_than",
+  "ten": "Chỗ trú dưới chân tượng",
+  "xuatThan": "xt_nguoi_giu_mieu_nho",
+  "goiYDaiLo": [
+    "tinh_mong"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Sổ lễ dưới mái dột",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Mái {LOC04} nhỏ nước lên mâm. Ngươi được nhờ lợp lại trước đêm lạnh và ghi ai gửi đồ thờ. Một gói lễ ướt để lộ mảnh tên được gấp mặt vào trong.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Lợp mái rồi kê từng gói lễ",
+          "t": "Ngươi thay phần ngói vỡ và để mỗi người xác nhận gói mình đã gửi tới.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Đón người trú và giữ đồ khô",
+          "t": "Ngươi dời chiếu lên cao, hong mâm lễ và chép tên người đã gửi gạo.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Sao tên trước khi mực nhòe",
+          "t": "Ngươi ép mảnh tên vào giấy khô, giữ cả vết mực in lộn ở mặt sau.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mái được che tạm, gói lễ còn nằm ngoài sổ.",
+        "su": "Mái được che tạm, gói lễ còn nằm ngoài sổ.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Mâm lễ khóa tên",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Dưới tượng {LOC04}, một gói lễ có tên khác tên người đặt. Người coi mâm lỡ miệng nói nộp xong thì kẻ mang tên không rời được. Bên tượng còn vết dấu trùng với giấy.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Hỏi người đặt về tên bên trong",
+          "t": "Ngươi xác nhận gói lễ dùng để buộc tên người khác và chép lời người đặt.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tra giá một gói miễn trói",
+          "t": "Ngươi ghi khoản người coi đòi để miễn và nơi họ giữ những gói đã nộp.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Gỡ mảnh tên để giữ chứng",
+          "t": "Ngươi giữ mảnh gấp trước khi người coi kịp dời, rồi đánh dấu mâm cũ.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Gói mới được đặt lên trên, người có tên chưa nghe ai nói tới.",
+        "su": "Gói mới được đặt lên trên, người có tên chưa nghe ai nói tới.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Dấu trận trên chân tượng",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC05"
+      },
+      "mo": "Bản đối ở {LOC05} cho thấy cùng một ấn đang giữ tên trên tượng. Người có tên còn sống và phải xin phép mỗi khi rời nơi trú. Thợ trận giữ bản ghi điểm kết của ấn.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối ấn trước người đang bị buộc",
+          "t": "Ngươi tìm được người mang tên, hỏi họ trước khi xin thợ tháo đường ấn.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Chép giấy miễn từ người giữ ấn",
+          "t": "Ngươi ghi dấu chuyển quyền và phần lệ thu sau khi người mắc xin miễn.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin thợ chỉ cách tắt ấn an toàn",
+          "t": "Thợ đối bản rồi chỉ cách tắt ấn; ngươi giữ giấy cùng danh sách người trú.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bản đối được cất lại, người mắc ấn vẫn phải xin phép rời.",
+        "su": "Bản đối được cất lại, người mắc ấn vẫn phải xin phép rời.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Người xin rời mâm",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Người mang tên đến {LOC04} hỏi liệu có thể tự lấy gói của mình. Người thu lễ đem giấy chuyển quyền; các hộ cạnh miếu hỏi có cần chuẩn bị chỗ ngủ khác. Sổ mở trước tượng.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Tháo ấn với người mang tên đồng ý",
+          "t": "Ngươi để họ chọn giờ, nhờ thợ tháo rồi cùng họ ghi kết quả vào sổ.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ ấn để thu tiền xin miễn",
+          "t": "Ngươi nhận giấy chuyển, báo lệ nộp cho người biết và ghi người phản đối.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Dời người trú trước khi phá tượng",
+          "t": "Ngươi hỏi từng người rồi giao chỗ ngủ ở nhà các hộ, giữ lối đi khô.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người mang tên vẫn chờ, các hộ đưa thêm chiếu tới thềm.",
+        "su": "Người mang tên vẫn chờ, các hộ đưa thêm chiếu tới thềm.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Lệ treo trên vách",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Người trú cũ trở lại {LOC04} xem cửa có mở sau mùa gió. Người giữ gói còn đứng bên hòm tiền, trong khi các hộ đã trải chiếu ở nhà. Trên vách có chỗ treo một lệ mới.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Công bố lệ nhận trú và giao người giữ",
+          "t": "Ngươi treo lệ bỏ cưỡng tên, giao lượt coi mái cho người giữ qua mùa gió.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Thu tiền miễn và giao người coi ấn",
+          "t": "Ngươi thu lượt đầu theo sổ mới rồi lưu một đơn cầu bị bác vì thiếu lễ.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Phá ấn và tượng sau khi dời người",
+          "t": "Ngươi nhờ thợ tắt dấu, hạ tượng rồi giao phần nền cho người tự khắc tên.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3",
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Giữ mái qua đêm và để sổ mở",
+          "t": "Ngươi sắp chỗ khô và để người trú đọc sổ trước khi nhận một gói lễ.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Sổ lễ vẫn ở sau mâm, người trú tự hỏi nhà nào còn chỗ.",
+        "su": "Sổ lễ vẫn ở sau mâm, người trú tự hỏi nhà nào còn chỗ.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Miếu không bán tên",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Qua mùa gió, người thay ngươi lợp lại chỗ dột và mở chiếu theo lệ đã treo. Người từng có tên trên ấn tự bước qua cửa mà không cần xin giấy. Họ biết có thể quay lại mà không phải mang gói gì.",
+      "su": "{LOC04} qua mùa gió với lệ trú mở và ấn cưỡng tên đã tháo.",
+      "dauVong": "người từng nằm ở miếu nhớ tờ lệ cho phép vào tay không."
+    },
+    {
+      "id": "B",
+      "ten": "Hương khói có chủ",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Người có lễ nhận được dấu miễn, và tên người thiếu lễ nằm dưới hòm tiền. Một người trong số ấy giữ tờ đơn bị trả cho đến khi người coi thay phiên. Lúc mở hòm, họ vẫn phải đọc đúng tên trên đơn.",
+      "su": "Ấn ở {LOC04} nuôi nguồn thu từ người xin miễn.",
+      "dauVong": "một tờ đơn còn vết trả lại vì thiếu lễ."
+    },
+    {
+      "id": "C",
+      "ten": "Tượng nằm ngoài mưa",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Tượng nằm ngoài mưa sau lúc người cuối đã được nhận vào nhà hộ. Trên nền cũ, người qua khắc tên mình nếu muốn, không ai đem sổ ra thu. Chiếu của miếu được chia theo nơi đã mở cửa.",
+      "su": "Ấn và tượng bị phá sau khi chỗ trú chuyển sang các nhà hộ.",
+      "dauVong": "nền {LOC04} còn những tên do người từng đi ngang tự khắc."
+    }
+  ],
+  "ngoai": "Sổ lễ vẫn ở sau mâm, người trú tự hỏi nhà nào còn chỗ."
+}

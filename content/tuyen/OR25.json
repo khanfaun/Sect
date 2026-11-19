@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 1,
+  "id": "OR25",
+  "loai": "xuat_than",
+  "ten": "Nước ngoài trường khảo",
+  "xuatThan": "xt_ke_bo_truong_thi",
+  "goiYDaiLo": [
+    "tinh_mong"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Bài nằm lại bên bờ",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Tờ bài bỏ ở {LOC02} được gửi về đúng ngày nước tràn {LOC01}. Trong bài có nét chỉ một bờ đất thấp hơn mức ghi. Mấy hộ muốn ngươi dùng dây đo thay vì đọc lại lời chấm.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đo bờ và thử phần bài bỏ",
+          "t": "Ngươi đối vạch thực với bản bài, chỉ được chỗ nước có thể rẽ qua.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Chép bài bỏ làm chứng",
+          "t": "Ngươi giữ chữ đầu và nét sửa, kèm lời người từng thấy ngươi nộp quyển.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi người dùng bài sau buổi thi",
+          "t": "Ngươi xác định tờ bài ấy đã được đem đặt dưới tên khác trước lúc chấm.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bài được cất, chỗ bờ thấp vẫn chưa có người đo.",
+        "su": "Bài được cất, chỗ bờ thấp vẫn chưa có người đo.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Người đỗ cầm tay run",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Người đỗ nhờ bài ở {LOC02} chờ ngươi tại chỗ phơi quyển. Lời của họ vấp ở đoạn phải nói vì sao tờ bài đổi tên. Trong tay còn một lệnh đem quyển từ bàn nọ sang bàn kia.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Hỏi ai ép nhận quyển",
+          "t": "Ngươi nghe lời người đỗ và sao lệnh, xác nhận họ bị buộc đứng tên thay.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Đối lời với người nhận quyển",
+          "t": "Ngươi tìm được người giao quyển xác nhận ai viết yêu cầu đổi tên vào sổ.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi cách người mua lấy suất",
+          "t": "Ngươi nghe đầu mối hỏi sẽ trả bao nhiêu cho một tên được đưa vào chỗ trống.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người đỗ cất lệnh, lời về ngày đổi quyển chưa được ghi.",
+        "su": "Người đỗ cất lệnh, lời về ngày đổi quyển chưa được ghi.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Nét sửa chạy sang sổ thuế",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Bản quyển ở {LOC02} có một nét đổi tên cùng màu mực với mục thuế giấy thi. Người giữ sổ hiểu từ đó ai đã thu tiền và ai nộp bài thật. Trang mực cũ còn xem được nếu có người đối.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Lấy quyển và chứng cách đổi tên",
+          "t": "Ngươi cùng người giữ sổ đối nét, giữ bản có lệnh đổi và dấu nhận thuế.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Sao bản trị thủy cho các hộ",
+          "t": "Ngươi chép riêng phép đo bờ và giao các hộ bản để so trước khi làm.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ chỗ trống trong sổ thi",
+          "t": "Ngươi tìm một suất còn bỏ trống và ghi đường người mua tới nhận quyển.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bản quyển cất cùng sổ thuế, hai dấu sửa chưa được công khai.",
+        "su": "Bản quyển cất cùng sổ thuế, hai dấu sửa chưa được công khai.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Một chức hay một đoạn bờ",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Người xét ở {LOC02} gửi lời muốn dàn xếp tờ quyển. Các hộ {LOC01} đem dây đo ra chợ xin người chỉ làm bờ. Đầu mối chỗ trống hứa trả tiền ngay nếu ngươi giữ im.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đổi lời miễn kiện lấy quyền làm bờ",
+          "t": "Ngươi lấy giấy được làm việc thật, để các hộ cử người thay nhau thử cửa nước.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_1_1",
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Đòi xét quyển công khai và bổ nhiệm",
+          "t": "Ngươi đưa chứng ra bàn xét. Quyển được trả tên và người xét giao chức công khai.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Bán im lặng kèm một suất",
+          "t": "Ngươi nhận bạc và đưa đầu mối một chỗ để thử dùng tên mua trong kỳ tới.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Phiên thương lượng tan, các hộ tự căng dây dọc chỗ nước tràn.",
+        "su": "Phiên thương lượng tan, các hộ tự căng dây dọc chỗ nước tràn.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Họ tên dưới dấu khảo",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Ngày ghi sổ ở {LOC02}, người có quyển đợi nghe đọc tên. Ngoài {LOC01}, các hộ đưa tới bản thử cửa nước. Người mua mang biên nhận để hỏi tên của mình đã qua phiên hay chưa.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Dạy các hộ vận hành công trình",
+          "t": "Ngươi thử xong cửa nước, giao quyền giữ lượt cho những hộ đã nhận phần.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận chức sau khi đọc lại quyển",
+          "t": "Ngươi nhận chức ở buổi đọc công khai, để tên thật và dấu sửa còn trên quyển.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Giao suất đã mua và giữ mạng môi giới",
+          "t": "Ngươi giao giấy cho người mua khi họ đã qua phiên, giữ danh sách người giới thiệu.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Sổ đóng theo lệ cũ, các hộ giữ bản thử cửa nước ở nhà.",
+        "su": "Sổ đóng theo lệ cũ, các hộ giữ bản thử cửa nước ở nhà.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Không bằng vẫn trị được nước",
+      "dk": {
+        "dau": [
+          "moc_1_1",
+          "moc_3_2",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Cửa nước mở đúng vạch khi dân tự chia lượt đứng bờ. Họ dựng một bia ghi cách đo, dùng tên các hộ chứ không dùng chức danh của người chỉ. Tờ bài bỏ nằm dưới bản đo để người sau còn đối.",
+      "su": "Công trình ở {LOC01} hoạt động và người dân tự đứng lượt vận hành.",
+      "dauVong": "bia giữ vạch mở cửa mà không khắc chức của người chỉ việc."
+    },
+    {
+      "id": "B",
+      "ten": "Đỗ vào chỗ trống",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Người coi kỳ đọc cả dấu đổi trên quyển khi trao chức. Người từng bị ép nhận bài được nghe phần của mình trong biên bản. Từ kỳ ấy, quyển đổi bàn phải giữ dấu cũ đủ để người nộp tra lại.",
+      "su": "Vụ đổi bài được xét công khai trước khi trao chức tại {LOC02}.",
+      "dauVong": "quyển khảo giữ tên người viết thật và cả dấu của lần bị đổi."
+    },
+    {
+      "id": "C",
+      "ten": "Trường thi của người mua",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Người mua nhận chức đầu rồi dùng dấu mới thay người coi giấy. Hộ có việc cần trình nghe họ đọc nhầm một dòng và giữ tờ ấy làm chứng. Trong sổ mạng môi giới, tiền của suất đầu vẫn nằm bên tên đã mua.",
+      "su": "Một suất mua qua kỳ khảo, mạng môi giới giữ được đầu mối.",
+      "dauVong": "một hộ ở {LOC02} giữ giấy sai của người lên chức bằng suất mua."
+    }
+  ],
+  "ngoai": "Sổ đóng theo lệ cũ, các hộ giữ bản thử cửa nước ở nhà."
+}
