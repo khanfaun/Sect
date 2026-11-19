@@ -852,6 +852,6 @@ THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuy�
 - Tên tệp cảnh truy đuổi: content/canh/truy.json (đã sửa tài liệu GUI-GPT-2 cho khớp bộ kiểm).
 70. A: hạn mốc tự cộng thời gian đi bộ (tối đa 3 năm).
 71. C: "Người đã gặp" ghi mọi người đã từng tiếp xúc gần/tương tác (nói chuyện, giao dịch, giao đấu, đi cùng, nhận việc…), không cần thiện cảm cao.
-72. B mở rộng: thang quan hệ thế lực 7 mức bằng chữ (đề xuất, chờ người dùng duyệt tên): Tử thù – Thù địch – Bất hòa – Xa lạ – Giao hảo – Thân thiết – Đồng tâm (= cùng tiến cùng lùi); "Đồng minh" là trạng thái kết minh chính thức (có thể làm cờ riêng).
+72. B mở rộng: thang quan hệ thế lực 7 mức bằng chữ (đề xuất, chờ người dùng duyệt tên): Tử thù – Thù địch – Bất hòa – Xa lạ – Giao hảo – Thân thiết – Chí giao (= cùng tiến cùng lùi; người dùng đã chốt tên); "Đồng minh" là trạng thái kết minh chính thức (có thể làm cờ riêng).
 73. Sau Đ10: tổng hợp lại mọi thứ cần gửi GPT (gồm sua-sau-ra-soat.md + phần chữ Đ10).
 Việc cần làm (Sửa-N, làm cùng/ trước Đ8b): câu 71, 72.
