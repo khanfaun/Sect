@@ -76,7 +76,8 @@ function kiemTep(file,B,seen){const loi=[],cb=[];const rel=path.relative(ROOT,fi
     const ids=new Set();L.forEach((c,j)=>{const kc=k+'['+j+']';if(!only(kc,c,['id','l','t','dk','e']))return;
       if(typeof c.id!=='string'||!/^[a-z][a-z0-9_]{0,30}$/.test(c.id))bad(kc+'.id','mã lựa chọn "'+c.id+'" sai.','chữ thường không dấu, ví dụ "giu_loi".');else if(ids.has(c.id))bad(kc+'.id','trùng mã lựa chọn "'+c.id+'".');ids.add(c.id);
       if(isStr(kc+'.l',c.l)){vanCam(kc+'.l',c.l);if(c.l.length>70)warn(kc+'.l','nhãn dài ('+c.l.length+' ký tự), nên dưới 60.');}
-      txt(kc+'.t',c.t,60,700);kiemDk(kc+'.dk',c.dk);kiemE(kc+'.e',c.e);});
+      txt(kc+'.t',c.t,60,700);kiemDk(kc+'.dk',c.dk);kiemE(kc+'.e',c.e);
+      if(c.e&&Number.isInteger(c.e.bac)&&c.e.bac<0&&!(c.dk&&c.dk.bacTu>=-c.e.bac))bad(kc+'.dk','lựa chọn trả tiền mà không đòi có đủ tiền.','thêm "dk": {"bacTu": '+(-c.e.bac)+'} để người không đủ tiền không bấm được.');});
     if(L.length&&L.every(c=>c&&c.dk))bad(k,'mọi lựa chọn đều có điều kiện: người chơi có thể kẹt.','để ít nhất một lựa chọn không có "dk".');}
   const ROOTK={qua_chin:['schemaVersion','loai','deed','bien'],nghe:['schemaVersion','loai','nghe','len','ket'],cai_can:['schemaVersion','loai','duong','ev'],canh:['schemaVersion','loai','nhom','canh']};
   if(!A||typeof A!=='object'||!ROOTK[A.loai]){bad('loai','"loai" phải là một trong: '+Object.keys(ROOTK).join(', ')+'.');return {loi,cb};}
