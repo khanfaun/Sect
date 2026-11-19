@@ -248,8 +248,41 @@ const TESTS = {
     const F=JSON.parse(run("JSON.stringify(soFaView())"));
     ok(F.length===10&&F.every(f=>f.n&&f.trang&&f.cong&&f.qh), 'đủ mười thế lực: tên, tình trạng, quan hệ, sổ cống hiến');
     run("faAdj('FA07',-200,'test');tyE({fa:{FA04:5}},G.run.arc.xt);chAdd&&chAdd('fa:FA04',12)");const F2=JSON.parse(run("JSON.stringify(soFaView())"));
-    ok(F2.find(f=>f.id==='FA07').diet===1&&F2.find(f=>f.id==='FA04').qh===run("contentText('so.faGiup')"), 'thế lực tan ghi đã tan; góp sức qua tuyến ghi quan hệ');
+    ok(F2.find(f=>f.id==='FA07').diet===1&&F2.find(f=>f.id==='FA04').bac>F.find(f=>f.id==='FA04').bac, 'thế lực tan ghi đã tan; góp sức qua tuyến nâng mức quan hệ');
     ok(!JSON.stringify(F2).match(/nghiệp/), 'không hiện nghiệp');
+    ok(!/\d/.test(F2.map(f=>f.qh+f.minh).join('')), 'thang quan hệ bằng chữ, không hiện số');
+  },
+  // Sửa-N câu 71: người đã gặp ghi mọi NPC từng tiếp xúc
+  gap_nguoi() {
+    fresh("G._ngNoEv=1;delete G.run.arc;delete G.run.gapVai;delete G.run.gapNg;G.run.origin='nong'");
+    run("favAdd('Vô Danh Khách',1)");let V=JSON.parse(run("JSON.stringify(soVaiView())"));let x=V.find(v=>v.ten==='Vô Danh Khách');
+    ok(!!x&&x.qh&&/trò chuyện/.test(x.vai), 'nói chuyện (thiện cảm thấp) cũng vào danh sách, không cần thân');
+    run("favAdd('@3:x',5)");ok(!JSON.parse(run("JSON.stringify(soVaiView())")).some(v=>/@/.test(v.ten)), 'khoá nội bộ (@…) không vào danh sách');
+    run("gapNguoi('Kẻ Đấu','dau');gapNguoi('Kẻ Đấu','cung')");V=JSON.parse(run("JSON.stringify(soVaiView())"));
+    ok(V.filter(v=>v.ten==='Kẻ Đấu').length===1&&/giao đấu/.test(V.find(v=>v.ten==='Kẻ Đấu').vai), 'giao đấu ghi một lần, giữ lý do đầu');
+    run("addParty({ten:'Bạn Đường',g:'nam',realm:1},10)");ok(run("soVaiView().some(v=>v.ten==='Bạn Đường')"), 'đi cùng: ghi');
+    run("gapNguoi('???','noi');gapNguoi('','noi')");ok(!run("soVaiView().some(v=>v.ten==='???'||!v.ten)"), '"???" và tên rỗng không ghi');
+    const nm=run("vaiNow('NP03').ten");run("gapNguoi("+JSON.stringify(nm)+",'noi')");
+    ok(run("!!G.run.gapVai.NP03&&!(G.run.gapNg||{})["+JSON.stringify(nm)+"]"), 'người đang giữ vai NP: ghi vào gapVai, không trùng gapNg');
+    run("delete G.run.gapNg;G=JSON.parse(JSON.stringify(G))");ok(run("soVaiView().length>=1"), 'bản lưu cũ (không gapNg) chạy được');
+  },
+  // Sửa-N câu 72: thang quan hệ thế lực 7 mức, Đồng minh là cờ riêng
+  fa_thang() {
+    fresh("G._ngNoEv=1;delete G.run.arc;delete G.run.faQh;delete G.run.faHai;delete G.run.faMinh");
+    const T=i=>run("contentText('so.fq."+i+"')");
+    ok([0,1,2,3,4,5,6].map(T).join('-')==='Tử thù-Thù địch-Bất hòa-Xa lạ-Giao hảo-Thân thiết-Chí giao', 'bảy mức đúng tên');
+    const bac=()=>run("soFaView().find(f=>f.id==='FA04').bac");
+    ok(bac()===3&&run("soFaView().find(f=>f.id==='FA04').qh")==='Xa lạ', 'chưa dính dáng: Xa lạ');
+    run("G.run.faQh={FA04:5}");ok(bac()===4, 'góp sức chút ít: Giao hảo');
+    run("G.run.faQh={FA04:12}");ok(bac()===5, 'góp sức nhiều: Thân thiết');
+    run("G.run.faQh={FA04:30}");ok(bac()===6, 'góp sức rất nhiều: Chí giao');
+    run("G.run.faQh={FA04:-5}");ok(bac()===2, 'làm tổn hại ít: Bất hòa');
+    run("G.run.faQh={FA04:-15}");ok(bac()===1, 'tổn hại nặng: Thù địch');
+    run("G.run.faQh={FA04:-30}");ok(bac()===0, 'tổn hại rất nặng: Tử thù');
+    run("G.run.faQh={};G.run.faHai={FA04:2}");ok(bac()<=2, 'giết người của thế lực làm tụt mức');
+    run("G.run.faHai={}");ok(run("soFaView().every(f=>!f.minh)")&&!run("faMinh('FA04')"), 'chưa kết minh: không hiện Đồng minh');
+    run("faKetMinh('FA04',true)");ok(run("soFaView().find(f=>f.id==='FA04').minh")==='Đồng minh'&&run("soFaView().find(f=>f.id==='FA05').minh")==='', 'cờ kết minh: chỉ thế lực ấy hiện Đồng minh');
+    run("G=JSON.parse(JSON.stringify(G))");ok(run("faMinh('FA04')"), 'cờ kết minh qua lưu – tải');
   },
   menh_tuyen() {
     fresh("G._ngNoEv=1;G.run.origin='nong';G.run.bac=20000;delete G.run.arc");

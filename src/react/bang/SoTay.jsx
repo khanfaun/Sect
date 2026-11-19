@@ -83,7 +83,7 @@ function TheLuc() {
       <span className="r-i">🏯</span>
       <span className="r-t"><b>{x.n}</b>
         <small>{[x.noi, x.trang, x.chu ? T('so.faChu', [x.chu]) : T('so.faKhongChu')].join(' · ')}</small>
-        <small>{[x.qh, x.danh ? T('so.faDanh', [x.danh]) : '', x.cong].filter(Boolean).join(' · ')}</small>
+        <small>{[x.minh, x.qh, x.danh ? T('so.faDanh', [x.danh]) : '', x.cong].filter(Boolean).join(' · ')}</small>
       </span>
     </div>))}</div>;
 }

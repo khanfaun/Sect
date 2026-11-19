@@ -855,3 +855,8 @@ THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuy�
 72. B mở rộng: thang quan hệ thế lực 7 mức bằng chữ (đề xuất, chờ người dùng duyệt tên): Tử thù – Thù địch – Bất hòa – Xa lạ – Giao hảo – Thân thiết – Chí giao (= cùng tiến cùng lùi; người dùng đã chốt tên); "Đồng minh" là trạng thái kết minh chính thức (có thể làm cờ riêng).
 73. Sau Đ10: tổng hợp lại mọi thứ cần gửi GPT (gồm sua-sau-ra-soat.md + phần chữ Đ10).
 Việc cần làm (Sửa-N, làm cùng/ trước Đ8b): câu 71, 72.
+
+## Sửa-N — câu 71, 72
+- 71: `gapNguoi(ten,how)` (core2/63) ghi mọi NPC có tên từng tiếp xúc: nói chuyện / thiện cảm đổi (`favAdd`), gặp trên đường (`meetEnt`), tặng lễ (`favGift`), giao đấu mọi kết quả (`finishCombat`, người lạ "???" chỉ ghi khi đã biết tên), đi cùng (`addParty`), gặp thiên kiêu có tương tác (`applyE` rival), Ám Hội (người đã nhận ra). Người đang giữ vai NP vẫn vào `r.gapVai`; người khác vào `r.gapNg={tên:{ten,y,how}}`. Khoá nội bộ `@…` bỏ qua. Bản lưu cũ chạy được. Chưa có: cửa hàng có chủ là vai (hiện chưa có cửa hàng nào gắn người cụ thể), quest bảng (vô danh).
+- 72: `faQhBac(id)` 0..6 = Tử thù, Thù địch, Bất hòa, Xa lạ, Giao hảo, Thân thiết, Chí giao; điểm ngầm = lựa chọn tuyến (`r.faQh`×2) + tiếng ở căn cứ (×0.15) + cống hiến (/5, tối đa 15) + thiện cảm người thế lực đã gặp (±10) − người của họ bị ta giết qua tuyến (`r.faHai`, ×10). Ngưỡng `FA_QH_NGUONG` = −40, −20, −6, 6, 20, 40 (chỉnh ở một chỗ). Không hiện số. "Đồng minh": `faKetMinh(id,on)` / `faMinh(id)` (cờ `r.faMinh`), chỉ hiện khi có; hiện chưa có cách kết minh, để Đ10/sau gọi.
+- Bài: luật `gap_nguoi`, `fa_thang` (thêm vào `test:rules`), `so_tay_nv` sửa; giao diện `so_tay_nv` thêm ý.
