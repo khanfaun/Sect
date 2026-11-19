@@ -28,6 +28,37 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Đ7.4: kiểm nghề tu — đủ ba chiêu sau syncSkills, luật không ghép, thần thông chỉ qua pháp tướng, 48 chiêu chạy được trong trận
+  nghe_tu() {
+    fresh("G._ngNoEv=1;G._tuNoRui=1;G.run.pham=0;G.run.root={id:'tap',els:['kim','moc'],q:'thuong'};G.run.rootKnown=1;G.run.st=9999;var ntLk=lkTang;lkTang=()=>9");
+    ok(run("Object.keys(TU_NGHE).length")===16&&run("Object.keys(TU_ART).length")===16, 'mười sáu nghề tu, mười sáu công pháp');
+    ok(run("Object.keys(TU_NGHE).every(id=>TU_ART[id].lines.filter(x=>x.sk).map(x=>x.sk).join()===['a','b','c'].map(c=>'sk'+id.slice(2)+c).join()&&['a','b','c'].every(c=>!!SK['sk'+id.slice(2)+c]))"), 'mỗi công pháp mở đúng ba chiêu A, B, C');
+    run(`(()=>{const r=G.run;r.scene=null;const n=tuNode('TU01');r.at=n;openPlace(n);})()`);run("venueDo('tumon','hoc:TU01')");
+    run("const k=G.run.tu.k.TU01;tuHd('TU01');k.xp=300;tuTang('TU01');G.run.realm=1;tuHd('TU01');tuTang('TU01');syncSkills()");
+    ok(run("tuArtOf('TU01').lv")===6&&['sk01a','sk01b','sk01c'].every(id=>run(`G.run.skills.some(k=>k.id==='${id}')`)), 'học CP01 tới tầng ba: có SK01A–SK01C sau syncSkills');
+    run("syncSkills();syncSkills()");ok(run("G.run.skills.filter(k=>/^sk01/.test(k.id)).length")===3, 'dựng lại chiêu nhiều lần không mất chiêu nghề tu');
+    // luật ghép: Phật pháp (pháp môn mở rộng Đ11) với Huyết thuật bị từ chối
+    ok(run("tuGhepCam('phat','huyet')")&&run("tuGhepCam('huyet','phat')")&&!run("tuGhepCam('kiem','huyet')"), 'bảng không ghép: Phật pháp — Huyết thuật');
+    run("TU_NGHE.TU90={n:'Phật tu',pm:'phat',hd:{noi:[]}};G.run.tu.phu=null;G.run.tu.chinh='TU90'");
+    ok(/không ghép được/.test(run("tuWhyHoc('TU03',0)")), 'đang theo Phật pháp: học Huyết Triều Nội Kinh bị từ chối');
+    ok(run("tuWhyHoc('TU02',0)")==='', 'Phật pháp với Thể tu thì được');
+    run("delete TU_NGHE.TU90;G.run.tu.chinh='TU01'");
+    // thần thông chỉ tung qua pháp tướng
+    ok(['a','b','c'].every(c=>run(`Object.keys(TU_NGHE).every(id=>SK['sk'+id.slice(2)+'${c}'].t<=2&&skCat(SK['sk'+id.slice(2)+'${c}'])!=='ult')`)), '48 chiêu nghề tu đều dưới bậc ba (không phải thần thông)');
+    const ult=run("Object.keys(SK).find(k=>SK[k].t>=3&&SK[k].fx.p&&!/^sk\\d/.test(k))");
+    run(`startCombat({},{kind:'node'});var ntSc=G.run.scene,ntMe=mainUnit(ntSc);G.run.kn.ult=['${ult}'];G.run.skills.push({id:'${ult}',lv:1});ntSc.prep=0;ntSc.cur=ntMe.id;ntMe.phase='ready';ntMe.mp=ntMe.maxMp=9999`);
+    ok(!run(`playerAct('${ult}')`)&&run(`ntSc._ult=1;var ntOk=playerAct('${ult}');ntSc._ult=0;ntOk`), 'thần thông '+ult+' chỉ tung được khi có pháp tướng');
+    run("ntSc.dodge=null;ntSc.qte=null;ntSc.critQ=null;ntSc.cur=ntMe.id;ntMe.phase='ready'");
+    ok(run("playerAct('sk01a')"), 'chiêu nghề tu tung thẳng được');
+    // mọi chiêu chạy được trong trận, không lỗi
+    const errs=[];
+    for(const id of JSON.parse(run("JSON.stringify(Object.keys(SK).filter(k=>/^sk\\d\\d[abc]$/.test(k)))"))){
+      const e=run(`(()=>{try{G.run.scene=null;startCombat({},{kind:'node'});const sc=G.run.scene,me=mainUnit(sc);const f=alive(sc,'B')[0];f.hp=f.max=99999;me.mp=me.maxMp=9999;
+        resolveSkill(sc,me,SK.sk06a,1,[],1,null);const sk=SK['${id}'];if(sk.fx.tgt)doSkill(sc,me,sk,1,f.id,1);else resolveSkill(sc,me,sk,1,sk.fx.p?[f]:[],1,'auto');onZero(sc,me);onZero(sc,f);return '';}catch(e){return e.message;}})()`);
+      if(e)errs.push(id+': '+e);}
+    ok(!errs.length, 'cả 48 chiêu chạy trong trận không lỗi'+(errs.length?' — '+errs.join('; '):''));
+    run("G.run.scene=null;lkTang=ntLk");
+  },
   // Đ7.3: mười sáu nghề phàm còn lại
   nghe_pham2() {
     fresh("G._ngNoEv=1;G.run.pham=1;G.run.paths={};G.run.base.ngo=20;G.run.bac=99999");

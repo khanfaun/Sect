@@ -124,8 +124,8 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
-- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-G.
-- Còn: Đ7 trở đi.
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-G.
+- Tiếp theo: Đ8 (thế giới neo, đồng hồ, thời gian luân hồi, đất ma), rồi Đ9.1 (bộ máy tuyến + schema + công cụ kiểm) và file hướng dẫn GPT (Đ9.0).
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
 ## NGƯỜI DÙNG CHỐT 15 CÂU (việc phải làm lại/bổ sung trước khi làm Đ5.4)
@@ -462,3 +462,39 @@ File hướng dẫn (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) phải có: đị
 - Bản lưu cũ: `r.ccVt` chuyển vào túi lúc nạp (bọc `run2`, cần `G.run` để biết số ô trống nên không làm trong `migrateX`); túi đầy thì gửi lại tại chỗ.
 - Bài mới `cai_can_tui`.
 - Kết quả: `npm run test:rules` 683 ý đạt (660 + 12 hiếm + 11 túi); `node tools/test-ui.js` 155 đạt.
+
+## Đ7 — 16 nghề tu lõi, 16 nghề phàm còn lại (HN A.8; C §10 P.1–P.4; B §7.2, §7.5)
+
+### Đ7.1 — từ vựng hiệu ứng chiêu
+- `node tools/liet-ke-fx.js` in khoá fx trong `SK_RAW` và khoá máy trận đọc. Bảng ánh xạ cách viết của C (A/M/H/L, hồi chiêu, hộ thể…) ở `docs/thiet-ke/anh-xa-fx.md`.
+- Khoá mới ở `src/game/core2/50-fx-moi.js` (số 42 đã dùng cho nghề nên lấy số tiếp theo), chữ `content/text/fx-moi.json`: vsCharge, fOnly, fromHide, needTrap, pierceBlock, hpDmg, breakCharge, mark, markWeak, slow, backlash, selfWeak, blockH, blockM (lowHp), cutT, curePoi, poiStop, hide, cxT, fleeUp, cover, allyCover, sumCover, allyRage, allyHeal, summon, unsummon (mpBack), trap, breakAll, dispel, tgt, pillBoost, **cd** (hồi chiêu).
+- Quyết định: chi phí "x% L" → `c = x × 0,3` (linh lực tối đa ≈ `TAB.mp`); hộ thể từ nguồn mới kẹp 30% khí huyết tối đa (C P.5); hồi chiêu đếm theo lần ra tay của chủ (nút mờ, ghi "hồi chiêu n", tự đánh bỏ qua; ổ khoá chiêu vẫn theo ý người chơi); thực thể triệu hồi là đơn vị phe mình có hạn lượt (`sumBy`, `ttl`), tan thì `gone`.
+
+### Đ7.2 — 16 công pháp, 48 chiêu, nghề tu
+- Chiêu `sk01a…sk16c` trong `content/items/sk-raw.js` (A, B bậc 1; C bậc 2, mở ở tầng ba, cần Trúc Cơ); bị gỡ khỏi `SK_RAW` lúc nạp nên không lọt vào kho chiêu ngẫu nhiên. Công pháp `cp_tu01…cp_tu16` trong `content/catalog/arts.json` (trường `tu`), gỡ khỏi kho công pháp ngẫu nhiên (`TU_ART`). Dòng nội tại ghi số thật (`raw`), hiệu ứng chưa có hệ ghi chữ (`tuNote`).
+- Luật `src/game/core2/51-nghe-tu.js`, bảng `content/rules/nghe-tu.js` (`TU_NGHE`, `TU_TANG`, `TU_CFG`, `TU_PM_CAM`, `TU_PM_LOI`), chữ `content/text/nghe-tu.json`. Hộp **Pháp môn** (venue `tumon`, nhóm Tu luyện): bái học ở nơi thầy dạy (phí linh thạch theo P.2, 30 ngày), hoặc tự học qua bản lưu (gấp đôi thời gian, nửa phí); hợp đồng khởi nghiệp theo P.4 (vốn, thù lao linh thạch, ngày; +10 tay nghề, cùng việc trong 30 ngày chỉ tính một lần; 10% hỏng: thương ngoài, mất vốn); nghiên cứu tầng (P.1: 90/180/360 ngày, Luyện Khí tầng 6 / Trúc Cơ / Kết Đan, tay nghề 100/300/700, mỗi tầng một hợp đồng kiểm chứng); gác chuyên môn phụ (30 ngày, giữ chiêu).
+- `r.tu={chinh,phu,k:{TUxx:{xp,tang,hd,hdT,n}}}`: tối đa hai chuyên môn, phụ nhận nửa tay nghề; bậc tay nghề hiện chữ (Học đồ / Hành nghề / Chuyên gia / Tông sư). Vô căn / chưa dẫn khí không học được. Kiếp mới không mang nghề tu.
+- Nơi thầy dạy chốt một lần cho thế giới (`W().tuSrc[LOC]`, dùng `ccPin` như cải căn; Đ8 gắn neo LOC thì tự theo neo).
+- Luật ghép B §7.5: bảng cấm và bảng có lợi đủ cả pháp môn mở rộng (Phật, Nho, Lôi, Thi, Thôn phệ, Cổ, Huyễn) để Đ11 dùng; ghép có lợi ×1,15 chiêu của cả hai (vd Kiếm tu + Thần thức tu).
+- Tài nguyên riêng (`r.tuRes`, thanh tím trong thẻ nhân vật lúc giao chiến): ra chiêu nghề +1, đủ năm thì đòn kế ×1,25 rồi về 0; ra trận còn một nửa.
+- Sửa kèm: nút xác nhận hộp chọn (`ACT.vgo`) cắt mã lựa chọn ở dấu `:` đầu tiên — trước đây mã nhiều phần (vd `tim:bo_chong_sap` của Cơ duyên, `hoc:TU01`) bị cắt cụt.
+
+### Đ7.3 — mười sáu nghề phàm còn lại
+- Thêm vào `NGHE`: Tiều phu, Thợ mỏ, Thợ rèn, Thợ thủ công, Người chép sách, Phu trạm, Binh lính (bảy bậc), Sát thủ phàm (cần võ), Đạo chích, Nghệ nhân gánh hát, Quan viên (bảy bậc), Người chèo đò, Chưởng môn võ phái (cần võ bậc hai), Thợ săn, Tiêu sư (cần võ), Khất cái. Bậc lấy của B §7.2; Thợ mỏ, Phu trạm, Người chèo đò không có trong B nên tự đặt. Tiền công theo C chia ba như năm nghề đầu.
+- Mỗi nghề 12 sự kiện (`content/events/nghe/<mã>.json`, bốn mỗi tầng), lựa chọn dùng năng lực hỗ trợ, có nghiệp (deed) ở chỗ hợp. Kỳ ngộ thăng bậc dùng lời chung (`ng.upT`), chưa có lời riêng từng bậc.
+- Việc nghề có thể mang nghiệp (`deed` trong việc: móc túi, trộm nhà phú hộ, mở kho cứu tế) — `core2/52-nghe-pham-2.js`.
+- Sửa kèm: việc nghề so cả loại nút gốc (`ngNoi`, vd đầm lầy = sông hồ). Trước đây việc của Ngư dân ghi `song/bien` không bao giờ hiện vì thế giới không có nút loại đó.
+- `NANG_NGHE` đủ 21 nghề; bot: `tuHoc/tuHd/tuTang/tuDoiPhu` vào `COV_FN`, thêm `MANAGE.nghetu` (chưa chạy bot).
+
+### Đ7.4 — kiểm tra
+- Luật: `fx_moi` (13), `tu_hoc` (28), `nghe_pham2` (9), `nghe_tu` (12) — học CP01 tới tầng ba có SK01A–SK01C sau `syncSkills()`; Phật pháp + Huyết thuật bị từ chối; thần thông chỉ tung qua pháp tướng, 48 chiêu nghề tu không phải thần thông; cả 48 chiêu chạy trong trận không lỗi.
+- Giao diện: `nghe_tu` (hộp Pháp môn, Đạo đồ có nghề tu, thanh Kiếm ý trong trận).
+
+### Câu 30 — Văn tâm
+- Nho tu thuộc nhóm **mở rộng** (Đ11), không có trong 16 nghề tu lõi → đường cải căn "Văn tâm" (Dưỡng Hạo Nhiên Khí) **vẫn tắt** (`off:'nho'`), bật lại khi làm Nho tu ở Đ11. Luật ghép của Nho đã có sẵn trong `TU_PM_CAM`/`TU_PM_LOI`.
+
+### Còn dở
+- Vật tư dùng trong chiêu (P.5: phù giấy, liều độc, bó dược, lõi khôi) và sản phẩm nghề (P.6) chưa nhập; chiêu chỉ tốn linh lực (Dẫn Dược dùng đan hồi có thật).
+- Nhiều nội tại tầng 3–4 (chế tạo, đan, phù, khế hồn…) mới ghi chữ, chưa có hệ để cộng số.
+- Việc nhập học của P.2 (hộ tống cho NP25, trả tên ba hài cốt…) gộp vào phí + hợp đồng kiểm chứng; chưa có sự kiện riêng của từng thầy (chờ NPC ở Đ8).
+- Lời riêng cho kỳ ngộ thăng bậc của 16 nghề phàm mới; 4 kết cục từng nghề (B) chưa làm.
