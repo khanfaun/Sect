@@ -831,3 +831,6 @@ THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuy�
 - 55: Ám Hội, người bán là NPC: NPC khác không có thứ trong danh sách thì đề nghị đổi bằng vật khác (`amNpcDoi`, nhật ký `amh.deNpc`). Người bán xét theo nhu cầu: độ hợp `amHop` >= `hopMin` và giá trị (đã nhân độ hợp) đủ vượt mức đang dẫn thì nhận, vào đấu như một lần trả giá (nhiều vòng, đếm ngược); vật không hợp thì bị chê (`amh.deTu`, ghi vào nhật ký bàn). Chữ: `amh.log.deNpc`, `amh.log.deTu`.
 - Bài kiểm: `tam_giu` thêm 12 ý (vật liệu, lệnh bài, cộng dồn, không giới hạn, không tự cất, cất cả chồng, mất sau 365 ngày); mới `am_npc_doi` (5 ý, đã thêm vào `test:rules`).
 - Còn dở: giao diện chưa có bài riêng cho dòng tạm giữ của vật liệu (dùng lại thẻ có sẵn, tên ghi "× số lượng"); bot chưa biết cất tạm giữ.
+
+56. A: hạn tạm giữ chồng vật liệu tính từ lần vào đầu tiên (giữ như đang làm).
+57. A: NPC bán ở Ám Hội chỉ nhận pháp bảo hoặc vật cùng loại danh sách (giữ).
