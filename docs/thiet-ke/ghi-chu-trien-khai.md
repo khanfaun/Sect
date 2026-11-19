@@ -910,3 +910,9 @@ Luật: `core2/64-dat-dai.js` (sinh ô, lọc nút), `core2/65-dat-dai-xay-pha.j
 ## NGƯỜI DÙNG CHỐT (câu 74–75) — làm ở Sửa-O (sau Đ8b)
 74. B: Chí giao khó hơn (cần thêm cống hiến lớn). Đồng thời 60–70% điểm quan hệ thế lực đến từ quan hệ (thiện cảm) của ĐẠI ĐA SỐ thành viên thế lực với nhân vật chính, có trọng số theo vai: cao tầng nặng hơn, đệ tử nhẹ hơn. 30–40% còn lại từ tuyến/danh tiếng/cống hiến/giết-giúp.
 75. A: ghi tất cả, nhưng: người chưa tương tác đủ ("thoáng qua") mà lâu không gặp lại thì tự xoá; người đã tương tác đủ (đạt ngưỡng quen biết) thì giữ vĩnh viễn, không bao giờ bị tự xoá nữa. Tự chọn ngưỡng/thời gian, ghi chú.
+
+## NGƯỜI DÙNG CHỐT (câu 76–79) — làm ở Sửa-O
+76. B: công trình tự nhiên bị phá, nếu ô đó không bị xây gì lên, sẽ tự mọc lại sau vài chục năm (có xây thì không mọc).
+77. B + làm hệ truy nã kiểu thế giới mở (tham khảo cơ chế chung của các game thế giới mở, không sao chép): phạm tội trong thành gần như chắc bị truy nã, ở trấn tùy có NHÂN CHỨNG (nhân chứng chạy báo quan; ngăn/mua chuộc/giết nhân chứng — giết thêm thì tội nặng hơn); MỨC TRUY NÃ nhiều bậc (bằng chữ/biểu tượng, không số) tăng theo tội và việc chống cự; quan sai lùng trong vùng, thoát khỏi tầm mắt/ra khỏi vùng một thời gian thì "mất dấu" hạ dần mức; TIỀN TREO THƯỞNG tích lũy theo vùng, thợ săn tiền thưởng truy theo; xoá truy nã bằng nộp phạt ở quan phủ (hoặc ngồi tù/làm công), cải trang/che giấu tu vi giúp né; tội ở vùng này không tự lan vùng khác trừ khi rất nặng. Nối hệ danh tiếng Đ1.4, truy đuổi Sửa-K, nợ Sửa-B, đất đai Đ8b.
+78. (đang hỏi lại cho rõ)
+79. B: ở thành/trấn chỉ được xây sau khi đã mua đất (ô trống của dân thì không cho xây).
