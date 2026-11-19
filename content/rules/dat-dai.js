@@ -1,0 +1,76 @@
+// Nguồn chuẩn cho Đ8b: đất đai. Luật: src/game/core2/64-dat-dai.js · chữ: content/text/dat-dai.json (khoá dat.*).
+// Mỗi địa điểm có N ô đất; mỗi ô mang 0–1 công trình; mỗi công trình mở đúng một mục trong hộp chi tiết địa điểm
+// (mục = một nút của PGROUP, ui/08-cac-canh-hien-de.js; riêng "Sơn môn điện" mở cả nhóm Tông môn vì các việc tông môn là một khối).
+// Nút KHÔNG gắn công trình (thăm dò, bế quan, xung kích, dưỡng thương, hành trang, nhà mình, mưu sinh, cơ duyên, pháp môn…) vẫn hiện như cũ.
+//
+// CONG_TRINH[id]:
+//   n = tên · nhom = nhóm PGROUP mà mục đó thuộc · tu = 1 công trình tự nhiên (không xây được), 0 nhân tạo
+//   acts = các nút mở ra (thường một) · noi = loại nơi thường có (chỉ để ghi chú, sinh ô dùng DAT.goc / DAT.hoang)
+//   xay = null không xây được; {noi:[loại nơi], st: linh thạch Hạ phẩm, h: số giờ, tu: 1 phải là tu sĩ} xây được trên ô trống
+//   pha = null không phá được; {h: số giờ phá} · hau = hậu quả khi phá (ghi trong hộp xác nhận)
+//   dp = 1 công trình này là động phủ của nơi đó (n.dp: bế quan nhanh hơn, ít bị quấy)
+const CONG_TRINH={
+  // --- nhân tạo ở thôn trấn / thành ---
+  khach_diem:{n:'Khách điếm',nhom:'Nghỉ chân',tu:0,acts:['inn'],noi:['tran','thanh'],xay:null,pha:{h:6},hau:'Mất chỗ trọ ở nơi này.'},
+  tra_lau:{n:'Trà lâu',nhom:'Nghỉ chân',tu:0,acts:['tea'],noi:['tran','thanh','cho'],xay:null,pha:{h:4},hau:'Mất chỗ nghe ngóng tin tức.'},
+  tuu_lau:{n:'Tửu lầu',nhom:'Nghỉ chân',tu:0,acts:['tuu'],noi:['tran','thanh'],xay:null,pha:{h:4},hau:'Mất quán rượu.'},
+  bang_thuong:{n:'Bảng treo thưởng',nhom:'Sự vụ',tu:0,acts:['board'],noi:['tran','thanh'],xay:null,pha:{h:1},hau:'Không còn nhận việc treo thưởng ở đây.'},
+  thuong_cac:{n:'Thưởng Các',nhom:'Sự vụ',tu:0,acts:['thuongcac'],noi:['tran','thanh'],xay:null,pha:{h:4},hau:'Mất chỗ đổi Thưởng Lệnh.'},
+  tien_trang:{n:'Tiền trang',nhom:'Sự vụ',tu:0,acts:['vay'],noi:['tran','thanh'],xay:null,pha:{h:6},hau:'Không còn ai cho vay ở đây.'},
+  tap_hoa:{n:'Tạp hóa',nhom:'Mua bán',tu:0,acts:['taphoa'],noi:['tran','cho'],xay:null,pha:{h:3},hau:'Mất chỗ mua đồ phàm.'},
+  lai_buon:{n:'Bến hàng lái buôn',nhom:'Mua bán',tu:0,acts:['laibuon'],noi:['tran','thanh','cho'],xay:null,pha:{h:3},hau:'Lái buôn không ghé nữa.'},
+  phuong_thi:{n:'Phường thị',nhom:'Mua bán',tu:0,acts:['shop'],noi:['thanh'],xay:null,pha:{h:8},hau:'Mất chợ đồ tu sĩ.'},
+  quy_thi:{n:'Quỷ thị',nhom:'Mua bán',tu:0,acts:['ghost'],noi:['thanh','ma'],xay:null,pha:{h:6},hau:'Mất chợ đêm.'},
+  am_hoi:{n:'Hầm Ám Hội',nhom:'Mua bán',tu:0,acts:['amhoi'],noi:['thanh','ma'],xay:null,pha:{h:6},hau:'U Minh Ám Hội không họp ở đây nữa.'},
+  doi_lt:{n:'Ngân phường',nhom:'Mua bán',tu:0,acts:['doilt'],noi:['thanh','cho'],xay:null,pha:{h:6},hau:'Mất chỗ đổi linh thạch.'},
+  cam_do:{n:'Hiệu cầm đồ',nhom:'Mua bán',tu:0,acts:['camdo'],noi:['thanh','cho'],xay:null,pha:{h:3},hau:'Mất hiệu cầm đồ.'},
+  tram_dich:{n:'Trạm dịch',nhom:'Đi lại',tu:0,acts:['tram'],noi:['tran','thanh'],xay:null,pha:{h:6},hau:'Không còn xe ngựa, thuê đường ở đây.'},
+  loi_dai:{n:'Lôi đài',nhom:'Tu luyện',tu:0,acts:['loidai'],noi:['thanh'],xay:null,pha:{h:4},hau:'Không còn đấu lôi đài ở đây.'},
+  thao_lu:{n:'Thảo lư ẩn sĩ',nhom:'Tu luyện',tu:0,acts:['thinhgiao'],noi:['ancu'],xay:null,pha:{h:2},hau:'Ẩn sĩ bỏ đi, không còn chỗ thỉnh giáo.'},
+  son_mon:{n:'Sơn môn điện',nhom:'Tông môn',tu:0,acts:['join','lib','congmon','nhansu','tongviec','conghien','tinhthat','taphoa','doilt','tinh'],noi:['tong'],xay:null,pha:null,hau:''},
+  // --- tự nhiên ở hoang dã: không xây được, phá được ---
+  bai_san:{n:'Bãi săn',nhom:'Hoang dã',tu:1,acts:['sanbat'],noi:['rung','nui','hoang','dam','khoang','duoc','linhdia','song','bien'],xay:null,pha:{h:12},hau:'Muông thú bỏ đi, không săn bắt được nữa.'},
+  ho_ca:{n:'Hồ cá',nhom:'Hoang dã',tu:1,acts:['sanbat'],noi:['song','bien','dam'],xay:null,pha:{h:24},hau:'Lấp hồ: không đánh bắt được nữa.'},
+  hang_yeu:{n:'Hang yêu thú',nhom:'Hoang dã',tu:1,acts:['sanyeu'],noi:['nui','dong','rung'],xay:null,pha:{h:12},hau:'Lấp hang: yêu thú không còn tụ về để săn.'},
+  dam_yeu:{n:'Đầm yêu',nhom:'Hoang dã',tu:1,acts:['sanyeu'],noi:['dam','song','bien','hoang','ma','phe','thien'],xay:null,pha:{h:24},hau:'Lấp đầm: yêu thú không còn tụ về để săn.'},
+  rung_thuoc:{n:'Rừng thuốc',nhom:'Hoang dã',tu:1,acts:['haithuoc'],noi:['rung','duoc','song','bien'],xay:null,pha:{h:12},hau:'Đốt rừng thuốc: không hái thuốc được nữa.'},
+  bai_thao:{n:'Bãi linh thảo',nhom:'Hoang dã',tu:1,acts:['haithuoc'],noi:['hoang','thien','duoc'],xay:null,pha:{h:8},hau:'Cào bãi thảo: không hái thuốc được nữa.'},
+  mo_khoang:{n:'Mỏ khoáng',nhom:'Hoang dã',tu:1,acts:['daokhoang'],noi:['khoang','nui','dong','phe','ma'],xay:null,pha:{h:24},hau:'Sập mỏ: không đào khoáng được nữa.'},
+  hang_dong:{n:'Hang động',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['dong','nui'],xay:null,pha:{h:24},hau:'Sập hang: mất chỗ tĩnh tọa.'},
+  linh_tuyen:{n:'Linh tuyền',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['linhdia','thien'],xay:null,pha:{h:24},hau:'Lấp linh tuyền: mất chỗ tĩnh tọa.'},
+  co_thu:{n:'Cổ thụ',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['rung','hoang'],xay:null,pha:{h:12},hau:'Đốn cổ thụ: mất chỗ tĩnh tọa.'},
+  ho_nuoc:{n:'Hồ nước',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['song','bien'],xay:null,pha:{h:24},hau:'Lấp hồ: mất chỗ tĩnh tọa bên nước.'},
+  tran_co:{n:'Trận pháp cổ',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['hoang','phe','nui','dong','linhdia'],xay:null,pha:{h:12},hau:'Phá trận cổ: mất chỗ tĩnh tọa, linh khí tản đi.'},
+  // --- người chơi xây trên đất hoang không chủ (tu sĩ) ---
+  dong_phu:{n:'Động phủ',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],dp:1,xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma'],st:30,h:720,tu:1},pha:{h:12},hau:'Mất động phủ: bế quan ở đây không còn được che chở.'},
+  tran_phap:{n:'Trận pháp hộ thân',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','tran','thanh'],st:50,h:240,tu:1},pha:{h:6},hau:'Trận tan: mất chỗ tĩnh tọa trong trận.'}};
+
+// DAT: cách sinh ô và hậu quả.
+//   goc[loại nơi] = công trình luôn có ở loại nơi đó (bảo đảm dịch vụ cốt lõi; bản lưu cũ cũng sinh theo bảng này)
+//   trong[loại nơi] = [ít, nhiều] số ô trống thêm (ở thành/trấn là đất của dân, ở hoang dã là đất hoang không chủ)
+//   hoang[nút] = các công trình tự nhiên có thể cấp nút đó; chọn theo địa hình quanh nút (ter: chỉ số TER_N, nặng = trọng số) và hạt giống thế giới
+//   them = [xác suất, tối đa] thêm công trình tự nhiên (mỗi công trình cấp một nút đã có ở nơi đó) — chỉ thêm cho đẹp, không mở thêm dịch vụ
+//   phat: hậu quả khi xây/phá trên ô có chủ. fav = thiện cảm chủ (vai NPC) · fa = điểm quan hệ thế lực (r.faQh, ×2 khi tính thang) ·
+//         danh = danh tiếng khu (thôn trấn / thành) · truy = xác suất bị chủ hoặc người của họ truy đuổi (hệ Sửa-K, loại cuop) ·
+//         na = xác suất bị quan phủ truy nã ở thôn trấn / thành (truy loại quan, danh tiếng khu xuống mức truy nã naDanh)
+//   hu = số tháng một công trình cốt lõi ở nơi neo bị phá thì chỉ hư tạm (dựng lại sau ngần ấy)
+const DAT={
+  goc:{
+    tran:['khach_diem','tra_lau','tuu_lau','bang_thuong','thuong_cac','tien_trang','tap_hoa','lai_buon','tram_dich'],
+    thanh:['khach_diem','tra_lau','tuu_lau','bang_thuong','thuong_cac','tien_trang','phuong_thi','quy_thi','am_hoi','lai_buon','doi_lt','cam_do','tram_dich','loi_dai'],
+    cho:['tra_lau','tap_hoa','lai_buon','doi_lt','cam_do'],
+    tong:['son_mon'],ancu:['thao_lu'],ma:['quy_thi','am_hoi']},
+  trong:{tran:[0,1],thanh:[1,1],cho:[0,1],tong:[0,0],ancu:[0,1],hoang:[1,2]},
+  hoang:{
+    sanbat:[['bai_san',{1:2,2:3,3:1,6:2}],['ho_ca',{4:3,5:3,7:2}]],
+    sanyeu:[['hang_yeu',{2:2,3:3,6:2}],['dam_yeu',{4:1,5:1,7:3,1:1}]],
+    haithuoc:[['rung_thuoc',{2:3,4:1,7:1}],['bai_thao',{1:2,6:2,3:1}]],
+    daokhoang:[['mo_khoang',{3:1,6:1,1:1}]],
+    tinh:[['hang_dong',{3:3,6:2}],['linh_tuyen',{5:2,4:1}],['co_thu',{2:3,1:1}],['ho_nuoc',{4:2,5:3}],['tran_co',{1:1,3:1,6:1,7:1}]]},
+  them:[0.35,1],
+  phat:{
+    vai:{fav:-15,fa:-3,truy:0.3},
+    fa:{fa:-4,truy:0.25},
+    dan:{danh:{tran:-12,thanh:-20},na:{tran:0.3,thanh:0.6},naDanh:-60},
+    tong:{danh:-15,truy:0.4}},
+  hu:3};

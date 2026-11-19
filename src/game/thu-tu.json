@@ -322,6 +322,8 @@
  "data/07-noi-dung-2-du-lieu.js",
  "core2/62-noi-dung-2.js",
  "core2/63-so-tay-nhan-vat.js",
+ "content/rules/dat-dai.js",
+ "core2/64-dat-dai.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
