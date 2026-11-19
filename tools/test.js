@@ -1519,6 +1519,15 @@ const TESTS = {
     run("CC_FORCE=null");ok(run(`W().regions.flatMap(R=>R.nodes).filter(n=>!ccAmVt(n)).length>0`), 'không phải lúc nào Ám Hội cũng có');
   },
   // Sửa-H câu 36 + 32: đồ cải căn có phẩm (tạp/tứ → tam → song → Địa → Thiên), đồ dởm, cộng dồn sau thất bại, lô ở đấu giá thường
+  // Sửa-I câu 37: không đường cải căn nào ra Thiên đại trà (chỉ CC05 độc nhất và đồ phẩm 5)
+  cc_thien() {
+    fresh("G._ngNoEv=1");
+    const out=JSON.parse(run("(()=>{const o={};for(const [id,P] of Object.entries(CAI_CAN)){for(const st of P.steps||[]){if(st.b!=='rite'||!st.out||st.out.nang||st.out.tuc)continue;for(let i=0;i<60;i++){const R=ccMakeRoot(st.out,id);if(R.id==='thien')o[id]=(o[id]||0)+1;}}}return JSON.stringify(o);})()"));
+    ok(Object.keys(out).every(k=>k==='CC05'), 'chỉ Tàn Hỏa Chủng (độc nhất) còn ra Thiên: '+JSON.stringify(out));
+    ok(run("['HUYET_TE','XA_LOI','TAY_TUY','CC06'].every(id=>CAI_CAN[id].steps.filter(s=>s.b==='rite').every(s=>{for(let i=0;i<40;i++){const R=ccMakeRoot(s.out,id);if(CC_LV[R.id]>3)return false;}return true;}))"), 'Huyết Tế, Xá Lợi, Tẩy Tủy, Huyết Mạch Khế: cao nhất song linh căn');
+    ok(run("(()=>{for(let i=0;i<30;i++){const R=ccMakeRoot(CAI_CAN.XA_LOI.steps.find(s=>s.b==='rite').out,'XA_LOI');if(R.id!=='song'||!(R.els.includes('tho')||R.els.includes('kim')))return false;}return true;})()"), 'Xá Lợi: song linh căn có hệ thổ/kim');
+    ok(run("CAI_CAN.CC05.hoi===0"), 'Tàn Hỏa Chủng độc nhất cả thế giới (hoi=0)');
+  },
   cai_can_do() {
     ok(run("[1,2,3,4,5].every(p=>!CC_DO[p+1]||(CC_DO[p+1].ok<CC_DO[p].ok&&CC_DO[p+1].lv>CC_DO[p].lv&&CC_DO[p+1].dg<CC_DO[p].dg&&CC_DO[p+1].st>CC_DO[p].st))"), 'phẩm càng cao: cải được tới mức cao hơn, dễ hỏng hơn, hiếm hơn, đắt hơn');
     ok(run("CC_DO[4].to.id==='dia'&&CC_DO[5].to.id==='thien'&&CC_DO[3].to.id==='song'&&CC_DO[2].to.id==='tam'"), 'phẩm 2–5 ra tam / song / Địa / Thiên');

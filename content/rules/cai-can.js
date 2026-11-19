@@ -9,6 +9,8 @@
 // steps (b): proof (kiểm chứng; L: đầu mối, lua: kẻ bán đồ giả) · tranh (người tranh giành; L: cách xử) · gain (vt: vật tư cần có)
 //   serve (phục vụ/khổ luyện; thang|ngay, chunk ngày mỗi lần, an: bao cơm, rui: rủi ro mỗi lần, alt: trả tiền thay, cho: vật tư nhận khi xong)
 //   grow (nuôi qua nam năm, mỗi năm phải về chăm một lần) · rite (nghi thức: ok tỉ lệ, out kết quả, fail hậu quả, mua: chỉ mùa đó, bloom: chờ kỳ nở)
+// Sửa-I câu 37: không đường nào ra Thiên đại trà; chỉ Tàn Hỏa Chủng (CC05, độc nhất cả thế giới) và đồ phẩm 5 còn ra Thiên.
+// lim:1 = elSrc chỉ chọn hệ, giữ đúng id (không tự nâng lên Thiên).
 // out: {id: loại linh căn, q: phẩm, el/els: hệ, elSrc: 'thu'|'sao' lấy hệ chốt sẵn của nguồn, pick: chọn ngẫu nhiên trong các loại}
 // fail: {hpP: giảm khí huyết tối đa vĩnh viễn (%), tam: {nam, fx} suy nhược có hạn, life: mất năm thọ, wound, die: khả năng chết, ngheDown: mất một bậc nghề}
 const CC_CFG={
@@ -106,7 +108,7 @@ const CAI_CAN={
            {id:'liu',l:'Cùng đội thợ chặn cửa mỏ',p:0.5,vo:1,wound:'gay',t:'Đuổi được bọn đào lậu, cửa mỏ giờ là của đội ngươi.'},
            {id:'nhuong',kq:'nhuong',l:'Để chúng vào trước'}]},
       {b:'serve',l:'Thăm dò lòng mỏ, chống sập từng đoạn',ngay:90,chunk:30,rui:{p:0.08,wound:'gay',hpP:30,t:'Vách mỏ rùng mình, đội ngươi kịp rút nhưng một tảng đá vẫn đè trúng người.'}},
-      {b:'rite',l:'Niêm ống tủy, uống trong bảy ngày',ngay:7,ok:0.65,out:{id:'thien',q:'khuyet',el:'tho'},okFx:{tam:{nam:2,fx:{hpP:-10}}},
+      {b:'rite',l:'Niêm ống tủy, uống trong bảy ngày',ngay:7,ok:0.65,out:{id:'dia',q:'khuyet',el:'tho'},okFx:{tam:{nam:2,fx:{hpP:-10}}},
         fail:{tam:{nam:2,fx:{hpP:-25,atkP:-20}},wound:'noi'},vt:[['bo_chong_sap',1],['doi_mo',1]],
         okT:'Đất như thở cùng ngươi. Một luồng khí nặng và ấm chìm xuống đan điền. Thân thể phải mất hai năm mới hồi lại.',failT:'Tủy quá nặng, kinh mạch không giữ nổi. Hai năm tới ngươi đi đứng cũng phải nghỉ.'}]},
   CC03:{n:'Ngũ Hành Dưỡng Căn Pháp',noi:{loc:'LOC01',t:['tran'],re:/Thôn|Khê/},mode:'vo',hoi:null,tuoi:6,
@@ -163,7 +165,7 @@ const CAI_CAN={
            {id:'ep',l:'Ép nó ký khế',deed:'tra_tan',t:'Nó ký, nhưng mắt nó nhìn ngươi như kẻ thù.'},
            {id:'nhuong',kq:'nhuong',l:'Để nó yên'}]},
       {b:'gain',vt:[['khe_huyet',1]]},
-      {b:'rite',l:'Ký khế, nhường một phần năm thọ nguyên còn lại',ngay:3,ok:0.8,out:{id:'thien',q:'thuong',elSrc:'thu'},cost:{lifePct:20},
+      {b:'rite',l:'Ký khế, nhường một phần năm thọ nguyên còn lại',ngay:3,ok:0.8,out:{id:'song',q:'thuong',elSrc:'thu',lim:1},cost:{lifePct:20},
         fail:{tam:{nam:2,fx:{hpP:-20,atkP:-15}}},vt:[['khe_huyet',1]],
         okT:'Máu thú và máu người hòa vào nhau. Từ nay hai bên cùng chia một phần đời.',failT:'Huyết mạch đào thải nhau. Ngươi suy nhược hai năm, con thú cũng ốm theo.'}]},
   CC07:{n:'Vay Căn Nghịch Mệnh',noi:{loc:'LOC07',t:['ma','phe','tran']},mode:'vo',hoi:null,tuoi:12,
@@ -196,7 +198,7 @@ const CAI_CAN={
     steps:[
       {b:'proof',L:[{id:'vo_su',l:'Hỏi hai võ sư từng thấy người luyện thành',ngay:3}],lua:{l:'Mua bản kinh chép tay ở chợ',bac:300}},
       {b:'serve',l:'Khổ luyện Tẩy Tủy Kinh',thang:36,chunk:30,rui:{p:0.05,wound:'noi',t:'Một lần luyện quá sức, nội tạng chấn động.'}},
-      {b:'rite',l:'Phạt mạch lần cuối',ngay:7,ok:0.7,out:{pick:['tap','tap','tap','thien'],q:'khuyet'},
+      {b:'rite',l:'Phạt mạch lần cuối',ngay:7,ok:0.7,out:{pick:['tap','tap','tap','tu'],q:'khuyet'},
         fail:{wound:'noi',tam:{nam:1,fx:{hpP:-20}}},
         okT:'Một tiếng vỡ nhỏ trong xương sống. Mạch tắc thông rồi.',failT:'Mạch không vỡ, chỉ có người ngươi gục xuống. Một năm sau mới cầm lại được binh khí.'}]},
   QUAN_DINH:{n:'Tiên nhân quán đỉnh',noi:{loc:'LOC04',t:['phe','dong','tran']},mode:'vo',hoi:50,tuoi:1,
@@ -211,7 +213,7 @@ const CAI_CAN={
     clue:'Ở {{0}} có kẻ truyền phép huyết tế: lấy máu người sống mở mạch cho kẻ không căn.',
     steps:[
       {b:'proof',L:[{id:'huyet_kinh',l:'Xem bản huyết kinh và người đã khai mạch',ngay:2}]},
-      {b:'rite',l:'Làm lễ huyết tế',ngay:1,ok:0.7,deed:'huyet_te_nguoi',out:{id:'thien',q:'khuyet',el:'thuy'},okFx:{flag:'huyet_can'},
+      {b:'rite',l:'Làm lễ huyết tế',ngay:1,ok:0.7,deed:'huyet_te_nguoi',out:{id:'song',q:'khuyet',el:'thuy'},okFx:{flag:'huyet_can'},
         fail:{wound:'noi',life:-2},
         okT:'Máu người khác chảy qua mạch ngươi, để lại một căn mỏng và lạnh. Từ nay mùi máu dễ gọi nó dậy.',failT:'Lễ hỏng. Máu đã đổ, căn không thành.'}]},
   LINH_CO:{n:'Linh Căn Cổ',noi:{loc:'LOC09',t:['dam','rung','song','tran']},mode:'vo',hoi:null,tuoi:2,
@@ -234,7 +236,7 @@ const CAI_CAN={
     steps:[
       {b:'proof',L:[{id:'su_gia',l:'Hỏi sư già trong chùa',ngay:1}]},
       {b:'serve',l:'Giữ giới, làm việc chùa',thang:60,chunk:30,an:1,deed:'bo_thi'},
-      {b:'rite',l:'Ngồi dưới xá lợi một đêm',ngay:1,ok:0.85,out:{id:'thien',q:'thuong',pick_el:['tho','kim']},
+      {b:'rite',l:'Ngồi dưới xá lợi một đêm',ngay:1,ok:0.85,out:{id:'song',q:'thuong',pick_el:['tho','kim']},
         fail:{},
         okT:'Đêm ấy không có gì lạ. Sáng ra, ngươi thấy mình nghe được hơi thở của đất.',failT:'Đêm trôi qua. Ngươi vẫn là ngươi, năm năm giữ giới cũng không mất đi đâu.'}]},
   HAO_NHIEN:{n:'Dưỡng Hạo Nhiên Khí',off:'nho',noi:{loc:'LOC02',t:['thanh']},mode:'vo',hoi:null,tuoi:1,

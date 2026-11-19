@@ -206,9 +206,9 @@ function ccMakeRoot(o,id){const r=G.run,s=ccSrc(id)||{};const qi=q=>ROOT_Q.findI
   if(o.nang){const k=Math.min(ROOT_Q.length-1,Math.max(0,qi(r.root.q||'thuong'))+1);return Object.assign({},r.root,{els:r.root.els.slice(),q:ROOT_Q[k].id});}
   if(o.tuc){const T=G.meta.tucCan.root;const k=Math.max(0,qi(T.q||'thuong')-1);return {id:T.id,els:T.els.slice(),q:ROOT_Q[k].id};}
   let rid=o.id||pick(o.pick);let el=o.el||(o.pick_el&&pick(o.pick_el))||null;
-  if(o.elSrc){el=s.el||pick(NGUHANH);rid=NGUHANH.includes(el)?'thien':'bien';}
+  if(o.elSrc){el=s.el||pick(NGUHANH);rid=o.lim&&o.id?o.id:NGUHANH.includes(el)?'thien':'bien';}
   let els;if(rid==='tap')els=NGUHANH.slice();else if(rid==='thien')els=[el||pick(NGUHANH)];else if(rid==='bien')els=[el||pick(['loi','bang','phong'])];
-  else if(rid==='song')els=o.els?o.els.slice():pick([['kim','thuy'],['thuy','moc'],['moc','hoa'],['hoa','tho'],['tho','kim']]).slice();
+  else if(rid==='song'){const SP=[['kim','thuy'],['thuy','moc'],['moc','hoa'],['hoa','tho'],['tho','kim']];els=o.els?o.els.slice():pick(el&&NGUHANH.includes(el)?SP.filter(x=>x.includes(el)):SP).slice();}
   else els=shuffle(NGUHANH.slice()).slice(0,(ROOT.find(x=>x.id===rid)||{k:3}).k);
   return {id:rid,els,q:o.q||'thuong'};}
 let CC_FORCE=null; // bài kiểm: ép kết quả (1 thành, 0 hỏng)

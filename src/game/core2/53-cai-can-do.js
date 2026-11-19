@@ -21,7 +21,7 @@ function ccRootFx(ch){const r=G.run;const k=tlFxKind(r.root);if(!k)return;r.tlFx
   if(si>=0){const ppl=tlSectFav(si,k);r.tlFx.sect=w.sects[si].n;r.tlFx.ppl=ppl;if(ch)ch.push(chip('🔔',contentText('tlfx.sectChip',[w.sects[si].n]),contentText('tlfx.sectTip',[ppl.join(', ')]),'up'));}
   log(contentText('tlfx.log.'+k));if(typeof bio==='function')bio(contentText('tlfx.bio.'+k,[Math.floor(r.age),r.ten]));dbg('cc.fx',{k,sect:si});}
 // Địa linh căn: một cặp tương sinh (như lúc sinh ra)
-{const _mr=ccMakeRoot;ccMakeRoot=function(o,id){const R=_mr.apply(this,arguments);if(R&&R.id==='dia'&&!(o&&o.els))R.els=pick([['kim','thuy'],['thuy','moc'],['moc','hoa'],['hoa','tho'],['tho','kim']]).slice();return R;};}
+{const _mr=ccMakeRoot;ccMakeRoot=function(o,id){const R=_mr.apply(this,arguments);if(R&&R.id==='dia'&&!(o&&o.els)){const SP=[['kim','thuy'],['thuy','moc'],['moc','hoa'],['hoa','tho'],['tho','kim']];const el=o&&o.el;R.els=pick(el?SP.filter(x=>x.includes(el)):SP).slice();}return R;};}
 // đường cải căn: cộng dồn vào tỉ lệ nghi thức, hỏng thì cộng thêm, thành thì về 0 và có dị tượng nếu ra Địa/Thiên
 {const _rt=ccRite;ccRite=function(P,st){const r=G.run;const was=!!r.ccOk;const res=_rt.call(this,P,Object.assign({},st,{ok:ccOkP(st.ok)}));
   if(G.run===r&&!was&&r.ccOk){ccBonOk();ccRootFx(res&&res.ch);}else if(!was&&!(G.run===r&&r.ccOk))ccBonFail();
