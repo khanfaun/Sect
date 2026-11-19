@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 1,
+  "id": "DL07",
+  "loai": "dai_lo",
+  "ten": "Thế Gia Vạn Đại",
+  "daiLo": "the_gia",
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Sổ họ đặt ngoài cửa",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Người từ nhiều nhà ở {LOC01} đặt tên chung trên mặt ngoài cuốn sổ. Có người sinh trong họ, có người chỉ tìm một mái qua mùa. Họ muốn biết phần nào được giữ nếu ngày sau không còn đứng dưới cùng một tên.",
+      "boQuaNeuXuatThan": true,
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi tên theo lời từng hộ",
+          "t": "Ngươi để người đến tự xưng tên rồi hỏi họ muốn giữ lại quyền gì.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi phần của người dời nhà",
+          "t": "Ngươi chép điều người đã rời muốn còn đọc được khi trở về đối sổ.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Để người ngoài họ giữ bản",
+          "t": "Ngươi xin một người không nhận phần giữ bản kê lúc các hộ còn đồng ý.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cuốn sổ được cất, các hộ tự giữ giấy riêng qua mùa.",
+        "su": "Cuốn sổ được cất, các hộ tự giữ giấy riêng qua mùa.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Hộ đi xa và hộ ở lại",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Ở {LOC09}, người dời tới có giấy nhưng không có đất, người ở lại có quyền bến mà thiếu tay làm. Một dòng quy ước mới có thể ghi ai kế việc giữ họ khi nhà cũ chia nhánh.",
+      "khacVoi": "OR01.N4 chia đất trong thôn; hồi này đặt quyền thành viên và kế nhiệm giữa hai nơi khi dòng họ dời đi.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Lập bản họ có quyền vào ra",
+          "t": "Ngươi để hộ chọn ghi tên hoặc rút, giữ bản ở cả bến và nhà cũ.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Kê phần dành cho người cùng họ",
+          "t": "Ngươi ghi quỹ và lượt bến ưu tiên cho người có tên trong bản nhà.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tách sổ việc chung khỏi sổ nhà",
+          "t": "Ngươi giao người giữ việc một bảng riêng, để phần nhà không làm điều kiện nhận công.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hộ tới nhờ bến một chuyến, quyền lâu dài chưa có người đối.",
+        "su": "Hộ tới nhờ bến một chuyến, quyền lâu dài chưa có người đối.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Mùa đói thử lời nhà",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Tại {LOC01}, nồi chung thiếu phần trước lúc hộ ngoài bến trở về. Có người đòi chỉ mở kho cho cùng họ, còn các hộ giữ hai bản xin đối phần góp và phần cần trước khi chia.",
+      "khacVoi": "OR18.N4 sửa sổ phát thóc sai; hồi này thử lệ tương trợ và quyền vào ra khi họ ở nhiều nơi cùng thiếu.",
+      "clk": "CLK01",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Mở quỹ hai nơi theo phần cần",
+          "t": "Ngươi cho hai người giữ bản cùng đối phần phát, giữ chỗ cho người đã đổi nhà.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "e": {
+            "clk": {
+              "id": "CLK01",
+              "kq": "Hai nơi góp gạo qua mùa đói, phần phát được đối trước cả hộ đã dời."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Dành kho cho người còn trong họ",
+          "t": "Ngươi cấp gạo theo bản tên nhà, để người rút giữ phiếu từ chối.",
+          "dau": [
+            "moc_3_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Cho từng hộ rút phần đã góp",
+          "t": "Ngươi chia số còn theo biên nhận và để hộ tự chuyển phần tới nơi khác.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Kho giữ một phần cho nhà cũ, nhà mới tự xoay bữa tối.",
+        "su": "Kho giữ một phần cho nhà cũ, nhà mới tự xoay bữa tối.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Người thay giữ sổ",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Sổ ở {LOC09} mở sang trang ghi người kế lượt. Một người từ nhánh xa tới nhận giữ việc, một người muốn giữ chìa theo huyết hệ. Hộ đã rút đến hỏi bản ghi việc chung còn dùng được không.",
+      "khacVoi": "OR16.N5 giữ hay bán bí quyết vá lưới; hồi này thử chuyển trách nhiệm trông họ sang người được các hộ cử.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao ca giữ họ cho người được cử",
+          "t": "Ngươi để người mới thử đọc và sửa hai bản trước những hộ đã dùng quỹ.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giao chìa theo dòng nhà",
+          "t": "Ngươi chọn người cùng họ nhận ca, ghi người ngoài phải có nhà đứng bảo.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Khép sổ họ, giữ việc chung theo hộ",
+          "t": "Ngươi trả giấy từng nhà và để các hộ tự nhận việc trên bảng riêng.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người coi tạm giữ sổ, nhánh xa chưa có lượt thay.",
+        "su": "Người coi tạm giữ sổ, nhánh xa chưa có lượt thay.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Họ đi qua một mùa nước",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Bến {LOC09} đang giữ phần gạo cho lượt sau, nhưng một chuyến thiếu lương xin ghé trước. Người kế sổ đứng cạnh hộ đã rút, cả hai chờ biết tờ nào còn có giá khi chuyến cũ không quay.",
+      "khacVoi": "OR31.N5 chọn nơi lưu chữ trên tường; hồi này thử việc truyền quyền trông họ qua thiếu tiếp tế và thay người.",
+      "clk": "CLK03",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Trao cả hai bản cho người nối lượt",
+          "t": "Ngươi để người mới mở phần lương theo lệ đã thử và trao bản cho cả hai nơi.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          },
+          "e": {
+            "clk": {
+              "id": "CLK03",
+              "kq": "Bến mở phần lương do hai nhánh đối cùng người kế lượt trước chuyến thiếu."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ họ bằng phần ưu tiên đã đặt",
+          "t": "Ngươi nhận biên bản cũ, cho người cầm chìa phát riêng phần mang tên nhà.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Rời sổ họ sau khi trao đủ giấy",
+          "t": "Ngươi giao biên nhận để từng hộ đi theo ngả riêng và trả chìa cũ.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Cho chuyến ghé nghỉ trước phiên",
+          "t": "Ngươi giữ mái bến cho người lỡ chuyến rồi báo các hộ tự cân được phần cho.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bến tự đổi phần có sẵn, người giữ sổ chờ chuyến sau.",
+        "su": "Bến tự đổi phần có sẵn, người giữ sổ chờ chuyến sau.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Nhà còn qua người giữ khác",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người đã từng dời tới nhận lượt mở kho mà không cần đổi họ. Hai đầu giữ bản cùng sửa tên người tự xin ra. Đến mùa sau, người ở bến gọi tên người giữ lượt mới và vẫn chỉ đúng chỗ tra bản của ngươi.",
+      "su": "Hai nhánh truyền quyền qua lệ góp quỹ và tự chọn tên.",
+      "dauVong": "bản họ đặt ở hai nơi có dòng rút tên do hộ tự ký."
+    },
+    {
+      "id": "B",
+      "ten": "Chìa chỉ đi trong nhà",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Nhà còn quỹ và đủ người giữ phiên qua mùa. Một hộ từng rút trở về cầm phiếu mà không lấy được phần như trước. Họ đặt nó bên bản tên đã sửa, để người tới sau biết vì sao hai tờ không khớp.",
+      "su": "Sổ họ giữ phần ưu tiên theo dòng nhà qua một kỳ thiếu.",
+      "dauVong": "một hộ rời họ giữ phiếu bị bác ở lần quay lại bến."
+    },
+    {
+      "id": "C",
+      "ten": "Khi nhà tách làm nhiều ngả",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Các hộ mang giấy phần mình về từng mái. Người trông bến không còn nhận ra một dấu chung, nhưng biết chỗ gặp từng người đã góp. Tờ việc chung để ngỏ cho ai muốn cùng làm lại mùa sau.",
+      "su": "Các hộ tách sổ họ và giữ việc chung theo thỏa thuận riêng.",
+      "dauVong": "một tờ việc chung còn chữ các hộ đã chọn đi đường riêng."
+    }
+  ],
+  "ngoai": "Bến tự đổi phần có sẵn, người giữ sổ chờ chuyến sau."
+}
