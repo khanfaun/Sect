@@ -501,4 +501,11 @@ File hướng dẫn (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) phải có: đị
 
 ## NGƯỜI DÙNG CHỐT ĐỢT 5 (câu 32–33) — làm sau Đ7 (Sửa-H)
 32. CÓ đưa đồ cải căn lên đấu giá thường. Thứ tự lô: đồ càng quý/phẩm càng cao càng xếp về cuối buổi đấu giá ("vật áp trục" xuất hiện sau cùng).
-33. (người dùng chưa hiểu câu hỏi tỉ lệ — đã giải thích lại; chờ trả lời, tạm giữ số hiện tại)
+33. CHỐT: giữ các tỉ lệ hiện tại (dò 35%, bán 50% giá ×3; Ám Hội ×5; kỳ ngộ 4%/tháng).
+34. Tên bậc Thợ mỏ/Phu trạm/Chèo đò: giữ tên máy tự đặt.  35. Vật tư chiêu: làm sau Đ8 hoặc cùng Đ11.
+36. LOGIC CẢI CĂN (rà lại toàn hệ Đ6, làm ở Sửa-H):
+   - Mỗi đồ cải căn có tác dụng riêng. Có ĐỒ DỞM (bị lừa mua, không tác dụng gì; nối với bẫy "kẻ bán đồ giả" có sẵn) và ĐỒ XỊN.
+   - Đồ xịn chia PHẨM; mỗi phẩm cải được tới mức tương ứng, ví dụ: phẩm thấp → tạp/tứ linh căn, cao hơn → tam linh căn, → song linh căn, → Địa linh căn, cao nhất → Thiên linh căn.
+   - Đồ càng xịn tỉ lệ THẤT BẠI càng cao; sở hữu chưa chắc thành công.
+   - Mỗi lần thất bại cộng thêm % thành công cho lần sau (tích lũy, có trần hợp lý). Cân lại với luật "mỗi kiếp chỉ thành công một lần" và "thất bại chờ 1 năm" đang có.
+   - Phẩm càng cao càng hiếm và càng dồn về cuối buổi đấu giá (câu 32).
