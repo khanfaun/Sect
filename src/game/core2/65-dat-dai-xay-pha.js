@@ -54,7 +54,8 @@ function datPha(n,i){const d=datOf(n);const c=d&&d.o[i];const C=datCt(c);if(!C||
   if(c.goc&&datLoi(n)){dbg('dat.chan',{id:n.id,ct:c.ct});return null;}if(c.hu>t0)return null;
   advanceTime(C.pha.h);if(!G.run)return {msg:[]};
   const tam=c.goc&&n.anchor;const ct=c.ct;
-  if(tam){c.hu=W().t+DAT.hu*HM;}else{c.ct=null;d.pha[ct]=(d.pha[ct]||0)+1;if(C.dp)n.dp=0;}
+  if(tam){c.hu=W().t+DAT.hu*HM;}else{c.ct=null;d.pha[ct]=(d.pha[ct]||0)+1;if(C.dp)n.dp=0;
+    if(C.tu){c.cu=ct;c.moc=W().t+(DAT.moc[0]+R()*(DAT.moc[1]-DAT.moc[0]))*HY;}} // Sửa-O câu 76: tự nhiên thì mọc lại
   const P=datPhat(n,c,true);
   dbg('dat.pha',{id:n.id,i,ct,tam:tam?1:0,chu:c.chu?c.chu.k:''});
   const msg=[contentText(tam?'dat.xongPhaTam':'dat.xongPha',[C.n])].concat(P);log(msg[0]);
@@ -63,7 +64,7 @@ function datPha(n,i){const d=datOf(n);const c=d&&d.o[i];const C=datCt(c);if(!C||
 function datXay(n,i,ct){const d=datOf(n);const c=d&&d.o[i];const C=CONG_TRINH[ct],X=C&&C.xay;const r=G.run;
   if(!c||c.ct||!X||!X.noi.includes(n.type))return null;if(X.tu&&isPham())return null;if((r.st||0)<X.st)return null;
   r.st-=X.st;advanceTime(X.h);if(!G.run)return {msg:[]};
-  c.ct=ct;c.goc=0;if(C.dp)n.dp=1;const P=datPhat(n,c,true);if(!c.chu)c.chu={k:'ta'};
+  c.ct=ct;c.goc=0;delete c.cu;delete c.moc;if(C.dp)n.dp=1;const P=datPhat(n,c,true);if(!c.chu)c.chu={k:'ta'};
   dbg('dat.xay',{id:n.id,i,ct,st:X.st});
   const msg=[contentText('dat.xongXay',[C.n])].concat(P);log(msg[0]);
   return {msg,ch:[chip('💎','−'+X.st,contentText('dat.gXay'),'dn'),chip('⏳',durH(X.h),contentText('dat.gXay'),'')]};}

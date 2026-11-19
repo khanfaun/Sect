@@ -928,3 +928,6 @@ Luật: `core2/64-dat-dai.js` (sinh ô, lọc nút), `core2/65-dat-dai-xay-pha.j
 - Ngưỡng quen biết (tự chọn): gặp ở 3 ngày khác nhau, hoặc tiếp xúc sâu (đi cùng, tặng lễ, thiên kiêu), hoặc thiện cảm |fav| ≥ 20.
 - Chưa quen mà 3 năm không gặp lại → xoá (`gapDon`, chạy khi ghi người mới và khi mở Sổ tay). Người giữ vai NP (`r.gapVai`) không bao giờ bị xoá.
 - Bản lưu cũ: mục không có `t` bắt đầu đếm từ lúc tải.
+### O.76 — công trình tự nhiên mọc lại
+- Phá công trình tự nhiên (CONG_TRINH tu:1) ở nơi thường: ô ghi `cu` (mã cũ) và `moc` (lúc mọc lại, sau `DAT.moc` = 20–40 năm). `datMoc` (core2/64, chạy mỗi lần đọc ô) trả công trình về khi tới hạn mà ô còn trống; xây gì lên ô đó (`datXay`) thì xoá hẹn, không mọc. Nhật ký `dat.moc`.
+- Bài `dat_dai` thêm 4 ý; ý "bản lưu cũ: thành đủ dịch vụ" nay đặt giờ về đêm (quỷ thị, Ám Hội chỉ họp đêm) cho khỏi trượt theo giờ.

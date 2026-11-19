@@ -51,6 +51,11 @@ const TESTS = {
     ok(!!run("datPha(DDX_N,DDX_I)"), 'phá được công trình tự nhiên');
     ok(run("!placeActs(DDX_N).some(a=>a.a==='sanbat')&&W().dat[DDX_N.id].pha[DDX_C]===1"), 'phá xong: mất nút săn bắt, có ghi đã phá');
     ok(run("W().t") > t0 && run("NK.count('dat.pha')") > 0, 'phá tốn thời gian, có nhật ký dat.pha');
+    // Sửa-O câu 76: công trình tự nhiên mọc lại sau vài chục năm nếu ô còn trống
+    ok(run("(()=>{const c=W().dat[DDX_N.id].o[DDX_I];return c.cu===DDX_C&&c.moc-W().t>=DAT.moc[0]*HY-1&&c.moc-W().t<=DAT.moc[1]*HY+1})()"), 'phá công trình tự nhiên: hẹn mọc lại sau '+run("DAT.moc.join('–')")+' năm');
+    run("DDX_MT=W().t;W().dat[DDX_N.id].o[DDX_I].moc=W().t+HD");ok(run("!placeActs(DDX_N).some(a=>a.a==='sanbat')"), 'chưa tới hạn: chưa mọc');
+    run("W().t+=2*HD");ok(run("placeActs(DDX_N).some(a=>a.a==='sanbat')&&W().dat[DDX_N.id].o[DDX_I].ct===DDX_C&&!W().dat[DDX_N.id].o[DDX_I].cu")&&run("NK.count('dat.moc')")>0, 'tới hạn: mọc lại, săn bắt dùng được');
+    run("G.run.st=100;datPha(DDX_N,DDX_I);W().dat[DDX_N.id].o[DDX_I].ct='tran_phap';W().dat[DDX_N.id].o[DDX_I].moc=W().t-1;placeActs(DDX_N)");ok(run("W().dat[DDX_N.id].o[DDX_I].ct==='tran_phap'&&!W().dat[DDX_N.id].o[DDX_I].cu"), 'đã xây lên ô đó: không mọc lại');
     // xây động phủ trên đất hoang không chủ
     run(`DDX_H=${all}.find(n=>isWild(n)&&!n.anchor&&!n.dp&&n.state!=='ruin'&&n.id!==DDX_N.id&&W().dat[n.id]&&W().dat[n.id].o.some(c=>!c.ct&&!c.chu));DDX_J=W().dat[DDX_H.id].o.findIndex(c=>!c.ct&&!c.chu)`);
     ok(run("!!DDX_H"), 'có nơi hoang dã còn đất hoang không chủ');
@@ -92,7 +97,7 @@ const TESTS = {
     // bản lưu cũ: chưa có W().dat → sinh khi tải, giữ quán, chợ, nhà, thầy, Ám Hội
     run("delete W().dat;G.run.scene=null");
     run(`DDX_OLD=${all}.find(n=>n.type==='thanh'&&n.state!=='ruin')`);
-    const old = JSON.parse(run("JSON.stringify(placeActs(DDX_OLD).map(a=>a.a))"));
+    const old = JSON.parse(run("(()=>{W().t+=((22-tHour(W().t))%24+24)%24;return JSON.stringify(placeActs(DDX_OLD).map(a=>a.a))})()"));
     ok(['inn','tea','tuu','shop','board','tram','camdo','ghost','amhoi','doilt'].every(a => old.includes(a)), 'bản lưu cũ: thành vẫn đủ quán, chợ, trạm, quỷ thị, Ám Hội ('+old.join()+')');
     ok(run("!!W().dat&&!!W().dat[DDX_OLD.id]"), 'bản lưu cũ: ô đất sinh khi cần');
     run("FEAT.no=1;FEAT.nha=1;delete W().dat");ok(run("(()=>{const L=placeActs(DDX_OLD).map(a=>a.a);return L.includes('vay')&&L.includes('nha')})()"), 'bản lưu cũ (bật nợ, nhà ở): vẫn có người cho vay và nhà ở');run("FEAT.no=0;FEAT.nha=0");

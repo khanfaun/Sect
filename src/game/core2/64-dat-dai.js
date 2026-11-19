@@ -50,7 +50,10 @@ function datChuGan(n,o){const t=n.type;const code=n.anchor,Lc=code&&typeof LOC_N
 // lấy ô của một nút (sinh nếu chưa có). L = danh sách nút CHƯA lọc (nếu có sẵn) để sinh đủ dịch vụ đang có
 function datOf(n,L){const D=datStore();if(!D||!n)return null;let d=D[n.id];
   if(!d||!Array.isArray(d.o)){if(!L){DAT_RAW_ON=1;try{L=placeActs(n);}finally{DAT_RAW_ON=0;}}d=D[n.id]=datGen(n,L);dbg('dat.sinh',{id:n.id,type:n.type,o:d.o.map(c=>c.ct||'-').join(',')});}
-  if(!d.pha)d.pha={};return d;}
+  if(!d.pha)d.pha={};datMoc(n,d);return d;}
+// Sửa-O (câu 76): công trình tự nhiên bị phá (c.cu = mã cũ, c.moc = lúc mọc lại) tự mọc lại nếu ô vẫn trống; đã xây gì lên thì thôi
+function datMoc(n,d){const t=W().t;for(const c of d.o){if(!c.cu)continue;if(c.ct){delete c.cu;delete c.moc;continue;}
+  if(t>=c.moc){c.ct=c.cu;delete c.cu;delete c.moc;dbg('dat.moc',{id:n.id,ct:c.ct});}}}
 // bản lưu cũ / nơi đổi loại: sinh lại ô thì vẫn giữ những gì đã phá (d.pha) và chủ đã đổi
 let DAT_RAW_ON=0;
 {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(DAT_RAW_ON||!feat('dat')||!G.run||!n||n.type==='ai'||n.type==='sao'||!W())return L;
