@@ -548,6 +548,9 @@ Luật `src/game/core2/53-cai-can-do.js`; bảng `CC_DO`, `CC_LV`, `CC_DOCFG` �
 - Huyết Tế → song linh căn (Khuyết, có thủy); Xá Lợi → song (Thường, có thổ/kim); Tẩy Tủy → tạp/tứ (Khuyết); Huyết Mạch Khế → song (Thường, có hệ của thú; khoá `lim:1` để `elSrc` không tự nâng lên Thiên).
 - Rà các đường khác: Địa Mạch Linh Tủy (CC02, nguồn hồi 120 năm) Thiên → Địa (Khuyết, có thổ). Còn ra Thiên: Tàn Hỏa Chủng (CC05, `hoi:0` độc nhất cả thế giới = cơ duyên cực hiếm), Túc căn (chỉ khi kiếp trước đã có Thiên, hạ một phẩm) và đồ phẩm 5. Song có `el` thì cặp tương sinh chứa hệ đó.
 - Bài mới `cc_thien`.
+### I.38 — cộng dồn sau thất bại chỉ trong một kiếp
+- `ccBon` chuyển từ `G.meta.ccBon` sang `G.run.ccBon` (kiếp mới không có → 0). Bản lưu cũ: `migrateX` bỏ `G.meta.ccBon`. Bài mới `cc_bon_kiep`; `cai_can_do` sửa theo.
+- Ghi chú: hai ý đồ dởm trong `cai_can_do` (khảo vật 90% nhìn ra) phụ thuộc chuỗi ngẫu nhiên — chạy theo thứ tự trong `test:rules` thì qua.
 
 ## Đ8 — thế giới neo, vai NPC, thế lực, đồng hồ, thời gian luân hồi, đất ma (HN A.9.2, A.17; C §6–§7; B §14.8–§14.9)
 Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm thế giới), `55-thoi-cuc.js` (đồng hồ), `56-luan-hoi.js` (khoảng luân hồi, tua thập kỷ), `57-dat-ma.js`. Bảng: `content/world/the-gioi-neo.js` (LOC_NEO, LOC_DUONG, LOC_LOI, VAI_NP, THE_LUC, TU_THAY), `content/world/thoi-cuc.js` (THOI_CUC, QUOC_MOI), `content/rules/luan-hoi.js`, `content/rules/dat-ma.js`; chữ `content/text/the-gioi.json` (tg.*, tc.*, lh.*, ma.*).
@@ -668,3 +671,5 @@ Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm th
 | CLK12 | Tiên Nhân Hạ Phàm | một lần | LOC15 |
 | CLK13 | Long Mạch Đứt | 300–600 năm | — |
 | CLK14 | Thiên Lộ Mở | 300–300 năm | LOC15 |
+
+40. (đang giải thích lại)  41. CHỐT: hai lựa chọn ở Bến Vong Xuyên làm ở Đ10 cùng Mộng Ấn.

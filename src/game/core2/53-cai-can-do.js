@@ -1,7 +1,7 @@
 // Sửa-H (câu 32, 36): đồ cải căn có phẩm, đồ dởm, cộng dồn sau thất bại, dị tượng Địa/Thiên, lô cải căn ở đấu giá thường.
 // Bảng CC_DO, CC_LV, CC_DOCFG: content/rules/cai-can.js · chữ: content/text/cai-can.json (khoá ccd.*)
 // Vật trong túi (r.qitems): 'ccd_<p>' thật chưa thẩm định · 'cct_<p>' thật đã thẩm định · 'ccg_<p>' dởm chưa lộ (cùng tên với ccd) · 'ccx_<p>' dởm đã lộ.
-// G.meta.ccBon: phần cộng thêm vào tỉ lệ thành sau mỗi lần hỏng (đồ hay đường), có trần, giữ qua các kiếp; thành công thì về 0.
+// G.run.ccBon: phần cộng thêm vào tỉ lệ thành sau mỗi lần hỏng (đồ hay đường), có trần, chỉ trong một kiếp (Sửa-I câu 38); thành công thì về 0.
 // W().dgCc[nút]={m,mua:{p:1}}: lô đã bán trong buổi đấu giá tháng đó.
 function ccDoQ(k,p){return k+'_'+p;}
 function ccDoParse(q){const m=/^cc([dtgx])_([1-5])$/.exec(String(q||''));return m?{k:m[1],p:+m[2]}:null;}
@@ -11,9 +11,11 @@ for(const p in CC_DO){const D=CC_DO[p];
   CAT.byId[ccDoQ('cct',p)]={id:ccDoQ('cct',p),n:D.n+' '+contentText('ccd.that'),i:D.i,d:contentText('ccd.tip',[contentText('ccd.lv.'+p)]),use:contentText('ccd.use')};
   CAT.byId[ccDoQ('ccx',p)]={id:ccDoQ('ccx',p),n:D.n+' '+contentText('ccd.gia'),i:'🪨',d:contentText('ccd.giaTip')};}
 // ---------- cộng dồn sau thất bại ----------
-function ccBon(){return Math.min(CC_DOCFG.bonMax,Math.max(0,+((G.meta&&G.meta.ccBon)||0)));}
-function ccBonFail(){if(!G.meta)return;G.meta.ccBon=Math.round(Math.min(CC_DOCFG.bonMax,ccBon()+CC_DOCFG.bon)*1000)/1000;dbg('cc.bon',{v:G.meta.ccBon});}
-function ccBonOk(){if(G.meta)G.meta.ccBon=0;}
+function ccBon(){const r=G.run;return Math.min(CC_DOCFG.bonMax,Math.max(0,+((r&&r.ccBon)||0)));}
+function ccBonFail(){const r=G.run;if(!r)return;r.ccBon=Math.round(Math.min(CC_DOCFG.bonMax,ccBon()+CC_DOCFG.bon)*1000)/1000;dbg('cc.bon',{v:r.ccBon});}
+function ccBonOk(){if(G.run)G.run.ccBon=0;}
+// Sửa-I câu 38: cộng dồn chỉ trong một kiếp (G.run.ccBon); bản lưu cũ còn G.meta.ccBon thì bỏ.
+{const _mx=migrateX;migrateX=function(d){d=_mx.apply(this,arguments);if(d&&d.meta&&'ccBon' in d.meta)delete d.meta.ccBon;return d;};}
 function ccOkP(p){return Math.min(0.95,p+ccBon());}
 // ---------- dị tượng khi cải thành Địa / Thiên linh căn; tông môn kinh động ----------
 function ccRootFx(ch){const r=G.run;const k=tlFxKind(r.root);if(!k)return;r.tlFx={k,id:Date.now()+Math.floor(Math.random()*1e3),cach:'caican'};
