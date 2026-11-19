@@ -1,7 +1,8 @@
-// Sửa-H (câu 32, 36): đồ cải căn có phẩm, đồ dởm, cộng dồn sau thất bại, dị tượng Địa/Thiên, (lô ở đấu giá: câu 32).
+// Sửa-H (câu 32, 36): đồ cải căn có phẩm, đồ dởm, cộng dồn sau thất bại, dị tượng Địa/Thiên, lô cải căn ở đấu giá thường.
 // Bảng CC_DO, CC_LV, CC_DOCFG: content/rules/cai-can.js · chữ: content/text/cai-can.json (khoá ccd.*)
 // Vật trong túi (r.qitems): 'ccd_<p>' thật chưa thẩm định · 'cct_<p>' thật đã thẩm định · 'ccg_<p>' dởm chưa lộ (cùng tên với ccd) · 'ccx_<p>' dởm đã lộ.
 // G.meta.ccBon: phần cộng thêm vào tỉ lệ thành sau mỗi lần hỏng (đồ hay đường), có trần, giữ qua các kiếp; thành công thì về 0.
+// W().dgCc[nút]={m,mua:{p:1}}: lô đã bán trong buổi đấu giá tháng đó.
 function ccDoQ(k,p){return k+'_'+p;}
 function ccDoParse(q){const m=/^cc([dtgx])_([1-5])$/.exec(String(q||''));return m?{k:m[1],p:+m[2]}:null;}
 for(const p in CC_DO){const D=CC_DO[p];
@@ -78,3 +79,23 @@ function ccLuaP(id){const L=CC_DOCFG.luaP;const h=ncHash('lua|'+id+'|'+(G.run.ki
 {const _cm=ccMonth;ccMonth=function(){_cm.apply(this,arguments);const r=G.run;if(!r||r.ccOk||!rootKnown(r)||ccCurLv(r)>=5)return;
   if(!chance(CC_DOCFG.ky))return;const ps=Object.keys(CC_DO).filter(p=>CC_DO[p].lv>ccCurLv(r));if(!ps.length)return;
   const p=+wpick(ps,p=>CC_DO[p].ky);ccDoAdd(p,0,'ky');log(contentText('ccd.kyLog',[CC_DO[p].n]));note(contentText('cc.kyNote',[CC_DO[p].n]),'up');};}
+// ---------- đấu giá thường: lô cải căn, vật càng quý càng ra cuối buổi ----------
+function dgCcLots(nid,m){const L=[];if(nid==null)return L;m=m==null?ncMonth():m;
+  for(const p in CC_DO)if(CC_FORCE===1||ncHash('dgcc|'+nid+'|'+m+'|'+p)<CC_DO[p].dg)L.push(+p);return L;}
+function dgCcBought(nid,p){const w=W();const T=w.dgCc&&w.dgCc[nid];return !!(T&&T.m===ncMonth()&&T.mua&&T.mua[p]);}
+function dgCcGia(p){return Math.round(CC_DO[p].st*(1+0.15*(+p)));}
+// thứ tự các lô trong buổi (ra trước → ra sau): món nhỏ, lô cải căn phẩm thấp tăng dần, món chót; Địa/Thiên là vật áp trục, ra sau cùng
+function dgLots(nid){const cc=dgCcLots(nid);const lo=cc.filter(p=>p<=3).sort((a,b)=>a-b),ap=cc.filter(p=>p>3).sort((a,b)=>a-b);
+  return ['nho'].concat(lo.map(p=>'cc'+p),['chot'],ap.map(p=>'cc'+p));}
+function dgLotVal(k){if(k==='nho')return 30;if(k==='chot')return 55;return dgCcGia(+k.slice(2));}
+{const E=EVMAP.dau_gia;if(E&&Array.isArray(E.c)){
+  const find=f=>E.c.find(c=>c.e&&f(c.e));const chot=find(e=>e.pill),nho=find(e=>e.relic!=null),rest=E.c.filter(c=>c!==chot&&c!==nho);
+  const lot=p=>({i:CC_DO[p].i,l:'{$cc'+p+'}',t:contentText('ccd.dgT',[CC_DO[p].n]),e:{dgCc:p},
+    req:r=>{const at=r&&r.at;return !r.pham&&dgCcLots(at).includes(p)&&!dgCcBought(at,p)&&ltGet(0)>=dgCcGia(p)&&bagCap()-bagStacks()>0;}});
+  E.c=[nho].concat([1,2,3].map(lot),[chot],[4,5].map(lot),rest).filter(Boolean);
+  const _v=E.v;E.v=function(r){const v=_v?_v.apply(this,arguments):{};for(const p in CC_DO)v['cc'+p]=contentText(p>3?'ccd.dgApTruc':'ccd.dgLo',[CC_DO[p].n,dgCcGia(p)]);return v;};}}
+{const _ae=applyE;applyE=function(e,v){if(!e||e.dgCc==null)return _ae.apply(this,arguments);const p=+e.dgCc;const r=G.run;const nid=r.at;const g=dgCcGia(p);const ch=[];
+  const e2=Object.assign({},e);delete e2.dgCc;const base=Object.keys(e2).length?_ae.call(this,e2,v):[];
+  if(ltGet(0)<g)return base;ltAdd(0,-g,'daugia');ch.push(ltChip(0,-g));ccDoAdd(p,0,'daugia');ch.push(chip(CC_DO[p].i,CC_DO[p].n,contentText('ccd.dgTip'),'up'));
+  const w=W();w.dgCc=w.dgCc||{};const m=ncMonth();if(!w.dgCc[nid]||w.dgCc[nid].m!==m)w.dgCc[nid]={m,mua:{}};w.dgCc[nid].mua[p]=1;dbg('ccd.dg',{p,g});
+  return (base||[]).concat(ch);};}

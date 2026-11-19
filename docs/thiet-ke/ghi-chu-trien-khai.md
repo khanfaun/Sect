@@ -20,7 +20,7 @@ Một việc "giết người vô tội" cố ý ≈ 15 điểm nghiệp chướ
 Hoàn cảnh đầu thai đọc theo **bậc ròng = bậc thiện duyên − bậc nghiệp chướng** (−5..5) lúc chết:
 
 | Bậc ròng | −5 | −4 | −3 | −2 | −1 | 0 | 1 | 2 | 3 | 4 | 5 |
-|---|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|---|---|---|
 | Bấp bênh (xuất thân khốn khó, tiền ×0,75) | 70% | 60% | 50% | 40% | 32% | 25% | 20% | 15% | 12% | 10% | 10% |
 | Được nâng đỡ (xuất thân khá giả, tiền ×1,25) | 5% | 8% | 10% | 15% | 20% | 25% | 32% | 40% | 45% | 50% | 55% |
 
@@ -510,27 +510,30 @@ File hướng dẫn (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) phải có: đị
    - Mỗi lần thất bại cộng thêm % thành công cho lần sau (tích lũy, có trần hợp lý). Cân lại với luật "mỗi kiếp chỉ thành công một lần" và "thất bại chờ 1 năm" đang có.
    - Phẩm càng cao càng hiếm và càng dồn về cuối buổi đấu giá (câu 32).
 
-## Sửa-H — câu 36 (đợt 5)
+## Sửa-H — câu 36, 32 (đợt 5)
 Luật `src/game/core2/53-cai-can-do.js`; bảng `CC_DO`, `CC_LV`, `CC_DOCFG` ở `content/rules/cai-can.js`; chữ `ccd.*` trong `content/text/cai-can.json`.
 ### H.36 — logic cải căn
 - **Đồ cải căn** (dùng thẳng từ túi, mỗi món một ô): năm phẩm, mỗi phẩm cải tới một mức (`CC_LV`: vô 0 · tạp 1 · tứ 1,5 · tam 2 · song/biến dị 3 · Địa/cực 4 · Thiên 5). Căn đang có bằng hoặc cao hơn mức của món thì bị từ chối (không mất đồ).
-  | phẩm | tên | cải ra | thành |
-  |---|---|---|---|
-  | 1 | Tẩy Mạch Đan | tạp/tứ (vô căn), tứ (tạp) | 75% |
-  | 2 | Tam Nguyên Dịch Căn Đan | tam | 60% |
-  | 3 | Lưỡng Nghi Tạo Căn Đan | song | 42% |
-  | 4 | Địa Nguyên Hóa Căn Lộ | Địa | 22% |
-  | 5 | Thiên Đạo Hóa Căn Quả | Thiên | 8% |
-  Hỏng: mất đồ, chờ một năm (`CC_CFG.cho`), hậu quả tăng theo phẩm (suy nhược, thương, mất thọ; phẩm 5 có 15% chết).
+  | phẩm | tên | cải ra | thành | lô/buổi đấu giá | giá khởi điểm (Hạ) |
+  |---|---|---|---|---|---|
+  | 1 | Tẩy Mạch Đan | tạp/tứ (vô căn), tứ (tạp) | 75% | 30% | 69 |
+  | 2 | Tam Nguyên Dịch Căn Đan | tam | 60% | 12% | 234 |
+  | 3 | Lưỡng Nghi Tạo Căn Đan | song | 42% | 4% | 870 |
+  | 4 | Địa Nguyên Hóa Căn Lộ | Địa | 22% | 0,4% | 4.800 |
+  | 5 | Thiên Đạo Hóa Căn Quả | Thiên | 8% | 0,02% | 26.250 |
+  Hỏng: mất đồ, chờ một năm (`CC_CFG.cho`), hậu quả tăng theo phẩm (suy nhược, thương, mất thọ; phẩm 5 có 15% chết). Thiên: một buổi đấu giá chỉ ~1,6/100.000 ra được Thiên linh căn.
 - **Mỗi kiếp một lần** dùng chung với các đường (`r.ccOk`); dùng đồ khi đang theo một đường thì đường đó dừng (không tính là hỏng).
 - **Cộng dồn sau thất bại**: `G.meta.ccBon` +5%/lần hỏng (đồ hoặc nghi thức của đường), trần 25%, giữ qua các kiếp, thành công thì về 0. Tỉ lệ kẹp 95%. Hộp xác nhận nghi thức ghi tỉ lệ đã cộng và một câu "những lần hỏng trước…".
 - **Đồ dởm**: mã `ccg_<p>` cùng tên với đồ thật; dùng thì mất, không tác dụng, không tính là hỏng (không chờ, không cộng dồn). Bẫy "kẻ bán đồ giả" ở bước kiểm chứng giờ trao một món dởm (phẩm rao theo `luaP`, băm). Lúc nhận đồ dởm: khảo vật / nhận dược ≥ 25 có khả năng nhìn ra ngay (tới 90% ở mức 100) → thành `ccx_<p>` "(đồ giả)", không dùng được. **Thẩm định**: hộp Cơ duyên ở thành / trấn / thành ma tu có nút "Nhờ người thẩm định" (2 giờ; phàm 300 xu, tu sĩ 3 Hạ phẩm): thật → "(đã thẩm định)", giả → "(đồ giả)"; rèn khảo vật một chút.
-- **Nguồn đồ thật**: kỳ ngộ hiếm (`CC_DOCFG.ky` 0,2%/tháng khi đã biết căn và chưa cải thành; tỉ trọng phẩm theo `ky`). Chưa đưa đồ lên Ám Hội / dò hỏi.
+- **Nguồn đồ thật**: đấu giá thường (câu 32), kỳ ngộ hiếm (`CC_DOCFG.ky` 0,2%/tháng khi đã biết căn và chưa cải thành; tỉ trọng phẩm theo `ky`). Chưa đưa đồ lên Ám Hội / dò hỏi.
 - **Dị tượng Địa / Thiên**: cải thành Địa hoặc Thiên (đồ hay đường) đặt `r.tlFx` (dị tượng toàn màn như trắc linh, `cach:'caican'`), ghi biên niên; tông đang ở (hoặc đang đứng ở sơn môn) kinh động: thiện cảm trưởng lão, đệ tử, tông môn như C.18–19.
 - Sửa kèm: `ccMakeRoot` ra Địa linh căn thì hệ là một cặp tương sinh.
+### H.32 — lô cải căn ở đấu giá thường
+- Sự kiện `dau_gia` có thêm năm lô (mỗi phẩm một lô, có hay không băm theo nơi + tháng, `CC_DO[p].dg`), chỉ hiện khi đủ linh thạch và túi còn ô; mỗi lô bán một lần trong tháng (`W().dgCc`). Đấu giá là đồ thật.
+- **Thứ tự lô** (`dgLots`): món nhỏ → lô cải căn phẩm 1–3 tăng dần → món chót → **vật áp trục** Địa / Thiên ra sau cùng. Lựa chọn trong sự kiện xếp đúng thứ tự này.
 ### Kiểm tra
-- Bài mới `cai_can_do` (21 ý); `cai_can` vẫn qua (mua đồ giả giờ còn được thêm món dởm). Thêm vào `npm run test:rules`.
-- Kết quả: luật 766 ý đạt (mốc 744); giao diện 160 đạt.
+- Bài mới `cai_can_do` (29 ý: 21 ý cải căn, 8 ý đấu giá); `cai_can` vẫn qua (mua đồ giả giờ còn được thêm món dởm). Thêm vào `npm run test:rules`.
+- Kết quả: luật 773 ý đạt (mốc 744; 766 sau câu 36); giao diện 160 đạt.
 ### Còn dở / hỏi lại
 - Các đường cũ vẫn giữ kết quả của HN (vd Huyết Tế, Xá Lợi, Tẩy Tủy, Huyết Mạch Khế ra **Thiên** linh căn phẩm Khuyết/Thường, nguồn không giới hạn) — có nên hạ xuống cho khớp luật "Thiên cực hiếm" không?
 - Đồ cải căn chưa có ở Ám Hội / dò hỏi; chưa có bài giao diện riêng cho đồ cải căn; bot chưa biết dùng (không chạy bot).

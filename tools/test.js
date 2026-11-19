@@ -1427,6 +1427,18 @@ const TESTS = {
     run(`G.run.at=${sn};G.run.sfav={};ccDoAdd(4,0);CC_FORCE=1`);run("bagUse('vccd_4',1)");run("CC_FORCE=null");
     ok(run("G.run.root.id")==='dia'&&run("G.run.root.els.length")===2&&run("!!G.run.tlFx&&G.run.tlFx.k==='dia'&&G.run.tlFx.cach==='caican'"), 'tam → Địa linh căn (một cặp tương sinh), có dị tượng trắc linh');
     ok(run("Object.values(G.run.sfav||{}).some(v=>v>0)")&&run("NK.count('cc.fx')")===1, 'tông môn kinh động: thiện cảm tăng');
+    // đấu giá thường: lô cải căn, vật càng quý càng ra cuối buổi
+    run("CC_FORCE=1");ok(run("dgLots(1).join()")==='nho,cc1,cc2,cc3,chot,cc4,cc5', 'thứ tự lô: '+run("dgLots(1).join(' → ')"));
+    ok(run("(()=>{const L=dgLots(1).filter(k=>k!=='nho'&&k!=='chot');return L.every((k,i)=>!i||dgLotVal(k)>dgLotVal(L[i-1]))})()"), 'lô cải căn ra sau thì quý hơn');
+    ok(run("EVMAP.dau_gia.c.map(c=>c.e.dgCc?'cc'+c.e.dgCc:c.e.pill?'chot':c.e.relic!=null?'nho':'x').filter(k=>k!=='x').join()")==='nho,cc1,cc2,cc3,chot,cc4,cc5', 'lựa chọn trong sự kiện đấu giá theo đúng thứ tự lô');
+    const tc=run("W().regions.flatMap(R=>R.nodes).find(n=>(n.type==='thanh'||n.type==='ma')&&n.state!=='ruin').id");
+    const sev="(()=>{const f=contentTriggerOk;contentTriggerOk=()=>true;try{G.run.scene=null;return startEvent('dau_gia')}finally{contentTriggerOk=f}})()";
+    run(`G.run.at=${tc};G.run.st=2000;G.run.ccOk=0`);run(sev);
+    const vis=run("visChoices(G.run.scene).map(x=>x.c.e.dgCc||0).filter(Boolean).join()");ok(vis==='1,2,3', 'đủ linh thạch cho phẩm 1–3 thì thấy ba lô ('+vis+')');
+    const i3=run("visChoices(G.run.scene).find(x=>x.c.e.dgCc===3).i");const st0=run("ltGet(0)");run(`choose(${i3})`);
+    ok(run("G.run.qitems.includes('ccd_3')")&&run("ltGet(0)")===st0-run("dgCcGia(3)")&&run(`dgCcBought(${tc},3)`), 'mua lô phẩm 3: trừ '+run("dgCcGia(3)")+' linh thạch, đồ thật vào túi');
+    run(sev);ok(!run("visChoices(G.run.scene).some(x=>x.c.e.dgCc===3)"), 'lô đã bán không ra lại trong tháng');
+    run("CC_FORCE=null");ok(run(`W().regions.flatMap(R=>R.nodes).filter(n=>dgCcLots(n.id).length===0).length>0`), 'không phải buổi nào cũng có lô cải căn');
   },
   // Sửa-G câu 31: vật tư cải căn chiếm ô túi đồ; túi đầy thì gửi lại tại chỗ; bản lưu cũ r.ccVt chuyển vào túi
   cai_can_tui() {
