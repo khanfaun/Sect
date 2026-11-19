@@ -60,6 +60,34 @@ function MenhThu() {
     </div>))}</div>;
 }
 
+// Đ9 (câu 40): người đã gặp — tên hiện tại của vai, nơi, thiện cảm bằng chữ, còn sống / đã mất, người kế
+function NguoiDaGap() {
+  const T = PS.contentText, L = (PS.soVaiView && PS.soVaiView()) || [];
+  if (!L.length) return <p className="empty so-ng">{T('so.vRong')}</p>;
+  return <div className="rows so-ng">{L.map(x => (
+    <div key={x.ma} className={'row so-vai' + (x.song ? '' : ' mat')}>
+      <span className="r-i">{x.song ? '👤' : '🕯️'}</span>
+      <span className="r-t"><b>{x.ten}</b>
+        <small>{[x.vai, x.noi, x.tinh, x.qh].filter(Boolean).join(' · ')}</small>
+        {x.ke && <small>{x.ke}</small>}
+        <small className="dim">{x.gap}</small>
+      </span>
+    </div>))}</div>;
+}
+
+// Đ9 (câu 40): mười thế lực — tình trạng bằng chữ, người đứng đầu, quan hệ / danh tiếng với mình, sổ cống hiến
+function TheLuc() {
+  const T = PS.contentText, L = (PS.soFaView && PS.soFaView()) || [];
+  return <div className="rows so-fa">{L.map(x => (
+    <div key={x.id} className={'row so-the-luc' + (x.diet ? ' mat' : '')}>
+      <span className="r-i">🏯</span>
+      <span className="r-t"><b>{x.n}</b>
+        <small>{[x.noi, x.trang, x.chu ? T('so.faChu', [x.chu]) : T('so.faKhongChu')].join(' · ')}</small>
+        <small>{[x.qh, x.danh ? T('so.faDanh', [x.danh]) : '', x.cong].filter(Boolean).join(' · ')}</small>
+      </span>
+    </div>))}</div>;
+}
+
 const Dong = ({ a, t }) => <p><span>{a}</span>{t}</p>;
 
 export function SoTay() {
@@ -67,7 +95,7 @@ export function SoTay() {
   const r = G.run, w = PS.W();
   // Đ8: Sử lược (chuyện lớn của thế giới, kể cả khi người chơi vắng mặt) — chỉ hiện khi đã có
   const TY = (PS.tuyenView && PS.tuyenView()) || [];
-  const TABS = TABS0.concat(TY.length ? [['ty', PS.contentText('ty.the')]] : [], ccCo() ? [['cc', 'Cơ duyên']] : [], (w.suLuoc || []).length ? [['su', 'Sử lược']] : []);
+  const TABS = TABS0.concat(TY.length ? [['ty', PS.contentText('ty.the')]] : [], [['ng', PS.contentText('so.theNg')], ['fa', PS.contentText('so.theFa')]], ccCo() ? [['cc', 'Cơ duyên']] : [], (w.suLuoc || []).length ? [['su', 'Sử lược']] : []);
   let tab = UI.tab.journal || 'quest'; if (!TABS.some(t => t[0] === tab)) tab = 'quest';
   let body = null;
   if (tab === 'aff') body = <ThienHa />;
@@ -87,6 +115,8 @@ export function SoTay() {
   }
   if (tab === 'cc') body = <CoDuyen />;
   if (tab === 'ty') body = <MenhThu />;
+  if (tab === 'ng') body = <NguoiDaGap />;
+  if (tab === 'fa') body = <TheLuc />;
   if (tab === 'su') {
     const C = (w.suLuoc || []).slice().reverse(), A = (PS.clkView && PS.clkView()) || [];
     body = <div className="su-luoc">

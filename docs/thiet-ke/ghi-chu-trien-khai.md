@@ -126,7 +126,8 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
 - Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-M.
 - Xong thêm: Đ9.1 (bộ máy tuyến, schema, công cụ kiểm `npm run content:tuyen`, tuyến mẫu OR01, bài `menh_tuyen`) và Đ9.0 (docs/content/HUONG-DAN-GPT-VIET-TUYEN.md) — xem mục Đ9.1 cuối tệp.
-- Tiếp theo: người dùng đưa GPT viết theo lô (lô 1: OR02–OR04), Claude kiểm + rà mẫu, ghép. Thẻ "Mệnh thư" trong Sổ tay (giao diện) chưa làm.
+- Xong Đ9 (Đ9.1–Đ9.4): 45 tuyến xuất thân + 9 đại lộ (GPT viết) đã ghép và rà bằng mô phỏng; thẻ Mệnh thư, Người đã gặp, Thế lực trong Sổ tay; bài `menh_tuyen_d94`, `tuyen_ra_soat`, `so_tay_nv` — xem mục "Đ9.2–Đ9.4" cuối tệp.
+- Tiếp theo: Đ10. GPT sửa lời văn theo docs/content/GUI-GPT/sua-sau-ra-soat.md (không gấp).
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
 ## NGƯỜI DÙNG CHỐT 15 CÂU (việc phải làm lại/bổ sung trước khi làm Đ5.4)
@@ -834,3 +835,14 @@ THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuy�
 
 56. A: hạn tạm giữ chồng vật liệu tính từ lần vào đầu tiên (giữ như đang làm).
 57. A: NPC bán ở Ám Hội chỉ nhận pháp bảo hoặc vật cùng loại danh sách (giữ).
+
+## Đ9.2–Đ9.4 — rà 54 tuyến, Sổ tay người đã gặp + thế lực, bài menh_tuyen hoàn chỉnh
+- Công cụ `node tools/mo-phong-tuyen.js [OR02 …]`: dò tĩnh mọi đường chọn (đại lộ chạy cả hai kiểu: đủ hồi 1 / bỏ hồi 1), rồi chạy thật mỗi kết bằng `tuyenTick/tuyenGap/kyPick`; báo kết không tới được, lựa chọn không bao giờ mở, vật không ai trao, phàm + cảnh giới, chữ còn mã, tin đồn quá xa so với hạn, vai giao việc ở nơi khác, đại lộ giống chữ tuyến xuất thân (cụm ba chữ). Kết quả: 162/162 kết tới được, 252/252 đường chạy thật đạt, 0 lỗi nội dung; 1 cảnh báo (OR07 N2 NP08 giao việc ở LOC12).
+- Lỗi bộ máy tìm ra và đã sửa (core2/59):
+  1. Bản đồ rất rộng (LOC01→LOC02 đi bộ phàm nhân ~1 năm), 112 nút có hạn 6–12 tháng không thể tới kịp → hạn mềm cộng thời gian đi bộ từ chỗ đứng tới nơi hẹn lúc nút mở (`tyDuongT`, trần `TY_CFG.duongMax`=36 tháng).
+  2. Tin đồn chỉ hiện khi sang tháng mà đang đứng yên ngoài bản đồ (đang mở thẻ địa điểm thì không) → tới điểm cuối của chặng thì gặp ngay (gộp với hook "hoãn khi đi đường" của nhánh chính; lúc `travelTick` gọi `arrive` ở điểm cuối `r.moving` vẫn còn nên coi seg cuối là đã dừng); thẻ địa điểm đang mở vẫn chặn lời mời (không chen ngang).
+  3. Tin đồn chưa từng đưa lời mời thì Mệnh thư không có nút mở → `tyMoDuoc`: nút đang mở, chưa quá hạn, đứng đúng nơi là mở được.
+- Đọc mẫu: lời văn đại lộ khô, trừu tượng; vài câu tuyến xuất thân tối nghĩa → danh sách cho GPT ở docs/content/GUI-GPT/sua-sau-ra-soat.md (không sửa tệp tuyến).
+- Sổ tay (câu 40): `core2/63-so-tay-nhan-vat.js`. `r.gapVai={NPxx:{doi,ten,y,how}}` ghi khi lời mời tuyến hiện ra (người gọi + mọi `{NPxx}` trong đoạn mở, người còn sống) và khi thầy ở nơi neo dạy (`tuThay`). `soVaiView()`: tên (người hiện giữ vai, hoặc tên người đã gặp nếu người ấy mất), vai, nơi, còn sống/đã mất, thiện cảm bằng chữ (`favLv`), người kế hoặc vật chứng còn lại. `r.faQh` cộng `e.fa` của lựa chọn tuyến. `soFaView()`: 10 thế lực, tình trạng bằng chữ, người đứng đầu, quan hệ (góp sức / tổn hại / chưa dính dáng), tiếng ở căn cứ (`danhName`), sổ cống hiến (`faCong`). Không số nghiệp. Giao diện: thẻ "Người đã gặp", "Thế lực" trong Sổ tay (src/react/bang/SoTay.jsx, bảng `journal` đã đăng ký). Chữ `so.*` trong content/text/menh-tuyen.json.
+- Bài: luật `menh_tuyen_d94` (15 ý: cả 45 xuất thân bỏ mặc → đứng ngoài không kẹt; người giao việc chết → đoạn thay thế; hạn cộng đường; tới nơi gặp ngay; đại lộ hồi 2, đổi một lần mỗi kiếp, kiếp mới đổi lại được), `tuyen_ra_soat` (4 ý, gọi mo-phong-tuyen), `so_tay_nv` (8 ý); giao diện `so_tay_nv`. Cả ba bài luật đã thêm vào `test:rules`.
+- Còn dở: "đã gặp" mới ghi qua tuyến và thầy dạy (chưa có NPC vai đi lại trên bản đồ); bộ kiểm vẫn chưa so mục tiêu đại lộ với xuất thân bằng nghĩa (chỉ cùng người + nơi và giống chữ).

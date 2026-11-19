@@ -433,6 +433,19 @@ const TESTS = {
     ok(await ev(p, () => !!G.run.scene&&/^tuyen:/.test(G.run.scene.ev||'')&&!UI.panel), 'bấm mở lại: hiện lời mời, đóng Sổ tay');
     await ev(p, () => {G.run.scene=null;delete G.run.arc;render();});
   },
+  // Đ9 câu 40: Sổ tay — thẻ Người đã gặp và Thế lực
+  async so_tay_nv(p) {
+    await ev(p, () => {const r=G.run;r.origin='nong';delete r.arc;delete r.gapVai;r.scene=null;UI.modal=null;tuyenTick();W().t+=HM;tuyenTick();tuyenGap(true);r.scene=null;
+      UI.panel='journal';UI.tab.journal='ng';render();});
+    await p.waitForTimeout(150);
+    const ten = await ev(p, () => vaiNow('NP01').ten);
+    const d = await ev(p, () => (document.querySelector('.so-ng')||{}).innerText||'');
+    ok(d.includes(ten) && /còn sống/.test(d) && /Xa lạ|Quen biết|Thân thiện/.test(d), 'Sổ tay thẻ Người đã gặp: '+d.replace(/\s+/g,' ').slice(0,120));
+    await ev(p, () => {UI.tab.journal='fa';render();});await p.waitForTimeout(150);
+    const f = await ev(p, () => ({n:document.querySelectorAll('.so-fa .so-the-luc').length,t:(document.querySelector('.so-fa')||{}).innerText||''}));
+    ok(f.n===10 && /sổ cống hiến/.test(f.t) && /đang vững/.test(f.t) && !/nghiệp/i.test(f.t), 'Sổ tay thẻ Thế lực: đủ mười, có tình trạng và sổ cống hiến');
+    await ev(p, () => {UI.panel=null;G.run.scene=null;delete G.run.arc;render();});
+  },
   // Đ8: Sổ tay thẻ Sử lược — chuyện thế giới khi vắng mặt, đồng hồ đang diễn ra
   async su_luoc(p) {
     await ev(p, () => {const w=W();w.suLuoc=[{y:1200,t:'Thế kỷ thứ ba: chuyện cũ.',k:'gop'},{y:1250,t:'Lương Kinh thất thủ; triều mới do một phe lập.',k:'clk'}];const s=w.thoiCuc.CLK07;s.pha=2;s.tPha=tYear(w.t);
