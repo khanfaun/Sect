@@ -42,7 +42,7 @@ const TESTS = {
     run("G.run.scene=null");
     ok(run("truyStart('tu',{d:-2})")===null, 'địch kém hai cảnh giới: không đuổi');
     run("TRUY.loai.tu.ngay=[5,5];G.run.truy=null;truyStart('tu',{d:0});TK_A=G.run.truy.until-W().t;G.run.truy=null;truyStart('tu',{d:3});TK_B=G.run.truy.until-W().t");
-    ok(Math.abs(run("TK_B/TK_A")-2.5)<1e-6, 'địch mạnh hơn ba bậc: đuổi dai gấp 2,5 lần');
+    ok(Math.abs(run("TK_B/TK_A")-1.75)<1e-6, 'địch mạnh hơn ba bậc: đuổi dai gấp 1,75 lần');
     ok(run("truyP({k:'tu',d:3})>truyP({k:'tu',d:0})"), 'địch mạnh hơn: dễ chặn được hơn');
     run("G.run.realm=2;G.run.hide=null");const p0=run("truyP({k:'tu',d:0})");run("G.run.hide=1");
     ok(run("hideOn()")&&run("truyP({k:'tu',d:0})")<p0, 'che giấu tu vi: khó bị chặn hơn');
@@ -84,6 +84,17 @@ const TESTS = {
     run("G.run.truy=null;FEAT.no=1;G.run.bac=-5000;G.run.noTra={t0:W().t,han:W().t+HM,lan:1};noTruyNa(G.run)");ok(run("G.run.truy&&G.run.truy.k")==='no', 'truy nã vì nợ: sai dịch truy đuổi');
     run("G.run.bac=0;G.run.noTra=null;truyCheck()");ok(run("!G.run.truy"), 'trả hết nợ: sai dịch thôi đuổi');
     // bản lưu cũ
+    // Sửa-L câu 50: hạn truy tính bằng năm, dò thưa
+    run("Object.assign(TRUY,JSON.parse(TRUY_BK));G.run.truy=null;G.run.scene=null;truyStart('ke',{n:'Kẻ thù',d:0})");
+    ok(run("(G.run.truy.until-W().t)/HD")>=365*5, 'kẻ thù: truy ít nhất năm năm');
+    ok(run("TRUY.loai.thu.ngay[0]")>=365&&run("TRUY.loai.ke.ngay[1]")>=365*9, 'yêu thú tối thiểu một năm, kẻ thù tới cả chục năm');
+    ok(run("Object.values(TRUY.loai).every(L=>L.gian[0]>=240)"), 'mỗi lần dò cách nhau ít nhất mười ngày');
+    // Sửa-L câu 51: bị chặn giữa đường, đánh thắng/chạy tiếp xong vẫn đứng yên tới khi bấm Đi tiếp
+    run(`G.run.truy=null;G.run.scene=null;G.run.halt=false;travelTo(${far});G.run.dest=${far};TK_S=edgeLen(G.run.moving.path[0],G.run.moving.path[1])/walkSpeed();truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});TRUY.loai.tac.chan=1;G.run.truy.nx=W().t+TK_S*0.5;G.run.kyT=W().t;G.run.tmT=W().t;travelTick(TK_S*20)`);
+    run("TRUY.chay.goc=1;TRUY.chay.max=1;kyPick(1);G.run.scene=null;if(G.run.moving)G.run.moving.halt=0;advanceTime(1)");
+    ok(run("G.run.halt===true&&!!G.run.moving"), 'chạy tiếp xong: vẫn đứng yên giữa đường (chờ bấm Đi tiếp)');
+    run("G.run.scene=null;truyChan();kyPick(0);G.run.scene.over='win';combatContinue();G.run.scene=null");
+    ok(run("G.run.halt===true&&!!G.run.moving"), 'đánh thắng xong: vẫn đứng yên giữa đường');
     run("delete G.run.truy;G.run.scene=null;advanceTime(5)");ok(run("!G.run.truy&&truyOn()===false&&truyTip()===''"), 'bản lưu cũ (không có r.truy): chạy bình thường');
     } finally { run("Object.assign(TRUY,JSON.parse(TRUY_BK));FEAT.truy=0;FEAT.no=0"); }
   },

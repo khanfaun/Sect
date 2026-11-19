@@ -542,6 +542,9 @@ const TESTS = {
     await p.waitForTimeout(150);
     ok(await ev(p, () => !G.run.truy && !document.querySelector('.wi.truy')), 'thắng: hết bị truy, biểu tượng tắt');
     ok(await ev(p, () => NK.count('truy') > 0), 'có nhật ký truy.*');
+    await ev(p, () => {if(G.run.scene&&G.run.scene.type!=='combat')G.run.scene=null;render();});
+    await p.waitForTimeout(400);
+    ok(await ev(p, () => G.run.halt===true&&!!G.run.moving&&!!document.querySelector('[data-act="goOn"]')), 'sau trận vẫn đứng giữa đường, có nút Đi tiếp (câu 51)');
     await ev(p, () => {TRUY.loai.tac.chan=0.4;});
     ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
   },
