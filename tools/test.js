@@ -45,7 +45,7 @@ const TESTS = {
     run("(()=>{const r=G.run;r.pham=1;r.wounds=[];r.maT=W().t;const t0=r.tamma||0;W().t+=20*HD;timeHooks(20*HD);})()");
     ok(run("wounds().length")>0&&run("NK.count('ma.nhiem')")>0, 'phàm nhân ở Ma vực hai mươi ngày: nhiễm ma khí (thương, tâm ma)');
     // hồi theo thế kỷ
-    run("vyRun(600)");ok(run("W().maVuc.length")===0||run("W().maVuc.every(z=>z.bac>=1)"), 'sáu trăm năm: hết Ma vực');
+    run("vyRun(600)");ok(run("W().maVuc.length")===0||run("W().maVuc.every(z=>z.bac>=1||maRate(z,W())<MA_CFG.hoi)"), 'sáu trăm năm: hết Ma vực (trừ khu có ma tông gần làm chậm)');
     run("vyRun(2900)");ok(run("W().maVuc.length")===0, 'vài ngàn năm (dù có ma tông gần làm chậm): đất đã lành');
     ok(run("W().regions.flatMap(R=>R.nodes).every(n=>n.maLv==null&&!n.maRuin)"), 'lành hẳn: không còn dấu ma trên nút');
     // tịnh hóa
@@ -978,15 +978,7 @@ const TESTS = {
     run("G.run.lt=[0,0,0];G.run.st=0;G.run.pills=[];G.run.relics=[genRelic(4)]");const v=run("Math.round(sellList()[0].p0*SUAE.dg.nhan)");run("applyE({dgBan:1})");
     ok(run("G.run.relics.length")===0&&run("G.run.st+G.run.lt[0]*100")===v&&run("G.run.lt[1]")===Math.min(5,Math.floor(v/100)), 'đấu giá: gửi bán thu '+v+' Hạ quy ra Trung ('+run("ltTxt()")+')');
     ok(run("CONTENT_EVENTS.find(d=>d.id==='dau_gia').choices.some(c=>c.e&&c.e.dgBan)"), 'hội đấu giá có lựa chọn gửi bán');
-    // U Minh Ám Hội
-    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);})()");
-    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='amhoi')"), 'canh ba ở thành: có U Minh Ám Hội');
-    run("G.run.relics=[genRelic(4),genRelic(1)];G.run.lt=[0,0,0]");const L=JSON.parse(run("JSON.stringify(venueOpts(nodeById(G.run.at),'amhoi'))"));
-    ok(L.some(o=>o.id==='bao:0:2')&&L.some(o=>o.id==='bao:0:3')&&!L.some(o=>o.id.startsWith('bao:1'))&&L.find(o=>o.id==='mua:2').no, 'đòi Thượng/Cực bằng pháp bảo phẩm cao; thiếu linh thạch thì khoá');
-    ok(run("venueDo('amhoi','bao:0:3')")&&run("G.run.lt[2]")===1&&run("G.run.relics.length")===1, 'giao Tiên phẩm lấy 1 Cực phẩm');
-    run("openPlace(G.run.at);G.run.lt=[0,5,0]");ok(!run("venueDo('amhoi','mua:2')"), 'mỗi tháng một lần');
-    run("W().t+=HM;openPlace(G.run.at);G.run.lt=[0,5,0]");const n0=run("G.run.relics.length");ok(run("venueDo('amhoi','mua:2')")&&run("G.run.lt[1]")===2&&run("G.run.relics.length")===n0+1, 'tháng sau: 3 Thượng phẩm đổi một pháp bảo');
-    run("G.run.pham=1");ok(!run("placeActs(nodeById(G.run.at)).some(a=>a.a==='amhoi')"), 'phàm nhân không vào được');
+    // U Minh Ám Hội: làm lại ở Sửa-I (bài am_hoi)
   },
   // Sửa-E câu 19: bế quan đói chậm, sau bế quan đói chậm, tĩnh toạ không; Tích Cốc Đan cho Trúc Cơ+
   tich_coc() {
@@ -1508,17 +1500,82 @@ const TESTS = {
     // kỳ ngộ: đang gom thì đôi khi được một món còn thiếu
     run("CC_CFG.ky=1");const h0=run("ccHave('doi_mo')");run("ccMonth()");run("CC_CFG.ky=0.04");
     ok(run("NK.count('cc.ky')")===1&&run("ccHave('doi_mo')")===h0+1, 'kỳ ngộ khi đang gom: được món còn thiếu');
-    // Ám Hội: tu sĩ đường Tạo Hóa, món đang thiếu được đem ra, giá ×amX
+    // Ám Hội (Sửa-I): tu sĩ đường Tạo Hóa — một khách vô danh mang sẵn món đang thiếu trong túi, đem ra bàn
     fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=1;G.run.root={id:'tam',els:['kim','moc','thuy'],q:'thuong'};G.run.rootKnown=1;G.run.st=500;G.run.ccHeard.TAO_HOA=1;ccStart('TAO_HOA')");
     run("(()=>{while(G.run.cc&&ccStep().b!=='gain')ccNext();})()");
     const n=run("W().regions.flatMap(R=>R.nodes).find(n=>(n.type==='thanh'||n.type==='ma')&&n.state!=='ruin').id");
-    run("CC_FORCE=1");const ao=run(`amOpts(nodeById(${n})).find(o=>o.id==='cc:tao_hoa_dich')`);
-    ok(!!ao&&ao.st===run("CC_VT.tao_hoa_dich.st*CC_CFG.amX"), 'Ám Hội có Tạo Hóa Thần Dịch, giá '+(ao&&ao.st)+' linh thạch');
-    const s0=run("ltGet(0)");run(`amDo(nodeById(${n}),'cc:tao_hoa_dich')`);run("CC_FORCE=null");
-    ok(run("ltGet(0)")===s0-ao.st&&(run("ccHave('tao_hoa_dich')")===1||run("ccStep().b")==='rite'), 'đổi được ở Ám Hội, trừ linh thạch');
+    run(`(()=>{const r=G.run;r.at=${n};W().t=Math.floor(W().t/HD)*HD+HD+23;CC_FORCE=1;amStart(nodeById(${n}));CC_FORCE=null;})()`);
+    const lo=run("JSON.stringify(G.run.scene.q.find(l=>l.it.id==='cc_tao_hoa_dich')||null)");
+    ok(lo!=='null'&&run("G.run.scene.ppl.some(p=>p.k==='khach'&&p.tui.some(x=>x.id==='cc_tao_hoa_dich'))"), 'Ám Hội: khách vô danh mang Tạo Hóa Thần Dịch trong túi, đem ra bàn ('+(lo!=='null'&&JSON.parse(lo).v)+' Hạ)');
     run("CC_FORCE=null");ok(run(`W().regions.flatMap(R=>R.nodes).filter(n=>!ccAmVt(n)).length>0`), 'không phải lúc nào Ám Hội cũng có');
   },
   // Sửa-H câu 36 + 32: đồ cải căn có phẩm (tạp/tứ → tam → song → Địa → Thiên), đồ dởm, cộng dồn sau thất bại, lô ở đấu giá thường
+  // Sửa-I câu 39: U Minh Ám Hội — buổi họp kín, mỗi người đưa vật đang có ra trả giá
+  am_hoi() {
+    fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=2;G.run.relics=[];G.run.pills=[];G.run.qitems=[];G.run.st=0;G.run.lt=[0,0,0]");
+    const nid=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);return n.id;})()");
+    ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='amhoi')"), 'canh ba ở thành: có U Minh Ám Hội');
+    ok(run("Object.keys(VAI_NP).filter(ma=>VAI_NP[ma].tu>=1).every(ma=>vaiTui(ma).length>0&&vaiTui(ma).length<=12&&W().vai[ma].cua>0)"), 'NPC giữ vai là tu sĩ có túi đồ (≤12 món) và của cải');
+    ok(run("Object.keys(VAI_NP).filter(ma=>VAI_NP[ma].tu<1).every(ma=>!vaiTui(ma).length)"), 'người phàm giữ vai không bị nhét đồ tu sĩ');
+    const snap=()=>run("JSON.stringify(Object.keys(VAI_NP).map(ma=>vaiTui(ma).map(x=>x.u).join(',')))");const s0=snap();
+    ok(run("venueDo('amhoi','vao')")&&run("G.run.scene.type")==='amhoi', 'ngồi vào bàn: mở hộp thoại Ám Hội');
+    const sc=()=>JSON.parse(run("JSON.stringify(G.run.scene)"));let S=sc();
+    ok(S.ppl.filter(p=>p.k==='vai').length>=1&&S.ppl.filter(p=>p.k==='khach').length>=2, 'quanh bàn: '+S.ppl.filter(p=>p.k==='vai').length+' NPC giữ vai, '+S.ppl.filter(p=>p.k==='khach').length+' khách vô danh');
+    ok(S.q.every(L=>{const p=S.ppl[L.own];const T=p.k==='vai'?JSON.parse(run(`JSON.stringify(vaiTui('${p.ma}'))`)):p.tui;return T.some(x=>x.u===L.u);}), 'mọi món trên bàn là đồ đang nằm trong túi người đưa (không tạo mới)');
+    ok(S.q.every((L,i)=>i===0||S.q[i-1].v<=L.v), 'vật quý xếp về cuối buổi');
+    ok(snap()===s0, 'mở hội không làm đổi túi NPC');
+    ok(!run("venueDo('amhoi','vao')"), 'đang ngồi bàn thì không mở lần nữa');
+    // NPC lô đầu: không trả thì người khác lấy hoặc về chủ
+    const L0=S.q[0];const own0=S.ppl[L0.own];const lead0=S.lot&&S.lot.lead;
+    run("amAct('bo')");S=sc();
+    if(lead0!=null){const p=S.ppl[lead0];const T=p.k==='vai'?JSON.parse(run(`JSON.stringify(vaiTui('${p.ma}'))`)):p.tui;ok(T.some(x=>x.u===L0.u), 'bỏ qua: NPC trả cao nhất lấy món, món sang túi người mua');}
+    else{const T=own0.k==='vai'?JSON.parse(run(`JSON.stringify(vaiTui('${own0.ma}'))`)):own0.tui;ok(T.some(x=>x.u===L0.u), 'không ai trả: món về lại túi chủ');}
+    // người chơi trả giá, mua được
+    run("G.run.st=0;G.run.lt=[0,0,500]");let g=0;
+    while(run("G.run.scene.ph")==='lot'&&g++<20){run("amAct('tra')");if(run("G.run.scene.lot.lead")==='me'){break;}}
+    const mua=run("JSON.stringify(G.run.scene.q[G.run.scene.i])");const t0=run("amLtTot()"),p0=run("G.run.scene.lot.p"),nr=run("G.run.relics.length+G.run.pills.length+G.run.qitems.length");
+    const okLead=run("G.run.scene.lot&&G.run.scene.lot.lead")==='me';
+    run("amAct('bo')");
+    ok(okLead&&run("amLtTot()")===t0-p0&&run("G.run.relics.length+G.run.pills.length+G.run.qitems.length")===nr+1, 'trả giá rồi gõ búa: trả đúng '+p0+' Hạ (quy đổi phẩm), món vào túi');
+    const M=JSON.parse(mua);const p=S.ppl[M.own];const T=p.k==='vai'?JSON.parse(run(`JSON.stringify(vaiTui('${p.ma}'))`)):JSON.parse(run(`JSON.stringify(G.run.scene.ppl[${M.own}].tui)`));
+    ok(!T.some(x=>x.u===M.u), 'món đã bán rời túi người bán');
+    // tới lượt mình: đưa đồ của mình ra
+    run("(()=>{const sc=G.run.scene;while(sc.ph!=='chon'&&sc.ph!=='xong'){amAct('bo');}})()");
+    ok(run("G.run.scene.ph")==='chon', 'tới lượt ngươi: chọn đồ trong túi đưa ra');
+    run("G.run.relics.push(Object.assign(genRelic(3),{name:'Thử Kiếm Lô'}))");
+    const key=run("amView().mine.find(m=>/Thử Kiếm Lô/.test(m.n)).key");run(`amAct('chon=${key}')`);
+    run("(()=>{const sc=G.run.scene;let g=0;while(sc.ph==='lot'&&g++<30)amAct('bo');})()");
+    ok(run("G.run.scene.ph")==='ban'&&run("G.run.scene.q[G.run.scene.i].own")==='me', 'lô của ngươi ra bàn, cả bàn trả giá');
+    const lead=run("G.run.scene.lot.lead");
+    if(lead!=null){const pb=run("G.run.scene.lot.p"),tb=run("amLtTot()"),cua0=run(`amCua(G.run.scene,${lead})`);run("amAct('ban')");
+      const T2=run(`JSON.stringify(amTui(G.run.scene,${lead}))`);
+      ok(!run("G.run.relics.some(x=>x.name==='Thử Kiếm Lô')")&&/Thử Kiếm Lô/.test(T2)&&run("amLtTot()")===tb+pb&&run(`amCua(G.run.scene,${lead})`)===cua0-pb, 'bán: món sang túi NPC mua, NPC trả bằng của cải của họ ('+pb+' Hạ)');}
+    else{run("amAct('rut')");ok(run("G.run.relics.some(x=>x.name==='Thử Kiếm Lô')"), 'không ai mua: rút về');}
+    run("(()=>{const sc=G.run.scene;let g=0;while(sc.ph!=='xong'&&g++<40)amAct(sc.ph==='ban'?'rut':'bo');})()");
+    ok(run("G.run.scene.ph")==='xong'&&run("amAct('xong')")&&!run("G.run.scene"), 'hết lô: hội tan');
+    run("openPlace(G.run.at)");ok(/đã ngồi bàn/.test(run("venueOpts(nodeById(G.run.at),'amhoi')[0].no")), 'mỗi tháng một lần');
+    run("W().t+=HM;openPlace(G.run.at)");ok(!run("venueOpts(nodeById(G.run.at),'amhoi')[0].no"), 'tháng sau ngồi lại được');
+    // đổi vật: đưa một món trong túi thay linh thạch
+    run("W().t+=HM;openPlace(G.run.at);venueDo('amhoi','vao');G.run.st=0;G.run.lt=[0,0,0];(()=>{const sc=G.run.scene;let g=0;while(sc.ph!=='lot'&&sc.ph!=='xong'&&g++<10){if(sc.ph==='chon')amAct('khong');else amAct('rut');}})()");
+    if(run("G.run.scene.ph")==='lot'){run("G.run.relics.push(Object.assign(genRelic(4),{name:'Đổi Ấn Lô',tier:4}))");run("amAct('doi')");
+      const k2=run("(amView().mine.find(m=>/Đổi Ấn Lô/.test(m.n)&&!m.no)||{}).key");const u2=run("G.run.scene.q[G.run.scene.i].u"),own2=run("G.run.scene.q[G.run.scene.i].own");
+      if(k2){run(`amAct('vat=${k2}')`);const me=run("G.run.scene.lot.lead")==='me';run("amAct('bo')");
+        ok(!me||(!run("G.run.relics.some(x=>x.name==='Đổi Ấn Lô')")&&/Đổi Ấn Lô/.test(run(`JSON.stringify(amTui(G.run.scene,${own2}))`))), 'đổi vật: món của ngươi sang túi người bán'+(me?'':' (bị trả cao hơn)'));}
+      else ok(run("G.run.scene.ph")==='doi', 'đổi vật: hiện danh sách đồ trong túi');}
+    run("G.run.scene&&G.run.scene.type==='amhoi'&&amAct('roi')");
+    // đồ dởm: khách có thể đem đồ cải căn giả; khảo vật cao dễ nhận ra
+    run("AM_HOI._g=AM_HOI.gia;AM_HOI.gia=1;G.run.nang={khao:100,duoc:100}");let fk=null;
+    for(let m=0;m<6&&!fk;m++){run("W().t+=HM;openPlace(G.run.at);G.run.scene.venue=null;venueDo('amhoi','vao')");fk=run("JSON.stringify(G.run.scene.ppl.find(p=>p.k==='khach'&&p.tui.some(x=>/^ccg_/.test(x.id)))||null)");if(fk==='null')fk=null;if(!fk)run("amAct('roi')");}
+    ok(!!fk&&run("G.run.scene.q.some(l=>/^ccg_/.test(l.it.id))"), 'khách vô danh có thể mang đồ cải căn dởm trong túi, đem ra bàn');
+    const nghi=run("(()=>{const sc=G.run.scene;const L=sc.q.find(l=>/^ccg_/.test(l.it.id));if(!L)return -1;let g=0;while((sc.q[sc.i]!==L||sc.ph==='chon')&&g++<40){if(sc.ph==='chon')amAct('khong');else amAct(sc.ph==='ban'?'rut':'bo');}return sc.q[sc.i]===L?L.nghi:-2;})()");
+    ok(nghi===1, 'khảo vật / nhận dược cao: đồ dởm hiện "nghi đồ giả" ('+nghi+')');
+    run("AM_HOI.gia=AM_HOI._g;amAct('roi')");
+    ok(run("(G.run.nang={khao:0,duoc:0},ccNhanP())")===0, 'khảo vật / nhận dược thấp: không nhìn ra đồ dởm');
+    run("(()=>{const v=W().vai.NP19||Object.values(W().vai).find((x,i)=>VAI_NP[Object.keys(W().vai)[i]].tu>=1);})()");
+    run("(()=>{const ma=Object.keys(VAI_NP).find(m=>VAI_NP[m].tu>=1);const v=W().vai[ma];v.tui=[];delete v.tuiS;})()");ok(run("(()=>{const ma=Object.keys(VAI_NP).find(m=>VAI_NP[m].tu>=1);return vaiTui(ma).length>0&&W().vai[ma].tuiS===1;})()"), 'bản lưu cũ: túi NPC tu sĩ được lập khi tải');
+    run("G.run.pham=1");ok(!run("placeActs(nodeById(G.run.at)).some(a=>a.a==='amhoi')"), 'phàm nhân không vào được');
+    run("G.run.pham=0");ok(run("(()=>{const sc={seed:'x'};return amVal({id:'ccg_3'},0)===CC_DO[3].st&&amVal({id:'ccg_3'},1)===0&&amVal({id:'ccx_3'},0)===0;})()"), 'đồ dởm trông như đồ thật nhưng giá trị thật bằng 0');
+  },
   // Sửa-I câu 38: cộng dồn % sau thất bại chỉ trong một kiếp
   cc_bon_kiep() {
     fresh("G._ngNoEv=1");

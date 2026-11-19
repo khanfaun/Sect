@@ -124,8 +124,8 @@ Luật: `src/game/core2/40-tan-thu.js` (số 39 đã dùng cho tiền tệ); b�
 9. Bot chưa sửa cho tân thủ (chưa được phép chạy bot).
 
 ## TIẾN ĐỘ (điểm dừng để làm tiếp)
-- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-H.
-- Tiếp theo: Sửa-I (câu 37–39), Đ9.1 (bộ máy tuyến + schema + công cụ kiểm), rồi file hướng dẫn GPT (Đ9.0) dùng BẢNG MÃ ở mục Đ8.
+- Xong: Đ0, Đ1, Đ2, Đ3, Đ4, Đ5 (Đ5.1–Đ5.5), Đ6 (Đ6.1–Đ6.4, cải tạo linh căn), Đ7 (Đ7.1–Đ7.4, nghề tu lõi và nghề phàm), Đ8 (Đ8.1–Đ8.7: neo, vai, thế lực, đồng hồ, luân hồi, đất ma — xem mục Đ8 và BẢNG MÃ); các đợt sửa theo câu người dùng chốt: Sửa-A … Sửa-I.
+- Tiếp theo: Đ9.1 (bộ máy tuyến + schema + công cụ kiểm), rồi file hướng dẫn GPT (Đ9.0) dùng BẢNG MÃ ở mục Đ8.
 - Bot chưa được chạy cho các hệ mới (chờ người dùng cho phép).
 
 ## NGƯỜI DÙNG CHỐT 15 CÂU (việc phải làm lại/bổ sung trước khi làm Đ5.4)
@@ -551,6 +551,24 @@ Luật `src/game/core2/53-cai-can-do.js`; bảng `CC_DO`, `CC_LV`, `CC_DOCFG` �
 ### I.38 — cộng dồn sau thất bại chỉ trong một kiếp
 - `ccBon` chuyển từ `G.meta.ccBon` sang `G.run.ccBon` (kiếp mới không có → 0). Bản lưu cũ: `migrateX` bỏ `G.meta.ccBon`. Bài mới `cc_bon_kiep`; `cai_can_do` sửa theo.
 - Ghi chú: hai ý đồ dởm trong `cai_can_do` (khảo vật 90% nhìn ra) phụ thuộc chuỗi ngẫu nhiên — chạy theo thứ tự trong `test:rules` thì qua.
+### I.39 — U Minh Ám Hội làm lại (buổi họp kín)
+Luật `src/game/core2/58-am-hoi.js` (bọc hộp `amhoi` cũ của 48-sua-e.js); bảng `AM_HOI` ở `content/rules/am-hoi.js`; chữ `amh.*` ở `content/text/am-hoi.json`; giao diện `src/react/canh/AmHoi.jsx` (cảnh `amhoi`, nút `data-act="am"` ở `ui/30-am-hoi.js`).
+- Vào: như cũ (thành / thành ma tu, quỷ thị mở, chỉ tu sĩ), hộp có một nút "Ngồi vào bàn"; **mỗi tháng mỗi nơi một buổi** (`W().amhoi`).
+- Người ngồi bàn: tới `AM_HOI.vai`=3 NPC giữ vai (tu sĩ `tu≥1`, còn sống, túi có đồ; chọn băm theo nơi + tháng) và 2–3 **khách vô danh** sinh lúc hội mở, mang sẵn túi 2–4 món + của cải (× hệ số vùng). Khách chỉ dùng đồ trong túi họ.
+- **Túi NPC giữ vai**: Đ8 để trống nên Sửa-I lập một lần (`v.tuiS`) cho vai tu sĩ theo hạt giống thế giới (`wRnd`, không động `R()`): 2–5 món (pháp bảo quanh cảnh giới, đan, hiếm có đồ cải căn thật; 15% có một món dởm), của cải `vaiCua × 4^cảnh giới`. Bản lưu cũ lập khi tải. Vai phàm không có đồ.
+- Món: `{u,id,n,q,rel}` — `rel` pháp bảo, `pill:<id>`, hoặc mã vật trong túi (`ccd_/ccg_/cct_`, `cc_<vật tư>`). Giá trị (Hạ phẩm): pháp bảo `40×3^phẩm`, đan theo giá đan, đồ cải căn `CC_DO.st`, vật tư cải căn `st × amX`. Linh thạch quy đổi 1 Trung = 100 Hạ… trả từ phẩm thấp, thừa trả lại Hạ.
+- Mỗi người đưa **một** món đang có (khách ưu tiên vật tư cải căn rồi đồ dởm); lô xếp theo giá trị tăng dần (vật quý cuối buổi). Lượt của người chơi ở giữa buổi: chọn một món trong túi hoặc thôi; món đó chen vào hàng theo giá trị.
+- Trả giá: khởi điểm `0,6 ×` giá trị; mỗi NPC chịu trả tới `giá trị × nhu cầu (0,75–1,35, băm)` nhưng không quá của cải, túi đầy thì không trả. Người chơi: **Trả giá** (+10%, NPC trả lại nếu còn chịu), **Đổi vật** (đưa món trong túi, người bán định giá; đồ dởm có thể bị nhìn ra), **Bỏ qua / Gõ búa**. Lô của người chơi: **Bán** cho người trả cao nhất, **Đổi lấy** một món trong túi NPC, **Đòi thêm** (không ai chịu thì thôi), **Rút lại**.
+- Không món nào rời túi trước khi bán xong; bán rồi thì rời túi người bán sang túi người mua (kể cả NPC mua của NPC), linh thạch/của cải đổi tay. Rời bàn giữa chừng không mất gì.
+- **Đồ dởm**: món `ccg_` trông như thật; mỗi NPC trả giá có `bietGia`=40% nhìn ra (không trả). Người chơi có khảo vật / nhận dược (`ccNhanP`, như Sửa-H) thì lô hiện "(nghi đồ giả)"; mua về vẫn qua `ccDoAdd` nên có thêm một lần nhìn ra, và thẩm định như cũ.
+- Thay đường cũ: bỏ đổi thẳng pháp bảo ↔ Thượng/Cực và đổi Thượng/Cực lấy đồ mới (tạo đồ tại chỗ). Vật tư cải căn đang thiếu (Sửa-G, `ccAmVt` 25%) giờ nằm trong túi một khách vô danh, đem ra bàn.
+- `dbg`: `amh.mo`, `amh.dua`, `amh.mua`, `amh.doi`, `amh.ban`, `amh.doiNhan`, `amh.npc`, `amh.tan`, `amh.roi`.
+- Bài: mới `am_hoi` (luật, 25 ý) và `am_hoi` (giao diện); `lt_nguon` bỏ phần Ám Hội cũ, `cai_can_hiem` sửa phần Ám Hội theo túi khách. Sửa kèm `dat_ma`: ý "sáu trăm năm" miễn khu có ma tông gần (bài phụ thuộc hạt giống, lệch khi thêm bài trước nó).
+### Kết quả Sửa-I
+- `npm run test:rules` 872 ý đạt (mốc 847); giao diện 168 ý đạt (mốc 162).
+### Còn dở / hỏi lại
+- Khách vô danh tan sau buổi (đồ họ mua đi theo họ). NPC giữ vai chưa tự dùng / bổ sung túi theo thời gian (chỉ đổi qua Ám Hội).
+- Giá trị pháp bảo theo phẩm là quy ước mới (40×3^phẩm Hạ); bot chưa biết ngồi Ám Hội (không chạy bot).
 
 ## Đ8 — thế giới neo, vai NPC, thế lực, đồng hồ, thời gian luân hồi, đất ma (HN A.9.2, A.17; C §6–§7; B §14.8–§14.9)
 Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm thế giới), `55-thoi-cuc.js` (đồng hồ), `56-luan-hoi.js` (khoảng luân hồi, tua thập kỷ), `57-dat-ma.js`. Bảng: `content/world/the-gioi-neo.js` (LOC_NEO, LOC_DUONG, LOC_LOI, VAI_NP, THE_LUC, TU_THAY), `content/world/thoi-cuc.js` (THOI_CUC, QUOC_MOI), `content/rules/luan-hoi.js`, `content/rules/dat-ma.js`; chữ `content/text/the-gioi.json` (tg.*, tc.*, lh.*, ma.*).
@@ -672,4 +690,4 @@ Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm th
 | CLK13 | Long Mạch Đứt | 300–600 năm | — |
 | CLK14 | Thiên Lộ Mở | 300–300 năm | LOC15 |
 
-40. (đang giải thích lại)  41. CHỐT: hai lựa chọn ở Bến Vong Xuyên làm ở Đ10 cùng Mộng Ấn.
+40. CHỐT: màn xem NPC đã gặp + thế lực trong Sổ tay để làm ở Đ9.  41. CHỐT: hai lựa chọn ở Bến Vong Xuyên làm ở Đ10 cùng Mộng Ấn.

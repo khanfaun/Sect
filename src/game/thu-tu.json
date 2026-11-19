@@ -311,6 +311,8 @@
  "core2/56-luan-hoi.js",
  "content/rules/dat-ma.js",
  "core2/57-dat-ma.js",
+ "content/rules/am-hoi.js",
+ "core2/58-am-hoi.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
@@ -339,5 +341,6 @@
  "ui/27-vo-nghe.js",
  "ui/28-trac-linh-fx.js",
  "ui/23-chu-thich-ten.js",
- "ui/29-thien-cam-chu-nho.js"
+ "ui/29-thien-cam-chu-nho.js",
+ "ui/30-am-hoi.js"
 ]

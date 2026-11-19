@@ -362,6 +362,27 @@ const TESTS = {
     ok(/Tái Mạch Đan/.test(d) && /Kiểm chứng/.test(d) && !/\d/.test(d), 'Sổ tay thẻ Cơ duyên: '+d.replace(/\s+/g,' ').slice(0,70));
     await ev(p, () => {UI.panel=null;G.run.cc=null;render();});
   },
+  // Sửa-I câu 39: hộp thoại U Minh Ám Hội — lượt, món, giá, nút trả giá / bỏ qua / đưa đồ của mình
+  async am_hoi(p) {
+    await ev(p, () => {const r=G.run;r.pham=0;r.realm=Math.max(1,r.realm||0);r.lt=[0,0,50];r.scene=null;UI.modal=null;UI.panel=null;
+      const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');r.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);
+      if(W().amhoi)delete W().amhoi[n.id];r.scene.venue='amhoi';venueDo('amhoi','vao');render();});
+    await p.waitForTimeout(150);
+    let t = await ev(p, () => (document.querySelector('.amhoi')||{}).innerText||'');
+    ok(/U Minh Ám Hội/.test(t) && /Lượt \d+\/\d+/.test(t) && /Giá hiện tại/.test(t), 'hộp Ám Hội: lượt, món, giá hiện tại');
+    await shot(p, 'am_hoi');
+    ok(/Bỏ qua|Gõ búa/.test(t) && /Trả giá|Gõ búa/.test(t) && /Đổi vật|Gõ búa/.test(t), 'có nút trả giá / đổi vật / bỏ qua');
+    await ev(p, () => {const sc=G.run.scene;let g=0;while(sc.ph!=='chon'&&sc.ph!=='xong'&&g++<30)amAct('bo');G.run.relics.push(Object.assign(genRelic(2),{name:'Thử Ấn Bày'}));render();});
+    await p.waitForTimeout(120);
+    t = await ev(p, () => (document.querySelector('.amhoi')||{}).innerText||'');
+    ok(/Tới lượt ngươi/.test(t) && /Thử Ấn Bày/.test(t), 'tới lượt ngươi: hiện đồ trong túi để đưa ra');
+    const btn = await ev(p, () => {const b=[...document.querySelectorAll('.amhoi [data-act="am"]')].find(x=>/Thử Ấn Bày/.test(x.innerText));if(b)b.click();return !!b;});
+    await p.waitForTimeout(150);
+    ok(btn && await ev(p, () => G.run.scene&&G.run.scene.q.some(l=>l.own==='me')), 'bấm món: món của ngươi lên bàn');
+    await ev(p, () => {const b=[...document.querySelectorAll('.amhoi [data-act="am"]')].find(x=>/Rời bàn/.test(x.innerText));if(b)b.click();});
+    await p.waitForTimeout(120);
+    ok(await ev(p, () => !G.run.scene || G.run.scene.type!=='amhoi'), 'rời bàn: đóng hộp thoại');
+  },
   // Đ8: Sổ tay thẻ Sử lược — chuyện thế giới khi vắng mặt, đồng hồ đang diễn ra
   async su_luoc(p) {
     await ev(p, () => {const w=W();w.suLuoc=[{y:1200,t:'Thế kỷ thứ ba: chuyện cũ.',k:'gop'},{y:1250,t:'Lương Kinh thất thủ; triều mới do một phe lập.',k:'clk'}];const s=w.thoiCuc.CLK07;s.pha=2;s.tPha=tYear(w.t);

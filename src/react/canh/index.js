@@ -5,6 +5,7 @@ import { ChienLoiPham, PhuongThi, LinhNgo } from './ChienLoiPham';
 import { DiaDiem } from './DiaDiem';
 import { DocDuong, KyNgo } from './KyNgo';
 import { ChuanBiDotPha } from './ChuanBiDotPha';
+import { AmHoi } from './AmHoi';
 import { ChuanBiTran } from '../tran/ChuanBiTran';
 import { QuanAi, KetQuaDotPha, BangTreoThuong, ChonDo } from './ViecKhac';
 
@@ -25,4 +26,5 @@ export const CANH = {
   kyngo: KyNgo,
   prep: ChuanBiDotPha,
   combat: ChuanBiTran,
+  amhoi: AmHoi,
 };
