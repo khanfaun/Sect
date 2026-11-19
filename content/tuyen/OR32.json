@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Lô giấy ăn một màu mực",
+      "ten": "Giấy làm tan mực ghi thuế",
       "cho": {
         "thang": 1
       },
@@ -24,11 +24,11 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Lô giấy bị trả về {LOC11} vẫn giữ nét mực thường. Riêng mực dùng chép thuế tan vào lớp phủ, để lại vệt bạc ở chỗ ghi tên hộ. Người mang hàng đòi đổi cả bó.",
+      "mo": "Lô giấy bị trả về {LOC11} giữ được mực thường. Riêng mực ghi thuế tan trong lớp phủ, để vệt bạc trên tên người nộp thuế. Khách đòi đổi cả bó.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối hai loại mực trên mẫu",
+          "l": "So hai loại mực trên mẫu",
           "t": "Ngươi thử hai nét cạnh nhau, giữ tờ chỉ xóa phần viết bằng mực sổ.",
           "dau": [
             "moc_1_1"
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Hóa đơn của lớp phủ",
+      "ten": "Ai đặt làm lớp phủ?",
       "cho": {
         "thang": 2
       },
@@ -72,12 +72,12 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Xưởng {NP22} còn mẫu từng gửi {LOC03}. Giao dịch ghi người đặt mua chất phủ theo đúng mùa chép thuế. Chữ ký chồng lên điều khoản chỉ giao riêng cho người đã đặt.",
+      "mo": "Xưởng {NP22} còn mẫu gửi {LOC03}. Hóa đơn ghi đặt chất phủ đúng mùa chép thuế. Khách đã ký điều khoản đòi xưởng chỉ giao cho một mình họ.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối mẫu xưởng với hóa đơn",
-          "t": "Ngươi lấy ngày và dấu nhận để chỉ ai đặt chất phủ trước khi giấy đổi màu.",
+          "l": "So mẫu xưởng với hóa đơn",
+          "t": "Ngươi lấy ngày và dấu xác nhận để chỉ ai đặt chất phủ trước khi giấy đổi màu.",
           "dau": [
             "moc_2_1"
           ]
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Tên trở lại trên thớ giấy",
+      "ten": "Đọc lại tên trên trang giấy mờ",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Trang mờ ở {LOC02} có một vệt cuối chưa tan. Thợ bồi dùng mẫu cũ kê dưới, cho ngươi thấy tên hộ từng nằm ở đâu. Người nhà mang tới phiếu thu còn đọc được.",
+      "mo": "Trang ở {LOC02} còn một vệt mực chưa tan. Thợ bồi dùng mẫu cũ để tìm dòng tên. Người nhà mang phiếu thu còn đọc được để đối với nét vừa hiện.",
       "cach": [
         {
           "id": "cach_1",
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Quyền giữ mẫu",
+      "ten": "Bán cách tẩy hay làm giấy chống sửa?",
       "cho": {
         "thang": 3
       },
@@ -168,7 +168,7 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Ở {LOC11}, một kho xin giấy chống sửa, còn người đặt lớp phủ đợi lấy đủ cách làm. Thợ góp xưởng đem khung tới để hỏi ai sẽ kiểm lô cấp cho người học.",
+      "mo": "Một kho ở {LOC11} xin giấy khó tẩy. Kẻ đặt chất phủ muốn mua riêng cách làm. Các thợ góp khung xin ngươi đặt lệ giữ giấy cho người đi học.",
       "cach": [
         {
           "id": "cach_1",
@@ -216,7 +216,7 @@
     },
     {
       "id": "N5",
-      "ten": "Giá một tờ giữ lời",
+      "ten": "Ai được thử mẫu và mua giấy?",
       "cho": {
         "thang": 6
       },
@@ -227,7 +227,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Bàn giấy {LOC02} đợi xem kho có nhận lô chống sửa hay trả về. Một khách mang trang đã nhòe để đổi lấy thêm lớp phủ. Người học nghèo đếm phần giấy được phát qua mùa.",
+      "mo": "Người giữ kho ở {LOC02} chờ thử lô chống sửa. Khách cũ mang trang đã nhòe tới hỏi mua thêm lớp phủ. Người học nghèo đếm số tờ còn được nhận.",
       "cach": [
         {
           "id": "cach_1",
@@ -244,7 +244,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Duy trì lệ độc quyền khi khách đã dùng",
+          "l": "Giữ độc quyền sau khi khách dùng chất tẩy",
           "t": "Ngươi thấy khách dùng lớp phủ xóa một dòng chứng rồi ký tiếp phiếu giao.",
           "dau": [
             "moc_5_2"
@@ -257,7 +257,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Giữ mức cấp giấy học qua một mùa",
+          "l": "Giữ mức được cấp giấy học qua một mùa",
           "t": "Ngươi cùng thợ bù công để giấy học không đổi giá và để người học kiểm mẫu.",
           "dau": [
             "moc_5_3"
@@ -284,7 +284,7 @@
           "moc_5_1"
         ]
       },
-      "t": "Kho dùng lô mới sau khi tự đối mẫu trước mặt người chép. Trang phục dựng được đặt cạnh tờ có tên hộ, cả hai còn đọc được sau lượt cất đầu. Người nhà cầm một bản về cùng phiếu thu.",
+      "t": "Kho dùng lô mới sau khi tự so mẫu trước mặt người chép. Trang phục dựng được đặt cạnh tờ có tên hộ, cả hai còn đọc được sau lượt cất đầu. Người nhà cầm một bản về cùng phiếu thu.",
       "su": "Kho {LOC02} nhận giấy chống sửa và giữ trang đã phục dựng.",
       "dauVong": "một trang còn tên hộ mà {ten} đã cứu khỏi vệt mờ."
     },

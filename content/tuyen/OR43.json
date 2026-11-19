@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Tên được thuê đọc",
+      "ten": "Một tên cho cả bình tro",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Người thuê ở {LOC14} giao bình tro và dặn đúng một tên để đọc ở {LOC01}. Trong bình có tiếng vật cứng chạm nhau, dù miệng chỉ đóng một niêm. Ngươi được trả công khi trao tới cửa.",
+      "mo": "Người thuê ở {LOC14} đưa bình tro và dặn chỉ đọc một tên khi tới {LOC01}. Trong bình có nhiều vật cứng chạm nhau, dù miệng chỉ đóng một dấu niêm.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Vật trong tro không cùng thẻ",
+      "ten": "Trong bình có dấu của ba người",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Thẻ tử ở {LOC01} chỉ có một tên, nhưng bình giữ ba dấu thuộc ba người. Một vật có rãnh vừa khớp thẻ; hai vật kia không. Gia quyến muốn biết phần nào còn phân được.",
+      "mo": "Thẻ tử ở {LOC01} ghi một tên, nhưng bình có ba vật nhận dạng khác nhau. Chỉ một vật khớp thẻ. Gia đình muốn biết phần nào còn có thể xác nhận.",
       "cach": [
         {
           "id": "cach_1",
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Lệnh chia ghi sau thẻ",
+      "ten": "Ai ra lệnh trộn tro?",
       "cho": {
         "thang": 2
       },
@@ -120,11 +120,11 @@
         "cach": "tin",
         "noi": "LOC12"
       },
-      "mo": "{NP24} còn giữ lệnh khắc tại {LOC12}. Lệnh buộc gom phần vô danh vào cùng bình để một cái chết không hiện trên sổ. Người chia đã khắc những dấu nhỏ dưới ba vật để người sau nhận ra.",
+      "mo": "{NP24} giữ lệnh khắc ở {LOC12}. Lệnh buộc gộp tro để giấu một cái chết khỏi sổ. Người chia tro đã để những dấu nhỏ trên ba vật cho người sau nhận ra.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối lệnh và nhờ gia quyến nhận dấu",
+          "l": "So lệnh và nhờ gia quyến nhận dấu",
           "t": "Ngươi chỉ dòng buộc gom, xác nhận phần có thẻ trước mặt người nhà.",
           "dau": [
             "moc_3_1"
@@ -167,7 +167,7 @@
     },
     {
       "id": "N4",
-      "ten": "Trao bình trên bậc cửa",
+      "ten": "Gia đình sắp nhận bình",
       "cho": {
         "thang": 3
       },
@@ -178,11 +178,11 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Ở {LOC01}, gia quyến đợi nghe tên trước khi mở niêm. Người giữ mộ chung đã đem bản kê rỗng tới. Một người giữ bạc chờ ngươi đọc đúng lời đã hẹn rồi mới nhận bình.",
+      "mo": "Ở {LOC01}, gia quyến chờ ngươi đọc tên trước khi mở niêm. Người giữ mộ chung mang sổ đến. Kẻ hứa trả thêm bạc cũng đợi ngươi đọc cả bình dưới một cái tên.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Trả phần xác minh và ghi phần còn trộn",
+          "l": "Trả phần tro xác định được, ghi riêng phần còn lại",
           "t": "Ngươi giao đúng phần khớp, để phần chưa rõ có một trang ghi giới hạn.",
           "dau": [
             "moc_4_1"
@@ -225,7 +225,7 @@
         },
         {
           "id": "cach_4",
-          "l": "Xin thêm ngày đối dấu",
+          "l": "Xin thêm ngày so dấu",
           "t": "Ngươi giữ bình khô và giao gia quyến bản hình các vật để họ tự xem.",
           "dau": [
             "moc_4_4"
@@ -242,7 +242,7 @@
     },
     {
       "id": "N5",
-      "ten": "Quyền mở lại sổ tro",
+      "ten": "Ai được bổ sung tên người mất?",
       "cho": {
         "thang": 6
       },
@@ -253,7 +253,7 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Ở {LOC01}, một nhà nhận đúng phần và một nhà vẫn hỏi vật không có thẻ. Người giữ mộ cần biết khi có dấu mới thì ai được bổ sung. Ngoài bậc, đường cũ còn người đợi thuê đưa bình.",
+      "mo": "Ở {LOC01}, có nhà đã nhận được phần tro và có nhà vẫn hỏi về vật không có thẻ. Người coi mộ muốn biết ai được ghi thêm tên khi tìm thấy chứng cứ mới.",
       "cach": [
         {
           "id": "cach_1",
@@ -283,7 +283,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Trao mộ chung cho người giữ danh",
+          "l": "Trao mộ chung cho người giữ danh sách",
           "t": "Ngươi giao bản chưa rõ, dặn bổ sung tên khi dấu khớp với lời người đến.",
           "dau": [
             "moc_5_3"
@@ -324,7 +324,7 @@
           "moc_5_1"
         ]
       },
-      "t": "Người nhà nhận phần có thẻ và đọc đúng tên trên bình chia. Phần còn trộn có dòng riêng nói vì sao chưa thể gọi tên. Một người khác đem vật mới tới được xem bản đối mà không cần trả tiền cho lời chắc.",
+      "t": "Người nhà nhận phần có thẻ và đọc đúng tên trên bình chia. Phần còn trộn có dòng riêng nói vì sao chưa thể gọi tên. Một người khác đem vật mới tới được xem bản đối chiếu mà không cần trả tiền cho lời chắc.",
       "su": "Phần tro xác minh được đã trả, phần chưa rõ giữ đúng giới hạn.",
       "dauVong": "tên trên bình chia còn bên tờ ghi phần chưa phân được."
     },
@@ -353,7 +353,7 @@
           "moc_5_3"
         ]
       },
-      "t": "Người giữ danh để các dấu chưa rõ cạnh mộ, có chỗ thêm lời mới. Một người tới đối được vật của nhà mình sau nhiều chuyến đi. Họ đọc tên vừa thêm mà vẫn nhìn thấy những dòng còn phải để trống.",
+      "t": "Người giữ danh sách để các dấu chưa rõ cạnh mộ, có chỗ thêm lời mới. Một người tới đối được vật của nhà mình sau nhiều chuyến đi. Họ đọc tên vừa thêm mà vẫn nhìn thấy những dòng còn phải để trống.",
       "su": "Mộ chung ghi phần chưa rõ và có người giữ quy tắc thêm tên.",
       "dauVong": "một tên được bổ sung sau khi người nhà đem dấu tới đối."
     }

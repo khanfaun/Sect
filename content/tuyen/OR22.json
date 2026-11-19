@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Đơn chiếu chôn dư",
+      "ten": "Đơn chiếu chôn ghi thiếu người chết",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Người mua lấy chiếu chôn ở {LOC01} nhưng bắt ngươi chỉ ghi một người. Số tấm giao nhiều hơn số trong biên nhận. Một tấm có đường dệt mà thợ trẻ nhà ngươi hay dùng để tự đánh dấu.",
+      "mo": "Người mua ở {LOC01} nhận nhiều chiếu chôn nhưng bắt ngươi ghi một người. Một tấm mang đường dệt riêng của thợ trẻ nhà ngươi. Họ không nói các tấm còn lại dùng cho ai.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Lô cói có thẻ người",
+      "ten": "Người lao dịch bị ghi chung với cói",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Cói xuống {LOC09} cùng thẻ của người đi lao dịch. Người dỡ chỉ nhớ tên họ theo nút buộc, vì sổ thuyền gộp thành một lô. Một thợ trẻ nhận ra nút do mình thắt.",
+      "mo": "Lô cói cập {LOC09} cùng thẻ của người bị đưa đi làm. Sổ thuyền gộp cả người và cói vào một lô. Một thợ trẻ nhận ra nút buộc do chính mình thắt.",
       "cach": [
         {
           "id": "cach_1",
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Hàng tên có vạch tuyển",
+      "ten": "Tên trẻ trong sổ tuyển lao dịch",
       "cho": {
         "thang": 2
       },
@@ -120,11 +120,11 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Sổ tuyển ở {LOC11} dùng vạch giống thẻ buộc lô cói. Bản mua ở {LOC03} có cả giá và quyền rút bị gạch. Người coi sổ đang chờ chuyển nhóm trẻ về đúng mục.",
+      "mo": "Vạch ở sổ tuyển {LOC11} giống hệt dấu buộc trên lô cói. Giấy mua ở {LOC03} còn ghi giá và xóa quyền thôi việc. Người coi sổ đang chờ chuyển nhóm trẻ đi.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối thẻ với sổ tuyển trẻ",
+          "l": "So thẻ với sổ tuyển trẻ",
           "t": "Ngươi tìm tên gốc của nhóm ở bến rồi hỏi ai muốn được giấu một đêm.",
           "dau": [
             "moc_3_1"
@@ -162,7 +162,7 @@
     },
     {
       "id": "N4",
-      "ten": "Mặt nào của chiếu",
+      "ten": "Cho thợ trốn hay nhận đơn lớn?",
       "cho": {
         "thang": 3
       },
@@ -173,7 +173,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Thợ dệt ở {LOC09} chừa chiếu sạch cho người muốn trốn và kê một hòm quỹ. Người mua đơn lớn tới đòi giao lại thợ. Ngoài cửa có gánh trống đang đợi người góp khung.",
+      "mo": "Thợ dệt ở {LOC09} chừa chiếu cho người muốn trốn và kê hòm quỹ. Người đặt đơn lớn đòi giữ thợ theo khế. Ngoài cửa, một người rủ họ góp khung lập gánh riêng.",
       "cach": [
         {
           "id": "cach_1",
@@ -190,7 +190,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Ký đơn lớn và giữ khế không rút",
+          "l": "Nhận đơn lớn, ép thợ làm đến hết nợ",
           "t": "Ngươi nhận đơn rồi đưa người mua bản khế buộc thợ ở tới khi trả hết.",
           "dau": [
             "moc_4_2"
@@ -220,7 +220,7 @@
     },
     {
       "id": "N5",
-      "ten": "Nơi làm việc sau chuyến",
+      "ten": "Thợ trẻ sẽ làm và ngủ ở đâu?",
       "cho": {
         "thang": 6
       },
@@ -231,7 +231,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Hôm nhận chiếu ở {LOC09}, thợ trẻ muốn biết tối nay ai còn có chỗ nằm. Người coi quỹ, người cầm đơn lớn và người gánh khung đều mang giấy để ngươi ký.",
+      "mo": "Đến hôm giao chiếu ở {LOC09}, người coi quỹ, người đặt đơn lớn và người gánh khung đều chờ ngươi ký. Thợ trẻ chỉ muốn biết tối nay họ được ngủ và làm việc ở đâu.",
       "cach": [
         {
           "id": "cach_1",

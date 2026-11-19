@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Tiền công dưới thớt",
+      "ten": "Tiền công cũ và người bếp mất tích",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Chủ quán {LOC02} trả thẻ bếp cũ và khoản công còn thiếu. Người rửa nồi để phần cơm của một tay bếp chưa về bên bậu. Bữa cuối người ấy làm là bữa tiếp {FA02}.",
+      "mo": "Chủ quán {LOC02} trả thẻ bếp cũ và tiền còn nợ. Người rửa nồi vẫn chừa cơm cho một tay bếp chưa về. Ca cuối của người ấy là bữa tiếp khách {FA02}.",
       "cach": [
         {
           "id": "cach_1",
@@ -39,7 +39,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Đối thẻ bếp khác trong giỏ",
+          "l": "So thẻ bếp khác trong giỏ",
           "t": "Ngươi kiểm được một thẻ vắng đúng hôm người của thương hội lên bàn tiệc.",
           "dau": [
             "moc_1_2"
@@ -64,7 +64,7 @@
     },
     {
       "id": "N2",
-      "ten": "Chỗ móc tạp dề trống",
+      "ten": "Tạp dề còn treo, người đã đi đâu?",
       "cho": {
         "thang": 2
       },
@@ -75,7 +75,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Tạp dề vẫn vắt trên móc ở {LOC02}, nhưng chủ quán nói tay bếp đã đi theo chuyến hàng. Bạn làm cùng thấy người ấy bị gọi xuống kho sau khi dọn món thịt. Không ai nhận đã trả công thôi việc.",
+      "mo": "Tạp dề còn trên móc ở {LOC02}. Bạn bếp thấy người mất tích bị gọi xuống kho sau khi dọn thịt. Chủ quán bảo họ theo xe hàng nhưng chưa ai trả công thôi việc.",
       "cach": [
         {
           "id": "cach_1",
@@ -112,7 +112,7 @@
     },
     {
       "id": "N3",
-      "ten": "Món thịt mang dấu",
+      "ten": "Món thịt đi cùng khế cầm người",
       "cho": {
         "thang": 2
       },
@@ -123,7 +123,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Thực đơn {LOC02} trùng ký hiệu lô thịt ghi trên phiếu ở {LOC03}. Người phu kể có tờ khế cầm người đi cùng. Tay bếp còn sống và đang phải đứng kho theo khế ấy.",
+      "mo": "Ký hiệu trên thực đơn ở {LOC02} trùng phiếu giao một lô thịt ở {LOC03}. Người phu nói có tờ khế đi kèm. Tay bếp còn sống nhưng phải làm ở kho theo khế ấy.",
       "cach": [
         {
           "id": "cach_1",
@@ -160,7 +160,7 @@
     },
     {
       "id": "N4",
-      "ten": "Chuyến xe lúc thu nồi",
+      "ten": "Trả khế hay giữ tay bếp lại?",
       "cho": {
         "thang": 3
       },
@@ -171,11 +171,11 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Xe bếp ở {LOC02} đã xếp nồi, còn người coi kho mang tờ khế tới. Có thể trả tờ ấy, nhận quyền giữ ca hoặc đưa người đi cùng xe. Tay bếp đứng đợi mà chưa dám tháo tạp dề.",
+      "mo": "Xe ở {LOC02} đã xếp nồi để rời sân. Người coi kho đem tờ khế tới, còn tay bếp chờ bên xe. Ngươi có thể hủy khế, nhận quyền giữ người hoặc đưa họ đi.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Trả khế và mời người tự chọn ca",
+          "l": "Hủy khế để tay bếp được tự chọn ở hay đi",
           "t": "Ngươi hủy quyền giữ người rồi mời tay bếp chọn làm tiếp hoặc rời cửa.",
           "dau": [
             "moc_4_1"
@@ -231,7 +231,7 @@
     },
     {
       "id": "N5",
-      "ten": "Ai còn ngồi bên nồi",
+      "ten": "Bếp chung hay quán riêng?",
       "cho": {
         "thang": 6
       },
@@ -242,7 +242,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Chủ quán {LOC02} đòi chốt sổ. Bàn góp cơm đã có người đặt tiền trước, bên kia còn khách hẹn tiệc riêng. Người đang theo xe hỏi phần công của họ được mang tới đâu.",
+      "mo": "Chủ quán {LOC02} đòi chốt sổ. Có người góp tiền mở bếp chung và có khách hẹn tiệc riêng. Những người đang theo xe hỏi tiền công sẽ được giao cho ai.",
       "cach": [
         {
           "id": "cach_1",
@@ -326,7 +326,7 @@
           "moc_5_2"
         ]
       },
-      "t": "Khách có quyền vẫn tìm tới bàn, còn người đứng bếp chỉ đổi ca khi ngươi trả thẻ. Một thân nhân tìm đúng móc áo nhưng phải đọc tên theo sổ khế. Quán giữ khách bằng cả bữa ăn lẫn món nợ.",
+      "t": "Khách có quyền vẫn tìm tới bàn, còn người đứng bếp chỉ thay ca khi ngươi trả thẻ. Một thân nhân tìm đúng móc áo nhưng phải đọc tên theo sổ khế. Quán giữ khách bằng cả bữa ăn lẫn món nợ.",
       "su": "Quán giữ hợp đồng tiệc và khế lao động cưỡng ép.",
       "dauVong": "một người còn dò thẻ bếp để đòi lại cái tên trên khế."
     },

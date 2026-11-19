@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Lưỡi cuốc đầu mùa",
+      "ten": "Sửa cuốc trước ngày gieo",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Một hộ dưới chân {LOC11} mang cuốc sứt tới, cần lấy trước ngày xuống giống. {NP21} nhận giữ lửa cho lượt đầu, còn {NP22} đặt khuôn dựa vào chân bàn. Nhà ngươi còn tiền than đúng cho một lượt.",
+      "mo": "Một hộ dưới chân {LOC11} mang cuốc sứt đến, cần lấy trước ngày gieo. {NP21} nhận trông lửa, còn {NP22} mang khuôn tới. Nhà ngươi chỉ còn đủ tiền than cho một lượt rèn.",
       "cach": [
         {
           "id": "cach_1",
@@ -64,7 +64,7 @@
     },
     {
       "id": "N2",
-      "ten": "Vệt xỉ trong phôi",
+      "ten": "Phôi hỏng trước khi thợ rèn nhận",
       "cho": {
         "thang": 2
       },
@@ -75,7 +75,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Phôi nứt để lộ vệt xỉ không giống vết tay búa. Sổ giao ở {LOC03} ghi đổi lô sau khi thiếc niêm đã mở. Hợp đồng buộc thợ mua lại phôi hỏng với giá đủ đẩy lò vào nợ.",
+      "mo": "Một thanh phôi vừa nứt, để lộ xỉ lẫn bên trong. Sổ ở {LOC03} cho thấy lô phôi đã bị đổi sau khi mở niêm. Vậy mà hợp đồng bắt thợ mua lại mọi thanh hỏng.",
       "cach": [
         {
           "id": "cach_1",
@@ -88,7 +88,7 @@
         {
           "id": "cach_2",
           "l": "Tra ngày đổi phôi ở hội quán",
-          "t": "Ngày trong hợp đồng đi sau ngày đổi lô. Ngươi xin người giao ký vào bản đối.",
+          "t": "Ngày trong hợp đồng đi sau ngày đổi lô. Ngươi xin người giao ký vào bản đối chiếu.",
           "dau": [
             "moc_2_2"
           ]
@@ -112,7 +112,7 @@
     },
     {
       "id": "N3",
-      "ten": "Nợ nằm trên bảng công",
+      "ten": "Thợ phải xuống mỏ để trả nợ phôi",
       "cho": {
         "thang": 2
       },
@@ -123,12 +123,12 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Trong đường hầm {LOC11}, bảng công bắt thợ xuống thêm ca để trả nợ đúng lô phôi đã nứt. Một người ho đưa phiếu công chưa lĩnh cho ngươi. Ngoài cửa, chủ kho chờ khóa sổ.",
+      "mo": "Ở {LOC11}, chủ kho trừ tiền công vào khoản nợ của lô phôi hỏng. Một người ho đưa ngươi phiếu lương chưa lĩnh. Nếu sổ đóng hôm nay, thợ lại phải xuống hầm làm thêm.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Kê tiền thiếu theo từng thợ",
-          "t": "Ngươi chép phiếu công thiếu và gọi thợ đối từng khoản trước khi chủ kho khóa sổ.",
+          "t": "Ngươi chép phiếu tiền công thiếu và gọi thợ so từng khoản trước khi chủ kho khóa sổ.",
           "dau": [
             "moc_3_1"
           ]
@@ -160,7 +160,7 @@
     },
     {
       "id": "N4",
-      "ten": "Phiên thanh toán dưới lò",
+      "ten": "Ai trả tiền công còn thiếu?",
       "cho": {
         "thang": 3
       },
@@ -171,11 +171,11 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Chủ lò đã gọi người giữ sổ đến chốt lương thiếu. Thợ muốn thấy tiền trước khi nhóm lửa, người đặt kiếm chờ giấy giao lô. Mấy hộ ngoài mỏ gửi tới danh sách việc làm còn trống.",
+      "mo": "Người giữ sổ đến {LOC11} để tính tiền lương. Một bên muốn thợ góp sức giữ lò, một bên ứng tiền nếu lò rèn kiếm cho họ. Ngoài mỏ cũng có người nhận thợ về sửa nông cụ.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đàm phán công hội và trả đủ công",
+          "l": "Lập hội thợ và trả hết tiền công",
           "t": "Hội thợ lấy phần đặt cọc mua phôi để trả đủ lương, rồi ký giá phôi công khai.",
           "dau": [
             "moc_4_1"
@@ -201,8 +201,8 @@
         },
         {
           "id": "cach_3",
-          "l": "Kết toán nợ rồi chuyển việc cho thợ",
-          "t": "Ngươi đối sổ và đổi phôi còn lại lấy phần trả nợ, đưa thợ đến chỗ đã nhận.",
+          "l": "Thanh toán nợ rồi chuyển việc cho thợ",
+          "t": "Ngươi kiểm sổ và đổi phôi còn lại lấy phần trả nợ, đưa thợ đến chỗ đã nhận.",
           "dau": [
             "moc_4_3"
           ],
@@ -231,7 +231,7 @@
     },
     {
       "id": "N5",
-      "ten": "Lượt lửa cuối",
+      "ten": "Rèn tiếp hay đóng lò?",
       "cho": {
         "thang": 6
       },
@@ -242,7 +242,7 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Một lưỡi cuốc và một thanh kiếm nguội trên bệ. Người học việc đứng chờ xem ngươi đưa món nào xuống nước trước. Khóa đường hầm cũng ở đó, người giữ chìa xin câu trả lời trước tối.",
+      "mo": "Một lưỡi cuốc và một thanh kiếm đặt trên bệ. Người học việc muốn biết nên chuẩn bị giao món nào. Người giữ chìa đường hầm cũng chờ xem còn phải mở cửa cho ca sau không.",
       "cach": [
         {
           "id": "cach_1",
@@ -259,7 +259,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giao đủ lô kiếm theo giấy bảo trợ",
+          "l": "Giao kiếm cho phe đã trả tiền ứng",
           "t": "Ngươi giao đủ lô theo dấu đã nhận, đổi lấy kỳ mua sắt kế tiếp cho lò.",
           "dau": [
             "moc_5_2"
@@ -273,7 +273,7 @@
         {
           "id": "cach_3",
           "l": "Đóng lò và bàn giao việc mới",
-          "t": "Ngươi tắt lửa an toàn rồi giao phiếu việc mới cho những người đã kết toán nợ.",
+          "t": "Ngươi tắt lửa an toàn rồi giao phiếu việc mới cho những người đã thanh toán nợ.",
           "dau": [
             "moc_5_3"
           ],
@@ -340,8 +340,8 @@
           "moc_5_3"
         ]
       },
-      "t": "Cửa hầm khóa sau khi người cuối đã lên. Những người từng trả nợ bằng ca mỏ đem phiếu kết toán đến chỗ nhận việc mới. Họ quen nhìn về mái lò đã nguội mỗi khi đi qua con dốc cũ.",
-      "su": "Lò tại {LOC11} đóng an toàn, thợ đã kết toán có nơi nhận việc.",
+      "t": "Cửa hầm khóa sau khi người cuối đã lên. Những người từng trả nợ bằng ca mỏ đem phiếu thanh toán đến chỗ nhận việc mới. Họ quen nhìn về mái lò đã nguội mỗi khi đi qua con dốc cũ.",
+      "su": "Lò tại {LOC11} đóng an toàn, thợ đã thanh toán có nơi nhận việc.",
       "dauVong": "con đường thợ đi còn vết búa khắc chỉ lối dưới nền lò."
     }
   ],

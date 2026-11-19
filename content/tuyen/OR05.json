@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Dép dưới sạp",
+      "ten": "Hai đứa trẻ biến mất sau buổi quét chợ",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Sau buổi quét chợ, chiếu ngủ dưới sạp chỉ còn hai vết lõm. Một chiếc dép vá bằng dây cỏ nằm cạnh túi cơm mà người giữ miếu từng mang cho lũ trẻ. Chủ gánh đang tuyển người làm sân ở bờ nước.",
+      "mo": "Sau buổi quét chợ, hai đứa trẻ từng ngủ dưới sạp bỗng mất tích. Chiếc dép vá bằng dây cỏ vẫn cạnh túi cơm người giữ miếu đem cho. Bên bờ nước, chủ gánh hát đang cần người bưng đèn.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Gạch chéo trên sổ thuê",
+      "ten": "Báo đã chết, vẫn lĩnh cơm",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Xe rời chợ để lại bùn đen như đất chân lò. Ở {LOC11}, bảng công ghi trẻ đã chết bằng cùng một nét gạch như sổ thuê tại {LOC03}. Người giữ sổ vẫn phát cơm theo đúng số miệng bị gạch.",
+      "mo": "Chiếc xe rời chợ để lại bùn đen như đất quanh {LOC11}. Sổ thuê ở {LOC03} ghi hai đứa đã chết, nhưng lán thợ mỏ vẫn lĩnh đúng hai suất cơm cho chúng. Người giữ sổ biết cả hai còn sống.",
       "cach": [
         {
           "id": "cach_1",
@@ -84,7 +84,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Tra sổ thuê ở hội quán",
+          "l": "Tra sổ thuê người ở hội quán",
           "t": "Ngươi sao cột phát cơm từ {LOC03}, nơi hai suất vẫn được nhận sau ngày báo tử.",
           "dau": [
             "moc_2_2"
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Giá của một suất cơm",
+      "ten": "Chủ nợ ra giá chuộc trẻ",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Đứa vá dép bị đưa ra cân công, còn đứa nhỏ đứng sau lưng nó. Chủ khế hỏi ngươi đến để chuộc người hay mua phần tin. Cai lán đã để sẵn một tờ giao nhận cho chuyến sau.",
+      "mo": "Chủ nợ ở {LOC11} muốn đưa đứa đi dép vá xuống hầm. Đứa nhỏ nấp sau lưng nó. Gã hỏi ngươi muốn trả tiền chuộc chúng hay cung cấp tin để được vào nhóm làm việc cho gã.",
       "cach": [
         {
           "id": "cach_1",
@@ -137,8 +137,8 @@
         },
         {
           "id": "cach_2",
-          "l": "Đổi tin lấy chỗ trong nhóm dò đường",
-          "t": "Ngươi chỉ chỗ đứa vá dép nấp để được nhận vào nhóm. Nó bị chuyển hầm, đứa nhỏ trốn theo xe.",
+          "l": "Báo chỗ đứa trẻ trốn để theo nhóm dò tin",
+          "t": "Ngươi chỉ cho cai lán nơi đứa đi dép vá đang nấp. Họ nhận ngươi vào nhóm dò đường và đưa đứa ấy xuống hầm. Đứa nhỏ trốn theo xe.",
           "dau": [
             "moc_3_2"
           ]
@@ -162,7 +162,7 @@
     },
     {
       "id": "N4",
-      "ten": "Nồi ăn dưới sạp",
+      "ten": "Một chỗ nằm cho trẻ ngoài sổ",
       "cho": {
         "thang": 3
       },
@@ -173,7 +173,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Chủ sạp chịu cho dùng gian phía sau nếu bếp được dọn đều. Ngoài chợ, mạng đưa tin đang tranh phần cơm với đám trẻ tự kiếm. Gánh hát cũng sắp rời bến và còn chỗ cho người bưng đèn.",
+      "mo": "Chủ sạp ở {LOC02} chịu cho dùng gian sau nếu có người dọn bếp. Nhóm đưa tin ngoài chợ lại chỉ muốn chia cơm cho người làm việc. Gánh hát sắp đi, còn chỗ cho một người bưng đèn.",
       "cach": [
         {
           "id": "cach_1",
@@ -185,7 +185,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Nắm mạng tin, chia cơm theo phần việc",
+          "l": "Nắm mạng tin, chia cơm theo công việc",
           "t": "Qua một phiên chợ ngươi giữ đầu mối và chia hết phần góp. Đứa giấu tin bị cắt cơm.",
           "dau": [
             "moc_4_2"
@@ -215,7 +215,7 @@
     },
     {
       "id": "N5",
-      "ten": "Tên trên giấy đi",
+      "ten": "Ghi tên ở lại hay theo gánh hát?",
       "cho": {
         "thang": 6
       },
@@ -226,7 +226,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Bàn ghi hộ kê sát lối ra chợ. Một người muốn ghi đủ tên, một người chỉ xin giữ dấu nhận nhau giữa những đứa đã mất dấu. Bên xe gánh, sợi dây giữ hòm đèn vừa được buộc lại.",
+      "mo": "Bàn ghi hộ ở {LOC02} đã mở. Có đứa muốn được ghi tên đàng hoàng, có đứa sợ lộ chỗ ở. Ngoài cổng, người đánh xe của gánh hát đang buộc nốt hòm đèn lên xe.",
       "cach": [
         {
           "id": "cach_1",
@@ -244,7 +244,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ mạng bằng dấu kín",
+          "l": "Giấu danh sách trẻ, giữ mạng đưa tin",
           "t": "Ngươi giữ sổ tên dưới đáy thúng và giao ám hiệu cho người coi phần cơm.",
           "dau": [
             "moc_5_2"
@@ -299,7 +299,7 @@
         ]
       },
       "t": "Gian sạp vẫn có chỗ nằm sau ngày ghi hộ. Đứa vá dép xin giữ cả tên cũ lẫn tên mới trong một dòng; nó muốn đứa em lớn lên còn nhớ ai từng cõng mình qua chợ.",
-      "su": "Các hộ mới ở {LOC02} có mái trú và tên do chính họ ghi.",
+      "su": "Các hộ mới ở {LOC02} có chỗ trú và tên do chính họ ghi.",
       "dauVong": "gian sạp còn một cuốn sổ có tên do lũ trẻ tự chọn."
     },
     {
@@ -312,9 +312,9 @@
           "moc_5_2"
         ]
       },
-      "t": "Người bán hàng biết đưa tin qua tay ai mới được yên một phiên. Dấu nhận nhau vẫn dùng qua mùa sau, cả trong tay đứa bị cắt cơm mà ngươi chưa từng hỏi lại tên.",
-      "su": "Mạng tin ở {LOC02} chia đồ ăn theo phần việc và giữ tên người ngoài sổ hộ.",
-      "dauVong": "một đứa từng bị cắt cơm còn nhớ dấu nhận người của {ten}."
+      "t": "Người bán hàng biết đưa tin qua tay ai mới được yên một phiên. Dấu xác nhận nhau vẫn dùng qua mùa sau, cả trong tay đứa bị cắt cơm mà ngươi chưa từng hỏi lại tên.",
+      "su": "Mạng tin ở {LOC02} chia đồ ăn theo công việc và giữ tên người ngoài sổ hộ.",
+      "dauVong": "một đứa từng bị cắt cơm còn nhớ dấu xác nhận người của {ten}."
     },
     {
       "id": "C",

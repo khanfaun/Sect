@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Lời đau sau lần buộc",
+      "ten": "Người bệnh đau hơn sau khi bó nẹp",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Người được ngươi bó nẹp ở {LOC14} nói đau hơn khi nghỉ. Vết dây còn hằn trên da, và họ chưa dám đặt chân xuống đất. Người coi bệnh chừa một trang để ghi kết quả sau nhiều lượt.",
+      "mo": "Người ngươi bó nẹp ở {LOC14} nói lúc nghỉ lại đau hơn. Dây để vết hằn, họ chưa dám đặt chân xuống. Người coi bệnh muốn theo dõi thêm trước khi nói đã khỏi.",
       "cach": [
         {
           "id": "cach_1",
@@ -37,7 +37,7 @@
         {
           "id": "cach_2",
           "l": "Ghi lời đau rồi hỏi giới hạn",
-          "t": "Ngươi chép đúng lời người bệnh, xin người coi xem trước khi đặt lượt thử sau.",
+          "t": "Ngươi chép đúng lời người bệnh, xin người coi xem trước khi đặt lần thử sau.",
           "dau": [
             "moc_1_2"
           ]
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Dấu nẹp giống nhau",
+      "ten": "Nhiều cựu binh bị thương cùng chỗ",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "{NP27} dẫn ngươi qua những giường người trở về ở {LOC14}. Nhiều chân có vết thương cùng một chỗ dù người bệnh đi các lượt khác nhau. Một người còn giữ thanh gỗ có dấu quân.",
+      "mo": "{NP27} dẫn ngươi qua dãy giường ở {LOC14}. Nhiều người bị thương đúng một chỗ dù về từ các lượt khác nhau. Một người giữ thanh gỗ có dấu của quân.",
       "cach": [
         {
           "id": "cach_1",
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Lệnh luyện trước ngày lành",
+      "ten": "Lính bị bắt luyện khi chưa lành",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Thẻ từ {LOC11} ghi trang bị có cạnh lỗi. Lệnh ở {LOC13} buộc người dùng nó luyện thêm ngay sau ngày đau. Hai bàn ký khác nhau, nhưng đã được báo cùng một dấu từ trại.",
+      "mo": "Phiếu {LOC11} ghi một món trang bị có cạnh lỗi. Lệnh ở {LOC13} buộc người dùng nó tập tiếp ngay sau hôm báo đau. Hai người ký đều từng được trại báo về vết thương.",
       "cach": [
         {
           "id": "cach_1",
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Người chờ được đứng",
+      "ten": "Giúp tập đi hay giao người cho quân?",
       "cho": {
         "thang": 3
       },
@@ -168,7 +168,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Ở {LOC14}, người đã bước ổn xin chỗ tập tiếp. Người gọi quân mang giấy ứng tới, còn một gia đình chỉ muốn ngươi ngồi cùng người không thể chuyển trước tối.",
+      "mo": "Người đã bước ổn ở {LOC14} xin chỗ tập tiếp. Người gọi quân mang giấy ứng công. Một gia đình khác chỉ muốn có người ngồi cạnh bệnh nhân chưa thể chuyển.",
       "cach": [
         {
           "id": "cach_1",
@@ -185,7 +185,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giao người chưa lành cho quân",
+          "l": "Cho lính trở lại đơn vị dù chưa lành",
           "t": "Ngươi ký họ đủ trở lại theo giấy ứng, dù biết một người vẫn bước lệch.",
           "dau": [
             "moc_4_2"
@@ -215,7 +215,7 @@
     },
     {
       "id": "N5",
-      "ten": "Nơi đặt chân sau đợt dưỡng",
+      "ten": "Ai chăm người sau khi tháo nẹp?",
       "cho": {
         "thang": 6
       },
@@ -226,7 +226,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Một gian trống ở {LOC14} có thể dùng làm chỗ tập. Người gọi quân đã chừa đường cho ngươi theo. Những gia đình còn ở trại muốn biết ai sẽ nhận ca vượt sức người bó nẹp.",
+      "mo": "Một gian ở {LOC14} có thể dùng làm chỗ tập. Quân cũng đã chừa chỗ cho ngươi theo. Các hộ trong trại muốn biết bệnh nhân sẽ được chuyển đến ai nếu thợ bó nẹp chịu thua.",
       "cach": [
         {
           "id": "cach_1",
@@ -297,8 +297,8 @@
           "moc_5_2"
         ]
       },
-      "t": "Đơn vị nhận đủ người theo hợp đồng, kể cả người ngươi biết chưa lành. Dấu chân lệch thành một vệt riêng ở cửa trại sau lần đổi lượt gác. Sổ ứng công vẫn ghi người ấy đã được duyệt trở lại.",
-      "su": "Quân nhận người chưa lành theo hợp đồng của {ten}.",
+      "t": "Đơn vị nhận đủ người theo hợp đồng, kể cả người ngươi biết chưa lành. Dấu chân lệch thành một vệt riêng ở cửa trại sau lần chuyển sang lượt khác gác. Sổ ứng công vẫn ghi người ấy đã được duyệt trở lại.",
+      "su": "Đơn vị nhận lính chưa lành theo hợp đồng của {ten}.",
       "dauVong": "dấu chân không đều còn trong lời người từng cùng gác trại."
     },
     {

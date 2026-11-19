@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Phiếu gửi và hòm bạc",
+      "ten": "Sạp bạc không đủ tiền trả người gửi",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Hòm ở {LOC03} còn bạc thật lẫn miếng rỗng. Số giấy gửi nhiều hơn phần bạc đếm được ngay cả khi tính cả miếng rỗng. Người thừa kế phải tự ghi chỗ thiếu trước khi mở sạp.",
+      "mo": "Hòm ở {LOC03} có cả bạc thật lẫn miếng rỗng. Số giấy gửi nhiều hơn số bạc trong hòm ngay cả khi tính bạc rỗng. Ngươi phải biết thiếu bao nhiêu trước khi mở sạp.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Mẫu cùng vết lõm",
+      "ten": "Bạc thật bị đổi lấy bạc giả",
       "cho": {
         "thang": 2
       },
@@ -72,11 +72,11 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Mẫu từ {LOC11} mang vết lõm giống miếng rỗng ở hòm. Phiếu giao còn ghi người lấy bạc thật đem đổi mẫu. Chỗ đặt khuôn đã bỏ trống, nhưng người coi lửa vẫn giữ ngày giao.",
+      "mo": "Miếng đúc ở {LOC11} có cùng vết lõm với bạc rỗng trong hòm. Phiếu giao ghi ai đã lấy bạc thật đổi mẫu ấy. Người coi lò vẫn nhớ ngày giao khuôn.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối ngày để tách hai món lỗ",
+          "l": "So ngày để tách hai món lỗ",
           "t": "Ngươi tách phần bạc bị lấy đi khỏi phần thêm do lô mạo, ghi ai nhận.",
           "dau": [
             "moc_2_1"
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Di chúc ghi hai việc",
+      "ten": "Thừa kế cả quầy lẫn khoản nợ",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Tờ di chúc ở {LOC02} cho người thừa kế đứng quầy nhưng buộc nhận giấy gửi theo tờ đối. Một người muốn tách hai việc ấy. Người giữ di chúc đặt cả phần quyền lẫn phần nợ ra bàn.",
+      "mo": "Di chúc ở {LOC02} cho người thừa kế giữ quầy, đồng thời buộc họ trả phần bạc đã nhận giữ. Một người muốn ngươi nhận quyền mà bỏ nợ. Người giữ chúc thư đưa cả hai điều ra bàn.",
       "cach": [
         {
           "id": "cach_1",
@@ -162,7 +162,7 @@
     },
     {
       "id": "N4",
-      "ten": "Người xếp hàng rút bạc",
+      "ten": "Chủ sạp trả bạc hay phát thêm giấy?",
       "cho": {
         "thang": 3
       },
@@ -173,12 +173,12 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Người gửi đã tới {LOC03}, người đầu hàng giữ giấy bị nghi. Quỹ có thể trả theo thứ tự treo, đổi sạp lấy bạc thật hoặc đóng cửa cho người cầm giấy phải đi nơi khác.",
+      "mo": "Người gửi đã xếp hàng ở {LOC03}, người đầu cầm một phiếu bị nghi giả. Có thể trả theo thứ tự đã báo, bán sạp lấy bạc, hoặc đóng cửa và cho họ cầm giấy đi.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Trả theo thứ tự và ghi phiếu đã lĩnh",
-          "t": "Ngươi cho người gửi đối dấu rồi nhận phần đúng lượt, giấy giả đã được báo.",
+          "t": "Ngươi cho người gửi so dấu rồi nhận phần đúng lượt, giấy giả đã được báo.",
           "dau": [
             "moc_4_1"
           ],
@@ -190,7 +190,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Phát giấy thiếu bạc và buộc điểm bán nhận",
+          "l": "Phát giấy thiếu bạc và ép các quầy nhận",
           "t": "Ngươi phát giấy vượt hòm, dùng cam kết khiến các điểm vẫn nhận theo giá ghi.",
           "dau": [
             "moc_4_2"
@@ -233,7 +233,7 @@
     },
     {
       "id": "N5",
-      "ten": "Dòng cuối trong hòm",
+      "ten": "Cân lần cuối trước khi giao chìa",
       "cho": {
         "thang": 6
       },
@@ -244,7 +244,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Ở {LOC03}, hòm mở lần cuối để đối số bạc còn. Có người xin giữ hộ nữa, có người trả giấy, còn người mua sạp chờ nhận chìa. Người chưa lĩnh đủ muốn tự viết phần mình thiếu.",
+      "mo": "Hòm ở {LOC03} mở để đếm bạc còn. Người mua sạp chờ chìa khóa. Những người chưa lĩnh đủ muốn ghi món sạp còn nợ trước khi tấm biển bị tháo.",
       "cach": [
         {
           "id": "cach_1",
@@ -282,8 +282,8 @@
         }
       ],
       "tuDien": {
-        "t": "Hòm đóng, giấy nhận thiếu còn đợi người ký đối.",
-        "su": "Hòm đóng, giấy nhận thiếu còn đợi người ký đối.",
+        "t": "Hòm đóng, giấy ghi số còn thiếu còn đợi người ký đối.",
+        "su": "Hòm đóng, giấy ghi số còn thiếu còn đợi người ký đối.",
         "dau": [
           "qua_han_5"
         ]
@@ -302,7 +302,7 @@
         ]
       },
       "t": "Người gửi nhìn vào hòm trước khi đưa phiếu. Những tờ giả đã được báo và giữ dấu riêng để người tới muộn vẫn tra. Một người nhận bạc gấp phiếu đã trả vào túi, rồi mới đưa khoản gửi mới lên cân.",
-      "su": "Sạp công bố giấy giả và xử nghĩa vụ theo lượt kiểm quỹ.",
+      "su": "Sạp công bố giấy giả và xử nghĩa vụ theo lần kiểm tra quỹ.",
       "dauVong": "một phiếu đã trả có chữ ký người đứng cạnh lần mở hòm."
     },
     {
@@ -317,7 +317,7 @@
         ]
       },
       "t": "Phe giữ quầy trả công bằng giấy và được các điểm bán nhận đủ. Đến nơi người gửi muốn lấy bạc, hòm không còn đủ mở cho cả hàng. Một vùng nhớ ngày họ mang tiền giấy về mà không mua được phần đã hẹn.",
-      "su": "Giấy thiếu bảo chứng lưu hành theo quyền ép nhận, một vùng vỡ quỹ.",
+      "su": "Giấy thiếu bảo đảm lưu hành theo quyền ép nhận, một vùng vỡ quỹ.",
       "dauVong": "người ở vùng vỡ quỹ còn giữ giấy từng được nhận ngang bạc."
     },
     {
@@ -335,5 +335,5 @@
       "dauVong": "hồ sơ còn chữ nhận thiếu của người chưa lĩnh hết tiền gửi."
     }
   ],
-  "ngoai": "Hòm đóng, giấy nhận thiếu còn đợi người ký đối."
+  "ngoai": "Hòm đóng, giấy ghi số còn thiếu còn đợi người ký đối."
 }

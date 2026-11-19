@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Tên trong tro lạnh",
+      "ten": "Tên người sống trong sổ tử",
       "cho": {
         "thang": 1
       },
@@ -25,21 +25,21 @@
         "noi": "LOC12",
         "vai": "NP23"
       },
-      "mo": "{NP23} đưa ngươi chổi và bản chuông để chép lúc quét tháp tro ở {LOC12}. Một dòng sổ tử mang tên ngươi, ghi ngày ngươi còn nhận chổi từ chính kho ấy. Dấu nhận chổi vẫn nằm dưới bậc.",
-      "thayThe": "Trong văn bản thư khố {LOC12} có bản chuông kẹp tờ nhận chổi. Tên người nhận cũng nằm trong sổ tro ở đúng ngày ấy. Nét mực của cả hai còn đọc được.",
+      "mo": "{NP23} giao ngươi chổi quét tháp tro ở {LOC12} và bản ghi tiếng chuông để chép. Tên ngươi nằm ngay trong sổ tử, ghi đúng ngày ngươi ký nhận chổi. Tờ nhận vẫn còn dưới bậc.",
+      "thayThe": "Trong văn bản thư khố {LOC12} có bản chuông kẹp giấy xác nhận chổi. Tên người nhận cũng nằm trong sổ tro ở đúng ngày ấy. Nét mực của cả hai còn đọc được.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Quét tháp và chép nguyên dòng",
-          "t": "Ngươi quét sạch bậc rồi chép ngày ghi tử, giữ cả tờ nhận chổi có dấu tay.",
+          "t": "Ngươi quét sạch bậc rồi chép ngày ghi là đã chết, giữ cả giấy xác nhận chổi có dấu tay.",
           "dau": [
             "moc_1_1"
           ]
         },
         {
           "id": "cach_2",
-          "l": "Dò tên cạnh phiếu công",
-          "t": "Ngươi trải phiếu công trên thềm, chép tên xuất hiện ở cả sổ tro lẫn sổ chổi.",
+          "l": "Dò tên cạnh phiếu tiền công",
+          "t": "Ngươi trải phiếu tiền công trên thềm, chép tên xuất hiện ở cả sổ tro lẫn sổ chổi.",
           "dau": [
             "moc_1_2"
           ]
@@ -47,7 +47,7 @@
         {
           "id": "cach_3",
           "l": "Xin giữ riêng tờ sổ tro",
-          "t": "Ngươi gập tờ sổ vào vải, tránh để nước dột làm trôi mất ngày ghi tử.",
+          "t": "Ngươi gập tờ sổ vào vải, tránh để nước dột làm trôi mất ngày ghi là đã chết.",
           "dau": [
             "moc_1_3"
           ]
@@ -63,7 +63,7 @@
     },
     {
       "id": "N2",
-      "ten": "Dấu tay ngày chôn",
+      "ten": "Dấu tay của người bị ghi đã chết",
       "cho": {
         "thang": 2
       },
@@ -74,20 +74,20 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Ở {LOC14}, người coi sổ cứu thương cho tra phiếu phát chăn. Cùng ngày sổ tro ghi ngươi chết, phiếu có dấu tay ngươi nhận chăn cho một người bó xương. Tấm chăn còn vết vá.",
+      "mo": "Người coi sổ ở {LOC14} đưa phiếu phát chăn cho ngươi xem. Đúng ngày sổ tro bảo ngươi chết, phiếu này có dấu tay ngươi nhận chăn. Tấm chăn vá ấy vẫn còn ở trại.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Lấy lời người phát chăn",
-          "t": "Ngươi đối dấu tay và xin người phát xác nhận mình đã đến nhận chăn hôm ấy.",
+          "t": "Ngươi so dấu tay và xin người phát xác nhận mình đã đến nhận chăn hôm ấy.",
           "dau": [
             "moc_2_1"
           ]
         },
         {
           "id": "cach_2",
-          "l": "Mượn phiếu công ở trại",
-          "t": "Ngươi mang bản chép phiếu có dấu nhận, để người ở tháp đối lại ngày ghi tử.",
+          "l": "Mượn phiếu tiền công ở trại",
+          "t": "Ngươi mang bản chép phiếu có dấu xác nhận, để người ở tháp đối lại ngày ghi là đã chết.",
           "dau": [
             "moc_2_2"
           ]
@@ -102,8 +102,8 @@
         }
       ],
       "tuDien": {
-        "t": "Phiếu phát chăn được đóng lại, ngày ghi tử chưa được đối chứng.",
-        "su": "Phiếu phát chăn được đóng lại, ngày ghi tử chưa được đối chứng.",
+        "t": "Phiếu phát chăn được đóng lại, ngày ghi là đã chết chưa được đối chứng.",
+        "su": "Phiếu phát chăn được đóng lại, ngày ghi là đã chết chưa được đối chứng.",
         "dau": [
           "qua_han_2"
         ]
@@ -111,7 +111,7 @@
     },
     {
       "id": "N3",
-      "ten": "Tai trận trên vành chuông",
+      "ten": "Chuông giữ lại tiếng người",
       "cho": {
         "thang": 2
       },
@@ -122,12 +122,12 @@
         "cach": "tin",
         "noi": "LOC05"
       },
-      "mo": "Mẫu in vành chuông khớp các vạch thu ở {LOC05}. Bản thử cũ cho thấy nút này ghi ký ức thành tiếng; người ghi sổ đã coi mỗi tiếng là một cái chết. Một khuôn đất nằm cạnh bản thử.",
+      "mo": "Bản in vành chuông khớp vạch thu trong trận đồ ở {LOC05}. Trận lưu ký ức rồi phát thành tiếng. Người viết sổ tro đã nhầm mỗi tiếng gọi với tin một người qua đời.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Sao cách nhận lời tự nguyện",
-          "t": "Ngươi xin thợ trận thử nút với lời người còn sống, có người chứng và quyền dừng.",
+          "l": "Học cách chỉ thu lời người tự nguyện",
+          "t": "Ngươi xin thợ trận thử nút với lời người còn sống, có người làm chứng và quyền dừng.",
           "dau": [
             "moc_3_1"
           ]
@@ -159,7 +159,7 @@
     },
     {
       "id": "N4",
-      "ten": "Người nghe đòi gọi lại",
+      "ten": "Đó là giọng cũ hay lời mới?",
       "cho": {
         "thang": 3
       },
@@ -170,7 +170,7 @@
         "cach": "tin",
         "noi": "LOC04"
       },
-      "mo": "Dưới mái {LOC04}, {NP07} nghe một tiếng chuông giống giọng người đã mất. Người coi miếu chỉ vào bản khắc: tiếng ấy nằm trong mạch thu cũ. Có người muốn dùng nó làm chứng, có người muốn nghe thêm lần nữa.",
+      "mo": "Dưới mái {LOC04}, {NP07} nhận ra giọng một người đã mất. Bản khắc cho thấy trận chỉ phát lại tiếng từng ghi. Có người muốn dùng tiếng ấy làm chứng, người khác chỉ muốn nghe thêm lần nữa.",
       "cach": [
         {
           "id": "cach_1",
@@ -200,7 +200,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Dùng ký ức gọi người tới theo mình",
+          "l": "Dùng giọng đã ghi để khiến người thân nghe lời",
           "t": "Ngươi cho phát tiếng đã ghi của người mất để gọi thân nhân tới và nhận quyền giữ chuông.",
           "dau": [
             "moc_4_3"
@@ -208,8 +208,8 @@
         }
       ],
       "tuDien": {
-        "t": "Dân miếu cất bản khắc, vài người vẫn lầm tiếng thu là lời của người chết.",
-        "su": "Dân miếu cất bản khắc, vài người vẫn lầm tiếng thu là lời của người chết.",
+        "t": "Dân miếu cất bản khắc, vài người vẫn lầm tiếng đã ghi là lời của người chết.",
+        "su": "Dân miếu cất bản khắc, vài người vẫn lầm tiếng đã ghi là lời của người chết.",
         "dau": [
           "qua_han_4"
         ]
@@ -217,7 +217,7 @@
     },
     {
       "id": "N5",
-      "ten": "Treo dây hay tháo dây",
+      "ten": "Để chuông vang hay tháo dây?",
       "cho": {
         "thang": 6
       },
@@ -228,7 +228,7 @@
         "cach": "tin",
         "noi": "LOC12"
       },
-      "mo": "Ở {LOC12}, dây chuông được thả xuống tới nền. Người ghi sổ chừa ba tờ riêng cho lời tự nguyện, vật giữ tiếng và lệnh nối mạch. Khách ngoài tháp đứng chờ nghe tiếng đầu từ trên cao.",
+      "mo": "Dây chuông ở {LOC12} đã được thả sát nền. Thợ trận có thể sửa cách thu tiếng, cất ký ức cũ vào khuôn đất hoặc nối lại mạch cũ. Người qua tháp đang đợi quyết định.",
       "cach": [
         {
           "id": "cach_1",
@@ -259,7 +259,7 @@
         {
           "id": "cach_3",
           "l": "Nối mạch theo quyền giữ chuông",
-          "t": "Ngươi giữ lệnh nối và dùng tiếng thu cũ ép những người đã tin phải làm theo.",
+          "t": "Ngươi giữ lệnh nối và dùng tiếng đã ghi cũ ép những người đã tin phải làm theo.",
           "dau": [
             "moc_5_3"
           ]
@@ -286,7 +286,7 @@
         ]
       },
       "t": "Sổ tro được sửa ngay trước người từng nhận chăn. Từ hôm ấy, lời vào chuông đều có người tự nói và biết chỗ xin xóa. Người trông thư khố giữ riêng tờ đặt lại tên ngươi bên bản ghi buổi đầu.",
-      "su": "{LOC12} mở thư khố lời tự nguyện và gỡ tên ghi tử sai.",
+      "su": "{LOC12} mở thư khố lời tự nguyện và gỡ tên ghi là đã chết sai.",
       "dauVong": "người coi chuông đọc được tên người từng thoát khỏi sổ tử."
     },
     {

@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Ngựa quỵ dưới máng",
+      "ten": "Con ngựa bị quất đến kiệt",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Con ngựa ở {LOC13} đã bị quất đến kiệt, ngã ngay khi chạm mõm vào máng. {NP26} chỉ những vết roi dưới bờm. Túi thư buộc phía yên còn nguyên dấu trạm.",
+      "mo": "Ngựa ở {LOC13} quỵ ngay trước máng. {NP26} vạch bờm cho ngươi thấy những vết roi. Túi thư vẫn buộc bên yên, còn nguyên dấu của trạm.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Hai giờ trên cùng một túi",
+      "ten": "Ai giữ thư lại giữa đường?",
       "cho": {
         "thang": 2
       },
@@ -72,11 +72,11 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Hai túi ở {LOC13} đóng dấu giao trái giờ. Tờ trực ghi một túi đợi trong chuồng dù còn ngựa khỏe. Người cầm roi tối ấy ký ngay dưới giờ bị bỏ trống.",
+      "mo": "Hai túi thư ở {LOC13} ghi giờ giao trái nhau. Sổ trực cho thấy một túi bị giữ trong chuồng dù còn ngựa khỏe. Người kéo dài chuyến ấy có ký tên ở cuối sổ.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối hai túi trước bàn trạm",
+          "l": "So hai túi trước bàn trạm",
           "t": "Ngươi chép hai giờ cạnh nhau và xác định người giữ túi đã cho chuyến đợi.",
           "dau": [
             "moc_2_1"
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Tờ lệnh tới tay chỉ huy",
+      "ten": "Lệnh rút đến sau khi tuyết phủ",
       "cho": {
         "thang": 2
       },
@@ -120,12 +120,12 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "{NP25} từng nhận lệnh rút sau lúc tuyết phủ lối ra {LOC13}. Người đưa túi còn sống, cạnh yên có thẻ con ngựa chở nó đã chết. Cả hai dấu nối về cùng trạm.",
+      "mo": "{NP25} nhận lệnh rút khi tuyết đã bít đường khỏi {LOC13}. Người đưa thư còn sống, còn con ngựa chở thư đã chết. Thẻ đeo yên có thể giúp xác định nó qua trạm lúc nào.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Nối thẻ chuyến với lệnh rút",
-          "t": "Ngươi lấy thẻ ngựa đối giờ {NP25} nhận, thấy lệnh thật đã bị giữ giữa đường.",
+          "t": "Ngươi lấy thẻ ngựa so giờ {NP25} nhận, thấy lệnh thật đã bị giữ giữa đường.",
           "dau": [
             "moc_3_1"
           ]
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Ai mang túi qua gió",
+      "ten": "Ai mang bản lệnh thật?",
       "cho": {
         "thang": 3
       },
@@ -168,7 +168,7 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Trước đợt tuyết, bộ chỉ huy còn chờ bản xác nhận giờ thật. Kẻ mua chậm giờ đã giữ tiền trong áo. Người giữ ngựa xin ngươi chọn ai mang thư và chỗ họ được đổi ngựa.",
+      "mo": "Bộ chỉ huy đang chờ bản xác nhận giờ giao thư. Có kẻ muốn trả tiền để giữ chuyến lại. Người giữ ngựa hỏi ngươi sẽ chọn ai mang thư và giúp họ đổi ngựa ở đâu.",
       "cach": [
         {
           "id": "cach_1",
@@ -185,7 +185,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Bán một canh chậm thư",
+          "l": "Lấy tiền để giữ thư chậm một canh",
           "t": "Ngươi chọn người đã chịu giá, cho người ấy đổi ngựa và giữ quyền giao giờ tại trạm.",
           "dau": [
             "moc_4_2"
@@ -228,7 +228,7 @@
     },
     {
       "id": "N5",
-      "ten": "Chuông trên dây cương",
+      "ten": "Trạm quân hay đường thồ của dân?",
       "cho": {
         "thang": 6
       },
@@ -239,7 +239,7 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Bảng đổi ngựa {LOC13} chừa chỗ cho việc đi trạm tiếp. Ngựa đã khỏi đứng sát những con người dân trả về. Ngoài cửa có người muốn biết ai sẽ giữ giờ thư từ mùa sau.",
+      "mo": "Trạm {LOC13} sắp lập bảng đổi ngựa mới. Một số ngựa đã khỏi, số khác được trả về làng. Người coi trạm muốn biết từ mùa sau ai định giờ giao thư và ai giữ ngựa nghỉ.",
       "cach": [
         {
           "id": "cach_1",
@@ -270,7 +270,7 @@
         {
           "id": "cach_3",
           "l": "Mở đường thồ ngoài quân tịch",
-          "t": "Ngươi trả thẻ quân và giao phiếu chở hàng cho người, ngựa đã rời cửa ải.",
+          "t": "Ngươi trả thẻ lính và giao phiếu chở hàng cho người, ngựa đã rời cửa ải.",
           "dau": [
             "moc_5_3"
           ]
@@ -297,7 +297,7 @@
         ]
       },
       "t": "Bản thật đến tay chỉ huy trước khi tuyết khóa đường. Đội ngoài ải có thể rút theo lệnh đúng, còn trạm giữ đủ ngựa khỏe cho chuyến sau. Người chăn khắc tên những người giữ giờ lên chuông dây cương.",
-      "su": "{LOC13} nhận lệnh đúng giờ và tổ chức lượt đổi ngựa có ca nghỉ.",
+      "su": "{LOC13} nhận lệnh đúng giờ và tổ chức việc đổi ngựa có ca nghỉ.",
       "dauVong": "chuông ngựa còn tên người từng đưa thư tới trước tuyết."
     },
     {

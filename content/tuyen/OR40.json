@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Vệt khác dưới miệng bao",
+      "ten": "Bao đường nặng hơn số ghi trên niêm",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Lô đường ở {LOC03} có bao nặng hơn phần niêm ghi. Mấy hạt dưới miệng bao khác màu khi đặt cạnh mẫu. Người giữ kho bảo số bao ấy được đưa thẳng sang lối phát riêng.",
+      "mo": "Vài bao ở {LOC03} cân nặng hơn giấy niêm ghi. Hạt dưới miệng bao có màu khác mẫu đường thường. Người coi kho nói mấy bao này xuất theo một lối riêng.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Phiếu bệnh cạnh mẫu đường",
+      "ten": "Người dùng khó chịu khi ngừng ăn",
       "cho": {
         "thang": 2
       },
@@ -72,11 +72,11 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Ở {LOC10}, người dùng bao pha trở lại nhiều lần vì thấy khổ sở khi ngừng. Ca theo dõi đối đúng dấu mẫu; một phiếu từ {LOC13} ghi cùng dấu nhận. Người coi bệnh chưa kết lời cho những ca không khớp.",
+      "mo": "Ở {LOC10}, những người dùng lô đường pha trở lại vì thấy khổ sở khi ngừng. Mẫu từ túi của họ khớp dấu bao. Phiếu quân kho {LOC13} cũng mang cùng dấu ấy.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối mẫu với các ca đã theo dõi",
+          "l": "So mẫu với các ca đã theo dõi",
           "t": "Ngươi giữ kết luận cho những ca khớp, báo riêng phần chưa rõ với người nhận.",
           "dau": [
             "moc_2_1"
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Hai dấu dưới hợp đồng",
+      "ten": "Ai biết có chất pha?",
       "cho": {
         "thang": 2
       },
@@ -120,11 +120,11 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Ở {LOC03}, người bán chất pha đã ký phụ lục, còn người vận chỉ ký nhận tải. Hợp đồng có một lời dặn về khách mua lặp lại. Người chở xin bản riêng để khỏi bị ghi vào phần đã biết.",
+      "mo": "Phụ lục ở {LOC03} có chữ ký người bán chất pha. Người đánh xe chỉ ký nhận tải. Người chở muốn xin một bản phiếu để khỏi bị đổ là biết trước.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối dấu rồi thông báo bên nhận",
+          "l": "So dấu rồi thông báo bên nhận",
           "t": "Ngươi ghi ai biết, ai chỉ chở và gửi nơi có ca theo dõi phiếu thu hồi.",
           "dau": [
             "moc_3_1"
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Phiên lấy bao về",
+      "ten": "Thu hồi các bao pha hay bán tiếp?",
       "cho": {
         "thang": 3
       },
@@ -168,7 +168,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Cửa kho {LOC03} nhận xe hàng trả. Bên ngoài có khách muốn đúng bao dấu cũ và người nhận đồ khô đang chờ. Người chở hàng cầm bản đối dấu để biết mình phải trả bao nào.",
+      "mo": "Xe chở hàng trả đã tới {LOC03}. Có khách vẫn muốn mua đúng dấu bao cũ, còn người đặt hàng khô đang chờ. Người chở cần biết phải trả bao nào.",
       "cach": [
         {
           "id": "cach_1",
@@ -185,7 +185,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Bán tiếp cho người đã lệ thuộc",
+          "l": "Tiếp tục bán đường pha cho người lệ thuộc",
           "t": "Ngươi bán đúng dấu bao mà khách tìm, biết họ quay lại vì triệu chứng.",
           "dau": [
             "moc_4_2"
@@ -202,7 +202,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Kết toán lô pha và chuyển hàng an toàn",
+          "l": "Thanh toán lô pha và chuyển hàng an toàn",
           "t": "Ngươi giao bao pha cho người coi, đối giấy nhận rồi chuyển hàng thường sang đơn mới.",
           "dau": [
             "moc_4_3"
@@ -219,7 +219,7 @@
     },
     {
       "id": "N5",
-      "ten": "Biển kho sau lượt giao",
+      "ten": "Giữ kho đường hay đổi sang hàng khô?",
       "cho": {
         "thang": 6
       },
@@ -230,7 +230,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Ở {LOC03}, bàn xuất có dấu mới, dấu cũ và biển hàng khô. Khách tới đòi đúng bao từng mua đứng riêng khỏi người kiểm lô. Bên tường sau còn lỗ đinh của tấm biển cũ.",
+      "mo": "Bàn xuất ở {LOC03} đặt cả dấu niêm mới lẫn dấu cũ. Khách quen vẫn hỏi bao pha. Chủ xe hàng khô thì đợi xem ngươi có treo biển mới hay không.",
       "cach": [
         {
           "id": "cach_1",
@@ -248,7 +248,7 @@
         {
           "id": "cach_2",
           "l": "Dựng mạng khách theo dấu bao cũ",
-          "t": "Ngươi dành nguồn pha cho các điểm bán mới, giữ danh sách người mua lặp.",
+          "t": "Ngươi dành nguồn pha cho các điểm bán mới, giữ danh sách sách người mua lặp.",
           "dau": [
             "moc_5_2"
           ],
@@ -261,7 +261,7 @@
         {
           "id": "cach_3",
           "l": "Mở cửa bằng hàng khô đã nhận đơn",
-          "t": "Ngươi treo biển mới, giao hết đơn khô và cất giấy kết toán bao pha.",
+          "t": "Ngươi treo biển mới, giao hết đơn khô và cất giấy thanh toán bao pha.",
           "dau": [
             "moc_5_3"
           ]
@@ -314,8 +314,8 @@
           "moc_5_3"
         ]
       },
-      "t": "Đơn hàng khô chạy hết một lượt, người chở mang về giấy đã nhận đủ. Bao pha không còn ở kho và giấy bàn giao chỉ rõ nơi chịu giữ chúng. Biển đường cũ nằm sau vách mới, mặt chữ quay vào trong.",
-      "su": "Nhà đã kết toán bao pha và mở kho hàng khô có chuyến giao.",
+      "t": "Đơn hàng khô chạy hết một lượt, người chở mang về giấy đã nhận đủ. Bao pha không còn ở kho và giấy bàn giao chỉ rõ nơi chịu giữ chúng. Biển đường cũ nằm sau vách mới, mặt có chữ quay vào trong.",
+      "su": "Nhà đã thanh toán bao pha và mở kho hàng khô có chuyến giao.",
       "dauVong": "tấm biển đường cũ nằm sau vách của kho đổi nghề."
     }
   ],

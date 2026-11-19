@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Khuôn đặt trên giấy buộc tội",
+      "ten": "Vết dao nào là của thợ?",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "{NP22} cho xem khuôn bị giữ tại {LOC11}. Vết dao của thợ nằm ở mép, còn nét khiến tiền bị nghi lại đi từ mặt đối. Người giữ khuôn bảo sổ công chỉ ghi một lần đúc.",
+      "mo": "{NP22} cho ngươi xem chiếc khuôn bị giữ ở {LOC11}. Vết dao của thợ nằm ở mép, còn vết trên đồng bạc bị nghi lại đến từ mặt kia. Sổ công chỉ ghi một lượt đúc.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Lô đúc dưới dấu khác",
+      "ten": "Có một khuôn thứ hai",
       "cho": {
         "thang": 2
       },
@@ -72,12 +72,12 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Sổ lửa {LOC11} giấu một lượt đúc sau tờ tổng công. Một khuôn thứ hai được đưa vào theo dấu người có quyền. Mẫu bạc của lượt ấy mang đúng nét mà thợ bị quy.",
+      "mo": "Sổ lò {LOC11} giấu một lượt đúc sau lúc chốt công. Một người có quyền đã cho đưa khuôn thứ hai vào lò. Đồng bạc đúc lần đó mang đúng vết lỗi bị đổ cho thợ.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Lấy mẫu từ lượt đúc khuất",
-          "t": "Ngươi đối dấu lượt với mẫu còn lỗi và xin người coi lửa xác nhận.",
+          "t": "Ngươi so dấu lượt với mẫu còn lỗi và xin người coi lửa xác nhận.",
           "dau": [
             "moc_2_1"
           ]
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Đồng bạc qua sạp",
+      "ten": "Đồng bạc lỗi dẫn tới người duyệt lô",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Một mẫu ở {LOC03} dẫn đến phiếu nhận tại {LOC02}. Phiếu ghi người đổi lấy bạc thật bằng lô bạc mới, đúng dấu trên tờ tổng công. Người coi sạp còn giữ một đồng có vệt lỗi.",
+      "mo": "Ở {LOC03}, người giữ sạp còn một đồng bạc lỗi và phiếu nhận từ {LOC02}. Phiếu cho thấy ai đã đổi lô bạc mới lấy bạc thật. Dấu ấy trùng với dấu trên sổ lò.",
       "cach": [
         {
           "id": "cach_1",
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Mẫu chứng hay vốn",
+      "ten": "Dùng khuôn làm chứng hay kiếm vốn?",
       "cho": {
         "thang": 3
       },
@@ -168,7 +168,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Ở {LOC02}, người xét chờ mẫu đúc cùng lời thợ. Một phe đặt túi bạc đổi khuôn còn nguyên. Thợ cũ đem búa tới, hỏi có thể phá khuôn mà giữ được bản đối chứng không.",
+      "mo": "Người xét ở {LOC02} chờ mẫu bạc và lời thợ. Một phe đem bạc tới đổi lấy khuôn còn nguyên. Thợ cũ hỏi có thể hủy khuôn mà vẫn giữ được bản chứng hay không.",
       "cach": [
         {
           "id": "cach_1",
@@ -185,7 +185,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ khuôn rồi giao một lô giả",
+          "l": "Giữ khuôn và đưa bạc giả ra chợ",
           "t": "Ngươi dùng khuôn đã giữ, đưa lô bạc lỗi vào chợ để lấy vốn cho bên mua.",
           "dau": [
             "moc_4_2"
@@ -216,7 +216,7 @@
     },
     {
       "id": "N5",
-      "ten": "Người đứng bên bàn khắc",
+      "ten": "Ai được quyền kiểm khuôn?",
       "cho": {
         "thang": 6
       },
@@ -227,7 +227,7 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Ở {LOC11}, thợ đến lấy mẫu thử cho lượt sau. Người mua lô bạc muốn ngươi giữ khuôn, còn nhà đặt thẻ thường đã trả công đầu. Hòm mẫu có chỗ để ghi tên người cùng kiểm.",
+      "mo": "Thợ ở {LOC11} tới lấy mẫu cho lượt đúc sau. Người mua lô bạc muốn ngươi giữ khuôn. Nhà đặt thẻ hàng đã trả công cho một mẻ đồ khắc tay.",
       "cach": [
         {
           "id": "cach_1",
@@ -284,7 +284,7 @@
           "moc_5_1"
         ]
       },
-      "t": "Thợ bị quy được xem biên bản có tên người đặt lô thật. Mỗi lượt nhận khuôn sau đó có hai người xem mẫu trước khi đốt lửa. Bản nét thật giữ bên bàn để người học còn phân biệt hai tay dao.",
+      "t": "Thợ bị quy được xem biên bản có tên người đặt lô thật. Mỗi lần nhận khuôn sau đó có hai người xem mẫu trước khi đốt lửa. Bản nét thật giữ bên bàn để người học còn phân biệt hai tay dao.",
       "su": "Lô bạc giả được xử và thợ dùng mẫu kiểm chéo trước khi đúc.",
       "dauVong": "mẫu thử ở {LOC11} giữ nét dao thật của người từng bị quy."
     },

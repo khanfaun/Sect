@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Đèn sau màn",
+      "ten": "Người kéo màn đau tay",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "{NP18} gọi ngươi đỡ đèn sau sân ở {LOC09}. Người kéo màn đau cổ tay nhưng vẫn buộc lại dây để vở được diễn nốt. Cuối buổi có một xấp vai cũ, trang chót bị xé sát mép.",
+      "mo": "{NP18} gọi ngươi giúp một buổi diễn ở {LOC09}. Người kéo màn đau cổ tay nhưng vẫn buộc dây cho vở diễn hết. Trong xấp kịch bản cũ còn một trang bị xé sát mép.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Tiếng hát gặp lời người sống",
+      "ten": "Vở hát kể một vụ bán quân lương",
       "cho": {
         "thang": 2
       },
@@ -72,12 +72,12 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Các mảnh từ {LOC09} nối được nửa trang. Ở {LOC14}, người trở về nghe một câu hát rồi gọi đúng chuyến lương từng bị bán. Họ chỉ chỗ tên trên trang là tên thật và chỗ người viết đã ghép vai.",
+      "mo": "Những mảnh giấy từ {LOC09} ghép được nửa trang kịch. Ở {LOC14}, một cựu binh nghe câu hát và nhận ra chuyến lương từng bị bán. Người ấy chỉ được tên thật nào đã bị đổi thành vai diễn.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Đối tên thật với người trở về",
-          "t": "Ngươi chép lời nhận diện cạnh trang ghép và tách tên thật khỏi vai hư cấu.",
+          "t": "Ngươi chép lời xác nhận diện cạnh trang ghép và tách tên thật khỏi vai hư cấu.",
           "dau": [
             "moc_2_1"
           ]
@@ -93,7 +93,7 @@
         {
           "id": "cach_3",
           "l": "Tra dấu án ở kinh",
-          "t": "Ngươi xin {NP03} đối dấu vụ bán lương và nhận một bản ghi nơi tra án.",
+          "t": "Ngươi xin {NP03} so dấu vụ bán lương và nhận một bản ghi nơi tra án.",
           "dau": [
             "moc_2_3"
           ]
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Sân đổi lấy một câu",
+      "ten": "Người cho mượn sân muốn sửa lời hát",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Một nơi ở {LOC09} chịu dựng sân bằng tiền hộ góp. Người bảo trợ mang gỗ tốt hơn, nhưng xin đổi câu chỉ kẻ bán lương. Người kéo màn hỏi sân nào còn chỗ để đoàn không phải ngủ ngoài nước.",
+      "mo": "Các hộ ở {LOC09} chịu góp dựng sân. Người bảo trợ có gỗ tốt hơn, nhưng muốn đổi câu hát gọi tên kẻ bán lương. Người kéo màn chỉ mong đoàn còn chỗ ngủ.",
       "cach": [
         {
           "id": "cach_1",
@@ -162,7 +162,7 @@
     },
     {
       "id": "N4",
-      "ten": "Lời hát trước mạn đò",
+      "ten": "Hát bản thật hay bản đã sửa?",
       "cho": {
         "thang": 3
       },
@@ -173,7 +173,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Khán giả xếp ghế về phía sông {LOC09}, còn người kéo màn đứng sau rèm. Người bảo trợ ngồi sát lối lên. Đoàn có thể giữ tên thật, hát bản đã sửa hoặc báo đây là lần cuối.",
+      "mo": "Khán giả kê ghế bên sông {LOC09}. Người kéo màn đứng sau rèm, còn người bảo trợ ngồi sát lối lên sân. Tới đoạn cuối, đoàn phải chọn lời nào sẽ được hát trước mọi người.",
       "cach": [
         {
           "id": "cach_1",
@@ -190,7 +190,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Diễn bản đã sửa trước người bảo trợ",
+          "l": "Hát lời đã sửa để được độc quyền diễn",
           "t": "Ngươi đọc đúng câu đã đổi, người trả tiền đóng dấu độc quyền trên giấy diễn.",
           "dau": [
             "moc_4_2"
@@ -233,7 +233,7 @@
     },
     {
       "id": "N5",
-      "ten": "Ai mang chiếc đèn đi",
+      "ten": "Ai mang chiếc đèn đi?",
       "cho": {
         "thang": 6
       },
@@ -244,7 +244,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Sân {LOC09} đã dỡ ghế, chỉ còn đèn, rèm và sổ công. Người kéo màn muốn biết còn lịch diễn tháng tới không. Hai người giữ bản thật và người bảo trợ đã để lời nhắn ở hai đầu sân.",
+      "mo": "Ghế ở sân {LOC09} đã dỡ. Người kéo màn muốn biết đoàn còn lịch diễn hay sẽ chia tiền công và đạo cụ. Hai người giữ bản kịch thật vẫn đợi lời, cũng như người bảo trợ.",
       "cach": [
         {
           "id": "cach_1",
@@ -330,7 +330,7 @@
           "moc_5_3"
         ]
       },
-      "t": "Sau buổi diễn, người nhận đèn đánh dấu nơi mình tới trong sổ công. Người mang rèm đi theo chuyến khác, nhưng ai cũng có phần đã nhận và chỗ để gửi thư. Chiếc đèn vẫn được châm khi có người cũ ghé.",
+      "t": "Sau buổi diễn, người nhận đèn đánh dấu nơi mình tới trong sổ chấm công. Người mang rèm đi theo chuyến khác, nhưng ai cũng có phần đã nhận và chỗ để gửi thư. Chiếc đèn vẫn được châm khi có người cũ ghé.",
       "su": "Đoàn giải tán sau buổi cuối và chia công, đồ, nơi đi theo sổ.",
       "dauVong": "người từng kéo màn vẫn giữ đèn của buổi diễn cuối."
     }

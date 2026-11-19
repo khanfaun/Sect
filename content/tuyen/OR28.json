@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Dây giày dưới ván",
+      "ten": "Khách trả tiền mà chưa từng lên bờ",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Thuyền {LOC09} còn dây giày mắc dưới ván của khách đã trả tiền nhưng chẳng xuống bến. Người dọn đò đã tìm khắp mạn. Sổ chuyến ghi khách ấy xuống ở một giờ nước còn cạn.",
+      "mo": "Dưới ván thuyền ở {LOC09} còn dây giày của khách đi đêm. Sổ ghi khách đã lên bến vào giờ nước cạn. Người dọn đò tìm khắp mạn mà chẳng thấy ai nhớ họ xuống.",
       "cach": [
         {
           "id": "cach_1",
@@ -36,7 +36,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Đối giờ xuống với người gác bến",
+          "l": "So giờ xuống với người gác bến",
           "t": "Ngươi hỏi người gác, biết giờ cạn không có ai bước lên bậc bến.",
           "dau": [
             "moc_1_2"
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Lịch nước cạnh lưới",
+      "ten": "Chiếc giày trong lưới",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Xác mắc lưới ở {LOC09} mang một chiếc giày còn nguyên. Người giữ nước đối giờ và thấy thuyền đã ghé một lối khác trước khi quay. Chỗ đó có người nhận khách từ các chuyến đêm.",
+      "mo": "Lưới ở {LOC09} mắc một thi thể còn mang một chiếc giày. So giờ nước, người coi bến thấy thuyền đã ghé một lối khác. Có người thường tới lối ấy đón khách đêm.",
       "cach": [
         {
           "id": "cach_1",
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Tên nằm trong phiếu giao",
+      "ten": "Chạy nạn hay bị đem bán?",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Phiếu ở {LOC03} ghi giá giao một người không biết bến đến. Một người sống sót nhận dấu ấy, nói khách chạy nạn từng được tự chọn bờ. Chuyến mua người thì không ghi quyền ấy.",
+      "mo": "Phiếu ở {LOC03} ghi giá giao một người không biết mình sẽ bị đưa đi đâu. Người sống sót nói khách chạy nạn từng được tự chọn bờ. Tờ phiếu này xóa hẳn quyền đó.",
       "cach": [
         {
           "id": "cach_1",
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Chuyến đêm đang buộc",
+      "ten": "Chuyến đò sắp giao người",
       "cho": {
         "thang": 3
       },
@@ -168,7 +168,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Thuyền đêm {LOC09} còn buộc dây với khách ở khoang. Người mua đã đến đúng dấu hẹn. Một bờ khác có người sẵn lòng đón, nhưng muốn nghe chính khách chọn hướng trước lúc nhổ cọc.",
+      "mo": "Thuyền đêm ở {LOC09} vẫn buộc cọc, khách còn trong khoang. Người mua đã đến. Bờ bên kia có người sẵn lòng đón nếu được nghe chính khách chọn nơi lên.",
       "cach": [
         {
           "id": "cach_1",
@@ -202,7 +202,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Đưa khách đang chở tới chỗ có chứng",
+          "l": "Đưa khách lên bờ có người làm chứng",
           "t": "Ngươi cho họ tự rời thuyền tại bến có người giữ lưới đứng chứng.",
           "dau": [
             "moc_4_3"
@@ -219,7 +219,7 @@
     },
     {
       "id": "N5",
-      "ten": "Tên bên cọc buộc",
+      "ten": "Tên người mất trên cọc bến",
       "cho": {
         "thang": 6
       },
@@ -230,7 +230,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Ở {LOC09}, người giữ cọc hỏi sẽ treo đèn theo dấu nào. Thân nhân đem một cái tên cần ghi. Người mua đứng ngoài bậc đá, đợi biết có còn chuyến nhận khách kín sau đêm ấy.",
+      "mo": "Thân nhân tới {LOC09} mang một cái tên cần khắc lên cọc. Người coi bến muốn biết nên treo đèn theo dấu nào. Kẻ mua người đứng ngoài bậc đá chờ hỏi chuyến sau.",
       "cach": [
         {
           "id": "cach_1",

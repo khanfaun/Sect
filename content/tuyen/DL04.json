@@ -7,7 +7,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Sổ mở rộng hơn một nhà",
+      "ten": "Từ một chuyến hàng đến nhiều kho",
       "cho": {
         "thang": 1
       },
@@ -18,7 +18,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Ở {LOC03}, người nhận hàng đặt sổ tuyến bên cạnh tờ góp vốn. Một nhà có thể giữ được chuyến đầu, nhưng cả mạng vận còn cần quy tắc để khi một kho hết hàng, các kho khác không cùng khóa cửa.",
+      "mo": "Người nhận hàng ở {LOC03} đặt sổ tuyến cạnh giấy góp vốn. Một nhà giữ được chuyến đầu, nhưng nhiều kho muốn đi chung cần có cách giúp nhau khi một chỗ hết hàng.",
       "boQuaNeuXuatThan": true,
       "cach": [
         {
@@ -56,7 +56,7 @@
     },
     {
       "id": "N2",
-      "ten": "Tín dụng qua nhiều kho",
+      "ten": "Nếu các kho cùng bị đòi bạc",
       "cho": {
         "thang": 2
       },
@@ -67,13 +67,13 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Người giữ sổ ở {LOC03} nhận giấy gửi từ nhiều chặng. Một kho thiếu bạc có thể kéo cả mạng dừng nếu giấy cùng bị đòi một ngày. Bên cạnh hòm còn mẫu để các kho ký bù cho nhau.",
+      "mo": "Bàn gửi {LOC03} nhận giấy từ nhiều chặng. Nếu người gửi đồng loạt đòi rút khi một kho cạn bạc, cả đường hàng có thể dừng. Các kho đang bàn cách góp quỹ bù cho nhau.",
       "khacVoi": "OR44.N3 xét nghĩa vụ thừa kế tại sạp; hồi này xây quỹ điều hòa giữa các kho độc lập.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Góp quỹ dự phòng có lượt kiểm",
-          "t": "Ngươi đặt phần góp bên giấy của các kho và cho người gửi tra quyền rút.",
+          "l": "Góp quỹ dự phòng có lần kiểm tra",
+          "t": "Ngươi đặt phần góp bên giấy của các kho và cho người gửi tra quyền rút lui.",
           "dau": [
             "moc_2_1"
           ]
@@ -110,7 +110,7 @@
     },
     {
       "id": "N3",
-      "ten": "Chuyến hàng mang theo kỳ nợ",
+      "ten": "Đến kỳ trả nợ, gạo vẫn chưa rời kho",
       "cho": {
         "thang": 2
       },
@@ -121,13 +121,13 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Kỳ đòi nợ ở {LOC02} kéo tới cả bàn gửi tại {LOC03}. Các kho có gạo nhưng ngại mở nếu ngày thu nợ chưa đổi. Một nhà xin nhận bằng gạo trước, rồi đối phiếu bạc khi chuyến về.",
+      "mo": "Kỳ trả nợ ở {LOC02} ảnh hưởng tới quầy gửi tại {LOC03}. Kho còn gạo nhưng ngại mở. Một nhà xin lĩnh gạo trước và đối phiếu bạc sau khi chuyến về.",
       "khacVoi": "OR11.N4 mở một tuyến vận và hoàn tất chuyến giao; hồi này xử thanh khoản của nhiều kho trước kỳ nợ.",
       "clk": "CLK02",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Giải quỹ cho chuyến gạo theo phiếu đối",
+          "l": "Dùng quỹ chung giao gạo cho kho thiếu",
           "t": "Ngươi dùng khoản bù để gạo tới kho thiếu, để người gửi tự kiểm biên nhận.",
           "dau": [
             "moc_3_1"
@@ -135,7 +135,7 @@
           "e": {
             "clk": {
               "id": "CLK02",
-              "kq": "Kho thương đội bù bằng chuyến gạo đã đối sổ, các hộ giữ phiếu nhận qua kỳ nợ."
+              "kq": "Kho thương đội bù bằng chuyến gạo đã kiểm sổ, các hộ giữ phiếu nhận qua kỳ nợ."
             }
           }
         },
@@ -171,7 +171,7 @@
     },
     {
       "id": "N4",
-      "ten": "Người cầm sổ sau chủ cũ",
+      "ten": "Chủ vắng thì ai được mở quỹ?",
       "cho": {
         "thang": 3
       },
@@ -182,12 +182,12 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Bàn ở {LOC03} đã có người thay coi sổ. Họ hỏi quỹ có mở được khi ngươi đi xa và ai xem giá khi kho ít gạo. Người đưa hàng đặt cạnh đó giấy nhận phần của nhà vừa rút.",
+      "mo": "Người sẽ thay ngươi coi sổ ở {LOC03} hỏi ai có quyền mở quỹ và ai được đặt giá lúc khan hàng. Người giao hàng đem tới biên nhận của một nhà vừa rút vốn.",
       "khacVoi": "OR26.N5 giao chuẩn cân và quyền đi một tuyến muối; hồi này chia quyền quỹ và quyền giá của cả mạng kho.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Thử kế sổ khi chủ vắng",
+          "l": "Cho người kế nhiệm thử mở quỹ khi ngươi vắng",
           "t": "Ngươi để người mới mở quỹ theo hai dấu và đối chuyến đã bù mà không cần gọi mình.",
           "dau": [
             "moc_4_1"
@@ -201,7 +201,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ quyền giá bằng giấy chặng",
+          "l": "Buộc các kho cùng giữ mức giá của ngươi",
           "t": "Ngươi buộc các kho nhận cùng giá, đổi quyền mở chuyến lấy cam kết không hạ.",
           "dau": [
             "moc_4_2"
@@ -216,7 +216,7 @@
         {
           "id": "cach_3",
           "l": "Tất toán phần nhà và trao chìa",
-          "t": "Ngươi trả chìa kho sau khi tờ thiếu đã ký, dành phần làm nghề ngoài mạng.",
+          "t": "Ngươi trả chìa kho sau khi giấy ghi số còn thiếu đã ký, dành phần làm nghề ngoài mạng.",
           "dau": [
             "moc_4_3"
           ]
@@ -232,7 +232,7 @@
     },
     {
       "id": "N5",
-      "ten": "Kho mở vào tháng giáp hạt",
+      "ten": "Giá gạo tháng giáp hạt",
       "cho": {
         "thang": 6
       },
@@ -243,7 +243,7 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Bên cửa phát ở {LOC01}, người mua lẻ mang phiếu đến sớm. Người coi sổ mới đã đợi từ trước, còn người điều giá cho xe dừng ngoài thôn. Mỗi bên xin ngươi ghi cách họ mở phiên này.",
+      "mo": "Người mua lẻ tới cửa phát ở {LOC01} từ sớm. Người coi quỹ đã chờ bên trong, còn xe gạo dừng ngoài thôn theo lệnh người giữ giá. Mỗi bên chờ ngươi chọn cách bán.",
       "khacVoi": "OR40.N5 quyết mô hình một kho đường; hồi này thử mô hình kế quyền của mạng thương hội vào mùa đói.",
       "clk": "CLK01",
       "cach": [
@@ -281,7 +281,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Rời mạng với khoản đã kết toán",
+          "l": "Rời mạng với khoản đã thanh toán",
           "t": "Ngươi sống bằng việc ngoài quỹ, gửi bản thiếu cho ai còn cần dùng để đòi.",
           "dau": [
             "moc_5_3"
@@ -295,7 +295,7 @@
         {
           "id": "cach_4",
           "l": "Cho hộ sao phiếu quan trọng",
-          "t": "Ngươi giữ cửa sáng thêm để các hộ đối phiếu trước khi xe rời sân.",
+          "t": "Ngươi giữ cửa sáng thêm để các hộ so phiếu trước khi xe rời sân.",
           "dau": [
             "moc_5_4"
           ]
@@ -350,9 +350,9 @@
           "moc_5_3"
         ]
       },
-      "t": "Ngươi mang tờ đã trả ra khỏi kho và nhận công ở nơi không dùng dấu hội. Người còn thiếu vẫn có bản để tự hỏi phần của họ. Chìa cũ không đi theo tên ngươi nữa, nhưng tờ nhận còn đó.",
+      "t": "Ngươi mang tờ đã trả ra khỏi kho và nhận công ở nơi không dùng dấu hội. Người còn thiếu vẫn có bản để tự hỏi phần của họ. Chìa cũ không đi theo tên ngươi nữa, nhưng giấy xác nhận còn đó.",
       "su": "Phần nhà rút khỏi mạng vốn sau khi ghi rõ khoản đã trả và khoản thiếu.",
-      "dauVong": "người giữ giấy nhận thiếu còn biết nơi đi đối mà không cần tìm chủ cũ."
+      "dauVong": "người giữ giấy ghi số còn thiếu còn biết nơi đi đối mà không cần tìm chủ trước."
     }
   ],
   "ngoai": "Hộ đợi tự chia phần còn, xe để gạo lại kho qua đêm."

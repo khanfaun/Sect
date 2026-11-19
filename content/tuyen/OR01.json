@@ -14,11 +14,11 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Sổ thóc thiếu một dòng",
+      "ten": "Nhà ngươi bị đòi thóc lần hai",
       "cho": { "thang": 1 },
       "loiMoi": { "cach": "nguoi", "vai": "NP01", "noi": "LOC01" },
       "han": { "thang": 6 },
-      "mo": "Chiều muộn, {NP01} tìm tới, áo còn dính bùn ruộng. Người đứng đầu các hộ ở {LOC01} đặt lên bàn một tờ giấy chép tay: phần thóc nhà ngươi nộp năm ngoái, đối với sổ thu của {NP03} ở {LOC02}, thiếu hẳn một dòng. Không chỉ nhà ngươi. Ba bốn nhà nữa cũng thiếu, như thể có ai đó đã nhẹ tay gạch bớt. \"Thóc thì nộp đủ rồi,\" {NP01} nói khẽ, \"mà sổ bảo là chưa. Mùa này mà bị đòi lại lần nữa thì nhiều nhà không qua nổi.\"",
+      "mo": "{NP01} tìm tới lúc chiều muộn, áo còn dính bùn. Sổ của thôn ghi nhà ngươi đã nộp đủ thóc, nhưng sổ thuế ở {LOC02} lại bỏ sót khoản ấy. Mấy nhà khác cũng bị đòi nộp lần nữa.",
       "thayThe": "Chiều muộn, một người trong hội hộ nông mang tới cuốn sổ hộ và tấm bia người giữ giống chép lại thành giấy. {NP01.vai} cũ đã không còn, nhưng những dòng ông để lại vẫn rõ: phần thóc nhà ngươi nộp năm ngoái, đối với sổ thu ở {LOC02}, thiếu hẳn một dòng. Ba bốn nhà khác cũng thế. Không ai biết ai đã gạch bớt, chỉ biết mùa này mà bị đòi lại thì nhiều nhà không qua nổi.",
       "cach": [
         {
@@ -51,11 +51,11 @@
     },
     {
       "id": "N2",
-      "ten": "Chân đê xốp như bánh",
+      "ten": "Đá tốt ở chân đê đã bị tráo",
       "cho": { "thang": 2 },
       "loiMoi": { "cach": "tin", "noi": "LOC01" },
       "han": { "thang": 8 },
-      "mo": "Người ở chợ đồn rằng đê {LOC01} lại thấm, mới đắp chưa đầy hai mùa. Ngươi về tới nơi, lội xuống chân đê. Nước rỉ qua từng kẽ, và đá kè cầm lên nhẹ bẫng, bẻ tay cũng vỡ. Một ông thợ già ngồi vá rổ gần đó nhìn ngươi, rồi nhìn đá, không nói gì. Trên một hòn đá còn dấu đục của lò đá lậu, loại người ta bán qua tay {FA02} cho mấy kẻ môi giới của triều.",
+      "mo": "Đê {LOC01} vừa đắp chưa đầy hai mùa đã rỉ nước. Ngươi lội xuống xem, bẻ một hòn đá bằng tay cũng vỡ. Ông thợ ngồi gần đó nhận ra dấu đục của lò đá lậu.",
       "cach": [
         {
           "id": "lay_mau",
@@ -95,16 +95,16 @@
     },
     {
       "id": "N3",
-      "ten": "Mùa giáp hạt",
+      "ten": "Ai có gạo qua mùa giáp hạt?",
       "cho": { "thang": 3 },
       "clk": "CLK01",
       "loiMoi": { "cach": "ky_ngo", "noi": "here" },
       "han": { "thang": 6 },
-      "mo": "Mùa giáp hạt tới sớm. Ở {que}, nồi cháo mỗi ngày một loãng, trẻ con khóc đêm vì đói mà người lớn không biết dỗ bằng gì. Kho thóc của thôn chỉ còn đáy. Ngươi nghe người ta bàn: có nhà muốn vay lương của thương đội, có nhà muốn đi làm thuê xa, có kẻ thì thầm chuyện phá kho của nhà giàu. Còn vò thóc giống cuối cùng, ăn thì qua được ít bữa, giữ thì có cái gieo sang năm.",
+      "mo": "Nồi cháo ở {que} mỗi ngày một loãng. Trong kho chỉ còn thóc giống. Ăn hết thì qua được vài bữa, nhưng tới mùa gieo, cả thôn sẽ chẳng còn gì để xuống đồng.",
       "cach": [
         {
           "id": "giu_giong",
-          "l": "Giữ thóc giống, chia cháo loãng cho đủ người",
+          "l": "Nấu cháo chung, dành thóc giống",
           "t": "Ngươi cùng mấy nhà gom thóc giống vào một chỗ, niêm lại, thề không ai đụng. Cháo mỗi ngày loãng hơn, nhưng nồi chung thì không nhà nào bị bỏ ra ngoài. Đêm đói dài, nhưng sáng vẫn tới.",
           "dau": ["giu_giong"],
           "e": { "hp": "-10%", "deed": "cuu_dich", "clk": { "id": "CLK01", "kq": "Mùa đói ở {LOC01} qua đi nhờ một nồi cháo chung và thóc giống không ai đụng tới." } }
@@ -139,11 +139,11 @@
     },
     {
       "id": "N4",
-      "ten": "Đất của người tới sau",
+      "ten": "Ai được cày ruộng bỏ hoang?",
       "cho": { "thang": 4 },
       "loiMoi": { "cach": "nguoi", "vai": "NP02", "noi": "LOC01" },
       "han": { "thang": 8 },
-      "mo": "{NP02} gọi ngươi ra bờ ruộng. Mấy hộ di cư chạy đói từ nơi khác tới đã dựng lều trên những thửa bỏ hoang của nhà đã đi. Người trong thôn đòi đuổi, người mới tới quỳ xin ở lại. Ruộng không có chủ thì không ai cày, mà có chủ rồi thì ai cũng muốn làm chủ. \"Ngươi là người trong thôn, lại từng đi xa,\" {NP02} nói, \"nói một câu đi, người ta sẽ nghe.\"",
+      "mo": "{NP02} gọi ngươi ra bờ ruộng. Mấy hộ chạy đói đã dựng lều trên ruộng bỏ hoang, còn người trong thôn muốn đuổi họ đi. Có nhà cũ vẫn nhận ruộng là của mình dù đã bỏ làng.",
       "thayThe": "Danh sách quân dịch ở trạm có ghi tên những người từng giữ an cho thôn, nhưng {NP02.vai} giờ không còn ai đứng ra. Ngươi tự ra bờ ruộng. Mấy hộ di cư chạy đói đã dựng lều trên những thửa bỏ hoang. Người trong thôn đòi đuổi, người mới tới quỳ xin ở lại. Không ai gọi ngươi, nhưng mọi người đều quay sang nhìn ngươi.",
       "cach": [
         {
@@ -185,11 +185,11 @@
     },
     {
       "id": "N5",
-      "ten": "Khi mùa thu sau tới",
+      "ten": "Vụ sau lấy thóc ở đâu?",
       "cho": { "thang": 6 },
       "loiMoi": { "cach": "nguoi", "vai": "NP01", "noi": "LOC01" },
       "han": { "nam": 1 },
-      "mo": "Mùa thu lại tới, lúa trên đồng {LOC01} đã chín vàng. {NP01} ngồi với ngươi ở đầu bờ, nhìn những bông lúa trĩu xuống. \"Năm nay qua được rồi,\" ông nói, \"nhưng năm sau thì sao? Kho chung thì phải có người giữ, ruộng thì phải có người cày, mà người thì cứ mỗi năm một đi.\" Ông không hỏi ngươi định làm gì. Ông chỉ chờ.",
+      "mo": "Lúa ở {LOC01} đã chín. {NP01} muốn biết có ai chịu giữ thóc chung cho vụ đói sau. Ngoài đồng, người cày thuê cũng đang chờ xem phần ruộng mình cày sẽ thuộc về ai.",
       "thayThe": "Mùa thu lại tới, lúa trên đồng {LOC01} đã chín vàng. Ngươi ngồi một mình ở đầu bờ, trước tấm bia người giữ giống mà {NP01.vai} để lại. Trên bia khắc một câu: kho chung thì phải có người giữ, ruộng thì phải có người cày. Không ai hỏi ngươi định làm gì. Chỉ có gió thổi qua đồng.",
       "cach": [
         {

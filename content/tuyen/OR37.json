@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Ấn thật và tờ lệnh thật",
+      "ten": "Ấn thật đóng một lệnh có hại",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Dấu {NP28} để lại ở {LOC14} còn khớp một lệnh do người nhà ngươi từng đóng. Tờ ấy ghi giữ một đội ở lại sau giờ rút. Người cất bản bảo ấn thật cũng phải đọc đúng lời bên dưới.",
+      "mo": "Ấn {NP28} để lại ở {LOC14} khớp lệnh do người nhà ngươi từng đóng. Lệnh này bắt một đội ở lại quá giờ rút. Người cất ấn muốn ngươi đọc cả phần ấy.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Hai lệnh trái một dấu",
+      "ten": "Một lệnh giả, một lệnh thật",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Lệnh rút ở {LOC13} mang vết giống ấn nhà nhưng thiếu một khe mòn. Lệnh giữ quân lại có đủ khe. Người nhận cả hai nói mình đã bỏ lỡ giờ vì cả tờ thật lẫn tờ giả.",
+      "mo": "Lệnh rút ở {LOC13} mang dấu thiếu khe mòn trên ấn nhà ngươi. Lệnh giữ đội ở lại thì có đủ. Người nhận cả hai nói cả hai đều khiến đội bỏ lỡ giờ rút.",
       "cach": [
         {
           "id": "cach_1",
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Sổ người đưa ấn",
+      "ten": "Ai ra lệnh, ai chỉ đóng ấn?",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Sổ tiếp ấn ở {LOC02} ghi tên người yêu cầu lệnh, khác tên người đóng dấu. Gia quyến muốn hỏi cả hai trước khi đứng ra nhận giấy rửa oan. Tờ giao nhận đã có một ngày bị sửa.",
+      "mo": "Sổ ở {LOC02} ghi tên người yêu cầu khác tên người đóng dấu. Người nhà của lính bị giữ muốn hỏi cả hai. Trong giấy giao nhận có một ngày bị sửa.",
       "cach": [
         {
           "id": "cach_1",
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Dấu đặt giữa hai bên",
+      "ten": "Đưa cả hai lệnh ra xét",
       "cho": {
         "thang": 3
       },
@@ -168,11 +168,11 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Bàn đối ở {LOC02} đặt tờ giả cạnh tờ thật và ấn nhà ngươi. Một đội chờ lệnh, gia quyến chờ đọc hồ sơ. Người cất mẫu hỏi liệu ấn sẽ được dùng tiếp sau phiên này.",
+      "mo": "Trên bàn ở {LOC02} có tờ giả, tờ thật và ấn nhà ngươi. Gia quyến chờ đọc hồ sơ, còn một đội chờ lệnh mới. Người cất mẫu hỏi có nên giữ quyền dùng ấn không.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Công bố thật giả và nhận phần trách nhiệm",
+          "l": "Công bố cả hai lệnh và nhận phần lỗi của nhà",
           "t": "Ngươi đọc cả hai bản, ghi người ra lệnh và người đóng trước người bị giữ oan.",
           "dau": [
             "moc_4_1"
@@ -229,7 +229,7 @@
     },
     {
       "id": "N5",
-      "ten": "Ai đứng bên dấu ngày mai",
+      "ten": "Một người hay hai người cùng ký?",
       "cho": {
         "thang": 6
       },
@@ -240,7 +240,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Người coi sổ {LOC02} đã trải tờ ghi hai chỗ ký. Đội thực thi chờ đọc lệnh tiếp, còn thư khố mở hòm cho mảnh ấn cũ. Gia quyến mang theo bản đã gỡ lời oan.",
+      "mo": "Người coi sổ {LOC02} trải tờ lệnh có hai chỗ ký. Đội đã nghe lệnh cũ đợi bên cửa. Thư khố đã dọn hòm cho mảnh ấn nếu ngươi quyết trả lại.",
       "cach": [
         {
           "id": "cach_1",
@@ -326,7 +326,7 @@
           "moc_5_3"
         ]
       },
-      "t": "Tên người bị kết sai trở lại trên giấy gia quyến đem về. Ấn nhà chỉ còn một mảnh nằm cùng bản in trong thư khố. Công việc đối lệnh đi qua bàn mới, nơi không cần hỏi ngươi sinh ở dòng nào.",
+      "t": "Tên người bị kết sai trở lại trên giấy gia quyến đem về. Ấn nhà chỉ còn một mảnh nằm cùng bản in trong thư khố. Công việc so lệnh đi qua bàn mới, nơi không cần hỏi ngươi sinh ở dòng nào.",
       "su": "Gia tộc mất quyền dùng ấn, chứng lệnh giữ tại thư khố.",
       "dauVong": "mảnh ấn cũ nằm cạnh giấy rửa oan mà gia quyến có thể tra."
     }

@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Nét đục mặt dưới",
+      "ten": "Mảnh bia còn nửa chữ tên",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Mảnh bia nằm bên lối chở cuối ở {LOC14}, mặt chữ úp vào bùn. Ngươi nhận ra sức nặng ấy khi nhấc lên. Một nét tên bị đục giữa đường vẫn còn nửa chân chữ.",
+      "mo": "Mảnh bia ở {LOC14} nằm úp trong bùn, đúng lối của chuyến chở cuối. Ngươi nhận ra sức nặng khi nhấc lên. Tên bị đục giữa đường vẫn còn nửa chân chữ.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Lệnh khắc bỏ một dòng",
+      "ten": "Tên có trong danh sách quân nhưng vắng trên bia",
       "cho": {
         "thang": 2
       },
@@ -72,11 +72,11 @@
         "cach": "tin",
         "noi": "LOC12"
       },
-      "mo": "{NP24} giữ lệnh khắc ở {LOC12}, còn danh sách quân do {NP25} coi có thêm một dòng. Dòng đó vừa đúng khoảng trống trên đá. Bản lệnh đem đặt lại ghi thiếu chính đoạn chữ còn trên mảnh.",
+      "mo": "{NP24} giữ lệnh khắc ở {LOC12}, còn {NP25} giữ danh sách quân. Danh sách có thêm một tên vừa khớp khoảng trống trên bia. Phần chữ còn sót khớp với tên ấy.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối lệnh khắc với tên quân",
+          "l": "So lệnh khắc với tên quân",
           "t": "Ngươi sao hai dòng lệch, ghim bản in mảnh đá vào tên người bị loại.",
           "dau": [
             "moc_2_1"
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Người đứng sau tên mất",
+      "ten": "Ai lấy mất phần quân công?",
       "cho": {
         "thang": 2
       },
@@ -120,19 +120,19 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Một gia quyến tới {LOC14} với phiếu phát công cho người có tên bị đục. Lệnh sửa bia dùng dấu của người muốn ghi chiến công cho mình. Mảnh đá còn vết đục từ trước ngày lệnh được nhập.",
+      "mo": "Một gia đình mang phiếu phát công tới {LOC14}. Lệnh sửa bia mang dấu của người muốn đứng tên chiến công. Vết đục trên đá có từ trước ngày lệnh vào sổ.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Ghi lời gia quyến và lý do gạch tên",
-          "t": "Ngươi đối phiếu để chứng người ấy đã có mặt trước lúc kẻ giữ lệnh nhận công.",
+          "t": "Ngươi so phiếu để chứng người ấy đã có mặt trước lúc kẻ giữ lệnh nhận công.",
           "dau": [
             "moc_3_1"
           ]
         },
         {
           "id": "cach_2",
-          "l": "Nhận đơn khắc danh khác lấy bạc",
+          "l": "Lấy bạc để khắc tên người không dự trận",
           "t": "Ngươi nhận một lượng bạc để ghi một người vắng trận vào hàng quân công.",
           "dau": [
             "moc_3_2"
@@ -160,7 +160,7 @@
     },
     {
       "id": "N4",
-      "ten": "Bia còn để đứng hay nằm",
+      "ten": "Dựng lại bia hay hạ bia giả?",
       "cho": {
         "thang": 3
       },
@@ -171,12 +171,12 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Mặt bia ở {LOC14} đã kê lên đòn. Gia quyến muốn nhận một bản chứng, người trả tiền hỏi khi nào tên mới có mặt. Người làm đường tới xem có thể dùng mảnh đá nào.",
+      "mo": "Mặt bia ở {LOC14} đã kê lên đòn. Người nhà muốn bản in tên thật, người trả bạc hỏi bao giờ tên giả được khắc. Người làm đường cũng đến xin dùng đá.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Dựng bia đã sửa và trao chứng",
-          "t": "Ngươi khắc lại tên theo phiếu rồi giao gia quyến bản in có người chứng.",
+          "t": "Ngươi khắc lại tên theo phiếu rồi giao gia quyến bản in có người làm chứng.",
           "dau": [
             "moc_4_1"
           ],
@@ -231,7 +231,7 @@
     },
     {
       "id": "N5",
-      "ten": "Nét khắc còn lại",
+      "ten": "Xưởng khắc sẽ tin giấy hay tin bạc?",
       "cho": {
         "thang": 6
       },
@@ -242,11 +242,11 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Ở {LOC14}, thợ đến nhận khuôn mẫu cho đợt khắc sau. Một nhà không đủ tiền đứng ngoài. Người làm đường để lại ảnh dập chỗ chữ cũ vừa nằm dưới chân cầu.",
+      "mo": "Thợ ở {LOC14} tới nhận mẫu chữ. Một gia đình không đủ tiền đứng ngoài. Người làm đường mang tới bản dập của nét chữ nay nằm dưới chân cầu.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Mở bàn khắc có hai người chứng",
+          "l": "Mở bàn khắc có hai người làm chứng",
           "t": "Ngươi mở sổ có phiếu quân và lời nhà, để thợ khác kiểm từng hàng.",
           "dau": [
             "moc_5_1"
@@ -299,7 +299,7 @@
           "moc_5_1"
         ]
       },
-      "t": "Người nhà tới đọc hàng chữ được khắc lại rồi đem bản in về. Trên đường đi, họ gặp người cũng đang tra phiếu công và chỉ cho họ bàn có người chứng. Mảnh cũ vẫn giữ được nửa chân chữ.",
+      "t": "Người nhà tới đọc hàng chữ được khắc lại rồi đem bản in về. Trên đường đi, họ gặp người cũng đang tra phiếu tiền công và chỉ cho họ bàn có người làm chứng. Mảnh cũ vẫn giữ được nửa chân chữ.",
       "su": "{LOC14} dựng bia đã sửa và trao bản chứng cho gia quyến.",
       "dauVong": "bản in còn nét đục cũ bên tên đã được đặt lại."
     },
@@ -314,7 +314,7 @@
         ]
       },
       "t": "Mỗi hàng có giá riêng, và người đã trả bạc đứng trước bia nghe đọc danh giả. Nhà ít tiền không tìm thấy tên người mình dù phiếu quân còn nguyên. Họ giữ chỗ ở bên lề sổ để về sau hỏi lại.",
-      "su": "Xưởng khắc dưới tay {ten} đã nhận bạc để đặt danh giả.",
+      "su": "Xưởng khắc dưới tay {ten} đã nhận bạc để khắc tên giả.",
       "dauVong": "một nhà còn phiếu quân mà chưa mua nổi hàng chữ."
     },
     {

@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Tiếng gõ sau đất sụp",
+      "ten": "Còn người kẹt trong hầm than",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Ở {LOC11}, miệng hầm than sập khi nhà ngươi chưa đủ người về. Từ phía đất ướt còn tiếng gõ, còn người giữ bảng đếm theo số thẻ đã phát. Có một thẻ nằm ngoài giỏ cơm.",
+      "mo": "Miệng hầm ở {LOC11} sập khi người nhà ngươi còn chưa về đủ. Sau vách đất ướt có tiếng gõ. Một thẻ công nằm ngoài giỏ cơm, chưa ai biết chủ thẻ đang ở đâu.",
       "cach": [
         {
           "id": "cach_1",
@@ -36,7 +36,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Đối thẻ công để tìm người",
+          "l": "So thẻ công để tìm người",
           "t": "Ngươi tìm được thân nhân của người còn trong hầm và đưa họ tới chỗ chờ tin.",
           "dau": [
             "moc_1_2"
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Ca đốt ghi chồng nhau",
+      "ten": "Hợp đồng ép thợ đốt thêm mẻ",
       "cho": {
         "thang": 2
       },
@@ -72,11 +72,11 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Luồng gió dưới {LOC11} yếu dần sau lần vách lún. Sổ trên miệng hầm vẫn ghi thêm mẻ giữa hai ca cũ. Người mua than đã đóng dấu phạt nếu thợ để mẻ nguội sớm.",
+      "mo": "Gió dưới hầm {LOC11} yếu đi sau khi vách lún. Sổ trực vẫn chen thêm một mẻ giữa hai ca. Người mua than bắt thợ chịu phạt nếu để lửa tắt sớm.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối dấu gió với mẻ ép tăng",
+          "l": "So dấu gió với mẻ ép tăng",
           "t": "Ngươi ghi chỗ gió yếu và chép điều phạt, nối ca bị ép với người đặt than.",
           "dau": [
             "moc_2_1"
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Ho khan trên sổ than",
+      "ten": "Bệnh ho bắt đầu từ đâu?",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "{NP19} nhận mẫu than và hồ sơ thợ tại {LOC10}. Dưới dấu {FA08} còn chữ của nhà mua than, đúng lô đã ép thêm mẻ. Thầy thuốc chừa chỗ ghi người có thể quay lại điều trị.",
+      "mo": "{NP19} xem mẫu than và bệnh án ở {LOC10}. Nhà mua đã ký ép tăng mẻ ngay dưới dấu {FA08}. Thầy thuốc muốn biết ai trong số thợ ho có thể trở lại chữa.",
       "cach": [
         {
           "id": "cach_1",
@@ -162,7 +162,7 @@
     },
     {
       "id": "N4",
-      "ten": "Ai giữ lửa qua mẻ sau",
+      "ten": "Giữ lò, giữ hợp đồng hay đưa thợ đi?",
       "cho": {
         "thang": 3
       },
@@ -173,7 +173,7 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Người coi cửa hầm {LOC11} hỏi sẽ gia cố, nhận hợp đồng cũ hay tắt lửa. Thợ bệnh đã có giấy hẹn với bệnh xá, còn nhà mua than chỉ trả tiền nếu đủ suất ghi chồng.",
+      "mo": "Thợ bệnh ở {LOC11} đã có giấy hẹn chữa. Người coi hầm hỏi nên sửa đường gió hay đóng cửa. Nhà mua than chỉ chịu trả nếu lò giao cả số mẻ làm thêm.",
       "cach": [
         {
           "id": "cach_1",
@@ -191,7 +191,7 @@
         {
           "id": "cach_2",
           "l": "Nhận hợp đồng bằng suất cũ",
-          "t": "Ngươi nhận dấu mua than, cam kết đủ cả phần mẻ chồng ca đã ghi.",
+          "t": "Ngươi nhận dấu mua than, cam kết đủ cả phần mẻ chen giữa hai ca đã ghi.",
           "dau": [
             "moc_4_2"
           ],
@@ -217,7 +217,7 @@
         {
           "id": "cach_4",
           "l": "Tạm dừng mẻ sau để kiểm hầm",
-          "t": "Ngươi báo đổi ca, giữ thợ ngoài cửa cho tới khi người coi kiểm vách.",
+          "t": "Ngươi báo thay ca, giữ thợ ngoài cửa cho tới khi người coi kiểm vách.",
           "dau": [
             "moc_4_4"
           ]
@@ -233,7 +233,7 @@
     },
     {
       "id": "N5",
-      "ten": "Ngày trả cửa hầm",
+      "ten": "Ca sau còn phải xuống hầm không?",
       "cho": {
         "thang": 6
       },
@@ -244,12 +244,12 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Ngày cân than ở {LOC11}, bảng giá và bảng ca treo cạnh nhau. Người làm muốn biết giới hạn ca nào sẽ được giữ sau lần lún. Bên rìa rừng, người đợi dỡ đồ đã kê sẵn một xe.",
+      "mo": "Trong ngày cân than tại {LOC11}, thợ muốn biết có giới hạn giờ làm mới hay không. Nhà mua đợi chốt giá. Bên rìa rừng, xe chở đồ đã sẵn cho người muốn đổi việc.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Đặt giới hạn ca theo đường gió mới",
-          "t": "Ngươi đo lại gió sau gia cố rồi ký giá đủ để bỏ mẻ chồng ca.",
+          "t": "Ngươi đo lại gió sau gia cố rồi ký giá đủ để bỏ mẻ chen giữa hai ca.",
           "dau": [
             "moc_5_1"
           ],
@@ -261,7 +261,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ giá rẻ bằng mẻ ép",
+          "l": "Giữ giá than rẻ bằng cách ép thợ làm thêm",
           "t": "Ngươi giao than theo dấu mới và vẫn gọi thợ ho trở lại làm quá suất.",
           "dau": [
             "moc_5_2"
@@ -317,7 +317,7 @@
         ]
       },
       "t": "Than ra đủ suất để lò mua rẻ qua mùa lạnh. Người giữ sổ bệnh vẫn nhận những người cũ trở lại với tiếng ho dày hơn. Bảng giá treo ngoài cửa có dấu của ngươi, cùng ngày thợ bị gọi thêm lượt.",
-      "su": "Hợp đồng than dưới tay {ten} tiếp tục ép mẻ chồng ca.",
+      "su": "Hợp đồng than dưới tay {ten} tiếp tục ép mẻ chen giữa hai ca.",
       "dauVong": "sổ bệnh còn ngày thợ bị gọi thêm lượt sau lần hầm sụp."
     },
     {

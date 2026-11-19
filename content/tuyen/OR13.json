@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Bát nước đầu giường",
+      "ten": "Ai trả tiền thuốc cho người hái thuốc?",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Một người hái thuốc nằm lạnh ở {LOC10}. {NP19} nhờ ngươi ghi cơn run và {NP20} đem sổ phí tới. Tên người trả tiền nằm khác tên người bệnh, cùng một dấu đã xuất hiện bên giường sát cửa.",
+      "mo": "Một người hái thuốc nằm run ở {LOC10}. {NP19} nhờ ngươi ghi cơn bệnh, còn {NP20} mang sổ phí tới. Người trả tiền thuốc cũng đã ứng cho bệnh nhân nằm sát cửa.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Vệt cặn cùng màu",
+      "ten": "Các ca bệnh cùng dùng một nguồn nước",
       "cho": {
         "thang": 2
       },
@@ -72,12 +72,12 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Mẫu từ {LOC10} và nhánh nước qua {LOC11} để lại cùng một vệt cặn. Người không uống ở nhánh ấy ít có cơn run hơn. Sổ lò ghi ca xả trước ngày các bệnh nhân đầu tới giường.",
+      "mo": "Nước lấy ở {LOC10} và nhánh qua {LOC11} để lại cặn giống nhau. Người không uống ở nhánh ấy ít bị run hơn. Sổ lò ghi ca xả trước khi những người bệnh đầu tiên tới.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Đối nhiều ca với mẫu và khóa nhánh",
-          "t": "Ngươi đối sổ ca rồi cùng người cấp nước khóa nhánh có cặn và mở nguồn sạch.",
+          "t": "Ngươi kiểm sổ ca rồi cùng người cấp nước khóa nhánh có cặn và mở nguồn sạch.",
           "dau": [
             "moc_2_1"
           ]
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Thuốc chờ bên cửa lạnh",
+      "ten": "Thang nào giúp được người bệnh?",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Kho {LOC10} có đan phương giữ riêng và một thang phàm để giảm cơn run. Hồ sơ còn nhắc một huyết phương cần người hiến. Trước cửa, người bệnh hỏi thang nào có thể dùng khi chưa đổi được nước.",
+      "mo": "Kho {LOC10} có đan phương cất riêng, một thang thuốc phàm giảm run và một huyết phương cần người hiến. Người nhà muốn biết có thuốc nào giúp được trước khi đổi nguồn nước không.",
       "cach": [
         {
           "id": "cach_1",
@@ -140,7 +140,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Niêm huyết phương, ghi giới hạn thuốc",
+          "l": "Niêm huyết phương, nói rõ thuốc giúp được gì",
           "t": "Ngươi kê phần đòi người hiến và cất riêng, rồi báo nhà bệnh thuốc chỉ giảm đau.",
           "dau": [
             "moc_3_3"
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Ai nhận phần đầu",
+      "ten": "Ai được uống trước?",
       "cho": {
         "thang": 3
       },
@@ -168,7 +168,7 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Mâm phát thuốc ở {LOC10} chỉ đủ đưa vài bát một lượt. Các hộ chờ theo giấy phí, người hộ tống mang danh sách riêng. Ở giường sát cửa, người hái thuốc xin gặp người nhà trước tối.",
+      "mo": "Thuốc ở {LOC10} chỉ đủ phát vài bát mỗi lượt. Có người chờ theo giấy đã nộp tiền, có người mang danh sách bảo trợ. Bệnh nhân sát cửa chỉ xin gặp gia đình trước tối.",
       "cach": [
         {
           "id": "cach_1",
@@ -215,7 +215,7 @@
     },
     {
       "id": "N5",
-      "ten": "Cửa kho sau canh cuối",
+      "ten": "Ai giữ chìa kho thuốc?",
       "cho": {
         "thang": 6
       },
@@ -226,7 +226,7 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Sau canh cuối, {LOC10} cần quyết ai được giữ chìa kho. Có người xin chép phương, có người mang giấy cấp riêng, người nhà đem một trang bệnh án đã khô mực. Ngọn đèn cạnh bát vẫn cháy.",
+      "mo": "Sau canh cuối ở {LOC10}, có người xin chép phương thuốc, có người muốn giữ quyền phát riêng. Gia đình người bệnh cũng mang tới trang bệnh án họ muốn ngươi giữ lại.",
       "cach": [
         {
           "id": "cach_1",

@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Ngày tử trái dấu thư",
+      "ten": "Thư bị trả vì người nhận đã chết",
       "cho": {
         "thang": 1
       },
@@ -24,11 +24,11 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Thư ngươi viết hộ quay về {LOC02} với dấu người nhận đã mất. Ngày tử lại sớm hơn lần chính họ ký nhận thư trước. Người trả thư muốn bỏ cả phong vào hòm giấy hỏng.",
+      "mo": "Thư ngươi viết hộ quay lại {LOC02} với dấu báo tử. Ngày mất ghi trên phong lại sớm hơn ngày chính người ấy ký nhận thư trước. Người coi hòm định bỏ cả phong.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối dấu tử với phong nhận",
+          "l": "So dấu tử với phong nhận",
           "t": "Ngươi giữ hai ngày khác nhau, ghi rõ ngày nào có chữ ký người nhận.",
           "dau": [
             "moc_1_1"
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Lời đã đọc cho người viết",
+      "ten": "Lời nào là của người gửi?",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Ở {LOC14}, thân nhân người nhờ viết nhận ra nét gấp. Họ biết câu nào đã được nói khi ngươi cầm bút và câu nào chưa từng được nhờ. Người còn sống xin đừng đọc lớn phần lời riêng.",
+      "mo": "Thân nhân ở {LOC14} nhận ra nếp gấp của phong thư. Họ nhớ câu nào người gửi đã nhờ ngươi viết, câu nào không. Họ xin đừng đọc lớn phần lời riêng.",
       "cach": [
         {
           "id": "cach_1",
@@ -100,8 +100,8 @@
         }
       ],
       "tuDien": {
-        "t": "Thân nhân về trại, câu đã đổi vẫn chưa có bản đối.",
-        "su": "Thân nhân về trại, câu đã đổi vẫn chưa có bản đối.",
+        "t": "Thân nhân về trại, câu đã đổi vẫn chưa có bản đối chiếu.",
+        "su": "Thân nhân về trại, câu đã đổi vẫn chưa có bản đối chiếu.",
         "dau": [
           "qua_han_2"
         ]
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Dấu trạm trên mép mới",
+      "ten": "Thư bị đổi khi đi qua trạm",
       "cho": {
         "thang": 2
       },
@@ -120,11 +120,11 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Dấu {LOC13} nằm trên một mép gấp không khớp bản nhà giữ ở {LOC02}. Tờ ngoài vẫn đúng, nhưng lời trong đã đổi ở lần chuyển túi. Người coi trạm cho xem sổ ngày nhận.",
+      "mo": "Dấu {LOC13} nằm trên nếp gấp khác với bản nhà giữ ở {LOC02}. Ngoài phong vẫn đúng dấu, nhưng lời bên trong đã bị đổi khi chuyển túi. Sổ trạm còn ghi ngày nhận.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối dấu rồi chép lại lời đã xác nhận",
+          "l": "So dấu rồi chép lại lời đã xác nhận",
           "t": "Ngươi nối ngày trạm với bản nhà, sao nguyên câu mà thân nhân đã nhận.",
           "dau": [
             "moc_3_1"
@@ -162,7 +162,7 @@
     },
     {
       "id": "N4",
-      "ten": "Người có quyền mở",
+      "ten": "Trao thư cho ai?",
       "cho": {
         "thang": 3
       },
@@ -173,12 +173,12 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Ở {LOC02} có người mang dấu nhà đến hỏi phong thư. Một người khác đưa bạc đổi câu về phần nhà. Những phong tồn được buộc lại, người giữ hòm chờ nghe quy tắc nhận.",
+      "mo": "Một người ở {LOC02} đem dấu của gia đình tới hỏi thư. Người khác trả bạc để ngươi sửa câu về phần nhà được chia. Người coi hòm đang chờ biết ai được mở thư.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Giao lời thật cho người đã được chọn",
-          "t": "Ngươi đối dấu, giao bản thật trong chỗ kín và giữ lời hứa không đọc lớn.",
+          "l": "Giao thư thật cho đúng người",
+          "t": "Ngươi so dấu, giao bản thật trong chỗ kín và giữ lời hứa không đọc lớn.",
           "dau": [
             "moc_4_1"
           ],
@@ -225,7 +225,7 @@
     },
     {
       "id": "N5",
-      "ten": "Tủ thư sau cùng",
+      "ten": "Giữ thư chưa có người nhận",
       "cho": {
         "thang": 6
       },
@@ -236,7 +236,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Một tủ khô ở {LOC02} đã được dọn. Người mở đúng phong mang lời đáp riêng, còn người cầm bản sửa tới đưa giấy nhà đã đổi chủ. Ngoài cửa vẫn còn người tìm thư chưa nhận.",
+      "mo": "Một tủ khô ở {LOC02} đã được dọn cho thư chưa giao. Người nhận đúng phong đem lời đáp, còn kẻ cầm bản sửa có giấy nhà đã đổi chủ. Vẫn có người đang chờ thư.",
       "cach": [
         {
           "id": "cach_1",

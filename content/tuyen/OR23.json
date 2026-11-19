@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Ấm đổi chỗ",
+      "ten": "Có ai đã đổi trà?",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC12"
       },
-      "mo": "Ở {LOC12}, khay quen được bưng ra với lá trà khác mùi. Người lớn ngừng nói khi ngươi qua cửa, nhưng bỏ quên chiếc ấm có vết nứt. Dưới đáy còn một lá chưa nở.",
+      "mo": "Ở {LOC12}, khay quen được bưng ra với trà khác mùi. Người lớn im bặt khi ngươi qua cửa. Họ để quên chiếc ấm nứt, dưới đáy còn một lá chưa nở.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Vị khách quên tên",
+      "ten": "Uống trà rồi quên đường về",
       "cho": {
         "thang": 2
       },
@@ -72,12 +72,12 @@
         "cach": "tin",
         "noi": "LOC12"
       },
-      "mo": "Một khách uống trà hôm đổi khay trở lại {LOC12} và không nhớ đường về. Cũng giờ ấy người chép chuông nghe tên khách trong tiếng thu. Tờ nhận trà còn dưới chén.",
+      "mo": "Người từng uống trà lạ quay lại {LOC12} nhưng chẳng nhớ đường về. Cũng lúc đó, người coi chuông nghe tên khách trong tiếng ghi. Tờ nhận trà vẫn ở dưới chén.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối giờ uống với giờ nghe chuông",
-          "t": "Ngươi nhờ khách chỉ tờ nhận và ghi riêng phần họ còn nhớ, phần không.",
+          "l": "So giờ uống với giờ nghe chuông",
+          "t": "Ngươi nhờ khách chỉ giấy xác nhận và ghi riêng phần họ còn nhớ, phần không.",
           "dau": [
             "moc_2_1"
           ]
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Vệt trà trong sổ dẫn",
+      "ten": "Trà mang ký ức tới chuông",
       "cho": {
         "thang": 2
       },
@@ -120,7 +120,7 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Kho {LOC10} giữ một mẫu có vệt giống cặn ấm. Sổ thử ghi lá mang phần ký ức tới nút thu khi pha. Dòng theo dõi phân biệt rõ với những ca ngộ độc.",
+      "mo": "Kho {LOC10} giữ một mẫu giống cặn ấm. Sổ thử phân biệt trà ấy với chất độc thường. Khi pha, nó mang ký ức của người uống tới chỗ trận giữ tiếng.",
       "cach": [
         {
           "id": "cach_1",
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Ấm đặt giữa bàn",
+      "ten": "Người uống có được quyền từ chối?",
       "cho": {
         "thang": 3
       },
@@ -168,12 +168,12 @@
         "cach": "tin",
         "noi": "LOC12"
       },
-      "mo": "Vị khách ở {LOC12} muốn biết lúc nào mình phải thử lại và lúc nào có thể dừng. Người của {FA03} xin giữ ấm. Bên bếp còn một khay trà thường để mời mà khỏi dùng lá cũ.",
+      "mo": "Khách ở {LOC12} muốn biết lúc nào có thể dừng thử trà. Người của {FA03} xin giữ ấm nứt. Bên bếp cũng có trà thường để tiếp khách mà khỏi dùng lá cũ.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Giải tạp có phép người uống",
-          "t": "Ngươi xin họ chọn lượt thử và dừng khi họ muốn, rồi ghi phần nhớ chưa trở lại.",
+          "t": "Ngươi xin họ chọn lần thử và dừng khi họ muốn, rồi ghi phần nhớ chưa trở lại.",
           "dau": [
             "moc_4_1"
           ],
@@ -185,7 +185,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ ấm và lấy lời khi khách chưa biết",
+          "l": "Dùng ấm trà để lấy lời kín của khách",
           "t": "Ngươi dùng khay cũ lấy một lời kín, giấu sổ của người nói sau bình phong.",
           "dau": [
             "moc_4_2"
@@ -215,7 +215,7 @@
     },
     {
       "id": "N5",
-      "ten": "Chỗ đặt bình phong",
+      "ten": "Tiếp khách hay bán lời nói kín?",
       "cho": {
         "thang": 6
       },
@@ -226,7 +226,7 @@
         "cach": "tin",
         "noi": "LOC12"
       },
-      "mo": "{LOC12} mở lại bàn tiếp khách, chừa chỗ đặt một khay thường và một trang hỏi ý. Khách cũ đang đứng gần cửa. Người hỏi mua tin vừa gửi tiền dưới một chén úp.",
+      "mo": "Bàn ở {LOC12} đã mở lại. Khách cũ đứng gần cửa, sẵn sàng nói điều họ muốn giữ riêng. Một người muốn mua tin vừa giấu tiền dưới chén úp.",
       "cach": [
         {
           "id": "cach_1",
@@ -283,7 +283,7 @@
           "moc_5_1"
         ]
       },
-      "t": "Khách có thể đứng dậy trước khi ai rót và tự gạch phần lời đã gửi. Trong hồ sơ cũ còn những khoảng nhớ chưa trả được, ghi theo ý người đã uống. Ấm nứt chỉ được đem ra để đối ca ấy.",
+      "t": "Khách ở trà thất được biết trước khi ngươi muốn ghi lời họ, và có thể từ chối hoặc xin xóa lời đã ghi. Hồ sơ cũ vẫn nói rõ phần ký ức nào chưa trả được. Chiếc ấm nứt được giữ lại để người nhà xem.",
       "su": "{LOC12} thực thi lệ hỏi ý khi mời trà, giữ hồ sơ phần nhớ còn thiếu.",
       "dauVong": "ấm có vết nứt đi cùng quyển ghi ngày người uống tự dừng."
     },
@@ -296,7 +296,7 @@
           "moc_5_2"
         ]
       },
-      "t": "Tiền mua tin nằm dưới chén trước lúc khách ngồi. Người nói chỉ biết có đoạn mình không còn nhớ, còn ngươi nhận được người mua cho đoạn ấy. Một người đến tìm lời khai của mình khi danh sách khách đã đổi.",
+      "t": "Người mua tin giấu bạc dưới chén, còn ngươi dùng ấm lấy lời khách khi họ chưa đồng ý. Một người uống trà nhận ra mình quên mất một đoạn đã kể. Khi họ quay lại tìm lời khai, danh sách khách đã đổi.",
       "su": "Đường trà kín giữ lời lấy từ người chưa đồng ý.",
       "dauVong": "một vị khách tìm lại lời khai bị thất lạc sau lần uống trà."
     },
@@ -310,7 +310,7 @@
           "moc_5_3"
         ]
       },
-      "t": "Bếp vẫn đỏ, nhưng việc đun nước chỉ còn tính theo ấm trà thường. Một nút thu ngừng nhận tiếng, và người đến hỏi có thể đọc lý do trên giấy ở cửa. Người học việc chép bài trà mới không chép tên khách.",
+      "t": "Ngươi hủy vật dẫn ký ức, rồi mở bếp bán trà thường. Nút thu không còn nhận tiếng từ khay trà. Người đến hỏi có thể đọc nguyên do trên giấy ở cửa, còn người học việc chỉ ghi cách pha.",
       "su": "Vật dẫn bị hủy và bếp {LOC12} chuyển sang việc trà thường.",
       "dauVong": "bài trà mới ghi cách tiếp khách mà không kèm tên người uống."
     }

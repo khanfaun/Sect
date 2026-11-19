@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Vết niêm không khớp sổ",
+      "ten": "Thóc còn nguyên, sổ ghi đã phát",
       "cho": {
         "thang": 1
       },
@@ -24,12 +24,12 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Dấu đóng kho ở {LOC01} nằm dưới hàng bao chưa từng mở, dù sổ ngươi chép ghi đã phát. Người giữ chìa muốn đóng nốt dấu trước buổi cân. Ngoài cửa, một hộ mang rổ rỗng đứng đợi.",
+      "mo": "Bao thóc ở {LOC01} vẫn còn nguyên niêm, nhưng sổ ngươi chép ghi dân đã lĩnh. Người giữ chìa sắp đóng dấu lên sổ. Ngoài kho, một hộ cầm rổ rỗng đứng đợi.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Đếm bao nguyên niêm",
-          "t": "Ngươi đối từng dấu với trang mình chép, khoanh số bao còn nằm sau cửa.",
+          "t": "Ngươi so từng dấu với trang mình chép, khoanh số bao còn nằm sau cửa.",
           "dau": [
             "moc_1_1"
           ]
@@ -45,7 +45,7 @@
         {
           "id": "cach_3",
           "l": "Giữ bản chép trước ngày đóng dấu",
-          "t": "Ngươi đặt tờ nháp dưới bao vải, giữ được ngày nhận lệnh chép số cũ.",
+          "t": "Ngươi đặt tờ nháp dưới bao vải, giữ được ngày nhận được lệnh chép số cũ.",
           "dau": [
             "moc_1_3"
           ]
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Rổ không có thóc",
+      "ten": "Ai ký thay những hộ chưa lĩnh?",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Hộ đứng ngoài kho {LOC01} có dấu đã lĩnh, nhưng trong rổ chỉ có dây buộc. Một hộ khác cũng mang giấy như vậy. Họ nhận ra dấu tay trên hai giấy thuộc cùng một người phát.",
+      "mo": "Hai hộ ở {LOC01} mang giấy ghi đã lĩnh thóc dù chưa nhận gì. Dấu tay trên hai tờ giống hệt dấu của người phát. Họ muốn ngươi ghi rõ ai thực sự mang thóc về.",
       "cach": [
         {
           "id": "cach_1",
@@ -92,7 +92,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Xin người phát đối dấu tay",
+          "l": "Xin người phát so dấu tay",
           "t": "Ngươi mượn giấy lĩnh đặt cạnh sổ tay, đánh dấu hai chỗ có nét trùng.",
           "dau": [
             "moc_2_3"
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Bao thóc đi đường khác",
+      "ten": "Thóc cứu đói bị chở đi bán",
       "cho": {
         "thang": 2
       },
@@ -120,11 +120,11 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Ở {LOC03}, bao thóc mang dấu kho {LOC01} cân đúng phần bị thiếu. Người phu còn giữ phiếu chở, kẻ mua chỉ nhận hàng có dây mới. Chỗ dây cũ đi qua vẫn hằn trên vải.",
+      "mo": "Bao thóc ở {LOC03} mang dấu kho {LOC01} và cân đúng số bị thiếu. Người chở còn phiếu giao, dù bên mua đã thay dây buộc để che nguồn gốc bao.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối cân với phiếu người phu",
+          "l": "Cân lại với phiếu người phu",
           "t": "Ngươi lấy cân và phiếu chở làm chứng, nối được bao chưa phát tới người mua.",
           "dau": [
             "moc_3_1"
@@ -133,7 +133,7 @@
         {
           "id": "cach_2",
           "l": "Sao sổ nhận hàng hai bản",
-          "t": "Ngươi chép dấu kho và trọng lượng, giữ một bản khô để gửi người tra sau.",
+          "t": "Ngươi chép dấu kho và trọng lượng, giữ một bản ở chỗ khô để gửi người tra sau.",
           "dau": [
             "moc_3_2"
           ]
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Dòng ghi trước mặt hộ đói",
+      "ten": "Sửa sổ hay mua lại thóc trong im lặng?",
       "cho": {
         "thang": 3
       },
@@ -168,7 +168,7 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Bàn sửa sổ {LOC01} mở khi dân chờ thóc. Người coi kho có thể nhận phiếu chuyển đi hoặc mua lại lương nếu giữ kín sai số. Kẻ khác hỏi giá một dòng trắng để ghi những hộ đứng cùng mình.",
+      "mo": "Dân đứng chờ ngoài kho {LOC01}. Người coi kho có thể nhận chứng cứ thóc bị bán, hoặc mua lại thóc nếu ngươi giữ kín. Kẻ khác hỏi mua dòng trống để ghi phần cho người theo mình.",
       "cach": [
         {
           "id": "cach_1",
@@ -186,7 +186,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Mua lương kín rồi giữ quyền ghi sổ",
+          "l": "Giấu chuyện bán thóc để mua lại và giữ kho",
           "t": "Ngươi đổi lời im lấy thóc và chìa, ghi phần ưu tiên cho người chịu theo mình.",
           "dau": [
             "moc_4_2"
@@ -200,7 +200,7 @@
         {
           "id": "cach_3",
           "l": "Gửi bản thật cho hai nơi",
-          "t": "Ngươi để một bản ở hộ bị thiếu, một bản ở bàn tra {LOC03} có dấu nhận riêng.",
+          "t": "Ngươi để một bản ở hộ bị thiếu, một bản ở bàn tra {LOC03} có dấu xác nhận riêng.",
           "dau": [
             "moc_4_3"
           ],
@@ -229,7 +229,7 @@
     },
     {
       "id": "N5",
-      "ten": "Phiên giao chìa",
+      "ten": "Ai giữ chìa kho sau mùa đói?",
       "cho": {
         "thang": 6
       },
@@ -240,11 +240,11 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Hết mùa đói, những bao còn lại ở {LOC01} được kéo ra đếm. Chìa đặt trên bàn bên cuốn sổ nặng mùi ẩm. Người từng chờ ngoài cửa hỏi lần tới ai được đứng cạnh cân.",
+      "mo": "Đã hết mùa đói, các bao còn lại ở {LOC01} được đưa ra đếm. Những hộ từng chờ rổ rỗng muốn biết vụ tới ai được đứng cạnh cân và ai có quyền mở kho.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Trao chìa cho lượt kiểm độc lập",
+          "l": "Trao chìa cho lần kiểm tra độc lập",
           "t": "Ngươi đối hàng với sổ đã sửa rồi giao chìa cho hai hộ thay nhau kiểm.",
           "dau": [
             "moc_5_1"
@@ -271,7 +271,7 @@
         {
           "id": "cach_3",
           "l": "Rời chức, giao giấy tra cho người sau",
-          "t": "Ngươi trả chìa và trao giấy nhận hai nơi cho người đã xin nối việc kiểm.",
+          "t": "Ngươi trả chìa và trao giấy nhận hai nơi cho người đã xin tiếp tục việc kiểm.",
           "dau": [
             "moc_5_3"
           ]
@@ -299,7 +299,7 @@
         ]
       },
       "t": "Hộ từng mang rổ rỗng nhận đúng phần thiếu. Khi đối bao cuối, người đứng cạnh cân do các hộ cử tự đọc tên mình. Họ chép bản đối chiếu mới và đặt cạnh dòng có nét tay của ngươi.",
-      "su": "{LOC01} trả phần bị ghi giả và giao lượt kiểm kho ra ngoài sổ cũ.",
+      "su": "{LOC01} trả phần bị ghi giả và giao lần kiểm tra kho ra ngoài sổ cũ.",
       "dauVong": "hai bản đối chiếu để người kiểm sau biết ai đã lĩnh thóc."
     },
     {
@@ -326,9 +326,9 @@
           "moc_5_3"
         ]
       },
-      "t": "Người nhận chỗ của ngươi còn hỏi vì sao hai bản phải nằm xa nhau. Khi nhà kho đổi tay, bản ở hộ vẫn đem đối được với dấu nhận kia. Công việc chép sổ không đứt ở ngày ngươi trả chìa.",
+      "t": "Người nhận chỗ của ngươi còn hỏi vì sao hai bản phải nằm xa nhau. Khi nhà kho đổi tay, bản ở hộ vẫn đem đối được với dấu xác nhận kia. Công việc chép sổ không đứt ở ngày ngươi trả chìa.",
       "su": "Bản thật được lưu ở hai đầu đường thóc sau khi {ten} rời chức.",
-      "dauVong": "người nối việc kiểm kê còn đọc được cả ngày sao và dấu nhận."
+      "dauVong": "người tiếp tục việc kiểm kê còn đọc được cả ngày sao và dấu xác nhận."
     }
   ],
   "ngoai": "Người giữ kho cũ nhận lại chìa, sổ chưa có người so độc lập."

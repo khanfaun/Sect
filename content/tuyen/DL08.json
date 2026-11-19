@@ -7,7 +7,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Bàn chuyển ca",
+      "ten": "Đưa người bệnh đi đâu?",
       "cho": {
         "thang": 1
       },
@@ -18,7 +18,7 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Trong sân {LOC10} có một bàn không bán thuốc. Người ngồi đó chỉ nhận câu hỏi nơi nào chữa được và ai sẽ trông người bệnh giữa đường. Họ muốn lập cách chuyển ca trước khi bệnh xá quá đông.",
+      "mo": "Trong sân {LOC10} có một bàn chỉ việc cho người cần chuyển đi chữa. Người trực hỏi nơi nào còn giường và ai sẽ trông bệnh nhân giữa đường. Họ muốn định lệ trước lúc quá đông.",
       "boQuaNeuXuatThan": true,
       "cach": [
         {
@@ -56,7 +56,7 @@
     },
     {
       "id": "N2",
-      "ten": "Lời hứa của nhiều bệnh xá",
+      "ten": "Bệnh xá nào chịu nhận người?",
       "cho": {
         "thang": 2
       },
@@ -67,7 +67,7 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Người từ nhiều nơi đến {LOC10} để định lúc nào chuyển ca, lúc nào ở cạnh. Một nơi xin dùng quỹ chung, nơi khác chỉ nhận khi có giấy bảo trợ. Người bệnh muốn đọc điều ấy trước khi rời giường.",
+      "mo": "Các bệnh xá gặp nhau ở {LOC10} để bàn cách chuyển bệnh nhân. Nơi muốn góp quỹ, nơi chỉ nhận người có giấy bảo trợ. Người bệnh muốn biết trước khi rời giường.",
       "khacVoi": "OR13.N4 cấp phần thuốc ở một bệnh xá; hồi này đặt quy tắc chuyển ca giữa nhiều nơi và chia chi phí đường.",
       "cach": [
         {
@@ -105,7 +105,7 @@
     },
     {
       "id": "N3",
-      "ten": "Giường cuối trước cửa đóng",
+      "ten": "Ai có thể chuyển trước khi cửa đóng?",
       "cho": {
         "thang": 2
       },
@@ -116,13 +116,13 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Ở {LOC10}, tiếng gọi giường vọng tới hàng người đứng ngoài. Người coi đường muốn biết ca nào chuyển được khi cửa đóng, ca nào phải còn người chăm. Tờ bàn giao có chỗ ghi giờ và cả lời từ chối.",
+      "mo": "Hàng người ở {LOC10} đã đứng ra ngoài sân. Người phụ trách đường cần biết ai đủ sức đi và ai phải giữ lại chăm. Giấy bàn giao phải ghi nơi chắc chắn nhận.",
       "khacVoi": "OR29.N4 xử lô thuốc pha loãng; hồi này chuyển người và giữ chăm sóc khi bệnh lan rộng.",
       "clk": "CLK10",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Mở tuyến chuyển ca có người nhận",
+          "l": "Chuyển bệnh nhân tới nơi đã nhận",
           "t": "Ngươi đối giường với người nhận ở mỗi đầu rồi đưa phần chăm tới chỗ chờ.",
           "dau": [
             "moc_3_1"
@@ -137,7 +137,7 @@
         {
           "id": "cach_2",
           "l": "Dành giường theo giấy bảo trợ",
-          "t": "Ngươi mở kho lấy phần cấp riêng và ghi rõ ai bị lùi tới lượt sau.",
+          "t": "Ngươi mở kho lấy suất được cấp riêng và ghi rõ ai bị lùi tới lượt sau.",
           "dau": [
             "moc_3_2"
           ],
@@ -150,7 +150,7 @@
         {
           "id": "cach_3",
           "l": "Giữ người chăm nơi không thể chuyển",
-          "t": "Ngươi cho ca nằm yên chọn người ở cạnh, ghi giờ hỏi lại và phần còn thiếu.",
+          "t": "Ngươi cho người chưa thể chuyển chọn người ở cạnh, ghi giờ hỏi lại và phần còn thiếu.",
           "dau": [
             "moc_3_3"
           ]
@@ -166,7 +166,7 @@
     },
     {
       "id": "N4",
-      "ten": "Bàn giao khi thầy vắng",
+      "ten": "Ai trực bàn khi thầy thuốc vắng?",
       "cho": {
         "thang": 3
       },
@@ -177,12 +177,12 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Bàn chuyển ở {LOC10} cần một người thay lượt. Họ chưa biết ai được sửa nhầm ca, cũng chưa biết có phải nói thật khi không còn thuốc. Người nhà đem theo trang ghi ai đã nhận họ hôm cửa đóng.",
+      "mo": "Bàn chuyển bệnh ở {LOC10} cần người thay. Người mới phải biết ai sửa được giấy nhầm và trả lời sao khi hết giường. Gia đình đã chuyển tới đang đem giấy nhận về đối.",
       "khacVoi": "OR38.N5 mở một chỗ phục hồi hoặc chuyển nghề; hồi này truyền quyền điều phối cả mạng khi người đứng đầu vắng.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Cho người mới xử một lượt đủ sổ",
+          "l": "Để người học thử điều phối một chuyến",
           "t": "Ngươi cho người học tự đối nơi gửi và nhận, để gia đình tự hỏi phần chưa rõ.",
           "dau": [
             "moc_4_1"
@@ -226,7 +226,7 @@
     },
     {
       "id": "N5",
-      "ten": "Ngày mở cửa cho người đợi",
+      "ten": "Mở lại đường chuyển người bệnh",
       "cho": {
         "thang": 6
       },
@@ -237,7 +237,7 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Các nơi về {LOC10} đối lại sổ sau đợt cửa đóng. Người giữ bàn mới đem một dấu chuyển, người giữ kho đem phiếu ưu tiên, và người nằm lại gửi một lời nhờ đọc cho ca tiếp theo.",
+      "mo": "Sau đợt đóng cửa, các nơi về {LOC10} so danh sách. Người giữ bàn đem giấy chuyển, người giữ kho đem phiếu ưu tiên. Gia đình bệnh nhân chờ biết ai quyết lượt đi.",
       "khacVoi": "OR13.N5 xử sở hữu một phương thuốc; hồi này trao quyền điều phối và kiểm việc chuyển ca qua một đợt dịch.",
       "clk": "CLK10",
       "cach": [
@@ -275,7 +275,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Chuyển việc về nơi chăm tại chỗ",
+          "l": "Giao việc cho các nhóm chăm bệnh tại chỗ",
           "t": "Ngươi giao lịch cho các nhóm tại chỗ, để họ trả lời thật điều chưa thể chữa.",
           "dau": [
             "moc_5_3"
@@ -296,8 +296,8 @@
         }
       ],
       "tuDien": {
-        "t": "Bàn tiếp tục nhận giấy nhưng quyền đổi lượt còn chờ người bàn giao.",
-        "su": "Bàn tiếp tục nhận giấy nhưng quyền đổi lượt còn chờ người bàn giao.",
+        "t": "Bàn tiếp tục nhận giấy nhưng quyền chuyển sang lượt khác còn chờ người bàn giao.",
+        "su": "Bàn tiếp tục nhận giấy nhưng quyền chuyển sang lượt khác còn chờ người bàn giao.",
         "dau": [
           "qua_han_5"
         ]
@@ -349,5 +349,5 @@
       "dauVong": "tờ lịch tại chỗ chừa một dòng để người bệnh ghi người muốn gặp."
     }
   ],
-  "ngoai": "Bàn tiếp tục nhận giấy nhưng quyền đổi lượt còn chờ người bàn giao."
+  "ngoai": "Bàn tiếp tục nhận giấy nhưng quyền chuyển sang lượt khác còn chờ người bàn giao."
 }

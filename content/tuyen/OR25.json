@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Bài nằm lại bên bờ",
+      "ten": "Bài thi bỏ lại có thể giúp giữ bờ",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Tờ bài bỏ ở {LOC02} được gửi về đúng ngày nước tràn {LOC01}. Trong bài có nét chỉ một bờ đất thấp hơn mức ghi. Mấy hộ muốn ngươi dùng dây đo thay vì đọc lại lời chấm.",
+      "mo": "Bài bỏ ở {LOC02} về đúng ngày nước tràn {LOC01}. Bài chỉ ra một bờ đất thấp hơn sổ ghi. Dân muốn ngươi mang dây ra đo để họ biết có thể dẫn nước qua đâu.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Người đỗ cầm tay run",
+      "ten": "Ai đứng tên bài của ngươi?",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Người đỗ nhờ bài ở {LOC02} chờ ngươi tại chỗ phơi quyển. Lời của họ vấp ở đoạn phải nói vì sao tờ bài đổi tên. Trong tay còn một lệnh đem quyển từ bàn nọ sang bàn kia.",
+      "mo": "Người đỗ ở {LOC02} đợi ngươi bên chỗ phơi quyển. Họ ấp úng khi bị hỏi về tên trên bài, rồi đưa ra lệnh bắt chuyển quyển từ bàn này sang bàn khác.",
       "cach": [
         {
           "id": "cach_1",
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Nét sửa chạy sang sổ thuế",
+      "ten": "Tiền mua tên đi qua sổ thuế",
       "cho": {
         "thang": 2
       },
@@ -120,12 +120,12 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Bản quyển ở {LOC02} có một nét đổi tên cùng màu mực với mục thuế giấy thi. Người giữ sổ hiểu từ đó ai đã thu tiền và ai nộp bài thật. Trang mực cũ còn xem được nếu có người đối.",
+      "mo": "Quyển thi ở {LOC02} có nét đổi tên cùng màu mực với dòng thu tiền giấy thi. Người giữ sổ có thể cho biết ai thu tiền và ai nộp bài thật, nếu ngươi xin tra.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Lấy quyển và chứng cách đổi tên",
-          "t": "Ngươi cùng người giữ sổ đối nét, giữ bản có lệnh đổi và dấu nhận thuế.",
+          "t": "Ngươi cùng người giữ sổ đối nét, giữ bản có lệnh đổi và dấu xác nhận thuế.",
           "dau": [
             "moc_3_1"
           ],
@@ -162,7 +162,7 @@
     },
     {
       "id": "N4",
-      "ten": "Một chức hay một đoạn bờ",
+      "ten": "Nhận chức hay xin làm bờ?",
       "cho": {
         "thang": 3
       },
@@ -173,11 +173,11 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Người xét ở {LOC02} gửi lời muốn dàn xếp tờ quyển. Các hộ {LOC01} đem dây đo ra chợ xin người chỉ làm bờ. Đầu mối chỗ trống hứa trả tiền ngay nếu ngươi giữ im.",
+      "mo": "Người xét ở {LOC02} muốn dàn xếp chuyện đổi bài. Dân {LOC01} mang dây đo nhờ người hướng dẫn làm bờ. Kẻ bán suất thi cũng tới hỏi ngươi giá giữ im.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đổi lời miễn kiện lấy quyền làm bờ",
+          "l": "Thôi đòi xét bài để được đứng ra làm bờ",
           "t": "Ngươi lấy giấy được làm việc thật, để các hộ cử người thay nhau thử cửa nước.",
           "dau": [
             "moc_4_1"
@@ -205,7 +205,7 @@
         {
           "id": "cach_3",
           "l": "Bán im lặng kèm một suất",
-          "t": "Ngươi nhận bạc và đưa đầu mối một chỗ để thử dùng tên mua trong kỳ tới.",
+          "t": "Ngươi nhận bạc và đưa đầu mối một chỗ để thử dùng tên mua vào kỳ tới.",
           "dau": [
             "moc_4_3"
           ]
@@ -221,7 +221,7 @@
     },
     {
       "id": "N5",
-      "ten": "Họ tên dưới dấu khảo",
+      "ten": "Ai đứng tên trong sổ khảo?",
       "cho": {
         "thang": 6
       },
@@ -232,7 +232,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Ngày ghi sổ ở {LOC02}, người có quyển đợi nghe đọc tên. Ngoài {LOC01}, các hộ đưa tới bản thử cửa nước. Người mua mang biên nhận để hỏi tên của mình đã qua phiên hay chưa.",
+      "mo": "Người có quyển chờ nghe đọc tên tại {LOC02}. Dân {LOC01} mang kết quả thử cửa nước. Kẻ mua suất cũng cầm biên nhận tới hỏi tên mình đã qua kỳ khảo chưa.",
       "cach": [
         {
           "id": "cach_1",
@@ -263,7 +263,7 @@
         {
           "id": "cach_3",
           "l": "Giao suất đã mua và giữ mạng môi giới",
-          "t": "Ngươi giao giấy cho người mua khi họ đã qua phiên, giữ danh sách người giới thiệu.",
+          "t": "Ngươi giao giấy cho người mua khi họ đã qua phiên, giữ danh sách sách người giới thiệu.",
           "dau": [
             "moc_5_3"
           ]

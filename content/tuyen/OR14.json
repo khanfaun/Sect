@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Khi cổ tay đổi màu",
+      "ten": "Dấu huyết mạch không phải linh căn",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC07"
       },
-      "mo": "Cổ tay ngươi nổi vệt đỏ khi đi gần huyết trì {LOC07}. {NP13} đặt một chén nước mát cạnh thềm, còn {NP14} chỉ cách nhận cơn trước khi ngất. Họ ghi riêng dấu huyết và căn tu.",
+      "mo": "Tay ngươi nổi vệt đỏ khi đi gần huyết trì ở {LOC07}. {NP13} đặt chén nước mát cạnh thềm. {NP14} chỉ ngươi nhận ra cơn trước khi ngất và ghi dấu huyết riêng với linh căn.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Hai nét thư trên một tên",
+      "ten": "Ai thêm tên vào danh sách hiến tế?",
       "cho": {
         "thang": 2
       },
@@ -72,11 +72,11 @@
         "cach": "tin",
         "noi": "LOC04"
       },
-      "mo": "{NP08} đem phả phụ ở {LOC04} đối với bản của {LOC07}. Cùng một tên, bản trong cốc lại thêm dấu tuyển hiến. Nét dấu thuộc người giữ phả đời trước và nằm dưới trang lẽ ra đã đóng.",
+      "mo": "{NP08} đem gia phả phụ ở {LOC04} đối chiếu với bản trong {LOC07}. Chỉ bản trong cốc có dấu gọi người đi hiến tế. Dấu ấy do người giữ phả đời trước thêm sau khi đóng sổ.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối phả và chỉ người sửa",
+          "l": "Đối chiếu gia phả và chỉ người sửa",
           "t": "Ngươi sao hai nét để chỉ rõ người giữ phả đời trước thêm dấu sau khi đóng sổ.",
           "dau": [
             "moc_2_1"
@@ -100,8 +100,8 @@
         }
       ],
       "tuDien": {
-        "t": "Phả phụ được cất dưới bia, dấu tuyển hiến chưa có người tra.",
-        "su": "Phả phụ được cất dưới bia, dấu tuyển hiến chưa có người tra.",
+        "t": "Phả phụ được cất dưới bia, dấu gọi đi hiến tế chưa có người tra.",
+        "su": "Phả phụ được cất dưới bia, dấu gọi đi hiến tế chưa có người tra.",
         "dau": [
           "qua_han_2"
         ]
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Ấn đổi lấy phần huyết",
+      "ten": "Nhận huyết ấn phải nộp gì?",
       "cho": {
         "thang": 2
       },
@@ -120,19 +120,19 @@
         "cach": "tin",
         "noi": "LOC07"
       },
-      "mo": "Bàn kế vị ở {LOC07} đặt huyết ấn cạnh bản cống. Người giữ cửa muốn biết phần huyết sẽ lấy từ ai. Một người đã mang dấu tuyển hiến đến hỏi liệu mình có được rút tên khỏi danh sách.",
+      "mo": "Bàn kế vị ở {LOC07} đặt huyết ấn cạnh danh sách nộp máu. Một người mang dấu tuyển hiến tới hỏi mình có thể rút tên không. Người giữ cửa muốn biết ai sẽ nộp thay lượt.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Mở sổ tự hiến có quyền rút",
-          "t": "Ngươi bỏ phần gọi tên cưỡng ép và hỏi ai muốn góp, cho họ quyền rút trước lượt.",
+          "l": "Mở sổ tự hiến có quyền rút lui",
+          "t": "Ngươi bỏ phần gọi tên cưỡng ép và hỏi ai muốn góp, cho họ quyền rút lui trước lượt.",
           "dau": [
             "moc_3_1"
           ]
         },
         {
           "id": "cach_2",
-          "l": "Nhận ấn bằng cách ép người có dấu",
+          "l": "Nhận huyết ấn bằng cách bắt người nộp thay",
           "t": "Ngươi nhận huyết ấn sau khi giữ người mang dấu lại để nộp thay lượt của mình.",
           "dau": [
             "moc_3_2"
@@ -148,8 +148,8 @@
         }
       ],
       "tuDien": {
-        "t": "Người mang dấu bị giữ lại, bàn kế vị tiếp tục dùng bản cống cũ.",
-        "su": "Người mang dấu bị giữ lại, bàn kế vị tiếp tục dùng bản cống cũ.",
+        "t": "Người mang dấu bị giữ lại, bàn kế vị tiếp tục dùng danh sách nộp máu cũ.",
+        "su": "Người mang dấu bị giữ lại, bàn kế vị tiếp tục dùng danh sách nộp máu cũ.",
         "dau": [
           "qua_han_3"
         ]
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Người canh ngoài cốc",
+      "ten": "Đường vào cốc đã bị chặn",
       "cho": {
         "thang": 3
       },
@@ -168,7 +168,7 @@
         "cach": "tin",
         "noi": "LOC07"
       },
-      "mo": "Những người muốn săn huyết tộc đã đóng đường vào {LOC07}. Trong cốc có người xin tự trị, cũng có người xếp gánh đi. Một nhóm ngoài đường chịu nghe nếu được tận mắt thấy người dâng có thể rút tên.",
+      "mo": "Những người muốn săn huyết tộc chặn đường vào {LOC07}. Có hộ muốn ở lại tự giữ cốc, có hộ đã gói đồ. Một nhóm bên ngoài chịu thương lượng nếu người hiến được quyền đổi ý.",
       "cach": [
         {
           "id": "cach_1",
@@ -215,7 +215,7 @@
     },
     {
       "id": "N5",
-      "ten": "Quyền nằm dưới vệt mực",
+      "ten": "Ra khỏi cốc còn bị gọi nộp máu?",
       "cho": {
         "thang": 6
       },
@@ -226,11 +226,11 @@
         "cach": "tin",
         "noi": "LOC07"
       },
-      "mo": "Đường vào {LOC07} đã có người chờ nhận phán quyết. Bản khế tự hiến, huyết ấn và trang gọi tên đều đặt trên thềm. Người mang dấu hỏi nếu ra khỏi cốc thì phía trong còn quyền gọi mình hay không.",
+      "mo": "Khế tự nguyện, huyết ấn và danh sách cưỡng ép cùng đặt trên thềm {LOC07}. Người mang dấu muốn biết một khi rời khỏi cốc, người giữ sổ có còn quyền gọi mình về nộp máu hay không.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Ban khế có quyền rút cho cả hai bên",
+          "l": "Ban khế có quyền rút lui cho cả hai bên",
           "t": "Ngươi giao hai bản đã thực thi cho người gác trong và ngoài, mỗi bên giữ một dấu.",
           "dau": [
             "moc_5_1"
@@ -261,8 +261,8 @@
         },
         {
           "id": "cach_3",
-          "l": "Hủy quyền gọi tên và bỏ đặc quyền",
-          "t": "Ngươi cùng các hộ rời cốc xóa mục ép cống, rồi trả phần cấp dành riêng cho huyết hệ.",
+          "l": "Hủy quyền ép nộp máu, bỏ đặc quyền",
+          "t": "Ngươi cùng các hộ rời cốc xóa mục ép cống, rồi trả suất được cấp dành riêng cho huyết hệ.",
           "dau": [
             "moc_5_3"
           ],
@@ -303,7 +303,7 @@
         ]
       },
       "t": "Người đứng gác mở đường đúng ngày ghi trong khế dù có một người vừa rút phần góp. Qua phiên sau, bản chép của hai bên vẫn cùng một điều: ai cho thì tự gọi tên, và ai đổi ý thì tự gạch.",
-      "su": "{FA05} giữ đường tiếp tế theo bản cống tự nguyện đã thử qua một phiên.",
+      "su": "{FA05} giữ đường tiếp tế theo danh sách nộp máu tự nguyện đã thử qua một phiên.",
       "dauVong": "bản khế giữ một ô dành riêng cho người xin rút tên."
     },
     {
@@ -317,7 +317,7 @@
         ]
       },
       "t": "Cốc đứng qua kỳ vây và kho mở theo dấu ngươi. Người mang dấu bị giữ tới kỳ cống sau, bên tên họ có ghi cả phần kho đã nuôi người gác. Người giữ phả về sau kể hai việc cùng một lúc.",
-      "su": "Huyết ấn của {ten} giữ cốc qua kỳ vây cùng bản cống cưỡng ép.",
+      "su": "Huyết ấn của {ten} giữ cốc qua kỳ vây cùng danh sách nộp máu cưỡng ép.",
       "dauVong": "người giữ phả còn chép nợ của một người từng bị bắt nộp thay."
     },
     {
@@ -330,7 +330,7 @@
           "moc_5_3"
         ]
       },
-      "t": "Những người bước khỏi đường cốc mang phần ăn theo hộ, rồi chia đường đi. Người từng mang dấu có thể dùng tên khác mà không bị gọi lại. Ngươi để phần cấp huyết hệ nằm yên trên thềm cùng trang đã xóa.",
+      "t": "Những người bước khỏi đường cốc mang phần ăn theo hộ, rồi chia đường đi. Người từng mang dấu có thể dùng tên khác mà không bị gọi lại. Ngươi để suất được cấp huyết hệ nằm yên trên thềm cùng trang đã xóa.",
       "su": "Quyền ép cống bị hủy, các hộ tự chọn nơi ở và người nhận họ.",
       "dauVong": "một người rời cốc giữ tên tự đặt cùng giấy đã xóa nghĩa vụ."
     }

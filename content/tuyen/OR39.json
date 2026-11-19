@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Vết bậc trên vách",
+      "ten": "Bậc đá từng dẫn vào nhà",
       "cho": {
         "thang": 1
       },
@@ -24,7 +24,7 @@
         "cach": "tin",
         "noi": "LOC06"
       },
-      "mo": "Vách cạnh {LOC06} còn những bậc dẫn lên một khoảng tường không cửa. Người biết đường cũ kể xóm từng chạy dọc chân đá trước khi nước đổi. Khi họ gọi tên các lối, vách trả tiếng muộn.",
+      "mo": "Cạnh {LOC06} còn những bậc dẫn lên một vách không cửa. Người biết đường cũ kể từng có xóm dọc chân đá. Mỗi khi họ gọi tên lối cũ, vách trả lại một tiếng muộn.",
       "cach": [
         {
           "id": "cach_1",
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Trụ phía sau tiếng vọng",
+      "ten": "Trụ trận giữ nước trên cao",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC05"
       },
-      "mo": "{NP09} để ngươi đối tiếng dội với bản trụ ở {LOC05}. Chỗ vách trả tiếng là nơi trận giữ nước trên cao. Bên lề bản có dấu xưa chỉ một nhánh vòng qua xóm.",
+      "mo": "{NP09} đặt bản trụ ở {LOC05} cạnh dấu tiếng vọng. Chỗ vách dội tiếng là nơi trận chặn nước trên cao. Mép bản còn vẽ một nhánh có thể vòng qua xóm.",
       "cach": [
         {
           "id": "cach_1",
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Bia cùng sổ đất",
+      "ten": "Mở trụ sẽ làm ngập nhà nào?",
       "cho": {
         "thang": 2
       },
@@ -120,12 +120,12 @@
         "cach": "tin",
         "noi": "LOC04"
       },
-      "mo": "Bia ở {LOC04} ghi những hộ đã dời đi, sổ {FA03} ghi ai giữ đất dưới trụ. Qua hai bản có thể thấy mở thẳng nước sẽ ngập các nhà đang ở. Người của xóm chờ xem đường nào còn khô.",
+      "mo": "Bia ở {LOC04} ghi những hộ từng phải dời, còn sổ {FA03} ghi quyền đất dưới trụ. Mở nước thẳng sẽ làm ngập các nhà đang ở. Họ cần biết còn đường nào khô.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Đối đất và xin chỗ mới tự nguyện",
-          "t": "Ngươi dùng bản đối để xin đất khô, cho từng hộ tự chọn có nhận hay không.",
+          "t": "Ngươi dùng bản đối chiếu để xin đất khô, cho từng hộ tự chọn có nhận hay không.",
           "dau": [
             "moc_3_1"
           ]
@@ -140,7 +140,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Ghi giờ đưa người khỏi vùng đổi",
+          "l": "Ghi giờ đưa người khỏi vùng bị đổi dòng nước",
           "t": "Ngươi hẹn lượt dời với người muốn theo và cất bản đất ngoài vùng ngập.",
           "dau": [
             "moc_3_3"
@@ -157,7 +157,7 @@
     },
     {
       "id": "N4",
-      "ten": "Giờ nước đã hẹn",
+      "ten": "Dời người trước khi đổi dòng",
       "cho": {
         "thang": 3
       },
@@ -168,11 +168,11 @@
         "cach": "tin",
         "noi": "LOC05"
       },
-      "mo": "Trước trụ ở {LOC05}, các hộ mang gánh tới điểm đếm. Thợ trận chờ ngươi xác nhận giờ, còn người giữ khóa muốn nghe ai nhận trách nhiệm nếu tiếp tục giữ nước trên vách.",
+      "mo": "Các hộ mang gánh tới điểm đếm gần {LOC05}. Thợ chờ ngươi báo đã đủ người mới đổi dòng. Người giữ khóa cũng hỏi ai chịu trách nhiệm nếu vẫn để trụ giữ nước.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Dời hộ tự nguyện rồi chuyển nhánh nước",
+          "l": "Dời hộ đã đồng ý rồi đổi dòng nước",
           "t": "Ngươi đếm người tới đất mới trước khi thợ mở nhánh đã đo, giữ nền xóm khô.",
           "dau": [
             "moc_4_1"
@@ -230,7 +230,7 @@
     },
     {
       "id": "N5",
-      "ten": "Nền nhà sau tiếng tắt",
+      "ten": "Ai giữ đất và ai được lấy nước?",
       "cho": {
         "thang": 6
       },
@@ -241,7 +241,7 @@
         "cach": "tin",
         "noi": "LOC06"
       },
-      "mo": "Từ {LOC06}, người về xem vách nghe được nước đi ở một chỗ khác. Có người muốn nhận đất, người muốn xin mở dòng. Tờ đất và bảng vùng đổi được trải cạnh bậc đá khô.",
+      "mo": "Từ {LOC06}, người về thăm xóm nghe nước chảy qua một lối khác. Có hộ muốn nhận đất mới, có hộ chỉ xin mở nước cho ruộng. Hai việc đều cần tờ ghi rõ.",
       "cach": [
         {
           "id": "cach_1",
@@ -272,7 +272,7 @@
         {
           "id": "cach_3",
           "l": "Lưu bản đổi cảnh và giao chỗ ở",
-          "t": "Ngươi gửi hồ sơ vùng đổi cùng địa chỉ người đã rút tới nơi họ chọn.",
+          "t": "Ngươi gửi hồ sơ vùng bị đổi dòng nước cùng địa chỉ người đã rút tới nơi họ chọn.",
           "dau": [
             "moc_5_3"
           ],
@@ -326,8 +326,8 @@
           "moc_5_2"
         ]
       },
-      "t": "Chìa trụ đem lại khoản thu đầu trước khi nước tới ruộng thấp. Người cần mở lượt đem đơn lên chỗ ngươi đứng và phải đợi đến phiên. Một nhà giữ bản đơn bị hoãn cạnh những hạt giống đã khô.",
-      "su": "Trụ nước dưới quyền {ten} thu phí theo lượt mở.",
+      "t": "Chìa trụ đem lại khoản thu đầu trước khi nước tới ruộng thấp. Người cần mở phiên đem đơn lên chỗ ngươi đứng và phải đợi đến phiên. Một nhà giữ bản đơn bị hoãn cạnh những hạt giống đã khô.",
+      "su": "Trụ nước dưới quyền {ten} thu phí theo lần mở.",
       "dauVong": "một đơn xin mở dòng còn ghi ngày ruộng dưới bị hoãn nước."
     },
     {
@@ -341,7 +341,7 @@
           "moc_5_3"
         ]
       },
-      "t": "Vực đổi tiếng sau lúc trụ ngắt, chỉ còn nước đụng đá. Những người đi theo đã có chỗ dừng và được ghi trong hồ sơ vùng đổi. Ai tìm xóm cũ có thể đối tấm bản trước khi xuống lối nay đã chìm.",
+      "t": "Vực đổi tiếng sau lúc trụ ngắt, chỉ còn nước đụng đá. Những người đi theo đã có chỗ dừng và được ghi trong hồ sơ vùng bị đổi dòng nước. Ai tìm xóm cũ có thể đối tấm bản trước khi xuống lối nay đã chìm.",
       "su": "Trụ bị hủy sau khi sơ tán, hồ sơ và nơi ở mới được lưu.",
       "dauVong": "vực không còn tiếng trận, cạnh bản ghi đường cũ trước khi ngập."
     }

@@ -7,7 +7,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Lời hẹn trước bia",
+      "ten": "Tên người gây thù chưa được xác nhận",
       "cho": {
         "thang": 1
       },
@@ -18,7 +18,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Ở {LOC14}, một người đặt lời hẹn trả món cũ cạnh bia. Người đứng trông nhắc rằng người giữ vai hôm nay có thể chưa hề biết việc đời trước. Tờ giấy để trống tên kẻ đã làm và tên người phải chịu.",
+      "mo": "Một người đặt lời hẹn trả thù bên bia {LOC14}. Người coi bia nhắc rằng người đang giữ chức có thể chưa từng biết chuyện cũ. Muốn đòi đúng người, phải có chứng cứ.",
       "boQuaNeuXuatThan": true,
       "cach": [
         {
@@ -32,7 +32,7 @@
         {
           "id": "cach_2",
           "l": "Hỏi ai còn giữ dấu thời ấy",
-          "t": "Ngươi xin người coi bia chỉ vật có thể đối khi người giữ vai đã thay.",
+          "t": "Ngươi xin người coi bia chỉ vật có thể đối khi người giữ chức đã thay.",
           "dau": [
             "moc_1_2"
           ]
@@ -56,7 +56,7 @@
     },
     {
       "id": "N2",
-      "ten": "Món nợ qua người kế vai",
+      "ten": "Kẻ gây chuyện và người hưởng lợi",
       "cho": {
         "thang": 2
       },
@@ -67,20 +67,20 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Bản giữ tên ở {LOC14} có cả nét đời trước lẫn dấu nhận đời sau. Người trông hòm để hai dấu cách nhau, để ai tìm thù không lấy một chức làm một người. Một hộ chờ biết phần họ còn có thể đòi.",
+      "mo": "Sổ ở {LOC14} có nét của người đời trước và dấu nhận của người kế chức. Một hộ muốn lấy lại phần từng mất. Họ cần biết ai gây chuyện và ai đang giữ phần ấy.",
       "khacVoi": "OR20.N3 đối hộ tịch để nhận thân phận của mình; hồi này phân trách nhiệm cá nhân khỏi quyền kế vai.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Lấy chứng và giao phần người vô can",
-          "t": "Ngươi đối ngày hành động rồi cho người kế vai sao bản ghi họ không có mặt.",
+          "t": "Ngươi so ngày hành động rồi cho người kế chức sao bản ghi họ không có mặt.",
           "dau": [
             "moc_2_1"
           ]
         },
         {
           "id": "cach_2",
-          "l": "Giữ quyền đòi với người đang hưởng phần",
+          "l": "Đòi lại tài sản từ người đang hưởng lợi",
           "t": "Ngươi tách danh người hưởng lợi hiện tại, giữ phần họ còn nắm để đòi lại.",
           "dau": [
             "moc_2_2"
@@ -105,7 +105,7 @@
     },
     {
       "id": "N3",
-      "ten": "Giấy đòi trong ngày cờ đổi",
+      "ten": "Giữ người làm chứng qua ngày đổi ngôi",
       "cho": {
         "thang": 2
       },
@@ -116,21 +116,21 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Ở {LOC02}, ngày cờ đổi khiến bàn xét có thể dời trước khi trả lời. Người đem chứng muốn được bảo vệ. Phía hưởng phần xin đem tiền ra đổi, còn mấy người đứng ngoài chỉ muốn kịp rời khỏi cửa.",
+      "mo": "Bàn xét ở {LOC02} có thể dời vì cờ sắp đổi. Người làm chứng xin chỗ trú, phía hưởng lợi đề nghị trả tiền. Người ngoài cuộc chỉ muốn được rời đi an toàn.",
       "khacVoi": "OR06.N4 tranh ghế và xử phần gia nhân; hồi này giữ quyền của người làm chứng trong một cuộc đổi ngôi.",
       "clk": "CLK09",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Giữ bàn chứng mở qua đổi cờ",
-          "t": "Ngươi giao một bản sang nơi khác và đưa người chứng tới mái được hai bên biết.",
+          "l": "Giữ người làm chứng và bản sao khi đổi ngôi",
+          "t": "Ngươi giao một bản sang nơi khác và đưa người làm chứng tới mái được hai bên biết.",
           "dau": [
             "moc_3_1"
           ],
           "e": {
             "clk": {
               "id": "CLK09",
-              "kq": "Hồ sơ và người chứng được giữ qua đổi ngôi, hạn xét còn ghi trên cả hai bản."
+              "kq": "Hồ sơ và người làm chứng được giữ qua đổi ngôi, hạn xét còn ghi trên cả hai bản."
             }
           }
         },
@@ -166,7 +166,7 @@
     },
     {
       "id": "N4",
-      "ten": "Đòi món chính hay kéo cả nhà",
+      "ten": "Đòi đúng người hay buộc cả nhà chịu?",
       "cho": {
         "thang": 3
       },
@@ -177,7 +177,7 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Các bản chứng về {LOC14} với hai chỗ ký còn trống. Người mất phần muốn nghe câu trả lời cho việc cụ thể. Có người lại đưa tên của cả thân thuộc vào giấy đòi, dù họ không có mặt khi việc xảy ra.",
+      "mo": "Bản chứng trở về {LOC14}. Người mất phần muốn biết ai sẽ trả lại. Có kẻ đề nghị ghi cả thân thuộc vào giấy đòi, dù họ không có mặt lúc việc xảy ra.",
       "khacVoi": "OR43.N4 trả tro hoặc lập mộ theo vật chứng; hồi này phân xử món nợ còn có thể hoàn trả giữa người sống.",
       "cach": [
         {
@@ -196,7 +196,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ phần bồi rồi ép phần quyền",
+          "l": "Lấy lại tài sản rồi ép người giữ quyền nhường ghế",
           "t": "Ngươi lấy lại phần đã bị hưởng, rồi buộc người đang nắm quyền ký nhường ghế.",
           "dau": [
             "moc_4_2"
@@ -226,7 +226,7 @@
     },
     {
       "id": "N5",
-      "ten": "Bước qua bia sau món cũ",
+      "ten": "Làm gì sau khi đòi được món cũ?",
       "cho": {
         "thang": 6
       },
@@ -237,14 +237,14 @@
         "cach": "tin",
         "noi": "LOC14"
       },
-      "mo": "Gió qua {LOC14} thổi vào giấy đã ghi trả, giấy nắm quyền và tờ hòa giải. Những người từng đứng đợi muốn biết từ nay có phải tiếp tục làm chứng theo lệnh ngươi. Ngày thay mùa ở cửa ải đã gần.",
+      "mo": "Trước bia {LOC14} có giấy hoàn trả, giấy nhường quyền và tờ hòa giải. Những người từng giúp ngươi muốn biết từ nay họ có phải tiếp tục đi theo làm chứng không.",
       "khacVoi": "OR30.N5 chọn cách giữ hay giải thể một bếp; hồi này khép việc trả thù và quyết quyền đối với những người từng giúp.",
       "clk": "CLK03",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đóng món thù và cấp đường về",
-          "t": "Ngươi trả bản, để người chứng dùng lượt xe lương về nhà mà không phải đi theo mình.",
+          "l": "Khép vụ cũ và cho người làm chứng về nhà",
+          "t": "Ngươi trả bản, để người làm chứng dùng lượt xe lương về nhà mà không phải đi theo mình.",
           "dau": [
             "moc_5_1"
           ],
@@ -303,9 +303,9 @@
           "moc_5_1"
         ]
       },
-      "t": "Người làm chứng nhìn tên mình ra khỏi sổ rồi bước lên xe. Phần được trả về đúng tay người chịu, người kế vai giữ giấy xác nhận mình không phải kẻ năm ấy. Khi qua bia, ngươi chỉ đọc tên người thực sự có mặt.",
+      "t": "Người làm chứng nhìn tên mình ra khỏi sổ rồi bước lên xe. Phần được trả về đúng tay người chịu, người kế chức giữ giấy xác nhận mình không phải kẻ năm ấy. Khi qua bia, ngươi chỉ đọc tên người thực sự có mặt.",
       "su": "Món cũ khép bằng chứng và phần hoàn trả có người nhận.",
-      "dauVong": "một bản xét giữ hai dòng riêng cho người làm và người kế vai."
+      "dauVong": "một bản xét giữ hai dòng riêng cho người làm và người kế chức."
     },
     {
       "id": "B",

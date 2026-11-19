@@ -13,7 +13,7 @@
   "nut": [
     {
       "id": "N1",
-      "ten": "Người ký dưới nhãn hàng",
+      "ten": "Ai ký bảo lãnh bằng nhãn nhà?",
       "cho": {
         "thang": 1
       },
@@ -24,11 +24,11 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "{NP05} cho mở hòm nợ ở {LOC03}. Dưới nhãn nhà ngươi là chữ ký của người quản hàng cũ, kèm một dấu nhận của {NP06}. Tiền bảo lãnh còn treo, nhưng số kiện đã bị sửa bằng mực mới.",
+      "mo": "{NP05} mở sổ nợ ở {LOC03}. Người quản hàng cũ ký bảo lãnh dưới nhãn nhà ngươi, còn {NP06} chỉ ký nhận hàng. Khoản nợ chưa trả, nhưng số kiện đã bị ai đó sửa.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối hai chữ ký",
+          "l": "So hai chữ ký",
           "t": "Ngươi chứng được người quản hàng ký bảo lãnh, còn người dẫn đội chỉ ký nhận kiện.",
           "dau": [
             "moc_1_1"
@@ -61,7 +61,7 @@
     },
     {
       "id": "N2",
-      "ten": "Kiện hàng bước được",
+      "ten": "Người sống bị ghi là kiện hàng",
       "cho": {
         "thang": 2
       },
@@ -72,7 +72,7 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Chuyến từ {LOC03} ghé {LOC09} khi nước xuống. Một người đi chân trần bước khỏi khoang, số trên thẻ cổ trùng kiện ghi mất. Người dẫn đội còn giữ một phiếu khác gửi theo đường lò phía {LOC11}.",
+      "mo": "Thuyền từ {LOC03} ghé {LOC09} khi nước xuống. Người đi chân trần bước ra khỏi khoang; thẻ ở cổ trùng số của kiện ghi mất. Tờ hàng từ {LOC11} cũng có một mục đáng ngờ.",
       "cach": [
         {
           "id": "cach_1",
@@ -84,7 +84,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Đối phiếu đường lò",
+          "l": "So phiếu đường lò",
           "t": "Ngươi tìm được lời người giao ở {LOC11}, xác nhận thợ lò bị chở dưới danh kiện mất.",
           "dau": [
             "moc_2_2"
@@ -109,7 +109,7 @@
     },
     {
       "id": "N3",
-      "ten": "Nợ nào trả bằng bạc",
+      "ten": "Trả nợ để giải người hay nhận quyền buôn?",
       "cho": {
         "thang": 2
       },
@@ -120,11 +120,11 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Người coi khế ở {LOC03} đặt hai phiếu cầm lên bàn. Người chân trần chờ cạnh cửa, còn thợ lò sắp bị chuyển tiếp. Một người từ thương hội đề nghị nhận cả quyền bán lại dấu nhà ngươi.",
+      "mo": "Người coi khế ở {LOC03} đặt hai tờ cầm cố lên bàn. Người chân trần còn chờ ở cửa, còn thợ lò sắp bị chuyển đi. Thương hội đề nghị nhận cả quyền dùng nhãn nhà ngươi.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Dùng hàng còn nguyên để phản khế",
+          "l": "Dùng hàng trong kho trả nợ và giải người",
           "t": "Ngươi đối kho, lấy hàng bù nợ rồi đưa người chân trần ra cửa. Thợ lò chờ ký hủy.",
           "dau": [
             "moc_3_1"
@@ -145,7 +145,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Bán nhãn rồi trả phần công còn nợ",
+          "l": "Bán nhãn rồi trả tiền công còn nợ",
           "t": "Ngươi bán quyền dùng nhãn cho chủ nợ, dành bạc trả công và ghi riêng số còn thiếu.",
           "dau": [
             "moc_3_3"
@@ -162,7 +162,7 @@
     },
     {
       "id": "N4",
-      "ten": "Một chuyến giao bằng tên mình",
+      "ten": "Tự chở hàng hay theo thương hội?",
       "cho": {
         "thang": 3
       },
@@ -173,7 +173,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Trên sân {LOC03} có xe trống và hàng đã buộc dây. Người mua độc lập cần một chuyến đúng hẹn. Bên kia sân, người giữ ghế phân phối đặt sẵn sổ chia hàng giữa các vùng.",
+      "mo": "Trên sân {LOC03}, hàng đã lên xe. Một khách muốn đặt ngươi chở hàng riêng. Người giữ ghế thương hội lại có thể giao quyền chia chuyến giữa các vùng.",
       "cach": [
         {
           "id": "cach_1",
@@ -190,7 +190,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Điều phối hai tuyến qua ghế thương hội",
+          "l": "Dùng ghế thương hội để nắm hai tuyến hàng",
           "t": "Ngươi giao xong hai luồng hàng, rồi khóa quyền cấp chuyến vào sổ mình giữ.",
           "dau": [
             "moc_4_2"
@@ -220,7 +220,7 @@
     },
     {
       "id": "N5",
-      "ten": "Điều khoản ngược tay",
+      "ten": "Điều khoản nào áp cả lên chủ hàng?",
       "cho": {
         "thang": 6
       },
@@ -231,7 +231,7 @@
         "cach": "tin",
         "noi": "LOC03"
       },
-      "mo": "Bàn hợp đồng ở {LOC03} nhận lại kiện hỏng và một yêu cầu cấm giao từ xa. Người làm cũ mang phiếu công đứng sau chủ nợ. Tờ cuối còn đủ chỗ để ghi điều khoản áp cả lên ngươi.",
+      "mo": "Ở {LOC03}, khách trả lại một kiện hỏng và đòi bồi thường. Cùng lúc, có người muốn ngươi chặn hàng sang vùng khác. Thợ cũ đem phiếu tiền công tới chờ trả.",
       "cach": [
         {
           "id": "cach_1",
@@ -289,7 +289,7 @@
           "moc_5_1"
         ]
       },
-      "t": "Người mua đem kiện hỏng tới cân ngay trước chủ xe và nhận đủ tiền bồi. Một người đã được tháo khế tới ký làm thuê theo chuyến. Tờ bảo lãnh mới chỉ ghi hàng và phần công, đủ để thương đội khác nhận chở.",
+      "t": "Người mua đem kiện hỏng tới cân ngay trước chủ xe và nhận đủ tiền bồi thường. Một người đã được tháo khế tới ký làm thuê theo chuyến. Tờ bảo lãnh mới chỉ ghi hàng và phần công, đủ để thương đội khác nhận chở.",
       "su": "Tuyến vận độc lập tại {LOC03} bỏ cầm người và đã bồi thường kiện hỏng.",
       "dauVong": "tờ bảo lãnh của {ten} vẫn được nhận tại bàn giao hàng độc lập."
     },
@@ -318,7 +318,7 @@
       },
       "t": "Biển cũ được tháo xuống khi người làm cuối đã ký nhận tiền. Món nợ chưa tìm thấy chủ được giữ trong hòm niêm, ai mang đủ phiếu có thể tới đối. Những người từng đi chung xe tìm mối riêng từ chuyến kế.",
       "su": "Nhãn cũ giải thể sau khi kê phần của chủ nợ và người làm.",
-      "dauVong": "một người khuân hàng giữ giấy nhận phần cuối dưới chỗ từng treo nhãn."
+      "dauVong": "một người khuân hàng giữ giấy xác nhận đã lĩnh phần cuối dưới chỗ từng treo nhãn."
     }
   ],
   "ngoai": "Chủ nợ giữ lại kiện cuối, người làm phải trở lại hỏi phần công."
