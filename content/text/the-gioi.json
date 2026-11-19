@@ -1,0 +1,20 @@
+{
+  "tg.slGop": "Thế kỷ thứ {{0}}: {{1}} chuyện lớn. {{2}}",
+  "tg.vaiMat": "{{0}}, {{1}} ở {{2}}, qua đời.",
+  "tg.vaiKe": "{{0}} ({{1}}) nhận lại việc {{2}} ở {{3}}.",
+  "tg.vaiTrong": "Việc {{0}} ở {{1}} không còn ai giữ; chỉ còn {{2}}.",
+  "tg.vaiQh.con": "con của {{0}}",
+  "tg.vaiQh.tro": "học trò của {{0}}",
+  "tg.vaiQh.thay": "người thay {{0}}",
+  "tg.faSuy": "{{0}} suy yếu: tiền cạn, người bỏ đi.",
+  "tg.faHoi": "{{0}} gượng dậy được.",
+  "tg.faDiet": "{{0}} tan rã. {{1}} không còn chủ.",
+  "tg.faLap": "Có người dựng lại {{0}} ở {{1}}.",
+  "tg.trang.song": "đang vững",
+  "tg.trang.suy": "đang suy",
+  "tg.trang.diet": "đã tan",
+  "tg.locPha": "{{0}}: {{1}}.",
+  "tg.locLanh": "{{0}} được dựng lại.",
+  "tg.tuThay": "Người dạy ở đây: {{0}}, {{1}}.",
+  "tg.tuThayTrong": "Người dạy cũ đã mất; chỉ còn {{0}} để tự học theo."
+}

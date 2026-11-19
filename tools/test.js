@@ -28,6 +28,36 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Đ8.2: vai NPC có người kế; Đ8.3: mười thế lực, sổ cống hiến theo thế lực
+  vai() {
+    fresh();
+    ok(run("Object.keys(W().vai).length")===30&&run("vaiNow('NP01').ten")==='Lý Thổ'&&run("vaiNow('NP01').noiTen")==='Thanh Khê Thôn', 'ba mươi vai, NP01 Lý Thổ ở Thanh Khê Thôn');
+    run("var vyRun=(n)=>{const w=W();for(let i=0;i<n;i++){w.t+=HY;worldYearsTo(w);}};vyRun(200)");
+    const v=JSON.parse(run("JSON.stringify(vaiNow('NP01'))"));
+    ok(v.doi>1&&v.ten!=='Lý Thổ'&&run("W().vai.NP01.ke.some(x=>x.ten==='Lý Thổ')"), 'hai trăm năm sau Lý Thổ đã mất, có người kế ('+v.ten+', đời '+v.doi+')');
+    ok(run("Object.keys(VAI_NP).every(m=>{const x=vaiNow(m);return x.song?x.tuoi<W().vai[m].tho||VAI_NP[m].bat:!!x.thay;})"), 'mọi vai có người giữ còn sống trong thọ, hoặc có người / vật chứng thay thế');
+    ok(run("vaiNow('NP30').ten")==='Tịch Âm'&&run("vaiNow('NP30').doi")===1, 'NP30 Tịch Âm không già, không người kế');
+    ok(run("W().suLuoc.length")>0, 'Sử lược có ghi chuyện');
+    run("vaiGiet('NP19')");ok(!run("vaiNow('NP19').song")&&!!run("vaiNow('NP19').thay"), 'người giữ vai bị giết: vai trống, có vật chứng thay');
+    run("vyRun(3)");ok(run("vaiNow('NP19').song")&&/học trò của/.test(run("vaiNow('NP19').qh")), 'vài năm sau có học trò nhận lại vai');
+    // thế lực
+    ok(run("Object.keys(W().fa).length")===10&&run("faNow('FA01').n")==='Lương triều', 'mười thế lực');
+    ok(run("Object.keys(W().fa).filter(k=>W().fa[k].trang!=='diet').length")>=7, 'hai trăm năm yên ổn: phần lớn thế lực còn');
+    run("faAdj('FA05',-200,'test')");ok(run("faNow('FA05').trang")==='diet'&&!run("vaiNow('NP13').song"), 'Huyết Sát Cốc tan: chủ cốc không còn ai giữ');
+    run("vyRun(5)");ok(!run("vaiNow('NP13').song"), 'thế lực đã tan thì vai đứng đầu còn trống');
+    run("W().fa.FA05.tDiet-=200;vyRun(120)");ok(run("W().fa.FA05.lap")>=2||run("faNow('FA05').trang")==='diet', 'thế lực tan lâu có thể được dựng lại');
+    // cống hiến theo thế lực
+    run("(()=>{const r=G.run;r.flags.tongmon=0;r.at=anchorNode('LOC01').id;})()");
+    ok(run("chKey()")==='fa:FA04', 'đứng ở Thanh Khê Thôn, không thuộc tông: sổ cống hiến của Thanh Khê Liên Thôn');
+    run("chAdd(chKey(),5)");ok(run("faCong('FA04')")===5, 'cống hiến ghi vào sổ fa:FA04');
+    // bản lưu cũ
+    run("(()=>{const w=W();delete w.vai;delete w.fa;delete w.yLast;delete w.suLuoc;snapWorld(w);})()");
+    ok(run("Object.keys(W().vai).length")===30&&run("Object.keys(W().fa).length")===10&&run("W().yLast")===run("tYear(W().t)"), 'bản lưu cũ: dựng vai, thế lực khi tải');
+    // nối Đ7: hộp Pháp môn ghi người dạy đang giữ vai
+    run("(()=>{const n=anchorNode('LOC10');G.run.at=n.id;})()");
+    ok(run("tuThay(anchorNode('LOC10'))").includes(run("vaiNow('NP19').ten")), 'Bách Thảo Cốc: người dạy là người đang giữ vai NP19');
+    const t0=Date.now();run("vyRun(3000)");ok(Date.now()-t0<2000, 'ba ngàn năm thế giới chạy nhanh ('+(Date.now()-t0)+' ms)');
+  },
   // Đ8.1: 15 địa điểm neo — đủ, khác nhau, đúng đại khu, không phải sơn môn; bản lưu cũ đặt neo khi tải và chốt lại nơi thầy dạy / nguồn cải căn
   neo() {
     fresh();

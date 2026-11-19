@@ -76,3 +76,5 @@ const THE_LUC={
   FA09:{n:'Lạn Kha Tự',noi:'LOC12',chu:'NP23',tien:25,quan:10,dan:45,suc:70,giu:'ký ức người chết',no:['FA03'],lai:0.2,phuc:30},
   FA10:{n:'Bắc Phong Quân',noi:'LOC13',chu:'NP25',tien:30,quan:80,dan:40,suc:60,giu:'biên ải và lương quân',no:['FA01'],lai:-0.1,phuc:20}
 };
+// người dạy nghề tu ở từng nơi neo (nối Đ7: nhập học P.2 gọi người đang giữ vai)
+const TU_THAY={LOC05:'NP09',LOC07:'NP13',LOC08:'NP15',LOC09:'NP17',LOC10:'NP19',LOC11:'NP21',LOC12:'NP23',LOC13:'NP25',LOC15:'NP29'};
