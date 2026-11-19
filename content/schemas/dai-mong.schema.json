@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phu-sinh/dai-mong.schema.json",
+  "title": "Lời văn Đại Mộng (Đ10)",
+  "description": "Tệp trong content/dai-mong/**. Kiểm thật bằng tools/kiem-tra-dai-mong.js (npm run content:mong) — bộ kiểm còn bắt lời cấm (con số, tên ghi thẳng, mã nội bộ, nhớ kiếp trước, lộ thân phận Người Gác Bến quá sớm). Chỗ thay được: {ten}, {NPxx}, {NPxx.vai}, {NPxx.noi}, {LOCxx}, {FAxx}.",
+  "$defs": {
+    "doan": {"type": "string", "minLength": 30},
+    "mang": {"type": "array", "items": {"$ref": "#/$defs/doan"}}
+  },
+  "oneOf": [
+    {"title": "mong_an — content/dai-mong/mong-an/MAxx.json", "type": "object", "additionalProperties": false, "required": ["schemaVersion", "loai", "ma", "nhat"],
+      "properties": {"schemaVersion": {"const": 1}, "loai": {"const": "mong_an"}, "ma": {"enum": ["MA01","MA02","MA03","MA04","MA05","MA06","MA07","MA08"]},
+        "nhat": {"$ref": "#/$defs/mang", "minItems": 2, "maxItems": 3, "description": "đoạn kể lúc nhặt (150–700 ký tự mỗi đoạn)"}}},
+    {"title": "gac_ben — content/dai-mong/gac-ben/<dang>.json", "type": "object", "additionalProperties": false, "required": ["schemaVersion", "loai", "dang", "hien", "nhan", "loi"],
+      "properties": {"schemaVersion": {"const": 1}, "loai": {"const": "gac_ben"}, "dang": {"enum": ["lao_cheo_do","tre_an_may","ni_co_mu","ban_canh","lao_dao","ba_do"]},
+        "hien": {"$ref": "#/$defs/mang", "minItems": 2, "maxItems": 4, "description": "cảnh xuất hiện"},
+        "nhan": {"$ref": "#/$defs/mang", "minItems": 2, "maxItems": 4, "description": "đáp khi người chơi nói \"Ta đã gặp ngươi\""},
+        "loi": {"$ref": "#/$defs/mang", "minItems": 5, "maxItems": 5, "description": "lời nói thật từng phần theo bậc lộ 0..4; chỉ loi[4] được nhắc Yêu Hoàng"}}},
+    {"title": "ben — content/dai-mong/ben.json", "type": "object", "additionalProperties": false, "required": ["schemaVersion", "loai", "vao", "uong", "doi", "doiLai", "mim"],
+      "properties": {"schemaVersion": {"const": 1}, "loai": {"const": "ben"}, "vao": {"$ref": "#/$defs/mang", "minItems": 3}, "uong": {"$ref": "#/$defs/mang", "minItems": 3},
+        "doi": {"$ref": "#/$defs/mang", "minItems": 3, "maxItems": 6}, "doiLai": {"$ref": "#/$defs/mang", "minItems": 2}, "mim": {"$ref": "#/$defs/mang", "minItems": 2}}},
+    {"title": "ket — content/dai-mong/ket/ENDxx.json", "type": "object", "additionalProperties": false, "required": ["schemaVersion", "loai", "ma", "canh", "hau"],
+      "properties": {"schemaVersion": {"const": 1}, "loai": {"const": "ket"}, "ma": {"enum": ["END01","END02","END03","END04","END05","END06","END07","END08"]},
+        "canh": {"$ref": "#/$defs/mang", "minItems": 2, "maxItems": 3, "description": "cảnh kết (200–900 ký tự); câu kết cố định game tự thêm"},
+        "hau": {"$ref": "#/$defs/mang", "minItems": 2, "maxItems": 5, "description": "câu hậu truyện ngắn (30–220 ký tự)"}}},
+    {"title": "nghi_thuc — content/dai-mong/nghi-thuc/NGxx.json", "type": "object", "additionalProperties": false, "required": ["schemaVersion", "loai", "ma"],
+      "properties": {"schemaVersion": {"const": 1}, "loai": {"const": "nghi_thuc"}, "ma": {"enum": ["NG01","NG02","NG03","NG04"]},
+        "chuanBi": {"$ref": "#/$defs/doan"}, "xong": {"$ref": "#/$defs/doan"}, "hong": {"$ref": "#/$defs/doan"}},
+      "description": "NG01: chuanBi, xong, hong · NG02: chuanBi, xong · NG03: chuanBi, xong, hong · NG04: xong, hong"},
+    {"title": "khao — content/dai-mong/khao/LOCxx.json", "type": "object", "additionalProperties": false, "required": ["schemaVersion", "loai", "loc", "muc"],
+      "properties": {"schemaVersion": {"const": 1}, "loai": {"const": "khao"}, "loc": {"enum": ["LOC05","LOC06","LOC07","LOC09","LOC12","LOC15"]},
+        "muc": {"type": "object", "additionalProperties": {"$ref": "#/$defs/doan"}, "description": "mã việc (DM_VIEC) → đoạn kể (150–700)"}}}
+  ]
+}
