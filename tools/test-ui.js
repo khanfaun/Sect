@@ -27,7 +27,7 @@ async function boot(b, w = 400, h = 800) {
   await p.waitForTimeout(1200);
   // chờ hết hiệu ứng chuyển màn (mực loang) và đã vào bản đồ; bấm lại nếu cú bấm đầu rơi vào lúc chưa sẵn sàng
   for (let i = 0; i < 25 && await p.evaluate(() => G.screen !== 'map' || UI.inkBusy); i++) { const b = await p.$('[data-act="lifeGo"]'); if (b) await b.click().catch(() => {}); await p.waitForTimeout(400); }
-  await p.evaluate(() => { G.run.scene = null; });
+  await p.evaluate(() => { G.run.scene = null; G.run.gbXong = 1; }); // Đ10: Người Gác Bến không tự hiện giữa bài khác (bài dai_mong kiểm riêng)
   return p;
 }
 const ev = (p, f, a) => p.evaluate(f, a);
@@ -600,6 +600,38 @@ const TESTS = {
     ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
   },
   // Sửa-O câu 77: truy nã — biểu tượng chữ trên bản đồ, nhân chứng mở hộp lựa chọn, Quan phủ trong hộp địa điểm
+  // Đ10: mục Đại sự ở nơi cổ, Bến Vong Xuyên khi chết, thẻ Đại Mộng, màn kết + Tân Mộng
+  async dai_mong(p) {
+    const settle = async () => { await p.waitForTimeout(150); for (let i = 0; i < 40 && await ev(p, () => UI.inkBusy); i++) await p.waitForTimeout(100); await p.waitForTimeout(100); };
+    await ev(p, () => {FEAT.mong=1;const r=G.run;r.pham=0;r.realm=1;r.bac=1e6;r.st=1e5;r.scene=null;r.gbXong=1;UI.modal=null;UI.panel=null;
+      const n=locNode('LOC05');r.at=n.id;r.region=n.r;r.moving=null;openPlace(n.id);render();});
+    await p.waitForTimeout(150);
+    ok(await ev(p, () => !!document.querySelector('[data-act="pact"][data-arg="daisu"]')), 'nơi cổ có nút "Đại sự"');
+    await p.locator('[data-act="pact"][data-arg="daisu"]').click();await p.waitForTimeout(120);
+    const opts = await p.locator('[data-act="vopt"]').allInnerTexts();
+    ok(opts.some(x => /Khảo trục quan trắc/.test(x)), 'mục Đại sự liệt kê việc khảo sát ' + JSON.stringify(opts));
+    await p.locator('[data-act="vopt"][data-arg="k05a"]').click();await p.waitForTimeout(120);
+    await p.locator('[data-act="vgo"]').click();await p.waitForTimeout(150);
+    ok(await ev(p, () => triSrc('TRI01').includes('LOC05')), 'khảo xong: ghi một nguồn vào sổ luân hồi');
+    ok(/sổ luân hồi|lặp lại/.test(await ev(p, () => document.body.innerText)), 'lời khảo sát hiện trên thẻ địa điểm');
+    // chết → bến
+    await ev(p, () => {die('combat',{n:'x'});render();});await settle();
+    ok(await ev(p, () => !!document.querySelector('[data-act="benDoi"]') && !!document.querySelector('[data-act="benUong"]') && !document.querySelector('[data-act="overNext"]')), 'màn hết kiếp: hai lựa chọn ở bến, chưa luân hồi ngay');
+    await p.locator('[data-act="benDoi"]').click();await p.waitForTimeout(120);
+    for (let i = 0; i < 8 && await p.$('[data-act="benTiep"]'); i++) { await p.locator('[data-act="benTiep"]').click(); await p.waitForTimeout(80); }
+    ok(await ev(p, () => mongCo('MA01')) && /Bát canh không đáy/.test(await ev(p, () => document.body.innerText)), 'ngồi đợi nghe hết: Mộng Ấn #1 hiện trên màn');
+    ok(await ev(p, () => !!document.querySelector('[data-act="overNext"]')), 'nghe xong mới có nút Luân hồi');
+    await ev(p, () => {G.over=null;G.screen='meta';UI.tab.meta='mong';render();});await settle();
+    const mt = await ev(p, () => document.body.innerText);
+    ok(/Mộng Ấn/.test(mt) && /Bát canh không đáy/.test(mt) && /Người Gác Bến/.test(mt), 'Bến Vong Xuyên: thẻ Đại Mộng (Mộng Ấn, tri thức, Người Gác Bến)');
+    // màn kết
+    await ev(p, () => {genBirth();newRun(G.birth.cards[0]);G.run.scene=null;dmKetHet('END07');render();});await settle();
+    const kt = await ev(p, () => document.body.innerText);
+    ok(/Người chặt vòng/.test(kt) && /Nước thôi chảy ngược/.test(kt), 'màn kết: tên kết + câu kết');
+    await p.locator('[data-act="tanMong"]').click();await settle();ok(/Bấm lần nữa/i.test(await ev(p, () => document.body.innerText)), 'Tân Mộng hỏi lại trước khi xoá hồ sơ');await p.locator('[data-act="tanMong"]').click();await settle();
+    ok(await ev(p, () => G.screen==='title' && G.meta.daTinh===1 && !G.meta.ketHet), 'Tân Mộng: hồ sơ mới, giữ dấu đã tỉnh');
+    ok(p.errs.length === 0, 'không lỗi JavaScript ' + p.errs.slice(0, 2).join(' | '));
+  },
   async truy_na(p) {
     await ev(p, () => {FEAT.truy=1;FEAT.tna=1;const r=G.run;r.pham=0;r.realm=1;r.scene=null;UI.modal=null;UI.panel=null;r.truy=null;r.tna={};
       const n=W().regions.flatMap(x=>x.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');window.TN=n;r.at=n.id;r.region=n.r;r.moving=null;

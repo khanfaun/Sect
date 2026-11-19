@@ -20,7 +20,8 @@ function fresh(patch) {
     try{G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0]);}
     finally{genWorld=original;}
     NK.on=true;NK.clear();G.run.scene=null;G.run.rootKnown=1; // Sửa-C.6: linh căn luôn ẩn tới khi trắc; bài cũ coi như đã trắc
-    FEAT.an=0;FEAT.nc=0;FEAT.no=0;FEAT.nha=0;FEAT.truy=0;FEAT.tna=0; // nợ/nhà ở (Sửa-B) tắt, bài no_nha bật lại; ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
+    FEAT.an=0;FEAT.nc=0;FEAT.no=0;FEAT.nha=0;FEAT.truy=0;FEAT.tna=0;FEAT.mong=0; // Đ10: Người Gác Bến tự hiện (kỳ ngộ) tắt trong bài khác; bài dai_mong bật lại
+     // nợ/nhà ở (Sửa-B) tắt, bài no_nha bật lại; ăn uống (Đ3.6) tắt trong bài không nói về cái ăn; com_ao bật lại. Nhu cầu (Sửa-A) tắt để giá cố định; bài nhu_cau bật lại
   })()`);
   if (patch) run(patch);
 }
@@ -2384,6 +2385,187 @@ const TESTS = {
     run("G.run.lifeAdj=500;advanceTime(30*HY)");ok(run("G.run.family[1].tuoi")===40, 'mỗi năm thêm một tuổi ('+run("G.run.family[1].tuoi")+')');
     ok(run("G.run.family[0].song")===0&&run("NK.count('gd.tang')")>=1, 'người già mất, có tin tang');
     run("delete G.run.family;delete G.run._gdV1;run2()");ok(run("Array.isArray(G.run.family)"), 'bản lưu cũ: có danh sách người nhà');
+  },
+  // ===== Đ10: Đại Mộng =====
+  // Mộng Ấn, ba tri thức (hai nguồn độc lập, giữ qua kiếp), khảo sát nơi cổ, Người Gác Bến
+  dai_mong() {
+    fresh("FEAT.mong=1;G.screen='map';G.run.pham=0;G.run.realm=1;G.run.bac=1e6;G.run.st=1e5;G.run.kyT=W().t");
+    const at = loc => run(`(()=>{const n=locNode('${loc}');const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;r.scene=null;openPlace(n.id);return n.id})()`);
+    const ids = () => JSON.parse(run(`JSON.stringify(venueOpts(nodeById(G.run.at),'daisu').map(o=>o.id+(o.no?'!':'')))`));
+    ok(run("JSON.stringify(dmView().tri.map(t=>t.co))")==='[false,false,false]'&&run("dmM().mong.length")===0, 'sổ luân hồi trống lúc đầu');
+    ok(run("['LOC05','LOC12','LOC15'].every(l=>placeActs(locNode(l)).some(a=>a.a==='daisu'))"), 'ba nơi lõi có mục "Đại sự"');
+    at('LOC05');let L=ids();ok(L.includes('k05a')&&L.includes('k05b!')&&!L.includes('k05c'), 'LOC05: khảo trục mở, khảo lõi cần biết điều thứ nhất trước: '+L.join(','));
+    run("NK.clear();venueDo('daisu','k05a')");ok(run("triSrc('TRI01').join()")==='LOC05'&&!run("triCo('TRI01')"), 'một nguồn: chưa đủ chứng');
+    ok(run("NK.count('dm.tri')")===1&&run("G.run.scene.msg.join(' ')").length>40, 'có lời khảo sát và nhật ký');
+    ok(!ids().includes('k05a'), 'nguồn đã có thì không khảo lại');
+    at('LOC12');run("venueDo('daisu','k12a')");ok(run("triCo('TRI01')")&&run("NK.count('dm.triDat')")===1, 'hai nguồn độc lập (LOC05 + LOC12): biết "Vòng đã từng khép"');
+    L=ids();ok(L.includes('k12b!'), 'mỗi nơi chỉ cho một nguồn mỗi kiếp: '+L.join(','));
+    ok(run("venueDo('daisu','k12b')")===false&&!run("triSrc('TRI02').length"), 'bấm việc bị khoá thì không làm gì');
+    // Mộng Ấn: tối đa một mỗi kiếp
+    ok(run("mongNhat('MA03')")&&run("triSrc('TRI01').includes('MA03')"), 'nhặt Mộng Ấn: thành một nguồn của tri thức');
+    ok(!run("mongNhat('MA05')")&&run("NK.count('dm.mongDay')")===1, 'mỗi kiếp tối đa một Mộng Ấn');
+    // kiếp sau (giả lập): sổ còn nguyên
+    run("G.run.kiep=2;G.run.dmKhao={}");at('LOC12');L=ids();ok(L.includes('que')&&L.includes('k12b'), 'kiếp sau: xin quẻ mở, khảo chuông mở: '+L.join(','));
+    run("venueDo('daisu','que')");ok(run("mongCo('MA05')")&&run("triSrc('TRI02').includes('MA05')"), 'MA05 Chữ trong quẻ (LOC12, từ kiếp hai)');
+    // MA04 tuồng cũ cần một đời trước
+    run("G.run.kiep=3;G.run.dmKhao={}");at('LOC09');ok(ids().includes('tuong!'), 'chưa có đời nào: gánh hát chưa diễn đời mình');
+    run("G.meta.lives.unshift({k:1,ten:'X',lines:['a'],ep:'',pts:1})");ok(ids().includes('tuong'), 'đã có đời trước: xem tuồng được');
+    run("venueDo('daisu','tuong')");ok(run("mongCo('MA04')"), 'MA04 Tuồng cũ');
+    // MA07 chỉ khi Tiên Nhân Hạ Phàm / Thiên Lộ Mở
+    run("G.run.kiep=4");at('LOC15');ok(ids().includes('troi!'), 'trời yên: chưa thấy vết nứt');
+    run("tcInit(W()).CLK14.pha=2");ok(ids().includes('troi'), 'Thiên Lộ Mở: nhìn lên được');
+    run("venueDo('daisu','troi')");ok(run("mongCo('MA07')")&&run("triSrc('TRI03').includes('MA07')"), 'MA07 Vết nứt trên trời → nguồn của điều thứ ba');
+    run("tcInit(W()).CLK14.pha=0");
+    // MA03: viếng mộ mình kiếp trước
+    run("(()=>{G.run.kiep=5;dmM().mong=dmM().mong.filter(x=>x!=='MA03');G.run.scene=null;const n=nodeById(G.run.at);n.grave={ten:'Kiếp Cũ',tuoi:40,realmName:'',t:0,items:[]};visitGrave(n)})()");
+    ok(run("mongCo('MA03')"), 'MA03 Mộ của chính mình (viếng mộ kiếp trước)');
+    // MA06: thiên kiêu gặp ở kiếp trước nhận ra
+    run("G.run.kiep=6;DM_TK=W().rivals[0].ten;gapNguoi(DM_TK,'tk')");ok(!run("mongCo('MA06')")&&run("dmM().tkGap[DM_TK]")===6, 'gặp thiên kiêu lần đầu: ghi kiếp');
+    run("G.run.kiep=7;gapNguoi(DM_TK,'tk')");ok(run("mongCo('MA06')"), 'MA06 Kẻ cũng đang mơ (gặp lại ở kiếp sau)');
+    // MA08: hồi 4 đại lộ Tỉnh Mộng
+    run("(()=>{G.run.kiep=8;const S=tyNew('DL09',3);tySt().dl=S;S.han=W().t+HY;tyDong(S,TUYEN.DL09.nut[3].cach[0].id,'chon')})()");ok(run("mongCo('MA08')"), 'MA08 Đáy Vong Xuyên (qua hồi 4 Tỉnh Mộng)');
+    // Người Gác Bến: mỗi kiếp một lần, dạng khác nhau, nhận ra ba kiếp → MA02
+    run("G.run.kiep=9;G.run.scene=null;G.run.gbHen=W().t;G.run.gbXong=0;advanceTime(1)");ok(run("G.run.scene&&G.run.scene.ev")==='dm_gacben', 'Người Gác Bến hiện (kỳ ngộ riêng)');
+    const d1=run("G.run.gbDang");ok(JSON.parse(run("JSON.stringify(kyOpts(G.run.scene).map(o=>o.l))")).length===2, 'lần đầu gặp: không có lựa chọn "Ta đã gặp ngươi"');
+    run("kyPick(0)");ok(run("G.run.scene.res.t").length>40&&!/\{\{|\{NP/.test(run("G.run.scene.res.t")), 'lời Gác Bến hiện đủ, không còn mã');
+    run("G.run.scene=null;G.run.gbHen=W().t;advanceTime(1)");ok(!run("G.run.scene"), 'một kiếp chỉ hiện một lần');
+    for (const k of [10,11,12]) run(`G.run.kiep=${k};G.run.gbXong=0;G.run.gbHen=W().t;G.run.scene=null;advanceTime(1);kyPick(0)`);
+    ok(run("G.run.gbDang")!==d1, 'kiếp khác: dạng khác ('+d1+' → '+run("G.run.gbDang")+')');
+    ok(run("dmM().gb.nk.length")===3&&run("mongCo('MA02')"), 'nhận ra ở ba kiếp: MA02 Người không già');
+    ok(run("gbBac()")===3, 'bậc lộ tăng theo số lần nhận ra');
+    // bản lưu cũ
+    run("delete G.meta.mong;delete G.meta.tri;delete G.meta.gb;delete G.meta.tkGap;delete G.meta.ends;delete G.meta.mongK;delete G.run.gbHen;delete G.run.gbXong;G.run.scene=null");
+    ok(run("(()=>{try{advanceTime(24);dmView();venueOpts(locNode('LOC05'),'daisu');return true}catch(e){return e.message}})()")===true, 'bản lưu cũ (chưa có sổ Đại Mộng): chạy được');
+    ok(run("Array.isArray(G.meta.mong)&&typeof G.run.gbHen==='number'"), 'bản lưu cũ: dựng sổ và hẹn Gác Bến');
+  },
+  // tám kết thúc: điều kiện, ghi theo đời (END01/02/03/06) và khép hành trình (END04/05/07/08)
+  ket_thuc() {
+    const base = "FEAT.mong=1;G.screen='map';G.run.pham=0;G.run.realm=4;G.run.bac=1e6;G.run.st=1e5;G.run.kyT=W().t;G.run.gbXong=1;";
+    const tri = "for(const id in TRI_THUC){triThem(id,'LOC05');triThem(id,'LOC12');}";
+    const at = loc => run(`(()=>{const n=locNode('${loc}');const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;r.scene=null;openPlace(n.id);return n.id})()`);
+    const ids = () => JSON.parse(run(`JSON.stringify(venueOpts(nodeById(G.run.at),'daisu').map(o=>o.id+(o.no?'!':'')))`));
+    fresh(base);
+    // kết minh (Sửa-N faKetMinh)
+    at('LOC01');ok(!ids().some(x=>x.startsWith('minh')), 'xa lạ: chưa có lựa chọn kết minh');
+    run("G.run.faQh={FA04:30}");ok(run("faQhBac('FA04')")===5&&ids().includes('minh'), 'thân thiết: kết minh được');
+    run("venueDo('daisu','minh')");ok(run("faMinh('FA04')"), 'đã kết minh với thế lực của nơi này');
+    // END02 Nhân Hoàng
+    at('LOC02');ok(ids().includes('end02!'), 'Lên ngôi: thiếu điều kiện thì khoá');
+    ok(/✗/.test(run("venueOpts(nodeById(G.run.at),'daisu').find(o=>o.id==='end02').d")), 'hộp xác nhận liệt kê điều kiện còn thiếu');
+    run("faKetMinh('FA10',1);faKetMinh('FA02',1);vaiGiet('NP04','dm')");ok(ids().includes('end02'), 'ngai trống + kho + quân + hai thế lực công nhận + quân lương: lên ngôi được');
+    const b0=run("G.run.bac");run("venueDo('daisu','end02')");ok(run("G.run.ends.includes('END02')")&&run("G.run.bac")<b0&&run("G.meta.ends.some(e=>e.id==='END02')")&&!!run("G.run"), 'END02 ghi theo đời, đời vẫn tiếp, mất quân lương');
+    ok(/Chiếu thư/.test(run("G.run.scene.msg.join(' ')")), 'có câu kết của END02');
+    // END03 Ma chủ
+    at('LOC07');ok(ids().includes('end03!'), 'Ma chủ: thiếu điều kiện thì khoá');
+    run("vaiGiet('NP13','dm')");ok(ids().includes('end03'), 'huyết ấn không chủ + ba đồng minh + nguồn: được');
+    run("venueDo('daisu','end03')");ok(run("G.run.ends.includes('END03')"), 'END03 ghi theo đời');
+    // END06 Truyền một ngọn đèn
+    run("ngStart('nong').bac=3;G.run.birthAge=(G.run.birthAge||16)+40;G.run.age=60");const n1=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&!n.anchor&&n.state!=='ruin');G.run.at=n.id;G.run.scene=null;openPlace(n.id);return n.id})()");
+    ok(ids().includes('truyen'), 'nghề chính tới bậc cao, đủ tuổi: nhận học trò ở thôn trấn');
+    run("venueDo('daisu','truyen')");ok(run("G.run&&G.run.ends.includes('END06')"), 'END06 sau một năm dạy');
+    // END01 lúc chết
+    run("G.run.family=[{ten:'A',qh:'con',tuoi:20,song:1}];die('quyan')");ok(run("G.over.end01")==='END01'&&run("G.over.ends.join()")==='END02,END03,END06,END01', 'chết: một đời đã sống (END01), màn hết kiếp liệt kê kết lớn');
+    fresh(base+"G.run.age=20;G.run.family=[];G.run.party=[]");run("die('combat',{n:'x'})");ok(run("G.over.end01")==='chua'&&run("G.over.life.chuaTen")===1, 'chết trẻ: "Đời chưa kịp gọi tên"');
+    // phi thăng thiếu tri thức → mộng trong mộng
+    fresh(base);run("G.run.ng01=1;die('phithang')");ok(run("G.screen")==='over'&&run("G.over.mim")===1&&!run("G.meta.ketHet"), 'phi thăng thiếu ba tri thức: mộng trong mộng, vẫn luân hồi');
+    ok(run("benView().mim").length>40, 'màn hết kiếp có lời "mộng trong mộng"');
+    // END04
+    fresh(base+tri);at('LOC15');ok(ids().includes('ng01'), 'đủ ba tri thức, Hóa Thần: chuẩn bị cửa tỉnh mộng');
+    run("G.run.realm=3");ok(ids().includes('ng01!'), 'dưới Hóa Thần: khoá');run("G.run.realm=4;venueDo('daisu','ng01')");ok(run("G.run.ng01")===1, 'cửa đã chuẩn bị');
+    run("die('phithang')");ok(run("G.screen")==='ket'&&run("G.meta.ketHet.id")==='END04'&&run("G.meta.daTinh")===1, 'đủ ba tri thức + cửa + phi thăng: END04, màn kết');
+    ok(/Lần đầu tiên/.test(run("dmKetView().cau"))&&run("dmKetView().hau.length")>=3, 'màn kết: câu kết + hậu truyện');
+    run("dmTanMong()");ok(run("G.meta.daTinh")===1&&run("G.meta.endsCu.length")===1&&!run("G.meta.ketHet")&&run("dmM().mong.length")===0, 'Tân Mộng: hồ sơ mới, giữ dấu đã tỉnh');
+    // END05
+    fresh(base+tri);at('LOC15');ok(ids().includes('ng02m')&&!ids().includes('ng02t'), 'thay nguồn: thử mô hình trước');
+    run("venueDo('daisu','ng02m')");for(const l of ['LOC05','LOC12','LOC15']){at(l);run("venueDo('daisu','ng02t')");}
+    ok(run("ngDu(ngW().NG02.tu)"), 'bộ tụ ở cả ba nơi');at('LOC15');run("venueDo('daisu','ng02c')");ok(ids().includes('ng02x!'), 'chạy thử chưa đủ chu kỳ: chưa nhận được');
+    run("W().ng.NG02.chay-=31*HD");ok(ids().includes('ng02x')&&/không trở lại/.test(run("venueOpts(nodeById(G.run.at),'daisu').find(o=>o.id==='ng02x').d")), 'đủ chu kỳ: lời xác nhận cuối');
+    run("venueDo('daisu','ng02x')");ok(run("G.screen")==='ket'&&run("G.meta.ketHet.id")==='END05'&&!run("G.run"), 'END05 Giữ mộng bằng tên mình: khép hành trình');
+    // END07
+    fresh(base+tri);for(const l of ['LOC05','LOC12']){at(l);run("venueDo('daisu','ng03x')");}at('LOC05');ok(ids().includes('ng03c!'), 'chưa xác minh đủ ba nơi: chưa đặt chốt');
+    at('LOC15');run("venueDo('daisu','ng03x');venueDo('daisu','ng03c')");for(const l of ['LOC05','LOC12']){at(l);run("venueDo('daisu','ng03c')");}
+    ok(ids().includes('ng03h'), 'đủ ba chốt: hẹn giờ');run("venueDo('daisu','ng03h')");ok(!!run("G.run")&&run("W().ng.NG03.hen")>run("W().t"), 'chưa tới giờ: đời vẫn tiếp');
+    run("advanceTime(8*HD)");ok(run("G.screen")==='ket'&&run("G.meta.ketHet.id")==='END07', 'tới giờ, đủ ba chốt: END07 Người chặt vòng');
+    fresh(base+tri);run("(()=>{const g=ngW().NG03;for(const l of NG_NOI)g.xm[l]=1;g.chot.LOC05=1;g.chot.LOC12=1;g.hen=W().t+HD;advanceTime(2*HD)})()");ok(!!run("G.run")&&!run("W().ng.NG03.hen")&&!run("G.meta.ketHet"), 'thiếu một chốt tới giờ: vòng chưa khép');
+    // END08
+    fresh(base+tri);at('LOC15');ok(ids().includes('ng04t'), 'thiếu quyền khoá: chỉ có lựa chọn cưỡng mở');
+    for(const l of ['LOC05','LOC07']){at(l);run("venueDo('daisu',venueOpts(nodeById(G.run.at),'daisu').find(o=>o.id.startsWith('khoa')).id)");}
+    at('LOC15');run("G.run.hp=S().maxHp");ok(ids().includes('ng04'), 'hai quyền khoá + ba tri thức + nguồn + sức: mở Diệt Thế');
+    const hp0=run("G.run.hp");run("venueDo('daisu','ng04')");ok(run("G.meta.ketHet.id")==='END08'&&run("G.screen")==='ket', 'END08 Thế giới không còn người gọi tên');
+    // diệt thế thiếu điều kiện → 3 khu đất ma
+    fresh(base);at('LOC15');const z0=run("(W().maVuc||[]).length");const c0=run("tcInit(W()).CLK06.muc");
+    ok(ids().includes('ng04t'), 'không có tri thức: cưỡng mở');run("venueDo('daisu','ng04t')");
+    ok(run("W().maVuc.length")-z0===3&&!run("G.meta.ketHet")&&!!run("G.run"), 'diệt thế thiếu điều kiện: ba khu thành đất ma, không kết');
+    ok(run("tcInit(W()).CLK06.muc")>c0&&!ids().some(x=>x.startsWith('ng04')), 'Đêm Dài tăng; mỗi kiếp một lần');
+    ok(!/\{\{|\{NP|\{LOC|undefined/.test(run("G.run.scene.msg.join(' ')")), 'lời không còn mã');
+  },
+  // Bến Vong Xuyên khi chết: "Uống canh, đi ngay" / "Ngồi đợi", Mộng Ấn #1, nối khoảng luân hồi
+  ben_vong_xuyen() {
+    fresh("FEAT.mong=1");
+    run("die('combat',{n:'x'})");ok(run("G.over.ben.st")==='chon'&&run("benView().vao").length>40, 'chết: tới bến, chọn uống canh hay ngồi đợi');
+    const y0=run("W().t"),g0=run("G.over.gap");run("benDoi()");
+    ok(run("G.over.gap")>g0&&run("W().t")-y0>=3*run("HY")-1, 'ngồi đợi: thế gian trôi thêm '+(run("G.over.gap")-g0)+' năm (cộng vào khoảng luân hồi)');
+    ok(run("benView().dong").length>20&&run("benView().con"), 'nghe Người Gác Bến từng đoạn');
+    for(let i=0;i<10&&run("G.over.ben.st")==='doi';i++)run("benTiep()");
+    ok(run("G.over.ben.st")==='xong'&&run("mongCo('MA01')")&&run("triSrc('TRI01').includes('MA01')"), 'nghe tới cuối: Mộng Ấn #1 Bát canh không đáy');
+    ok(run("benView().t").length>40, 'lời nhặt Mộng Ấn');
+    run("G.over=null;G.screen='title';genBirth();newRun(G.birth.cards[0]);G.run.scene=null;die('combat',{n:'y'})");run("benDoi()");
+    ok(!run("benView().con")||run("G.over.ben.L.length")<=4, 'lần sau: lời ngắn hơn');
+    for(let i=0;i<10&&run("G.over.ben.st")==='doi';i++)run("benTiep()");ok(run("dmM().mong.length")===1, 'không nhặt lại MA01');
+    run("G.over=null;G.screen='title';genBirth();newRun(G.birth.cards[0]);G.run.scene=null;die('combat',{n:'z'})");const y1=run("W().t");run("benUong()");
+    ok(run("G.over.ben.st")==='uong'&&run("W().t")===y1&&run("benView().t").length>20, 'uống canh, đi ngay: không thêm thời gian');
+    ok(run("benDoi()")===false, 'đã chọn thì không chọn lại');
+    run("G.over.ben=undefined");ok(run("benView()")===null, 'bản lưu cũ (màn hết kiếp chưa có bến): không lỗi');
+  },
+  // mô phỏng nhiều kiếp tới từng kết khép hành trình: tri thức giữ qua kiếp, tối đa một nguồn mỗi nơi mỗi kiếp
+  nhieu_kiep() {
+    const at = loc => run(`(()=>{const n=locNode('${loc}');const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;r.scene=null;openPlace(n.id);return n.id})()`);
+    const lam = (loc,id) => {at(loc);return run(`venueDo('daisu','${id}')`);};
+    const sang = "(()=>{if(G.run)die('quyan');if(G.over&&G.over.ben)benUong();G.over=null;G.screen='title';genBirth();newRun(G.birth.cards[0]);const r=G.run;r.scene=null;r.rootKnown=1;r.pham=0;r.realm=4;r.bac=1e6;r.st=1e5;r.gbXong=1;})()";
+    const ba = () => {
+      fresh("FEAT.mong=1;G.run.pham=0;G.run.realm=4;G.run.bac=1e6;G.run.st=1e5;G.run.gbXong=1");
+      lam('LOC05','k05a');lam('LOC12','k12a');run(sang);            // kiếp 1: điều thứ nhất
+      lam('LOC05','k05b');lam('LOC15','k15b');run(sang);            // kiếp 2: điều thứ hai
+      lam('LOC05','k05c');lam('LOC15','k15c');                       // kiếp 3: điều thứ ba
+      return run("tri3()")&&run("G.run.kiep")===3;
+    };
+    for (const E of ['END04','END05','END07','END08']) {
+      const k3 = ba();
+      if (E==='END04'){lam('LOC15','ng01');run("die('phithang')");}
+      if (E==='END05'){lam('LOC15','ng02m');for(const l of ['LOC05','LOC12','LOC15'])lam(l,'ng02t');lam('LOC15','ng02c');run("advanceTime(31*HD)");if(G_ok())lam('LOC15','ng02x');}
+      if (E==='END07'){for(const l of ['LOC05','LOC12','LOC15'])lam(l,'ng03x');for(const l of ['LOC05','LOC12','LOC15'])lam(l,'ng03c');lam('LOC15','ng03h');run("advanceTime(8*HD)");}
+      if (E==='END08'){lam('LOC05','khoa05');lam('LOC12','khoa12');run("G.run.hp=S().maxHp");lam('LOC15','ng04');}
+      ok(k3&&run("G.meta.ketHet&&G.meta.ketHet.id")===E&&run("G.screen")==='ket', E+': ba kiếp góp đủ ba tri thức rồi tới kết (kiếp '+run("G.meta.ketHet&&G.meta.ketHet.kiep")+')');
+    }
+    function G_ok(){return !!run("G.run");}
+    // đường Mộng Ấn: điều thứ nhất từ bến + mộ, không cần LOC12
+    fresh("FEAT.mong=1;G.run.pham=0;G.run.realm=1;G.run.gbXong=1");
+    run("die('combat',{n:'x'});benDoi();for(let i=0;i<10&&G.over.ben.st==='doi';i++)benTiep()");ok(run("mongCo('MA01')")&&!run("triCo('TRI01')"), 'kiếp 1 chết, ngồi đợi ở bến: Mộng Ấn #1 (một nguồn)');
+    run("G.over=null;G.screen='title';genBirth();newRun(G.birth.cards[0]);G.run.scene=null;G.run.gbXong=1");
+    const gn=run("W().regions.flatMap(R=>R.nodes).find(n=>n.grave).id");run(`G.run.at=${gn};visitGrave(nodeById(${gn}))`);
+    ok(run("triCo('TRI01')")&&run("G.run.kiep")===2, 'kiếp 2 viếng mộ mình: đủ hai Mộng Ấn → biết điều thứ nhất');
+    // tri thức giữ qua kiếp, quên sạch vẫn đúng (nhân vật mới không mang đồ / tu vi)
+    run("die('combat',{n:'y'});benUong();G.over=null;G.screen='title';genBirth();newRun(G.birth.cards[0])");ok(run("triCo('TRI01')")&&run("G.run.kiep")===3&&run("(G.run.dmKhao||null)")===null, 'kiếp 3: sổ tri thức còn, việc của đời trước thì không');
+  },
+  // công cụ kiểm lời văn Đại Mộng
+  dm_kiem() {
+    const K = require('./kiem-tra-dai-mong'), fs = require('fs'), path = require('path'), os = require('os');
+    const r = K.kiemDaiMong();ok(r.loi.length===0&&r.n>=6, 'các tệp mẫu đạt ('+r.n+' tệp)');
+    ok(K.canViet().length===33&&r.thieu.length===33-r.n, 'danh sách phải viết: 33 tệp, còn '+r.thieu.length);
+    ok(K.kiemDaiMong(null,{du:true}).loi.length===r.thieu.length, '--du: mỗi tệp thiếu là một lỗi');
+    const dir = path.join(__dirname,'..','content/dai-mong/mong-an'), f = path.join(dir,'MA02.json');
+    const viet = o => {fs.writeFileSync(f,JSON.stringify(o,null,1));try{return K.kiemDaiMong([f]).loi.join('\n');}finally{fs.unlinkSync(f);}};
+    const dai = 'Ngươi đứng trước một người không già, dáng ngồi y hệt người đã thấy ở đâu đó, có lẽ trong một giấc ngủ trưa rất xa. Người ấy hỏi ngươi một câu không đầu không cuối rồi cười.';
+    ok(viet({schemaVersion:1,loai:'mong_an',ma:'MA02',nhat:[dai,dai+' Rồi gió nổi.']})==='', 'tệp đúng: không lỗi');
+    ok(/con số "3"/.test(viet({schemaVersion:1,loai:'mong_an',ma:'MA02',nhat:[dai+' Đã 3 lần.',dai]})), 'bắt con số trong lời văn');
+    ok(/Mạc Liên/.test(viet({schemaVersion:1,loai:'mong_an',ma:'MA02',nhat:[dai+' Mạc Liên gật đầu.',dai]})), 'bắt tên người giữ vai ghi thẳng');
+    ok(/quên sạch/.test(viet({schemaVersion:1,loai:'mong_an',ma:'MA02',nhat:['Ngươi nhớ lại kiếp trước. '+dai,dai]})), 'bắt "nhớ lại kiếp trước" (trái luật quên sạch)');
+    ok(/mã nội bộ/.test(viet({schemaVersion:1,loai:'mong_an',ma:'MA02',nhat:[dai+' Đó là TRI01.',dai]})), 'bắt mã nội bộ trong lời văn');
+    ok(/tên tệp/.test(viet({schemaVersion:1,loai:'mong_an',ma:'MA03',nhat:[dai,dai+' x']})), 'tên tệp phải trùng mã');
+    const gb = K.kiemDaiMong([path.join(__dirname,'..','content/dai-mong/gac-ben/lao_cheo_do.json')]);ok(gb.loi.length===0, 'mẫu Người Gác Bến đạt');
+    const g2 = path.join(__dirname,'..','content/dai-mong/gac-ben/ba_do.json');const src=JSON.parse(fs.readFileSync(path.join(__dirname,'..','content/dai-mong/gac-ben/lao_cheo_do.json'),'utf8'));
+    src.dang='ba_do';src.loi[1]=src.loi[1]+' Ta là kẻ Yêu Hoàng để lại.';fs.writeFileSync(g2,JSON.stringify(src));let e2;try{e2=K.kiemDaiMong([g2]).loi.join('\n');}finally{fs.unlinkSync(g2);}
+    ok(/quá sớm/.test(e2), 'Người Gác Bến lộ thân phận quá sớm: báo lỗi');
   },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
   smoke() {

@@ -19,7 +19,7 @@ function render(){
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
     if(cb&&UI.panel!=='more'){UI.panel=null;}
     if(!inMap&&UI.modal)UI.modal=null;
-    if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth'):G.screen==='over'&&G.over?rxv('Over'):G.screen==='meta'?rxv('Meta'):G.screen==='life'&&G.run?rxv('Life'):rxv('Title');}
+    if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth'):G.screen==='over'&&G.over?rxv('Over'):G.screen==='ket'&&G.meta&&G.meta.ketHet?rxv('Ket'):G.screen==='meta'?rxv('Meta'):G.screen==='life'&&G.run?rxv('Life'):rxv('Title');}
     else{
       if(cb)full=rxv('TranDau');
       else{hud=rxv('Hud');nav=rxv('Nav');

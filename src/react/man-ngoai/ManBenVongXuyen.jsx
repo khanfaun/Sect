@@ -2,7 +2,7 @@
 import { Ke } from '../chung';
 import { Html, PS, Tabs, Tranh } from '../html';
 
-const TABS = [['upg', 'Khắc vào chân linh'], ['lives', 'Các kiếp'], ['lore', 'Điển tích'], ['ach', 'Thành tựu']];
+const TABS = [['upg', 'Khắc vào chân linh'], ['lives', 'Các kiếp'], ['lore', 'Điển tích'], ['ach', 'Thành tựu'], ['mong', 'Đại Mộng']];
 
 function KhacChanLinh({ M }) {
   return (
@@ -60,10 +60,31 @@ function ThanhTuu({ M }) {
   </>;
 }
 
+// Đ10: sổ luân hồi — Mộng Ấn, ba tri thức, Người Gác Bến, các kết lớn đã đạt
+function DaiMong() {
+  const V = PS.dmView();
+  return <>
+    {V.daTinh && <p className="hint">Đã tỉnh một lần. Đây là một giấc mộng mới.</p>}
+    <h4>Ba điều cần biết</h4>
+    <div className="rows">
+      {V.tri.map(t => <div className={'row' + (t.co ? ' taken' : '')} key={t.id}><span className="r-t"><b>{t.co ? t.n : '???'}</b><small>{t.muc}</small></span></div>)}
+    </div>
+    <h4>Mộng Ấn</h4>
+    <div className="rows">
+      {V.mong.map(m => m.co
+        ? <div className="row taken" key={m.id}><span className="r-t"><b>{m.n}</b><small>{m.he}</small></span></div>
+        : <div className="row dim" key={m.id}><span className="r-t"><b>chưa nhặt</b></span></div>)}
+    </div>
+    <h4>Người Gác Bến</h4>
+    <p className="hint">{V.gb.n ? 'Đã gặp ở ' + V.gb.n + ' kiếp, nhận ra ' + V.gb.nhan + ' lần.' : 'Chưa gặp.'}</p>
+    {V.ends.length > 0 && <><h4>Kết lớn đã đạt</h4><ul>{V.ends.map((e, i) => <li key={i}>{e.n} — {e.ten} ({PS.kiepName(e.kiep)})</li>)}</ul></>}
+  </>;
+}
+
 export function ManBenVongXuyen() {
   const { G, UI } = PS;
   const M = G.meta, tab = UI.tab.meta || 'upg';
-  const body = { upg: KhacChanLinh, lives: CacKiep, lore: DienTich, ach: ThanhTuu }[tab];
+  const body = { upg: KhacChanLinh, lives: CacKiep, lore: DienTich, ach: ThanhTuu, mong: DaiMong }[tab];
   const Body = body || (() => null);
   return (
     <div className="meta">
@@ -75,7 +96,7 @@ export function ManBenVongXuyen() {
           <Tabs k="meta" list={TABS} cur={tab} />
           <Body M={M} />
         </div>
-        <footer className="win-f"><span className="grow"></span><button className="btn pri" data-act="screen" data-arg="title">Rời bến</button></footer>
+        <footer className="win-f"><span className="grow"></span><button className="btn pri" data-act="screen" data-arg={M.ketHet ? 'ket' : 'title'}>Rời bến</button></footer>
       </section>
     </div>
   );
