@@ -37,7 +37,7 @@ function datOpts(n){const d=datOf(n);if(!d)return [];const r=G.run,t=W().t,L=[];
     for(const id in CONG_TRINH){const X=CONG_TRINH[id].xay;if(!X||!X.noi.includes(n.type))continue;
       if(id==='dong_phu'&&(n.dp||d.o.some(z=>z.ct==='dong_phu')))continue;
       if(L.some(o=>o.xct===id))continue; // mỗi loại chỉ gợi ý trên ô trống đầu tiên
-      const no=X.tu&&isPham()?contentText('dat.canTu'):(r.st||0)<X.st?contentText('dat.thieuLt'):'';
+      const no=datCanMua(n,c)?contentText('dat.canMua'):X.tu&&isPham()?contentText('dat.canTu'):(r.st||0)<X.st?contentText('dat.thieuLt'):'';
       L.push({id:'xay:'+i+':'+id,xct:id,l:contentText('dat.oXay',[i+1,CONG_TRINH[id].n,chuT]),
         d:contentText('dat.dXay',[CONG_TRINH[id].n,chuT])+(c.chu?'\n'+datPhat(n,c,false).join('\n'):''),h:X.h,st:X.st,g:{txt:contentText('dat.gXay')},no});}});
   if(!L.length)L.push({id:'xem',l:contentText('dat.xem'),d:datView(n).map(v=>contentText('dat.dong',[v.i+1,v.ten,v.chuTen])).join('\n'),h:0,st:0,g:{},no:''});
@@ -60,9 +60,11 @@ function datPha(n,i){const d=datOf(n);const c=d&&d.o[i];const C=datCt(c);if(!C||
   dbg('dat.pha',{id:n.id,i,ct,tam:tam?1:0,chu:c.chu?c.chu.k:''});
   const msg=[contentText(tam?'dat.xongPhaTam':'dat.xongPha',[C.n])].concat(P);log(msg[0]);
   return {msg,ch:[chip('⏳',durH(C.pha.h),contentText('dat.gPha'),'')]};}
+// Sửa-O (câu 79): ở thôn trấn / thành (nơi có dân) chỉ xây trên ô đã mua (chu k:'ta'); ô trống của dân thì không
+function datCanMua(n,c){return DAT_SETTLE.includes(n.type)&&n.type!=='tong'&&!(c.chu&&c.chu.k==='ta');}
 // xây công trình ct trên ô trống i
 function datXay(n,i,ct){const d=datOf(n);const c=d&&d.o[i];const C=CONG_TRINH[ct],X=C&&C.xay;const r=G.run;
-  if(!c||c.ct||!X||!X.noi.includes(n.type))return null;if(X.tu&&isPham())return null;if((r.st||0)<X.st)return null;
+  if(!c||c.ct||!X||!X.noi.includes(n.type))return null;if(datCanMua(n,c)){dbg('dat.canMua',{id:n.id,i});return null;}if(X.tu&&isPham())return null;if((r.st||0)<X.st)return null;
   r.st-=X.st;advanceTime(X.h);if(!G.run)return {msg:[]};
   c.ct=ct;c.goc=0;delete c.cu;delete c.moc;if(C.dp)n.dp=1;const P=datPhat(n,c,true);if(!c.chu)c.chu={k:'ta'};
   dbg('dat.xay',{id:n.id,i,ct,st:X.st});

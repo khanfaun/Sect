@@ -931,3 +931,6 @@ Luật: `core2/64-dat-dai.js` (sinh ô, lọc nút), `core2/65-dat-dai-xay-pha.j
 ### O.76 — công trình tự nhiên mọc lại
 - Phá công trình tự nhiên (CONG_TRINH tu:1) ở nơi thường: ô ghi `cu` (mã cũ) và `moc` (lúc mọc lại, sau `DAT.moc` = 20–40 năm). `datMoc` (core2/64, chạy mỗi lần đọc ô) trả công trình về khi tới hạn mà ô còn trống; xây gì lên ô đó (`datXay`) thì xoá hẹn, không mọc. Nhật ký `dat.moc`.
 - Bài `dat_dai` thêm 4 ý; ý "bản lưu cũ: thành đủ dịch vụ" nay đặt giờ về đêm (quỷ thị, Ám Hội chỉ họp đêm) cho khỏi trượt theo giờ.
+### O.79 — thôn trấn / thành: mua đất rồi mới xây
+- `datCanMua(n,c)` (core2/65): ở nơi có dân (tran, thanh, cho, ancu) ô chưa phải của ngươi (`chu.k!=='ta'`) thì lựa chọn xây khoá với lý do `dat.canMua`, `datXay` từ chối (nhật ký `dat.canMua`). Tông môn giữ luật cũ (không có gì xây được).
+- Mua đất vẫn chưa mở (`datMua` trả false), nên hiện chưa xây được gì trong thôn trấn / thành; `datSoHuu` dùng trong bài kiểm.

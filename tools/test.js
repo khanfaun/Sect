@@ -71,6 +71,11 @@ const TESTS = {
     ok(!!run("datPha(DDX_T2,DDX_K)"), 'phá tửu lầu của dân');
     ok(run("danhGet('reg:'+DDX_T2.r)<=DAT.phat.dan.naDanh&&G.run.truy&&G.run.truy.k==='quan'"), 'bị quan phủ truy nã: danh tiếng khu xuống mức truy nã, bị truy đuổi (loại quan)');
     ok(run("!placeActs(DDX_T2).some(a=>a.a==='tuu')"), 'tửu lầu không còn');
+    // Sửa-O câu 79: ở thôn trấn / thành chỉ xây sau khi đã mua đất
+    run("G.run.st=500;G.run.pham=0");const xo=JSON.parse(run("JSON.stringify(datOpts(DDX_T2).find(o=>/^xay:/.test(o.id))||null)"));
+    ok(xo&&xo.no===run("contentText('dat.canMua')"), 'ô trống của dân ở trấn: lựa chọn xây bị khoá (phải mua đất)');
+    ok(!run("datXay(DDX_T2,DDX_K,'tran_phap')")&&!run("W().dat[DDX_T2.id].o[DDX_K].ct"), 'không xây được trên ô của dân');
+    run("datSoHuu(DDX_T2,DDX_K)");ok(!run("datOpts(DDX_T2).find(o=>o.id==='xay:'+DDX_K+':tran_phap').no")&&!!run("datXay(DDX_T2,DDX_K,'tran_phap')"), 'đã mua (ô của ngươi): xây được trận pháp');
     // vai NPC làm chủ ở nơi neo: chỉ hư tạm, thiện cảm giảm, có thể bị truy đuổi
     run(`DDX_V=null;DDX_VI=-1;for(const n of ${all}){if(!n.anchor||LOC_LOI.includes(n.anchor))continue;placeActs(n);const i=W().dat[n.id].o.findIndex(c=>c.ct&&c.chu&&c.chu.k==='vai'&&CONG_TRINH[c.ct].pha);if(i>=0){DDX_V=n;DDX_VI=i;break;}}`);
     ok(run("!!DDX_V"), 'có ô của người giữ vai ở nơi neo');
