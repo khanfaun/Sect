@@ -348,10 +348,20 @@ const TESTS = {
     ok(bac()===3&&run("soFaView().find(f=>f.id==='FA04').qh")==='Xa lạ', 'chưa dính dáng: Xa lạ');
     run("G.run.faQh={FA04:5}");ok(bac()===4, 'góp sức chút ít: Giao hảo');
     run("G.run.faQh={FA04:12}");ok(bac()===5, 'góp sức nhiều: Thân thiết');
-    run("G.run.faQh={FA04:30}");ok(bac()===6, 'góp sức rất nhiều: Chí giao');
+    run("G.run.faQh={FA04:30}");ok(bac()===5, 'Sửa-O: chỉ góp sức qua việc làm (thành viên chưa gặp, trung tính): tối đa Thân thiết');
     run("G.run.faQh={FA04:-5}");ok(bac()===2, 'làm tổn hại ít: Bất hòa');
     run("G.run.faQh={FA04:-15}");ok(bac()===1, 'tổn hại nặng: Thù địch');
-    run("G.run.faQh={FA04:-30}");ok(bac()===0, 'tổn hại rất nặng: Tử thù');
+    run("G.run.faQh={FA04:-30}");ok(bac()===1, 'Sửa-O: chỉ việc làm thì chưa tới Tử thù (cần thành viên ghét)');
+    // Sửa-O câu 74: 60–70% điểm từ thiện cảm thành viên, có trọng số theo vai
+    const tv=(ds,f)=>run(`(()=>{G.run.gapVai={};for(const m of ${JSON.stringify(ds)}){gapVai(m,'test');const v=vaiNow(m);npcRec(v.ten).met=1;favAdd(v.ten,${f}-favOf(v.ten));}})()`);
+    run("G.run.faQh={}");tv(['NP01','NP02','NP11'],-100);ok(bac()<=1, 'cả thế lực ghét ngươi: Thù địch trở xuống');
+    run("G.run.faQh={FA04:-30}");ok(bac()===0, 'thành viên ghét + tổn hại: Tử thù');
+    run("G.run.faQh={}");tv(['NP01','NP02','NP11'],100);ok(bac()===5, 'mọi thành viên quý nhưng chưa có cống hiến lớn: dừng ở Thân thiết');
+    run("chAdd('fa:FA04',FA_QH.chiCong)");ok(bac()===6, 'thêm cống hiến lớn: Chí giao');
+    run("delete G.run.chMap['fa:FA04']");tv(['NP02'],100);ok(bac()<=4, 'chỉ một người thường quý (đa số chưa gặp): không quá Giao hảo');
+    const dLead=(tv(['NP01'],100),run("faTv('FA04')")),dDe=(tv(['NP02'],100),run("faTv('FA04')"));
+    ok(dLead>dDe&&dDe>0, 'người đứng đầu nặng hơn người thường ('+dLead.toFixed(2)+' > '+dDe.toFixed(2)+')');
+    run("G.run.gapVai={}");
     run("G.run.faQh={};G.run.faHai={FA04:2}");ok(bac()<=2, 'giết người của thế lực làm tụt mức');
     run("G.run.faHai={}");ok(run("soFaView().every(f=>!f.minh)")&&!run("faMinh('FA04')"), 'chưa kết minh: không hiện Đồng minh');
     run("faKetMinh('FA04',true)");ok(run("soFaView().find(f=>f.id==='FA04').minh")==='Đồng minh'&&run("soFaView().find(f=>f.id==='FA05').minh")==='', 'cờ kết minh: chỉ thế lực ấy hiện Đồng minh');

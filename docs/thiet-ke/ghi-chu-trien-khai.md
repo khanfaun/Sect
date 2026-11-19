@@ -916,3 +916,10 @@ Luật: `core2/64-dat-dai.js` (sinh ô, lọc nút), `core2/65-dat-dai-xay-pha.j
 77. B + làm hệ truy nã kiểu thế giới mở (tham khảo cơ chế chung của các game thế giới mở, không sao chép): phạm tội trong thành gần như chắc bị truy nã, ở trấn tùy có NHÂN CHỨNG (nhân chứng chạy báo quan; ngăn/mua chuộc/giết nhân chứng — giết thêm thì tội nặng hơn); MỨC TRUY NÃ nhiều bậc (bằng chữ/biểu tượng, không số) tăng theo tội và việc chống cự; quan sai lùng trong vùng, thoát khỏi tầm mắt/ra khỏi vùng một thời gian thì "mất dấu" hạ dần mức; TIỀN TREO THƯỞNG tích lũy theo vùng, thợ săn tiền thưởng truy theo; xoá truy nã bằng nộp phạt ở quan phủ (hoặc ngồi tù/làm công), cải trang/che giấu tu vi giúp né; tội ở vùng này không tự lan vùng khác trừ khi rất nặng. Nối hệ danh tiếng Đ1.4, truy đuổi Sửa-K, nợ Sửa-B, đất đai Đ8b.
 78. B: trận pháp hộ thân giữ chỉ tĩnh toạ; thêm tác dụng khi làm mua đất.
 79. B: ở thành/trấn chỉ được xây sau khi đã mua đất (ô trống của dân thì không cho xây).
+
+## Sửa-O — câu 74, 75, 76, 77, 79
+### O.74 — quan hệ thế lực theo thành viên
+- `faDiem(id)` (core2/63) = phần thành viên `faTv(id)`×65 + phần việc làm `faViec(id)` (kẹp ±35). Bảng chỉnh ở `FA_QH` (cùng chỗ với `FA_QH_NGUONG`, ngưỡng giữ nguyên −40, −20, −6, 6, 20, 40).
+- Thành viên = mọi người giữ vai NP thuộc thế lực còn sống; trọng số: người đứng đầu ×3, có tu vi ×2, phàm / đệ tử ×1; người chưa gặp (không có trong `r.gapVai` cùng đời) tính trung tính. Thiện cảm −100..100 → −1..1.
+- Việc làm: tuyến (`r.faQh`×2) + tiếng ở căn cứ (×0,15) + cống hiến (/5, tối đa 15) − người của họ bị giết (`r.faHai`×10).
+- Chí giao cần thêm cống hiến lớn: `faCong(id)` ≥ `FA_QH.chiCong` = 200; thiếu thì dừng ở Thân thiết. Chỉ việc làm (không ai trong thế lực quý / ghét) thì tối đa Thân thiết / thấp nhất Thù địch.
