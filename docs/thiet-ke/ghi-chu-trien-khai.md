@@ -711,5 +711,6 @@ Luật: `core2/54-the-gioi-neo.js` (neo, vai, thế lực, Sử lược, năm th
    - Người bán đưa vật B kèm DANH SÁCH vật mong muốn (tên + số lượng X mỗi món); chấp nhận 1 trong các món đó. Người trả giá chọn 1 món trong danh sách nếu túi họ có đủ số lượng. Giá trị giao dịch = giá trị món (theo nhu cầu) × số lượng.
    - Nếu không có món nào trong danh sách: nút "Thương lượng" — tự chọn vật trong túi + số lượng Y; hệ thống xét hợp nhu cầu người bán + tổng giá trị tương đương thì được tính là một lần trả giá hợp lệ.
    - Đây là ĐẤU GIÁ nhiều vòng: A trả mức 1, B trả mức 2 (phải hấp dẫn/giá trị hơn), A có thể trả tiếp mức 3… cho tới khi mọi người khác bỏ cuộc; người còn lại với mức cao nhất thắng. Ai đã bỏ cuộc thì không được trả giá lại trong vòng của món đó (sang món khác thì được). NPC cũng tham gia trả giá nhiều vòng theo nhu cầu + của cải/túi của họ.
+   - ĐẾM NGƯỢC: mỗi lần có người đưa giá, đồng hồ đếm 10 giây (thời gian thật, hiện trên hộp thoại); nếu 10 giây không ai trả cao hơn thì món thuộc người đó. Có người trả mới thì đếm lại từ 10. NPC ra giá trong khoảng đếm (độ trễ ngẫu nhiên). Bài kiểm phải chạy được không chờ thật (cho phép tua đồng hồ trong test).
 Việc cần làm (Sửa-J): câu 42, 42b, 43, 44.
 Gói gửi GPT: docs/content/GUI-GPT/ (0-loi-nhan, 1-huong-dan, 2-thiet-ke-45-tuyen). TẠM DỪNG — chờ người dùng.
