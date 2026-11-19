@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "CC05",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "gang_cu",
+      "ten": "Găng cũ trên bàn rèn",
+      "t": "Tại {LOC11}, một người bán dụng cụ bày găng còn ám khói cạnh mấy món dùng gần lửa. Thợ phụ xin ngươi phân biệt món đã chai với món chỉ bị bẩn. Ngươi có thể xem trước, còn việc mua vẫn phải hỏi người giữ quầy.",
+      "c": [
+        {
+          "id": "xem",
+          "l": "Xem người thợ thử độ mềm",
+          "t": "Ngươi bóp thử phần găng cũ vừa được đưa ra. Thợ phụ chỉ chỗ nứt bị giấu dưới muội.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Hỏi chỗ sửa đồ đã dùng lâu",
+          "t": "Người bán chỉ bàn vá ở cuối xưởng. Ngươi ghi giờ người thợ có mặt rồi rời quầy."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "trang_chay",
+      "ten": "Sổ tôi lửa có trang cháy",
+      "t": "Mảnh lò và sổ cũ ở {LOC11} mang cùng dấu búa, nhưng trang ghi về hạt lửa bị cháy mất góc. Thợ rèn già muốn nghe ngươi đọc đúng phần còn lại, để lời đồn ngoài chợ khỏi điền vào chỗ thiếu.",
+      "c": [
+        {
+          "id": "doc",
+          "l": "Đọc phần còn thấy cho thợ nghe",
+          "t": "Ngươi đọc chậm, dừng ở nét không chắc. Ông chép thêm ngày bản sổ từng được chuyển kho.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "sao",
+          "l": "Xin vẽ lại dấu búa",
+          "t": "Ông đưa giấy để ngươi vẽ dấu. Bản chính vẫn đặt trên bàn, chưa ai nhận đã tìm được tàn lò."
+        }
+      ]
+    },
+    {
+      "buoc": 2,
+      "id": "ban_do",
+      "ten": "Người bị mất bản đồ",
+      "t": "Kẻ rao bán bản đồ tàn lò đã bỏ đi khỏi quầy. Một thợ phường rèn ở {LOC11} còn nhớ buổi bản ấy bị lấy, nhưng sợ có người gọi mình là đồng lõa. Ông xin giữ một bản lời khai nếu phải ra mặt.",
+      "c": [
+        {
+          "id": "ghi",
+          "l": "Chép lời ông thành hai bản",
+          "t": "Ngươi trao ông một bản và hỏi khi nào được dùng bản kia. Ông nhận giấy rồi hẹn tới phường.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "giu",
+          "l": "Chỉ hỏi điều ông chịu nói công khai",
+          "t": "Ông cho biết buổi mất bản, nhưng giữ lại tên người đi cùng. Ngươi ghi đúng phần đã nghe."
+        }
+      ]
+    },
+    {
+      "buoc": 3,
+      "id": "ghe_lo",
+      "ten": "Chỗ ngồi của thợ coi lửa",
+      "t": "Trong lúc chuẩn bị đồ hộ tâm và giữ lửa, người học việc ở {LOC11} chỉ cái ghế sứt cạnh lò. Thợ coi lửa phải ngồi đó tới cuối ca, có hôm không kịp ăn. Họ hỏi ai sẽ mang cơm khi ca kéo dài.",
+      "c": [
+        {
+          "id": "mang",
+          "l": "Mang cơm cho người coi lửa",
+          "t": "Ngươi đặt bát ở bàn thấp ngoài lò để họ ăn lúc đổi người, tránh vướng tay khi đang làm.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "doi",
+          "l": "Giúp sửa chân ghế đang lung lay",
+          "t": "Ngươi chèn lại chân ghế rồi để người coi lửa tự thử. Họ bảo sẽ xin nghỉ nếu ca còn quá dài."
+        }
+      ]
+    }
+  ]
+}

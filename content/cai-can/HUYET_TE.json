@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "HUYET_TE",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "loi_ngoai_kinh",
+      "ten": "Người từng mở mạch xin nói riêng",
+      "t": "Một người ở {LOC07} từng dự lễ huyết tế đồng ý cho ngươi xem bản kinh, nhưng xin người đứng lễ ra ngoài trước khi họ kể. Họ muốn ngươi nghe cả tên người đã mất trong lễ, vì tên ấy không có trên giấy.",
+      "c": [
+        {
+          "id": "nghe",
+          "l": "Đợi họ nói hết rồi mới xem bản kinh",
+          "t": "Ngươi chép điều họ cho phép. Khi họ dừng, ngươi cũng dừng, dù phần cuối vẫn chưa rõ.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "tra",
+          "l": "Hỏi ai còn giữ danh sách người có mặt",
+          "t": "Họ chỉ nơi người nhà đang lưu giấy. Ngươi rời bàn mà chưa quyết định có dự lễ hay không."
+        }
+      ]
+    }
+  ]
+}

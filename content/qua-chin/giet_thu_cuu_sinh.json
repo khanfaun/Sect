@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "giet_thu_cuu_sinh",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Lối đi dưới vệt móng",
+      "t": "Con thú từng vồ người trên đường núi đã chết dưới tay ngươi. Nay nhóm gánh hàng quay lại con đường cũ. Một người chỉ vết móng vẫn còn trên cây và hỏi có nên để trẻ chăn trâu đi lối ấy.",
+      "c": [
+        {
+          "id": "xem_loi",
+          "l": "Đi một lượt với người gánh hàng",
+          "t": "Ngươi cùng họ xem chỗ khuất và chỉ đường dễ nhìn hơn. Họ hẹn đi chung khi qua đoạn vắng.",
+          "e": {
+            "h": 3,
+            "nang": {
+              "giac": 1
+            }
+          }
+        },
+        {
+          "id": "bao_nha",
+          "l": "Nhờ họ báo các nhà có trẻ",
+          "t": "Ngươi nhờ người đi chợ nhắn về từng nhà. Họ đồng ý dẫn trẻ đi cùng một thời gian."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Tấm áo người chăn cừu",
+      "t": "Người chăn cừu từng thoát khỏi con thú nhờ ngươi mang một tấm áo lót len đến. Chị đã có thể thả đàn trở lại bãi. Một nhà phía dưới cũng mất cừu và đang xin mượn áo qua mùa lạnh.",
+      "c": [
+        {
+          "id": "nhan_ao",
+          "l": "Nhận áo chị mang tặng",
+          "t": "Ngươi thử lớp len còn thơm mùi nắng. Chị nhìn vừa vai mới yên lòng quay về với đàn.",
+          "e": {
+            "tamma": -2
+          }
+        },
+        {
+          "id": "gui_ao",
+          "l": "Nhờ chị chuyển áo cho nhà đang thiếu",
+          "t": "Chị cuộn áo, giữ nguyên dải buộc rồi đem xuống dốc. Ngươi đi cùng đến cửa nhà ấy."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Chuông đàn trở lại",
+      "t": "Tiếng chuông lại vang trên bãi sau lần ngươi hạ con thú ăn gia súc. Dân mang tới phần công đã hứa; trong túi có cả tiền của một hộ vừa mua lại được con dê đầu tiên.",
+      "c": [
+        {
+          "id": "nhan_cong",
+          "l": "Nhận tiền công dân đã hẹn",
+          "t": "Ngươi nhận phần công. Người giữ sổ đọc từng khoản để cả bãi biết việc đã được thanh toán.",
+          "e": {
+            "bac": 280
+          }
+        },
+        {
+          "id": "tra_ho",
+          "l": "Trả phần góp cho hộ mới mua dê",
+          "t": "Hộ ấy nhận lại xu rồi xin dành chúng mua cỏ khô, để con dê còn qua mùa lạnh."
+        }
+      ]
+    }
+  ]
+}

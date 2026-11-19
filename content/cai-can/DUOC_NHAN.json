@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "DUOC_NHAN",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "nguoi_tro_ve",
+      "ten": "Người trở về từ giường thuốc",
+      "t": "Ở {LOC07}, một người từng thử thuốc chờ ngươi tại hiên. Họ chỉ vết cũ trên tay, kể có những người không về được. Trên tờ mà y quán phát, chỉ tên những người sống sót được ghi bằng mực đỏ.",
+      "c": [
+        {
+          "id": "nghe",
+          "l": "Nghe cả phần không ghi trên tờ",
+          "t": "Ngươi để họ kể ai đã không về. Khi lời dứt, họ chỉ chỗ gia đình những người ấy thường đợi.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Hỏi họ có giữ bản đã ký không",
+          "t": "Họ lấy ra bản gấp nhỏ, chỉ cho ngươi dòng hứa không có trên giấy phát cho khách."
+        }
+      ]
+    }
+  ]
+}

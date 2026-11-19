@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "XA_LOI",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "so_nguoi_o",
+      "ten": "Ngày giữ giới bắt đầu từ đâu?",
+      "t": "Sư già ở {LOC12} đưa ngươi xem cuốn ghi người xin ở chùa. Có người đã làm việc lâu mà chưa dám ghi tên, vì còn phải về nuôi mẹ. Lão hỏi ngươi muốn nghe lệ giữ giới hay hỏi cách sắp việc trước.",
+      "c": [
+        {
+          "id": "hoi",
+          "l": "Hỏi cách giữ lời khi vẫn phải về nhà",
+          "t": "Lão nói cứ ghi ngày có thể ở thật. Ngươi chừa chỗ cho những lần phải xin về chăm nhà.",
+          "e": {
+            "nang": {
+              "nhan": 1
+            }
+          }
+        },
+        {
+          "id": "doc",
+          "l": "Đọc lệ cùng người đang chờ ghi tên",
+          "t": "Ngươi đọc chậm để họ kịp hỏi. Người ấy xin giữ một bản trước khi tự quyết định."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "bep_chua",
+      "ten": "Tiếng mõ trong buổi chia cơm",
+      "t": "Qua những mùa giữ giới tại {LOC12}, ngươi quen nghe mõ rồi mang cơm ra sân. Hôm nay còn một người làm chưa về. Người trông bếp định cất nồi vì sắp hết giờ và hỏi có nên để riêng một bát không.",
+      "c": [
+        {
+          "id": "de_phan",
+          "l": "Giữ phần cơm cho người vắng",
+          "t": "Ngươi đậy bát trong bếp. Khi người làm về, họ ăn xong rồi giúp ngươi rửa nồi.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "di_hoi",
+          "l": "Ra sân sau hỏi họ có cần giúp",
+          "t": "Ngươi tìm người ấy đang dọn sân và phụ nốt ít việc, để hai người kịp về trước khi bếp đóng.",
+          "e": {
+            "h": 3
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "THIEN_LOI",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "ao_mua",
+      "ten": "Vết cháy trên áo mưa",
+      "t": "Dưới chân núi gần {LOC14}, một người sống sót sau giông cho ngươi xem tấm áo cháy. Họ không nhớ mình đã đứng ở đâu khi sét đánh. Người đưa họ về lại nhớ chỗ tìm thấy, nhưng chưa có ai hỏi.",
+      "c": [
+        {
+          "id": "hoi",
+          "l": "Hỏi người đã đưa họ về",
+          "t": "Ngươi nghe lời người cứu rồi ghi riêng chỗ vết cháy và nơi họ tìm thấy người bị nạn.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "nghe",
+          "l": "Để người sống sót kể theo trí nhớ",
+          "t": "Ngươi không giục họ nhớ thêm. Họ tự chỉ phần nào là điều mình thấy và phần nào chỉ nghe kể."
+        }
+      ]
+    }
+  ]
+}

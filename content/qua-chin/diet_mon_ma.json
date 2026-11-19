@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "diet_mon_ma",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Người giặt áo ở cổng vỡ",
+      "t": "Sau trận diệt ma tông, cổng cũ sập một nửa. Người giặt áo thuê tìm ngươi vì muốn nhận chiếc hòm công còn kẹt bên trong. Bà nói trong hòm có tên cả những người chưa từng cầm binh khí.",
+      "c": [
+        {
+          "id": "doi",
+          "l": "Giúp bà tìm tên những người làm thuê",
+          "t": "Ngươi cùng bà chép tên từ sổ còn đọc được. Người đến nhận công có thể chỉ đúng dòng mình.",
+          "e": {
+            "h": 4
+          }
+        },
+        {
+          "id": "gui",
+          "l": "Chuyển lời tới người đang giữ kho cũ",
+          "t": "Ngươi đem lời nhắn đến người coi kho. Họ hẹn một buổi để các gia đình tự tới đối."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Bếp làng hết người canh",
+      "t": "Dân dưới sơn môn không còn phải nộp gạo cho người gác cổng cũ. Một bà mang cơm tới cảm ơn, dắt theo cháu từng làm tạp dịch ở đó. Đứa nhỏ chỉ hỏi ngươi có biết người cùng nhóm đã đi đâu.",
+      "c": [
+        {
+          "id": "hoi_tin",
+          "l": "Dành buổi chiều hỏi tin người còn sống",
+          "t": "Ngươi đi hỏi các hộ vừa nhận người về. Đứa nhỏ giữ một địa chỉ để mai tự tìm bạn.",
+          "e": {
+            "h": 4
+          }
+        },
+        {
+          "id": "nhan_com",
+          "l": "Ăn cơm và nghe hai bà cháu kể",
+          "t": "Ngươi ngồi nghe đến hết bữa. Bà mừng vì làng được yên, còn đứa nhỏ vẫn dành một bát cho bạn."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Chìa kho ở đáy áo",
+      "t": "Một người sống sót từ sơn môn xin ngươi làm chứng khi trả chìa kho cho dân. Anh từng bị bắt coi cửa và sợ người ta gộp mình với chủ cũ. Mấy hộ đã đứng đợi, tay cầm giấy ghi gạo bị lấy.",
+      "c": [
+        {
+          "id": "chung",
+          "l": "Đứng chứng cho việc trả kho",
+          "t": "Ngươi để anh kể việc mình từng làm trước khi đưa chìa. Các hộ yêu cầu cả sổ gạo được đặt lên bàn.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "ngoai",
+          "l": "Để các hộ tự nhận chìa",
+          "t": "Ngươi lui khỏi cửa. Người coi kho đưa chìa cho từng hộ xem rồi đặt nó cạnh tờ kê gạo."
+        }
+      ]
+    }
+  ]
+}

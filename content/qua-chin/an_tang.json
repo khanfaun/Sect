@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "an_tang",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Một người mang đôi giày lẻ",
+      "t": "Người đi tìm cha tới chỗ ngươi từng chôn một người chết bên đường. Ông mang chiếc giày lẻ còn lại, nhận ra miếng vá trên chiếc ngươi cất bên mộ. Ông ngồi xuống, xin nghe người mất đã được đặt nằm thế nào.",
+      "c": [
+        {
+          "id": "ke",
+          "l": "Kể rõ việc chôn cất",
+          "t": "Ngươi kể từng việc mình biết. Ông đặt chiếc giày vào chân bia rồi xin ngồi thêm một lúc.",
+          "e": {
+            "h": 2,
+            "tamma": -2
+          }
+        },
+        {
+          "id": "giu",
+          "l": "Để ông xem vật tìm thấy bên mộ",
+          "t": "Ngươi giao chiếc giày có miếng vá để ông tự đối. Ông ôm cả hai chiếc trước khi về báo nhà."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Cỏ mọc ngang tấm bia",
+      "t": "Nấm mộ ngươi đắp bên đường đã có cỏ che kín. Một người chăn trâu thường nhổ cỏ quanh bia, chỉ vì từng thấy khách lỡ đường đặt nước ở đó. Hôm nay người ấy hỏi ngươi có biết tên ai nằm dưới mộ.",
+      "c": [
+        {
+          "id": "ghi",
+          "l": "Ghi điều biết được lên một mảnh gỗ",
+          "t": "Ngươi chỉ ghi nơi tìm thấy người mất và ngày an táng. Người chăn cắm mảnh gỗ bên tấm bia.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "don",
+          "l": "Dọn cỏ và chừa lối cho người tới",
+          "t": "Ngươi nhổ cỏ quanh chân bia. Người chăn để lại gáo nước cho người tìm mộ sau này."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Gói hương gửi nhầm người",
+      "t": "Một bà tới hỏi ngươi có phải thân nhân người được chôn bên đường. Bà mang hương vì chính bà từng tìm người nhà nhiều năm. Biết ngươi chỉ là người qua đường, bà vẫn muốn gửi lại một nén.",
+      "c": [
+        {
+          "id": "thap",
+          "l": "Cùng bà thắp hương",
+          "t": "Ngươi dẫn bà tới bia. Bà đặt một nén rồi đứng yên nghe gió lùa qua bụi cỏ.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "giu",
+          "l": "Giữ nén hương cho ngày có người nhận",
+          "t": "Bà nhờ ngươi giữ nén hương khô. Nếu có gia đình tìm tới, họ sẽ có thứ để thắp ngay."
+        }
+      ]
+    }
+  ]
+}

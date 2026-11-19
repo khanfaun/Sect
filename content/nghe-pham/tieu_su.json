@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "tieu_su",
+  "len": [
+    "Người giữ đoàn giao ngươi đứng cạnh xe hàng thay vì chỉ chạy trước. Chủ hàng muốn biết sẽ nhận lại món ở đâu.",
+    "Ngươi được dẫn một chuyến và phải điểm đủ người lúc qua đèo. Một tiêu đồng đang chờ ngươi cho nghỉ thay giày.",
+    "Từ nay ngươi thay người đứng đầu khi một đoàn về muộn. Các nhà gửi hàng đem giấy tới để đối phần còn thiếu.",
+    "Cả tiêu cục đợi ngươi chia đường cho những chuyến tới. Có người muốn đổi chuyến để kịp đưa người nhà đi chữa.",
+    "Lá cờ tiêu cục được giao cho ngươi cùng những khoản đền còn treo. Một người từng mất hàng đứng chờ ngoài sân."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Giấy giao tới tận nhà",
+      "t": "Sau ngày tang, tiêu cục vẫn cho người nhận cùng kiểm niêm trước lúc ký. Một người từng được đền hàng mang giấy đến thắp hương, rồi giao chuyến mới cho học trò ngươi. Lá cờ cũ còn đi qua những bến quen.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Cờ treo trên sổ thiếu",
+      "t": "Tiêu cục nhận cờ sau khi ngươi mất, nhưng một người nhà tiêu đồng đòi phần công chưa trả. Họ lật đúng trang chuyển chuyến năm nọ. Người cầm cờ nay phải đọc khoản thiếu trước những người còn đi đường.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Người đợi đủ xe",
+      "t": "Đoàn từng theo ngươi dừng cùng một lúc ở đầu dốc để thắp hương. Họ giữ tờ ghi chỗ có thể đợi xe tụt lại, rồi dạy người mới cách kiểm niêm khi qua chân đèo.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Chiếc dây buộc rương",
+      "t": "Khi ngươi mất, đồng nghiệp trả gia đình chiếc dây buộc rương ngươi vẫn mang theo. Nó đã sờn ở chỗ thường xiết nút. Họ dùng tiền của chuyến cuối còn lại để thuê xe đưa tang về quê."
+    }
+  ]
+}

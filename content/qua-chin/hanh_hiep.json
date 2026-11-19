@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "hanh_hiep",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Cửa hàng mở lại",
+      "t": "Người bán bánh từng bị ép dọn sạp nay đã trở về chỗ cũ sau khi ngươi đứng ra bênh. Bà đặt lên thớt hai chiếc bánh, một cho ngươi và một cho người gác chợ từng chịu làm chứng.",
+      "c": [
+        {
+          "id": "mang_banh",
+          "l": "Mang bánh tới người gác chợ",
+          "t": "Ngươi tìm đúng người đã làm chứng. Bà bán bánh đợi tới khi cả hai ngồi xuống mới nhóm bếp.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "nhan_banh",
+          "l": "Nhận phần của mình rồi đi",
+          "t": "Ngươi nhận bánh còn nóng. Bà cười, bảo giờ cuối ngày có thể về nhà mà không sợ bị chặn."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Tờ đơn có thêm dấu tay",
+      "t": "Một người từng được ngươi bênh trước cửa phủ đem tới tờ đơn đã có dấu của các hộ. Vụ cũ đã được nghe, nhưng một người bán hàng khác vẫn sợ lên tiếng. Họ nhờ ngươi đọc tờ đơn trước khi mang nộp.",
+      "c": [
+        {
+          "id": "doc_don",
+          "l": "Đọc đơn cho mọi người cùng nghe",
+          "t": "Ngươi đọc rõ từng dòng, để người ký sửa điều họ chưa đồng ý. Một người mới xin ghi thêm tên.",
+          "e": {
+            "nang": {
+              "giao": 1
+            }
+          }
+        },
+        {
+          "id": "giu_rieng",
+          "l": "Gặp riêng người còn sợ ký",
+          "t": "Ngươi nghe họ nói dưới mái hiên, rồi để họ tự chọn có đưa tên mình vào tờ đơn hay không.",
+          "e": {
+            "h": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Cái then được thay",
+      "t": "Gia đình từng được ngươi giúp lấy lại tiền công nay đã sửa được cửa. Họ dành một buổi thay then ở nhà người cũng bị quỵt công, rồi mời ngươi mang phần cơm đã nấu ra cho nhóm thợ.",
+      "c": [
+        {
+          "id": "cung_lam",
+          "l": "Đến đưa cơm và phụ thay then",
+          "t": "Ngươi giữ cửa cho họ ráp then, rồi chia cơm. Chủ nhà thử đóng mở mấy lần mới chịu ngồi nghỉ.",
+          "e": {
+            "h": 4
+          }
+        },
+        {
+          "id": "nhan",
+          "l": "Nhận phần cơm rồi chúc họ làm xong",
+          "t": "Họ gói phần của ngươi vào lá, dặn khi ghé lại hãy thử cái then từng kẹt lúc trời mưa."
+        }
+      ]
+    }
+  ]
+}

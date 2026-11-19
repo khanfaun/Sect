@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "trom_ngheo",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Chiếc bị rỗng bên cầu",
+      "t": "Người bán rau từng mất túi tiền vì ngươi vẫn đeo chiếc bị rách quai. Bà phải mua chịu giống sau hôm đó và vừa trả được phần lãi. Gặp ngươi bên cầu, bà nhờ đọc hộ tờ ghi nợ còn lại.",
+      "c": [
+        {
+          "id": "tra",
+          "l": "Trả lại một phần số tiền đã lấy",
+          "t": "Ngươi đặt xu trước mặt bà và nói vì sao. Bà tự đếm rồi cất riêng vào túi đựng tiền giống.",
+          "dk": {
+            "bacTu": 140
+          },
+          "e": {
+            "bac": -140
+          }
+        },
+        {
+          "id": "doc",
+          "l": "Đọc nguyên tờ nợ cho bà nghe",
+          "t": "Ngươi đọc cả tiền gốc lẫn phần lãi. Bà chép dấu của chủ nợ để còn mang đi hỏi lại."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Bữa thuốc bị lỡ",
+      "t": "Một người lao động nhận ra ngươi gần nơi mình mất tiền. Họ kể số tiền ấy để mua thuốc cho mẹ và bà đã phải chờ thêm mấy hôm. Hôm nay họ chỉ mang đơn cũ tới để hỏi nhà thuốc còn bán chịu không.",
+      "c": [
+        {
+          "id": "doi",
+          "l": "Trả giúp tiền thang thuốc còn thiếu",
+          "t": "Ngươi đặt tiền vào tay người cầm đơn, để họ tự mua. Họ nhận nhưng không nói món cũ đã qua.",
+          "dk": {
+            "bacTu": 100
+          },
+          "e": {
+            "bac": -100
+          }
+        },
+        {
+          "id": "dung",
+          "l": "Dừng lại nghe họ kể hết",
+          "t": "Ngươi nghe tới hết chuyện bữa thuốc. Họ gập đơn rồi bước vào hiệu, không nhờ ngươi nói thay."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Chiếc giỏ để quên",
+      "t": "Đứa bé giữ sạp đưa lại chiếc giỏ ngươi bỏ quên. Nhà nó từng phải bán nồi vì mất món tiền ngươi lấy. Nó không nhận ra ngươi và chỉ dặn giữ giỏ chặt khi qua chỗ đông.",
+      "c": [
+        {
+          "id": "gui",
+          "l": "Hỏi có thể giúp mua lại nồi không",
+          "t": "Ngươi góp phần mình có, để nó tự mang về hỏi người nhà. Nó buộc tiền ở đáy giỏ.",
+          "dk": {
+            "bacTu": 120
+          },
+          "e": {
+            "bac": -120
+          }
+        },
+        {
+          "id": "nhan",
+          "l": "Nhận giỏ và cảm ơn đứa bé",
+          "t": "Ngươi nhận lại đủ đồ. Lúc quay lưng, ngươi nghe nó hỏi chủ sạp có thể ứng tiền công hay chưa."
+        }
+      ]
+    }
+  ]
+}

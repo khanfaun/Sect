@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "phong_sinh",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Chiếc vòng chân đã rơi",
+      "t": "Con chim ngươi từng thả khỏi lồng lại đậu trên mái, chân còn vết cọ. Nó kéo từng cọng rơm lên làm tổ. Người nuôi chim cũ đứng ngoài cổng, hỏi ngươi có muốn giúp bắt lại vì nó vẫn nhớ chỗ ăn.",
+      "c": [
+        {
+          "id": "giu_to",
+          "l": "Xin chừa mái cho chim làm tổ",
+          "t": "Ngươi xin người trong nhà hoãn sửa góc mái. Người nuôi chim nhìn một lúc rồi cuộn lưới đi.",
+          "e": {
+            "tamma": -2
+          }
+        },
+        {
+          "id": "hoi_gia",
+          "l": "Hỏi vì sao người nuôi muốn bắt lại",
+          "t": "Người ấy nói chim đã từng mang tiền về cho nhà. Ngươi nghe hết, rồi chỉ chỗ còn chiếc vòng rơi."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Cá về cửa lạch",
+      "t": "Bầy cá từng mắc trong đăng đã bơi xuống lạch nhờ ngươi mở lối. Qua mùa nước, lũ nhỏ đem giỏ tới hỏi có nên đặt đăng ngay nơi cá con quay về. Một đứa chỉ những vệt bạc dưới chân cầu.",
+      "c": [
+        {
+          "id": "doi_cho",
+          "l": "Chỉ chỗ đặt đăng xa đàn cá con",
+          "t": "Ngươi dắt chúng xuống đoạn nước sâu hơn. Chúng vẫn có cá mang về mà lối vào bãi giống còn mở.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "bao_nguoi",
+          "l": "Gọi người đánh cá tới bàn",
+          "t": "Ngươi mời những nhà đặt đăng cùng xem đàn cá nhỏ. Họ hẹn sáng mai bàn phần được giữ lại."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Lồng rỗng phơi ngoài vách",
+      "t": "Người từng bán cho ngươi con thú để thả đem chiếc lồng rỗng ra phơi. Sau lần ấy, nàng bỏ việc giữ thú và tập đan rổ. Nàng nhờ ngươi xem chiếc rổ đầu có chịu nổi một gánh rau không.",
+      "c": [
+        {
+          "id": "thu_ro",
+          "l": "Giúp nàng thử đựng một gánh rau",
+          "t": "Ngươi đặt rau vào rổ và thấy đáy còn võng. Nàng buộc lại đáy, rồi mang chiếc đã sửa ra chợ.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "mua_ro",
+          "l": "Mua rổ để nàng có tiền lấy tre",
+          "t": "Ngươi trả giá nàng đã đặt. Nàng ghi món thu đầu vào bảng gỗ từng treo bên chiếc lồng.",
+          "dk": {
+            "bacTu": 60
+          },
+          "e": {
+            "bac": -60
+          }
+        }
+      ]
+    }
+  ]
+}

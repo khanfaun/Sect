@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "tram",
+  "len": [
+    "Ngựa giao vào tay ngươi cùng một túi thư còn niêm. Người coi trạm dặn lúc ngựa mệt phải báo ngay cho nơi nhận.",
+    "Ngươi được giao trực đường thư của quân. Người phát lệnh đặt túi lên bàn và đợi ngươi đọc giờ phải tới.",
+    "Chìa chuồng về tay ngươi. Lần đầu đổi phiên, ngươi phải xếp đủ ngựa nghỉ trước khi người đưa thư từ xa tới.",
+    "Các trạm đem sổ tới để ngươi sửa giờ giao. Một phu trạm xin chừa ngày nghỉ cho con ngựa đã chạy nhiều hôm.",
+    "Ngươi coi cả đường thư. Trong bản lịch mới, có chỗ ghi đường vòng và người cần báo nếu một cửa đèo bị tuyết bít."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Giờ giao ghi ngoài cửa",
+      "t": "Ngày ngươi mất, người qua trạm vẫn có thể xem giờ nhận thư ở cửa. Phu mới giữ một đường vòng đã thử và hai máng nước luôn đầy. Một gia đình đưa tang ngươi vì từng nhận được thư trước ngày phải dời.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Túi thư đến chậm",
+      "t": "Người kế trạm nhận sổ có những canh giờ bị bán. Sau lễ tang, một người cầm thư đến muộn yêu cầu ghi ngày thật vào biên bản. Họ muốn biết ai từng trả để túi thư nằm lại trong chuồng.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Máng nước bên đường",
+      "t": "Người giữ trạm treo dây cương của ngươi cạnh máng. Sau khi chôn ngươi, họ tiếp tục đánh dấu con nào chưa đủ sức chạy. Một người đưa thư lần đầu ghé trạm nghe họ đọc tên ngươi khi đổi ngựa.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Bậc chuồng đã mòn",
+      "t": "Ngươi mất khi còn giữ ngựa cho người khác. Phu trạm cũ tới trả chiếc túi ngươi từng khâu và giúp gia đình dọn rơm. Vết bước chân trên bậc chuồng chưa mất sau nhiều trận mưa."
+    }
+  ]
+}

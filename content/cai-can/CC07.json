@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "CC07",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "loi_nguoi_cho",
+      "ten": "Lời người cho căn",
+      "t": "Người bệnh tại {LOC07} muốn tự nói chuyện với ngươi. Họ đẩy giấy sang một bên để hỏi điều gì sẽ xảy ra với người nhà mình. Một người coi quán nhắc cứ xem hồ sơ trước khi tin hộp gỗ rao ngoài chợ.",
+      "c": [
+        {
+          "id": "nghe",
+          "l": "Để người bệnh nói trước",
+          "t": "Ngươi nghe họ nói hết rồi mới hỏi chỗ ghi điều đã đồng ý. Họ xin được giữ một bản.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Hỏi người coi quán nơi tra hồ sơ",
+          "t": "Người coi chỉ chỗ ghi bệnh án và dặn đừng trả tiền cho món hàng chưa rõ nguồn."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "bua_yen",
+      "ten": "Bữa ăn trước ngày chọn",
+      "t": "Người có căn nằm yếu, còn người nhà chưa thống nhất. Người coi y quán mang thêm giấy rao một nguồn khác. Người bệnh hỏi có thể cất giấy đi để mọi người được ăn một bữa yên trước khi bàn không.",
+      "c": [
+        {
+          "id": "bep",
+          "l": "Dọn bữa cho người bệnh và người nhà",
+          "t": "Ngươi đặt bát trong tầm tay rồi tránh ra. Họ có thời gian nói riêng mà không phải ký gì.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "doi",
+          "l": "Xin người coi quán để giấy ngoài cửa",
+          "t": "Người coi cất giấy đi. Ngươi nhắc người nhà hỏi chính người bệnh trước khi tới bàn."
+        }
+      ]
+    },
+    {
+      "buoc": 2,
+      "id": "phieu_nhan",
+      "ten": "Phiếu ghi người nhận",
+      "t": "Trong lúc chuẩn bị vật tư, người phụ việc ở {LOC07} muốn có giấy ghi ai nhận từng món và ai chịu trách nhiệm cấy căn. Một dòng bị bỏ trắng cho người có nghề, dù người bán cứ bảo ngươi đặt tiền trước.",
+      "c": [
+        {
+          "id": "tra",
+          "l": "Kiểm ai đứng tên chịu trách nhiệm",
+          "t": "Ngươi hỏi từng vai đứng tên, ghi riêng phần chưa ai nhận. Chưa có món nào đổi chủ.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "giu",
+          "l": "Giữ bản kê để hỏi lại người có nghề",
+          "t": "Ngươi gập bản kê vào túi và hẹn trở lại khi người có nghề tự xác nhận phần mình."
+        }
+      ]
+    }
+  ]
+}

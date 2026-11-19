@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "ngu",
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Đèn chờ thuyền về",
+      "t": "Đêm ngươi mất, cả bến thắp đèn trên những chiếc thuyền từng được ngươi cho đi chung mùa nước xấu. Người giữ lượt kéo lưới tiếp quản kho dây và để mọi nhà mượn khi cần. Con ngươi giữ chiếc phao cũ treo ngoài mái để người về muộn biết bến vẫn sáng.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Sổ cá dưới đáy hòm",
+      "t": "Ngươi để lại đội thuyền và một cuốn sổ ghi nhà nào còn nợ lưới. Khi ngươi chết, người kế sổ gọi những hộ ấy tới trước khi đưa tang. Một ngư phủ giữ bản nợ vì muốn sau này con mình biết tại sao nhà từng phải bán thuyền.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Chiếc mái chèo truyền tay",
+      "t": "Chiếc thuyền nhỏ vào tay người từng phụ ngươi vá lưới. Sau khi chôn ngươi, họ giữ mái chèo cũ làm mái dự phòng. Lần đầu gặp gió ngược, họ nhớ lời ngươi dặn chờ nước đổi rồi mới rời bến.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Một mẻ cá cuối ngày",
+      "t": "Khi ngươi mất, chủ thuyền trả nốt tiền vá lưới cho gia đình. Người từng ngồi vá bên ngươi chừa một chỗ trên sàn gỗ đến hết mùa nước, rồi dạy đứa trẻ ở bến cách luồn kim qua mắt lưới."
+    }
+  ]
+}

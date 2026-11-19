@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "TAO_HOA",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "chu_mo",
+      "ten": "Tấm bia mờ ở đường lên",
+      "t": "Gần {LOC15}, người giữ bản dập chỉ một dòng đã mòn trên bia. Chữ còn lại nói thần dịch chỉ giúp người đã có linh căn. Một khách khác lại rao mua để giúp người vô căn trong nhà.",
+      "c": [
+        {
+          "id": "doc",
+          "l": "Đọc dòng còn nguyên cho khách nghe",
+          "t": "Ngươi chỉ phần bia còn rõ, nói chỗ nào mình chưa chắc. Người khách hoãn trả giá để đi hỏi thêm.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Xin bản dập để so với lời rao",
+          "t": "Ngươi xem cả chỗ ghép giấy và ghi lại dấu cũ. Người giữ bia cất bản chính lại sau lượt xem."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "chia_phan",
+      "ten": "Người cùng tìm muốn chia phần",
+      "t": "Một tu sĩ cũng tìm đến {LOC15}, mang bản đường bị rách ở đoạn cuối. Họ muốn chia phần trước khi ai thấy được thần dịch. Người dẫn đường xin cả hai đừng quyết thay người còn đứng chờ ngoài cửa.",
+      "c": [
+        {
+          "id": "ban",
+          "l": "Hỏi ai đã hẹn phần với người dẫn",
+          "t": "Ngươi nghe từng lời hẹn, ghi rõ phần chưa ai có quyền nhận. Cả nhóm tiếp tục nói mà chưa giao vật.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "cho",
+          "l": "Để người đến sau đọc lại bản đường",
+          "t": "Ngươi chờ họ xem xong rồi cất bản của mình. Người dẫn đường nhận ra một đoạn hai bản đã chép khác nhau."
+        }
+      ]
+    },
+    {
+      "buoc": 2,
+      "id": "the_binh",
+      "ten": "Ghi dấu trước khi nhận bình",
+      "t": "Trong lúc tìm thần dịch tại {LOC15}, ngươi thấy người coi bàn kê bình muốn đặt chung vật đã rõ nguồn và vật chưa được đối. Một người học việc đem thẻ tới hỏi có cần ghi ngày nhận mẫu không.",
+      "c": [
+        {
+          "id": "ke",
+          "l": "Giúp ghi riêng các mẫu chưa đối",
+          "t": "Ngươi ghi nhãn rồi đọc lại cho người học việc. Họ để riêng các bình ấy, chưa trao món nào cho ai.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "tra",
+          "l": "Hỏi ai tận mắt thấy mẫu được lấy",
+          "t": "Ngươi tìm người giao bình hỏi cho rõ. Họ chỉ xác nhận phần mình nhìn thấy, còn nguồn vẫn cần tra."
+        }
+      ]
+    }
+  ]
+}

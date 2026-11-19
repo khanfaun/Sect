@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "khat_cai",
+  "len": [
+    "Người coi chợ chừa cho ngươi một chỗ ngồi quen. Một đứa mới tới hỏi khi nào được ngồi đó mà không bị xua.",
+    "Những người ngủ dưới sạp nhờ ngươi chia phần cơm. Có người xin để riêng một bát cho người đang đi đưa tin.",
+    "Trưởng lão trong thành mời ngươi giữ việc ở vài ngõ. Ba người đem giấy tới hỏi tiền chỗ ngủ đã đi về đâu.",
+    "Ngươi nhận phần coi một nhánh Cái bang. Người trú dưới mái mới muốn biết được đi sang nơi khác lúc nào.",
+    "Các nhánh đem sổ tới xin ngươi chia phần qua mùa. Ngoài cửa có người mới tới mà chưa ai biết tên."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Nồi cơm có phần người mới",
+      "t": "Sau khi ngươi mất, người giữ chợ vẫn múc một bát để ngoài hàng cho ai đến muộn. Đứa từng được nhận ngủ dưới mái trả tiền công đầu để mua gạo. Họ kể về ngươi bằng cái tên ngươi từng tự chọn.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Tên dưới sổ thu phần",
+      "t": "Bang giữ được các ngõ sau lễ tang, nhưng người làm tin phải nộp phần như cũ. Một đứa từng bị cắt cơm mang tờ phạt tới và xin được ghi năm ấy ai đã ký. Người kế bang nhận tờ giấy trước mặt cả nhóm.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Dấu biết chỗ trú",
+      "t": "Người từng ngủ chung sạp thay nhau đưa ngươi đi chôn. Họ giữ cách buộc dây ở mái khô để người đi đêm biết có chỗ nằm. Một người mới hỏi ai đã chỉ dấu ấy và nghe câu chuyện bên nồi cơm.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Chiếc bát rửa lần cuối",
+      "t": "Khi ngươi không còn, bạn ngồi chợ rửa chiếc bát cũ rồi để cạnh giỏ tang. Họ trả chỗ ngồi cho đứa đến sau. Mỗi chiều, người bán nước vẫn nhớ ngươi từng đỡ họ kéo thêm một gàu."
+    }
+  ]
+}

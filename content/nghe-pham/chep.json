@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "chep",
+  "len": [
+    "Thầy cho ngươi ghi tên vào sổ đồng sinh. Trang đầu ngươi tự chép dành cho một đứa bé chưa có tiền mua giấy.",
+    "Sau kỳ khảo, người trong làng gọi ngươi là tú tài. Họ đem tờ thuế đến nhờ ngươi đọc từng dòng bằng tiếng thường.",
+    "Tờ báo đỗ về đến cổng trước ngươi. Một người từng cho mượn đèn tới hỏi có thể xem lại quyển ngươi đã viết không.",
+    "Ngươi nhận tên tiến sĩ và một chỗ dạy ở kinh. Chuyến về quê, ngươi mang theo giấy để học trò được tự chép.",
+    "Học trò từ xa đến hỏi cách đọc sử. Ngươi đặt hai bản trái nhau lên bàn, giữ cả lời người mà sử quan đã bỏ."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Bản sách nằm ngoài thư khố",
+      "t": "Khi ngươi mất, học trò tìm lại đủ hai bản của một vụ án từng bị chép lệch. Họ giữ một bản ở làng, một bản ở nơi dạy học. Người đọc về sau có thể thấy lời của những gia đình từng bị gạch tên.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Quyển chép còn nét tẩy",
+      "t": "Người giữ thư phòng niêm tủ trước giờ đưa tang. Học trò tìm thấy tờ có nét ngươi sửa theo lệnh, cạnh một tờ hứa trả công. Họ giữ cả hai để người sau biết trang nào từng được trả giá.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Lớp bên ngọn đèn cũ",
+      "t": "Sau khi chôn ngươi, mấy học trò góp dầu để lớp còn mở vào tối. Họ đặt tờ đối nét của ngươi ngoài cửa. Một người đi nộp thuế ghé vào xin con đọc giúp tờ quan vừa gửi.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Giấy tập chữ phơi lại",
+      "t": "Gia đình đem tập giấy của ngươi hong sau ngày mưa đưa tang. Một đứa trẻ đọc được tên mình trong trang ngươi từng chép hộ. Nó xin giữ trang ấy, rồi lại kê giấy lên bàn học."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "thuong",
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Phiếu gửi còn được tin",
+      "t": "Ngày đưa tang, một người từng được ngươi trả đủ tiền giữa lúc kho cạn mang phiếu tới. Người kế quầy mở hòm trước họ và tiếp tục giữ lệ cũ. Từ đó khách đi xa còn biết có chỗ gửi hàng, kể cả khi người ký trên phiếu đã qua đời.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Cửa kho bán theo nợ",
+      "t": "Con cháu giữ được các kho sau khi ngươi mất. Họ cũng nhận lại sổ những món nợ ngươi từng dùng để buộc người bán sang hàng. Một gia đình tới thắp hương, rồi đứng ngoài sân đòi xem bản mua có ghi đủ giá hay không.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Biển hiệu sang tay",
+      "t": "Người phụ quầy mua lại cửa hiệu từ gia đình sau ngày tang. Họ giữ chỗ đặt cân và thay tấm biển đã cong. Một khách quen vẫn hỏi mua đúng loại hàng ngươi từng để riêng ở ngăn dưới.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Đòn gánh ngoài hiên",
+      "t": "Ngươi chết khi trong nhà vẫn còn một gánh chưa bán hết. Người cùng chợ mang tiền sang mua số hàng cuối để gia đình lo tang. Đòn gánh kê bên hiên, ngày mưa còn in một đường nước trên vách."
+    }
+  ]
+}

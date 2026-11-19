@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "CC02",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "vach_mo",
+      "ten": "Vạch đo dưới bụi than",
+      "t": "Tại {LOC11}, một thợ già nhìn bản đo vỉa mà ngươi đang hỏi mua. Ông chỉ hai dấu dễ nhầm: một dấu chỉ hốc đá, một dấu ghi chỗ thợ phải quay lại. Cạnh bàn, người rao quặng phát sáng đang gọi khách.",
+      "c": [
+        {
+          "id": "hoi",
+          "l": "Hỏi cách đọc hai dấu trên bản đo",
+          "t": "Ông lấy ngón tay lần theo đường vỉa. Ngươi ghi riêng dấu lui để khỏi đọc nhầm lần sau.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "nghe",
+          "l": "Nghe lời người bán rồi đi hỏi nguồn",
+          "t": "Ngươi hỏi quặng lấy từ đâu. Người bán đổi giọng và chỉ một cửa mỏ không có trên bản đo."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "do_mo",
+      "ten": "Thợ vá đèn bên chợ",
+      "t": "Trước lúc gom đồ vào mỏ, ngươi gặp một người sửa đèn ở {LOC11}. Họ đặt cạnh nhau chiếc đèn có quai lỏng và một cây chống bị mục chân, rồi hỏi khách có thường nhìn kỹ đồ trước khi mang vào hầm tối không.",
+      "c": [
+        {
+          "id": "xem",
+          "l": "Ngồi xem người thợ kiểm đồ",
+          "t": "Ngươi nhìn họ thử từng món trên mặt đất, rồi ghi các dấu cần hỏi khi mua đồ của mình.",
+          "e": {
+            "h": 2,
+            "nang": {
+              "canh": 1
+            }
+          }
+        },
+        {
+          "id": "don",
+          "l": "Giúp dọn chỗ thử trước cửa hàng",
+          "t": "Ngươi dọn thúng khỏi lối, để khách sau có chỗ đặt cây chống và xem dưới ánh sáng."
+        }
+      ]
+    },
+    {
+      "buoc": 2,
+      "id": "cho_cua",
+      "ten": "Cùng chờ ngoài cửa mỏ",
+      "t": "Một toán đào lậu đến cửa mỏ ở {LOC11} khi đội thợ chưa vào hầm. Hai bên nhìn vào lối chỉ vừa đủ một người. Một phu gùi thấp giọng xin đừng vây kín cửa, vì nhà anh vẫn có người đang làm gần đó.",
+      "c": [
+        {
+          "id": "chua_loi",
+          "l": "Yêu cầu cả hai bên chừa lối ra",
+          "t": "Ngươi nhắc có người còn gần cửa. Hai nhóm lùi lại, đủ chỗ cho phu gùi bước ra hỏi tin."
+        },
+        {
+          "id": "nghe_phu",
+          "l": "Đưa phu gùi ra ngoài để hỏi",
+          "t": "Ngươi đi cùng anh tới bờ đá. Anh chỉ nơi các gia đình thường đứng đợi khi đổi ca.",
+          "e": {
+            "h": 2
+          }
+        }
+      ]
+    },
+    {
+      "buoc": 3,
+      "id": "ten_chong",
+      "ten": "Tên khắc trên thanh chống",
+      "t": "Trong lúc thăm dò và chống hầm ở {LOC11}, ngươi thấy một thanh chống cũ khắc tên thợ. Một người trong ca nhận ra tên cha, bảo nhà họ chưa từng biết ông làm ở đoạn nào trước lúc mỏ bỏ.",
+      "c": [
+        {
+          "id": "sao",
+          "l": "Chép tên và vị trí cho người nhà",
+          "t": "Ngươi ghi đoạn hầm cùng nét khắc còn đọc được. Người thợ gói tờ giấy trước khi xuống ca.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "cho",
+          "l": "Đứng chờ họ tự xem nét khắc",
+          "t": "Ngươi giữ đèn ở mép lối. Họ nhìn một lúc rồi quay ra, xin chưa kể chuyện này cho ai."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "cuu_nguoi_hy_sinh",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Vai trái ngày mưa",
+      "t": "Trời vừa đổ mưa, vết thương trên vai ngươi lại nhói. Người từng được ngươi cõng ra khỏi căn nhà sập tìm tới, mang theo một cái đòn gánh đã bào nhẵn. Thấy ngươi định nhấc gùi, anh xin mang giúp đến trạm.",
+      "c": [
+        {
+          "id": "nho_ganh",
+          "l": "Nhờ anh mang gùi đến trạm",
+          "t": "Ngươi trao gùi. Anh đi chậm ở những chỗ trơn, đợi ngươi theo kịp rồi mới bước tiếp.",
+          "e": {
+            "h": 2,
+            "tamma": -2
+          }
+        },
+        {
+          "id": "hoi_nha",
+          "l": "Hỏi căn nhà đã dựng lại chưa",
+          "t": "Anh bảo mái còn dột một góc, nhưng đêm nay cả nhà có thể ngủ chung trong gian khô."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Tiền chuộc chiếc thuyền",
+      "t": "Để cứu người dưới nước, ngươi từng bỏ cả chiếc thuyền vào dòng xiết. Hôm nay người sống sót tìm tới bến, trao một túi bạc nhỏ. Nàng đã dành tiền qua mấy mùa vá lưới và chỉ xin ngươi đừng trả ngay.",
+      "c": [
+        {
+          "id": "nhan_bac",
+          "l": "Nhận số bạc nàng dành dụm",
+          "t": "Ngươi nhận túi bạc. Nàng thở phào, ngồi xuống bến như cuối cùng cũng được nghỉ một lát.",
+          "e": {
+            "bac": 350
+          }
+        },
+        {
+          "id": "gui_lai",
+          "l": "Để nàng giữ bạc sửa lưới",
+          "t": "Nàng giữ lại tiền, rồi rủ ngươi tới nhà ăn bữa cơm. Hôm ấy nàng không nhắc món nợ nữa."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Miếng vải lót nẹp",
+      "t": "Người từng được ngươi kéo khỏi bánh xe trông thấy ngươi xoa cổ tay đã gãy trong lần cứu họ. Họ mang tới mảnh vải sạch, kể đã hỏi người bó xương cách kê tay khi ngủ để vết cũ bớt đau.",
+      "c": [
+        {
+          "id": "thu_nep",
+          "l": "Thử kê tay bằng mảnh vải",
+          "t": "Ngươi đặt tay lên lớp vải mềm. Cơn nhức dịu bớt, và lần đầu trong buổi ngươi thả lỏng vai.",
+          "e": {
+            "hp": "5%"
+          }
+        },
+        {
+          "id": "trao_nguoi",
+          "l": "Gửi mảnh vải cho người đang cần",
+          "t": "Ngươi chỉ người phu đang giữ cánh tay đau. Hai người đem vải tới hỏi anh có cần dùng không."
+        }
+      ]
+    }
+  ]
+}
