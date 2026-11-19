@@ -1,0 +1,362 @@
+{
+  "schemaVersion": 1,
+  "id": "DL01",
+  "loai": "dai_lo",
+  "ten": "Phi Thăng Lộ",
+  "daiLo": "phi_thang",
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Trận đồ chỉ lối lên trời",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC05"
+      },
+      "mo": "Bản vẽ ở {LOC05} chỉ một con đường vượt khỏi trận địa lên trời. Người coi bản đặt tên những người từng thử đi bên cạnh. Chưa ai ghi rõ có lối nào quay xuống.",
+      "boQuaNeuXuatThan": true,
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Hỏi nơi đường trận dừng",
+          "t": "Ngươi chép vạch cuối vào giấy và hỏi ai đã thực sự trở về từ đó.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Đề nghị có lối quay xuống",
+          "t": "Ngươi xin dành một chỗ trống trên bản đồ cho người đổi ý giữa đường.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Nhận xem đường khi có người làm chứng",
+          "t": "Ngươi để người đi cùng giữ bản đồ chỉ đường thứ hai, phòng lúc người dẫn mất dấu.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bản đường được gửi theo các thợ, viên đá còn lại bên trang trắng.",
+        "su": "Bản đường được gửi theo các thợ, viên đá còn lại bên trang trắng.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Cảnh trên trời có thể do trận dựng",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC05"
+      },
+      "mo": "Mặt sau trận đồ cho thấy đường lên có thể lấy ký ức của người đi để dựng cảnh. Nếu đặt dấu ở {LOC15} và dưới chân trận, ngươi có thể kiểm xem cảnh nào đang lặp.",
+      "khacVoi": "OR02.N4 thay nguồn trục địa phương; hồi này kiểm chỗ đối chứng giữa hai mặt đường lên trời.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Tìm hai mốc để nhận ra cảnh do trận dựng",
+          "t": "Ngươi ghi một mốc dưới và một mốc trên, để biết khi nào cảnh được dệt lại.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin giữ lối quay xuống cho đoàn",
+          "t": "Ngươi yêu cầu có điểm rút tự do và tập gọi dấu hẹn từ mặt thấp.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ riêng vạch đi nhanh",
+          "t": "Ngươi nhận bản đồ chỉ đường tắt rồi ghi tên những người sẽ bị kéo theo nếu mở sớm.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Đường được phơi lại, phần vạch mặt dưới chỉ có một người chép.",
+        "su": "Đường được phơi lại, phần vạch mặt dưới chỉ có một người chép.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Đường lên đang rút linh khí dưới đất",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC15"
+      },
+      "mo": "Mỗi lần đường sáng ở {LOC15}, linh mạch dưới đất lại yếu đi. Các động phủ sắp tranh phần. Người coi mốc đo hỏi ai chịu giảm lượng linh khí mình lấy.",
+      "khacVoi": "OR39.N2 tìm trụ chặn nước trên vách; hồi này xử việc chia linh mạch giữa các nhóm khi đường cao lấy nguồn.",
+      "clk": "CLK13",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giảm phần đường cao để giữ nguồn chung",
+          "t": "Ngươi khóa bớt suất được cấp cho đường lên và giao vạch đo cho người ở dưới kiểm.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "e": {
+            "clk": {
+              "id": "CLK13",
+              "kq": "Linh mạch được chia theo vạch công khai, đường cao phải giảm phần lấy."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Thử đường về cho người muốn quay xuống",
+          "t": "Ngươi treo dây nhận dấu ở mốc thấp, để đoàn thử lối rút trước lúc mở cao.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giành suất được cấp cho đường đi nhanh",
+          "t": "Ngươi lấy lượt cấp đầu cho đường riêng, khiến các động phủ đứng cuối thiếu phần.",
+          "dau": [
+            "moc_3_3"
+          ],
+          "e": {
+            "tamma": 2
+          }
+        }
+      ],
+      "tuDien": {
+        "t": "Đoàn đo hụt một phiên, người giữ nguồn giữ mức chia cũ.",
+        "su": "Đoàn đo hụt một phiên, người giữ nguồn giữ mức chia cũ.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Căn nhà thân quen sau cửa",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC15"
+      },
+      "mo": "Cửa ở {LOC15} hiện ra căn nhà ngươi nhớ nhất, nhưng tiếng gọi trong nhà lặp đúng nhịp của trận. Dưới ánh sáng vẫn còn một cửa thấp để quay lại.",
+      "khacVoi": "OR09.N4 dùng chuông để xử một ký ức gia đình; hồi này thử cả cảnh giới dựng bằng ký ức và quyền quay lại.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối cảnh với mốc rồi ghi phần lặp",
+          "t": "Ngươi dùng mốc đã chép để chỉ chỗ cảnh lặp, giữ tờ đối chiếu ngoài cửa.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Dẫn đoàn thử quay xuống",
+          "t": "Ngươi gọi đúng dấu đã tập, đưa người đổi ý qua cửa thấp trước khi nó mờ.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Dùng linh khí đã giành để giữ đường đi nhanh",
+          "t": "Ngươi để cảnh lặp che phần thấp, giữ lối cao bằng lượt cấp đã lấy.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Để ngoài cửa một lời chỉ đường",
+          "t": "Ngươi đặt dấu cảnh lặp và mốc thấp bên chân vách cho người tới sau.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cửa cao vẫn sáng, tín hiệu của người chờ phía dưới đi qua mà không ai nhận.",
+        "su": "Cửa cao vẫn sáng, tín hiệu của người chờ phía dưới đi qua mà không ai nhận.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Bước qua cầu hay dẫn người quay xuống?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC15"
+      },
+      "mo": "Cầu ở {LOC15} đã hiện. Có người muốn đối chứng trước khi bước, có người giục cả đoàn đi cho kịp. Dấu ở cửa thấp vẫn còn sáng để dẫn người muốn trở về.",
+      "khacVoi": "OR45.N5 chọn cách sống sau một mùa lũ; hồi này quyết định áp dụng chứng cứ ở ngưỡng phi thăng cho cả nhóm.",
+      "clk": "CLK14",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Phá cảnh lặp rồi bước qua cầu",
+          "t": "Ngươi đem bản đối chiếu lên mốc và chỉ ra chỗ căn nhà lặp lại. Khi cảnh tan, ngươi bước qua cầu nhưng vẫn nhìn thấy dấu chỉ đường về.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          },
+          "e": {
+            "clk": {
+              "id": "CLK14",
+              "kq": "Người qua cầu giữ được mốc kiểm cảnh và quyền quay lại của đoàn."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Trở xuống cùng những người đã chọn",
+          "t": "Ngươi trả đường cao, dẫn người theo dấu thấp rồi giao họ bản đồ chỉ đường.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Mở phần cao và giữ giá qua cửa",
+          "t": "Ngươi duy trì lối riêng bằng mạch đã lấy, để người còn lại tự đòi phần.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Giữ bản ở mốc ngoài",
+          "t": "Ngươi cất bản ở bậc không bị ánh sáng che, chờ người tự kiểm trước khi bước.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cửa khép qua lượt chờ, ngoài mốc thấp có người giữ bản đồ chỉ đường.",
+        "su": "Cửa khép qua lượt chờ, ngoài mốc thấp có người giữ bản đồ chỉ đường.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Tỉnh giữa đường lên",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Ngươi nhận ra căn nhà sau cửa chỉ là cảnh trận dựng từ ký ức. Khi cảnh tan, dấu ở mốc thấp vẫn còn sáng. Ngươi bước qua cầu và biết mình có thể theo dấu ấy trở xuống.",
+      "su": "Người qua đường cao giữ chứng cảnh lặp và mốc về.",
+      "dauVong": "một bản đối chiếu nằm ở mốc ngoài với hai dấu cùng chỉ một chỗ."
+    },
+    {
+      "id": "B",
+      "ten": "Người trở xuống trước",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Những người muốn quay về theo ngươi qua cửa thấp trước lúc cầu khép. Họ đem bản đồ về cho người còn chờ dưới chân trận. Lần mở cửa sau, người đi có thể hỏi họ cách quay lại.",
+      "su": "Đoàn giữ được lối rút cho những người tự chọn trở về.",
+      "dauVong": "dấu gọi xuống còn đọc được trên một dây buộc ở mốc thấp."
+    },
+    {
+      "id": "C",
+      "ten": "Cửa sáng thu phần",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Ngươi dùng phần linh khí đã giành để giữ đường cao và thu tiền qua cửa. Vài động phủ phía dưới phải ngừng tu luyện một phiên vì thiếu linh khí. Họ giữ tờ đòi lại phần đã bị lấy.",
+      "su": "Đường cao giữ suất được cấp riêng cùng món thiếu của các nhóm dưới.",
+      "dauVong": "một tờ đòi phần nguồn còn ghim dưới bảng qua cửa."
+    }
+  ],
+  "ngoai": "Cửa khép qua lượt chờ, ngoài mốc thấp có người giữ bản đồ chỉ đường."
+}

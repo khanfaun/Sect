@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "id": "OR30",
+  "loai": "xuat_than",
+  "ten": "Thẻ tre sau bếp",
+  "xuatThan": "xt_dua_tre_lon_sau_bep",
+  "goiYDaiLo": [
+    "huyet_cuu"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Tiền công cũ và người bếp mất tích",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Chủ quán {LOC02} trả thẻ bếp cũ và tiền còn nợ. Người rửa nồi vẫn chừa cơm cho một tay bếp chưa về. Ca cuối của người ấy là bữa tiếp khách {FA02}.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Nhận công và hỏi bữa thương hội",
+          "t": "Ngươi cất thẻ và ghi lại ai làm ca cuối của bữa có người biến mất.",
+          "dau": [
+            "moc_1_1"
+          ],
+          "e": {
+            "bac": 400
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "So thẻ bếp khác trong giỏ",
+          "t": "Ngươi kiểm được một thẻ vắng đúng hôm người của thương hội lên bàn tiệc.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ phần cơm cho người vắng",
+          "t": "Ngươi gói cơm, hỏi người rửa nồi lối tay bếp hay về sau ca muộn.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Tiền công được để sau thớt, phần cơm của tay bếp đã nguội.",
+        "su": "Tiền công được để sau thớt, phần cơm của tay bếp đã nguội.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Tạp dề còn treo, người đã đi đâu?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Tạp dề còn trên móc ở {LOC02}. Bạn bếp thấy người mất tích bị gọi xuống kho sau khi dọn thịt. Chủ quán bảo họ theo xe hàng nhưng chưa ai trả công thôi việc.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Tìm người đã thấy lối kho",
+          "t": "Ngươi nhờ bạn bếp chỉ cửa và ghi lời họ về món thịt đưa xuống.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Kê những người chủ quán còn giữ thẻ",
+          "t": "Ngươi chép tên người lệ thuộc và hỏi ai nhận quyền chia ca bếp.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi nơi đón người thôi bếp",
+          "t": "Ngươi xin nhà khác xác nhận có việc và chỗ nằm nếu người bếp được rời.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Móc áo bỏ trống, tên tay bếp được gạch khỏi ca sau.",
+        "su": "Móc áo bỏ trống, tên tay bếp được gạch khỏi ca sau.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Món thịt đi cùng khế cầm người",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Ký hiệu trên thực đơn ở {LOC02} trùng phiếu giao một lô thịt ở {LOC03}. Người phu nói có tờ khế đi kèm. Tay bếp còn sống nhưng phải làm ở kho theo khế ấy.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối thực đơn với lời phu rồi lấy khế",
+          "t": "Ngươi xác nhận lô thịt mang dấu và tìm được tờ khế đứng tên tay bếp.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi giá chuyển quyền quản",
+          "t": "Ngươi xem bản khế còn hiệu lực và biết giữ thẻ bếp sẽ giữ được người.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin người phu chở người về chỗ trú",
+          "t": "Ngươi hẹn xe bếp tới đón những người muốn đi, cùng địa chỉ nơi đã nhận.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Thực đơn gấp vào sổ bếp, tay bếp tiếp tục bị giữ ở kho.",
+        "su": "Thực đơn gấp vào sổ bếp, tay bếp tiếp tục bị giữ ở kho.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Trả khế hay giữ tay bếp lại?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Xe ở {LOC02} đã xếp nồi để rời sân. Người coi kho đem tờ khế tới, còn tay bếp chờ bên xe. Ngươi có thể hủy khế, nhận quyền giữ người hoặc đưa họ đi.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Hủy khế để tay bếp được tự chọn ở hay đi",
+          "t": "Ngươi hủy quyền giữ người rồi mời tay bếp chọn làm tiếp hoặc rời cửa.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận quyền coi quán và giữ khế",
+          "t": "Ngươi nhận chỗ chủ quán, giữ thẻ và phần khế cấm tay bếp thôi việc.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đưa người lệ thuộc ra theo xe bếp",
+          "t": "Ngươi xếp người muốn rời lên xe và bàn giao họ tại chỗ trú đã hẹn.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Để xe chở nồi và giữ bản chứng",
+          "t": "Ngươi gửi bản sao thẻ theo xe, nhờ người nhận giữ tới lúc tay bếp về.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Xe ra khỏi sân với nồi rỗng, người coi kho giữ lại thẻ.",
+        "su": "Xe ra khỏi sân với nồi rỗng, người coi kho giữ lại thẻ.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Bếp chung hay quán riêng?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Chủ quán {LOC02} đòi chốt sổ. Có người góp tiền mở bếp chung và có khách hẹn tiệc riêng. Những người đang theo xe hỏi tiền công sẽ được giao cho ai.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Mở bếp chung qua một mùa",
+          "t": "Ngươi mở ca tự chọn, trả công bằng tiền cơm đủ qua mùa và ghi ai ở lại.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ quán riêng và thẻ bếp",
+          "t": "Ngươi nhận tiệc theo giấy quyền, giữ tay bếp làm ca dưới khế còn hiệu lực.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Chia công và giao nồi tới nơi mới",
+          "t": "Ngươi chốt tiền từng người, dỡ bếp và đưa nồi tới người vừa chuyển chỗ.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Ghi người còn đợi công",
+          "t": "Ngươi để tên từng người còn chờ trên sổ rồi giao người rửa nồi bản sao.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bếp cũ chia phần còn trong nồi, ca sau chưa ai đứng tên.",
+        "su": "Bếp cũ chia phần còn trong nồi, ca sau chưa ai đứng tên.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Bếp không khóa cửa",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Qua mùa thiếu khách, bếp còn tiền mua gạo và trả ca. Tay bếp từng bị giữ tự chọn ở lại thêm một lượt rồi dạy người mới món ăn để được qua đêm mà không cần mua chịu. Thẻ cũ treo ngoài cửa.",
+      "su": "Bếp {LOC02} sống qua mùa với ca tự chọn và không giữ khế.",
+      "dauVong": "món ăn do tay bếp từng bị giữ truyền lại cho người tới làm thuê."
+    },
+    {
+      "id": "B",
+      "ten": "Bàn tiệc có người nợ",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Khách có quyền vẫn tìm tới bàn, còn người đứng bếp chỉ thay ca khi ngươi trả thẻ. Một thân nhân tìm đúng móc áo nhưng phải đọc tên theo sổ khế. Quán giữ khách bằng cả bữa ăn lẫn món nợ.",
+      "su": "Quán giữ hợp đồng tiệc và khế lao động cưỡng ép.",
+      "dauVong": "một người còn dò thẻ bếp để đòi lại cái tên trên khế."
+    },
+    {
+      "id": "C",
+      "ten": "Bữa cuối chia đều",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Người mở nồi ở nơi mới đếm đủ tiền công đã gửi theo xe, rồi dùng phần gạo cuối nấu bữa chung. Quán cũ đổi tay, còn ai đã rời bếp đều có chỗ ngủ cùng một tờ ghi ngày nhận việc.",
+      "su": "Bếp cũ giải thể sau khi chia công và chuyển chỗ cho người lệ thuộc.",
+      "dauVong": "chiếc nồi theo xe tới chỗ làm mới của những người rời bếp."
+    }
+  ],
+  "ngoai": "Bếp cũ chia phần còn trong nồi, ca sau chưa ai đứng tên."
+}

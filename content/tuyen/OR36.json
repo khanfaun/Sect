@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "id": "OR36",
+  "loai": "xuat_than",
+  "ten": "Phong thư trở về",
+  "xuatThan": "xt_ke_viet_thu_ho",
+  "goiYDaiLo": [
+    "de_nghiep"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Thư bị trả vì người nhận đã chết",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Thư ngươi viết hộ quay lại {LOC02} với dấu báo tử. Ngày mất ghi trên phong lại sớm hơn ngày chính người ấy ký nhận thư trước. Người coi hòm định bỏ cả phong.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So dấu tử với phong nhận",
+          "t": "Ngươi giữ hai ngày khác nhau, ghi rõ ngày nào có chữ ký người nhận.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ kín phong rồi xin tra sổ",
+          "t": "Ngươi bảo người coi hòm chỉ ghi dấu ngoài, không mở lời người gửi.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi người trả thư về đường trạm",
+          "t": "Ngươi ghi nơi phong thư đã đổi tay và ai báo người nhận qua đời.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Phong thư nhập hòm giấy trả, hai ngày không ai đối.",
+        "su": "Phong thư nhập hòm giấy trả, hai ngày không ai đối.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Lời nào là của người gửi?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Thân nhân ở {LOC14} nhận ra nếp gấp của phong thư. Họ nhớ câu nào người gửi đã nhờ ngươi viết, câu nào không. Họ xin đừng đọc lớn phần lời riêng.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Xin xác nhận lời thật và quyền nhận",
+          "t": "Ngươi ghi phần họ xác nhận, hỏi ai có quyền mở và hứa giữ phần riêng.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Nghe lời về phần nhà sẽ chuyển",
+          "t": "Ngươi biết một câu có thể đổi người nhận phần nhà nếu họ tin dấu ngoài.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Chép quy tắc giữ thư không mở",
+          "t": "Ngươi xin gia đình định cách hỏi dấu để người nhận sau vẫn nhận được.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Thân nhân về trại, câu đã đổi vẫn chưa có bản đối chiếu.",
+        "su": "Thân nhân về trại, câu đã đổi vẫn chưa có bản đối chiếu.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Thư bị đổi khi đi qua trạm",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Dấu {LOC13} nằm trên nếp gấp khác với bản nhà giữ ở {LOC02}. Ngoài phong vẫn đúng dấu, nhưng lời bên trong đã bị đổi khi chuyển túi. Sổ trạm còn ghi ngày nhận.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So dấu rồi chép lại lời đã xác nhận",
+          "t": "Ngươi nối ngày trạm với bản nhà, sao nguyên câu mà thân nhân đã nhận.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ chỗ sửa để đổi phần nhà",
+          "t": "Ngươi dùng nhầm lẫn giữa hai mép để chuẩn bị câu đổi người nhận phần.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Lấy ngày trạm làm khóa nhận thư",
+          "t": "Ngươi chép dấu ngoài và ngày đi vào mục tìm thư mà không mở nội dung.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Sổ trạm được trả vào hòm, bản nhà tiếp tục giữ mép gấp cũ.",
+        "su": "Sổ trạm được trả vào hòm, bản nhà tiếp tục giữ mép gấp cũ.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Trao thư cho ai?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Một người ở {LOC02} đem dấu của gia đình tới hỏi thư. Người khác trả bạc để ngươi sửa câu về phần nhà được chia. Người coi hòm đang chờ biết ai được mở thư.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao thư thật cho đúng người",
+          "t": "Ngươi so dấu, giao bản thật trong chỗ kín và giữ lời hứa không đọc lớn.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Bán câu đã sửa cho người đòi phần",
+          "t": "Ngươi nhận bạc và giao bản sửa, người mua đem nó đi lấy phần nhà.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2",
+              "moc_3_2"
+            ]
+          },
+          "e": {
+            "bac": 1000,
+            "deed": "lua_loi"
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Niêm thư tồn theo dấu người nhận",
+          "t": "Ngươi đặt phong riêng từng hòm và cho tìm qua ngày trạm, giữ nội dung kín.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Phong thư được buộc lại, người hỏi chưa nhận được câu trả lời.",
+        "su": "Phong thư được buộc lại, người hỏi chưa nhận được câu trả lời.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Giữ thư chưa có người nhận",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Một tủ khô ở {LOC02} đã được dọn cho thư chưa giao. Người nhận đúng phong đem lời đáp, còn kẻ cầm bản sửa có giấy nhà đã đổi chủ. Vẫn có người đang chờ thư.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Trao lời đáp và khép sổ người nhận",
+          "t": "Ngươi giao lời đáp đúng người, giữ kín phần đã hẹn rồi gạch thư khỏi sổ tồn.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ mạng đổi lời theo giá",
+          "t": "Ngươi nhận phần hẹn sau khi giấy nhà đã đổi, giữ liên lạc để bán lời lần khác.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Lập tủ thư tồn có người coi",
+          "t": "Ngươi giao hòm kín cho người coi, để ai có dấu chỉ mở đúng phong của họ.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Tủ giữ phong theo dấu ngoài, người tìm phải quay lại phiên khác.",
+        "su": "Tủ giữ phong theo dấu ngoài, người tìm phải quay lại phiên khác.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Thư tới người còn chờ",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Phong thư mở trước đúng người còn đợi, họ đọc phần lời mà ngươi đã hứa không bán. Sau đó lời đáp về tới nơi đã viết câu đầu. Hai nét gấp khớp lại, và sổ chỉ ghi rằng phong đã giao.",
+      "su": "Bản thư thật đã tới người có quyền nhận và lời riêng được giữ.",
+      "dauVong": "một phong thư có dấu mở đúng người còn trong hòm nhà."
+    },
+    {
+      "id": "B",
+      "ten": "Một nét đổi một nhà",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Phần nhà chuyển sau khi người coi giấy tin câu mới. Kẻ nhận nhà trả bạc đúng hẹn, còn người mất phần giữ mảnh phong có nếp cũ để tìm bản gốc. Ngoài cửa, người ta kể lại câu ngươi đã chép sai.",
+      "su": "Bản thư cố ý sửa làm đổi người nhận phần nhà.",
+      "dauVong": "người mất phần mang mảnh phong cũ đi tìm bản chưa bị đổi."
+    },
+    {
+      "id": "C",
+      "ten": "Hộp thư không người nhận",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Những lá chưa có người đến vẫn nằm trong tủ khô với nguyên dây. Người coi tra ngày và dấu tay ở ngoài, không đọc thay người vắng. Một phong được giữ qua nhiều mùa vì chưa ai đem đúng dấu hỏi.",
+      "su": "Thư tồn được lưu theo quy tắc nhận mà không mở nội dung.",
+      "dauVong": "một phong chưa mở còn được tra bằng ngày qua trạm."
+    }
+  ],
+  "ngoai": "Tủ giữ phong theo dấu ngoài, người tìm phải quay lại phiên khác."
+}

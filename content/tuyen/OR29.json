@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "id": "OR29",
+  "loai": "xuat_than",
+  "ten": "Quả cân bên giường",
+  "xuatThan": "xt_con_nha_boc_thuoc",
+  "goiYDaiLo": [
+    "y_gia"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Đơn thuốc bị cân thiếu",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Quả cân nhà ngươi nhẹ hơn quả chuẩn của {FA07} ở {LOC10}. Một đơn bị trả vì thuốc nhạt màu. Túi vẫn nguyên niêm, nên phần thiếu có từ trước khi chở đi.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So quả chuẩn với đơn thuốc bị trả",
+          "t": "Ngươi ghi phần hụt và nhờ người coi cân ký lên tờ gói còn nguyên.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi người bốc từng đơn",
+          "t": "Ngươi tìm ai đã trực lúc cân và ghi họ lấy thuốc từ ngăn nào.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ quả cân làm mẫu sai",
+          "t": "Ngươi buộc nhãn vào quả nhẹ, tránh để nó trở lại bàn cân chung.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Đơn bị trả về túi, vạch nhẹ chưa được ghi trước lần cân tiếp.",
+        "su": "Đơn bị trả về túi, vạch nhẹ chưa được ghi trước lần cân tiếp.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Thuốc tốt đã bị bán riêng",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Thuốc từ {LOC10} đến {LOC02} được cân trước khi xếp lên xe. Sổ cho thấy phần tốt đã bán riêng. Người đánh xe còn tờ cân thật, dù túi niêm ghi đủ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Chứng phần dược bán riêng",
+          "t": "Ngươi đối tờ cân với biên nhận bán lẻ rồi giữ cả hai ngày giao.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tra người chịu ký nhận lô",
+          "t": "Ngươi xin tên người nhận ở kinh, ghi họ đã cân hay chỉ nhìn niêm.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi giá của lô thiếu",
+          "t": "Ngươi giữ một bản giá đã bán phần tốt và chi phí nhà phải trả nếu thu hồi.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Sổ hàng đóng theo cân khai, phần bán riêng không hiện trên đơn.",
+        "su": "Sổ hàng đóng theo cân khai, phần bán riêng không hiện trên đơn.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Ai đã uống thuốc và ai khỏi trước đó?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Người dùng lô thuốc ở {LOC02} tới đối đơn. Có người hết sốt trước khi uống, có người uống rồi vẫn sốt. Một gia đình còn giữ túi để cân lại.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi cả ca khỏi trước khi dùng",
+          "t": "Ngươi so giờ uống, giờ hết sốt và phần chưa khỏi cho từng nhà.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ danh sách sách người mua tiếp",
+          "t": "Ngươi ghi ai vẫn chịu lấy nhãn nhà dù đã biết túi không đủ cân.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Kê từng khoản phải bồi",
+          "t": "Ngươi đối tiền đơn và tiền họ trả chữa lại, xin từng nhà xác nhận.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Một số người tự đổi nơi chữa, sổ nhà chưa ghi kết quả từng ca.",
+        "su": "Một số người tự đổi nơi chữa, sổ nhà chưa ghi kết quả từng ca.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Thu hồi thuốc hay tiếp tục bán?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Người mua ở {LOC02} chờ được trả tiền hoặc đổi thuốc. Chủ sạp muốn lấy tiếp lô giá rẻ. Người coi cân chuẩn xin một túi làm mẫu để lần sau còn so được.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Thông báo lô sai và nhận hàng trả",
+          "t": "Ngươi treo số lô bằng dấu trên túi, mời từng nhà đem gói dư cân lại.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Bán tiếp lô đã biết sai",
+          "t": "Ngươi nhận đơn rẻ từ người còn mua, vẫn dán nhãn cũ lên túi thiếu.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          },
+          "e": {
+            "deed": "lua_loi",
+            "bac": 600
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Bán đồ nhà để bồi thường",
+          "t": "Ngươi bán phần hàng còn tốt và trả từng khoản theo bản kê đã đối.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Sạp cất đơn thuốc bị trả, người mua tự giữ gói dư tới phiên khác.",
+        "su": "Sạp cất đơn thuốc bị trả, người mua tự giữ gói dư tới phiên khác.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ai đứng cạnh cân thuốc?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Người nhận thuốc ở {LOC10} hỏi ai sẽ ký chịu trách nhiệm trên phiếu cân. Chủ sạp cũ còn đặt hàng. Những gia đình được bồi thường muốn xem tờ đã trả đủ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao cân cho người kiểm độc lập",
+          "t": "Ngươi mở sổ thu hồi và giao quyền so quả cân cho người không bán thuốc.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ mối bán theo nhãn cũ",
+          "t": "Ngươi nhận đơn kỳ sau từ sạp cũ, để lô thiếu đi qua cùng một nhãn.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Trả đủ tiền bồi thường rồi đóng sạp thuốc",
+          "t": "Ngươi so từng khoản bồi thường rồi gạch đơn cuối, trả chỗ bán cho người coi chợ.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cân vẫn theo tay người trực, phiếu lô cũ chờ có người đối.",
+        "su": "Cân vẫn theo tay người trực, phiếu lô cũ chờ có người đối.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Cân đứng giữa hai tay",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Túi thuộc lô sai mang ra cân trước người đã mua, phần đã uống cũng có dòng thông báo. Bệnh xá nhận lô mới khi có thêm tay kiểm độc lập. Quả chuẩn được giữ cạnh tờ ghi ai chịu nhận thuốc.",
+      "su": "Bệnh xá {LOC10} có chuẩn cân độc lập sau khi thông báo lô sai.",
+      "dauVong": "một quả cân dược nằm cạnh danh sách người nhận chịu trách nhiệm."
+    },
+    {
+      "id": "B",
+      "ten": "Nhẹ thuốc nặng bạc",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Nhãn nhà tiếp tục đi qua sạp với giá rẻ và để lại nhiều tiền hơn. Một bệnh án ghi đúng màu giấy của túi thiếu, cùng ngày người bệnh phải mua thang thứ hai. Người viết giữ lại nhãn trong túi hồ sơ.",
+      "su": "Nhà bán tiếp lô đã biết thiếu và giữ đường tiêu thụ.",
+      "dauVong": "bệnh án tại {LOC02} còn một nhãn thuốc nhà {ten} ở trang ghi mua lại."
+    },
+    {
+      "id": "C",
+      "ten": "Bán hết để trả một đơn",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Sạp đóng khi người cuối cùng nhận khoản bồi thường đã đối. Những khách cũ tìm nơi khác bốc thuốc, còn ngươi giữ tờ đơn gạch nợ cạnh quả cân. Họ có thể trở lại hỏi khoản đã trả ngay cả khi bàn bán đã dỡ.",
+      "su": "Sạp dừng bán sau khi thanh toán các khoản bồi thường.",
+      "dauVong": "một tờ đơn đã gạch nợ còn dấu xác nhận của người từng mua."
+    }
+  ],
+  "ngoai": "Cân vẫn theo tay người trực, phiếu lô cũ chờ có người đối."
+}

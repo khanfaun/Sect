@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "id": "OR16",
+  "loai": "xuat_than",
+  "ten": "Mắt lưới nhà ai",
+  "xuatThan": "xt_con_nha_va_luoi",
+  "goiYDaiLo": [
+    "the_gia"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Lưới rách vì sợi bị thay",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "{NP17} đem trả tấm lưới vừa vá. Lưới rách ngay chuyến đầu vì đoạn chỉ không giống chỉ nhà ngươi. Phiếu tiền công chưa trả vẫn kẹp ở cán vá.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So nút thắt và sợi rách",
+          "t": "Ngươi tháo một mắt, so hai sợi và ghi lô có màu nhạt hơn cuộn cũ.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ghi phiếu tiền công trước khi vá",
+          "t": "Ngươi giữ phiếu chưa trả cùng đoạn sợi lạ, rồi vá tạm cho chuyến gần.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Thử lại một mắt bằng chỉ nhà",
+          "t": "Ngươi thử một mắt ngay bờ, chỉ nhà giữ được trong khi sợi thay tuột.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lưới được gửi sửa lại, khoản công cũ chưa ai trả.",
+        "su": "Lưới được gửi sửa lại, khoản công cũ chưa ai trả.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Người bán biết cuộn chỉ dễ đứt",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Kho {LOC03} giữ phiếu trả cuộn chỉ lỗi. Người bán đã ký nhận lại cuộn ấy trước khi giao nó cho bến. Trong kho còn chỉ tốt, kèm giấy rao bán cả kho.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Sao phiếu trả có dấu xác nhận",
+          "t": "Ngươi giữ một bản có ngày người bán nhận cuộn rách trước khi xuất chuyến.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin kê giá mua cả kho",
+          "t": "Ngươi lấy giấy giá và danh sách nợ bến, biết kho có thể đổi chủ ngay kỳ tới.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi nhà dệt ở ngoài bến",
+          "t": "Ngươi gặp người nhận thợ vá đi xa, xin một lời hẹn khi mang theo khung.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cuộn chỉ lỗi tiếp tục được cân theo giá cuộn tốt.",
+        "su": "Cuộn chỉ lỗi tiếp tục được cân theo giá cuộn tốt.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Mất cá vì bão hay vì lưới rách?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Đơn bồi thường ở {LOC09} đổ mọi mẻ cá mất cho trận bão. Sổ bến lại ghi vài thuyền ra khơi hôm trời yên rồi về với lưới rách. Ngươi có thể đem sợi lỗi so từng phiếu.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Tách mẻ bão khỏi mẻ rách",
+          "t": "Ngươi so từng phiếu và đoạn sợi, chép ba thuyền cần sửa vì cuộn chỉ lỗi.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Kê những thuyền còn mua chịu",
+          "t": "Ngươi chép chủ thuyền và giá họ đang nợ để đối nếu kho đổi chủ.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Đưa phiếu tiền công cho người giữ bến",
+          "t": "Ngươi hỏi lượt sửa nào còn chưa trả rồi giao mỗi người một dòng đối.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Đơn bồi nhập chung với mẻ bão, vài thuyền chưa có tiền vá.",
+        "su": "Đơn bồi nhập chung với mẻ bão, vài thuyền chưa có tiền vá.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Ai trả tiền vá lưới?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Ba thuyền muốn biết ai trả công vá. Chủ kho muốn bán trước mùa nước lên, còn người góp quỹ đã mang tiền tới. Nhà ngươi cũng có thể dời khung sang bến khác.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Mở quỹ và trả tiền công cũ",
+          "t": "Ngươi ghi tên từng thuyền góp, trả phiếu tiền công rồi vá miễn phí cho ba thuyền.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Mua kho đổi lấy hợp đồng bến",
+          "t": "Ngươi nhận kho bằng phần ứng của các thuyền và ký họ chỉ mua sợi từ ngươi.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Chuyển khung tới nơi đã hẹn",
+          "t": "Ngươi gửi khung và chỗ ngủ cho người phụ việc, ghi ai sẽ theo chuyến dời.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Đòi tiền từng lượt vá",
+          "t": "Ngươi đưa phiếu đúng chủ thuyền, nhận lời hẹn riêng để không tính chung vào mẻ bão.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Quỹ chưa mở, những người còn nợ tự vá trước chuyến.",
+        "su": "Quỹ chưa mở, những người còn nợ tự vá trước chuyến.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Giữ hay bán cách thắt mắt lưới?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Người của {FA06} đến {LOC09} hỏi mua cách thắt lưới. Ba thuyền sẵn lòng thử loại mắt để cá con lọt qua. Nhà ngươi cũng có đò chở khung nếu quyết định rời bến.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Cho ba thuyền dùng mắt lưới thả cá con",
+          "t": "Ngươi cùng ba thuyền thử nút và để cá nhỏ lọt qua trước khi nhận chuẩn.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Bán bí quyết theo hợp đồng độc quyền",
+          "t": "Ngươi giao mẫu cho người mua sợi qua kho mình, ghi phần nợ của người chài.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Mang khung và người nhà rời bến",
+          "t": "Ngươi đưa người đã nhận chỗ theo khung, giao bến cũ phần chỉ thuộc về họ.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Các thuyền tự chọn chỉ, một số lưới vẫn vướng cá non.",
+        "su": "Các thuyền tự chọn chỉ, một số lưới vẫn vướng cá non.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Mắt lưới giữ giống",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Ba thuyền nhấc lưới ở ba luồng, đều để lứa cá nhỏ lọt qua đúng mắt. Phiếu tiền công cũ đã thanh toán được ghim với tên người góp quỹ. Nút nhà ngươi được chép bên cạnh mẫu mắt để ai sửa cũng thắt được.",
+      "su": "Ba thuyền {LOC09} dùng cùng chuẩn giữ giống và tiền sửa cũ đã được trả.",
+      "dauVong": "sổ quỹ bến giữ một nút mẫu của nhà {ten}."
+    },
+    {
+      "id": "B",
+      "ten": "Cả bến mua một sợi",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Người giữ bến chỉ nhận lưới vá bằng sợi từ kho ngươi. Ai chưa có tiền được ghi một dòng mua chịu, cùng phần chênh giữa giá cũ và giá theo khế mới. Người chài giữ những phiếu ấy lâu hơn tuổi một tấm lưới.",
+      "su": "Kho sợi cùng hợp đồng bến tập trung về một chủ.",
+      "dauVong": "sổ nợ còn tên những thuyền từng phải mua chỉ ở một kho."
+    },
+    {
+      "id": "C",
+      "ten": "Đứt chỉ rời bến",
+      "dk": {
+        "dau": [
+          "moc_2_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Khung được đặt xuống bên một mái nhà xa, người theo nhà ngươi đã có chỗ làm từng lượt. Bến cũ thiếu tay thắt nút trong mùa sau, còn những người đi đem đúng một tấm lưới để truyền cách vá cho nhau.",
+      "su": "Nhà vá và người phụ việc chuyển khung khỏi {LOC09}.",
+      "dauVong": "một tấm lưới ở mái nhà xa còn nút thắt từ bến cũ."
+    }
+  ],
+  "ngoai": "Các thuyền tự chọn chỉ, một số lưới vẫn vướng cá non."
+}

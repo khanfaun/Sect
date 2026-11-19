@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "id": "OR32",
+  "loai": "xuat_than",
+  "ten": "Trang giấy giữ hay xóa",
+  "xuatThan": "xt_nguoi_boi_giay_do",
+  "goiYDaiLo": [
+    "tinh_mong"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Giấy làm tan mực ghi thuế",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Lô giấy bị trả về {LOC11} giữ được mực thường. Riêng mực ghi thuế tan trong lớp phủ, để vệt bạc trên tên người nộp thuế. Khách đòi đổi cả bó.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So hai loại mực trên mẫu",
+          "t": "Ngươi thử hai nét cạnh nhau, giữ tờ chỉ xóa phần viết bằng mực sổ.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Lấy lời người trả giấy",
+          "t": "Ngươi ghi trang nào đã mất chữ và xin họ không bỏ mảnh sổ hỏng đi.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Chia mẫu cho người chép nghèo",
+          "t": "Ngươi giữ mảnh phủ riêng, đưa giấy còn tốt cho người đang thiếu tờ học.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bó giấy bị đổi qua mẫu mới, vệt mực tan không ai sao.",
+        "su": "Bó giấy bị đổi qua mẫu mới, vệt mực tan không ai sao.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Ai đặt làm lớp phủ?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Xưởng {NP22} còn mẫu gửi {LOC03}. Hóa đơn ghi đặt chất phủ đúng mùa chép thuế. Khách đã ký điều khoản đòi xưởng chỉ giao cho một mình họ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So mẫu xưởng với hóa đơn",
+          "t": "Ngươi lấy ngày và dấu xác nhận để chỉ ai đặt chất phủ trước khi giấy đổi màu.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin giá bán độc quyền",
+          "t": "Ngươi hỏi người đặt về giá mua hết cách làm, giữ tờ họ chịu trả trước.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi thợ muốn góp xưởng giấy",
+          "t": "Ngươi ghi số khung và bể thợ tự nguyện góp để dành giấy cho người học.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mẫu phủ được cất, điều khoản giao riêng tiếp tục theo hóa đơn.",
+        "su": "Mẫu phủ được cất, điều khoản giao riêng tiếp tục theo hóa đơn.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Đọc lại tên trên trang giấy mờ",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Trang ở {LOC02} còn một vệt mực chưa tan. Thợ bồi dùng mẫu cũ để tìm dòng tên. Người nhà mang phiếu thu còn đọc được để đối với nét vừa hiện.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Phục dựng trang trước hộ có tên",
+          "t": "Ngươi ghép mẫu và chỉ đúng tên hộ trên phiếu, giữ một bản để họ đối.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Chỉ cho khách chỗ đã mất chữ",
+          "t": "Ngươi cho người đặt xem vệt mờ và nhận lời mua nếu giữ kín giá.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Dạy nhóm thợ đọc dấu bằng mẫu bồi",
+          "t": "Ngươi đưa mẫu đối cho nhóm góp xưởng, để họ biết trang nào cần giữ riêng.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Trang bị gập lại, hộ giữ phiếu mà chưa có bản tên.",
+        "su": "Trang bị gập lại, hộ giữ phiếu mà chưa có bản tên.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Bán cách tẩy hay làm giấy chống sửa?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Một kho ở {LOC11} xin giấy khó tẩy. Kẻ đặt chất phủ muốn mua riêng cách làm. Các thợ góp khung xin ngươi đặt lệ giữ giấy cho người đi học.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao giấy chống sửa cho kho thử",
+          "t": "Ngươi dùng bản phục dựng để thử mẫu mới, để người giữ kho tự so nét.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Bán riêng chất phủ và giữ tên khách",
+          "t": "Ngươi giao quyền mua độc nhất sau khi khách trả đủ giá đã hẹn.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2",
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Lập xưởng chung theo phần khung",
+          "t": "Ngươi ghi phần góp và để người học nhận giấy theo suất đã thống nhất.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Kho dùng giấy cũ, nhóm thợ cất khung trong khi chờ người nhận.",
+        "su": "Kho dùng giấy cũ, nhóm thợ cất khung trong khi chờ người nhận.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ai được thử mẫu và mua giấy?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Người giữ kho ở {LOC02} chờ thử lô chống sửa. Khách cũ mang trang đã nhòe tới hỏi mua thêm lớp phủ. Người học nghèo đếm số tờ còn được nhận.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao quyền thử mẫu cho người chép kho",
+          "t": "Kho nhận lô đã thử và treo hai loại mẫu cho người chép tự đối.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ độc quyền sau khi khách dùng chất tẩy",
+          "t": "Ngươi thấy khách dùng lớp phủ xóa một dòng chứng rồi ký tiếp phiếu giao.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ mức được cấp giấy học qua một mùa",
+          "t": "Ngươi cùng thợ bù công để giấy học không đổi giá và để người học kiểm mẫu.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Giấy theo giá cũ, người chép tự chọn chỗ mua theo túi tiền.",
+        "su": "Giấy theo giá cũ, người chép tự chọn chỗ mua theo túi tiền.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Giấy giữ được lời",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Kho dùng lô mới sau khi tự so mẫu trước mặt người chép. Trang phục dựng được đặt cạnh tờ có tên hộ, cả hai còn đọc được sau lượt cất đầu. Người nhà cầm một bản về cùng phiếu thu.",
+      "su": "Kho {LOC02} nhận giấy chống sửa và giữ trang đã phục dựng.",
+      "dauVong": "một trang còn tên hộ mà {ten} đã cứu khỏi vệt mờ."
+    },
+    {
+      "id": "B",
+      "ten": "Chữ theo giá giấy",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Khách giữ độc quyền chất phủ, và một trang chứng mới rời sổ dưới dạng giấy bạc màu. Người tìm tên chỉ nhận ra thớ giấy của xưởng nhà ngươi. Họ đem mảnh đó đi hỏi chỗ còn giữ mẫu.",
+      "su": "Khách độc quyền đã dùng lớp phủ để xóa dòng chứng.",
+      "dauVong": "một vệt trên thớ giấy chỉ ra lô từng làm mất chữ."
+    },
+    {
+      "id": "C",
+      "ten": "Xưởng giấy của người đọc",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Xưởng giữ đủ giấy học qua kỳ đóng góp đầu. Người bồi mang giấy tới lớp và để trẻ thử một nét trên mẫu trước khi nhận bó. Về sau có cuốn sách giữ đúng cách bồi tay ấy ở cả hai bìa.",
+      "su": "Xưởng chung duy trì mức giấy dành cho người học qua một mùa.",
+      "dauVong": "một cuốn sách học trò còn hai bìa bồi tay của xưởng."
+    }
+  ],
+  "ngoai": "Giấy theo giá cũ, người chép tự chọn chỗ mua theo túi tiền."
+}

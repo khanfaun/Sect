@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "id": "OR28",
+  "loai": "xuat_than",
+  "ten": "Tiền đò lúc tắt đèn",
+  "xuatThan": "xt_ke_cheo_do_ban_dem",
+  "goiYDaiLo": [
+    "tinh_mong"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Khách trả tiền mà chưa từng lên bờ",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Dưới ván thuyền ở {LOC09} còn dây giày của khách đi đêm. Sổ ghi khách đã lên bến vào giờ nước cạn. Người dọn đò tìm khắp mạn mà chẳng thấy ai nhớ họ xuống.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giữ dây và hỏi người dọn đò",
+          "t": "Ngươi giữ dấu giày, chép vị trí khách lần cuối ngồi trước khi thuyền quay.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "So giờ xuống với người gác bến",
+          "t": "Ngươi hỏi người gác, biết giờ cạn không có ai bước lên bậc bến.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Kê bàn ghế trên chuyến đêm",
+          "t": "Ngươi ghi ai từng ngồi cạnh khách, để có thể hỏi khi gặp lại.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Dây giày được quét khỏi ván, chuyến đêm vẫn ghi khách đã xuống.",
+        "su": "Dây giày được quét khỏi ván, chuyến đêm vẫn ghi khách đã xuống.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Chiếc giày trong lưới",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Lưới ở {LOC09} mắc một thi thể còn mang một chiếc giày. So giờ nước, người coi bến thấy thuyền đã ghé một lối khác. Có người thường tới lối ấy đón khách đêm.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối xác và lịch nước",
+          "t": "Ngươi nhận ra giày khớp dây đã thấy, ghi chỗ khách bị chuyển giữa hai bờ.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tìm chỗ đón chuyến sau",
+          "t": "Ngươi ghi nơi thuyền đổi người và giờ một chuyến khác sắp rời cọc.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin người giữ lưới chép tên",
+          "t": "Ngươi nhờ họ giữ tên hoặc dấu áo của người mất, để thân nhân còn tra.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người mắc lưới được đưa lên, lịch nước chưa ghim vào chuyến.",
+        "su": "Người mắc lưới được đưa lên, lịch nước chưa ghim vào chuyến.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Chạy nạn hay bị đem bán?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Phiếu ở {LOC03} ghi giá giao một người không biết mình sẽ bị đưa đi đâu. Người sống sót nói khách chạy nạn từng được tự chọn bờ. Tờ phiếu này xóa hẳn quyền đó.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối lời sống sót và giữ bờ tự chọn",
+          "t": "Ngươi tách chuyến tự nguyện khỏi chuyến cưỡng ép rồi xin họ chỉ nơi đón.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận dấu để dẫn tuyến ngầm",
+          "t": "Ngươi nhận dấu người mua và biết rõ người chuyến sau không được tự chọn.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Chép đường ngầm cùng tên người mất",
+          "t": "Ngươi sao lối đổi thuyền và hỏi thân nhân đồng ý khắc dấu nào trên cọc.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Phiếu giao bị gập vào sổ hàng, lời người sống chưa có chỗ ghi.",
+        "su": "Phiếu giao bị gập vào sổ hàng, lời người sống chưa có chỗ ghi.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Chuyến đò sắp giao người",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Thuyền đêm ở {LOC09} vẫn buộc cọc, khách còn trong khoang. Người mua đã đến. Bờ bên kia có người sẵn lòng đón nếu được nghe chính khách chọn nơi lên.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đưa khách sống tới bờ họ chọn",
+          "t": "Ngươi đưa khách ra ánh đèn, để họ nói bờ muốn lên rồi giao đúng người đón.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giao khách theo dấu trả tiền",
+          "t": "Ngươi thấy khách xin rời nhưng vẫn trao họ cho người giữ dấu và nhận bạc.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          },
+          "e": {
+            "bac": 1000,
+            "deed": "ban_nguoi"
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đưa khách lên bờ có người làm chứng",
+          "t": "Ngươi cho họ tự rời thuyền tại bến có người giữ lưới đứng chứng.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chuyến rời cọc theo người mua, giấy lên bờ vẫn chưa có tên khách.",
+        "su": "Chuyến rời cọc theo người mua, giấy lên bờ vẫn chưa có tên khách.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Tên người mất trên cọc bến",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Thân nhân tới {LOC09} mang một cái tên cần khắc lên cọc. Người coi bến muốn biết nên treo đèn theo dấu nào. Kẻ mua người đứng ngoài bậc đá chờ hỏi chuyến sau.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi tên và mở chuyến tự nguyện",
+          "t": "Ngươi khắc tên đã xác nhận, nhận khách theo dấu xin đò và lời tự chọn bờ.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ bờ nhận dấu của người mua",
+          "t": "Ngươi nhận quyền cọc đêm, giấu tên khách lần giao trong bản riêng.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Tắt đèn tuyến ngầm và treo bản đường",
+          "t": "Ngươi chép tên lên cọc, công bố chỗ đổi thuyền rồi bỏ chuyến đêm.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Đưa tên cho người coi bến",
+          "t": "Ngươi giao tờ người mất cho bến, để sơ đồ chuyến lại với gia đình.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Đèn thuyền treo muộn, tên người mất còn ở tờ rời.",
+        "su": "Đèn thuyền treo muộn, tên người mất còn ở tờ rời.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Đò đưa người có đường về",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người đã xuống đúng bờ trở lại chỉ dấu xin đò cho khách sau. Bến ghi tên người mất cùng thời điểm tìm thấy họ. Người đi đêm được hỏi bờ muốn đến trước khi ngồi vào khoang, và có thể bước xuống lại.",
+      "su": "{LOC09} có tuyến đò để khách tự chọn bờ sau khi cứu chuyến bị giữ.",
+      "dauVong": "một mật hiệu xin đò được người từng thoát giữ tại bến."
+    },
+    {
+      "id": "B",
+      "ten": "Người giữ bờ tối",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Dấu người mua cho thuyền qua điểm đổi trong đêm. Người đã xin rời nằm trong phiếu giao của một lần ngươi nhận bạc. Về sau thân nhân đến dò chiếc thuyền, chỉ tìm được vết dây cũ trên cọc.",
+      "su": "Tuyến ngầm dưới quyền {ten} đã giao người bị cưỡng ép.",
+      "dauVong": "thân nhân một khách còn dò chiếc thuyền theo vết buộc cọc."
+    },
+    {
+      "id": "C",
+      "ten": "Đèn tắt ở bến cũ",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Những khách cuối đã xuống ở nơi có người đứng chứng. Bản đường để trống ngày chuyến sau vì đèn đã tắt. Người chuyển người phải đi lối khác, còn thân nhân khắc tên họ đọc được vào cọc cũ.",
+      "su": "Tuyến đò ngầm đóng sau khi đưa khách cuối lên bờ và công bố lối đổi.",
+      "dauVong": "cọc bến còn tên người mất dưới vết từng treo đèn."
+    }
+  ],
+  "ngoai": "Đèn thuyền treo muộn, tên người mất còn ở tờ rời."
+}

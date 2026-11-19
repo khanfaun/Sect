@@ -1,0 +1,356 @@
+{
+  "schemaVersion": 1,
+  "id": "OR41",
+  "loai": "xuat_than",
+  "ten": "Tờ giấy không ghi người",
+  "xuatThan": "xt_nguoi_bi_tra_ve_tu_bien_ai",
+  "goiYDaiLo": [
+    "de_nghiep"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Giấy trả về không ghi đủ quyền",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Giấy ở {LOC13} nói ngươi không còn giá trị sử dụng, nhưng người khám đánh giá thương tật khác. Một tờ quy định cho biết người bị trả vẫn có thể lĩnh phần quân cấp nếu có ngày trực.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối quyền quân cấp với thương tật",
+          "t": "Ngươi lấy lời người khám và phiếu trực để ghi phần mình còn quyền nhận.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ghi chỗ làm hợp với tay chân",
+          "t": "Ngươi thử việc ở sân và kê điều mình còn làm được sau vết thương.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin giấy xác nhận thương tật riêng",
+          "t": "Ngươi giữ giấy thật về sức mình, tránh dùng tờ trả thay cho lời người khám.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Giấy trả được xếp riêng, phần quân cấp chưa thấy ngày nhận.",
+        "su": "Giấy trả được xếp riêng, phần quân cấp chưa thấy ngày nhận.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Nhiều người bị trả đúng ngày có lệnh rút",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Ở {LOC14}, những người về cùng đợt nhận ra quân cấp đều bị cắt sau lệnh rút. Có người còn sức làm việc, có người cần người đỡ. Sổ trại chưa ghi ai từng nhìn thấy lệnh.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Gom tờ trả và nối cùng lệnh rút",
+          "t": "Ngươi so ngày của các tờ, ghi người biết chuyện lệnh và người cần chỗ ở.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi ai muốn lập đội riêng",
+          "t": "Ngươi nghe lời từng người về việc giữ một chỗ an toàn và phần lương có thể góp.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi ai muốn làm việc dân",
+          "t": "Ngươi ghi người muốn rời quân, xin ở lại bên họ khi hỏi chỗ làm mới.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Các hộ đổi nơi ngủ, ngày bị loại vẫn nằm trên tờ trả riêng từng người.",
+        "su": "Các hộ đổi nơi ngủ, ngày bị loại vẫn nằm trên tờ trả riêng từng người.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Có người bị loại chỉ vì biết chuyện",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Hồ sơ {LOC13} ghi riêng thương tật, người từng thấy lệnh và phần tiền bị cắt. Một người vẫn làm được việc nhưng bị loại vì tên nằm trong mục biết chuyện.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Lấy chứng cắt quân cấp sai",
+          "t": "Ngươi so từng cột với tờ trả rồi xin nơi xét bồi thường cho cả nhóm.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin lương cho nhóm giữ kho",
+          "t": "Ngươi lấy phần lương được trả và hẹn với đội giữ kho bằng công có hạn.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Nhận việc dân sự có giấy",
+          "t": "Ngươi dùng phiếu sức làm việc để xin đơn trồng trọt đầu cho nhóm tự chọn.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hồ sơ đóng lại, khoản cắt tiền chưa bị đối với ngày trở về.",
+        "su": "Hồ sơ đóng lại, khoản cắt tiền chưa bị đối với ngày trở về.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Đòi bồi thường, lập đội hay rời quân?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Tại {LOC14}, người xét mời nhóm trình giấy bị cắt tiền. Một số muốn giữ kho để có lương, số khác muốn nhận việc ngoài ruộng. Ai cũng muốn tự quyết trước khi ghi tên.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đòi bồi thường và tìm chỗ ở cho cựu binh",
+          "t": "Ngươi trình chứng, dùng phần được xét để giữ mái và việc đỡ người đi cùng.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Lập quân của người bị bỏ",
+          "t": "Ngươi gom người đã chọn, chia lương đã nhận và giữ kho qua lượt tranh quyền.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2",
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Rời quân cùng người tự chọn",
+          "t": "Ngươi đưa đơn dân sự cho từng người và xếp lượt việc theo sức họ khai.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_3",
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Ghi lời người muốn đi riêng",
+          "t": "Ngươi giúp họ chép địa chỉ và giấy ghi quyền hạn quân cấp để tự mang tới nơi chọn.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mỗi người giữ tờ trả của mình, chưa có ai nhận thay phần cả nhóm.",
+        "su": "Mỗi người giữ tờ trả của mình, chưa có ai nhận thay phần cả nhóm.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Mái nhà nào cho người bị trả?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Ở {LOC14}, mái nhà chung vừa mở cửa. Đội giữ kho đem sổ trực tới, còn nhóm làm ruộng mang lưỡi cũ đã rèn làm cuốc. Mỗi người chờ chọn nơi thuộc về.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Mở nhà chung cho người được bồi",
+          "t": "Ngươi trao thẻ nhận người và giao lịch đỡ đi lại cho nhóm có chỗ ở.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nắm đội đã giữ được kho",
+          "t": "Ngươi đối lương và phần trực trước lời thề, giao việc giữ kho cho đội mình.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Trả thẻ lính và giao việc ngoài ruộng",
+          "t": "Ngươi dùng cuốc cũ giao lượt làm đầu và để ai muốn rời tự chọn hướng.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Giữ giấy của mình rồi tìm việc",
+          "t": "Ngươi gấp tờ trả vào túi, đi hỏi việc mà không ký thay cho người khác.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người giữ bảng cất tờ mới, ai chưa có chỗ vẫn ở lại trại.",
+        "su": "Người giữ bảng cất tờ mới, ai chưa có chỗ vẫn ở lại trại.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Giấy trả thành giấy nhận",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Khoản bồi thường được xét theo hồ sơ thay vì câu trên tờ trả. Người chống gậy nhận thẻ vào nhà và tự ghi giờ mình cần người đỡ. Khi người mới tới, họ đưa thẻ ra chỉ lối chứ không hỏi người ấy còn làm lính được không.",
+      "su": "Trại {LOC14} dùng phần bồi để mở nhà có hỗ trợ cho cựu binh.",
+      "dauVong": "thẻ nhận người có chỗ ghi điều họ cần, bên cạnh tên tự đọc."
+    },
+    {
+      "id": "B",
+      "ten": "Quân của người bị bỏ",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Đội giữ được kho bằng người và lương đã kê, sau đó đứng thành hàng đọc lời thề. Trong lời có tên những người từng bị trả về. Mỗi lần thay ca, họ đọc phần sẽ làm trước phần lương sẽ nhận.",
+      "su": "Đội mới có lương và đã giữ kho qua một lượt tranh quyền.",
+      "dauVong": "lời thề của nhóm từng bị trả còn được đọc ở cửa kho."
+    },
+    {
+      "id": "C",
+      "ten": "Không ai gọi là quân nữa",
+      "dk": {
+        "dau": [
+          "moc_2_3",
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Lượt việc ngoài ruộng đã trả đủ công, ai muốn đi nơi khác tự mang giấy của mình. Một lưỡi từ vũ khí cũ được dùng làm cuốc và chuyền theo lượt. Trong sổ mới không ai phải ghi cấp bậc trước tên.",
+      "su": "Một nhóm rời quân tịch và làm việc dân sự theo thỏa thuận tự chọn.",
+      "dauVong": "lưỡi cuốc rèn từ đồ quân được người ngoài trại dùng mỗi mùa."
+    }
+  ],
+  "ngoai": "Người giữ bảng cất tờ mới, ai chưa có chỗ vẫn ở lại trại."
+}

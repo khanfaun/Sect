@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "id": "OR19",
+  "loai": "xuat_than",
+  "ten": "Vết than trong phổi",
+  "xuatThan": "xt_con_nha_ham_than",
+  "goiYDaiLo": [
+    "vo_lam"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Còn người kẹt trong hầm than",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Miệng hầm ở {LOC11} sập khi người nhà ngươi còn chưa về đủ. Sau vách đất ướt có tiếng gõ. Một thẻ công nằm ngoài giỏ cơm, chưa ai biết chủ thẻ đang ở đâu.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Dẫn thợ tới tiếng gõ",
+          "t": "Ngươi đưa người coi hầm tới chỗ nghe tiếng và đón thợ lạc khi họ được kéo ra.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "So thẻ công để tìm người",
+          "t": "Ngươi tìm được thân nhân của người còn trong hầm và đưa họ tới chỗ chờ tin.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi vị trí người đã mất",
+          "t": "Ngươi giúp đánh dấu chỗ tìm thấy người mất, giữ thẻ của họ bên giỏ cơm.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cứu hộ tìm qua lượt đầu, thẻ người chưa về còn dưới giỏ.",
+        "su": "Cứu hộ tìm qua lượt đầu, thẻ người chưa về còn dưới giỏ.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Hợp đồng ép thợ đốt thêm mẻ",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Gió dưới hầm {LOC11} yếu đi sau khi vách lún. Sổ trực vẫn chen thêm một mẻ giữa hai ca. Người mua than bắt thợ chịu phạt nếu để lửa tắt sớm.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So dấu gió với mẻ ép tăng",
+          "t": "Ngươi ghi chỗ gió yếu và chép điều phạt, nối ca bị ép với người đặt than.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Sao giá và quyền nhận hợp đồng",
+          "t": "Ngươi chép phần lời mỗi mẻ, biết ai có thể sang quyền nếu nhận đủ suất.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Kê người làm muốn rời hầm",
+          "t": "Ngươi hỏi từng người xem có thể nhận việc ngoài rừng khi hầm đóng không.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Ca sau tiếp tục mang phần mẻ tăng, đường gió chưa ai sửa.",
+        "su": "Ca sau tiếp tục mang phần mẻ tăng, đường gió chưa ai sửa.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Bệnh ho bắt đầu từ đâu?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "{NP19} xem mẫu than và bệnh án ở {LOC10}. Nhà mua đã ký ép tăng mẻ ngay dưới dấu {FA08}. Thầy thuốc muốn biết ai trong số thợ ho có thể trở lại chữa.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Xin lịch chữa gắn với mẫu than",
+          "t": "Ngươi đối ca ho với sổ đốt rồi nhận lịch để từng người trở lại khám.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Đối giá than với sổ bệnh",
+          "t": "Ngươi sao tên bên mua và tỷ lệ công, giữ sổ bệnh riêng khỏi giấy sang quyền.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin giới thiệu việc ngoài hầm",
+          "t": "Ngươi lấy thư nhận thợ khỏe làm việc khác và chỗ nằm cho người còn bệnh.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Sổ bệnh giữ vệt than, nhiều thợ chưa có ngày trở lại chữa.",
+        "su": "Sổ bệnh giữ vệt than, nhiều thợ chưa có ngày trở lại chữa.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Giữ lò, giữ hợp đồng hay đưa thợ đi?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Thợ bệnh ở {LOC11} đã có giấy hẹn chữa. Người coi hầm hỏi nên sửa đường gió hay đóng cửa. Nhà mua than chỉ chịu trả nếu lò giao cả số mẻ làm thêm.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Gia cố đường gió và cho thợ đi chữa",
+          "t": "Ngươi dùng bản đo để giám sát gia cố, đưa người có giấy đến điều trị.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận hợp đồng bằng suất cũ",
+          "t": "Ngươi nhận dấu mua than, cam kết đủ cả phần mẻ chen giữa hai ca đã ghi.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Dời thợ và kiểm người trước khi đóng",
+          "t": "Ngươi giao việc và chỗ nằm theo thư nhận, rồi kiểm từng thẻ còn dưới hầm.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Tạm dừng mẻ sau để kiểm hầm",
+          "t": "Ngươi báo thay ca, giữ thợ ngoài cửa cho tới khi người coi kiểm vách.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hầm giữ hợp đồng cũ, nhóm thợ ho đổi nhau nằm gần cửa.",
+        "su": "Hầm giữ hợp đồng cũ, nhóm thợ ho đổi nhau nằm gần cửa.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ca sau còn phải xuống hầm không?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Trong ngày cân than tại {LOC11}, thợ muốn biết có giới hạn giờ làm mới hay không. Nhà mua đợi chốt giá. Bên rìa rừng, xe chở đồ đã sẵn cho người muốn đổi việc.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đặt giới hạn ca theo đường gió mới",
+          "t": "Ngươi đo lại gió sau gia cố rồi ký giá đủ để bỏ mẻ chen giữa hai ca.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ giá than rẻ bằng cách ép thợ làm thêm",
+          "t": "Ngươi giao than theo dấu mới và vẫn gọi thợ ho trở lại làm quá suất.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đóng hầm và trả đất cho rừng",
+          "t": "Ngươi chờ thợ cuối lên rồi đóng miệng hầm, dựng bia ở lối đi còn lại.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Nhà mua giữ giá cũ, người coi hầm tự chia lượt còn lại.",
+        "su": "Nhà mua giữ giá cũ, người coi hầm tự chia lượt còn lại.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Khói đi khỏi ngực",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Ống gió dẫn được luồng qua chỗ từng lún, và ca đốt kết thúc trước lượt chồng. Người ho có lịch trở lại bệnh xá, không còn phải xin khỏi bỏ lượt chữa. Ngươi khắc dấu nhà lên phần ống đã thử.",
+      "su": "{LOC11} giới hạn ca theo gió và đưa thợ bệnh đi điều trị.",
+      "dauVong": "ống gió cạnh cửa hầm còn dấu nhà của {ten}."
+    },
+    {
+      "id": "B",
+      "ten": "Lửa mua bằng phổi",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Than ra đủ suất để lò mua rẻ qua mùa lạnh. Người giữ sổ bệnh vẫn nhận những người cũ trở lại với tiếng ho dày hơn. Bảng giá treo ngoài cửa có dấu của ngươi, cùng ngày thợ bị gọi thêm lượt.",
+      "su": "Hợp đồng than dưới tay {ten} tiếp tục ép mẻ chen giữa hai ca.",
+      "dauVong": "sổ bệnh còn ngày thợ bị gọi thêm lượt sau lần hầm sụp."
+    },
+    {
+      "id": "C",
+      "ten": "Rừng mọc trên miệng hầm",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Người cuối rời hầm mang hết thẻ công và đồ nghề. Họ đã có việc và chỗ ngủ bên lối mới. Rừng lên chậm trên cửa đã đóng, còn tấm bia ghi người không kịp trở về nằm ở khoảng đất đủ khô.",
+      "su": "Hầm ở {LOC11} đóng, thợ chuyển tới việc mới và để lại bia cho người mất.",
+      "dauVong": "bia thợ còn đứng ở lối rừng mọc qua miệng hầm cũ."
+    }
+  ],
+  "ngoai": "Nhà mua giữ giá cũ, người coi hầm tự chia lượt còn lại."
+}

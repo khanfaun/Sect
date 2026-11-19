@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "id": "OR08",
+  "loai": "xuat_than",
+  "ten": "Lửa trong lòng đất",
+  "xuatThan": "ren",
+  "goiYDaiLo": [
+    "vo_lam"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Sửa cuốc trước ngày gieo",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Một hộ dưới chân {LOC11} mang cuốc sứt đến, cần lấy trước ngày gieo. {NP21} nhận trông lửa, còn {NP22} mang khuôn tới. Nhà ngươi chỉ còn đủ tiền than cho một lượt rèn.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Sửa cuốc và giao tận ruộng",
+          "t": "Ngươi trả lưỡi cuốc trước ngày xuống giống. Người mua đặt luôn lượt sửa sau.",
+          "dau": [
+            "moc_1_1"
+          ],
+          "e": {
+            "bac": 300
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Góp công với thợ khuôn",
+          "t": "Ngươi nhờ thợ khuôn hoàn tất lưỡi cuốc, chia công rồi giữ được đơn kế tiếp.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Nhận thêm đơn mài",
+          "t": "Ngươi mài bộ lưỡi cũ đổi than, đủ giữ lò ấm cho lần giao cuốc tới.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Khách đem cuốc sang lò khác, nhà ngươi phải trả lại phần ứng.",
+        "su": "Khách đem cuốc sang lò khác, nhà ngươi phải trả lại phần ứng.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Phôi hỏng trước khi thợ rèn nhận",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Một thanh phôi vừa nứt, để lộ xỉ lẫn bên trong. Sổ ở {LOC03} cho thấy lô phôi đã bị đổi sau khi mở niêm. Vậy mà hợp đồng bắt thợ mua lại mọi thanh hỏng.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối phôi vỡ với mẫu niêm",
+          "t": "Ngươi cho người mua nhìn hai mặt gãy cạnh nhau, rồi sao điều khoản mua lại.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tra ngày đổi phôi ở hội quán",
+          "t": "Ngày trong hợp đồng đi sau ngày đổi lô. Ngươi xin người giao ký vào bản đối chiếu.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ mẫu cho buổi tính tiền",
+          "t": "Ngươi giữ phôi nứt và biên nhận, để phần sắt hỏng chưa bị nấu mất.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lô phôi lỗi nhập chung với phôi tốt, giấy nợ tiếp tục tính cho thợ.",
+        "su": "Lô phôi lỗi nhập chung với phôi tốt, giấy nợ tiếp tục tính cho thợ.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Thợ phải xuống mỏ để trả nợ phôi",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Ở {LOC11}, chủ kho trừ tiền công vào khoản nợ của lô phôi hỏng. Một người ho đưa ngươi phiếu lương chưa lĩnh. Nếu sổ đóng hôm nay, thợ lại phải xuống hầm làm thêm.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Kê tiền thiếu theo từng thợ",
+          "t": "Ngươi chép phiếu tiền công thiếu và gọi thợ so từng khoản trước khi chủ kho khóa sổ.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tìm phe chịu ứng công",
+          "t": "Một người lo quân lương chịu ứng tiền thợ nếu lò giao đủ lô kiếm thử.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi đường kiếm việc ngoài mỏ",
+          "t": "Ngươi dẫn người ho lên gặp các hộ cần thợ đồ nông, rồi xin họ ghi ngày nhận.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Tiền công bị gạch sang nợ phôi, thợ còn một ca phải xuống hầm.",
+        "su": "Tiền công bị gạch sang nợ phôi, thợ còn một ca phải xuống hầm.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Ai trả tiền công còn thiếu?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Người giữ sổ đến {LOC11} để tính tiền lương. Một bên muốn thợ góp sức giữ lò, một bên ứng tiền nếu lò rèn kiếm cho họ. Ngoài mỏ cũng có người nhận thợ về sửa nông cụ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Lập hội thợ và trả hết tiền công",
+          "t": "Hội thợ lấy phần đặt cọc mua phôi để trả đủ lương, rồi ký giá phôi công khai.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận bảo trợ để trả công thợ",
+          "t": "Ngươi dùng khoản ứng trả tiền thợ và ký lô kiếm với người lo quân lương.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Thanh toán nợ rồi chuyển việc cho thợ",
+          "t": "Ngươi kiểm sổ và đổi phôi còn lại lấy phần trả nợ, đưa thợ đến chỗ đã nhận.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Kê phần thợ còn thiếu",
+          "t": "Ngươi hỏi từng bàn rèn và đặt bản kê trước cửa kho để họ còn đòi.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người giữ sổ đóng cửa kho, thợ chia nhau chút than còn lại.",
+        "su": "Người giữ sổ đóng cửa kho, thợ chia nhau chút than còn lại.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Rèn tiếp hay đóng lò?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Một lưỡi cuốc và một thanh kiếm đặt trên bệ. Người học việc muốn biết nên chuẩn bị giao món nào. Người giữ chìa đường hầm cũng chờ xem còn phải mở cửa cho ca sau không.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao cuốc và truyền nghề cho thợ trẻ",
+          "t": "Ngươi giao lưỡi cuốc đã thử rồi trao búa cho người sẽ giữ mẫu của lò.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giao kiếm cho phe đã trả tiền ứng",
+          "t": "Ngươi giao đủ lô theo dấu đã nhận, đổi lấy kỳ mua sắt kế tiếp cho lò.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đóng lò và bàn giao việc mới",
+          "t": "Ngươi tắt lửa an toàn rồi giao phiếu việc mới cho những người đã thanh toán nợ.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Gửi búa lại cho người coi kho",
+          "t": "Ngươi lau búa và trả vào giá, dặn người coi giữ chỗ khô cho lưỡi cuốc.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lửa hạ, người học việc trở về mà chưa biết lò có mở lại.",
+        "su": "Lửa hạ, người học việc trở về mà chưa biết lò có mở lại.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Lò có người tiếp",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Thợ coi bảng công trước khi nhận phôi, và khách được đọc cả điều khoản lô hỏng. Người học việc vẫn giữ phôi thử có vết búa đầu, để ai bảo sắt xấu do tay thợ còn có vật mà đối.",
+      "su": "{LOC11} giữ lò theo giá phôi công khai và đủ tiền công.",
+      "dauVong": "người học việc giữ một miếng phôi có vết búa của {ten}."
+    },
+    {
+      "id": "B",
+      "ten": "Đúc kiếm cho người thắng",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Lô kiếm rời cửa mỏ trong bao thô. Về sau người mang bao đến lĩnh sắt gọi chủ lò bằng tên người bảo trợ, còn một người mất ruộng qua trận đánh giữ lại mảnh bao dính dấu xưởng.",
+      "su": "Lô kiếm ở {LOC11} được giao trọn cho phe đã ứng tiền.",
+      "dauVong": "mảnh bao mang dấu lò còn trong tay một người chịu trận."
+    },
+    {
+      "id": "C",
+      "ten": "Tắt lửa mở đường",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Cửa hầm khóa sau khi người cuối đã lên. Những người từng trả nợ bằng ca mỏ đem phiếu thanh toán đến chỗ nhận việc mới. Họ quen nhìn về mái lò đã nguội mỗi khi đi qua con dốc cũ.",
+      "su": "Lò tại {LOC11} đóng an toàn, thợ đã thanh toán có nơi nhận việc.",
+      "dauVong": "con đường thợ đi còn vết búa khắc chỉ lối dưới nền lò."
+    }
+  ],
+  "ngoai": "Lửa hạ, người học việc trở về mà chưa biết lò có mở lại."
+}

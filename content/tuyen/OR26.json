@@ -1,0 +1,352 @@
+{
+  "schemaVersion": 1,
+  "id": "OR26",
+  "loai": "xuat_than",
+  "ten": "Vị muối trên đòn gánh",
+  "xuatThan": "xt_con_nha_ganh_muoi",
+  "goiYDaiLo": [
+    "phu_giap"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Cân thuế nặng hơn cân bán",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Gánh muối ở {LOC03} vẫn nguyên dây buộc mà qua hai cân lại nặng nhẹ khác nhau. Người thu phí lén đẩy quả cân nặng xuống gầm bàn. Nhà ngươi còn nợ tính theo tải.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So hai cân cùng một tải",
+          "t": "Ngươi ghi độ lệch và xin người bán giữ dấu cân đúng trên phiếu.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Kê nợ theo tải thực",
+          "t": "Ngươi đếm tải nhà đã gánh, chép phần gốc riêng khỏi phí bị tính thêm.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi giờ người thu thay cân",
+          "t": "Ngươi nhờ một bạn gánh làm chứng khi quả nặng được đưa xuống gầm.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người thu giữ quả cân, tải nhà ngươi nhận thêm một dòng phí.",
+        "su": "Người thu giữ quả cân, tải nhà ngươi nhận thêm một dòng phí.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Một chuyến phải nộp phí hai lần",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Trạm trên đường từ {LOC03} tới {LOC11} đòi thu lại khoản đã nộp. Dấu của kẻ bảo kê nằm trên biên nhận cả hai trạm. Đoàn gánh chưa biết có thể khiếu với ai.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Gom biên nhận của hai trạm",
+          "t": "Ngươi ghi cả hai lượt thu và người bảo kê để xin đối lại phép đường.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi giá giữ hai chặng",
+          "t": "Ngươi tìm người chịu giao quyền thu ở hai trạm nếu có tiền ứng đủ.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tìm việc không gánh muối",
+          "t": "Ngươi giúp một hộ khiêng hàng thường, nhận lời hẹn một việc đủ nuôi nhà.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Tải qua trạm phải nộp lần nữa, người trực vẫn giữ mép biên nhận.",
+        "su": "Tải qua trạm phải nộp lần nữa, người trực vẫn giữ mép biên nhận.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Muối của quân bị ép bán giữa đường",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Giấy ở {LOC13} ghi muối để quân qua rét. Phiếu giao bên dưới lại buộc đoàn bán muối trước khi tới kho. Người coi kho chưa nhận bao nào mang dấu ấy.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối phép với người coi kho quân",
+          "t": "Ngươi chứng được phần muối đã bị ép bán rồi xin giấy xác nhận số thiếu.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ phiếu bán để đổi quyền chặng",
+          "t": "Ngươi ghi người mua lại và nơi họ chịu giao quyền nếu được giữ giá.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Lập bảng trả phần nợ tải",
+          "t": "Ngươi đặt nợ gốc cạnh tiền công đã kiếm, xin chủ nợ đối khoản phí.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Kho quân ghi chưa nhận đủ, đoàn tiếp tục bán lại theo phiếu ép.",
+        "su": "Kho quân ghi chưa nhận đủ, đoàn tiếp tục bán lại theo phiếu ép.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Xin sửa phép hay nắm cả hai trạm?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Người xét ở {LOC03} cần biên nhận để đổi cân và sửa phép đường. Người giữ hai chặng đợi tiền ứng. Một bạn gánh cũng đem tới giấy nhận việc không phải chở muối.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Sửa phép và chia lượt cho các hộ",
+          "t": "Ngươi đưa chứng hai trạm và kho quân, nhận phép một cân rồi chia quyền luân phiên.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nắm cả hai chặng",
+          "t": "Ngươi nhận hai dấu trạm của người bán lại và ký giá buộc đoàn sau phải chịu.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2",
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Phân xử nợ và nhận việc khác",
+          "t": "Ngươi đối khoản gốc với chủ nợ, trả phần còn thiếu bằng ứng công ngoài tải.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_3",
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Kê phí chung để các hộ tự đối",
+          "t": "Ngươi đặt bản kê ở nơi nghỉ để người đi sau giữ biên nhận của mình.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Giấy qua đường giữ mức cũ, đoàn chia nhau phần phí mới thu.",
+        "su": "Giấy qua đường giữ mức cũ, đoàn chia nhau phần phí mới thu.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Giá muối cho chuyến sau",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Đoàn tới {LOC03} đã kê đòn gánh thành hàng. Họ hỏi giá muối và ai cho qua trạm. Người nhận ngươi chở hàng thường cũng đang chờ trước khi đóng xe.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Công nhận cân đúng và chia quyền qua trạm",
+          "t": "Ngươi cho các hộ kiểm quả cân, mở phiên đi theo phần quyền đã chia.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Ấn định một giá qua hai trạm",
+          "t": "Ngươi thu đủ ở cả hai chặng theo giá riêng, hộ nghèo chỉ mua được nửa tải.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đặt đòn gánh xuống và chuyển việc",
+          "t": "Ngươi mang giấy nợ đã đối sang nhà mới, nhận chuyến hàng thường đầu.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Giữ bản cân đúng cho đoàn sau",
+          "t": "Ngươi trao phiếu cân thật để họ còn biết mỗi trạm đã lấy thêm bao nhiêu.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Đoàn đi theo giấy cũ, người không đủ phí để lại một phần tải.",
+        "su": "Đoàn đi theo giấy cũ, người không đủ phí để lại một phần tải.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Muối tới bếp",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Đoàn đi bằng quả cân do các hộ kiểm và đổi phiên giữ giấy qua đường. Muối tới bếp với giá vừa chỗ những người trước kia phải mua chịu. Quả cân được khắc dấu để lần sau còn đem đối.",
+      "su": "Giá muối hạ sau khi chuẩn cân và chia lượt qua trạm.",
+      "dauVong": "một quả cân ở {LOC03} còn dấu của các hộ đi chung tuyến."
+    },
+    {
+      "id": "B",
+      "ten": "Vua đường mặn",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Cả hai trạm giữ một giá qua đủ chuyến. Người mua cuối đường nhận gói nhỏ hơn trước dù trả cùng số bạc. Họ còn nhớ bữa phải pha loãng nước muối trong lúc người giữ chặng đổi phiên.",
+      "su": "Hai chặng bán theo giá độc quyền của {ten}.",
+      "dauVong": "một nhà cuối đường nhớ ngày phải pha loãng nước muối."
+    },
+    {
+      "id": "C",
+      "ten": "Gánh đặt xuống thềm",
+      "dk": {
+        "dau": [
+          "moc_2_3",
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Giấy đối chiếu nợ đã có dấu xác nhận, cả nhà chuyển sang chở hàng thường. Đòn gánh muối được kê dưới thềm chỗ ở mới, để người nhà còn nhớ những lần mồ hôi không có dòng riêng trong sổ tải.",
+      "su": "Nhà {ten} rời tải muối sau khi phân xử nợ và nhận việc khác.",
+      "dauVong": "đòn gánh muối nằm trên thềm nhà làm nghề mới."
+    }
+  ],
+  "ngoai": "Đoàn đi theo giấy cũ, người không đủ phí để lại một phần tải."
+}

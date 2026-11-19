@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "id": "OR37",
+  "loai": "xuat_than",
+  "ten": "Dưới dấu tay người",
+  "xuatThan": "xt_hau_due_nguoi_coi_an",
+  "goiYDaiLo": [
+    "de_nghiep"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Ấn thật đóng một lệnh có hại",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Ấn {NP28} để lại ở {LOC14} khớp lệnh do người nhà ngươi từng đóng. Lệnh này bắt một đội ở lại quá giờ rút. Người cất ấn muốn ngươi đọc cả phần ấy.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối đúng dấu trên lệnh người nhà",
+          "t": "Ngươi xác nhận dấu thật và giữ cả dòng buộc đội ở lại quá giờ.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ghi vết mòn để truy lượt đóng",
+          "t": "Ngươi in vết mòn cạnh lệnh đã ký, giữ phần để so với bản quân.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giao giấy cho người cùng tra",
+          "t": "Ngươi đưa một bản cho người từng giữ lệnh, xin họ kiểm cả điều bất lợi.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Ấn được bọc lại, tờ lệnh thật chưa ai ghi người chịu trách nhiệm.",
+        "su": "Ấn được bọc lại, tờ lệnh thật chưa ai ghi người chịu trách nhiệm.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Một lệnh giả, một lệnh thật",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Lệnh rút ở {LOC13} mang dấu thiếu khe mòn trên ấn nhà ngươi. Lệnh giữ đội ở lại thì có đủ. Người nhận cả hai nói cả hai đều khiến đội bỏ lỡ giờ rút.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Chỉ dấu giả và nhận phần thật",
+          "t": "Ngươi đặt hai bản cạnh nhau, chỉ khe sai và dòng giữ quân do nhà đóng.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin lời người đã nhận lệnh thật",
+          "t": "Ngươi chép hậu quả của giờ giữ lại, kể cả phần không thể đổ cho bản giả.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi điều lực lượng sẽ nghe",
+          "t": "Ngươi hỏi người cầm đội sẽ thi hành lệnh nào nếu có dấu thật và đủ lương.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hai lệnh tiếp tục nhập chung một ngăn, phần thật giả chưa rõ.",
+        "su": "Hai lệnh tiếp tục nhập chung một ngăn, phần thật giả chưa rõ.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Ai ra lệnh, ai chỉ đóng ấn?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Sổ ở {LOC02} ghi tên người yêu cầu khác tên người đóng dấu. Người nhà của lính bị giữ muốn hỏi cả hai. Trong giấy giao nhận có một ngày bị sửa.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Sao người ra lệnh cùng người đóng",
+          "t": "Ngươi giữ cả hai dòng và hỏi người chịu oan muốn đọc ở buổi nào.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tìm đội chịu nhận lệnh theo ấn",
+          "t": "Ngươi nhận lời một đội tự chuẩn bị lương nếu lệnh chuyển việc có dấu thật.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin thư khố nhận mẫu và lời chứng",
+          "t": "Ngươi để riêng bản in ấn và ghi tên người cần được rửa oan trước khi trả ấn.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Sổ tiếp ấn đóng lại, người đưa lệnh và người đóng chưa bị đối.",
+        "su": "Sổ tiếp ấn đóng lại, người đưa lệnh và người đóng chưa bị đối.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Đưa cả hai lệnh ra xét",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Trên bàn ở {LOC02} có tờ giả, tờ thật và ấn nhà ngươi. Gia quyến chờ đọc hồ sơ, còn một đội chờ lệnh mới. Người cất mẫu hỏi có nên giữ quyền dùng ấn không.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Công bố cả hai lệnh và nhận phần lỗi của nhà",
+          "t": "Ngươi đọc cả hai bản, ghi người ra lệnh và người đóng trước người bị giữ oan.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Dùng ấn gọi đội đã nhận lương",
+          "t": "Ngươi đóng lệnh chuyển quyền, đội mang lương tới thực thi dưới dấu ấy.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Phá ấn và gửi chứng lệnh cũ",
+          "t": "Ngươi hủy quyền đóng, để bản chứng giúp gia quyến gỡ lời kết sai về người mất.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Lưu dấu đối trong biên bản",
+          "t": "Ngươi gửi hai bản in cho người tra sau và yêu cầu giữ nguyên mép lệnh.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bàn đối hoãn, đội cũ nhận lệnh qua người coi dấu trước.",
+        "su": "Bàn đối hoãn, đội cũ nhận lệnh qua người coi dấu trước.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Một người hay hai người cùng ký?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Người coi sổ {LOC02} trải tờ lệnh có hai chỗ ký. Đội đã nghe lệnh cũ đợi bên cửa. Thư khố đã dọn hòm cho mảnh ấn nếu ngươi quyết trả lại.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đặt lệ đồng ký qua lượt đầu",
+          "t": "Ngươi nhận việc coi ấn với điều hai người cùng đọc, rồi thử ký trước dân.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận chức theo lệnh đã thi hành",
+          "t": "Ngươi ngồi vào chỗ người giữ quyền, để đội còn coi lệnh trước có hiệu lực.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Trả quyền cho bàn đối mới",
+          "t": "Ngươi giao mảnh ấn vào thư khố và giữ giấy rửa oan ngoài dòng quyền gia tộc.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chức coi dấu vẫn để chờ, người thay lượt giữ ấn trong hòm.",
+        "su": "Chức coi dấu vẫn để chờ, người thay lượt giữ ấn trong hòm.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Ấn có người cùng chịu",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Bản thật và bản giả cùng ở lại hành lang xét lệnh. Người đóng dấu phải đọc với người yêu cầu, và hai chữ ký đã đứng dưới lượt đầu. Gia quyến có thể tra ai cầm bút, ai ra lời.",
+      "su": "Chức coi ấn chuyển sang lệ đồng kiểm sau khi công bố cả hai lệnh.",
+      "dauVong": "sổ lệnh ở {LOC02} có hai chữ ký cạnh dấu."
+    },
+    {
+      "id": "B",
+      "ten": "Một dấu lấy thiên hạ",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Đội đã chuẩn bị lương thực thi trước khi người coi cũ ra lời. Sau đó lệnh có dấu của ngươi vẫn được đọc mỗi kỳ nhận việc. Người đứng ngoài đội giữ một bản vì muốn biết khi nào quyền ấy hết.",
+      "su": "Đội đã thi hành một lệnh thật và trao quyền coi việc cho {ten}.",
+      "dauVong": "một lệnh còn hiệu lực giữ dấu của {ten} dưới chữ nhận đội."
+    },
+    {
+      "id": "C",
+      "ten": "Ấn vỡ tên còn",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Tên người bị kết sai trở lại trên giấy gia quyến đem về. Ấn nhà chỉ còn một mảnh nằm cùng bản in trong thư khố. Công việc so lệnh đi qua bàn mới, nơi không cần hỏi ngươi sinh ở dòng nào.",
+      "su": "Gia tộc mất quyền dùng ấn, chứng lệnh giữ tại thư khố.",
+      "dauVong": "mảnh ấn cũ nằm cạnh giấy rửa oan mà gia quyến có thể tra."
+    }
+  ],
+  "ngoai": "Chức coi dấu vẫn để chờ, người thay lượt giữ ấn trong hòm."
+}

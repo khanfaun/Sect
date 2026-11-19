@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 1,
+  "id": "OR05",
+  "loai": "xuat_than",
+  "ten": "Những người không có trong sổ",
+  "xuatThan": "khat",
+  "goiYDaiLo": [
+    "tinh_mong"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Hai đứa trẻ biến mất sau buổi quét chợ",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Sau buổi quét chợ, hai đứa trẻ từng ngủ dưới sạp bỗng mất tích. Chiếc dép vá bằng dây cỏ vẫn cạnh túi cơm người giữ miếu đem cho. Bên bờ nước, chủ gánh hát đang cần người bưng đèn.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Gom vật nhận biết",
+          "t": "Ngươi buộc chiếc dép vào mảnh yếm, ghi riêng đứa vá dép và đứa hay ôm em.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi người dọn chợ",
+          "t": "Ngươi tìm được người đã thấy hai đứa bị đặt lên cùng một xe, dưới chiếu.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin chỗ làm sân",
+          "t": "Chủ gánh cho ngươi bưng đèn đổi cơm và hứa cho đi theo khi rời bến.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chiếc dép vá bị quét vào đống rác, chỉ còn vết dây trên cột sạp.",
+        "su": "Chiếc dép vá bị quét vào đống rác, chỉ còn vết dây trên cột sạp.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Báo đã chết, vẫn lĩnh cơm",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Chiếc xe rời chợ để lại bùn đen như đất quanh {LOC11}. Sổ thuê ở {LOC03} ghi hai đứa đã chết, nhưng lán thợ mỏ vẫn lĩnh đúng hai suất cơm cho chúng. Người giữ sổ biết cả hai còn sống.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Theo xe tới mỏ",
+          "t": "Ngươi nhận ra chiếc yếm treo ngoài lán và nghe đứa nhỏ gọi anh qua vách.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tra sổ thuê người ở hội quán",
+          "t": "Ngươi sao cột phát cơm từ {LOC03}, nơi hai suất vẫn được nhận sau ngày báo tử.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Đánh dấu đường qua trạm",
+          "t": "Ngươi dò được lối xe ngựa ra khỏi chợ và nơi người đi sân được qua.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Xe vào mỏ, tên những đứa trên xe tiếp tục bị gạch.",
+        "su": "Xe vào mỏ, tên những đứa trên xe tiếp tục bị gạch.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Chủ nợ ra giá chuộc trẻ",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Chủ nợ ở {LOC11} muốn đưa đứa đi dép vá xuống hầm. Đứa nhỏ nấp sau lưng nó. Gã hỏi ngươi muốn trả tiền chuộc chúng hay cung cấp tin để được vào nhóm làm việc cho gã.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Chuộc hai đứa bằng công sân",
+          "t": "Chủ gánh ứng công mùa tới để chuộc. Ngươi đưa cả hai ra cổng và ghi tên do chúng tự xưng.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_1_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Báo chỗ đứa trẻ trốn để theo nhóm dò tin",
+          "t": "Ngươi chỉ cho cai lán nơi đứa đi dép vá đang nấp. Họ nhận ngươi vào nhóm dò đường và đưa đứa ấy xuống hầm. Đứa nhỏ trốn theo xe.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ lời khai của người phát cơm",
+          "t": "Ngươi xin một lời chứng trước khi cai lán dời đứa vá dép. Đứa nhỏ đã rời lán, chưa rõ sống ở đâu.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Đứa vá dép bị chuyển xuống hầm, còn đứa nhỏ mất dấu sau phiên giao.",
+        "su": "Đứa vá dép bị chuyển xuống hầm, còn đứa nhỏ mất dấu sau phiên giao.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Một chỗ nằm cho trẻ ngoài sổ",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Chủ sạp ở {LOC02} chịu cho dùng gian sau nếu có người dọn bếp. Nhóm đưa tin ngoài chợ lại chỉ muốn chia cơm cho người làm việc. Gánh hát sắp đi, còn chỗ cho một người bưng đèn.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Dựng chỗ trú có phần cho trẻ mới",
+          "t": "Ngươi nhận việc dọn sạp để giữ mái cho lũ trẻ. Người phụ bếp chừa bát cho đứa đến sau.",
+          "dau": [
+            "moc_4_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Nắm mạng tin, chia cơm theo công việc",
+          "t": "Qua một phiên chợ ngươi giữ đầu mối và chia hết phần góp. Đứa giấu tin bị cắt cơm.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin giấy theo gánh hát",
+          "t": "Ngươi nhận giấy đi sân từ chủ gánh, kèm lời hẹn chỉ trở lại khi tự kiếm nổi cơm.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Gian sạp bị khóa, trẻ ngoài chợ lại tìm mái hiên riêng để ngủ.",
+        "su": "Gian sạp bị khóa, trẻ ngoài chợ lại tìm mái hiên riêng để ngủ.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ghi tên ở lại hay theo gánh hát?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Bàn ghi hộ ở {LOC02} đã mở. Có đứa muốn được ghi tên đàng hoàng, có đứa sợ lộ chỗ ở. Ngoài cổng, người đánh xe của gánh hát đang buộc nốt hòm đèn lên xe.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đăng tên do trẻ tự chọn",
+          "t": "Ngươi đưa hai đứa tới bàn, ghi tên chúng chọn và địa chỉ gian sạp sẽ còn mở.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1",
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giấu danh sách trẻ, giữ mạng đưa tin",
+          "t": "Ngươi giữ sổ tên dưới đáy thúng và giao ám hiệu cho người coi phần cơm.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Rời chợ theo giấy đi",
+          "t": "Ngươi đưa giấy cho người gác rồi lên xe. Những đứa ở lại tự chọn người cầm nồi.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Ghi tên người vắng vào lời khai",
+          "t": "Ngươi để một tờ khai cho người phát cơm, ghi chỗ từng thấy hai đứa trước khi xe đi.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bàn ghi hộ dẹp khi chợ đóng, lũ trẻ tự cử người coi phần cơm.",
+        "su": "Bàn ghi hộ dẹp khi chợ đóng, lũ trẻ tự cử người coi phần cơm.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Nhà có cửa",
+      "dk": {
+        "dau": [
+          "moc_1_3",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Gian sạp vẫn có chỗ nằm sau ngày ghi hộ. Đứa vá dép xin giữ cả tên cũ lẫn tên mới trong một dòng; nó muốn đứa em lớn lên còn nhớ ai từng cõng mình qua chợ.",
+      "su": "Các hộ mới ở {LOC02} có chỗ trú và tên do chính họ ghi.",
+      "dauVong": "gian sạp còn một cuốn sổ có tên do lũ trẻ tự chọn."
+    },
+    {
+      "id": "B",
+      "ten": "Chúa của ngõ tối",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Người bán hàng biết đưa tin qua tay ai mới được yên một phiên. Dấu xác nhận nhau vẫn dùng qua mùa sau, cả trong tay đứa bị cắt cơm mà ngươi chưa từng hỏi lại tên.",
+      "su": "Mạng tin ở {LOC02} chia đồ ăn theo công việc và giữ tên người ngoài sổ hộ.",
+      "dauVong": "một đứa từng bị cắt cơm còn nhớ dấu xác nhận người của {ten}."
+    },
+    {
+      "id": "C",
+      "ten": "Một mình ra khỏi chợ",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Xe qua cổng khi đèn chưa thắp. Ở chợ, đám nhỏ họp quanh nồi để tự chọn người nói thay mình. Đứa giữ dép gọi ngươi bằng tên cũ, còn người theo gánh chỉ biết tên trên giấy.",
+      "su": "Gánh hát mang {ten} rời {LOC02}, nhóm trẻ tự chọn người dẫn.",
+      "dauVong": "người ở chợ và người theo gánh gọi {ten} bằng hai cái tên."
+    }
+  ],
+  "ngoai": "Bàn ghi hộ dẹp khi chợ đóng, lũ trẻ tự cử người coi phần cơm."
+}

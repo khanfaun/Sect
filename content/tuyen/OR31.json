@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "id": "OR31",
+  "loai": "xuat_than",
+  "ten": "Chữ dưới lớp vôi",
+  "xuatThan": "xt_tho_cao_voi_tuong",
+  "goiYDaiLo": [
+    "the_gia"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Một cái tên dưới lớp vôi",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Lưỡi cạo ở {LOC02} chạm một hàng chữ cũ. Chủ việc bảo phủ phẳng trước tối. Một mảnh vữa rơi ra đúng nơi người trả tiền từng chỉ, vẫn còn nguyên nét tên.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Bóc mảnh nguyên nét",
+          "t": "Ngươi bọc mảnh vữa rồi chép vị trí nó từng dính, tránh lẫn với chữ mới.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ép giấy lấy vết chữ",
+          "t": "Ngươi giữ bản dập trước khi vôi mới được đưa tới và ghi ngày làm.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi ai trả lượt cạo",
+          "t": "Ngươi chép lời người đưa vôi về dấu của kẻ đã thanh toán lượt xóa.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lớp vôi cũ lại được phủ, mảnh chữ chưa có ai ghi.",
+        "su": "Lớp vôi cũ lại được phủ, mảnh chữ chưa có ai ghi.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Ai trả tiền xóa cái tên ấy?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Sổ công ở {LOC02} ghi tiền cạo chữ riêng khỏi tiền lợp. Dấu người trả cũng xuất hiện trên trang gia phả vừa sửa. Người giữ sổ muốn cất biên nhận trước khi ngươi đọc hết.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Kiểm sổ công trình với phần gia phả",
+          "t": "Ngươi nối người trả tiền với dòng thừa kế từng cạnh tên trên tường.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận lịch xóa các vách khác",
+          "t": "Ngươi nhận được danh sách những vách người thuê muốn làm trắng về sau.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Chép biên nhận làm hai bản",
+          "t": "Ngươi giữ một bản cho nhà mình và dành một bản gửi người giữ phả.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Biên nhận khóa trong hòm, người quét vôi sang làm mặt ngoài.",
+        "su": "Biên nhận khóa trong hòm, người quét vôi sang làm mặt ngoài.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Người trên tường đã mất trước ngày bị buộc tội",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Bia ở {LOC14} ghi người mang tên ấy đã mất trước ngày bị kết tội. {NP18} còn biết chuyện đổi quyền trong họ. Cả hai nguồn đều có thể đối với sổ công.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So ngày mộ với sổ bị sửa",
+          "t": "Ngươi xác nhận họ bị xóa vì tranh phần, không thể dự việc bị quy.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin lời người kể và giữ kín tờ chứng",
+          "t": "Ngươi biết chữ là thật nhưng giấu lời vào túi cùng lịch việc của người thuê.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Gửi bản dập cho người ngoài họ",
+          "t": "Ngươi giao bản và lời ngày mộ cho người coi bia, giữ một giấy nhận.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lời kể ở lại với gánh hát, ngày khắc bia chưa được đối.",
+        "su": "Lời kể ở lại với gánh hát, ngày khắc bia chưa được đối.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Đặt lại tên hay quét vôi phủ kín?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Vách {LOC02} đã cạo tới nền. Người thuê giữ tiền cho lượt xóa tiếp theo. Nhà ngươi đã tìm được việc khác nếu quyết định đặt lại chữ và trả lưỡi cạo.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Viết lại tên và chỉ nơi có thể tra chứng cứ",
+          "t": "Ngươi đặt lại tên và ghi nơi xem bia, sổ công trình, để người qua tự tra.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Xóa tiếp rồi nhận hợp đồng",
+          "t": "Ngươi che phần chữ đã biết là thật và nhận lịch của những vách sau.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2",
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Gửi mẫu nơi thứ hai và đổi việc",
+          "t": "Ngươi gửi mảnh chữ cho người giữ phả, nhận việc khác để nuôi nhà.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Giữ giàn cho người xem vách",
+          "t": "Ngươi kéo dài ca nghỉ để người qua nhìn được chân chữ trước khi phủ.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lớp vôi phủ thêm, người đi ngang chỉ thấy một mảng trắng.",
+        "su": "Lớp vôi phủ thêm, người đi ngang chỉ thấy một mảng trắng.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Người qua đường còn đọc được gì?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Dân ở {LOC02} đến xem bức tường khi giàn sắp dỡ. Chủ việc hỏi có thể phủ luôn vách sau không. Trong túi ngươi còn giấy nhận việc mới và nơi cất các bản chứng.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đặt tường làm nơi nhớ tên",
+          "t": "Ngươi để nguyên rìa lớp vôi, treo bản ghi nguồn cạnh chữ vừa đặt lại.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ mạng người thuê xóa dấu",
+          "t": "Ngươi bỏ mẫu thật khỏi sổ công trình và nhận tiền cho bức tường tiếp.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Rời nghề và giữ đường tra hai nơi",
+          "t": "Ngươi trả lưỡi cạo, mang giấy nhận tới nhà mới và giữ tên hai chỗ cất.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Giàn được dỡ, người qua tự tìm dấu vôi dưới trời sáng.",
+        "su": "Giàn được dỡ, người qua tự tìm dấu vôi dưới trời sáng.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Bức tường biết nói",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người đi ngang đọc được tên cùng nơi giữ sổ công trình và ngày mộ. Một người đưa tay theo rìa vôi để nghe thợ chỉ lớp nào từng che chữ. Tên được giữ nguyên cả khi tường cần quét lại ở hai bên.",
+      "su": "Tường {LOC02} giữ chữ thật và chỉ nơi đối chứng.",
+      "dauVong": "vết rìa lớp vôi còn chỉ chỗ tên đã được đặt lại."
+    },
+    {
+      "id": "B",
+      "ten": "Tay trắng không dấu",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Người thuê giữ quyền qua các bức vách và đưa thêm tiền cho tay giữ giàn. Có người tìm đúng căn nhà mà chỉ thấy mảng trắng, phải nghe lời gia quyến đọc tên từ trí nhớ. Sổ chấm công không còn bản dập.",
+      "su": "Tên bị xóa theo hợp đồng dù người thợ đã có chứng thật.",
+      "dauVong": "một người còn tìm bức tường trắng để đọc lại tên nhà."
+    },
+    {
+      "id": "C",
+      "ten": "Mảnh vữa mang đi",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Nhà ngươi sống bằng việc khác, còn hai giấy xác nhận cho thấy người tìm tên phải đi về hai hướng. Một bản dập nằm cùng bia, mảnh vữa nằm nơi khác. Họ có thể so hai nguồn ngay cả sau khi giàn đã dỡ.",
+      "su": "Chứng tường còn hai nơi sau khi nhà thợ đổi sinh kế.",
+      "dauVong": "mảnh vữa có nét chữ nằm trong hòm nhà khác."
+    }
+  ],
+  "ngoai": "Giàn được dỡ, người qua tự tìm dấu vôi dưới trời sáng."
+}

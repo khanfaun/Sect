@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "id": "OR15",
+  "loai": "xuat_than",
+  "ten": "Vở diễn không hạ màn",
+  "xuatThan": "hat",
+  "goiYDaiLo": [
+    "tinh_mong"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Người kéo màn đau tay",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "{NP18} gọi ngươi giúp một buổi diễn ở {LOC09}. Người kéo màn đau cổ tay nhưng vẫn buộc dây cho vở diễn hết. Trong xấp kịch bản cũ còn một trang bị xé sát mép.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đỡ đèn để người kéo màn nghỉ",
+          "t": "Ngươi làm hết lượt đèn và chia công với người kéo màn, hẹn giữ chỗ cho họ.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Lên sân thay một vai",
+          "t": "Ngươi hát thay đoạn người mất giọng, rồi ghi ai đã đỡ tiếng dưới màn.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Dọn sân rồi hỏi về trang rách",
+          "t": "Ngươi giúp hạ màn và hỏi người kéo dây ai từng cất phần trang bị xé.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Vở hạ màn, trang chót bị xé vẫn nằm thiếu trong tập.",
+        "su": "Vở hạ màn, trang chót bị xé vẫn nằm thiếu trong tập.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Vở hát kể một vụ bán quân lương",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Những mảnh giấy từ {LOC09} ghép được nửa trang kịch. Ở {LOC14}, một cựu binh nghe câu hát và nhận ra chuyến lương từng bị bán. Người ấy chỉ được tên thật nào đã bị đổi thành vai diễn.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối tên thật với người trở về",
+          "t": "Ngươi chép lời xác nhận diện cạnh trang ghép và tách tên thật khỏi vai hư cấu.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Dựng lại câu hát từ mảnh cũ",
+          "t": "Ngươi nối đủ trang nhưng đặt một dấu riêng ở câu không có ai nhận làm chứng.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tra dấu án ở kinh",
+          "t": "Ngươi xin {NP03} so dấu vụ bán lương và nhận một bản ghi nơi tra án.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mảnh trang được cất, chỉ còn người trở về nhớ chuyến lương.",
+        "su": "Mảnh trang được cất, chỉ còn người trở về nhớ chuyến lương.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Người cho mượn sân muốn sửa lời hát",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Các hộ ở {LOC09} chịu góp dựng sân. Người bảo trợ có gỗ tốt hơn, nhưng muốn đổi câu hát gọi tên kẻ bán lương. Người kéo màn chỉ mong đoàn còn chỗ ngủ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Nhận sân góp và chia bản cho hai người",
+          "t": "Ngươi giao bản thật cho người trở về và người coi sân, mỗi người tự cất một bản.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Ký bảo trợ và sửa câu bán lương",
+          "t": "Ngươi chép câu thuận ý người trả gỗ để nhận giấy chỉ đoàn ngươi được diễn vở.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Chọn một sân cho buổi cuối",
+          "t": "Ngươi nhận sân tạm đúng một tối để đoàn diễn nốt rồi chia tài sản.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hộ góp giữ lại gỗ, người bảo trợ cho đoàn mượn sân một tối.",
+        "su": "Hộ góp giữ lại gỗ, người bảo trợ cho đoàn mượn sân một tối.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Hát bản thật hay bản đã sửa?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Khán giả kê ghế bên sông {LOC09}. Người kéo màn đứng sau rèm, còn người bảo trợ ngồi sát lối lên sân. Tới đoạn cuối, đoàn phải chọn lời nào sẽ được hát trước mọi người.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Diễn nguyên lời có chứng",
+          "t": "Ngươi hát câu đã đối trước người nghe ở bến, còn người giữ bản đứng ngoài sân.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Hát lời đã sửa để được độc quyền diễn",
+          "t": "Ngươi đọc đúng câu đã đổi, người trả tiền đóng dấu độc quyền trên giấy diễn.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Diễn lần cuối và kê từng đạo cụ",
+          "t": "Ngươi báo buổi cuối, đợi khán giả ra rồi hỏi từng người sẽ đi đâu.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Đọc đoạn mở rồi trả sân",
+          "t": "Ngươi đọc phần mở đã tập, chia tiền vé cho người đứng sân trước khi dỡ ghế.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Đoàn hát đoạn mở rồi nghỉ, trang cuối vẫn không được diễn.",
+        "su": "Đoàn hát đoạn mở rồi nghỉ, trang cuối vẫn không được diễn.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ai mang chiếc đèn đi?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Ghế ở sân {LOC09} đã dỡ. Người kéo màn muốn biết đoàn còn lịch diễn hay sẽ chia tiền công và đạo cụ. Hai người giữ bản kịch thật vẫn đợi lời, cũng như người bảo trợ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giữ đoàn bằng tiền diễn và bản thật",
+          "t": "Đoàn nhận lịch mới từ hộ góp. Hai người giữ bản đọc lại lời đã diễn cho học nghề.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ quyền sân theo ấn kiểm",
+          "t": "Ngươi nhận tiền và giao lịch diễn qua bàn duyệt, giữ chỗ cho người kéo màn.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Chia đồ và ghi nơi đi",
+          "t": "Ngươi giao đèn cho người kéo màn, chia rèm và công theo sổ, ghi nơi từng người tới.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người kéo màn chia tiền còn lại, mỗi người tự mang đồ đã góp.",
+        "su": "Người kéo màn chia tiền còn lại, mỗi người tự mang đồ đã góp.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Khán giả nhớ tên",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Đoàn đi sang sân khác với lời hát đã được nghe công khai. Người trở về giữ một bản, người coi sân giữ bản kia. Khán giả nhớ câu chỉ chuyến lương và có thể hỏi từ tên trong câu tới giấy vụ án.",
+      "su": "Vở về chuyến lương được công diễn, bản thật giữ ở hai người độc lập.",
+      "dauVong": "một câu hát ở {LOC09} còn dẫn tới bản lời chứng về chuyến lương."
+    },
+    {
+      "id": "B",
+      "ten": "Sân khấu dưới ấn",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Tiền công đủ mua dây màn mới, nhưng câu nói về chuyến lương từ đó chỉ được hát theo bản duyệt. Người kéo màn không mất việc. Trên tờ kiểm, nét tẩy của ngươi còn cạnh dấu dành riêng quyền diễn.",
+      "su": "Đoàn nhận quyền diễn riêng sau khi sửa câu theo người bảo trợ.",
+      "dauVong": "bản kiểm duyệt còn nét thay câu của {ten} dưới dấu cấp sân."
+    },
+    {
+      "id": "C",
+      "ten": "Đêm diễn cuối",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Sau buổi diễn, người nhận đèn đánh dấu nơi mình tới trong sổ chấm công. Người mang rèm đi theo chuyến khác, nhưng ai cũng có phần đã nhận và chỗ để gửi thư. Chiếc đèn vẫn được châm khi có người cũ ghé.",
+      "su": "Đoàn giải tán sau buổi cuối và chia công, đồ, nơi đi theo sổ.",
+      "dauVong": "người từng kéo màn vẫn giữ đèn của buổi diễn cuối."
+    }
+  ],
+  "ngoai": "Người kéo màn chia tiền còn lại, mỗi người tự mang đồ đã góp."
+}
