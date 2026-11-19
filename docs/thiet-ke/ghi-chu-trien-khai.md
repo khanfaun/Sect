@@ -782,3 +782,5 @@ THỨ TỰ MỚI: Sửa-J → Sửa-K → Đ9 (bộ máy còn lại, nhập tuy�
 47. B: khi người chơi đưa đồ ra bán ở Ám Hội, được tự chọn danh sách vật muốn nhận (tên + số lượng) trước khi đấu; linh thạch là một lựa chọn trong danh sách nếu muốn.
 48. B: tạm dừng đồng hồ 10 giây khi người chơi đang mở phần Thương lượng (giới hạn vài giây, tránh lạm dụng).
 49. Túi đầy (NPC lẫn nhân vật chính): đồ nhận thêm vào "tạm giữ bên người" (ngoài các ô túi); sau 365 ngày không dọn chỗ để cất vào túi thì mất. Áp chung cho mọi nguồn nhận đồ (Ám Hội, đấu giá, nhặt, phần thưởng…), thống nhất với cơ chế gửi tại chỗ của Sửa-G (xem có nên gộp).
+50. Truy đuổi: TĂNG hạn truy lên vài năm tới cả chục năm (tùy loại địch, mạnh/thù sâu thì lâu hơn); chỉnh tần suất chặn cho hợp hạn dài (không bị chặn liên tục). Làm ở Sửa-L.
+51. A: bị chặn giữa đường xong thì đứng yên, người chơi tự bấm "Đi tiếp".
