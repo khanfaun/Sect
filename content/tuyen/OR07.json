@@ -75,13 +75,13 @@
         "noi": "LOC12",
         "vai": "NP08"
       },
-      "mo": "{NP08} tìm thấy dấu khâu trên cả bia {LOC04} và danh sách người trú ở {LOC12}. Danh sách còn ghi có người đến nhận đứa trẻ. Tên người ấy bị nhòe, nhưng dấu nhận vẫn còn.",
+      "mo": "Từ {LOC04}, {NP08} đi tới {LOC12} tra danh sách người trú. Tới nơi, người ấy nhờ ngươi so dấu nhận trên giấy với dấu khâu đã thấy trên bia. Giấy ghi từng có người đến nhận đứa trẻ. Tên đã nhòe, nhưng dấu vẫn còn.",
       "thayThe": "Tập chép bia có một mũi xéo giống vết trên áo trẻ. Mục lục ở {LOC12} chỉ tới danh sách trú cùng mùa, dưới mục người đến nhận còn một vệt mực nhòe.",
       "cach": [
         {
           "id": "cach_1",
           "l": "Đối chiếu bia và danh sách trú",
-          "t": "Ngươi chép dòng bia bên dòng trú, giữ lại dấu tới nhận dù chữ đã nhòe.",
+          "t": "Ngươi chép dòng trên bia cạnh dòng trong sổ trú. Tên đã nhòe, nhưng dấu của người tới nhận đứa trẻ vẫn đọc được.",
           "dau": [
             "moc_2_1"
           ]
@@ -129,7 +129,7 @@
         {
           "id": "cach_1",
           "l": "Dùng dấu khâu để tìm đứa trẻ được thả",
-          "t": "Ngươi tìm dấu chỉ xéo dưới dòng cạo. Phiếu kèm xác nhận đứa bé được thả nhờ đổi tên.",
+          "t": "Ngươi tìm thấy dấu chỉ xéo bên dưới dòng tên bị cạo. Tờ phiếu kẹp cùng sổ ghi đứa trẻ được thả sau khi đổi tên.",
           "dau": [
             "moc_3_1"
           ],

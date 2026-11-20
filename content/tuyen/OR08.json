@@ -202,7 +202,7 @@
         {
           "id": "cach_3",
           "l": "Thanh toán nợ rồi chuyển việc cho thợ",
-          "t": "Ngươi kiểm sổ và đổi phôi còn lại lấy phần trả nợ, đưa thợ đến chỗ đã nhận.",
+          "t": "Ngươi kiểm sổ rồi đổi số phôi còn lại lấy tiền trả nợ. Xong việc, ngươi đưa thợ tới những nơi đã nhận họ.",
           "dau": [
             "moc_4_3"
           ],
@@ -260,7 +260,7 @@
         {
           "id": "cach_2",
           "l": "Giao kiếm cho phe đã trả tiền ứng",
-          "t": "Ngươi giao đủ lô theo dấu đã nhận, đổi lấy kỳ mua sắt kế tiếp cho lò.",
+          "t": "Ngươi giao đủ lô kiếm theo giấy đã ký. Đổi lại, lò được mua tiếp một kỳ sắt.",
           "dau": [
             "moc_5_2"
           ],

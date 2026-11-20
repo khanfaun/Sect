@@ -242,7 +242,7 @@
         {
           "id": "dua_dan",
           "l": "Đưa các hộ chân trục ra ngoài đường mạch",
-          "t": "Ngươi men lối đã đo, đưa nhóm hộ sát chân trục tới thềm {LOC04}. Người giữ miếu đếm lại từng người, từ trẻ nhỏ tới người đi chậm, rồi mới hạ gánh nước.",
+          "t": "Ngươi theo đường đã đo, đưa các hộ dưới chân trục tới thềm {LOC04}. Người giữ miếu đếm đủ cả trẻ nhỏ lẫn người tới chậm rồi mới đặt gánh nước xuống.",
           "dau": [
             "da_so_tan"
           ],
@@ -315,7 +315,7 @@
         {
           "id": "niem_ho_so",
           "l": "Niêm trách nhiệm dưới ấn giữ trục",
-          "t": "Hết kỳ, trục vẫn sáng nhờ phần bình ngươi đã khóa sổ. Những người coi trận nhận lệnh đổi phiên từ tay ngươi. Ngươi niêm hồ sơ trách nhiệm và sổ nạp cũ dưới ấn mới.",
+          "t": "Đến hết kỳ, trục vẫn chạy bằng số bình ngươi đã giữ lại. Người coi trận chờ lệnh ngươi mới đổi phiên. Ngươi đóng ấn niêm cả sổ nạp cũ lẫn hồ sơ ghi ai chịu trách nhiệm.",
           "dau": [
             "da_giu_truc"
           ],
