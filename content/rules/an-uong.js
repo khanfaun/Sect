@@ -10,3 +10,12 @@ const AN={muc:{dam:{n:'Đạm bạc',bac:12,rg:-0.1},thuong:{n:'Thường',bac:2
   doi:{thieu:30,doi:60,la:150,kiet:300,canh:630,chet:660},rgDoi:-0.25,rgKiet:-0.5,hpLa:-0.15,hpKiet:-0.3,kietHp:0.005,
   nhip:{lk:0.5,tc:1/60,bq:1/3,sauBq:0.5},sauBqNgay:90,thang:30,
   quan:['tran','thanh','tutran','tuthanh','cho'],baoTu:4,baoNghi:90};
+// ---- Ăn uống bản mới (20/11, core2/75-an-moi.js): không tính theo ngày nữa ----
+// r.doi giờ là "độ đói" 0..chet: 0 no căng, 100 cạn bụng (thanh no = 100 - doi). No căng tới cạn mất thangNo tháng (phàm; tu sĩ chậm theo nhip).
+// Cạn bụng rồi thì còn chừng thangKiet tháng nữa là chết đói. Mốc doi dưới đây tính theo thang mới.
+// Một bữa ở quán/quê: no căng, giá = mức ăn (bac) × buaX. Ở quán/sơn môn: chỉ ăn khi doi >= anQuan.
+// Đồ ăn trong túi (mon: số tháng no) tự ăn khi doi >= anTu2: chọn món no lâu nhất mà không phí (lấp vừa chỗ trống);
+//   không món nào vừa mà đã đói quá nửa (doi >= doi.doi) thì ăn món nhỏ nhất. Hết đồ ăn khi đang đi mà đói quá nửa: dừng đường, báo.
+AN.doi={thieu:30,doi:50,la:70,kiet:100,canh:170,chet:200};
+Object.assign(AN,{thangNo:6,thangKiet:2,buaX:6,anQuan:30,anTu2:40,
+  mon:{banh_bao:{thang:0.5,bac:15},com_nam:{thang:1,bac:30},luong_kho:{thang:2,bac:60},thit_kho:{thang:3,bac:90},banh_chung:{thang:4,bac:120},gao_rang:{thang:6,bac:170}},monQty:5});

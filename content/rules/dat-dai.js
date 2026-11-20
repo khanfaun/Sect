@@ -97,8 +97,8 @@ const DAT={
     ct:{_:20000,khach_diem:40000,tra_lau:25000,tuu_lau:30000,bang_thuong:10000,thuong_cac:40000,tien_trang:60000,tap_hoa:15000,lai_buon:15000,
       phuong_thi:80000,quy_thi:60000,am_hoi:80000,doi_lt:60000,cam_do:30000,tram_dich:40000,loi_dai:50000,thao_lu:5000,nha_rieng:25000,tran_phap:20000},
     tran:{bq:0.5,tm:2,ngu:1}},
-  // thue: thuế đất trên ô của ngươi ở thôn trấn / thành (chợ, ẩn cư không thu). Mỗi ky tháng nộp ty[loại nơi] × giá đất gốc (trấn 900 xu, thành 4.000 xu một năm).
+  // thue: thuế đất trên ô của ngươi ở thôn trấn / thành (chợ, ẩn cư không thu). Mỗi ky tháng nộp ty[loại nơi] × giá đất gốc (trấn 450 xu, thành 1.600 xu một năm — dưới tiền thuê nhà cả năm, 20/11 giảm theo người dùng).
   //   Trả bạc, tu sĩ thiếu bạc trả linh thạch (như mua). Không trả được thì ghi nợ trên ô, danh tiếng khu thêm danh mỗi kỳ; có tiền thì tự trả nợ (xét mỗi ngày).
   //   Nợ quá noKy kỳ thì quan phủ ghi thành nợ thường (r.bac âm, hệ nợ Sửa-B: hạn, phạt…); không mất đất. Đang nợ thuế ở nơi nào thì không mua thêm đất ở đó.
   //   Chỉ thu trên đất mua trong kiếp này (ô ghi kiếp lúc mua; bản lưu cũ ghi kiếp hiện tại, kỳ đầu tính từ lúc xét).
-  thue:{ky:12,ty:{tran:0.03,thanh:0.05,tutran:0.03,tuthanh:0.05},danh:-3,noKy:3}};
+  thue:{ky:12,ty:{tran:0.015,thanh:0.02,tutran:0.015,tuthanh:0.02},danh:-3,noKy:3}};

@@ -36,8 +36,10 @@ function pickEvent(type,src){
   const sp=src!=='explore'?[]:EVS.filter(e=>e.spec&&srcOk(e,src)&&whenOk(e)&&(!type||!e.tg||e.tg.includes('*')||e.tg.includes(type))&&(r.evCount[e.id]||0)<2&&(!e.r||e.r.includes(rT()))&&!(e.once&&r.evCount[e.id])&&!r.evRecent.includes(e.id)&&e.cond&&e.cond(r));
   if(sp.length&&chance(.55))return pick(sp).id;
   let pool=EVS.filter(e=>evOk(e,type,src));
-  if(!pool.length)pool=EVS.filter(e=>evOk(e,null,src));
-  if(!pool.length)pool=EVS.filter(e=>!e.spec&&!e.once&&srcOk(e,src)&&(!e.r||e.r.includes(rT())));
+  // hết cảnh mới: chỉ nới lịch sử gặp (gặp gần đây, quá hai lần), vẫn giữ nơi, buổi, mùa, cảnh giới, điều kiện riêng; không còn gì thì không có cảnh
+  if(!pool.length)pool=EVS.filter(e=>{if(e.spec||!srcOk(e,src)||!whenOk(e))return false;if(e.r&&!e.r.includes(rT()))return false;
+    if(type&&e.tg&&!e.tg.includes('*')&&!e.tg.includes(type))return false;if(e.once&&r.evCount[e.id])return false;if(e.cond&&!e.cond(r))return false;return true;});
+  if(!pool.length)dbg('ev.rong',{type,src});
   if(!pool.length)return null;
   return wpick(pool,e=>(e.w||1)*((e.tg&&e.tg.includes(type))?2:1)/(1+(r.evCount[e.id]||0)*2)).id;
 }

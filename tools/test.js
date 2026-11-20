@@ -29,6 +29,17 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // GPT đợt bảy, báo cáo logic: sự kiện giữ điều kiện nơi; tin đồn nhắc nơi có thật; giá trạm dịch theo nguồn chuẩn; thuế đất dưới tiền thuê nhà
+  sua_logic7() {
+    fresh();
+    ok(run("(()=>{const r=G.run;const keep=EVS.slice();try{EVS.length=0;EVS.push({id:'t_chi_song',tg:['song'],w:1});EVMAP.t_chi_song=EVS[0];return pickEvent('nui','explore')===null;}finally{EVS.length=0;for(const e of keep)EVS.push(e);delete EVMAP.t_chi_song;}})()"), 'không có cảnh hợp nơi: không lấy cảnh của nơi khác');
+    ok(run("(()=>{const r=G.run;const keep=EVS.slice();try{EVS.length=0;EVS.push({id:'t_nui',tg:['nui'],w:1});EVMAP.t_nui=EVS[0];r.evRecent.push('t_nui');return pickEvent('nui','explore')===null;}finally{EVS.length=0;for(const e of keep)EVS.push(e);delete EVMAP.t_nui;r.evRecent.pop();}})()"), 'cảnh hợp nơi vừa gặp: không lặp ngay, cũng không mượn cảnh nơi khác');
+    ok(run("(()=>{const names=new Set(W().regions.flatMap(R=>R.nodes).map(n=>n.name));for(let i=0;i<30;i++)if(!names.has(rumorPl()))return false;return true;})()"), 'tin đồn chỉ nhắc nơi có thật trên bản đồ');
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isTownT(n.type)&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()");
+    ok(run("(()=>{const n=curNode();const L=tramStock(n);const v=L.find(x=>x.cid);if(!v)return true;const p0=CAT.byId[v.cid].p;CAT.byId[v.cid].p=p0+7;const ok=tramStock(n).find(x=>x.cid===v.cid).p===p0+7;CAT.byId[v.cid].p=p0;return ok;})()"), 'đổi giá danh mục: trạm dịch đổi theo (cả hàng đã có sẵn)');
+    ok(run("(()=>{const n=curNode();const L=tramStock(n);const i=L.findIndex(x=>!x.cid);if(i<0)return true;const v=L[i];G.run.realm=4;G.run.st=1e7;const c=vehRent(v),s0=G.run.st;vehTake(i,'rent');return s0-G.run.st===c;})()"), 'thuê ở trạm: trừ đúng giá hiện');
+    ok(run("DAT.thue.ty.thanh*DAT.mua.gia.thanh")<run("NHA.thue.thanh*12")&&run("DAT.thue.ty.tran*DAT.mua.gia.tran")<run("NHA.thue.tran*12"), 'thuế đất một năm thấp hơn tiền thuê nhà một năm');
+  },
   // GPT đợt bảy: chữ Hoàng quốc và loại nơi mới
   noi_chu() {
     fresh();
@@ -1836,47 +1847,48 @@ const TESTS = {
     const wild="(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&!n.dp);G.run.at=n.id;G.run.scene=null;G.run.moving=null;G.run.bac=0;G.run.st=0;G.run.qitems=[];G.run.anAcc=0;G.run.doi=0;G.run.hp=S().maxHp;})()";
     const wild0=wild;const fr=()=>{fresh(wild0);run('FEAT.an=1');};
     fr();ok(run("needFood(G.run)"), 'phàm nhân phải ăn');
-    // Sửa lỗi đói: thang cũ chết ở ngày 15 → nay thieu 30 / doi 60 / la 150 / kiet 300 / canh 630 / chết 660 ngày
-    run("for(let i=0;i<14;i++)advanceTime(24)");ok(!!run("G.run")&&run("G.run.doi")===14&&run("anState()")==='no', '14 ngày không ăn: còn sống, mới thiếu ăn ('+run("G.run&&G.run.doi")+')');
-    ok(run("NK.count('an.doi')")===14&&run("G.run.no")<100, 'đếm từng ngày thiếu ăn');
-    run("advanceTime(46*24)");ok(run("anState()")==='doi'&&run("anRgMul()")<1, '60 ngày: đói, hồi phục chậm');
-    run("advanceTime(90*24)");ok(run("anState()")==='la'&&run("S().maxHp")<run("(()=>{const d=G.run.doi;G.run.doi=0;const m=S().maxHp;G.run.doi=d;return m})()"), '150 ngày: đói lả, khí huyết tối đa giảm');
-    run("advanceTime(509*24)");ok(!!run("G.run")&&run("G.run.doi")===659&&run("anState()")==='kiet', '659 ngày: kiệt sức nhưng còn sống');
-    run("advanceTime(24)");ok(!run("G.run")&&run("G.over&&G.over.cause")==='doi'&&run("G.over.title")==='Chết đói', 'ngày 660: chết đói');
-    fr();run("G.run.pham=0;G.run.realm=1");run("for(let i=0;i<100;i++)advanceTime(24)");ok(!!run("G.run")&&run("G.run.doi")<=2&&run("anState()")==='tich', 'Trúc Cơ trôi 100 ngày: đói rất chậm (thiếu '+run("G.run.doi")+' bữa), vẫn tịch cốc');
-    fr();run("G.run.qitems=['luong_kho'];advanceTime(90*24)");ok(run("G.run.doi")===0&&!run("G.run.qitems.includes('luong_kho')"), 'một gói lương khô đủ ba tháng (90 ngày)');
-    run("advanceTime(24)");ok(run("G.run.doi")===1, 'hết lương khô thì đói');
-    fr();run("G.run.pham=0;G.run.realm=0;advanceTime(4*24)");ok(run("G.run.doi")===2, 'Luyện Khí ăn nửa phần: bốn ngày đói hai ('+run("G.run.doi")+')');
-    fr();run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.bac=100;G.run.anMuc='thuong'})();advanceTime(3*24)");
-    ok(run("G.run.doi")===0&&run("G.run.bac")===100-3*run("anCost(G.run)"), 'ở thành có bạc: tự mua cơm theo giá thật mỗi ngày ('+run("G.run.bac")+')');
-    // Sửa-B: bỏ cơm nhà (người dùng chốt câu 10) — ở quê không tiền thì mua chịu tới mức NO.chiu, hết chịu thì đói
-    fr();run("FEAT.no=1;G.run.at=G.run.queAt;G.run.noTra=null;G.run.origin='nong';G.run.family=[{qh:'me',song:1}];advanceTime(20*24)");ok(run("G.run.doi")===0&&run("G.run.bac")===-20*run("anCost(G.run)"), 'ở quê không tiền: mua chịu cơm, còn nợ '+run("fmtBac(G.run.bac)"));
-    run("for(let i=0;i<11&&!G.run.doi;i++)advanceTime(24)");ok(run("G.run.doi")===1&&run("G.run.bac")>=-600&&run("G.run.bac-anCost(G.run)")<-600, 'hết mức chịu 600 xu: đói ('+run("G.run.doi")+')');run("FEAT.no=0");
+    // Ăn uống bản mới: no căng đủ chừng sáu tháng, cạn bụng thì còn chừng hai tháng nữa là chết đói
+    run("advanceTime(90*24)");ok(!!run("G.run")&&run("anState()")==='doi'&&run("anRgMul()")<1, 'ba tháng không ăn: đói quá nửa, hồi phục chậm ('+Math.round(run("G.run.doi"))+')');
+    run("advanceTime(91*24)");ok(!!run("G.run")&&run("anState()")==='kiet'&&run("G.run.no")===0, 'sáu tháng: cạn bụng, kiệt sức nhưng còn sống');
+    run("advanceTime(50*24)");ok(!!run("G.run"), 'cạn bụng thêm gần hai tháng: vẫn sống');
+    run("advanceTime(15*24)");ok(!run("G.run")&&run("G.over&&G.over.cause")==='doi'&&run("G.over.title")==='Chết đói', 'quá hai tháng cạn bụng: chết đói');
+    fr();run("G.run.pham=0;G.run.realm=1");run("advanceTime(100*24)");ok(!!run("G.run")&&run("anState()")==='tich', 'Trúc Cơ trôi 100 ngày: vẫn tịch cốc');
+    // tự ăn đồ trong túi: món no lâu nhất mà không phí
+    const cnt=id=>run(`G.run.qitems.filter(x=>x==='${id}').length`);
+    fr();run("G.run.qitems=['gao_rang','com_nam','com_nam','com_nam','banh_bao','banh_bao','banh_bao'];G.run.doi=70;advanceTime(24)");
+    ok(cnt('gao_rang')===1&&cnt('com_nam')===1&&cnt('banh_bao')===3, 'đói 70: ăn cơm nắm (vừa chỗ trống), không phí bao gạo, không gặm bánh bao lẻ');
+    run("G.run.qitems=['gao_rang','banh_bao','banh_bao'];G.run.doi=45;advanceTime(24)");ok(cnt('banh_bao')===1&&cnt('gao_rang')===1, 'đói ít: ăn món nhỏ vừa khít (tới khi bụng đủ), giữ món lớn');
+    run("G.run.qitems=['gao_rang'];G.run.doi=45;advanceTime(24)");ok(cnt('gao_rang')===1, 'chưa tới nửa: không ăn món quá lớn');
+    run("G.run.doi=55;advanceTime(24)");ok(cnt('gao_rang')===0&&run("G.run.doi")===0, 'quá nửa mà chỉ còn món lớn: ăn');
+    fr();run("G.run.pham=0;G.run.realm=0;advanceTime(60*24)");ok(Math.abs(run("G.run.doi")-100/6)<1, 'Luyện Khí đói nửa nhịp ('+run("G.run.doi").toFixed(1)+')');
+    fr();run("G.run.pham=0;G.run.realm=0;G.run._inBq=1;advanceTime(90*24);G.run._inBq=0");ok(Math.abs(run("G.run.doi")-100/36*3)<1, 'Luyện Khí bế quan: đói chậm ×1/3');
+    // quán, quê
+    fr();run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.bac=1000;G.run.anMuc='thuong';G.run.doi=35})();advanceTime(24)");
+    ok(run("G.run.doi")===0&&run("G.run.bac")===1000-run("anCost(G.run)*AN.buaX"), 'ở thành, bụng vơi: ăn một bữa no căng ('+run("anCost(G.run)*AN.buaX")+' xu)');
+    run("advanceTime(24)");ok(run("G.run.bac")===1000-run("anCost(G.run)*AN.buaX"), 'còn no: không ăn thêm');
+    fr();run("FEAT.no=1;G.run.at=G.run.queAt;G.run.noTra=null;G.run.origin='nong';G.run.family=[{qh:'me',song:1}];G.run.doi=35;advanceTime(24)");ok(run("G.run.doi")===0&&run("G.run.bac")===-run("anCost(G.run)*AN.buaX"), 'ở quê không tiền: mua chịu một bữa');run("FEAT.no=0");
     fr();const qa=run("G.run.queAt");run("delete G.run._anV1;delete G.run.no;delete G.run.anTu;delete G.run.queAt;run2()");ok(run("G.run.no")===100&&run("G.run.anTu")===1, 'bản lưu cũ: no đủ, tự lo cơm');
     ok(run("G.run.queAt")===qa, 'bản lưu cũ: tìm lại nút quê theo tên');
-    fr();run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.bac=1000;G.run.anMuc='thuong'})();advanceTime(24)");
-    ok(run("G.run.bac")===1000-run("anCost(G.run)")*30&&run("G.run.anCov")===29, 'đủ tiền: mua lương thực cả tháng ('+run("anCost(G.run)*30")+' xu, thường là 600)');
-    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&!n.dp);G.run.at=n.id;})();advanceTime(29*24)");ok(run("G.run.doi")===0&&run("G.run.anCov")===0, 'mang lương thực tháng theo người: 29 ngày ngoài hoang không đói');
-    fr();run("G.run.pham=0;G.run.realm=0;G.run._inBq=1;advanceTime(30*24);G.run._inBq=0");ok(run("G.run.doi")===5, 'Luyện Khí bế quan: đói chậm ×1/3 (30 ngày thiếu '+run("G.run.doi")+')');
-    fr();run("G.run.pham=0;G.run.realm=0;G.run.anCham=W().t+90*HD;advanceTime(30*24)");ok(run("G.run.doi")===7, 'sau bế quan: đói chậm ×1/2 ('+run("G.run.doi")+')');
-    fr();run("delete G.run._anV2;G.run.doi=200;run2()");ok(run("G.run.doi")===0, 'bản lưu cũ đang đói: nới về no');
+    fr();run("delete G.run._anV3;G.run.doi=500;G.run.anCov=20;run2()");ok(run("G.run.doi")===0&&run("G.run.anCov")===0, 'bản lưu thang ngày cũ: về no căng');
     fr();run("G.run.anAcc=0;advanceTime(800*24)");ok(!run("G.run")&&run("G.over.cause")==='doi', 'nhảy dài 800 ngày không ăn: chết đói, không treo');
-    // báo đói thưa: mốc nhẹ (thiếu/đói/lả) không báo; mốc nặng (kiệt, sắp chết) mỗi mốc một lần; có khoảng nghỉ
-    fr();run("G.run.doi=29;G.run.anBao=0;advanceTime(24);G.run.doi=59;advanceTime(24);G.run.doi=149;advanceTime(24)");ok(run("NK.count('an.bao')")===0&&run("G.run.anBao")===3, 'mốc nhẹ (thiếu, đói, lả): không báo');
-    run("G.run.doi=299;advanceTime(24)");ok(run("NK.count('an.bao')")===1&&run("G.run.anBao")===4, 'kiệt sức: báo một lần');
-    run("for(let i=0;i<20;i++)advanceTime(24)");ok(run("NK.count('an.bao')")===1, 'kiệt kéo dài: không báo lặp');
-    run("(()=>{const r=G.run;r.moving={path:[r.at,neighbors(r.at)[0]],seg:0,prog:0};r.anCov=1;advanceTime(24);r.doi=299;advanceTime(24);})()");
-    ok(run("G.run.doi")===300&&run("NK.count('an.bao')")===1, 'đang đi đường: ăn rồi đói lại không báo lặp');
-    run("(()=>{const r=G.run;r.moving=null;r.anCov=1;advanceTime(24);r.doi=299;advanceTime(24);})()");ok(run("NK.count('an.bao')")===1&&run("NK.count('an.baoNghi')")===1, 'ăn rồi đói lại ngay: trong khoảng nghỉ thì không báo');
-    run("(()=>{const r=G.run;r.anCov=1;advanceTime(24);r.anBaoT=W().t-(AN.baoNghi+1)*HD;r.doi=299;advanceTime(24);})()");ok(run("NK.count('an.bao')")===2, 'qua khoảng nghỉ: báo lại');
-    run("G.run.doi=629;advanceTime(24)");ok(run("NK.count('an.bao')")===3&&run("G.run.anBao")===5, 'sắp chết đói: luôn báo');
-    fr();run("delete G.run.anBao;delete G.run.anBaoT;G.run.doi=300;advanceTime(24)");ok(run("NK.count('an.bao')")===1, 'bản lưu cũ không có anBao: vẫn chạy');
+    // báo đói thưa: mốc nhẹ không báo; kiệt, sắp chết mỗi mốc một lần
+    fr();run("G.run.doi=49;advanceTime(24);G.run.doi=69.9;advanceTime(24)");ok(run("NK.count('an.bao')")===0&&run("G.run.anBao")===3, 'mốc nhẹ (thiếu, đói, lả): không báo');
+    run("G.run.doi=99.9;advanceTime(24)");ok(run("NK.count('an.bao')")===1&&run("G.run.anBao")===4, 'kiệt sức: báo một lần');
+    run("advanceTime(20*24)");ok(run("NK.count('an.bao')")===1, 'kiệt kéo dài: không báo lặp');
+    run("G.run.doi=169.9;advanceTime(24)");ok(run("NK.count('an.bao')")===2&&run("G.run.anBao")===5, 'sắp chết đói: luôn báo');
+    // hết đồ ăn giữa đường, đói quá nửa: dừng, hiện hộp báo
+    fr();run("(()=>{const r=G.run;r.moving={path:[r.at,neighbors(r.at)[0]],seg:0,prog:0.3};r.doi=49.8;advanceTime(24);})()");
+    ok(run("NK.count('an.dung')")===1&&run("G.run.halt")===true&&run("G.run.scene&&G.run.scene.ev")==='an_dung', 'hết đồ ăn khi đang đi, đói quá nửa: dừng lại, báo phải kiếm cái ăn');
+    run("G.run.scene=null;advanceTime(24)");ok(run("NK.count('an.dung')")===1, 'không báo lặp trong cùng cơn đói');
+    fr();run("(()=>{const r=G.run;r.qitems=['luong_kho'];r.moving={path:[r.at,neighbors(r.at)[0]],seg:0,prog:0.3};r.doi=49.8;advanceTime(24);})()");
+    ok(run("NK.count('an.dung')")===0&&run("G.run.doi")<50, 'còn đồ ăn: tự ăn, đi tiếp');
+    ok(run("shopExtra.length")>=0&&(()=>{const L=run("(()=>{const it=[];shopExtra(it,curNode());return it.filter(x=>AN.mon[x.id]).length})()");return L===6;})(), 'tạp hóa bán đủ sáu món ăn');
     // trước khi lên đường: ước lương thực, nguy cơ chết đói cao thì hỏi lại
     fr();const far=run(`(()=>{const r=G.run;let best=null;for(const R of W().regions)for(const n of R.nodes){if(n.id===r.at)continue;const p=findPath(r.at,n.id);if(!p)continue;const d=travelHours(p)/24;if(d>=15&&d<=80&&(!best||d<best[1]))best=[n.id,d];}return best;})()`);
     ok(!!far, 'có nơi xa 15–80 ngày đường ('+(far&&Math.round(far[1]))+')');
-    if(far){run("G.run.doi=640;G.run.qitems=[];G.run.anCov=0;G.run.anLk=0");ok(!!run(`anTripRisk(${far[0]})`)&&/chết đói/.test(run(`anTripRisk(${far[0]}).t`)), 'đói lâu, không lương thực, đường xa: cảnh báo');
-      run("G.run.qitems=['luong_kho']");ok(!run(`anTripRisk(${far[0]})`), 'có một gói lương khô: không chặn');
-      run("G.run.qitems=[];G.run.doi=0");ok(!run(`anTripRisk(${far[0]})`), 'chưa đói: không chặn');}
+    if(far){run("G.run.doi=160;G.run.qitems=[]");ok(!!run(`anTripRisk(${far[0]})`)&&/chết đói/.test(run(`anTripRisk(${far[0]}).t`)), 'đã cạn bụng, không đồ ăn, đường xa: cảnh báo chết đói');
+      run("G.run.qitems=['gao_rang']");ok(!run(`anTripRisk(${far[0]})`), 'có bao gạo rang: không chặn');
+      run("G.run.qitems=[];G.run.doi=0");ok(!run(`anTripRisk(${far[0]})`), 'đang no: không chặn');}
   },
   // Sửa lỗi đói: kiếp mới khốn khó đi bộ nhiều chặng (mỗi chặng hàng chục ngày) và ở hoang vài tháng không ăn vẫn sống, có cảnh báo
   doi_dai() {
@@ -1886,8 +1898,7 @@ const TESTS = {
     ok(!!run("G.run")&&run("G.run.doi")<run("AN.doi.chet"), 'đi bộ ba chặng ('+legs.join(', ')+' ngày) không tiền: còn sống');
     fresh("FEAT.an=1;"+"(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&!n.dp);G.run.at=n.id;G.run.bac=0;G.run.qitems=[];G.run.anCov=0})()");
     run("for(let i=0;i<160;i++)advanceTime(24)");ok(!!run("G.run")&&run("anState()")==='la', '5 tháng rưỡi ở hoang không ăn: sống, đói lả');
-    ok(run("NK.count('an.doi')")===160, 'mỗi ngày thiếu ăn đều ghi');
-    run("G.run.qitems=['luong_kho'];advanceTime(24)");ok(run("G.run.doi")===0, 'ăn được một bữa thì hết đói');
+    run("G.run.qitems=['gao_rang'];advanceTime(24)");ok(run("G.run.doi")===0, 'có đồ ăn no lâu thì hết đói');
     // gặp chuyện dọc đường chỉ còn khoảng một nửa (ROAD_MUL)
     fresh();const rb=run(`(()=>{const r=G.run;const a=r.at,b=neighbors(a)[0];const se=startEvent,en=encounter,pl=r.place;let ev=0;startEvent=()=>{ev++;r.scene={type:'thu'};return true;};encounter=()=>{ev++;r.scene={type:'thu'};};
       NK.clear();try{for(let i=0;i<1000;i++){r.scene=null;roadRoll(a,b);}}finally{startEvent=se;encounter=en;r.scene=null;r.place=pl;}return NK.count('road.bo');})()`);
@@ -2038,7 +2049,7 @@ const TESTS = {
     // mỗi nghề làm được một việc ở nơi hợp
     const cases=[['nong','tran','dan','dong'],['ngu','song','cau',null],['thuong','tran','ganh',null],['vo_gia','tran','hanh_hiep',null],['y','thanh','boc_thuoc',null]];
     for(const [m,t,a,mua] of cases){
-      run(`(()=>{G.run.scene=null;G.run.lamNgay=null;G.run.paths={};G.run.base.ngo=20;voOf(G.run).bac=1;${mua?`let k=0;while(seasonOf(W().t)!=='${mua}'&&k++<400)W().t+=HD;`:''}const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='${t}'&&n.state!=='ruin');G.run.at=n.id;openPlace(n.id);})()`);
+      run(`(()=>{G.run.scene=null;G.run.lamNgay=null;G.run.paths={};G.run.base.ngo=20;voOf(G.run).bac=1;${mua?`let k=0;while(seasonOf(W().t)!=='${mua}'&&k++<400)W().t+=HD;`:''}const A=W().regions.flatMap(R=>R.nodes).filter(n=>n.state!=='ruin');const n=A.find(n=>n.type==='${t}')||A.find(n=>vtList(n).some(x=>x.id==='ng:${m}:${a}'));G.run.at=n.id;openPlace(n.id);})()`);
       const why=run(`(vtList(nodeById(G.run.at)).find(x=>x.id==='ng:${m}:${a}')||{why:'không có'}).why`);
       ok(!why&&run(`vtDo('ng:${m}:${a}')`)&&run(`G.run.paths.${m}.xp`)>0, m+': làm '+a+' ở '+t+(why?' ('+why+')':''));
     }
@@ -2371,7 +2382,7 @@ const TESTS = {
     const i0=S.i;run("amTua(AM_HOI.tre[0]-5)");ok(run("G.run.scene.i")===i0&&!run("G.run.scene.lot.lead"), 'chưa tới lúc NPC ngẫm xong: chưa ai trả, chưa gõ búa');
     ok(run("amView().con")>=9&&run("amView().con")<=10, 'hộp thoại hiện số giây đếm ngược ('+run("amView().con")+')');
     // người chơi trả giá theo danh sách
-    run("G.run.lt=[0,0,500];G.run.st=5000");
+    run("G.run.lt=[500,500,500];G.run.st=5000"); // đủ mọi bậc linh thạch người bán có thể đòi
     const need0=run("amNeed(G.run.scene.q[G.run.scene.i],G.run.scene.lot)");
     ok(run("amAct('tra=0')")&&run("G.run.scene.lot.lead.who")==='me', 'trả bằng một món trong danh sách (đủ số lượng): ngươi dẫn');
     ok(run("G.run.scene.lot.lead.v")>=need0, 'mức trả không thấp hơn giá mở');
@@ -2402,7 +2413,7 @@ const TESTS = {
     run("AM_HOI.nhu=[0,0]");let g=0;while(run("G.run.scene.ph")==='chon'&&g++<3)run("amAct('khong')");
     if(run("G.run.scene.ph")==='lot'){
       const L=JSON.parse(run("JSON.stringify(G.run.scene.q[G.run.scene.i])"));const own=L.own;const p=S.ppl[own];
-      run("G.run.lt=[0,0,500];G.run.st=50000");const tot0=run("amLtTot()"),cua0=run(`amCua(G.run.scene,${own})`),nr=run("G.run.relics.length+G.run.pills.length+G.run.qitems.length");
+      run("G.run.lt=[500,500,500];G.run.st=50000");const tot0=run("amLtTot()"),cua0=run(`amCua(G.run.scene,${own})`),nr=run("G.run.relics.length+G.run.pills.length+G.run.qitems.length");
       run("(()=>{const sc=G.run.scene;const m=sc.lot.muon.findIndex(m=>m.key.startsWith('lt:'));amAct('tra='+m);})()");const ld=JSON.parse(run("JSON.stringify(G.run.scene.lot.lead)"));
       run("amTua(AM_HOI.dem-200)");ok(run("G.run.scene.i")===L.i||run("G.run.scene.q[G.run.scene.i].u")===L.u, 'chưa đủ mười giây: chưa gõ búa');
       run("amTua(400)");if(process.argv.includes('--log'))console.log(run("JSON.stringify(G.run.scene.log)"),tot0,run("amLtTot()"),cua0,run(`amCua(G.run.scene,${own})`));

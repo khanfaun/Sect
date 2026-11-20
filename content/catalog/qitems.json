@@ -816,9 +816,9 @@
   {
     "id": "luong_kho",
     "n": "Lương khô",
-    "i": "🍙",
-    "dang": "Vật dùng",
-    "use": "Tự ăn khi đói và không có quán: một gói đủ ba tháng (90 ngày).",
+    "i": "🍘",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng hai tháng.",
     "d": "Gói bánh khô và thịt muối bọc lá, cứng như gỗ nhưng no lâu.",
     "status": "active"
   },
@@ -991,6 +991,51 @@
     "dang": "Vật dùng",
     "use": "Dùng trong túi (Trúc Cơ trở lên): no bụng ba năm, không cần ăn.",
     "d": "Viên đan màu vàng đất, ngậm vào thấy vị ngũ cốc. Tu sĩ bế quan lâu ngày đều mang theo.",
+    "status": "active"
+  },
+  {
+    "id": "banh_bao",
+    "n": "Bánh bao",
+    "i": "🥟",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng nửa tháng.",
+    "d": "Cái bánh nóng gói giấy dầu, ăn dọc đường cho đỡ dạ.",
+    "status": "active"
+  },
+  {
+    "id": "com_nam",
+    "n": "Cơm nắm",
+    "i": "🍙",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng một tháng.",
+    "d": "Nắm cơm muối vừng gói lá chuối.",
+    "status": "active"
+  },
+  {
+    "id": "thit_kho",
+    "n": "Thịt khô",
+    "i": "🥓",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng ba tháng.",
+    "d": "Thịt hun khói treo bếp cả mùa, dai mà chắc dạ.",
+    "status": "active"
+  },
+  {
+    "id": "banh_chung",
+    "n": "Bánh chưng",
+    "i": "🟩",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng bốn tháng.",
+    "d": "Bánh gạo nếp nhân đậu thịt, gói lá dong, để lâu không hỏng.",
+    "status": "active"
+  },
+  {
+    "id": "gao_rang",
+    "n": "Bao gạo rang",
+    "i": "🌾",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng sáu tháng.",
+    "d": "Bao gạo rang kĩ trộn muối, nấu hay nhai sống đều được.",
     "status": "active"
   }
 ]

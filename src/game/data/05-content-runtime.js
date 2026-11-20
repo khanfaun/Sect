@@ -103,6 +103,8 @@ function contentRumor(){const r=G.run,w=W();const rv=pick(r.rivals);if(!rv)retur
 // Danh mục phương tiện viết sẵn tham gia kho trạm dịch đang hoạt động.
 {const _ts=tramStock;tramStock=function(n){const L=_ts(n);if(!n.tram.contentVersion){n.tram.contentVersion=1;
  const pool=CAT.mounts.filter(x=>x.realm<=rT()+1);for(const x of shuffle(pool.slice()).slice(0,2))L.push({k:x.magic?'kiem':'ngua',cid:x.id,n:x.n,m:x.m,p:x.p,realm:x.realm,minUserLevel:x.minUserLevel,magic:x.magic,tier:clamp(x.realm,0,4),ic:x.magic?'sword':'run',qty:1});L.sort((a,b)=>a.p-b.p);}
+ // giá luôn đọc lại từ nguồn chuẩn (danh mục cho món có cid, VEH_T cho món sinh theo loại/bậc), kể cả hàng đã lưu trong bản lưu
+ for(const v of L){if(v.cid&&CAT.byId[v.cid]&&CAT.byId[v.cid].p!=null)v.p=CAT.byId[v.cid].p;else if(!v.cid&&v.k&&v.tier!=null&&VEH_T.some(x=>x.k===v.k))v.p=vehMake(v.k,v.tier).p;}
  return L;};}
 {const _vt=vehTake;vehTake=function(i,mode){const sc=G.run&&G.run.scene;if(!sc||sc.type!=='place')return false;const v=tramStock(nodeById(sc.id))[i];if(v&&v.minUserLevel!=null&&plv()<v.minUserLevel)return false;return _vt(i,mode);};}
 {const _mo=mountOf;mountOf=function(){const x=_mo();return x&&x.minUserLevel!=null&&plv()<x.minUserLevel?null:x;};}

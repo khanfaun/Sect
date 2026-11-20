@@ -1,8 +1,12 @@
 // ---------------- THỜI GIAN & THẾ GIỚI ----------------
 function pushNews(t,quiet){const r=G.run;if(!r)return;if(TICK_OUT&&!quiet)TICK_OUT.push(t);r.news.push({a:Math.floor(r.age),t});if(r.news.length>40)r.news.shift();r.newsQ=(r.newsQ||[]);r.newsQ.push(t);if(r.newsQ.length>4)r.newsQ.shift();}
+// tin đồn chỉ nhắc nơi có thật (ưu tiên đại khu đang đứng); nghe xong thì biết tên nơi đó trên bản đồ. Không có nơi hợp thì nói chung chung.
+function rumorPl(){try{const r=G.run,w=W();const T=['nui','phe','hoang','song','thanh','tuthanh','como','ditich'];
+  const all=w.regions.flatMap(R=>R.nodes).filter(n=>T.includes(n.type)&&n.state!=='ruin');const gan=r?all.filter(n=>n.r===r.region):[];
+  const L=gan.length?gan:all;if(!L.length)return contentText('rumor.noiXa');const n=pick(L);if(typeof hearOf==='function')hearOf(n);return n.name;}catch(e){return contentText('rumor.noiXa');}}
 function rumorV(rv,extra){
   const w=G.meta.world, wr=w.rivals[rv.i];
-  return Object.assign({a:wr.ten,s:w.sects[wr.s].n,s2:pick(w.sects).n,pl:placeName(pick(['nui','phe','hoang','song','thanh'])),cg:REALM[rv.realm],dan:PILL[pick(['trucco','ngungkim','phaanh','hoathan'])].n},extra||{});
+  return Object.assign({a:wr.ten,s:w.sects[wr.s].n,s2:pick(w.sects).n,pl:rumorPl(),cg:REALM[rv.realm],dan:PILL[pick(['trucco','ngungkim','phaanh','hoathan'])].n},extra||{});
 }
 function worldTick(dy){
   const r=G.run,w=G.meta.world;if(!r)return;
