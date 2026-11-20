@@ -691,14 +691,14 @@ const TESTS = {
     await p.waitForTimeout(150);
     ok(await ev(p, () => G.run.scene&&G.run.scene.ev==='tna_chung'), 'nhân chứng: mở hộp lựa chọn');
     const kt = await ev(p, () => document.body.innerText);
-    ok(/Diệt khẩu/.test(kt) && /Mặc kệ/.test(kt), 'hộp nhân chứng hiện các lựa chọn');
+    ok(/Giết nhân chứng/.test(kt) && /Để hắn đi/.test(kt), 'hộp nhân chứng hiện các lựa chọn');
     await ev(p, () => {kyPick(3);G.run.scene=null;Object.assign(TNA,JSON.parse(TNA_UB));G.run.truy=null;openPlace(TN.id);render();});
     await p.waitForTimeout(150);
     ok(await ev(p, () => !!document.querySelector('[data-act="pact"][data-arg="quanphu"]')), 'hộp địa điểm có nút Quan phủ');
     await p.locator('[data-act="pact"][data-arg="quanphu"]').click();
     await p.waitForTimeout(150);
     const opts = await p.locator('[data-act="vopt"]').allInnerTexts();
-    ok(opts.length >= 3 && opts.some(x => /Nộp phạt/.test(x)) && opts.some(x => /Ngồi tù/.test(x)), 'mục Quan phủ: nộp phạt, làm công, ngồi tù ' + JSON.stringify(opts));
+    ok(opts.length >= 3 && opts.some(x => /Nộp .*tiền phạt/.test(x)) && opts.some(x => /Làm công/.test(x)) && opts.some(x => /Chịu giam/.test(x)), 'mục Quan phủ: nộp phạt, làm công, ngồi tù ' + JSON.stringify(opts));
     await ev(p, () => {G.run.bac=tnaE(TN.r).tien+1;render();});
     await p.locator('[data-act="vopt"][data-arg="nop"]').click();
     await p.waitForTimeout(150);

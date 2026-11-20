@@ -2993,8 +2993,9 @@ const TESTS = {
     // Nho tu: thiện cảm
     fresh(base+"hdAdd(30,0,'x');"+lv7('TU20'));ok(run("aggFx().nhoThuyet")===20&&run("favAdd('Người Thử',10)")===12&&run("favAdd('Người Thử',-10)")===-10, 'Nho tu: thiện cảm tăng thêm 20%, phần giảm giữ nguyên');
     // Thương tu: mua rẻ, bán được giá
-    fresh(base);run("G.run.realm=3;G.run.pills=[{id:Object.keys(PILL)[0],q:0}];SL0=sellList()[0].p;P0=price(100);"+lv7('TU22'));
-    ok(run("price(100)")<run("P0")&&run("sellList()[0].p")>run("SL0")&&run("aggFx().banP")===10, 'Thương tu: mua rẻ hơn, bán được giá hơn');
+    // so trong cùng một trạng thái (bật/tắt nghề), vì giá chợ còn đổi theo nơi và thời gian; dùng hàng đắt để làm tròn không nuốt mất 10%
+    fresh(base);run("G.run.realm=3;G.run.pills=[{id:Object.keys(PILL).reduce((a,b)=>(PILL[b].p||0)>(PILL[a].p||0)?b:a),q:0}];"+lv7('TU22')+"P1=price(1000);S1=sellList()[0].p;B1=aggFx().banP;tuArtOf('TU22').lv=0;P0=price(1000);S0=sellList()[0].p;B0=aggFx().banP||0;tuArtOf('TU22').lv=7;");
+    ok(run("P1")<run("P0")&&run("S1")>run("S0")&&run("B1")===10&&run("B0")===0, 'Thương tu: mua rẻ hơn, bán được giá hơn');
     // Cổ sư: giải cổ ít hỏng
     fresh(base);run(lv7('TU17')+"G._tuNoRui=0;TD_RUI=TU_CFG.rui;TU_CFG.rui=1;(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>['tran','dam'].includes(n.type)&&n.state!=='ruin');G.run.at=n.id})()");
     run("for(let i=0;i<20;i++){G.run.wounds=[];G.run.st=999;tuHd('TU17')};TU_CFG.rui=TD_RUI;G._tuNoRui=1");

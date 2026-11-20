@@ -1106,7 +1106,7 @@ Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời
 - Bài: `dl02_diet` (10 ý), `nghe_tu_duyen` (36 ý), cuối danh sách, đã thêm vào `test:rules`; COV_FN thêm `dmDl02`, `dmDietThieu`, `mrDuyenTick` (chưa chạy bot). Không đổi giao diện (hộp duyên dùng khung kỳ ngộ).
 
 ## Quy tắc giao agent (người dùng chốt 20/11)
-Tự chọn model cho từng agent (không dùng Fable). Mức nỗ lực: việc phức tạp nhất tối đa "cao"; việc không đơn giản "trung bình"; việc đơn giản "thấp". Chỉ đặt effort theo quy tắc này.
+Tự chọn model cho từng agent (không dùng Fable). Mức nỗ lực (cập nhật 20/11): tối đa "trung bình"; không dùng Opus mức cao; Sonnet mức cao được nhưng hạn chế; việc đơn giản "thấp".
 - Tiết kiệm token khi giao agent (người dùng dặn 20/11): ít agent hơn, gộp việc liên quan vào một agent; chỉ spawn khi việc đủ lớn; prompt gọn, chỉ đúng tệp/mục cần; không giao việc tôi làm trực tiếp rẻ hơn (sửa nhỏ, kiểm tra, commit); không giao lại việc đã có kết quả; không chạy kiểm cả bộ lặp lại nhiều lần.
 - Người dùng chốt: GPT tự thiết kế + viết sự kiện cho 3 pháp môn Lôi pháp, Huyễn thuật, Thôn phệ (gói đợt sáu). Gói đợt sáu soạn SAU khi xong 2 agent (nhập nội dung nghề tu, nộp phạt theo quận), gồm cả các khoá chữ mới.
 
@@ -1129,8 +1129,4 @@ Tự chọn model cho từng agent (không dùng Fable). Mức nỗ lực: việ
 - Bài `nghe_tu_sk` (test.js, cuối TESTS và `test:rules`; test-ui.js cuối). Sửa bài cũ: `hau_qua` so lời theo bản kể đang gặp; test-ui `nghe_tu_mr` đổi tên công pháp mới ("Bát Nhã Tâm Kinh"). Còn lỗi sẵn có (không do đợt này): `nghe_tu_duyen` "Thương tu: mua rẻ hơn, bán được giá hơn" chỉ hỏng khi chạy cả `test:rules` (chạy riêng đạt; hỏng cả ở 5aadcff).
 
 ## TRẠNG THÁI CUỐI NGÀY 20/11 (trước /compact)
-Kiểm cuối: build + content:check đạt. Còn lỗi cần sửa ở phiên sau:
-- test:rules `nghe_tu_duyen` "Thương tu: mua rẻ hơn, bán được giá hơn" (chỉ hỏng khi chạy cả bộ, có từ trước 5aadcff).
-- test-ui `truy_na`: "hộp nhân chứng hiện các lựa chọn", "mục Quan phủ: nộp phạt, làm công, ngồi tù" (bài cũ chưa theo chữ mới của GPT/quận: nhãn nay là "Nộp … tiền phạt", "Làm công chuộc án", "Chịu giam").
-- test-ui `truy`: "bị chặn giữa chặng đi dài", "hộp chặn đường có các lựa chọn []".
-Tiếp theo: sửa các lỗi trên → soạn gói GPT đợt sáu (viết lại ~34 khoá chữ mới: tna.hoan*, tna.fa*, tna.*F, dat.thue*, dat.*MuaCt, dm.dl02*, tumr.duyen*, tumr.dy.*; thiết kế + viết sự kiện cho Lôi pháp, Huyễn thuật, Thôn phệ ~8 sự kiện + 2 kết cục mỗi nghề).
+Phiên sau compact: đã sửa 3 lỗi (đều do bài kiểm: Thương tu so giá ở cùng trạng thái + hàng đắt; truy_na theo chữ mới của GPT; truy không còn hỏng). test:rules và test-ui đạt hết. Tiếp: gói GPT đợt sáu.
