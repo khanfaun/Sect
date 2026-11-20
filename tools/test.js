@@ -2930,6 +2930,81 @@ const TESTS = {
     run("(()=>{const c=W().dat[DT_T.id].o[2];c.thueK=99;c.thueT=W().t;G.run.datThueX=null;G.run.scene=null})();advanceTime(HD)");
     ok(run("G.run.bac")===1e5, 'đất ghi kiếp khác: không thu thuế đời này');
   },
+  // Đ10 còn dở: đại lộ DL02 "Diệt Thế Ma Đồ" kết tuyến → cưỡng mở Diệt Thế (thiếu: ba khu đất ma; đủ: END08)
+  dl02_diet() {
+    fresh("FEAT.mong=1;G.screen='map';G.run.gbXong=1;G.run.pham=0;G.run.realm=2;G.run.kiep=1");
+    run("DL_S=()=>{const T=tySt();T.dl=tyNew('DL02');return T.dl}");
+    ok(run("JSON.stringify(DM_DL.ket)")==='["A","B"]'&&run("TUYEN.DL02.ket.map(k=>k.id).join()")==='A,B,C', 'bảng DM_DL: kết A, B của DL02 động mạch sâu');
+    run("G.run.dietThieu=0;tyKet(DL_S(),'C')");ok(!run("G.run.dietThieu")&&run("NK.count('dm.dl02')")===0, 'kết C (dừng trước mạch sâu): không mở Diệt Thế');
+    run("tyKet(DL_S(),null)");ok(!run("G.run.dietThieu"), 'tuyến tự khép (ngoài người chơi): không mở');
+    const z0 = run("W().regions.flatMap(R0=>R0.nodes).filter(n=>n.state==='ma'||n.ma).length");
+    run("DL_D0=demDaiTang;DL_DN=0;demDaiTang=function(){DL_DN++;return DL_D0.apply(this,arguments)};tyKet(DL_S(),'A');demDaiTang=DL_D0");
+    ok(run("G.run.dietThieu")===1&&/src":"dl02/.test(run("NK.dump()"))&&run("DL_DN")===1, 'kết A thiếu điều kiện: ba khu đất ma, Đêm Dài +1, ghi nhật ký');
+    ok(run("G.run")&&!run("G.run.dlDiet")&&run("G.screen")==='map', 'thiếu điều kiện: đời vẫn tiếp, không kết');
+    run("NK.clear();tyKet(DL_S(),'B')");ok(run("NK.count('dm.dietThieu')")===0, 'mỗi kiếp một lần');
+    // đủ điều kiện NG04 → END08 ở lượt thời gian kế
+    run("G.run.dietThieu=0;G.meta.tri={TRI01:['a','b'],TRI02:['a','b'],TRI03:['a','b']};ngW().khoa={LOC05:1,LOC07:1};G.run.st=1500;G.run.hp=S().maxHp");
+    ok(run("dmDkOk(dmDk('NG04'))"), 'đủ ba tri thức, hai quyền khoá, linh thạch, khí huyết');
+    run("tyKet(DL_S(),'B')");ok(run("G.run.dlDiet")===1&&!run("G.run.dietThieu"), 'kết B đủ điều kiện: hẹn Diệt Thế');
+    run("G.run.scene={type:'kyngo'};advanceTime(1)");ok(run("G.run&&G.run.dlDiet")===1, 'đang ở hộp thoại: chờ');
+    run("G.run.scene=null;advanceTime(1)");ok(run("G.screen")==='ket'&&run("G.meta.ketHet.id")==='END08'&&!run("G.run")&&/src":"dl02/.test(run("NK.dump()")), 'lượt kế: Thế giới không còn người gọi tên (END08)');
+  },
+  // Đ11 còn dở: lối vào nghề theo duyên (khí vận / linh căn / xuất thân) và số cho hiệu ứng ngoài trận của nghề mở rộng
+  nghe_tu_duyen() {
+    const base="G._ngNoEv=1;G._tuNoRui=1;G.run.pham=0;G.run.root={id:'tap',els:['kim','moc'],q:'thuong'};G.run.rootKnown=1;G.run.st=9999;G.run.lifeAdj=500;lkTang=()=>9;G.screen='map';G.run.kv=[];G.run.ccFlag={};G.run.origin='nong';";
+    run("var dyLk=lkTang");
+    try {
+    fresh(base);
+    ok(Object.keys(JSON.parse(run("JSON.stringify(TU_DUYEN)"))).join()==='TU17,TU18,TU19,TU20,TU21,TU22,TU23,TU24,TU25', 'chín nghề mở rộng đều có lối vào theo duyên');
+    ok(!run("mrDuyen('TU19')")&&run("tuPhi('TU19',0)")===15, 'không duyên: bái học mất phí như cũ');
+    run("G.run.kv=['phat_tu']");ok(/Phật Tử/.test(run("mrDuyen('TU19')"))&&run("tuPhi('TU19',0)")===0, 'khí vận Phật Tử: duyên Phật tu, bái học không mất phí');
+    run("G.run.scene=null;ccMonth()");ok(run("G.run.scene&&G.run.scene.ev")==='tumr_duyen'&&run("G.run.tuDuyen.TU19")===1, 'mỗi tháng: hiện hộp "Duyên nghề"');
+    ok(/Phật tu/.test(run("G.run.scene.text")), 'hộp nói rõ nghề và duyên');
+    run("kyPick(0)");ok(run("G.run.tu.chinh")==='TU19'&&run("G.run.st")===9999&&run("NK.count('tumr.duyenHoc')")===1, 'theo duyên: tự ngộ Phật tu tại chỗ, không phí');
+    run("G.run.scene=null;ccMonth()");ok(!run("G.run.scene"), 'đã học: không hỏi lại');
+    // linh căn Cổ → Cổ sư (từ chối thì để sau, mỗi kiếp hỏi một lần)
+    fresh(base+"G.run.ccFlag={nuoi_co:1}");ok(/Linh Căn Cổ/.test(run("mrDuyen('TU17')")||''), 'Linh Căn Cổ: duyên Cổ sư');
+    run("G.run.scene=null;ccMonth();kyPick(1)");ok(!run("tuArtOf('TU17')")&&run("NK.count('tumr.duyenSau')")===1, 'để sau: chưa học');
+    run("G.run.scene=null;ccMonth()");ok(!run("G.run.scene"), 'mỗi kiếp một lần');
+    run("(()=>{const n=nodeById(tuNode('TU17'));G.run.at=n.id})()");ok(run("tuOpts(nodeById(G.run.at)).some(o=>o.id==='hoc:TU17'&&/có duyên/.test(o.l))"), 'ở nơi thầy: lựa chọn ghi "có duyên"');
+    // linh căn hệ Lôi, xuất thân con nhà buôn, Văn tâm
+    fresh(base+"G.run.root={id:'bien',els:['loi'],q:'thuong'}");ok(/Lôi/.test(run("mrDuyen('TU23')")||''), 'linh căn hệ Lôi: duyên Lôi pháp sư');
+    fresh(base+"G.run.origin='buon'");ok(!!run("mrDuyen('TU22')"), 'con nhà buôn có linh căn: duyên Thương tu');
+    fresh(base+"G.run.ccFlag={van_tam:1};hdAdd(0,40,'x')");ok(!!run("mrDuyen('TU20')"), 'Văn tâm: duyên Nho tu');
+    run("G.run.scene=null;ccMonth()");ok(!run("G.run.scene"), 'Nho tu vẫn cần lòng ngay: nghiêng tà thì không hiện');
+    ok(run("CAI_CAN.HAO_NHIEN.steps[0].okFx.flag")==='van_tam', 'cải căn Dưỡng Hạo Nhiên Khí để lại Văn tâm');
+    fresh(base+"G.run.pham=1");run("G.run.kv=['quy_nhan'];G.run.scene=null;ccMonth()");ok(!run("G.run.scene"), 'phàm nhân: chưa hiện');
+    fresh(base);run("G.run.tuDuyen=undefined;G.run.kv=['nhan_qua_dao'];G.run.scene=null;ccMonth()");ok(run("G.run.scene&&G.run.scene.ev")==='tumr_duyen', 'bản lưu cũ (không có tuDuyen): vẫn chạy');
+    // số cho hiệu ứng ngoài trận
+    const lv7 = id => `tuHoc('${id}',0);tuArtOf('${id}').lv=7;`;
+    fresh(base);run("G.run.realm=3;"+lv7('TU23'));ok(run("aggFx().loiKiep")===20&&run("aggFx().loiAm")===25, 'Lôi pháp: thiên lôi nhẹ hơn 20%, nơi âm khí yếu 25%');
+    run("startCombat({kiep:{n:3,waves:1,block:0,kind:'loi'}},{kind:'node'});DK_S=G.run.scene;DK_S.skipDodge=1;DK_M=mainUnit(DK_S);DK_K=DK_S.units.find(u=>u.kind==='kiep');DK_M.hp=DK_M.max=100000;DK_M.st={}");
+    const h0 = run("DK_M.hp");run("kiepHit(DK_S,DK_K,null)");const d1 = h0-run("DK_M.hp");
+    run("tuArtOf('TU23').lv=1;DK_M.hp=100000;kiepHit(DK_S,DK_K,null)");const d2 = 100000-run("DK_M.hp");
+    const rat = (d1/(0.18+0.035))/(d2/(0.18+0.07));ok(Math.abs(rat-0.8)<0.02&&run("NK.count('tumr.loiKiep')")===1, 'thiên lôi đánh nhẹ hơn 20% (tỉ lệ '+rat.toFixed(2)+')');
+    fresh(base);run(lv7('TU23')+"(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>n.type==='phe'||n.type==='ma');G.run.at=n.id})();startCombat({},{kind:'node'});G.run.scene.skipDodge=1");
+    run("var dS=G.run.scene,dM=mainUnit(dS),dF=alive(dS,'B')[0];dF.hp=dF.max=99999;dM.mp=dM.maxMp=9999;resolveSkill(dS,dM,SK.sk23a,1,[dF],1,'auto')");ok(run("NK.count('tumr.loiAm')")===1, 'Lôi pháp ở nơi âm khí: chiêu yếu đi');
+    // Thi tu: ban ngày ngoài trời xác luyện yếu
+    fresh(base);run("tuHoc('TU18',0);(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>!TU_MR.thiTrong.includes(n.type));G.run.at=n.id})();startCombat({},{kind:'node'});G.run.scene.skipDodge=1");
+    ok(run("aggFx().thiNgay")===30, 'Thi tu: ban ngày xác luyện yếu 30%');
+    run("var tS=G.run.scene,tM=mainUnit(tS);W().t=Math.floor(W().t/HD)*HD+2;resolveSkill(tS,tM,SK.sk18b,1,[],1,null);TD_N=fxmSum(tS,tM,'thi').atk");
+    run("W().t=Math.floor(W().t/HD)*HD+HD+12;resolveSkill(tS,tM,SK.sk18b,1,[],1,null);TD_D=fxmSum(tS,tM,'thi').atk");
+    ok(Math.abs(run("TD_D/TD_N")-0.7)<0.03&&run("NK.count('tumr.thiNgay')")===1, 'ban đêm đủ sức, ban ngày còn 70%');
+    // Nho tu: thiện cảm
+    fresh(base+"hdAdd(30,0,'x');"+lv7('TU20'));ok(run("aggFx().nhoThuyet")===20&&run("favAdd('Người Thử',10)")===12&&run("favAdd('Người Thử',-10)")===-10, 'Nho tu: thiện cảm tăng thêm 20%, phần giảm giữ nguyên');
+    // Thương tu: mua rẻ, bán được giá
+    fresh(base);run("G.run.pills=[{id:Object.keys(PILL)[0],q:0}];SL0=sellList()[0].p;P0=price(100);"+lv7('TU22'));
+    ok(run("price(100)")<run("P0")&&run("sellList()[0].p")>run("SL0")&&run("aggFx().banP")===10, 'Thương tu: mua rẻ hơn, bán được giá hơn');
+    // Cổ sư: giải cổ ít hỏng
+    fresh(base);run(lv7('TU17')+"G._tuNoRui=0;TD_RUI=TU_CFG.rui;TU_CFG.rui=1;(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>['tran','dam'].includes(n.type)&&n.state!=='ruin');G.run.at=n.id})()");
+    run("for(let i=0;i<20;i++){G.run.wounds=[];G.run.st=999;tuHd('TU17')};TU_CFG.rui=TD_RUI;G._tuNoRui=1");
+    const tha = run("NK.count('tumr.coGiai')");ok(tha>=4&&tha<=16, 'Cổ sư: giải cổ chắc tay hơn (thoát hỏng '+tha+'/20)');
+    // Thôn phệ: đã nuốt ở cảnh giới này thì đột phá khó hơn
+    fresh(base);run("G.run.realm=3;G.run.tamma=0;"+lv7('TU25'));const b0 = run("btRate([])");run("G.run.tuThonR=4");const b1 = run("btRate([])");
+    ok(run("aggFx().thonBt")===10&&b1<b0&&Math.abs(b1/b0-0.9)<0.02, 'Thôn phệ: đột phá ×0,9 sau khi nuốt tu vi ('+b0.toFixed(3)+'→'+b1.toFixed(3)+')');
+    run("G.run.tuThonR=3");ok(run("btRate([])")===b0, 'nuốt ở cảnh giới trước: không tính');
+    } finally { run("lkTang=dyLk;G._tuNoRui=0"); }
+  },
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });
     const out = (o.stdout || '') + (o.stderr || '');

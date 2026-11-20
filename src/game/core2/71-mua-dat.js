@@ -54,8 +54,10 @@ function datBan(n,i){const d=datOf(n);const c=d&&d.o[i];if(!c||!(c.chu&&c.chu.k=
   const no=c.thueNo||0,g=Math.max(0,datBanGia(n,c)-no);advanceTime(DAT.mua.h);if(!G.run)return {msg:[]};
   if(g)bacAdd(g,'dat.ban');c.chu={k:'dan'};['muaTu','muaCt','thueT','thueK','thueNo','thueKy'].forEach(k=>delete c[k]);dbg('dat.ban',{id:n.id,i,g,no});
   const m=contentText('dat.xongBan',[i+1]);log(m);return {msg:[m],ch:[bacChip(g)]};}
+// ô trống / bán lên đầu; mua ô có công trình xếp cuối (sau phá / xây) cho đỡ rối
 {const _o=datOpts;datOpts=function(n){let L=_o.apply(this,arguments);const M=datMuaOpts(n);if(!M.length)return L;L=L.filter(o=>o.id!=='xem');
-  return M.concat(L);};}
+  const d=datOf(n),ct=o=>{const p=o.id.split(':');return p[0]==='mua'&&!!d.o[+p[1]].ct;};
+  return M.filter(o=>!ct(o)).concat(L,M.filter(ct));};}
 {const _d=datDo;datDo=function(id){const p=String(id||'').split(':');if(p[0]!=='mua'&&p[0]!=='ban')return _d.apply(this,arguments);
   const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);const o=datOpts(n).find(x=>x.id===id);if(!o||o.no)return false;
   const res=p[0]==='mua'?datMua(n,+p[1]):datBan(n,+p[1]);if(!res)return false;

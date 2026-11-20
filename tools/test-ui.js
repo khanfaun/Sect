@@ -607,7 +607,7 @@ const TESTS = {
     await p.locator('[data-act="pact"][data-arg="datdai"]').click();
     await p.waitForTimeout(150);
     const opts = await p.locator('[data-act="vopt"]').allInnerTexts();
-    ok(opts.length === 3 && opts.every(x => /phá/.test(x)), 'mục Đất đai liệt kê ba ô để phá ' + JSON.stringify(opts));
+    ok(opts.filter(x => /phá/.test(x)).length === 3 && opts.filter(x => /· mua /.test(x)).length === 3 && /phá/.test(opts[0]), 'mục Đất đai liệt kê ba ô để phá (mua ô có công trình xếp sau) ' + JSON.stringify(opts));
     await p.locator('[data-act="vopt"][data-arg="pha:0"]').click();
     await p.waitForTimeout(150);
     const md = await ev(p, () => (document.querySelector('.mbox')||{}).innerText||'');

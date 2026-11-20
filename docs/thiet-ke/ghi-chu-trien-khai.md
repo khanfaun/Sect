@@ -1089,3 +1089,11 @@ Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời
 - Bản ghi truy nã vùng thêm `E.fa` = các thế lực biết mặt (phạm tội ở nơi của ai thì người đó biết). Bị nhận ra khi tới trấn/thành/chợ và cải trang bị lộ (đám đông, khí tức) chỉ khi thế lực nơi đang đứng biết mặt (`tnaBiet`). `'*'` = cả vùng: tội không rõ nơi, danh tiếng tụt, bản lưu cũ không có `fa`, tội lan; từ mức `TNA.lan` (Tử tội) mọi thế lực đều biết, nối với luật lan vùng sẵn có. Nợ ở quê ghi thế lực nơi quê.
 - Giữ nguyên theo vùng: mức, treo thưởng, mất dấu, Quan phủ / Chấp pháp đường, hoãn sự kiện, mua đất. Chú thích HUD ghi thế lực biết mặt và "nơi này chưa biết mặt ngươi".
 - Chữ mới `tna.hoanBao/hoanHet/faBiet/faKhap/faDay/faQuan`. Nhật ký `tna.hoanBao`, `tna.hoanHet`, `tna.laFa`, `tna.bao` thêm `fa`. Bài `truy_na3` (21 ý, cuối `test:rules`). Không đụng giao diện React.
+
+## Đ8b — thuế đất + mua ô có công trình — 20/11
+- Luật cuối `core2/71-mua-dat.js`; bảng `DAT.mua.ct`, `DAT.thue` (`content/rules/dat-dai.js`); chữ `dat.oMuaCt`, `dat.dMuaCt`, `dat.thue*`. Giá đất giữ nguyên (trấn 30, thành 80, chợ 20, ẩn cư 10 lượng).
+- **Mua ô có công trình** của dân / người giữ vai / thế lực (không mua khi đang hư tạm, không mua sơn môn): giá = (giá đất + giá công trình, ví dụ tửu lầu 30 lượng, phường thị 80) × loại chủ; từ chối như ô trống. Mua xong công trình giữ nguyên, dịch vụ vẫn mở (`c.muaCt=1`); bán lại được nửa (đất + công trình). Trong mục Đất đai xếp sau các lựa chọn phá / xây.
+- **Thuế đất** chỉ ở thôn trấn / thành, mỗi năm: trấn 3% giá đất (900 xu), thành 5% (4.000 xu); tự trả bạc, tu sĩ thiếu bạc trả linh thạch. Thiếu → nợ trên ô (`thueNo`), danh tiếng khu −3 mỗi kỳ, không mua thêm đất ở nơi đó; có tiền thì tự trả (xét mỗi ngày); nợ quá 3 kỳ → quan phủ ghi thành nợ thường (`r.bac` âm, hệ nợ Sửa-B). Không mất đất. Bán đất khi còn nợ thì trừ vào tiền bán.
+- Chỉ thu trên đất của kiếp này (`c.thueK`); bản lưu cũ: lần đầu xét thì ghi sổ, không thu bù. Nhật ký `dat.thue`, `dat.thueNo`, `dat.thueTraNo`, `dat.thueQuan`, `dat.thueCu`; `dat.mua` thêm `ct`.
+- Bài luật `dat_thue` (21 ý, cuối danh sách, thêm vào `test:rules`); `mua_dat` sửa một ý (ô có công trình nay mua được); giao diện `dat_dai` sửa ý đếm lựa chọn.
+- Còn dở: chưa tịch biên khi nợ thuế rất lâu; NPC chưa tự mua lại đất; công trình mua về chưa sinh lời (thu tiền quán).
