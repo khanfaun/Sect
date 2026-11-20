@@ -25,7 +25,7 @@
         }
       },
       "text": [
-        "{$en} chặn ngươi lại. Kẻ cầm đầu, {$a.ten}, hỏi: “Từ đâu tới? Tới đây làm gì?”"
+        "{$en} chặn ngươi lại. Người dẫn đội là {$a.ten}, muốn biết ngươi từ đâu tới và định làm gì."
       ],
       "choices": [
         {
@@ -131,7 +131,7 @@
         }
       },
       "text": [
-        "{$a.ten} của {$en} nhìn ngươi đầy hứng thú: “Đạo hữu có vẻ không tầm thường. Thử vài chiêu chứ?”"
+        "{$a.ten} của {$en} nhìn ngươi rồi lùi lại, chừa khoảng đất trống. “Thử vài chiêu chứ?”"
       ],
       "choices": [
         {

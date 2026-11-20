@@ -32,7 +32,7 @@
         {
           "i": "🏪",
           "l": "Xem hàng",
-          "t": "{$a.ten} mở từng hòm, vừa mở vừa kể lai lịch từng món.",
+          "t": "{$a.ten} mở hòm rồi chỉ cho ngươi từng món lấy từ đâu.",
           "e": {
             "shop": 1
           }
@@ -192,7 +192,7 @@
         }
       },
       "text": [
-        "Người dắt lạc đà của {$en} là kẻ lắm mồm. Chưa hỏi đã kể, kể không ngừng."
+        "Người dắt lạc đà của {$en} vừa đưa tay buộc dây đã kể chuyện trạm trước. Ngươi chưa kịp hỏi mà họ đã kể sang chặng sau."
       ],
       "choices": [
         {
