@@ -10,7 +10,7 @@
       "c": [
         {
           "id": "chi",
-          "l": "Dẫn người giữ miếu tới ngoài vết nứt",
+          "l": "Dẫn người giữ miếu tới mép vùng nứt",
           "t": "Ngươi chỉ chỗ mình đã phá rồi giúp treo biển báo ở lối dân hay qua, bên ngoài vùng nguy hiểm.",
           "e": {
             "h": 4
@@ -38,7 +38,7 @@
         },
         {
           "id": "gop",
-          "l": "Góp tiền thay đèn quanh lối",
+          "l": "Góp tiền dầu cho người gác",
           "t": "Ngươi giao tiền dầu cho người gác. Họ giữ đủ cho đêm nay và chia phần thừa cho nhà cuối dốc.",
           "dk": {
             "bacTu": 90
