@@ -313,9 +313,12 @@ const TESTS = {
     ok(run("(G.run.truy.until-W().t)/HD")>=365*5, 'kẻ thù: truy ít nhất năm năm');
     ok(run("TRUY.loai.thu.ngay[0]")>=365&&run("TRUY.loai.ke.ngay[1]")>=365*9, 'yêu thú tối thiểu một năm, kẻ thù tới cả chục năm');
     ok(run("Object.values(TRUY.loai).every(L=>L.gian[0]>=240)"), 'mỗi lần dò cách nhau ít nhất mười ngày');
+    // bắt đầu sạch: các bước trên để lại r.moving cũ (arrive() không xoá) không khớp r.at, làm chặng đầu và far2 phụ thuộc bố cục bản đồ (seed)
+    run("G.run.moving=null;G.run.halt=false;G.run.scene=null");
     const far2=run(`(()=>{const r=G.run;const a=nodeById(r.at);let best=null,bh=0;for(const R0 of W().regions)for(const n of R0.nodes){if(n.id===r.at)continue;n.fog=Math.max(n.fog||0,1);const p=findPath(r.at,n.id);if(!p||p.length<2)continue;const h=edgeLen(p[0],p[1])/walkSpeed();if(h>bh&&h<24*40){bh=h;best=n.id;}}return best;})()`);
+    ok(far2!=null, 'tìm được chặng đi để thử bị chặn giữa đường');
     // Sửa-L câu 51: bị chặn giữa đường, đánh thắng/chạy tiếp xong vẫn đứng yên tới khi bấm Đi tiếp
-    run(`G.run.truy=null;G.run.scene=null;G.run.halt=false;travelTo(${far2});G.run.dest=${far2};TK_S=edgeLen(G.run.moving.path[0],G.run.moving.path[1])/walkSpeed();truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});TRUY.loai.tac.chan=1;G.run.truy.nx=W().t+TK_S*0.5;G.run.kyT=W().t;G.run.tmT=W().t;travelTick(TK_S*20)`);
+    run(`G.run.truy=null;G.run.scene=null;G.run.halt=false;travelTo(${far2});G.run.dest=${far2};TK_S=edgeLen(G.run.moving.path[0],G.run.moving.path[1])/walkSpeed();truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});TRUY.loai.tac.chan=1;G.run.truy.nx=W().t+TK_S*0.5;G.run.kyT=W().t;G.run.tmT=W().t;TK_P=truyP;truyP=()=>1;try{travelTick(TK_S*20)}finally{truyP=TK_P}`);
     TK_DBG=run(`JSON.stringify([G.run.at,${far2},!!G.run.moving&&G.run.moving.path.length,G.run.moving&&G.run.moving.prog,G.run.scene&&G.run.scene.ev,G.run.halt])`);
     run("TRUY.chay.goc=1;TRUY.chay.max=1;kyPick(1);G.run.scene=null;if(G.run.moving)G.run.moving.halt=0;advanceTime(1)");
     ok(run("G.run.halt===true&&!!G.run.moving"), 'chạy tiếp xong: vẫn đứng yên giữa đường (chờ bấm Đi tiếp) '+TK_DBG+run("JSON.stringify([G.run.halt,!!G.run.moving,G.run.scene&&G.run.scene.type,NK.count('truy.chan'),G.run.at])"));
@@ -1358,7 +1361,7 @@ const TESTS = {
     ok(m[0]<m[1]&&m[1]<m[2]&&m[2]<m[3], 'phẩm càng cao tu càng nhanh: '+m.join(' < '));
     ok(run("rootView({id:'song',els:['kim','moc']}).m")===m[1], 'bản lưu cũ không có phẩm = như phẩm Thường');
     ok(run("(()=>{const c={};for(let i=0;i<4000;i++){const q=genRoot().q;c[q]=(c[q]||0)+1;}return c.thuong>c.khuyet&&c.khuyet>c.thuan})()"), 'phẩm rút theo tỉ lệ (Thường nhiều nhất)');
-    run("G.run.root={id:'song',els:['kim','moc'],q:'thuan'};G.run.rootKnown=1");ok(/phẩm Thuần/.test(run("rootLabel()")), 'tên hiển thị có phẩm: '+run("rootLabel()"));
+    run("G.run.root={id:'song',els:['kim','moc'],q:'thuan'};G.run.rootKnown=1");ok(!/phẩm/.test(run("rootLabel()"))&&/lcq-thuan/.test(run("rootHTML()")), 'không ghi chữ phẩm, có màu lớp: '+run("rootHTML()"));
     for(const k of ['bien','song','tam','tu','tap'])ok(run(`CONTENT_TEXT['tlfx.title.${k}']!=null&&CONTENT_TEXT['tlfx.sub.${k}']!=null`), 'có chữ dị tượng '+k);
     for(const e of ['loi','bang','phong','x'])ok(run(`CONTENT_TEXT['tlfx.lt.bien.${e}']!=null`), 'Biến dị: lời kể riêng '+e);
   },

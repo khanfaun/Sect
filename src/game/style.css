@@ -1802,3 +1802,5 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 @keyframes ltspin{to{transform:rotate(360deg)}}
 @keyframes ltpulse{0%,100%{opacity:.75;scale:.9}50%{opacity:1;scale:1.12}}
 :root[data-anim="0"] .tlfx-lt *,:root[data-anim="0"][data-tlfx=bien] #app{animation:none!important}
+
+.lcq-khuyet{color:var(--ink3)}.lcq-thuan{color:var(--jade)}.lcq-vien{color:var(--gold);font-weight:700;text-shadow:0 0 6px color-mix(in srgb,var(--gold) 45%,transparent)}

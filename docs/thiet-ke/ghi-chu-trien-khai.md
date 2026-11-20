@@ -1006,3 +1006,15 @@ Còn lại / chờ người dùng:
 - Chữ hiệu ứng trắc linh 4 loại viết thẳng trong code, chưa đưa vào content/ (khoá `tlfx.*`).
 - Chưa thử trên máy thật: hiệu ứng trắc linh, việc tắt hiệu ứng tiềm chất.
 - Các câu 80–88 vẫn chờ trả lời; Đ11, Đ12 chưa làm.
+
+## CÂU HỎI CHỜ NGƯỜI DÙNG CHỐT (80–88) — người dùng sẽ trả lời sau
+Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời.
+- 80. Mua đất (Đ8b đã có ô đất, công trình; chưa mở mua): A mở ngay · B để sau Đ10.
+- 81. Nộp phạt (tội, nợ…) bằng linh thạch: A giữ, cho nộp · B chỉ tiền phàm (xu, bạc, vàng).
+- 82. Phạm tội trong sự kiện có bị truy nã không: A game tự xét (nhân chứng, vùng) · B chỉ khi sự kiện ghi rõ bị lộ.
+- 83. Truy nã mà cải trang vào thành: A giữ (có thể qua mặt) · B luôn bị báo quan.
+- 84. Canh Mạnh Bà: A không đổi số năm giữa hai kiếp · B uống để rút ngắn khoảng cách.
+- 85. Nghi thức Bến Vong Xuyên: A rút gọn như nay · B đòi đủ vật tư riêng.
+- 86. Sau khi khép hành trình: A chuyển sang Tân Mộng (vòng mới) · B có hậu truyện, chơi tiếp.
+- 87. Mộng Ấn: A mỗi kiếp 1 mảnh · B ngoại lệ: kết Tỉnh Mộng được 2 mảnh.
+- 88. Hậu quả thế giới của END02, END03: A làm thật ở đợt sau · B chỉ ghi sổ, không đổi thế giới.

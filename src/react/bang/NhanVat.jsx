@@ -47,8 +47,8 @@ function CanCo() {
   const og = ORIGIN.find(o => o.id === r.origin), tr = TRAIT.find(t => t.id === r.trait), R0 = PS.rootView(r.root);
   const R1 = ROOT.find(x => x.id === r.root.id), tc = s.tuchat, left = Math.max(0, Math.floor(s.life - r.age));
   const rk = PS.rootKnown(r);
-  const lcV = esc(PS.rootLabel(r));
-  const lcT = !rk ? 'Chưa trắc linh: chưa biết mình có linh căn hay không.' : R1.d + (PS.rootQ(r.root) ? '\nPhẩm ' + PS.rootQ(r.root).n + '.' : '') + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R0.m) + ').';
+  const lcV = PS.rootHTML(r);
+  const lcT = !rk ? 'Chưa trắc linh: chưa biết mình có linh căn hay không.' : R1.d + '' + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R0.m) + ').';
   const lcTh = esc(lcT).replace(/\n/g, '<br>') + (rk ? '<div class="lc-els">' + r.root.els.map(PS.elSeal).join('') + '</div>' : '');
   const tvTip = 'Tu vi ' + PS.tvShow() + '%' + (PS.dinhPhong() ? (PS.dvm() ? '\nĐại viên mãn: khí huyết, linh lực, công, thủ +5%.' : '\nChưa đại viên mãn: ' + PS.dvmWhy() + '.\n(Cần: không trọng thương, tâm ma dưới ' + PS.DVM_TAMMA + ', đạo tâm từ ' + PS.DVM_TAM + ')') : '')
     + (PS.bbKind() ? '\nBán bộ ' + REALM[r.realm + 1] + ': dùng được đồ, công pháp, tâm pháp của ' + REALM[r.realm + 1] + '; chỉ số vẫn như cũ.' : '');
