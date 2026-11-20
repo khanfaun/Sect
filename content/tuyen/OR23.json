@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "So giờ uống với giờ nghe chuông",
-          "t": "Ngươi nhờ khách chỉ giấy xác nhận và ghi riêng phần họ còn nhớ, phần không.",
+          "t": "Ngươi nhờ khách chỉ tờ xác nhận, rồi ghi riêng chuyện họ còn nhớ và những đoạn đã quên.",
           "dau": [
             "moc_2_1"
           ]
@@ -125,7 +125,7 @@
         {
           "id": "cach_1",
           "l": "Đối cặn với hồ sơ ký ức",
-          "t": "Ngươi đem dấu từ khay so với mẫu và xin ghi giới hạn của cách giải tạp.",
+          "t": "Ngươi so dấu trên khay với mẫu. Rồi ngươi xin ghi rõ cách lọc trà có thể gạn được gì và còn sót gì.",
           "dau": [
             "moc_3_1"
           ]

@@ -37,7 +37,7 @@
         {
           "id": "cach_2",
           "l": "Lên sân thay một vai",
-          "t": "Ngươi hát thay đoạn người mất giọng, rồi ghi ai đã đỡ tiếng dưới màn.",
+          "t": "Ngươi hát nốt đoạn của người khản giọng, rồi ghi tên người đã cất tiếng đỡ câu ở sau màn.",
           "dau": [
             "moc_1_2"
           ]
@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "Đối tên thật với người trở về",
-          "t": "Ngươi chép lời xác nhận diện cạnh trang ghép và tách tên thật khỏi vai hư cấu.",
+          "t": "Ngươi chép lời người nhận ra nhân vật bên trang vừa ghép, để ai đọc cũng phân biệt tên thật với tên vai diễn.",
           "dau": [
             "moc_2_1"
           ]
@@ -138,7 +138,7 @@
         {
           "id": "cach_2",
           "l": "Ký bảo trợ và sửa câu bán lương",
-          "t": "Ngươi chép câu thuận ý người trả gỗ để nhận giấy chỉ đoàn ngươi được diễn vở.",
+          "t": "Ngươi sửa câu hát theo ý người trả tiền gỗ. Đổi lại, đoàn của ngươi nhận giấy được độc quyền diễn vở.",
           "dau": [
             "moc_3_2"
           ]

@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "Gom biên nhận của hai trạm",
-          "t": "Ngươi ghi cả hai lượt thu và người bảo kê để xin đối lại phép đường.",
+          "t": "Ngươi ghi hai lượt thu cùng tên người bảo kê, rồi xin đối với giấy phép đi đường.",
           "dau": [
             "moc_2_1"
           ]
@@ -173,7 +173,7 @@
         {
           "id": "cach_1",
           "l": "Sửa phép và chia lượt cho các hộ",
-          "t": "Ngươi đưa chứng hai trạm và kho quân, nhận phép một cân rồi chia quyền luân phiên.",
+          "t": "Ngươi đưa chứng từ hai trạm và kho quân ra đối. Đoàn được dùng một quả cân, các hộ thay nhau giữ giấy phép.",
           "dau": [
             "moc_4_1"
           ],

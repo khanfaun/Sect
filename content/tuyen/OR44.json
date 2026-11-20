@@ -29,7 +29,7 @@
         {
           "id": "cach_1",
           "l": "Đếm quỹ trước hai người gửi",
-          "t": "Ngươi chia bạc thật và rỗng, ghi phần giấy không có gì đứng sau.",
+          "t": "Ngươi tách bạc thật khỏi miếng rỗng và ghi những phiếu gửi không còn bạc trong hòm để đổi.",
           "dau": [
             "moc_1_1"
           ]
@@ -125,7 +125,7 @@
         {
           "id": "cach_1",
           "l": "Công bố giấy gửi sai và thứ tự hoàn",
-          "t": "Ngươi đọc phần quyền cùng nợ, báo từng phiếu giả và treo thứ tự trả.",
+          "t": "Ngươi đọc quyền của người giữ quầy và các khoản họ phải trả. Rồi ngươi chỉ từng phiếu giả và treo thứ tự trả nợ.",
           "dau": [
             "moc_3_1"
           ]
@@ -262,7 +262,7 @@
         {
           "id": "cach_2",
           "l": "Tiếp tục phát giấy dưới quyền ép nhận",
-          "t": "Ngươi giữ mạng nhận giấy qua lượt hòm cạn và cấp vốn cho bên bảo trợ.",
+          "t": "Ngươi giữ cho các điểm bán tiếp tục nhận phiếu dù hòm đã cạn, rồi dùng vốn ấy cấp cho bên bảo trợ.",
           "dau": [
             "moc_5_2"
           ],

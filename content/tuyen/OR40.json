@@ -93,7 +93,7 @@
         {
           "id": "cach_3",
           "l": "Tìm mối hàng thường thay đường",
-          "t": "Ngươi xin một đơn khô từ người giao hàng, đủ mở cửa kho theo nghề khác.",
+          "t": "Ngươi xin một đơn hàng khô từ người giao hàng để có thể mở kho làm nghề khác.",
           "dau": [
             "moc_2_3"
           ]
@@ -133,7 +133,7 @@
         {
           "id": "cach_2",
           "l": "Giữ quyền mua chất pha",
-          "t": "Ngươi nhận phần nguồn từ người ký phụ lục, để người chở ngoài sổ biết việc.",
+          "t": "Ngươi nhận quyền lấy hàng từ người ký phụ lục. Người chở dù không có tên trong sổ vẫn được báo.",
           "dau": [
             "moc_3_2"
           ]
@@ -248,7 +248,7 @@
         {
           "id": "cach_2",
           "l": "Dựng mạng khách theo dấu bao cũ",
-          "t": "Ngươi dành nguồn pha cho các điểm bán mới, giữ danh sách sách người mua lặp.",
+          "t": "Ngươi dành đường pha cho các điểm bán mới và giữ danh sách những người đã quay lại mua.",
           "dau": [
             "moc_5_2"
           ],

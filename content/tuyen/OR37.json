@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "Chỉ dấu giả và nhận phần thật",
-          "t": "Ngươi đặt hai bản cạnh nhau, chỉ khe sai và dòng giữ quân do nhà đóng.",
+          "t": "Ngươi đặt hai bản cạnh nhau, chỉ chỗ dấu không khớp và dòng giữ quân có dấu thật của nhà mình.",
           "dau": [
             "moc_2_1"
           ]
@@ -173,7 +173,7 @@
         {
           "id": "cach_1",
           "l": "Công bố cả hai lệnh và nhận phần lỗi của nhà",
-          "t": "Ngươi đọc cả hai bản, ghi người ra lệnh và người đóng trước người bị giữ oan.",
+          "t": "Ngươi đọc cả hai bản trước người bị giữ oan. Bên mỗi bản, ngươi ghi riêng ai ra lệnh và ai đóng dấu.",
           "dau": [
             "moc_4_1"
           ],
@@ -271,7 +271,7 @@
         {
           "id": "cach_3",
           "l": "Trả quyền cho bàn đối mới",
-          "t": "Ngươi giao mảnh ấn vào thư khố và giữ giấy rửa oan ngoài dòng quyền gia tộc.",
+          "t": "Ngươi đưa mảnh ấn vào thư khố. Giấy rửa oan được cất riêng để gia đình có thể tra mà chẳng cần xin quyền của nhà ngươi.",
           "dau": [
             "moc_5_3"
           ]

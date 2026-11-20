@@ -29,7 +29,7 @@
         {
           "id": "cach_1",
           "l": "Hỏi ai nghe tiếng khóc trước",
-          "t": "Ngươi ghi lời người hàng xóm đã gọi nhà nuôi, đối với vết cháy họ chỉ.",
+          "t": "Ngươi chép lời người hàng xóm đã gọi nhà nuôi ra đón trẻ, rồi so với vết cháy họ chỉ.",
           "dau": [
             "moc_1_1"
           ]
@@ -133,7 +133,7 @@
         {
           "id": "cach_2",
           "l": "Tra điều kiện tài sản của tên gốc",
-          "t": "Ngươi xin chép phần thừa kế và kỳ so dấu còn bắt buộc với người nhận.",
+          "t": "Ngươi xin sao mục chia gia sản và ghi ngày người nhận phải tới so dấu.",
           "dau": [
             "moc_3_2"
           ]
@@ -257,7 +257,7 @@
         {
           "id": "cach_3",
           "l": "Bỏ quyền ép nhận họ, giữ chỗ trú qua mùa lũ",
-          "t": "Ngươi bỏ phần quyền cưỡng nhận họ, giữ chỗ trú qua đợt nước cho trẻ mới.",
+          "t": "Ngươi bỏ quyền ép người khác nhận quan hệ họ hàng. Qua đợt nước, ngươi giữ chỗ trú cho những đứa trẻ mới tới.",
           "dau": [
             "moc_5_3"
           ]

@@ -188,7 +188,7 @@
         {
           "id": "ghi_duong_ho_so",
           "l": "Ghi số đăng bộ và để bản trong hòm",
-          "t": "Ngươi chép mục tra và ngày nhận cho người tới sau. Mép giấy dính vào lớp bồi, nên ngươi trả bản vào hòm với mục người ra lệnh còn bỏ ngỏ.",
+          "t": "Ngươi ghi mục cần tra và ngày nhận bản. Mép giấy dính chặt vào bìa. Ngươi cất lại bản gốc, vẫn chưa đọc được tên người ra lệnh.",
           "dau": [
             "co_muc_tra"
           ]
@@ -318,7 +318,7 @@
         {
           "id": "doi_so_cong_khai",
           "l": "Bảo vệ lời khai và sửa sổ nợ cho hộ dân",
-          "t": "Ngươi ghi rõ phần tay chép và tay ra lệnh để lời thư lại có sổ đối chứng. Với chức khảo sổ, ngươi gạch khoản thu oan. Hộ dân mang biên nhận đã sửa về kịp lần thu thóc tiếp theo.",
+          "t": "Ngươi ghi rõ ai chép và ai ra lệnh sửa. Với quyền khảo sổ, ngươi gạch khoản thu oan. Hộ dân kịp mang biên nhận đã sửa về trước lần thu thóc kế tiếp.",
           "dau": [
             "da_sua_no_dan"
           ],

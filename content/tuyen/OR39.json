@@ -85,7 +85,7 @@
         {
           "id": "cach_2",
           "l": "Xin giấy quyền coi trụ",
-          "t": "Ngươi hỏi việc nhận khóa, chép điều kiện giữ nước cho các hộ bên thấp.",
+          "t": "Ngươi hỏi ai có thể giao khóa trụ rồi ghi điều kiện để các hộ vùng thấp còn được cấp nước.",
           "dau": [
             "moc_2_2"
           ]
@@ -200,7 +200,7 @@
         {
           "id": "cach_3",
           "l": "Hủy trụ sau giờ dân đã rút",
-          "t": "Ngươi đối lại gánh tại điểm cao, rồi nhờ thợ ngắt trụ theo bản đã giữ.",
+          "t": "Ngươi đếm lại các gánh đã lên chỗ cao. Khi đủ, ngươi nhờ thợ ngắt trụ theo bản đo đã giữ.",
           "dau": [
             "moc_4_3"
           ],
@@ -259,7 +259,7 @@
         {
           "id": "cach_2",
           "l": "Thu quyền mở dòng từ trụ",
-          "t": "Ngươi nhận khoản sử dụng nước đầu và lưu đơn của xóm buộc phải xin.",
+          "t": "Ngươi thu khoản tiền nước đầu tiên và cất đơn xin lượt của xóm phải chờ ngươi mở trụ.",
           "dau": [
             "moc_5_2"
           ],

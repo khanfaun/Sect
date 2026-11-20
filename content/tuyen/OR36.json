@@ -93,7 +93,7 @@
         {
           "id": "cach_3",
           "l": "Chép quy tắc giữ thư không mở",
-          "t": "Ngươi xin gia đình định cách hỏi dấu để người nhận sau vẫn nhận được.",
+          "t": "Ngươi nhờ gia đình chọn cách kiểm dấu, để về sau thư vẫn đến đúng người được nhận.",
           "dau": [
             "moc_2_3"
           ]
@@ -138,7 +138,7 @@
         {
           "id": "cach_2",
           "l": "Giữ chỗ sửa để đổi phần nhà",
-          "t": "Ngươi dùng nhầm lẫn giữa hai mép để chuẩn bị câu đổi người nhận phần.",
+          "t": "Ngươi lợi dụng hai mép giấy dễ lẫn để soạn một câu khác, đổi tên người được nhận phần nhà.",
           "dau": [
             "moc_3_2"
           ]

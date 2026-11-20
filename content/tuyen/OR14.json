@@ -37,7 +37,7 @@
         {
           "id": "cach_2",
           "l": "Kê triệu chứng trong huyết phả",
-          "t": "Ngươi ghi cơn đỏ và cơn ngất riêng, để người coi sổ không kê thành căn tu.",
+          "t": "Ngươi ghi riêng lúc tay đỏ và lúc ngất, để người coi sổ khỏi lầm những cơn ấy là dấu có căn tu.",
           "dau": [
             "moc_1_2"
           ]
@@ -173,7 +173,7 @@
         {
           "id": "cach_1",
           "l": "Thử hiệp ước với người gác ngoài",
-          "t": "Một người rút tên trước mặt hai bên. Nhóm ngoài mở đường tiếp tế theo lời đã ký.",
+          "t": "Trước mặt hai bên, một người tự rút tên khỏi danh sách góp máu. Nhóm bên ngoài vẫn mở đường tiếp tế như đã ký.",
           "dau": [
             "moc_4_1"
           ],
@@ -231,7 +231,7 @@
         {
           "id": "cach_1",
           "l": "Ban khế có quyền rút lui cho cả hai bên",
-          "t": "Ngươi giao hai bản đã thực thi cho người gác trong và ngoài, mỗi bên giữ một dấu.",
+          "t": "Ngươi đưa một bản khế đã làm theo cho người gác trong, một bản cho người gác ngoài. Mỗi bên giữ một dấu.",
           "dau": [
             "moc_5_1"
           ],

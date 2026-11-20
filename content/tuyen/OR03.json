@@ -84,7 +84,7 @@
         {
           "id": "doi_the",
           "l": "Đối chiếu ký hiệu lô hàng với khế bến",
-          "t": "Ngươi tách được lô gia súc có lồng thật khỏi lô ghi thêm một người vá lưới và một chị quẩy nước. Người giữ bến giao ngươi tờ khế gốc có hai tên bị chuyển thành dấu cầm.",
+          "t": "Ngươi tách đàn gia súc thật khỏi lô hàng có hai người bị ghi lẫn vào. Người giữ bến đưa ngươi tờ khế gốc. Tên người vá lưới và chị quẩy nước đã bị thay bằng dấu cầm cố.",
           "dau": [
             "biet_khe_nguoi",
             "co_giay_goc"
@@ -257,7 +257,7 @@
         {
           "id": "giu_khe",
           "l": "Giữ dấu hồn để buộc chị quẩy nước ở lại",
-          "t": "Ngươi xuất tờ giao nhận và giữ dấu hồn làm vật giữ khế. Chị quẩy nước đòi bỏ khoản nợ ghi thay giá mua, nhưng người coi sổ ghi khế vẫn hiệu lực.",
+          "t": "Ngươi đưa tờ giao nhận ra và giữ dấu hồn để khế còn hiệu lực. Chị quẩy nước xin xóa món nợ ghi thay tiền mua chị. Người coi sổ vẫn để nguyên khoản ấy.",
           "dau": [
             "khe_cuong_con"
           ],
@@ -274,7 +274,7 @@
         {
           "id": "de_loi_chung",
           "l": "Ghi cách nhận diện dấu cho các hộ",
-          "t": "Ngươi để một giấy xác nhận diện thẻ hàng mang dấu hồn cạnh sổ hộ. Người đi chợ có thứ để đối chiếu khi gặp một chuyến khác.",
+          "t": "Ngươi ghi cách nhận ra thẻ hàng có dấu hồn rồi để tờ giấy cạnh sổ hộ. Ai gặp chuyến hàng khác có thể đem thẻ tới so.",
           "dau": [
             "co_ban_nhan_dau"
           ]

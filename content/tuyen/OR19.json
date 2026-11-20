@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "So dấu gió với mẻ ép tăng",
-          "t": "Ngươi ghi chỗ gió yếu và chép điều phạt, nối ca bị ép với người đặt than.",
+          "t": "Ngươi ghi chỗ gió yếu và chép điều phạt. Hai thứ chỉ ra ai đặt than và vì sao thợ phải xuống hầm thêm ca.",
           "dau": [
             "moc_2_1"
           ]
@@ -125,7 +125,7 @@
         {
           "id": "cach_1",
           "l": "Xin lịch chữa gắn với mẫu than",
-          "t": "Ngươi đối ca ho với sổ đốt rồi nhận lịch để từng người trở lại khám.",
+          "t": "Ngươi so tên những người bị ho với sổ đốt than rồi xin lịch tái khám cho từng người.",
           "dau": [
             "moc_3_1"
           ],
@@ -249,7 +249,7 @@
         {
           "id": "cach_1",
           "l": "Đặt giới hạn ca theo đường gió mới",
-          "t": "Ngươi đo lại gió sau gia cố rồi ký giá đủ để bỏ mẻ chen giữa hai ca.",
+          "t": "Ngươi đo lại luồng gió sau khi gia cố hầm. Giá mới đủ trả công mà chẳng cần chen thêm mẻ giữa hai ca.",
           "dau": [
             "moc_5_1"
           ],

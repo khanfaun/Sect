@@ -29,7 +29,7 @@
         {
           "id": "cach_1",
           "l": "So quả chuẩn với đơn thuốc bị trả",
-          "t": "Ngươi ghi phần hụt và nhờ người coi cân ký lên tờ gói còn nguyên.",
+          "t": "Ngươi ghi túi thuốc hụt bao nhiêu và nhờ người coi cân ký lên giấy gói còn nguyên.",
           "dau": [
             "moc_1_1"
           ]
@@ -93,7 +93,7 @@
         {
           "id": "cach_3",
           "l": "Ghi giá của lô thiếu",
-          "t": "Ngươi giữ một bản giá đã bán phần tốt và chi phí nhà phải trả nếu thu hồi.",
+          "t": "Ngươi giữ bản ghi giá thuốc tốt đã bán và tính khoản nhà phải trả nếu gọi người mua đem thuốc trở lại.",
           "dau": [
             "moc_2_3"
           ]
@@ -173,7 +173,7 @@
         {
           "id": "cach_1",
           "l": "Thông báo lô sai và nhận hàng trả",
-          "t": "Ngươi treo số lô bằng dấu trên túi, mời từng nhà đem gói dư cân lại.",
+          "t": "Ngươi treo dấu dùng để nhận ra lô sai và mời từng nhà mang những túi còn dư đến cân lại.",
           "dau": [
             "moc_4_1"
           ],

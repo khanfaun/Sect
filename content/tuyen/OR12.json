@@ -29,7 +29,7 @@
         {
           "id": "cach_1",
           "l": "Ghi mùa và xem mang cá",
-          "t": "Ngươi đối mẻ cá với lịch bãi giống. Mang đục xuất hiện sớm hơn mùa cá rời bến.",
+          "t": "Ngươi so mẻ cá với lịch nghỉ ở bãi giống. Cá đã đục mang trước cả mùa chúng thường rời bến.",
           "dau": [
             "moc_1_1"
           ]
@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "So mẫu và lấy tên người lệnh xả",
-          "t": "Ngươi đặt hai vò trước người trực, sao dòng lệnh và phần đánh vượt mùa.",
+          "t": "Ngươi đặt hai vò cạnh nhau trước mặt người trực. Rồi ngươi chép lệnh xả và khoản cá đánh quá mùa.",
           "dau": [
             "moc_2_1"
           ]
@@ -186,7 +186,7 @@
         {
           "id": "cach_1",
           "l": "Trả tên người mất và canh bãi cá trọn kỳ",
-          "t": "Ngươi báo hộ nhận áo và giao người giữ luồng sổ canh đủ một kỳ.",
+          "t": "Ngươi báo cho hộ đến nhận áo, rồi trao người giữ luồng cuốn sổ đủ để họ canh hết một kỳ.",
           "dau": [
             "moc_4_1"
           ],
