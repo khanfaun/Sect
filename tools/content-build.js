@@ -23,6 +23,9 @@ function buildContent(){
  // Đ10: lời văn Đại Mộng (content/dai-mong/**) — kiểm rồi mới ghép; thiếu tệp thì game dùng lời dự phòng.
  const dm=require('./kiem-tra-dai-mong').kiemDaiMong();if(dm.loi.length)throw Error('Lời văn Đại Mộng sai (chạy npm run content:mong để xem):\n'+dm.loi.join('\n'));
  write('src/game/data/08-dai-mong-du-lieu.js','// SINH TỰ ĐỘNG từ content/dai-mong/**. Không sửa tệp này.\nconst DM_DATA='+JSON.stringify(dm.data)+';\n');
+ // gói GPT đợt năm (L1–L6): sự kiện và kết cục sáu nghề tu mở rộng (content/nghe-tu/*.json) — kiểm rồi mới ghép.
+ const nt=require('./kiem-tra-nghe-tu').kiemNgheTu();if(nt.loi.length)throw Error('Sự kiện nghề tu sai (chạy npm run content:nghe để xem):\n'+nt.loi.join('\n'));
+ write('src/game/data/09-nghe-tu-du-lieu.js','// SINH TỰ ĐỘNG từ content/nghe-tu/*.json. Không sửa tệp này.\nconst NTU_DATA='+JSON.stringify(nt.data)+';\n');
  return {events:events.length,stories:story.length,catalog:cat,tuyen:ty.tuyen.length};
 }
 module.exports={buildContent};if(require.main===module){const r=buildContent();console.log('Content:',r.events,'mục sự kiện;',r.stories,'cảnh truyện.');}

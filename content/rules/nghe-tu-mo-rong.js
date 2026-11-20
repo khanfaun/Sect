@@ -49,3 +49,27 @@ const TU_DUYEN={
   TU24:{kv:['huyen_anh_phong_than','mi_cot']},
   TU25:{kv:['thien_ma_hang_the','ta_than_nghich_tu']},
 };
+// Gói GPT đợt năm (L1–L6): 12 sự kiện + 4 kết cục cho sáu nghề Cổ sư, Thi tu, Phật tu, Nho tu, Thiên cơ sư, Thương tu.
+// Chữ và hiệu ứng từng lựa chọn: content/nghe-tu/TUxx.json (kiểm: npm run content:nghe). Luật xử lý: src/game/core2/73-nghe-tu-su-kien.js.
+//   tang[i]: tầng nghề tối thiểu để sự kiện thứ i (S01…S12) hiện · canh[i]: cảnh giới tối thiểu (0 Luyện Khí … 3 Nguyên Anh)
+//   p: khả năng mỗi tháng (khi đang theo nghề, rảnh, có sự kiện đủ điều kiện) · gap: số tháng tối thiểu giữa hai sự kiện nghề · su: lấy sự kiện theo thứ tự
+const TU_SK={tang:[1,1,1,2,2,2,3,3,3,4,4,4],canh:[0,0,0,0,0,0,1,1,1,2,2,3],p:0.35,gap:2};
+// Kết cục nghề (HN B §7.4, điều kiện Claude tự quyết), xét lúc hết kiếp theo thứ tự, gặp cái đầu tiên đủ điều kiện thì hiện ở màn hết kiếp.
+// dk là một đối tượng, hoặc mảng các đối tượng (đủ một cái là được). Khoá:
+//   tang: tầng nghề tối thiểu · canh: cảnh giới tối thiểu · su: số sự kiện nghề đã qua · chon:{Sxx:i} đã chọn lựa chọn i (đủ hết) · chonMot:[[Sxx,i]…] (một trong)
+//   hd:'chinh'|'ta' Hành Đạo nghiêng · tamma: tâm ma tối thiểu · mong: số Mộng Ấn đã nhặt · chet:[nguyên nhân chết] · st: linh thạch tối thiểu lúc chết
+//   coDoi: cổ đang đói (Cổ sư) · phaGioi: từng phạm giới sát (Phật tu) · vo: văn tâm đã vỡ (Nho tu) · khien: số lần bị thiên khiển · khuy: đã Khuy Mệnh (Thiên cơ)
+const TU_KET={
+  TU17:[{ma:'K04',dk:{tang:3,hd:'ta',chon:{S04:1,S08:1}}},{ma:'K01',dk:{tang:4,canh:4}},
+    {ma:'K02',dk:[{coDoi:1},{tamma:60,su:3},{hd:'ta',su:3}]},{ma:'K03',dk:{su:3}}],
+  TU18:[{ma:'K03',dk:{chet:['combat'],chonMot:[['S04',0],['S10',1]]}},{ma:'K02',dk:[{chon:{S09:0},chet:['combat']},{chon:{S11:1},tamma:40}]},
+    {ma:'K01',dk:[{tang:4,canh:4},{tang:4,canh:3,chon:{S12:1}}]},{ma:'K04',dk:[{chet:['toahoa'],su:2},{su:4}]}],
+  TU19:[{ma:'K02',dk:{phaGioi:1}},{ma:'K01',dk:{tang:4,canh:4,hd:'chinh'}},
+    {ma:'K04',dk:[{mong:3,tang:3},{chon:{S12:0},mong:1}]},{ma:'K03',dk:{su:3}}],
+  TU20:[{ma:'K02',dk:{vo:1}},{ma:'K01',dk:{tang:4,canh:4,hd:'chinh'}},
+    {ma:'K03',dk:{tang:3,hd:'chinh',chonMot:[['S03',0],['S03',1]]}},{ma:'K04',dk:[{chon:{S10:0}},{su:4}]}],
+  TU21:[{ma:'K03',dk:{chet:['combat'],chonMot:[['S09',0],['S11',1],['S04',0]]}},{ma:'K02',dk:[{khien:2},{khien:1,su:4}]},
+    {ma:'K01',dk:[{tang:4,canh:4},{tang:4,khuy:1}]},{ma:'K04',dk:[{mong:3,tang:3},{chon:{S05:1},mong:1},{su:6}]}],
+  TU22:[{ma:'K02',dk:{chon:{S12:1}}},{ma:'K01',dk:[{tang:4,canh:4},{tang:4,st:2000}]},
+    {ma:'K04',dk:{tang:3,hd:'chinh',chonMot:[['S06',1],['S10',0]]}},{ma:'K03',dk:{su:3}}],
+};

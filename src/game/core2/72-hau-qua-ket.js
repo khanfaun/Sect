@@ -34,15 +34,20 @@ function dmLinhGioi(){const K=G.meta&&G.meta.ketHet;if(!K)return null;return {kh
 // ---------- kỳ ngộ A1 / A2 ----------
 function kyD(ma){const D=dmD().ky||{};return D[ma]||null;}
 function kyDmEv(ma){const id='dm_ky_'+ma,D=kyD(ma);if(!D)return null;let ev=KYNGO.find(x=>x.id===id);if(!ev){ev={id,sp:1,n:'',t:'',c:[]};KYNGO.push(ev);}
-  ev.n=D.ten;ev.t=(D.text||[]).map(s=>dmT(s)).join('\n\n');ev.c=(D.c||[]).map((c,i)=>({l:c.l,go:()=>kyDmChon(ma,i)}));return ev;}
+  const V=kyDmV(ma);ev.n=D.ten;ev.t=(V.text||[]).map(s=>dmT(s)).join('\n\n');ev.c=(D.c||[]).map((c,i)=>({l:c.l,go:()=>kyDmChon(ma,i)}));return ev;}
+// L7 (gói GPT đợt năm): bản kể khác (DM_DATA.ky[ma].bien). r.kyA1V / r.kyA2V = bản đang gặp (0 = bản gốc; bản lưu cũ không có: bản gốc).
+function kyDmV(ma){const D=kyD(ma);if(!D)return {text:[],t:[]};const r=G.run;const v=r?(r['ky'+ma+'V']||0):0;const B=(D.bien||[])[v-1];
+  return B?{text:B.text,t:B.t}:{text:D.text||[],t:(D.c||[]).map(c=>c.t)};}
+function kyDmChonV(ma){const D=kyD(ma),r=G.run;if(!D||!r)return 0;const L=[0].concat((D.bien||[]).map((_,i)=>i+1));
+  const v=dmPick(L,ma+':'+(r.kiep||1)+':'+Math.floor(W().t/HD));r['ky'+ma+'V']=v;dbg('dm.kyBien',{ma,v});return v;}
 for(const ma in DM_KY)kyDmEv(ma); // đăng ký sẵn để tải lại giữa kỳ ngộ vẫn còn lựa chọn
 // câu 82: đang bị truy nã / lùng bắt thì kỳ ngộ ngẫu nhiên tạm hoãn — hai kỳ ngộ này chỉ đơn giản là chưa tới (lần sau thử lại)
-function kyDmMo(ma){const r=G.run;const ev=kyDmEv(ma);if(!r||!ev)return false;if(typeof tnaHoan==='function'&&tnaHoan()){dbg('dm.kyHoan',{ma});return false;}r['ky'+ma]=1;dbg('dm.ky',{ma});kyStart(ev);return true;}
+function kyDmMo(ma){const r=G.run;if(!r||!kyD(ma))return false;if(typeof tnaHoan==='function'&&tnaHoan()){dbg('dm.kyHoan',{ma});return false;}kyDmChonV(ma);const ev=kyDmEv(ma);if(!ev)return false;r['ky'+ma]=1;dbg('dm.ky',{ma});kyStart(ev);return true;}
 function kyDmChon(ma,i){const D=kyD(ma),E=((DM_KY[ma]||{}).e||[])[i]||{};const r=G.run,s=S();const ch=[];
   if(E.tm){const x=Math.min(r.tamma||0,E.tm);r.tamma=Math.max(0,(r.tamma||0)-E.tm);if(x)ch.push(chip('🧘','−'+x,contentText('dm.kyTm'),'up'));}
   if(E.hp){const d=Math.round(s.maxHp*E.hp);const h0=r.hp;r.hp=clamp(r.hp+d,1,s.maxHp);const dd=r.hp-h0;if(dd)ch.push(chip('❤️',(dd<0?'−':'+')+Math.abs(dd),contentText('dm.kyHp'),dd<0?'dn':'up'));}
   if(E.mp&&!isPham()){const d=Math.round(s.maxMp*E.mp);const m0=r.mp;r.mp=clamp(r.mp+d,0,s.maxMp);const dd=r.mp-m0;if(dd)ch.push(chip('💧',(dd<0?'−':'+')+Math.abs(dd),contentText('dm.kyMp'),dd<0?'dn':'up'));}
-  dbg('dm.kyChon',{ma,i});return {t:dmT((D&&D.c[i]&&D.c[i].t)||''),ch};}
+  dbg('dm.kyChon',{ma,i});return {t:dmT(kyDmV(ma).t[i]||(D&&D.c[i]&&D.c[i].t)||''),ch};}
 // A1: tu sĩ tĩnh tọa ở nơi hoang (không phải nơi có dân, không phải tông môn)
 function kyA1Thu(){const r=G.run;if(!r||!feat('mong')||r.kyA1||!kyD('A1')||isPham()||r.moving)return false;const n=nodeById(r.at);
   if(!n||DAT_SETTLE.includes(n.type)||(r.scene&&r.scene.type!=='place'))return false;if(!(R()<DM_KY.A1.p))return false;return kyDmMo('A1');}

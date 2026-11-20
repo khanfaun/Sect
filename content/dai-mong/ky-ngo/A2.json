@@ -20,5 +20,29 @@
       "l": "Xách tay nải đi tiếp",
       "t": "Ngươi khoác tay nải lên vai và men theo bờ. Ngoảnh lại, ngươi thấy ông dùng vạt áo lau vòng bụi khô chỗ tay nải vừa đặt, kỹ như lau miệng bát cho khách sắp đến."
     }
+  ],
+  "bien": [
+    {
+      "text": [
+        "Ở ngã sông, người chèo đò ép giẻ vào kẽ ván. Ngươi vô cớ biết ông sắp chống cán chèo vào bậc nào.",
+        "Mái chèo vừa tì lên đá thì ông ngẩng đầu. “Có người đến bờ rồi mới bắt đầu lỡ chuyến,” ông nói. Ngươi chẳng hiểu vì sao mình muốn gật đầu."
+      ],
+      "t": [
+        "Ngươi hỏi ông thường đón khách ở đâu. Ông rà tay đến chỗ mạn nhẵn vì nhiều người đã vịn, rồi hất cằm về bờ không lối xuống.",
+        "Ngươi ngồi im bên mép bậc. Ông chống chèo giữ đò yên cho đến khi bóng ngươi thôi lay trên nước.",
+        "Ngươi xách tay nải qua khúc rẽ. Nhìn lại, ngươi thấy ông để đò lùi về đúng chỗ ngươi vừa đứng."
+      ]
+    },
+    {
+      "text": [
+        "Người chèo đò đang nhặt củi mắc vào dây neo. Cách ông dùng bàn chân đẩy khúc gỗ cong khỏi dòng nước khiến ngươi dừng bước vì thấy quen.",
+        "Ông nhìn đường bùn dọc bờ và phủi tay. “Đường về thường khô trước dấu chân,” ông nói. Ngươi cúi nhìn dép mình mà vẫn chưa hiểu."
+      ],
+      "t": [
+        "Ngươi hỏi ông đón khách ở bờ nào. Ông căng dây neo rồi để dây chùng, đúng về phía lối mòn mới bị nước xóa.",
+        "Ngươi ngồi bên đống củi nghe nước rút. Ông nhặt khúc gỗ cong, đặt dưới chân ngươi, chỗ đất còn đủ ướt để in dấu.",
+        "Ngươi đi tiếp, chân tránh vũng theo thói quen. Khi ngươi quay đầu, ông đã kéo thuyền sát bậc và để mũi đò chĩa theo lối ngươi đi."
+      ]
+    }
   ]
 }

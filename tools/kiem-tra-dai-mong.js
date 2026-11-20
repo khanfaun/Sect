@@ -19,7 +19,7 @@ const LOAI={mong_an:{dir:'mong-an',ten:'Mộng Ấn'},gac_ben:{dir:'gac-ben',ten
   hau_qua:{dir:'hau-qua',ten:'hậu quả thế giới của kết'},ky_ngo:{dir:'ky-ngo',ten:'kỳ ngộ Đại Mộng'}};
 // kết theo đời có hậu quả thế giới (đời sau mới thấy) · kỳ ngộ Đại Mộng (A1 mộng du tiên cảnh, A2 người chèo đò quen)
 const HQ_KET=['END02','END03','END06'],KY_MA=['A1','A2'];
-SO.tin_don=4;SO.dia_diem=3;SO.su_luoc=2;SO.text=[2,3];SO.choices=[2,3];
+SO.tin_don=[4,10];SO.dia_diem=3;SO.su_luoc=2;SO.text=[2,3];SO.choices=[2,3];
 function canViet(B){B=B||bangDM();const L=[];
   for(const m in B.MONG_AN)L.push({loai:'mong_an',tep:DIR+'/mong-an/'+m+'.json',ma:m,mo:B.MONG_AN[m].n+' — '+B.MONG_AN[m].he});
   for(const d of B.GAC_BEN)L.push({loai:'gac_ben',tep:DIR+'/gac-ben/'+d+'.json',ma:d,mo:d.replace(/_/g,' ')});
@@ -60,7 +60,7 @@ function kiemTep(file,B,seen){const loi=[],cb=[];const rel=path.relative(ROOT,fi
     const seen2=new Set();L.forEach((s,i)=>{const h=String(s).slice(0,40);if(seen2.has(h))warn(k+'['+i+']','mở đầu giống một đoạn khác: nên đổi cách vào cảnh.');seen2.add(h);});};
   const ROOTK={mong_an:['schemaVersion','loai','ma','nhat'],gac_ben:['schemaVersion','loai','dang','hien','nhan','loi'],ben:['schemaVersion','loai','vao','uong','doi','doiLai','mim'],
     ket:['schemaVersion','loai','ma','canh','hau'],nghi_thuc:null,khao:['schemaVersion','loai','loc','muc'],
-    hau_qua:['schemaVersion','loai','ma','tin_don','dia_diem','su_luoc','muon'],ky_ngo:['schemaVersion','loai','ma','ten','text','choices']};
+    hau_qua:['schemaVersion','loai','ma','tin_don','dia_diem','su_luoc','muon'],ky_ngo:['schemaVersion','loai','ma','ten','text','choices','bien']};
   if(!A||typeof A!=='object'||!(A.loai in ROOTK)){bad('loai','"loai" phải là một trong: '+Object.keys(ROOTK).join(', ')+'.');return {loi,cb};}
   const sub=LOAI[A.loai].dir;const want=sub?DIR+'/'+sub+'/':DIR+'/';if(!rel.startsWith(want)||(!sub&&rel!==DIR+'/ben.json'))bad('loai','tệp loại "'+A.loai+'" phải nằm ở '+(sub?want:DIR+'/ben.json')+'.');
   const keys=A.loai==='nghi_thuc'?['schemaVersion','loai','ma'].concat(NG_K[A.ma]||['chuanBi','xong','hong']):ROOTK[A.loai];
@@ -91,7 +91,12 @@ function kiemTep(file,B,seen){const loi=[],cb=[];const rel=path.relative(ROOT,fi
   if(A.loai==='ky_ngo'){ma1('ma',KY_MA,'mã kỳ ngộ');txt('ten',A.ten,4,60);mang('text',A.text,SO.text,80,600);
     const C=A.choices;const [a,b]=SO.choices;if(!Array.isArray(C)||C.length<a||C.length>b)bad('choices','cần '+a+'–'+b+' lựa chọn.');
     (Array.isArray(C)?C:[]).forEach((c,i)=>{const k='choices['+i+']';if(!only(k,c,['l','t']))return;txt(k+'.l',c.l,4,80);txt(k+'.t',c.t,60,500);});
-    out.ma=A.ma;out.v={ten:A.ten,text:A.text,c:(Array.isArray(C)?C:[]).map(c=>({l:c.l,t:c.t}))};}
+    // L7 (gói GPT đợt năm): bản kể khác — đoạn mở đầu khác, cùng các lựa chọn gốc, "t" viết lại (mỗi lựa chọn một câu kết quả, đúng thứ tự)
+    const BV=A.bien;if(BV!=null&&(!Array.isArray(BV)||BV.length>4))bad('bien','phải là mảng tối đa 4 bản kể khác.');
+    (Array.isArray(BV)?BV:[]).forEach((v,i)=>{const k='bien['+i+']';if(!only(k,v,['text','t']))return;mang(k+'.text',v.text,SO.text,80,600);
+      if(!Array.isArray(v.t)||v.t.length!==(Array.isArray(C)?C.length:0))bad(k+'.t','cần đúng '+(Array.isArray(C)?C.length:0)+' câu kết quả (mỗi lựa chọn một câu, đúng thứ tự).');
+      else v.t.forEach((x,j)=>txt(k+'.t['+j+']',x,60,500));});
+    out.ma=A.ma;out.v={ten:A.ten,bien:(Array.isArray(BV)?BV:[]).map(v=>({text:v.text,t:v.t})),text:A.text,c:(Array.isArray(C)?C:[]).map(c=>({l:c.l,t:c.t}))};}
   return {loi,cb,out};}
 function tatCaTep(){const L=[];const walk=d=>{const p=path.join(ROOT,d);if(!fs.existsSync(p))return;for(const f of fs.readdirSync(p).sort()){const q=path.join(p,f);if(fs.statSync(q).isDirectory())walk(d+'/'+f);else if(f.endsWith('.json'))L.push(q);}};walk(DIR);return L;}
 function kiemDaiMong(files,o){o=o||{};const B=bangDM();const loi=[],cb=[],seen={};const data={mong:{},gb:{},ben:null,ket:{},ng:{},khao:{},hq:{},ky:{}};let n=0;const all=tatCaTep();

@@ -16,5 +16,27 @@
       "l": "Quay lưng bỏ đi",
       "t": "Ngươi quay về phía tiếng lá khô. Tỉnh lại, ngươi thấy nhẹ cả vai, chỉ thoáng tiếc vì chưa nhìn xem bậc cuối dẫn tới đâu. Một cánh hoa trắng mắc trong nếp tay áo."
     }
+  ],
+  "bien": [
+    {
+      "text": [
+        "Ngươi tựa vai vào đá ven đường, đếm hơi thở cho đều. Bụi dưới chân bỗng sáng lên thành dãy bậc trắng lạnh.",
+        "Có tiếng sông rất xa, nghe như dưới nền nhà. Bàn chân ngươi tự nhấc lên trước khi ngươi kịp nhìn bậc kế."
+      ],
+      "t": [
+        "Ngươi lên cao đến khi tiếng sông mỏng như tiếng chỉ tuột khỏi vải. Tỉnh lại, đầu gối nặng trĩu nhưng hơi thở đã lắng. Một hạt cát trắng nằm trong đường chỉ gấu áo.",
+        "Ngươi lùi về chỗ bụi chưa sáng. Tỉnh lại, ngươi thở phào, rồi tiếc chưa kịp nhìn đỉnh thang. Quai dép còn vương sợi cỏ bạc màu."
+      ]
+    },
+    {
+      "text": [
+        "Ngươi tĩnh tọa dưới mái đá, nghe mưa ngoài dốc. Lúc ngẩng lên, giọt mưa đứng im giữa không, để lộ dãy bậc trắng trong luồng sáng lạnh.",
+        "Tiếng sông vọng từ xa. Ngươi có cảm giác từng chờ nước lặng ở đây, nhưng bậc đá đã mở ngay dưới chân."
+      ],
+      "t": [
+        "Ngươi bước qua những giọt mưa đứng im. Lúc tỉnh, cổ chân đau âm ỉ nhưng ngươi vẫn ngồi yên được tới khi mưa nhẹ hạt. Trong lòng bàn tay còn đọng giọt nước buốt.",
+        "Ngươi quay về phía tiếng sông, vừa bước thì mưa lại rơi. Vai nhẹ đi khi ngươi tỉnh, chỉ còn chút tiếc chưa ngó qua bậc trên cùng. Bên gối có chiếc lá khô viền sương."
+      ]
+    }
   ]
 }

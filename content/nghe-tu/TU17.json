@@ -1,0 +1,404 @@
+{
+ "schemaVersion": 1,
+ "loai": "nghe_tu",
+ "nghe": "TU17",
+ "ten": "Cổ sư",
+ "su_kien": [
+  {
+   "ma": "S01",
+   "ten": "Vò cổ đầu",
+   "text": [
+    "Ngươi đặt vò đất lên tấm ván ở bến {LOC09}. Từ trong vò vọng ra tiếng cào mảnh như móng tay miết qua giấy.",
+    "Người bán chỉ cho ngươi chỗ nhét linh thạch qua nắp. Dưới gấu áo ngươi là túi dành tiền trọ, cũng là chỗ cất phần nuôi cổ."
+   ],
+   "choices": [
+    {
+     "l": "Để riêng phần nuôi cổ",
+     "t": "Ngươi rút linh thạch khỏi túi trước khi cất vò. Tối đến, chỗ ngủ chỉ còn mái hiên, nhưng tiếng cào đã lắng.",
+     "e": {
+      "st": -1,
+      "res": 1,
+      "xp": 2
+     }
+    },
+    {
+     "l": "Gửi vò lại người bán",
+     "t": "Ngươi xin khất việc nhận vò đến khi có tiền nuôi. Người bán kéo vò về bên chân, còn ngươi giữ được chỗ ngủ qua đêm.",
+     "e": {
+      "hp": "5%"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S02",
+   "ten": "Cổ cắn chủ",
+   "text": [
+    "Linh thạch đã cạn từ trước khi ngươi dừng ở quán. Vừa hé nắp vò, ngươi thấy cổ bám lên mép rồi cắn vào kẽ ngón tay.",
+    "Vết cắn nóng dần, đến lúc buộc lại nắp ngươi đã khó gập tay. Người coi bếp đặt nước sạch xuống và chỉ lối tới thầy thuốc."
+   ],
+   "choices": [
+    {
+     "l": "Gửi vò, đi chữa độc",
+     "t": "Ngươi nhờ người coi bếp giữ vò đóng kín rồi đi tìm thuốc. Vết nóng dịu xuống, còn chìa hòm đựng vò nằm lại ở quán.",
+     "e": {
+      "hp": "5%",
+      "res": -1,
+      "st": -1
+     }
+    },
+    {
+     "l": "Mang vò đi tìm linh thạch",
+     "t": "Ngươi quấn tay rồi ghé chợ bán món đồ dành đi đường. Có thức nuôi cho cổ, nhưng khi trở về ngươi vẫn phải nhờ người mở nút vải trên tay.",
+     "e": {
+      "wound": "doc",
+      "res": 1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S03",
+   "ten": "Giải cổ cho người",
+   "text": [
+    "Người nhà bệnh nhân dẫn ngươi tới bên giường. Họ giơ chiếc bát lên, cho ngươi thấy những vệt bò chỉ xuất hiện khi nước nguội.",
+    "Bệnh nhân muốn tự chọn ai có mặt lúc giải. Ngoài cửa đứng sẵn người đã trả tiền, đòi chứng kiến để biết cổ mang dấu nhà nào."
+   ],
+   "choices": [
+    {
+     "l": "Giải trước người bệnh chọn",
+     "t": "Ngươi đợi người trả tiền ra ngoài rồi bắt đầu giải. Khi cổ rơi vào chén, bệnh nhân tự đẩy chén tới người mình đã gọi vào.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "danh": 3,
+      "xp": 3
+     }
+    },
+    {
+     "l": "Giữ cổ làm chứng",
+     "t": "Ngươi xin người bệnh cho giữ con cổ sau khi tháo phép. Tới sáng, người nhà đem chén niêm đi đối dấu, còn tên bệnh nhân được che dưới mép giấy.",
+     "e": {
+      "res": 1,
+      "st": 1,
+      "hd": [
+       1,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S04",
+   "ten": "Hạ tình cổ",
+   "text": [
+    "Một người đặt thư cưới và túi linh thạch cạnh vò của ngươi. Họ muốn người đã trả thư đổi ý trước ngày thuyền rời bến.",
+    "Mé dưới thư còn nguyên dấu gấp, như thể người nhận chưa từng mở. Khách chỉ vào phong thư, hỏi ngươi có chịu dùng cổ thay lời mình không."
+   ],
+   "choices": [
+    {
+     "l": "Trả thù lao và lá thư",
+     "t": "Ngươi đẩy vò khỏi tầm tay khách rồi trả lại cả thư lẫn tiền. Lúc ra bến, khách xé phong thư nhưng vẫn cất tờ bên trong.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "tamma": -2
+     }
+    },
+    {
+     "l": "Nhận lời hạ cổ",
+     "t": "Ngươi nhận tiền và hạ cổ theo lời khách. Khi gặp lại, người bị hạ tự đưa thư tới nhưng phải bấu vào cột bến mới bước thêm được.",
+     "e": {
+      "st": 3,
+      "hd": [
+       0,
+       3
+      ],
+      "tamma": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S05",
+   "ten": "Trại cổ bị đốt",
+   "text": [
+    "Khói hun thấp dưới mái trại, và dây treo vò đã bén lửa. Người giữ trại ho bên cổng, chỉ về phía dãy vò còn khóa.",
+    "Có tiếng gõ từ kho sau, nơi người nuôi cổ ngủ lại. Cửa trại đang hẹp dần vì cột xà cháy nghiêng vào lối."
+   ],
+   "choices": [
+    {
+     "l": "Đưa người trong kho ra",
+     "t": "Ngươi dẫn họ qua cửa trước khi xà rơi. Lúc đứng được ngoài sân, người giữ trại mới hỏi còn vò nào chưa vỡ.",
+     "e": {
+      "deed": "cuu_nguoi",
+      "hp": "-5%"
+     }
+    },
+    {
+     "l": "Dời những vò còn kín",
+     "t": "Ngươi kéo dãy vò ra sát bờ nước để lửa khỏi bén. Khi quay lại, người trong kho đã thoát qua vách sau, bàn tay bỏng vì tự gỡ phên.",
+     "e": {
+      "res": 2,
+      "hd": [
+       0,
+       1
+      ],
+      "danh": -2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S06",
+   "ten": "Cổ vương xuất vò",
+   "text": [
+    "Những tiếng cào rời rạc trong vò bỗng im. Con cổ còn lại bò lên miệng vò, chân dừng ngay trên đường đất đã rạn.",
+    "Người giữ trại mang đến chén linh thạch và chiếc nắp dự phòng. Họ hỏi ngươi có dám mở vò trước mặt những người cùng nuôi hay chưa."
+   ],
+   "choices": [
+    {
+     "l": "Thử hiệu lệnh trong sân kín",
+     "t": "Ngươi dọn sân rồi mở hé vò cho mọi người đứng xem từ ngoài cửa. Cổ chịu dừng theo tiếng gõ, nhưng từ hôm ấy phần nuôi được khóa riêng.",
+     "e": {
+      "res": 2,
+      "xp": 4,
+      "st": -1
+     }
+    },
+    {
+     "l": "Đậy vò, ngừng buổi thử",
+     "t": "Ngươi đặt nắp dự phòng lên trước khi con cổ vượt miệng vò. Người xem ra về, còn ngươi phải tìm chỗ giữ vò mới vì đường rạn đã chạy tới đáy.",
+     "e": {
+      "tv": 3,
+      "tamma": -2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S07",
+   "ten": "Dịch cổ lan làng",
+   "text": [
+    "Dân làng mang chiếu ra hong, tưởng mùi ẩm từ giường làm người nhà sốt. Dưới đường viền chiếu, ngươi thấy vệt cổ bò sang tấm kế bên.",
+    "Người gánh hàng xin mở lối ra vì còn mẹ ốm ở bờ bên kia. Người coi kho đứng chờ ngươi nói nên giữ hàng lại hay mở đường cho họ đi."
+   ],
+   "choices": [
+    {
+     "l": "Tách đồ nhiễm và giải cổ",
+     "t": "Ngươi chỉ từng tấm chiếu có vệt, nhờ chủ nhà tự đem ra chỗ riêng. Hàng hóa ở lại qua phiên, còn người cần đi được ngươi xem trước khi qua bến.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "danh": 5,
+      "mp": "-10%"
+     }
+    },
+    {
+     "l": "Theo gánh tìm vò nguồn",
+     "t": "Ngươi đi cùng người gánh hàng ngược về kho cũ và tìm ra chiếc vò rạn. Khi mang tin về, người làng đã phải chuyển chỗ ngủ vì vệt mới xuất hiện ở vách.",
+     "e": {
+      "xp": 4,
+      "res": 1,
+      "danh": -3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S08",
+   "ten": "Cổ mẫu",
+   "text": [
+    "Bên dưới khay đựng thức nuôi có một ổ đất mềm. Mỗi khi cổ mẫu cựa, lũ cổ trong những vò gần đó đều bám về phía ấy.",
+    "Người coi trại muốn đem ổ sang lò nuôi riêng. Bà giữ nhà bên cạnh xin ngươi dời cả dãy vò đi trước khi trẻ nhỏ về ngủ."
+   ],
+   "choices": [
+    {
+     "l": "Dời ổ ra khỏi khu nhà",
+     "t": "Ngươi chuyển ổ tới lán cách xa chỗ ngủ, đem vò theo để khỏi tản cổ. Đến tối, bà giữ nhà mới mở lại cửa sổ phía trại.",
+     "e": {
+      "hd": [
+       1,
+       0
+      ],
+      "danh": 3,
+      "res": -1
+     }
+    },
+    {
+     "l": "Giữ cổ mẫu trong trại",
+     "t": "Ngươi nhận chỗ lò nuôi và khóa dãy vò quanh ổ. Người nhà bên dời giường sang gian trước, còn phần linh thạch dành nuôi phải trích riêng từ mỗi chuyến.",
+     "e": {
+      "res": 3,
+      "st": -2,
+      "hd": [
+       0,
+       1
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S09",
+   "ten": "Cổ sư đối đầu",
+   "text": [
+    "Một cổ sư đặt vò của mình trên cầu ván rồi chặn lối ngươi. Vết bò trên nắp giống hệt dấu cổ vừa được tháo cho nhà ở bến.",
+    "Họ muốn phân hơn thua bằng cách thả cổ xuống cùng một khay. Người lái đò đứng sau ngươi hỏi bao giờ mới có thể đưa khách qua."
+   ],
+   "choices": [
+    {
+     "l": "Dời cuộc thử khỏi cầu",
+     "t": "Ngươi mang khay ra bãi đất trống để đò được cập bến. Trên khay, cổ của đối phương bò thẳng về chiếc nắp ngươi mang theo.",
+     "e": {
+      "xp": 4,
+      "hp": "-8%"
+     }
+    },
+    {
+     "l": "Đem dấu tới người bị hạ",
+     "t": "Ngươi đậy vò, mời người kia đi cùng tới nhà ở bến. Họ bỏ đi giữa chừng, nhưng người bị hạ đã nhận được bản dập để tự đối.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "danh": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S10",
+   "ten": "Bị quan phủ truy",
+   "text": [
+    "Cáo thị ngoài bến vẽ cả dáng chiếc vò ngươi mang. Người bán rau nhận ra đường dây buộc, kéo thúng vào trong cho lính đi qua.",
+    "Trong tay ngươi có giấy nhà từng thuê giải cổ. Tên người đã hạ cổ lại nằm ở mặt sau, nơi người nhà từng xin ngươi đừng đọc lớn."
+   ],
+   "choices": [
+    {
+     "l": "Ra trình giấy giải cổ",
+     "t": "Ngươi tới nha môn và để người bị hạ tự đọc phần họ chịu xác nhận. Quan sai tạm giữ vò, còn giấy có tên người tố được gấp lại trước mặt họ.",
+     "e": {
+      "res": -2,
+      "danh": 5,
+      "hd": [
+       1,
+       0
+      ]
+     }
+    },
+    {
+     "l": "Rời bến cùng chiếc vò",
+     "t": "Ngươi bỏ lại gánh đồ và đi theo lối bờ ruộng. Tới chợ khác, khách thấy cáo thị trước khi thấy vò nên chẳng ai dám mời ngươi vào nhà.",
+     "e": {
+      "danh": -5,
+      "tamma": 3,
+      "res": 1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S11",
+   "ten": "Cổ hóa người",
+   "text": [
+    "Sau tấm rèm là dáng một người đang ngồi chải tóc. Chiếc lược đi qua gáy rồi trở về đúng chỗ cũ, chẳng kéo theo một sợi nào.",
+    "Vò của ngươi đã trống, và người ngồi sau rèm quay mặt mỗi khi khay linh thạch dịch gần. Người coi trại hỏi có được phép mở cửa cho họ đi không."
+   ],
+   "choices": [
+    {
+     "l": "Đóng cửa và quan sát",
+     "t": "Ngươi dời khay ra xa rồi ngồi canh ngoài rèm. Khi tới khuya, dáng người đã tan, còn cổ nằm co dưới chiếc lược.",
+     "e": {
+      "tv": 4,
+      "tamma": 2
+     }
+    },
+    {
+     "l": "Đưa khay ra sân trống",
+     "t": "Ngươi mang khay ra sân và để người coi trại đứng ngoài then. Dáng ấy theo tới ngạch cửa rồi hụt xuống đất, để lại chiếc lược nằm ngang trên bậc.",
+     "e": {
+      "tamma": -2,
+      "res": -1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S12",
+   "ten": "Cổ thần",
+   "text": [
+    "Người nuôi cổ đem vò đến sân, đặt nắp hướng về ghế của ngươi. Chưa ai gõ hiệu, những tiếng cào đã lắng theo nhịp tay ngươi đặt xuống.",
+    "Bên cạnh ghế là sổ thức nuôi và những lời xin giải cổ. Người mới đến chờ xem ngươi sẽ truyền cách giải trước hay giữ cả phép trong trại."
+   ],
+   "choices": [
+    {
+     "l": "Mở sổ giải cổ",
+     "t": "Ngươi đặt bản giải cạnh sổ thức nuôi để người đến học tự chép. Khi có nhà mang bệnh nhân tới, người học đứng ra giải trước mặt ngươi.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "danh": 8,
+      "xp": 5
+     }
+    },
+    {
+     "l": "Giữ phép dưới ấn trại",
+     "t": "Ngươi nhận các vò về cùng một kho và chỉ giao nắp cho người đã thề theo. Từ đó, nhà muốn giải cổ phải chờ bản có dấu từ sân của ngươi.",
+     "e": {
+      "res": 3,
+      "st": 3,
+      "hd": [
+       0,
+       3
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "ket_cuc": [
+  {
+   "ma": "K01",
+   "ten": "Cổ thần",
+   "canh": [
+    "Trong sân, các vò cùng im khi ngươi nhấc tay. Người giữ sổ vẫn hỏi ngươi phần linh thạch dành nuôi kỳ tới, và ngươi đẩy hòm về phía họ.",
+    "Ngoài hiên có người tới học gõ hiệu. Ngươi giao cho họ chiếc vò đã mẻ miệng, để họ biết nó được giữ kín bằng cách nào."
+   ]
+  },
+  {
+   "ma": "K02",
+   "ten": "Bị cổ ăn mòn",
+   "canh": [
+    "Ngươi lật nắp vò trống, còn tay kia không chịu rời cổ tay đã sưng. Tiếng cào ngươi vẫn nghe mỗi tối giờ vọng ngay dưới vạt áo.",
+    "Người giữ trại cất chiếc vò khỏi chỗ nằm. Trên ván chỉ còn dấu tròn của đáy vò và túi linh thạch đã cạn."
+   ]
+  },
+  {
+   "ma": "K03",
+   "ten": "Thầy giải cổ được kính",
+   "canh": [
+    "Ngươi đặt bát thu cổ ngoài hiên, ở chỗ bệnh nhân có thể tự nhìn. Người nhà tới trả công mang theo chiếc ghế thấp để người đến sau khỏi ngồi đất.",
+    "Về sau, có người gọi ngươi tới nhà chỉ để xem lại nơi họ cất chăn. Trong góc ấy, họ đã tự giữ được vò thuốc kín và khô."
+   ]
+  },
+  {
+   "ma": "K04",
+   "ten": "Gieo dịch cổ diệt thành",
+   "canh": [
+    "Cửa thành đóng sớm, nhưng vệt cổ vẫn chạy qua kẽ những thúng hàng đã bỏ lại. Tới lúc bếp cuối cùng tắt, ngoài đê còn người dùng tiếng gõ để gọi nhau.",
+    "Ngươi đi ngang tấm biển hàng đã tháo xuống khỏi cửa. Ngày giao hàng vẫn còn viết trên mặt gỗ, ngay nơi có vệt cổ bò xuyên qua."
+   ]
+  }
+ ]
+}

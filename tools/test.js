@@ -70,7 +70,7 @@ const TESTS = {
     const op = JSON.parse(run("JSON.stringify(datOpts(DDX_T2).find(o=>o.id==='pha:'+DDX_K))"));
     ok(op && /nói xấu/.test(op.d) && /truy nã/.test(op.d), 'hộp xác nhận ghi rõ hậu quả (tiếng xấu, truy nã)');
     ok(!!run("datPha(DDX_T2,DDX_K)"), 'phá tửu lầu của dân');
-    ok(run("danhGet('reg:'+DDX_T2.r)<=TNA.danh&&G.run.truy&&G.run.truy.k==='quan'&&tnaMuc(DDX_T2.r)>=1"), 'bị quan phủ truy nã (hệ truy nã): danh tiếng khu xuống mức truy nã, quan sai đuổi theo');
+    ok(run("danhGet('reg:'+DDX_T2.r)<=TNA.danh&&G.run.truy&&G.run.truy.k==='quan'&&tnaMuc(tnaK(DDX_T2))>=1"), 'bị quan phủ truy nã (hệ truy nã): danh tiếng khu xuống mức truy nã, quan sai đuổi theo');
     ok(run("!placeActs(DDX_T2).some(a=>a.a==='tuu')"), 'tửu lầu không còn');
     // Sửa-O câu 79: ở thôn trấn / thành chỉ xây sau khi đã mua đất
     run("G.run.st=500;G.run.pham=0");const xo=JSON.parse(run("JSON.stringify(datOpts(DDX_T2).find(o=>/^xay:/.test(o.id))||null)"));
@@ -121,7 +121,7 @@ const TESTS = {
     const th = goTo("n.type==='thanh'");run(`TN_TH=nodeById(${th});TN_R=TN_TH.r`);
     // thành: gần như chắc bị báo quan ngay
     run("TNA.chung.thanh=1");ok(run("tnaToi('pha_dat')")===2, 'phạm tội trong thành: bị báo quan ngay');
-    ok(run("tnaMuc(TN_R)")===2&&run("G.run.tna[TN_R].tien")===run("TNA.tien.xu*2*TNA.tien.thanh"), 'mức truy nã theo vùng, tiền treo thưởng (thành gấp đôi)');
+    ok(run("tnaMuc(TN_R)")===2&&run("tnaE(TN_R).tien")===run("TNA.tien.xu*2*TNA.tien.thanh"), 'mức truy nã theo vùng, tiền treo thưởng (thành gấp đôi)');
     ok(run("danhGet('reg:'+TN_R)<=TNA.danh&&danhName(TN_TH)===contentText('danh.4')"), 'nối danh tiếng Đ1.4: khu bị kéo xuống "Bị truy nã"');
     ok(run("G.run.truy&&G.run.truy.k==='quan'"), 'quan sai lần theo (truy đuổi loại quan)');
     ok(run("Object.keys(G.run.tna).length")===1, 'tội không lan sang vùng khác');
@@ -129,13 +129,13 @@ const TESTS = {
     run("tnaToi('pha_dat')");ok(run("tnaMuc(TN_R)")===4, 'thêm tội: mức tăng');
     // trấn: tùy nhân chứng
     run("G.run.tna={};G.run.truy=null");const tr=goTo("n.type==='tran'");run(`TN_T=nodeById(${tr})`);
-    run("TNA.chung.tran=0");ok(run("tnaToi('pha_dat')")===0&&!run("G.run.tna[TN_T.r]"), 'không ai thấy: không bị truy nã');
+    run("TNA.chung.tran=0");ok(run("tnaToi('pha_dat')")===0&&!run("tnaE(TN_T.r)"), 'không ai thấy: không bị truy nã');
     run("TNA.chung.tran=1;TNA.chung.chac=1.01");ok(run("tnaToi('pha_dat')")===1&&run("G.run.scene&&G.run.scene.ev")==='tna_chung', 'ở trấn có nhân chứng: hộp lựa chọn (chưa báo quan)');
-    ok(!run("G.run.tna[TN_T.r]")&&JSON.parse(run("JSON.stringify(kyOpts(G.run.scene).map(o=>o.l))")).length===4, 'bốn lựa chọn: chặn, mua chuộc, diệt khẩu, mặc kệ');
-    run("G.run.bac=5000;TNA.mua.p=1;kyPick(1)");ok(!run("G.run.tna[TN_T.r]")&&run("G.run.bac")===5000-run("TNA.mua.xu*TNA.toi.pha_dat")&&!run("G.run.tnaCh"), 'mua chuộc được: mất tiền, không bị truy nã');
-    run("G.run.scene=null;TNA.ngan={goc:0,tp:0,max:0};tnaToi('pha_dat');kyPick(0)");ok(run("tnaMuc(TN_T.r)")===2&&run("G.run.tna[TN_T.r].tien")===run("TNA.tien.xu*2"), 'chặn không kịp: bị báo quan (trấn không nhân đôi treo thưởng)');
-    run("G.run.tna={};G.run.scene=null;TNA.giet.lo=0;NK.clear();tnaToi('pha_dat');kyPick(2)");ok(!run("G.run.tna[TN_T.r]")&&run("NK.count('nq.deed')")>0, 'diệt khẩu không lộ: không bị truy nã nhưng mang nghiệp');
-    run("G.run.scene=null;TNA.giet.lo=1;tnaToi('pha_dat');kyPick(2)");ok(run("tnaMuc(TN_T.r)")===4&&run("G.run.tna[TN_T.r].ly.includes('giet_chung')"), 'diệt khẩu bị lộ: tội nặng hơn hẳn');
+    ok(!run("tnaE(TN_T.r)")&&JSON.parse(run("JSON.stringify(kyOpts(G.run.scene).map(o=>o.l))")).length===4, 'bốn lựa chọn: chặn, mua chuộc, diệt khẩu, mặc kệ');
+    run("G.run.bac=5000;TNA.mua.p=1;kyPick(1)");ok(!run("tnaE(TN_T.r)")&&run("G.run.bac")===5000-run("TNA.mua.xu*TNA.toi.pha_dat")&&!run("G.run.tnaCh"), 'mua chuộc được: mất tiền, không bị truy nã');
+    run("G.run.scene=null;TNA.ngan={goc:0,tp:0,max:0};tnaToi('pha_dat');kyPick(0)");ok(run("tnaMuc(TN_T.r)")===2&&run("tnaE(TN_T.r).tien")===run("TNA.tien.xu*2"), 'chặn không kịp: bị báo quan (trấn không nhân đôi treo thưởng)');
+    run("G.run.tna={};G.run.scene=null;TNA.giet.lo=0;NK.clear();tnaToi('pha_dat');kyPick(2)");ok(!run("tnaE(TN_T.r)")&&run("NK.count('nq.deed')")>0, 'diệt khẩu không lộ: không bị truy nã nhưng mang nghiệp');
+    run("G.run.scene=null;TNA.giet.lo=1;tnaToi('pha_dat');kyPick(2)");ok(run("tnaMuc(TN_T.r)")===4&&run("tnaE(TN_T.r).ly.includes('giet_chung')"), 'diệt khẩu bị lộ: tội nặng hơn hẳn');
     run("G.run.tna={};G.run.scene=null;tnaToi('pha_dat');kyPick(3)");ok(run("tnaMuc(TN_T.r)")===2, 'mặc kệ: bị báo quan');
     run("G.run.tna={};G.run.scene={type:'event'};tnaToi('pha_dat')");ok(run("G.run.scene.type==='event'&&!!G.run.tnaCh"), 'đang bận cảnh khác: nhân chứng chờ');
     run("G.run.scene=null;advanceTime(1)");ok(run("G.run.scene&&G.run.scene.ev")==='tna_chung', 'rảnh ra: hộp nhân chứng hiện');
@@ -147,17 +147,17 @@ const TESTS = {
     ok(run("TNA.chung.tran*(tnaChe()?TNA.chung.che:1)")<p0, 'cải trang: nhân chứng ít hơn');
     run("G.run.caiT=0;G.run.realm=3;G.run.hide=1");ok(run("tnaChe()"), 'che giấu tu vi cũng giúp né');run("G.run.hide=null;G.run.realm=1;G.run.scene=null");
     // bị nhận ra khi tới thôn trấn trong vùng
-    run("TNA.nhan=[0,1,1,1,1,1];G.run.truy=null;G.run.tna[TN_T.r].t=W().t-5*HD;arrive(TN_T.id)");ok(run("G.run.truy&&G.run.truy.k==='quan'&&G.run.tna[TN_T.r].t===W().t"), 'tới trấn trong vùng: bị nhận ra, quan sai đuổi');
+    run("TNA.nhan=[0,1,1,1,1,1];G.run.truy=null;tnaE(TN_T.r).t=W().t-5*HD;arrive(TN_T.id)");ok(run("G.run.truy&&G.run.truy.k==='quan'&&tnaE(TN_T.r).t===W().t"), 'tới trấn trong vùng: bị nhận ra, quan sai đuổi');
     run("G.run.truy=null;G.run.caiT=W().t+HM;TNA.nhan=[0,0,0,0,0,0];arrive(TN_T.id)");ok(run("!G.run.truy"), 'khả năng bị nhận ra thấp (cải trang): không bị đuổi');run("G.run.caiT=0");
     // mất dấu hạ dần
-    run("G.run.tna[TN_T.r].m=3;G.run.tna[TN_T.r].t=W().t-TNA.matDau[3]*HD-1;advanceTime(1)");ok(run("tnaMuc(TN_T.r)")===2, 'lâu không bị thấy: hạ một mức');
-    run("G.run.region=(TN_T.r+1)%5;G.run.tna[TN_T.r].t=W().t-TNA.matDau[2]*HD*TNA.ngoai-1;advanceTime(1)");ok(run("tnaMuc(TN_T.r)")===1&&run("danhGet('reg:'+TN_T.r)")>run("TNA.danh"), 'ra khỏi vùng: mất dấu nhanh hơn; dưới mức truy bắt thì danh tiếng hết "Bị truy nã"');
-    run("G.run.tna[TN_T.r].t=W().t-TNA.matDau[1]*HD-1;advanceTime(1)");ok(!run("G.run.tna[TN_T.r]"), 'mất dấu hẳn: hết truy nã');
+    run("tnaE(TN_T.r).m=3;tnaE(TN_T.r).t=W().t-TNA.matDau[3]*HD-1;advanceTime(1)");ok(run("tnaMuc(TN_T.r)")===2, 'lâu không bị thấy: hạ một mức');
+    run("G.run.region=(TN_T.r+1)%5;tnaE(TN_T.r).t=W().t-TNA.matDau[2]*HD*TNA.ngoai-1;advanceTime(1)");ok(run("tnaMuc(TN_T.r)")===1&&run("danhGet('reg:'+TN_T.r)")>run("TNA.danh"), 'ra khỏi vùng: mất dấu nhanh hơn; dưới mức truy bắt thì danh tiếng hết "Bị truy nã"');
+    run("tnaE(TN_T.r).t=W().t-TNA.matDau[1]*HD-1;advanceTime(1)");ok(!run("tnaE(TN_T.r)"), 'mất dấu hẳn: hết truy nã');
     run("G.run.region=TN_T.r");
     // rất nặng thì lan
     run("tnaBao(TN_T.r,5,{noTruy:1})");ok(run("W().regions.every((_,i)=>tnaMuc(i)>=(i===TN_T.r?5:TNA.lanM))"), 'tội rất nặng (Tử tội): lan sang mọi vùng ở mức thấp hơn');
     // thợ săn tiền thưởng
-    run("G.run.tna={};tnaBao(TN_T.r,2,{noTruy:1});G.run.tna[TN_T.r].tien=TNA.san.min;TNA.san.p=1;G.run.truy=null;G.run.tnaSan=Math.floor(W().t/HM)-1;advanceTime(1)");ok(run("G.run.truy&&G.run.truy.k==='san'"), 'treo thưởng lớn: thợ săn tiền thưởng lần theo');
+    run("G.run.tna={};tnaBao(TN_T.r,2,{noTruy:1});tnaE(TN_T.r).tien=TNA.san.min;TNA.san.p=1;G.run.truy=null;G.run.tnaSan=Math.floor(W().t/HM)-1;advanceTime(1)");ok(run("G.run.truy&&G.run.truy.k==='san'"), 'treo thưởng lớn: thợ săn tiền thưởng lần theo');
     ok(run("TRUY.loai.san&&TRUY.an.thanh.san==='giam'"), 'thợ săn không sợ thành (chỉ chùn bước)');
     // chống cự
     run("G.run.truy=null;truyStart('quan',{n:'Bộ khoái',ek:'sontac',d:0});truyFight();G.run.scene.over='win';combatContinue()");ok(run("tnaMuc(TN_T.r)")===3, 'đánh thắng quan sai: tội chống người thi hành công vụ, mức tăng');
@@ -166,19 +166,19 @@ const TESTS = {
     ok(run("!placeActs(nodeById("+th+")).some(a=>a.a==='quanphu')||nodeById("+th+").r===TN_T.r"), 'vùng không bị truy nã: không có Quan phủ');
     run("openPlace(TN_T.id);G.run.bac=0");let Q=JSON.parse(run("JSON.stringify(venueOpts(TN_T,'quanphu'))"));
     ok(Q.map(o=>o.id).join()==='nop,cong,tu'&&Q[0].no, 'quan phủ (nơi phàm nhân): nộp phạt bằng tiền phàm, làm công, ngồi tù; thiếu tiền thì khoá');
-    run("G.run.bac=G.run.tna[TN_T.r].tien+10;TN_B0=G.run.bac");ok(!!run("venueDo('quanphu','nop')")&&!run("G.run.tna[TN_T.r]")&&run("G.run.bac")===10, 'nộp phạt: xoá truy nã ở vùng này');
+    run("G.run.bac=tnaE(TN_T.r).tien+10;TN_B0=G.run.bac");ok(!!run("venueDo('quanphu','nop')")&&!run("tnaE(TN_T.r)")&&run("G.run.bac")===10, 'nộp phạt: xoá truy nã ở vùng này');
     ok(run("danhGet('reg:'+TN_T.r)")>run("TNA.danh")&&!run("placeActs(TN_T).some(a=>a.a==='quanphu')"), 'hết truy nã: danh tiếng khu không còn "Bị truy nã", hết mục Quan phủ');
-    run("tnaBao(TN_T.r,3,{noTruy:1});G.run.scene=null;openPlace(TN_T.id);TN_TT=W().t;venueDo('quanphu','tu')");ok(!run("G.run.tna[TN_T.r]")&&run("W().t-TN_TT")>=run("TNA.tu[3]*HM"), 'ngồi tù: qua thời gian án, sạch tội');
+    run("tnaBao(TN_T.r,3,{noTruy:1});G.run.scene=null;openPlace(TN_T.id);TN_TT=W().t;venueDo('quanphu','tu')");ok(!run("tnaE(TN_T.r)")&&run("W().t-TN_TT")>=run("TNA.tu[3]*HM"), 'ngồi tù: qua thời gian án, sạch tội');
     run("tnaBao(TN_T.r,5,{noTruy:1,lan:1});G.run.scene=null;openPlace(TN_T.id);G.run.bac=1e9");Q=JSON.parse(run("JSON.stringify(venueOpts(TN_T,'quanphu'))"));
     ok(Q[0].no&&!Q.some(o=>o.id==='cong'), 'tử tội: không nộp phạt, không làm công được (chỉ ngồi tù)');
-    run("G.run.scene=null;G.run.truy=null;truyStart('quan',{n:'Bộ khoái',ek:'sontac',d:0});truyFight();G.run.scene.over='lose';combatContinue()");ok(!run("G.run.tna[TN_T.r]")&&run("NK.count('tna.giam')")>0, 'thua quan sai: bị giải về ngồi tù, xoá tội');
+    run("G.run.scene=null;G.run.truy=null;truyStart('quan',{n:'Bộ khoái',ek:'sontac',d:0});truyFight();G.run.scene.over='lose';combatContinue()");ok(!run("tnaE(TN_T.r)")&&run("NK.count('tna.giam')")>0, 'thua quan sai: bị giải về ngồi tù, xoá tội');
     // gộp nợ (Sửa-B)
     run("G.run.tna={};G.run.scene=null;G.run.truy=null;FEAT.no=1;G.run.queAt=TN_T.id;G.run.bac=-5000;G.run.noTra={t0:W().t,han:W().t+HM,lan:1};noTruyNa(G.run)");
-    ok(run("tnaMuc(TN_T.r)>=1&&G.run.tna[TN_T.r].ly.includes('no')&&noTruy()&&G.run.truy&&G.run.truy.k==='no'"), 'truy nã vì nợ: vào hệ truy nã, quan sai đòi nợ lần theo');
-    run("G.run.bac=0;G.run.noTra=null;advanceTime(1)");ok(!run("G.run.tna[TN_T.r]"), 'trả hết nợ: hết truy nã vì nợ');run("FEAT.no=0");
+    ok(run("tnaMuc(TN_T.r)>=1&&tnaE(TN_T.r).ly.includes('no')&&noTruy()&&G.run.truy&&G.run.truy.k==='no'"), 'truy nã vì nợ: vào hệ truy nã, quan sai đòi nợ lần theo');
+    run("G.run.bac=0;G.run.noTra=null;advanceTime(1)");ok(!run("tnaE(TN_T.r)"), 'trả hết nợ: hết truy nã vì nợ');run("FEAT.no=0");
     // gộp việc làm trong sổ nghiệp
     run("TNA.chung.tran=1;TNA.chung.chac=0.9;G.run.scene=null;deed('trom_ngheo',{})");ok(run("tnaMuc(TN_T.r)")>=1, 'trộm của người nghèo ở trấn (bị thấy): truy nã');
-    run("G.run.tna={};deed('trom_ngheo',{lo:0})");ok(!run("G.run.tna[TN_T.r]"), 'việc làm kín (không lộ): không truy nã');
+    run("G.run.tna={};deed('trom_ngheo',{lo:0})");ok(!run("tnaE(TN_T.r)"), 'việc làm kín (không lộ): không truy nã');
     // gộp danh tiếng (Đ1.4) + bản lưu cũ
     run("G.run.tna=undefined;delete G.run.tnaV;danhPut('reg:'+TN_T.r,-100);advanceTime(1)");ok(run("tnaMuc(TN_T.r)")===2&&run("NK.count('tna.cu')")>0, 'bản lưu cũ: khu đang "Bị truy nã" (danh tiếng) thành truy nã mức truy bắt');
     run("G=JSON.parse(JSON.stringify(G))");ok(run("tnaMuc(TN_T.r)")===2, 'lưu – tải giữ mức truy nã');
@@ -197,10 +197,10 @@ const TESTS = {
     ok(run("placeActs(T2).some(a=>a.a==='quanphu')&&!placeActs(T2).some(a=>a.a==='chapphap')")&&Q.some(o=>o.id==='nop')&&!Q.some(o=>o.id==='nopLt'), 'thôn trấn (phàm nhân): Quan phủ, nộp xu/bạc/vàng, không nhận linh thạch');
     let tu = goTo("(n.type==='cho'||n.type==='tong')");
     if (tu == null) { run("(()=>{const n=W().regions[0].nodes.find(n=>n.type!=='tran'&&n.type!=='thanh'&&n.state!=='ruin');n.type='cho';})()"); tu = goTo("n.type==='cho'"); }
-    run(`C2=nodeById(${tu});G.run.tna={};tnaBao(C2.r,2,{noTruy:1});G.run.scene=null;openPlace(C2.id)`);
+    run(`C2=nodeById(${tu});G.run.tna={};tnaBao(tnaK(C2),2,{noTruy:1});G.run.scene=null;openPlace(C2.id)`);
     Q = JSON.parse(run("JSON.stringify(venueOpts(C2,'chapphap'))"));
     ok(run("placeActs(C2).some(a=>a.a==='chapphap')&&!placeActs(C2).some(a=>a.a==='quanphu')")&&Q.some(o=>o.id==='nopLt')&&!Q.some(o=>o.id==='nop'), 'nơi tu sĩ (chợ phiên / sơn môn): Chấp pháp đường, chỉ nộp linh thạch');
-    run("G.run.st=1000;G.run.bac=777;C2_ST=Math.ceil(G.run.tna[C2.r].tien/TNA.phat.xuLt)");ok(!!run("venueDo('chapphap','nopLt')")&&!run("G.run.tna[C2.r]")&&run("G.run.st")===1000-run("C2_ST")&&run("G.run.bac")===777, 'nộp linh thạch ở chấp pháp đường: xoá truy nã, tiền phàm giữ nguyên');
+    run("G.run.st=1000;G.run.bac=777;C2_ST=Math.ceil(tnaE(tnaK(C2)).tien/TNA.phat.xuLt)");ok(!!run("venueDo('chapphap','nopLt')")&&!run("tnaE(tnaK(C2))")&&run("G.run.st")===1000-run("C2_ST")&&run("G.run.bac")===777, 'nộp linh thạch ở chấp pháp đường: xoá truy nã, tiền phàm giữ nguyên');
     ok(run("!!VENUE_N.chapphap&&VENUE_IN.chapphap.length===2"), 'Chấp pháp đường có tên và lời tả');
     // mua chuộc nhân chứng theo nơi
     run("G.run.tna={};G.run.scene=null;TNA.chung.tran=1;TNA.chung.chac=1.01;TNA.mua.p=1");goTo("n.id===T2.id");
@@ -225,7 +225,7 @@ const TESTS = {
     run("G.run.scene=null;tnaBao(T2.r,2,{noTruy:1});G.run.region=T2.r;G.run.kyHoan=[];for(let i=0;i<400&&!G.run.kyHoan.length;i++){G.run.scene=null;roadRoll(T2.id,T2.id);}G.run.scene=null");ok(!run("G.run.scene")&&run("G.run.kyHoan[0]")==='road:tran', 'sự kiện dọc đường: được giữ lại, không hiện');
     run("tnaXoa(T2.r,'nop');G.run.kyThaT=null;advanceTime(1)");ok(run("G.run.scene&&G.run.scene.type")==='event'&&run("G.run.kyHoan.length")===0, 'hết bị truy: sự kiện dọc đường hiện ra');
     // 83: cải trang không chắc chắn
-    run("G.run.scene=null;G.run.kyHoan=[];G.run.tna={};tnaBao(T2.r,2,{noTruy:1});G.run.caiT=W().t+HM;TNA.nhan=[0,0,0,0,0,0];TNA.cai.dong={tran:1};G.run.truy=null;arrive(T2.id)");
+    run("G.run.scene=null;G.run.kyHoan=[];G.run.tna={};tnaBao(tnaK(T2),2,{noTruy:1});G.run.caiT=W().t+HM;TNA.nhan=[0,0,0,0,0,0];TNA.cai.dong={tran:1};G.run.truy=null;arrive(T2.id)");
     ok(!run("tnaCai()")&&run("G.run.truy&&G.run.truy.k==='quan'")&&run("NK.count('tna.lo')")>0, 'bị nhiều người vây quanh: cải trang bị lộ, quan sai đuổi');
     run("G.run.truy=null;G.run.caiT=W().t+HM;TNA.cai.dong={};arrive(T2.id)");ok(run("tnaCai()")&&!run("G.run.truy"), 'không ai nhìn kỹ: cải trang vẫn qua mặt được');
     const th = goTo("n.type==='thanh'");
@@ -2834,7 +2834,7 @@ const TESTS = {
     run("G.over=null;genBirth();newRun(G.birth.cards[0]);G.run.scene=null;G.run.gbXong=1;G.run.kyT=W().t;G.run.pham=0;G.run.realm=1;G.screen='map';DM_KY.A1.p=1;DM_KY.A2.p=1");
     run("(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>isWild(n)&&!n.anchor&&dangerTag(n)<3&&n.type!=='sao'&&!DM_KY.A2.noi.includes(n.type));const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;openPlace(n.id);r.tamma=50})()");
     run("tinhToa(1)");ok(run("G.run.scene&&G.run.scene.ev")==='dm_ky_A1'&&run("G.run.kyA1")===1, 'A1: tĩnh tọa nơi hoang → Mộng du tiên cảnh');
-    const tm = run("G.run.tamma");run("kyPick(0)");ok(run("G.run.scene.res&&G.run.scene.res.t")===run("DM_DATA.ky.A1.c[0].t")&&run("G.run.tamma")<tm, 'A1 "bước lên bậc": lời kết quả, tâm ma lắng xuống');
+    const tm = run("G.run.tamma");run("kyPick(0)");ok(run("G.run.scene.res&&G.run.scene.res.t")===run("dmT(kyDmV('A1').t[0])")&&run("G.run.tamma")<tm, 'A1 "bước lên bậc": lời kết quả, tâm ma lắng xuống');
     run("G.run.scene=null;openPlace(G.run.at);tinhToa(1)");ok(run("G.run.scene.type")==='place', 'A1: mỗi kiếp một lần');
     // A2: chỉ khi đã có Mộng Ấn, ở nơi sông nước
     run("(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>DM_KY.A2.noi.includes(n.type)&&n.state!=='ruin');const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;r.scene=null;G.screen='map';r.kyT=W().t;dmM().mong=[];r.tamma=50})()");
@@ -2854,14 +2854,14 @@ const TESTS = {
     run("TN3_GO=id=>{const n=nodeById(id);const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;r.scene=null;r.truy=null;return n}");
     // hai nơi có dân cùng vùng, khác thế lực chủ
     const pr = JSON.parse(run(`JSON.stringify((()=>{const L=W().regions.flatMap(R0=>R0.nodes).filter(n=>['tran','thanh','cho'].includes(n.type)&&n.state!=='ruin');
-      for(const a of L)for(const b of L)if(a.r===b.r&&a.id!==b.id&&tnaFa(a)!==tnaFa(b))return [a.id,b.id];return null})())`));
-    ok(!!pr, 'có hai nơi cùng vùng thuộc hai thế lực khác nhau');
+      for(const a of L)for(const b of L)if(tnaQ(a)===tnaQ(b)&&!tnaCanCu(a)&&!tnaCanCu(b)&&a.id!==b.id&&tnaFa(a)!==tnaFa(b))return [a.id,b.id];return null})())`));
+    ok(!!pr, 'có hai nơi cùng quận thuộc hai thế lực khác nhau');
     if (pr) {
     run(`TA=nodeById(${pr[0]});TB=nodeById(${pr[1]});TN3_GO(TA.id)`);
     ok(run("(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>n.anchor&&LOC_NEO[n.anchor].fa&&n.type!=='tong');return !n||tnaFa(n)===LOC_NEO[n.anchor].fa})()"), 'nơi neo: thế lực chủ là thế lực của nơi đó');
     ok(run("W().regions.flatMap(R0=>R0.nodes).filter(n=>n.type==='tong').every(n=>tnaFa(n)==='tong:'+n.id)"), 'sơn môn: lính canh là người của tông đó');
     run("TNA.chung[TA.type]=1;TNA.chung.chac=0.9");run("tnaToi('pha_dat')");if(run("!!G.run.tnaCh"))run("kyPick(3)");run("G.run.scene=null;G.run.truy=null");
-    ok(run("JSON.stringify(G.run.tna[TA.r].fa)")===JSON.stringify([run("tnaFa(TA)")]), 'phạm tội ở nơi thế lực A: chỉ thế lực A ghi mặt');
+    ok(run("JSON.stringify(tnaE(TA.r).fa)")===JSON.stringify([run("tnaFa(TA)")]), 'phạm tội ở nơi thế lực A: chỉ thế lực A ghi mặt');
     run("TNA.nhan=[0,1,1,1,1,1];NK.clear();TN3_GO(TB.id);arrive(TB.id)");ok(!run("G.run.truy")&&run("NK.count('tna.laFa')")>0, 'tới nơi của thế lực khác cùng vùng: lính canh không nhận ra');
     run("TN3_GO(TA.id);arrive(TA.id)");ok(run("G.run.truy&&G.run.truy.k==='quan'"), 'về nơi của thế lực A: bị nhận ra, quan sai đuổi');
     run("G.run.truy=null;TNA.nhan=[0,0,0,0,0,0];TNA.cai.dong={thanh:1,tran:1,cho:1};TNA.cai.khi={goc:1,realm:0,max:1};G.run.hide=null;G.run.caiT=W().t+HM;TN3_GO(TB.id);arrive(TB.id)");
@@ -2869,11 +2869,11 @@ const TESTS = {
     run("TN3_GO(TA.id);arrive(TA.id)");ok(!run("tnaCai()")&&run("NK.count('tna.lo')")>0, 'cải trang ở nơi thế lực A: bị lộ');
     run("G.run.truy=null;TN3_GO(TB.id)");const tip=run("tnaHud().tip");
     ok(tip.includes(run("tnaFaTen(tnaFa(TA))"))&&tip.includes(run("contentText('tna.faDay',[tnaFaTen(tnaFa(TB))])")), 'chú thích: ghi thế lực biết mặt, nơi đang đứng chưa biết');
-    run("tnaBao(TB.r,1,{noTruy:1,node:TB})");ok(run("tnaBiet(G.run.tna[TB.r],TB)&&G.run.tna[TB.r].fa.length===2"), 'phạm tội cả ở nơi thế lực B: B cũng biết');
-    run("G.run.tna={};tnaBao(TA.r,1,{noTruy:1,node:TA})");ok(!run("tnaBiet(G.run.tna[TA.r],TB)"), 'tội nhẹ không lan sang thế lực khác');
-    run("tnaBao(TA.r,4,{noTruy:1,node:TA})");ok(run("tnaBiet(G.run.tna[TA.r],TB)")&&run("W().regions.every((_,i)=>i===TA.r||(G.run.tna[i]&&G.run.tna[i].fa[0]==='*'))"), 'tội rất nặng: mọi thế lực, mọi vùng đều biết');
-    run("G.run.tna={};G.run.tna[TA.r]={m:2,tien:1000,t:W().t,ly:['danh']}");ok(run("tnaBiet(G.run.tna[TA.r],TB)&&!!tnaHud()"), 'bản lưu cũ (không ghi thế lực): cả vùng biết như trước');
-    run("tnaBao(TA.r,1,{noTruy:1})");ok(run("tnaBiet(G.run.tna[TA.r],TB)"), 'tội không rõ nơi (danh tiếng, nợ cũ): cả vùng biết');
+    run("tnaBao(TB.r,1,{noTruy:1,node:TB})");ok(run("tnaBiet(tnaE(TB.r),TB)&&tnaE(TB.r).fa.length===2"), 'phạm tội cả ở nơi thế lực B: B cũng biết');
+    run("G.run.tna={};tnaBao(TA.r,1,{noTruy:1,node:TA})");ok(!run("tnaBiet(tnaE(TA.r),TB)"), 'tội nhẹ không lan sang thế lực khác');
+    run("tnaBao(TA.r,4,{noTruy:1,node:TA})");ok(run("tnaBiet(tnaE(TA.r),TB)")&&run("tnaQs().every(q=>q===tnaQ(TA)||(tnaE(q)&&tnaE(q).fa[0]==='*'))"), 'tội rất nặng: mọi thế lực, mọi vùng đều biết');
+    run("G.run.tna={};G.run.tna[TA.r]={m:2,tien:1000,t:W().t,ly:['danh']}");ok(run("tnaBiet(tnaE(TA.r),TB)&&!!tnaHud()"), 'bản lưu cũ (không ghi thế lực): cả vùng biết như trước');
+    run("tnaBao(TA.r,1,{noTruy:1})");ok(run("tnaBiet(tnaE(TA.r),TB)"), 'tội không rõ nơi (danh tiếng, nợ cũ): cả vùng biết');
     // thế lực tan thì nơi đó về tay thế lực khác
     const an = run("(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>n.anchor&&LOC_NEO[n.anchor].fa&&n.type!=='tong');return n?n.id:null})()");
     if (an != null) { run(`TN3_F=LOC_NEO[nodeById(${an}).anchor].fa;TN3_FB=JSON.stringify(faInit(W())[TN3_F]);faInit(W())[TN3_F].trang='diet'`);
@@ -3010,6 +3010,106 @@ const TESTS = {
     const out = (o.stdout || '') + (o.stderr || '');
     ok(o.status === 0, 'bot.js thoát bình thường'); ok(!/Lỗi|Error|TypeError|ReferenceError/.test(out.replace(/Nguyên nhân/g, '')), 'không có lỗi trong đầu ra');
     console.log(out.split('\n').filter(l => /Số kiếp|Nguyên nhân|Cảnh giới khi chết|^LỖI|^CHUỖI|^   /.test(l)).slice(0,14).map(l => '     ' + l).join('\n'));
+  },
+  // người dùng chốt: xoá tội theo quận (quan phủ thôn trấn / thành) · tông môn, căn cứ thế lực xử sổ riêng
+  truy_na4() {
+    fresh("FEAT.truy=1;FEAT.tna=1;G.screen='map';G.run.pham=0;G.run.realm=2;G.run.kyT=W().t;G.run.tmT=W().t;TNA_BK=JSON.stringify(TNA)");
+    try {
+    const all = "W().regions.flatMap(R0=>R0.nodes).filter(n=>n.state!=='ruin')";
+    run("TN4_GO=n=>{const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;r.scene=null;r.truy=null;return n}");
+    // hai trấn cùng vùng, khác quận
+    const pr = JSON.parse(run(`JSON.stringify((()=>{const L=${all}.filter(n=>n.type==='tran');for(const a of L)for(const b of L)if(a.r===b.r&&tnaQ(a)!==tnaQ(b))return [a.id,b.id];return null})())`));
+    ok(!!pr, 'có hai trấn cùng vùng thuộc hai quận');
+    if (pr) {
+      run(`QA=nodeById(${pr[0]});QB=nodeById(${pr[1]});TN4_GO(QA)`);
+      ok(/^q\d+$/.test(run("tnaK(QA)"))&&run("tnaKTen(tnaK(QA))")===run("geo().dnames[geo().dist[nodeHex(QA)]]"), 'tội ở trấn: ghi vào sổ quận, có tên quận');
+      run("TNA.chung.tran=1;TNA.chung.chac=0.9;tnaToi('pha_dat');if(G.run.tnaCh)kyPick(3);G.run.scene=null;G.run.truy=null");
+      ok(run("!!tnaE(tnaK(QA))&&!tnaE(tnaK(QB))&&Object.keys(G.run.tna).length===1"), 'tội chỉ ghi ở quận nơi phạm, quận khác cùng vùng sạch');
+      ok(run("tnaHud().tip").includes(run("tnaKTen(tnaK(QA))")), 'chú thích ghi tên quận');
+      run("TN4_GO(QB)");ok(!run("placeActs(QB).some(a=>a.a==='quanphu'||a.a==='chapphap')"), 'quận khác: không có quan phủ để xử');
+      run("tnaBao(tnaK(QB),2,{noTruy:1,node:QB});TN4_GO(QA);openPlace(QA.id);G.run.bac=1e7");
+      ok(!!run("venueDo('quanphu','nop')")&&!run("tnaE(tnaK(QA))")&&!!run("tnaE(tnaK(QB))"), 'nộp phạt ở quan phủ: chỉ xoá tội trong quận đó');
+      ok(run("danhGet('reg:'+QA.r)<=TNA.danh"), 'vùng còn quận đang truy bắt: danh tiếng khu vẫn "Bị truy nã"');
+      run("TN4_GO(QB);openPlace(QB.id);venueDo('quanphu','nop')");ok(!run("tnaE(tnaK(QB))")&&run("danhGet('reg:'+QA.r)>TNA.danh"), 'xoá quận cuối của vùng: danh tiếng khu hết "Bị truy nã"');
+    }
+    // tông môn: sổ riêng
+    const tg = run(`(()=>{const n=${all}.find(n=>n.type==='tong');return n?n.id:null})()`);
+    ok(tg != null, 'có tông môn');
+    if (tg != null) {
+      run(`TG=nodeById(${tg});G.run.tna={};TN4_GO(TG)`);
+      ok(run("tnaK(TG)")==='f:tong:'+tg&&run("tnaCanCu(TG)")==='tong:'+tg, 'tông môn: sổ riêng của tông');
+      run("TNA.chung.tong=1;TNA.chung.chac=0.5;tnaToi('pha_dat');G.run.scene=null;G.run.truy=null");
+      ok(run("!!tnaE(tnaK(TG))&&!tnaE(tnaQ(TG))"), 'phạm tội ở tông môn: chỉ tông ghi, quận không ghi');
+      run("tnaBao(tnaQ(TG),2,{noTruy:1});openPlace(TG.id)");
+      ok(run("placeActs(TG).some(a=>a.a==='chapphap')")&&!!run("JSON.stringify(venueOpts(TG,'chapphap'))").includes('nopLt'), 'tông môn: chấp pháp đường xử án riêng (nộp linh thạch)');
+      run("G.run.st=1e6;NK.clear()");ok(!!run("venueDo('chapphap','nopLt')")&&!run("tnaE(tnaK(TG))")&&!!run("tnaE(tnaQ(TG))")&&run("NK.dump()").includes('"f":1'), 'nộp ở chấp pháp tông: chỉ xoá tội với tông, tội ở quận còn nguyên');
+      ok(!run("placeActs(TG).some(a=>a.a==='chapphap'||a.a==='quanphu')"), 'tông môn không xử tội của quận');
+      // bị bắt bởi người của tông: chỉ xoá sổ tông
+      run("tnaBao(tnaK(TG),2,{noTruy:1});truyStart('quan',{n:'Chấp pháp',ek:'sontac',d:0});G.run.truy.tk=tnaK(TG);truyFight();G.run.scene.over='lose';combatContinue()");
+      ok(!run("tnaE(tnaK(TG))")&&!!run("tnaE(tnaQ(TG))"), 'bị người tông bắt giam: chỉ xoá sổ tông');
+      run("G.run.scene=null;G.run.truy=null;TN4_GO(TG);truyStart('quan',{n:'Bộ khoái',ek:'sontac',d:0});G.run.truy.tk=tnaQ(TG);truyFight();G.run.scene.over='lose';combatContinue()");
+      ok(!run("tnaE(tnaQ(TG))"), 'bị quan sai bắt: xoá tội trong quận');run("G.run.scene=null;G.run.truy=null");
+    }
+    // căn cứ thế lực (trụ sở không phải trấn / thành) có sổ riêng; trấn / thành dù là trụ sở vẫn thuộc quan phủ quận
+    ok(run(`${all}.filter(n=>n.anchor&&THE_LUC[LOC_NEO[n.anchor].fa]&&THE_LUC[LOC_NEO[n.anchor].fa].noi===n.anchor).every(n=>['tran','thanh'].includes(n.type)?/^q/.test(tnaK(n)):(n.type==='tong'||tnaK(n)==='f:'+LOC_NEO[n.anchor].fa))`), 'căn cứ thế lực: sổ riêng; trụ sở là thôn trấn / thành: sổ quận');
+    // bản lưu cũ: sổ theo vùng → quy về các quận của vùng
+    run("G.run.tna={};G.run.tna[2]={m:3,tien:3000,t:W().t,ly:['pha_dat']};G.run.tnaCh={reg:2,loai:'pha_dat',nang:2,node:null,t:W().t};NK.clear()");
+    const nq = run("tnaQI().by[2].length");
+    ok(run("tnaMax()")===3&&run("Object.keys(G.run.tna).length")===nq&&run("tnaQI().by[2].every(d=>G.run.tna['q'+d]&&G.run.tna['q'+d].m===3)")&&!run("G.run.tna[2]"), 'bản lưu cũ: sổ vùng chép sang mọi quận của vùng ('+nq+' quận)');
+    ok(run("G.run.tna['q'+tnaQI().by[2][0]].tien")===Math.ceil(3000/nq)&&run("NK.count('tna.quyQuan')")===1&&/^q\d+$/.test(run("G.run.tnaCh.k")), 'tiền treo thưởng chia đều, nhân chứng cũ có sổ quận, có nhật ký');
+    run("G=JSON.parse(JSON.stringify(G))");ok(run("tnaMax()")===3, 'lưu – tải giữ sổ quận');
+    } finally { run("Object.assign(TNA,JSON.parse(TNA_BK));G.run&&(G.run.scene=null)"); }
+  },
+  // gói GPT đợt năm: L1–L6 sự kiện + kết cục sáu nghề tu mở rộng (content/nghe-tu, core2/73) · L7 biến thể Đại Mộng
+  nghe_tu_sk() {
+    const base="G._ngNoEv=1;G._tuNoRui=1;G.run.pham=0;G.run.root={id:'tap',els:['kim','moc'],q:'thuong'};G.run.rootKnown=1;G.run.st=9999;G.run.lifeAdj=500;lkTang=()=>9;G.screen='map';G.run.kv=[];G.run.ccFlag={};G.run.origin='nong';G.run.tuDuyen={TU17:1,TU18:1,TU19:1,TU20:1,TU21:1,TU22:1};";
+    run("var ntLk=lkTang;NT_BK=JSON.stringify(TU_SK);var ntHoan=typeof tnaHoan==='function'?tnaHoan:null");
+    const lai = "W().t+=3*HM;G.run.scene=null;ccMonth()";
+    try {
+    ok(run("Object.keys(NTU_DATA).sort().join()")==='TU17,TU18,TU19,TU20,TU21,TU22'&&run("Object.values(NTU_DATA).every(D=>D.sk.length===12&&Object.keys(D.ket).length===4)"), 'nạp bản thảo: sáu nghề, mỗi nghề 12 sự kiện + 4 kết cục');
+    ok(run("KYNGO.filter(x=>/^ntu_TU\\d\\d_S\\d\\d$/.test(x.id)&&x.sp===1).length")===72&&run("Object.values(NTU_DATA).every(D=>D.sk.every(s=>s.c.every(c=>Object.keys(c.e).length>0)))"), '72 hộp thoại đăng ký sẵn (sp:1), lựa chọn nào cũng có hiệu ứng');
+    ok(run("Object.entries(TU_KET).every(([id,L])=>L.every(x=>NTU_DATA[id].ket[x.ma]))"), 'mọi kết cục trong luật đều có lời');
+    // Cổ sư: chưa theo nghề → không có; vừa vào nghề → đợi vài tháng
+    fresh(base+"TU_SK.p=1");run("G.run.scene=null;ccMonth()");ok(!run("G.run.scene"), 'chưa theo nghề: không có sự kiện nghề');
+    run("tuHoc('TU17',0);G.run.scene=null;ccMonth()");ok(!run("G.run.scene")&&run("G.run.ntu.b.TU17")!=null, 'vừa vào nghề: chưa hiện ngay');
+    run(lai);ok(run("G.run.scene&&G.run.scene.ev")==='ntu_TU17_S01'&&!/\{LOC/.test(run("G.run.scene.text"))&&run("NK.count('ntu.mo')")===1, 'vài tháng sau: "Vò cổ đầu" (mã nơi đã thay chữ)');
+    run("NT_R0=(G.run.tuRes||{}).TU17|0;NT_X0=tuK('TU17').xp;NT_S0=G.run.st;kyPick(0)");
+    ok(run("G.run.ntu.c['TU17.S01']")===0&&run("(G.run.tuRes.TU17|0)-NT_R0")===1&&run("tuK('TU17').xp")>run("NT_X0")&&run("G.run.st")<run("NT_S0"), 'chọn "Để riêng phần nuôi cổ": cổ trùng +1, tiến bộ nghề, tốn linh thạch');
+    ok(run("G.run.scene.res.t")===run("tyT(NTU_DATA.TU17.sk[0].c[0].t)")&&run("G.run.scene.chips.length")>=3, 'lời kết quả và các chip hiệu ứng');
+    run("G.run.scene=null;ccMonth()");ok(!run("G.run.scene"), 'cách nhau ít nhất hai tháng');
+    run(lai);ok(run("G.run.scene&&G.run.scene.ev")==='ntu_TU17_S02', 'lần sau: sự kiện kế tiếp theo thứ tự');run("kyPick(1)");
+    ok(run("(G.run.wounds||[]).some(w=>w.k==='doc')"), '"Mang vò đi tìm linh thạch": trúng độc');
+    run(lai+";kyPick(0)");run(lai);ok(!run("G.run.scene"), 'hết sự kiện tầng một: chờ lên tầng');
+    run("tuK('TU17').tang=2;"+lai);ok(run("G.run.scene&&G.run.scene.ev")==='ntu_TU17_S04', 'tầng hai: "Hạ tình cổ"');
+    run("NT_H=hdSum().T;NT_T=G.run.tamma;kyPick(1)");ok(run("hdSum().T")>run("NT_H")&&run("G.run.tamma")>run("NT_T"), 'nhận lời hạ cổ: Hành Đạo nghiêng tà, tâm ma tăng');
+    run("G.run.ntu.c={};tuK('TU17').tang=4;G.run.realm=2;"+lai);ok(run("G.run.scene.ev")==='ntu_TU17_S01', 'mỗi sự kiện một lần mỗi kiếp (xoá sổ thì gặp lại từ đầu)');
+    run("G.run.ntu.c={};for(let i=0;i<11;i++)G.run.ntu.c['TU17.S'+String(i+1).padStart(2,'0')]=0;G.run.realm=2;"+lai);ok(!run("G.run.scene"), 'sự kiện cuối cần cảnh giới cao hơn');
+    if (run("ntHoan!=null")) { run("tnaHoan=()=>true;G.run.realm=3;"+lai);ok(!run("G.run.scene")&&run("NK.count('ntu.hoan')")>=1, 'đang bị truy nã hoãn: chưa hiện');run("tnaHoan=ntHoan"); }
+    run("G.run.ntu=undefined;"+lai);ok(run("G.run.scene")==null&&run("typeof G.run.ntu.c")==='object', 'bản lưu cũ (không có ntu): vẫn chạy');
+    // kết cục Cổ sư
+    fresh(base);run("tuHoc('TU17',0);tuK('TU17').tang=3;hdAdd(0,40,'x');ntSt().c={'TU17.S04':1,'TU17.S08':1,'TU17.S01':0};die('combat',{n:'x'})");
+    ok(run("G.over.tuKet&&G.over.tuKet.ma")==='K04'&&run("G.over.tuKet.ten")===run("NTU_DATA.TU17.ket.K04.ten")&&run("G.over.tuKet.canh.length")===2&&run("NK.count('ntu.ket')")===1, 'Cổ sư nghiêng tà, đã hạ tình cổ và giữ cổ mẫu: "Gieo dịch cổ diệt thành"');
+    fresh(base);run("tuHoc('TU17',0);hdAdd(40,0,'x');ntSt().c={'TU17.S01':0,'TU17.S02':0,'TU17.S03':0};die('toahoa')");ok(run("G.over.tuKet.ma")==='K03', 'Cổ sư lòng ngay, đã qua ba việc nghề: "Thầy giải cổ được kính"');
+    fresh(base);run("tuHoc('TU17',0);hdAdd(40,0,'x');G.run.tuCoDoi=1;die('combat',{n:'x'})");ok(run("G.over.tuKet.ma")==='K02', 'chết khi cổ đang đói: "Bị cổ ăn mòn"');
+    fresh(base);run("tuHoc('TU17',0);die('combat',{n:'x'})");ok(!run("G.over.tuKet"), 'mới vào nghề, chưa trải việc: không có kết cục nghề');
+    // Phật tu phá giới · Nho tu văn tâm vỡ · Thiên cơ thiên khiển · Thương tu
+    fresh(base);run("tuHoc('TU19',0);ntChon('TU19',3,1)");ok(run("G.run.tuPhatTat>0")&&run("G.run.ntu.c['TU19.S04']")===1, 'Phật tu "Ra đòn đoạt mạng": phạm giới sát, Phật quang tắt');
+    run("die('combat',{n:'x'})");ok(run("G.over.tuKet.ma")==='K02'&&run("G.over.tuKet.n")==='Phật tu', 'kết cục "Phá giới hoàn tục"');
+    fresh(base+"hdAdd(40,0,'x')");run("tuHoc('TU20',0);hdAdd(0,6,'x');hdAdd(0,6,'x');hdAdd(0,6,'x')");ok(!run("tuArtOf('TU20')")&&run("G.run.ntu.vo")===1, 'Nho tu nứt ba lần: văn tâm vỡ (ghi lại)');
+    run("die('combat',{n:'x'})");ok(run("G.over.tuKet.ma")==='K02'&&run("G.over.tuKet.id")==='TU20', 'mất pháp môn vẫn có kết cục "Văn tâm vỡ thành phế nhân"');
+    fresh(base);run("tuHoc('TU21',0);NT_T0=G.run.lifeAdj;ntE({khien:1},'TU21');ntE({tho:1},'TU21')");ok(run("G.run.ntu.tk")===1&&run("G.run.lifeAdj")===run("NT_T0")-1, 'Thiên cơ: thiên khiển được đếm, quẻ tổn một năm thọ');
+    run("ntE({khien:1},'TU21');die('combat',{n:'x'})");ok(run("G.over.tuKet.ma")==='K02', 'hai lần thiên khiển: "Mù vì thiên khiển"');
+    fresh(base);run("tuHoc('TU22',0);G.run.st=1000;ntE({st:'-60%'},'TU22')");ok(run("G.run.st")===400, 'Thương tu phá sản: mất phần lớn linh thạch');
+    run("ntSt().c['TU22.S12']=1;die('combat',{n:'x'})");ok(run("G.over.tuKet.ma")==='K02', 'còn nợ khế chưa gạch: "Phá sản, bị chủ nợ giết"');
+    fresh(base);run("tuHoc('TU18',0);G.run.tuRes={TU18:4};ntE({res:-3,danh:-4},'TU18')");ok(run("G.run.tuRes.TU18")===1&&run("danhGet('reg:'+(nodeById(G.run.at).r))")<0, 'tài nguyên nghề giảm, dân vùng e dè');
+    // L7: biến thể Đại Mộng
+    ok(run("DM_DATA.hq.END02.tin.length===10&&DM_DATA.hq.END03.tin.length===10&&DM_DATA.hq.END06.tin.length===10"), 'tin đồn ba kết: mỗi kết mười câu');
+    ok(run("Object.values(DM_DATA.gb).every(x=>x.hien.length===4)"), 'Người Gác Bến: mỗi dạng bốn cảnh gặp');
+    ok(run("DM_DATA.ky.A1.bien.length===2&&DM_DATA.ky.A2.bien.length===2&&DM_DATA.ky.A2.bien.every(b=>b.t.length===3)"), 'kỳ ngộ A1, A2: mỗi cái hai bản kể khác, đủ lời từng lựa chọn');
+    run("G.run.kyA1V=2");ok(run("kyDmEv('A1').t")===run("DM_DATA.ky.A1.bien[1].text.map(s=>dmT(s)).join('\\n\\n')")&&run("kyDmChon('A1',1).t")===run("dmT(DM_DATA.ky.A1.bien[1].t[1])"), 'bản kể khác: đoạn mở đầu và lời kết quả đổi theo bản');
+    run("G.run.kyA1V=undefined");ok(run("kyDmChon('A1',0).t")===run("dmT(DM_DATA.ky.A1.c[0].t)"), 'bản lưu cũ: bản gốc');
+    ok(run("(()=>{const s=new Set();for(let i=0;i<40;i++){W().t+=HD;s.add(kyDmChonV('A2'))}return s.size})()")===3, 'game chọn ngẫu nhiên giữa bản gốc và hai bản khác');
+    } finally { run("lkTang=ntLk;G._tuNoRui=0;Object.assign(TU_SK,JSON.parse(NT_BK));if(ntHoan)tnaHoan=ntHoan"); }
   },
 };
 

@@ -699,12 +699,12 @@ const TESTS = {
     await p.waitForTimeout(150);
     const opts = await p.locator('[data-act="vopt"]').allInnerTexts();
     ok(opts.length >= 3 && opts.some(x => /Nộp phạt/.test(x)) && opts.some(x => /Ngồi tù/.test(x)), 'mục Quan phủ: nộp phạt, làm công, ngồi tù ' + JSON.stringify(opts));
-    await ev(p, () => {G.run.bac=G.run.tna[TN.r].tien+1;render();});
+    await ev(p, () => {G.run.bac=tnaE(TN.r).tien+1;render();});
     await p.locator('[data-act="vopt"][data-arg="nop"]').click();
     await p.waitForTimeout(150);
     await p.locator('[data-act="vgo"]').click();
     await p.waitForTimeout(200);
-    ok(await ev(p, () => !G.run.tna[TN.r] && !document.querySelector('.wi.na')), 'nộp phạt xong: hết truy nã, mất biểu tượng');
+    ok(await ev(p, () => !tnaE(TN.r) && !document.querySelector('.wi.na')), 'nộp phạt xong: hết truy nã, mất biểu tượng');
     await ev(p, () => {G.run.scene=null;render();});
     ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
   },

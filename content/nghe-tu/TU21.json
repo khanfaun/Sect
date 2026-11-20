@@ -1,0 +1,377 @@
+{
+ "schemaVersion": 1,
+ "loai": "nghe_tu",
+ "nghe": "TU21",
+ "ten": "Thiên cơ sư",
+ "su_kien": [
+  {
+   "ma": "S01",
+   "ten": "Quẻ đầu",
+   "text": [
+    "Ở {LOC05}, thẻ quẻ ngã nghiêng về phía chén nước. Trong mặt nước, ngươi thoáng thấy mấy đôi dép dừng trước cầu, rồi nước đục đi.",
+    "Người hỏi chỉ muốn biết nên qua cầu hôm nay hay chờ. Khi ngươi với tay dựng thẻ, ngón tay bỗng lạnh dù nước trong chén còn ấm."
+   ],
+   "choices": [
+    {
+     "l": "Nói điều thấy và điều chưa rõ",
+     "t": "Ngươi tả đôi dép và nhắc quẻ không chỉ được ngày. Người ấy chọn hỏi người coi cầu, còn tay ngươi run tới tận khi cất chén.",
+     "e": {
+      "res": 1,
+      "xp": 2,
+      "tamma": -1
+     }
+    },
+    {
+     "l": "Gieo thêm để tìm ngày",
+     "t": "Ngươi dốc thẻ lần nữa, nhưng bóng người dời sang bến. Tóc mai bạc thêm, và người hỏi bỏ về khi nghe ngươi không dám hẹn ngày.",
+     "e": {
+      "tho": 0.5,
+      "res": 2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S02",
+   "ten": "Quẻ báo chết cho người thân",
+   "text": [
+    "Trong quẻ, ngươi thấy chiếc bát của người nhà nằm úp bên giường. Tiếng ho phía bên kia cửa vẫn đều, chưa cho biết điều gì sắp tới.",
+    "Khi nhấc tay khỏi thẻ, ngươi phải ngồi xuống vì đầu choáng. Người thân mang nước tới, hỏi vì sao ngươi giữ chặt chiếc bát của họ."
+   ],
+   "choices": [
+    {
+     "l": "Kể dấu quẻ và mời thầy thuốc",
+     "t": "Ngươi nói bóng chiếc bát có thể chỉ cơn bệnh rồi nhờ thầy thuốc tới xem. Người nhà vẫn tự chọn có đi chữa, còn ngươi giữ kín điều quẻ chưa nói rõ.",
+     "e": {
+      "hd": [
+       1,
+       0
+      ],
+      "res": 1
+     }
+    },
+    {
+     "l": "Ở lại chăm mà không gieo thêm",
+     "t": "Ngươi cất thẻ và đỡ người thân uống nước. Cơn ho chưa dứt, nhưng họ ngủ được trước khi đầu ngươi thôi choáng.",
+     "e": {
+      "tamma": -3,
+      "mp": "10%"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S03",
+   "ten": "Vua mời xem quốc vận",
+   "text": [
+    "Ở {LOC02}, người giữ ấn trải bản đồ lên bàn, lấy đĩa cân chặn mép. Ngươi nhìn thấy kho mở trong quẻ, nhưng không biết vì cứu đói hay vì quân kéo tới.",
+    "Quẻ vừa dứt, khớp tay ngươi nhức buốt. Người đợi ngoài cửa đã mài mực, sẵn sàng chép lời ngươi vào chiếu."
+   ],
+   "choices": [
+    {
+     "l": "Đọc các ngả và xin tra kho",
+     "t": "Ngươi ghi cả khả năng cứu đói lẫn điều quân rồi xin xem sổ lương. Chiếu chưa đóng dấu, còn ngươi rời bàn với cổ tay phải quấn vải.",
+     "e": {
+      "tho": 0.5,
+      "st": 3
+     }
+    },
+    {
+     "l": "Chỉ nêu dấu chắc mình đã thấy",
+     "t": "Ngươi chỉ ghi hình cửa kho mở và từ chối nói kho sẽ mở cho ai. Người giữ ấn gấp giấy lại, không giao phần lễ đã hứa.",
+     "e": {
+      "hd": [
+       1,
+       0
+      ],
+      "res": 1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S04",
+   "ten": "Ma đầu ép xem đường sống",
+   "text": [
+    "Người cầm đao đặt thẻ quẻ trước mặt ngươi và buộc ngươi chỉ lối thoát. Trong quẻ, con đường hiện ra bên vệt nước, nhưng bờ bên kia chìm trong bóng tối.",
+    "Cơn lạnh chạy lên cánh tay khi ngươi nhặt thẻ. Sau tấm vách, ngươi nghe người giữ ngựa loay hoay kéo dây khỏi chốt."
+   ],
+   "choices": [
+    {
+     "l": "Nói rõ rủi ro ở bến",
+     "t": "Ngươi chỉ dấu nước và nhắc bờ kia có thể không cập được. Kẻ cầm đao chạy xuống bến, để ngươi với bàn tay cứng lạnh và chiếc ghế đổ.",
+     "e": {
+      "mp": "-10%",
+      "res": 1
+     }
+    },
+    {
+     "l": "Bẻ thẻ, không chỉ lối",
+     "t": "Ngươi bẻ thẻ cuối và nói quẻ chưa đủ để dẫn đường. Kẻ ấy tự kéo ngựa đi, còn ngươi phải nhờ người giữ trạm gỡ cửa đã chốt.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "hp": "-5%"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S05",
+   "ten": "Thấy bóng mình trong quẻ (Mộng Ấn)",
+   "text": [
+    "Trong mặt quẻ có bàn tay đang gấp tờ giấy. Ngươi nhìn xuống và thấy tay mình cũng có thói quen miết góc giấy theo chiều ấy.",
+    "Cổ tay chợt lạnh, hình trên mặt quẻ bắt đầu loang. Ngươi có thể ghi điều vừa thấy hoặc giữ quẻ mở để xem bàn tay kia viết gì."
+   ],
+   "choices": [
+    {
+     "l": "Ghi hình rồi khép quẻ",
+     "t": "Ngươi vẽ lại nếp gấp và cất tờ giấy. Lúc quay vào, cảm giác quen vẫn còn nhưng ngươi chẳng gọi được một cái tên nào.",
+     "e": {
+      "tamma": -2,
+      "tv": 3
+     }
+    },
+    {
+     "l": "Giữ quẻ tới khi hình tan",
+     "t": "Ngươi giữ tay trên thẻ đến khi cơn lạnh tê tận khuỷu. Giấy trong quẻ lật mặt, để lộ vệt mực chưa thành chữ rồi tan vào nước.",
+     "e": {
+      "tho": 0.5,
+      "res": 2,
+      "tv": 5
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S06",
+   "ten": "Bị thiên khiển",
+   "text": [
+    "Ngươi chưa kịp thu thẻ thì mắt tối sầm. Tiếng chén vỡ dưới nền đến trước cơn đau buốt trong thức hải.",
+    "Có người muốn ngươi gieo tiếp để kịp giờ mở kho. Người giữ phòng đã lấy khăn ấm, đứng đợi ngươi buông tay khỏi quẻ."
+   ],
+   "choices": [
+    {
+     "l": "Dừng quẻ và dưỡng thương",
+     "t": "Ngươi để người giữ phòng cất thẻ rồi dựa lưng tới khi phân biệt được ánh ngoài cửa. Khách đi tìm người khác, còn ngươi bỏ trống ngày xem tiếp.",
+     "e": {
+      "khien": 1,
+      "tamma": -2
+     }
+    },
+    {
+     "l": "Tra dấu cũ, không mở quẻ mới",
+     "t": "Ngươi nhờ họ đọc bản chép cũ, chỉ được chỗ còn mơ hồ trên giấy. Chủ kho tự quyết giờ mở, còn ngươi phải quay mặt vào vách khi đèn được thắp.",
+     "e": {
+      "khien": 1,
+      "st": 2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S07",
+   "ten": "Đổi mệnh cho người khác",
+   "text": [
+    "Một người cha đưa ngươi chiếc áo của đứa trẻ và xin nhận phần yểu mệnh thay con. Trong quẻ có dáng người đứng bên giường, nhưng đường chỉ chưa nối tới đâu.",
+    "Người cha vẫn muốn làm khi nghe rằng cả hai đều có thể hao thọ. Tóc bên thái dương ngươi đã bạc đi chỉ sau khi nhìn thế quẻ."
+   ],
+   "choices": [
+    {
+     "l": "Chỉ làm khi cha tự nhận cái giá",
+     "t": "Ngươi hỏi lại trước mặt người nhà rồi mới đổi dấu trên quẻ. Đứa trẻ qua được cơn nguy, còn người cha hụt hơi ngay khi cúi xuống nhặt chiếc áo.",
+     "e": {
+      "deed": "nghich_thien",
+      "tho": 1,
+      "res": 2
+     }
+    },
+    {
+     "l": "Khép quẻ và tìm cách chữa",
+     "t": "Ngươi tháo thẻ khỏi dây, giúp người cha đưa đứa trẻ tới nơi chữa. Bên đường, cả hai dừng nghỉ vì tay ngươi còn run và người cha chưa hết ho.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "hp": "-5%"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S08",
+   "ten": "Đoán sai",
+   "text": [
+    "Ngươi đã bảo đoàn xe tránh con đường ven ruộng vì thấy nước dâng. Sáng sau, con đường ấy vẫn khô, còn xe đã đi theo lối bị lở.",
+    "Người chở hàng mang tới dải vải buộc từ bánh gãy. Ngươi nhìn thấy tay mình run vì phí thọ hôm qua và biết lời đoán vẫn đã sai."
+   ],
+   "choices": [
+    {
+     "l": "Nhận sai và góp công dỡ xe",
+     "t": "Ngươi mang ván tới chỗ lở rồi cùng người chở nhấc hàng xuống. Họ yêu cầu ngươi sửa tờ báo quẻ ở trạm trước khi lấy lại tiền đã trả.",
+     "e": {
+      "st": -2,
+      "danh": 3,
+      "tamma": -2
+     }
+    },
+    {
+     "l": "Công bố bản quẻ cho họ đối",
+     "t": "Ngươi treo bản chép bên lời báo của người giữ đường, gạch rõ chỗ mình đã suy sai. Đoàn xe tự đi tìm lối, còn người tới xem quẻ sau đọc tờ ấy trước khi ngồi.",
+     "e": {
+      "danh": 4,
+      "res": -1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S09",
+   "ten": "Thiên cơ các truy sát kẻ lộ thiên cơ",
+   "text": [
+    "Người của {FA03} chặn ngươi trước cửa trạm và đòi bản quẻ đã lọt ra ngoài. Trong tay họ là tờ sao chỉ còn phần kết, mất hết dòng ngươi ghi còn nghi.",
+    "Ngươi đã hao thọ khi mở quẻ, và chân trở nặng lúc muốn đi nhanh. Người đưa giấy còn trong quán, chưa biết ngoài cửa có người đợi."
+   ],
+   "choices": [
+    {
+     "l": "Giao cả bản đối chứng",
+     "t": "Ngươi trải bản đủ ra bàn, chỉ chỗ họ đã bỏ mất dòng còn nghi. Người truy giữ ngươi lại để hỏi, còn người đưa giấy được rời trạm qua cửa trước.",
+     "e": {
+      "hp": "-10%",
+      "res": -1
+     }
+    },
+    {
+     "l": "Đưa người chuyển giấy ra cửa sau",
+     "t": "Ngươi để lại bản quẻ trên ghế và ra hiệu cho người chuyển giấy đi cùng. Họ thoát được trước, còn ngươi phải dừng ngoài bờ dốc để lấy lại hơi.",
+     "e": {
+      "deed": "cuu_nguoi",
+      "mp": "-15%"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S10",
+   "ten": "Đứa trẻ có mệnh đế vương",
+   "text": [
+    "Đứa trẻ nghịch góc bản đồ, dùng hạt đậu chặn ngay chỗ vẽ cửa thành. Trong quẻ, ngươi thấy bóng nó ngồi trên ghế cao, còn phía sau trống rỗng.",
+    "Hơi lạnh đã lan tới ngực ngươi, vậy mà người đưa trẻ tới vẫn muốn nghe ngươi nói chắc. Ngoài cửa, đứa trẻ hỏi có được mang hạt đậu về gieo không."
+   ],
+   "choices": [
+    {
+     "l": "Giữ lời quẻ trong sổ riêng",
+     "t": "Ngươi nói với người nhà rằng hình chỉ là một ngả, rồi cất bản. Đứa trẻ lấy hạt đậu về, và người nhà chưa đặt người canh ngoài cửa.",
+     "e": {
+      "res": 1,
+      "tamma": -2
+     }
+    },
+    {
+     "l": "Cho gia đình xem với lời dè dặt",
+     "t": "Ngươi để họ đọc cả hình lẫn phần chưa rõ. Họ thuê thầy đến nhà, còn đứa trẻ phải để hạt đậu lại vì từ mai không được chạy ra bờ ruộng một mình.",
+     "e": {
+      "st": 3,
+      "tho": 0.5
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S11",
+   "ten": "Xem tận thế",
+   "text": [
+    "Trong quẻ, ngươi thấy dãy bếp tắt trước khi trời tối. Ngoài khung cửa, một ngọn lửa vẫn cháy đều dưới đáy nồi, không khớp với bóng vừa hiện.",
+    "Phải chống cả tay xuống bàn ngươi mới đứng dậy được. Người nghe hỏi nên báo dân rời đi hay chỉ giữ đề phòng khi có dấu thật."
+   ],
+   "choices": [
+    {
+     "l": "Báo những dấu có thể kiểm",
+     "t": "Ngươi chỉ cho họ đối ngày bếp tắt với gió và nước ở trạm. Người giữ trạm chuẩn bị chỗ trú, còn ngươi dừng xem để cơn đau không tăng thêm.",
+     "e": {
+      "danh": 5,
+      "hd": [
+       3,
+       0
+      ]
+     }
+    },
+    {
+     "l": "Đặt quẻ khác cạnh quẻ cũ",
+     "t": "Ngươi mở thêm quẻ và thấy có bếp còn đỏ dưới bóng tối. Thọ nguyên đã hao mà hai hình vẫn khác, nên ngươi chỉ gửi giấy ghi những chỗ chúng cùng hiện.",
+     "e": {
+      "tho": 1,
+      "res": 3,
+      "xp": 4
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S12",
+   "ten": "Quẻ cuối",
+   "text": [
+    "Ngươi đặt thẻ cuối lên tấm vải đã sờn ở chỗ từng cầm. Trong quẻ thấp thoáng lối rẽ giữa sương, còn chân ngươi lạnh tới mức chẳng còn cảm được mép chiếu.",
+    "Ngoài cửa có người vẫn đợi lời dặn của ngươi. Phần thọ còn lại có thể đem gieo, hoặc để ngươi gọi họ vào và nói hết chuyện cần nói."
+   ],
+   "choices": [
+    {
+     "l": "Gieo quẻ cho mình",
+     "t": "Ngươi lật thẻ và thấy bóng người tản về những ngả khác nhau. Cảnh vẫn mờ, nhưng tới lúc họ vào, bàn tay ngươi đã không đủ sức thu thẻ.",
+     "e": {
+      "tho": 1,
+      "tv": 6
+     }
+    },
+    {
+     "l": "Khép vải và gọi người vào",
+     "t": "Ngươi bọc thẻ lại, nhờ người kia tới sát cửa giường. Họ được nghe ngươi dặn chỗ cất bản quẻ dở và ai cần trả phần lễ còn nợ.",
+     "e": {
+      "tamma": -5,
+      "hd": [
+       1,
+       0
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "ket_cuc": [
+  {
+   "ma": "K01",
+   "ten": "Thiên cơ tử",
+   "canh": [
+    "Khách đến {LOC05} mang theo lời đồn rằng ngươi thấy được mọi ngả. Ngươi đặt trước mặt họ bản chép cả những lần đoán sai, rồi trải vải cho lượt xem tiếp.",
+    "Mỗi lần thẻ đổ, bàn tay ngươi lại lạnh thêm. Người học ngồi bên tự ghi chỗ quẻ bỏ trống trước khi chép lời ngươi."
+   ]
+  },
+  {
+   "ma": "K02",
+   "ten": "Mù vì thiên khiển",
+   "canh": [
+    "Sau cơn đau, ngươi đưa tay về phía đèn mà chẳng thấy bóng mình trên bàn. Người học kéo đĩa thẻ tới sát ngón tay để ngươi nhận ra mép vải.",
+    "Từ hôm đó, khách đọc câu hỏi thành tiếng. Ngươi tập nghe hết lời rồi hỏi lại họ muốn biết điều gì, trước khi quyết định có mở quẻ."
+   ]
+  },
+  {
+   "ma": "K03",
+   "ten": "Chết vì lộ thiên cơ",
+   "canh": [
+    "Người truy tìm ngươi tới trạm khi bản lời quẻ đã được chuyền sang bờ. Sáng hôm sau, chiếc chiếu ngươi nằm vẫn còn hơi ẩm, nhưng người giữ trạm gọi mãi không thấy ngươi đáp.",
+    "Họ giữ lại tờ ghi các dấu chưa rõ cùng bản sao đã phát ra. Người đến tìm về sau đọc được vì sao một câu còn nghi lại thành lời quyết."
+   ]
+  },
+  {
+   "ma": "K04",
+   "ten": "Tỉnh mộng",
+   "canh": [
+    "Ngươi đặt bản quẻ cuối cạnh các bản đã chép và nhìn thấy cùng một lối rẽ ở phần giấy còn trống. Dưới nền đá vang tiếng nước, chẳng lời nào xác nhận bên kia có gì.",
+    "Ngươi đứng lên khi tay bắt đầu lạnh và bước về phía lối rẽ. Trước khi đi, ngươi để lại các thẻ chưa lật cho người sau tự dò."
+   ]
+  }
+ ]
+}

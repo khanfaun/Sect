@@ -1,5 +1,6 @@
 // Nguồn chuẩn cho Sửa-O (câu 77): hệ truy nã kiểu thế giới mở. Luật: src/game/core2/66-truy-na.js · chữ: content/text/truy-na.json (khoá tna.*).
-// Phạm tội → (nhân chứng) → quan phủ ghi MỨC TRUY NÃ theo VÙNG (đại khu vực) + TIỀN TREO THƯỞNG của vùng đó.
+// Phạm tội → (nhân chứng) → quan phủ ghi MỨC TRUY NÃ theo QUẬN (đơn vị hành chính trên bản đồ) + TIỀN TREO THƯỞNG của quận đó;
+// tội ở tông môn / căn cứ thế lực (trụ sở không phải trấn, thành) ghi vào sổ riêng của thế lực đó, chỉ chấp pháp đường nơi đó xoá được (core2/66 tnaK).
 // Mức 0..5 chỉ dùng bên trong; người chơi chỉ thấy chữ + biểu tượng (tna.m.1..5, icon).
 //   toi[mã] = sức nặng của tội (cộng vào mức): pha_dat phá đất dân · no quỵt nợ · chong chống lại quan sai · giet_chung giết nhân chứng bị lộ ·
 //            danh tiếng xấu tới mức bị ghét cả vùng (danh) · các việc làm trong sổ nghiệp (deed) phạm luật khi ở nơi có dân (bảng deed).

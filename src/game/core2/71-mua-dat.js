@@ -26,7 +26,7 @@ function datBanGia(n,c){return Math.round((datGoc(n)+(c.muaCt&&c.ct?datCtGia(c.c
 function datMuaLt(g){return Math.ceil(g/DAT.mua.lt);}
 // lý do không mua được (chuỗi rỗng = được)
 function datMuaNo(n,c){const r=G.run,M=DAT.mua;const g=datMuaGia(n,c);
-  if(typeof tnaMuc==='function'&&feat('tna')&&tnaMuc(n.r!=null?n.r:(r.region||0))>=M.naMin)return contentText('dat.muaNa');
+  if(typeof tnaMuc==='function'&&feat('tna')&&tnaMuc(typeof tnaK==='function'?tnaK(n):(n.r!=null?n.r:(r.region||0)))>=M.naMin)return contentText('dat.muaNa');
   if(datSoTa(n)>=M.toiDa)return contentText('dat.muaDu');
   if(datThueNoNoi(n)>0)return contentText('dat.thueMua');
   const k=datGiaChu(c);
