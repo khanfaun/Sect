@@ -63,7 +63,7 @@ export function NutBanDo() {
     <div className="mbl">
       <Nut act="panel" arg="craft" icon="flask" l="Luyện chế" t="Luyện chế: luyện đan, luyện khí từ vật liệu" on={UI.panel === 'craft'} dis={r.moving} />
       <Nut act="bagOpen" icon="bag" l="Túi đồ" t="Túi đồ" on={UI.panel === 'char' && UI.tab.char === 'bag'} />
-      {!PS.voKnown() && <Nut act="hudBq" icon="seat" l="Bế quan" cls={brk ? 'glow' : ''} dis={bqNo} t={bqNo || (brk ? 'Bế quan · tu vi viên mãn: vào để đột phá' : 'Bế quan tu luyện ngay tại đây')} />}
+      <Nut act="hudBq" icon="seat" l="Bế quan" cls={brk ? 'glow' : ''} dis={!!bqNo || PS.voKnown()} t={PS.voKnown() ? 'Vô linh căn: chưa thể bế quan tu luyện' : bqNo || (brk ? 'Bế quan · tu vi viên mãn: vào để đột phá' : 'Bế quan tu luyện ngay tại đây')} />
       <Nut act="cgOpen" icon="yin" l="Cảnh giới" on={!!(UI.modal && /cg/.test(UI.modal.k || ''))} t="Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá" />
     </div>
   </>;

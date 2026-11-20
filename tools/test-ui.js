@@ -187,7 +187,7 @@ const TESTS = {
   async vo_hud(p) {
     await ev(p, () => {G.run.root={id:'vo',els:[]};G.run.rootKnown=1;UI.modal=null;UI.panel=null;render();});
     await p.waitForTimeout(150);
-    ok(await ev(p, () => !document.querySelector('.mbl [data-act="hudBq"]')), 'ẩn nút bế quan');
+    ok(await ev(p, () => { const q = document.querySelector('.mbl [data-act="hudBq"]'); return !!q && q.disabled; }), 'nút bế quan hiện nhưng mờ (không bấm được)');
     await ev(p, () => {UI.panel='char';UI.tab.char='base';render();});
     await p.waitForTimeout(150);
     ok(await ev(p, () => /Vô linh căn — chưa thể tu luyện/.test(document.body.innerText)), 'bảng nhân vật: chưa thể tu luyện');

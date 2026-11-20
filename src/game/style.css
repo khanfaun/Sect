@@ -1499,7 +1499,7 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .nv .dot.soft{top:-3px;left:auto;right:-3px}
   /* nút bản đồ: dàn ngang dưới màn hình, chia hai bên, có chữ kế bên */
   .mbl{top:auto!important;bottom:14px!important;flex-direction:row!important;gap:6px!important;align-items:center;left:auto!important;right:12px!important}
-  .mright{top:auto!important;bottom:110px!important;left:12px!important;right:auto!important;flex-direction:column!important;gap:6px!important;align-items:center}
+  .mright{top:auto!important;bottom:14px!important;left:12px!important;right:auto!important;flex-direction:row!important;gap:6px!important;align-items:center}
   .mright .mb{width:40px!important;padding:0!important;justify-content:center}.mright .mb-l{display:none!important}
   .mright .mb,.mbl .mb{width:auto!important;height:40px!important;margin:0!important;padding:0 13px 0 10px;display:inline-flex;align-items:center;gap:7px;font-size:.84em;letter-spacing:.03em;white-space:nowrap}
   .mright .mb .ic,.mbl .mb .ic{width:19px!important;height:19px!important}
@@ -1726,6 +1726,5 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 .rh.lt-0{background:#8a9a8f}.rh.lt-1{background:#3f9a5a}.rh.lt-2{background:#3a78c8}.rh.lt-3{background:#9a4ac8}
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){
   .tien-cum{bottom:auto;top:64px;right:12px;font-size:.9em}
-  .mright{top:106px!important}
 }
 @media (max-width:420px){.tien-cum{gap:5px;padding:4px 7px;font-size:.72em}}
