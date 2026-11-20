@@ -1079,3 +1079,5 @@ Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời
 - Bài: luật `mua_dat` (27 ý), `hau_qua` (20 ý) — đặt cuối danh sách (trước smoke) để không đổi hạt giống các bài cũ; đã thêm vào `test:rules`; `dm_kiem` sửa số tệp phải viết (38). Giao diện: `dat_dai` thêm mua đất (3 ý), `dai_mong` thay Tân Mộng bằng về màn mở đầu + hồi ức đời sau (4 ý). Bot: thêm `datMua`, `datBan`, `kyDmChon` vào COV_FN (chưa chạy bot).
 - Kết quả: `content:check` đạt; luật (mọi bài trừ smoke) 1468 ý đạt; giao diện 252 ý, một lần trượt `thenoi` ("chạm đánh dấu tuyến") khi chạy cả bộ, chạy riêng thì đạt (cả bản gốc) — nghi do nhịp chạy.
 - **Còn dở:** chưa có thuế đất / tịch biên (HN HS05); chưa mua ô đã có công trình (quán, tiệm); NPC chưa tự mua lại đất; hồi ức đời sau chưa hiện ở bến (chỉ ở màn hết kiếp).
+- 84. A: không đổi số năm giữa hai kiếp (người dùng xác nhận). 85. không (nghi thức rút gọn). 86. tạm thời như đã làm.
+- 87. Quy tắc làm việc: phần NỘI DUNG (lời văn, sự kiện, kết cục) giao GPT, Claude không tự viết để đỡ tốn token; Claude chỉ làm bộ máy/luật/giao diện.
