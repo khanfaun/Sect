@@ -1,0 +1,20 @@
+{
+  "ma": "A1",
+  "ten": "Mộng du tiên cảnh",
+  "text": [
+    "Đi đường đã lâu, ngươi ngồi tĩnh tọa bên gốc cây cho chân bớt mỏi. Khi hé mắt, ngươi thấy một cõi sáng lạnh và dãy bậc trắng chạy lên cao. Vạt áo khẽ lay, nhưng ngọn cỏ cạnh chân đứng im.",
+    "Ở đâu xa có tiếng nước chảy, nghe như sông qua chân cầu. Ngươi chợt có cảm giác đã từng đứng đợi tiếng ấy dứt. Chân ngươi đã đặt lên mép bậc, còn phía sau có tiếng lá khô lạo xạo."
+  ],
+  "choices": [
+    {
+      "l": "Bước lên bậc thang",
+      "t": "Ngươi bước lên cho tới khi tiếng sông mỏng dần phía dưới. Lúc mở mắt dưới gốc cây, bắp chân ngươi mỏi rã mà hơi thở vẫn đều. Trên mu bàn chân có một vệt ướt hẹp bằng mép bậc.",
+      "e": {}
+    },
+    {
+      "l": "Quay lưng bỏ đi",
+      "t": "Ngươi quay về phía tiếng lá khô. Tỉnh lại, ngươi thấy nhẹ cả vai, chỉ thoáng tiếc vì chưa nhìn xem bậc cuối dẫn tới đâu. Một cánh hoa trắng mắc trong nếp tay áo.",
+      "e": {}
+    }
+  ]
+}
