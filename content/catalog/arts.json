@@ -12276,7 +12276,7 @@
     "id": "cp_tu17",
     "type": "cp",
     "tu": "TU17",
-    "n": "Dưỡng Cổ Thiên",
+    "n": "Dưỡng Cổ Kinh",
     "el": "vo",
     "t": 1,
     "req": 0,
@@ -12322,14 +12322,14 @@
         "d": "Giải cổ cho người dễ hơn (chờ hệ chữa bệnh)"
       }
     ],
-    "d": "Trăm con trùng chung một vò, con nào sống sót mới đáng gọi là cổ.",
+    "d": "Ngươi chăm vò cổ bằng linh thạch để trùng trong vò chịu nghe hiệu lệnh.",
     "dang": "Cổ sư"
   },
   {
     "id": "cp_tu18",
     "type": "cp",
     "tu": "TU18",
-    "n": "Dưỡng Thi Quyết",
+    "n": "Tàng Thi Quyết",
     "el": "vo",
     "t": 1,
     "req": 0,
@@ -12375,14 +12375,14 @@
         "d": "Luyện xác vô chủ không vướng nghiệp; đào mộ người thường thì vướng"
       }
     ],
-    "d": "Người chết không đau nữa; kẻ luyện thi phải nhớ thay họ.",
+    "d": "Ngươi dẫn thi khí vào xác luyện rồi buộc nó theo hiệu lệnh của mình.",
     "dang": "Thi tu"
   },
   {
     "id": "cp_tu19",
     "type": "cp",
     "tu": "TU19",
-    "n": "Bát Nhã Tâm Kinh Giải",
+    "n": "Bát Nhã Tâm Kinh",
     "el": "vo",
     "t": 1,
     "req": 0,
@@ -12428,14 +12428,14 @@
         "d": "Túc Mạng Thông: kiếp sau thỉnh thoảng nhớ lại nghề đã học"
       }
     ],
-    "d": "Lời kinh không dạy cách đánh, chỉ dạy cách không sợ.",
+    "d": "Lời kinh giúp ngươi giữ tâm vững khi gom nguyện lực và đối diện tà vật.",
     "dang": "Phật tu"
   },
   {
     "id": "cp_tu20",
     "type": "cp",
     "tu": "TU20",
-    "n": "Đại Học Chính Tâm Thiên",
+    "n": "Chính Tâm Kinh",
     "el": "vo",
     "t": 1,
     "req": 0,
@@ -12481,14 +12481,14 @@
         "d": "Lời nói ra có sức nặng với người đọc sách (chờ hệ thuyết phục)"
       }
     ],
-    "d": "Lòng ngay thì chữ thẳng, chữ thẳng thì lời có sức.",
+    "d": "Ngươi dưỡng hạo nhiên khí bằng việc giữ lời đã viết và làm điều đã dạy.",
     "dang": "Nho tu"
   },
   {
     "id": "cp_tu21",
     "type": "cp",
     "tu": "TU21",
-    "n": "Mai Hoa Dịch Số",
+    "n": "Dịch Quẻ Kinh",
     "el": "vo",
     "t": 1,
     "req": 0,
@@ -12534,14 +12534,14 @@
         "d": "Khuy Mệnh (từ Nguyên Anh): trước khi chết được nhìn trước người mình có thể thành"
       }
     ],
-    "d": "Một cánh hoa rụng cũng là một quẻ; người xem quẻ trả bằng tuổi của mình.",
+    "d": "Ngươi đọc thế biến trong quẻ và trả thọ nguyên mỗi khi nhìn sâu vào thiên cơ.",
     "dang": "Thiên cơ sư"
   },
   {
     "id": "cp_tu22",
     "type": "cp",
     "tu": "TU22",
-    "n": "Thông Bảo Quyết",
+    "n": "Tụ Tài Quyết",
     "el": "vo",
     "t": 1,
     "req": 0,
@@ -12587,14 +12587,14 @@
         "d": "Cho vay linh thạch, mở phường thị (chờ hệ thương hội)"
       }
     ],
-    "d": "Linh thạch chảy như nước; người giữ được nó là người biết đào mương.",
+    "d": "Ngươi dưỡng tài khí qua những chuyến linh vật và những khế ước đã làm trọn.",
     "dang": "Thương tu"
   },
   {
     "id": "cp_tu23",
     "type": "cp",
     "tu": "TU23",
-    "n": "Ngũ Lôi Phù Ấn",
+    "n": "Dẫn Lôi Pháp",
     "el": "vo",
     "t": 1,
     "req": 0,
@@ -12640,14 +12640,14 @@
         "d": "Thiên lôi đánh xuống nhẹ hơn một phần (chờ hệ thiên kiếp)"
       }
     ],
-    "d": "Năm ấn trong lòng bàn tay, mỗi ấn giữ một tiếng sét chưa nổ.",
+    "d": "Ngươi giữ lôi khí trong phù ấn rồi dẫn sét theo đường đã vạch.",
     "dang": "Lôi pháp sư"
   },
   {
     "id": "cp_tu24",
     "type": "cp",
     "tu": "TU24",
-    "n": "Kính Hoa Thủy Nguyệt Quyết",
+    "n": "Chiếu Ảnh Quyết",
     "el": "vo",
     "t": 1,
     "req": 0,
@@ -12693,14 +12693,14 @@
         "d": "Dựng ảo cảnh ngoài trận để cắt dấu kẻ đuổi (chờ hệ truy đuổi)"
       }
     ],
-    "d": "Hoa trong gương, trăng dưới nước: thấy được mà không chạm được.",
+    "d": "Ngươi mượn sắc nước và bóng gương để dựng cảnh giả ngay trước mắt người nhìn.",
     "dang": "Huyễn thuật sư"
   },
   {
     "id": "cp_tu25",
     "type": "cp",
     "tu": "TU25",
-    "n": "Phệ Linh Quyết",
+    "n": "Thôn Linh Quyết",
     "el": "vo",
     "t": 1,
     "req": 0,
@@ -12746,7 +12746,7 @@
         "d": "Tu vi nuốt được khiến đột phá khó hơn (chờ cân bằng)"
       }
     ],
-    "d": "Thứ gì đã chết thì không cần nữa; kẻ nuốt nó thì cần.",
+    "d": "Ngươi kéo linh lực của kẻ khác về kinh mạch mình và chịu dư âm nó để lại.",
     "dang": "Thôn phệ tu"
   }
 ]
