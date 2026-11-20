@@ -40,7 +40,7 @@ export function ThienHa() {
           </button>
         ))}
       </div>
-      <p className="hint">Chạm một dòng để xem chỗ đó trên bản đồ. Chỉ hiện những chuyện ngươi tự thấy hoặc đã nghe tin.</p>
+      <p className="hint">Chạm một dòng để mở vị trí trên bản đồ. Sổ chỉ ghi chuyện ngươi đã thấy hoặc nghe kể.</p>
     </> : <p className="empty">Chưa nghe ngóng được gì. Ghé trà lâu, hoặc đi xa hơn.</p>}
   </>;
 }

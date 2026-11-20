@@ -27,3 +27,12 @@ function chuGan(w){const g=geoFor(w);const G2=hqNhom(w);w.hqG=G2;
     else{const gi=G2[g.dist[n.hex]];n.fa=hq[k][gi==null?0:gi];}}
   w.chu1=1;dbg('chu.gan',{n:all.filter(n=>n.fa).length});}
 {const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions&&w.v2&&!w.chu1)chuGan(w);};}
+// ---- chữ GPT đợt bảy (content/world/noi-chu.js): câu lúc tới lần đầu, tin đồn ở trà lâu, phong tục Hoàng quốc ----
+function noiChu(t){return typeof NOI_CHU!=='undefined'?NOI_CHU[t]||null:null;}
+function hqChu(fa){return typeof HQ_CHU!=='undefined'&&fa?HQ_CHU[fa]||null:null;}
+{const _ar=arrive;arrive=function(id){const n=nodeById(id);const lan1=n&&n.fog<3&&!n.seenT;const x=_ar.apply(this,arguments);
+  const C=n&&noiChu(n.type);if(lan1&&C&&C.den&&C.den.length&&G.run){log(C.den[hashS('den'+n.id)%C.den.length]);dbg('chu.den',{t:n.type});}return x;};}
+{const _th=teaHouse;teaHouse=function(n){const res=_th.apply(this,arguments);const C=n&&noiChu(n.type),sc=G.run&&G.run.scene;
+  if(C&&C.tin&&C.tin.length&&sc&&Array.isArray(sc.msg)&&chance(0.5))sc.msg.push(pick(C.tin));return res;};}
+{const _pm=placeMeta;placeMeta=function(n){const o=_pm.apply(this,arguments);
+  if(o&&n&&n.fa&&isTownT(n.type)&&!isTuT(n.type)){const H=hqChu(n.fa);if(H&&H.tuc&&H.tuc.length){const t=H.tuc[hashS('tuc'+n.id)%H.tuc.length];o.desc=(o.desc?o.desc+' ':'')+t;}}return o;};}

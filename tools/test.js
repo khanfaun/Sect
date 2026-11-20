@@ -29,6 +29,19 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // GPT đợt bảy: chữ Hoàng quốc và loại nơi mới
+  noi_chu() {
+    fresh();
+    ok(run("Object.keys(NOI_CHU).length")===9&&run("Object.values(NOI_CHU).every(C=>C.mt.length&&C.den.length&&C.tin.length)"), 'chín loại nơi đủ mô tả, câu lúc tới, tin đồn');
+    ok(run("HQ_KV.flat().every(f=>HQ_CHU[f]&&THE_LUC[f].n===HQ_CHU[f].n)"), 'mười Hoàng quốc mang tên mới');
+    const id=run("W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tuthanh'&&n.state!=='ruin').id");
+    ok(run(`NOI_CHU.tuthanh.mt.includes(placeMeta(nodeById(${id})).desc)`), 'thẻ thành tu sĩ dùng mô tả mới');
+    const ph=run("W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.fa&&n.state!=='ruin').id");
+    ok(run(`(()=>{const n=nodeById(${ph});return HQ_CHU[n.fa].tuc.some(t=>placeMeta(n).desc.includes(t));})()`), 'thành phàm kể một phong tục của Hoàng quốc cai quản');
+    run(`(()=>{const n=nodeById(${id});n.fog=1;n.seenT=0;G.run.log=[];arrive(${id});})()`);
+    ok(run("NK.count('chu.den')")===1, 'tới thành tu sĩ lần đầu: có câu lúc tới');
+    run(`arrive(${id})`);ok(run("NK.count('chu.den')")===1, 'tới lần sau: không lặp');
+  },
   dat_dai() {
     // Đ8b: ô đất, công trình, xây/phá, chủ đất, nơi neo, bản lưu cũ
     fresh("FEAT.truy=1;FEAT.tna=1;G.screen='map';G.run.pham=0;G.run.realm=1;DAT_BK=JSON.stringify(DAT);TNA_BK0=JSON.stringify(TNA)");

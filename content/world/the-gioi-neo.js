@@ -77,15 +77,15 @@ const THE_LUC={
   FA10:{n:'Bắc Phong Quân',noi:'LOC13',chu:'NP25',tien:30,quan:80,dan:40,suc:60,giu:'biên ải và lương quân',no:['FA01'],lai:-0.1,phuc:20},
   // Hoàng quốc (loai:'hq'): thế lực phàm nhân nắm các thành, trấn phàm nhân của một nhóm quận. Mỗi đại khu vực hai nước, kv = đại khu vực.
   //   Không có trụ sở neo (noi:null) và chưa có người giữ vai (chu:null). Tên dưới đây là tên tạm.
-  FA11:{n:'Yên quốc',loai:'hq',kv:0,noi:null,chu:null,tien:50,quan:50,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
-  FA12:{n:'Sở quốc',loai:'hq',kv:1,noi:null,chu:null,tien:45,quan:55,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
-  FA13:{n:'Ngô quốc',loai:'hq',kv:1,noi:null,chu:null,tien:55,quan:45,dan:65,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
-  FA14:{n:'Việt quốc',loai:'hq',kv:2,noi:null,chu:null,tien:50,quan:45,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
-  FA15:{n:'Mân quốc',loai:'hq',kv:2,noi:null,chu:null,tien:55,quan:40,dan:65,suc:58,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
-  FA16:{n:'Thục quốc',loai:'hq',kv:3,noi:null,chu:null,tien:45,quan:50,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
-  FA17:{n:'Tần quốc',loai:'hq',kv:3,noi:null,chu:null,tien:40,quan:60,dan:65,suc:62,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
-  FA18:{n:'Triệu quốc',loai:'hq',kv:4,noi:null,chu:null,tien:35,quan:65,dan:60,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
-  FA19:{n:'Hán quốc',loai:'hq',kv:4,noi:null,chu:null,tien:40,quan:55,dan:65,suc:58,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30}
+  FA11:{n:'Định Nguyên',loai:'hq',kv:0,noi:null,chu:null,tien:50,quan:50,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
+  FA12:{n:'Lâm Tấn',loai:'hq',kv:1,noi:null,chu:null,tien:45,quan:55,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
+  FA13:{n:'Bình Cảo',loai:'hq',kv:1,noi:null,chu:null,tien:55,quan:45,dan:65,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
+  FA14:{n:'Vân Phổ',loai:'hq',kv:2,noi:null,chu:null,tien:50,quan:45,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
+  FA15:{n:'Trạch Dung',loai:'hq',kv:2,noi:null,chu:null,tien:55,quan:40,dan:65,suc:58,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
+  FA16:{n:'Cẩm Lĩnh',loai:'hq',kv:3,noi:null,chu:null,tien:45,quan:50,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
+  FA17:{n:'Tùng Kỳ',loai:'hq',kv:3,noi:null,chu:null,tien:40,quan:60,dan:65,suc:62,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
+  FA18:{n:'Sóc Ninh',loai:'hq',kv:4,noi:null,chu:null,tien:35,quan:65,dan:60,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
+  FA19:{n:'Hoài Túc',loai:'hq',kv:4,noi:null,chu:null,tien:40,quan:55,dan:65,suc:58,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30}
 };
 // HQ_KV: hai Hoàng quốc của từng đại khu vực (kv 0..4); Lương triều (FA01) luôn là nước ở nhóm quận có Lương Kinh (LOC02).
 const HQ_KV=[['FA01','FA11'],['FA12','FA13'],['FA14','FA15'],['FA16','FA17'],['FA18','FA19']];

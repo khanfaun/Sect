@@ -21,7 +21,7 @@ function OTrangBi({ k, label, rel, o = {} }) {
 function PhuongTien({ k, n }) {
   const { G, ASSET } = PS;
   const r = G.run, m = PS.mountOf(), off = r.vehOff || r.rentOff;
-  const t = m ? m.n + (m.d ? '\n' + m.d : '') + '\nTốc độ ×' + PS.numVN(m.m || 1) : off ? 'Đang tháo ' + off.n + (off.v ? off.v.n : '') + '. Chạm để dùng lại.' : 'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.';
+  const t = m ? m.n + (m.d ? '\n' + m.d : '') + '\nTốc độ ×' + PS.numVN(m.m || 1) : off ? 'Đã cất ' + off.n + (off.v ? off.v.n : '') + '. Chạm để dùng lại.' : 'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.';
   return (
     <div className={'eqc' + (m ? ' on' : '')} style={m ? pcs(m.tier || 1) : undefined} data-act={off && !m ? 'vehOn' : undefined} {...tip(t)}>
       {m && m.k && ASSET.veh && ASSET.veh[m.k] ? <img className="asset" src={ASSET.veh[m.k]} alt="" /> : <Html style={{ display: 'contents' }} h={PS.slotIcon(k)} />}
@@ -143,7 +143,7 @@ export function TuiDo() {
     </div>
     <div className="bagwrap">
       <div className="bagL"><CotTrai /></div>
-      <div className="bagR"><CotPhai items={items} /><p className="hint">Chạm một món để xem và dùng. Ô trang bị: chạm để chọn đồ, dấu × ở góc để tháo.</p><TamGiu /></div>
+      <div className="bagR"><CotPhai items={items} /><p className="hint">Chạm món đồ để xem cách dùng. Chạm ô trang bị để chọn món hoặc chạm dấu × để tháo.</p><TamGiu /></div>
     </div>
   </>;
 }

@@ -96,10 +96,10 @@ function GhiChuDaGhim() {
 function CachChoi() {
   return (
     <div className="story help">
-      <p><b>Mục tiêu.</b> Tu luyện, đột phá qua các cảnh giới trước khi hết thọ nguyên. Chết thì luân hồi, thế giới vẫn tiếp tục già đi.</p>
-      <p><b>Thời gian.</b> Đứng ở bản đồ, 1 giây = 1 giờ. Đi đường, bế quan, đột phá, vượt ải ngốn tháng năm. Mở bảng nào đó thì thời gian dừng.</p>
+      <p><b>Mục tiêu.</b> Tu luyện, đột phá qua các cảnh giới trước khi hết thọ nguyên. Khi đời này khép lại, ngươi đầu thai. Thế giới vẫn tiếp tục đổi thay.</p>
+      <p><b>Thời gian.</b> Đứng ở bản đồ, 1 giây = 1 giờ. Đi đường, bế quan, đột phá hoặc vượt ải đều làm thời gian trôi. Mở bảng để tạm dừng.</p>
       <p><b>Bản đồ.</b> Chạm một điểm để xem, bấm “Đi tới”. Tới nơi bấm “Vào” để thăm dò, nghỉ ngơi, mua bán. Chấm xanh ngọc là nơi có động phủ: bế quan và đột phá ở đó.</p>
-      <p><b>Chiến đấu.</b> Mỗi bên chạy trên thanh hành động; tới mốc giữa thì ra chiêu. Bị đánh thì bấm “Né” đúng lúc vòng khép lại. Lười thì bật “Tự đánh”.</p>
+      <p><b>Chiến đấu.</b> Khi vạch hành động của một bên tới mốc giữa, bên đó ra chiêu. Bị đánh thì bấm “Né” đúng lúc vòng khép lại. Bật “Tự đánh” để game tự chọn đòn.</p>
       <p><b>Vòng chu thiên.</b> Trong bảng Nhân vật: xếp công pháp, pháp bảo quanh đan điền sao cho hệ trước sinh hệ sau.</p>
       <p><b>Linh thú, luyện chế.</b> Hạ yêu thú có khi được trứng và yêu đan. Thăm dò nơi hoang dã được linh thảo, linh khoáng để luyện đan, luyện khí.</p>
     </div>

@@ -109,7 +109,7 @@ function placeMeta(n){const h=hashS('pm'+W().seed+':'+n.id),w=W();const pk=(L,k)
     quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.082"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.083"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.084"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.085")],6);}
   if(n.fa&&isTownT(n.type)&&typeof chuTen==='function'){const o=chuTen(n.fa);if(o)luc=o;} // thế giới mới: chủ thành trấn là Hoàng quốc hoặc thế lực tu sĩ
   if((n.vstate||n.state)==='ruin'){luc=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.086");}
-  const L=P['canh_'+t]||P.canh_tran;const desc=L[(h>>>9)%L.length];
+  const L=(typeof NOI_CHU!=='undefined'&&NOI_CHU[n.type]&&NOI_CHU[n.type].mt)||P['canh_'+t]||P.canh_tran;const desc=L[(h>>>9)%L.length];
   return {luc,quy,desc:desc.indexOf('{')<0?desc:''};}
 // ----- đi đường: tính theo tháng năm, tùy thân pháp và phương tiện -----
 // Bảng MOUNT: content/world/mount.js
