@@ -45,7 +45,7 @@
         {
           "id": "cach_3",
           "l": "Xin người thuê viết quyền của nhà nhận",
-          "t": "Ngươi lấy lời cho gia quyến xem dấu trong bình trước khi nhận phần.",
+          "t": "Ngươi xin lời chứng để gia quyến được xem các dấu trong bình trước khi nhận phần tro của nhà mình.",
           "dau": [
             "moc_1_3"
           ]
@@ -151,7 +151,7 @@
         {
           "id": "cach_3",
           "l": "Xin người coi bia nhận mục chưa rõ",
-          "t": "Ngươi xin một người giữ mộ đứng tên nhận các dấu chưa đủ để tách.",
+          "t": "Ngươi xin người giữ mộ đứng tên nhận phần tro có dấu chưa đủ rõ để tách riêng.",
           "dau": [
             "moc_3_3"
           ]
@@ -258,7 +258,7 @@
         {
           "id": "cach_1",
           "l": "Giao sổ thật cùng quyền đối cho các nhà",
-          "t": "Ngươi đặt bình chia và phần chưa rõ dưới cùng lệ đối, cho nhà tự mang chứng.",
+          "t": "Ngươi đặt phần tro đã tách và phần chưa rõ dưới cùng một lệ đối dấu. Gia đình có thể tự mang vật chứng tới.",
           "dau": [
             "moc_5_1"
           ],

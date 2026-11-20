@@ -45,7 +45,7 @@
         {
           "id": "cach_3",
           "l": "Hỏi ai trả lượt cạo",
-          "t": "Ngươi chép lời người đưa vôi về dấu của kẻ đã thanh toán lượt xóa.",
+          "t": "Ngươi chép lời người đưa vôi, kể cả dấu nhận tiền của người đã thuê xóa chữ.",
           "dau": [
             "moc_1_3"
           ]
@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "Kiểm sổ công trình với phần gia phả",
-          "t": "Ngươi nối người trả tiền với dòng thừa kế từng cạnh tên trên tường.",
+          "t": "Ngươi tìm ra người trả tiền quét vôi. Tên họ cũng nằm trong dòng chia gia sản từng khắc cạnh cái tên bị xóa.",
           "dau": [
             "moc_2_1"
           ]
@@ -125,7 +125,7 @@
         {
           "id": "cach_1",
           "l": "So ngày mộ với sổ bị sửa",
-          "t": "Ngươi xác nhận họ bị xóa vì tranh phần, không thể dự việc bị quy.",
+          "t": "Ngươi xác nhận người ấy bị xóa tên vì tranh gia sản. Họ không thể có mặt trong vụ mà người ta đổ cho họ.",
           "dau": [
             "moc_3_1"
           ]

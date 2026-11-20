@@ -93,7 +93,7 @@
         {
           "id": "cach_3",
           "l": "Vẽ lũ thành tờ thủy chí",
-          "t": "Ngươi chép vạch, ngày và nhánh vào cùng trang để người không biết trận đọc.",
+          "t": "Ngươi ghi vạch nước, ngày lũ và nhánh bị đổi trên cùng một trang để người chưa học trận cũng đọc được.",
           "dau": [
             "moc_2_3"
           ]
@@ -141,7 +141,7 @@
         {
           "id": "cach_3",
           "l": "Chép nguyên nhân và cách đọc phàm",
-          "t": "Ngươi ghi bản nào đòi người, dùng lời dễ đọc để giải thích nước theo lịch.",
+          "t": "Ngươi đánh dấu bản nào đòi dùng người rồi viết lại cho dễ đọc: nước sẽ đi đâu mỗi khi trụ đổi nhánh.",
           "dau": [
             "moc_3_3"
           ]
@@ -244,7 +244,7 @@
         {
           "id": "cach_2",
           "l": "Giữ quyền trụ, để thợ vận hành",
-          "t": "Ngươi đối lượt đã thử và nhận giấy vùng chuyển nước trước khi giữ chìa.",
+          "t": "Ngươi kiểm lại lần thử và nhận bản ghi vùng nước sẽ bị dẫn qua. Xong việc, ngươi mới giữ chìa trụ.",
           "dau": [
             "moc_5_2"
           ],

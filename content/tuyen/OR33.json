@@ -37,7 +37,7 @@
         {
           "id": "cach_2",
           "l": "Sao mẫu điều đổi người bảo lãnh",
-          "t": "Ngươi chép điều khoản chủ nợ thường dùng để cho một tên ra khỏi khế.",
+          "t": "Ngươi chép điều khoản chủ nợ vẫn dùng khi gạch tên một người khỏi khế.",
           "dau": [
             "moc_1_2"
           ]
@@ -182,7 +182,7 @@
         {
           "id": "cach_1",
           "l": "Trả phần thật và bác khoản giả",
-          "t": "Ngươi đối lời người bảo lãnh với bản khế, nộp phần đúng và lấy giấy tháo nghĩa vụ.",
+          "t": "Ngươi đối lời người bảo lãnh với tờ khế, nộp đúng số nợ rồi lấy giấy xác nhận họ đã hết nghĩa vụ.",
           "dau": [
             "moc_4_1"
           ],
@@ -209,7 +209,7 @@
         {
           "id": "cach_3",
           "l": "Chuyển nợ sang người chưa đồng ý",
-          "t": "Ngươi dùng thẻ không có lời đồng ý, để chủ nợ ghi thu sang tên kia.",
+          "t": "Ngươi dùng thẻ dù người có tên chưa đồng ý. Chủ nợ chuyển khoản đòi sang người ấy.",
           "dau": [
             "moc_4_3"
           ],

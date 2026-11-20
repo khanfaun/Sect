@@ -146,7 +146,7 @@
         {
           "id": "cach_3",
           "l": "Nhận việc dân sự có giấy",
-          "t": "Ngươi dùng phiếu sức làm việc để xin đơn trồng trọt đầu cho nhóm tự chọn.",
+          "t": "Ngươi trình giấy ghi mỗi người còn làm được việc gì, rồi xin việc ngoài ruộng cho nhóm tự nguyện đi cùng.",
           "dau": [
             "moc_3_3"
           ]
@@ -178,7 +178,7 @@
         {
           "id": "cach_1",
           "l": "Đòi bồi thường và tìm chỗ ở cho cựu binh",
-          "t": "Ngươi trình chứng, dùng phần được xét để giữ mái và việc đỡ người đi cùng.",
+          "t": "Ngươi đưa chứng cứ ra xét. Khoản được cấp giúp cả nhóm giữ chỗ ở và có người đỡ những ai đi lại khó.",
           "dau": [
             "moc_4_1"
           ],
@@ -251,7 +251,7 @@
         {
           "id": "cach_1",
           "l": "Mở nhà chung cho người được bồi",
-          "t": "Ngươi trao thẻ nhận người và giao lịch đỡ đi lại cho nhóm có chỗ ở.",
+          "t": "Ngươi trao thẻ vào nhà cho nhóm đã có chỗ ở, rồi giao lịch giúp những người cần có người dìu.",
           "dau": [
             "moc_5_1"
           ],
