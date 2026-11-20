@@ -95,7 +95,7 @@ function TheNoi({ n, hold }) {
   const r = G.run, I = PS.nodeInfo(n), here = n.id === r.at, dg = PS.dangerTag(n);
   const nt = PS.noteOf(n.id), M = I.sure ? PS.placeMeta(n) : null;
   const where = I.sure ? PS.hexInfo(PS.nodeHex(n)).dist : '';
-  const pimg = ASSET.place[n.type];
+  const pimg = ASSET.place[n.type] || ASSET.place[(PS.NEWT[n.type] || {}).as];
   return (
     <div className={'dock card np' + (PS.UI.npMin && !hold ? ' min' : '') + (hold ? ' hold' : '')} data-ax={hold ? hold.x : n.x} data-ay={hold ? hold.y : n.y} data-ic={hold ? 46 : undefined}>
       <div className="np-h">

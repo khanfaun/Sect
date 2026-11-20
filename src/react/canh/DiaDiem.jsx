@@ -89,8 +89,9 @@ export function DiaDiem({ sc }) {
     <h4 key={'h' + name} className="sgrp"><Ib n={GRP_IC[name] || 'more'} c="soft" />{name}</h4>,
     <div key={'d' + name} className="choices">{L.map(a => <NutViec key={a.a} a={a} n={n} num={num()} />)}</div>,
   ]);
-  const art = ASSET.place[n.type]
-    ? <div className="art strip pimg"><img className="asset" src={ASSET.place[n.type]} alt="" /></div>
+  const pimg = ASSET.place[n.type] || ASSET.place[(PS.NEWT[n.type] || {}).as];
+  const art = pimg
+    ? <div className="art strip pimg"><img className="asset" src={pimg} alt="" /></div>
     : <Tranh seed={n.name} reg={r.region} type={n.type} cls="strip" />;
   return (
     <Card title={n.name} sub="" cls="tall place" art={art}

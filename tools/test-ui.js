@@ -281,6 +281,19 @@ const TESTS = {
   },
   // Đ3.6: HUD báo đói, chạm đổi mức ăn
   // Việc 3: hộp thư lời công trình
+  // Việc 9: xem tận mắt các màn mới (chụp ảnh khi có --shot): chú giải, thẻ thành tu sĩ, nắm quyền, hộp thư, báo đói giữa đường
+  async man_moi(p) {
+    await ev(p, () => {UI.modal=null;UI.panel='more';UI.tab.more='legend';render();});await p.waitForTimeout(200);
+    ok(await ev(p, () => /trấn tu sĩ|thành tu sĩ/i.test(document.querySelector('#panel').innerText)), 'chú giải có thành trấn tu sĩ');await shot(p,'1-chu-giai');
+    await ev(p, () => {const r=G.run;r.pham=0;r.realm=1;const n=W().regions.flatMap(x=>x.nodes).find(n=>n.type==='tuthanh'&&n.state!=='ruin');r.at=n.id;r.region=n.r;arrive(n.id);UI.panel=null;r.scene=null;UI.sel=n.id;render();});await p.waitForTimeout(250);
+    await shot(p,'2-the-thanh-tu');
+    await ev(p, () => {openPlace(G.run.at);G.run.scene.venue='quyen';render();});await p.waitForTimeout(200);
+    ok(await ev(p, () => /Đánh chiếm|Mua lại/.test(document.body.innerText)), 'màn Nắm quyền hiện cách đánh chiếm, mua lại');await shot(p,'3-nam-quyen');
+    await ev(p, () => {const r=G.run;r.scene=null;r.hopThu=[{m:1,L:[{node:r.at,noi:'Thử Trấn',ct:'khach_diem',bac:320,lt:2,an:['com_nam'],pill:[],vat:{},tin:[]}]}];ACT.hopThu();render();});await p.waitForTimeout(200);
+    await shot(p,'4-hop-thu');
+    await ev(p, () => {const r=G.run;UI.modal=null;r.hopThu=[];r.pham=1;r.qitems=[];r.moving={path:[r.at,neighbors(r.at)[0]],seg:0,prog:0.3};r.doi=49.9;advanceTime(24);render();});await p.waitForTimeout(250);
+    ok(await ev(p, () => G.run.scene&&G.run.scene.ev==='an_dung'&&/kiếm cái ăn/.test(document.body.innerText)), 'hộp báo đói giữa đường hiện trên màn');await shot(p,'5-bao-doi');
+  },
   async hop_thu(p) {
     await ev(p, () => {const r=G.run;r.hopThu=[{m:1,L:[{node:r.at,noi:'Thử Trấn',ct:'khach_diem',bac:320,lt:0,an:['com_nam'],pill:[],vat:{},tin:[]}]}];UI.modal=null;UI.panel=null;r.scene=null;render();});
     await p.waitForTimeout(150);

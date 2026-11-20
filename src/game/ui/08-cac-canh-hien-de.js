@@ -11,7 +11,7 @@ function itemView(p){
   return {ic:'💎',n:p.n+' linh thạch',sub:'',tip:''};}
 
 // PGROUP: bảng nút → nhóm. Từ Đ8b nút nào hiện là do công trình trên ô đất (CONG_TRINH.acts, core2/64-dat-dai.js); bảng này chỉ xếp nhóm.
-const PGROUP=[['Sự vụ',['board','thuongcac','vay','quanphu','chapphap']],['Tông môn',['congmon','join','lib','nhansu','tongviec','conghien','tinhthat']],['Mua bán',['laibuon','taphoa','shop','doilt','camdo','ghost','amhoi']],['Mưu sinh',['muusinh']],['Nghỉ chân',['nha','tea','inn','tuu','tinh','heal']],['Đi lại',['tram','goback']],['Tu luyện',['khaiphu','thinhgiao','tumon']],['Hoang dã',['sanbat','sanyeu','haithuoc','daokhoang']],['Việc khác',['coduyen','grave','patron','bury','quyan','datdai','quyen','caitrang']]];
+const PGROUP=[['Sự vụ',['board','thuongcac','vay','quanphu','chapphap']],['Tông môn',['congmon','join','lib','nhansu','tongviec','conghien','tinhthat']],['Mua bán',['laibuon','taphoa','shop','doilt','camdo','ghost','amhoi']],['Mưu sinh',['muusinh']],['Nghỉ chân',['nha','tea','inn','tuu','tinh','heal']],['Đi lại',['tram','goback']],['Tu luyện',['khaiphu','thinhgiao','tumon']],['Hoang dã',['sanbat','sanyeu','haithuoc','daokhoang']],['Việc khác',['coduyen','grave','patron','bury','quyan','datdai','quyen','daomo','aocanh','caitrang']]];
 const PNOW=['boss','cross','bt','xk'];
 const GRP_IC={'Sự vụ':'scroll','Mưu sinh':'bag','Tông môn':'gate','Mua bán':'bag','Nghỉ chân':'tea','Đi lại':'cart','Tu luyện':'seat','Hoang dã':'tree','Việc khác':'more'};
 const PL_N={tea:'Trà lâu',inn:'Khách điếm',shop:'Phường thị',board:'Bảng treo thưởng',ghost:'Quỷ thị',join:'Sơn môn',lib:'Tàng Kinh Các',tinh:'Tĩnh tọa',heal:'Dưỡng thương'};

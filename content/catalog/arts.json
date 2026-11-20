@@ -12372,7 +12372,7 @@
         "v": 0,
         "req": 2,
         "raw": 1,
-        "d": "Luyện xác vô chủ không vướng nghiệp; đào mộ người thường thì vướng"
+        "d": "Mở việc Đào mộ lấy xác: xác vô chủ không vướng nghiệp; đào mộ người thường thì vướng"
       }
     ],
     "d": "Ngươi dẫn thi khí vào xác luyện rồi buộc nó theo hiệu lệnh của mình.",
@@ -12690,7 +12690,7 @@
         "v": 0,
         "req": 2,
         "raw": 1,
-        "d": "Dựng ảo cảnh ngoài trận để cắt dấu kẻ đuổi (chờ hệ truy đuổi)"
+        "d": "Mở việc Dựng ảo cảnh: đang bị truy đuổi thì cắt dấu kẻ đuổi"
       }
     ],
     "d": "Ngươi mượn sắc nước và bóng gương để dựng cảnh giả ngay trước mắt người nhìn.",

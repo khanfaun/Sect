@@ -62,7 +62,7 @@ function nqXayGia(ct){return Math.round(datCtGia(ct)*NQ2.xayX);}
   return H[H.length-1];};}
 
 // ---------- việc 5: NPC hỏi mua công trình của ngươi; NPC tự mua công trình của dân ----------
-const NQ_HOI={id:'nq_hoi_mua',sp:1,n:'',t:'',c:[]};KYNGO.push(NQ_HOI);
+const NQ_HOI={id:'nq_hoi_mua',sp:1,tag:'Thư hỏi mua',n:'',t:'',c:[]};KYNGO.push(NQ_HOI);
 function nqHoiBan(k){const r=G.run,o=r.nqHoi;if(!o)return {t:''};const n=nodeById(o.node),d=n&&datStore()[n.id],c=d&&d.o[o.i];r.nqHoi=null;
   if(!c||!(c.chu&&c.chu.k==='ta'))return {t:contentText('nq2.hoiMat')};
   let g=o.gia;if(k===1){if(R()<NQ2.macHoiP)g=Math.round(g*(1+NQ2.macHoi));else{dbg('nq2.hoiBo',{});return {t:contentText('nq2.hoiBo',[o.ten])};}}

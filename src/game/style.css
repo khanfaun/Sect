@@ -1804,3 +1804,7 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 :root[data-anim="0"] .tlfx-lt *,:root[data-anim="0"][data-tlfx=bien] #app{animation:none!important}
 
 .lcq-khuyet{color:var(--ink3)}.lcq-thuan{color:var(--jade)}.lcq-vien{color:var(--gold);font-weight:700;text-shadow:0 0 6px color-mix(in srgb,var(--gold) 45%,transparent)}
+
+/* hộp thư (core2/77) */
+.mbox.hopthu .hop-ds{margin:6px 0;padding-left:18px;}
+.mbox.hopthu .hop-ds li{margin:2px 0;}

@@ -29,6 +29,41 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Việc 8: hai dòng công pháp nay có luật — Thi tu đào mộ, Huyễn thuật cắt dấu kẻ đuổi
+  thi_huyen() {
+    fresh("FEAT.truy=1;G.run.pham=0;G.run.realm=1;G.run.st=99999");
+    const A="W().regions.flatMap(R=>R.nodes).filter(n=>n.state!=='ruin')";
+    run("tuHoc('TU18',0)");const vo=run(`${A}.find(n=>THH.dao.noiVoChu.includes(n.type)).id`),ng=run(`${A}.find(n=>n.type==='tran').id`);
+    const go=id=>run(`(()=>{const r=G.run;r.scene=null;r.moving=null;r.at=${id};openPlace(${id});})()`);
+    go(vo);ok(!run("placeActs(curNode()).some(a=>a.a==='daomo')"), 'Thi tu tầng một: chưa có việc đào mộ');
+    run("tuK('TU18').tang=2");go(vo);ok(run("placeActs(curNode()).some(a=>a.a==='daomo')"), 'tầng hai: có việc đào mộ ở nơi hoang phế');
+    const b0=run("ngB(G.run)"),r0=run("(G.run.tuRes||{}).TU18||0");run("placeAct('daomo')");
+    ok(run("(G.run.tuRes||{}).TU18")>r0&&run("ngB(G.run)")===b0, 'xác vô chủ: được xác luyện, không vướng nghiệp');
+    go(vo);ok(run("placeActs(curNode()).find(a=>a.a==='daomo').dis"), 'vừa đào: đợi ít tháng mới đào lại');
+    go(ng);run("placeAct('daomo')");ok(run("ngB(G.run)")>b0&&run("NK.count('nq.deed')")>=1, 'mộ người thường: vướng nghiệp (việc ác đào mộ)');
+    // Huyễn thuật
+    fresh("FEAT.truy=1;G.run.pham=0;G.run.realm=1;G.run.st=99999");run("tuHoc('TU24',0);tuK('TU24').tang=2");go(vo);
+    ok(!run("placeActs(curNode()).some(a=>a.a==='aocanh')"), 'không bị truy đuổi: không có việc dựng ảo cảnh');
+    run("truyStart('cuop',{n:'Kẻ cướp',i:'😠',d:0})");run("G.run.mp=S().maxMp;THH.ao.p=1");go(vo);
+    ok(run("placeActs(curNode()).some(a=>a.a==='aocanh')"), 'đang bị truy đuổi: có việc dựng ảo cảnh');
+    const mp0=run("G.run.mp");run("placeAct('aocanh')");ok(!run("G.run.truy")&&run("G.run.mp")<mp0, 'ảo cảnh thành: cắt dấu, hết bị truy, tốn linh lực');
+    run("truyStart('cuop',{n:'Kẻ cướp',i:'😠',d:0});G.run.mp=S().maxMp;THH.ao.p=0");go(vo);run("placeAct('aocanh')");ok(!!run("G.run.truy")&&run("G.run.truy.d")>=1, 'ảo cảnh vỡ: kẻ đuổi áp sát hơn');
+    run("THH.ao.p=0.7");
+  },
+  // Việc 7: sang kiếp — truyền công trình, thành trấn đang nắm
+  truyen_ct() {
+    const setup=`(()=>{const r=G.run;const A=W().regions.flatMap(R=>R.nodes).filter(n=>n.state!=='ruin'&&n.fa&&datOf(n));
+      const ph=A.find(n=>n.type==='thanh'),tu=A.find(n=>n.type==='tutran');datOf(ph).o[0].chu={k:'ta'};datOf(tu).o[0].chu={k:'ta'};tu.quyen={k:'ta',t:0,fa0:tu.fa};return [ph.id,tu.id,ph.fa];})()`;
+    const ct=(id)=>run(`datOf(nodeById(${id})).o[0].chu.k`);
+    fresh("FEAT.dat=1");run("G.run.family=[{ten:'Lý Nhị',qh:'con',song:1}]");let x=run(`JSON.stringify(${setup})`);x=JSON.parse(x);run("die('tho')");
+    ok(ct(x[0])==='than'&&ct(x[1])==='than'&&run(`nodeById(${x[1]}).quyen.k`)==='than', 'còn người thân: công trình và thành trấn đang nắm về tay người thân');
+    ok(/Lý Nhị/.test(run(`datChuTen(datOf(nodeById(${x[0]})).o[0].chu)`)), 'chủ mới hiện tên người thân');
+    fresh("FEAT.dat=1");run("G.run.family=[]");x=JSON.parse(run(`JSON.stringify(${setup})`));run("die('tho')");
+    ok(ct(x[0])==='fa'&&run(`datOf(nodeById(${x[0]})).o[0].chu.id`)===x[2], 'không người thân: ô ở thành phàm về Hoàng quốc');
+    ok(ct(x[1])==='dan'&&!run(`nodeById(${x[1]}).quyen`)&&run(`nodeById(${x[1]}).fa`)==='tutri'&&run(`chuTen('tutri')`)==='Dân tự trị', 'không người thân: thành tu sĩ tự trị');
+    fresh("FEAT.dat=1");run("G.run.family=[{ten:'A',qh:'con',song:1}];G.run.chuFa=['FA03']");x=JSON.parse(run(`JSON.stringify(${setup})`));run("die('tho')");
+    ok(ct(x[0])==='fa'&&run(`datOf(nodeById(${x[0]})).o[0].chu.id`)==='FA03'&&run(`nodeById(${x[1]}).fa`)==='FA03', 'là chủ thế lực: mọi thứ về tay thế lực đó');
+  },
   // Việc 4: nắm quyền thành trấn
   nam_quyen() {
     fresh("FEAT.dat=1;FEAT.tna=1;G.run.pham=0;G.run.realm=2;G.run.bac=10000000;G.run.st=0;G.run.flags.tongmon=0");

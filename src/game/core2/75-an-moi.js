@@ -21,7 +21,7 @@ function anBaoMoc(r){const lv=anLv(r.doi);if(lv<=(r.anBao||0))return;r.anBao=lv;
   if(lv===AN.doi.la||lv===4)clampHp();
   if(lv<tu)dbg('an.baoNhe',{lv});else if(lv<5&&r.anBaoT!=null&&t-r.anBaoT<nghi)dbg('an.baoNghi',{lv});else{r.anBaoT=t;note(contentText(AN_NOTE[lv]),'dn');dbg('an.bao',{lv});}}
 // hết đồ ăn giữa đường, đói quá nửa: dừng, hiện hộp báo
-const AN_DUNG={id:'an_dung',sp:1,n:contentText('an.dungN'),t:contentText('an.dungT'),c:[{l:contentText('an.dungC0'),go:()=>({t:contentText('an.dungR')})}]};
+const AN_DUNG={id:'an_dung',sp:1,tag:'Đói bụng · cần lương thực',n:contentText('an.dungN'),t:contentText('an.dungT'),c:[{l:contentText('an.dungC0'),go:()=>({t:contentText('an.dungR')})}]};
 KYNGO.push(AN_DUNG);
 function anDungDuong(r){if(!r.moving||r.anDung||(r.doi||0)<AN.doi.doi||anTui(r).length)return;r.anDung=1;
   const m=r.moving;if(m.seg<m.path.length-1&&typeof snapStop==='function')snapStop();if(G.run.moving)G.run.halt=true;

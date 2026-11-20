@@ -12,9 +12,9 @@ Chi tiết quyết định: cuối `docs/thiet-ke/ghi-chu-trien-khai.md` (mục 
    - Nắm quyền: xây gì cũng được, đổi loại công trình được.
 5. ~~**NPC mua công trình**~~ (XONG 20/11) — NPC cũng hỏi mua công trình của ngươi (trả giá).
 6. ~~**Tịch biên**~~ (XONG 20/11) khi nợ thuế lâu.
-7. **Sang kiếp** — truyền công trình cho người thân; không có thì thành phàm về Hoàng quốc, thành tu sĩ tự trị; nếu ngươi là chủ thế lực thì về tay thế lực ngươi.
-8. **Hai hiệu ứng chữ** — Thi tu đào mộ, Huyễn thuật cắt dấu (làm xen kẽ).
-9. **Xem tận mắt** các màn mới (làm xen kẽ).
+7. ~~**Sang kiếp**~~ (XONG 20/11) — truyền công trình cho người thân; không có thì thành phàm về Hoàng quốc, thành tu sĩ tự trị; nếu ngươi là chủ thế lực thì về tay thế lực ngươi.
+8. ~~**Hai hiệu ứng chữ**~~ (XONG 20/11) — Thi tu đào mộ, Huyễn thuật cắt dấu (làm xen kẽ).
+9. ~~**Xem tận mắt**~~ (XONG 20/11) các màn mới (làm xen kẽ).
 
 ## Chờ GPT
 10. **Đợt 6** (`docs/content/GUI-GPT-6/`) — 30 khoá chữ mới; sự kiện Lôi pháp, Huyễn thuật, Thôn phệ. Xong: Claude gộp, gắn hiệu ứng.

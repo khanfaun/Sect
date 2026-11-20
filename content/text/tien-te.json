@@ -198,5 +198,20 @@
   "nq2.hoiMat": "Công trình ấy không còn là của ngươi nữa.",
   "nq2.daBan": "Đã bán {{0}} ở {{1}}, nhận {{2}}.",
   "nq2.tich": "Quan phủ tịch biên {{1}} của ngươi ở {{0}} vì nợ thuế quá lâu.",
-  "nq2.oDat": "ô đất"
+  "nq2.oDat": "ô đất",
+  "tc.than": "{{0}} (người nhà)",
+  "tc.tuTri": "Dân tự trị",
+  "thh.dao": "Đào mộ lấy xác",
+  "thh.daoVoTip": "Xác vô chủ ở nơi hoang phế: luyện được, không vướng nghiệp.",
+  "thh.daoNguoiTip": "Mộ người thường: luyện được, nhưng là việc ác, vướng nghiệp và dễ bị truy nã.",
+  "thh.daoCho": "Vừa đào ở đây, đợi ít tháng",
+  "thh.daoVo": "Ngươi bới lớp đất cũ, nhấc ra một bộ xác không còn ai nhận. Không ai oán trách việc này.",
+  "thh.daoNguoi": "Ngươi đào trộm một nấm mộ có người hương khói. Xác luyện được, nhưng việc này sẽ đeo theo ngươi.",
+  "thh.res": "Xác luyện",
+  "thh.ao": "Dựng ảo cảnh cắt dấu",
+  "thh.aoTip": "Đang bị truy đuổi: dựng cảnh giả làm kẻ đuổi lạc dấu ({{0}}% thành).",
+  "thh.thieuMp": "Không đủ linh lực",
+  "thh.mp": "Linh lực",
+  "thh.aoOk": "Ảo cảnh dựng xong, dấu chân ngươi tan vào sương. Kẻ đuổi theo lạc hướng, bỏ cuộc.",
+  "thh.aoHong": "Ảo cảnh vỡ giữa chừng. Kẻ đuổi theo nhìn thấu, áp sát hơn."
 }
