@@ -1,5 +1,5 @@
 // ĐỢT 1.4: Danh tiếng theo nơi chốn (khu vực, tông môn). G.run.danh = {'reg:<khu>':{v}, 'sect:<tông>':{v}, trieu:{v}}
-const DANH_LO=['tran','thanh','cho','tong'];
+const DANH_LO=['tran','thanh','tutran','tuthanh','cho','tong'];
 function danhSectIdx(n){if(!n||!n.owner)return -1;return W().sects.findIndex(x=>x.n===n.owner);}
 function danhGet(k){const r=G.run;if(!r)return 0;nqInit(r);return (r.danh[k]||{}).v||0;}
 function danhPut(k,d){const r=G.run;if(!r||!d)return;nqInit(r);const o=r.danh[k]||(r.danh[k]={v:0});o.v=clamp(o.v+d,-100,100);}

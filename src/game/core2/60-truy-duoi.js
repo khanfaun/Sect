@@ -74,7 +74,7 @@ function truyPick(o){const r=G.run,T=r.truy;if(!T)return {t:''};const t=W().t;db
   return _cc.apply(this,arguments);};}
 // tới nơi an toàn: thành có thủ vệ, tông môn mình
 {const _ar=arrive;arrive=function(id){const o=_ar.apply(this,arguments);const r=G.run;const T=r&&r.truy;if(!T||!feat('truy'))return o;const n=nodeById(id);if(!n||n.state==='ruin')return o;
-  let a=0;if(n.type==='tong'&&typeof contentOwnSect==='function'&&contentOwnSect(n))a=TRUY.an.tong;else if(n.type==='thanh')a=TRUY.an.thanh[T.k]||0;
+  let a=0;if(n.type==='tong'&&typeof contentOwnSect==='function'&&contentOwnSect(n))a=TRUY.an.tong;else if(isThanhT(n.type))a=TRUY.an.thanh[T.k]||0;
   if(a==='huy'){r.truy=null;const m=contentText('truy.anHuy',[n.name,T.n]);note(m,'up');log(m);dbg('truy.an',{a,k:T.k,n:n.type});}
   else if(a==='giam'&&!T.giam){T.giam=1;const t=W().t;T.until=t+(T.until-t)*TRUY.an.giam;note(contentText('truy.anGiam',[n.name,T.n]));dbg('truy.an',{a,k:T.k,n:n.type});}
   return o;};}

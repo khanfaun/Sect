@@ -41,7 +41,7 @@ function clkMacDinh(id,w,y,o){const D=THOI_CUC[id],fx=D.fx||{};let t=D.macDinh;c
     const f=faInit(w).FA01;if(f.trang==='diet'){f.trang='song';f.lap++;}f.suc=Math.max(f.suc,55);f.tien=40;}
   if(fx.dich){let k=0;for(const ma in VAI_NP){const P=VAI_NP[ma],v=w.vai&&w.vai[ma];if(!v||!v.song||P.tu>=0||P.bat)continue;
       if(fx.dich.kv.includes(LOC_NEO[P.noi].kv)&&wRnd(w,'dich:'+ma+y)<fx.dich.p){vaiMat(ma,'dich',w);k++;}}
-    const F=faInit(w);for(const f in THE_LUC)if(fx.dich.kv.includes(LOC_NEO[THE_LUC[f].noi].kv))F[f].dan=Math.round(F[f].dan*(1-fx.dich.p));if(k)t+=' '+contentText('tc.dich',[k]);}
+    const F=faInit(w);for(const f in THE_LUC)if(fx.dich.kv.includes(THE_LUC[f].noi?LOC_NEO[THE_LUC[f].noi].kv:THE_LUC[f].kv))F[f].dan=Math.round(F[f].dan*(1-fx.dich.p));if(k)t+=' '+contentText('tc.dich',[k]);}
   if(fx.longMach){w.lkMod=w.lkMod||{};const k=Math.floor(wRnd(w,'lm:'+y)*5);w.lkMod[k]=Math.max(0.4,(w.lkMod[k]==null?1:w.lkMod[k])-fx.longMach);t+=' '+contentText('tc.long',[REG[k].n]);}
   if(fx.maVuc&&typeof maVucTao==='function'){const n=anchorOf(w,D.noi);maVucTao(n?n.id:null,fx.maVuc,w);}
   return t;}
@@ -69,7 +69,7 @@ function clkView(){const S=tcInit(W());return Object.keys(THOI_CUC).filter(id=>S
 function thienLoMo(){const s=tcInit(W()).CLK14;return !!s&&s.pha===2;}
 function biCanhMo(){const s=tcInit(W()).CLK11;return !!s&&s.pha===2;}
 // linh khí theo khu (Long Mạch Đứt): hồi rất chậm
-function lkModAt(n){const w=W();if(!n||!w.lkMod)return 1;const v=w.lkMod[Math.floor(n.id/100)];return v==null?1:v;}
+function lkModAt(n){const w=W();if(!n||!w.lkMod)return 1;const v=w.lkMod[idReg(n.id)];return v==null?1:v;}
 function lkYear(w){if(!w.lkMod)return;for(const k in w.lkMod){w.lkMod[k]=Math.min(1,w.lkMod[k]+0.0005);if(w.lkMod[k]>=1)delete w.lkMod[k];}}
 {const _bq=bqRate;bqRate=function(){return _bq.apply(this,arguments)*lkModAt(curNode());};}
 {const _wy=worldYear;worldYear=function(y,o,w){_wy(y,o,w);w=w||W();clkYear(w,y,o);locYear(w,y);lkYear(w);};}

@@ -9,7 +9,7 @@ FEAT.dat=1;
 const DAT_V=1;
 // nút gắn công trình: chỉ những nút này mới bị lọc; nút khác (thăm dò, bế quan, dưỡng thương, nhà mình…) hiện như cũ
 const DAT_TIED={};for(const id in CONG_TRINH)for(const a of CONG_TRINH[id].acts)(DAT_TIED[a]=DAT_TIED[a]||[]).push(id);
-const DAT_SETTLE=['tran','thanh','cho','ancu','tong'];
+const DAT_SETTLE=['tran','thanh','tutran','tuthanh','cho','ancu','tong'];
 function datStore(){const w=W();return w?(w.dat||(w.dat={})):null;}
 function datCt(c){return c&&c.ct?CONG_TRINH[c.ct]:null;}
 function datHas(n,ct){const d=datStore()&&datStore()[n.id];return !!d&&d.o.some(c=>c.ct===ct);}
@@ -27,7 +27,7 @@ function datGen(n,L){const w=W(),t=n.type,o=[];const key=s=>'dat:'+n.id+':'+s;
   const add=ct=>{if(ct&&CONG_TRINH[ct]&&!o.some(c=>c.ct===ct))o.push({ct,chu:null,goc:1});};
   const covered=a=>o.some(c=>c.ct&&CONG_TRINH[c.ct].acts.includes(a));
   if(n.dp)add('dong_phu');
-  for(const ct of DAT.goc[t]||[])add(ct);
+  for(const ct of ((!w.v2&&DAT.gocCu&&DAT.gocCu[t])||DAT.goc[t]||[]))add(ct); // thế giới cũ giữ bảng cũ
   const need=datNeed(n,L),C=datTer(n);
   for(const a of Object.keys(DAT_TIED)){if(!need.has(a)||covered(a))continue;
     add(DAT.hoang[a]?datPickNat(n,a,C,key(a)):DAT_TIED[a][0]);}

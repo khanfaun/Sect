@@ -15,5 +15,12 @@ const PLACE = {
     hoang: ['Nguyên','Hoang Mạc','Chiến Trường','Bãi','Hoang Nguyên'],
     ma: ['Ma Uyên','Quỷ Vực','Huyết Trì','Thi Lĩnh','U Cốc','Ma Thành'],
     thien: ['Thiên Môn','Tinh Lộ','Vân Hải','Hư Không','Tiên Khư','Thiên Giai'],
+    tutran: ['Phường','Tập','Bảo','Phường Thị','Phường','Bảo'],
+    tuthanh: ['Tiên Thành','Linh Thành','Tiên Phủ','Tiên Thành'],
+    bicanh: ['Bí Cảnh','Huyền Cảnh','Mật Cảnh','Tiên Cảnh'],
+    dongthien: ['Động Thiên','Thiên Động','Động Thiên'],
+    como: ['Cổ Mộ','Địa Cung','Lăng','Mộ Cung','Cổ Lăng'],
+    yeusao: ['Yêu Sào','Thú Huyệt','Yêu Quật','Xà Quật','Hổ Huyệt'],
+    ditich: ['Di Tích','Cổ Tích','Tàn Viên','Cổ Điện','Đoạn Đài'],
   },
 };

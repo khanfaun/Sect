@@ -256,11 +256,11 @@ function worldCoarse(m){
 }
 function nodeRecover(){
   const w=W();
-  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;if(n.type==='tran'||n.type==='thanh')chron(contentText("core_08-loi-kiep_js.nodeRecover.056", [n.name]));}}
+  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;if(isTownT(n.type))chron(contentText("core_08-loi-kiep_js.nodeRecover.056", [n.name]));}}
 }
 function flipNode(){
   const w=W();const r=G.run;
-  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if(['tran','thanh','tong'].includes(n.type)&&n.state!=='ruin'&&(!r||n.id!==r.at))pool.push(n); // nơi đang hoang tàn thì không "gặp nạn" lần nữa
+  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if((isTownT(n.type)||n.type==='tong')&&n.state!=='ruin'&&(!r||n.id!==r.at))pool.push(n); // nơi đang hoang tàn thì không "gặp nạn" lần nữa
   if(!pool.length)return;const n=pick(pool);
   if(n.state==='ruin'){n.state='ok';n.stateUntil=0;chron(contentText("core_08-loi-kiep_js.flipNode.057", [n.name]));}
   else if(n.type==='tong'){const s=pick(w.sects);n.owner=s.n;chron(contentText("core_08-loi-kiep_js.flipNode.058", [n.name,s.n]));}

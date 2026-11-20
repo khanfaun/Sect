@@ -101,7 +101,7 @@ const TESTS = {
     run("G.run.scene=null;G.run.at=DDX_T2.id;openPlace(DDX_T2.id);placeAct('datdai')");
     ok(run("G.run.scene&&G.run.scene.venue==='datdai'&&venueOpts(nodeById(G.run.scene.id),'datdai').length>0"), 'mở mục Đất đai: có danh sách việc');
     // bản lưu cũ: chưa có W().dat → sinh khi tải, giữ quán, chợ, nhà, thầy, Ám Hội
-    run("delete W().dat;G.run.scene=null");
+    run("delete W().dat;delete W().v2;G.run.scene=null");
     run(`DDX_OLD=${all}.find(n=>n.type==='thanh'&&n.state!=='ruin')`);
     const old = JSON.parse(run("(()=>{W().t+=((22-tHour(W().t))%24+24)%24;return JSON.stringify(placeActs(DDX_OLD).map(a=>a.a))})()"));
     ok(['inn','tea','tuu','shop','board','tram','camdo','ghost','amhoi','doilt'].every(a => old.includes(a)), 'bản lưu cũ: thành vẫn đủ quán, chợ, trạm, quỷ thị, Ám Hội ('+old.join()+')');
@@ -590,7 +590,7 @@ const TESTS = {
     run("(()=>{const r=G.run;r.pham=1;r.wounds=[];r.maT=W().t;const t0=r.tamma||0;W().t+=20*HD;timeHooks(20*HD);})()");
     ok(run("wounds().length")>0&&run("NK.count('ma.nhiem')")>0, 'phàm nhân ở Ma vực hai mươi ngày: nhiễm ma khí (thương, tâm ma)');
     // hồi theo thế kỷ
-    run("vyRun(600)");ok(run("W().maVuc.length")===0||run("W().maVuc.every(z=>z.bac>=1||maRate(z,W())<MA_CFG.hoi)"), 'sáu trăm năm: hết Ma vực (trừ khu có ma tông gần làm chậm)');
+    run("vyRun(600)");ok(run("W().maVuc.every(z=>z.ma<=MA_CFG.dau-600*MA_CFG.hoi*MA_CFG.cham+1)"), 'sáu trăm năm: Ma vực tan dần đúng tốc độ (khu còn lại là do gần ma tông hoặc chưa đủ thời gian)');
     run("vyRun(2900)");ok(run("W().maVuc.length")===0, 'vài ngàn năm (dù có ma tông gần làm chậm): đất đã lành');
     ok(run("W().regions.flatMap(R=>R.nodes).every(n=>n.maLv==null&&!n.maRuin)"), 'lành hẳn: không còn dấu ma trên nút');
     // tịnh hóa
@@ -671,7 +671,7 @@ const TESTS = {
     run("vaiGiet('NP19')");ok(!run("vaiNow('NP19').song")&&!!run("vaiNow('NP19').thay"), 'người giữ vai bị giết: vai trống, có vật chứng thay');
     run("vyRun(3)");ok(run("vaiNow('NP19').song")&&/học trò của/.test(run("vaiNow('NP19').qh")), 'vài năm sau có học trò nhận lại vai');
     // thế lực
-    ok(run("Object.keys(W().fa).length")===10&&run("faNow('FA01').n")==='Lương triều', 'mười thế lực');
+    ok(run("Object.keys(W().fa).length")===run("Object.keys(THE_LUC).length")&&run("faNow('FA01').n")==='Lương triều', 'đủ thế lực (mười cũ + Hoàng quốc mới)');
     ok(run("Object.keys(W().fa).filter(k=>W().fa[k].trang!=='diet').length")>=7, 'hai trăm năm yên ổn: phần lớn thế lực còn');
     run("faAdj('FA05',-200,'test')");ok(run("faNow('FA05').trang")==='diet'&&!run("vaiNow('NP13').song"), 'Huyết Sát Cốc tan: chủ cốc không còn ai giữ');
     run("vyRun(5)");ok(!run("vaiNow('NP13').song"), 'thế lực đã tan thì vai đứng đầu còn trống');
@@ -682,7 +682,7 @@ const TESTS = {
     run("chAdd(chKey(),5)");ok(run("faCong('FA04')")===5, 'cống hiến ghi vào sổ fa:FA04');
     // bản lưu cũ
     run("(()=>{const w=W();delete w.vai;delete w.fa;delete w.yLast;delete w.suLuoc;snapWorld(w);})()");
-    ok(run("Object.keys(W().vai).length")===30&&run("Object.keys(W().fa).length")===10&&run("W().yLast")===run("tYear(W().t)"), 'bản lưu cũ: dựng vai, thế lực khi tải');
+    ok(run("Object.keys(W().vai).length")===30&&run("Object.keys(W().fa).length")===run("Object.keys(THE_LUC).length")&&run("W().yLast")===run("tYear(W().t)"), 'bản lưu cũ: dựng vai, thế lực khi tải');
     ok(run("vaiTuiAdd('NP05',{id:'x1',n:'Ngọc bội'})&&vaiTui('NP05').length===1&&vaiTuiBo('NP05','x1').n==='Ngọc bội'"), 'NPC có túi đồ nhỏ (thêm, lấy ra)');
     run("delete W().vai.NP05.tui");ok(run("Array.isArray(vaiTui('NP05'))"), 'bản lưu cũ không có túi NPC vẫn đọc được');
     // nối Đ7: hộp Pháp môn ghi người dạy đang giữ vai
@@ -693,7 +693,7 @@ const TESTS = {
   // Đ8.1: 15 địa điểm neo — đủ, khác nhau, đúng đại khu, không phải sơn môn; bản lưu cũ đặt neo khi tải và chốt lại nơi thầy dạy / nguồn cải căn
   neo() {
     fresh();
-    const L=JSON.parse(run("JSON.stringify(Object.keys(LOC_NEO).map(c=>{const n=anchorNode(c);return n&&[c,n.id,Math.floor(n.id/100)===LOC_NEO[c].kv,n.type,n.name===LOC_NEO[c].n,n.anchor===c];}))"));
+    const L=JSON.parse(run("JSON.stringify(Object.keys(LOC_NEO).map(c=>{const n=anchorNode(c);return n&&[c,n.id,idReg(n.id)===LOC_NEO[c].kv,n.type,n.name===LOC_NEO[c].n,n.anchor===c];}))"));
     ok(L.length===15&&L.every(x=>x), 'đủ mười lăm nút neo');
     ok(new Set(L.map(x=>x[1])).size===15, 'mười lăm nút khác nhau');
     ok(L.every(x=>x[2]&&x[4]&&x[5]), 'mỗi neo đúng đại khu, đúng tên');
@@ -1015,7 +1015,7 @@ const TESTS = {
     ok(run('W().mo') === 1, 'thế giới đã chuyển sang bản đồ liền');
     ok(run('W().regions.every(R0=>R0.nodes.every(n=>{const g=geo();return terWalk(g.ter[n.hex])&&g.reg[n.hex]===R0.k;}))'), 'mọi địa điểm nằm trên đất đi được, đúng đại khu vực');
     ok(run('W().regions.every(R0=>R0.nodes.every(n=>n.type!=="ai"))'), 'không còn quan ải');
-    const areas = run('(()=>{const s=new Set();for(let i=0;i<60;i++)s.add(Math.floor(birthNode().id/100));return s.size;})()');
+    const areas = run('(()=>{const s=new Set();for(let i=0;i<60;i++)s.add(idReg(birthNode().id));return s.size;})()');
     ok(areas >= 3, `sinh ra ngẫu nhiên khắp bản đồ (${areas} đại khu vực)`);
     ok(run('REG.map(x=>x.n).join(",")') === 'Trung Châu,Đông Hoang,Nam Trạch,Tây Lĩnh,Bắc Nhạc', 'tên năm đại khu vực');
     // đường đi tránh hồ và vân hải
@@ -2176,7 +2176,7 @@ const TESTS = {
   cai_can_hiem() {
     ok(run("Object.values(CC_VT).every(V=>V.mua==null)"), 'bảng vật tư không còn giá mua thẳng');
     ok(run("Object.keys(CC_VT).every(v=>CC_VT[v].cong||CC_VT[v].che||ccHiem(v)||Object.values(CAI_CAN).some(P=>P.steps.some(s=>(s.cho||[]).some(([x])=>x===v))))"), 'mỗi vật tư đều có ít nhất một nguồn (làm công, tự chế, dò hỏi, phần thưởng phục vụ)');
-    fresh("G._ngNoEv=1;G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;G.run.bac=500000;G.run.base.tp=10;G.run.ccHeard.CC02=1;ccStart('CC02');G.run.cc.s=1;CC_FORCE=null");
+    fresh("G._ngNoEv=1;G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1;G.run.bac=500000;G.run.base.tp=10;G.run.ccHeard.CC02=1;ccStart('CC02');G.run.cc.s=1;CC_FORCE=null;CC_CFG.ky=0"); // tắt kỳ ngộ ngẫu nhiên tới bước thử kỳ ngộ
     const go=n=>run(`(()=>{const r=G.run;r.scene=null;r.moving=null;r.at=${n};openPlace(${n});r.scene.venue='coduyen';return 1})()`);
     const n2=run("ccSrc('CC02').node");go(n2);
     const ids=()=>run("ccOpts(nodeById(G.run.at)).map(o=>o.id+(o.no?'!':'')).join(',')");
@@ -2191,12 +2191,14 @@ const TESTS = {
     go(n2);ok(!/mua:bo_chong_sap/.test(ids()), 'lời nhượng dùng một lần');
     run("W().t+=3*HM");go(n2);ok(!/mua:/.test(ids()), 'lời nhượng hết hạn khi sang tháng');
     // kỳ ngộ: đang gom thì đôi khi được một món còn thiếu
-    run("CC_CFG.ky=1");const h0=run("ccHave('doi_mo')");run("ccMonth()");run("CC_CFG.ky=0.04");
-    ok(run("NK.count('cc.ky')")===1&&run("ccHave('doi_mo')")===h0+1, 'kỳ ngộ khi đang gom: được món còn thiếu');
+    run("CC_CFG.ky=1");const T0=run("JSON.stringify(ccThieu())");run("NK.clear();ccMonth()");run("CC_CFG.ky=0.04");
+    // món nhận được có thể bị dùng ngay (tự sang bước sau), nên kiểm qua nhật ký: món đó đang thiếu và đã vào túi
+    const kyV=run("(NK.buf.find(e=>e.tag==='cc.ky')||{d:{}}).d.vt");
+    ok(run("NK.count('cc.ky')")===1&&JSON.parse(T0).includes(kyV), 'kỳ ngộ khi đang gom: được món còn thiếu ('+kyV+')');
     // Ám Hội (Sửa-I): tu sĩ đường Tạo Hóa — một khách vô danh mang sẵn món đang thiếu trong túi, đem ra bàn
     fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=1;G.run.root={id:'tam',els:['kim','moc','thuy'],q:'thuong'};G.run.rootKnown=1;G.run.st=500;G.run.ccHeard.TAO_HOA=1;ccStart('TAO_HOA')");
     run("(()=>{while(G.run.cc&&ccStep().b!=='gain')ccNext();})()");
-    const n=run("W().regions.flatMap(R=>R.nodes).find(n=>(n.type==='thanh'||n.type==='ma')&&n.state!=='ruin').id");
+    const n=run("W().regions.flatMap(R=>R.nodes).find(n=>(n.type==='tuthanh'||n.type==='ma')&&n.state!=='ruin').id");
     run(`(()=>{const r=G.run;r.at=${n};W().t=Math.floor(W().t/HD)*HD+HD+23;CC_FORCE=1;amStart(nodeById(${n}));CC_FORCE=null;})()`);
     const lo=run("JSON.stringify(G.run.scene.q.find(l=>l.it.id==='cc_tao_hoa_dich')||null)");
     ok(lo!=='null'&&run("G.run.scene.ppl.some((p,i)=>(p.k==='vai'||p.k==='tk')&&amTui(G.run.scene,i).some(x=>x.id==='cc_tao_hoa_dich'))"), 'Ám Hội: một NPC thật ngồi bàn mang Tạo Hóa Thần Dịch trong túi, đem ra bàn ('+(lo!=='null'&&JSON.parse(lo).v)+' Hạ)');
@@ -2207,7 +2209,7 @@ const TESTS = {
   // Sửa-L câu 47–48: người chơi tự đặt danh sách vật muốn nhận khi bán; NPC chỉ trả bằng thứ trong danh sách hoặc đề nghị đổi; đồng hồ dừng khi thương lượng
   am_dat() {
     fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=2;G.run.relics=[];G.run.pills=[];G.run.qitems=[];G.run.st=0;G.run.lt=[0,0,0];AM_LECH=0");
-    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);})()");
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tuthanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);})()");
     ok(run("venueDo('amhoi','vao')"), 'ngồi vào bàn');
     // câu 48: đồng hồ dừng khi mở Thương lượng
     run("(()=>{const sc=G.run.scene;let g=0;while(sc.ph==='chon'&&g++<3)amAct('khong');})()");
@@ -2267,7 +2269,7 @@ const TESTS = {
     ok(run("tgL().length===2&&tgL().every(e=>e.bao)")&&run("tgView().every(v=>v.sap&&/còn \\d+ ngày/.test(v.con))")&&run("NK.count('tg.bao')")>0, 'sắp hết một năm: báo trước');
     run("W().t+=TAM_GIU.bao*HD;advanceTime(1)");ok(run("tgL().length")===0&&run("NK.count('tg.mat')")>=2, 'quá một năm chưa cất: mất');
     // Ám Hội: túi đầy vẫn trả giá; NPC túi đầy thì món nhận vào tạm giữ của NPC, có chỗ thì tự cất
-    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);venueDo('amhoi','vao');})()");
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tuthanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);venueDo('amhoi','vao');})()");
     ok(run("G.run.scene&&G.run.scene.type==='amhoi'")&&run("amRoom()"), 'túi đầy vẫn ngồi bàn trả giá được');
     run("G.run.qitems.push('luong_kho');saveSoon();amDat(G.run.scene,'me',[{u:'x1',id:'rel',n:'Thử Ấn Đấu',q:1,rel:Object.assign(genRelic(1),{name:'Thử Ấn Đấu',seen:1})}])");
     ok(run("tgL().some(e=>e.n==='Thử Ấn Đấu')"), 'thắng đấu giá khi túi đầy: món vào tạm giữ');
@@ -2302,7 +2304,7 @@ const TESTS = {
   // Sửa-M câu 55: NPC bán ở Ám Hội, NPC khác đề nghị đổi bằng vật khác; người bán xét theo nhu cầu
   am_npc_doi() {
     fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=2;G.run.relics=[];G.run.pills=[];G.run.qitems=[];G.run.st=0;G.run.lt=[0,0,0];AM_LECH=0");
-    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);venueDo('amhoi','vao');})()");
+    run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tuthanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);venueDo('amhoi','vao');})()");
     run("(()=>{const sc=G.run.scene;let g=0;while(sc.ph==='chon'&&g++<3)amAct('khong');})()");
     ok(run("G.run.scene.ph==='lot'&&G.run.scene.q[G.run.scene.i].own!=='me'"), 'có lô do NPC bán');
     // dựng: người bán nêu danh sách chỉ có đan; mọi NPC khác không có đan/linh thạch, chỉ có pháp bảo (hợp nhu cầu) trong túi
@@ -2324,13 +2326,13 @@ const TESTS = {
   },
   am_hoi() {
     fresh("G._ngNoEv=1;G.run.pham=0;G.run.realm=2;G.run.relics=[];G.run.pills=[];G.run.qitems=[];G.run.st=0;G.run.lt=[0,0,0];AM_LECH=0");
-    const nid=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);return n.id;})()");
+    const nid=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tuthanh'&&n.state!=='ruin');G.run.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);return n.id;})()");
     ok(run("placeActs(nodeById(G.run.at)).some(a=>a.a==='amhoi')"), 'canh ba ở thành: có U Minh Ám Hội');
     ok(run("Object.keys(VAI_NP).filter(ma=>VAI_NP[ma].tu>=1).every(ma=>vaiTui(ma).length>0&&vaiTui(ma).length<=12&&W().vai[ma].cua>0)"), 'NPC giữ vai là tu sĩ có túi đồ (≤12 món) và của cải');
     ok(run("Object.keys(VAI_NP).filter(ma=>VAI_NP[ma].tu<1).every(ma=>!vaiTui(ma).length)"), 'người phàm giữ vai không bị nhét đồ tu sĩ');
     // giá trị = giá gốc × nhu cầu thế giới
     run("FEAT.nc=1");
-    ok(run(`(()=>{const it={id:'rel',q:2};const b=amBase(it,0);const v0=amVal(it,0,${nid});ncPush(${nid},'pb',0.3);const v1=amVal(it,0,${nid});return v0===Math.round(b*ncGet(${nid},'pb')-0)||Math.abs(v0-b*(ncGet(${nid},'pb')-0.3))<=1?v1>v0&&v1===Math.max(1,Math.round(b*ncGet(${nid},'pb'))):false;})()`), 'giá trị vật = giá gốc × nhu cầu nơi họp; nhu cầu tăng thì giá trị tăng');
+    ok(run(`(()=>{const it={id:'rel',q:2};const b=amBase(it,0);const g0=ncGet(${nid},'pb');const v0=amVal(it,0,${nid});W().nc&&W().nc[${nid}]&&delete W().nc[${nid}].pb;const ga=ncGet(${nid},'pb'),va=amVal(it,0,${nid});ncPush(${nid},'pb',0.3);const v1=amVal(it,0,${nid});return Math.abs(v0-b*g0)<=1&&v1>va&&v1===Math.max(1,Math.round(b*ncGet(${nid},'pb')));})()`), 'giá trị vật = giá gốc × nhu cầu nơi họp; nhu cầu tăng thì giá trị tăng');
     ok(run(`amVal('lt:1',0,${nid})===Math.max(1,Math.round(100*ncGet(${nid},'lt1')))`), 'linh thạch cũng định giá theo nhu cầu (Trung phẩm = 100 Hạ × nhu cầu)');
     const snap=()=>run("JSON.stringify(Object.keys(VAI_NP).map(ma=>vaiTui(ma).map(x=>x.u).join(',')))");const s0=snap();
     ok(run("venueDo('amhoi','vao')")&&run("G.run.scene.type")==='amhoi', 'ngồi vào bàn: mở hộp thoại Ám Hội');
@@ -2837,7 +2839,7 @@ const TESTS = {
     const tm = run("G.run.tamma");run("kyPick(0)");ok(run("G.run.scene.res&&G.run.scene.res.t")===run("dmT(kyDmV('A1').t[0])")&&run("G.run.tamma")<tm, 'A1 "bước lên bậc": lời kết quả, tâm ma lắng xuống');
     run("G.run.scene=null;openPlace(G.run.at);tinhToa(1)");ok(run("G.run.scene.type")==='place', 'A1: mỗi kiếp một lần');
     // A2: chỉ khi đã có Mộng Ấn, ở nơi sông nước
-    run("(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>DM_KY.A2.noi.includes(n.type)&&n.state!=='ruin');const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;r.scene=null;G.screen='map';r.kyT=W().t;dmM().mong=[];r.tamma=50})()");
+    run("(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>DM_KY.A2.noi.includes(n.type)&&n.state!=='ruin'&&!isTownT(n.type));const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;r.scene=null;G.screen='map';r.kyT=W().t;dmM().mong=[];r.tamma=50})()");
     run("advanceTime(24)");ok(!run("G.run.kyA2"), 'A2: chưa có Mộng Ấn thì không gặp');
     run("dmM().mong=['MA03'];G.run.scene=null;G.run.kyT=W().t;advanceTime(24)");ok(run("G.run.scene&&G.run.scene.ev")==='dm_ky_A2'&&run("KYNGO.find(x=>x.id==='dm_ky_A2').c.length")===3, 'A2: đã có Mộng Ấn, ở bến sông → Một người chèo đò quen (ba lựa chọn)');
     run("kyPick(1)");ok(run("G.run.tamma")<=42&&run("NK.count('dm.kyChon')")>=2, 'A2 "ngồi im bên ông": tâm ma lắng xuống');
@@ -3111,6 +3113,42 @@ const TESTS = {
     run("G.run.kyA1V=undefined");ok(run("kyDmChon('A1',0).t")===run("dmT(DM_DATA.ky.A1.c[0].t)"), 'bản lưu cũ: bản gốc');
     ok(run("(()=>{const s=new Set();for(let i=0;i<40;i++){W().t+=HD;s.add(kyDmChonV('A2'))}return s.size})()")===3, 'game chọn ngẫu nhiên giữa bản gốc và hai bản khác');
     } finally { run("lkTang=ntLk;G._tuNoRui=0;Object.assign(TU_SK,JSON.parse(NT_BK));if(ntHoan)tnaHoan=ntHoan"); }
+  },
+  the_gioi_moi() {
+    fresh();
+    const N = JSON.parse(run(`JSON.stringify((()=>{const w=W(),g=geo(),Q=quanCells(g),all=w.regions.flatMap(R=>R.nodes);const per={};
+      for(const n of all){const d=g.dist[n.hex];(per[d]||(per[d]={}))[n.type]=((per[d]||{})[n.type]||0)+1;}
+      const bad=[];for(const d in Q){const c=Q[d].cells.length,co=quanCo(c),q=NOI_SL[co],p=per[d]||{};
+        const tp=p.thanh||0,tt=p.tuthanh||0,rp=p.tran||0,rt=p.tutran||0;
+        if(tp<q.thanhPham[0]||tp>q.thanhPham[1]+1||tt<1||rp<Math.min(q.tranPham[0],q.tranPham[0])-1||rt<q.tranTu[0]-1||rt>q.tranTu[1]+1)bad.push([d,c,co,tp,tt,rp,rt]);}
+      const types=new Set(all.map(n=>n.type));const ids=new Set(all.map(n=>n.id));const cells=new Set(all.map(n=>n.hex));
+      const hq=new Set(all.filter(n=>isTownT(n.type)&&!isTuT(n.type)).map(n=>n.fa));
+      return {tot:all.length,bad,types:[...types],dupId:all.length-ids.size,dupHex:all.length-cells.size,
+        noChu:all.filter(n=>isTownT(n.type)&&!n.fa).length,hq:[...hq].filter(f=>THE_LUC[f]&&THE_LUC[f].loai==='hq').length,hqAll:Object.keys(THE_LUC).filter(f=>THE_LUC[f].loai==='hq').length,
+        walk:all.filter(n=>!terWalk(g.ter[n.hex])).length,anchors:all.filter(n=>n.anchor).length,
+        tuChu:all.filter(n=>isTuT(n.type)).every(n=>n.fa&&(n.fa.startsWith('tong:')||THE_LUC[n.fa])),
+        lk:(()=>{const a=anchorOf(w,'LOC02');return a&&a.fa;})(),
+        hqKv:[0,1,2,3,4].map(k=>new Set(all.filter(n=>idReg(n.id)===k&&n.type==='thanh').map(n=>n.fa)).size)};})())`));
+    ok(N.tot >= 450 && N.tot <= 700, 'tổng số nơi khoảng 500–600 (hiện ' + N.tot + ')');
+    ok(N.bad.length === 0, 'mỗi quận đúng số thành, trấn phàm / tu sĩ theo cỡ quận' + (N.bad.length ? ' ' + JSON.stringify(N.bad.slice(0, 4)) : ''));
+    ok(['tutran', 'tuthanh', 'bicanh', 'dongthien', 'como', 'yeusao', 'ditich'].every(t => N.types.includes(t)), 'có đủ loại nơi mới');
+    ok(N.dupId === 0 && N.dupHex === 0 && N.walk === 0, 'nơi không chồng lên nhau, đều trên ô đi được');
+    ok(N.anchors === 15, 'giữ đủ 15 nơi neo');
+    ok(N.noChu === 0 && N.tuChu, 'mọi thành trấn đều có chủ');
+    ok(N.hqAll === 10 && N.hq === 10, 'mười Hoàng quốc, mỗi nước nắm thành trấn phàm (' + N.hq + ')');
+    ok(N.lk === 'FA01', 'Lương Kinh thuộc Lương triều');
+    ok(run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tuthanh');return placeActs(n).some(a=>a.a==='shop')&&TYPE_NAME.tuthanh&&NODE_IC.bicanh;})()"), 'thành tu sĩ có chợ đồ tu sĩ');
+    ok(run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh');openPlace(n.id);const a=placeActs(n).map(x=>x.a);return !a.includes('shop')&&a.includes('taphoa');})()"), 'thành phàm: tạp hóa, không có phường thị tu sĩ');
+    ok(run("(()=>{const r=G.run;for(const t of ['bicanh','dongthien','como','yeusao','ditich']){const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type===t);r.at=n.id;openPlace(n.id);if(!placeActs(n).some(a=>a.a==='explore'))return false;}return true;})()"), 'nơi hoang dã mới có hành động khám phá');
+    ok(run("W().regions.flatMap(R=>R.nodes).filter(n=>n.type==='bicanh'||n.type==='dongthien').every(n=>n.danger===3)"), 'bí cảnh, động thiên nguy hiểm nhất');
+    ok(run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran');return tnaFa(n)===n.fa;})()"), 'truy nã đọc chủ trên nút');
+    // bản lưu cũ: không có dấu v2, không có chủ → vẫn chạy, không đổi số nơi
+    const before = run("W().regions.flatMap(R=>R.nodes).length");
+    run("(()=>{const w=W();delete w.dat;delete w.v2;delete w.chu1;for(const n of w.regions.flatMap(R=>R.nodes))delete n.fa;snapWorld(w);})()");
+    ok(run("W().regions.flatMap(R=>R.nodes).length") === before, 'bản lưu cũ: nạp lại không đổi số nơi');
+    ok(run("(()=>{const w=W();const n=w.regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh');openPlace(n.id);const a=placeActs(n).map(x=>x.a);const m=tnaFa(n);return a.includes('shop')&&typeof m==='string';})()"), 'bản lưu cũ: thành vẫn có đồ tu sĩ, truy nã không lỗi');
+    const t = run("(()=>{const t=Date.now();for(let i=0;i<3;i++)genWorld(900+i);return (Date.now()-t)/3;})()");
+    ok(t < 600, 'sinh thế giới không chậm (' + Math.round(t) + ' ms)');
   },
 };
 

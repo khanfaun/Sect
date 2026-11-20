@@ -27,7 +27,7 @@
 const TNA={
   toi:{pha_dat:2,no:2,chong:1,giet_chung:2,danh:2},
   deed:{giet_vo_toi:3,diet_khau:3,giet_doat_bao:3,luyen_hon_nguoi:3,dau_doc:2,ban_nguoi:2,huyet_te_nguoi:2,trom_ngheo:1,trom_ac_ba:1,hiep_dao:1,lua_loi:1,dao_mo:1,tham_o:1},
-  chung:{thanh:0.95,tran:0.5,cho:0.5,ancu:0.25,tong:0.6,hoang:0.08,chac:0.9,che:0.6},
+  chung:{thanh:0.95,tran:0.5,tuthanh:0.95,tutran:0.5,cho:0.5,ancu:0.25,tong:0.6,hoang:0.08,chac:0.9,che:0.6},
   ngan:{goc:0.35,tp:0.015,max:0.85},
   mua:{xu:300,st:3,p:0.85},
   giet:{lo:0.35,che:0.6},
@@ -36,9 +36,9 @@ const TNA={
   nhan:[0,0.15,0.3,0.5,0.7,0.9],
   lan:5,lanM:2,danh:-60,danhSau:-45,
   san:{min:2000,p:0.25},
-  quan:['tran','thanh','cho','tong'],tuNoi:['cho','tong','ancu'],
+  quan:['tran','thanh','tutran','tuthanh','cho','tong'],tuNoi:['cho','tong','ancu','tutran','tuthanh'],
   hoan:{m:2,max:3,gian:3,giu:180},
   phat:{xuLt:200,phatMax:5},
   tu:[0,1,3,6,12,36],
   cong:[0,2,6,12,24,0],
-  cai:{xu:300,ngay:30,dong:{thanh:0.25,cho:0.2,tran:0.08},canh:['thanh','tong'],khi:{goc:0.15,realm:0.05,max:0.6}}};
+  cai:{xu:300,ngay:30,dong:{thanh:0.25,tuthanh:0.25,cho:0.2,tran:0.08,tutran:0.08},canh:['thanh','tuthanh','tong'],khi:{goc:0.15,realm:0.05,max:0.6}}};

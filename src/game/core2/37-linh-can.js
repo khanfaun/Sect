@@ -62,7 +62,7 @@ function tlCheck(){const r=G.run;if(!r||rootKnown(r)||!tlFree())return;const m=M
   while((r.tlM||0)<m&&G.run&&!rootKnown(r)&&tlFree()){r.tlM=(r.tlM||0)+1;const k=r.tlM;
     if(k<=2&&!r.tlTd){r.tlTd=1;if(tlSectNear()&&tlOpen('tl_tuyendo'))return;}
     if(k>=3){tlOpen('tl_laodao');return;}
-    const n=nodeById(r.at);if(n&&['tran','thanh'].includes(n.type)&&chance(.3)&&tlOpen('tl_dusi'))return;}}
+    const n=nodeById(r.at);if(n&&isTownT(n.type)&&chance(.3)&&tlOpen('tl_dusi'))return;}}
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(r&&h>0&&!rootKnown(r)){r.tlAcc=(r.tlAcc||0)+h;tlCheck();}
   // Tự biết: vô căn có tâm pháp mà luyện mãi không được, hoặc qua TP_Y năm
   const r2=G.run;if(r2&&isVo(r2)&&!rootKnown(r2)&&!r2.tlTb&&tlFree()&&((typeof hasTp==='function'&&hasTp())||(r2.age-r2.birthAge)>=TP_Y)){r2.tlTb=1;tlOpen('tl_tubiet');}

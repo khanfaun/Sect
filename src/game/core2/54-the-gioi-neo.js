@@ -12,7 +12,7 @@ function anchorsPlace(w){if(!w||!w.regions||w.anchorsV1)return false;
   const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
   const used=new Set(all.filter(n=>n.anchor).map(n=>n.id));const at={};for(const n of all)if(n.anchor)at[n.anchor]=n;
   for(const code of Object.keys(LOC_NEO)){if(at[code])continue;const L=LOC_NEO[code];
-    const pool=all.filter(n=>Math.floor(n.id/100)===L.kv&&n.type!=='tong'&&!used.has(n.id)&&!n.anchor);if(!pool.length)continue;
+    const pool=all.filter(n=>idReg(n.id)===L.kv&&n.type!=='tong'&&!used.has(n.id)&&!n.anchor);if(!pool.length)continue;
     const link=LOC_DUONG.filter(d=>d[0]===code||d[1]===code).map(d=>at[d[0]===code?d[1]:d[0]]).filter(Boolean);
     let cand=null;for(const t of L.t){const c=pool.filter(n=>n.type===t);if(c.length){cand=c;break;}}
     if(!cand)cand=pool.filter(n=>n.type!=='sao');if(!cand.length)cand=pool;
@@ -87,7 +87,7 @@ function vaiGiet(ma,ly){return vaiMat(ma,ly||'giet');}
 function faInit(w){w=w||W();if(!w)return null;const F=w.fa||(w.fa={});
   for(const id in THE_LUC)if(!F[id]){const D=THE_LUC[id];F[id]={tien:D.tien,quan:D.quan,dan:D.dan,suc:D.suc,chu:D.chu,trang:'song',tDiet:null,lap:1};}return F;}
 function faTrang(f){return f.suc<=0?'diet':f.suc<30?'suy':f.trang==='suy'&&f.suc<40?'suy':'song';} // hồi phải lên 40 mới tính là vững lại
-function faSet(id,f,w,y){const D=THE_LUC[id],t0=f.trang,t1=t0==='diet'?'diet':faTrang(f);if(t0===t1)return;f.trang=t1;const n=anchorOf(w,D.noi);const nt=n?n.name:LOC_NEO[D.noi].n;
+function faSet(id,f,w,y){const D=THE_LUC[id],t0=f.trang,t1=t0==='diet'?'diet':faTrang(f);if(t0===t1)return;f.trang=t1;const n=anchorOf(w,D.noi);const nt=n?n.name:(D.noi&&LOC_NEO[D.noi]?LOC_NEO[D.noi].n:D.n);
   if(t1==='diet'){f.tDiet=y;f.suc=0;suLuocAdd(contentText('tg.faDiet',[D.n,nt]),'fa',w);
     for(const ma in VAI_NP)if(VAI_NP[ma].fa===id&&VAI_NP[ma].lead&&w.vai&&w.vai[ma]&&w.vai[ma].song)vaiMat(ma,'fa',w);}
   else if(t1==='suy')suLuocAdd(contentText('tg.faSuy',[D.n]),'fa',w);
@@ -96,7 +96,7 @@ function faAdj(id,d,ly,w){w=w||W();const F=faInit(w),f=F[id];if(!f||f.trang==='d
 function faYear(w,y,n){const F=faInit(w);n=n||1;
   for(const id in F){const f=F[id],D=THE_LUC[id];
     if(f.trang==='diet'){if(y-f.tDiet>=D.phuc&&wRnd(w,'lap:'+id+':'+y)<0.05*n){f.suc=40;f.trang='song';f.lap++;f.tien=Math.round(D.tien*0.6);f.quan=Math.round(D.quan*0.6);f.dan=Math.round(D.dan*0.7);
-      const n0=anchorOf(w,D.noi);suLuocAdd(contentText('tg.faLap',[D.n,n0?n0.name:LOC_NEO[D.noi].n]),'fa',w);dbg('fa.lap',{id});}continue;}
+      const n0=anchorOf(w,D.noi);suLuocAdd(contentText('tg.faLap',[D.n,n0?n0.name:(D.noi&&LOC_NEO[D.noi]?LOC_NEO[D.noi].n:D.n)]),'fa',w);dbg('fa.lap',{id});}continue;}
     const e=(wRnd(w,'fa:'+id+':'+y)-0.5)*4;f.suc=clamp(f.suc+((D.suc-f.suc)*0.03+D.lai)*n+e,0,100);
     for(const k of ['tien','quan','dan'])f[k]=clamp(Math.round(f[k]+(D[k]-f[k])*0.05*n),0,100);faSet(id,f,w,y);}}
 function faNow(id){const w=W();const F=faInit(w),f=F[id],D=THE_LUC[id];if(!f)return null;const c=f.chu&&vaiNow(f.chu);

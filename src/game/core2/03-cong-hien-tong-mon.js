@@ -54,12 +54,12 @@ function needOk(c){return needList(c).every(x=>x.ok);}
 // thăm dò ở nơi có người: hàng hóa chắc chắn có và thứ chỉ gặp khi có duyên
 function townStats(n){const r=G.run,g=rT(),L=[],M=[];const q=g>=2?2:g>=1?1:0;const G1=clamp(g,0,4),G2=clamp(g+1,0,4);
   const rg=(a,b)=>a===b?a:a+' – '+b;
-  if(n.type==='thanh'||n.type==='tran'||n.type==='cho'){L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.047"),rg(PQ[0],PQ[q])],[contentText("core2_03-cong-hien-tong-mon_js.townStats.048"),contentText("core2_03-cong-hien-tong-mon_js.townStats.049")+Math.min(4,g+2)],[contentText("core2_03-cong-hien-tong-mon_js.townStats.050"),rg(GRADE[G1],GRADE[G2])]);
+  if(isTownT(n.type)||n.type==='cho'){L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.047"),rg(PQ[0],PQ[q])],[contentText("core2_03-cong-hien-tong-mon_js.townStats.048"),contentText("core2_03-cong-hien-tong-mon_js.townStats.049")+Math.min(4,g+2)],[contentText("core2_03-cong-hien-tong-mon_js.townStats.050"),rg(GRADE[G1],GRADE[G2])]);
     if(n.type!=='cho')L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.051"),MOUNT.filter(m=>r.realm>=(m.realm||0)).map(m=>m.n).join(', ')],[contentText("core2_03-cong-hien-tong-mon_js.townStats.052"),contentText("core2_03-cong-hien-tong-mon_js.townStats.053")]);}
   if(n.type==='tong')L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.054"),contentText("core2_03-cong-hien-tong-mon_js.townStats.055")+Math.min(4,g+2)],[contentText("core2_03-cong-hien-tong-mon_js.townStats.056"),PQ[1]],[contentText("core2_03-cong-hien-tong-mon_js.townStats.057"),contentText("core2_03-cong-hien-tong-mon_js.townStats.058")]);
   if(n.type==='ancu')L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.059"),contentText("core2_03-cong-hien-tong-mon_js.townStats.060")]);
   M.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.061"),contentText("core2_03-cong-hien-tong-mon_js.townStats.062")+rg(GRADE[G1],GRADE[G2])+contentText("core2_03-cong-hien-tong-mon_js.townStats.063")+rg(PQ[0],PQ[2])],[contentText("core2_03-cong-hien-tong-mon_js.townStats.064"),contentText("core2_03-cong-hien-tong-mon_js.townStats.065")+rg(GRADE[G2],GRADE[clamp(g+2,0,4)])+contentText("core2_03-cong-hien-tong-mon_js.townStats.066")],[contentText("core2_03-cong-hien-tong-mon_js.townStats.067"),contentText("core2_03-cong-hien-tong-mon_js.townStats.068")]);
-  if(n.type==='thanh'||n.type==='cho')M.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.069"),contentText("core2_03-cong-hien-tong-mon_js.townStats.070")+rg(GRADE[G1],GRADE[clamp(g+2,0,4)])]);
+  if(isThanhT(n.type)||n.type==='cho')M.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.069"),contentText("core2_03-cong-hien-tong-mon_js.townStats.070")+rg(GRADE[G1],GRADE[clamp(g+2,0,4)])]);
   const evs=EVS.filter(e=>!e.spec&&(e.src||'explore')==='explore'&&e.tg&&e.tg.includes(tAs(n.type))&&(!e.r||e.r.includes(g))).slice(0,8).map(e=>e.n).filter(Boolean);
   return {L,M,evs};}
 

@@ -46,12 +46,12 @@ function snapWorld(w){if(!w||!w.regions)return;const g=geoFor(w);const used=new 
     for(const n of R0.nodes){
       if(!n.wc){const lx=clamp((n.x-k*1000)/1000,0,1),ly=clamp(n.y/1000,0,1);n.x=B0[0]+lx*(B0[2]-B0[0]);n.y=B0[1]+ly*(B0[3]-B0[1]);n.wc=1;n.hex=null;n.rx=null;n.ry=null;}
       let c=n.hex!=null?n.hex:hexAt(n.x,n.y);
-      if(!ok(c,k)){const seen=new Set([c]);let fr=[c],found=-1;for(let it=0;it<80&&found<0&&fr.length;it++){const nx=[];for(const a of fr)for(const b of hexNb(a)){if(seen.has(b))continue;seen.add(b);nx.push(b);if(found<0&&ok(b,k))found=b;}fr=nx;}
+      if(!ok(c,k)&&!(n.nw&&!used.has(c)&&g.reg[c]===k)){const seen=new Set([c]);let fr=[c],found=-1;for(let it=0;it<80&&found<0&&fr.length;it++){const nx=[];for(const a of fr)for(const b of hexNb(a)){if(seen.has(b))continue;seen.add(b);nx.push(b);if(found<0&&ok(b,k))found=b;}fr=nx;}
         if(found>=0)c=found;}
-      used.add(c);ring(c);n.hex=c;const p=hexCenter(c);n.x=Math.round(p[0]*10)/10;n.y=Math.round(p[1]*10)/10;if(n.rx!=null){const pr=hexCenter(hexAt(n.rx,n.ry));n.rx=pr[0];n.ry=pr[1];}}
+      used.add(c);if(!n.nw)ring(c);n.hex=c;const p=hexCenter(c);n.x=Math.round(p[0]*10)/10;n.y=Math.round(p[1]*10)/10;if(n.rx!=null){const pr=hexCenter(hexAt(n.rx,n.ry));n.rx=pr[0];n.ry=pr[1];}}
     for(const e of R0.edges){const a=nodeById2(w,e.a),b=nodeById2(w,e.b);if(a&&b)e.len=Math.round(Math.hypot(a.x-b.x,a.y-b.y));}}
   w.mo=1;}
-function nodeById2(w,id){const R0=w.regions[Math.floor(id/100)];return R0&&R0.nodes[id%100];}
+function nodeById2(w,id){const R0=w.regions[idReg(id)];return R0&&R0.nodes[idIdx(id)];}
 {const _gw2=genWorld;genWorld=function(seed){const w=_gw2(seed);snapWorld(w);return w;};}
 {const _nm2=newMeta;newMeta=function(){const m=_nm2();snapWorld(m.world);return m;};}
 // đường đi qua các ô: biển đi được nhưng rất tốn (thuê thuyền), núi và sông hồ chậm hơn đồng bằng
@@ -63,7 +63,7 @@ function hexPath(a,b){const g=geo();const key=a+'>'+b;if(g.paths[key])return g.p
   const cells=[];for(let c=b;c>=0;c=P[c]){cells.push(c);if(c===a)break;}cells.reverse();
   const cum=[0];for(let i=1;i<cells.length;i++)cum.push(cum[i-1]+stepCost(g,cells[i-1],cells[i]));
   const res={cells,cum,len:Math.max(1,cum[cum.length-1])*HEXW};g.paths[key]=res;g.paths[b+'>'+a]={cells:cells.slice().reverse(),cum:cum.map(x=>cum[cum.length-1]-x).reverse(),len:res.len};return res;}
-function nodeHex(n){return n.hex!=null?n.hex:hexAt(...mapXY(Math.floor(n.id/100),n.x,n.y));}
+function nodeHex(n){return n.hex!=null?n.hex:hexAt(...mapXY(idReg(n.id),n.x,n.y));}
 function findPath(from,to){return from===to?[from]:[from,to];} // một bản đồ liền: đi thẳng theo ô tới bất cứ đâu
 function edgeLen(a,b){if(a===b)return 0;return Math.round(hexPath(nodeHex(nodeById(a)),nodeHex(nodeById(b))).len);}
 function pathLen(p){let L=0;for(let i=1;i<p.length;i++)L+=edgeLen(p[i-1],p[i]);return L;}

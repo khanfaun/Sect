@@ -27,17 +27,24 @@ const GLYPH={
   cho:'M3 10l2-5h14l2 5M4 10v10h16V10M3 10h18M9 20v-5h6v5',
   ancu:'M3 12l9-8 9 8M6 11v9h12v-9M10 20v-4h4v4',
   dam:'M3 19c3-2 5 2 8 0s5 2 8 0M8 16V7M8 7c-1-2-1-3 0-4 1 1 1 2 0 4M15 15V9M15 9c-1-2-1-3 0-4 1 1 1 2 0 4',
+  tutran:'M3 20V12l5-4 5 4v8M13 20v-5l4-3 4 3v5M2 20h20M8 5v3M8 3l1.5 1.5L8 6 6.5 4.5z',
+  tuthanh:'M4 20V9h3v3h3V7h4v5h3V9h3v11M2 20h20M10 20v-4h4v4M12 2l1.2 2.6L16 5l-2 2 .5 2.8L12 8.4 9.5 9.8 10 7 8 5l2.8-.4z',
+  bicanh:'M12 3a9 9 0 100 18 9 9 0 000-18zM12 7a5 5 0 105 5M12 11a1.5 1.5 0 101.5 1.5',
+  dongthien:'M3 20c0-9 4-15 9-15s9 6 9 15zM12 8l1 2.5 2.5 1-2.5 1L12 15l-1-2.5-2.5-1 2.5-1z',
+  como:'M7 20V9a5 5 0 0110 0v11zM12 10v6M9.5 12.5h5M3 20h18',
+  yeusao:'M3 20c0-6 4-10 9-10s9 4 9 10zM8 14l1-3 1 3M14 14l1-3 1 3M10 18h4',
+  ditich:'M4 20V8M4 8h5M9 8v12M14 20V12h6v8M12 20h10M3 20h5',
   ruin:'M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z',
   me:'M12 6a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM7 13c0-3 2-5 5-5s5 2 5 5M3 20c3-4 6-5 9-5s6 1 9 5',
 };
 const P2D={};function p2d(k){return P2D[k]||(P2D[k]=new Path2D(GLYPH[k]||GLYPH.tran));}
-const NODE_CAT={tran:'gold',thanh:'gold',tong:'acc',rung:'jade',nui:'jade',song:'jade',bien:'jade',hoang:'jade',thien:'acc',phe:'vio',dong:'vio',ma:'seal',sao:'seal',ai:'ink',linhdia:'acc',khoang:'vio',duoc:'jade',cho:'gold',ancu:'acc',dam:'jade'};
+const NODE_CAT={tran:'gold',thanh:'gold',tong:'acc',rung:'jade',nui:'jade',song:'jade',bien:'jade',hoang:'jade',thien:'acc',phe:'vio',dong:'vio',ma:'seal',sao:'seal',ai:'ink',linhdia:'acc',khoang:'vio',duoc:'jade',cho:'gold',ancu:'acc',dam:'jade',tutran:'acc',tuthanh:'acc',bicanh:'vio',dongthien:'vio',como:'seal',yeusao:'seal',ditich:'vio'};
 
 const HERO_IMG={};function heroImg(){const u=ASSET.hero.me;if(!u||typeof Image==='undefined')return null;if(!HERO_IMG[u]){const im=new Image();im.onload=()=>Map2.invalidate();im.src=u;HERO_IMG[u]=im;}return HERO_IMG[u];}
 const ENT_GLYPH={thutrieu:'paw',di:'star',tuantra:'shield',thienkieu:'medal',truysat:'sword',khach:'walk'};const ICPATH={};function icPath(k){return ICPATH[k]||(ICPATH[k]=new Path2D(ICP[k]));}
 function entCol(t,C){return ['thutrieu','truysat'].includes(t)?C.seal:t==='di'?C.vio:t==='thuong'?C.gold:C.acc;}
 function avLetter(name){const w=String(name||'?').trim().split(/\s+/);return (w[w.length-1]||'?')[0].toUpperCase();}
-function mapNode(n){const k=Math.floor(n.id/100);return mapXY(k,n.x,n.y);}
+function mapNode(n){const k=idReg(n.id);return mapXY(k,n.x,n.y);}
 const Map2=(()=>{
   // lưới ô và các đường ranh: dựng một lần thành nét vẽ sẵn, mỗi khung chỉ tô lại
   let HX=null,hov=null,pcam=null,pse=null;
@@ -350,7 +357,7 @@ const Map2=(()=>{
       if(n.grave&&n.fog>=1){ctx.fillStyle=C.ink2;ctx.fillRect(x-s0/2-2,y-s0/2-2,5,7);}
       if(QN.has(n.id)){const qx=x+s0/2,qy=y+s0/2;ctx.beginPath();ctx.arc(qx,qy,6.5,0,6.3);ctx.fillStyle=C.gold;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='#fffaf0';ctx.font='700 10px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('!',qx,qy+0.5);}
       if(CFG.notes&&notes[n.id]){ctx.beginPath();ctx.arc(x-s0/2+1,y+s0/2-1,4.5,0,6.3);ctx.fillStyle=C.gold;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();}
-      if(CFG.names&&(!small||sel||n.id===r.at||n.type==='thanh'||n.type==='ai')&&(z>=0.3||sel||n.id===r.at)){label(n.name+(sure?'':'?'),x,y+s0/2+3,{c:sure?C.ink:C.ink3,s:CFG.font==='m'?12:14});if(old)label('tin cũ',x,y+s0/2+18,{c:C.ink3,s:10});}}
+      if(CFG.names&&(!small||sel||n.id===r.at||isThanhT(n.type)||n.type==='ai')&&(z>=0.3||sel||n.id===r.at)){label(n.name+(sure?'':'?'),x,y+s0/2+3,{c:sure?C.ink:C.ink3,s:CFG.font==='m'?12:14});if(old)label('tin cũ',x,y+s0/2+18,{c:C.ink3,s:10});}}
     // thực thể qua lại
     if(CFG.ents&&showIc){const sr=senseR();for(const e of entsHere(reg)){if(HE[e.type])continue;const p=entXY(e);const see=Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr;
       if(!see&&!e.heard)continue;const q=mapXY(reg,see?p[0]:e.heard.x,see?p[1]:e.heard.y);const parked=see&&e.to==null;const x=SX(q[0])+(parked?HW*0.64:0),y=SY(q[1]);const er=Math.max(6,HW*0.52);if(x<-30||y<-30||x>W0+30||y>H0+30)continue;

@@ -68,6 +68,6 @@ function faQhBac(id){const d=faDiem(id);let i=0;while(i<FA_QH_NGUONG.length&&d>=
 function faMinh(id){const r=G.run;return !!(r&&r.faMinh&&r.faMinh[id]);}
 function faKetMinh(id,on){const r=G.run;if(!r||!THE_LUC[id])return false;const M=r.faMinh||(r.faMinh={});if(on)M[id]=1;else delete M[id];dbg('fa.minh',{id,on:!!on});return true;}
 function soFaView(){const r=G.run;if(!r||!W())return [];
-  return Object.keys(THE_LUC).sort().map(id=>{const f=faNow(id);if(!f)return null;const n=anchorNode(f.noi);
+  return Object.keys(THE_LUC).sort().filter(id=>THE_LUC[id].noi).map(id=>{const f=faNow(id);if(!f)return null;const n=anchorNode(f.noi);
     const b=faQhBac(id);const c=faCong(id);
     return {id,n:f.n,noi:f.noiTen,trang:f.trangT,diet:f.trang==='diet'?1:0,chu:f.chu||'',danh:n&&typeof danhName==='function'?danhName(n):'',qh:contentText('so.fq.'+b),bac:b,minh:faMinh(id)?contentText('so.fqMinh'):'',cong:c>0?contentText('so.faCong',[Math.floor(c)]):contentText('so.faCong0')};}).filter(Boolean);}

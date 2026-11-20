@@ -25,10 +25,12 @@ const TIEN2={
   doi:{
     cho:{xuong:[97,93,89],len:[1.06,1.12,1.22],max:2,lenThang:[6,3,1]},
     tong:{xuong:[99,95,91],len:[1.05,1.10,1.18],max:2,lenThang:[5,2,1]},
-    thanh:{xuong:[94,90,86],len:[1.10,1.18,1.30],max:1,lenThang:[4,1,0]}},
+    thanh:{xuong:[94,90,86],len:[1.10,1.18,1.30],max:1,lenThang:[4,1,0]},
+    tuthanh:{xuong:[94,90,86],len:[1.10,1.18,1.30],max:1,lenThang:[4,1,0]},
+    tutran:{xuong:[97,93,89],len:[1.06,1.12,1.22],max:2,lenThang:[6,3,1]}},
   lech:2,
   nc:{dao:0.12,chu:3,day:0.04,phai:0.7,min:0.7,max:1.4},
-  shop:{tran:1,thanh:2},
+  shop:{tran:1,thanh:2,tutran:2,tuthanh:3},
   hang:[{id:'kim_sang_duoc',bac:120,qty:3},{id:'huong_an_than',bac:60,qty:2},{id:'luong_kho',bac:70,qty:5}],
-  cam:{thang:1,xuPer:200,noi:['thanh','cho']},
+  cam:{thang:1,xuPer:200,noi:['thanh','cho']}, // cầm đồ chỉ ở thành phàm nhân và chợ phiên
   dung:{kim_sang_duoc:{hp:0.3},huong_an_than:{tamma:-5}}};

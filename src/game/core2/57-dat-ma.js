@@ -6,14 +6,14 @@ function maVucTao(src,k,w){w=w||W();k=k||MA_CFG.khu;const all=[];for(const R0 of
   const L=w.maVuc||(w.maVuc=[]);const taken=new Set(L.flatMap(x=>x.nut));const tam=[];
   const cand=all.filter(n=>!loi(n)&&!taken.has(n.id)).sort((a,b)=>Math.hypot(a.x-s0.x,a.y-s0.y)-Math.hypot(b.x-s0.x,b.y-s0.y));
   for(const n of cand){if(tam.length>=k)break;if(tam.every(t=>Math.hypot(t.x-n.x,t.y-n.y)>MA_CFG.ban*1.2))tam.push(n);}
-  const out=[];for(const t of tam){const kv=Math.floor(t.id/100);
-    const nut=all.filter(n=>Math.floor(n.id/100)===kv&&!loi(n)&&!taken.has(n.id)&&Math.hypot(n.x-t.x,n.y-t.y)<=MA_CFG.ban).map(n=>n.id);nut.forEach(i=>taken.add(i));
+  const out=[];for(const t of tam){const kv=idReg(t.id);
+    const nut=all.filter(n=>idReg(n.id)===kv&&!loi(n)&&!taken.has(n.id)&&Math.hypot(n.x-t.x,n.y-t.y)<=MA_CFG.ban).map(n=>n.id);nut.forEach(i=>taken.add(i));
     const z={tam:t.id,k:kv,ma:MA_CFG.dau,nut,bac:-1};L.push(z);maApply(z,w);out.push(z);suLuocAdd(contentText('ma.tao',[t.name,MA_BAC[z.bac].n]),'ma',w);}
   dbg('ma.tao',{n:out.length,src:s0.id});return out;}
 // áp bậc lên các nút trong khu: nguy hiểm, thôn trấn biến mất ở Ma vực
 function maApply(z,w){const b=maBac(z.ma),B=MA_BAC[b];const ch=b!==z.bac;z.bac=b;const r=G.run;
   for(const id of z.nut){const n=nodeById2(w,id);if(!n)continue;if(n.dangerGoc==null)n.dangerGoc=n.danger;n.danger=clamp(n.dangerGoc+B.dg,0,3);n.maLv=b;
-    if(B.mat&&(n.type==='tran'||n.type==='thanh')&&!(r&&r.at===n.id)){n.state='ruin';n.stateUntil=Math.max(n.stateUntil||0,w.t+2*HY);n.maRuin=1;}
+    if(B.mat&&isTownT(n.type)&&!(r&&r.at===n.id)){n.state='ruin';n.stateUntil=Math.max(n.stateUntil||0,w.t+2*HY);n.maRuin=1;}
     else if(n.maRuin&&!B.mat){n.stateUntil=Math.min(n.stateUntil||0,w.t);delete n.maRuin;}}
   return ch;}
 function maLanh(z,w){for(const id of z.nut){const n=nodeById2(w,id);if(!n)continue;if(n.dangerGoc!=null){n.danger=n.dangerGoc;delete n.dangerGoc;}delete n.maLv;if(n.maRuin){n.stateUntil=Math.min(n.stateUntil||0,w.t);delete n.maRuin;}}}

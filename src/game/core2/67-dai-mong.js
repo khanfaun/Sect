@@ -145,7 +145,7 @@ function dmOpts(n){const r=G.run;const L=[];if(!r||!n||!W())return L;const loc=d
       else if(!r.pham&&r.realm>=2)L.push(dmOpt('ng04t',contentText('dm.v.ng04t'),contentText('dm.ng04tD',[N.thieuKhu])+'\n\n'+dmDkChu(D),{h:N.ngay*HD,st:Math.round(N.st*0.3),no:(r.st||0)>=Math.round(N.st*0.3)?'':contentText('dat.thieuLt')}));}
   }
   // truyền nghề (END06): ở thôn trấn / thành hoặc nơi neo
-  if((loc||['tran','thanh'].includes(n.type))&&!(r.ends||[]).includes('END06')&&typeof ngChinh==='function'&&ngChinh(r)){const D=dmDk('END06');
+  if((loc||isTownT(n.type))&&!(r.ends||[]).includes('END06')&&typeof ngChinh==='function'&&ngChinh(r)){const D=dmDk('END06');
     if(D[0][1])L.push(dmOpt('truyen',contentText('dm.v.truyen'),contentText('dm.truyenD',[DM_CFG.end06Thang])+'\n\n'+dmDkChu(D),{h:DM_CFG.end06Thang*HM,no:dmDkOk(D)?'':contentText('dm.thieuDk')}));}
   return L;}
 function fmtNgay(h){return Math.max(1,Math.ceil(h/HD))+' ngày';}

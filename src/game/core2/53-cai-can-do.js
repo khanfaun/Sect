@@ -59,7 +59,7 @@ function ccDoAdd(p,fake,why){const r=ccSt();let q=ccDoQ(fake?'ccg':'ccd',p);let 
   if(fake&&chance(ccNhanP())){q=ccDoQ('ccx',p);lo=1;note(contentText('ccd.nhanRa',[CC_DO[p].n]),'');}
   r.qitems.push(q);dbg('ccd.add',{p,fake:fake?1:0,lo,why:why||''});return q;}
 // thẩm định (thành / trấn): biết thật giả
-function ccTdOk(n){return !!n&&['thanh','tran','ma'].includes(n.type)&&n.state!=='ruin';}
+function ccTdOk(n){return !!n&&(isTownT(n.type)||n.type==='ma')&&n.state!=='ruin';}
 function ccTdGia(){return G.run.pham?{bac:CC_DOCFG.tdBac}:{st:CC_DOCFG.tdSt};}
 function ccTdOpts(n){const r=G.run;const L=[];if(!r||!ccTdOk(n))return L;const seen={};
   for(const q of r.qitems||[]){const P=ccDoParse(q);if(!P||P.k==='t'||P.k==='x'||seen[P.p])continue;seen[P.p]=1;const g=ccTdGia();

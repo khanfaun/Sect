@@ -22,7 +22,7 @@ function tnaQ(n){if(!n)return tnaKey(G.run.region||0);const d=geo().dist[nodeHex
 function tnaQs(){return Object.keys(tnaQI().reg).map(d=>'q'+d);}
 // tông môn → 'tong:id'; trụ sở thế lực còn sống (THE_LUC.noi) mà không phải thôn trấn / thành → mã thế lực; nơi khác → null (thuộc quan phủ quận)
 function tnaCanCu(n){if(!n)return null;if(n.type==='tong')return 'tong:'+n.id;
-  if(['tran','thanh'].includes(n.type)||!n.anchor||typeof THE_LUC==='undefined'||typeof LOC_NEO==='undefined')return null;
+  if(isTownT(n.type)||!n.anchor||typeof THE_LUC==='undefined'||typeof LOC_NEO==='undefined')return null;
   const L=LOC_NEO[n.anchor],fa=L&&L.fa;return fa&&THE_LUC[fa]&&THE_LUC[fa].noi===n.anchor&&faAlive(fa)?fa:null;}
 // khoá sổ ghi tội cho việc làm ở nơi n
 function tnaK(n){const b=tnaCanCu(n);return b?'f:'+b:tnaQ(n);}
@@ -63,7 +63,7 @@ function tnaDanhLen(q){if(tnaIsF(q))return;const reg=tnaKReg(q),T=G.run.tna||{};
 // quan phủ quận / chấp pháp thế lực ghi tội: tăng mức, cộng tiền treo thưởng, quan sai lần theo (nếu ngươi đang ở đó)
 function tnaBao(k0,nang,o){const r=G.run;if(!r||!nang||!W())return null;o=o||{};const T=tnaS(),t=W().t;const reg=tnaKey(k0);
   const E=T[reg]||(T[reg]={m:0,tien:0,t,ly:[],fa:[]});const m0=E.m;E.m=clamp(E.m+nang,1,5);
-  const nd=o.node;tnaFaGhi(E,o.lan?'*':o.faK||(nd?tnaFa(nd):'*'));E.tien+=Math.round(TNA.tien.xu*nang*(nd&&nd.type==='thanh'?TNA.tien.thanh:1));E.t=t;if(o.ly&&!E.ly.includes(o.ly))E.ly.push(o.ly);
+  const nd=o.node;tnaFaGhi(E,o.lan?'*':o.faK||(nd?tnaFa(nd):'*'));E.tien+=Math.round(TNA.tien.xu*nang*(nd&&isThanhT(nd.type)?TNA.tien.thanh:1));E.t=t;if(o.ly&&!E.ly.includes(o.ly))E.ly.push(o.ly);
   if(E.m>=TNA.lan)E.fa=['*'];if(E.m>=2)tnaDanhXuong(reg);
   // tội rất nặng: lan sang mọi quận khác (sổ thế lực khác không lan)
   if(E.m>=TNA.lan&&!o.lan)for(const q of tnaQs()){if(q===reg)continue;const F=T[q];if(!F||F.m<TNA.lanM)tnaBao(q,TNA.lanM-(F?F.m:0),{ly:'lan',lan:1,quiet:1,noTruy:1});}
@@ -115,7 +115,7 @@ function tnaTick(){const r=G.run;if(!tnaOn()||TNA_BUSY)return;const t=W().t,T=tn
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);if(G.run&&!TNA_BUSY)tnaTick();return o;};}
 // tới thôn trấn / thành / chợ trong quận đang bị truy nã (hoặc căn cứ thế lực đang ghi tội ngươi): có thể bị nhận ra (cải trang, che giấu tu vi giúp né)
 {const _ar=arrive;arrive=function(id){const o=_ar.apply(this,arguments);const r=G.run;if(!tnaOn())return o;const n=nodeById(id);
-  if(!n||n.state==='ruin')return o;const b=tnaCanCu(n);if(!b&&!['tran','thanh','cho'].includes(n.type))return o;
+  if(!n||n.state==='ruin')return o;const b=tnaCanCu(n);if(!b&&!isTownT(n.type)&&n.type!=='cho')return o;
   const reg=b?'f:'+b:tnaQ(n),E=tnaE(reg);if(!E)return o;
   if(!b&&!tnaBiet(E,n)){dbg('tna.laFa',{k:reg,fa:tnaFa(n)});return o;}
   const lo=tnaCaiThu(n);const p=lo?1:TNA.nhan[E.m]*(tnaChe()?TNA.chung.che:1);const hit=lo||chance(p);dbg('tna.nhan',{reg,p:Math.round(p*100),hit,lo:lo||''});
@@ -150,7 +150,7 @@ VENUE_N.chapphap=contentText('tna.cpN');VENUE_IN.chapphap=[contentText('tna.cpIn
   const qv=tnaQpV(n),tu=qv==='chapphap',b=tnaCanCu(n);
   // quan phủ (quận) ở nơi giam giữ thường; tông môn / căn cứ thế lực chỉ xử sổ riêng của mình
   if((b||TNA.quan.includes(n.type))&&tnaE(tnaK(n))&&!L.some(x=>x.a===qv))L.push({a:qv,i:'⚖️',l:contentText(tu?'tna.cpN':'tna.qpN'),h:0,tip:contentText(tu?'tna.cpTip':'tna.qpTip'),dis:false,x:''});
-  if(['tran','thanh','cho'].includes(n.type)&&tnaMax()>0&&!L.some(x=>x.a==='caitrang'))L.push({a:'caitrang',i:'🎭',l:contentText('tna.caiN'),h:1,tip:contentText('tna.caiTip',[TNA.cai.ngay]),dis:(r.bac||0)<TNA.cai.xu,x:(r.bac||0)<TNA.cai.xu?contentText('no.khongDu'):''});
+  if((isTownT(n.type)||n.type==='cho')&&tnaMax()>0&&!L.some(x=>x.a==='caitrang'))L.push({a:'caitrang',i:'🎭',l:contentText('tna.caiN'),h:1,tip:contentText('tna.caiTip',[TNA.cai.ngay]),dis:(r.bac||0)<TNA.cai.xu,x:(r.bac||0)<TNA.cai.xu?contentText('no.khongDu'):''});
   return L;};}
 {const _p=placeAct;placeAct=function(a){if(a!=='caitrang')return _p.apply(this,arguments);const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place'||(r.bac||0)<TNA.cai.xu)return;
   bacAdd(-TNA.cai.xu,'tna.cai');advanceTime(1);if(!G.run)return;r.caiT=W().t+TNA.cai.ngay*HD;sc.msg=[contentText('tna.caiXong',[TNA.cai.ngay])];sc.chips=[bacChip(-TNA.cai.xu)];dbg('tna.cai',{den:r.caiT});};}
@@ -233,6 +233,7 @@ function tnaHoanTha(){const r=G.run;if(!r)return false;const Q=r.kyHoan,co=Array
 function tnaFa(n){if(!n)return null;const w=W();if(n.type==='tong')return 'tong:'+n.id;const reg=tnaReg(n);
   if(typeof THE_LUC==='undefined'||typeof anchorOf!=='function')return 'reg:'+reg;
   const L=n.anchor&&typeof LOC_NEO!=='undefined'&&LOC_NEO[n.anchor];if(L&&L.fa&&THE_LUC[L.fa]&&faAlive(L.fa))return L.fa;
+  if(n.fa){if(n.fa.startsWith('tong:')){const t=nodeById(+n.fa.slice(5));if(t&&t.type==='tong')return n.fa;}else if(THE_LUC[n.fa]&&faAlive(n.fa))return n.fa;} // thế giới mới: chủ ghi trên nút
   let best=null,bd=1e18;for(const id of Object.keys(THE_LUC).sort()){if(!faAlive(id))continue;const a=anchorOf(w,THE_LUC[id].noi);if(!a||tnaReg(a)!==reg)continue;
     const d=Math.hypot((a.x||0)-(n.x||0),(a.y||0)-(n.y||0));if(d<bd){bd=d;best=id;}}
   return best||'reg:'+reg;}

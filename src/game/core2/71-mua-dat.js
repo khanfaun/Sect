@@ -10,7 +10,7 @@
 // Dữ liệu: chỉ dùng W().dat (chu {k:'ta'}); bản lưu cũ không cần chuyển.
 // Đợt sau: mua cả ô ĐÃ có công trình của dân / vai / thế lực (giá cộng DAT.mua.ct, công trình giữ nguyên, c.muaCt=1);
 // thuế đất ở thôn trấn / thành (DAT.thue): nộp mỗi năm, thiếu thì nợ trên ô (thueNo) + danh tiếng khu tụt; nợ lâu thành nợ quan phủ (r.bac âm). Không mất đất.
-const DAT_DAN=['tran','thanh','cho','ancu'];
+const DAT_DAN=['tran','thanh','tutran','tuthanh','cho','ancu'];
 function datCtTa(n,ct){if(!n||!feat('dat')||!G.run||!W())return false;const d=datStore()&&datStore()[n.id];return !!d&&d.o.some(c=>c.ct===ct&&c.chu&&c.chu.k==='ta');}
 function datNhaTa(n){return datCtTa(n,'nha_rieng');}
 function datTranTa(n){return datCtTa(n,'tran_phap');}

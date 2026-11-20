@@ -6,7 +6,7 @@
 //   có thể bị truy đuổi theo hệ Sửa-K, ở thôn trấn / thành có thể bị quan phủ truy nã).
 // - Nơi lõi (LOC_LOI: LOC05, LOC12, LOC15): không phá được công trình cốt lõi. Nơi neo khác: công trình cốt lõi chỉ hư tạm DAT.hu tháng.
 VENUE_N.datdai=contentText('dat.n');VENUE_IN.datdai=[contentText('dat.in1'),contentText('dat.in2')];
-function datLoai(n){return n.type==='thanh'?'thanh':'tran';}
+function datLoai(n){return isThanhT(n.type)?'thanh':'tran';}
 function datLoi(n){return !!(n&&n.anchor&&typeof LOC_LOI!=='undefined'&&LOC_LOI.includes(n.anchor));}
 // hậu quả (bằng chữ) khi động vào ô có chủ; apply=true thì áp luôn và trả về các dòng đã xảy ra
 function datPhat(n,c,apply){const chu=c&&c.chu;const L=[];if(!chu||chu.k==='ta')return L;const r=G.run,P=DAT.phat;

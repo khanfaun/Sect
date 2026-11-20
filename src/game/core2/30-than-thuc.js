@@ -15,7 +15,7 @@ function tkUse(){const r=G.run;const w=tkWhy();if(w){note(w,'dn');return false;}
   note(contentText("core2_30-than-thuc_js.tkUse.005")+senseR()+' dặm'+(n?contentText("core2_30-than-thuc_js.tkUse.006")+n+contentText("core2_30-than-thuc_js.tkUse.007"):'.'),'up');dbg('tk.use',{R:senseR(),n});return true;}
 // sinh giao tranh gần người chơi (mỗi tháng có thể)
 function gtSpawn(){const r=G.run;if(!r||isPham()&&r.age<17)return;const w=W();if(entsHere(r.region).some(e=>e.type==='giaotranh'))return;if(!chance(.3))return;
-  const [x,y]=playerXY();const R0=senseR()*1.6;const L=regionOf(r.region).nodes.filter(n=>!['tran','thanh','ai','tong'].includes(n.type)&&n.id!==r.at&&Math.hypot(n.x-x,n.y-y)<=R0);if(!L.length)return;
+  const [x,y]=playerXY();const R0=senseR()*1.6;const L=regionOf(r.region).nodes.filter(n=>!(isTownT(n.type)||n.type==='ai'||n.type==='tong')&&n.id!==r.at&&Math.hypot(n.x-x,n.y-y)<=R0);if(!L.length)return;
   const a=pick(L);const T0=ENT_T.giaotranh;const e={id:(w.eid=(w.eid||0)+1),type:'giaotranh',r:r.region,name:contentText("core2_30-than-thuc_js.gtSpawn.008")+a.name,icon:T0.i,at:a.id,to:null,prog:0,route:[],speed:0,until:w.t+ri(T0.life[0],T0.life[1])*HD,data:{},wait:0};
   w.ents.push(e);dbg('gt.spawn',{at:a.name,seen:Math.hypot(a.x-x,a.y-y)<=senseR()});}
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(r&&h>0){r.gtAcc=(r.gtAcc||0)+h;if(r.gtAcc>=HM){r.gtAcc=0;gtSpawn();}}return o;};}

@@ -306,9 +306,9 @@ const TESTS = {
   },
   // Đ5.1: nút luyện võ trong nhóm Tu luyện; phàm nhân thấy "Nội lực"; bảng nhân vật có dòng Võ học
   async vodao(p) {
-    await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.pham=1;voOf(G.run).bac=1;UI.panel=null;UI.modal=null;openPlace(n.id);render();});
+    await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tuthanh'&&n.state!=='ruin');G.run.at=n.id;G.run.pham=1;voOf(G.run).bac=1;UI.panel=null;UI.modal=null;openPlace(n.id);render();});
     await p.waitForTimeout(200);
-    ok(await ev(p, () => !!document.querySelector('[data-act="pact"][data-arg="luyenvo"]') && !!document.querySelector('[data-act="pact"][data-arg="loidai"]')), 'thẻ thành có nút Luyện võ, Đấu lôi đài');
+    ok(await ev(p, () => !!document.querySelector('[data-act="pact"][data-arg="luyenvo"]') && !!document.querySelector('[data-act="pact"][data-arg="loidai"]')), 'thẻ thành tu sĩ có nút Luyện võ, Đấu lôi đài');
     await ev(p, () => {ACT.pact('luyenvo');render();});await p.waitForTimeout(100);
     if (await ev(p, () => UI.modal&&UI.modal.k==='pconf')) { await ev(p, () => {const a=UI.modal.a;UI.modal=null;placeAct(a);render();}); }
     ok(await ev(p, () => G.run.vo.xp>=1), 'luyện võ một buổi');
@@ -394,7 +394,7 @@ const TESTS = {
   },
   async am_hoi(p) {
     await ev(p, () => {const r=G.run;r.pham=0;r.realm=Math.max(1,r.realm||0);r.lt=[0,0,50];r.st=20000;r.scene=null;UI.modal=null;UI.panel=null;AM_LECH=0;
-      const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');r.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);
+      const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tuthanh'&&n.state!=='ruin');r.at=n.id;W().t=Math.floor(W().t/HD)*HD+HD+23;openPlace(n.id);
       if(W().amhoi)delete W().amhoi[n.id];r.scene.venue='amhoi';venueDo('amhoi','vao');render();});
     await p.waitForTimeout(150);
     let t = await ev(p, () => (document.querySelector('.amhoi')||{}).innerText||'');

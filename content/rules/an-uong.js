@@ -9,4 +9,4 @@ const AN={muc:{dam:{n:'Đạm bạc',bac:12,rg:-0.1},thuong:{n:'Thường',bac:2
   lkNgay:90,maxNgay:400,lkBac:70,lkQty:5,
   doi:{thieu:30,doi:60,la:150,kiet:300,canh:630,chet:660},rgDoi:-0.25,rgKiet:-0.5,hpLa:-0.15,hpKiet:-0.3,kietHp:0.005,
   nhip:{lk:0.5,tc:1/60,bq:1/3,sauBq:0.5},sauBqNgay:90,thang:30,
-  quan:['tran','thanh','cho'],baoTu:4,baoNghi:90};
+  quan:['tran','thanh','tutran','tuthanh','cho'],baoTu:4,baoNghi:90};

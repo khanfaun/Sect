@@ -38,7 +38,7 @@ function voMerge(r){if(!r)return;if(!r.kn)r.kn={atk:[],def:[],move:[],ult:[]};r.
 function voWhy(){const r=G.run;if(!r||(r.scene&&r.scene.type==='combat'))return contentText('vo.ban');return '';}
 {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(!feat('voh')||!G.run||!n||n.state==='ruin')return L;
   if(!L.some(x=>x.a==='luyenvo')){const w=voWhy();L.push({a:'luyenvo',i:'🥋',l:contentText('vo.act'),h:VO_LUYEN.h,tip:contentText('vo.tip'),dis:!!w,x:w});}
-  if(n.type==='thanh'&&!L.some(x=>x.a==='loidai'))L.push({a:'loidai',i:'🏟️',l:contentText('vo.loi'),h:1,tip:contentText('vo.loiTip'),dis:!!voWhy(),x:''});
+  if(isTuK(n.type)&&isThanhT(n.type)&&!L.some(x=>x.a==='loidai'))L.push({a:'loidai',i:'🏟️',l:contentText('vo.loi'),h:1,tip:contentText('vo.loiTip'),dis:!!voWhy(),x:''});
   return L;};}
 function voLuyen(){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place'||voWhy())return false;
   advanceTime(VO_LUYEN.h);if(!G.run)return true;const v=voOf(r);const g=r.pham?1:VO_LUYEN.tu;v.xp=(v.xp||0)+g;v.noi=(v.noi||0)+1;

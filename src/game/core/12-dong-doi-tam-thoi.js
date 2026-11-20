@@ -42,7 +42,7 @@ function afterlife(r,cause,info){
   const keep=[];
   for(const L of w.legacy){
     if(L.done){continue;}
-    if(L.t==='an'&&chance(.5)){const pool=[];for(const R0 of w.regions.slice(0,Math.max(1,(r.maxRegion||0)+1)))for(const x of R0.nodes)if(['tran','thanh','tong'].includes(x.type)&&!x.patron)pool.push(x);
+    if(L.t==='an'&&chance(.5)){const pool=[];for(const R0 of w.regions.slice(0,Math.max(1,(r.maxRegion||0)+1)))for(const x of R0.nodes)if((isTownT(x.type)||x.type==='tong')&&!x.patron)pool.push(x);
       if(pool.length){const x=pick(pool);x.patron={ten:L.ten,who:L.who,d:L.d,role:x.type==='tong'?contentText("core_12-dong-doi-tam-thoi_js.afterlife.020"):contentText("core_12-dong-doi-tam-thoi_js.afterlife.021")};continue;}}
     if(L.t==='oan'&&chance(.5)){L.feud=1;keep.push(L);continue;}
     if(L.t==='oan'&&!L.feud)continue;

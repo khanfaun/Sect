@@ -30,7 +30,7 @@ function LopBanDo() {
   );
 }
 
-const NHOM = [['Nơi có người', ['tran', 'thanh', 'cho', 'tong', 'ancu', 'ai']], ['Hoang dã', ['rung', 'nui', 'song', 'bien', 'hoang', 'dam', 'thien']], ['Tài nguyên', ['linhdia', 'duoc', 'khoang', 'dong']], ['Hiểm địa', ['phe', 'ma', 'sao']]];
+const NHOM = [['Nơi có người', ['tran', 'thanh', 'tutran', 'tuthanh', 'cho', 'tong', 'ancu', 'ai']], ['Hoang dã', ['rung', 'nui', 'song', 'bien', 'hoang', 'dam', 'thien']], ['Tài nguyên', ['linhdia', 'duoc', 'khoang', 'dong', 'dongthien']], ['Hiểm địa', ['phe', 'ma', 'sao', 'bicanh', 'como', 'yeusao', 'ditich']]];
 
 // Một ô chọn ẩn/hiện trong chú giải
 function O({ act, k, on, children }) {

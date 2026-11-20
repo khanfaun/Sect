@@ -50,7 +50,7 @@ function dgBan(){const r=G.run;const L=sellList();if(!L.length){note(contentText
   return res;};}
 // U Minh Ám Hội: trong quỷ thị (thành, ma tu) lúc quỷ thị mở
 VENUE_N.amhoi=contentText('am.n');VENUE_IN.amhoi=[contentText('am.in1'),contentText('am.in2')];
-function amOpen(n){return !!n&&(n.type==='thanh'||n.type==='ma')&&n.state!=='ruin'&&G.run&&!G.run.pham&&(typeof svcOpen!=='function'||svcOpen('ghost'));}
+function amOpen(n){return !!n&&((isTuK(n.type)&&isThanhT(n.type))||n.type==='ma')&&n.state!=='ruin'&&G.run&&!G.run.pham&&(typeof svcOpen!=='function'||svcOpen('ghost'));}
 function amLeft(n){const w=W(),m=ncMonth();const T=(w.amhoi=w.amhoi||{})[n.id];return Math.max(0,SUAE.am.thang-(T&&T.m===m?T.n:0));}
 {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(amOpen(n)&&!L.some(x=>x.a==='amhoi'))L.push({a:'amhoi',i:'🎭',l:contentText('am.n'),h:1,tip:contentText('am.tip'),dis:false,x:''});return L;};}
 function amOpts(n){const r=G.run,A=SUAE.am;const left=amLeft(n);const L=[];

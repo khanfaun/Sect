@@ -54,7 +54,7 @@ const RVV=r=>{const w=W();let i=r.metRival;let rv=r.rivals.find(x=>x.i===i&&x.al
 
 
 // lời kể bế quan theo chỗ ngồi: giữa thành trấn (chưa có động phủ) thì là phòng trọ, không phải vách đá
-function bqText(){const r=G.run;const n=r&&nodeById(r.at);return n&&!n.dp&&['tran','thanh','cho'].includes(n.type)?REST_T.bqTown:REST_T.bq;}
+function bqText(){const r=G.run;const n=r&&nodeById(r.at);return n&&!n.dp&&(isTownT(n.type)||n.type==='cho')?REST_T.bqTown:REST_T.bq;}
 
 // câu mở đầu {mo} (thời tiết, thời khắc) phải hợp giờ và mùa đang có: không "giữa trưa" lúc nửa đêm, không "tuyết đầu mùa" giữa hè
 {const MO0=P.mo.slice();const PART={sang:[5,11],chieu:[4,9,18,22],toi:[0,10],dem:[3,7,13,19,23]};const ANY=[1,2,8,12,14,16,17];const SEA={dong:[6,15],thu:[20],xuan:[21],ha:[9]};

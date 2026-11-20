@@ -49,7 +49,7 @@ function TheQuan({ c }) {
   const ter = Object.keys(tc).sort((a, b) => tc[b] - tc[a]).slice(0, 3);
   const all = PS.regionOf(I.reg).nodes.filter(n => g.dist[PS.nodeHex(n)] === d), kn = all.filter(n => n.fog >= 2 || n.memory);
   const dg = kn.length ? Math.max(...kn.map(PS.dangerTag)) : 0;
-  const luc = kn.find(n => n.type === 'tong') || kn.find(n => n.type === 'thanh') || kn.find(n => n.type === 'tran');
+  const luc = kn.find(n => n.type === 'tong') || kn.find(n => n.type === 'thanh' || n.type === 'tuthanh') || kn.find(n => n.type === 'tran' || n.type === 'tutran');
   return (
     <div className={'dock card np' + (PS.UI.npMin ? ' min' : '')} data-ax={cx} data-ay={cy}>
       <div className="np-h"><div className="np-t"><b className="np-nm">{I.dist || 'Vùng vô danh'}</b><small>quận thuộc {I.regName}</small></div><NutThe /></div>
