@@ -1081,3 +1081,4 @@ Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời
 - **Còn dở:** chưa có thuế đất / tịch biên (HN HS05); chưa mua ô đã có công trình (quán, tiệm); NPC chưa tự mua lại đất; hồi ức đời sau chưa hiện ở bến (chỉ ở màn hết kiếp).
 - 84. A: không đổi số năm giữa hai kiếp (người dùng xác nhận). 85. không (nghi thức rút gọn). 86. tạm thời như đã làm.
 - 87. Quy tắc làm việc: phần NỘI DUNG (lời văn, sự kiện, kết cục) giao GPT, Claude không tự viết để đỡ tốn token; Claude chỉ làm bộ máy/luật/giao diện.
+- Người dùng chốt: mức truy nã "Bị nghi" KHÔNG hoãn sự kiện (giữ như đã làm). Giá đất giữ như hiện tại (trấn 30, thành 80, chợ 20, ẩn cư 10 lượng).
