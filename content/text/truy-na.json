@@ -15,7 +15,7 @@
   "tna.chN": "Có kẻ đã thấy",
   "tna.chT": "Ngươi vừa ra tay thì có kẻ nhìn thấy. Hắn hoảng hốt quay đầu chạy về phía nha môn {{0}}, chỉ chậm chân là quan phủ sẽ biết mặt ngươi.",
   "tna.chNgan": "Đuổi theo chặn lại",
-  "tna.chMua": "Mua chuộc cho hắn im miệng ({{0}} hoặc {{1}} linh thạch)",
+  "tna.chMua": "Mua chuộc cho hắn im miệng ({{0}})",
   "tna.chGiet": "Diệt khẩu",
   "tna.chMac": "Mặc kệ",
   "tna.nganOk": "Ngươi đuổi kịp, giữ hắn lại nói cho ra lẽ. Hắn hứa không hé răng.",
@@ -51,5 +51,17 @@
   "tna.hudT": "{{0}}: {{1}}, {{2}}.",
   "tna.hudKhac": "Nơi khác: {{0}}.",
   "tna.hudChe": "Đang cải trang hoặc che giấu tu vi: khó bị nhận ra hơn.",
-  "tna.hudCach": "Tránh mặt quan sai lâu ngày, hoặc rời khỏi vùng, thì sẽ bị mất dấu dần. Nộp phạt, làm công, ngồi tù ở quan phủ để xoá hẳn."
+  "tna.hudCach": "Tránh mặt quan sai lâu ngày, hoặc rời khỏi vùng, thì sẽ bị mất dấu dần. Muốn xoá hẳn: ra quan phủ (thôn trấn, thành) nộp tiền, hoặc chấp pháp đường (chợ phiên tu sĩ, sơn môn) nộp linh thạch; hay làm công, ngồi tù.",
+  "tna.chMuaLt": "Mua chuộc cho hắn im miệng ({{0}} linh thạch)",
+  "tna.cpN": "Chấp pháp đường",
+  "tna.cpTip": "Ra trình diện trước người chấp pháp của tu sĩ: nộp linh thạch, làm tạp dịch hoặc chịu giam để xoá truy nã ở vùng này.",
+  "tna.cpIn1": "Trong điện đá lạnh lẽo, một tu sĩ chấp pháp mở mắt nhìn ngươi, thần thức quét qua như gió lạnh.",
+  "tna.cpIn2": "Trên vách treo tấm ngọc giản ghi tên những kẻ bị truy, trong đó có tên ngươi.",
+  "tna.cpNopD": "Đang bị: {{0}}. Tu sĩ không nhận tiền phàm, chỉ nhận linh thạch. Nộp đủ thì gỡ lệnh truy ở vùng này.",
+  "tna.cpCongD": "Làm tạp dịch cho thế lực tu sĩ, không mất linh thạch nhưng mất nhiều thời gian.",
+  "tna.nopXongLt": "Nộp linh thạch xong, chấp pháp đường gạch tên ngươi khỏi lệnh truy.",
+  "tna.lo.danh": "Đánh nhau một trận, râu giả rơi, y phục rách: lớp cải trang của ngươi không còn.",
+  "tna.lo.dong": "Người chen chúc vây quanh, có kẻ nhìn kỹ mặt ngươi: lớp cải trang bị lộ.",
+  "tna.lo.khi": "Lính canh có tu vi cảm được khí tức của ngươi, chẳng giống kẻ phàm ngươi đóng vai: cải trang bị lộ.",
+  "tna.hudHoan": "Đang bị truy lùng: kỳ ngộ và chuyện lạ tạm lánh xa, đợi ngươi hết bị truy mới tới."
 }

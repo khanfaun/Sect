@@ -36,10 +36,10 @@ function datOpts(n){const d=datOf(n);if(!d)return [];const r=G.run,t=W().t,L=[];
         no:loi?contentText('dat.loiKhoa'):hu?contentText('dat.dangHu'):''});return;}
     for(const id in CONG_TRINH){const X=CONG_TRINH[id].xay;if(!X||!X.noi.includes(n.type))continue;
       if(id==='dong_phu'&&(n.dp||d.o.some(z=>z.ct==='dong_phu')))continue;
-      if(L.some(o=>o.xct===id))continue; // mỗi loại chỉ gợi ý trên ô trống đầu tiên
-      const no=datCanMua(n,c)?contentText('dat.canMua'):X.tu&&isPham()?contentText('dat.canTu'):(r.st||0)<X.st?contentText('dat.thieuLt'):'';
-      L.push({id:'xay:'+i+':'+id,xct:id,l:contentText('dat.oXay',[i+1,CONG_TRINH[id].n,chuT]),
-        d:contentText('dat.dXay',[CONG_TRINH[id].n,chuT])+(c.chu?'\n'+datPhat(n,c,false).join('\n'):''),h:X.h,st:X.st,g:{txt:contentText('dat.gXay')},no});}});
+      // mỗi loại chỉ gợi ý trên một ô trống: ô đầu tiên dựng được (đất của ngươi trước), không có thì ô trống đầu tiên
+      const no=datXayNo(n,c,X),ex=L.findIndex(o=>o.xct===id);if(ex>=0&&!(L[ex].no&&!no))continue;
+      L[ex>=0?ex:L.length]=({id:'xay:'+i+':'+id,xct:id,l:contentText('dat.oXay',[i+1,CONG_TRINH[id].n,chuT]),
+        d:contentText('dat.dXay',[CONG_TRINH[id].n,chuT])+(c.chu&&c.chu.k!=='ta'?'\n'+datPhat(n,c,false).join('\n'):''),h:X.h,st:X.st||0,g:{txt:X.bac?fmtBac(X.bac):contentText('dat.gXay')},no});}});
   if(!L.length)L.push({id:'xem',l:contentText('dat.xem'),d:datView(n).map(v=>contentText('dat.dong',[v.i+1,v.ten,v.chuTen])).join('\n'),h:0,st:0,g:{},no:''});
   return L;}
 {const _vo=venueOpts;venueOpts=function(n,v){if(v==='datdai')return datOpts(n);return _vo.apply(this,arguments);};}
@@ -62,20 +62,20 @@ function datPha(n,i){const d=datOf(n);const c=d&&d.o[i];const C=datCt(c);if(!C||
   return {msg,ch:[chip('⏳',durH(C.pha.h),contentText('dat.gPha'),'')]};}
 // Sửa-O (câu 79): ở thôn trấn / thành (nơi có dân) chỉ xây trên ô đã mua (chu k:'ta'); ô trống của dân thì không
 function datCanMua(n,c){return DAT_SETTLE.includes(n.type)&&n.type!=='tong'&&!(c.chu&&c.chu.k==='ta');}
+// lý do không xây được (chuỗi rỗng = được). X.cuaTa: chỉ trên ô của ngươi · X.bac: giá bằng bạc (xu) · X.st: linh thạch · X.tu: phải là tu sĩ
+function datXayNo(n,c,X){const r=G.run;if(datCanMua(n,c))return contentText('dat.canMua');if(X.cuaTa&&!(c.chu&&c.chu.k==='ta'))return contentText('dat.canCuaTa');
+  if(X.tu&&isPham())return contentText('dat.canTu');if((r.st||0)<(X.st||0))return contentText('dat.thieuLt');if(X.bac&&(r.bac||0)<X.bac)return contentText('no.khongDu');return '';}
 // xây công trình ct trên ô trống i
 function datXay(n,i,ct){const d=datOf(n);const c=d&&d.o[i];const C=CONG_TRINH[ct],X=C&&C.xay;const r=G.run;
-  if(!c||c.ct||!X||!X.noi.includes(n.type))return null;if(datCanMua(n,c)){dbg('dat.canMua',{id:n.id,i});return null;}if(X.tu&&isPham())return null;if((r.st||0)<X.st)return null;
-  r.st-=X.st;advanceTime(X.h);if(!G.run)return {msg:[]};
+  if(!c||c.ct||!X||!X.noi.includes(n.type))return null;if(datCanMua(n,c)){dbg('dat.canMua',{id:n.id,i});return null;}if(datXayNo(n,c,X))return null;
+  r.st-=X.st||0;if(X.bac)bacAdd(-X.bac,'dat.xay');advanceTime(X.h);if(!G.run)return {msg:[]};
   c.ct=ct;c.goc=0;delete c.cu;delete c.moc;if(C.dp)n.dp=1;const P=datPhat(n,c,true);if(!c.chu)c.chu={k:'ta'};
   dbg('dat.xay',{id:n.id,i,ct,st:X.st});
   const msg=[contentText('dat.xongXay',[C.n])].concat(P);log(msg[0]);
-  return {msg,ch:[chip('💎','−'+X.st,contentText('dat.gXay'),'dn'),chip('⏳',durH(X.h),contentText('dat.gXay'),'')]};}
+  return {msg,ch:[X.bac?bacChip(-X.bac):chip('💎','−'+X.st,contentText('dat.gXay'),'dn'),chip('⏳',durH(X.h),contentText('dat.gXay'),'')]};}
 // nơi lõi: hư tạm cũng không có; nơi neo: công trình cốt lõi hư xong thì dựng lại (đọc c.hu, không cần dọn)
 
-// ---------- để sẵn cho mua nhà / đất (chưa mở) ----------
+// ---------- sở hữu ô (mua / bán đất: core2/71-mua-dat.js) ----------
 // Người chơi sở hữu ô: chu={k:'ta'}. Ô của mình thì xây / phá không bị phạt (datPhat bỏ qua k:'ta').
-// Sau này: datMua(n,i) trả giá cho chủ (vai / thế lực / dân) rồi datSoHuu; xây trên ô mình được mọi công trình có xay
-// (thêm loại nơi vào CONG_TRINH[x].xay.noi, hoặc cờ xay.cuaTa cho quán, tiệm…). Bán lại: datSoHuu(n,i,null).
 function datSoHuu(n,i,chu){const d=datOf(n);const c=d&&d.o[i];if(!c)return false;c.chu=chu===undefined?{k:'ta'}:chu;dbg('dat.soHuu',{id:n.id,i,k:c.chu?c.chu.k:''});return true;}
 function datCuaTa(){const D=datStore()||{},L=[];for(const id in D)(D[id].o||[]).forEach((c,i)=>{if(c.chu&&c.chu.k==='ta')L.push({node:+id,i,ct:c.ct});});return L;}
-function datMua(){return false;} // chưa mở: mua bán đất làm ở đợt sau

@@ -12,7 +12,14 @@
 //   lan: từ mức này trở lên (rất nặng) tội lan sang mọi vùng khác ở mức lanM · danh: từ mức 2, danh tiếng khu bị kéo xuống mức này (Đ1.4 "Bị truy nã");
 //   danhSau: khi hết truy nã (xoá hoặc mất dấu xuống dưới mức 2) danh tiếng khu được nâng lên mức này (vẫn bị ghét, không còn truy nã).
 //   san: thợ săn tiền thưởng — mỗi tháng, vùng có tiền treo thưởng từ min xu thì xác suất p có kẻ lần theo (truy loại san, đi theo cả khi sang vùng khác).
-//   quan: nơi có quan phủ (mục "Quan phủ") · phat: nộp phạt = tiền treo thưởng (xu), hoặc linh thạch = ceil(xu / xuLt); từ mức phatMax không nộp phạt được.
+//   phat: nộp phạt = tiền treo thưởng (xu), hoặc linh thạch = ceil(xu / xuLt); từ mức phatMax không nộp phạt được.
+//   quan: nơi giam giữ (có quan phủ / chấp pháp đường). Câu 81: nộp phạt TUỲ NƠI GIAM GIỮ — nơi của phàm nhân (thôn trấn, thành) nộp tiền phàm (xu / bạc / vàng);
+//          nơi của thế lực tu sĩ (tuNoi: chợ phiên tu sĩ, sơn môn, thảo lư) nộp linh thạch (= ceil(xu / xuLt)); mua chuộc nhân chứng cũng theo loại nơi như vậy.
+//   hoan (câu 82, kiểu GTA5): đang bị truy nã ở vùng đang đứng từ mức m, hoặc đang bị quan sai / thợ săn lùng (truy quan, san), hoặc nhân chứng đang chạy đi báo
+//          → kỳ ngộ / sự kiện ngẫu nhiên TẠM HOÃN (giữ lại tối đa max cái, không mất); hết trạng thái đó thì lần lượt hiện lại, cách nhau ít nhất gian ngày;
+//          cái nào điều kiện chưa hợp thì chờ tiếp, quá giu ngày sau khi hết bị truy mới bỏ.
+//   cai (câu 83): cải trang không chắc chắn — dong[loại nơi] = xác suất bị nhiều người vây quanh nhìn kỹ mỗi lần tới nơi đó (lộ);
+//          khi: lộ khí tức (chưa che giấu tu vi) ở nơi có lính canh (canh) = goc + realm × cảnh giới, tối đa max; đánh nhau ở nơi có dân cũng làm lộ.
 //   tu[m] = số tháng ngồi tù · cong[m] = số tháng làm công (0 = không cho) · cai: cải trang (xu, ngày hiệu lực) mua ở tạp hóa / thôn trấn / thành.
 const TNA={
   toi:{pha_dat:2,no:2,chong:1,giet_chung:2,danh:2},
@@ -26,8 +33,9 @@ const TNA={
   nhan:[0,0.15,0.3,0.5,0.7,0.9],
   lan:5,lanM:2,danh:-60,danhSau:-45,
   san:{min:2000,p:0.25},
-  quan:['tran','thanh'],
+  quan:['tran','thanh','cho','tong'],tuNoi:['cho','tong','ancu'],
+  hoan:{m:2,max:3,gian:3,giu:180},
   phat:{xuLt:200,phatMax:5},
   tu:[0,1,3,6,12,36],
   cong:[0,2,6,12,24,0],
-  cai:{xu:300,ngay:30}};
+  cai:{xu:300,ngay:30,dong:{thanh:0.25,cho:0.2,tran:0.08},canh:['thanh','tong'],khi:{goc:0.15,realm:0.05,max:0.6}}};

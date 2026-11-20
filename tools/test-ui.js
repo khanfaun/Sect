@@ -630,6 +630,15 @@ const TESTS = {
     await p.waitForTimeout(200);
     ok(await ev(p, () => DH.dp===1 && W().dat[DH.id].o.some(c=>c.ct==='dong_phu'&&c.chu&&c.chu.k==='ta')), 'dựng được động phủ, ô thành của ngươi');
     ok(await ev(p, () => NK.count('dat') > 0), 'có nhật ký dat.*');
+    // câu 80: mua đất trống của dân ở trấn rồi mới dựng nhà riêng
+    await ev(p, () => {const r=G.run;r.scene=null;r.bac=1e6;r.tna={};r.at=DT.id;r.region=DT.r;openPlace(DT.id);render();});
+    await p.waitForTimeout(150);
+    await p.locator('[data-act="pact"][data-arg="datdai"]').click();await p.waitForTimeout(150);
+    ok(await p.locator('[data-act="vopt"][data-arg="mua:0"]').count() === 1, 'ô trống của dân: có lựa chọn mua đất');
+    await p.locator('[data-act="vopt"][data-arg="mua:0"]').click();await p.waitForTimeout(150);
+    ok(/Giá/.test(await ev(p, () => (document.querySelector('.mbox')||{}).innerText||'')), 'hộp xác nhận ghi giá đất');
+    await p.locator('[data-act="vgo"]').click();await p.waitForTimeout(200);
+    ok(await ev(p, () => W().dat[DT.id].o[0].chu.k === 'ta' && datOpts(DT).some(o => o.id === 'xay:0:nha_rieng' && !o.no)), 'mua xong: ô của ngươi, dựng được nhà riêng');
     await ev(p, () => {TNA.chung.tran=0.5;G.run.scene=null;render();});
     ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
   },
@@ -662,8 +671,13 @@ const TESTS = {
     await ev(p, () => {genBirth();newRun(G.birth.cards[0]);G.run.scene=null;dmKetHet('END07');render();});await settle();
     const kt = await ev(p, () => document.body.innerText);
     ok(/Người chặt vòng/.test(kt) && /Nước thôi chảy ngược/.test(kt), 'màn kết: tên kết + câu kết');
-    await p.locator('[data-act="tanMong"]').click();await settle();ok(/Bấm lần nữa/i.test(await ev(p, () => document.body.innerText)), 'Tân Mộng hỏi lại trước khi xoá hồ sơ');await p.locator('[data-act="tanMong"]').click();await settle();
-    ok(await ev(p, () => G.screen==='title' && G.meta.daTinh===1 && !G.meta.ketHet), 'Tân Mộng: hồ sơ mới, giữ dấu đã tỉnh');
+    ok(/Phàm giới/.test(kt) && !(await p.$('[data-act="tanMong"]')), 'màn kết: nhắc Phàm giới, không còn nút Tân Mộng (câu 86)');
+    await p.locator('[data-act="ketVe"]').click();await settle();const tt = await ev(p, () => document.body.innerText);
+    ok(await ev(p, () => G.screen==='title' && !!G.meta.ketHet) && /Linh giới đang trong quá trình phát triển/.test(tt) && /Phàm giới đã khép/.test(tt), 'về màn mở đầu: báo Linh giới đang phát triển, giữ hồ sơ');
+    ok(!(await p.$('[data-act="birth"]')) && !!(await p.$('[data-act="screen"][data-arg="ket"]')), 'màn mở đầu: không luân hồi tiếp, xem lại được màn kết');
+    // câu 88: hồi ức đời sau ở màn hết kiếp
+    await ev(p, () => {G.meta.ketHet=null;genBirth();newRun(G.birth.cards[0]);G.run.scene=null;G.run.gbXong=1;dmM().ends.push({id:'END06',kiep:1,ten:'x',y:1});G.run.kiep=5;delete (G.meta.hqMuon||{}).END06;die('combat',{n:'x'});render();});await settle();
+    ok(/Chuyện kể của đời sau/.test(await ev(p, () => document.body.innerText)), 'màn hết kiếp đời sau: hồi ức của kết truyền nghề');
     ok(p.errs.length === 0, 'không lỗi JavaScript ' + p.errs.slice(0, 2).join(' | '));
   },
   async truy_na(p) {

@@ -40,5 +40,20 @@
   "dat.biNa": "Quan phủ dán bảng truy nã ngươi.",
   "dat.xongPha": "Đã phá {{0}}.",
   "dat.xongPhaTam": "{{0}} đổ nát, nhưng người ở đây đã bắt tay dựng lại.",
-  "dat.xongXay": "Đã dựng xong {{0}}."
+  "dat.xongXay": "Đã dựng xong {{0}}.",
+  "dat.oMua": "Ô {{0}} · mua mảnh đất trống ({{1}})",
+  "dat.dMua": "Mua mảnh đất trống này của {{0}}. Giá {{1}}. Mua rồi là đất của ngươi: xây gì, phá gì cũng không ai trách; bán lại được một nửa giá.",
+  "dat.dMuaLt": "Không đủ bạc thì trả bằng {{0}} linh thạch.",
+  "dat.gMua": "mua đất",
+  "dat.oBan": "Ô {{0}} · bán lại mảnh đất ({{1}})",
+  "dat.dBan": "Bán mảnh đất của ngươi lại cho dân nơi này, được {{0}}. Công trình trên đó cũng thuộc về người mua.",
+  "dat.gBan": "bán đất",
+  "dat.muaNa": "Đang bị truy nã ở vùng này: quan phủ không làm giấy đất cho ngươi.",
+  "dat.muaGhet": "{{0}} không ưa ngươi, không chịu bán.",
+  "dat.muaFa": "{{0}} không chịu bán đất cho kẻ họ không tin.",
+  "dat.muaPham": "Không đủ tiền.",
+  "dat.muaDu": "Ở nơi này ngươi đã có đủ đất rồi.",
+  "dat.xongMua": "Đã mua mảnh đất ô {{0}}. Giấy đất mang tên ngươi.",
+  "dat.xongBan": "Đã bán lại mảnh đất ô {{0}}.",
+  "dat.canCuaTa": "Chỉ dựng được trên đất của ngươi."
 }

@@ -18,6 +18,9 @@ function tnaChe(){const r=G.run;return !!r&&((typeof hideOn==='function'&&hideOn
 function tnaTen(m){return contentText('tna.m.'+m);}
 function tnaRegTen(reg){return (REG[reg]&&REG[reg].n)||'';}
 function tnaTienChu(x){return contentText('tna.tien.'+(x<1000?0:x<3000?1:x<8000?2:3));}
+// câu 81: nơi của thế lực tu sĩ (chợ phiên tu sĩ, sơn môn, thảo lư) → linh thạch; nơi phàm nhân → tiền phàm (xu / bạc / vàng)
+function tnaTuNoi(n){return !!n&&TNA.tuNoi.includes(n.type);}
+function tnaQpV(n){return tnaTuNoi(n)?'chapphap':'quanphu';}
 function tnaNoi(n){return n&&TNA.chung[n.type]!=null&&!['chac','che','hoang'].includes(n.type)?n.type:'hoang';}
 // danh tiếng khu: bị truy nã (mức ≥ 2) thì kéo xuống mức "Bị truy nã" của Đ1.4; hết truy nã thì nâng lên "bị ghét"
 function tnaDanhXuong(reg){const k='reg:'+reg,v=danhGet(k);if(v>TNA.danh)danhPut(k,TNA.danh-v);}
@@ -43,17 +46,17 @@ function tnaToi(loai,o){const r=G.run;if(!tnaOn())return 0;o=o||{};const n=o.nod
   r.tnaCh={reg,loai,nang,node:n?n.id:null,t:W().t};dbg('tna.chung',{loai,k,reg});tnaChMo();return 1;}
 // hộp lựa chọn khi có nhân chứng chạy đi báo quan (mở ngay nếu rảnh, không thì lúc rảnh đầu tiên)
 function tnaChMo(){const r=G.run;const C=r&&r.tnaCh;if(!C||r.scene||r._inBq||TNA_BUSY)return false;kyStart(tnaChEv(C));return true;}
-function tnaMuaGia(C){const M=TNA.mua;return {xu:M.xu*C.nang,st:M.st*C.nang};}
+function tnaMuaGia(C){const M=TNA.mua;return tnaTuNoi(nodeById(C.node))?{st:M.st*C.nang}:{xu:M.xu*C.nang};}
 function tnaChEv(C){let ev=KYNGO.find(x=>x.id==='tna_chung');if(!ev){ev={id:'tna_chung',sp:1,n:'',t:'',c:[]};KYNGO.push(ev);}
   const n=nodeById(C.node);ev.n=contentText('tna.chN');ev.t=contentText('tna.chT',[n?n.name:'']);const g=tnaMuaGia(C);
   ev.c=[{l:contentText('tna.chNgan'),go:()=>tnaChPick('ngan')},
-    {l:contentText('tna.chMua',[fmtBac(g.xu),g.st]),need:()=>((G.run.bac||0)>=g.xu||(G.run.st||0)>=g.st)?'':contentText('truy.nopThieu'),go:()=>tnaChPick('mua')},
+    {l:g.st?contentText('tna.chMuaLt',[g.st]):contentText('tna.chMua',[fmtBac(g.xu)]),need:()=>(g.st?(G.run.st||0)>=g.st:(G.run.bac||0)>=g.xu)?'':contentText('truy.nopThieu'),go:()=>tnaChPick('mua')},
     {l:contentText('tna.chGiet'),go:()=>tnaChPick('giet')},
     {l:contentText('tna.chMac'),go:()=>tnaChPick('mac')}];return ev;}
 function tnaChBao(C,them,ly){G.run.tnaCh=null;tnaBao(C.reg,C.nang+(them||0),{ly:ly||C.loai,node:nodeById(C.node),luon:1});}
 function tnaChPick(o){const r=G.run,C=r.tnaCh;if(!C)return {t:''};dbg('tna.chon',{o});
   if(o==='ngan'){const N=TNA.ngan;if(chance(Math.min(N.max,N.goc+N.tp*(S().tp||0)))){r.tnaCh=null;return {t:contentText('tna.nganOk')};}tnaChBao(C);return {t:contentText('tna.nganHong')};}
-  if(o==='mua'){const g=tnaMuaGia(C);if((r.bac||0)>=g.xu)bacAdd(-g.xu,'tna.mua');else if((r.st||0)>=g.st)r.st-=g.st;else return {t:''};
+  if(o==='mua'){const g=tnaMuaGia(C);if(g.xu&&(r.bac||0)>=g.xu)bacAdd(-g.xu,'tna.mua');else if(g.st&&(r.st||0)>=g.st)r.st-=g.st;else return {t:''};dbg('tna.mua',g);
     if(chance(TNA.mua.p)){r.tnaCh=null;return {t:contentText('tna.muaOk')};}tnaChBao(C);return {t:contentText('tna.muaHong')};}
   if(o==='giet'){if(typeof deed==='function'&&DEED.diet_khau)deed('diet_khau',{lo:0});
     if(chance(TNA.giet.lo*(tnaChe()?TNA.giet.che:1))){tnaChBao(C,TNA.toi.giet_chung,'giet_chung');return {t:contentText('tna.gietLo')};}r.tnaCh=null;return {t:contentText('tna.gietOk')};}
@@ -75,7 +78,7 @@ function tnaTick(){const r=G.run;if(!tnaOn()||TNA_BUSY)return;const t=W().t,T=tn
 // tới thôn trấn / thành trong vùng đang bị truy nã: có thể bị nhận ra (cải trang, che giấu tu vi giúp né)
 {const _ar=arrive;arrive=function(id){const o=_ar.apply(this,arguments);const r=G.run;if(!tnaOn())return o;const n=nodeById(id);
   if(!n||n.state==='ruin'||!['tran','thanh','cho'].includes(n.type))return o;const reg=tnaReg(n),E=tnaE(reg);if(!E)return o;
-  const p=TNA.nhan[E.m]*(tnaChe()?TNA.chung.che:1);const hit=chance(p);dbg('tna.nhan',{reg,p:Math.round(p*100),hit});
+  const lo=tnaCaiThu(n);const p=lo?1:TNA.nhan[E.m]*(tnaChe()?TNA.chung.che:1);const hit=lo||chance(p);dbg('tna.nhan',{reg,p:Math.round(p*100),hit,lo:lo||''});
   if(hit){E.t=W().t;const m=contentText('tna.nhanRa',[n.name]);note(m,'dn');log(m);
     if(feat('truy'))truyStart('quan',{n:contentText('tna.quanTen'),i:'👮',ek:'sontac',d:clamp(E.m-2,0,3)});}
   return o;};}
@@ -99,30 +102,76 @@ function tnaGiam(reg,kieu,bat){const r=G.run;const E=tnaE(reg);if(!E)return fals
   tnaXoa(reg,kieu);const m=contentText(bat?'tna.biBat':kieu==='cong'?'tna.congXong':'tna.tuXong',[th]);note(m,'dn');log(m);dbg('tna.giam',{reg,kieu,th});return true;}
 // ---------- Quan phủ (thôn trấn / thành của vùng đang bị truy nã) và cải trang ----------
 VENUE_N.quanphu=contentText('tna.qpN');VENUE_IN.quanphu=[contentText('tna.qpIn1'),contentText('tna.qpIn2')];
+VENUE_N.chapphap=contentText('tna.cpN');VENUE_IN.chapphap=[contentText('tna.cpIn1'),contentText('tna.cpIn2')];
 {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);const r=G.run;if(!tnaOn()||!n||n.state==='ruin')return L;
-  if(TNA.quan.includes(n.type)&&tnaE(tnaReg(n))&&!L.some(x=>x.a==='quanphu'))L.push({a:'quanphu',i:'⚖️',l:contentText('tna.qpN'),h:0,tip:contentText('tna.qpTip'),dis:false,x:''});
+  const qv=tnaQpV(n),tu=qv==='chapphap';
+  if(TNA.quan.includes(n.type)&&tnaE(tnaReg(n))&&!L.some(x=>x.a===qv))L.push({a:qv,i:'⚖️',l:contentText(tu?'tna.cpN':'tna.qpN'),h:0,tip:contentText(tu?'tna.cpTip':'tna.qpTip'),dis:false,x:''});
   if(['tran','thanh','cho'].includes(n.type)&&tnaMax()>0&&!L.some(x=>x.a==='caitrang'))L.push({a:'caitrang',i:'🎭',l:contentText('tna.caiN'),h:1,tip:contentText('tna.caiTip',[TNA.cai.ngay]),dis:(r.bac||0)<TNA.cai.xu,x:(r.bac||0)<TNA.cai.xu?contentText('no.khongDu'):''});
   return L;};}
 {const _p=placeAct;placeAct=function(a){if(a!=='caitrang')return _p.apply(this,arguments);const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place'||(r.bac||0)<TNA.cai.xu)return;
   bacAdd(-TNA.cai.xu,'tna.cai');advanceTime(1);if(!G.run)return;r.caiT=W().t+TNA.cai.ngay*HD;sc.msg=[contentText('tna.caiXong',[TNA.cai.ngay])];sc.chips=[bacChip(-TNA.cai.xu)];dbg('tna.cai',{den:r.caiT});};}
 function tnaQpOpts(n){const r=G.run,reg=tnaReg(n),E=tnaE(reg);if(!E)return [];const L=[];const P=TNA.phat;const st=Math.ceil(E.tien/P.xuLt);const cam=E.m>=P.phatMax?contentText('tna.qpNang'):'';
-  L.push({id:'nop',l:contentText('tna.qpNop',[fmtBac(E.tien)]),d:contentText('tna.qpNopD',[tnaTen(E.m)]),h:1,st:0,g:{txt:fmtBac(E.tien)},no:cam||((r.bac||0)>=E.tien?'':contentText('no.khongDu'))});
-  L.push({id:'nopLt',l:contentText('tna.qpNopLt',[st]),d:contentText('tna.qpNopD',[tnaTen(E.m)]),h:1,st:0,g:{txt:st+' 💎'},no:cam||((r.st||0)>=st?'':contentText('dat.thieuLt'))});
-  if(TNA.cong[E.m])L.push({id:'cong',l:contentText('tna.qpCong',[TNA.cong[E.m]]),d:contentText('tna.qpCongD'),h:0,st:0,g:{},no:''});
+  // câu 81: nộp phạt tuỳ nơi giam giữ — quan phủ phàm nhân nhận tiền phàm, chấp pháp đường của tu sĩ nhận linh thạch
+  if(!tnaTuNoi(n))L.push({id:'nop',l:contentText('tna.qpNop',[fmtBac(E.tien)]),d:contentText('tna.qpNopD',[tnaTen(E.m)]),h:1,st:0,g:{txt:fmtBac(E.tien)},no:cam||((r.bac||0)>=E.tien?'':contentText('no.khongDu'))});
+  else L.push({id:'nopLt',l:contentText('tna.qpNopLt',[st]),d:contentText('tna.cpNopD',[tnaTen(E.m)]),h:1,st:0,g:{txt:st+' 💎'},no:cam||((r.st||0)>=st?'':contentText('dat.thieuLt'))});
+  if(TNA.cong[E.m])L.push({id:'cong',l:contentText('tna.qpCong',[TNA.cong[E.m]]),d:contentText(tnaTuNoi(n)?'tna.cpCongD':'tna.qpCongD'),h:0,st:0,g:{},no:''});
   L.push({id:'tu',l:contentText('tna.qpTu',[TNA.tu[E.m]]),d:contentText('tna.qpTuD'),h:0,st:0,g:{},no:''});
   return L;}
-{const _vo=venueOpts;venueOpts=function(n,v){if(v==='quanphu')return tnaQpOpts(n);return _vo.apply(this,arguments);};}
-{const _vd=venueDo;venueDo=function(v,id){if(v==='quanphu')return tnaQpDo(id);return _vd.apply(this,arguments);};}
+{const _vo=venueOpts;venueOpts=function(n,v){if(v==='quanphu'||v==='chapphap')return tnaQpOpts(n);return _vo.apply(this,arguments);};}
+{const _vd=venueDo;venueDo=function(v,id){if(v==='quanphu'||v==='chapphap')return tnaQpDo(id);return _vd.apply(this,arguments);};}
 function tnaQpDo(id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return false;const n=nodeById(sc.id);const reg=tnaReg(n),E=tnaE(reg);
   const o=tnaQpOpts(n).find(x=>x.id===id);if(!o||o.no||!E)return false;let ch=[];
   if(id==='nop'){const x=E.tien;bacAdd(-x,'tna.phat');ch=[bacChip(-x)];}
   else if(id==='nopLt'){const x=Math.ceil(E.tien/TNA.phat.xuLt);r.st-=x;ch=[chip('💎','−'+x,contentText('tna.qpN'),'dn')];}
-  if(id==='nop'||id==='nopLt'){advanceTime(1);if(!G.run)return true;tnaXoa(reg,'nop');sc.msg=[contentText('tna.nopXong')];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;saveSoon();return true;}
+  if(id==='nop'||id==='nopLt'){advanceTime(1);if(!G.run)return true;tnaXoa(reg,'nop');dbg('tna.nop',{reg,id,tu:tnaTuNoi(n)?1:0});sc.msg=[contentText(id==='nopLt'?'tna.nopXongLt':'tna.nopXong')];sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;saveSoon();return true;}
   tnaGiam(reg,id);if(G.run){openPlace(n.id);}saveSoon();return true;}
 // HUD: biểu tượng truy nã (chữ + biểu tượng, không số)
 function tnaHud(){const r=G.run;if(!tnaOn()||!r.tna)return null;let reg=r.region||0,E=tnaE(reg);
   if(!E){let b=null;for(const k in r.tna)if(!b||r.tna[k].m>r.tna[b].m)b=k;if(b==null)return null;reg=+b;E=r.tna[b];}
   const L=[contentText('tna.hudN'),contentText('tna.hudT',[tnaRegTen(reg),tnaTen(E.m),tnaTienChu(E.tien)])];
   const khac=Object.keys(r.tna).filter(k=>+k!==reg).map(k=>tnaRegTen(k)+': '+tnaTen(r.tna[k].m));if(khac.length)L.push(contentText('tna.hudKhac',[khac.join(', ')]));
-  if(tnaChe())L.push(contentText('tna.hudChe'));L.push(contentText('tna.hudCach'));
+  if(tnaChe())L.push(contentText('tna.hudChe'));if(tnaHoan())L.push(contentText('tna.hudHoan'));L.push(contentText('tna.hudCach'));
   return {t:TNA_I[E.m],tip:L.join('\n'),m:E.m};}
+// ---------- Câu 83: cải trang qua mặt được nhưng không chắc chắn ----------
+// Bị lộ (hết cải trang) khi: đánh nhau ở nơi có dân · bị nhiều người vây quanh nhìn kỹ (TNA.cai.dong) · lộ khí tức (chưa che giấu tu vi) ở nơi có lính canh (TNA.cai.canh).
+function tnaCai(){const r=G.run;return !!r&&(r.caiT||0)>W().t;}
+function tnaLo(why){const r=G.run;if(!tnaCai())return false;r.caiT=0;const m=contentText('tna.lo.'+why);note(m,'dn');log(m);dbg('tna.lo',{why});return true;}
+// tới nơi có người khi đang cải trang: trả lý do bị lộ ('dong' / 'khi') hoặc ''
+function tnaCaiThu(n){const r=G.run,C=TNA.cai;if(!tnaCai()||!n)return '';
+  if(chance(C.dong[n.type]||0)){tnaLo('dong');return 'dong';}
+  if(C.canh.includes(n.type)&&!isPham()&&(r.realm||0)>=1&&!hideOn()&&chance(Math.min(C.khi.max,C.khi.goc+C.khi.realm*r.realm))){tnaLo('khi');return 'khi';}
+  return '';}
+// đánh nhau ở nơi có dân: cải trang rách, ai đang truy ngươi ở vùng này thì biết ngươi ở đây
+{const _sc=startCombat;startCombat=function(spec){const r=G.run;
+  if(r&&tnaOn()&&tnaCai()&&!(spec&&spec.kiep)&&!r.moving&&tnaNoi(nodeById(r.at))!=='hoang'){tnaLo('danh');const E=tnaE(r.region||0);if(E)E.t=W().t;}
+  return _sc.apply(this,arguments);};}
+// ---------- Câu 82: sự kiện tạm hoãn kiểu GTA5 ----------
+// Đang bị truy nã ở vùng đang đứng (từ TNA.hoan.m), đang bị quan sai / thợ săn lùng, hoặc nhân chứng đang đi báo quan:
+// kỳ ngộ / sự kiện ngẫu nhiên (vòng kỳ ngộ hằng ngày, sự kiện dọc đường, kỳ ngộ phàm nhân) không hiện mà được giữ lại trong r.kyHoan
+// (tối đa TNA.hoan.max), hết trạng thái đó thì lần lượt hiện lại. Truy đuổi, nhân chứng, cốt truyện chính, tâm ma, thọ cạn… không bị hoãn.
+function tnaHoan(){const r=G.run;if(!r||!tnaOn())return false;
+  return !!(r.tnaCh||(r.truy&&['quan','san','no'].includes(r.truy.k))||tnaMuc(r.region||0)>=TNA.hoan.m);}
+kyHoanNow=function(){return tnaHoan();};
+function tnaHoanThem(id){const r=G.run;const Q=Array.isArray(r.kyHoan)?r.kyHoan:(r.kyHoan=[]);
+  if(Q.length<TNA.hoan.max&&!Q.includes(id))Q.push(id);dbg('tna.hoan',{id,n:Q.length});}
+{const _kn=kyNgau;kyNgau=function(ev){const r=G.run;if(!ev||!tnaHoan())return _kn.apply(this,arguments);
+  tnaHoanThem(ev.id);r.kyT=W().t;return false;};}
+// sự kiện dọc đường: đang hoãn thì phần "sự kiện" được giữ lại, phần chạm trán đánh nhau vẫn như cũ (cùng xác suất với roadRoll gốc, core/09)
+{const _rr=roadRoll;roadRoll=function(a,b){if(!tnaHoan())return _rr.apply(this,arguments);const r=G.run;const nb=nodeById(b);
+  const dg=Math.max(nodeById(a).danger,nb.danger);let p=0.08+0.06*dg;if(partOf(W().t)==='dem')p*=1.5;if(!chance(p))return;
+  if(chance(.55)){tnaHoanThem('road:'+nb.type);return;}
+  r.place={n:contentText("core_09-ban-do_js.roadRoll.008")+nb.name,t:nb.type};encounter({type:dg>=3&&chance(.3)?'elite':'combat'});r.scene.back=null;};}
+// hết trạng thái: thả từng cái, cách nhau ít nhất TNA.hoan.gian ngày. Cái nào điều kiện chưa hợp (nơi chốn, hồi chiêu) thì giữ lại chờ,
+// quá TNA.hoan.giu ngày sau khi hết bị truy mà vẫn chưa hợp thì mới bỏ. r.kyHoanHet = lúc hết bị truy.
+function tnaHoanThu(id){if(id.startsWith('road:')){const eid=pickEvent(id.slice(5),'road');return !!eid&&!!startEvent(eid)&&!!G.run.scene;}
+  const ev=KYNGO.find(x=>x.id===id);if(!ev)return null;if(ev.g&&hasTp())return null;kyStart(ev);return !!G.run.scene;}
+function tnaHoanTha(){const r=G.run;const Q=r&&r.kyHoan;if(!Array.isArray(Q)||!Q.length)return false;if(tnaHoan()){r.kyHoanHet=null;return false;}
+  const t=W().t;if(r.kyHoanHet==null)r.kyHoanHet=t;
+  if(r.scene||r._inBq||r.moving||G.screen!=='map'||TNA_BUSY)return false;
+  if(t-(r.kyThaT==null?-1e9:r.kyThaT)<TNA.hoan.gian*HD)return false;
+  const het=t-r.kyHoanHet>TNA.hoan.giu*HD;
+  for(let i=0;i<Q.length;i++){const id=Q[i];const k=tnaHoanThu(id);
+    if(k===true){Q.splice(i,1);r.kyThaT=t;r.kyT=t;dbg('tna.tha',{id,con:Q.length});return true;}
+    if(k===null||het){Q.splice(i,1);i--;dbg('tna.bo',{id});}}
+  return false;}
+{const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);if(G.run&&!TNA_BUSY&&tnaOn())tnaHoanTha();return o;};}

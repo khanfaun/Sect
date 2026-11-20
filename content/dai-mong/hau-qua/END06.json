@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "loai": "hau_qua",
+  "ma": "END06",
+  "tin_don": [
+    "Người học việc đã nhận lời hẹn với khách rồi. Nghe đâu hôm ấy thầy chỉ ngồi vá khăn ngoài cửa.",
+    "Ở chợ bến có người đòi trả công thẳng cho tay học việc. Họ xem món làm xong rồi chờ chính tay ấy nhận tiền.",
+    "Tới xin học giờ dễ tìm chỗ ngồi hơn trước. Cứ hỏi người đang xếp đồ, có khi kỳ trước họ còn ngồi chỗ ngươi xin.",
+    "Chỗ ấy mới thay người trông, nhưng món làm hỏng hồi đầu vẫn nằm bên hộp đồ nghề. Người mới mở cửa bảo cứ để đấy cho học trò tự xem."
+  ],
+  "dia_diem": [
+    {
+      "loc": "{LOC09}",
+      "t": "Dưới mái chợ bến, người nhận việc kê thêm ghế để người học ngồi tập khi đò còn neo. Chỗ treo lời hẹn có cả nét chữ của những người mới được tự nhận khách."
+    },
+    {
+      "loc": "{LOC11}",
+      "t": "Bên bảng công, thợ giữ lại giá thấp để người học đặt đồ đã làm xong, chờ người nhận tới xem. Những món còn lỗi được đánh dấu bằng phấn và trả về đúng tay đã làm."
+    },
+    {
+      "loc": "{LOC01}",
+      "t": "Những buổi chợ vãn, người có nghề chừa đầu bàn để người mới học tự làm việc vừa sức. Đồ dùng để tập được gói trong khăn, hôm sau ai đến trước thì mở ra."
+    }
+  ],
+  "su_luoc": [
+    "Sổ công bắt đầu ghi tên người học đã tự nhận và hoàn tất việc được giao.",
+    "Ở những nơi có người nhận dạy tiếp, đồ tập được để riêng để người mới có thể dùng trước khi nhận việc của khách."
+  ],
+  "muon": "Lâu sau, ngươi nghe người ngồi giữ hàng kể chuyện một người từng truyền nghề. Người ấy bảo thầy mình đã học cách chờ cho người học tự sửa tay khi làm sai. Nói tới đó, họ kéo tay về khỏi món đồ đang làm dở và chừa chỗ cho người ngồi bên."
+}

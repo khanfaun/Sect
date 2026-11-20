@@ -46,7 +46,8 @@ function truyKyEv(T,giua,biet){let ev=KYNGO.find(x=>x.id==='truy_chan');if(!ev){
   ev.n=contentText('truy.kyN');ev.t=contentText('truy.kyT',[(T.i?T.i+' ':'')+T.n,(biet?contentText('truy.kyBiet')+' ':'')+(giua?contentText('truy.kyGiua'):contentText('truy.hoi'))]);
   const opt=truyL(T).opt.slice();if(biet)opt.unshift('lan');
   ev.c=opt.map(o=>({l:contentText('truy.'+o),need:o==='nop'?()=>truyNopGia()?'':contentText('truy.nopThieu'):null,go:()=>truyPick(o)}));return ev;}
-function truyNopGia(){const r=G.run,N=TRUY.nop;if((r.st||0)>=N.stMin)return {st:Math.max(N.stMin,Math.floor(r.st*N.st))};if((r.bac||0)>0){const b=Math.max(1,Math.floor(r.bac*N.bac));return {bac:b};}return null;}
+function truyNopGia(){const r=G.run,N=TRUY.nop;const pham=r.truy&&(N.pham||[]).includes(r.truy.k); // câu 81: quan sai phàm nhân chỉ nhận tiền phàm
+  if(!pham&&(r.st||0)>=N.stMin)return {st:Math.max(N.stMin,Math.floor(r.st*N.st))};if((r.bac||0)>0){const b=Math.max(1,Math.floor(r.bac*N.bac));return {bac:b};}return null;}
 function truyFight(){const r=G.run,T=r.truy;let en=null;try{en=T.ek&&EN[T.ek]?mkEnemy({k:T.ek,elite:T.el}):mkEnemy({elite:T.el});}catch(e){en=mkEnemy({});}
   if(T.n)en.n=T.n;if(T.i)en.i=T.i;startCombat({pre:en,elite:!!T.el},{kind:'node'});const sc=G.run.scene;if(sc&&sc.type==='combat'){sc.truyCh=1;sc.back=null;}dbg('truy.danh',{k:T.k});}
 function truyPick(o){const r=G.run,T=r.truy;if(!T)return {t:''};const t=W().t;dbg('truy.chon',{o,k:T.k});

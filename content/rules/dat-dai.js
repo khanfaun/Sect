@@ -43,7 +43,9 @@ const CONG_TRINH={
   tran_co:{n:'Trận pháp cổ',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['hoang','phe','nui','dong','linhdia'],xay:null,pha:{h:12},hau:'Phá trận cổ: mất chỗ tĩnh tọa, linh khí tản đi.'},
   // --- người chơi xây trên đất hoang không chủ (tu sĩ) ---
   dong_phu:{n:'Động phủ',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],dp:1,xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma'],st:30,h:720,tu:1},pha:{h:12},hau:'Mất động phủ: bế quan ở đây không còn được che chở.'},
-  tran_phap:{n:'Trận pháp hộ thân',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','tran','thanh'],st:50,h:240,tu:1},pha:{h:6},hau:'Trận tan: mất chỗ tĩnh tọa trong trận.'}};
+  tran_phap:{n:'Trận pháp hộ thân',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','tran','thanh','cho','ancu'],st:50,h:240,tu:1},pha:{h:6},hau:'Trận tan: mất chỗ tĩnh tọa trong trận.'},
+  // --- người chơi dựng trên đất đã mua ở nơi có dân (câu 80): phàm nhân cũng dựng được, trả bằng bạc (xu) ---
+  nha_rieng:{n:'Nhà riêng',nhom:'Nghỉ chân',tu:0,acts:[],noi:[],xay:{noi:['tran','thanh','cho','ancu'],st:0,bac:25000,h:360,cuaTa:1},pha:{h:6},hau:'Mất nhà: không còn chỗ ngủ, nghỉ của riêng ngươi ở đây.'}};
 
 // DAT: cách sinh ô và hậu quả.
 //   goc[loại nơi] = công trình luôn có ở loại nơi đó (bảo đảm dịch vụ cốt lõi; bản lưu cũ cũng sinh theo bảng này)
@@ -61,7 +63,7 @@ const DAT={
     thanh:['khach_diem','tra_lau','tuu_lau','bang_thuong','thuong_cac','tien_trang','phuong_thi','quy_thi','am_hoi','lai_buon','doi_lt','cam_do','tram_dich','loi_dai'],
     cho:['tra_lau','tap_hoa','lai_buon','doi_lt','cam_do'],
     tong:['son_mon'],ancu:['thao_lu'],ma:['quy_thi','am_hoi']},
-  trong:{tran:[0,1],thanh:[1,1],cho:[0,1],tong:[0,0],ancu:[0,1],hoang:[1,2]},
+  trong:{tran:[1,2],thanh:[1,3],cho:[0,1],tong:[0,0],ancu:[0,1],hoang:[1,2]},
   hoang:{
     sanbat:[['bai_san',{1:2,2:3,3:1,6:2}],['ho_ca',{4:3,5:3,7:2}]],
     sanyeu:[['hang_yeu',{2:2,3:3,6:2}],['dam_yeu',{4:1,5:1,7:3,1:1}]],
@@ -75,4 +77,12 @@ const DAT={
     dan:{danh:{tran:-12,thanh:-20}},
     tong:{danh:-15,truy:0.4}},
   moc:[20,40],
-  hu:3};
+  hu:3,
+  // mua: mua đất (câu 80, Đ8b đợt sau). Chỉ mua ô TRỐNG ở nơi có dân (thôn trấn, thành, chợ, ẩn cư; tông môn không bán). Hoang dã không chủ thì cứ dựng là thành của ngươi.
+  //   gia[loại nơi] = giá gốc (xu; HN B.2: nhà tranh 25 lượng, ruộng một mẫu 40 lượng) × chu[loại chủ] (dân / người giữ vai / thế lực)
+  //   lt = số xu đổi một linh thạch khi trả bằng linh thạch (tu sĩ, thiếu bạc) · ban = phần giá nhận lại khi bán · h = giờ làm giấy
+  //   favMin: người giữ vai có thiện cảm dưới mức này thì không bán · faMin: bậc quan hệ thế lực (faQhBac 0..6) tối thiểu để thế lực bán (3 = Xa lạ)
+  //   toiDa = số ô tối đa của ngươi ở một nơi · naMin: đang bị truy nã từ mức này ở vùng đó thì không mua được
+  //   tran: tác dụng trận pháp hộ thân trên đất của ngươi (câu 78): bq = hệ số rủi ro bế quan bị quấy, tm = hệ số tâm ma giảm khi tĩnh tọa, ngu = tính là có chỗ ngủ
+  mua:{gia:{tran:30000,thanh:80000,cho:20000,ancu:10000},chu:{dan:1,vai:1.3,fa:1.6},lt:200,ban:0.5,h:4,favMin:-10,faMin:3,toiDa:2,naMin:2,
+    tran:{bq:0.5,tm:2,ngu:1}}};

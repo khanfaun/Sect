@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "loai": "ky_ngo",
+  "ma": "A2",
+  "ten": "Một người chèo đò quen",
+  "text": [
+    "Ở một ngã sông, ngươi gặp người chèo đò đang ngồi gỡ cỏ vướng ở mái chèo. Ông nhấc giỏ cơm khỏi tấm ván để ngươi có chỗ đặt tay nải. Chỉ nhìn cách ông nhích giỏ bằng khuỷu tay, ngươi đã thấy quen, chẳng rõ vì đâu.",
+    "Đò vừa chạm bậc đá rồi lại giạt ra. \"Có chỗ ngồi đợi người lâu hơn người đợi đò,\" ông nói, gót chân vẫn giữ dây. Ngươi thấy câu ấy đúng, dù chưa biết ông nói tới chỗ nào."
+  ],
+  "choices": [
+    {
+      "l": "Hỏi ông thường đón khách ở đâu",
+      "t": "Ngươi hỏi ông thường buộc đò ở bờ nào. Ông chỉ vào tấm ván ngươi vừa đặt tay nải, rồi lấy tay gạt bùn trên đó như thể câu hỏi đã được trả lời."
+    },
+    {
+      "l": "Ngồi im bên ông",
+      "t": "Ngươi ngồi cạnh ông nghe nước vỗ vào mạn. Khi bóng cây đã dời khỏi bậc đá, ông vẫn giữ nguyên chỗ ngồi trống cạnh mình, dù giỏ cơm cứ trượt về phía ấy."
+    },
+    {
+      "l": "Xách tay nải đi tiếp",
+      "t": "Ngươi khoác tay nải lên vai và men theo bờ. Ngoảnh lại, ngươi thấy ông dùng vạt áo lau vòng bụi khô chỗ tay nải vừa đặt, kỹ như lau miệng bát cho khách sắp đến."
+    }
+  ]
+}
