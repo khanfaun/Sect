@@ -287,8 +287,8 @@ const Map2=(()=>{
             ctx.globalCompositeOperation='overlay';ctx.fillStyle=hexA(col,0.7*a);ctx.fill(cp);ctx.globalCompositeOperation='source-over';
             ctx.fillStyle=hexA(C.dark?'#ffffff':'#fff8e4',0.3*a);ctx.fill(cp);ctx.fillStyle=hexA(col,0.14*a);ctx.fill(cp);
             if(CFG.grid){ctx.strokeStyle=hexA(BR,0.3*a);ctx.lineWidth=0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(cp);ctx.setLineDash([]);}
-            if(red){ctx.strokeStyle=hexA('#d4372a',0.95);ctx.lineWidth=2.2/z;ctx.stroke(op);}else{ctx.strokeStyle=hexA(C.dark?'#fff1d0':mixHex(col,BR,0.5),0.95*a);ctx.lineWidth=1.6/z;ctx.setLineDash([4/z,3/z]);ctx.stroke(op);ctx.setLineDash([]);}}
-          if(tgC!=null&&tgC>=0&&!tgN){hexPoly(tgC);ctx.strokeStyle=hexA('#d4372a',0.95);ctx.lineWidth=2/z;ctx.stroke();}
+            if(red){ctx.strokeStyle=hexA('#f0b81c',0.98);ctx.lineWidth=2.2/z;ctx.stroke(op);}else{ctx.strokeStyle=hexA(C.dark?'#fff1d0':mixHex(col,BR,0.5),0.95*a);ctx.lineWidth=1.6/z;ctx.setLineDash([4/z,3/z]);ctx.stroke(op);ctx.setLineDash([]);}}
+          if(tgC!=null&&tgC>=0&&!tgN){hexPoly(tgC);ctx.strokeStyle=hexA('#f0b81c',0.98);ctx.lineWidth=2/z;ctx.stroke();}
           if(sel!=null&&showIc&&!hn&&!(UI.sel!=null)){hexPoly(sel);ctx.strokeStyle=hexA(BR,0.6);ctx.lineWidth=0.7/z;ctx.stroke();}}}
       ctx.restore();if(!bgHit){ctx=realCtx;BGK=bgKey;}
       ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(BGC,0,0);ctx.restore();
@@ -297,8 +297,8 @@ const Map2=(()=>{
       const sn=UI.sel!=null&&!r.moving&&nodeById(UI.sel);
       {const h0=nodeHex(nodeById(r.at)),th=r.moving?null:(UI.hold?(UI.hold.n!=null?hexAt(...mapNode(nodeById(UI.hold.n))):UI.hold.c):UI.mark?UI.mark.th:(sn&&sn.id!==r.at&&sn.fog>=1?hexAt(...mapNode(sn)):null));
         if(th!=null&&th!==h0){const hp=hexPath(h0,th);ctx.beginPath();hp.cells.forEach((c,i)=>{const p=hexCenter(c);if(i)ctx.lineTo(p[0],p[1]);else ctx.moveTo(p[0],p[1]);});
-          ctx.strokeStyle=hexA(C.acc,UI.mark||UI.hold?0.9:0.6);ctx.lineWidth=(UI.mark||UI.hold?1.3:2.5)/z;ctx.setLineDash(UI.mark||UI.hold?[5/z,4/z]:[2/z,7/z]);ctx.stroke();ctx.setLineDash([]);
-          if(UI.mark||UI.hold){const q=hexCenter(th);ctx.beginPath();ctx.arc(q[0],q[1],HEXW*0.32,0,6.3);ctx.lineWidth=1.6/z;ctx.strokeStyle=hexA(C.acc,0.95);ctx.stroke();ctx.fillStyle=hexA(C.acc,0.25);ctx.fill();}}}
+          ctx.strokeStyle=UI.mark||UI.hold?hexA('#f0b81c',0.98):hexA(C.acc,0.6);ctx.lineWidth=(UI.mark||UI.hold?2.8:2.5)/z;ctx.setLineDash(UI.mark||UI.hold?[5/z,4/z]:[2/z,7/z]);ctx.stroke();ctx.setLineDash([]);
+          if(UI.mark||UI.hold){const q=hexCenter(th),w=Math.max(HEXW*0.3,13/z),hh=Math.max(HEXW*0.62,28/z),y0=q[1]-HEXW*0.12;ctx.beginPath();ctx.moveTo(q[0],y0);ctx.lineTo(q[0]+w,y0-hh*0.5);ctx.lineTo(q[0]+w*0.38,y0-hh*0.5);ctx.lineTo(q[0]+w*0.38,y0-hh);ctx.lineTo(q[0]-w*0.38,y0-hh);ctx.lineTo(q[0]-w*0.38,y0-hh*0.5);ctx.lineTo(q[0]-w,y0-hh*0.5);ctx.closePath();ctx.lineWidth=1.4/z;ctx.strokeStyle=hexA('#59616d',0.95);ctx.stroke();ctx.fillStyle=hexA('#d9dee6',0.97);ctx.fill();}}}
       if(r.moving){const m=r.moving;ctx.beginPath();ctx.moveTo(pos[0],pos[1]);
         for(let i=m.seg;i<m.path.length-1;i++){const hp=hexPath(nodeHex(nodeById(m.path[i])),nodeHex(nodeById(m.path[i+1])));const t=i===m.seg?m.prog*(hp.cum[hp.cum.length-1]||1):-1;hp.cells.forEach((c,j)=>{if(hp.cum[j]<=t)return;const p=hexCenter(c);ctx.lineTo(p[0],p[1]);});}
         ctx.strokeStyle=hexA(C.seal,0.85);ctx.lineWidth=2.5/z;ctx.setLineDash([6/z,5/z]);ctx.stroke();ctx.setLineDash([]);}
@@ -375,7 +375,7 @@ const Map2=(()=>{
       else{ctx.fillStyle=C.ink;ctx.font=`500 ${Math.round(rr*1.05)}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(avLetter(r.ten),x,y+1);}
 }
     // thẻ chú thích gắn theo địa điểm / đại khu vực: bám vị trí trên bản đồ, nằm trên icon, hết chỗ thì xuống dưới
-    if(UI.mark&&!r.moving){const h0=nodeHex(nodeById(r.at));if(UI.mark.th!==h0){const q=hexCenter(UI.mark.th),hr=hexPath(h0,UI.mark.th).len/walkSpeed();label(durH(hr),SX(q[0]),SY(q[1])-HEXW*z*0.32-18,{c:C.ink,s:12,b:1});}}
+    if(UI.mark&&!r.moving){const h0=nodeHex(nodeById(r.at));if(UI.mark.th!==h0){const q=hexCenter(UI.mark.th),hr=hexPath(h0,UI.mark.th).len/walkSpeed();label(durH(hr),SX(q[0]),SY(q[1])-Math.max(HEXW*z*0.8,26)-22,{c:'#d4281c',s:17,b:1});}}
     {const el=document.querySelector('#dock .np');if(el){const ax=+el.dataset.ax,ay=+el.dataset.ay;
       if(el.dataset.area&&zf>=0.2){el.style.visibility='hidden';}
       else{const w=el.offsetWidth,h=el.offsetHeight;const cr=cv.getBoundingClientRect(),dr=el.parentElement.getBoundingClientRect();const sx=SX(ax),sy=SY(ay);const ic=el.dataset.ic?+el.dataset.ic:el.dataset.area?4:Math.max(10,HEXW*z*0.6);

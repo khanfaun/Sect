@@ -6,9 +6,10 @@ import { Html, PS } from '../html';
 import { Ic, Tranh, tip } from '../chung';
 
 function Tabs({ m }) {
+  const noBq = PS.bqNoWhy();
   return (
     <div className="tabs bq-tabs">
-      <button className={m.tab !== 'cg' && m.tab !== 'tt' ? 'on' : ''} data-act="bqTab" data-arg="bq">Bế quan</button>
+      <button className={m.tab !== 'cg' && m.tab !== 'tt' ? 'on' : ''} data-act="bqTab" data-arg="bq" disabled={!!noBq && m.tab === 'cg'} {...(noBq ? tip(noBq) : {})}>Bế quan</button>
       <button className={m.tab === 'tt' ? 'on' : ''} data-act="bqTab" data-arg="tt">Tĩnh toạ</button>
       <button className={m.tab === 'cg' ? 'on' : ''} data-act="bqTab" data-arg="cg">Cảnh giới</button>
     </div>

@@ -5,7 +5,7 @@
 // nhip: phần ăn mỗi ngày (phàm 1, Luyện Khí ½, Trúc Cơ+ 1/60); bế quan ×⅓; sau bế quan ×½ trong sauBqNgay ngày (câu 19).
 // thang: ở quán/quê đủ tiền thật (không mua chịu) thì mua một lần lương thực cả tháng (anCov ngày, mang theo người).
 const AN={muc:{dam:{n:'Đạm bạc',bac:12,rg:-0.1},thuong:{n:'Thường',bac:20,rg:0},kha:{n:'Khá',bac:40,rg:0.1,tm:1}},
-  lkNgay:5,maxNgay:400,lkBac:70,lkQty:5,
+  lkNgay:90,maxNgay:400,lkBac:70,lkQty:5,
   doi:{thieu:30,doi:60,la:150,kiet:300,canh:630,chet:660},rgDoi:-0.25,rgKiet:-0.5,hpLa:-0.15,hpKiet:-0.3,kietHp:0.005,
   nhip:{lk:0.5,tc:1/60,bq:1/3,sauBq:0.5},sauBqNgay:90,thang:30,
   quan:['tran','thanh','cho']};

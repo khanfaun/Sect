@@ -138,4 +138,6 @@ function eqAuto(){const r=G.run;if(!r)return;const E=eqOf();const put=[];for(let
 {const _ac4=autoCheck;autoCheck=function(){eqAuto();_ac4();};}
 function chuPool(){const r=run2();const used=new Set(r.chu.map(chuKey));const L=[];for(const k of r.skills){const c={k:'s',id:k.id};if(!used.has(chuKey(c)))L.push(c);}return L;}
 function craftRate(c){const s=S();return clamp(c.base+(s.ngo-10)*0.02+(s.van-3)*0.01+(s.fx.craftP||0)/100,0.1,0.97);}
-{const _br=bqRisk;bqRisk=function(y){return _br(y)*(1-Math.min(80,aggFx().bqSafe||0)/100);};}
+{const _br=bqRisk;bqRisk=function(y){return _br(y)*(1-Math.min(80,aggFx().bqSafe||0)/100);};}// gặp chuyện dọc đường (roadRoll, core/09): chỉ còn khoảng một nửa so với trước. Truy đuổi/truy nã có luật riêng, không qua đây.
+const ROAD_MUL=0.5;
+{const _rr=roadRoll;roadRoll=function(a,b){if(!chance(ROAD_MUL)){dbg('road.bo',{a,b});return;}return _rr(a,b);};}

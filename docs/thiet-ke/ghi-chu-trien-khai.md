@@ -992,3 +992,17 @@ Luật: `core2/67-dai-mong.js` · bảng: `content/rules/dai-mong.js` (MONG_AN, 
 - Lời văn 27 tệp Đại Mộng chờ GPT (đang dùng lời dự phòng ngắn trong dm.*). Kết theo đời END02/03/06 chưa có hậu quả thế giới riêng (đổi chủ Lương triều, ma quốc…), chỉ ghi Sử lược + sổ.
 - Mộng Ấn "nhận ra Người Gác Bến" mới qua kỳ ngộ; sự kiện "Mộng du tiên cảnh" (B) chưa nối. Tuyến DL02 "Diệt Thế Ma Đồ" chưa gọi cưỡng mở Diệt Thế khi kết.
 - Bot chưa thử mục Đại sự / bến (chưa được chạy bot).
+
+## Đợt sửa giao diện + đói (tạm dừng, CHƯA kiểm xong)
+Đã làm (code đã lưu, **chưa chạy xong bộ kiểm** — phiên sau chạy lần lượt: `npm run content:check`, `npm run test:rules`, `node tools/test-ui.js`, không chạy cùng lúc):
+- Nút Bế quan luôn hiện, mờ khi vô linh căn; modal Cảnh giới mờ lối vào bế quan (nút Đột phá vẫn bấm được — chờ người dùng quyết có chặn không).
+- Thanh no/đói; cuộn hết hộp thoại thì cuộn cả cửa sổ; cụm tiền tệ dàn ngang (icon mới, 4 phẩm linh thạch khác nhau); cụm nút định vị desktop xuống dưới.
+- Tắt hiệu ứng tiềm chất lúc mới vào kiếp; thanh "Đang trên đường" gọn; modal desktop không che footer; đường đi vàng, số thời gian đỏ to; viền chọn vàng + mũi tên bạc; hiệu ứng trắc linh song/tam/tứ/tạp.
+- Luật: giảm ~½ gặp chuyện dọc đường (ROAD_MUL=0.5); báo đói một lần mỗi mốc; hộp xác nhận trước chuyến đi dễ chết đói (Huỷ / Mở túi đồ / Vẫn đi); lương khô 90 ngày.
+Còn lại / chờ người dùng:
+- `test:rules` từng báo 2 lỗi nghi có sẵn từ trước (`truy` "tìm được chặng đi dài", `ngovan` "khí vận thấp ×1.00" lúc đạt lúc không) — cần xác nhận bằng bản gốc.
+- Bài test-ui `vo_hud` đã sửa theo nút bế quan mờ; chạy lại để chắc.
+- Giá lương khô vẫn 70 bạc/gói (90 ngày) rẻ hơn ăn quán rất nhiều: hỏi người dùng có nâng giá không.
+- Chữ hiệu ứng trắc linh 4 loại viết thẳng trong code, chưa đưa vào content/ (khoá `tlfx.*`).
+- Chưa thử trên máy thật: hiệu ứng trắc linh, việc tắt hiệu ứng tiềm chất.
+- Các câu 80–88 vẫn chờ trả lời; Đ11, Đ12 chưa làm.

@@ -105,7 +105,7 @@ document.addEventListener('visibilitychange',()=>{clkLast=performance.now();clkA
 window.addEventListener('resize',()=>{Map2.resize();Art.clear();Art.fillAll();});
 
 // ---------- hành động ----------
-function openBq(){const r=G.run;if(bqCan())return;UI.bqOpened=!r.scene;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')UI.modal={k:'bq'};}
+function openBq(){const r=G.run;if(typeof voKnown==='function'&&voKnown()){note('Vô linh căn: chưa thể bế quan tu luyện','dn');return;}if(bqCan())return;UI.bqOpened=!r.scene;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')UI.modal={k:'bq'};}
 const ACT={
   birth:()=>{genBirth();const c=G.birth.cards;newRun(c[Math.floor(Math.random()*c.length)]);UI.sel=null;UI.panel=null;run2();},
   born:i=>{newRun(G.birth.cards[+i]);UI.sel=null;UI.panel=null;run2();},
@@ -165,7 +165,8 @@ const ACT={
   sell:a=>{const [k,i]=a.split(':');sellItem(k,+i);},
   stage:id=>{UI.modal=null;stageGo(+id);},
   go:id=>{const n=nodeById(+id);if(CFG.confirmDanger&&dangerTag(n)>=3&&n.id!==G.run.at){UI.modal={k:'danger',id:n.id};return;}ACT.goSure(id);},
-  goSure:id=>{UI.modal=null;G.run.halt=false;if(travelTo(+id)){G.run.dest=+id;UI.paused=false;UI.cardMin=true;Map2.cam.follow=true;}},
+  goAnOk:id=>{UI.anOk=1;ACT.goSure(id);},goAnBag:()=>{UI.modal=null;ACT.bagOpen();},
+  goSure:id=>{const ok=UI.anOk;UI.anOk=0;if(!ok&&typeof anTripRisk==='function'){const k=anTripRisk(+id);if(k){UI.modal={k:'pconf',doi:k,id:+id};return;}}UI.modal=null;G.run.halt=false;if(travelTo(+id)){G.run.dest=+id;UI.paused=false;UI.cardMin=true;Map2.cam.follow=true;}},
   enter:()=>{G.run.dest=null;UI.sel=null;UI.cell=null;UI.pop=null;UI.hold=null;openPlace(G.run.at);},
   stop:()=>{const r=G.run;if(r.moving){r.halt=true;snapStop();}},
   goOn:()=>{G.run.halt=false;UI.paused=false;},

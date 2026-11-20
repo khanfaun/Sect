@@ -96,12 +96,16 @@ function anAtSect(r){const n=nodeById(r.at);return !!n&&n.type==='tong'&&!!r.fla
 // Sửa-B: bỏ cơm nhà. Ở quê (r.queAt) mua cơm như ở quán, được mua chịu (core2/44-no-nha.js)
 function anAtHome(r){return r.queAt!=null&&r.at===r.queAt&&!r.moving;}
 function anLkEat(r){if((r.anLk||0)>0){r.anLk--;return true;}const i=(r.qitems||[]).indexOf('luong_kho');if(i<0)return false;r.qitems.splice(i,1);r.anLk=AN.lkNgay-1;dbg('an.lk',{left:(r.qitems||[]).filter(x=>x==='luong_kho').length});return true;}
-function anFed(r,how){if((r.doi||0)>=AN.doi.doi)dbg('an.het',{doi:r.doi,how});r.no=100;r.doi=0;}
+function anFed(r,how){if((r.doi||0)>=AN.doi.doi)dbg('an.het',{doi:r.doi,how});r.no=100;r.doi=0;if(!r.moving)r.anBao=0;}
+// mốc đói: 0 no, 1 thiếu, 2 đói, 3 lả, 4 kiệt, 5 sắp chết. r.anBao = mốc cao nhất đã báo (chỉ báo khi vừa rơi xuống mốc mới; ăn lại lúc không đi đường thì đặt lại)
+function anLv(d){const D=AN.doi;return d>=D.canh?5:d>=D.kiet?4:d>=D.la?3:d>=D.doi?2:d>=D.thieu?1:0;}
+const AN_NOTE=['','an.noteThieu','an.noteDoi','an.noteLa','an.noteKiet','an.noteCanh'];
 // Sửa lỗi đói: mọi người đều đói, nhưng theo nhịp (phần ăn mỗi ngày) — phàm 1, Luyện Khí ½, Trúc Cơ+ rất chậm; bế quan chậm hơn, sau bế quan chậm một thời gian
 function anRate(r){let k=r.pham?1:r.realm===0?AN.nhip.lk:AN.nhip.tc;if(r._inBq)k*=AN.nhip.bq;else if((r.anCham||0)>W().t)k*=AN.nhip.sauBq;return k;}
 function anShow(r){r=r||G.run;return !!r&&(needFood(r)||(r.doi||0)>=AN.doi.thieu);}
 function anStarve(r){r.doi=(r.doi||0)+1;r.no=Math.max(0,100-Math.round(r.doi*100/AN.doi.la));dbg('an.doi',{doi:r.doi});const D=AN.doi;
-  if(r.doi===D.thieu)note(contentText('an.noteThieu'),'dn');else if(r.doi===D.doi)note(contentText('an.noteDoi'),'dn');else if(r.doi===D.la){note(contentText('an.noteLa'),'dn');clampHp();}else if(r.doi===D.kiet){note(contentText('an.noteKiet'),'dn');clampHp();}else if(r.doi===D.canh)note(contentText('an.noteCanh'),'dn');
+  if(r.doi===D.la||r.doi===D.kiet)clampHp();
+  const lv=anLv(r.doi);if(lv>(r.anBao||0)){r.anBao=lv;note(contentText(AN_NOTE[lv]),'dn');dbg('an.bao',{lv,doi:r.doi});}
   if(r.doi>=D.kiet){const s=S();r.hp=Math.max(1,r.hp-Math.max(1,Math.round(s.maxHp*AN.kietHp)));}}
 // một bữa (một ngày ăn): việc có cơm, sơn môn mình, lương thực đã mua, quán/quê (đủ tiền thật thì mua cả tháng), lương khô, không thì đói
 function anMeal(r){
@@ -129,6 +133,16 @@ function anRgMul(){const r=G.run;if(!r||!feat('an'))return 1;let m=1+(needFood(r
 {const _t=rgTurnRate;rgTurnRate=function(){return _t.apply(this,arguments)*anRgMul();};}
 {const _S=S;S=function(){const s=_S.apply(this,arguments);const r=G.run;const d=(r&&r.doi)||0;if(r&&feat('an')&&d>=AN.doi.la)s.maxHp=Math.max(1,Math.round(s.maxHp*(1+(d>=AN.doi.kiet?AN.hpKiet:AN.hpLa))));return s;};}
 function anState(r){r=r||G.run;const d=(r&&r.doi)||0;if(!r)return 'tich';if(!needFood(r)&&d<AN.doi.doi)return 'tich';return d>=AN.doi.kiet?'kiet':d>=AN.doi.la?'la':d>=AN.doi.doi?'doi':'no';}
+// trước khi lên đường: ước số bữa phải ăn dọc đường so với lương thực mang theo (anCov, gói lương khô đang mở, lương khô trong túi).
+// Dọc đường không mua được cơm (anAtQuan cần đứng yên), nên bạc không tính. Trả null nếu nguy cơ thấp; ngược lại {ngay,du,doi0,doi1,chet,t}.
+function anTripDays(r){return (r.anCov||0)+(r.anLk||0)+(r.qitems||[]).filter(x=>x==='luong_kho').length*AN.lkNgay;}
+function anTripRisk(id){const r=G.run;if(!r||!feat('an')||r.anFree)return null;const n=nodeById(id);if(!n||id===r.at)return null;
+  const p=findPath(r.at,id);if(!p)return null;const h=travelHours(p);if(!(h>0))return null;
+  const ngay=Math.ceil(h/24),bua=Math.floor(ngay*anRate(r)+(r.anPart||0)),du=anTripDays(r),doi0=r.doi||0,doi1=du>0?bua-du:doi0+bua; // ăn được bữa nào là hết đói, đói lại từ đầu
+  if(bua<=du)return null;
+  if(doi1<AN.doi.canh)return null;
+  const t=contentText(doi1>=AN.doi.chet?'an.diChet':'an.diCanh',[ngay,du,doi0,AN.doi.chet]);
+  dbg('an.diRui',{id,ngay,bua,du,doi0,doi1});return {ngay,du,doi0,doi1,chet:AN.doi.chet,t};}
 // Sửa lỗi đói: bản lưu cũ (thang 15 ngày) đang đói thì nới về mức an toàn
 {const _r=run2;run2=function(){const r=_r.apply(this,arguments);if(r&&!r._anV2){r._anV2=1;if((r.doi||0)>0)dbg('an.migrate',{doi:r.doi});r.doi=0;r.anPart=0;if(r.no!=null)r.no=Math.max(r.no,100);}return r;};}
 // bản lưu cũ: no đủ, tự lo cơm

@@ -1728,3 +1728,57 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   .tien-cum{bottom:auto;top:64px;right:12px;font-size:.9em}
 }
 @media (max-width:420px){.tien-cum{gap:5px;padding:4px 7px;font-size:.72em}}
+
+/* cụm tiền tệ v2: icon SVG, giãn rộng, vạch ngăn giữa tiền phàm và linh thạch */
+.tien-cum{gap:13px}
+.tien-cum .tc{gap:4px}
+.tien-cum .tc-sep{align-self:stretch;width:1px;margin:-1px 0;background:var(--ink2);opacity:.35;text-decoration:none}
+.tien-cum .ti{width:1.55em;height:1.55em;flex:none;overflow:visible}
+.tien-cum .tc.no .ti-xu,.tien-cum.no .ti-xu{filter:drop-shadow(0 0 2px var(--seal))}
+.tien-cum .ti-2{filter:drop-shadow(0 0 2px rgba(90,160,255,.7))}
+.tien-cum .ti-3{filter:drop-shadow(0 0 3px rgba(255,200,70,.9));animation:tcShine 2.4s ease-in-out infinite}
+.tien-cum .ti-3 .spk{transform-origin:8px 8px;animation:tcSpark 1.8s ease-in-out infinite}
+@keyframes tcShine{0%,100%{filter:drop-shadow(0 0 2px rgba(255,200,70,.6))}50%{filter:drop-shadow(0 0 5px rgba(255,220,110,1))}}
+@keyframes tcSpark{0%,100%{transform:scale(.6) rotate(0);opacity:.7}50%{transform:scale(1.15) rotate(45deg);opacity:1}}
+@media (max-width:420px){.tien-cum{gap:9px}}
+
+/* ===== máy tính: thanh di chuyển gọn, hộp lớn không che footer ===== */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  #dock:has(.dock.go){width:min(400px,40vw);bottom:70px}
+  .dock.go{padding:6px 12px;gap:10px;font-size:.86em}
+  .dock.go .btn{font-size:.9em;padding:.25em .9em;min-height:30px}
+  #modal{padding:16px 64px 66px}
+  .mbox{max-height:100%;max-width:560px}
+  .mbox.pick{max-width:620px}.mbox.imod{max-width:460px}
+  #panel{bottom:66px;width:min(940px,calc(100vw/var(--dz) - 140px))}
+  #panel:has(.win.wide){width:min(1180px,calc(100vw/var(--dz) - 140px))}
+  #sheet{bottom:66px;top:100px!important}
+}
+
+/* trắc linh nhẹ: song < tam < tứ; tạp đục. Đều kém hoành tráng hơn Địa/Thiên (không phủ đen toàn màn, không rung màn hình) */
+.tlfx-lt{background:none;cursor:pointer;--gl:#fffaf0}
+.tlfx-lt .lt-wash{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 42%,transparent) 0%,color-mix(in srgb,var(--c2) 26%,transparent) 38%,rgba(10,8,20,.34) 100%);animation:tlbg var(--tlms) ease-out both}
+.tlfx-song .lt-wash{opacity:.8}
+.tlfx-tam .lt-wash{background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 55%,transparent) 0%,color-mix(in srgb,var(--c2) 34%,transparent) 42%,rgba(10,8,20,.4) 100%)}
+.tlfx-tu .lt-wash{background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 70%,#fff 10%) 0%,color-mix(in srgb,var(--c2) 45%,transparent) 45%,rgba(10,8,20,.48) 100%)}
+.tlfx-tap .lt-wash{background:radial-gradient(ellipse at 50% 58%,rgba(150,140,120,.5) 0%,rgba(90,84,76,.42) 45%,rgba(30,28,26,.55) 100%);filter:blur(2px)}
+.tlfx-lt .lt-orbit{position:absolute;left:50%;top:58%;width:0;height:0;animation:ltspin 6s linear infinite,tlbg var(--tlms) ease-out both}
+.tlfx-lt .lt-orbit i{position:absolute;left:0;top:0;width:26px;height:26px;margin:-13px;border-radius:50%;background:radial-gradient(circle,#fff 0%,var(--oc) 45%,transparent 72%);transform:rotate(var(--a)) translateY(-96px);box-shadow:0 0 18px 4px var(--oc);animation:ltpulse 1.6s ease-in-out infinite;animation-delay:var(--od)}
+.tlfx-song .lt-orbit i{width:20px;height:20px;margin:-10px;box-shadow:0 0 12px 2px var(--oc)}
+.tlfx-tam .lt-orbit i{box-shadow:0 0 18px 4px var(--oc)}
+.tlfx-tu .lt-orbit i{width:30px;height:30px;margin:-15px;box-shadow:0 0 26px 8px var(--oc);transform:rotate(var(--a)) translateY(-112px)}
+.tlfx-tap .lt-orbit{animation-duration:9s,var(--tlms)}
+.tlfx-tap .lt-orbit i{width:22px;height:22px;margin:-11px;opacity:.55;filter:saturate(.45) blur(1.5px);box-shadow:0 0 14px 3px var(--oc);transform:rotate(var(--a)) translateY(-84px)}
+.tlfx-lt .lt-ring{position:absolute;left:50%;top:58%;width:60px;height:60px;margin:-30px;border-radius:50%;border:2px solid var(--c1);box-shadow:0 0 18px var(--c1);opacity:0;animation:tlring 2.8s ease-out both}
+.tlfx-lt .lt-ring.r2{animation-delay:.7s;border-color:var(--c2);box-shadow:0 0 18px var(--c2)}
+.tlfx-tap .lt-ring{border-color:#a89f8c;box-shadow:0 0 10px #a89f8c;animation-duration:3.4s}
+.tlfx-lt .lt-rays{position:absolute;left:50%;top:58%;width:0;height:0}
+.tlfx-lt .lt-rays i{position:absolute;left:0;top:0;width:3px;height:70vmax;margin-left:-1.5px;background:linear-gradient(to top,var(--c1),transparent 70%);transform-origin:top;transform:rotate(var(--a));opacity:0;animation:tlray var(--tlms) ease-out both}
+.tlfx-lt .tlfx-in{color:#fff;text-shadow:0 0 10px var(--c2),0 0 2px #000;animation:tlbg var(--tlms) ease-out both}
+.tlfx-lt .tlfx-in h2{font-size:clamp(1.5em,6vw,2em);letter-spacing:.08em;margin:.2em 0 .5em}
+.tlfx-lt .tlfx-in small{color:#fff}
+.tlfx-tap .tlfx-in{text-shadow:0 0 6px #000,0 0 2px #000;color:#e6e0d2}
+@keyframes ltspin{to{transform:rotate(360deg)}}
+@keyframes ltpulse{0%,100%{opacity:.75;scale:.9}50%{opacity:1;scale:1.12}}
+:root[data-anim="0"] .tlfx-lt *{animation:none!important}
+.tlfx-tap .lt-ring.r2{border-color:#a89f8c;box-shadow:0 0 10px #a89f8c}

@@ -37,6 +37,12 @@ function KhungXacNhan({ title, d, h, st, bac, g, act, arg }) {
 }
 
 export function XacNhanViec({ m }) {
+  if (m.doi) return (
+    <div className="mbox pconf">
+      <h3>{PS.contentText('an.diH3')}</h3><p>{m.doi.t}</p>
+      <div className="mb-f"><button className="btn" data-act="modalX">Huỷ</button><button className="btn" data-act="goAnBag">Mở túi đồ</button><button className="btn pri" data-act="goAnOk" data-arg={m.id}>Vẫn đi</button></div>
+    </div>
+  );
   const r = PS.G.run;
   if (!r || !r.scene) return null;
   const n = PS.nodeById(r.scene.id), a = PS.placeActs(n).find(x => x.a === m.a);
