@@ -85,7 +85,7 @@
         {
           "id": "cach_2",
           "l": "Giữ phiếu người chấp nhận mua giờ",
-          "t": "Ngươi nhận ra một người hỏi giá cho mỗi canh thư nằm lại sát máng.",
+          "t": "Ngươi nghe một người ra giá cho mỗi canh giờ túi thư bị giữ lại bên máng ngựa.",
           "dau": [
             "moc_2_2"
           ]
@@ -186,7 +186,7 @@
         {
           "id": "cach_2",
           "l": "Lấy tiền để giữ thư chậm một canh",
-          "t": "Ngươi chọn người đã chịu giá, cho người ấy đổi ngựa và giữ quyền giao giờ tại trạm.",
+          "t": "Ngươi cho người đã trả tiền đổi ngựa. Từ đây, chính ngươi định giờ giao túi thư tại trạm.",
           "dau": [
             "moc_4_2"
           ],
@@ -257,7 +257,7 @@
         {
           "id": "cach_2",
           "l": "Giữ quyền định giờ giao",
-          "t": "Ngươi giữ ấn trạm và để người mua nhận lợi từ canh giờ đã bán.",
+          "t": "Ngươi giữ ấn trạm. Người mua lấy một canh giờ ngươi bán để dời người trước khi lệnh tới.",
           "dau": [
             "moc_5_2"
           ],

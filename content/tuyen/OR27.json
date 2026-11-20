@@ -85,7 +85,7 @@
         {
           "id": "cach_2",
           "l": "Xin giữ khuôn thứ hai",
-          "t": "Ngươi lấy khuôn theo giấy giao mẫu, biết người giữ lò còn muốn đổi bạc.",
+          "t": "Ngươi nhận khuôn theo giấy giao mẫu. Người giữ lò vẫn muốn lấy bạc để giao phần còn lại.",
           "dau": [
             "moc_2_2"
           ]
@@ -133,7 +133,7 @@
         {
           "id": "cach_2",
           "l": "Tìm người nhận lô bạc",
-          "t": "Ngươi hỏi ai chịu đưa lô vào chợ và ghi giá họ lấy trên từng phần.",
+          "t": "Ngươi hỏi ai chịu mang lô bạc ấy ra chợ, rồi ghi phần tiền họ đòi trên mỗi đợt giao.",
           "dau": [
             "moc_3_2"
           ]

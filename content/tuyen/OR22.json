@@ -29,7 +29,7 @@
         {
           "id": "cach_1",
           "l": "Đếm tấm giao và giữ biên nhận",
-          "t": "Ngươi ghi số tấm thực giao cạnh phần người mua chịu để lại trên giấy.",
+          "t": "Ngươi đếm số chiếu đã giao, ghi cạnh số người mua chịu xác nhận trên biên nhận.",
           "dau": [
             "moc_1_1"
           ]
@@ -93,7 +93,7 @@
         {
           "id": "cach_3",
           "l": "Đếm khung có thể mang đi",
-          "t": "Ngươi kê khung gấp được và hỏi thợ nào tự nguyện góp khung vào gánh.",
+          "t": "Ngươi kê những chiếc khung có thể gấp rồi hỏi ai muốn góp khung vào gánh.",
           "dau": [
             "moc_2_3"
           ]
@@ -178,7 +178,7 @@
         {
           "id": "cach_1",
           "l": "Giấu người và lập quỹ hộ",
-          "t": "Ngươi dùng dấu dệt nhận đúng người, mở quỹ có tên các hộ góp cho nơi họ chọn.",
+          "t": "Ngươi lần theo hoa dệt để tìm đúng nhóm thợ. Quỹ ghi tên từng hộ góp tiền cho chỗ ở mà nhóm tự chọn.",
           "dau": [
             "moc_4_1"
           ],
