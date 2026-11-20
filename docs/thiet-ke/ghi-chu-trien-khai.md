@@ -1049,3 +1049,15 @@ Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời
 - Sự kiện riêng (12 mỗi nghề) và 4 kết cục từng nghề của B §7.4 chưa viết; chưa có điều kiện "vào nghề" theo khí vận / linh căn (Linh Căn Cổ, Phật Tử, Quỷ Nhãn…), chỉ bái học ở nơi thầy.
 - Hiệu ứng ngoài trận ghi bằng `tuNote` (giải cổ, ban ngày yếu thi, âm khí yếu lôi, giảm thiên lôi, thuyết phục, phường thị, giám định linh thạch). Giảm sát thương thiên lôi của Lôi pháp chờ hệ thiên kiếp (core/08 đang do Đ12 sửa).
 - Hạo nhiên khí chưa làm mạnh Văn Khí Hộ Thân; Huyễn thuật chưa có "mất đạo tâm"; Thi tu chưa có xác luyện bền ngoài trận.
+
+## NGƯỜI DÙNG CHỐT (câu 80–88) — ngày 20/11
+80. A: mở mua đất ngay.
+81. Tùy nơi giam giữ: nơi phàm nhân → nộp xu/bạc/vàng; nơi thế lực tu sĩ → nộp linh thạch.
+82. A, kiểu GTA5: game tự xét lộ hay không; **sự kiện (kỳ ngộ/sự kiện ngẫu nhiên) tạm hoãn** khi đang bị truy nã hoặc đang bị tìm kiếm mà chưa thấy người chơi, tới khi hết trạng thái đó mới tiếp.
+83. A (giữ cải trang qua mặt được) nhưng KHÔNG chắc 100%: đánh nhau, bị nhiều người vây quanh, hoặc lộ khí tức mà gần có lính canh → bị lộ.
+84. Người dùng hỏi: luân hồi đã có thời gian ngẫu nhiên (A.17), uống canh rút ngắn có chồng chéo không → khuyến nghị A (không đổi số năm giữa hai kiếp); chờ người dùng xác nhận.
+85. A: nghi thức rút gọn như nay.
+86. Sau khi khép hành trình: về màn hình chính ban đầu + thông báo "linh giới đang trong quá trình phát triển". Ý định: sau này có Linh giới, Tiên giới; thế giới hiện nay gọi là **Phàm giới**.
+87. A: mỗi kiếp 1 Mộng Ấn.
+88. A: hậu quả thế giới của END02/03 làm thật ở đợt sau (nay nhập bản thảo GPT: docs/content/GUI-GPT-4/ban-thao).
+Đ12 (ba mức ×0,75/×0,85/×1,15): người dùng giao Claude tự quyết, giữ như đã áp.
