@@ -29,6 +29,39 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Lên làm người đứng đầu thế lực: kế vị (đủ công) hoặc thách đấu / soán ngôi; rồi tiếp quản thành trấn của thế lực
+  dung_dau() {
+    fresh("FEAT.dat=1;FEAT.tna=1;G.run.pham=0;G.run.realm=2;G.run.flags.tongmon=0");
+    const go=id=>run(`(()=>{const r=G.run;r.scene=null;r.moving=null;r.at=${id};openPlace(${id});r.scene.venue='dungdau';})()`);
+    // thế lực có trụ sở: Bách Thảo Cốc (FA07)
+    const bt=run("anchorNode('LOC10').id");go(bt);ok(run("placeActs(curNode()).some(a=>a.a==='dungdau')"), 'trụ sở thế lực có mục Tranh ngôi đứng đầu');
+    ok(/Công lao chưa đủ/.test(run("ddOpts(curNode()).find(o=>o.id==='ke').no")), 'chưa đủ công: chưa kế vị được');
+    run("chAdd('fa:FA07',2000)");ok(run("venueDo('dungdau','ke')")&&run("ddLa('FA07')")&&run("faNow('FA07').chu")===run("G.run.ten"), 'đủ công, đủ cảnh giới: kế vị, sổ thế lực ghi ngươi đứng đầu');
+    ok(run("ddDanh('FA07')")==='Cốc chủ'&&/Cốc chủ/.test(run("ddOpts(curNode())[0].l")), 'tên gọi theo thế lực: Cốc chủ');
+    // tiếp quản thành trấn thế lực đó nắm
+    const tc=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.fa==='FA07'&&isTuT(n.type));return n?n.id:null;})()");
+    // thách đấu
+    fresh("FEAT.dat=1;FEAT.tna=1;G.run.pham=0;G.run.realm=1;G.run.flags.tongmon=0");const vt=run("anchorNode('LOC08').id");go(vt);run("chAdd('fa:FA06',600)");
+    const cu=run("faNow('FA06').chu");run("venueDo('dungdau','thach')");ok(run("G.run.scene.type")==='combat'&&run("G.run.scene.after.ddThach")==='FA06', 'thách đấu: vào trận với người đứng đầu');
+    run("(()=>{const sc=G.run.scene;sc.over='win';finishCombat(sc);})()");ok(run("ddLa('FA06')")&&run("faNow('FA06').chu")===run("G.run.ten")&&run("vaiNow('NP15').ten")!==cu, 'thắng: lên ngôi, người cũ không còn');
+    // Hoàng quốc: soán ngôi
+    fresh("FEAT.dat=1;FEAT.tna=1;G.run.pham=0;G.run.realm=1;G.run.karma=0");const lk=run("ddKinh('FA01').id");go(lk);
+    ok(run("ddKhoa(curNode())")==='FA01'&&/Hoàng đế/.test(run("ddDanh('FA01')")), 'kinh đô Lương triều: đường lên Hoàng đế');
+    ok(/thành trấn/.test(run("(()=>{chAdd('fa:FA01',5000);return ddOpts(curNode()).find(o=>o.id==='ke').no;})()")), 'nhường ngôi cần cai quản đủ thành trấn cho nước đó');
+    run("venueDo('dungdau','thach');(()=>{const sc=G.run.scene;sc.over='win';finishCombat(sc);})()");ok(run("ddLa('FA01')")&&run("G.run.karma")<0, 'soán ngôi: lên ngôi, thiện ác giảm');
+    const k2=run("(()=>{const H=HQ_KV.flat().find(f=>f!=='FA01');return ddKinh(H)?H:null;})()");ok(!!k2&&run(`ddKinh('${k2}').type`)==='thanh', 'nước không có kinh đô neo: lấy thành phàm lớn nhất làm kinh đô');
+    // tông môn của ngươi: kế vị chưởng môn, rồi tiếp quản thành tu sĩ tông nắm
+    fresh("FEAT.dat=1;FEAT.tna=1;G.run.pham=0;G.run.realm=3");
+    const tg=run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tong'&&W().regions.flatMap(R=>R.nodes).some(x=>x.fa==='tong:'+n.id));const r=G.run;r.flags.tongmon=1;r.sectName=n.owner||n.name;return n.id;})()");
+    go(tg);ok(run("ddKhoa(curNode())")===`tong:${tg}`&&run("ddDanh(ddKhoa(curNode()))")==='Chưởng môn', 'sơn môn tông mình: đường lên Chưởng môn');
+    run("chAdd('sect:'+contentSectName(),4000)");ok(run("venueDo('dungdau','ke')")&&run(`ddLa('tong:${tg}')`), 'đủ công: kế vị Chưởng môn');
+    const tt=run(`W().regions.flatMap(R=>R.nodes).find(x=>x.fa==='tong:${tg}').id`);run(`(()=>{const r=G.run;r.scene=null;r.at=${tt};openPlace(${tt});r.scene.venue='quyen';})()`);
+    ok(run("venueDo('quyen','chu')")&&run(`nqTa(nodeById(${tt}))`), 'Chưởng môn: tiếp quản thành tu sĩ tông nắm');
+    run("die('tho')");ok(!run(`nodeById(${tt}).quyen`)&&run(`nodeById(${tt}).fa`)===`tong:${tg}`, 'qua đời: thành trấn về lại tông môn');
+    // sang kiếp: thế lực chọn người mới
+    fresh("FEAT.dat=1;G.run.pham=0;G.run.realm=2");run("ddLen('FA01','ke')");
+    run("die('tho')");ok(!run("W().fa.FA01.chuTa"), 'qua đời: thế lực không còn ghi ngươi đứng đầu');
+  },
   // Việc 8: hai dòng công pháp nay có luật — Thi tu đào mộ, Huyễn thuật cắt dấu kẻ đuổi
   thi_huyen() {
     fresh("FEAT.truy=1;G.run.pham=0;G.run.realm=1;G.run.st=99999");
