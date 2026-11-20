@@ -1,12 +1,12 @@
 // Nguồn chuẩn: TRAIT. Luật xử lý ở src/game/core/02-tin-don-giang-ho.js.
 const TRAIT = [
-  {id:'kiemtam',n:'Kiếm tâm',i:'🗡️',fx:{elP:{kim:25}},d:'Pháp thuật hệ Kim +25%'},
+  {id:'kiemtam',n:'Kiếm tâm',i:'🗡️',fx:{elP:{kim:25}},d:'Tăng 25% sức đánh của pháp thuật hệ Kim.'},
   {id:'thanluc',n:'Thiên sinh thần lực',i:'💪',fx:{atkP:15},d:'Công +15%'},
   {id:'menhcung',n:'Mệnh cứng',i:'🪨',fx:{hpP:20},d:'Khí huyết +20%'},
   {id:'chithuy',n:'Tâm như chỉ thủy',i:'🪷',fx:{tam:3,tammaRes:50},d:'Đạo tâm +3, tâm ma tăng chậm một nửa'},
-  {id:'linhnhan',n:'Linh nhãn',i:'👁️',fx:{chkP:10},d:'Mọi phép thử +10%'},
+  {id:'linhnhan',n:'Linh nhãn',i:'👁️',fx:{chkP:10},d:'Cộng 10% vào cơ hội qua phép thử.'},
   {id:'luoi',n:'Ba tấc lưỡi',i:'👅',fx:{shopP:20},d:'Mua đồ rẻ 20%'},
-  {id:'yeuhuyet',n:'Huyết mạch yêu tộc',i:'🐾',fx:{regenHp:3},d:'Mỗi lượt hồi 3% khí huyết'},
+  {id:'yeuhuyet',n:'Huyết mạch yêu tộc',i:'🐾',fx:{regenHp:3},d:'Hồi 3% khí huyết mỗi lượt trong trận.'},
   {id:'thiendo',n:'Thiên đố anh tài',i:'🌩️',fx:{ngo:5,lifeP:-15},d:'Ngộ tính +5, thọ nguyên −15%'},
   {id:'phuctinh',n:'Phúc tinh cao chiếu',i:'🍀',fx:{van:5},d:'Khí vận +5'},
   {id:'hoalinh',n:'Hỏa linh thể',i:'🔥',fx:{elP:{hoa:25},burnHit:0.15},d:'Hỏa +25%, mỗi đòn gây thêm Thiêu'},
@@ -15,7 +15,7 @@ const TRAIT = [
   {id:'bachdoc',n:'Bách độc bất xâm',i:'🧪',fx:{poisonImm:1,hpP:5},d:'Miễn nhiễm độc'},
   {id:'ngodao',n:'Ngộ đạo nhanh',i:'💫',fx:{tvP:20},d:'Tu vi nhận thêm 20%'},
   {id:'khotu',n:'Khổ tu',i:'⛰️',fx:{bqP:50},d:'Bế quan hiệu quả gấp rưỡi'},
-  {id:'sattinh',n:'Sát tinh',i:'☄️',fx:{execute:30},d:'Đánh kẻ dưới 30% khí huyết +30%'},
+  {id:'sattinh',n:'Sát tinh',i:'☄️',fx:{execute:30},d:'Đòn đánh vào địch còn dưới 30% khí huyết gây thêm 30% sát thương.'},
   {id:'mongdu',n:'Mộng du tiên cảnh',i:'🌙',fx:{tvP:10,tam:2},d:'Tu vi +10%, đạo tâm +2'},
   {id:'huyenco',n:'Huyền cơ',i:'🎐',fx:{mpP:20,mpCost:-15},d:'Linh lực +20%, pháp thuật tốn ít hơn 15%'},
 ];

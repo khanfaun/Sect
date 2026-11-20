@@ -781,7 +781,7 @@
         {
           "i": "✋",
           "l": "Hong khô muối ngay trước mặt dân chợ",
-          "t": "Ngươi hong muối bằng linh lực đến rát lòng bàn tay. Bao nhẹ đi rõ rệt, người thu thuế vẫn định ghi số cũ. Dân chợ vây lại đòi xem sổ; hắn buộc phải cân lại.",
+          "t": "Ngươi hong muối bằng linh lực đến rát lòng bàn tay. Bao nhẹ đi rõ rệt, người thu thuế vẫn định ghi số cũ. Dân chợ vây lại đòi xem sổ, buộc hắn cân lại.",
           "cost": {
             "mp": "20%"
           },
@@ -1858,7 +1858,7 @@
           "alignment": "context"
         }
       },
-      "text": "Tán tu {$a.ten} nhận đưa ngói lên mái, còn bà lợp nhà {$b.ten} phải tự leo thang xếp từng viên. Hắn thấy ngươi thì chào đồng đạo, khoe mình làm chưa đầy một khắc. Bà ở trên mái gọi xuống: “Còn nửa ngày buộc ngói, tiên trưởng có tính không?”",
+      "text": "Tán tu {$a.ten} nhận đưa ngói lên mái, còn bà lợp nhà {$b.ten} phải tự leo thang xếp từng viên. Hắn chào ngươi rồi khoe vừa đưa ngói lên trong chốc lát. Bà ở trên mái gọi xuống: “Còn nửa ngày buộc ngói, tiên trưởng có tính không?”",
       "choices": [
         {
           "i": "🗣️",

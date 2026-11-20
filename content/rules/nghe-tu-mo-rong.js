@@ -9,11 +9,11 @@ Object.assign(TU_NGHE,{
   TU18:{n:'Thi tu',cp:'cp_tu18',pm:'thi',res:'Thi khí',loc:'LOC14',t:['phe','hoang'],phi:20,mr:1,dh:'ta',hd:{l:'Thu liệm xác vô chủ ở bãi chiến cũ',ngay:4,von:3,cong:8,noi:['phe','ma','dong']}},
   TU19:{n:'Phật tu',cp:'cp_tu19',pm:'phat',res:'Nguyện lực',loc:'LOC12',t:['linhdia','nui'],phi:15,mr:1,dh:'chinh',hd:{l:'Siêu độ vong hồn một làng chết dịch',ngay:7,von:2,cong:6,noi:['tran','phe'],deed:'sieu_do',res:1}},
   TU20:{n:'Nho tu',cp:'cp_tu20',pm:'nho',res:'Hạo nhiên khí',loc:'LOC02',t:['thanh'],phi:20,mr:1,dh:'chinh',hdMax:1,hd:{l:'Dạy chữ một mùa cho trẻ trong trấn',ngay:30,von:2,cong:10,noi:['tran','thanh'],res:1}},
-  TU21:{n:'Thiên cơ sư',cp:'cp_tu21',pm:'thienco',res:'Quẻ tượng',loc:'LOC05',t:['linhdia','thanh'],phi:30,mr:1,hd:{l:'Xem quẻ cho một nhà buôn lớn',ngay:2,von:3,cong:9,noi:['thanh','cho'],tho:0.5}},
+  TU21:{n:'Thiên cơ sư',cp:'cp_tu21',pm:'thienco',res:'Quẻ tượng',loc:'LOC05',t:['linhdia','thanh'],phi:30,mr:1,hd:{l:'Xem quẻ đường làm ăn cho nhà buôn',ngay:2,von:3,cong:9,noi:['thanh','cho'],tho:0.5}},
   TU22:{n:'Thương tu',cp:'cp_tu22',pm:'thuong',res:'Tài khí',loc:'LOC03',t:['cho','thanh'],phi:25,mr:1,hd:{l:'Áp tải một chuyến linh vật qua hai khu',ngay:10,von:12,cong:21,noi:['cho','thanh']}},
   TU23:{n:'Lôi pháp sư',cp:'cp_tu23',pm:'loi',res:'Lôi ấn',loc:'LOC15',t:['thien','nui'],phi:25,mr:1,dh:'chinh',hd:{l:'Trừ tà cho một ngôi nhà bị ám',ngay:3,von:3,cong:8,noi:['tran','thanh','phe']}},
-  TU24:{n:'Huyễn thuật sư',cp:'cp_tu24',pm:'huyen',res:'Huyễn lực',loc:'LOC04',t:['tran','phe'],phi:20,mr:1,hd:{l:'Dựng ảo cảnh cho một buổi tế lễ',ngay:2,von:2,cong:6,noi:['thanh','tran']}},
-  TU25:{n:'Thôn phệ tu',cp:'cp_tu25',pm:'thon',res:'Thôn phệ',loc:'LOC07',t:['ma','dong'],phi:25,mr:1,dh:'ta',hd:{l:'Nuốt tà khí rò ra từ một mỏ cũ',ngay:4,von:3,cong:9,noi:['khoang','ma','dong'],tamma:3}},
+  TU24:{n:'Huyễn thuật sư',cp:'cp_tu24',pm:'huyen',res:'Huyễn lực',loc:'LOC04',t:['tran','phe'],phi:20,mr:1,hd:{l:'Dựng cảnh bằng huyễn thuật cho buổi tế',ngay:2,von:2,cong:6,noi:['thanh','tran']}},
+  TU25:{n:'Thôn phệ tu',cp:'cp_tu25',pm:'thon',res:'Thôn phệ',loc:'LOC07',t:['ma','dong'],phi:25,mr:1,dh:'ta',hd:{l:'Thu luồng tà khí rò từ mỏ cũ',ngay:4,von:3,cong:9,noi:['khoang','ma','dong'],tamma:3}},
 });
 // HN A.16: bí truyền ngoại lệ luân hồi, tham ngộ ở nơi neo (loc) khi một nghề trong "nghe" đã tới tầng bốn.
 //   ngay: số ngày tham ngộ; phi: linh thạch; pick: kiếp sau được chọn một trong ba lá số; mem: kiếp sau nhớ chuyên môn chính (học lại miễn phí, nửa thời gian)

@@ -2,7 +2,7 @@
   "dm.triDat": "Chuông Phù Sinh ngân một tiếng trong sổ luân hồi: điều \"{{0}}\" nay đã có đủ chứng.",
   "dm.triDau": "Một dấu vết nữa cho điều \"{{0}}\" được ghi vào sổ luân hồi.",
   "dm.triMuc.0": "chưa có dấu nào",
-  "dm.triMuc.1": "mới có một dấu, chưa đủ chứng",
+  "dm.triMuc.1": "đã có một dấu, còn thiếu chứng cứ",
   "dm.triMuc.2": "đã đủ hai chứng độc lập",
   "dm.mongNhat": "Chuông Phù Sinh ngân. Mộng Ấn \"{{0}}\": {{1}}",
   "dm.mongLoi": "Một mảnh mộng chợt hiện rồi tắt, để lại cảm giác đã từng. Sổ luân hồi ghi: \"{{0}}\" — {{1}}",
@@ -97,7 +97,7 @@
   "dm.minhChua": "Họ chưa thân với ngươi tới mức kết minh.",
   "dm.minhT": "Lời hứa đã trao, có người làm chứng: ngươi và {{0}} nay là đồng minh.",
   "dm.dkD": "Điều kiện:\n{{0}}",
-  "dm.thieuDk": "Chưa đủ điều kiện.",
+  "dm.thieuDk": "Nghi thức chưa đủ điều kiện.",
   "dm.ng01D": "Ở lại bảy ngày hiệu chỉnh cửa ở nền đài. Xong thì lần độ kiếp phi thăng tới sẽ mở ra ngoài giấc mộng, không về bến nữa.\n\n{{0}}",
   "dm.ng01T": "Cửa đá đã được hiệu chỉnh, im lặng như một con mắt nhắm. Khi ngươi vượt thiên kiếp cuối, nó sẽ mở.",
   "dm.ng02mD": "Bảy ngày dựng một mô hình nhỏ chứng minh trục có thể chạy bằng ký ức người ta tự nguyện gửi lại.",
@@ -139,6 +139,6 @@
   "dm.kyTm": "tâm ma lắng xuống",
   "dm.kyHp": "khí huyết",
   "dm.kyMp": "linh lực",
-  "dm.dl02Du": "Mạch sâu đã mở. Đủ ba điều, đủ quyền khoá: Diệt Thế không còn dừng được.",
-  "dm.dl02Thieu": "Mạch sâu vỡ mà ngươi chưa đủ hiểu. Sức huỷ tràn ra {{0}} khu đất thành đất ma."
+  "dm.dl02Du": "Ngươi đã có đủ tri thức và quyền khóa. Mạch sâu mở, nghi thức Diệt Thế không còn dừng được.",
+  "dm.dl02Thieu": "Mạch sâu vỡ trước khi ngươi kịp khóa. Sức hủy tràn ra biến {{0}} khu thành đất ma."
 }

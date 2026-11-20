@@ -1,10 +1,10 @@
 {
   "ntu.resTip": "Tài nguyên nghề: {{0}}",
   "ntu.xpTip": "Tiến bộ nghề {{0}}",
-  "ntu.danhUp": "Dân vùng nể",
-  "ntu.danhDn": "Dân vùng e dè",
-  "ntu.danhTip": "Danh tiếng của ngươi với dân quanh vùng này",
-  "ntu.woundTip": "Vết thương từ việc nghề",
+  "ntu.danhUp": "Dân trong vùng kính nể",
+  "ntu.danhDn": "Dân trong vùng e dè",
+  "ntu.danhTip": "Danh tiếng của ngươi trong vùng",
+  "ntu.woundTip": "Thương thế do việc nghề gây ra",
   "ntu.ketH": "Kết cục nghề tu",
   "ntu.ketLog": "Kết cục nghề {{0}}: {{1}}."
 }
