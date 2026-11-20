@@ -2,21 +2,25 @@
 // Mọi hộp thoại, chân trang, biểu tượng đã ẩn (data-asc, data-tlfx). Hết thời gian thì tự đóng, hộp kết quả trắc linh hiện lại.
 import { PS } from '../html';
 
-// Dị tượng nhẹ cho song / tam / tứ / tạp linh căn: các quầng sáng theo hệ quay quanh viên đá, càng nhiều hệ càng rực (trừ tạp: đục)
+// Dị tượng nhẹ, mạnh→yếu: Biến dị > Song > Tam > Tứ > Tạp (bậc L.rk). Quầng sáng theo hệ quay quanh viên đá;
+// bậc càng cao càng nhiều tia, nhiều vòng sáng, càng rực; Biến dị thêm cột sáng + chớp dị khí; Tạp đục và tắt nhanh.
 function TracLinhNhe({ fx, L, ms }) {
   const { EL_COL, ACT, render } = PS;
-  const els = (fx.els && fx.els.length ? fx.els : Array.from({ length: L.n }, () => 'vo')).slice(0, 5);
+  const T = PS.tlFxlText(fx);
+  const base = (fx.els && fx.els.length ? fx.els : ['vo']).slice(0, 5);
+  const els = L.orbs ? Array.from({ length: L.orbs }, (_, i) => base[i % base.length]) : base;
   const col = e => (EL_COL && EL_COL[e]) || '#c9b27a';
   return (
-    <div className={'tlfx tlfx-lt tlfx-' + fx.k} style={{ '--tlms': ms + 'ms', '--c1': col(els[0]), '--c2': col(els[1] || els[0]) }} onClick={() => { ACT.tlFxDone(); render(); }}>
+    <div className={'tlfx tlfx-lt tlfx-' + fx.k + ' lt-rk' + L.rk + (fx.k === 'bien' && base[0] ? ' lt-' + base[0] : '')} data-rk={L.rk} style={{ '--tlms': ms + 'ms', '--c1': col(base[0]), '--c2': col(base[1] || base[0]) }} onClick={() => { ACT.tlFxDone(); render(); }}>
       <div className="lt-wash"></div>
-      {fx.k === 'tu' && <div className="lt-rays">{Array.from({ length: 8 }, (_, i) => <i key={i} style={{ '--a': i * 45 + 'deg' }} />)}</div>}
+      {L.rays > 0 && <div className="lt-rays">{Array.from({ length: L.rays }, (_, i) => <i key={i} style={{ '--a': i * 360 / L.rays + 'deg' }} />)}</div>}
+      {fx.k === 'bien' && <><div className="lt-beam"></div><div className="lt-flash"></div></>}
       <div className="lt-orbit">{els.map((e, i) => <i key={i} style={{ '--a': i * 360 / els.length + 'deg', '--oc': col(e), '--od': i * 0.12 + 's' }} />)}</div>
-      {fx.k !== 'song' && <div className="lt-ring r1"></div>}{(fx.k === 'tu' || fx.k === 'tap') && <div className="lt-ring r2"></div>}
+      {Array.from({ length: L.rings }, (_, i) => <div key={i} className={'lt-ring r' + (i + 1)}></div>)}
       <div className="tlfx-in">
-        <small>{L.s}</small>
-        <h2>{L.t}</h2>
-        {L.l.map((t, i) => <p key={i} style={{ animationDelay: '.5s' }}>{t}</p>)}
+        <small>{T.s}</small>
+        <h2>{T.t}</h2>
+        {T.l.map((t, i) => <p key={i} style={{ animationDelay: '.5s' }}>{t}</p>)}
       </div>
     </div>
   );

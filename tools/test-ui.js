@@ -511,6 +511,24 @@ const TESTS = {
     ok(await p.locator('[data-act="pact"][data-arg="sanbat"]').count()===1, 'hoang dã có nút săn bắt, hái lượm');
     ok(p.errs.length===0, 'không có lỗi trang: '+p.errs.join(' | '));
   },
+  // dị tượng trắc linh theo thứ bậc: Thiên > Địa > Biến dị > Song > Tam > Tứ > Tạp
+  async tlfx_bac(p) {
+    ok(await ev(p, () => TL_FX.thien.ms>TL_FX.dia.ms&&TL_FX.dia.ms>TL_FXL.bien.ms), 'Thiên > Địa > Biến dị (thời gian)');
+    const order=['bien','song','tam','tu','tap'];const info={};
+    for(const k of order){
+      await ev(p, (k) => {CFG.anim=true;const r=G.run;r.scene=null;UI.modal=null;r.tlFx=null;r.root={id:k,els:k==='bien'?['loi']:k==='song'?['kim','moc']:k==='tam'?['kim','moc','thuy']:k==='tu'?['kim','moc','thuy','hoa']:NGUHANH.slice(),q:'thuong'};r.rootKnown=0;tlResult('dusi');render();}, k);
+      await p.waitForTimeout(150);
+      info[k]=await ev(p, (k) => {const d=document.querySelector('.tlfx.tlfx-lt.tlfx-'+k);return d?{rk:+d.dataset.rk,rays:d.querySelectorAll('.lt-rays i').length,rings:d.querySelectorAll('.lt-ring').length,orbs:d.querySelectorAll('.lt-orbit i').length,ms:TL_FXL[k].ms,beam:d.querySelectorAll('.lt-beam,.lt-flash').length,txt:d.innerText,de:document.documentElement.dataset.tlfx}:null;}, k);
+      ok(!!info[k]&&info[k].de===k, 'hiện dị tượng '+k);
+      await ev(p, () => {ACT.tlFxDone();render();});
+    }
+    ok(order.every((k,i)=>!i||(info[order[i-1]].rk>info[k].rk&&info[order[i-1]].ms>info[k].ms)), 'bậc và thời gian giảm dần Biến dị→Tạp');
+    ok(order.every((k,i)=>!i||info[order[i-1]].rays>=info[k].rays&&info[order[i-1]].rings>=info[k].rings), 'tia sáng, vòng sáng không tăng khi bậc giảm');
+    ok(info.bien.beam===2&&info.bien.rays>info.song.rays&&info.bien.orbs>=6&&/Biến dị linh căn/.test(info.bien.txt)&&/điện/.test(info.bien.txt), 'Biến dị (lôi): cột sáng + chớp, nhiều tia nhất, lời kể riêng');
+    ok(/Ngũ hành tạp linh căn/.test(info.tap.txt)&&info.tap.rays===0, 'Tạp: yếu nhất, không có tia');
+    ok(await ev(p, () => !document.querySelector('.tlfx')&&!G.run.tlFx), 'đóng hết hiệu ứng');
+    ok(p.errs.length===0, 'không có lỗi trang: '+p.errs.join(' | '));
+  },
   // Sửa-D: chú thích nằm sát chỗ rê/bấm ở cỡ máy tính (trước đây lệch vì #tip bị zoom --dz mà left/top không chia lại)
   async tooltip_vitri(p) {
     for (const [w, h] of [[1440, 900], [1920, 1080], [1280, 720]]) {

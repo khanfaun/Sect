@@ -841,6 +841,16 @@ const TESTS = {
     ok(run('G.run.base.van=KY_BIG_VAN+5;kyBigOpen()') === true, 'khí vận cao: kỳ ngộ lớn mở');
   },
   // thế giới mở: một bản đồ liền, năm đại khu vực, đi bộ trên cạn, tầm nhìn theo địa hình, độ khó theo cảnh giới
+  mo_tam_nhin() {
+    // vừa đầu thai (kiếp đầu và kiếp sau) hoặc nạp bản lưu: bản đồ mở sẵn trong tầm thần thức, không đợi đi
+    const chk=()=>run("(()=>{const r=G.run;const p=playerMapXY();const L=visCells(hexAt(p[0],p[1]),visR());const vis=VIS.reduce((a,b)=>a+b,0);return [L.length,L.every(c=>VIS[c]&&VNOW[c]&&!VT[c]),vis,(r.visS.match(/[^A]/g)||[]).length,r.moving==null];})()");
+    run("G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};NK.on=true;NK.clear();genBirth();newRun(G.birth.cards[0])");
+    let a=chk();ok(a[0]>0&&a[1]&&a[2]>=a[0]&&a[3]>0&&a[4], 'kiếp đầu: mở sẵn '+a[0]+' ô trong tầm thần thức, hiện ngay, đã lưu');
+    ok(run("NK.count('mo.vis0')")>=1, 'ghi nhật ký mo.vis0');
+    run("die('combat',{n:'thử'});if(G.over&&G.over.ben)benUong();G.over=null;G.screen='title';genBirth();newRun(G.birth.cards[0])");
+    a=chk();ok(run("G.run.kiep")===2&&a[0]>0&&a[1]&&a[3]>0, 'kiếp sau: mở sẵn '+a[0]+' ô ngay khi đầu thai');
+    run("(()=>{const s=G.run.visS;VIS=null;visReset();G.run.visS=s;VIS_K='';visOpen();})()");a=chk();ok(a[0]>0&&a[1], 'nạp lại: vẫn thấy vùng quanh mình');
+  },
   themo() {
     fresh('');
     ok(run('W().mo') === 1, 'thế giới đã chuyển sang bản đồ liền');
@@ -1340,6 +1350,18 @@ const TESTS = {
     // ưu tiên cùng phe
     ok(run("(()=>{const L=['a','b','c','d'];const P={a:'ta',b:'chinh',c:'chinh',d:'ta'};const x=tlPickPpl(L,2,'chinh',n=>P[n]);return x.every(n=>P[n]==='chinh')})()"), 'ưu tiên người cùng phe với tông');
   },
+  // Phẩm linh căn là thật (ROOT_Q nhân tốc độ tu); chữ dị tượng nhẹ các bậc nằm trong content/text (tlfx.*)
+  linhcan() {
+    fresh();
+    ok(run("ROOT_Q.map(q=>q.id).join()")==='khuyet,thuong,thuan,vien', 'bốn phẩm: Khuyết, Thường, Thuần, Viên Mãn');
+    const m=JSON.parse(run("JSON.stringify(ROOT_Q.map(q=>rootView({id:'song',els:['kim','moc'],q:q.id}).m))"));
+    ok(m[0]<m[1]&&m[1]<m[2]&&m[2]<m[3], 'phẩm càng cao tu càng nhanh: '+m.join(' < '));
+    ok(run("rootView({id:'song',els:['kim','moc']}).m")===m[1], 'bản lưu cũ không có phẩm = như phẩm Thường');
+    ok(run("(()=>{const c={};for(let i=0;i<4000;i++){const q=genRoot().q;c[q]=(c[q]||0)+1;}return c.thuong>c.khuyet&&c.khuyet>c.thuan})()"), 'phẩm rút theo tỉ lệ (Thường nhiều nhất)');
+    run("G.run.root={id:'song',els:['kim','moc'],q:'thuan'};G.run.rootKnown=1");ok(/phẩm Thuần/.test(run("rootLabel()")), 'tên hiển thị có phẩm: '+run("rootLabel()"));
+    for(const k of ['bien','song','tam','tu','tap'])ok(run(`CONTENT_TEXT['tlfx.title.${k}']!=null&&CONTENT_TEXT['tlfx.sub.${k}']!=null`), 'có chữ dị tượng '+k);
+    for(const e of ['loi','bang','phong','x'])ok(run(`CONTENT_TEXT['tlfx.lt.bien.${e}']!=null`), 'Biến dị: lời kể riêng '+e);
+  },
   quen_sach() {
     fresh();
     ok(run("!UPG.find(u=>u.id==='ky'||u.id==='kytp')"), 'không còn nâng cấp Ký ức công pháp / tâm pháp');
@@ -1644,7 +1666,7 @@ const TESTS = {
     fr();ok(run("needFood(G.run)"), 'phàm nhân phải ăn');
     // Sửa lỗi đói: thang cũ chết ở ngày 15 → nay thieu 30 / doi 60 / la 150 / kiet 300 / canh 630 / chết 660 ngày
     run("for(let i=0;i<14;i++)advanceTime(24)");ok(!!run("G.run")&&run("G.run.doi")===14&&run("anState()")==='no', '14 ngày không ăn: còn sống, mới thiếu ăn ('+run("G.run&&G.run.doi")+')');
-    ok(run("NK.count('an.doi')")===14&&run("G.run.no")<100, 'đếm từng ngày thiếu ăn, có báo một tuần');
+    ok(run("NK.count('an.doi')")===14&&run("G.run.no")<100, 'đếm từng ngày thiếu ăn');
     run("advanceTime(46*24)");ok(run("anState()")==='doi'&&run("anRgMul()")<1, '60 ngày: đói, hồi phục chậm');
     run("advanceTime(90*24)");ok(run("anState()")==='la'&&run("S().maxHp")<run("(()=>{const d=G.run.doi;G.run.doi=0;const m=S().maxHp;G.run.doi=d;return m})()"), '150 ngày: đói lả, khí huyết tối đa giảm');
     run("advanceTime(509*24)");ok(!!run("G.run")&&run("G.run.doi")===659&&run("anState()")==='kiet', '659 ngày: kiệt sức nhưng còn sống');
@@ -1661,19 +1683,22 @@ const TESTS = {
     fr();const qa=run("G.run.queAt");run("delete G.run._anV1;delete G.run.no;delete G.run.anTu;delete G.run.queAt;run2()");ok(run("G.run.no")===100&&run("G.run.anTu")===1, 'bản lưu cũ: no đủ, tự lo cơm');
     ok(run("G.run.queAt")===qa, 'bản lưu cũ: tìm lại nút quê theo tên');
     fr();run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.bac=1000;G.run.anMuc='thuong'})();advanceTime(24)");
-    ok(run("G.run.bac")===400&&run("G.run.anCov")===29, 'đủ tiền: mua lương thực cả tháng 600 xu');
+    ok(run("G.run.bac")===1000-run("anCost(G.run)")*30&&run("G.run.anCov")===29, 'đủ tiền: mua lương thực cả tháng ('+run("anCost(G.run)*30")+' xu, thường là 600)');
     run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)&&!n.dp);G.run.at=n.id;})();advanceTime(29*24)");ok(run("G.run.doi")===0&&run("G.run.anCov")===0, 'mang lương thực tháng theo người: 29 ngày ngoài hoang không đói');
     fr();run("G.run.pham=0;G.run.realm=0;G.run._inBq=1;advanceTime(30*24);G.run._inBq=0");ok(run("G.run.doi")===5, 'Luyện Khí bế quan: đói chậm ×1/3 (30 ngày thiếu '+run("G.run.doi")+')');
     fr();run("G.run.pham=0;G.run.realm=0;G.run.anCham=W().t+90*HD;advanceTime(30*24)");ok(run("G.run.doi")===7, 'sau bế quan: đói chậm ×1/2 ('+run("G.run.doi")+')');
     fr();run("delete G.run._anV2;G.run.doi=200;run2()");ok(run("G.run.doi")===0, 'bản lưu cũ đang đói: nới về no');
     fr();run("G.run.anAcc=0;advanceTime(800*24)");ok(!run("G.run")&&run("G.over.cause")==='doi', 'nhảy dài 800 ngày không ăn: chết đói, không treo');
-    // báo đói một lần mỗi mốc: đang đi đường thì ăn rồi đói lại cũng không báo lại; ăn lúc đứng yên thì đặt lại
-    fr();run("G.run.doi=29;G.run.anBao=0;advanceTime(24)");ok(run("NK.count('an.bao')")===1&&run("G.run.anBao")===1, 'vừa thiếu ăn: báo một lần');
-    run("(()=>{const r=G.run;r.moving={path:[r.at,neighbors(r.at)[0]],seg:0,prog:0};r.anCov=1;advanceTime(24);r.doi=29;advanceTime(24);})()");
-    ok(run("G.run.doi")===30&&run("NK.count('an.bao')")===1, 'đang đi đường: ăn rồi đói lại không báo lặp');
-    run("(()=>{const r=G.run;r.moving=null;r.anCov=1;advanceTime(24);r.doi=29;advanceTime(24);})()");ok(run("NK.count('an.bao')")===2, 'ăn lúc đứng yên rồi đói lại: báo lại');
-    run("G.run.doi=59;advanceTime(24)");ok(run("NK.count('an.bao')")===3&&run("G.run.anBao")===2, 'rơi xuống mốc đói: báo mốc mới');
-    fr();run("delete G.run.anBao;G.run.doi=100;advanceTime(24)");ok(run("NK.count('an.bao')")===1, 'bản lưu cũ không có anBao: vẫn chạy');
+    // báo đói thưa: mốc nhẹ (thiếu/đói/lả) không báo; mốc nặng (kiệt, sắp chết) mỗi mốc một lần; có khoảng nghỉ
+    fr();run("G.run.doi=29;G.run.anBao=0;advanceTime(24);G.run.doi=59;advanceTime(24);G.run.doi=149;advanceTime(24)");ok(run("NK.count('an.bao')")===0&&run("G.run.anBao")===3, 'mốc nhẹ (thiếu, đói, lả): không báo');
+    run("G.run.doi=299;advanceTime(24)");ok(run("NK.count('an.bao')")===1&&run("G.run.anBao")===4, 'kiệt sức: báo một lần');
+    run("for(let i=0;i<20;i++)advanceTime(24)");ok(run("NK.count('an.bao')")===1, 'kiệt kéo dài: không báo lặp');
+    run("(()=>{const r=G.run;r.moving={path:[r.at,neighbors(r.at)[0]],seg:0,prog:0};r.anCov=1;advanceTime(24);r.doi=299;advanceTime(24);})()");
+    ok(run("G.run.doi")===300&&run("NK.count('an.bao')")===1, 'đang đi đường: ăn rồi đói lại không báo lặp');
+    run("(()=>{const r=G.run;r.moving=null;r.anCov=1;advanceTime(24);r.doi=299;advanceTime(24);})()");ok(run("NK.count('an.bao')")===1&&run("NK.count('an.baoNghi')")===1, 'ăn rồi đói lại ngay: trong khoảng nghỉ thì không báo');
+    run("(()=>{const r=G.run;r.anCov=1;advanceTime(24);r.anBaoT=W().t-(AN.baoNghi+1)*HD;r.doi=299;advanceTime(24);})()");ok(run("NK.count('an.bao')")===2, 'qua khoảng nghỉ: báo lại');
+    run("G.run.doi=629;advanceTime(24)");ok(run("NK.count('an.bao')")===3&&run("G.run.anBao")===5, 'sắp chết đói: luôn báo');
+    fr();run("delete G.run.anBao;delete G.run.anBaoT;G.run.doi=300;advanceTime(24)");ok(run("NK.count('an.bao')")===1, 'bản lưu cũ không có anBao: vẫn chạy');
     // trước khi lên đường: ước lương thực, nguy cơ chết đói cao thì hỏi lại
     fr();const far=run(`(()=>{const r=G.run;let best=null;for(const R of W().regions)for(const n of R.nodes){if(n.id===r.at)continue;const p=findPath(r.at,n.id);if(!p)continue;const d=travelHours(p)/24;if(d>=15&&d<=80&&(!best||d<best[1]))best=[n.id,d];}return best;})()`);
     ok(!!far, 'có nơi xa 15–80 ngày đường ('+(far&&Math.round(far[1]))+')');
