@@ -4,7 +4,7 @@
     "n": "Lá thư chưa gửi",
     "i": "✉️",
     "dang": "Thư",
-    "use": "Lá thư nhặt trên thuyền ma; kỷ vật cốt truyện, chưa có nhiệm vụ gửi thư riêng.",
+    "use": "Kỷ vật nhặt trên thuyền ma. Hiện chưa có việc chuyển thư.",
     "d": "Phong bì ố vàng, nét chữ run run: \"Gửi mẹ.\"",
     "status": "active"
   },
@@ -14,7 +14,7 @@
     "i": "✉️",
     "dang": "Thư",
     "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Lời Nhắn Qua Nước · dùng để tìm Khoen Đồng Của Người Chèo",
-    "d": "Nếp gấp còn đọng bùn.",
+    "d": "Bùn khô bám trong nếp gấp.",
     "status": "reference"
   },
   {
@@ -32,7 +32,7 @@
     "i": "🧩",
     "dang": "Mảnh vỡ",
     "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Viên Gạch Đếm Bước · dùng để tìm Chìa Dưới Bậc Gạch",
-    "d": "Một mặt còn in vân rơm.",
+    "d": "Trên mặt còn in dấu sợi rơm.",
     "status": "reference"
   },
   {
