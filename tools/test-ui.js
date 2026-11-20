@@ -737,6 +737,22 @@ const TESTS = {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');
   },
+  // gói GPT đợt năm: sự kiện nghề tu hiện bằng khung kỳ ngộ; kết cục nghề tu ở màn hết kiếp
+  async nghe_tu_sk(p) {
+    await ev(p, () => {const r=G.run;r.pham=0;r.rootKnown=1;r.root={id:'tap',els:['kim','moc'],q:'thuong'};r.st=9999;r.scene=null;G._ngNoEv=1;lkTang=()=>9;UI.modal=null;UI.panel=null;
+      tuHoc('TU17',0);r.scene=null;G.screen='map';ntMo('TU17',0);render();});
+    await p.waitForTimeout(200);
+    const t = await ev(p, () => document.body.innerText);
+    ok(/Vò cổ đầu/.test(t) && !/\{LOC/.test(t), 'hộp sự kiện nghề "Vò cổ đầu" hiện, mã nơi đã thay chữ');
+    ok(await ev(p, () => document.querySelectorAll('[data-act="kyPick"]').length) === 2, 'hai lựa chọn');
+    await p.locator('[data-act="kyPick"][data-arg="0"]').click();await p.waitForTimeout(150);
+    ok(await ev(p, () => G.run.ntu.c['TU17.S01']===0 && document.body.innerText.includes(tyT(NTU_DATA.TU17.sk[0].c[0].t).slice(0,30))), 'chọn xong: lời kết quả hiện');
+    await ev(p, () => {const r=G.run;r.scene=null;hdAdd(40,0,'x');r.ntu.c={'TU17.S01':0,'TU17.S02':0,'TU17.S03':0};r.gbXong=1;die('toahoa');render();});
+    for (let i = 0; i < 40 && await ev(p, () => UI.inkBusy); i++) await p.waitForTimeout(100);
+    await p.waitForTimeout(300);
+    const o = await ev(p, () => document.body.innerText), ten = await ev(p, () => NTU_DATA.TU17.ket.K03.ten);
+    ok(/Kết cục nghề tu/.test(o) && o.includes(ten), 'màn hết kiếp: kết cục nghề tu "' + ten + '"');
+  },
 };
 
 (async () => {

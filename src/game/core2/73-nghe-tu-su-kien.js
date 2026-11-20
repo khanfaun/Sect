@@ -4,7 +4,7 @@
 //   cách nhau ít nhất TU_SK.gap tháng (kể cả từ lúc mới vào nghề), khả năng TU_SK.p. Mỗi kiếp mỗi sự kiện một lần. Hộp thoại dùng khung kỳ ngộ (sp:1).
 // Kết cục: hết kiếp → xét TU_KET theo thứ tự cho nghề chính rồi nghề phụ, hiện ở màn hết kiếp (G.over.tuKet), cạnh kết cục nghề phàm.
 // Trường lưu (bản lưu cũ không có vẫn chạy): r.ntu={c:{'TUxx.Syy': chỉ số lựa chọn (−1 đang mở)}, t: lúc sự kiện cuối, b:{TUxx: lúc bắt đầu đếm}, vo: văn tâm đã vỡ, tk: số lần thiên khiển}
-FEAT.ntu=0;
+FEAT.ntu=1;
 const NTU=typeof NTU_DATA!=='undefined'&&NTU_DATA?NTU_DATA:{};
 function ntT(k,a){return contentText('ntu.'+k,a);}
 function ntSt(r){r=r||G.run;if(!r)return null;if(!r.ntu||typeof r.ntu!=='object')r.ntu={};const S=r.ntu;
