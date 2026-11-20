@@ -19,18 +19,18 @@ const CONG_TRINH={
   tien_trang:{n:'Tiền trang',nhom:'Sự vụ',tu:0,acts:['vay'],noi:['tran','thanh'],xay:null,pha:{h:6},hau:'Không còn ai cho vay ở đây.'},
   tap_hoa:{n:'Tạp hóa',nhom:'Mua bán',tu:0,acts:['taphoa'],noi:['tran','cho'],xay:null,pha:{h:3},hau:'Mất chỗ mua đồ phàm.'},
   lai_buon:{n:'Bến hàng lái buôn',nhom:'Mua bán',tu:0,acts:['laibuon'],noi:['tran','thanh','cho'],xay:null,pha:{h:3},hau:'Lái buôn không ghé nữa.'},
-  phuong_thi:{n:'Phường thị',nhom:'Mua bán',tu:0,acts:['shop'],noi:['thanh'],xay:null,pha:{h:8},hau:'Mất chợ đồ tu sĩ.'},
+  phuong_thi:{n:'Phường thị',nhom:'Mua bán',tu:0,acts:['shop'],noi:['thanh'],xay:null,pha:{h:8},hau:'Mất chỗ mua bán đồ tu sĩ.'},
   quy_thi:{n:'Quỷ thị',nhom:'Mua bán',tu:0,acts:['ghost'],noi:['thanh','ma'],xay:null,pha:{h:6},hau:'Mất chợ đêm.'},
   am_hoi:{n:'Hầm Ám Hội',nhom:'Mua bán',tu:0,acts:['amhoi'],noi:['thanh','ma'],xay:null,pha:{h:6},hau:'U Minh Ám Hội không họp ở đây nữa.'},
   doi_lt:{n:'Ngân phường',nhom:'Mua bán',tu:0,acts:['doilt'],noi:['thanh','cho'],xay:null,pha:{h:6},hau:'Mất chỗ đổi linh thạch.'},
   cam_do:{n:'Hiệu cầm đồ',nhom:'Mua bán',tu:0,acts:['camdo'],noi:['thanh','cho'],xay:null,pha:{h:3},hau:'Mất hiệu cầm đồ.'},
-  tram_dich:{n:'Trạm dịch',nhom:'Đi lại',tu:0,acts:['tram'],noi:['tran','thanh'],xay:null,pha:{h:6},hau:'Không còn xe ngựa, thuê đường ở đây.'},
+  tram_dich:{n:'Trạm dịch',nhom:'Đi lại',tu:0,acts:['tram'],noi:['tran','thanh'],xay:null,pha:{h:6},hau:'Mất chỗ mua hoặc thuê phương tiện và đi xe chuyến.'},
   loi_dai:{n:'Lôi đài',nhom:'Tu luyện',tu:0,acts:['loidai'],noi:['thanh'],xay:null,pha:{h:4},hau:'Không còn đấu lôi đài ở đây.'},
   thao_lu:{n:'Thảo lư ẩn sĩ',nhom:'Tu luyện',tu:0,acts:['thinhgiao'],noi:['ancu'],xay:null,pha:{h:2},hau:'Ẩn sĩ bỏ đi, không còn chỗ thỉnh giáo.'},
   son_mon:{n:'Sơn môn điện',nhom:'Tông môn',tu:0,acts:['join','lib','congmon','nhansu','tongviec','conghien','tinhthat','taphoa','doilt','tinh'],noi:['tong'],xay:null,pha:null,hau:''},
   // --- tự nhiên ở hoang dã: không xây được, phá được ---
   bai_san:{n:'Bãi săn',nhom:'Hoang dã',tu:1,acts:['sanbat'],noi:['rung','nui','hoang','dam','khoang','duoc','linhdia','song','bien'],xay:null,pha:{h:12},hau:'Muông thú bỏ đi, không săn bắt được nữa.'},
-  ho_ca:{n:'Hồ cá',nhom:'Hoang dã',tu:1,acts:['sanbat'],noi:['song','bien','dam'],xay:null,pha:{h:24},hau:'Lấp hồ: không đánh bắt được nữa.'},
+  ho_ca:{n:'Hồ cá',nhom:'Hoang dã',tu:1,acts:['sanbat'],noi:['song','bien','dam'],xay:null,pha:{h:24},hau:'Hồ bị lấp nên không còn đánh bắt được ở đây.'},
   hang_yeu:{n:'Hang yêu thú',nhom:'Hoang dã',tu:1,acts:['sanyeu'],noi:['nui','dong','rung'],xay:null,pha:{h:12},hau:'Lấp hang: yêu thú không còn tụ về để săn.'},
   dam_yeu:{n:'Đầm yêu',nhom:'Hoang dã',tu:1,acts:['sanyeu'],noi:['dam','song','bien','hoang','ma','phe','thien'],xay:null,pha:{h:24},hau:'Lấp đầm: yêu thú không còn tụ về để săn.'},
   rung_thuoc:{n:'Rừng thuốc',nhom:'Hoang dã',tu:1,acts:['haithuoc'],noi:['rung','duoc','song','bien'],xay:null,pha:{h:12},hau:'Đốt rừng thuốc: không hái thuốc được nữa.'},
@@ -43,9 +43,9 @@ const CONG_TRINH={
   tran_co:{n:'Trận pháp cổ',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['hoang','phe','nui','dong','linhdia'],xay:null,pha:{h:12},hau:'Phá trận cổ: mất chỗ tĩnh tọa, linh khí tản đi.'},
   // --- người chơi xây trên đất hoang không chủ (tu sĩ) ---
   dong_phu:{n:'Động phủ',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],dp:1,xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma'],st:30,h:720,tu:1},pha:{h:12},hau:'Mất động phủ: bế quan ở đây không còn được che chở.'},
-  tran_phap:{n:'Trận pháp hộ thân',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','tran','thanh','cho','ancu'],st:50,h:240,tu:1},pha:{h:6},hau:'Trận tan: mất chỗ tĩnh tọa trong trận.'},
+  tran_phap:{n:'Trận pháp hộ thân',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','tran','thanh','cho','ancu'],st:50,h:240,tu:1},pha:{h:6},hau:'Trận tan, ngươi mất chỗ tĩnh tọa được trận che chở.'},
   // --- người chơi dựng trên đất đã mua ở nơi có dân (câu 80): phàm nhân cũng dựng được, trả bằng bạc (xu) ---
-  nha_rieng:{n:'Nhà riêng',nhom:'Nghỉ chân',tu:0,acts:[],noi:[],xay:{noi:['tran','thanh','cho','ancu'],st:0,bac:25000,h:360,cuaTa:1},pha:{h:6},hau:'Mất nhà: không còn chỗ ngủ, nghỉ của riêng ngươi ở đây.'}};
+  nha_rieng:{n:'Nhà riêng',nhom:'Nghỉ chân',tu:0,acts:[],noi:[],xay:{noi:['tran','thanh','cho','ancu'],st:0,bac:25000,h:360,cuaTa:1},pha:{h:6},hau:'Nhà mất, ngươi không còn chỗ ngủ và nghỉ riêng ở đây.'}};
 
 // DAT: cách sinh ô và hậu quả.
 //   goc[loại nơi] = công trình luôn có ở loại nơi đó (bảo đảm dịch vụ cốt lõi; bản lưu cũ cũng sinh theo bảng này)
