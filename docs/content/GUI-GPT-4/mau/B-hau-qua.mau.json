@@ -1,0 +1,19 @@
+{
+  "ma": "END02",
+  "tin_don": [
+    "Tin 1: một câu hay hai, giọng người đi đường.",
+    "Tin 2.",
+    "Tin 3.",
+    "Tin 4."
+  ],
+  "dia_diem": [
+    { "loc": "{LOC02}", "t": "Hai câu tả nơi ấy đã đổi thay thế nào." },
+    { "loc": "{LOCxx}", "t": "Nơi thứ hai." },
+    { "loc": "{LOCxx}", "t": "Nơi thứ ba." }
+  ],
+  "su_luoc": [
+    "Dòng sử lược 1, một câu.",
+    "Dòng sử lược 2, một câu."
+  ],
+  "muon": "Ba câu hồi ức nhiều năm sau, người ta kể về một người từng ngồi lên ngai, không nêu tên."
+}
