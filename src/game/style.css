@@ -1725,7 +1725,7 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 .tien-cum .rh{margin:0 1px;width:.7em;height:.7em}
 .rh.lt-0{background:#8a9a8f}.rh.lt-1{background:#3f9a5a}.rh.lt-2{background:#3a78c8}.rh.lt-3{background:#9a4ac8}
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){
-  .tien-cum{bottom:auto;top:12px;right:12px;font-size:.9em}
-  .mright{top:calc(12px + 42px)!important}
+  .tien-cum{bottom:auto;top:64px;right:12px;font-size:.9em}
+  .mright{top:106px!important}
 }
 @media (max-width:420px){.tien-cum{gap:5px;padding:4px 7px;font-size:.72em}}
