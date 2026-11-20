@@ -2976,7 +2976,7 @@ const TESTS = {
     fresh(base+"G.run.pham=1");run("G.run.kv=['quy_nhan'];G.run.scene=null;ccMonth()");ok(!run("G.run.scene"), 'phàm nhân: chưa hiện');
     fresh(base);run("G.run.tuDuyen=undefined;G.run.kv=['nhan_qua_dao'];G.run.scene=null;ccMonth()");ok(run("G.run.scene&&G.run.scene.ev")==='tumr_duyen', 'bản lưu cũ (không có tuDuyen): vẫn chạy');
     // số cho hiệu ứng ngoài trận
-    const lv7 = id => `tuHoc('${id}',0);tuArtOf('${id}').lv=7;`;
+    const lv7 = id => `G.run.realm=3;tuHoc('${id}',0);tuArtOf('${id}').lv=7;`; // dòng req 2 cần cảnh giới
     fresh(base);run("G.run.realm=3;"+lv7('TU23'));ok(run("aggFx().loiKiep")===20&&run("aggFx().loiAm")===25, 'Lôi pháp: thiên lôi nhẹ hơn 20%, nơi âm khí yếu 25%');
     run("startCombat({kiep:{n:3,waves:1,block:0,kind:'loi'}},{kind:'node'});DK_S=G.run.scene;DK_S.skipDodge=1;DK_M=mainUnit(DK_S);DK_K=DK_S.units.find(u=>u.kind==='kiep');DK_M.hp=DK_M.max=100000;DK_M.st={}");
     const h0 = run("DK_M.hp");run("kiepHit(DK_S,DK_K,null)");const d1 = h0-run("DK_M.hp");
@@ -2985,7 +2985,7 @@ const TESTS = {
     fresh(base);run(lv7('TU23')+"(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>n.type==='phe'||n.type==='ma');G.run.at=n.id})();startCombat({},{kind:'node'});G.run.scene.skipDodge=1");
     run("var dS=G.run.scene,dM=mainUnit(dS),dF=alive(dS,'B')[0];dF.hp=dF.max=99999;dM.mp=dM.maxMp=9999;resolveSkill(dS,dM,SK.sk23a,1,[dF],1,'auto')");ok(run("NK.count('tumr.loiAm')")===1, 'Lôi pháp ở nơi âm khí: chiêu yếu đi');
     // Thi tu: ban ngày ngoài trời xác luyện yếu
-    fresh(base);run("tuHoc('TU18',0);(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>!TU_MR.thiTrong.includes(n.type));G.run.at=n.id})();startCombat({},{kind:'node'});G.run.scene.skipDodge=1");
+    fresh(base);run(lv7('TU18')+"(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>!TU_MR.thiTrong.includes(n.type));G.run.at=n.id})();startCombat({},{kind:'node'});G.run.scene.skipDodge=1");
     ok(run("aggFx().thiNgay")===30, 'Thi tu: ban ngày xác luyện yếu 30%');
     run("var tS=G.run.scene,tM=mainUnit(tS);W().t=Math.floor(W().t/HD)*HD+2;resolveSkill(tS,tM,SK.sk18b,1,[],1,null);TD_N=fxmSum(tS,tM,'thi').atk");
     run("W().t=Math.floor(W().t/HD)*HD+HD+12;resolveSkill(tS,tM,SK.sk18b,1,[],1,null);TD_D=fxmSum(tS,tM,'thi').atk");
@@ -2993,7 +2993,7 @@ const TESTS = {
     // Nho tu: thiện cảm
     fresh(base+"hdAdd(30,0,'x');"+lv7('TU20'));ok(run("aggFx().nhoThuyet")===20&&run("favAdd('Người Thử',10)")===12&&run("favAdd('Người Thử',-10)")===-10, 'Nho tu: thiện cảm tăng thêm 20%, phần giảm giữ nguyên');
     // Thương tu: mua rẻ, bán được giá
-    fresh(base);run("G.run.pills=[{id:Object.keys(PILL)[0],q:0}];SL0=sellList()[0].p;P0=price(100);"+lv7('TU22'));
+    fresh(base);run("G.run.realm=3;G.run.pills=[{id:Object.keys(PILL)[0],q:0}];SL0=sellList()[0].p;P0=price(100);"+lv7('TU22'));
     ok(run("price(100)")<run("P0")&&run("sellList()[0].p")>run("SL0")&&run("aggFx().banP")===10, 'Thương tu: mua rẻ hơn, bán được giá hơn');
     // Cổ sư: giải cổ ít hỏng
     fresh(base);run(lv7('TU17')+"G._tuNoRui=0;TD_RUI=TU_CFG.rui;TU_CFG.rui=1;(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>['tran','dam'].includes(n.type)&&n.state!=='ruin');G.run.at=n.id})()");
