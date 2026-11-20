@@ -7,7 +7,7 @@
 const LOC_NEO={
   LOC01:{n:'Thanh Khê Thôn',kv:0,t:['tran'],fa:'FA04',dung:'Ruộng, nhà hộ dân, đê, kho thóc, chợ.',pha:['trại tị nạn','di tích'],luu:'LOC02'},
   LOC02:{n:'Lương Kinh',kv:0,t:['thanh'],fa:'FA01',dung:'Triều đình, trường thi, ngục, sổ thuế, sân khấu.',pha:['kinh thành đổi chủ','kinh thành dưới luật mới']},
-  LOC03:{n:'Vạn Bảo Hội Quán',kv:0,t:['cho','thanh','tran'],fa:'FA02',dung:'Hợp đồng, thương đội, bảo quản, đấu giá.',pha:['hội quán cháy, sổ nợ còn bản sao trong thương đội','nền hội quán cũ'],luu:'LOC09'},
+  LOC03:{n:'Vạn Bảo Hội Quán',kv:0,t:['cho','thanh','tran'],fa:'FA02',dung:'Thương đội ký khế, gửi hàng và mở phiên đấu giá.',pha:['hội quán cháy, sổ nợ còn bản sao trong thương đội','nền hội quán cũ'],luu:'LOC09'},
   LOC04:{n:'Cổ Miếu Vô Danh',kv:1,t:['phe','ancu','tran'],fa:null,dung:'Trú ẩn, bia tên người mất, dấu mộng.',pha:['miếu đổ, bia vỡ còn mảnh chữ đọc được','nền miếu giữa cỏ']},
   LOC05:{n:'Huyền Cơ Trận Các',kv:1,t:['linhdia','dong','phe','thanh'],fa:'FA03',dung:'Trận đồ, trục quan trắc, hồ sơ Ngũ Tổ.',pha:['các sụp, còn phòng lõi nguy hiểm có thể khảo sát','phòng lõi giữa đá đổ'],loi:1},
   LOC06:{n:'Đoạn Tùng Lâm',kv:1,t:['rung','nui','dam','linhdia','dong'],fa:null,dung:'Gỗ, dược phàm, thú, đất chôn.',pha:['rừng cháy, lộ nền đá cổ','rừng non mọc trên nền đá cổ']},
@@ -16,9 +16,9 @@ const LOC_NEO={
   LOC09:{n:'Tịch Chiếu Bến',kv:2,t:['song','dam','tran'],fa:null,dung:'Đò, lưới, chợ nước, sân hát, xác tàu.',pha:['lũ đổi lối vào, lời khai nằm trên bảng khắc thuyền','bến mới bên dòng cũ']},
   LOC10:{n:'Bách Thảo Cốc',kv:3,t:['duoc','linhdia','rung'],fa:'FA07',dung:'Ruộng thuốc, bệnh xá, hồ sơ dịch, bàn luyện đan.',pha:['vườn bị đốt, hạt giống còn trong kho lạnh','vườn mọc lại từ kho lạnh']},
   LOC11:{n:'Hàn Thiết Lô',kv:3,t:['khoang','nui','dong','tran'],fa:'FA08',dung:'Mỏ, lò, xưởng giấy và khuôn.',pha:['mỏ đóng, còn đường hầm, bảng công và lô kim loại cuối','đường hầm bỏ hoang']},
-  LOC12:{n:'Lạn Kha Tự',kv:3,t:['ancu','phe','linhdia','nui','dong'],fa:'FA09',dung:'Thư khố, nhà tạm trú, tháp tro, văn bia.',pha:['chùa đổ, văn bản tản mát ở người hành hương','tháp tro còn đứng'],loi:1},
+  LOC12:{n:'Lạn Kha Tự',kv:3,t:['ancu','phe','linhdia','nui','dong'],fa:'FA09',dung:'Có thư khố, chỗ trú chân, tháp tro và bia ghi tên.',pha:['chùa đổ, văn bản tản mát ở người hành hương','tháp tro còn đứng'],loi:1},
   LOC13:{n:'Bắc Phong Ải',kv:4,t:['thanh','tran'],fa:'FA10',dung:'Quân doanh, trường luyện, trạm ngựa, kho.',pha:['ải thất thủ thành chiến địa, tuyến tiếp tế lưu vong','chiến địa cũ']},
-  LOC14:{n:'Táng Cốt Nguyên',kv:4,t:['phe','hoang','dong','tran'],fa:null,dung:'Mồ tập thể, bia trận vong, trại người trở về, xưởng dựng bia.',pha:['trại bỏ hoang, dấu linh hồn còn đọc được','đồng mộ không người']},
+  LOC14:{n:'Táng Cốt Nguyên',kv:4,t:['phe','hoang','dong','tran'],fa:null,dung:'Có mộ chung, bia người tử trận, trại người trở về và xưởng khắc bia.',pha:['trại bỏ hoang, dấu linh hồn còn đọc được','đồng mộ không người']},
   LOC15:{n:'Hồi Thanh Đài',kv:4,t:['thien','linhdia','nui','dong','phe'],fa:null,dung:'Điểm nghe ký ức, quan trắc Đêm Dài và cửa kết thúc.',pha:['nền đá nứt, lõi đài còn nghe được','nền đá'],loi:1}
 };
 // đường neo bắt buộc (C §6): [a,b,cách đi]

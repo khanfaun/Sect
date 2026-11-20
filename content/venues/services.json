@@ -24,11 +24,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Biết thêm một nơi và nghe tin đồn; lời truyền miệng được tách khỏi sự thật đã xác nhận.",
+      "text": "Gọi trà để nghe chuyện dọc đường và biết thêm một nơi trong vùng.",
       "choices": [
         {
           "l": "Gọi ấm trà, ngồi nghe chuyện",
-          "t": "Biết thêm một nơi và nghe tin đồn; lời truyền miệng được tách khỏi sự thật đã xác nhận."
+          "t": "Gọi trà để nghe chuyện dọc đường và biết thêm một nơi trong vùng."
         }
       ],
       "logic": {
@@ -122,11 +122,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Chơi cờ giúp tăng lịch luyện và tĩnh tâm; cần ngộ tính.",
+      "text": "Cần đủ ngộ tính để đối cờ. Chơi cờ tăng lịch luyện và giảm tâm ma.",
       "choices": [
         {
           "l": "Đánh một ván cờ với khách lạ",
-          "t": "Chơi cờ giúp tăng lịch luyện và tĩnh tâm; cần ngộ tính."
+          "t": "Cần đủ ngộ tính để đối cờ. Chơi cờ tăng lịch luyện và giảm tâm ma."
         }
       ],
       "logic": {
@@ -375,11 +375,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Hồi tối đa 15% khí huyết, không vượt mức tối đa.",
+      "text": "Ăn một bữa để hồi tới 15% khí huyết tối đa.",
       "choices": [
         {
           "l": "Ngồi sảnh dưới ăn một bữa",
-          "t": "Hồi tối đa 15% khí huyết, không vượt mức tối đa."
+          "t": "Ăn một bữa để hồi tới 15% khí huyết tối đa."
         }
       ],
       "logic": {
@@ -472,11 +472,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Giảm tâm ma, hồi tối đa 10% khí huyết và nghe tin.",
+      "text": "Uống rượu để giảm tâm ma, hồi tới 10% khí huyết tối đa và nghe tin.",
       "choices": [
         {
           "l": "Uống vài chén, nghe chuyện",
-          "t": "Giảm tâm ma, hồi tối đa 10% khí huyết và nghe tin."
+          "t": "Uống rượu để giảm tâm ma, hồi tới 10% khí huyết tối đa và nghe tin."
         }
       ],
       "logic": {
@@ -523,11 +523,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Mời rượu để kết giao, tăng lịch luyện và nghe tin.",
+      "text": "Mời rượu để nghe tin, tăng lịch luyện và giảm tâm ma.",
       "choices": [
         {
           "l": "Mời cả bàn một vò rượu ngon",
-          "t": "Mời rượu để kết giao, tăng lịch luyện và nghe tin."
+          "t": "Mời rượu để nghe tin, tăng lịch luyện và giảm tâm ma."
         }
       ],
       "logic": {
