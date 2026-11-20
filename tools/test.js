@@ -1676,7 +1676,7 @@ const TESTS = {
     run("advanceTime(24)");ok(run("G.run.doi")===1, 'hết lương khô thì đói');
     fr();run("G.run.pham=0;G.run.realm=0;advanceTime(4*24)");ok(run("G.run.doi")===2, 'Luyện Khí ăn nửa phần: bốn ngày đói hai ('+run("G.run.doi")+')');
     fr();run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.bac=100;G.run.anMuc='thuong'})();advanceTime(3*24)");
-    ok(run("G.run.doi")===0&&run("G.run.bac")===40, 'ở thành có bạc: tự mua cơm 20 đồng một ngày ('+run("G.run.bac")+')');
+    ok(run("G.run.doi")===0&&run("G.run.bac")===100-3*run("anCost(G.run)"), 'ở thành có bạc: tự mua cơm theo giá thật mỗi ngày ('+run("G.run.bac")+')');
     // Sửa-B: bỏ cơm nhà (người dùng chốt câu 10) — ở quê không tiền thì mua chịu tới mức NO.chiu, hết chịu thì đói
     fr();run("FEAT.no=1;G.run.at=G.run.queAt;G.run.noTra=null;G.run.origin='nong';G.run.family=[{qh:'me',song:1}];advanceTime(20*24)");ok(run("G.run.doi")===0&&run("G.run.bac")===-20*run("anCost(G.run)"), 'ở quê không tiền: mua chịu cơm, còn nợ '+run("fmtBac(G.run.bac)"));
     run("for(let i=0;i<11&&!G.run.doi;i++)advanceTime(24)");ok(run("G.run.doi")===1&&run("G.run.bac")>=-600&&run("G.run.bac-anCost(G.run)")<-600, 'hết mức chịu 600 xu: đói ('+run("G.run.doi")+')');run("FEAT.no=0");
