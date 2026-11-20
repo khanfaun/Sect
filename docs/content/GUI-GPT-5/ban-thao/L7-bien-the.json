@@ -1,0 +1,90 @@
+{
+  "tin_don_END02": [
+    "Xe lương gãy trục giữa dốc. Bên ải gửi thợ xuống, còn phu xe cởi áo tơi phủ lên thóc.",
+    "Hộ nào bận vá đê ở {LOC01} cứ nhờ hàng xóm cầm phiếu đi nhận giống. Người giữ kho đã kê bàn sát đầu bờ.",
+    "Có nhà đem cả bao thóc lĩnh hụt tới cửa quan. Viên thư lại phải mượn cân của hàng gạo ngoài chợ.",
+    "Người giữ kho chà thử hạt thóc mới trong tay rồi mới chịu ghi đã trả giống. Đến lượt nhà kế, ông đưa luôn mẫu cho họ xem.",
+    "Tờ hẹn phát lương giờ treo ngoài cổng ở {LOC02}. Người trong chợ nhìn giấy là biết ngày nào xe lên ải.",
+    "Nghe nói có thể xin xét thuế ngay khi ruộng còn ngập. Hồi trước phải đợi tới khi mất cả vụ mới nộp được đơn."
+  ],
+  "tin_don_END03": [
+    "Chuyến đá gặp mưa, dấu trên giấy loang hết. Người coi cân ở {LOC07} phải gọi người dẫn đường tới nhận từng gánh.",
+    "Quán ven dốc giờ cho người gánh đá ăn chịu theo phiếu. Hễ lỡ phiên cân là tiền cơm nằm lại sang chuyến sau.",
+    "Họ đóng cửa phụ của kho rồi. Người gánh thuê phải đi vòng, đến nơi thì bóng đã qua hết mái.",
+    "Thợ hòm ở {LOC03} bận đặt đai cho hòm đá. Muốn mua hộp nhỏ giờ phải tự đem gỗ đến tận cửa.",
+    "Có người xin dọn kho thay phần phải nộp. Người coi sổ chịu, nhưng vẫn giữ khế tới khi hết việc.",
+    "Bên dốc vào cốc có mái gửi gánh cho người đổi phiên. Tới kỳ thu, tiền thuê lại nhích lên."
+  ],
+  "tin_don_END06": [
+    "Nhà cuối chợ đem việc dễ tới cho học trò tập. Họ hẹn ngày lấy, còn ai làm thì để người trong nghề tự chọn.",
+    "Nghe nói học việc xin dời buổi tập sang sau phiên chợ. Người dạy đem đồ tới tận hiên để họ khỏi bỏ buổi bán hàng.",
+    "Có người đi xa về đem theo cách làm khác. Thầy bảo cứ thử trước sân rồi gọi khách cũ tới xem.",
+    "Học trò mới treo tờ hẹn lên cửa, nét chữ còn nghiêng. Trời mưa, khách đầu giúp dời tờ giấy vào dưới mái.",
+    "Hòm đồ nghề được cho mượn lúc vắng khách. Ai lấy món nào thì tự vẽ dấu món ấy vào sổ.",
+    "Người từng học ở đó giờ dạy lại cho khách trọ. Họ bảo cứ làm thử, tự thu dọn được rồi hãy hẹn việc với khách."
+  ],
+  "ky_ngo_A1": [
+    {
+      "text": [
+        "Ngươi tựa vai vào đá ven đường, đếm hơi thở cho đều. Bụi dưới chân bỗng sáng lên thành dãy bậc trắng lạnh.",
+        "Có tiếng sông rất xa, nghe như dưới nền nhà. Bàn chân ngươi tự nhấc lên trước khi ngươi kịp nhìn bậc kế."
+      ],
+      "t_len": "Ngươi lên cao đến khi tiếng sông mỏng như tiếng chỉ tuột khỏi vải. Tỉnh lại, đầu gối nặng trĩu nhưng hơi thở đã lắng. Một hạt cát trắng nằm trong đường chỉ gấu áo.",
+      "t_quay": "Ngươi lùi về chỗ bụi chưa sáng. Tỉnh lại, ngươi thở phào, rồi tiếc chưa kịp nhìn đỉnh thang. Quai dép còn vương sợi cỏ bạc màu."
+    },
+    {
+      "text": [
+        "Ngươi tĩnh tọa dưới mái đá, nghe mưa ngoài dốc. Lúc ngẩng lên, giọt mưa đứng im giữa không, để lộ dãy bậc trắng trong luồng sáng lạnh.",
+        "Tiếng sông vọng từ xa. Ngươi có cảm giác từng chờ nước lặng ở đây, nhưng bậc đá đã mở ngay dưới chân."
+      ],
+      "t_len": "Ngươi bước qua những giọt mưa đứng im. Lúc tỉnh, cổ chân đau âm ỉ nhưng ngươi vẫn ngồi yên được tới khi mưa nhẹ hạt. Trong lòng bàn tay còn đọng giọt nước buốt.",
+      "t_quay": "Ngươi quay về phía tiếng sông, vừa bước thì mưa lại rơi. Vai nhẹ đi khi ngươi tỉnh, chỉ còn chút tiếc chưa ngó qua bậc trên cùng. Bên gối có chiếc lá khô viền sương."
+    }
+  ],
+  "ky_ngo_A2": [
+    {
+      "text": [
+        "Ở ngã sông, người chèo đò ép giẻ vào kẽ ván. Ngươi vô cớ biết ông sắp chống cán chèo vào bậc nào.",
+        "Mái chèo vừa tì lên đá thì ông ngẩng đầu. “Có người đến bờ rồi mới bắt đầu lỡ chuyến,” ông nói. Ngươi chẳng hiểu vì sao mình muốn gật đầu."
+      ],
+      "t": [
+        "Ngươi hỏi ông thường đón khách ở đâu. Ông rà tay đến chỗ mạn nhẵn vì nhiều người đã vịn, rồi hất cằm về bờ không lối xuống.",
+        "Ngươi ngồi im bên mép bậc. Ông chống chèo giữ đò yên cho đến khi bóng ngươi thôi lay trên nước.",
+        "Ngươi xách tay nải qua khúc rẽ. Nhìn lại, ngươi thấy ông để đò lùi về đúng chỗ ngươi vừa đứng."
+      ]
+    },
+    {
+      "text": [
+        "Người chèo đò đang nhặt củi mắc vào dây neo. Cách ông dùng bàn chân đẩy khúc gỗ cong khỏi dòng nước khiến ngươi dừng bước vì thấy quen.",
+        "Ông nhìn đường bùn dọc bờ và phủi tay. “Đường về thường khô trước dấu chân,” ông nói. Ngươi cúi nhìn dép mình mà vẫn chưa hiểu."
+      ],
+      "t": [
+        "Ngươi hỏi ông đón khách ở bờ nào. Ông căng dây neo rồi để dây chùng, đúng về phía lối mòn mới bị nước xóa.",
+        "Ngươi ngồi bên đống củi nghe nước rút. Ông nhặt khúc gỗ cong, đặt dưới chân ngươi, chỗ đất còn đủ ướt để in dấu.",
+        "Ngươi đi tiếp, chân tránh vũng theo thói quen. Khi ngươi quay đầu, ông đã kéo thuyền sát bậc và để mũi đò chĩa theo lối ngươi đi."
+      ]
+    }
+  ],
+  "gac_ben_hien_them": {
+    "lao_cheo_do": [
+      "Lão chèo đò trét nhựa vào khe ván. Ngươi vừa dừng, lão đã lật ghế kê chân cho ngươi ngồi. Nhựa trên tay lão đen cả, trừ ngón cái sạch như vừa nhúng nước.",
+      "Đò mắc cạn giữa mấy hòn đá. Lão chèo đò nhờ ngươi giữ dây rồi lội xuống đẩy mũi thuyền. Khi lên bờ, lão trả dây vào tay ngươi, nút thắt nằm vừa vặn giữa các ngón."
+    ],
+    "tre_an_may": [
+      "Đứa trẻ ăn mày ngồi bên gánh đậu, tách hạt rơi khỏi sạn. Thấy ngươi dừng, nó chìa phần đã lựa cho ngươi rồi lấy gấu áo chùi phần còn dính đất.",
+      "Dưới chân cầu, đứa trẻ ăn mày treo bát lên đinh để chó khỏi liếm. Ngươi vừa cúi đi qua, nó đã hạ bát cho quai tay nải của ngươi khỏi vướng."
+    ],
+    "ni_co_mu": [
+      "Ni cô mù đang gỡ nút trên dây phơi. Nghe dép ngươi đi ngang, nàng giơ dây vừa đủ cao cho ngươi khỏi cúi. Tới khi ngươi quay lại, nàng mới lần tay tìm nút tiếp.",
+      "Ni cô mù đứng cạnh giếng, nghe gàu chạm nước rồi mới kéo. Ngươi bước tới giúp, nàng dịch tay chừa khúc dây đã khô như biết lòng bàn tay ngươi đang rát."
+    ],
+    "lao_dao": [
+      "Lão đạo ăn xin hong ống quẻ trên thành bếp. Nghe thẻ tre lách cách, lão đẩy ghế cho ngươi. Ghế vừa tầm chân, dù lão chẳng ngẩng lên nhìn.",
+      "Lão đạo ăn xin gỡ đồng xu khỏi mép chiếu. Lão đặt nó nghiêng trên kẽ gạch, bảo ngươi đoán khi nào nó đổ. Ngươi vừa đưa tay đón thì lão đã rút chiếu đi."
+    ],
+    "ban_canh": [
+      "Người bán canh nép gánh dưới tán cây. Thấy ngươi lại gần, người ấy đậy chiếc bát đang nguội rồi dịch nó sang đúng chỗ tay ngươi có thể với.",
+      "Người bán canh lau muội chân nồi bằng nắm rơm ẩm. Ngươi đứng tránh đường cho khách thì người ấy lấy dưới gánh ra chiếc ghế thấp đã kê nghiêng về phía ngươi."
+    ]
+  }
+}
