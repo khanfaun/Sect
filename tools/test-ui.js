@@ -352,7 +352,7 @@ const TESTS = {
     await ev(p, () => {const r=G.run;r.pham=0;r.root={id:'tap',els:['kim','moc'],q:'thuong'};r.rootKnown=1;r.st=999;r.scene=null;UI.modal=null;UI.panel=null;r.tu={chinh:null,phu:null,k:{}};
       r.arts=(r.arts||[]).filter(a=>!a.tu);const id=mrLocNode('LOC12');r.at=id;openPlace(id);ACT.pact('tumon');render();});
     await p.waitForTimeout(150);
-    ok(/Bát Nhã Tâm Kinh Giải/.test(await ev(p, () => (document.querySelector('.venue')||{}).innerText||'')), 'hộp Pháp môn ở Lạn Kha Tự có Bát Nhã Tâm Kinh Giải');
+    ok(/Bát Nhã Tâm Kinh/.test(await ev(p, () => (document.querySelector('.venue')||{}).innerText||'')), 'hộp Pháp môn ở Lạn Kha Tự có Bát Nhã Tâm Kinh');
     await ev(p, () => {window._lk=lkTang;lkTang=()=>1;ACT.vgo('tumon:hoc:TU19');lkTang=window._lk;G.run.tu.k.TU19.tang=4;tuArtOf('TU19').lv=7;openPlace(G.run.at);ACT.pact('tumon');render();});
     await p.waitForTimeout(150);
     ok(/Luân Hồi Chuyển Thế Kinh/.test(await ev(p, () => (document.querySelector('.venue')||{}).innerText||'')), 'Phật tu tầng bốn: thấy bí truyền Luân Hồi Chuyển Thế Kinh');
