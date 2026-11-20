@@ -32,11 +32,26 @@ function DaiVetThuong() {
   ));
 }
 
+// Cụm tiền tệ: xu, lượng bạc, lượng vàng rồi tới 4 phẩm linh thạch (cuối cùng), dàn ngang
+function CumTien({ r }) {
+  const T = PS.TIEN, d = Math.max(0, Math.round(r.bac || 0));
+  const vang = Math.floor(d / T.vang), bac = Math.floor((d % T.vang) / T.luong), xu = d % T.luong;
+  const C = [['xu', xu, 'Xu'], ['bac', bac, 'Lượng bạc'], ['vang', vang, 'Lượng vàng']];
+  const tp = ['Hạ phẩm', 'Trung phẩm', 'Thượng phẩm', 'Cực phẩm'];
+  return (
+    <div className={'tien-cum' + ((r.bac || 0) < 0 ? ' no' : '')} {...tip('Hầu bao\nLinh thạch: ' + PS.ltTxt(r) + '\nTiền phàm: ' + PS.fmtBac(r.bac || 0) + '\nThưởng Lệnh: ' + (r.thuongLenh || 0) + (PS.noTip ? PS.noTip(r) : ''))}>
+      {C.map(([k, v, n]) => <span key={k} className={'tc' + (v ? '' : ' z')} title={n}><i className={'cn cn-' + k} />{v}</span>)}
+      {tp.map((n, k) => { const v = PS.ltGet(k, r) || 0; return <span key={'l' + k} className={'tc lt' + (v ? '' : ' z')} title={n}><i className={'rh lt-' + k} />{PS.fmtN(v)}</span>; })}
+    </div>
+  );
+}
+
 export function NutBanDo() {
   const { G, CFG, UI } = PS;
   const r = G.run, bqNo = PS.bqCan(), brk = PS.canBreak();
   const dev = !!PS.DEV;
   return <>
+    <CumTien r={r} />
     <div className="mleft wb"><DaiVetThuong />{dev && <Nut act="devOpen" icon="bolt" cls="dev" t="Dev test: thử hiệu ứng" />}</div>
     <div className="mright">
       <Nut act="gridT" icon="hex" l="Lưới ô" t={CFG.grid ? 'Ẩn lưới ô' : 'Hiện lưới ô'} on={CFG.grid} />
