@@ -1,0 +1,387 @@
+{
+  "hoang_quoc": [
+    {
+      "khu": "Trung Châu",
+      "ten": "Lương triều",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": "",
+      "ghi_chu": "đã có (FA01, kinh đô Lương Kinh LOC02): chỉ viết thêm mo_ta, phong_tuc, quan_he nếu thiếu, không đổi tên"
+    },
+    {
+      "khu": "Trung Châu",
+      "ten": "",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": ""
+    },
+    {
+      "khu": "Đông Hoang",
+      "ten": "",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": ""
+    },
+    {
+      "khu": "Đông Hoang",
+      "ten": "",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": ""
+    },
+    {
+      "khu": "Nam Trạch",
+      "ten": "",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": ""
+    },
+    {
+      "khu": "Nam Trạch",
+      "ten": "",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": ""
+    },
+    {
+      "khu": "Tây Lĩnh",
+      "ten": "",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": ""
+    },
+    {
+      "khu": "Tây Lĩnh",
+      "ten": "",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": ""
+    },
+    {
+      "khu": "Bắc Nhạc",
+      "ten": "",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": ""
+    },
+    {
+      "khu": "Bắc Nhạc",
+      "ten": "",
+      "xung_ho": "",
+      "mo_ta": "",
+      "phong_tuc": [
+        "",
+        ""
+      ],
+      "quan_he": ""
+    }
+  ],
+  "loai_noi": [
+    {
+      "ma": "tran",
+      "loai": "Trấn phàm nhân",
+      "ten_goi_chung": "",
+      "hau_to": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "mo_ta": [
+        "",
+        "",
+        ""
+      ],
+      "luc_den": [
+        "",
+        "",
+        ""
+      ],
+      "tin_don": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "ma": "thanh",
+      "loai": "Thành phàm nhân",
+      "ten_goi_chung": "",
+      "hau_to": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "mo_ta": [
+        "",
+        "",
+        ""
+      ],
+      "luc_den": [
+        "",
+        "",
+        ""
+      ],
+      "tin_don": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "ma": "tutran",
+      "loai": "Trấn tu sĩ",
+      "ten_goi_chung": "",
+      "hau_to": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "mo_ta": [
+        "",
+        "",
+        ""
+      ],
+      "luc_den": [
+        "",
+        "",
+        ""
+      ],
+      "tin_don": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "ma": "tuthanh",
+      "loai": "Thành tu sĩ",
+      "ten_goi_chung": "",
+      "hau_to": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "mo_ta": [
+        "",
+        "",
+        ""
+      ],
+      "luc_den": [
+        "",
+        "",
+        ""
+      ],
+      "tin_don": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "ma": "bicanh",
+      "loai": "Bí cảnh",
+      "ten_goi_chung": "",
+      "hau_to": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "mo_ta": [
+        "",
+        "",
+        ""
+      ],
+      "luc_den": [
+        "",
+        "",
+        ""
+      ],
+      "tin_don": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "ma": "dongthien",
+      "loai": "Động thiên",
+      "ten_goi_chung": "",
+      "hau_to": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "mo_ta": [
+        "",
+        "",
+        ""
+      ],
+      "luc_den": [
+        "",
+        "",
+        ""
+      ],
+      "tin_don": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "ma": "como",
+      "loai": "Cổ mộ",
+      "ten_goi_chung": "",
+      "hau_to": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "mo_ta": [
+        "",
+        "",
+        ""
+      ],
+      "luc_den": [
+        "",
+        "",
+        ""
+      ],
+      "tin_don": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "ma": "yeusao",
+      "loai": "Yêu sào",
+      "ten_goi_chung": "",
+      "hau_to": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "mo_ta": [
+        "",
+        "",
+        ""
+      ],
+      "luc_den": [
+        "",
+        "",
+        ""
+      ],
+      "tin_don": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "ma": "ditich",
+      "loai": "Di tích cổ",
+      "ten_goi_chung": "",
+      "hau_to": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "mo_ta": [
+        "",
+        "",
+        ""
+      ],
+      "luc_den": [
+        "",
+        "",
+        ""
+      ],
+      "tin_don": [
+        "",
+        "",
+        ""
+      ]
+    }
+  ]
+}
