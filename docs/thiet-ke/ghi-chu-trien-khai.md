@@ -1082,3 +1082,10 @@ Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời
 - 84. A: không đổi số năm giữa hai kiếp (người dùng xác nhận). 85. không (nghi thức rút gọn). 86. tạm thời như đã làm.
 - 87. Quy tắc làm việc: phần NỘI DUNG (lời văn, sự kiện, kết cục) giao GPT, Claude không tự viết để đỡ tốn token; Claude chỉ làm bộ máy/luật/giao diện.
 - Người dùng chốt: mức truy nã "Bị nghi" KHÔNG hoãn sự kiện (giữ như đã làm). Giá đất giữ như hiện tại (trấn 30, thành 80, chợ 20, ẩn cư 10 lượng).
+
+## Truy nã: báo hoãn sự kiện + lính canh theo thế lực — 20/11
+- **Báo hoãn:** lần đầu một kỳ ngộ / sự kiện bị giữ lại trong mỗi đợt bị truy → một dòng thông báo (`tna.hoanBao`, không chặn); hết bị truy mà còn cái bị giữ → một dòng `tna.hoanHet` rồi thả như cũ. Đợt sau báo lại (cờ `r.kyHoanBao`). "Bị nghi" vẫn không hoãn, không báo.
+- **Lính canh theo thế lực** (`tnaFa`, cuối core2/66): nơi neo → thế lực của nơi đó; sơn môn → tông đó (`tong:id`); nơi khác → thế lực còn sống có căn cứ gần nhất cùng đại khu (THE_LUC); không có → quan phủ địa phương (`reg:vùng`). Thế lực tan thì nơi đó về tay thế lực khác.
+- Bản ghi truy nã vùng thêm `E.fa` = các thế lực biết mặt (phạm tội ở nơi của ai thì người đó biết). Bị nhận ra khi tới trấn/thành/chợ và cải trang bị lộ (đám đông, khí tức) chỉ khi thế lực nơi đang đứng biết mặt (`tnaBiet`). `'*'` = cả vùng: tội không rõ nơi, danh tiếng tụt, bản lưu cũ không có `fa`, tội lan; từ mức `TNA.lan` (Tử tội) mọi thế lực đều biết, nối với luật lan vùng sẵn có. Nợ ở quê ghi thế lực nơi quê.
+- Giữ nguyên theo vùng: mức, treo thưởng, mất dấu, Quan phủ / Chấp pháp đường, hoãn sự kiện, mua đất. Chú thích HUD ghi thế lực biết mặt và "nơi này chưa biết mặt ngươi".
+- Chữ mới `tna.hoanBao/hoanHet/faBiet/faKhap/faDay/faQuan`. Nhật ký `tna.hoanBao`, `tna.hoanHet`, `tna.laFa`, `tna.bao` thêm `fa`. Bài `truy_na3` (21 ý, cuối `test:rules`). Không đụng giao diện React.

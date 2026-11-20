@@ -84,5 +84,14 @@ const DAT={
   //   favMin: người giữ vai có thiện cảm dưới mức này thì không bán · faMin: bậc quan hệ thế lực (faQhBac 0..6) tối thiểu để thế lực bán (3 = Xa lạ)
   //   toiDa = số ô tối đa của ngươi ở một nơi · naMin: đang bị truy nã từ mức này ở vùng đó thì không mua được
   //   tran: tác dụng trận pháp hộ thân trên đất của ngươi (câu 78): bq = hệ số rủi ro bế quan bị quấy, tm = hệ số tâm ma giảm khi tĩnh tọa, ngu = tính là có chỗ ngủ
+  //   ct = giá công trình (xu) khi mua ô ĐÃ có công trình của dân / người giữ vai / thế lực: giá = (giá đất + ct) × chu; '_' = mặc định.
+  //        Mua xong công trình giữ nguyên (vẫn mở dịch vụ); bán lại ô mua kèm công trình được ban × (giá đất + ct).
   mua:{gia:{tran:30000,thanh:80000,cho:20000,ancu:10000},chu:{dan:1,vai:1.3,fa:1.6},lt:200,ban:0.5,h:4,favMin:-10,faMin:3,toiDa:2,naMin:2,
-    tran:{bq:0.5,tm:2,ngu:1}}};
+    ct:{_:20000,khach_diem:40000,tra_lau:25000,tuu_lau:30000,bang_thuong:10000,thuong_cac:40000,tien_trang:60000,tap_hoa:15000,lai_buon:15000,
+      phuong_thi:80000,quy_thi:60000,am_hoi:80000,doi_lt:60000,cam_do:30000,tram_dich:40000,loi_dai:50000,thao_lu:5000,nha_rieng:25000,tran_phap:20000},
+    tran:{bq:0.5,tm:2,ngu:1}},
+  // thue: thuế đất trên ô của ngươi ở thôn trấn / thành (chợ, ẩn cư không thu). Mỗi ky tháng nộp ty[loại nơi] × giá đất gốc (trấn 900 xu, thành 4.000 xu một năm).
+  //   Trả bạc, tu sĩ thiếu bạc trả linh thạch (như mua). Không trả được thì ghi nợ trên ô, danh tiếng khu thêm danh mỗi kỳ; có tiền thì tự trả nợ (xét mỗi ngày).
+  //   Nợ quá noKy kỳ thì quan phủ ghi thành nợ thường (r.bac âm, hệ nợ Sửa-B: hạn, phạt…); không mất đất. Đang nợ thuế ở nơi nào thì không mua thêm đất ở đó.
+  //   Chỉ thu trên đất mua trong kiếp này (ô ghi kiếp lúc mua; bản lưu cũ ghi kiếp hiện tại, kỳ đầu tính từ lúc xét).
+  thue:{ky:12,ty:{tran:0.03,thanh:0.05},danh:-3,noKy:3}};

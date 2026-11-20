@@ -241,7 +241,7 @@ const CAI_CAN={
         okT:'Đêm ấy không có gì lạ. Sáng ra, ngươi thấy mình nghe được hơi thở của đất.',failT:'Đêm trôi qua. Ngươi vẫn là ngươi, năm năm giữ giới cũng không mất đi đâu.'}]},
   HAO_NHIEN:{n:'Dưỡng Hạo Nhiên Khí',dk:{hd:1},noi:{loc:'LOC02',t:['thanh']},mode:'vo',hoi:null,tuoi:1,
     clue:'Thư sinh ở {{0}} bàn về hạo nhiên khí: đỗ đạt, ngộ lời thánh hiền thì lòng có một thứ căn khác.',
-    steps:[{b:'rite',l:'Ngộ lời thánh hiền',ngay:1,ok:1,out:{id:'tap',q:'khuyet'}}]},
+    steps:[{b:'rite',l:'Ngộ lời thánh hiền',ngay:1,ok:1,out:{id:'tap',q:'khuyet'},okFx:{flag:'van_tam'}}]}, // van_tam: Văn tâm, mở duyên Nho tu (TU_DUYEN)
   TUC_CAN:{n:'Túc căn kiếp trước',noi:{meta:1},mode:'tuc',hoi:null,tuoi:1,
     clue:'Có đêm ngươi mơ thấy {{0}}, dưới một gốc cây có thứ của mình chôn từ rất lâu.',
     steps:[

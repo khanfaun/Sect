@@ -72,6 +72,10 @@ const NGHI_THUC={
   NG04:{n:'Diệt thế',ket:'END08',loc:'LOC15',khoa:2,st:1000,ngay:30,xung:0.15,hpMin:0.5,thieuKhu:3}
 };
 const NG_NOI=['LOC05','LOC12','LOC15'];
+// Đại lộ DL02 "Diệt Thế Ma Đồ" (HN: END08 nếu đủ tri thức; không đủ thì ba khu đất ma): kết tuyến bằng một kết trong `ket` thì cưỡng mở Diệt Thế.
+//   Đủ điều kiện NG04 (dmDk) → END08 ở lượt thời gian kế (trả st như NG04, chịu ba xung). Thiếu → như mở thiếu ở LOC15 (thieuKhu khu đất ma, Đêm Dài +1). Mỗi kiếp một lần.
+//   Tự quyết: kết A (giữ quyền mạch) và B (cắt mạch sâu) động tới mạch sâu; kết C (dừng trước mạch sâu) không.
+const DM_DL={tuyen:'DL02',ket:['A','B']};
 // khaoMoiKiep: mỗi nơi neo chỉ cho một nguồn tri thức mỗi kiếp ("lòng đá phải lắng lại") · gbThang: Người Gác Bến hiện sau ngần này tháng kể từ đầu kiếp ·
 // gbNhan: số kiếp nhận ra để nhặt MA02 · doiNam: ngồi đợi ở bến thêm ngần ấy năm (cộng vào khoảng luân hồi Đ8.5) · mongMoiKiep: Mộng Ấn tối đa mỗi kiếp ·
 // end01Tuoi: tuổi tối thiểu để một đời (không quy ẩn) được tính "đã sống" · end02Bac: xu nuôi quân lương ba kỳ · end03St: linh thạch duy trì một kỳ ·

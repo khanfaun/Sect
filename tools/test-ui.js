@@ -130,7 +130,7 @@ const TESTS = {
   },
   // thẻ địa điểm nổi gần icon: có nút đi tới kèm thời gian, nằm trong vùng nhìn thấy; chạm đại khu vực khi thu nhỏ hết cỡ
   async thenoi(p) {
-    await ev(p, () => { Map2.locate(); const n = regionOf(G.run.region).nodes.find(x => x.id !== G.run.at && x.type === 'tran'); n.fog = 2; geo().nodeAt = null; const q = nodeById(n.id); Map2.focus(q.x, q.y); mapHold(q, nodeHex(q), [q.x, q.y]); });
+    await ev(p, () => { Map2.locate(); CFG.confirmDanger = false; const n = regionOf(G.run.region).nodes.find(x => x.id !== G.run.at && x.type === 'tran' && x.fog !== undefined && findPath(G.run.at, x.id)) || regionOf(G.run.region).nodes.find(x => x.id !== G.run.at && findPath(G.run.at, x.id)); window.__tnId = n.id; n.fog = 2; geo().nodeAt = null; const q = nodeById(n.id); Map2.focus(q.x, q.y); mapHold(q, nodeHex(q), [q.x, q.y]); });
     await p.waitForTimeout(700);
     const r = await ev(p, () => { const e = document.querySelector('#dock .np'); if (!e) return null; const b = e.getBoundingClientRect(); return { vis: getComputedStyle(e).visibility, l: b.left, t: b.top, r: b.right, b: b.bottom, go: (e.querySelector('.np-k:last-of-type') || {}).textContent, dg: !!e.querySelector('.np-dg'), W: innerWidth, H: innerHeight, txt: e.innerText }; });
     ok(!!r && r.vis === 'visible', 'thẻ địa điểm nổi hiện ra');
@@ -138,7 +138,7 @@ const TESTS = {
     ok(r && /Đường đi/.test(r.go || ''), 'giữ chuột: thẻ có thời gian đường đi: ' + (r && r.go));
     ok(r && r.dg && !/Linh khí|dặm|Quy mô/.test(r.txt), 'có cụm an toàn/nguy hiểm, bỏ linh khí, dặm, quy mô');
     // thả tay: đánh dấu tuyến; chạm lại đúng chỗ: lên đường
-    const mk = await ev(p, () => { const n = regionOf(G.run.region).nodes.find(x => x.id !== G.run.at && x.type === 'tran'); const q = nodeById(n.id); mapHoldEnd(); const c = nodeHex(q); mapTap(q, c, [q.x, q.y], 0.6); const a = !!UI.mark; mapTap(q, c, [q.x, q.y], 0.6); return [a, !!G.run.moving, !UI.mark]; });
+    const mk = await ev(p, () => { const q = nodeById(window.__tnId); G.run.scene = null; G.run.moving = null; UI.mark = null; mapHoldEnd(); const c = nodeHex(q); mapTap(q, c, [q.x, q.y], 0.6); const a = !!UI.mark; UI.anOk = 1; mapTap(q, c, [q.x, q.y], 0.6); return [a, !!G.run.moving, !UI.mark, !!G.run.scene, UI.modal && UI.modal.k, G.run.pham, q.fog, q.id, G.run.at, !!findPath(G.run.at,q.id)]; });
     ok(mk[0] && mk[1] && mk[2], 'chạm đánh dấu tuyến, chạm lại thì lên đường ' + JSON.stringify(mk));
     await ev(p, () => { G.run.moving = null; G.run.dest = null; UI.sel = null; Map2.zoomOutAll(); const c = hexAt(WORLD_W / 2, WORLD_H / 2); mapTap(null, c, [WORLD_W / 2, WORLD_H / 2], Map2.zf); });
     await p.waitForTimeout(600);

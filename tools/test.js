@@ -992,10 +992,12 @@ const TESTS = {
     ok(lo === 1, `ngộ tính thấp: hệ số ${lo}`); ok(hi > 1 && hi <= 1.5, `ngộ tính cao: hệ số ${hi.toFixed(2)} (tối đa 1.5)`);
     const l0 = +run('G.run.ll=0;G.run.base.ngo=30;llAdd(10,"thử");G.run.ll');
     ok(l0 > 0, `llAdd có tác dụng (ll=${l0})`);
-    const k1 = +run('G.run.base.van=1;kyMul()'), k2 = +run('G.run.base.van=20;kyMul()');
+    // khí vận thật = base + bon + fx (đặc tính/trang bị ngẫu nhiên) nên đặt base bù phần ngoài để chỉ số cuối cố định
+    const setVan = v => run(`G.run.base.van=0;G.run.base.van=${v}-S().van`);
+    setVan(1); const k1 = +run('kyMul()'); setVan(20); const k2 = +run('kyMul()');
     ok(k1 >= 0.6 && k1 < 1, `khí vận thấp: ×${k1.toFixed(2)}`); ok(k2 > 1 && k2 <= 3, `khí vận cao: ×${k2.toFixed(2)}`);
-    ok(run('G.run.base.van=1;kyBigOpen()') === false, 'khí vận thấp: kỳ ngộ lớn đóng');
-    ok(run('G.run.base.van=KY_BIG_VAN+5;kyBigOpen()') === true, 'khí vận cao: kỳ ngộ lớn mở');
+    setVan(1); ok(run('kyBigOpen()') === false, 'khí vận thấp: kỳ ngộ lớn đóng');
+    run('G.run.base.van=0'); setVan(run('KY_BIG_VAN')+5); ok(run('kyBigOpen()') === true, 'khí vận cao: kỳ ngộ lớn mở');
   },
   // thế giới mở: một bản đồ liền, năm đại khu vực, đi bộ trên cạn, tầm nhìn theo địa hình, độ khó theo cảnh giới
   mo_tam_nhin() {
@@ -2779,7 +2781,7 @@ const TESTS = {
     const ops = () => JSON.parse(run("JSON.stringify(datOpts(MD_T).map(o=>({id:o.id,no:o.no})))"));
     const op = id => ops().find(o => o.id === id) || {};
     ok(ops().some(o=>o.id==='mua:1'), 'ô trống của dân ở trấn: có lựa chọn mua');
-    ok(!ops().some(o=>o.id==='mua:0'), 'ô đã có công trình: không có lựa chọn mua');
+    ok(ops().some(o=>o.id==='mua:0'), 'ô đã có công trình của dân: cũng mua được');
     ok(op('mua:1').no===run("contentText('dat.muaPham')"), 'không đủ tiền: khoá');
     ok(run("datMuaGia(MD_T,W().dat[MD_T.id].o[1])")===run("DAT.mua.gia.tran"), 'giá đất dân ở trấn = giá gốc ('+run("fmtBac(DAT.mua.gia.tran)")+')');
     ok(run("datMuaGia(MD_T,{chu:{k:'fa',id:'FA04'}})")===run("Math.round(DAT.mua.gia.tran*DAT.mua.chu.fa)"), 'đất của thế lực: đắt hơn');
@@ -2844,6 +2846,89 @@ const TESTS = {
     ok(run("G.screen")==='ket'&&run("G.meta.ketHet.hau[G.meta.ketHet.hau.length-1]")===run("contentText('dm.ketHau')"), 'màn kết: hậu truyện nhắc Phàm giới');
     ok(/Phàm giới/.test(run("dmLinhGioi().khep"))&&/Linh giới đang trong quá trình phát triển/.test(run("dmLinhGioi().linh")), 'màn mở đầu sau khi khép: báo Linh giới đang phát triển');
     } finally { run("Object.assign(DM_KY,JSON.parse(HQ_BK))"); }
+  },
+  // truy nã: báo riêng khi sự kiện bị hoãn / hết hoãn; lính canh chia theo thế lực từng nơi
+  truy_na3() {
+    fresh("FEAT.truy=1;FEAT.tna=1;G.screen='map';G.run.pham=0;G.run.realm=2;G.run.kyT=W().t;G.run.tmT=W().t;TNA_BK=JSON.stringify(TNA)");
+    try {
+    run("TN3_GO=id=>{const n=nodeById(id);const r=G.run;r.at=n.id;r.region=n.r;r.moving=null;r.scene=null;r.truy=null;return n}");
+    // hai nơi có dân cùng vùng, khác thế lực chủ
+    const pr = JSON.parse(run(`JSON.stringify((()=>{const L=W().regions.flatMap(R0=>R0.nodes).filter(n=>['tran','thanh','cho'].includes(n.type)&&n.state!=='ruin');
+      for(const a of L)for(const b of L)if(a.r===b.r&&a.id!==b.id&&tnaFa(a)!==tnaFa(b))return [a.id,b.id];return null})())`));
+    ok(!!pr, 'có hai nơi cùng vùng thuộc hai thế lực khác nhau');
+    if (pr) {
+    run(`TA=nodeById(${pr[0]});TB=nodeById(${pr[1]});TN3_GO(TA.id)`);
+    ok(run("(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>n.anchor&&LOC_NEO[n.anchor].fa&&n.type!=='tong');return !n||tnaFa(n)===LOC_NEO[n.anchor].fa})()"), 'nơi neo: thế lực chủ là thế lực của nơi đó');
+    ok(run("W().regions.flatMap(R0=>R0.nodes).filter(n=>n.type==='tong').every(n=>tnaFa(n)==='tong:'+n.id)"), 'sơn môn: lính canh là người của tông đó');
+    run("TNA.chung[TA.type]=1;TNA.chung.chac=0.9");run("tnaToi('pha_dat')");if(run("!!G.run.tnaCh"))run("kyPick(3)");run("G.run.scene=null;G.run.truy=null");
+    ok(run("JSON.stringify(G.run.tna[TA.r].fa)")===JSON.stringify([run("tnaFa(TA)")]), 'phạm tội ở nơi thế lực A: chỉ thế lực A ghi mặt');
+    run("TNA.nhan=[0,1,1,1,1,1];NK.clear();TN3_GO(TB.id);arrive(TB.id)");ok(!run("G.run.truy")&&run("NK.count('tna.laFa')")>0, 'tới nơi của thế lực khác cùng vùng: lính canh không nhận ra');
+    run("TN3_GO(TA.id);arrive(TA.id)");ok(run("G.run.truy&&G.run.truy.k==='quan'"), 'về nơi của thế lực A: bị nhận ra, quan sai đuổi');
+    run("G.run.truy=null;TNA.nhan=[0,0,0,0,0,0];TNA.cai.dong={thanh:1,tran:1,cho:1};TNA.cai.khi={goc:1,realm:0,max:1};G.run.hide=null;G.run.caiT=W().t+HM;TN3_GO(TB.id);arrive(TB.id)");
+    ok(run("tnaCai()"), 'cải trang ở nơi thế lực khác: đám đông, khí tức không làm lộ');
+    run("TN3_GO(TA.id);arrive(TA.id)");ok(!run("tnaCai()")&&run("NK.count('tna.lo')")>0, 'cải trang ở nơi thế lực A: bị lộ');
+    run("G.run.truy=null;TN3_GO(TB.id)");const tip=run("tnaHud().tip");
+    ok(tip.includes(run("tnaFaTen(tnaFa(TA))"))&&tip.includes(run("contentText('tna.faDay',[tnaFaTen(tnaFa(TB))])")), 'chú thích: ghi thế lực biết mặt, nơi đang đứng chưa biết');
+    run("tnaBao(TB.r,1,{noTruy:1,node:TB})");ok(run("tnaBiet(G.run.tna[TB.r],TB)&&G.run.tna[TB.r].fa.length===2"), 'phạm tội cả ở nơi thế lực B: B cũng biết');
+    run("G.run.tna={};tnaBao(TA.r,1,{noTruy:1,node:TA})");ok(!run("tnaBiet(G.run.tna[TA.r],TB)"), 'tội nhẹ không lan sang thế lực khác');
+    run("tnaBao(TA.r,4,{noTruy:1,node:TA})");ok(run("tnaBiet(G.run.tna[TA.r],TB)")&&run("W().regions.every((_,i)=>i===TA.r||(G.run.tna[i]&&G.run.tna[i].fa[0]==='*'))"), 'tội rất nặng: mọi thế lực, mọi vùng đều biết');
+    run("G.run.tna={};G.run.tna[TA.r]={m:2,tien:1000,t:W().t,ly:['danh']}");ok(run("tnaBiet(G.run.tna[TA.r],TB)&&!!tnaHud()"), 'bản lưu cũ (không ghi thế lực): cả vùng biết như trước');
+    run("tnaBao(TA.r,1,{noTruy:1})");ok(run("tnaBiet(G.run.tna[TA.r],TB)"), 'tội không rõ nơi (danh tiếng, nợ cũ): cả vùng biết');
+    // thế lực tan thì nơi đó về tay thế lực khác
+    const an = run("(()=>{const n=W().regions.flatMap(R0=>R0.nodes).find(n=>n.anchor&&LOC_NEO[n.anchor].fa&&n.type!=='tong');return n?n.id:null})()");
+    if (an != null) { run(`TN3_F=LOC_NEO[nodeById(${an}).anchor].fa;TN3_FB=JSON.stringify(faInit(W())[TN3_F]);faInit(W())[TN3_F].trang='diet'`);
+      ok(run(`tnaFa(nodeById(${an}))!==TN3_F`), 'thế lực đã tan: lính canh nơi đó thuộc thế lực khác');run("faInit(W())[TN3_F]=JSON.parse(TN3_FB)"); }
+    }
+    // báo riêng khi sự kiện bị hoãn / hết hoãn
+    run("G.run.tna={};G.run.truy=null;G.run.tnaCh=null;G.run.kyHoan=[];G.run.scene=null;G.toasts=[];KY3=KYNGO.find(x=>!x.sp&&!x.paid&&!x.joke&&(!x.content||contentTriggerOk(x.content)))");
+    const nT = k => run(`G.toasts.filter(x=>x.t===contentText('${k}')).length`);
+    run("tnaBao(G.run.region,1,{noTruy:1})");ok(!run("tnaHoan()")&&run("kyNgau(KY3)")===true&&nT('tna.hoanBao')===0, '"Bị nghi": không hoãn, không báo');
+    run("G.run.scene=null;tnaBao(G.run.region,1,{noTruy:1})");run("kyNgau(KY3);kyNgau(KY3)");ok(nT('tna.hoanBao')===1&&run("G.run.kyHoan.length")===1, 'bị hoãn lần đầu: một dòng báo (lần sau trong đợt không báo lại)');
+    run("tnaXoa(G.run.region,'nop');G.run.kyThaT=null;G.run.contentLast={};G.toasts=[];advanceTime(1)");ok(nT('tna.hoanHet')===1&&run("NK.count('tna.hoanHet')")>0, 'hết hoãn: một dòng báo sự kiện giữ lại sẽ hiện');
+    run("G.run.scene=null;G.toasts=[];advanceTime(1)");ok(nT('tna.hoanHet')===0, 'không báo lại khi đã hết hoãn');
+    run("tnaBao(G.run.region,2,{noTruy:1});kyNgau(KY3)");ok(nT('tna.hoanBao')===1, 'đợt truy nã mới: báo lại');
+    run("tnaXoa(G.run.region,'nop');G.run.kyHoan=[];G.toasts=[];advanceTime(1)");ok(nT('tna.hoanHet')===0&&!run("G.run.kyHoanBao"), 'hết đợt mà không còn gì giữ lại: không báo');
+    } finally { run("Object.assign(TNA,JSON.parse(TNA_BK));G.run&&(G.run.scene=null)"); }
+  },
+  dat_thue() {
+    // mua ô đã có công trình (giá cộng giá công trình, giữ công trình) · thuế đất ở thôn trấn / thành, nợ thuế
+    fresh("FEAT.tna=1;FEAT.nha=1;FEAT.no=1;G.screen='map';G.run.pham=0;G.run.realm=1;G.run.kiep=1");
+    const all = "W().regions.flatMap(R0=>R0.nodes)";
+    run(`DT_T=${all}.find(n=>n.type==='tran'&&!n.anchor&&n.state!=='ruin');datStore()[DT_T.id]={v:1,o:[{ct:'tuu_lau',chu:{k:'dan'},goc:1},{ct:'tra_lau',chu:{k:'dan'},goc:1,hu:W().t+9e9},{ct:null,chu:{k:'dan'},goc:0}],pha:{}};
+      (()=>{const r=G.run;r.at=DT_T.id;r.region=DT_T.r;r.moving=null;openPlace(DT_T.id);r.bac=1e6;r.st=0;r.tna={};})()`);
+    const ops = () => JSON.parse(run("JSON.stringify(datOpts(DT_T).map(o=>({id:o.id,no:o.no,d:o.d})))"));
+    const op = id => ops().find(o => o.id === id) || {};
+    const gia = run("Math.round((DAT.mua.gia.tran+DAT.mua.ct.tuu_lau)*DAT.mua.chu.dan)");
+    ok(run("datMuaGia(DT_T,W().dat[DT_T.id].o[0])")===gia, 'giá ô có công trình = giá đất + giá công trình ('+run("fmtBac("+gia+")")+')');
+    ok(!!op('mua:0').id&&!op('mua:0').no&&op('mua:0').d.includes(run("contentText('dat.thueD',[fmtBac(datThueGia(DT_T))])")), 'ô tửu lầu của dân: mua được, có báo thuế mỗi năm');
+    ok(!op('mua:1').id, 'công trình đang hư tạm: không bán');
+    run("G.run.faQh={FA04:-30}");ok(run("datMuaNo(DT_T,{ct:'tuu_lau',chu:{k:'fa',id:'FA04'}})")===run("contentText('dat.muaFa',[datChuTen({k:'fa',id:'FA04'})])"), 'công trình của thế lực không ưa: không bán (như ô trống)');run("G.run.faQh={}");
+    run("G.run.tna={[DT_T.r]:{m:2,tien:0,t:W().t,ly:[]}}");ok(op('mua:0').no===run("contentText('dat.muaNa')"), 'bị truy nã: không bán ô có công trình');run("G.run.tna={}");
+    const b0 = run("G.run.bac");ok(run("venueDo('datdai','mua:0')")&&b0-run("G.run.bac")===gia, 'mua tửu lầu: trừ đúng giá');
+    ok(run("(()=>{const c=W().dat[DT_T.id].o[0];return c.chu.k==='ta'&&c.ct==='tuu_lau'&&c.muaCt===1&&c.thueT>W().t})()")&&run("placeActs(DT_T).some(a=>a.a==='tuu')"), 'mua xong: của ngươi, tửu lầu vẫn mở');
+    ok(/dat.mua.*tuu_lau/.test(run("NK.dump()")), 'nhật ký dat.mua (ct tuu_lau)');
+    // thuế
+    const tg = run("datThueGia(DT_T)");ok(tg===run("Math.round(DAT.mua.gia.tran*DAT.thue.ty.tran)")&&tg>0, 'thuế trấn mỗi năm '+run("fmtBac("+tg+")"));
+    ok(run(`(()=>{const n=${all}.find(n=>n.type==='cho');return !n||datThueGia(n)===0})()`), 'chợ: không thu thuế');
+    const b1 = run("G.run.bac");run("G.run.scene=null;advanceTime(DAT.thue.ky*HM+HD)");
+    ok(run("G.run")&&b1-run("G.run.bac")===tg&&run("NK.count('dat.thue')")>0, 'tới kỳ: tự nộp thuế bằng bạc');
+    const d0 = run("danhGet('reg:'+DT_T.r)");run("G.run.bac=0;G.run.st=0;G.run.scene=null;advanceTime(DAT.thue.ky*HM)");
+    ok(run("W().dat[DT_T.id].o[0].thueNo")===tg&&run("W().dat[DT_T.id].o[0].chu.k")==='ta', 'không đủ tiền: ghi nợ thuế, không mất đất');
+    ok(run("danhGet('reg:'+DT_T.r)")===d0+run("DAT.thue.danh")&&run("NK.count('dat.thueNo')")>0, 'nợ thuế: danh tiếng khu tụt nhẹ');
+    run("openPlace(DT_T.id)");ok(op('mua:2').no===run("contentText('dat.thueMua')"), 'đang nợ thuế: không mua thêm đất ở đây');
+    run("G.run.bac=5000;G.run.scene=null;advanceTime(HD)");ok(run("W().dat[DT_T.id].o[0].thueNo")===0&&run("G.run.bac")===5000-tg, 'có tiền: tự trả nợ thuế');
+    run("G.run.bac=0;G.run.scene=null;advanceTime((DAT.thue.noKy+1)*DAT.thue.ky*HM)");
+    ok(run("G.run.bac")===-(run("DAT.thue.noKy")+1)*tg&&run("W().dat[DT_T.id].o[0].thueNo")===0&&run("NK.count('dat.thueQuan')")>0, 'nợ quá '+run("DAT.thue.noKy")+' kỳ: quan phủ ghi thành nợ thường ('+run("fmtBac(-G.run.bac)")+')');
+    ok(run("W().dat[DT_T.id].o[0].chu.k")==='ta'&&!!run("G.run.noTra"), 'vẫn giữ đất; sổ nợ quan phủ mở');
+    // bán lại khi còn nợ thuế: trừ vào tiền bán
+    run("G.run.bac=0;G.run.noTra=null;W().dat[DT_T.id].o[0].thueNo=500;openPlace(DT_T.id)");
+    ok(run("venueDo('datdai','ban:0')")&&run("G.run.bac")===run("Math.round((DAT.mua.gia.tran+DAT.mua.ct.tuu_lau)*DAT.mua.ban)")-500, 'bán ô mua kèm công trình: nửa giá (đất + công trình), trừ nợ thuế');
+    ok(run("(()=>{const c=W().dat[DT_T.id].o[0];return c.chu.k==='dan'&&c.ct==='tuu_lau'&&!c.thueNo&&!c.thueT})()"), 'bán rồi: về tay dân, công trình còn, hết sổ thuế');
+    // bản lưu cũ / đất kiếp trước
+    run("(()=>{const o=W().dat[DT_T.id].o;o[2].chu={k:'ta'};delete o[2].thueT;G.run.datThueX=null;G.run.bac=1e5;G.run.scene=null})();advanceTime(HD)");
+    ok(run("W().dat[DT_T.id].o[2].thueT>W().t")&&run("G.run.bac")===1e5&&run("NK.count('dat.thueCu')")>0, 'bản lưu cũ: ghi sổ thuế, không thu bù');
+    run("(()=>{const c=W().dat[DT_T.id].o[2];c.thueK=99;c.thueT=W().t;G.run.datThueX=null;G.run.scene=null})();advanceTime(HD)");
+    ok(run("G.run.bac")===1e5, 'đất ghi kiếp khác: không thu thuế đời này');
   },
   smoke() {
     const o = cp.spawnSync('node', ['bot.js', '15', '--quiet'], { cwd: require('path').join(__dirname, '..'), encoding: 'utf8', timeout: 420000 });

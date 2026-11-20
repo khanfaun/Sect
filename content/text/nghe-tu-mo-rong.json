@@ -55,5 +55,15 @@
   "tumr.tip.mpDrain": "Hút {{0}}% linh lực tối đa của địch",
   "tumr.tip.devour": "Kết liễu: nhận một ít tu vi, tâm ma có thể dâng",
   "tumr.tip.tho": "Tổn thọ khi dùng",
-  "tumr.tip.ltCost": "Tốn {{0}} linh thạch, thiếu thì vô hiệu"
+  "tumr.tip.ltCost": "Tốn {{0}} linh thạch, thiếu thì vô hiệu",
+  "tumr.duyenN": "Duyên nghề",
+  "tumr.duyenT": "Trong ngươi có thứ gì đó ứng với {{0}} ({{1}}). Không cần thầy, ngươi tự ngộ được pháp môn này.",
+  "tumr.duyenL": "Theo duyên, tự ngộ {{0}} ({{1}} ngày)",
+  "tumr.duyenSau": "Để sau",
+  "tumr.duyenSauT": "Ngươi gác lại. Nếu tìm tới thầy, người ấy sẽ không lấy phí.",
+  "tumr.duyenTag": " · có duyên",
+  "tumr.dy.kv": "khí vận {{0}}",
+  "tumr.dy.cc": "linh căn {{0}}",
+  "tumr.dy.el": "linh căn hệ {{0}}",
+  "tumr.dy.og": "xuất thân {{0}}"
 }

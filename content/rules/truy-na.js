@@ -20,6 +20,8 @@
 //          cái nào điều kiện chưa hợp thì chờ tiếp, quá giu ngày sau khi hết bị truy mới bỏ.
 //   cai (câu 83): cải trang không chắc chắn — dong[loại nơi] = xác suất bị nhiều người vây quanh nhìn kỹ mỗi lần tới nơi đó (lộ);
 //          khi: lộ khí tức (chưa che giấu tu vi) ở nơi có lính canh (canh) = goc + realm × cảnh giới, tối đa max; đánh nhau ở nơi có dân cũng làm lộ.
+//   Lính canh theo thế lực (core2/66 tnaFa): mỗi nơi có thế lực chủ (nơi neo → thế lực đó; sơn môn → tông đó; nơi khác → thế lực có căn cứ gần nhất cùng đại khu).
+//          Bị nhận ra / cải trang bị lộ chỉ khi thế lực nơi đang đứng đã biết mặt ngươi (phạm tội ở nơi của họ); từ mức lan thì mọi thế lực đều biết.
 //   tu[m] = số tháng ngồi tù · cong[m] = số tháng làm công (0 = không cho) · cai: cải trang (xu, ngày hiệu lực) mua ở tạp hóa / thôn trấn / thành.
 const TNA={
   toi:{pha_dat:2,no:2,chong:1,giet_chung:2,danh:2},

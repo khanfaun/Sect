@@ -55,5 +55,13 @@
   "dat.muaDu": "Ở nơi này ngươi đã có đủ đất rồi.",
   "dat.xongMua": "Đã mua mảnh đất ô {{0}}. Giấy đất mang tên ngươi.",
   "dat.xongBan": "Đã bán lại mảnh đất ô {{0}}.",
-  "dat.canCuaTa": "Chỉ dựng được trên đất của ngươi."
+  "dat.canCuaTa": "Chỉ dựng được trên đất của ngươi.",
+  "dat.oMuaCt": "Ô {{0}} · mua {{1}} ({{2}})",
+  "dat.dMuaCt": "Mua {{0}} cùng mảnh đất của {{1}}. Giá {{2}}. Công trình giữ nguyên, thành của ngươi.",
+  "dat.thueD": "Thuế đất mỗi năm {{0}}.",
+  "dat.thueDNo": "Đang nợ thuế {{0}} (trừ vào tiền bán).",
+  "dat.thueTra": "Nộp thuế đất ở {{0}}: {{1}}.",
+  "dat.thueNo": "Không đủ tiền nộp thuế đất ở {{0}}: nợ {{1}}.",
+  "dat.thueQuan": "Nợ thuế đất ở {{0}} lâu ngày: quan phủ ghi thành nợ {{1}}.",
+  "dat.thueMua": "Còn nợ thuế đất ở nơi này."
 }

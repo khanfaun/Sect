@@ -63,5 +63,11 @@
   "tna.lo.danh": "Đánh nhau một trận, râu giả rơi, y phục rách: lớp cải trang của ngươi không còn.",
   "tna.lo.dong": "Người chen chúc vây quanh, có kẻ nhìn kỹ mặt ngươi: lớp cải trang bị lộ.",
   "tna.lo.khi": "Lính canh có tu vi cảm được khí tức của ngươi, chẳng giống kẻ phàm ngươi đóng vai: cải trang bị lộ.",
-  "tna.hudHoan": "Đang bị truy lùng: kỳ ngộ và chuyện lạ tạm lánh xa, đợi ngươi hết bị truy mới tới."
+  "tna.hudHoan": "Đang bị truy lùng: kỳ ngộ và chuyện lạ tạm lánh xa, đợi ngươi hết bị truy mới tới.",
+  "tna.hoanBao": "Đang bị truy lùng: kỳ ngộ và chuyện lạ tạm lánh xa ngươi.",
+  "tna.hoanHet": "Đã thoát vòng truy lùng: những chuyện lạ bị lỡ sẽ lần lượt tìm tới.",
+  "tna.faBiet": "Lính canh biết mặt ngươi: {{0}}.",
+  "tna.faKhap": "Lính canh mọi thế lực trong vùng đều biết mặt ngươi.",
+  "tna.faDay": "Nơi này thuộc {{0}}, lính canh ở đây chưa biết mặt ngươi.",
+  "tna.faQuan": "quan phủ {{0}}"
 }

@@ -28,4 +28,24 @@ const TU_BI={
 //   khuy: Khuy Mệnh của Thiên cơ sư — cảnh giới tối thiểu (3 Nguyên Anh), năm thọ mất; tucMang: khả năng nhớ lại mỗi nghề tu ở kiếp sau (Túc Mạng Thông)
 //   coNuoi: linh thạch nuôi cổ mỗi tháng; coDoi: số tháng bỏ đói thì cổ cắn chủ; thonTam: khả năng tâm ma dâng mỗi lần thôn phệ, thonTamV: mức tăng
 const TU_MR={phatGioi:['giet_vo_toi','giet_dau_hang','giet_cuop_dang_ac','giet_thien_kieu_chinh','giet_ma_dau','giet_doat_bao'],phatTat:30,phatX:0.5,phatGiau:500,
-  nhoNut:5,nhoVo:3,tcNam:3,tcKhien:0.2,khuy:{realm:3,tho:10},tucMang:0.5,coNuoi:1,coDoi:2,thonTam:0.2,thonTamV:3};
+  nhoNut:5,nhoVo:3,tcNam:3,tcKhien:0.2,khuy:{realm:3,tho:10},tucMang:0.5,coNuoi:1,coDoi:2,thonTam:0.2,thonTamV:3,
+  // hiệu ứng ngoài trận (số ở dòng công pháp, content/catalog/arts.json): amNoi: loại nơi âm khí nặng (lôi pháp yếu, dòng loiAm);
+  //   thiTrong: loại nơi tính là trong nhà / dưới đất (ban ngày ở đây xác luyện không yếu, dòng thiNgay)
+  amNoi:['ma','phe'],thiTrong:['dong','khoang']};
+// Lối vào nghề theo duyên (B §7.4 "Vào"), ngoài bái học ở nơi thầy. Có duyên thì: bái học ở nơi thầy không mất phí; mỗi kiếp một lần,
+// khi đã có thể học (tu sĩ, đủ tầng Luyện Khí, còn chỗ, hợp luật ghép) hiện hộp "Duyên nghề" cho tự ngộ ngay tại chỗ (thời gian như bái học, không phí).
+//   kv: khí vận (r.kv) · cc: cờ cải căn (r.ccFlag) · el: hệ linh căn (r.root.els) · og: xuất thân (r.origin)
+//   Tự quyết theo B: Cổ ← Linh Căn Cổ · Thi ← Quỷ Nhãn · Phật ← Phật Tử · Nho ← Văn tâm (cải căn Dưỡng Hạo Nhiên Khí), Hạo Nhiên Chính Khí ·
+//   Thiên cơ ← Nhân Quả Đạo, Thiên Lý Nhãn · Thương ← thương nhân có linh căn · Lôi ← linh căn hệ Lôi, Lôi Đình Bá, Lôi Thần Giáng Thế ·
+//   Huyễn ← Huyễn Ảnh Phong Thân, Mị Cốt · Thôn phệ ← Thiên Ma Hàng Thế, Tà Thần Nghịch Tử.
+const TU_DUYEN={
+  TU17:{cc:['nuoi_co']},
+  TU18:{kv:['quy_nhan']},
+  TU19:{kv:['phat_tu']},
+  TU20:{cc:['van_tam'],kv:['hao_nhien_chinh_khi']},
+  TU21:{kv:['nhan_qua_dao','thien_ly_nhan']},
+  TU22:{og:['buon']},
+  TU23:{el:['loi'],kv:['loi_dinh_ba','loi_than_giang_the']},
+  TU24:{kv:['huyen_anh_phong_than','mi_cot']},
+  TU25:{kv:['thien_ma_hang_the','ta_than_nghich_tu']},
+};

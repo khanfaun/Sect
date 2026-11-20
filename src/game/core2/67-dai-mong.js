@@ -178,12 +178,23 @@ function dmDo(id){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place')return f
   else if(id==='ng03c'){NG.NG03.chot[loc]=1;msg.push(contentText('dm.ng03cT',[NG_NOI.filter(l=>NG.NG03.chot[l]).length]));}
   else if(id==='ng03h'){NG.NG03.hen=W().t+NGHI_THUC.NG03.henNgay*HD;msg.push(dmNgLoi('NG03','chuanBi')||contentText('dm.ng03hT'));}
   else if(id==='ng04'){const N=NGHI_THUC.NG04;const mx=S().maxHp;for(let i=0;i<3;i++)r.hp=Math.max(1,r.hp-Math.round(mx*N.xung));dbg('dm.xung',{hp:r.hp});dmKetHet('END08');return true;}
-  else if(id==='ng04t'){r.dietThieu=1;const z=maVucTao(null,NGHI_THUC.NG04.thieuKhu);if(typeof demDaiTang==='function')demDaiTang(1,'dm');dbg('dm.dietThieu',{khu:z.length});
-    msg.push(dmNgLoi('NG04','hong')||contentText('dm.ng04tT',[z.length]));suLuocAdd(contentText('dm.suDiet',[r.ten]),'ma');}
+  else if(id==='ng04t'){const z=dmDietThieu('ng04');msg.push(dmNgLoi('NG04','hong')||contentText('dm.ng04tT',[z.length]));}
   sc.msg=msg.filter(Boolean);sc.chips=ch;sc.venue=null;sc.seq=(sc.seq||0)+1;if(typeof saveSoon==='function')saveSoon();return true;}
+// Diệt Thế mở thiếu điều kiện (LOC15 hoặc kết DL02): ba khu đất ma, Đêm Dài +1, mỗi kiếp một lần
+function dmDietThieu(src){const r=G.run;r.dietThieu=1;const z=maVucTao(null,NGHI_THUC.NG04.thieuKhu);if(typeof demDaiTang==='function')demDaiTang(1,'dm');
+  dbg('dm.dietThieu',{khu:z.length,src:src||'ng04'});suLuocAdd(contentText('dm.suDiet',[r.ten]),'ma');return z;}
+// Đại lộ DL02 "Diệt Thế Ma Đồ": kết tuyến → cưỡng mở Diệt Thế (bảng DM_DL). Đủ điều kiện → r.dlDiet=1, END08 ở dmTick; thiếu → dmDietThieu.
+function dmDl02(S){const r=G.run;if(!r||!feat('mong')||!S||typeof DM_DL==='undefined'||S.id!==DM_DL.tuyen||!DM_DL.ket.includes(S.ket))return;
+  if(r.dietThieu||r.dlDiet||(r.ends||[]).includes('END08'))return;const ok=dmDkOk(dmDk('NG04'));dbg('dm.dl02',{ket:S.ket,ok});
+  if(ok){r.dlDiet=1;dmSay(contentText('dm.dl02Du'),'dn');return;}
+  const z=dmDietThieu('dl02');dmSay(contentText('dm.dl02Thieu',[z.length]),'dn');}
+{const _tk=tyKet;tyKet=function(S){const x=_tk.apply(this,arguments);try{dmDl02(S);}catch(e){dbg('dm.loi',{m:String(e.message||e)});}return x;};}
+function dmDl02Ket(){const r=G.run,N=NGHI_THUC.NG04;r.dlDiet=2;r.st=Math.max(0,(r.st||0)-N.st);const mx=S().maxHp;for(let i=0;i<3;i++)r.hp=Math.max(1,r.hp-Math.round(mx*N.xung));
+  dbg('dm.xung',{hp:r.hp,src:'dl02'});dmKetHet('END08');}
 function dmNgLoi(ma,k){const D=dmD().ng||{},x=D[ma];return x&&x[k]?dmT(x[k]):'';}
 // thời gian: Người Gác Bến tới hẹn, chốt NG03 tới giờ
 function dmTick(){const r=G.run;if(!r||!W())return;const NG=W().ng;
+  if(r.dlDiet===1&&!(r.scene&&['kyngo','combat'].includes(r.scene.type))){dmDl02Ket();return;}
   if(NG&&NG.NG03&&NG.NG03.hen&&W().t>=NG.NG03.hen){if(ngDu(NG.NG03.chot)){dbg('dm.ngat',{});dmKetHet('END07');return;}NG.NG03.hen=0;dmSay(dmNgLoi('NG03','hong')||contentText('dm.ng03Hong'),'dn');}
   gbTick();}
 {const _adv=advanceTime;advanceTime=function(h){const o=_adv.apply(this,arguments);if(!G.run)return o;try{dmTick();}catch(e){dbg('dm.loi',{m:String(e.message||e)});}return o;};}

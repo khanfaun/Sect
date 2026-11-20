@@ -27,13 +27,13 @@ function tnaDanhXuong(reg){const k='reg:'+reg,v=danhGet(k);if(v>TNA.danh)danhPut
 function tnaDanhLen(reg){const k='reg:'+reg,v=danhGet(k);if(v<=TNA.danh)danhPut(k,TNA.danhSau-v);}
 // quan phủ ghi tội: tăng mức, cộng tiền treo thưởng, quan sai lần theo (nếu ngươi đang ở vùng đó)
 function tnaBao(reg,nang,o){const r=G.run;if(!r||!nang||!W())return null;o=o||{};const T=tnaS(),t=W().t;
-  const E=T[reg]||(T[reg]={m:0,tien:0,t,ly:[]});const m0=E.m;E.m=clamp(E.m+nang,1,5);
-  const nd=o.node;E.tien+=Math.round(TNA.tien.xu*nang*(nd&&nd.type==='thanh'?TNA.tien.thanh:1));E.t=t;if(o.ly&&!E.ly.includes(o.ly))E.ly.push(o.ly);
-  if(E.m>=2)tnaDanhXuong(reg);
+  const E=T[reg]||(T[reg]={m:0,tien:0,t,ly:[],fa:[]});const m0=E.m;E.m=clamp(E.m+nang,1,5);
+  const nd=o.node;tnaFaGhi(E,o.lan?'*':o.faK||(nd?tnaFa(nd):'*'));E.tien+=Math.round(TNA.tien.xu*nang*(nd&&nd.type==='thanh'?TNA.tien.thanh:1));E.t=t;if(o.ly&&!E.ly.includes(o.ly))E.ly.push(o.ly);
+  if(E.m>=TNA.lan)E.fa=['*'];if(E.m>=2)tnaDanhXuong(reg);
   if(E.m>=TNA.lan&&!o.lan)for(let i=0;i<W().regions.length;i++){if(i===+reg)continue;const F=T[i];if(!F||F.m<TNA.lanM)tnaBao(i,TNA.lanM-(F?F.m:0),{ly:'lan',lan:1,quiet:1,noTruy:1});}
   if(!o.quiet){const m=contentText(m0?'tna.tang':'tna.bao',[tnaRegTen(reg),tnaTen(E.m)]);note(m,'dn');log(m);}
   if(!o.noTruy&&feat('truy')&&(o.luon||G.run.region===+reg))truyStart(o.k||'quan',{n:contentText(o.k==='no'?'truy.noTen':'tna.quanTen'),i:'👮',ek:'sontac',d:clamp(E.m-2,0,3)});
-  dbg('tna.bao',{reg:+reg,m0,m:E.m,nang,ly:o.ly||'',tien:E.tien});return E;}
+  dbg('tna.bao',{reg:+reg,m0,m:E.m,nang,ly:o.ly||'',tien:E.tien,fa:(E.fa||['*']).join()});return E;}
 // xoá truy nã ở một vùng (nộp phạt, ngồi tù, làm công, mất dấu hết)
 function tnaXoa(reg,why){const r=G.run;const E=tnaE(reg);if(!E)return false;delete r.tna[reg];tnaDanhLen(reg);
   if(r.truy&&['quan','san'].includes(r.truy.k)&&(why!=='matdau'||G.run.region===+reg))truyEnd(why,1);
@@ -78,6 +78,7 @@ function tnaTick(){const r=G.run;if(!tnaOn()||TNA_BUSY)return;const t=W().t,T=tn
 // tới thôn trấn / thành trong vùng đang bị truy nã: có thể bị nhận ra (cải trang, che giấu tu vi giúp né)
 {const _ar=arrive;arrive=function(id){const o=_ar.apply(this,arguments);const r=G.run;if(!tnaOn())return o;const n=nodeById(id);
   if(!n||n.state==='ruin'||!['tran','thanh','cho'].includes(n.type))return o;const reg=tnaReg(n),E=tnaE(reg);if(!E)return o;
+  if(!tnaBiet(E,n)){dbg('tna.laFa',{reg,fa:tnaFa(n)});return o;}
   const lo=tnaCaiThu(n);const p=lo?1:TNA.nhan[E.m]*(tnaChe()?TNA.chung.che:1);const hit=lo||chance(p);dbg('tna.nhan',{reg,p:Math.round(p*100),hit,lo:lo||''});
   if(hit){E.t=W().t;const m=contentText('tna.nhanRa',[n.name]);note(m,'dn');log(m);
     if(feat('truy'))truyStart('quan',{n:contentText('tna.quanTen'),i:'👮',ek:'sontac',d:clamp(E.m-2,0,3)});}
@@ -86,11 +87,12 @@ function tnaTick(){const r=G.run;if(!tnaOn()||TNA_BUSY)return;const t=W().t,T=tn
 {const _cc=combatContinue;combatContinue=function(){const r=G.run,sc=r&&r.scene;const T=r&&r.truy;
   const res=sc&&sc.type==='combat'&&sc.over&&sc.truyCh&&T&&['quan','san'].includes(T.k)&&tnaOn()?sc.over:null;const reg=r?r.region||0:0;
   const o=_cc.apply(this,arguments);if(!res||!G.run)return o;
-  if(res==='win')tnaBao(reg,TNA.toi.chong,{ly:'chong'});
-  else if(res==='lose'){const E=tnaE(reg)||tnaBao(reg,1,{ly:'chong',quiet:1,noTruy:1});tnaGiam(reg,'tu',1);}
+  const nd=nodeById(r.at),nd2=nd&&tnaReg(nd)===+reg?nd:null;
+  if(res==='win')tnaBao(reg,TNA.toi.chong,{ly:'chong',node:nd2});
+  else if(res==='lose'){const E=tnaE(reg)||tnaBao(reg,1,{ly:'chong',quiet:1,noTruy:1,node:nd2});tnaGiam(reg,'tu',1);}
   return o;};}
 // gộp nợ (Sửa-B): truy nã ở quê vì nợ = tội 'no' ở vùng quê
-function tnaNo(r){const n=noQue(r);if(!n)return false;tnaBao(tnaReg(n),TNA.toi.no,{ly:'no',k:'no',luon:1,quiet:1});return true;}
+function tnaNo(r){const n=noQue(r);if(!n)return false;tnaBao(tnaReg(n),TNA.toi.no,{ly:'no',k:'no',luon:1,quiet:1,faK:tnaFa(n)});return true;}
 {const _nt=noTruy;noTruy=function(r){if(_nt.apply(this,arguments))return true;if(!tnaOn())return false;const n=noQue(r);return !!n&&tnaMuc(tnaReg(n))>0;};}
 // gộp việc làm trong sổ nghiệp: phạm luật ở nơi có dân (không phải việc làm kín) → có thể bị truy nã
 {const _d=deed;deed=function(id,o){const res=_d.apply(this,arguments);const r=G.run;
@@ -130,6 +132,7 @@ function tnaHud(){const r=G.run;if(!tnaOn()||!r.tna)return null;let reg=r.region
   if(!E){let b=null;for(const k in r.tna)if(!b||r.tna[k].m>r.tna[b].m)b=k;if(b==null)return null;reg=+b;E=r.tna[b];}
   const L=[contentText('tna.hudN'),contentText('tna.hudT',[tnaRegTen(reg),tnaTen(E.m),tnaTienChu(E.tien)])];
   const khac=Object.keys(r.tna).filter(k=>+k!==reg).map(k=>tnaRegTen(k)+': '+tnaTen(r.tna[k].m));if(khac.length)L.push(contentText('tna.hudKhac',[khac.join(', ')]));
+  L.push(tnaFaHud(E,reg));
   if(tnaChe())L.push(contentText('tna.hudChe'));if(tnaHoan())L.push(contentText('tna.hudHoan'));L.push(contentText('tna.hudCach'));
   return {t:TNA_I[E.m],tip:L.join('\n'),m:E.m};}
 // ---------- Câu 83: cải trang qua mặt được nhưng không chắc chắn ----------
@@ -153,7 +156,8 @@ function tnaHoan(){const r=G.run;if(!r||!tnaOn())return false;
   return !!(r.tnaCh||(r.truy&&['quan','san','no'].includes(r.truy.k))||tnaMuc(r.region||0)>=TNA.hoan.m);}
 kyHoanNow=function(){return tnaHoan();};
 function tnaHoanThem(id){const r=G.run;const Q=Array.isArray(r.kyHoan)?r.kyHoan:(r.kyHoan=[]);
-  if(Q.length<TNA.hoan.max&&!Q.includes(id))Q.push(id);dbg('tna.hoan',{id,n:Q.length});}
+  if(Q.length<TNA.hoan.max&&!Q.includes(id))Q.push(id);dbg('tna.hoan',{id,n:Q.length});
+  if(!r.kyHoanBao){r.kyHoanBao=1;note(contentText('tna.hoanBao'),'dn');dbg('tna.hoanBao',{id});}}
 {const _kn=kyNgau;kyNgau=function(ev){const r=G.run;if(!ev||!tnaHoan())return _kn.apply(this,arguments);
   tnaHoanThem(ev.id);r.kyT=W().t;return false;};}
 // sự kiện dọc đường: đang hoãn thì phần "sự kiện" được giữ lại, phần chạm trán đánh nhau vẫn như cũ (cùng xác suất với roadRoll gốc, core/09)
@@ -165,7 +169,11 @@ function tnaHoanThem(id){const r=G.run;const Q=Array.isArray(r.kyHoan)?r.kyHoan:
 // quá TNA.hoan.giu ngày sau khi hết bị truy mà vẫn chưa hợp thì mới bỏ. r.kyHoanHet = lúc hết bị truy.
 function tnaHoanThu(id){if(id.startsWith('road:')){const eid=pickEvent(id.slice(5),'road');return !!eid&&!!startEvent(eid)&&!!G.run.scene;}
   const ev=KYNGO.find(x=>x.id===id);if(!ev)return null;if(ev.g&&hasTp())return null;kyStart(ev);return !!G.run.scene;}
-function tnaHoanTha(){const r=G.run;const Q=r&&r.kyHoan;if(!Array.isArray(Q)||!Q.length)return false;if(tnaHoan()){r.kyHoanHet=null;return false;}
+function tnaHoanTha(){const r=G.run;if(!r)return false;const Q=r.kyHoan,co=Array.isArray(Q)&&Q.length>0;
+  if(tnaHoan()){if(co)r.kyHoanHet=null;return false;}
+  // hết đợt bị truy: báo một dòng (chỉ khi đợt này có cái bị giữ lại), đợt sau báo lại từ đầu
+  if(r.kyHoanBao){r.kyHoanBao=0;if(co){note(contentText('tna.hoanHet'),'up');dbg('tna.hoanHet',{n:Q.length});}}
+  if(!co)return false;
   const t=W().t;if(r.kyHoanHet==null)r.kyHoanHet=t;
   if(r.scene||r._inBq||r.moving||G.screen!=='map'||TNA_BUSY)return false;
   if(t-(r.kyThaT==null?-1e9:r.kyThaT)<TNA.hoan.gian*HD)return false;
@@ -175,3 +183,24 @@ function tnaHoanTha(){const r=G.run;const Q=r&&r.kyHoan;if(!Array.isArray(Q)||!Q
     if(k===null||het){Q.splice(i,1);i--;dbg('tna.bo',{id});}}
   return false;}
 {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);if(G.run&&!TNA_BUSY&&tnaOn())tnaHoanTha();return o;};}
+// ---------- Lính canh chia theo thế lực từng nơi ----------
+// Mỗi nơi có một thế lực chủ (tnaFa): nơi neo của thế lực còn sống → thế lực đó; sơn môn → chính tông đó ('tong:id');
+// nơi khác → thế lực còn sống có căn cứ gần nhất trong cùng đại khu (THE_LUC, Đ8.3); không có thì quan phủ địa phương ('reg:vùng').
+// E.fa = [các thế lực đã biết mặt ngươi] trong bản ghi truy nã của vùng; '*' = cả vùng (tội không rõ nơi, danh tiếng tụt, bản lưu cũ không có fa, tội lan).
+// Bị nhận ra / cải trang bị lộ chỉ do lính canh của thế lực nơi đang đứng, nếu thế lực đó biết mặt ngươi. Tội rất nặng (từ TNA.lan) thì mọi thế lực đều biết.
+function tnaFa(n){if(!n)return null;const w=W();if(n.type==='tong')return 'tong:'+n.id;const reg=tnaReg(n);
+  if(typeof THE_LUC==='undefined'||typeof anchorOf!=='function')return 'reg:'+reg;
+  const L=n.anchor&&typeof LOC_NEO!=='undefined'&&LOC_NEO[n.anchor];if(L&&L.fa&&THE_LUC[L.fa]&&faAlive(L.fa))return L.fa;
+  let best=null,bd=1e18;for(const id of Object.keys(THE_LUC).sort()){if(!faAlive(id))continue;const a=anchorOf(w,THE_LUC[id].noi);if(!a||tnaReg(a)!==reg)continue;
+    const d=Math.hypot((a.x||0)-(n.x||0),(a.y||0)-(n.y||0));if(d<bd){bd=d;best=id;}}
+  return best||'reg:'+reg;}
+function tnaFaTen(k){if(!k)return '';if(k==='*')return contentText('tna.faKhap');
+  if(k.startsWith('tong:')){const n=nodeById(+k.slice(5));return n?n.name:'';}
+  if(k.startsWith('reg:'))return contentText('tna.faQuan',[tnaRegTen(+k.slice(4))]);
+  const f=typeof faNow==='function'&&THE_LUC[k]&&faNow(k);return f&&f.n||(THE_LUC[k]||{}).n||k;}
+function tnaFaGhi(E,k){if(!E.fa)return;if(E.fa.includes('*'))return;k=k||'*';if(k==='*')E.fa=['*'];else if(!E.fa.includes(k))E.fa.push(k);}
+// thế lực chủ nơi n có biết mặt ngươi không (bản ghi cũ không có fa = cả vùng)
+function tnaBiet(E,n){if(!E)return false;if(!E.fa||E.fa.includes('*')||E.m>=TNA.lan)return true;return E.fa.includes(tnaFa(n));}
+function tnaFaHud(E,reg){const r=G.run;if(!E.fa||E.fa.includes('*')||E.m>=TNA.lan)return contentText('tna.faKhap');
+  let s=contentText('tna.faBiet',[E.fa.map(tnaFaTen).join(', ')]);const n=nodeById(r.at);
+  if(n&&tnaReg(n)===+reg&&!tnaBiet(E,n))s+=' '+contentText('tna.faDay',[tnaFaTen(tnaFa(n))]);return s;}

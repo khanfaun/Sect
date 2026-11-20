@@ -122,3 +122,53 @@ function tuKhuy(){const r=G.run;if(tuWhyKhuy())return null;r.lifeAdj=(r.lifeAdj|
   if(f.tho)L.push(mrT('tip.tho'));if(f.ltCost)L.push(mrT('tip.ltCost',[f.ltCost]));
   if(L.length){const i=s.lastIndexOf('\n');s=i>=0?s.slice(0,i)+'\n'+L.join('\n')+s.slice(i):s+'\n'+L.join('\n');}
   return s;};}
+// ---------- lối vào nghề theo duyên (bảng TU_DUYEN): khí vận, linh căn, xuất thân ----------
+// r.tuDuyen={TUxx:1} đã hiện hộp "Duyên nghề" trong kiếp (bản lưu cũ không có: coi như chưa).
+function mrDuyen(id,r){r=r||G.run;const D=TU_DUYEN[id];if(!r||!D)return null;
+  const kv=(D.kv||[]).find(k=>(r.kv||[]).includes(k));if(kv)return mrT('dy.kv',[TT_DEST[kv]?TT_DEST[kv].name:kv]);
+  const cc=(D.cc||[]).find(k=>(r.ccFlag||{})[k]);if(cc){const P=Object.values(CAI_CAN).find(p=>p.steps.some(s=>s.okFx&&s.okFx.flag===cc));return mrT('dy.cc',[P?P.n:cc]);}
+  const el=(D.el||[]).find(e=>r.root&&rootKnown(r)&&(r.root.els||[]).includes(e));if(el)return mrT('dy.el',[EL[el]?EL[el].n:el]);
+  const og=(D.og||[]).find(o=>r.origin===o);if(og){const O=ORIGIN.find(x=>x.id===og);return mrT('dy.og',[O?O.n:og]);}
+  return null;}
+{const _p=tuPhi;tuPhi=function(id,luu){if(mrDuyen(id))return 0;return _p.apply(this,arguments);};}
+{const _o=tuOpts;tuOpts=function(n){const L=_o.apply(this,arguments);for(const o of L){const m=/^(hoc|luu):(TU\d\d)$/.exec(o.id);if(m&&mrDuyen(m[2])&&!/có duyên/.test(o.l))o.l+=mrT('duyenTag');}return L;};}
+function mrDuyenEv(id){let ev=KYNGO.find(x=>x.id==='tumr_duyen');if(!ev){ev={id:'tumr_duyen',sp:1,n:'',t:'',c:[]};KYNGO.push(ev);}
+  const N=TU_NGHE[id],a0=TU_ART[id];ev.n=mrT('duyenN');ev.t=mrT('duyenT',[N.n,mrDuyen(id)||'']);
+  ev.c=[{l:mrT('duyenL',[a0.n,TU_TANG[0].ngay]),need:()=>tuWhyHoc(id,0),go:()=>{const res=tuHoc(id,0);dbg('tumr.duyenHoc',{id,ok:!!res});return res||{t:''};}},
+    {l:mrT('duyenSau'),go:()=>{dbg('tumr.duyenSau',{id});return {t:mrT('duyenSauT')};}}];return ev;}
+// mỗi tháng: nghề có duyên chưa học, đã học được ngay (bỏ qua phí) → hộp một lần mỗi kiếp
+function mrDuyenTick(){const r=G.run;if(!r||!feat('tuMr')||r.scene||r._inBq||G.screen!=='map'||!W()||!tuCanTu(r))return false;
+  for(const id of Object.keys(TU_DUYEN)){if((r.tuDuyen||{})[id]||tuArtOf(id)||!mrDuyen(id))continue;if(tuWhyHoc(id,0))continue;
+    r.tuDuyen=r.tuDuyen||{};r.tuDuyen[id]=1;dbg('tumr.duyen',{id,why:mrDuyen(id)});kyStart(mrDuyenEv(id));return true;}
+  return false;}
+{const _m=ccMonth;ccMonth=function(){const out=_m.apply(this,arguments);try{mrDuyenTick();}catch(e){dbg('tumr.loi',{m:String(e.message||e)});}return out;};}
+// ---------- hiệu ứng ngoài trận (số ở dòng công pháp) ----------
+// Cổ sư coGiai: hợp đồng giải cổ ít hỏng hơn v%
+{const _hd=tuHd;tuHd=function(id){const v=id==='TU17'&&G.run?(aggFx().coGiai||0):0;if(!v||G._tuNoRui)return _hd.apply(this,arguments);
+  const tha=chance(Math.min(100,v)/100);if(tha)G._tuNoRui=1;try{return _hd.apply(this,arguments);}finally{if(tha){G._tuNoRui=0;dbg('tumr.coGiai',{});}}};}
+// Thi tu thiNgay: ban ngày (sáng, chiều) ở nơi ngoài trời, xác luyện yếu đi v% (công, khí huyết)
+function mrNgoaiTroi(){const r=G.run;const n=r&&nodeById(r.at);return !(n&&TU_MR.thiTrong.includes(n.type));}
+{const _s=fxmSummon;fxmSummon=function(sc,u,o){const x=_s.apply(this,arguments);if(!x||!o||o.k!=='thi'||!u||!u.isMain||!G.run)return x;
+  const v=aggFx().thiNgay||0;const p=partOf(W().t);if(v&&(p==='sang'||p==='chieu')&&mrNgoaiTroi()){const m=1-Math.min(90,v)/100;
+    x.atk=Math.round(x.atk*m);x.matk=Math.round(x.matk*m);x.hp=x.max=Math.max(1,Math.round(x.max*m));dbg('tumr.thiNgay',{p,m});}
+  return x;};}
+// Nho tu nhoThuyet: thiện cảm tăng (phần dương) thêm v%
+{const _f=favAdd;favAdd=function(n,d,why){if(d>0&&G.run&&!G.run._nhoIn){G.run._nhoIn=1;let v=0;try{v=aggFx().nhoThuyet||0;}finally{G.run._nhoIn=0;}
+    if(v){const d2=Math.round(d*(1+v/100));if(d2!==d)dbg('tumr.nhoThuyet',{d,d2});d=d2;}}
+  return _f.call(this,n,d,why);};}
+// Thương tu banP: bán đồ được giá hơn v% (shopP mua rẻ dùng chung bộ máy giá sẵn có)
+{const _sl=sellList;sellList=function(){const L=_sl.apply(this,arguments);const v=G.run?(aggFx().banP||0):0;
+  if(v)for(const x of L)if(typeof x.p==='number')x.p=Math.max(1,Math.round(x.p*(1+v/100)));return L;};}
+// Lôi pháp loiAm: chiêu Lôi pháp ở nơi âm khí nặng yếu đi v% · loiKiep: thiên kiếp hệ lôi đánh nhẹ hơn v%
+{const _rs=resolveSkill;resolveSkill=function(sc,u,sk,lv,tg,qm,offs){
+  if(u&&u.isMain&&G.run&&tuOfSk(sk&&sk.id)==='TU23'){const v=aggFx().loiAm||0;const n=nodeById(G.run.at);
+    if(v&&n&&TU_MR.amNoi.includes(n.type)){qm=(qm||1)*(1-Math.min(90,v)/100);dbg('tumr.loiAm',{t:n.type});}}
+  return _rs.call(this,sc,u,sk,lv,tg,qm,offs);};}
+{const _kh=kiepHit;kiepHit=function(sc,k,off){const K=sc&&sc.kiep;if(K&&G.run){const kd=K.kind||'loi';const v=aggFx().loiKiep||0;
+    if(v&&KIEP[kd]&&KIEP[kd].el==='loi'){K.uy=(K.uy||1)*(1-Math.min(90,v)/100);dbg('tumr.loiKiep',{kd,v});}}
+  return _kh.apply(this,arguments);};}
+// Thôn phệ thonBt: đã nuốt tu vi ở cảnh giới đang đứng (r.tuThonR) thì tỉ lệ đột phá ×(1−v%)
+{const _rs=resolveSkill;resolveSkill=function(sc,u,sk){const f=(sk&&sk.fx)||{};const t=arguments[4]&&arguments[4][0];const out=_rs.apply(this,arguments);
+  if(f.devour&&u&&u.isMain&&t&&t.hp<=0&&G.run)G.run.tuThonR=(G.run.realm||0)+1;return out;};}
+{const _br=btRate;btRate=function(slots){const p=_br.apply(this,arguments);const r=G.run;if(!r||(r.tuThonR||0)!==(r.realm||0)+1)return p;
+  const v=aggFx().thonBt||0;if(!v||p>=1)return p;dbg('tumr.thonBt',{v});return p*(1-Math.min(90,v)/100);};}

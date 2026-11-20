@@ -12315,11 +12315,11 @@
         "req": 1
       },
       {
-        "fx": "tuNote",
-        "v": 0,
+        "fx": "coGiai",
+        "v": 50,
         "req": 2,
         "raw": 1,
-        "d": "Giải cổ cho người dễ hơn (chờ hệ chữa bệnh)"
+        "d": "Giải cổ cho người: rủi ro hỏng việc giảm {v}%"
       }
     ],
     "d": "Trăm con trùng chung một vò, con nào sống sót mới đáng gọi là cổ.",
@@ -12346,11 +12346,11 @@
         "req": 0
       },
       {
-        "fx": "tuNote",
-        "v": 0,
+        "fx": "thiNgay",
+        "v": 30,
         "req": 0,
         "raw": 1,
-        "d": "Ban ngày ngoài trời, xác luyện yếu đi (chờ hệ ngày đêm)"
+        "d": "Ban ngày ngoài trời, xác luyện yếu đi {v}%"
       },
       {
         "sk": "sk18b",
@@ -12474,11 +12474,11 @@
         "req": 1
       },
       {
-        "fx": "tuNote",
-        "v": 0,
+        "fx": "nhoThuyet",
+        "v": 20,
         "req": 2,
         "raw": 1,
-        "d": "Lời nói ra có sức nặng với người đọc sách (chờ hệ thuyết phục)"
+        "d": "Lời nói có sức nặng: thiện cảm người khác tăng thêm {v}%"
       }
     ],
     "d": "Lòng ngay thì chữ thẳng, chữ thẳng thì lời có sức.",
@@ -12558,11 +12558,11 @@
         "req": 0
       },
       {
-        "fx": "tuNote",
-        "v": 0,
+        "fx": "shopP",
+        "v": 5,
         "req": 0,
         "raw": 1,
-        "d": "Nhìn ra linh thạch giả (chờ hệ giám định)"
+        "d": "Nhìn ra hàng giả, mua đồ rẻ hơn {v}%"
       },
       {
         "sk": "sk22b",
@@ -12580,11 +12580,11 @@
         "req": 1
       },
       {
-        "fx": "tuNote",
-        "v": 0,
+        "fx": "banP",
+        "v": 10,
         "req": 2,
         "raw": 1,
-        "d": "Cho vay linh thạch, mở phường thị (chờ hệ thương hội)"
+        "d": "Bán đồ được giá hơn {v}%"
       }
     ],
     "d": "Linh thạch chảy như nước; người giữ được nó là người biết đào mương.",
@@ -12611,11 +12611,11 @@
         "req": 0
       },
       {
-        "fx": "tuNote",
-        "v": 0,
+        "fx": "loiAm",
+        "v": 25,
         "req": 0,
         "raw": 1,
-        "d": "Nơi âm khí nặng, lôi pháp yếu đi"
+        "d": "Nơi âm khí nặng, lôi pháp yếu đi {v}%"
       },
       {
         "sk": "sk23b",
@@ -12633,11 +12633,11 @@
         "req": 1
       },
       {
-        "fx": "tuNote",
-        "v": 0,
+        "fx": "loiKiep",
+        "v": 20,
         "req": 2,
         "raw": 1,
-        "d": "Thiên lôi đánh xuống nhẹ hơn một phần (chờ hệ thiên kiếp)"
+        "d": "Thiên lôi đánh xuống nhẹ hơn {v}%"
       }
     ],
     "d": "Năm ấn trong lòng bàn tay, mỗi ấn giữ một tiếng sét chưa nổ.",
@@ -12739,11 +12739,11 @@
         "req": 1
       },
       {
-        "fx": "tuNote",
-        "v": 0,
+        "fx": "thonBt",
+        "v": 10,
         "req": 2,
         "raw": 1,
-        "d": "Tu vi nuốt được khiến đột phá khó hơn (chờ cân bằng)"
+        "d": "Đã thôn phệ ở cảnh giới này thì đột phá khó hơn {v}%"
       }
     ],
     "d": "Thứ gì đã chết thì không cần nữa; kẻ nuốt nó thì cần.",
