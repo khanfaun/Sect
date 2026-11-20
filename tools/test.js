@@ -659,7 +659,7 @@ const TESTS = {
   // Đ7.4: kiểm nghề tu — đủ ba chiêu sau syncSkills, luật không ghép, thần thông chỉ qua pháp tướng, 48 chiêu chạy được trong trận
   nghe_tu() {
     fresh("G._ngNoEv=1;G._tuNoRui=1;G.run.pham=0;G.run.root={id:'tap',els:['kim','moc'],q:'thuong'};G.run.rootKnown=1;G.run.st=9999;var ntLk=lkTang;lkTang=()=>9");
-    ok(run("Object.keys(TU_NGHE).length")===16&&run("Object.keys(TU_ART).length")===16, 'mười sáu nghề tu, mười sáu công pháp');
+    ok(run("Object.keys(TU_NGHE).filter(id=>!TU_NGHE[id].mr).length")===16&&run("Object.keys(TU_ART).length")===Object.keys(JSON.parse(run("JSON.stringify(TU_NGHE)"))).length, 'mười sáu nghề tu lõi, mỗi nghề một công pháp');
     ok(run("Object.keys(TU_NGHE).every(id=>TU_ART[id].lines.filter(x=>x.sk).map(x=>x.sk).join()===['a','b','c'].map(c=>'sk'+id.slice(2)+c).join()&&['a','b','c'].every(c=>!!SK['sk'+id.slice(2)+c]))"), 'mỗi công pháp mở đúng ba chiêu A, B, C');
     run(`(()=>{const r=G.run;r.scene=null;const n=tuNode('TU01');r.at=n;openPlace(n);})()`);run("venueDo('tumon','hoc:TU01')");
     run("G.run.tu.k.TU01.xp=0;tuHd('TU01');G.run.tu.k.TU01.xp=300;tuTang('TU01');G.run.realm=1;tuHd('TU01');tuTang('TU01');syncSkills()");
@@ -684,8 +684,91 @@ const TESTS = {
       const e=run(`(()=>{try{G.run.scene=null;startCombat({},{kind:'node'});const sc=G.run.scene,me=mainUnit(sc);const f=alive(sc,'B')[0];f.hp=f.max=99999;me.mp=me.maxMp=9999;
         resolveSkill(sc,me,SK.sk06a,1,[],1,null);const sk=SK['${id}'];if(sk.fx.tgt)doSkill(sc,me,sk,1,f.id,1);else resolveSkill(sc,me,sk,1,sk.fx.p?[f]:[],1,'auto');onZero(sc,me);onZero(sc,f);return '';}catch(e){return e.message;}})()`);
       if(e)errs.push(id+': '+e);}
-    ok(!errs.length, 'cả 48 chiêu chạy trong trận không lỗi'+(errs.length?' — '+errs.join('; '):''));
+    ok(!errs.length, 'cả '+run("Object.keys(SK).filter(k=>/^sk\\d\\d[abc]$/.test(k)).length")+' chiêu nghề tu chạy trong trận không lỗi'+(errs.length?' — '+errs.join('; '):''));
     run("G.run.scene=null;lkTang=ntLk");
+  },
+  // Đ11: nghề tu mở rộng (core2/69-nghe-tu-mo-rong.js) và bí truyền ngoại lệ luân hồi (HN A.16)
+  nghe_tu_mr() {
+    const base="G._ngNoEv=1;G._tuNoRui=1;G.run.pham=0;G.run.root={id:'tap',els:['kim','moc'],q:'thuong'};G.run.rootKnown=1;G.run.st=9999;G.run.lifeAdj=500;lkTang=()=>9;";
+    const seed0=fixtureSeed; // giữ seed của các bài sau như cũ (vài bài phụ thuộc thế giới sinh ra)
+    run("var mrLk=lkTang");
+    fresh(base);
+    const MR=['TU17','TU18','TU19','TU20','TU21','TU22','TU23','TU24','TU25'];
+    ok(JSON.stringify(JSON.parse(run("JSON.stringify(Object.keys(TU_NGHE).filter(id=>TU_NGHE[id].mr))")))===JSON.stringify(MR), 'chín nghề mở rộng: Cổ, Thi, Phật, Nho, Thiên cơ, Thương, Lôi, Huyễn, Thôn phệ');
+    ok(MR.every(id=>run(`!!TU_ART['${id}']&&['a','b','c'].every(c=>!!SK['sk${id.slice(2)}'+c]&&SK['sk${id.slice(2)}'+c].t<=2)`)), 'mỗi nghề một công pháp, ba chiêu dưới bậc thần thông');
+    ok(run("['co','thi','phat','nho','loi','huyen','thon'].every(p=>Object.values(TU_NGHE).some(N=>N.pm===p))"), 'đủ pháp môn của bảng ghép');
+    // Phật tu: bái học, hướng chính, luật ghép
+    run("tuHoc('TU19',0)");ok(run("G.run.tu.chinh")==='TU19'&&run("G.run.hd.log.some(x=>x.why==='tu:TU19'&&x.p>0)"), 'bái học Phật tu: Hành Đạo nghiêng chính');
+    ok(/không ghép được/.test(run("tuWhyHoc('TU25',0)"))&&/không ghép được/.test(run("tuWhyHoc('TU18',0)")), 'Phật pháp không ghép với Thôn phệ, Thi thuật');
+    run("tuHoc('TU23',0)");ok(run("G.run.tu.phu")==='TU23'&&run("tuLoiOn('TU19')"), 'Phật pháp + Lôi pháp: ghép có lợi');
+    // giới sát
+    run("deed('giet_vo_toi',{})");ok(run("mrPhatTat()")&&run("(G.run.tuRes||{}).TU19|0")===0&&run("NK.count('tumr.phatGioi')")===1, 'giết người: Phật quang tắt, nguyện lực về không');
+    run("G.run.tuPhatTat=0;G.run.st=9999;G.run.tuRes={TU19:0}");run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin');G.run.at=n.id;})()");
+    run("tuHd('TU19')");ok(run("G.run.tuRes.TU19|0")===0&&run("NK.count('tumr.phatGiau')")>=1, 'giữ của lớn: siêu độ xong nguyện lực không tăng');
+    run("G.run.st=100;tuHd('TU19')");ok(run("G.run.tuRes.TU19")===1&&run("NK.count('nq.deed')")>=1, 'siêu độ vong hồn: nguyện lực +1, ghi hành vi');
+    // Nho tu: cần lòng ngay; văn tâm nứt ba lần thì vỡ
+    fresh(base);run("hdAdd(0,40,'x')");ok(/chưa đủ ngay/.test(run("tuWhyHoc('TU20',0)")), 'Hành Đạo nghiêng tà: không học được Nho tu');
+    fresh(base);run("hdAdd(30,0,'x');tuHoc('TU20',0);G.run.tuRes={TU20:4};hdAdd(0,8,'x')");
+    ok(run("G.run.tu.k.TU20.nut")===1&&run("G.run.tuRes.TU20")===2, 'việc tà nặng: văn tâm nứt, mất nửa hạo nhiên khí');
+    run("hdAdd(0,8,'x');hdAdd(0,8,'x')");ok(!run("tuArtOf('TU20')")&&run("G.run.tu.chinh")===null&&run("NK.count('tumr.nhoVo')")===1, 'nứt ba lần: văn tâm vỡ, mất pháp môn');
+    ok(!/Nho/.test(run("ccWhyStart('HAO_NHIEN')")||''), 'Dưỡng Hạo Nhiên Khí đã mở (có Nho tu)');
+    // Thiên cơ sư: hợp đồng tổn thọ, thiên khiển, Khuy Mệnh
+    fresh(base);run("tuHoc('TU21',0);(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;})()");
+    const la=run("G.run.lifeAdj");run("tuHd('TU21');tuHd('TU21')");ok(run("G.run.lifeAdj")===la-1, 'xem quẻ hai lần: tổn một năm thọ');
+    run("TU_MR.tcKhien=1;tuHd('TU21');tuHd('TU21');TU_MR.tcKhien=0.2");ok(run("(G.run.wounds||[]).some(w=>w.k==='than')")&&run("NK.count('tumr.thienKhien')")>=1, 'xem quá nhiều trong năm: thiên khiển');
+    ok(!run("tuOpts(nodeById(G.run.at)).some(o=>o.id==='khuy')"), 'chưa tới tầng bốn: không có Khuy Mệnh');
+    run("tuArtOf('TU21').lv=7;G.run.tu.k.TU21.tang=4;G.run.realm=2");ok(/Nguyên Anh/.test(run("(tuOpts(nodeById(G.run.at)).find(o=>o.id==='khuy')||{}).no||''")), 'Khuy Mệnh cần Nguyên Anh');
+    run("G.run.realm=3");const lb=run("G.run.lifeAdj");ok(run("!!tuDo(nodeById(G.run.at),'khuy')"), 'dùng Khuy Mệnh');
+    run("G.run.realm=3");ok(run("G.run.lifeAdj")===lb-10&&run("dtPickWhy().includes('khuy')"), 'Khuy Mệnh: tổn mười năm thọ, kiếp sau được chọn lá số');
+    // Thương tu: hợp đồng lời thêm
+    fresh(base);run("tuHoc('TU22',0);tuArtOf('TU22').lv=6;G.run.realm=1;(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;})()");
+    ok(run("aggFx().thuongLai")===10, 'tầng ba Thương tu: lời thêm một phần mười');
+    const s0=run("G.run.st");run("tuHd('TU22')");ok(run("G.run.st")===s0-12+21+2, 'áp tải xong: công cộng lời thêm');
+    // Cổ sư: nuôi cổ
+    fresh(base);run("tuHoc('TU17',0);G.run.st=5;ccMonth()");ok(run("G.run.st")===4, 'nuôi cổ mỗi tháng tốn linh thạch');
+    run("G.run.st=0;ccMonth();ccMonth()");ok(run("(G.run.wounds||[]).some(w=>w.k==='doc')")&&run("NK.count('tumr.coCan')")===1, 'bỏ đói hai tháng: cổ cắn chủ');
+    // Thôn phệ: hợp đồng dâng tâm ma
+    fresh(base);run("tuHoc('TU25',0);G.run.tamma=0;(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>['khoang','ma','dong'].includes(n.type)&&n.state!=='ruin');G.run.at=n.id;})()");
+    run("tuHd('TU25')");ok(run("G.run.tamma")===3&&run("G.run.hd.log.some(x=>x.why==='tu:TU25'&&x.t>0)"), 'Thôn phệ: bái học nghiêng tà, hợp đồng dâng tâm ma');
+    // khoá chiêu mới trong trận
+    fresh(base+"startCombat({},{kind:'node'});G.run.scene.skipDodge=1");
+    run("var mrSc=G.run.scene,mrMe=mainUnit(mrSc),mrF=alive(mrSc,'B')[0];mrF.hp=mrF.max=99999;mrMe.mp=mrMe.maxMp=9999;mrMe.realm=2;mrF.realm=1;mrF.f='quy'");
+    run("resolveSkill(mrSc,mrMe,SK.sk23a,1,[mrF],1,'auto')");ok(run("NK.count('fx.vsF')")===1, 'Chưởng Tâm Lôi đánh hồn quỷ mạnh hơn');
+    run("resolveSkill(mrSc,mrMe,SK.sk18c,1,[mrF],1,'auto')");ok(run("NK.count('fx.needSum0')")===1, 'Thi Bạo không có xác luyện: một nửa');
+    run("resolveSkill(mrSc,mrMe,SK.sk18b,1,[],1,null)");ok(run("!!fxmSum(mrSc,mrMe,'thi')"), 'Thiết Thi Hộ Chủ gọi xác luyện');
+    run("mrF.hp=99999;resolveSkill(mrSc,mrMe,SK.sk18c,1,[mrF],1,'auto')");ok(!run("fxmSum(mrSc,mrMe,'thi')"), 'Thi Bạo: xác luyện nổ tan');
+    run("mrF.stunT=0;mrF.hp=99999;doSkill(mrSc,mrMe,SK.sk20a,1,mrF.id,1)");ok(run("mrF.stunT>0"), 'Ngôn Định: địch cảnh giới thấp hơn đứng sững');
+    run("mrF.stunT=0;mrF.realm=5;doSkill(mrSc,mrMe,SK.sk20a,1,mrF.id,1)");ok(run("mrF.stunT")===0, 'Ngôn Định: địch cao hơn không động');
+    run("mrMe.stunT=0;resolveSkill(mrSc,mrMe,SK.sk24c,1,[mrF],1,'auto')");ok(run("mrMe.stunT>0")&&run("NK.count('fx.huyenPhan')")===1, 'Thiên Huyễn Lao Lung với địch mạnh hơn: ảo cảnh phản lại');
+    run("mrF.realm=1;mrF.mp=100;mrF.maxMp=100;mrMe.mp=10;resolveSkill(mrSc,mrMe,SK.sk25a,1,[mrF],1,'auto')");ok(run("mrF.mp")===85&&run("mrMe.mp")===25, 'Phệ Linh Thủ hút linh lực địch');
+    run("var mrTvN=0,mrAt=addTv;addTv=function(x){mrTvN+=x;return mrAt.apply(this,arguments);};mrF.hp=1;mrF.def=0;resolveSkill(mrSc,mrMe,SK.sk25c,1,[mrF],1,'auto');addTv=mrAt");ok(run("mrTvN")===3&&run("NK.count('fx.devour')")===1, 'Thôn Phệ Tinh Huyết kết liễu: nhận tu vi');
+    fresh(base+"startCombat({},{kind:'node'});G.run.scene.skipDodge=1");
+    run("var mrSc=G.run.scene,mrMe=mainUnit(mrSc);G.run.st=2;resolveSkill(mrSc,mrMe,SK.sk22b,1,[],1,null)");ok(run("G.run.st")===1&&run("mrSc.fleeB")===30, 'Mua Đường: tốn linh thạch, dễ rút lui');
+    run("mrMe.st.block=0;resolveSkill(mrSc,mrMe,SK.sk22c,1,[],1,null)");ok(run("G.run.st")===1&&!(run("mrMe.st.block")>0), 'Tán Tài Hộ Thân: thiếu linh thạch thì vô hiệu');
+    ok(/Tổn thọ/.test(run("skillTip(SK.sk21c,1)"))&&/hồn quỷ/.test(run("skillTip(SK.sk19a,1)")), 'chú thích chiêu có hiệu ứng mới');
+    run("G.run.scene=null");
+    // bí truyền: Luân Hồi Chuyển Thế Kinh (Phật tu tầng bốn, Lạn Kha Tự)
+    fresh(base);run("tuHoc('TU19',0)");const nd=run("mrLocNode('LOC12')");run(`G.run.at=${nd}`);
+    ok(/tầng bốn/.test(run(`(tuOpts(nodeById(${nd})).find(o=>o.id==='bi:lhct')||{no:'?'}).no||''`)), 'chưa tới tầng bốn: chưa tham ngộ được');
+    run("G.run.tu.k.TU19.tang=4;tuArtOf('TU19').lv=7");ok(!run(`(tuOpts(nodeById(${nd})).find(o=>o.id==='bi:lhct')||{no:'?'}).no`), 'tầng bốn: tham ngộ được Luân Hồi Chuyển Thế Kinh');
+    run(`tuDo(nodeById(${nd}),'bi:lhct')`);ok(run("G.run.tuBi.lhct")===1&&run("dtPickWhy().includes('lhct')"), 'tham ngộ xong: khi chết được chọn lá số');
+    // Túc Mạng Thông: chết thì kiếp sau học lại nhanh
+    run("TU_MR.tucMang=1;G.meta.pick=0;die('combat',{n:'thử'});TU_MR.tucMang=0.5");ok(run("(G.meta.tucMang||[]).includes('TU19')")&&run("G.meta.pick")>=1, 'Túc Mạng Thông nhớ nghề Phật tu, Luân Hồi Chuyển Thế Kinh cho chọn lá số');
+    run("genBirth();newRun(G.birth.cards[0]);"+base+"G.run.at=mrLocNode('LOC12')");
+    ok(/quen thuộc/.test(run("(tuOpts(nodeById(G.run.at)).find(o=>o.id==='hoc:TU19')||{l:''}).l")), 'kiếp sau: Phật tu hiện là quen thuộc');
+    const t1=run("W().t");run("tuHoc('TU19',0)");ok(run("W().t-"+t1)>=run("15*HD")&&run("W().t-"+t1)<run("30*HD")&&!run("(G.meta.tucMang||[]).includes('TU19')"), 'học lại Phật tu mất nửa thời gian');
+    // Bất Muội Linh Quang Quyết: nhớ chuyên môn chính, học lại miễn phí
+    fresh(base);run("tuHoc('TU05',0);G.run.tu.k.TU05.tang=4;G.run.at=mrLocNode('LOC05')");run("tuDo(nodeById(G.run.at),'bi:bmlq')");
+    ok(run("G.run.tuBi.bmlq")===1, 'Thần thức tu tầng bốn: tham ngộ Bất Muội Linh Quang Quyết ở Huyền Cơ Trận Các');
+    run("die('combat',{n:'thử'})");ok(run("G.meta.tuMem&&G.meta.tuMem.id")==='TU05', 'chết: kiếp sau nhớ Thần thức tu');
+    run("genBirth();newRun(G.birth.cards[0]);"+base);ok(run("tuPhi('TU05',0)")===0&&run("tuPhi('TU01',0)")>0, 'kiếp sau học lại Thần thức tu không mất phí');
+    run("tuHoc('TU05',0)");ok(!run("G.meta.tuMem")&&run("!!tuArtOf('TU05')"), 'học lại xong thì hết ký ức');
+    // Túc Tuệ Đăng: không có tâm pháp thì nhớ nghề tu
+    fresh(base);run("tuHoc('TU01',0);G.run.arts=G.run.arts.filter(a=>a.type!=='tp');G.run.qitems=['tuc_tue_dang'];die('combat',{n:'thử'})");
+    ok(run("G.meta.tuMem&&G.meta.tuMem.src")==='den'&&run("G.meta.tuMem.id")==='TU01', 'Túc Tuệ Đăng nhớ nghề Kiếm tu');
+    // bản lưu cũ
+    fresh(base);run("delete G.run.tuBi;delete G.run.tuKhuy;delete G.run.tuPhatTat;delete G.run.tuTc");ok(Array.isArray(run("tuOpts(nodeById(mrLocNode('LOC12')))"))&&run("dtPickWhy().length")===0, 'bản lưu cũ không có trường mới vẫn chạy');
+    run("lkTang=mrLk");fixtureSeed=seed0;
   },
   // Đ7.3: mười sáu nghề phàm còn lại
   nghe_pham2() {
@@ -1994,6 +2077,7 @@ const TESTS = {
       fresh(`G._ngNoEv=1;G.run.pham=${mode==='nang'?0:1};G.run.root=${mode==='nang'?"{id:'tam',els:['kim','moc','thuy'],q:'thuong'}":"{id:'vo',els:[],q:null}"};G.run.rootKnown=1;G.run.bac=500000;G.run.st=500;G.run.lifeAdj=400;G.run.base.tp=10;voOf(G.run).bac=3;G.run.paths={nong:{xp:100,bac:2,last:0}};CC_FORCE=1;`+
         (mode==='tuc'?"G.meta.tucCan={root:{id:'song',els:['hoa','tho'],q:'thuan'},node:W().regions[0].nodes[0].id,k:0};":''));
       if(mode==='nang')run("G.run.realm=1");
+      if(run(`(CAI_CAN['${id}'].dk||{}).hd!=null&&hdLvIdx()>CAI_CAN['${id}'].dk.hd`))run("hdAdd(30,0,'x')"); // Đ11: Văn tâm cần lòng ngay
       run(`G.run.ccHeard['${id}']=1`);const why=run(`ccWhyStart('${id}')`);
       if(why){ok(false, id+': không bắt đầu được ('+why+')');continue;}
       run(`ccStart('${id}')`);const e=run(`(${drive})('${id}')`);run("CC_FORCE=null");
@@ -2020,8 +2104,9 @@ const TESTS = {
     run("(()=>{let k=0;while(seasonOf(W().t)!=='ha'&&k++<400)W().t+=HD*10;const n=ccSrc('THIEN_LOI').node;G.run.at=n;openPlace(n);G.run.scene.venue='coduyen';venueDo('coduyen','le');})()");
     run("CAI_CAN.THIEN_LOI.steps[1].fail.die=0.5;CAI_CAN.THIEN_LOI.steps[1].ok=0.05");
     ok(run("G.run===null&&!!G.over")&&run("NK.count('cc.chet')")===1, 'Thiên Lôi Quán Thể: hỏng thì có thể chết');
-    // Văn tâm chờ hệ Nho tu
-    fresh();ok(/Nho/.test(run("ccWhyStart('HAO_NHIEN')")), 'Dưỡng Hạo Nhiên Khí: chờ lối tu Nho gia');
+    // Văn tâm: Đ11 đã có Nho tu, đường mở lại nhưng cần Hành Đạo nghiêng chính
+    fresh("G.run.pham=1;G.run.root={id:'vo',els:[],q:null};G.run.rootKnown=1");ok(run("ccWhyStart('HAO_NHIEN')")===run("contentText('cc.canHd')"), 'Dưỡng Hạo Nhiên Khí: cần Hành Đạo nghiêng chính');
+    run("hdAdd(30,0,'x')");ok(run("ccWhyStart('HAO_NHIEN')")!==run("contentText('cc.canHd')")&&!/Nho/.test(run("ccWhyStart('HAO_NHIEN')")), 'lòng ngay thì theo được đường Văn tâm');
     // Linh Căn Cổ: không tiền nuôi cổ thì trúng độc
     fresh("G.run.pham=1;G.run.bac=0;G.run.ccFlag={nuoi_co:1}");run("ccMonth()");
     ok(run("(G.run.wounds||[]).some(w=>w.k==='doc')"), 'Linh Căn Cổ: không có tiền nuôi cổ thì trúng độc');

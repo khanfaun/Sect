@@ -12271,5 +12271,482 @@
     ],
     "d": "Bóng đi trước người; người khéo thì bóng cũng không để lại.",
     "dang": "Ảnh sát tu"
+  },
+  {
+    "id": "cp_tu17",
+    "type": "cp",
+    "tu": "TU17",
+    "n": "Dưỡng Cổ Thiên",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "poiRes",
+        "v": 10,
+        "req": 0,
+        "raw": 1,
+        "d": "Độc nhận nhẹ đi {v}%"
+      },
+      {
+        "sk": "sk17a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Nuôi cổ mỗi tháng tốn chút linh thạch; bỏ đói lâu thì cổ cắn chủ"
+      },
+      {
+        "sk": "sk17b",
+        "req": 0
+      },
+      {
+        "fx": "drainRel",
+        "v": 8,
+        "req": 1,
+        "raw": 1,
+        "d": "Hút sinh lực hiệu quả hơn {v}%"
+      },
+      {
+        "sk": "sk17c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Giải cổ cho người dễ hơn (chờ hệ chữa bệnh)"
+      }
+    ],
+    "d": "Trăm con trùng chung một vò, con nào sống sót mới đáng gọi là cổ.",
+    "dang": "Cổ sư"
+  },
+  {
+    "id": "cp_tu18",
+    "type": "cp",
+    "tu": "TU18",
+    "n": "Dưỡng Thi Quyết",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "defP",
+        "v": 6,
+        "req": 0,
+        "raw": 1,
+        "d": "Thủ +{v}%"
+      },
+      {
+        "sk": "sk18a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Ban ngày ngoài trời, xác luyện yếu đi (chờ hệ ngày đêm)"
+      },
+      {
+        "sk": "sk18b",
+        "req": 0
+      },
+      {
+        "fx": "hpP",
+        "v": 6,
+        "req": 1,
+        "raw": 1,
+        "d": "Khí huyết +{v}%"
+      },
+      {
+        "sk": "sk18c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Luyện xác vô chủ không vướng nghiệp; đào mộ người thường thì vướng"
+      }
+    ],
+    "d": "Người chết không đau nữa; kẻ luyện thi phải nhớ thay họ.",
+    "dang": "Thi tu"
+  },
+  {
+    "id": "cp_tu19",
+    "type": "cp",
+    "tu": "TU19",
+    "n": "Bát Nhã Tâm Kinh Giải",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "hpP",
+        "v": 6,
+        "req": 0,
+        "raw": 1,
+        "d": "Khí huyết +{v}%"
+      },
+      {
+        "sk": "sk19a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Giới sát: giết người thì Phật quang tắt một thời gian; giữ của lớn thì nguyện lực ngừng tăng"
+      },
+      {
+        "sk": "sk19b",
+        "req": 0
+      },
+      {
+        "fx": "defP",
+        "v": 6,
+        "req": 1,
+        "raw": 1,
+        "d": "Thủ +{v}%"
+      },
+      {
+        "sk": "sk19c",
+        "req": 1
+      },
+      {
+        "fx": "tucMang",
+        "v": 1,
+        "req": 2,
+        "raw": 1,
+        "d": "Túc Mạng Thông: kiếp sau thỉnh thoảng nhớ lại nghề đã học"
+      }
+    ],
+    "d": "Lời kinh không dạy cách đánh, chỉ dạy cách không sợ.",
+    "dang": "Phật tu"
+  },
+  {
+    "id": "cp_tu20",
+    "type": "cp",
+    "tu": "TU20",
+    "n": "Đại Học Chính Tâm Thiên",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "matkP",
+        "v": 6,
+        "req": 0,
+        "raw": 1,
+        "d": "Công phép +{v}%"
+      },
+      {
+        "sk": "sk20a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Văn tâm: làm việc tà nặng thì nứt, nứt nhiều lần thì vỡ"
+      },
+      {
+        "sk": "sk20b",
+        "req": 0
+      },
+      {
+        "fx": "cx",
+        "v": 4,
+        "req": 1,
+        "raw": 1,
+        "d": "Chính xác +{v}"
+      },
+      {
+        "sk": "sk20c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Lời nói ra có sức nặng với người đọc sách (chờ hệ thuyết phục)"
+      }
+    ],
+    "d": "Lòng ngay thì chữ thẳng, chữ thẳng thì lời có sức.",
+    "dang": "Nho tu"
+  },
+  {
+    "id": "cp_tu21",
+    "type": "cp",
+    "tu": "TU21",
+    "n": "Mai Hoa Dịch Số",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "than",
+        "v": 1,
+        "req": 0,
+        "raw": 1,
+        "d": "Thần thức +{v}"
+      },
+      {
+        "sk": "sk21a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Nhìn trộm thiên cơ tổn thọ; dùng quá nhiều trong một năm dễ bị thiên khiển"
+      },
+      {
+        "sk": "sk21b",
+        "req": 0
+      },
+      {
+        "fx": "cx",
+        "v": 4,
+        "req": 1,
+        "raw": 1,
+        "d": "Chính xác +{v}"
+      },
+      {
+        "sk": "sk21c",
+        "req": 1
+      },
+      {
+        "fx": "khuyMenh",
+        "v": 1,
+        "req": 2,
+        "raw": 1,
+        "d": "Khuy Mệnh (từ Nguyên Anh): trước khi chết được nhìn trước người mình có thể thành"
+      }
+    ],
+    "d": "Một cánh hoa rụng cũng là một quẻ; người xem quẻ trả bằng tuổi của mình.",
+    "dang": "Thiên cơ sư"
+  },
+  {
+    "id": "cp_tu22",
+    "type": "cp",
+    "tu": "TU22",
+    "n": "Thông Bảo Quyết",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "crit",
+        "v": 3,
+        "req": 0,
+        "raw": 1,
+        "d": "Chí mạng +{v}"
+      },
+      {
+        "sk": "sk22a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Nhìn ra linh thạch giả (chờ hệ giám định)"
+      },
+      {
+        "sk": "sk22b",
+        "req": 0
+      },
+      {
+        "fx": "thuongLai",
+        "v": 10,
+        "req": 1,
+        "raw": 1,
+        "d": "Hợp đồng nghề tu lời thêm {v} phần trăm"
+      },
+      {
+        "sk": "sk22c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Cho vay linh thạch, mở phường thị (chờ hệ thương hội)"
+      }
+    ],
+    "d": "Linh thạch chảy như nước; người giữ được nó là người biết đào mương.",
+    "dang": "Thương tu"
+  },
+  {
+    "id": "cp_tu23",
+    "type": "cp",
+    "tu": "TU23",
+    "n": "Ngũ Lôi Phù Ấn",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "matkP",
+        "v": 6,
+        "req": 0,
+        "raw": 1,
+        "d": "Công phép +{v}%"
+      },
+      {
+        "sk": "sk23a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Nơi âm khí nặng, lôi pháp yếu đi"
+      },
+      {
+        "sk": "sk23b",
+        "req": 0
+      },
+      {
+        "fx": "dodge",
+        "v": 4,
+        "req": 1,
+        "raw": 1,
+        "d": "Né +{v}"
+      },
+      {
+        "sk": "sk23c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Thiên lôi đánh xuống nhẹ hơn một phần (chờ hệ thiên kiếp)"
+      }
+    ],
+    "d": "Năm ấn trong lòng bàn tay, mỗi ấn giữ một tiếng sét chưa nổ.",
+    "dang": "Lôi pháp sư"
+  },
+  {
+    "id": "cp_tu24",
+    "type": "cp",
+    "tu": "TU24",
+    "n": "Kính Hoa Thủy Nguyệt Quyết",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "than",
+        "v": 1,
+        "req": 0,
+        "raw": 1,
+        "d": "Thần thức +{v}"
+      },
+      {
+        "sk": "sk24a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Đối phương thần thức mạnh hơn thì ảo cảnh phản lại"
+      },
+      {
+        "sk": "sk24b",
+        "req": 0
+      },
+      {
+        "fx": "dodge",
+        "v": 5,
+        "req": 1,
+        "raw": 1,
+        "d": "Né +{v}"
+      },
+      {
+        "sk": "sk24c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Dựng ảo cảnh ngoài trận để cắt dấu kẻ đuổi (chờ hệ truy đuổi)"
+      }
+    ],
+    "d": "Hoa trong gương, trăng dưới nước: thấy được mà không chạm được.",
+    "dang": "Huyễn thuật sư"
+  },
+  {
+    "id": "cp_tu25",
+    "type": "cp",
+    "tu": "TU25",
+    "n": "Phệ Linh Quyết",
+    "el": "vo",
+    "t": 1,
+    "req": 0,
+    "lines": [
+      {
+        "fx": "drainRel",
+        "v": 10,
+        "req": 0,
+        "raw": 1,
+        "d": "Hút sinh lực hiệu quả hơn {v}%"
+      },
+      {
+        "sk": "sk25a",
+        "req": 0
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 0,
+        "raw": 1,
+        "d": "Mỗi lần thôn phệ, tâm ma có thể dâng"
+      },
+      {
+        "sk": "sk25b",
+        "req": 0
+      },
+      {
+        "fx": "atkP",
+        "v": 6,
+        "req": 1,
+        "raw": 1,
+        "d": "Công vật lý +{v}%"
+      },
+      {
+        "sk": "sk25c",
+        "req": 1
+      },
+      {
+        "fx": "tuNote",
+        "v": 0,
+        "req": 2,
+        "raw": 1,
+        "d": "Tu vi nuốt được khiến đột phá khó hơn (chờ cân bằng)"
+      }
+    ],
+    "d": "Thứ gì đã chết thì không cần nữa; kẻ nuốt nó thì cần.",
+    "dang": "Thôn phệ tu"
   }
 ]

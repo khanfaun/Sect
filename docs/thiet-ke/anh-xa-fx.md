@@ -108,3 +108,54 @@ Mã viết thường `sk01a`…`sk16c`; A, B bậc 1, C bậc 2 (không phải t
 | sk16c | Đoạn Truy | fleeUp 25 | chưa bỏ lại vật mồi |
 
 Mọi chiêu có `cd` theo cột hồi chiêu của C.
+
+## Đ11 — 27 chiêu nghề tu mở rộng
+
+Chiêu của B §7.5 viết lại theo khuôn số của C (A, B bậc 1 · C bậc 2, mở ở tầng ba; không chiêu nào là thần thông). Chiêu B có 5 chiêu mỗi pháp môn, chỉ giữ 3 chiêu tiêu biểu cho đúng khuôn 3 chiêu một công pháp của C. Công vật lý: sk18a, sk19c, sk22a. Phần tử: Phật pháp `phat` (sk19a, sk19c), Lôi pháp `loi` (sk23*), còn lại `vo`.
+
+Khoá mới (xử lý ở `src/game/core2/69-nghe-tu-mo-rong.js`, chữ `content/text/nghe-tu-mo-rong.json`):
+
+| Khoá | Nghĩa |
+|---|---|
+| `vsF:[họ,x]` | đánh họ kẻ địch đó (`quy` = hồn quỷ, thi) ×x |
+| `needSum:'thi'` | cần thực thể triệu hồi loại đó; không có thì một nửa; dùng xong thực thể tan (nổ xác) |
+| `dinh:1` | địch cảnh giới thấp hơn: choáng chắc; ngang: 40%; cao hơn: vô hiệu (Ngôn "Định") |
+| `huyenPhan:1` | địch cảnh giới cao hơn: chiêu không choáng được, bản thân choáng (phản ảo) |
+| `mpDrain:x` | hút x% linh lực tối đa của địch (địch không có linh lực thì hồi x/2% của mình) |
+| `devour:x` | kết liễu bằng chiêu này: `addTv(x)`, 20% tâm ma +3 |
+| `tho:y` | tổn y năm thọ (cộng dồn, trừ khi đủ một năm); quá ba lần một năm: 20% thiên khiển (thần thức tổn thương) |
+| `ltCost:n` | tốn n linh thạch; thiếu thì phần hộ thể / rút lui vô hiệu |
+
+Có sẵn được dùng thêm: `stun`, `vuln` (giảm thủ), `crit`, `h` (số đòn), `evade`, `cxT`, `cutT`, `fleeUp`, `blockH`, `blockM`, `pierceBlock`, `drain`, `poison`, `summon` (loại `thi`).
+
+| Mã | Tên | fx | Lệch so với B |
+|---|---|---|---|
+| sk17a | Phệ Tâm Cổ | p 0,8 · độc 0,5 | |
+| sk17b | Kim Tằm Cổ | p 1 · hút 25 | |
+| sk17c | Vạn Cổ Thực Thiên | p 1,33 diện rộng · giảm thủ 2 · độc 0,2 | |
+| sk18a | Thi Độc Trảo | p 1,1 vật lý · độc 0,3 | |
+| sk18b | Thiết Thi Hộ Chủ | gọi xác luyện (0,3 H, 0,3 M, 3 lượt) | |
+| sk18c | Thi Bạo | p 2,5 diện rộng · needSum thi | nổ xác luyện của mình thay cho xác trên chiến trường |
+| sk19a | Sư Tử Hống | p 1 · choáng 30 · quỷ ×1,5 | B ghi "đánh ma" |
+| sk19b | Kim Cương Hộ Thể | hộ thể 12% H | B ghi 30% H (vượt trần 30% của C P.5 nếu cộng dồn) |
+| sk19c | Đại Thủ Ấn | p 1,8 vật lý · bỏ 50% hộ thể | B 220% — hạ theo khuôn C |
+| sk20a | Ngôn Định | tgt · dinh | |
+| sk20b | Văn Khí Hộ Thân | hộ thể 0,8 M | chưa theo lượng hạo nhiên khí |
+| sk20c | Bút Lạc Kinh Phong | p 1,8 · quỷ ×1,4 | B 200% đánh tà ×1,5 |
+| sk21a | Tiên Tri | né chắc 1 · chính xác +8 | |
+| sk21b | Quan Nhân Quả | tgt · đánh dấu · suy nhược 1 · tổn thọ | B là thuật ngoài trận |
+| sk21c | Tránh Hung | giảm 50% một lượt · rút lui +30 · tổn thọ | B là thuật ngoài trận (huỷ sự kiện xấu) |
+| sk22a | Kim Tiền Tiêu | p 1,1 vật lý · chí mạng +10 | tự đặt (B không có bảng chiêu Thương tu) |
+| sk22b | Mua Đường | rút lui +30 · 1 linh thạch | tự đặt |
+| sk22c | Tán Tài Hộ Thân | hộ thể 15% H · 3 linh thạch | tự đặt |
+| sk23a | Chưởng Tâm Lôi | p 1,3 Lôi · quỷ ×1,5 | |
+| sk23b | Lôi Độn | né chắc 1 · chính xác +3 | |
+| sk23c | Ngũ Lôi Oanh Đỉnh | 5 đòn × 0,42 | |
+| sk24a | Huyễn Ảnh | né chắc 2 | |
+| sk24b | Mê Hồn | p 0,6 · choáng 45 | |
+| sk24c | Thiên Huyễn Lao Lung | p 1,4 · choáng 60 · suy nhược 2 · huyenPhan | chưa có "mất đạo tâm" |
+| sk25a | Phệ Linh Thủ | p 1 · mpDrain 15 | |
+| sk25b | Hắc Động | p 0,6 · giảm thủ 3 | |
+| sk25c | Thôn Phệ Tinh Huyết | p 1,9 · hút 20 · devour 3 | |
+
+Nội tại công pháp mới: `thuongLai` (% thù lao hợp đồng nghề tu), `tucMang` / `khuyMenh` (đánh dấu dòng tầng bốn, đọc qua `mrLv`).

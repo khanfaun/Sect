@@ -347,6 +347,22 @@ const TESTS = {
     ok(await ev(p, () => !!document.querySelector('.tures')) && /Kiếm ý/.test(await ev(p, () => (document.querySelector('.tures')||{}).innerText||'')), 'trong trận có thanh Kiếm ý');
     await ev(p, () => {G.run.scene=null;UI.modal=null;render();});
   },
+  // Đ11: nghề tu mở rộng — Phật tu ở Lạn Kha Tự, bí truyền Luân Hồi Chuyển Thế Kinh, thanh Nguyện lực
+  async nghe_tu_mr(p) {
+    await ev(p, () => {const r=G.run;r.pham=0;r.root={id:'tap',els:['kim','moc'],q:'thuong'};r.rootKnown=1;r.st=999;r.scene=null;UI.modal=null;UI.panel=null;r.tu={chinh:null,phu:null,k:{}};
+      r.arts=(r.arts||[]).filter(a=>!a.tu);const id=mrLocNode('LOC12');r.at=id;openPlace(id);ACT.pact('tumon');render();});
+    await p.waitForTimeout(150);
+    ok(/Bát Nhã Tâm Kinh Giải/.test(await ev(p, () => (document.querySelector('.venue')||{}).innerText||'')), 'hộp Pháp môn ở Lạn Kha Tự có Bát Nhã Tâm Kinh Giải');
+    await ev(p, () => {window._lk=lkTang;lkTang=()=>1;ACT.vgo('tumon:hoc:TU19');lkTang=window._lk;G.run.tu.k.TU19.tang=4;tuArtOf('TU19').lv=7;openPlace(G.run.at);ACT.pact('tumon');render();});
+    await p.waitForTimeout(150);
+    ok(/Luân Hồi Chuyển Thế Kinh/.test(await ev(p, () => (document.querySelector('.venue')||{}).innerText||'')), 'Phật tu tầng bốn: thấy bí truyền Luân Hồi Chuyển Thế Kinh');
+    await ev(p, () => {G.run.scene=null;UI.modal=null;UI.panel='char';UI.tab.char='dao';render();});await p.waitForTimeout(150);
+    ok(/Phật tu/.test(await ev(p, () => document.body.innerText)), 'Đạo đồ có nghề Phật tu');
+    await ev(p, () => {UI.panel=null;UI.modal=null;G.run.tuRes={TU19:2};openPlace(G.run.at);startCombat({cnt:1},{kind:'node'});CFG.autoFight=0;render();});
+    await p.waitForTimeout(400); await p.click('[data-act="cbGo"]'); await p.waitForSelector('.cb-ally', { timeout: 8000 }).catch(() => {});
+    ok(/Nguyện lực/.test(await ev(p, () => (document.querySelector('.tures')||{}).innerText||'')), 'trong trận có thanh Nguyện lực');
+    await ev(p, () => {G.run.scene=null;UI.modal=null;render();});
+  },
   async cai_can(p) {
     await ev(p, () => {const r=G.run;r.pham=1;r.root={id:'vo',els:[],q:null};r.rootKnown=1;r.bac=50000;r.scene=null;UI.modal=null;UI.panel=null;
       const id=ccSrc('CC01').node;r.at=id;openPlace(id);render();});

@@ -1024,3 +1024,28 @@ Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời
 - `core2/70-can-bang-d12.js` (+ bảng `content/rules/can-bang-d12.js`, ghi ngay sau `core2/68` trong thu-tu.json): bọc `btRate` ngoài cùng → `min(BT_CAP)`, **bỏ qua khi Cảm ngộ đầy** (`camNgoFull()`, vẫn ra 1); `bqReal` ×`D12_BQ`=0,75; `llAdd` (phần cộng) ×`D12_LL`=0,85; `mkEnemy`/`mkBoss` khí huyết, công, thủ ×`D12_EN`=1,15 (trừ tâm ma vì dựng từ chỉ số người chơi), nhật ký `d12.foe`.
 - Bài kiểm mới `d12`; `camngo` vẫn đạt (4 lần thất bại giờ ra 0,88 thay vì 0,97). Không bài cũ nào phải sửa số.
 - Còn lại: các đòn bẩy khác ở HN B §4.2 (thương thế khi đột phá hỏng, linh thạch rơi, giá đan, tinh anh 15%…) chưa làm; đo bằng bot chỉ khi người dùng cho.
+
+## Đ11 — Nghề tu mở rộng (HN A.8, A.16; B §7.4–§7.5)
+
+### Đã làm
+- Chín nghề mới TU17–TU25 nối vào bộ máy nghề tu của Đ7 (`TU_NGHE`, trường `mr:1`): Cổ sư (LOC09), Thi tu (LOC14), Phật tu (LOC12), Nho tu (LOC02), Thiên cơ sư (LOC05), Thương tu (LOC03), Lôi pháp sư (LOC15), Huyễn thuật sư (LOC04), Thôn phệ tu (LOC07). Bảng `content/rules/nghe-tu-mo-rong.js` (thêm `TU_BI`, `TU_MR`), luật `src/game/core2/69-nghe-tu-mo-rong.js` (ghi sau core2/68 trong thu-tu.json), chữ `content/text/nghe-tu-mo-rong.json`.
+- Mỗi nghề một công pháp `cp_tu17…cp_tu25` (4 tầng, 7 dòng như lõi) và ba chiêu `sk17a…sk25c` viết lại theo khuôn số C (bảng ở `docs/thiet-ke/anh-xa-fx.md` mục Đ11). Khoá chiêu mới: `vsF`, `needSum`, `dinh`, `huyenPhan`, `mpDrain`, `devour`, `tho`, `ltCost`; thực thể triệu hồi loại `thi` (Xác luyện).
+- Luật riêng (B §7.5 "cái giá"): bái học Thi / Thôn phệ nghiêng tà, Phật / Nho / Lôi nghiêng chính; Nho tu cần Hành Đạo nghiêng chính, việc tà nặng làm văn tâm nứt (mất nửa hạo nhiên khí), ba lần thì vỡ, mất pháp môn; Phật tu phạm giới sát (hành vi giết người trong `DEED`) thì Phật quang tắt ba mươi ngày (chiêu Phật pháp một nửa, nguyện lực về không), giữ trên năm trăm linh thạch thì nguyện lực ngừng tăng; Thiên cơ sư xem quẻ / dùng thuật tổn thọ, quá ba lần một năm có thể bị thiên khiển; Thương tu tầng ba lời thêm một phần mười mọi hợp đồng nghề tu; Cổ sư nuôi cổ mỗi tháng một linh thạch, bỏ đói hai tháng thì cổ cắn chủ (trúng độc); Thôn phệ: hợp đồng và chiêu kết liễu làm tâm ma dâng, kết liễu được tu vi.
+- Hợp đồng nghề có thêm trường `deed` (Phật siêu độ), `res` (Phật, Nho +1 tài nguyên), `tho` (Thiên cơ), `tamma` (Thôn phệ).
+- Ngoại lệ luân hồi HN A.16 (Định Mệnh Châu, Túc Tuệ Đăng đã có từ Đ2.5–Đ2.6/Sửa-C): **Luân Hồi Chuyển Thế Kinh** (bí truyền, Phật tu hoặc Thiên cơ sư tầng bốn, tham ngộ ở Lạn Kha Tự / Huyền Cơ Trận Các → khi chết được chọn lá số); **Bất Muội Linh Quang Quyết** (Hồn tu hoặc Thần thức tu tầng bốn, Huyền Cơ Trận Các → kiếp sau nhớ chuyên môn chính: học lại miễn phí, nửa thời gian); **Túc Mạng Thông** (dòng tầng bốn của công pháp Phật tu → mỗi nghề tu đã học có một nửa khả năng được học lại nửa thời gian ở kiếp sau); **Khuy Mệnh** (Thiên cơ sư tầng bốn, Nguyên Anh, mười năm thọ, một lần mỗi kiếp → kiếp sau được chọn lá số); **Túc Tuệ Đăng** nay nhớ được nghề tu khi không có tâm pháp. Các mục "được chọn" đi qua `dtPickWhy` (Sửa-C.6). Hộp Pháp môn ghi "quen thuộc lạ" ở nghề được nhớ.
+- Bật lại cải căn **Dưỡng Hạo Nhiên Khí** (Văn tâm, câu 30): bỏ `off:'nho'`, thêm điều kiện Hành Đạo nghiêng chính (`dk:{hd:1}`).
+- Nhật ký: tumr.nhoLai, tumr.lai, tumr.tho, tumr.thienKhien, tumr.tamma, tumr.phatGioi, tumr.phatGiau, tumr.phatYeu, tumr.nhoNut, tumr.nhoVo, tumr.coCan, tumr.bi, tumr.khuy, tumr.mem, tumr.tucMang; fx.vsF, fx.needSum / needSum0, fx.huyenPhan, fx.mpDrain, fx.devour, fx.ltCost, fx.dinh.
+- Bài kiểm: luật `nghe_tu_mr` (48 ý, giữ nguyên seed cho các bài sau), sửa `nghe_tu` (đếm 16 nghề lõi, chạy cả 75 chiêu nghề tu), `cai_can` và `cai_can_duong` (Văn tâm mở, cần lòng ngay); giao diện `nghe_tu_mr` (hộp Pháp môn ở Lạn Kha Tự, bí truyền, Đạo đồ, thanh Nguyện lực). Thêm vào `test:rules`. Bot: `tuBiHoc`, `tuKhuy`, `mrTho`, `mrBo` vào COV_FN; `MANAGE.nghetu` sẵn có tự thử các lựa chọn mới (chưa chạy bot).
+
+### Chỗ tự quyết
+- Giữ khuôn ba chiêu một công pháp của C (B có năm chiêu mỗi pháp môn): chọn ba chiêu tiêu biểu, bỏ các chiêu thần thông bậc ba và các thuật ngoài trận (Bốc Quẻ, Tình Cổ, Nghịch Thiên Cải Mệnh…). Quan Nhân Quả / Tránh Hung đổi thành chiêu trong trận có tổn thọ.
+- Thương tu không có bảng chiêu và công pháp trong B: tự đặt "Thông Bảo Quyết" và ba chiêu dùng linh thạch.
+- Lôi pháp, Huyễn thuật, Thôn phệ làm thành nghề tu (có hợp đồng, tầng) cho dùng chung bộ máy, tên nghề "Lôi pháp sư", "Huyễn thuật sư", "Thôn phệ tu".
+- "Đánh ma / tà" của Phật, Nho, Lôi quy về họ kẻ địch `quy` (hồn quỷ, thi); game chưa có cờ ma tu riêng.
+- Phật giới sát chỉ tính theo hành vi `DEED` giết người (không tính mọi trận thắng người), phạt theo bảng "cái giá" (Phật quang tắt) thay vì mất tiểu cảnh giới.
+- Bí truyền đặt thời gian tham ngộ ba trăm sáu mươi ngày, sáu mươi linh thạch.
+
+### Còn dở
+- Sự kiện riêng (12 mỗi nghề) và 4 kết cục từng nghề của B §7.4 chưa viết; chưa có điều kiện "vào nghề" theo khí vận / linh căn (Linh Căn Cổ, Phật Tử, Quỷ Nhãn…), chỉ bái học ở nơi thầy.
+- Hiệu ứng ngoài trận ghi bằng `tuNote` (giải cổ, ban ngày yếu thi, âm khí yếu lôi, giảm thiên lôi, thuyết phục, phường thị, giám định linh thạch). Giảm sát thương thiên lôi của Lôi pháp chờ hệ thiên kiếp (core/08 đang do Đ12 sửa).
+- Hạo nhiên khí chưa làm mạnh Văn Khí Hộ Thân; Huyễn thuật chưa có "mất đạo tâm"; Thi tu chưa có xác luyện bền ngoài trận.
