@@ -1130,3 +1130,13 @@ Tự chọn model cho từng agent (không dùng Fable). Mức nỗ lực (cập
 
 ## TRẠNG THÁI CUỐI NGÀY 20/11 (trước /compact)
 Phiên sau compact: đã sửa 3 lỗi (đều do bài kiểm: Thương tu so giá ở cùng trạng thái + hàng đắt; truy_na theo chữ mới của GPT; truy không còn hỏng). test:rules và test-ui đạt hết. Tiếp: gói GPT đợt sáu.
+
+## QUYẾT ĐỊNH 20/11 — CÔNG TRÌNH SINH LỜI, NẮM QUYỀN THÀNH TRẤN, BẢN ĐỒ
+- Hai loại thành/trấn: **phàm nhân** (đồ, việc, tin cho phàm nhân; mọi thành trấn phàm do một Hoàng quốc nắm — Hoàng quốc là thế lực phàm) và **tu sĩ** (đồ, việc, tin cho tu sĩ; do tông môn/thế lực gần đó nắm).
+- Mua công trình trong thành trấn người khác nắm: sinh lời, KHÔNG đổi loại công trình. Nắm quyền cả thành trấn: xây gì cũng được, đổi loại được, công trình đều sinh lời. Lời tuỳ loại: tiền hoặc thứ khác (Claude tự định, hợp lý, khác nhau giữa thành phàm và thành tu sĩ).
+- Nắm quyền thành phàm: làm quan/chức tước hoặc lập công cho Hoàng quốc để được điều về cai quản. Nắm quyền thành tu sĩ: (A) làm chủ thế lực đang nắm; (C) đánh chiếm (gây xung đột/chiến tranh với thế lực → hộp xác nhận); (E) đàm phán mua lại (giá khổng lồ, có mặc cả).
+- Nhận lời: tự cộng mỗi tháng, ở đâu cũng nhận, kiểu **hộp thư**.
+- NPC tự mua công trình; NPC có thể hỏi mua công trình của ngươi (trả giá). Tịch biên khi nợ thuế lâu: CÓ.
+- Sang kiếp: truyền cho người thân; không có người thân thì thành phàm về Hoàng quốc, thành tu sĩ tự trị; nếu nhân vật là chủ thế lực thì về tay thế lực đó (người trong thế lực quản).
+- Bản đồ: thành trấn tu sĩ ≈ 1/3 thành trấn phàm. Quận cỡ vừa tối thiểu: 1 thành phàm, 1 thành tu sĩ, 6 trấn phàm, 3 trấn tu sĩ; quận bé ít trấn hơn, quận lớn nhiều hơn. Thêm nhiều nơi hoang dã, động thiên, bí cảnh, hang động…; thêm loại địa hình (bổ sung chú giải); mức an toàn/nguy hiểm cho hợp.
+- Thứ tự: làm rõ/dựng bản đồ + hai loại thành trấn trước, rồi mới tới sinh lời / nắm quyền.
