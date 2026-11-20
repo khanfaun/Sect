@@ -29,6 +29,55 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Việc 4: nắm quyền thành trấn
+  nam_quyen() {
+    fresh("FEAT.dat=1;FEAT.tna=1;G.run.pham=0;G.run.realm=2;G.run.bac=10000000;G.run.st=0;G.run.flags.tongmon=0");
+    const A="W().regions.flatMap(R=>R.nodes).filter(n=>n.state!=='ruin'&&n.fa)";
+    const ph=run(`${A}.find(n=>n.type==='thanh'&&!String(n.fa).startsWith('tong:')).id`);
+    const go=id=>run(`(()=>{const r=G.run;r.scene=null;r.moving=null;r.at=${id};openPlace(${id});r.scene.venue='quyen';})()`);
+    go(ph);ok(run("placeActs(curNode()).some(a=>a.a==='quyen')"), 'thành phàm có mục Nắm quyền');
+    ok(/Công lao chưa đủ/.test(run("nqOpts(curNode()).find(o=>o.id==='quan').no")), 'chưa đủ công với Hoàng quốc: chưa xin được');
+    ok(run("chKey()")===run(`'fa:'+nodeById(${ph}).fa`), 'đứng ở thành phàm: cống hiến ghi cho Hoàng quốc nắm nơi đó');
+    run("chAdd(chKey(),600)");ok(run("venueDo('quyen','quan')")&&run(`nqTa(nodeById(${ph}))`), 'đủ công: được điều về cai quản');
+    ok(run(`placeMeta(nodeById(${ph})).luc`)==='Ngươi', 'thẻ địa điểm: tọa trấn là ngươi');
+    // nắm quyền: xây mọi công trình hợp nơi, phá không phạt, mọi công trình sinh lời
+    run(`(()=>{const d=datOf(nodeById(${ph}));if(!d.o.some(c=>!c.ct))d.o.push({ct:null,chu:{k:'dan'}});})()`);go(ph);run("G.run.scene.venue='datdai'");
+    ok(run("datOpts(curNode()).some(o=>o.id.startsWith('nqxay:')&&/Tiền trang|Khách điếm|Trà lâu/.test(o.l))"), 'xây được công trình vốn không ai xây được (tiền trang, khách điếm…)');
+    const xo=run("datOpts(curNode()).find(o=>o.id.startsWith('nqxay:')&&!o.no).id");ok(run(`datDo('${xo}')`)&&run("NK.count('nq2.xay')")===1, 'xây xong');
+    ok(run(`datPhat(nodeById(${ph}),datOf(nodeById(${ph})).o.find(c=>c.chu&&c.chu.k!=='ta'),false).length`)===0, 'phá công trình trong thành mình nắm: không bị phạt');
+    run("G.run.hopThu=[];G.run.loiM=ncMonth();advanceTime(HM+1)");ok(run(`hopTong().dong.filter(d=>d.noi===nodeById(${ph}).name).length`)>=2, 'mọi công trình trong thành gửi lời về hộp thư');
+    // thành tu sĩ: mua (mặc cả), đánh chiếm
+    const tu=run(`${A}.find(n=>n.type==='tutran').id`);go(tu);
+    const O=JSON.parse(run("JSON.stringify(nqOpts(curNode()).map(o=>o.id))"));ok(O.includes('chiem')&&O.includes('mua:0')&&O.includes('mua:2'), 'thành tu sĩ: đánh chiếm, mua lại, mặc cả');
+    ok(!run("venueDo('quyen','mua:0')"), 'không đủ linh thạch: không mua được');
+    run("G.run.st=1e7;NQ2.mac[2][1]=0");const s0=run("G.run.st");run("venueDo('quyen','mua:2')");run("NQ2.mac[2][1]=0.2");
+    ok(!run(`nqTa(nodeById(${tu}))`)&&run("G.run.st")===s0&&/một năm/.test(run("nqOpts(curNode()).find(o=>o.id==='mua:0').no")), 'mặc cả hỏng: không mất tiền, đợi một năm');
+    run(`G.run.nqCam={}`);const g=run(`nqGiaLt(nodeById(${tu}),1)`);run("venueDo('quyen','mua:0')");ok(run(`nqTa(nodeById(${tu}))`)&&run("G.run.st")===s0-g, 'trả đủ giá: mua được ('+g+' linh thạch)');
+    const tu2=run(`${A}.find(n=>n.type==='tuthanh'&&!n.quyen).id`);go(tu2);run("venueDo('quyen','chiem')");
+    ok(run("G.run.scene&&G.run.scene.type")==='combat'&&run("G.run.scene.after.nqChiem")===tu2, 'đánh chiếm: vào trận với lực lượng giữ thành');
+    run("(()=>{const sc=G.run.scene;sc.over='win';finishCombat(sc);})()");ok(run(`nqTa(nodeById(${tu2}))`)&&run(`nodeById(${tu2}).quyen.cach`)==='chiem', 'thắng: nơi đó về tay ngươi');
+    ok(run(`tnaMuc(tnaK(nodeById(${tu2})))`)>=1, 'gây chiến: bị truy nã');
+  },
+  // Việc 5: NPC hỏi mua công trình, NPC tự mua công trình của dân
+  npc_mua_ct() {
+    fresh("FEAT.dat=1;G.run.pham=0;G.run.realm=1;G.run.bac=0");
+    const x=JSON.parse(run(`JSON.stringify((()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin'&&(datOf(n)||{o:[]}).o.some(c=>c.ct&&!LOI_CT.boQua.includes(c.ct)));const i=datOf(n).o.findIndex(c=>c.ct&&!LOI_CT.boQua.includes(c.ct));datOf(n).o[i].chu={k:'ta'};return [n.id,i];})())`));
+    run("NQ2.hoiMua=1;G.screen='map';G.run.scene=null;G.run.moving=null;advanceTime(HM+1)");
+    ok(run("G.run.scene&&G.run.scene.ev")==='nq_hoi_mua', 'có người hỏi mua công trình: hiện hộp chọn');
+    const g=run("G.run.nqHoi.gia");run("kyPick(0)");ok(run("G.run.bac")===g&&run(`datOf(nodeById(${x[0]})).o[${x[1]}].chu.k`)==='vai', 'bán: nhận tiền, công trình thành của người hỏi ('+g+' xu)');
+    ok(g>run(`datBanGia(nodeById(${x[0]}),Object.assign({muaCt:1},datOf(nodeById(${x[0]})).o[${x[1]}]))`), 'giá hỏi mua cao hơn giá bán thường');
+    run(`datOf(nodeById(${x[0]})).o[${x[1]}].chu={k:'ta'};G.run.scene=null;G.run.nqHoi=null;advanceTime(HM)`);run("kyPick(2)");ok(run(`datOf(nodeById(${x[0]})).o[${x[1]}].chu.k`)==='ta', 'không bán: vẫn là của ngươi');
+    run("NQ2.hoiMua=0.03;NQ2.npcMua=1;G.run.scene=null;G.run.nqHoi=null;advanceTime(HY)");ok(run("NK.count('nq2.npcMua')")>=1&&run("Object.values(datStore()).some(d=>d.o.some(c=>c.ct&&c.chu&&c.chu.k==='vai'))"), 'NPC tự mua công trình của dân');
+    run("NQ2.npcMua=0.05");
+  },
+  // Việc 6: tịch biên khi nợ thuế lâu
+  tich_bien() {
+    fresh("FEAT.dat=1;FEAT.no=0;G.run.pham=1;G.run.bac=0;G.run.st=0");
+    const x=JSON.parse(run(`JSON.stringify((()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin'&&n.fa&&datOf(n));const i=0;const c=datOf(n).o[i];c.chu={k:'ta'};datThueMoi(c);return [n.id,i];})())`));
+    run("for(let k=0;k<4;k++)advanceTime(DAT.thue.ky*HM)");ok(run(`datOf(nodeById(${x[0]})).o[${x[1]}].chu.k`)==='ta'&&run(`datOf(nodeById(${x[0]})).o[${x[1]}].thueKy`)===4, 'nợ thuế bốn kỳ: chưa tịch biên');
+    run("advanceTime(DAT.thue.ky*HM)");ok(run(`datOf(nodeById(${x[0]})).o[${x[1]}].chu.k`)!=='ta'&&run("NK.count('nq2.tich')")===1, 'nợ năm kỳ: quan phủ tịch biên');
+    ok(run(`datOf(nodeById(${x[0]})).o[${x[1]}].chu.k`)==='fa', 'ô đất về tay Hoàng quốc nắm thành');
+  },
   // Việc 2: nguy hiểm động ở nơi có người (thế giới mới)
   nguy_hiem_dong() {
     fresh("FEAT.tna=1;G.run.pham=0;G.run.realm=1;G.run.karma=0");
