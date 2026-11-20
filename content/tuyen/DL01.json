@@ -18,12 +18,12 @@
         "cach": "tin",
         "noi": "LOC05"
       },
-      "mo": "Bản vẽ ở {LOC05} chỉ một con đường vượt khỏi trận địa lên trời. Người coi bản đặt tên những người từng thử đi bên cạnh. Chưa ai ghi rõ có lối nào quay xuống.",
+      "mo": "Ở {LOC05}, người coi trận lấy chặn giấy đè lên một góc trận đồ. Một đường mực chạy khỏi chân núi, lên tới mép giấy thì dừng. Bên cạnh là tên những người đã thử đi. Ngươi cần biết họ đã đến đâu và ai tìm được đường trở xuống.",
       "boQuaNeuXuatThan": true,
       "cach": [
         {
           "id": "cach_1",
-          "l": "Hỏi nơi đường trận dừng",
+          "l": "Hỏi đường trận dừng ở đâu",
           "t": "Ngươi chép vạch cuối vào giấy và hỏi ai đã thực sự trở về từ đó.",
           "dau": [
             "moc_1_1"
@@ -31,7 +31,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Đề nghị có lối quay xuống",
+          "l": "Chừa lối trở xuống trên bản đồ",
           "t": "Ngươi xin dành một chỗ trống trên bản đồ cho người đổi ý giữa đường.",
           "dau": [
             "moc_1_2"
@@ -39,7 +39,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Nhận xem đường khi có người làm chứng",
+          "l": "Nhờ người đi cùng giữ bản đồ thứ hai",
           "t": "Ngươi để người đi cùng giữ bản đồ chỉ đường thứ hai, phòng lúc người dẫn mất dấu.",
           "dau": [
             "moc_1_3"
@@ -67,12 +67,12 @@
         "cach": "tin",
         "noi": "LOC05"
       },
-      "mo": "Mặt sau trận đồ cho thấy đường lên có thể lấy ký ức của người đi để dựng cảnh. Nếu đặt dấu ở {LOC15} và dưới chân trận, ngươi có thể kiểm xem cảnh nào đang lặp.",
+      "mo": "Ngươi lật trận đồ và thấy một căn nhà hiện lên từ vết mực nhòe. Cái then cửa nằm đúng phía ngươi vẫn quen gài. Nếu trận lấy chuyện trong đầu ngươi để dựng cảnh, ngươi sẽ phải dùng dấu ở chân trận và ở {LOC15} để thử nó.",
       "khacVoi": "OR02.N4 thay nguồn trục địa phương; hồi này kiểm chỗ đối chứng giữa hai mặt đường lên trời.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Tìm hai mốc để nhận ra cảnh do trận dựng",
+          "l": "Đặt hai mốc để nhận ra cảnh lặp",
           "t": "Ngươi ghi một mốc dưới và một mốc trên, để biết khi nào cảnh được dệt lại.",
           "dau": [
             "moc_2_1"
@@ -80,7 +80,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Xin giữ lối quay xuống cho đoàn",
+          "l": "Thử tín hiệu quay xuống",
           "t": "Ngươi yêu cầu có điểm rút tự do và tập gọi dấu hẹn từ mặt thấp.",
           "dau": [
             "moc_2_2"
@@ -88,7 +88,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Giữ riêng vạch đi nhanh",
+          "l": "Giữ riêng bản đồ đường tắt",
           "t": "Ngươi nhận bản đồ chỉ đường tắt rồi ghi tên những người sẽ bị kéo theo nếu mở sớm.",
           "dau": [
             "moc_2_3"
@@ -116,13 +116,13 @@
         "cach": "tin",
         "noi": "LOC15"
       },
-      "mo": "Mỗi lần đường sáng ở {LOC15}, linh mạch dưới đất lại yếu đi. Các động phủ sắp tranh phần. Người coi mốc đo hỏi ai chịu giảm lượng linh khí mình lấy.",
+      "mo": "Ở {LOC15}, {NP29} cúi nghe dưới nền. Mỗi lần đường lên sáng, hòn đá đo linh khí bên cạnh lại tối đi. Người của các động phủ đã kéo tới, mỗi bên mang theo một bản ghi phần mình. Họ đợi ngươi quyết xem đường trên được lấy bao nhiêu.",
       "khacVoi": "OR39.N2 tìm trụ chặn nước trên vách; hồi này xử việc chia linh mạch giữa các nhóm khi đường cao lấy nguồn.",
       "clk": "CLK13",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Giảm phần đường cao để giữ nguồn chung",
+          "l": "Bớt phần linh khí dành cho đường lên",
           "t": "Ngươi khóa bớt suất được cấp cho đường lên và giao vạch đo cho người ở dưới kiểm.",
           "dau": [
             "moc_3_1"
@@ -136,7 +136,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Thử đường về cho người muốn quay xuống",
+          "l": "Thử lối rút ở mốc thấp",
           "t": "Ngươi treo dây nhận dấu ở mốc thấp, để đoàn thử lối rút trước lúc mở cao.",
           "dau": [
             "moc_3_2"
@@ -144,7 +144,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Giành suất được cấp cho đường đi nhanh",
+          "l": "Giành linh khí cho đường tắt",
           "t": "Ngươi lấy lượt cấp đầu cho đường riêng, khiến các động phủ đứng cuối thiếu phần.",
           "dau": [
             "moc_3_3"
@@ -175,12 +175,12 @@
         "cach": "tin",
         "noi": "LOC15"
       },
-      "mo": "Cửa ở {LOC15} hiện ra căn nhà ngươi nhớ nhất, nhưng tiếng gọi trong nhà lặp đúng nhịp của trận. Dưới ánh sáng vẫn còn một cửa thấp để quay lại.",
+      "mo": "Cửa ở {LOC15} mở ra một căn nhà quen. Có người trong nhà gọi, ngừng đúng một nhịp rồi gọi lại bằng y giọng ấy. Bên dưới thềm vẫn còn ánh sáng lọt qua một cửa thấp. Ngươi có đủ thời gian để thử dấu hoặc đi tiếp.",
       "khacVoi": "OR09.N4 dùng chuông để xử một ký ức gia đình; hồi này thử cả cảnh giới dựng bằng ký ức và quyền quay lại.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Đối cảnh với mốc rồi ghi phần lặp",
+          "l": "Đối mốc và đánh dấu cảnh lặp",
           "t": "Ngươi dùng mốc đã chép để chỉ chỗ cảnh lặp, giữ tờ đối chiếu ngoài cửa.",
           "dau": [
             "moc_4_1"
@@ -193,7 +193,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Dẫn đoàn thử quay xuống",
+          "l": "Dẫn người đổi ý qua cửa thấp",
           "t": "Ngươi gọi đúng dấu đã tập, đưa người đổi ý qua cửa thấp trước khi nó mờ.",
           "dau": [
             "moc_4_2"
@@ -206,7 +206,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Dùng linh khí đã giành để giữ đường đi nhanh",
+          "l": "Dồn linh khí giữ đường tắt",
           "t": "Ngươi để cảnh lặp che phần thấp, giữ lối cao bằng lượt cấp đã lấy.",
           "dau": [
             "moc_4_3"
@@ -219,7 +219,7 @@
         },
         {
           "id": "cach_4",
-          "l": "Để ngoài cửa một lời chỉ đường",
+          "l": "Để dấu chỉ cửa thấp cho người sau",
           "t": "Ngươi đặt dấu cảnh lặp và mốc thấp bên chân vách cho người tới sau.",
           "dau": [
             "moc_4_4"
@@ -247,7 +247,7 @@
         "cach": "tin",
         "noi": "LOC15"
       },
-      "mo": "Cầu ở {LOC15} đã hiện. Có người muốn đối chứng trước khi bước, có người giục cả đoàn đi cho kịp. Dấu ở cửa thấp vẫn còn sáng để dẫn người muốn trở về.",
+      "mo": "Một nhịp cầu vươn khỏi sườn {LOC15}. Gió thổi qua mặt cầu, cuốn tờ vẽ khỏi tay một người đang giục cả đoàn lên. Dấu ở cửa thấp vẫn sáng. Ngươi có thể thử cảnh trên cầu, đưa đoàn trở xuống hoặc giữ lối cao cho riêng mình.",
       "khacVoi": "OR45.N5 chọn cách sống sau một mùa lũ; hồi này quyết định áp dụng chứng cứ ở ngưỡng phi thăng cho cả nhóm.",
       "clk": "CLK14",
       "cach": [
@@ -272,7 +272,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Trở xuống cùng những người đã chọn",
+          "l": "Dẫn người muốn về xuống núi",
           "t": "Ngươi trả đường cao, dẫn người theo dấu thấp rồi giao họ bản đồ chỉ đường.",
           "dau": [
             "moc_5_2"
@@ -285,7 +285,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Mở phần cao và giữ giá qua cửa",
+          "l": "Giữ lối cao bằng phần linh khí đã lấy",
           "t": "Ngươi duy trì lối riêng bằng mạch đã lấy, để người còn lại tự đòi phần.",
           "dau": [
             "moc_5_3"
@@ -298,7 +298,7 @@
         },
         {
           "id": "cach_4",
-          "l": "Giữ bản ở mốc ngoài",
+          "l": "Đặt bản đối chiếu bên ngoài cửa",
           "t": "Ngươi cất bản ở bậc không bị ánh sáng che, chờ người tự kiểm trước khi bước.",
           "dau": [
             "moc_5_4"

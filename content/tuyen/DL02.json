@@ -18,20 +18,20 @@
         "cach": "tin",
         "noi": "LOC07"
       },
-      "mo": "Ở {LOC07}, người coi tro đặt một chỗ cho người mới nhận huyết ấn. Ai muốn lấy quyền trên ba vùng đất phải nói rõ sẽ nuôi dân thế nào và bắt ai trả giá.",
+      "mo": "Ở {LOC07}, người coi tro phủi bụi trên chiếc ghế trống trước hòm ấn. Dưới chân ghế là sổ lương, bên trong có những xóm còn thóc và những xóm đã hết. Ai nhận quyền trên cả ba vùng sẽ quyết cả mùa sau xóm nào phải chịu đói.",
       "boQuaNeuXuatThan": true,
       "cach": [
         {
           "id": "cach_1",
-          "l": "Ghi món đất cần nuôi",
-          "t": "Ngươi hỏi phần lương nào còn đủ tới mùa sau rồi ghi chỗ chưa có người giữ.",
+          "l": "Kê kho và bỏ mặc những xóm thiếu người giữ",
+          "t": "Ngươi hỏi kho nào còn đủ tới mùa sau. Những xóm thiếu người giữ được khoanh riêng để người cầm ấn khỏi phải chia lương cho họ trước.",
           "dau": [
             "moc_1_1"
           ]
         },
         {
           "id": "cach_2",
-          "l": "Hỏi nguồn quyền ngoài huyết ấn",
+          "l": "Hỏi ai đọc được nền ký ức",
           "t": "Ngươi chép tên vai có thể tra nền ký ức trước khi đem dấu ra mở.",
           "dau": [
             "moc_1_2"
@@ -39,7 +39,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Để phần tro lại làm chứng",
+          "l": "Giữ danh sách các hộ phải trả giá",
           "t": "Ngươi giữ danh sách các hộ chịu giá, đặt bản sao ngoài hòm dấu quyền.",
           "dau": [
             "moc_1_3"
@@ -67,12 +67,12 @@
         "cach": "tin",
         "noi": "LOC07"
       },
-      "mo": "Sổ ở {LOC07} ghi ba vùng có thể bị huyết ấn cai quản. Có hộ chịu góp lương, có hộ chỉ xin được rời đi. Rút linh mạch đột ngột có thể khiến những nơi ấy không còn sống được.",
+      "mo": "Trước hòm ấn ở {LOC07}, một người gấp lá đơn xin rời làng làm tư để nhét vào khe cửa. Bên trong, giấy kê lương đã mở sẵn cho cả ba vùng. Huyết ấn cho ngươi quyền đòi cống. Rút mạch lúc này có thể khiến đất dưới chân họ chết theo.",
       "khacVoi": "OR14.N3 xử phần cống khi kế vị; hồi này kê giá và quyền của ba vùng có thể lệ thuộc.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Gom lương và người coi từng vùng",
+          "l": "Cho từng vùng cử người phát lương",
           "t": "Ngươi giao phần kho có kiểm, để ba vùng cử người giữ phiên cấp lương.",
           "dau": [
             "moc_2_1"
@@ -80,7 +80,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Tìm chỗ cắt mạch mà không hại dân",
+          "l": "Tìm chỗ ngắt mạch mà dân còn sống",
           "t": "Ngươi tra dấu từ {LOC15} và ghi chỗ có thể cắt mạch mà không xóa người.",
           "dau": [
             "moc_2_2"
@@ -88,8 +88,8 @@
         },
         {
           "id": "cach_3",
-          "l": "Giữ quyền thu bằng dấu của cốc",
-          "t": "Ngươi nhận lời phục tùng từ người giữ dấu rồi chép vùng phải nộp phần.",
+          "l": "Ép ba vùng nộp cống bằng huyết ấn",
+          "t": "Ngươi nhận lời phục tùng của {FA05} rồi ghi đủ những vùng phải nộp. Lá đơn xin đi bị chặn bên dưới tờ kê cống.",
           "dau": [
             "moc_2_3"
           ],
@@ -126,13 +126,13 @@
         "cach": "tin",
         "noi": "LOC15"
       },
-      "mo": "Ánh đỏ trùm đường tới {LOC15}. Nền đá vọng tiếng của những người bị mạch giữ lại. Dân ba vùng cần biết ai mở kho và còn lối nào để ra ngoài.",
+      "mo": "Ánh đỏ phủ lên những bậc cuối của {LOC15}. {NP30} áp tai xuống nền đá. Bên dưới có tiếng người đập cửa, rồi im. Người từ ba vùng đem bao rỗng lên xin lương. Một gia đình đứng cạnh cửa thoát, chờ xem ngươi có cho họ đi qua.",
       "khacVoi": "OR03.N4 trả tên trong khế buôn người; hồi này xử ký ức bị giữ trên cả nền và đường lương của các vùng.",
       "clk": "CLK06",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Mở đường tiếp tế qua đêm",
+          "l": "Mở kho tiếp tế cho ba vùng",
           "t": "Ngươi cho các vùng dùng phần kho đã kê, giữ bảng phát lương dưới dấu họ tự cử.",
           "dau": [
             "moc_3_1"
@@ -146,7 +146,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Kiểm dấu để cắt mạch cưỡng ép",
+          "l": "Đối chứng nơi phải ngắt mạch",
           "t": "Ngươi so hai nguồn chứng và ghi những nhà cần được bảo vệ khi ngắt mạch.",
           "dau": [
             "moc_3_2"
@@ -159,8 +159,8 @@
         },
         {
           "id": "cach_3",
-          "l": "Dùng đêm để giành quyền cửa",
-          "t": "Ngươi nhận quyền gọi lượt qua cửa, khiến những người muốn đi phải trình dấu mình.",
+          "l": "Chặn cửa thoát để buộc trình dấu",
+          "t": "Ngươi giành quyền gọi từng lượt qua cửa. Người không chịu trình dấu của ngươi phải đứng lại ngoài thềm, dưới ánh đỏ.",
           "dau": [
             "moc_3_3"
           ]
@@ -187,13 +187,13 @@
         "cach": "tin",
         "noi": "LOC07"
       },
-      "mo": "Đại diện ba vùng tới {LOC07} cùng sổ hộ. Người xin giữ mạch muốn họ thề theo mình. Người coi nền đá bảo ai muốn ngắt mạch phải kê những nhà cần dời trước.",
+      "mo": "Ở {LOC07}, một người ôm sổ hộ sát ngực, còn người bên cạnh đã chìa tay chờ chìa kho. Người giữ nền mang bản thử ngắt mạch đến. Ngươi phải chọn ai được cấp lương, ai được giữ kho và những nhà nào cần dời trước.",
       "khacVoi": "OR14.N4 giải tranh chấp quanh cốc; hồi này xác lập trách nhiệm liên vùng và quyền ra khỏi mạch.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Nhận lời thề có lương và phiên kiểm",
-          "t": "Ngươi nhận dấu theo cách chia lương đã thử, để từng vùng giữ quyền đọc phần của họ.",
+          "l": "Bắt từng vùng tuyên thệ để lĩnh lương",
+          "t": "Ngươi chỉ cho mở kho khi từng vùng đã thề theo mình. Người đại diện phải đọc lời thề trước hàng người đang đợi lương, rồi mới được xem phần thóc của họ.",
           "dau": [
             "moc_4_1"
           ],
@@ -206,7 +206,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Chuẩn bị ngắt phần mạch giữ tên người",
+          "l": "Giao bản thử ngắt mạch giữ tên",
           "t": "Ngươi đặt chứng về mạch bị giữ bên danh hộ, giao người giữ nền bản dự kiểm.",
           "dau": [
             "moc_4_2"
@@ -219,7 +219,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Giữ ba khu bằng người coi đã cử",
+          "l": "Giao chìa kho cho người ba vùng cử",
           "t": "Ngươi giao chìa cho ba người địa phương và ghi rõ phần nợ chưa được xóa.",
           "dau": [
             "moc_4_3"
@@ -247,14 +247,14 @@
         "cach": "tin",
         "noi": "LOC15"
       },
-      "mo": "Huyết ấn vừa chạm nền {LOC15}, mạch sâu đã sáng. Có người xin giữ kho qua đêm, có người muốn bỏ phần trói tên. Đại diện ba vùng cũng có thể nhận sổ về tự lo.",
+      "mo": "Huyết ấn chạm nền {LOC15}, soi rõ bàn tay của những người đang chìa sổ về phía ngươi. Dưới chân họ, mạch giữ tên người đã sáng. Ngươi có thể giữ mạch cùng các kho, ngắt phần trói tên hoặc trả sổ cho ba vùng tự lo.",
       "khacVoi": "OR14.N5 đặt quan hệ của huyết hệ với người ngoài cốc; hồi này quyết định tương lai mạch sâu và ba vùng đã kê.",
       "clk": "CLK06",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Giữ mạch và cấp lương cho ba vùng",
-          "t": "Ngươi giữ mạch và kho theo lời thề đã nhận, cùng bản nợ đi theo quyền.",
+          "l": "Giữ mạch trói tên để tiếp tục cấp lương",
+          "t": "Ngươi mở kho theo lời thề đã nhận và để mạch tiếp tục giữ tên người. Ba vùng có lương qua đêm. Trong sổ, món nợ nằm ngay dưới dấu của ngươi.",
           "dau": [
             "moc_5_1"
           ],
@@ -272,7 +272,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Cắt phần trói khi chứng đã đủ",
+          "l": "Ngắt phần mạch trói tên",
           "t": "Ngươi cùng người giữ nền tách cơ chế buộc tên, để người sống tự chọn đường.",
           "dau": [
             "moc_5_2"
@@ -285,7 +285,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Dừng trước mạch sâu và giao sổ vùng",
+          "l": "Trả sổ cho ba vùng chia lương",
           "t": "Ngươi để ba vùng tự chia phần và trả sổ cho người đang ở đó.",
           "dau": [
             "moc_5_3"
@@ -298,7 +298,7 @@
         },
         {
           "id": "cach_4",
-          "l": "Ghi món nợ còn ngoài sổ",
+          "l": "Ghi nợ của các hộ còn ngoài sổ",
           "t": "Ngươi đặt bản ghi đêm lên mốc, chừa chỗ cho người chưa có lời.",
           "dau": [
             "moc_5_4"
