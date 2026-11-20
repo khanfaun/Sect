@@ -273,10 +273,10 @@ const TESTS = {
     const tip=run("truyTip()");ok(/Bị truy đuổi/.test(tip)&&!/\d/.test(tip), 'chú thích bằng chữ, không có số');
     run("W().t=G.run.truy.until+1;advanceTime(1)");ok(run("!G.run.truy"), 'hết hạn: tự cắt đuôi');
     // chặng đi dài: bị chặn giữa chặng
-    const far=run(`(()=>{const r=G.run;const a=nodeById(r.at);let best=null,bh=0;for(const R0 of W().regions)for(const n of R0.nodes){if(n.id===r.at)continue;n.fog=Math.max(n.fog||0,1);const p=findPath(r.at,n.id);if(!p||p.length<2)continue;const h=edgeLen(p[0],p[1])/walkSpeed();if(h>bh&&h<24*40){bh=h;best=n.id;}}return best;})()`);
+    const far=run(`(()=>{const r=G.run;let best=null,bh=1e18;for(const R0 of W().regions)for(const n of R0.nodes){if(n.id===r.at)continue;n.fog=Math.max(n.fog||0,1);const p=findPath(r.at,n.id);if(!p||p.length<2)continue;const h=edgeLen(p[0],p[1])/walkSpeed();if(h>24&&h<bh){bh=h;best=n.id;}}return best;})()`);
     ok(far!=null&&run(`edgeLen(G.run.at,${far})/walkSpeed()`)>24, 'tìm được chặng đi dài (hơn một ngày đường)');
     run(`TRUY.loai.tac.chan=1;TRUY.manh.chan=0;G.run.scene=null;G.run.halt=false;travelTo(${far});G.run.dest=${far};TK_S=edgeLen(G.run.moving.path[0],G.run.moving.path[1])/walkSpeed();truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});G.run.truy.nx=W().t+TK_S*0.5;G.run.truy.until=W().t+999*HD;G.run.kyT=W().t;G.run.tmT=W().t;TK_T0=W().t`);
-    run("travelTick(TK_S*20)");
+    run("TK_P=truyP;truyP=()=>1;try{travelTick(TK_S*20)}finally{truyP=TK_P}");
     ok(run("G.run.scene&&G.run.scene.type==='kyngo'&&G.run.scene.ev==='truy_chan'"), 'đang đi chặng dài thì bị chặn (hộp lựa chọn)');
     ok(run("!!G.run.moving&&G.run.moving.prog>0&&G.run.moving.prog<1&&G.run.halt===true"), 'dừng giữa chặng, không nhảy về nút ('+run("G.run.moving&&G.run.moving.prog")+')');
     ok(run("W().t-TK_T0<TK_S"), 'bị chặn trước khi đi hết chặng đầu');
@@ -315,7 +315,7 @@ const TESTS = {
     ok(run("Object.values(TRUY.loai).every(L=>L.gian[0]>=240)"), 'mỗi lần dò cách nhau ít nhất mười ngày');
     // bắt đầu sạch: các bước trên để lại r.moving cũ (arrive() không xoá) không khớp r.at, làm chặng đầu và far2 phụ thuộc bố cục bản đồ (seed)
     run("G.run.moving=null;G.run.halt=false;G.run.scene=null");
-    const far2=run(`(()=>{const r=G.run;const a=nodeById(r.at);let best=null,bh=0;for(const R0 of W().regions)for(const n of R0.nodes){if(n.id===r.at)continue;n.fog=Math.max(n.fog||0,1);const p=findPath(r.at,n.id);if(!p||p.length<2)continue;const h=edgeLen(p[0],p[1])/walkSpeed();if(h>bh&&h<24*40){bh=h;best=n.id;}}return best;})()`);
+    const far2=run(`(()=>{const r=G.run;let best=null,bh=1e18;for(const R0 of W().regions)for(const n of R0.nodes){if(n.id===r.at)continue;n.fog=Math.max(n.fog||0,1);const p=findPath(r.at,n.id);if(!p||p.length<2)continue;const h=edgeLen(p[0],p[1])/walkSpeed();if(h>24&&h<bh){bh=h;best=n.id;}}return best;})()`);
     ok(far2!=null, 'tìm được chặng đi để thử bị chặn giữa đường');
     // Sửa-L câu 51: bị chặn giữa đường, đánh thắng/chạy tiếp xong vẫn đứng yên tới khi bấm Đi tiếp
     run(`G.run.truy=null;G.run.scene=null;G.run.halt=false;travelTo(${far2});G.run.dest=${far2};TK_S=edgeLen(G.run.moving.path[0],G.run.moving.path[1])/walkSpeed();truyStart('tac',{n:'Sơn tặc',ek:'sontac',d:0});TRUY.loai.tac.chan=1;G.run.truy.nx=W().t+TK_S*0.5;G.run.kyT=W().t;G.run.tmT=W().t;TK_P=truyP;truyP=()=>1;try{travelTick(TK_S*20)}finally{truyP=TK_P}`);
@@ -871,8 +871,8 @@ const TESTS = {
     ok(go[1] === go[2] && go[0] !== go[1], `đi bộ sang đại khu vực khác (${go[0]} → ${go[1]})`);
     const spl = run('(()=>{const g=geo(),M={};for(let i=0;i<HN;i++){if(g.reg[i]<0)continue;const d=g.dist[i];if(M[d]!=null&&M[d]!==g.reg[i])return d;M[d]=g.reg[i];}return -1;})()');
     ok(spl === -1, 'mỗi quận nằm trọn trong một đại khu vực');
-    // đi tới ô đất bất kỳ (điểm hoang tạm)
-    const wp = run('(()=>{const r=G.run,g=geo();const h0=nodeHex(nodeById(r.at));let c=-1;for(let i=0;i<HN&&c<0;i++){if(g.reg[i]>=0&&terWalk(g.ter[i])&&hexNode(i)==null&&Math.abs(i-h0)>25&&Math.abs(i-h0)<80)c=i;}const hrs=cellHours(c);const n=wpMake(c);let tries=0;while(G.run&&r.at!==n.id&&tries++<10){r.scene=null;travelTo(n.id);let q=0;while(G.run&&r.moving&&q++<4000){if(r.scene)r.scene=null;travelTick(6);}}const ok1=r.at===n.id&&nodeHex(nodeById(r.at))===c;const hx=hexNode(c);return [ok1,hrs>0,hx==null,nodeById(r.at).wp];})()');
+    // đi tới ô đất bất kỳ (điểm hoang tạm). Chọn ô không thuộc địa điểm nào, kể cả nơi chưa khám phá (ô phụ của nơi chưa biết chưa tính vào hexNode, đi ngang qua phát hiện ra thì ô đó thành của nơi ấy)
+    const wp = run('(()=>{const r=G.run,g=geo();const h0=nodeHex(nodeById(r.at));const own=new Set();for(const R0 of W().regions)for(const n of R0.nodes){own.add(nodeHex(n));for(const x of n.cells||[])own.add(x);}let c=-1;for(let i=0;i<HN&&c<0;i++){if(g.reg[i]>=0&&terWalk(g.ter[i])&&hexNode(i)==null&&!own.has(i)&&Math.abs(i-h0)>25&&Math.abs(i-h0)<80)c=i;}const hrs=cellHours(c);const n=wpMake(c);let tries=0;while(G.run&&r.at!==n.id&&tries++<10){r.scene=null;travelTo(n.id);let q=0;while(G.run&&r.moving&&q++<4000){if(r.scene)r.scene=null;travelTick(6);}}const ok1=r.at===n.id&&nodeHex(nodeById(r.at))===c;const hx=hexNode(c);return [ok1,hrs>0,hx==null,nodeById(r.at).wp];})()');
     ok(wp[0] && wp[1] && wp[2] && wp[3], 'đi tới ô đất bất kỳ: đến đúng ô, có thời gian, không thành icon địa điểm ' + JSON.stringify(wp));
     // tầm nhìn: đồng bằng trống nhìn xa hơn chỗ nhiều núi
     const vv = run('(()=>{const g=geo();let a=0,na=0,b=0,nb=0;for(let i=0;i<HN;i+=7){if(g.reg[i]<0)continue;const nbs=hexNb(i);const m=nbs.filter(j=>g.ter[j]===3&&g.el[j]>=g.el[i]).length;if(g.ter[i]===1&&m===0&&na<30){a+=visCells(i,6).length;na++;}else if(g.ter[i]!==3&&m>=3&&nb<30){b+=visCells(i,6).length;nb++;}}return [a/na,b/nb];})()');
