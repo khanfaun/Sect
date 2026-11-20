@@ -25,11 +25,12 @@ function OBaoDotPha({ cn }) {
   if (PS.btReadyTv() && PS.llOf() < PS.llNeedBt()) return <div className="bt-box"><b><Ic n="spark" /> {bth}</b><p className="hint bad">Lịch luyện chưa theo kịp nên chưa đột phá được. Hãy ra ngoài lịch luyện.</p></div>;
   if (!PS.canBreak()) return null;
   const atDp = (cn && cn.dp) || ph;
+  const vo = !!PS.voKnown();
   return (
     <div className={'bt-box' + (atDp ? ' on' : '')}>
       <b><Ic n="spark" /> {bth}</b>
       <p className="hint">{ph ? 'Có thể dẫn khí nhập thể ngay tại đây.' : atDp ? 'Nơi này có động phủ, có thể đột phá ngay.' : 'Phải tới nơi có động phủ mới đột phá được.'}</p>
-      <button className={'btn ' + (atDp ? 'pri glow' : '')} data-act="cgGo" disabled={!atDp}>{ph ? 'Xung kích' : 'Đột phá'}</button>
+      <button className={'btn ' + (atDp && !vo ? 'pri glow' : '')} data-act="cgGo" disabled={!atDp || vo} {...(vo ? tip('Vô linh căn: không thể đột phá') : {})}>{ph ? 'Xung kích' : 'Đột phá'}</button>
     </div>
   );
 }
