@@ -3601,8 +3601,10 @@ const QPRE=['','Nhân Đạo','Địa Đạo','Thiên Đạo'];
 // Nguồn chuẩn: QMUL, QLIFE. Luật xử lý ở src/game/core/08-loi-kiep.js.
 const QMUL=[1,1.06,1.13,1.22],QLIFE=[0,5,10,20];
 
-// Nguồn chuẩn: BT_BASE. Luật xử lý ở src/game/core/08-loi-kiep.js.
-const BT_BASE=[0.62,0.52,0.46,0.40,0.35];
+// Nguồn chuẩn: BT_BASE, BT_CAP. Luật xử lý ở src/game/core/08-loi-kiep.js (trần áp ở src/game/core2/70-can-bang-d12.js).
+// Đ12 (HN B §4.2): Luyện Khí→Trúc Cơ, →Kết Đan, →Nguyên Anh, →Hóa Thần, →Độ Kiếp.
+const BT_BASE=[0.45,0.36,0.28,0.20,0.14];
+const BT_CAP=0.88; // trần tỉ lệ đột phá sau mọi cộng thêm (trừ khi Cảm ngộ đầy)
 
 // Nguồn chuẩn: MONTH. Luật xử lý ở src/game/core/08-loi-kiep.js.
 const MONTH=['Giêng','Hai','Ba','Tư','Năm','Sáu','Bảy','Tám','Chín','Mười',contentText("core_08-loi-kiep_js.053"),'Chạp'];
@@ -3693,7 +3695,7 @@ function btEff(slots){
 function btRate(slots){
   const r=G.run,s=S();const e=btEff(slots||[]);
   const p=BT_BASE[Math.min(4,r.realm)]+(s.ngo-10)*0.012+(s.tam-10)*0.012-r.tamma*0.004+(r.btFail||0)*0.08+e.rate/100;
-  return clamp(p,0.05,0.97);
+  return clamp(p,0.05,BT_CAP);
 }
 function btChance(){return btRate([]);}
 function canBreak(){const r=G.run;return (lkOn()?(lkTang()>=10||(lkTang()===9&&lkFull())):r.tv>=100)&&r.realm<=4;}
@@ -15140,6 +15142,25 @@ function visOpen(){const r=G.run;if(!r||r.at==null||typeof sense!=='function')re
   dbg('mo.vis0',{at:r.at,n});return n;}
 {const _nr=newRun;newRun=function(){const x=_nr.apply(this,arguments);if(G.run)visOpen();return x;};}
 if(typeof loadData==='function'){const _ld=loadData;loadData=function(){const x=_ld.apply(this,arguments);if(G.run)visOpen();return x;};}
+
+// Nguồn chuẩn: D12_BQ, D12_LL, D12_EN. Luật xử lý ở src/game/core2/70-can-bang-d12.js.
+// Đ12 — số độ khó ban đầu (HN B §4.2). Chỉ chỉnh lại khi người dùng cho chạy bot đo.
+let D12_BQ=0.75; // tu vi nhận khi bế quan
+let D12_LL=0.85; // lịch luyện nhận được (phần cộng thêm)
+let D12_EN=1.15; // chỉ số kẻ địch cùng tầng (khí huyết, công, thủ)
+
+// ================= Đ12: ÁP SỐ ĐỘ KHÓ BAN ĐẦU (HN B §4.2) =================
+// Bảng BT_BASE, BT_CAP: content/rules/bt-base.js · D12_BQ, D12_LL, D12_EN: content/rules/can-bang-d12.js
+// 1) Trần tỉ lệ đột phá: bọc ngoài cùng (sau Cảm ngộ ở core2/19) nên phải chừa Cảm ngộ đầy — khi đó vẫn chắc chắn qua.
+{const _br70=btRate;btRate=function(slots){const p=_br70(slots);if(camNgoFull())return p;return Math.min(BT_CAP,p);};}
+// 2) Tu vi bế quan ×D12_BQ
+{const _bq70=bqReal;bqReal=function(){return _bq70.apply(this,arguments)*D12_BQ;};}
+// 3) Lịch luyện nhận được ×D12_LL (chỉ phần cộng)
+{const _la70=llAdd;llAdd=function(x,why,quiet){return _la70(x>0?x*D12_LL:x,why,quiet);};}
+// 4) Kẻ địch mạnh hơn ×D12_EN (tâm ma dựng từ chỉ số người chơi nên giữ nguyên)
+function d12Foe(e){if(!e)return e;for(const k of ['hp','max','atk','def'])if(typeof e[k]==='number')e[k]=Math.round(e[k]*D12_EN);dbg('d12.foe',{n:e.n,hp:e.hp,atk:e.atk,def:e.def});return e;}
+{const _me70=mkEnemy;mkEnemy=function(spec){const e=_me70.apply(this,arguments);if(spec&&spec.k==='tamma')return e;return d12Foe(e);};}
+{const _mb70=mkBoss;mkBoss=function(){return d12Foe(_mb70.apply(this,arguments));};}
 
 // ================= GIAO DIỆN =================
 // ---------- nền tảng: tiện ích, cấu hình, biểu tượng ----------

@@ -811,6 +811,25 @@ const TESTS = {
     ok(b === 1, `${run('CN_MAX')} lần thất bại: tỉ lệ ${b} (chắc chắn)`);
     ok(run('btParts([]).some(x=>/Cảm ngộ/.test(x.t))'), 'bảng tỉ lệ có dòng Cảm ngộ khi đầy');
   },
+  // Đ12: số độ khó ban đầu (BT_BASE mới, trần 0,88 trừ khi Cảm ngộ đầy, bế quan/lịch luyện/kẻ địch)
+  d12() {
+    fresh();
+    ok(run('JSON.stringify(BT_BASE)') === '[0.45,0.36,0.28,0.2,0.14]', 'BT_BASE = 45/36/28/20/14%');
+    const hi = +run('(()=>{G.run.btFail=0;const _bp=btParts;btParts=s=>_bp(s).concat([{t:"x",v:500}]);try{return btRate([])}finally{btParts=_bp}})()');
+    ok(Math.abs(hi - 0.88) < 1e-9, `cộng thêm thật nhiều vẫn không quá trần: ${hi}`);
+    const cn = +run('G.run.btFail=CN_MAX;btRate([])');
+    ok(cn === 1, `Cảm ngộ đầy vẫn chắc chắn qua: ${cn}`);
+    const bq = +run('(()=>{const r=G.run;r.btFail=0;const _v=isVo,_p=isPham,_q=bqRate;isVo=()=>false;isPham=()=>false;bqRate=()=>1;try{const _x=D12_BQ;const a=bqReal();D12_BQ=1;const b=bqReal();D12_BQ=_x;return b?a/b:-1}finally{isVo=_v;isPham=_p;bqRate=_q}})()');
+    ok(Math.abs(bq - 0.75) < 1e-6, `bế quan ×${bq.toFixed(2)}`);
+    const ll = +run('(()=>{const r=G.run;const b=r.ll||0;r.ll=0;llAdd(30,"t",1);const a=r.ll;r.ll=0;const _x=D12_LL;D12_LL=1;llAdd(30,"t",1);const c=r.ll;D12_LL=_x;r.ll=b;return c?a/c:0})()');
+    ok(Math.abs(ll - 0.85) < 0.04, `lịch luyện ×${ll.toFixed(3)}`);
+    const en = run('JSON.stringify(d12Foe({hp:100,max:100,atk:20,def:10}))');
+    ok(en === '{"hp":115,"max":115,"atk":23,"def":12}', `kẻ địch ×1,15: ${en}`);
+    run('NK.clear()'); run('mkEnemy({k:"tamma"})');
+    ok(run('NK.count("d12")') === 0, 'tâm ma (dựng từ chỉ số người chơi) không nhân');
+    run('mkEnemy({k:"beast"})');
+    ok(run('NK.count("d12")') > 0, 'nhật ký ghi d12.foe');
+  },
   // chiêu dùng một lần: dùng xong mất, mặc định bị khoá khỏi tự đánh, khoá bật tắt được
   skillonce() {
     fresh(`globalThis.__aa=activeArts;globalThis.__as=artSk;globalThis.__sl=skLvOf;activeArts=()=>[{zz:1}];artSk=a=>a.zz?['zz_once','zz_norm']:[];skLvOf=()=>1;

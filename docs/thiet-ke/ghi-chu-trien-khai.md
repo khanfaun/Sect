@@ -1018,3 +1018,9 @@ Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời
 - 86. Sau khi khép hành trình: A chuyển sang Tân Mộng (vòng mới) · B có hậu truyện, chơi tiếp.
 - 87. Mộng Ấn: A mỗi kiếp 1 mảnh · B ngoại lệ: kết Tỉnh Mộng được 2 mảnh.
 - 88. Hậu quả thế giới của END02, END03: A làm thật ở đợt sau · B chỉ ghi sổ, không đổi thế giới.
+
+## Đ12 — Áp số ban đầu (chưa đo bằng bot)
+- `content/rules/bt-base.js`: `BT_BASE=[0.45,0.36,0.28,0.20,0.14]`, thêm `BT_CAP=0.88`. `core/08-loi-kiep.js:78` dùng `BT_CAP` (thân này đã bị core2/11 thay hẳn, nên trần thật nằm ở khối bọc mới).
+- `core2/70-can-bang-d12.js` (+ bảng `content/rules/can-bang-d12.js`, ghi ngay sau `core2/68` trong thu-tu.json): bọc `btRate` ngoài cùng → `min(BT_CAP)`, **bỏ qua khi Cảm ngộ đầy** (`camNgoFull()`, vẫn ra 1); `bqReal` ×`D12_BQ`=0,75; `llAdd` (phần cộng) ×`D12_LL`=0,85; `mkEnemy`/`mkBoss` khí huyết, công, thủ ×`D12_EN`=1,15 (trừ tâm ma vì dựng từ chỉ số người chơi), nhật ký `d12.foe`.
+- Bài kiểm mới `d12`; `camngo` vẫn đạt (4 lần thất bại giờ ra 0,88 thay vì 0,97). Không bài cũ nào phải sửa số.
+- Còn lại: các đòn bẩy khác ở HN B §4.2 (thương thế khi đột phá hỏng, linh thạch rơi, giá đan, tinh anh 15%…) chưa làm; đo bằng bot chỉ khi người dùng cho.

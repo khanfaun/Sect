@@ -75,7 +75,7 @@ function btEff(slots){
 function btRate(slots){
   const r=G.run,s=S();const e=btEff(slots||[]);
   const p=BT_BASE[Math.min(4,r.realm)]+(s.ngo-10)*0.012+(s.tam-10)*0.012-r.tamma*0.004+(r.btFail||0)*0.08+e.rate/100;
-  return clamp(p,0.05,0.97);
+  return clamp(p,0.05,BT_CAP);
 }
 function btChance(){return btRate([]);}
 function canBreak(){const r=G.run;return (lkOn()?(lkTang()>=10||(lkTang()===9&&lkFull())):r.tv>=100)&&r.realm<=4;}

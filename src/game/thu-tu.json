@@ -331,6 +331,8 @@
  "content/rules/dai-mong.js",
  "core2/67-dai-mong.js",
  "core2/68-mo-tam-nhin.js",
+ "content/rules/can-bang-d12.js",
+ "core2/70-can-bang-d12.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
