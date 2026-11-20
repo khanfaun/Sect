@@ -1108,3 +1108,4 @@ Trả lời kiểu "80 A, 81 B…". Chưa làm gì cho tới khi có trả lời
 ## Quy tắc giao agent (người dùng chốt 20/11)
 Tự chọn model cho từng agent (không dùng Fable). Mức nỗ lực: việc phức tạp nhất tối đa "cao"; việc không đơn giản "trung bình"; việc đơn giản "thấp". Chỉ đặt effort theo quy tắc này.
 - Tiết kiệm token khi giao agent (người dùng dặn 20/11): ít agent hơn, gộp việc liên quan vào một agent; chỉ spawn khi việc đủ lớn; prompt gọn, chỉ đúng tệp/mục cần; không giao việc tôi làm trực tiếp rẻ hơn (sửa nhỏ, kiểm tra, commit); không giao lại việc đã có kết quả; không chạy kiểm cả bộ lặp lại nhiều lần.
+- Người dùng chốt: GPT tự thiết kế + viết sự kiện cho 3 pháp môn Lôi pháp, Huyễn thuật, Thôn phệ (gói đợt sáu). Gói đợt sáu soạn SAU khi xong 2 agent (nhập nội dung nghề tu, nộp phạt theo quận), gồm cả các khoá chữ mới.
