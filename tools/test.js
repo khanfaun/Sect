@@ -29,6 +29,38 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // Việc 2: nguy hiểm động ở nơi có người (thế giới mới)
+  nguy_hiem_dong() {
+    fresh("FEAT.tna=1;G.run.pham=0;G.run.realm=1;G.run.karma=0");
+    const A="W().regions.flatMap(R=>R.nodes).filter(n=>n.state!=='ruin')";
+    const tt=run(`${A}.find(n=>n.type==='tutran').id`),th=run(`${A}.find(n=>n.type==='tuthanh').id`),ph=run(`${A}.find(n=>n.type==='thanh').id`);
+    ok(run(`dangerTag(nodeById(${tt}))`)===0, 'Trúc Cơ ở trấn tu sĩ (người mạnh nhất ngang mình): an toàn');
+    ok(run(`dangerTag(nodeById(${th}))`)===1&&/mạnh hơn/.test(run(`dangerWhy(nodeById(${th}))`)), 'Trúc Cơ ở thành tu sĩ (có Kết Đan): hơi nguy hiểm, có lý do');
+    run("G.run.pham=1;G.run.realm=0");ok(run(`dangerTag(nodeById(${ph}))`)===0&&run(`dangerTag(nodeById(${tt}))`)===1, 'phàm nhân: thành phàm an toàn, trấn tu sĩ hơi nguy hiểm');
+    run("G.run.pham=0;G.run.realm=1");
+    run(`(()=>{const n=nodeById(${ph});tnaBao(tnaK(n),2,{});})()`);
+    ok(run(`dangerTag(nodeById(${ph}))`)>=2, 'bị truy nã ở nơi đó: nguy hiểm ('+run(`dangerTag(nodeById(${ph}))`)+')');
+    const tg=run(`${A}.find(n=>n.type==='tong'&&W().sects.find(x=>x.n===n.owner&&x.al==='chinh')).id`);
+    run("G.run.karma=-70;G.run.realm=0");ok(run(`dangerTag(nodeById(${tg}))`)===3&&/Tử địa/.test(run(`dangerWhy(nodeById(${tg}))`)), 'tà tu yếu hơn hai bậc tới chính tông: tử địa');
+    fresh("FEAT.tna=1;G.run.pham=0;G.run.realm=3;G.run.karma=0");const tg2=run(`${A}.find(n=>n.type==='tong'&&W().sects.find(x=>x.n===n.owner&&x.al==='chinh')).id`);ok(run(`dangerTag(nodeById(${tg2}))`)===0, 'Nguyên Anh, không thù oán, tới sơn môn: an toàn');
+  },
+  // Việc 3: công trình sinh lời mỗi tháng → hộp thư
+  loi_ct() {
+    fresh("FEAT.dat=1;G.run.pham=0;G.run.realm=1;G.run.bac=10000000;G.run.st=1000000");
+    const pick=t=>run(`(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='${t}'&&n.state!=='ruin'&&(datOf(n)||{o:[]}).o.some(c=>c.ct&&datMuaCtOk(c)&&!LOI_CT.boQua.includes(c.ct)));if(!n)return null;const i=datOf(n).o.findIndex(c=>c.ct&&datMuaCtOk(c)&&!LOI_CT.boQua.includes(c.ct));const c=datOf(n).o[i];c.chu={k:'ta'};return [n.id,i,c.ct];})()`);
+    const a=pick('thanh'),b=pick('tuthanh');
+    ok(!!a&&!!b, 'có công trình ở thành phàm và thành tu sĩ để sở hữu ('+(a&&a[2])+', '+(b&&b[2])+')');
+    run("G.run.hopThu=[];G.run.loiM=ncMonth();W().t+=0");run("advanceTime(HM+1)");
+    ok(run("hopL().length")===1, 'qua một tháng: có một thư');
+    const T=JSON.parse(run("JSON.stringify(hopTong())"));
+    ok(T.bac>0&&T.lt>0, 'thành phàm trả bạc, thành tu sĩ trả linh thạch ('+T.bac+' xu, '+T.lt+' linh thạch)');
+    run("G.run.at=W().regions.flatMap(R=>R.nodes).find(n=>isWild(n)).id");const b0=run("G.run.bac"),s0=run("G.run.st");run("hopNhan()");
+    ok(run("G.run.bac")===b0+T.bac&&run("G.run.st")===s0+T.lt&&run("hopL().length")===0, 'nhận ở nơi hoang dã cũng được, đúng số');
+    run("advanceTime(30*HM)");ok(run("hopL().length")===run("LOI_CT.giu"), 'để lâu không nhận: giữ tối đa '+run("LOI_CT.giu")+' thư (cũ gộp vào)');
+    ok(run("hopTong().dong.reduce((s,d)=>s+d.thang,0)")===30*2, 'thư cũ không mất, chỉ gộp (đủ 30 tháng × 2 công trình: '+run("hopTong().dong.reduce((s,d)=>s+d.thang,0)")+')');
+    run("G.run.hopThu=[];(()=>{for(const id in datStore())for(const c of datStore()[id].o)if(c.chu&&c.chu.k==='ta')c.chu={k:'dan'};})();advanceTime(HM)");ok(run("hopL().length")===0, 'không sở hữu công trình: không có thư');
+    run("delete G.run.hopThu;delete G.run.loiM");ok(Array.isArray(run("hopL()")), 'bản lưu cũ chưa có hộp thư: vẫn chạy');
+  },
   // GPT đợt bảy, báo cáo logic: sự kiện giữ điều kiện nơi; tin đồn nhắc nơi có thật; giá trạm dịch theo nguồn chuẩn; thuế đất dưới tiền thuê nhà
   sua_logic7() {
     fresh();

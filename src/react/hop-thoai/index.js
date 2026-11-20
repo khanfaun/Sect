@@ -11,6 +11,7 @@ import { XemVatPham, XemCongPhap, CacPham, TieuHuyet } from './VatPham';
 import { XacNhanViec, XacNhanNoiChon, LamNhiemVu, HuyNhiemVu } from './XacNhan';
 import { ThuongCac } from './ThuongCac';
 import { MuuSinh } from './MuuSinh';
+import { HopThu } from './HopThu';
 import { BoQuaTanThu, NguyenVong } from '../chung/TanThu';
 
 export const HOP_THOAI = {
@@ -46,4 +47,5 @@ export const HOP_THOAI = {
   muusinh: MuuSinh,
   tutSkip: BoQuaTanThu,
   wish: NguyenVong,
+  hopthu: HopThu,
 };

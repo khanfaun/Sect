@@ -280,6 +280,18 @@ const TESTS = {
     await ev(p, () => {UI.modal=null;G.run.scene=null;render();});
   },
   // Đ3.6: HUD báo đói, chạm đổi mức ăn
+  // Việc 3: hộp thư lời công trình
+  async hop_thu(p) {
+    await ev(p, () => {const r=G.run;r.hopThu=[{m:1,L:[{node:r.at,noi:'Thử Trấn',ct:'khach_diem',bac:320,lt:0,an:['com_nam'],pill:[],vat:{},tin:[]}]}];UI.modal=null;UI.panel=null;r.scene=null;render();});
+    await p.waitForTimeout(150);
+    ok(await ev(p, () => !!document.querySelector('[data-act="hopThu"]')), 'có thư: hiện nút hộp thư trên thanh trên');
+    await ev(p, () => {ACT.hopThu();render();});await p.waitForTimeout(150);
+    ok(await ev(p, () => {const b=document.querySelector('.mbox.hopthu');return !!b&&/Khách điếm/.test(b.innerText)&&/Thử Trấn/.test(b.innerText)&&!!b.querySelector('[data-act="hopNhan"]');}), 'hộp thư liệt kê công trình, nơi, nút Nhận hết');
+    const b0=await ev(p, () => G.run.bac||0);
+    await ev(p, () => {document.querySelector('[data-act="hopNhan"]').click();});await p.waitForTimeout(150);
+    ok(await ev(p, () => G.run.hopThu.length===0&&!document.querySelector('[data-act="hopThu"]')&&G.run.qitems.includes('com_nam')), 'bấm Nhận hết: nhận tiền, đồ; nút hộp thư ẩn');
+    ok(await ev(p, () => G.run.bac||0)===b0+320, 'cộng đúng 320 xu');
+  },
   async an_hud(p) {
     await ev(p, () => {G.run.pham=1;G.run.doi=80; // ăn uống bản mới: đói lả từ 70 tới 100
     G.run.anMuc='thuong';UI.modal=null;UI.panel=null;G.run.scene=null;render();});

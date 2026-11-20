@@ -277,6 +277,8 @@
  "content/rules/tien.js",
  "content/venues/thuong-cac.js",
  "content/rules/an-uong.js",
+ "content/rules/nguy-hiem-dong.js",
+ "content/rules/loi-ct.js",
  "content/venues/viec-thue.js",
  "content/rules/gia-dinh.js",
  "core2/39-tien-te.js",
@@ -342,6 +344,8 @@
  "core2/73-nghe-tu-su-kien.js",
  "core2/74-chu-thanh-tran.js",
  "core2/75-an-moi.js",
+ "core2/76-nguy-hiem-dong.js",
+ "core2/77-loi-ct-hop-thu.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
@@ -373,5 +377,6 @@
  "ui/29-thien-cam-chu-nho.js",
  "ui/30-am-hoi.js",
  "ui/31-tam-giu.js",
- "ui/32-dai-mong.js"
+ "ui/32-dai-mong.js",
+ "ui/33-hop-thu.js"
 ]

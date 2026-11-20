@@ -4,8 +4,8 @@ Chi tiết quyết định: cuối `docs/thiet-ke/ghi-chu-trien-khai.md` (mục 
 
 ## Claude làm (theo thứ tự)
 1. ~~**Bản đồ mới**~~ (XONG 20/11) — áp lại `docs/thiet-ke/dang-do/ban-do-moi.patch` (xem README cùng thư mục), kiểm icon + Chú giải, chạy cả bộ kiểm, sửa bài cũ hỏng.
-2. **Nguy hiểm động** — tuỳ thế lực có địch ý, khác chính/tà, có người/yêu cao hơn 1–2 cảnh giới (mức "tử địa").
-3. **Công trình sinh lời** — lời mỗi tháng gửi về **hộp thư**; thành phàm và thành tu sĩ lời khác nhau (tiền hoặc thứ khác).
+2. ~~**Nguy hiểm động**~~ (XONG 20/11) — tuỳ thế lực có địch ý, khác chính/tà, có người/yêu cao hơn 1–2 cảnh giới (mức "tử địa").
+3. ~~**Công trình sinh lời**~~ (XONG 20/11) — lời mỗi tháng gửi về **hộp thư**; thành phàm và thành tu sĩ lời khác nhau (tiền hoặc thứ khác).
 4. **Nắm quyền thành trấn**
    - Thành phàm: làm quan / lập công, được Hoàng quốc điều về cai quản.
    - Thành tu sĩ: làm chủ thế lực đang nắm; đánh chiếm (hộp xác nhận, gây chiến); đàm phán mua lại (giá khổng lồ, có mặc cả).

@@ -154,5 +154,12 @@
   "an.dungT": "Đi được nửa đường thì bụng đói cồn cào, trong túi chẳng còn miếng nào. Đi tiếp thế này e gục giữa đường. Phải kiếm cái ăn ngay: ghé quán gần nhất, săn bắt, hái lượm hoặc làm thuê lấy bữa.",
   "an.dungC0": "Dừng lại, đi kiếm cái ăn",
   "an.dungR": "Ngươi dừng chân, nhìn quanh tìm chỗ có khói bếp.",
-  "rumor.noiXa": "một nơi xa"
+  "rumor.noiXa": "một nơi xa",
+  "nhd.manh": "Nơi có người mạnh hơn ngươi: cư xử cho phải phép thì không sao.",
+  "nhd.dich": "Người nắm nơi này có địch ý với ngươi: vào là dễ sinh chuyện.",
+  "nhd.tuDia": "Tử địa: người nắm nơi này thù ngươi, lại có kẻ mạnh hơn ngươi nhiều bậc.",
+  "hop.nhanLog": "Nhận lời công trình gửi về: {{0}}.",
+  "hop.vat": "đồ vật",
+  "hop.ten": "Hộp thư",
+  "hop.trong": "Chưa có thư nào. Công trình ngươi sở hữu gửi lời về đây mỗi tháng."
 }
