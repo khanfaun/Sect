@@ -4,7 +4,7 @@
     "n": "Lá thư chưa gửi",
     "i": "✉️",
     "dang": "Thư",
-    "use": "Lá thư nhặt trên thuyền ma; kỷ vật cốt truyện, chưa có nhiệm vụ gửi thư riêng.",
+    "use": "Kỷ vật nhặt trên thuyền ma. Hiện chưa có việc chuyển thư.",
     "d": "Phong bì ố vàng, nét chữ run run: \"Gửi mẹ.\"",
     "status": "active"
   },
@@ -14,7 +14,7 @@
     "i": "✉️",
     "dang": "Thư",
     "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Lời Nhắn Qua Nước · dùng để tìm Khoen Đồng Của Người Chèo",
-    "d": "Nếp gấp còn đọng bùn.",
+    "d": "Bùn khô bám trong nếp gấp.",
     "status": "reference"
   },
   {
@@ -32,7 +32,7 @@
     "i": "🧩",
     "dang": "Mảnh vỡ",
     "use": "Dữ liệu dự trữ, chưa có sự kiện đang chạy trao/thu vật này. Viên Gạch Đếm Bước · dùng để tìm Chìa Dưới Bậc Gạch",
-    "d": "Một mặt còn in vân rơm.",
+    "d": "Trên mặt còn in dấu sợi rơm.",
     "status": "reference"
   },
   {
@@ -766,6 +766,276 @@
     "i": "📜",
     "d": "Mái giữ được linh khí, còn căn nhà kế mất chỗ dựa. Đêm xuống, san hô chạm nhau ngoài mặt nước.",
     "use": "Kỷ vật cốt truyện; không cộng chỉ số và không mở tính năng chưa khai báo.",
+    "status": "active"
+  },
+  {
+    "id": "trac_linh_thach",
+    "n": "Trắc Linh Thạch",
+    "i": "🪨",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi để tự trắc linh căn.",
+    "d": "Viên đá xám trơn nhẵn, nắm chặt thì biết có linh căn hay không.",
+    "status": "active"
+  },
+  {
+    "id": "luan_hoi_kinh",
+    "n": "Luân Hồi Kinh (bản chép)",
+    "i": "📕",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi để học tâm pháp Luân Hồi Kinh. Đã tu thì kiếp sau được chọn lá số.",
+    "d": "Quyển kinh mỏng, chữ cuối trang trùng với chữ đầu trang.",
+    "status": "active"
+  },
+  {
+    "id": "luan_hoi_ngoc",
+    "n": "Luân Hồi Ngọc Bội",
+    "i": "🧿",
+    "dang": "Vật dùng",
+    "use": "Mang theo lúc chết: kiếp sau được tự chọn lá số đầu thai.",
+    "d": "Ngọc bội hình vòng khuyết, đeo lâu thì lạnh như nước giếng.",
+    "status": "active"
+  },
+  {
+    "id": "dinh_menh_chau",
+    "n": "Định Mệnh Châu",
+    "i": "🔮",
+    "dang": "Vật dùng",
+    "use": "Mang theo lúc chết: kiếp sau được tự chọn lá số đầu thai.",
+    "d": "Viên châu đục, nhìn lâu thấy bóng người lạ trong đó.",
+    "status": "active"
+  },
+  {
+    "id": "tuc_tue_dang",
+    "n": "Túc Tuệ Đăng",
+    "i": "🪔",
+    "dang": "Vật dùng",
+    "use": "Mang theo lúc chết: kiếp sau nhớ lại tâm pháp đang tu (ở bậc thấp nhất).",
+    "d": "Ngọn đèn nhỏ, bấc cháy mãi không tàn.",
+    "status": "active"
+  },
+  {
+    "id": "luong_kho",
+    "n": "Lương khô",
+    "i": "🍘",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng hai tháng.",
+    "d": "Gói bánh khô và thịt muối bọc lá, cứng như gỗ nhưng no lâu.",
+    "status": "active"
+  },
+  {
+    "id": "kim_sang_duoc",
+    "n": "Kim sang dược",
+    "i": "🩹",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi: hồi ba phần mười khí huyết. Thuốc của người phàm, ai cũng dùng được.",
+    "d": "Gói bột thuốc vàng nâu, rắc lên vết thương thì cầm máu.",
+    "status": "active"
+  },
+  {
+    "id": "huong_an_than",
+    "n": "Hương an thần",
+    "i": "🪔",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi: đốt một nén cho lòng lắng lại, giảm tâm ma.",
+    "d": "Nén hương trầm của tiệm tạp hóa, mùi dịu và lâu tan.",
+    "status": "active"
+  },
+  {
+    "id": "bt_truong_quyen",
+    "n": "Trường Quyền Nhập Môn",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tam lưu).",
+    "d": "Bí tịch võ phàm, môn quyền. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_ngu_ho_dao",
+    "n": "Ngũ Hổ Đoạn Môn Đao",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+    "d": "Bí tịch võ phàm, môn đao. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_that_tinh_kiem",
+    "n": "Thất Tinh Kiếm Pháp",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+    "d": "Bí tịch võ phàm, môn kiếm. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_thiet_bo_sam",
+    "n": "Thiết Bố Sam",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+    "d": "Bí tịch võ phàm, môn ngạnh công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_thao_thuong_phi",
+    "n": "Thảo Thượng Phi",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+    "d": "Bí tịch võ phàm, môn khinh công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_bat_quai_chuong",
+    "n": "Bát Quái Chưởng",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+    "d": "Bí tịch võ phàm, môn chưởng. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_lien_chau_tien",
+    "n": "Liên Châu Tiễn Pháp",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+    "d": "Bí tịch võ phàm, môn cung. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_ung_trao_cong",
+    "n": "Ưng Trảo Công",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+    "d": "Bí tịch võ phàm, môn trảo. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_thai_cuc",
+    "n": "Thái Cực Hóa Kình",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Hậu thiên đỉnh phong).",
+    "d": "Bí tịch võ phàm, môn nội gia. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_kim_chung_trao",
+    "n": "Kim Chung Tráo",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tiên thiên).",
+    "d": "Bí tịch võ phàm, môn ngạnh công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_pha_ngoc_quyen",
+    "n": "Phá Ngọc Quyền",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tiên thiên).",
+    "d": "Bí tịch võ phàm, môn cương quyền. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_doan_thuy_kiem",
+    "n": "Đoạn Thủy Kiếm Ý",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tông sư).",
+    "d": "Bí tịch võ phàm, môn kiếm ý. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_hon_nguyen",
+    "n": "Hỗn Nguyên Nhất Khí Công",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Tam lưu).",
+    "d": "Bí tịch võ phàm, môn nội công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "bt_quy_tuc",
+    "n": "Quy Tức Công",
+    "i": "📕",
+    "dang": "Bí tịch võ",
+    "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+    "d": "Bí tịch võ phàm, môn nội công. Không cần linh căn, chỉ cần khổ luyện.",
+    "status": "active"
+  },
+  {
+    "id": "vk_thiet_kiem",
+    "n": "Thiết kiếm",
+    "i": "🗡️",
+    "dang": "Binh khí phàm",
+    "use": "Mang theo: người phàm đánh mạnh hơn. Hiệu cầm đồ trả khoảng 10 lượng bạc.",
+    "d": "Thanh kiếm sắt rèn kỹ, lưỡi sáng, chuôi quấn da. Với tu sĩ chỉ là sắt vụn.",
+    "status": "active"
+  },
+  {
+    "id": "vk_cuong_dao",
+    "n": "Cương đao",
+    "i": "🔪",
+    "dang": "Binh khí phàm",
+    "use": "Mang theo: người phàm đánh mạnh hơn. Hiệu cầm đồ trả khoảng 9 lượng bạc.",
+    "d": "Đao thép bản dày của tiêu cục, chém củi chém người đều bén.",
+    "status": "active"
+  },
+  {
+    "id": "tich_coc_dan",
+    "n": "Tích Cốc Đan",
+    "i": "💊",
+    "dang": "Vật dùng",
+    "use": "Dùng trong túi (Trúc Cơ trở lên): no bụng ba năm, không cần ăn.",
+    "d": "Viên đan màu vàng đất, ngậm vào thấy vị ngũ cốc. Tu sĩ bế quan lâu ngày đều mang theo.",
+    "status": "active"
+  },
+  {
+    "id": "banh_bao",
+    "n": "Bánh bao",
+    "i": "🥟",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng nửa tháng.",
+    "d": "Cái bánh nóng gói giấy dầu, ăn dọc đường cho đỡ dạ.",
+    "status": "active"
+  },
+  {
+    "id": "com_nam",
+    "n": "Cơm nắm",
+    "i": "🍙",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng một tháng.",
+    "d": "Nắm cơm muối vừng gói lá chuối.",
+    "status": "active"
+  },
+  {
+    "id": "thit_kho",
+    "n": "Thịt khô",
+    "i": "🥓",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng ba tháng.",
+    "d": "Thịt hun khói treo bếp cả mùa, dai mà chắc dạ.",
+    "status": "active"
+  },
+  {
+    "id": "banh_chung",
+    "n": "Bánh chưng",
+    "i": "🟩",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng bốn tháng.",
+    "d": "Bánh gạo nếp nhân đậu thịt, gói lá dong, để lâu không hỏng.",
+    "status": "active"
+  },
+  {
+    "id": "gao_rang",
+    "n": "Bao gạo rang",
+    "i": "🌾",
+    "dang": "Đồ ăn",
+    "use": "Tự ăn khi đói (chọn món ít phí nhất): no được chừng sáu tháng.",
+    "d": "Bao gạo rang kĩ trộn muối, nấu hay nhai sống đều được.",
     "status": "active"
   }
 ]

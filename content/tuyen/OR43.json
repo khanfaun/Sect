@@ -1,0 +1,362 @@
+{
+  "schemaVersion": 1,
+  "id": "OR43",
+  "loai": "xuat_than",
+  "ten": "Một bình nhiều dấu",
+  "xuatThan": "xt_ke_mang_tro_ve_que",
+  "goiYDaiLo": [
+    "huyet_cuu"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Một tên cho cả bình tro",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Người thuê ở {LOC14} đưa bình tro và dặn chỉ đọc một tên khi tới {LOC01}. Trong bình có nhiều vật cứng chạm nhau, dù miệng chỉ đóng một dấu niêm.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi tuyến và lời người thuê",
+          "t": "Ngươi chép lối đưa bình tới {LOC01} và tên phải đọc ở đúng bậc cửa.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Đối niêm trước khi nhận bình",
+          "t": "Ngươi giữ mẫu niêm và hỏi ai có thể chứng khi bình được mở ở nhà.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin người thuê viết quyền của nhà nhận",
+          "t": "Ngươi xin lời chứng để gia quyến được xem các dấu trong bình trước khi nhận phần tro của nhà mình.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bình được gói lại theo đường cũ, tên thuê đọc đứng một mình.",
+        "su": "Bình được gói lại theo đường cũ, tên thuê đọc đứng một mình.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Trong bình có dấu của ba người",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Thẻ tử ở {LOC01} ghi một tên, nhưng bình có ba vật nhận dạng khác nhau. Chỉ một vật khớp thẻ. Gia đình muốn biết phần nào còn có thể xác nhận.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối rãnh và phân phần có thể biết",
+          "t": "Ngươi giữ riêng phần đi với thẻ đã khớp, ghi phần còn trộn chưa thể gọi tên.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Chép từng dấu hộ muốn nghe",
+          "t": "Ngươi ghi tên họ mong đợi và thấy họ sẽ trả thêm nếu được nghe chắc.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Kê dấu chưa xác nhận để lập mộ",
+          "t": "Ngươi chép từng vật không khớp để sau này người mới có thể tới hỏi.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bình đặt trên bàn, gia quyến chưa nhận lời về hai dấu khác.",
+        "su": "Bình đặt trên bàn, gia quyến chưa nhận lời về hai dấu khác.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Ai ra lệnh trộn tro?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC12"
+      },
+      "mo": "{NP24} giữ lệnh khắc ở {LOC12}. Lệnh buộc gộp tro để giấu một cái chết khỏi sổ. Người chia tro đã để những dấu nhỏ trên ba vật cho người sau nhận ra.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So lệnh và nhờ gia quyến nhận dấu",
+          "t": "Ngươi chỉ dòng buộc gom, xác nhận phần có thẻ trước mặt người nhà.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận giá kể một lời chắc giả",
+          "t": "Ngươi nghe người mua trả thêm nếu đọc cả bình dưới một tên, biết lệnh nói khác.",
+          "dau": [
+            "moc_3_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin người coi bia nhận mục chưa rõ",
+          "t": "Ngươi xin người giữ mộ đứng tên nhận phần tro có dấu chưa đủ rõ để tách riêng.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lệnh khắc về lại hòm, tên bị che vẫn chưa có mục riêng.",
+        "su": "Lệnh khắc về lại hòm, tên bị che vẫn chưa có mục riêng.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Gia đình sắp nhận bình",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Ở {LOC01}, gia quyến chờ ngươi đọc tên trước khi mở niêm. Người giữ mộ chung mang sổ đến. Kẻ hứa trả thêm bạc cũng đợi ngươi đọc cả bình dưới một cái tên.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Trả phần tro xác định được, ghi riêng phần còn lại",
+          "t": "Ngươi giao đúng phần khớp, để phần chưa rõ có một trang ghi giới hạn.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Bán nhận dạng sai cho người tin",
+          "t": "Ngươi nhận bạc và để nhà đưa cả bình lên thờ dưới một tên sai.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          },
+          "e": {
+            "bac": 1000,
+            "deed": "lua_loi"
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "An táng chung theo bản chưa rõ",
+          "t": "Ngươi đặt bình ở mộ chung, khắc riêng từng dấu và điều còn chưa biết.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Xin thêm ngày so dấu",
+          "t": "Ngươi giữ bình khô và giao gia quyến bản hình các vật để họ tự xem.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bình giữ nguyên ở cửa, gia quyến tự đặt hương mà chưa mở.",
+        "su": "Bình giữ nguyên ở cửa, gia quyến tự đặt hương mà chưa mở.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ai được bổ sung tên người mất?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Ở {LOC01}, có nhà đã nhận được phần tro và có nhà vẫn hỏi về vật không có thẻ. Người coi mộ muốn biết ai được ghi thêm tên khi tìm thấy chứng cứ mới.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao sổ thật cùng quyền đối cho các nhà",
+          "t": "Ngươi đặt phần tro đã tách và phần chưa rõ dưới cùng một lệ đối dấu. Gia đình có thể tự mang vật chứng tới.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ nghề bán lời chắc",
+          "t": "Ngươi nhận chuyến sau khi người mua đã thờ sai, giữ kín vật còn lại.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Trao mộ chung cho người giữ danh sách",
+          "t": "Ngươi giao bản chưa rõ, dặn bổ sung tên khi dấu khớp với lời người đến.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Đưa bản hình cho gia quyến",
+          "t": "Ngươi để người nhà giữ bản hình từng vật và chỉ họ chỗ có thể mang chứng tới.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người đưa bình rời bậc, lệ nhận dấu mới chưa có ai giữ.",
+        "su": "Người đưa bình rời bậc, lệ nhận dấu mới chưa có ai giữ.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Tro có người đón",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người nhà nhận phần có thẻ và đọc đúng tên trên bình chia. Phần còn trộn có dòng riêng nói vì sao chưa thể gọi tên. Một người khác đem vật mới tới được xem bản đối chiếu mà không cần trả tiền cho lời chắc.",
+      "su": "Phần tro xác minh được đã trả, phần chưa rõ giữ đúng giới hạn.",
+      "dauVong": "tên trên bình chia còn bên tờ ghi phần chưa phân được."
+    },
+    {
+      "id": "B",
+      "ten": "Một bình một lời dối",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Gia đình đặt cả bình dưới một tên và trả đủ tiền cho câu chuyện ngươi biết sai. Lúc đốt hương, một người đem tới chiếc thẻ có cùng rãnh với vật khác. Họ không được mở bình nên mang thẻ đi hỏi dọc đường.",
+      "su": "Một nhà nhận dạng sai do mua lời kể của {ten}.",
+      "dauVong": "một thân nhân còn hỏi dấu trên chiếc thẻ không được đặt cạnh bình."
+    },
+    {
+      "id": "C",
+      "ten": "Mộ chung không giấu thiếu",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Người giữ danh sách để các dấu chưa rõ cạnh mộ, có chỗ thêm lời mới. Một người tới đối được vật của nhà mình sau nhiều chuyến đi. Họ đọc tên vừa thêm mà vẫn nhìn thấy những dòng còn phải để trống.",
+      "su": "Mộ chung ghi phần chưa rõ và có người giữ quy tắc thêm tên.",
+      "dauVong": "một tên được bổ sung sau khi người nhà đem dấu tới đối."
+    }
+  ],
+  "ngoai": "Người đưa bình rời bậc, lệ nhận dấu mới chưa có ai giữ."
+}

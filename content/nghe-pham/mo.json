@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "mo",
+  "len": [
+    "Người coi cửa phát cho ngươi thẻ xuống hầm. Ngươi đã có thể cầm cuốc trong ca thay vì chỉ gùi quặng ra ngoài.",
+    "Thợ mới đợi ngươi chỉ chỗ đổi tay trước khi vào ca. Khi hết lượt, họ đưa ngươi đếm lại đủ thẻ rồi mới về.",
+    "Chìa cửa hầm được giao cho ngươi. Một thợ xin đổi ca để chăm người bệnh và chờ ngươi ghi rõ vào bảng.",
+    "Người luyện quặng tới chờ lệnh mở lò. Ngươi xem phiếu cân cùng thợ, rồi để họ tự đối phần công trước khi đốt.",
+    "Khi nhận cả mỏ, ngươi phải quyết việc một cửa hầm đã yếu. Trước cửa có người hỏi nếu đóng thì họ còn việc ở đâu."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Tên cạnh giờ lên hầm",
+      "t": "Sau khi ngươi mất, người coi ca vẫn đọc tên từng thợ lúc lên. Bảng cũ có một dòng về cửa hầm phải đóng nếu thiếu gió. Gia đình một người từng được đưa ra kịp giữ bản chép ấy trong nhà.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Quặng chất sau cửa khóa",
+      "t": "Người thừa kế nhận hòm tiền đầy cùng một sổ công chưa trả. Đến ngày chôn ngươi, mấy thợ cầm thẻ quá hạn đứng chờ ở cửa thay vì theo đám. Họ xin người coi mỏ ghi lại ngày đáng lẽ đã được rời.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Chỗ ngồi của thợ cả",
+      "t": "Thợ cùng ca đem cái ghế thấp của ngươi lên cửa hầm ngày đưa tang. Họ để nó ở nơi đếm người, dặn thợ mới khi lên phải tự gọi tên mình. Người từng được ngươi đổi ca trở về giúp nhà lo cơm.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Chiếc gùi đặt xuống",
+      "t": "Ngươi không để lại phần mỏ nào, chỉ có chiếc gùi mòn vai. Người cùng đường gửi chiếc gùi lại. Trong đáy còn mẩu than dùng ghi công. Họ ngồi bên hiên kể về những chuyến đưa quặng cuối mùa mưa."
+    }
+  ]
+}

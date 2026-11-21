@@ -18,11 +18,11 @@ Ma tu {$a.ten} đã cầm phần thọ nguyên cuối để chuộc tuổi cho n
 
 - **1. Bù phần thiếu bằng thọ nguyên của ngươi**
   {$b.ten} nhận lại tuổi. {$a.ten} nhặt sợi tóc, lặng lẽ gài sau tai mình.
-  - `e`: `{"karma":4,"lifeCut":4,"an":["a","mùa đông đặt trên cân"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"lifeCut":4,"an":["a","mùa đông đặt trên cân"]}`
 - **2. Mua nửa món nợ của {$c.ten}**
   Ngươi có phần tuổi để thu. {$a.ten} xin được đem chiếc cân về một đêm để tập đặt tay.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":-3}`
+  - `e`: `{"deed":"ep_ta_dien"}`
 - **3. Bỏ đi**
   {$c.ten} đặt quả cân xuống. Đĩa nhẹ nhấc khỏi bàn dù {$a.ten} đang giữ.
 
@@ -55,10 +55,10 @@ Người em {$b.ten} thấy tóc ma tu {$a.ten} bạc đi vì phần tuổi đã
 - **1. Góp lửa để hai người qua mùa**
   Ngươi trả tiền mua than linh giữ ấm căn nhà. Hai anh em thôi phải đổi tóc lấy phù, cùng ngồi vá lại áo trước bếp. Người em hẹn tới khi khỏe sẽ tự tìm việc, không để anh cầm thêm tuổi nữa.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":4,"an":["a","tóc rụng khỏi khăn"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","tóc rụng khỏi khăn"]}`
 - **2. Dạy hắn kiếm linh thạch bằng bùa tuổi**
   Hắn đủ tiền chuộc một ít tuổi. Mẻ bùa đầu có một sợi tóc trắng nằm ngang.
-  - `e`: `{"karma":1,"tamma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"tamma":2}`
 - **3. Bỏ đi**
   Hắn phủ khăn qua vai anh, để chỗ tóc vừa cắt quay vào trong.
 
@@ -92,11 +92,11 @@ Chủ khế {$c.ten} đến thu tuổi trước hạn vì đoán ma tu {$a.ten} 
 
 - **1. Hủy phần nợ của ngươi và kéo dài hạn**
   Ngươi hủy phần nợ mình giữ, buộc chủ khế ghi lại số tuổi và hạn còn lại. Hai anh em có thêm thời gian xoay xở. Người em giữ bản đối chiếu, không còn giao cả giấy cho một mình chủ khế.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua nốt món nợ để tự định hạn**
   Ngươi có quyền giữ tuổi lẫn lãi. {$b.ten} đưa thẳng cho ngươi lá bùa cuối còn khô.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":-3}`
+  - `e`: `{"deed":"ep_ta_dien"}`
 - **3. Bỏ đi**
   {$c.ten} đếm tuổi bằng móng tay. Người đứng cạnh nghe tiếng cào từ trong giấy.
 
@@ -130,11 +130,11 @@ Chủ khế {$c.ten} bị thương nặng, cần thọ nguyên để sống qua 
 
 - **1. Buộc lão trả hết giấy cầm trước khi truyền tuổi**
   Ngươi yêu cầu lão trả khế trước, rồi giúp giữ mạch lúc truyền tuổi. Luồng khí đứt quãng khiến ngươi bị thương, nhưng lão qua được cơn nguy. Người em kiểm đủ giấy của anh mình rồi mới nhận lời dừng truyền.
-  - `e`: `{"karma":4,"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"hp":"-10%"}`
 - **2. Mua chỗ tuổi còn dư sau khi cứu lão**
   Sau khi cứu lão, người em bán một phần tuổi để lấy tiền chuộc nốt cho anh. Ngươi nhận mua, thêm thọ nguyên; hắn giữ lại đủ tuổi mình cần, không nghe lời ngươi trả giá cao hơn.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":-4,"tamma":3,"life":20}`
+  - `e`: `{"deed":"lua_loi","tamma":3,"life":20}`
 - **3. Bỏ đi**
   Ma tu {$a.ten} cầm đèn tới, ánh đèn không đủ soi hết một mặt khế.
 
@@ -175,11 +175,11 @@ Nếu giấy đã trả, hai anh em đã hết nợ, đem khế cũ bỏ vào b�
 
 - **1. Trao phần tuổi ngươi còn giữ hoặc bù bằng tuổi mình**
   Ma tu {$a.ten} có thêm một mùa bên em. Trên bếp vẫn còn một tờ chưa cháy hết.
-  - `e`: `{"karma":4,"lifeCut":3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"lifeCut":3}`
 - **2. Giữ tuổi và trả bằng linh thạch**
   Họ dùng bạc đắp lại mái, chỗ cạnh bếp ấm lâu hơn. Ma tu {$a.ten} tự gấp tờ giấy, lấy móng tay miết đến phẳng.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Người em hỏi anh có muốn ra ngoài xem tuyết không. Ngươi cáo từ trước khi họ quyết, để hai anh em có một buổi riêng.
 

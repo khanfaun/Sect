@@ -24,11 +24,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Biết thêm một nơi và nghe tin đồn; lời truyền miệng được tách khỏi sự thật đã xác nhận.",
+      "text": "Gọi trà để nghe chuyện dọc đường và biết thêm một nơi trong vùng.",
       "choices": [
         {
           "l": "Gọi ấm trà, ngồi nghe chuyện",
-          "t": "Biết thêm một nơi và nghe tin đồn; lời truyền miệng được tách khỏi sự thật đã xác nhận."
+          "t": "Gọi trà để nghe chuyện dọc đường và biết thêm một nơi trong vùng."
         }
       ],
       "logic": {
@@ -40,7 +40,8 @@
             "info": 1
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 5
         }
       },
       "origin": {
@@ -51,7 +52,7 @@
     },
     {
       "id": "service_tea_hoi",
-      "name": "Dúi tiền hỏi tiểu nhị đường đi",
+      "name": "Cho tiểu nhị ít tiền để hỏi đường",
       "kind": "service",
       "theme": "Dịch vụ địa điểm",
       "tags": [],
@@ -75,7 +76,7 @@
       "text": "Trả tiền hỏi đường đến hai địa điểm trong vùng.",
       "choices": [
         {
-          "l": "Dúi tiền hỏi tiểu nhị đường đi",
+          "l": "Cho tiểu nhị ít tiền để hỏi đường",
           "t": "Trả tiền hỏi đường đến hai địa điểm trong vùng."
         }
       ],
@@ -88,7 +89,8 @@
             "info": 2
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 10
         }
       },
       "origin": {
@@ -120,11 +122,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Chơi cờ giúp tăng lịch luyện và tĩnh tâm; cần ngộ tính.",
+      "text": "Cần đủ ngộ tính để đối cờ. Chơi cờ tăng lịch luyện và giảm tâm ma.",
       "choices": [
         {
           "l": "Đánh một ván cờ với khách lạ",
-          "t": "Chơi cờ giúp tăng lịch luyện và tĩnh tâm; cần ngộ tính."
+          "t": "Cần đủ ngộ tính để đối cờ. Chơi cờ tăng lịch luyện và giảm tâm ma."
         }
       ],
       "logic": {
@@ -189,7 +191,8 @@
             "tamma": -4
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 8
         }
       },
       "origin": {
@@ -239,13 +242,63 @@
             "tamma": -2
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 12
         }
       },
       "origin": {
         "file": "src/game/core2/07-dot-10-tho-nap.js",
         "ref": "phong",
         "commit": "d9ab301"
+      }
+    },
+    {
+      "id": "service_inn_giuong",
+      "name": "Ngủ giường tập thể một đêm",
+      "kind": "service",
+      "theme": "Dịch vụ địa điểm",
+      "tags": [],
+      "trigger": {
+        "source": "venue",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "venues": [
+          "inn"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Trải chiếu cạnh mấy người khách nghèo; ngủ được, nhưng giữ chặt hầu bao.",
+      "choices": [
+        {
+          "l": "Ngủ giường tập thể một đêm",
+          "t": "Trải chiếu cạnh mấy người khách nghèo; ngủ được, nhưng giữ chặt hầu bao."
+        }
+      ],
+      "logic": {
+        "service": {
+          "id": "giuong",
+          "h": 8,
+          "stoneBase": 0,
+          "g": {
+            "hpPct": 55
+          },
+          "req": null,
+          "limited": false,
+          "bac": 6
+        }
+      },
+      "origin": {
+        "file": "content/venues/services.json",
+        "ref": "giuong",
+        "commit": "Đ3.2"
       }
     },
     {
@@ -322,11 +375,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Hồi tối đa 15% khí huyết, không vượt mức tối đa.",
+      "text": "Ăn một bữa để hồi tới 15% khí huyết tối đa.",
       "choices": [
         {
           "l": "Ngồi sảnh dưới ăn một bữa",
-          "t": "Hồi tối đa 15% khí huyết, không vượt mức tối đa."
+          "t": "Ăn một bữa để hồi tới 15% khí huyết tối đa."
         }
       ],
       "logic": {
@@ -338,7 +391,8 @@
             "hpPct": 15
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 13
         }
       },
       "origin": {
@@ -418,11 +472,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Giảm tâm ma, hồi tối đa 10% khí huyết và nghe tin.",
+      "text": "Uống rượu để giảm tâm ma, hồi tới 10% khí huyết tối đa và nghe tin.",
       "choices": [
         {
           "l": "Uống vài chén, nghe chuyện",
-          "t": "Giảm tâm ma, hồi tối đa 10% khí huyết và nghe tin."
+          "t": "Uống rượu để giảm tâm ma, hồi tới 10% khí huyết tối đa và nghe tin."
         }
       ],
       "logic": {
@@ -436,7 +490,8 @@
             "info": 1
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 15
         }
       },
       "origin": {
@@ -468,11 +523,11 @@
         "weight": 1
       },
       "actors": {},
-      "text": "Mời rượu để kết giao, tăng lịch luyện và nghe tin.",
+      "text": "Mời rượu để nghe tin, tăng lịch luyện và giảm tâm ma.",
       "choices": [
         {
           "l": "Mời cả bàn một vò rượu ngon",
-          "t": "Mời rượu để kết giao, tăng lịch luyện và nghe tin."
+          "t": "Mời rượu để nghe tin, tăng lịch luyện và giảm tâm ma."
         }
       ],
       "logic": {
@@ -486,7 +541,8 @@
             "info": 1
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 90
         }
       },
       "origin": {
@@ -587,7 +643,8 @@
             "tamma": -8
           },
           "req": null,
-          "limited": false
+          "limited": false,
+          "bac": 30
         }
       },
       "origin": {
@@ -598,7 +655,7 @@
     },
     {
       "id": "service_tea_doicau",
-      "name": "Thi đối câu đối của lão tú tài",
+      "name": "Thi đối câu với lão tú tài",
       "kind": "service",
       "theme": "Cơ hội trong quán",
       "tags": [],
@@ -622,7 +679,7 @@
       "text": "Lão tú tài treo giải: ai đối được vế của lão thì nhận một túi linh thạch.",
       "choices": [
         {
-          "l": "Thi đối câu đối của lão tú tài",
+          "l": "Thi đối câu với lão tú tài",
           "t": "Lão tú tài treo giải: ai đối được vế của lão thì nhận một túi linh thạch."
         }
       ],
@@ -740,7 +797,9 @@
           "stoneBase": 0,
           "g": {
             "st": 6,
-            "karma": 1
+            "hd": {
+              "p": 1
+            }
           },
           "req": null,
           "limited": true,

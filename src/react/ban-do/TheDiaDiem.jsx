@@ -49,7 +49,7 @@ function TheQuan({ c }) {
   const ter = Object.keys(tc).sort((a, b) => tc[b] - tc[a]).slice(0, 3);
   const all = PS.regionOf(I.reg).nodes.filter(n => g.dist[PS.nodeHex(n)] === d), kn = all.filter(n => n.fog >= 2 || n.memory);
   const dg = kn.length ? Math.max(...kn.map(PS.dangerTag)) : 0;
-  const luc = kn.find(n => n.type === 'tong') || kn.find(n => n.type === 'thanh') || kn.find(n => n.type === 'tran');
+  const luc = kn.find(n => n.type === 'tong') || kn.find(n => n.type === 'thanh' || n.type === 'tuthanh') || kn.find(n => n.type === 'tran' || n.type === 'tutran');
   return (
     <div className={'dock card np' + (PS.UI.npMin ? ' min' : '')} data-ax={cx} data-ay={cy}>
       <div className="np-h"><div className="np-t"><b className="np-nm">{I.dist || 'Vùng vô danh'}</b><small>quận thuộc {I.regName}</small></div><NutThe /></div>
@@ -95,7 +95,7 @@ function TheNoi({ n, hold }) {
   const r = G.run, I = PS.nodeInfo(n), here = n.id === r.at, dg = PS.dangerTag(n);
   const nt = PS.noteOf(n.id), M = I.sure ? PS.placeMeta(n) : null;
   const where = I.sure ? PS.hexInfo(PS.nodeHex(n)).dist : '';
-  const pimg = ASSET.place[n.type];
+  const pimg = ASSET.place[n.type] || ASSET.place[(PS.NEWT[n.type] || {}).as];
   return (
     <div className={'dock card np' + (PS.UI.npMin && !hold ? ' min' : '') + (hold ? ' hold' : '')} data-ax={hold ? hold.x : n.x} data-ay={hold ? hold.y : n.y} data-ic={hold ? 46 : undefined}>
       <div className="np-h">

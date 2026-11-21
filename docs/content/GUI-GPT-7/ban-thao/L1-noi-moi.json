@@ -1,0 +1,387 @@
+{
+  "hoang_quoc": [
+    {
+      "khu": "Trung Châu",
+      "ten": "Lương triều",
+      "xung_ho": "",
+      "mo_ta": "Quanh kinh đô {LOC02}, thóc và hàng hóa đổ về đều đặn, nhưng kho triều vẫn phải vay để giữ quân và lo việc công. Viên coi thuế giữ sổ chặt, còn dân ngoài thành tin tờ biên nhận hơn lời hứa miệng.",
+      "phong_tuc": [
+        "Hộ đóng thóc phơi biên nhận trên nắp chum cho mực khô.",
+        "Trước kỳ khảo, hàng bán giấy dọn sạp từ khi bếp dân còn chưa đỏ lửa."
+      ],
+      "quan_he": "Triều đình giữ việc thu thuế trong tay mình và nhờ {FA02} chuyển hàng khi kho thiếu.",
+      "ghi_chu": "đã có (FA01, kinh đô Lương Kinh LOC02): chỉ viết thêm mo_ta, phong_tuc, quan_he nếu thiếu, không đổi tên"
+    },
+    {
+      "khu": "Trung Châu",
+      "ten": "Định Nguyên",
+      "xung_ho": "quốc chủ",
+      "mo_ta": "Ruộng của Định Nguyên rộng nhưng đất thấp, dân sống được nhờ đê và kho giống. Quốc chủ giữ nhiều thợ đắp đê hơn quân đóng cổng.",
+      "phong_tuc": [
+        "Người đi họp làng mang một nắm đất từ bờ ruộng để chỉ chỗ nứt.",
+        "Sau vụ, nhà mượn giống trả thóc ngay trên chiếu phơi của kho chung."
+      ],
+      "quan_he": "Định Nguyên bán thóc sang {FA01} khi được cam kết giữ lối vận chuyển qua mùa nước."
+    },
+    {
+      "khu": "Đông Hoang",
+      "ten": "Lâm Tấn",
+      "xung_ho": "nữ vương",
+      "mo_ta": "Lâm Tấn giàu gỗ và nhựa cây, nhưng đường qua rừng hẹp khiến hàng thường đến chậm. Nữ vương trọng người dẫn đường và cho dân giữ rừng quanh nguồn nước.",
+      "phong_tuc": [
+        "Tiều phu treo dăm gỗ ở cổng để người nhà biết mình đi lối nào.",
+        "Trước bữa ăn, chủ nhà gạt phần than đỏ sang bên cho khách hong giày."
+      ],
+      "quan_he": "Lâm Tấn đổi gỗ lấy vải của nước láng giềng và giữ các lối mòn qua rừng cho dân lui tới."
+    },
+    {
+      "khu": "Đông Hoang",
+      "ten": "Bình Cảo",
+      "xung_ho": "quốc chủ",
+      "mo_ta": "Bình Cảo ít ruộng tốt, sống bằng giếng và các phiên đổi vải. Quốc chủ dè chừng người dùng phép sau những vụ lấy nước làm hỏng ruộng, nên đặt người phàm coi nguồn nước.",
+      "phong_tuc": [
+        "Mỗi nhà mang gáo của mình tới giếng và rửa gáo trước khi múc.",
+        "Thợ dệt buộc mép vải mẫu ngay cửa để khách sờ thử ngoài nắng."
+      ],
+      "quan_he": "Bình Cảo tiếp tu sĩ như khách mua bán và yêu cầu họ cất pháp khí khi vào sân giếng."
+    },
+    {
+      "khu": "Nam Trạch",
+      "ten": "Vân Phổ",
+      "xung_ho": "nữ vương",
+      "mo_ta": "Vân Phổ có bến đông ghe, kiếm lời nhờ chở gạo, cá khô và muối. Nữ vương giữ đội tuần sông để thương thuyền qua được mùa nước dữ.",
+      "phong_tuc": [
+        "Chủ đò buộc dải vải thấp trên cọc cho khách nhận chuyến.",
+        "Nhà bán cá hong chiếc cân qua đêm rồi mới đem ra đầu bến."
+      ],
+      "quan_he": "Vân Phổ chở hàng cho nước láng giềng, đổi lấy chỗ neo khi gió lớn."
+    },
+    {
+      "khu": "Nam Trạch",
+      "ten": "Trạch Dung",
+      "xung_ho": "vương",
+      "mo_ta": "Trạch Dung ít phố lớn, dân sống rải theo bờ đầm và giữ nghề đan lưới. Vương trọng các tu sĩ biết cứu người qua lũ, thường dành mái kho khô cho họ trú.",
+      "phong_tuc": [
+        "Người đan lưới treo mắt lưới mẫu trước hiên cho trẻ tập thắt.",
+        "Nhà ở sát đầm kê ghế cao cạnh cửa để khách tháo dép ướt."
+      ],
+      "quan_he": "Trạch Dung gửi thợ vá lưới sang nước bên kia đầm và nhờ họ báo lúc nước đổi dòng."
+    },
+    {
+      "khu": "Tây Lĩnh",
+      "ten": "Cẩm Lĩnh",
+      "xung_ho": "hoàng đế",
+      "mo_ta": "Mỏ và lò mang của cải về Cẩm Lĩnh, nhưng đường dốc khiến các làng vẫn thường thiếu gạo. Triều đình dựa vào thợ giữ lò và quân đóng các ngả đèo.",
+      "phong_tuc": [
+        "Thợ mỏ lật thẻ gỗ khi nhận ca để nhà biết ai còn dưới hầm.",
+        "Người chở than đặt khăn ẩm lên đầu gánh trước khi vào chợ."
+      ],
+      "quan_he": "Cẩm Lĩnh đổi đồ sắt lấy thuốc và lương từ láng giềng cùng khu."
+    },
+    {
+      "khu": "Tây Lĩnh",
+      "ten": "Tùng Kỳ",
+      "xung_ho": "nữ vương",
+      "mo_ta": "Tùng Kỳ ít quân và sống bằng vườn thuốc trên sườn núi. Nữ vương dành tiền giữ đường đến bệnh xá, nhờ vậy người mất mùa vẫn có việc phơi và gánh thuốc.",
+      "phong_tuc": [
+        "Ở quán nước, người hái thuốc gõ bùn khỏi giỏ trước khi đặt lên bàn.",
+        "Nhà giữ giống buộc thẻ vải vào vò, để người mù chữ lần tay phân biệt."
+      ],
+      "quan_he": "Tùng Kỳ mời tu sĩ chữa bệnh xuống làng và yêu cầu họ nói rõ giá thuốc trước khi nhận người."
+    },
+    {
+      "khu": "Bắc Nhạc",
+      "ten": "Sóc Ninh",
+      "xung_ho": "hoàng đế",
+      "mo_ta": "Sóc Ninh giữ những ải lạnh và sống bằng đàn ngựa, thóc dự trữ cùng công hộ tống. Hoàng đế quen điều quân sớm khi có tin tuyết dày, nhưng kho vùng xa vẫn hay báo thiếu.",
+      "phong_tuc": [
+        "Người giữ trạm treo dây cương ngoài cửa để báo còn ngựa đổi.",
+        "Nhà có người đi ải khâu thêm mảnh vải lót gót vào đôi giày gửi theo xe lương."
+      ],
+      "quan_he": "Sóc Ninh mua cỏ khô của láng giềng và mở đường ải cho đoàn của họ vào phiên chợ."
+    },
+    {
+      "khu": "Bắc Nhạc",
+      "ten": "Hoài Túc",
+      "xung_ho": "quốc chủ",
+      "mo_ta": "Hoài Túc nuôi được dân nhờ đồng cỏ thấp và các bãi nghỉ sau đèo. Quốc chủ ít mở cuộc chinh phạt, thường giữ người và xe để đón những nhà phải dời khi ải thất thủ.",
+      "phong_tuc": [
+        "Giếng trên đường có móc gầu thấp cho người mới tới dùng.",
+        "Chỗ nghỉ của đoàn xe chừa một khoảnh đất để phơi chăn trước khi chia cỏ."
+      ],
+      "quan_he": "Hoài Túc đón người rời ải và giữ lối về cho họ khi nước láng giềng mở lại đường."
+    }
+  ],
+  "loai_noi": [
+    {
+      "ma": "tran",
+      "loai": "Trấn phàm nhân",
+      "ten_goi_chung": "trấn phàm",
+      "hau_to": [
+        "Trấn",
+        "Thôn",
+        "Tập",
+        "Phố",
+        "Hương",
+        "Bảo",
+        "Xóm",
+        "Dịch"
+      ],
+      "mo_ta": [
+        "Khói bếp vướng dưới mái chợ thấp. Người coi cân vừa đặt đấu thóc lên bàn.",
+        "Nha môn nhìn ra mặt đường đất. Lính đổi phiên ngay bên hàng bánh.",
+        "Người trong trấn hong rau ngoài hiên, chừa lối vừa đủ cho người gánh nước."
+      ],
+      "luc_den": [
+        "Ngươi tới đầu trấn lúc người bán bánh nhấc vung.",
+        "Qua cột gác, ngươi nghe tiếng chày từ nhà sát đường.",
+        "Ngươi phủi bụi ở bậc đá trước hàng nước."
+      ],
+      "tin_don": [
+        "Nghe đâu nhà xay thóc mở cửa sớm vào phiên chợ.",
+        "Ai mất giấy lĩnh gạo thì thử hỏi người giữ sổ bên nha môn.",
+        "Người bán đậu bảo lối sau chợ còn khô tới khi mưa lớn."
+      ]
+    },
+    {
+      "ma": "thanh",
+      "loai": "Thành phàm nhân",
+      "ten_goi_chung": "thành phàm",
+      "hau_to": [
+        "Thành",
+        "Đô",
+        "Phủ",
+        "Châu",
+        "Quận",
+        "Ải",
+        "Thành Quan",
+        "Nội Thành"
+      ],
+      "mo_ta": [
+        "Quân Hoàng quốc giữ cổng đá. Sau cổng, xe rau nhường lối cho người đưa giấy chạy về nha môn.",
+        "Phố đông tới tận sát chân tường. Tiếng rao lọt vào sân quan mỗi khi cửa mở.",
+        "Có mùi cơm mới từ dãy nhà sau công đường. Trên vách ngoài, giấy cáo thị vẫn còn ẩm mực."
+      ],
+      "luc_den": [
+        "Ngươi bước qua bóng cổng và nghe xe gỗ dội trên mặt đá.",
+        "Người lính gác nhấc dây chắn khi ngươi theo dòng người vào phố.",
+        "Ngươi tới khi phu quét đường đang gom tro bếp khỏi lối xe."
+      ],
+      "tin_don": [
+        "Nghe nói hàng giấy bên công đường chịu chép đơn cho khách lỡ phiên.",
+        "Xe lương vào thành sớm hơn xe chợ, cứ đợi họ qua rồi hãy tới cổng.",
+        "Có người bảo chiều nay lính đổi ca ở cổng bên, hàng xe sẽ đi chậm."
+      ]
+    },
+    {
+      "ma": "tutran",
+      "loai": "Trấn tu sĩ",
+      "ten_goi_chung": "trấn tu sĩ",
+      "hau_to": [
+        "Linh Trấn",
+        "Linh Phường",
+        "Dược Phố",
+        "Kiếm Tập",
+        "Vân Tập",
+        "Phù Phố",
+        "Linh Dịch",
+        "Tiên Tập"
+      ],
+      "mo_ta": [
+        "Phường thị kê sạp sát nhau, đan và lá phù nằm dưới những tấm vải dày. Người bán cơm vẫn nhận xu của khách phàm.",
+        "Linh khí mát quanh giếng. Trước sạp đá, một khách bộ hành đang hỏi giá bằng tiền phàm.",
+        "Người của chấp pháp tông môn đi dọc lối hẹp, tránh sạp dược thảo còn ướt."
+      ],
+      "luc_den": [
+        "Ngươi tới trấn lúc một tu sĩ hạ kiếm ngoài dãy mái.",
+        "Ngươi nghe tiếng linh thạch chạm cân từ sạp gần cổng.",
+        "Ngươi qua hàng cơm rồi mới thấy bảng việc của phường thị."
+      ],
+      "tin_don": [
+        "Hỏi người coi sạp trước khi sờ lá phù, có lá họ để mở chỉ để xem.",
+        "Nghe đâu quầy thu dược có người cân lại cho khách đi bộ từ xa tới.",
+        "Tiệm cơm ngoài phường mở sớm hơn các sạp linh vật."
+      ]
+    },
+    {
+      "ma": "tuthanh",
+      "loai": "Thành tu sĩ",
+      "ten_goi_chung": "thành tu sĩ",
+      "hau_to": [
+        "Linh Thành",
+        "Tiên Thành",
+        "Vân Đô",
+        "Kiếm Thành",
+        "Đan Thành",
+        "Phù Đô",
+        "Tiên Phủ",
+        "Linh Quận"
+      ],
+      "mo_ta": [
+        "Chấp pháp tông môn trực ở cổng, còn tu sĩ hạ kiếm trên sân rộng phía trong. Khách phàm vào bằng lối đi bộ bên quầy nước.",
+        "Linh khí tụ dưới dãy mái cao, nơi thương đội bày hòm cho người mua đối niêm. Từ sân sau vọng lại tiếng hỏi giá đan.",
+        "Người thu hàng ghi linh thạch trong sổ lớn, cách một vách là phố bán cơm và chỗ trọ cho người đi đường."
+      ],
+      "luc_den": [
+        "Ngươi tới chân cổng khi bóng người ngự kiếm lướt qua mặt phố.",
+        "Ngươi theo lối đi bộ qua sân, tránh chỗ sắp có người hạ kiếm.",
+        "Ngươi nghe chấp pháp gọi người mang hòm tới bàn đối niêm."
+      ],
+      "tin_don": [
+        "Phiên lớn chưa mở, nhưng người đi đường đã có thể xem danh mục ở bàn ngoài.",
+        "Nghe nói sân hạ kiếm dời sang phía trong từ lúc mái cổng được sửa.",
+        "Ai tìm việc hộ tống cứ xem bảng cạnh quầy cơm, lời hẹn ở đó dễ đọc hơn."
+      ]
+    },
+    {
+      "ma": "bicanh",
+      "loai": "Bí cảnh",
+      "ten_goi_chung": "bí cảnh",
+      "hau_to": [
+        "Bí Cảnh",
+        "Huyễn Cảnh",
+        "Ẩn Vực",
+        "Tàng Cảnh",
+        "Mật Cảnh",
+        "Hư Cảnh",
+        "Phong Vực",
+        "Cấm Vực"
+      ],
+      "mo_ta": [
+        "Vạch phấn chỉ lối dừng giữa bậc đá. Sau vạch, bóng tường đổi hướng dù ngươi vẫn đứng yên.",
+        "Sương rút để lộ đường vào, rồi dồn lại quanh lối cũ. Dưới nền có tiếng đá kéo dài mà không thấy khe.",
+        "Chiếc đèn bỏ lại còn cháy ở ngưỡng. Xa hơn, gió tắt hẳn, nhưng dây treo đèn dưới mái vẫn giật từng chặp."
+      ],
+      "luc_den": [
+        "Ngươi dừng ở mép vạch cuối khi vệt sáng phía trong tắt phụt.",
+        "Ngươi tới nơi, nghe tiếng bước từ phía trước trùng với nhịp chân mình.",
+        "Ngươi đứng ngoài ngưỡng khi cánh đá bắt đầu khép."
+      ],
+      "tin_don": [
+        "Có người bảo đừng lấy bóng mặt trời làm dấu, vào sâu rồi bóng đổi phía.",
+        "Chuyến trước về được tới bậc ngoài mà vẫn tìm không ra người giữ đèn.",
+        "Nghe đâu dấu trên đá còn nằm đó, nhưng lối bắc đã rơi xuống khe."
+      ]
+    },
+    {
+      "ma": "dongthien",
+      "loai": "Động thiên",
+      "ten_goi_chung": "động thiên",
+      "hau_to": [
+        "Động Thiên",
+        "Linh Thiên",
+        "Hư Thiên",
+        "Vân Thiên",
+        "Thiên Động",
+        "Linh Động",
+        "Vân Phủ",
+        "Thiên Khuyết"
+      ],
+      "mo_ta": [
+        "Mây trôi thấp dưới nền đá, linh khí ép tai ngươi ù đi. Mép nền bên kia đã vỡ, đá rơi hồi lâu vẫn chưa nghe tiếng chạm.",
+        "Một dòng nước chạy ngược lên vòm. Dưới luồng nước, có cả bậc đứng lẫn khoảng sâu bị sương che.",
+        "Gió từ hốc cao dồn từng đợt, mạnh tới mức vạt áo giật căng. Chỗ lan can gãy chỉ còn một lỗ chốt."
+      ],
+      "luc_den": [
+        "Ngươi tới bậc ngoài, thấy mây trôi ngay dưới đế giày.",
+        "Ngươi nghe tiếng nước dội từ trên đỉnh vòm, dù dưới chân khô ráo.",
+        "Ngươi ghì vạt áo khi luồng linh khí xô ngang nền."
+      ],
+      "tin_don": [
+        "Có người bảo đừng dựa vào lan can, đá đứng nguyên mà chốt đã rời.",
+        "Nghe đâu cứ lúc nước đổi chiều là lối bên vòm khuất mất.",
+        "Người về tới trạm bảo gió trong đó đủ hất người khỏi bậc."
+      ]
+    },
+    {
+      "ma": "como",
+      "loai": "Cổ mộ",
+      "ten_goi_chung": "cổ mộ",
+      "hau_to": [
+        "Cổ Mộ",
+        "Thạch Mộ",
+        "U Lăng",
+        "Lăng Tẩm",
+        "Địa Cung",
+        "Mộ Thất",
+        "Mộ Huyệt",
+        "Thạch Lăng"
+      ],
+      "mo_ta": [
+        "Chân bia còn kẹt trong đất ẩm. Từ bậc xuống mộ bốc lên mùi gỗ cũ.",
+        "Trong hốc đá còn chiếc bát úp cạnh nền. Vệt nước bò qua mép bát mà phía dưới khô nguyên.",
+        "Lối hẹp dần quanh vách, đèn soi vừa tới mép hòm. Khe đá bên cạnh rịn hơi lạnh."
+      ],
+      "luc_den": [
+        "Ngươi gạt lá khỏi bậc đầu và nghe đất sụt dưới gót.",
+        "Tới cửa mộ, ngươi thấy vệt nước ngừng trước chân bia.",
+        "Ngươi bước tới mép đá khi giọt nước rơi trúng nắp hòm."
+      ],
+      "tin_don": [
+        "Có người bảo chớ dựng bia nghiêng, chân bia đang chặn đất lở.",
+        "Nghe đâu áo liệm dưới lăng còn nguyên nếp dù gỗ đã mục.",
+        "Người coi mộ dặn nếu nghe tiếng bát chạm đá thì hãy lui khỏi lối hẹp."
+      ]
+    },
+    {
+      "ma": "yeusao",
+      "loai": "Yêu sào",
+      "ten_goi_chung": "yêu sào",
+      "hau_to": [
+        "Yêu Sào",
+        "Thú Sào",
+        "Yêu Huyệt",
+        "Thú Cốc",
+        "Yêu Động",
+        "Yêu Cốc",
+        "Thú Huyệt",
+        "Thú Động"
+      ],
+      "mo_ta": [
+        "Lông thú mắc trên gai ngang tầm thắt lưng. Thấp hơn, nền đất đầy vết móng còn mới.",
+        "Xương đã được kéo vào dưới mái đá. Từ sau đống xương vọng ra tiếng thở nặng.",
+        "Dải cỏ trước huyệt bị ép sát đất. Vết cào trên thân cây vẫn còn rịn nhựa."
+      ],
+      "luc_den": [
+        "Ngươi tới gần cửa sào, tiếng chim trên đầu bỗng im.",
+        "Ngươi dừng sát bụi thấp và nghe móng kéo qua nền đá.",
+        "Ngươi ngửi thấy mùi lông ướt trước khi trông rõ miệng huyệt."
+      ],
+      "tin_don": [
+        "Có người bảo vết móng mới nằm bên lối về, cứ đi xa chỗ ấy ra.",
+        "Nghe nói con đầu đàn tha mồi về gần tối, đừng đứng chắn cửa sào.",
+        "Người đốn củi bảo cứ thấy cành còn rịn nhựa thì khoan bước tới."
+      ]
+    },
+    {
+      "ma": "ditich",
+      "loai": "Di tích cổ",
+      "ten_goi_chung": "di tích cổ",
+      "hau_to": [
+        "Chiến Địa",
+        "Cổ Thành",
+        "Phế Đài",
+        "Tàn Trại",
+        "Cổ Lũy",
+        "Phế Quan",
+        "Tàn Điện",
+        "Di Chỉ"
+      ],
+      "mo_ta": [
+        "Gạch tường cũ lún nửa mặt xuống cỏ. Bên cạnh còn cọc gãy, vết chém trên thân đã xám.",
+        "Lối qua sân đầy mảnh ngói cháy. Dưới chân bậc là đường kéo của vật nặng, chưa bị mưa xóa hết.",
+        "Bờ lũy đổ để lộ dãy lỗ từng cắm cờ. Đất trong rãnh trộn mẩu sắt đã ngả màu."
+      ],
+      "luc_den": [
+        "Ngươi vòng qua cột gãy trước khi đặt chân lên sân cũ.",
+        "Ngươi nghe mảnh ngói vỡ dưới gót ở chỗ tường đã sụp.",
+        "Ngươi tới mép lũy, gặp vệt gỉ chạy xuống từ chiếc đinh cũ."
+      ],
+      "tin_don": [
+        "Người gom gạch thấy vết cháy ở cả mặt trong tường, bảo trận xưa đã lan vào sân.",
+        "Nghe đâu bên chân lũy vẫn còn thẻ gỗ, nhưng chữ đã lẫn vào đất.",
+        "Ai theo đường cũ qua trại nên coi chừng rãnh xe, cỏ phủ kín mặt rồi."
+      ]
+    }
+  ]
+}

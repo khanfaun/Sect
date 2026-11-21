@@ -1200,3 +1200,255 @@ Nguồn: `content/catalog/qitems.json`
   "status": "active"
 }
 ```
+
+## Trắc Linh Thạch — `trac_linh_thach`
+
+```json
+{
+  "id": "trac_linh_thach",
+  "n": "Trắc Linh Thạch",
+  "i": "🪨",
+  "dang": "Vật dùng",
+  "use": "Dùng trong túi để tự trắc linh căn.",
+  "d": "Viên đá xám trơn nhẵn, nắm chặt thì biết có linh căn hay không.",
+  "status": "active"
+}
+```
+
+## Định Mệnh Châu — `dinh_menh_chau`
+
+```json
+{
+  "id": "dinh_menh_chau",
+  "n": "Định Mệnh Châu",
+  "i": "🔮",
+  "dang": "Vật dùng",
+  "use": "Mang theo lúc chết: kiếp sau được tự chọn lá số đầu thai.",
+  "d": "Viên châu đục, nhìn lâu thấy bóng người lạ trong đó.",
+  "status": "active"
+}
+```
+
+## Túc Tuệ Đăng — `tuc_tue_dang`
+
+```json
+{
+  "id": "tuc_tue_dang",
+  "n": "Túc Tuệ Đăng",
+  "i": "🪔",
+  "dang": "Vật dùng",
+  "use": "Mang theo lúc chết: kiếp sau nhớ lại tâm pháp đang tu (ở bậc thấp nhất).",
+  "d": "Ngọn đèn nhỏ, bấc cháy mãi không tàn.",
+  "status": "active"
+}
+```
+
+## Lương khô — `luong_kho`
+
+```json
+{
+  "id": "luong_kho",
+  "n": "Lương khô",
+  "i": "🍙",
+  "dang": "Vật dùng",
+  "use": "Tự ăn khi đói và không có quán: một gói đủ năm ngày.",
+  "d": "Gói bánh khô và thịt muối bọc lá, cứng như gỗ nhưng no lâu.",
+  "status": "active"
+}
+```
+
+## Trường Quyền Nhập Môn — `bt_truong_quyen`
+
+```json
+{
+  "id": "bt_truong_quyen",
+  "n": "Trường Quyền Nhập Môn",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Tam lưu).",
+  "d": "Bí tịch võ phàm, môn quyền. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Ngũ Hổ Đoạn Môn Đao — `bt_ngu_ho_dao`
+
+```json
+{
+  "id": "bt_ngu_ho_dao",
+  "n": "Ngũ Hổ Đoạn Môn Đao",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+  "d": "Bí tịch võ phàm, môn đao. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Thất Tinh Kiếm Pháp — `bt_that_tinh_kiem`
+
+```json
+{
+  "id": "bt_that_tinh_kiem",
+  "n": "Thất Tinh Kiếm Pháp",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+  "d": "Bí tịch võ phàm, môn kiếm. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Thiết Bố Sam — `bt_thiet_bo_sam`
+
+```json
+{
+  "id": "bt_thiet_bo_sam",
+  "n": "Thiết Bố Sam",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+  "d": "Bí tịch võ phàm, môn ngạnh công. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Thảo Thượng Phi — `bt_thao_thuong_phi`
+
+```json
+{
+  "id": "bt_thao_thuong_phi",
+  "n": "Thảo Thượng Phi",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+  "d": "Bí tịch võ phàm, môn khinh công. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Bát Quái Chưởng — `bt_bat_quai_chuong`
+
+```json
+{
+  "id": "bt_bat_quai_chuong",
+  "n": "Bát Quái Chưởng",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+  "d": "Bí tịch võ phàm, môn chưởng. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Liên Châu Tiễn Pháp — `bt_lien_chau_tien`
+
+```json
+{
+  "id": "bt_lien_chau_tien",
+  "n": "Liên Châu Tiễn Pháp",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+  "d": "Bí tịch võ phàm, môn cung. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Ưng Trảo Công — `bt_ung_trao_cong`
+
+```json
+{
+  "id": "bt_ung_trao_cong",
+  "n": "Ưng Trảo Công",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Nhất lưu).",
+  "d": "Bí tịch võ phàm, môn trảo. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Thái Cực Hóa Kình — `bt_thai_cuc`
+
+```json
+{
+  "id": "bt_thai_cuc",
+  "n": "Thái Cực Hóa Kình",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Hậu thiên đỉnh phong).",
+  "d": "Bí tịch võ phàm, môn nội gia. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Kim Chung Tráo — `bt_kim_chung_trao`
+
+```json
+{
+  "id": "bt_kim_chung_trao",
+  "n": "Kim Chung Tráo",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Tiên thiên).",
+  "d": "Bí tịch võ phàm, môn ngạnh công. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Phá Ngọc Quyền — `bt_pha_ngoc_quyen`
+
+```json
+{
+  "id": "bt_pha_ngoc_quyen",
+  "n": "Phá Ngọc Quyền",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Tiên thiên).",
+  "d": "Bí tịch võ phàm, môn cương quyền. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Đoạn Thủy Kiếm Ý — `bt_doan_thuy_kiem`
+
+```json
+{
+  "id": "bt_doan_thuy_kiem",
+  "n": "Đoạn Thủy Kiếm Ý",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Tông sư).",
+  "d": "Bí tịch võ phàm, môn kiếm ý. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Hỗn Nguyên Nhất Khí Công — `bt_hon_nguyen`
+
+```json
+{
+  "id": "bt_hon_nguyen",
+  "n": "Hỗn Nguyên Nhất Khí Công",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Tam lưu).",
+  "d": "Bí tịch võ phàm, môn nội công. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```
+
+## Quy Tức Công — `bt_quy_tuc`
+
+```json
+{
+  "id": "bt_quy_tuc",
+  "n": "Quy Tức Công",
+  "i": "📕",
+  "dang": "Bí tịch võ",
+  "use": "Đọc trong túi để học (cần bậc võ Nhị lưu).",
+  "d": "Bí tịch võ phàm, môn nội công. Không cần linh căn, chỉ cần khổ luyện.",
+  "status": "active"
+}
+```

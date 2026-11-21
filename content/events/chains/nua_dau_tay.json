@@ -49,7 +49,12 @@
             "st": 10
           },
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "giấy bán thân"
@@ -61,7 +66,12 @@
           "l": "Để bà ký và làm chứng",
           "t": "{$c.ten} gạch bớt một mùa công để có chữ của ngươi. {$b.ten} nhặt giẻ lau ngón tay mẹ, để lại một vệt đen trên tay mình.",
           "e": {
-            "karma": 1
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -152,7 +162,12 @@
           "l": "Góp một trục gỗ mới",
           "t": "Ngươi mua giúp một trục gỗ đủ già để chịu nước. Cậu bé theo thợ lắp từ sáng đến chiều, khắc dấu nửa vòng ở đầu trục để nhớ chiều quay.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 10
@@ -164,7 +179,9 @@
           "t": "Họ mua đủ gỗ, đổi lại phải xay phần thóc của ngươi trước mỗi phiên. {$a.ten} khâu riêng một bao đựng phần ấy.",
           "e": {
             "st": 14,
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -257,7 +274,12 @@
           "l": "Đòi trả công theo tờ giấy đã ký",
           "t": "Ngươi đem tờ giấy làm chứng ra đối lại ngày công. Chủ nợ phải trả đủ, nhưng đuổi hai mẹ con khỏi cối. Người mẹ nhận tiền, nói sẽ sang bến khác tìm việc; cậu bé xin mang theo chiếc trục hỏng để học sửa.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -268,7 +290,12 @@
             "st": 10
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -354,14 +381,14 @@
           "alignment": "context"
         }
       },
-      "text": "Cậu bé {$b.ten} năm xưa đã mở được một kho bột từ tiền xay thuê. Dân mất mùa tới xin mua chịu, còn chủ nợ {$c.ten} trả giá gấp đôi để gom hết hàng. Nếu ngươi từng góp trục, cậu khoe chiếc cối vẫn dùng trục ngươi mua. Nếu ngươi từng cho vay, cậu nói khoản vay đã trả đủ bằng tiền công xay những năm trước. Nếu từng giúp ở sân phơi cám, cậu nhắc hai mẹ con đã dùng tiền công ấy gây dựng lại từ đầu.",
+      "text": "{$b.ten} nay đã mở được kho bột bằng tiền xay thuê. Dân mất mùa xin mua chịu, còn chủ nợ {$c.ten} trả gấp đôi để gom hết hàng. Nếu ngươi từng góp trục, cậu chỉ chiếc cối vẫn dùng trục ấy. Nếu ngươi từng cho vay, cậu nhắc khoản nợ đã trả bằng tiền xay. Nếu ngươi từng giúp ở sân phơi cám, cậu nói chính tiền công ở đó đã giúp hai mẹ con làm lại.",
       "choices": [
         {
           "i": "💎",
           "l": "Mua bột chia cho dân đói",
           "t": "Ngươi trả tiền mua một phần bột phát cho dân. Cậu tự góp thêm, chia mỗi nhà đủ ăn vài ngày để kho vẫn còn hàng bán. Chủ nợ thấy không gom trọn được nữa, thu cân bỏ đi.",
           "e": {
-            "karma": 4
+            "deed": "phat_chan"
           },
           "cost": {
             "st": 10
@@ -373,7 +400,7 @@
           "t": "Cậu có vốn qua mùa sau và chia tiền môi giới cho ngươi. Cậu mở cửa sau cho người tới quét nền kho, nơi bột còn đọng trong kẽ gạch.",
           "e": {
             "st": 14,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -482,7 +509,12 @@
             "st": 10
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {

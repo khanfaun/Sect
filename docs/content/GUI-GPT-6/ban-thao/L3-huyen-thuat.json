@@ -1,0 +1,183 @@
+{
+  "nghe": "Huyễn thuật sư",
+  "su_kien": [
+    {
+      "ma": "S01",
+      "ten": "Bóng rơi khỏi bát nước",
+      "text": [
+        "Ở {LOC04}, ngươi nhìn bóng ngọn đèn trong bát nước. Khi gió tắt ở cửa, cái bóng vẫn lay như còn ai đi ngang.",
+        "Người dạy đặt chiếc thìa bên bát và mời ngươi thử giữ hình cho tới khi có khách bước vào. Trên thềm, người đi đường đang gỡ bùn khỏi dép."
+      ],
+      "choices": [
+        {
+          "l": "Báo trước rồi cho khách xem",
+          "t": "Ngươi nói trước đây là cảnh dựng và mời khách quấy nước. Hình tắt ngay đầu thìa, nhưng họ chỉ cho ngươi biết nó đã lệch từ lúc nào.",
+          "e": {}
+        },
+        {
+          "l": "Giữ hình tới khi khách tự nhận ra",
+          "t": "Ngươi giữ bóng qua lúc khách vào, khiến họ đặt đèn thật xuống chỗ tưởng có chỗ tựa. Đèn nghiêng đổ, và ngươi mất buổi học để lau dầu khỏi chiếu.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S02",
+      "ten": "Dựng mái hiên cho lễ tế",
+      "text": [
+        "Người trông lễ ở {LOC02} thuê ngươi dựng cảnh mái nhà cũ trên sân. Họ đem tới tấm rèm bạc màu, xin giữ đúng vết rách ở góc dưới.",
+        "Người góp tiền lại muốn ngươi làm mái mới hẳn để khách khỏi thấy nhà từng tiêu điều. Gia quyến đã xếp ghế, chờ nghe người trông lễ báo bắt đầu."
+      ],
+      "choices": [
+        {
+          "l": "Dựng lại mái nhà đúng dấu cũ",
+          "t": "Ngươi giữ vết rách và để người nhà tự chỉ nơi họ từng ngồi. Chủ lễ trả công theo hẹn, còn người góp tiền đứng ngoài hàng ghế tới lúc cảnh tan.",
+          "e": {}
+        },
+        {
+          "l": "Dựng mái mới theo lời người góp",
+          "t": "Ngươi làm mái sáng màu và giấu vết rách sau bóng rèm. Người góp tiền đứng ra nhận lời khen, còn gia quyến phải mang rèm thật lên sân để chỉ chỗ cũ.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S03",
+      "ten": "Mẻ bạc dưới lòng cân",
+      "text": [
+        "Ngươi thấy gã lái buôn đẩy quả cân về phía đĩa đã có chì. Người bán đang cúi nhặt hàng, chẳng nhìn ra vì sao phần bạc của mình cứ vơi.",
+        "Gã lái buôn chỉ nhìn đĩa nặng và đã đưa tay về phía bạc trên quầy. Ngươi có thể dựng một bóng bạc để gã phải đặt lại cân."
+      ],
+      "choices": [
+        {
+          "l": "Nhử gã tự cân trước mặt người bán",
+          "t": "Ngươi để bóng bạc hiện lệch khỏi đĩa. Gã nhấc quả nặng ra xem, và người bán thấy rõ miếng chì trước khi cho cân lại.",
+          "e": {}
+        },
+        {
+          "l": "Dùng bóng bạc đổi lấy quả cân",
+          "t": "Ngươi để gã chụp vào bóng rồi cầm quả cân đi. Người bán giữ được mẻ hàng sau, song lượt bạc đã trả thiếu không quay lại với họ.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S04",
+      "ten": "Khung cửa bên giường",
+      "text": [
+        "Người sắp tắt thở ở trạm xin được nhìn qua khung cửa nhà. Người đi cùng đặt bát nước lên bàn, bảo bên ngoài cửa thật chỉ có tường kho.",
+        "Họ nhớ bậc cửa thường hứng nắng ở cạnh nào, nhưng chẳng còn nói đủ hơi. Ngươi có thể dựng cảnh từ điều vừa nghe hoặc để người nhà kể tiếp."
+      ],
+      "choices": [
+        {
+          "l": "Dựng bậc cửa trống",
+          "t": "Ngươi dựng vệt nắng sát ngạch và để cảnh đứng yên. Người bệnh thả lỏng tay, còn người nhà tự ngồi vào chỗ sáng để được nhìn thấy.",
+          "e": {}
+        },
+        {
+          "l": "Dựng cảnh cùng lời người nhà",
+          "t": "Ngươi giữ nền cửa mờ và chờ từng lời kể mới thêm vào. Người bệnh chưa kịp thấy hết sân, nhưng nghe rõ tiếng người nhà nhắc chỗ họ từng đặt dép.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S05",
+      "ten": "Gương đẩy bóng ngược",
+      "text": [
+        "Ở sân tập, đối thủ nhìn thẳng qua bóng ngươi dựng và chạm tay vào mặt gương. Cảnh giả gập lại, đập ngược vào mắt khiến ngươi choáng tới mức phải vịn bàn.",
+        "Người coi sân đã đưa khăn tới. Đối thủ hỏi ngươi có muốn dừng hay thử tìm chỗ họ vừa nhìn ra."
+      ],
+      "choices": [
+        {
+          "l": "Dừng để đối lại từng dấu",
+          "t": "Ngươi ngồi xuống và nhờ họ chỉ nét đầu tiên bị lộ. Hóa ra bóng trong gương quay đầu chậm hơn thân người, và ngươi ghi lại lỗi sau khi hết choáng.",
+          "e": {}
+        },
+        {
+          "l": "Giữ buổi thử bằng cảnh đơn giản",
+          "t": "Ngươi đợi đứng vững rồi chỉ dựng bóng ngọn đèn trên vách. Đối thủ vẫn thấy vết lệch, nhưng lần này ngươi tự dập hình trước khi cảnh dội lại.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S06",
+      "ten": "Người gác sau tấm phên",
+      "text": [
+        "Trong kho gần {LOC09}, người giữ hàng nhờ ngươi dựng bóng lính để kẻ tới khuân trộm bỏ đi. Qua phên, ngươi thấy một người còn trẻ đến nhặt chiếc bị đã để quên từ chiều.",
+        "Người giữ kho đã gọi khách quanh bến tới nhìn. Bóng trên vách đủ giống người có thật để họ tin kẻ vừa vào đã bị bắt quả tang."
+      ],
+      "choices": [
+        {
+          "l": "Dẹp bóng và cho người ấy tự nói",
+          "t": "Ngươi thu cảnh rồi mở phên. Người trẻ lấy bị ra cho mọi người xem, còn người giữ kho phải tự đi kiểm chỗ hàng thiếu.",
+          "e": {}
+        },
+        {
+          "l": "Giữ bóng để kho trống qua đêm",
+          "t": "Ngươi để bóng đứng ở cửa và bảo người nhặt bị quay ra. Tới sáng, hàng còn nguyên, nhưng ngoài chợ đã có lời đồn rằng ngươi dùng hình giả để làm chứng.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S07",
+      "ten": "Chợ lặp lại sau rèm",
+      "text": [
+        "Ngươi dẹp cảnh ở sân xong mà tiếng hàng rao vẫn vọng ra sau rèm. Cùng một tấm khăn rơi xuống mép bàn, lần nào cũng gấp đúng nếp.",
+        "Người coi sân gọi ngươi từ ngoài cửa và gõ lên mặt gỗ. Tiếng gõ có chỗ hụt, khác tiếng đều trong cảnh ngươi vừa dựng."
+      ],
+      "choices": [
+        {
+          "l": "Theo tiếng gõ ra khỏi sân",
+          "t": "Ngươi quay về nơi tiếng gõ hụt và lần được chốt cửa thật. Khi rèm buông, trong tay ngươi còn tấm khăn đã nhặt, ướt sũng chỗ tưởng khô.",
+          "e": {}
+        },
+        {
+          "l": "Ở lại lần tới chỗ cảnh lặp",
+          "t": "Ngươi nâng mép rèm, tìm thấy hình bắt đầu từ vệt đèn trên khay nước. Lúc dập đèn, ngươi lại không nhận ra người coi sân cho tới khi họ gọi đúng món đồ ngươi đã gửi.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S08",
+      "ten": "Phiên diễn không còn màn",
+      "text": [
+        "Trước giờ diễn, người trông sân lấy rèm đi che nhà dột. Khách vẫn tới, có người nghe đồn hôm nay sẽ được gặp lại người đã khuất.",
+        "Ngươi chỉ còn khoảng sân trống và những chiếc đèn thấp. Gần cửa, người đã trả công đợi ngươi nhận sẽ dựng đến đâu."
+      ],
+      "choices": [
+        {
+          "l": "Cho khách thấy cảnh thành hình",
+          "t": "Ngươi đặt đèn giữa sân rồi giải thích trước khi dựng bóng. Có người rời ghế, còn những người ở lại tự kể chuyện khi bóng đã tắt.",
+          "e": {}
+        },
+        {
+          "l": "Dựng cảnh kín dưới bóng đèn",
+          "t": "Ngươi tắt đèn sát cửa để hình hiện ra mà khách không trông thấy ngươi. Buổi diễn đông đến lúc hạ bóng, rồi có người cứ gọi theo hình đã tan và không chịu đứng dậy.",
+          "e": {}
+        }
+      ]
+    }
+  ],
+  "ket_cuc": [
+    {
+      "ma": "K01",
+      "ten": "Người mở rèm trước khách",
+      "canh": [
+        "Ngươi dùng đèn thấp soi bàn tay dựng cảnh để khách biết bóng từ đâu tới. Ai muốn dừng chỉ việc kéo tấm rèm về phía mình.",
+        "Người coi sân vẫn giữ những chiếc ghế phía ngoài cho người chỉ muốn nghe kể. Cuối buổi, ngươi dọn đèn trước, để người xem tự nói điều họ vừa thấy."
+      ]
+    },
+    {
+      "ma": "K02",
+      "ten": "Dấu tay trên cửa giả",
+      "canh": [
+        "Ngươi lần theo khung cửa đến mức lòng bàn tay rát. Bên cạnh có người gọi, nhưng tiếng ấy vừa dứt đã trở lại từ bức tường đối diện.",
+        "Sáng nào người coi sân cũng đặt nước ngoài rèm. Có hôm ngươi uống được, có hôm chỉ ngồi đợi mặt nước ngừng chiếu một bàn tay đang gõ cửa."
+      ]
+    }
+  ]
+}

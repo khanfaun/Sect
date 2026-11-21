@@ -1,0 +1,787 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_ngu_bao",
+      "name": "Giông giữa nước",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Trời tối sầm lúc thuyền đang ở giữa dòng. Gió quật, sóng dựng, lưới còn chưa thu.",
+      "choices": [
+        {
+          "l": "Cắt lưới, chèo vào bờ",
+          "i": "🛶",
+          "chk": [
+            "tp",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi chèo tới tróc da tay. Thuyền chạm bờ vừa lúc mưa trút xuống.",
+            "e": {
+              "nxp": [
+                "ngu",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Một con sóng hất ngươi xuống nước. Bò được lên bờ thì người đã tím tái.",
+            "e": {
+              "hp": "-20%"
+            }
+          }
+        },
+        {
+          "l": "Cố kéo lưới lên",
+          "i": "🎣",
+          "chk": [
+            "tam",
+            10
+          ],
+          "ok": {
+            "t": "Lưới nặng trĩu cá. Ngươi vào bờ muộn nhưng mẻ cá đáng giá.",
+            "e": {
+              "bac": 80,
+              "nxp": [
+                "ngu",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Lưới mắc đá, thuyền chao nghiêng. Ngươi mất cả lưới lẫn cá.",
+            "e": {
+              "hp": "-25%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_bao",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_xac",
+      "name": "Lưới vớt xác người",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mẻ lưới nặng khác thường. Kéo lên, trong lưới là một người đàn ông đã chết, bên hông còn đeo túi tiền.",
+      "choices": [
+        {
+          "l": "Đưa vào bờ chôn cất",
+          "i": "🪦",
+          "t": "Ngươi đào huyệt dưới gốc gạo, cắm một nén nhang.",
+          "e": {
+            "h": 4,
+            "nxp": [
+              "ngu",
+              3
+            ],
+            "deed": "an_tang"
+          }
+        },
+        {
+          "l": "Lấy túi tiền rồi thả xuống nước",
+          "i": "👛",
+          "t": "Túi có ít bạc vụn. Đêm ấy ngươi ngủ không yên.",
+          "e": {
+            "bac": 60,
+            "tamma": 3,
+            "deed": "dao_mo"
+          }
+        },
+        {
+          "l": "Báo cho lý trưởng",
+          "i": "📜",
+          "t": "Lý trưởng ghi tên ngươi vào sổ, khen là dân lành.",
+          "e": {
+            "h": 6,
+            "nxp": [
+              "ngu",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_xac",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_ca_chep",
+      "name": "Cá chép vàng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Trong giỏ có một con cá chép vảy vàng như dát vàng. Nó ngước nhìn ngươi, mắt long lanh như sắp khóc.",
+      "choices": [
+        {
+          "l": "Thả nó về",
+          "i": "💧",
+          "t": "Con cá quẫy đuôi ba lần trên mặt nước rồi lặn mất. Lòng ngươi nhẹ đi.",
+          "e": {
+            "tamma": -5,
+            "deed": "phong_sinh"
+          }
+        },
+        {
+          "l": "Đem lên chợ bán",
+          "i": "🪙",
+          "t": "Một phú hộ trả giá cao để mua về thả ao. Ngươi cầm tiền mà thấy lành lạnh.",
+          "e": {
+            "bac": 250
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_ca_chep",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_ep_gia",
+      "name": "Chợ cá ép giá",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "cho",
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Bến cá đông người. Lái cá trả giá thấp như cho, ai không bán thì cá ươn.",
+      "choices": [
+        {
+          "l": "Bán rẻ cho xong",
+          "i": "🐟",
+          "t": "Ngươi cầm mấy đồng bạc lẻ đi về.",
+          "e": {
+            "bac": 15
+          }
+        },
+        {
+          "l": "Mặc cả",
+          "i": "🗣️",
+          "chk": [
+            "nang.thuong",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi chỉ ra mấy con cá còn quẫy. Lái cá chép miệng trả thêm.",
+            "e": {
+              "bac": 40,
+              "nxp": [
+                "ngu",
+                3
+              ]
+            }
+          },
+          "no": {
+            "t": "Lái cá quay đi. Tới trưa ngươi đành bán còn rẻ hơn.",
+            "e": {
+              "bac": 10
+            }
+          }
+        },
+        {
+          "l": "Mang về phơi khô",
+          "i": "☀️",
+          "t": "Cá phơi ba nắng, bán dần cũng được giá.",
+          "e": {
+            "h": 6,
+            "bac": 30,
+            "nxp": [
+              "ngu",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_ep_gia",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_thuy_quy",
+      "name": "Thủy quỷ kéo chân",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đang lội gỡ lưới, có bàn tay lạnh ngắt nắm lấy cổ chân ngươi, kéo xuống.",
+      "choices": [
+        {
+          "l": "Giữ bình tĩnh, gỡ tay nó ra",
+          "i": "🫁",
+          "chk": [
+            "nang.tu",
+            10
+          ],
+          "ok": {
+            "t": "Ngươi nín thở, bẻ từng ngón tay lạnh như đá. Nó buông ra. Ngươi ngoi lên, thở dốc.",
+            "e": {
+              "nxp": [
+                "ngu",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi uống mấy ngụm nước mới vùng được lên. Đêm ấy sốt mê man.",
+            "e": {
+              "hp": "-25%",
+              "tamma": 5
+            }
+          }
+        },
+        {
+          "l": "Đạp mạnh, bơi về thuyền",
+          "i": "🏊",
+          "chk": [
+            "tp",
+            10
+          ],
+          "ok": {
+            "t": "Ngươi đạp trúng thứ gì mềm nhũn rồi trườn lên thuyền.",
+            "e": {
+              "nxp": [
+                "ngu",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Bàn tay siết chặt hơn. Lúc thoát ra, cổ chân hằn năm vết tím.",
+            "e": {
+              "hp": "-20%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_thuy_quy",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_hai_tac",
+      "name": "Bọn chặn đường sông",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ba chiếc xuồng nhỏ chặn ngang luồng. Người đứng đầu cầm mã tấu, đòi tiền mãi lộ.",
+      "choices": [
+        {
+          "l": "Nộp tiền",
+          "i": "🪙",
+          "t": "Chúng lấy tiền rồi tránh đường, còn cười chúc ngươi may mắn.",
+          "e": {
+            "bac": -100
+          }
+        },
+        {
+          "l": "Lái thuyền lách qua",
+          "i": "⛵",
+          "chk": [
+            "tp",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi cho thuyền lướt qua khe giữa hai xuồng. Tiếng chửi đuổi theo sau lưng.",
+            "e": {
+              "nxp": [
+                "ngu",
+                12
+              ]
+            }
+          },
+          "no": {
+            "t": "Xuồng chúng áp mạn. Ngươi bị đánh, mất sạch tiền mang theo.",
+            "e": {
+              "hp": "-30%",
+              "bac": -200
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_hai_tac",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_ca_chay",
+      "name": "Mùa cá chạy",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nước đổi màu. Đàn cá kéo về đông như bão, mặt nước lấp lánh suốt đêm.",
+      "choices": [
+        {
+          "l": "Thả lưới cả đêm",
+          "i": "🎣",
+          "t": "Tới sáng thuyền ngươi đầy cá tới mạn. Hai tay rã rời.",
+          "e": {
+            "h": 12,
+            "bac": 150,
+            "nxp": [
+              "ngu",
+              10
+            ]
+          }
+        },
+        {
+          "l": "Gọi người trong xóm cùng đánh",
+          "i": "🤝",
+          "t": "Cả xóm chài cùng thả lưới. Chia nhau ai cũng có phần.",
+          "e": {
+            "bac": 80,
+            "nxp": [
+              "ngu",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_ca_chay",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_hop_go",
+      "name": "Hộp gỗ cổ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lưới vướng một chiếc hộp gỗ đen, khoá đồng đã gỉ, bọc trong rong rêu.",
+      "choices": [
+        {
+          "l": "Cạy ra xem",
+          "i": "📦",
+          "chk": [
+            "nang.khao",
+            10
+          ],
+          "ok": {
+            "t": "Trong hộp là một cuốn sách da cá còn khô. Chữ viết về cách thở dưới nước.",
+            "e": {
+              "item": "bt_quy_tuc",
+              "nxp": [
+                "ngu",
+                5
+              ]
+            }
+          },
+          "no": {
+            "t": "Nắp vừa bật, một luồng khí tanh xộc lên. Ngươi ho tới chảy nước mắt.",
+            "e": {
+              "hp": "-10%"
+            }
+          }
+        },
+        {
+          "l": "Ném lại xuống nước",
+          "i": "🌊",
+          "t": "Thứ của sông thì trả cho sông. Ngươi chèo đi, không ngoái lại.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_hop_go",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_giao_long",
+      "name": "Giao long mắc cạn",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nước rút, trên bãi cát nằm một con rắn biển khổng lồ có sừng. Nó thở phì phò, vảy khô nứt.",
+      "choices": [
+        {
+          "l": "Gọi người cùng đẩy nó ra biển",
+          "i": "🌊",
+          "t": "Hơn chục người kéo tới chiều mới đưa được nó xuống nước. Nó quay đầu nhìn ngươi rất lâu.",
+          "e": {
+            "h": 12,
+            "nxp": [
+              "ngu",
+              15
+            ],
+            "deed": "phong_sinh"
+          }
+        },
+        {
+          "l": "Đợi nó chết, bán xương vảy",
+          "i": "🦴",
+          "t": "Lái buôn từ thành về tận nơi mua. Ngươi giàu lên trong một đêm. Biển sau đó động suốt một tháng.",
+          "e": {
+            "bac": 900
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_giao_long",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_tieng_hat",
+      "name": "Tiếng hát dưới nước",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đêm trăng, mặt nước phẳng lặng. Từ dưới đáy vọng lên tiếng hát, ngọt như mật.",
+      "choices": [
+        {
+          "l": "Chèo lại gần",
+          "i": "🌕",
+          "chk": [
+            "nang.tu",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi nghe trọn khúc hát mà vẫn tỉnh. Sáng ra trên mạn thuyền có một viên ngọc trai nhỏ.",
+            "e": {
+              "pill": "tinhnguyen",
+              "nxp": [
+                "ngu",
+                12
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi tỉnh lại khi nước đã tới cổ. Bò lên được thuyền, đầu đau như búa bổ.",
+            "e": {
+              "hp": "-20%",
+              "tamma": 5
+            }
+          }
+        },
+        {
+          "l": "Nhét bông vào tai, chèo đi",
+          "i": "🙉",
+          "t": "Tiếng hát nhỏ dần sau lưng. Ngươi chèo một mạch về bến."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_tieng_hat",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_thuyen_dam",
+      "name": "Thuyền đắm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một chiếc thuyền buôn lật úp giữa dòng. Hàng hoá trôi lềnh bềnh, có người đang chới với.",
+      "choices": [
+        {
+          "l": "Lao xuống cứu người",
+          "i": "🛟",
+          "chk": [
+            "tp",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi kéo được hai người lên thuyền. Chủ hàng sau đó tìm tới tận nhà cảm tạ.",
+            "e": {
+              "bac": 150,
+              "nxp": [
+                "ngu",
+                10
+              ],
+              "deed": "cuu_nguoi"
+            }
+          },
+          "no": {
+            "t": "Ngươi cứu được một người nhưng bị sặc nước, phải nằm mấy hôm.",
+            "e": {
+              "hp": "-25%",
+              "deed": "cuu_nguoi_hy_sinh"
+            }
+          }
+        },
+        {
+          "l": "Vớt hàng trôi",
+          "i": "📦",
+          "t": "Ngươi vớt được mấy kiện vải lụa. Tiếng kêu cứu tắt dần.",
+          "e": {
+            "bac": 400,
+            "tamma": 5
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_thuyen_dam",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_ngu_nguoi_cho",
+      "name": "Người nhà chờ ở bến",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ngu",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "bien"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Chiều nào cũng có người đứng ở đầu bến nhìn ra nước, chờ thuyền ngươi về.",
+      "choices": [
+        {
+          "l": "Ở nhà ít hôm",
+          "i": "🏠",
+          "t": "Mấy ngày không ra nước, ngươi ngủ được những giấc dài.",
+          "e": {
+            "h": 48,
+            "tamma": -10
+          }
+        },
+        {
+          "l": "Tiếp tục ra khơi kiếm thêm trong mùa này",
+          "i": "⛵",
+          "t": "Người ở bến vẫy tay. Thuyền ngươi xa dần.",
+          "e": {
+            "bac": 200,
+            "nxp": [
+              "ngu",
+              8
+            ],
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ngu.json",
+        "ref": "ng_ngu_nguoi_cho",
+        "commit": "d5.3"
+      }
+    }
+  ]
+}

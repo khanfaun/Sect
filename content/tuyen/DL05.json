@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 1,
+  "id": "DL05",
+  "loai": "dai_lo",
+  "ten": "Huyết Cừu",
+  "daiLo": "huyet_cuu",
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Tên người gây thù chưa được xác nhận",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Ở {LOC14}, {NP28} giữ một góc giấy cho ngươi khỏi bị gió thổi khỏi bia. Người mang chức cũ bây giờ có thể là một người chưa từng đặt chân tới đây. Ngươi sẽ ghi món nợ nào trước và cần ai còn giữ được bằng chứng?",
+      "boQuaNeuXuatThan": true,
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi món thù, giữ cả phần chưa có chứng",
+          "t": "Ngươi ghi món thù lên đầu giấy để lời đòi có thể theo tới người giữ chức bây giờ. Phần chưa có chứng vẫn để trống, nhưng tờ đòi đã có thể đem đi.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi ai giữ dấu của người đời trước",
+          "t": "Ngươi xin người coi bia chỉ vật có thể đối khi người giữ chức đã thay.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi tên những người phải để yên",
+          "t": "Ngươi để bên lời hẹn tên những người không được buộc chịu cùng kẻ có lỗi.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lời hẹn nằm trên thềm, không ai được ghi làm người chịu thay.",
+        "su": "Lời hẹn nằm trên thềm, không ai được ghi làm người chịu thay.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Kẻ gây chuyện và người hưởng lợi",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Bên bia ở {LOC14}, một người chỉ vết dấu mờ trên sổ cũ. Dấu mới bên dưới là của người kế chức. Cạnh sổ có giấy xin trả mảnh đất cho một hộ đã mất nhà. Ngươi sẽ tách người gây chuyện khỏi người đang hưởng phần ấy thế nào?",
+      "khacVoi": "OR20.N3 đối hộ tịch để nhận thân phận của mình; hồi này phân trách nhiệm cá nhân khỏi quyền kế vai.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối ngày và trao giấy cho người vô can",
+          "t": "Ngươi so ngày hành động rồi cho người kế chức sao bản ghi họ không có mặt.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ tài sản người đang hưởng để đòi lại",
+          "t": "Ngươi giữ phần tài sản đang tranh ngay từ tay người kế hưởng. Dù họ chưa từng đặt dấu lên tờ cũ, họ sẽ phải chờ ngươi xét mới được dùng lại.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi người chịu thiệt có cần hòa giải",
+          "t": "Ngươi hỏi người còn chịu giá có muốn nhận một người ngoài cuộc để nghe hai bên.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hai bản được để riêng, hộ mang giấy về chờ người chịu trách nhiệm.",
+        "su": "Hai bản được để riêng, hộ mang giấy về chờ người chịu trách nhiệm.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Giữ người làm chứng qua ngày đổi ngôi",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Trong phòng xét ở {LOC02}, người làm chứng giấu một tay đang run dưới gầm bàn. Phía đối diện đẩy tới một bọc bạc. Ngoài cửa có tiếng tháo cờ. Ngươi phải chọn gửi người và chứng cứ đi đâu, hoặc giữ món gì khi việc xét bị dời.",
+      "khacVoi": "OR06.N4 tranh ghế và xử phần gia nhân; hồi này giữ quyền của người làm chứng trong một cuộc đổi ngôi.",
+      "clk": "CLK09",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đưa người làm chứng đi trú và gửi bản sao",
+          "t": "Ngươi giao một bản sang nơi khác và đưa người làm chứng tới mái được hai bên biết.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "e": {
+            "clk": {
+              "id": "CLK09",
+              "kq": "Hồ sơ và người làm chứng được giữ qua đổi ngôi, hạn xét còn ghi trên cả hai bản."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ phần đang tranh, thả người vô can",
+          "t": "Ngươi giữ chặt phần đang tranh theo bản kê, để người đang hưởng mất quyền dùng nó ngay trong ngày. Người vô can nhận giấy đi, còn bọc bạc nằm yên trên bàn.",
+          "dau": [
+            "moc_3_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Mở hai lối cho người muốn dừng hòa giải",
+          "t": "Ngươi giữ hai lối ra, để ai không chịu tiếp lời được tự dừng trước khi ký.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bàn xét dời phiên, người làm chứng tự tìm mái qua đêm.",
+        "su": "Bàn xét dời phiên, người làm chứng tự tìm mái qua đêm.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Đòi đúng người hay buộc cả nhà chịu?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Ở {LOC14}, người giữ ghế vừa ngồi xuống thì người mất phần trải bản đối chứng ngay trước mặt. Có người đã chuẩn bị sẵn một tờ đòi ghi cả tên thân thuộc. Ngươi có thể đưa chứng đi xét, tước ghế để đòi lại của hoặc để người chịu thiệt tự chốt lời.",
+      "khacVoi": "OR43.N4 trả tro hoặc lập mộ theo vật chứng; hồi này phân xử món nợ còn có thể hoàn trả giữa người sống.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đưa chứng ra xét đúng người gây việc",
+          "t": "Ngươi đưa chứng cho bàn xét và để người vô can giữ giấy ra khỏi việc.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Tịch thu phần hưởng và ép nhường ghế",
+          "t": "Ngươi lấy lại phần đã bị hưởng, rồi buộc người đang nắm quyền ký nhường ghế.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Để người chịu thiệt chốt lời hòa giải",
+          "t": "Ngươi để người chịu giá tự đọc khoản đã nhận và việc chưa thể tha, rồi giữ cả hai dòng.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người coi bia giữ bản chưa ký và không chép thân thuộc vào sổ.",
+        "su": "Người coi bia giữ bản chưa ký và không chép thân thuộc vào sổ.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Làm gì sau khi đòi được món cũ?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Dưới chân bia {LOC14}, ba tờ giấy đã gấp xong: trả của, nhường ghế, hòa giải. Một người làm chứng đi dép đứt quai đến hỏi bao giờ được về. Ngươi có thể cho họ đi, giữ quyền vừa lấy để đòi tiếp hoặc giao hai bên bản hòa giải.",
+      "khacVoi": "OR30.N5 chọn cách giữ hay giải thể một bếp; hồi này khép việc trả thù và quyết quyền đối với những người từng giúp.",
+      "clk": "CLK03",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Cho người làm chứng lên xe về nhà",
+          "t": "Ngươi trả bản, để người làm chứng dùng lượt xe lương về nhà mà không phải đi theo mình.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          },
+          "e": {
+            "clk": {
+              "id": "CLK03",
+              "kq": "Chuyến tiếp tế có chỗ đưa những người làm chứng về qua cửa ải."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ ghế để tiếp tục đòi nợ cũ",
+          "t": "Ngươi ngồi vào chiếc ghế vừa lấy và chép người còn chịu giá vào sổ của mình. Những ai tưởng vụ đòi đã khép vẫn phải chờ xem lượt sau ngươi gọi tên ai.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Trao giấy hòa giải rồi thôi đòi",
+          "t": "Ngươi để hai bên giữ bản, từ lời đòi tiếp và không bắt người giúp phải theo.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Giấy ở lại với người đưa chứng, món chưa trả không bị ghi thành đã xong.",
+        "su": "Giấy ở lại với người đưa chứng, món chưa trả không bị ghi thành đã xong.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Món trả đúng người",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người làm chứng nhìn tên mình ra khỏi sổ rồi bước lên xe. Phần được trả về đúng tay người chịu, người kế chức giữ giấy xác nhận mình không phải kẻ năm ấy. Khi qua bia, ngươi chỉ đọc tên người thực sự có mặt.",
+      "su": "Món cũ khép bằng chứng và phần hoàn trả có người nhận.",
+      "dauVong": "một bản xét giữ hai dòng riêng cho người làm và người kế chức."
+    },
+    {
+      "id": "B",
+      "ten": "Ghế bên món nợ",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Chiếc ghế đã nhường giữ ngươi lại sau buổi đòi. Người chịu giá đọc được phần bồi, nhưng cũng thấy một dòng mới ghi ai phải xin gặp chủ. Một người từng giúp ngươi đem bản ấy ra hỏi vào mùa sau.",
+      "su": "Quyền mới dựa trên phần đã đòi và giữ sổ người còn chịu giá.",
+      "dauVong": "người từng giúp đòi nợ giữ một phiếu xin gặp chưa được đọc."
+    },
+    {
+      "id": "C",
+      "ten": "Bia không giữ chân",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Bản hòa giải nằm ở hai nhà và phần chưa tha vẫn đọc được. Ngươi không lấy tên của ai làm điều kiện để rời thềm. Người đã đi cùng tự chọn đường sau, còn người coi bia giữ chỗ cho việc nếu có chứng mới.",
+      "su": "Hai bên giữ bản hòa giải và những người đi theo được tự rời.",
+      "dauVong": "một tờ hòa giải chừa chỗ ghi việc chưa tha bên phần đã trả."
+    }
+  ],
+  "ngoai": "Giấy ở lại với người đưa chứng, món chưa trả không bị ghi thành đã xong."
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "CC06",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "mat_sau",
+      "ten": "Dòng cho phép rút khế",
+      "t": "Một người ở {LOC08} đem khế cũ ra đối. Mặt trước ghi phần huyết mạch được chia, mặt sau ghi khi nào linh thú có thể rời đi. Người giữ chuồng nói bản bán ngoài chợ thường không sao dòng sau.",
+      "c": [
+        {
+          "id": "doc",
+          "l": "Nhờ đọc cả hai mặt trước khi bàn",
+          "t": "Ngươi nghe hết phần rút khế và chép câu chưa rõ. Người giữ chuồng chỉ người có thể hỏi tiếp.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Hỏi người trông thú về dấu từ chối",
+          "t": "Người trông thú nói lúc con vật lùi khỏi cửa thì họ dừng. Ngươi giữ lời ấy khi tới chuồng."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "bat_nuoc",
+      "ten": "Con thú quay mặt vào vách",
+      "t": "Con linh thú hợp huyết đang bị thương trong chuồng ở {LOC08}. Khi người lạ gọi, nó quay mặt vào vách. Người nuôi nói nó vẫn ăn nếu để bát ở cửa rồi cho nó một khoảng yên.",
+      "c": [
+        {
+          "id": "giu",
+          "l": "Giúp người nuôi dọn bát và chờ",
+          "t": "Ngươi dọn bát cũ rồi lùi khỏi cửa. Con thú tự tới uống, không ai mang giấy khế ra.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "di",
+          "l": "Rời chuồng để nó nghỉ",
+          "t": "Ngươi rời chỗ đứng. Người nuôi đóng tấm rèm thưa, vẫn để lối cho con thú nhìn ra ngoài."
+        }
+      ]
+    },
+    {
+      "buoc": 2,
+      "id": "tho_chep",
+      "ten": "Thợ chép nghỉ tay",
+      "t": "Trong lúc tìm giấy khế ở {LOC08}, ngươi gặp người thợ chép bị đau cổ tay. Bản mẫu trên bàn đã hoàn thành, nhưng phía ngoài nhiều người thúc. Một học trò muốn tập đọc phần ghi quyền rút.",
+      "c": [
+        {
+          "id": "doc",
+          "l": "Đọc mẫu cùng người học việc",
+          "t": "Ngươi đọc rõ phần bên nào có quyền dừng. Người học tự chép vào sách tập, còn mẫu vẫn nằm trên bàn.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "bao",
+          "l": "Mời người ngoài quay lại sau",
+          "t": "Ngươi nói thợ cần nghỉ và xin họ hẹn giờ khác. Nhờ vậy người học có một buổi đọc lại."
+        }
+      ]
+    }
+  ]
+}

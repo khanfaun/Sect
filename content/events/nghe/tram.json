@@ -1,0 +1,749 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_tram_ngua_om",
+      "name": "Ngựa trạm ốm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Con ngựa tốt nhất của trạm bỏ ăn, mắt lờ đờ.",
+      "choices": [
+        {
+          "l": "Thức canh, nấu cháo cho ngựa",
+          "i": "🐴",
+          "chk": [
+            "nang.nhan",
+            8
+          ],
+          "ok": {
+            "t": "Sáng thứ ba nó đứng dậy hí vang.",
+            "e": {
+              "nxp": [
+                "tram",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Nó chết trước khi trời sáng. Trạm trưởng trừ công ngươi.",
+            "e": {
+              "bac": -20
+            }
+          }
+        },
+        {
+          "l": "Báo trạm trưởng",
+          "i": "📢",
+          "t": "Trạm trưởng gọi thầy thú y, tốn tiền trạm.",
+          "e": {
+            "nxp": [
+              "tram",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_ngua_om",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_thu_ngap",
+      "name": "Thư dính nước",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Qua suối, túi thư bị ướt. Mấy lá thư nhòe mực.",
+      "choices": [
+        {
+          "l": "Phơi khô, giao như cũ",
+          "i": "☀️",
+          "t": "Người nhận đọc được, không ai biết.",
+          "e": {
+            "nxp": [
+              "tram",
+              4
+            ]
+          }
+        },
+        {
+          "l": "Thú thật với người nhận",
+          "i": "🙇",
+          "t": "Họ không trách, còn mời ngươi chén nước.",
+          "e": {
+            "nxp": [
+              "tram",
+              5
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_thu_ngap",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_cuop_duong",
+      "name": "Kẻ chặn đường",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Hai gã bịt mặt chặn đường, đòi túi thư.",
+      "choices": [
+        {
+          "l": "Thúc ngựa chạy",
+          "i": "🏇",
+          "chk": [
+            "tp",
+            8
+          ],
+          "ok": {
+            "t": "Ngươi phóng qua, tim còn đập thình thịch.",
+            "e": {
+              "nxp": [
+                "tram",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngựa vấp, ngươi ngã. Bọn cướp lục túi rồi bỏ đi vì toàn thư.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "l": "Đưa túi thư",
+          "i": "✋",
+          "t": "Chúng lục một hồi, ném túi lại. Ngươi đến trạm muộn nửa ngày.",
+          "e": {
+            "nxp": [
+              "tram",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_cuop_duong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_nguoi_nho",
+      "name": "Người nhờ đi cùng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một cô gái nhờ đi cùng ngựa trạm tới thành, nói nhà có việc gấp.",
+      "choices": [
+        {
+          "l": "Cho đi cùng",
+          "i": "🤝",
+          "t": "Đến nơi cô cảm ơn rồi đi vội. Trạm trưởng mắng ngươi phạm luật.",
+          "e": {
+            "nxp": [
+              "tram",
+              3
+            ],
+            "deed": "cuu_nguoi"
+          }
+        },
+        {
+          "l": "Từ chối, đúng luật",
+          "i": "📜",
+          "t": "Cô ngồi khóc bên đường.",
+          "e": {
+            "nxp": [
+              "tram",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_nguoi_nho",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_cong_van_mat",
+      "name": "Công văn mật",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi được giao một ống công văn có dấu son, dặn không được mở. Dọc đường có người trả nhiều tiền để xem.",
+      "choices": [
+        {
+          "l": "Không mở, giao đúng hạn",
+          "i": "📜",
+          "t": "Công văn tới nơi nguyên dấu. Quan trạm ghi công.",
+          "e": {
+            "nxp": [
+              "tram",
+              12
+            ],
+            "deed": "giu_loi"
+          }
+        },
+        {
+          "l": "Cho xem rồi giao",
+          "i": "💰",
+          "t": "Ngươi giàu thêm. Tin trong công văn lọt ra ngoài.",
+          "e": {
+            "bac": 300,
+            "nxp": [
+              "tram",
+              4
+            ],
+            "deed": "that_hua"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_cong_van_mat",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_tuyet_deo",
+      "name": "Tuyết trên đèo",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "nui"
+        ],
+        "levels": null,
+        "time": {
+          "season": [
+            "dong"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Tuyết chặn đèo. Công văn hỏa tốc phải tới nơi trong hai ngày.",
+      "choices": [
+        {
+          "l": "Đi thẳng qua đèo tuyết cho kịp hạn",
+          "i": "🏔️",
+          "chk": [
+            "nang.nhan",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi tới kịp, tay chân tím tái.",
+            "e": {
+              "nxp": [
+                "tram",
+                14
+              ],
+              "hp": "-10%"
+            }
+          },
+          "no": {
+            "t": "Lạc trong tuyết một đêm.",
+            "e": {
+              "hp": "-25%",
+              "nxp": [
+                "tram",
+                5
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đi đường vòng",
+          "i": "🛤️",
+          "t": "Muộn một ngày, bị phạt.",
+          "e": {
+            "bac": -40,
+            "nxp": [
+              "tram",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_tuyet_deo",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_tram_moi",
+      "name": "Trạm bỏ hoang",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Giữa đường có trạm bỏ hoang. Mở lại thì đường thư ngắn đi nửa ngày.",
+      "choices": [
+        {
+          "l": "Xin trên cho mở lại",
+          "i": "📝",
+          "chk": [
+            "nang.giao",
+            11
+          ],
+          "ok": {
+            "t": "Trạm mở lại, ngươi được giao coi.",
+            "e": {
+              "nxp": [
+                "tram",
+                12
+              ]
+            }
+          },
+          "no": {
+            "t": "Trên không duyệt.",
+            "e": {
+              "nxp": [
+                "tram",
+                3
+              ]
+            }
+          }
+        },
+        {
+          "l": "Thôi",
+          "i": "🤷",
+          "t": "Đường thư vẫn dài như cũ.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_tram_moi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_ngua_ban",
+      "name": "Bán ngựa trạm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Trạm trưởng bán lén ngựa trạm, đổi ngựa già, bảo ngươi ký vào sổ.",
+      "choices": [
+        {
+          "l": "Ký",
+          "i": "✍️",
+          "t": "Ngươi được chia phần. Ngựa già chết dọc đường tháng sau.",
+          "e": {
+            "bac": 80,
+            "deed": "tham_o"
+          }
+        },
+        {
+          "l": "Không ký",
+          "i": "🙅",
+          "t": "Trạm trưởng ghét ngươi, giao toàn việc nặng.",
+          "e": {
+            "nxp": [
+              "tram",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_ngua_ban",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_lu_duong",
+      "name": "Lũ cắt đường thư",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "song"
+        ],
+        "levels": null,
+        "time": {
+          "season": [
+            "ha",
+            "thu"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lũ lớn cắt đứt mọi đường. Cả vùng cần tin để xin cứu tế.",
+      "choices": [
+        {
+          "l": "Tự mình vượt lũ đưa tin",
+          "i": "🌊",
+          "chk": [
+            "tp",
+            12
+          ],
+          "ok": {
+            "t": "Tin tới nơi, thuyền cứu tế về kịp.",
+            "e": {
+              "nxp": [
+                "tram",
+                22
+              ],
+              "deed": "cuu_nguoi_hy_sinh"
+            }
+          },
+          "no": {
+            "t": "Ngươi bị lũ cuốn, may được người vớt.",
+            "e": {
+              "hp": "-30%",
+              "nxp": [
+                "tram",
+                8
+              ]
+            }
+          }
+        },
+        {
+          "l": "Chờ nước rút",
+          "i": "⏳",
+          "t": "Tin tới muộn bảy ngày.",
+          "e": {
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_lu_duong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_duong_thu_moi",
+      "name": "Đường thư mới",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Triều đình muốn mở đường thư qua vùng núi, giao ngươi vẽ tuyến.",
+      "choices": [
+        {
+          "l": "Đi khảo từng trạm",
+          "i": "🗺️",
+          "chk": [
+            "nang.giac",
+            14
+          ],
+          "ok": {
+            "t": "Tuyến mới ngắn, an toàn. Ngươi được thăng chức.",
+            "e": {
+              "nxp": [
+                "tram",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Tuyến vẽ sai, phải làm lại.",
+            "e": {
+              "nxp": [
+                "tram",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Chép bản đồ cũ nộp",
+          "i": "📜",
+          "t": "Tuyến dài, nhiều cướp.",
+          "e": {
+            "nxp": [
+              "tram",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_duong_thu_moi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_tin_gia",
+      "name": "Tin giả",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Có kẻ muốn ngươi đổi một bức thư báo tin thắng trận thành tin bại.",
+      "choices": [
+        {
+          "l": "Từ chối, báo lên",
+          "i": "📢",
+          "t": "Kẻ đó bị bắt.",
+          "e": {
+            "nxp": [
+              "tram",
+              14
+            ],
+            "deed": "giu_loi"
+          }
+        },
+        {
+          "l": "Nhận tiền",
+          "i": "💰",
+          "t": "Cả một đạo quân rút lui oan.",
+          "e": {
+            "bac": 800,
+            "deed": "lua_loi",
+            "tamma": 5
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_tin_gia",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tram_nguoi_cu",
+      "name": "Người phu trạm cũ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tram",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lão phu trạm già sắp mất, muốn ngươi giữ cái túi thư lão mang suốt bốn mươi năm.",
+      "choices": [
+        {
+          "l": "Nhận và treo ở trạm",
+          "i": "👜",
+          "t": "Phu trạm trẻ nào cũng chạm tay vào túi trước khi lên đường.",
+          "e": {
+            "nxp": [
+              "tram",
+              14
+            ]
+          }
+        },
+        {
+          "l": "Nhận, cất đi",
+          "i": "📦",
+          "t": "Ngươi giữ nó trong rương.",
+          "e": {
+            "nxp": [
+              "tram",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tram.json",
+        "ref": "ng_tram_nguoi_cu",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

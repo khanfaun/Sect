@@ -8,7 +8,7 @@ function kiepStrike(sc,k){
 function kiepHit(sc,k,off){
   const K=sc.kiep,me=mainUnit(sc);const i=K.done+1;
   let d=Math.round(me.max*(0.18+0.035*i)*K.uy);K.uy=1;
-  if(me.st.stance&&me.tl>=TL_BLOCK){me.tl-=TL_BLOCK;d=Math.round(d*(1-0.25));}
+  if(me.st.stance&&me.tl>=tlB(me)){me.tl-=tlB(me);d=Math.round(d*(1-0.25));}
   if(me.st.stance&&me.phase==='guard')endStance(sc,me,null);
   let red=0;if(off==='auto')red=0.25*0.6;else if(off!=null&&Math.abs(off)<=0.09)red=0.5;else if(off!=null&&Math.abs(off)<=0.25)red=0.25;
   d=Math.round(d*(1-red));d=absorb(me.st,d);me.hp-=d;K.done++;
@@ -75,7 +75,7 @@ function btEff(slots){
 function btRate(slots){
   const r=G.run,s=S();const e=btEff(slots||[]);
   const p=BT_BASE[Math.min(4,r.realm)]+(s.ngo-10)*0.012+(s.tam-10)*0.012-r.tamma*0.004+(r.btFail||0)*0.08+e.rate/100;
-  return clamp(p,0.05,0.97);
+  return clamp(p,0.05,BT_CAP);
 }
 function btChance(){return btRate([]);}
 function canBreak(){const r=G.run;return (lkOn()?(lkTang()>=10||(lkTang()===9&&lkFull())):r.tv>=100)&&r.realm<=4;}
@@ -256,11 +256,11 @@ function worldCoarse(m){
 }
 function nodeRecover(){
   const w=W();
-  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;if(n.type==='tran'||n.type==='thanh')chron(contentText("core_08-loi-kiep_js.nodeRecover.056", [n.name]));}}
+  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;if(isTownT(n.type))chron(contentText("core_08-loi-kiep_js.nodeRecover.056", [n.name]));}}
 }
 function flipNode(){
   const w=W();const r=G.run;
-  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if(['tran','thanh','tong'].includes(n.type)&&n.state!=='ruin'&&(!r||n.id!==r.at))pool.push(n); // nơi đang hoang tàn thì không "gặp nạn" lần nữa
+  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if((isTownT(n.type)||n.type==='tong')&&n.state!=='ruin'&&(!r||n.id!==r.at))pool.push(n); // nơi đang hoang tàn thì không "gặp nạn" lần nữa
   if(!pool.length)return;const n=pick(pool);
   if(n.state==='ruin'){n.state='ok';n.stateUntil=0;chron(contentText("core_08-loi-kiep_js.flipNode.057", [n.name]));}
   else if(n.type==='tong'){const s=pick(w.sects);n.owner=s.n;chron(contentText("core_08-loi-kiep_js.flipNode.058", [n.name,s.n]));}

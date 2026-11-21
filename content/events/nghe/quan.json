@@ -1,0 +1,764 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_quan_so_thieu",
+      "name": "Sổ thuế thiếu",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Sổ thuế thiếu hai trăm lượng. Tri huyện bảo ngươi ghi bù vào phần dân làng.",
+      "choices": [
+        {
+          "l": "Ghi bù",
+          "i": "✍️",
+          "t": "Dân làng nộp thêm. Tri huyện vỗ vai ngươi.",
+          "e": {
+            "nxp": [
+              "quan",
+              6
+            ],
+            "deed": "tham_o"
+          }
+        },
+        {
+          "l": "Lục sổ tìm chỗ thất thoát",
+          "i": "🔍",
+          "chk": [
+            "nang.khao",
+            9
+          ],
+          "ok": {
+            "t": "Hóa ra là tay thư lại khác ăn bớt.",
+            "e": {
+              "nxp": [
+                "quan",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Lục mãi không ra, tri huyện bực.",
+            "e": {
+              "nxp": [
+                "quan",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_so_thieu",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_kien_dat",
+      "name": "Kiện đất",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Hai nhà kiện nhau vì bờ ruộng. Một nhà đưa ngươi gói bạc.",
+      "choices": [
+        {
+          "l": "Nhận bạc, xử nghiêng",
+          "i": "💰",
+          "t": "Nhà kia khóc ròng ra về.",
+          "e": {
+            "bac": 80,
+            "deed": "tham_o"
+          }
+        },
+        {
+          "l": "Trả bạc, xử theo sổ địa bạ",
+          "i": "📜",
+          "chk": [
+            "nang.khao",
+            8
+          ],
+          "ok": {
+            "t": "Cả hai nhà phục.",
+            "e": {
+              "nxp": [
+                "quan",
+                8
+              ],
+              "deed": "quan_thanh_liem"
+            }
+          },
+          "no": {
+            "t": "Sổ cũ rách nát, xử sao cũng có người oán.",
+            "e": {
+              "nxp": [
+                "quan",
+                4
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_kien_dat",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_ha_dan",
+      "name": "Dân kêu oan",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một người dân quỳ trước cổng nha môn kêu oan, lính đuổi đi.",
+      "choices": [
+        {
+          "l": "Ra cổng nghe người dân trình bày",
+          "i": "👂",
+          "t": "Ngươi ghi lại đơn, trình lên trên.",
+          "e": {
+            "nxp": [
+              "quan",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Mặc kệ",
+          "i": "🙈",
+          "t": "Người dân quỳ tới tối.",
+          "e": {
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_ha_dan",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_hoc_luat",
+      "name": "Đọc luật",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi mượn được bộ luật cũ của triều.",
+      "choices": [
+        {
+          "l": "Đọc kỹ",
+          "i": "📚",
+          "chk": [
+            "ngo",
+            8
+          ],
+          "ok": {
+            "t": "Ngươi thuộc nhiều điều mà quan trên còn quên.",
+            "e": {
+              "nxp": [
+                "quan",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Chữ nhiều quá, đọc không vào.",
+            "e": {
+              "nxp": [
+                "quan",
+                2
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đọc lướt",
+          "i": "📖",
+          "t": "Biết sơ sơ.",
+          "e": {
+            "nxp": [
+              "quan",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_hoc_luat",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_tri_thuy",
+      "name": "Trị thủy",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đê sông sắp vỡ. Kho huyện chỉ đủ tiền cho một việc: đắp đê hoặc sửa nha môn như trên đòi.",
+      "choices": [
+        {
+          "l": "Đắp đê",
+          "i": "🌊",
+          "t": "Mùa lũ đê giữ được. Trên khiển trách ngươi.",
+          "e": {
+            "nxp": [
+              "quan",
+              14
+            ],
+            "deed": "quan_thanh_liem"
+          }
+        },
+        {
+          "l": "Sửa nha môn",
+          "i": "🏛️",
+          "t": "Nha môn khang trang. Lũ về, ba làng chìm.",
+          "e": {
+            "nxp": [
+              "quan",
+              6
+            ],
+            "tamma": 5
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_tri_thuy",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_dut_lot",
+      "name": "Phong bì Tết",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Tết đến, mấy nhà giàu gửi tiền tới nhà ngươi dưới danh nghĩa biếu lễ. Họ đều có việc đang chờ nha môn xét.",
+      "choices": [
+        {
+          "l": "Nhận hết",
+          "i": "💰",
+          "t": "Nhà ngươi đủ đầy. Năm sau xử kiện khó lòng công bằng.",
+          "e": {
+            "bac": 400,
+            "deed": "tham_o"
+          }
+        },
+        {
+          "l": "Trả lại",
+          "i": "🙅",
+          "t": "Các nhà giàu nhìn ngươi dè chừng.",
+          "e": {
+            "nxp": [
+              "quan",
+              10
+            ],
+            "deed": "quan_thanh_liem"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_dut_lot",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_cuu_doi",
+      "name": "Năm đói",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mất mùa. Dân đói kéo về huyện. Mở kho thì trái lệnh trên.",
+      "choices": [
+        {
+          "l": "Mở kho phát gạo",
+          "i": "🍚",
+          "t": "Dân sống qua mùa đông. Ngươi bị phạt bổng một năm.",
+          "e": {
+            "nxp": [
+              "quan",
+              16
+            ],
+            "deed": "bo_thi"
+          }
+        },
+        {
+          "l": "Chờ lệnh trên",
+          "i": "📜",
+          "t": "Lệnh về muộn một tháng. Nhiều người không đợi được.",
+          "e": {
+            "tamma": 5,
+            "nxp": [
+              "quan",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_cuu_doi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_tham_quan",
+      "name": "Quan trên tham",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi có bằng chứng quan trên ăn bớt tiền đắp đê.",
+      "choices": [
+        {
+          "l": "Dâng sớ tố",
+          "i": "📜",
+          "chk": [
+            "nang.giao",
+            13
+          ],
+          "ok": {
+            "t": "Quan trên bị cách chức. Ngươi được thăng.",
+            "e": {
+              "nxp": [
+                "quan",
+                16
+              ],
+              "deed": "quan_thanh_liem"
+            }
+          },
+          "no": {
+            "t": "Sớ bị giữ lại. Ngươi bị điều đi vùng biên.",
+            "e": {
+              "nxp": [
+                "quan",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Giữ bằng chứng làm vốn",
+          "i": "🤫",
+          "t": "Quan trên biết, tự nhiên đối đãi tốt với ngươi.",
+          "e": {
+            "bac": 300,
+            "nxp": [
+              "quan",
+              8
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_tham_quan",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_dai_an",
+      "name": "Đại án",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi xử một vụ án liên quan tới con trai một vị thượng thư.",
+      "choices": [
+        {
+          "l": "Xử đúng luật",
+          "i": "⚖️",
+          "chk": [
+            "nang.giao",
+            16
+          ],
+          "ok": {
+            "t": "Con trai thượng thư bị xử. Ngươi nổi tiếng thanh liêm.",
+            "e": {
+              "nxp": [
+                "quan",
+                25
+              ],
+              "deed": "quan_thanh_liem"
+            }
+          },
+          "no": {
+            "t": "Ngươi xử đúng, nhưng bị giáng chức ngay sau đó.",
+            "e": {
+              "nxp": [
+                "quan",
+                10
+              ],
+              "deed": "quan_thanh_liem"
+            }
+          }
+        },
+        {
+          "l": "Xử nhẹ",
+          "i": "🤝",
+          "t": "Thượng thư ghi nhớ ơn ngươi.",
+          "e": {
+            "bac": 800,
+            "nxp": [
+              "quan",
+              12
+            ],
+            "deed": "tham_o"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_dai_an",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_cai_cach",
+      "name": "Sửa luật thuế",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi có cơ hội dâng phép thuế mới, nhẹ cho dân nghèo, nặng cho nhà giàu.",
+      "choices": [
+        {
+          "l": "Dâng",
+          "i": "📜",
+          "chk": [
+            "ngo",
+            13
+          ],
+          "ok": {
+            "t": "Phép thuế được thi hành ở ba châu.",
+            "e": {
+              "nxp": [
+                "quan",
+                22
+              ]
+            }
+          },
+          "no": {
+            "t": "Bị các nhà quyền thế bác bỏ.",
+            "e": {
+              "nxp": [
+                "quan",
+                8
+              ]
+            }
+          }
+        },
+        {
+          "l": "Thôi",
+          "i": "🤷",
+          "t": "Thuế vẫn như cũ.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_cai_cach",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_loan",
+      "name": "Dân nổi loạn",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Dân một châu nổi loạn vì thuế nặng. Triều đình lệnh ngươi dẹp.",
+      "choices": [
+        {
+          "l": "Đàm phán với dân",
+          "i": "🕊️",
+          "chk": [
+            "nang.giao",
+            16
+          ],
+          "ok": {
+            "t": "Dân hạ giáo. Ngươi xin miễn thuế cho họ ba năm.",
+            "e": {
+              "nxp": [
+                "quan",
+                22
+              ],
+              "deed": "hoa_giai"
+            }
+          },
+          "no": {
+            "t": "Đàm phán đổ vỡ, máu đổ.",
+            "e": {
+              "nxp": [
+                "quan",
+                8
+              ],
+              "tamma": 4
+            }
+          }
+        },
+        {
+          "l": "Dẹp bằng quân",
+          "i": "⚔️",
+          "t": "Loạn tan. Châu ấy hận ngươi ba đời.",
+          "e": {
+            "nxp": [
+              "quan",
+              14
+            ],
+            "tamma": 4
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_loan",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_quan_tu_quan",
+      "name": "Từ quan",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:quan",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Triều chính mục nát. Ngươi muốn từ quan về dạy học.",
+      "choices": [
+        {
+          "l": "Từ quan",
+          "i": "🏡",
+          "t": "Ngươi về quê. Dân tiễn ra tận cổng thành.",
+          "e": {
+            "nxp": [
+              "quan",
+              10
+            ],
+            "tamma": -4
+          }
+        },
+        {
+          "l": "Ở lại gỡ từng việc",
+          "i": "🏛️",
+          "t": "Ngươi ở lại thêm mười năm.",
+          "e": {
+            "nxp": [
+              "quan",
+              16
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/quan.json",
+        "ref": "ng_quan_tu_quan",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

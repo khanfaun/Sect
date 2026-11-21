@@ -58,14 +58,25 @@ function dijkstraAll(nodes,edges,src){
     for(const e of edges){if(e.a!==u&&e.b!==u)continue;const v=e.a===u?e.b:e.a;if(D[u]+e.len<D[v])D[v]=D[u]+e.len;}}
   return D;
 }
-function nodeById(id){const w=W();const R0=w.regions[Math.floor(id/100)];return R0&&R0.nodes[id%100];}
+// mã địa điểm: khu*100+số thứ tự (dưới 90); thế giới mới có hơn 90 nơi mỗi khu nên số thứ tự từ 90 trở đi mã là (khu+1)*1000+số thứ tự
+function idReg(id){return id>=1000?Math.floor(id/1000)-1:Math.floor(id/100);}
+function idIdx(id){return id>=1000?id%1000:id%100;}
+function mkId(k,i){return i<90?k*100+i:(k+1)*1000+i;}
+// loại nơi có dân: thành trấn phàm nhân (tran, thanh) và thành trấn tu sĩ (tutran, tuthanh): ai cũng vào được, khác nhau ở công trình, đồ và việc
+function isTownT(t){return t==='tran'||t==='thanh'||t==='tutran'||t==='tuthanh';}
+function isTuT(t){return t==='tutran'||t==='tuthanh';}
+function isThanhT(t){return t==='thanh'||t==='tuthanh';}
+// nơi có đồ, việc của tu sĩ: thành trấn tu sĩ; ở thế giới sinh từ bản cũ (chưa chia hai loại) thì thành thường vẫn có cả hai
+function isTuK(t){return t==='tutran'||t==='tuthanh'||(t==='thanh'&&!(typeof W==='function'&&W()&&W().v2));}
+function isTuN(n){return !!n&&isTuK(n.type);}
+function nodeById(id){const w=W();const R0=w.regions[idReg(id)];return R0&&R0.nodes[idIdx(id)];}
 function regionOf(k){return W().regions[k];}
 function curNode(){return G.run?nodeById(G.run.at):null;}
 function curDanger(){const n=curNode();return n?n.danger:0;}
-function edgeLen(a,b){const R0=regionOf(Math.floor(a/100));const e=R0.edges.find(e=>(e.a===a&&e.b===b)||(e.a===b&&e.b===a));return e?e.len:Math.round(Math.hypot(nodeById(a).x-nodeById(b).x,nodeById(a).y-nodeById(b).y));}
-function neighbors(id){const R0=regionOf(Math.floor(id/100));return R0.edges.filter(e=>e.a===id||e.b===id).map(e=>e.a===id?e.b:e.a);}
+function edgeLen(a,b){const R0=regionOf(idReg(a));const e=R0.edges.find(e=>(e.a===a&&e.b===b)||(e.a===b&&e.b===a));return e?e.len:Math.round(Math.hypot(nodeById(a).x-nodeById(b).x,nodeById(a).y-nodeById(b).y));}
+function neighbors(id){const R0=regionOf(idReg(id));return R0.edges.filter(e=>e.a===id||e.b===id).map(e=>e.a===id?e.b:e.a);}
 function findPath(from,to){
-  const R0=regionOf(Math.floor(from/100));if(Math.floor(to/100)!==R0.k)return null;
+  const R0=regionOf(idReg(from));if(idReg(to)!==R0.k)return null;
   const D={},P={};for(const n of R0.nodes)D[n.id]=Infinity;D[from]=0;const done=new Set();
   while(true){let u=null;for(const n of R0.nodes)if(!done.has(n.id)&&D[n.id]<Infinity&&(u===null||D[n.id]<D[u]))u=n.id;if(u===null)break;if(u===to)break;done.add(u);
     for(const v of neighbors(u)){const L=D[u]+edgeLen(u,v);if(L<D[v]){D[v]=L;P[v]=u;}}}
@@ -151,7 +162,7 @@ function nodeDanger(n){return n.fog>=2?n.danger:(n.memory?n.danger:(n.rd!=null?n
 function openPlace(id){const r=G.run;const n=nodeById(id==null?r.at:id);r.place={n:n.name,t:n.type};r.scene={type:'place',id:n.id,msg:[],chips:[],intro:placeIntro(n)};}
 function placeIntro(n){
   const t=W().t;let s=T('{canh_'+(P['canh_'+n.type]?n.type:(n.type==='ai'?'nui':n.type==='sao'?'phe':'tran'))+'}');
-  const pt=partOf(t);const town=['tran','thanh','cho','tong','ancu','ai'].includes(n.type);
+  const pt=partOf(t);const town=isTownT(n.type)||['cho','tong','ancu','ai'].includes(n.type);
   // bỏ những câu không hợp chỗ (khói bếp, mái ngói ở nơi hoang vu) hoặc không hợp giờ (nắng, chim én lúc đêm)
   const fit=L=>(L||[]).filter(x=>(town||!/khói bếp|đèn lồng|chó sủa|mái ngói|nước giếng|lúa chín|cơm mới/i.test(x))&&(!(pt==='dem'||pt==='toi')||!/nắng|chim én|ve kêu|nhạn bay|mây trắng/i.test(x)));
   const pp=fit(P['buoi_'+pt]),ss=fit(P['mua_'+seasonOf(t)]);
@@ -167,13 +178,13 @@ function placeActs(n){
   if(t==='ai'){add('cross','🚧',contentText("core_09-ban-do_js.placeActs.011"),0,contentText("core_09-ban-do_js.placeActs.012"));return L;}
   if(t==='sao'){const done=r.bossDone[r.region];add('boss','☠️',done?contentText("core_09-ban-do_js.placeActs.013"):contentText("core_09-ban-do_js.placeActs.014"),1,contentText("core_09-ban-do_js.placeActs.015"),done);add('explore','🔍',contentText("core_09-ban-do_js.placeActs.016"),2,contentText("core_09-ban-do_js.placeActs.017"));return L;}
   add('explore','🔍',contentText("core_09-ban-do_js.placeActs.018"),2,contentText("core_09-ban-do_js.placeActs.019")+(n.danger>=2?contentText("core_09-ban-do_js.placeActs.020"):''));
-  if((t==='tran'||t==='thanh')&&!ruin){
+  if(isTownT(t)&&!ruin){
     add('inn','🛏️',contentText("core_09-ban-do_js.placeActs.021"),8,contentText("core_09-ban-do_js.placeActs.022"),r.st<price(4),'💎'+price(4));
     add('tea','🍵',contentText("core_09-ban-do_js.placeActs.023"),1,contentText("core_09-ban-do_js.placeActs.024")+(svcOpen('tea')?'':contentText("core_09-ban-do_js.placeActs.025")),!svcOpen('tea'));
     if(QUEST_ON)add('board','📜',contentText("core_09-ban-do_js.placeActs.026"),0,contentText("core_09-ban-do_js.placeActs.027"));
   }
-  if(t==='thanh'&&!ruin)add('shop','🏪',contentText("core_09-ban-do_js.placeActs.028"),1,contentText("core_09-ban-do_js.placeActs.029")+(svcOpen('shop')?'':contentText("core_09-ban-do_js.placeActs.030")),!svcOpen('shop'));
-  if(HOURS_ON&&(t==='thanh'||t==='ma')&&!ruin)add('ghost','🏮',contentText("core_09-ban-do_js.placeActs.031"),1,contentText("core_09-ban-do_js.placeActs.032"),!svcOpen('ghost'));
+  if(isTuK(t)&&!ruin)add('shop','🏪',contentText("core_09-ban-do_js.placeActs.028"),1,contentText("core_09-ban-do_js.placeActs.029")+(svcOpen('shop')?'':contentText("core_09-ban-do_js.placeActs.030")),!svcOpen('shop'));
+  if(HOURS_ON&&((isTuK(t)&&t!=='tutran')||t==='ma')&&!ruin)add('ghost','🏮',contentText("core_09-ban-do_js.placeActs.031"),1,contentText("core_09-ban-do_js.placeActs.032"),!svcOpen('ghost'));
   if(t==='tong'){if(!r.flags.tongmon)add('join','⛩️',contentText("core_09-ban-do_js.placeActs.033"),2,contentText("core_09-ban-do_js.placeActs.034"));else add('lib','📚',contentText("core_09-ban-do_js.placeActs.035"),2,contentText("core_09-ban-do_js.placeActs.036"));}
   if(WILD.includes(t)||n.dp||t==='tong')add('tinh','🧘',contentText("core_09-ban-do_js.placeActs.037"),6,contentText("core_09-ban-do_js.placeActs.038"));
   if(n.dp){
@@ -184,7 +195,7 @@ function placeActs(n){
     if(canBreak())add('bt','🌕',r.realm>=4?contentText("core_09-ban-do_js.placeActs.045"):contentText("core_09-ban-do_js.placeActs.046")+REALM[r.realm+1],HM,contentText("core_09-ban-do_js.placeActs.047"),false,'🌕'+btWord(btChance()));
     add('quyan','🍃',contentText("core_09-ban-do_js.placeActs.048"),0,contentText("core_09-ban-do_js.placeActs.049"));
   }
-  if(CACHE_ON&&WILD.concat(['phe','dong','ma','thien']).includes(t))add('bury','⚱️',contentText("core_09-ban-do_js.placeActs.050"),1,contentText("core_09-ban-do_js.placeActs.051"));
+  if(CACHE_ON&&WILD.concat(['phe','dong','ma','thien','bicanh','dongthien','como','yeusao','ditich']).includes(t))add('bury','⚱️',contentText("core_09-ban-do_js.placeActs.050"),1,contentText("core_09-ban-do_js.placeActs.051"));
   if(n.grave&&GRAVE_ON)add('grave','🪦',contentText("core_09-ban-do_js.placeActs.052"),1,contentText("core_09-ban-do_js.placeActs.053"));
   if(n.patron&&GRAVE_ON)add('patron','🤝',contentText("core_09-ban-do_js.placeActs.054"),1,contentText("core_09-ban-do_js.placeActs.055"));
   return L;

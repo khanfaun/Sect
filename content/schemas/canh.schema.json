@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cảnh kể (content/canh/quan-phu.json, content/canh/truy-duoi.json)",
+  "description": "quan_phu: heo1, heo2, truyNa, lamCong, raTu. truy: thu, tac, tu, ke, quy, no, cuop (được dùng {ke} = tên kẻ đuổi). Kiểm đủ (mã có thật, không con số, không tên mới, đủ số lượng) bằng npm run content:gpt.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "loai",
+    "nhom",
+    "canh"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "loai": {
+      "const": "canh"
+    },
+    "nhom": {
+      "enum": [
+        "quan_phu",
+        "truy"
+      ]
+    },
+    "canh": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 3,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "t"
+          ],
+          "properties": {
+            "t": {
+              "type": "string",
+              "minLength": 80
+            },
+            "dk": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "pham": {
+                  "type": "boolean"
+                },
+                "tuoiTu": {
+                  "type": "integer"
+                },
+                "tuoiDen": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

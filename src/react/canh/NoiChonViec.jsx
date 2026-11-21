@@ -16,7 +16,7 @@ export function NoiChonViec({ n, v }) {
             <span className="vn-t"><span className="vn-k">{i + 1}.</span>{o.l}</span>
             <span className="vn-c">
               {!!o.spec && <span className="vn-sp"><Ic n="hour" />còn {PS.durH(o.spec)}</span>}
-              <Cost h={o.h} st={o.st} />
+              <Cost h={o.h} st={o.st} bac={o.bac} />
               {o.req && <span className={'vn-rq' + (o.lack ? ' bad' : '')}>{o.req[2]} {o.req[1]}</span>}
             </span>
           </button>

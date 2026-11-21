@@ -18,10 +18,10 @@ Tàu hải tặc đã đầu hàng đang được tháo bán. Cựu hải tặc 
 
 - **1. Giữ người lại để nghe hết chuyện**
   Ngươi bảo lãnh cho {$a.ten}. Hắn đặt tấm tên úp xuống, chỗ cạnh gỗ còn rỉ nhựa.
-  - `e`: `{"karma":4,"an":["a","đinh giữ tên"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","đinh giữ tên"]}`
 - **2. Giao tấm tên đổi tiền treo**
   Ngươi lấy bạc và hắn bị giữ. Bánh lái vẫn quay được, hở đúng một lỗ đinh.
-  - `e`: `{"st":22,"karma":-3,"oan":["a","đinh giữ tên"]}`
+  - `e`: `{"st":22,"deed":"lua_loi","oan":["a","đinh giữ tên"]}`
 - **3. Bỏ đi**
   Tấm tên bị quăng vào đống gỗ tháo, mặt chữ quay lên.
 
@@ -53,10 +53,10 @@ Cựu hải tặc {$a.ten} kể mình từng giữ lái cho thuyền chạy tho�
 
 - **1. Giúp ghi riêng từng chuyến đã chở người**
   Ngươi theo hắn tìm người làm chứng cho từng chuyến đã cứu nạn. Có chuyến được xác nhận, có chuyến không ai nhớ. Người đòi nợ đồng ý ghi riêng công cứu người, nhưng nói việc cướp tàu vẫn phải xét đủ.
-  - `e`: `{"karma":4,"an":["a","những lần đổi tay"],"h":24}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","những lần đổi tay"],"h":24}`
 - **2. Đòi hắn làm công lái thuyền để trả nợ**
   Người mất tàu có phần công, ngươi có người dẫn lối. Hắn bọc bánh lái bằng vải để khỏi thấy lỗ đinh.
-  - `e`: `{"karma":-1}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   {$b.ten} xin đọc lại đúng một dòng.
 
@@ -91,10 +91,10 @@ Người đòi nợ {$b.ten} đem cháo đến bè vì nhận ra cựu hải t�
 - **1. Dùng tiền treo xin cho hắn ra làm chứng**
   Ngươi bỏ tiền bảo lãnh, xin cho hắn ra đối chứng và nhận trách nhiệm đưa trở lại nếu việc chưa rõ. Người đòi nợ dẫn tới gặp người em từng được hắn cứu. Hắn nghe xong mới biết người ấy còn sống.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4,"an":["a","chỗ tay bấu vào cũi"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","chỗ tay bấu vào cũi"]}`
 - **2. Xin cho hắn trả nợ bằng công thay vì giam**
   Hắn nhận việc lái những chuyến nguy hiểm. {$b.ten} bỏ thêm một bát cháo vào thúng khi tiễn.
-  - `e`: `{"karma":3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **3. Bỏ đi**
   Sóng đánh bè nghiêng. Hai người cùng đưa tay giữ bát.
 
@@ -129,10 +129,10 @@ Một tàu chở khách mắc cạn ngoài cảng, phải bỏ hàng mới có t
 - **1. Ứng tiền đền hàng, cho cắt dây cứu người**
   Ngươi nhận ứng tiền đền phần hàng phải bỏ. Hắn cắt dây, quay mạn đón từng người từ thuyền nhỏ. Người lên cuối hỏi ai mất hàng, hắn bảo cứ lên cho đủ rồi tính.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"deed":"cuu_nguoi"}`
 - **2. Cứu tàu bằng cách bỏ lại thuyền nhỏ**
   Hàng giữ được, người đi thuyền nhỏ được vớt sau một đêm lạnh. Trên mạn tàu còn hai vết móng.
-  - `e`: `{"karma":-1}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Tàu quay được nửa vòng rồi mắc lại, mũi hướng về bờ.
 
@@ -174,7 +174,7 @@ Nếu người được đưa qua trước, họ mang đến một tấm gỗ g�
 - **1. Khắc cả tên người cứu lẫn người chịu thiệt**
   Ngươi chịu phần tiền đền hoặc mất phần thưởng còn lại. Cựu hải tặc {$a.ten} khoan lỗ đinh đầu tiên ở mặt trong.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua bánh lái và thuê hắn đi chuyến mới**
   Ngươi có một tay lái giỏi. Trước khi rời bờ, hắn nhờ người đòi nợ {$b.ten} kiểm lại chỗ thuyền nhỏ đã được buộc.
   - `cost`: `{"st":16}`

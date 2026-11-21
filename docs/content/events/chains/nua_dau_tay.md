@@ -19,10 +19,10 @@ Người mẹ {$a.ten} nhận trước tiền công hai mùa để nuôi con, na
 - **1. Chuộc tờ giấy**
   Ngươi bỏ bạc cho {$c.ten}. {$a.ten} xé phần giấy có dấu mực và giữ lại một mảnh bằng móng tay.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4,"an":["a","giấy bán thân"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","giấy bán thân"]}`
 - **2. Để bà ký và làm chứng**
   {$c.ten} gạch bớt một mùa công để có chữ của ngươi. {$b.ten} nhặt giẻ lau ngón tay mẹ, để lại một vệt đen trên tay mình.
-  - `e`: `{"karma":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Cậu bé bị gỡ tay ra. Lần này dấu ngón cái in trọn dưới giá bạc.
 
@@ -55,10 +55,10 @@ Thoát món nợ cũ, người mẹ {$a.ten} góp tiền công với hàng xóm 
 - **1. Góp một trục gỗ mới**
   Ngươi mua giúp một trục gỗ đủ già để chịu nước. Cậu bé theo thợ lắp từ sáng đến chiều, khắc dấu nửa vòng ở đầu trục để nhớ chiều quay.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Cho họ vay bằng tiền công xay**
   Họ mua đủ gỗ, đổi lại phải xay phần thóc của ngươi trước mỗi phiên. {$a.ten} khâu riêng một bao đựng phần ấy.
-  - `e`: `{"st":14,"karma":-1}`
+  - `e`: `{"st":14,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Cối vẫn chạy bằng trục cũ. Lần cuối ngươi ngoái lại, cậu bé còn ngồi mài cái chốt bị vênh.
 
@@ -92,11 +92,11 @@ Chủ nợ {$c.ten} giữ hết tiền công vì bảo một mùa rét năm ấy
 
 - **1. Đòi trả công theo tờ giấy đã ký**
   Ngươi đem tờ giấy làm chứng ra đối lại ngày công. Chủ nợ phải trả đủ, nhưng đuổi hai mẹ con khỏi cối. Người mẹ nhận tiền, nói sẽ sang bến khác tìm việc; cậu bé xin mang theo chiếc trục hỏng để học sửa.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Trả bạc mua lại mùa công còn thiếu**
   Hai người được về. Cậu bé {$b.ten} vác cả hai túi cám, đi tới cổng mới nhận ra mình vẫn chưa đặt chúng xuống.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **3. Bỏ đi**
   {$c.ten} buộc lại hai miệng túi, rút phần dây thừa bỏ vào tay áo.
 
@@ -131,10 +131,10 @@ Cậu bé {$b.ten} năm xưa đã mở được một kho bột từ tiền xay 
 - **1. Mua bột chia cho dân đói**
   Ngươi trả tiền mua một phần bột phát cho dân. Cậu tự góp thêm, chia mỗi nhà đủ ăn vài ngày để kho vẫn còn hàng bán. Chủ nợ thấy không gom trọn được nữa, thu cân bỏ đi.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"deed":"phat_chan"}`
 - **2. Khuyên cậu bán cho {$c.ten}**
   Cậu có vốn qua mùa sau và chia tiền môi giới cho ngươi. Cậu mở cửa sau cho người tới quét nền kho, nơi bột còn đọng trong kẽ gạch.
-  - `e`: `{"st":14,"karma":-3}`
+  - `e`: `{"st":14,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Cậu xin dân chờ để tính lại lượng bột. Người mua chịu đứng thành hàng trước kho; không ai muốn về tay không.
 
@@ -178,7 +178,7 @@ Nếu ngươi từng chia bột cứu đói, dân qua vụ mới đem quà tới
 - **1. Đứng tên bảo cho người mua chịu**
   Ngươi đặt tiền bảo lãnh cho những nhà chưa trả được ngay. Cậu ghi rõ hạn và số bột từng nhà, mẹ cậu ngồi bên đọc lại để không ai bị tính nhầm.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Nhận tiền công xem giúp sổ sách**
   Ngươi kiểm lại sổ thu chi và chỉ cậu cách để riêng tiền mua thóc giống. Hai mẹ con trả công đã thỏa thuận. Khoản giúp dân năm trước được ghi là cho tặng, không tính thành nợ.
   - `e`: `{"st":14}`

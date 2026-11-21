@@ -19,10 +19,10 @@ Người giữ đèn {$a.ten} châm một ngọn soi xuống đường lui, tron
 - **1. Góp dầu để giữ cả hai lối**
   Ngươi mua thêm dầu giữ cả đèn lên lẫn đèn xuống. Người giữ đèn thắp thử hai ngọn, tu sĩ nhìn rõ đường rồi mới khởi hành. Lão dặn hắn nhớ vị trí ngọn đèn thấp, đi xa còn biết chỗ quay về.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Đổ dầu vào đèn đi lên**
   Ngươi và {$b.ten} thấy rõ đường. Sau lưng, {$a.ten} ép bấc tắt xuống đĩa.
-  - `e`: `{"karma":-2}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Có người từ trên cao gõ ba tiếng vào lan can, phía dưới không đáp.
 
@@ -54,10 +54,10 @@ Tu sĩ {$b.ten} quay lại vì muốn xuống thăm người nhà. Hắn chưa b
 
 - **1. Dẫn hắn xuống đoạn đầu**
   Ngươi dẫn hắn xuống đoạn đầu, lỡ cửa lên mở trong ngày. Tới chỗ tự nhận ra đường, hắn hạ đèn, cảm tạ rồi đi tiếp. Người giữ đèn rủ ngươi về trạm chờ lượt sau.
-  - `e`: `{"karma":4,"h":24,"an":["a","người mang đèn bằng hai tay"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":24,"an":["a","người mang đèn bằng hai tay"]}`
 - **2. Đổi đường về riêng lấy ngọn đèn chung**
   Ngươi chỉ cho hắn một lối riêng về nhà, nhận ngọn đèn của trạm làm vật dẫn đường. Hắn có thể đi, nhưng khách tới sau không còn đèn dùng chung. Người giữ đèn đứng chờ ngươi trả, ngươi không hẹn ngày.
-  - `e`: `{"karma":-1,"namedRelic":{"k":"dang","name":"Đèn Dẫn Đường Chung","lore":"Ngươi chỉ cho hắn một lối riêng về nhà, nhận ngọn đèn của trạm làm vật dẫn đường. Hắn có thể đi, nhưng khách tới sau không còn đèn dùng chung. Người giữ đèn đứng chờ ngươi trả, ngươi không hẹn ngày."}}`
+  - `e`: `{"hd":{"t":1},"namedRelic":{"k":"dang","name":"Đèn Dẫn Đường Chung","lore":"Ngươi chỉ cho hắn một lối riêng về nhà, nhận ngọn đèn của trạm làm vật dẫn đường. Hắn có thể đi, nhưng khách tới sau không còn đèn dùng chung. Người giữ đèn đứng chờ ngươi trả, ngươi không hẹn ngày."}}`
 - **3. Bỏ đi**
   Hắn chậm rãi hạ tay. Vết cháy trên áo còn bốc một sợi khói.
 
@@ -91,10 +91,10 @@ Tu sĩ {$b.ten} muốn xuống nhưng chỉ nhớ hướng ngọn lửa từng t
 
 - **1. Chia lửa hộ thân cho hắn thử lại**
   Ngươi truyền linh hỏa vào nét đường hắn đã vạch. Hơi lạnh phản lại làm ngực đau nhói, ngươi vẫn giữ tới khi hắn tìm được lối thật. Hắn gọi thêm người theo xuống, còn ngươi ở lại dưỡng khí.
-  - `e`: `{"karma":4,"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"hp":"-10%"}`
 - **2. Bán cho hắn một lối xuống riêng**
   Hắn trả bằng vật đã lấy ở tầng trên. Người theo sau hỏi đường, ngươi chỉ thấy bàn tay hắn khép lại.
-  - `e`: `{"karma":-3,"relic":0}`
+  - `e`: `{"deed":"lua_loi","relic":0}`
 - **3. Bỏ đi**
   Hắn đặt lòng bàn tay lên đá, chờ hơi ấm vạch đường.
 
@@ -128,10 +128,10 @@ Một đoàn tu sĩ muốn quay xuống sau khi cửa lên khép. Nếu từng c
 
 - **1. Đốt một phần đạo hạnh dựng đường lui chung**
   Ngươi dùng một phần tu vi mở đường lui cho cả đoàn. Người biết lối xuống đi trước dẫn đường, người khỏe dìu người yếu. Khi đường khép, tu sĩ cuối đã về tới trạm; ngươi ngồi xuống dưỡng thần.
-  - `e`: `{"karma":4,"tv":-4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tv":-4}`
 - **2. Gom lễ vật rồi mở đường theo lượt**
   Ngươi có linh thạch, chỉ người trả đủ được qua trước khi ánh tắt. Bên mép đá còn một túi vải rỗng.
-  - `e`: `{"st":30,"karma":-3}`
+  - `e`: `{"st":30,"hd":{"t":3},"ng":{"b":1}}`
 - **3. Bỏ đi**
   Người giữ đèn {$a.ten} nhấc một đĩa không dầu. Đám người vẫn dạt sang hai bên cho lão qua.
 
@@ -173,7 +173,7 @@ Nếu từng mở đường chung, người về góp dầu đặt đèn mới. 
 - **1. Trao phần dầu hoặc lễ vật cho người giữ đèn {$a.ten}**
   Lão giữ lửa cho người đi hai chiều. Bấc cắt thành hai đầu, đầu quay xuống cháy trước.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Dựng lối có người trông bằng phí qua đường**
   Đường giữ được lâu và ngươi có phần thu. {$b.ten} chừa dưới đèn một bậc cho người chưa trả nghỉ chân.
   - `e`: `{"st":30}`

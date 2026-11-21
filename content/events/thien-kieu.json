@@ -252,7 +252,7 @@
         },
         {
           "i": "🙇",
-          "l": "Nhường",
+          "l": "Nhường, không lên đấu",
           "t": "Ngươi tránh đường. {$rv.ten} cười khẩy.",
           "e": {
             "tamma": 2
@@ -260,8 +260,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -338,8 +338,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -409,7 +409,7 @@
       "choices": [
         {
           "i": "⚔️",
-          "l": "Tranh",
+          "l": "Tranh lấy bảo vật",
           "fight": {
             "k": "kiemtu",
             "n": "{$rv.ten}",
@@ -458,13 +458,18 @@
           "t": "Ngươi để lại cho {$rv.hn}.",
           "e": {
             "rival": 1,
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -537,7 +542,7 @@
             "e": {
               "rival": 2,
               "tv": 6,
-              "karma": 4
+              "deed": "cuu_nguoi"
             }
           }
         },
@@ -551,8 +556,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {

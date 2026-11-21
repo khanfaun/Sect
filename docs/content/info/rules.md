@@ -351,7 +351,7 @@ Nguồn: `content/rules/upg.js`
       12,
       30
     ],
-    "d": "Đầu thai rút thêm một tiên thiên khí vận"
+    "d": "Cứ bốn kiếp được một lần tự chọn lá số khi đầu thai, bậc 2 thì ba kiếp"
   },
   {
     "id": "tho",
@@ -366,17 +366,6 @@ Nguồn: `content/rules/upg.js`
       28
     ],
     "d": "Thọ nguyên +6% mỗi bậc"
-  },
-  {
-    "id": "ky",
-    "n": "Ký ức công pháp",
-    "i": "📖",
-    "max": 2,
-    "c": [
-      10,
-      26
-    ],
-    "d": "Đầu thai mang theo pháp thuật bậc 1, bậc 2 thì là bậc 2"
   },
   {
     "id": "nhan",
@@ -430,17 +419,6 @@ Nguồn: `content/rules/upg.js`
       16
     ],
     "d": "Thêm 2 ô đan dược mỗi bậc"
-  },
-  {
-    "id": "kytp",
-    "n": "Khắc tâm pháp vào chân linh",
-    "i": "🪷",
-    "max": 2,
-    "c": [
-      12,
-      28
-    ],
-    "d": "Đầu thai nhớ lại tâm pháp tốt nhất kiếp trước: bậc 1 giảm một phẩm (tối đa Hoàng phẩm), bậc 2 giữ nguyên phẩm (tối đa Huyền phẩm)"
   }
 ]
 ```
@@ -484,12 +462,12 @@ Nguồn: `content/rules/ach.js`
   {
     "id": "thien",
     "n": "Thiện nhân",
-    "d": "Nhân quả từ +60 trở lên."
+    "d": "Chính tâm kiên định, ân nghĩa sâu dày."
   },
   {
     "id": "ma",
     "n": "Ma đầu",
-    "d": "Nhân quả từ −60 trở xuống."
+    "d": "Tà niệm ăn sâu, nghiệp hải trùng trùng."
   },
   {
     "id": "toahoa",

@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 1,
+  "id": "OR20",
+  "loai": "xuat_than",
+  "ten": "Bậc cửa nghe tiếng khóc",
+  "xuatThan": "xt_dua_tre_nhat_o_bac_cua",
+  "goiYDaiLo": [
+    "huyet_cuu"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Bậc cửa nơi ngươi được nhặt",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Hàng xóm nhớ tiếng trẻ khóc dưới bậc cửa có móc treo đèn. Cánh cửa ấy vẫn còn vết cháy. Người nuôi ngươi lấy từ hòm ra chiếc tã từng nhặt ở đó.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Hỏi ai nghe tiếng khóc trước",
+          "t": "Ngươi chép lời người hàng xóm đã gọi nhà nuôi ra đón trẻ, rồi so với vết cháy họ chỉ.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Vẽ dấu móc lên giấy",
+          "t": "Ngươi chép hình móc và hướng cửa để còn đối với lời người đem trẻ đến.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Cùng người nuôi mở hòm",
+          "t": "Ngươi hỏi ai giữ tã qua các mùa ẩm và chép thứ họ muốn được giữ.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cánh cửa được thay móc mới, tã cũ vẫn nằm trong hòm.",
+        "su": "Cánh cửa được thay móc mới, tã cũ vẫn nằm trong hòm.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Nhãn thuốc cho thấy có người từng cứu ngươi",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "{NP19} đọc nhãn đã mềm ở {LOC10}. Đơn ghi có người tìm thuốc cho một đứa trẻ khó thở. Ngày cấp thuốc ngay trước hôm nhà nuôi nghe tiếng khóc.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối nhãn với đơn đã cấp",
+          "t": "Ngươi xác nhận có người mua thuốc cứu đứa trẻ trước khi gửi nó đi.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin giữ lời người kê thuốc",
+          "t": "Ngươi chép lời người từng xem bệnh và giữ tên người nuôi ngoài bản tra.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi dấu người đã nhận thuốc",
+          "t": "Ngươi xin một dấu đối chứng để người mang thuốc có thể nhận đúng mình.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Nhãn được hong rồi cất, ngày cấp thuốc chưa được ghi ra.",
+        "su": "Nhãn được hong rồi cất, ngày cấp thuốc chưa được ghi ra.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Một thân phận có hai dòng ghi khác nhau",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Sổ hộ {LOC02} ghi một đứa trẻ mất dấu đúng hôm bia {LOC04} thêm mục vô danh. Dấu trên đơn thuốc khớp ghi chú bên ngày ấy. Hai người giữ sổ sẵn lòng cho ngươi đối tên.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối bia và mục hộ cũ",
+          "t": "Ngươi xác định tên gốc bị đổi trong lần chép lại, sao cả phần nhà nuôi.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tra điều kiện tài sản của tên gốc",
+          "t": "Ngươi xin sao mục chia gia sản và ghi ngày người nhận phải tới so dấu.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Chép riêng hai dòng để giữ kín",
+          "t": "Ngươi trao bản cho hai người giữ sổ, chỉ ghi dấu tra thay cho tên nhà nuôi.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mục vô danh vẫn để riêng, giấy ghi hộ không được đối với bia.",
+        "su": "Mục vô danh vẫn để riêng, giấy ghi hộ không được đối với bia.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Gặp người gửi hay giữ kín?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Người từng mang thuốc đợi ở {LOC04}. Người nuôi mang tới chiếc tã cũ. Ngoài chuyện nhận nhau, ngươi còn phải quyết có nhận tài sản gắn với tên gốc hay không.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Gặp người gửi cùng người nuôi",
+          "t": "Hai bên nhận ra dấu tã, rồi tự chọn cách qua lại và ghi tên cùng nhau.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận tên gốc trước bàn thừa kế",
+          "t": "Ngươi so dấu theo kỳ và ký nhận phần tài sản đi với tên gốc.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ tên riêng và nhận coi cửa trú",
+          "t": "Ngươi giữ kín người gửi, nhận coi chỗ trú cho những đứa đến sau trận nước.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cuộc gặp khép lại, hai bên mang đồ của mình về.",
+        "su": "Cuộc gặp khép lại, hai bên mang đồ của mình về.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Tài sản theo tên cũ, tình nhà theo ai?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Bàn nhận tài sản ở {LOC01} kê cả quyền thừa kế và nghĩa vụ. Người nuôi đặt tã cạnh nhãn thuốc. Ngoài hiên, một đứa trẻ mới đang chờ xin ngủ nhờ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi thỏa thuận của hai nhà",
+          "t": "Ngươi để hai bên tự ký phần qua lại, giữ cả tã lẫn nhãn trong hòm.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Chốt tài sản và ghi phần người mất",
+          "t": "Ngươi lĩnh phần đúng tên gốc rồi ghi lời người bị giảm phần trong biên nhận.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Bỏ quyền ép nhận họ, giữ chỗ trú qua mùa lũ",
+          "t": "Ngươi bỏ quyền ép người khác nhận quan hệ họ hàng. Qua đợt nước, ngươi giữ chỗ trú cho những đứa trẻ mới tới.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Phần tài sản chờ người đến so dấu, người trú tự tìm một mái khác.",
+        "su": "Phần tài sản chờ người đến so dấu, người trú tự tìm một mái khác.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Hai mái nhà",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Chiếc tã và nhãn thuốc nằm trong cùng một hòm. Người nuôi giữ chỗ qua lại đã tự chọn, còn người gửi chỉ tới khi có lời mời. Ngươi mở hòm cho cả hai xem mà không phải dời thứ nào ra ngoài.",
+      "su": "Hai nhà đã gặp và giữ thỏa thuận qua lại tự nguyện.",
+      "dauVong": "một hòm có cả nhãn thuốc và tã mà người nuôi từng giữ."
+    },
+    {
+      "id": "B",
+      "ten": "Tên cũ nhận gia tài",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Phần tài sản được giao sau khi tên gốc đối đúng dấu. Người mất một phần giữ bản kê và lời mình đã nói. Khi ngươi đem giấy về nhà nuôi, chiếc tã vẫn nằm đúng chỗ, gập theo nếp mà ngươi nhớ.",
+      "su": "Tài sản theo tên gốc đổi chủ sau kỳ so dấu.",
+      "dauVong": "biên nhận còn lời người chịu giảm phần khi {ten} nhận gia tài."
+    },
+    {
+      "id": "C",
+      "ten": "Cửa mở cho trẻ khác",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Qua đợt nước, cửa giữ được một chỗ khô cho những đứa không ai tới nhận. Chúng có thể ghi tên sau khi chọn được người muốn gọi. Người nuôi ngươi vẫn đem chăn tới đúng bậc cửa từng nghe tiếng khóc.",
+      "su": "Chỗ trú giữ được người qua nước mà không buộc họ đổi tên.",
+      "dauVong": "một người lớn còn nhớ bậc cửa mở suốt một đêm nước lên."
+    }
+  ],
+  "ngoai": "Phần tài sản chờ người đến so dấu, người trú tự tìm một mái khác."
+}

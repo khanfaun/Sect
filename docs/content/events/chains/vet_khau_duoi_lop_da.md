@@ -19,10 +19,10 @@ Trước lúc khép lò, người luyện thi {$a.ten} thấy một mũi kim ch�
 - **1. Ngừng luyện và giữ kim để hỏi**
   Ngươi bù phí phôi. Mũi chỉ tự rút một nửa rồi dừng.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":4,"tamma":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tamma":-3}`
 - **2. Cho luyện tiếp để đổi bí quyết**
   Ngươi có khẩu quyết giữ thi. {$b.ten} đem theo cái kim mà không ai nghĩ tới việc đòi lại.
-  - `e`: `{"karma":-3,"tamma":4,"skill":1}`
+  - `e`: `{"hd":{"t":3},"ng":{"b":1},"tamma":4,"skill":1}`
 - **3. Bỏ đi**
   Lò khép. Ở mép nắp còn lòi ra một đầu chỉ.
 
@@ -54,10 +54,10 @@ Thi thể tự khâu một cái túi vào vải liệm. Người em {$b.ten} nh�
 
 - **1. Cho thi thể chọn vật mang theo**
   Ngươi giữ thi thức thêm một đêm, để nó tự chọn đồ mang theo. Nó bỏ hạt ngô ra, cất nút áo vào túi rồi khâu miệng túi lại. Người em nói đó là nút áo mẹ từng đơm cho anh.
-  - `e`: `{"karma":4,"tamma":-3,"h":24}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tamma":-3,"h":24}`
 - **2. Dùng túi để chuyển linh vật qua vách**
   Ngươi lấy được một vật bị kẹt trong lò. Khi trở về, tay áo ngươi có thêm một đường chỉ ngược.
-  - `e`: `{"karma":-2,"tamma":3,"item":"story_item_vet_khau_duoi_lop_da_2"}`
+  - `e`: `{"hd":{"t":1},"tamma":3,"item":"story_item_vet_khau_duoi_lop_da_2"}`
 - **3. Bỏ đi**
   {$b.ten} sờ cái túi đến khi nút áo ấm lên.
 
@@ -91,11 +91,11 @@ Thi thể vâng lệnh mọi người, riêng khi người em {$b.ten} gọi th�
 
 - **1. Thuyết phục người luyện thi tháo phù chủ**
   Ngươi nhắc thi thể vẫn nhận ra người nhà, ở lại nói tới khi lão chịu tháo phù chủ. Nó quay đúng về phía người em, đưa tay đòi chiếc kim. Người em đứng im một lúc mới dám trao.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua quyền ra lệnh cho nó**
   Nó theo ngươi, đổi lại {$b.ten} xin được tự mang kim theo. Mỗi lúc nghỉ, nó ngồi quay mặt về phía tiếng kim chạm đá.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":-4,"tamma":4}`
+  - `e`: `{"hd":{"t":3},"ng":{"b":3},"tamma":4}`
 - **3. Bỏ đi**
   Người luyện thi gọi tiếp. Bàn chân thi thể quay trước, cổ quay sau.
 
@@ -130,11 +130,11 @@ Thi thể khâu mình vào vách để khỏi bị mang đi. Nếu từng đư�
 - **1. Cắt chỉ và chống thi trận của người luyện thi {$a.ten}**
   - `fight`: `{"k":"luyenthi","n":"{$a.ten}"}`
   - **Thắng trận**: Ngươi tháo trận, để thi thể tự rút những mũi chỉ cuối rồi chọn nơi nằm.
-    `{"e":{"karma":4}}`
+    `{"e":{"hd":{"p":3},"ng":{"g":3}}}`
   - **Thua trận**: Thua, ngươi bị trận đánh bật, chỉ cắt được một vòng; người em phải giữ cổ tay còn mắc trong vách để nó không bị kéo sâu thêm.
 - **2. Thương lượng để người luyện thi rút trận**
   Lão đồng ý rút trận nếu được giữ phần cốt dùng tụ linh khí. Người em nhận lời để cứu anh khỏi vách, nhưng bàn tay thi thể nhẹ đi rõ rệt. Nó vẫn giữ được chiếc kim.
-  - `e`: `{"karma":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Từng mũi chỉ chìm sâu, mặt đá khép lại ở chỗ sau cùng.
 
@@ -175,10 +175,10 @@ Nếu ngươi đã thắng thi trận, thi thể tự đi tới dốc an táng t
 
 - **1. Chôn cả kim lẫn phần cốt còn lại**
   Ngươi cùng người em chôn cả kim và bộ cốt, canh tới khi thi khí tan hết. Hắn kể xong chuyện nhà, xin ngươi để mình ở lại thêm một lúc.
-  - `e`: `{"karma":4}`
+  - `e`: `{"deed":"an_tang"}`
 - **2. Giữ kim để nhận ra thi thức còn sống**
   Ngươi có một vật thử thi. Người em {$b.ten} xin chỉ một đoạn chỉ, đủ quấn qua ngón tay.
-  - `e`: `{"karma":-1,"item":"story_item_vet_khau_duoi_lop_da_4"}`
+  - `e`: `{"hd":{"t":1},"item":"story_item_vet_khau_duoi_lop_da_4"}`
 - **3. Bỏ đi**
   Ngươi lui ra khỏi dốc. Người em ngồi cạnh gối đá, kể tiếp câu chuyện đang dang dở.
 

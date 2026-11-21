@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "vo_gia",
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Sân tập còn sáng",
+      "t": "Sau tang lễ, những người từng học võ ở sân ngươi thay nhau mở cửa. Một người già đến xin họ hộ tống sang chợ, còn một đứa trẻ ngồi ngoài thềm đợi được tập. Không ai lấy việc ngươi đã khuất làm cớ khóa sân.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Bảng danh và giấy đòi nợ",
+      "t": "Ngày ngươi mất, người trong giang hồ đem tới nhiều bảng tên. Chủ quán từng phải trả tiền mới được yên lại mang giấy đòi phần đã nộp. Người giữ võ quán phải đọc giấy ấy trước khi nhận chiếc ghế của ngươi.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Đường qua võ quán cũ",
+      "t": "Mấy người từng được ngươi hộ tống ghé đứng bên mộ. Một người mang gậy tới sân tập, tìm người mới dẫn mình qua dốc. Họ vẫn nhớ ngươi thường đợi khách buộc xong dép mới thúc bước.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Một người nhớ lời hẹn",
+      "t": "Ngươi qua đời ở quán nghỉ, thanh binh khí đặt bên vách. Người gác cửa biết tin liền gửi thư về quê cho ngươi. Họ từng chỉ đi cùng ngươi một quãng nhưng vẫn nhớ lời hẹn sẽ giúp báo tin nếu ai gặp nạn."
+    }
+  ]
+}

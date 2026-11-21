@@ -1,8 +1,12 @@
 // ---------------- THỜI GIAN & THẾ GIỚI ----------------
 function pushNews(t,quiet){const r=G.run;if(!r)return;if(TICK_OUT&&!quiet)TICK_OUT.push(t);r.news.push({a:Math.floor(r.age),t});if(r.news.length>40)r.news.shift();r.newsQ=(r.newsQ||[]);r.newsQ.push(t);if(r.newsQ.length>4)r.newsQ.shift();}
+// tin đồn chỉ nhắc nơi có thật (ưu tiên đại khu đang đứng); nghe xong thì biết tên nơi đó trên bản đồ. Không có nơi hợp thì nói chung chung.
+function rumorPl(){try{const r=G.run,w=W();const T=['nui','phe','hoang','song','thanh','tuthanh','como','ditich'];
+  const all=w.regions.flatMap(R=>R.nodes).filter(n=>T.includes(n.type)&&n.state!=='ruin');const gan=r?all.filter(n=>n.r===r.region):[];
+  const L=gan.length?gan:all;if(!L.length)return contentText('rumor.noiXa');const n=pick(L);if(typeof hearOf==='function')hearOf(n);return n.name;}catch(e){return contentText('rumor.noiXa');}}
 function rumorV(rv,extra){
   const w=G.meta.world, wr=w.rivals[rv.i];
-  return Object.assign({a:wr.ten,s:w.sects[wr.s].n,s2:pick(w.sects).n,pl:placeName(pick(['nui','phe','hoang','song','thanh'])),cg:REALM[rv.realm],dan:PILL[pick(['trucco','ngungkim','phaanh','hoathan'])].n},extra||{});
+  return Object.assign({a:wr.ten,s:w.sects[wr.s].n,s2:pick(w.sects).n,pl:rumorPl(),cg:REALM[rv.realm],dan:PILL[pick(['trucco','ngungkim','phaanh','hoathan'])].n},extra||{});
 }
 function worldTick(dy){
   const r=G.run,w=G.meta.world;if(!r)return;
@@ -80,7 +84,7 @@ function applyE(e,v){
   if(e.an){const [k,d]=Array.isArray(e.an)?e.an:[e.an,contentText("core_05-thoi-gian-the-gioi_js.applyE.040")];const n=v&&v[k];if(n&&n.ten){r.seeds.push({t:'an',ten:n.ten,hn:n.hn,d,r:r.region,at:G.meta.world.t});ch.push(chip('🤝',contentText("core_05-thoi-gian-the-gioi_js.applyE.041"),contentText("core_05-thoi-gian-the-gioi_js.applyE.042"),'up'));}}
   if(e.oan){const [k,d]=Array.isArray(e.oan)?e.oan:[e.oan,'hại']; const n=v&&v[k];if(n&&n.ten){r.seeds.push({t:'oan',ten:n.ten,hn:n.hn,d,r:r.region,at:G.meta.world.t});ch.push(chip('🗡️',contentText("core_05-thoi-gian-the-gioi_js.applyE.043"),contentText("core_05-thoi-gian-the-gioi_js.applyE.044"),'dn'));}}
   if(e.rumor){for(let i=0;i<e.rumor;i++){pushNews(contentRumor());}ch.push(chip('🍃',contentText("core_05-thoi-gian-the-gioi_js.applyE.045"),contentText("core_05-thoi-gian-the-gioi_js.applyE.046"),'')); r.showNews=e.rumor;}
-  if(e.rival){const rv=r.rivals.find(x=>x.i===(v&&v.rvi));if(rv){rv.rel+=e.rival;ch.push(chip('🤝',e.rival>0?contentText("core_05-thoi-gian-the-gioi_js.applyE.047"):contentText("core_05-thoi-gian-the-gioi_js.applyE.048"),contentText("core_05-thoi-gian-the-gioi_js.applyE.049"),e.rival>0?'up':'dn'));}}
+  if(e.rival){const rv=r.rivals.find(x=>x.i===(v&&v.rvi));if(rv){rv.rel+=e.rival;if(typeof favPop==="function"){const rw=(G.meta.world.rivals||[])[rv.i];if(rw&&rw.ten)favPop(rw.ten,e.rival*10);}ch.push(chip('🤝',e.rival>0?contentText("core_05-thoi-gian-the-gioi_js.applyE.047"):contentText("core_05-thoi-gian-the-gioi_js.applyE.048"),contentText("core_05-thoi-gian-the-gioi_js.applyE.049"),e.rival>0?'up':'dn'));}}
   clampHp();
   return ch;
 }
@@ -96,7 +100,7 @@ function relicLorePool(name){const soft=/Phất Trần|Trượng|Phiến|Quạt|
 function genRelic(tier){
   const r=G.run;const K=pick(RELIC_K);
   let el,base;
-  if(K.k==='hap'){el=chance(.7)?pick(r.root.els):pick(['kim','moc','thuy','hoa','tho','loi']);base={kim:contentText("core_05-thoi-gian-the-gioi_js.genRelic.054"),moc:contentText("core_05-thoi-gian-the-gioi_js.genRelic.055"),thuy:contentText("core_05-thoi-gian-the-gioi_js.genRelic.056"),hoa:'Phiến',tho:contentText("core_05-thoi-gian-the-gioi_js.genRelic.057"),loi:contentText("core_05-thoi-gian-the-gioi_js.genRelic.058"),bang:contentText("core_05-thoi-gian-the-gioi_js.genRelic.059"),phong:'Phong Linh'}[el];}
+  if(K.k==='hap'){el=chance(.7)&&r.root.els.length?pick(r.root.els):pick(['kim','moc','thuy','hoa','tho','loi']);base={kim:contentText("core_05-thoi-gian-the-gioi_js.genRelic.054"),moc:contentText("core_05-thoi-gian-the-gioi_js.genRelic.055"),thuy:contentText("core_05-thoi-gian-the-gioi_js.genRelic.056"),hoa:'Phiến',tho:contentText("core_05-thoi-gian-the-gioi_js.genRelic.057"),loi:contentText("core_05-thoi-gian-the-gioi_js.genRelic.058"),bang:contentText("core_05-thoi-gian-the-gioi_js.genRelic.059"),phong:'Phong Linh'}[el];}
   else {el=chance(.45)?'vo':pick(NGUHANH);base=pick(K.b);}
   const pre=pick(RELIC_PRE[el]||RELIC_PRE.vo);
   const who=genName(chance(.5)?'nam':'nu');

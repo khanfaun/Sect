@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "ban_dong_doi",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Người trở về chống gậy",
+      "t": "Người đồng đội ngươi bỏ lại giữa hiểm cảnh đã sống nhờ một đoàn xa lạ cứu. Họ chống gậy tìm tới để hỏi ngươi đã báo người khác quay lại hay chưa. Trên gậy còn buộc mảnh băng của bộ áo cũ.",
+      "c": [
+        {
+          "id": "ke",
+          "l": "Trả lời trước mặt người từng cứu họ",
+          "t": "Ngươi kể mình đã đi đâu sau khi bỏ họ lại. Người đồng đội nhớ từng đoạn và hỏi đến khi rõ.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "dua",
+          "l": "Đề nghị đưa họ tới chỗ bó xương",
+          "t": "Họ chỉ gật khi được tự chọn đường. Ngươi đi kế bên, chờ họ tự bước qua từng bậc.",
+          "e": {
+            "h": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Hòm đồ chưa có người nhận",
+      "t": "Một người gác trạm mang hòm của đồng đội ngươi từng bỏ. Trong hòm còn thư chưa gửi và một chiếc áo để riêng cho người nhà. Họ hỏi ngươi có thể tìm đúng người nhận thay vì để hòm mục ngoài hiên.",
+      "c": [
+        {
+          "id": "giao",
+          "l": "Đem hòm đến và kể đúng ngày chia tay",
+          "t": "Ngươi trao hòm còn niêm. Khi người nhà hỏi, ngươi nói lúc rời đi họ vẫn còn bị thương.",
+          "e": {
+            "h": 5,
+            "tamma": 1
+          }
+        },
+        {
+          "id": "doc",
+          "l": "Cho người gác địa chỉ của gia đình",
+          "t": "Ngươi chép địa chỉ để họ gửi hòm. Người gác đọc lại từng chữ rồi đặt giấy dưới dây buộc."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Người đi cùng chọn đứng lại",
+      "t": "Một người từng nghe chuyện ngươi bỏ đồng đội nhận ra ngươi khi xếp đoàn. Họ chỉ người đang đau chân rồi nói nếu phải bỏ người giữa đường thì họ thà ở lại. Người coi đoàn đợi ngươi trả lời.",
+      "c": [
+        {
+          "id": "cung",
+          "l": "Chờ với người bị đau chân",
+          "t": "Ngươi chờ cho họ nghỉ và tới chặng sau muộn hơn đoàn. Người ấy tự đi được phần đường còn lại.",
+          "e": {
+            "h": 6
+          }
+        },
+        {
+          "id": "tach",
+          "l": "Để họ tự chọn đoàn khác",
+          "t": "Ngươi không giữ họ bằng lời hứa. Họ tìm xe chậm hơn để người bị đau có thể theo cùng."
+        }
+      ]
+    }
+  ]
+}

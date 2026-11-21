@@ -35,7 +35,12 @@
           "t": "{$a.ten} cảm ơn rối rít, còn kể cho ngươi nghe chuyện vừa thấy dọc đường.",
           "e": {
             "rumor": 1,
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -95,13 +100,13 @@
         }
       },
       "text": [
-        "{$en} đi cùng hướng với ngươi. Đường dài, {$a.hn} bắt chuyện cho đỡ buồn.",
+        "{$en} đi cùng hướng với ngươi. Qua đoạn dốc, {$a.hn} hỏi ngươi có biết quán nước nào ở phía trước không.",
         "Trời sắp tối. {$en} đề nghị đốt chung một đống lửa bên đường cho đỡ sợ thú dữ."
       ],
       "choices": [
         {
           "i": "🔥",
-          "l": "Ngồi cùng nghỉ chân",
+          "l": "Nghỉ chân cùng người đi đường",
           "t": "Hai người chia nhau miếng lương khô. {$a.ten} kể chuyện quê nhà, ngươi nghe mà lòng nhẹ đi.",
           "e": {
             "h": 6,
@@ -119,8 +124,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -182,7 +187,7 @@
           "l": "Cho một viên đan hồi khí huyết",
           "t": "Một lúc sau {$a.ten} hồng hào trở lại, run run lạy ngươi một lạy.",
           "e": {
-            "karma": 6,
+            "deed": "cuu_nguoi",
             "an": [
               "a",
               "cứu mạng giữa đường"
@@ -200,7 +205,7 @@
           },
           "t": "Chân khí ấm áp chạy vào kinh mạch người phàm. {$a.ten} đỡ hẳn, cảm kích không thôi.",
           "e": {
-            "karma": 4,
+            "deed": "cuu_nguoi",
             "an": [
               "a",
               "truyền chân khí cứu giúp"
@@ -272,7 +277,7 @@
       "choices": [
         {
           "i": "⚔️",
-          "l": "Ra tay",
+          "l": "Chống lại kẻ cướp",
           "fight": {
             "k": "sontac",
             "cnt": 2
@@ -362,7 +367,7 @@
           "t": "{$a.ten} mừng như bắt được vàng, nhất quyết biếu ngươi chút lộ phí.",
           "e": {
             "st": 6,
-            "karma": 5
+            "deed": "giu_loi"
           }
         },
         {
@@ -371,13 +376,16 @@
           "t": "Trong túi có ít bạc vụn và một lá thư nhà. Ngươi lặng lẽ rẽ sang lối khác.",
           "e": {
             "st": 10,
-            "karma": -5
+            "deed": "trom_ngheo",
+            "deedO": {
+              "yd": "phot_lo"
+            }
           }
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -463,8 +471,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {

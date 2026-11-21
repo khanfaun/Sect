@@ -25,7 +25,7 @@
         }
       },
       "text": [
-        "{$en} chặn ngươi lại. Kẻ cầm đầu, {$a.ten}, hỏi: “Từ đâu tới? Tới đây làm gì?”"
+        "{$en} chặn ngươi lại. Người dẫn đội là {$a.ten}, muốn biết ngươi từ đâu tới và định làm gì."
       ],
       "choices": [
         {
@@ -76,8 +76,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -131,7 +131,7 @@
         }
       },
       "text": [
-        "{$a.ten} của {$en} nhìn ngươi đầy hứng thú: “Đạo hữu có vẻ không tầm thường. Thử vài chiêu chứ?”"
+        "{$a.ten} của {$en} nhìn ngươi rồi lùi lại, chừa khoảng đất trống. “Thử vài chiêu chứ?”"
       ],
       "choices": [
         {
@@ -230,7 +230,9 @@
             "t": "Ngươi phá vây mà đi. Lệnh truy nã sẽ còn dán khắp nơi.",
             "e": {
               "tv": 6,
-              "karma": -3
+              "hd": {
+                "t": 3
+              }
             }
           }
         },
@@ -242,23 +244,23 @@
           },
           "t": "{$a.ten} nhìn túi linh thạch, quay mặt đi. “Hôm nay không thấy ai cả.”",
           "e": {
-            "karma": -2
+            "deed": "lua_loi"
           }
         },
         {
           "i": "🙇",
-          "l": "Chịu phạt",
+          "l": "Chấp nhận bị giữ lại chịu phạt",
           "t": "Ngươi bị giữ lại ba ngày, chép kinh sám hối.",
           "e": {
             "h": 72,
-            "karma": 6,
+            "deed": "sam_hoi",
             "tamma": -4
           }
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -323,7 +325,7 @@
           "l": "Cho một viên đan hồi khí huyết",
           "t": "Thương thế ổn lại. {$a.ten} nói muốn đi cùng ngươi một đoạn để trả ơn.",
           "e": {
-            "karma": 5,
+            "deed": "cuu_nguoi",
             "party": {
               "k": "a",
               "days": 20
@@ -341,7 +343,7 @@
           },
           "t": "Người kia tỉnh lại. {$a.ten} cúi đầu cảm tạ.",
           "e": {
-            "karma": 4,
+            "deed": "cuu_nguoi",
             "an": [
               "a",
               "cứu sư huynh đệ"
@@ -494,7 +496,7 @@
         },
         {
           "i": "🏃",
-          "l": "Chạy",
+          "l": "Bỏ chạy để tránh khám xét",
           "chk": [
             "tp",
             11
@@ -502,7 +504,9 @@
           "ok": {
             "t": "Ngươi chạy mất dạng.",
             "e": {
-              "karma": -2
+              "hd": {
+                "t": 1
+              }
             }
           },
           "no": {
@@ -514,15 +518,17 @@
             "win": {
               "t": "Thoát được, nhưng giờ thì thật sự là kẻ thù.",
               "e": {
-                "karma": -4
+                "hd": {
+                  "t": 1
+                }
               }
             }
           }
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {

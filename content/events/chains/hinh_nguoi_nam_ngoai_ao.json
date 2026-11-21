@@ -40,7 +40,12 @@
           "l": "Mua cho hắn áo mới để tự học dáng đi",
           "t": "Ngươi mua một chiếc áo vừa vai hắn, để người coi cửa dạy từng bước. Hắn đi chậm, vạt áo chưa chịu nằm yên, nhưng bóng đã là của riêng mình.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "chiếc áo đi tìm vai"
@@ -55,7 +60,9 @@
           "l": "Thuê hắn mặc áo của người đã mất",
           "t": "Ngươi được mở cửa một lần theo tên cũ. Hắn cúi chào, cổ áo chậm một nhịp mới hạ xuống.",
           "e": {
-            "karma": -1,
+            "hd": {
+              "t": 1
+            },
             "tamma": 2
           },
           "cost": {
@@ -133,14 +140,19 @@
           "alignment": "context"
         }
       },
-      "text": "Thiên ma {$a.ten} học ngồi im nhưng chỉ giữ được nửa người, vạt áo kia liên tục đứng dậy. Người coi cửa {$b.ten} kê thêm một ghế để nó có chỗ ngồi riêng.",
+      "text": "Thiên ma {$a.ten} thử ngồi yên bằng dáng thật. Hắn ngồi xuống được, nhưng chiếc áo mượn vẫn tự đứng dậy như có người mặc. Người coi cửa {$b.ten} kê thêm một ghế cho nó.",
       "choices": [
         {
           "i": "✋",
           "l": "Dạy hắn ngồi theo dáng của chính hắn",
           "t": "Ngươi dạy hắn tự tìm thế ngồi vững, không cần bắt chước dáng ai. Hắn thử vài lần mới được, vui đến mức đứng bật dậy khoe. Ngươi phải nhắc bài hôm nay là ngồi im.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "tv": 4
           }
         },
@@ -149,7 +161,9 @@
           "l": "Dạy hắn giả dáng một khách quen",
           "t": "Hắn dẫn ngươi qua cửa hẹp. Khi được chào bằng tên người kia, hắn mất một lúc mới nhớ cúi đầu.",
           "e": {
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -232,7 +246,12 @@
           "l": "Kể cho người ấy nghe chiếc áo đã mượn từ đâu",
           "t": "Ngươi kể rõ áo thuộc về ai, người đang mặc là ai. Người ấy im lặng rồi xin giữ lại áo cũ, mời thiên ma ngồi bên như một vị khách. Hắn lần đầu được hỏi chính mình muốn ăn gì.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "an": [
               "a",
               "nhà có một người ngồi nhầm"
@@ -244,7 +263,12 @@
           "l": "Để hắn ở lại qua một bữa cơm",
           "t": "Người ấy có một bữa với dáng người quen. {$a.ten} trả áo muộn, vạt áo vương mùi cơm mới.",
           "e": {
-            "karma": 1
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -320,14 +344,19 @@
           "alignment": "context"
         }
       },
-      "text": "Cửa soi bóng để nhận khách, không chỉ nhìn hình áo. Nếu thiên ma từng học ngồi theo dáng mình hoặc được nói rõ thân phận, hắn đứng ra khỏi chiếc áo, tự xin qua. Nếu hắn vẫn quen mượn dáng người khác, hắn tìm lại nếp áo cũ, sợ bị gọi đúng tên mình. Người coi cửa cho cả hai một lượt thử.",
+      "text": "Cửa nhận người qua bằng bóng của họ, chứ không nhìn quần áo. Nếu thiên ma đã tập giữ dáng thật hoặc từng nói rõ thân phận, hắn có thể bỏ áo và tự xin qua. Nếu vẫn quen mượn dáng người chết, hắn lại tìm chiếc áo vì sợ phải xưng tên thật. Người coi cửa cho thử cả hai cách.",
       "choices": [
         {
           "i": "💎",
           "l": "Đặt tên hắn dưới chính cái bóng ấy",
           "t": "Ngươi đứng ra xác nhận tên riêng của hắn, bỏ cách mượn tên cũ qua cửa. Cửa nhận bóng, cho hắn đi dù hai vai còn lệch. Hắn quay lại tự xưng tên một lần nữa, lần này không hỏi ngươi đã đúng chưa.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -335,7 +364,9 @@
           "l": "Dùng chiếc áo để cả hai qua nhanh",
           "t": "Ngươi tiết kiệm một lượt chờ. Bên kia cửa, hắn phải cởi áo mới nghe được giọng mình.",
           "e": {
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -418,14 +449,19 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu từng qua bằng tên mình, thiên ma {$a.ten} trông áo cho khách. Nếu từng qua nhờ áo, hắn làm việc ở mép cửa và tháo áo mỗi lúc có người gọi một cái tên cũ.",
+      "text": "Nếu thiên ma {$a.ten} đã qua bằng tên thật, hắn nay trông áo cho khách qua cửa. Nếu từng mượn áo để qua, hắn vẫn làm việc ở mép cửa và tháo áo mỗi khi có người gọi tên chủ cũ.",
       "choices": [
         {
           "i": "🤲",
           "l": "Góp gỗ làm chỗ treo áo cho khách",
           "t": "Ngươi mua gỗ giúp hắn đóng thêm móc cho khách tự treo đồ. Hắn làm đủ cao thấp, giải thích có người không thích mượn hình vai của ai khác. Người coi cửa nghe xong, cười bảo hắn đã hiểu nghề.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "một cái móc thấp hơn"

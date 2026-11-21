@@ -16,7 +16,7 @@
     "n": "Sa Tủy Hồi Mạch Đan",
     "i": "🟢",
     "x": 36,
-    "p": 29,
+    "p": 20,
     "reg": 0,
     "lore": "Bẻ viên đan sẽ nhận ra vệt phấn đá đục. Uống với nước nguội, hơi ấm dần trở lại đầu ngón.",
     "eff": "hoixuan",
@@ -40,7 +40,7 @@
     "n": "Mộc Miên Hồi Mạch Đan",
     "i": "🟢",
     "x": 32,
-    "p": 95,
+    "p": 80,
     "reg": 1,
     "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, hơi ấm dần trở lại đầu ngón.",
     "eff": "hoixuan",
@@ -124,7 +124,7 @@
     "n": "Cương Mạt Hồi Mạch Đan",
     "i": "🟢",
     "x": 42,
-    "p": 831,
+    "p": 595,
     "reg": 3,
     "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, hơi ấm dần trở lại đầu ngón.",
     "eff": "hoixuan",
@@ -184,7 +184,7 @@
     "n": "Điện Tủy Hoàn Linh Đan",
     "i": "🔵",
     "x": 38,
-    "p": 29,
+    "p": 25,
     "reg": 0,
     "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, linh tức từ từ đầy lại dưới rốn.",
     "eff": "tukhi",
@@ -196,7 +196,7 @@
     "n": "Hồn Đăng Hoàn Linh Đan",
     "i": "🔵",
     "x": 27,
-    "p": 30,
+    "p": 25,
     "reg": 0,
     "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, linh tức từ từ đầy lại dưới rốn.",
     "eff": "tukhi",
@@ -328,24 +328,24 @@
     "n": "Bạch Lãng Tán Độc Đan",
     "i": "🟤",
     "x": 26,
-    "p": 36,
+    "p": 20,
     "reg": 0,
     "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_dao_suong_tan_doc_dan",
     "n": "Đào Sương Tán Độc Đan",
     "i": "🟤",
     "x": 29,
-    "p": 26,
+    "p": 20,
     "reg": 0,
     "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_luoi_dong_tan_doc_dan",
@@ -357,31 +357,31 @@
     "lore": "Lớp áo đan giữ tiếng đồng ngân dưới mưa. Qua một nhịp thở, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_bang_vu_tan_doc_dan",
     "n": "Băng Vũ Tán Độc Đan",
     "i": "🟤",
     "x": 33,
-    "p": 89,
+    "p": 55,
     "reg": 1,
     "lore": "Bẻ viên đan sẽ nhận ra những hạt băng mịn. Uống với nước nguội, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_phong_dang_tan_doc_dan",
     "n": "Phong Đăng Tán Độc Đan",
     "i": "🟤",
     "x": 32,
-    "p": 73,
+    "p": 55,
     "reg": 1,
     "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_nham_phan_tan_doc_dan",
@@ -393,7 +393,7 @@
     "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_tan_dang_tan_doc_dan",
@@ -405,19 +405,19 @@
     "lore": "Lớp áo đan giữ mùi tàn hương vừa tắt. Qua một nhịp thở, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_day_may_tan_doc_dan",
     "n": "Dây Mây Tán Độc Đan",
     "i": "🟤",
     "x": 37,
-    "p": 237,
+    "p": 180,
     "reg": 2,
     "lore": "Bẻ viên đan sẽ nhận ra vệt bụi từ bờ ruộng. Uống với nước nguội, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_thien_thach_tan_doc_dan",
@@ -429,7 +429,7 @@
     "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_tu_dien_tan_doc_dan",
@@ -441,7 +441,7 @@
     "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_da_liem_tan_doc_dan",
@@ -453,7 +453,7 @@
     "lore": "Lớp áo đan giữ mùi hương cũ trong buồng kín. Qua một nhịp thở, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_anh_giap_tan_doc_dan",
@@ -465,7 +465,7 @@
     "lore": "Bẻ viên đan sẽ nhận ra tiếng vải lụa sột soạt dưới đèn. Uống với nước nguội, vị chát tan hết thì hơi độc mới lui.",
     "eff": "giaidoc",
     "w": "any",
-    "d": "Giải độc và thiêu, hồi {x}% khí huyết"
+    "d": "Xóa độc và bỏng, hồi {x}% khí huyết."
   },
   {
     "id": "dan_vien_am_an_mong_dan",
@@ -604,7 +604,7 @@
     "n": "Giấy Gió Dẫn Tu Đan",
     "i": "🟡",
     "x": 7,
-    "p": 30,
+    "p": 20,
     "reg": 0,
     "lore": "Lớp áo đan giữ mùi nắng trên vải mộc. Qua một nhịp thở, một vòng thổ nạp nhẹ như rót nước.",
     "eff": "tinhnguyen",
@@ -688,7 +688,7 @@
     "n": "Thủy Liêm Dẫn Tu Đan",
     "i": "🟡",
     "x": 15,
-    "p": 661,
+    "p": 480,
     "reg": 3,
     "lore": "Lắc nhẹ lọ, viên đan lăn qua lớp giấy lót. Chờ một lát sau khi uống, một vòng thổ nạp nhẹ như rót nước.",
     "eff": "tinhnguyen",
@@ -712,7 +712,7 @@
     "n": "Băng Ti Dẫn Tu Đan",
     "i": "🟡",
     "x": 16,
-    "p": 2456,
+    "p": 1690,
     "reg": 4,
     "lore": "Bẻ viên đan sẽ nhận ra những hạt băng mịn. Uống với nước nguội, một vòng thổ nạp nhẹ như rót nước.",
     "eff": "tinhnguyen",
@@ -772,7 +772,7 @@
     "n": "Đăng Tủy Bồi Huyết Đan",
     "i": "🔴",
     "x": 6,
-    "p": 6897,
+    "p": 5325,
     "reg": 4,
     "lore": "Bẻ viên đan sẽ nhận ra ánh lửa liếm qua mép. Uống với nước nguội, mạch đập vững thêm sau một canh tĩnh tọa.",
     "eff": "taytuy",
@@ -844,7 +844,7 @@
     "n": "Tịnh Đăng Minh Ngộ Đan",
     "i": "⚪",
     "x": 3,
-    "p": 4986,
+    "p": 3915,
     "reg": 4,
     "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, những chữ đã học chợt nối nghĩa với nhau.",
     "eff": "khaitri",
@@ -892,7 +892,7 @@
     "n": "Mái Ngói Dưỡng Thọ Đan",
     "i": "🟠",
     "x": 12,
-    "p": 7638,
+    "p": 4330,
     "reg": 4,
     "lore": "Viên đan còn vết lõm do ngón tay se. Khi vị thuốc lắng xuống, hơi thở đằm lại như nước xuống giếng.",
     "eff": "dientho",
@@ -968,12 +968,12 @@
     "n": "Phạn Âm Thúc Huyết Phù",
     "i": "🟥",
     "x": 2,
-    "p": 38,
+    "p": 30,
     "reg": 0,
     "lore": "Đường vẽ cuối trên giấy còn lưu mùi trầm đọng dưới mái. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_bang_ti_thuc_huyet_phu",
@@ -985,7 +985,7 @@
     "lore": "Dưới đèn, nét phù lộ những hạt băng mịn. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_loi_mach_thuc_huyet_phu",
@@ -997,7 +997,7 @@
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_bui_trau_thuc_huyet_phu",
@@ -1009,7 +1009,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu mùi khói bếp vương lại. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_phong_mien_thuc_huyet_phu",
@@ -1021,7 +1021,7 @@
     "lore": "Dưới đèn, nét phù lộ tiếng lá khô lăn dưới gót. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_diem_nha_thuc_huyet_phu",
@@ -1033,7 +1033,7 @@
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_hac_trieu_thuc_huyet_phu",
@@ -1045,7 +1045,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu vệt bóng mọc về phía sáng. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_dao_suong_thuc_huyet_phu",
@@ -1057,19 +1057,19 @@
     "lore": "Dưới đèn, nét phù lộ những thớ gỗ ướt. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_luoi_dong_thuc_huyet_phu",
     "n": "Lưỡi Đồng Thúc Huyết Phù",
     "i": "🟥",
     "x": 4,
-    "p": 191,
+    "p": 130,
     "reg": 4,
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_tram_ba_thuc_huyet_phu",
@@ -1081,7 +1081,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu tiếng giọt rơi vào chum. Mực theo đường gân cổ tay, ngực nóng dần lên.",
     "eff": "baohuyet",
     "w": "combat",
-    "d": "Cuồng nộ +{x} trong trận"
+    "d": "Tăng {x} tầng cuồng nộ trong trận."
   },
   {
     "id": "phu_han_tao_ke_giap_phu",
@@ -1093,7 +1093,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu những hạt băng mịn. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_thiet_yen_ke_giap_phu",
@@ -1105,7 +1105,7 @@
     "lore": "Dưới đèn, nét phù lộ ánh bạc nhạt trên mép. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_son_nau_ke_giap_phu",
@@ -1117,7 +1117,7 @@
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_da_vu_ke_giap_phu",
@@ -1129,19 +1129,19 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu mùi nước mưa đọng trên ngói. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_loi_tam_ke_giap_phu",
     "n": "Lôi Tằm Kê Giáp Phù",
     "i": "🟨",
     "x": 35,
-    "p": 86,
+    "p": 50,
     "reg": 1,
     "lore": "Dưới đèn, nét phù lộ một ánh chớp xanh. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_phong_dang_ke_giap_phu",
@@ -1153,7 +1153,7 @@
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_diem_vi_ke_giap_phu",
@@ -1165,7 +1165,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu tiếng than nổ trong lò. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_hon_tram_ke_giap_phu",
@@ -1177,7 +1177,7 @@
     "lore": "Dưới đèn, nét phù lộ mùi hương cũ trong buồng kín. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_ngo_dong_ke_giap_phu",
@@ -1189,7 +1189,7 @@
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_ne_tam_ke_giap_phu",
@@ -1201,7 +1201,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu tiếng cát lọt qua kẽ. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_bo_tuyen_ke_giap_phu",
@@ -1213,7 +1213,7 @@
     "lore": "Dưới đèn, nét phù lộ vết bụi vàng của hương. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_loi_vi_ke_giap_phu",
@@ -1225,7 +1225,7 @@
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_tinh_huong_ke_giap_phu",
@@ -1237,7 +1237,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu tiếng mõ ngân rất khẽ. Tờ phù co vào một nếp, linh quang ép sát trước ngực.",
     "eff": "kimcang",
     "w": "combat",
-    "d": "Hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết."
   },
   {
     "id": "phu_dang_sa_khai_an_phu",
@@ -1250,7 +1250,7 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "moc",
-    "d": "Đánh một đòn {x}% công, hệ Mộc"
+    "d": "Ra đòn hệ Mộc với sức công {x}%."
   },
   {
     "id": "phu_gio_lua_khai_an_phu",
@@ -1263,7 +1263,7 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "phong",
-    "d": "Đánh một đòn {x}% công, hệ Phong"
+    "d": "Ra đòn hệ Phong với sức công {x}%."
   },
   {
     "id": "phu_giay_gio_khai_an_phu",
@@ -1276,7 +1276,7 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "vo",
-    "d": "Đánh một đòn {x}% công, hệ Vô"
+    "d": "Ra đòn với sức công {x}%, không mang ngũ hành."
   },
   {
     "id": "phu_tinh_vu_khai_an_phu",
@@ -1289,7 +1289,7 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "thuy",
-    "d": "Đánh một đòn {x}% công, hệ Thủy"
+    "d": "Ra đòn hệ Thủy với sức công {x}%."
   },
   {
     "id": "phu_tuyet_tu_khai_an_phu",
@@ -1302,46 +1302,46 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "bang",
-    "d": "Đánh một đòn {x}% công, hệ Băng"
+    "d": "Ra đòn hệ Băng với sức công {x}%."
   },
   {
     "id": "phu_tu_dien_khai_an_phu",
     "n": "Tử Điện Khai Ấn Phù",
     "i": "⚡",
     "x": 242,
-    "p": 74,
+    "p": 55,
     "reg": 1,
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
     "eff": "loiphu",
     "w": "combat",
     "el": "loi",
-    "d": "Đánh một đòn {x}% công, hệ Lôi"
+    "d": "Ra đòn hệ Lôi với sức công {x}%."
   },
   {
     "id": "phu_nhat_ke_khai_an_phu",
     "n": "Nhất Kệ Khai Ấn Phù",
     "i": "⚡",
     "x": 256,
-    "p": 76,
+    "p": 55,
     "reg": 1,
     "lore": "Đường vẽ cuối trên giấy còn lưu mùi trầm đọng dưới mái. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
     "eff": "loiphu",
     "w": "combat",
     "el": "phat",
-    "d": "Đánh một đòn {x}% công, hệ Phật"
+    "d": "Ra đòn hệ Phật với sức công {x}%."
   },
   {
     "id": "phu_tho_vu_khai_an_phu",
     "n": "Thổ Vũ Khai Ấn Phù",
     "i": "⚡",
     "x": 255,
-    "p": 70,
+    "p": 55,
     "reg": 1,
     "lore": "Dưới đèn, nét phù lộ vệt phấn đá đục. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
     "eff": "loiphu",
     "w": "combat",
     "el": "tho",
-    "d": "Đánh một đòn {x}% công, hệ Thổ"
+    "d": "Ra đòn hệ Thổ với sức công {x}%."
   },
   {
     "id": "phu_sa_nhan_khai_an_phu",
@@ -1354,33 +1354,33 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "kim",
-    "d": "Đánh một đòn {x}% công, hệ Kim"
+    "d": "Ra đòn hệ Kim với sức công {x}%."
   },
   {
     "id": "phu_dang_tuy_khai_an_phu",
     "n": "Đăng Tủy Khai Ấn Phù",
     "i": "⚡",
     "x": 303,
-    "p": 134,
+    "p": 90,
     "reg": 2,
     "lore": "Đường vẽ cuối trên giấy còn lưu tiếng than nổ trong lò. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
     "eff": "loiphu",
     "w": "combat",
     "el": "hoa",
-    "d": "Đánh một đòn {x}% công, hệ Hỏa"
+    "d": "Ra đòn hệ Hỏa với sức công {x}%."
   },
   {
     "id": "phu_u_to_khai_an_phu",
     "n": "U Tơ Khai Ấn Phù",
     "i": "⚡",
     "x": 291,
-    "p": 136,
+    "p": 90,
     "reg": 2,
     "lore": "Dưới đèn, nét phù lộ mùi hương cũ trong buồng kín. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
     "eff": "loiphu",
     "w": "combat",
     "el": "am",
-    "d": "Đánh một đòn {x}% công, hệ Âm"
+    "d": "Ra đòn hệ Âm với sức công {x}%."
   },
   {
     "id": "phu_truc_cham_khai_an_phu",
@@ -1393,7 +1393,7 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "moc",
-    "d": "Đánh một đòn {x}% công, hệ Mộc"
+    "d": "Ra đòn hệ Mộc với sức công {x}%."
   },
   {
     "id": "phu_thanh_duc_khai_an_phu",
@@ -1406,20 +1406,20 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "phong",
-    "d": "Đánh một đòn {x}% công, hệ Phong"
+    "d": "Ra đòn hệ Phong với sức công {x}%."
   },
   {
     "id": "phu_u_huong_khai_an_phu",
     "n": "U Hương Khai Ấn Phù",
     "i": "⚡",
     "x": 389,
-    "p": 193,
+    "p": 130,
     "reg": 3,
     "lore": "Dưới đèn, nét phù lộ ánh đen lẫn trong khói. Nét mực cuối bứt khỏi giấy và đánh thẳng tới địch.",
     "eff": "loiphu",
     "w": "combat",
     "el": "am",
-    "d": "Đánh một đòn {x}% công, hệ Âm"
+    "d": "Ra đòn hệ Âm với sức công {x}%."
   },
   {
     "id": "phu_mai_ngoi_khai_an_phu",
@@ -1432,7 +1432,7 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "vo",
-    "d": "Đánh một đòn {x}% công, hệ Vô"
+    "d": "Ra đòn với sức công {x}%, không mang ngũ hành."
   },
   {
     "id": "phu_van_tao_khai_an_phu",
@@ -1445,7 +1445,7 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "thuy",
-    "d": "Đánh một đòn {x}% công, hệ Thủy"
+    "d": "Ra đòn hệ Thủy với sức công {x}%."
   },
   {
     "id": "phu_thiet_yen_khai_an_phu",
@@ -1458,7 +1458,7 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "kim",
-    "d": "Đánh một đòn {x}% công, hệ Kim"
+    "d": "Ra đòn hệ Kim với sức công {x}%."
   },
   {
     "id": "phu_tuyet_sa_khai_an_phu",
@@ -1471,7 +1471,7 @@
     "eff": "loiphu",
     "w": "combat",
     "el": "bang",
-    "d": "Đánh một đòn {x}% công, hệ Băng"
+    "d": "Ra đòn hệ Băng với sức công {x}%."
   },
   {
     "id": "phu_tu_dien_thoat_dau_phu",
@@ -1483,7 +1483,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu tiếng rền như dưới nền nhà. Bóng người mắc lại trên lá phù đúng một hơi.",
     "eff": "thanhanh",
     "w": "combat",
-    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+    "d": "Bảo đảm thoát trận, trừ khi gặp thủ lĩnh."
   },
   {
     "id": "phu_dia_mien_thoat_dau_phu",
@@ -1495,7 +1495,7 @@
     "lore": "Dưới đèn, nét phù lộ mùi đất vỡ sau cơn mưa. Bóng người mắc lại trên lá phù đúng một hơi.",
     "eff": "thanhanh",
     "w": "combat",
-    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+    "d": "Bảo đảm thoát trận, trừ khi gặp thủ lĩnh."
   },
   {
     "id": "phu_thiet_tam_thoat_dau_phu",
@@ -1507,7 +1507,7 @@
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Bóng người mắc lại trên lá phù đúng một hơi.",
     "eff": "thanhanh",
     "w": "combat",
-    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+    "d": "Bảo đảm thoát trận, trừ khi gặp thủ lĩnh."
   },
   {
     "id": "phu_bang_lan_thoat_dau_phu",
@@ -1519,7 +1519,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu ánh xanh trên mặt băng. Bóng người mắc lại trên lá phù đúng một hơi.",
     "eff": "thanhanh",
     "w": "combat",
-    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+    "d": "Bảo đảm thoát trận, trừ khi gặp thủ lĩnh."
   },
   {
     "id": "phu_truc_tuy_thoat_dau_phu",
@@ -1531,19 +1531,19 @@
     "lore": "Dưới đèn, nét phù lộ những thớ gỗ ướt. Bóng người mắc lại trên lá phù đúng một hơi.",
     "eff": "thanhanh",
     "w": "combat",
-    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+    "d": "Bảo đảm thoát trận, trừ khi gặp thủ lĩnh."
   },
   {
     "id": "phu_ao_toi_thoat_dau_phu",
     "n": "Áo Tơi Thoát Dấu Phù",
     "i": "🟦",
     "x": 0,
-    "p": 132,
+    "p": 105,
     "reg": 2,
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Bóng người mắc lại trên lá phù đúng một hơi.",
     "eff": "thanhanh",
     "w": "combat",
-    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+    "d": "Bảo đảm thoát trận, trừ khi gặp thủ lĩnh."
   },
   {
     "id": "phu_diem_sa_thoat_dau_phu",
@@ -1555,7 +1555,7 @@
     "lore": "Đường vẽ cuối trên giấy còn lưu ánh lửa liếm qua mép. Bóng người mắc lại trên lá phù đúng một hơi.",
     "eff": "thanhanh",
     "w": "combat",
-    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+    "d": "Bảo đảm thoát trận, trừ khi gặp thủ lĩnh."
   },
   {
     "id": "phu_tinh_dang_thoat_dau_phu",
@@ -1567,7 +1567,7 @@
     "lore": "Dưới đèn, nét phù lộ hơi ấm như hạt cơm mới. Bóng người mắc lại trên lá phù đúng một hơi.",
     "eff": "thanhanh",
     "w": "combat",
-    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+    "d": "Bảo đảm thoát trận, trừ khi gặp thủ lĩnh."
   },
   {
     "id": "phu_u_huong_thoat_dau_phu",
@@ -1579,35 +1579,35 @@
     "lore": "Tờ giấy gập quanh một nét mực chưa ráo. Bóng người mắc lại trên lá phù đúng một hơi.",
     "eff": "thanhanh",
     "w": "combat",
-    "d": "Chắc chắn thoát thân (trừ thủ lĩnh)"
+    "d": "Bảo đảm thoát trận, trừ khi gặp thủ lĩnh."
   },
   {
     "id": "bt_u_to_mo_mach_dan",
     "n": "U Tơ Mở Mạch Đan",
     "i": "🏵️",
     "x": 16,
-    "p": 125,
+    "p": 75,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra mùi hương cũ trong buồng kín. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
     "w": "bt",
     "bt": {
       "rate": 16
     },
-    "d": "Đột phá +{x}%"
+    "d": "Tăng {x}% cơ hội đột phá."
   },
   {
     "id": "bt_sam_tat_giu_nguyen_tan",
     "n": "Sấm Tắt Giữ Nguyên Tán",
     "i": "🟤",
     "x": 1,
-    "p": 81,
+    "p": 65,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra một ánh chớp xanh. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
     "w": "bt",
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống"
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp."
   },
   {
     "id": "bt_tuyet_tuy_lech_kiep_phu",
@@ -1621,21 +1621,21 @@
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi"
+    "d": "Bớt {x} đợt sét khi độ kiếp."
   },
   {
     "id": "bt_tich_thien_don_sam_dan",
     "n": "Tịch Thiền Đón Sấm Đan",
     "i": "🟣",
     "x": 19,
-    "p": 123,
+    "p": 85,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra vết bụi vàng của hương. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
     "w": "bt",
     "bt": {
       "kiepHp": 19
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp."
   },
   {
     "id": "bt_lieu_nhung_mo_mach_dan",
@@ -1649,7 +1649,7 @@
     "bt": {
       "rate": 20
     },
-    "d": "Đột phá +{x}%"
+    "d": "Tăng {x}% cơ hội đột phá."
   },
   {
     "id": "bt_thau_bac_giu_nguyen_tan",
@@ -1663,7 +1663,7 @@
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống"
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp."
   },
   {
     "id": "bt_day_gai_lech_kiep_phu",
@@ -1677,21 +1677,21 @@
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi"
+    "d": "Bớt {x} đợt sét khi độ kiếp."
   },
   {
     "id": "bt_phong_trao_don_sam_dan",
     "n": "Phong Trạo Đón Sấm Đan",
     "i": "🟣",
     "x": 19,
-    "p": 114,
+    "p": 85,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra ánh chao như cánh chim. Ánh đan quấn lấy cổ tay trước khi tiếng sấm đầu rơi xuống.",
     "w": "bt",
     "bt": {
       "kiepHp": 19
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết"
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp."
   },
   {
     "id": "bt_tram_nham_lap_co_hoan",
@@ -1705,7 +1705,7 @@
     "bt": {
       "dao": 2
     },
-    "d": "Phẩm chất: đạo cơ +{x} khi đột phá"
+    "d": "Tăng {x} đạo cơ khi đột phá để nâng phẩm chất."
   },
   {
     "id": "bt_tan_tinh_mo_mach_dan",
@@ -1719,21 +1719,21 @@
     "bt": {
       "rate": 20
     },
-    "d": "Đột phá +{x}%"
+    "d": "Tăng {x}% cơ hội đột phá."
   },
   {
     "id": "bt_thach_tuy_mo_mach_dan",
     "n": "Thạch Tủy Mở Mạch Đan",
     "i": "🏵️",
     "x": 18,
-    "p": 116,
+    "p": 75,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra vệt phấn đá đục. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
     "w": "bt",
     "bt": {
       "rate": 18
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 0
   },
   {
@@ -1741,14 +1741,14 @@
     "n": "Sương Đóng Giữ Nguyên Tán",
     "i": "🟤",
     "x": 1,
-    "p": 91,
+    "p": 65,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra ánh xanh trên mặt băng. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
     "w": "bt",
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 0
   },
   {
@@ -1756,14 +1756,14 @@
     "n": "Phong Lạc Lệch Kiếp Phù",
     "i": "🪬",
     "x": 1,
-    "p": 99,
+    "p": 70,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra ánh chao như cánh chim. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
     "w": "bt",
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 0
   },
   {
@@ -1778,7 +1778,7 @@
     "bt": {
       "kiepHp": 21
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 0
   },
   {
@@ -1793,7 +1793,7 @@
     "bt": {
       "rate": 22
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 0
   },
   {
@@ -1801,14 +1801,14 @@
     "n": "Giấy Gió Giữ Nguyên Tán",
     "i": "🟤",
     "x": 1,
-    "p": 124,
+    "p": 65,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra tiếng cửa gỗ bị gió đẩy. Khi linh lực đứt nhịp, một lớp vỏ mỏng ép tu vi về lại đan điền.",
     "w": "bt",
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 0
   },
   {
@@ -1816,14 +1816,14 @@
     "n": "Mộ Đăng Lệch Kiếp Phù",
     "i": "🪬",
     "x": 1,
-    "p": 126,
+    "p": 70,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra ánh đen lẫn trong khói. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
     "w": "bt",
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 0
   },
   {
@@ -1838,7 +1838,7 @@
     "bt": {
       "kiepHp": 21
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 0
   },
   {
@@ -1846,14 +1846,14 @@
     "n": "Ô Diệm Lập Cơ Hoàn",
     "i": "🟡",
     "x": 2,
-    "p": 114,
+    "p": 65,
     "reg": 0,
     "lore": "Đặt gần tay có thể nhận ra ánh lửa liếm qua mép. Phần thuốc chìm xuống chậm hơn phần nổi, đợi đạo cơ đứng yên mới tan.",
     "w": "bt",
     "bt": {
       "dao": 2
     },
-    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "d": "Tăng {x} đạo cơ khi đột phá để nâng phẩm chất.",
     "realm": 0
   },
   {
@@ -1868,7 +1868,7 @@
     "bt": {
       "rate": 22
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 0
   },
   {
@@ -1883,7 +1883,7 @@
     "bt": {
       "rate": 20
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 1
   },
   {
@@ -1898,7 +1898,7 @@
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 1
   },
   {
@@ -1913,7 +1913,7 @@
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 1
   },
   {
@@ -1928,7 +1928,7 @@
     "bt": {
       "kiepHp": 23
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 1
   },
   {
@@ -1943,7 +1943,7 @@
     "bt": {
       "rate": 24
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 1
   },
   {
@@ -1958,7 +1958,7 @@
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 1
   },
   {
@@ -1973,7 +1973,7 @@
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 1
   },
   {
@@ -1988,7 +1988,7 @@
     "bt": {
       "kiepHp": 23
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 1
   },
   {
@@ -2003,7 +2003,7 @@
     "bt": {
       "dao": 3
     },
-    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "d": "Tăng {x} đạo cơ khi đột phá để nâng phẩm chất.",
     "realm": 1
   },
   {
@@ -2018,7 +2018,7 @@
     "bt": {
       "rate": 24
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 1
   },
   {
@@ -2026,14 +2026,14 @@
     "n": "Trúc Châm Mở Mạch Đan",
     "i": "🏵️",
     "x": 22,
-    "p": 770,
+    "p": 590,
     "reg": 2,
     "lore": "Đặt gần tay có thể nhận ra những thớ gỗ ướt. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
     "w": "bt",
     "bt": {
       "rate": 22
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 2
   },
   {
@@ -2048,7 +2048,7 @@
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 2
   },
   {
@@ -2063,7 +2063,7 @@
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 2
   },
   {
@@ -2078,7 +2078,7 @@
     "bt": {
       "kiepHp": 25
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 2
   },
   {
@@ -2093,7 +2093,7 @@
     "bt": {
       "rate": 26
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 2
   },
   {
@@ -2108,7 +2108,7 @@
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 2
   },
   {
@@ -2123,7 +2123,7 @@
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 2
   },
   {
@@ -2138,7 +2138,7 @@
     "bt": {
       "kiepHp": 25
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 2
   },
   {
@@ -2153,7 +2153,7 @@
     "bt": {
       "dao": 3
     },
-    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "d": "Tăng {x} đạo cơ khi đột phá để nâng phẩm chất.",
     "realm": 2
   },
   {
@@ -2168,7 +2168,7 @@
     "bt": {
       "rate": 26
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 2
   },
   {
@@ -2183,7 +2183,7 @@
     "bt": {
       "rate": 24
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 3
   },
   {
@@ -2198,7 +2198,7 @@
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 3
   },
   {
@@ -2213,7 +2213,7 @@
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 3
   },
   {
@@ -2228,7 +2228,7 @@
     "bt": {
       "kiepHp": 27
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 3
   },
   {
@@ -2243,7 +2243,7 @@
     "bt": {
       "rate": 28
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 3
   },
   {
@@ -2258,7 +2258,7 @@
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 3
   },
   {
@@ -2273,7 +2273,7 @@
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 3
   },
   {
@@ -2288,7 +2288,7 @@
     "bt": {
       "kiepHp": 27
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 3
   },
   {
@@ -2303,7 +2303,7 @@
     "bt": {
       "dao": 4
     },
-    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "d": "Tăng {x} đạo cơ khi đột phá để nâng phẩm chất.",
     "realm": 3
   },
   {
@@ -2318,7 +2318,7 @@
     "bt": {
       "rate": 28
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 3
   },
   {
@@ -2326,14 +2326,14 @@
     "n": "Hắc Nhung Mở Mạch Đan",
     "i": "🏵️",
     "x": 26,
-    "p": 3603,
+    "p": 2565,
     "reg": 4,
     "lore": "Đặt gần tay có thể nhận ra tiếng vải lụa sột soạt dưới đèn. Vị thuốc lắng ở đầu lưỡi, đợi đúng lúc linh lực dồn tới mới tan.",
     "w": "bt",
     "bt": {
       "rate": 26
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 4
   },
   {
@@ -2348,7 +2348,7 @@
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 4
   },
   {
@@ -2356,14 +2356,14 @@
     "n": "Lôi Cốt Lệch Kiếp Phù",
     "i": "🪬",
     "x": 1,
-    "p": 3271,
+    "p": 2315,
     "reg": 4,
     "lore": "Đặt gần tay có thể nhận ra tiếng rền như dưới nền nhà. Nét gấp chừa một kẽ hở cho một đạo sét đi qua.",
     "w": "bt",
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 4
   },
   {
@@ -2378,7 +2378,7 @@
     "bt": {
       "kiepHp": 29
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 4
   },
   {
@@ -2393,7 +2393,7 @@
     "bt": {
       "rate": 30
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 4
   },
   {
@@ -2408,7 +2408,7 @@
     "bt": {
       "guard": 1
     },
-    "d": "Hộ mệnh: thất bại không mất tu vi, không trọng thương; gục giữa kiếp vẫn sống",
+    "d": "Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.",
     "realm": 4
   },
   {
@@ -2423,7 +2423,7 @@
     "bt": {
       "kiepCut": 1
     },
-    "d": "Trợ kiếp: bớt {x} đạo lôi",
+    "d": "Bớt {x} đợt sét khi độ kiếp.",
     "realm": 4
   },
   {
@@ -2438,7 +2438,7 @@
     "bt": {
       "kiepHp": 29
     },
-    "d": "Trợ kiếp: vào kiếp được hộ thể {x}% khí huyết",
+    "d": "Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.",
     "realm": 4
   },
   {
@@ -2453,7 +2453,7 @@
     "bt": {
       "dao": 4
     },
-    "d": "Phẩm chất: đạo cơ +{x} khi đột phá",
+    "d": "Tăng {x} đạo cơ khi đột phá để nâng phẩm chất.",
     "realm": 4
   },
   {
@@ -2468,7 +2468,7 @@
     "bt": {
       "rate": 30
     },
-    "d": "Đột phá +{x}%",
+    "d": "Tăng {x}% cơ hội đột phá.",
     "realm": 4
   }
 ]

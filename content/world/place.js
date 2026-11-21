@@ -3,8 +3,8 @@ const PLACE = {
   a: ['Thanh','Xích','Hắc','Bạch','Tử','Kim','Ngân','Huyền','Bích','Thương','Hoàng','Ngọc','Lưu','Tàn','Đoạn','Cô','Vụ','Lạc','Cửu','Vạn','Thiên','U','Linh','Huyễn','Tịch','Hàn','Liệt','Vọng','Ẩn','Phi','Trầm','Cổ','Phù','Mê','Vân','Nguyệt','Tinh','Sương','Tuyết','Phong','Lôi','Băng','Long','Hổ','Hạc','Phượng','Quy','Lang','Nhạn','Thạch','Liễu','Đào','Trúc','Tùng','Lạn','Vĩnh','Phú','An','Bảo','Lợi','Tử Phúc','Bình'],
   b: ['Vân','Phong','Vũ','Tuyết','Sương','Nguyệt','Nhật','Tinh','Hà','Thạch','Hỏa','Lôi','Long','Hổ','Hạc','Phượng','Lang','Nhạn','Ưng','Liễu','Trúc','Tùng','Hoa','Diệp','Tuyền','Ba','Yên','Vụ','Kiếm','Cốt','Hồn','Ảnh','Âm','Dương','Minh','Tịch','Thủy','Lâm','Khê','Âu','Phách','Bằng','Lan','Mai','Cầm','Thủ'],
   sfx: {
-    tran: ['Trấn','Thôn','Phường','Tập','Trấn','Thôn'],
-    thanh: ['Thành','Đô','Phủ','Thành'],
+    tran: ['Trấn', 'Thôn', 'Tập', 'Phố', 'Hương', 'Bảo', 'Xóm', 'Dịch'],
+    thanh: ['Thành', 'Đô', 'Phủ', 'Châu', 'Quận', 'Ải', 'Thành Quan', 'Nội Thành'],
     rung: ['Lâm','Sâm Lâm','Mộc Hải','Lâm'],
     nui: ['Sơn','Lĩnh','Phong','Nhai','Đỉnh','Sơn'],
     song: ['Hồ','Khê','Giang','Đàm','Độ','Tân'],
@@ -15,5 +15,12 @@ const PLACE = {
     hoang: ['Nguyên','Hoang Mạc','Chiến Trường','Bãi','Hoang Nguyên'],
     ma: ['Ma Uyên','Quỷ Vực','Huyết Trì','Thi Lĩnh','U Cốc','Ma Thành'],
     thien: ['Thiên Môn','Tinh Lộ','Vân Hải','Hư Không','Tiên Khư','Thiên Giai'],
+    tutran: ['Linh Trấn', 'Linh Phường', 'Dược Phố', 'Kiếm Tập', 'Vân Tập', 'Phù Phố', 'Linh Dịch', 'Tiên Tập'],
+    tuthanh: ['Linh Thành', 'Tiên Thành', 'Vân Đô', 'Kiếm Thành', 'Đan Thành', 'Phù Đô', 'Tiên Phủ', 'Linh Quận'],
+    bicanh: ['Bí Cảnh', 'Huyễn Cảnh', 'Ẩn Vực', 'Tàng Cảnh', 'Mật Cảnh', 'Hư Cảnh', 'Phong Vực', 'Cấm Vực'],
+    dongthien: ['Động Thiên', 'Linh Thiên', 'Hư Thiên', 'Vân Thiên', 'Thiên Động', 'Linh Động', 'Vân Phủ', 'Thiên Khuyết'],
+    como: ['Cổ Mộ', 'Thạch Mộ', 'U Lăng', 'Lăng Tẩm', 'Địa Cung', 'Mộ Thất', 'Mộ Huyệt', 'Thạch Lăng'],
+    yeusao: ['Yêu Sào', 'Thú Sào', 'Yêu Huyệt', 'Thú Cốc', 'Yêu Động', 'Yêu Cốc', 'Thú Huyệt', 'Thú Động'],
+    ditich: ['Chiến Địa', 'Cổ Thành', 'Phế Đài', 'Tàn Trại', 'Cổ Lũy', 'Phế Quan', 'Tàn Điện', 'Di Chỉ'],
   },
 };

@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cải căn dọc đường (content/cai-can/<mã đường>.json)",
+  "description": "Sự kiện hiện khi người chơi bước vào một bước (buoc = số thứ tự bước, trừ nghi thức) của đường cải căn. Kiểm đủ (mã có thật, không con số, không tên mới, đủ số lượng) bằng npm run content:gpt.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "loai",
+    "duong",
+    "ev"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "loai": {
+      "const": "cai_can"
+    },
+    "duong": {
+      "type": "string"
+    },
+    "ev": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "buoc",
+          "id",
+          "ten",
+          "t",
+          "c"
+        ],
+        "properties": {
+          "buoc": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,30}$"
+          },
+          "ten": {
+            "type": "string",
+            "minLength": 1
+          },
+          "t": {
+            "type": "string",
+            "minLength": 150
+          },
+          "c": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "l",
+                "t"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]{0,30}$"
+                },
+                "l": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "t": {
+                  "type": "string",
+                  "minLength": 60
+                },
+                "dk": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "pham": {
+                      "type": "boolean"
+                    },
+                    "tuoiTu": {
+                      "type": "integer",
+                      "minimum": 16
+                    },
+                    "tuoiDen": {
+                      "type": "integer",
+                      "minimum": 16
+                    },
+                    "bacTu": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 200000,
+                      "description": "xu"
+                    },
+                    "canhGioiTu": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 5
+                    }
+                  }
+                },
+                "e": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "bac": {
+                      "type": "integer",
+                      "minimum": -200000,
+                      "maximum": 200000,
+                      "description": "xu; 1 lượng bạc = 1000 xu"
+                    },
+                    "deed": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "mã trong content/rules/deed.js"
+                    },
+                    "hp": {
+                      "type": "string",
+                      "pattern": "^-?\\d{1,2}%$"
+                    },
+                    "h": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 720
+                    },
+                    "tamma": {
+                      "type": "integer",
+                      "minimum": -15,
+                      "maximum": 15
+                    },
+                    "nang": {
+                      "type": "object",
+                      "propertyNames": {
+                        "enum": [
+                          "giac",
+                          "giao",
+                          "thuong",
+                          "canh",
+                          "duoc",
+                          "khao",
+                          "tu",
+                          "nhan"
+                        ]
+                      },
+                      "additionalProperties": {
+                        "type": "number",
+                        "minimum": -3,
+                        "maximum": 3
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

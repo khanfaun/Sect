@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "id": "DL02",
+  "loai": "dai_lo",
+  "ten": "Con đường diệt thế",
+  "daiLo": "diet_the",
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Huyết ấn và cái giá giữ đất",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC07"
+      },
+      "mo": "Ở {LOC07}, người coi tro phủi bụi trên chiếc ghế trống trước hòm ấn. Dưới chân ghế là sổ lương, bên trong có những xóm còn thóc và những xóm đã hết. Ai nhận quyền trên cả ba vùng sẽ quyết cả mùa sau xóm nào phải chịu đói.",
+      "boQuaNeuXuatThan": true,
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Kê kho và bỏ mặc những xóm thiếu người giữ",
+          "t": "Ngươi hỏi kho nào còn đủ tới mùa sau. Những xóm thiếu người giữ được khoanh riêng để người cầm ấn khỏi phải chia lương cho họ trước.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi ai đọc được nền ký ức",
+          "t": "Ngươi chép tên vai có thể tra nền ký ức trước khi đem dấu ra mở.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ danh sách các hộ phải trả giá",
+          "t": "Ngươi giữ danh sách các hộ chịu giá, đặt bản sao ngoài hòm dấu quyền.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Tro được cất vào hòm, dấu quyền chưa có người mới nhận.",
+        "su": "Tro được cất vào hòm, dấu quyền chưa có người mới nhận.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Ba vùng đất có người đang ở",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC07"
+      },
+      "mo": "Trước hòm ấn ở {LOC07}, một người gấp lá đơn xin rời làng làm tư để nhét vào khe cửa. Bên trong, giấy kê lương đã mở sẵn cho cả ba vùng. Huyết ấn cho ngươi quyền đòi cống. Rút mạch lúc này có thể khiến đất dưới chân họ chết theo.",
+      "khacVoi": "OR14.N3 xử phần cống khi kế vị; hồi này kê giá và quyền của ba vùng có thể lệ thuộc.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Cho từng vùng cử người phát lương",
+          "t": "Ngươi giao phần kho có kiểm, để ba vùng cử người giữ phiên cấp lương.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tìm chỗ ngắt mạch mà dân còn sống",
+          "t": "Ngươi tra dấu từ {LOC15} và ghi chỗ có thể cắt mạch mà không xóa người.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ép ba vùng nộp cống bằng huyết ấn",
+          "t": "Ngươi nhận lời phục tùng của {FA05} rồi ghi đủ những vùng phải nộp. Lá đơn xin đi bị chặn bên dưới tờ kê cống.",
+          "dau": [
+            "moc_2_3"
+          ],
+          "dk": {
+            "faSong": [
+              "FA05"
+            ]
+          },
+          "e": {
+            "fa": {
+              "FA05": 2
+            }
+          }
+        }
+      ],
+      "tuDien": {
+        "t": "Các vùng tự kê phần lương, người coi ấn chưa nhận đủ lời ngoài cửa.",
+        "su": "Các vùng tự kê phần lương, người coi ấn chưa nhận đủ lời ngoài cửa.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Đêm đỏ, dân vẫn cần lương",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC15"
+      },
+      "mo": "Ánh đỏ phủ lên những bậc cuối của {LOC15}. {NP30} áp tai xuống nền đá. Bên dưới có tiếng người đập cửa, rồi im. Người từ ba vùng đem bao rỗng lên xin lương. Một gia đình đứng cạnh cửa thoát, chờ xem ngươi có cho họ đi qua.",
+      "khacVoi": "OR03.N4 trả tên trong khế buôn người; hồi này xử ký ức bị giữ trên cả nền và đường lương của các vùng.",
+      "clk": "CLK06",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Mở kho tiếp tế cho ba vùng",
+          "t": "Ngươi cho các vùng dùng phần kho đã kê, giữ bảng phát lương dưới dấu họ tự cử.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "e": {
+            "clk": {
+              "id": "CLK06",
+              "kq": "Ba vùng giữ đường tiếp tế trong đêm đỏ bằng kho do người tại chỗ kiểm."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Đối chứng nơi phải ngắt mạch",
+          "t": "Ngươi so hai nguồn chứng và ghi những nhà cần được bảo vệ khi ngắt mạch.",
+          "dau": [
+            "moc_3_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Chặn cửa thoát để buộc trình dấu",
+          "t": "Ngươi giành quyền gọi từng lượt qua cửa. Người không chịu trình dấu của ngươi phải đứng lại ngoài thềm, dưới ánh đỏ.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người ở ngoài tự chia đèn, nền vẫn dội tiếng vào những giờ tối.",
+        "su": "Người ở ngoài tự chia đèn, nền vẫn dội tiếng vào những giờ tối.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Ai giữ kho, ai giữ quyền rời đi?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC07"
+      },
+      "mo": "Ở {LOC07}, một người ôm sổ hộ sát ngực, còn người bên cạnh đã chìa tay chờ chìa kho. Người giữ nền mang bản thử ngắt mạch đến. Ngươi phải chọn ai được cấp lương, ai được giữ kho và những nhà nào cần dời trước.",
+      "khacVoi": "OR14.N4 giải tranh chấp quanh cốc; hồi này xác lập trách nhiệm liên vùng và quyền ra khỏi mạch.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Bắt từng vùng tuyên thệ để lĩnh lương",
+          "t": "Ngươi chỉ cho mở kho khi từng vùng đã thề theo mình. Người đại diện phải đọc lời thề trước hàng người đang đợi lương, rồi mới được xem phần thóc của họ.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giao bản thử ngắt mạch giữ tên",
+          "t": "Ngươi đặt chứng về mạch bị giữ bên danh hộ, giao người giữ nền bản dự kiểm.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Giao chìa kho cho người ba vùng cử",
+          "t": "Ngươi giao chìa cho ba người địa phương và ghi rõ phần nợ chưa được xóa.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Các vùng giữ sổ riêng, chưa chịu theo cùng một dấu.",
+        "su": "Các vùng giữ sổ riêng, chưa chịu theo cùng một dấu.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Giữ ba vùng hay cắt phần mạch trói người?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC15"
+      },
+      "mo": "Huyết ấn chạm nền {LOC15}, soi rõ bàn tay của những người đang chìa sổ về phía ngươi. Dưới chân họ, mạch giữ tên người đã sáng. Ngươi có thể giữ mạch cùng các kho, ngắt phần trói tên hoặc trả sổ cho ba vùng tự lo.",
+      "khacVoi": "OR14.N5 đặt quan hệ của huyết hệ với người ngoài cốc; hồi này quyết định tương lai mạch sâu và ba vùng đã kê.",
+      "clk": "CLK06",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giữ mạch trói tên để tiếp tục cấp lương",
+          "t": "Ngươi mở kho theo lời thề đã nhận và để mạch tiếp tục giữ tên người. Ba vùng có lương qua đêm. Trong sổ, món nợ nằm ngay dưới dấu của ngươi.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          },
+          "e": {
+            "clk": {
+              "id": "CLK06",
+              "kq": "Đêm đỏ qua mà các vùng vẫn nhận lương, quyền giữ mạch ghi kèm món nợ."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Ngắt phần mạch trói tên",
+          "t": "Ngươi cùng người giữ nền tách cơ chế buộc tên, để người sống tự chọn đường.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Trả sổ cho ba vùng chia lương",
+          "t": "Ngươi để ba vùng tự chia phần và trả sổ cho người đang ở đó.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Ghi nợ của các hộ còn ngoài sổ",
+          "t": "Ngươi đặt bản ghi đêm lên mốc, chừa chỗ cho người chưa có lời.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Nền đá giữ vệt sáng, ba vùng tiếp tục tự lo phần lương.",
+        "su": "Nền đá giữ vệt sáng, ba vùng tiếp tục tự lo phần lương.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Chủ đêm còn nợ",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Ba vùng vẫn có lương qua đêm đỏ và người coi kho làm theo huyết ấn của ngươi. Khi tới kỳ kiểm kho, một người đem sổ đến chỉ những phần dân đã góp mà chưa được trả. Giữ quyền cũng có nghĩa là nhận món nợ ấy.",
+      "su": "Ba vùng theo dấu {ten} qua đêm và lưu sổ nợ cùng quyền mạch.",
+      "dauVong": "bản lời thề giữ tên một vùng từng phải xin cấp lương."
+    },
+    {
+      "id": "B",
+      "ten": "Mạch không trói người",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Ngươi ngắt được phần linh mạch giam người mà vẫn giữ nguồn nuôi ba vùng. Những hộ từng bị gọi tên nay tự chọn nơi ở. Người coi nền đá cất bản đồ chỗ đã ngắt cùng danh sách những nhà còn ở lại.",
+      "su": "Mạch sâu bị cắt phần ép đổi tên khi chứng và đường đi của hộ đã đủ.",
+      "dauVong": "nền đá giữ một vạch đã tắt bên bản danh người ở lại."
+    },
+    {
+      "id": "C",
+      "ten": "Ba vùng tự giữ",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Ngươi dừng trước mạch sâu và trả sổ cùng chìa khóa cho người của từng vùng. Từ nay họ tự quyết cách mở kho và chia lương. Trong ba cuốn sổ vẫn ghi cùng một khoản nợ chưa phân được ai phải trả.",
+      "su": "Ba khu giữ quyền tại chỗ sau khi {ten} dừng trước mạch sâu.",
+      "dauVong": "ba bản đất khác dấu còn chỉ cùng một khoản nợ chưa chia."
+    }
+  ],
+  "ngoai": "Nền đá giữ vệt sáng, ba vùng tiếp tục tự lo phần lương."
+}

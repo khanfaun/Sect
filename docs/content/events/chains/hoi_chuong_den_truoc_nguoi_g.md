@@ -18,10 +18,10 @@ Chuông báo đổ cầu vang khi người giữ chuông {$a.ten} còn đứng c
 
 - **1. Tin tiếng chuông và cho mọi người rời cầu**
   Ngươi cho người rời cầu, lỡ giờ qua cửa. Thợ cầu xuống kiểm tra, phát hiện chốt neo đã nứt. Hắn xin đóng cầu sửa ngay, không ai còn hỏi chuông vì sao tự kêu.
-  - `e`: `{"karma":4}`
+  - `e`: `{"deed":"cuu_nguoi"}`
 - **2. Ép chuông im để đoàn qua trước**
   Người và hàng qua được. Một cái chốt bắn ra, rơi đúng chỗ {$a.ten} vừa đặt chân.
-  - `e`: `{"karma":-3,"tamma":3}`
+  - `e`: `{"hd":{"t":3},"ng":{"b":1},"tamma":3}`
 - **3. Bỏ đi**
   Hồi chuông thứ hai vang nhỏ hơn, như có người đã kịp bịt một bên tai.
 
@@ -54,11 +54,11 @@ Thợ cầu {$b.ten} nối chuông với một đồng hồ nước: khi chuông
 - **1. Giữ cầu đóng tới khi thay đủ chốt**
   Ngươi trả phí cho đoàn hàng ở lại, giữ cầu đóng tới khi thay đủ chốt. Sửa xong, thợ cho xe nhẹ thử trước rồi mới mở. Chiếc chốt nứt được giữ lại bên đồng hồ làm lời nhắc.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua giờ báo trước để đi lối ngắn**
   Ngươi mua riêng một lượt theo dõi đồng hồ, kịp chọn đường ngắn trước khi cầu đóng. Người giữ chuông ghi tên từng người đã mua lượt; những người khác vẫn phải đợi tin ngoài cổng.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":-2}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Ngươi chọn đường vòng. Thợ cầu tiếp tục canh đồng hồ, chờ xem khoảng báo trước có thay đổi không.
 
@@ -93,10 +93,10 @@ Một nhịp cầu đã đổ sau khi đoàn ngươi qua. Thợ cầu {$b.ten} n
 - **1. Dùng phần tiền chuyến hàng sửa nhịp cầu**
   Ngươi góp tiền thuê thợ sửa lại nhịp đã đổ. Người đi sau được mở lối khi công việc xong, thợ cầu xin ghi cả ngày sập lẫn ngày sửa lên bảng để không ai quên.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":5}`
+  - `e`: `{"deed":"hanh_hiep"}`
 - **2. Bán riêng tin chuông báo sập lần tới**
   Ngươi giữ chốt cong làm dấu đối chiếu với đồng hồ, bán riêng tin báo sớm cho khách đủ tiền. Những người còn lại phải đợi ngoài giàn. Người giữ chuông hỏi nếu lần tới nó gọi tên một người không trả tiền thì ngươi tính sao.
-  - `e`: `{"st":30,"karma":-3}`
+  - `e`: `{"st":30,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   {$b.ten} đặt chốt xuống rồi đổi sang tay còn lành.
 
@@ -130,10 +130,10 @@ Chuông báo thợ cầu {$b.ten} sẽ rơi, gọi đúng tên hắn. Nếu ngư
 
 - **1. Tự lên cầu giữ người rồi ra lệnh tháo nhịp**
   Ngươi lên cầu giữ thợ khỏi rơi, dùng một phần tu vi chống nhịp trong lúc mọi người rút đi. Người giữ chuông cho tháo cầu sau khi đủ người lên bờ. Ngươi bị thương, thợ cầu ở lại giúp dưỡng khí.
-  - `e`: `{"karma":4,"hp":"-15%","tv":-4}`
+  - `e`: `{"deed":"cuu_nguoi_hy_sinh","hp":"-15%","tv":-4}`
 - **2. Nhờ người giữ chuông {$a.ten} canh từng lượt qua**
   Người qua đủ, nhưng {$b.ten} gãy tay khi tự cắt dây. Hồi chuông dừng đúng lúc sợi dây chạm đá.
-  - `e`: `{"karma":-1}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Người giữ chuông {$a.ten} hạ dùi xuống, chuông vẫn gọi thêm một lần.
 
@@ -175,7 +175,7 @@ Nếu nhịp đã tháo, người qua cầu góp đồng đúc chuông mới. N�
 - **1. Đúc chuông báo cho mọi đầu cầu**
   Ngươi góp tiền đúc chuông, yêu cầu người trông mỗi đầu cầu đều được biết cách nghe và báo. Thợ cầu thử tiếng đầu tiên, người bên kia đáp lại. Từ nay không phải mua riêng giờ báo trước mới được biết.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Giữ tiếng báo sớm cho người trông cầu**
   Ngươi có một phần công coi đường. Người giữ chuông {$a.ten} bắt đầu học cách gọi tên người còn chưa nhìn thấy.
   - `e`: `{"st":30}`

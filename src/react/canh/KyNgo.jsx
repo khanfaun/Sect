@@ -42,7 +42,7 @@ export function KyNgo({ sc }) {
   const ev = PS.KYNGO.find(x => x.id === sc.ev);
   // loại vớ vẩn cũng ghi "hữu duyên" cho người chơi mắc lừa
   const head = <>
-    <p className={'ky-tag' + (ev.paid ? ' paid' : '')}>{ev.paid ? 'Kỳ ngộ · phải trả giá' : 'Kỳ ngộ · hữu duyên'}</p>
+    <p className={'ky-tag' + (ev.paid ? ' paid' : '')}>{ev.tag || (ev.paid ? 'Kỳ ngộ · phải trả giá' : 'Kỳ ngộ · hữu duyên')}</p>
     <div className="story"><Html as="p" className="new" h={PS.txt(sc.text)} /></div>
   </>;
   if (sc.res) return <Card title={ev.n} sub="" cls="kyngo" foot={<GoBtn act="kyDone" label="Tiếp tục" />}>{head}<KetQua sc={sc} /></Card>;

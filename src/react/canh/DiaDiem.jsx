@@ -89,8 +89,9 @@ export function DiaDiem({ sc }) {
     <h4 key={'h' + name} className="sgrp"><Ib n={GRP_IC[name] || 'more'} c="soft" />{name}</h4>,
     <div key={'d' + name} className="choices">{L.map(a => <NutViec key={a.a} a={a} n={n} num={num()} />)}</div>,
   ]);
-  const art = ASSET.place[n.type]
-    ? <div className="art strip pimg"><img className="asset" src={ASSET.place[n.type]} alt="" /></div>
+  const pimg = ASSET.place[n.type] || ASSET.place[(PS.NEWT[n.type] || {}).as];
+  const art = pimg
+    ? <div className="art strip pimg"><img className="asset" src={pimg} alt="" /></div>
     : <Tranh seed={n.name} reg={r.region} type={n.type} cls="strip" />;
   return (
     <Card title={n.name} sub="" cls="tall place" art={art}
@@ -106,7 +107,7 @@ export function DiaDiem({ sc }) {
         {n.type !== 'ai' && <button className="btn" data-act="exStat" {...tip('Xem nơi này có gì: yêu ma, vật liệu, tỉ lệ')}>Thăm dò</button>}
         <span className="grow"></span><button className="btn" data-act="leave">Rời đi</button>
       </>}>
-      {M && <div className="pl-kv"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div></div>}
+      {M && <div className="pl-kv"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div>{PS.SETTLE.includes(n.type) && <div><small>Danh tiếng nơi này</small><span>{PS.danhName(n)}</span></div>}</div>}
       {sc.venue && VENUE_N[sc.venue] && <NoiChonViec n={n} v={sc.venue} />}
       <LoiKe sc={sc} />
       {qs.length > 0 && <>

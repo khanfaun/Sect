@@ -1,0 +1,355 @@
+{
+  "schemaVersion": 1,
+  "id": "OR42",
+  "loai": "xuat_than",
+  "ten": "Tiếng dưới sàn lò",
+  "xuatThan": "xt_tre_an_duoi_san_dan",
+  "goiYDaiLo": [
+    "huyet_cuu"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Miếng sàn còn dấu mẻ đan",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Mặt dưới miếng sàn che ngươi ở {LOC10} còn ký hiệu một mẻ đan. Vết mở nằm đúng mép ngươi từng thoát ra. Người coi kho nói mẻ ấy đã bị rút khỏi sổ nung.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Nhấc miếng gỗ và chép dấu",
+          "t": "Ngươi giữ nét in cùng ngày nhớ được, tránh để thợ lật mặt gỗ lần nữa.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi người từng biết chỗ ẩn",
+          "t": "Ngươi chép ai đã tới gần sàn hôm ấy và ai giấu tên trong mục lò.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ vết ở mép gỗ",
+          "t": "Ngươi vẽ vết mở dưới ký hiệu, để ai nhận biết có thể chỉ đúng chỗ.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Sàn được vá lại, mặt gỗ có dấu lô chưa được đem đối.",
+        "su": "Sàn được vá lại, mặt gỗ có dấu lô chưa được đem đối.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Ai định đem ngươi luyện đan?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Danh sách người mất tích ở {LOC04} khớp ký hiệu mẻ đan trong hồ sơ {FA07}. Một người coi lò xin lấy thêm người cho mẻ ấy. Sổ trú lại ghi ai mang chiếu tới giấu ngươi.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối tên người đòi với người đã giấu",
+          "t": "Ngươi chép cả hai dòng, ghi riêng ai xin nguyên liệu và ai mở chỗ giấu người.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tìm thân nhân còn trong danh",
+          "t": "Ngươi hỏi người ghi bia về một người nhà vừa bị chuyển vào lô kế.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Sao số lô chưa có lời trả",
+          "t": "Ngươi chép dấu những người đã được đưa đi, giữ bản ngoài tay người coi lò.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Danh mất tích được cất, dấu người mang chiếu còn trên tờ trú.",
+        "su": "Danh mất tích được cất, dấu người mang chiếu còn trên tờ trú.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Có thể luyện đan mà không dùng người?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Ở {LOC10}, một phương dùng nguồn khác đã qua lượt thử. Lời hứa đổi nguồn trước đây chỉ khiến các tù nhân bị giữ thêm. Người coi mẫu cho xem cả hai bản.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Kiểm mẫu thay dưới người làm chứng",
+          "t": "Ngươi mời người giữ hồ sơ xem buổi thử rồi chép lại phương luyện đan làm được mà không dùng người.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xác nhận quyền nắm phương",
+          "t": "Ngươi nhận tờ trao quyền giữ phương luyện đan. Tờ ấy vẫn cho phép dùng người bị giữ làm nguyên liệu.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tra tên còn lại trước giao dịch",
+          "t": "Ngươi đọc tên thân nhân và những người khác được ghi rõ là còn trong lô.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mẫu thử được đưa về kho, người chờ trong lô vẫn chưa biết ngày ra.",
+        "su": "Mẫu thử được đưa về kho, người chờ trong lô vẫn chưa biết ngày ra.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Mở cửa cho tất cả hay chỉ người nhà?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Người coi cửa {LOC10} chờ lệnh. Nguồn thay đã thử vẫn trên khay. Họ chịu thả riêng một người nếu ngươi ký để những người khác tiếp tục bị giữ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đổi nguồn luyện đan và thả những người bị giữ",
+          "t": "Ngươi cho lò nhận nguồn đã thử rồi cùng người làm chứng trả tự do cho nhóm trong lô.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          },
+          "e": {
+            "deed": "cuu_nguoi"
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận phương và giữ người làm nguồn",
+          "t": "Ngươi dùng giấy quyền giữ nhóm dưới cửa, nhận tiền ứng từ bên mua đan.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          },
+          "e": {
+            "bac": 2000,
+            "tamma": 4
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đổi giấy riêng để đưa thân nhân ra",
+          "t": "Ngươi biết những tên còn lại vẫn bị giữ, ký riêng để đưa người nhà ra cửa.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2",
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Đưa bản danh tới người ngoài lò",
+          "t": "Ngươi gửi tên người bị giữ để luyện đan ra ngoài, giữ đúng dấu của người đứng nhận.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cửa mở một lần kiểm tra, danh sách lô tiếp tục được giữ.",
+        "su": "Cửa mở một lần kiểm tra, danh sách lô tiếp tục được giữ.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ai giữ phương và sổ những người bị giữ?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Trên bàn {LOC10} có viên đan thử, sổ ghi nguồn và tờ trao quyền giữ phương. Người vừa được thả muốn đọc sổ. Ngoài hiên, thân nhân của những người còn lại vẫn đợi.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giao phương thay và công bố nguồn",
+          "t": "Ngươi tháo điều dùng người khỏi sổ và cho nhóm đã ra đọc bản nguồn thật.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ phương dưới dấu của mình",
+          "t": "Ngươi nhận khoản mua lô kế, cất tên người bị giữ cùng phần tro trong hòm.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Rời giao dịch cùng người đã cứu",
+          "t": "Ngươi đưa người nhà khỏi lò, giữ tờ ghi rõ ai khác vẫn còn dưới cửa.",
+          "dau": [
+            "moc_5_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Lưu bản danh ở nơi nhận chứng",
+          "t": "Ngươi giao bản tên có dấu lô để người ngoài còn biết ai chưa ra.",
+          "dau": [
+            "moc_5_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hồ sơ lò trở vào hòm, ngoài hiên vẫn còn người chờ lời.",
+        "su": "Hồ sơ lò trở vào hòm, ngoài hiên vẫn còn người chờ lời.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Lò không nhận tên người",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Phương mới không cần dùng người. Những người bị giữ để luyện đan đã được thả, và họ có thể tự xem dòng ghi về mình. Từ nay người coi kho phải ghi nguồn trước khi nhóm lò.",
+      "su": "{LOC10} bỏ nguồn người cưỡng ép và công khai nguồn thay đã thử.",
+      "dauVong": "một viên đan mẫu nằm cạnh tờ ghi đúng nguồn ở {LOC10}."
+    },
+    {
+      "id": "B",
+      "ten": "Người trên sàn",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Ngươi lấy tiền bán đan ngay trên tấm sàn từng che mình. Dưới cửa vẫn có người bị giữ cho mẻ sau. Họ khắc tên cạnh hòm tro để người dọn lò biết đã có ai ở đó.",
+      "su": "Quyền phương và tiền đan về tay {ten}, nguồn người vẫn bị giữ.",
+      "dauVong": "trong hòm tro còn dấu tên của người từng bị giữ qua kỳ lò."
+    },
+    {
+      "id": "C",
+      "ten": "Cứu một người khỏi lửa",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Ngươi đưa được người nhà ra khỏi lò. Tờ giao dịch chỉ ghi một người được thả, còn trang trước vẫn đủ tên những người bị giữ lại. Về sau một người đem chính trang ấy đến hỏi ngươi có từng nghe họ gọi không.",
+      "su": "Một nhà đoàn tụ sau giao dịch riêng, những người còn trong lô vẫn có tên đối chứng.",
+      "dauVong": "một người từng bị bỏ còn giữ trang danh đứng trước tờ trả người nhà."
+    }
+  ],
+  "ngoai": "Hồ sơ lò trở vào hòm, ngoài hiên vẫn còn người chờ lời."
+}

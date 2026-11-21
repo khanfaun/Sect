@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "id": "OR27",
+  "loai": "xuat_than",
+  "ten": "Nét dao bị nhận nhầm",
+  "xuatThan": "xt_nguoi_hoc_khac_khuon",
+  "goiYDaiLo": [
+    "tinh_mong"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Vết dao nào là của thợ?",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "{NP22} cho ngươi xem chiếc khuôn bị giữ ở {LOC11}. Vết dao của thợ nằm ở mép, còn vết trên đồng bạc bị nghi lại đến từ mặt kia. Sổ công chỉ ghi một lượt đúc.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối vết dao trước bàn thợ",
+          "t": "Ngươi làm bản in hai mặt để chỉ vết nào thuộc tay thợ đứng cạnh mình.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ghi lời thợ không được ký",
+          "t": "Ngươi chép mẫu thử và lời người bị buộc tội trước khi họ phải rời xưởng.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin xem phiếu đưa khuôn vào lò",
+          "t": "Ngươi sao ngày giao khuôn, tìm người coi lượt đúc sau lúc ngừng lửa.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Khuôn bị niêm, nét ở mặt đối chưa được ghi nhận.",
+        "su": "Khuôn bị niêm, nét ở mặt đối chưa được ghi nhận.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Có một khuôn thứ hai",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Sổ lò {LOC11} giấu một lượt đúc sau lúc chốt công. Một người có quyền đã cho đưa khuôn thứ hai vào lò. Đồng bạc đúc lần đó mang đúng vết lỗi bị đổ cho thợ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Lấy mẫu từ lượt đúc khuất",
+          "t": "Ngươi so dấu lượt với mẫu còn lỗi và xin người coi lửa xác nhận.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Xin giữ khuôn thứ hai",
+          "t": "Ngươi nhận khuôn theo giấy giao mẫu. Người giữ lò vẫn muốn lấy bạc để giao phần còn lại.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Kê phần khuôn còn nguy hiểm",
+          "t": "Ngươi đếm bản có thể đúc tiếp rồi đánh dấu để lúc hủy không bỏ sót.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Tờ tổng công phủ lại lượt lửa, khuôn thứ hai chưa ai đưa ra.",
+        "su": "Tờ tổng công phủ lại lượt lửa, khuôn thứ hai chưa ai đưa ra.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Đồng bạc lỗi dẫn tới người duyệt lô",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Ở {LOC03}, người giữ sạp còn một đồng bạc lỗi và phiếu nhận từ {LOC02}. Phiếu cho thấy ai đã đổi lô bạc mới lấy bạc thật. Dấu ấy trùng với dấu trên sổ lò.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Truy mẫu tới phiếu quan",
+          "t": "Ngươi đặt đồng lỗi cạnh phiếu, thấy người đặt lô chính là người duyệt dấu.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tìm người nhận lô bạc",
+          "t": "Ngươi hỏi ai chịu mang lô bạc ấy ra chợ, rồi ghi phần tiền họ đòi trên mỗi đợt giao.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi người nhận đồ khắc thường",
+          "t": "Ngươi nhận đơn khắc thẻ hàng không dùng khuôn bạc, đủ thay việc cũ.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mẫu bị trả về hòm, phiếu đổi chưa được đưa ra đối.",
+        "su": "Mẫu bị trả về hòm, phiếu đổi chưa được đưa ra đối.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Dùng khuôn làm chứng hay kiếm vốn?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Người xét ở {LOC02} chờ mẫu bạc và lời thợ. Một phe đem bạc tới đổi lấy khuôn còn nguyên. Thợ cũ hỏi có thể hủy khuôn mà vẫn giữ được bản chứng hay không.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Chứng tay nghề và công bố người đặt lô",
+          "t": "Ngươi trình mẫu và phiếu cho buổi xét, gỡ tội khỏi người không đặt lô.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ khuôn và đưa bạc giả ra chợ",
+          "t": "Ngươi dùng khuôn đã giữ, đưa lô bạc lỗi vào chợ để lấy vốn cho bên mua.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2",
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Hủy khuôn sau khi sao mẫu",
+          "t": "Ngươi giữ bản chứng, hủy khuôn đã kê rồi nhận đơn khắc thẻ thường.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người xét niêm hòm, khuôn còn nguyên trong kho tạm.",
+        "su": "Người xét niêm hòm, khuôn còn nguyên trong kho tạm.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ai được quyền kiểm khuôn?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Thợ ở {LOC11} tới lấy mẫu cho lượt đúc sau. Người mua lô bạc muốn ngươi giữ khuôn. Nhà đặt thẻ hàng đã trả công cho một mẻ đồ khắc tay.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Lập chuẩn kiểm chéo của thợ",
+          "t": "Ngươi giữ mẫu đúng cạnh bản lỗi, cho hai thợ cùng ký trước khi dùng khuôn.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ quyền khuôn và vốn luân phiên",
+          "t": "Ngươi nhận tiền lô đã vào chợ, đặt người riêng coi chỗ cất khuôn.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Giao đồ khắc tay rồi rời nghề đúc",
+          "t": "Ngươi giao thẻ hàng, lấy công nuôi bàn khắc thường và trả dụng cụ đúc.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Mẫu để lại trên bàn, mỗi thợ tự quyết có nhận khuôn cũ.",
+        "su": "Mẫu để lại trên bàn, mỗi thợ tự quyết có nhận khuôn cũ.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Một nét khắc có người chứng",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Thợ bị quy được xem biên bản có tên người đặt lô thật. Mỗi lần nhận khuôn sau đó có hai người xem mẫu trước khi đốt lửa. Bản nét thật giữ bên bàn để người học còn phân biệt hai tay dao.",
+      "su": "Lô bạc giả được xử và thợ dùng mẫu kiểm chéo trước khi đúc.",
+      "dauVong": "mẫu thử ở {LOC11} giữ nét dao thật của người từng bị quy."
+    },
+    {
+      "id": "B",
+      "ten": "Ấn tiền dưới lòng bàn tay",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Phe đã mua có vốn trả công trước kỳ, còn ngoài chợ người bán cân lại từng đồng. Đồng lỗi đi qua vài tay rồi nằm trong túi một người đã mất hàng vì nhận nó. Khuôn vẫn nằm dưới quyền ngươi.",
+      "su": "Lô giả vào lưu thông và giá ở chợ đổi theo độ tin đồng bạc.",
+      "dauVong": "một đồng bạc có vệt lỗi còn trong túi người từng nhận lô."
+    },
+    {
+      "id": "C",
+      "ten": "Khuôn vỡ mà tay còn",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Khuôn bạc chỉ còn trong bản in của vụ xét. Trên bàn mới nằm thẻ hàng đã giao, mỗi chiếc khắc tay bằng con dao cũ. Người từng nghi nét dao đem về một tấm để treo trước cửa nhà mình.",
+      "su": "Khuôn nguy hiểm bị hủy, người thợ chuyển sang đồ khắc tay.",
+      "dauVong": "một thẻ hàng còn nét tay của người đã thôi nghề đúc bạc."
+    }
+  ],
+  "ngoai": "Mẫu để lại trên bàn, mỗi thợ tự quyết có nhận khuôn cũ."
+}

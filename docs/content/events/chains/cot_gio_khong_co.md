@@ -19,10 +19,10 @@ Trưởng lão {$a.ten} cần lấy dây giữ cầu để treo cờ đón khác
 - **1. Góp tiền mua dây treo cờ riêng**
   Ngươi trả tiền mua dây ở kho, yêu cầu giữ nguyên dây cầu. Đệ tử thử neo xong mới treo cờ, rồi nhờ quản sự ghi lại: đồ giữ cầu không được lấy dùng việc lễ.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Cho lấy dây cầu để được vào đoàn đón khách**
   Ngươi nhận linh thạch. {$b.ten} bện dây rơm thay chỗ trống, giấu đầu sợi dưới tay vịn.
-  - `e`: `{"st":16,"karma":-3}`
+  - `e`: `{"st":16,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Lá cờ bay lên, phía dưới vọng một tiếng dây kéo qua đá.
 
@@ -54,7 +54,7 @@ Lễ đón khách đã xong. Đệ tử {$b.ten} thu dây ngươi mua, hỏi có
 
 - **1. Cho hắn giữ phần dây cứng**
   Ngươi cho hắn giữ phần dây còn dùng được. Hắn buộc thêm tay vịn, gọi người gánh nước đi thử ngay rồi mới siết nút.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Xin nhận lại tiền mua dây theo lệ tông môn**
   Ngươi nhận lại khoản đã ứng. Đệ tử đem dây vào kho, ghi rõ nguồn để lần sau xin dùng không phải mua thêm.
   - `e`: `{"st":13}`
@@ -92,10 +92,10 @@ Dây rơm no mưa và võng xuống. Đệ tử {$b.ten} ngâm chân dưới su�
 - **1. Mua dây mới bằng tiền đã nhận**
   Ngươi dùng khoản nhận từ lễ đón khách mua dây mới. Đệ tử lên bờ, cùng thợ thay xong mới cho mở cầu. Hắn ngồi bóp đôi chân ngâm nước lâu, bảo lần sau sẽ nhất quyết không tháo dây.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mở đường vòng thu phí**
   Người có tiền qua trên đường khô. {$b.ten} ở lại dưới suối với những người cầm túi rỗng.
-  - `e`: `{"st":18,"karma":-3}`
+  - `e`: `{"st":18,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Hắn hỏi người sau còn bao nhiêu người. Người ấy cúi nhìn nước, đếm bằng tay.
 
@@ -129,10 +129,10 @@ Trụ cờ bị gió bẻ nghiêng, dây chằng của nó mắc vào neo cầu.
 
 - **1. Cắt dây cờ, neo lại cầu**
   Ngươi cắt dây chằng, cho trụ cờ đổ về bãi trống rồi dùng đoạn dây còn chắc neo lại cầu. Người qua hết, quản sự đòi ngươi chịu phạt vì hỏng đồ lễ. Đệ tử đứng ra kể rõ vì sao phải cắt.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Đỡ trụ cờ và gọi người đi vòng**
   Ngươi được thưởng. Người qua đường vòng bỏ lại những gánh quá nặng, ngay dưới bóng lá cờ còn nguyên.
-  - `e`: `{"st":16,"karma":-2}`
+  - `e`: `{"st":16,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Trụ nghiêng về phía cầu. Lá cờ chạm nước trước.
 
@@ -173,11 +173,11 @@ Nếu cờ từng cứu cầu, dân đem vải tới vá lại. Nếu trụ từ
 
 - **1. Dành trụ mới để phơi dây và vải cầu**
   Ngươi đề nghị chuyển cột mới sang sân phơi dây cầu, chịu bị gạt khỏi lễ đón khách. Người coi cầu nhận việc hong và kiểm dây mỗi tuần. Đệ tử xin học cùng, nói mình đã biết một sợi dây hỏng có thể làm khổ bao nhiêu người.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Treo lại cờ và đặt quỹ sửa cầu**
   Ngươi đóng một phần bạc và có tên trong lễ. Dưới lá cờ, người đi qua đặt những đồng nhỏ lên một phiến đá.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Ngươi để người trong tông tự bàn chuyện dựng trụ. Trước khi đi, ngươi thấy đệ tử đã đem sổ sửa cầu tới, không đứng ngoài cửa đợi nữa.
 

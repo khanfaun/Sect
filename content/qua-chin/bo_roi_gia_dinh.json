@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "bo_roi_gia_dinh",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Chìa khóa dưới bát",
+      "t": "Nhà mà ngươi bỏ đi vẫn giữ chiếc chìa dưới cái bát úp. Nay một người thân đem chìa tới trao lại, nói họ phải bán nhà để trả tiền cơm trong những tháng ngươi vắng. Người ấy muốn ngươi tới buổi bàn giao.",
+      "c": [
+        {
+          "id": "den",
+          "l": "Đến giúp dọn đồ và nghe họ nói",
+          "t": "Ngươi chuyển từng hòm ra sân. Người thân chỉ chỗ ở mới nhưng xin ngươi đợi được mời rồi mới tới.",
+          "e": {
+            "h": 6
+          }
+        },
+        {
+          "id": "gop",
+          "l": "Gửi phần tiền thuê xe",
+          "t": "Ngươi gửi đủ tiền một chuyến xe. Họ nhận để chở đồ và bảo sẽ tự chọn nơi đến.",
+          "dk": {
+            "bacTu": 120
+          },
+          "e": {
+            "bac": -120
+          }
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Người quen ngoài bến",
+      "t": "Một người từng sống cùng nhà thấy ngươi ở bến. Họ đã làm đủ việc qua mùa khó, nay xin ngươi nói rõ có định nhận lại trách nhiệm với đứa trẻ hay chỉ muốn gặp một lần cho yên lòng.",
+      "c": [
+        {
+          "id": "nghe",
+          "l": "Nghe họ nói trước khi gặp đứa trẻ",
+          "t": "Ngươi nghe về những ngày mình vắng. Hai người hẹn chỉ gặp khi đứa trẻ biết trước và muốn gặp.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "thoi",
+          "l": "Để người thân tự nói với đứa trẻ",
+          "t": "Ngươi nhường họ quyết định khi nào nên kể. Đứa trẻ đi qua sân, vẫn mải sửa con diều."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Hũ gạo có hai nắp",
+      "t": "Người trong nhà từng phải chia gạo để sống qua những ngày ngươi bỏ đi. Nay họ có một hũ mới, mỗi nắp đánh dấu phần của một người nuôi trẻ. Họ hỏi ngươi có thể góp một bữa, rồi để hai bên tự tính việc sau.",
+      "c": [
+        {
+          "id": "gop_com",
+          "l": "Góp tiền cho bữa cơm hôm nay",
+          "t": "Ngươi gửi tiền mua gạo, không nhận lời thay mặt ai. Người coi bếp đặt thêm một cái bát.",
+          "dk": {
+            "bacTu": 80
+          },
+          "e": {
+            "bac": -80
+          }
+        },
+        {
+          "id": "tu_choi",
+          "l": "Nói rõ mình chưa thể giúp",
+          "t": "Họ đậy hũ rồi dùng phần đã dành từ hôm trước. Ngươi nghe tiếng gạo rơi xuống đáy nồi."
+        }
+      ]
+    }
+  ]
+}

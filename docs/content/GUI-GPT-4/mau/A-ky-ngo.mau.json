@@ -1,0 +1,20 @@
+{
+  "ma": "A1",
+  "ten": "Mộng du tiên cảnh",
+  "text": [
+    "Đoạn mở: ngươi chợp mắt bên đường, rồi thấy mình đứng trước một bậc thang trắng. Gió không có, mà vạt áo vẫn động.",
+    "Đoạn hai: xa xa có tiếng nước chảy ngược, ngươi thấy mình đã từng nghe nó mà không nhớ ở đâu."
+  ],
+  "choices": [
+    {
+      "l": "Bước lên bậc thang",
+      "t": "Kết quả 2–3 câu. Cuối là một chi tiết nhỏ còn lại ngoài đời.",
+      "e": {}
+    },
+    {
+      "l": "Quay lưng bỏ đi",
+      "t": "Kết quả 2–3 câu, khác nhánh trên về cảm giác.",
+      "e": {}
+    }
+  ]
+}

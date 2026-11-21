@@ -19,7 +19,7 @@ function render(){
     if(!G.run&&UI.panel&&UI.panel!=='more')UI.panel=null;
     if(cb&&UI.panel!=='more'){UI.panel=null;}
     if(!inMap&&UI.modal)UI.modal=null;
-    if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth'):G.screen==='over'&&G.over?rxv('Over'):G.screen==='meta'?rxv('Meta'):G.screen==='life'&&G.run?rxv('Life'):rxv('Title');}
+    if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth'):G.screen==='over'&&G.over?rxv('Over'):G.screen==='ket'&&G.meta&&G.meta.ketHet?rxv('Ket'):G.screen==='meta'?rxv('Meta'):G.screen==='life'&&G.run?rxv('Life'):rxv('Title');}
     else{
       if(cb)full=rxv('TranDau');
       else{hud=rxv('Hud');nav=rxv('Nav');
@@ -105,7 +105,7 @@ document.addEventListener('visibilitychange',()=>{clkLast=performance.now();clkA
 window.addEventListener('resize',()=>{Map2.resize();Art.clear();Art.fillAll();});
 
 // ---------- hành động ----------
-function openBq(){const r=G.run;if(bqCan())return;UI.bqOpened=!r.scene;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')UI.modal={k:'bq'};}
+function openBq(){const r=G.run;if(typeof voKnown==='function'&&voKnown()){note('Vô linh căn: chưa thể bế quan tu luyện','dn');return;}if(bqCan())return;UI.bqOpened=!r.scene;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')UI.modal={k:'bq'};}
 const ACT={
   birth:()=>{genBirth();const c=G.birth.cards;newRun(c[Math.floor(Math.random()*c.length)]);UI.sel=null;UI.panel=null;run2();},
   born:i=>{newRun(G.birth.cards[+i]);UI.sel=null;UI.panel=null;run2();},
@@ -165,7 +165,8 @@ const ACT={
   sell:a=>{const [k,i]=a.split(':');sellItem(k,+i);},
   stage:id=>{UI.modal=null;stageGo(+id);},
   go:id=>{const n=nodeById(+id);if(CFG.confirmDanger&&dangerTag(n)>=3&&n.id!==G.run.at){UI.modal={k:'danger',id:n.id};return;}ACT.goSure(id);},
-  goSure:id=>{UI.modal=null;G.run.halt=false;if(travelTo(+id)){G.run.dest=+id;UI.paused=false;UI.cardMin=true;Map2.cam.follow=true;}},
+  goAnOk:id=>{UI.anOk=1;ACT.goSure(id);},goAnBag:()=>{UI.modal=null;ACT.bagOpen();},
+  goSure:id=>{const ok=UI.anOk;UI.anOk=0;if(!ok&&typeof anTripRisk==='function'){const k=anTripRisk(+id);if(k){UI.modal={k:'pconf',doi:k,id:+id};return;}}UI.modal=null;G.run.halt=false;if(travelTo(+id)){G.run.dest=+id;UI.paused=false;UI.cardMin=true;Map2.cam.follow=true;}},
   enter:()=>{G.run.dest=null;UI.sel=null;UI.cell=null;UI.pop=null;UI.hold=null;openPlace(G.run.at);},
   stop:()=>{const r=G.run;if(r.moving){r.halt=true;snapStop();}},
   goOn:()=>{G.run.halt=false;UI.paused=false;},
@@ -181,7 +182,7 @@ const ACT={
   pactGo:a=>{UI.modal=null;UI.confirm=null;const sc=G.run.scene;const A=sc&&sc.type==='place'&&placeActs(nodeById(sc.id)).find(x=>x.a===a);UI.lastQ=PL_N[a]||(A&&A.l)||null;placeAct(a);UI.plTop=1;},
   vclose:()=>{const sc=G.run&&G.run.scene;if(sc)sc.venue=null;},
   vopt:id=>{const sc=G.run&&G.run.scene;if(!sc||!sc.venue)return;const o=venueOpts(nodeById(sc.id),sc.venue).find(x=>x.id===id);if(!o)return;UI.modal={k:o.lack||o.no?'vreq':'vconf',v:sc.venue,id};},
-  vgo:x=>{const [v,id]=x.split(':');UI.modal=null;const sc=G.run.scene;const o=sc&&venueOpts(nodeById(sc.id),v).find(z=>z.id===id);UI.lastQ=o?VENUE_N[v]+': '+o.l:null;venueDo(v,id);UI.plTop=1;},
+  vgo:x=>{const ix=x.indexOf(':'),v=x.slice(0,ix),id=x.slice(ix+1);UI.modal=null;const sc=G.run.scene;const o=sc&&venueOpts(nodeById(sc.id),v).find(z=>z.id===id);UI.lastQ=o?VENUE_N[v]+': '+o.l:null;venueDo(v,id);UI.plTop=1;},
   kvPick:i=>{kvChoose(+i);},
   xkGo:()=>{UI.modal=null;const r=G.run;if(!r.scene)openPlace(r.at);if(r.scene&&r.scene.type==='place')placeAct('xk');},
   bqSet:y=>{if(UI.modal&&UI.modal.k==='bq'){UI.modal.y=+y;UI.modal.ok=0;const c=bqCapY();UI.modal.warn=c!=null&&+y>c?1:0;}},

@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "CC03",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "ban_pha",
+      "ten": "Trang phả thiếu tên cây",
+      "t": "Người giữ gia phả ở {LOC01} đặt trang khuyết cạnh bản dập bia. Tên một vật liệu vẫn còn, nhưng dòng bên dưới mất nét. Một bà từng chăm vườn nói đừng vội mua bản chép ở chợ chỉ vì nó đủ chữ.",
+      "c": [
+        {
+          "id": "doi",
+          "l": "So hai bản trước mặt bà",
+          "t": "Bà đọc chỗ mình từng biết. Ngươi ghi riêng phần còn ngờ, để sau này không chép đoán thành thật.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Hỏi bà về công việc trong vườn",
+          "t": "Bà kể khi nào phải nghỉ tay để đất hồi. Ngươi nghe hết rồi trả bản ngay trước lúc mưa."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "loi_gieng",
+      "ten": "Lối ra giếng qua vườn cũ",
+      "t": "Địa chủ đòi phần vườn ở {LOC01}, trong khi dân vẫn đi qua đó ra giếng. Một người gánh nước chỉ hàng rào sắp dời. Bà xin các bên đừng bàn quyền giữ vườn mà quên lối đi của những nhà cuối xóm.",
+      "c": [
+        {
+          "id": "ghi_loi",
+          "l": "Ghi lời những hộ dùng lối giếng",
+          "t": "Ngươi hỏi từng hộ rồi chép cùng một tờ, để họ có thể mang tới buổi bàn về vườn.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "giu_ganh",
+          "l": "Đỡ gánh cho bà qua hàng rào",
+          "t": "Ngươi giữ thùng cho khỏi đổ. Bà qua được, rồi tự quay lại chỉ lối cho người tới sau."
+        }
+      ]
+    },
+    {
+      "buoc": 2,
+      "id": "kenh_bun",
+      "ten": "Bữa trưa bên kênh",
+      "t": "Trong những ngày dọn kênh nuôi vườn, bùn bám tới khuỷu tay. Một người già ở {LOC01} đem cơm ra cho thợ nhưng chỉ đủ vài bát. Bà hỏi có thể chia phần ngay trước khi đội cuối lên bờ hay không.",
+      "c": [
+        {
+          "id": "cho",
+          "l": "Đợi đội cuối lên rồi cùng chia",
+          "t": "Ngươi đậy nồi để cơm khỏi nguội. Lúc cả đội tới, bà nhìn đủ người rồi mới xới.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "mua",
+          "l": "Góp tiền mua thêm cơm",
+          "t": "Ngươi đưa tiền cho người chạy chợ. Người coi kênh chừa riêng phần cho đội chưa lên.",
+          "dk": {
+            "bacTu": 80
+          },
+          "e": {
+            "bac": -80
+          }
+        }
+      ]
+    },
+    {
+      "buoc": 3,
+      "id": "hoi_nguon",
+      "ten": "Mẫu nào đến từ đâu",
+      "t": "Ở chỗ gom đồ cho vườn, người bán đặt nhiều vật giống nhau lên mâm. Một người từng chăm cây nhắc ngươi hỏi nơi lấy từng mẫu và ai giữ phần còn lại. Họ không muốn dân bóc trụi một bờ vì lời đồn.",
+      "c": [
+        {
+          "id": "hoi",
+          "l": "Hỏi người bán ghi nơi lấy từng mẫu",
+          "t": "Người bán viết nơi họ nhớ. Ngươi giữ lại câu nào chưa có chứng để hỏi tiếp lần sau.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "bao",
+          "l": "Nhắc khách chừa phần đang mọc",
+          "t": "Ngươi chỉ bờ đất còn non. Hai người mua đồng ý đợi lời người chăm vườn trước khi tới đó."
+        }
+      ]
+    },
+    {
+      "buoc": 4,
+      "id": "chia_nuoc",
+      "ten": "Vườn qua đợt hạn",
+      "t": "Trong những mùa chăm vườn ở {LOC01}, mức nước hạ thấp hơn hòn đá đánh dấu. Người cùng giữ vườn nói mấy hộ bên dưới cũng chỉ còn một máng. Họ xin ngươi cùng xem lúc nào có thể chia phiên tưới.",
+      "c": [
+        {
+          "id": "chia",
+          "l": "Cùng các hộ kê lại phiên tưới",
+          "t": "Ngươi chép giờ từng nhà lấy nước và dành chỗ cho hộ có người bệnh không khiêng nổi gánh.",
+          "e": {
+            "h": 4
+          }
+        },
+        {
+          "id": "tuoi",
+          "l": "Nhận một lượt tưới muộn",
+          "t": "Ngươi ở lại tới khi người cuối lấy nước xong, rồi mới kéo gáo để tưới phần mình trông.",
+          "e": {
+            "h": 5
+          }
+        }
+      ]
+    }
+  ]
+}

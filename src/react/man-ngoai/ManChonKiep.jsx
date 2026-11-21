@@ -3,6 +3,7 @@ import { Html, PS } from '../html';
 
 export function ManChonKiep() {
   const { G, ORIGIN, TRAIT, ROOT } = PS;
+  const hide = PS.feat('vo'); // Sửa-C.6: linh căn luôn ẩn tới khi trắc, kể cả kiếp đầu
   return (
     <div className="birth">
       <h2>Chọn một kiếp</h2>
@@ -14,7 +15,7 @@ export function ManChonKiep() {
             <button key={i} className="fate" data-act="born" data-arg={i}>
               <span className="f-n"><b>{c.ten}</b><small>{c.g === 'nam' ? 'nam' : 'nữ'} · quê {c.que}</small></span>
               <span className="f-r"><i>Xuất thân</i><b>{og.n}</b><small>{og.d}</small></span>
-              <span className="f-r"><i>Linh căn</i><Html as="b" h={c.root.els.map(e => PS.elSeal(e)).join('') + ' ' + PS.esc(R0.n)} /><small>{R0.d}</small></span>
+              {hide ? <span className="f-r"><i>Linh căn</i><b>Chưa trắc</b><small>Phải chờ trắc linh mới biết.</small></span> : <span className="f-r"><i>Linh căn</i><Html as="b" h={c.root.els.map(e => PS.elSeal(e)).join('') + ' ' + PS.esc(R0.n)} /><small>{R0.d}</small></span>}
               <span className="f-r"><i>Mệnh cách</i><b>{tr.n}</b><small>{tr.d}</small></span>
             </button>
           );

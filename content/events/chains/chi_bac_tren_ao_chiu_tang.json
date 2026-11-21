@@ -41,7 +41,12 @@
           "l": "Nhận cuộn chỉ là của ngươi",
           "t": "Hai phái bỏ qua. {$a.ten} luồn phần chỉ đã lộ vào một vết rách phía trong.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "an": [
               "a",
               "mặt trong áo trắng"
@@ -53,7 +58,9 @@
           "l": "Để họ xem cổ áo",
           "t": "Ngươi được coi là giữ lễ. {$a.ten} tự tháo chỉ, còn {$b.ten} đứng nhìn đến hết nút cuối.",
           "e": {
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -142,7 +149,12 @@
           "l": "Cho họ dùng nhà mái kín qua một buổi",
           "t": "Ngươi cho họ mượn gian nhà một buổi, chịu lời trách vì đưa người ngoại phái vào. Lúc trả chìa, họ nói đã bàn xong chuyện tự xin ra ngoài làm việc chung; lần sau sẽ không phải lén gặp nữa.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "hẹn ở vườn mai"
@@ -154,7 +166,9 @@
           "l": "Nhờ họ trao đổi tin hai phái để trả ơn",
           "t": "Ngươi có tin đổi người giữ đèo. Họ gói tin trong hai mảnh vải, mỗi mảnh lấy từ một đầu áo.",
           "e": {
-            "karma": -1,
+            "hd": {
+              "t": 1
+            },
             "st": 10
           }
         },
@@ -245,7 +259,12 @@
           "l": "Đứng tên cho hai người nhận chung một việc ngoài núi",
           "t": "Ngươi đứng tên xin cho họ cùng nhận một việc ngoài núi, nhận trách nhiệm nếu về trễ. Họ hẹn nhau ngay trước cửa phát áo mưa, lần này không giấu người đang nhìn.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "chiếc kim trả lại"
@@ -258,7 +277,7 @@
           "t": "Ngươi được trả công giới thiệu. Hai người đi hai lượt khác nhau, chiếc kim nằm nguyên trong khe cửa.",
           "e": {
             "st": 12,
-            "karma": -2
+            "deed": "lua_loi"
           }
         },
         {
@@ -338,14 +357,19 @@
           "alignment": "context"
         }
       },
-      "text": "Hai phái đóng đèo giữa lúc dân chở vải lên. Nếu ngươi từng mở chỗ gặp, hai đệ tử đến cùng nhau. Nếu ngươi từng lấy tin hoặc tiền thưởng, họ đến từ hai đầu đèo, mỗi người cầm một lệnh riêng.",
+      "text": "Hai phái chặn đèo đúng lúc dân chuyển vải qua. Nếu ngươi từng giúp hai đệ tử gặp nhau, họ tới cùng xin mở đường. Nếu ngươi từng bán tin hoặc nhận thưởng, hai người đến từ hai đầu đèo, mỗi người cầm lệnh của phái mình.",
       "choices": [
         {
           "i": "✋",
           "l": "Bảo lãnh cho cả hai cùng mở lối",
           "t": "Ngươi bảo lãnh cho họ mở đèo, chịu bị một phái thu lại quyền ra vào vì trái lệnh giữ đường. Dân chở vải qua được trước mưa. Hai đệ tử ở lại nhận lỗi cùng nhau, không để một người chịu thay.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -354,7 +378,7 @@
           "t": "Ngươi có lời, họ phải chia lượt canh. Một người ôm chồng vải của khách không đủ tiền cho tới khi trời tối.",
           "e": {
             "st": 18,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -441,22 +465,27 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu lối từng mở cho mọi người, hai đệ tử đã rời phái và cùng giữ đường vải. Nếu lệnh qua từng được bán, họ vẫn giữ hai bậc gác, lâu lâu cùng đem áo xuống giặt.",
+      "text": "Nếu ngươi giúp mở đèo cho dân, hai đệ tử đã rời phái và cùng coi đường chở vải. Nếu ngươi bán giấy qua đèo, họ vẫn đứng gác ở hai phía, thỉnh thoảng mới gặp nhau lúc xuống suối giặt áo.",
       "choices": [
         {
           "i": "💎",
-          "l": "Trả lại tiền lệnh hoặc góp vải mở nhà trú đèo",
+          "l": "Trả tiền giấy qua đèo hoặc góp dựng chỗ trú",
           "t": "Người gánh vải có chỗ nghỉ, hai người đặt chung một hòm kim. Nắp hòm để mở, bên trong có sợi chỉ bạc đã xỉn.",
           "cost": {
             "st": 13
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
           "i": "💎",
-          "l": "Đặt họ làm áo hộ thân cho ngươi",
+          "l": "Thuê hai người may áo hộ thân cho ngươi",
           "t": "Ngươi có áo chịu gió kiếm, họ có tiền sống qua mùa. Phần chỉ bạc cuối dùng để viền một chiếc túi nhỏ bên trong.",
           "e": {
             "namedRelic": {

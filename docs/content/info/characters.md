@@ -469,6 +469,14 @@ Nguồn: `content/characters/root.js`
     "d": "Đủ năm hệ. Người đời gọi là phế linh căn."
   },
   {
+    "id": "vo",
+    "n": "Vô linh căn",
+    "m": 0,
+    "w": 0,
+    "k": 0,
+    "d": "Không có linh căn. Không thể dẫn khí nhập thể."
+  },
+  {
     "id": "cuc",
     "n": "Cực linh căn",
     "m": 1.5,
@@ -487,6 +495,7 @@ Nguồn: `content/characters/origin.js`
 [
   {
     "id": "nong",
+    "grp": "thuong",
     "n": "Con nhà nông",
     "i": "🌾",
     "fx": {
@@ -497,6 +506,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "tran",
+    "grp": "thuong",
     "n": "Con nhà trận sư",
     "i": "🔯",
     "fx": {
@@ -508,6 +518,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "dote",
+    "grp": "thuong",
     "n": "Con nhà đồ tể",
     "i": "🔪",
     "fx": {
@@ -519,6 +530,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "thusinh",
+    "grp": "thuong",
     "n": "Thư sinh nghèo",
     "i": "📜",
     "fx": {
@@ -530,6 +542,11 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "khat",
+    "grp": "kho",
+    "bac": [
+      0,
+      30
+    ],
     "n": "Tiểu khất cái",
     "i": "🥣",
     "fx": {
@@ -542,6 +559,15 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "thegia",
+    "grp": "kha",
+    "lt": [
+      1,
+      2
+    ],
+    "bac": [
+      10000,
+      20000
+    ],
     "n": "Con thứ thế gia",
     "i": "🏯",
     "st": 45,
@@ -551,6 +577,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "mieu",
+    "grp": "kho",
     "n": "Đứa trẻ bị bỏ ở miếu",
     "i": "🛕",
     "fx": {
@@ -562,6 +589,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "ren",
+    "grp": "thuong",
     "n": "Con nhà thợ rèn",
     "i": "⚒️",
     "fx": {
@@ -572,6 +600,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "daodong",
+    "grp": "thuong",
     "n": "Tiểu đạo đồng",
     "i": "☯️",
     "fx": {
@@ -583,6 +612,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "linh",
+    "grp": "thuong",
     "n": "Cựu binh biên ải",
     "i": "🛡️",
     "fx": {
@@ -595,14 +625,20 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "buon",
+    "grp": "kha",
+    "bac": [
+      8000,
+      20000
+    ],
     "n": "Con nhà buôn",
     "i": "⚖️",
     "st": 70,
-    "d": "Thêm nhiều linh thạch",
+    "d": "Hầu bao rủng rỉnh bạc",
     "bio": "là con nhà buôn vải ở {$que}, giỏi tính toán hơn giỏi đánh nhau"
   },
   {
     "id": "chai",
+    "grp": "thuong",
     "n": "Con nhà chài lưới",
     "i": "🎣",
     "fx": {
@@ -613,6 +649,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "duoc",
+    "grp": "thuong",
     "n": "Dược đồng",
     "i": "🌿",
     "pill": "hoixuan",
@@ -622,6 +659,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "mahuyet",
+    "grp": "kho",
     "n": "Mang huyết mạch ma tộc",
     "i": "🩸",
     "fx": {
@@ -634,6 +672,7 @@ Nguồn: `content/characters/origin.js`
   },
   {
     "id": "hat",
+    "grp": "thuong",
     "n": "Con nhà gánh hát",
     "i": "🎭",
     "fx": {
@@ -654,7 +693,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Thân pháp +2, Linh lực +5%",
     "bio": "lớn lên bên bến {$que}, học thắt nút qua những đêm đợi người ra khơi",
     "st": 8,
-    "pill": "hoixuan"
+    "pill": "hoixuan",
+    "grp": "thuong"
   },
   {
     "id": "xt_tre_giu_ngua_tram",
@@ -667,7 +707,8 @@ Nguồn: `content/characters/origin.js`
     "bio": "từng giữ ngựa cho trạm dịch ở {$que}, nghe tiếng vó là biết khách nào đã tới",
     "st": 12,
     "age": 1,
-    "pill": "hoixuan"
+    "pill": "hoixuan",
+    "grp": "thuong"
   },
   {
     "id": "xt_nguoi_chep_so_thoc",
@@ -680,7 +721,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Ngộ tính +2, Khí vận +1, có tâm pháp gia truyền",
     "bio": "quen đếm thóc ở kho {$que}, đến năm đói vẫn nhớ nhà nào còn một đấu",
     "st": 18,
-    "karma": 1
+    "karma": 1,
+    "grp": "thuong"
   },
   {
     "id": "xt_con_nha_ham_than",
@@ -692,7 +734,8 @@ Nguồn: `content/characters/origin.js`
     },
     "d": "Khí huyết +7%, Thủ +7%",
     "bio": "học phân biệt gỗ cháy bằng mùi khói khi theo người nhà vào núi ở {$que}",
-    "st": 5
+    "st": 5,
+    "grp": "thuong"
   },
   {
     "id": "xt_dua_tre_nhat_o_bac_cua",
@@ -705,7 +748,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Khí vận +3, Đạo tâm +1",
     "bio": "được nhặt trước bậc cửa ở {$que} vào ngày tuyết tan, gói trong một tấm áo người lớn",
     "karma": 4,
-    "pill": "hoixuan"
+    "pill": "hoixuan",
+    "grp": "kho"
   },
   {
     "id": "xt_ke_tung_vac_bia",
@@ -719,7 +763,8 @@ Nguồn: `content/characters/origin.js`
     "bio": "vác bia thuê qua nhiều ngõ ở {$que}, nhớ được vài cái tên trên đường về",
     "st": 14,
     "karma": -1,
-    "age": 2
+    "age": 2,
+    "grp": "thuong"
   },
   {
     "id": "xt_con_nguoi_det_chieu",
@@ -732,7 +777,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Linh lực +6%, Ngộ tính +1",
     "bio": "từng ngồi giữ mép chiếu ở {$que}, học đếm nhịp bằng tiếng tay đập cói",
     "st": 10,
-    "karma": 1
+    "karma": 1,
+    "grp": "thuong"
   },
   {
     "id": "xt_dong_tu_dun_tra",
@@ -746,7 +792,8 @@ Nguồn: `content/characters/origin.js`
     "bio": "thường đun trà ở {$que}, để ý chén người khách nào nguội trước",
     "st": 15,
     "karma": 2,
-    "pill": "tukhi"
+    "pill": "tukhi",
+    "grp": "thuong"
   },
   {
     "id": "xt_nguoi_giu_mieu_nho",
@@ -760,7 +807,8 @@ Nguồn: `content/characters/origin.js`
     "bio": "giữ ngọn đèn trong miếu {$que} qua ba mùa nước lên, ngủ ngay trên bậc cửa",
     "st": 4,
     "karma": 3,
-    "age": 1
+    "age": 1,
+    "grp": "thuong"
   },
   {
     "id": "xt_ke_bo_truong_thi",
@@ -774,7 +822,8 @@ Nguồn: `content/characters/origin.js`
     "bio": "bỏ trường thi ở {$quoc} khi nghe tin nhà dột, mang về cả xấp giấy chưa viết",
     "st": 20,
     "tamma": 3,
-    "age": 3
+    "age": 3,
+    "grp": "thuong"
   },
   {
     "id": "xt_con_nha_ganh_muoi",
@@ -786,7 +835,8 @@ Nguồn: `content/characters/origin.js`
     },
     "d": "Thân pháp +2, Khí huyết +5%",
     "bio": "quen gánh muối qua lối đồi ở {$que}, từng về nhà bằng đúng đường muối rơi",
-    "st": 22
+    "st": 22,
+    "grp": "thuong"
   },
   {
     "id": "xt_nguoi_hoc_khac_khuon",
@@ -799,7 +849,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Tỉ lệ luyện thành +5%, Ngộ tính +1",
     "bio": "giữ những mảnh gỗ thừa ở {$que} để khắc lại hình con vật mình gặp dọc đường",
     "st": 17,
-    "age": 1
+    "age": 1,
+    "grp": "thuong"
   },
   {
     "id": "xt_ke_cheo_do_ban_dem",
@@ -814,7 +865,8 @@ Nguồn: `content/characters/origin.js`
     "st": 18,
     "karma": 2,
     "tamma": 2,
-    "age": 1
+    "age": 1,
+    "grp": "thuong"
   },
   {
     "id": "xt_con_nha_boc_thuoc",
@@ -828,7 +880,8 @@ Nguồn: `content/characters/origin.js`
     "bio": "lớn lên cạnh giỏ thuốc ở {$que}, từng chép tên từng vị lên mặt trong nắp giỏ",
     "st": 12,
     "karma": 3,
-    "pill": "giaidoc"
+    "pill": "giaidoc",
+    "grp": "thuong"
   },
   {
     "id": "xt_dua_tre_lon_sau_bep",
@@ -842,7 +895,8 @@ Nguồn: `content/characters/origin.js`
     "bio": "lớn sau bếp nhà trọ ở {$que}, được chủ quán để riêng phần cơm sát đáy nồi",
     "st": 3,
     "karma": 1,
-    "pill": "hoixuan"
+    "pill": "hoixuan",
+    "grp": "kho"
   },
   {
     "id": "xt_tho_cao_voi_tuong",
@@ -855,7 +909,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Thủ +9%, Thân pháp +1",
     "bio": "từng cạo vôi cho những nhà cũ ở {$que}, nhặt lại nhiều mảnh tranh người ta đã phủ đi",
     "st": 11,
-    "age": 1
+    "age": 1,
+    "grp": "thuong"
   },
   {
     "id": "xt_nguoi_boi_giay_do",
@@ -868,7 +923,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Linh lực +7%, Ngộ tính +2",
     "bio": "biết pha nước bồi giấy từ nhỏ ở {$que}, có lần giữ được thư nhà qua một đêm mưa",
     "st": 16,
-    "karma": 1
+    "karma": 1,
+    "grp": "thuong"
   },
   {
     "id": "xt_ke_tron_no_qua_deo",
@@ -883,7 +939,8 @@ Nguồn: `content/characters/origin.js`
     "st": -8,
     "karma": -5,
     "tamma": 6,
-    "age": 1
+    "age": 1,
+    "grp": "kho"
   },
   {
     "id": "xt_con_nha_nung_men",
@@ -895,7 +952,8 @@ Nguồn: `content/characters/origin.js`
     },
     "d": "Tỉ lệ luyện thành +6%, Khí huyết +5%",
     "bio": "lớn quanh lò gốm ở {$que}, nhận ra mẻ men ngon nhờ tiếng nứt khi lò nguội",
-    "st": 20
+    "st": 20,
+    "grp": "thuong"
   },
   {
     "id": "xt_nguoi_lam_thue_o_mo",
@@ -911,7 +969,8 @@ Nguồn: `content/characters/origin.js`
     "karma": -1,
     "tamma": 2,
     "age": 2,
-    "pill": "hoixuan"
+    "pill": "hoixuan",
+    "grp": "kho"
   },
   {
     "id": "xt_ke_viet_thu_ho",
@@ -925,7 +984,8 @@ Nguồn: `content/characters/origin.js`
     "bio": "kiếm sống bằng nghề viết thư ở {$que}, thuộc nhiều lời từ biệt hơn lời mời về",
     "st": 25,
     "karma": 4,
-    "age": 2
+    "age": 2,
+    "grp": "thuong"
   },
   {
     "id": "xt_hau_due_nguoi_coi_an",
@@ -938,7 +998,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Linh lực +8%, Khí vận +2, có tâm pháp gia truyền",
     "bio": "được dạy cách bọc ấn từ nhỏ ở {$que}, đến lúc đi xa còn giữ tấm vải lót đã bạc màu",
     "st": 45,
-    "karma": 2
+    "karma": 2,
+    "grp": "kha"
   },
   {
     "id": "xt_nguoi_hoc_bo_xuong",
@@ -953,7 +1014,8 @@ Nguồn: `content/characters/origin.js`
     "st": 14,
     "karma": 5,
     "age": 1,
-    "pill": "giaidoc"
+    "pill": "giaidoc",
+    "grp": "thuong"
   },
   {
     "id": "xt_ke_lon_len_ben_vach_da",
@@ -965,7 +1027,8 @@ Nguồn: `content/characters/origin.js`
     },
     "d": "Thân pháp +3, Né tránh +4%",
     "bio": "từng lội theo những đường khe cạn ở {$que}, tối về phơi giày trên vách gần bếp",
-    "age": 1
+    "age": 1,
+    "grp": "thuong"
   },
   {
     "id": "xt_con_nha_giu_kho_duong",
@@ -978,7 +1041,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Khí huyết +7%, Khí vận +2",
     "bio": "lớn gần kho đường ở {$que}, ngày lạnh thường chia cho bạn mấy cục vụn dưới đáy hũ",
     "st": 36,
-    "karma": 1
+    "karma": 1,
+    "grp": "thuong"
   },
   {
     "id": "xt_nguoi_bi_tra_ve_tu_bien_ai",
@@ -994,7 +1058,8 @@ Nguồn: `content/characters/origin.js`
     "karma": -3,
     "tamma": 4,
     "age": 3,
-    "pill": "hoixuan"
+    "pill": "hoixuan",
+    "grp": "thuong"
   },
   {
     "id": "xt_tre_an_duoi_san_dan",
@@ -1008,7 +1073,8 @@ Nguồn: `content/characters/origin.js`
     "bio": "lớn lên dưới sàn đan ở {$que}, đoán được ai đến nhà bằng cách họ giũ dép",
     "st": 6,
     "karma": 1,
-    "tamma": 1
+    "tamma": 1,
+    "grp": "kho"
   },
   {
     "id": "xt_ke_mang_tro_ve_que",
@@ -1023,7 +1089,8 @@ Nguồn: `content/characters/origin.js`
     "st": 5,
     "karma": 4,
     "tamma": 3,
-    "age": 2
+    "age": 2,
+    "grp": "kho"
   },
   {
     "id": "xt_nguoi_thua_ke_sap_bac",
@@ -1036,7 +1103,8 @@ Nguồn: `content/characters/origin.js`
     "d": "Giảm giá mua +6%, Khí vận +2",
     "bio": "được để lại một sạp bạc ở {$que}, lấy mấy đồng méo cuối cùng làm tiền lên đường",
     "st": 65,
-    "karma": -1
+    "karma": -1,
+    "grp": "kha"
   },
   {
     "id": "xt_nguoi_hoc_dao_sau_mua_lu",
@@ -1052,7 +1120,8 @@ Nguồn: `content/characters/origin.js`
     "karma": 2,
     "tamma": 1,
     "age": 5,
-    "pill": "tukhi"
+    "pill": "tukhi",
+    "grp": "thuong"
   }
 ]
 ```
@@ -5240,6 +5309,21 @@ Nguồn: `content/characters/tt-dest.js`
     },
     "lore": "Thiên sinh không thể cảm nhận Mộc khí.",
     "story": "Thiên sinh không thể cảm nhận Mộc khí."
+  },
+  "vo_can": {
+    "id": "vo_can",
+    "name": "Vô Căn",
+    "description": "Ngộ tính giảm nhẹ; Công phép giảm nhẹ.",
+    "rank": 1,
+    "cost": 10,
+    "effects": {
+      "attributeChangePercent": {
+        "aptitude": -3,
+        "magicPower": -3
+      }
+    },
+    "lore": "Không có linh căn, con đường tu tiên vô cùng gian nan.",
+    "story": "Không có linh căn, con đường tu tiên vô cùng gian nan."
   },
   "thien_luong_chi_nhan": {
     "id": "thien_luong_chi_nhan",

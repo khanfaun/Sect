@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 1,
+  "id": "OR38",
+  "loai": "xuat_than",
+  "ten": "Tay giữ chiếc nẹp",
+  "xuatThan": "xt_nguoi_hoc_bo_xuong",
+  "goiYDaiLo": [
+    "y_gia"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Người bệnh đau hơn sau khi bó nẹp",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Người ngươi bó nẹp ở {LOC14} nói lúc nghỉ lại đau hơn. Dây để vết hằn, họ chưa dám đặt chân xuống. Người coi bệnh muốn theo dõi thêm trước khi nói đã khỏi.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Theo ca tới khi bước lại",
+          "t": "Ngươi nhờ người coi bệnh sửa nẹp và theo từng lượt đến khi họ bước ổn.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ghi lời đau rồi hỏi giới hạn",
+          "t": "Ngươi chép đúng lời người bệnh, xin người coi xem trước khi đặt lần thử sau.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ở cùng ca không đỡ",
+          "t": "Ngươi ngồi cạnh người bệnh qua một đêm, ghi cơn nào còn làm họ thức dậy.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Trang theo dõi chỉ có lượt đầu, người bệnh tự xin nới dây.",
+        "su": "Trang theo dõi chỉ có lượt đầu, người bệnh tự xin nới dây.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Nhiều cựu binh bị thương cùng chỗ",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "{NP27} dẫn ngươi qua dãy giường ở {LOC14}. Nhiều người bị thương đúng một chỗ dù về từ các lượt khác nhau. Một người giữ thanh gỗ có dấu của quân.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Học cách ghi thương tích lặp",
+          "t": "Người biết nghề chỉ chỗ chiếc nẹp tì vào chân. Ngươi ghi lại và để từng người bệnh xác nhận lời mình.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ghi người quân muốn gọi lại",
+          "t": "Ngươi đối tên từng người với phiếu gọi về đơn vị trước khi vết thương kín.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi cách chuyển ca vượt tay",
+          "t": "Ngươi học cách báo giới hạn và xin nơi nhận những người cần chăm tiếp.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người trở về đổi chỗ nằm, thanh gỗ chưa được đối với vết nẹp.",
+        "su": "Người trở về đổi chỗ nằm, thanh gỗ chưa được đối với vết nẹp.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Lính bị bắt luyện khi chưa lành",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC13"
+      },
+      "mo": "Phiếu {LOC11} ghi một món trang bị có cạnh lỗi. Lệnh ở {LOC13} buộc người dùng nó tập tiếp ngay sau hôm báo đau. Hai người ký đều từng được trại báo về vết thương.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối trang bị và lệnh bằng hồ sơ ca",
+          "t": "Ngươi đưa dấu vết cho người xét, xin dừng lượt để người bệnh tập bước.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận giấy ứng công từ quân",
+          "t": "Ngươi nhận khoản ứng với điều kiện cho một số người trở lại trước khi lành.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi ca không thể khỏi bằng nẹp",
+          "t": "Ngươi chép giới hạn của mình, nhờ trại ghi người có thể chăm hoặc nhận chuyển.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lệnh luyện giữ nguyên, phiếu trang bị chưa được đối cùng ca thương.",
+        "su": "Lệnh luyện giữ nguyên, phiếu trang bị chưa được đối cùng ca thương.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Giúp tập đi hay giao người cho quân?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Người đã bước ổn ở {LOC14} xin chỗ tập tiếp. Người gọi quân mang giấy ứng công. Một gia đình khác chỉ muốn có người ngồi cạnh bệnh nhân chưa thể chuyển.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Mở lịch tập và cho bệnh nhân tự thử",
+          "t": "Ngươi đưa ca đã ổn vào lượt tập có chỗ nghỉ, cùng hộ góp chăm tiếp.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_1_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Cho lính trở lại đơn vị dù chưa lành",
+          "t": "Ngươi ký họ đủ trở lại theo giấy ứng, dù biết một người vẫn bước lệch.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Chuyển ca hoặc chăm hết sức mình",
+          "t": "Ngươi nói rõ ai còn chuyển đi được và gọi nơi nhận họ. Với người phải nằm lại, ngươi ở bên giường.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Gia đình tự thay nhau ngồi, người coi bệnh ghi ca chuyển sang ngày khác.",
+        "su": "Gia đình tự thay nhau ngồi, người coi bệnh ghi ca chuyển sang ngày khác.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ai chăm người sau khi tháo nẹp?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC14"
+      },
+      "mo": "Một gian ở {LOC14} có thể dùng làm chỗ tập. Quân cũng đã chừa chỗ cho ngươi theo. Các hộ trong trại muốn biết bệnh nhân sẽ được chuyển đến ai nếu thợ bó nẹp chịu thua.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giữ chỗ phục hồi bằng lịch góp",
+          "t": "Ngươi nhận gian chăm bệnh, giữ lịch trực và cất chiếc nẹp bên tên người đã tập đi lại.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Đi theo quân bằng hợp đồng đã ký",
+          "t": "Ngươi nhận công và theo đơn vị, nghe bước lệch của người mình đã giao.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Giữ nghề dân và giao hồ sơ thật",
+          "t": "Ngươi ghi nơi chuyển ca, để lại lời của người đã được ở cạnh mình.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Gian trống được dùng cất chăn, từng nhà tự hỏi nơi chuyển ca.",
+        "su": "Gian trống được dùng cất chăn, từng nhà tự hỏi nơi chuyển ca.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Bước chân trở về",
+      "dk": {
+        "dau": [
+          "moc_1_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người từng không dám đặt chân xuống nay tự bước tới chỗ nghỉ giữa gian. Lịch góp công vẫn kín qua lượt cấp chăn tiếp theo. Chiếc nẹp đầu được giữ cùng tên người đã dạy ngươi nghe lời đau.",
+      "su": "Chỗ tập ở {LOC14} duy trì lượt chăm và giúp ca theo dõi bước ổn.",
+      "dauVong": "chiếc nẹp còn tên người đầu tiên tập bước lại trong gian."
+    },
+    {
+      "id": "B",
+      "ten": "Nẹp để ra trận",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Đơn vị nhận đủ người theo hợp đồng, kể cả người ngươi biết chưa lành. Dấu chân lệch thành một vệt riêng ở cửa trại sau lần chuyển sang lượt khác gác. Sổ ứng công vẫn ghi người ấy đã được duyệt trở lại.",
+      "su": "Đơn vị nhận lính chưa lành theo hợp đồng của {ten}.",
+      "dauVong": "dấu chân không đều còn trong lời người từng cùng gác trại."
+    },
+    {
+      "id": "C",
+      "ten": "Biết buông tay",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Ngươi giữ trang ghi khi nào nẹp không còn giúp được, và ai đã nhận ca chuyển. Người ở lại có người ngồi cùng theo ý họ. Lời về cơn đau và lời nhờ được ở cạnh đều có chỗ trong hồ sơ.",
+      "su": "Hồ sơ giữ giới hạn chữa và nơi chuyển, cùng lời người được chăm.",
+      "dauVong": "một lời nhờ ngồi cùng nằm dưới trang ghi ca vượt khả năng."
+    }
+  ],
+  "ngoai": "Gian trống được dùng cất chăn, từng nhà tự hỏi nơi chuyển ca."
+}

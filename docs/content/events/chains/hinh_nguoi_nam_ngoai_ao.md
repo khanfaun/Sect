@@ -19,11 +19,11 @@ Thiên ma {$a.ten} muốn học dáng người để qua cửa. Người coi c�
 - **1. Mua cho hắn áo mới để tự học dáng đi**
   Ngươi mua một chiếc áo vừa vai hắn, để người coi cửa dạy từng bước. Hắn đi chậm, vạt áo chưa chịu nằm yên, nhưng bóng đã là của riêng mình.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":4,"an":["a","chiếc áo đi tìm vai"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","chiếc áo đi tìm vai"]}`
 - **2. Thuê hắn mặc áo của người đã mất**
   Ngươi được mở cửa một lần theo tên cũ. Hắn cúi chào, cổ áo chậm một nhịp mới hạ xuống.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":-1,"tamma":2}`
+  - `e`: `{"hd":{"t":1},"tamma":2}`
 - **3. Bỏ đi**
   Ngươi để hắn tự quyết. Hắn xin người coi cửa cho thử đi không mặc áo cũ trước, chưa muốn mượn hình người khác.
 
@@ -55,10 +55,10 @@ Thiên ma {$a.ten} học ngồi im nhưng chỉ giữ được nửa người, v
 
 - **1. Dạy hắn ngồi theo dáng của chính hắn**
   Ngươi dạy hắn tự tìm thế ngồi vững, không cần bắt chước dáng ai. Hắn thử vài lần mới được, vui đến mức đứng bật dậy khoe. Ngươi phải nhắc bài hôm nay là ngồi im.
-  - `e`: `{"karma":4,"tv":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tv":4}`
 - **2. Dạy hắn giả dáng một khách quen**
   Hắn dẫn ngươi qua cửa hẹp. Khi được chào bằng tên người kia, hắn mất một lúc mới nhớ cúi đầu.
-  - `e`: `{"karma":-1}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Vạt áo đứng lên lần nữa. Hắn ngồi nhìn nó với vẻ rất kiên nhẫn.
 
@@ -92,10 +92,10 @@ Một người nhận thiên ma {$a.ten} là anh đã mất. Hắn biết chiế
 
 - **1. Kể cho người ấy nghe chiếc áo đã mượn từ đâu**
   Ngươi kể rõ áo thuộc về ai, người đang mặc là ai. Người ấy im lặng rồi xin giữ lại áo cũ, mời thiên ma ngồi bên như một vị khách. Hắn lần đầu được hỏi chính mình muốn ăn gì.
-  - `e`: `{"karma":4,"an":["a","nhà có một người ngồi nhầm"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","nhà có một người ngồi nhầm"]}`
 - **2. Để hắn ở lại qua một bữa cơm**
   Người ấy có một bữa với dáng người quen. {$a.ten} trả áo muộn, vạt áo vương mùi cơm mới.
-  - `e`: `{"karma":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Người ấy bưng thêm một bát. Hắn giữ hai tay trong tay áo.
 
@@ -129,10 +129,10 @@ Cửa soi bóng để nhận khách, không chỉ nhìn hình áo. Nếu thiên 
 
 - **1. Đặt tên hắn dưới chính cái bóng ấy**
   Ngươi đứng ra xác nhận tên riêng của hắn, bỏ cách mượn tên cũ qua cửa. Cửa nhận bóng, cho hắn đi dù hai vai còn lệch. Hắn quay lại tự xưng tên một lần nữa, lần này không hỏi ngươi đã đúng chưa.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Dùng chiếc áo để cả hai qua nhanh**
   Ngươi tiết kiệm một lượt chờ. Bên kia cửa, hắn phải cởi áo mới nghe được giọng mình.
-  - `e`: `{"karma":-2}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Người coi cửa {$b.ten} chừa cửa hé. Hắn nhìn qua khe, tay vẫn đặt ở cổ áo.
 
@@ -174,7 +174,7 @@ Nếu từng qua bằng tên mình, thiên ma {$a.ten} trông áo cho khách. N�
 - **1. Góp gỗ làm chỗ treo áo cho khách**
   Ngươi mua gỗ giúp hắn đóng thêm móc cho khách tự treo đồ. Hắn làm đủ cao thấp, giải thích có người không thích mượn hình vai của ai khác. Người coi cửa nghe xong, cười bảo hắn đã hiểu nghề.
   - `cost`: `{"st":22}`
-  - `e`: `{"karma":4,"an":["a","một cái móc thấp hơn"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","một cái móc thấp hơn"]}`
 - **2. Đặt hắn làm một chiếc áo mở lối**
   Ngươi được áo tốt, hắn có tiền sửa nhà. Trước khi trao, hắn gỡ sạch hình vai cũ khỏi lớp lót.
   - `cost`: `{"st":22}`

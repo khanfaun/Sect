@@ -1,0 +1,387 @@
+{
+ "schemaVersion": 1,
+ "loai": "nghe_tu",
+ "nghe": "TU22",
+ "ten": "Thương tu",
+ "su_kien": [
+  {
+   "ma": "S01",
+   "ten": "Chuyến hàng linh vật đầu",
+   "text": [
+    "Ở {LOC03}, ngươi đặt hàng lên cân trước giờ xe đi. Người chở chỉ vào chiếc hòm lỏng đai, bảo qua dốc xóc thì dấu niêm sẽ rách.",
+    "Trong khế có ghi rõ ngày giao. Quầy thợ bên cạnh còn mở, nhưng để họ sửa xong thì xe phải chờ tới lúc chợ vãn."
+   ],
+   "choices": [
+    {
+     "l": "Đóng lại đai rồi gửi hàng",
+     "t": "Ngươi giữ xe lại và trả thêm công đóng đai. Hòm tới nơi nguyên niêm, còn người mua ghi ngày nhận muộn ngay cạnh dấu của ngươi.",
+     "e": {
+      "st": -1,
+      "danh": 2,
+      "xp": 2
+     }
+    },
+    {
+     "l": "Chia hàng sang hòm của xe",
+     "t": "Ngươi xin người chở nhường chỗ trong hòm của họ rồi lập lại giấy giao. Xe đi đúng hẹn, nhưng tiền chuyến phải chia cho cả người cho mượn chỗ.",
+     "e": {
+      "st": 1,
+      "res": 1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S02",
+   "ten": "Bị cướp ở biên khu",
+   "text": [
+    "Xe trước đổ nghiêng ở trạm giáp biên, dây buộc hàng đã bị cắt. Người dẫn đường thở gấp và bảo nhóm cướp còn đứng ngay lối xe quay đầu.",
+    "Trong bụi có phu xe ôm chân, còn chiếc hòm ngươi đã vay tiền để mua nằm giữa đường. Sau lưng ngươi, người kéo xe hỏi phải gỡ ngựa đi lối nào."
+   ],
+   "choices": [
+    {
+     "l": "Bỏ xe để đưa phu bị thương đi",
+     "t": "Ngươi tháo ngựa, đỡ phu xe lên yên rồi men theo rãnh về trạm. Khi quay lại có người theo, đám cướp đã kéo hòm khỏi đường.",
+     "e": {
+      "deed": "cuu_nguoi",
+      "st": -3
+     }
+    },
+    {
+     "l": "Đổi hòm lấy lối đi",
+     "t": "Ngươi để hòm giữa đường và gọi cho họ lui đủ xa. Người bị thương lên được xe, còn khách mua phải nhận tin rằng hàng đã bị đem đi.",
+     "e": {
+      "st": -2,
+      "danh": -2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S03",
+   "ten": "Đấu giá gian lận",
+   "text": [
+    "Người xướng giá vừa khép sổ thì ngươi thấy phiếu cao nhất vẫn còn giắt sau cổ tay họ. Linh vật đã được chuyển sang khay của người trả thấp hơn.",
+    "Chủ hàng đứng ngoài hàng ghế, chờ lĩnh tiền để trả công. Ngươi có trong tay cuống phiếu còn hằn đúng dấu của lượt bị giấu."
+   ],
+   "choices": [
+    {
+     "l": "Đòi đọc lại phiếu trước sàn",
+     "t": "Ngươi đặt cuống phiếu lên khay và mời chủ hàng tới đối. Buổi bán phải mở lại, còn ghế của người xướng giá được dời khỏi bục.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "danh": 4
+     }
+    },
+    {
+     "l": "Rút hàng của mình khỏi buổi bán",
+     "t": "Ngươi chỉ cho chủ hàng chỗ giữ cuống rồi rút lô của mình về. Chủ sàn vẫn chốt giá cũ, còn ngươi phải tự tìm khách cho chuyến tiếp theo.",
+     "e": {
+      "st": -1,
+      "res": 1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S04",
+   "ten": "Con nợ là tông môn",
+   "text": [
+    "Tờ khế đặt trên bàn có dấu sơn môn, nhưng người đón ngươi chỉ mang ra bao linh thạch nhẹ hơn khoản đến hạn. Dưới sân, đệ tử đã xếp hàng nhận phần dùng qua mùa.",
+    "Người giữ kho xin dời phần nợ tới vụ sau. Họ đặt trước mặt ngươi chìa cửa kho hàng, hỏi có muốn giữ chìa để làm tin không."
+   ],
+   "choices": [
+    {
+     "l": "Gia hạn và giữ bản kê",
+     "t": "Ngươi nhận phần đang có, chép ngày trả phần còn lại trước mặt họ. Đệ tử vẫn lĩnh được phần trong kho, còn ngươi phải lùi chuyến mua tiếp.",
+     "e": {
+      "st": 1,
+      "danh": 3,
+      "hd": [
+       1,
+       0
+      ]
+     }
+    },
+    {
+     "l": "Nhận hàng thay khoản đến hạn",
+     "t": "Ngươi kiểm kho rồi chọn lô có thể bán lại, ghi giá ngay trên khế. Họ cho xe ngươi rời cổng, nhưng đơn đặt hàng mới được giao cho người khác.",
+     "e": {
+      "st": 3,
+      "res": -1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S05",
+   "ten": "Đầu cơ linh thảo trước thú triều",
+   "text": [
+    "Trước ngày thú triều tràn tới, các trạm bắt đầu hỏi mua linh thảo. Trong kho ngươi có bao còn tươi, ngoài sân có người đã trả trước chờ nhận.",
+    "Một lái hàng xin mua cả kho để bán khi đường ách lại. Người từ trạm chữa thú đem theo giấy hẹn cũ và cái giỏ chưa có gì."
+   ],
+   "choices": [
+    {
+     "l": "Giao linh thảo theo giấy hẹn",
+     "t": "Ngươi mở kho và cấp đúng phần đã hẹn cho từng trạm. Lái hàng bỏ giá cao đi, còn phu xe có đường giao hàng trước khi cổng đóng.",
+     "e": {
+      "danh": 5,
+      "hd": [
+       3,
+       0
+      ],
+      "st": 1
+     }
+    },
+    {
+     "l": "Giữ kho chờ giá lên",
+     "t": "Ngươi khóa cửa và đợi tin đường bị chặn. Hôm sau người mua trả giá cao, nhưng nhà ở sát trạm chỉ đủ bạc đem về phần lá vụn.",
+     "e": {
+      "st": 5,
+      "hd": [
+       0,
+       3
+      ],
+      "danh": -4
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S06",
+   "ten": "Thương minh chèn ép",
+   "text": [
+    "Tới {LOC03}, ngươi thấy tên mình bị gạch trên bảng chia lượt xe. Người giữ bảng bảo thành viên đã đồng ý dành chỗ cho hàng của hội trước.",
+    "Chủ các xe nhỏ đứng ngoài cửa nghe cùng câu ấy. Có người muốn ký vào hội, có người mang theo bản đồ đường vòng qua chợ nước."
+   ],
+   "choices": [
+    {
+     "l": "Ký theo lệ của thương minh",
+     "t": "Ngươi nhận suất xe và đồng ý trả phần phí theo bảng mới. Khi tới phiên ngươi, các xe nhỏ vẫn phải đứng ngoài với hàng đã lên men.",
+     "e": {
+      "st": 2,
+      "hd": [
+       0,
+       1
+      ]
+     }
+    },
+    {
+     "l": "Gom xe nhỏ đi tuyến khác",
+     "t": "Ngươi chia tiền thuê người dẫn đường với các chủ xe chờ ngoài cửa. Chuyến mất thêm ngày đường, nhưng mỗi nhà giữ được phiếu giao đứng tên mình.",
+     "e": {
+      "danh": 5,
+      "res": 1,
+      "st": -1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S07",
+   "ten": "Buôn hàng cấm cho ma tông",
+   "text": [
+    "Một người mua đặt khế ở mép bàn và dùng tay che dòng ghi nơi nhận. Món hàng bị cấm qua chốt, còn tiền trước đã nằm trong hòm ngươi.",
+    "Người theo xe chỉ mới được dặn chở hàng khô. Họ hỏi có nên lấy thêm bạt vì đêm nay phải dừng gần chốt hay không."
+   ],
+   "choices": [
+    {
+     "l": "Hủy chuyến, trả tiền cọc",
+     "t": "Ngươi mở hòm trả đủ tiền rồi nói với phu xe vì sao phải dỡ hàng. Khách mang khế bỏ đi, còn tiền công chuẩn bị do ngươi tự trả.",
+     "e": {
+      "st": -2,
+      "hd": [
+       3,
+       0
+      ]
+     }
+    },
+    {
+     "l": "Giữ chuyến và nói rõ món hàng",
+     "t": "Ngươi mở khế cho phu xe đọc, trả công cho người muốn rút rồi đưa phần còn lại đi. Khi hàng tới, người mua nhận hết và dặn chuyến sau tự lo người.",
+     "e": {
+      "st": 6,
+      "hd": [
+       0,
+       3
+      ],
+      "tamma": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S08",
+   "ten": "Linh thạch giả",
+   "text": [
+    "Viên linh thạch kêu đục khi chạm mặt cân. Ngươi thấy vết phủ đọng trong rãnh, đúng chỗ người trả tiền vừa miết ngón tay.",
+    "Người nhận công đã tới quầy, có người chờ tiền để kịp xe về. Còn trong hòm chỉ có ít linh thạch đã đối được dấu."
+   ],
+   "choices": [
+    {
+     "l": "Tách đá giả và giữ phiếu",
+     "t": "Ngươi để riêng số đá nghi giả rồi trả công bằng phần đã xác nhận. Người chưa đến lượt nhận phiếu hẹn để lần sau khỏi phải kể lại từ đầu.",
+     "e": {
+      "st": -1,
+      "danh": 2
+     }
+    },
+    {
+     "l": "Bù công rồi đòi bên giao giải trình",
+     "t": "Ngươi lấy phần vốn dành mua hàng để trả công đúng lượt. Sau đó ngươi mang viên giả và biên nhận tới quầy đã giao, buộc họ mở sổ đối.",
+     "e": {
+      "st": -2,
+      "danh": 4,
+      "xp": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S09",
+   "ten": "Cứu một thương đội",
+   "text": [
+    "Thương đội mắc ở đoạn suối, bánh xe ngập tới trục. Họ đã tháo ngựa ra, nhưng người trông hàng không chịu bỏ hòm mà lên bờ.",
+    "Xe của ngươi còn dây kéo. Dùng dây để cứu xe sẽ lỡ buổi giao ở chợ, còn đưa người đi ngay thì kho hàng có thể bị nước cuốn."
+   ],
+   "choices": [
+    {
+     "l": "Kéo người lên trước",
+     "t": "Ngươi đưa dây cho người còn dưới nước, giữ chặt tới khi họ lên bờ. Hòm trôi mất, nhưng người trông hàng còn giữ được phiếu để báo chủ.",
+     "e": {
+      "deed": "cuu_nguoi"
+     }
+    },
+    {
+     "l": "Kéo cả xe qua bãi cạn",
+     "t": "Ngươi gọi người đã lên bờ cùng ghì dây và xoay đầu xe. Hàng được cứu, còn người mua của ngươi rời chợ trước khi chuyến tới.",
+     "e": {
+      "st": 2,
+      "res": 1,
+      "hp": "-8%"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S10",
+   "ten": "Phường thị riêng",
+   "text": [
+    "Ngươi trải khế thuê đất cạnh phác đồ quầy ở {LOC03}. Người buôn nhỏ hỏi tiền kê sạp tính theo ngày hay theo cả mùa.",
+    "Người góp vốn chỉ chỗ tốt dưới mái và xin dành nó cho hàng nhà mình. Chỗ sát rãnh nước còn đủ rộng để mở thêm lối cho khách."
+   ],
+   "choices": [
+    {
+     "l": "Mở sạp theo phiên chung",
+     "t": "Ngươi ghi lượt sạp để mỗi nhà tự xem được ngày của mình. Người góp vốn lấy phần lời muộn hơn, nhưng lối sát rãnh được để trống cho khách.",
+     "e": {
+      "danh": 6,
+      "hd": [
+       1,
+       0
+      ],
+      "res": 1
+     }
+    },
+    {
+     "l": "Cho người góp vốn chọn quầy trước",
+     "t": "Ngươi nhường quầy dưới mái để đổi lấy tiền dựng sạp sớm. Các nhà buôn nhỏ chuyển ra ngoài, tự kê ván qua rãnh cho khách tới.",
+     "e": {
+      "st": 5,
+      "danh": -3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S11",
+   "ten": "Tài thần giáng (tin đồn)",
+   "text": [
+    "Một người đi chợ đặt tiền lên quầy và bảo hàng qua tay ngươi bán sẽ gặp vận. Ngoài cửa, có người đã cầm món đồ đem cầm cố để lấy vốn theo chuyến.",
+    "Ngươi vừa nhận tin chuyến ấy có thể trễ vì cửa trạm hỏng. Người cầm món đồ vẫn đứng đợi ngươi ra giá cho họ góp phần."
+   ],
+   "choices": [
+    {
+     "l": "Nói rõ rủi ro trước khi nhận",
+     "t": "Ngươi cho họ đọc giấy trạm rồi để từng người quyết định. Nhà cần tiền gấp đem món cầm về, còn số vốn nhận được chỉ đủ cho chuyến ngắn.",
+     "e": {
+      "danh": 4,
+      "st": 1
+     }
+    },
+    {
+     "l": "Nhận phần góp theo giá đang chào",
+     "t": "Ngươi nhận vốn khi tin tốt còn lan ngoài chợ. Xe tới muộn, và lúc trả lời người góp, ngươi phải mở sổ bên cạnh những món đồ họ đã cầm.",
+     "e": {
+      "st": 5,
+      "res": 2,
+      "tamma": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S12",
+   "ten": "Phá sản",
+   "text": [
+    "Người giữ quầy gỡ tấm biển xuống, để lộ vệt tường sạch phía sau. Trong hòm còn tiền lẻ và phiếu của các phu xe chưa lĩnh công.",
+    "Chủ nợ chờ ngoài cửa, còn người làm đã đến lấy đồ nghề. Ngươi phải nói họ được giữ giấy gì trước khi bàn giao chìa."
+   ],
+   "choices": [
+    {
+     "l": "Chia phần còn lại trước mặt các bên",
+     "t": "Ngươi đọc sổ và ghi món nợ còn thiếu trên từng phiếu. Chủ nợ nhận chìa kho, còn người làm giữ giấy có chữ của người đứng tên trả.",
+     "e": {
+      "st": "-60%",
+      "deed": "giu_loi"
+     }
+    },
+    {
+     "l": "Bán hết hàng để ưu tiên trả công",
+     "t": "Ngươi bán lô cuối cho hàng bên cạnh rồi trả công đến hạn. Chủ nợ nhận quầy trống, giữ tờ khế chưa gạch và chờ ngươi ở phiên sau.",
+     "e": {
+      "st": "-40%",
+      "danh": -3
+     }
+    }
+   ]
+  }
+ ],
+ "ket_cuc": [
+  {
+   "ma": "K01",
+   "ten": "Tài thần",
+   "canh": [
+    "Ở {LOC03}, người giữ cân phải đổi sang sân rộng vì chuyến hàng chen kín cửa. Các lái buôn dùng dấu của ngươi để nhận hàng ở quầy mà chẳng cần ngươi có mặt.",
+    "Ngươi đi vòng qua mái sau và ghé chỗ người ghi phí. Trước mặt họ là sổ lời, bên dưới còn những biên nhận phải đối khi xe về."
+   ]
+  },
+  {
+   "ma": "K02",
+   "ten": "Phá sản, bị chủ nợ giết",
+   "canh": [
+    "Ngươi trả chiếc chìa cuối cùng, nhưng chủ nợ vẫn chặn đường ở ngõ hẹp. Sáng hôm sau, người làm tìm thấy ngươi bên tấm biển quầy đã tháo.",
+    "Họ đem phiếu tiền công ra bàn để tìm tên người có thể trả. Tờ kê nợ còn nguyên dấu, nhưng ghế đầu quầy đã trống."
+   ]
+  },
+  {
+   "ma": "K03",
+   "ten": "Quy ẩn với kho báu (chôn cho kiếp sau)",
+   "canh": [
+    "Ngươi thôi đứng tên chuyến và chở hòm cuối về chỗ đất khô. Trước khi lấp, ngươi giắt vào nắp mẩu giấy vẽ lối tính từ bậc cửa.",
+    "Sau vụ mưa, cỏ che khuất vết đào, còn mẩu giấy chép lại nằm trong sổ luân hồi. Người qua đường chỉ thấy bậc cửa thấp và chỗ vừa đủ kê chân."
+   ]
+  },
+  {
+   "ma": "K04",
+   "ten": "Thương minh truyền đời",
+   "canh": [
+    "Ngươi trao sổ giao nhận cho người sẽ trông phiên sau. Họ đọc lại cả giá và khoản phu xe được lĩnh, rồi mới gọi chuyến đầu.",
+    "Về sau, chữ ký trên khế đổi tay nhiều lượt. Các nhà vẫn giữ bản của mình để còn đối nếu hòm giao tới bị hỏng."
+   ]
+  }
+ ]
+}

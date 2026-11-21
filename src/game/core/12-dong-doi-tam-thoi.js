@@ -35,14 +35,14 @@ function afterlife(r,cause,info){
   // kẻ đã giết người chơi
   if(cause==='combat'&&info&&!info.boss&&info.k&&info.k!=='kiep'){const old=w.nemesis&&w.nemesis.n===info.n?w.nemesis.lv:0;w.nemesis={n:info.n,k:info.k,i:info.i,el:info.el,r:r.region,lv:old+1,kiep:r.kiep,who:r.ten};}
   // 5. năm tháng trôi qua
-  const yrs=ri(3,30);G.lastGap=yrs;
-  worldCoarse(yrs*12);rivalsCoarse(yrs*12);
+  const yrs=gapRoll(r);G.lastGap=yrs;
+  worldGap(yrs); // Đ8.5: khoảng dài thì tua theo thập kỷ (core2/56-luan-hoi.js)
   // 6. thế hệ
   for(let i=0;i<w.rstate.length;i++){if(!w.rstate[i].alive)newRival(i,true);}
   const keep=[];
   for(const L of w.legacy){
     if(L.done){continue;}
-    if(L.t==='an'&&chance(.5)){const pool=[];for(const R0 of w.regions.slice(0,Math.max(1,(r.maxRegion||0)+1)))for(const x of R0.nodes)if(['tran','thanh','tong'].includes(x.type)&&!x.patron)pool.push(x);
+    if(L.t==='an'&&chance(.5)){const pool=[];for(const R0 of w.regions.slice(0,Math.max(1,(r.maxRegion||0)+1)))for(const x of R0.nodes)if((isTownT(x.type)||x.type==='tong')&&!x.patron)pool.push(x);
       if(pool.length){const x=pick(pool);x.patron={ten:L.ten,who:L.who,d:L.d,role:x.type==='tong'?contentText("core_12-dong-doi-tam-thoi_js.afterlife.020"):contentText("core_12-dong-doi-tam-thoi_js.afterlife.021")};continue;}}
     if(L.t==='oan'&&chance(.5)){L.feud=1;keep.push(L);continue;}
     if(L.t==='oan'&&!L.feud)continue;

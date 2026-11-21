@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "san",
+  "len": [
+    "Người chợ đã mua mẻ săn do ngươi mang về. Một thợ quen cho biết mùa nào nên để thú non ở lại trong rừng.",
+    "Khách thuê ngươi dẫn một chuyến sâu vào rừng. Họ đợi ngươi xem dấu trên đất rồi mới dám bước qua chỗ khuất.",
+    "Các thợ săn trao ngươi quyền chọn đường. Trước khi đi, một người hỏi ai sẽ quay về nếu cả nhóm gặp mưa lớn.",
+    "Người gác làng đến tìm ngươi vì thú đã xuống sát ruộng. Họ muốn biết đường nào cần đóng để dân khỏi đi nhầm.",
+    "Danh thần tiễn đi qua nhiều bản. Người trẻ tới hỏi ngươi có biết lúc nào nên hạ cung để người sau còn vào rừng."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Lối rừng còn dấu gậy",
+      "t": "Sau khi ngươi mất, phường săn giữ một lối qua rừng cho người đi hái củi. Họ cắm dấu ở bãi thú non và thay nhau dẫn khách lúc trời mờ. Gia đình từng được ngươi đưa ra đặt quả khô bên mộ.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Giá lông trên cửa kho",
+      "t": "Người mua xếp hàng khi kho mở sau lễ tang. Một thợ từng mất công đem sổ tới hỏi vì sao phần lông nhà họ bị giữ. Các dấu trên sổ vẫn dẫn về giá ngươi từng đặt cho cả phường.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Cây cung gửi người đi trước",
+      "t": "Người từng theo ngươi một mùa nhận cây cung sau ngày chôn cất. Họ hạ nó xuống mỗi khi dẫn khách qua đường trơn, làm đúng lời ngươi từng dặn phải nhìn người trước khi nhìn dấu thú.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Bữa thịt dưới mái thấp",
+      "t": "Ngươi qua đời, người nhà chỉ còn vài dây phơi và một tấm da chưa bán. Bạn săn mang thịt đến giúp lo tang. Trong bữa, họ nhớ ngươi từng chia phần trước cho người đi xa nhất."
+    }
+  ]
+}

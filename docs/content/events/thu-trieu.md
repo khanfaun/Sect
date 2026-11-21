@@ -21,7 +21,7 @@ Nguồn chuẩn: `content/events/thu-trieu.json`. Bản đọc tự sinh. Cú ph
 - **1. Chặn thú triều lại**
   - `fight`: `{"k":"beast","cnt":3}`
   - **Thắng trận**: Con đầu đàn ngã xuống, cả bầy tan rã. Thôn trấn phía sau sẽ không bao giờ biết mình vừa thoát nạn.
-    `{"e":{"entGone":1,"tv":8,"karma":8,"st":20}}`
+    `{"e":{"entGone":1,"tv":8,"deed":"cuu_nguoi_hy_sinh","st":20}}`
 - **2. Tránh đường**
   Ngươi nép vào vách đá cho tới khi bầy thú chạy qua. Phía trước có ai đó sẽ không may.
   - `e`: `{"tamma":3}`
@@ -47,7 +47,7 @@ Nguồn chuẩn: `content/events/thu-trieu.json`. Bản đọc tự sinh. Cú ph
 - **2. Nhìn thẳng vào mắt nó**
   - `chk`: `["tam",12]`
   - **Thành công**: Rất lâu sau, thú vương quay đầu. Cả bầy theo nó rút về rừng.
-    `{"e":{"entGone":1,"tam":1,"karma":4}}`
+    `{"e":{"entGone":1,"tam":1,"hd":{"p":3}}}`
   - **Thất bại**: Nó gầm lên, lao tới.
     `{"fight":{"k":"beast","cnt":3},"win":{"t":"Ngươi đứng giữa xác thú, thở dốc.","e":{"entGone":1,"tv":8}}}`
 - **3. Lùi lại**
@@ -71,11 +71,11 @@ Nguồn chuẩn: `content/events/thu-trieu.json`. Bản đọc tự sinh. Cú ph
 
 - **1. Hộ tống dân chạy nạn**
   Ngươi dẫn họ đi đường tắt qua núi. Đi tới đâu, người ta lạy tới đó.
-  - `e`: `{"h":12,"karma":8,"an":["a","cứu cả nhà khỏi thú triều"]}`
+  - `e`: `{"h":12,"deed":"cuu_nguoi","an":["a","cứu cả nhà khỏi thú triều"]}`
 - **2. Quay lại chặn thú**
   - `fight`: `{"k":"beast","cnt":3}`
   - **Thắng trận**: Ngươi chặn được thú triều. Đám dân quay lại, mang theo rượu và gà.
-    `{"e":{"entGone":1,"tv":8,"karma":6,"st":15}}`
+    `{"e":{"entGone":1,"tv":8,"deed":"cuu_nguoi","st":15}}`
 - **3. Mặc kệ**
   Ngươi đi tiếp. Tiếng trẻ con khóc mãi sau lưng.
   - `e`: `{"tamma":3}`
@@ -132,9 +132,9 @@ Nguồn chuẩn: `content/events/thu-trieu.json`. Bản đọc tự sinh. Cú ph
 - **1. Ôm đứa trẻ chạy**
   - `chk`: `["tp",10]`
   - **Thành công**: Ngươi chạy như bay, bầy thú sượt qua sau lưng. Đứa bé ôm cổ ngươi không buông.
-    `{"e":{"karma":10,"an":["a","cứu giữa thú triều"]}}`
+    `{"e":{"deed":"cuu_nguoi_hy_sinh","an":["a","cứu giữa thú triều"]}}`
   - **Thất bại**: Chậm một bước. Bầy thú cắn xé, ngươi che cho đứa bé bằng chính lưng mình.
-    `{"e":{"hp":"-35%","karma":10,"an":["a","cứu giữa thú triều"]}}`
+    `{"e":{"hp":"-35%","deed":"cuu_nguoi_hy_sinh","an":["a","cứu giữa thú triều"]}}`
 - **2. Không kịp nữa**
   Ngươi quay mặt đi.
   - `e`: `{"tamma":8}`

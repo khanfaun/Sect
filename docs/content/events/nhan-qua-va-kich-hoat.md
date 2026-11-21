@@ -22,12 +22,12 @@ Nguồn chuẩn: `content/events/nhan-qua-va-kich-hoat.json`. Bản đọc tự 
 - **2. Luyện hóa tàn hồn**
   - `chk`: `["tam",12]`
   - **Thành công**: Lão gào thét rồi im bặt. Sức mạnh ba nghìn năm chảy vào kinh mạch ngươi, lạnh và đắng.
-    `{"e":{"tv":18,"tamma":8,"karma":-6,"rmRelic":"nhancu"}}`
+    `{"e":{"tv":18,"tamma":8,"deed":"luyen_hon_nguoi","rmRelic":"nhancu"}}`
   - **Thất bại**: Tàn hồn phản kích, suýt nữa chiếm luôn thức hải của ngươi.
     `{"e":{"hp":"-30%","tamma":6}}`
 - **3. Mời lão đi đầu thai**
   Lão im lặng rất lâu. “Ba nghìn năm… cũng mệt rồi.” Ánh sáng tắt. Chiếc nhẫn trở lại là sắt vụn, nhưng ngươi giữ nó lại.
-  - `e`: `{"karma":8,"van":3,"lore":"luan_hoi"}`
+  - `e`: `{"deed":"sieu_do","van":3,"lore":"luan_hoi"}`
 
 ### Nối cơ chế
 
@@ -60,7 +60,7 @@ Nguồn chuẩn: `content/events/nhan-qua-va-kich-hoat.json`. Bản đọc tự 
   - `e`: `{"tam":3,"tamma":-10,"van":2,"lore":"luan_hoi"}`
 - **2. Đào lên**
   Trong quan tài chỉ còn bộ xương và vài thứ tùy thân. Ngươi cầm lên, thấy quen như của chính mình.
-  - `e`: `{"graveItems":1,"relic":"mocu","st":10,"karma":-2,"lore":"luan_hoi"}`
+  - `e`: `{"graveItems":1,"relic":"mocu","st":10,"deed":"dao_mo","lore":"luan_hoi"}`
 - **3. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -181,7 +181,7 @@ Nguồn chuẩn: `content/events/nhan-qua-va-kich-hoat.json`. Bản đọc tự 
 - **2. Xin lỗi**
   - `chk`: `["tam",12]`
   - **Thành công**: {$s.ten} sững người. Rất lâu sau, {$s.hn} quay đi, không nói một lời.
-    `{"e":{"tamma":-15,"karma":8}}`
+    `{"e":{"tamma":-15,"deed":"hoa_giai"}}`
   - **Thất bại**: “Xin lỗi?” {$s.ten} cười như khóc. “Muộn rồi.”
     `{"fight":{"k":"tantu","n":"{$s.ten}","m":1.2},"win":{"t":"Một mối nợ đã trả bằng máu.","e":{"tamma":4}}}`
 - **3. Cáo từ, tiếp tục lên đường**
@@ -228,7 +228,7 @@ Nguồn chuẩn: `content/events/nhan-qua-va-kich-hoat.json`. Bản đọc tự 
     `{"e":{"tamma":10,"hp":"-15%"}}`
 - **3. Thuận theo nó**
   Một luồng sức mạnh lạnh lẽo tràn vào kinh mạch. Dễ chịu tới đáng sợ.
-  - `e`: `{"atkP":10,"tamma":15,"karma":-10}`
+  - `e`: `{"atkP":10,"tamma":15,"hd":{"t":8}}`
 
 ### Nối cơ chế
 

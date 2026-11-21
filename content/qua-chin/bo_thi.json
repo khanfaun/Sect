@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "bo_thi",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Bát cơm ở chợ sớm",
+      "t": "Người từng xin ngươi một bữa cơm nay đã có việc gánh nước ở chợ. Gặp ngươi lúc hàng quán chưa mở, ông kéo ra một cái ghế con và chia nửa phần cơm còn nóng mà chủ sạp vừa trả công cho ông.",
+      "c": [
+        {
+          "id": "an_cung",
+          "l": "Ngồi ăn chung với ông",
+          "t": "Ngươi ngồi xuống. Ông kể bữa cơm ngươi cho đã giúp ông đủ sức đứng chờ việc đến chiều.",
+          "e": {
+            "tamma": -2
+          }
+        },
+        {
+          "id": "de_phan",
+          "l": "Để ông mang phần cơm về",
+          "t": "Ngươi đã có đồ ăn trong túi. Ông gói lại nửa bát, bảo con ông sẽ có cơm nóng trưa nay."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Đôi dép đan bằng cỏ",
+      "t": "Đứa nhỏ từng nhận mấy đồng mua bánh tìm ngươi dưới mái chợ. Nó đang học đan dép và mang theo đôi đầu tiên làm vừa chân người lớn. Một quai còn lệch, nó xin ngươi thử rồi chỉ chỗ bị cấn.",
+      "c": [
+        {
+          "id": "thu_dep",
+          "l": "Thử dép và chỉ chỗ quai cấn",
+          "t": "Ngươi đi vài bước rồi chỉ ngón chân bị cọ. Nó ngồi sửa ngay, bảo mai còn dám mang dép ra bán.",
+          "e": {
+            "nang": {
+              "giao": 1
+            }
+          }
+        },
+        {
+          "id": "mua_dep",
+          "l": "Trả tiền đôi dép đầu tiên",
+          "t": "Ngươi mua đôi dép với giá người học việc tự đặt. Nó đếm xu rồi giữ riêng một đồng làm vốn.",
+          "dk": {
+            "bacTu": 40
+          },
+          "e": {
+            "bac": -40
+          }
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Nồi cháo đổi người coi",
+      "t": "Một bà từng nhận tiền của ngươi qua mùa đói đang nấu cháo ở cổng miếu. Bà dành riêng một bát cho khách đến muộn. Khi thấy ngươi, bà chỉ bát ấy, nói hôm nay bà đã có thể san một bữa cho người khác.",
+      "c": [
+        {
+          "id": "trong_noi",
+          "l": "Trông nồi để bà về ăn cơm",
+          "t": "Ngươi coi bếp đến lúc bà quay lại. Một người gánh củi đến muộn vẫn nhận được bát nóng.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "an_bat",
+          "l": "Nhận bát bà để phần",
+          "t": "Bà múc thêm chút cháo dưới đáy nồi. Ngươi ăn hết bát rồi giúp bà mang gáo về bên giếng.",
+          "e": {
+            "hp": "4%"
+          }
+        }
+      ]
+    }
+  ]
+}

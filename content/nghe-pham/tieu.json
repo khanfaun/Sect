@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "tieu",
+  "len": [
+    "Người mua củi nhận ra bó ngươi buộc. Từ nay ngươi tự chọn cây khô để đốn và tự mang củi ra chợ bán.",
+    "Xưởng đặt ngươi đốn những cây lớn. Thợ già đứng lại xem ngươi hạ cây mà không làm gãy bụi non bên cạnh.",
+    "Người mua gỗ hỏi giá cả chuyến qua ngươi. Những người kéo gỗ muốn biết họ sẽ được trả trước khi xe rời bãi hay sau.",
+    "Ngươi nhận chìa xưởng. Mỗi chiều ngươi phải xem số gỗ nhập và phần công còn thiếu của những người chưa về.",
+    "Người coi rừng đem bản ranh tới cho ngươi. Từ nay việc giữ cây quanh nguồn nước cũng thuộc phần ngươi phải lo."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Dấu vạch giữ nguồn nước",
+      "t": "Sau khi ngươi mất, người trong xưởng vẫn chừa một dải cây quanh nguồn nước. Họ ghi vào sổ cả gỗ đã đốn lẫn chỗ phải để cây mọc lại. Mấy người gánh củi chậm bước qua mộ ngươi rồi ra bãi nhận công.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Ranh rừng qua tay người mua",
+      "t": "Ngươi để lại nhiều giấy quyền đốn gỗ. Khi tang chưa xong, người mua mới đã cắm lại mốc, chặn lối những hộ từng được vào nhặt củi. Một tiều phu giữ bản mốc cũ để đi hỏi quyền lấy củi cho cả xóm.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Cây ngã đúng lối kéo",
+      "t": "Thợ trong xưởng chôn ngươi ở nơi nhìn sang bãi gỗ. Người từng đi với ngươi giữ một cây nêm cũ, vẫn dùng nó chỉ cho người học cách giữ khoảng cách lúc hạ cây. Nhà ngươi nhận phần công cuối đủ lo bữa đưa tang.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Bó củi dưới mái",
+      "t": "Ngươi mất mà chỉ còn chiếc rìu mẻ và mấy bó củi khô. Hàng xóm lấy một bó nhóm bếp nấu cơm đưa tang, số còn lại để gia đình dùng. Họ vẫn nhớ ngươi thường gánh thêm một bó cho bà cụ sống một mình."
+    }
+  ]
+}

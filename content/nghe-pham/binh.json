@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "binh",
+  "len": [
+    "Ngươi được giao coi một toán nhỏ. Tới giờ điểm danh, người lính trẻ xin nói ai còn mắc ở chỗ phát lương.",
+    "Người giữ cửa giao thêm lính cho ngươi. Trước lần đổi gác, ngươi để từng người nhận lại đủ áo qua đêm lạnh.",
+    "Ngươi nhận quyền coi cả đội và phải đọc lệnh rút cho những người ở cuối hàng. Họ hỏi chỗ nào còn lương.",
+    "Báo từ nhiều toán về cùng một lúc. Ngươi phải nghe cả người đứng cuối kho, vì họ biết bao nào chưa từng mở.",
+    "Khi nhận cờ tướng quân, ngươi được hỏi sẽ làm gì với những nhà lính phải chuyển khỏi phía dưới cửa ải.",
+    "Các đội chờ ngươi định thứ tự tiếp tế. Trước bàn lệnh, một lính già đem danh sách những người còn chưa về."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Đủ tên qua cổng",
+      "t": "Ngày ngươi mất, đội trực đọc danh sách cả người đã về và người còn thiếu. Gia đình lính có thể tra phần lương trước lúc đưa tang. Một người từng được gọi về đúng giờ mang đến chiếc áo mặc trong đêm rút quân.",
+      "dk": {
+        "bacNgheTu": 5,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Kho còn lệnh cấm mở",
+      "t": "Ngươi mất khi kho vẫn còn bao thóc chờ lệnh. Một số thân nhân cầm phiếu tới đòi lương, kể cả nhà có người từng bị giữ gác quá hạn. Người nhận cờ phải giữ các phiếu ấy cùng lệnh ngươi để lại.",
+      "dk": {
+        "bacNgheTu": 5,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Phiên gác sau cùng",
+      "t": "Đội thay ca đến đưa tang ngươi rồi quay lại gác đúng giờ. Một cựu binh đem đèn treo ở chỗ dân hay qua. Họ vẫn nhớ ngươi từng cho nghỉ để người bị thương kịp về với gia đình.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Áo vải gấp tư",
+      "t": "Ngươi chết với chiếc áo lính đã vá nhiều lượt. Người cùng toán gấp áo, trả tiền công còn thiếu cho gia đình rồi ăn bữa cơm sau tang. Họ nhớ ngươi vì luôn chừa nước cho người trực sau."
+    }
+  ]
+}

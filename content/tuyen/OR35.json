@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "id": "OR35",
+  "loai": "xuat_than",
+  "ten": "Ngày cuối trên thẻ công",
+  "xuatThan": "xt_nguoi_lam_thue_o_mo",
+  "goiYDaiLo": [
+    "vo_lam"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Ngày hết hạn trên thẻ bị sửa",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "{NP21} mở bảng phát công ở {LOC11}. Ngày hết hạn làm việc trong bảng sớm hơn ngày ghi trên thẻ. Nhiều thẻ khác cũng có mực mới đè lên ngày cũ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So ngày trong hai bản",
+          "t": "Ngươi đọc ngày thật trước người phát công rồi giữ lời họ về nét mực đè.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Chép các thẻ cũng bị sửa",
+          "t": "Ngươi hỏi từng thợ rồi chép ngày họ từng được hứa trả thẻ vào cạnh từng ca.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin giấy xác nhận đã lĩnh phần công đã xong",
+          "t": "Ngươi xin người phát ký số ca đã làm, chừa chỗ cho ngày tranh chấp.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Thẻ công cũ bị trả lại, ngày thêm vẫn dùng khi điểm ca.",
+        "su": "Thẻ công cũ bị trả lại, ngày thêm vẫn dùng khi điểm ca.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Cửa đã niêm, thợ vẫn còn dưới hầm",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Có tiếng gọi sau cửa phụ {LOC11} dù cửa đã bị niêm. Bảng trực ghi những người chưa lên. Người giữ đường gió muốn có người thay ca trước khi ai mở cửa.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi tên và giữ lượt thông gió",
+          "t": "Ngươi giao danh sách cho người trông đường gió. Ngươi ở lại đến khi ca sau tới đủ người mới đi.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tìm người nắm chìa giám công",
+          "t": "Ngươi xác nhận ai giữ cửa, rồi hỏi điều kiện để nhận quyền thay họ.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Đếm người muốn dời khỏi mỏ",
+          "t": "Ngươi ghi tên người đi cùng nếu đóng cửa và chỗ họ có thể nhận việc.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cửa vẫn niêm, người giữ gió chuyển lượt qua đường còn thông.",
+        "su": "Cửa vẫn niêm, người giữ gió chuyển lượt qua đường còn thông.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Ai tự nguyện làm, ai bị giữ vì nợ?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Giấy ở {LOC03} ghi người được đi khi hết hạn ở một mục, người nợ bị giữ ở mục khác. Thẻ của ngươi đã bị sửa để khớp với mục thứ hai.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối khế với danh sách dưới cửa",
+          "t": "Ngươi tách công tự nguyện khỏi phần giam nợ, giữ bản để gọi người cứu.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận giấy coi mỏ theo phần nợ",
+          "t": "Ngươi nhận dấu giám công và hứa sẽ tiếp tục giữ thẻ để buộc những người còn nợ xuống hầm.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tìm chỗ nhận thợ rời hầm",
+          "t": "Ngươi lấy giấy nhận việc ngoài mỏ, kể cả cho người đang chờ tháo niêm.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Khế lại cất dưới dấu, các thẻ bị sửa chưa được trả.",
+        "su": "Khế lại cất dưới dấu, các thẻ bị sửa chưa được trả.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Mở cửa mà vẫn giữ đường gió",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Đội cứu ở {LOC11} đợi danh sách người mắc kẹt. Thợ ngừng làm để đòi chìa khóa. Người coi đường gió cần biết ai trực thay mình trong lúc mọi người tranh quyền.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đưa người sống ra theo danh sách",
+          "t": "Ngươi cùng đội cứu mở cửa, giữ người trực gió cho tới khi thợ cuối lên.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ gió rồi nhận quyền giám công",
+          "t": "Ngươi giữ ca gió và lấy chìa bằng giấy đã nhận, vẫn buộc người nợ xuống.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Dời hết người khỏi hầm nguy hiểm",
+          "t": "Ngươi giữ gió trong lượt dời, đếm người ở cửa rồi giao giấy nhận việc mới.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Giữ ca thông gió cho người cứu",
+          "t": "Ngươi đỡ ca trực để các bên còn đủ thời gian gọi người trong hầm.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Một ca gió tiếp tục theo lịch cũ, cứu hộ chưa có danh sách đủ.",
+        "su": "Một ca gió tiếp tục theo lịch cũ, cứu hộ chưa có danh sách đủ.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Phần bồi thường sau vụ sập",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Thợ ở {LOC11} chờ biết ai giữ quyền khai mỏ và ai trả tiền bồi. Người đã tìm được việc khác muốn biết khi nào hầm nguy hiểm sẽ được khóa hẳn.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Trả đúng hạn trên thẻ, cho thợ kiểm mỏ",
+          "t": "Ngươi mở sổ hạn thuê, giao thợ cùng kiểm lượt xuống và xét tiền bồi thường.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ quyền mỏ bằng thẻ giam",
+          "t": "Ngươi duyệt tăng chuyến quặng, buộc người còn nợ làm thêm ca rồi khóa khoản bồi thường.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Đóng hầm sau khi kiểm hết người",
+          "t": "Ngươi nhờ thợ coi hầm đóng đúng phần nguy hiểm, giao tiền công cho người chuyển việc.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người coi cửa giữ bảng cũ, phần bồi chờ người đứng ra nhận.",
+        "su": "Người coi cửa giữ bảng cũ, phần bồi chờ người đứng ra nhận.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Ra khỏi mỏ đủ tên",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người sống được gọi đúng tên khi ra khỏi cửa, từng người nhận lại thẻ có ngày thật. Thợ cử người xem lượt gió và khoản bồi thường trước ca. Bảng mới còn một ô để ai hết hạn có thể tự xin trả thẻ.",
+      "su": "Thợ {LOC11} được đưa ra và kiểm hạn thuê cùng lượt xuống mỏ.",
+      "dauVong": "một thẻ công giữ nguyên ngày ra dưới dấu người thợ."
+    },
+    {
+      "id": "B",
+      "ten": "Cầm roi ở cửa hầm",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Quặng lên nhiều hơn, còn thẻ người nợ không rời móc khi đã hết ngày hẹn. Một người khắc tên vào sau vách để gia đình có chỗ tìm. Người coi cửa gọi họ theo ca, rồi ghi công vào khoản còn nợ.",
+      "su": "Người giữ mỏ dùng lao dịch cưỡng ép để tăng quặng.",
+      "dauVong": "sau vách hầm còn tên người từng bị giữ quá hạn."
+    },
+    {
+      "id": "C",
+      "ten": "Mỏ đóng, đường mở",
+      "dk": {
+        "dau": [
+          "moc_3_3",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Cửa hầm nguy hiểm được đóng khi danh sách không còn ai bên dưới. Những người có giấy nhận đến nơi làm mới theo từng nhóm. Người biết giữ gió đi cuối cùng, mang theo tờ ghi ai đã nhận tiền công.",
+      "su": "Hầm nguy hiểm đóng, người theo nhóm thợ đã có việc mới.",
+      "dauVong": "đoàn thợ đi việc mới giữ tờ trả công từ ngày đóng hầm."
+    }
+  ],
+  "ngoai": "Người coi cửa giữ bảng cũ, phần bồi chờ người đứng ra nhận."
+}

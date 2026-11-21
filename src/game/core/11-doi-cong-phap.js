@@ -20,7 +20,7 @@ ENT_ON=true;HOURS_ON=true;SEASON_ON=true;QUEST_ON=true;CACHE_ON=true;GRAVE_ON=tr
 // Bảng DI_K: content/world/di-k.js
 function entsHere(k){return W().ents.filter(e=>e.r===k);}
 function entXY(e){const a=nodeById(e.at);if(e.to==null)return [a.x,a.y];const b=nodeById(e.to);return [a.x+(b.x-a.x)*e.prog,a.y+(b.y-a.y)*e.prog];}
-function townsOf(k){return regionOf(k).nodes.filter(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok');}
+function townsOf(k){return regionOf(k).nodes.filter(n=>isTownT(n.type)&&n.state==='ok');}
 function setRoute(e,dest){const p=findPath(e.at,dest);if(!p||p.length<2){e.route=[];e.to=null;return false;}e.route=p.slice(1);e.to=e.route[0];e.prog=0;e.dest=dest;return true;}
 function spawnEnt(type,k,o){
   const w=W();o=o||{};const T0=ENT_T[type];const R0=regionOf(k);const ns=R0.nodes;
@@ -29,7 +29,7 @@ function spawnEnt(type,k,o){
   if(type==='thuong'){const ts=townsOf(k);if(ts.length<2)return null;let a=pick(ts),b=pick(ts.filter(x=>x!==a));
     if(o.near!=null){const nb=neighbors(o.near);a=nodeById(pick(nb));const far=ns.filter(x=>x.id!==o.near&&x.id!==a.id&&x.type!=='ai');const p=pick(far);e.at=a.id;setRoute(e,o.near);e.route=e.route.concat((findPath(o.near,p.id)||[]).slice(1));e.dest=p.id;}
     else{e.at=a.id;setRoute(e,b.id);}e.name=contentText("core_11-doi-cong-phap_js.spawnEnt.002")+pick(NAME.ho);}
-  else if(type==='thutrieu'){const src=ns.filter(n=>n.danger>=2&&!['ai','tran','thanh'].includes(n.type));if(!src.length)return null;const a=pick(src);e.at=a.id;
+  else if(type==='thutrieu'){const src=ns.filter(n=>n.danger>=2&&!['ai','tran','thanh','tutran','tuthanh'].includes(n.type));if(!src.length)return null;const a=pick(src);e.at=a.id;
     const ts=townsOf(k).sort((x,y)=>Math.hypot(x.x-a.x,x.y-a.y)-Math.hypot(y.x-a.x,y.y-a.y));if(!ts.length)return null;setRoute(e,ts[0].id);e.data.tgt=ts[0].id;e.name=contentText("core_11-doi-cong-phap_js.spawnEnt.003")+a.name;if(e.route.length)e.until=w.t+pathLen([a.id].concat(e.route))/e.speed+5*HD;}
   else if(type==='tuantra'){const ss=ns.filter(n=>n.type==='tong');const base=ss.length?pick(ss):pick(townsOf(k).length?townsOf(k):ns);e.at=base.id;e.data.home=base.id;const nb=neighbors(base.id);setRoute(e,pick(nb));e.name=contentText("core_11-doi-cong-phap_js.spawnEnt.004")+(base.owner||pick(w.sects).n);}
   else if(type==='thienkieu'){const al=(G.run?G.run.rivals:w.rstate||[]).filter(x=>x.alive);if(!al.length)return null;const rv=o.rv!=null?o.rv:pick(al).i;if(w.ents.some(x=>x.type==='thienkieu'&&x.data.rv===rv))return null;e.data.rv=rv;e.name=w.rivals[rv].ten;
@@ -39,7 +39,7 @@ function spawnEnt(type,k,o){
     if(o.near!=null){a=nodeById(pick(neighbors(o.near)));e.at=a.id;setRoute(e,o.near);e.route=e.route.concat((findPath(o.near,dst.id)||[]).slice(1));e.dest=dst.id;}
     else{e.at=a.id;setRoute(e,dst.id);}
     const kk=pick(KHACH_K);e.data.k=kk[0];e.name=kk[0]+' họ '+pick(NAME.ho);e.icon=kk[1];}
-  else if(type==='di'){const kk=o.k||pick(Object.keys(DI_K));const pool=ns.filter(n=>kk==='daugia'?n.type==='thanh':!['tran','thanh','ai','sao'].includes(n.type));if(!pool.length)return null;const a=pick(pool);e.at=a.id;e.data.k=kk;e.name=DI_K[kk].n;e.icon=DI_K[kk].i;e.speed=0;
+  else if(type==='di'){const kk=o.k||pick(Object.keys(DI_K));const pool=ns.filter(n=>kk==='daugia'?isThanhT(n.type):!['tran','thanh','tutran','tuthanh','ai','sao'].includes(n.type));if(!pool.length)return null;const a=pick(pool);e.at=a.id;e.data.k=kk;e.name=DI_K[kk].n;e.icon=DI_K[kk].i;e.speed=0;
     chronQuiet(contentText("core_11-doi-cong-phap_js.spawnEnt.006", [DI_K[kk].n,a.name]));}
   if(e.at==null)return null;
   w.ents.push(e);return e;
@@ -128,7 +128,7 @@ function timeHooks(h){
   const r=G.run,w=W();if(!r)return;
   if(h<=48)entsStep(h);
   if(w.t-(w.dirT||0)>=HD){w.dirT=w.t;director();}
-  for(const q of r.quests){if(q.state==='open'&&w.t>q.due){q.state='fail';r.karma=clamp(r.karma-4,-100,100);log(contentText("core_11-doi-cong-phap_js.timeHooks.010", [q.text]));note(contentText("core_11-doi-cong-phap_js.timeHooks.011")+q.text+contentText("core_11-doi-cong-phap_js.timeHooks.012"),'dn');}}
+  for(const q of r.quests){if(q.state==='open'&&w.t>q.due){q.state='fail';if(feat('nq'))deed('that_hua',{why:q.text});else r.karma=clamp(r.karma-4,-100,100);log(contentText("core_11-doi-cong-phap_js.timeHooks.010", [q.text]));note(contentText("core_11-doi-cong-phap_js.timeHooks.011")+q.text+contentText("core_11-doi-cong-phap_js.timeHooks.012"),'dn');}}
   if(r.quests.length>12)r.quests=r.quests.filter(q=>q.state==='open').concat(r.quests.filter(q=>q.state!=='open').slice(-4));
   if(r.party&&r.party.length){const b=r.party.length;r.party=r.party.filter(p=>p.until>w.t&&p.hp>0);if(r.party.length<b)log(contentText("core_11-doi-cong-phap_js.timeHooks.013"));}
   // kẻ địch tự tìm tới khi đứng yên
@@ -162,14 +162,14 @@ function takeQuest(i){
 }
 function questArrive(id){
   const r=G.run;for(const q of r.quests){if(q.state!=='open'||q.node!==id)continue;
-    if(q.kind==='den'){q.state='done';const ch=applyE({st:q.reward.st,tv:q.reward.tv,karma:2});log(contentText("core_11-doi-cong-phap_js.questArrive.021", [q.text]));pushNews(contentText("core_11-doi-cong-phap_js.questArrive.022")+q.text,true);r.qdone=(r.qdone||[]).concat(ch).slice(-4);}
+    if(q.kind==='den'){q.state='done';const ch=applyE(feat('nq')?{st:q.reward.st,tv:q.reward.tv,deed:'giu_loi'}:{st:q.reward.st,tv:q.reward.tv,karma:2});log(contentText("core_11-doi-cong-phap_js.questArrive.021", [q.text]));pushNews(contentText("core_11-doi-cong-phap_js.questArrive.022")+q.text,true);r.qdone=(r.qdone||[]).concat(ch).slice(-4);}
   }
 }
 function questExplore(n){
   const r=G.run;const q=r.quests.find(q=>q.state==='open'&&q.kind==='diet'&&q.node===n.id);if(!q)return false;
   encounter({type:n.danger>=3?'elite':'combat'});r.scene.quest=q.id;r.scene.text=contentText("core_11-doi-cong-phap_js.questExplore.023")+r.scene.text;return true;
 }
-function questWin(qid){const r=G.run;const q=r.quests.find(x=>x.id===qid&&x.state==='open');if(!q)return [];q.state='done';log(contentText("core_11-doi-cong-phap_js.questWin.024", [q.text]));return applyE({st:q.reward.st,tv:q.reward.tv,karma:2});}
+function questWin(qid){const r=G.run;const q=r.quests.find(x=>x.id===qid&&x.state==='open');if(!q)return [];q.state='done';log(contentText("core_11-doi-cong-phap_js.questWin.024", [q.text]));return applyE(feat('nq')?{st:q.reward.st,tv:q.reward.tv,deed:'giu_loi'}:{st:q.reward.st,tv:q.reward.tv,karma:2});}
 
 // ---------------- MỘ, CHÔN ĐỒ, CỐ NHÂN ----------------
 function visitGrave(n){

@@ -41,7 +41,12 @@
           "l": "Góp tiền mua dây treo cờ riêng",
           "t": "Ngươi trả tiền mua dây ở kho, yêu cầu giữ nguyên dây cầu. Đệ tử thử neo xong mới treo cờ, rồi nhờ quản sự ghi lại: đồ giữ cầu không được lấy dùng việc lễ.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 13
@@ -53,7 +58,7 @@
           "t": "Ngươi nhận linh thạch. {$b.ten} bện dây rơm thay chỗ trống, giấu đầu sợi dưới tay vịn.",
           "e": {
             "st": 16,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -138,7 +143,12 @@
           "l": "Cho hắn giữ phần dây cứng",
           "t": "Ngươi cho hắn giữ phần dây còn dùng được. Hắn buộc thêm tay vịn, gọi người gánh nước đi thử ngay rồi mới siết nút.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -236,7 +246,12 @@
             "st": 13
           },
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -245,7 +260,7 @@
           "t": "Người có tiền qua trên đường khô. {$b.ten} ở lại dưới suối với những người cầm túi rỗng.",
           "e": {
             "st": 18,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -325,14 +340,19 @@
           "alignment": "context"
         }
       },
-      "text": "Trụ cờ bị gió bẻ nghiêng, dây chằng của nó mắc vào neo cầu. Nếu ngươi từng để dây lại sửa cầu hoặc mua dây mới, đệ tử {$b.ten} đã giữ được tay vịn để đưa khách lên bờ. Nếu dây bị cất kho hoặc chỉ có đường vòng thu phí, người chưa qua được đang dồn ở đầu cầu. Trụ sắp đổ; giữ trụ thì phải bỏ lối cầu, cắt dây cờ thì cứu được neo.",
+      "text": "Gió quật nghiêng trụ cờ. Dây chằng trụ mắc vào dây neo cầu, kéo cả cầu theo. Nếu ngươi từng để dây lại sửa cầu hoặc mua dây mới, đệ tử {$b.ten} có tay vịn để đưa người lên bờ. Nếu dây đã cất kho hoặc khách chỉ có đường vòng mất phí, họ vẫn chen ở đầu cầu. Muốn cứu cầu, phải cắt dây giữ trụ cờ.",
       "choices": [
         {
           "i": "✋",
           "l": "Cắt dây cờ, neo lại cầu",
           "t": "Ngươi cắt dây chằng, cho trụ cờ đổ về bãi trống rồi dùng đoạn dây còn chắc neo lại cầu. Người qua hết, quản sự đòi ngươi chịu phạt vì hỏng đồ lễ. Đệ tử đứng ra kể rõ vì sao phải cắt.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -341,7 +361,7 @@
           "t": "Ngươi được thưởng. Người qua đường vòng bỏ lại những gánh quá nặng, ngay dưới bóng lá cờ còn nguyên.",
           "e": {
             "st": 16,
-            "karma": -2
+            "deed": "lua_loi"
           }
         },
         {
@@ -428,14 +448,19 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu cờ từng cứu cầu, dân đem vải tới vá lại. Nếu trụ từng được cứu, trưởng lão {$a.ten} mang lá cờ nguyên tới, còn đệ tử {$b.ten} đem dây cầu đã tuột.",
+      "text": "Nếu ngươi cắt dây cờ để giữ cầu, dân mang vải đến vá lá cờ. Nếu ngươi giữ trụ, trưởng lão {$a.ten} mang lá cờ nguyên tới, còn đệ tử {$b.ten} chỉ đem được sợi dây đã tuột khỏi cầu.",
       "choices": [
         {
           "i": "✋",
-          "l": "Dành trụ mới để phơi dây và vải cầu",
+          "l": "Dùng trụ mới để phơi dây và vải sửa cầu",
           "t": "Ngươi đề nghị chuyển cột mới sang sân phơi dây cầu, chịu bị gạt khỏi lễ đón khách. Người coi cầu nhận việc hong và kiểm dây mỗi tuần. Đệ tử xin học cùng, nói mình đã biết một sợi dây hỏng có thể làm khổ bao nhiêu người.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -443,7 +468,12 @@
           "l": "Treo lại cờ và đặt quỹ sửa cầu",
           "t": "Ngươi đóng một phần bạc và có tên trong lễ. Dưới lá cờ, người đi qua đặt những đồng nhỏ lên một phiến đá.",
           "e": {
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           },
           "cost": {
             "st": 13

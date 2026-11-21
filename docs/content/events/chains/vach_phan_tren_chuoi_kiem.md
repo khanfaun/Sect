@@ -19,7 +19,7 @@ Nữ kiếm đồ {$a.ten} xin một thanh kiếm thuận tay trái. Kiếm sư 
 - **1. Mua chuôi kiếm thuận tay trái**
   Ngươi mua chuôi phù hợp ở xưởng, để nàng thử lại cách cầm. Kiếm sư chưa chịu đổi bài dạy, nhưng nàng đã có thể đặt ngón tay đúng chỗ.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":4,"an":["a","kiếm cầm tay nào"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","kiếm cầm tay nào"]}`
 - **2. Khuyên nàng học đúng lối truyền trong tông**
   {$b.ten} cho ngươi dự buổi dạy riêng. Nàng chép thêm một dòng nhỏ ở cuối bài để nhớ đổi tay.
   - `e`: `{"tv":4}`
@@ -54,7 +54,7 @@ Nữ kiếm đồ {$a.ten} để lại một vết chéo mà tay phải khó đ�
 
 - **1. Giúp nàng dạy thế kiếm ấy**
   Ngươi dành một buổi giúp nàng chỉ thế kiếm cho hai đệ tử. Một người thuận tay phải phải đổi cách đứng mới làm được. Nàng cười: “Ta cũng đã học bài của các ngươi khó như thế.”
-  - `e`: `{"karma":4,"an":["a","nét chéo trên vách"],"h":12}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","nét chéo trên vách"],"h":12}`
 - **2. Mua riêng khẩu quyết của nàng**
   Nàng có bạc sửa kiếm. Vết chéo bị trát lại, lớp vôi mới khác màu đá.
   - `cost`: `{"st":13}`
@@ -92,11 +92,11 @@ Nữ kiếm đồ {$a.ten} ngâm bàn tay phải vào nước thuốc, lòng bà
 
 - **1. Đổi buổi học của ngươi lấy thời gian cho nàng tập tay trái**
   Ngươi nhường buổi có người hướng dẫn để nàng thử lại kiếm tay trái. Sau vài lần còn vụng, nàng bắt đúng đường kiếm. Kiếm sư đứng xem hết buổi, chưa nói lời nào.
-  - `e`: `{"karma":4,"h":24,"an":["a","vết chai lệch"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":24,"an":["a","vết chai lệch"]}`
 - **2. Mua thuốc để nàng tiếp tục bài cũ**
   Nàng theo kịp lớp. Lúc ghi tên vào sổ, nàng lặng lẽ dùng tay trái.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Nước thuốc nguội. Thanh kiếm trên vách vẫn treo chuôi quay vào trong.
 
@@ -131,10 +131,10 @@ Nữ kiếm đồ {$a.ten} ngâm bàn tay phải vào nước thuốc, lòng bà
 - **1. Dùng linh lực chống xà cho nàng cứu người**
   Ngươi chống xà tới khi nàng đưa kiếm sư ra được. Đá ép xuống khiến vai ngươi bị thương, nhưng cả hai đã ra khỏi hành lang trước lúc mái sập.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"hp":"-10%"}`
+  - `e`: `{"deed":"cuu_nguoi","hp":"-10%"}`
 - **2. Chỉ nàng cắt xà bằng đường kiếm riêng**
   Nàng theo góc ngươi chỉ, cắt xà rồi kéo thầy ra ngoài. Mái đổ xuống nghiền nát giá kiếm chung. Lão nhìn đống gỗ, bảo nàng đừng quay lại nhặt, người còn đủ mới là được.
-  - `e`: `{"karma":1,"tv":3}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"tv":3}`
 - **3. Bỏ đi**
   Nàng bảo lão nhắm mắt. Ngươi nghe kiếm chạm xà một lần rồi im.
 
@@ -176,7 +176,7 @@ Nếu ngươi chống xà, kiếm sư {$b.ten} đặt kiếm cong trên bàn đ�
 - **1. Góp công làm chuôi cho cả hai tay**
   Từ nay người học được chọn. Lão đặt hộp phấn giữa bàn để khỏi phải chuyền qua ai.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":4,"an":["a","một chuôi chưa sơn"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","một chuôi chưa sơn"]}`
 - **2. Nhận thanh kiếm được sửa riêng**
   Ngươi có một thanh kiếm vừa tay. {$a.ten} giữ phần gỗ thừa, đủ làm nửa chuôi nữa.
   - `e`: `{"namedRelic":{"k":"kiem","name":"Kiếm Chuôi Thuận Tay","lore":"Ngươi có một thanh kiếm vừa tay. {$a.ten} giữ phần gỗ thừa, đủ làm nửa chuôi nữa."}}`

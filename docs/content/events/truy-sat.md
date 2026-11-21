@@ -48,7 +48,7 @@ Nguồn chuẩn: `content/events/truy-sat.json`. Bản đọc tự sinh. Cú ph�
 - **1. Thuyết phục**
   - `chk`: `["tam",12]`
   - **Thành công**: Hắn nghe hết, im lặng rất lâu, rồi bẻ gãy tờ lệnh.
-    `{"e":{"karma":5,"tamma":-5}}`
+    `{"e":{"deed":"hoa_giai","tamma":-5}}`
   - **Thất bại**: “Lý lẽ hay đấy. Nhưng tiền đã nhận rồi.”
     `{"fight":{"k":"satthu","n":"{$en}"},"win":{"t":"Kết thúc.","e":{"tv":6}}}`
 - **2. Trả gấp đôi tiền thuê**

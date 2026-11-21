@@ -18,10 +18,10 @@ Người gác {$a.ten} muốn đánh thêm một hồi kẻng vì thấy khói n
 
 - **1. Đánh kẻng cùng {$a.ten}**
   Dân chạy về kịp dập lửa trước khi cháy lan. Cơn mưa tới sau làm ướt số lúa chưa thu, {$b.ten} lập tức đổ lỗi cho người đánh kẻng. Người gác cãi: “Không gọi họ về thì giờ còn nhà đâu mà giữ lúa?”
-  - `e`: `{"karma":4}`
+  - `e`: `{"deed":"cuu_nguoi"}`
 - **2. Im kẻng và tự ra xem**
   Ngươi dập được lửa trước khi bén nhà, tay bị bỏng khi kéo giàn phơi ra khỏi lối. Một dãy rơm đã cháy hết. Người gác chạy tới giúp, bảo lần sau dù ai cản cũng phải báo cho cả xóm.
-  - `e`: `{"karma":4,"hp":"-10%"}`
+  - `e`: `{"deed":"cuu_nguoi","hp":"-10%"}`
 - **3. Bỏ đi**
   Ngươi nghe hai hồi kẻng, hồi cuối dội ra từ phía nhà đã bắt lửa.
 
@@ -54,11 +54,11 @@ Hào trưởng {$b.ten} bắt người gác {$a.ten} đền lúa ướt. {$a.ten
 - **1. Chia phần đền và xin lập lệ báo cháy**
   Ngươi góp một phần đền số lúa ướt, dân góp phần còn lại. Trước mặt cả làng, mọi người lập lệ thấy cháy được đánh kẻng ngay. Hào trưởng buộc phải điểm chỉ vào giấy.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Trả hết rồi đòi giữ dùi kẻng**
   {$a.ten} thoát nợ và dân phải qua ngươi để xin báo cháy. Lão quấn giẻ quanh tay mình dù chiếc dùi đã được mang đi.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":-2}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Lão bán nong thóc cho người nấu rượu. Bên đáy nong vẫn còn những chấm trắng mắc vào nan.
 
@@ -93,7 +93,7 @@ Dân dựng lại giàn, treo ngay chỗ cũ. Người gác {$a.ten} đem dùi k
 - **1. Góp gỗ dựng chòi mới**
   Ngươi mua gỗ dựng chòi nhìn được cả hai xóm, giao người gác tự quyết lúc báo động. Lão gọi mấy người trẻ lên học phân biệt khói bếp với khói cháy, không muốn lần sau chỉ mình lão biết.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":4,"an":["a","giàn phơi mới"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","giàn phơi mới"]}`
 - **2. Thuê người thay lão giữ chòi**
   Hào trưởng {$b.ten} bằng lòng vì người mới chịu hỏi hắn trước khi đánh. {$a.ten} đặt dùi lên giàn phơi, ở ngay khoảng rơm từng cháy.
   - `cost`: `{"st":10}`
@@ -130,10 +130,10 @@ Gió mạnh đẩy lửa qua bãi cỏ khô về phía xóm dưới. Nếu ngư�
 
 - **1. Dẫn người phá hàng rào làm đường cản lửa**
   Ngươi dẫn dân phá rào, dọn cỏ thành dải đất trống. Nhà trong xóm giữ được, ngươi bị tàn lửa làm bỏng tay, còn phải trả phần rào đã phá. Dân nhận giúp chăm vết thương rồi cùng ngươi tính tiền đền.
-  - `e`: `{"karma":4,"hp":"-15%"}`
+  - `e`: `{"deed":"cuu_nguoi","hp":"-15%"}`
 - **2. Giữ riêng dãy nhà phía trên**
   Hào trưởng {$b.ten} thưởng bạc vì nhà hắn thoát lửa. Phía dưới gò chỉ còn những khoanh đất sáng màu nơi từng đặt chum nước.
-  - `e`: `{"st":14,"karma":-3}`
+  - `e`: `{"st":14,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Gió thổi ngược khi trời gần sáng. Trên gò chỉ còn một đoạn rào cắm nghiêng về xóm dưới.
 
@@ -175,10 +175,10 @@ Nếu đường cản lửa đã mở, dân mang cọc rào cháy tới để ch
 - **1. Nhận phần đền và giao dùi cho cả làng**
   Ngươi góp bạc bồi thường cho những nhà chịu thiệt, đề nghị cả làng cùng giữ quyền báo cháy. Sau một hồi tranh luận, họ giao chìa chòi cho ba người ở ba đầu xóm. Từ nay không ai được giữ riêng dùi kẻng.
   - `cost`: `{"st":10}`
-  - `e`: `{"karma":6}`
+  - `e`: `{"deed":"hanh_hiep"}`
 - **2. Để hào trưởng {$b.ten} giữ quyền báo**
   Hắn cấp tiền dựng lại chòi và yêu cầu cất dùi trong hòm khóa. Người gác {$a.ten} đục một lỗ trên vách chòi để nhìn về xóm dưới.
-  - `e`: `{"st":14,"karma":-2}`
+  - `e`: `{"st":14,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Cuộc họp còn kéo dài. Người gác nói sẽ ở lại tới khi có lệ rõ ràng; ngươi chào lão rồi lên đường.
 

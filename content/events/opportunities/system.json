@@ -95,7 +95,7 @@
           }
         },
         {
-          "l": "Nghe theo",
+          "l": "Nghe theo lời tâm ma",
           "cost": "nhân quả xấu đi, tâm ma tăng",
           "go": {
             "$hook": "ky_tm_du_c_1_go"
@@ -170,7 +170,7 @@
           }
         },
         {
-          "l": "Đón nhận",
+          "l": "Chấp nhận sức mạnh tâm ma hứa cho",
           "cost": "nhân quả xấu đi, tâm ma tăng",
           "go": {
             "$hook": "ky_tm_quyen_c_1_go"
@@ -275,6 +275,296 @@
         "status": "reviewed"
       },
       "theme": "Diễn biến nhân vật",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tl_tuyendo",
+      "name": "Sơn môn tuyển đồ",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "system",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Tiếng chiêng vang khắp quê. Sơn môn trên núi xuống tuyển đồ, bày một khối ngọc trắng giữa sân đình. Trẻ con xếp hàng dài, lần lượt đặt tay lên ngọc. Tới lượt ngươi.",
+      "choices": [
+        {
+          "l": "Đặt tay lên ngọc",
+          "go": {
+            "$hook": "ky_tl_tuyendo_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": true
+      },
+      "origin": {
+        "file": "src/game/core2/37-linh-can.js",
+        "ref": "tl_tuyendo",
+        "commit": "d2"
+      },
+      "scriptText": {
+        "event.tl_tuyendo.vo": "Ngọc lạnh ngắt, không chút ánh sáng. Vị chấp sự liếc qua rồi phất tay: “Phế vật. Người kế.” Tiếng cười khẽ sau lưng theo ngươi suốt đường về.",
+        "event.tl_tuyendo.thuong": "Ngọc le lói vài sắc mờ. Chấp sự gật đầu cho có: “Có linh căn, tư chất bình thường. Muốn thì lên núi làm tạp dịch ngoại môn.”",
+        "event.tl_tuyendo.tot": "Ngọc bừng sáng, cả sân đình lặng đi. Chấp sự đứng bật dậy, giọng đổi hẳn: “Tư chất này, sơn môn mở cửa đón ngươi bất cứ lúc nào.”"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Trắc linh",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tl_dusi",
+      "name": "Tu sĩ du phương",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "system",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Một tu sĩ áo bạc màu dừng chân bên quán nước, nhìn ngươi hồi lâu. “Lại đây, để ta xem cốt cách.” Bàn tay khô gầy đặt lên cổ tay ngươi.",
+      "choices": [
+        {
+          "l": "Đưa tay cho tu sĩ xem linh căn",
+          "go": {
+            "$hook": "ky_tl_dusi_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": true
+      },
+      "origin": {
+        "file": "src/game/core2/37-linh-can.js",
+        "ref": "tl_dusi",
+        "commit": "d2"
+      },
+      "scriptText": {
+        "event.tl_dusi.vo": "Y buông tay, thở dài: “Kinh mạch bịt kín, linh khí không vào. Tiên lộ không có phần ngươi. Làm người tốt là đủ rồi.”",
+        "event.tl_dusi.thuong": "Y gật gù: “Có linh căn, không tốt không xấu. Chịu khổ được thì cũng đi được một đoạn đường.”",
+        "event.tl_dusi.tot": "Y siết chặt cổ tay ngươi, mắt sáng lên: “Hiếm thấy! Nếu muốn, theo ta làm đồng tử, ta dạy ngươi dẫn khí.”"
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Trắc linh",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tl_thach",
+      "name": "Trắc Linh Thạch",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "system",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Viên đá xám trơn nhẵn nằm trong lòng bàn tay. Người bán dặn: nắm chặt, nín thở, đá sẽ nói thật.",
+      "choices": [
+        {
+          "l": "Nắm chặt viên đá",
+          "go": {
+            "$hook": "ky_tl_thach_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": true
+      },
+      "origin": {
+        "file": "src/game/core2/37-linh-can.js",
+        "ref": "tl_thach",
+        "commit": "d2"
+      },
+      "scriptText": {
+        "event.tl_thach.vo": "Đá vẫn xám như cũ. Ngươi nắm tới mỏi tay, nó cũng chẳng ấm lên lấy một chút. Rồi đá vỡ vụn thành bụi.",
+        "event.tl_thach.thuong": "Trong đá hiện lên vài vệt màu nhạt, chập chờn như đèn trước gió, rồi đá vỡ vụn. Có linh căn, chẳng hơn ai.",
+        "event.tl_thach.tot": "Đá bừng sáng rực rỡ, nóng rát lòng bàn tay, rồi vỡ tung. Linh căn của ngươi không tầm thường."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Trắc linh",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tl_tubiet",
+      "name": "Tự cảm nhận linh căn",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "system",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Ngươi ngồi thở theo khẩu quyết đã thuộc lòng, ngày này qua ngày khác. Đã quá lâu rồi.",
+      "choices": [
+        {
+          "l": "Ngồi thêm một đêm nữa",
+          "go": {
+            "$hook": "ky_tl_tubiet_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": true
+      },
+      "origin": {
+        "file": "src/game/core2/37-linh-can.js",
+        "ref": "tl_tubiet",
+        "commit": "d2"
+      },
+      "scriptText": {
+        "event.tl_tubiet.vo": "Ngươi thử giữ chút linh khí trong người, nhưng khí trôi qua như gió qua lưới rách. Không một sợi nào ở lại. Đến lúc ấy ngươi hiểu mình không có linh căn.",
+        "event.tl_tubiet.thuong": "Giữa đêm, một sợi khí mát chạy qua ngực rồi tan. Mỏng manh, nhưng là thật. Ngươi có linh căn.",
+        "event.tl_tubiet.tot": "Linh khí ùa vào và chạy khắp tay chân. Khi mở mắt, ngươi vẫn cảm được luồng khí chưa tan. Linh căn của ngươi có thể giữ được nhiều linh khí."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Trắc linh",
+      "setting": {
+        "description": "*",
+        "historyCondition": null
+      }
+    },
+    {
+      "id": "tl_laodao",
+      "name": "Lão đạo ăn xin",
+      "kind": "opportunity",
+      "tags": [],
+      "trigger": {
+        "source": "system",
+        "places": [
+          "*"
+        ],
+        "levels": null,
+        "time": {},
+        "once": false,
+        "special": false,
+        "weight": 1
+      },
+      "actors": {},
+      "text": "Một lão đạo rách rưới gõ cửa xin bát cơm. Ăn xong, lão không đi, cầm lấy bàn tay ngươi lật qua lật lại, mắt đục như nước sông.",
+      "choices": [
+        {
+          "l": "Để lão đạo xem linh căn",
+          "go": {
+            "$hook": "ky_tl_laodao_c_0_go"
+          }
+        }
+      ],
+      "logic": {
+        "paid": false,
+        "joke": false,
+        "system": true
+      },
+      "origin": {
+        "file": "src/game/core2/37-linh-can.js",
+        "ref": "tl_laodao",
+        "commit": "d2"
+      },
+      "scriptText": {
+        "event.tl_laodao.vo": "Lão buông tay, cười khà: “Không có rễ, không mọc thành cây. Nhưng người không rễ cũng có đường của người không rễ.” Rồi lão đi mất, không ai thấy lão rẽ lối nào.",
+        "event.tl_laodao.thuong": "Lão gật đầu: “Có rễ, rễ cạn. Tưới cho siêng thì cũng ra hoa.” Ngoái lại, bến sông đầu làng đã không còn bóng lão.",
+        "event.tl_laodao.tot": "Lão nheo mắt, ngón tay run khẽ: “Rễ sâu lắm. Giữ cho kỹ, kẻo người ta đào mất.” Ngươi chớp mắt, lão đã khuất sau bến sông."
+      },
+      "review": {
+        "checks": [
+          "schema",
+          "location",
+          "actor-role",
+          "cost-outcome",
+          "reward-type",
+          "continuity"
+        ],
+        "status": "reviewed"
+      },
+      "theme": "Trắc linh",
       "setting": {
         "description": "*",
         "historyCondition": null

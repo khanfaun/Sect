@@ -1,0 +1,761 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_mo_ham_sap",
+      "name": "Tiếng nứt trong hầm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đang gùi quặng thì vách hầm kêu răng rắc, bụi đá rơi lả tả.",
+      "choices": [
+        {
+          "l": "Hô mọi người chạy ra",
+          "i": "📢",
+          "chk": [
+            "nang.canh",
+            8
+          ],
+          "ok": {
+            "t": "Cả đám chạy kịp. Lát sau cửa hầm sụp xuống, bụi mù trời.",
+            "e": {
+              "nxp": [
+                "mo",
+                8
+              ],
+              "deed": "cuu_nguoi"
+            }
+          },
+          "no": {
+            "t": "Ngươi hô to nhưng chính mình vấp ngã, bị đá rơi trúng vai.",
+            "e": {
+              "hp": "-20%",
+              "nxp": [
+                "mo",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Vác nốt gùi quặng",
+          "i": "🪨",
+          "t": "Ngươi ra tới cửa thì hầm sụp. Gùi quặng còn nguyên, tim còn đập loạn.",
+          "e": {
+            "bac": 20,
+            "nxp": [
+              "mo",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_ham_sap",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_cai_an_bot",
+      "name": "Cai mỏ ăn bớt",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Cai mỏ ghi thiếu số gùi của ngươi, ba ngày liền.",
+      "choices": [
+        {
+          "l": "Cãi lại trước mặt mọi người",
+          "i": "🗣️",
+          "chk": [
+            "nang.giao",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi đếm từng gùi. Cai mỏ đỏ mặt, ghi lại cho đủ.",
+            "e": {
+              "bac": 30,
+              "nxp": [
+                "mo",
+                5
+              ]
+            }
+          },
+          "no": {
+            "t": "Cai mỏ đuổi ngươi về nghỉ hai hôm không công.",
+            "e": {
+              "h": 48
+            }
+          }
+        },
+        {
+          "l": "Nhịn",
+          "i": "😶",
+          "t": "Ngươi nhịn. Tiền công tháng ấy hụt một khoản.",
+          "e": {
+            "bac": -15,
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_cai_an_bot",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_quang_la",
+      "name": "Cục quặng lạ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi bổ trúng một cục đá ánh lên màu xanh nhạt, cầm thấy mát lạ.",
+      "choices": [
+        {
+          "l": "Giấu đi đem bán",
+          "i": "🤫",
+          "t": "Một tay buôn trả ngươi khá tiền, dặn kín miệng.",
+          "e": {
+            "bac": 80,
+            "nxp": [
+              "mo",
+              3
+            ]
+          }
+        },
+        {
+          "l": "Nộp cho cai mỏ",
+          "i": "🙇",
+          "t": "Cai mỏ khen một câu, thưởng mấy chục xu.",
+          "e": {
+            "bac": 30,
+            "nxp": [
+              "mo",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_quang_la",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_ho_lao",
+      "name": "Ho lao",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Người thợ già cùng ca ho ra máu. Hắn nói không được nghỉ, nghỉ thì nhà đói.",
+      "choices": [
+        {
+          "l": "Làm thay hắn mấy ca",
+          "i": "🤝",
+          "t": "Ngươi làm hai ca liền, vai rã rời. Ông già nắm tay ngươi không nói nên lời.",
+          "e": {
+            "h": 10,
+            "nxp": [
+              "mo",
+              6
+            ],
+            "deed": "bo_thi"
+          }
+        },
+        {
+          "l": "Mặc kệ",
+          "i": "🤷",
+          "t": "Hôm sau ông già không tới nữa.",
+          "e": {
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_ho_lao",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_mach_moi",
+      "name": "Mạch quặng mới",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi dò ra một mạch quặng chạy sâu dưới ruộng của làng bên.",
+      "choices": [
+        {
+          "l": "Báo chủ mỏ, đòi chia phần",
+          "i": "💰",
+          "chk": [
+            "nang.thuong",
+            12
+          ],
+          "ok": {
+            "t": "Chủ mỏ chia cho ngươi một phần nhỏ mạch quặng.",
+            "e": {
+              "bac": 200,
+              "nxp": [
+                "mo",
+                12
+              ]
+            }
+          },
+          "no": {
+            "t": "Chủ mỏ hứa suông rồi quên.",
+            "e": {
+              "nxp": [
+                "mo",
+                5
+              ]
+            }
+          }
+        },
+        {
+          "l": "Báo làng bên trước",
+          "i": "🏘️",
+          "t": "Làng bên mời ngươi bữa rượu, hứa cho làm cai nếu họ tự khai.",
+          "e": {
+            "nxp": [
+              "mo",
+              8
+            ],
+            "deed": "giu_loi"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_mach_moi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_khi_doc",
+      "name": "Khí độc dưới hầm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngọn đèn dầu dưới hầm cứ lụi dần. Mấy thợ trẻ thấy chóng mặt.",
+      "choices": [
+        {
+          "l": "Cho cả ca lên, đóng hầm",
+          "i": "🚪",
+          "t": "Mất một ngày công nhưng không ai chết. Cai mỏ lầm bầm.",
+          "e": {
+            "nxp": [
+              "mo",
+              10
+            ]
+          }
+        },
+        {
+          "l": "Làm cố cho xong ca",
+          "i": "⛏️",
+          "chk": [
+            "tp",
+            9
+          ],
+          "ok": {
+            "t": "Xong ca, ai nấy mặt xanh như tàu lá.",
+            "e": {
+              "bac": 40,
+              "nxp": [
+                "mo",
+                5
+              ]
+            }
+          },
+          "no": {
+            "t": "Hai người ngất dưới hầm, ngươi phải cõng ra.",
+            "e": {
+              "hp": "-15%",
+              "nxp": [
+                "mo",
+                4
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_khi_doc",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_dinh_cong",
+      "name": "Thợ đòi tăng công",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Thợ mỏ bỏ việc, đòi tăng công vì hầm sâu thêm.",
+      "choices": [
+        {
+          "l": "Đứng về phía thợ",
+          "i": "✊",
+          "t": "Chủ mỏ nhượng một nửa. Thợ coi ngươi là người của họ.",
+          "e": {
+            "nxp": [
+              "mo",
+              10
+            ]
+          }
+        },
+        {
+          "l": "Đứng về phía chủ",
+          "i": "🏛️",
+          "t": "Chủ mỏ thưởng ngươi, thợ nhìn ngươi bằng nửa con mắt.",
+          "e": {
+            "bac": 100,
+            "nxp": [
+              "mo",
+              6
+            ],
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_dinh_cong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_tre_mo",
+      "name": "Trẻ con xuống mỏ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Chủ mỏ thuê trẻ con chui vào những ngách hẹp, trả nửa công người lớn.",
+      "choices": [
+        {
+          "l": "Không cho trẻ vào ca mình",
+          "i": "🙅",
+          "t": "Ngươi đuổi lũ trẻ về. Ca của ngươi chậm hơn, công ít hơn.",
+          "e": {
+            "bac": -30,
+            "nxp": [
+              "mo",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Để yên",
+          "i": "🤷",
+          "t": "Mỏ chạy nhanh hơn. Một tháng sau có đứa không về nữa.",
+          "e": {
+            "bac": 30,
+            "tamma": 4
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_tre_mo",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_dong_mo",
+      "name": "Đóng mỏ cũ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mỏ đã hết quặng, vách hầm yếu. Chèn chống rồi đóng cửa tốn tiền, nhưng nếu bỏ mặc thì trẻ con trong làng vẫn có thể lẻn vào chơi.",
+      "choices": [
+        {
+          "l": "Bỏ tiền đóng cho chắc",
+          "i": "🧱",
+          "t": "Cửa mỏ được chèn đá kín. Người làng yên lòng.",
+          "e": {
+            "bac": -400,
+            "nxp": [
+              "mo",
+              18
+            ]
+          }
+        },
+        {
+          "l": "Rào tạm",
+          "i": "🪵",
+          "t": "Hàng rào gỗ mục dần sau hai mùa mưa.",
+          "e": {
+            "bac": -50,
+            "nxp": [
+              "mo",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_dong_mo",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_tu_si_mo",
+      "name": "Tu sĩ thuê mỏ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một tu sĩ muốn thuê mỏ của ngươi ba năm để đào linh thạch, trả bằng bạc trắng, không cho người ngoài vào.",
+      "choices": [
+        {
+          "l": "Cho thuê",
+          "i": "🤝",
+          "t": "Bạc chất đầy rương. Thợ của ngươi mất việc, tản đi các nơi.",
+          "e": {
+            "bac": 1500,
+            "nxp": [
+              "mo",
+              12
+            ],
+            "tamma": 2
+          }
+        },
+        {
+          "l": "Từ chối, giữ thợ",
+          "i": "🙅",
+          "chk": [
+            "nang.giao",
+            15
+          ],
+          "ok": {
+            "t": "Tu sĩ cười nhạt rồi đi, không làm khó.",
+            "e": {
+              "nxp": [
+                "mo",
+                14
+              ]
+            }
+          },
+          "no": {
+            "t": "Tu sĩ phật ý, sai người đập phá cửa hầm.",
+            "e": {
+              "bac": -300,
+              "nxp": [
+                "mo",
+                6
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_tu_si_mo",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_cuu_ham",
+      "name": "Cứu hầm sập",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "dong"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Hầm bên sập, chín người mắc kẹt. Đào cứu thì phải mở qua vách mỏ của ngươi, mỏ sẽ yếu đi.",
+      "choices": [
+        {
+          "l": "Mở vách cứu người",
+          "i": "⛏️",
+          "t": "Cứu ra được bảy người. Mỏ của ngươi nghỉ nửa năm sửa vách.",
+          "e": {
+            "bac": -500,
+            "nxp": [
+              "mo",
+              20
+            ],
+            "deed": "cuu_nguoi_hy_sinh"
+          }
+        },
+        {
+          "l": "Không mở",
+          "i": "🚫",
+          "t": "Hầm bên đào mất bốn ngày. Không ai sống.",
+          "e": {
+            "tamma": 6,
+            "nxp": [
+              "mo",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_cuu_ham",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_mo_so_mo",
+      "name": "Sổ an toàn",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:mo",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi muốn soạn một cuốn sổ ghi cách chống hầm, dò khí độc cho thợ đời sau.",
+      "choices": [
+        {
+          "l": "Ngồi soạn suốt mùa đông",
+          "i": "📒",
+          "chk": [
+            "ngo",
+            9
+          ],
+          "ok": {
+            "t": "Cuốn sổ thành, thợ mỏ các nơi chép lại.",
+            "e": {
+              "nxp": [
+                "mo",
+                16
+              ],
+              "h": 40
+            }
+          },
+          "no": {
+            "t": "Viết mãi không xong, đành bỏ dở.",
+            "e": {
+              "nxp": [
+                "mo",
+                5
+              ],
+              "h": 40
+            }
+          }
+        },
+        {
+          "l": "Để sau",
+          "i": "⏳",
+          "t": "Việc mỏ bận, cuốn sổ nằm im trong rương.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/mo.json",
+        "ref": "ng_mo_so_mo",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

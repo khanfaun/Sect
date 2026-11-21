@@ -18,10 +18,10 @@ Người khắc cầu {$a.ten} chỉ cho ngươi tên những người đã đ�
 
 - **1. Giúp lão lật một tấm ván để đọc**
   Ngươi lỡ lượt qua để giúp lão lật ván đọc tên người giữ cầu đã mất. Lão kể rõ người ấy đã giữ nhịp cho dân thoát thế nào. Ngươi nhớ được cả việc lẫn tên, đặt ván lại rồi mới đi.
-  - `e`: `{"karma":4,"h":12}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":12}`
 - **2. Mượn tên dưới ván để bước nhanh hơn**
   Cầu nâng bước ngươi. Ở đầu kia, một chữ đã mờ một nửa dù lão chưa hề chạm đục.
-  - `e`: `{"karma":-2,"tp":1}`
+  - `e`: `{"hd":{"t":1},"tp":1}`
 - **3. Bỏ đi**
   Lão áp tai dưới ván, đợi tiếng chân chấm dứt rồi đọc tiếp.
 
@@ -53,10 +53,10 @@ Hồn người giữ cầu {$b.ten} nhớ tiếng ván nứt mà quên tên. Nó
 
 - **1. Kể cả cái tên lẫn việc nó đã làm**
   Ngươi dành một đêm kể cho hồn nghe tên và việc giữ cầu của nó. Đến sáng, nó tự nhắc lại được mà không cần ngươi đọc trước. Người khắc cầu xin ghi tên lên mặt trên, để người sau cũng nhớ.
-  - `e`: `{"karma":4,"h":24,"an":["a","người không biết tên mình còn đó"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":24,"an":["a","người không biết tên mình còn đó"]}`
 - **2. Đổi tên lấy cách giữ cầu của nó**
   Ngươi học được cách phân lực lên nhiều nhịp. Khi lặp lại tên mình, hồn nói hụt ở chữ cuối.
-  - `e`: `{"skill":1,"karma":-1}`
+  - `e`: `{"skill":1,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Nó đi một vòng quanh tấm ván, đợi tên tự trở lại.
 
@@ -90,10 +90,10 @@ Hồn người giữ cầu {$b.ten} theo tiếng chân ngươi vì nghe tên mì
 
 - **1. Để lão gỡ nửa chữ khỏi dấu chân**
   Ngươi để lão gỡ nét tên đã nhập vào dấu chân, trả lại cho hồn. Bước đi mất phần nhẹ trước đó, nhưng tiếng chân phía sau cũng dừng. Hồn tự đọc được trọn tên mình rồi cúi chào ngươi.
-  - `e`: `{"karma":4,"tp":-1,"an":["a","tiếng chân của người đã mượn"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tp":-1,"an":["a","tiếng chân của người đã mượn"]}`
 - **2. Giữ nửa chữ và mời hồn cùng đi**
   Hồn thấy thêm nhiều chỗ trên cổ lộ, đổi lại phải theo tốc độ của ngươi. Đến chỗ nghỉ, nó vẫn đứng ngay sau gót.
-  - `e`: `{"karma":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Nó bước đúng lên dấu cuối ngươi để lại. Dấu ấy sâu thêm.
 
@@ -127,10 +127,10 @@ Một nhịp cầu mới chưa chịu nhận người qua. Nếu hồn đã đư
 
 - **1. Viết tên ngươi xuống để đỡ nhịp cầu cùng hồn**
   Ngươi viết tên mình cạnh tên hồn, để lại một phần thần niệm cùng đỡ cầu. Cả đoàn qua hết, hồn vẫn đứng vững tại nhịp giữa. Lão khắc cầu hứa sẽ coi phần tên ngươi để lại.
-  - `e`: `{"karma":4,"tv":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tv":-3}`
 - **2. Nhờ hồn chia phép giữ cầu vào nhiều tấm ván**
   Cầu chịu được đoàn người, nhưng các tên cũ mờ đi. Người khắc cầu {$a.ten} đặt đục xuống ngay giữa một chữ.
-  - `e`: `{"karma":-1}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Hồn bước ra thử. Nhịp ván hạ xuống vừa đủ chạm đầu ngón chân.
 
@@ -171,7 +171,7 @@ Nếu ngươi đã để tên, một người qua cầu đọc nó rồi hỏi t
 
 - **1. Khắc lại những tên còn nhớ ở phía trên**
   Ngươi giúp lão dò lại những tên còn nhớ, khắc trên mặt ván để người qua đọc được. Hồn chỉ đúng chỗ tên mình rồi đứng tránh sang bên. Lần đầu nó được nghe người lạ gọi tên mà không phải xin.
-  - `e`: `{"karma":4,"an":["a","tên ở phía người nhìn"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","tên ở phía người nhìn"]}`
 - **2. Xin hồn truyền phép giữ cầu để dùng ở những nơi khác**
   Nhiều nhịp mới đứng được. Mỗi nơi ngươi chừa một tấm ván trắng cho người địa phương tự khắc.
   - `e`: `{"skill":1}`

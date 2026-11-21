@@ -2,7 +2,7 @@
 // Mỗi màn React đăng ký tên ở đây; src/game/ui/22-cau-noi-react.js gọi RX.show để vẽ.
 import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
-import { ManMoDau, ManChonKiep, ManHetKiep, ManBenVongXuyen, ManMoDauKiep } from './man-ngoai';
+import { ManMoDau, ManChonKiep, ManHetKiep, ManBenVongXuyen, ManMoDauKiep, ManKet } from './man-ngoai';
 import { Hud } from './ban-do/Hud';
 import { Nav } from './ban-do/Nav';
 import { NutBanDo } from './ban-do/NutBanDo';
@@ -17,6 +17,7 @@ const VIEWS = {
   Title: ManMoDau,
   Birth: ManChonKiep,
   Over: ManHetKiep,
+  Ket: ManKet,
   Meta: ManBenVongXuyen,
   Life: ManMoDauKiep,
   Hud,

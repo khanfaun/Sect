@@ -41,7 +41,12 @@
           "l": "Giữ người lại để nghe hết chuyện",
           "t": "Ngươi bảo lãnh cho {$a.ten}. Hắn đặt tấm tên úp xuống, chỗ cạnh gỗ còn rỉ nhựa.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "đinh giữ tên"
@@ -54,7 +59,7 @@
           "t": "Ngươi lấy bạc và hắn bị giữ. Bánh lái vẫn quay được, hở đúng một lỗ đinh.",
           "e": {
             "st": 22,
-            "karma": -3,
+            "deed": "lua_loi",
             "oan": [
               "a",
               "đinh giữ tên"
@@ -142,7 +147,12 @@
           "l": "Giúp ghi riêng từng chuyến đã chở người",
           "t": "Ngươi theo hắn tìm người làm chứng cho từng chuyến đã cứu nạn. Có chuyến được xác nhận, có chuyến không ai nhớ. Người đòi nợ đồng ý ghi riêng công cứu người, nhưng nói việc cướp tàu vẫn phải xét đủ.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "những lần đổi tay"
@@ -155,7 +165,9 @@
           "l": "Đòi hắn làm công lái thuyền để trả nợ",
           "t": "Người mất tàu có phần công, ngươi có người dẫn lối. Hắn bọc bánh lái bằng vải để khỏi thấy lỗ đinh.",
           "e": {
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -240,7 +252,12 @@
           "l": "Dùng tiền treo xin cho hắn ra làm chứng",
           "t": "Ngươi bỏ tiền bảo lãnh, xin cho hắn ra đối chứng và nhận trách nhiệm đưa trở lại nếu việc chưa rõ. Người đòi nợ dẫn tới gặp người em từng được hắn cứu. Hắn nghe xong mới biết người ấy còn sống.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "chỗ tay bấu vào cũi"
@@ -255,7 +272,12 @@
           "l": "Xin cho hắn trả nợ bằng công thay vì giam",
           "t": "Hắn nhận việc lái những chuyến nguy hiểm. {$b.ten} bỏ thêm một bát cháo vào thúng khi tiễn.",
           "e": {
-            "karma": 3
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -333,14 +355,14 @@
           "alignment": "context"
         }
       },
-      "text": "Một tàu chở khách mắc cạn ngoài cảng, phải bỏ hàng mới có thể đón người từ thuyền nhỏ đang vỡ. Nếu cựu hải tặc đã được ra làm chứng, người mất tàu chịu theo hắn đi cứu nạn. Nếu hắn còn làm công trả nợ, người đòi nợ đem lệnh tới để cho hắn rời chuyến hàng đang nhận. Ngươi có mặt trên tàu cứu hộ khi hắn xin quyết ngay việc cắt hàng.",
+      "text": "Một tàu khách mắc cạn ngoài cảng. Tàu cứu hộ phải bỏ bớt hàng mới đón được người từ chiếc thuyền nhỏ sắp vỡ. Nếu cựu hải tặc từng được làm chứng, những người mất tàu chịu theo hắn đi cứu. Nếu hắn còn làm công trả nợ, chính người đòi nợ đến cho hắn rời chuyến hàng. Đứng trên tàu cứu hộ, hắn hỏi ngươi có chịu đền cho số hàng phải bỏ không.",
       "choices": [
         {
           "i": "✋",
           "l": "Ứng tiền đền hàng, cho cắt dây cứu người",
           "t": "Ngươi nhận ứng tiền đền phần hàng phải bỏ. Hắn cắt dây, quay mạn đón từng người từ thuyền nhỏ. Người lên cuối hỏi ai mất hàng, hắn bảo cứ lên cho đủ rồi tính.",
           "e": {
-            "karma": 4
+            "deed": "cuu_nguoi"
           },
           "cost": {
             "st": 16
@@ -351,7 +373,9 @@
           "l": "Cứu tàu bằng cách bỏ lại thuyền nhỏ",
           "t": "Hàng giữ được, người đi thuyền nhỏ được vớt sau một đêm lạnh. Trên mạn tàu còn hai vết móng.",
           "e": {
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -437,14 +461,19 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu người được đưa qua trước, họ mang đến một tấm gỗ góp làm bánh lái. Nếu hàng từng được giữ, người đi thuyền nhỏ đem tới những mảnh ván đã vớt được và đặt chúng dựa ngoài cửa.",
+      "text": "Nếu tàu cứu hộ đã bỏ hàng để đón người, những người được cứu góp một tấm gỗ làm bánh lái. Nếu tàu giữ hàng và bỏ lại thuyền nhỏ, người đi thuyền mang những mảnh ván vớt được tới, dựng chúng ngoài cửa.",
       "choices": [
         {
           "i": "✋",
           "l": "Khắc cả tên người cứu lẫn người chịu thiệt",
           "t": "Ngươi chịu phần tiền đền hoặc mất phần thưởng còn lại. Cựu hải tặc {$a.ten} khoan lỗ đinh đầu tiên ở mặt trong.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 16

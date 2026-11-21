@@ -183,7 +183,7 @@ Nguồn chuẩn: `content/events/thien-kieu.json`. Bản đọc tự sinh. Cú p
     `{"e":{"tamma":2}}`
 - **3. Nhường lại**
   Ngươi để lại cho {$rv.hn}.
-  - `e`: `{"rival":1,"karma":2}`
+  - `e`: `{"rival":1,"hd":{"p":1},"ng":{"g":1}}`
 - **4. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -217,7 +217,7 @@ Nguồn chuẩn: `content/events/thien-kieu.json`. Bản đọc tự sinh. Cú p
 - **1. Ra tay giúp**
   - `fight`: `{"k":"matu","cnt":2}`
   - **Thắng trận**: {$rv.ten} thở dốc: “Ơn này, {$rv.sect} sẽ nhớ.”
-    `{"e":{"rival":2,"tv":6,"karma":4}}`
+    `{"e":{"rival":2,"tv":6,"deed":"cuu_nguoi"}}`
 - **2. Chờ xem**
   {$rv.ten} tự phá vây được, nhưng đã thấy ngươi đứng xem.
   - `e`: `{"rival":-1}`

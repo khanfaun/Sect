@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "trom",
+  "len": [
+    "Người coi nhóm giao ngươi trông phần chia sau mỗi vụ trộm vặt. Một đứa mới hỏi có được trả lại món lấy nhầm.",
+    "Ngươi đã nổi tiếng vào được những nhà khóa cửa. Người đưa việc tới lần này cầm giấy ghi đồ của nhà đang mắc nợ.",
+    "Người trong thành gọi ngươi là đạo vương. Có người đến xin ngươi trả cái ống tiền dành cho một đứa đang bệnh.",
+    "Tin về ngươi đi qua nhiều trấn. Nhóm muốn theo phải nói trước họ có chấp nhận để nhà nghèo ra ngoài danh sách.",
+    "Người cầm sổ bang đưa ngươi quyền chia việc. Dưới mép bàn còn một danh sách những món chủ cũ đã đến đòi."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Đồ trả lại trước cửa",
+      "t": "Ngày ngươi mất, bang tìm thấy trong hòm nhiều món đã ghi sẵn nơi trả. Họ đem từng món về đúng cửa. Một bà nhận lại chiếc lược rồi lấy phần tiền hàng hôm ấy mua hương, dù vẫn không biết tên thật của ngươi.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Sổ chia còn tên nhà nghèo",
+      "t": "Bang giữ được người sau tang lễ, nhưng sổ chia cho thấy cả tiền thuốc từng bị lấy. Một nhà đem túi cũ đến hỏi. Người kế bang phải nghe họ đọc ra từng khoản ngay ở chỗ ngươi từng ngồi.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Một phiếu trả trước tối",
+      "t": "Người từng cùng ngươi làm việc ở thành đốt những giấy gọi chuyến sau khi chôn ngươi. Họ giữ lại phiếu của một món đã trả. Trên đó còn lời nhờ người nhận lấy đồ trước lúc chợ đóng.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Bàn tay rời túi áo",
+      "t": "Ngươi mất khi tài sản chỉ còn một túi vải rỗng. Một bạn chợ đến gấp túi lại, trả chủ sạp chiếc ghế đã mượn cho ngươi nằm. Họ nhớ ngươi từng trả lại tiền khi nghe chủ túi đi tìm."
+    }
+  ]
+}

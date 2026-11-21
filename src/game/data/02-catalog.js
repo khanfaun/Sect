@@ -74,7 +74,7 @@ for(const b of CAT.beasts){if(EN[b.id])continue;EN[b.id]={f:'thu',i:b.i,nb:b.nb,
 
 // ---------- 9. xuất thân: chuyện thơ ấu, tính tình (xét thể chất), tâm pháp gia truyền ----------
 for(const o of CAT.origins){if(ORIGIN.some(z=>z.id===o.id))continue;const x={id:o.id,n:o.n,i:o.i,fx:o.fx,d:o.d,bio:o.bio};
-  for(const k of ['st','karma','tamma','age','pill','pill2'])if(o[k]!=null)x[k]=o[k];
+  for(const k of ['st','karma','tamma','age','pill','pill2','grp','bac','lt'])if(o[k]!=null)x[k]=o[k];
   if(o.ls)LS_OG[o.id]=o.ls.map(t=>t.replace(/\{que\}/g,'{que}'));if(o.tinh)TT_TRAITS[o.id]=o.tinh;
   if(o.tp!=null){TP_ORIGIN[o.id]=o.tp;if(o.tpc)LS_TPG[o.id]=o.tpc;x.d+=', có tâm pháp gia truyền';}
   ORIGIN.push(x);}

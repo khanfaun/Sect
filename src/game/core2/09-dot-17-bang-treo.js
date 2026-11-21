@@ -21,7 +21,8 @@ function questRewardChipsHidden(q){const R0=questRewardOf(q);const L=questReward
   return L;}
 
 // màu phẩm nhiệm vụ: Dễ xám, Thường lục, Khó lam, Hiểm tím, Tử nạn cam, Tuyệt cảnh đỏ
-// Bảng QCOL: content/rules/qcol.jsfunction qpc(g){return '--pc:'+QCOL[clamp(g||0,0,5)];}
+// Bảng QCOL: content/rules/qcol.js
+function qpc(g){return '--pc:'+QCOL[clamp(g||0,0,5)];}
 
 // ================= ĐỢT 18: KỲ NGỘ HIẾM =================
 // Hai loại, xác suất rất thấp, mỗi ngày trong game gieo một lần (cách nhau ít nhất nửa năm):
@@ -33,12 +34,15 @@ function lifeLose(y){const r=G.run;r.lifeAdj-=y;return chip('⏳','thọ −'+y+
 function lifeGain(y){const r=G.run;r.lifeAdj+=y;return chip('⏳','thọ +'+y+' năm',contentText("core2_09-dot-17-bang-treo_js.lifeGain.008"),'up');}
 const KYNGO=[]; // content/events/opportunities/
 function kyStart(ev){if(!ev)return;const r=G.run;r.kyT=W().t;r.scene={type:'kyngo',ev:ev.id,text:ev.t,res:null,chips:[],back:r.moving?null:r.at};if(r.moving)r.moving.halt=1;}
+// kỳ ngộ / sự kiện NGẪU NHIÊN đi qua kyNgau để hệ khác tạm hoãn được (truy nã câu 82, core2/66). Trả false nếu bị hoãn.
+function kyNgau(ev){if(!ev)return false;kyStart(ev);return true;}
+function kyHoanNow(){return false;}
 function kyOpts(sc){const ev=KYNGO.find(x=>x.id===sc.ev);return ev.c.map(c=>({l:c.l,cost:c.cost||'',no:c.need?c.need():''}));}
 function kyPick(i){const r=G.run,sc=r.scene;if(!sc||sc.type!=='kyngo'||sc.res)return;const ev=KYNGO.find(x=>x.id===sc.ev);const c=ev&&ev.c[i];if(!c||(c.need&&c.need()))return;
   const o=c.go()||{};sc.res={l:c.l,t:o.t};sc.chips=o.ch||[];log(contentText("core2_09-dot-17-bang-treo_js.kyPick.009")+ev.n+'.');if(G.run&&r.age>=S().life)die('toahoa');}
 {const _adv18=advanceTime;advanceTime=function(h){const o=_adv18(h);const r=G.run;if(!r||h>48)return o;r.kyAcc=(r.kyAcc||0)+h;
   while(r.kyAcc>=HD){r.kyAcc-=HD;if(r.scene||G.screen!=='map'||W().t-(r.kyT||-1e9)<HY/2)continue;
-    const roll=R()/kyMul();if(roll<KY_P[0]){if(kyBigOpen())kyStart(pick(contentOpportunityPool(x=>x.paid)));break;}if(roll<KY_P[0]+KY_P[1]){kyStart(pick(contentOpportunityPool(x=>!x.paid&&!x.joke&&!x.sp)));break;}if(roll<KY_P[0]+KY_P[1]+KY_P[2]){kyStart(pick(contentOpportunityPool(x=>x.joke)));break;}}
+    const roll=R()/kyMul();if(roll<KY_P[0]){if(kyBigOpen())kyNgau(pick(contentOpportunityPool(x=>x.paid)));break;}if(roll<KY_P[0]+KY_P[1]){kyNgau(pick(contentOpportunityPool(x=>!x.paid&&!x.joke&&!x.sp)));break;}if(roll<KY_P[0]+KY_P[1]+KY_P[2]){kyNgau(pick(contentOpportunityPool(x=>x.joke)));break;}}
   return o;};}
 
 // Bảng KY_P: content/rules/ky-p.js

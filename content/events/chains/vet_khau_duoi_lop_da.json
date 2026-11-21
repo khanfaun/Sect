@@ -40,7 +40,12 @@
           "l": "Ngừng luyện và giữ kim để hỏi",
           "t": "Ngươi bù phí phôi. Mũi chỉ tự rút một nửa rồi dừng.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "tamma": -3
           },
           "cost": {
@@ -52,7 +57,12 @@
           "l": "Cho luyện tiếp để đổi bí quyết",
           "t": "Ngươi có khẩu quyết giữ thi. {$b.ten} đem theo cái kim mà không ai nghĩ tới việc đòi lại.",
           "e": {
-            "karma": -3,
+            "hd": {
+              "t": 3
+            },
+            "ng": {
+              "b": 1
+            },
             "tamma": 4,
             "skill": 1
           }
@@ -136,7 +146,12 @@
           "l": "Cho thi thể chọn vật mang theo",
           "t": "Ngươi giữ thi thức thêm một đêm, để nó tự chọn đồ mang theo. Nó bỏ hạt ngô ra, cất nút áo vào túi rồi khâu miệng túi lại. Người em nói đó là nút áo mẹ từng đơm cho anh.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "tamma": -3,
             "h": 24
           }
@@ -146,7 +161,9 @@
           "l": "Dùng túi để chuyển linh vật qua vách",
           "t": "Ngươi lấy được một vật bị kẹt trong lò. Khi trở về, tay áo ngươi có thêm một đường chỉ ngược.",
           "e": {
-            "karma": -2,
+            "hd": {
+              "t": 1
+            },
             "tamma": 3,
             "item": "story_item_vet_khau_duoi_lop_da_2"
           }
@@ -232,7 +249,12 @@
           "l": "Thuyết phục người luyện thi tháo phù chủ",
           "t": "Ngươi nhắc thi thể vẫn nhận ra người nhà, ở lại nói tới khi lão chịu tháo phù chủ. Nó quay đúng về phía người em, đưa tay đòi chiếc kim. Người em đứng im một lúc mới dám trao.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -240,7 +262,12 @@
           "l": "Mua quyền ra lệnh cho nó",
           "t": "Nó theo ngươi, đổi lại {$b.ten} xin được tự mang kim theo. Mỗi lúc nghỉ, nó ngồi quay mặt về phía tiếng kim chạm đá.",
           "e": {
-            "karma": -4,
+            "hd": {
+              "t": 3
+            },
+            "ng": {
+              "b": 3
+            },
             "tamma": 4
           },
           "cost": {
@@ -323,7 +350,7 @@
           "alignment": "context"
         }
       },
-      "text": "Thi thể khâu mình vào vách để khỏi bị mang đi. Nếu từng được lựa chọn, nó để lại một đầu chỉ cho em. Nếu từng bị sai khiến hoặc đem dùng, chỉ xuyên qua cổ tay, không chừa đầu.",
+      "text": "Thi thể tự khâu vào vách để khỏi bị kéo đi. Nếu trước đây nó được tự quyết, nó chừa một đầu chỉ cho em tháo. Nếu từng bị người khác sai khiến, nó khâu kín cổ tay và không để lại đầu chỉ nào.",
       "choices": [
         {
           "i": "✋",
@@ -335,7 +362,12 @@
           "win": {
             "t": "Ngươi tháo trận, để thi thể tự rút những mũi chỉ cuối rồi chọn nơi nằm.",
             "e": {
-              "karma": 4
+              "hd": {
+                "p": 1
+              },
+              "ng": {
+                "g": 1
+              }
             }
           },
           "lose": {
@@ -347,7 +379,12 @@
           "l": "Thương lượng để người luyện thi rút trận",
           "t": "Lão đồng ý rút trận nếu được giữ phần cốt dùng tụ linh khí. Người em nhận lời để cứu anh khỏi vách, nhưng bàn tay thi thể nhẹ đi rõ rệt. Nó vẫn giữ được chiếc kim.",
           "e": {
-            "karma": 1
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -433,14 +470,14 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu ngươi đã thắng thi trận, thi thể tự đi tới dốc an táng theo sau người em. Nếu ngươi từng thua trận, người em nhờ người tháo dần vòng chỉ còn lại rồi đưa anh tới đây. Nếu ngươi từng thương lượng rút trận, người em mang thi thể thiếu phần cốt tụ linh tới dốc. Nó đặt kim bên gối đá, chờ người em chọn chỗ chôn.",
+      "text": "Nếu ngươi thắng thi trận, thi thể tự đi tới dốc an táng theo sau người em. Nếu ngươi thua, người em phải nhờ tháo dần vòng chỉ rồi mới đưa anh tới. Nếu người luyện thi đã chịu rút trận, người em đưa thi thể thiếu phần cốt từng giữ linh lực tới dốc. Nó đặt kim cạnh gối đá và chờ em chọn chỗ chôn.",
       "choices": [
         {
           "i": "✋",
           "l": "Chôn cả kim lẫn phần cốt còn lại",
           "t": "Ngươi cùng người em chôn cả kim và bộ cốt, canh tới khi thi khí tan hết. Hắn kể xong chuyện nhà, xin ngươi để mình ở lại thêm một lúc.",
           "e": {
-            "karma": 4
+            "deed": "an_tang"
           }
         },
         {
@@ -448,7 +485,9 @@
           "l": "Giữ kim để nhận ra thi thức còn sống",
           "t": "Ngươi có một vật thử thi. Người em {$b.ten} xin chỉ một đoạn chỉ, đủ quấn qua ngón tay.",
           "e": {
-            "karma": -1,
+            "hd": {
+              "t": 1
+            },
             "item": "story_item_vet_khau_duoi_lop_da_4"
           }
         },

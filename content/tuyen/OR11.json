@@ -1,0 +1,325 @@
+{
+  "schemaVersion": 1,
+  "id": "OR11",
+  "loai": "xuat_than",
+  "ten": "Một chữ tín có giá bao nhiêu",
+  "xuatThan": "buon",
+  "goiYDaiLo": [
+    "phu_giap"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Ai ký bảo lãnh bằng nhãn nhà?",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "{NP05} mở sổ nợ ở {LOC03}. Người quản hàng cũ ký bảo lãnh dưới nhãn nhà ngươi, còn {NP06} chỉ ký nhận hàng. Khoản nợ chưa trả, nhưng số kiện đã bị ai đó sửa.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So hai chữ ký",
+          "t": "Ngươi tìm thấy hai chữ ký: người quản hàng đứng tên bảo lãnh, còn người dẫn đội chỉ nhận kiện đem đi.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Đếm hàng đã về kho",
+          "t": "Ngươi kê phần hàng còn nguyên, giữ lại phiếu của những kiện đi theo chuyến sau.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Xin giấy nhận nợ riêng",
+          "t": "Ngươi tách phần nợ do nhà chịu khỏi phí chuyến để còn dò người ký.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hòm nợ đóng lại, nhãn nhà ngươi vẫn đứng bảo lãnh.",
+        "su": "Hòm nợ đóng lại, nhãn nhà ngươi vẫn đứng bảo lãnh.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Người sống bị ghi là kiện hàng",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Thuyền từ {LOC03} ghé {LOC09} khi nước xuống. Người đi chân trần bước ra khỏi khoang; thẻ ở cổ trùng số của kiện ghi mất. Tờ hàng từ {LOC11} cũng có một mục đáng ngờ.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So thẻ với giấy chở hàng",
+          "t": "Ngươi xác nhận người chân trần và một thợ lò bị ghi vào mục tài sản cầm cố.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "So phiếu đường lò",
+          "t": "Ở {LOC11}, người giao hàng xác nhận thợ lò bị chở đi dưới cái tên dành cho một kiện thất lạc.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi người chân trần muốn đi đâu",
+          "t": "Ngươi nghe người ấy xin trở về bến, rồi ghi một địa chỉ để có thể tìm lại.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hàng xuống bến, người chân trần tiếp tục đứng dưới mục tài sản.",
+        "su": "Hàng xuống bến, người chân trần tiếp tục đứng dưới mục tài sản.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Trả nợ để giải người hay nhận quyền buôn?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Người coi khế ở {LOC03} đặt hai tờ cầm cố lên bàn. Người chân trần còn chờ ở cửa, còn thợ lò sắp bị chuyển đi. Thương hội đề nghị nhận cả quyền dùng nhãn nhà ngươi.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Dùng hàng trong kho trả nợ và giải người",
+          "t": "Ngươi đối kho, lấy hàng bù nợ rồi đưa người chân trần ra cửa. Thợ lò chờ ký hủy.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_1_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận quyền phân phối đổi lấy khế",
+          "t": "Ngươi nhận ghế giao hàng, để thợ lò đi theo chủ mới và giữ khế người chân trần.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Bán nhãn rồi trả tiền công còn nợ",
+          "t": "Ngươi bán quyền dùng nhãn cho chủ nợ, dành bạc trả công và ghi riêng số còn thiếu.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Khế thợ lò chuyển cho chủ mới, người chân trần ở lại chờ định giá.",
+        "su": "Khế thợ lò chuyển cho chủ mới, người chân trần ở lại chờ định giá.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Tự chở hàng hay theo thương hội?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Trên sân {LOC03}, hàng đã lên xe. Một khách muốn đặt ngươi chở hàng riêng. Người giữ ghế thương hội lại có thể giao quyền chia chuyến giữa các vùng.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Chở chuyến độc lập và nhận hàng lỗi",
+          "t": "Ngươi giao đủ chuyến, nhận lại một kiện đã hỏng theo lời hẹn với người mua.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Dùng ghế thương hội để nắm hai tuyến hàng",
+          "t": "Ngươi giao xong hàng trên cả hai tuyến. Từ đó, ai muốn cho xe đi đều phải qua cuốn sổ ngươi giữ.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Giao chuyến cuối và kê tài sản",
+          "t": "Ngươi giao nốt kiện còn mắc rồi đề tên từng chủ nợ, người làm và phần nhận.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Xe rời sân dưới nhãn khác, người cầm khế giữ lại giấy nợ.",
+        "su": "Xe rời sân dưới nhãn khác, người cầm khế giữ lại giấy nợ.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Điều khoản nào áp cả lên chủ hàng?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Ở {LOC03}, khách trả lại một kiện hỏng và đòi bồi thường. Cùng lúc, có người muốn ngươi chặn hàng sang vùng khác. Thợ cũ đem phiếu tiền công tới chờ trả.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Bồi thường và bỏ điều cầm người",
+          "t": "Ngươi trả đủ giá kiện hỏng rồi ký hợp đồng cấm cầm người, kể cả với lô của mình.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Thi hành lệnh cấm vận",
+          "t": "Ngươi khóa chuyến qua hai tuyến. Một vùng không lấy được hàng và phải trả giá cao hơn.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Thanh toán rồi giải thể thương hiệu",
+          "t": "Ngươi trả hết khoản kê được, ghi phần chưa có người nhận, rồi tháo nhãn nhà khỏi xe.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chủ nợ giữ lại kiện cuối, người làm phải trở lại hỏi phần công.",
+        "su": "Chủ nợ giữ lại kiện cuối, người làm phải trở lại hỏi phần công.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Hội quán mở cửa",
+      "dk": {
+        "dau": [
+          "moc_1_2",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người mua đem kiện hỏng tới cân ngay trước chủ xe và nhận đủ tiền bồi thường. Một người đã được tháo khế tới ký làm thuê theo chuyến. Tờ bảo lãnh mới chỉ ghi hàng và phần công, đủ để thương đội khác nhận chở.",
+      "su": "Tuyến vận độc lập tại {LOC03} bỏ cầm người và đã bồi thường kiện hỏng.",
+      "dauVong": "tờ bảo lãnh của {ten} vẫn được nhận tại bàn giao hàng độc lập."
+    },
+    {
+      "id": "B",
+      "ten": "Người định giá thiên hạ",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Lệnh cấm vận đi qua hai vùng trước khi chuyến sau được phép nhấc bánh. Người có giấy mới lĩnh hàng, còn dân ở cuối tuyến nhớ ngày phải mua cơm theo một giá mà họ chưa từng trả. Sổ cấp chuyến về một tay.",
+      "su": "Quyền phân phối liên khu tập trung sau một lệnh cấm của {ten}.",
+      "dauVong": "một vùng còn nhớ giá cơm vào ngày chuyến hàng bị khóa."
+    },
+    {
+      "id": "C",
+      "ten": "Bỏ sổ xuống sông",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Biển cũ được tháo xuống khi người làm cuối đã ký nhận tiền. Món nợ chưa tìm thấy chủ được giữ trong hòm niêm, ai mang đủ phiếu có thể tới đối. Những người từng đi chung xe tìm mối riêng từ chuyến kế.",
+      "su": "Nhãn cũ giải thể sau khi kê phần của chủ nợ và người làm.",
+      "dauVong": "một người khuân hàng giữ giấy xác nhận đã lĩnh phần cuối dưới chỗ từng treo nhãn."
+    }
+  ],
+  "ngoai": "Chủ nợ giữ lại kiện cuối, người làm phải trở lại hỏi phần công."
+}

@@ -29,14 +29,15 @@ function KhungCanh({ sc, me, foes, al }) {
 
 // Một nút chiêu
 function NutChieu({ id, sk, lv, t, me }) {
-  const c = PS.skillCost(sk), no = me.mp < c || (PS.isPham() && String(id)[0] !== '_');
+  const c = PS.skillCost(sk), cd = String(id)[0] !== '_' ? PS.skCd(id) : 0, no = me.mp < c || cd > 0 || (PS.isPham() && String(id)[0] !== '_');
+  const lk = String(id)[0] !== '_' && (PS.skLockRaw ? PS.skLockRaw(id) : PS.skLocked(id));
   const d = sk.fx.p ? Math.round(sk.fx.p * 100) + '% uy lực' : '';
   const q = sk.t != null && String(sk.id || '')[0] !== '_';
   return (
     <button className={'sk' + (q ? ' qk' : '')} data-act="skill" data-arg={id} disabled={no} style={q ? pcs(sk.t) : undefined} {...tip(t || PS.skillTip(sk, lv))}>
       <H h={PS.elSeal(sk.el)} />
-      <span className="sn"><span className={q ? 'qt' : ''}>{sk.n}</span>{lv > 1 && <> <i>{'Ⅰ Ⅱ Ⅲ'.split(' ')[lv - 1]}</i></>}<small>{[sk.once ? 'dùng một lần' : '', d, c ? c + ' linh lực' : '', sk.fx.charge ? 'tụ lực' : ''].filter(Boolean).join(' · ')}</small></span>
-      {String(id)[0] !== '_' && <span className={'sk-lock' + (PS.skLocked(id) ? ' on' : '')} data-act="skLock" data-arg={id} {...tip(PS.skLocked(id) ? 'Đã khoá: chế độ tự đánh không dùng chiêu này. Bấm để mở khoá.' : 'Bấm để khoá: chế độ tự đánh sẽ không dùng chiêu này.')}>{PS.skLocked(id) ? '🔒' : '🔓'}</span>}
+      <span className="sn"><span className={q ? 'qt' : ''}>{sk.n}</span>{lv > 1 && <> <i>{'Ⅰ Ⅱ Ⅲ'.split(' ')[lv - 1]}</i></>}<small>{[sk.once ? 'dùng một lần' : '', d, c ? c + ' linh lực' : '', sk.fx.charge ? 'tụ lực' : '', cd ? 'hồi chiêu ' + cd : ''].filter(Boolean).join(' · ')}</small></span>
+      {String(id)[0] !== '_' && <span className={'sk-lock' + (lk ? ' on' : '')} data-act="skLock" data-arg={id} {...tip(lk ? 'Đã khoá: chế độ tự đánh không dùng chiêu này. Bấm để mở khoá.' : 'Bấm để khoá: chế độ tự đánh sẽ không dùng chiêu này.')}>{lk ? '🔒' : '🔓'}</span>}
     </button>
   );
 }
@@ -81,7 +82,7 @@ function BangLenh({ sc, me, rp, pickMode }) {
   );
   if (m === 'def') return (
     <div className="skills">
-      <button className="sk" data-act="skill" data-arg="_block" disabled={me.tl < PS.TL_BLOCK} {...tip('Đỡ đòn: thủ thế, chạy dần từ mốc ra chiêu tới mốc phát lực.\nTrong quãng đó bị đánh thì đỡ được một lần: giảm khoảng 20–30% sát thương, tốn 30% thể lực.\nKhông ai đánh thì không có gì xảy ra.')}>
+      <button className="sk" data-act="skill" data-arg="_block" disabled={me.tl < PS.tlB(me)} {...tip('Đỡ đòn: thủ thế, chạy dần từ mốc ra chiêu tới mốc phát lực.\nTrong quãng đó bị đánh thì đỡ được một lần: giảm khoảng 20–30% sát thương, tốn 30% thể lực.\nKhông ai đánh thì không có gì xảy ra.')}>
         <span className="el">Đỡ</span><span className="sn">Đỡ đòn<small>30% thể lực</small></span>
       </button>
       <NutChieu id="_guard" sk={PS.GUARD_SK} lv={1} t={'Vận khí thủ thế\nĐược hộ thể và hồi 30% linh lực'} me={me} />

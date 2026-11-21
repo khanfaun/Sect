@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "TUC_CAN",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "goi_giac",
+      "ten": "Gốc cây không giống trong mộng",
+      "t": "Ngươi tìm tới nơi từng thấy trong mộng, nhưng gốc cây đã nghiêng và lối cũ mọc kín cỏ. Một người qua đường nhớ hồi trước có hai gốc sát nhau. Họ hỏi ngươi đang tìm nơi chôn vật hay tìm người từng sống ở đây.",
+      "c": [
+        {
+          "id": "ve",
+          "l": "Vẽ lại nơi thấy trong giấc mộng",
+          "t": "Ngươi đánh dấu gốc cây và hướng lối cũ. Người qua đường chỉ thêm chỗ từng có bậc đất.",
+          "e": {
+            "nang": {
+              "giac": 1
+            }
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Hỏi họ từng thấy ai ở quanh gốc",
+          "t": "Họ chỉ nhớ một người thường ngồi ở đó lúc mưa. Ngươi ghi lại lời kể, chưa nhận người ấy là mình."
+        }
+      ]
+    }
+  ]
+}

@@ -39,8 +39,8 @@ function placeSize(n){const t=n.type;if(t==='tong'){const z=TONG_SZ[n.quy||1];re
 // từ ngữ do hệ thống tính theo loại và số ô thật sự chiếm được
 function scaleWord(n,c){const t=n.type;
   if(t==='tong')return c<=4?contentText("core2_33-the-gioi-mo_js.scaleWord.021"):c<=6?'Đồ sộ':c<=8?contentText("core2_33-the-gioi-mo_js.scaleWord.022"):'Bao la';
-  if(t==='thanh')return c<=5?contentText("core2_33-the-gioi-mo_js.scaleWord.023"):'Lớn';
-  if(t==='tran')return c<=2?'Nhỏ':'Trung';
+  if(t==='thanh'||t==='tuthanh')return c<=5?contentText("core2_33-the-gioi-mo_js.scaleWord.023"):'Lớn';
+  if(t==='tran'||t==='tutran')return c<=2?'Nhỏ':'Trung';
   return c<=1?contentText("core2_33-the-gioi-mo_js.scaleWord.024"):c===2?'Nhỏ':c===3?'Vừa':c===4?contentText("core2_33-the-gioi-mo_js.scaleWord.025"):c<=6?'Rộng':contentText("core2_33-the-gioi-mo_js.scaleWord.026");}
 function placeScale(n){const c=placeCells(n).length;return {c,w:scaleWord(n,c),txt:scaleWord(n,c)+' · '+c+' ô',area:c*HEX_DAM2};}
 function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô -> địa điểm đang chiếm
@@ -50,20 +50,68 @@ function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô
   // số ô còn có thể mọc ra quanh một ô gốc (đếm theo đúng luật mọc ô), tối đa cap
   const reach=(c,k,id,cap)=>{const seen=new Set([c]);let fr=[c];while(fr.length&&seen.size<cap){const nx=[];for(const u of fr)for(const b of hexNb(u))if(!seen.has(b)&&ok(b,k,id)){seen.add(b);nx.push(b);}fr=nx;}return seen.size;};
   const regCells=new Map();const cellsOf=k=>{if(!regCells.has(k)){const L=[];for(let i=0;i<HN;i++)if(g.reg[i]===k&&terWalk(g.ter[i])&&g.ter[i]!==4)L.push(i);regCells.set(k,L);}return regCells.get(k);};
-  all.filter(n=>!n.cells).map(n=>[n,placeSize(n)]).sort((a,b)=>b[1]-a[1]).forEach(([n,sz])=>{const k=Math.floor(n.id/100);
+  all.filter(n=>!n.cells).map(n=>[n,placeSize(n)]).sort((a,b)=>b[1]-a[1]).forEach(([n,sz])=>{const k=idReg(n.id);
     // tông môn, thành mà chỗ chật không đủ chỗ mọc thì dời sang chỗ rộng hơn
-    if((n.type==='tong'||n.type==='thanh')&&reach(n.hex,k,n.id,sz)<Math.min(sz,n.type==='tong'?4:5)){const L=cellsOf(k);
+    if((n.type==='tong'||isThanhT(n.type))&&reach(n.hex,k,n.id,sz)<Math.min(sz,n.type==='tong'?4:5)){const L0=cellsOf(k),dq=g.dist[n.hex],Lq=L0.filter(c=>g.dist[c]===dq),L=Lq.length>20?Lq:L0; // ưu tiên dời trong cùng quận
       for(let t=0;t<500;t++){const c=L[Math.floor(R()*L.length)];if(own.has(c)||hexNb(c).some(b=>own.has(b)))continue;if(reach(c,k,n.id,sz)>=sz){own.delete(n.hex);n.hex=c;own.set(c,n.id);const q=hexCenter(c);n.x=Math.round(q[0]*10)/10;n.y=Math.round(q[1]*10)/10;break;}}}
     const set=[n.hex];const inS=new Set(set);
     while(set.length<sz){const cand=new Map();for(const c of set)for(const b of hexNb(c))if(!inS.has(b)&&ok(b,k,n.id))cand.set(b,(cand.get(b)||0)+1);if(!cand.size)break;
       const L=[...cand];const b=wpick(L,x=>x[1]*x[1]+0.5)[0];set.push(b);inS.add(b);own.set(b,n.id);}
     n.cells=set;});}
+
+// ================= SINH NƠI THEO QUẬN (CHỈ THẾ GIỚI MỚI) =================
+// Mỗi quận có số thành, trấn phàm nhân / tu sĩ và nơi hoang dã, bí cảnh theo cỡ quận (bảng NOI_SL, NOI_HOANG: content/world/size-t.js).
+// Thế giới mới đánh dấu w.v2=1; bản lưu cũ không có dấu này nên giữ nguyên, chỉ đi qua ensureCounts như trước.
+let GEN_NEW=false;
+{const _gw=genWorld;genWorld=function(seed){GEN_NEW=true;try{return _gw.apply(this,arguments);}finally{GEN_NEW=false;}};}
+function hexD(a,b){const ca=a%HCOLS,ra=(a-ca)/HCOLS,cb=b%HCOLS,rb=(b-cb)/HCOLS;const qa=ca-(ra-(ra&1))/2,qb=cb-(rb-(rb&1))/2,dq=qa-qb,dr=ra-rb;return Math.max(Math.abs(dq),Math.abs(dr),Math.abs(dq+dr));}
+function quanCells(g){const Q={};for(let i=0;i<HN;i++){const d=g.dist[i];if(d>=0&&g.reg[i]>=0&&terWalk(g.ter[i]))(Q[d]||(Q[d]={k:g.reg[i],cells:[]})).cells.push(i);}return Q;}
+function quanCo(n){const S=NOI_SL;return n<S.nguong[0]?'be':n>S.nguong[1]?'lon':'vua';}
+function expandWorld(w){if(w.v2)return;const g=geoFor(w);
+  seeded('noi'+w.seed,()=>{
+    const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
+    const occ=new Uint8Array(HN),b2=new Uint8Array(HN),b3=new Uint8Array(HN);
+    const mark=c=>{occ[c]=1;b2[c]=1;b3[c]=1;for(const b of hexNb(c)){b2[b]=1;b3[b]=1;for(const d of hexNb(b))b3[d]=1;}};
+    for(const n of all)mark(n.hex);
+    const names=w.regions.map(R0=>new Set(R0.nodes.map(x=>x.name)));
+    const uname=(k,t)=>{let nm,q=0;do{nm=placeName(t);}while(names[k].has(nm)&&q++<30);names[k].add(nm);return nm;};
+    const ter=c=>g.ter[c];
+    const TW={1:3,6:2,2:1.2,7:0.3,3:0.35};
+    const room=c=>{let r=0;for(const b of hexNb(c)){if(!b2[b]&&terWalk(ter(b)))r++;}return r;};
+    const free=(cells,sp)=>{const B=sp===3?b3:b2;return cells.filter(c=>!B[c]&&ter(c)!==4);};
+    const pickTown=(cells,thanh)=>{let L=free(cells,3);if(!L.length)L=free(cells,2);if(!L.length)return -1;
+      let best=-1,bs=-1;for(let i=0;i<14;i++){const c=L[Math.floor(R()*L.length)];const s=((TW[ter(c)]||0.3)*(1+room(c)*(thanh?0.5:0.2)))*(0.6+R()*0.8);if(s>bs){bs=s;best=c;}}return best;};
+    const addNode=(t,c,dg,dp)=>{const k=g.reg[c],R0=w.regions[k];const p=hexCenter(c);
+      const near=R0.nodes.map(n=>[n,Math.hypot(n.x-p[0],n.y-p[1])]).sort((a,b)=>a[1]-b[1]);
+      const n={id:mkId(k,R0.nodes.length),r:k,x:Math.round(p[0]*10)/10,y:Math.round(p[1]*10)/10,hex:c,wc:1,nw:1,type:t,name:uname(k,t),danger:dg,fog:0,seenT:-1,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:dp?1:0};
+      R0.nodes.push(n);all.push(n);mark(c);if(near[0])R0.edges.push({a:n.id,b:near[0][0].id,len:Math.round(near[0][1])});if(near[1])R0.edges.push({a:n.id,b:near[1][0].id,len:Math.round(near[1][1])});return n;};
+    const retype=(n,t)=>{n.type=t;n.dp=0;n.name=uname(idReg(n.id),t);n.danger=isTownT(t)?Math.min(n.danger,1):n.danger;delete n.cells;};
+    const HK=Object.keys(NOI_HOANG),HW=HK.map(k=>NOI_HOANG[k].w);
+    const wildType=c=>{const t=ter(c);let tot=0;const ws=HK.map((k,i)=>{const v=HW[i]*(0.25+(NOI_HOANG[k].ter[t]||0));tot+=v;return v;});let x=R()*tot;for(let i=0;i<HK.length;i++){x-=ws[i];if(x<=0)return HK[i];}return HK[0];};
+    const wildAdd=(c,t)=>{const H=NOI_HOANG[t];return addNode(t,c,ri(H.d[0],H.d[1]),H.dp);};
+    const Q=quanCells(g);
+    for(const d of Object.keys(Q).map(Number).sort((a,b)=>a-b)){const {k,cells}=Q[d],R0=w.regions[k];const q=NOI_SL[quanCo(cells.length)];
+      const want={thanh:ri(...q.thanhPham),tuthanh:ri(...q.thanhTu),tran:ri(...q.tranPham),tutran:ri(...q.tranTu)};
+      const have={thanh:[],tuthanh:[],tran:[],tutran:[]},extra=[];
+      const ex=R0.nodes.filter(n=>g.dist[n.hex]===d&&!n.dp&&!n.sectFix&&(n.type==='thanh'||n.type==='tran'));
+      for(const n of ex.filter(n=>n.type==='thanh')){if(have.thanh.length<want.thanh)have.thanh.push(n);else if(have.tuthanh.length<want.tuthanh){retype(n,'tuthanh');have.tuthanh.push(n);}else extra.push(n);}
+      for(const n of ex.filter(n=>n.type==='tran')){if(have.tran.length<want.tran)have.tran.push(n);else if(have.tutran.length<want.tutran){retype(n,'tutran');have.tutran.push(n);}else extra.push(n);}
+      for(const n of extra.slice()){if(have.tran.length<want.tran){retype(n,'tran');have.tran.push(n);}else if(have.tutran.length<want.tutran){retype(n,'tutran');have.tutran.push(n);}else{const t=wildType(n.hex);retype(n,t);const H=NOI_HOANG[t];n.danger=ri(H.d[0],H.d[1]);n.dp=H.dp?1:0;}}
+      for(const t of ['thanh','tuthanh','tran','tutran'])for(const n of have[t])n.danger=Math.min(n.danger,1);
+      for(const t of ['thanh','tuthanh','tran','tutran'])while(have[t].length<want[t]){const c=pickTown(cells,t==='thanh'||t==='tuthanh');if(c<0)break;have[t].push(addNode(t,c,0,0));}
+      const nh=ri(...q.hoang);for(let i=0;i<nh;i++){let L=free(cells,3);if(!L.length)L=free(cells,2);if(!L.length)break;
+        const t=wildType(L[Math.floor(R()*L.length)]);const H=NOI_HOANG[t];let best=-1,bs=-1;for(let j=0;j<10;j++){const c=L[Math.floor(R()*L.length)];const s=(0.25+(H.ter[ter(c)]||0))*(0.6+R()*0.8);if(s>bs){bs=s;best=c;}}wildAdd(best,t);}}
+    // bảo đảm thế giới có đủ mọi loại nơi mới (đổi bớt một nơi hoang dã sẵn có nếu thiếu)
+    for(const t of ['bicanh','dongthien','como','yeusao','ditich']){if(all.some(n=>n.type===t))continue;
+      const n=all.find(n=>!n.dp&&!n.sectFix&&['rung','nui','phe','hoang','dam'].includes(n.type));if(n){retype(n,t);n.danger=ri(NOI_HOANG[t].d[0],NOI_HOANG[t].d[1]);}}
+  });
+  w.v2=1;w.ens=1;dbg('mo.noi',{n:w.regions.reduce((s,R0)=>s+R0.nodes.length,0)});}
 // mỗi đại khu vực có ít nhất 3 thành, mỗi quận có ít nhất 2 trấn (chuyển loại địa điểm sẵn có hoặc thêm mới), chỉ làm một lần cho mỗi thế giới
 function ensureCounts(w){if(w.ens===1)return;const g=geoFor(w);const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
   const blocked=new Set();const ring=c=>{blocked.add(c);for(const b of hexNb(c)){blocked.add(b);for(const d of hexNb(b))blocked.add(d);}};for(const n of all)ring(n.hex);
   const freeCell=(c,k)=>!blocked.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4;
   const SOFT=['rung','nui','song','hoang','phe','bien','dam','linhdia','duoc','cho','ancu','khoang','dong'];
-  const conv=(n,t)=>{n.type=t;n.dp=0;const R0=w.regions[Math.floor(n.id/100)];const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);n.name=nm;n.danger=Math.min(n.danger,t==='tran'||t==='thanh'?1:n.danger);delete n.cells;};
+  const conv=(n,t)=>{n.type=t;n.dp=0;const R0=w.regions[idReg(n.id)];const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);n.name=nm;n.danger=Math.min(n.danger,t==='tran'||t==='thanh'?1:n.danger);delete n.cells;};
   const add=(k,t,c)=>{const R0=w.regions[k];if(R0.nodes.length>=97)return null;const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);const p=hexCenter(c);
     const near=R0.nodes.map(n=>[n,Math.hypot(n.x-p[0],n.y-p[1])]).sort((a,b)=>a[1]-b[1]);
     const n={id:k*100+R0.nodes.length,r:k,x:Math.round(p[0]*10)/10,y:Math.round(p[1]*10)/10,hex:c,wc:1,type:t,name:nm,danger:0,fog:0,seenT:-1,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0};
@@ -78,7 +126,7 @@ function ensureCounts(w){if(w.ens===1)return;const g=geoFor(w);const all=[];for(
     while(have<2){const cand=R0.nodes.filter(n=>g.dist[n.hex]===d&&SOFT.includes(n.type)&&!n.dp&&!n.sectFix);
       if(cand.length){conv(cand[Math.floor(R()*cand.length)],'tran');have++;continue;}const c=pickCell(D.cells,k);if(c<0)break;if(add(k,'tran',c))have++;else break;}}
   w.ens=1;}
-{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions){ensureCounts(w);if(w.sep!==3){for(const R0 of w.regions)for(const n of R0.nodes)delete n.cells;w.sep=3;}growPlaces(w);}};}
+{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions){if(GEN_NEW&&!w.v2&&!w.ens)expandWorld(w);ensureCounts(w);if(w.sep!==3){for(const R0 of w.regions)for(const n of R0.nodes)delete n.cells;w.sep=3;}growPlaces(w);}};}
 function placeCells(n){return n&&n.cells&&n.cells.length?n.cells:n?[nodeHex(n)]:[];}
 function canGoBack(){return false;}
 
@@ -89,7 +137,7 @@ function birthNode(){const w=W();const all=[];for(const R0 of w.regions)for(cons
   if(r.scene&&r.scene.type==='region')r.scene.text=T(REG[r.region].intro,{que:r.que});dbg('mo.spawn',{at:r.at,area:r.region,ten:r.ten});}return x;};}
 
 // tới một địa điểm: biết mình đang ở đại khu vực nào
-{const _ar=arrive;arrive=function(id){const r=G.run;const k=Math.floor(id/100);const was=r.region;r.region=k;r.maxRegion=Math.max(r.maxRegion||0,k);
+{const _ar=arrive;arrive=function(id){const r=G.run;const k=idReg(id);const was=r.region;r.region=k;r.maxRegion=Math.max(r.maxRegion||0,k);
   const x=_ar.apply(this,arguments);
   if(was!==k&&r.areas&&!r.areas.includes(k)){r.areas.push(k);if(typeof note==='function')note(contentText("core2_33-the-gioi-mo_js.027")+REG[k].n+': '+REG[k].sub.toLowerCase()+'.');dbg('mo.area',{from:was,to:k});}
   if(!r.areas)r.areas=[k];return x;};}
@@ -128,7 +176,7 @@ function sense(){const r=G.run,w=W();if(!r)return false;visLoad();const p=player
 function hexSeen(i){visLoad();return !!(VIS&&(VIS[i]||VNOW[i]));}
 
 // ---- bản lưu cũ (bản đồ năm ô vuông) không dùng được nữa: dựng lại thế giới, đưa nhân vật về một trấn ----
-function moFixRun(){const r=G.run;if(!r)return;const n=birthNode();r.at=n.id;r.region=Math.floor(n.id/100);r.moving=null;r.reveal=[];r.visS='';r.quests=[];r.passes=[];r.place={n:n.name,t:n.type};
+function moFixRun(){const r=G.run;if(!r)return;const n=birthNode();r.at=n.id;r.region=idReg(n.id);r.moving=null;r.reveal=[];r.visS='';r.quests=[];r.passes=[];r.place={n:n.name,t:n.type};
   if(r.scene&&r.scene.type!=='combat')r.scene=null;visReset();arrive(n.id);dbg('mo.migrate',{at:n.id});}
 if(typeof loadData==='function'){const _ld=loadData;loadData=function(d){
   const old=d&&d.meta&&d.meta.world&&!d.meta.world.mo;
@@ -143,7 +191,7 @@ function areaStat(k){const g=geo();visLoad();const tc={};let land=0,seen=0;const
 // ================= ĐI TỚI Ô ĐẤT BẤT KỲ =================
 // Điểm dừng tạm ("điểm hoang"): nút ngoài danh sách địa điểm, id = khu*100 + 90..99, lưu ở w.wp. Máy chạy y như một địa điểm hoang bình thường.
 // Bảng WP0, WP_TY, WP_BASE: content/rules/wp0.js
-{const _nb=nodeById;nodeById=function(id){if(id%100>=WP0){const w=W();return w&&w.wp&&w.wp[id]||undefined;}return _nb(id);};}
+{const _nb=nodeById;nodeById=function(id){if(id<1000&&id%100>=WP0){const w=W();return w&&w.wp&&w.wp[id]||undefined;}return _nb(id);};}
 function wpGC(){const r=G.run,w=W();if(!r||!w||!w.wp)return;const keep=new Set([r.at,r.dest]);if(r.moving)for(const id of r.moving.path)keep.add(id);for(const id in w.wp)if(!keep.has(+id))delete w.wp[id];}
 function wpDraft(c){const g=geo(),k=g.reg[c],t=g.ter[c];if(k<0||!terWalk(t))return null;
   let nd=null,bd=1e9;const [cx,cy]=hexCenter(c);for(const n of regionOf(k).nodes){const p=mapXY(k,n.x,n.y),d=Math.hypot(p[0]-cx,p[1]-cy);if(d<bd){bd=d;nd=n;}}

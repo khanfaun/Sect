@@ -88,14 +88,14 @@ Nguồn chuẩn: `content/events/tuan-tra.json`. Bản đọc tự sinh. Cú ph�
 - **1. Phá vây**
   - `fight`: `{"k":"detu","cnt":2}`
   - **Thắng trận**: Ngươi phá vây mà đi. Lệnh truy nã sẽ còn dán khắp nơi.
-    `{"e":{"tv":6,"karma":-3}}`
+    `{"e":{"tv":6,"hd":{"t":3}}}`
 - **2. Đút lót**
   {$a.ten} nhìn túi linh thạch, quay mặt đi. “Hôm nay không thấy ai cả.”
   - `cost`: `{"st":30}`
-  - `e`: `{"karma":-2}`
+  - `e`: `{"deed":"lua_loi"}`
 - **3. Chịu phạt**
   Ngươi bị giữ lại ba ngày, chép kinh sám hối.
-  - `e`: `{"h":72,"karma":6,"tamma":-4}`
+  - `e`: `{"h":72,"deed":"sam_hoi","tamma":-4}`
 - **4. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -129,11 +129,11 @@ Nguồn chuẩn: `content/events/tuan-tra.json`. Bản đọc tự sinh. Cú ph�
 - **1. Cho một viên đan hồi khí huyết**
   Thương thế ổn lại. {$a.ten} nói muốn đi cùng ngươi một đoạn để trả ơn.
   - `cost`: `{"pillGroup":"healing"}`
-  - `e`: `{"karma":5,"party":{"k":"a","days":20}}`
+  - `e`: `{"deed":"cuu_nguoi","party":{"k":"a","days":20}}`
 - **2. Truyền linh lực giúp**
   Người kia tỉnh lại. {$a.ten} cúi đầu cảm tạ.
   - `cost`: `{"mp":"40%"}`
-  - `e`: `{"karma":4,"an":["a","cứu sư huynh đệ"]}`
+  - `e`: `{"deed":"cuu_nguoi","an":["a","cứu sư huynh đệ"]}`
 - **3. Không giúp**
   Ngươi đi qua.
 
@@ -201,9 +201,9 @@ Nguồn chuẩn: `content/events/tuan-tra.json`. Bản đọc tự sinh. Cú ph�
 - **2. Chạy**
   - `chk`: `["tp",11]`
   - **Thành công**: Ngươi chạy mất dạng.
-    `{"e":{"karma":-2}}`
+    `{"e":{"hd":{"t":1}}}`
   - **Thất bại**: Bị đuổi kịp.
-    `{"fight":{"k":"detu","cnt":2},"win":{"t":"Thoát được, nhưng giờ thì thật sự là kẻ thù.","e":{"karma":-4}}}`
+    `{"fight":{"k":"detu","cnt":2},"win":{"t":"Thoát được, nhưng giờ thì thật sự là kẻ thù.","e":{"hd":{"t":1}}}}`
 - **3. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 

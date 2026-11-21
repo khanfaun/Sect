@@ -1,0 +1,816 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_trom_tui_ba_gia",
+      "name": "Túi tiền bà già",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Giữa chợ, một bà cụ đeo túi tiền lỏng lẻo bên hông. Trong túi chắc chỉ có mấy chục xu.",
+      "choices": [
+        {
+          "l": "Ra tay",
+          "i": "✋",
+          "chk": [
+            "nang.giac",
+            8
+          ],
+          "ok": {
+            "t": "Túi tiền nhẹ tênh. Bà cụ vẫn đứng mặc cả mớ rau.",
+            "e": {
+              "bac": 20,
+              "nxp": [
+                "trom",
+                5
+              ],
+              "deed": "trom_ngheo"
+            }
+          },
+          "no": {
+            "t": "Bà cụ kêu toáng, ngươi chạy trối chết.",
+            "e": {
+              "hp": "-5%"
+            }
+          }
+        },
+        {
+          "l": "Bỏ qua",
+          "i": "🙅",
+          "t": "Ngươi tìm mục tiêu khác béo hơn.",
+          "e": {
+            "nxp": [
+              "trom",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_tui_ba_gia",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_bi_bat",
+      "name": "Bị tóm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một gã lực điền tóm cổ tay ngươi khi đang móc túi.",
+      "choices": [
+        {
+          "l": "Vùng chạy",
+          "i": "🏃",
+          "chk": [
+            "tp",
+            7
+          ],
+          "ok": {
+            "t": "Ngươi giật ra được, lẩn vào ngõ hẻm.",
+            "e": {
+              "nxp": [
+                "trom",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Gã đấm ngươi mấy cú rồi giải lên lính.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "l": "Xin tha, trả lại",
+          "i": "🙏",
+          "chk": [
+            "nang.giao",
+            8
+          ],
+          "ok": {
+            "t": "Gã nhổ nước bọt rồi buông.",
+            "e": {
+              "nxp": [
+                "trom",
+                3
+              ]
+            }
+          },
+          "no": {
+            "t": "Gã không tha, ngươi ăn đòn.",
+            "e": {
+              "hp": "-10%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_bi_bat",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_thay_tro",
+      "name": "Lão trộm già",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một lão trộm già ngồi uống rượu ở quán, bảo ngươi tay còn vụng lắm.",
+      "choices": [
+        {
+          "l": "Xin học",
+          "i": "🙇",
+          "t": "Lão dạy ngươi cách đi không tiếng động.",
+          "e": {
+            "bac": -20,
+            "nxp": [
+              "trom",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Mặc kệ lão",
+          "i": "🤷",
+          "t": "Lão cười khà.",
+          "e": {
+            "nxp": [
+              "trom",
+              1
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_thay_tro",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_anh_em",
+      "name": "Đứa trẻ ăn cắp",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một đứa trẻ gầy nhom định móc túi ngươi.",
+      "choices": [
+        {
+          "l": "Cho nó ít tiền",
+          "i": "🪙",
+          "t": "Nó giật tiền rồi chạy, ngoái lại cười.",
+          "e": {
+            "bac": -10,
+            "deed": "bo_thi",
+            "nxp": [
+              "trom",
+              2
+            ]
+          }
+        },
+        {
+          "l": "Dạy nó vài ngón",
+          "i": "👐",
+          "t": "Nó theo ngươi từ hôm ấy.",
+          "e": {
+            "nxp": [
+              "trom",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_anh_em",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_nha_phu_ho",
+      "name": "Nhà phú hộ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nhà phú hộ ép giá thóc cả vùng. Kho bạc nhà hắn ở sau vườn, hai con chó dữ canh.",
+      "choices": [
+        {
+          "l": "Đêm nay ra tay",
+          "i": "🌙",
+          "chk": [
+            "nang.canh",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi khuân ra được một rương bạc.",
+            "e": {
+              "bac": 300,
+              "nxp": [
+                "trom",
+                12
+              ],
+              "deed": "trom_ac_ba"
+            }
+          },
+          "no": {
+            "t": "Chó sủa, gia nhân đuổi theo.",
+            "e": {
+              "hp": "-20%",
+              "nxp": [
+                "trom",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Chia cho dân nghèo một nửa nếu lấy được",
+          "i": "🤲",
+          "chk": [
+            "nang.canh",
+            13
+          ],
+          "ok": {
+            "t": "Sáng hôm sau, mấy nhà nghèo thấy túi bạc trước cửa.",
+            "e": {
+              "bac": 150,
+              "nxp": [
+                "trom",
+                12
+              ],
+              "deed": "trom_ac_ba"
+            }
+          },
+          "no": {
+            "t": "Ngươi bị phát hiện, không lấy được gì.",
+            "e": {
+              "hp": "-20%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_nha_phu_ho",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_do_gian",
+      "name": "Đồ gian lạ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một món đồ trộm được có khắc huy hiệu tông môn tu sĩ.",
+      "choices": [
+        {
+          "l": "Bán ở quỷ thị",
+          "i": "💰",
+          "t": "Giá cao. Vài hôm sau có tu sĩ đi hỏi khắp thành.",
+          "e": {
+            "bac": 250,
+            "nxp": [
+              "trom",
+              6
+            ],
+            "tamma": 2
+          }
+        },
+        {
+          "l": "Lén trả lại",
+          "i": "📦",
+          "chk": [
+            "nang.canh",
+            12
+          ],
+          "ok": {
+            "t": "Không ai biết ai trả.",
+            "e": {
+              "nxp": [
+                "trom",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi bị tu sĩ bắt gặp, ăn một chưởng.",
+            "e": {
+              "hp": "-30%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_do_gian",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_bang_nhom",
+      "name": "Bang nhóm mời",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một bang trộm trong thành mời ngươi gia nhập, đổi lại phải nộp ba phần mười.",
+      "choices": [
+        {
+          "l": "Gia nhập",
+          "i": "🤝",
+          "t": "Có người che chở, có đất làm ăn.",
+          "e": {
+            "nxp": [
+              "trom",
+              10
+            ]
+          }
+        },
+        {
+          "l": "Làm một mình",
+          "i": "🐺",
+          "chk": [
+            "nang.canh",
+            11
+          ],
+          "ok": {
+            "t": "Ngươi tự do, bang nhóm tạm để yên.",
+            "e": {
+              "nxp": [
+                "trom",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Bang nhóm cho người dằn mặt ngươi.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_bang_nhom",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_oan_nguoi",
+      "name": "Người khác bị bắt oan",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một gã ăn mày bị bắt vì vụ trộm ngươi làm.",
+      "choices": [
+        {
+          "l": "Tự ra thú",
+          "i": "🙇",
+          "t": "Ngươi ngồi tù ba tháng. Gã ăn mày được thả.",
+          "e": {
+            "h": 720,
+            "deed": "giu_loi",
+            "nxp": [
+              "trom",
+              4
+            ]
+          }
+        },
+        {
+          "l": "Im lặng",
+          "i": "🤐",
+          "t": "Gã ăn mày bị đánh năm mươi trượng.",
+          "e": {
+            "tamma": 5
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_oan_nguoi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_so_no",
+      "name": "Sổ nợ của quan",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Quan đầu tỉnh giữ sổ nợ của nửa thành. Đốt nó, cả thành thoát nợ.",
+      "choices": [
+        {
+          "l": "Lấy sổ để dân có cơ hội thoát nợ",
+          "i": "📒",
+          "chk": [
+            "nang.canh",
+            16
+          ],
+          "ok": {
+            "t": "Sổ nợ cháy giữa sân đình. Cả thành thở phào.",
+            "e": {
+              "nxp": [
+                "trom",
+                25
+              ],
+              "deed": "trom_ac_ba"
+            }
+          },
+          "no": {
+            "t": "Ngươi bị vây trong phủ, phải nhảy tường thoát thân.",
+            "e": {
+              "hp": "-30%",
+              "nxp": [
+                "trom",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Lấy sổ đem bán lại cho quan",
+          "i": "💰",
+          "chk": [
+            "nang.canh",
+            16
+          ],
+          "ok": {
+            "t": "Quan trả giá đậm để chuộc sổ.",
+            "e": {
+              "bac": 1500,
+              "nxp": [
+                "trom",
+                15
+              ]
+            }
+          },
+          "no": {
+            "t": "Bị bắt quả tang.",
+            "e": {
+              "hp": "-30%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_so_no",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_dao_vuong",
+      "name": "Đạo vương thách đấu",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đạo vương thành bên thách ngươi trộm cái chén ngọc trên bàn thờ nhà hắn.",
+      "choices": [
+        {
+          "l": "Nhận thách",
+          "i": "🏆",
+          "chk": [
+            "nang.giac",
+            15
+          ],
+          "ok": {
+            "t": "Sáng ra, chén ngọc nằm trên bàn ngươi. Đạo vương gửi thiếp phục.",
+            "e": {
+              "nxp": [
+                "trom",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi rơi vào bẫy, mất mặt cả giới.",
+            "e": {
+              "nxp": [
+                "trom",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Không nhận",
+          "i": "🙅",
+          "t": "Người ta bảo ngươi già rồi.",
+          "e": {
+            "nxp": [
+              "trom",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_dao_vuong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_hiep_dao",
+      "name": "Hiệp đạo",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Dân nghèo bắt đầu gọi ngươi là hiệp đạo. Quan bắt đầu treo giải.",
+      "choices": [
+        {
+          "l": "Tiếp tục cướp nhà giàu chia người nghèo",
+          "i": "🦸",
+          "t": "Tên ngươi thành truyền thuyết. Đầu ngươi cũng có giá.",
+          "e": {
+            "nxp": [
+              "trom",
+              18
+            ],
+            "deed": "trom_ac_ba"
+          }
+        },
+        {
+          "l": "Lặn đi một thời gian",
+          "i": "🫥",
+          "t": "Người ta quên dần.",
+          "e": {
+            "nxp": [
+              "trom",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_hiep_dao",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_trom_rua_tay",
+      "name": "Gác nghề",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:trom",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi đã có đủ tiền sống cả đời. Đám đàn em vẫn trông vào ngươi.",
+      "choices": [
+        {
+          "l": "Giao bang cho đứa đáng tin nhất",
+          "i": "🤝",
+          "chk": [
+            "nang.giao",
+            14
+          ],
+          "ok": {
+            "t": "Bang giữ được luật cũ: không trộm nhà nghèo.",
+            "e": {
+              "nxp": [
+                "trom",
+                16
+              ]
+            }
+          },
+          "no": {
+            "t": "Đứa ấy phản, bang tan.",
+            "e": {
+              "nxp": [
+                "trom",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Bỏ đi biệt tăm",
+          "i": "🚶",
+          "t": "Bang tranh nhau ghế suốt mùa đông.",
+          "e": {
+            "nxp": [
+              "trom",
+              4
+            ],
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/trom.json",
+        "ref": "ng_trom_rua_tay",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

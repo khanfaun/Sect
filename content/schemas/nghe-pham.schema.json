@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nghề phàm (content/nghe-pham/<mã nghề>.json)",
+  "description": "Lời thăng bậc riêng (len, một đoạn mỗi bậc từ bậc 1) và 4 kết cục khi hết kiếp (A, B, C có điều kiện; D dự phòng). Kiểm đủ (mã có thật, không con số, không tên mới, đủ số lượng) bằng npm run content:gpt.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "loai",
+    "nghe",
+    "ket"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "loai": {
+      "const": "nghe"
+    },
+    "nghe": {
+      "type": "string"
+    },
+    "len": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 80
+      },
+      "description": "bắt buộc với nghề chưa có lời thăng bậc (16 nghề Đ7.3); số đoạn = số bậc − 1"
+    },
+    "ket": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "ten",
+          "t"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "ten": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dk": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "bacNgheTu": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 6
+              },
+              "bacNgheDen": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 6
+              },
+              "nghiep": {
+                "enum": [
+                  "thien",
+                  "ac"
+                ]
+              },
+              "hanhDao": {
+                "enum": [
+                  "chinh",
+                  "ta"
+                ]
+              },
+              "nang": {
+                "type": "object",
+                "propertyNames": {
+                  "enum": [
+                    "giac",
+                    "giao",
+                    "thuong",
+                    "canh",
+                    "duoc",
+                    "khao",
+                    "tu",
+                    "nhan"
+                  ]
+                },
+                "additionalProperties": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              },
+              "bacTu": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "pham": {
+                "type": "boolean"
+              },
+              "tuoiTu": {
+                "type": "integer",
+                "minimum": 16
+              }
+            }
+          },
+          "t": {
+            "type": "string",
+            "minLength": 150
+          }
+        }
+      }
+    }
+  }
+}

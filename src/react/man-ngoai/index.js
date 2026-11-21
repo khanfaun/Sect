@@ -4,3 +4,4 @@ export { ManChonKiep } from './ManChonKiep';
 export { ManHetKiep } from './ManHetKiep';
 export { ManBenVongXuyen } from './ManBenVongXuyen';
 export { ManMoDauKiep } from './ManMoDauKiep';
+export { ManKet } from './ManKet';

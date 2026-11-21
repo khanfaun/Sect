@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "id": "OR04",
+  "loai": "xuat_than",
+  "xuatThan": "thusinh",
+  "goiYDaiLo": [
+    "de_nghiep"
+  ],
+  "ten": "Bài thi viết bằng tro",
+  "tomTat": "Một bài giải đúng bị loại vì chứng minh kho thiếu thóc trước kỳ thu, còn án sửa biến khoản hụt thành nợ dân.",
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Tiền giấy và tiền trọ",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "nguoi",
+        "noi": "LOC02",
+        "vai": "NP03"
+      },
+      "mo": "{NP03}, người từng dạy ngươi đọc sổ, mang tới một việc chép thuê ở {LOC02}. Làm xong đủ tiền mua giấy và trả chỗ nằm. Dưới xấp giấy có một đề thuế cũ để ngươi thử bút.",
+      "thayThe": "Bản sổ thuế có nét sửa ở {LOC02} còn kẹp tờ tập chữ của ngươi. Bên lề là lời người từng dạy ngươi giữ ngòi khỏi xước giấy. Người coi sổ còn cần người chép sạch một tập, công đủ mua giấy và trả trọ.",
+      "cach": [
+        {
+          "id": "chep_so",
+          "l": "Chép sổ thuê người và giữ lời người dạy chữ",
+          "t": "Ngươi chép đủ tập, kể cả những dòng nhòe phải soi sát đèn. Sáu trăm xu đủ trả giấy và chỗ nằm. Ngươi ghi {NP03.vai} là người chỉ mình đọc dòng thuế đầu tiên.",
+          "dau": [
+            "du_giay_tro",
+            "ghi_nguoi_day"
+          ],
+          "e": {
+            "bac": 600,
+            "h": 48
+          }
+        },
+        {
+          "id": "chep_thu",
+          "l": "Chép thư cho người ngoài cổng khảo",
+          "t": "Ngươi để người nhờ chép nghe lại từng câu trước khi nhận. Sáu trăm xu tiền công đủ chỗ trọ và giấy. Ngươi ghi vai người dạy chữ ở mép tờ đầu.",
+          "dau": [
+            "du_giay_tro",
+            "ghi_nguoi_day",
+            "quen_nguoi_ngoai"
+          ],
+          "e": {
+            "bac": 600,
+            "h": 36
+          }
+        },
+        {
+          "id": "doi_cong",
+          "l": "Chép mục lục đổi giấy và chỗ nằm",
+          "t": "Ngươi chép mục lục cho người giữ sách dạt từ {LOC12}, đổi lấy giấy dư và một chỗ nằm khô. Trong bản tay, ngươi ghi công người dạy chữ lẫn người cho mượn đèn.",
+          "dau": [
+            "du_giay_tro",
+            "ghi_nguoi_day"
+          ],
+          "e": {
+            "h": 24
+          }
+        }
+      ],
+      "tuDien": {
+        "t": "Việc chép thuê được giao cho tay bút khác, còn tờ tập chữ bị gập lại vào sổ.",
+        "su": "Một tập sổ ở {LOC02} được chép lại, tờ tập chữ cũ vẫn nằm kẹp bên trong.",
+        "dau": [
+          "lo_viec_chep"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Bài đúng bị gạt khỏi tập chấm",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Đề khảo ở {LOC02} hỏi lấy thóc đâu để đắp bờ giữ nước. Một bài giải chỉ ra kho đã hụt thóc trước kỳ thu, nhưng bị gạt khỏi tập chấm. Bản án ngoài cổng lại ghi lỗi ở những hộ đã nộp đủ.",
+      "cach": [
+        {
+          "id": "du_khao",
+          "l": "Dự khảo và giữ bản nháp bài giải",
+          "t": "Ngươi nộp bài đã tính lại khoản thu. Khi bài bị trả, dấu gạt nằm đúng dòng chứng minh kho hụt trước kỳ thu. Tên các hộ trên án vẫn còn trong nháp.",
+          "dau": [
+            "biet_an_sua",
+            "da_du_khao"
+          ],
+          "dk": {
+            "dau": [
+              "du_giay_tro"
+            ]
+          }
+        },
+        {
+          "id": "xem_bo_nuoc",
+          "l": "Khảo bờ nước theo biên nhận của dân",
+          "t": "Ngươi đi cùng mấy hộ dọc bờ, so ngày giao thóc với ngày kho báo thiếu thóc. Bản án lấy tên người đã nộp thay cho khoản hụt trước đó. Một hộ cho ngươi chép biên nhận.",
+          "dau": [
+            "biet_an_sua",
+            "co_bien_nhan"
+          ],
+          "e": {
+            "h": 24
+          }
+        },
+        {
+          "id": "chep_bai_loai",
+          "l": "Xin chép bài bị gạt khỏi tập chấm",
+          "t": "Ngươi đối bài bị gạt với án công bố ngoài cổng. Chỗ bài ghi thóc hụt trong kho, án lại chép tên mấy hộ vào mục nợ. Ngươi sao cả dấu gạch của người chấm.",
+          "dau": [
+            "biet_an_sua",
+            "co_bai_bi_loai"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Tập bài bị gạt được dùng nhóm lửa, còn bản án mới treo nguyên ở cửa.",
+        "su": "Ở {LOC02}, khoản kho hụt vẫn hiện thành nợ dân trên bản án công bố.",
+        "dau": [
+          "bai_khao_thanh_tro"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Ai ra lệnh sửa sổ?",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 7
+      },
+      "loiMoi": {
+        "cach": "thu",
+        "noi": "LOC12",
+        "vai": "NP23"
+      },
+      "mo": "{NP23} nhắn rằng thư khố ở {LOC12} còn giữ bản sao án thuế. Kèm theo án là lệnh đổi khoản kho hụt thành nợ của dân. Dấu trên bản gốc ở {LOC02} có thể cho biết ai ra lệnh.",
+      "thayThe": "Mục lục cũ của {LOC12} rơi ra từ bó giấy được gửi trả sau chuyến hành hương. Nó ghi nơi tra bản sao và dấu xác nhận từ {LOC02}. Trong lời chép kèm có lệnh sửa khoản kho hụt thành nợ dân.",
+      "cach": [
+        {
+          "id": "lay_ban_goc",
+          "l": "Lấy bản gốc và so dấu tại kinh thành",
+          "t": "Ngươi xuất biên nhận để tra án gốc. Dấu son khớp sổ trả giấy và lệnh chỉ rõ người coi kho bắt sửa mục ghi thóc thiếu. Nét sửa thuộc {NP03.vai}, còn lệnh có chữ ký khác.",
+          "dau": [
+            "co_chung_that",
+            "co_an_goc"
+          ],
+          "dk": {
+            "dau": [
+              "biet_an_sua",
+              "co_bien_nhan"
+            ]
+          }
+        },
+        {
+          "id": "lay_ban_sao",
+          "l": "Đối chiếu bản sao và lệnh ép sửa tại thư khố",
+          "t": "Ngươi so ngày ấn với dấu xác nhận tại {LOC12}. Lệnh của người coi kho buộc {NP03.vai} chép tên dân vào mục thóc thiếu. Ngươi sao cả lệnh lẫn án, giữ hai trang liền nhau.",
+          "dau": [
+            "co_chung_that",
+            "co_ban_thu_kho"
+          ],
+          "dk": {
+            "dau": [
+              "biet_an_sua"
+            ]
+          },
+          "e": {
+            "h": 24
+          }
+        },
+        {
+          "id": "ghi_duong_ho_so",
+          "l": "Ghi số đăng bộ và để bản trong hòm",
+          "t": "Ngươi ghi mục cần tra và ngày nhận bản. Mép giấy dính chặt vào bìa. Ngươi cất lại bản gốc, vẫn chưa đọc được tên người ra lệnh.",
+          "dau": [
+            "co_muc_tra"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bản gốc bị đóng gói cùng hồ sơ thuế cũ, bản sao còn trong mục lục ít ai hỏi tới.",
+        "su": "Bản án có lệnh sửa không được đưa ra đối chiếu trong kỳ kiểm sổ.",
+        "dau": [
+          "ho_so_chua_doi"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Đem chứng cứ vào quan hay ra chợ?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 7
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC02"
+      },
+      "mo": "Đến kỳ xét sổ ở {LOC02}, mấy hộ góp giấy để chép lại bản án. Một phe muốn mua chứng cứ, còn người xét sổ hỏi ngươi có chịu đứng ra tra vụ thiếu thóc hay không.",
+      "cach": [
+        {
+          "id": "trinh_that",
+          "l": "Trình chứng thật và nhận chức khảo sổ",
+          "t": "Ngươi trình bản án cùng lệnh ép sửa, xin để các hộ dự buổi đối. Người xét sổ giao chức khảo sổ có thời hạn, kèm ngày phải trả lời cho dân.",
+          "dau": [
+            "co_chuc_khao_so",
+            "trinh_chung_that"
+          ],
+          "dk": {
+            "dau": [
+              "co_chung_that"
+            ]
+          }
+        },
+        {
+          "id": "sao_hai_noi",
+          "l": "Giao bản thật cho dân và thư khố",
+          "t": "Ngươi giao một bản cho các hộ tại {LOC02}, gửi bản kia đến {LOC12}. Hai bên trả giấy nhận riêng, mỗi nơi có thể mở bản của mình khi nơi kia mất giấy.",
+          "dau": [
+            "ban_that_hai_noi"
+          ],
+          "dk": {
+            "dau": [
+              "co_chung_that"
+            ]
+          }
+        },
+        {
+          "id": "ban_chung",
+          "l": "Bán chứng cho phe tranh quyền",
+          "t": "Ngươi giao chứng và nhận hai lượng bạc. Họ đọc kỹ tên người coi kho rồi gấp biên nhận của dân vào trong. Chiều ấy cửa kho đổi người gác mà sổ nợ vẫn nguyên.",
+          "dau": [
+            "chung_vao_tay_phe"
+          ],
+          "dk": {
+            "dau": [
+              "co_chung_that"
+            ]
+          },
+          "e": {
+            "bac": 2000
+          }
+        },
+        {
+          "id": "doi_an_lay_chuc",
+          "l": "Sửa án sai để đổi lấy chức",
+          "t": "Ngươi rút lệnh ép sửa và chép khoản hụt thành nợ của hộ đã nộp đủ. Người coi kho bảo cử ngươi. Tờ bổ nhiệm đóng ấn cùng buổi hộ kia nhận giấy đòi thóc.",
+          "dau": [
+            "chuc_tu_an_sai",
+            "da_bop_meo"
+          ],
+          "dk": {
+            "dau": [
+              "co_chung_that"
+            ]
+          },
+          "e": {
+            "deed": [
+              "lua_loi",
+              "an_oan"
+            ],
+            "tamma": 4
+          }
+        },
+        {
+          "id": "giu_nhap",
+          "l": "Giữ bản nháp và nghe dân đọc đơn",
+          "t": "Ngươi chép lời các hộ tự đọc bên cổng và giữ trong tay áo. Cửa nhận đơn đóng trước tối, người chưa nộp được đứng chia nhau phần giấy còn khô.",
+          "dau": [
+            "giu_loi_dan"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hạn nhận đơn khép lại, người xét sổ tiếp tục dùng bản án cũ tính truy thu.",
+        "su": "Kỳ xét sổ ở {LOC02} qua đi mà khoản nợ sai chưa bị gỡ.",
+        "dau": [
+          "qua_han_trinh"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Thư lại có phải chịu hết tội?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 8
+      },
+      "loiMoi": {
+        "cach": "nguoi",
+        "noi": "LOC02",
+        "vai": "NP03"
+      },
+      "mo": "{NP03} đặt bản sổ lên bàn và nhận nét sửa là của mình. Ngoài cửa có một hộ chờ gỡ nợ và một người muốn học đọc án. Đến lượt ngươi nói rõ trách nhiệm của người chép lẫn kẻ ra lệnh.",
+      "thayThe": "Bản sổ có nét sửa của {NP03.vai} được đem ra trong ngày xét người coi sổ. Mép giấy còn hằn dòng đổi thành nợ dân, phía dưới có ghi người coi kho ra lệnh. Ngoài cửa có người chờ gỡ nợ, còn ghế người chép bỏ trống.",
+      "cach": [
+        {
+          "id": "doi_so_cong_khai",
+          "l": "Bảo vệ lời khai và sửa sổ nợ cho hộ dân",
+          "t": "Ngươi ghi rõ ai chép và ai ra lệnh sửa. Với quyền khảo sổ, ngươi gạch khoản thu oan. Hộ dân kịp mang biên nhận đã sửa về trước lần thu thóc kế tiếp.",
+          "dau": [
+            "da_sua_no_dan"
+          ],
+          "dk": {
+            "dau": [
+              "co_chuc_khao_so",
+              "trinh_chung_that"
+            ]
+          }
+        },
+        {
+          "id": "day_ngoai_cua",
+          "l": "Rời việc quan và dạy đọc bản án thật",
+          "t": "Ngươi giữ lời người dạy chữ trên bản chép. Một học trò đem giấy đối chiếu giữa {LOC02} và {LOC12}, tự đọc ra dòng đã sửa rồi xin nhận dạy buổi sau.",
+          "dau": [
+            "co_nguoi_hoc_tiep"
+          ],
+          "dk": {
+            "dau": [
+              "ban_that_hai_noi"
+            ]
+          }
+        },
+        {
+          "id": "giu_an_qua_xet",
+          "l": "Đổ trách nhiệm cho tay chép để giữ chức",
+          "t": "Ngươi dùng nét sửa làm chứng chống người chép và giữ lại lệnh ép sửa. Người coi kho bảo lãnh cho ngươi qua kỳ xét. Hộ đã nộp thóc vẫn mang nợ.",
+          "dau": [
+            "da_qua_xet"
+          ],
+          "dk": {
+            "dau": [
+              "chuc_tu_an_sai",
+              "da_bop_meo"
+            ]
+          },
+          "e": {
+            "fa": {
+              "FA01": 2
+            },
+            "deed": "an_oan",
+            "tamma": 3
+          }
+        },
+        {
+          "id": "tra_cho_ngoi",
+          "l": "Trả chỗ ngồi và giữ bản tay",
+          "t": "Ngươi rời bàn xét, mang bản tay ghi người đã dạy mình. Hộ chờ gỡ nợ xin ngươi đọc lại giấy đòi thóc. Hai người đứng ngoài hiên đến khi cửa khóa.",
+          "dau": [
+            "roi_ban_xet"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người coi kỳ xét thu sổ, bỏ trống mục trách nhiệm người chép và dời đơn dân sang kỳ sau.",
+        "su": "Buổi xét ở {LOC02} khép lại, hộ nộp đơn vẫn chưa nhận giấy gỡ nợ.",
+        "dau": [
+          "doi_ky_sau"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Quan giữ sổ thật",
+      "dk": {
+        "dau": [
+          "co_chuc_khao_so",
+          "da_sua_no_dan"
+        ]
+      },
+      "t": "Hộ bị ghi nợ mang giấy gỡ thuế qua cửa mà không bị gọi lại. Từ vụ ấy, người khảo sổ phải mở cả biên nhận kho lẫn sổ dân khi có khoản hụt. Ngươi lấy tờ tập chữ cũ trong sổ ra treo cạnh bản xác nhận mà người đi nộp đơn được phép chép.",
+      "su": "Một vụ nợ sai tại {LOC02} được gỡ và sổ thuế phải đối với biên nhận kho.",
+      "dauVong": "ở {LOC02} có người nhà của hộ được gỡ nợ còn giữ bản có nét sửa của {ten}."
+    },
+    {
+      "id": "B",
+      "ten": "Chữ ngoài cửa quan",
+      "dk": {
+        "dau": [
+          "ban_that_hai_noi",
+          "co_nguoi_hoc_tiep"
+        ]
+      },
+      "t": "Hai bản án nằm ở hai nơi, một bản theo các hộ và một bản theo thư khố. Khi bản chép bị thu, người học đem bản còn lại ra đọc kín; khi được lưu hành, họ đặt cả hai lên bàn. Nhiều năm sau, một học trò vẫn nhận ra nét bút chỗ ghi ngày kho hụt.",
+      "su": "Bản án thật được giữ độc lập tại {LOC02} và {LOC12}, có người tiếp tục dạy cách đọc.",
+      "dauVong": "một học trò giữ bản đối chiếu và nhận ra bút tích của {ten} ở dòng ghi ngày kho hụt."
+    },
+    {
+      "id": "C",
+      "ten": "Ấn son trên trang trắng",
+      "dk": {
+        "dau": [
+          "da_bop_meo",
+          "da_qua_xet"
+        ]
+      },
+      "t": "Sau kỳ xét, người coi kho có thêm người mang ấn chịu ký vào khoản hụt. Hộ đã nộp đủ cất biên nhận lẫn giấy đòi thóc trong hòm áo. Đến khi con họ biết chữ, hai tờ giấy vẫn mang cùng ngày, và chỉ tờ đòi thóc có dấu của ngươi.",
+      "su": "{ten} giữ chức qua kỳ xét bằng án đã sửa, còn người bảo cử tiếp tục nắm sổ kho.",
+      "dauVong": "một gia đình ở {LOC02} giữ hai tờ giấy cùng ngày và biết tờ nào buộc họ nộp thóc lần nữa."
+    }
+  ],
+  "ngoai": "Tờ tập chữ của {ten} còn trong sổ, còn khoản kho hụt vẫn chờ một người chịu mở cả hai bản."
+}

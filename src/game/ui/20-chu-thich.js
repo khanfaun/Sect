@@ -2,11 +2,15 @@
 let tipT=null,tipEl=null;
 // đặt chú thích cạnh con trỏ; chạm mép phải/dưới thì lật sang phía bên kia
 // cảm ứng: đặt ngay phía trên đầu ngón tay (không che chỗ chạm), không đủ chỗ thì ngay phía dưới; căn giữa theo ngón tay
-function placeTipTouch(x,y){const tip=$('#tip');const tw=tip.offsetWidth,th=tip.offsetHeight,W=window.innerWidth,H=window.innerHeight;
-  let L=Math.max(8,Math.min(W-tw-8,x-tw/2)),T=y-th-22;if(T<8)T=Math.min(H-th-8,y+28);tip.style.left=L+'px';tip.style.top=T+'px';}
-function placeTip(x,y){const tip=$('#tip');const tw=tip.offsetWidth,th=tip.offsetHeight,W=window.innerWidth,H=window.innerHeight;
+// #tip có thể bị phóng (zoom --dz trên máy tính): left/top tính theo đơn vị đã phóng nên phải chia cho hệ số, còn kích thước đo bằng khung nhìn thật
+function tipZ(tip){return parseFloat(getComputedStyle(tip).zoom)||1;}
+function tipSet(tip,L,T){const z=tipZ(tip);tip.style.left=(L/z)+'px';tip.style.top=(T/z)+'px';}
+function tipSize(tip){const r=tip.getBoundingClientRect();return [r.width,r.height];}
+function placeTipTouch(x,y){const tip=$('#tip');const [tw,th]=tipSize(tip),W=window.innerWidth,H=window.innerHeight;
+  let L=Math.max(8,Math.min(W-tw-8,x-tw/2)),T=y-th-22;if(T<8)T=Math.min(H-th-8,y+28);tipSet(tip,L,T);}
+function placeTip(x,y){const tip=$('#tip');const [tw,th]=tipSize(tip),W=window.innerWidth,H=window.innerHeight;
   let L=x+14,T=y+16;if(L+tw>W-6)L=x-tw-12;if(L<6)L=Math.max(6,Math.min(W-tw-6,x-tw/2));if(T+th>H-6)T=y-th-12;if(T<6)T=Math.max(6,Math.min(H-th-6,y+16));
-  tip.style.left=L+'px';tip.style.top=T+'px';}
+  tipSet(tip,L,T);}
 function showTip(el,toggle,xy,touch){
   const tip=$('#tip');const txt=el.dataset.tip;if(!txt)return;
   if(toggle&&tipEl===el&&!tip.hidden){hideTip();return;}
@@ -14,10 +18,10 @@ function showTip(el,toggle,xy,touch){
   if(xy&&touch){placeTipTouch(xy[0],xy[1]);return;}
   if(xy){placeTip(xy[0],xy[1]);return;}
   // chạm (không có con trỏ): đặt trên phần tử, không đủ chỗ thì xuống dưới
-  const r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;
+  const r=el.getBoundingClientRect(),[tw,th]=tipSize(tip);
   let x=r.left+Math.min(r.width/2,60)-tw/2;x=Math.max(6,Math.min(window.innerWidth-tw-6,x));
   let y=r.top-th-8;if(y<6)y=Math.min(window.innerHeight-th-6,r.bottom+8);
-  tip.style.left=x+'px';tip.style.top=y+'px';
+  tipSet(tip,x,y);
 }
 function hideTip(){const t=$('#tip');if(t){t.hidden=true;}tipEl=null;}
 document.addEventListener('pointerover',e=>{if(e.pointerType!=='mouse')return;const t=e.target.closest('[data-tip]');if(t){if(t!==tipEl)showTip(t,false,[e.clientX,e.clientY]);}else if(tipEl)hideTip();});
@@ -58,7 +62,7 @@ function migrate(d){
   return d;
 }
 function loadData(d){d=migrate(d);G={meta:d.meta,run:d.run||null,over:d.over||null,birth:d.birth||null,screen:d.screen||'title'};
-  if((G.screen==='map'||G.screen==='run')&&!G.run)G.screen='title';if(G.screen==='run')G.screen='map';if(G.screen==='codex')G.screen='meta';if(G.screen==='over'&&!G.over)G.screen='title';if(G.screen==='birth'&&!G.birth)G.screen='title';
+  if((G.screen==='map'||G.screen==='run')&&!G.run)G.screen='title';if(G.screen==='run')G.screen='map';if(G.screen==='codex')G.screen='meta';if(G.screen==='over'&&!G.over)G.screen='title';if(G.screen==='ket'&&!(G.meta&&G.meta.ketHet))G.screen='title';if(G.screen==='birth'&&!G.birth)G.screen='title';
   if(!G.meta.world)G.meta.world=genWorld();
   extendWorld(G.meta.world);snapWorld(G.meta.world);entsRescale(G.meta.world);if(G.run)run2();syncDodge();
   const sc=G.run&&G.run.scene;if(sc&&sc.type==='combat'){if(sc.dodge)dodgeResolve(null);if(sc.qte)qteResolve(null);}}
@@ -165,7 +169,7 @@ ACT.ascDone=()=>{const r=G.run;const a=r.asc;if(!a)return;r.asc=null;UI.modal=nu
 // thanh đầu: dòng cảnh giới chuyển từ cũ sang mới
 
 // thiên phú đổi bậc: frame cũ lóe sáng rồi mới đổi sang frame mới
-{const _ptR=playerTal;playerTal=function(){let t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talFake){if(performance.now()<UI.talFake.until)t=Object.assign({},t,{tier:UI.talFake.tier});else{UI.talFake=null;UI.talS=t.tier;}}if(UI.talS==null)UI.talS=t.tier;
+{const _ptR=playerTal;playerTal=function(){let t=_ptR();if(!t||typeof UI==='undefined')return t;if(UI.talRun!==G.run){UI.talRun=G.run;UI.talS=null;UI.talA=null;}if(UI.talFake){if(performance.now()<UI.talFake.until)t=Object.assign({},t,{tier:UI.talFake.tier});else{UI.talFake=null;UI.talS=t.tier;}}if(UI.talS==null)UI.talS=t.tier;
   if(t.tier!==UI.talS&&!UI.talA&&!(G.run&&G.run.asc)&&!UI.realmAnim){UI.talA={from:UI.talS,to:t.tier};{const up=t.tier>UI.talS;const nw=performance.now();if(up){document.documentElement.dataset.ascShake='xk';setTimeout(()=>{delete document.documentElement.dataset.ascShake;},950);}UI.lvGlow={t0:nw,t1:nw+3000,c:up?'up':'down'};setTimeout(()=>hnote(up?'Tiềm chất thăng lên · '+TAL_N[t.tier]:'Tiềm chất suy giảm · '+TAL_N[t.tier],up?'up':'down'),50);}setTimeout(()=>{if(UI.talA)UI.talS=UI.talA.to;UI.talA=null;UI.talNew=performance.now();render();setTimeout(()=>{UI.talNew=0;render();},1300);},1700);}
   return t.tier===UI.talS?t:Object.assign({},t,{tier:UI.talS});};}
 {const _tc2=talCardHTML;talCardHTML=function(){const h=_tc2();return UI.talA?h.replace('class="tal-wrap','class="talchg tal-wrap'):UI.talNew?h.replace('class="tal-wrap','class="talnew tal-wrap'):h;};}

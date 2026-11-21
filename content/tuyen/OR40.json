@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "id": "OR40",
+  "loai": "xuat_than",
+  "ten": "Bao đường mất cân",
+  "xuatThan": "xt_con_nha_giu_kho_duong",
+  "goiYDaiLo": [
+    "phu_giap"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Bao đường nặng hơn số ghi trên niêm",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Vài bao ở {LOC03} cân nặng hơn giấy niêm ghi. Hạt dưới miệng bao có màu khác mẫu đường thường. Người coi kho nói mấy bao này xuất theo một lối riêng.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Cân riêng và giữ mẫu đã niêm",
+          "t": "Ngươi buộc dấu lên mẫu từ bao lệch, ghi phiếu xuất tương ứng.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ghi những bao đã qua cửa",
+          "t": "Ngươi chép nơi nhận của từng bao và giữ bản để gọi trở lại nếu cần.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tách đường thường khỏi lô pha",
+          "t": "Ngươi để đường còn nguyên sang ngăn khác, đợi ca theo dõi trả lời.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bao pha nhập kho theo phiếu cũ, vệt khác màu chưa được lưu.",
+        "su": "Bao pha nhập kho theo phiếu cũ, vệt khác màu chưa được lưu.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Người dùng khó chịu khi ngừng ăn",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC10"
+      },
+      "mo": "Ở {LOC10}, những người dùng lô đường pha trở lại vì thấy khổ sở khi ngừng. Mẫu từ túi của họ khớp dấu bao. Phiếu quân kho {LOC13} cũng mang cùng dấu ấy.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So mẫu với các ca đã theo dõi",
+          "t": "Ngươi giữ kết luận cho những ca khớp, báo riêng phần chưa rõ với người nhận.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi ai muốn mua lại bao cũ",
+          "t": "Ngươi biết người đã dùng còn đi tìm đúng dấu bao, giữ mối với người bán.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Tìm mối hàng thường thay đường",
+          "t": "Ngươi xin một đơn hàng khô từ người giao hàng để có thể mở kho làm nghề khác.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bệnh xá giữ phiếu theo dõi, kho chưa nhận lời báo về bao pha.",
+        "su": "Bệnh xá giữ phiếu theo dõi, kho chưa nhận lời báo về bao pha.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Ai biết có chất pha?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Phụ lục ở {LOC03} có chữ ký người bán chất pha. Người đánh xe chỉ ký nhận tải. Người chở muốn xin một bản phiếu để khỏi bị đổ là biết trước.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So dấu rồi thông báo bên nhận",
+          "t": "Ngươi ghi ai biết, ai chỉ chở và gửi nơi có ca theo dõi phiếu thu hồi.",
+          "dau": [
+            "moc_3_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ quyền mua chất pha",
+          "t": "Ngươi nhận quyền lấy hàng từ người ký phụ lục. Người chở dù không có tên trong sổ vẫn được báo.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Kê hàng còn lại để bàn giao",
+          "t": "Ngươi tách hàng thường đem đổi khỏi bao pha phải giao người giữ an toàn.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hợp đồng được khóa, người vận giữ lại phiếu tải để tự đối sau.",
+        "su": "Hợp đồng được khóa, người vận giữ lại phiếu tải để tự đối sau.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Thu hồi các bao pha hay bán tiếp?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Xe chở hàng trả đã tới {LOC03}. Có khách vẫn muốn mua đúng dấu bao cũ, còn người đặt hàng khô đang chờ. Người chở cần biết phải trả bao nào.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Thu hồi bao pha và thử niêm mới",
+          "t": "Ngươi nhận bao trả theo phiếu, đóng niêm kiểm nguồn lên lô thường tiếp.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Tiếp tục bán đường pha cho người lệ thuộc",
+          "t": "Ngươi bán đúng dấu bao mà khách tìm, biết họ quay lại vì triệu chứng.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          },
+          "e": {
+            "bac": 1000,
+            "deed": "lua_loi"
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Thanh toán lô pha và chuyển hàng an toàn",
+          "t": "Ngươi giao bao pha cho người coi, đối giấy nhận rồi chuyển hàng thường sang đơn mới.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Xe trả phải chờ lượt khác, đường cũ tiếp tục bán theo niêm.",
+        "su": "Xe trả phải chờ lượt khác, đường cũ tiếp tục bán theo niêm.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Giữ kho đường hay đổi sang hàng khô?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Bàn xuất ở {LOC03} đặt cả dấu niêm mới lẫn dấu cũ. Khách quen vẫn hỏi bao pha. Chủ xe hàng khô thì đợi xem ngươi có treo biển mới hay không.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giữ kho qua kỳ kiểm nguồn",
+          "t": "Ngươi giao trọn một kỳ có người đối niêm nguồn và giữ giấy thu hồi.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Dựng mạng khách theo dấu bao cũ",
+          "t": "Ngươi dành đường pha cho các điểm bán mới và giữ danh sách những người đã quay lại mua.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Mở cửa bằng hàng khô đã nhận đơn",
+          "t": "Ngươi treo biển mới, giao hết đơn khô và cất giấy thanh toán bao pha.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Kho mở theo dấu cũ thêm một lượt, người mua tự chọn nơi lấy hàng.",
+        "su": "Kho mở theo dấu cũ thêm một lượt, người mua tự chọn nơi lấy hàng.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Ngọt không giấu thuốc",
+      "dk": {
+        "dau": [
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Bao lỗi đã được đối theo giấy thu hồi và lô sau đi trọn kỳ với dấu kiểm nguồn. Người chở cũ ký đúng mục của mình, người nhận tự so niêm trước khi hạ bao. Một mẫu niêm được treo ngoài cửa.",
+      "su": "Kho {LOC03} qua một kỳ giao theo chuẩn nguồn sau khi thu hồi.",
+      "dauVong": "dấu niêm đường treo cạnh tờ ghi nơi lấy mẫu đối lô."
+    },
+    {
+      "id": "B",
+      "ten": "Khách không rời quầy",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Điểm bán mới nhận đúng bao có dấu nhuộm cũ. Một người tìm thuốc để khỏi phải quay lại quầy vẫn bị dò tên qua sổ khách quen. Người giữ nguồn thu thêm bạc mỗi khi họ không thể đứng qua một ngày thiếu bao.",
+      "su": "Kho bán lô pha dù biết khách lệ thuộc và giữ nguồn cho các điểm bán.",
+      "dauVong": "một người còn đi tìm thuốc cắt vì biết mình đã bị buộc vào quầy."
+    },
+    {
+      "id": "C",
+      "ten": "Cửa kho đổi nghề",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Đơn hàng khô chạy hết một lượt, người chở mang về giấy đã nhận đủ. Bao pha không còn ở kho và giấy bàn giao chỉ rõ nơi chịu giữ chúng. Biển đường cũ nằm sau vách mới, mặt có chữ quay vào trong.",
+      "su": "Nhà đã thanh toán bao pha và mở kho hàng khô có chuyến giao.",
+      "dauVong": "tấm biển đường cũ nằm sau vách của kho đổi nghề."
+    }
+  ],
+  "ngoai": "Kho mở theo dấu cũ thêm một lượt, người mua tự chọn nơi lấy hàng."
+}

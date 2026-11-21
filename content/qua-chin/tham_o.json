@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "tham_o",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Mái sập vì tiền bị rút",
+      "t": "Một phần tiền tu sửa mái chợ từng vào tay ngươi. Mưa vừa làm mái sập, một người bán nước phải nghỉ vì bị thương. Người coi chợ đem sổ chi tới hỏi vì sao số ngói mua ít hơn số có trên giấy.",
+      "c": [
+        {
+          "id": "tra",
+          "l": "Trả một phần tiền cho người bị thương",
+          "t": "Ngươi giao tiền trước người coi chợ. Người bán nước ghi đã nhận và xin giữ nguyên tờ trình.",
+          "dk": {
+            "bacTu": 400
+          },
+          "e": {
+            "bac": -400
+          }
+        },
+        {
+          "id": "ke",
+          "l": "Chỉ dòng tiền bị lấy trước buổi xét",
+          "t": "Ngươi mở sổ và kể ai đã nhận phần tiền. Người coi chợ chép nguyên lời rồi đóng dấu.",
+          "e": {
+            "h": 4,
+            "tamma": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Dấu chi trong sổ áo",
+      "t": "Người từng chép thay ngươi một khoản chi mang bản nháp tới. Họ sắp bị bắt nhận phần thiếu do khoản ngươi đã lấy. Họ chỉ xin ngươi xác nhận ai đã bảo chép dòng cuối.",
+      "c": [
+        {
+          "id": "nhan",
+          "l": "Nhận mình đã ra lệnh ghi sai",
+          "t": "Ngươi nói trước người xét sổ. Người chép giữ biên bản để tự đối khi bị gọi lần sau.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "sao",
+          "l": "Cho họ sao giấy để tự trình",
+          "t": "Ngươi để họ chép dấu vào bản nháp. Họ cất giấy trong áo và tự tới bàn xét."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Hàng gạch còn thiếu",
+      "t": "Một người lấy gạch dựng lại bờ giếng hỏi ngươi vì sao phần ngân quỹ họ từng xin lại ghi đã dùng hết. Món ấy từng bị ngươi lấy. Dưới giếng, một đứa nhỏ đang đợi người lớn kéo nước lên.",
+      "c": [
+        {
+          "id": "gop",
+          "l": "Bỏ tiền mua phần gạch thiếu",
+          "t": "Ngươi trả tiền cho số gạch còn thiếu. Người coi giếng ghi rõ khoản này đến từ ngươi.",
+          "dk": {
+            "bacTu": 280
+          },
+          "e": {
+            "bac": -280
+          }
+        },
+        {
+          "id": "ghi",
+          "l": "Cùng họ kê lại kinh phí thật",
+          "t": "Ngươi ghi số gạch thật và phần không có biên nhận để họ còn trình lên khi cần.",
+          "e": {
+            "h": 2
+          }
+        }
+      ]
+    }
+  ]
+}

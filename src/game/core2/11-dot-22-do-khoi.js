@@ -85,7 +85,7 @@ btRate=function(slots){return clamp(btParts(slots).reduce((a,x)=>a+x.v,0)/100,0.
 // Đạo cơ (phẩm chất cảnh giới): ngoài đạo cơ tích lũy và linh dược, lúc đột phá còn cộng thêm
 function daoParts(){const r=G.run;if(isPham())return [];const to=btTarget();const L=[];const a=tuArt();const n=nodeById(r.at);
   if(a&&a.tier>=to+1)L.push({t:contentText("core2_11-dot-22-do-khoi_js.daoParts.082")+PHAM[a.tier]+contentText("core2_11-dot-22-do-khoi_js.daoParts.083"),v:a.tier>=to+2?2:1});
-  if(['thien','bien'].includes(r.root.id))L.push({t:rootView(r.root).n,v:1});
+  if(['thien','dia','bien'].includes(r.root.id))L.push({t:rootView(r.root).n,v:1});
   if(lkOf(n)>=3)L.push({t:contentText("core2_11-dot-22-do-khoi_js.daoParts.084"),v:1});
   if(llOf()>=130)L.push({t:contentText("core2_11-dot-22-do-khoi_js.daoParts.085"),v:1});
   if(!r.tamma)L.push({t:contentText("core2_11-dot-22-do-khoi_js.daoParts.086"),v:1});

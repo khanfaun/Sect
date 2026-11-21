@@ -23,7 +23,7 @@ function DongNguoi({ u, me }) {
   const tal = PS.unitTal(u);
   return (
     <div className={'pp-u' + (foe ? ' foe' : '')}>
-      <Html className="u-av" {...tip(tal ? 'Tiềm chất: ' + TAL_N[tal.tier] : '')} h={PS.uAvatar(u)} />
+      <Html className="u-av" {...tip([tal ? 'Tiềm chất: ' + TAL_N[tal.tier] : '', PS.triTxtU ? PS.triTxtU(u) : ''].filter(Boolean).join('\n'))} h={PS.uAvatar(u)} />
       <div className="pp-t">
         <div className="pp-nl">
           <span className="pp-n">{u.name}<small className="pp-sub"><H h={PS.elSeal(u.el || 'vo')} /> {sub}</small></span>
@@ -32,7 +32,7 @@ function DongNguoi({ u, me }) {
         <div className="pp-row2">
           <div className="pp-bars">
             <span {...tip('Khí huyết')}><Ic n="heart" /><CBar cur={hp} max={mh} cls={'hp' + (hp < mh * 0.3 ? ' low' : hp < mh * 0.6 ? ' mid' : '')} /></span>
-            <span {...tip(mm ? 'Linh lực' : 'Chưa có linh lực')}><Ic n="drop" /><CBar cur={mp} max={mm || 1} cls="mp" /></span>
+            <span {...tip(mm ? PS.mpName() : 'Chưa có ' + PS.mpName().toLowerCase())}><Ic n="drop" /><CBar cur={mp} max={mm || 1} cls="mp" /></span>
           </div>
           {/* thiên kiếp không so lực chiến như một đối thủ */}
           <div className="pp-lc" {...tip(foe ? 'Lực chiến của kẻ này, so với người ở cảnh giới của ngươi' : 'Lực chiến so với người cùng cảnh giới')}>

@@ -1,0 +1,841 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_ren_be_thung",
+      "name": "Ống bễ thủng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ống bễ da thủng một lỗ, lửa lò cứ lụi đi. Thầy đang dở mẻ thép.",
+      "choices": [
+        {
+          "l": "Lấy da vá ngay",
+          "i": "🧵",
+          "chk": [
+            "nang.khao",
+            8
+          ],
+          "ok": {
+            "t": "Miếng vá khít, lửa bùng lên. Thầy gật đầu.",
+            "e": {
+              "nxp": [
+                "ren",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Vá vội, gió xì ra bên cạnh, mẻ thép hỏng.",
+            "e": {
+              "bac": -20,
+              "nxp": [
+                "ren",
+                2
+              ]
+            }
+          }
+        },
+        {
+          "l": "Thổi bằng miệng cầm cự",
+          "i": "😮‍💨",
+          "t": "Ngươi thổi tới tím mặt, lò cũng đủ nóng.",
+          "e": {
+            "hp": "-5%",
+            "nxp": [
+              "ren",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_be_thung",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_dao_cuoc",
+      "name": "Dao cuốc cho làng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Làng bên đặt một trăm lưỡi cuốc trước vụ cày, trả chậm sau mùa gặt.",
+      "choices": [
+        {
+          "l": "Nhận, chịu trả chậm",
+          "i": "🤝",
+          "t": "Cả xưởng làm suốt tháng. Mùa gặt năm ấy họ trả đủ.",
+          "e": {
+            "bac": 120,
+            "nxp": [
+              "ren",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Đòi trả trước một nửa",
+          "i": "🪙",
+          "chk": [
+            "nang.thuong",
+            9
+          ],
+          "ok": {
+            "t": "Làng chịu trả trước. Xưởng có vốn mua thép.",
+            "e": {
+              "bac": 150,
+              "nxp": [
+                "ren",
+                7
+              ]
+            }
+          },
+          "no": {
+            "t": "Làng đi đặt nơi khác.",
+            "e": {
+              "nxp": [
+                "ren",
+                2
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_dao_cuoc",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_kiem_cu",
+      "name": "Thanh kiếm cũ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một gã giang hồ đem thanh kiếm mẻ tới, đòi rèn lại như mới, trả rất ít.",
+      "choices": [
+        {
+          "l": "Rèn tử tế",
+          "i": "⚒️",
+          "t": "Thanh kiếm sáng như mới. Gã cầm kiếm đi, không trả thêm đồng nào.",
+          "e": {
+            "bac": 10,
+            "nxp": [
+              "ren",
+              7
+            ]
+          }
+        },
+        {
+          "l": "Rèn qua loa",
+          "i": "🔨",
+          "t": "Gã cầm kiếm đi. Ngươi nghe nói sau đó kiếm gãy giữa trận.",
+          "e": {
+            "bac": 10,
+            "nxp": [
+              "ren",
+              2
+            ],
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_kiem_cu",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_bong_lua",
+      "name": "Bỏng lửa",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một tia thép nóng bắn vào tay ngươi, da phồng rộp.",
+      "choices": [
+        {
+          "l": "Nghiến răng làm tiếp",
+          "i": "😬",
+          "chk": [
+            "nang.nhan",
+            8
+          ],
+          "ok": {
+            "t": "Mẻ thép xong, thầy không nói gì nhưng rót cho ngươi chén rượu.",
+            "e": {
+              "nxp": [
+                "ren",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Tay run, ngươi làm hỏng mẻ thép.",
+            "e": {
+              "hp": "-10%",
+              "bac": -15
+            }
+          }
+        },
+        {
+          "l": "Nghỉ đắp thuốc",
+          "i": "🌿",
+          "t": "Ngươi nghỉ nửa ngày.",
+          "e": {
+            "h": 6,
+            "nxp": [
+              "ren",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_bong_lua",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_binh_khi_cuop",
+      "name": "Đơn hàng của sơn trại",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Người của sơn trại tới đặt năm mươi thanh đao, trả gấp ba giá thường.",
+      "choices": [
+        {
+          "l": "Nhận đơn",
+          "i": "💰",
+          "t": "Đao giao xong, tiền về đầy túi. Mấy tháng sau đường núi có thêm mấy vụ cướp.",
+          "e": {
+            "bac": 400,
+            "nxp": [
+              "ren",
+              8
+            ],
+            "tamma": 3
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Bọn chúng chửi đổng rồi đi. Đêm ấy ngươi cài then cửa thêm một lần.",
+          "e": {
+            "nxp": [
+              "ren",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Nhận rồi báo quan",
+          "i": "📜",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Quan phủ phục kích được bọn cướp lúc nhận hàng.",
+            "e": {
+              "bac": 150,
+              "nxp": [
+                "ren",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Bọn cướp biết tin, đập phá xưởng của ngươi.",
+            "e": {
+              "bac": -200,
+              "hp": "-15%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_binh_khi_cuop",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_thep_tot",
+      "name": "Lô thép tốt",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một thương đội chở lô thép nam tới, giá cao nhưng thép tốt hiếm có.",
+      "choices": [
+        {
+          "l": "Bỏ tiền mua cả lô thép tốt",
+          "i": "🛒",
+          "chk": [
+            "nang.khao",
+            12
+          ],
+          "ok": {
+            "t": "Thép quả tốt, đồ rèn ra bán được giá gấp đôi.",
+            "e": {
+              "bac": 150,
+              "nxp": [
+                "ren",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Bên trong có lẫn thép xấu. Ngươi lỗ một khoản.",
+            "e": {
+              "bac": -150,
+              "nxp": [
+                "ren",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Không mua",
+          "i": "🚫",
+          "t": "Ngươi dùng thép cũ, đồ vẫn bán được.",
+          "e": {
+            "nxp": [
+              "ren",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_thep_tot",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_hoc_tro_lui",
+      "name": "Học trò lười",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Thằng học trò cứ đến trưa là ngủ gật bên lò.",
+      "choices": [
+        {
+          "l": "Mắng một trận",
+          "i": "😠",
+          "t": "Nó tỉnh ngủ được mấy hôm rồi lại như cũ.",
+          "e": {
+            "nxp": [
+              "ren",
+              3
+            ]
+          }
+        },
+        {
+          "l": "Hỏi chuyện nhà nó",
+          "i": "💬",
+          "chk": [
+            "nang.giao",
+            10
+          ],
+          "ok": {
+            "t": "Nó kể đêm phải xay lúa cho mẹ ốm. Ngươi cho nó về sớm, nó làm chăm hẳn.",
+            "e": {
+              "nxp": [
+                "ren",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Nó ậm ừ không kể.",
+            "e": {
+              "nxp": [
+                "ren",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_hoc_tro_lui",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_ren_luoi_cay",
+      "name": "Lưỡi cày mới",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi nghĩ ra cách uốn lưỡi cày cho đất cứng, cày nhẹ hơn hẳn.",
+      "choices": [
+        {
+          "l": "Truyền cho thợ cả vùng",
+          "i": "📣",
+          "t": "Thợ các làng tới học. Tên ngươi được nhắc ở nhiều lò.",
+          "e": {
+            "nxp": [
+              "ren",
+              14
+            ]
+          }
+        },
+        {
+          "l": "Giữ làm bí quyết",
+          "i": "🤫",
+          "t": "Lưỡi cày của ngươi bán chạy suốt mấy mùa.",
+          "e": {
+            "bac": 250,
+            "nxp": [
+              "ren",
+              8
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_ren_luoi_cay",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_kiem_tu_si",
+      "name": "Tu sĩ đặt kiếm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một tu sĩ trẻ đặt ngươi rèn phôi kiếm từ một khối thiết thạch, nói sẽ tự luyện thành pháp khí.",
+      "choices": [
+        {
+          "l": "Nhận việc, rèn hết sức",
+          "i": "🔥",
+          "chk": [
+            "nang.khao",
+            16
+          ],
+          "ok": {
+            "t": "Phôi kiếm vang như chuông khi gõ. Tu sĩ trả bằng bạc, gật đầu đầy kính nể.",
+            "e": {
+              "bac": 800,
+              "nxp": [
+                "ren",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Khối thiết thạch nứt giữa chừng. Tu sĩ lạnh mặt bỏ đi.",
+            "e": {
+              "nxp": [
+                "ren",
+                6
+              ],
+              "tamma": 3
+            }
+          }
+        },
+        {
+          "l": "Từ chối, sợ không kham nổi",
+          "i": "🙅",
+          "t": "Tu sĩ đi tìm lò khác.",
+          "e": {
+            "nxp": [
+              "ren",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_kiem_tu_si",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_lo_truyen",
+      "name": "Lò truyền nghề",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi già rồi. Ba đứa học trò, đứa nào cũng muốn giữ lò.",
+      "choices": [
+        {
+          "l": "Giao cho đứa giỏi nhất",
+          "i": "🔨",
+          "t": "Lò sang tay đứa giỏi nhất. Hai đứa kia ra đi.",
+          "e": {
+            "nxp": [
+              "ren",
+              16
+            ]
+          }
+        },
+        {
+          "l": "Chia lò làm ba",
+          "i": "⚖️",
+          "chk": [
+            "nang.giao",
+            14
+          ],
+          "ok": {
+            "t": "Ba lò cùng một bảng hiệu, nghề của ngươi lan khắp vùng.",
+            "e": {
+              "nxp": [
+                "ren",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Ba đứa cãi nhau, lò tan.",
+            "e": {
+              "nxp": [
+                "ren",
+                5
+              ],
+              "tamma": 3
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_lo_truyen",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_dao_dang_cap",
+      "name": "Dâng đao cho quan",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Quan phủ muốn một thanh đao để dâng lên triều, bảo ngươi rèn, không nói giá.",
+      "choices": [
+        {
+          "l": "Rèn, chịu không công",
+          "i": "⚒️",
+          "t": "Thanh đao được dâng lên. Bảng hiệu nhà ngươi có thêm chữ son.",
+          "e": {
+            "nxp": [
+              "ren",
+              18
+            ],
+            "bac": -200
+          }
+        },
+        {
+          "l": "Nói rõ giá",
+          "i": "🗣️",
+          "chk": [
+            "nang.thuong",
+            14
+          ],
+          "ok": {
+            "t": "Quan cười, trả đủ giá. Ít ai dám mặc cả với ông ta.",
+            "e": {
+              "bac": 500,
+              "nxp": [
+                "ren",
+                14
+              ]
+            }
+          },
+          "no": {
+            "t": "Quan phật ý, xưởng của ngươi bị thu thuế gấp đôi năm ấy.",
+            "e": {
+              "bac": -400
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_dao_dang_cap",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_ren_ren_den",
+      "name": "Rèn cho người bị truy nã",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:ren",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nửa đêm có người gõ cửa, xin rèn gấp một thanh đao. Mặt hắn giống bức họa truy nã ở cổng thành.",
+      "choices": [
+        {
+          "l": "Rèn cho hắn",
+          "i": "🔥",
+          "t": "Hắn trả gấp đôi, đi mất trước khi trời sáng.",
+          "e": {
+            "bac": 300,
+            "nxp": [
+              "ren",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Đuổi đi",
+          "i": "🚪",
+          "t": "Hắn nhìn ngươi một lúc rồi bỏ đi.",
+          "e": {
+            "nxp": [
+              "ren",
+              4
+            ]
+          }
+        },
+        {
+          "l": "Giữ chân hắn, báo quan",
+          "i": "📜",
+          "chk": [
+            "nang.giao",
+            14
+          ],
+          "ok": {
+            "t": "Hắn bị bắt ngay trong xưởng. Quan thưởng ngươi.",
+            "e": {
+              "bac": 200,
+              "nxp": [
+                "ren",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Hắn nhận ra, đâm ngươi một nhát rồi chạy.",
+            "e": {
+              "hp": "-25%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/ren.json",
+        "ref": "ng_ren_ren_den",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

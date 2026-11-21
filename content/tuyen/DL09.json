@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 1,
+  "id": "DL09",
+  "loai": "dai_lo",
+  "ten": "Tỉnh Mộng",
+  "daiLo": "tinh_mong",
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Điều gì còn lại sau giấc mộng?",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Bên bia {LOC04}, người giữ bia ghim một tờ giấy dưới hòn đá. Có người vẽ một cánh cửa thấy trong mộng, người khác để lại đúng một tiếng nghe được. Ngươi cần giữ chỗ cho lời chưa kiểm và tìm người chưa từng đọc tờ này.",
+      "boQuaNeuXuatThan": true,
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Tách điều đã thấy khỏi lời chưa kiểm",
+          "t": "Ngươi gạch lề tách điều tận mắt thấy khỏi điều người kể chưa thể kiểm.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tìm dấu còn lại sau khi tỉnh",
+          "t": "Ngươi chép chỗ người từ xa nhớ giống nhau dù chưa từng trao bản.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi người chưa đọc bản ghi",
+          "t": "Ngươi chọn một người chưa đọc lời mình để họ tự ghi điều còn nhớ.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Tờ hỏi cất dưới bia, các ô chưa có chứng còn nguyên.",
+        "su": "Tờ hỏi cất dưới bia, các ô chưa có chứng còn nguyên.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Một dấu có từ đời trước",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC04"
+      },
+      "mo": "Ngươi trải bản dập từ {LOC04} cạnh tờ chép ở {LOC12}. Cả hai có vết móc ở cùng một nét, dù người chép ghi vào hai ngày khác nhau. Một người muốn rút tên khỏi bản công khai. Ngươi còn phải biết họ đã thấy dấu từ đâu.",
+      "khacVoi": "OR07.N2 đọc bia để truy tên riêng; hồi này kiểm chứng dấu lặp xuyên qua các đời.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối hai bản chép độc lập",
+          "t": "Ngươi giữ bản dập và ngày nhận ở cả hai nơi rồi hỏi người chép độc lập.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Cho người kể rút tên khỏi bản công khai",
+          "t": "Ngươi cho họ tự bỏ tên khỏi tờ công khai, giữ phần họ đồng ý dùng.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Gửi bản nguyên cho người chưa tin",
+          "t": "Ngươi gửi một bản nguyên, kèm chỗ để họ tự nghiệm trước lúc nhận lời.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Hai bản lại nằm riêng, câu hỏi về ngày còn để trống.",
+        "su": "Hai bản lại nằm riêng, câu hỏi về ngày còn để trống.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Nhiều người mơ cùng một câu",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC12"
+      },
+      "mo": "Trong nhà khách {LOC12}, một người bật dậy giữa đêm đỏ và đọc nốt lời người nằm bên vừa nói. Hai người bảo họ nghe bằng hai giọng khác nhau. Người thức ngoài cửa đưa ngươi sổ ghi giờ. Ngươi có thể kiểm lời, đưa người ra ngoài hoặc niêm bản kể.",
+      "khacVoi": "OR23.N3 xác định trà dẫn ký ức; hồi này kiểm nhịp lặp của nhiều giấc bằng người quan sát bên ngoài.",
+      "clk": "CLK06",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Nhờ người thức ghi giờ đối chứng",
+          "t": "Ngươi nhờ người ngoài giấc giữ giờ và ghi lúc từng khách tự báo nghe câu lặp.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "e": {
+            "clk": {
+              "id": "CLK06",
+              "kq": "Những người tỉnh giữ được sổ đối qua đêm đỏ và không buộc ai ngủ lại."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Đưa người muốn dừng ra chỗ sáng",
+          "t": "Ngươi đưa người đã xin dừng tới mái sáng, giữ lời họ cho phép chép.",
+          "dau": [
+            "moc_3_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Niêm lời riêng, sao lại dấu giờ",
+          "t": "Ngươi cho khách tự niêm lời, chỉ sao dấu giờ để người khác còn đối.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Câu lặp đi qua một đêm, người tỉnh chưa có bản độc lập.",
+        "su": "Câu lặp đi qua một đêm, người tỉnh chưa có bản độc lập.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Có thể đổi vòng mộng mà không mất ai?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC15"
+      },
+      "mo": "Ở {LOC15}, ngươi áp bản dập vào nền đá và thấy vết móc lọt đúng rãnh. Dưới rãnh có nhịp gõ từng nghe trong đêm đỏ. {NP29} đứng ngoài đường khắc, chờ ngươi đưa đủ chứng rồi mới cho thử đổi nhịp.",
+      "khacVoi": "OR32.N4 phục dựng chứng trên giấy; hồi này thử một thay đổi của vòng và kiểm người bên ngoài còn nguyên.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Thử sửa vòng rồi kiểm người đứng ngoài",
+          "t": "Ngươi mang bản dập và sổ ghi giờ tới nền đá. Sau một lần đổi nhịp, ngươi hỏi lại từng người đứng ngoài và ghi rằng họ vẫn có mặt.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Mở lối rút cho người muốn tỉnh",
+          "t": "Ngươi đưa họ qua mốc đã thử dừng, để mỗi người tự chọn có đi tiếp.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Ghi phần vòng chưa thử được",
+          "t": "Ngươi giữ đoạn khắc và điều chưa chứng được, gửi bản về người coi bia.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Nền giữ một nhịp cũ, người ngoài chưa có bản thử cách thay.",
+        "su": "Nền giữ một nhịp cũ, người ngoài chưa có bản thử cách thay.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Bước qua cửa hay giữ vòng đã sửa?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC15"
+      },
+      "mo": "Trên {LOC15}, khe sáng mở đúng vết ngươi đã khoanh. Giấy ghi giờ rung trên mặt đá. Ngươi còn có thể đem đủ chứng qua cửa, ở lại giao người khác trông vòng đã sửa hoặc đem bản dở về bia.",
+      "khacVoi": "OR25.N5 chọn việc sau một kỳ thi; hồi này xét ba chứng cứ của vòng và quyền quyết định trước cửa tỉnh.",
+      "clk": "CLK14",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đối đủ chứng rồi bước qua cửa",
+          "t": "Ngươi so bản dập, sổ ghi giờ và kết quả lần thử. Cả ba đều khớp, nên ngươi bước qua cửa theo lối còn dấu quay về.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          },
+          "e": {
+            "clk": {
+              "id": "CLK14",
+              "kq": "Cửa sáng mở qua một lượt đối chứng, người qua giữ đường về cho người còn đợi."
+            }
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ chỗ đã sửa và nhờ người kiểm",
+          "t": "Ngươi giữ điểm đổi đã thử và gửi bản cho người ngoài kiểm khi vòng chạy lại.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Lùi khỏi cửa, trả bản về bia",
+          "t": "Ngươi đưa bản chưa đủ về bia, chừa chỗ người sau tự dò mà không bị gọi qua.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Cửa sáng qua một lượt rồi khép, bản nền vẫn còn để người sau tra.",
+        "su": "Cửa sáng qua một lượt rồi khép, bản nền vẫn còn để người sau tra.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Tỉnh bên kia vạch",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Dấu trên bia, giờ do người thức ghi và lần thử dưới nền cùng chỉ chỗ vòng mộng bị ngắt. Ngươi bước qua cửa sáng. Tiếng đáp của người giữ mốc vẫn vọng tới, cho ngươi biết đường về còn mở.",
+      "su": "Người đi qua đối đủ ba chứng và vẫn giữ được lối về.",
+      "dauVong": "mốc ngoài còn giữ bản có đủ dấu cũ, mốc giờ trong đêm và lần thử thay vòng."
+    },
+    {
+      "id": "B",
+      "ten": "Vòng đổi mà người còn",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_2"
+        ]
+      },
+      "t": "Ngươi ở lại và giao người khác coi chỗ đã sửa. Vòng mộng chạy lại theo nhịp mới. Những người từng đứng ngoài vẫn còn đủ, và lần này họ tự ghi điều mình thấy để người tới sau kiểm tra.",
+      "su": "Vòng được sửa theo lần thử có đối chứng độc lập.",
+      "dauVong": "người coi nền sau còn sổ ghi người đã đứng ngoài qua lượt đổi."
+    },
+    {
+      "id": "C",
+      "ten": "Tờ hỏi để ngỏ",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Ngươi chưa giải được vòng mộng nên mang bản chép về đặt dưới bia. Người đến sau có thể thấy ngươi đã thử việc gì, còn vướng ở đâu và đi lối nào nếu muốn quay ra.",
+      "su": "Bản chứng dang dở được lưu để người khác tự kiểm tiếp.",
+      "dauVong": "dưới bia còn tờ hỏi có ô trống cạnh phần chưa thể chứng."
+    }
+  ],
+  "ngoai": "Cửa sáng qua một lượt rồi khép, bản nền vẫn còn để người sau tra."
+}

@@ -25,9 +25,9 @@ Nguồn chuẩn: `content/events/di-tuong.json`. Bản đọc tự sinh. Cú ph�
 - **2. Chờ ở cửa, cướp kẻ đi ra**
   - `chk`: `["tp",11]`
   - **Thành công**: Mấy kẻ lảo đảo đi ra, mình đầy thương tích. Ngươi ra tay nhanh gọn.
-    `{"e":{"st":40,"karma":-6}}`
+    `{"e":{"st":40,"hd":{"t":3},"ng":{"b":3}}}`
   - **Thất bại**: Kẻ đi ra đầu tiên lại là kẻ mạnh nhất.
-    `{"fight":{"k":"tantu","elite":1},"win":{"t":"Hắn gục. Túi trữ vật của hắn nặng trịch.","e":{"st":30,"karma":-3}}}`
+    `{"fight":{"k":"tantu","elite":1},"win":{"t":"Hắn gục. Túi trữ vật của hắn nặng trịch.","e":{"st":30,"hd":{"t":3},"ng":{"b":3}}}}`
 - **3. Không tham gia**
   Nơi nhiều người tranh, thường lắm kẻ chết. Ngươi đi tiếp.
 

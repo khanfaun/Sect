@@ -69,8 +69,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -128,7 +128,7 @@
           "ok": {
             "t": "Hắn nghe hết, im lặng rất lâu, rồi bẻ gãy tờ lệnh.",
             "e": {
-              "karma": 5,
+              "deed": "hoa_giai",
               "tamma": -5
             }
           },
@@ -156,8 +156,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -207,7 +207,7 @@
       "choices": [
         {
           "i": "👃",
-          "l": "Ngửi kỹ",
+          "l": "Kiểm tra rượu rồi đối mặt kẻ hạ độc",
           "chk": [
             "ngo",
             11
@@ -295,7 +295,7 @@
       "choices": [
         {
           "i": "🌀",
-          "l": "Nhảy lên",
+          "l": "Nhảy tránh cạm bẫy",
           "chk": [
             "tp",
             11
@@ -332,8 +332,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},

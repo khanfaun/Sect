@@ -1,0 +1,773 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_hat_quen_loi",
+      "name": "Quên lời",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đang diễn giữa sân, ngươi quên mất câu hát tiếp theo.",
+      "choices": [
+        {
+          "l": "Ứng khẩu",
+          "i": "🎭",
+          "chk": [
+            "nang.tu",
+            8
+          ],
+          "ok": {
+            "t": "Câu ứng khẩu còn hay hơn bản cũ. Khán giả vỗ tay rần rần.",
+            "e": {
+              "nxp": [
+                "hat",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi lắp bắp, cả sân cười ồ.",
+            "e": {
+              "tamma": 1
+            }
+          }
+        },
+        {
+          "l": "Ra hiệu bạn diễn nhắc",
+          "i": "👋",
+          "t": "Vở diễn trôi qua, bầu gánh liếc ngươi.",
+          "e": {
+            "nxp": [
+              "hat",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_quen_loi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_mua_san",
+      "name": "Mưa giữa buổi diễn",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mưa đổ giữa buổi. Khán giả chạy tán loạn, tiền vé chưa thu.",
+      "choices": [
+        {
+          "l": "Diễn tiếp dưới mưa",
+          "i": "🌧️",
+          "t": "Mấy người ở lại dưới hiên, ném tiền lên sân.",
+          "e": {
+            "bac": 10,
+            "nxp": [
+              "hat",
+              6
+            ],
+            "hp": "-5%"
+          }
+        },
+        {
+          "l": "Dọn đồ",
+          "i": "📦",
+          "t": "Buổi ấy không ai có tiền.",
+          "e": {
+            "nxp": [
+              "hat",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_mua_san",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_ao_rach",
+      "name": "Phục trang rách",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Bộ áo bào dùng đóng vai vua bị chuột gặm.",
+      "choices": [
+        {
+          "l": "Thức đêm vá",
+          "i": "🧵",
+          "chk": [
+            "nang.nhan",
+            8
+          ],
+          "ok": {
+            "t": "Áo lành, còn đẹp hơn.",
+            "e": {
+              "nxp": [
+                "hat",
+                5
+              ]
+            }
+          },
+          "no": {
+            "t": "Vá vụng, lộ đường chỉ.",
+            "e": {
+              "nxp": [
+                "hat",
+                2
+              ]
+            }
+          }
+        },
+        {
+          "l": "Diễn tạm áo khác",
+          "i": "👘",
+          "t": "Vua mặc áo quan, khán giả cười.",
+          "e": {
+            "nxp": [
+              "hat",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_ao_rach",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_tre_hoc",
+      "name": "Đứa trẻ mê hát",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một đứa trẻ trong làng theo gánh mấy ngày, xin được học hát.",
+      "choices": [
+        {
+          "l": "Dạy nó vài câu",
+          "i": "🎶",
+          "t": "Nó hát theo, giọng trong vắt.",
+          "e": {
+            "nxp": [
+              "hat",
+              4
+            ],
+            "deed": "nhan_nuoi"
+          }
+        },
+        {
+          "l": "Đuổi về",
+          "i": "🙅",
+          "t": "Nó đứng nhìn theo xe gánh.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_tre_hoc",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_vo_cam",
+      "name": "Vở bị cấm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Gánh có một vở tuồng nói xấu quan tham. Quan huyện cấm diễn.",
+      "choices": [
+        {
+          "l": "Vẫn diễn",
+          "i": "🎭",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Cả thành kéo tới xem. Quan không dám bắt vì sợ dân.",
+            "e": {
+              "nxp": [
+                "hat",
+                16
+              ]
+            }
+          },
+          "no": {
+            "t": "Lính tới dỡ sân khấu, bầu gánh bị bắt.",
+            "e": {
+              "hp": "-10%",
+              "nxp": [
+                "hat",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Diễn vở khác",
+          "i": "📜",
+          "t": "Buổi diễn bình thường.",
+          "e": {
+            "nxp": [
+              "hat",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_vo_cam",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_gia_dang",
+      "name": "Giả dạng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một người lạ trả tiền thuê ngươi giả làm sứ giả trong một ngày.",
+      "choices": [
+        {
+          "l": "Nhận tiền đóng giả sứ giả",
+          "i": "🎭",
+          "chk": [
+            "nang.tu",
+            11
+          ],
+          "ok": {
+            "t": "Không ai nhận ra. Người lạ trả hậu, không nói để làm gì.",
+            "e": {
+              "bac": 200,
+              "nxp": [
+                "hat",
+                8
+              ],
+              "deed": "lua_loi"
+            }
+          },
+          "no": {
+            "t": "Ngươi lộ tẩy, bị đánh.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Người lạ đi tìm kép khác.",
+          "e": {
+            "nxp": [
+              "hat",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_gia_dang",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_phu_quan",
+      "name": "Diễn cho phủ quan",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Quan mời gánh về phủ diễn tiệc sinh nhật. Đêm diễn, một vị khách sàm sỡ đào nhỏ.",
+      "choices": [
+        {
+          "l": "Dừng diễn, che cho nó",
+          "i": "✋",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Quan ra mặt can, xin lỗi gánh.",
+            "e": {
+              "nxp": [
+                "hat",
+                10
+              ],
+              "deed": "hanh_hiep"
+            }
+          },
+          "no": {
+            "t": "Gánh bị đuổi, không được trả tiền.",
+            "e": {
+              "nxp": [
+                "hat",
+                4
+              ],
+              "deed": "hanh_hiep"
+            }
+          }
+        },
+        {
+          "l": "Diễn tiếp",
+          "i": "🎶",
+          "t": "Tiền thưởng hậu. Đào nhỏ bỏ gánh hôm sau.",
+          "e": {
+            "bac": 150,
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_phu_quan",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_canh_tranh",
+      "name": "Gánh khác tranh sân",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một gánh hát lớn tới, chiếm sân chợ của gánh ngươi.",
+      "choices": [
+        {
+          "l": "Thách diễn cùng đêm",
+          "i": "🔥",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Khán giả đứng về phía ngươi.",
+            "e": {
+              "bac": 80,
+              "nxp": [
+                "hat",
+                12
+              ]
+            }
+          },
+          "no": {
+            "t": "Gánh kia đông khách hơn hẳn.",
+            "e": {
+              "nxp": [
+                "hat",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Rời đi nơi khác",
+          "i": "🚚",
+          "t": "Gánh lên đường sớm hơn dự định.",
+          "e": {
+            "nxp": [
+              "hat",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_canh_tranh",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_lam_chung",
+      "name": "Sân khấu làm chứng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi biết một người bị xử oan. Quan không chịu nghe lời một kép hát, nhưng dân ngoài chợ có thể nghe nếu ngươi đưa vụ án lên sân khấu.",
+      "choices": [
+        {
+          "l": "Dựng vở, diễn giữa chợ",
+          "i": "🎭",
+          "chk": [
+            "nang.giao",
+            15
+          ],
+          "ok": {
+            "t": "Cả thành bàn tán. Vụ án được xét lại.",
+            "e": {
+              "nxp": [
+                "hat",
+                22
+              ],
+              "deed": "giu_loi"
+            }
+          },
+          "no": {
+            "t": "Vở bị cấm ngay đêm đầu, ngươi bị giam.",
+            "e": {
+              "hp": "-15%",
+              "nxp": [
+                "hat",
+                8
+              ]
+            }
+          }
+        },
+        {
+          "l": "Im lặng",
+          "i": "🤐",
+          "t": "Người bị oan chết trong ngục.",
+          "e": {
+            "tamma": 5
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_lam_chung",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_bau_ganh",
+      "name": "Lên bầu gánh",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Bầu gánh già giao lại gánh cho ngươi, kèm món nợ của gánh.",
+      "choices": [
+        {
+          "l": "Nhận gánh và nợ",
+          "i": "🎪",
+          "t": "Ngươi làm bầu. Gánh có thêm ba vở mới.",
+          "e": {
+            "bac": -300,
+            "nxp": [
+              "hat",
+              18
+            ]
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Gánh tan.",
+          "e": {
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_bau_ganh",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_vua_xem",
+      "name": "Vua xem tuồng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Gánh được mời vào kinh diễn cho vua xem.",
+      "choices": [
+        {
+          "l": "Diễn vở sở trường",
+          "i": "👑",
+          "chk": [
+            "nang.tu",
+            16
+          ],
+          "ok": {
+            "t": "Vua thưởng ngựa và bạc. Tên ngươi lan khắp nước.",
+            "e": {
+              "bac": 1500,
+              "nxp": [
+                "hat",
+                25
+              ]
+            }
+          },
+          "no": {
+            "t": "Run tay, diễn hỏng. Vua bỏ về sớm.",
+            "e": {
+              "nxp": [
+                "hat",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Diễn vở ca ngợi vua",
+          "i": "🎶",
+          "t": "Vua khen. Người trong nghề chê ngươi nịnh.",
+          "e": {
+            "bac": 800,
+            "nxp": [
+              "hat",
+              12
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_vua_xem",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_hat_truyen_tuong",
+      "name": "Chép tuồng để lại",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:hat",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi muốn chép lại các vở tuồng chỉ truyền miệng trước khi chúng mất.",
+      "choices": [
+        {
+          "l": "Ngồi chép cả mùa đông",
+          "i": "📚",
+          "t": "Mười hai vở tuồng được giữ lại.",
+          "e": {
+            "nxp": [
+              "hat",
+              18
+            ],
+            "h": 60
+          }
+        },
+        {
+          "l": "Dạy học trò thuộc lòng",
+          "i": "🎶",
+          "t": "Học trò thuộc, nhưng mỗi người nhớ một kiểu.",
+          "e": {
+            "nxp": [
+              "hat",
+              10
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/hat.json",
+        "ref": "ng_hat_truyen_tuong",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

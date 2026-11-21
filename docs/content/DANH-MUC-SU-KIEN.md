@@ -1,6 +1,6 @@
 # Danh mục toàn bộ tương tác
 
-Có **403 mục**. Đây là danh mục sinh từ nguồn chuẩn; sửa tệp nguồn được dẫn, không sửa bản đọc này. Tầng nội dung 0–4 khác địa lý bản đồ.
+Có **469 mục**. Đây là danh mục sinh từ nguồn chuẩn; sửa tệp nguồn được dẫn, không sửa bản đọc này. Tầng nội dung 0–4 khác địa lý bản đồ.
 
 | ID | Tên | Loại | Nguồn | Chủ đề | Ở đâu | Khi nào | Tệp đọc / nguồn |
 |---|---|---|---|---|---|---|---|
@@ -252,6 +252,11 @@ Có **403 mục**. Đây là danh mục sinh từ nguồn chuẩn; sửa tệp n
 | tm_du | Tâm ma thì thầm | opportunity | Hệ thống | Diễn biến nhân vật | * | mọi tầng | [đọc](events/opportunities/system.md#tm_du) / `content/events/opportunities/system.json` |
 | tm_quyen | Tâm ma dụ dỗ | opportunity | Hệ thống | Diễn biến nhân vật | * | mọi tầng | [đọc](events/opportunities/system.md#tm_quyen) / `content/events/opportunities/system.json` |
 | tho_can | Thọ nguyên đã cạn | opportunity | Hệ thống | Diễn biến nhân vật | * | mọi tầng | [đọc](events/opportunities/system.md#tho_can) / `content/events/opportunities/system.json` |
+| tl_tuyendo | Sơn môn tuyển đồ | opportunity | Hệ thống | Trắc linh | * | mọi tầng | [đọc](events/opportunities/system.md#tl_tuyendo) / `content/events/opportunities/system.json` |
+| tl_dusi | Tu sĩ du phương | opportunity | Hệ thống | Trắc linh | * | mọi tầng | [đọc](events/opportunities/system.md#tl_dusi) / `content/events/opportunities/system.json` |
+| tl_thach | Trắc Linh Thạch | opportunity | Hệ thống | Trắc linh | * | mọi tầng | [đọc](events/opportunities/system.md#tl_thach) / `content/events/opportunities/system.json` |
+| tl_tubiet | Tự biết | opportunity | Hệ thống | Trắc linh | * | mọi tầng | [đọc](events/opportunities/system.md#tl_tubiet) / `content/events/opportunities/system.json` |
+| tl_laodao | Lão đạo ăn xin | opportunity | Hệ thống | Trắc linh | * | mọi tầng | [đọc](events/opportunities/system.md#tl_laodao) / `content/events/opportunities/system.json` |
 | delivery_1 | Người nhận vắng nhà | quest-door | Giao nhiệm vụ | Giao nhiệm vụ | * | mọi tầng | [đọc](events/quests/delivery.md#delivery_1) / `content/events/quests/delivery.json` |
 | delivery_2 | Kẻ lạ đòi hàng | quest-door | Giao nhiệm vụ | Giao nhiệm vụ | * | mọi tầng | [đọc](events/quests/delivery.md#delivery_2) / `content/events/quests/delivery.json` |
 | delivery_3 | Bữa cơm cảm tạ | quest-door | Giao nhiệm vụ | Giao nhiệm vụ | * | mọi tầng | [đọc](events/quests/delivery.md#delivery_3) / `content/events/quests/delivery.json` |
@@ -397,6 +402,7 @@ Có **403 mục**. Đây là danh mục sinh từ nguồn chuẩn; sửa tệp n
 | service_tea_co | Đánh một ván cờ với khách lạ | service | Trong quán | Dịch vụ địa điểm | thôn trấn, thành trì, chợ phiên tu sĩ / Trà lâu | mọi tầng | [đọc](events/venues/services.md#service_tea_co) / `content/venues/services.json` |
 | service_tea_tinh | Ngồi yên thưởng trà, tĩnh tâm | service | Trong quán | Dịch vụ địa điểm | thôn trấn, thành trì, chợ phiên tu sĩ / Trà lâu | mọi tầng | [đọc](events/venues/services.md#service_tea_tinh) / `content/venues/services.json` |
 | service_inn_phong | Thuê phòng thường, ngủ một đêm | service | Trong quán | Dịch vụ địa điểm | thôn trấn, thành trì, chợ phiên tu sĩ / Khách điếm | mọi tầng | [đọc](events/venues/services.md#service_inn_phong) / `content/venues/services.json` |
+| service_inn_giuong | Ngủ giường tập thể một đêm | service | Trong quán | Dịch vụ địa điểm | thôn trấn, thành trì, chợ phiên tu sĩ / Khách điếm | mọi tầng | [đọc](events/venues/services.md#service_inn_giuong) / `content/venues/services.json` |
 | service_inn_thuong | Thuê phòng thượng hạng có tụ linh trận | service | Trong quán | Dịch vụ địa điểm | thôn trấn, thành trì, chợ phiên tu sĩ / Khách điếm | mọi tầng | [đọc](events/venues/services.md#service_inn_thuong) / `content/venues/services.json` |
 | service_inn_an | Ngồi sảnh dưới ăn một bữa | service | Trong quán | Dịch vụ địa điểm | thôn trấn, thành trì, chợ phiên tu sĩ / Khách điếm | mọi tầng | [đọc](events/venues/services.md#service_inn_an) / `content/venues/services.json` |
 | service_inn_chuong | Hỏi chưởng quầy có chuyện gì lạ | service | Trong quán | Dịch vụ địa điểm | thôn trấn, thành trì, chợ phiên tu sĩ / Khách điếm | mọi tầng | [đọc](events/venues/services.md#service_inn_chuong) / `content/venues/services.json` |
@@ -407,3 +413,63 @@ Có **403 mục**. Đây là danh mục sinh từ nguồn chuẩn; sửa tệp n
 | service_tea_doicau | Thi đối câu đối của lão tú tài | service | Trong quán | Cơ hội trong quán | thôn trấn, thành trì, chợ phiên tu sĩ / Trà lâu | mọi tầng | [đọc](events/venues/services.md#service_tea_doicau) / `content/venues/services.json` |
 | service_inn_hotong | Nhận lời hộ tống một thương nhân | service | Trong quán | Cơ hội trong quán | thôn trấn, thành trì, chợ phiên tu sĩ / Khách điếm | mọi tầng | [đọc](events/venues/services.md#service_inn_hotong) / `content/venues/services.json` |
 | service_tuu_gaysu | Dạy cho gã say gây sự một bài học | service | Trong quán | Cơ hội trong quán | thôn trấn, thành trì, chợ phiên tu sĩ / Tửu phường | mọi tầng | [đọc](events/venues/services.md#service_tuu_gaysu) / `content/venues/services.json` |
+| ng_nong_han | Mùa hạn | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; ha; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_han) / `content/events/nghe/nong.json` |
+| ng_nong_tranh_nuoc | Tranh nước với làng bên | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_tranh_nuoc) / `content/events/nghe/nong.json` |
+| ng_nong_trau_om | Trâu ốm | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_trau_om) / `content/events/nghe/nong.json` |
+| ng_nong_tang_to | Địa chủ tăng tô | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_tang_to) / `content/events/nghe/nong.json` |
+| ng_nong_duoc_mua | Được mùa | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; thu; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_duoc_mua) / `content/events/nghe/nong.json` |
+| ng_nong_binh_luong | Quan thu binh lương | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_binh_luong) / `content/events/nghe/nong.json` |
+| ng_nong_trom_lua | Trộm lúa đêm | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_trom_lua) / `content/events/nghe/nong.json` |
+| ng_nong_de_vo | Đê vỡ | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_de_vo) / `content/events/nghe/nong.json` |
+| ng_nong_linh_dien | Tu sĩ thuê người trồng linh điền | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_linh_dien) / `content/events/nghe/nong.json` |
+| ng_nong_hat_la | Hạt giống lạ | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_hat_la) / `content/events/nghe/nong.json` |
+| ng_nong_heo_yeu | Heo rừng thành yêu | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_heo_yeu) / `content/events/nghe/nong.json` |
+| ng_nong_nam_doi | Năm đói, dân bỏ làng | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/nong.md#ng_nong_nam_doi) / `content/events/nghe/nong.json` |
+| ng_ngu_bao | Giông giữa nước | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_bao) / `content/events/nghe/ngu.json` |
+| ng_ngu_xac | Lưới vớt xác người | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_xac) / `content/events/nghe/ngu.json` |
+| ng_ngu_ca_chep | Cá chép vàng | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_ca_chep) / `content/events/nghe/ngu.json` |
+| ng_ngu_ep_gia | Chợ cá ép giá | event | Khám phá | Sinh kế | chợ phiên tu sĩ, sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_ep_gia) / `content/events/nghe/ngu.json` |
+| ng_ngu_thuy_quy | Thủy quỷ kéo chân | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_thuy_quy) / `content/events/nghe/ngu.json` |
+| ng_ngu_hai_tac | Bọn chặn đường sông | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_hai_tac) / `content/events/nghe/ngu.json` |
+| ng_ngu_ca_chay | Mùa cá chạy | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_ca_chay) / `content/events/nghe/ngu.json` |
+| ng_ngu_hop_go | Hộp gỗ cổ | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_hop_go) / `content/events/nghe/ngu.json` |
+| ng_ngu_giao_long | Giao long mắc cạn | event | Khám phá | Sinh kế | biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_giao_long) / `content/events/nghe/ngu.json` |
+| ng_ngu_tieng_hat | Tiếng hát dưới nước | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_tieng_hat) / `content/events/nghe/ngu.json` |
+| ng_ngu_thuyen_dam | Thuyền đắm | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_thuyen_dam) / `content/events/nghe/ngu.json` |
+| ng_ngu_nguoi_cho | Người nhà chờ ở bến | event | Khám phá | Sinh kế | sông hồ, biển khơi | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/ngu.md#ng_ngu_nguoi_cho) / `content/events/nghe/ngu.json` |
+| ng_thuong_cuop | Hàng bị cướp | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_cuop) / `content/events/nghe/thuong.json` |
+| ng_thuong_mua | Mưa hỏng hàng | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_mua) / `content/events/nghe/thuong.json` |
+| ng_thuong_lot_tay | Quan đòi lót tay | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_lot_tay) / `content/events/nghe/thuong.json` |
+| ng_thuong_hang_gia | Hàng giả | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_hang_gia) / `content/events/nghe/thuong.json` |
+| ng_thuong_tu_si | Tu sĩ mua hàng | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_tu_si) / `content/events/nghe/thuong.json` |
+| ng_thuong_phan | Bạn hàng phản | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_phan) / `content/events/nghe/thuong.json` |
+| ng_thuong_con_no | Con nợ chết | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_con_no) / `content/events/nghe/thuong.json` |
+| ng_thuong_muoi_lau | Buôn muối lậu | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_muoi_lau) / `content/events/nghe/thuong.json` |
+| ng_thuong_dau_co | Đầu cơ năm đói | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_dau_co) / `content/events/nghe/thuong.json` |
+| ng_thuong_vu_cao | Đối thủ vu cáo | event | Khám phá | Sinh kế | thôn trấn, chợ phiên tu sĩ, thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_vu_cao) / `content/events/nghe/thuong.json` |
+| ng_thuong_yeu_thu | Thương đội gặp yêu thú | event | Khám phá | Sinh kế | thành trì, thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_yeu_thu) / `content/events/nghe/thuong.json` |
+| ng_thuong_tien_trang | Mở tiền trang | event | Khám phá | Sinh kế | thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/thuong.md#ng_thuong_tien_trang) / `content/events/nghe/thuong.json` |
+| ng_vo_gia_loi_dai | Lôi đài sinh tử | event | Khám phá | Sinh kế | thành trì, thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_loi_dai) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_ket_nghia | Kết nghĩa huynh đệ | event | Khám phá | Sinh kế | thành trì, thôn trấn, rừng sâu | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_ket_nghia) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_son_tac | Cứu thôn khỏi sơn tặc | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_son_tac) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_mao_danh | Bị mạo danh | event | Khám phá | Sinh kế | thành trì, thôn trấn, rừng sâu | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_mao_danh) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_am_toan | Bát rượu có độc | event | Khám phá | Sinh kế | thành trì, thôn trấn, rừng sâu | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_am_toan) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_bi_tich | Tranh bí tịch | event | Khám phá | Sinh kế | thành trì, thôn trấn, rừng sâu | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_bi_tich) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_tu_si | Đối mặt một tu sĩ | event | Khám phá | Sinh kế | thành trì, thôn trấn, rừng sâu | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_tu_si) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_duyen | Duyên giang hồ | event | Khám phá | Sinh kế | thành trì, thôn trấn, rừng sâu | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_duyen) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_dai_hoi | Đại hội võ lâm | event | Khám phá | Sinh kế | thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_dai_hoi) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_an_su | Ân sư bị giết | event | Khám phá | Sinh kế | thành trì, thôn trấn, rừng sâu | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_an_su) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_tong_su | Thách đấu tông sư | event | Khám phá | Sinh kế | thành trì, thôn trấn, rừng sâu | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_tong_su) / `content/events/nghe/vo_gia.json` |
+| ng_vo_gia_gac_kiem | Rửa tay gác kiếm | event | Khám phá | Sinh kế | thành trì, thôn trấn, rừng sâu | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/vo_gia.md#ng_vo_gia_gac_kiem) / `content/events/nghe/vo_gia.json` |
+| ng_y_khong_tien | Bệnh nhân không tiền | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_khong_tien) / `content/events/nghe/y.json` |
+| ng_y_thu_thuoc | Thử thuốc trên mình | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_thu_thuoc) / `content/events/nghe/y.json` |
+| ng_y_thay_cung | Tranh với thầy cúng | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_thay_cung) / `content/events/nghe/y.json` |
+| ng_y_do_de | Đỡ đẻ khó | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_do_de) / `content/events/nghe/y.json` |
+| ng_y_dai_dich | Đại dịch | event | Khám phá | Sinh kế | thôn trấn | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_dai_dich) / `content/events/nghe/y.json` |
+| ng_y_quy_nhan | Quý nhân bệnh nặng | event | Khám phá | Sinh kế | thành trì | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_quy_nhan) / `content/events/nghe/y.json` |
+| ng_y_ep_doc | Bị ép bào chế độc | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_ep_doc) / `content/events/nghe/y.json` |
+| ng_y_ma_tu | Bệnh nhân lạ | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_ma_tu) / `content/events/nghe/y.json` |
+| ng_y_chua_nham | Chữa nhầm | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_chua_nham) / `content/events/nghe/y.json` |
+| ng_y_linh_duoc | Linh dược quá đắt | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_linh_duoc) / `content/events/nghe/y.json` |
+| ng_y_nguoi_than | Người thân bệnh nặng | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_nguoi_than) / `content/events/nghe/y.json` |
+| ng_y_y_thu | Truyền y thư | event | Khám phá | Sinh kế | thôn trấn, thành trì, chợ phiên tu sĩ | mọi tầng; một lần/kiếp; nghỉ 720 giờ | [đọc](events/nghe/y.md#ng_y_y_thu) / `content/events/nghe/y.json` |

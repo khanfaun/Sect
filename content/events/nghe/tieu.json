@@ -1,0 +1,794 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_tieu_cay_thieng",
+      "name": "Cây cổ thụ đầu bản",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Cây lim già nhất rừng mọc ngay lối mòn. Gốc cây có buộc dải vải đỏ, bát hương mốc meo. Chủ xưởng dặn: hạ được cây này thì công gấp đôi.",
+      "choices": [
+        {
+          "l": "Hạ cây lấy công",
+          "i": "🪓",
+          "t": "Cây đổ ầm một tiếng, chim bay rợp trời. Mấy hôm sau người trong bản nhìn ngươi không nói gì.",
+          "e": {
+            "bac": 40,
+            "nxp": [
+              "tieu",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Để cây lại, đốn cây khác",
+          "i": "🌳",
+          "t": "Ngươi thắp lại nén hương rồi đi xa thêm một quãng. Cây kém hơn, công cũng ít hơn.",
+          "e": {
+            "bac": 15,
+            "nxp": [
+              "tieu",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_cay_thieng",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_rau_xuong",
+      "name": "Lưỡi rìu mẻ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lưỡi rìu mẻ một miếng to bằng móng tay giữa lúc đang đốn dở.",
+      "choices": [
+        {
+          "l": "Tự mài lại bên suối",
+          "i": "🪨",
+          "chk": [
+            "nang.nhan",
+            8
+          ],
+          "ok": {
+            "t": "Mài tới chiều, lưỡi rìu sáng lại, cầm chắc tay hơn cả cũ.",
+            "e": {
+              "nxp": [
+                "tieu",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Mài lệch, lưỡi rìu cùn hẳn. Ngươi phải bỏ tiền ra lò rèn.",
+            "e": {
+              "bac": -20
+            }
+          }
+        },
+        {
+          "l": "Đem ra lò rèn",
+          "i": "⚒️",
+          "t": "Thợ rèn gõ vài nhát, lấy hai mươi xu.",
+          "e": {
+            "bac": -20,
+            "nxp": [
+              "tieu",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_rau_xuong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_gau",
+      "name": "Dấu chân gấu",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Trên lớp đất ẩm có dấu chân to bằng cái mẹt, còn mới. Đống củi ngươi chặt dở ở ngay phía trước.",
+      "choices": [
+        {
+          "l": "Lặng lẽ quay về",
+          "i": "🚶",
+          "chk": [
+            "nang.canh",
+            8
+          ],
+          "ok": {
+            "t": "Ngươi đi giật lùi, tai nghe tiếng cành gãy phía xa. Về tới bìa rừng mới dám thở.",
+            "e": {
+              "nxp": [
+                "tieu",
+                4
+              ]
+            }
+          },
+          "no": {
+            "t": "Vừa quay lưng thì con gấu lù lù hiện ra. Ngươi chạy trối chết, áo rách toạc một mảng.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "l": "Liều vác nốt bó củi",
+          "i": "🪵",
+          "chk": [
+            "tp",
+            7
+          ],
+          "ok": {
+            "t": "Ngươi vác củi chạy một mạch, không ngoảnh lại.",
+            "e": {
+              "bac": 15,
+              "nxp": [
+                "tieu",
+                5
+              ]
+            }
+          },
+          "no": {
+            "t": "Bó củi rơi giữa đường, con gấu đuổi theo một quãng.",
+            "e": {
+              "hp": "-20%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_gau",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_tre_lac",
+      "name": "Đứa trẻ lạc trong rừng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Tiếng khóc thút thít sau bụi rậm. Một đứa bé chăn trâu lạc đường từ chiều qua, môi tím tái.",
+      "choices": [
+        {
+          "l": "Cõng nó về bản",
+          "i": "🧒",
+          "t": "Ngươi bỏ dở buổi đốn củi, cõng đứa trẻ về tới nơi khi trời tối hẳn. Mẹ nó khóc ròng.",
+          "e": {
+            "deed": "cuu_nguoi",
+            "nxp": [
+              "tieu",
+              3
+            ],
+            "h": 6
+          }
+        },
+        {
+          "l": "Chỉ đường rồi đi tiếp",
+          "i": "👉",
+          "t": "Ngươi chỉ hướng khe suối. Đứa bé lủi thủi đi, ngoái lại mấy lần.",
+          "e": {
+            "nxp": [
+              "tieu",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_tre_lac",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_lam_tac",
+      "name": "Lâm tặc rủ rê",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một toán người lạ đề nghị ngươi chỉ chỗ mấy cây trầm trong rừng cấm, chia ba phần mười.",
+      "choices": [
+        {
+          "l": "Nhận lời",
+          "i": "🤝",
+          "t": "Đêm ấy cây trầm bị cưa. Tiền chia nặng tay, nhưng người giữ rừng bắt đầu dò hỏi.",
+          "e": {
+            "bac": 150,
+            "nxp": [
+              "tieu",
+              6
+            ],
+            "deed": "hiep_dao"
+          }
+        },
+        {
+          "l": "Từ chối, báo người giữ rừng",
+          "i": "📜",
+          "t": "Ngươi đi báo. Lão giữ rừng gật đầu, lần sau có việc lại gọi ngươi trước.",
+          "e": {
+            "nxp": [
+              "tieu",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Lắc đầu, không dính vào",
+          "i": "🙅",
+          "t": "Ngươi bỏ đi. Mấy hôm sau nghe nói rừng cấm mất mấy cây.",
+          "e": {
+            "nxp": [
+              "tieu",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_lam_tac",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_lu_go",
+      "name": "Bè gỗ giữa mùa lũ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "song"
+        ],
+        "levels": null,
+        "time": {
+          "season": [
+            "ha",
+            "thu"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nước lũ về sớm, bè gỗ của xưởng mắc ở khúc quanh. Chủ xưởng hứa thưởng ai gỡ được.",
+      "choices": [
+        {
+          "l": "Lội ra gỡ bè",
+          "i": "🌊",
+          "chk": [
+            "tp",
+            8
+          ],
+          "ok": {
+            "t": "Ngươi bám dây lội ra, gỡ được bè trước khi nước dâng.",
+            "e": {
+              "bac": 80,
+              "nxp": [
+                "tieu",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Dòng nước quật ngươi vào đá. May mà bám được dây.",
+            "e": {
+              "hp": "-20%",
+              "nxp": [
+                "tieu",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đợi nước rút",
+          "i": "⏳",
+          "t": "Hai hôm sau nước rút, bè gỗ trôi mất một nửa.",
+          "e": {
+            "nxp": [
+              "tieu",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_lu_go",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_chia_rung",
+      "name": "Chia lô rừng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Quan huyện cho đấu thầu quyền khai một lô rừng. Mấy đầu nậu gỗ ngồi chật cả sân đình.",
+      "choices": [
+        {
+          "l": "Trả giá cao, giành lô tốt",
+          "i": "💰",
+          "chk": [
+            "nang.thuong",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi giữ được giá. Lô rừng tốt về tay ngươi.",
+            "e": {
+              "bac": -200,
+              "nxp": [
+                "tieu",
+                14
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi trả quá tay, lô rừng lại cằn.",
+            "e": {
+              "bac": -260,
+              "nxp": [
+                "tieu",
+                5
+              ]
+            }
+          }
+        },
+        {
+          "l": "Nhận lô xấu, giá rẻ",
+          "i": "🌲",
+          "t": "Lô rừng ít gỗ quý nhưng không ai tranh.",
+          "e": {
+            "bac": -60,
+            "nxp": [
+              "tieu",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_chia_rung",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_trong_lai",
+      "name": "Đồi trọc",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Sườn đồi ngươi khai năm ngoái giờ trơ đất đỏ, mưa xuống là sạt. Dân dưới chân đồi lo mất ruộng.",
+      "choices": [
+        {
+          "l": "Bỏ tiền thuê người trồng lại",
+          "i": "🌱",
+          "t": "Một mùa sau, cây non phủ kín sườn đồi.",
+          "e": {
+            "bac": -120,
+            "nxp": [
+              "tieu",
+              10
+            ],
+            "deed": "bo_thi"
+          }
+        },
+        {
+          "l": "Mặc kệ",
+          "i": "🤷",
+          "t": "Mùa mưa năm ấy, một mảng đồi sạt xuống ruộng nhà dưới.",
+          "e": {
+            "nxp": [
+              "tieu",
+              4
+            ],
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_trong_lai",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_giay_quan",
+      "name": "Giấy phép của quan",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Quan phủ muốn cấp cho ngươi quyền giữ cả cánh rừng phía tây, đổi lại mỗi năm nộp một phần gỗ quý vào phủ.",
+      "choices": [
+        {
+          "l": "Nhận giấy phép",
+          "i": "📜",
+          "t": "Ngươi thành chủ rừng có giấy quan. Người trong nghề gọi ngươi là ông chủ.",
+          "e": {
+            "bac": -500,
+            "nxp": [
+              "tieu",
+              20
+            ]
+          }
+        },
+        {
+          "l": "Xin giảm phần gỗ phải nộp hằng năm",
+          "i": "🗣️",
+          "chk": [
+            "nang.giao",
+            14
+          ],
+          "ok": {
+            "t": "Quan gật đầu, phần nộp nhẹ đi một nửa.",
+            "e": {
+              "bac": -300,
+              "nxp": [
+                "tieu",
+                22
+              ]
+            }
+          },
+          "no": {
+            "t": "Quan phật ý, giấy phép về tay người khác.",
+            "e": {
+              "nxp": [
+                "tieu",
+                5
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_giay_quan",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_tho_go",
+      "name": "Thợ đốn bị cây đè",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một thợ của ngươi bị cây đè gãy chân. Nhà hắn có ba đứa con nhỏ.",
+      "choices": [
+        {
+          "l": "Trả tiền thuốc, nuôi nhà hắn tới khi khỏi",
+          "i": "💊",
+          "t": "Ba tháng sau hắn chống gậy tới cảm ơn, cả xưởng nhìn ngươi khác hẳn.",
+          "e": {
+            "bac": -300,
+            "deed": "cuu_nguoi",
+            "nxp": [
+              "tieu",
+              12
+            ]
+          }
+        },
+        {
+          "l": "Cho ít tiền rồi thôi",
+          "i": "🪙",
+          "t": "Hắn cầm tiền, không nói gì. Thợ khác thì thầm sau lưng.",
+          "e": {
+            "bac": -50,
+            "nxp": [
+              "tieu",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_tho_go",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_rung_thieng",
+      "name": "Rừng có linh khí",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Sâu trong rừng có một khoảnh cây mọc thẳng tắp, sương đọng không tan. Người ta đồn là đất có linh khí, tu sĩ hay lui tới.",
+      "choices": [
+        {
+          "l": "Khai thác bán cho tu sĩ",
+          "i": "🪓",
+          "t": "Gỗ ở đó bán được giá cao, nhưng từ hôm ấy rừng lặng hẳn tiếng chim.",
+          "e": {
+            "bac": 600,
+            "nxp": [
+              "tieu",
+              15
+            ],
+            "tamma": 4
+          }
+        },
+        {
+          "l": "Rào lại, giữ nguyên",
+          "i": "🛡️",
+          "t": "Ngươi rào khu rừng, cấm người vào. Đêm ấy ngươi ngủ ngon hiếm có.",
+          "e": {
+            "nxp": [
+              "tieu",
+              12
+            ],
+            "tamma": -3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_rung_thieng",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tieu_truyen_nghe",
+      "name": "Truyền nghề",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tieu",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đứa học việc theo ngươi đã mười năm. Nó xin ra mở xưởng riêng ở bên kia núi.",
+      "choices": [
+        {
+          "l": "Cho nó đi, tặng vốn",
+          "i": "🎁",
+          "t": "Nó lạy ngươi ba lạy rồi đi. Nghề rừng của ngươi có thêm một nhánh.",
+          "e": {
+            "bac": -300,
+            "nxp": [
+              "tieu",
+              18
+            ]
+          }
+        },
+        {
+          "l": "Giữ nó lại",
+          "i": "✋",
+          "chk": [
+            "nang.giao",
+            15
+          ],
+          "ok": {
+            "t": "Ngươi nói chuyện cả đêm. Nó ở lại, làm đầu nậu cho ngươi.",
+            "e": {
+              "nxp": [
+                "tieu",
+                14
+              ]
+            }
+          },
+          "no": {
+            "t": "Nó vẫn đi, không chào.",
+            "e": {
+              "nxp": [
+                "tieu",
+                4
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tieu.json",
+        "ref": "ng_tieu_truyen_nghe",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

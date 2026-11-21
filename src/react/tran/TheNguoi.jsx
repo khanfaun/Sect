@@ -72,13 +72,14 @@ export function TheNguoi({ sc, u, pickMode, compact }) {
         <div className="u-nm"><b>{u.name}</b><small><H h={PS.elSeal(u.el || 'vo')} /> {sub}</small></div>
         <div className="brow" {...tip('Khí huyết')}><span className="bl"><Ic n="heart" /></span><CBar cur={Math.max(0, u.hp)} max={u.max} cls={hpCls(u)} /><b>{pct(Math.max(0, u.hp), u.max)}</b></div>
         <div className="brow2 mpnl">
-          {u.maxMp > 0 && <span {...tip('Linh lực ' + pct(u.mp, u.maxMp))}><span className="bl"><Ic n="drop" /></span><CBar cur={u.mp} max={u.maxMp} cls="mp" /><b>{pct(u.mp, u.maxMp)}</b></span>}
+          {u.maxMp > 0 && <span {...tip((u.isMain ? PS.mpName() : 'Linh lực') + ' ' + pct(u.mp, u.maxMp))}><span className="bl"><Ic n="drop" /></span><CBar cur={u.mp} max={u.maxMp} cls="mp" /><b>{pct(u.mp, u.maxMp)}</b></span>}
           {u.maxNl > 0 && <span {...tip('Niệm lực ' + pct(u.nl || 0, u.maxNl))}><span className="bl"><Ic n="brain" /></span><CBar cur={u.nl || 0} max={u.maxNl} cls="nl" /><b>{pct(u.nl || 0, u.maxNl)}</b></span>}
         </div>
         <div className="brow2">
           {u.tl != null && <span {...tip('Thể lực ' + Math.round(u.tl) + '%')}><span className="bl"><Ic n="run" /></span><CBar cur={u.tl} max={100} cls="tl" /></span>}
           <span {...tip('Định lực ' + Math.round(dlOf(u)) + '%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt.')}><span className="bl"><Ic n="lotus" /></span><CBar cur={dlOf(u)} max={100} cls="dl" /></span>
         </div>
+        {u.isMain && PS.tuResView && PS.tuResView(u).map(x => <div key={x.id} className="brow tures" {...tip(x.n + ' ' + x.v + '/' + x.max)}><span className="bl">✦</span><CBar cur={x.v} max={x.max} cls="tu" /><b>{x.n}</b></div>)}
         <H h={PS.stIcons(u.st)} />
       </div>
     </div>
@@ -110,13 +111,14 @@ export function TheMinh({ sc, u }) {
         <div className="u-nm"><b>{u.name}</b><small>{PS.realmLabel()}</small></div>
         <div className="brow" {...tip('Khí huyết')}><span className="bl"><Ic n="heart" /></span><CBar cur={Math.max(0, u.hp)} max={u.max} cls={hpCls(u)} /><b>{pct(Math.max(0, u.hp), u.max)}</b></div>
         <div className="brow2 mpnl">
-          <span {...tip('Linh lực ' + (u.maxMp ? pct(u.mp, u.maxMp) : 'chưa có') + '\nThi triển pháp thuật')}><span className="bl"><Ic n="drop" /></span><CBar cur={u.mp} max={u.maxMp} cls="mp" /><b>{u.maxMp ? pct(u.mp, u.maxMp) : '—'}</b></span>
+          <span {...tip(PS.mpName() + ' ' + (u.maxMp ? pct(u.mp, u.maxMp) : 'chưa có') + (PS.isPham() ? '\nRa chiêu võ' : '\nThi triển pháp thuật'))}><span className="bl"><Ic n="drop" /></span><CBar cur={u.mp} max={u.maxMp} cls="mp" /><b>{u.maxMp ? pct(u.mp, u.maxMp) : '—'}</b></span>
           <span {...tip('Niệm lực ' + pct(u.nl || 0, u.maxNl || 1) + '\nSức thần thức trong trận. Dùng vật phẩm, tế pháp bảo, đòn thần thức đều tốn niệm lực.\nVào trận thì đầy.')}><span className="bl"><Ic n="brain" /></span><CBar cur={u.nl || 0} max={u.maxNl || 1} cls="nl" /><b>{pct(u.nl || 0, u.maxNl || 1)}</b></span>
         </div>
         <div className="brow2">
           <span {...tip('Thể lực ' + Math.round(u.tl) + '%\nNé tốn 25%, đỡ được đòn tốn 30%.\nHồi 20% mỗi khi về mốc đầu')}><span className="bl"><Ic n="run" /></span><CBar cur={u.tl} max={100} cls="tl" /></span>
           <span {...tip('Định lực ' + Math.round(dlOf(u)) + '%\nTrúng đòn thì giảm. Về 0: choáng, mất một lượt, rồi hồi đầy.')}><span className="bl"><Ic n="lotus" /></span><CBar cur={dlOf(u)} max={100} cls="dl" /></span>
         </div>
+        {PS.tuResView && PS.tuResView(u).map(x => <div key={x.id} className="brow tures" {...tip(x.n + ' ' + x.v + '/' + x.max + '\nRa chiêu của nghề thì tích thêm; đủ thì dồn vào một đòn mạnh hơn.')}><span className="bl">✦</span><CBar cur={x.v} max={x.max} cls="tu" /><b>{x.n}</b></div>)}
         <H h={PS.stIcons(u.st)} />
       </div>
     </div>

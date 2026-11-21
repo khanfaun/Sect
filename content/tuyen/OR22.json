@@ -1,0 +1,325 @@
+{
+  "schemaVersion": 1,
+  "id": "OR22",
+  "loai": "xuat_than",
+  "ten": "Tấm chiếu hai mặt",
+  "xuatThan": "xt_con_nguoi_det_chieu",
+  "goiYDaiLo": [
+    "the_gia"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Đơn chiếu chôn ghi thiếu người chết",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC01"
+      },
+      "mo": "Người mua ở {LOC01} nhận nhiều chiếu chôn nhưng bắt ngươi ghi một người. Một tấm mang đường dệt riêng của thợ trẻ nhà ngươi. Họ không nói các tấm còn lại dùng cho ai.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Đếm tấm giao và giữ biên nhận",
+          "t": "Ngươi đếm số chiếu đã giao, ghi cạnh số người mua chịu xác nhận trên biên nhận.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Ghi đường dệt của thợ trẻ",
+          "t": "Ngươi sao đường dệt thấy trên chiếu, hỏi thợ trẻ nào từng nhận lô cói ấy.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Giao đơn rồi hỏi người khiêng",
+          "t": "Ngươi giao đủ chiếu và xin người khiêng giữ tên các chỗ đã đem tới.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chiếu đi hết dưới một biên nhận, số người đã mất chưa được ghi.",
+        "su": "Chiếu đi hết dưới một biên nhận, số người đã mất chưa được ghi.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Người lao dịch bị ghi chung với cói",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Lô cói cập {LOC09} cùng thẻ của người bị đưa đi làm. Sổ thuyền gộp cả người và cói vào một lô. Một thợ trẻ nhận ra nút buộc do chính mình thắt.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Theo nút đến chỗ thợ trú",
+          "t": "Ngươi tìm được nhóm lao dịch đổi tên dưới mái dỡ hàng và hỏi ai muốn rời.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Hỏi ai giữ đơn chiếu lớn",
+          "t": "Ngươi xin bản giá đơn lớn, thấy người mua muốn điều khoản giữ thợ đến hết nợ.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Đếm khung có thể mang đi",
+          "t": "Ngươi kê những chiếc khung có thể gấp rồi hỏi ai muốn góp khung vào gánh.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Lô cói vào kho, tên người vẫn ghi chung theo thẻ chuyến.",
+        "su": "Lô cói vào kho, tên người vẫn ghi chung theo thẻ chuyến.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Tên trẻ trong sổ tuyển lao dịch",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Vạch ở sổ tuyển {LOC11} giống hệt dấu buộc trên lô cói. Giấy mua ở {LOC03} còn ghi giá và xóa quyền thôi việc. Người coi sổ đang chờ chuyển nhóm trẻ đi.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "So thẻ với sổ tuyển trẻ",
+          "t": "Ngươi tìm tên gốc của nhóm ở bến rồi hỏi ai muốn được giấu một đêm.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Tra đơn hàng cùng giấy giữ thợ",
+          "t": "Ngươi nhận ra đơn lớn chỉ cấp cho người chịu giữ nhóm thợ bằng khế.",
+          "dau": [
+            "moc_3_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Sao tên và phần khung từng người",
+          "t": "Ngươi chép ai mang khung và ai chỉ góp công, để họ tự chọn khi rời.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Các thẻ tuyển được nhận, một số thợ trẻ chưa có tên riêng.",
+        "su": "Các thẻ tuyển được nhận, một số thợ trẻ chưa có tên riêng.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Cho thợ trốn hay nhận đơn lớn?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Thợ dệt ở {LOC09} chừa chiếu cho người muốn trốn và kê hòm quỹ. Người đặt đơn lớn đòi giữ thợ theo khế. Ngoài cửa, một người rủ họ góp khung lập gánh riêng.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giấu người và lập quỹ hộ",
+          "t": "Ngươi lần theo hoa dệt để tìm đúng nhóm thợ. Quỹ ghi tên từng hộ góp tiền cho chỗ ở mà nhóm tự chọn.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận đơn lớn, ép thợ làm đến hết nợ",
+          "t": "Ngươi nhận đơn rồi đưa người mua bản khế buộc thợ ở tới khi trả hết.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Gom gánh theo phần góp tự nguyện",
+          "t": "Ngươi giao thẻ phần khung cho từng thợ và đọc điều khoản được rời đoàn.",
+          "dau": [
+            "moc_4_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chiếu trong kho bị cuộn lại, nhóm thợ tự chia chỗ ngủ.",
+        "su": "Chiếu trong kho bị cuộn lại, nhóm thợ tự chia chỗ ngủ.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Thợ trẻ sẽ làm và ngủ ở đâu?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC09"
+      },
+      "mo": "Đến hôm giao chiếu ở {LOC09}, người coi quỹ, người đặt đơn lớn và người gánh khung đều chờ ngươi ký. Thợ trẻ chỉ muốn biết tối nay họ được ngủ và làm việc ở đâu.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Giữ quỹ để thợ tự chọn nhà",
+          "t": "Ngươi mở quỹ cho thợ chọn chỗ sống và giao mỗi nhà một dấu dệt nhận nhau.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Mở xưởng theo đơn lớn",
+          "t": "Ngươi chốt chuyến chiếu đủ số, giữ nhóm thợ trẻ trong sổ không được rút.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Giao phần rồi đưa gánh lên đường",
+          "t": "Ngươi đếm phần từng thợ và để người muốn ở lại lấy lại phần của họ.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chuyến chiếu đi trước, thợ trẻ còn hỏi chỗ ngủ cho ngày mai.",
+        "su": "Chuyến chiếu đi trước, thợ trẻ còn hỏi chỗ ngủ cho ngày mai.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Chiếu đủ chỗ nằm",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Những người từng đi theo thẻ lô cói tự chọn nơi đặt chiếu. Quỹ hộ mua cho họ chỗ qua mùa và ghi ai đã góp. Khi cần một mái khác, họ nhận nhau qua hoa dệt ở mép chiếu.",
+      "su": "Quỹ hộ ở {LOC09} duy trì chỗ trú theo lựa chọn của người thoát.",
+      "dauVong": "hoa dệt ở mép chiếu chỉ nơi người từng lao dịch có thể gõ cửa."
+    },
+    {
+      "id": "B",
+      "ten": "Xưởng không tắt đèn",
+      "dk": {
+        "dau": [
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Chuyến chiếu lớn được giao đúng ngày và giá hạ. Trong xưởng, một người trẻ giữ nguyên chỗ cạnh khung vì giấy không cho họ rút. Ngọn đèn còn thắp tới lượt cuối sau khi người mua đã về.",
+      "su": "Xưởng giữ đơn lớn bằng khế không cho thợ rút.",
+      "dauVong": "một người thợ nhớ khung dệt nơi khế đã giữ họ suốt mùa."
+    },
+    {
+      "id": "C",
+      "ten": "Chiếu cuộn theo đường",
+      "dk": {
+        "dau": [
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Gánh chia phần ở mỗi chỗ nghỉ, ai rời có thể mang theo chiếc khung của mình. Người dừng ở một trấn dệt lại dấu lô cói thành dấu của người tự đi. Chuyến kế còn những thợ tự chọn ở lại.",
+      "su": "Nhóm thợ lập gánh chiếu có phần góp và quyền rời.",
+      "dauVong": "một tấm chiếu ở trấn xa mang hoa dệt của nhóm thợ từng đi chung."
+    }
+  ],
+  "ngoai": "Chuyến chiếu đi trước, thợ trẻ còn hỏi chỗ ngủ cho ngày mai."
+}

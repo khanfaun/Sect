@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "giet_vo_toi",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Tên người trở về trên sổ",
+      "t": "Một người chép sổ tìm tới với giấy xác nhận người ngươi đã giết chưa hề dính vào vụ án. Gia đình đã chờ qua mấy mùa mới nghe được tên thật. Họ muốn ngươi đứng bên bàn khi dòng kết tội bị xóa.",
+      "c": [
+        {
+          "id": "ra_chung",
+          "l": "Đứng trước gia đình và kể phần mình",
+          "t": "Ngươi kể việc mình đã làm. Người chép ghi tên ngươi vào biên bản, còn gia đình lấy một bản mang về.",
+          "e": {
+            "h": 4,
+            "tamma": 2
+          }
+        },
+        {
+          "id": "roi_di",
+          "l": "Rời bàn khi họ đọc tên người mất",
+          "t": "Ngươi đi trước khi tờ giấy trao tay. Tới tối, tiếng người chép đọc tên vẫn vẳng trong trí.",
+          "e": {
+            "tamma": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Áo của người không về",
+      "t": "Một đứa bé ôm chiếc áo lớn đến hỏi người mặc có từng gửi lời gì. Ngươi nhận ra đường vá trên tay áo của người vô tội đã chết. Đứa bé đã mang áo theo nhiều chuyến, mong một người chịu nói thật.",
+      "c": [
+        {
+          "id": "noi_that",
+          "l": "Nói người ấy đã mất và nhận phần lỗi",
+          "t": "Đứa bé không đáp. Nó gấp áo thật chậm rồi xin ngươi chỉ nơi gia đình có thể thắp hương."
+        },
+        {
+          "id": "goi_nguoi",
+          "l": "Nhờ một người thân ngồi nghe cùng",
+          "t": "Ngươi tìm bà cô của đứa bé. Khi cô tới, nó mới đặt chiếc áo xuống và hỏi lại từ đầu.",
+          "e": {
+            "h": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Bữa cơm dành cho người vắng",
+      "t": "Chủ quán vẫn để một chỗ trống cho người vô tội mà ngươi đã giết. Người ấy từng trả tiền trước cho một bữa cơm cùng bạn. Chủ quán chưa biết chuyện và hỏi ngươi có thể chuyển lời hẹn hay không.",
+      "c": [
+        {
+          "id": "bao_quan",
+          "l": "Báo tin cho chủ quán",
+          "t": "Ngươi kể đủ để ông tìm đúng nhà. Ông gói phần cơm mang đi, để nguyên chiếc ghế trống."
+        },
+        {
+          "id": "than_nhan",
+          "l": "Tìm người bạn được hẹn tới ăn",
+          "t": "Ngươi đem tin tới người bạn. Họ đợi ở bàn cũ rồi nhờ ngươi dẫn tới chỗ người mất.",
+          "e": {
+            "h": 4
+          }
+        }
+      ]
+    }
+  ]
+}

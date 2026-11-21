@@ -18,10 +18,10 @@ Nguồn chuẩn: `content/events/chains/loi_noi_duoi_phien_da.json`. Bản đọ
 
 - **1. Nhận là ngươi đặt nêm**
   Ngươi chịu một đêm tĩnh tu thay. {$a.ten} lấy vạt áo thấm nốt phần nước tràn.
-  - `e`: `{"karma":4,"h":12,"tamma":-2}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":12,"tamma":-2}`
 - **2. Rút nêm rồi trả bình**
   Ngươi được {$c.ten} cho qua. Từ bên trong có người đưa ra một cái chén còn khô.
-  - `e`: `{"karma":-1}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Chiếc nêm bị đá sang góc. {$a.ten} nhặt nó lên bằng chân trần.
 
@@ -53,10 +53,10 @@ Nguồn chuẩn: `content/events/chains/loi_noi_duoi_phien_da.json`. Bản đọ
 
 - **1. Giúp họ ghi lại người đã chịu phạt**
   Ngươi cùng họ ghi tên những người từng bị cắt nước khi chịu phạt. Chuyện tới tai giám luật, ngươi bị cấm mượn sách một kỳ. Danh sách đã được chép thành nhiều bản, không còn giấu dưới bình nữa.
-  - `e`: `{"karma":4,"an":["a","chén nước đã nguội"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","chén nước đã nguội"]}`
 - **2. Đưa đan dược để {$b.ten} khỏi phải nói**
   Hắn dưỡng được giọng, còn danh sách nằm dưới bình. Khi nhấc bình lên, trên giấy có một vòng tròn sẫm.
-  - `e`: `{"pill":1,"karma":1}`
+  - `e`: `{"pill":1,"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   {$a.ten} đổi chén lớn hơn, đặt bên cạnh bình.
 
@@ -90,11 +90,11 @@ Nguồn chuẩn: `content/events/chains/loi_noi_duoi_phien_da.json`. Bản đọ
 
 - **1. Đọc mẩu giấy trước mặt người làm bếp**
   Ngươi đọc lời kể của đệ tử bị nhốt cho mọi người trong bếp nghe. Họ nhận ra không chỉ một người từng bị bỏ khát. Giám luật ghi tên ngươi, nhưng lần này đã có nhiều người đứng lại làm chứng.
-  - `e`: `{"karma":4,"an":["a","bình úp mặt"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","bình úp mặt"]}`
 - **2. Trả tiền giữ kín và mua nước cho người trong phòng**
   Nước được đưa vào mỗi tối. Người mang nước xin thêm tiền để mua một cái chén không sứt.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Khăn khô dần và giấy cong lên, đẩy miệng bình nhích khỏi bàn.
 
@@ -128,11 +128,11 @@ Giám luật {$c.ten} dời phòng phạt xuống dưới đất. Nếu lời ch
 
 - **1. Đòi giám luật mở phòng cho mọi người xem**
   Ngươi đòi mở phòng mới cho mọi người kiểm tra, bị gạch tên khỏi buổi nghị sự trong tông. Người tới xem phát hiện khe thông khí quá hẹp, đồng loạt yêu cầu sửa trước khi nhốt người.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua quyền trông việc nước**
   Người trong phòng có nước đều. Mỗi tháng ngươi nhận một phần lương kèm chìa khóa dài hơn chìa khóa cũ.
   - `cost`: `{"st":13}`
-  - `e`: `{"st":20,"karma":1}`
+  - `e`: `{"st":20,"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Phiến đá được hạ xuống. Mấy chiếc chén trên sân cùng rung.
 
@@ -173,10 +173,10 @@ Nếu phòng đã mở công khai, giám luật {$c.ten} mang tới tờ đề n
 
 - **1. Ủng hộ bỏ cửa khóa kín**
   Ngươi phải trả chìa hoặc mất phần tiếng nói còn lại trong nhà luật. Đệ tử {$a.ten} đem cái nêm cũ kê cửa phòng họp.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Giữ phòng và buộc có người chứng kiến**
   Người trong phòng luôn được gặp người ngoài, còn {$c.ten} tiếp tục giữ cửa. Lão làm một cái ghế cho người chứng kiến, quay mặt thẳng vào khe.
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Ngươi không dự việc quyết định của họ. Khi ra ngoài, ngươi nghe hai bên bắt đầu bàn hạn phạt và người được quyền tới thăm.
 

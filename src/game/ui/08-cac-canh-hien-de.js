@@ -6,12 +6,14 @@ function itemView(p){
   if(p.k==='relic')return {ic:relIcon(p.rel),n:p.rel.name,sub:GRADE[p.rel.tier],tip:relicTip(p.rel),t:p.rel.tier||0};
   if(p.k==='skill'){const sk=SK[p.id];const h=G.run.skills.find(x=>x.id===p.id);return {ic:elSeal(sk.el),n:sk.n,sub:'Bí tịch công pháp · '+PHAM[sk.t],tip:skillTip(sk,h?h.lv+1:1),t:sk.t};}
   if(p.k==='pill')return {ic:PILL[p.id].i,n:(p.q?PQ[p.q]+' ':'')+PILL[p.id].n,sub:PILL[p.id].d.replace('{x}',pillX(p.id,p.q)),tip:pillTip(p.id,p.q),t:p.q||0};
+  if(p.k==='qi'){const x=CAT.byId[p.id]||{};return {ic:x.i||'🪨',n:x.n||p.id,sub:x.dang||'',tip:[x.d,x.use].filter(Boolean).join('\n'),t:2};}
   if(p.k==='pass')return {ic:'🎫',n:p.n,sub:'Lệnh bài thông quan',tip:'Trình ở quan ải để sang '+REG[p.reg].n,t:2};
   return {ic:'💎',n:p.n+' linh thạch',sub:'',tip:''};}
 
-const PGROUP=[['Sự vụ',['board']],['Tông môn',['congmon','join','lib','nhansu','tongviec','conghien','tinhthat']],['Mua bán',['laibuon','taphoa','shop','ghost']],['Nghỉ chân',['tea','inn','tuu','tinh','heal']],['Đi lại',['tram','goback']],['Tu luyện',['khaiphu','thinhgiao']],['Hoang dã',['sanyeu','haithuoc','daokhoang']],['Việc khác',['grave','patron','bury','quyan']]];
+// PGROUP: bảng nút → nhóm. Từ Đ8b nút nào hiện là do công trình trên ô đất (CONG_TRINH.acts, core2/64-dat-dai.js); bảng này chỉ xếp nhóm.
+const PGROUP=[['Sự vụ',['board','thuongcac','vay','quanphu','chapphap']],['Tông môn',['congmon','join','lib','nhansu','tongviec','conghien','tinhthat']],['Mua bán',['laibuon','taphoa','shop','doilt','camdo','ghost','amhoi']],['Mưu sinh',['muusinh']],['Nghỉ chân',['nha','tea','inn','tuu','tinh','heal']],['Đi lại',['tram','goback']],['Tu luyện',['khaiphu','thinhgiao','tumon']],['Hoang dã',['sanbat','sanyeu','haithuoc','daokhoang']],['Việc khác',['coduyen','grave','patron','bury','quyan','datdai','quyen','dungdau','daomo','aocanh','caitrang']]];
 const PNOW=['boss','cross','bt','xk'];
-const GRP_IC={'Sự vụ':'scroll','Tông môn':'gate','Mua bán':'bag','Nghỉ chân':'tea','Đi lại':'cart','Tu luyện':'seat','Hoang dã':'tree','Việc khác':'more'};
+const GRP_IC={'Sự vụ':'scroll','Mưu sinh':'bag','Tông môn':'gate','Mua bán':'bag','Nghỉ chân':'tea','Đi lại':'cart','Tu luyện':'seat','Hoang dã':'tree','Việc khác':'more'};
 const PL_N={tea:'Trà lâu',inn:'Khách điếm',shop:'Phường thị',board:'Bảng treo thưởng',ghost:'Quỷ thị',join:'Sơn môn',lib:'Tàng Kinh Các',tinh:'Tĩnh tọa',heal:'Dưỡng thương'};
 
 function vPrep(sc){

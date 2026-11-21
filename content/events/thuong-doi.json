@@ -32,7 +32,7 @@
         {
           "i": "🏪",
           "l": "Xem hàng",
-          "t": "{$a.ten} mở từng hòm, vừa mở vừa kể lai lịch từng món.",
+          "t": "{$a.ten} mở hòm rồi chỉ cho ngươi từng món lấy từ đâu.",
           "e": {
             "shop": 1
           }
@@ -125,7 +125,7 @@
                 "t": "Bọn cướp tháo chạy. {$a.ten} vái ngươi ba vái, trả gấp đôi tiền công.",
                 "e": {
                   "st": 40,
-                  "karma": 4,
+                  "deed": "giet_cuop_dang_ac",
                   "an": [
                     "a",
                     "đánh lui bọn cướp"
@@ -192,12 +192,12 @@
         }
       },
       "text": [
-        "Người dắt lạc đà của {$en} là kẻ lắm mồm. Chưa hỏi đã kể, kể không ngừng."
+        "Người dắt lạc đà của {$en} vừa đưa tay buộc dây đã kể chuyện trạm trước. Ngươi chưa kịp hỏi mà họ đã kể sang chặng sau."
       ],
       "choices": [
         {
           "i": "🍵",
-          "l": "Mời một chén trà, nghe kể",
+          "l": "Mời trà để nghe tin phương xa",
           "cost": {
             "st": 2
           },
@@ -380,7 +380,7 @@
         },
         {
           "i": "👁️",
-          "l": "Soi kỹ",
+          "l": "Xem kỹ món hàng trước khi mua",
           "chk": [
             "ngo",
             11
@@ -466,7 +466,7 @@
             "t": "Bầy thú tan tác. {$a.ten} quỳ xuống cảm tạ, dâng cả túi linh thạch.",
             "e": {
               "st": 35,
-              "karma": 6,
+              "deed": "cuu_nguoi",
               "an": [
                 "a",
                 "cứu khỏi bầy yêu thú"
@@ -480,13 +480,15 @@
           "t": "Ngươi không xen vào. Lúc ngươi đi, tiếng kêu cứu đã tắt.",
           "e": {
             "tamma": 4,
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {

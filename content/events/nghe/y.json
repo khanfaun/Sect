@@ -1,0 +1,736 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_y_khong_tien",
+      "name": "Bệnh nhân không tiền",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Người mẹ bế đứa con sốt hầm hập, quỳ trước hiệu thuốc. Trong tay chị không có một đồng.",
+      "choices": [
+        {
+          "l": "Chữa, không lấy tiền",
+          "i": "💊",
+          "t": "Sáng hôm sau đứa bé hạ sốt. Chị đem tới một giỏ trứng gà.",
+          "e": {
+            "nxp": [
+              "y",
+              6
+            ],
+            "deed": "bo_thi"
+          }
+        },
+        {
+          "l": "Bảo chị đi chỗ khác",
+          "i": "✋",
+          "t": "Chị bế con đi trong mưa. Ngươi đóng cửa hiệu sớm hơn mọi ngày.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_khong_tien",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_thu_thuoc",
+      "name": "Thử thuốc trên mình",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một bài thuốc mới chép được, không ai dám uống thử.",
+      "choices": [
+        {
+          "l": "Tự uống thử",
+          "i": "🧪",
+          "chk": [
+            "nang.duoc",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi sốt một đêm, sáng ra ghi lại đủ từng triệu chứng. Bài thuốc dùng được.",
+            "e": {
+              "nxp": [
+                "y",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi nôn thốc nôn tháo ba ngày.",
+            "e": {
+              "hp": "-20%",
+              "nxp": [
+                "y",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Cất đi",
+          "i": "📜",
+          "t": "Ngươi kẹp bài thuốc vào sách, đợi ngày có thầy giỏi hỏi."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_thu_thuoc",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_thay_cung",
+      "name": "Tranh với thầy cúng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ông thầy cúng trong làng bảo bệnh của nhà kia là do ma làm, đòi một con lợn để trừ tà. Người nhà nhìn ngươi.",
+      "choices": [
+        {
+          "l": "Nói thẳng là bệnh, không phải ma",
+          "i": "🗣️",
+          "chk": [
+            "nang.giao",
+            9
+          ],
+          "ok": {
+            "t": "Ngươi bắt mạch, kê đơn. Ba hôm sau người bệnh ngồi dậy được. Thầy cúng bỏ đi.",
+            "e": {
+              "bac": 40,
+              "nxp": [
+                "y",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Người nhà tin thầy cúng. Ngươi bị đuổi ra cổng.",
+            "e": {
+              "bac": -30
+            }
+          }
+        },
+        {
+          "l": "Không xen vào",
+          "i": "😶",
+          "t": "Tiếng mõ trừ tà vang suốt đêm. Sáng ra nhà ấy có tang.",
+          "e": {
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_thay_cung",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_do_de",
+      "name": "Đỡ đẻ khó",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nửa đêm có người đập cửa. Vợ hắn đau đẻ từ chiều, bà đỡ đã bó tay.",
+      "choices": [
+        {
+          "l": "Đi ngay",
+          "i": "🏃",
+          "chk": [
+            "ngo",
+            10
+          ],
+          "ok": {
+            "t": "Gần sáng, tiếng khóc trẻ con vang lên. Người cha quỳ xuống trước ngươi.",
+            "e": {
+              "bac": 60,
+              "nxp": [
+                "y",
+                10
+              ],
+              "deed": "cuu_nguoi"
+            }
+          },
+          "no": {
+            "t": "Ngươi giữ được người mẹ. Đứa bé không qua khỏi.",
+            "e": {
+              "tamma": 8,
+              "nxp": [
+                "y",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Bảo hắn đi tìm thầy khác",
+          "i": "✋",
+          "t": "Hắn chạy đi trong đêm. Ngươi không ngủ lại được.",
+          "e": {
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_do_de",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_dai_dich",
+      "name": "Đại dịch",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Dịch lan khắp làng, nhà nào cũng có người nằm. Người khỏe đã bỏ đi gần hết.",
+      "choices": [
+        {
+          "l": "Ở lại chữa",
+          "i": "🩺",
+          "t": "Mười ngày liền ngươi không ngủ đủ một canh. Dịch lui dần. Ngươi gầy rộc.",
+          "e": {
+            "h": 240,
+            "nxp": [
+              "y",
+              20
+            ],
+            "hp": "-20%",
+            "deed": "cuu_dich"
+          }
+        },
+        {
+          "l": "Rời làng",
+          "i": "🚶",
+          "t": "Ngươi đi không ngoái lại. Tiếng ho đuổi theo tới đầu làng.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_dai_dich",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_quy_nhan",
+      "name": "Quý nhân bệnh nặng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Phủ quan cho người tới mời: lão thái gia bệnh nặng, chữa khỏi có thưởng lớn.",
+      "choices": [
+        {
+          "l": "Đến phủ quan chữa bệnh cho lão thái gia",
+          "i": "🏯",
+          "chk": [
+            "ngo",
+            11
+          ],
+          "ok": {
+            "t": "Bệnh lão thái gia lui. Phủ quan trả công hậu, còn khắc biển tặng.",
+            "e": {
+              "bac": 800,
+              "nxp": [
+                "y",
+                15
+              ]
+            }
+          },
+          "no": {
+            "t": "Bệnh trở nặng. Ngươi bị đánh hai mươi trượng rồi đuổi đi.",
+            "e": {
+              "hp": "-20%",
+              "bac": -200
+            }
+          }
+        },
+        {
+          "l": "Viện cớ từ chối",
+          "i": "✋",
+          "t": "Người nhà quan liếc ngươi, không nói gì."
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_quy_nhan",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_ep_doc",
+      "name": "Bị ép bào chế độc",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một gã mặt lạnh đặt túi bạc lên quầy: cần một liều thuốc không mùi không vị, uống vào ngủ không dậy.",
+      "choices": [
+        {
+          "l": "Làm",
+          "i": "☠️",
+          "t": "Ngươi bào chế trong đêm. Túi bạc nặng tay, còn lòng thì nặng hơn.",
+          "e": {
+            "bac": 300,
+            "deed": "dau_doc"
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "✋",
+          "chk": [
+            "tam",
+            11
+          ],
+          "ok": {
+            "t": "Hắn nhìn ngươi hồi lâu rồi cầm túi bạc đi.",
+            "e": {}
+          },
+          "no": {
+            "t": "Hắn đập vỡ quầy thuốc, đánh ngươi một trận rồi mới đi.",
+            "e": {
+              "hp": "-30%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_ep_doc",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_ma_tu",
+      "name": "Bệnh nhân lạ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Người khách nửa đêm mặc áo đen, vết thương trên vai bốc khói đen. Hắn trả trước, không nói tên.",
+      "choices": [
+        {
+          "l": "Chữa cho hắn",
+          "i": "🩹",
+          "t": "Ngươi rửa vết thương bằng nước muối, đắp thuốc. Hắn đi trước khi trời sáng, để lại tiền công gấp ba.",
+          "e": {
+            "bac": 200,
+            "nxp": [
+              "y",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Từ chối, đóng cửa",
+          "i": "🚪",
+          "t": "Hắn cười nhạt, biến vào bóng tối. Mấy hôm sau nghe đồn làng bên có người chết lạ.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_ma_tu",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_chua_nham",
+      "name": "Chữa nhầm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một bệnh nhân uống thuốc ngươi kê mà bệnh nặng thêm. Người nhà kéo tới đông như hội.",
+      "choices": [
+        {
+          "l": "Nhận lỗi, đền tiền thuốc",
+          "i": "🙇",
+          "t": "Ngươi đổi bài thuốc, đền tiền. Người bệnh khỏi dần, người nhà thôi không làm khó.",
+          "e": {
+            "bac": -300,
+            "tamma": 5,
+            "nxp": [
+              "y",
+              10
+            ]
+          }
+        },
+        {
+          "l": "Đổ cho số trời",
+          "i": "🤷",
+          "t": "Họ chửi bới rồi bỏ đi. Từ đó vắng khách hẳn.",
+          "e": {}
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_chua_nham",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_linh_duoc",
+      "name": "Linh dược quá đắt",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Bệnh của đứa bé chỉ có một vị linh dược chữa được. Giá của nó bằng cả gia tài nhà nó.",
+      "choices": [
+        {
+          "l": "Bỏ tiền mình ra mua",
+          "i": "💰",
+          "t": "Đứa bé khỏi bệnh. Cha mẹ nó khắc tên ngươi lên bàn thờ.",
+          "e": {
+            "bac": -500,
+            "nxp": [
+              "y",
+              10
+            ],
+            "deed": "cuu_nguoi"
+          }
+        },
+        {
+          "l": "Tìm vị thuốc phàm thay thế",
+          "i": "🌿",
+          "chk": [
+            "nang.duoc",
+            12
+          ],
+          "ok": {
+            "t": "Ba vị thuốc phàm phối với nhau, đủ đẩy lùi bệnh. Ngươi chép bài ấy vào sách.",
+            "e": {
+              "nxp": [
+                "y",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Thuốc không đủ sức. Đứa bé yếu dần.",
+            "e": {
+              "tamma": 8
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_linh_duoc",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_nguoi_than",
+      "name": "Người thân bệnh nặng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lá thư từ quê: người nhà ngươi bệnh nặng, các thầy trong vùng đều lắc đầu.",
+      "choices": [
+        {
+          "l": "Về quê chữa",
+          "i": "🏠",
+          "chk": [
+            "ngo",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi thức trắng bảy đêm bên giường bệnh. Người nhà qua khỏi.",
+            "e": {
+              "h": 168,
+              "tamma": -10,
+              "nxp": [
+                "y",
+                15
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi về kịp để nắm tay lần cuối.",
+            "e": {
+              "h": 168,
+              "tamma": 15
+            }
+          }
+        },
+        {
+          "l": "Gửi thuốc về",
+          "i": "📦",
+          "t": "Ngươi gói thuốc nhờ người mang về. Đêm nào cũng ngồi nhìn về phía quê.",
+          "e": {
+            "bac": -100,
+            "tamma": 5
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_nguoi_than",
+        "commit": "d5.3"
+      }
+    },
+    {
+      "id": "ng_y_y_thu",
+      "name": "Truyền y thư",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:y",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh",
+          "cho"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Học trò xin ngươi chép lại những gì đã học cả đời.",
+      "choices": [
+        {
+          "l": "Chép kinh nghiệm chữa bệnh thành y thư",
+          "i": "📖",
+          "t": "Một tháng ngồi viết. Ngươi nhận ra mình đã biết nhiều hơn mình tưởng.",
+          "e": {
+            "h": 720,
+            "nxp": [
+              "y",
+              30
+            ]
+          }
+        },
+        {
+          "l": "Dạy miệng cho học trò",
+          "i": "🗣️",
+          "t": "Mỗi tối một bài. Học trò ghi chép, ngươi thì ngẫm lại.",
+          "e": {
+            "nxp": [
+              "y",
+              10
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/y.json",
+        "ref": "ng_y_y_thu",
+        "commit": "d5.3"
+      }
+    }
+  ]
+}

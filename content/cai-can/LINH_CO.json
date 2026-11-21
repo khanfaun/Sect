@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "LINH_CO",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "com_nguoi_mang",
+      "ten": "Chén cơm của người mang cổ",
+      "t": "Người ở {LOC09} cho ngươi hỏi chuyện con cổ trong kinh mạch. Họ đưa một chén cơm đã nguội, nói có những ngày chỉ lo cho con cổ mà quên ăn. Người bán ngoài chợ chỉ kể khúc đầu về cái lợi.",
+      "c": [
+        {
+          "id": "hoi",
+          "l": "Hỏi việc nuôi cổ mỗi ngày",
+          "t": "Họ kể từ ngày nuôi tới những hôm muốn bỏ. Ngươi ghi rõ điều còn phải hỏi người có nghề.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "moi",
+          "l": "Mời họ ăn rồi nghe nốt",
+          "t": "Ngươi nhường chén còn ấm của mình. Họ ăn chậm và kể tiếp khi ngoài cửa đã vắng."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "ong_tre",
+      "ten": "Ống tre chưa rõ nguồn",
+      "t": "Người rao trứng cổ ở {LOC09} bày nhiều ống tre đã bịt. Học việc bên quầy bảo có ống để từ mùa trước mà chưa ai đối dấu. Nó muốn hỏi chủ nhưng sợ bị đuổi khỏi chỗ làm.",
+      "c": [
+        {
+          "id": "hoi",
+          "l": "Xin chủ nói rõ gốc từng ống",
+          "t": "Ngươi hỏi ngay trước người mua khác. Chủ quầy chỉ được nguồn vài ống, số còn lại phải cất đi.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "bao",
+          "l": "Dặn học việc giữ lời mình đã thấy",
+          "t": "Ngươi khuyên nó chỉ nói điều tận mắt thấy nếu bị hỏi. Nó nhớ ngày đem ống cũ ra sạp."
+        }
+      ]
+    }
+  ]
+}

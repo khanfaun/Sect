@@ -18,10 +18,10 @@ Diêm dân {$a.ten} nếm muối mà chỉ thấy vị sắt. Chủ ruộng {$b.
 
 - **1. Giữ mẻ muối lại để xét nước**
   Ngươi yêu cầu giữ mẻ muối, ở lại cùng diêm dân xem nguồn nước. Chủ ruộng giục giao hàng, ngươi không ký xác nhận. Người mua đành chờ kết quả thay vì mang muối lạ về bán.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Cho bán và lấy tiền hoa hồng**
   Ngươi có bạc. {$a.ten} dùng nước rửa tay ba lần, chấm xám vẫn còn dưới móng.
-  - `e`: `{"st":22,"karma":-3,"tamma":3}`
+  - `e`: `{"st":22,"deed":"lua_loi","tamma":3}`
 - **3. Bỏ đi**
   Thúng muối được nâng lên, một nhúm xám rơi ra sau chót.
 
@@ -54,10 +54,10 @@ Diêm dân {$a.ten} tìm thấy nước rửa quặng chảy vào ruộng qua ch
 - **1. Góp tiền dẫn dòng rửa quặng sang bể kín**
   Ngươi góp tiền xây bể kín nhận nước rửa quặng, tách hẳn khỏi dòng vào ruộng muối. Thợ thử nước xong mới tháo ván chặn. Diêm dân nhờ thầy thuốc kiểm thêm mẻ muối sau, chưa dám đem bán ngay.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Bán tung tích cho người tranh ruộng với chủ**
   Ngươi có bạc và ruộng bị đóng. Dân tới xin việc đứng bên chum đã cạn.
-  - `e`: `{"st":22,"karma":-3}`
+  - `e`: `{"st":22,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   {$a.ten} rút nắp. Nước bên trong trong đến thấy đáy, cặn xám bám cả thành.
 
@@ -92,11 +92,11 @@ Diêm dân {$a.ten} đưa đơn thuốc có chữ nhòe. Người mua muối x�
 - **1. Dùng tiền hoa hồng bù phí thuốc**
   Ngươi đem tiền hoa hồng trả phí thuốc, để thầy thuốc ghi rõ nguồn muối vào đơn. Người bệnh nhẹ dần, nhưng vẫn còn người chưa trở lại làm được. Diêm dân nhờ ngươi cùng họ đòi xét nguồn nước.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua hết đơn có nhắc mẻ muối**
   Chủ ruộng {$b.ten} trả ngươi khoản lớn hơn. Người xếp cuối cầm bát đi hỏi tên thuốc.
   - `cost`: `{"st":16}`
-  - `e`: `{"st":40,"karma":-5,"tamma":4}`
+  - `e`: `{"st":40,"hd":{"t":3},"ng":{"b":8,"tn":"tiep_tay"},"tamma":4}`
   - `accounting`: `{"mode":"buy-and-sell","capital":16,"profit":24}`
 - **3. Bỏ đi**
   {$a.ten} liếm mép bát rồi đậy nắp. Nước thuốc vẫn còn nguyên.
@@ -132,10 +132,10 @@ Nếu nước từng được dẫn đi hoặc thuốc có ghi nguồn, dân đ�
 - **1. Chia dòng sạch cho từng ô dân góp công**
   Ngươi trả phí dựng bờ, chia nước sạch theo phần ruộng và công dân đã góp. Mẻ đầu ít vì phải rửa lại nền, nhưng không còn vị sắt. Mọi người thống nhất chưa đem bán cho tới khi thử thêm một mẻ.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Dành nước sạch cho một ô bán đắt**
   Ngươi có lời và đủ tiền mua thuốc cho người làm ô ấy. Các ô bên cạnh chỉ phơi được bùn.
-  - `e`: `{"st":22,"karma":-3}`
+  - `e`: `{"st":22,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Nước lên trong mương, chảy tới chỗ tấm ván chắn rồi quay ngược.
 
@@ -176,11 +176,11 @@ Nếu nước đã chia, dân mang nắm đầu mùa tới bỏ chung vào rổ.
 
 - **1. Để dân giữ quyền coi mương**
   Ngươi nhường phần lợi lâu dài. {$a.ten} dùng bát thuốc múc một bát cho người cuối hàng.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Giữ quyền bán và trả đủ tiền chữa bệnh**
   Người đã bệnh nhận được bạc, ô sạch vẫn thuộc ngươi. Dưới đáy rổ xuất hiện một vệt trắng rất mỏng.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Ngươi chào người coi mương rồi đi. Trên sân, dân đang tranh luận giá muối vụ mới, lần này không phải xếp hàng đợi phát thuốc.
 

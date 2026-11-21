@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "CC04",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "so_lich",
+      "ten": "Lịch sen và lịch thuế",
+      "t": "Ở {LOC09}, người coi sổ mở trang thuế nước có ghi một mùa sen nở. Một bà già nói năm ấy nhà bà đánh cá muộn. Hai cách nhớ không cùng ngày, nhưng dấu nước trên bậc nhà vẫn còn.",
+      "c": [
+        {
+          "id": "doi",
+          "l": "Cùng bà so lại vạch nước",
+          "t": "Ngươi hỏi lúc nào thuyền phải cột cao hơn và ghi cạnh ngày trong sổ, để còn tra tiếp.",
+          "e": {
+            "nang": {
+              "giac": 1
+            }
+          }
+        },
+        {
+          "id": "nghe",
+          "l": "Nghe người coi sổ đọc cả trang",
+          "t": "Ngươi nghe luôn phần thu sau mùa sen. Một dòng ghi rõ sổ được sao muộn hơn buổi đo nước."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "ho_can",
+      "ten": "Những hộ cần nước dưới đập",
+      "t": "Người coi hồ ở {LOC09} chỉ bờ cạn vì dòng bị chặn. Một hộ dưới đập muốn cứu hồ, nhưng lo nhà mình chịu hết nước tràn lúc đổi dòng. Họ hỏi có ai chịu ghi cả phần lo của họ trước buổi bàn không.",
+      "c": [
+        {
+          "id": "ghi",
+          "l": "Ghi ý của hộ dưới đập",
+          "t": "Ngươi để hộ tự đọc lời mình trước người coi hồ. Họ xin có mặt khi hai bên nói chuyện.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "bao",
+          "l": "Giúp báo tin cho nhà vắng",
+          "t": "Ngươi đem lời hẹn xuống bờ dưới, tránh để họ chỉ nghe tin sau khi mọi việc đã bàn xong."
+        }
+      ]
+    },
+    {
+      "buoc": 2,
+      "id": "coi_sen",
+      "ten": "Lượt canh sen lúc tối",
+      "t": "Một người coi sen ở {LOC09} phải về trông con ốm. Họ nhờ ngươi ngồi lại một lượt, chỉ xem mực nước và đừng chạm vào những đài đang non. Trong chòi có một ngọn đèn sắp cạn dầu.",
+      "c": [
+        {
+          "id": "truc",
+          "l": "Trông chòi thay họ một lượt",
+          "t": "Ngươi ngồi đến lúc họ trở về, ghi mực nước lên bảng. Đài sen vẫn nguyên dưới sương.",
+          "e": {
+            "h": 6,
+            "nang": {
+              "nhan": 1
+            }
+          }
+        },
+        {
+          "id": "goi",
+          "l": "Tìm người đổi phiên đã quen hồ",
+          "t": "Ngươi gọi một người biết lối bờ. Họ mang theo dầu và tự nhận lượt trước khi trời tối."
+        }
+      ]
+    }
+  ]
+}

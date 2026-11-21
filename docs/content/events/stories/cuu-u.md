@@ -19,7 +19,7 @@ Người châm đèn {$a.ten} thử ba lần, bấc vẫn không bén. Lão soi 
 - **1. Đổi dầu rồi đốt lại từ đèn của ngươi**
   Ngươi thay dầu rồi truyền lửa sang, giữ phù quanh bóng cho tới khi nó khớp lại với người. Lão cầm đèn đi thử vài bước, không còn ai thổi nữa. Ngươi hao pháp lực, phải ngồi lại dưỡng khí trước khi đi.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"tamma":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tamma":-3}`
 - **2. Thu giọt dầu vào phù**
   Ngươi luyện được một lá phù dập lửa. Mỗi lần châm đèn, ngươi phải đợi một hơi thở sau gáy mới thấy lửa bắt.
   - `e`: `{"pill":1,"tamma":4}`
@@ -42,7 +42,7 @@ Thợ chắp xương {$a.ten} gắn nhầm một đốt hàm vào vai thi thể.
 
 - **1. Rút đốt hàm và trả về phần cốt**
   Ngươi dùng phù ở bàn khâu giữ thi thể nằm yên, giúp lão rút phần hàm trả về đúng bộ cốt. Tiếng gọi tắt. Lão xin chôn riêng bộ cốt, rồi tự thu dọn bàn, không nhận thêm việc trong hôm ấy.
-  - `e`: `{"karma":4,"tamma":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tamma":-3}`
 - **2. Mua thi thể để hỏi chuyện người đã khuất**
   Cái miệng nói đúng về một lối cất đồ. Đêm sau nó dùng giọng ngươi gọi từ phía vai.
   - `cost`: `{"st":19}`
@@ -67,10 +67,10 @@ Người đi đường góp tro nóng vào một lò chung. Người giữ lán 
 - **1. Góp phần linh hỏa dưỡng thân**
   Ngươi góp linh hỏa giữ lò ấm thêm một canh. Người trong lán dời ra cho khách mới vào, gọi ngươi ngồi ăn chút gì nóng. Đứa bé tỉnh giấc đòi nghe tiếp chuyện lúc nãy, cả lán lại có tiếng nói cười.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","giờ ấm của chợ tro"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","giờ ấm của chợ tro"]}`
 - **2. Đổi tro tốt lấy một chỗ nằm gần lò**
   Ngươi ngủ được một canh. Tới lúc đi, {$a.ten} đưa một tấm đệm cho đứa bé nằm vào chỗ còn ấm.
-  - `e`: `{"karma":-2}`
+  - `e`: `{"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Ngươi rời lán sau khi hơ tay. Người giữ lò nhắc đoạn đường trước mặt có gió lùa, dặn ngươi buộc kín cổ áo.
 
@@ -90,11 +90,11 @@ Ma tu {$a.ten} cho người bệnh vay thọ nguyên, thu lãi bằng số mùa 
 
 - **1. Trả một phần thọ nguyên để hủy lãi**
   Ngươi chuyển một phần thọ nguyên để xóa số lãi hai mẹ con còn thiếu, bắt chủ nợ trả bản khế đã sửa. Người mẹ đọc lại ngày hết nợ hai lần rồi mới dám nhận. Ngươi thấy mình già thêm, cần ngồi xuống một lát.
-  - `e`: `{"karma":4,"lifeCut":3,"an":["a","mượn tuổi qua mùa rét"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"lifeCut":3,"an":["a","mượn tuổi qua mùa rét"]}`
 - **2. Mua món nợ để thu vào mùa sau**
   Ngươi có quyền lấy thọ nguyên kèm lời cam kết. Đứa trẻ tập viết ngày trả bằng nét rất chậm.
   - `cost`: `{"st":19}`
-  - `e`: `{"st":40,"karma":-5,"tamma":4}`
+  - `e`: `{"st":40,"deed":"ep_ta_dien","tamma":4}`
 - **3. Bỏ đi**
   {$b.ten} nhấc tay lên, để lại một dấu xám trên vệt tuổi của con.
 
@@ -114,10 +114,10 @@ Bà nấu canh {$a.ten} bỏ một bát canh bên mép hốc. Oán hồn thườ
 
 - **1. Đọc vệt tay và đưa nó tìm hài cốt**
   Ngươi lần theo những dấu tay oán hồn vẽ, mất một đêm mới tìm được nơi chôn cốt. Chôn lại xong, nó trở về bếp cúi đầu chào bà rồi tan đi. Bà hỏi ngươi còn đói không, trong nồi vẫn đủ một bát.
-  - `e`: `{"karma":4,"an":["a","bát canh dành cho người câm"],"h":24,"tamma":-2}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","bát canh dành cho người câm"],"h":24,"tamma":-2}`
 - **2. Hỏi đường tắt đổi lấy bát canh của mình**
   Oán hồn chỉ đúng đường. Nó chấm lên hai bát, vệt thứ hai nhỏ hơn.
-  - `e`: `{"karma":-2}`
+  - `e`: `{"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Bà đặt thêm chén nước bên cạnh để nó dễ vẽ. Ngươi đi khỏi, để hai người tiếp tục câu chuyện không thành tiếng.
 
@@ -137,10 +137,10 @@ Thi công {$a.ten} nhất quyết đòi trả ủng, bảo người đóng đã 
 
 - **1. Đổi một chiếc ủng của ngươi cho hắn thử**
   Ngươi cho hắn thử một chiếc ủng rộng hơn. Hắn đi được vài bước, quay lại nhận mình trách nhầm thợ. Người đóng ủng hẹn sửa đúng cỡ, nhưng yêu cầu hắn đừng tự đổi xương trước ngày lấy.
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **2. Đổi hai chân cho vừa ủng**
   Hắn đứng thẳng một lát rồi cúi xin đổi lại vì chân mới quen đi trước. {$b.ten} ghi cả hai cỡ lên một miếng da.
-  - `e`: `{"karma":1,"tamma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"tamma":2}`
 - **3. Bỏ đi**
   Thi công ngồi xuống chờ đo lại, còn người đóng ủng đem bảng giá bổ sung một dòng: xin kiểm đủ chân trước khi đặt.
 
@@ -161,11 +161,11 @@ Cô gái đưa tang {$a.ten} giữ nút dây chứa lời cuối của chị. M�
 - **1. Dùng thần niệm giúp nàng nghe rõ lời cuối**
   Ngươi giữ tiếng trong thần niệm, đọc lại cho nàng nghe trọn lời dặn về chỗ cất chum trong nhà. Nàng nghe thêm lần nữa rồi tự tháo nút. Khi nàng chào, ngươi biết nàng đã sẵn sàng trở về.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","nút thắt giữ câu nói cuối"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","nút thắt giữ câu nói cuối"]}`
 - **2. Mua nút để dùng vào thuật truyền âm**
   Nàng có tiền lo an táng. Khi ngươi mở nút, giọng bên trong hỏi ai đã nhấc chum đi.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":1}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Nàng tháo sợi dài khỏi cổ tay, giữ nguyên đúng một nút.
 
@@ -186,12 +186,12 @@ Giám thi {$a.ten} bảo đệ tử {$b.ten} đã chết, cần nhốt trong hò
 - **1. Phá then và giao đấu với {$a.ten}**
   - `fight`: `{"k":"luyenthi","n":"{$a.ten}"}`
   - **Thắng trận**: Ngươi đưa {$b.ten} ra và lấy lại phù giữ hồn.
-    `{"e":{"karma":4}}`
+    `{"e":{"hd":{"p":3},"ng":{"g":3}}}`
   - **Thua trận**: Thua, ngươi bị đánh bật khỏi sân, còn người trong hòm tự nhét bùa ra khe.
 - **2. Đổi pháp khí lấy quyền mở hòm**
   {$a.ten} nhận giá, {$b.ten} bước ra mà vẫn ôm nắp hòm như ôm một tấm chăn.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **3. Bỏ đi**
   Ngươi nghe người trong hòm hít vào ngay lúc then thứ hai sập xuống.
 
@@ -214,7 +214,7 @@ Nước rỉ qua đá, gặp máu là vòng sang bên. Tu sĩ {$a.ten} rửa v�
   - `e`: `{"tv":5}`
 - **2. Giữ mạch nước để luyện công pháp khắc huyết**
   Ngươi có một bình nước lạ. Khi {$a.ten} đưa tay ra, mạch nước còn lại đổi sang bên kia vách.
-  - `e`: `{"tv":4,"karma":-3,"tamma":3}`
+  - `e`: `{"tv":4,"hd":{"t":3},"ng":{"b":1},"tamma":3}`
 - **3. Bỏ đi**
   {$a.ten} đưa bàn tay kia ra, chờ giọt nước chịu rơi.
 
@@ -234,10 +234,10 @@ Thiếu chủ {$a.ten} đem sáu bài vị tới nhận mình là cháu thất l
 
 - **1. Xin người quét nhà tự dâng hương**
   Ngươi mời người quét nhà dâng hương. Sáu bài vị cùng quay về phía y, thiếu chủ cuống quýt thu gia phả. Ma tu bảo cả hai ở lại đối chứng, riêng ngươi được mời một chén trà vì đã ngăn việc nhận nhầm.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Đổi thứ tự bài vị để nhận phần gia sản**
   Hắn chia cho ngươi một món pháp khí. Tới giỗ, trong món ấy có sáu tiếng đồng thanh nhắc hắn quét sân.
-  - `e`: `{"karma":-4,"tamma":2,"namedRelic":{"k":"phu","name":"Phù Sáu Bài Vị","lore":"Hắn chia cho ngươi một món pháp khí. Tới giỗ, trong món ấy có sáu tiếng đồng thanh nhắc hắn quét sân."}}`
+  - `e`: `{"deed":"lua_loi","tamma":2,"namedRelic":{"k":"phu","name":"Phù Sáu Bài Vị","lore":"Hắn chia cho ngươi một món pháp khí. Tới giỗ, trong món ấy có sáu tiếng đồng thanh nhắc hắn quét sân."}}`
 - **3. Bỏ đi**
   Người quét nhà lấy chổi khều tàn hương. Cả sáu bài vị lùi lại cho chổi qua.
 
@@ -257,10 +257,10 @@ Nén hương cháy từ phía chân cắm, còn oán hồn {$a.ten} quỳ phía 
 
 - **1. Bẻ hương và đưa cả hai cùng ra**
   Ngươi bẻ hương, giữ ký ức chưa tràn về hết để cả hai có một canh nói chuyện. Người đứng sau phải tự nhận việc đã làm, không còn núp sau lưng ngươi. Oán hồn nghe xong mới quyết có theo hắn ra ngoài hay không.
-  - `e`: `{"karma":4,"tamma":-3}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"tamma":-3}`
 - **2. Để hương cháy hết rồi giữ người đứng sau**
   Oán hồn nhớ được tên kẻ đã hại mình. Trong lúc giằng co, móng tay nó cào thành một chữ thiếu nét trên áo ngươi.
-  - `e`: `{"karma":2,"hp":"-10%","tamma":3}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"hp":"-10%","tamma":3}`
 - **3. Bỏ đi**
   Nén hương ngã đúng lúc ngươi rời hành lang, đầu lửa vẫn hướng lên.
 
@@ -281,10 +281,10 @@ Nữ ma tu {$a.ten} chỉ giữ được thân thể khi có người áp lưng 
 - **1. Đốt đá ấm cho họ ngồi đối diện**
   Ngươi dùng linh lực làm ấm đá, thay cho phần khí người kia phải truyền liên tục. Hai người xoay ghế nhìn nhau. Nàng im lặng một lúc rồi bật cười: “Hóa ra ngươi nói chuyện cứ hay cau mày.”
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4,"an":["a","hai chiếc ghế quay lưng"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","hai chiếc ghế quay lưng"]}`
 - **2. Đổi đá ấm lấy một đoạn công pháp**
   Họ có một đêm nhìn mặt nhau, ngươi có khẩu quyết. Nàng đặt chiếc ghế cũ sát vách để lần sau còn dùng.
-  - `e`: `{"skill":1,"karma":-1}`
+  - `e`: `{"skill":1,"hd":{"t":1}}`
 - **3. Bỏ đi**
   Ngươi rời nhà sưởi giữa lúc họ bàn xem mai ai đi mua củi. Người kia nhắc nàng nói chậm, lưng y đã tê đến không phân biệt được gật hay lắc.
 
@@ -304,10 +304,10 @@ Người giải khế {$a.ten} đưa lời thề vào cối để xay bỏ. Phu 
 
 - **1. Giữ tay quay để hắn nghe hết lời thề**
   Ngươi giữ tay quay, chịu cơn đau của khế để người phu xe nghe hết lời vợ. Nàng chỉ dặn hắn đừng vì lời hẹn cũ mà sống một mình mãi. Hắn xin người giải khế xay tiếp, tự tay đỡ lấy phần giấy đã hết chữ.
-  - `e`: `{"karma":4,"an":["a","cối nghiền chữ thề"],"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","cối nghiền chữ thề"],"hp":"-10%"}`
 - **2. Thu mực để viết lời thề mới**
   Lời ngươi viết có sức ràng buộc. Mỗi khi dùng mực, trong chữ ký lại hiện một nét không thuộc về ngươi.
-  - `e`: `{"karma":-3,"tamma":2,"namedMat":"story_mat_coi_nghien_chu_the"}`
+  - `e`: `{"hd":{"t":3},"ng":{"b":1},"tamma":2,"namedMat":"story_mat_coi_nghien_chu_the"}`
 - **3. Bỏ đi**
   {$a.ten} giảm tay. Cối mất thêm một vòng mới thôi nói.
 
@@ -328,10 +328,10 @@ Bụi tro bò sát nền, hễ gặp người thở là dựng đứng. Người
 - **1. Dùng linh lực mở một đường nước chảy**
   Ngươi dẫn nước từ khe đá qua lối đi. Tro gặp nước hạ xuống, cả đoàn bám theo rãnh mà qua, không ai được chạy trước. Ra khỏi vùng bụi, ngươi phải nghỉ dưỡng khí; người dẫn đường nhận chờ cùng.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Dồn bụi về phía kho trống để thu linh tro**
   Ngươi lấy được nguyên liệu luyện trận. Lúc đóng kho, trong bụi hiện dấu một bàn chân đã đi xa.
-  - `e`: `{"karma":-1,"namedMat":"story_mat_con_bui_bo_duoi_chan"}`
+  - `e`: `{"hd":{"t":1},"namedMat":"story_mat_con_bui_bo_duoi_chan"}`
 - **3. Bỏ đi**
   Ngươi bước lên đá cao, phía dưới chiếc khăn ướt đổi màu.
 
@@ -352,11 +352,11 @@ Một thi khôi cào cửa từ ngoài, đòi lại xương tay bị lấy làm 
 - **1. Đánh lui thi khôi để người trong nhà thoát ra**
   - `fight`: `{"k":"cuongthi","n":"Thi khôi chặn cửa"}`
   - **Thắng trận**: Ngươi đẩy thi khôi khỏi cửa, buộc người luyện thi mở khóa mang xương ra trả.
-    `{"e":{"karma":4}}`
+    `{"e":{"deed":"cuu_nguoi"}}`
   - **Thua trận**: Thua, ngươi bị cào rách tay, phải lùi khỏi sân để tránh đòn tiếp.
 - **2. Đập khóa và trả xương tay**
   Ngươi đập khóa bằng búa trước sân, buộc người luyện thi trả xương tay. Thi khôi nhận lại xương rồi rời đi. Khi ngươi đặt búa xuống, tiếng cào vẫn vang từ cán búa thêm một lúc.
-  - `e`: `{"karma":2,"tamma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1},"tamma":2}`
 - **3. Bỏ đi**
   Từ sau cánh cửa, có người đẩy một chiếc chìa khác qua khe, rất chậm.
 
@@ -376,7 +376,7 @@ Một bản khế chỉ đọc được khi người ký nói dối. Nữ quản
 
 - **1. Đặt khế vào lửa trước khi câu nói dứt**
   Ngươi thả khế vào lửa trước khi lời nàng làm sáng hết mặt giấy. Để chặn khế phản lại người giữ, ngươi dùng thần niệm chịu một lần giằng xé. Nàng cảm tạ, không giải thích thêm chuyện người nhà; ngươi cũng không hỏi.
-  - `e`: `{"karma":4,"an":["a","bản khế không có mặt chữ"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","bản khế không có mặt chữ"]}`
 - **2. Nghe hết rồi mua bản khế**
   Ngươi có vật xét lời dối. Mỗi khi nàng đi ngang, giấy nóng lên dù đang gấp.
   - `cost`: `{"st":19}`
@@ -400,10 +400,10 @@ Thợ may {$a.ten} buộc chỉ vào áo để oán hồn tìm về được đ�
 
 - **1. Cho mượn hướng về {$que}**
   Ngươi cho hồn mượn ký ức đường về quê mình. Nó theo chỉ ra khỏi ma vực, còn ngươi phải ngồi nhớ lại từng ngã rẽ đã cho đi. Người thợ may ở lại cùng ngươi tới khi ngươi tự nhắc được tên quê.
-  - `e`: `{"karma":4,"an":["a","đầu kim tìm đường về"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","đầu kim tìm đường về"]}`
 - **2. Bán cho nó một đường về bất kỳ**
   Ngươi có chút âm thạch. Ở đầu chỉ còn lại, {$a.ten} buộc một nút nhỏ để hồn có thể quay đầu.
-  - `e`: `{"karma":-3,"tamma":4,"st":20}`
+  - `e`: `{"deed":"lua_loi","tamma":4,"st":20}`
 - **3. Bỏ đi**
   Lão đặt kim xuống ngay ngắn, đầu kim hướng vào áo trống.
 
@@ -423,10 +423,10 @@ Oán hồn {$a.ten} trả tiền học hú đã ba buổi, cứ mở miệng l�
 
 - **1. Chỉ nó thở chậm qua một lỗ sáo**
   Ngươi chỉ nó lấy hơi chậm theo tiếng sáo của thầy. Nó hú được một tiếng dài, tự nghe cũng giật mình. Thầy vội ghi lại cách dạy mới, nói biết đâu ngày mai nhận thêm học trò.
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **2. Thu tiếng nấc vào một lá phù xua ngủ**
   Phù dùng được, {$a.ten} xin ngươi trả tiếng nấc vào những hôm học thanh dài.
-  - `e`: `{"karma":-1,"tamma":2,"pill":1}`
+  - `e`: `{"hd":{"t":1},"tamma":2,"pill":1}`
 - **3. Bỏ đi**
   Ngươi bảo nó cứ thử hát xem sao. Nó nhìn thầy xin phép; thầy tính một lúc rồi nói học hát vẫn cùng giá.
 
@@ -446,10 +446,10 @@ Dấu đầu gối trên sân tự lõm mỗi khi giám lễ {$a.ten} gọi tên
 
 - **1. Buộc {$a.ten} gọi tên chính hắn**
   Ngươi buộc giám lễ gọi chính tên hắn. Đất kéo hắn quỳ xuống, cũng kéo ngươi ngã vì đứng trong trận. Khi hai người đứng dậy, người chờ chịu lễ đồng loạt hỏi ai đã đặt luật này.
-  - `e`: `{"karma":4,"hp":"-10%"}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"hp":"-10%"}`
 - **2. Lấy đất lõm luyện phù ép người**
   Phù dùng được một lần. Về sau mỗi khi niệm chú, đầu gối ngươi nhói trước khi đất chuyển.
-  - `e`: `{"pill":1,"karma":-2,"tamma":3}`
+  - `e`: `{"pill":1,"hd":{"t":1},"tamma":3}`
 - **3. Bỏ đi**
   {$a.ten} gọi tên tiếp theo, chỗ đất phía ngươi vẫn chưa đầy lên.
 
@@ -470,7 +470,7 @@ Người đun bếp {$a.ten} hứng tro từ bếp ngục về ủ khoai. Hôm n
 - **1. Mua củi cho xóm khỏi dùng tro ngục**
   Ngươi mua củi để cả xóm thôi phải xin tro nóng từ ngục. Người đun bếp đốt mẻ đầu, giữ lại miếng sắt hỏi tin người làm ra chiếc chén. Lão mời ngươi ăn khoai, lần này không cần phủi tro trước.
   - `cost`: `{"st":19}`
-  - `e`: `{"karma":4,"an":["a","bếp tro phía sau nhà giam"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","bếp tro phía sau nhà giam"]}`
 - **2. Đổi tro lấy ít khí âm**
   Ngươi luyện được một mẻ mực. Lão nướng khoai bằng củi sống, khói bám vào từng đường rãnh trên vỏ.
   - `e`: `{"pill":1,"tamma":2}`

@@ -1,13 +1,19 @@
 // Các hộp thoại theo loại (UI.modal.k). Loại nào chưa có ở đây thì dùng bản cũ.
-import { TuDia, GhiChu, KetQua, DienBienTran, TranDangDo, DevTest, NhanSu } from './ThongTin';
+import { TuDia, GhiChu, KetQua, DienBienTran, TranDangDo, NhanSu } from './ThongTin';
+import { DevTest } from './DevTest';
 import { DienCongHien, LaiBuon, TramDich } from './MuaBan';
 import { ThamDo } from './ThamDo';
 import { HopChon } from './HopChon';
 import { BeQuan } from './BeQuan';
 import { LinhNgoGap, LinhNgoThem } from './LinhNgoGap';
 import { KhiVan, ChonTienThien } from './KhiVan';
+import { TracLinh } from './TracLinh';
 import { XemVatPham, XemCongPhap, CacPham, TieuHuyet } from './VatPham';
 import { XacNhanViec, XacNhanNoiChon, LamNhiemVu, HuyNhiemVu } from './XacNhan';
+import { ThuongCac } from './ThuongCac';
+import { MuuSinh } from './MuuSinh';
+import { HopThu } from './HopThu';
+import { BoQuaTanThu, NguyenVong } from '../chung/TanThu';
 
 export const HOP_THOAI = {
   danger: TuDia,
@@ -32,9 +38,15 @@ export const HOP_THOAI = {
   bbLearn: LinhNgoGap,
   bbLearn2: LinhNgoThem,
   asc: KhiVan,
+  tlfx: TracLinh,
   kvPick: ChonTienThien,
   item: XemVatPham,
   art: XemCongPhap,
   pham: CacPham,
   th: TieuHuyet,
+  thuongcac: ThuongCac,
+  muusinh: MuuSinh,
+  tutSkip: BoQuaTanThu,
+  wish: NguyenVong,
+  hopthu: HopThu,
 };

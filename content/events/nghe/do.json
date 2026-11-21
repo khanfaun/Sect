@@ -1,0 +1,776 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_do_khach_khong_tien",
+      "name": "Khách không tiền",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một bà mẹ bế con xin qua sông, không có tiền đò.",
+      "choices": [
+        {
+          "l": "Chở không lấy tiền",
+          "i": "🛶",
+          "t": "Bà mẹ cảm ơn rối rít.",
+          "e": {
+            "nxp": [
+              "do",
+              4
+            ],
+            "deed": "bo_thi"
+          }
+        },
+        {
+          "l": "Bắt chờ chuyến sau",
+          "i": "⏳",
+          "t": "Bà mẹ ngồi chờ dưới nắng.",
+          "e": {
+            "nxp": [
+              "do",
+              1
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_khach_khong_tien",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_nuoc_xoay",
+      "name": "Vùng nước xoáy",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Giữa dòng có vùng nước xoáy mới hình thành sau trận mưa.",
+      "choices": [
+        {
+          "l": "Lách qua",
+          "i": "🌀",
+          "chk": [
+            "nang.giac",
+            8
+          ],
+          "ok": {
+            "t": "Ngươi lách mũi đò qua sát mép xoáy.",
+            "e": {
+              "nxp": [
+                "do",
+                7
+              ]
+            }
+          },
+          "no": {
+            "t": "Đò chao mạnh, một khách rơi xuống nước. Ngươi vớt kịp.",
+            "e": {
+              "hp": "-10%",
+              "nxp": [
+                "do",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đi vòng",
+          "i": "↩️",
+          "t": "Mất thêm nửa canh giờ.",
+          "e": {
+            "nxp": [
+              "do",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_nuoc_xoay",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_thuyen_ro",
+      "name": "Thuyền rò",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nước rỉ qua đáy đò. Muốn trám chỗ rò cho chắc phải dùng dầu chai. Nếu chưa mua được dầu, ngươi chỉ còn bùn để bịt tạm.",
+      "choices": [
+        {
+          "l": "Mua dầu chai trét kỹ",
+          "i": "🪣",
+          "t": "Đò lại kín như mới.",
+          "e": {
+            "bac": -15,
+            "nxp": [
+              "do",
+              5
+            ]
+          }
+        },
+        {
+          "l": "Lấy bùn trét tạm",
+          "i": "🟫",
+          "t": "Tạm được vài hôm.",
+          "e": {
+            "nxp": [
+              "do",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_thuyen_ro",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_ca_lon",
+      "name": "Cá lớn mắc lưới",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Lưới thả ven đò mắc một con cá chép to bằng bắp chân.",
+      "choices": [
+        {
+          "l": "Bán ở chợ",
+          "i": "💰",
+          "t": "Được giá.",
+          "e": {
+            "bac": 30,
+            "nxp": [
+              "do",
+              2
+            ]
+          }
+        },
+        {
+          "l": "Thả về sông",
+          "i": "🐟",
+          "t": "Ông lái đò già bảo cá chép lớn là cá của thủy thần.",
+          "e": {
+            "nxp": [
+              "do",
+              3
+            ],
+            "deed": "phong_sinh"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_ca_lon",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_nguoi_tron",
+      "name": "Người bị truy bắt",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một người chạy tới bến, lính đuổi phía sau. Hắn xin qua sông.",
+      "choices": [
+        {
+          "l": "Chở hắn qua",
+          "i": "🛶",
+          "chk": [
+            "nang.canh",
+            11
+          ],
+          "ok": {
+            "t": "Đò ra giữa dòng thì lính tới bến. Hắn nhảy lên bờ bên kia, biến mất.",
+            "e": {
+              "nxp": [
+                "do",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Lính bắn tên theo, một mũi sượt vai ngươi.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Lính bắt hắn ngay tại bến.",
+          "e": {
+            "nxp": [
+              "do",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_nguoi_tron",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_lu_ve",
+      "name": "Lũ về",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "tran"
+        ],
+        "levels": null,
+        "time": {
+          "season": [
+            "ha",
+            "thu"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nước lũ lên nhanh. Cả xóm bên kia sông chưa kịp sang.",
+      "choices": [
+        {
+          "l": "Chèo nhiều chuyến",
+          "i": "🌊",
+          "chk": [
+            "nang.nhan",
+            12
+          ],
+          "ok": {
+            "t": "Ngươi chở hết người sang trước khi nước ngập xóm.",
+            "e": {
+              "nxp": [
+                "do",
+                16
+              ],
+              "deed": "cuu_nguoi_hy_sinh"
+            }
+          },
+          "no": {
+            "t": "Đò lật ở chuyến cuối, ngươi bơi vào bờ.",
+            "e": {
+              "hp": "-25%",
+              "nxp": [
+                "do",
+                8
+              ],
+              "deed": "cuu_nguoi"
+            }
+          }
+        },
+        {
+          "l": "Neo đò, lên chỗ cao",
+          "i": "⛰️",
+          "t": "Sáng ra, xóm bên kia chỉ còn mái nhà.",
+          "e": {
+            "tamma": 5
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_lu_ve",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_phep_ben",
+      "name": "Phép bến",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Bến của ngươi bị một tay thủy bá đòi nộp tiền qua đường.",
+      "choices": [
+        {
+          "l": "Nộp",
+          "i": "🪙",
+          "t": "Hắn để yên.",
+          "e": {
+            "bac": -40,
+            "nxp": [
+              "do",
+              3
+            ]
+          }
+        },
+        {
+          "l": "Gom các lái đò cùng chống",
+          "i": "✊",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Thủy bá thấy đông người, rút lui.",
+            "e": {
+              "nxp": [
+                "do",
+                12
+              ]
+            }
+          },
+          "no": {
+            "t": "Hắn cho người đập đò ngươi.",
+            "e": {
+              "bac": -100,
+              "hp": "-10%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_phep_ben",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_cho_hang_lau",
+      "name": "Hàng lậu",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một thương lái thuê ngươi chở mấy kiện hàng ban đêm, trả gấp ba.",
+      "choices": [
+        {
+          "l": "Nhận",
+          "i": "🌙",
+          "t": "Hàng tới nơi. Ngươi không hỏi trong kiện có gì.",
+          "e": {
+            "bac": 150,
+            "nxp": [
+              "do",
+              6
+            ]
+          }
+        },
+        {
+          "l": "Mở ra xem trước",
+          "i": "📦",
+          "chk": [
+            "nang.canh",
+            11
+          ],
+          "ok": {
+            "t": "Trong kiện là người bị trói. Ngươi cắt dây thả họ.",
+            "e": {
+              "nxp": [
+                "do",
+                10
+              ],
+              "deed": "cuu_nguoi"
+            }
+          },
+          "no": {
+            "t": "Thương lái rút dao.",
+            "e": {
+              "hp": "-20%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_cho_hang_lau",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_giu_ben",
+      "name": "Giữ bến qua lũ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song",
+          "tran"
+        ],
+        "levels": null,
+        "time": {
+          "season": [
+            "ha",
+            "thu"
+          ]
+        },
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Trận lũ trăm năm. Bến là đường sống duy nhất của ba làng.",
+      "choices": [
+        {
+          "l": "Đóng bè lớn, giữ bến suốt mùa lũ",
+          "i": "🛟",
+          "chk": [
+            "nang.nhan",
+            16
+          ],
+          "ok": {
+            "t": "Ba làng không mất một người.",
+            "e": {
+              "nxp": [
+                "do",
+                25
+              ],
+              "deed": "cuu_nguoi_hy_sinh"
+            }
+          },
+          "no": {
+            "t": "Bè vỡ, ngươi suýt chết.",
+            "e": {
+              "hp": "-30%",
+              "nxp": [
+                "do",
+                10
+              ]
+            }
+          }
+        },
+        {
+          "l": "Chở người nhà mình trước",
+          "i": "🏃",
+          "t": "Nhà ngươi an toàn.",
+          "e": {
+            "nxp": [
+              "do",
+              8
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_giu_ben",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_thuy_ba",
+      "name": "Thành thủy bá",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Các lái đò muốn ngươi đứng đầu bến, thu phí giữ trật tự.",
+      "choices": [
+        {
+          "l": "Nhận, thu phí nhẹ",
+          "i": "⚓",
+          "t": "Bến trật tự, ai cũng có phần.",
+          "e": {
+            "bac": 300,
+            "nxp": [
+              "do",
+              18
+            ]
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Bến lại loạn như cũ.",
+          "e": {
+            "nxp": [
+              "do",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_thuy_ba",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_ban_do_song",
+      "name": "Bản đồ dòng sông",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi muốn vẽ lại mọi khúc nông, xoáy, đá ngầm cho lái đò đời sau.",
+      "choices": [
+        {
+          "l": "Đi đo từng khúc",
+          "i": "🗺️",
+          "chk": [
+            "nang.giac",
+            14
+          ],
+          "ok": {
+            "t": "Bản đồ dòng sông treo ở mọi bến.",
+            "e": {
+              "nxp": [
+                "do",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Đo mãi vẫn còn sót.",
+            "e": {
+              "nxp": [
+                "do",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Kể miệng cho học trò",
+          "i": "🗣️",
+          "t": "Học trò nhớ được phần lớn.",
+          "e": {
+            "nxp": [
+              "do",
+              10
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_ban_do_song",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_do_tu_si_qua_song",
+      "name": "Tu sĩ qua sông",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:do",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một tu sĩ đứng trên bờ, không bay mà gọi đò. Hắn trả bằng một viên đá sáng.",
+      "choices": [
+        {
+          "l": "Chở, không hỏi",
+          "i": "🛶",
+          "t": "Giữa dòng, hắn kể cho ngươi nghe chuyện về dòng sông này nghìn năm trước.",
+          "e": {
+            "nxp": [
+              "do",
+              12
+            ],
+            "tamma": -2
+          }
+        },
+        {
+          "l": "Từ chối vì sợ",
+          "i": "😨",
+          "t": "Hắn mỉm cười, bước đi trên mặt nước.",
+          "e": {
+            "nxp": [
+              "do",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/do.json",
+        "ref": "ng_do_tu_si_qua_song",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

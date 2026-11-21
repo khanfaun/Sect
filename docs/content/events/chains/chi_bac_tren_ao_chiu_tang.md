@@ -18,10 +18,10 @@ Nữ đệ tử {$a.ten} may một sợi chỉ bạc của đệ tử {$b.ten} d
 
 - **1. Nhận cuộn chỉ là của ngươi**
   Hai phái bỏ qua. {$a.ten} luồn phần chỉ đã lộ vào một vết rách phía trong.
-  - `e`: `{"karma":4,"an":["a","mặt trong áo trắng"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","mặt trong áo trắng"]}`
 - **2. Để họ xem cổ áo**
   Ngươi được coi là giữ lễ. {$a.ten} tự tháo chỉ, còn {$b.ten} đứng nhìn đến hết nút cuối.
-  - `e`: `{"karma":-2}`
+  - `e`: `{"hd":{"t":1}}`
 - **3. Bỏ đi**
   Chiếc áo đi qua cửa. Một đoạn chỉ mắc vào then.
 
@@ -53,10 +53,10 @@ Nữ đệ tử {$a.ten} may một sợi chỉ bạc của đệ tử {$b.ten} d
 
 - **1. Cho họ dùng nhà mái kín qua một buổi**
   Ngươi cho họ mượn gian nhà một buổi, chịu lời trách vì đưa người ngoại phái vào. Lúc trả chìa, họ nói đã bàn xong chuyện tự xin ra ngoài làm việc chung; lần sau sẽ không phải lén gặp nữa.
-  - `e`: `{"karma":4,"an":["a","hẹn ở vườn mai"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","hẹn ở vườn mai"]}`
 - **2. Nhờ họ trao đổi tin hai phái để trả ơn**
   Ngươi có tin đổi người giữ đèo. Họ gói tin trong hai mảnh vải, mỗi mảnh lấy từ một đầu áo.
-  - `e`: `{"karma":-1,"st":10}`
+  - `e`: `{"hd":{"t":1},"st":10}`
 - **3. Bỏ đi**
   Mưa bụi bắt đầu, {$b.ten} lấy vai che chỗ kim đang xỏ.
 
@@ -90,10 +90,10 @@ Nữ đệ tử {$a.ten} may một sợi chỉ bạc của đệ tử {$b.ten} d
 
 - **1. Đứng tên cho hai người nhận chung một việc ngoài núi**
   Ngươi đứng tên xin cho họ cùng nhận một việc ngoài núi, nhận trách nhiệm nếu về trễ. Họ hẹn nhau ngay trước cửa phát áo mưa, lần này không giấu người đang nhìn.
-  - `e`: `{"karma":4,"an":["a","chiếc kim trả lại"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","chiếc kim trả lại"]}`
 - **2. Đổi việc ấy lấy phần thưởng cho mình**
   Ngươi được trả công giới thiệu. Hai người đi hai lượt khác nhau, chiếc kim nằm nguyên trong khe cửa.
-  - `e`: `{"st":12,"karma":-2}`
+  - `e`: `{"st":12,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   {$b.ten} quay lại một lần. Bên kia cửa chỉ còn vết kim hằn trên bụi.
 
@@ -127,10 +127,10 @@ Hai phái đóng đèo giữa lúc dân chở vải lên. Nếu ngươi từng m
 
 - **1. Bảo lãnh cho cả hai cùng mở lối**
   Ngươi bảo lãnh cho họ mở đèo, chịu bị một phái thu lại quyền ra vào vì trái lệnh giữ đường. Dân chở vải qua được trước mưa. Hai đệ tử ở lại nhận lỗi cùng nhau, không để một người chịu thay.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Bán lệnh đi qua cho người chịu trả**
   Ngươi có lời, họ phải chia lượt canh. Một người ôm chồng vải của khách không đủ tiền cho tới khi trời tối.
-  - `e`: `{"st":18,"karma":-3}`
+  - `e`: `{"st":18,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Vải nằm giữa đèo gặp mưa. Hai người ở hai đầu đều lấy áo ra che.
 
@@ -172,7 +172,7 @@ Nếu lối từng mở cho mọi người, hai đệ tử đã rời phái và 
 - **1. Trả lại tiền lệnh hoặc góp vải mở nhà trú đèo**
   Người gánh vải có chỗ nghỉ, hai người đặt chung một hòm kim. Nắp hòm để mở, bên trong có sợi chỉ bạc đã xỉn.
   - `cost`: `{"st":13}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Đặt họ làm áo hộ thân cho ngươi**
   Ngươi có áo chịu gió kiếm, họ có tiền sống qua mùa. Phần chỉ bạc cuối dùng để viền một chiếc túi nhỏ bên trong.
   - `cost`: `{"st":13}`

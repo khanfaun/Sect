@@ -5,7 +5,19 @@ export function ManMoDau() {
   const { G, UI, ASSET } = PS;
   const M = G.meta, run = G.run, last = M.lives[0];
   let mid;
-  if (run) {
+  const LG = !run && PS.dmLinhGioi();
+  if (LG) {
+    // câu 86: hành trình ở Phàm giới đã khép
+    mid = <>
+      <p className="t-sub">{LG.khep}</p>
+      <div className="t-btn">
+        <p className="hint linh-gioi">{LG.linh}</p>
+        <button className="btn pri big" data-act="screen" data-arg="ket">{PS.contentText('dm.ketXem')}</button>
+        <button className="btn" data-act="screen" data-arg="meta">Lên Bến Vong Xuyên</button>
+        <p className="hint">{LG.ten} · {LG.n}</p>
+      </div>
+    </>;
+  } else if (run) {
     mid = <>
       <p className="t-sub">Một kiếp tu tiên. Vạn kiếp luân hồi.</p>
       <div className="t-btn">

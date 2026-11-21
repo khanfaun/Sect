@@ -18,10 +18,10 @@ Chủ bến {$a.ten} dời vạch triều để thu tiền neo thêm một canh.
 
 - **1. Ghi lại vạch cũ và đứng ra làm chứng**
   Ngươi chép vạch cũ lên ván đo của bến, ký tên làm chứng. Chủ bến giữ ngươi lại xét hỏi hết buổi. Người đo nước đem bản chép khác cho thuyền ngoài đảo, trước khi vạch bị cạo mất.
-  - `e`: `{"karma":4,"h":24}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":24}`
 - **2. Đổi im lặng lấy quyền neo rẻ**
   Ngươi bớt được tiền neo. {$b.ten} phải đục đi đường vạch, mùn gỗ lẫn vào lớp hà.
-  - `e`: `{"st":22,"karma":-3}`
+  - `e`: `{"st":22,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Một người từ xa đặt dây theo vạch mới rồi đứng đợi nước không lên.
 
@@ -54,10 +54,10 @@ Người đo nước {$b.ten} chép vạch triều lên nhiều mảnh giấy. G
 - **1. Góp người canh mực nước**
   Ngươi ở lại cùng người đo nước canh đủ một con triều, lỡ chuyến thuyền thuận. Số đo của nhiều người trùng nhau, đủ để đối lại lệ thu tiền. Họ rủ nhau đem giấy tới nhà chủ bến vào sáng mai.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4,"h":12}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":12}`
 - **2. Bán bản đo cho bến đối diện**
   Ngươi có bạc, bến kia dùng giấy để giành khách. Tờ có nét của {$b.ten} được gấp che tên.
-  - `e`: `{"st":22,"karma":-3}`
+  - `e`: `{"st":22,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Hắn đổi vỏ sò lớn hơn, đến lúc nước lên mới nhớ nhấc giấy.
 
@@ -92,11 +92,11 @@ Người đo nước {$b.ten} bị đuổi sau khi vạch cũ bị xóa. Lão đ
 - **1. Trả phần tiền đã được bớt cho người neo thuyền**
   Ngươi trả lại số tiền neo đã được bớt, giúp họ mua dây đủ dài. Người đo nước tự thử từng sợi trước con triều kế tiếp. Một người hỏi sao trước đây lão không nói, lão đáp rằng đã nói nhưng không ai chịu nghe.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Mua dây ngắn bán cho bến lớn**
   Ngươi có lời mỗi lượt đổi dây. Bến cá treo phần dây thừa lên cho mượn.
   - `cost`: `{"st":16}`
-  - `e`: `{"st":38,"karma":-3}`
+  - `e`: `{"st":38,"deed":"lua_loi"}`
   - `accounting`: `{"mode":"buy-and-sell","capital":16,"profit":22}`
 - **3. Bỏ đi**
   {$b.ten} bện hai đầu thừa với nhau, nút nối to bằng đốt ngón tay.
@@ -132,10 +132,10 @@ Chủ bến {$a.ten} nhổ cọc nước đem bán cho thuyền ngoại đảo. 
 - **1. Mua cọc cho người ở cả hai bến cùng đo**
   Ngươi mua lại cọc làm mốc chung, nhờ người đo nước kiểm tra từ đầu. Cả hai bến cử người ghi số đo mỗi ngày. Chủ bến không còn được tự dời vạch rồi tính thêm tiền.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Bán lại quyền dùng vạch**
   Ngươi lấy được tiền của hai bến. Một đứa bé đặt dấu riêng bằng than trên cọc, ngay chỗ ngập nước.
-  - `e`: `{"st":22,"karma":-3}`
+  - `e`: `{"st":22,"deed":"lua_loi"}`
 - **3. Bỏ đi**
   Cọc được nhấc lên. Một đoạn hà rơi đúng chỗ từng ghi giờ nước.
 
@@ -176,10 +176,10 @@ Nếu vạch thuộc cả hai bến, thuyền mới đến dùng chung một l�
 
 - **1. Chuyển vạch lên vách đá ai cũng nhìn được**
   Chủ bến {$a.ten} cắt phần lợi của ngươi hoặc đòi phí dựng mốc. Người đo nước {$b.ten} khắc đủ sâu để vôi phai vẫn thấy đường.
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Dùng tiền neo dựng một cầu riêng**
   Ngươi giữ mối thu phí và có chỗ trú cho thuyền khách. Người đo nước {$b.ten} để lại một thang mộc cho thuyền nhỏ tự ghé.
-  - `e`: `{"st":22,"karma":1}`
+  - `e`: `{"st":22,"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Ngươi lên thuyền đi tiếp. Những người ở lại bàn dựng thêm mốc trên đá, để lần sau dù cọc bị nhổ vẫn còn chỗ đối chứng.
 

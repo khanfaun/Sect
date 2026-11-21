@@ -38,7 +38,8 @@ export function ChoiceBtn({ n, act, arg, label, extra, dis, cls, t }) {
 export function ChoiceExtra({ c }) {
   const r = PS.G.run, out = [];
   if (c.cost) {
-    if (c.cost.st) { const v = Math.round(c.cost.st * PS.SC[r.region]); out.push(<span key="st" className={'cx' + (r.st < v ? ' no' : '')} {...tip('Tốn linh thạch')}><Stone v={v} /></span>); }
+    if (c.cost.st && PS.evCostBac(c.cost)) { const b = PS.evCostBac(c.cost); out.push(<span key="st" className={'cx' + (!PS.bacCan(b) ? ' no' : '')} {...tip('Tốn tiền phàm')}><span className="cost-b">🪙{PS.fmtBac(b)}</span></span>); }
+    else if (c.cost.st) { const v = Math.round(c.cost.st * PS.SC[r.region]); out.push(<span key="st" className={'cx' + (r.st < v ? ' no' : '')} {...tip('Tốn linh thạch')}><Stone v={v} /></span>); }
     if (c.cost.mp) out.push(<span key="mp" className="cx" {...tip('Tốn linh lực')}>linh lực {c.cost.mp}</span>);
     if (c.cost.hp) out.push(<span key="hp" className="cx" {...tip('Tốn khí huyết')}>khí huyết {c.cost.hp}</span>);
   }

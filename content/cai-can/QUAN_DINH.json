@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "QUAN_DINH",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "loi_tieu_phu",
+      "ten": "Lời chỉ ở ngã rẽ",
+      "t": "Gần {LOC04}, một người bán nước nhớ tiều phu từng kể chuyện lão tu sĩ trong hang. Người rao tin ngoài ngõ lại chỉ một lối khác và đòi tiền trước. Bà đưa ngươi ghế, hỏi muốn nghe cả câu chuyện hay chỉ hỏi đường.",
+      "c": [
+        {
+          "id": "nghe",
+          "l": "Nghe bà kể từ lúc gặp tiều phu",
+          "t": "Bà kể cả thời tiết và nơi ông nghỉ chân. Ngươi ghi lại ai đã nghe trực tiếp để còn hỏi.",
+          "e": {
+            "h": 2
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Xin tên vai người dẫn đường",
+          "t": "Bà chỉ người vẫn bán củi vào buổi sớm. Ngươi để dành tiền rồi đi tìm lời xác nhận."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "bat_nuoc",
+      "ten": "Bát nước người bệnh muốn tự nâng",
+      "t": "Trong những ngày chăm lão tu sĩ, ngươi thấy tay lão không còn giữ nổi bát nước. Lão vẫn muốn tự nhấp một ngụm trước khi nói chuyện di nguyện. Gần giường còn chiếc ghế đặt cho người tới thăm.",
+      "c": [
+        {
+          "id": "ke",
+          "l": "Kê bát để lão tự nhấp",
+          "t": "Ngươi đặt bát sát mép bàn, đợi lão ra hiệu rồi mới đỡ tay. Lão uống xong mới nói tiếp."
+        },
+        {
+          "id": "cho",
+          "l": "Ngồi chờ khi lão muốn nghỉ",
+          "t": "Ngươi dời ghế ra hiên rồi quay lại khi lão gọi. Khoảng nghỉ yên hơn mọi lời hứa.",
+          "e": {
+            "h": 3
+          }
+        }
+      ]
+    }
+  ]
+}

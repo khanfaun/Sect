@@ -1,0 +1,785 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_binh_quan_lenh",
+      "name": "Lệnh đánh đòn",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngũ trưởng ra lệnh đánh một tân binh vì tội ngủ gật.",
+      "choices": [
+        {
+          "l": "Thi hành",
+          "i": "🪵",
+          "t": "Tân binh không dám ngẩng lên nhìn ngươi suốt tháng.",
+          "e": {
+            "nxp": [
+              "binh",
+              4
+            ]
+          }
+        },
+        {
+          "l": "Xin tha cho nó",
+          "i": "🙏",
+          "chk": [
+            "nang.giao",
+            8
+          ],
+          "ok": {
+            "t": "Ngũ trưởng gắt một câu rồi thôi.",
+            "e": {
+              "nxp": [
+                "binh",
+                5
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi bị đánh cùng.",
+            "e": {
+              "hp": "-10%"
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_quan_lenh",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_thieu_luong",
+      "name": "Thiếu lương",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ba tháng không có lương. Lính trong doanh xì xào bỏ trốn.",
+      "choices": [
+        {
+          "l": "Ở lại",
+          "i": "🛡️",
+          "chk": [
+            "nang.nhan",
+            8
+          ],
+          "ok": {
+            "t": "Tháng thứ tư lương về đủ.",
+            "e": {
+              "bac": 60,
+              "nxp": [
+                "binh",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi đói lả, ốm một trận.",
+            "e": {
+              "hp": "-15%"
+            }
+          }
+        },
+        {
+          "l": "Trốn theo",
+          "i": "🏃",
+          "t": "Ngươi trốn về quê, mang tiếng đào ngũ.",
+          "e": {
+            "deed": "that_hua"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_thieu_luong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_dan_bi_cuop",
+      "name": "Dân bị lính ức hiếp",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mấy tên lính cùng đội vào làng bắt gà, đánh ông già.",
+      "choices": [
+        {
+          "l": "Can ngăn",
+          "i": "✋",
+          "chk": [
+            "nang.canh",
+            8
+          ],
+          "ok": {
+            "t": "Chúng bực nhưng thôi. Ông già cúi lạy ngươi.",
+            "e": {
+              "nxp": [
+                "binh",
+                5
+              ],
+              "deed": "hanh_hiep"
+            }
+          },
+          "no": {
+            "t": "Chúng quay sang đánh ngươi.",
+            "e": {
+              "hp": "-15%",
+              "deed": "hanh_hiep"
+            }
+          }
+        },
+        {
+          "l": "Làm ngơ",
+          "i": "🙈",
+          "t": "Đêm ấy cả đội ăn thịt gà.",
+          "e": {
+            "tamma": 2
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_dan_bi_cuop",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_tap_cung",
+      "name": "Thi bắn cung",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Doanh trại thi bắn cung, ai trúng hồng tâm được thưởng.",
+      "choices": [
+        {
+          "l": "Dự thi",
+          "i": "🏹",
+          "chk": [
+            "tp",
+            7
+          ],
+          "ok": {
+            "t": "Mũi tên cắm giữa hồng tâm. Thập trưởng nhớ mặt ngươi.",
+            "e": {
+              "bac": 30,
+              "nxp": [
+                "binh",
+                7
+              ]
+            }
+          },
+          "no": {
+            "t": "Tên bay lệch, cả doanh cười.",
+            "e": {
+              "nxp": [
+                "binh",
+                2
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đứng xem",
+          "i": "👀",
+          "t": "Ngươi học được cách giữ hơi khi giương cung.",
+          "e": {
+            "nxp": [
+              "binh",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_tap_cung",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_dem_tap_kich",
+      "name": "Đêm tập kích",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "rung",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đội của ngươi được lệnh tập kích một trại cướp lúc nửa đêm.",
+      "choices": [
+        {
+          "l": "Xông lên đầu",
+          "i": "⚔️",
+          "chk": [
+            "nang.canh",
+            11
+          ],
+          "ok": {
+            "t": "Trại cướp tan. Ngươi được thăng ngũ trưởng.",
+            "e": {
+              "bac": 100,
+              "nxp": [
+                "binh",
+                14
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi trúng một nhát đao.",
+            "e": {
+              "hp": "-25%",
+              "nxp": [
+                "binh",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đi sau giữ đường lui",
+          "i": "🛡️",
+          "t": "Không ai chết ở phía ngươi.",
+          "e": {
+            "nxp": [
+              "binh",
+              8
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_dem_tap_kich",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_tu_binh",
+      "name": "Tù binh",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Bắt được một tên cướp. Bách hộ muốn tra khảo cho ra sào huyệt.",
+      "choices": [
+        {
+          "l": "Tra khảo",
+          "i": "🔗",
+          "t": "Hắn khai. Ngươi rửa tay ba lần vẫn thấy dơ.",
+          "e": {
+            "nxp": [
+              "binh",
+              8
+            ],
+            "deed": "tra_tan"
+          }
+        },
+        {
+          "l": "Hỏi tù binh mà không dùng tra khảo",
+          "i": "💬",
+          "chk": [
+            "nang.giao",
+            11
+          ],
+          "ok": {
+            "t": "Hắn khai đổi lấy chén cơm.",
+            "e": {
+              "nxp": [
+                "binh",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Hắn câm như hến.",
+            "e": {
+              "nxp": [
+                "binh",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_tu_binh",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_ban_quan_luong",
+      "name": "Bán lương quân",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Thập trưởng rủ bán bớt gạo quân cho thương lái, chia đều.",
+      "choices": [
+        {
+          "l": "Tham gia",
+          "i": "💰",
+          "t": "Túi ngươi nặng thêm. Lính đói thêm.",
+          "e": {
+            "bac": 150,
+            "deed": "tham_o"
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Thập trưởng không rủ nữa, cũng không ưa ngươi.",
+          "e": {
+            "nxp": [
+              "binh",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_ban_quan_luong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_ban_chet",
+      "name": "Bạn đồng ngũ chết",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Người bạn cùng ngũ chết trong trận. Nhà hắn ở làng bên.",
+      "choices": [
+        {
+          "l": "Mang di vật về cho mẹ hắn",
+          "i": "🎒",
+          "t": "Bà mẹ ôm cái áo khóc ngất.",
+          "e": {
+            "nxp": [
+              "binh",
+              6
+            ],
+            "h": 24,
+            "deed": "an_tang"
+          }
+        },
+        {
+          "l": "Gửi người khác mang về",
+          "i": "📦",
+          "t": "Không biết di vật có tới nơi không.",
+          "e": {
+            "nxp": [
+              "binh",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_ban_chet",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_xuat_chinh",
+      "name": "Lệnh xuất chinh",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Triều đình hạ lệnh đánh một nước nhỏ ở biên giới. Ai cũng biết là đánh để cướp đất.",
+      "choices": [
+        {
+          "l": "Dẫn quân đi",
+          "i": "⚔️",
+          "t": "Thắng trận, thăng chức. Làng bên kia biên giới thành tro.",
+          "e": {
+            "bac": 800,
+            "nxp": [
+              "binh",
+              22
+            ],
+            "tamma": 4
+          }
+        },
+        {
+          "l": "Xin giữ thành",
+          "i": "🏯",
+          "chk": [
+            "nang.giao",
+            15
+          ],
+          "ok": {
+            "t": "Được giữ thành, không phải đi.",
+            "e": {
+              "nxp": [
+                "binh",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Bị giáng chức vì hèn nhát.",
+            "e": {}
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_xuat_chinh",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_dua_quan_ve",
+      "name": "Đưa quân về",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "nui"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Thua trận, đội quân tan tác giữa núi. Ngươi là người cao nhất còn sống.",
+      "choices": [
+        {
+          "l": "Gom quân rút về, không bỏ người bị thương",
+          "i": "🛡️",
+          "chk": [
+            "nang.nhan",
+            14
+          ],
+          "ok": {
+            "t": "Ngươi đưa được hơn trăm người về tới thành.",
+            "e": {
+              "nxp": [
+                "binh",
+                25
+              ],
+              "deed": "cuu_nguoi_hy_sinh"
+            }
+          },
+          "no": {
+            "t": "Rút chậm, quân địch đuổi kịp. Mất một nửa.",
+            "e": {
+              "nxp": [
+                "binh",
+                10
+              ],
+              "hp": "-20%"
+            }
+          }
+        },
+        {
+          "l": "Bỏ người bị thương, chạy nhanh",
+          "i": "🏃",
+          "t": "Về được ít người, nhanh.",
+          "e": {
+            "nxp": [
+              "binh",
+              10
+            ],
+            "deed": "ban_dong_doi",
+            "tamma": 4
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_dua_quan_ve",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_phan_loan",
+      "name": "Lời mời làm phản",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một vị tướng mời ngươi theo hắn khởi binh, hứa phong hầu.",
+      "choices": [
+        {
+          "l": "Theo",
+          "i": "🚩",
+          "t": "Ngươi thành người của phe phản. Đường lui đã đóng.",
+          "e": {
+            "bac": 500,
+            "nxp": [
+              "binh",
+              10
+            ],
+            "deed": "that_hua"
+          }
+        },
+        {
+          "l": "Từ chối, giữ kín",
+          "i": "🤐",
+          "t": "Hắn gật đầu, không làm khó.",
+          "e": {
+            "nxp": [
+              "binh",
+              8
+            ]
+          }
+        },
+        {
+          "l": "Tố giác",
+          "i": "📜",
+          "t": "Hắn bị bắt. Ngươi được thăng hai cấp.",
+          "e": {
+            "bac": 400,
+            "nxp": [
+              "binh",
+              18
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_phan_loan",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_binh_ve_huu",
+      "name": "Cởi giáp",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:binh",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ba mươi năm đeo giáp. Ngươi muốn về quê, mà quân còn cần người.",
+      "choices": [
+        {
+          "l": "Ở lại thêm một năm dạy tân binh",
+          "i": "🎖️",
+          "t": "Lứa tân binh ấy về sau nhiều người làm tướng.",
+          "e": {
+            "nxp": [
+              "binh",
+              16
+            ]
+          }
+        },
+        {
+          "l": "Về quê",
+          "i": "🏡",
+          "t": "Ngươi treo giáp lên vách nhà.",
+          "e": {
+            "nxp": [
+              "binh",
+              6
+            ],
+            "tamma": -3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/binh.json",
+        "ref": "ng_binh_ve_huu",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

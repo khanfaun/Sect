@@ -40,7 +40,12 @@
           "l": "Góp dầu để giữ cả hai lối",
           "t": "Ngươi mua thêm dầu giữ cả đèn lên lẫn đèn xuống. Người giữ đèn thắp thử hai ngọn, tu sĩ nhìn rõ đường rồi mới khởi hành. Lão dặn hắn nhớ vị trí ngọn đèn thấp, đi xa còn biết chỗ quay về.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 22
@@ -51,7 +56,9 @@
           "l": "Đổ dầu vào đèn đi lên",
           "t": "Ngươi và {$b.ten} thấy rõ đường. Sau lưng, {$a.ten} ép bấc tắt xuống đĩa.",
           "e": {
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -132,7 +139,12 @@
           "l": "Dẫn hắn xuống đoạn đầu",
           "t": "Ngươi dẫn hắn xuống đoạn đầu, lỡ cửa lên mở trong ngày. Tới chỗ tự nhận ra đường, hắn hạ đèn, cảm tạ rồi đi tiếp. Người giữ đèn rủ ngươi về trạm chờ lượt sau.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "h": 24,
             "an": [
               "a",
@@ -145,7 +157,9 @@
           "l": "Đổi đường về riêng lấy ngọn đèn chung",
           "t": "Ngươi chỉ cho hắn một lối riêng về nhà, nhận ngọn đèn của trạm làm vật dẫn đường. Hắn có thể đi, nhưng khách tới sau không còn đèn dùng chung. Người giữ đèn đứng chờ ngươi trả, ngươi không hẹn ngày.",
           "e": {
-            "karma": -1,
+            "hd": {
+              "t": 1
+            },
             "namedRelic": {
               "k": "dang",
               "name": "Đèn Dẫn Đường Chung",
@@ -233,7 +247,12 @@
           "l": "Chia lửa hộ thân cho hắn thử lại",
           "t": "Ngươi truyền linh hỏa vào nét đường hắn đã vạch. Hơi lạnh phản lại làm ngực đau nhói, ngươi vẫn giữ tới khi hắn tìm được lối thật. Hắn gọi thêm người theo xuống, còn ngươi ở lại dưỡng khí.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 5
+            },
+            "ng": {
+              "g": 5
+            },
             "hp": "-10%"
           }
         },
@@ -242,7 +261,7 @@
           "l": "Bán cho hắn một lối xuống riêng",
           "t": "Hắn trả bằng vật đã lấy ở tầng trên. Người theo sau hỏi đường, ngươi chỉ thấy bàn tay hắn khép lại.",
           "e": {
-            "karma": -3,
+            "deed": "lua_loi",
             "relic": 0
           }
         },
@@ -319,14 +338,19 @@
           "alignment": "context"
         }
       },
-      "text": "Một đoàn tu sĩ muốn quay xuống sau khi cửa lên khép. Nếu từng có đèn hoặc lửa chia, tu sĩ {$b.ten} biết đưa người xuống từng tốp. Nếu ngươi từng giữ đèn hoặc bán đường riêng, họ đứng chờ ngươi mở lối.",
+      "text": "Cửa dẫn lên đã đóng. Một đoàn tu sĩ muốn trở xuống. Nếu trước đây có đèn chung hoặc mọi người đã chia lửa, tu sĩ {$b.ten} biết đường đưa họ xuống từng tốp. Nếu ngươi giữ đèn hoặc bán đường riêng, cả đoàn phải đợi ngươi mở lối.",
       "choices": [
         {
           "i": "✋",
           "l": "Đốt một phần đạo hạnh dựng đường lui chung",
           "t": "Ngươi dùng một phần tu vi mở đường lui cho cả đoàn. Người biết lối xuống đi trước dẫn đường, người khỏe dìu người yếu. Khi đường khép, tu sĩ cuối đã về tới trạm; ngươi ngồi xuống dưỡng thần.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 5
+            },
+            "ng": {
+              "g": 5
+            },
             "tv": -4
           }
         },
@@ -336,7 +360,12 @@
           "t": "Ngươi có linh thạch, chỉ người trả đủ được qua trước khi ánh tắt. Bên mép đá còn một túi vải rỗng.",
           "e": {
             "st": 30,
-            "karma": -3
+            "hd": {
+              "t": 3
+            },
+            "ng": {
+              "b": 1
+            }
           }
         },
         {
@@ -419,14 +448,19 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu từng mở đường chung, người về góp dầu đặt đèn mới. Nếu từng thu lễ, tu sĩ {$b.ten} lấy dầu riêng đốt ở bậc đầu. Người đứng đợi vẫn giữ những túi đã từng đem lên.",
+      "text": "Nếu ngươi từng mở đường cho mọi người, những người trở về góp dầu đặt đèn mới. Nếu ngươi từng thu lễ, tu sĩ {$b.ten} phải lấy dầu của mình thắp ở bậc đầu. Những người đứng chờ vẫn mang theo túi lễ đã chuẩn bị.",
       "choices": [
         {
           "i": "✋",
           "l": "Trao phần dầu hoặc lễ vật cho người giữ đèn {$a.ten}",
           "t": "Lão giữ lửa cho người đi hai chiều. Bấc cắt thành hai đầu, đầu quay xuống cháy trước.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 22

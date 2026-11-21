@@ -46,14 +46,14 @@ export function Hud() {
   return <>
     <div className="hud-top">
       <button className={'hud-av hud-av2' + PS.talCls(tal)} data-act="panel" data-arg="char" aria-label="Nhân vật"
-        {...tip('Khí huyết ' + PS.pctOf(r.hp, s.maxHp) + ' (nửa trên)\nLinh lực ' + (s.maxMp ? PS.pctOf(r.mp, s.maxMp) : 'chưa có') + ' (nửa dưới)\nChạm để mở nhân vật')}>
+        {...tip('Khí huyết ' + PS.pctOf(r.hp, s.maxHp) + ' (nửa trên)\n' + PS.mpName() + ' ' + (s.maxMp ? PS.pctOf(r.mp, s.maxMp) : 'chưa có') + ' (nửa dưới)\nChạm để mở nhân vật')}>
         <Vong hp={hp} mp={mp} />
         <Html className="hud-avi" h={PS.assetImg('hero', 'me', `<span class="av-txt">${PS.esc((r.ten.split(' ').pop() || '?')[0])}</span>`)} />
         {tal && tal.tier >= 0 && <Html className="tfr" h={PS.talFrameSVG(tal, 'hudtf')} />}
       </button>
       <div className="hud-id">
         <span className="nmrow"><b className="nm">{r.ten}</b><NhanDotPha /></span>
-        <span className="rl" {...tip(PS.realmLabel() + '\nTu vi ' + tv + '%\n' + PS.rootView(r.root).n + ': ' + r.root.els.map(e => PS.EL[e].n).join(', '))}><TenCanhGioi /></span>
+        <span className="rl" {...tip(PS.realmLabel() + (PS.voKnown() ? '\nVô linh căn — chưa thể tu luyện\n' : !PS.rootKnown() ? '\nChưa biết mình có tiên duyên hay không\n' : '\nTu vi ' + tv + '%\n') + 'Linh căn: ' + PS.rootLabel(r) + (PS.rootElsLabel(r) ? ': ' + PS.rootElsLabel(r) : ''))}><TenCanhGioi /></span>
         <small className={warn ? 'bad' : ''} {...tip('Tuổi / thọ nguyên ' + s.life + (warn ? '\nThọ nguyên sắp cạn!' : ''))}>
           {Math.floor(r.age)} tuổi · còn {Math.max(0, Math.floor(left))} năm{hurt && <> · <b className="bad">{hurt}</b></>}
         </small>
@@ -65,10 +65,12 @@ export function Hud() {
       <span className="hs tu" {...tip('Tốc độ tu luyện khi bế quan ở đây: ' + PS.rateOf('bq', PS.bqReal(), 'toc').t + '\nThổ nạp: ' + PS.rateOf('thonap', PS.thonapPct(), 'toc').t)}><Ic n="seat" /><Rt k="bq" v={PS.bqReal()} kind="toc" /></span>
       <span className={'hs tm' + (tm >= 60 ? ' hi' : '')} {...tip('Tâm ma: ' + PS.tmWord(tm).toLowerCase() + '\nĐầy sẽ phải đối mặt với chính mình')}><Ic n="skull" />{PS.tmWord(tm)}</span>
       <span className="hs dt" {...tip('Đạo tâm: ' + PS.rateOf('tam', s.tam, 'muc').t + '\nChống ảo cảnh, giúp đột phá')}><Ic n="lotus" /><Rt k="tam" v={s.tam} kind="muc" /></span>
-      <span className="hs st" {...tip('Linh thạch')}><i className="rh"></i>{PS.fmtN(r.st)}</span>
+      {(PS.anShow ? PS.anShow(r) : PS.needFood && PS.needFood(r)) && <button className={'hs an' + (PS.anState(r) !== 'no' ? ' hi' : '')} data-act="anMuc" {...tip('Cái ăn: ' + PS.contentText('an.' + PS.anState(r)) + ' · no ' + (r.no != null ? r.no : 100) + '/100' + '\nMức ăn: ' + PS.anMuc(r).n + ' · ' + PS.fmtBac(PS.anCost(r) * (PS.AN.buaX || 30)) + ' một bữa no' + (PS.anTui && PS.anTui(r).length ? '\nĐồ ăn mang theo: ' + PS.anTui(r).map(x => x.k + ' ' + (PS.CAT.byId[x.id] || {}).n).join(', ') : '') + '\nChạm để đổi mức ăn')}>🍚<i className={'an-bar st-' + PS.anState(r)}><b style={{ width: Math.round(100 * Math.max(0.04, 1 - Math.min(1, (r.doi || 0) / ((PS.AN && PS.AN.doi.chet) || 200)))) + '%' }} /></i>{PS.anState(r) !== 'no' ? PS.contentText('an.' + PS.anState(r)) : ''}</button>}
+      {PS.hopL && PS.hopL(r).length > 0 && <button className="hs hop hi" data-act="hopThu" {...tip('Hộp thư: lời công trình gửi về\nChạm để xem và nhận')}>📮{PS.hopL(r).length}</button>}
+      <span className="hs st" {...tip('Hầu bao\nLinh thạch: ' + PS.ltTxt(r) + '\nTiền phàm: ' + PS.fmtBac(r.bac || 0) + '\nThưởng Lệnh: ' + (r.thuongLenh || 0) + (PS.noTip ? PS.noTip(r) : ''))}><i className="rh"></i>{PS.fmtN(r.st)}<small className={'hs-bac' + ((r.bac || 0) < 0 ? ' no' : '')}><i className="sep"> · </i>{PS.fmtBacS(r.bac || 0)}</small></span>
     </div>
-    <div className="hud-ls" {...tip('Linh thạch')}><i className="rh"></i>{PS.fmtN(r.st)}</div>
-    <i className="hud-tv" style={{ width: clamp(tv, 0, 100) + '%' }} {...tip('Tu vi ' + tv + '%')} />
+    <div className="hud-ls" {...tip('Hầu bao\nLinh thạch: ' + PS.ltTxt(r) + '\nTiền phàm: ' + PS.fmtBac(r.bac || 0) + '\nThưởng Lệnh: ' + (r.thuongLenh || 0) + (PS.noTip ? PS.noTip(r) : ''))}><i className="rh"></i>{PS.fmtN(r.st)}<small className={'hs-bac' + ((r.bac || 0) < 0 ? ' no' : '')}><i className="sep"> · </i>{PS.fmtBacS(r.bac || 0)}</small></div>
+    <i className="hud-tv" style={{ width: PS.voKnown() ? 0 : clamp(tv, 0, 100) + '%' }} {...tip(PS.voKnown() ? 'Vô linh căn — chưa thể tu luyện' : !PS.rootKnown() ? 'Chưa biết mình có tiên duyên hay không' : 'Tu vi ' + tv + '%')} />
     <i className="hud-ll" style={{ width: PS.llShow() + '%' }} {...tip('Lịch luyện ' + PS.llShow() + '%')} />
   </>;
 }

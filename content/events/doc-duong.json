@@ -46,7 +46,7 @@
               "t": "{$a.hn} nắm chặt tay ngươi, cười khà: “Không ngờ cuối đời còn gặp được người tốt.” {$a.hn} nhét vào tay ngươi một cuốn sách nhàu nát, rồi nhắm mắt. Gió thổi, mái tóc bạc khẽ lay.",
               "e": {
                 "skill": 1,
-                "karma": 5
+                "deed": "cuu_nguoi"
               }
             },
             {
@@ -54,7 +54,7 @@
               "t": "{$a.hn} gắng gượng kể về một khe đá sau núi, rồi tắt thở. Ngươi chôn cất tử tế. Theo lời {$a.hn}, ngươi tìm được mấy túi linh thạch giấu kỹ.",
               "e": {
                 "st": 25,
-                "karma": 5,
+                "deed": "cuu_nguoi",
                 "tv": 4
               }
             },
@@ -82,10 +82,15 @@
           "o": [
             {
               "w": 2,
-              "t": "Ngươi giật lấy túi. {$a.hn} trợn mắt nhìn ngươi, muốn nói gì đó mà không thành tiếng. Đi xa rồi, ngươi vẫn thấy ánh mắt ấy sau gáy.",
+              "t": "Ngươi giật lấy túi. {$a.hn} trợn mắt nhìn ngươi, muốn nói gì đó mà không thành tiếng. Đi xa rồi, ngươi vẫn thấy như có người đang nhìn theo.",
               "e": {
                 "st": 35,
-                "karma": -8,
+                "hd": {
+                  "t": 8
+                },
+                "ng": {
+                  "b": 8
+                },
                 "tamma": 6
               }
             },
@@ -94,7 +99,12 @@
               "t": "Túi có cấm chế. Vừa chạm vào, một luồng hắc khí xộc lên tay. {$a.hn} cười khàn khàn rồi tắt thở.",
               "e": {
                 "hp": "-20%",
-                "karma": -5,
+                "hd": {
+                  "t": 8
+                },
+                "ng": {
+                  "b": 8
+                },
                 "st": 15
               }
             }
@@ -102,7 +112,7 @@
         },
         {
           "i": "🚶",
-          "l": "Bước qua",
+          "l": "Đi tiếp, không giúp",
           "t": "Ngươi bước qua. Sau lưng có tiếng thở dài, rồi im bặt. Tu tiên giới mỗi ngày đều có người chết như vậy.",
           "e": {
             "tamma": 2
@@ -110,8 +120,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -183,7 +193,7 @@
             "t": "{$a.ten} lạy ngươi như tế sao: “Ân nhân! Ân nhân!” Gã nhất quyết dúi vào tay ngươi một túi linh thạch, hứa sau này gặp lại sẽ báo đáp.",
             "e": {
               "st": 30,
-              "karma": 6,
+              "deed": "cuu_nguoi",
               "an": [
                 "a",
                 "cứu khỏi tay bọn cướp"
@@ -193,7 +203,7 @@
         },
         {
           "i": "👀",
-          "l": "Đứng xem, chờ ngư ông đắc lợi",
+          "l": "Đợi hai bên kiệt sức rồi kiếm lợi",
           "chk": [
             "tp",
             10
@@ -202,7 +212,9 @@
             "t": "Hai bên đánh nhau tan tác. Ngươi lặng lẽ nhặt mấy thứ rơi vãi rồi biến mất trước khi ai kịp để ý.",
             "e": {
               "st": 25,
-              "karma": -3,
+              "hd": {
+                "t": 1
+              },
               "pill": 1
             }
           },
@@ -229,8 +241,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -303,7 +315,7 @@
             "t": "{$a.ten} cúi đầu thật sâu: “Ơn này {$a.xung} khắc cốt.” Trước khi đi, {$a.hn} để lại cho ngươi một viên đan.",
             "e": {
               "pill": 1,
-              "karma": 5,
+              "deed": "cuu_nguoi",
               "an": [
                 "a",
                 "cứu khỏi tay truy binh"
@@ -321,7 +333,7 @@
           "ok": {
             "t": "Đám đệ tử {$sect} hỏi, ngươi chỉ bừa sang hướng khác, mặt không đổi sắc. Chúng đi rồi, {$a.ten} bò ra, run rẩy cảm tạ.",
             "e": {
-              "karma": 5,
+              "deed": "cuu_nguoi",
               "tv": 3,
               "an": [
                 "a",
@@ -349,7 +361,10 @@
           "t": "Ngươi chỉ tay. {$a.ten} nhìn ngươi bằng ánh mắt mà ngươi sẽ còn nhớ rất lâu. Đệ tử {$sect} ném cho ngươi túi linh thạch như ném xương cho chó.",
           "e": {
             "st": 30,
-            "karma": -8,
+            "deed": "giet_vo_toi",
+            "deedO": {
+              "tn": "tiep_tay"
+            },
             "tamma": 5,
             "oan": [
               "a",
@@ -359,8 +374,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -464,7 +479,7 @@
             "Ngươi khép mắt người chết lại, đắp đất thành nấm. Không biết tên, ngươi khắc lên đá: “Người đi đường”."
           ],
           "e": {
-            "karma": 6,
+            "deed": "an_tang",
             "tam": 1,
             "van": 1
           }
@@ -541,7 +556,7 @@
             "t": "Bọn cướp chạy tán loạn, bỏ lại cả của cướp được.",
             "e": {
               "st": 20,
-              "karma": 2
+              "deed": "giet_cuop_dang_ac"
             }
           }
         },
@@ -585,8 +600,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -651,7 +666,7 @@
       "choices": [
         {
           "i": "💎",
-          "l": "Nộp",
+          "l": "Nộp tiền để được qua",
           "cost": {
             "st": 30
           },
@@ -659,7 +674,7 @@
         },
         {
           "i": "⚔️",
-          "l": "Đánh",
+          "l": "Giao đấu với đoàn yêu tộc",
           "fight": {
             "k": "beast",
             "elite": 1,
@@ -674,7 +689,7 @@
         },
         {
           "i": "🗣️",
-          "l": "Thuyết phục",
+          "l": "Nhắc lại hòa ước giữa người và yêu",
           "chk": [
             "ngo",
             12
@@ -703,8 +718,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {

@@ -40,7 +40,12 @@
           "l": "Mua chuôi kiếm thuận tay trái",
           "t": "Ngươi mua chuôi phù hợp ở xưởng, để nàng thử lại cách cầm. Kiếm sư chưa chịu đổi bài dạy, nhưng nàng đã có thể đặt ngón tay đúng chỗ.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "kiếm cầm tay nào"
@@ -139,7 +144,12 @@
           "l": "Giúp nàng dạy thế kiếm ấy",
           "t": "Ngươi dành một buổi giúp nàng chỉ thế kiếm cho hai đệ tử. Một người thuận tay phải phải đổi cách đứng mới làm được. Nàng cười: “Ta cũng đã học bài của các ngươi khó như thế.”",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "an": [
               "a",
               "nét chéo trên vách"
@@ -242,7 +252,12 @@
           "l": "Đổi buổi học của ngươi lấy thời gian cho nàng tập tay trái",
           "t": "Ngươi nhường buổi có người hướng dẫn để nàng thử lại kiếm tay trái. Sau vài lần còn vụng, nàng bắt đúng đường kiếm. Kiếm sư đứng xem hết buổi, chưa nói lời nào.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "h": 24,
             "an": [
               "a",
@@ -258,7 +273,12 @@
             "st": 13
           },
           "e": {
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -337,14 +357,14 @@
           "alignment": "context"
         }
       },
-      "text": "Đá ép xà xuống ngang vai kiếm sư {$b.ten}. Nếu nữ kiếm đồ {$a.ten} đã tập tay trái, nàng tìm được góc kiếm mở đường. Nếu vẫn học bài cũ, nàng phải đổi tay ngay trong khe đá.",
+      "text": "Đá đè xà xuống ngang vai kiếm sư {$b.ten}, chặn đường ra. Nếu nữ kiếm đồ {$a.ten} đã tập kiếm tay trái, nàng biết cách đưa kiếm vào khe hẹp. Nếu trước giờ vẫn tập tay phải, lần này nàng phải đổi tay ngay trong khe đá.",
       "choices": [
         {
           "i": "✋",
           "l": "Dùng linh lực chống xà cho nàng cứu người",
           "t": "Ngươi chống xà tới khi nàng đưa kiếm sư ra được. Đá ép xuống khiến vai ngươi bị thương, nhưng cả hai đã ra khỏi hành lang trước lúc mái sập.",
           "e": {
-            "karma": 4,
+            "deed": "cuu_nguoi",
             "hp": "-10%"
           },
           "cost": {
@@ -356,7 +376,12 @@
           "l": "Chỉ nàng cắt xà bằng đường kiếm riêng",
           "t": "Nàng theo góc ngươi chỉ, cắt xà rồi kéo thầy ra ngoài. Mái đổ xuống nghiền nát giá kiếm chung. Lão nhìn đống gỗ, bảo nàng đừng quay lại nhặt, người còn đủ mới là được.",
           "e": {
-            "karma": 1,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "tv": 3
           }
         },
@@ -443,7 +468,7 @@
           "alignment": "context"
         }
       },
-      "text": "Nếu ngươi chống xà, kiếm sư {$b.ten} đặt kiếm cong trên bàn để đo lại chuôi. Nếu xà bị cắt, lão dùng gỗ của giá kiếm vỡ, còn nữ kiếm đồ {$a.ten} đứng chỉ cho lão chỗ khoét.",
+      "text": "Nếu ngươi chống xà cho nàng cứu người, kiếm sư {$b.ten} dùng thanh kiếm đã cong để đo lại chuôi. Nếu nàng cắt xà, nữ kiếm đồ {$a.ten} chỉ cho lão cách làm chuôi mới vừa tay trái bằng gỗ từ giá kiếm đã vỡ.",
       "choices": [
         {
           "i": "🤲",
@@ -453,7 +478,12 @@
             "st": 13
           },
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "một chuôi chưa sơn"

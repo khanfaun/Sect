@@ -22,12 +22,12 @@ Nguồn chuẩn: `content/events/doc-duong.json`. Bản đọc tự sinh. Cú ph
 
 - **1. Đỡ dậy, truyền chút linh lực**
   - `cost`: `{"mp":"30%"}`
-  - **Khả năng 1**: {$a.hn} nắm chặt tay ngươi, cười khà: “Không ngờ cuối đời còn gặp được người tốt.” {$a.hn} nhét vào tay ngươi một cuốn sách nhàu nát, rồi nhắm mắt. Gió thổi, mái tóc bạc khẽ lay. `{"w":3,"e":{"skill":1,"karma":5}}`
-  - **Khả năng 2**: {$a.hn} gắng gượng kể về một khe đá sau núi, rồi tắt thở. Ngươi chôn cất tử tế. Theo lời {$a.hn}, ngươi tìm được mấy túi linh thạch giấu kỹ. `{"w":2,"e":{"st":25,"karma":5,"tv":4}}`
+  - **Khả năng 1**: {$a.hn} nắm chặt tay ngươi, cười khà: “Không ngờ cuối đời còn gặp được người tốt.” {$a.hn} nhét vào tay ngươi một cuốn sách nhàu nát, rồi nhắm mắt. Gió thổi, mái tóc bạc khẽ lay. `{"w":3,"e":{"skill":1,"deed":"cuu_nguoi"}}`
+  - **Khả năng 2**: {$a.hn} gắng gượng kể về một khe đá sau núi, rồi tắt thở. Ngươi chôn cất tử tế. Theo lời {$a.hn}, ngươi tìm được mấy túi linh thạch giấu kỹ. `{"w":2,"e":{"st":25,"deed":"cuu_nguoi","tv":4}}`
   - **Khả năng 3**: Bàn tay khô héo bỗng siết lại như gọng kìm. {$a.hn} ngẩng lên, mắt đỏ ngầu: “Thân thể trẻ thật…” Là ma tu muốn đoạt xá! `{"w":1,"fight":{"k":"matu","n":"{$a.ten}","m":1.1},"win":{"t":"Lão ma tan thành khói đen. Trong túi còn ít linh thạch và một viên đan.","e":{"st":20,"pill":1}}}`
 - **2. Lấy túi trữ vật**
-  - **Khả năng 1**: Ngươi giật lấy túi. {$a.hn} trợn mắt nhìn ngươi, muốn nói gì đó mà không thành tiếng. Đi xa rồi, ngươi vẫn thấy ánh mắt ấy sau gáy. `{"w":2,"e":{"st":35,"karma":-8,"tamma":6}}`
-  - **Khả năng 2**: Túi có cấm chế. Vừa chạm vào, một luồng hắc khí xộc lên tay. {$a.hn} cười khàn khàn rồi tắt thở. `{"w":1,"e":{"hp":"-20%","karma":-5,"st":15}}`
+  - **Khả năng 1**: Ngươi giật lấy túi. {$a.hn} trợn mắt nhìn ngươi, muốn nói gì đó mà không thành tiếng. Đi xa rồi, ngươi vẫn thấy ánh mắt ấy sau gáy. `{"w":2,"e":{"st":35,"hd":{"t":8},"ng":{"b":8},"tamma":6}}`
+  - **Khả năng 2**: Túi có cấm chế. Vừa chạm vào, một luồng hắc khí xộc lên tay. {$a.hn} cười khàn khàn rồi tắt thở. `{"w":1,"e":{"hp":"-20%","hd":{"t":8},"ng":{"b":8},"st":15}}`
 - **3. Bước qua**
   Ngươi bước qua. Sau lưng có tiếng thở dài, rồi im bặt. Tu tiên giới mỗi ngày đều có người chết như vậy.
   - `e`: `{"tamma":2}`
@@ -63,11 +63,11 @@ Nguồn chuẩn: `content/events/doc-duong.json`. Bản đọc tự sinh. Cú ph
 - **1. Ra tay tương trợ**
   - `fight`: `{"k":"sontac"}`
   - **Thắng trận**: {$a.ten} lạy ngươi như tế sao: “Ân nhân! Ân nhân!” Gã nhất quyết dúi vào tay ngươi một túi linh thạch, hứa sau này gặp lại sẽ báo đáp.
-    `{"e":{"st":30,"karma":6,"an":["a","cứu khỏi tay bọn cướp"]}}`
+    `{"e":{"st":30,"deed":"cuu_nguoi","an":["a","cứu khỏi tay bọn cướp"]}}`
 - **2. Đứng xem, chờ ngư ông đắc lợi**
   - `chk`: `["tp",10]`
   - **Thành công**: Hai bên đánh nhau tan tác. Ngươi lặng lẽ nhặt mấy thứ rơi vãi rồi biến mất trước khi ai kịp để ý.
-    `{"e":{"st":25,"karma":-3,"pill":1}}`
+    `{"e":{"st":25,"hd":{"t":1},"pill":1}}`
   - **Thất bại**: Một tên cướp phát hiện ra ngươi. “Còn một con chuột!” Cả đám quay sang.
     `{"fight":{"k":"sontac"},"win":{"t":"Bọn cướp chạy tán loạn. Thương đội đã bỏ đi từ lúc nào.","e":{"st":10}}}`
 - **3. Đi đường vòng**
@@ -105,16 +105,16 @@ Nguồn chuẩn: `content/events/doc-duong.json`. Bản đọc tự sinh. Cú ph
 - **1. Đứng chắn phía trước**
   - `fight`: `{"k":"detu","n":"{$b.ten}"}`
   - **Thắng trận**: {$a.ten} cúi đầu thật sâu: “Ơn này {$a.xung} khắc cốt.” Trước khi đi, {$a.hn} để lại cho ngươi một viên đan.
-    `{"e":{"pill":1,"karma":5,"an":["a","cứu khỏi tay truy binh"]}}`
+    `{"e":{"pill":1,"deed":"cuu_nguoi","an":["a","cứu khỏi tay truy binh"]}}`
 - **2. Giấu vào bụi rậm, đánh lạc hướng**
   - `chk`: `["tam",10]`
   - **Thành công**: Đám đệ tử {$sect} hỏi, ngươi chỉ bừa sang hướng khác, mặt không đổi sắc. Chúng đi rồi, {$a.ten} bò ra, run rẩy cảm tạ.
-    `{"e":{"karma":5,"tv":3,"an":["a","che giấu khỏi truy binh"]}}`
+    `{"e":{"deed":"cuu_nguoi","tv":3,"an":["a","che giấu khỏi truy binh"]}}`
   - **Thất bại**: “Nói dối không chớp mắt nhỉ?” Kẻ cầm đầu cười lạnh, rút kiếm.
     `{"fight":{"k":"detu","n":"{$b.ten}"},"win":{"t":"Đuổi được bọn chúng, nhưng {$a.ten} đã biến mất, chỉ để lại vệt máu và một miếng ngọc bội.","e":{"relic":0}}}`
 - **3. Chỉ chỗ cho kẻ đuổi**
   Ngươi chỉ tay. {$a.ten} nhìn ngươi bằng ánh mắt mà ngươi sẽ còn nhớ rất lâu. Đệ tử {$sect} ném cho ngươi túi linh thạch như ném xương cho chó.
-  - `e`: `{"st":30,"karma":-8,"tamma":5,"oan":["a","chỉ chỗ cho kẻ thù"]}`
+  - `e`: `{"st":30,"deed":"giet_vo_toi","deedO":{"tn":"tiep_tay"},"tamma":5,"oan":["a","chỉ chỗ cho kẻ thù"]}`
 - **4. Cáo từ, tiếp tục lên đường**
   Ngươi chọn rời khỏi nơi này, không can dự thêm.
 
@@ -153,7 +153,7 @@ Nguồn chuẩn: `content/events/doc-duong.json`. Bản đọc tự sinh. Cú ph
   - **Khả năng 4**: Thi thể bỗng co giật, rồi ngồi bật dậy! `{"w":1,"fight":{"k":"cuongthi"},"win":{"t":"Lần này thì nó nằm yên thật. Trong túi còn ít linh thạch.","e":{"st":20}}}`
 - **2. Chôn cất tử tế**
   Ngươi đào huyệt, đặt thi thể xuống, cắm một cành cây làm bia. Đêm ấy ngươi mơ thấy một người cúi đầu cảm tạ.,Ngươi khép mắt người chết lại, đắp đất thành nấm. Không biết tên, ngươi khắc lên đá: “Người đi đường”.
-  - `e`: `{"karma":6,"tam":1,"van":1}`
+  - `e`: `{"deed":"an_tang","tam":1,"van":1}`
 - **3. Không đụng vào**
   Người chết rồi, ân oán nên chết theo. Ngươi đi tiếp.
 
@@ -176,7 +176,7 @@ Nguồn chuẩn: `content/events/doc-duong.json`. Bản đọc tự sinh. Cú ph
 - **1. Đánh**
   - `fight`: `{"k":"sontac","n":"{$a.ten}"}`
   - **Thắng trận**: Bọn cướp chạy tán loạn, bỏ lại cả của cướp được.
-    `{"e":{"st":20,"karma":2}}`
+    `{"e":{"st":20,"deed":"giet_cuop_dang_ac"}}`
 - **2. Nộp tiền mãi lộ**
   Bọn chúng cười hô hố, nhường đường. Ngươi nuốt cục tức xuống bụng.
   - `cost`: `{"st":12}`

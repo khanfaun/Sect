@@ -1,0 +1,778 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_chep_muc_do",
+      "name": "Lọ mực đổ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi lỡ tay làm đổ mực lên trang sách thuê chép đã gần xong.",
+      "choices": [
+        {
+          "l": "Chép lại từ đầu",
+          "i": "✍️",
+          "chk": [
+            "nang.nhan",
+            8
+          ],
+          "ok": {
+            "t": "Chép lại suốt đêm, chữ còn đẹp hơn lần trước.",
+            "e": {
+              "nxp": [
+                "chep",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Mắt mỏi, chữ xiêu vẹo. Chủ sách trừ tiền.",
+            "e": {
+              "bac": -10,
+              "nxp": [
+                "chep",
+                2
+              ]
+            }
+          }
+        },
+        {
+          "l": "Cắt trang, chép đè",
+          "i": "✂️",
+          "t": "Chủ sách không để ý. Ngươi thì nhớ mãi.",
+          "e": {
+            "nxp": [
+              "chep",
+              2
+            ],
+            "tamma": 1
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_muc_do",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_thu_nha",
+      "name": "Lá thư về nhà",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Bà cụ mù chữ nhờ viết thư cho con trai đi lính. Bà không có tiền.",
+      "choices": [
+        {
+          "l": "Viết không lấy tiền",
+          "i": "📜",
+          "t": "Bà cụ nắm tay ngươi rất lâu.",
+          "e": {
+            "nxp": [
+              "chep",
+              4
+            ],
+            "deed": "bo_thi"
+          }
+        },
+        {
+          "l": "Viết, lấy nửa giá",
+          "i": "🪙",
+          "t": "Bà dốc túi trả mấy xu.",
+          "e": {
+            "bac": 3,
+            "nxp": [
+              "chep",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_thu_nha",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_sach_cam",
+      "name": "Sách cấm",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một người khách trả giá cao, nhờ chép một cuốn sách bàn chuyện triều chính, dặn kín miệng.",
+      "choices": [
+        {
+          "l": "Nhận chép",
+          "i": "🤫",
+          "t": "Tiền công hậu. Nửa năm sau ngươi nghe tin có người bị bắt vì cuốn sách ấy.",
+          "e": {
+            "bac": 60,
+            "nxp": [
+              "chep",
+              5
+            ],
+            "tamma": 2
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Khách nhìn ngươi khinh khỉnh rồi đi.",
+          "e": {
+            "nxp": [
+              "chep",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_sach_cam",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_thi_hoc",
+      "name": "Thầy đồ thử chữ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Thầy đồ già trong làng ra một vế đối, bảo ai đối được thì cho mượn sách.",
+      "choices": [
+        {
+          "l": "Đối lại",
+          "i": "🖌️",
+          "chk": [
+            "ngo",
+            8
+          ],
+          "ok": {
+            "t": "Thầy cười khà, cho ngươi mượn cả rương sách cũ.",
+            "e": {
+              "nxp": [
+                "chep",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi đối vụng, cả sân cười ồ.",
+            "e": {
+              "nxp": [
+                "chep",
+                2
+              ]
+            }
+          }
+        },
+        {
+          "l": "Chỉ đứng nghe",
+          "i": "👂",
+          "t": "Ngươi ghi nhớ mấy câu hay.",
+          "e": {
+            "nxp": [
+              "chep",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_thi_hoc",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_di_thi",
+      "name": "Khoa thi hương",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Năm nay mở khoa thi hương. Lộ phí, giấy bút, trọ trong thành mất cả tháng tiền chép thuê.",
+      "choices": [
+        {
+          "l": "Lên đường đi thi",
+          "i": "📚",
+          "chk": [
+            "ngo",
+            11
+          ],
+          "ok": {
+            "t": "Tên ngươi có trong bảng. Làng mổ lợn ăn mừng.",
+            "e": {
+              "bac": -150,
+              "nxp": [
+                "chep",
+                16
+              ]
+            }
+          },
+          "no": {
+            "t": "Bảng không có tên ngươi. Ngươi về làng lúc trời tối.",
+            "e": {
+              "bac": -150,
+              "nxp": [
+                "chep",
+                6
+              ],
+              "tamma": 2
+            }
+          }
+        },
+        {
+          "l": "Để khoa sau",
+          "i": "⏳",
+          "t": "Ngươi tiếp tục chép thuê.",
+          "e": {
+            "nxp": [
+              "chep",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_di_thi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_van_te",
+      "name": "Văn tế thuê",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nhà phú hộ có tang, nhờ viết bài văn tế ca ngợi người chết. Ai cũng biết lão là kẻ ác.",
+      "choices": [
+        {
+          "l": "Viết lời ca ngợi theo ý nhà phú hộ",
+          "i": "✍️",
+          "t": "Bài văn tế được khen. Ngươi cầm tiền về mà thấy nặng tay.",
+          "e": {
+            "bac": 80,
+            "nxp": [
+              "chep",
+              6
+            ],
+            "tamma": 1
+          }
+        },
+        {
+          "l": "Viết đúng những gì ngươi biết về người chết",
+          "i": "📜",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Nhà phú hộ nghe xong lặng thinh, vẫn trả tiền.",
+            "e": {
+              "bac": 40,
+              "nxp": [
+                "chep",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Họ đuổi ngươi ra cổng.",
+            "e": {
+              "nxp": [
+                "chep",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_van_te",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_so_gia",
+      "name": "Sổ sách gian",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một thương hội thuê ngươi chép lại sổ, sửa vài con số cho đẹp trước khi quan tra.",
+      "choices": [
+        {
+          "l": "Làm theo",
+          "i": "🤝",
+          "t": "Thương hội qua mặt quan. Ngươi được trả đậm.",
+          "e": {
+            "bac": 200,
+            "nxp": [
+              "chep",
+              5
+            ],
+            "deed": "lua_loi"
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Họ thuê người khác.",
+          "e": {
+            "nxp": [
+              "chep",
+              5
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_so_gia",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_mo_truong",
+      "name": "Mở trường làng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Làng không có trường. Người ta hỏi ngươi có chịu dạy không, trả bằng thóc.",
+      "choices": [
+        {
+          "l": "Mở trường",
+          "i": "🏫",
+          "t": "Mười mấy đứa trẻ ê a dưới mái đình.",
+          "e": {
+            "nxp": [
+              "chep",
+              12
+            ]
+          }
+        },
+        {
+          "l": "Chỉ dạy con nhà khá",
+          "i": "💰",
+          "t": "Ít trò, nhiều tiền.",
+          "e": {
+            "bac": 60,
+            "nxp": [
+              "chep",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_mo_truong",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_sach_that",
+      "name": "Cuốn sử thật",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi có trong tay bản chép tay ghi lại một vụ án oan mà triều đình muốn xoá.",
+      "choices": [
+        {
+          "l": "Chép thành nhiều bản giấu khắp nơi",
+          "i": "📚",
+          "t": "Sự thật không mất. Ngươi thì phải sống ẩn một thời gian.",
+          "e": {
+            "nxp": [
+              "chep",
+              22
+            ],
+            "deed": "giu_loi"
+          }
+        },
+        {
+          "l": "Đốt đi cho yên",
+          "i": "🔥",
+          "t": "Đêm ấy ngươi ngủ yên. Nhiều đêm sau thì không.",
+          "e": {
+            "tamma": 5,
+            "nxp": [
+              "chep",
+              4
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_sach_that",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_thi_hoi",
+      "name": "Thi hội ở kinh",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi đã đỗ cử nhân. Khoa thi hội mở ở kinh, đường xa nửa tháng.",
+      "choices": [
+        {
+          "l": "Lên kinh",
+          "i": "🏯",
+          "chk": [
+            "ngo",
+            15
+          ],
+          "ok": {
+            "t": "Ngươi đỗ tiến sĩ. Tên khắc lên bia đá.",
+            "e": {
+              "bac": -400,
+              "nxp": [
+                "chep",
+                25
+              ]
+            }
+          },
+          "no": {
+            "t": "Ngươi trượt, ở lại kinh chép thuê kiếm lộ phí về.",
+            "e": {
+              "bac": -400,
+              "nxp": [
+                "chep",
+                8
+              ]
+            }
+          }
+        },
+        {
+          "l": "Ở lại dạy học",
+          "i": "🏫",
+          "t": "Học trò của ngươi lần lượt đỗ đạt.",
+          "e": {
+            "nxp": [
+              "chep",
+              10
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_thi_hoi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_tu_quan",
+      "name": "Quan mời làm môn khách",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Quan đầu tỉnh mời ngươi về phủ soạn văn thư, lương hậu, nhưng phải viết theo ý quan.",
+      "choices": [
+        {
+          "l": "Nhận",
+          "i": "🏛️",
+          "t": "Ngày ngày ngươi viết những gì quan muốn đọc.",
+          "e": {
+            "bac": 600,
+            "nxp": [
+              "chep",
+              12
+            ],
+            "tamma": 2
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "chk": [
+            "nang.giao",
+            14
+          ],
+          "ok": {
+            "t": "Quan tiếc, nhưng nể.",
+            "e": {
+              "nxp": [
+                "chep",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Quan phật lòng, trường làng của ngươi bị thu thuế nặng.",
+            "e": {
+              "bac": -200
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_tu_quan",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_chep_thu_vien",
+      "name": "Thư phòng cháy",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:chep",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh",
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Thư phòng của một nhà học lâu đời bốc cháy giữa đêm.",
+      "choices": [
+        {
+          "l": "Lao vào cứu sách",
+          "i": "🔥",
+          "chk": [
+            "tp",
+            10
+          ],
+          "ok": {
+            "t": "Ngươi ôm ra được mấy chục cuốn sách quý.",
+            "e": {
+              "nxp": [
+                "chep",
+                16
+              ],
+              "hp": "-10%"
+            }
+          },
+          "no": {
+            "t": "Khói đặc, ngươi ngất ở cửa. Người ta kéo ngươi ra.",
+            "e": {
+              "hp": "-25%",
+              "nxp": [
+                "chep",
+                5
+              ]
+            }
+          }
+        },
+        {
+          "l": "Đứng ngoài",
+          "i": "🧍",
+          "t": "Cả thư phòng thành tro.",
+          "e": {
+            "tamma": 3
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/chep.json",
+        "ref": "ng_chep_thu_vien",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

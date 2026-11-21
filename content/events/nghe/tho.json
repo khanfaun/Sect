@@ -1,0 +1,810 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "ng_tho_chieu_rach",
+      "name": "Chiếc chiếu rách",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Mẻ chiếu dệt hỏng một tấm, mép bị sổ.",
+      "choices": [
+        {
+          "l": "Tháo ra dệt lại",
+          "i": "🧵",
+          "chk": [
+            "nang.nhan",
+            8
+          ],
+          "ok": {
+            "t": "Dệt lại tới khuya, tấm chiếu còn đẹp hơn cũ.",
+            "e": {
+              "nxp": [
+                "tho",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Càng sửa càng xấu, đành bán rẻ.",
+            "e": {
+              "bac": -5,
+              "nxp": [
+                "tho",
+                2
+              ]
+            }
+          }
+        },
+        {
+          "l": "Bán rẻ cho xong",
+          "i": "🪙",
+          "t": "Có người mua với nửa giá.",
+          "e": {
+            "bac": 5,
+            "nxp": [
+              "tho",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_chieu_rach",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_dat_set",
+      "name": "Đất sét mới",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "song"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi tìm được một bãi đất sét mịn ven sông, nặn ra bình không nứt.",
+      "choices": [
+        {
+          "l": "Đào về dùng",
+          "i": "⛏️",
+          "t": "Mẻ gốm năm ấy đẹp lạ.",
+          "e": {
+            "nxp": [
+              "tho",
+              7
+            ]
+          }
+        },
+        {
+          "l": "Báo cho cả xóm",
+          "i": "🏘️",
+          "t": "Cả xóm gốm có đất tốt. Người ta mời ngươi rượu.",
+          "e": {
+            "nxp": [
+              "tho",
+              5
+            ],
+            "deed": "bo_thi"
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_dat_set",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_khach_kho_tinh",
+      "name": "Khách khó tính",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một bà phu nhân chê cái tủ ngươi đóng không bằng phẳng, đòi trả nửa giá.",
+      "choices": [
+        {
+          "l": "Giải thích, chỉ từng mộng gỗ",
+          "i": "🗣️",
+          "chk": [
+            "nang.giao",
+            9
+          ],
+          "ok": {
+            "t": "Bà ta nghe xong, trả đủ, còn đặt thêm một cái.",
+            "e": {
+              "bac": 40,
+              "nxp": [
+                "tho",
+                6
+              ]
+            }
+          },
+          "no": {
+            "t": "Bà ta càng giận, bỏ về không trả xu nào.",
+            "e": {
+              "bac": -20
+            }
+          }
+        },
+        {
+          "l": "Chịu nửa giá",
+          "i": "😮‍💨",
+          "t": "Bà ta trả nửa giá, đi khắp nơi kể xấu.",
+          "e": {
+            "bac": 10,
+            "nxp": [
+              "tho",
+              2
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_khach_kho_tinh",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_mua_ra",
+      "name": "Mưa dột xưởng",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:0"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Đêm mưa to, mái xưởng dột ngay chỗ để hàng mới làm.",
+      "choices": [
+        {
+          "l": "Dậy che hàng",
+          "i": "☔",
+          "t": "Ngươi ướt sũng tới sáng, hàng không hỏng.",
+          "e": {
+            "hp": "-5%",
+            "nxp": [
+              "tho",
+              4
+            ]
+          }
+        },
+        {
+          "l": "Ngủ tiếp",
+          "i": "😴",
+          "t": "Sáng ra nửa số hàng bị mốc.",
+          "e": {
+            "bac": -30
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_mua_ra",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_hang_gia",
+      "name": "Hàng nhái",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngoài chợ có kẻ bán hàng nhái dấu xưởng ngươi, chất lượng kém.",
+      "choices": [
+        {
+          "l": "Tới tận nơi nói chuyện",
+          "i": "🗣️",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Hắn xin lỗi, hứa không dùng dấu ngươi nữa.",
+            "e": {
+              "nxp": [
+                "tho",
+                8
+              ]
+            }
+          },
+          "no": {
+            "t": "Hắn gọi người tới dọa ngươi.",
+            "e": {
+              "hp": "-10%"
+            }
+          }
+        },
+        {
+          "l": "Đổi dấu khó nhái hơn",
+          "i": "🔏",
+          "chk": [
+            "nang.khao",
+            11
+          ],
+          "ok": {
+            "t": "Dấu mới tinh xảo, kẻ nhái chịu thua.",
+            "e": {
+              "nxp": [
+                "tho",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Dấu mới vẫn bị nhái.",
+            "e": {
+              "nxp": [
+                "tho",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_hang_gia",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_don_cuoi",
+      "name": "Đồ cưới nhà giàu",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Nhà phú hộ đặt trọn bộ đồ cưới, hạn một tháng.",
+      "choices": [
+        {
+          "l": "Thuê thêm thợ làm cho kịp",
+          "i": "👷",
+          "t": "Đúng hạn, nhà phú hộ trả đủ, còn thưởng.",
+          "e": {
+            "bac": 200,
+            "nxp": [
+              "tho",
+              12
+            ]
+          }
+        },
+        {
+          "l": "Tự làm, xin lùi hạn",
+          "i": "🙏",
+          "chk": [
+            "nang.giao",
+            10
+          ],
+          "ok": {
+            "t": "Họ chịu lùi mười ngày.",
+            "e": {
+              "bac": 150,
+              "nxp": [
+                "tho",
+                10
+              ]
+            }
+          },
+          "no": {
+            "t": "Họ huỷ đơn.",
+            "e": {
+              "nxp": [
+                "tho",
+                3
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_don_cuoi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_hoc_tro_ngheo",
+      "name": "Đứa trẻ xin học",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một đứa trẻ mồ côi xin theo học nghề, không có tiền nộp.",
+      "choices": [
+        {
+          "l": "Nhận nó",
+          "i": "🧒",
+          "t": "Nó ở lại xưởng, chăm chỉ hơn ai hết.",
+          "e": {
+            "nxp": [
+              "tho",
+              8
+            ],
+            "deed": "nhan_nuoi"
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🙅",
+          "t": "Nó cúi đầu đi.",
+          "e": {
+            "tamma": 1
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_hoc_tro_ngheo",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_mau_moi",
+      "name": "Mẫu hoa văn mới",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:1"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi nghĩ ra mẫu hoa văn mới, nhưng thợ cả bảo làm khó, tốn công.",
+      "choices": [
+        {
+          "l": "Làm thử một mẻ",
+          "i": "🎨",
+          "chk": [
+            "ngo",
+            8
+          ],
+          "ok": {
+            "t": "Hàng mới bán hết trong ba ngày.",
+            "e": {
+              "bac": 120,
+              "nxp": [
+                "tho",
+                12
+              ]
+            }
+          },
+          "no": {
+            "t": "Mẻ thử hỏng, phí vật liệu.",
+            "e": {
+              "bac": -60,
+              "nxp": [
+                "tho",
+                4
+              ]
+            }
+          }
+        },
+        {
+          "l": "Giữ mẫu cũ",
+          "i": "📦",
+          "t": "Hàng vẫn bán đều.",
+          "e": {
+            "nxp": [
+              "tho",
+              3
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_mau_moi",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_bi_quyet",
+      "name": "Bí quyết nghề",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Ngươi giữ bí quyết pha men cả đời. Học trò giỏi nhất xin được biết.",
+      "choices": [
+        {
+          "l": "Truyền lại",
+          "i": "📜",
+          "t": "Bí quyết không mất theo ngươi. Học trò khắc tên ngươi lên lò.",
+          "e": {
+            "nxp": [
+              "tho",
+              18
+            ]
+          }
+        },
+        {
+          "l": "Ghi vào sách để lại",
+          "i": "📒",
+          "chk": [
+            "ngo",
+            10
+          ],
+          "ok": {
+            "t": "Cuốn sách men gốm được chép thành nhiều bản.",
+            "e": {
+              "nxp": [
+                "tho",
+                20
+              ]
+            }
+          },
+          "no": {
+            "t": "Viết mãi không đủ ý.",
+            "e": {
+              "nxp": [
+                "tho",
+                6
+              ]
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_bi_quyet",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_hang_tien",
+      "name": "Hàng tiến vua",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Quan muốn xưởng ngươi làm một bộ hàng tiến vua, không được sai một li.",
+      "choices": [
+        {
+          "l": "Nhận, làm kỹ từng món",
+          "i": "👑",
+          "chk": [
+            "nang.khao",
+            16
+          ],
+          "ok": {
+            "t": "Bộ hàng được chọn. Xưởng ngươi thành xưởng có tiếng nhất châu.",
+            "e": {
+              "bac": 1000,
+              "nxp": [
+                "tho",
+                22
+              ]
+            }
+          },
+          "no": {
+            "t": "Một món nứt men. Quan phạt nặng.",
+            "e": {
+              "bac": -500,
+              "nxp": [
+                "tho",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Từ chối khéo",
+          "i": "🙇",
+          "chk": [
+            "nang.giao",
+            12
+          ],
+          "ok": {
+            "t": "Quan chọn xưởng khác, không làm khó.",
+            "e": {
+              "nxp": [
+                "tho",
+                4
+              ]
+            }
+          },
+          "no": {
+            "t": "Quan ghét ra mặt.",
+            "e": {
+              "bac": -200
+            }
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_hang_tien",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_xuong_chay",
+      "name": "Xưởng bên cháy",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "tran",
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Xưởng của đối thủ lâu năm bị cháy rụi. Hắn tới xin mượn lò.",
+      "choices": [
+        {
+          "l": "Cho mượn",
+          "i": "🤝",
+          "t": "Hắn làm lại được. Từ đó hai xưởng không còn giành mối nhau.",
+          "e": {
+            "nxp": [
+              "tho",
+              14
+            ],
+            "deed": "hoa_giai"
+          }
+        },
+        {
+          "l": "Từ chối",
+          "i": "🚫",
+          "t": "Khách của hắn chuyển sang ngươi.",
+          "e": {
+            "bac": 300,
+            "nxp": [
+              "tho",
+              6
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_xuong_chay",
+        "commit": "d7.3"
+      }
+    },
+    {
+      "id": "ng_tho_dat_ao",
+      "name": "Đặt áo cho tu sĩ",
+      "kind": "event",
+      "theme": "Sinh kế",
+      "tags": [
+        "nghe:tho",
+        "nghe-tang:2"
+      ],
+      "trigger": {
+        "source": "explore",
+        "places": [
+          "thanh"
+        ],
+        "levels": null,
+        "time": {},
+        "once": true,
+        "special": false,
+        "weight": 1,
+        "cooldownHours": 720
+      },
+      "actors": {},
+      "text": "Một nữ tu đặt dệt tấm áo bằng tơ linh tằm, trả bằng bạc.",
+      "choices": [
+        {
+          "l": "Dệt hết sức",
+          "i": "🧵",
+          "chk": [
+            "nang.nhan",
+            16
+          ],
+          "ok": {
+            "t": "Tấm áo ánh như nước. Nữ tu mỉm cười, trả gấp đôi.",
+            "e": {
+              "bac": 900,
+              "nxp": [
+                "tho",
+                18
+              ]
+            }
+          },
+          "no": {
+            "t": "Sợi tơ đứt mấy lần, áo không đều.",
+            "e": {
+              "bac": 200,
+              "nxp": [
+                "tho",
+                6
+              ]
+            }
+          }
+        },
+        {
+          "l": "Nhận một phần việc, giao phần khó cho thợ khác",
+          "i": "⚖️",
+          "t": "Áo xong, không xuất sắc.",
+          "e": {
+            "bac": 300,
+            "nxp": [
+              "tho",
+              8
+            ]
+          }
+        }
+      ],
+      "logic": {},
+      "origin": {
+        "file": "content/events/nghe/tho.json",
+        "ref": "ng_tho_dat_ao",
+        "commit": "d7.3"
+      }
+    }
+  ]
+}

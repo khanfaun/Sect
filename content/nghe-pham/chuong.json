@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "chuong",
+  "len": [
+    "Một nhóm học trò xin ở lại sau buổi tập. Họ muốn dựng tiểu phái và hỏi ngươi sẽ đặt lệ vào học như thế nào.",
+    "Người từ các thôn tới xin gửi con học võ. Ngươi phải sắp lịch cho những em còn phải về nhà trước chiều.",
+    "Nhiều võ quán mang thư tới hỏi học trò có thể tập chung không. Ngươi đặt một bàn để nghe cả lời phía ít người.",
+    "Các võ phái khác xin ngươi đứng ra phân xử một cuộc tranh sân. Học trò hỏi có được góp lời nếu không đồng ý.",
+    "Người khắp nơi gọi ngươi là bậc đứng đầu giới võ. Sáng ấy, một người mới vẫn phải đứng ngoài vì chưa có ai nhận."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Đèn sân truyền qua tay",
+      "t": "Sau khi ngươi mất, môn đồ để người học tự chọn thầy và giữ quyền rời sân. Họ cử một người mở cửa cho trẻ không đủ phí. Đứa nhỏ từng đứng ngoài quay lại đặt bó củi đầu tiên dưới đèn.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Danh thiếp còn kèm khoản nợ",
+      "t": "Các chi nhánh gửi lễ tới đám tang, rồi hỏi phần phí phải nộp từ nay. Một môn đồ cầm danh thiếp cũ xin được thôi mà không mất việc. Người kế vị phải mở sổ những lời hứa ngươi đã buộc họ ký.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Sân cũ còn tiếng chân",
+      "t": "Sau lễ tang, vài học trò tổ chức lại buổi tập trên nền cũ. Họ để nguyên hàng ghế thấp nơi ngươi từng ngồi chỉ thế đứng. Người đi ngang còn nghe tiếng họ đếm nhịp qua cửa.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Tấm biển tự tay treo",
+      "t": "Võ quán nhỏ khép cửa khi ngươi qua đời. Người từng đến tập thỉnh thoảng ghé lau tấm biển đã bạc màu. Một người đem cất nó sau trận mưa lớn để con cháu còn biết đây từng là nơi học võ."
+    }
+  ]
+}

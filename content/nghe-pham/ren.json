@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "ren",
+  "len": [
+    "Thợ cả để ngươi tự gắp phôi khỏi lửa. Lần này người kéo bễ đứng cạnh ngươi, chờ nghe lúc cần dừng.",
+    "Người mang cuốc tới hỏi ngươi chọn sắt thay vì chờ chủ lò. Món đầu sửa xong đã được đem thẳng ra ruộng.",
+    "Chùm chìa của lò về tay ngươi. Thợ hỏi hôm nào lĩnh công, còn khách đã đặt trước lưỡi cày cho mùa tới.",
+    "Người mua từ xa tới xem dấu búa nhà ngươi. Ngươi để họ thử một lưỡi trước khi nhận cả lô đem đi.",
+    "Những lò khác gửi người tới học. Ngươi trải các mẫu đã hỏng lên bàn, chỉ cả chỗ sắt nứt và chỗ thợ đánh quá tay."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Búa còn bên đe",
+      "t": "Sau khi ngươi mất, người học việc dùng búa của ngươi sửa miễn công lưỡi cuốc đầu mùa cho một nhà cũ. Họ giữ lệ cho khách thử ngay trước bệ. Từ xa, người ta còn mang đồ hỏng tới vì tin sẽ được nói rõ có sửa được không.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Dấu lò trên bao kiếm",
+      "t": "Người bảo trợ gửi xe tới lấy lô kiếm cuối ngay trước ngày tang. Họ giữ được đơn hàng, còn một hộ từng mất ruộng trong trận đánh mang mảnh bao có dấu lò tới nhận mặt. Người kế nghiệp cất nó cạnh sổ tiền ứng.",
+      "dk": {
+        "bacNgheTu": 4,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Tiếng búa bên vách",
+      "t": "Người phụ lò nhóm lửa lại sau khi chôn ngươi. Họ mài lưỡi búa theo vết cũ và treo tờ ghi giá để dân biết trước khi mang cuốc. Những người đứng chờ vẫn gọi chỗ sửa ấy bằng tên ngươi.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Tàn than trong túi áo",
+      "t": "Khi ngươi qua đời, gia đình giũ áo ra còn nắm bụi than. Người từng đứng cạnh bễ đến trả chiếc kìm ngươi cho mượn. Họ dùng nó gắp một hòn than để nhóm bếp cho bữa tang."
+    }
+  ]
+}

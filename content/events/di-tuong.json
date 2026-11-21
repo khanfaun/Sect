@@ -19,7 +19,7 @@
       },
       "actors": {},
       "text": [
-        "Trên trời bỗng mở ra một khe nứt ngũ sắc. Tu sĩ khắp nơi đổ về: bí cảnh trăm năm mới mở một lần!",
+        "Một khe sáng ngũ sắc mở giữa trời. Tu sĩ từ các ngả đổ về khi lối vào bí cảnh còn hé.",
         "Một vòng sáng xoáy giữa khoảng đất trống. Lối vào bí cảnh mở ra, để lộ những bậc đá không thuộc về nơi này."
       ],
       "choices": [
@@ -38,7 +38,8 @@
               "win": {
                 "t": "Thủ hộ thú gục xuống. Phía sau là một bệ đá, trên đó có bảo vật đang phát sáng.",
                 "e": {
-                  "relic": 1
+                  "relic": 1,
+                  "ltRoll": "bicanh"
                 }
               }
             },
@@ -51,7 +52,8 @@
                   "hoixuan",
                   "taytuy"
                 ],
-                "h": 144
+                "h": 144,
+                "ltRoll": "bicanh"
               }
             },
             {
@@ -75,7 +77,12 @@
             "t": "Mấy kẻ lảo đảo đi ra, mình đầy thương tích. Ngươi ra tay nhanh gọn.",
             "e": {
               "st": 40,
-              "karma": -6
+              "hd": {
+                "t": 3
+              },
+              "ng": {
+                "b": 3
+              }
             }
           },
           "no": {
@@ -88,7 +95,12 @@
               "t": "Hắn gục. Túi trữ vật của hắn nặng trịch.",
               "e": {
                 "st": 30,
-                "karma": -3
+                "hd": {
+                  "t": 3
+                },
+                "ng": {
+                  "b": 3
+                }
               }
             }
           }
@@ -197,8 +209,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {},
@@ -249,7 +261,7 @@
       "actors": {},
       "text": [
         "Đại hội đấu giá của Vạn Bảo Thương Hội. Món cuối cùng được bưng ra, phủ khăn đỏ. Người dẫn chương trình mỉm cười: “{$dan}, giá khởi điểm…”",
-        "Ngươi chen được vào hội đấu giá ở {$pl}. Đèn lồng vạn ngọn, người tu tiên ngồi kín ba tầng lầu."
+        "Ngươi chen được vào hội đấu giá ở {$pl}. Đèn lồng thắp dọc lan can, khách ngồi kín các tầng lầu."
       ],
       "choices": [
         {
@@ -273,6 +285,14 @@
           "t": "Một món bảo vật không ai để ý. Ngươi mua với giá hời.",
           "e": {
             "relic": 0
+          }
+        },
+        {
+          "i": "🏷️",
+          "l": "Gửi bán một món",
+          "t": "Ngươi giao món đồ quý nhất cho thương hội. Tiếng búa gõ, giá cao hơn tiệm thường.",
+          "e": {
+            "dgBan": 1
           }
         },
         {
@@ -344,7 +364,7 @@
         },
         {
           "i": "🚪",
-          "l": "Lách vào trong",
+          "l": "Lách vào nơi linh khí đang phun",
           "fight": {
             "k": "tantu",
             "cnt": 2
@@ -359,8 +379,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -433,7 +453,7 @@
         },
         {
           "i": "🔍",
-          "l": "Nghiên cứu tinh lực",
+          "l": "Tìm hiểu sức mạnh trong mảnh sao",
           "t": "Ngươi ngồi bên hố, cảm ngộ tinh lực trời sao.",
           "e": {
             "h": 12,
@@ -443,8 +463,8 @@
         },
         {
           "i": "🚶",
-          "l": "Cáo từ, tiếp tục lên đường",
-          "t": "Ngươi chọn rời khỏi nơi này, không can dự thêm."
+          "l": "Tiếp tục lên đường",
+          "t": "Ngươi rời đi, để chuyện lại cho những người ở đây."
         }
       ],
       "logic": {
@@ -505,7 +525,7 @@
         },
         {
           "i": "🚶",
-          "l": "Không có tiền, thôi",
+          "l": "Rời hội đấu giá",
           "t": "Ngươi đứng ngoài nghe tiếng hô giá."
         }
       ],

@@ -1,0 +1,27 @@
+{
+  "nghe": "Cổ sư",
+  "su_kien": [
+    {
+      "ma": "S01",
+      "ten": "Tên sự kiện theo bảng 7.4",
+      "text": [
+        "Đoạn mở: nêu cảnh bằng chi tiết cụ thể, 2–4 câu.",
+        "Đoạn hai: đặt ra việc phải chọn."
+      ],
+      "choices": [
+        { "l": "Nhãn lựa chọn ngắn", "t": "Kết quả 2–3 câu, riêng cho lựa chọn này.", "e": {} },
+        { "l": "Lựa chọn thứ hai", "t": "Kết quả khác hẳn nhánh trên.", "e": {} }
+      ]
+    }
+  ],
+  "ket_cuc": [
+    {
+      "ma": "K01",
+      "ten": "Tên kết cục theo bảng 7.4",
+      "canh": [
+        "Đoạn một của cảnh kết.",
+        "Đoạn hai của cảnh kết."
+      ]
+    }
+  ]
+}

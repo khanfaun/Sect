@@ -46,8 +46,7 @@ function tpSect(){const r=G.run;if(r.flags.sectTp)return null;r.flags.sectTp=1;c
 // bỏ tâm pháp tự cấp cho mọi kiếp; xuất thân gia truyền, ký ức kiếp trước
 // Bảng TP_ORIGIN: content/characters/tp-origin.js
 for(const id in TP_ORIGIN){const o=ORIGIN.find(x=>x.id===id);if(o)o.d+=contentText("core2_10-pham-nhan-chua-dan_js.019");}
-UPG.push({id:'kytp',n:contentText("core2_10-pham-nhan-chua-dan_js.020"),i:'🪷',max:2,c:[12,28],d:contentText("core2_10-pham-nhan-chua-dan_js.021")});
-{const _die21=die;die=function(cause,info){const r=G.run;if(r&&r.arts){const a=tuOf(arts());if(a)G.meta.tpMem={n:a.n,tier:a.tier,el:a.el};}return _die21(cause,info);};}
+// (Đ2.6) bỏ nâng cấp Ký ức tâm pháp: đầu thai quên sạch (HN A.16). Điểm đã mua được hoàn ở migrateX (core2/37).
 {const _nr21=newRun;newRun=function(c){const res=_nr21(c);const r=G.run;if(!r||!r.pham)return res;run2();
   const old=r.arts.filter(a=>a.start).map(a=>a.u);r.arts=r.arts.filter(a=>!a.start);for(let j=0;j<8;j++)if(r.chu[j]&&old.includes(r.chu[j].u))r.chu[j]=null;
   const og=TP_ORIGIN[r.origin];const mem=G.meta.tpMem,k=U('kytp');
@@ -59,12 +58,13 @@ UPG.push({id:'kytp',n:contentText("core2_10-pham-nhan-chua-dan_js.020"),i:'🪷'
   items.unshift({k:'relic',rel:bookOf(a),p:price(15)});};}
 // cao nhân, tự ngộ, lão nhân: kỳ ngộ riêng, không rơi vào vòng ngẫu nhiên
 // Kỳ ngộ/hộp thoại: content/events/opportunities/.
-{const _adv21=advanceTime;advanceTime=function(h){const o=_adv21(h);const r=G.run;if(!r||!r.pham||!(h>0))return o;if(hasTp()){r.tpAcc=0;return o;}
+{const _adv21=advanceTime;advanceTime=function(h){const o=_adv21(h);const r=G.run;if(!r||!r.pham||!(h>0)||isVo(r))return o; // vô căn: không có tâm pháp bảo đảm (Đ2.3)
+ if(hasTp()){r.tpAcc=0;return o;}
   r.tpAcc=(r.tpAcc||0)+h;const y=r.age-r.birthAge;const free=()=>!r.scene&&G.screen==='map';
-  if(y>=TP_Y-0.5&&free()){kyStart(tpGuarPick());r.tpAcc=0;return o;}
+  if(y>=TP_Y-0.5&&free()&&!kyHoanNow()){kyStart(tpGuarPick());r.tpAcc=0;return o;}
   while(r.tpAcc>=HM&&G.run&&!hasTp()){r.tpAcc-=HM;
     if(S().ngo>=14&&chance(.03)){const a=tpLearn(0,{n:contentText("core2_10-pham-nhan-chua-dan_js.027"),el:pick(r.root.els.filter(e=>EL[e]))||'vo',src:contentText("core2_10-pham-nhan-chua-dan_js.028")});tpPop(a,contentText("core2_10-pham-nhan-chua-dan_js.029"),contentText("core2_10-pham-nhan-chua-dan_js.030"));break;}
-    if(y>=1&&free()&&chance(.04+.03*y)){const candidate=KYNGO.find(x=>x.id==='tp_ansi');if(!candidate.content||contentTriggerOk(candidate.content))kyStart(candidate);break;}}
+    if(y>=1&&free()&&chance(.04+.03*y)){const candidate=KYNGO.find(x=>x.id==='tp_ansi');if(!candidate.content||contentTriggerOk(candidate.content))kyNgau(candidate);break;}}
   if(G.run&&!hasTp()&&y>=TP_Y){const v=tpGuarPick();const a=tpGuarLearn(v);tpPop(a,v.n,v.pop);}
   return o;};}
 function tpPop(a,title,text){note(text+contentText("core2_10-pham-nhan-chua-dan_js.tpPop.031")+a.n+'.','up');G.qpop=G.qpop||[];G.qpop.push({kind:'done',text:a.n,grade:a.tier+1,ch:[tpChip(a)],title});}

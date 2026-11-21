@@ -1867,7 +1867,7 @@
       "line": 26
     }
   ],
-  "events": 403,
+  "events": 469,
   "collections": {
     "relics": 814,
     "pre": 11,
@@ -1879,6 +1879,6 @@
     "mats": 210,
     "beasts": 61,
     "origins": 30,
-    "qitems": 86
+    "qitems": 104
   }
 }

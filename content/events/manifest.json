@@ -41,6 +41,27 @@
     "content/events/thuong-doi.json",
     "content/events/truy-sat.json",
     "content/events/tuan-tra.json",
-    "content/venues/services.json"
+    "content/venues/services.json",
+    "content/events/nghe/nong.json",
+    "content/events/nghe/ngu.json",
+    "content/events/nghe/thuong.json",
+    "content/events/nghe/vo_gia.json",
+    "content/events/nghe/y.json",
+    "content/events/nghe/tieu.json",
+    "content/events/nghe/mo.json",
+    "content/events/nghe/ren.json",
+    "content/events/nghe/tho.json",
+    "content/events/nghe/chep.json",
+    "content/events/nghe/tram.json",
+    "content/events/nghe/binh.json",
+    "content/events/nghe/sat.json",
+    "content/events/nghe/trom.json",
+    "content/events/nghe/hat.json",
+    "content/events/nghe/quan.json",
+    "content/events/nghe/do.json",
+    "content/events/nghe/chuong.json",
+    "content/events/nghe/san.json",
+    "content/events/nghe/tieu_su.json",
+    "content/events/nghe/khat_cai.json"
   ]
 }

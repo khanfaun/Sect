@@ -1,15 +1,15 @@
 // Bảng nhân vật: căn cơ (thân thế, tu luyện, chiến đấu), túi đồ, sở học, kỹ năng.
 // Túi đồ, sở học, kỹ năng và thẻ tiềm chất vẫn dùng bản HTML cũ (sẽ chuyển sau).
 import { Html, PS } from '../html';
-import { Ib, Ic, Tabs, tip } from '../chung';
+import { Ib, Ic, Tabs, tip, tah } from '../chung';
 import { Win } from './Khung';
 import { TuiDo } from './TuiDo';
 import { SoHoc, KyNang } from './SoHoc';
 
 // Một dòng tên — giá trị (giống kvRow()). v là chuỗi HTML (mức đánh giá có màu…)
-function Kv({ n, v, t, cls }) {
+function Kv({ n, v, t, th, cls, tut }) {
   return (
-    <div className={'kr ' + (cls || '')} {...tip(t)}>
+    <div className={'kr ' + (cls || '')} {...(th ? tah(th) : tip(t))} data-tut={tut}>
       <span><Html style={{ display: 'contents' }} h={PS.sib(n)} />{n}</span>
       <Html as="b" h={String(v)} />
     </div>
@@ -46,7 +46,10 @@ function CanCo() {
   const r = G.run, s = PS.S();
   const og = ORIGIN.find(o => o.id === r.origin), tr = TRAIT.find(t => t.id === r.trait), R0 = PS.rootView(r.root);
   const R1 = ROOT.find(x => x.id === r.root.id), tc = s.tuchat, left = Math.max(0, Math.floor(s.life - r.age));
-  const lcV = `<span class="lc2"><small>${esc(R0.n)}</small><span class="lc-els">${r.root.els.map(PS.elSeal).join('')}</span></span>`;
+  const rk = PS.rootKnown(r);
+  const lcV = PS.rootHTML(r);
+  const lcT = !rk ? 'Chưa trắc linh: chưa biết mình có linh căn hay không.' : R1.d + '' + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R0.m) + ').';
+  const lcTh = esc(lcT).replace(/\n/g, '<br>') + (rk ? '<div class="lc-els">' + r.root.els.map(PS.elSeal).join('') + '</div>' : '');
   const tvTip = 'Tu vi ' + PS.tvShow() + '%' + (PS.dinhPhong() ? (PS.dvm() ? '\nĐại viên mãn: khí huyết, linh lực, công, thủ +5%.' : '\nChưa đại viên mãn: ' + PS.dvmWhy() + '.\n(Cần: không trọng thương, tâm ma dưới ' + PS.DVM_TAMMA + ', đạo tâm từ ' + PS.DVM_TAM + ')') : '')
     + (PS.bbKind() ? '\nBán bộ ' + REALM[r.realm + 1] + ': dùng được đồ, công pháp, tâm pháp của ' + REALM[r.realm + 1] + '; chỉ số vẫn như cũ.' : '');
   const e = PS.llEff(r.tv);
@@ -57,8 +60,9 @@ function CanCo() {
     <div className="basegrid">
       <HopGon k="than" icon="flag" name="Thân thế">
         <Kv n="Xuất thân" v={esc(og.n)} t={og.d} />
-        {tr && tr.id !== 'none' && <Kv n="Mệnh cách" v={esc(tr.n)} t={tr.d} />}
-        <Kv n="Linh căn" v={lcV} t={R1.d + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R1.m) + ').'} />
+        <button className="kr wishrow" data-act="wishOpen" {...tip('Điều ta muốn ở kiếp này. Chỉ là lời ghi, đổi lúc nào cũng được.')}><span>Nguyện vọng</span><b>{r.wish ? ((PS.TUT_WISH || []).find(x => x[0] === r.wish) || [0, ''])[1] : 'Chưa ghi'}</b></button>
+        {tr && tr.id !== 'none' && <Kv n="Mệnh cách" v={esc(tr.n)} t={tr.d + (PS.tueTxt(tr.id) ? '\n' + PS.tueTxt(tr.id) : '')} />}
+        <Kv n="Linh căn" tut="rootinfo" v={lcV} th={lcTh} />
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên khí vận', (r.kv || []).map(k => TT_DEST[k]), 'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.')} />
         <Html style={{ display: 'contents' }} h={PS.htRow()} />
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên thể chất', (r.the || []).map(PS.ttPhysOf), 'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.')} />
@@ -68,13 +72,15 @@ function CanCo() {
         <Kv n="Đạo tâm" v={RT('tam', s.tam, 'muc')} t="Chống ảo cảnh, đột phá" />
         <Kv n="Khí vận" v={RT('van', s.van, 'muc')} t={"Chí mạng, may mắn. Khí vận cao thì dễ gặp kỳ ngộ; kỳ ngộ lớn chỉ mở khi khí vận từ " + PS.KY_BIG_VAN + " trở lên."} />
         <Kv n="Mị lực" v={`<span class="mi-v">${PS.miName()}</span>`} t={'Dung mạo, phong thái. Ảnh hưởng giá mua bán, các phép thử thuyết phục, ấn tượng ban đầu của người lạ, việc kết giao, bái sư, kết đạo lữ.\nQuá nổi bật đôi khi cũng chuốc lấy ghen ghét.'} />
-        <Kv n="Nhân quả" v={PS.karmaName(r.karma)} t="Thiện ác đều có báo" />
+        <Kv n="Hành đạo" v={PS.hdName()} t={PS.hdTip()} />
+        <Kv n="Thiện duyên" v={PS.ngName('G')} t="Những người còn nhớ ơn ngươi." />
+        <Kv n="Nghiệp chướng" v={PS.ngName('B')} t="Những món nợ còn chưa trả." />
         <Kv n="Tuổi" v={Math.floor(r.age) + ' · còn ' + left + ' năm'} t={'Thọ nguyên ' + s.life + '. Hết thọ nguyên là tọa hóa'} />
       </HopGon>
       <HopGon k="tu" icon="yin" name="Tu luyện">
         <Kv n="Cảnh giới" v={esc(PS.realmLabel()) + ` <span class="qhelp" data-act="cgOpen" data-tip="Mở hệ thống cảnh giới">?</span>`} t={tvTip} />
-        {!PS.isPham() && PS.G.run.realm >= 1 && <Kv n="Che giấu tu vi" v={`<button class="btn sm" data-act="hideCycle">${PS.hideOn() ? 'Hiện như ' + PS.shownName() : 'Không che'}</button>`} t={'Người ngoài thấy cảnh giới thấp hơn thật. Sức mạnh không đổi. Kẻ địch không nhìn thấu thì coi thường, ngươi ra tay trước. Kẻ có thần thức cao hơn nhìn xuyên được.\nBấm để hạ thêm một bậc, hạ tới phàm nhân thì bấm nữa để thôi.'} />}
-        <Thanh n="Tu vi" v={PS.tvShow()} cls="tv" />
+        {!PS.isPham() && PS.G.run.realm >= 1 && <Kv n="Che giấu tu vi" v={`<button class="btn sm" data-act="hideCycle">${PS.hideOn() ? 'Người khác thấy ngươi ở bậc ' + PS.shownName() : 'Không che'}</button>`} t={'Người ngoài thấy cảnh giới thấp hơn thật. Sức mạnh không đổi. Kẻ địch không nhìn thấu thì coi thường, ngươi ra tay trước. Kẻ có thần thức cao hơn nhìn xuyên được.\nBấm để hạ thêm một bậc, hạ tới phàm nhân thì bấm nữa để thôi.'} />}
+        {PS.voKnown() ? <div className="vo-note">Vô linh căn — chưa thể tu luyện</div> : !PS.rootKnown() ? <div className="vo-note">Chưa biết mình có tiên duyên hay không</div> : <Thanh n="Tu vi" v={PS.tvShow()} cls="tv" />}
         <Kv n="Tốc độ tu" v={RT('bq', PS.bqReal(), 'toc')} t={'Tu vi nhận được mỗi tháng BẾ QUAN ở nơi đang đứng. Không bế quan thì không tăng theo chỉ số này. Hên xui trong khoảng này.\nPhụ thuộc linh căn, tư chất, ngộ tính, Khí Hải và linh khí nơi bế quan.'} />
         <Kv n="Thổ nạp" v={RT('thonap', PS.thonapPct(), 'toc')} t={'Thân thể tự hít thở linh khí: không cần bế quan, tu vi vẫn tự tăng theo thời gian, kể cả lúc đi đường hay bế quan.\nRất ít, chừng 5% tốc độ bế quan. Theo linh căn, tư chất, ngộ tính, công pháp, tâm pháp, trang bị, mệnh cách và linh khí nơi đang đứng.'} />
         <Kv n="Hiệu suất tu" v={`<span class="${hs[0]}">${hs[1]}</span>`} t={'Phần tu vi thực nhận so với lẽ ra được nhận, do chênh lệch tu vi và lịch luyện.\nTu vi càng bỏ xa lịch luyện thì nhận càng ít, tới mức bình cảnh gần như đứng yên.\nLịch luyện cao hơn tu vi thì được ngộ đạo, nhận thêm một ít.'} />
@@ -82,6 +88,7 @@ function CanCo() {
         <Kv n="Tâm ma" v={`<span class="${['rt3', 'rt3', 'rt2', 'bad', 'bad'][Math.min(4, Math.floor((r.tamma || 0) / 20))]}">${PS.tmWord(r.tamma)}</span>`} t="Tâm ma đầy thì phải đối mặt với chính mình" cls={r.tamma >= 60 ? 'bad' : ''} />
         <Kv n="Thần thức" v={RT('than', s.than, 'luc')} t={'Sức mạnh thần thức. Hơn đối thủ thì đòn thần thức làm choáng được. Tầm thần thức là tầm nhìn trên bản đồ.\nTăng theo cảnh giới, ngộ tính và tâm pháp.'} />
         <Kv n="Niệm lực" v={RT('nl', s.nl, 'luc')} t={'Kho sức thần thức dùng trong trận, bằng ba lần Thần thức. Vào trận thì đầy.\nDùng vật phẩm, tế pháp bảo, đòn thần thức đều tốn niệm lực.'} />
+        {r.vo && <Kv n="Võ học" v={PS.voBacN(r.vo.bac | 0) + ' · ' + PS.voNgayTxt(r)} t={'Bậc võ phàm. Luyện võ ở bất cứ đâu, thắng trận và lôi đài để lên bậc.' + ((r.voHoc || []).length ? '\nĐã học: ' + r.voHoc.map(id => (PS.voHocBy(id) || {}).n).join(', ') : '')} />}
         <Kv n="Thân pháp" v={RT('tp', s.tp, 'toc')} t="Nhanh nhẹn. Trong trận là tốc độ chạy trên nửa đầu thanh hành động; ngoài trận đi lại cũng nhanh hơn." />
       </HopGon>
       <details className="sgbox cbstat" open={cbOpen}>
@@ -89,7 +96,7 @@ function CanCo() {
         <div className="kvl">
           <Kv n="Lực chiến" v={RT('lc', PS.lucChien(), 'luc')} t="Lực chiến: tính từ chỉ số chiến đấu và trang bị" cls="lcrow" />
           <Kv n="Khí huyết" v={RT('maxHp', s.maxHp, 'ben')} t="Khí huyết tối đa dày hay mỏng. Về 0 là chết" />
-          <Kv n="Linh lực" v={RT('maxMp', s.maxMp, 'ben')} t="Thi triển pháp thuật" />
+          <Kv n={PS.mpName()} v={RT('maxMp', s.maxMp, 'ben')} t={PS.isPham() ? 'Nội lực luyện từ khí huyết, dùng ra chiêu võ' : 'Thi triển pháp thuật'} />
           <Kv n="Công vật lý" v={RT('atk', s.atk)} t="Dùng cho đánh thường và kiếm pháp, quyền cước" />
           <Kv n="Công phép" v={RT('matk', s.matk)} t="Dùng cho pháp thuật" />
           <Kv n="Chí mạng" v={RT('crit', s.crit, 'muc')} t="Tỉ lệ chí mạng" />
@@ -105,7 +112,22 @@ function CanCo() {
   </>;
 }
 
-const TABS = [['base', 'Căn cơ'], ['bag', 'Túi đồ'], ['hoc', 'Sở học'], ['kn', 'Kỹ năng']];
+const TABS = [['base', 'Căn cơ'], ['bag', 'Túi đồ'], ['hoc', 'Sở học'], ['kn', 'Kỹ năng'], ['dao', 'Đạo đồ']];
+
+// Đ5.2: Đạo đồ — các đường đời đang theo (nghề phàm), danh vị và tiến độ bằng chữ; võ học
+function DaoDo() {
+  const r = PS.G.run, L = PS.ngView();
+  return (
+    <div className="kvl daodo">
+      {!L.length && !r.vo && <p className="hint">Chưa theo con đường nào. Tìm việc ở Mưu sinh hoặc luyện võ để bắt đầu.</p>}
+      {L.map(x => <Kv key={x.ma} n={x.n} v={(x.phai ? '<span class="bad">' : '') + x.rank + ' · ' + x.txt + (x.phai ? '</span>' : '')} t={x.phai ? 'Đường này đang phai: đã theo đủ ba đường khác. Làm lại việc của nghề thì nối lại.' : 'Danh vị trong nghề ' + x.n.toLowerCase()} />)}
+      {r.vo && <Kv n="Võ học" v={PS.voBacN(r.vo.bac | 0) + ' · ' + PS.voNgayTxt(r)} t="Võ đạo phàm nhân" />}
+      {PS.tuView && PS.tuView().map(x => <Kv key={x.id} n={x.n} v={x.bac + ' · ' + x.cp + ' ' + x.tang} t={x.vai + ': nghề tu, tay nghề tăng qua hợp đồng đúng nghề'} />)}
+      {PS.nangView && <><h4>{PS.contentText('nang.head')}</h4>
+        {PS.nangView().map(x => <Kv key={'n' + x.k} n={x.n} v={x.muc} t={x.t} />)}</>}
+    </div>
+  );
+}
 
 export function NhanVat() {
   const { G, UI } = PS;
@@ -118,6 +140,7 @@ export function NhanVat() {
       {tab === 'bag' && <TuiDo />}
       {tab === 'hoc' && <SoHoc />}
       {tab === 'kn' && <KyNang />}
+      {tab === 'dao' && <DaoDo />}
     </Win>
   );
 }

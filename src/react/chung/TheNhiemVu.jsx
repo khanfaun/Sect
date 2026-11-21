@@ -26,7 +26,7 @@ export function TheNhiemVu({ q }) {
             <div><span>Nơi tới</span><b>{tg && tg.fog >= 1 ? tg.name : 'chưa rõ'}</b></div>
             <div><span>Nhận ở</span><b>{fn ? fn.name : ''}</b></div>
             <div className="qrw-row"><span>Phần thưởng</span><b className="qrw"><Chips list={PS.questRewardChips(q)} /></b></div>
-            <div><span>Hủy thì phạt</span><b className="bad">mất {pen.st} linh thạch, nhân quả {pen.karma}</b></div>
+            <div><span>Hủy thì phạt</span><b className="bad">mất {pen.st} linh thạch, mang tiếng thất hứa</b></div>
           </div>
         </div>
       )}

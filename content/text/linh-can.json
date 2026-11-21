@@ -1,0 +1,13 @@
+{
+  "vo.noTv": "Không cảm được linh khí",
+  "vo.noTvTip": "Ngươi không có linh căn, nên không thể giữ linh khí trong người.",
+  "vo.hud": "Vô linh căn — chưa thể tu luyện",
+  "tl.chua": "Chưa trắc",
+  "tl.log": "Trắc linh: {{0}}.",
+  "tl.chipTip": "Kết quả trắc linh",
+  "tl.daBiet": "Ngươi đã biết linh căn của mình; viên đá vỡ vụn vô ích.",
+  "tl.hud": "Chưa biết mình có tiên duyên hay không",
+  "qs.src": "Túc Tuệ Đăng",
+  "tue.log": "Theo năm tháng, {{1}} có chuyển biến.",
+  "tue.tip": "Theo năm tháng: {{0}}"
+}

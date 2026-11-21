@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "dao_mo",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Chiếc bát đặt sai chỗ",
+      "t": "Một người mang đồ cúng ra mộ và thấy huyệt từng bị ngươi đào chưa được lấp chắc. Chiếc bát gia đình vẫn dùng đã nghiêng theo đất lún. Họ tìm ngươi vì có người thấy ngươi trở về từ lối ấy.",
+      "c": [
+        {
+          "id": "nhan",
+          "l": "Nhận việc và phụ đắp lại mộ",
+          "t": "Ngươi nói mình đã lấy gì rồi phụ đắp đất. Gia đình giữ lại quyền quyết chỗ đặt bát.",
+          "e": {
+            "h": 4
+          }
+        },
+        {
+          "id": "gui",
+          "l": "Gửi tiền sửa mộ và rời đi",
+          "t": "Ngươi trao tiền dưới chân bia. Họ nhận để sửa mộ, nhưng vẫn hỏi đồ cũ đã đi đâu.",
+          "dk": {
+            "bacTu": 160
+          },
+          "e": {
+            "bac": -160
+          }
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Món đồ cũ trong tủ hiệu",
+      "t": "Một người nhận ra chiếc lược gia đình chôn theo người thân trên sạp đồ cũ. Món ấy do ngươi bán sau khi đào mộ. Chủ sạp chưa dám trao, muốn người bán tới xác nhận trước.",
+      "c": [
+        {
+          "id": "xac",
+          "l": "Xác nhận để họ lấy lược về",
+          "t": "Ngươi kể mình lấy nó ở đâu. Chủ sạp trao lược, còn gia đình giữ tờ ghi đường đi của món đồ."
+        },
+        {
+          "id": "chuoc",
+          "l": "Bỏ tiền chuộc lược rồi trao lại",
+          "t": "Ngươi trả giá chủ sạp đã mua và đứng đợi khi người nhà gói lược vào khăn.",
+          "dk": {
+            "bacTu": 120
+          },
+          "e": {
+            "bac": -120
+          }
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Người trông mộ mất chỗ ngủ",
+      "t": "Sau lần mộ bị đào, người trông mộ phải đem chăn ra ngủ ngoài vườn. Ông tìm ngươi để hỏi có còn ai quay lại. Đêm trước mưa dột, chiếc chiếu phía ngoài vẫn ướt tới mép.",
+      "c": [
+        {
+          "id": "noi",
+          "l": "Nói rõ chỉ mình ngươi đã tới",
+          "t": "Ngươi nói điều mình biết và ghi đường đã đi. Ông mang bản ấy về để hỏi chủ vườn."
+        },
+        {
+          "id": "mua",
+          "l": "Mua chiếu khô cho ông qua đêm",
+          "t": "Ngươi trả tiền chiếu và giúp chuyển vào mái khô. Ông nhận nhưng vẫn muốn nghe chuyện cái huyệt.",
+          "dk": {
+            "bacTu": 80
+          },
+          "e": {
+            "bac": -80
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -19,7 +19,7 @@ Nữ thợ lặn {$a.ten} đứng trên giàn, giữ sợi dây có đầu kia n
 - **1. Mua bùa thở giúp nàng xuống gặp**
   Ngươi mua bùa ở trạm lặn. Nàng xuống gặp được hắn, trở lên đúng trước khi bùa hết hiệu lực. Gỡ dây xong, nàng vẫn quay lại nhìn mặt nước.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4,"an":["a","dây kéo ở hai đầu"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"an":["a","dây kéo ở hai đầu"]}`
 - **2. Mua chỗ trên giàn để xuống trước**
   Ngươi tới được mạch khí đang mở. Hai người đợi trên và dưới mặt nước, dây nằm ngang qua một vòng phao.
   - `cost`: `{"st":16}`
@@ -56,7 +56,7 @@ Hai người tìm một buồng có túi khí đủ lâu để nói chuyện. Ng
 - **1. Gia cố vòm buồng bằng pháp lực**
   Ngươi dùng pháp lực gia cố vòm, để túi khí không tan theo sóng lớn. Hai người có chỗ gặp nhau lâu hơn một hơi lặn. Nàng nhờ ngươi dạy cách nhìn vết nứt, lần sau sẽ tự kiểm tra trước khi xuống.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Đổi giờ dùng buồng lấy công dẫn đường**
   Họ chỉ ngươi lối đi sâu. Khi ngươi tới buồng, trên tường còn dấu hai chỗ từng treo áo.
   - `e`: `{"tv":3}`
@@ -94,11 +94,11 @@ Giàn đã mục. Nữ thợ lặn {$a.ten} đem vòng phao lên bãi, trên dâ
 - **1. Tìm chỗ neo cho hai người gặp lại**
   Ngươi trả tiền thuê thuyền, đưa nàng tìm một mỏm đá kín gió, mất trọn ngày dò đường. Người dưới nước nhận ra sợi dây thả xuống, bơi lên đón. Cả hai chọn chỗ ấy làm nơi gặp mới.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4,"h":24,"an":["a","vòng phao bỏ trống"]}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3},"h":24,"an":["a","vòng phao bỏ trống"]}`
 - **2. Mua vòng phao lấy gỗ nhẹ**
   Nàng đủ tiền thuê giàn khác một lần. Nút dây còn lại vướng vào tay ngươi lúc cưa gỗ.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":2}`
+  - `e`: `{"hd":{"p":1},"ng":{"g":1}}`
 - **3. Bỏ đi**
   Nàng quấn dây quanh vòng. Đến nút ấy thì dừng.
 
@@ -132,11 +132,11 @@ Triều lớn ép một nhóm người vào hốc đá giữa biển. Nếu ngư
 
 - **1. Căng dây dẫn cả nhóm ra ngoài**
   Ngươi cùng nàng kéo dây từ hốc tới mỏm đá. Ngư nhân dẫn từng người bám dây ra khỏi nước, ngươi giữ đầu trong tới lượt cuối. Không còn ai mắc lại.
-  - `e`: `{"karma":4}`
+  - `e`: `{"deed":"cuu_nguoi"}`
 - **2. Giữ túi khí để chờ cứu từ bờ**
   Ngươi dùng pháp lực giữ túi khí, để người biết bơi ra bờ gọi thuyền. Tới khi cứu được người cuối, ngươi kiệt khí, phải nhờ đôi bạn dìu lên. Họ đếm lại đủ người rồi mới rời đi.
   - `cost`: `{"mp":"20%"}`
-  - `e`: `{"karma":2}`
+  - `e`: `{"deed":"cuu_nguoi_hy_sinh"}`
 - **3. Bỏ đi**
   Trước khi tiếng người bị nước lấp, dây giật một lần.
 
@@ -178,7 +178,7 @@ Nếu nhóm thoát qua dây, họ mang thừng dựng nhà chờ. Nếu từng �
 - **1. Góp bùa cho người đi ngang dùng chung**
   Ngươi mua bùa thở mới để người qua bến dùng chung. Hai người ngồi ở ghế nửa chìm, mỗi người đặt một cái chén.
   - `cost`: `{"st":16}`
-  - `e`: `{"karma":4}`
+  - `e`: `{"hd":{"p":3},"ng":{"g":3}}`
 - **2. Nhận quyền cho thuê nhà chờ**
   Ngươi có linh thạch và trả công giữ nhà. Một nửa ghế vẫn được chừa cho người đến từ dưới nước.
   - `e`: `{"st":22}`

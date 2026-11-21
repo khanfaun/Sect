@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 1,
+  "id": "OR33",
+  "loai": "xuat_than",
+  "ten": "Khế bên kia đèo",
+  "xuatThan": "xt_ke_tron_no_qua_deo",
+  "goiYDaiLo": [
+    "phu_giap"
+  ],
+  "mo": {
+    "tuoiTu": 16
+  },
+  "nut": [
+    {
+      "id": "N1",
+      "ten": "Chủ nợ đã thêm khoản nào?",
+      "cho": {
+        "thang": 1
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Bản khế ở {LOC03} ghi tiền ngươi thực vay, rồi tới lãi đã hẹn. Dưới đó còn một khoản được thêm sau lần điểm chỉ. Chủ nợ đem cả dấu của người bảo lãnh tới.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Tách gốc, lãi hẹn và lãi giả",
+          "t": "Ngươi kẻ ba dòng, yêu cầu người giữ khế đọc khoản nào đã có lúc ký.",
+          "dau": [
+            "moc_1_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Sao mẫu điều đổi người bảo lãnh",
+          "t": "Ngươi chép điều khoản chủ nợ vẫn dùng khi gạch tên một người khỏi khế.",
+          "dau": [
+            "moc_1_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi đường qua đèo với người chở thuê",
+          "t": "Ngươi ghi chỗ họ đổi tải và ai biết lối tới mỏ khi bị chặn ở trạm thu phí.",
+          "dau": [
+            "moc_1_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Khế nhập về hòm, khoản lãi thêm tiếp tục được tính.",
+        "su": "Khế nhập về hòm, khoản lãi thêm tiếp tục được tính.",
+        "dau": [
+          "qua_han_1"
+        ]
+      }
+    },
+    {
+      "id": "N2",
+      "ten": "Người bảo lãnh bị giữ ở mỏ",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Người bảo lãnh đã phải xuống mỏ {LOC11} thay ngươi. Họ chỉ đồng ý bảo lãnh nợ gốc. Dấu tay dưới khoản lãi thêm khớp với dấu trên một tờ khác.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Ghi lời người bị giữ làm chứng",
+          "t": "Ngươi hỏi họ điều gì đã chấp nhận và giữ phần dấu tay bị in lại.",
+          "dau": [
+            "moc_2_1"
+          ]
+        },
+        {
+          "id": "cach_2",
+          "l": "Tìm người khác chủ nợ muốn thay vào",
+          "t": "Ngươi thấy chủ nợ đã chuẩn bị một thẻ trắng cho người mới không có mặt.",
+          "dau": [
+            "moc_2_2"
+          ]
+        },
+        {
+          "id": "cach_3",
+          "l": "Hỏi nhóm muốn theo đường đèo",
+          "t": "Ngươi ghi ai tự nguyện đi và chia phần tải để họ có thể theo kịp.",
+          "dau": [
+            "moc_2_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Người bảo lãnh xuống ca, giấy họ từng nghe không được mang ra.",
+        "su": "Người bảo lãnh xuống ca, giấy họ từng nghe không được mang ra.",
+        "dau": [
+          "qua_han_2"
+        ]
+      }
+    },
+    {
+      "id": "N3",
+      "ten": "Lấy gì trả khoản nợ thật?",
+      "cho": {
+        "thang": 2
+      },
+      "han": {
+        "thang": 6
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC11"
+      },
+      "mo": "Người nhận hàng ở {LOC11} thuê phu theo gánh. Có nhóm muốn thuê ngươi dẫn qua đèo. Chủ nợ nói có thể khỏi nộp bạc nếu đưa tên người khác vào khế.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Làm thuê để dành phần trả",
+          "t": "Ngươi nhận công nhiều chuyến và dành đủ khoản gốc đã được hai bên đối.",
+          "dau": [
+            "moc_3_1"
+          ],
+          "e": {
+            "bac": 900,
+            "h": 120
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Nhận phí dẫn nhóm qua đèo",
+          "t": "Ngươi đưa một nhóm tới bờ bên kia rồi ghi giá và người có quyền gọi chuyến.",
+          "dau": [
+            "moc_3_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_3"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Dùng tiền ứng của chủ nợ",
+          "t": "Ngươi nhận khoản ứng với điều kiện giao lại thẻ tên của người khác.",
+          "dau": [
+            "moc_3_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Chủ nợ giữ ngày đối, vài người đi tìm việc nơi khác.",
+        "su": "Chủ nợ giữ ngày đối, vài người đi tìm việc nơi khác.",
+        "dau": [
+          "qua_han_3"
+        ]
+      }
+    },
+    {
+      "id": "N4",
+      "ten": "Trả nợ hay chuyển cho người khác?",
+      "cho": {
+        "thang": 3
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Bàn xét ở {LOC03} đã mở. Người bảo lãnh đợi bên ngoài. Bạn đường mang phí dẫn đoàn, còn chủ nợ chừa chỗ ghi một tên khác vào tờ khế.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Trả phần thật và bác khoản giả",
+          "t": "Ngươi đối lời người bảo lãnh với tờ khế, nộp đúng số nợ rồi lấy giấy xác nhận họ đã hết nghĩa vụ.",
+          "dau": [
+            "moc_4_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_1",
+              "moc_3_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Mở đầu mối đường vòng",
+          "t": "Ngươi nhận quyền gọi chuyến sau khi nhóm đầu đã qua, giữ phí trong sổ riêng.",
+          "dau": [
+            "moc_4_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_3_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Chuyển nợ sang người chưa đồng ý",
+          "t": "Ngươi dùng thẻ dù người có tên chưa đồng ý. Chủ nợ chuyển khoản đòi sang người ấy.",
+          "dau": [
+            "moc_4_3"
+          ],
+          "dk": {
+            "dau": [
+              "moc_2_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_4",
+          "l": "Xin sao khế trước khi bàn đóng",
+          "t": "Ngươi đem bản sao ra gặp người bảo lãnh, nói rõ khoản nào còn chưa phân được.",
+          "dau": [
+            "moc_4_4"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Khế giữ nguyên dấu, người bảo lãnh chưa được trả thẻ.",
+        "su": "Khế giữ nguyên dấu, người bảo lãnh chưa được trả thẻ.",
+        "dau": [
+          "qua_han_4"
+        ]
+      }
+    },
+    {
+      "id": "N5",
+      "ten": "Ai được lấy tên khỏi khế?",
+      "cho": {
+        "thang": 6
+      },
+      "han": {
+        "thang": 9
+      },
+      "loiMoi": {
+        "cach": "tin",
+        "noi": "LOC03"
+      },
+      "mo": "Ở {LOC03} có giấy trả hết nợ, phiếu dẫn qua đèo và tờ chuyển nghĩa vụ. Người từng đứng tên thay ngươi chỉ muốn biết họ có được lấy lại thẻ để rời mỏ hay không.",
+      "cach": [
+        {
+          "id": "cach_1",
+          "l": "Nhận lại tên và trao giấy tháo khế",
+          "t": "Ngươi đưa người bảo lãnh giấy ra khỏi nghĩa vụ rồi ký lại tên mình lên sổ nhà.",
+          "dau": [
+            "moc_5_1"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_1"
+            ]
+          }
+        },
+        {
+          "id": "cach_2",
+          "l": "Giữ đường đèo theo phí công bố",
+          "t": "Ngươi giao ám hiệu cho người thay lượt, ghi phí ngay trước lúc nhóm sau đi.",
+          "dau": [
+            "moc_5_2"
+          ],
+          "dk": {
+            "dau": [
+              "moc_4_2"
+            ]
+          }
+        },
+        {
+          "id": "cach_3",
+          "l": "Lấy giấy hết nợ trên tên người khác",
+          "t": "Ngươi nhận dấu thanh toán cho mình, còn người vắng nhận giấy đòi ngày sau.",
+          "dau": [
+            "moc_5_3"
+          ]
+        }
+      ],
+      "tuDien": {
+        "t": "Bàn đóng để chờ phiên khác, thẻ bảo lãnh vẫn ở dưới dấu.",
+        "su": "Bàn đóng để chờ phiên khác, thẻ bảo lãnh vẫn ở dưới dấu.",
+        "dau": [
+          "qua_han_5"
+        ]
+      }
+    }
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Tên không còn trốn",
+      "dk": {
+        "dau": [
+          "moc_2_1",
+          "moc_3_1",
+          "moc_4_1",
+          "moc_5_1"
+        ]
+      },
+      "t": "Người giữ khế gạch phần lãi giả trước mặt người từng bị giữ. Khi họ bước ra cửa với thẻ được trả, ngươi ký tên mình dưới dòng đã thanh toán. Bản đóng dấu được đem về mà không cần đi vòng.",
+      "su": "Khế được phân xử, người bảo lãnh rời nghĩa vụ bị gán thêm.",
+      "dauVong": "tờ khế đóng dấu thanh toán giữ cả phần lãi bị bác."
+    },
+    {
+      "id": "B",
+      "ten": "Chủ của những đường vòng",
+      "dk": {
+        "dau": [
+          "moc_2_3",
+          "moc_3_2",
+          "moc_4_2",
+          "moc_5_2"
+        ]
+      },
+      "t": "Nhóm đầu kể lại nơi đổi tải cho người đến sau, kèm mức phí ngươi đã đặt. Qua hai mùa, đầu mối còn gọi chuyến theo cùng một dấu. Kẻ thiếu tiền đứng đợi bên dốc cho tới khi kiếm đủ phần.",
+      "su": "Đường qua đèo có đầu mối thu phí sau chuyến đưa người đầu.",
+      "dauVong": "một dấu gọi người đưa đường vẫn được dùng ở đầu dốc."
+    },
+    {
+      "id": "C",
+      "ten": "Nợ sang vai khác",
+      "dk": {
+        "dau": [
+          "moc_2_2",
+          "moc_4_3",
+          "moc_5_3"
+        ]
+      },
+      "t": "Giấy của ngươi đóng dấu hết nợ khi chủ nợ đã nhận được tên khác để đòi. Người ấy cầm tờ truy nợ tới hỏi ai ký mà không hỏi mình. Trên dấu chuyển còn ngày của buổi ngươi bước khỏi bàn.",
+      "su": "Chủ nợ chuyển quyền đòi sang một người chưa đồng ý.",
+      "dauVong": "tờ truy nợ còn dấu chuyển cùng ngày {ten} nhận giấy hết nợ."
+    }
+  ],
+  "ngoai": "Bàn đóng để chờ phiên khác, thẻ bảo lãnh vẫn ở dưới dấu."
+}

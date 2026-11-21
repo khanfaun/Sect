@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "loai": "cai_can",
+  "duong": "CC08",
+  "ev": [
+    {
+      "buoc": 0,
+      "id": "doi_sao",
+      "ten": "Mưa che ngày sao rơi",
+      "t": "Người coi thiên tượng ở {LOC05} trải hai bản chép về đêm sao rơi. Một bản ghi mưa lớn, bản kia vẽ bầu trời quang. Người chép trẻ nhờ ngươi xem ngày ghi trên mép, vì có thể họ chỉ khác cách tính ngày.",
+      "c": [
+        {
+          "id": "doi",
+          "l": "So ngày nhận bản với ngày ngắm sao",
+          "t": "Ngươi giúp tách ngày sao rơi khỏi ngày người chép nhận giấy, rồi đánh dấu phần còn ngờ.",
+          "e": {
+            "nang": {
+              "khao": 1
+            }
+          }
+        },
+        {
+          "id": "nghe",
+          "l": "Nghe người chép kể ai trao bản",
+          "t": "Ngươi ghi tên vai người giao từng bản để thợ trận có thể tìm nguồn mà đối sau."
+        }
+      ]
+    },
+    {
+      "buoc": 1,
+      "id": "the_sao",
+      "ten": "Hòm trưng ba vệt sáng",
+      "t": "Người sưu tầm ở {LOC05} treo hình ba mảnh sao để khách phân biệt. Một đứa học việc định đổi chỗ tên ghi dưới hình vì nhìn màu giống nhau. Nó hỏi ngươi có thấy chữ ở lưng thẻ không.",
+      "c": [
+        {
+          "id": "chi",
+          "l": "Chỉ chữ dưới lưng thẻ cho học đồ",
+          "t": "Ngươi lật thẻ trước mặt nó, giữ nguyên thứ tự để khách sau còn biết hình nào đang xem."
+        },
+        {
+          "id": "hoi",
+          "l": "Hỏi vì sao tên thẻ dễ bị nhầm",
+          "t": "Ngươi nghe người coi giải thích về ánh đèn, rồi ghi điều cần kiểm trước khi nhận hàng.",
+          "e": {
+            "h": 2
+          }
+        }
+      ]
+    },
+    {
+      "buoc": 2,
+      "id": "loi_dan",
+      "ten": "Tên người chép trong trận đồ",
+      "t": "Khi khảo trận tại {LOC05}, ngươi thấy trang ghi về ký ức phải trao ở cuối tập. Học đồ bên cạnh hỏi nếu phải bỏ một kỹ năng đã học, có nên để lại lời dặn cho người đang dựa vào nó không.",
+      "c": [
+        {
+          "id": "viet",
+          "l": "Dành thời gian viết lời dặn",
+          "t": "Ngươi chép việc cần bàn giao cho người đang trông đợi mình. Trang về trận vẫn nằm nguyên.",
+          "e": {
+            "h": 4
+          }
+        },
+        {
+          "id": "hoi",
+          "l": "Hỏi học đồ từng thấy ai chuẩn bị chưa",
+          "t": "Họ kể người trước chỉ kịp gửi một lá thư. Ngươi ghi nơi để thư, phòng khi cần."
+        }
+      ]
+    }
+  ]
+}

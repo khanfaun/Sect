@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "loai": "nghe",
+  "nghe": "quan",
+  "len": [
+    "Tờ bổ nhiệm đưa ngươi từ bàn chép sang bàn xét việc huyện. Người nộp đơn đầu tiên muốn biết có được giữ bản sao không.",
+    "Tại huyện nha, ngươi nhận ấn xử việc. Trước cửa có một hộ mang biên nhận thuế tới, chờ ngươi nghe họ đọc.",
+    "Các huyện gửi án lên phủ để ngươi xét lại. Một người từng bị xử vắng mặt xin được đứng trước bàn nói phần mình.",
+    "Ngươi coi việc cả châu. Trước kỳ thu, người dưới kho đem tới những sổ có số thóc không khớp nhau.",
+    "Khi nhận chức thượng thư, ngươi phải đọc cả phần lương đã chuyển và phần dân còn phải nộp ngay trước triều.",
+    "Ấn tể tướng đặt cạnh tờ bãi chức. Người đem đơn được đứng lâu đủ để giải thích vì sao họ đã đi qua nhiều cửa."
+  ],
+  "ket": [
+    {
+      "id": "A",
+      "ten": "Cửa nhận đơn không đóng",
+      "t": "Sau khi ngươi mất, người giữ nha môn vẫn cho dân lấy bản sao trước khi ra về. Một người được sửa sổ thuế mang tới giấy cũ để đặt cạnh hương. Họ bảo đã thôi phải nộp lại khoản nhà từng đóng.",
+      "dk": {
+        "bacNgheTu": 5,
+        "nghiep": "thien"
+      }
+    },
+    {
+      "id": "B",
+      "ten": "Ấn đặt trên chồng nợ",
+      "t": "Ngươi chết, ấn được trả nhưng các tờ thu quá mức vẫn còn. Vài nhà đưa tang xong quay lại đòi xét phần của họ. Người kế chức mở sổ và thấy nhiều dòng có chính chữ ngươi bên cạnh chỗ bị thêm.",
+      "dk": {
+        "bacNgheTu": 5,
+        "nghiep": "ac"
+      }
+    },
+    {
+      "id": "C",
+      "ten": "Tờ án có ngày trả lời",
+      "t": "Người giữ việc huyện tìm thấy trong hòm ngươi những đơn đã ghi ngày phải đáp. Sau tang lễ họ tiếp tục gọi từng nhà. Có người tới nhận lời xét lần đầu và để lại một tờ cảm tạ không đề tên.",
+      "dk": {
+        "bacNgheTu": 2
+      }
+    },
+    {
+      "id": "D",
+      "ten": "Tên người chép ở cuối trang",
+      "t": "Ngươi chết trước khi được cầm ấn lớn. Một người từng ngồi chờ đọc đơn mang giấy đến đặt bên mộ. Họ vẫn nhận ra nét ngươi ở cuối trang, dưới lời xác nhận số tiền họ đã nộp."
+    }
+  ]
+}

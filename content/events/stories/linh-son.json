@@ -32,10 +32,15 @@
       "choices": [
         {
           "i": "🤲",
-          "l": "Góp da làm thêm một tấm",
+          "l": "Góp da làm tấm đệm thấp hơn",
           "t": "Ngươi mua thêm da cho hắn làm tấm đệm thấp. Đệ tử nhỏ tuổi thử một kiếm, trúng giữa tấm rồi quay lại chắp tay cảm tạ. Người dạy kiếm gật đầu: “Đúng tầm rồi.”",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 13
@@ -47,7 +52,9 @@
           "t": "Kiếm mẻ, ngươi hiểu chỗ nào mình thường hạ cổ tay. {$a.ten} nhặt mảnh thép và gói bằng góc đệm.",
           "e": {
             "tv": 4,
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -121,7 +128,12 @@
           "l": "Xin lấy nước rửa mặt ghế",
           "t": "Ngươi xin chậu nước, rửa lớp mực làm cũ trên chân ghế. Nét khắc còn mới nguyên. {$b.ten} hỏi ai cho phép tự chiếm chỗ của tông môn, thiếu gia đành đứng dậy giữa tiếng xì xào.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -129,7 +141,7 @@
           "l": "Đứng về phía hắn để đổi một lời giới thiệu",
           "t": "Hắn dẫn ngươi vào hàng khách danh dự, dúi thêm linh thạch cảm tạ đã bênh mình. Những người bị đuổi phải đặt đồ lễ xuống đất. Quản sự nhìn thấy khoản tiền, ghi cả tên ngươi vào sổ xét việc.",
           "e": {
-            "karma": -4,
+            "deed": "lua_loi",
             "st": 10,
             "tamma": 2
           }
@@ -200,7 +212,12 @@
           "l": "Dùng linh lực giữ khí qua chỗ ống gãy",
           "t": "Ngươi dẫn khí qua chỗ nối cho tới khi quản sự mở được trận. Người trong phòng tỉnh lại, ngươi bị luồng khí ngược làm đau ngực. Đệ tử tự tới nhận lỗi, không nhờ ngươi giấu nữa.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "hp": "-5%"
           },
           "cost": {
@@ -213,7 +230,7 @@
           "t": "Phòng được mở khẩn cấp, ngươi được thưởng, còn {$a.ten} bị cấm làm việc. Nồi thuốc của hắn sôi khô ngoài cửa.",
           "e": {
             "st": 18,
-            "karma": -3,
+            "deed": "lua_loi",
             "oan": [
               "a",
               "đốt tre ở cửa ngách"
@@ -291,7 +308,12 @@
           "l": "Đổi ca để hai người tự gặp",
           "t": "Ngươi nhận đứng thay một ca gác, để họ gặp nhau lúc đổi người. Người nhận áo xem đường vá, nói nhỏ: “Lần sau rách nữa, ta còn nhờ được không?” Người kia gật đầu, giục hắn mặc vào kẻo lạnh.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "an": [
               "a",
               "đường may ngược"
@@ -304,7 +326,7 @@
           "t": "Hai người trả bằng phần linh thạch họ góp mua áo mới. Từ lần sau, vết rách chỉ được gập vào trong.",
           "e": {
             "st": 18,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -373,7 +395,12 @@
           "l": "Góp công sửa bàn thờ và khắc lại danh sách",
           "t": "Ngươi bỏ buổi nghe giảng, cùng lão làm lại giá đặt bài vị và chép đủ tên lên vách. Người tới thắp hương từ nay tìm được tên người nhà, không phải xin dỡ từng hàng xuống.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "h": 6,
             "an": [
               "a",
@@ -386,7 +413,9 @@
           "l": "Nộp gỗ tốt để đổi quyền đặt bài vị của mình",
           "t": "Ngươi có chỗ trước hàng đầu. Những bài vị rơi được gom vào một ngăn, vừa khít chiều dài ngón tay.",
           "e": {
-            "karma": -2,
+            "hd": {
+              "t": 1
+            },
             "van": 1
           },
           "cost": {
@@ -464,7 +493,12 @@
           "l": "Mua quả đổi lấy nắp lò",
           "t": "Ngươi mua ít quả chín, đặt xuống đất rồi lùi ra. Linh viên mang nắp xuống đổi, còn chỉ tay đòi ngươi thêm một quả cho công leo xà. Đệ tử vội ôm nắp chạy về lò.",
           "e": {
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           },
           "cost": {
             "st": 13
@@ -475,7 +509,12 @@
           "l": "Cho {$b.ten} mượn nắp nồi",
           "t": "Hắn cứu được mẻ đan, nồi cơm của ngươi từ đó phảng phất mùi thuốc tẩy tủy.",
           "e": {
-            "karma": 3
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
@@ -542,7 +581,12 @@
           "l": "Tháo từng lá phù khỏi khung",
           "t": "Ngươi tháo phù cũ theo thứ tự ngược với trận giữ kho. Hơi ấm tắt hẳn; một bàn tay lạnh túm cổ tay ngươi rồi tan khi lá phù cuối rời cửa. Ngươi bị thương nhẹ, phải đứng ngoài vận khí hồi lâu mới dám mở kho.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 5
+            },
+            "ng": {
+              "g": 5
+            },
             "hp": "-10%",
             "tamma": -3
           }
@@ -633,7 +677,9 @@
           "t": "Ngươi luyện được một bước đổi chân giữa không trung. Nước trong thùng hắn sóng ra, để lại vết sạch trên bậc mòn.",
           "e": {
             "tv": 3,
-            "karma": -1
+            "hd": {
+              "t": 1
+            }
           }
         },
         {
@@ -703,7 +749,12 @@
           "l": "Cân lại bằng linh thạch của ngươi",
           "t": "Ngươi bỏ linh thạch cùng cỡ lên cân làm đối chứng. Hai nửa quả cân ghép lại đã nhẹ hơn trước, đôi bên phải kiểm sổ rồi chia lại than. Ngươi để lại số linh thạch ấy cho tới khi việc đối chứng xong.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           },
           "cost": {
             "st": 13
@@ -715,7 +766,7 @@
           "t": "Ngươi lấy linh thạch, ký xác nhận mà không cân lại. Bên bị hụt than phải nhóm lò bằng gỗ ướt, kéo nhau tới đòi xem chữ ký. Phái trả tiền bảo ngươi đã nhận thì tự ra giải thích.",
           "e": {
             "st": 18,
-            "karma": -3
+            "deed": "lua_loi"
           }
         },
         {
@@ -729,7 +780,12 @@
           "win": {
             "t": "Ngươi gạt được kiếm hắn mà cân vẫn đứng, hai bên chịu dùng quả cân của ngươi.",
             "e": {
-              "karma": 4
+              "hd": {
+                "p": 3
+              },
+              "ng": {
+                "g": 3
+              }
             }
           },
           "lose": {
@@ -805,7 +861,12 @@
           "l": "Tháo thanh gỗ để đưa cho người từng chịu phạt",
           "t": "Ngươi bị giữ lại giải trình. Tới khi được thả, họ đã mang thanh gỗ đặt ngay ngưỡng cửa của {$sect}.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "h": 24
           }
         },
@@ -815,7 +876,7 @@
           "t": "Ngươi nhận bạc để bỏ qua việc thay gỗ. Lửa nhà bếp bén ở chữ cuối, nơi có nhiều mạt gỗ nhất.",
           "e": {
             "st": 18,
-            "karma": -3,
+            "deed": "lua_loi",
             "tamma": 2
           }
         },
@@ -887,10 +948,15 @@
       "choices": [
         {
           "i": "✋",
-          "l": "Mài lại phiến đá cho nét mực dày",
+          "l": "Mài nghiên để học trò nhìn rõ nét mực",
           "t": "Ngươi dành một buổi mài lại nghiên, để mực giữ thành nét nổi khi khô. Học trò lần tay đọc được lá phù mình vừa viết. Phù sư bảo hắn thử thêm một tờ, giọng vui hơn hẳn.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "an": [
               "a",
               "cành mận trong chén mài"
@@ -903,7 +969,12 @@
           "l": "Mua lại bút cũ của {$b.ten}",
           "t": "Hắn có bạc đi chữa mắt, còn ngươi lấy được bút từng ăn nhiều linh lực. Cành mận vẫn đặt trong chén, chúc xuống.",
           "e": {
-            "karma": 1,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "namedRelic": {
               "k": "but",
               "name": "Bút Cành Mận",
@@ -985,7 +1056,12 @@
           "l": "Xuống hẻm buộc lại dây vào gốc đá",
           "t": "Ngươi xuống hẻm buộc dây cầu vào gốc đá. Gió cắt đứt sợi dây kéo phụ, làm ngươi va vào vách, nhưng cầu đã được neo chắc. Leo lên tới bờ, ngươi mới thở ra được.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 5
+            },
+            "ng": {
+              "g": 5
+            },
             "hp": "-10%"
           }
         },
@@ -995,7 +1071,12 @@
           "t": "Ngươi có khí nhẹ để luyện thân pháp. Cầu mất một nhịp dây, người qua phải đi nghiêng đến hết thu.",
           "e": {
             "tv": 4,
-            "karma": -3
+            "hd": {
+              "t": 3
+            },
+            "ng": {
+              "b": 1
+            }
           }
         },
         {
@@ -1064,7 +1145,12 @@
           "l": "Đục rãnh vòng qua kiếm đường",
           "t": "Ngươi đục lối nước vòng qua nơi dư khí đọng lại, làm hết buổi còn bị kiếm khí cứa tay. Cá vừa vào dòng mới đã bơi đi. Nông phu xin tông môn từ nay xả nước sau giờ luyện, ngươi nhận giúp chuyển lời.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 5
+            },
+            "ng": {
+              "g": 5
+            },
             "h": 12,
             "an": [
               "a",
@@ -1075,11 +1161,11 @@
         },
         {
           "i": "✋",
-          "l": "Luyện kiếm bằng luồng dư khí",
+          "l": "Dùng khí đọng trong rãnh để luyện kiếm",
           "t": "Kiếm ngươi bén thêm, cá chết hết trước khi mặt trời lặn. {$a.ten} chôn chúng dưới gốc mạ mới cấy.",
           "e": {
             "tv": 5,
-            "karma": -4,
+            "deed": "giet_thu_vo_hai",
             "tamma": 3
           }
         },
@@ -1154,7 +1240,12 @@
           "l": "Dụ rùa đi bằng rau non",
           "t": "Ngươi hái rau non dẫn rùa khỏi giấy, đệ tử vội chép nốt cửa trận. Nó ăn xong lại nằm vào giữa. Hắn thở dài: “Mai ta phải trải hai tờ, cho nó riêng một tờ.”",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -1243,7 +1334,12 @@
           "l": "Xin nhận ca trực bằng tên ngươi",
           "t": "Ngươi xin ghi tên nhận ca trực thay, để hắn kịp xuống núi. Trở về, hắn cảm tạ rồi đứng cạnh ngươi tới hết ca, kể cha đã tỉnh được một lúc để nhận ra mình.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "h": 12,
             "an": [
               "a",
@@ -1257,7 +1353,7 @@
           "t": "Hắn kịp đi. Khi bút tích lộ ra, hắn nhận cả lỗi, còn chữ giả vẫn đen hơn mọi chữ khác trong sổ.",
           "e": {
             "st": 10,
-            "karma": -2
+            "deed": "lua_loi"
           }
         },
         {
@@ -1336,7 +1432,12 @@
           "l": "Đọc nốt nửa thiệp trước mặt trưởng lão {$c.ten}",
           "t": "Nhà hắn phải nhận lại món nợ. {$b.ten} tự xé nửa thiệp của mình, giữ riêng mảnh ghi ngày trả.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -1355,7 +1456,12 @@
           "l": "Hộ tống nàng rời sân",
           "t": "Ngươi hộ tống nàng xuống núi, lỡ buổi thỉnh giảng. Đi được một đoạn, nàng tự gấp thiệp cất đi: “Đạo hữu đưa tới đây được rồi. Đường sau ta tự đi.”",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "h": 12,
             "an": [
               "a",
@@ -1430,16 +1536,26 @@
           "l": "Yêu cầu dừng lễ và cạo vôi kiểm tra",
           "t": "Ngươi buộc người coi lễ cho thợ cạo lớp vôi. Vết nứt chạy sâu vào chân cổng, phải gia cố ngay. Dù bị gạt khỏi hàng khách vì làm chậm lễ, ngươi thấy đoàn người đã được chuyển sang lối an toàn.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            }
           }
         },
         {
           "i": "✋",
-          "l": "Dùng linh lực cố vách tới hết lễ",
+          "l": "Dùng linh lực giữ vách đến hết lễ",
           "t": "Ngươi kiệt sức và được trả công. Sau khi người cuối cùng qua, trên vôi xuất hiện lại một đường chân tóc.",
           "e": {
             "st": 12,
-            "karma": 2
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           },
           "cost": {
             "mp": "20%"
@@ -1517,7 +1633,12 @@
           "l": "Mua chỉ tơ linh giúp vá phù",
           "t": "Ngươi mua đúng loại tơ dẫn linh lực. Thợ vá lần theo nét phù cũ, giữ được thêm một lần hộ thân cho người mang. Đệ tử hỏi kỹ cách bảo quản rồi mới cất vào ngực.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "đường kim qua phù rách"
@@ -1532,7 +1653,12 @@
           "l": "Mua lại phù để lấy phần giấy còn tốt",
           "t": "{$b.ten} dùng tiền mua thuốc. Đường chỉ cắt ra, hắn xin giữ rồi quấn quanh cổ tay.",
           "e": {
-            "karma": 1,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "pill": 1
           },
           "cost": {
@@ -1605,7 +1731,12 @@
           "l": "Giúp lão kê phiến đá rồi tiễn xuống",
           "t": "Ngươi giúp lão kê lại phiến đá, lỡ giờ nghe giảng. Lão dẫm thử cho chắc rồi từ biệt sơn môn: “Ở đây mấy chục năm, ít ra cũng để lại được một bậc lành.”",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "an": [
               "a",
               "bậc trên cùng thiếu một phiến"
@@ -1692,7 +1823,12 @@
           "l": "Trông mái để hai người xuống uống trà",
           "t": "Ngươi nhận trông mái hết cơn mưa cho họ xuống uống trà. Trở lên, hai người mang thêm cho ngươi một ấm nóng, đứng kể chuyện sửa mái tới khi trời tạnh.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "an": [
               "a",
               "sợi dây giữa hai mái"
@@ -1706,7 +1842,9 @@
           "t": "Ngươi có tơ luyện phù, hai đôi găng rơi vào hai sân khác nhau. Mãi tối họ mới tìm được chiếc thiếu ngón.",
           "e": {
             "pill": 1,
-            "karma": -2
+            "hd": {
+              "t": 1
+            }
           }
         },
         {

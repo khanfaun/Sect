@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "loai": "qua_chin",
+  "deed": "diet_khau",
+  "bien": [
+    {
+      "id": "a",
+      "ten": "Bản chép còn ở tay người khác",
+      "t": "Người chép thư mang tới bản sao lời khai của kẻ ngươi từng giết để bịt miệng. Họ đã giữ nó qua nhiều chuyến, nay muốn trả cho gia đình người chết. Họ hỏi ngươi có định ngăn họ nữa hay không.",
+      "c": [
+        {
+          "id": "de_di",
+          "l": "Để họ trao bản chép cho gia đình",
+          "t": "Ngươi nhường lối. Tới cửa, người chép gọi đúng tên ngươi để người nhà biết ai đã nghe lời ấy."
+        },
+        {
+          "id": "nhan",
+          "l": "Đến cùng họ và nhận việc đã làm",
+          "t": "Ngươi đi bên cạnh, nói rõ vì sao người khai không về. Gia đình giữ bản sao và hỏi có ai cùng chịu trách nhiệm.",
+          "e": {
+            "h": 4,
+            "tamma": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "ten": "Lời dặn chưa được giao",
+      "t": "Một phu trạm đem phong thư chưa giao của người bị ngươi giết để giấu lời khai. Phong thư chỉ dặn người nhà đón con trước mưa. Người phu hỏi tại sao người gửi không còn tới lấy thư trả.",
+      "c": [
+        {
+          "id": "giao",
+          "l": "Dẫn người phu tới đúng nhà",
+          "t": "Ngươi tìm căn nhà được ghi trên phong. Người nhận đọc thư rồi quay sang hỏi ngày người gửi mất.",
+          "e": {
+            "h": 3
+          }
+        },
+        {
+          "id": "ke",
+          "l": "Kể sự thật để phu trạm tự quyết",
+          "t": "Ngươi nói vì sao thư nằm lại. Người phu cất phong vào túi trong, bảo sẽ tự giao tận tay."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "ten": "Người bỏ buổi làm chứng",
+      "t": "Một người hẹn gặp ngươi ngoài chợ rồi đổi ý. Họ từng định làm chứng cùng người đã bị ngươi giết để giấu chuyện. Nay họ cầm phần lời của mình và chỉ xin được đi về mà không có ai bám theo.",
+      "c": [
+        {
+          "id": "tranh",
+          "l": "Rời chợ trước để họ tự đi",
+          "t": "Ngươi đi lối khác. Họ còn đứng bên sạp một lúc lâu rồi mới chịu cất tờ giấy vào áo."
+        },
+        {
+          "id": "boi",
+          "l": "Góp tiền cho họ đi nhờ xe",
+          "t": "Ngươi trả tiền xe theo lối họ chọn. Người đánh xe chờ họ tự bước lên rồi mới ghìm cương.",
+          "dk": {
+            "bacTu": 60
+          },
+          "e": {
+            "bac": -60
+          }
+        }
+      ]
+    }
+  ]
+}

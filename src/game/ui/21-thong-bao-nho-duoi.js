@@ -80,8 +80,9 @@ function cgDetailHTML(i){const r=G.run;const R=CG_R.find(x=>x.i===i);if(!R)retur
   // cách đột phá lên cảnh giới sau
   const nx=CG_R.find(x=>x.i===i+1);if(nx&&R.brk)h+=`<h4 class="sgrp">Đột phá lên ${nx.n}</h4><p class="cg-d">${cgOk('R'+i+'b',i+1)||here&&cgKnow('R'+i+'b')?esc(R.brk):'Chưa rõ. Có lẽ phải nghe ngóng ở trà lâu, tửu phường, hoặc tìm đọc trong Tàng Kinh Các.'}</p>`;
   if(here){const X=typeof lkXkState==='function'&&lkXkState();const brk=canBreak();
-    h+=`<div class="cg-act">${X?`<button class="btn${X.ok?' pri':''}" data-act="xkGo"${X.ok?'':' disabled'}${ta(X.ok?'':X.why||'')}>${ic('spark')} Xung kích ${esc(X.nx)}</button>`:''}${brk?`<button class="btn pri" data-act="hudBt">${ic('spark')} Đột phá</button>`:''}</div>`;}
+    h+=`<div class="cg-act">${X?`<button class="btn${X.ok&&!bqNoWhy()?' pri':''}" data-act="xkGo"${X.ok&&!bqNoWhy()?'':' disabled'}${ta(bqNoWhy()||(X.ok?'':X.why||''))}>${ic('spark')} Xung kích ${esc(X.nx)}</button>`:''}${brk?`<button class="btn${voKnown()?'':' pri'}" data-act="hudBt"${voKnown()?' disabled':''}${ta(voKnown()?'Vô linh căn: không thể đột phá':'')}>${ic('spark')} Đột phá</button>`:''}</div>`;}
   return h+'</div>';}
+function bqNoWhy(){const r=G.run;if(!r)return '';if(voKnown())return 'Vô linh căn: chưa thể bế quan tu luyện';if(!hasTp())return 'Chưa có tâm pháp: chưa thể bế quan tu luyện';return bqCan()||'';}
 function cgTabHTML(){const s=UI.cgSel;return s===''||s==null?cgListHTML():cgDetailHTML(+s);}
 // bảng lớn: hai tab Bế quan / Cảnh giới
 

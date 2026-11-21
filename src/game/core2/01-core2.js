@@ -166,7 +166,7 @@ function noteOf(id){const w=W();return w.notes&&w.notes[id]||'';}
   const r=run2();const sc=r&&r.scene;const n=sc&&sc.type==='place'?nodeById(sc.id):null;const ex0=n?n.explore:0;
   _pa(a);
   if(a!=='explore'||!G.run||!n||n.explore===ex0||n.explore>=4)return;
-  const t=n.type;const k=['rung','hoang','song','bien','thien'].includes(t)?'thao':['nui','dong','phe','ma','sao'].includes(t)?'khoang':null;
+  const t=tAs(n.type);const k=['rung','hoang','song','bien','thien'].includes(t)?'thao':['nui','dong','phe','ma','sao'].includes(t)?'khoang':null;
   if(k&&chance(.5)){const x=ri(1,2)+(n.danger>=2?1:0);r.mats[k]+=x;note(contentText("core2_01-core2_js.052", [MAT[k].i,x,MAT[k].n.toLowerCase()]),'up');}};}
 {const _ac=autoCheck;autoCheck=function(){
   const r=run2();if(r&&r.eggs.length&&r.pets.length<PET_MAX){for(let i=r.eggs.length-1;i>=0;i--)if(W().t>=r.eggs[i].t)petHatch(i);}

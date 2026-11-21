@@ -168,7 +168,7 @@ talFrameSVG=function(t,id){if(!t||t.tier<0||t.tier===1)return '';if(t.tier===0)r
 function npcInfo(n){const r=G.run,w=W();const k=(w.rivals||[]).findIndex(x=>x.ten===n);if(k>=0){const rv=(r.rivals||[]).find(x=>x.i===k);return {g:w.rivals[k].g,realm:rv?rv.realm:r.realm,sect:w.rivals[k].s};}
   const o=(r.npcs||{})[n];if(o)return {g:o.g,realm:o.realm!=null?o.realm:Math.max(0,rT()),sect:o.sect};const m=/^@(\d+):/.exec(n);if(m)return {realm:Math.min(5,(r.realm||0)+2)};return {};}
 function bondActs(n,o){const rk=relOfNpc(n);const B=k=>{const w=relWhy(n,k,o);return `<button class="btn sm" data-act="relMake" data-arg="${esc(n)}|${k}"${w?' disabled':''}${ta(REL_T[k].d+(w?'\n\nChưa được: '+w:''))}>${REL_T[k].n}</button>`;};
-  return `<div class="bond-a"><button class="btn sm" data-act="favGift" data-arg="${esc(n)}"${ta('Tặng lễ vật: tốn '+giftCost(n)+' linh thạch, 2 giờ. Tăng hảo cảm.')}>Tặng lễ</button>${rk?`<button class="btn sm bad" data-act="relBreak" data-arg="${esc(n)}">Cắt đứt ${REL_T[rk].n.toLowerCase()}</button>`:['kn','np','sp','dd','pt','dl'].map(B).join('')}</div>`;}
+  return `<div class="bond-a"><button class="btn sm" data-act="favGift" data-arg="${esc(n)}"${ta('Tặng lễ vật: tốn '+giftTxt(n)+', 2 giờ. Tăng hảo cảm.')}>Tặng lễ</button>${rk?`<button class="btn sm bad" data-act="relBreak" data-arg="${esc(n)}">Cắt đứt ${REL_T[rk].n.toLowerCase()}</button>`:['kn','np','sp','dd','pt','dl'].map(B).join('')}</div>`;}
 // tab Nhân mạch: thêm Quan hệ và Quen biết
 
 STAT_IC['Mị lực']=['heart','vio'];

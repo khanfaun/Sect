@@ -45,7 +45,12 @@
           "l": "Bù phần thiếu bằng thọ nguyên của ngươi",
           "t": "{$b.ten} nhận lại tuổi. {$a.ten} nhặt sợi tóc, lặng lẽ gài sau tai mình.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 5
+            },
+            "ng": {
+              "g": 5
+            },
             "lifeCut": 4,
             "an": [
               "a",
@@ -58,7 +63,7 @@
           "l": "Mua nửa món nợ của {$c.ten}",
           "t": "Ngươi có phần tuổi để thu. {$a.ten} xin được đem chiếc cân về một đêm để tập đặt tay.",
           "e": {
-            "karma": -3
+            "deed": "ep_ta_dien"
           },
           "cost": {
             "st": 19
@@ -148,7 +153,12 @@
           "l": "Góp lửa để hai người qua mùa",
           "t": "Ngươi trả tiền mua than linh giữ ấm căn nhà. Hai anh em thôi phải đổi tóc lấy phù, cùng ngồi vá lại áo trước bếp. Người em hẹn tới khi khỏe sẽ tự tìm việc, không để anh cầm thêm tuổi nữa.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 3
+            },
+            "ng": {
+              "g": 3
+            },
             "an": [
               "a",
               "tóc rụng khỏi khăn"
@@ -163,7 +173,12 @@
           "l": "Dạy hắn kiếm linh thạch bằng bùa tuổi",
           "t": "Hắn đủ tiền chuộc một ít tuổi. Mẻ bùa đầu có một sợi tóc trắng nằm ngang.",
           "e": {
-            "karma": 1,
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            },
             "tamma": 2
           }
         },
@@ -253,7 +268,12 @@
           "l": "Hủy phần nợ của ngươi và kéo dài hạn",
           "t": "Ngươi hủy phần nợ mình giữ, buộc chủ khế ghi lại số tuổi và hạn còn lại. Hai anh em có thêm thời gian xoay xở. Người em giữ bản đối chiếu, không còn giao cả giấy cho một mình chủ khế.",
           "e": {
-            "karma": 4
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           }
         },
         {
@@ -261,7 +281,7 @@
           "l": "Mua nốt món nợ để tự định hạn",
           "t": "Ngươi có quyền giữ tuổi lẫn lãi. {$b.ten} đưa thẳng cho ngươi lá bùa cuối còn khô.",
           "e": {
-            "karma": -3
+            "deed": "ep_ta_dien"
           },
           "cost": {
             "st": 19
@@ -346,23 +366,28 @@
           "alignment": "context"
         }
       },
-      "text": "Chủ khế {$c.ten} bị thương nặng, cần thọ nguyên để sống qua đêm. Nếu ngươi từng giúp hai anh em, người em tự tới đề nghị đổi một phần tuổi lấy việc trả khế. Nếu ngươi từng giữ quyền thu nợ, chủ khế tìm ngươi thương lượng bán cả số khế còn lại để mua tuổi cứu mình. Lần này chính lão phải chờ người khác ra giá.",
+      "text": "Chủ khế {$c.ten} bị thương nặng và cần thêm thọ nguyên mới sống qua đêm. Nếu ngươi từng giúp hai anh em, người em tự tới đề nghị nhường một phần tuổi thọ để lấy lại giấy cầm. Nếu ngươi từng giữ quyền thu nợ, chủ khế tìm ngươi để bán số khế còn lại lấy tiền mua thọ nguyên.",
       "choices": [
         {
           "i": "✋",
           "l": "Buộc lão trả hết giấy cầm trước khi truyền tuổi",
           "t": "Ngươi yêu cầu lão trả khế trước, rồi giúp giữ mạch lúc truyền tuổi. Luồng khí đứt quãng khiến ngươi bị thương, nhưng lão qua được cơn nguy. Người em kiểm đủ giấy của anh mình rồi mới nhận lời dừng truyền.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 5
+            },
+            "ng": {
+              "g": 5
+            },
             "hp": "-10%"
           }
         },
         {
           "i": "💎",
-          "l": "Mua chỗ tuổi còn dư sau khi cứu lão",
+          "l": "Mua phần thọ nguyên còn dư sau khi cứu lão",
           "t": "Sau khi cứu lão, người em bán một phần tuổi để lấy tiền chuộc nốt cho anh. Ngươi nhận mua, thêm thọ nguyên; hắn giữ lại đủ tuổi mình cần, không nghe lời ngươi trả giá cao hơn.",
           "e": {
-            "karma": -4,
+            "deed": "lua_loi",
             "tamma": 3,
             "life": 20
           },
@@ -463,7 +488,12 @@
           "l": "Trao phần tuổi ngươi còn giữ hoặc bù bằng tuổi mình",
           "t": "Ma tu {$a.ten} có thêm một mùa bên em. Trên bếp vẫn còn một tờ chưa cháy hết.",
           "e": {
-            "karma": 4,
+            "hd": {
+              "p": 5
+            },
+            "ng": {
+              "g": 5
+            },
             "lifeCut": 3
           }
         },
@@ -472,7 +502,12 @@
           "l": "Giữ tuổi và trả bằng linh thạch",
           "t": "Họ dùng bạc đắp lại mái, chỗ cạnh bếp ấm lâu hơn. Ma tu {$a.ten} tự gấp tờ giấy, lấy móng tay miết đến phẳng.",
           "e": {
-            "karma": 1
+            "hd": {
+              "p": 1
+            },
+            "ng": {
+              "g": 1
+            }
           },
           "cost": {
             "st": 19
