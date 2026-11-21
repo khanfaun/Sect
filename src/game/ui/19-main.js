@@ -22,7 +22,8 @@ function render(){
     if(!inMap){full=G.screen==='birth'&&G.birth?rxv('Birth'):G.screen==='over'&&G.over?rxv('Over'):G.screen==='ket'&&G.meta&&G.meta.ketHet?rxv('Ket'):G.screen==='meta'?rxv('Meta'):G.screen==='life'&&G.run?rxv('Life'):rxv('Title');}
     else{
       if(cb)full=rxv('TranDau');
-      else{hud=rxv('Hud');nav=rxv('Nav');
+      else if(typeof dpHome==='function'&&window.RX&&RX.has('TrangChu')&&dpHome()){mapui=rxv('TrangChu');} // giao diện mới: màn Động phủ
+      else{hud=rxv('Hud');
         if(!sc||(UI.evMin&&sc.type==='event')){mapui=rxv('NutBanDo');dock=rxv('TheDiaDiem');}
         else{sheet=rxv('Canh:'+sc.type);if(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine) and (min-width:1200px)').matches)mapui=rxv('NutBanDo');} // máy tính: giữ các nút nổi khi mở bảng
       }
