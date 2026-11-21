@@ -9,3 +9,5 @@ ACT.sapCo=k=>{note((k||'Tính năng này')+' sẽ mở ở bản sau.');};
 // đi tới đâu thì ở lại bản đồ để thấy đường
 {const _go=ACT.go;ACT.go=function(a){UI.xemMap=true;return _go.apply(this,arguments);};}
 {const _gc=ACT.goCell;ACT.goCell=function(a){UI.xemMap=true;return _gc.apply(this,arguments);};}
+// mở một bảng đúng thẻ: 'char:hoc'
+ACT.moBang=a=>{const [p,t]=String(a).split(':');UI.panel=p;if(t)UI.tab[p]=t;};

@@ -196,7 +196,7 @@ function ThanhLoTrinh({ m }) {
         <div className="x-ctx-t"><small>Lộ trình tới</small><b>{n.name}</b>
           <span className={'x-dg dg' + dg} {...tip(PS.dangerWhy(n))}><i></i>{PS.DTAG[dg]}{p && <em> · {PS.durH(PS.travelHours(p))}</em>}</span></div>
         <button className="icb" data-act="unsel" aria-label="Bỏ chọn"><Ic n="close" /></button>
-        <button className="sk-btn x-go" data-act="go" data-arg={n.id} disabled={!p}><Ic n="walk" /><span className="lab"><b>Lên đường</b></span></button>
+        <button className="z-go" data-act="go" data-arg={n.id} disabled={!p}><Ic n="walk" /><span className="lab"><b>Lên đường</b></span></button>
       </div>
     );
   }
@@ -206,7 +206,7 @@ function ThanhLoTrinh({ m }) {
       <div className="x-ctx-t"><small>Lộ trình tới</small><b>{PS.hexSeen(c) ? PS.TER_N[g.ter[c]] : 'Vùng chưa khám phá'}</b>
         <span className="x-dg">{[I.dist, h != null && PS.durH(h)].filter(Boolean).join(' · ')}</span></div>
       <button className="icb" data-act="unsel" aria-label="Bỏ chọn"><Ic n="close" /></button>
-      <button className="sk-btn x-go" data-act="goCell" data-arg={c}><Ic n="walk" /><span className="lab"><b>Lên đường</b></span></button>
+      <button className="z-go" data-act="goCell" data-arg={c}><Ic n="walk" /><span className="lab"><b>Lên đường</b></span></button>
     </div>
   );
 }
@@ -227,7 +227,7 @@ function ThanhTaiCho() {
     <div className="x-ctx day">
             <div className="x-ctx-t"><small>Ngươi đang ở</small><b>{n.name}</b>
         <span className={'x-dg dg' + dg}><i></i>{PS.DTAG[dg]} · {PS.capS(PS.TYPE_NAME[n.type])}</span></div>
-      <button className="sk-btn x-go" data-act="enter" {...tip(PS.ENTER_L[n.type] || 'Vào')}><Ic n="gate" /><span className="lab"><b>Vào</b><i>{PS.ENTER_L[n.type] || ""}</i></span></button>
+      <button className="z-go" data-act="enter" {...tip(PS.ENTER_L[n.type] || 'Vào')}><Ic n="gate" /><span className="lab"><b>Vào</b><i>{PS.ENTER_L[n.type] || ""}</i></span></button>
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { HOP_THOAI } from './hop-thoai';
 import { BANG } from './bang';
 import { TranDau } from './tran/TranDau';
 import { PS } from './html';
+import { TrangChu } from './dong-phu/TrangChu';
 
 const VIEWS = {
   Title: ManMoDau,
@@ -25,6 +26,7 @@ const VIEWS = {
   NutBanDo,
   TheDiaDiem,
   TranDau,
+  TrangChu,
 };
 // Các cảnh: 'Canh:<loại>' vẽ cảnh đang mở (G.run.scene)
 // Hộp thoại: 'HopThoai:<loại>' vẽ hộp thoại đang mở (UI.modal)
