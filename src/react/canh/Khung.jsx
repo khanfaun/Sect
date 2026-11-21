@@ -5,7 +5,8 @@ import { Ic, Stone, tip } from '../chung';
 // Khung thẻ cảnh: tiêu đề, phụ đề, thân, chân. x: nút đóng hẳn về bản đồ.
 export function Card({ title, sub, cls, art, head, x, foot, children }) {
   return (
-    <section className={'scard ' + (cls || '')}>
+    <section className={'scard x-sc ' + (cls || '')}>
+      <i className="x-grip" aria-hidden="true" />
       {art}
       <header className="sc-h">
         <h2>{title}</h2>

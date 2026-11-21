@@ -180,5 +180,54 @@ export function TheDiaDiem() {
   if (n && n.fog >= 1) return <TheNoi n={n} />;
   if (UI.pop) return <TheVung pop={UI.pop} />;
   if (UI.cell != null) return PS.Map2.zf < 0.5 ? <TheQuan c={UI.cell} /> : <TheO c={UI.cell} />;
-  return null;
+  if (UI.mark) return <ThanhLoTrinh m={UI.mark} />;
+  return <ThanhTaiCho />;
+}
+
+// Thanh ngữ cảnh (giao diện mới) — luôn nói rõ bây giờ làm được gì.
+// Đã chấm một đích trên bản đồ: tên, an nguy, thời gian, nút Lên đường (chạm lại vào đích cũng đi).
+function ThanhLoTrinh({ m }) {
+  const r = PS.G.run;
+  if (m.k[0] === 'n') {
+    const n = PS.nodeById(+m.k.slice(1)), p = n && PS.findPath(r.at, n.id), dg = n ? PS.dangerTag(n) : 0;
+    if (!n) return null;
+    return (
+      <div className="x-ctx lo">
+        <div className="x-ctx-t"><small>Lộ trình tới</small><b>{n.name}</b>
+          <span className={'x-dg dg' + dg} {...tip(PS.dangerWhy(n))}><i></i>{PS.DTAG[dg]}{p && <em> · {PS.durH(PS.travelHours(p))}</em>}</span></div>
+        <button className="icb" data-act="unsel" aria-label="Bỏ chọn"><Ic n="close" /></button>
+        <button className="sk-btn x-go" data-act="go" data-arg={n.id} disabled={!p}><Ic n="walk" /><span className="lab"><b>Lên đường</b></span></button>
+      </div>
+    );
+  }
+  const c = +m.k.slice(1), h = PS.cellHours(c), g = PS.geo(), I = PS.hexInfo(c);
+  return (
+    <div className="x-ctx lo">
+      <div className="x-ctx-t"><small>Lộ trình tới</small><b>{PS.hexSeen(c) ? PS.TER_N[g.ter[c]] : 'Vùng chưa khám phá'}</b>
+        <span className="x-dg">{[I.dist, h != null && PS.durH(h)].filter(Boolean).join(' · ')}</span></div>
+      <button className="icb" data-act="unsel" aria-label="Bỏ chọn"><Ic n="close" /></button>
+      <button className="sk-btn x-go" data-act="goCell" data-arg={c}><Ic n="walk" /><span className="lab"><b>Lên đường</b></span></button>
+    </div>
+  );
+}
+
+// Không chọn gì: cho biết đang đứng ở đâu, nút vào thẳng nơi đó; ở chốn hoang thì gợi ý chạm bản đồ.
+function ThanhTaiCho() {
+  const r = PS.G.run, n = PS.nodeById(r.at);
+  if (!n) return null;
+  const I = PS.hexInfo(PS.nodeHex(n));
+  if (n.wp) return (
+    <div className="x-ctx hoang">
+      <div className="x-ctx-t"><small>{[I.dist, I.regName].filter(Boolean).join(' · ')}</small><b>{I.ter || 'Chốn hoang'}</b>
+        <span className="x-dg">Chạm một nơi trên bản đồ để chọn đường</span></div>
+    </div>
+  );
+  const dg = PS.dangerTag(n), img = PS.ASSET.place[n.type];
+  return (
+    <div className="x-ctx day">
+            <div className="x-ctx-t"><small>Ngươi đang ở</small><b>{n.name}</b>
+        <span className={'x-dg dg' + dg}><i></i>{PS.DTAG[dg]} · {PS.capS(PS.TYPE_NAME[n.type])}</span></div>
+      <button className="sk-btn x-go" data-act="enter" {...tip(PS.ENTER_L[n.type] || 'Vào')}><Ic n="gate" /><span className="lab"><b>Vào</b><i>{PS.ENTER_L[n.type] || ""}</i></span></button>
+    </div>
+  );
 }

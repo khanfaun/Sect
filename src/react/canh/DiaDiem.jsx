@@ -89,46 +89,51 @@ export function DiaDiem({ sc }) {
     <h4 key={'h' + name} className="sgrp"><Ib n={GRP_IC[name] || 'more'} c="soft" />{name}</h4>,
     <div key={'d' + name} className="choices">{L.map(a => <NutViec key={a.a} a={a} n={n} num={num()} />)}</div>,
   ]);
-  const art = ASSET.place[n.type]
-    ? <div className="art strip pimg"><img className="asset" src={ASSET.place[n.type]} alt="" /></div>
-    : <Tranh seed={n.name} reg={r.region} type={n.type} cls="strip" />;
+  // Giao diện mới: không còn hộp thoại che kín. Bản đồ vẫn hiện phía trên; tên nơi nổi ở đầu,
+  // các việc làm là những ô lớn trong một ngăn dưới đáy (kéo cuộn được).
+  const img = ASSET.place[n.type];
   return (
-    <Card title={n.name} sub="" cls="tall place" art={art}
-      head={<>
-        <button className="xb sc-x" data-act="leave" {...tip('Đóng, rời khỏi nơi này')} aria-label="Đóng"><Ic n="close" /></button>
-        <div className="pl-meta">
-          <span className={'nc-g dg' + dg} {...tip(PS.dangerWhy(n))}><i></i>{PS.DTAG[dg]}</span>
-          <span>{PS.capS(PS.TYPE_NAME[n.type])}</span><span>{PS.REG[r.region].n}</span>
-          <span>Linh khí {PS.LK_N[PS.lkOf(n)].toLowerCase()}</span>
+    <div className="x-noi">
+      <header className="x-noi-h">
+        {img && <img className="x-noi-p" src={img} alt="" />}
+        <div className="x-noi-t">
+          <h2>{n.name}</h2>
+          <div className="x-noi-m">
+            <span className={'x-dg dg' + dg} {...tip(PS.dangerWhy(n))}><i></i>{PS.DTAG[dg]}</span>
+            <span>{PS.capS(PS.TYPE_NAME[n.type])}</span><span>Linh khí {PS.LK_N[PS.lkOf(n)].toLowerCase()}</span>
+          </div>
         </div>
-      </>}
-      foot={<>
-        {n.type !== 'ai' && <button className="btn" data-act="exStat" {...tip('Xem nơi này có gì: yêu ma, vật liệu, tỉ lệ')}>Thăm dò</button>}
-        <span className="grow"></span><button className="btn" data-act="leave">Rời đi</button>
-      </>}>
-      {M && <div className="pl-kv"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div>{PS.SETTLE.includes(n.type) && <div><small>Danh tiếng nơi này</small><span>{PS.danhName(n)}</span></div>}</div>}
-      {sc.venue && VENUE_N[sc.venue] && <NoiChonViec n={n} v={sc.venue} />}
-      <LoiKe sc={sc} />
-      {qs.length > 0 && <>
-        <h3 className="grp big"><Ib n="scroll" c="gold" />Nhiệm vụ</h3>
-        <div className="choices">
-          {qs.map(q => (
-            <button key={q.id} className="ch qrow qdo" data-act="qDo" data-arg={q.id} style={{ '--pc': PS.qpc(PS.questGrade(q)).replace(/^--pc:/, '') }}>
-              <span className="ct">{q.kind === 'den' ? 'Giao tận tay' : 'Lùng tìm mục tiêu'} · {q.text}</span>
-              <span className="qmeta"><span className="qgr">{PS.QGRADE[PS.questGrade(q)]}</span><Cost h={q.kind === 'den' ? 1 : 2} st={0} /></span>
-            </button>
-          ))}
+        {n.type !== 'ai' && <button className="icb x-noi-b" data-act="exStat" {...tip('Thăm dò: nơi này có gì, yêu ma, vật liệu, tỉ lệ')} aria-label="Thăm dò"><Ic n="eye" /></button>}
+        <button className="icb x-noi-b" data-act="leave" {...tip('Rời khỏi nơi này, về bản đồ')} aria-label="Rời đi"><Ic n="close" /></button>
+      </header>
+      <section className="x-noi-d">
+        <i className="x-grip" aria-hidden="true" />
+        <div className="sc-b">
+          {sc.venue && VENUE_N[sc.venue] && <NoiChonViec n={n} v={sc.venue} />}
+          <LoiKe sc={sc} />
+          {M && <p className="x-noi-kv"><span><small>Tọa trấn</small>{M.luc}</span><span><small>Quy mô</small>{M.quy}</span>{PS.SETTLE.includes(n.type) && <span><small>Danh tiếng</small>{PS.danhName(n)}</span>}</p>}
+          {qs.length > 0 && <>
+            <h3 className="grp big"><Ib n="scroll" c="gold" />Nhiệm vụ</h3>
+            <div className="choices">
+              {qs.map(q => (
+                <button key={q.id} className="ch qrow qdo" data-act="qDo" data-arg={q.id} style={{ '--pc': PS.qpc(PS.questGrade(q)).replace(/^--pc:/, '') }}>
+                  <span className="ct">{q.kind === 'den' ? 'Giao tận tay' : 'Lùng tìm mục tiêu'} · {q.text}</span>
+                  <span className="qmeta"><span className="qgr">{PS.QGRADE[PS.questGrade(q)]}</span><Cost h={q.kind === 'den' ? 1 : 2} st={0} /></span>
+                </button>
+              ))}
+            </div>
+          </>}
+          {evs.length > 0 && <>
+            <h3 className="grp now"><Ib n="bell" c="seal" />Trước mắt<i {...tip('Những chuyện này không chờ ai. Bỏ mặc lâu thì tự mất.')}>còn chừng {Math.max(1, Math.round((n.evs.until - w.t) / PS.HY))} năm</i></h3>
+            <div className="choices">{evBtns}</div>
+          </>}
+          {(big.length > 0 || ents.length > 0) && <>
+            <h3 className="grp big"><Ib n="flag" c="gold" />Chuyện lớn</h3>
+            <div className="choices">{bigBtns}{entBtns}</div>
+          </>}
+          {groups.length > 0 && groupEls}
         </div>
-      </>}
-      {(big.length > 0 || ents.length > 0) && <>
-        <h3 className="grp big"><Ib n="flag" c="gold" />Chuyện lớn</h3>
-        <div className="choices">{bigBtns}{entBtns}</div>
-      </>}
-      {evs.length > 0 && <>
-        <h3 className="grp now"><Ib n="bell" c="seal" />Trước mắt<i {...tip('Những chuyện này không chờ ai. Bỏ mặc lâu thì tự mất.')}>biến mất sau chừng {Math.max(1, Math.round((n.evs.until - w.t) / PS.HY))} năm</i></h3>
-        <div className="choices">{evBtns}</div>
-      </>}
-      {groups.length > 0 && <><h3 className="grp"><Ib n="book" c="ink" />Thường nhật</h3>{groupEls}</>}
-    </Card>
+      </section>
+    </div>
   );
 }

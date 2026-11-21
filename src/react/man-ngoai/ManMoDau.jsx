@@ -1,5 +1,6 @@
 // Màn mở đầu: tiếp tục kiếp đang dở, hoặc kể lại kiếp trước rồi luân hồi.
-import { Html, PS, Tranh } from '../html';
+import { Html, PS } from '../html';
+import { CanhNui, ConDau, VachChia } from '../chung/HoaVan';
 
 export function ManMoDau() {
   const { G, UI, ASSET } = PS;
@@ -37,13 +38,15 @@ export function ManMoDau() {
     </>;
   }
   return (
-    <div className="title">
-      {ASSET.title
-        ? <img className="t-art t-ink" src={ASSET.title} alt="" />
-        : <Tranh seed={'phusinh-title' + M.nlife} reg={Math.min(4, last ? last._mr || 0 : 0)} type="song" cls="t-art" />}
-      <div className="t-seal">Phù</div>
-      <h1>Phù Sinh</h1>
-      {mid}
+    <div className="title x-title">
+      <CanhNui />
+      {ASSET.title && <img className="x-title-art" src={ASSET.title} alt="" />}
+      <div className="x-logo">
+        <ConDau t="浮生" />
+        <h1>Phù Sinh</h1>
+        <VachChia />
+      </div>
+      <div className="x-title-k">{mid}</div>
       <div className="t-foot">
         {run && M.nlife > 1 && <button className="lnk" data-act="screen" data-arg="meta">Bến Vong Xuyên · {M.pts} điểm</button>}
         <button className="lnk" data-act="titleCfg">Cấu hình</button>

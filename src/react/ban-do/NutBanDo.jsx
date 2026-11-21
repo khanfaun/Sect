@@ -1,5 +1,6 @@
 // Các nút nổi trên bản đồ: vết thương bên trái, lưới/chú giải/về chỗ mình bên phải,
 // góc trái dưới: luyện chế, túi đồ, bế quan (sáng lên khi đủ điều kiện đột phá), cảnh giới.
+import { useState } from 'react';
 import { PS } from '../html';
 import { Ic, tip } from '../chung';
 
@@ -47,7 +48,7 @@ function TienIco({ k }) {
 }
 
 // Cụm tiền tệ: xu, lượng bạc, lượng vàng rồi tới 4 phẩm linh thạch (cuối cùng), dàn ngang
-function CumTien({ r }) {
+export function CumTien({ r }) {
   const T = PS.TIEN, d = Math.max(0, Math.round(r.bac || 0));
   const vang = Math.floor(d / T.vang), bac = Math.floor((d % T.vang) / T.luong), xu = d % T.luong;
   const C = [['xu', xu, 'Xu'], ['bac', bac, 'Lượng bạc'], ['vang', vang, 'Lượng vàng']];
@@ -61,25 +62,22 @@ function CumTien({ r }) {
   );
 }
 
+// Nút bản đồ (giao diện mới): bên trái là dải cảnh báo; bên phải một nút "La bàn" xổ ra công cụ bản đồ, và nút "Về chỗ" luôn hiện.
 export function NutBanDo() {
-  const { G, CFG, UI } = PS;
-  const r = G.run, bqNo = PS.bqCan(), brk = PS.canBreak();
+  const { CFG, UI } = PS;
+  const [mo, setMo] = useState(false);
   const dev = !!PS.DEV;
   return <>
-    <CumTien r={r} />
-    <div className="mleft wb"><DaiVetThuong />{dev && <Nut act="devOpen" icon="bolt" cls="dev" t="Dev test: thử hiệu ứng" />}</div>
-    <div className="mright">
-      <Nut act="gridT" icon="hex" l="Lưới ô" t={CFG.grid ? 'Ẩn lưới ô' : 'Hiện lưới ô'} on={CFG.grid} />
-      <Nut act="legendOpen" icon="list" l="Chú giải" t="Chú giải ký hiệu trên bản đồ" on={UI.panel === 'more' && UI.tab.more === 'legend'} />
-      {!PS.isPham() && <Nut act="tkUse" icon="eye" l="Thần thức" on={PS.tkActive()} dis={!!PS.tkWhy() && !PS.tkActive()} t={'Phóng thần thức: tầm nhìn gấp ' + PS.TK_MUL + ' lần trong ' + PS.durH(PS.TK_DUR) + ', tốn ' + PS.TK_MP + '% linh lực, chờ ' + PS.TK_CD + ' ngày mới dùng lại.\nTầm hiện tại: ' + PS.senseR() + (PS.tkWhy() ? '\n' + PS.tkWhy() : '')} />}
-      <Nut act="zoomAll" icon="globe" l="Toàn đồ" t="Thu nhỏ hết cỡ: xem cả bản đồ" />
-      <Nut act="center" icon="target" l="Về chỗ" t="Về chỗ ngươi" />
-    </div>
-    <div className="mbl">
-      <Nut act="panel" arg="craft" icon="flask" l="Luyện chế" t="Luyện chế: luyện đan, luyện khí từ vật liệu" on={UI.panel === 'craft'} dis={r.moving} />
-      <Nut act="bagOpen" icon="bag" l="Túi đồ" t="Túi đồ" on={UI.panel === 'char' && UI.tab.char === 'bag'} />
-      <Nut act="hudBq" icon="seat" l="Bế quan" cls={brk ? 'glow' : ''} dis={!!bqNo || PS.voKnown()} t={PS.voKnown() ? 'Vô linh căn: chưa thể bế quan tu luyện' : bqNo || (brk ? 'Bế quan · tu vi viên mãn: vào để đột phá' : 'Bế quan tu luyện ngay tại đây')} />
-      <Nut act="cgOpen" icon="yin" l="Cảnh giới" on={!!(UI.modal && /cg/.test(UI.modal.k || ''))} t="Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá" />
+    <div className="x-warn"><DaiVetThuong />{dev && <Nut act="devOpen" icon="bolt" cls="dev" t="Dev test: thử hiệu ứng" />}</div>
+    <div className={'x-tools' + (mo ? ' mo' : '')}>
+      <button className="mb x-lb" onClick={() => setMo(!mo)} aria-label="Công cụ bản đồ"><Ic n={mo ? 'close' : 'layers'} /></button>
+      {mo && <div className="x-tools-l">
+        <Nut act="gridT" icon="hex" l="Lưới ô" t={CFG.grid ? 'Ẩn lưới ô' : 'Hiện lưới ô'} on={CFG.grid} />
+        <Nut act="legendOpen" icon="list" l="Chú giải" t="Chú giải ký hiệu trên bản đồ" on={UI.panel === 'more' && UI.tab.more === 'legend'} />
+        <Nut act="zoomAll" icon="globe" l="Toàn đồ" t="Thu nhỏ hết cỡ: xem cả bản đồ" />
+      </div>}
+      {!PS.isPham() && <Nut act="tkUse" icon="eye" l="Thần thức" cls="x-tk" on={PS.tkActive()} dis={!!PS.tkWhy() && !PS.tkActive()} t={'Phóng thần thức: tầm nhìn gấp ' + PS.TK_MUL + ' lần trong ' + PS.durH(PS.TK_DUR) + ', tốn ' + PS.TK_MP + '% linh lực, chờ ' + PS.TK_CD + ' ngày mới dùng lại.\nTầm hiện tại: ' + PS.senseR() + (PS.tkWhy() ? '\n' + PS.tkWhy() : '')} />}
+      <Nut act="center" icon="target" l="Về chỗ" cls="x-ve" t="Về chỗ ngươi" />
     </div>
   </>;
 }

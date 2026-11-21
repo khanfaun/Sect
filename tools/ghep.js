@@ -16,6 +16,6 @@ function html(title) {
   let h = rd('src/index.html');
   title = title || process.env.PS_TITLE;
   if (title) h = h.replace('<title>Phù Sinh</title>', `<title>${title}</title>`);
-  return h.replace('/*STYLE*/', () => rd('src/game/style.css')).replace('/*SCRIPT*/', () => script());
+  return h.replace('/*STYLE*/', () => rd('src/game/style.css') + '\n' + rd('src/game/style-moi.css')).replace('/*SCRIPT*/', () => script());
 }
 module.exports = { root, order, script, html };
