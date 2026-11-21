@@ -6,8 +6,8 @@
 // vk: binh khí phàm (vật trong túi). atkP = công +% cho phàm nhân đang mang (chọn món tốt nhất); bac = giá bày ở tạp hóa thành.
 const SUAE={
   cam:{ltPer:0.6,thang:1,btPer:0.5,
-    pham:{vk_thiet_kiem:10000,vk_cuong_dao:9000,kim_sang_duoc:60,huong_an_than:30,luong_kho:35}},
-  vk:{vk_thiet_kiem:{atkP:10,bac:14000},vk_cuong_dao:{atkP:8,bac:12000}}};
+    pham:{vk_thiet_kiem:5000,vk_cuong_dao:4750,kim_sang_duoc:50,huong_an_than:30,luong_kho:35}},
+  vk:{vk_thiet_kiem:{atkP:10,bac:10000},vk_cuong_dao:{atkP:8,bac:9500}}};
 // câu 18 — nguồn linh thạch phẩm cao. ltRoll[bảng] = danh sách [phẩm k, xác suất, ít nhất, nhiều nhất]; phẩm 0 (Hạ) đi qua hiệu ứng st nên nhân hệ số vùng.
 //   daibi: tông môn đại bỉ thắng — tối đa Trung phẩm. bicanh: chủ yếu Hạ/Trung, Thượng rất hiếm, Cực rất rất hiếm.
 //   coduyen: kỳ ngộ cơ duyên lớn (trả giá) — nơi Cực phẩm ra nhiều nhất; huuduyen: kỳ ngộ hữu duyên (không mất gì), ít hơn.
@@ -25,7 +25,7 @@ Object.assign(SUAE,{
   am:{thang:1,minT:2,cucT:4,thuong:3,len:2,cucDan:2}});
 // câu 19 — Tích Cốc Đan (vật dùng trong túi, chỉ Trúc Cơ trở lên): no trong `ngay` ngày (không đói, hết đói ngay), giá `st` linh thạch Hạ phẩm (× hệ số vùng price()),
 //   bày ở nơi bán đồ tu sĩ: chợ phiên tu sĩ, phường thị trong thành, bảo khố tông mình; `qty` viên mỗi lần bày.
-SUAE.tc={id:'tich_coc_dan',ngay:1095,st:8,qty:2,noi:['cho','thanh','tong']};
+SUAE.tc={id:'tich_coc_dan',ngay:1095,st:12,qty:2,noi:['cho','thanh','tong']};
 // câu 20 — trả trước một phần khoản vay ở người cho vay: các mức (xu) nhỏ hơn số còn phải trả, và "một nửa". Không giảm lãi đã tính, không đổi hạn.
 SUAE.traTruoc=[200,1000,3000];
 // câu 23 — thương lượng giảm giá tiệm: giảm = max × (năng lực − tu) / (100 − tu), kẹp 0..max. Gốc 10 không giảm; "Lão luyện" (55) ≈ 2,5%; tối đa 5% ở 100.

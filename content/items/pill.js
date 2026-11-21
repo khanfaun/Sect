@@ -1,6 +1,6 @@
 // Nguồn chuẩn: PILL. Luật xử lý ở src/game/core/03-dan-duoc-phu-luc.js.
 const PILL = {
-  hoixuan:{n:'Hồi Xuân Đan',i:'🟢',x:35,d:'Hồi {x}% khí huyết',w:'any',p:22},
+  hoixuan:{n:'Hồi Xuân Đan',i:'🟢',x:35,d:'Hồi {x}% khí huyết',w:'any',p:20},
   tukhi:{n:'Tụ Khí Đan',i:'🔵',x:50,d:'Hồi {x}% linh lực',w:'any',p:18},
   baohuyet:{n:'Bạo Huyết Đan',i:'🔴',x:3,d:'Tăng {x} tầng cuồng nộ trong trận.',w:'combat',p:28},
   kimcang:{n:'Kim Cang Phù',i:'🟨',x:35,d:'Tạo lớp hộ thể bằng {x}% khí huyết.',w:'combat',p:24},
@@ -15,7 +15,7 @@ const PILL = {
   dientho:{n:'Diên Thọ Đan',i:'🍑',x:8,d:'Thọ nguyên +{x}%',w:'any',p:70},
   phacanh:{n:'Phá Cảnh Đan',i:'🌕',x:15,d:'Đặt vào ô chuẩn bị để cộng {x} điểm phần trăm vào tỷ lệ đột phá.',w:'bt',p:55,bt:{rate:15}},
   homach:{n:'Hộ Mạch Đan',i:'🛡️',x:0,d:'Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.',w:'bt',p:70,bt:{guard:1}},
-  bode:{n:'Bồ Đề Tử',i:'📿',x:0,d:'Hộ mệnh khi đột phá, giữ mạng khi gục giữa kiếp',w:'bt',p:90,bt:{guard:1}},
+  bode:{n:'Bồ Đề Tử',i:'📿',x:0,d:'Hộ mệnh khi đột phá, giữ mạng khi gục giữa kiếp',w:'bt',p:70,bt:{guard:1}},
   tiloi:{n:'Tị Lôi Phù',i:'🪬',x:0,d:'Bớt một đợt sét khi độ kiếp.',w:'bt',p:65,bt:{kiepCut:1}},
   duongnguyen:{n:'Dưỡng Nguyên Đan',i:'🍵',x:20,d:'Tạo lớp hộ thể bằng {x}% khí huyết khi vào thiên kiếp.',w:'bt',p:50,bt:{kiepHp:20}},
   thiendao:{n:'Thiên Đạo Quả',i:'🍎',x:4,d:'Phẩm chất: đạo cơ +{x} khi đột phá',w:'bt',p:140,bt:{dao:4}},

@@ -45,7 +45,7 @@ const CONG_TRINH={
   dong_phu:{n:'Động phủ',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],dp:1,xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','dongthien','ditich'],st:30,h:720,tu:1},pha:{h:12},hau:'Mất động phủ: bế quan ở đây không còn được che chở.'},
   tran_phap:{n:'Trận pháp hộ thân',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','bicanh','dongthien','como','yeusao','ditich','tran','thanh','tutran','tuthanh','cho','ancu'],st:50,h:240,tu:1},pha:{h:6},hau:'Trận tan, ngươi mất chỗ tĩnh tọa được trận che chở.'},
   // --- người chơi dựng trên đất đã mua ở nơi có dân (câu 80): phàm nhân cũng dựng được, trả bằng bạc (xu) ---
-  nha_rieng:{n:'Nhà riêng',nhom:'Nghỉ chân',tu:0,acts:[],noi:[],xay:{noi:['tran','thanh','tutran','tuthanh','cho','ancu'],st:0,bac:25000,h:360,cuaTa:1},pha:{h:6},hau:'Nhà mất, ngươi không còn chỗ ngủ và nghỉ riêng ở đây.'}};
+  nha_rieng:{n:'Nhà riêng',nhom:'Nghỉ chân',tu:0,acts:[],noi:[],xay:{noi:['tran','thanh','tutran','tuthanh','cho','ancu'],st:0,bac:18000,h:360,cuaTa:1},pha:{h:6},hau:'Nhà mất, ngươi không còn chỗ ngủ và nghỉ riêng ở đây.'}};
 
 // DAT: cách sinh ô và hậu quả.
 //   goc[loại nơi] = công trình luôn có ở loại nơi đó (bảo đảm dịch vụ cốt lõi; bản lưu cũ cũng sinh theo bảng này)
@@ -93,11 +93,11 @@ const DAT={
   //   tran: tác dụng trận pháp hộ thân trên đất của ngươi (câu 78): bq = hệ số rủi ro bế quan bị quấy, tm = hệ số tâm ma giảm khi tĩnh tọa, ngu = tính là có chỗ ngủ
   //   ct = giá công trình (xu) khi mua ô ĐÃ có công trình của dân / người giữ vai / thế lực: giá = (giá đất + ct) × chu; '_' = mặc định.
   //        Mua xong công trình giữ nguyên (vẫn mở dịch vụ); bán lại ô mua kèm công trình được ban × (giá đất + ct).
-  mua:{gia:{tran:30000,thanh:80000,tutran:36000,tuthanh:100000,cho:20000,ancu:10000},chu:{dan:1,vai:1.3,fa:1.6},lt:200,ban:0.5,h:4,favMin:-10,faMin:3,toiDa:2,naMin:2,
+  mua:{gia:{tran:20000,thanh:60000,tutran:24000,tuthanh:75000,cho:16000,ancu:9000},chu:{dan:1,vai:1.3,fa:1.6},lt:200,ban:0.5,h:4,favMin:-10,faMin:3,toiDa:2,naMin:2,
     ct:{_:20000,khach_diem:40000,tra_lau:25000,tuu_lau:30000,bang_thuong:10000,thuong_cac:40000,tien_trang:60000,tap_hoa:15000,lai_buon:15000,
-      phuong_thi:80000,quy_thi:60000,am_hoi:80000,doi_lt:60000,cam_do:30000,tram_dich:40000,loi_dai:50000,thao_lu:5000,nha_rieng:25000,tran_phap:20000},
+      phuong_thi:80000,quy_thi:60000,am_hoi:80000,doi_lt:60000,cam_do:30000,tram_dich:40000,loi_dai:50000,thao_lu:5000,nha_rieng:18000,tran_phap:20000},
     tran:{bq:0.5,tm:2,ngu:1}},
-  // thue: thuế đất trên ô của ngươi ở thôn trấn / thành (chợ, ẩn cư không thu). Mỗi ky tháng nộp ty[loại nơi] × giá đất gốc (trấn 450 xu, thành 1.600 xu một năm — dưới tiền thuê nhà cả năm, 20/11 giảm theo người dùng).
+  // thue: thuế đất trên ô của ngươi ở thôn trấn / thành (chợ, ẩn cư không thu). Mỗi ky tháng nộp ty[loại nơi] × giá đất gốc (trấn 300 xu, thành 1.200 xu một năm — dưới tiền thuê nhà cả năm, 20/11 giảm theo người dùng).
   //   Trả bạc, tu sĩ thiếu bạc trả linh thạch (như mua). Không trả được thì ghi nợ trên ô, danh tiếng khu thêm danh mỗi kỳ; có tiền thì tự trả nợ (xét mỗi ngày).
   //   Nợ quá noKy kỳ thì quan phủ ghi thành nợ thường (r.bac âm, hệ nợ Sửa-B: hạn, phạt…); không mất đất. Đang nợ thuế ở nơi nào thì không mua thêm đất ở đó.
   //   Chỉ thu trên đất mua trong kiếp này (ô ghi kiếp lúc mua; bản lưu cũ ghi kiếp hiện tại, kỳ đầu tính từ lúc xét).

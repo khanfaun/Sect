@@ -1785,12 +1785,12 @@ const TESTS = {
     ok(no==='Không đủ tiền'&&!run("venueDo('inn','phong')")&&run("G.run.bac")===5, 'không tiền: khóa với chữ "Không đủ tiền"');
     run("openPlace(G.run.at);G.run.bac=0;G.run.st=1");ok(!run("venueDo('inn','phong')")&&run("G.run.st")===1, 'Sửa-A: thiếu xu mà có linh thạch: không đổi tự động');
     run("G.run.arts=(G.run.arts||[]).filter(a=>a.type!=='tp');G.run.relics=G.run.relics.filter(x=>!(x.k==='book'&&x.art&&x.art.type==='tp'));G.run.bac=1000;G.run.st=0;nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");
-    const it=JSON.parse(run("JSON.stringify(G.run.scene.items[0])"));ok(it.bac===800, 'tạp hóa: bản chép tay tâm pháp giá 800 đồng ('+it.bac+')');
-    run("buy(0)");ok(run("G.run.scene.items[0].sold")&&run("G.run.bac")===200, 'phàm nhân kiếp đầu mua được tâm pháp bằng bạc');
-    run("G.run.hp=1;G.run.bac=1000;G.run.st=0;G.run.scene.healed=0");ok(run("G.run.scene.healBac")===150, 'thầy lang cho phàm nhân: 150 đồng');run("healBuy()");ok(run("G.run.hp===S().maxHp&&G.run.bac===850"), 'trả bạc mời thầy lang');
+    const it=JSON.parse(run("JSON.stringify(G.run.scene.items[0])"));ok(it.bac===run('TIEN.tpBac'), 'tạp hóa: bản chép tay tâm pháp giá theo bảng ('+it.bac+')');
+    run("buy(0)");ok(run("G.run.scene.items[0].sold")&&run("G.run.bac")===1000-run('TIEN.tpBac'), 'phàm nhân kiếp đầu mua được tâm pháp bằng bạc');
+    run("G.run.hp=1;G.run.bac=1000;G.run.st=0;G.run.scene.healed=0");ok(run("G.run.scene.healBac")===run('TIEN.yBac'), 'thầy lang cho phàm nhân: giá theo bảng');run("healBuy()");ok(run("G.run.hp===S().maxHp&&G.run.bac===1000-TIEN.yBac"), 'trả bạc mời thầy lang');
     run("G.run.rootKnown=0;G.run.bac=10000;G.run.qitems=[];nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");const k=run("G.run.scene.items.findIndex(x=>x.k==='qi'&&x.id==='trac_linh_thach')");
-    ok(k>=0&&run(`G.run.scene.items[${k}].bac`)===9900, 'chưa trắc linh: phường thị bán Trắc Linh Thạch 9.900 đồng');
-    run(`buy(${k})`);ok(run("G.run.qitems.includes('trac_linh_thach')")&&run("G.run.bac")===100, 'mua Trắc Linh Thạch bằng bạc');
+    ok(k>=0&&run(`G.run.scene.items[${k}].bac`)===run('TIEN.tlBac'), 'chưa trắc linh: phường thị bán Trắc Linh Thạch (giá theo bảng)');
+    run(`buy(${k})`);ok(run("G.run.qitems.includes('trac_linh_thach')")&&run("G.run.bac")===10000-run('TIEN.tlBac'), 'mua Trắc Linh Thạch bằng bạc');
   },
   // Đ3.3 tiền trang — Sửa-A (câu 9): không còn đổi linh thạch ↔ tiền phàm; thay bằng hiệu cầm đồ
   tien_trang() {
@@ -1811,12 +1811,12 @@ const TESTS = {
     run("G.run.bac=0;G.run.st=0;G.run.pills=[];G.run.relics=[genRelic(0)];G.run.chu=null;G.run.qitems=['vk_thiet_kiem','kim_sang_duoc','bt_truong_quyen','trac_linh_thach']");
     const L=JSON.parse(run("JSON.stringify(venueOpts(nodeById(G.run.at),'camdo'))"));
     ok(L.length===4&&L.some(o=>o.id==='q:0'&&/10 lượng|lượng/.test(o.g.txt))&&!L.some(o=>o.id==='q:3'), 'nhận binh khí, thuốc, bí tịch; không nhận Trắc Linh Thạch: '+L.map(o=>o.g.txt).join(' | '));
-    ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===10000&&!run("hasItem('vk_thiet_kiem')"), 'binh khí phàm: 10 lượng bạc ('+run("fmtBac(G.run.bac)")+')');
-    run("openPlace(G.run.at)");ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===10060, 'kim sang dược 60 xu (nửa giá mua), đồ phàm không giới hạn tháng');
-    run("openPlace(G.run.at)");ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===13060, 'bí tịch võ: nửa giá (3.000 xu)');
-    run("openPlace(G.run.at)");const p=run("sellList()[0].p");const g=run("camLt(nodeById(G.run.at),sellList()[0])");ok(run("venueDo('camdo','r:0')")&&run("G.run.st")===g&&g>=1&&g<p&&run("G.run.bac")===13060, 'pháp khí: '+g+' linh thạch (tiệm tu sĩ '+p+'), không trả tiền phàm');
+    ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===run('SUAE.cam.pham.vk_thiet_kiem')&&!run("hasItem('vk_thiet_kiem')"), 'binh khí phàm: giá cầm theo bảng ('+run("fmtBac(G.run.bac)")+')');
+    run("openPlace(G.run.at)");ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===run('SUAE.cam.pham.vk_thiet_kiem+SUAE.cam.pham.kim_sang_duoc'), 'kim sang dược (nửa giá mua), đồ phàm không giới hạn tháng');
+    run("openPlace(G.run.at)");ok(run("venueDo('camdo','q:0')")&&run("G.run.bac")===run('SUAE.cam.pham.vk_thiet_kiem+SUAE.cam.pham.kim_sang_duoc')+3000, 'bí tịch võ: nửa giá (3.000 xu)');
+    run("openPlace(G.run.at)");const p=run("sellList()[0].p");const g=run("camLt(nodeById(G.run.at),sellList()[0])");ok(run("venueDo('camdo','r:0')")&&run("G.run.st")===g&&g>=1&&g<p&&run("G.run.bac")===run('SUAE.cam.pham.vk_thiet_kiem+SUAE.cam.pham.kim_sang_duoc')+3000, 'pháp khí: '+g+' linh thạch (tiệm tu sĩ '+p+'), không trả tiền phàm');
     run("G.run.qitems=[]");const a0=run("S().atk");run("G.run.pham=1;G.run.qitems=[]");const a1=run("S().atk");run("G.run.qitems=['vk_thiet_kiem']");ok(run("S().atk")>a1, 'phàm nhân mang thiết kiếm thì công tăng ('+a1+' → '+run("S().atk")+')');
-    run("nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");ok(run("G.run.scene.items.some(x=>x.k==='qi'&&SUAE.vk[x.id]&&x.bac>=10000)"), 'tạp hóa thành bày một binh khí phàm');
+    run("nodeById(G.run.at).shop=null;openShop(nodeById(G.run.at))");ok(run("G.run.scene.items.some(x=>x.k==='qi'&&SUAE.vk[x.id]&&x.bac>=SUAE.vk.vk_cuong_dao.bac)"), 'tạp hóa thành bày một binh khí phàm');
     // Sửa-F câu 25: bí tịch võ đắt hơn nhiều, bậc cao đắt hơn bậc thấp, vẫn rẻ hơn binh khí phàm; cầm đồ ≈ nửa giá
     ok(run("VO_HOC.find(h=>h.id==='truong_quyen').bac")===6000&&run("VO_HOC.find(h=>h.id==='hon_nguyen').bac")===9000, 'giá bí tịch: Trường Quyền 6.000, Hỗn Nguyên 9.000 xu');
     ok(run("camPhamGia('bt_hon_nguyen')")===4500&&run("camPhamGia('bt_truong_quyen')")===3000&&run("VO_HOC.filter(h=>h.bac).every(h=>h.bac<SUAE.vk.vk_cuong_dao.bac)"), 'cầm bí tịch: 3.000 / 4.500; mọi bí tịch rẻ hơn binh khí phàm');
@@ -1879,9 +1879,9 @@ const TESTS = {
     run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;n.shop=null;G.run.bac=1e6;})()");
     const gia=v=>{run(`nangOf().thuong=${v};openShop(nodeById(G.run.at))`);return run("G.run.scene.items.find(x=>x.k==='qi'&&x.id==='kim_sang_duoc').bac");};
     const g10=gia(10),g55=gia(55),g100=gia(100);
-    ok(g10===120, 'năng lực gốc: không giảm ('+g10+' xu)');
+    ok(g10===run('TIEN2.hang[0].bac'), 'năng lực gốc: không giảm ('+g10+' xu)');
     ok(g55<g10&&g55>=g10*0.96, 'Lão luyện: giảm chút ít ('+g55+')');
-    ok(g100===114, 'tối đa: 120 xu còn 114 (−5%)');
+    ok(g100===Math.round(g10*0.95), 'tối đa: còn 95% ('+g100+')');
     ok(Math.abs(run("(nangOf().thuong=100,macGiam())")-0.05)<1e-9&&run("(nangOf().thuong=200,macGiam())")<=0.05, 'giảm kẹp ở 5%');
   },
   // Sửa-A (câu 9): bốn phẩm linh thạch, bản lưu cũ
@@ -1934,7 +1934,7 @@ const TESTS = {
     // áp vào giá cửa hàng
     run(`G.run.at=${nid};openPlace(${nid});nodeById(${nid}).shop=null;G.run.bac=1e6;G.run.st=1e4;openShop(nodeById(${nid}))`);
     const k=run("G.run.scene.items.findIndex(x=>x.k==='qi'&&x.id==='kim_sang_duoc')");const b0=run(`G.run.scene.items[${k}].bac`);
-    ok(b0===Math.max(1,Math.round(120*run(`ncGet(${nid},'qi:kim_sang_duoc')`))), 'giá tiệm theo nhu cầu: '+b0+' xu');
+    ok(b0===Math.max(1,Math.round(run('TIEN2.hang[0].bac')*run(`ncGet(${nid},'qi:kim_sang_duoc')`))), 'giá tiệm theo nhu cầu: '+b0+' xu');
     run(`buy(${k});buy(${k})`);ok(run(`G.run.scene.items[${k}].bac`)>b0, 'mua hai gói thì giá lên: '+run(`G.run.scene.items[${k}].bac`));
     run(`W().nc={};G.run.relics=[genRelic(3)]`);const p0=run("sellList()[0].p");run(`ncPush(${nid},'pb',0.4)`);ok(run("sellList()[0].p")>p0, 'bán: nhu cầu cao thì được giá hơn ('+p0+' → '+run("sellList()[0].p")+', nc '+run(`ncGet(${nid},'pb')`)+')');
     ok(run("JSON.stringify(W().nc).length")<400, 'dữ liệu gọn: '+run("JSON.stringify(W().nc).length")+' ký tự');
@@ -1945,7 +1945,7 @@ const TESTS = {
     for(const t of ['tran','thanh']){
       run(`(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='${t}'&&n.state!=='ruin');G.run.at=n.id;n.shop=null;openShop(n);})()`);
       const tu=run("G.run.scene.items.filter(shopCultivator).length");ok(tu<=(t==='tran'?1:2), t+': đồ tu sĩ ≤ '+(t==='tran'?1:2)+' ('+tu+')');
-      ok(run("G.run.scene.items.some(x=>x.k==='qi'&&x.id==='kim_sang_duoc'&&x.bac===120)"), t+': bán Kim sang dược 120 xu');}
+      ok(run("G.run.scene.items.some(x=>x.k==='qi'&&x.id==='kim_sang_duoc'&&x.bac===TIEN2.hang[0].bac)"), t+': bán Kim sang dược (giá theo bảng)');}
     run("G.run.hp=1;G.run.qitems=['kim_sang_duoc']");ok(run("bagUse('vkim_sang_duoc',1)")===1&&run("G.run.hp")>1&&!run("G.run.qitems.length"), 'dùng Kim sang dược hồi khí huyết');
     const T=run("W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tong').id");
     run(`G.run.at=${T};G.run.flags.tongmon=0`);ok(!run(`placeActs(nodeById(${T})).some(a=>a.a==='taphoa')`), 'người ngoài: không có bảo khố');

@@ -20,7 +20,7 @@ function amNode(){const sc=G.run&&G.run.scene;return sc&&sc.type==='amhoi'?sc.no
 function amIdOf(it){return typeof it==='string'?it:String(it&&it.id);}
 function amBase(it,that){if(!it)return 0;const id=amIdOf(it);
   if(id.startsWith('lt:'))return AMV[+id.slice(3)]||0;
-  if(id==='rel')return Math.round(AM_HOI.relic*Math.pow(3,clamp(it.q||0,0,6)));
+  if(id==='rel')return Math.round(AM_HOI.relic*Math.pow(AM_HOI.relicX||3,clamp(it.q||0,0,6)));
   if(id.startsWith('pill:')){const P=PILL[id.slice(5)];return P?Math.max(1,Math.round((P.p||10)*(1+((it&&it.q)||0)))):0;}
   const D=typeof ccDoParse==='function'?ccDoParse(id):null;
   if(D){if(D.k==='x')return 0;if(D.k==='g'&&that)return 0;return Math.round(CC_DO[D.p].st*(D.k==='t'?1.1:1));}

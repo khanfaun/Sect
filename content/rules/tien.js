@@ -6,7 +6,7 @@
 const TIEN={quan:1000,luong:1000,vang:10000,lt:1000000,
   grpBac:{kho:[150,300],thuong:[300,700],kha:[5000,20000]},
   hc:{bap:0.75,nang:1.25},
-  tpBac:800,tlBac:9900,qBac:100,yBac:150,evXu:100};
+  tpBac:600,tlBac:4800,qBac:100,yBac:120,evXu:100};
 // tpBac: bản chép tay tâm pháp ở tạp hóa; tlBac: Trắc Linh Thạch; yBac: thầy lang ở phường thị (đều là xu)
 // qBac: phàm nhân nhận thưởng nhiệm vụ bảng treo bằng tiền phàm, mỗi linh thạch ghi trên bảng = qBac xu
 // evXu: sự kiện phàm nhân dùng được mà ghi giá linh thạch thì mỗi linh thạch (sau hệ số vùng) = evXu xu
@@ -31,6 +31,6 @@ const TIEN2={
   lech:2,
   nc:{dao:0.12,chu:3,day:0.04,phai:0.7,min:0.7,max:1.4},
   shop:{tran:1,thanh:2,tutran:2,tuthanh:3},
-  hang:[{id:'kim_sang_duoc',bac:120,qty:3},{id:'huong_an_than',bac:60,qty:2},{id:'luong_kho',bac:70,qty:5}],
+  hang:[{id:'kim_sang_duoc',bac:100,qty:3},{id:'huong_an_than',bac:60,qty:2},{id:'luong_kho',bac:70,qty:5}],
   cam:{thang:1,xuPer:200,noi:['thanh','cho']}, // cầm đồ chỉ ở thành phàm nhân và chợ phiên
   dung:{kim_sang_duoc:{hp:0.3},huong_an_than:{tamma:-5}}};
