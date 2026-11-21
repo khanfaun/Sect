@@ -3413,6 +3413,38 @@ const TESTS = {
     ok(run(`unitTal({side:'B',f:'nhan',name:'${ten}'}).tier`)===run(`rivalTal(${rv0}.i).tier`), 'thẻ trận: người trùng tên thiên kiêu hiện đúng tiềm chất thiên kiêu');
     ok(/Tâm trí: /.test(run(`triTxtU({side:'B',f:'nhan',name:'${ten}'})`))&&run("triTxtU({side:'B',f:'thu',name:'Sói'})")==='', 'có dòng "Tâm trí" cho người; yêu thú không có');
   },
+  // Dev test: đổi cảnh giới, mở bản đồ, nhận vật phẩm, khí vận/thể chất, thương thế, dàn trận thử
+  dev_test() {
+    fresh("NK.on=true;G.run.scene=null");
+    run("devSetRealm(2,3)");ok(run("G.run.realm")===2&&!run("G.run.pham")&&run("tieu()")===2&&run("G.run.hp")===run("S().maxHp"), 'đổi cảnh giới: Kết Đan hậu kỳ, máu đầy');
+    run("devSetRealm(0,10)");ok(run("G.run.realm")===0&&run("lkTang()")===10, 'Luyện Khí tầng 10');
+    run("devSetRealm(-1)");ok(run("G.run.pham")===1, 'về phàm nhân');run("devSetRealm(1,1)");
+    const n=run("devMoMap()");ok(run("W().regions.every(R=>R.nodes.every(x=>x.fog>=3))")&&run("VIS.every(x=>x===1)"), 'mở toàn bộ bản đồ ('+n+' nơi mới hiện)');
+    for(const [l,n0] of [['pb',0],['cp',0],['dan',0],['lieu',0],['vat',0],['xe',0],['trung',0]]){const L=run(`devList('${l}').length`);ok(L>0, 'danh sách '+l+': '+L+' món');}
+    const r0=run("G.run.relics.length");const id=run("devList('pb')[0].id");run(`devGiveMany('pb',['${id}'])`);ok(run("G.run.relics.length")===r0+1&&run(`G.run.relics.some(x=>x.cid==='${id}')`), 'nhận một trang bị đã chọn');
+    run("devGiveMany('cp',[devList('cp')[0].id])");ok(run("G.run.relics.some(x=>x.k==='book'&&x.art)"), 'nhận công pháp thành bí tịch');
+    const p0=run("G.run.pills.length");const nd=run("devGiveMany('dan')");ok(run("G.run.pills.length")-p0===nd&&nd===run("devList('dan').length"), 'nhận cả loại đan dược ('+nd+' viên, bỏ qua giới hạn túi)');
+    run("devGiveMany('lieu',[devList('lieu')[0].id])");ok(run("Object.values(G.run.mats).some(x=>x>0)"), 'nhận vật liệu');
+    run("devGiveMany('vat',[devList('vat')[0].id])");ok(run("G.run.qitems.length")>0, 'nhận vật phẩm');
+    run("devGiveMany('xe',[devList('xe')[1].id])");ok(run("G.run.mount")===run("devList('xe')[1].id")&&!!run("mountOf()"), 'nhận phương tiện (đang cưỡi)');
+    run("devGiveMany('trung',[devList('trung')[0].id])");ok(run("G.run.eggs.length")>0, 'nhận trứng linh thú');
+    for(const k of ['tt','the','ht']){const x=run(`devKvList('${k}').find(x=>!devKvCo('${k}').includes(x.id)).id`);run(`devKvAdd('${k}','${x}')`);ok(run(`devKvCo('${k}').includes('${x}')`), 'thêm '+k);run(`devKvDel('${k}','${x}')`);ok(!run(`devKvCo('${k}').includes('${x}')`), 'xoá '+k);}
+    run("devWAdd('gay');devWAdd('nguy')");ok(run("devWCo().includes('gay')&&devWCo().includes('nguy')"), 'thêm thương thế (gãy xương, trọng thương)');
+    run("devWDel('gay')");ok(!run("devWCo().includes('gay')")&&run("devWCo().includes('nguy')"), 'chữa một loại');run("devWDel()");ok(run("devWCo().length")===0, 'chữa hết');
+    // dàn trận: phe ta có nhân vật chính (Hóa Thần) + một thiên kiêu, phe địch hai yêu thú Luyện Khí
+    const hp0=run("G.run.hp"),re0=run("G.run.realm");const beast=run("devCbList().find(x=>x.nhom==='Yêu thú').v");
+    ok(run(`devCombat([{v:'main',re:4},{v:'rv:0',re:2}],[{v:'${beast}',re:0},{v:'${beast}',re:0}])`)===true, 'dựng trận thử');
+    const u=JSON.parse(run("JSON.stringify(G.run.scene.units.map(u=>({s:u.side,n:u.name,re:u.realm,m:!!u.isMain,max:u.max})))"));
+    ok(u.length===4&&u.filter(x=>x.s==='A').length===2&&u.filter(x=>x.s==='B').length===2&&u.some(x=>x.n===run("W().rivals[0].ten")&&x.s==='A'&&x.re===2), 'đúng hai phe, đúng cảnh giới từng người');
+    ok(run("G.run.realm")===re0, 'cảnh giới thật không đổi trong lúc đánh thử');
+    run("(()=>{const sc=G.run.scene;for(let i=0;i<20000&&!sc.done;i++){if(sc.dodge)dodgeResolve(null);else if(sc.qte)qteResolve(null);else if(readyPlayer(sc))playerAct('_atk');else combatStep(0.05);}})()");
+    ok(run("G.run.scene.over")==='win', 'Hóa Thần + thiên kiêu thắng hai yêu thú Luyện Khí');run("combatContinue()");
+    ok(!run("G.run.scene")&&run("G.run.hp")===hp0&&run("G.run.realm")===re0&&!!run("G.run"), 'xong trận thử: trả lại máu, cảnh giới');
+    // không có nhân vật chính: hai yêu thú tự đánh nhau; phe ta thua cũng không chết
+    ok(run(`devCombat([{v:'${beast}',re:0}],[{v:'rv:1',re:4}])`)===true&&run("mainUnit(G.run.scene).gone")===1, 'trận không có nhân vật chính (chỉ đứng xem)');
+    run("(()=>{const sc=G.run.scene;for(let i=0;i<20000&&!sc.done;i++){if(sc.dodge)dodgeResolve(null);else if(sc.qte)qteResolve(null);else combatStep(0.05);}})()");
+    ok(run("G.run.scene.over")==='lose', 'yêu thú Luyện Khí thua thiên kiêu Nguyên Anh');run("combatContinue()");ok(!!run("G.run")&&!run("G.run.scene"), 'thua trận thử không chết');
+  },
 };
 
 if (args.includes('--list')) { console.log(Object.keys(TESTS).join('\n')); process.exit(0); }

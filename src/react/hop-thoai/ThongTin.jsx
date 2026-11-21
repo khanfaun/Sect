@@ -1,4 +1,4 @@
-// Hộp thoại thông tin ngắn: tử địa, ghi chú bản đồ, kết quả, diễn biến trận, trận dang dở, dev test, nhân sự tông môn.
+// Hộp thoại thông tin ngắn: tử địa, ghi chú bản đồ, kết quả, diễn biến trận, trận dang dở, nhân sự tông môn.
 import { Html, PS } from '../html';
 import { Chips, Ic, Ke } from '../chung';
 
@@ -57,19 +57,6 @@ export function TranDangDo() {
       <h3><Ic n="sword" /> Trận chiến đang dang dở</h3>
       <p>Ngươi vẫn đang giao chiến với <b>{en}</b>. Trận đánh tạm ngưng chờ ngươi trở lại.</p>
       <div className="mb-f"><span className="grow"></span><button className="btn pri big" data-act="cbResumeGo">Tiếp tục trận chiến</button><span className="grow"></span></div>
-    </div>
-  );
-}
-
-const DEV_FX = [['bt', 'Đột phá'], ['xk', 'Xung kích'], ['talup', 'Tiềm chất lên Thiên kiêu'], ['taldn', 'Tiềm chất giảm'], ['rldn', 'Rớt cảnh giới'], ['lowhp', 'Máu thấp'], ['heal', 'Hồi phục']];
-export function DevTest() {
-  return (
-    <div className="mbox dev">
-      <h3><Ic n="bolt" /> Dev test</h3>
-      <p className="hint">Chỉ để xem hiệu ứng, nhân vật không thay đổi gì.</p>
-      <h4 className="sgrp">Hiệu ứng</h4>
-      <div className="devg">{DEV_FX.map(([k, n]) => <button key={k} className="btn" data-act="fxDemo" data-arg={k}>{n}</button>)}</div>
-      <div className="mb-f"><span className="grow"></span>{Nut.dong}</div>
     </div>
   );
 }

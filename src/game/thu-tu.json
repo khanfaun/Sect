@@ -355,6 +355,7 @@
  "core2/80-thi-huyen.js",
  "core2/81-dung-dau.js",
  "core2/82-tri-npc.js",
+ "core2/83-dev-test.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
@@ -387,5 +388,7 @@
  "ui/30-am-hoi.js",
  "ui/31-tam-giu.js",
  "ui/32-dai-mong.js",
- "ui/33-hop-thu.js"
+ "ui/33-hop-thu.js",
+ "ui/34-dev-test.js",
+ "nap:devBotNap"
 ]

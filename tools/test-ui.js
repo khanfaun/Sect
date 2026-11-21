@@ -57,6 +57,41 @@ const TESTS = {
     ok(p.errs.length===0, 'không có lỗi JavaScript trong luồng nội dung');
   },
 
+  // hộp Dev test: các tab con, nhận vật phẩm có ảnh, dàn trận thử, máy tự chơi
+  async devtest(p) {
+    const clk = async s => { await ev(p, s => { const b = document.querySelector(s); if (b) b.click(); return !!b; }, s); await p.waitForTimeout(150); };
+    await ev(p, () => { G.run.scene = null; UI.modal = null; render(); ACT.devOpen(); render(); });await p.waitForTimeout(300);
+    const tabs = await ev(p, () => [...document.querySelectorAll('.mbox.dev .dev-tabs button')].map(b => b.textContent));
+    ok(['Tự chơi', 'Dàn trận', 'Cảnh giới', 'Bản đồ', 'Vật phẩm', 'Khí vận', 'Thương thế', 'Hiệu ứng'].every(t => tabs.includes(t)), 'đủ tab con: ' + tabs.join(', '));
+    await clk('[data-act="devTab"][data-arg="vat"]');
+    ok(await ev(p, () => document.querySelectorAll('.mbox.dev .dev-sub button').length === DEV_LOAI.length && document.querySelectorAll('.mbox.dev .bgrid .bc').length > 50), 'tab Vật phẩm: các loại con, lưới món');
+    ok(await ev(p, () => [...document.querySelectorAll('.mbox.dev .bgrid .bc')].slice(0, 20).every(b => b.querySelector('img,svg,.bem'))), 'mỗi món có ảnh đại diện');
+    await shot(p, 'dev-vat');
+    await clk('[data-act="devLoai"][data-arg="dan"]');
+    const n0 = await ev(p, () => G.run.pills.length);
+    await clk('.mbox.dev .bgrid .bc'); ok(await ev(p, () => document.querySelectorAll('.mbox.dev .bc.sel').length === 1), 'bấm một món: được chọn');
+    await clk('[data-act="devGive"]'); ok(await ev(p, () => G.run.pills.length) === n0 + 1, 'nhận món đã chọn');
+    await clk('[data-act="devTab"][data-arg="kv"]'); ok(await ev(p, () => document.querySelectorAll('.mbox.dev .rows .row').length > 10), 'tab Khí vận: danh sách thêm/xoá');
+    await clk('[data-act="devTab"][data-arg="thuong"]'); await clk('[data-act="devWAdd"][data-arg="gay"]'); ok(await ev(p, () => wounds().some(x => x.k === 'gay')), 'tab Thương thế: thêm gãy xương');
+    await clk('[data-act="devWDel"]'); ok(await ev(p, () => wounds().length === 0), 'chữa hết');
+    await clk('[data-act="devTab"][data-arg="cg"]'); await ev(p, () => { ACT.devRe(3); ACT.devG(2); render(); }); await clk('[data-act="devReGo"]');
+    ok(await ev(p, () => G.run.realm === 3 && !G.run.pham), 'tab Cảnh giới: đổi lên Nguyên Anh');
+    await clk('[data-act="devTab"][data-arg="map"]'); await clk('[data-act="devMap"]'); ok(await ev(p, () => W().regions.every(R => R.nodes.every(x => x.fog >= 3))), 'tab Bản đồ: mở hết');
+    await clk('[data-act="devTab"][data-arg="tran"]');
+    await ev(p, () => { const v = devCbList().find(x => x.nhom === 'Yêu thú').v; ACT.devCbPick(v); ACT.devCbRePick(0); ACT.devCbAdd('B'); ACT.devCbAdd('B'); render(); }); await p.waitForTimeout(150);
+    ok(await ev(p, () => document.querySelectorAll('.mbox.dev .dev-phe .dev-u').length === 3), 'tab Dàn trận: phe ta có nhân vật chính, phe địch hai yêu thú');
+    await shot(p, 'dev-tran');
+    await clk('[data-act="devCbGo"]'); await p.waitForTimeout(300);
+    ok(await ev(p, () => G.run.scene && G.run.scene.type === 'combat' && G.run.scene.dev && G.run.scene.units.filter(u => u.side === 'B').length === 2), 'vào trận thử');
+    await ev(p, () => { G.run.scene = null; render(); });
+    // tự chơi: chạy vài nhịp rồi dừng
+    await ev(p, () => { ACT.devOpen(); devSt().tab = 'ai'; render(); }); await p.waitForTimeout(150);
+    await clk('[data-act="devAiGo"][data-arg="5"]'); await p.waitForTimeout(1500);
+    const ai = await ev(p, () => devAiInfo());
+    ok(!!ai && ai.buoc > 0, 'tự chơi: máy đã đi ' + (ai ? ai.buoc : 0) + ' bước');
+    await ev(p, () => { ACT.devAiStop(); render(); }); ok(await ev(p, () => !devAiOn()), 'dừng tự chơi');
+    await ev(p, () => { UI.modal = null; G.run.scene = null; render(); });
+  },
   // túi trữ vật khoá khi hết linh lực; mũi tên tăng/giảm; tên riêng có chú thích
   async dot32(p) {
     const b = p; // trang đã mở sẵn

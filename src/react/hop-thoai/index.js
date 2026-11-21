@@ -1,5 +1,6 @@
 // Các hộp thoại theo loại (UI.modal.k). Loại nào chưa có ở đây thì dùng bản cũ.
-import { TuDia, GhiChu, KetQua, DienBienTran, TranDangDo, DevTest, NhanSu } from './ThongTin';
+import { TuDia, GhiChu, KetQua, DienBienTran, TranDangDo, NhanSu } from './ThongTin';
+import { DevTest } from './DevTest';
 import { DienCongHien, LaiBuon, TramDich } from './MuaBan';
 import { ThamDo } from './ThamDo';
 import { HopChon } from './HopChon';
