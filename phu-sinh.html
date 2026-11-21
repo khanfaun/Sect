@@ -2090,6 +2090,21 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 /* bản đồ: tân thủ không che cột nút */
 .z-mtop .tut{right:72px!important;width:190px!important}
 
+/* ===== chữ dễ đọc trên tranh: chữ trắng/vàng nhạt, viền tối, đặt trên nền tối mờ ===== */
+.z-home{--vien2:0 0 2px #0b1a24,0 0 3px #0b1a24,0 1px 4px rgba(0,0,0,.9)}
+.z-nut-l,.z-mb span,.z-ve span{color:#fff7e0!important;text-shadow:var(--vien2,0 0 2px #0b1a24,0 0 3px #0b1a24,0 1px 4px #000)!important;font-weight:700}
+.z-mb span,.z-ve span{--vien2:0 0 2px #0b1a24,0 0 3px #0b1a24}
+.z-the-t{background:rgba(10,24,34,.6);padding:4px 10px 5px;border-radius:8px;text-shadow:none!important}
+.z-the-t b{color:#fff!important}.z-the-t small{color:#cfdbe2!important}.z-the-t em{color:#ffd27a!important}
+.z-noi span{background:rgba(10,24,34,.6);padding:2px 8px 3px;border-radius:8px;margin-top:2px;text-shadow:none!important}
+.z-noi small{color:#cfdbe2!important}.z-noi b{color:#ffe3a0!important}
+.z-qc small{background:rgba(10,24,34,.6);color:#fff!important;padding:2px 8px;border-radius:8px;text-shadow:none!important;margin-top:-4px}
+.z-tu-g{background:rgba(10,24,34,.58);border-radius:12px;padding:6px 10px 8px;text-shadow:none!important}
+.z-tu-g p{color:#e8eef2!important;text-shadow:none!important}.z-tu-g p b{color:#ffd27a!important}
+.z-tu-g .z-ll{color:#bfe9d8!important;text-shadow:none!important}
+.z-log{background:rgba(10,24,34,.6)!important;color:#dfe7ec!important}.z-log i{color:#8fd0ff!important}.z-log b,.z-log .gl{color:#ffc27a!important}
+.z-mtop-t small,.z-clk{color:#33414d}
+
 </style>
   <script type="module" crossorigin>(function(){const i=document.createElement("link").relList;if(i&&i.supports&&i.supports("modulepreload"))return;for(const u of document.querySelectorAll('link[rel="modulepreload"]'))d(u);new MutationObserver(u=>{for(const m of u)if(m.type==="childList")for(const f of m.addedNodes)f.tagName==="LINK"&&f.rel==="modulepreload"&&d(f)}).observe(document,{childList:!0,subtree:!0});function c(u){const m={};return u.integrity&&(m.integrity=u.integrity),u.referrerPolicy&&(m.referrerPolicy=u.referrerPolicy),u.crossOrigin==="use-credentials"?m.credentials="include":u.crossOrigin==="anonymous"?m.credentials="omit":m.credentials="same-origin",m}function d(u){if(u.ep)return;u.ep=!0;const m=c(u);fetch(u.href,m)}})();var ai={exports:{}},Us={},ri={exports:{}},sn={};/**
  * @license React

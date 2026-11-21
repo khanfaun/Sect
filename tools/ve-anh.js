@@ -74,15 +74,26 @@ function cau(C,seed){const W=320,c=cv(W,W),x=c.getContext('2d'),m=W/2,r=88;
 // ---------- khung nút tròn 168x168 (đĩa ngà, viền vàng đồng) ----------
 function vienTron(ctx,m,r,gold){let g=ctx.createLinearGradient(0,m-r,0,m+r);
   g.addColorStop(0,gold?'#fff1c4':'#ffffff');g.addColorStop(.45,gold?'#d9a84f':'#c9d2d8');g.addColorStop(1,gold?'#8a5a1c':'#7f8c96');ctx.fillStyle=g;ctx.beginPath();ctx.arc(m,m,r,0,7);ctx.fill();}
-function nutTron(icon,kieu){const W=168,c=cv(W,W),x=c.getContext('2d'),m=W/2;
-  x.filter='blur(6px)';x.fillStyle='rgba(30,45,60,.35)';x.beginPath();x.arc(m,m+6,70,0,7);x.fill();x.filter='none';
-  vienTron(x,m,72,kieu!=='bac');vienTron(x,m,66,false);
-  let g=x.createRadialGradient(m-16,m-22,8,m,m,62);g.addColorStop(0,'#ffffff');g.addColorStop(.6,'#eef3f5');g.addColorStop(1,'#cfdbe2');x.fillStyle=g;x.beginPath();x.arc(m,m,61,0,7);x.fill();
-  x.save();x.beginPath();x.arc(m,m,61,0,7);x.clip();x.globalAlpha=.15;x.globalCompositeOperation='multiply';x.drawImage(noise(W,W,12,3,11),0,0);x.restore();
-  if(icon){const p=new Path2D(icon.d);x.save();x.translate(m-48,m-48);x.scale(4,4);x.lineCap='round';x.lineJoin='round';
-    x.shadowColor='rgba(255,255,255,.9)';x.shadowBlur=0;x.lineWidth=3.6;x.strokeStyle='#ffffff';x.stroke(p);
-    const ig=x.createLinearGradient(0,0,0,24);ig.addColorStop(0,icon.c[0]);ig.addColorStop(1,icon.c[1]);x.lineWidth=2.1;x.strokeStyle=ig;x.shadowColor='rgba(0,0,0,.25)';x.shadowBlur=3;x.shadowOffsetY=1;x.stroke(p);x.restore();}
-  x.fillStyle='rgba(255,255,255,.55)';x.beginPath();x.ellipse(m-14,m-36,30,10,-.3,0,7);x.fill();
+function nutTron(icon,kieu){const W=192,c=cv(W,W),x=c.getContext('2d'),m=W/2;
+  const L={nau:['#f7d9a0','#b0702a','#5a3010'],xanh:['#bfe6ff','#2f7fbf','#123a66'],luc:['#c9f2cf','#2f9a5a','#124a2a'],do:['#ffd0c0','#d0503c','#6a1a10'],tim:['#ecd2ff','#8a4ac8','#36125e'],bac:['#f2f6f8','#9aa8b2','#4a5862']}[icon&&icon.k||'bac'];
+  // bóng đổ
+  x.filter='blur(7px)';x.fillStyle='rgba(10,20,30,.45)';x.beginPath();x.arc(m,m+7,80,0,7);x.fill();x.filter='none';
+  // viền vàng ngoài: dải kim loại nhiều nấc
+  let g=x.createLinearGradient(0,m-84,0,m+84);[[0,'#fff6d6'],[.18,'#f0c96a'],[.42,'#a8711f'],[.55,'#f7dc8e'],[.8,'#8a5414'],[1,'#e8bd62']].forEach(([o,cl])=>g.addColorStop(o,cl));
+  x.fillStyle=g;x.beginPath();x.arc(m,m,84,0,7);x.fill();
+  // khía chạm quanh viền
+  x.save();x.translate(m,m);for(let k=0;k<24;k++){x.rotate(Math.PI/12);x.fillStyle=k%2?'rgba(90,50,10,.55)':'rgba(255,240,190,.7)';x.beginPath();x.arc(0,-78,2.4,0,7);x.fill();}x.restore();
+  g=x.createLinearGradient(0,m-72,0,m+72);g.addColorStop(0,'#6b4212');g.addColorStop(1,'#f3d387');x.fillStyle=g;x.beginPath();x.arc(m,m,73,0,7);x.fill();
+  // lòng ngọc
+  g=x.createRadialGradient(m-18,m-26,6,m,m,70);g.addColorStop(0,L[0]);g.addColorStop(.5,L[1]);g.addColorStop(1,L[2]);x.fillStyle=g;x.beginPath();x.arc(m,m,69,0,7);x.fill();
+  x.save();x.beginPath();x.arc(m,m,69,0,7);x.clip();x.globalAlpha=.35;x.globalCompositeOperation='overlay';x.drawImage(noise(W,W,7,4,(icon&&icon.d.length)||5),0,0);
+  x.globalAlpha=1;x.globalCompositeOperation='source-over';const v=x.createRadialGradient(m,m,40,m,m,72);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(0,0,0,.35)');x.fillStyle=v;x.fillRect(0,0,W,W);x.restore();
+  // hình biểu tượng: nét ngà dày, viền tối, phát sáng
+  if(icon){const p=new Path2D(icon.d);x.save();x.translate(m-54,m-54);x.scale(4.5,4.5);x.lineCap='round';x.lineJoin='round';
+    x.lineWidth=4;x.strokeStyle='rgba(20,10,0,.55)';x.stroke(p);
+    x.shadowColor=L[0];x.shadowBlur=10;const ig=x.createLinearGradient(0,0,0,24);ig.addColorStop(0,'#ffffff');ig.addColorStop(1,'#ffe3a0');x.lineWidth=2.3;x.strokeStyle=ig;x.stroke(p);x.restore();}
+  // bóng loáng nửa trên
+  g=x.createLinearGradient(0,m-69,0,m);g.addColorStop(0,'rgba(255,255,255,.55)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.beginPath();x.ellipse(m,m-34,52,30,0,0,7);x.fill();
   return c;}
 
 // ---------- nút hình thoi 176x176 ----------
@@ -187,7 +198,7 @@ const CAU = {
     }
   }
   for (const [k, C] of Object.entries(CAU)) await save(k, `cau(${JSON.stringify(C)},${k.length * 7})`);
-  for (const [k, [ic, m]] of Object.entries(NUT)) await save(k, `nutTron(${JSON.stringify({ d: ICP[ic], c: MAU[m] })})`);
+  for (const [k, [ic, m]] of Object.entries(NUT)) await save(k, `nutTron(${JSON.stringify({ d: ICP[ic], k: m })})`);
   await save('nut-trong', 'nutTron(null)');
   for (const [k, ic] of Object.entries(THOI)) await save(k, `nutThoi(${JSON.stringify({ d: ICP[ic] })})`);
   for (let k = 0; k < 7; k++) await save('o-pham-' + k, `oPham(${k})`);
