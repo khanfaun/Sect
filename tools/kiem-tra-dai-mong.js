@@ -15,7 +15,11 @@ function bangDM(){const B=bang2();const s=fs.readFileSync(path.join(ROOT,'conten
 const NG_K={NG01:['chuanBi','xong','hong'],NG02:['chuanBi','xong'],NG03:['chuanBi','xong','hong'],NG04:['xong','hong']};
 const SO={nhat:[2,3],hien:[2,4],nhan:[2,4],loi:5,vao:[3,6],uong:[3,6],doi:[3,6],doiLai:[2,4],mim:[2,4],canh:[2,3],hau:[2,5]};
 const LOAI={mong_an:{dir:'mong-an',ten:'Mộng Ấn'},gac_ben:{dir:'gac-ben',ten:'Người Gác Bến'},ben:{dir:'',ten:'Bến Vong Xuyên'},ket:{dir:'ket',ten:'màn kết'},
-  nghi_thuc:{dir:'nghi-thuc',ten:'nghi thức'},khao:{dir:'khao',ten:'khảo sát nơi cổ'}};
+  nghi_thuc:{dir:'nghi-thuc',ten:'nghi thức'},khao:{dir:'khao',ten:'khảo sát nơi cổ'},
+  hau_qua:{dir:'hau-qua',ten:'hậu quả thế giới của kết'},ky_ngo:{dir:'ky-ngo',ten:'kỳ ngộ Đại Mộng'}};
+// kết theo đời có hậu quả thế giới (đời sau mới thấy) · kỳ ngộ Đại Mộng (A1 mộng du tiên cảnh, A2 người chèo đò quen)
+const HQ_KET=['END02','END03','END06'],KY_MA=['A1','A2'];
+SO.tin_don=[4,10];SO.dia_diem=3;SO.su_luoc=2;SO.text=[2,3];SO.choices=[2,3];
 function canViet(B){B=B||bangDM();const L=[];
   for(const m in B.MONG_AN)L.push({loai:'mong_an',tep:DIR+'/mong-an/'+m+'.json',ma:m,mo:B.MONG_AN[m].n+' — '+B.MONG_AN[m].he});
   for(const d of B.GAC_BEN)L.push({loai:'gac_ben',tep:DIR+'/gac-ben/'+d+'.json',ma:d,mo:d.replace(/_/g,' ')});
@@ -23,6 +27,8 @@ function canViet(B){B=B||bangDM();const L=[];
   for(const e in B.KET_THUC)L.push({loai:'ket',tep:DIR+'/ket/'+e+'.json',ma:e,mo:B.KET_THUC[e].n});
   for(const g in B.NGHI_THUC)L.push({loai:'nghi_thuc',tep:DIR+'/nghi-thuc/'+g+'.json',ma:g,mo:B.NGHI_THUC[g].n+' ('+NG_K[g].join(', ')+')'});
   for(const l in B.KHAO)L.push({loai:'khao',tep:DIR+'/khao/'+l+'.json',ma:l,mo:B.LOC[l].n+': '+B.KHAO[l].join(', ')});
+  for(const e of HQ_KET)L.push({loai:'hau_qua',tep:DIR+'/hau-qua/'+e+'.json',ma:e,mo:B.KET_THUC[e].n+' (tin đồn, địa điểm, sử lược, hồi ức)'});
+  for(const k of KY_MA)L.push({loai:'ky_ngo',tep:DIR+'/ky-ngo/'+k+'.json',ma:k,mo:'kỳ ngộ '+k});
   return L;}
 function kiemTep(file,B,seen){const loi=[],cb=[];const rel=path.relative(ROOT,file).replace(/\\/g,'/');let P;
   try{P=parseJ(fs.readFileSync(file,'utf8'));}catch(e){loi.push(rel+' dòng '+(e.line||'?')+': JSON sai — '+e.message+'. Cách sửa: mở tệp ở dòng này, kiểm dấu phẩy, ngoặc và ngoặc kép.');return {loi,cb};}
@@ -53,7 +59,8 @@ function kiemTep(file,B,seen){const loi=[],cb=[];const rel=path.relative(ROOT,fi
     L.forEach((s,i)=>txt(k+'['+i+']',s,min,max,typeof o==='function'?o(i):o));
     const seen2=new Set();L.forEach((s,i)=>{const h=String(s).slice(0,40);if(seen2.has(h))warn(k+'['+i+']','mở đầu giống một đoạn khác: nên đổi cách vào cảnh.');seen2.add(h);});};
   const ROOTK={mong_an:['schemaVersion','loai','ma','nhat'],gac_ben:['schemaVersion','loai','dang','hien','nhan','loi'],ben:['schemaVersion','loai','vao','uong','doi','doiLai','mim'],
-    ket:['schemaVersion','loai','ma','canh','hau'],nghi_thuc:null,khao:['schemaVersion','loai','loc','muc']};
+    ket:['schemaVersion','loai','ma','canh','hau'],nghi_thuc:null,khao:['schemaVersion','loai','loc','muc'],
+    hau_qua:['schemaVersion','loai','ma','tin_don','dia_diem','su_luoc','muon'],ky_ngo:['schemaVersion','loai','ma','ten','text','choices','bien']};
   if(!A||typeof A!=='object'||!(A.loai in ROOTK)){bad('loai','"loai" phải là một trong: '+Object.keys(ROOTK).join(', ')+'.');return {loi,cb};}
   const sub=LOAI[A.loai].dir;const want=sub?DIR+'/'+sub+'/':DIR+'/';if(!rel.startsWith(want)||(!sub&&rel!==DIR+'/ben.json'))bad('loai','tệp loại "'+A.loai+'" phải nằm ở '+(sub?want:DIR+'/ben.json')+'.');
   const keys=A.loai==='nghi_thuc'?['schemaVersion','loai','ma'].concat(NG_K[A.ma]||['chuanBi','xong','hong']):ROOTK[A.loai];
@@ -75,17 +82,32 @@ function kiemTep(file,B,seen){const loi=[],cb=[];const rel=path.relative(ROOT,fi
     out.ma=A.ma;out.v={};for(const f of NG_K[A.ma]||[])out.v[f]=A[f];}
   if(A.loai==='khao'){if(ma1('loc',B.KHAO,'nơi')){const ids=B.KHAO[A.loc];if(only('muc',A.muc,ids)){for(const id of ids){if(A.muc[id]==null)bad('muc.'+id,'thiếu đoạn cho việc "'+id+'".','xem bảng việc ở hướng dẫn.');else txt('muc.'+id,A.muc[id],150,700);}}}
     out.ma=A.loc;out.v={muc:A.muc};}
+  if(A.loai==='hau_qua'){ma1('ma',HQ_KET,'mã kết có hậu quả');mang('tin_don',A.tin_don,SO.tin_don,40,300);
+    const D=A.dia_diem;if(!Array.isArray(D)||D.length!==SO.dia_diem)bad('dia_diem','cần '+SO.dia_diem+' nơi (đang có '+(Array.isArray(D)?D.length:0)+').');
+    (Array.isArray(D)?D:[]).forEach((x,i)=>{const k='dia_diem['+i+']';if(!only(k,x,['loc','t']))return;const m=/^\{(LOC\d\d)\}$/.exec(x.loc||'');
+      if(!m||!B.LOC[m[1]])bad(k+'.loc','nơi phải là một mã {LOCxx} có thật.','ví dụ "{LOC02}".');txt(k+'.t',x.t,60,400);});
+    mang('su_luoc',A.su_luoc,SO.su_luoc,30,220);txt('muon',A.muon,120,600);
+    out.ma=A.ma;out.v={tin:A.tin_don,noi:(Array.isArray(D)?D:[]).map(x=>({loc:String(x.loc||'').replace(/[{}]/g,''),t:x.t})),su:A.su_luoc,muon:A.muon};}
+  if(A.loai==='ky_ngo'){ma1('ma',KY_MA,'mã kỳ ngộ');txt('ten',A.ten,4,60);mang('text',A.text,SO.text,80,600);
+    const C=A.choices;const [a,b]=SO.choices;if(!Array.isArray(C)||C.length<a||C.length>b)bad('choices','cần '+a+'–'+b+' lựa chọn.');
+    (Array.isArray(C)?C:[]).forEach((c,i)=>{const k='choices['+i+']';if(!only(k,c,['l','t']))return;txt(k+'.l',c.l,4,80);txt(k+'.t',c.t,60,500);});
+    // L7 (gói GPT đợt năm): bản kể khác — đoạn mở đầu khác, cùng các lựa chọn gốc, "t" viết lại (mỗi lựa chọn một câu kết quả, đúng thứ tự)
+    const BV=A.bien;if(BV!=null&&(!Array.isArray(BV)||BV.length>4))bad('bien','phải là mảng tối đa 4 bản kể khác.');
+    (Array.isArray(BV)?BV:[]).forEach((v,i)=>{const k='bien['+i+']';if(!only(k,v,['text','t']))return;mang(k+'.text',v.text,SO.text,80,600);
+      if(!Array.isArray(v.t)||v.t.length!==(Array.isArray(C)?C.length:0))bad(k+'.t','cần đúng '+(Array.isArray(C)?C.length:0)+' câu kết quả (mỗi lựa chọn một câu, đúng thứ tự).');
+      else v.t.forEach((x,j)=>txt(k+'.t['+j+']',x,60,500));});
+    out.ma=A.ma;out.v={ten:A.ten,bien:(Array.isArray(BV)?BV:[]).map(v=>({text:v.text,t:v.t})),text:A.text,c:(Array.isArray(C)?C:[]).map(c=>({l:c.l,t:c.t}))};}
   return {loi,cb,out};}
 function tatCaTep(){const L=[];const walk=d=>{const p=path.join(ROOT,d);if(!fs.existsSync(p))return;for(const f of fs.readdirSync(p).sort()){const q=path.join(p,f);if(fs.statSync(q).isDirectory())walk(d+'/'+f);else if(f.endsWith('.json'))L.push(q);}};walk(DIR);return L;}
-function kiemDaiMong(files,o){o=o||{};const B=bangDM();const loi=[],cb=[],seen={};const data={mong:{},gb:{},ben:null,ket:{},ng:{},khao:{}};let n=0;const all=tatCaTep();
+function kiemDaiMong(files,o){o=o||{};const B=bangDM();const loi=[],cb=[],seen={};const data={mong:{},gb:{},ben:null,ket:{},ng:{},khao:{},hq:{},ky:{}};let n=0;const all=tatCaTep();
   const chon=files&&files.length?files.map(f=>path.resolve(f)):all;
   for(const f of chon){if(!fs.existsSync(f)){loi.push(f+': không có tệp.');continue;}const r=kiemTep(f,B,seen);loi.push(...r.loi);cb.push(...r.cb);
     if(!r.loi.length&&r.out){n++;const x=r.out;if(x.loai==='mong_an')data.mong[x.ma]=x.v;else if(x.loai==='gac_ben')data.gb[x.ma]=x.v;else if(x.loai==='ben')data.ben=x.v;
-      else if(x.loai==='ket')data.ket[x.ma]=x.v;else if(x.loai==='nghi_thuc')data.ng[x.ma]=x.v;else data.khao[x.ma]=x.v;}}
+      else if(x.loai==='ket')data.ket[x.ma]=x.v;else if(x.loai==='nghi_thuc')data.ng[x.ma]=x.v;else if(x.loai==='hau_qua')data.hq[x.ma]=x.v;else if(x.loai==='ky_ngo')data.ky[x.ma]=x.v;else data.khao[x.ma]=x.v;}}
   const co=new Set(all.map(f=>path.relative(ROOT,f).replace(/\\/g,'/')));const thieu=canViet(B).filter(x=>!co.has(x.tep));
   if(o.du)for(const x of thieu)loi.push(x.tep+': chưa có tệp ('+LOAI[x.loai].ten+' — '+x.mo+'). Cách sửa: viết tệp này theo mẫu trong hướng dẫn.');
   return {loi,cb,data,n,thieu};}
-module.exports={kiemDaiMong,canViet,bangDM,NG_K,SO,LOAI};
+module.exports={kiemDaiMong,canViet,bangDM,NG_K,SO,LOAI,HQ_KET,KY_MA};
 if(require.main===module){const a=process.argv.slice(2);const r=kiemDaiMong(a.filter(x=>!x.startsWith('-')),{du:a.includes('--du')});
   for(const c of r.cb)console.log('  ⚠ Cảnh báo: '+c);for(const l of r.loi)console.log('  ✗ Lỗi: '+l);
   if(!a.includes('--du')&&r.thieu.length){const by={};for(const x of r.thieu)(by[x.loai]=by[x.loai]||[]).push(x.ma);console.log('  · Còn chưa viết (chưa tính là lỗi): '+Object.entries(by).map(([k,v])=>LOAI[k].ten+' '+v.length).join(', ')+'.');}

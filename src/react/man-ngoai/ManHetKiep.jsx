@@ -45,7 +45,9 @@ export function ManHetKiep() {
           {o.ketCanh && <div className="dm-ket1">{o.ketCanh.split('\n\n').map((t, i) => <p key={i} className={i ? 'ep' : ''}>{t}</p>)}</div>}
           {o.end01 === 'chua' && <p className="hint dm-chua">Đời chưa kịp gọi tên.</p>}
           {o.ngHong && <p className="hint">{o.ngHong}</p>}
+          {o.hqMuon && o.hqMuon.length > 0 && <div className="dm-muon"><h4>{PS.contentText('dm.hqMuonH')}</h4>{o.hqMuon.map((t, i) => <p key={i} className="ep">{t}</p>)}</div>}
           {o.ngKet && <div className="ng-ket"><h4>{PS.contentText('nd2.ngKet')}: {o.ngKet.n} — {o.ngKet.bac}</h4><p><b>{o.ngKet.ten}</b></p><p>{o.ngKet.t}</p></div>}
+          {o.tuKet && <div className="ng-ket tu-ket"><h4>{PS.contentText('ntu.ketH')}: {o.tuKet.n}</h4><p><b>{o.tuKet.ten}</b></p>{o.tuKet.canh.map((t, i) => <p key={i}>{t}</p>)}</div>}
           {o.qc && o.qc.length > 0 && <div className="qc-left"><h4>{PS.contentText('nq.qc.title')}</h4><p className="hint">{PS.contentText('nq.qc.hint')}</p><ul>{o.qc.map((t, i) => <li key={i}>{t}</li>)}</ul></div>}
           <BenVongXuyen />
         </div>

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "loai": "ket",
+  "ma": "END02",
+  "canh": [
+    "Trong điện ở {LOC02}, ngươi nghe người coi kho đọc số thóc còn lại. Bên cạnh sổ kho là sổ cấp lương của {FA10}, mép đã quăn vì mưa dọc đường. Ngươi đặt ấn xuống giữa hai quyển. Ngoài thềm, người đưa tin của {FA04} còn đứng đợi chuyến xe đầu được xuống dốc.",
+    "Trên bàn trước ngai, ngươi đặt giấy kê lương cạnh tờ biểu xin miễn thuế. Cả hai cùng nhắc đến một thôn từng mất vụ. Viên thư lại chấm mực, đợi ngươi đọc tên nơi đầu tiên sẽ nhận thóc. Từ sau cửa điện vọng vào tiếng bánh xe nghiến trên đá ướt."
+  ],
+  "hau": [
+    "Có thôn được phát giống đúng vụ và có thôn phải bán trâu trước khi xe lương tới.",
+    "Người giữ kho ở kinh thành bắt đầu chép cả ngày xe rời kho lẫn ngày nó đến làng."
+  ]
+}

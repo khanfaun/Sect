@@ -37,7 +37,7 @@
         {
           "id": "cach_2",
           "l": "Tính khoản lương khi thợ phải dừng",
-          "t": "Ngươi ghi mỗi lượt thợ mất công và hỏi ai nhận phần đền nếu lò đóng.",
+          "t": "Ngươi ghi từng ca thợ phải nghỉ và hỏi nếu lò đóng thì ai sẽ nhận tiền đền.",
           "dau": [
             "moc_1_2"
           ]
@@ -125,7 +125,7 @@
         {
           "id": "cach_1",
           "l": "Buộc bên mua xác nhận phần đã biết",
-          "t": "Ngươi chỉ lời dặn có trước cơn run và lấy giấy họ cùng chịu tiền bồi thường.",
+          "t": "Ngươi chỉ tờ cảnh báo đã có trước khi thợ bắt đầu run. Những người liên quan ký giấy cùng trả tiền bồi thường.",
           "dau": [
             "moc_3_1"
           ]

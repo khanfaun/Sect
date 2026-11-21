@@ -85,7 +85,7 @@
         {
           "id": "cach_2",
           "l": "Tra sổ thuê người ở hội quán",
-          "t": "Ngươi sao cột phát cơm từ {LOC03}, nơi hai suất vẫn được nhận sau ngày báo tử.",
+          "t": "Ngươi chép sổ phát cơm ở {LOC03}. Sau ngày hai đứa bị báo đã chết, vẫn có người đến nhận cả hai suất.",
           "dau": [
             "moc_2_2"
           ]
@@ -186,7 +186,7 @@
         {
           "id": "cach_2",
           "l": "Nắm mạng tin, chia cơm theo công việc",
-          "t": "Qua một phiên chợ ngươi giữ đầu mối và chia hết phần góp. Đứa giấu tin bị cắt cơm.",
+          "t": "Suốt phiên chợ, ngươi giữ mối đưa tin và chia hết phần mọi người góp. Riêng đứa giấu tin bị ngươi cắt cơm.",
           "dau": [
             "moc_4_2"
           ],

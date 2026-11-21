@@ -31,7 +31,7 @@
         {
           "id": "cach_1",
           "l": "Quét tháp và chép nguyên dòng",
-          "t": "Ngươi quét sạch bậc rồi chép ngày ghi là đã chết, giữ cả giấy xác nhận chổi có dấu tay.",
+          "t": "Ngươi quét sạch bậc, chép ngày sổ ghi ngươi đã chết rồi giữ lại phiếu quét sân có dấu tay.",
           "dau": [
             "moc_1_1"
           ]
@@ -143,7 +143,7 @@
         {
           "id": "cach_3",
           "l": "Xin bản phân biệt tiếng và người",
-          "t": "Ngươi mang bản vạch về miếu và cắt một tờ giải thích cho người coi sổ tro.",
+          "t": "Ngươi mang bản vẽ các vạch về miếu rồi chép cách đọc từng vạch cho người coi sổ tro.",
           "dau": [
             "moc_3_3"
           ]
@@ -233,7 +233,7 @@
         {
           "id": "cach_1",
           "l": "Chỉ thu lời tự nguyện",
-          "t": "Ngươi bỏ dòng tử sai và giao nút thu cho người tự nói, có thể dừng giữa chừng.",
+          "t": "Ngươi xóa dòng ghi nhầm người chết. Ai tự nguyện nói trước chuông được giữ nút thu và có thể dừng giữa câu.",
           "dau": [
             "moc_5_1"
           ],

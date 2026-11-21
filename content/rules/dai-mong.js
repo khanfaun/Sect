@@ -72,6 +72,10 @@ const NGHI_THUC={
   NG04:{n:'Diệt thế',ket:'END08',loc:'LOC15',khoa:2,st:1000,ngay:30,xung:0.15,hpMin:0.5,thieuKhu:3}
 };
 const NG_NOI=['LOC05','LOC12','LOC15'];
+// Đại lộ DL02 "Diệt Thế Ma Đồ" (HN: END08 nếu đủ tri thức; không đủ thì ba khu đất ma): kết tuyến bằng một kết trong `ket` thì cưỡng mở Diệt Thế.
+//   Đủ điều kiện NG04 (dmDk) → END08 ở lượt thời gian kế (trả st như NG04, chịu ba xung). Thiếu → như mở thiếu ở LOC15 (thieuKhu khu đất ma, Đêm Dài +1). Mỗi kiếp một lần.
+//   Tự quyết: kết A (giữ quyền mạch) và B (cắt mạch sâu) động tới mạch sâu; kết C (dừng trước mạch sâu) không.
+const DM_DL={tuyen:'DL02',ket:['A','B']};
 // khaoMoiKiep: mỗi nơi neo chỉ cho một nguồn tri thức mỗi kiếp ("lòng đá phải lắng lại") · gbThang: Người Gác Bến hiện sau ngần này tháng kể từ đầu kiếp ·
 // gbNhan: số kiếp nhận ra để nhặt MA02 · doiNam: ngồi đợi ở bến thêm ngần ấy năm (cộng vào khoảng luân hồi Đ8.5) · mongMoiKiep: Mộng Ấn tối đa mỗi kiếp ·
 // end01Tuoi: tuổi tối thiểu để một đời (không quy ẩn) được tính "đã sống" · end02Bac: xu nuôi quân lương ba kỳ · end03St: linh thạch duy trì một kỳ ·
@@ -79,3 +83,14 @@ const NG_NOI=['LOC05','LOC12','LOC15'];
 // minhBac: bậc quan hệ thế lực tối thiểu để kết minh (5 = Thân thiết).
 const DM_CFG={khaoMoiKiep:1,gbThang:[3,30],gbNhan:3,doiNam:[3,12],mongMoiKiep:1,end01Tuoi:40,end02Bac:90000,end03St:300,end03Minh:3,end02Minh:2,
   end06Bac:3,end06Tuoi:35,end06Thang:12,minhBac:5};
+// Câu 88: hậu quả thế giới của ba kết theo đời (END02, END03, END06). Chữ: content/dai-mong/hau-qua/ENDxx.json (DM_DATA.hq).
+// Hậu quả hiện từ đời sau (kiếp lớn hơn kiếp đạt kết): tin đồn ở quán trà / tin tức (tin = xác suất thay lời truyền miệng thường; nam = tin tức tự đến mỗi năm),
+// tả nơi đổi thay trên thẻ địa điểm, Sử lược ghi lúc kết (bản lưu cũ ghi bù), hồi ức "muon" hiện một lần ở màn hết kiếp của đời sau.
+const DM_HQ={ket:['END02','END03','END06'],tin:0.4,nam:0.08};
+// Hai kỳ ngộ Đại Mộng (chữ: content/dai-mong/ky-ngo/Ax.json, DM_DATA.ky). Mỗi kiếp tối đa một lần mỗi kỳ ngộ.
+//   A1 Mộng du tiên cảnh: tu sĩ tĩnh tọa ở nơi hoang (không phải thôn trấn / thành / tông môn), xác suất p mỗi lần tĩnh tọa.
+//   A2 Người chèo đò quen: đã có ít nhất một Mộng Ấn, đang ở nơi có sông nước (noi), xác suất p mỗi ngày.
+//   e[i] = hiệu ứng của lựa chọn thứ i: tm = tâm ma giảm, hp / mp = phần khí huyết / linh lực tối đa (âm là mất).
+const DM_KY={
+  A1:{p:0.12,e:[{tm:10,hp:-0.05},{hp:0.1}]},
+  A2:{p:0.01,noi:['song','bien','dam','tran','cho'],e:[{},{tm:8},{}]}};

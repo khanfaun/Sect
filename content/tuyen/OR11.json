@@ -29,7 +29,7 @@
         {
           "id": "cach_1",
           "l": "So hai chữ ký",
-          "t": "Ngươi chứng được người quản hàng ký bảo lãnh, còn người dẫn đội chỉ ký nhận kiện.",
+          "t": "Ngươi tìm thấy hai chữ ký: người quản hàng đứng tên bảo lãnh, còn người dẫn đội chỉ nhận kiện đem đi.",
           "dau": [
             "moc_1_1"
           ]
@@ -85,7 +85,7 @@
         {
           "id": "cach_2",
           "l": "So phiếu đường lò",
-          "t": "Ngươi tìm được lời người giao ở {LOC11}, xác nhận thợ lò bị chở dưới danh kiện mất.",
+          "t": "Ở {LOC11}, người giao hàng xác nhận thợ lò bị chở đi dưới cái tên dành cho một kiện thất lạc.",
           "dau": [
             "moc_2_2"
           ]
@@ -191,7 +191,7 @@
         {
           "id": "cach_2",
           "l": "Dùng ghế thương hội để nắm hai tuyến hàng",
-          "t": "Ngươi giao xong hai luồng hàng, rồi khóa quyền cấp chuyến vào sổ mình giữ.",
+          "t": "Ngươi giao xong hàng trên cả hai tuyến. Từ đó, ai muốn cho xe đi đều phải qua cuốn sổ ngươi giữ.",
           "dau": [
             "moc_4_2"
           ],

@@ -82,7 +82,7 @@
         {
           "id": "dap_tam",
           "l": "Đắp tạm bằng đất và cọc tre",
-          "t": "Ngươi cùng mấy nhà lân cận vác đất, đóng cọc. Đê tạm thì vẫn là đê tạm, nhưng qua được mùa này. Có người lẩm bẩm rằng sang năm lại phải đắp, và ai cũng biết người đó nói đúng.",
+          "t": "Ngươi cùng mấy nhà vác đất và đóng cọc. Đê tạm qua được mùa này. Một người hỏi sang năm ai sẽ đắp lại, cả đám vẫn cắm cúi vác đất.",
           "dau": ["de_tam"],
           "e": { "h": 48, "hp": "-5%" }
         }

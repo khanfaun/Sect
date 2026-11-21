@@ -81,7 +81,7 @@
         {
           "id": "cach_1",
           "l": "Lấy bản giao dịch có chữ ký",
-          "t": "Ngươi sao điều kiện xóa nợ và chỉ ra người giữ chìa nhà ký ở hai bản dùng để đối chiếu.",
+          "t": "Ngươi chép điều kiện xóa nợ rồi đặt hai bản cạnh nhau. Chữ ký của người giữ chìa nhà có trên cả hai.",
           "dau": [
             "moc_2_1"
           ]
@@ -129,7 +129,7 @@
         {
           "id": "cach_1",
           "l": "Chép phiếu bến lấy công",
-          "t": "Ngươi giao đủ phiếu cho chuyến nước lên, nhận tiền công và được hẹn chuyến sau.",
+          "t": "Ngươi giao đủ phiếu hàng cho chuyến đi lúc nước lên. Người ở bến trả công và hẹn ngươi quay lại chuyến sau.",
           "dau": [
             "moc_3_1"
           ],
@@ -277,7 +277,7 @@
         {
           "id": "cach_3",
           "l": "Trả công rồi chia phần nhà cũ",
-          "t": "Ngươi giao kho thóc cho người còn nợ công, nhà cho các hộ góp tiền và hủy sổ lệ thuộc.",
+          "t": "Ngươi giao thóc trong kho cho người chưa được trả công, giao nhà cho các hộ góp tiền rồi hủy sổ lệ thuộc.",
           "dau": [
             "moc_5_3"
           ]

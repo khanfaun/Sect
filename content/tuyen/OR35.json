@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "Ghi tên và giữ lượt thông gió",
-          "t": "Ngươi giao danh sách cho người giữ gió, ở lại đến khi lượt sau nhận đủ.",
+          "t": "Ngươi giao danh sách cho người trông đường gió. Ngươi ở lại đến khi ca sau tới đủ người mới đi.",
           "dau": [
             "moc_2_1"
           ]
@@ -138,7 +138,7 @@
         {
           "id": "cach_2",
           "l": "Nhận giấy coi mỏ theo phần nợ",
-          "t": "Ngươi nhận dấu giám công với lời hứa giữ nguyên thẻ giam cho người còn nợ.",
+          "t": "Ngươi nhận dấu giám công và hứa sẽ tiếp tục giữ thẻ để buộc những người còn nợ xuống hầm.",
           "dau": [
             "moc_3_2"
           ]
@@ -262,7 +262,7 @@
         {
           "id": "cach_2",
           "l": "Giữ quyền mỏ bằng thẻ giam",
-          "t": "Ngươi duyệt lượt quặng tăng, giữ người nợ trong ca thêm và khóa phần bồi.",
+          "t": "Ngươi duyệt tăng chuyến quặng, buộc người còn nợ làm thêm ca rồi khóa khoản bồi thường.",
           "dau": [
             "moc_5_2"
           ],

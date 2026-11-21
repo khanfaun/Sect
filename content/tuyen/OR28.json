@@ -133,7 +133,7 @@
         {
           "id": "cach_2",
           "l": "Nhận dấu để dẫn tuyến ngầm",
-          "t": "Ngươi nhận dấu người mua và biết rõ người chuyến sau không được tự chọn.",
+          "t": "Ngươi nhận dấu của người mua dù đã biết khách chuyến sau bị bắt đi và không được chọn bờ.",
           "dau": [
             "moc_3_2"
           ]
@@ -235,7 +235,7 @@
         {
           "id": "cach_1",
           "l": "Ghi tên và mở chuyến tự nguyện",
-          "t": "Ngươi khắc tên đã xác nhận, nhận khách theo dấu xin đò và lời tự chọn bờ.",
+          "t": "Ngươi khắc những tên đã xác nhận. Từ nay, khách ra dấu xin đò và tự nói bờ mình muốn tới.",
           "dau": [
             "moc_5_1"
           ],

@@ -1663,7 +1663,7 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 .tut-bar em{position:relative;display:block;text-align:center;font-size:.68em;line-height:12px;font-style:normal;color:var(--ink)}
 .tut-f{display:flex;justify-content:flex-end;margin-top:3px}
 .tut-sk{background:none;border:0;padding:0 2px;font-size:.72em;color:var(--ink3);text-decoration:underline;cursor:pointer}
-.wishrow{width:100%;background:none;border:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
+.wishrow{width:100%;background:none;border:0;border-bottom:1px dotted var(--line);font:inherit;color:inherit;cursor:pointer;text-align:left}
 .tut-flash{animation:tutfl .5s ease-in-out infinite alternate;outline:2px solid var(--gold);outline-offset:1px}
 @keyframes tutfl{from{box-shadow:0 0 0 0 color-mix(in srgb,var(--gold) 0%,transparent)}to{box-shadow:0 0 0 5px color-mix(in srgb,var(--gold) 60%,transparent)}}
 /* ===== Sửa-C.18: dị tượng trắc linh — Địa (tím), Thiên (cam vàng, chói hơn nhiều) ===== */
@@ -1755,30 +1755,52 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
   #sheet{bottom:66px;top:100px!important}
 }
 
-/* trắc linh nhẹ: song < tam < tứ; tạp đục. Đều kém hoành tráng hơn Địa/Thiên (không phủ đen toàn màn, không rung màn hình) */
+/* trắc linh nhẹ, mạnh→yếu: Biến dị > Song > Tam > Tứ > Tạp. Đều kém Địa/Thiên (không phủ đen toàn màn); chỉ Biến dị rung nhẹ màn hình */
 .tlfx-lt{background:none;cursor:pointer;--gl:#fffaf0}
-.tlfx-lt .lt-wash{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 42%,transparent) 0%,color-mix(in srgb,var(--c2) 26%,transparent) 38%,rgba(10,8,20,.34) 100%);animation:tlbg var(--tlms) ease-out both}
-.tlfx-song .lt-wash{opacity:.8}
-.tlfx-tam .lt-wash{background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 55%,transparent) 0%,color-mix(in srgb,var(--c2) 34%,transparent) 42%,rgba(10,8,20,.4) 100%)}
-.tlfx-tu .lt-wash{background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 70%,#fff 10%) 0%,color-mix(in srgb,var(--c2) 45%,transparent) 45%,rgba(10,8,20,.48) 100%)}
-.tlfx-tap .lt-wash{background:radial-gradient(ellipse at 50% 58%,rgba(150,140,120,.5) 0%,rgba(90,84,76,.42) 45%,rgba(30,28,26,.55) 100%);filter:blur(2px)}
+.tlfx-lt .lt-wash{position:absolute;inset:0;animation:tlbg var(--tlms) ease-out both;background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 40%,transparent) 0%,color-mix(in srgb,var(--c2) 24%,transparent) 38%,rgba(10,8,20,.34) 100%)}
+.tlfx-bien .lt-wash{background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 80%,#fff 15%) 0%,color-mix(in srgb,var(--c1) 50%,transparent) 40%,rgba(8,6,22,.62) 100%)}
+.tlfx-song .lt-wash{background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 64%,#fff 8%) 0%,color-mix(in srgb,var(--c2) 40%,transparent) 44%,rgba(10,8,20,.46) 100%)}
+.tlfx-tam .lt-wash{background:radial-gradient(ellipse at 50% 58%,color-mix(in srgb,var(--c1) 48%,transparent) 0%,color-mix(in srgb,var(--c2) 30%,transparent) 40%,rgba(10,8,20,.38) 100%)}
+.tlfx-tu .lt-wash{opacity:.75}
+.tlfx-tap .lt-wash{background:radial-gradient(ellipse at 50% 58%,rgba(150,140,120,.4) 0%,rgba(90,84,76,.34) 45%,rgba(30,28,26,.5) 100%);filter:blur(2px)}
 .tlfx-lt .lt-orbit{position:absolute;left:50%;top:58%;width:0;height:0;animation:ltspin 6s linear infinite,tlbg var(--tlms) ease-out both}
-.tlfx-lt .lt-orbit i{position:absolute;left:0;top:0;width:26px;height:26px;margin:-13px;border-radius:50%;background:radial-gradient(circle,#fff 0%,var(--oc) 45%,transparent 72%);transform:rotate(var(--a)) translateY(-96px);box-shadow:0 0 18px 4px var(--oc);animation:ltpulse 1.6s ease-in-out infinite;animation-delay:var(--od)}
-.tlfx-song .lt-orbit i{width:20px;height:20px;margin:-10px;box-shadow:0 0 12px 2px var(--oc)}
-.tlfx-tam .lt-orbit i{box-shadow:0 0 18px 4px var(--oc)}
-.tlfx-tu .lt-orbit i{width:30px;height:30px;margin:-15px;box-shadow:0 0 26px 8px var(--oc);transform:rotate(var(--a)) translateY(-112px)}
+.tlfx-lt .lt-orbit i{position:absolute;left:0;top:0;width:24px;height:24px;margin:-12px;border-radius:50%;background:radial-gradient(circle,#fff 0%,var(--oc) 45%,transparent 72%);transform:rotate(var(--a)) translateY(-96px);box-shadow:0 0 16px 3px var(--oc);animation:ltpulse 1.6s ease-in-out infinite;animation-delay:var(--od)}
+.tlfx-bien .lt-orbit{animation-duration:2.4s,var(--tlms)}
+.tlfx-bien .lt-orbit i{width:34px;height:34px;margin:-17px;box-shadow:0 0 34px 12px var(--oc);transform:rotate(var(--a)) translateY(-126px)}
+.tlfx-song .lt-orbit{animation-duration:4.5s,var(--tlms)}
+.tlfx-song .lt-orbit i{width:30px;height:30px;margin:-15px;box-shadow:0 0 26px 8px var(--oc);transform:rotate(var(--a)) translateY(-112px)}
+.tlfx-tu .lt-orbit{animation-duration:7.5s,var(--tlms)}
+.tlfx-tu .lt-orbit i{width:20px;height:20px;margin:-10px;opacity:.8;box-shadow:0 0 10px 2px var(--oc);transform:rotate(var(--a)) translateY(-88px)}
 .tlfx-tap .lt-orbit{animation-duration:9s,var(--tlms)}
-.tlfx-tap .lt-orbit i{width:22px;height:22px;margin:-11px;opacity:.55;filter:saturate(.45) blur(1.5px);box-shadow:0 0 14px 3px var(--oc);transform:rotate(var(--a)) translateY(-84px)}
+.tlfx-tap .lt-orbit i{width:18px;height:18px;margin:-9px;opacity:.5;filter:saturate(.4) blur(1.5px);box-shadow:0 0 8px 2px var(--oc);transform:rotate(var(--a)) translateY(-80px)}
 .tlfx-lt .lt-ring{position:absolute;left:50%;top:58%;width:60px;height:60px;margin:-30px;border-radius:50%;border:2px solid var(--c1);box-shadow:0 0 18px var(--c1);opacity:0;animation:tlring 2.8s ease-out both}
 .tlfx-lt .lt-ring.r2{animation-delay:.7s;border-color:var(--c2);box-shadow:0 0 18px var(--c2)}
-.tlfx-tap .lt-ring{border-color:#a89f8c;box-shadow:0 0 10px #a89f8c;animation-duration:3.4s}
+.tlfx-lt .lt-ring.r3{animation-delay:1.4s}
+.tlfx-bien .lt-ring{border-width:3px;box-shadow:0 0 30px 4px var(--c1);animation:tlring 2s ease-out infinite}
+.tlfx-tu .lt-ring{opacity:0;border-width:1px;box-shadow:0 0 8px var(--c1);animation-duration:2.4s}
+.tlfx-tap .lt-ring{border-width:1px;border-color:#a89f8c;box-shadow:0 0 6px #a89f8c;animation-duration:2s}
 .tlfx-lt .lt-rays{position:absolute;left:50%;top:58%;width:0;height:0}
 .tlfx-lt .lt-rays i{position:absolute;left:0;top:0;width:3px;height:70vmax;margin-left:-1.5px;background:linear-gradient(to top,var(--c1),transparent 70%);transform-origin:top;transform:rotate(var(--a));opacity:0;animation:tlray var(--tlms) ease-out both}
+.tlfx-bien .lt-rays i{width:4px;margin-left:-2px;height:95vmax;background:linear-gradient(to top,#fff,var(--c1) 30%,transparent 80%);animation:tlray calc(var(--tlms)*.4) ease-out infinite}
+/* Biến dị: cột dị khí + chớp (lôi: điện giật, băng: sương giá, phong: lốc) */
+.tlfx-bien .lt-beam{position:absolute;left:50%;bottom:0;width:70px;height:100%;margin-left:-35px;background:linear-gradient(to top,#fff,var(--c1) 35%,transparent);filter:blur(5px);transform-origin:bottom;animation:tlbeam var(--tlms) cubic-bezier(.2,.7,.3,1) both}
+.tlfx-bien .lt-flash{position:absolute;inset:0;background:color-mix(in srgb,var(--c1) 45%,#fff);opacity:0;mix-blend-mode:screen;animation:ltflash 1.1s steps(1) infinite}
+.tlfx-bien.lt-bang .lt-flash{background:radial-gradient(ellipse at 50% 58%,transparent 30%,rgba(220,245,255,.7) 100%);animation:ltfrost var(--tlms) ease-out both}
+.tlfx-bien.lt-phong .lt-flash{background:conic-gradient(from 0deg at 50% 58%,transparent,color-mix(in srgb,var(--c1) 40%,transparent),transparent 30%,color-mix(in srgb,var(--c1) 40%,transparent),transparent 60%);mix-blend-mode:normal;animation:ltspin 1.6s linear infinite,tlbg var(--tlms) ease-out both}
+:root[data-tlfx=bien] #app{animation:ascShk .45s ease-in-out 2}
+@keyframes ltflash{0%,100%{opacity:0}8%{opacity:.55}12%{opacity:0}16%{opacity:.35}20%{opacity:0}}
+@keyframes ltfrost{0%{opacity:0}30%{opacity:1}100%{opacity:.4}}
 .tlfx-lt .tlfx-in{color:#fff;text-shadow:0 0 10px var(--c2),0 0 2px #000;animation:tlbg var(--tlms) ease-out both}
-.tlfx-lt .tlfx-in h2{font-size:clamp(1.5em,6vw,2em);letter-spacing:.08em;margin:.2em 0 .5em}
+.tlfx-lt .tlfx-in h2{font-size:clamp(1.4em,5.5vw,1.9em);letter-spacing:.08em;margin:.2em 0 .5em}
+.tlfx-bien .tlfx-in h2{font-size:clamp(1.8em,7.5vw,2.4em);letter-spacing:.12em;text-shadow:0 0 16px var(--c1),0 0 36px var(--c1),0 0 2px #000}
+.tlfx-song .tlfx-in h2{font-size:clamp(1.6em,6.5vw,2.1em);text-shadow:0 0 14px var(--c1),0 0 2px #000}
+.tlfx-tu .tlfx-in h2{font-size:clamp(1.3em,5vw,1.7em)}
+.tlfx-tap .tlfx-in h2{font-size:clamp(1.2em,4.6vw,1.55em)}
 .tlfx-lt .tlfx-in small{color:#fff}
+.tlfx-tu .tlfx-in{text-shadow:0 0 6px var(--c2),0 0 2px #000}
 .tlfx-tap .tlfx-in{text-shadow:0 0 6px #000,0 0 2px #000;color:#e6e0d2}
 @keyframes ltspin{to{transform:rotate(360deg)}}
 @keyframes ltpulse{0%,100%{opacity:.75;scale:.9}50%{opacity:1;scale:1.12}}
-:root[data-anim="0"] .tlfx-lt *{animation:none!important}
-.tlfx-tap .lt-ring.r2{border-color:#a89f8c;box-shadow:0 0 10px #a89f8c}
+:root[data-anim="0"] .tlfx-lt *,:root[data-anim="0"][data-tlfx=bien] #app{animation:none!important}
+
+.lcq-khuyet{color:var(--ink3)}.lcq-thuan{color:var(--jade)}.lcq-vien{color:var(--gold);font-weight:700;text-shadow:0 0 6px color-mix(in srgb,var(--gold) 45%,transparent)}

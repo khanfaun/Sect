@@ -1,0 +1,279 @@
+{
+  "nghe": "Thi tu",
+  "su_kien": [
+    {
+      "ma": "S01",
+      "ten": "Xác đầu tiên",
+      "text": [
+        "Ở rìa {LOC14}, người trông bãi đặt xác vô chủ trên tấm phên. Dưới cổ tay còn buộc mảnh chỉ màu, nhưng sổ tìm người chưa có ai đến nhận.",
+        "Ngươi mang theo đồ để luyện thi. Người trông bãi gõ lên nắp hòm và hỏi có nên để lại dấu cho người tới sau không."
+      ],
+      "choices": [
+        {
+          "l": "Giữ dấu trước khi luyện",
+          "t": "Ngươi vẽ dấu sợi chỉ vào sổ rồi đem thi thể đi luyện. Khi xác đã đứng được, người giữ bãi vẫn biết phải chỉ cho gia quyến tìm ở đâu.",
+          "e": {}
+        },
+        {
+          "l": "Khâm liệm và đợi người nhận",
+          "t": "Ngươi thay phên bằng tấm chiếu khô rồi đặt thi thể vào hòm. Đến sáng có người hỏi về sợi chỉ, và tấm phên luyện của ngươi vẫn để trống.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S02",
+      "ten": "Đào nhầm mộ người quen",
+      "text": [
+        "Đất trên nấm mộ vừa lở, bia đã nằm sấp. Tới lúc mở được hòm, ngươi mới nhận ra vết khâu trên chiếc áo mình từng mượn.",
+        "Mưa đang dồn vào hố, còn người đào thuê đã buông xẻng. Họ chờ ngươi quyết có lấy thi thể ra khỏi hòm không."
+      ],
+      "choices": [
+        {
+          "l": "Đóng hòm và dựng lại bia",
+          "t": "Ngươi giữ áo nguyên nếp rồi đóng hòm, nhờ người đào thuê chèn đất quanh chân bia. Trước khi về, ngươi tự đọc lại tên trên đá cho họ nghe.",
+          "e": {}
+        },
+        {
+          "l": "Đưa hòm về lán, tìm gia quyến",
+          "t": "Ngươi dời hòm khỏi chỗ sụt và gửi tin tới người nhà. Trong lúc đợi, ngươi phải dọn chỗ luyện thi sang mái khác để giữ nguyên chiếc áo và đồ chôn.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S03",
+      "ten": "Thi biến",
+      "text": [
+        "Xác luyện đã đứng lên khi ngươi còn đang tra then. Nó kéo chiếc ghế thấp ra khỏi bóng đèn và đứng chắn lối vào.",
+        "Người giúp việc gọi từ bên cửa sau. Trên bàn có vật phát hiệu, nhưng muốn lấy phải bước qua chỗ ghế vừa đổ."
+      ],
+      "choices": [
+        {
+          "l": "Kéo người giúp việc ra sau",
+          "t": "Ngươi chạy vòng qua vách và đưa người giúp việc ra sân. Khi dám quay lại, xác vẫn trong lán, nhưng chiếc hòm đã bật nắp.",
+          "e": {}
+        },
+        {
+          "l": "Lấy vật phát hiệu, ghìm xác",
+          "t": "Ngươi với được vật phát hiệu và buộc xác dừng bên bàn. Người giúp việc tự mở cửa thoát, bỏ lại gánh đồ đã gãy quai.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S04",
+      "ten": "Đạo sĩ Lôi pháp truy đuổi",
+      "text": [
+        "Đạo sĩ bám theo vệt đất ẩm của thi luyện tới tận mái trạm. Lá phù trên tay họ đã cháy quăn mép.",
+        "Dưới mái còn có người dắt ngựa tránh mưa. Ngươi có thể dời cuộc đuổi ra bãi trống hoặc tự giao vật giữ hiệu lệnh."
+      ],
+      "choices": [
+        {
+          "l": "Dẫn thi luyện ra ngoài trạm",
+          "t": "Ngươi gọi xác theo mình ra bãi, để người đi đường lùa ngựa vào trong. Đạo sĩ phóng lôi vào thi luyện, và ngươi mất chỗ nấp sau khi nó đổ xuống.",
+          "e": {}
+        },
+        {
+          "l": "Đặt vật phát hiệu dưới mái",
+          "t": "Ngươi để vật giữ hiệu lên ghế rồi lùi lại cho đạo sĩ tới lấy. Họ thu xác và để người dắt ngựa rời đi trước khi hỏi tới ngươi.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S05",
+      "ten": "Thi luyện từ người thân",
+      "text": [
+        "Ngươi trải áo liệm lên bàn rồi thấy ngay đường vá ở khuỷu. Người nhà bảo nên để chiếc áo ấy đi theo người chết vì trời đã trở rét.",
+        "Phần dụng cụ luyện vẫn nằm dưới gầm bàn. Chỉ cần ngươi nhấc tấm áo lên, nhà sẽ biết ngươi đã chọn cách nào."
+      ],
+      "choices": [
+        {
+          "l": "Khâm liệm theo lời nhà",
+          "t": "Ngươi vuốt phẳng nếp áo rồi khép hòm. Tới ngày giỗ, chiếc bàn được dùng lại để dọn cơm, còn đồ luyện vẫn cất dưới gầm.",
+          "e": {}
+        },
+        {
+          "l": "Đưa thi thể vào luyện",
+          "t": "Ngươi đem thi thể đi luyện và giữ lại chiếc áo đã vá. Khi xác đứng trước cửa nhà theo hiệu lệnh, người thân nhận ra áo mà vẫn phải hỏi ai đã đưa nó tới.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S06",
+      "ten": "Làng bị thi triều",
+      "text": [
+        "Ban đầu người trong làng tưởng tiếng kéo dưới bậc là củi lũ đẩy vào. Đến khi cửa rung, ngươi thấy ngoài sân đã có xác lang thang dồn về phía đèn.",
+        "Phía sau dãy nhà còn lối qua bờ ruộng. Người gác muốn mở lối ngay, còn người chưa tìm thấy thân nhân vẫn nắm chặt then cổng."
+      ],
+      "choices": [
+        {
+          "l": "Dẫn người sống ra bờ ruộng",
+          "t": "Ngươi dắt người đi chậm qua cửa sau trước khi tắt đèn. Dân làng ra được bờ ruộng, nhưng sáng hôm sau phải trở về tìm lại đồ và người còn mất dấu.",
+          "e": {}
+        },
+        {
+          "l": "Kéo thi triều về sân trống",
+          "t": "Ngươi dời đèn sang sân phơi để giữ lối ra. Xác dồn về phía ngươi, và tới lúc dân qua hết, sân đã nát ván.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S07",
+      "ten": "Cổ thi trong lăng",
+      "text": [
+        "Trong lăng, ngươi thấy bát gỗ còn nằm cạnh hòm, mặt trong có vết muỗng mòn. Thi thể không mục, chỉ có tà áo dính vào mép gỗ.",
+        "Ở bậc dưới, người dẫn đường hỏi ngươi sẽ đem xác đi hay ghi lại chỗ tìm được rồi đóng cửa. Sương bắt đầu đọng phía trong phiến đá chắn."
+      ],
+      "choices": [
+        {
+          "l": "Khép lăng và chép dấu",
+          "t": "Ngươi vẽ dấu trên ván hòm rồi kê phiến đá về chỗ cũ. Người dẫn đường giữ bản chép để sau này người có thân phận phù hợp tự tới hỏi.",
+          "e": {}
+        },
+        {
+          "l": "Đưa cổ thi ra luyện",
+          "t": "Ngươi nhấc cổ thi khỏi hòm và đem qua cửa đá. Tới khi luyện xong, nó giữ thế rất vững, nhưng người dẫn đường đã bỏ đi cùng lối trở lại lăng.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S08",
+      "ten": "Mặt trời đổ lửa",
+      "text": [
+        "Nắng phủ kín bãi, làm tay nắm cửa nóng tới mức không giữ lâu được. Thi luyện ngoài sân đứng chậm dần, tà áo khô cứng quanh vai.",
+        "Có mái che ở đầu dốc, nhưng dân đi đường đã ngồi chen dưới đó. Ngươi còn chiếc xe phủ bạt, vốn để chở đồ về lán."
+      ],
+      "choices": [
+        {
+          "l": "Chở thi luyện về lán",
+          "t": "Ngươi trải bạt kín xe rồi kéo xác về theo đoạn dốc dài. Tới nhà, đồ nghề phải bỏ lại ngoài đường, còn thi luyện đứng được khi trời dịu.",
+          "e": {}
+        },
+        {
+          "l": "Cất hiệu lệnh và chờ qua nắng",
+          "t": "Ngươi đưa tay khỏi vật phát hiệu, ngồi lại với người tránh nắng. Tới chiều, xác đã đổ ngoài bãi, chỉ còn chiếc áo có thể đem về.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S09",
+      "ten": "Thi tỉnh trí",
+      "text": [
+        "Thi luyện đang gấp tấm khăn trên bàn theo nếp rất đều. Nó ngẩng đầu khi ngươi gọi, rồi nhấc tay lên trước cả lúc hiệu lệnh được phát.",
+        "Người giúp việc tưởng người chết đã trở lại, mang chén cũ tới gần. Thi luyện đặt khăn xuống và chậm rãi chạm vào miệng chén."
+      ],
+      "choices": [
+        {
+          "l": "Dừng hiệu lệnh để quan sát",
+          "t": "Ngươi giữ người giúp việc ở ngoài vạch rồi để xác tiếp tục động tác. Nó gấp lại khăn suốt buổi, nhưng chẳng đáp được khi người kia gọi tên.",
+          "e": {}
+        },
+        {
+          "l": "Kết thúc phép luyện",
+          "t": "Ngươi thu vật phát hiệu rồi tháo phép khỏi thi thể. Người giúp việc cất chén vào hòm, để tấm khăn gấp nguyên cho lễ liệm.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S10",
+      "ten": "Bị tông chính vây",
+      "text": [
+        "Người của tông chính dựng đèn quanh lán, soi rõ các vết chân trên đất. Họ gọi ngươi ra và hỏi tên những thi thể đang bị giữ trong nhà.",
+        "Bên trong còn có người chép sổ giúp ngươi. Họ biết một cửa sau, nhưng nếu chạy đi thì sổ nguồn gốc từng xác sẽ nằm lại."
+      ],
+      "choices": [
+        {
+          "l": "Giao sổ và cho người ra",
+          "t": "Ngươi đẩy sổ qua ngưỡng cửa trước, rồi để người chép theo sau. Người ngoài giữ lán, nhưng gia đình có thể tra đúng những thi thể đã bị đưa tới.",
+          "e": {}
+        },
+        {
+          "l": "Rút cùng người chép",
+          "t": "Ngươi đưa người chép qua cửa sau và mang theo bản tên còn đọc được. Lán bị niêm, và họ phải giữ bản ấy để về sau còn đối với hòm nào thuộc về ai.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S11",
+      "ten": "Thi vương mộ",
+      "text": [
+        "Trên bậc xuống mộ, nước nhỏ qua một vòng sắt đã gỉ. Mỗi lần nước đụng vòng, các xác luyện theo ngươi lại xoay đầu về phía hòm lớn.",
+        "Dưới chân hòm còn thấy một hàng dấu giống nét khắc trên vật phát hiệu. Người đi cùng đề nghị chép chúng và lên ngay trước khi nước dâng."
+      ],
+      "choices": [
+        {
+          "l": "Chép dấu rồi rời mộ",
+          "t": "Ngươi áp giấy lên chân hòm, lấy được dấu trước khi dòng nước che kín. Khi quay lên, thi luyện cũng dừng xoay đầu và đi theo ngươi.",
+          "e": {}
+        },
+        {
+          "l": "Ở lại thử điều khiển",
+          "t": "Ngươi đặt vật phát hiệu cạnh chân hòm và chờ. Xác quanh ngươi cùng bước tới khiến người đi cùng phải bỏ dây, còn bản khắc chỉ chép được một phần.",
+          "e": {}
+        }
+      ]
+    },
+    {
+      "ma": "S12",
+      "ten": "Ngàn xác một đêm",
+      "text": [
+        "Đêm chưa hết mà đường vào bãi đã kín bóng người chết. Dưới chân họ, chiếc guốc ai bỏ lại bị kéo lê qua từng rãnh nước.",
+        "Ngươi đứng cạnh lối tắt dẫn về nhà dân. Người trông bãi nắm đèn, đợi xem ngươi sẽ giữ lối ấy hay tập hợp thi binh về phía mình."
+      ],
+      "choices": [
+        {
+          "l": "Giữ lối về nhà dân",
+          "t": "Ngươi cùng người giữ bãi dẫn những xác đi lẻ quay về vùng đất trống. Khi trời sáng, đèn đã cạn dầu mà cửa nhà dân vẫn mở được.",
+          "e": {}
+        },
+        {
+          "l": "Tập hợp xác dưới hiệu lệnh",
+          "t": "Ngươi gọi thi binh về bãi, để chúng đứng thành hàng cạnh vật phát hiệu. Người trông bãi buộc phải dời đèn khỏi đường cũ vì chẳng còn khoảng trống cho người qua.",
+          "e": {}
+        }
+      ]
+    }
+  ],
+  "ket_cuc": [
+    {
+      "ma": "K01",
+      "ten": "Thi vương",
+      "canh": [
+        "Ngươi hạ tay, cả hàng thi luyện đứng yên trên đất lầy. Người coi bãi vẫn đi dọc hàng, dò từng mảnh thẻ để biết xác nào còn người tìm.",
+        "Trong lán, những gia đình mang chiếu đến nhận thi thể chờ qua hết phiên. Sau khi họ đi, ngươi gấp phần chiếu còn lại và dọn chỗ cho hòm kế."
+      ]
+    },
+    {
+      "ma": "K02",
+      "ten": "Bị chính thi phản",
+      "canh": [
+        "Hiệu lệnh đã dứt, xác luyện vẫn đẩy ghế từng chút về phía ngươi. Khi người giữ bãi chạy tới, chiếc ghế nằm nghiêng và vật phát hiệu đã vỡ.",
+        "Sáng sau, họ nhặt thẻ tên đặt cạnh ngươi rồi khóa cửa lán. Tiếng kéo ngoài sân đã im, còn chỗ cắm then lành lặn từ phía ngoài."
+      ]
+    },
+    {
+      "ma": "K03",
+      "ten": "Bị Lôi pháp tru diệt",
+      "canh": [
+        "Sét rơi ngoài bãi, soi bàn tay ngươi vẫn giữ vật phát hiệu đã cháy đen. Thi luyện đổ xuống cùng lúc, và người ở trạm không còn nghe ngươi đáp.",
+        "Đạo sĩ để lại chiếu khô trước khi đi. Người trông bãi dùng chiếu ấy phủ chỗ ngươi nằm rồi nhặt từng thẻ còn đọc được."
+      ]
+    },
+    {
+      "ma": "K04",
+      "ten": "Tự chôn mình làm thi",
+      "canh": [
+        "Ngươi xuống hòm và kéo nắp lại tới chỗ vạch đã đánh dấu. Ngoài miệng hố, người ngươi nhờ đứng đợi cho đến khi không còn tiếng gõ.",
+        "Qua mùa mưa, người trông bãi vẫn trông thấy đất sụt quanh nấm mộ ấy. Họ đắp đất lên, lật tấm bia quay về phía đường để người qua biết chỗ mà tránh."
+      ]
+    }
+  ]
+}

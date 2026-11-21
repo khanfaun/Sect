@@ -85,7 +85,7 @@
         {
           "id": "cach_2",
           "l": "Xin bảng giá của xưởng",
-          "t": "Ngươi hỏi ai trả công từng hàng và biết ai đang giữ quyền nhận đơn.",
+          "t": "Ngươi hỏi ai trả tiền cho từng hàng chữ. Từ đó, ngươi tìm ra người đang nhận đơn xin khắc bia.",
           "dau": [
             "moc_2_2"
           ]
@@ -189,7 +189,7 @@
         {
           "id": "cach_2",
           "l": "Khắc danh giả và nhận xưởng",
-          "t": "Ngươi giao hàng chữ đã mua; người trả bạc trao quyền nhận đơn thay mình.",
+          "t": "Ngươi khắc hàng chữ đã được trả tiền. Người mua giao luôn cho ngươi quyền nhận đơn khắc thay họ.",
           "dau": [
             "moc_4_2"
           ],

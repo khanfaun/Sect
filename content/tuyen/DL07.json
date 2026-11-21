@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "DL07",
   "loai": "dai_lo",
-  "ten": "Thế Gia Vạn Đại",
+  "ten": "Giữ cơ nghiệp dòng họ qua nhiều đời",
   "daiLo": "the_gia",
   "nut": [
     {
@@ -18,12 +18,12 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Nhiều nhà ở {LOC01} muốn đặt tên chung trên một cuốn sổ. Có người cùng huyết thống, có người chỉ xin ở nhờ qua mùa. Họ hỏi nếu đổi ý thì còn được giữ phần gì.",
+      "mo": "Ở {LOC01}, {NP08} tới giúp các hộ lập sổ. Người ấy đặt cuốn sổ còn trắng lên nắp thùng thóc. Một nhà đưa tên cả họ, nhà khác chỉ xin qua mùa này. Người ngồi cuối chiếu hỏi nếu sang năm dọn đi thì phần đã góp có được mang theo không.",
       "boQuaNeuXuatThan": true,
       "cach": [
         {
           "id": "cach_1",
-          "l": "Ghi tên theo lời từng hộ",
+          "l": "Cho từng hộ tự ghi tên và phần giữ lại",
           "t": "Ngươi để người đến tự xưng tên rồi hỏi họ muốn giữ lại quyền gì.",
           "dau": [
             "moc_1_1"
@@ -31,7 +31,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Hỏi phần của người dời nhà",
+          "l": "Hỏi người dời đi muốn giữ giấy gì",
           "t": "Ngươi chép điều người đã rời muốn còn đọc được khi trở về kiểm sổ.",
           "dau": [
             "moc_1_2"
@@ -39,7 +39,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Để người ngoài họ giữ bản",
+          "l": "Nhờ người ngoài họ giữ một bản",
           "t": "Ngươi xin một người không nhận phần giữ bản kê lúc các hộ còn đồng ý.",
           "dau": [
             "moc_1_3"
@@ -67,12 +67,12 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Ở {LOC09}, hộ dời tới có giấy mà chưa có đất. Hộ ở lại có quyền bến nhưng thiếu người làm. Họ cần biết ai coi việc chung nếu dòng họ chia hai nhánh.",
+      "mo": "Ở {LOC09}, một nhà mới đến ghìm chiếc thuyền vào cọc, giấy dời nhà vẫn giắt ở thắt lưng. Hộ giữ bến bảo còn chỗ làm nhưng chẳng còn đất chia. Ngươi phải định ai được ghi tên và ai sẽ coi việc chung nếu hai nhánh tách nhau.",
       "khacVoi": "OR01.N4 chia đất trong thôn; hồi này đặt quyền thành viên và kế nhiệm giữa hai nơi khi dòng họ dời đi.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Cho các hộ tự chọn vào hay rời dòng họ",
+          "l": "Cho từng hộ tự chọn vào hoặc rời họ",
           "t": "Ngươi để hộ chọn ghi tên hoặc rút, giữ bản ở cả bến và nhà cũ.",
           "dau": [
             "moc_2_1"
@@ -80,7 +80,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Kê phần dành cho người cùng họ",
+          "l": "Dành quỹ và lượt bến cho người trong họ",
           "t": "Ngươi ghi quỹ và lượt bến ưu tiên cho người có tên trong bản nhà.",
           "dau": [
             "moc_2_2"
@@ -88,7 +88,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Tách sổ việc chung khỏi sổ nhà",
+          "l": "Tách sổ việc chung khỏi sổ họ",
           "t": "Ngươi giao người giữ việc một bảng riêng, để phần nhà không làm điều kiện nhận công.",
           "dau": [
             "moc_2_3"
@@ -116,13 +116,13 @@
         "cach": "tin",
         "noi": "LOC01"
       },
-      "mo": "Nồi chung ở {LOC01} sắp cạn trước lúc người ngoài bến trở về. Có người chỉ muốn phát gạo cho cùng họ. Những hộ giữ bản sổ thứ hai xin đối phần góp trước.",
+      "mo": "Nắp nồi ở {LOC01} bật lên khi người coi bếp múc xuống đáy. Bát còn xếp ngoài cửa, cả của người đã dời ra bến. Hai người giữ sổ đến để đối phần góp. Ngươi phải quyết ai được lĩnh trước khi kho cạn.",
       "khacVoi": "OR18.N4 sửa sổ phát thóc sai; hồi này thử lệ tương trợ và quyền vào ra khi họ ở nhiều nơi cùng thiếu.",
       "clk": "CLK01",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Mở quỹ cả hai nhánh cho những hộ đang đói",
+          "l": "Mở quỹ hai nhánh để phát gạo",
           "t": "Ngươi cho hai người giữ bản cùng đối phần phát, giữ chỗ cho người đã đổi nhà.",
           "dau": [
             "moc_3_1"
@@ -136,7 +136,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Dành kho cho người còn trong họ",
+          "l": "Chỉ phát gạo cho người còn trong họ",
           "t": "Ngươi cấp gạo theo bản tên nhà, để người rút giữ phiếu từ chối.",
           "dau": [
             "moc_3_2"
@@ -149,7 +149,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Cho từng hộ rút phần đã góp",
+          "l": "Trả từng hộ phần đã góp",
           "t": "Ngươi chia số còn theo biên nhận và để hộ tự chuyển phần tới nơi khác.",
           "dau": [
             "moc_3_3"
@@ -177,12 +177,12 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Ở {LOC09}, một người từ nhánh xa xin coi sổ, còn một người bảo quyền ấy chỉ truyền trong huyết hệ. Hộ đã rút tên muốn biết giấy góp công còn dùng được không.",
+      "mo": "Ở {LOC09}, một người nhánh xa đem đèn tới bàn xin giữ sổ. Người cùng huyết thống đã để sẵn tay trên chìa kho. Ngay sau họ là một hộ rút tên, vẫn cầm giấy góp công chờ hỏi còn dùng được không.",
       "khacVoi": "OR16.N5 giữ hay bán bí quyết vá lưới; hồi này thử chuyển trách nhiệm trông họ sang người được các hộ cử.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Giao ca giữ họ cho người được cử",
+          "l": "Cho người được cử thử giữ hai sổ",
           "t": "Ngươi để người mới thử đọc và sửa hai bản trước những hộ đã dùng quỹ.",
           "dau": [
             "moc_4_1"
@@ -196,7 +196,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giao chìa theo dòng nhà",
+          "l": "Giao chìa cho người cùng huyết thống",
           "t": "Ngươi chọn người cùng họ nhận ca, ghi người ngoài phải có nhà đứng bảo.",
           "dau": [
             "moc_4_2"
@@ -209,7 +209,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Khép sổ họ, giữ việc chung theo hộ",
+          "l": "Trả giấy từng hộ và đóng sổ họ",
           "t": "Ngươi trả giấy từng nhà và để các hộ tự nhận việc trên bảng riêng.",
           "dau": [
             "moc_4_3"
@@ -237,13 +237,13 @@
         "cach": "tin",
         "noi": "LOC09"
       },
-      "mo": "Một chuyến thiếu lương ghé {LOC09} trước kỳ phát gạo. Người kế sổ và hộ đã rút cùng đứng ở bến. Ngươi phải cho họ biết ai được nhận và ai có quyền mở kho.",
+      "mo": "Một chiếc thuyền thiếu lương ghé {LOC09}. Người kế sổ mang chìa xuống bến. Người đã rút tên đứng cạnh, đưa ra phiếu cũ còn gấp ngay ngắn. Ngươi phải nói cho cả hai biết kho mở theo sổ nào.",
       "khacVoi": "OR31.N5 chọn nơi lưu chữ trên tường; hồi này thử việc truyền quyền trông họ qua thiếu tiếp tế và thay người.",
       "clk": "CLK03",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Giao sổ hai nhánh cho người kế nhiệm",
+          "l": "Trao hai sổ cho người kế nhiệm",
           "t": "Ngươi để người mới mở phần lương theo lệ đã thử và trao bản cho cả hai nơi.",
           "dau": [
             "moc_5_1"
@@ -262,7 +262,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ họ bằng phần ưu tiên đã đặt",
+          "l": "Phát phần ưu tiên cho người trong họ",
           "t": "Ngươi nhận biên bản cũ, cho người cầm chìa phát riêng phần mang tên nhà.",
           "dau": [
             "moc_5_2"
@@ -275,7 +275,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Rời sổ họ sau khi trao đủ giấy",
+          "l": "Trả chìa và giao đủ biên nhận",
           "t": "Ngươi giao biên nhận để từng hộ đi theo ngả riêng và trả chìa cũ.",
           "dau": [
             "moc_5_3"
@@ -288,7 +288,7 @@
         },
         {
           "id": "cach_4",
-          "l": "Cho chuyến ghé nghỉ trước phiên",
+          "l": "Cho người lỡ chuyến nghỉ dưới mái bến",
           "t": "Ngươi giữ mái bến cho người lỡ chuyến rồi báo các hộ tự cân được phần cho.",
           "dau": [
             "moc_5_4"

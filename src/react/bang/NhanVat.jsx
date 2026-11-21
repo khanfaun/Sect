@@ -1,15 +1,15 @@
 // Bảng nhân vật: căn cơ (thân thế, tu luyện, chiến đấu), túi đồ, sở học, kỹ năng.
 // Túi đồ, sở học, kỹ năng và thẻ tiềm chất vẫn dùng bản HTML cũ (sẽ chuyển sau).
 import { Html, PS } from '../html';
-import { Ib, Ic, Tabs, tip } from '../chung';
+import { Ib, Ic, Tabs, tip, tah } from '../chung';
 import { Win } from './Khung';
 import { TuiDo } from './TuiDo';
 import { SoHoc, KyNang } from './SoHoc';
 
 // Một dòng tên — giá trị (giống kvRow()). v là chuỗi HTML (mức đánh giá có màu…)
-function Kv({ n, v, t, cls, tut }) {
+function Kv({ n, v, t, th, cls, tut }) {
   return (
-    <div className={'kr ' + (cls || '')} {...tip(t)} data-tut={tut}>
+    <div className={'kr ' + (cls || '')} {...(th ? tah(th) : tip(t))} data-tut={tut}>
       <span><Html style={{ display: 'contents' }} h={PS.sib(n)} />{n}</span>
       <Html as="b" h={String(v)} />
     </div>
@@ -47,7 +47,9 @@ function CanCo() {
   const og = ORIGIN.find(o => o.id === r.origin), tr = TRAIT.find(t => t.id === r.trait), R0 = PS.rootView(r.root);
   const R1 = ROOT.find(x => x.id === r.root.id), tc = s.tuchat, left = Math.max(0, Math.floor(s.life - r.age));
   const rk = PS.rootKnown(r);
-  const lcV = `<span class="lc2"><small>${esc(PS.rootLabel(r))}</small><span class="lc-els">${rk ? r.root.els.map(PS.elSeal).join('') : ''}</span></span>`;
+  const lcV = PS.rootHTML(r);
+  const lcT = !rk ? 'Chưa trắc linh: chưa biết mình có linh căn hay không.' : R1.d + '' + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R0.m) + ').';
+  const lcTh = esc(lcT).replace(/\n/g, '<br>') + (rk ? '<div class="lc-els">' + r.root.els.map(PS.elSeal).join('') + '</div>' : '');
   const tvTip = 'Tu vi ' + PS.tvShow() + '%' + (PS.dinhPhong() ? (PS.dvm() ? '\nĐại viên mãn: khí huyết, linh lực, công, thủ +5%.' : '\nChưa đại viên mãn: ' + PS.dvmWhy() + '.\n(Cần: không trọng thương, tâm ma dưới ' + PS.DVM_TAMMA + ', đạo tâm từ ' + PS.DVM_TAM + ')') : '')
     + (PS.bbKind() ? '\nBán bộ ' + REALM[r.realm + 1] + ': dùng được đồ, công pháp, tâm pháp của ' + REALM[r.realm + 1] + '; chỉ số vẫn như cũ.' : '');
   const e = PS.llEff(r.tv);
@@ -60,7 +62,7 @@ function CanCo() {
         <Kv n="Xuất thân" v={esc(og.n)} t={og.d} />
         <button className="kr wishrow" data-act="wishOpen" {...tip('Điều ta muốn ở kiếp này. Chỉ là lời ghi, đổi lúc nào cũng được.')}><span>Nguyện vọng</span><b>{r.wish ? ((PS.TUT_WISH || []).find(x => x[0] === r.wish) || [0, ''])[1] : 'Chưa ghi'}</b></button>
         {tr && tr.id !== 'none' && <Kv n="Mệnh cách" v={esc(tr.n)} t={tr.d + (PS.tueTxt(tr.id) ? '\n' + PS.tueTxt(tr.id) : '')} />}
-        <Kv n="Linh căn" tut="rootinfo" v={lcV} t={!rk ? 'Chưa trắc linh: chưa biết mình có linh căn hay không.' : R1.d + (PS.rootQ(r.root) ? '\nPhẩm ' + PS.rootQ(r.root).n + '.' : '') + '\nLinh căn là số đường dẫn linh khí vào thân. Càng ít hệ càng thuần, tu càng nhanh (×' + PS.numVN(R0.m) + ').'} />
+        <Kv n="Linh căn" tut="rootinfo" v={lcV} th={lcTh} />
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên khí vận', (r.kv || []).map(k => TT_DEST[k]), 'Khí vận định sẵn lúc đầu thai. Có cái kéo linh căn về một hành, có cái ép linh căn biến dị, có cái quyết định thể chất.')} />
         <Html style={{ display: 'contents' }} h={PS.htRow()} />
         <Html style={{ display: 'contents' }} h={PS.ttRow('Tiên thiên thể chất', (r.the || []).map(PS.ttPhysOf), 'Suy ra từ linh căn, khí vận, nhân quả và tính tình lúc sinh ra. Tối đa ba thể chất, phẩm cao nhất trước.')} />

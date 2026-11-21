@@ -10,6 +10,7 @@
 // che: che giấu tu vi làm chan × hide; thần thức hơn địch (đang phóng thần thức, hoặc địch kém cảnh giới) làm chan × than và biết trước (có thêm lựa chọn "lan": lẩn đi, xác suất lan).
 // chay: chạy tiếp thành công = goc + tp × thân pháp, tối đa max; thành công thì lần dò sau lùi thêm lui giờ. Hỏng thì phải đánh.
 // nop: nộp của: mất phần st linh thạch Hạ phẩm (ít nhất stMin) hoặc phần bac tiền phàm; quan sai (no) thì trả hết nợ nếu đủ tiền.
+//   pham: kẻ bám theo là người của quan phủ phàm nhân (câu 81) → chỉ nhận tiền phàm (xu / bạc / vàng), không nhận linh thạch.
 // tl: thương lượng = goc + tam × đạo tâm, tối đa max; không thành thì phải đánh.
 const TRUY={
   loai:{
@@ -26,5 +27,5 @@ const TRUY={
   an:{thanh:{thu:'huy',tac:'huy',quy:'huy',tu:'giam',ke:'giam',cuop:'giam',no:0,quan:0,san:'giam'},tong:'huy',giam:0.5},
   che:{hide:0.6,than:0.8,lan:0.6},
   chay:{goc:0.4,tp:0.015,max:0.85,lui:[12,24]},
-  nop:{st:0.25,stMin:5,bac:0.3},
+  nop:{st:0.25,stMin:5,bac:0.3,pham:['quan','no']},
   tl:{goc:0.3,tam:0.01,max:0.7}};

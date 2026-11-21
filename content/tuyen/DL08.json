@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "DL08",
   "loai": "dai_lo",
-  "ten": "Y Giả Độ Thế",
+  "ten": "Hành y cứu đời",
   "daiLo": "y_gia",
   "nut": [
     {
@@ -18,12 +18,12 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Trong sân {LOC10} có một bàn chỉ việc cho người cần chuyển đi chữa. Người trực hỏi nơi nào còn giường và ai sẽ trông bệnh nhân giữa đường. Họ muốn định lệ trước lúc quá đông.",
+      "mo": "Trong sân {LOC10}, {NP23} tới hỏi chỗ nhận bệnh, rồi giúp gập chân một chiếc cáng cho lọt dưới mái. Người nằm trên cáng chưa biết nơi nào còn giường, người khiêng cũng chưa có ai đi cùng. Trước khi thêm bệnh nhân đến, ngươi phải hỏi rõ từng chỗ nhận.",
       "boQuaNeuXuatThan": true,
       "cach": [
         {
           "id": "cach_1",
-          "l": "Hỏi nơi nào có thể nhận thêm ca",
+          "l": "Hỏi bệnh xá nào còn giường",
           "t": "Ngươi ghi nơi còn giường và người chịu trả lời nếu họ đã hết chỗ.",
           "dau": [
             "moc_1_1"
@@ -31,7 +31,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Để người bệnh tự ghi điều khó nói",
+          "l": "Cho người bệnh gửi giấy kín",
           "t": "Ngươi đặt giấy kín để người đi chữa báo phần họ muốn giữ riêng.",
           "dau": [
             "moc_1_2"
@@ -39,7 +39,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Đếm người cần chăm giữa đường",
+          "l": "Ghi người cần chăm dọc đường",
           "t": "Ngươi hỏi ai phải có người đi kèm, rồi ghi mái nghỉ còn dùng được.",
           "dau": [
             "moc_1_3"
@@ -67,12 +67,12 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Các bệnh xá gặp nhau ở {LOC10} để bàn cách chuyển bệnh nhân. Nơi muốn góp quỹ, nơi chỉ nhận người có giấy bảo trợ. Người bệnh muốn biết trước khi rời giường.",
+      "mo": "Các bệnh xá trải giấy nhận bệnh trên bàn ở {LOC10}. Có tờ đóng dấu kho bảo trợ, có tờ chỉ ghi còn một giường. Một gia đình đang thu chăn chờ chuyển. Họ muốn biết tới nơi thì ai sẽ mở cửa.",
       "khacVoi": "OR13.N4 cấp phần thuốc ở một bệnh xá; hồi này đặt quy tắc chuyển ca giữa nhiều nơi và chia chi phí đường.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Dựng quỹ chuyển ca có đối chứng",
+          "l": "Lập quỹ chuyển bệnh, đối giấy hai nơi",
           "t": "Ngươi cho nơi gửi và nơi nhận cùng ghi để người bệnh biết mình đã được nhận.",
           "dau": [
             "moc_2_1"
@@ -80,7 +80,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Nhận kho riêng để đổi quyền ưu tiên",
+          "l": "Đổi kho riêng lấy quyền ưu tiên",
           "t": "Ngươi ghi ai được gọi trước theo giấy kho, giữ cả lời của người phải đợi.",
           "dau": [
             "moc_2_2"
@@ -88,7 +88,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Ghi giới hạn và lượt chăm tại chỗ",
+          "l": "Ghi ca phải giữ lại chăm tại chỗ",
           "t": "Ngươi nhờ mỗi nơi chỉ điều không chữa được, giao đường chăm cho người tự nhận.",
           "dau": [
             "moc_2_3"
@@ -116,13 +116,13 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Hàng người ở {LOC10} đã đứng ra ngoài sân. Người phụ trách đường cần biết ai đủ sức đi và ai phải giữ lại chăm. Giấy bàn giao phải ghi nơi chắc chắn nhận.",
+      "mo": "Ở {LOC10}, người khiêng đặt cáng xuống sân cho người bệnh thở. Hàng đợi đã ra tới cổng. Nơi nhận gửi giấy về, nhưng chẳng ai muốn đưa người lên đường khi chưa biết giường ấy còn trống hay không.",
       "khacVoi": "OR29.N4 xử lô thuốc pha loãng; hồi này chuyển người và giữ chăm sóc khi bệnh lan rộng.",
       "clk": "CLK10",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Chuyển bệnh nhân tới nơi đã nhận",
+          "l": "Chuyển bệnh nhân tới giường đã xác nhận",
           "t": "Ngươi đối giường với người nhận ở mỗi đầu rồi đưa phần chăm tới chỗ chờ.",
           "dau": [
             "moc_3_1"
@@ -136,7 +136,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Dành giường theo giấy bảo trợ",
+          "l": "Dành giường cho người có giấy bảo trợ",
           "t": "Ngươi mở kho lấy suất được cấp riêng và ghi rõ ai bị lùi tới lượt sau.",
           "dau": [
             "moc_3_2"
@@ -149,7 +149,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Giữ người chăm nơi không thể chuyển",
+          "l": "Xếp người chăm cho ca chưa thể đi",
           "t": "Ngươi cho người chưa thể chuyển chọn người ở cạnh, ghi giờ hỏi lại và phần còn thiếu.",
           "dau": [
             "moc_3_3"
@@ -177,12 +177,12 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Bàn chuyển bệnh ở {LOC10} cần người thay. Người mới phải biết ai sửa được giấy nhầm và trả lời sao khi hết giường. Gia đình đã chuyển tới đang đem giấy nhận về đối.",
+      "mo": "Tại bàn chuyển bệnh ở {LOC10}, người học việc cầm hai tờ giấy lệch tên lên soi. Gia đình vừa chuyển lại đứng trước bàn để hỏi. Ngươi có thể cho họ thử tự đối giấy, giao quyền cho người giữ kho hoặc gửi việc về từng nhóm chăm.",
       "khacVoi": "OR38.N5 mở một chỗ phục hồi hoặc chuyển nghề; hồi này truyền quyền điều phối cả mạng khi người đứng đầu vắng.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Để người học thử điều phối một chuyến",
+          "l": "Cho người học tự điều phối một chuyến",
           "t": "Ngươi cho người học tự đối nơi gửi và nhận, để gia đình tự hỏi phần chưa rõ.",
           "dau": [
             "moc_4_1"
@@ -196,7 +196,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giao bàn theo giấy giữ kho",
+          "l": "Giao quyền duyệt cho người bảo trợ",
           "t": "Ngươi cho người bảo trợ cử người duyệt lượt, ghi đơn bị hoãn vào bản công.",
           "dau": [
             "moc_4_2"
@@ -209,7 +209,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Lập nhóm chăm có quyền báo giới hạn",
+          "l": "Giao lịch cho nhóm chăm tại chỗ",
           "t": "Ngươi giao lịch cho người đã ngồi cùng ca nặng, giữ lời hẹn nói đúng khả năng.",
           "dau": [
             "moc_4_3"
@@ -237,13 +237,13 @@
         "cach": "tin",
         "noi": "LOC10"
       },
-      "mo": "Sau đợt đóng cửa, các nơi về {LOC10} so danh sách. Người giữ bàn đem giấy chuyển, người giữ kho đem phiếu ưu tiên. Gia đình bệnh nhân chờ biết ai quyết lượt đi.",
+      "mo": "Sau đợt đóng cửa, các gia đình xếp giấy chuyển bệnh lên bàn ở {LOC10}. Người giữ kho mang phiếu ưu tiên tới, còn người đã thử điều phối đang tra danh sách giường. Ngươi phải chọn ai sẽ trả lời những nhà còn chờ.",
       "khacVoi": "OR13.N5 xử sở hữu một phương thuốc; hồi này trao quyền điều phối và kiểm việc chuyển ca qua một đợt dịch.",
       "clk": "CLK10",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Trao bàn cho người đã thử giữ lượt",
+          "l": "Trao bàn chuyển bệnh cho người đã thử",
           "t": "Ngươi để người học mở đường nhận ca và cho gia đình kiểm dấu trước khi đi.",
           "dau": [
             "moc_5_1"
@@ -262,7 +262,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ ưu tiên theo kho bảo trợ",
+          "l": "Duy trì lượt ưu tiên của kho bảo trợ",
           "t": "Ngươi tiếp tục mở kho theo phiếu hẹn, trả lời người bị hoãn bằng đúng bản ghi.",
           "dau": [
             "moc_5_2"
@@ -275,7 +275,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Giao việc cho các nhóm chăm bệnh tại chỗ",
+          "l": "Giao lịch cho các nhóm chăm tại chỗ",
           "t": "Ngươi giao lịch cho các nhóm tại chỗ, để họ trả lời thật điều chưa thể chữa.",
           "dau": [
             "moc_5_3"
@@ -288,7 +288,7 @@
         },
         {
           "id": "cach_4",
-          "l": "Gửi phiếu cho người còn đợi",
+          "l": "Đưa phiếu chỉ giường trống cho từng nhà",
           "t": "Ngươi chép tên nơi còn giường và đưa từng nhà một bản trước lúc họ trở về.",
           "dau": [
             "moc_5_4"

@@ -1,0 +1,379 @@
+{
+ "schemaVersion": 1,
+ "loai": "nghe_tu",
+ "nghe": "TU19",
+ "ten": "Phật tu",
+ "su_kien": [
+  {
+   "ma": "S01",
+   "ten": "Xuống tóc",
+   "text": [
+    "Ngươi ngồi trên ghế nhỏ ở {LOC12}, gáy chạm luồng gió từ cửa. Người cầm dao đặt bên chân ngươi tấm khăn để hứng tóc.",
+    "Ngoài hiên, người thân giữ tay nải vẫn chưa chịu về. Thầy hỏi ngươi muốn xuống tóc ngay hay ra ngồi với họ cho đến khi họ nói hết."
+   ],
+   "choices": [
+    {
+     "l": "Xuống tóc trước thềm",
+     "t": "Ngươi cúi đầu, nghe từng lọn tóc rơi xuống khăn. Khi ra hiên, người nhà đã đi, nhưng tay nải vẫn được kê lên chỗ khô.",
+     "e": {
+      "tv": 3,
+      "res": 1,
+      "tamma": -3
+     }
+    },
+    {
+     "l": "Ra gặp người nhà trước",
+     "t": "Ngươi ra ngồi cạnh người thân và nghe họ dặn cách đi qua mùa rét. Khi quay vào, thầy đã hâm lại bát nước để rửa dao.",
+     "e": {
+      "mp": "10%",
+      "danh": 2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S02",
+   "ten": "Hóa duyên bị đuổi",
+   "text": [
+    "Chủ nhà ở cuối chợ lấy cán chổi chặn ngang ngưỡng cửa. Sau lưng ông có tiếng gạo vét từ đáy chum.",
+    "Ngươi nghe một đứa nhỏ xin thêm cơm trong nhà. Bát khất thực trong tay ngươi còn trống, và gió đã bắt đầu thổi lạnh qua phố."
+   ],
+   "choices": [
+    {
+     "l": "Xin việc đổi bữa",
+     "t": "Ngươi đặt bát xuống và xin gánh nước. Chủ nhà chừa cho ngươi phần cháo bám quanh thành nồi sau khi cả nhà ăn.",
+     "e": {
+      "hp": "-5%",
+      "res": 1
+     }
+    },
+    {
+     "l": "Chào rồi sang ngõ khác",
+     "t": "Ngươi rời cửa, để chủ nhà quét nốt sân. Đến tối, người hàng xóm chia chỗ khô dưới mái nhưng cũng chỉ có nước ấm.",
+     "e": {
+      "tv": 2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S03",
+   "ten": "Siêu độ làng chết dịch",
+   "text": [
+    "Mưa làm nhòe tờ giấy ghi người chết dán ở đầu làng. Ngươi thấy dưới mỗi mái nhà đều còn chiếc bát úp bên cửa.",
+    "Người sống xin ngươi tụng trước khi đem đồ đi chôn. Người giữ sổ muốn đọc từng tên, còn một nhà chỉ xin được ngồi yên bên chiếc bát."
+   ],
+   "choices": [
+    {
+     "l": "Đọc tên cùng người giữ sổ",
+     "t": "Ngươi chờ ông hong khô giấy rồi đọc tên theo từng mái nhà. Tới chỗ chữ đã nhòe, gia quyến tự nói phần còn thiếu.",
+     "e": {
+      "deed": "sieu_do",
+      "res": 1
+     }
+    },
+    {
+     "l": "Ngồi cạnh các nhà muốn im lặng",
+     "t": "Ngươi tụng nhỏ ở sân và chừa hiên cho họ ngồi. Lúc trời tạnh, họ tự mang bát ra, đặt cạnh tấm chiếu đã hong.",
+     "e": {
+      "tamma": -3,
+      "res": 1,
+      "danh": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S04",
+   "ten": "Phá giới cứu người",
+   "text": [
+    "Một kẻ có đao đẩy người bán dầu sát chân tường. Ngọn đèn rơi nhưng chưa tắt, soi đúng bàn tay người ấy đang níu cửa.",
+    "Ngươi đứng đủ gần để ra đòn. Sau lưng người cầm đao còn một khe hẹp mà người bán dầu có thể lách qua nếu ngươi giữ được hắn."
+   ],
+   "choices": [
+    {
+     "l": "Chặn tay đao, mở đường thoát",
+     "t": "Ngươi ghì cổ tay cầm đao và gọi người bán dầu chạy qua khe. Hắn giằng ra làm vai ngươi rách áo, nhưng người kia đã tới được đầu phố.",
+     "e": {
+      "wound": "ngoai",
+      "deed": "cuu_nguoi"
+     }
+    },
+    {
+     "l": "Ra đòn đoạt mạng",
+     "t": "Ngươi đánh để người bán dầu thoát và kẻ cầm đao ngã chết bên tường. Khi ngươi đưa tay đỡ ngọn đèn, Phật quang đã tắt và nguyện lực tiêu tan.",
+     "e": {
+      "deed": "giet_cuop_dang_ac"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S05",
+   "ten": "Ma đầu xin quy y",
+   "text": [
+    "Người tới xin quy y đặt thanh đao còn bọc vải xuống thềm. Sau lưng họ là thân nhân của một người đã chết, tay vẫn cầm tờ đơn cũ.",
+    "Họ xin ở lại qua đêm và chấp nhận nghe lời người đang đợi. Chỗ ngủ trong chùa còn, nhưng tấm chiếu ngoài cổng cũng chưa ai dọn."
+   ],
+   "choices": [
+    {
+     "l": "Cho trú và giữ cuộc gặp",
+     "t": "Ngươi cất đao, dành chỗ ngủ rồi hỏi người cầm đơn có muốn ngồi lại sáng mai. Họ chưa nhận lời, nhưng tự chọn mang tờ đơn về hay để lại.",
+     "e": {
+      "res": 1,
+      "tamma": 2,
+      "hd": [
+       3,
+       0
+      ]
+     }
+    },
+    {
+     "l": "Dẫn họ ra trình diện",
+     "t": "Ngươi đi cùng họ tới cửa quan, mang theo thanh đao còn bọc. Người cầm đơn giữ bản của mình và tự chọn ngày tới nói.",
+     "e": {
+      "danh": 4,
+      "hd": [
+       1,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S06",
+   "ten": "Sư phụ viên tịch",
+   "text": [
+    "Sư phụ vừa tắt thở khi ấm nước trong phòng còn sôi. Người học nhỏ tuổi nhất vẫn đứng ngoài hiên, cầm chiếc chén thầy thường dùng.",
+    "Trong hòm có bản kinh thầy chưa chép xong. Có người xin ngươi đọc nốt ngay, còn người giữ bếp muốn thu dọn giường trước khi khách tới."
+   ],
+   "choices": [
+    {
+     "l": "Đọc bản kinh còn dở",
+     "t": "Ngươi đọc tới dòng cuối rồi dừng ở chỗ mực chưa kín. Người học nhỏ đặt chiếc chén bên trang ấy và đọc tiếp phần mình đã thuộc.",
+     "e": {
+      "tv": 5,
+      "xp": 4
+     }
+    },
+    {
+     "l": "Cùng dọn chỗ nằm của thầy",
+     "t": "Ngươi hạ màn và gấp chiếc chăn với người giữ bếp. Người học nhỏ mang chén vào rửa, rồi xin tự đọc bản kinh vào buổi sau.",
+     "e": {
+      "tamma": -4,
+      "res": 1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S07",
+   "ten": "Chùa bị ma tông đốt",
+   "text": [
+    "Lửa đã bén mái kho ở {LOC12}. Người trú kéo chăn ra sân, còn từ lối sau có tiếng ai gọi vì cửa đã kẹt.",
+    "Trong thư khố vẫn còn giấy ghi nơi các gia đình tản đi. Ngươi phải chọn lối tới cửa kẹt hoặc cứu phần giấy trước khi xà sụm."
+   ],
+   "choices": [
+    {
+     "l": "Phá cửa sau để đưa người ra",
+     "t": "Ngươi cùng người giữ sân nhấc cửa khỏi ngạch. Người mắc kẹt thoát được, còn sáng hôm sau các nhà phải tự đi hỏi lại địa chỉ của nhau.",
+     "e": {
+      "deed": "cuu_nguoi",
+      "hp": "-5%"
+     }
+    },
+    {
+     "l": "Chuyền hòm giấy ra sân",
+     "t": "Ngươi đưa hòm cho người đứng ngoài rồi gọi họ mở lối sau từ phía sân. Người cuối thoát sát lúc xà đổ, chân bỏng vì phải đợi.",
+     "e": {
+      "danh": 4,
+      "tamma": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S08",
+   "ten": "Thiền trăm ngày",
+   "text": [
+    "Bụi ở bậu cửa dày thêm từ buổi ngươi bắt đầu ngồi thiền. Có người quen đặt nước xuống mỗi sáng, nay chỉ còn nghe tiếng bát cọ lên đá.",
+    "Hôm nay họ gõ cửa và nói người gánh nước đã ngã ở dốc. Chuông chưa báo hết buổi, còn ngoài hiên đã có tiếng kéo cáng."
+   ],
+   "choices": [
+    {
+     "l": "Rời chiếu xuống dốc",
+     "t": "Ngươi bước ra khi chân còn tê, cùng họ khiêng người ngã lên hiên. Chiếu thiền để trống đến tối, rồi được dùng lót dưới chiếc cáng.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "res": 1,
+      "tv": -2
+     }
+    },
+    {
+     "l": "Nhờ người đi, ngồi hết buổi",
+     "t": "Ngươi gọi người ngoài cửa tới giúp và ở lại đến khi chuông dứt. Lúc ra sân, người bị thương đã được cáng về, còn chiếc bát sáng vẫn chưa có ai mang đi.",
+     "e": {
+      "tv": 6,
+      "tamma": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S09",
+   "ten": "Người tình cũ tìm tới",
+   "text": [
+    "Người ấy đứng trước chùa, cầm áo ngươi từng bỏ lại. Mép tay áo đã được vá bằng loại chỉ chỉ có ở nhà cũ.",
+    "Họ cần người đi cùng qua đoạn đường ngập để về đưa mẹ đi chữa. Trước khi quay xuống dốc, họ hỏi ngươi có muốn nghe chuyện trong nhà không."
+   ],
+   "choices": [
+    {
+     "l": "Đi cùng qua đoạn nước",
+     "t": "Ngươi xắn áo, theo họ qua chỗ nước xiết. Sang bờ, họ đưa áo cũ cho ngươi giữ và nói hết chuyện đã định kể.",
+     "e": {
+      "tamma": 4,
+      "hp": "-5%",
+      "hd": [
+       1,
+       0
+      ]
+     }
+    },
+    {
+     "l": "Mời họ nghỉ và tìm người dẫn",
+     "t": "Ngươi dọn chỗ cho họ hong dép rồi tìm người quen đường ngập. Khi khởi hành, họ giữ lại áo cũ, hẹn lúc mẹ khỏe sẽ mang sang.",
+     "e": {
+      "tamma": -2,
+      "res": 1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S10",
+   "ten": "Độ hóa yêu",
+   "text": [
+    "Sau vách kho có con yêu đang gỡ mảnh lưới khỏi móng. Nó đặt từng sợi xuống nền, cạnh những hạt thóc đã cắn dở.",
+    "Người coi kho mang đèn tới và đòi đóng cửa lại. Con yêu nhìn ngươi, rồi đẩy trả cái đấu còn dính trấu."
+   ],
+   "choices": [
+    {
+     "l": "Dẫn nó ra ngoài và nghe chuyện",
+     "t": "Ngươi mở cửa bên hông rồi cho nó tự bước ra. Nó chỉ chỗ thóc bị rơi trên đường, còn người coi kho đi theo để xem có đúng không.",
+     "e": {
+      "res": 2,
+      "hd": [
+       3,
+       0
+      ]
+     }
+    },
+    {
+     "l": "Để hai bên tự định phần bù",
+     "t": "Ngươi giữ đèn trong tay và nghe người coi kho kê thóc đã mất. Con yêu nhận kéo bao để trả phần ấy, bắt đầu bằng bao còn mắc dưới cầu.",
+     "e": {
+      "danh": 3,
+      "res": 1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S11",
+   "ten": "Xá lợi",
+   "text": [
+    "Sau lễ hỏa táng, người quét sân tìm thấy hạt sáng trong một lớp tro nguội. Họ đặt nó lên đĩa bên chiếc lược của người đã khuất.",
+    "Khách đứng ngoài xin đem đi thờ, còn người nhà chỉ muốn giữ chiếc lược. Người giữ chùa đợi ngươi hỏi ý họ trước khi niêm đĩa."
+   ],
+   "choices": [
+    {
+     "l": "Đặt xá lợi dưới mái chung",
+     "t": "Ngươi đợi người nhà chọn xong rồi đặt đĩa ở chỗ khách có thể đến viếng. Họ đem lược về, còn người giữ chùa ghi rõ tên bên đĩa.",
+     "e": {
+      "res": 2,
+      "danh": 3
+     }
+    },
+    {
+     "l": "Giao xá lợi cho người nhà",
+     "t": "Ngươi bọc hạt sáng cùng chiếc lược và trao cho người nhà. Họ xin người giữ chùa chỉ đưa khách tới khi trong nhà đã thắp đèn.",
+     "e": {
+      "tamma": -3,
+      "hd": [
+       1,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S12",
+   "ten": "Ngộ không",
+   "text": [
+    "Ngươi ngồi trước bát nước đã nguội. Bóng ngọn đèn trong bát cứ lệch đi, dù ngươi đã thôi chạm vào bàn.",
+    "Ngoài sân, người giữ bếp gọi tìm ai phụ đỡ thúng. Trước mặt ngươi, vệt sáng trong nước vẫn lay như có điều chưa chịu dứt."
+   ],
+   "choices": [
+    {
+     "l": "Ở lại nhìn mặt nước lặng",
+     "t": "Ngươi chờ tới khi nước phẳng rồi nhấc bát khỏi bàn. Dưới đáy chỉ còn vết xước quen tay, nhưng suốt lúc ấy ngươi thấy như đã từng nhìn nó.",
+     "e": {
+      "tv": 6,
+      "tamma": -5
+     }
+    },
+    {
+     "l": "Đặt bát xuống và ra phụ",
+     "t": "Ngươi ra sân đỡ thúng, để mặt nước tự lặng. Lúc quay vào, người giữ bếp đã dùng chiếc bát ấy kê chân bàn khỏi cập kênh.",
+     "e": {
+      "res": 2,
+      "hd": [
+       1,
+       0
+      ],
+      "mp": "15%"
+     }
+    }
+   ]
+  }
+ ],
+ "ket_cuc": [
+  {
+   "ma": "K01",
+   "ten": "Thành Phật",
+   "canh": [
+    "Ngươi đi qua sân khi người giữ bếp đang nhóm lửa. Phật quang vừa lên, người đứng gần chỉ thấy đủ sáng để tìm nắp nồi đã lăn dưới bàn.",
+    "Khách muốn ở lại nghe chuyện, còn ngươi xếp thêm chiếu cho người đến trễ. Tới lúc bếp nguội, họ tự gấp chiếu rồi mang tro ra vườn."
+   ]
+  },
+  {
+   "ma": "K02",
+   "ten": "Phá giới hoàn tục",
+   "canh": [
+    "Ngươi gấp áo tu bên cửa, nơi người giữ bếp vẫn để bát nước. Phật quang chưa trở lại, và người nhà đứng ở sân với chiếc áo đi đường.",
+    "Ra khỏi cổng, ngươi ghé giúp họ buộc lại gánh. Lưỡi dao cạo được để lại, còn vết rách trên tay áo do chính ngươi khâu."
+   ]
+  },
+  {
+   "ma": "K03",
+   "ten": "Viên tịch để lại xá lợi",
+   "canh": [
+    "Người học trò ngồi bên ngươi tới lúc đèn cạn dầu. Khi nhấc bát khỏi đầu giường, họ lau sạch phần nước đã đổ xuống tấm ván.",
+    "Sau lễ hỏa táng, hạt xá lợi được đặt cạnh bát. Người tới viếng vẫn dùng cửa bên để người trong chùa có thể đưa cơm qua sân."
+   ]
+  },
+  {
+   "ma": "K04",
+   "ten": "Tỉnh mộng (Mộng Ấn)",
+   "canh": [
+    "Ngươi nghe chuông và thấy mảnh mộng hiện lên trong mặt nước. Cánh cửa ở đó hé vừa đủ cho một vệt sáng lạnh lọt ra.",
+    "Khi chuông dứt, sân chùa đã sáng, và người giữ bếp mang nước tới. Ngươi nhận bát, vẫn còn cảm giác bàn tay mình từng ấm lên ở chỗ khác."
+   ]
+  }
+ ]
+}

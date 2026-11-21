@@ -45,7 +45,7 @@
         {
           "id": "cach_3",
           "l": "Giữ bản chép trước ngày đóng dấu",
-          "t": "Ngươi đặt tờ nháp dưới bao vải, giữ được ngày nhận được lệnh chép số cũ.",
+          "t": "Ngươi giấu tờ nháp dưới bao vải. Trên đó còn ngày người coi kho bảo ngươi chép lại số cũ.",
           "dau": [
             "moc_1_3"
           ]
@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "Ghi từng hộ bị gạch phần",
-          "t": "Ngươi chép tên và lời từng hộ, để cả hai xác nhận dấu chưa từng điểm.",
+          "t": "Ngươi chép tên và lời từng hộ. Cả hai hộ xác nhận dấu lĩnh thóc trên giấy chẳng phải do họ điểm.",
           "dau": [
             "moc_2_1"
           ]

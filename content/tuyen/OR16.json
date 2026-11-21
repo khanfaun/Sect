@@ -45,7 +45,7 @@
         {
           "id": "cach_3",
           "l": "Thử lại một mắt bằng chỉ nhà",
-          "t": "Ngươi thử một mắt ngay bờ, chỉ nhà giữ được trong khi sợi thay tuột.",
+          "t": "Ngươi thử thay một mắt lưới ngay tại bờ. Sợi mới tuột ra, còn nút của nhà ngươi vẫn giữ được mắt lưới.",
           "dau": [
             "moc_1_3"
           ]
@@ -146,7 +146,7 @@
         {
           "id": "cach_3",
           "l": "Đưa phiếu tiền công cho người giữ bến",
-          "t": "Ngươi hỏi lượt sửa nào còn chưa trả rồi giao mỗi người một dòng đối.",
+          "t": "Ngươi hỏi ai còn nợ tiền vá. Mỗi người nhận một dòng ghi phần công còn thiếu để đem về đối lại.",
           "dau": [
             "moc_3_3"
           ]

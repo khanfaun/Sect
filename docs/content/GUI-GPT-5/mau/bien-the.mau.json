@@ -1,0 +1,20 @@
+{
+  "tin_don_END02": ["Tin mới 1.", "Tin mới 2.", "Tin mới 3.", "Tin mới 4.", "Tin mới 5.", "Tin mới 6."],
+  "tin_don_END03": ["6 tin", "…"],
+  "tin_don_END06": ["6 tin", "…"],
+  "ky_ngo_A1": [
+    { "text": ["Đoạn mở khác 1", "Đoạn mở khác 2"], "t_len": "Kết quả viết lại cho lựa chọn 'Bước lên bậc thang'", "t_quay": "Kết quả viết lại cho lựa chọn 'Quay lưng bỏ đi'" },
+    { "text": ["…"], "t_len": "…", "t_quay": "…" }
+  ],
+  "ky_ngo_A2": [
+    { "text": ["…"], "t": ["kết quả lựa chọn 1", "kết quả lựa chọn 2", "kết quả lựa chọn 3"] },
+    { "text": ["…"], "t": ["…", "…", "…"] }
+  ],
+  "gac_ben_hien_them": {
+    "lao_cheo_do": ["đoạn hien mới 1", "đoạn hien mới 2"],
+    "tre_an_may": ["…", "…"],
+    "ni_co_mu": ["…", "…"],
+    "lao_dao": ["…", "…"],
+    "ban_canh": ["…", "…"]
+  }
+}

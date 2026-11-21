@@ -40,7 +40,7 @@
         {
           "id": "cach_2",
           "l": "So thẻ bếp khác trong giỏ",
-          "t": "Ngươi kiểm được một thẻ vắng đúng hôm người của thương hội lên bàn tiệc.",
+          "t": "Ngươi tìm thấy một thẻ bếp bị bỏ trống, đúng hôm người của thương hội tới dự tiệc.",
           "dau": [
             "moc_1_2"
           ]
@@ -88,7 +88,7 @@
         {
           "id": "cach_2",
           "l": "Kê những người chủ quán còn giữ thẻ",
-          "t": "Ngươi chép tên người lệ thuộc và hỏi ai nhận quyền chia ca bếp.",
+          "t": "Ngươi chép tên những người bị giữ bằng khế và hỏi từ nay ai có quyền chia ca bếp.",
           "dau": [
             "moc_2_2"
           ]
@@ -247,7 +247,7 @@
         {
           "id": "cach_1",
           "l": "Mở bếp chung qua một mùa",
-          "t": "Ngươi mở ca tự chọn, trả công bằng tiền cơm đủ qua mùa và ghi ai ở lại.",
+          "t": "Ngươi mở ca cho thợ tự chọn, dành đủ tiền trả công và lo cơm qua mùa rồi ghi ai muốn ở lại.",
           "dau": [
             "moc_5_1"
           ],

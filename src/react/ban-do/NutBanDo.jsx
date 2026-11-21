@@ -51,13 +51,14 @@ function TienIco({ k }) {
 export function CumTien({ r }) {
   const T = PS.TIEN, d = Math.max(0, Math.round(r.bac || 0));
   const vang = Math.floor(d / T.vang), bac = Math.floor((d % T.vang) / T.luong), xu = d % T.luong;
-  const C = [['xu', xu, 'Xu'], ['bac', bac, 'Lượng bạc'], ['vang', vang, 'Lượng vàng']];
-  const tp = ['Hạ phẩm', 'Trung phẩm', 'Thượng phẩm', 'Cực phẩm'];
+  const C = [['xu', xu, 'Xu', 'Tiền lẻ của phàm nhân, dùng mua đồ rẻ.'], ['bac', bac, 'Lượng bạc', 'Bằng ' + T.luong + ' xu.'], ['vang', vang, 'Lượng vàng', 'Bằng ' + T.vang / T.luong + ' lượng bạc.']];
+  const noT = (r.bac || 0) < 0 ? (PS.noTip ? PS.noTip(r) : '') : '';
+  const tp = ['Hạ phẩm', 'Trung phẩm', 'Thượng phẩm', 'Cực phẩm'], tpd = ['Linh thạch thường, dùng hằng ngày.', 'Gấp 100 lần hạ phẩm.', 'Gấp 100 lần trung phẩm.', 'Quý nhất, gấp 100 lần thượng phẩm.'];
   return (
-    <div className={'tien-cum' + ((r.bac || 0) < 0 ? ' no' : '')} {...tip('Hầu bao\nLinh thạch: ' + PS.ltTxt(r) + '\nTiền phàm: ' + PS.fmtBac(r.bac || 0) + '\nThưởng Lệnh: ' + (r.thuongLenh || 0) + (PS.noTip ? PS.noTip(r) : ''))}>
-      {C.map(([k, v, n]) => <span key={k} className={'tc' + (v ? '' : ' z') + (k === 'xu' ? ' xu' : '')} title={n}><TienIco k={k} />{v}</span>)}
+    <div className={'tien-cum' + ((r.bac || 0) < 0 ? ' no' : '')}>
+      {C.map(([k, v, n, d]) => <span key={k} className={'tc' + (v ? '' : ' z') + (k === 'xu' ? ' xu' : '')} {...tip(n + ': ' + v + '\n' + d + (k === 'xu' ? noT : ''))}><TienIco k={k} />{v}</span>)}
       <u className="tc-sep" />
-      {tp.map((n, k) => { const v = PS.ltGet(k, r) || 0; return <span key={'l' + k} className={'tc lt lt' + k + (v ? '' : ' z')} title={n}><TienIco k={k} />{PS.fmtN(v)}</span>; })}
+      {tp.map((n, k) => { const v = PS.ltGet(k, r) || 0; return <span key={'l' + k} className={'tc lt lt' + k + (v ? '' : ' z')} {...tip('Linh thạch ' + n.toLowerCase() + ': ' + PS.fmtN(v) + '\n' + tpd[k])}><TienIco k={k} />{PS.fmtN(v)}</span>; })}
     </div>
   );
 }

@@ -97,7 +97,7 @@ function anAtSect(r){const n=nodeById(r.at);return !!n&&n.type==='tong'&&!!r.fla
 function anAtHome(r){return r.queAt!=null&&r.at===r.queAt&&!r.moving;}
 function anLkEat(r){if((r.anLk||0)>0){r.anLk--;return true;}const i=(r.qitems||[]).indexOf('luong_kho');if(i<0)return false;r.qitems.splice(i,1);r.anLk=AN.lkNgay-1;dbg('an.lk',{left:(r.qitems||[]).filter(x=>x==='luong_kho').length});return true;}
 function anFed(r,how){if((r.doi||0)>=AN.doi.doi)dbg('an.het',{doi:r.doi,how});r.no=100;r.doi=0;if(!r.moving)r.anBao=0;}
-// mốc đói: 0 no, 1 thiếu, 2 đói, 3 lả, 4 kiệt, 5 sắp chết. r.anBao = mốc cao nhất đã báo (chỉ báo khi vừa rơi xuống mốc mới; ăn lại lúc không đi đường thì đặt lại)
+// mốc đói: 0 no, 1 thiếu, 2 đói, 3 lả, 4 kiệt, 5 sắp chết. r.anBao = mốc cao nhất đã qua (chỉ báo khi vừa rơi xuống mốc nặng mới; ăn lại lúc không đi đường thì đặt lại). r.anBaoT = lúc báo gần nhất
 function anLv(d){const D=AN.doi;return d>=D.canh?5:d>=D.kiet?4:d>=D.la?3:d>=D.doi?2:d>=D.thieu?1:0;}
 const AN_NOTE=['','an.noteThieu','an.noteDoi','an.noteLa','an.noteKiet','an.noteCanh'];
 // Sửa lỗi đói: mọi người đều đói, nhưng theo nhịp (phần ăn mỗi ngày) — phàm 1, Luyện Khí ½, Trúc Cơ+ rất chậm; bế quan chậm hơn, sau bế quan chậm một thời gian
@@ -105,7 +105,11 @@ function anRate(r){let k=r.pham?1:r.realm===0?AN.nhip.lk:AN.nhip.tc;if(r._inBq)k
 function anShow(r){r=r||G.run;return !!r&&(needFood(r)||(r.doi||0)>=AN.doi.thieu);}
 function anStarve(r){r.doi=(r.doi||0)+1;r.no=Math.max(0,100-Math.round(r.doi*100/AN.doi.la));dbg('an.doi',{doi:r.doi});const D=AN.doi;
   if(r.doi===D.la||r.doi===D.kiet)clampHp();
-  const lv=anLv(r.doi);if(lv>(r.anBao||0)){r.anBao=lv;note(contentText(AN_NOTE[lv]),'dn');dbg('an.bao',{lv,doi:r.doi});}
+  // chỉ báo mốc nặng (AN.baoTu), mỗi mốc một lần, cách lần báo trước ít nhất AN.baoNghi ngày (mốc sắp chết luôn báo)
+  const lv=anLv(r.doi);if(lv>(r.anBao||0)){r.anBao=lv;const t=W().t,tu=AN.baoTu||4,nghi=(AN.baoNghi||0)*HD;
+    if(lv<tu)dbg('an.baoNhe',{lv,doi:r.doi});
+    else if(lv<5&&r.anBaoT!=null&&t-r.anBaoT<nghi)dbg('an.baoNghi',{lv,doi:r.doi});
+    else{r.anBaoT=t;note(contentText(AN_NOTE[lv]),'dn');dbg('an.bao',{lv,doi:r.doi});}}
   if(r.doi>=D.kiet){const s=S();r.hp=Math.max(1,r.hp-Math.max(1,Math.round(s.maxHp*AN.kietHp)));}}
 // một bữa (một ngày ăn): việc có cơm, sơn môn mình, lương thực đã mua, quán/quê (đủ tiền thật thì mua cả tháng), lương khô, không thì đói
 function anMeal(r){

@@ -29,7 +29,7 @@
         {
           "id": "cach_1",
           "l": "Đòi phần công và ghi người sống",
-          "t": "Ngươi lĩnh phần được công nhận rồi chép tên người có mặt sau buổi phát.",
+          "t": "Ngươi lĩnh phần công đã được công nhận. Sau buổi phát, ngươi chép tên những người đã có mặt.",
           "dau": [
             "moc_1_1"
           ],
@@ -176,7 +176,7 @@
         {
           "id": "cach_1",
           "l": "Chia mái và ghi đủ tên đơn vị",
-          "t": "Ngươi lấy danh sách người sống đối với trại, giao mỗi nhóm một mái và phần lương.",
+          "t": "Ngươi đối tên người sống với danh sách ở trại rồi giao mỗi nhóm một mái trú và phần lương.",
           "dau": [
             "moc_4_1"
           ],
@@ -287,7 +287,7 @@
         {
           "id": "cach_4",
           "l": "Trả thẻ lính và giữ bản sao",
-          "t": "Ngươi trả thẻ trực, đưa người giữ trạm một bản giấy để còn dò được lệnh.",
+          "t": "Ngươi trả thẻ trực và đưa người giữ trạm một bản sao để họ còn lần ra tờ lệnh.",
           "dau": [
             "moc_5_4"
           ]

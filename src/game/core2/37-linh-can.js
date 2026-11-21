@@ -44,7 +44,9 @@ function rootKnown(r){r=r||G.run;return !r||r.rootKnown==null||!!r.rootKnown;}
 function voKnown(r){r=r||G.run;return isVo(r)&&rootKnown(r);}
 // tên linh căn để HIỂN THỊ (rootView vẫn dùng cho công thức)
 function rootLabel(r,root){r=r||G.run;root=root||(r&&r.root);if(!root)return '';if(r&&!rootKnown(r))return contentText('tl.chua');
-  const Q=rootQ(root);const n=rootView(root).n;return Q&&root.id!=='vo'?n+' · '+contentText('tl.pham',[Q.n]):n;}
+  return rootView(root).n;}
+// HTML tên linh căn: màu chữ theo phẩm (lcq-khuyet/thuong/thuan/vien), không ghi chữ phẩm
+function rootHTML(r,root){r=r||G.run;root=root||(r&&r.root);const n=String(rootLabel(r,root)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));if(!root||root.id==='vo'||(r&&!rootKnown(r)))return n;return '<span class="lcq lcq-'+(root.q||'thuong')+'">'+n+'</span>';}
 function rootElsLabel(r){r=r||G.run;if(!rootKnown(r)||isVo(r))return '';return r.root.els.map(e=>EL[e]?EL[e].n:e).join(', ');}
 function tlCat(root){if(!root||root.id==='vo')return 'vo';return ['song','thien','dia','bien','cuc'].includes(root.id)?'tot':'thuong';}
 function tlResult(cach){const r=G.run;if(!r)return {t:''};const cat=tlCat(r.root);r.rootKnown=1;

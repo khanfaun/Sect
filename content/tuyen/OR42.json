@@ -77,7 +77,7 @@
         {
           "id": "cach_1",
           "l": "Đối tên người đòi với người đã giấu",
-          "t": "Ngươi sao hai dòng và tách người xin nguồn khỏi người mở chỗ ẩn.",
+          "t": "Ngươi chép cả hai dòng, ghi riêng ai xin nguyên liệu và ai mở chỗ giấu người.",
           "dau": [
             "moc_2_1"
           ]
@@ -125,7 +125,7 @@
         {
           "id": "cach_1",
           "l": "Kiểm mẫu thay dưới người làm chứng",
-          "t": "Ngươi cho người giữ hồ sơ dự lần thử và ghi phương khả thi không dùng người.",
+          "t": "Ngươi mời người giữ hồ sơ xem buổi thử rồi chép lại phương luyện đan làm được mà không dùng người.",
           "dau": [
             "moc_3_1"
           ]
@@ -133,7 +133,7 @@
         {
           "id": "cach_2",
           "l": "Xác nhận quyền nắm phương",
-          "t": "Ngươi nhận tờ giữ phương, thấy nó vẫn cho dùng nguồn theo mẻ đan dùng người bị giữ.",
+          "t": "Ngươi nhận tờ trao quyền giữ phương luyện đan. Tờ ấy vẫn cho phép dùng người bị giữ làm nguyên liệu.",
           "dau": [
             "moc_3_2"
           ]

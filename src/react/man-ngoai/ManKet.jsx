@@ -1,10 +1,9 @@
-// Đ10: màn kết — một trong bốn kết khép hành trình (END04, END05, END07, END08). Sau đó là Tân Mộng (hồ sơ mới, giữ dấu "đã tỉnh").
+// Đ10: màn kết — một trong bốn kết khép hành trình (END04, END05, END07, END08). Câu 86: sau đó về màn mở đầu (Linh giới đang phát triển), không còn Tân Mộng.
 import { PS, Tranh } from '../html';
 
 export function ManKet() {
   const K = PS.dmKetView();
   if (!K) return null;
-  const c = PS.UI.confirm === 'tanMong';
   return (
     <div className="over ket">
       <Tranh seed={'ket' + K.id} reg={4} type="thien" cls="o-art" />
@@ -17,7 +16,7 @@ export function ManKet() {
         </div>
         <footer className="sc-f">
           <button className="btn" data-act="screen" data-arg="meta">Xem lại các kiếp</button>
-          <button className="btn pri" data-act="tanMong">{c ? 'Bấm lần nữa: mở giấc mộng mới' : 'Tân Mộng'}</button>
+          <button className="btn pri" data-act="ketVe">{PS.contentText('dm.ketVe')}</button>
         </footer>
       </section>
     </div>

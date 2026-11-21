@@ -6,11 +6,12 @@
   if(de.dataset.tlfx){delete de.dataset.tlfx;delete de.dataset.asc;}if(UI.modal&&UI.modal.k==='tlfx')UI.modal=null;return _m.apply(this,arguments);};}
 ACT.tlFxDone=()=>{const r=G.run;if(!r||!r.tlFx)return;dbg('tl.fxDone',{k:r.tlFx.k});r.tlFx=null;UI.modal=null;const de=document.documentElement;delete de.dataset.tlfx;delete de.dataset.asc;clearTimeout(UI.tlFxT);UI.tlFxId=null;};
 
-// Song / Tam / Tứ / Ngũ hành tạp linh căn: dị tượng nhẹ, kém Địa/Thiên (chỉ giao diện, không đụng luật).
-// Bậc càng cao càng rực: song (2 quầng nhẹ) < tam < tứ; tạp thì đục, lẫn nhiều màu nhưng yếu.
-const TL_FXL={song:{ms:2400,n:2,t:'Song linh căn',s:'Hai khí giao hòa',l:['Hai luồng linh khí khẽ quấn lấy nhau trên mặt đá.']},
-  tam:{ms:3000,n:3,t:'Tam linh căn',s:'Ba khí cùng hiện',l:['Ba luồng linh khí lần lượt sáng lên, tản ra thành những vòng sáng mờ.']},
-  tu:{ms:3600,n:4,t:'Tứ linh căn',s:'Bốn khí tụ về',l:['Bốn luồng linh khí cùng bừng lên, đá trắc linh rực một thoáng.']},
-  tap:{ms:3800,n:5,t:'Ngũ hành tạp linh căn',s:'Ngũ khí lẫn lộn',l:['Năm luồng linh khí đục mờ lẫn vào nhau, chớp lên yếu ớt rồi tắt dần.']}};
+// Dị tượng nhẹ (chỉ giao diện, không đụng luật). Thứ bậc mạnh→yếu: Thiên > Địa (toàn màn, TL_FX) > Biến dị > Song > Tam > Tứ > Tạp.
+// rk: bậc (càng lớn càng mạnh) — thời gian, số tia, số vòng sáng, độ rực đều giảm dần theo bậc. Chữ: content/text (tlfx.title/sub/lt.*).
+const TL_FXL={bien:{rk:5,ms:5200,rays:16,rings:3,orbs:6},song:{rk:4,ms:3800,rays:8,rings:2},tam:{rk:3,ms:3200,rays:0,rings:1},
+  tu:{rk:2,ms:2800,rays:0,rings:1},tap:{rk:1,ms:2400,rays:0,rings:1}};
+function tlFxlText(fx){const k=fx.k;const e=(fx.els||[])[0];
+  const lt=k==='bien'?(CONTENT_TEXT['tlfx.lt.bien.'+e]!=null?'tlfx.lt.bien.'+e:'tlfx.lt.bien.x'):'tlfx.lt.'+k;
+  return {t:contentText('tlfx.title.'+k),s:contentText('tlfx.sub.'+k),l:[contentText(lt)]};}
 {const _tr=tlResult;tlResult=function(cach){const r=G.run;const res=_tr.apply(this,arguments);if(!r||G.run!==r||r.tlFx||!r.root||!TL_FXL[r.root.id])return res;
-  r.tlFx={k:r.root.id,id:Date.now()+Math.floor(Math.random()*1e3),cach,lt:1,els:(r.root.els||[]).slice()};dbg('tl.fxLight',{k:r.root.id});return res;};}
+  r.tlFx={k:r.root.id,id:Date.now()+Math.floor(Math.random()*1e3),cach,lt:1,els:(r.root.els||[]).slice()};dbg('tl.fxLight',{k:r.root.id,rk:TL_FXL[r.root.id].rk});return res;};}

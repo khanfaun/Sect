@@ -61,10 +61,10 @@ for(const id in TP_ORIGIN){const o=ORIGIN.find(x=>x.id===id);if(o)o.d+=contentTe
 {const _adv21=advanceTime;advanceTime=function(h){const o=_adv21(h);const r=G.run;if(!r||!r.pham||!(h>0)||isVo(r))return o; // vô căn: không có tâm pháp bảo đảm (Đ2.3)
  if(hasTp()){r.tpAcc=0;return o;}
   r.tpAcc=(r.tpAcc||0)+h;const y=r.age-r.birthAge;const free=()=>!r.scene&&G.screen==='map';
-  if(y>=TP_Y-0.5&&free()){kyStart(tpGuarPick());r.tpAcc=0;return o;}
+  if(y>=TP_Y-0.5&&free()&&!kyHoanNow()){kyStart(tpGuarPick());r.tpAcc=0;return o;}
   while(r.tpAcc>=HM&&G.run&&!hasTp()){r.tpAcc-=HM;
     if(S().ngo>=14&&chance(.03)){const a=tpLearn(0,{n:contentText("core2_10-pham-nhan-chua-dan_js.027"),el:pick(r.root.els.filter(e=>EL[e]))||'vo',src:contentText("core2_10-pham-nhan-chua-dan_js.028")});tpPop(a,contentText("core2_10-pham-nhan-chua-dan_js.029"),contentText("core2_10-pham-nhan-chua-dan_js.030"));break;}
-    if(y>=1&&free()&&chance(.04+.03*y)){const candidate=KYNGO.find(x=>x.id==='tp_ansi');if(!candidate.content||contentTriggerOk(candidate.content))kyStart(candidate);break;}}
+    if(y>=1&&free()&&chance(.04+.03*y)){const candidate=KYNGO.find(x=>x.id==='tp_ansi');if(!candidate.content||contentTriggerOk(candidate.content))kyNgau(candidate);break;}}
   if(G.run&&!hasTp()&&y>=TP_Y){const v=tpGuarPick();const a=tpGuarLearn(v);tpPop(a,v.n,v.pop);}
   return o;};}
 function tpPop(a,title,text){note(text+contentText("core2_10-pham-nhan-chua-dan_js.tpPop.031")+a.n+'.','up');G.qpop=G.qpop||[];G.qpop.push({kind:'done',text:a.n,grade:a.tier+1,ch:[tpChip(a)],title});}

@@ -29,6 +29,17 @@
       "description": "NG01: chuanBi, xong, hong · NG02: chuanBi, xong · NG03: chuanBi, xong, hong · NG04: xong, hong"},
     {"title": "khao — content/dai-mong/khao/LOCxx.json", "type": "object", "additionalProperties": false, "required": ["schemaVersion", "loai", "loc", "muc"],
       "properties": {"schemaVersion": {"const": 1}, "loai": {"const": "khao"}, "loc": {"enum": ["LOC05","LOC06","LOC07","LOC09","LOC12","LOC15"]},
-        "muc": {"type": "object", "additionalProperties": {"$ref": "#/$defs/doan"}, "description": "mã việc (DM_VIEC) → đoạn kể (150–700)"}}}
+        "muc": {"type": "object", "additionalProperties": {"$ref": "#/$defs/doan"}, "description": "mã việc (DM_VIEC) → đoạn kể (150–700)"}}},
+    {"title": "hau_qua — content/dai-mong/hau-qua/ENDxx.json (hậu quả thế giới của kết theo đời; đời sau mới thấy)", "type": "object", "additionalProperties": false, "required": ["schemaVersion", "loai", "ma", "tin_don", "dia_diem", "su_luoc", "muon"],
+      "properties": {"schemaVersion": {"const": 1}, "loai": {"const": "hau_qua"}, "ma": {"enum": ["END02","END03","END06"]},
+        "tin_don": {"type": "array", "minItems": 4, "maxItems": 10, "items": {"type": "string"}, "description": "tin đồn ở quán trà / tin tức các đời sau (40–300)"},
+        "dia_diem": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "object", "additionalProperties": false, "required": ["loc", "t"], "properties": {"loc": {"type": "string", "pattern": "^\\{LOC\\d\\d\\}$"}, "t": {"type": "string"}}}, "description": "tả nơi đổi thay, hiện ở thẻ địa điểm"},
+        "su_luoc": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "string"}, "description": "dòng Sử lược (ghi lúc kết)"},
+        "muon": {"type": "string", "description": "hồi ức hiện ở màn hết kiếp của đời sau (một lần)"}}},
+    {"title": "ky_ngo — content/dai-mong/ky-ngo/Ax.json (A1 khi tĩnh tọa ngoài hoang; A2 khi đã có Mộng Ấn, ở bến sông)", "type": "object", "additionalProperties": false, "required": ["schemaVersion", "loai", "ma", "ten", "text", "choices"],
+      "properties": {"schemaVersion": {"const": 1}, "loai": {"const": "ky_ngo"}, "ma": {"enum": ["A1","A2"]}, "ten": {"type": "string"},
+        "text": {"$ref": "#/$defs/mang", "minItems": 2, "maxItems": 3},
+        "choices": {"type": "array", "minItems": 2, "maxItems": 3, "items": {"type": "object", "additionalProperties": false, "required": ["l", "t"], "properties": {"l": {"type": "string"}, "t": {"type": "string"}}}, "description": "hiệu ứng gắn trong luật (DM_KY, content/rules/dai-mong.js)"},
+        "bien": {"type": "array", "maxItems": 4, "description": "bản kể khác (game chọn ngẫu nhiên mỗi lần gặp): đoạn mở đầu khác, cùng các lựa chọn gốc, t viết lại theo thứ tự lựa chọn", "items": {"type": "object", "additionalProperties": false, "required": ["text", "t"], "properties": {"text": {"$ref": "#/$defs/mang", "minItems": 2, "maxItems": 3}, "t": {"type": "array", "minItems": 2, "maxItems": 3, "items": {"type": "string"}}}}}}}
   ]
 }

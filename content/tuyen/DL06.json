@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "DL06",
   "loai": "dai_lo",
-  "ten": "Võ Lâm Chí Tôn",
+  "ten": "Đứng đầu võ lâm",
   "daiLo": "vo_lam",
   "nut": [
     {
@@ -18,12 +18,12 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Người muốn tập ở {LOC11} để vũ khí ngoài sân cho thợ còn làm việc. Họ hỏi có thể học để hộ tống khách đường mà không phải ghi tên theo một phe hay không.",
+      "mo": "Ở {LOC11}, người coi sân chỉ vào mấy thanh kiếm gỗ đang dựa cạnh bảng công. Thợ tan ca, người muốn tập mới dám bước vào sân. Có người hỏi học hộ tống rồi có phải theo người dạy suốt đời không. Ngươi phải định cách mở sân.",
       "boQuaNeuXuatThan": true,
       "cach": [
         {
           "id": "cach_1",
-          "l": "Xin mở sân theo lượt tự chọn",
+          "l": "Mở sân cho người học tự chọn buổi",
           "t": "Ngươi hỏi từng người vì sao muốn tập và để họ tự chọn ngày đến.",
           "dau": [
             "moc_1_1"
@@ -31,7 +31,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Tra nơi cần người bảo vệ đường",
+          "l": "Ghi những đường cần người hộ tống",
           "t": "Ngươi giữ bản kê các lối có người đi một mình và ngày họ cần hộ tống.",
           "dau": [
             "moc_1_2"
@@ -39,7 +39,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Giữ giờ làm cho người học",
+          "l": "Xếp giờ tập sau buổi làm",
           "t": "Ngươi đặt lịch sau buổi công để người học không phải bỏ thẻ việc.",
           "dau": [
             "moc_1_3"
@@ -67,12 +67,12 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Đội từ {LOC13} muốn gửi người tới tập ở {LOC11}. Một người không có bạc cũng xin vào, nhưng sợ phải mang nợ với người dạy. Thợ muốn người học chịu trách nhiệm khi nhận hộ tống.",
+      "mo": "Một người từ {LOC13} đặt túi rỗng lên ghế sân {LOC11}, xin học bằng công thay học phí. Người của đội giữ ải ngồi cạnh, mang theo giấy bảo trợ. Ngươi có thể nhận học trò tự do, nhận môn đồ theo giấy hoặc lập đội đi từng chuyến.",
       "khacVoi": "OR08.N5 giao lưỡi cuốc và truyền nghề rèn; hồi này xây lệ nhận người học võ và trách nhiệm hộ tống.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Nhận học trò mà không bắt họ mắc nợ",
+          "l": "Nhận học trò, cho góp công tùy sức",
           "t": "Ngươi để người học tự nhận buổi và góp công theo sức, có quyền thôi.",
           "dau": [
             "moc_2_1"
@@ -80,7 +80,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Gom môn đồ theo danh bảo trợ",
+          "l": "Nhận môn đồ theo giấy bảo trợ",
           "t": "Ngươi nhận người từ một đầu góp lương, ghi ai phải đáp lại lời gọi sau này.",
           "dau": [
             "moc_2_2"
@@ -88,7 +88,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Lập đội hộ tống theo từng chuyến",
+          "l": "Tuyển người hộ tống theo từng chuyến",
           "t": "Ngươi ký chỗ theo chuyến với người đi đường, không lấy tên cả đời làm bảo đảm.",
           "dau": [
             "moc_2_3"
@@ -116,13 +116,13 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Bảng so tài ở {LOC13} đang ghi tên võ sinh từ nhiều nơi. Có người đủ sức dự nhưng không dám lấy tiền ăn của nhà nộp phí. Người coi bảng chờ định lại lệ.",
+      "mo": "Ở {LOC13}, một võ sinh đếm tiền ăn ngay trước bảng ghi tên rồi lặng lẽ cất đi. {NP26} đặt bút xuống, đợi ngươi nói có để người thiếu phí dự thử hay đưa đội của mình đi nhận chuyến ngoài sân.",
       "khacVoi": "OR21.N4 chọn cách giữ ký ức trên bia; hồi này đặt lệ đối tài để người vô danh được quyền học và dự.",
       "clk": "CLK07",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Mở lần thử công khai và cho quyền rút lui",
+          "l": "Mở lượt thi và cho võ sinh tự rút",
           "t": "Ngươi xin người coi ghi cả lượt xin rút và giữ suất dự cho người thiếu phí.",
           "dau": [
             "moc_3_1"
@@ -136,7 +136,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Đưa môn đồ lên theo giấy bảo trợ",
+          "l": "Đưa môn đồ được bảo trợ vào thi",
           "t": "Ngươi gọi nhóm đã nhận lương dự thử để lấy danh chung cho người trả công.",
           "dau": [
             "moc_3_2"
@@ -149,7 +149,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Dẫn đội bảo vệ đường ngoài sân",
+          "l": "Nhận chuyến hộ tống ngoài võ đài",
           "t": "Ngươi cùng người đi đường hoàn tất chuyến hộ tống đã nhận và đối lời tại bến.",
           "dau": [
             "moc_3_3"
@@ -177,12 +177,12 @@
         "cach": "tin",
         "noi": "LOC11"
       },
-      "mo": "Ở {LOC11}, một học trò xin giữ đèn sân khi ngươi đi. Người bảo trợ mang phần thưởng tới, còn khách đường muốn thuê người hộ tống mà không phải theo phe nào.",
+      "mo": "Ở sân {LOC11}, một học trò châm đèn rồi hỏi có thể đứng lớp khi ngươi đi không. Trên ghế, người bảo trợ đã đặt phần thưởng. Ngoài cổng, khách hỏi giá một chuyến hộ tống. Cả ba chờ ngươi trả lời.",
       "khacVoi": "OR19.N5 đặt ca và giá cho hầm than; hồi này phân quyền dạy và nghĩa vụ của môn đồ ngoài chỗ làm.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Để học trò thử đứng ra dạy",
+          "l": "Cho học trò đứng dạy thử",
           "t": "Ngươi để họ tự nhận một lượt và cho người mới thử đứng rồi tự rời.",
           "dau": [
             "moc_4_1"
@@ -196,7 +196,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ môn đồ bằng phần thưởng",
+          "l": "Đổi phần thưởng lấy quyền gọi môn đồ",
           "t": "Ngươi giao danh thưởng cho người bảo trợ để họ đổi lại quyền gọi môn đồ.",
           "dau": [
             "moc_4_2"
@@ -209,7 +209,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Duy trì đội hộ tống rời võ đài",
+          "l": "Rời võ đài, giữ đội hộ tống",
           "t": "Ngươi trả bảng dự, giữ người nhận chuyến và nơi nghe phàn nàn của họ.",
           "dau": [
             "moc_4_3"
@@ -237,13 +237,13 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Lương ở {LOC13} sắp bị cắt. Người bảo trợ chịu mở kho nếu được quyền gọi môn đồ. Học trò mới và khách đợi hộ tống đều chờ xem ngươi nhận điều kiện gì.",
+      "mo": "Người coi kho ở {LOC13} rút then ra một nửa rồi dừng. Người bảo trợ chịu phát lương nếu từ nay được gọi môn đồ. Học trò và khách đường đứng chung dưới mái, chờ xem ngươi sẽ giao chìa cho ai.",
       "khacVoi": "OR35.N5 phân quyền khai thác và bồi vụ sập; hồi này thử quyền truyền nghề và bảo vệ người đi đường trước sức ép quân lương.",
       "clk": "CLK03",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Trao đèn cùng phần lương mở",
+          "l": "Giao sân và lương cho người học tự lo",
           "t": "Ngươi để người học giữ lượt cấp có người kiểm, rồi để họ tự nhận buổi sau.",
           "dau": [
             "moc_5_1"
@@ -262,7 +262,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Nhận lương và giao quyền gọi môn đồ",
+          "l": "Đổi lương lấy quyền gọi môn đồ",
           "t": "Ngươi mở kho của người bảo trợ và để họ gọi người theo danh đã giao.",
           "dau": [
             "moc_5_2"
@@ -275,7 +275,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Giữ nghề hộ tống theo từng chuyến",
+          "l": "Giữ đội hộ tống theo từng chuyến",
           "t": "Ngươi giữ giấy nhận chuyến đã đối, chia công rồi cho đội tự rời trước lượt mới.",
           "dau": [
             "moc_5_3"
@@ -288,7 +288,7 @@
         },
         {
           "id": "cach_4",
-          "l": "Chia chỗ nghỉ cho khách đường",
+          "l": "Dành mái sân cho khách lỡ đường",
           "t": "Ngươi cho người đợi dùng mái sân, lấy phần đội tự góp để giữ qua đêm.",
           "dau": [
             "moc_5_4"

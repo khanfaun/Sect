@@ -5,3 +5,5 @@ Object.assign(ACT,{benUong:()=>{benUong();saveSoon();},benDoi:()=>{benDoi();save
 // hành trình đã khép (END04/05/07/08): không đầu thai tiếp trong hồ sơ này, chỉ Tân Mộng
 {const _b=ACT.birth;ACT.birth=function(){if(G.meta&&G.meta.ketHet){G.screen='ket';return;}return _b.apply(this,arguments);};}
 KEEP_CONFIRM.tanMong=1;
+// câu 86: khép hành trình xong thì về màn mở đầu (không Tân Mộng); màn mở đầu báo "Linh giới đang trong quá trình phát triển"
+ACT.ketVe=()=>{UI.confirm=null;UI.panel=null;UI.modal=null;G.screen='title';dbg('dm.ketVe',{});saveSoon();};

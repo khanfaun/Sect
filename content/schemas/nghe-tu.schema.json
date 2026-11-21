@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phu-sinh/nghe-tu.schema.json",
+  "title": "Sự kiện và kết cục nghề tu mở rộng (content/nghe-tu/TUxx.json)",
+  "description": "12 sự kiện S01…S12 (hiện theo tầng nghề / cảnh giới ở TU_SK) và 4 kết cục K01…K04 (điều kiện ở TU_KET, content/rules/nghe-tu-mo-rong.js). Kiểm thật bằng tools/kiem-tra-nghe-tu.js (npm run content:nghe): mã nơi/người/thế lực có thật, không con số, hiệu ứng nhỏ. Chỗ thay được: {NPxx}, {NPxx.vai}, {NPxx.noi}, {LOCxx}, {FAxx}.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "loai", "nghe", "ten", "su_kien", "ket_cuc"],
+  "$defs": {
+    "doan": {"type": "string", "minLength": 40},
+    "hieuUng": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "description": "hiệu ứng nhỏ của lựa chọn (Claude gắn)",
+      "properties": {
+        "tv": {"type": "number", "minimum": -10, "maximum": 10, "description": "tu vi"},
+        "hp": {"type": "string", "pattern": "^-?\\d{1,2}%$", "description": "khí huyết, phần trăm tối đa"},
+        "mp": {"type": "string", "pattern": "^-?\\d{1,2}%$", "description": "linh lực, phần trăm tối đa"},
+        "st": {"oneOf": [{"type": "integer", "minimum": -10, "maximum": 10}, {"type": "string", "pattern": "^-\\d{1,3}%$"}], "description": "linh thạch (số nhân theo bậc vùng) hoặc mất một phần"},
+        "tamma": {"type": "integer", "minimum": -10, "maximum": 10, "description": "tâm ma"},
+        "hd": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 0, "maximum": 8}, "description": "Hành Đạo [chính, tà]; Nho tu một quyết định tà từ 5 làm văn tâm nứt"},
+        "deed": {"type": "string", "description": "mã hành vi ở content/rules/deed.js"},
+        "danh": {"type": "integer", "minimum": -10, "maximum": 10, "description": "danh tiếng với dân vùng đang đứng"},
+        "res": {"type": "integer", "minimum": -5, "maximum": 5, "description": "tài nguyên nghề (cổ trùng, nguyện lực, …)"},
+        "xp": {"type": "number", "minimum": 0, "maximum": 10, "description": "tiến bộ nghề"},
+        "wound": {"type": "string", "description": "mã thương ở content/rules/wound.js"},
+        "tho": {"type": "number", "minimum": 0, "maximum": 2, "description": "năm thọ mất (Thiên cơ; tính cả thiên khiển khi dùng nhiều)"},
+        "khien": {"const": 1, "description": "bị thiên khiển (thần thức tổn thương, được đếm cho kết cục)"}
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "loai": {"const": "nghe_tu"},
+    "nghe": {"enum": ["TU17", "TU18", "TU19", "TU20", "TU21", "TU22"]},
+    "ten": {"type": "string"},
+    "su_kien": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"type": "object", "additionalProperties": false, "required": ["ma", "ten", "text", "choices"],
+      "properties": {"ma": {"type": "string", "pattern": "^S\\d\\d$"}, "ten": {"type": "string"},
+        "text": {"type": "array", "minItems": 2, "maxItems": 3, "items": {"$ref": "#/$defs/doan"}},
+        "choices": {"type": "array", "minItems": 2, "maxItems": 3, "items": {"type": "object", "additionalProperties": false, "required": ["l", "t", "e"],
+          "properties": {"l": {"type": "string"}, "t": {"type": "string"}, "e": {"$ref": "#/$defs/hieuUng"}}}}}}},
+    "ket_cuc": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "object", "additionalProperties": false, "required": ["ma", "ten", "canh"],
+      "properties": {"ma": {"enum": ["K01", "K02", "K03", "K04"]}, "ten": {"type": "string"}, "canh": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/doan"}}}}}
+  }
+}

@@ -130,7 +130,7 @@ const TESTS = {
   },
   // thẻ địa điểm nổi gần icon: có nút đi tới kèm thời gian, nằm trong vùng nhìn thấy; chạm đại khu vực khi thu nhỏ hết cỡ
   async thenoi(p) {
-    await ev(p, () => { Map2.locate(); const n = regionOf(G.run.region).nodes.find(x => x.id !== G.run.at && x.type === 'tran'); n.fog = 2; geo().nodeAt = null; const q = nodeById(n.id); Map2.focus(q.x, q.y); mapHold(q, nodeHex(q), [q.x, q.y]); });
+    await ev(p, () => { Map2.locate(); CFG.confirmDanger = false; const n = regionOf(G.run.region).nodes.find(x => x.id !== G.run.at && x.type === 'tran' && x.fog !== undefined && findPath(G.run.at, x.id)) || regionOf(G.run.region).nodes.find(x => x.id !== G.run.at && findPath(G.run.at, x.id)); window.__tnId = n.id; n.fog = 2; geo().nodeAt = null; const q = nodeById(n.id); Map2.focus(q.x, q.y); mapHold(q, nodeHex(q), [q.x, q.y]); });
     await p.waitForTimeout(700);
     const r = await ev(p, () => { const e = document.querySelector('#dock .np'); if (!e) return null; const b = e.getBoundingClientRect(); return { vis: getComputedStyle(e).visibility, l: b.left, t: b.top, r: b.right, b: b.bottom, go: (e.querySelector('.np-k:last-of-type') || {}).textContent, dg: !!e.querySelector('.np-dg'), W: innerWidth, H: innerHeight, txt: e.innerText }; });
     ok(!!r && r.vis === 'visible', 'thẻ địa điểm nổi hiện ra');
@@ -138,7 +138,7 @@ const TESTS = {
     ok(r && /Đường đi/.test(r.go || ''), 'giữ chuột: thẻ có thời gian đường đi: ' + (r && r.go));
     ok(r && r.dg && !/Linh khí|dặm|Quy mô/.test(r.txt), 'có cụm an toàn/nguy hiểm, bỏ linh khí, dặm, quy mô');
     // thả tay: đánh dấu tuyến; chạm lại đúng chỗ: lên đường
-    const mk = await ev(p, () => { const n = regionOf(G.run.region).nodes.find(x => x.id !== G.run.at && x.type === 'tran'); const q = nodeById(n.id); mapHoldEnd(); const c = nodeHex(q); mapTap(q, c, [q.x, q.y], 0.6); const a = !!UI.mark; mapTap(q, c, [q.x, q.y], 0.6); return [a, !!G.run.moving, !UI.mark]; });
+    const mk = await ev(p, () => { const q = nodeById(window.__tnId); G.run.scene = null; G.run.moving = null; UI.mark = null; mapHoldEnd(); const c = nodeHex(q); mapTap(q, c, [q.x, q.y], 0.6); const a = !!UI.mark; UI.anOk = 1; mapTap(q, c, [q.x, q.y], 0.6); return [a, !!G.run.moving, !UI.mark, !!G.run.scene, UI.modal && UI.modal.k, G.run.pham, q.fog, q.id, G.run.at, !!findPath(G.run.at,q.id)]; });
     ok(mk[0] && mk[1] && mk[2], 'chạm đánh dấu tuyến, chạm lại thì lên đường ' + JSON.stringify(mk));
     await ev(p, () => { G.run.moving = null; G.run.dest = null; UI.sel = null; Map2.zoomOutAll(); const c = hexAt(WORLD_W / 2, WORLD_H / 2); mapTap(null, c, [WORLD_W / 2, WORLD_H / 2], Map2.zf); });
     await p.waitForTimeout(600);
@@ -347,6 +347,22 @@ const TESTS = {
     ok(await ev(p, () => !!document.querySelector('.tures')) && /Kiếm ý/.test(await ev(p, () => (document.querySelector('.tures')||{}).innerText||'')), 'trong trận có thanh Kiếm ý');
     await ev(p, () => {G.run.scene=null;UI.modal=null;render();});
   },
+  // Đ11: nghề tu mở rộng — Phật tu ở Lạn Kha Tự, bí truyền Luân Hồi Chuyển Thế Kinh, thanh Nguyện lực
+  async nghe_tu_mr(p) {
+    await ev(p, () => {const r=G.run;r.pham=0;r.root={id:'tap',els:['kim','moc'],q:'thuong'};r.rootKnown=1;r.st=999;r.scene=null;UI.modal=null;UI.panel=null;r.tu={chinh:null,phu:null,k:{}};
+      r.arts=(r.arts||[]).filter(a=>!a.tu);const id=mrLocNode('LOC12');r.at=id;openPlace(id);ACT.pact('tumon');render();});
+    await p.waitForTimeout(150);
+    ok(/Bát Nhã Tâm Kinh/.test(await ev(p, () => (document.querySelector('.venue')||{}).innerText||'')), 'hộp Pháp môn ở Lạn Kha Tự có Bát Nhã Tâm Kinh');
+    await ev(p, () => {window._lk=lkTang;lkTang=()=>1;ACT.vgo('tumon:hoc:TU19');lkTang=window._lk;G.run.tu.k.TU19.tang=4;tuArtOf('TU19').lv=7;openPlace(G.run.at);ACT.pact('tumon');render();});
+    await p.waitForTimeout(150);
+    ok(/Luân Hồi Chuyển Thế Kinh/.test(await ev(p, () => (document.querySelector('.venue')||{}).innerText||'')), 'Phật tu tầng bốn: thấy bí truyền Luân Hồi Chuyển Thế Kinh');
+    await ev(p, () => {G.run.scene=null;UI.modal=null;UI.panel='char';UI.tab.char='dao';render();});await p.waitForTimeout(150);
+    ok(/Phật tu/.test(await ev(p, () => document.body.innerText)), 'Đạo đồ có nghề Phật tu');
+    await ev(p, () => {UI.panel=null;UI.modal=null;G.run.tuRes={TU19:2};openPlace(G.run.at);startCombat({cnt:1},{kind:'node'});CFG.autoFight=0;render();});
+    await p.waitForTimeout(400); await p.click('[data-act="cbGo"]'); await p.waitForSelector('.cb-ally', { timeout: 8000 }).catch(() => {});
+    ok(/Nguyện lực/.test(await ev(p, () => (document.querySelector('.tures')||{}).innerText||'')), 'trong trận có thanh Nguyện lực');
+    await ev(p, () => {G.run.scene=null;UI.modal=null;render();});
+  },
   async cai_can(p) {
     await ev(p, () => {const r=G.run;r.pham=1;r.root={id:'vo',els:[],q:null};r.rootKnown=1;r.bac=50000;r.scene=null;UI.modal=null;UI.panel=null;
       const id=ccSrc('CC01').node;r.at=id;openPlace(id);render();});
@@ -511,6 +527,24 @@ const TESTS = {
     ok(await p.locator('[data-act="pact"][data-arg="sanbat"]').count()===1, 'hoang dã có nút săn bắt, hái lượm');
     ok(p.errs.length===0, 'không có lỗi trang: '+p.errs.join(' | '));
   },
+  // dị tượng trắc linh theo thứ bậc: Thiên > Địa > Biến dị > Song > Tam > Tứ > Tạp
+  async tlfx_bac(p) {
+    ok(await ev(p, () => TL_FX.thien.ms>TL_FX.dia.ms&&TL_FX.dia.ms>TL_FXL.bien.ms), 'Thiên > Địa > Biến dị (thời gian)');
+    const order=['bien','song','tam','tu','tap'];const info={};
+    for(const k of order){
+      await ev(p, (k) => {CFG.anim=true;const r=G.run;r.scene=null;UI.modal=null;r.tlFx=null;r.root={id:k,els:k==='bien'?['loi']:k==='song'?['kim','moc']:k==='tam'?['kim','moc','thuy']:k==='tu'?['kim','moc','thuy','hoa']:NGUHANH.slice(),q:'thuong'};r.rootKnown=0;tlResult('dusi');render();}, k);
+      await p.waitForTimeout(150);
+      info[k]=await ev(p, (k) => {const d=document.querySelector('.tlfx.tlfx-lt.tlfx-'+k);return d?{rk:+d.dataset.rk,rays:d.querySelectorAll('.lt-rays i').length,rings:d.querySelectorAll('.lt-ring').length,orbs:d.querySelectorAll('.lt-orbit i').length,ms:TL_FXL[k].ms,beam:d.querySelectorAll('.lt-beam,.lt-flash').length,txt:d.innerText,de:document.documentElement.dataset.tlfx}:null;}, k);
+      ok(!!info[k]&&info[k].de===k, 'hiện dị tượng '+k);
+      await ev(p, () => {ACT.tlFxDone();render();});
+    }
+    ok(order.every((k,i)=>!i||(info[order[i-1]].rk>info[k].rk&&info[order[i-1]].ms>info[k].ms)), 'bậc và thời gian giảm dần Biến dị→Tạp');
+    ok(order.every((k,i)=>!i||info[order[i-1]].rays>=info[k].rays&&info[order[i-1]].rings>=info[k].rings), 'tia sáng, vòng sáng không tăng khi bậc giảm');
+    ok(info.bien.beam===2&&info.bien.rays>info.song.rays&&info.bien.orbs>=6&&/Biến dị linh căn/.test(info.bien.txt)&&/điện/.test(info.bien.txt), 'Biến dị (lôi): cột sáng + chớp, nhiều tia nhất, lời kể riêng');
+    ok(/Ngũ hành tạp linh căn/.test(info.tap.txt)&&info.tap.rays===0, 'Tạp: yếu nhất, không có tia');
+    ok(await ev(p, () => !document.querySelector('.tlfx')&&!G.run.tlFx), 'đóng hết hiệu ứng');
+    ok(p.errs.length===0, 'không có lỗi trang: '+p.errs.join(' | '));
+  },
   // Sửa-D: chú thích nằm sát chỗ rê/bấm ở cỡ máy tính (trước đây lệch vì #tip bị zoom --dz mà left/top không chia lại)
   async tooltip_vitri(p) {
     for (const [w, h] of [[1440, 900], [1920, 1080], [1280, 720]]) {
@@ -573,7 +607,7 @@ const TESTS = {
     await p.locator('[data-act="pact"][data-arg="datdai"]').click();
     await p.waitForTimeout(150);
     const opts = await p.locator('[data-act="vopt"]').allInnerTexts();
-    ok(opts.length === 3 && opts.every(x => /phá/.test(x)), 'mục Đất đai liệt kê ba ô để phá ' + JSON.stringify(opts));
+    ok(opts.filter(x => /phá/.test(x)).length === 3 && opts.filter(x => /· mua /.test(x)).length === 3 && /phá/.test(opts[0]), 'mục Đất đai liệt kê ba ô để phá (mua ô có công trình xếp sau) ' + JSON.stringify(opts));
     await p.locator('[data-act="vopt"][data-arg="pha:0"]').click();
     await p.waitForTimeout(150);
     const md = await ev(p, () => (document.querySelector('.mbox')||{}).innerText||'');
@@ -596,6 +630,15 @@ const TESTS = {
     await p.waitForTimeout(200);
     ok(await ev(p, () => DH.dp===1 && W().dat[DH.id].o.some(c=>c.ct==='dong_phu'&&c.chu&&c.chu.k==='ta')), 'dựng được động phủ, ô thành của ngươi');
     ok(await ev(p, () => NK.count('dat') > 0), 'có nhật ký dat.*');
+    // câu 80: mua đất trống của dân ở trấn rồi mới dựng nhà riêng
+    await ev(p, () => {const r=G.run;r.scene=null;r.bac=1e6;r.tna={};r.at=DT.id;r.region=DT.r;openPlace(DT.id);render();});
+    await p.waitForTimeout(150);
+    await p.locator('[data-act="pact"][data-arg="datdai"]').click();await p.waitForTimeout(150);
+    ok(await p.locator('[data-act="vopt"][data-arg="mua:0"]').count() === 1, 'ô trống của dân: có lựa chọn mua đất');
+    await p.locator('[data-act="vopt"][data-arg="mua:0"]').click();await p.waitForTimeout(150);
+    ok(/Giá/.test(await ev(p, () => (document.querySelector('.mbox')||{}).innerText||'')), 'hộp xác nhận ghi giá đất');
+    await p.locator('[data-act="vgo"]').click();await p.waitForTimeout(200);
+    ok(await ev(p, () => W().dat[DT.id].o[0].chu.k === 'ta' && datOpts(DT).some(o => o.id === 'xay:0:nha_rieng' && !o.no)), 'mua xong: ô của ngươi, dựng được nhà riêng');
     await ev(p, () => {TNA.chung.tran=0.5;G.run.scene=null;render();});
     ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
   },
@@ -628,8 +671,13 @@ const TESTS = {
     await ev(p, () => {genBirth();newRun(G.birth.cards[0]);G.run.scene=null;dmKetHet('END07');render();});await settle();
     const kt = await ev(p, () => document.body.innerText);
     ok(/Người chặt vòng/.test(kt) && /Nước thôi chảy ngược/.test(kt), 'màn kết: tên kết + câu kết');
-    await p.locator('[data-act="tanMong"]').click();await settle();ok(/Bấm lần nữa/i.test(await ev(p, () => document.body.innerText)), 'Tân Mộng hỏi lại trước khi xoá hồ sơ');await p.locator('[data-act="tanMong"]').click();await settle();
-    ok(await ev(p, () => G.screen==='title' && G.meta.daTinh===1 && !G.meta.ketHet), 'Tân Mộng: hồ sơ mới, giữ dấu đã tỉnh');
+    ok(/Phàm giới/.test(kt) && !(await p.$('[data-act="tanMong"]')), 'màn kết: nhắc Phàm giới, không còn nút Tân Mộng (câu 86)');
+    await p.locator('[data-act="ketVe"]').click();await settle();const tt = await ev(p, () => document.body.innerText);
+    ok(await ev(p, () => G.screen==='title' && !!G.meta.ketHet) && /Linh giới đang trong quá trình phát triển/.test(tt) && /Phàm giới đã khép/.test(tt), 'về màn mở đầu: báo Linh giới đang phát triển, giữ hồ sơ');
+    ok(!(await p.$('[data-act="birth"]')) && !!(await p.$('[data-act="screen"][data-arg="ket"]')), 'màn mở đầu: không luân hồi tiếp, xem lại được màn kết');
+    // câu 88: hồi ức đời sau ở màn hết kiếp
+    await ev(p, () => {G.meta.ketHet=null;genBirth();newRun(G.birth.cards[0]);G.run.scene=null;G.run.gbXong=1;dmM().ends.push({id:'END06',kiep:1,ten:'x',y:1});G.run.kiep=5;delete (G.meta.hqMuon||{}).END06;die('combat',{n:'x'});render();});await settle();
+    ok(/Chuyện kể của đời sau/.test(await ev(p, () => document.body.innerText)), 'màn hết kiếp đời sau: hồi ức của kết truyền nghề');
     ok(p.errs.length === 0, 'không lỗi JavaScript ' + p.errs.slice(0, 2).join(' | '));
   },
   async truy_na(p) {
@@ -643,20 +691,20 @@ const TESTS = {
     await p.waitForTimeout(150);
     ok(await ev(p, () => G.run.scene&&G.run.scene.ev==='tna_chung'), 'nhân chứng: mở hộp lựa chọn');
     const kt = await ev(p, () => document.body.innerText);
-    ok(/Diệt khẩu/.test(kt) && /Mặc kệ/.test(kt), 'hộp nhân chứng hiện các lựa chọn');
+    ok(/Giết nhân chứng/.test(kt) && /Để hắn đi/.test(kt), 'hộp nhân chứng hiện các lựa chọn');
     await ev(p, () => {kyPick(3);G.run.scene=null;Object.assign(TNA,JSON.parse(TNA_UB));G.run.truy=null;openPlace(TN.id);render();});
     await p.waitForTimeout(150);
     ok(await ev(p, () => !!document.querySelector('[data-act="pact"][data-arg="quanphu"]')), 'hộp địa điểm có nút Quan phủ');
     await p.locator('[data-act="pact"][data-arg="quanphu"]').click();
     await p.waitForTimeout(150);
     const opts = await p.locator('[data-act="vopt"]').allInnerTexts();
-    ok(opts.length >= 3 && opts.some(x => /Nộp phạt/.test(x)) && opts.some(x => /Ngồi tù/.test(x)), 'mục Quan phủ: nộp phạt, làm công, ngồi tù ' + JSON.stringify(opts));
-    await ev(p, () => {G.run.bac=G.run.tna[TN.r].tien+1;render();});
+    ok(opts.length >= 3 && opts.some(x => /Nộp .*tiền phạt/.test(x)) && opts.some(x => /Làm công/.test(x)) && opts.some(x => /Chịu giam/.test(x)), 'mục Quan phủ: nộp phạt, làm công, ngồi tù ' + JSON.stringify(opts));
+    await ev(p, () => {G.run.bac=tnaE(TN.r).tien+1;render();});
     await p.locator('[data-act="vopt"][data-arg="nop"]').click();
     await p.waitForTimeout(150);
     await p.locator('[data-act="vgo"]').click();
     await p.waitForTimeout(200);
-    ok(await ev(p, () => !G.run.tna[TN.r] && !document.querySelector('.wi.na')), 'nộp phạt xong: hết truy nã, mất biểu tượng');
+    ok(await ev(p, () => !tnaE(TN.r) && !document.querySelector('.wi.na')), 'nộp phạt xong: hết truy nã, mất biểu tượng');
     await ev(p, () => {G.run.scene=null;render();});
     ok(p.errs.length===0, 'không lỗi JavaScript ' + p.errs.join(' '));
   },
@@ -688,6 +736,22 @@ const TESTS = {
   async nhatky(p) {
     ok(await ev(p, () => NK.on === true), 'nhật ký bật nhờ ?debug=1');
     ok(await ev(p, () => NK.buf.length > 0 || (dbg('thu', {}), NK.buf.length > 0)), 'nhật ký có dòng');
+  },
+  // gói GPT đợt năm: sự kiện nghề tu hiện bằng khung kỳ ngộ; kết cục nghề tu ở màn hết kiếp
+  async nghe_tu_sk(p) {
+    await ev(p, () => {const r=G.run;r.pham=0;r.rootKnown=1;r.root={id:'tap',els:['kim','moc'],q:'thuong'};r.st=9999;r.scene=null;G._ngNoEv=1;lkTang=()=>9;UI.modal=null;UI.panel=null;
+      tuHoc('TU17',0);r.scene=null;G.screen='map';ntMo('TU17',0);render();});
+    await p.waitForTimeout(200);
+    const t = await ev(p, () => document.body.innerText);
+    ok(/Vò cổ đầu/.test(t) && !/\{LOC/.test(t), 'hộp sự kiện nghề "Vò cổ đầu" hiện, mã nơi đã thay chữ');
+    ok(await ev(p, () => document.querySelectorAll('[data-act="kyPick"]').length) === 2, 'hai lựa chọn');
+    await p.locator('[data-act="kyPick"][data-arg="0"]').click();await p.waitForTimeout(150);
+    ok(await ev(p, () => G.run.ntu.c['TU17.S01']===0 && document.body.innerText.includes(tyT(NTU_DATA.TU17.sk[0].c[0].t).slice(0,30))), 'chọn xong: lời kết quả hiện');
+    await ev(p, () => {const r=G.run;r.scene=null;hdAdd(40,0,'x');r.ntu.c={'TU17.S01':0,'TU17.S02':0,'TU17.S03':0};r.gbXong=1;die('toahoa');render();});
+    for (let i = 0; i < 40 && await ev(p, () => UI.inkBusy); i++) await p.waitForTimeout(100);
+    await p.waitForTimeout(300);
+    const o = await ev(p, () => document.body.innerText), ten = await ev(p, () => NTU_DATA.TU17.ket.K03.ten);
+    ok(/Kết cục nghề tu/.test(o) && o.includes(ten), 'màn hết kiếp: kết cục nghề tu "' + ten + '"');
   },
 };
 

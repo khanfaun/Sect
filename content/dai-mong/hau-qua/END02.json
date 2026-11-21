@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "loai": "hau_qua",
+  "ma": "END02",
+  "tin_don": [
+    "Xe thóc từ kinh thành tới trước mùa gieo rồi đấy. Ai nhận giống thì nhớ giữ tờ có dấu kho.",
+    "Nghe nói ở {LOC13} giờ người mở kho phải chờ phu xe đọc xong giấy giao. Hồi trước đổ bao xuống là họ cho xe về.",
+    "Năm mất vụ, nhà ven đê mang bùn còn dính trên gấu quần vào tận bàn thuế. Viên coi sổ bảo cứ để đơn lại, chờ kho làng gửi bản đối.",
+    "Quan mới tới hỏi sao giấy miễn thuế cũ còn nằm trong hòm. Người đứng đợi ngoài cửa đem biên nhận ra, ông ấy lại sai kê thêm ghế.",
+    "Xe lương gãy trục giữa dốc. Bên ải gửi thợ xuống, còn phu xe cởi áo tơi phủ lên thóc.",
+    "Hộ nào bận vá đê ở {LOC01} cứ nhờ hàng xóm cầm phiếu đi nhận giống. Người giữ kho đã kê bàn sát đầu bờ.",
+    "Có nhà đem cả bao thóc lĩnh hụt tới cửa quan. Viên thư lại phải mượn cân của hàng gạo ngoài chợ.",
+    "Người giữ kho chà thử hạt thóc mới trong tay rồi mới chịu ghi đã trả giống. Đến lượt nhà kế, ông đưa luôn mẫu cho họ xem.",
+    "Tờ hẹn phát lương giờ treo ngoài cổng ở {LOC02}. Người trong chợ nhìn giấy là biết ngày nào xe lên ải.",
+    "Nghe nói có thể xin xét thuế ngay khi ruộng còn ngập. Hồi trước phải đợi tới khi mất cả vụ mới nộp được đơn."
+  ],
+  "dia_diem": [
+    {
+      "loc": "{LOC02}",
+      "t": "Bàn nhận đơn miễn thuế được dời ra dưới mái hiên gần cửa kho. Người chờ tới lượt có thể trải biên nhận trên mặt ghế dài cho mực khô."
+    },
+    {
+      "loc": "{LOC01}",
+      "t": "Sổ thu thóc của làng có chỗ ghi phần giống trả lại sau vụ gặt. Bìa sổ lấm dấu ngón tay của người đến đối, còn bao giống xếp sát vách cao để tránh nước lên."
+    },
+    {
+      "loc": "{LOC13}",
+      "t": "Ở sân kho, quân giữ ải và phu xe cùng đứng bên cân lúc giao lương. Tờ nhận hàng được hong gần bếp trạm trước khi người đánh xe mang bản của mình về."
+    }
+  ],
+  "su_luoc": [
+    "Triều đình định lệ đối sổ kho với biên nhận của từng hộ trước khi truy thu thóc.",
+    "Kho của {FA04} và trạm lương của {FA10} giữ biên nhận ở cả nơi giao lẫn nơi nhận."
+  ],
+  "muon": "Qua nhiều vụ gặt, ngươi ghé quán nước và nghe chủ quán kể về một người từng ngồi trên ngai. Bà bảo hồi ấy mẹ mình cất tờ miễn thuế trong vung thúng, ra đồng cũng sợ để lạc. Nói tới đó, bà lấy chiếc vung xuống, chỉ cho ngươi xem chỗ giấy đã in vệt mực vào nan."
+}

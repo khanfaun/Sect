@@ -1,0 +1,388 @@
+{
+ "schemaVersion": 1,
+ "loai": "nghe_tu",
+ "nghe": "TU20",
+ "ten": "Nho tu",
+ "su_kien": [
+  {
+   "ma": "S01",
+   "ten": "Đêm đọc sách thấy chữ phát sáng",
+   "text": [
+    "Ngươi hong trang sách bên đèn, lấy chiếc thước chặn góc giấy ẩm. Khi ngọn lửa lịm xuống, dòng chữ ngươi vừa đọc vẫn còn sáng.",
+    "Ở đầu dòng là lời hẹn trả công cho người chở sách. Phiếu trong tay áo của ngươi cho thấy lời ấy vẫn chưa làm trọn."
+   ],
+   "choices": [
+    {
+     "l": "Đem công tới trả trước khi đọc tiếp",
+     "t": "Ngươi gấp trang giấy, ra ngõ tìm người chở. Lúc trở về, chữ đã thôi sáng, nhưng ngươi đọc liền mạch được chỗ trước đó vẫn vấp.",
+     "e": {
+      "hd": [
+       1,
+       0
+      ],
+      "tv": 3
+     }
+    },
+    {
+     "l": "Chép lại dòng sáng và lưu phiếu",
+     "t": "Ngươi chép chữ lên giấy khô rồi kẹp phiếu cạnh đó. Đến sáng, ngươi tìm được người chở đã chuyển nơi ở và phải nhờ người đi đường đưa phần công.",
+     "e": {
+      "res": 1,
+      "xp": 2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S02",
+   "ten": "Viết hịch",
+   "text": [
+    "Người từ làng lên {LOC02} mang theo tờ thu thóc đã thủng mép. Họ đặt tờ ấy cạnh giấy trắng và xin ngươi viết lời để quan phải đọc.",
+    "Ngoài cửa có người đề nghị thêm chuyện chưa có ai chứng để lời mạnh hơn. Người đem tờ thu cũ vẫn đứng đợi ngươi hỏi tên."
+   ],
+   "choices": [
+    {
+     "l": "Viết từ biên nhận đã đối",
+     "t": "Ngươi chép đúng ngày và người đã ký, rồi để dân tự đọc lại. Tờ hịch ngắn, nhưng hôm đưa đi có người mang cả sổ tới đứng cạnh.",
+     "e": {
+      "res": 1,
+      "danh": 3
+     }
+    },
+    {
+     "l": "Truyền hịch trước khi đối đủ lời",
+     "t": "Ngươi cho chép ngay khi phiên chợ đang đông. Quan mở kho tra phần có giấy, còn người bị ghi oan mang đơn tới tận cửa ngươi.",
+     "e": {
+      "danh": 5,
+      "hd": [
+       0,
+       1
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S03",
+   "ten": "Can vua",
+   "text": [
+    "Trên bàn ở {LOC02} có chiếu sửa đê và lệnh điều lính. Người giữ ấn đặt tay lên bản lệnh, chờ ngươi nói lý do phải hoãn.",
+    "Ngươi vừa tận mắt thấy đất lún dưới chân cọc. Viên coi kho muốn giữ kín chuyện ấy cho tới khi xe đã đi."
+   ],
+   "choices": [
+    {
+     "l": "Đọc lời dân trước lúc đóng ấn",
+     "t": "Ngươi mời người đắp đê vào nói chỗ cọc lún. Người giữ ấn hoãn chuyến, còn viên coi kho phải ngồi lại trả lời trước mặt họ.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "res": 1,
+      "danh": 3
+     }
+    },
+    {
+     "l": "Xin đi xem đê cùng người giữ ấn",
+     "t": "Ngươi gấp tờ can và dẫn người xem qua đoạn đất còn ướt. Chuyến đầu đã rời kho, nhưng người giữ ấn cho gọi lại chuyến sau.",
+     "e": {
+      "xp": 3,
+      "tv": 2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S04",
+   "ten": "Đốt sách",
+   "text": [
+    "Người coi cửa đem danh mục tới và chỉ tên quyển sách trên bàn. Họ đã nhóm lò, đợi ngươi giao đúng bản bị lệnh thu.",
+    "Một người học lặng lẽ mở túi vải dưới bàn. Họ chỉ có thể mang đi phần giấy còn khô và hỏi ngươi muốn giữ trang nào."
+   ],
+   "choices": [
+    {
+     "l": "Gửi bản sao ra ngoài",
+     "t": "Ngươi đặt những trang có tên người làm chứng vào túi và để học trò tự chọn lối đi. Bản chính cháy, nhưng về sau từng nhà còn trang để đối.",
+     "e": {
+      "res": 2,
+      "danh": 2
+     }
+    },
+    {
+     "l": "Giữ người học và nộp quyển sách",
+     "t": "Ngươi bảo họ đứng nguyên rồi tự trao quyển sách cho người coi cửa. Sau buổi ấy, cả lớp phải viết lại những điều còn thuộc, chừa trống chỗ ai cũng quên.",
+     "e": {
+      "res": -1,
+      "tamma": 3,
+      "xp": 2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S05",
+   "ten": "Học trò phản đạo",
+   "text": [
+    "Ngươi nhận ra nét bút học trò trên tờ xin lấy đất của người đã cho họ ở nhờ. Họ vẫn dùng câu ngươi thường dạy để mở đầu tờ giấy.",
+    "Học trò nói chủ mới sẽ trả công và cho họ một ghế trong sổ. Người mất đất chờ ngoài sân, cầm phiếu góp công đã cũ."
+   ],
+   "choices": [
+    {
+     "l": "Gọi học trò đối mặt người mất đất",
+     "t": "Ngươi đặt phiếu cũ cạnh đơn và để người ngoài sân tự kể. Học trò rút chữ ký, nhưng vẫn phải đi cùng họ tới chỗ đã nộp giấy để xin trả đất.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "res": 1
+     }
+    },
+    {
+     "l": "Gửi bản đối chiếu đến bàn xét",
+     "t": "Ngươi sao riêng nét chữ và phần công đã góp, không ký đỡ cho học trò. Vụ xét mở, còn ghế của họ trong lớp bỏ trống từ buổi sau.",
+     "e": {
+      "tamma": 3,
+      "danh": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S06",
+   "ten": "Văn tự ngục",
+   "text": [
+    "Lính gác đem tới một trang sách có câu bị khoanh mực đỏ. Từ cửa ngục, ngươi thấy người sao sách đang bị giữ vì nét chữ trên bản ấy.",
+    "Câu bị khoanh do chính ngươi viết. Viên xét chỉ hỏi ai đã chép và để sẵn chỗ cho ngươi ký."
+   ],
+   "choices": [
+    {
+     "l": "Nhận lời mình đã viết",
+     "t": "Ngươi viết tên mình bên câu bị khoanh và đọc hết đoạn cho người xét. Người sao sách được về, còn bản thảo của ngươi bị giữ để tra tiếp.",
+     "e": {
+      "res": 2,
+      "st": -2
+     }
+    },
+    {
+     "l": "Đòi đối bản trước khi ký",
+     "t": "Ngươi chỉ chỗ xuống dòng làm câu bị hiểu khác và xin đưa bản gốc tới. Người sao sách phải chờ thêm, nhưng người xét ghi cả đoạn vào hồ sơ thay vì giữ riêng câu khoanh.",
+     "e": {
+      "tamma": 2,
+      "xp": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S07",
+   "ten": "Một câu hàng phục sơn tặc",
+   "text": [
+    "Kẻ cầm gậy đứng chắn xe ở đầu dốc, sau lưng có người kéo chân què. Ngươi thấy tay họ run khi chiếc xe chở gạo dừng lại.",
+    "Người hộ tống đã nắm chuôi đao. Ngươi có thể gọi người cầm gậy ra nói chuyện hoặc lấy lời giữ họ đứng yên cho xe lùi."
+   ],
+   "choices": [
+    {
+     "l": "Gọi họ bỏ gậy và nói giá gạo",
+     "t": "Ngươi hỏi ai đang đói và câu nói khiến người cầm gậy buông tay. Người hộ tống chịu mở thúng, ghi phần đưa đi trước mặt họ.",
+     "e": {
+      "res": 1,
+      "hd": [
+       3,
+       0
+      ],
+      "st": -1
+     }
+    },
+    {
+     "l": "Dùng lời giữ chân cho xe lùi",
+     "t": "Lời ngươi dằn xuống khiến kẻ cầm gậy khựng lại. Xe lùi khỏi dốc, còn nhóm người phía sau phải tự tìm đường đưa người què về.",
+     "e": {
+      "mp": "-10%",
+      "xp": 3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S08",
+   "ten": "Đối đáp với ma tu",
+   "text": [
+    "Ma tu đặt tờ khế lên bàn, mời ngươi đọc dòng đã viết dưới tên người bị giữ. Họ bảo người ấy đã điểm chỉ nên chẳng còn gì để hỏi.",
+    "Ngươi thấy mép giấy có vết bị cắt, còn người đứng bên cửa không dám ngẩng lên. Đối phương chờ ngươi nhận chữ trên khế hay đòi đọc lời người ký."
+   ],
+   "choices": [
+    {
+     "l": "Để người ký tự đọc điều đã nhận",
+     "t": "Ngươi lui khỏi bàn và mời họ nói từ chỗ đứng. Khi nghe phần bị cắt, người giữ cửa đòi xem lại bản của mình trước khi cho mang người đi.",
+     "e": {
+      "res": 1,
+      "hd": [
+       1,
+       0
+      ]
+     }
+    },
+    {
+     "l": "Chỉ ra phần bị cắt ngay trên khế",
+     "t": "Ngươi đặt vết cắt cạnh bản chép của người làm chứng và chỉ đường mép không khớp. Ma tu thu khế, để phiên xét hoãn và người bị giữ còn ở nguyên chỗ.",
+     "e": {
+      "xp": 4,
+      "mp": "-10%"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S09",
+   "ten": "Lập học đường",
+   "text": [
+    "Ngươi kê bàn dưới mái chợ, lấy mảnh ngói chèn cho chân khỏi cập kênh. Người mang trẻ tới muốn biết chúng có thể học sau buổi làm không.",
+    "Người góp tiền dựng lớp xin dạy trước cho con nhà họ. Những đứa đang đứng ngoài chỉ có bảng gỗ đã dùng mòn."
+   ],
+   "choices": [
+    {
+     "l": "Dạy theo giờ rảnh của người học",
+     "t": "Ngươi mở lớp sau phiên, tự nhờ người khác giữ đèn. Người góp vốn rút bớt phần hứa, còn lũ trẻ có thể đem bảng tới sau khi dọn hàng.",
+     "e": {
+      "hd": [
+       3,
+       0
+      ],
+      "res": 1,
+      "st": -2
+     }
+    },
+    {
+     "l": "Nhận tiền và dành lượt học riêng",
+     "t": "Ngươi lấy tiền sửa mái rồi dành buổi sớm cho nhà góp. Các học trò phải làm việc ban ngày chờ tới khi có người nhận trông lớp tối.",
+     "e": {
+      "st": 3,
+      "danh": -2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S10",
+   "ten": "Sách truyền thiên hạ",
+   "text": [
+    "Ở {LOC11}, tờ in thử còn dính vào khuôn. Người bồi giấy chỉ một chữ mất nét và bảo nếu in ngay thì phải để nguyên chữ ấy qua cả lô.",
+    "Người đặt sách đã hẹn xe ra bến. Một học trò muốn sửa tiếp, còn người coi xưởng hỏi ai sẽ trả tiền giữ thợ ở lại."
+   ],
+   "choices": [
+    {
+     "l": "Dừng in để sửa chữ",
+     "t": "Ngươi chịu phần công thêm rồi đợi học trò so lại trang. Xe đi trước, nhưng khi sách tới tay người đọc, họ không phải nhờ ai đoán chữ đã mất.",
+     "e": {
+      "st": -2,
+      "res": 2,
+      "danh": 4
+     }
+    },
+    {
+     "l": "Gửi bản thử, kèm tờ đính chính",
+     "t": "Ngươi đánh dấu trang có lỗi và gửi tờ sửa theo xe. Sách tới đúng hẹn, còn người nhận phải tự dán lại từng bản trước khi cho mượn.",
+     "e": {
+      "danh": 2,
+      "st": 1
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S11",
+   "ten": "Văn tâm nứt",
+   "text": [
+    "Ngươi đóng dấu vào tờ khiến một hộ phải chịu khoản không do họ vay. Nét mực chưa khô thì văn tâm rạn, hạo nhiên khí theo đó mà tản.",
+    "Người đưa giấy bảo cứ ngồi yên tới khi họ lấy lại khế. Ngoài hiên, người bị ghi nợ vẫn cầm giấy lĩnh thóc chờ ngươi gọi."
+   ],
+   "choices": [
+    {
+     "l": "Công khai sửa tờ đã ký",
+     "t": "Ngươi gọi người ấy vào, đọc lại chỗ mình sửa sai rồi trao bản có dấu mới. Khí đã tản vẫn chưa về, còn người đưa giấy thôi gửi việc tới bàn ngươi.",
+     "e": {
+      "res": -2,
+      "tamma": -3,
+      "danh": 2
+     }
+    },
+    {
+     "l": "Giữ dấu và theo người đưa giấy",
+     "t": "Ngươi để nguyên tờ đang khô và nhận phần công họ trả. Khi thử đọc lời cũ lên, ngươi nghe câu hụt giữa chừng, còn người mang giấy lĩnh thóc bỏ về.",
+     "e": {
+      "hd": [
+       0,
+       5
+      ],
+      "st": 2
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S12",
+   "ten": "Thánh ngôn",
+   "text": [
+    "Ngươi vừa mở sổ thì người đứng chật sân đã im. Câu ngươi định đọc là lời hẹn giữ phần công cho những người sắp phải rời chỗ ở.",
+    "Người coi sổ xin ngươi nói thay tất cả để kịp đóng ấn. Ngoài cửa có người mới đến, giấy của họ vẫn chưa ghi tên."
+   ],
+   "choices": [
+    {
+     "l": "Đọc lời hẹn rồi nhường lời cho dân",
+     "t": "Ngươi đọc điều đã ký rồi lùi khỏi bàn. Người đến trễ tự nói tên, và người coi sổ phải mở trang mới để chép cho đủ.",
+     "e": {
+      "res": 3,
+      "danh": 6,
+      "hd": [
+       1,
+       0
+      ]
+     }
+    },
+    {
+     "l": "Giữ lời đã ký và buộc mở sổ",
+     "t": "Lời ngươi làm tay người giữ ấn dừng giữa chừng. Sổ được mở cho đối ngay, nhưng người tới trễ phải giữ tờ riêng vì phiên xét đã khép.",
+     "e": {
+      "res": 2,
+      "tv": 5
+     }
+    }
+   ]
+  }
+ ],
+ "ket_cuc": [
+  {
+   "ma": "K01",
+   "ten": "Á thánh",
+   "canh": [
+    "Ngươi tới lớp lúc người học đang tự sửa một dòng chép sai. Họ đứng dậy, nhưng ngươi kéo ghế tới bên cửa để khỏi che ánh sáng trên bảng.",
+    "Khách muốn nghe ngươi nói, còn người học muốn làm xong việc đang dở. Ngươi chờ đến lúc nét cuối khô rồi bảo họ tự đọc trước."
+   ]
+  },
+  {
+   "ma": "K02",
+   "ten": "Văn tâm vỡ thành phế nhân",
+   "canh": [
+    "Lời ngươi đọc rơi xuống trong căn phòng kín, không còn sức lay ngọn đèn. Văn tâm đã vỡ, và trang sách cũ chỉ còn nét mực xếp trên giấy.",
+    "Ngươi gấp sách rồi lấy chổi quét vụn than cạnh bếp. Người đến xin học được ngươi chỉ sang mái bên, nơi có người vẫn đang đứng lớp."
+   ]
+  },
+  {
+   "ma": "K03",
+   "ten": "Đế sư",
+   "canh": [
+    "Người giữ ấn mời ngươi ngồi cạnh bàn xét, ngay chỗ có thể nhìn thấy cả sổ lương và đơn của dân. Ngươi đẩy tờ đã duyệt sang bên để người cầm đơn có thể đặt giấy trước mặt họ.",
+    "Đến cuối buổi, người giữ ấn tự hỏi hộ cuối có bản để mang về không. Ngươi thu chiếc thước vẫn để cạnh tay và cho người ngoài mở cửa."
+   ]
+  },
+  {
+   "ma": "K04",
+   "ten": "Sách truyền đời",
+   "canh": [
+    "Bản ngươi chép đã sờn góc, nhưng ở lớp xa người đọc vẫn dùng nó để đối bản mới. Họ ghi lời sửa ở mép, giữ đủ nét cũ để người sau còn biết vì sao phải đổi.",
+    "Một ngày ngươi ghé qua, người đứng lớp đọc đoạn ấy bằng giọng khác hẳn. Cuối buổi, họ đặt sách xuống và cho học trò tự thử điều vừa đọc."
+   ]
+  }
+ ]
+}

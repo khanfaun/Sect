@@ -1,0 +1,28 @@
+{
+  "ma": "END03",
+  "tin_don": [
+    "Có huyết ấn trên giấy thì cứ theo đúng phiên mà giao đá. Đến sớm, người cân cũng bảo cất gánh xuống chờ.",
+    "Nghe nói thương đội ở {LOC03} chịu ứng công đường cho người chở linh thạch. Lúc về, họ sẽ trừ thẳng vào tiền chuyến.",
+    "Nhà trọ gần cốc còn giữ yên con la của người gánh đá. Chủ trọ bảo người ấy đã bán cả la để trả tiền qua đường, chưa quay lại lấy yên.",
+    "Tờ cũ cũng mang huyết ấn đấy, nhưng kho chỉ nhận giấy có dấu sửa của người giữ sổ bây giờ. Mang giấy cũ lẫn giấy mới đi hỏi thì chắc phải chờ tới lúc họ cân xong."
+  ],
+  "dia_diem": [
+    {
+      "loc": "{LOC07}",
+      "t": "Ngoài điện có mái che mới cho người đợi giao linh thạch. Bảng ghi phiên treo sát cửa, còn ô ghi công chỉ được điền sau khi đá đã qua cân."
+    },
+    {
+      "loc": "{LOC03}",
+      "t": "Bên quầy hợp đồng có thêm ngăn đựng những tờ ứng công đường. Người giao hàng thường kê thúng lên làm bàn để sao phần sẽ bị trừ."
+    },
+    {
+      "loc": "{LOC09}",
+      "t": "Người coi bến kẻ vạch trên ván để dành chỗ cho các gánh linh thạch có giấy. Người bán cá chuyển ra đầu cầu, nơi mặt ván hẹp và nước bắn vào rổ."
+    }
+  ],
+  "su_luoc": [
+    "{FA05} định phiên nộp linh thạch theo huyết ấn và tra giấy trước khi nhận hàng.",
+    "{FA02} ghi tiền ứng công đường vào khế vận chuyển và khấu trừ khi thanh toán chuyến."
+  ],
+  "muon": "Về sau, ngươi nghe người coi cân kể về kẻ từng giữ huyết ấn. Ông nhớ từ hồi ấy, gánh đá đến đều phiên và cha ông phải đợi tới khi cân xong mới được nhận công. Nói rồi, ông xếp tờ giao hàng dưới đá cân để gió khỏi cuốn."
+}

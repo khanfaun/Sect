@@ -96,7 +96,7 @@ export function ManBenVongXuyen() {
           <Tabs k="meta" list={TABS} cur={tab} />
           <Body M={M} />
         </div>
-        <footer className="win-f"><span className="grow"></span><button className="btn pri" data-act="screen" data-arg={M.ketHet ? 'ket' : 'title'}>Rời bến</button></footer>
+        <footer className="win-f"><span className="grow"></span><button className="btn pri" data-act="screen" data-arg="title">Rời bến</button></footer>
       </section>
     </div>
   );

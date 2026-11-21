@@ -129,7 +129,7 @@ function ccRiteD(P,st){const r=G.run,s=S();const L=[contentText('cc.leKq',[ccOut
   return L.join(' ');}
 function ccOutTxt(o){if(o.nang)return contentText('cc.kqNang');if(o.tuc)return contentText('cc.kqTuc');
   const id=o.id||'';const R=ROOT.find(x=>x.id===id);const Q=ROOT_Q.find(x=>x.id===o.q);
-  return (o.pick?contentText('cc.kqPick'):R?R.n:'')+(Q?' · '+contentText('tl.pham',[Q.n]):'');}
+  return (o.pick?contentText('cc.kqPick'):R?R.n:'')+'';}
 function ccFailTxt(f){const L=[];if(f.die)L.push(contentText('cc.hChet'));if(f.hpP)L.push(contentText('cc.hHp'));if(f.tam)L.push(contentText('cc.hYeu',[f.tam.nam>=1?f.tam.nam+' năm':Math.round(f.tam.nam*12)+' tháng']));
   if(f.life)L.push(contentText('cc.hTho',[-f.life]));if(f.wound)L.push(contentText('cc.hThuong',[WOUND[f.wound]?WOUND[f.wound].n.toLowerCase():'']));if(f.ngheDown)L.push(contentText('cc.hNghe'));
   return L.length?L.join(', '):contentText('cc.hKhong');}

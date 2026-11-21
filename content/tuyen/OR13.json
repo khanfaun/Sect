@@ -29,7 +29,7 @@
         {
           "id": "cach_1",
           "l": "Ghi triệu chứng và người ứng phí",
-          "t": "Ngươi ghi giờ run, màu nước và tên hộ đã ứng tiền thuốc cho người hái.",
+          "t": "Ngươi ghi cơn run bắt đầu lúc nào, nước có màu gì và hộ nào ứng tiền thuốc cho người hái.",
           "dau": [
             "moc_1_1"
           ]
@@ -141,7 +141,7 @@
         {
           "id": "cach_3",
           "l": "Niêm huyết phương, nói rõ thuốc giúp được gì",
-          "t": "Ngươi kê phần đòi người hiến và cất riêng, rồi báo nhà bệnh thuốc chỉ giảm đau.",
+          "t": "Ngươi ghi riêng phần thuốc đòi có người hiến và cất bản ấy đi. Với gia đình, ngươi nói thẳng thuốc chỉ giảm đau.",
           "dau": [
             "moc_3_3"
           ]
@@ -199,7 +199,7 @@
         {
           "id": "cach_3",
           "l": "Chăm đến lúc người nhà tới",
-          "t": "Ngươi giữ ấm và đọc thật giới hạn thuốc, để người nhà kịp nghe lời từ biệt.",
+          "t": "Ngươi giữ ấm cho người bệnh và nói rõ thuốc còn giúp được đến đâu. Người nhà kịp ngồi xuống nghe lời từ biệt.",
           "dau": [
             "moc_4_3"
           ]

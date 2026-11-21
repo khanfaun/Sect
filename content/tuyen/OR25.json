@@ -29,7 +29,7 @@
         {
           "id": "cach_1",
           "l": "Đo bờ và thử phần bài bỏ",
-          "t": "Ngươi đối vạch thực với bản bài, chỉ được chỗ nước có thể rẽ qua.",
+          "t": "Ngươi so vạch đo ngoài bờ với phép đo trong bài, tìm được chỗ có thể dẫn dòng nước sang.",
           "dau": [
             "moc_1_1"
           ]
@@ -146,7 +146,7 @@
         {
           "id": "cach_3",
           "l": "Giữ chỗ trống trong sổ thi",
-          "t": "Ngươi tìm một suất còn bỏ trống và ghi đường người mua tới nhận quyển.",
+          "t": "Ngươi tìm một suất còn trống và ghi lối để người mua tới nhận quyển thi.",
           "dau": [
             "moc_3_3"
           ]
@@ -263,7 +263,7 @@
         {
           "id": "cach_3",
           "l": "Giao suất đã mua và giữ mạng môi giới",
-          "t": "Ngươi giao giấy cho người mua khi họ đã qua phiên, giữ danh sách sách người giới thiệu.",
+          "t": "Qua phiên xét, ngươi giao giấy cho người mua và giữ danh sách những người môi giới đã giới thiệu họ.",
           "dau": [
             "moc_5_3"
           ]

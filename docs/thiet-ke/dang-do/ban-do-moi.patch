@@ -1,0 +1,1174 @@
+diff --git a/content/rules/an-uong.js b/content/rules/an-uong.js
+index 0f8ae44..4971e27 100644
+--- a/content/rules/an-uong.js
++++ b/content/rules/an-uong.js
+@@ -9,4 +9,4 @@ const AN={muc:{dam:{n:'Đạm bạc',bac:12,rg:-0.1},thuong:{n:'Thường',bac:2
+   lkNgay:90,maxNgay:400,lkBac:70,lkQty:5,
+   doi:{thieu:30,doi:60,la:150,kiet:300,canh:630,chet:660},rgDoi:-0.25,rgKiet:-0.5,hpLa:-0.15,hpKiet:-0.3,kietHp:0.005,
+   nhip:{lk:0.5,tc:1/60,bq:1/3,sauBq:0.5},sauBqNgay:90,thang:30,
+-  quan:['tran','thanh','cho'],baoTu:4,baoNghi:90};
++  quan:['tran','thanh','tutran','tuthanh','cho'],baoTu:4,baoNghi:90};
+diff --git a/content/rules/dat-dai.js b/content/rules/dat-dai.js
+index b795f79..2969fbc 100644
+--- a/content/rules/dat-dai.js
++++ b/content/rules/dat-dai.js
+@@ -11,41 +11,41 @@
+ //   dp = 1 công trình này là động phủ của nơi đó (n.dp: bế quan nhanh hơn, ít bị quấy)
+ const CONG_TRINH={
+   // --- nhân tạo ở thôn trấn / thành ---
+-  khach_diem:{n:'Khách điếm',nhom:'Nghỉ chân',tu:0,acts:['inn'],noi:['tran','thanh'],xay:null,pha:{h:6},hau:'Mất chỗ trọ ở nơi này.'},
+-  tra_lau:{n:'Trà lâu',nhom:'Nghỉ chân',tu:0,acts:['tea'],noi:['tran','thanh','cho'],xay:null,pha:{h:4},hau:'Mất chỗ nghe ngóng tin tức.'},
++  khach_diem:{n:'Khách điếm',nhom:'Nghỉ chân',tu:0,acts:['inn'],noi:['tran','thanh','tutran','tuthanh'],xay:null,pha:{h:6},hau:'Mất chỗ trọ ở nơi này.'},
++  tra_lau:{n:'Trà lâu',nhom:'Nghỉ chân',tu:0,acts:['tea'],noi:['tran','thanh','tutran','tuthanh','cho'],xay:null,pha:{h:4},hau:'Mất chỗ nghe ngóng tin tức.'},
+   tuu_lau:{n:'Tửu lầu',nhom:'Nghỉ chân',tu:0,acts:['tuu'],noi:['tran','thanh'],xay:null,pha:{h:4},hau:'Mất quán rượu.'},
+-  bang_thuong:{n:'Bảng treo thưởng',nhom:'Sự vụ',tu:0,acts:['board'],noi:['tran','thanh'],xay:null,pha:{h:1},hau:'Không còn nhận việc treo thưởng ở đây.'},
+-  thuong_cac:{n:'Thưởng Các',nhom:'Sự vụ',tu:0,acts:['thuongcac'],noi:['tran','thanh'],xay:null,pha:{h:4},hau:'Mất chỗ đổi Thưởng Lệnh.'},
++  bang_thuong:{n:'Bảng treo thưởng',nhom:'Sự vụ',tu:0,acts:['board'],noi:['tran','thanh','tutran','tuthanh'],xay:null,pha:{h:1},hau:'Không còn nhận việc treo thưởng ở đây.'},
++  thuong_cac:{n:'Thưởng Các',nhom:'Sự vụ',tu:0,acts:['thuongcac'],noi:['tutran','tuthanh'],xay:null,pha:{h:4},hau:'Mất chỗ đổi Thưởng Lệnh.'},
+   tien_trang:{n:'Tiền trang',nhom:'Sự vụ',tu:0,acts:['vay'],noi:['tran','thanh'],xay:null,pha:{h:6},hau:'Không còn ai cho vay ở đây.'},
+-  tap_hoa:{n:'Tạp hóa',nhom:'Mua bán',tu:0,acts:['taphoa'],noi:['tran','cho'],xay:null,pha:{h:3},hau:'Mất chỗ mua đồ phàm.'},
++  tap_hoa:{n:'Tạp hóa',nhom:'Mua bán',tu:0,acts:['taphoa'],noi:['tran','thanh','cho'],xay:null,pha:{h:3},hau:'Mất chỗ mua đồ phàm.'},
+   lai_buon:{n:'Bến hàng lái buôn',nhom:'Mua bán',tu:0,acts:['laibuon'],noi:['tran','thanh','cho'],xay:null,pha:{h:3},hau:'Lái buôn không ghé nữa.'},
+-  phuong_thi:{n:'Phường thị',nhom:'Mua bán',tu:0,acts:['shop'],noi:['thanh'],xay:null,pha:{h:8},hau:'Mất chợ đồ tu sĩ.'},
+-  quy_thi:{n:'Quỷ thị',nhom:'Mua bán',tu:0,acts:['ghost'],noi:['thanh','ma'],xay:null,pha:{h:6},hau:'Mất chợ đêm.'},
+-  am_hoi:{n:'Hầm Ám Hội',nhom:'Mua bán',tu:0,acts:['amhoi'],noi:['thanh','ma'],xay:null,pha:{h:6},hau:'U Minh Ám Hội không họp ở đây nữa.'},
+-  doi_lt:{n:'Ngân phường',nhom:'Mua bán',tu:0,acts:['doilt'],noi:['thanh','cho'],xay:null,pha:{h:6},hau:'Mất chỗ đổi linh thạch.'},
++  phuong_thi:{n:'Phường thị',nhom:'Mua bán',tu:0,acts:['shop'],noi:['tutran','tuthanh'],xay:null,pha:{h:8},hau:'Mất chợ đồ tu sĩ.'},
++  quy_thi:{n:'Quỷ thị',nhom:'Mua bán',tu:0,acts:['ghost'],noi:['tuthanh','ma'],xay:null,pha:{h:6},hau:'Mất chợ đêm.'},
++  am_hoi:{n:'Hầm Ám Hội',nhom:'Mua bán',tu:0,acts:['amhoi'],noi:['tuthanh','ma'],xay:null,pha:{h:6},hau:'U Minh Ám Hội không họp ở đây nữa.'},
++  doi_lt:{n:'Ngân phường',nhom:'Mua bán',tu:0,acts:['doilt'],noi:['tutran','tuthanh','cho'],xay:null,pha:{h:6},hau:'Mất chỗ đổi linh thạch.'},
+   cam_do:{n:'Hiệu cầm đồ',nhom:'Mua bán',tu:0,acts:['camdo'],noi:['thanh','cho'],xay:null,pha:{h:3},hau:'Mất hiệu cầm đồ.'},
+-  tram_dich:{n:'Trạm dịch',nhom:'Đi lại',tu:0,acts:['tram'],noi:['tran','thanh'],xay:null,pha:{h:6},hau:'Không còn xe ngựa, thuê đường ở đây.'},
+-  loi_dai:{n:'Lôi đài',nhom:'Tu luyện',tu:0,acts:['loidai'],noi:['thanh'],xay:null,pha:{h:4},hau:'Không còn đấu lôi đài ở đây.'},
++  tram_dich:{n:'Trạm dịch',nhom:'Đi lại',tu:0,acts:['tram'],noi:['tran','thanh','tuthanh'],xay:null,pha:{h:6},hau:'Không còn xe ngựa, thuê đường ở đây.'},
++  loi_dai:{n:'Lôi đài',nhom:'Tu luyện',tu:0,acts:['loidai'],noi:['tuthanh'],xay:null,pha:{h:4},hau:'Không còn đấu lôi đài ở đây.'},
+   thao_lu:{n:'Thảo lư ẩn sĩ',nhom:'Tu luyện',tu:0,acts:['thinhgiao'],noi:['ancu'],xay:null,pha:{h:2},hau:'Ẩn sĩ bỏ đi, không còn chỗ thỉnh giáo.'},
+   son_mon:{n:'Sơn môn điện',nhom:'Tông môn',tu:0,acts:['join','lib','congmon','nhansu','tongviec','conghien','tinhthat','taphoa','doilt','tinh'],noi:['tong'],xay:null,pha:null,hau:''},
+   // --- tự nhiên ở hoang dã: không xây được, phá được ---
+-  bai_san:{n:'Bãi săn',nhom:'Hoang dã',tu:1,acts:['sanbat'],noi:['rung','nui','hoang','dam','khoang','duoc','linhdia','song','bien'],xay:null,pha:{h:12},hau:'Muông thú bỏ đi, không săn bắt được nữa.'},
++  bai_san:{n:'Bãi săn',nhom:'Hoang dã',tu:1,acts:['sanbat'],noi:['rung','nui','hoang','dam','khoang','duoc','linhdia','song','bien','yeusao'],xay:null,pha:{h:12},hau:'Muông thú bỏ đi, không săn bắt được nữa.'},
+   ho_ca:{n:'Hồ cá',nhom:'Hoang dã',tu:1,acts:['sanbat'],noi:['song','bien','dam'],xay:null,pha:{h:24},hau:'Lấp hồ: không đánh bắt được nữa.'},
+-  hang_yeu:{n:'Hang yêu thú',nhom:'Hoang dã',tu:1,acts:['sanyeu'],noi:['nui','dong','rung'],xay:null,pha:{h:12},hau:'Lấp hang: yêu thú không còn tụ về để săn.'},
+-  dam_yeu:{n:'Đầm yêu',nhom:'Hoang dã',tu:1,acts:['sanyeu'],noi:['dam','song','bien','hoang','ma','phe','thien'],xay:null,pha:{h:24},hau:'Lấp đầm: yêu thú không còn tụ về để săn.'},
+-  rung_thuoc:{n:'Rừng thuốc',nhom:'Hoang dã',tu:1,acts:['haithuoc'],noi:['rung','duoc','song','bien'],xay:null,pha:{h:12},hau:'Đốt rừng thuốc: không hái thuốc được nữa.'},
+-  bai_thao:{n:'Bãi linh thảo',nhom:'Hoang dã',tu:1,acts:['haithuoc'],noi:['hoang','thien','duoc'],xay:null,pha:{h:8},hau:'Cào bãi thảo: không hái thuốc được nữa.'},
+-  mo_khoang:{n:'Mỏ khoáng',nhom:'Hoang dã',tu:1,acts:['daokhoang'],noi:['khoang','nui','dong','phe','ma'],xay:null,pha:{h:24},hau:'Sập mỏ: không đào khoáng được nữa.'},
+-  hang_dong:{n:'Hang động',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['dong','nui'],xay:null,pha:{h:24},hau:'Sập hang: mất chỗ tĩnh tọa.'},
+-  linh_tuyen:{n:'Linh tuyền',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['linhdia','thien'],xay:null,pha:{h:24},hau:'Lấp linh tuyền: mất chỗ tĩnh tọa.'},
+-  co_thu:{n:'Cổ thụ',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['rung','hoang'],xay:null,pha:{h:12},hau:'Đốn cổ thụ: mất chỗ tĩnh tọa.'},
++  hang_yeu:{n:'Hang yêu thú',nhom:'Hoang dã',tu:1,acts:['sanyeu'],noi:['nui','dong','rung','yeusao'],xay:null,pha:{h:12},hau:'Lấp hang: yêu thú không còn tụ về để săn.'},
++  dam_yeu:{n:'Đầm yêu',nhom:'Hoang dã',tu:1,acts:['sanyeu'],noi:['dam','song','bien','hoang','ma','phe','thien','yeusao','como'],xay:null,pha:{h:24},hau:'Lấp đầm: yêu thú không còn tụ về để săn.'},
++  rung_thuoc:{n:'Rừng thuốc',nhom:'Hoang dã',tu:1,acts:['haithuoc'],noi:['rung','duoc','song','bien','yeusao'],xay:null,pha:{h:12},hau:'Đốt rừng thuốc: không hái thuốc được nữa.'},
++  bai_thao:{n:'Bãi linh thảo',nhom:'Hoang dã',tu:1,acts:['haithuoc'],noi:['hoang','thien','duoc','bicanh','ditich'],xay:null,pha:{h:8},hau:'Cào bãi thảo: không hái thuốc được nữa.'},
++  mo_khoang:{n:'Mỏ khoáng',nhom:'Hoang dã',tu:1,acts:['daokhoang'],noi:['khoang','nui','dong','phe','ma','dongthien','como','ditich'],xay:null,pha:{h:24},hau:'Sập mỏ: không đào khoáng được nữa.'},
++  hang_dong:{n:'Hang động',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['dong','nui','dongthien'],xay:null,pha:{h:24},hau:'Sập hang: mất chỗ tĩnh tọa.'},
++  linh_tuyen:{n:'Linh tuyền',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['linhdia','thien','bicanh','dongthien'],xay:null,pha:{h:24},hau:'Lấp linh tuyền: mất chỗ tĩnh tọa.'},
++  co_thu:{n:'Cổ thụ',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['rung','hoang','yeusao'],xay:null,pha:{h:12},hau:'Đốn cổ thụ: mất chỗ tĩnh tọa.'},
+   ho_nuoc:{n:'Hồ nước',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['song','bien'],xay:null,pha:{h:24},hau:'Lấp hồ: mất chỗ tĩnh tọa bên nước.'},
+-  tran_co:{n:'Trận pháp cổ',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['hoang','phe','nui','dong','linhdia'],xay:null,pha:{h:12},hau:'Phá trận cổ: mất chỗ tĩnh tọa, linh khí tản đi.'},
++  tran_co:{n:'Trận pháp cổ',nhom:'Nghỉ chân',tu:1,acts:['tinh'],noi:['hoang','phe','nui','dong','linhdia','bicanh','como','ditich'],xay:null,pha:{h:12},hau:'Phá trận cổ: mất chỗ tĩnh tọa, linh khí tản đi.'},
+   // --- người chơi xây trên đất hoang không chủ (tu sĩ) ---
+-  dong_phu:{n:'Động phủ',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],dp:1,xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma'],st:30,h:720,tu:1},pha:{h:12},hau:'Mất động phủ: bế quan ở đây không còn được che chở.'},
+-  tran_phap:{n:'Trận pháp hộ thân',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','tran','thanh','cho','ancu'],st:50,h:240,tu:1},pha:{h:6},hau:'Trận tan: mất chỗ tĩnh tọa trong trận.'},
++  dong_phu:{n:'Động phủ',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],dp:1,xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','dongthien','ditich'],st:30,h:720,tu:1},pha:{h:12},hau:'Mất động phủ: bế quan ở đây không còn được che chở.'},
++  tran_phap:{n:'Trận pháp hộ thân',nhom:'Nghỉ chân',tu:0,acts:['tinh'],noi:[],xay:{noi:['rung','nui','song','bien','hoang','phe','dong','dam','khoang','duoc','linhdia','thien','ma','bicanh','dongthien','como','yeusao','ditich','tran','thanh','tutran','tuthanh','cho','ancu'],st:50,h:240,tu:1},pha:{h:6},hau:'Trận tan: mất chỗ tĩnh tọa trong trận.'},
+   // --- người chơi dựng trên đất đã mua ở nơi có dân (câu 80): phàm nhân cũng dựng được, trả bằng bạc (xu) ---
+-  nha_rieng:{n:'Nhà riêng',nhom:'Nghỉ chân',tu:0,acts:[],noi:[],xay:{noi:['tran','thanh','cho','ancu'],st:0,bac:25000,h:360,cuaTa:1},pha:{h:6},hau:'Mất nhà: không còn chỗ ngủ, nghỉ của riêng ngươi ở đây.'}};
++  nha_rieng:{n:'Nhà riêng',nhom:'Nghỉ chân',tu:0,acts:[],noi:[],xay:{noi:['tran','thanh','tutran','tuthanh','cho','ancu'],st:0,bac:25000,h:360,cuaTa:1},pha:{h:6},hau:'Mất nhà: không còn chỗ ngủ, nghỉ của riêng ngươi ở đây.'}};
+ 
+ // DAT: cách sinh ô và hậu quả.
+ //   goc[loại nơi] = công trình luôn có ở loại nơi đó (bảo đảm dịch vụ cốt lõi; bản lưu cũ cũng sinh theo bảng này)
+@@ -58,12 +58,19 @@ const CONG_TRINH={
+ //   moc = [ít, nhiều] số năm một công trình tự nhiên bị phá tự mọc lại (Sửa-O câu 76; ô đã xây gì lên thì không mọc)
+ //   hu = số tháng một công trình cốt lõi ở nơi neo bị phá thì chỉ hư tạm (dựng lại sau ngần ấy)
+ const DAT={
++  // Thế giới mới chia hai loại: thành/trấn PHÀM NHÂN (tạp hóa, lái buôn, tiền trang, cầm đồ, trạm dịch, tửu lầu…) và thành/trấn TU SĨ
++  // (phường thị, quỷ thị, ngân phường, lôi đài, thưởng các, Ám Hội…). Ai cũng vào được cả hai. gocCu = bảng của thế giới sinh từ bản cũ (chưa chia hai loại).
+   goc:{
+-    tran:['khach_diem','tra_lau','tuu_lau','bang_thuong','thuong_cac','tien_trang','tap_hoa','lai_buon','tram_dich'],
+-    thanh:['khach_diem','tra_lau','tuu_lau','bang_thuong','thuong_cac','tien_trang','phuong_thi','quy_thi','am_hoi','lai_buon','doi_lt','cam_do','tram_dich','loi_dai'],
++    tran:['khach_diem','tra_lau','tuu_lau','bang_thuong','tien_trang','tap_hoa','lai_buon','tram_dich'],
++    thanh:['khach_diem','tra_lau','tuu_lau','bang_thuong','tien_trang','tap_hoa','lai_buon','cam_do','tram_dich'],
++    tutran:['khach_diem','tra_lau','bang_thuong','thuong_cac','phuong_thi','doi_lt'],
++    tuthanh:['khach_diem','tra_lau','bang_thuong','thuong_cac','phuong_thi','quy_thi','am_hoi','doi_lt','loi_dai','tram_dich'],
+     cho:['tra_lau','tap_hoa','lai_buon','doi_lt','cam_do'],
+     tong:['son_mon'],ancu:['thao_lu'],ma:['quy_thi','am_hoi']},
+-  trong:{tran:[1,2],thanh:[1,3],cho:[0,1],tong:[0,0],ancu:[0,1],hoang:[1,2]},
++  gocCu:{
++    tran:['khach_diem','tra_lau','tuu_lau','bang_thuong','thuong_cac','tien_trang','tap_hoa','lai_buon','tram_dich'],
++    thanh:['khach_diem','tra_lau','tuu_lau','bang_thuong','thuong_cac','tien_trang','phuong_thi','quy_thi','am_hoi','lai_buon','doi_lt','cam_do','tram_dich','loi_dai']},
++  trong:{tran:[1,2],thanh:[1,3],tutran:[1,2],tuthanh:[1,3],cho:[0,1],tong:[0,0],ancu:[0,1],hoang:[1,2]},
+   hoang:{
+     sanbat:[['bai_san',{1:2,2:3,3:1,6:2}],['ho_ca',{4:3,5:3,7:2}]],
+     sanyeu:[['hang_yeu',{2:2,3:3,6:2}],['dam_yeu',{4:1,5:1,7:3,1:1}]],
+@@ -74,7 +81,7 @@ const DAT={
+   phat:{
+     vai:{fav:-15,fa:-3,truy:0.3},
+     fa:{fa:-4,truy:0.25},
+-    dan:{danh:{tran:-12,thanh:-20}},
++    dan:{danh:{tran:-12,thanh:-20,tutran:-12,tuthanh:-20}},
+     tong:{danh:-15,truy:0.4}},
+   moc:[20,40],
+   hu:3,
+@@ -86,7 +93,7 @@ const DAT={
+   //   tran: tác dụng trận pháp hộ thân trên đất của ngươi (câu 78): bq = hệ số rủi ro bế quan bị quấy, tm = hệ số tâm ma giảm khi tĩnh tọa, ngu = tính là có chỗ ngủ
+   //   ct = giá công trình (xu) khi mua ô ĐÃ có công trình của dân / người giữ vai / thế lực: giá = (giá đất + ct) × chu; '_' = mặc định.
+   //        Mua xong công trình giữ nguyên (vẫn mở dịch vụ); bán lại ô mua kèm công trình được ban × (giá đất + ct).
+-  mua:{gia:{tran:30000,thanh:80000,cho:20000,ancu:10000},chu:{dan:1,vai:1.3,fa:1.6},lt:200,ban:0.5,h:4,favMin:-10,faMin:3,toiDa:2,naMin:2,
++  mua:{gia:{tran:30000,thanh:80000,tutran:36000,tuthanh:100000,cho:20000,ancu:10000},chu:{dan:1,vai:1.3,fa:1.6},lt:200,ban:0.5,h:4,favMin:-10,faMin:3,toiDa:2,naMin:2,
+     ct:{_:20000,khach_diem:40000,tra_lau:25000,tuu_lau:30000,bang_thuong:10000,thuong_cac:40000,tien_trang:60000,tap_hoa:15000,lai_buon:15000,
+       phuong_thi:80000,quy_thi:60000,am_hoi:80000,doi_lt:60000,cam_do:30000,tram_dich:40000,loi_dai:50000,thao_lu:5000,nha_rieng:25000,tran_phap:20000},
+     tran:{bq:0.5,tm:2,ngu:1}},
+@@ -94,4 +101,4 @@ const DAT={
+   //   Trả bạc, tu sĩ thiếu bạc trả linh thạch (như mua). Không trả được thì ghi nợ trên ô, danh tiếng khu thêm danh mỗi kỳ; có tiền thì tự trả nợ (xét mỗi ngày).
+   //   Nợ quá noKy kỳ thì quan phủ ghi thành nợ thường (r.bac âm, hệ nợ Sửa-B: hạn, phạt…); không mất đất. Đang nợ thuế ở nơi nào thì không mua thêm đất ở đó.
+   //   Chỉ thu trên đất mua trong kiếp này (ô ghi kiếp lúc mua; bản lưu cũ ghi kiếp hiện tại, kỳ đầu tính từ lúc xét).
+-  thue:{ky:12,ty:{tran:0.03,thanh:0.05},danh:-3,noKy:3}};
++  thue:{ky:12,ty:{tran:0.03,thanh:0.05,tutran:0.03,tuthanh:0.05},danh:-3,noKy:3}};
+diff --git a/content/rules/no-nha.js b/content/rules/no-nha.js
+index aa65e20..0d3faa2 100644
+--- a/content/rules/no-nha.js
++++ b/content/rules/no-nha.js
+@@ -7,9 +7,9 @@
+ const NO={chiu:600,han:60,bao:10,giaHan:45,nhieu:3000,
+   heo:[{hp:0.25,w:'ngoai'},{hp:0.45,w:'gay',truy:1}],laoNam:[2,3],laoNam3:8000,truyDanh:-60,
+   vay:[{id:'v1',goc:1000,thang:6,tong:1180},{id:'v3',goc:3000,thang:6,tong:3540},{id:'v10',goc:10000,thang:12,tong:13000}],khoVay:1,
+-  vayNoi:['tran','thanh'],vayBao:15};
++  vayNoi:['tran','thanh','tutran','tuthanh'],vayBao:15};
+ // NHA: nhà ở. khong: xuất thân không có nhà ở quê (ngoài GD.none và nhóm khốn khó). thue: tiền thuê mỗi tháng theo loại nơi.
+ // ngoai: ngủ ngoài trời từ `min` ngày trong một tháng thì bị lạnh (mất lanh × khí huyết tối đa × số ngày/30),
+ // và có thể bệnh với xác suất benh + benhNgay × số ngày/30 (mất benhHp khí huyết tối đa, tâm ma +benhTm). nghi: nghỉ ở nhà hồi phần khí huyết.
+-const NHA={khong:['daodong','linh','hat'],thue:{tran:150,thanh:300},thueNoi:['tran','thanh'],
++const NHA={khong:['daodong','linh','hat'],thue:{tran:150,thanh:300,tutran:150,tuthanh:300},thueNoi:['tran','thanh','tutran','tuthanh'],
+   ngoai:{min:8,lanh:0.08,benh:0.15,benhNgay:0.35,benhHp:0.15,benhTm:5},nghi:0.3,nghiH:8,troNgay:1};
+diff --git a/content/rules/tien.js b/content/rules/tien.js
+index edd7e14..dcb7d0a 100644
+--- a/content/rules/tien.js
++++ b/content/rules/tien.js
+@@ -25,10 +25,12 @@ const TIEN2={
+   doi:{
+     cho:{xuong:[97,93,89],len:[1.06,1.12,1.22],max:2,lenThang:[6,3,1]},
+     tong:{xuong:[99,95,91],len:[1.05,1.10,1.18],max:2,lenThang:[5,2,1]},
+-    thanh:{xuong:[94,90,86],len:[1.10,1.18,1.30],max:1,lenThang:[4,1,0]}},
++    thanh:{xuong:[94,90,86],len:[1.10,1.18,1.30],max:1,lenThang:[4,1,0]},
++    tuthanh:{xuong:[94,90,86],len:[1.10,1.18,1.30],max:1,lenThang:[4,1,0]},
++    tutran:{xuong:[97,93,89],len:[1.06,1.12,1.22],max:2,lenThang:[6,3,1]}},
+   lech:2,
+   nc:{dao:0.12,chu:3,day:0.04,phai:0.7,min:0.7,max:1.4},
+-  shop:{tran:1,thanh:2},
++  shop:{tran:1,thanh:2,tutran:2,tuthanh:3},
+   hang:[{id:'kim_sang_duoc',bac:120,qty:3},{id:'huong_an_than',bac:60,qty:2},{id:'luong_kho',bac:70,qty:5}],
+-  cam:{thang:1,xuPer:200,noi:['thanh','cho']},
++  cam:{thang:1,xuPer:200,noi:['thanh','cho']}, // cầm đồ chỉ ở thành phàm nhân và chợ phiên
+   dung:{kim_sang_duoc:{hp:0.3},huong_an_than:{tamma:-5}}};
+diff --git a/content/rules/truy-na.js b/content/rules/truy-na.js
+index 6a57b99..5e33406 100644
+--- a/content/rules/truy-na.js
++++ b/content/rules/truy-na.js
+@@ -27,7 +27,7 @@
+ const TNA={
+   toi:{pha_dat:2,no:2,chong:1,giet_chung:2,danh:2},
+   deed:{giet_vo_toi:3,diet_khau:3,giet_doat_bao:3,luyen_hon_nguoi:3,dau_doc:2,ban_nguoi:2,huyet_te_nguoi:2,trom_ngheo:1,trom_ac_ba:1,hiep_dao:1,lua_loi:1,dao_mo:1,tham_o:1},
+-  chung:{thanh:0.95,tran:0.5,cho:0.5,ancu:0.25,tong:0.6,hoang:0.08,chac:0.9,che:0.6},
++  chung:{thanh:0.95,tran:0.5,tuthanh:0.95,tutran:0.5,cho:0.5,ancu:0.25,tong:0.6,hoang:0.08,chac:0.9,che:0.6},
+   ngan:{goc:0.35,tp:0.015,max:0.85},
+   mua:{xu:300,st:3,p:0.85},
+   giet:{lo:0.35,che:0.6},
+@@ -36,9 +36,9 @@ const TNA={
+   nhan:[0,0.15,0.3,0.5,0.7,0.9],
+   lan:5,lanM:2,danh:-60,danhSau:-45,
+   san:{min:2000,p:0.25},
+-  quan:['tran','thanh','cho','tong'],tuNoi:['cho','tong','ancu'],
++  quan:['tran','thanh','tutran','tuthanh','cho','tong'],tuNoi:['cho','tong','ancu','tutran','tuthanh'],
+   hoan:{m:2,max:3,gian:3,giu:180},
+   phat:{xuLt:200,phatMax:5},
+   tu:[0,1,3,6,12,36],
+   cong:[0,2,6,12,24,0],
+-  cai:{xu:300,ngay:30,dong:{thanh:0.25,cho:0.2,tran:0.08},canh:['thanh','tong'],khi:{goc:0.15,realm:0.05,max:0.6}}};
++  cai:{xu:300,ngay:30,dong:{thanh:0.25,tuthanh:0.25,cho:0.2,tran:0.08,tutran:0.08},canh:['thanh','tuthanh','tong'],khi:{goc:0.15,realm:0.05,max:0.6}}};
+diff --git a/content/rules/wild2.js b/content/rules/wild2.js
+index 48f14dc..f8b44a6 100644
+--- a/content/rules/wild2.js
++++ b/content/rules/wild2.js
+@@ -1,2 +1,2 @@
+ // Nguồn chuẩn: WILD2. Luật xử lý ở src/game/core2/02-dia-diem-mo-rong.js.
+-const WILD2=['rung','nui','song','bien','hoang','phe','dong','ma','thien'];
++const WILD2=['rung','nui','song','bien','hoang','phe','dong','ma','thien','bicanh','dongthien','como','yeusao','ditich'];
+diff --git a/content/world/newt.js b/content/world/newt.js
+index 0e6ecef..4d99cf1 100644
+--- a/content/world/newt.js
++++ b/content/world/newt.js
+@@ -6,4 +6,12 @@ const NEWT={
+   cho:{n:'chợ phiên tu sĩ',as:'thanh',sfx:['Tụ Bảo Phường','Chợ Phiên','Giao Dịch Phường']},
+   ancu:{n:'thảo lư ẩn sĩ',as:'nui',sfx:['Thảo Lư','Trúc Xá','Am']},
+   dam:{n:'đầm lầy',as:'song',sfx:['Đầm','Trạch','Bãi Lầy']},
++  // loại sinh riêng ở thế giới mới (no:1 = không rải ngẫu nhiên ở extendWorld; mượn cảnh, sự kiện, yêu ma của loại `as`; ic = biểu tượng chữ)
++  tutran:{n:'trấn tu sĩ',as:'tran',no:1,ic:'🏘️',sfx:['Phường','Tập','Bảo']},
++  tuthanh:{n:'thành tu sĩ',as:'thanh',no:1,ic:'🏯',sfx:['Tiên Thành','Linh Thành']},
++  bicanh:{n:'bí cảnh',as:'thien',no:1,ic:'🌀',sfx:['Bí Cảnh','Huyền Cảnh']},
++  dongthien:{n:'động thiên',as:'dong',no:1,ic:'🌌',sfx:['Động Thiên']},
++  como:{n:'cổ mộ',as:'phe',no:1,ic:'⚰️',sfx:['Cổ Mộ','Địa Cung']},
++  yeusao:{n:'yêu sào',as:'rung',no:1,ic:'🐾',sfx:['Yêu Sào','Yêu Quật']},
++  ditich:{n:'di tích cổ',as:'phe',no:1,ic:'🗿',sfx:['Di Tích','Cổ Điện']},
+ };
+diff --git a/content/world/place.js b/content/world/place.js
+index 5caec1e..99242c1 100644
+--- a/content/world/place.js
++++ b/content/world/place.js
+@@ -15,5 +15,12 @@ const PLACE = {
+     hoang: ['Nguyên','Hoang Mạc','Chiến Trường','Bãi','Hoang Nguyên'],
+     ma: ['Ma Uyên','Quỷ Vực','Huyết Trì','Thi Lĩnh','U Cốc','Ma Thành'],
+     thien: ['Thiên Môn','Tinh Lộ','Vân Hải','Hư Không','Tiên Khư','Thiên Giai'],
++    tutran: ['Phường','Tập','Bảo','Phường Thị','Phường','Bảo'],
++    tuthanh: ['Tiên Thành','Linh Thành','Tiên Phủ','Tiên Thành'],
++    bicanh: ['Bí Cảnh','Huyền Cảnh','Mật Cảnh','Tiên Cảnh'],
++    dongthien: ['Động Thiên','Thiên Động','Động Thiên'],
++    como: ['Cổ Mộ','Địa Cung','Lăng','Mộ Cung','Cổ Lăng'],
++    yeusao: ['Yêu Sào','Thú Huyệt','Yêu Quật','Xà Quật','Hổ Huyệt'],
++    ditich: ['Di Tích','Cổ Tích','Tàn Viên','Cổ Điện','Đoạn Đài'],
+   },
+ };
+diff --git a/content/world/settle.js b/content/world/settle.js
+index 589bee6..ee33c4e 100644
+--- a/content/world/settle.js
++++ b/content/world/settle.js
+@@ -1,2 +1,2 @@
+ // Nguồn chuẩn: SETTLE. Luật xử lý ở src/game/core2/02-dia-diem-mo-rong.js.
+-const SETTLE=['tran','thanh','cho','tong','ancu'];
++const SETTLE=['tran','thanh','tutran','tuthanh','cho','tong','ancu'];
+diff --git a/content/world/size-t.js b/content/world/size-t.js
+index f6a8a0d..96c83ce 100644
+--- a/content/world/size-t.js
++++ b/content/world/size-t.js
+@@ -1,2 +1,27 @@
+ // Nguồn chuẩn: SIZE_T. Luật xử lý ở src/game/core2/33-the-gioi-mo.js.
+-const SIZE_T={tran:[2,4],thanh:[4,7],dong:[1,2],khoang:[1,2],duoc:[1,2],ancu:[1,1],cho:[1,2],phe:[1,3],ma:[2,4],sao:[2,3],rung:[3,6],nui:[3,6],song:[2,4],bien:[3,6],hoang:[4,7],thien:[3,5],linhdia:[2,4],dam:[2,4]};
++const SIZE_T={tran:[2,4],thanh:[4,7],dong:[1,2],khoang:[1,2],duoc:[1,2],ancu:[1,1],cho:[1,2],phe:[1,3],ma:[2,4],sao:[2,3],rung:[3,6],nui:[3,6],song:[2,4],bien:[3,6],hoang:[4,7],thien:[3,5],linhdia:[2,4],dam:[2,4],
++  tutran:[1,3],tuthanh:[3,5],bicanh:[2,4],dongthien:[1,3],como:[1,2],yeusao:[2,3],ditich:[1,3]};
++
++// Số nơi sinh cho mỗi quận (thế giới mới). Cỡ quận theo số ô đất đi được: dưới nguong[0] là bé, trên nguong[1] là lớn, còn lại là vừa.
++// thanhPham/thanhTu = thành phàm nhân / thành tu sĩ; tranPham/tranTu = trấn phàm nhân / trấn tu sĩ; hoang = số nơi hoang dã, bí cảnh thêm vào.
++const NOI_SL={nguong:[150,300],
++  be:{thanhPham:[1,1],thanhTu:[1,1],tranPham:[3,3],tranTu:[1,2],hoang:[4,8]},
++  vua:{thanhPham:[1,1],thanhTu:[1,1],tranPham:[6,6],tranTu:[3,3],hoang:[4,8]},
++  lon:{thanhPham:[2,2],thanhTu:[1,1],tranPham:[9,9],tranTu:[4,4],hoang:[4,8]}};
++// Loại nơi hoang dã được thêm vào quận: w trọng số chọn · d [nguy hiểm thấp nhất, cao nhất] · ter trọng số theo loại đất (1 đồng bằng, 2 rừng, 3 núi, 6 đồi, 7 đầm lầy) · dp 1 = có động phủ sẵn.
++const NOI_HOANG={
++  bicanh:{w:1.3,d:[3,3],ter:{3:2,6:2,1:1,2:1,7:1}},
++  dongthien:{w:1.3,d:[3,3],ter:{3:3,6:2,2:1}},
++  como:{w:1.6,d:[2,3],ter:{1:2,6:3,3:1,7:1}},
++  yeusao:{w:1.6,d:[2,3],ter:{2:3,3:2,7:2,6:1}},
++  ditich:{w:1.6,d:[1,2],ter:{1:3,6:2,2:1,3:1}},
++  rung:{w:1,d:[0,2],ter:{2:4,6:1}},
++  nui:{w:1,d:[1,2],ter:{3:4,6:2}},
++  dong:{w:0.8,d:[1,2],ter:{3:3,6:2},dp:1},
++  hoang:{w:0.7,d:[1,2],ter:{1:3,6:1}},
++  phe:{w:0.7,d:[1,3],ter:{1:2,6:2,3:1}},
++  dam:{w:0.6,d:[1,2],ter:{7:5,2:1}},
++  duoc:{w:0.6,d:[0,1],ter:{2:3,6:1}},
++  khoang:{w:0.5,d:[1,2],ter:{3:4,6:2}},
++  linhdia:{w:0.5,d:[1,2],ter:{3:1,2:2,6:2},dp:1},
++  ancu:{w:0.4,d:[0,0],ter:{6:3,2:1,3:1}}};
+diff --git a/content/world/the-gioi-neo.js b/content/world/the-gioi-neo.js
+index fcd6c45..202bde5 100644
+--- a/content/world/the-gioi-neo.js
++++ b/content/world/the-gioi-neo.js
+@@ -65,7 +65,7 @@ const VAI_NP={
+ // THE_LUC: n tên; noi căn cứ; chu vai đứng đầu; tien/quan/dan sức tài, quân, dân (0–100); suc sức duy trì ban đầu; giu điều thế lực giữ;
+ //   no thế lực nó nợ / cần; lai mỗi năm sức duy trì đổi bao nhiêu khi yên ổn (âm: tự hao); phuc năm tối thiểu để có người lập lại sau khi diệt.
+ const THE_LUC={
+-  FA01:{n:'Lương triều',noi:'LOC02',chu:'NP04',tien:45,quan:55,dan:80,suc:65,giu:'thuế và ngôi',no:['FA02','FA10'],lai:-0.2,phuc:20},
++  FA01:{n:'Lương triều',loai:'hq',kv:0,noi:'LOC02',chu:'NP04',tien:45,quan:55,dan:80,suc:65,giu:'thuế và ngôi',no:['FA02','FA10'],lai:-0.2,phuc:20},
+   FA02:{n:'Vạn Bảo Thương Hội',noi:'LOC03',chu:'NP05',tien:90,quan:30,dan:40,suc:75,giu:'hợp đồng, độc quyền vận chuyển',no:['FA08','FA05'],lai:0.3,phuc:30},
+   FA03:{n:'Huyền Cơ Trận Các',noi:'LOC05',chu:'NP09',tien:50,quan:35,dan:20,suc:60,giu:'hệ trận Ngũ Tổ',no:['FA09'],lai:0,phuc:60},
+   FA04:{n:'Thanh Khê Liên Thôn',noi:'LOC01',chu:'NP01',tien:20,quan:15,dan:70,suc:55,giu:'đất, nước, an táng',no:['FA01'],lai:0.1,phuc:10},
+@@ -74,7 +74,22 @@ const THE_LUC={
+   FA07:{n:'Bách Thảo Cốc',noi:'LOC10',chu:'NP19',tien:40,quan:20,dan:50,suc:55,giu:'cứu chữa và đan phương',no:['FA01'],lai:-0.1,phuc:40},
+   FA08:{n:'Hàn Thiết Hội',noi:'LOC11',chu:'NP21',tien:45,quan:30,dan:60,suc:55,giu:'lò và quyền thợ',no:['FA02'],lai:-0.1,phuc:25},
+   FA09:{n:'Lạn Kha Tự',noi:'LOC12',chu:'NP23',tien:25,quan:10,dan:45,suc:70,giu:'ký ức người chết',no:['FA03'],lai:0.2,phuc:30},
+-  FA10:{n:'Bắc Phong Quân',noi:'LOC13',chu:'NP25',tien:30,quan:80,dan:40,suc:60,giu:'biên ải và lương quân',no:['FA01'],lai:-0.1,phuc:20}
++  FA10:{n:'Bắc Phong Quân',noi:'LOC13',chu:'NP25',tien:30,quan:80,dan:40,suc:60,giu:'biên ải và lương quân',no:['FA01'],lai:-0.1,phuc:20},
++  // Hoàng quốc (loai:'hq'): thế lực phàm nhân nắm các thành, trấn phàm nhân của một nhóm quận. Mỗi đại khu vực hai nước, kv = đại khu vực.
++  //   Không có trụ sở neo (noi:null) và chưa có người giữ vai (chu:null). Tên dưới đây là tên tạm.
++  FA11:{n:'Yên quốc',loai:'hq',kv:0,noi:null,chu:null,tien:50,quan:50,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
++  FA12:{n:'Sở quốc',loai:'hq',kv:1,noi:null,chu:null,tien:45,quan:55,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
++  FA13:{n:'Ngô quốc',loai:'hq',kv:1,noi:null,chu:null,tien:55,quan:45,dan:65,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
++  FA14:{n:'Việt quốc',loai:'hq',kv:2,noi:null,chu:null,tien:50,quan:45,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
++  FA15:{n:'Mân quốc',loai:'hq',kv:2,noi:null,chu:null,tien:55,quan:40,dan:65,suc:58,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
++  FA16:{n:'Thục quốc',loai:'hq',kv:3,noi:null,chu:null,tien:45,quan:50,dan:70,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
++  FA17:{n:'Tần quốc',loai:'hq',kv:3,noi:null,chu:null,tien:40,quan:60,dan:65,suc:62,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
++  FA18:{n:'Triệu quốc',loai:'hq',kv:4,noi:null,chu:null,tien:35,quan:65,dan:60,suc:60,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30},
++  FA19:{n:'Hán quốc',loai:'hq',kv:4,noi:null,chu:null,tien:40,quan:55,dan:65,suc:58,giu:'ruộng, thuế và dân phàm',no:[],lai:0,phuc:30}
+ };
++// HQ_KV: hai Hoàng quốc của từng đại khu vực (kv 0..4); Lương triều (FA01) luôn là nước ở nhóm quận có Lương Kinh (LOC02).
++const HQ_KV=[['FA01','FA11'],['FA12','FA13'],['FA14','FA15'],['FA16','FA17'],['FA18','FA19']];
++// thế lực tu sĩ có căn cứ neo: thành, trấn tu sĩ gần căn cứ nào thì thuộc căn cứ đó (tông môn gần hơn thì thuộc tông môn)
++const FA_TU=['FA02','FA03','FA05','FA06','FA07','FA08','FA09'];
+ // người dạy nghề tu ở từng nơi neo (nối Đ7: nhập học P.2 gọi người đang giữ vai)
+ const TU_THAY={LOC05:'NP09',LOC07:'NP13',LOC08:'NP15',LOC09:'NP17',LOC10:'NP19',LOC11:'NP21',LOC12:'NP23',LOC13:'NP25',LOC15:'NP29'};
+diff --git a/src/game/core/08-loi-kiep.js b/src/game/core/08-loi-kiep.js
+index 81c600b..65ba3f8 100644
+--- a/src/game/core/08-loi-kiep.js
++++ b/src/game/core/08-loi-kiep.js
+@@ -256,11 +256,11 @@ function worldCoarse(m){
+ }
+ function nodeRecover(){
+   const w=W();
+-  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;if(n.type==='tran'||n.type==='thanh')chron(contentText("core_08-loi-kiep_js.nodeRecover.056", [n.name]));}}
++  for(const R0 of w.regions)for(const n of R0.nodes){if(n.state==='ruin'&&w.t>=n.stateUntil){n.state='ok';n.stateUntil=0;if(isTownT(n.type))chron(contentText("core_08-loi-kiep_js.nodeRecover.056", [n.name]));}}
+ }
+ function flipNode(){
+   const w=W();const r=G.run;
+-  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if(['tran','thanh','tong'].includes(n.type)&&n.state!=='ruin'&&(!r||n.id!==r.at))pool.push(n); // nơi đang hoang tàn thì không "gặp nạn" lần nữa
++  const pool=[];for(const R0 of w.regions)for(const n of R0.nodes)if((isTownT(n.type)||n.type==='tong')&&n.state!=='ruin'&&(!r||n.id!==r.at))pool.push(n); // nơi đang hoang tàn thì không "gặp nạn" lần nữa
+   if(!pool.length)return;const n=pick(pool);
+   if(n.state==='ruin'){n.state='ok';n.stateUntil=0;chron(contentText("core_08-loi-kiep_js.flipNode.057", [n.name]));}
+   else if(n.type==='tong'){const s=pick(w.sects);n.owner=s.n;chron(contentText("core_08-loi-kiep_js.flipNode.058", [n.name,s.n]));}
+diff --git a/src/game/core/09-ban-do.js b/src/game/core/09-ban-do.js
+index f56c3f5..3ba1a64 100644
+--- a/src/game/core/09-ban-do.js
++++ b/src/game/core/09-ban-do.js
+@@ -58,14 +58,25 @@ function dijkstraAll(nodes,edges,src){
+     for(const e of edges){if(e.a!==u&&e.b!==u)continue;const v=e.a===u?e.b:e.a;if(D[u]+e.len<D[v])D[v]=D[u]+e.len;}}
+   return D;
+ }
+-function nodeById(id){const w=W();const R0=w.regions[Math.floor(id/100)];return R0&&R0.nodes[id%100];}
++// mã địa điểm: khu*100+số thứ tự (dưới 90); thế giới mới có hơn 90 nơi mỗi khu nên số thứ tự từ 90 trở đi mã là (khu+1)*1000+số thứ tự
++function idReg(id){return id>=1000?Math.floor(id/1000)-1:Math.floor(id/100);}
++function idIdx(id){return id>=1000?id%1000:id%100;}
++function mkId(k,i){return i<90?k*100+i:(k+1)*1000+i;}
++// loại nơi có dân: thành trấn phàm nhân (tran, thanh) và thành trấn tu sĩ (tutran, tuthanh): ai cũng vào được, khác nhau ở công trình, đồ và việc
++function isTownT(t){return t==='tran'||t==='thanh'||t==='tutran'||t==='tuthanh';}
++function isTuT(t){return t==='tutran'||t==='tuthanh';}
++function isThanhT(t){return t==='thanh'||t==='tuthanh';}
++// nơi có đồ, việc của tu sĩ: thành trấn tu sĩ; ở thế giới sinh từ bản cũ (chưa chia hai loại) thì thành thường vẫn có cả hai
++function isTuK(t){return t==='tutran'||t==='tuthanh'||(t==='thanh'&&!(typeof W==='function'&&W()&&W().v2));}
++function isTuN(n){return !!n&&isTuK(n.type);}
++function nodeById(id){const w=W();const R0=w.regions[idReg(id)];return R0&&R0.nodes[idIdx(id)];}
+ function regionOf(k){return W().regions[k];}
+ function curNode(){return G.run?nodeById(G.run.at):null;}
+ function curDanger(){const n=curNode();return n?n.danger:0;}
+-function edgeLen(a,b){const R0=regionOf(Math.floor(a/100));const e=R0.edges.find(e=>(e.a===a&&e.b===b)||(e.a===b&&e.b===a));return e?e.len:Math.round(Math.hypot(nodeById(a).x-nodeById(b).x,nodeById(a).y-nodeById(b).y));}
+-function neighbors(id){const R0=regionOf(Math.floor(id/100));return R0.edges.filter(e=>e.a===id||e.b===id).map(e=>e.a===id?e.b:e.a);}
++function edgeLen(a,b){const R0=regionOf(idReg(a));const e=R0.edges.find(e=>(e.a===a&&e.b===b)||(e.a===b&&e.b===a));return e?e.len:Math.round(Math.hypot(nodeById(a).x-nodeById(b).x,nodeById(a).y-nodeById(b).y));}
++function neighbors(id){const R0=regionOf(idReg(id));return R0.edges.filter(e=>e.a===id||e.b===id).map(e=>e.a===id?e.b:e.a);}
+ function findPath(from,to){
+-  const R0=regionOf(Math.floor(from/100));if(Math.floor(to/100)!==R0.k)return null;
++  const R0=regionOf(idReg(from));if(idReg(to)!==R0.k)return null;
+   const D={},P={};for(const n of R0.nodes)D[n.id]=Infinity;D[from]=0;const done=new Set();
+   while(true){let u=null;for(const n of R0.nodes)if(!done.has(n.id)&&D[n.id]<Infinity&&(u===null||D[n.id]<D[u]))u=n.id;if(u===null)break;if(u===to)break;done.add(u);
+     for(const v of neighbors(u)){const L=D[u]+edgeLen(u,v);if(L<D[v]){D[v]=L;P[v]=u;}}}
+@@ -151,7 +162,7 @@ function nodeDanger(n){return n.fog>=2?n.danger:(n.memory?n.danger:(n.rd!=null?n
+ function openPlace(id){const r=G.run;const n=nodeById(id==null?r.at:id);r.place={n:n.name,t:n.type};r.scene={type:'place',id:n.id,msg:[],chips:[],intro:placeIntro(n)};}
+ function placeIntro(n){
+   const t=W().t;let s=T('{canh_'+(P['canh_'+n.type]?n.type:(n.type==='ai'?'nui':n.type==='sao'?'phe':'tran'))+'}');
+-  const pt=partOf(t);const town=['tran','thanh','cho','tong','ancu','ai'].includes(n.type);
++  const pt=partOf(t);const town=isTownT(n.type)||['cho','tong','ancu','ai'].includes(n.type);
+   // bỏ những câu không hợp chỗ (khói bếp, mái ngói ở nơi hoang vu) hoặc không hợp giờ (nắng, chim én lúc đêm)
+   const fit=L=>(L||[]).filter(x=>(town||!/khói bếp|đèn lồng|chó sủa|mái ngói|nước giếng|lúa chín|cơm mới/i.test(x))&&(!(pt==='dem'||pt==='toi')||!/nắng|chim én|ve kêu|nhạn bay|mây trắng/i.test(x)));
+   const pp=fit(P['buoi_'+pt]),ss=fit(P['mua_'+seasonOf(t)]);
+@@ -167,13 +178,13 @@ function placeActs(n){
+   if(t==='ai'){add('cross','🚧',contentText("core_09-ban-do_js.placeActs.011"),0,contentText("core_09-ban-do_js.placeActs.012"));return L;}
+   if(t==='sao'){const done=r.bossDone[r.region];add('boss','☠️',done?contentText("core_09-ban-do_js.placeActs.013"):contentText("core_09-ban-do_js.placeActs.014"),1,contentText("core_09-ban-do_js.placeActs.015"),done);add('explore','🔍',contentText("core_09-ban-do_js.placeActs.016"),2,contentText("core_09-ban-do_js.placeActs.017"));return L;}
+   add('explore','🔍',contentText("core_09-ban-do_js.placeActs.018"),2,contentText("core_09-ban-do_js.placeActs.019")+(n.danger>=2?contentText("core_09-ban-do_js.placeActs.020"):''));
+-  if((t==='tran'||t==='thanh')&&!ruin){
++  if(isTownT(t)&&!ruin){
+     add('inn','🛏️',contentText("core_09-ban-do_js.placeActs.021"),8,contentText("core_09-ban-do_js.placeActs.022"),r.st<price(4),'💎'+price(4));
+     add('tea','🍵',contentText("core_09-ban-do_js.placeActs.023"),1,contentText("core_09-ban-do_js.placeActs.024")+(svcOpen('tea')?'':contentText("core_09-ban-do_js.placeActs.025")),!svcOpen('tea'));
+     if(QUEST_ON)add('board','📜',contentText("core_09-ban-do_js.placeActs.026"),0,contentText("core_09-ban-do_js.placeActs.027"));
+   }
+-  if(t==='thanh'&&!ruin)add('shop','🏪',contentText("core_09-ban-do_js.placeActs.028"),1,contentText("core_09-ban-do_js.placeActs.029")+(svcOpen('shop')?'':contentText("core_09-ban-do_js.placeActs.030")),!svcOpen('shop'));
+-  if(HOURS_ON&&(t==='thanh'||t==='ma')&&!ruin)add('ghost','🏮',contentText("core_09-ban-do_js.placeActs.031"),1,contentText("core_09-ban-do_js.placeActs.032"),!svcOpen('ghost'));
++  if(isTuK(t)&&!ruin)add('shop','🏪',contentText("core_09-ban-do_js.placeActs.028"),1,contentText("core_09-ban-do_js.placeActs.029")+(svcOpen('shop')?'':contentText("core_09-ban-do_js.placeActs.030")),!svcOpen('shop'));
++  if(HOURS_ON&&((isTuK(t)&&t!=='tutran')||t==='ma')&&!ruin)add('ghost','🏮',contentText("core_09-ban-do_js.placeActs.031"),1,contentText("core_09-ban-do_js.placeActs.032"),!svcOpen('ghost'));
+   if(t==='tong'){if(!r.flags.tongmon)add('join','⛩️',contentText("core_09-ban-do_js.placeActs.033"),2,contentText("core_09-ban-do_js.placeActs.034"));else add('lib','📚',contentText("core_09-ban-do_js.placeActs.035"),2,contentText("core_09-ban-do_js.placeActs.036"));}
+   if(WILD.includes(t)||n.dp||t==='tong')add('tinh','🧘',contentText("core_09-ban-do_js.placeActs.037"),6,contentText("core_09-ban-do_js.placeActs.038"));
+   if(n.dp){
+@@ -184,7 +195,7 @@ function placeActs(n){
+     if(canBreak())add('bt','🌕',r.realm>=4?contentText("core_09-ban-do_js.placeActs.045"):contentText("core_09-ban-do_js.placeActs.046")+REALM[r.realm+1],HM,contentText("core_09-ban-do_js.placeActs.047"),false,'🌕'+btWord(btChance()));
+     add('quyan','🍃',contentText("core_09-ban-do_js.placeActs.048"),0,contentText("core_09-ban-do_js.placeActs.049"));
+   }
+-  if(CACHE_ON&&WILD.concat(['phe','dong','ma','thien']).includes(t))add('bury','⚱️',contentText("core_09-ban-do_js.placeActs.050"),1,contentText("core_09-ban-do_js.placeActs.051"));
++  if(CACHE_ON&&WILD.concat(['phe','dong','ma','thien','bicanh','dongthien','como','yeusao','ditich']).includes(t))add('bury','⚱️',contentText("core_09-ban-do_js.placeActs.050"),1,contentText("core_09-ban-do_js.placeActs.051"));
+   if(n.grave&&GRAVE_ON)add('grave','🪦',contentText("core_09-ban-do_js.placeActs.052"),1,contentText("core_09-ban-do_js.placeActs.053"));
+   if(n.patron&&GRAVE_ON)add('patron','🤝',contentText("core_09-ban-do_js.placeActs.054"),1,contentText("core_09-ban-do_js.placeActs.055"));
+   return L;
+diff --git a/src/game/core/11-doi-cong-phap.js b/src/game/core/11-doi-cong-phap.js
+index 7b713f4..987e2bc 100644
+--- a/src/game/core/11-doi-cong-phap.js
++++ b/src/game/core/11-doi-cong-phap.js
+@@ -20,7 +20,7 @@ ENT_ON=true;HOURS_ON=true;SEASON_ON=true;QUEST_ON=true;CACHE_ON=true;GRAVE_ON=tr
+ // Bảng DI_K: content/world/di-k.js
+ function entsHere(k){return W().ents.filter(e=>e.r===k);}
+ function entXY(e){const a=nodeById(e.at);if(e.to==null)return [a.x,a.y];const b=nodeById(e.to);return [a.x+(b.x-a.x)*e.prog,a.y+(b.y-a.y)*e.prog];}
+-function townsOf(k){return regionOf(k).nodes.filter(n=>(n.type==='tran'||n.type==='thanh')&&n.state==='ok');}
++function townsOf(k){return regionOf(k).nodes.filter(n=>isTownT(n.type)&&n.state==='ok');}
+ function setRoute(e,dest){const p=findPath(e.at,dest);if(!p||p.length<2){e.route=[];e.to=null;return false;}e.route=p.slice(1);e.to=e.route[0];e.prog=0;e.dest=dest;return true;}
+ function spawnEnt(type,k,o){
+   const w=W();o=o||{};const T0=ENT_T[type];const R0=regionOf(k);const ns=R0.nodes;
+@@ -29,7 +29,7 @@ function spawnEnt(type,k,o){
+   if(type==='thuong'){const ts=townsOf(k);if(ts.length<2)return null;let a=pick(ts),b=pick(ts.filter(x=>x!==a));
+     if(o.near!=null){const nb=neighbors(o.near);a=nodeById(pick(nb));const far=ns.filter(x=>x.id!==o.near&&x.id!==a.id&&x.type!=='ai');const p=pick(far);e.at=a.id;setRoute(e,o.near);e.route=e.route.concat((findPath(o.near,p.id)||[]).slice(1));e.dest=p.id;}
+     else{e.at=a.id;setRoute(e,b.id);}e.name=contentText("core_11-doi-cong-phap_js.spawnEnt.002")+pick(NAME.ho);}
+-  else if(type==='thutrieu'){const src=ns.filter(n=>n.danger>=2&&!['ai','tran','thanh'].includes(n.type));if(!src.length)return null;const a=pick(src);e.at=a.id;
++  else if(type==='thutrieu'){const src=ns.filter(n=>n.danger>=2&&!['ai','tran','thanh','tutran','tuthanh'].includes(n.type));if(!src.length)return null;const a=pick(src);e.at=a.id;
+     const ts=townsOf(k).sort((x,y)=>Math.hypot(x.x-a.x,x.y-a.y)-Math.hypot(y.x-a.x,y.y-a.y));if(!ts.length)return null;setRoute(e,ts[0].id);e.data.tgt=ts[0].id;e.name=contentText("core_11-doi-cong-phap_js.spawnEnt.003")+a.name;if(e.route.length)e.until=w.t+pathLen([a.id].concat(e.route))/e.speed+5*HD;}
+   else if(type==='tuantra'){const ss=ns.filter(n=>n.type==='tong');const base=ss.length?pick(ss):pick(townsOf(k).length?townsOf(k):ns);e.at=base.id;e.data.home=base.id;const nb=neighbors(base.id);setRoute(e,pick(nb));e.name=contentText("core_11-doi-cong-phap_js.spawnEnt.004")+(base.owner||pick(w.sects).n);}
+   else if(type==='thienkieu'){const al=(G.run?G.run.rivals:w.rstate||[]).filter(x=>x.alive);if(!al.length)return null;const rv=o.rv!=null?o.rv:pick(al).i;if(w.ents.some(x=>x.type==='thienkieu'&&x.data.rv===rv))return null;e.data.rv=rv;e.name=w.rivals[rv].ten;
+@@ -39,7 +39,7 @@ function spawnEnt(type,k,o){
+     if(o.near!=null){a=nodeById(pick(neighbors(o.near)));e.at=a.id;setRoute(e,o.near);e.route=e.route.concat((findPath(o.near,dst.id)||[]).slice(1));e.dest=dst.id;}
+     else{e.at=a.id;setRoute(e,dst.id);}
+     const kk=pick(KHACH_K);e.data.k=kk[0];e.name=kk[0]+' họ '+pick(NAME.ho);e.icon=kk[1];}
+-  else if(type==='di'){const kk=o.k||pick(Object.keys(DI_K));const pool=ns.filter(n=>kk==='daugia'?n.type==='thanh':!['tran','thanh','ai','sao'].includes(n.type));if(!pool.length)return null;const a=pick(pool);e.at=a.id;e.data.k=kk;e.name=DI_K[kk].n;e.icon=DI_K[kk].i;e.speed=0;
++  else if(type==='di'){const kk=o.k||pick(Object.keys(DI_K));const pool=ns.filter(n=>kk==='daugia'?isThanhT(n.type):!['tran','thanh','tutran','tuthanh','ai','sao'].includes(n.type));if(!pool.length)return null;const a=pick(pool);e.at=a.id;e.data.k=kk;e.name=DI_K[kk].n;e.icon=DI_K[kk].i;e.speed=0;
+     chronQuiet(contentText("core_11-doi-cong-phap_js.spawnEnt.006", [DI_K[kk].n,a.name]));}
+   if(e.at==null)return null;
+   w.ents.push(e);return e;
+diff --git a/src/game/core/12-dong-doi-tam-thoi.js b/src/game/core/12-dong-doi-tam-thoi.js
+index 392493f..433f75d 100644
+--- a/src/game/core/12-dong-doi-tam-thoi.js
++++ b/src/game/core/12-dong-doi-tam-thoi.js
+@@ -42,7 +42,7 @@ function afterlife(r,cause,info){
+   const keep=[];
+   for(const L of w.legacy){
+     if(L.done){continue;}
+-    if(L.t==='an'&&chance(.5)){const pool=[];for(const R0 of w.regions.slice(0,Math.max(1,(r.maxRegion||0)+1)))for(const x of R0.nodes)if(['tran','thanh','tong'].includes(x.type)&&!x.patron)pool.push(x);
++    if(L.t==='an'&&chance(.5)){const pool=[];for(const R0 of w.regions.slice(0,Math.max(1,(r.maxRegion||0)+1)))for(const x of R0.nodes)if((isTownT(x.type)||x.type==='tong')&&!x.patron)pool.push(x);
+       if(pool.length){const x=pick(pool);x.patron={ten:L.ten,who:L.who,d:L.d,role:x.type==='tong'?contentText("core_12-dong-doi-tam-thoi_js.afterlife.020"):contentText("core_12-dong-doi-tam-thoi_js.afterlife.021")};continue;}}
+     if(L.t==='oan'&&chance(.5)){L.feud=1;keep.push(L);continue;}
+     if(L.t==='oan'&&!L.feud)continue;
+diff --git a/src/game/core/15-thu-trieu.js b/src/game/core/15-thu-trieu.js
+index d0586c7..4502856 100644
+--- a/src/game/core/15-thu-trieu.js
++++ b/src/game/core/15-thu-trieu.js
+@@ -54,7 +54,7 @@ const RVV=r=>{const w=W();let i=r.metRival;let rv=r.rivals.find(x=>x.i===i&&x.al
+ 
+ 
+ // lời kể bế quan theo chỗ ngồi: giữa thành trấn (chưa có động phủ) thì là phòng trọ, không phải vách đá
+-function bqText(){const r=G.run;const n=r&&nodeById(r.at);return n&&!n.dp&&['tran','thanh','cho'].includes(n.type)?REST_T.bqTown:REST_T.bq;}
++function bqText(){const r=G.run;const n=r&&nodeById(r.at);return n&&!n.dp&&(isTownT(n.type)||n.type==='cho')?REST_T.bqTown:REST_T.bq;}
+ 
+ // câu mở đầu {mo} (thời tiết, thời khắc) phải hợp giờ và mùa đang có: không "giữa trưa" lúc nửa đêm, không "tuyết đầu mùa" giữa hè
+ {const MO0=P.mo.slice();const PART={sang:[5,11],chieu:[4,9,18,22],toi:[0,10],dem:[3,7,13,19,23]};const ANY=[1,2,8,12,14,16,17];const SEA={dong:[6,15],thu:[20],xuan:[21],ha:[9]};
+diff --git a/src/game/core2/01-core2.js b/src/game/core2/01-core2.js
+index 03d2cef..095cab3 100644
+--- a/src/game/core2/01-core2.js
++++ b/src/game/core2/01-core2.js
+@@ -166,7 +166,7 @@ function noteOf(id){const w=W();return w.notes&&w.notes[id]||'';}
+   const r=run2();const sc=r&&r.scene;const n=sc&&sc.type==='place'?nodeById(sc.id):null;const ex0=n?n.explore:0;
+   _pa(a);
+   if(a!=='explore'||!G.run||!n||n.explore===ex0||n.explore>=4)return;
+-  const t=n.type;const k=['rung','hoang','song','bien','thien'].includes(t)?'thao':['nui','dong','phe','ma','sao'].includes(t)?'khoang':null;
++  const t=tAs(n.type);const k=['rung','hoang','song','bien','thien'].includes(t)?'thao':['nui','dong','phe','ma','sao'].includes(t)?'khoang':null;
+   if(k&&chance(.5)){const x=ri(1,2)+(n.danger>=2?1:0);r.mats[k]+=x;note(contentText("core2_01-core2_js.052", [MAT[k].i,x,MAT[k].n.toLowerCase()]),'up');}};}
+ {const _ac=autoCheck;autoCheck=function(){
+   const r=run2();if(r&&r.eggs.length&&r.pets.length<PET_MAX){for(let i=r.eggs.length-1;i>=0;i--)if(W().t>=r.eggs[i].t)petHatch(i);}
+diff --git a/src/game/core2/02-dia-diem-mo-rong.js b/src/game/core2/02-dia-diem-mo-rong.js
+index 8f4e63f..2a1c129 100644
+--- a/src/game/core2/02-dia-diem-mo-rong.js
++++ b/src/game/core2/02-dia-diem-mo-rong.js
+@@ -8,13 +8,13 @@ function nodeEvs(n){const r=G.run,w=W();if(n.type==='ai')return [];
+     for(let i=0;i<k*4&&L.length<k;i++){const id=pickEvent(n.type,'explore');if(id&&EVMAP[id]&&!L.includes(id))L.push(id);}
+     n.evs={kiep:r.kiep,until:w.t+5*HY,L};}
+   return n.evs.L;}
+-function exploreStats(n){const fp=[0.04,0.14,0.26,0.4][n.danger]+(['phe','ma'].includes(n.type)?0.08:0)+(n.type==='sao'?0.3:0);
+-  const foes=Object.keys(EN).filter(k=>EN[k].pl&&EN[k].pl.includes(n.type)).map(k=>EN[k]);
+-  const mat=['rung','hoang','song','bien','thien'].includes(n.type)?'thao':['nui','dong','phe','ma','sao'].includes(n.type)?'khoang':null;
++function exploreStats(n){const tt=tAs(n.type);const fp=[0.04,0.14,0.26,0.4][n.danger]+(['phe','ma'].includes(tt)?0.08:0)+(n.type==='sao'?0.3:0);
++  const foes=Object.keys(EN).filter(k=>EN[k].pl&&EN[k].pl.includes(tt)).map(k=>EN[k]);
++  const mat=['rung','hoang','song','bien','thien'].includes(tt)?'thao':['nui','dong','phe','ma','sao'].includes(tt)?'khoang':null;
+   return {fp:Math.min(.9,fp),foes,mat,egg:Math.min(.5,0.1+S().van*0.01)};}
+ {const _pa0=placeActs;placeActs=function(n){const L=_pa0(n);const r=G.run,w=W(),t=n.type,ruin=n.state==='ruin';
+   const add=(a,i,l,h,tip,dis,x)=>L.push({a,i,l,h,tip,dis:!!dis,x});
+-  if((t==='tran'||t==='thanh')&&!ruin){if(t==='tran')add('taphoa','',contentText("core2_02-dia-diem-mo-rong_js.001"),1,contentText("core2_02-dia-diem-mo-rong_js.002"));
++  if(isTownT(t)&&!ruin){if(t==='tran'||(t==='thanh'&&W().v2))add('taphoa','',contentText("core2_02-dia-diem-mo-rong_js.001"),1,contentText("core2_02-dia-diem-mo-rong_js.002"));
+     add('laibuon','',contentText("core2_02-dia-diem-mo-rong_js.003"),0,contentText("core2_02-dia-diem-mo-rong_js.004"));
+     add('tuu','',contentText("core2_02-dia-diem-mo-rong_js.005"),3,contentText("core2_02-dia-diem-mo-rong_js.006"),r.st<price(2),contentText("core2_02-dia-diem-mo-rong_js.007")+price(2));
+     add('tram','',contentText("core2_02-dia-diem-mo-rong_js.008"),0,contentText("core2_02-dia-diem-mo-rong_js.009"));}
+@@ -48,7 +48,7 @@ function sellList(){const r=G.run;const L=[];
+ function sellItem(k,i){const r=G.run;const it=sellList().find(x=>x.k===k&&x.i===i);if(!it)return;
+   if(k==='r'){const rel=r.relics[i];r.relics.splice(i,1);const c=run2().chu;for(let j=0;j<8;j++)if(c[j]&&c[j].k==='r'&&c[j].n===rel.name)c[j]=null;clampHp();}else r.pills.splice(i,1);
+   r.st+=it.p;log(contentText("core2_02-dia-diem-mo-rong_js.sellItem.035", [it.n,it.p]));note(contentText("core2_02-dia-diem-mo-rong_js.sellItem.036", [it.n,it.p]),'up');}
+-function stageList(n){const r=G.run;return regionOf(r.region).nodes.filter(x=>x.id!==n.id&&(x.type==='tran'||x.type==='thanh')&&x.fog>=3&&x.state!=='ruin')
++function stageList(n){const r=G.run;return regionOf(r.region).nodes.filter(x=>x.id!==n.id&&isTownT(x.type)&&x.fog>=3&&x.state!=='ruin')
+   .map(x=>{const p=findPath(n.id,x.id);return p?{id:x.id,n:x.name,h:travelHours(p)/3,c:price(1+Math.round(pathLen(p)/60))}:null;}).filter(Boolean);}
+ function stageGo(id){const r=G.run;const s=stageList(nodeById(r.at)).find(x=>x.id===id);if(!s||r.st<s.c)return;r.st-=s.c;r.scene=null;
+   advanceTime(s.h);if(!G.run||G.run.scene)return;arrive(id);openPlace(id);G.run.scene.msg=[contentText("core2_02-dia-diem-mo-rong_js.stageGo.037")+durH(s.h)+contentText("core2_02-dia-diem-mo-rong_js.stageGo.038")+s.n+'.'];}
+@@ -57,11 +57,11 @@ function sectPeople(n){const w=W();return w.rivals.map((x,i)=>({x,i})).filter(o=
+ // ================= ĐỢT 3: ĐẠI LỤC LIỀN, LOẠI ĐỊA ĐIỂM MỚI, LINH KHÍ, NGUY HIỂM TƯƠNG ĐỐI, ĐI ĐƯỜNG DÀI, CỐNG HIẾN =================
+ // Bảng NEWT: content/world/newt.js
+ // Bảng NAME_PRE: content/world/name-pre.js
+-for(const k in NEWT){TYPE_NAME[k]=NEWT[k].n;NODE_IC[k]='•';if(!P['canh_'+k])P['canh_'+k]=P['canh_'+NEWT[k].as];}
++for(const k in NEWT){TYPE_NAME[k]=NEWT[k].n;NODE_IC[k]=NEWT[k].ic||'•';if(!P['canh_'+k])P['canh_'+k]=P['canh_'+NEWT[k].as];}
+ function tAs(t){return NEWT[t]?NEWT[t].as:t;}
+ function extendWorld(w){if(!w||!w.regions)return;
+   for(const R0 of w.regions){if(R0.ext)continue;R0.ext=1;const k=R0.k,X0=k*1000;const used=new Set(R0.nodes.map(n=>n.name));
+-    const types=shuffle(Object.keys(NEWT)).concat(shuffle(Object.keys(NEWT))).slice(0,10);
++    const nk=Object.keys(NEWT).filter(k=>!NEWT[k].no);const types=shuffle(nk.slice()).concat(shuffle(nk.slice())).slice(0,10);
+     for(const t of types){let p=null;for(let g=0;g<300&&!p;g++){const q={x:X0+ri(45,955),y:ri(45,955)};if(R0.nodes.every(n=>Math.hypot(n.x-q.x,n.y-q.y)>=78))p=q;}
+       if(!p||R0.nodes.length>=95)continue;
+       const near=R0.nodes.map(n=>[n,Math.round(Math.hypot(n.x-p.x,n.y-p.y))]).sort((a,b)=>a[1]-b[1]);
+@@ -78,7 +78,7 @@ WILD2.push('linhdia','khoang','duoc','dam');
+ 
+ // ----- linh khí từng nơi -----
+ // Bảng LK_N, LK_M: content/rules/lk-n.js
+-function lkOf(n){if(!n)return 1;if(n.type==='linhdia')return 3;if(n.type==='tong')return 2;if(['tran','thanh','cho','ai'].includes(n.type))return 0;
++function lkOf(n){if(!n)return 1;if(n.type==='linhdia'||n.type==='dongthien'||n.type==='bicanh')return 3;if(n.type==='tong')return 2;if(['tran','thanh','cho','ai'].includes(n.type))return 0;if(isTuT(n.type))return 1; // nơi tu sĩ có chút linh khí
+   return Math.min(3,hashS('lk'+W().seed+':'+n.id)%3+(n.dp?1:0));}
+ // ----- mức nguy hiểm so với chính ngươi -----
+ // Bảng DTAG: content/world/dtag.js
+@@ -97,7 +97,7 @@ function dangerWhy(n){const g=dangerTag(n);if(SETTLE.includes(n.type))return g?c
+ // ----- thông tin thêm cho thẻ địa điểm: thế lực tọa trấn, quy mô, đôi dòng mô tả (cố định theo từng nơi) -----
+ function placeMeta(n){const h=hashS('pm'+W().seed+':'+n.id),w=W();const pk=(L,k)=>L[(h>>>(k||0))%L.length];
+   const sect=w.sects&&w.sects.length?pk(w.sects,3).n:contentText("core2_02-dia-diem-mo-rong_js.placeMeta.048");const ho=pk(NAME.ho,5);
+-  let luc,quy;const t=n.type;
++  let luc,quy;const t=isTownT(n.type)?(isThanhT(n.type)?'thanh':'tran'):n.type;
+   if(t==='tong'){luc=n.owner||sect;quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.049"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.050"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.051")],7);}
+   else if(t==='thanh'){luc=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.052")+ho,contentText("core2_02-dia-diem-mo-rong_js.placeMeta.053"),sect+contentText("core2_02-dia-diem-mo-rong_js.placeMeta.054"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.055")+ho+' gia'],2);quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.056"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.057"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.058")],6);}
+   else if(t==='tran'){luc=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.059"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.060")+ho,ho+contentText("core2_02-dia-diem-mo-rong_js.placeMeta.061"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.062")+ho],2);quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.063"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.064"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.065")],6);}
+@@ -107,6 +107,7 @@ function placeMeta(n){const h=hashS('pm'+W().seed+':'+n.id),w=W();const pk=(L,k)
+   else if(t==='ma'){luc=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.073"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.074"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.075")],2);quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.076"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.077")],6);}
+   else{luc=(n.danger||0)>=3?contentText("core2_02-dia-diem-mo-rong_js.placeMeta.078"):(n.danger||0)>=2?contentText("core2_02-dia-diem-mo-rong_js.placeMeta.079"):(n.danger||0)>=1?contentText("core2_02-dia-diem-mo-rong_js.placeMeta.080"):contentText("core2_02-dia-diem-mo-rong_js.placeMeta.081");
+     quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.082"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.083"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.084"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.085")],6);}
++  if(n.fa&&isTownT(n.type)&&typeof chuTen==='function'){const o=chuTen(n.fa);if(o)luc=o;} // thế giới mới: chủ thành trấn là Hoàng quốc hoặc thế lực tu sĩ
+   if((n.vstate||n.state)==='ruin'){luc=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.086");}
+   const L=P['canh_'+t]||P.canh_tran;const desc=L[(h>>>9)%L.length];
+   return {luc,quy,desc:desc.indexOf('{')<0?desc:''};}
+diff --git a/src/game/core2/03-cong-hien-tong-mon.js b/src/game/core2/03-cong-hien-tong-mon.js
+index d6f31d8..a94b6d4 100644
+--- a/src/game/core2/03-cong-hien-tong-mon.js
++++ b/src/game/core2/03-cong-hien-tong-mon.js
+@@ -54,12 +54,12 @@ function needOk(c){return needList(c).every(x=>x.ok);}
+ // thăm dò ở nơi có người: hàng hóa chắc chắn có và thứ chỉ gặp khi có duyên
+ function townStats(n){const r=G.run,g=rT(),L=[],M=[];const q=g>=2?2:g>=1?1:0;const G1=clamp(g,0,4),G2=clamp(g+1,0,4);
+   const rg=(a,b)=>a===b?a:a+' – '+b;
+-  if(n.type==='thanh'||n.type==='tran'||n.type==='cho'){L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.047"),rg(PQ[0],PQ[q])],[contentText("core2_03-cong-hien-tong-mon_js.townStats.048"),contentText("core2_03-cong-hien-tong-mon_js.townStats.049")+Math.min(4,g+2)],[contentText("core2_03-cong-hien-tong-mon_js.townStats.050"),rg(GRADE[G1],GRADE[G2])]);
++  if(isTownT(n.type)||n.type==='cho'){L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.047"),rg(PQ[0],PQ[q])],[contentText("core2_03-cong-hien-tong-mon_js.townStats.048"),contentText("core2_03-cong-hien-tong-mon_js.townStats.049")+Math.min(4,g+2)],[contentText("core2_03-cong-hien-tong-mon_js.townStats.050"),rg(GRADE[G1],GRADE[G2])]);
+     if(n.type!=='cho')L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.051"),MOUNT.filter(m=>r.realm>=(m.realm||0)).map(m=>m.n).join(', ')],[contentText("core2_03-cong-hien-tong-mon_js.townStats.052"),contentText("core2_03-cong-hien-tong-mon_js.townStats.053")]);}
+   if(n.type==='tong')L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.054"),contentText("core2_03-cong-hien-tong-mon_js.townStats.055")+Math.min(4,g+2)],[contentText("core2_03-cong-hien-tong-mon_js.townStats.056"),PQ[1]],[contentText("core2_03-cong-hien-tong-mon_js.townStats.057"),contentText("core2_03-cong-hien-tong-mon_js.townStats.058")]);
+   if(n.type==='ancu')L.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.059"),contentText("core2_03-cong-hien-tong-mon_js.townStats.060")]);
+   M.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.061"),contentText("core2_03-cong-hien-tong-mon_js.townStats.062")+rg(GRADE[G1],GRADE[G2])+contentText("core2_03-cong-hien-tong-mon_js.townStats.063")+rg(PQ[0],PQ[2])],[contentText("core2_03-cong-hien-tong-mon_js.townStats.064"),contentText("core2_03-cong-hien-tong-mon_js.townStats.065")+rg(GRADE[G2],GRADE[clamp(g+2,0,4)])+contentText("core2_03-cong-hien-tong-mon_js.townStats.066")],[contentText("core2_03-cong-hien-tong-mon_js.townStats.067"),contentText("core2_03-cong-hien-tong-mon_js.townStats.068")]);
+-  if(n.type==='thanh'||n.type==='cho')M.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.069"),contentText("core2_03-cong-hien-tong-mon_js.townStats.070")+rg(GRADE[G1],GRADE[clamp(g+2,0,4)])]);
++  if(isThanhT(n.type)||n.type==='cho')M.push([contentText("core2_03-cong-hien-tong-mon_js.townStats.069"),contentText("core2_03-cong-hien-tong-mon_js.townStats.070")+rg(GRADE[G1],GRADE[clamp(g+2,0,4)])]);
+   const evs=EVS.filter(e=>!e.spec&&(e.src||'explore')==='explore'&&e.tg&&e.tg.includes(tAs(n.type))&&(!e.r||e.r.includes(g))).slice(0,8).map(e=>e.n).filter(Boolean);
+   return {L,M,evs};}
+ 
+diff --git a/src/game/core2/04-luoi-luc-giac.js b/src/game/core2/04-luoi-luc-giac.js
+index c057b0e..5476de3 100644
+--- a/src/game/core2/04-luoi-luc-giac.js
++++ b/src/game/core2/04-luoi-luc-giac.js
+@@ -46,12 +46,12 @@ function snapWorld(w){if(!w||!w.regions)return;const g=geoFor(w);const used=new
+     for(const n of R0.nodes){
+       if(!n.wc){const lx=clamp((n.x-k*1000)/1000,0,1),ly=clamp(n.y/1000,0,1);n.x=B0[0]+lx*(B0[2]-B0[0]);n.y=B0[1]+ly*(B0[3]-B0[1]);n.wc=1;n.hex=null;n.rx=null;n.ry=null;}
+       let c=n.hex!=null?n.hex:hexAt(n.x,n.y);
+-      if(!ok(c,k)){const seen=new Set([c]);let fr=[c],found=-1;for(let it=0;it<80&&found<0&&fr.length;it++){const nx=[];for(const a of fr)for(const b of hexNb(a)){if(seen.has(b))continue;seen.add(b);nx.push(b);if(found<0&&ok(b,k))found=b;}fr=nx;}
++      if(!ok(c,k)&&!(n.nw&&!used.has(c)&&g.reg[c]===k)){const seen=new Set([c]);let fr=[c],found=-1;for(let it=0;it<80&&found<0&&fr.length;it++){const nx=[];for(const a of fr)for(const b of hexNb(a)){if(seen.has(b))continue;seen.add(b);nx.push(b);if(found<0&&ok(b,k))found=b;}fr=nx;}
+         if(found>=0)c=found;}
+-      used.add(c);ring(c);n.hex=c;const p=hexCenter(c);n.x=Math.round(p[0]*10)/10;n.y=Math.round(p[1]*10)/10;if(n.rx!=null){const pr=hexCenter(hexAt(n.rx,n.ry));n.rx=pr[0];n.ry=pr[1];}}
++      used.add(c);if(!n.nw)ring(c);n.hex=c;const p=hexCenter(c);n.x=Math.round(p[0]*10)/10;n.y=Math.round(p[1]*10)/10;if(n.rx!=null){const pr=hexCenter(hexAt(n.rx,n.ry));n.rx=pr[0];n.ry=pr[1];}}
+     for(const e of R0.edges){const a=nodeById2(w,e.a),b=nodeById2(w,e.b);if(a&&b)e.len=Math.round(Math.hypot(a.x-b.x,a.y-b.y));}}
+   w.mo=1;}
+-function nodeById2(w,id){const R0=w.regions[Math.floor(id/100)];return R0&&R0.nodes[id%100];}
++function nodeById2(w,id){const R0=w.regions[idReg(id)];return R0&&R0.nodes[idIdx(id)];}
+ {const _gw2=genWorld;genWorld=function(seed){const w=_gw2(seed);snapWorld(w);return w;};}
+ {const _nm2=newMeta;newMeta=function(){const m=_nm2();snapWorld(m.world);return m;};}
+ // đường đi qua các ô: biển đi được nhưng rất tốn (thuê thuyền), núi và sông hồ chậm hơn đồng bằng
+@@ -63,7 +63,7 @@ function hexPath(a,b){const g=geo();const key=a+'>'+b;if(g.paths[key])return g.p
+   const cells=[];for(let c=b;c>=0;c=P[c]){cells.push(c);if(c===a)break;}cells.reverse();
+   const cum=[0];for(let i=1;i<cells.length;i++)cum.push(cum[i-1]+stepCost(g,cells[i-1],cells[i]));
+   const res={cells,cum,len:Math.max(1,cum[cum.length-1])*HEXW};g.paths[key]=res;g.paths[b+'>'+a]={cells:cells.slice().reverse(),cum:cum.map(x=>cum[cum.length-1]-x).reverse(),len:res.len};return res;}
+-function nodeHex(n){return n.hex!=null?n.hex:hexAt(...mapXY(Math.floor(n.id/100),n.x,n.y));}
++function nodeHex(n){return n.hex!=null?n.hex:hexAt(...mapXY(idReg(n.id),n.x,n.y));}
+ function findPath(from,to){return from===to?[from]:[from,to];} // một bản đồ liền: đi thẳng theo ô tới bất cứ đâu
+ function edgeLen(a,b){if(a===b)return 0;return Math.round(hexPath(nodeHex(nodeById(a)),nodeHex(nodeById(b))).len);}
+ function pathLen(p){let L=0;for(let i=1;i<p.length;i++)L+=edgeLen(p[i-1],p[i]);return L;}
+diff --git a/src/game/core2/30-than-thuc.js b/src/game/core2/30-than-thuc.js
+index 724fc4f..7049245 100644
+--- a/src/game/core2/30-than-thuc.js
++++ b/src/game/core2/30-than-thuc.js
+@@ -15,7 +15,7 @@ function tkUse(){const r=G.run;const w=tkWhy();if(w){note(w,'dn');return false;}
+   note(contentText("core2_30-than-thuc_js.tkUse.005")+senseR()+' dặm'+(n?contentText("core2_30-than-thuc_js.tkUse.006")+n+contentText("core2_30-than-thuc_js.tkUse.007"):'.'),'up');dbg('tk.use',{R:senseR(),n});return true;}
+ // sinh giao tranh gần người chơi (mỗi tháng có thể)
+ function gtSpawn(){const r=G.run;if(!r||isPham()&&r.age<17)return;const w=W();if(entsHere(r.region).some(e=>e.type==='giaotranh'))return;if(!chance(.3))return;
+-  const [x,y]=playerXY();const R0=senseR()*1.6;const L=regionOf(r.region).nodes.filter(n=>!['tran','thanh','ai','tong'].includes(n.type)&&n.id!==r.at&&Math.hypot(n.x-x,n.y-y)<=R0);if(!L.length)return;
++  const [x,y]=playerXY();const R0=senseR()*1.6;const L=regionOf(r.region).nodes.filter(n=>!(isTownT(n.type)||n.type==='ai'||n.type==='tong')&&n.id!==r.at&&Math.hypot(n.x-x,n.y-y)<=R0);if(!L.length)return;
+   const a=pick(L);const T0=ENT_T.giaotranh;const e={id:(w.eid=(w.eid||0)+1),type:'giaotranh',r:r.region,name:contentText("core2_30-than-thuc_js.gtSpawn.008")+a.name,icon:T0.i,at:a.id,to:null,prog:0,route:[],speed:0,until:w.t+ri(T0.life[0],T0.life[1])*HD,data:{},wait:0};
+   w.ents.push(e);dbg('gt.spawn',{at:a.name,seen:Math.hypot(a.x-x,a.y-y)<=senseR()});}
+ {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(r&&h>0){r.gtAcc=(r.gtAcc||0)+h;if(r.gtAcc>=HM){r.gtAcc=0;gtSpawn();}}return o;};}
+diff --git a/src/game/core2/33-the-gioi-mo.js b/src/game/core2/33-the-gioi-mo.js
+index 21378a0..b9a41d1 100644
+--- a/src/game/core2/33-the-gioi-mo.js
++++ b/src/game/core2/33-the-gioi-mo.js
+@@ -39,8 +39,8 @@ function placeSize(n){const t=n.type;if(t==='tong'){const z=TONG_SZ[n.quy||1];re
+ // từ ngữ do hệ thống tính theo loại và số ô thật sự chiếm được
+ function scaleWord(n,c){const t=n.type;
+   if(t==='tong')return c<=4?contentText("core2_33-the-gioi-mo_js.scaleWord.021"):c<=6?'Đồ sộ':c<=8?contentText("core2_33-the-gioi-mo_js.scaleWord.022"):'Bao la';
+-  if(t==='thanh')return c<=5?contentText("core2_33-the-gioi-mo_js.scaleWord.023"):'Lớn';
+-  if(t==='tran')return c<=2?'Nhỏ':'Trung';
++  if(t==='thanh'||t==='tuthanh')return c<=5?contentText("core2_33-the-gioi-mo_js.scaleWord.023"):'Lớn';
++  if(t==='tran'||t==='tutran')return c<=2?'Nhỏ':'Trung';
+   return c<=1?contentText("core2_33-the-gioi-mo_js.scaleWord.024"):c===2?'Nhỏ':c===3?'Vừa':c===4?contentText("core2_33-the-gioi-mo_js.scaleWord.025"):c<=6?'Rộng':contentText("core2_33-the-gioi-mo_js.scaleWord.026");}
+ function placeScale(n){const c=placeCells(n).length;return {c,w:scaleWord(n,c),txt:scaleWord(n,c)+' · '+c+' ô',area:c*HEX_DAM2};}
+ function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô -> địa điểm đang chiếm
+@@ -50,20 +50,68 @@ function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô
+   // số ô còn có thể mọc ra quanh một ô gốc (đếm theo đúng luật mọc ô), tối đa cap
+   const reach=(c,k,id,cap)=>{const seen=new Set([c]);let fr=[c];while(fr.length&&seen.size<cap){const nx=[];for(const u of fr)for(const b of hexNb(u))if(!seen.has(b)&&ok(b,k,id)){seen.add(b);nx.push(b);}fr=nx;}return seen.size;};
+   const regCells=new Map();const cellsOf=k=>{if(!regCells.has(k)){const L=[];for(let i=0;i<HN;i++)if(g.reg[i]===k&&terWalk(g.ter[i])&&g.ter[i]!==4)L.push(i);regCells.set(k,L);}return regCells.get(k);};
+-  all.filter(n=>!n.cells).map(n=>[n,placeSize(n)]).sort((a,b)=>b[1]-a[1]).forEach(([n,sz])=>{const k=Math.floor(n.id/100);
++  all.filter(n=>!n.cells).map(n=>[n,placeSize(n)]).sort((a,b)=>b[1]-a[1]).forEach(([n,sz])=>{const k=idReg(n.id);
+     // tông môn, thành mà chỗ chật không đủ chỗ mọc thì dời sang chỗ rộng hơn
+-    if((n.type==='tong'||n.type==='thanh')&&reach(n.hex,k,n.id,sz)<Math.min(sz,n.type==='tong'?4:5)){const L=cellsOf(k);
++    if((n.type==='tong'||isThanhT(n.type))&&reach(n.hex,k,n.id,sz)<Math.min(sz,n.type==='tong'?4:5)){const L0=cellsOf(k),dq=g.dist[n.hex],Lq=L0.filter(c=>g.dist[c]===dq),L=Lq.length>20?Lq:L0; // ưu tiên dời trong cùng quận
+       for(let t=0;t<500;t++){const c=L[Math.floor(R()*L.length)];if(own.has(c)||hexNb(c).some(b=>own.has(b)))continue;if(reach(c,k,n.id,sz)>=sz){own.delete(n.hex);n.hex=c;own.set(c,n.id);const q=hexCenter(c);n.x=Math.round(q[0]*10)/10;n.y=Math.round(q[1]*10)/10;break;}}}
+     const set=[n.hex];const inS=new Set(set);
+     while(set.length<sz){const cand=new Map();for(const c of set)for(const b of hexNb(c))if(!inS.has(b)&&ok(b,k,n.id))cand.set(b,(cand.get(b)||0)+1);if(!cand.size)break;
+       const L=[...cand];const b=wpick(L,x=>x[1]*x[1]+0.5)[0];set.push(b);inS.add(b);own.set(b,n.id);}
+     n.cells=set;});}
++
++// ================= SINH NƠI THEO QUẬN (CHỈ THẾ GIỚI MỚI) =================
++// Mỗi quận có số thành, trấn phàm nhân / tu sĩ và nơi hoang dã, bí cảnh theo cỡ quận (bảng NOI_SL, NOI_HOANG: content/world/size-t.js).
++// Thế giới mới đánh dấu w.v2=1; bản lưu cũ không có dấu này nên giữ nguyên, chỉ đi qua ensureCounts như trước.
++let GEN_NEW=false;
++{const _gw=genWorld;genWorld=function(seed){GEN_NEW=true;try{return _gw.apply(this,arguments);}finally{GEN_NEW=false;}};}
++function hexD(a,b){const ca=a%HCOLS,ra=(a-ca)/HCOLS,cb=b%HCOLS,rb=(b-cb)/HCOLS;const qa=ca-(ra-(ra&1))/2,qb=cb-(rb-(rb&1))/2,dq=qa-qb,dr=ra-rb;return Math.max(Math.abs(dq),Math.abs(dr),Math.abs(dq+dr));}
++function quanCells(g){const Q={};for(let i=0;i<HN;i++){const d=g.dist[i];if(d>=0&&g.reg[i]>=0&&terWalk(g.ter[i]))(Q[d]||(Q[d]={k:g.reg[i],cells:[]})).cells.push(i);}return Q;}
++function quanCo(n){const S=NOI_SL;return n<S.nguong[0]?'be':n>S.nguong[1]?'lon':'vua';}
++function expandWorld(w){if(w.v2)return;const g=geoFor(w);
++  seeded('noi'+w.seed,()=>{
++    const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
++    const occ=new Uint8Array(HN),b2=new Uint8Array(HN),b3=new Uint8Array(HN);
++    const mark=c=>{occ[c]=1;b2[c]=1;b3[c]=1;for(const b of hexNb(c)){b2[b]=1;b3[b]=1;for(const d of hexNb(b))b3[d]=1;}};
++    for(const n of all)mark(n.hex);
++    const names=w.regions.map(R0=>new Set(R0.nodes.map(x=>x.name)));
++    const uname=(k,t)=>{let nm,q=0;do{nm=placeName(t);}while(names[k].has(nm)&&q++<30);names[k].add(nm);return nm;};
++    const ter=c=>g.ter[c];
++    const TW={1:3,6:2,2:1.2,7:0.3,3:0.35};
++    const room=c=>{let r=0;for(const b of hexNb(c)){if(!b2[b]&&terWalk(ter(b)))r++;}return r;};
++    const free=(cells,sp)=>{const B=sp===3?b3:b2;return cells.filter(c=>!B[c]&&ter(c)!==4);};
++    const pickTown=(cells,thanh)=>{let L=free(cells,3);if(!L.length)L=free(cells,2);if(!L.length)return -1;
++      let best=-1,bs=-1;for(let i=0;i<14;i++){const c=L[Math.floor(R()*L.length)];const s=((TW[ter(c)]||0.3)*(1+room(c)*(thanh?0.5:0.2)))*(0.6+R()*0.8);if(s>bs){bs=s;best=c;}}return best;};
++    const addNode=(t,c,dg,dp)=>{const k=g.reg[c],R0=w.regions[k];const p=hexCenter(c);
++      const near=R0.nodes.map(n=>[n,Math.hypot(n.x-p[0],n.y-p[1])]).sort((a,b)=>a[1]-b[1]);
++      const n={id:mkId(k,R0.nodes.length),r:k,x:Math.round(p[0]*10)/10,y:Math.round(p[1]*10)/10,hex:c,wc:1,nw:1,type:t,name:uname(k,t),danger:dg,fog:0,seenT:-1,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:dp?1:0};
++      R0.nodes.push(n);all.push(n);mark(c);if(near[0])R0.edges.push({a:n.id,b:near[0][0].id,len:Math.round(near[0][1])});if(near[1])R0.edges.push({a:n.id,b:near[1][0].id,len:Math.round(near[1][1])});return n;};
++    const retype=(n,t)=>{n.type=t;n.dp=0;n.name=uname(idReg(n.id),t);n.danger=isTownT(t)?Math.min(n.danger,1):n.danger;delete n.cells;};
++    const HK=Object.keys(NOI_HOANG),HW=HK.map(k=>NOI_HOANG[k].w);
++    const wildType=c=>{const t=ter(c);let tot=0;const ws=HK.map((k,i)=>{const v=HW[i]*(0.25+(NOI_HOANG[k].ter[t]||0));tot+=v;return v;});let x=R()*tot;for(let i=0;i<HK.length;i++){x-=ws[i];if(x<=0)return HK[i];}return HK[0];};
++    const wildAdd=(c,t)=>{const H=NOI_HOANG[t];return addNode(t,c,ri(H.d[0],H.d[1]),H.dp);};
++    const Q=quanCells(g);
++    for(const d of Object.keys(Q).map(Number).sort((a,b)=>a-b)){const {k,cells}=Q[d],R0=w.regions[k];const q=NOI_SL[quanCo(cells.length)];
++      const want={thanh:ri(...q.thanhPham),tuthanh:ri(...q.thanhTu),tran:ri(...q.tranPham),tutran:ri(...q.tranTu)};
++      const have={thanh:[],tuthanh:[],tran:[],tutran:[]},extra=[];
++      const ex=R0.nodes.filter(n=>g.dist[n.hex]===d&&!n.dp&&!n.sectFix&&(n.type==='thanh'||n.type==='tran'));
++      for(const n of ex.filter(n=>n.type==='thanh')){if(have.thanh.length<want.thanh)have.thanh.push(n);else if(have.tuthanh.length<want.tuthanh){retype(n,'tuthanh');have.tuthanh.push(n);}else extra.push(n);}
++      for(const n of ex.filter(n=>n.type==='tran')){if(have.tran.length<want.tran)have.tran.push(n);else if(have.tutran.length<want.tutran){retype(n,'tutran');have.tutran.push(n);}else extra.push(n);}
++      for(const n of extra.slice()){if(have.tran.length<want.tran){retype(n,'tran');have.tran.push(n);}else if(have.tutran.length<want.tutran){retype(n,'tutran');have.tutran.push(n);}else{const t=wildType(n.hex);retype(n,t);const H=NOI_HOANG[t];n.danger=ri(H.d[0],H.d[1]);n.dp=H.dp?1:0;}}
++      for(const t of ['thanh','tuthanh','tran','tutran'])for(const n of have[t])n.danger=Math.min(n.danger,1);
++      for(const t of ['thanh','tuthanh','tran','tutran'])while(have[t].length<want[t]){const c=pickTown(cells,t==='thanh'||t==='tuthanh');if(c<0)break;have[t].push(addNode(t,c,0,0));}
++      const nh=ri(...q.hoang);for(let i=0;i<nh;i++){let L=free(cells,3);if(!L.length)L=free(cells,2);if(!L.length)break;
++        const t=wildType(L[Math.floor(R()*L.length)]);const H=NOI_HOANG[t];let best=-1,bs=-1;for(let j=0;j<10;j++){const c=L[Math.floor(R()*L.length)];const s=(0.25+(H.ter[ter(c)]||0))*(0.6+R()*0.8);if(s>bs){bs=s;best=c;}}wildAdd(best,t);}}
++    // bảo đảm thế giới có đủ mọi loại nơi mới (đổi bớt một nơi hoang dã sẵn có nếu thiếu)
++    for(const t of ['bicanh','dongthien','como','yeusao','ditich']){if(all.some(n=>n.type===t))continue;
++      const n=all.find(n=>!n.dp&&!n.sectFix&&['rung','nui','phe','hoang','dam'].includes(n.type));if(n){retype(n,t);n.danger=ri(NOI_HOANG[t].d[0],NOI_HOANG[t].d[1]);}}
++  });
++  w.v2=1;w.ens=1;dbg('mo.noi',{n:w.regions.reduce((s,R0)=>s+R0.nodes.length,0)});}
+ // mỗi đại khu vực có ít nhất 3 thành, mỗi quận có ít nhất 2 trấn (chuyển loại địa điểm sẵn có hoặc thêm mới), chỉ làm một lần cho mỗi thế giới
+ function ensureCounts(w){if(w.ens===1)return;const g=geoFor(w);const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
+   const blocked=new Set();const ring=c=>{blocked.add(c);for(const b of hexNb(c)){blocked.add(b);for(const d of hexNb(b))blocked.add(d);}};for(const n of all)ring(n.hex);
+   const freeCell=(c,k)=>!blocked.has(c)&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4;
+   const SOFT=['rung','nui','song','hoang','phe','bien','dam','linhdia','duoc','cho','ancu','khoang','dong'];
+-  const conv=(n,t)=>{n.type=t;n.dp=0;const R0=w.regions[Math.floor(n.id/100)];const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);n.name=nm;n.danger=Math.min(n.danger,t==='tran'||t==='thanh'?1:n.danger);delete n.cells;};
++  const conv=(n,t)=>{n.type=t;n.dp=0;const R0=w.regions[idReg(n.id)];const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);n.name=nm;n.danger=Math.min(n.danger,t==='tran'||t==='thanh'?1:n.danger);delete n.cells;};
+   const add=(k,t,c)=>{const R0=w.regions[k];if(R0.nodes.length>=97)return null;const used=new Set(R0.nodes.map(x=>x.name));let nm,q=0;do{nm=placeName(t);}while(used.has(nm)&&q++<12);const p=hexCenter(c);
+     const near=R0.nodes.map(n=>[n,Math.hypot(n.x-p[0],n.y-p[1])]).sort((a,b)=>a[1]-b[1]);
+     const n={id:k*100+R0.nodes.length,r:k,x:Math.round(p[0]*10)/10,y:Math.round(p[1]*10)/10,hex:c,wc:1,type:t,name:nm,danger:0,fog:0,seenT:-1,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0};
+@@ -78,7 +126,7 @@ function ensureCounts(w){if(w.ens===1)return;const g=geoFor(w);const all=[];for(
+     while(have<2){const cand=R0.nodes.filter(n=>g.dist[n.hex]===d&&SOFT.includes(n.type)&&!n.dp&&!n.sectFix);
+       if(cand.length){conv(cand[Math.floor(R()*cand.length)],'tran');have++;continue;}const c=pickCell(D.cells,k);if(c<0)break;if(add(k,'tran',c))have++;else break;}}
+   w.ens=1;}
+-{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions){ensureCounts(w);if(w.sep!==3){for(const R0 of w.regions)for(const n of R0.nodes)delete n.cells;w.sep=3;}growPlaces(w);}};}
++{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions){if(GEN_NEW&&!w.v2&&!w.ens)expandWorld(w);ensureCounts(w);if(w.sep!==3){for(const R0 of w.regions)for(const n of R0.nodes)delete n.cells;w.sep=3;}growPlaces(w);}};}
+ function placeCells(n){return n&&n.cells&&n.cells.length?n.cells:n?[nodeHex(n)]:[];}
+ function canGoBack(){return false;}
+ 
+@@ -89,7 +137,7 @@ function birthNode(){const w=W();const all=[];for(const R0 of w.regions)for(cons
+   if(r.scene&&r.scene.type==='region')r.scene.text=T(REG[r.region].intro,{que:r.que});dbg('mo.spawn',{at:r.at,area:r.region,ten:r.ten});}return x;};}
+ 
+ // tới một địa điểm: biết mình đang ở đại khu vực nào
+-{const _ar=arrive;arrive=function(id){const r=G.run;const k=Math.floor(id/100);const was=r.region;r.region=k;r.maxRegion=Math.max(r.maxRegion||0,k);
++{const _ar=arrive;arrive=function(id){const r=G.run;const k=idReg(id);const was=r.region;r.region=k;r.maxRegion=Math.max(r.maxRegion||0,k);
+   const x=_ar.apply(this,arguments);
+   if(was!==k&&r.areas&&!r.areas.includes(k)){r.areas.push(k);if(typeof note==='function')note(contentText("core2_33-the-gioi-mo_js.027")+REG[k].n+': '+REG[k].sub.toLowerCase()+'.');dbg('mo.area',{from:was,to:k});}
+   if(!r.areas)r.areas=[k];return x;};}
+@@ -128,7 +176,7 @@ function sense(){const r=G.run,w=W();if(!r)return false;visLoad();const p=player
+ function hexSeen(i){visLoad();return !!(VIS&&(VIS[i]||VNOW[i]));}
+ 
+ // ---- bản lưu cũ (bản đồ năm ô vuông) không dùng được nữa: dựng lại thế giới, đưa nhân vật về một trấn ----
+-function moFixRun(){const r=G.run;if(!r)return;const n=birthNode();r.at=n.id;r.region=Math.floor(n.id/100);r.moving=null;r.reveal=[];r.visS='';r.quests=[];r.passes=[];r.place={n:n.name,t:n.type};
++function moFixRun(){const r=G.run;if(!r)return;const n=birthNode();r.at=n.id;r.region=idReg(n.id);r.moving=null;r.reveal=[];r.visS='';r.quests=[];r.passes=[];r.place={n:n.name,t:n.type};
+   if(r.scene&&r.scene.type!=='combat')r.scene=null;visReset();arrive(n.id);dbg('mo.migrate',{at:n.id});}
+ if(typeof loadData==='function'){const _ld=loadData;loadData=function(d){
+   const old=d&&d.meta&&d.meta.world&&!d.meta.world.mo;
+@@ -143,7 +191,7 @@ function areaStat(k){const g=geo();visLoad();const tc={};let land=0,seen=0;const
+ // ================= ĐI TỚI Ô ĐẤT BẤT KỲ =================
+ // Điểm dừng tạm ("điểm hoang"): nút ngoài danh sách địa điểm, id = khu*100 + 90..99, lưu ở w.wp. Máy chạy y như một địa điểm hoang bình thường.
+ // Bảng WP0, WP_TY, WP_BASE: content/rules/wp0.js
+-{const _nb=nodeById;nodeById=function(id){if(id%100>=WP0){const w=W();return w&&w.wp&&w.wp[id]||undefined;}return _nb(id);};}
++{const _nb=nodeById;nodeById=function(id){if(id<1000&&id%100>=WP0){const w=W();return w&&w.wp&&w.wp[id]||undefined;}return _nb(id);};}
+ function wpGC(){const r=G.run,w=W();if(!r||!w||!w.wp)return;const keep=new Set([r.at,r.dest]);if(r.moving)for(const id of r.moving.path)keep.add(id);for(const id in w.wp)if(!keep.has(+id))delete w.wp[id];}
+ function wpDraft(c){const g=geo(),k=g.reg[c],t=g.ter[c];if(k<0||!terWalk(t))return null;
+   let nd=null,bd=1e9;const [cx,cy]=hexCenter(c);for(const n of regionOf(k).nodes){const p=mapXY(k,n.x,n.y),d=Math.hypot(p[0]-cx,p[1]-cy);if(d<bd){bd=d;nd=n;}}
+diff --git a/src/game/core2/35b-danh-tieng.js b/src/game/core2/35b-danh-tieng.js
+index 13fd0ab..f37e677 100644
+--- a/src/game/core2/35b-danh-tieng.js
++++ b/src/game/core2/35b-danh-tieng.js
+@@ -1,5 +1,5 @@
+ // ĐỢT 1.4: Danh tiếng theo nơi chốn (khu vực, tông môn). G.run.danh = {'reg:<khu>':{v}, 'sect:<tông>':{v}, trieu:{v}}
+-const DANH_LO=['tran','thanh','cho','tong'];
++const DANH_LO=['tran','thanh','tutran','tuthanh','cho','tong'];
+ function danhSectIdx(n){if(!n||!n.owner)return -1;return W().sects.findIndex(x=>x.n===n.owner);}
+ function danhGet(k){const r=G.run;if(!r)return 0;nqInit(r);return (r.danh[k]||{}).v||0;}
+ function danhPut(k,d){const r=G.run;if(!r||!d)return;nqInit(r);const o=r.danh[k]||(r.danh[k]={v:0});o.v=clamp(o.v+d,-100,100);}
+diff --git a/src/game/core2/37-linh-can.js b/src/game/core2/37-linh-can.js
+index 9165079..bb7f6c6 100644
+--- a/src/game/core2/37-linh-can.js
++++ b/src/game/core2/37-linh-can.js
+@@ -62,7 +62,7 @@ function tlCheck(){const r=G.run;if(!r||rootKnown(r)||!tlFree())return;const m=M
+   while((r.tlM||0)<m&&G.run&&!rootKnown(r)&&tlFree()){r.tlM=(r.tlM||0)+1;const k=r.tlM;
+     if(k<=2&&!r.tlTd){r.tlTd=1;if(tlSectNear()&&tlOpen('tl_tuyendo'))return;}
+     if(k>=3){tlOpen('tl_laodao');return;}
+-    const n=nodeById(r.at);if(n&&['tran','thanh'].includes(n.type)&&chance(.3)&&tlOpen('tl_dusi'))return;}}
++    const n=nodeById(r.at);if(n&&isTownT(n.type)&&chance(.3)&&tlOpen('tl_dusi'))return;}}
+ {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);const r=G.run;if(r&&h>0&&!rootKnown(r)){r.tlAcc=(r.tlAcc||0)+h;tlCheck();}
+   // Tự biết: vô căn có tâm pháp mà luyện mãi không được, hoặc qua TP_Y năm
+   const r2=G.run;if(r2&&isVo(r2)&&!rootKnown(r2)&&!r2.tlTb&&tlFree()&&((typeof hasTp==='function'&&hasTp())||(r2.age-r2.birthAge)>=TP_Y)){r2.tlTb=1;tlOpen('tl_tubiet');}
+diff --git a/src/game/core2/41-vo-dao.js b/src/game/core2/41-vo-dao.js
+index 104ada7..8a68129 100644
+--- a/src/game/core2/41-vo-dao.js
++++ b/src/game/core2/41-vo-dao.js
+@@ -38,7 +38,7 @@ function voMerge(r){if(!r)return;if(!r.kn)r.kn={atk:[],def:[],move:[],ult:[]};r.
+ function voWhy(){const r=G.run;if(!r||(r.scene&&r.scene.type==='combat'))return contentText('vo.ban');return '';}
+ {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(!feat('voh')||!G.run||!n||n.state==='ruin')return L;
+   if(!L.some(x=>x.a==='luyenvo')){const w=voWhy();L.push({a:'luyenvo',i:'🥋',l:contentText('vo.act'),h:VO_LUYEN.h,tip:contentText('vo.tip'),dis:!!w,x:w});}
+-  if(n.type==='thanh'&&!L.some(x=>x.a==='loidai'))L.push({a:'loidai',i:'🏟️',l:contentText('vo.loi'),h:1,tip:contentText('vo.loiTip'),dis:!!voWhy(),x:''});
++  if(isTuK(n.type)&&isThanhT(n.type)&&!L.some(x=>x.a==='loidai'))L.push({a:'loidai',i:'🏟️',l:contentText('vo.loi'),h:1,tip:contentText('vo.loiTip'),dis:!!voWhy(),x:''});
+   return L;};}
+ function voLuyen(){const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place'||voWhy())return false;
+   advanceTime(VO_LUYEN.h);if(!G.run)return true;const v=voOf(r);const g=r.pham?1:VO_LUYEN.tu;v.xp=(v.xp||0)+g;v.noi=(v.noi||0)+1;
+diff --git a/src/game/core2/48-sua-e.js b/src/game/core2/48-sua-e.js
+index bf6022c..1fdcc4c 100644
+--- a/src/game/core2/48-sua-e.js
++++ b/src/game/core2/48-sua-e.js
+@@ -50,7 +50,7 @@ function dgBan(){const r=G.run;const L=sellList();if(!L.length){note(contentText
+   return res;};}
+ // U Minh Ám Hội: trong quỷ thị (thành, ma tu) lúc quỷ thị mở
+ VENUE_N.amhoi=contentText('am.n');VENUE_IN.amhoi=[contentText('am.in1'),contentText('am.in2')];
+-function amOpen(n){return !!n&&(n.type==='thanh'||n.type==='ma')&&n.state!=='ruin'&&G.run&&!G.run.pham&&(typeof svcOpen!=='function'||svcOpen('ghost'));}
++function amOpen(n){return !!n&&((isTuK(n.type)&&isThanhT(n.type))||n.type==='ma')&&n.state!=='ruin'&&G.run&&!G.run.pham&&(typeof svcOpen!=='function'||svcOpen('ghost'));}
+ function amLeft(n){const w=W(),m=ncMonth();const T=(w.amhoi=w.amhoi||{})[n.id];return Math.max(0,SUAE.am.thang-(T&&T.m===m?T.n:0));}
+ {const _pa=placeActs;placeActs=function(n){const L=_pa.apply(this,arguments);if(amOpen(n)&&!L.some(x=>x.a==='amhoi'))L.push({a:'amhoi',i:'🎭',l:contentText('am.n'),h:1,tip:contentText('am.tip'),dis:false,x:''});return L;};}
+ function amOpts(n){const r=G.run,A=SUAE.am;const left=amLeft(n);const L=[];
+diff --git a/src/game/core2/53-cai-can-do.js b/src/game/core2/53-cai-can-do.js
+index acf1b20..7c7ece8 100644
+--- a/src/game/core2/53-cai-can-do.js
++++ b/src/game/core2/53-cai-can-do.js
+@@ -59,7 +59,7 @@ function ccDoAdd(p,fake,why){const r=ccSt();let q=ccDoQ(fake?'ccg':'ccd',p);let
+   if(fake&&chance(ccNhanP())){q=ccDoQ('ccx',p);lo=1;note(contentText('ccd.nhanRa',[CC_DO[p].n]),'');}
+   r.qitems.push(q);dbg('ccd.add',{p,fake:fake?1:0,lo,why:why||''});return q;}
+ // thẩm định (thành / trấn): biết thật giả
+-function ccTdOk(n){return !!n&&['thanh','tran','ma'].includes(n.type)&&n.state!=='ruin';}
++function ccTdOk(n){return !!n&&(isTownT(n.type)||n.type==='ma')&&n.state!=='ruin';}
+ function ccTdGia(){return G.run.pham?{bac:CC_DOCFG.tdBac}:{st:CC_DOCFG.tdSt};}
+ function ccTdOpts(n){const r=G.run;const L=[];if(!r||!ccTdOk(n))return L;const seen={};
+   for(const q of r.qitems||[]){const P=ccDoParse(q);if(!P||P.k==='t'||P.k==='x'||seen[P.p])continue;seen[P.p]=1;const g=ccTdGia();
+diff --git a/src/game/core2/54-the-gioi-neo.js b/src/game/core2/54-the-gioi-neo.js
+index 20f61b4..4953559 100644
+--- a/src/game/core2/54-the-gioi-neo.js
++++ b/src/game/core2/54-the-gioi-neo.js
+@@ -12,7 +12,7 @@ function anchorsPlace(w){if(!w||!w.regions||w.anchorsV1)return false;
+   const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
+   const used=new Set(all.filter(n=>n.anchor).map(n=>n.id));const at={};for(const n of all)if(n.anchor)at[n.anchor]=n;
+   for(const code of Object.keys(LOC_NEO)){if(at[code])continue;const L=LOC_NEO[code];
+-    const pool=all.filter(n=>Math.floor(n.id/100)===L.kv&&n.type!=='tong'&&!used.has(n.id)&&!n.anchor);if(!pool.length)continue;
++    const pool=all.filter(n=>idReg(n.id)===L.kv&&n.type!=='tong'&&!used.has(n.id)&&!n.anchor);if(!pool.length)continue;
+     const link=LOC_DUONG.filter(d=>d[0]===code||d[1]===code).map(d=>at[d[0]===code?d[1]:d[0]]).filter(Boolean);
+     let cand=null;for(const t of L.t){const c=pool.filter(n=>n.type===t);if(c.length){cand=c;break;}}
+     if(!cand)cand=pool.filter(n=>n.type!=='sao');if(!cand.length)cand=pool;
+@@ -87,7 +87,7 @@ function vaiGiet(ma,ly){return vaiMat(ma,ly||'giet');}
+ function faInit(w){w=w||W();if(!w)return null;const F=w.fa||(w.fa={});
+   for(const id in THE_LUC)if(!F[id]){const D=THE_LUC[id];F[id]={tien:D.tien,quan:D.quan,dan:D.dan,suc:D.suc,chu:D.chu,trang:'song',tDiet:null,lap:1};}return F;}
+ function faTrang(f){return f.suc<=0?'diet':f.suc<30?'suy':f.trang==='suy'&&f.suc<40?'suy':'song';} // hồi phải lên 40 mới tính là vững lại
+-function faSet(id,f,w,y){const D=THE_LUC[id],t0=f.trang,t1=t0==='diet'?'diet':faTrang(f);if(t0===t1)return;f.trang=t1;const n=anchorOf(w,D.noi);const nt=n?n.name:LOC_NEO[D.noi].n;
++function faSet(id,f,w,y){const D=THE_LUC[id],t0=f.trang,t1=t0==='diet'?'diet':faTrang(f);if(t0===t1)return;f.trang=t1;const n=anchorOf(w,D.noi);const nt=n?n.name:(D.noi&&LOC_NEO[D.noi]?LOC_NEO[D.noi].n:D.n);
+   if(t1==='diet'){f.tDiet=y;f.suc=0;suLuocAdd(contentText('tg.faDiet',[D.n,nt]),'fa',w);
+     for(const ma in VAI_NP)if(VAI_NP[ma].fa===id&&VAI_NP[ma].lead&&w.vai&&w.vai[ma]&&w.vai[ma].song)vaiMat(ma,'fa',w);}
+   else if(t1==='suy')suLuocAdd(contentText('tg.faSuy',[D.n]),'fa',w);
+@@ -96,7 +96,7 @@ function faAdj(id,d,ly,w){w=w||W();const F=faInit(w),f=F[id];if(!f||f.trang==='d
+ function faYear(w,y,n){const F=faInit(w);n=n||1;
+   for(const id in F){const f=F[id],D=THE_LUC[id];
+     if(f.trang==='diet'){if(y-f.tDiet>=D.phuc&&wRnd(w,'lap:'+id+':'+y)<0.05*n){f.suc=40;f.trang='song';f.lap++;f.tien=Math.round(D.tien*0.6);f.quan=Math.round(D.quan*0.6);f.dan=Math.round(D.dan*0.7);
+-      const n0=anchorOf(w,D.noi);suLuocAdd(contentText('tg.faLap',[D.n,n0?n0.name:LOC_NEO[D.noi].n]),'fa',w);dbg('fa.lap',{id});}continue;}
++      const n0=anchorOf(w,D.noi);suLuocAdd(contentText('tg.faLap',[D.n,n0?n0.name:(D.noi&&LOC_NEO[D.noi]?LOC_NEO[D.noi].n:D.n)]),'fa',w);dbg('fa.lap',{id});}continue;}
+     const e=(wRnd(w,'fa:'+id+':'+y)-0.5)*4;f.suc=clamp(f.suc+((D.suc-f.suc)*0.03+D.lai)*n+e,0,100);
+     for(const k of ['tien','quan','dan'])f[k]=clamp(Math.round(f[k]+(D[k]-f[k])*0.05*n),0,100);faSet(id,f,w,y);}}
+ function faNow(id){const w=W();const F=faInit(w),f=F[id],D=THE_LUC[id];if(!f)return null;const c=f.chu&&vaiNow(f.chu);
+diff --git a/src/game/core2/55-thoi-cuc.js b/src/game/core2/55-thoi-cuc.js
+index d60e125..341b54b 100644
+--- a/src/game/core2/55-thoi-cuc.js
++++ b/src/game/core2/55-thoi-cuc.js
+@@ -41,7 +41,7 @@ function clkMacDinh(id,w,y,o){const D=THOI_CUC[id],fx=D.fx||{};let t=D.macDinh;c
+     const f=faInit(w).FA01;if(f.trang==='diet'){f.trang='song';f.lap++;}f.suc=Math.max(f.suc,55);f.tien=40;}
+   if(fx.dich){let k=0;for(const ma in VAI_NP){const P=VAI_NP[ma],v=w.vai&&w.vai[ma];if(!v||!v.song||P.tu>=0||P.bat)continue;
+       if(fx.dich.kv.includes(LOC_NEO[P.noi].kv)&&wRnd(w,'dich:'+ma+y)<fx.dich.p){vaiMat(ma,'dich',w);k++;}}
+-    const F=faInit(w);for(const f in THE_LUC)if(fx.dich.kv.includes(LOC_NEO[THE_LUC[f].noi].kv))F[f].dan=Math.round(F[f].dan*(1-fx.dich.p));if(k)t+=' '+contentText('tc.dich',[k]);}
++    const F=faInit(w);for(const f in THE_LUC)if(fx.dich.kv.includes(THE_LUC[f].noi?LOC_NEO[THE_LUC[f].noi].kv:THE_LUC[f].kv))F[f].dan=Math.round(F[f].dan*(1-fx.dich.p));if(k)t+=' '+contentText('tc.dich',[k]);}
+   if(fx.longMach){w.lkMod=w.lkMod||{};const k=Math.floor(wRnd(w,'lm:'+y)*5);w.lkMod[k]=Math.max(0.4,(w.lkMod[k]==null?1:w.lkMod[k])-fx.longMach);t+=' '+contentText('tc.long',[REG[k].n]);}
+   if(fx.maVuc&&typeof maVucTao==='function'){const n=anchorOf(w,D.noi);maVucTao(n?n.id:null,fx.maVuc,w);}
+   return t;}
+@@ -69,7 +69,7 @@ function clkView(){const S=tcInit(W());return Object.keys(THOI_CUC).filter(id=>S
+ function thienLoMo(){const s=tcInit(W()).CLK14;return !!s&&s.pha===2;}
+ function biCanhMo(){const s=tcInit(W()).CLK11;return !!s&&s.pha===2;}
+ // linh khí theo khu (Long Mạch Đứt): hồi rất chậm
+-function lkModAt(n){const w=W();if(!n||!w.lkMod)return 1;const v=w.lkMod[Math.floor(n.id/100)];return v==null?1:v;}
++function lkModAt(n){const w=W();if(!n||!w.lkMod)return 1;const v=w.lkMod[idReg(n.id)];return v==null?1:v;}
+ function lkYear(w){if(!w.lkMod)return;for(const k in w.lkMod){w.lkMod[k]=Math.min(1,w.lkMod[k]+0.0005);if(w.lkMod[k]>=1)delete w.lkMod[k];}}
+ {const _bq=bqRate;bqRate=function(){return _bq.apply(this,arguments)*lkModAt(curNode());};}
+ {const _wy=worldYear;worldYear=function(y,o,w){_wy(y,o,w);w=w||W();clkYear(w,y,o);locYear(w,y);lkYear(w);};}
+diff --git a/src/game/core2/57-dat-ma.js b/src/game/core2/57-dat-ma.js
+index 4fba15c..09bbdb6 100644
+--- a/src/game/core2/57-dat-ma.js
++++ b/src/game/core2/57-dat-ma.js
+@@ -6,14 +6,14 @@ function maVucTao(src,k,w){w=w||W();k=k||MA_CFG.khu;const all=[];for(const R0 of
+   const L=w.maVuc||(w.maVuc=[]);const taken=new Set(L.flatMap(x=>x.nut));const tam=[];
+   const cand=all.filter(n=>!loi(n)&&!taken.has(n.id)).sort((a,b)=>Math.hypot(a.x-s0.x,a.y-s0.y)-Math.hypot(b.x-s0.x,b.y-s0.y));
+   for(const n of cand){if(tam.length>=k)break;if(tam.every(t=>Math.hypot(t.x-n.x,t.y-n.y)>MA_CFG.ban*1.2))tam.push(n);}
+-  const out=[];for(const t of tam){const kv=Math.floor(t.id/100);
+-    const nut=all.filter(n=>Math.floor(n.id/100)===kv&&!loi(n)&&!taken.has(n.id)&&Math.hypot(n.x-t.x,n.y-t.y)<=MA_CFG.ban).map(n=>n.id);nut.forEach(i=>taken.add(i));
++  const out=[];for(const t of tam){const kv=idReg(t.id);
++    const nut=all.filter(n=>idReg(n.id)===kv&&!loi(n)&&!taken.has(n.id)&&Math.hypot(n.x-t.x,n.y-t.y)<=MA_CFG.ban).map(n=>n.id);nut.forEach(i=>taken.add(i));
+     const z={tam:t.id,k:kv,ma:MA_CFG.dau,nut,bac:-1};L.push(z);maApply(z,w);out.push(z);suLuocAdd(contentText('ma.tao',[t.name,MA_BAC[z.bac].n]),'ma',w);}
+   dbg('ma.tao',{n:out.length,src:s0.id});return out;}
+ // áp bậc lên các nút trong khu: nguy hiểm, thôn trấn biến mất ở Ma vực
+ function maApply(z,w){const b=maBac(z.ma),B=MA_BAC[b];const ch=b!==z.bac;z.bac=b;const r=G.run;
+   for(const id of z.nut){const n=nodeById2(w,id);if(!n)continue;if(n.dangerGoc==null)n.dangerGoc=n.danger;n.danger=clamp(n.dangerGoc+B.dg,0,3);n.maLv=b;
+-    if(B.mat&&(n.type==='tran'||n.type==='thanh')&&!(r&&r.at===n.id)){n.state='ruin';n.stateUntil=Math.max(n.stateUntil||0,w.t+2*HY);n.maRuin=1;}
++    if(B.mat&&isTownT(n.type)&&!(r&&r.at===n.id)){n.state='ruin';n.stateUntil=Math.max(n.stateUntil||0,w.t+2*HY);n.maRuin=1;}
+     else if(n.maRuin&&!B.mat){n.stateUntil=Math.min(n.stateUntil||0,w.t);delete n.maRuin;}}
+   return ch;}
+ function maLanh(z,w){for(const id of z.nut){const n=nodeById2(w,id);if(!n)continue;if(n.dangerGoc!=null){n.danger=n.dangerGoc;delete n.dangerGoc;}delete n.maLv;if(n.maRuin){n.stateUntil=Math.min(n.stateUntil||0,w.t);delete n.maRuin;}}}
+diff --git a/src/game/core2/60-truy-duoi.js b/src/game/core2/60-truy-duoi.js
+index a093d0a..817b17b 100644
+--- a/src/game/core2/60-truy-duoi.js
++++ b/src/game/core2/60-truy-duoi.js
+@@ -74,7 +74,7 @@ function truyPick(o){const r=G.run,T=r.truy;if(!T)return {t:''};const t=W().t;db
+   return _cc.apply(this,arguments);};}
+ // tới nơi an toàn: thành có thủ vệ, tông môn mình
+ {const _ar=arrive;arrive=function(id){const o=_ar.apply(this,arguments);const r=G.run;const T=r&&r.truy;if(!T||!feat('truy'))return o;const n=nodeById(id);if(!n||n.state==='ruin')return o;
+-  let a=0;if(n.type==='tong'&&typeof contentOwnSect==='function'&&contentOwnSect(n))a=TRUY.an.tong;else if(n.type==='thanh')a=TRUY.an.thanh[T.k]||0;
++  let a=0;if(n.type==='tong'&&typeof contentOwnSect==='function'&&contentOwnSect(n))a=TRUY.an.tong;else if(isThanhT(n.type))a=TRUY.an.thanh[T.k]||0;
+   if(a==='huy'){r.truy=null;const m=contentText('truy.anHuy',[n.name,T.n]);note(m,'up');log(m);dbg('truy.an',{a,k:T.k,n:n.type});}
+   else if(a==='giam'&&!T.giam){T.giam=1;const t=W().t;T.until=t+(T.until-t)*TRUY.an.giam;note(contentText('truy.anGiam',[n.name,T.n]));dbg('truy.an',{a,k:T.k,n:n.type});}
+   return o;};}
+diff --git a/src/game/core2/63-so-tay-nhan-vat.js b/src/game/core2/63-so-tay-nhan-vat.js
+index bf68fb4..7774282 100644
+--- a/src/game/core2/63-so-tay-nhan-vat.js
++++ b/src/game/core2/63-so-tay-nhan-vat.js
+@@ -68,6 +68,6 @@ function faQhBac(id){const d=faDiem(id);let i=0;while(i<FA_QH_NGUONG.length&&d>=
+ function faMinh(id){const r=G.run;return !!(r&&r.faMinh&&r.faMinh[id]);}
+ function faKetMinh(id,on){const r=G.run;if(!r||!THE_LUC[id])return false;const M=r.faMinh||(r.faMinh={});if(on)M[id]=1;else delete M[id];dbg('fa.minh',{id,on:!!on});return true;}
+ function soFaView(){const r=G.run;if(!r||!W())return [];
+-  return Object.keys(THE_LUC).sort().map(id=>{const f=faNow(id);if(!f)return null;const n=anchorNode(f.noi);
++  return Object.keys(THE_LUC).sort().filter(id=>THE_LUC[id].noi).map(id=>{const f=faNow(id);if(!f)return null;const n=anchorNode(f.noi);
+     const b=faQhBac(id);const c=faCong(id);
+     return {id,n:f.n,noi:f.noiTen,trang:f.trangT,diet:f.trang==='diet'?1:0,chu:f.chu||'',danh:n&&typeof danhName==='function'?danhName(n):'',qh:contentText('so.fq.'+b),bac:b,minh:faMinh(id)?contentText('so.fqMinh'):'',cong:c>0?contentText('so.faCong',[Math.floor(c)]):contentText('so.faCong0')};}).filter(Boolean);}
+diff --git a/src/game/core2/64-dat-dai.js b/src/game/core2/64-dat-dai.js
+index 660e485..5efd6e8 100644
+--- a/src/game/core2/64-dat-dai.js
++++ b/src/game/core2/64-dat-dai.js
+@@ -9,7 +9,7 @@ FEAT.dat=1;
+ const DAT_V=1;
+ // nút gắn công trình: chỉ những nút này mới bị lọc; nút khác (thăm dò, bế quan, dưỡng thương, nhà mình…) hiện như cũ
+ const DAT_TIED={};for(const id in CONG_TRINH)for(const a of CONG_TRINH[id].acts)(DAT_TIED[a]=DAT_TIED[a]||[]).push(id);
+-const DAT_SETTLE=['tran','thanh','cho','ancu','tong'];
++const DAT_SETTLE=['tran','thanh','tutran','tuthanh','cho','ancu','tong'];
+ function datStore(){const w=W();return w?(w.dat||(w.dat={})):null;}
+ function datCt(c){return c&&c.ct?CONG_TRINH[c.ct]:null;}
+ function datHas(n,ct){const d=datStore()&&datStore()[n.id];return !!d&&d.o.some(c=>c.ct===ct);}
+@@ -27,7 +27,7 @@ function datGen(n,L){const w=W(),t=n.type,o=[];const key=s=>'dat:'+n.id+':'+s;
+   const add=ct=>{if(ct&&CONG_TRINH[ct]&&!o.some(c=>c.ct===ct))o.push({ct,chu:null,goc:1});};
+   const covered=a=>o.some(c=>c.ct&&CONG_TRINH[c.ct].acts.includes(a));
+   if(n.dp)add('dong_phu');
+-  for(const ct of DAT.goc[t]||[])add(ct);
++  for(const ct of ((!w.v2&&DAT.gocCu&&DAT.gocCu[t])||DAT.goc[t]||[]))add(ct); // thế giới cũ giữ bảng cũ
+   const need=datNeed(n,L),C=datTer(n);
+   for(const a of Object.keys(DAT_TIED)){if(!need.has(a)||covered(a))continue;
+     add(DAT.hoang[a]?datPickNat(n,a,C,key(a)):DAT_TIED[a][0]);}
+diff --git a/src/game/core2/65-dat-dai-xay-pha.js b/src/game/core2/65-dat-dai-xay-pha.js
+index e363509..1db0dc5 100644
+--- a/src/game/core2/65-dat-dai-xay-pha.js
++++ b/src/game/core2/65-dat-dai-xay-pha.js
+@@ -6,7 +6,7 @@
+ //   có thể bị truy đuổi theo hệ Sửa-K, ở thôn trấn / thành có thể bị quan phủ truy nã).
+ // - Nơi lõi (LOC_LOI: LOC05, LOC12, LOC15): không phá được công trình cốt lõi. Nơi neo khác: công trình cốt lõi chỉ hư tạm DAT.hu tháng.
+ VENUE_N.datdai=contentText('dat.n');VENUE_IN.datdai=[contentText('dat.in1'),contentText('dat.in2')];
+-function datLoai(n){return n.type==='thanh'?'thanh':'tran';}
++function datLoai(n){return isThanhT(n.type)?'thanh':'tran';}
+ function datLoi(n){return !!(n&&n.anchor&&typeof LOC_LOI!=='undefined'&&LOC_LOI.includes(n.anchor));}
+ // hậu quả (bằng chữ) khi động vào ô có chủ; apply=true thì áp luôn và trả về các dòng đã xảy ra
+ function datPhat(n,c,apply){const chu=c&&c.chu;const L=[];if(!chu||chu.k==='ta')return L;const r=G.run,P=DAT.phat;
+diff --git a/src/game/core2/66-truy-na.js b/src/game/core2/66-truy-na.js
+index 88f2a2f..d26ac1c 100644
+--- a/src/game/core2/66-truy-na.js
++++ b/src/game/core2/66-truy-na.js
+@@ -22,7 +22,7 @@ function tnaQ(n){if(!n)return tnaKey(G.run.region||0);const d=geo().dist[nodeHex
+ function tnaQs(){return Object.keys(tnaQI().reg).map(d=>'q'+d);}
+ // tông môn → 'tong:id'; trụ sở thế lực còn sống (THE_LUC.noi) mà không phải thôn trấn / thành → mã thế lực; nơi khác → null (thuộc quan phủ quận)
+ function tnaCanCu(n){if(!n)return null;if(n.type==='tong')return 'tong:'+n.id;
+-  if(['tran','thanh'].includes(n.type)||!n.anchor||typeof THE_LUC==='undefined'||typeof LOC_NEO==='undefined')return null;
++  if(isTownT(n.type)||!n.anchor||typeof THE_LUC==='undefined'||typeof LOC_NEO==='undefined')return null;
+   const L=LOC_NEO[n.anchor],fa=L&&L.fa;return fa&&THE_LUC[fa]&&THE_LUC[fa].noi===n.anchor&&faAlive(fa)?fa:null;}
+ // khoá sổ ghi tội cho việc làm ở nơi n
+ function tnaK(n){const b=tnaCanCu(n);return b?'f:'+b:tnaQ(n);}
+@@ -63,7 +63,7 @@ function tnaDanhLen(q){if(tnaIsF(q))return;const reg=tnaKReg(q),T=G.run.tna||{};
+ // quan phủ quận / chấp pháp thế lực ghi tội: tăng mức, cộng tiền treo thưởng, quan sai lần theo (nếu ngươi đang ở đó)
+ function tnaBao(k0,nang,o){const r=G.run;if(!r||!nang||!W())return null;o=o||{};const T=tnaS(),t=W().t;const reg=tnaKey(k0);
+   const E=T[reg]||(T[reg]={m:0,tien:0,t,ly:[],fa:[]});const m0=E.m;E.m=clamp(E.m+nang,1,5);
+-  const nd=o.node;tnaFaGhi(E,o.lan?'*':o.faK||(nd?tnaFa(nd):'*'));E.tien+=Math.round(TNA.tien.xu*nang*(nd&&nd.type==='thanh'?TNA.tien.thanh:1));E.t=t;if(o.ly&&!E.ly.includes(o.ly))E.ly.push(o.ly);
++  const nd=o.node;tnaFaGhi(E,o.lan?'*':o.faK||(nd?tnaFa(nd):'*'));E.tien+=Math.round(TNA.tien.xu*nang*(nd&&isThanhT(nd.type)?TNA.tien.thanh:1));E.t=t;if(o.ly&&!E.ly.includes(o.ly))E.ly.push(o.ly);
+   if(E.m>=TNA.lan)E.fa=['*'];if(E.m>=2)tnaDanhXuong(reg);
+   // tội rất nặng: lan sang mọi quận khác (sổ thế lực khác không lan)
+   if(E.m>=TNA.lan&&!o.lan)for(const q of tnaQs()){if(q===reg)continue;const F=T[q];if(!F||F.m<TNA.lanM)tnaBao(q,TNA.lanM-(F?F.m:0),{ly:'lan',lan:1,quiet:1,noTruy:1});}
+@@ -115,7 +115,7 @@ function tnaTick(){const r=G.run;if(!tnaOn()||TNA_BUSY)return;const t=W().t,T=tn
+ {const _at=advanceTime;advanceTime=function(h){const o=_at.apply(this,arguments);if(G.run&&!TNA_BUSY)tnaTick();return o;};}
+ // tới thôn trấn / thành / chợ trong quận đang bị truy nã (hoặc căn cứ thế lực đang ghi tội ngươi): có thể bị nhận ra (cải trang, che giấu tu vi giúp né)
+ {const _ar=arrive;arrive=function(id){const o=_ar.apply(this,arguments);const r=G.run;if(!tnaOn())return o;const n=nodeById(id);
+-  if(!n||n.state==='ruin')return o;const b=tnaCanCu(n);if(!b&&!['tran','thanh','cho'].includes(n.type))return o;
++  if(!n||n.state==='ruin')return o;const b=tnaCanCu(n);if(!b&&!isTownT(n.type)&&n.type!=='cho')return o;
+   const reg=b?'f:'+b:tnaQ(n),E=tnaE(reg);if(!E)return o;
+   if(!b&&!tnaBiet(E,n)){dbg('tna.laFa',{k:reg,fa:tnaFa(n)});return o;}
+   const lo=tnaCaiThu(n);const p=lo?1:TNA.nhan[E.m]*(tnaChe()?TNA.chung.che:1);const hit=lo||chance(p);dbg('tna.nhan',{reg,p:Math.round(p*100),hit,lo:lo||''});
+@@ -150,7 +150,7 @@ VENUE_N.chapphap=contentText('tna.cpN');VENUE_IN.chapphap=[contentText('tna.cpIn
+   const qv=tnaQpV(n),tu=qv==='chapphap',b=tnaCanCu(n);
+   // quan phủ (quận) ở nơi giam giữ thường; tông môn / căn cứ thế lực chỉ xử sổ riêng của mình
+   if((b||TNA.quan.includes(n.type))&&tnaE(tnaK(n))&&!L.some(x=>x.a===qv))L.push({a:qv,i:'⚖️',l:contentText(tu?'tna.cpN':'tna.qpN'),h:0,tip:contentText(tu?'tna.cpTip':'tna.qpTip'),dis:false,x:''});
+-  if(['tran','thanh','cho'].includes(n.type)&&tnaMax()>0&&!L.some(x=>x.a==='caitrang'))L.push({a:'caitrang',i:'🎭',l:contentText('tna.caiN'),h:1,tip:contentText('tna.caiTip',[TNA.cai.ngay]),dis:(r.bac||0)<TNA.cai.xu,x:(r.bac||0)<TNA.cai.xu?contentText('no.khongDu'):''});
++  if((isTownT(n.type)||n.type==='cho')&&tnaMax()>0&&!L.some(x=>x.a==='caitrang'))L.push({a:'caitrang',i:'🎭',l:contentText('tna.caiN'),h:1,tip:contentText('tna.caiTip',[TNA.cai.ngay]),dis:(r.bac||0)<TNA.cai.xu,x:(r.bac||0)<TNA.cai.xu?contentText('no.khongDu'):''});
+   return L;};}
+ {const _p=placeAct;placeAct=function(a){if(a!=='caitrang')return _p.apply(this,arguments);const r=G.run,sc=r&&r.scene;if(!sc||sc.type!=='place'||(r.bac||0)<TNA.cai.xu)return;
+   bacAdd(-TNA.cai.xu,'tna.cai');advanceTime(1);if(!G.run)return;r.caiT=W().t+TNA.cai.ngay*HD;sc.msg=[contentText('tna.caiXong',[TNA.cai.ngay])];sc.chips=[bacChip(-TNA.cai.xu)];dbg('tna.cai',{den:r.caiT});};}
+@@ -233,6 +233,7 @@ function tnaHoanTha(){const r=G.run;if(!r)return false;const Q=r.kyHoan,co=Array
+ function tnaFa(n){if(!n)return null;const w=W();if(n.type==='tong')return 'tong:'+n.id;const reg=tnaReg(n);
+   if(typeof THE_LUC==='undefined'||typeof anchorOf!=='function')return 'reg:'+reg;
+   const L=n.anchor&&typeof LOC_NEO!=='undefined'&&LOC_NEO[n.anchor];if(L&&L.fa&&THE_LUC[L.fa]&&faAlive(L.fa))return L.fa;
++  if(n.fa){if(n.fa.startsWith('tong:')){const t=nodeById(+n.fa.slice(5));if(t&&t.type==='tong')return n.fa;}else if(THE_LUC[n.fa]&&faAlive(n.fa))return n.fa;} // thế giới mới: chủ ghi trên nút
+   let best=null,bd=1e18;for(const id of Object.keys(THE_LUC).sort()){if(!faAlive(id))continue;const a=anchorOf(w,THE_LUC[id].noi);if(!a||tnaReg(a)!==reg)continue;
+     const d=Math.hypot((a.x||0)-(n.x||0),(a.y||0)-(n.y||0));if(d<bd){bd=d;best=id;}}
+   return best||'reg:'+reg;}
+diff --git a/src/game/core2/67-dai-mong.js b/src/game/core2/67-dai-mong.js
+index 8ad01a7..2dd8309 100644
+--- a/src/game/core2/67-dai-mong.js
++++ b/src/game/core2/67-dai-mong.js
+@@ -145,7 +145,7 @@ function dmOpts(n){const r=G.run;const L=[];if(!r||!n||!W())return L;const loc=d
+       else if(!r.pham&&r.realm>=2)L.push(dmOpt('ng04t',contentText('dm.v.ng04t'),contentText('dm.ng04tD',[N.thieuKhu])+'\n\n'+dmDkChu(D),{h:N.ngay*HD,st:Math.round(N.st*0.3),no:(r.st||0)>=Math.round(N.st*0.3)?'':contentText('dat.thieuLt')}));}
+   }
+   // truyền nghề (END06): ở thôn trấn / thành hoặc nơi neo
+-  if((loc||['tran','thanh'].includes(n.type))&&!(r.ends||[]).includes('END06')&&typeof ngChinh==='function'&&ngChinh(r)){const D=dmDk('END06');
++  if((loc||isTownT(n.type))&&!(r.ends||[]).includes('END06')&&typeof ngChinh==='function'&&ngChinh(r)){const D=dmDk('END06');
+     if(D[0][1])L.push(dmOpt('truyen',contentText('dm.v.truyen'),contentText('dm.truyenD',[DM_CFG.end06Thang])+'\n\n'+dmDkChu(D),{h:DM_CFG.end06Thang*HM,no:dmDkOk(D)?'':contentText('dm.thieuDk')}));}
+   return L;}
+ function fmtNgay(h){return Math.max(1,Math.ceil(h/HD))+' ngày';}
+diff --git a/src/game/core2/71-mua-dat.js b/src/game/core2/71-mua-dat.js
+index 0c10243..3f227ff 100644
+--- a/src/game/core2/71-mua-dat.js
++++ b/src/game/core2/71-mua-dat.js
+@@ -10,7 +10,7 @@
+ // Dữ liệu: chỉ dùng W().dat (chu {k:'ta'}); bản lưu cũ không cần chuyển.
+ // Đợt sau: mua cả ô ĐÃ có công trình của dân / vai / thế lực (giá cộng DAT.mua.ct, công trình giữ nguyên, c.muaCt=1);
+ // thuế đất ở thôn trấn / thành (DAT.thue): nộp mỗi năm, thiếu thì nợ trên ô (thueNo) + danh tiếng khu tụt; nợ lâu thành nợ quan phủ (r.bac âm). Không mất đất.
+-const DAT_DAN=['tran','thanh','cho','ancu'];
++const DAT_DAN=['tran','thanh','tutran','tuthanh','cho','ancu'];
+ function datCtTa(n,ct){if(!n||!feat('dat')||!G.run||!W())return false;const d=datStore()&&datStore()[n.id];return !!d&&d.o.some(c=>c.ct===ct&&c.chu&&c.chu.k==='ta');}
+ function datNhaTa(n){return datCtTa(n,'nha_rieng');}
+ function datTranTa(n){return datCtTa(n,'tran_phap');}
+diff --git a/src/game/core2/74-chu-thanh-tran.js b/src/game/core2/74-chu-thanh-tran.js
+new file mode 100644
+index 0000000..ce39ab3
+--- /dev/null
++++ b/src/game/core2/74-chu-thanh-tran.js
+@@ -0,0 +1,29 @@
++// ---------------- CHỦ CỦA THÀNH, TRẤN (CHỈ THẾ GIỚI MỚI, w.v2) ----------------
++// Thành/trấn phàm nhân: chủ = Hoàng quốc của quận (mỗi đại khu vực chia quận làm hai nhóm liền nhau, mỗi nhóm một Hoàng quốc: HQ_KV).
++// Thành/trấn tu sĩ: chủ = tông môn (nút 'tong') hoặc thế lực tu sĩ có căn cứ neo (FA_TU) gần nhất trong cùng đại khu.
++// Lưu trên nút: n.fa = 'FAxx' hoặc 'tong:<id nút>'. Thế giới sinh từ bản cũ không có n.fa, các hệ khác dùng cách cũ.
++function hqNhom(w){const g=geoFor(w);const by={};
++  for(let i=0;i<HN;i++){const d=g.dist[i],k=g.reg[i];if(d<0||k<0||!terWalk(g.ter[i]))continue;const o=by[d]||(by[d]={k,x:0,y:0,n:0});const p=hexCenter(i);o.x+=p[0];o.y+=p[1];o.n++;}
++  const res={};
++  for(let k=0;k<5;k++){const L=Object.keys(by).map(Number).filter(d=>by[d].k===k).sort((a,b)=>a-b);if(!L.length)continue;
++    for(const d of L){by[d].cx=by[d].x/by[d].n;by[d].cy=by[d].y/by[d].n;}
++    let a=L[0],b=L[0],bd=-1;for(const p of L)for(const q of L){const dd=Math.hypot(by[p].cx-by[q].cx,by[p].cy-by[q].cy);if(dd>bd){bd=dd;a=p;b=q;}}
++    const vx=by[b].cx-by[a].cx,vy=by[b].cy-by[a].cy;
++    const S=L.map(d=>[d,(by[d].cx-by[a].cx)*vx+(by[d].cy-by[a].cy)*vy]).sort((x,y)=>x[1]-y[1]||x[0]-y[0]);
++    S.forEach(([d],i)=>{res[d]=i<Math.ceil(S.length/2)?0:1;});}
++  return res;}
++function chuTen(f){if(!f)return '';if(f.startsWith('tong:')){const n=nodeById(+f.slice(5));return n?n.name:'';}return THE_LUC[f]?THE_LUC[f].n:'';}
++function chuGan(w){const g=geoFor(w);const G2=hqNhom(w);w.hqG=G2;
++  const all=[];for(const R0 of w.regions)for(const n of R0.nodes)all.push(n);
++  // nhóm nào có Lương Kinh thì là của Lương triều (FA01); nhóm kia là nước còn lại của đại khu
++  const hq=HQ_KV.map(p=>p.slice());const lk=anchorOf(w,'LOC02');
++  if(lk){const gi=G2[g.dist[lk.hex]];if(gi===1)hq[0]=[hq[0][1],hq[0][0]];}
++  const tuCS=[];for(const n of all)if(n.type==='tong')tuCS.push({f:'tong:'+n.id,n});
++  for(const id of FA_TU){const a=anchorOf(w,THE_LUC[id].noi);if(a)tuCS.push({f:id,n:a});}
++  for(const n of all){if(!isTownT(n.type))continue;const k=idReg(n.id);
++    if(isTuT(n.type)){let best=null,bd=1e18;for(const c of tuCS){if(idReg(c.n.id)!==k)continue;const d=Math.hypot(c.n.x-n.x,c.n.y-n.y);if(d<bd){bd=d;best=c.f;}}
++      if(!best)for(const c of tuCS){const d=Math.hypot(c.n.x-n.x,c.n.y-n.y);if(d<bd){bd=d;best=c.f;}}
++      n.fa=best;}
++    else{const gi=G2[g.dist[n.hex]];n.fa=hq[k][gi==null?0:gi];}}
++  w.chu1=1;dbg('chu.gan',{n:all.filter(n=>n.fa).length});}
++{const _sw=snapWorld;snapWorld=function(w){_sw(w);if(w&&w.regions&&w.v2&&!w.chu1)chuGan(w);};}
+diff --git a/src/game/thu-tu.json b/src/game/thu-tu.json
+index a0ba81e..45dfaae 100644
+--- a/src/game/thu-tu.json
++++ b/src/game/thu-tu.json
+@@ -339,6 +339,7 @@
+  "core2/72-hau-qua-ket.js",
+  "data/09-nghe-tu-du-lieu.js",
+  "core2/73-nghe-tu-su-kien.js",
++ "core2/74-chu-thanh-tran.js",
+  "ui/01-base.js",
+  "ui/02-assets.js",
+  "ui/03-ngu-hanh-bieu-tuong.js",
+diff --git a/src/game/ui/05-gfx.js b/src/game/ui/05-gfx.js
+index 6e53199..b0f5034 100644
+--- a/src/game/ui/05-gfx.js
++++ b/src/game/ui/05-gfx.js
+@@ -27,17 +27,24 @@ const GLYPH={
+   cho:'M3 10l2-5h14l2 5M4 10v10h16V10M3 10h18M9 20v-5h6v5',
+   ancu:'M3 12l9-8 9 8M6 11v9h12v-9M10 20v-4h4v4',
+   dam:'M3 19c3-2 5 2 8 0s5 2 8 0M8 16V7M8 7c-1-2-1-3 0-4 1 1 1 2 0 4M15 15V9M15 9c-1-2-1-3 0-4 1 1 1 2 0 4',
++  tutran:'M3 20V12l5-4 5 4v8M13 20v-5l4-3 4 3v5M2 20h20M8 5v3M8 3l1.5 1.5L8 6 6.5 4.5z',
++  tuthanh:'M4 20V9h3v3h3V7h4v5h3V9h3v11M2 20h20M10 20v-4h4v4M12 2l1.2 2.6L16 5l-2 2 .5 2.8L12 8.4 9.5 9.8 10 7 8 5l2.8-.4z',
++  bicanh:'M12 3a9 9 0 100 18 9 9 0 000-18zM12 7a5 5 0 105 5M12 11a1.5 1.5 0 101.5 1.5',
++  dongthien:'M3 20c0-9 4-15 9-15s9 6 9 15zM12 8l1 2.5 2.5 1-2.5 1L12 15l-1-2.5-2.5-1 2.5-1z',
++  como:'M7 20V9a5 5 0 0110 0v11zM12 10v6M9.5 12.5h5M3 20h18',
++  yeusao:'M3 20c0-6 4-10 9-10s9 4 9 10zM8 14l1-3 1 3M14 14l1-3 1 3M10 18h4',
++  ditich:'M4 20V8M4 8h5M9 8v12M14 20V12h6v8M12 20h10M3 20h5',
+   ruin:'M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z',
+   me:'M12 6a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM7 13c0-3 2-5 5-5s5 2 5 5M3 20c3-4 6-5 9-5s6 1 9 5',
+ };
+ const P2D={};function p2d(k){return P2D[k]||(P2D[k]=new Path2D(GLYPH[k]||GLYPH.tran));}
+-const NODE_CAT={tran:'gold',thanh:'gold',tong:'acc',rung:'jade',nui:'jade',song:'jade',bien:'jade',hoang:'jade',thien:'acc',phe:'vio',dong:'vio',ma:'seal',sao:'seal',ai:'ink',linhdia:'acc',khoang:'vio',duoc:'jade',cho:'gold',ancu:'acc',dam:'jade'};
++const NODE_CAT={tran:'gold',thanh:'gold',tong:'acc',rung:'jade',nui:'jade',song:'jade',bien:'jade',hoang:'jade',thien:'acc',phe:'vio',dong:'vio',ma:'seal',sao:'seal',ai:'ink',linhdia:'acc',khoang:'vio',duoc:'jade',cho:'gold',ancu:'acc',dam:'jade',tutran:'acc',tuthanh:'acc',bicanh:'vio',dongthien:'vio',como:'seal',yeusao:'seal',ditich:'vio'};
+ 
+ const HERO_IMG={};function heroImg(){const u=ASSET.hero.me;if(!u||typeof Image==='undefined')return null;if(!HERO_IMG[u]){const im=new Image();im.onload=()=>Map2.invalidate();im.src=u;HERO_IMG[u]=im;}return HERO_IMG[u];}
+ const ENT_GLYPH={thutrieu:'paw',di:'star',tuantra:'shield',thienkieu:'medal',truysat:'sword',khach:'walk'};const ICPATH={};function icPath(k){return ICPATH[k]||(ICPATH[k]=new Path2D(ICP[k]));}
+ function entCol(t,C){return ['thutrieu','truysat'].includes(t)?C.seal:t==='di'?C.vio:t==='thuong'?C.gold:C.acc;}
+ function avLetter(name){const w=String(name||'?').trim().split(/\s+/);return (w[w.length-1]||'?')[0].toUpperCase();}
+-function mapNode(n){const k=Math.floor(n.id/100);return mapXY(k,n.x,n.y);}
++function mapNode(n){const k=idReg(n.id);return mapXY(k,n.x,n.y);}
+ const Map2=(()=>{
+   // lưới ô và các đường ranh: dựng một lần thành nét vẽ sẵn, mỗi khung chỉ tô lại
+   let HX=null,hov=null,pcam=null,pse=null;
+@@ -350,7 +357,7 @@ const Map2=(()=>{
+       if(n.grave&&n.fog>=1){ctx.fillStyle=C.ink2;ctx.fillRect(x-s0/2-2,y-s0/2-2,5,7);}
+       if(QN.has(n.id)){const qx=x+s0/2,qy=y+s0/2;ctx.beginPath();ctx.arc(qx,qy,6.5,0,6.3);ctx.fillStyle=C.gold;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='#fffaf0';ctx.font='700 10px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('!',qx,qy+0.5);}
+       if(CFG.notes&&notes[n.id]){ctx.beginPath();ctx.arc(x-s0/2+1,y+s0/2-1,4.5,0,6.3);ctx.fillStyle=C.gold;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();}
+-      if(CFG.names&&(!small||sel||n.id===r.at||n.type==='thanh'||n.type==='ai')&&(z>=0.3||sel||n.id===r.at)){label(n.name+(sure?'':'?'),x,y+s0/2+3,{c:sure?C.ink:C.ink3,s:CFG.font==='m'?12:14});if(old)label('tin cũ',x,y+s0/2+18,{c:C.ink3,s:10});}}
++      if(CFG.names&&(!small||sel||n.id===r.at||isThanhT(n.type)||n.type==='ai')&&(z>=0.3||sel||n.id===r.at)){label(n.name+(sure?'':'?'),x,y+s0/2+3,{c:sure?C.ink:C.ink3,s:CFG.font==='m'?12:14});if(old)label('tin cũ',x,y+s0/2+18,{c:C.ink3,s:10});}}
+     // thực thể qua lại
+     if(CFG.ents&&showIc){const sr=senseR();for(const e of entsHere(reg)){if(HE[e.type])continue;const p=entXY(e);const see=Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr;
+       if(!see&&!e.heard)continue;const q=mapXY(reg,see?p[0]:e.heard.x,see?p[1]:e.heard.y);const parked=see&&e.to==null;const x=SX(q[0])+(parked?HW*0.64:0),y=SY(q[1]);const er=Math.max(6,HW*0.52);if(x<-30||y<-30||x>W0+30||y>H0+30)continue;
+diff --git a/src/game/ui/06-tranh-muc-phong-canh.js b/src/game/ui/06-tranh-muc-phong-canh.js
+index 392b0a1..00c76b6 100644
+--- a/src/game/ui/06-tranh-muc-phong-canh.js
++++ b/src/game/ui/06-tranh-muc-phong-canh.js
+@@ -18,7 +18,7 @@ const Art=(()=>{
+       const bx=W*(0.3+rnd()*0.4),by=H*0.88;g.fillStyle=hexA(ink,0.75);g.beginPath();g.moveTo(bx-22,by);g.quadraticCurveTo(bx,by+9,bx+24,by);g.lineTo(bx+16,by+5);g.lineTo(bx-15,by+5);g.closePath();g.fill();g.fillRect(bx-2,by-16,1.5,16);}
+     else{ridge(g,W,H,H*0.9,H*0.16,rnd,dark?tint[0]:tint[2],0.85,W*0.09);}
+     if(['rung','nui','tong','dong','thien'].includes(type)||!type){for(let i=0;i<3+Math.floor(rnd()*3);i++)pine(g,W*(0.05+rnd()*0.9),H*(0.9+rnd()*0.1),H*(0.22+rnd()*0.2),ink);}
+-    if(type==='tran'||type==='thanh'||type==='tong'||type==='ai'){const n=type==='tran'?3:5;let x=W*(0.25+rnd()*0.2);g.fillStyle=hexA(ink,0.7);for(let i=0;i<n;i++){const w=W*(0.05+rnd()*0.04),h=H*(type==='tran'?0.1:0.14+rnd()*0.1),y=H*0.9;g.fillRect(x,y-h,w,h);g.beginPath();g.moveTo(x-w*0.25,y-h);g.quadraticCurveTo(x+w/2,y-h-h*0.35,x+w*1.25,y-h);g.lineTo(x+w,y-h+3);g.lineTo(x,y-h+3);g.closePath();g.fill();x+=w*1.5;}}
++    if(isTownT(type)||type==='tong'||type==='ai'){const n=(type==='tran'||type==='tutran')?3:5;let x=W*(0.25+rnd()*0.2);g.fillStyle=hexA(ink,0.7);for(let i=0;i<n;i++){const w=W*(0.05+rnd()*0.04),h=H*((type==='tran'||type==='tutran')?0.1:0.14+rnd()*0.1),y=H*0.9;g.fillRect(x,y-h,w,h);g.beginPath();g.moveTo(x-w*0.25,y-h);g.quadraticCurveTo(x+w/2,y-h-h*0.35,x+w*1.25,y-h);g.lineTo(x+w,y-h+3);g.lineTo(x,y-h+3);g.closePath();g.fill();x+=w*1.5;}}
+     if(type==='phe'||type==='ma'||type==='sao'){g.strokeStyle=hexA(ink,0.7);g.lineWidth=3;for(let i=0;i<5;i++){const x=W*(0.1+rnd()*0.8),h=H*(0.1+rnd()*0.2);g.beginPath();g.moveTo(x,H*0.93);g.lineTo(x+rnd()*4-2,H*0.93-h);g.stroke();}if(type!=='phe'){g.fillStyle=hexA(seal,0.12);g.fillRect(0,0,W,H);}}
+     for(let b=0;b<2+Math.floor(rnd()*3);b++){const bx=W*(0.1+rnd()*0.8),by=H*(0.1+rnd()*0.25),w=4+rnd()*4;g.strokeStyle=hexA(ink,0.4);g.lineWidth=1;g.beginPath();g.moveTo(bx-w,by);g.quadraticCurveTo(bx-w/2,by-w/2,bx,by);g.quadraticCurveTo(bx+w/2,by-w/2,bx+w,by);g.stroke();}
+     if(night){g.fillStyle='rgba(15,28,58,.09)';g.fillRect(0,0,W,H);}
+diff --git a/src/react/ban-do/TheDiaDiem.jsx b/src/react/ban-do/TheDiaDiem.jsx
+index 4aeb86e..a70f3f0 100644
+--- a/src/react/ban-do/TheDiaDiem.jsx
++++ b/src/react/ban-do/TheDiaDiem.jsx
+@@ -49,7 +49,7 @@ function TheQuan({ c }) {
+   const ter = Object.keys(tc).sort((a, b) => tc[b] - tc[a]).slice(0, 3);
+   const all = PS.regionOf(I.reg).nodes.filter(n => g.dist[PS.nodeHex(n)] === d), kn = all.filter(n => n.fog >= 2 || n.memory);
+   const dg = kn.length ? Math.max(...kn.map(PS.dangerTag)) : 0;
+-  const luc = kn.find(n => n.type === 'tong') || kn.find(n => n.type === 'thanh') || kn.find(n => n.type === 'tran');
++  const luc = kn.find(n => n.type === 'tong') || kn.find(n => n.type === 'thanh' || n.type === 'tuthanh') || kn.find(n => n.type === 'tran' || n.type === 'tutran');
+   return (
+     <div className={'dock card np' + (PS.UI.npMin ? ' min' : '')} data-ax={cx} data-ay={cy}>
+       <div className="np-h"><div className="np-t"><b className="np-nm">{I.dist || 'Vùng vô danh'}</b><small>quận thuộc {I.regName}</small></div><NutThe /></div>
+diff --git a/src/react/bang/Them.jsx b/src/react/bang/Them.jsx
+index 1c13065..4031b68 100644
+--- a/src/react/bang/Them.jsx
++++ b/src/react/bang/Them.jsx
+@@ -30,7 +30,7 @@ function LopBanDo() {
+   );
+ }
+ 
+-const NHOM = [['Nơi có người', ['tran', 'thanh', 'cho', 'tong', 'ancu', 'ai']], ['Hoang dã', ['rung', 'nui', 'song', 'bien', 'hoang', 'dam', 'thien']], ['Tài nguyên', ['linhdia', 'duoc', 'khoang', 'dong']], ['Hiểm địa', ['phe', 'ma', 'sao']]];
++const NHOM = [['Nơi có người', ['tran', 'thanh', 'tutran', 'tuthanh', 'cho', 'tong', 'ancu', 'ai']], ['Hoang dã', ['rung', 'nui', 'song', 'bien', 'hoang', 'dam', 'thien']], ['Tài nguyên', ['linhdia', 'duoc', 'khoang', 'dong', 'dongthien']], ['Hiểm địa', ['phe', 'ma', 'sao', 'bicanh', 'como', 'yeusao', 'ditich']]];
+ 
+ // Một ô chọn ẩn/hiện trong chú giải
+ function O({ act, k, on, children }) {
+diff --git a/tools/test.js b/tools/test.js
+index 2fba15c..0e17ddb 100644
+--- a/tools/test.js
++++ b/tools/test.js
+@@ -101,7 +101,7 @@ const TESTS = {
+     run("G.run.scene=null;G.run.at=DDX_T2.id;openPlace(DDX_T2.id);placeAct('datdai')");
+     ok(run("G.run.scene&&G.run.scene.venue==='datdai'&&venueOpts(nodeById(G.run.scene.id),'datdai').length>0"), 'mở mục Đất đai: có danh sách việc');
+     // bản lưu cũ: chưa có W().dat → sinh khi tải, giữ quán, chợ, nhà, thầy, Ám Hội
+-    run("delete W().dat;G.run.scene=null");
++    run("delete W().dat;delete W().v2;G.run.scene=null");
+     run(`DDX_OLD=${all}.find(n=>n.type==='thanh'&&n.state!=='ruin')`);
+     const old = JSON.parse(run("(()=>{W().t+=((22-tHour(W().t))%24+24)%24;return JSON.stringify(placeActs(DDX_OLD).map(a=>a.a))})()"));
+     ok(['inn','tea','tuu','shop','board','tram','camdo','ghost','amhoi','doilt'].every(a => old.includes(a)), 'bản lưu cũ: thành vẫn đủ quán, chợ, trạm, quỷ thị, Ám Hội ('+old.join()+')');
+@@ -3112,6 +3112,42 @@ const TESTS = {
+     ok(run("(()=>{const s=new Set();for(let i=0;i<40;i++){W().t+=HD;s.add(kyDmChonV('A2'))}return s.size})()")===3, 'game chọn ngẫu nhiên giữa bản gốc và hai bản khác');
+     } finally { run("lkTang=ntLk;G._tuNoRui=0;Object.assign(TU_SK,JSON.parse(NT_BK));if(ntHoan)tnaHoan=ntHoan"); }
+   },
++  the_gioi_moi() {
++    fresh();
++    const N = JSON.parse(run(`JSON.stringify((()=>{const w=W(),g=geo(),Q=quanCells(g),all=w.regions.flatMap(R=>R.nodes);const per={};
++      for(const n of all){const d=g.dist[n.hex];(per[d]||(per[d]={}))[n.type]=((per[d]||{})[n.type]||0)+1;}
++      const bad=[];for(const d in Q){const c=Q[d].cells.length,co=quanCo(c),q=NOI_SL[co],p=per[d]||{};
++        const tp=p.thanh||0,tt=p.tuthanh||0,rp=p.tran||0,rt=p.tutran||0;
++        if(tp<q.thanhPham[0]||tp>q.thanhPham[1]+1||tt<1||rp<Math.min(q.tranPham[0],q.tranPham[0])-1||rt<q.tranTu[0]-1||rt>q.tranTu[1]+1)bad.push([d,c,co,tp,tt,rp,rt]);}
++      const types=new Set(all.map(n=>n.type));const ids=new Set(all.map(n=>n.id));const cells=new Set(all.map(n=>n.hex));
++      const hq=new Set(all.filter(n=>isTownT(n.type)&&!isTuT(n.type)).map(n=>n.fa));
++      return {tot:all.length,bad,types:[...types],dupId:all.length-ids.size,dupHex:all.length-cells.size,
++        noChu:all.filter(n=>isTownT(n.type)&&!n.fa).length,hq:[...hq].filter(f=>THE_LUC[f]&&THE_LUC[f].loai==='hq').length,hqAll:Object.keys(THE_LUC).filter(f=>THE_LUC[f].loai==='hq').length,
++        walk:all.filter(n=>!terWalk(g.ter[n.hex])).length,anchors:all.filter(n=>n.anchor).length,
++        tuChu:all.filter(n=>isTuT(n.type)).every(n=>n.fa&&(n.fa.startsWith('tong:')||THE_LUC[n.fa])),
++        lk:(()=>{const a=anchorOf(w,'LOC02');return a&&a.fa;})(),
++        hqKv:[0,1,2,3,4].map(k=>new Set(all.filter(n=>idReg(n.id)===k&&n.type==='thanh').map(n=>n.fa)).size)};})())`));
++    ok(N.tot >= 450 && N.tot <= 700, 'tổng số nơi khoảng 500–600 (hiện ' + N.tot + ')');
++    ok(N.bad.length === 0, 'mỗi quận đúng số thành, trấn phàm / tu sĩ theo cỡ quận' + (N.bad.length ? ' ' + JSON.stringify(N.bad.slice(0, 4)) : ''));
++    ok(['tutran', 'tuthanh', 'bicanh', 'dongthien', 'como', 'yeusao', 'ditich'].every(t => N.types.includes(t)), 'có đủ loại nơi mới');
++    ok(N.dupId === 0 && N.dupHex === 0 && N.walk === 0, 'nơi không chồng lên nhau, đều trên ô đi được');
++    ok(N.anchors === 15, 'giữ đủ 15 nơi neo');
++    ok(N.noChu === 0 && N.tuChu, 'mọi thành trấn đều có chủ');
++    ok(N.hqAll === 10 && N.hq === 10, 'mười Hoàng quốc, mỗi nước nắm thành trấn phàm (' + N.hq + ')');
++    ok(N.lk === 'FA01', 'Lương Kinh thuộc Lương triều');
++    ok(run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tuthanh');return placeActs(n).some(a=>a.a==='shop')&&TYPE_NAME.tuthanh&&NODE_IC.bicanh;})()"), 'thành tu sĩ có chợ đồ tu sĩ');
++    ok(run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh');openPlace(n.id);const a=placeActs(n).map(x=>x.a);return !a.includes('shop')&&a.includes('taphoa');})()"), 'thành phàm: tạp hóa, không có phường thị tu sĩ');
++    ok(run("(()=>{const r=G.run;for(const t of ['bicanh','dongthien','como','yeusao','ditich']){const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type===t);r.at=n.id;openPlace(n.id);if(!placeActs(n).some(a=>a.a==='explore'))return false;}return true;})()"), 'nơi hoang dã mới có hành động khám phá');
++    ok(run("W().regions.flatMap(R=>R.nodes).filter(n=>n.type==='bicanh'||n.type==='dongthien').every(n=>n.danger===3)"), 'bí cảnh, động thiên nguy hiểm nhất');
++    ok(run("(()=>{const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran');return tnaFa(n)===n.fa;})()"), 'truy nã đọc chủ trên nút');
++    // bản lưu cũ: không có dấu v2, không có chủ → vẫn chạy, không đổi số nơi
++    const before = run("W().regions.flatMap(R=>R.nodes).length");
++    run("(()=>{const w=W();delete w.dat;delete w.v2;delete w.chu1;for(const n of w.regions.flatMap(R=>R.nodes))delete n.fa;snapWorld(w);})()");
++    ok(run("W().regions.flatMap(R=>R.nodes).length") === before, 'bản lưu cũ: nạp lại không đổi số nơi');
++    ok(run("(()=>{const w=W();const n=w.regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh');openPlace(n.id);const a=placeActs(n).map(x=>x.a);const m=tnaFa(n);return a.includes('shop')&&typeof m==='string';})()"), 'bản lưu cũ: thành vẫn có đồ tu sĩ, truy nã không lỗi');
++    const t = run("(()=>{const t=Date.now();for(let i=0;i<3;i++)genWorld(900+i);return (Date.now()-t)/3;})()");
++    ok(t < 600, 'sinh thế giới không chậm (' + Math.round(t) + ' ms)');
++  },
+ };
+ 
+ if (args.includes('--list')) { console.log(Object.keys(TESTS).join('\n')); process.exit(0); }

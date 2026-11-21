@@ -85,7 +85,7 @@
         {
           "id": "cach_2",
           "l": "Tra giá một gói miễn trói",
-          "t": "Ngươi ghi khoản người coi đòi để miễn và nơi họ giữ những gói đã nộp.",
+          "t": "Ngươi ghi giá người coi lễ đòi để miễn ấn, rồi tìm chỗ họ cất những gói đã nộp.",
           "dau": [
             "moc_2_2"
           ]
@@ -133,7 +133,7 @@
         {
           "id": "cach_2",
           "l": "Chép giấy miễn từ người giữ ấn",
-          "t": "Ngươi ghi dấu chuyển quyền và phần lệ thu sau khi người mắc xin miễn.",
+          "t": "Ngươi chép dấu giao quyền và mức lễ phải nộp nếu người bị ràng ấn xin miễn.",
           "dau": [
             "moc_3_2"
           ]
@@ -186,7 +186,7 @@
         {
           "id": "cach_2",
           "l": "Giữ ấn để thu bạc của người xin thoát",
-          "t": "Ngươi nhận giấy chuyển, báo lệ nộp cho người biết và ghi người phản đối.",
+          "t": "Ngươi nhận giấy chuyển quyền, báo mức lễ cho những người phải nộp và ghi lại ai phản đối.",
           "dau": [
             "moc_4_2"
           ],

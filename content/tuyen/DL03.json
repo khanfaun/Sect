@@ -18,12 +18,12 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Bàn ở {LOC02} đặt sổ thuế cạnh sổ quân lương. Khi người thu thuế và người phát lương không còn theo cùng một lệnh, dân ngoài cửa muốn biết ai chịu trách nhiệm.",
+      "mo": "Ở {LOC02}, {NP04} đặt sổ thuế lên chiếc ghế kê sát cửa vì trên bàn đã chật giấy cấp lương. Một người nộp thuế cầm phiếu đi từ ghế tới bàn mà vẫn chưa biết ai sẽ ký. Ngươi cần biết ai giữ kho và dân có thể hỏi ai.",
       "boQuaNeuXuatThan": true,
       "cach": [
         {
           "id": "cach_1",
-          "l": "Xem ai đang giữ kho",
+          "l": "Hỏi ai có quyền mở kho",
           "t": "Ngươi hỏi từng đầu nhận lương và chép người có thể đứng tên kiểm họ.",
           "dau": [
             "moc_1_1"
@@ -31,7 +31,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Đo phần dân còn chịu được",
+          "l": "Ghi khoản từng hộ đã nộp",
           "t": "Ngươi nghe hai hộ đọc khoản đã nộp rồi giữ đúng ngày trong sổ riêng.",
           "dau": [
             "moc_1_2"
@@ -39,7 +39,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Xin mở bàn cho lời trái ý",
+          "l": "Cho dân ghi lời khiếu trực tiếp",
           "t": "Ngươi để người ngoài cửa ghi lời không cần mượn dấu của người đứng đầu.",
           "dau": [
             "moc_1_3"
@@ -67,7 +67,7 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Dân {LOC02} muốn nhận lương theo cùng một lệ dù cờ trước cửa thay. {LOC13} hỏi ai chịu trách nhiệm khi lỡ chuyến. Có thể xin triều giao quyền hoặc để các kho lập hội kiểm.",
+      "mo": "Một người đẩy xe lương tới sân {LOC02} với giấy hẹn đã nhòe. Người gác kho hỏi giấy có còn hiệu lực nếu cờ đổi, còn trạm {LOC13} chỉ muốn biết sẽ đòi lương ở đâu khi xe trễ. Ngươi phải quyết ai được giữ chìa và ai giữ bản ghi.",
       "khacVoi": "OR04.N3 tra một án thuế bị sửa; hồi này lập quyền kiểm kho cho cả người thu và người nhận.",
       "cach": [
         {
@@ -80,7 +80,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Nhận quyền điều lương còn của triều",
+          "l": "Xin triều giao quyền điều lương",
           "t": "Ngươi lấy giấy kiểm kho dưới triều và ghi nơi dân có thể khiếu người coi.",
           "dau": [
             "moc_2_2"
@@ -93,7 +93,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Gọi các kho tự lập biên nhận",
+          "l": "Yêu cầu từng kho ký biên nhận",
           "t": "Ngươi mời người còn giữ kho ký gửi mỗi nơi một bản có phần lương thực còn.",
           "dau": [
             "moc_2_3"
@@ -121,13 +121,13 @@
         "cach": "tin",
         "noi": "LOC13"
       },
-      "mo": "Kho {LOC13} chỉ đủ lương một lượt. Kinh thành lại muốn lấy một phần để trả nợ. Người coi trạm cần biết bao nào được chở ra ải và bao nào phải để lại cho dân.",
+      "mo": "Ở {LOC13}, người coi trạm kéo bạt khỏi chuyến xe đang đỗ. Các bao đã buộc dây, nhưng người từ kinh thành tới xin dỡ bớt để trả nợ. Bên ngoài, cả người giữ ải lẫn dân chờ phát thóc đều nhìn vào xe.",
       "khacVoi": "OR10.N3 truy lương đơn vị đã bán; hồi này đặt thứ tự cấp liên vùng trước rét và giám sát chuyến mới.",
       "clk": "CLK03",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Giữ chuyến lương có sổ hai đầu",
+          "l": "Đưa lương qua trạm, giao hai bản nhận",
           "t": "Ngươi đưa chuyến qua trạm đúng kỳ, giao cả kho và hộ bản đã nhận.",
           "dau": [
             "moc_3_1"
@@ -141,7 +141,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Ký khoán giữ ải đổi quyền xét",
+          "l": "Đổi lương lấy cam kết giữ ải",
           "t": "Ngươi giao một phần kho cho đội chịu nhận lệnh, giữ sổ người bị lùi lượt.",
           "dau": [
             "moc_3_2"
@@ -149,7 +149,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Chừa phần hộ trước lượt điều quân",
+          "l": "Giữ phần dân trước khi cấp quân",
           "t": "Ngươi gửi phần hộ về nơi phát, báo trạm chỉ nhận số còn lại có đối chứng.",
           "dau": [
             "moc_3_3"
@@ -177,12 +177,12 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Bàn {LOC02} nhận sổ từ các kho và lời của đội giữ ải. Có thể cho dân xem sổ hoặc giao chìa cho một người. Hộ vừa bị lùi phần đem phiếu tới hỏi.",
+      "mo": "Một người mang phiếu chưa lĩnh tới bàn ở {LOC02}, đặt xuống ngay chỗ có vết vành bát. Sổ của các kho đã về đủ. Ngươi có thể mở sổ cho dân đối chiếu, giao chìa cho đội giữ ải hoặc trả quyền chọn người giữ kho về từng nơi.",
       "khacVoi": "OR37.N5 cùng ký trên lệnh đóng dấu; hồi này buộc người nắm quyền điều lương chịu kiểm và khiếu công khai.",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Buộc người điều lương cho dân kiểm sổ",
+          "l": "Cho dân kiểm kho và đòi phần bị cấp sai",
           "t": "Ngươi giao hội kiểm quyền xem kho và thử việc trả phần sai trước dân.",
           "dau": [
             "moc_4_1"
@@ -196,7 +196,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ quyền nhờ đội đã nhận lương",
+          "l": "Giao cửa cho đội giữ ải để nắm quyền",
           "t": "Ngươi đặt đội giữ ải coi cửa, nhận ấn quyền với khoản nợ chưa trả.",
           "dau": [
             "moc_4_2"
@@ -209,7 +209,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Giao quyền từng kho cho dân sở tại",
+          "l": "Để dân từng nơi cử người giữ kho",
           "t": "Ngươi chép sổ giữa các kho, để mỗi nơi tự cử người có thể bị bãi.",
           "dau": [
             "moc_4_3"
@@ -237,13 +237,13 @@
         "cach": "tin",
         "noi": "LOC02"
       },
-      "mo": "Dân chợ {LOC02} muốn biết sau khi đổi ngôi, họ mang đơn tới đâu. Trên bàn có ấn, phiếu lương chưa trả và sổ của các kho. Ngươi phải chọn ai có quyền giữ những thứ đó.",
+      "mo": "Ngoài cửa ở {LOC02}, người mua ngoài chợ xếp thành hàng với đơn xin xét lại phần lương. Trong phòng, có người đã lấy khăn lau chỗ đặt ấn. Ngươi phải nói ai sẽ giữ ấn và dân sẽ đem đơn tới cửa nào khi ngươi rời bàn.",
       "khacVoi": "OR41.N5 chọn nơi sống hoặc quân của cựu binh; hồi này xác lập quyền dân và giới hạn của người đứng đầu sau biến ngôi.",
       "clk": "CLK09",
       "cach": [
         {
           "id": "cach_1",
-          "l": "Nhận ấn với quyền kiểm của dân",
+          "l": "Nhận ấn và giao dân quyền kiểm kho",
           "t": "Ngươi đọc lệ và giao sổ kiểm cho người đã thử, rồi mới nhận ấn.",
           "dau": [
             "moc_5_1"
@@ -262,7 +262,7 @@
         },
         {
           "id": "cach_2",
-          "l": "Giữ ấn bằng đội giữ ải",
+          "l": "Dùng đội giữ ải giữ ngôi",
           "t": "Ngươi trao phiên cửa cho đội nhận lương, giữ lời khiếu chưa xử trong hồ sơ.",
           "dau": [
             "moc_5_2"
@@ -275,7 +275,7 @@
         },
         {
           "id": "cach_3",
-          "l": "Từ chối nhận ấn, để các kho tự quản",
+          "l": "Trả ấn, giao quyền về từng kho",
           "t": "Ngươi giao bản phiên cho các kho tự chọn người, đặt dấu ấn xuống.",
           "dau": [
             "moc_5_3"
@@ -288,7 +288,7 @@
         },
         {
           "id": "cach_4",
-          "l": "Để lời khiếu lại cho buổi sau",
+          "l": "Để lại bản đối chiếu cho người khiếu",
           "t": "Ngươi đưa người cầm phiếu một bản đối chiếu, giữ cửa mở tới lúc họ đọc hết.",
           "dau": [
             "moc_5_4"
