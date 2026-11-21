@@ -53,7 +53,9 @@ const TU_DUYEN={
 // Chữ và hiệu ứng từng lựa chọn: content/nghe-tu/TUxx.json (kiểm: npm run content:nghe). Luật xử lý: src/game/core2/73-nghe-tu-su-kien.js.
 //   tang[i]: tầng nghề tối thiểu để sự kiện thứ i (S01…S12) hiện · canh[i]: cảnh giới tối thiểu (0 Luyện Khí … 3 Nguyên Anh)
 //   p: khả năng mỗi tháng (khi đang theo nghề, rảnh, có sự kiện đủ điều kiện) · gap: số tháng tối thiểu giữa hai sự kiện nghề · su: lấy sự kiện theo thứ tự
-const TU_SK={tang:[1,1,1,2,2,2,3,3,3,4,4,4],canh:[0,0,0,0,0,0,1,1,1,2,2,3],p:0.35,gap:2};
+const TU_SK={tang:[1,1,1,2,2,2,3,3,3,4,4,4],canh:[0,0,0,0,0,0,1,1,1,2,2,3],p:0.35,gap:2,
+  // nghề có ít sự kiện hơn (GPT đợt sáu: tám sự kiện, hai kết cục): tầng / cảnh giới riêng theo thứ tự sự kiện
+  rieng:{TU23:{tang:[1,1,2,2,3,3,4,4],canh:[0,0,0,0,1,1,2,3]},TU24:{tang:[1,1,2,2,3,3,4,4],canh:[0,0,0,0,1,1,2,3]},TU25:{tang:[1,1,2,2,3,3,4,4],canh:[0,0,0,0,1,1,2,3]}}};
 // Kết cục nghề (HN B §7.4, điều kiện Claude tự quyết), xét lúc hết kiếp theo thứ tự, gặp cái đầu tiên đủ điều kiện thì hiện ở màn hết kiếp.
 // dk là một đối tượng, hoặc mảng các đối tượng (đủ một cái là được). Khoá:
 //   tang: tầng nghề tối thiểu · canh: cảnh giới tối thiểu · su: số sự kiện nghề đã qua · chon:{Sxx:i} đã chọn lựa chọn i (đủ hết) · chonMot:[[Sxx,i]…] (một trong)
@@ -72,4 +74,8 @@ const TU_KET={
     {ma:'K01',dk:[{tang:4,canh:4},{tang:4,khuy:1}]},{ma:'K04',dk:[{mong:3,tang:3},{chon:{S05:1},mong:1},{su:6}]}],
   TU22:[{ma:'K02',dk:{chon:{S12:1}}},{ma:'K01',dk:[{tang:4,canh:4},{tang:4,st:2000}]},
     {ma:'K04',dk:{tang:3,hd:'chinh',chonMot:[['S06',1],['S10',0]]}},{ma:'K03',dk:{su:3}}],
+  // GPT đợt sáu: K01 kết tốt / thành, K02 kết xấu / sụp
+  TU23:[{ma:'K02',dk:{su:3,chonMot:[['S07',1],['S05',1]]}},{ma:'K01',dk:[{tang:4,canh:3,hd:'chinh'},{su:6,hd:'chinh'}]}],
+  TU24:[{ma:'K02',dk:[{chon:{S07:1},tamma:40},{tamma:60,su:4}]},{ma:'K01',dk:[{tang:4,canh:3},{su:6,hd:'chinh'}]}],
+  TU25:[{ma:'K01',dk:[{tang:4,canh:3,hd:'ta'},{tang:4,chon:{S08:0}}]},{ma:'K02',dk:[{tamma:60,su:3},{chon:{S08:0},tamma:40}]}],
 };

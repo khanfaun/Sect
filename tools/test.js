@@ -29,6 +29,20 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+  // GPT đợt sáu: sự kiện và kết cục Lôi pháp, Huyễn thuật, Thôn phệ (tám sự kiện, hai kết cục mỗi nghề)
+  nghe_tu_dot6() {
+    for(const id of ['TU23','TU24','TU25']){
+      fresh("G._ngNoEv=1;G.screen='map';G.run.pham=0;G.run.realm=0;G.run.st=99999");run(`tuHoc('${id}',0)`);
+      ok(run(`NTU['${id}']&&NTU['${id}'].sk.length`)===8&&run(`Object.keys(NTU['${id}'].ket).length`)===2, id+': nạp đủ tám sự kiện, hai kết cục');
+      ok(run(`ntNext('${id}')`)===0, id+': mới vào nghề gặp sự kiện đầu');
+      run(`G.run.scene=null;ntMo('${id}',0)`);ok(run("G.run.scene&&G.run.scene.type")==='kyngo'&&run("G.run.scene.ev")===`ntu_${id}_S01`, id+': mở hộp sự kiện có lời GPT');
+      run("kyPick(0)");ok(run(`ntNext('${id}')`)===1, id+': chọn xong thì sang sự kiện kế');
+      run("G.run.scene=null");ok(run(`ntNext('${id}')`)===1&&(run(`(()=>{const S=ntSt();S.c['${id}.S02']=0;return ntNext('${id}');})()`)===-1), id+': sự kiện thứ ba cần tầng hai');
+    }
+    fresh("G.run.pham=0;G.run.realm=0;G.run.st=99999");run("tuHoc('TU23',0);G.run.realm=1;(()=>{const S=ntSt();for(const m of ['S01','S02','S03','S04','S05','S06'])S.c['TU23.'+m]=0;S.c['TU23.S07']=1;})()");
+    ok(run("ntKet(G.run,'tho').ma")==='K02', 'Lôi pháp từng giáng lôi bừa: kết xấu "'+run("ntKet(G.run,'tho').ten")+'"');
+    fresh("G.run.pham=0;G.run.realm=0;G.run.st=99999");run("tuHoc('TU25',0);G.run.realm=3;tuK('TU25').tang=4;hdAdd(0,50,'t')");ok(run("ntKet(G.run,'tho').ma")==='K01', 'Thôn phệ tầng bốn, nghiêng tà: kết "'+run("ntKet(G.run,'tho').ten")+'"');
+  },
   // Lên làm người đứng đầu thế lực: kế vị (đủ công) hoặc thách đấu / soán ngôi; rồi tiếp quản thành trấn của thế lực
   dung_dau() {
     fresh("FEAT.dat=1;FEAT.tna=1;G.run.pham=0;G.run.realm=2;G.run.flags.tongmon=0");
@@ -3242,8 +3256,8 @@ const TESTS = {
     run("var ntLk=lkTang;NT_BK=JSON.stringify(TU_SK);var ntHoan=typeof tnaHoan==='function'?tnaHoan:null");
     const lai = "W().t+=3*HM;G.run.scene=null;ccMonth()";
     try {
-    ok(run("Object.keys(NTU_DATA).sort().join()")==='TU17,TU18,TU19,TU20,TU21,TU22'&&run("Object.values(NTU_DATA).every(D=>D.sk.length===12&&Object.keys(D.ket).length===4)"), 'nạp bản thảo: sáu nghề, mỗi nghề 12 sự kiện + 4 kết cục');
-    ok(run("KYNGO.filter(x=>/^ntu_TU\\d\\d_S\\d\\d$/.test(x.id)&&x.sp===1).length")===72&&run("Object.values(NTU_DATA).every(D=>D.sk.every(s=>s.c.every(c=>Object.keys(c.e).length>0)))"), '72 hộp thoại đăng ký sẵn (sp:1), lựa chọn nào cũng có hiệu ứng');
+    ok(run("Object.keys(NTU_DATA).sort().join()")==='TU17,TU18,TU19,TU20,TU21,TU22,TU23,TU24,TU25'&&run("Object.entries(NTU_DATA).every(([id,D])=>['TU23','TU24','TU25'].includes(id)?D.sk.length===8&&Object.keys(D.ket).length===2:D.sk.length===12&&Object.keys(D.ket).length===4)"), 'nạp bản thảo: sáu nghề 12 sự kiện + 4 kết cục, ba nghề đợt sáu 8 sự kiện + 2 kết cục');
+    ok(run("KYNGO.filter(x=>/^ntu_TU\\d\\d_S\\d\\d$/.test(x.id)&&x.sp===1).length")===72+24&&run("Object.values(NTU_DATA).every(D=>D.sk.every(s=>s.c.every(c=>Object.keys(c.e).length>0)))"), '96 hộp thoại đăng ký sẵn (sp:1), lựa chọn nào cũng có hiệu ứng');
     ok(run("Object.entries(TU_KET).every(([id,L])=>L.every(x=>NTU_DATA[id].ket[x.ma]))"), 'mọi kết cục trong luật đều có lời');
     // Cổ sư: chưa theo nghề → không có; vừa vào nghề → đợi vài tháng
     fresh(base+"TU_SK.p=1");run("G.run.scene=null;ccMonth()");ok(!run("G.run.scene"), 'chưa theo nghề: không có sự kiện nghề');

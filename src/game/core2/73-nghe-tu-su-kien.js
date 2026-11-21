@@ -40,7 +40,7 @@ function ntE(e,id){const r=G.run;let ch=[];if(!e||!r)return ch;
 // sự kiện kế tiếp chưa gặp của nghề (theo thứ tự S01…S12); chưa đủ tầng / cảnh giới thì chờ
 function ntNext(id,r){r=r||G.run;const D=NTU[id];if(!D||!tuArtOf(id,r))return -1;const S=ntSt(r),tg=tuK(id,r).tang||0;
   for(let i=0;i<D.sk.length;i++){if(S.c[id+'.'+D.sk[i].ma]!=null)continue;
-    if(tg<(TU_SK.tang[i]||1)||(r.realm||0)<(TU_SK.canh[i]||0))return -1;return i;}
+    const B=(TU_SK.rieng&&TU_SK.rieng[id])||TU_SK;if(tg<(B.tang[i]||1)||(r.realm||0)<(B.canh[i]||0))return -1;return i;}
   return -1;}
 function ntTick(){const r=G.run;if(!r||!feat('ntu')||!W()||!tuCanTu(r)||ndBusy())return false;const S=ntSt(),t=W().t,gap=TU_SK.gap*HM;
   for(const id of tuList(r)){if(!NTU[id]||!tuArtOf(id,r))continue;if(S.b[id]==null){S.b[id]=t;dbg('ntu.batDau',{id});}}

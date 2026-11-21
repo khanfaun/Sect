@@ -1,0 +1,259 @@
+{
+ "schemaVersion": 1,
+ "loai": "nghe_tu",
+ "nghe": "TU25",
+ "ten": "Thôn phệ tu",
+ "su_kien": [
+  {
+   "ma": "S01",
+   "ten": "Bát nước ở cửa cốc",
+   "text": [
+    "Ở {LOC07}, người truyền phép đặt bát nước trước mặt ngươi và bảo thử dẫn chút linh lực từ tay họ. Khi ngươi buông tay, mặt nước vẫn còn rung.",
+    "Người ấy kéo tay áo xuống rồi hỏi ngươi có muốn thử tiếp trên kẻ vừa chết ở ngoài sân không. Bên cổng có người đang chờ nhận thi thể."
+   ],
+   "choices": [
+    {
+     "l": "Dừng ở phần linh lực đã thử",
+     "t": "Ngươi trả bát và ra mở cổng cho người nhà. Ngón tay còn tê, song ngươi vẫn cầm được đầu chiếu giúp họ khiêng người đi.",
+     "e": {
+      "hd": [
+       1,
+       0
+      ],
+      "xp": 1
+     }
+    },
+    {
+     "l": "Thử nuốt phần khí còn lại",
+     "t": "Ngươi đợi người giữ sân xác nhận đối thủ đã tắt thở rồi kéo phần khí còn vương vào mình. Tay hết tê, nhưng khi bưng nước cho gia quyến, ngươi nghe tiếng mình cười khẽ dù môi chưa động.",
+     "e": {
+      "tv": 5,
+      "res": 2,
+      "tamma": 4,
+      "hd": [
+       0,
+       2
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S02",
+   "ten": "Mùi sắt trong mỏ cũ",
+   "text": [
+    "Người coi mỏ thuê ngươi nuốt luồng tà khí thoát ra quanh cửa hầm. Chốt cửa rịn hơi lạnh, còn mùi sắt bám vào răng dù ngươi chưa bước qua.",
+    "Thợ đã đứng ngoài với đèn và giỏ cơm. Họ cần biết ngươi sẽ làm ngay hay đợi đất trên cửa thôi rơi."
+   ],
+   "choices": [
+    {
+     "l": "Nhận việc sau khi thợ rời dốc",
+     "t": "Ngươi chờ họ lui rồi hút luồng khí khỏi cửa. Đèn thôi chao, nhưng tối ấy ngươi nghe trong đầu tiếng gõ mà ngoài vách chẳng có ai.",
+     "e": {
+      "res": 3,
+      "xp": 3,
+      "tamma": 4
+     }
+    },
+    {
+     "l": "Dừng việc và giữ cửa hầm",
+     "t": "Ngươi trả phần đã ứng rồi bảo thợ sang lán chờ. Người coi mỏ phải tìm cách khác, còn ngươi giữ cửa tới khi chuyến cuối rời dốc.",
+     "e": {
+      "st": -2,
+      "hd": [
+       1,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S03",
+   "ten": "Tay áo dưới gốc trâm",
+   "text": [
+    "Đối thủ vừa ngã, ống tay mắc vào rễ trâm. Luồng khí còn quanh người ấy rút chậm đến mức ngươi cảm được nó qua lòng bàn chân.",
+    "Ngươi cúi xuống thì thấy sợi dây giữ một lá thư còn niêm. Người ở đầu dốc đang gọi xem có ai sống sót không."
+   ],
+   "choices": [
+    {
+     "l": "Nuốt khí rồi giao lá thư",
+     "t": "Ngươi kéo luồng khí về kinh mạch rồi trao thư cho người chạy tới. Họ nhận thư, còn ngươi phải đứng yên một lúc vì cơn nóng cứ chạy ngược lên cổ.",
+     "e": {
+      "tv": 4,
+      "res": 2,
+      "tamma": 3
+     }
+    },
+    {
+     "l": "Giữ nguyên thư và gọi người liệm",
+     "t": "Ngươi dằn tay xuống đất, đợi cho luồng khí tan. Người đầu dốc nhận ra dấu trên thư và nhờ ngươi chỉ đúng chỗ người ấy đã ngã.",
+     "e": {
+      "deed": "an_tang",
+      "tamma": -3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S04",
+   "ten": "Khí mượn giữa buổi tĩnh tọa",
+   "text": [
+    "Ngươi vừa ngồi yên thì luồng khí đã nuốt chạy ngược thế dẫn quen thuộc. Chiếc chén bên gối đổ, nước lạnh thấm vào chiếu.",
+    "Người tập cùng nghe động và đặt tay lên cửa, hỏi có nên vào đỡ. Ngươi biết lượng khí ấy chưa chịu theo hơi thở của mình."
+   ],
+   "choices": [
+    {
+     "l": "Rời chiếu trước lúc bước tiếp",
+     "t": "Ngươi gọi người ngoài vào và tháo thế ngồi khi họ đỡ vai. Cơn nghẹn lắng dần, nhưng buổi đột phá phải dời tới khi ngươi vận được hơi của mình.",
+     "e": {
+      "tamma": -3,
+      "hp": "-5%"
+     }
+    },
+    {
+     "l": "Cố dẫn khí qua chỗ nghẹn",
+     "t": "Ngươi ghì hơi qua ngực và giữ thế ngồi. Luồng khí dội ngược, bàn tay không còn đủ sức nâng chiếc chén mà người kia đưa tới.",
+     "e": {
+      "tv": 7,
+      "xp": 4,
+      "hp": "-20%",
+      "tamma": 5
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S05",
+   "ten": "Lời gọi sau bàn cơm",
+   "text": [
+    "Người bán cơm đặt bát trước mặt ngươi rồi quay đi hâm nước. Trong tiếng thìa chạm thành nồi, ngươi nghe rõ lời thúc mình đi tìm kẻ vừa gục ngoài đường.",
+    "Khi ngươi đứng dậy, người bán hỏi vì sao chưa đụng đũa. Mùi cơm còn nóng, còn tiếng trong đầu đã nhắc lại lời cũ."
+   ],
+   "choices": [
+    {
+     "l": "Ngồi lại cho tới khi tiếng lắng",
+     "t": "Ngươi nhờ người bán giữ ghế và ăn chậm tới khi phân biệt được tiếng bếp. Ngoài đường đã yên, nhưng lúc trả tiền ngươi vẫn phải dùng cả tay để cầm bát.",
+     "e": {
+      "tamma": -4
+     }
+    },
+    {
+     "l": "Đi theo tiếng gọi",
+     "t": "Ngươi để bát nguyên rồi ra đầu đường. Người bị thương đã được đưa đi, còn ngươi lần theo dấu kéo tới tận trạm trước khi nhận ra mình đã bỏ cả tay nải ở quán.",
+     "e": {
+      "res": 2,
+      "xp": 3,
+      "tamma": 4
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S06",
+   "ten": "Người mang chiếc thắt lưng",
+   "text": [
+    "Trên đường dốc, một người chìa chiếc thắt lưng đã sờn và hỏi ngươi có gặp chủ của nó không. Ngươi nhận ra nút thắt của người vừa bị mình lấy mất phần khí.",
+    "Sau lưng họ là người trông bãi, cầm tờ giấy chờ ghi nơi tìm thấy thi thể. Ngươi có thể nói rõ việc đã làm hoặc chỉ cho họ đường xuống."
+   ],
+   "choices": [
+    {
+     "l": "Tự kể mình đã lấy gì",
+     "t": "Ngươi chỉ đúng chỗ rồi ở lại khi họ hỏi luồng khí đã đi đâu. Gia quyến giữ tờ ghi lời ngươi và yêu cầu ngươi rời bãi trước khi họ khâm liệm.",
+     "e": {
+      "hd": [
+       2,
+       0
+      ],
+      "danh": -3,
+      "tamma": -4
+     }
+    },
+    {
+     "l": "Chỉ lối và giữ kín việc nuốt khí",
+     "t": "Ngươi vạch đường xuống bãi trên đất rồi bước đi. Đến trạm sau, họ đã nhờ người mang chiếc thắt lưng đi hỏi những ai gặp ngươi trước trận.",
+     "e": {
+      "danh": 2,
+      "tamma": 4
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S07",
+   "ten": "Đèn của người truy hỏi",
+   "text": [
+    "Người của chính đạo dựng đèn ngang lối và đọc tên những người đã ngã trong vùng. Họ mang giấy của gia quyến đi theo, chờ ngươi nhận việc nào mình đã làm.",
+    "Ngươi nghe tâm ma giục tiến lên, đúng lúc có người giữ đèn bước hụt trên đá. Phía sau dốc vẫn còn mái trạm có người đi đường trú."
+   ],
+   "choices": [
+    {
+     "l": "Đặt giấy xuống trước hàng đèn",
+     "t": "Ngươi trao bản ghi và lùi lại để người truy đối từng việc. Họ đưa ngươi ra khỏi dốc để hỏi tiếp, còn người trượt chân tự vịn được vào cọc.",
+     "e": {
+      "danh": -4,
+      "hd": [
+       2,
+       0
+      ],
+      "tamma": -3
+     }
+    },
+    {
+     "l": "Lùi qua lối trạm bỏ trống",
+     "t": "Ngươi rời đường đèn và vòng khỏi chỗ khách đang trú. Người truy không bắt kịp, nhưng tới sáng lời gọi trong ngực ngươi vẫn chưa im.",
+     "e": {
+      "res": 1,
+      "xp": 3,
+      "danh": -3
+     }
+    }
+   ]
+  },
+  {
+   "ma": "S08",
+   "ten": "Cửa hang không nghe gió",
+   "text": [
+    "Luồng khí tụ dưới cửa hang làm ngọn đèn nghiêng hẳn vào lòng núi. Ngươi vừa đặt tay lên đá đã thấy trong miệng có vị bát nước bỏ lâu.",
+    "Người giữ đèn đợi ngươi kéo tiếp hay rời khỏi vạch. Đường ra vẫn mở, song cơn đói trong ngực đã át cả tiếng gió."
+   ],
+   "choices": [
+    {
+     "l": "Mở kinh mạch đón luồng khí",
+     "t": "Ngươi đứng lại để luồng khí tràn hết qua mình. Lúc bước ra, người giữ đèn gọi ngươi bằng tiếng từng nghe quen, và ngươi chỉ còn nhận ra hơi ấm của họ.",
+     "e": {
+      "tv": 8,
+      "res": 4,
+      "tamma": 8
+     }
+    },
+    {
+     "l": "Rút tay và để luồng khí tan",
+     "t": "Ngươi rời vạch rồi nhờ người giữ đèn đi trước. Đến khi nhìn thấy trời, ngươi vẫn nghe tiếng giục quay lại, nhưng đã gọi được họ bằng giọng mình.",
+     "e": {
+      "tamma": -5,
+      "xp": 2
+     }
+    }
+   ]
+  }
+ ],
+ "ket_cuc": [
+  {
+   "ma": "K01",
+   "ten": "Cơn đói dưới trời trống",
+   "canh": [
+    "Ngươi đứng giữa cửa hang và kéo cả luồng khí đang dâng về phía mình. Khi ngọn đèn ngoài cửa tắt, đến gió trên dốc cũng thôi thổi ngang mặt.",
+    "Người từng chia cơm đặt bát gần chân ngươi, gọi tới khản tiếng. Ngươi còn thấy hơi ấm từ cổ tay họ, nhưng đã quên cách đưa tay nhận bát."
+   ]
+  },
+  {
+   "ma": "K02",
+   "ten": "Tiếng gõ từ trong ngực",
+   "canh": [
+    "Ngươi vừa định vận khí thì những luồng đã nuốt cùng dồn ngược lên ngực. Tiếng gõ nổi lên từ trong người, ép ngươi rời chiếu mà vẫn chẳng đứng được.",
+    "Người giữ đèn kê bát nước cạnh ngươi rồi chạy đi gọi người chữa. Tới lúc họ trở lại, bát đã nguội và lòng bàn tay ngươi nằm mở trên nền."
+   ]
+  }
+ ]
+}

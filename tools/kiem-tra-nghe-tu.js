@@ -45,7 +45,7 @@ function kiemTep(file,B,seen){const loi=[],cb=[];const rel=path.relative(ROOT,fi
   if(!B.TU_KET[id]){bad('nghe','mã nghề "'+id+'" không có sự kiện nghề.','một trong: '+Object.keys(B.TU_KET).join(', ')+'.');return {loi,cb};}
   if(base!==id)bad('nghe','tên tệp "'+base+'.json" khác mã nghề "'+id+'".');if(seen[id])bad('nghe','trùng với '+seen[id]+'.');seen[id]=rel;
   if(A.ten!==B.TU_NGHE[id].n)warn('ten','tên nghề khác luật ("'+B.TU_NGHE[id].n+'").');
-  const n=B.TU_SK.tang.length;const S=A.su_kien;
+  const n=((B.TU_SK.rieng&&B.TU_SK.rieng[id])||B.TU_SK).tang.length;const S=A.su_kien;
   if(!Array.isArray(S)||S.length!==n){bad('su_kien','cần đúng '+n+' sự kiện.');}
   const out={ten:A.ten,sk:[],ket:{}};
   (Array.isArray(S)?S:[]).forEach((s,i)=>{const k='su_kien['+i+']';if(!only(k,s,['ma','ten','text','choices']))return;
