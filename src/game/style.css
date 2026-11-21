@@ -1808,3 +1808,24 @@ canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 /* hộp thư (core2/77) */
 .mbox.hopthu .hop-ds{margin:6px 0;padding-left:18px;}
 .mbox.hopthu .hop-ds li{margin:2px 0;}
+
+/* ---- 21/11 khung nhiệm vụ tân thủ: nút biểu tượng thu gọn, dẫn đường; mobile/tablet nằm trên cụm tiền tệ; desktop lề trái theo header ---- */
+.tut{position:absolute;top:auto;left:auto;right:8px;bottom:calc(var(--nav) + env(safe-area-inset-bottom,0px) + 52px);z-index:6;width:min(270px,calc(100vw - 72px));align-items:flex-end}
+.tut-h{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.tut-tt{font-size:.78em;color:var(--ink2);background:var(--paper);padding:2px 8px;border-radius:999px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.tut-tg{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;padding:0;border-radius:10px;font-size:1em}
+.tut-tg .ic{width:18px;height:18px}
+.tut-n{position:absolute;top:-5px;right:-5px;min-width:16px;height:16px;border-radius:8px;background:var(--gold);color:var(--ink);font-size:10px;line-height:16px;font-style:normal;text-align:center;padding:0 3px}
+.tut-l{max-height:38vh}
+.tut-top{display:flex;align-items:flex-start;justify-content:space-between;gap:6px}
+.tut-top b{font-size:.92em;color:var(--ink)}
+.tut-go{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--line);border-radius:8px;background:var(--paper2);color:var(--acc);cursor:pointer;padding:0}
+.tut-go .ic{width:15px;height:15px}
+.tut-c{display:flex;flex-direction:column;gap:2px}
+@media (hover:hover) and (pointer:fine) and (min-width:1200px){
+  .tut{left:12px;right:auto;top:calc(var(--hudh,84px) + 22px);bottom:auto;align-items:flex-start;width:min(300px,calc(100vw - 32px))}
+  .tut-h{justify-content:flex-start}
+  .tut-l{max-height:46vh}
+  .mleft{top:auto!important;bottom:118px!important}
+  .mright{bottom:66px!important}
+}

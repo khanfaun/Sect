@@ -2,6 +2,7 @@
 // góc trái dưới: luyện chế, túi đồ, bế quan (sáng lên khi đủ điều kiện đột phá), cảnh giới.
 import { PS } from '../html';
 import { Ic, tip } from '../chung';
+import { TanThu } from '../chung/TanThu';
 
 function Nut({ act, arg, icon, t, on, dis, cls, l }) {
   return (
@@ -68,6 +69,7 @@ export function NutBanDo() {
   const dev = !!PS.DEV;
   return <>
     <CumTien r={r} />
+    <TanThu />
     <div className="mleft wb"><DaiVetThuong />{dev && <Nut act="devOpen" icon="bolt" cls="dev" t="Dev test: thử hiệu ứng" />}</div>
     <div className="mright">
       <Nut act="gridT" icon="hex" l="Lưới ô" t={CFG.grid ? 'Ẩn lưới ô' : 'Hiện lưới ô'} on={CFG.grid} />

@@ -1,6 +1,6 @@
 // Đ4: hành động của khung tân thủ (luật ở core2/40-tan-thu.js; giao diện src/react/chung/TanThu.jsx)
 ACT.tutHide=()=>{const r=G.run;if(r&&r.tut)r.tut.hide=r.tut.hide?0:1;};
-ACT.tutClaim=id=>{const ch=tutClaim(id);if(ch){const t=tutById(id);UI.modal={k:'res',title:contentText('tut.title'),t:contentText('tut.claimLog',[t.n]),chips:ch};}};
+ACT.tutClaim=id=>{const t=tutById(id);const rw=t?tutRwList(t.rw):[];const ch=tutClaim(id);if(ch){UI.modal=null;note(contentText('tut.nhan',[rw.join(', ')||t.n]),'up');}};
 ACT.tutSkip=id=>{if(tutById(id))UI.modal={k:'tutSkip',id};};
 ACT.tutSkipGo=id=>{UI.modal=null;tutSkip(id);};
 ACT.wishOpen=()=>{UI.modal={k:'wish'};};

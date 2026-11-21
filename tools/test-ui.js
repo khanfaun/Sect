@@ -521,6 +521,8 @@ const TESTS = {
     await ev(p, () => {UI.panel=null;render();});await p.waitForTimeout(100);
     await p.locator('.tut [data-act="tutClaim"]').click();await p.waitForTimeout(100);
     ok(await ev(p, () => !!G.run.tut.done.HD01 && G.run.tut.open[0]==='HD02'), 'nhận thưởng HD01, mở HD02');
+    ok(await ev(p, () => !UI.modal && /Nhận thưởng: Lương khô/.test(document.body.innerText)), 'nhận thưởng: không mở hộp, chỉ hiện thông báo phần thưởng');
+    ok(await ev(p, () => !/Tân thủ \(/.test(document.body.innerText) && !!document.querySelector('.tut-tg .ic')), 'không còn nút chữ "Tân thủ", thay bằng nút biểu tượng');
     await ev(p, () => {UI.modal=null;render();});
     await p.locator('.tut-tg').click();await p.waitForTimeout(100);
     ok(await ev(p, () => !document.querySelector('.tut-c') && !!document.querySelector('.tut-tg')), 'nút ẩn làm khung biến mất, nút còn');

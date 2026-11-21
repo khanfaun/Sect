@@ -1,7 +1,6 @@
 // Thẻ trạng thái trên cùng: ảnh nhân vật (vòng khí huyết/linh lực), tên, cảnh giới, tuổi, đồng hồ, các chỉ số nhanh.
 import { Html, PS } from '../html';
 import { Ic, Rt, tip } from '../chung';
-import { TanThu } from '../chung/TanThu';
 
 // Nhãn đột phá / xung kích / bình cảnh cạnh tên
 function NhanDotPha() {
@@ -73,6 +72,5 @@ export function Hud() {
     <div className="hud-ls" {...tip('Hầu bao\nLinh thạch: ' + PS.ltTxt(r) + '\nTiền phàm: ' + PS.fmtBac(r.bac || 0) + '\nThưởng Lệnh: ' + (r.thuongLenh || 0) + (PS.noTip ? PS.noTip(r) : ''))}><i className="rh"></i>{PS.fmtN(r.st)}<small className={'hs-bac' + ((r.bac || 0) < 0 ? ' no' : '')}><i className="sep"> · </i>{PS.fmtBacS(r.bac || 0)}</small></div>
     <i className="hud-tv" style={{ width: PS.voKnown() ? 0 : clamp(tv, 0, 100) + '%' }} {...tip(PS.voKnown() ? 'Vô linh căn — chưa thể tu luyện' : !PS.rootKnown() ? 'Chưa biết mình có tiên duyên hay không' : 'Tu vi ' + tv + '%')} />
     <i className="hud-ll" style={{ width: PS.llShow() + '%' }} {...tip('Lịch luyện ' + PS.llShow() + '%')} />
-    <TanThu />
   </>;
 }

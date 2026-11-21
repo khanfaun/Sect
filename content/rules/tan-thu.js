@@ -6,10 +6,10 @@
 // go: dẫn đường {panel,tab}|{place:[loại nút]|'*', act}|{modal}|{hud: tên ACT}; act tìm trong placeActs của nút đã thấy
 // rw: phần thưởng {bac (đồng), st (linh thạch), pill:[[mã,sl]], relic:'mã danh mục', item:[[mã vật truyện,sl]], lenh (Thưởng Lệnh)}
 const TUT=[
- {id:'HD01',g:'A',n:'Biết mình còn gì',d:'Mở bảng nhân vật, đọc tuổi và xuất thân.',need:1,tick:'panel:char',go:{panel:'char'},rw:{item:[['luong_kho',2]]}},
- {id:'HD02',g:'A',n:'Một đường còn hé',d:'Chạm dòng Linh căn trong bảng Nhân vật để xem.',need:1,tick:'rootinfo',go:{panel:'char',tab:'base'},rw:{bac:200}},
- {id:'HD03',g:'A',n:'Có ăn mới có ngày mai',d:'Mở Hành trang để xem đồ đang mang theo.',need:1,tick:'bag',go:{modal:'bag'},rw:{pill:[['hoixuan',1]]}},
- {id:'HD04',g:'A',n:'Hỏi một người còn chịu trả lời',d:'Mở mục Mưu sinh để xem việc có thể nhận quanh đây.',need:1,tick:'jobs.open',go:{place:['tran','thanh','cho','tong'],act:'muusinh'},rw:{bac:300}},
+ {id:'HD01',g:'A',n:'Biết mình còn gì',d:'Xem tuổi và xuất thân của mình.',need:1,tick:'panel:char',go:{panel:'char'},rw:{item:[['luong_kho',2]]}},
+ {id:'HD02',g:'A',n:'Một đường còn hé',d:'Xem linh căn của mình.',need:1,tick:'rootinfo',go:{panel:'char',tab:'base'},rw:{bac:200}},
+ {id:'HD03',g:'A',n:'Có ăn mới có ngày mai',d:'Xem đồ đang mang theo.',need:1,tick:'bag',go:{modal:'bag'},rw:{pill:[['hoixuan',1]]}},
+ {id:'HD04',g:'A',n:'Hỏi một người còn chịu trả lời',d:'Xem việc có thể nhận quanh đây.',need:1,tick:'jobs.open',go:{place:['tran','thanh','cho','tong'],act:'muusinh'},rw:{bac:300}},
  {id:'HD05',g:'A',n:'Đổi một ngày lấy một ngày',d:'Làm trọn một việc có trả công.',need:1,tick:'job',go:{place:['tran','thanh','cho','tong'],act:'muusinh'},rw:{item:[['luong_kho',2]]}},
  {id:'HD06',g:'A',n:'Khép mắt khi còn nơi nằm',d:'Nghỉ một đêm ở khách điếm hoặc dưới mái nhà mình, hoặc tĩnh tọa một lượt.',need:1,tick:'rest',go:{place:['tran','thanh'],act:'inn'},rw:{pill:[['hoixuan',1]]}},
  {id:'HD07',g:'B',n:'Đường đi có giá',d:'Đi tới một địa điểm lân cận.',need:1,tick:'arrive',go:{place:'*'},rw:{relic:'non_dauap_suong'}},

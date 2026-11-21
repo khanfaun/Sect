@@ -233,5 +233,6 @@
   "dd.thieuCg": "Cần ít nhất {{0}}",
   "dd.thieuThanh": "Cần cai quản đủ thành trấn cho nước này ({{0}}/{{1}})",
   "dd.len": "{{0}} lên làm {{1}} {{2}}.",
-  "dd.keXong": "Ngươi chính thức là {{0}} {{1}}."
+  "dd.keXong": "Ngươi chính thức là {{0}} {{1}}.",
+  "tut.nhan": "Nhận thưởng: {{0}}"
 }

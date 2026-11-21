@@ -1,28 +1,33 @@
 // Khung nhiệm vụ tân thủ (Đ4, chỉ kiếp đầu). Luật: src/game/core2/40-tan-thu.js; hành động: src/game/ui/26-tan-thu.js
 import { PS } from '../html';
-import { tip } from './index';
+import { tip, Ic } from './index';
 
 export function TanThu() {
   const r = PS.G.run;
   if (!r || !r.tut) return null;
   const L = PS.tutView(), T = r.tut;
   const nReady = L.filter(x => x.ready).length;
+  // không còn nút chữ "Tân thủ": một nút biểu tượng thu gọn / mở rộng
   return (
     <div className={'tut' + (T.hide ? ' tut-off' : '')}>
-      <button className={'tut-tg' + (nReady ? ' hi' : '')} data-act="tutHide" {...tip(T.hide ? 'Hiện nhiệm vụ tân thủ' : 'Ẩn nhiệm vụ tân thủ')}>
-        Tân thủ ({L.length}){nReady ? ' · ' + nReady + ' xong' : ''}
-      </button>
+      <div className="tut-h">
+        {!T.hide && <b className="tut-tt">Nhiệm vụ tân thủ</b>}
+        <button className={'tut-tg' + (nReady ? ' hi' : '')} data-act="tutHide" {...tip(T.hide ? 'Mở nhiệm vụ tân thủ' : 'Thu gọn nhiệm vụ tân thủ')}>
+          <Ic n={T.hide ? 'scroll' : 'down'} />{T.hide && nReady > 0 ? <i className="tut-n">{nReady}</i> : null}
+        </button>
+      </div>
       {!T.hide && (
         <div className="tut-l">
           {!L.length && <p className="tut-d">Đã đi hết đường của kẻ mới tới.</p>}
           {L.map(x => (
             <div key={x.id} className={'tut-c' + (x.ready ? ' ok' : '')}>
-              <button className="tut-go" data-act="tutGo" data-arg={x.id} {...tip('Chạm để được dẫn tới chỗ làm việc này')}>
+              <div className="tut-top">
                 <b>{x.n}</b>
-                <span className="tut-d">{x.d}</span>
-                <span className="tut-bar"><i style={{ width: Math.round(100 * x.prog / Math.max(1, x.need)) + '%' }} /><em>{x.prog}/{x.need}</em></span>
-                {x.rw.length > 0 && <span className="tut-rw">Thưởng: {x.rw.join(', ')}</span>}
-              </button>
+                {!x.ready && <button className="tut-go" data-act="tutGo" data-arg={x.id} {...tip('Dẫn đường tới chỗ làm việc này')}><Ic n="walk" /></button>}
+              </div>
+              <span className="tut-d">{x.d}</span>
+              <span className="tut-bar"><i style={{ width: Math.round(100 * x.prog / Math.max(1, x.need)) + '%' }} /><em>{x.prog}/{x.need}</em></span>
+              {x.rw.length > 0 && <span className="tut-rw">Thưởng: {x.rw.join(', ')}</span>}
               <span className="tut-f">
                 {x.ready && <button className="btn sm pri" data-act="tutClaim" data-arg={x.id}>Nhận thưởng</button>}
                 {!x.ready && <button className="tut-sk" data-act="tutSkip" data-arg={x.id}>Bỏ qua</button>}
