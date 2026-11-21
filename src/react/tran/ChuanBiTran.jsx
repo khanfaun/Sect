@@ -23,7 +23,7 @@ function DongNguoi({ u, me }) {
   const tal = PS.unitTal(u);
   return (
     <div className={'pp-u' + (foe ? ' foe' : '')}>
-      <Html className="u-av" {...tip(tal ? 'Tiềm chất: ' + TAL_N[tal.tier] : '')} h={PS.uAvatar(u)} />
+      <Html className="u-av" {...tip([tal ? 'Tiềm chất: ' + TAL_N[tal.tier] : '', PS.triTxtU ? PS.triTxtU(u) : ''].filter(Boolean).join('\n'))} h={PS.uAvatar(u)} />
       <div className="pp-t">
         <div className="pp-nl">
           <span className="pp-n">{u.name}<small className="pp-sub"><H h={PS.elSeal(u.el || 'vo')} /> {sub}</small></span>

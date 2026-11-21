@@ -96,7 +96,11 @@ const TESTS = {
   },
   // đầu trận có chữ báo; vào trận thật bằng bấm nút
   async combat(p) {
-    await ev(p, () => { openPlace(G.run.at); startCombat({ cnt: 1 }, { kind: 'node' }); render(); });
+    // thẻ chuẩn bị trận: đối thủ là người có dòng "Tâm trí" cạnh "Tiềm chất"
+    await ev(p, () => { openPlace(G.run.at); startCombat({ k: 'human' }, { kind: 'node' }); render(); });
+    await p.waitForTimeout(300);
+    ok(await ev(p, () => [...document.querySelectorAll('.pp-u.foe .u-av')].some(x => /Tâm trí: /.test(x.getAttribute('data-tip') || ''))), 'đối thủ là người: thẻ có dòng "Tâm trí"');
+    await ev(p, () => { G.run.scene = null; openPlace(G.run.at); startCombat({ cnt: 1 }, { kind: 'node' }); render(); });
     await p.waitForTimeout(400); await (await p.waitForSelector('.btn.pri')).click();
     let txt = ''; for (let i = 0; i < 25 && !txt; i++) { await p.waitForTimeout(150); txt = await ev(p, () => (document.querySelector('.fx-banner') || {}).textContent || ''); }
     ok(!!txt, 'chữ báo đầu trận: "' + txt + '"'); await shot(p, 'combat');

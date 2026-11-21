@@ -2948,7 +2948,9 @@ const TESTS = {
     ok(K.canViet().length===38&&r.thieu.length===38-r.n, 'danh sách phải viết: 38 tệp (thêm 3 hậu quả kết, 2 kỳ ngộ), còn '+r.thieu.length);
     ok(K.kiemDaiMong(null,{du:true}).loi.length===r.thieu.length, '--du: mỗi tệp thiếu là một lỗi');
     const dir = path.join(__dirname,'..','content/dai-mong/mong-an'), f = path.join(dir,'MA02.json');
-    const viet = o => {fs.writeFileSync(f,JSON.stringify(o,null,1));try{return K.kiemDaiMong([f]).loi.join('\n');}finally{fs.unlinkSync(f);}};
+    // ghi đè tạm tệp thật để kiểm: cất bản gốc rồi trả lại (trước đây xoá luôn tệp thật MA02.json, ba_do.json)
+    const tam = (g, noi, fn) => {const goc=fs.existsSync(g)?fs.readFileSync(g):null;fs.writeFileSync(g,noi);try{return fn();}finally{if(goc)fs.writeFileSync(g,goc);else fs.unlinkSync(g);}};
+    const viet = o => tam(f,JSON.stringify(o,null,1),()=>K.kiemDaiMong([f]).loi.join('\n'));
     const dai = 'Ngươi đứng trước một người không già, dáng ngồi y hệt người đã thấy ở đâu đó, có lẽ trong một giấc ngủ trưa rất xa. Người ấy hỏi ngươi một câu không đầu không cuối rồi cười.';
     ok(viet({schemaVersion:1,loai:'mong_an',ma:'MA02',nhat:[dai,dai+' Rồi gió nổi.']})==='', 'tệp đúng: không lỗi');
     ok(/con số "3"/.test(viet({schemaVersion:1,loai:'mong_an',ma:'MA02',nhat:[dai+' Đã 3 lần.',dai]})), 'bắt con số trong lời văn');
@@ -2958,7 +2960,7 @@ const TESTS = {
     ok(/tên tệp/.test(viet({schemaVersion:1,loai:'mong_an',ma:'MA03',nhat:[dai,dai+' x']})), 'tên tệp phải trùng mã');
     const gb = K.kiemDaiMong([path.join(__dirname,'..','content/dai-mong/gac-ben/lao_cheo_do.json')]);ok(gb.loi.length===0, 'mẫu Người Gác Bến đạt');
     const g2 = path.join(__dirname,'..','content/dai-mong/gac-ben/ba_do.json');const src=JSON.parse(fs.readFileSync(path.join(__dirname,'..','content/dai-mong/gac-ben/lao_cheo_do.json'),'utf8'));
-    src.dang='ba_do';src.loi[1]=src.loi[1]+' Ta là kẻ Yêu Hoàng để lại.';fs.writeFileSync(g2,JSON.stringify(src));let e2;try{e2=K.kiemDaiMong([g2]).loi.join('\n');}finally{fs.unlinkSync(g2);}
+    src.dang='ba_do';src.loi[1]=src.loi[1]+' Ta là kẻ Yêu Hoàng để lại.';const e2=tam(g2,JSON.stringify(src),()=>K.kiemDaiMong([g2]).loi.join('\n'));
     ok(/quá sớm/.test(e2), 'Người Gác Bến lộ thân phận quá sớm: báo lỗi');
   },
   // máy tự chơi 15 kiếp: không lỗi, không chữ hỏng
@@ -3362,6 +3364,54 @@ const TESTS = {
     run(`G.run.bac=5;G.run.at=${at};G.run.scene=null`);run(`stageGo(${x.id})`);ok(run("G.run.at")===at, 'không đủ xu: không đi được');
     fresh("FEAT.tien=1;G.run.pham=0;G.run.realm=1;G.run.st=99999");run(`G.run.at=${at};G.run.region=idReg(${at});for(const x of regionOf(G.run.region).nodes)if(isTownT(x.type))x.fog=3;`);
     ok(run(`stageList(nodeById(${at})).every(x=>x.bac==null&&x.c>0)`), 'tu sĩ: vẫn trả linh thạch');
+  },
+  // tâm trí NPC: đủ chỉ số như nhân vật chính; khôn/dại theo tiềm chất; đánh nhau, đời sống, đối xử với người chơi
+  tri_npc() {
+    fresh("NK.on=true");
+    const c=JSON.parse(run("JSON.stringify(npcChiSo('foe:Thử Một'))"));
+    ok(['root','tuchat','ngo','tam','van','tp','kvMax','the','dao','tiem','tri'].every(k=>c[k]!=null)&&c.tri>=0&&c.tri<=100, 'NPC có đủ chỉ số như nhân vật chính và tâm trí 0–100 ('+c.tri+')');
+    ok(run("npcChiSo('foe:Thử Một').tri===npcChiSo('foe:Thử Một').tri"), 'cùng tên: chỉ số y nguyên');
+    const tb=JSON.parse(run("(()=>{const b=[0,0,0,0,0],n=[0,0,0,0,0];for(let i=0;i<2000;i++){const c=npcChiSo('foe:k'+i);b[c.tiem]+=c.tri;n[c.tiem]++;}return JSON.stringify(b.map((x,i)=>n[i]?x/n[i]:null).filter(x=>x!=null))})()"));
+    ok(tb.every((x,i)=>i===0||x>tb[i-1]), 'tiềm chất càng cao, tâm trí trung bình càng cao ('+tb.map(Math.round)+')');
+    // --- đánh nhau ---
+    const tran=`(()=>{G.run.scene=null;startCombat({k:'human'},{kind:'node'});const sc=G.run.scene;const u=sc.units.find(x=>x.side==='B');u._triK='foe:TT';u.pat=['atk','heal','poison'];u.intent='atk';return 1;})()`;
+    const q=()=>JSON.parse(run("JSON.stringify(triQuyet(G.run.scene,G.run.scene.units.find(x=>x.side==='B'))||null)"));
+    run(tran);run("TRI_EP['foe:TT']=90;(()=>{const sc=G.run.scene,me=mainUnit(sc),u=sc.units.find(x=>x.side==='B');me.phase='charge';me.pending={sk:BASIC,lv:1,tid:u.id};TRI.tran.thuThe=99;})()");
+    ok(q().it==='block', 'kẻ khôn thấy mình bị tụ lực nhắm vào: thủ thế');
+    run("(()=>{const sc=G.run.scene,me=mainUnit(sc),u=sc.units.find(x=>x.side==='B');me.phase='run';me.pending=null;u.hp=Math.round(u.max*0.3);})()");
+    ok(q().it==='heal', 'kẻ khôn máu thấp, có chiêu hồi: hồi máu');
+    run("(()=>{const sc=G.run.scene,u=sc.units.find(x=>x.side==='B');u.hp=Math.round(u.max*0.1);mainUnit(sc).hp=mainUnit(sc).max;TRI.tran.chay.p=1;})()");
+    ok(q().flee===1, 'kẻ mưu trí sắp chết, ngươi còn khoẻ: bỏ chạy');
+    run("(()=>{const sc=G.run.scene,u=sc.units.find(x=>x.side==='B');readyHack=1;sc.cur=u.id;sc.hold=true;runAct(sc,()=>aiAct(sc,u));})()");
+    ok(run("G.run.scene.units.find(x=>x.side==='B').gone===1&&G.run.scene.over==='win'")&&run("NK.count('tri.chay')")===1, 'bỏ chạy thật: kẻ địch rời trận, trận kết thúc');
+    run(tran);run("TRI_EP['foe:TT']=10;TRI.tran.danhBua=1;(()=>{const u=G.run.scene.units.find(x=>x.side==='B');u.intent='poison';u.hp=Math.round(u.max*0.1);})()");
+    const d=q();ok(d.it==='atk'&&d.why==='bua'&&!d.flee, 'kẻ dại: bỏ chiêu, đánh bừa, máu thấp cũng không biết chạy, không biết hồi');
+    run("TRI.tran.danhBua=0.35;TRI.tran.chay.p=0.6;TRI.tran.thuThe=0.9;G.run.scene=null");
+    // --- đời sống thiên kiêu ---
+    ok(run("triDpRate(90,130)")>run("triDpRate(10,100)")&&run("triCho(90)")>run("triCho(10)"), 'kẻ khôn chờ chắc mới đột phá, tỉ lệ thành cao hơn');
+    ok(run("triTuMul({tuchat:90,ngo:13})")>run("triTuMul({tuchat:20,ngo:8})"), 'tư chất, ngộ tính cao thì tu nhanh hơn');
+    run("var TRI_HK=[0,0];{const _d=dbg;dbg=function(t,d){if(t==='tri.hong')TRI_HK[d.t>=50?0:1]++;return _d.apply(this,arguments);};}");
+    const tk=JSON.parse(run(`(()=>{let a=0,b=0,da=0,db=0;for(let k=0;k<30;k++){G.run.rivals.forEach((x,j)=>{x.realm=0;x.prog=0;x.alive=true;TRI_EP[triKeyRv(x.i)]=j%2?90:10;});for(let y=0;y<60;y++)worldTick(1);
+      G.run.rivals.forEach((x,j)=>{if(j%2){a+=x.realm;da+=x.alive?0:1;}else{b+=x.realm;db+=x.alive?0:1;}});}
+      for(const x of G.run.rivals)delete TRI_EP[triKeyRv(x.i)];return JSON.stringify([a,b,da,db]);})()`));
+    const hk=JSON.parse(run("JSON.stringify(TRI_HK)"));
+    ok(hk[0]*2<hk[1], '60 năm: thiên kiêu khôn ít đột phá hỏng hơn hẳn (hỏng '+hk[0]+' so với '+hk[1]+'; tổng cảnh giới '+tk[0]+' so với '+tk[1]+')');
+    ok(tk[2]<tk[3], 'kẻ dại chết nhiều hơn (chết '+tk[2]+' so với '+tk[3]+')');
+    // --- với người chơi ---
+    fresh("NK.on=true;G.run.pham=0;G.run.realm=1;G.run.scene=null");
+    const rv0="G.run.rivals.find(x=>x.alive)";const ten=run(`W().rivals[${rv0}.i].ten`);const ent=`({type:'thienkieu',data:{rv:${rv0}.i},name:'${ten}'})`;
+    run(`${rv0}.rel=-8;${rv0}.realm=0;TRI_EP['rv:${ten}']=90;G.run.hp=S().maxHp`);
+    ok(run(`triGapTk(${ent})`)===false&&!run("G.run.scene")&&run("NK.count('tri.gap')")===1, 'kẻ thù khôn, yếu hơn ngươi: lặng lẽ tránh đi');
+    run(`${rv0}.realm=2`);ok(run(`triGapTk(${ent})`)===true&&run("G.run.scene&&G.run.scene.type")==='combat'&&run("G.run.scene.units.find(x=>x.side==='B').name")===ten, 'kẻ thù khôn, mạnh hơn ngươi: chặn đường ra tay');
+    run(`G.run.scene=null;${rv0}.realm=0;TRI_EP['rv:${ten}']=10`);ok(run(`triGapTk(${ent})`)===true, 'kẻ thù dại: yếu hơn vẫn lao vào gây sự');
+    run(`G.run.scene=null;${rv0}.rel=0;${rv0}.kgY=null;TRI_EP['rv:${ten}']=80`);const r0=run(`${rv0}.rel`);run(`triGapTk(${ent})`);
+    ok(run(`${rv0}.rel`)>r0, 'kẻ khôn, không thù, thấy ngươi mạnh hơn: chủ động kết giao');
+    run(`triGapTk(${ent})`);ok(run(`${rv0}.rel`)===r0+1, 'kết giao mỗi năm một lần');
+    run(`TRI_EP['rv:${ten}']=90`);const k1=run(`triThuyet('Lừa hắn rằng bảo vật ở phía tây',${rv0}.i)`),k2=run(`triThuyet('Thuyết phục hắn',${rv0}.i)`);
+    run(`TRI_EP['rv:${ten}']=10`);const k3=run(`triThuyet('Thuyết phục hắn',${rv0}.i)`);
+    ok(k1<k2&&k2<0&&k3>0, 'kẻ khôn khó thuyết phục, càng khó lừa; kẻ dại dễ xiêu ('+[k1,k2,k3].map(x=>x.toFixed(2))+')');
+    ok(run(`unitTal({side:'B',f:'nhan',name:'${ten}'}).tier`)===run(`rivalTal(${rv0}.i).tier`), 'thẻ trận: người trùng tên thiên kiêu hiện đúng tiềm chất thiên kiêu');
+    ok(/Tâm trí: /.test(run(`triTxtU({side:'B',f:'nhan',name:'${ten}'})`))&&run("triTxtU({side:'B',f:'thu',name:'Sói'})")==='', 'có dòng "Tâm trí" cho người; yêu thú không có');
   },
 };
 

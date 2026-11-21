@@ -29,6 +29,8 @@ Người dùng không phải lập trình viên: trả lời ngắn, ít thuật
 - Địa hình từng ô (loại đất, độ cao, khu vực) sinh từ ảnh bằng `python3 tools/dia-hinh.py [--debug thư_mục]` ra core2/03b-dia-hinh-du-lieu.js (`MAPD`). Ô 30px (`HEXW`), đi bộ theo `TER_COST` + lên dốc; hồ/vân hải coi như không đi được.
 - Tầm nhìn theo địa hình: `visCells` (núi chặn, nước nhìn xa). Ô đã thấy: `VIS` (lưu `r.visS`), đang thấy `VNOW`; vẽ "mực loang" bằng `inkMask` trong ui/05-gfx.js.
 - Túi đồ (core2/31): 10 ô mang trên người + túi trữ vật (relic k:'tui' đeo ở ô tuivat) mở thêm ô, ô túi khoá khi linh lực = 0 hoặc phàm nhân. Mỗi pháp bảo/vật liệu/trứng/lệnh bài/viên đan chiếm một ô. Giao diện ô/khoá chưa gắn (dùng `bagLayout()`, `it.locked`/`it.bsrc` của `bagItems()`).
+- Tâm trí NPC (core2/82-tri-npc.js, số trong content/rules/tri-npc.js): `npcChiSo(khoá)` cho NPC đủ chỉ số như nhân vật chính, `triOf(khoá)` 0–100 theo ngộ tính + tiềm chất + đạo tâm. Khoá: `rv:<tên thiên kiêu>`, `foe:<tên>`, `ally:<tên>`, `ent:<id>:<tên>`. Bài kiểm tra ép bằng `TRI_EP[khoá]=số`. Chi phối trận (`triQuyet`), đời sống thiên kiêu mỗi năm (`triNam`, thay phần tu/đột phá của worldTick cũ), gặp người chơi (`triGapTk`) và thuyết phục/lừa (`triThuyet`).
+- Bài kiểm tra nào phải ghi đè tạm tệp nội dung thật thì phải cất bản gốc rồi trả lại (bài `dm_kiem` từng xoá mất MA02.json và ba_do.json).
 - Lịch luyện nhận ×`LL_BOOST` (20-ngo-tinh-khi-van.js). Bế quan: linh lực hồi ×`BQ_MP_MUL` nhanh hơn khí huyết, xuất quan không còn hồi đầy cả hai (24-hoi-phuc.js).
 
 
