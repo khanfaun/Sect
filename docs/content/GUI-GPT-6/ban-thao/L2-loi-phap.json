@@ -3,160 +3,160 @@
   "su_kien": [
     {
       "ma": "S01",
-      "ten": "",
+      "ten": "Phù ướt trên nền đài",
       "text": [
-        "",
-        ""
+        "Ở {LOC15}, gió hất tờ phù vào ống tay áo ngươi. Nét mực sáng lên ngay chỗ nước mưa thấm qua.",
+        "Người dạy đè hòn cuội lên tờ giấy. Dưới dốc, người nhặt củi còn men theo đường trống để về."
       ],
       "choices": [
         {
-          "l": "",
-          "t": "",
+          "l": "Chờ đường vắng",
+          "t": "Ngươi đợi người nhặt củi đi khuất rồi mới đặt ấn xuống. Mực đã nhòe, nên ngươi phải vẽ lại tờ phù trước khi thử.",
           "e": {}
         },
         {
-          "l": "",
-          "t": "",
+          "l": "Dời buổi thử sang nền đá trống",
+          "t": "Ngươi mang phù sang mặt đá khuất đường đi. Tiếng lôi đến rõ, nhưng gió cuốn tờ phù xuống khe và ngươi phải quay lại tìm.",
           "e": {}
         }
       ]
     },
     {
       "ma": "S02",
-      "ten": "",
+      "ten": "Tiếng cào dưới bếp",
       "text": [
-        "",
-        ""
+        "Ở {LOC01}, chủ nhà đưa ngươi cái bát mẻ. Sáng nào họ cũng thấy nó úp cạnh cửa, dù tối qua đã cất kỹ.",
+        "Khi ngươi chạm vào bát, âm khí kéo qua đầu ngón tay. Dưới gầm bếp còn góc áo trẻ con mà người chủ muốn lấy ra."
       ],
       "choices": [
         {
-          "l": "",
-          "t": "",
+          "l": "Đưa người ra sân rồi trừ tà",
+          "t": "Ngươi chờ họ lấy áo, đưa cả nhà ra sân rồi mới đặt lôi ấn cạnh bếp. Tiếng cào dứt, nhưng người chủ phải nhờ ngươi kê lại viên gạch vừa bật khỏi nền.",
           "e": {}
         },
         {
-          "l": "",
-          "t": "",
+          "l": "Dẫn tà vật ra khỏi bếp",
+          "t": "Ngươi đặt bát ngoài sân, đợi bóng theo tới mới dùng lôi. Bếp còn nguyên, nhưng chiếc bát vỡ và người chủ nhặt lấy mảnh còn dấu tay đứa trẻ.",
           "e": {}
         }
       ]
     },
     {
       "ma": "S03",
-      "ten": "",
+      "ten": "Hòm thi giữa trạm",
       "text": [
-        "",
-        ""
+        "Một Thi tu dừng xe trước trạm, dây giữ hòm đã chùng. Ngón tay cứng từ trong hòm cào vào mép gỗ mỗi khi ngựa bước.",
+        "Người trực trạm xin ngươi đánh ngay vì khách đứng quá gần. Người chở hòm bảo gia quyến đang tới nhận áo liệm."
       ],
       "choices": [
         {
-          "l": "",
-          "t": "",
+          "l": "Cho khách lùi rồi đánh thi luyện",
+          "t": "Ngươi đợi khách dạt khỏi xe rồi đánh lúc xác luyện vừa đẩy nắp. Hòm cháy sém, và người chở phải cắt riêng phần áo còn lành cho gia quyến.",
           "e": {}
         },
         {
-          "l": "",
-          "t": "",
+          "l": "Buộc Thi tu thu hiệu lệnh",
+          "t": "Ngươi giữ lôi ấn trong tay và yêu cầu người chở dừng xác để trả áo. Họ làm theo, còn ngươi đi cùng xe tới bãi để chắc chiếc hòm được khép.",
           "e": {}
         }
       ]
     },
     {
       "ma": "S04",
-      "ten": "",
+      "ten": "Đá ẩm dưới đồng mộ",
       "text": [
-        "",
-        ""
+        "Ở {LOC14}, âm khí đọng dày trong rãnh đất. Ngươi thử lôi ấn, vệt sáng vừa chạm đá đã tắt.",
+        "Người giữ mộ giơ đèn chỉ lối cao còn khô. Dưới chân bia, bóng xám đứng chắn đường gia quyến xuống đặt cơm."
       ],
       "choices": [
         {
-          "l": "",
-          "t": "",
+          "l": "Dẫn bóng lên lối cao",
+          "t": "Ngươi đợi bóng men theo mép rãnh rồi dẫn nó khỏi vùng âm khí. Lôi ấn đánh tan được bóng, nhưng gia quyến phải dời mâm cơm muộn hơn giờ hẹn.",
           "e": {}
         },
         {
-          "l": "",
-          "t": "",
+          "l": "Giữ lối cho gia quyến rút",
+          "t": "Ngươi dùng luồng lôi yếu để giữ khoảng cách cho người đứng dưới bia quay lên. Bóng xám còn đó, nên ngươi ở lại canh tới khi mặt rãnh bắt đầu khô.",
           "e": {}
         }
       ]
     },
     {
       "ma": "S05",
-      "ten": "",
+      "ten": "Bóng ôm bao thóc",
       "text": [
-        "",
-        ""
+        "Người coi kho bảo ngươi trừ bóng đêm nào cũng ôm bao chạy qua sân. Ngươi thấy nó chỉ đi đúng quãng đường tới chỗ từng phát thóc.",
+        "Một bà lão đưa tờ phiếu còn dấu ngón tay của con mình. Bà xin đặt phiếu xuống trước khi ngươi dùng lôi."
       ],
       "choices": [
         {
-          "l": "",
-          "t": "",
+          "l": "Để bà trả phiếu trước",
+          "t": "Ngươi chừa lối cho bà tới bên bao. Bóng buông tay khi bà gọi đúng tên, và ngươi dùng lôi đánh tan phần âm khí còn bám trên vải.",
           "e": {}
         },
         {
-          "l": "",
-          "t": "",
+          "l": "Dùng ấn đuổi bóng khỏi kho",
+          "t": "Ngươi dẫn mọi người ra ngoài rồi giáng lôi xuống sân. Bóng tan, nhưng tờ phiếu bà đặt sát bao chỉ còn mép cháy đen.",
           "e": {}
         }
       ]
     },
     {
       "ma": "S06",
-      "ten": "",
+      "ten": "Ánh trắng ở đầu cầu",
       "text": [
-        "",
-        ""
+        "Sấm đánh gãy cọc, để cầu treo xệ xuống sát nước. Dưới mái trạm có người ướt sũng vẫn nhìn sang bờ kia, chỗ người nhà đang mắc lại.",
+        "Luồng lôi trong tay ngươi bắt nhịp với vệt sáng trên sườn núi. Chỗ có thể thử sức lại cách xa đầu cầu đang cần người giữ."
       ],
       "choices": [
         {
-          "l": "",
-          "t": "",
+          "l": "Giữ đầu cầu cho người qua",
+          "t": "Ngươi chống vai vào cọc và giữ dây tới khi người cuối sang bờ. Luồng lôi trong tay tan dần, còn người nhà chia nhau hong áo dưới mái trạm.",
           "e": {}
         },
         {
-          "l": "",
-          "t": "",
+          "l": "Rời cầu để thử dẫn lôi",
+          "t": "Ngươi nhờ người coi trạm giữ khách lại rồi lên chỗ đá trống đón sét. Ngươi dẫn được luồng lôi xuống đá, nhưng nước dâng buộc cả trạm chờ đến sáng mới sang.",
           "e": {}
         }
       ]
     },
     {
       "ma": "S07",
-      "ten": "",
+      "ten": "Dấu than trên tay nắm",
       "text": [
-        "",
-        ""
+        "Tới nhà bị ám, ngươi thấy than vương trên mặt trong tay nắm. Chủ nhà cho đó là dấu tà vật, song ngươi nghe tiếng ho sau chỗ vách mới ghép.",
+        "Người làng đã tụ ngoài cửa, muốn ngươi kết việc trước đêm. Trong tay ngươi có lá phù còn nguyên nét."
       ],
       "choices": [
         {
-          "l": "",
-          "t": "",
+          "l": "Mở vách và hỏi người đang trốn",
+          "t": "Ngươi gỡ tấm ván, để người nhóm than tự kể vì sao họ nấp. Đám đông giải tán chậm, còn chủ nhà phải xin ngươi xét lại tiếng gõ ở gian bếp.",
           "e": {}
         },
         {
-          "l": "",
-          "t": "",
+          "l": "Giáng lôi vào tay nắm",
+          "t": "Ngươi đánh vào tay nắm và tấm ván bật ra. Tiếng ho hóa thành tiếng gọi cứu, buộc ngươi bỏ phù xuống để đưa người bị thương ra.",
           "e": {}
         }
       ]
     },
     {
       "ma": "S08",
-      "ten": "",
+      "ten": "Trước tiếng sấm cuối",
       "text": [
-        "",
-        ""
+        "Trên nền {LOC15}, khí trời nặng tới mức ngọn đèn chao mà không tắt. Lôi ấn trong tay ngươi rung theo tiếng sấm từ sườn núi.",
+        "Người học đứng ở bậc dưới, cầm chiếc áo khô ngươi gửi. Họ hỏi có nên đợi ở đó hay xuống dốc trước khi ấn mở."
       ],
       "choices": [
         {
-          "l": "",
-          "t": "",
+          "l": "Cho người học lùi rồi đón sét",
+          "t": "Ngươi đợi họ xuống hết bậc mới xoay ấn theo luồng sáng. Lôi đi qua nền đá. Ngươi vẫn đứng được khi người học mang áo khô trở lại.",
           "e": {}
         },
         {
-          "l": "",
-          "t": "",
+          "l": "Khép ấn và xuống đài",
+          "t": "Ngươi dập nét ấn trước khi sấm tới gần rồi theo người học xuống. Sét đánh trúng chỗ đứng cũ, buổi thử phải hẹn lại khi đường dẫn được sửa.",
           "e": {}
         }
       ]
@@ -165,18 +165,18 @@
   "ket_cuc": [
     {
       "ma": "K01",
-      "ten": "",
+      "ten": "Người giữ ngọn đèn qua bão",
       "canh": [
-        "",
-        ""
+        "Người làng gọi ngươi sang khi tiếng cào trở lại dưới mái. Ngươi để họ tự chọn đồ muốn mang ra rồi mới dựng lôi ấn ở sân.",
+        "Về sau, hễ mưa lớn, họ chừa lối khô cho người đến giúp và thắp đèn chỉ chỗ bậc trơn. Ngươi tới chỉ việc đặt tay lên then, chẳng cần ai giục mở."
       ]
     },
     {
       "ma": "K02",
-      "ten": "",
+      "ten": "Vết sét trên vách nhà",
       "canh": [
-        "",
-        ""
+        "Ngươi mở ấn khi người sau vách còn chưa lên tiếng. Lôi dội qua gỗ ẩm, để lại vết cháy ngay ngang tay người từng níu cửa.",
+        "Từ đó, ngươi đứng ngoài mỗi khi có nhà mời vào trừ tà. Chiếc áo người học đem trả còn gấp nếp cũ, nhưng bàn tay ngươi chẳng giữ được ấn."
       ]
     }
   ]
