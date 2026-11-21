@@ -38,7 +38,34 @@ const MANAGE={
   caican(){const r=G.run;if(typeof ccStart!=='function'||!r||r.cc||r.ccOk||!r.ccHeard)return false;const L=Object.keys(r.ccHeard).filter(id=>!ccWhyStart(id));if(!L.length)return false;return ccStart(rr(L));},
   meta(){const M=G.meta;const u=UPG.filter(x=>(M.upg[x.id]||0)<x.max&&M.pts>=x.c[M.upg[x.id]||0]);if(!u.length)return false;buyUpg(rr(u).id);return true;},
 };
+// mua đồ ăn mang theo khi ở thôn trấn mà túi còn ít (người chơi thật được báo "đường xa sẽ đói", bot thì không đọc)
+function botFood(muc){muc=muc||300;const r=G.run;if(!r||!free()||typeof feat!=='function'||!feat('an')||r.anFree||typeof anTuiV!=='function')return false;
+  const n=nodeById(r.at);if(!n||!AN.quan.includes(n.type)||n.state==='ruin'||anTuiV(r)>=muc/2||(r.bac||0)<400)return false;
+  if(r._anMua===r.at+':'+Math.floor(W().t/HD))return false;r._anMua=r.at+':'+Math.floor(W().t/HD);
+  const sc0=r.scene;openShop(n);const sc=G.run.scene;let k=0;
+  if(sc&&sc.type==='shop')for(let g=0;g<12&&anTuiV(r)<muc&&(r.bac||0)>300;g++){
+    const L=sc.items.map((it,i)=>({it,i})).filter(x=>x.it.k==='qi'&&anMon(x.it.id)&&!x.it.sold&&(r.bac||0)-x.it.bac>200);if(!L.length)break;
+    L.sort((a,b)=>anMonV(b.it.id)/b.it.bac-anMonV(a.it.id)/a.it.bac);const n0=r.qitems.length;buy(L[0].i);if(r.qitems.length===n0)break;k++;}
+  G.run.scene=sc0;if(k)covInc('m:muaAn');return k>0;}
+// hết tiền xu: làm thuê ở nơi có việc (lương cao / giờ, tránh việc rủi ro nếu được)
+function botWork(){const r=G.run;if(!r||!free()||typeof vtList!=='function'||!feat('tien')||(r.bac||0)>=300)return false;
+  const n=nodeById(r.at);if(!n||n.state==='ruin')return false;const L=vtList(n).filter(v=>!v.why);if(!L.length)return false;
+  L.sort((a,b)=>(b.rui?0:1)-(a.rui?0:1)||(b.cong[0]+b.cong[1])/b.h-(a.cong[0]+a.cong[1])/a.h);
+  const sc0=r.scene;if(!sc0||sc0.type!=='place'||sc0.id!==n.id)openPlace(n.id);const ok=vtDo(L[0].id);
+  if(G.run&&G.run.scene&&G.run.scene.type!=='place'&&G.run.scene.type!=='combat'&&G.run.scene.type!=='kyngo'&&G.run.scene.type!=='event')G.run.scene=sc0;
+  if(ok)covInc('m:lamThue');return ok;}
+// đi đường: đọc lời báo "đường xa sẽ chết đói" như người chơi; đang ở thôn trấn thì mua thêm đồ ăn rồi mới đi, vẫn chết đói thì thôi
+function botQuan(n){return !!n&&AN.quan.includes(n.type)&&n.state!=='ruin';}
+{const _g=goOrOpen;goOrOpen=function(n){const r=G.run;if(!r||!n||n.id===r.at||typeof anTripRisk!=='function'||!feat('an'))return _g.apply(this,arguments);
+  let R=anTripRisk(n.id);if(R&&botQuan(nodeById(r.at))){r._anMua=null;botFood(600);R=anTripRisk(n.id);}
+  if(R&&!BOT_VE&&(R.doi1>=R.chet||!botQuan(n))){covInc('m:tranhDoi');return false;}return _g.apply(this,arguments);};}
+var BOT_VE=0;
+// đói mà không còn gì ăn, đang ở nơi hoang: về thôn trấn gần nhất
+function botVeAn(){const r=G.run;if(!r||(r.moving&&!r.halt)||(r.scene&&r.scene.type!=='place')||!feat('an')||(r.doi||0)<AN.anQuan||anTuiV(r)>=100-(r.doi||0)||botQuan(nodeById(r.at)))return false;
+  let best=null,bh=1e9;for(const R of W().regions)for(const n of R.nodes){if(!botQuan(n)||!(n.fog>=1))continue;const p=findPath(r.at,n.id);if(!p)continue;const h=travelHours(p);if(h<bh){bh=h;best=n;}}
+  if(!best)return false;covInc('m:veAn');BOT_VE=1;try{if(r.scene)r.scene=null;return goOrOpen(best);}finally{BOT_VE=0;}}
 function botManage(){
+  if(botVeAn()||botFood()||botWork())return;
   if(G.run&&G.run.kvPick&&free()){kvChoose(Math.floor(Math.random()*G.run.kvPick.length));return;} // chọn khí vận sau đột phá
   if(G.run&&G.run.htPick&&free()){htChoose(0);return;}
   if(!G.run||!free()||!chance(.25))return;

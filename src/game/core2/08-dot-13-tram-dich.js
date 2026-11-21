@@ -18,6 +18,12 @@ function vehTake(i,mode){const r=G.run,sc=r.scene;if(!sc||sc.type!=='place')retu
   if(mode==='buy'){r.veh=o;r.mount=null;log('Mua '+v.n+'.');note(contentText("core2_08-dot-13-tram-dich_js.vehTake.001")+v.n,'up');}else{r.rent={v:o,until:W().t+HM};log('Thuê '+v.n+contentText("core2_08-dot-13-tram-dich_js.vehTake.002"));note(contentText("core2_08-dot-13-tram-dich_js.vehTake.003")+v.n+contentText("core2_08-dot-13-tram-dich_js.vehTake.004"),'up');}return true;}
 // xe chuyến cũng đắt hơn
 {const _sl13=stageList;stageList=function(n){return _sl13(n).map(x=>Object.assign(x,{c:x.c*2}));};}
+// phàm nhân đi xe chuyến bằng xu (không có linh thạch): mỗi chuyến kèm giá bac; tu sĩ vẫn trả linh thạch
+function xeBac(p){const X=TIEN.xe;return Math.min(X.tran,X.goc+Math.round(pathLen(p)/X.chang));}
+function xePham(){return !!G.run&&feat('tien')&&isPham();}
+{const _sl=stageList;stageList=function(n){const L=_sl(n);if(!xePham())return L;for(const x of L){const p=findPath(n.id,x.id);x.bac=p?xeBac(p):TIEN.xe.tran;x.c=0;}return L;};}
+{const _sg=stageGo;stageGo=function(id){const r=G.run;if(!r||!xePham())return _sg(id);const s=stageList(nodeById(r.at)).find(x=>x.id===id);if(!s||!bacCan(s.bac))return;
+  bacPay(s.bac,'xe');dbg('xe.pham',{id,bac:s.bac});return _sg(id);};}
 // các tiệm: mỗi món có số lượng, hết thì thôi; một tháng thay hàng
 {const _os13=openShop;openShop=function(n){_os13(n);const sc=G.run&&G.run.scene;if(sc&&sc.type==='shop')for(const it of sc.items)if(it.qty==null)it.qty=it.k==='pill'?ri(1,3):1;};}
 {const _by13=buy;buy=function(i){const sc=G.run&&G.run.scene;const it=sc&&sc.items&&sc.items[i];if(!it||it.sold)return _by13(i);const q=it.qty==null?1:it.qty;_by13(i);if(it.sold){it.qty=q-1;if(it.qty>0)it.sold=0;}};}

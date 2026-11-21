@@ -28,7 +28,7 @@ function bang2(){const B=bang();
 function canViet(B){B=B||bang2();const L=[];
   for(const d of B.SEED)L.push({loai:'qua_chin',tep:'content/qua-chin/'+d+'.json',ma:d,mo:B.TX['deed.'+d]||d});
   for(const m in B.NGHE)L.push({loai:'nghe',tep:'content/nghe-pham/'+m+'.json',ma:m,mo:B.NGHE[m].n+' ('+B.NGHE[m].ranks.join(' → ')+')'+(B.TX['ng.'+m+'.up1']!=null?' — đã có lời thăng bậc, chỉ viết "ket"':' — viết "len" và "ket"'),len:B.TX['ng.'+m+'.up1']==null});
-  for(const c of B.CCID)L.push({loai:'cai_can',tep:'content/cai-can/'+c+'.json',ma:c,mo:B.CC[c].n+' — bước: '+B.CC[c].steps.map((s,i)=>s.b==='rite'?null:i+':'+s.b).filter(Boolean).join(', ')});
+  for(const c of B.CCID)if(B.CC[c].steps.some(s=>s.b!=='rite'))/* đường chỉ có nghi thức (vd Hạo Nhiên): không có gì dọc đường để viết */L.push({loai:'cai_can',tep:'content/cai-can/'+c+'.json',ma:c,mo:B.CC[c].n+' — bước: '+B.CC[c].steps.map((s,i)=>s.b==='rite'?null:i+':'+s.b).filter(Boolean).join(', ')});
   for(const n in CANH)L.push({loai:'canh',tep:'content/canh/'+n.replace('_','-')+'.json',ma:n,mo:CANH[n].join(', ')});
   return L;}
 function kiemTep(file,B,seen){const loi=[],cb=[];const rel=path.relative(ROOT,file).replace(/\\/g,'/');let P;

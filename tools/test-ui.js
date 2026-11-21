@@ -65,6 +65,16 @@ const TESTS = {
     await b.waitForTimeout(500);
     ok(await ev(b, () => document.querySelectorAll('.bc.tlk').length) === 4, 'túi khoá: 4 món trong ô túi mờ đi, có ổ khoá');
     ok(await ev(b, () => [...document.querySelectorAll('.hint')].some(x => /Túi trữ vật đang khoá/.test(x.innerText))), 'túi khoá: có dòng nhắc');
+    const tk = await ev(b, () => [document.querySelectorAll('.bc.tkh').length, tuiSlots(), document.querySelector('.bcap').innerText]);
+    ok(tk[0] === tk[1] - 4 && /ô túi đang khoá/.test(tk[2]), 'túi khoá: ô trống của túi cũng hiện dấu khoá, dòng đếm ô báo túi đang khoá (' + tk[0] + '/' + tk[1] + ')');
+    await ev(b, () => {G.run.mp=10;render();});await b.waitForTimeout(200);
+    ok(await ev(b, () => document.querySelectorAll('.bc.tkh').length === 0 && !/đang khoá/.test(document.querySelector('.bcap').innerText)), 'có linh lực: hết khoá');
+    // xe chuyến cho phàm nhân: giá bằng xu
+    const xe = await ev(b, () => {const r=G.run;r.pham=1;r.realm=0;r.bac=500;const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='tran'&&n.state!=='ruin'&&regionOf(idReg(n.id)).nodes.filter(x=>x.id!==n.id&&isTownT(x.type)).length);
+      r.at=n.id;r.region=idReg(n.id);for(const x of regionOf(r.region).nodes)if(isTownT(x.type))x.fog=3;r.scene=null;UI.panel=null;UI.modal={k:'tram'};render();return 1;});
+    await b.waitForTimeout(300);
+    ok(await ev(b, () => {const rows=[...document.querySelectorAll('.tram [data-act="stage"]')];return rows.length>0&&rows.every(x=>/🪙/.test(x.innerText)&&!x.disabled);}), 'trạm dịch (phàm nhân): xe chuyến ghi giá bằng xu, đủ xu thì bấm được');
+    await ev(b, () => {UI.modal=null;render();});
     const h = await ev(b, () => emoTxt('+130% lịch luyện') + '|' + emoTxt('−20% tu vi'));
     ok(/chev gain c3/.test(h) && /chev gain c1 dn/.test(h) && !/130%<\//.test(h), 'mũi tên: +130% ra 3 mũi xanh, −20% ra 1 mũi đỏ');
     // vật phẩm chưa đủ cảnh giới: nút Mặc vào khoá, món vừa sức thì dùng được

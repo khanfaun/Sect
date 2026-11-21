@@ -81,6 +81,11 @@ function YeuCau({ x, r }) {
   return rl && rl.k !== 'book' && !PS.relOk(rl) ? <em className="rq">{PS.LV_NAME[PS.relReq(rl)]}</em> : null;
 }
 
+// lý do túi trữ vật khoá, bằng lời thường
+function tuiKhoaWhy() {
+  return PS.isPham() ? 'phàm nhân chưa có linh lực để mở túi' : 'linh lực đã cạn, hồi linh lực để mở lại';
+}
+
 function CotPhai({ items }) {
   const { BAG_CAT, PHAM, BAG_MAX } = PS;
   const r = PS.run2(), B = PS.bagSt();
@@ -89,6 +94,9 @@ function CotPhai({ items }) {
   const cap = PS.bagCap(), full = B.tab === 'all' && B.pham < 0;
   const emp = full ? Math.max(0, cap - V.length) : Math.max(0, Math.ceil(Math.max(V.length, 10) / 6) * 6 - V.length);
   const locked = full ? Math.max(0, BAG_MAX - Math.max(cap, V.length)) : 0;
+  // ô trống thuộc túi trữ vật đang khoá (phàm nhân / hết linh lực): hiện riêng, có dấu khoá
+  const lay = PS.bagLayout ? PS.bagLayout() : null, tk = full && lay ? Math.min(emp, lay.slots.filter(x => x.locked && !x.unit).length) : 0;
+  const tkWhy = tuiKhoaWhy();
   return <>
     <div className="bfil">
       <DdSel act="bagTab" label="Loại" opts={Object.keys(BAG_CAT).map(c => ({ v: c, h: PS.esc(BAG_CAT[c]) + (cnt(c) ? ` <small>${cnt(c)}</small>` : '') }))} cur={B.tab} />
@@ -105,12 +113,13 @@ function CotPhai({ items }) {
             <YeuCau x={x} r={r} />
           </button>
         ))}
-        {Array.from({ length: emp }, (_, i) => <span key={'e' + i} className="bc"></span>)}
+        {Array.from({ length: emp - tk }, (_, i) => <span key={'e' + i} className="bc"></span>)}
+        {Array.from({ length: tk }, (_, i) => <span key={'t' + i} className="bc tkh" {...tip('Ô túi trữ vật đang khoá: ' + tkWhy)}><Ic n="lock" /></span>)}
         {Array.from({ length: locked }, (_, i) => <span key={'l' + i} className="bc lock" {...tip('Ô bị khóa. Lên cảnh giới hoặc đeo túi trữ vật tốt hơn để mở.')}><Ic n="lock" /></span>)}
       </div>
     </div>
     {!V.length && items.length > 0 && <p className="hint">Không có món nào khớp bộ lọc.</p>}
-    {PS.tuiSlots && PS.tuiSlots() > 0 && !PS.tuiOn() && <p className="hint"><Ic n="lock" /> Túi trữ vật đang khoá: cần có linh lực mới mở ra lấy đồ được.</p>}
+    {PS.tuiSlots && PS.tuiSlots() > 0 && !PS.tuiOn() && <p className="hint tkh-h"><Ic n="lock" /> Túi trữ vật đang khoá ({PS.tuiSlots()} ô): {tkWhy}. Đồ trong túi không mất, chỉ chưa lấy ra dùng được.</p>}
   </>;
 }
 
@@ -138,7 +147,7 @@ export function TuiDo() {
   return <>
     <div className="bagtop">
       <div className="bst" {...tip('Linh thạch: tiền tệ của giới tu tiên\n' + PS.ltTxt(r) + '\nĐổi phẩm ở phường thị, chợ tu sĩ, tông môn mình')}><span><small>Linh thạch</small><Stone v={r.st} />{[1, 2, 3].some(k => PS.ltGet(k, r)) && <small> {PS.ltTxt(r)}</small>}</span></div>
-      <div className="bcap" {...tip('Sức chứa tăng theo cảnh giới và túi trữ vật đang đeo.\nTối đa ' + PS.BAG_MAX + ' ô.')}><small>Túi đồ</small><b>{items.length} / {PS.bagCap()} ô</b></div>
+      <div className="bcap" {...tip('Sức chứa tăng theo cảnh giới và túi trữ vật đang đeo.\nTối đa ' + PS.BAG_MAX + ' ô.')}><small>Túi đồ</small><b>{items.length} / {PS.bagCap()} ô</b>{PS.tuiSlots && PS.tuiSlots() > 0 && !PS.tuiOn() && <small className="tkh-n"><Ic n="lock" /> {PS.tuiSlots()} ô túi đang khoá</small>}</div>
       <button className="icb" data-act="phamHelp" aria-label="Các phẩm" {...tip('Bảng màu các phẩm')}>?</button>
     </div>
     <div className="bagwrap">

@@ -1481,7 +1481,7 @@ input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text}
 canvas{touch-action:none}.dock.card.np.hold{pointer-events:none}
 
 .chev.gain{flex-direction:column;gap:0;margin:0 2px;line-height:0}.chev.gain svg{width:11px;height:6px}.chev.gain.dn{flex-direction:column-reverse}.chev.dn svg{fill:#c0392b;transform:rotate(180deg)}
-.bc.tlk{opacity:.5;filter:grayscale(.85)}.bc.tlk .lk{position:absolute;inset:auto 3px 3px auto;font-size:1.15em;color:#a33}
+.bc.tkh{border:1px dashed color-mix(in srgb,#a33 45%,transparent);background:color-mix(in srgb,#a33 7%,transparent);color:#a33;display:grid;place-items:center}.bc.tkh .ic{width:14px;height:14px;opacity:.7}.tkh-n{color:#a33!important}.bc.tlk{opacity:.5;filter:grayscale(.85)}.bc.tlk .lk{position:absolute;inset:auto 3px 3px auto;font-size:1.15em;color:#a33}
 
 /* ===== MÁY TÍNH (chuột, màn rộng ≥1200px): phóng to giao diện theo độ phân giải tới 4K; không áp cho điện thoại/máy tính bảng ===== */
 @media (hover:hover) and (pointer:fine) and (min-width:1200px){

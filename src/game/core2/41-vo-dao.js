@@ -9,7 +9,7 @@ function voBac(r){r=r||G.run;return (r&&r.vo&&r.vo.bac)|0;}
 function voBacN(b){return (VO_BAC[b]||VO_BAC[0]).n;}
 function voHocBy(id){return VO_HOC.find(x=>x.id===id);}
 function voFx(r){const fx={};const b=voBac(r);for(const id of (r.voHoc||[])){const h=voHocBy(id);if(!h||!h.fx||b<h.need)continue;for(const k in h.fx)fx[k]=(fx[k]||0)+h.fx[k];}return fx;}
-function voSkOk(sk){return !!sk&&(!!sk.fx.vo||sk.dt==='vl'||sk.id==='_atk');}
+function voSkOk(sk){return !!sk&&(!!sk.fx.vo||sk.dt==='vl'||sk.id==='_atk'||sk===WAIT_SK);} // chờ (lúc bị choáng) luôn được, kể cả phàm nhân — trước đây kẹt trận
 function mpName(){return isPham()?contentText('vo.noi'):contentText('vo.linh');}
 // tiến độ bằng chữ (không có số)
 function voNgayTxt(r){const x=(r.vo&&r.vo.xp)||0;return contentText('vo.ngay.'+(x<60?0:x<365?1:x<3650?2:3));}

@@ -56,7 +56,10 @@ function smartSell(){const r=G.run;if(r.st>=reserve()*1.5)return false;
   const L=sellList().filter(x=>x.k==='r'?(r.relics[x.i]&&r.relics[x.i].k!=='book'):(!PILL[r.pills[x.i].id].bt&&!/hoixuan|baohuyet/.test(r.pills[x.i].id)));
   if(!L.length)return false;L.sort((a,b)=>b.p-a.p);sellItem(L[0].k,L[0].i);why('bán','thiếu linh thạch, bán đồ thừa');return true;}
 // quản lý có chọn lọc
-function smartManage(){const r=G.run;if(!r||!free())return;
+function smartManage(){const r=G.run;if(!r)return;
+  // sống sót: cái ăn (phàm nhân / Luyện Khí phải ăn) — đói mà hết đồ ăn thì về thôn trấn; ở thôn trấn thì mua lương khô; hết xu thì làm thuê
+  if(botVeAn()){why('sống sót','đói, về thôn trấn ăn');return;}if(!free())return;
+  if(botFood()){why('sống sót','mua đồ ăn mang theo');return;}if(botWork()){why('tích luỹ','hết xu, làm thuê');return;}
   if(r.kvPick){kvChoose(0);return;}if(r.htPick){htChoose(0);return;}
   if(!chance(.3))return;
   for(const k of ['equip','book','study','chu','kn','craft','pet','mount','tong']){if(!G.run)return;if(chance(.5)&&MANAGE[k]()){covInc('m:'+k);return;}}

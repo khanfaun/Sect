@@ -159,7 +159,7 @@ while(life<LIVES){
       if(life>=LIVES)break;
       run('G.over=null;genBirth();newRun(G.birth.cards[Math.floor(Math.random()*G.birth.cards.length)]);');stepsLife=0;continue;
     }
-    if(BOOST)run('botBoost()');run('botManage();if(!G.run)throw new Error("mất kiếp trong botManage");if(G.run.scene)botScene();else botPlan();');
+    if(BOOST)run('botBoost()');run('botManage();if(G.run){if(G.run.scene)botScene();else botPlan();}'); // chết trong lúc quản lý (làm thuê, đi đường…) là chết thường, không phải lỗi
     if(DBG&&run('!!G.run'))lastSnap=run('JSON.stringify({pham:!!G.run.pham,tp:typeof tuArt==="function"&&tuArt()?tuArt().n:null,tv:Math.round(G.run.tv),ll:Math.round(G.run.ll||0),age:Math.floor(G.run.age),realm:G.run.realm,bt:typeof canBreak==="function"&&canBreak(),noi:(G.run.llP||[]).length,nguoi:(G.run.llN||[]).length,dich:Object.keys(G.run.llSeen||{}).length,tran:Object.values(G.run.llSeen||{}).reduce((a,b)=>a+b,0),soNoi:regionOf(G.run.region).nodes.length,bq:typeof bqCan==="function"?bqCan():"",goal:G.run._goal,khihai:(G.run.chu||[]).filter(Boolean).length,arts:(G.run.arts||[]).map(a=>a.type).join("")})');
     stats.steps++;stepsLife++;
     if(run('!!G.run')){

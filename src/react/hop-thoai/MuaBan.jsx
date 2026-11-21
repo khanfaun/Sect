@@ -103,13 +103,13 @@ export function TramDich({ m }) {
       <h4 className="sgrp">Thuê xe chuyến</h4>
       <div className="rows">
         {S0.length ? S0.map(x => (
-          <button key={x.id} className="row" data-act="stage" data-arg={x.id} disabled={r.st < x.c}>
+          <button key={x.id} className="row" data-act="stage" data-arg={x.id} disabled={x.bac != null ? (r.bac || 0) < x.bac : r.st < x.c}>
             <span className="r-t"><b>{x.n}</b><small>{PS.durH(x.h)} đường · nhanh gấp ba, không bị chặn</small></span>
-            <span className="r-x"><Stone v={x.c} /></span>
+            <span className="r-x">{x.bac != null ? <span className="cost-b">🪙{PS.fmtBac(x.bac)}</span> : <Stone v={x.c} />}</span>
           </button>
         )) : <p className="empty">Chưa tới thôn trấn nào khác trong vùng.</p>}
       </div>
-      <div className="mb-f"><span className="grow">Trong túi: <Stone v={r.st} /></span><button className="btn" data-act="modalX">Đóng</button></div>
+      <div className="mb-f"><span className="grow">Trong túi: <Stone v={r.st} />{PS.isPham() && <> · 🪙{PS.fmtBac(r.bac || 0)}</>}</span><button className="btn" data-act="modalX">Đóng</button></div>
     </div>
   );
 }

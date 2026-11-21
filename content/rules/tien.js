@@ -7,6 +7,8 @@ const TIEN={quan:1000,luong:1000,vang:10000,lt:1000000,
   grpBac:{kho:[150,300],thuong:[300,700],kha:[5000,20000]},
   hc:{bap:0.75,nang:1.25},
   tpBac:600,tlBac:4800,qBac:100,yBac:120,evXu:100};
+// xe chuyến cho phàm nhân (trả bằng xu): giá = goc + 1 xu mỗi chặng 60 ô đường, không quá tran (GPT đợt bảy: 25–60 xu)
+TIEN.xe={goc:25,tran:60,chang:60};
 // tpBac: bản chép tay tâm pháp ở tạp hóa; tlBac: Trắc Linh Thạch; yBac: thầy lang ở phường thị (đều là xu)
 // qBac: phàm nhân nhận thưởng nhiệm vụ bảng treo bằng tiền phàm, mỗi linh thạch ghi trên bảng = qBac xu
 // evXu: sự kiện phàm nhân dùng được mà ghi giá linh thạch thì mỗi linh thạch (sau hệ số vùng) = evXu xu

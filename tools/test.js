@@ -29,6 +29,7 @@ let fails = 0, cur = '';
 const ok = (c, msg) => { if (!c) { fails++; console.log('   ✗ ' + msg); } else console.log('   ✓ ' + msg); };
 
 const TESTS = {
+
   // GPT đợt sáu: sự kiện và kết cục Lôi pháp, Huyễn thuật, Thôn phệ (tám sự kiện, hai kết cục mỗi nghề)
   nghe_tu_dot6() {
     for(const id of ['TU23','TU24','TU25']){
@@ -3336,6 +3337,31 @@ const TESTS = {
     ok(run("(()=>{const w=W();const n=w.regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh');openPlace(n.id);const a=placeActs(n).map(x=>x.a);const m=tnaFa(n);return a.includes('shop')&&typeof m==='string';})()"), 'bản lưu cũ: thành vẫn có đồ tu sĩ, truy nã không lỗi');
     const t = run("(()=>{const t=Date.now();for(let i=0;i<3;i++)genWorld(900+i);return (Date.now()-t)/3;})()");
     ok(t < 600, 'sinh thế giới không chậm (' + Math.round(t) + ' ms)');
+  },
+  // sửa sau lần chạy bot đo độ khó: ghé thôn trấn được ăn ngay, phàm nhân bị choáng vẫn "qua lượt" được, xe chuyến trả xu cho phàm nhân
+  sua_sau_bot() {
+    const A="W().regions.flatMap(R=>R.nodes)";
+    const tr=()=>run(`${A}.find(n=>n.type==='tran'&&n.state!=='ruin'&&n.id!==G.run.at&&n.id!==G.run.queAt).id`);
+    fresh("FEAT.an=1;G.run.pham=1;G.run.realm=0;G.run.qitems=[];G.run.anMuc='thuong'");
+    let id=tr();run(`G.run.doi=40;G.run.bac=1000;arrive(${id})`);
+    ok(run("G.run.doi")===0&&run("G.run.bac")===1000-run("anCost(G.run)*AN.buaX")&&run("NK.count('an.ghe')")===1, 'tới thôn trấn lúc đói, có tiền: ghé quán ăn ngay, không cần ở lại qua ngày');
+    run(`G.run.doi=20;arrive(${id})`);ok(run("G.run.doi")===20, 'chưa đói (dưới mức ăn ở quán): không ăn');
+    run(`G.run.doi=40;G.run.bac=10;arrive(${id})`);ok(run("G.run.doi")===40&&run("G.run.bac")===10, 'không đủ tiền: không ăn, không trừ tiền');
+    const hoang=run(`${A}.find(n=>isWild(n)).id`);run(`G.run.bac=1000;arrive(${hoang})`);ok(run("G.run.doi")===40, 'tới nơi hoang: không có quán để ăn');
+    // phàm nhân bị đánh choáng: trước đây mọi nút đổi thành "qua lượt" mà phàm nhân lại bị cấm qua lượt nên trận đứng im
+    fresh("G.run.pham=1;G.run.realm=0");
+    run('(()=>{startCombat({},{kind:"node"});const sc=G.run.scene;for(const u of sc.units){if(u.side==="B"){u.atk=0;u.matk=0;}else{u.hp=u.max=1e6;}}for(let i=0;i<4000&&!readyPlayer(sc);i++){if(sc.dodge)dodgeResolve(null);else if(sc.qte)qteResolve(null);else if(sc.done)break;else combatStep(0.05);}})()');
+    run("readyPlayer(G.run.scene).dazed=1");ok(run("playerAct('_atk')")===true&&!run("mainUnit(G.run.scene).dazed"), 'phàm nhân bị choáng: bấm đánh thì qua lượt, hết choáng');
+    // xe chuyến cho phàm nhân: trả bằng xu 25–60
+    fresh("FEAT.tien=1;G.run.pham=1;G.run.realm=0;G.run.st=0;G.run.bac=500");
+    const at=run(`${A}.find(n=>n.type==='tran'&&n.state!=='ruin'&&regionOf(G.run.region).nodes.filter(x=>x.id!==n.id&&isTownT(x.type)).length).id`);
+    run(`G.run.at=${at};G.run.region=idReg(${at});for(const x of regionOf(G.run.region).nodes)if(isTownT(x.type))x.fog=3;`);
+    const L=JSON.parse(run(`JSON.stringify(stageList(nodeById(${at})))`));
+    ok(L.length>0&&L.every(x=>x.bac>=25&&x.bac<=60&&x.c===0), 'phàm nhân: xe chuyến tính bằng xu, 25–60 xu ('+L.slice(0,4).map(x=>x.bac)+')');
+    const x=L[0];run(`stageGo(${x.id})`);ok(run("G.run.at")===x.id&&run("G.run.bac")===500-x.bac&&run("G.run.st")===0, 'đi xe chuyến: tới nơi, trừ xu, không đụng linh thạch');
+    run(`G.run.bac=5;G.run.at=${at};G.run.scene=null`);run(`stageGo(${x.id})`);ok(run("G.run.at")===at, 'không đủ xu: không đi được');
+    fresh("FEAT.tien=1;G.run.pham=0;G.run.realm=1;G.run.st=99999");run(`G.run.at=${at};G.run.region=idReg(${at});for(const x of regionOf(G.run.region).nodes)if(isTownT(x.type))x.fog=3;`);
+    ok(run(`stageList(nodeById(${at})).every(x=>x.bac==null&&x.c>0)`), 'tu sĩ: vẫn trả linh thạch');
   },
 };
 

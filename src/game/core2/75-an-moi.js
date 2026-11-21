@@ -26,6 +26,15 @@ KYNGO.push(AN_DUNG);
 function anDungDuong(r){if(!r.moving||r.anDung||(r.doi||0)<AN.doi.doi||anTui(r).length)return;r.anDung=1;
   const m=r.moving;if(m.seg<m.path.length-1&&typeof snapStop==='function')snapStop();if(G.run.moving)G.run.halt=true;
   dbg('an.dung',{doi:Math.round(r.doi)});if(!G.run.scene)kyStart(AN_DUNG);}
+// mua một bữa ở quán / quê (tự động, theo mức ăn đã chọn); trả true nếu đã ăn
+function anQuanAn(r,how){if(r.anTu===0)return false;const c=anCost(r)*AN.buaX;if(!bacCan(c))return false;bacPay(c,'an');anFed(r,how);
+  if(anMuc(r).tm)r.tamma=Math.max(0,(r.tamma||0)-anMuc(r).tm*AN.thangNo);return true;}
+// đi ngang / ghé thôn trấn lúc bụng đã vơi: ghé quán ăn một bữa luôn (trước đây phải ở lại qua một ngày mới được ăn)
+{const _ar=arrive;arrive=function(id){const o=_ar.apply(this,arguments);const r=G.run;if(!r||!feat('an')||VT_AN||r.anFree||(r.doi||0)<AN.anQuan)return o;
+  const n=nodeById(id);if(!n||n.state==='ruin')return o;
+  if(n.type==='tong'&&r.at===id&&anAtSect(r))anFed(r,'tong');
+  else if((AN.quan.includes(n.type)||(r.queAt!=null&&id===r.queAt))&&anQuanAn(r,'ghe')){anSync(r);dbg('an.ghe',{id,doi:0,bac:r.bac});}
+  return o;};}
 anMeal=function(r){r.anDays=(r.anDays||0)+1;};
 anDay=function(){const r=G.run;if(!r||!feat('an'))return;
   if(VT_AN||r.anFree){if(!VT_AN)r.anFree=0;anFed(r,'viec');return;}
@@ -34,7 +43,7 @@ anDay=function(){const r=G.run;if(!r||!feat('an'))return;
   // ăn ở sơn môn / quán / quê khi bụng đã vơi
   if(r.doi>=AN.anQuan){
     if(anAtSect(r))anFed(r,'tong');
-    else if((anAtQuan(r)||anAtHome(r))&&r.anTu!==0){const c=anCost(r)*AN.buaX;if(bacCan(c)){bacPay(c,'an');anFed(r,'quan');if(anMuc(r).tm)r.tamma=Math.max(0,(r.tamma||0)-anMuc(r).tm*AN.thangNo);}}}
+    else if(anAtQuan(r)||anAtHome(r))anQuanAn(r,'quan');}
   anTuAn(r);anSync(r);anBaoMoc(r);
   if(r.doi>=AN.doi.kiet){const s=S();r.hp=Math.max(1,r.hp-Math.max(1,Math.round(s.maxHp*AN.kietHp)));}
   anDungDuong(r);
