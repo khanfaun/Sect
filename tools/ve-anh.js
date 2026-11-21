@@ -174,15 +174,14 @@ const CAU = {
     console.log(name + '.webp', Math.round(fs.statSync(path.join(OUT, name + '.webp')).size / 1024) + ' KB');
   };
   await p.evaluate(m => { window.MAP = m; }, mapB64);
-  await save('nen-dong-phu', 'nen(MAP,0)', null, 0.82);
-  await save('nen-dong-phu-dem', 'nen(MAP,1)', null, 0.82);
+  // nen-dong-phu(-dem) và nhan-vat-* là tranh thật do người dùng cung cấp: không vẽ đè
   await save('nen-tran', 'tran(MAP)', null, 0.82);
   await save('dai-da', 'dai()');
   { // dựng SVG nhân vật từ src/react/chung/HoaVan.jsx
     const esb = require('esbuild'); const React = require('react'), RS = require('react-dom/server');
     const code = esb.transformSync(fs.readFileSync(path.join(root, 'src/react/chung/HoaVan.jsx'), 'utf8').replace("import { PS } from '../html';", 'const PS={ICP:{}};'), { loader: 'jsx', format: 'cjs', jsx: 'transform' }).code;
     const m = { exports: {} }; Function('module', 'exports', 'require', 'React', code)(m, m.exports, require, React);
-    for (const [k, nu] of [['nhan-vat-nam', false], ['nhan-vat-nu', true]]) {
+    for (const [k, nu] of (process.argv.includes('--nguoi-tam') ? [['nhan-vat-nam', false], ['nhan-vat-nu', true]] : [])) {
       const svg = RS.renderToStaticMarkup(React.createElement(m.exports.NguoiNgoiThien, { nu })).replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="660" ');
       await save(k, `nguoi(${JSON.stringify(svg)})`);
     }

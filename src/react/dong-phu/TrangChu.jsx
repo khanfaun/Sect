@@ -40,6 +40,8 @@ export function TrangChu() {
   return (
     <div className="z-home">
       <Anh n={dem ? 'nen-dong-phu-dem' : 'nen-dong-phu'} cls="z-nen" />
+      {/* nhân vật ngồi trên đài đá giữa hồ của tranh nền */}
+      <Anh n={(nu ? 'nhan-vat-nu' : 'nhan-vat-nam') + (dem ? '-dem' : '')} cls={'z-nguoi' + (brk ? ' sang' : '')} />
 
       {/* --- tầng 1: thẻ nhân vật + tài nguyên --- */}
       <div className="z-top">
@@ -76,9 +78,6 @@ export function TrangChu() {
 
       {/* --- tầng 3: nhân vật và hai quả cầu --- */}
       <div className="z-giua">
-        <Anh n="dai-da" cls="z-dai" />
-        <Anh n={nu ? 'nhan-vat-nu' : 'nhan-vat-nam'} cls={'z-nguoi' + (brk ? ' sang' : '')} />
-        <Anh n="cau-tu" cls="z-cau-tu" />
         <button className={'z-qc trai' + (brk ? ' on' : '')} data-act="hudBq" disabled={!!bqNo || vo}
           {...tip(vo ? 'Vô linh căn: chưa thể tu luyện' : st === 'bc' ? 'Bình cảnh: tu vi đã đầy, cần lịch luyện thêm' : brk ? 'Đủ điều kiện: vào bế quan để ' + kiepL.toLowerCase() : 'Tu vi chưa đầy')}>
           <Anh n="cau-kiep" cls="z-qc-a" /><b className="z-qc-t">{kiepL}</b>
@@ -114,10 +113,9 @@ export function TrangChu() {
       </nav>
 
       {/* --- nhật ký --- */}
-      {log.length > 0 && <div className="z-log">
+      {r.tut ? <div className="z-tut"><TanThu /></div> : log.length > 0 && <div className="z-log">
         {log.map((x, i) => <Html as="p" key={i} h={'<i>[' + x.a + ' tuổi]</i> ' + PS.txt(String(x.t))} />)}
       </div>}
-      <div className="z-tut"><TanThu /></div>
     </div>
   );
 }

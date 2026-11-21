@@ -246,3 +246,29 @@
   .z-home,.z-mtop{max-width:600px;margin:0 auto}
   #panel{left:50%!important;right:auto!important;width:min(760px,92vw)!important;transform:translateX(-50%)!important}
 }
+
+/* ===== tranh thật (do người dùng cung cấp): nhân vật đặt lên đài đá của tranh nền ===== */
+.z-nen{object-position:50% 68%}
+.z-nguoi{position:absolute!important;z-index:1!important;left:50%;bottom:auto;top:calc(67% - min(80vw,330px));width:min(80vw,330px);height:auto;max-height:none;aspect-ratio:auto;transform:translateX(-50%);filter:drop-shadow(0 10px 18px rgba(20,50,70,.3));animation:zthO 5s ease-in-out infinite;pointer-events:none}
+.z-giua{z-index:2!important}
+.z-qc{top:2%}
+/* chữ trên nền tranh: viền đậm hơn cho dễ đọc */
+.z-tu-g p,.z-tu-g .z-ll,.z-qc small{text-shadow:0 0 2px #fff,0 0 3px #fff,0 0 5px #fff,0 0 8px rgba(255,255,255,.9)}
+/* tân thủ ở màn Động phủ: một dải gọn ở chỗ nhật ký */
+.z-home .z-tut{position:relative!important;right:auto;top:auto;width:auto;margin-top:6px;z-index:2}
+.z-home .z-tut .tut{position:static!important;width:100%!important;display:flex;flex-direction:row-reverse;align-items:stretch;gap:6px}
+.z-home .z-tut .tut-tg{flex:none;align-self:center;font-size:10.5px!important;padding:3px 8px!important}
+.z-home .z-tut .tut-l{max-height:none;overflow:visible;flex:1;min-width:0}
+.z-home .z-tut .tut-c{display:flex;align-items:center;gap:6px;padding:6px 8px!important}
+.z-home .z-tut .tut-c:not(:first-child),.z-home .z-tut .tut-d,.z-home .z-tut .tut-rw{display:none}
+.z-home .z-tut .tut-go{flex:1;min-width:0}.z-home .z-tut .tut-go b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.z-home .z-tut .tut-bar{height:10px}
+/* thông báo nổi: đưa lên giữa màn, không che nút */
+#toast{bottom:auto!important;top:calc(env(safe-area-inset-top,0px) + 40%)!important}
+/* màn ngoài dùng tranh cảnh nền */
+#full{background:#cfe0e0 url(src/assets/ui/nen-dong-phu.webp) no-repeat 50% 60%/cover!important}
+.x-logo{padding-top:calc(14vh + env(safe-area-inset-top,0px))}
+.x-logo h1{color:#fff!important;text-shadow:0 0 4px rgba(20,60,70,.8),0 0 18px rgba(20,60,70,.6),0 4px 20px rgba(0,0,0,.35)}
+.x-title-k{background:rgba(246,250,250,.82);border-radius:16px;padding:14px 12px;box-shadow:var(--sh)}
+/* bản đồ: tân thủ không che cột nút */
+.z-mtop .tut{right:72px!important;width:190px!important}

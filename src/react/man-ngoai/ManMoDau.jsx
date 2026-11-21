@@ -51,8 +51,6 @@ export function ManMoDau() {
   }
   return (
     <div className="title x-title">
-      <CanhNui />
-      {ASSET.title && <img className="x-title-art" src={ASSET.title} alt="" />}
       <div className="x-logo">
         <ConDau t="浮生" />
         <h1>Phù Sinh</h1>
