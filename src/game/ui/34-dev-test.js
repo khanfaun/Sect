@@ -60,3 +60,7 @@ ACT.devCbGo=()=>{const d=devSt();const A=d.cb.A.map(x=>x.v==='main'?{v:'main',re
   UI.modal=null;if(!devCombat(A,d.cb.B))note('Không dựng được trận.');};
 // ô tìm món: gõ tới đâu lọc tới đó
 document.addEventListener('input',e=>{const el=e.target;if(!el||!el.matches||!el.matches('input[data-devq]'))return;devSt().q=el.value;render();});
+// thẻ Nhân vật (ngoại hình): độ tuổi, tuổi, tóc, áo, hạt châu
+ACT.devNhTuoi=k=>{nhDoTuoiSet(k);};
+ACT.devNhAge=a=>{nhTuoiSet(+a);};
+ACT.devNhToc=v=>{nhSet('toc',v);};ACT.devNhAo=v=>{nhSet('ao',v);};ACT.devNhChau=v=>{nhSet('chau',v);};

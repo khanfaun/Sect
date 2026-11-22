@@ -3445,6 +3445,22 @@ const TESTS = {
     run("(()=>{const sc=G.run.scene;for(let i=0;i<20000&&!sc.done;i++){if(sc.dodge)dodgeResolve(null);else if(sc.qte)qteResolve(null);else combatStep(0.05);}})()");
     ok(run("G.run.scene.over")==='lose', 'yêu thú Luyện Khí thua thiên kiêu Nguyên Anh');run("combatContinue()");ok(!!run("G.run")&&!run("G.run.scene"), 'thua trận thử không chết');
   },
+  // ngoại hình theo độ tuổi (core2/84): tự đổi hình theo tuổi, độ tuổi chưa có ảnh thì mượn gần nhất, đổi tuổi giữ đúng thọ nguyên
+  ngoai_hinh() {
+    const seed0 = fixtureSeed; // không làm lệch seed của các bài sau
+    fresh("G.run.pham=0;G.run.realm=3;G.run.g='nam'"); fixtureSeed = seed0;
+    ok(run("nhTuoiOf(16)")==='teen'&&run("nhTuoiOf(25)")==='young'&&run("nhTuoiOf(45)")==='middle'&&run("nhTuoiOf(80)")==='elder', 'bốn độ tuổi theo số tuổi');
+    ok(run("nhHien('teen')")==='young'&&run("nhHien('elder')")==='elder', 'thiếu niên chưa có ảnh: mượn thanh niên; lão giả có ảnh riêng');
+    ok(run("ngoaiHinh().toc")==='r1'&&run("ngoaiHinh().ao")==='hero', 'mới sinh: tóc búi, lục bào');
+    const life=run("S().life");run("nhDoTuoiSet('elder')");
+    ok(Math.abs(run("G.run.age")-75)<0.01&&run("ngoaiHinh().toc")==='e1'&&run("ngoaiHinh().ao")==='e1', 'chọn lão giả: tuổi 75, tự đổi sang tóc bạc, áo lão giả');
+    run("W().t+=HY*2;G.run.age=G.run.birthAge+(W().t-G.run.bornT)/HY");ok(Math.abs(run("G.run.age")-77)<0.01, 'thời gian trôi: tuổi vẫn tính đúng từ birthAge (77)');
+    run("nhTuoiSet(9999)");ok(run("G.run.age")<life&&run("G.run.age")>=life-1, 'đổi tuổi không vượt thọ nguyên ('+life+')');
+    run("nhSet('chau','gold')");ok(run("ngoaiHinh().chau")==='gold', 'chọn hạt châu kim hoả');
+    run("nhSet('chau','auto')");ok(run("ngoaiHinh().chau")===(run("canBreak()")?'gold':'teal'), 'hạt châu tự động theo đột phá');
+    run("delete G.run.ngoai");ok(run("ngoaiHinh().chauChon")==='auto', 'bản lưu cũ không có ngoại hình: dùng mặc định');
+  }
+
 };
 
 if (args.includes('--list')) { console.log(Object.keys(TESTS).join('\n')); process.exit(0); }

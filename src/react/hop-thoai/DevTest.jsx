@@ -1,11 +1,44 @@
 // Hộp Dev test: các tab con thử nghiệm (luật ở core2/83-dev-test.js, nút ở ui/34-dev-test.js).
 import { Html, PS } from '../html';
 import { Ic, pcs, tip } from '../chung';
+import { NhanVatThien } from '../giao-dien/NhanVatThien';
 
-const TABS = [['ai', 'Tự chơi'], ['tran', 'Dàn trận'], ['cg', 'Cảnh giới'], ['map', 'Bản đồ'], ['vat', 'Vật phẩm'], ['kv', 'Khí vận'], ['thuong', 'Thương thế'], ['fx', 'Hiệu ứng']];
+const TABS = [['nv', 'Nhân vật'], ['ai', 'Tự chơi'], ['tran', 'Dàn trận'], ['cg', 'Cảnh giới'], ['map', 'Bản đồ'], ['vat', 'Vật phẩm'], ['kv', 'Khí vận'], ['thuong', 'Thương thế'], ['fx', 'Hiệu ứng']];
 const DEV_FX = [['bt', 'Đột phá'], ['xk', 'Xung kích'], ['talup', 'Tiềm chất lên Thiên kiêu'], ['taldn', 'Tiềm chất giảm'], ['rldn', 'Rớt cảnh giới'], ['lowhp', 'Máu thấp'], ['heal', 'Hồi phục']];
 const KV_TABS = [['tt', 'Tiên thiên khí vận'], ['the', 'Thể chất'], ['ht', 'Hậu thiên khí vận']];
 const realmOpts = (pham) => (pham ? [[-1, 'Phàm nhân']] : []).concat(PS.REALM.map((n, i) => [i, n]));
+
+// Thẻ Nhân vật (giống DEV của bản mẫu): độ tuổi, tuổi, kiểu tóc + gương mặt, trang phục, hạt châu.
+// Đổi độ tuổi là đổi tuổi thật của nhân vật (thọ nguyên còn lại đổi theo).
+// đổi lựa chọn: gọi thẳng hàm luật rồi vẽ lại (select có giá trị React giữ nên không dùng data-chg)
+const doiNh = e => { PS.ACT[e.target.dataset.nh](e.target.value); PS.dbg('nh.ui', { k: e.target.dataset.nh, v: e.target.value }); PS.render(); };
+
+function NgoaiHinh() {
+  const r = PS.G.run, s = PS.S(), N = PS.ngoaiHinh(), T = PS.NH_TUOI, H = T[N.hien];
+  const con = Math.max(0, s.life - r.age);
+  return <>
+    <div className="dev-nv">
+      <div className="dev-nv-xem"><NhanVatThien /></div>
+      <div className="dev-nv-ds">
+        <p><b>{Math.floor(r.age)} tuổi</b> · thọ nguyên {s.life} năm · còn <b className={con < s.life * 0.12 ? 'bad' : ''}>{Math.floor(con)} năm</b></p>
+        <p className="hint">Độ tuổi hiện tại: {T[N.tuoi].n}{N.hien !== N.tuoi ? ' (chưa có ảnh, đang mượn hình ' + H.n.toLowerCase() + ')' : ''}{N.nu ? ' · nhân vật nữ chưa có bộ ảnh ngồi thiền' : ''}</p>
+        <label>Độ tuổi
+          <select data-nh="devNhTuoi" value={N.tuoi} onChange={doiNh}>
+            {Object.entries(T).map(([k, x]) => <option key={k} value={k} disabled={x.mau >= s.life}>{x.n} ({x.tu}{x.den < 1e8 ? '–' + (x.den - 1) : '+'}){PS.nhCo(k) ? '' : ' – chưa có ảnh'}{x.mau >= s.life ? ' – vượt thọ nguyên' : ''}</option>)}
+          </select></label>
+        <label>Tuổi: {Math.floor(r.age)}
+          <input type="range" min="1" max={Math.max(1, Math.floor(s.life - 1))} step="1" value={Math.floor(r.age)} onChange={e => { PS.ACT.devNhAge(+e.target.value); PS.render(); }} /></label>
+        <label>Tóc + gương mặt
+          <select data-nh="devNhToc" value={N.toc} onChange={doiNh}>{H.toc.map(([v, n]) => <option key={v} value={v}>{n}</option>)}</select></label>
+        <label>Trang phục
+          <select data-nh="devNhAo" value={N.ao} onChange={doiNh}>{H.ao.map(([v, n]) => <option key={v} value={v}>{n}</option>)}</select></label>
+        <label>Hạt châu
+          <select data-nh="devNhChau" value={N.chauChon} onChange={doiNh}>{PS.NH_CHAU.map(([v, n]) => <option key={v} value={v}>{n}</option>)}</select></label>
+      </div>
+    </div>
+    <p className="hint">Sau này mỗi độ tuổi có bộ tóc, áo riêng: thêm vào NH_TUOI (core2/84-ngoai-hinh.js) và ảnh ch-head-*, ch-hmv-*, ch-of-* trong src/assets/ui là tự dùng.</p>
+  </>;
+}
 
 function TuChoi() {
   const on = PS.devAiOn(), I = PS.devAiInfo();
@@ -147,6 +180,7 @@ export function DevTest() {
       <h3><Ic n="bolt" /> Dev test</h3>
       <div className="tabs dev-tabs">{TABS.map(([k, n]) => <button key={k} className={d.tab === k ? 'on' : ''} data-act="devTab" data-arg={k}>{n}</button>)}</div>
       <div className="dev-body">
+        {d.tab === 'nv' && <NgoaiHinh />}
         {d.tab === 'ai' && <TuChoi />}
         {d.tab === 'tran' && <DanTran d={d} />}
         {d.tab === 'cg' && <CanhGioi d={d} />}

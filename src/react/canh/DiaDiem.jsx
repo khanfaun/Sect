@@ -4,6 +4,7 @@ import { Tranh } from '../html';
 import { Chips, Cost, Ib, Ic, tip } from '../chung';
 import { Card } from './Khung';
 import { NoiChonViec } from './NoiChonViec';
+import { anhCongTrinh } from '../giao-dien/cong-trinh';
 
 // Một nút việc làm ở địa điểm
 function NutViec({ a, n, num }) {
@@ -24,6 +25,25 @@ function NutViec({ a, n, num }) {
       <span className="cn">{num}.</span>
       {hot && <span className="ex" {...tip('Đang có chuyện đặc biệt, không chờ lâu')}>!</span>}
       <span className="ct">{label}</span>{x}
+    </button>
+  );
+}
+
+// Một công trình (toà nhà / vật) trên màn địa điểm: bấm = chọn việc đó (như chọn một mục trong bảng địa điểm cũ).
+// Nơi chọn việc (trà lâu, khách điếm…) thì mở danh sách lựa chọn của nơi đó ở bảng dưới.
+function CongTrinh({ a, n, nhom, on }) {
+  const { G, VENUE_N, PL_N } = PS;
+  const r = G.run, w = PS.W(), A = anhCongTrinh(a.a, nhom);
+  const hot = VENUE_N[a.a] && n.vsp && n.vsp.k === r.kiep && n.vsp.v === a.a && n.vsp.until > w.t;
+  const qa = a.a === 'quyan' && PS.UI.confirm === 'quyan';
+  const ten = qa ? 'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc' : PL_N[a.a] || VENUE_N[a.a] || a.l;
+  const sub = VENUE_N[a.a] ? (a.dis ? 'đang đóng cửa' : '') : (a.h && !a.dis ? PS.durH(a.h) : '');
+  return (
+    <button className={'ct-b' + (A.nho ? ' nho' : '') + (on ? ' on' : '') + (a.dis ? ' dis' : '') + (a.a === 'quyan' ? ' soft' : '')} data-act="pact" data-arg={a.a} disabled={!!a.dis}
+      data-anh={A.ten} {...tip((ten !== a.l ? a.l + '\n' : '') + (a.tip || ''))}>
+      <span className="ct-i"><img src={A.src} alt="" draggable="false" /></span>
+      {hot && <span className="ex" {...tip('Đang có chuyện đặc biệt, không chờ lâu')}>!</span>}
+      <span className="ct-n">{ten}</span>{sub && <small className="ct-s">{sub}</small>}
     </button>
   );
 }
@@ -85,51 +105,53 @@ export function DiaDiem({ sc }) {
       <span className="cn">{num()}.</span><span className="ex">!</span><span className="ct">{EVMAP[id].n || 'Một chuyện lạ'}</span>
     </button>
   ));
-  const groupEls = groups.map(([name, L]) => [
-    <h4 key={'h' + name} className="sgrp"><Ib n={GRP_IC[name] || 'more'} c="soft" />{name}</h4>,
-    <div key={'d' + name} className="choices">{L.map(a => <NutViec key={a.a} a={a} n={n} num={num()} />)}</div>,
-  ]);
   const pimg = ASSET.place[n.type] || ASSET.place[(PS.NEWT[n.type] || {}).as];
-  const art = pimg
-    ? <div className="art strip pimg"><img className="asset" src={pimg} alt="" /></div>
-    : <Tranh seed={n.name} reg={r.region} type={n.type} cls="strip" />;
+  const ctrinh = groups.flatMap(([name, L]) => L.map(a => <CongTrinh key={a.a} a={a} n={n} nhom={name} on={sc.venue === a.a} />));
+  const specials = qs.length + big.length + ents.length + evs.length;
   return (
-    <Card title={n.name} sub="" cls="tall place" art={art}
-      head={<>
+    <section className="scard tall place pl-home" data-n={ctrinh.length}>
+      <div className="pl-nen">{pimg ? <img src={pimg} alt="" /> : <Tranh seed={n.name} reg={r.region} type={n.type} cls="strip" />}</div>
+      <header className="sc-h pl-top">
+        <h2>{n.name}</h2>
         <button className="xb sc-x" data-act="leave" {...tip('Đóng, rời khỏi nơi này')} aria-label="Đóng"><Ic n="close" /></button>
         <div className="pl-meta">
           <span className={'nc-g dg' + dg} {...tip(PS.dangerWhy(n))}><i></i>{PS.DTAG[dg]}</span>
           <span>{PS.capS(PS.TYPE_NAME[n.type])}</span><span>{PS.REG[r.region].n}</span>
           <span>Linh khí {PS.LK_N[PS.lkOf(n)].toLowerCase()}</span>
         </div>
-      </>}
-      foot={<>
+        {M && <div className="pl-kv"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div>{PS.SETTLE.includes(n.type) && <div><small>Danh tiếng nơi này</small><span>{PS.danhName(n)}</span></div>}</div>}
+      </header>
+      <div className="pl-pho">
+        {ctrinh.length ? <div className="pl-ct">{ctrinh}</div> : <p className="hint pl-trong">Nơi này không có công trình nào để vào.</p>}
+      </div>
+      <div className={'pl-pan' + (sc.venue ? ' vn' : '')}>
+        {sc.venue && VENUE_N[sc.venue] && <NoiChonViec n={n} v={sc.venue} />}
+        <LoiKe sc={sc} />
+        {qs.length > 0 && <>
+          <h3 className="grp big"><Ib n="scroll" c="gold" />Nhiệm vụ</h3>
+          <div className="choices">
+            {qs.map(q => (
+              <button key={q.id} className="ch qrow qdo" data-act="qDo" data-arg={q.id} style={{ '--pc': PS.qpc(PS.questGrade(q)).replace(/^--pc:/, '') }}>
+                <span className="ct">{q.kind === 'den' ? 'Giao tận tay' : 'Lùng tìm mục tiêu'} · {q.text}</span>
+                <span className="qmeta"><span className="qgr">{PS.QGRADE[PS.questGrade(q)]}</span><Cost h={q.kind === 'den' ? 1 : 2} st={0} /></span>
+              </button>
+            ))}
+          </div>
+        </>}
+        {(big.length > 0 || ents.length > 0) && <>
+          <h3 className="grp big"><Ib n="flag" c="gold" />Chuyện lớn</h3>
+          <div className="choices">{bigBtns}{entBtns}</div>
+        </>}
+        {evs.length > 0 && <>
+          <h3 className="grp now"><Ib n="bell" c="seal" />Trước mắt<i {...tip('Những chuyện này không chờ ai. Bỏ mặc lâu thì tự mất.')}>biến mất sau chừng {Math.max(1, Math.round((n.evs.until - w.t) / PS.HY))} năm</i></h3>
+          <div className="choices">{evBtns}</div>
+        </>}
+        {!sc.venue && !specials && <p className="hint pl-goi">Chạm vào một công trình để vào.</p>}
+      </div>
+      <footer className="sc-f">
         {n.type !== 'ai' && <button className="btn" data-act="exStat" {...tip('Xem nơi này có gì: yêu ma, vật liệu, tỉ lệ')}>Thăm dò</button>}
         <span className="grow"></span><button className="btn" data-act="leave">Rời đi</button>
-      </>}>
-      {M && <div className="pl-kv"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div>{PS.SETTLE.includes(n.type) && <div><small>Danh tiếng nơi này</small><span>{PS.danhName(n)}</span></div>}</div>}
-      {sc.venue && VENUE_N[sc.venue] && <NoiChonViec n={n} v={sc.venue} />}
-      <LoiKe sc={sc} />
-      {qs.length > 0 && <>
-        <h3 className="grp big"><Ib n="scroll" c="gold" />Nhiệm vụ</h3>
-        <div className="choices">
-          {qs.map(q => (
-            <button key={q.id} className="ch qrow qdo" data-act="qDo" data-arg={q.id} style={{ '--pc': PS.qpc(PS.questGrade(q)).replace(/^--pc:/, '') }}>
-              <span className="ct">{q.kind === 'den' ? 'Giao tận tay' : 'Lùng tìm mục tiêu'} · {q.text}</span>
-              <span className="qmeta"><span className="qgr">{PS.QGRADE[PS.questGrade(q)]}</span><Cost h={q.kind === 'den' ? 1 : 2} st={0} /></span>
-            </button>
-          ))}
-        </div>
-      </>}
-      {(big.length > 0 || ents.length > 0) && <>
-        <h3 className="grp big"><Ib n="flag" c="gold" />Chuyện lớn</h3>
-        <div className="choices">{bigBtns}{entBtns}</div>
-      </>}
-      {evs.length > 0 && <>
-        <h3 className="grp now"><Ib n="bell" c="seal" />Trước mắt<i {...tip('Những chuyện này không chờ ai. Bỏ mặc lâu thì tự mất.')}>biến mất sau chừng {Math.max(1, Math.round((n.evs.until - w.t) / PS.HY))} năm</i></h3>
-        <div className="choices">{evBtns}</div>
-      </>}
-      {groups.length > 0 && <><h3 className="grp"><Ib n="book" c="ink" />Thường nhật</h3>{groupEls}</>}
-    </Card>
+      </footer>
+    </section>
   );
 }

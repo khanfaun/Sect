@@ -54,8 +54,24 @@ const TESTS = {
     ok(await ev(p, () => /^data:image\/webp/.test(ASSET.item.kiem) && /^data:image\/webp/.test(ASSET.item['pill:hoixuan']) && /^data:image\/webp/.test(ASSET.hero.me)), 'pháp bảo, đan dược, chân dung dùng ảnh mới');
     ok(await ev(p, () => getComputedStyle(document.querySelector('.btn') || document.body).borderImageSource.includes('data:image') || !document.querySelector('.btn')), 'nút dùng khung ảnh vàng');
     await ev(p, () => { const dp = regionOf(0).nodes.find(n => n.dp); G.run.at = dp.id; arrive(dp.id); openPlace(dp.id); UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(300);
-    ok(await ev(p, () => !!document.querySelector('.bq-sky .doll3') && !!document.querySelector('.bq-sky .bq-nen')), 'bế quan: phong cảnh và nhân vật ngồi thiền');
+    ok(await ev(p, () => !!document.querySelector('.bq-home .bq-stage .doll3') && !!document.querySelector('.bq-sky .bq-nen')), 'bế quan: phong cảnh và nhân vật ngồi thiền');
+    ok(await ev(p, () => !!document.querySelector('.bq-home .orbb.l') && !!document.querySelector('.bq-home .orbb.r') && document.querySelectorAll('.bq-home .bq-cult .hb').length === 2), 'bế quan toàn màn hình: hai hạt cầu Đột phá / Tâm ma, thẻ cảnh giới có thanh tu vi và lịch luyện');
+    ok(await ev(p, () => { const L = [...document.querySelectorAll('.bq-home .doll3 *')].flatMap(e => e.getAnimations().map(a => a.animationName)); return ['flp', 'brz', 'hsw', 'gspin2'].every(k => L.includes(k)) || G.run.g === 'nu'; }), 'nhân vật ngồi thiền có chuyển động áo, ngực, tóc, hạt châu');
     await shot(p, 'giao-dien-moi');
+    // Dev test > Nhân vật: đổi độ tuổi là đổi tuổi thật, hình đổi theo
+    await ev(p, () => { UI.modal = null; G.run.g = 'nam'; G.run.pham = 0; G.run.realm = 3; render(); ACT.devOpen(); devSt().tab = 'nv'; render(); }); await p.waitForTimeout(200);
+    ok(await ev(p, () => !!document.querySelector('.mbox.dev .dev-nv .doll3') && !!document.querySelector('select[data-nh="devNhTuoi"]')), 'Dev test có thẻ Nhân vật: xem trước, chọn độ tuổi');
+    await p.selectOption('select[data-nh="devNhTuoi"]', 'elder'); await p.waitForTimeout(200);
+    ok(await ev(p, () => Math.round(G.run.age) === 75 && document.querySelector('.dev-nv .doll3').dataset.toc === 'e1' && /còn/.test(document.querySelector('.dev-nv-ds').innerText)), 'chọn Lão giả: tuổi thành 75, hình đổi sang lão giả, hiện số năm còn lại');
+    await p.selectOption('select[data-nh="devNhChau"]', 'gold'); await p.waitForTimeout(150);
+    ok(await ev(p, () => document.querySelector('.dev-nv .doll3').dataset.chau === 'gold'), 'đổi hạt châu sang kim hoả');
+    // địa điểm: chuyển cảnh, công trình bấm được, bấm trà lâu hiện lựa chọn trà lâu
+    await ev(p, () => { UI.modal = null; const r = G.run; r.st = 1e4; const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'thanh' && n.state !== 'ruin'); r.at = n.id; r.region = n.r; arrive(n.id); openPlace(n.id); W().t += ((9 - tHour(W().t) + 24) % 24); render(); }); await p.waitForTimeout(300);
+    ok(await ev(p, () => !!document.querySelector('#sheet .scard.pl-home') && document.querySelectorAll('.pl-home .ct-b img[src^="data:image"]').length >= 4), 'địa điểm hiện thành cảnh, có các công trình có ảnh');
+    await p.locator('.pl-home .ct-b[data-arg="tea"]').click(); await p.waitForTimeout(200);
+    ok(await ev(p, () => G.run.scene.venue === 'tea' && !!document.querySelector('.pl-pan .venue .vn-o') && !!document.querySelector('.ct-b.on[data-arg="tea"]')), 'bấm công trình Trà lâu: hiện lựa chọn của trà lâu');
+    await shot(p, 'dia-diem');
+    await ev(p, () => { G.run.scene = null; render(); });
     await ev(p, () => { UI.modal = null; G.run.scene = null; render(); });
   },
   async content(p) {
@@ -392,7 +408,7 @@ const TESTS = {
   async muusinh(p) {
     await ev(p, () => {const n=W().regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh'&&n.state!=='ruin');G.run.at=n.id;G.run.lamNgay=null;UI.panel=null;UI.modal=null;openPlace(n.id);render();});
     await p.waitForTimeout(200);
-    ok(await ev(p, () => /Mưu sinh/.test((document.querySelector('.place')||document.body).innerText)), 'thẻ thành có nhóm Mưu sinh');
+    ok(await ev(p, () => /Mưu sinh/.test((document.querySelector('.place')||document.body).innerText) || !!document.querySelector('.pl-home .ct-b[data-arg="muusinh"]')), 'thẻ thành có nhóm Mưu sinh (công trình Mưu sinh)');
     await ev(p, () => {ACT.pact('muusinh');render();});
     await p.waitForTimeout(150);
     const t = await ev(p, () => (document.querySelector('.mmsinh')||{}).innerText||'');

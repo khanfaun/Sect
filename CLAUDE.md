@@ -35,6 +35,8 @@ Người dùng không phải lập trình viên: trả lời ngắn, ít thuật
 - Lịch luyện nhận ×`LL_BOOST` (20-ngo-tinh-khi-van.js). Bế quan: linh lực hồi ×`BQ_MP_MUL` nhanh hơn khí huyết, xuất quan không còn hồi đầy cả hai (24-hoi-phuc.js).
 
 - **Giao diện mới (kiểu Ngọc Hành Trình)**: ảnh ở `src/assets/ui/*.webp` (nhúng vào trang khi build), gắn vào `ASSET`/`artUri`/`npcAv` trong `src/react/giao-dien/anh.js` (dùng `I('tên')` trong JSX). Màu, nút khung ảnh, tab, thanh dưới… ở `src/react/giao-dien/giao-dien.css` (nạp sau style.css, dùng tiền tố `#app` để đè). Nhân vật ngồi thiền: `giao-dien/NhanVatThien.jsx` + `doll3.css`. Thanh dưới 7 ô ở `ban-do/Nav.jsx`; nút "Thêm" nằm trên thẻ trạng thái (`.hud-more`). Bài kiểm tra: `giao_dien_moi` trong test-ui.js.
+- **Bế quan** (`hop-thoai/BeQuan.jsx`, khung `KhungBeQuan`): toàn màn hình như màn tu luyện bản mẫu (hạt cầu Đột phá/Tâm ma, thẻ cảnh giới, bảng chọn ở dưới). **Ngoại hình** theo 4 độ tuổi ở core2/84-ngoai-hinh.js (`NH_TUOI`, `ngoaiHinh()`, `nhTuoiSet`), lưu `r.ngoai`; tự đổi hình theo `r.age`; Dev test có thẻ Nhân vật. Thêm bộ ảnh cho một độ tuổi: điền `toc`/`ao` vào `NH_TUOI` + ảnh `ch-head-<tóc>`, `ch-hmv-<tóc>` (mặt nạ tóc), `ch-of-<áo>`. Bài luật `ngoai_hinh` (để cuối danh sách: chen lên đầu làm lệch seed các bài sau).
+- **Địa điểm** (`canh/DiaDiem.jsx`): cảnh toàn màn hình, mỗi việc trong `PGROUP` là một công trình (`CongTrinh`, `data-act="pact"`); ảnh công trình ghép ở `giao-dien/cong-trinh.js` (tạm dùng ảnh bản mẫu, có ảnh mới thì đổi tên ở đó). Nơi chọn việc (trà lâu…) mở danh sách ở bảng dưới (`.pl-pan`).
 
 ## Nguồn nội dung sau khi chuẩn hóa
 - Đọc `docs/content/GUIDELINE.md` khi sửa cốt truyện/dữ liệu. Nguồn chính ở `content/`; `archive/` không được nạp.

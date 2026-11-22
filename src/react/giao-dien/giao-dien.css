@@ -176,14 +176,55 @@ body{font-family:var(--font);letter-spacing:0}
 #full{background:linear-gradient(#eef4ef,#e3ece5)}
 :root[data-theme=dark] #full{background:linear-gradient(#123029,#0f2621)}
 
-/* ---------- bế quan: phong cảnh + nhân vật ngồi thiền ---------- */
-#app .bq-sky{position:relative;height:230px;border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 1.5px var(--gl)}
-#app .bq-sky .bq-nen{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
-#app .bq-sky .doll3{bottom:2%;height:92%;z-index:1}
-#app .bq-sky .bq-tint{z-index:2;pointer-events:none}
-#app .bq-sky .bq-time{z-index:3}
+/* ---------- bế quan: toàn màn hình như màn tu luyện của bản mẫu ---------- */
+#modal:has(.bq-home){padding:0!important;place-items:stretch!important;background:#0e2a24!important}
+#app #modal .mbox.bq-home{position:relative;width:100%;height:100%;max-height:none!important;max-width:none;border:0!important;border-radius:0!important;padding:0!important;
+  overflow:hidden;display:flex;flex-direction:column;background:#cfe0d8!important;box-shadow:none;animation:none!important}
+.bq-home .bq-sky{position:absolute;inset:0;z-index:0;overflow:hidden}
+.bq-home .bq-sky .bq-nen{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%}
+.bq-home .bq-sky::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.28),transparent 20%,transparent 55%,rgba(14,42,36,.6));pointer-events:none}
+.bq-home .bq-tint{position:absolute;inset:0;pointer-events:none}
+.bq-home .bq-time{position:absolute;right:10px;top:calc(48px + env(safe-area-inset-top,0px));z-index:3;font-size:.72em;font-weight:600;color:#fff;background:rgba(14,42,36,.6);border-radius:10px;padding:0 8px}
+.bq-home .bq-top{position:relative;z-index:5;display:flex;align-items:center;gap:6px;padding:calc(6px + env(safe-area-inset-top,0px)) 8px 0}
+.bq-home .bq-top .tabs{flex:1;margin:0;padding:3px;background:rgba(251,250,243,.9);border:1px solid var(--gl)!important;border-radius:16px}
+.bq-home .bq-stage{position:relative;z-index:3;flex:1;min-height:180px}
+.bq-home .bq-stage .doll3{left:50%;bottom:-2%;height:100%;max-width:118%;transform:translateX(-50%)}
+.bq-home .orbb{position:absolute;top:6%;width:84px;text-align:center;z-index:4}
+.bq-home .orbb.l{left:4px}.bq-home .orbb.r{right:4px}
+.bq-home .orbb .o{position:relative;width:70px;height:70px;margin:0 auto;animation:gdFl 3s ease-in-out infinite}
+.bq-home .orbb.r .o{animation-delay:-1.5s}
+@keyframes gdFl{50%{transform:translateY(-5px)}}
+.bq-home .orbb .o img{position:absolute;inset:-13px;width:96px;height:96px;max-width:none}
+.bq-home .orbb .o b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--disp);font-weight:400;font-size:14px;color:#fff;text-shadow:0 0 6px #000,0 1px 2px #000;line-height:1}
+.bq-home .orbb small{display:inline-block;margin-top:2px;font-size:.66em;font-weight:600;background:rgba(251,250,243,.92);border:1px solid var(--gd);border-radius:8px;padding:0 6px;white-space:nowrap;color:var(--ink);max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.bq-home .orbb.rdy .o img{filter:drop-shadow(0 0 10px #ffd86a) brightness(1.15)}
+.bq-home .orbb.hi small{background:#f8e0dc;color:var(--seal);border-color:var(--seal)}
+.bq-home .bq-cult{position:relative;z-index:5;margin:0 6px 5px;display:flex;align-items:center;gap:6px;background:linear-gradient(rgba(251,250,243,.96),rgba(236,242,236,.94));border:1px solid var(--gl);border-radius:14px;padding:5px 6px;box-shadow:0 3px 10px rgba(14,42,36,.3)}
+.bq-home .bq-cult .rb{width:52px;flex:none;text-align:center;font-size:.62em;font-weight:600;color:var(--jd2);display:block}
+.bq-home .bq-cult .rb i{display:block;width:38px;height:38px;margin:0 auto 1px;border-radius:50%;padding:4px;background:linear-gradient(var(--jd),var(--jd2));box-shadow:0 0 0 2px var(--gd)}
+.bq-home .bq-cult .rb img{width:100%;height:100%;object-fit:contain}
+.bq-home .bq-cult .mid{flex:1;min-width:0;text-align:center}
+.bq-home .bq-cult .mid>b{font-family:var(--disp);font-weight:400;font-size:1em;display:block;color:var(--ink)}
+.bq-home .bq-cult .tvrow{grid-template-columns:4.6em 1fr 3.4em;margin:2px 0;font-size:.74em}
+.bq-home .bq-cult .tvrow .hb{height:10px}
+.bq-home .bq-pan{position:relative;z-index:5;flex:none;max-height:44%;overflow-y:auto;margin:0 6px 6px;padding:8px 10px 10px;border-radius:14px;background:linear-gradient(rgba(251,250,243,.97),rgba(238,244,239,.96));border:1px solid var(--gl);box-shadow:0 3px 10px rgba(14,42,36,.3);overscroll-behavior:contain}
+.bq-home .bq-pan h3{display:none}
+.bq-home.cgbox .bq-pan{max-height:52%}
+:root[data-theme=dark] .bq-home .bq-cult,:root[data-theme=dark] .bq-home .bq-pan{background:linear-gradient(rgba(22,51,44,.97),rgba(15,38,33,.97))}
+:root[data-theme=dark] .bq-home .bq-top .tabs{background:rgba(22,51,44,.9)}
+:root[data-theme=dark] .bq-home .bq-cult .mid>b{color:var(--ink)}
+@media (max-height:640px){.bq-home .bq-pan{max-height:50%}.bq-home .orbb .o{width:54px;height:54px}.bq-home .orbb .o img{inset:-10px;width:74px;height:74px}}
 .doll3.nu .nu-i{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .doll3.nu .hal{position:absolute;left:50%;top:55%;width:40%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:screen}
+
+/* ---------- Dev test: thẻ Nhân vật ---------- */
+.dev-nv{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
+.dev-nv-xem{position:relative;flex:0 0 170px;height:190px;border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 1.5px var(--gl);background:radial-gradient(circle at 50% 60%,#fff,rgba(255,255,255,0) 65%),url(../../assets/ui/nen-may.webp) center/cover}
+.dev-nv-xem .doll3{bottom:4px;height:92%}
+.dev-nv-ds{flex:1;min-width:180px;display:flex;flex-direction:column;gap:6px;font-size:.9em}
+.dev-nv-ds label{display:flex;flex-direction:column;gap:2px;font-size:.85em;color:var(--ink2)}
+.dev-nv-ds select{padding:4px 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;color:var(--ink)}
+.dev-nv-ds input[type=range]{width:100%}
 
 /* ---------- bảng nhân vật: khung nhân vật ---------- */
 .nvt-khung{position:relative;height:250px;margin:6px 0 8px;border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 1.5px var(--gl);
@@ -225,3 +266,57 @@ body{font-family:var(--font);letter-spacing:0}
 .tm-soon .tm-anh{display:flex;justify-content:center;align-items:flex-end;gap:2px;margin:4px 0}
 .tm-soon .tm-anh img{width:84px;height:84px;filter:drop-shadow(0 6px 5px rgba(14,42,36,.4))}
 .tm-soon .tm-anh img:nth-child(2){width:110px;height:110px}
+
+/* ==========================================================================
+   Màn địa điểm: chuyển cảnh vào nơi đó, phủ cả màn hình; các công trình bấm được
+   (bấm = chọn việc), bảng dưới hiện lời kể và lựa chọn của nơi đang vào.
+   ========================================================================== */
+#sheet:has(.scard.pl-home){top:0!important;left:0!important;right:0!important;bottom:calc(60px + env(safe-area-inset-bottom,0px))!important;z-index:8;justify-content:stretch}
+#app .scard.pl-home{position:relative;height:100%;max-height:none;border:0;border-radius:0;box-shadow:none;background:#cfe0d8;display:flex;flex-direction:column;overflow:hidden}
+:root[data-anim="1"] #app .scard.pl-home{animation:plIn .5s cubic-bezier(.22,1,.36,1) both}
+@keyframes plIn{from{opacity:0;transform:scale(1.06);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+.pl-home .pl-nen{position:absolute;inset:0;z-index:0}
+.pl-home .pl-nen img,.pl-home .pl-nen canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.pl-home .pl-nen::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.3),transparent 25%,transparent 55%,rgba(14,42,36,.55))}
+#app .pl-home .pl-top{position:relative;z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin:calc(6px + env(safe-area-inset-top,0px)) 6px 0;padding:6px 8px 6px 12px;
+  background:linear-gradient(90deg,rgba(251,250,243,.96),rgba(251,250,243,.86));border:1px solid var(--gl);border-radius:12px;box-shadow:0 2px 6px rgba(14,42,36,.2)}
+#app .pl-home .pl-top h2{flex:1;font-size:1.3em;margin:0;min-width:0}
+#app .pl-home .pl-top .sc-x{position:static}
+#app .pl-home .pl-meta{flex-basis:100%;display:flex;flex-wrap:wrap;gap:3px;margin:0}
+#app .pl-home .pl-meta span{font-size:.68em;padding:0 6px;border-radius:8px;background:#fff;border:1px solid var(--line)}
+#app .pl-home .pl-kv{flex-basis:100%;display:flex;gap:10px;margin:0;padding:0;border:0;font-size:.72em}
+#app .pl-home .pl-kv>div{border:0!important;padding:0!important;display:flex;gap:4px;align-items:baseline}
+#app .pl-home .pl-kv small{color:var(--ink3);text-transform:none;letter-spacing:0}
+/* khu công trình */
+.pl-home .pl-pho{position:relative;z-index:2;flex:1;min-height:120px;overflow-y:auto;padding:10px 6px 26px;overscroll-behavior:contain;scrollbar-width:none}
+.pl-home .pl-pho::-webkit-scrollbar{display:none}
+.pl-home .pl-ct{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 2px;align-items:start}
+.pl-home .ct-b{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0;min-width:0;background:none;border:0;transition:transform .15s}
+.pl-home .ct-b:nth-child(3n+2){transform:translateY(26px)}
+.pl-home .ct-b:not(:disabled):hover .ct-i img,.pl-home .ct-b.on .ct-i img{filter:drop-shadow(0 0 10px rgba(255,232,150,.95)) drop-shadow(0 6px 5px rgba(14,42,36,.45));transform:scale(1.05)}
+.pl-home .ct-b:not(:disabled):active{transform:scale(.97)}
+.pl-home .ct-b:nth-child(3n+2):not(:disabled):active{transform:translateY(26px) scale(.97)}
+.pl-home .ct-i{display:block;width:96px;height:96px;max-width:100%}
+.pl-home .ct-i img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 6px 5px rgba(14,42,36,.4));transition:transform .2s,filter .2s}
+.pl-home .ct-b.nho .ct-i{width:62px;height:62px;margin:18px 0 16px;border-radius:50%;padding:9px;background:radial-gradient(#fffdf5,#e8f0ea);box-shadow:0 0 0 2px var(--gd),0 4px 8px rgba(14,42,36,.4)}
+.pl-home .ct-n{display:inline-block;margin-top:-10px;position:relative;max-width:100%;background:linear-gradient(#fffdf5,#f1ead3);border:1px solid var(--gd);border-radius:8px;padding:0 6px;font-size:.7em;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-home .ct-b.nho .ct-n{margin-top:-8px}
+.pl-home .ct-b.on .ct-n{background:linear-gradient(var(--jd),var(--jd2));color:#fff;border-color:var(--gd)}
+.pl-home .ct-s{font-size:.6em;color:#fff;text-shadow:0 1px 2px #0e2a24,0 0 4px #0e2a24;margin-top:1px}
+.pl-home .ct-b.dis{opacity:1}.pl-home .ct-b.dis .ct-i img{filter:grayscale(1) opacity(.55)}
+.pl-home .ct-b .ex{position:absolute;top:4px;right:18%;z-index:2;width:18px;height:18px;border-radius:50%;background:var(--seal);color:#fff;font:700 11px/18px var(--font);box-shadow:0 0 0 1.5px #fff;animation:gdFl 1.6s ease-in-out infinite}
+.pl-home .pl-trong{color:#fff;text-shadow:0 1px 3px #0e2a24;text-align:center;margin-top:30%}
+/* bảng dưới: lời kể + lựa chọn */
+.pl-home .pl-pan{position:relative;z-index:3;flex:none;max-height:40%;overflow-y:auto;margin:0 6px;padding:6px 10px;border-radius:14px 14px 0 0;
+  background:linear-gradient(rgba(251,250,243,.97),rgba(238,244,239,.96));border:1px solid var(--gl);border-bottom:0;box-shadow:0 -3px 10px rgba(14,42,36,.25);overscroll-behavior:contain}
+.pl-home .pl-pan.vn{max-height:58%}
+.pl-home .pl-pan .pl-goi{text-align:center;margin:4px 0}
+#app .pl-home .sc-f{position:relative;z-index:3;margin:0 6px 6px;padding:6px 8px;border:1px solid var(--gl);border-top:1px solid var(--line);border-radius:0 0 14px 14px;background:rgba(251,250,243,.97)}
+.pl-home .venue{margin:2px 0 6px}
+:root[data-theme=dark] #app .pl-home .pl-top,:root[data-theme=dark] .pl-home .pl-pan,:root[data-theme=dark] #app .pl-home .sc-f{background:linear-gradient(rgba(22,51,44,.97),rgba(15,38,33,.97))}
+:root[data-theme=dark] #app .pl-home .pl-meta span{background:var(--paper2)}
+:root[data-theme=dark] .pl-home .ct-n{background:linear-gradient(#2a4a41,#16332c);color:var(--ink)}
+@media (max-height:640px){.pl-home .ct-i{width:74px;height:74px}.pl-home .pl-pan{max-height:46%}}
+#app .pl-home .pl-kv{flex-wrap:wrap;gap:0 10px}
+#app .pl-home .pl-kv small,#app .pl-home .pl-kv span{white-space:nowrap;display:inline}
+#app .pl-home .pl-kv small::after{content:':'}
