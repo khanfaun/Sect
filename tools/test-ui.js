@@ -34,6 +34,30 @@ const ev = (p, f, a) => p.evaluate(f, a);
 const shot = async (p, name) => { if (SHOT) await p.screenshot({ path: path.join(SHOT, name + '.png') }); };
 
 const TESTS = {
+  // giao diện mới (kiểu Ngọc Hành Trình): thanh dưới 7 ô có ảnh, nút Nhân vật/Túi đồ, nhân vật ngồi thiền, ảnh vật phẩm
+  async giao_dien_moi(p) {
+    const nav = await ev(p, () => [...document.querySelectorAll('#nav .nv')].map(b => [b.textContent, !!b.querySelector('img[src^="data:image"]')]));
+    ok(nav.length === 7 && nav.every(x => x[1]), 'thanh dưới 7 ô, ô nào cũng có ảnh: ' + nav.map(x => x[0]).join(', '));
+    ok(await ev(p, () => document.querySelector('#nav .nv.c.on') && document.querySelector('#nav .nv.c').textContent === 'Bản đồ'), 'ô giữa là Bản đồ, đang sáng khi không mở bảng');
+    const clk = s => ev(p, s => { document.querySelector(s).click(); return 1; }, s);
+    await clk('#nav .nv-bag'); await p.waitForTimeout(150);
+    ok(await ev(p, () => UI.panel === 'char' && UI.tab.char === 'bag' && document.querySelector('#nav .nv-bag.on')), 'bấm Túi đồ: mở túi đồ');
+    await clk('#nav .nv-char'); await p.waitForTimeout(300);
+    const nvc = await ev(p, () => [UI.panel, UI.tab.char, !!document.querySelector('.nvt-khung .doll3')]);
+    ok(nvc[0] === 'char' && nvc[1] !== 'bag' && nvc[2], 'bấm Nhân vật khi đang ở túi: chuyển sang Căn cơ (không đóng), có nhân vật ngồi thiền ' + JSON.stringify(nvc));
+    await clk('#nav .nv-char'); await p.waitForTimeout(150);
+    ok(await ev(p, () => UI.panel === null), 'bấm Nhân vật lần nữa: đóng bảng');
+    await clk('.hud-more'); await p.waitForTimeout(150);
+    ok(await ev(p, () => UI.panel === 'more'), 'nút Thêm trên thẻ trạng thái mở bảng Thêm');
+    await clk('#nav .nv-map'); await p.waitForTimeout(150);
+    ok(await ev(p, () => UI.panel === null), 'ô Bản đồ đóng bảng');
+    ok(await ev(p, () => /^data:image\/webp/.test(ASSET.item.kiem) && /^data:image\/webp/.test(ASSET.item['pill:hoixuan']) && /^data:image\/webp/.test(ASSET.hero.me)), 'pháp bảo, đan dược, chân dung dùng ảnh mới');
+    ok(await ev(p, () => getComputedStyle(document.querySelector('.btn') || document.body).borderImageSource.includes('data:image') || !document.querySelector('.btn')), 'nút dùng khung ảnh vàng');
+    await ev(p, () => { const dp = regionOf(0).nodes.find(n => n.dp); G.run.at = dp.id; arrive(dp.id); openPlace(dp.id); UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(300);
+    ok(await ev(p, () => !!document.querySelector('.bq-sky .doll3') && !!document.querySelector('.bq-sky .bq-nen')), 'bế quan: phong cảnh và nhân vật ngồi thiền');
+    await shot(p, 'giao-dien-moi');
+    await ev(p, () => { UI.modal = null; G.run.scene = null; render(); });
+  },
   async content(p) {
     await ev(p, () => {
       const r=G.run;r.pham=0;r.realm=1;r.st=10000;r.evCount={};r.evRecent=[];r.contentLast={};

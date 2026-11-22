@@ -3,7 +3,9 @@
 // (hàm bqUpd) cho nhanh. Vì vậy mỗi ô đó chỉ chứa đúng một chuỗi chữ.
 import { useLayoutEffect, useRef } from 'react';
 import { Html, PS } from '../html';
-import { Ic, Tranh, tip } from '../chung';
+import { Ic, tip } from '../chung';
+import { I } from '../giao-dien/anh';
+import { NhanVatThien } from '../giao-dien/NhanVatThien';
 
 function Tabs({ m }) {
   const noBq = PS.bqNoWhy();
@@ -65,7 +67,8 @@ function TroiBeQuan({ G }) {
   const ph = PS.partOf(w.t);
   return (
     <div className="bq-sky">
-      <Tranh seed={'bequan' + G.run.at} reg={G.run.region} type="dong" cls="mart" figs="nhan:0.5:0.5:0:bq" />
+      <img className="bq-nen" src={I('nen-tu-luyen')} alt="" />
+      <NhanVatThien />
       <i className="bq-tint" style={{ background: `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${Math.min(0.5, c[3] * 2.2).toFixed(3)})` }} />
       <small className="bq-time">{PHAN[ph]} · {Math.floor(h)}h</small>
     </div>

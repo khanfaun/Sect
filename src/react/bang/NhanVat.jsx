@@ -5,6 +5,8 @@ import { Ib, Ic, Tabs, tip, tah } from '../chung';
 import { Win } from './Khung';
 import { TuiDo } from './TuiDo';
 import { SoHoc, KyNang } from './SoHoc';
+import { NhanVatThien } from '../giao-dien/NhanVatThien';
+import { I } from '../giao-dien/anh';
 
 // Một dòng tên — giá trị (giống kvRow()). v là chuỗi HTML (mức đánh giá có màu…)
 function Kv({ n, v, t, th, cls, tut }) {
@@ -136,6 +138,7 @@ export function NhanVat() {
   return (
     <Win title={G.run.ten} cls="tall wide">
       <Tabs k="char" list={TABS} cur={tab} />
+      {tab === 'base' && <div className="nvt-khung"><NhanVatThien /><b className="tag"><img src={I('sk-sword')} alt="" />Lực chiến {PS.fmtN(Math.round(PS.lucChien()))}</b><small className="tag2">{PS.realmLabel()}</small></div>}
       {tab === 'base' && <CanCo />}
       {tab === 'bag' && <TuiDo />}
       {tab === 'hoc' && <SoHoc />}

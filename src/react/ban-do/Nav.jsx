@@ -1,17 +1,29 @@
-// Thanh điều hướng dưới cùng trên bản đồ: tông môn, linh thú, sổ tay, giao tình, thêm.
+// Thanh điều hướng dưới cùng (kiểu bản mẫu Ngọc Hành Trình): 7 ô có ảnh, ô giữa (Bản đồ) nổi lên.
+// Túi đồ / Nhân vật cùng mở bảng nhân vật (khác thẻ); "Thêm" nằm ở nút bánh răng trên thẻ trạng thái.
 import { PS } from '../html';
-import { Ib, tip } from '../chung';
+import { tip } from '../chung';
+import { I } from '../giao-dien/anh';
 
-const ITEMS = [['tong', 'flag', 'Tông môn'], ['pets', 'paw', 'Linh thú'], ['journal', 'book', 'Sổ tay'], ['bonds', 'people', 'Giao tình'], ['more', 'more', 'Thêm']];
+// [khoá, ảnh, chữ, data-act, data-arg]
+const ITEMS = [
+  ['bag', 'it-ruong', 'Túi đồ', 'bagOpen'],
+  ['char', 'it-ao-lam', 'Nhân vật', 'navChar'],
+  ['tong', 'it-co', 'Tông môn', 'panel', 'tong'],
+  ['map', 'cau-tu', 'Bản đồ', 'closePanel'],
+  ['pets', 'it-trung', 'Linh thú', 'panel', 'pets'],
+  ['journal', 'it-bi-kip', 'Sổ tay', 'panel', 'journal'],
+  ['bonds', 'it-lenh-ngoc', 'Giao tình', 'panel', 'bonds'],
+];
 
 export function Nav() {
   const { G, UI } = PS;
   const r = G.run;
   const dot = { journal: r && r.quests.some(q => q.state === 'open'), pets: r && r.eggs && r.eggs.length > 0 };
-  return ITEMS.map(([k, i, n]) => (
-    <button key={k} className={'nv' + (UI.panel === k ? ' on' : '')} data-act="panel" data-arg={k}>
-      <Ib n={i} /><span>{n}</span>
-      {dot[k] && <i className="dot soft" {...tip(k === 'journal' ? 'Đang có nhiệm vụ chưa xong' : 'Có trứng linh thú đang ấp')} />}
+  const on = k => k === 'map' ? !UI.panel : k === 'bag' ? UI.panel === 'char' && UI.tab.char === 'bag' : k === 'char' ? UI.panel === 'char' && UI.tab.char !== 'bag' : UI.panel === k;
+  return ITEMS.map(([k, im, n, act, arg]) => (
+    <button key={k} className={'nv nv-' + k + (k === 'map' ? ' c' : '') + (on(k) ? ' on' : '')} data-act={act} data-arg={arg} aria-label={n}>
+      <i className="nv-i"><img src={I(im)} alt="" draggable="false" /></i><span>{n}</span>
+      {dot[k] && <em className="dot soft" {...tip(k === 'journal' ? 'Đang có nhiệm vụ chưa xong' : 'Có trứng linh thú đang ấp')} />}
     </button>
   ));
 }

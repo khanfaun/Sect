@@ -3,6 +3,7 @@
 import { Html, PS } from '../html';
 import { Ic, Tranh, pcs, tip } from '../chung';
 import { ThanhHanhDong, TheMinh, TheNguoi } from './TheNguoi';
+import { I } from '../giao-dien/anh';
 
 const H = ({ h }) => <Html style={{ display: 'contents' }} h={h} />;
 const PT_SVG = () => PS.ptFigSVG();
@@ -103,9 +104,9 @@ function BangLenh({ sc, me, rp, pickMode }) {
   </>;
   return (
     <div className="skills main4">
-      <button className="sk" data-act="menu" data-arg="atk"><span className="cbi"><Ic n="sword" /></span><span className="sn">Tấn công</span></button>
-      <button className="sk" data-act="menu" data-arg="def"><span className="cbi"><Ic n="shield" /></span><span className="sn">Phòng thủ</span></button>
-      <button className="sk" data-act="menu" data-arg="bag" disabled={!cp.length}><span className="cbi"><Ic n="bag" /></span><span className="sn">Túi đồ<small>{cp.length} món · {nl} niệm lực</small></span></button>
+      <button className="sk" data-act="menu" data-arg="atk"><span className="cbi"><img src={I('sk-sword')} alt="" /></span><span className="sn">Tấn công</span></button>
+      <button className="sk" data-act="menu" data-arg="def"><span className="cbi"><img src={I('sk-shield')} alt="" /></span><span className="sn">Phòng thủ</span></button>
+      <button className="sk" data-act="menu" data-arg="bag" disabled={!cp.length}><span className="cbi"><img src={I('it-ruong')} alt="" /></span><span className="sn">Túi đồ<small>{cp.length} món · {nl} niệm lực</small></span></button>
       <button className="sk" data-act="skill" data-arg="_wait" {...tip('Qua lượt: không làm gì, nhường lượt')}><span className="cbi"><Ic n="skip" /></span><span className="sn">Qua lượt</span></button>
     </div>
   );

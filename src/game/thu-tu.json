@@ -390,5 +390,6 @@
  "ui/32-dai-mong.js",
  "ui/33-hop-thu.js",
  "ui/34-dev-test.js",
+ "ui/35-giao-dien-moi.js",
  "nap:devBotNap"
 ]

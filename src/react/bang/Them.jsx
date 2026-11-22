@@ -3,6 +3,7 @@
 import { Html, PS } from '../html';
 import { Ib, Ic, Tabs, tip } from '../chung';
 import { Win } from './Khung';
+import { I } from '../giao-dien/anh';
 import { CauHinh, OnOff, SetRow } from './CauHinh';
 
 const MENU = [['cfg', 'gear', 'Cấu hình', 'Đồ họa, khung hình, hiển thị, lối chơi'], ['layer', 'layers', 'Lớp bản đồ', 'Bật tắt tên, thực thể qua lại'], ['legend', 'list', 'Chú giải', 'Ý nghĩa các ký hiệu trên bản đồ'], ['notes', 'pin', 'Ghi chú', 'Các điểm ngươi đã ghim'], ['help', 'info', 'Cách chơi', 'Tóm tắt luật chơi']];
@@ -119,7 +120,7 @@ export function TongMon() {
   const R = PS.relations();
   return (
     <Win title="Tông môn" cls="tall">
-      <div className="soon"><Ib n="flag" c="soft" /><b>Tông môn</b><p className="hint">Phần này đang được xây dựng: lập tông, chiêu đệ tử, xây điện các.</p></div>
+      <div className="soon tm-soon"><div className="tm-anh">{['bd-tang-kinh', 'bd-chinh-dien', 'bd-luyen-khi'].map(k => <img key={k} src={I(k)} alt="" />)}</div><b>Tông môn</b><p className="hint">Phần này đang được xây dựng: lập tông, chiêu đệ tử, xây điện các.</p></div>
       <p className="hint">{R.mine ? 'Ngươi là đệ tử tông môn.' : 'Ngươi là tán tu, chưa vào tông môn nào.'}</p>
       <div className="rows">
         {R.sects.map((s, i) => <div key={i} className="row"><span className="r-i sect-i"><img src={PS.sectPic(s.n, s.al)} alt="" /></span><span className="r-t"><b>{s.n}</b><small>{AL[s.al] || s.al || ''}</small></span></div>)}

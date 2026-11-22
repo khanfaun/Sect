@@ -12,6 +12,10 @@ import { HOP_THOAI } from './hop-thoai';
 import { BANG } from './bang';
 import { TranDau } from './tran/TranDau';
 import { PS } from './html';
+import { ganAnh } from './giao-dien/anh';
+import './giao-dien/giao-dien.css';
+
+ganAnh();
 
 const VIEWS = {
   Title: ManMoDau,

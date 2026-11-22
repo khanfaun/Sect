@@ -1,0 +1,33 @@
+/* Nhân vật ngồi thiền nhiều lớp (lấy từ bản mẫu): áo, vạt áo đung đưa, ngực thở, tóc lay, hạt châu xoay */
+@keyframes gspin2{to{transform:rotate(360deg)}}
+.doll3{position:absolute;left:50%;bottom:16%;height:64%;aspect-ratio:1;transform:translateX(-50%);pointer-events:none;filter:drop-shadow(0 10px 14px rgba(14,42,36,.35))}
+.doll3 img{position:absolute;inset:0;width:100%;height:100%;max-width:none}
+.doll3 .ost{-webkit-mask-image:radial-gradient(ellipse 11.49% 7.4% at 7.78% 91.34%,transparent 72%,#000 100%),radial-gradient(ellipse 11.49% 7.4% at 92.07% 91.34%,transparent 72%,#000 100%),radial-gradient(ellipse 18.2% 13.05% at 49.92% 40.86%,transparent 72%,#000 100%);mask-image:radial-gradient(ellipse 11.49% 7.4% at 7.78% 91.34%,transparent 72%,#000 100%),radial-gradient(ellipse 11.49% 7.4% at 92.07% 91.34%,transparent 72%,#000 100%),radial-gradient(ellipse 18.2% 13.05% at 49.92% 40.86%,transparent 72%,#000 100%);-webkit-mask-composite:source-in;mask-composite:intersect;}
+.doll3 .ofl{-webkit-mask-image:radial-gradient(ellipse 11.49% 7.4% at 7.78% 91.34%,#000 72%,transparent 100%);mask-image:radial-gradient(ellipse 11.49% 7.4% at 7.78% 91.34%,#000 72%,transparent 100%);transform-origin:18.12% 84.68%;animation:flp 3.6s ease-in-out infinite}
+.doll3 .ofr{-webkit-mask-image:radial-gradient(ellipse 11.49% 7.4% at 92.07% 91.34%,#000 72%,transparent 100%);mask-image:radial-gradient(ellipse 11.49% 7.4% at 92.07% 91.34%,#000 72%,transparent 100%);transform-origin:81.72% 84.68%;animation:flp 3.6s ease-in-out infinite reverse;animation-delay:-1.1s}
+@keyframes flp{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg)}}
+.doll3 .och{-webkit-mask-image:radial-gradient(ellipse 18.2% 13.05% at 49.92% 40.86%,#000 72%,transparent 100%);mask-image:radial-gradient(ellipse 18.2% 13.05% at 49.92% 40.86%,#000 72%,transparent 100%);transform-origin:49.92% 53.92%;animation:brz 4.2s ease-in-out infinite}
+@keyframes brz{0%,100%{transform:scale(1,1)}50%{transform:scale(1.014,1.024)}}
+.doll3 .hg{position:absolute;inset:0;isolation:isolate;-webkit-mask-size:100% 100%;mask-size:100% 100%}
+.doll3 .hg i{position:absolute;inset:0;-webkit-mask-size:100% 100%;mask-size:100% 100%}
+.doll3 .hg i.tn{mix-blend-mode:color}
+.doll3 .hair{transform-origin:51.8% 6.92%;animation:hsw 4.5s ease-in-out infinite}
+.doll3 .hair.s-e1{transform-origin:49.04% 10.26%}
+@keyframes hsw{0%,100%{transform:rotate(-0.6deg)}50%{transform:rotate(0.6deg)}}
+.doll3 .glw{position:absolute;inset:0;transform-origin:49.92% 54.79%}
+.doll3 .gl{transform-origin:49.92% 54.79%;animation:gspin2 7s linear infinite}
+.doll3 .hal,.doll3 .hco{position:absolute;left:49.92%;top:54.79%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:screen;will-change:opacity,transform;pointer-events:none}
+.doll3 .hal{width:52.19%;animation:hbr 3.8s ease-in-out infinite}
+.doll3 .hco{width:16.18%;animation:hcr 3.8s ease-in-out infinite}
+.doll3 .hal.teal{background:radial-gradient(circle,rgba(120,255,235,.85) 0%,rgba(40,225,205,.42) 30%,rgba(20,200,180,.14) 52%,rgba(20,200,180,0) 70%)}
+.doll3 .hal.gold{background:radial-gradient(circle,rgba(255,225,140,.95) 0%,rgba(255,165,40,.5) 30%,rgba(255,120,0,.18) 54%,rgba(255,110,0,0) 72%)}
+.doll3 .hco.teal{background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(210,255,250,.75) 28%,rgba(120,255,240,.25) 55%,rgba(120,255,240,0) 72%)}
+.doll3 .hco.gold{background:radial-gradient(circle,rgba(255,255,240,1) 0%,rgba(255,240,180,.85) 28%,rgba(255,200,90,.3) 55%,rgba(255,190,80,0) 72%)}
+@keyframes hbr{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(.92)}50%{opacity:.95;transform:translate(-50%,-50%) scale(1.06)}}
+@keyframes hcr{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+.doll3 .hal.gold{animation-name:hbg}
+@keyframes hbg{0%,100%{opacity:.62;transform:translate(-50%,-50%) scale(.94)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}}
+.doll3 .hco.gold{animation-name:hcg}
+@keyframes hcg{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(.92)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}}
+.doll3 .shd{position:absolute;left:49.92%;top:93.52%;width:74.71%;height:9.57%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse at center,rgba(10,30,24,.42) 0%,rgba(10,30,24,.2) 45%,rgba(10,30,24,0) 72%)}
+.nvt-khung .doll3{bottom:22px;height:82%}
