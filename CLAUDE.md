@@ -34,6 +34,7 @@ Người dùng không phải lập trình viên: trả lời ngắn, ít thuật
 - Bài kiểm tra nào phải ghi đè tạm tệp nội dung thật thì phải cất bản gốc rồi trả lại (bài `dm_kiem` từng xoá mất MA02.json và ba_do.json).
 - Lịch luyện nhận ×`LL_BOOST` (20-ngo-tinh-khi-van.js). Bế quan: linh lực hồi ×`BQ_MP_MUL` nhanh hơn khí huyết, xuất quan không còn hồi đầy cả hai (24-hoi-phuc.js).
 
+- **Giao diện mới (kiểu Ngọc Hành Trình)**: ảnh ở `src/assets/ui/*.webp` (nhúng vào trang khi build), gắn vào `ASSET`/`artUri`/`npcAv` trong `src/react/giao-dien/anh.js` (dùng `I('tên')` trong JSX). Màu, nút khung ảnh, tab, thanh dưới… ở `src/react/giao-dien/giao-dien.css` (nạp sau style.css, dùng tiền tố `#app` để đè). Nhân vật ngồi thiền: `giao-dien/NhanVatThien.jsx` + `doll3.css`. Thanh dưới 7 ô ở `ban-do/Nav.jsx`; nút "Thêm" nằm trên thẻ trạng thái (`.hud-more`). Bài kiểm tra: `giao_dien_moi` trong test-ui.js.
 
 ## Nguồn nội dung sau khi chuẩn hóa
 - Đọc `docs/content/GUIDELINE.md` khi sửa cốt truyện/dữ liệu. Nguồn chính ở `content/`; `archive/` không được nạp.
