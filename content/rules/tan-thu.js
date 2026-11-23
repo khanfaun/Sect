@@ -35,6 +35,6 @@ const TUT=[
  {id:'HD27',g:'H',n:'Trúc Cơ',d:'Đột phá Trúc Cơ thành công.',need:1,tick:'trucco',st:'tutTrucCo',go:{hud:'hudBt'},rw:{pill:[['phacanh',1]],st:50}},
 ];
 // TUT_GRAD: số nhiệm vụ đã nhận thưởng để "tốt nghiệp"; TUT_GRAD_PTS: điểm luân hồi cộng lúc hết kiếp; TUT_MAX: số mở cùng lúc sau nhóm A
-const TUT_GRAD=22, TUT_GRAD_PTS=5, TUT_MAX=3;
+const TUT_GRAD=22, TUT_GRAD_PTS=5, TUT_MAX=5;
 // Nguyện vọng (HN A.9.3: 8 mục của C §3.3 + "Diệt thế", "Giàu có" của B). Chỉ là lời ghi, không là buff.
 const TUT_WISH=[['du_song','Đủ sống'],['giu_nguoi','Giữ người thân'],['nghe','Lập thân bằng nghề'],['quyen','Nắm quyền'],['bao_thu','Báo thù'],['nhap_dao','Tìm đường nhập đạo'],['phi_thang','Đột phá phi thăng'],['luan_hoi','Truy dấu luân hồi'],['giau','Giàu có'],['diet_the','Diệt thế']];

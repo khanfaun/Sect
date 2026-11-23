@@ -93,7 +93,7 @@ const Map2=(()=>{
   function zFit(){return Math.min(viewH()/WORLD_H,W0/WORLD_W);}
   function zMin(){return Math.max(viewH()/WORLD_H,W0/WORLD_W);} // phủ kín khung nhìn, không lòi mép
   function zDeep(){return Math.min(zFit(),zMin()*0.6);}
-  let bT=0,bN=0;function bump(){const n=performance.now();if(n-bT>1500)bN=0;if(n-bT>150||bN===0)bN++;bT=n;if(bN>=2&&!wide){wide=true;}}
+  let bT=0,bN=0;function bump(){const n=performance.now();if(n-bT>1500)bN=0;if(n-bT>150||bN===0)bN++;bT=n;if(bN>=3&&!wide){wide=true;}}
   function zFloor(){return wide?zDeep():zMin();} // lăn chuột chỉ tới zMin; sau khi bấm nút thu nhỏ thì tạm xuống tới mức bản đồ rộng bằng màn hình
   function zfNow(){return clamp(Math.log(cam.z/zMin())/Math.log(ZMAX/zMin()),0,1);}
   function worldAt(sx,sy){return [(sx-W0/2)/cam.z+cam.x,(sy-VCY)/cam.z+cam.y];}

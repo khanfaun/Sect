@@ -25,9 +25,9 @@ function tutEval(){const r=G.run;if(!tutOn())return;const T=r.tut;
     if(v>(T.prog[id]||0))T.prog[id]=Math.min(t.need,v);if((T.prog[id]||0)>=t.need){T.ready[id]=1;dbg('tut.ready',{id});}}}
 function tutFill(){const r=G.run;if(!tutOn())return;const T=r.tut;
   T.open=T.open.filter(id=>tutById(id)&&!tutClosed(T,id));
-  const A=TUT.filter(t=>t.g==='A'&&!tutClosed(T,t.id));
-  if(A.length){T.open=[A[0].id];}
-  else{for(const t of TUT){if(T.open.length>=TUT_MAX)break;if(tutClosed(T,t.id)||T.open.includes(t.id))continue;T.open.push(t.id);}}
+  // mới vào chỉ có 1 việc; xong một việc thì mở thêm dần, tối đa TUT_MAX (4-5) việc cùng lúc
+  const cap=Math.min(TUT_MAX,1+Object.keys(T.done).length+Object.keys(T.skip).length);
+  for(const t of TUT){if(T.open.length>=cap)break;if(tutClosed(T,t.id)||T.open.includes(t.id))continue;T.open.push(t.id);}
   tutEval();}
 function tutTick(kind,n){const r=G.run;if(!tutOn())return 0;const T=r.tut;n=n==null?1:n;let k=0;
   for(const id of T.open){const t=tutById(id);if(!t||t.tick!==kind||T.ready[id])continue;

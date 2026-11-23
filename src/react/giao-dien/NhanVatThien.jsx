@@ -28,3 +28,14 @@ export function NhanVatThien({ orb, cls, nut }) {
     </div>
   );
 }
+
+// Chân dung tròn: cắt phần đầu của chính hình nhân vật ngồi thiền, nên luôn khớp ngoại hình (tuổi, tóc, áo) ở thẻ Trang bị / túi đồ.
+// Trả về chuỗi HTML để dùng cả trong giao diện cũ (trận đánh) lẫn React.
+export function avatarHTML() {
+  const N = PS.ngoaiHinh ? PS.ngoaiHinh() : { toc: 'r1', ao: 'hero', hien: 'young' };
+  if (N.nu) return `<span class="avd nu"><span class="doll3 av-doll"><img class="nu-i" src="${I('de-tu-1')}" alt=""></span></span>`;
+  const o = I('ch-of-' + N.ao), h = I('ch-head-' + N.toc), v = I('ch-hmv-' + N.toc);
+  const mk = `-webkit-mask-image:url(${v});mask-image:url(${v})`;
+  return `<span class="avd t-${N.toc}"><span class="doll3 av-doll"><img class="ost" src="${o}" alt=""><span class="hg s-${N.toc}"><img src="${h}" alt=""></span><span class="hg hair s-${N.toc}" style="${mk}"><img src="${h}" alt=""></span></span></span>`;
+}
+if (typeof window !== 'undefined') window.avatarMe = avatarHTML; // PS là Proxy đọc theo tên toàn cục, nên gắn vào window

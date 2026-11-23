@@ -79,8 +79,9 @@ const TESTS = {
     const P = await R('#panel');
     ok(P && P[0] >= trai[2] - 1 && P[1] + P[3] <= day[1] + 1, 'bảng mở ở vùng giữa ' + P);
     await ev(p, () => { UI.tab.char = 'tb'; render(); }); await p.waitForTimeout(200);
-    const g = await R('.tb-giua'), cot = await ev(p, () => getComputedStyle(document.querySelector('.tb-duoi')).gridTemplateColumns.split(' ').length);
-    ok(g && g[2] / g[3] >= 0.95 && g[2] / g[3] <= 1.3 && cot === 3, 'trang bị: khung nhân vật gần vuông, 3 cột dưới ' + g + ' cột ' + cot);
+    const g = await R('.tb-giua'), pb = await R('.tb-duoi > .tb-nhom:nth-child(1)'), dd = await R('.tb-duoi > .tb-nhom:nth-child(2)'), pk = await R('.tb-duoi > .tb-nhom:nth-child(3)'), bo = await R('.tb-ben');
+    ok(g && g[2] / g[3] >= 0.8 && g[2] / g[3] <= 1.3 && pb && dd && pb[0] + pb[2] <= g[0] + 2 && dd[0] >= g[0] + g[2] - 2 && pk && pk[1] >= g[1] + g[3] - 2 && bo && bo[1] >= pk[1] + pk[3] - 2, 'trang bị PC: pháp bảo | nhân vật | đan điền, pháp khí rồi bộ + chỉ số dưới cùng ' + [g, pb, dd, pk, bo].join(' / '));
+    await shot(p, 'trang-bi');
     await ev(p, () => { UI.panel = 'more'; UI.tab.more = 'cfg'; render(); }); await p.waitForTimeout(200);
     const M = await R('#panel');
     ok(M && M[2] < 1440 * 0.5 && Math.abs(M[0] + M[2] / 2 - (trai[2] + 1440) / 2) < 30, 'bảng Thêm là hộp giữa vùng trống ' + M);
@@ -98,6 +99,20 @@ const TESTS = {
     ok(await ev(p, () => !document.documentElement.dataset.pc && !document.querySelector('.pc-trai') && document.querySelectorAll('#nav .nv').length === 7), 'màn hẹp: trở lại giao diện điện thoại');
   },
   // bảng treo thưởng mở thành hộp nổi (vẫn ở địa điểm), hộp nổi ở địa điểm có nút X; trang bị không còn áo choàng; túi đồ ghi tên tiền tệ
+  // việc ở địa điểm (cổng sơn môn, thăm dò…) mở sự kiện thành hộp trắng ngay trên cảnh địa điểm
+  async su_kien_hop(p) {
+    await p.setViewportSize({ width: 1440, height: 860 });
+    await ev(p, () => { const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'tong' && n.state !== 'ruin'); G.run.at = n.id; G.run.region = n.r; arrive(n.id); UI.panel = null; openPlace(n.id); render(); }); await p.waitForTimeout(250);
+    await ev(p, () => { ACT.pact('congmon'); render(); }); await p.waitForTimeout(200);
+    ok(await ev(p, () => UI.modal && UI.modal.k === 'pconf'), 'bấm Cổng sơn môn: hộp xác nhận');
+    const t0 = await ev(p, () => W().t);
+    await p.locator('[data-act="pactGo"]').first().click(); await p.waitForTimeout(300);
+    const st = await ev(p, (t0) => ({ sc: G.run.scene && G.run.scene.type, id: G.run.scene && G.run.scene.id, modal: UI.modal && UI.modal.k, dt: W().t - t0, hop: !!document.querySelector('.pl-evm'), txt: (document.querySelector(".pl-evm")||{}).innerText }), t0);
+    ok(st.sc === 'event' && st.hop && !!st.txt, 'Đồng ý: sự kiện hiện thành hộp ' + JSON.stringify(st).slice(0, 300));
+    await shot(p, 'su-kien-hop');
+    ok(await ev(p, () => !!document.querySelector('.pl-evm .choices button, .pl-evm [data-act="next"]')), 'hộp có nút chọn / tiếp tục');
+    await ev(p, () => { G.run.scene = null; UI.modal = null; render(); });
+  },
   async hop_dia_diem(p) {
     await ev(p, () => { const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'thanh' && n.state !== 'ruin'); G.run.at = n.id; G.run.region = n.r; arrive(n.id); UI.panel = null; openPlace(n.id); render(); }); await p.waitForTimeout(200);
     await ev(p, () => { ACT.pact('board'); render(); }); await p.waitForTimeout(200);

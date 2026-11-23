@@ -1,6 +1,17 @@
 // ---------- màn bản đồ: thẻ trạng thái, nút bản đồ, thẻ địa điểm ----------
 
-function clkStr(t){return `<span>ngày ${Math.floor((t%HM)/HD)+1} · tháng ${tMonth(t)+1}</span><b class="ck-y">Năm ${tYear(t)}</b><span>giờ ${gioName(t)}</span>`;}
+// biểu tượng buổi trong ngày và mùa (dùng cho cả điện thoại lẫn máy tính)
+const CK_IC={
+  sang:['#e0a21c','<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/>','Buổi sáng'],
+  chieu:['#e0742a','<path d="M6.5 16a5.5 5.5 0 0 1 11 0"/><path d="M3 16h18M12 5v2.5M4.6 9.6l1.8 1.5M19.4 9.6l-1.8 1.5M6 20h12"/>','Buổi chiều'],
+  toi:['#7a5cc2','<path d="M19 14.5A8 8 0 1 1 9.5 5a6.5 6.5 0 0 0 9.5 9.5z"/>','Buổi tối'],
+  dem:['#3f5aa8','<path d="M18 14.5A7.5 7.5 0 1 1 9.5 6a6 6 0 0 0 8.5 8.5z"/><path d="M19 3v4M17 5h4"/>','Ban đêm'],
+  xuan:['#d4688a','<path d="M12 21v-8"/><path d="M12 13c0-4 3-6.5 7-6.5 0 4-3 6.5-7 6.5zM12 15c0-3-2.2-5-5.5-5 0 3 2.2 5 5.5 5z"/>','Mùa xuân'],
+  ha:['#d9552b','<path d="M3 9c2-2 3-2 5 0s3 2 5 0 3-2 5 0M3 14c2-2 3-2 5 0s3 2 5 0 3-2 5 0M3 19c2-2 3-2 5 0s3 2 5 0 3-2 5 0"/>','Mùa hạ'],
+  thu:['#c0771e','<path d="M12 21V11M12 4c-4 2-6 5-6 8 2 2 4 2 6 0 2 2 4 2 6 0 0-3-2-6-6-8z"/>','Mùa thu'],
+  dong:['#3f8fc4','<path d="M12 2v20M3.5 7l17 10M3.5 17l17-10M9.5 3.8 12 6l2.5-2.2M9.5 20.2 12 18l2.5 2.2"/>','Mùa đông']};
+function ckIc(k){const x=CK_IC[k];return `<i class="ck-i" style="color:${x[0]}" title="${x[2]}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="${x[2]}">${x[1]}</svg></i>`;}
+function clkStr(t){return `<b class="ck-y">Năm ${tYear(t)}</b><span class="ck-d">ngày ${Math.floor((t%HM)/HD)+1} · tháng ${tMonth(t)+1}</span><span class="ck-g">giờ ${gioName(t)}</span><span class="ck-p">${ckIc(partOf(t))}${ckIc(seasonOf(t))}</span>`;}
 // thẻ thông tin quận: hiện khi chạm một ô đất trống
 
 const WICON={ngoai:'M5 19L19 5M8 8l3 3M13 13l3 3',bong:'M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z',gay:'M6 6l12 12M4 6a2 2 0 114 0 2 2 0 11-4 0M16 18a2 2 0 114 0 2 2 0 11-4 0M11 9l-2 2M15 13l-2 2',

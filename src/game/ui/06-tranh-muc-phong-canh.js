@@ -42,7 +42,7 @@ const Art=(()=>{
   function key(c){return c.dataset.scene+'|'+c.width+'x'+c.height+'|'+CFG.theme;}
   function fill(c){const d=Math.min(window.devicePixelRatio||1,gfxLv()?1.5:1);const r=c.getBoundingClientRect();const W=Math.max(60,Math.round((r.width||320)*d)),H=Math.max(40,Math.round((r.height||140)*d));if(c.width!==W||c.height!==H){c.width=W;c.height=H;}
     const k=key(c);let src=cache.get(k);
-    if(!src){src=document.createElement('canvas');src.width=W;src.height=H;const g=src.getContext('2d');const [seed,reg,type,night,figs]=c.dataset.scene.split('~');paint(g,W,H,seed,+reg||0,type||'',night==='1');
+    if(!src){src=document.createElement('canvas');src.width=W;src.height=H;const g=src.getContext('2d');const [seed,reg,type,night,figs]=c.dataset.scene.split('~');if(seed!=='!f')paint(g,W,H,seed,+reg||0,type||'',night==='1');
       if(figs)figs.split(',').forEach(f=>{const [kind,fx,fs,flip,sd]=f.split(':');figure(g,W*(+fx),H*0.93,H*(+fs),kind,sd||seed,flip==='1');});
       cache.set(k,src);if(cache.size>14)cache.delete(cache.keys().next().value);}
     c.getContext('2d').drawImage(src,0,0);}

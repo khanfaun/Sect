@@ -153,7 +153,7 @@ const ACT={
   descTg:()=>{UI.descHide=!UI.descHide;},
   exStat:()=>{UI.modal={k:'explore'};},
   exGo:()=>{UI.modal=null;placeAct('explore');},
-  evGo:i=>{const r=G.run,n=nodeById(r.scene.id);const id=n.evs&&n.evs.L[+i];if(!id)return;n.evs.L.splice(+i,1);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place'&&!startEvent(id))G.run.scene.msg=[contentText('content.event_expired')];},
+  evGo:i=>{const r=G.run,n=nodeById(r.scene.id);const id=n.evs&&n.evs.L[+i];if(!id)return;n.evs.L.splice(+i,1);if(!n.evs.L.length)n.evs.until=Math.max(n.evs.until,W().t+3*HY);advanceTime(2);if(G.run&&G.run.scene&&G.run.scene.type==='place'&&!startEvent(id))G.run.scene.msg=[contentText('content.event_expired')];},
   meet:id=>{const r=G.run,at=r.at;const e=W().ents.find(x=>String(x.id)===id);if(!e)return;meetEnt(e);if(G.run&&G.run.scene&&G.run.scene.type==='event')G.run.scene.back=at;else note('Họ lướt qua, chẳng để ý tới ngươi.');},
   closeAll:()=>{if(G.run){G.run.scene=null;}UI.modal=null;UI.panel=null;},
   openJournal:()=>{if(G.run)G.run.scene=null;UI.modal=null;UI.panel='journal';UI.tab.journal='quest';},

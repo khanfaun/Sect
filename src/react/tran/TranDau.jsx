@@ -21,7 +21,8 @@ function KhungCanh({ sc, me, foes, al }) {
       <span className="cspd cspd-art">
         {[1, 2, 3].map(k => <button key={k} className={(CFG.cspeed || 1) === k ? 'on' : ''} data-act="cspd" data-arg={k} {...tip('Tốc độ trận ×' + k)}>×{k}</button>)}
       </span>
-      <Tranh seed={'cb' + r.at + sc.en.n} reg={r.region} type={n ? n.type : ''} cls="" figs={figs.join(',')} />
+      <Tranh seed={'cb' + r.at + sc.en.n} reg={r.region} type={n ? n.type : ''} cls="" />
+      <Tranh seed="!f" reg={0} type="" cls="cb-figs" figs={figs.join(',')} />
       {aura && me.hp > 0 && <div className={'cb-aura' + aura} style={{ left: '30%', top: '72%' }}><i></i><i></i><i></i><i></i><i></i><b></b></div>}
       {!!sc.pt && <div className={'pt-fig el-' + sc.pt.el} {...tip(sc.pt.n)}><H h={PT_SVG()} /><b>{sc.pt.n}</b></div>}
     </div>

@@ -33,22 +33,23 @@ export function ChanTrang() {
   return (
     <div className="pc-day">
       <div className="pc-ben trai">
-        <div className="pc-cs">
-          <div {...tip('Lực chiến: so với người cùng cảnh giới, tính từ chỉ số chiến đấu và trang bị.')}><img src={I('sk-sword')} alt="" /><span className="pc-cl">Lực chiến</span><Rt k="lc" v={PS.lucChien()} /></div>
-          <div {...tip('Tốc độ tu luyện khi bế quan ở chỗ đang đứng')}><img src={I('cau-tu')} alt="" /><span className="pc-cl">Tu luyện</span><Rt k="bq" v={PS.bqReal()} kind="toc" /></div>
-          <div {...tip('Đạo tâm: chống ảo cảnh, tâm ma; giúp đột phá')}><img src={I('it-sen')} alt="" /><span className="pc-cl">Đạo tâm</span><Rt k="tam" v={s.tam} kind="muc" /></div>
-          <div className={tm >= 60 ? 'hi' : ''} {...tip('Tâm ma ' + Math.round(tm) + '/100. Đầy sẽ phải đối mặt với chính mình.')}><img src={I('cau-ma')} alt="" /><span className="pc-cl">Tâm ma</span><b>{PS.tmWord(tm)}</b></div>
-        </div>
-        <div className="pc-bars ngang">
-          <Thanh n="Khí huyết" v={r.hp} max={s.maxHp} cls={'hp' + (r.hp < s.maxHp * 0.35 ? ' low' : '')} t="Khí huyết: về 0 là thua trận" />
-          {s.maxMp > 0 ? <Thanh n={PS.mpName()} v={r.mp} max={s.maxMp} cls="mp" t={PS.mpName() + ': dùng để ra chiêu'} />
-            : <Thanh n="Thọ nguyên" v={Math.max(0, left)} max={s.life} cls="tho" txt={'còn ' + Math.max(0, Math.floor(left)) + ' năm'} t="Thọ nguyên còn lại" />}
+        <div className="pc-lcol">
+          <div className="pc-cs">
+            <div {...tip('Lực chiến: so với người cùng cảnh giới, tính từ chỉ số chiến đấu và trang bị.')}><img src={I('sk-sword')} alt="" /><span className="pc-cl">Lực chiến</span><Rt k="lc" v={PS.lucChien()} /></div>
+            <div {...tip('Tốc độ tu luyện khi bế quan ở chỗ đang đứng')}><img src={I('cau-tu')} alt="" /><span className="pc-cl">Tu luyện</span><Rt k="bq" v={PS.bqReal()} kind="toc" /></div>
+            <div {...tip('Đạo tâm: chống ảo cảnh, tâm ma; giúp đột phá')}><img src={I('it-sen')} alt="" /><span className="pc-cl">Đạo tâm</span><Rt k="tam" v={s.tam} kind="muc" /></div>
+            <div className={tm >= 60 ? 'hi' : ''} {...tip('Tâm ma ' + Math.round(tm) + '/100. Đầy sẽ phải đối mặt với chính mình.')}><img src={I('cau-ma')} alt="" /><span className="pc-cl">Tâm ma</span><b>{PS.tmWord(tm)}</b></div>
+          </div>
           {an && <div className="pc-an" data-act="anMuc" {...tip('Cái ăn: no ' + (r.no != null ? r.no : 100) + '/100\nMức ăn: ' + PS.anMuc(r).n + '\nChạm để đổi mức ăn')}><Thanh n="Cái ăn" v={r.no != null ? r.no : 100} max={100} cls={'an' + (PS.anState(r) !== 'no' ? ' low' : '')} txt={PS.contentText('an.' + PS.anState(r))} /></div>}
+        </div>
+        <div className="pc-bars">
+          <Thanh n="Khí huyết" v={r.hp} max={s.maxHp} cls={'hp' + (r.hp < s.maxHp * 0.35 ? ' low' : '')} t="Khí huyết: về 0 là thua trận" />
+          <Thanh n={PS.mpName()} v={r.mp} max={s.maxMp} cls="mp" txt={s.maxMp > 0 ? undefined : 'chưa có'} t={PS.mpName() + ': dùng để ra chiêu'} />
         </div>
       </div>
       <div className="pc-giua">
         <button className={'pc-av' + PS.talCls(tal)} data-act="navChar" {...tip('Mở bảng nhân vật (phím 2)')}>
-          <Html className="pc-avi" h={PS.assetImg('hero', 'me', `<span class="av-txt">${PS.esc((r.ten.split(' ').pop() || '?')[0])}</span>`)} />
+          <Html className="pc-avi" h={PS.avatarMe ? PS.avatarMe() : ''} />
           {tal && tal.tier >= 0 && <Html className="tfr" h={PS.talFrameSVG(tal, 'pctf')} />}
         </button>
         <b className="pc-ten">{r.ten}</b>
@@ -56,7 +57,7 @@ export function ChanTrang() {
         <small className={'pc-tuoi' + (warn ? ' bad' : '')}>{Math.floor(r.age)} tuổi · còn {Math.max(0, Math.floor(left))} năm</small>
       </div>
       <div className="pc-ben phai">
-        <div className="pc-bars ngang">
+        <div className="pc-bars">
           {!voK && PS.rootKnown() ? <Thanh n="Tu vi" v={PS.tvShow()} max={100} cls="tv" txt={PS.btReadyTv() ? 'viên mãn' : PS.tvShow() + '%'} t="Tu vi: đầy thì đủ sức đột phá" />
             : <Thanh n="Tu vi" v={0} max={100} cls="tv" txt={voK ? 'vô linh căn' : 'chưa rõ tiên duyên'} t="Chưa tu luyện được" />}
           {!voK && <Thanh n="Lịch luyện" v={PS.llShow()} max={100} cls="ll" txt={PS.llShow() + '%'} t="Lịch luyện: có được nhờ thực chiến, tới nơi mới, quen người mới, làm xong việc. Muốn đột phá cần đầy." />}
@@ -116,7 +117,6 @@ function NgayTren() {
   return (
     <div className="pc-ngay-top" {...tip(PS.dateText(t) + '\nBuổi ' + pa.n + ', mùa ' + PS.SEASON[PS.seasonOf(t)])}>
       <Html as="div" className="hud-clk3" id="clk" h={PS.clkStr(t)} />
-      <small>{pa.n.toLowerCase()} · {PS.SEASON[PS.seasonOf(t)].toLowerCase()}</small>
     </div>
   );
 }

@@ -8,7 +8,7 @@ function hpCls(u){const p=u.hp/Math.max(1,u.max);return p>0.5?'hp':p>0.2?'hp mid
 function cBar(cur,max,cls){return `<div class="cbar ${cls}"><i style="width:${clamp(cur/Math.max(1,max)*100,0,100)}%"></i></div>`;}
 function phBadge(u){return u.dazed?`<span class="ph dz"${ta('Cạn định lực: mất lượt kế tiếp')}>choáng</span>`:u.phase==='charge'?`<span class="ph"${ta('Đang tụ lực: tới mốc phát lực thì tung chiêu')}>tụ lực</span>`:u.phase==='guard'?`<span class="ph"${ta('Đang thủ thế: bị đánh trước mốc phát lực thì đỡ được một lần')}>thủ thế</span>`:u.stunT>0?'<span class="ph dz">choáng</span>':'';}
 function dlOf(u){return u.dl==null?100:u.dl;}
-function uAvatar(u){const foe=u.side==='B';return u.isMain?assetImg('hero','me',u.icon):foe?assetImg('foe',u.boss?'_boss':ASSET.foe[u.k]?u.k:'_'+(u.f||'thu'),u.icon):assetImg('pet',u.k||u.name,u.icon);}
+function uAvatar(u){const foe=u.side==='B';return u.isMain?(typeof avatarMe==='function'?avatarMe():assetImg('hero','me',u.icon)):foe?assetImg('foe',u.boss?'_boss':ASSET.foe[u.k]?u.k:'_'+(u.f||'thu'),u.icon):assetImg('pet',u.k||u.name,u.icon);}
 // thẻ kẻ địch / đồng hành. compact: chỉ avatar ở giữa, thanh khí huyết, thanh định lực, trạng thái
 
 // thẻ nhân vật chính: avatar có vòng thần lực (chạm để hiển hóa pháp tướng / tung đòn tối thượng)

@@ -65,6 +65,8 @@ export function ganAnh() {
   if (EN) for (const k of Object.keys(EN)) { const f = EN[k].f; if (f === 'nhan') A.foe[k] = IMG['mo-kim-giap']; else if (f === 'quy') A.foe[k] = IMG['mo-tam-ma']; else if (f === 'boss') A.foe[k] = IMG['mo-huyet-ma']; }
   // phần F: ảnh riêng cho từng loài thú (foe-<khoá>) và từng nguyên liệu (mat-<loại>)
   if (EN) for (const k of Object.keys(EN)) { const u = IMG['foe-' + k]; if (u) A.foe[k] = u; }
+  // loài chưa có ảnh riêng: mượn ảnh gần nghĩa để khỏi rơi về hình SVG
+  { const M = { linhthu_dulang: 'foe-lang', tinhthu: 'foe-holy', trung: 'foe-thu_buom_bui_tram', thienma: 'mo-huyet-ma', kiemlinh: 'mo-kim-giap', khoiloi: 'mo-kim-giap' }; for (const k in M) if (EN && EN[k] && !A.foe[k] && IMG[M[k]]) A.foe[k] = IMG[M[k]]; A.foe._thu = A.foe._thu || IMG['foe-lang']; A.foe._vat = A.foe._vat || IMG['mo-kim-giap']; }
   const CATG = PS.CAT && PS.CAT.byId;
   if (CATG) for (const id of Object.keys(CATG)) { const m = CATG[id], u = m && matImg(m); if (u) A.item['mat:' + id] = u; }
   if (A.veh) { A.veh.hac = IMG['mt-crane']; A.veh.kiem = IMG['mt-sword']; A.veh.chu = IMG['mt-phoenix']; A.veh.rua = IMG['mt-boat'] || IMG['mt-turtle']; if (IMG['mt-horse']) A.veh.ngua = IMG['mt-horse']; if (IMG['mt-deer']) A.veh.loc = IMG['mt-deer']; }

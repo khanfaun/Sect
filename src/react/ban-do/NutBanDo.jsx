@@ -45,7 +45,7 @@ const TIEN_ICO = {
   2: <><polygon points="8,1 12.5,3.5 14,8 11.5,13.5 8,15 4.5,13.5 2,8 3.5,3.5" fill="#3a78c8" stroke="#1d4a8a" strokeWidth="1" strokeLinejoin="round" /><polygon points="8,1 12.5,3.5 8,6 3.5,3.5" fill="#8cc0ff" /><polygon points="12.5,3.5 14,8 8,6" fill="#5b9aee" /><polygon points="3.5,3.5 8,6 2,8" fill="#4a88de" /><polygon points="8,6 14,8 11.5,13.5 8,15" fill="#2f66b0" /><polygon points="8,6 2,8 4.5,13.5 8,15" fill="#3a78c8" /><path d="M5 3.8L6.6 3 6 5Z" fill="#fff" opacity=".85" /></>,
   3: <><polygon points="8,.5 12,2.2 15,6 13.5,11.5 10.5,14.8 8,15.5 5.5,14.8 2.5,11.5 1,6 4,2.2" fill="#9a4ac8" stroke="#ffd45a" strokeWidth="1" strokeLinejoin="round" /><polygon points="8,.5 12,2.2 8,5 4,2.2" fill="#e0b3ff" /><polygon points="12,2.2 15,6 8,5" fill="#c37cf0" /><polygon points="4,2.2 8,5 1,6" fill="#b25fe0" /><polygon points="8,5 15,6 13.5,11.5 8,10" fill="#7a2fa8" /><polygon points="8,5 1,6 2.5,11.5 8,10" fill="#8a3cb8" /><polygon points="8,10 13.5,11.5 10.5,14.8 8,15.5" fill="#5e1f88" /><polygon points="8,10 2.5,11.5 5.5,14.8 8,15.5" fill="#6d2a98" /><path d="M8 5.6L8.6 7.4L10.4 8L8.6 8.6L8 10.4L7.4 8.6L5.6 8L7.4 7.4Z" fill="#fff6c0" className="spk" /></>,
 };
-function TienIco({ k }) {
+export function TienIco({ k }) {
   return <svg className={'ti ti-' + k} viewBox="0 0 16 16" aria-hidden="true">{TIEN_ICO[k]}</svg>;
 }
 

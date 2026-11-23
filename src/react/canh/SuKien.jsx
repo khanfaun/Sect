@@ -51,10 +51,12 @@ export function SuKien({ sc }) {
   if (pimg) return (
     <section className="scard tall place pl-home pl-ev">
       <div className="pl-nen"><img src={pimg} alt="" /></div>
-      <header className="sc-h pl-top"><h2>{e && e.n || 'Kỳ ngộ'}</h2><small>{r.place.n}</small>{minBtn}</header>
-      <div className="pl-pho" />
-      <div className="pl-pan sc-b">{body}</div>
-      {foot && <footer className="sc-f">{foot}</footer>}
+      <div className="pl-evb" />
+      <div className="pl-evm" role="dialog">
+        <header className="pl-evh"><div><h3>{e && e.n || 'Kỳ ngộ'}</h3><small>{r.place.n}</small></div>{minBtn}</header>
+        <div className="pl-evc sc-b">{body}</div>
+        {foot && <footer className="pl-evf">{foot}</footer>}
+      </div>
     </section>
   );
   return (
