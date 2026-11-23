@@ -160,7 +160,7 @@ const TESTS = {
     await ev(p, () => { UI.panel = 'char'; UI.tab.char = 'base'; render(); }); await p.waitForTimeout(150);
     ok(await ev(p, () => !document.querySelector('#panel .nvt-khung')), 'Căn cơ: không còn khung ảnh nhân vật');
     await ev(p, () => { UI.tab.char = 'tb'; render(); }); await p.waitForTimeout(150);
-    ok(await ev(p, () => document.querySelectorAll('#panel .tb-doll .tb-o .eqc').length === 9 && !!document.querySelector('#panel .tb-giua .doll3') && /Bộ trang bị/.test(document.querySelector('#panel').innerText) && /Chỉ số từ trang bị/.test(document.querySelector('#panel').innerText)), 'thẻ Trang bị: 9 ô hai bên, nhân vật giữa, bộ trang bị, chỉ số bằng chữ');
+    ok(await ev(p, () => document.querySelectorAll('#panel .tb-doll .tb-o .eqc').length === 8 && !!document.querySelector('#panel .tb-giua .doll3') && /Bộ trang bị/.test(document.querySelector('#panel').innerText) && /Chỉ số từ trang bị/.test(document.querySelector('#panel').innerText)), 'thẻ Trang bị: 8 ô hai bên (không còn áo choàng), nhân vật giữa, bộ trang bị, chỉ số bằng chữ');
     await ev(p, () => { UI.tab.char = 'bag'; render(); }); await p.waitForTimeout(150);
     ok(await ev(p, () => !document.querySelector('#panel .eqwrap') && document.querySelectorAll('#panel .bst-tien .tc').length >= 7), 'Túi đồ: không còn ô trang bị, hiện đủ các loại tiền');
     await ev(p, () => { const r = G.run; r.pham = 0; r.realm = 1; UI.tab.char = 'hoc'; render(); }); await p.waitForTimeout(150);
