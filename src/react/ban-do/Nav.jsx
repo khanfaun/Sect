@@ -3,6 +3,7 @@
 import { PS } from '../html';
 import { tip } from '../chung';
 import { I } from '../giao-dien/anh';
+import { CotTrai, laPC } from '../may-tinh/MayTinh';
 
 // [khoá, ảnh, chữ, data-act, data-arg]
 const ITEMS = [
@@ -16,6 +17,7 @@ const ITEMS = [
 ];
 
 export function Nav() {
+  if (laPC()) return <CotTrai />;
   const { G, UI } = PS;
   const r = G.run;
   const dot = { journal: r && r.quests.some(q => q.state === 'open'), pets: r && r.eggs && r.eggs.length > 0 };

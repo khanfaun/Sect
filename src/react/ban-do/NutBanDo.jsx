@@ -4,6 +4,7 @@ import { PS } from '../html';
 import { Ic, tip } from '../chung';
 import { TanThu } from '../chung/TanThu';
 import { I } from '../giao-dien/anh';
+import { CotPhai, laPC } from '../may-tinh/MayTinh';
 
 function Nut({ act, arg, icon, img, t, on, dis, cls, l }) {
   return (
@@ -14,7 +15,7 @@ function Nut({ act, arg, icon, img, t, on, dis, cls, l }) {
 }
 
 // Dải biểu tượng vết thương, tâm ma, thọ nguyên, bị truy đuổi
-function DaiVetThuong() {
+export function DaiVetThuong() {
   const { G, WOUND, WICON } = PS;
   const r = G.run, s = PS.S(), w = PS.W();
   const L = [];
@@ -68,6 +69,7 @@ export function NutBanDo() {
   const { G, CFG, UI } = PS;
   const r = G.run, bqNo = PS.bqCan(), brk = PS.canBreak();
   const dev = !!PS.DEV;
+  if (laPC()) return <CotPhai />;
   return <>
     <CumTien r={r} />
     <TanThu />

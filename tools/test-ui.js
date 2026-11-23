@@ -37,20 +37,28 @@ const TESTS = {
   // máy tính (kiểu A): bản đồ phủ màn hình, thanh 7 mục dọc bên trái, bảng mở thành cột phải, địa điểm ở giữa
   async may_tinh(p) {
     await p.setViewportSize({ width: 1440, height: 860 }); await ev(p, () => render()); await p.waitForTimeout(300);
-    const L = await ev(p, () => { const a = document.getElementById('app').getBoundingClientRect(), n = document.getElementById('nav').getBoundingClientRect(); return { aw: a.width, nx: n.x, nw: n.width, nh: n.height }; });
-    ok(L.aw === 1440, 'bản đồ phủ cả màn hình: ' + L.aw);
-    ok(L.nx < 40 && L.nh > L.nw * 3, 'thanh 7 mục dọc bên trái ' + JSON.stringify(L));
-    await ev(p, () => { UI.panel = 'char'; render(); }); await p.waitForTimeout(200);
-    const P = await ev(p, () => { const r = document.querySelector('#panel').getBoundingClientRect(); return [Math.round(r.x), Math.round(r.width)]; });
-    ok(P[0] + P[1] === 1440 && P[1] < 600, 'bảng mở thành cột phải ' + P);
-    await ev(p, () => { UI.panel = null; const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'thanh' && n.state !== 'ruin'); G.run.at = n.id; G.run.region = n.r; arrive(n.id); openPlace(n.id); render(); }); await p.waitForTimeout(300);
-    const S = await ev(p, () => { const r = document.querySelector('#sheet').getBoundingClientRect(); return [Math.round(r.x), Math.round(r.width)]; });
-    ok(S[0] > 100 && Math.abs(S[0] + S[1] / 2 - 720) < 3, 'địa điểm ở giữa, hai bên thấy bản đồ ' + S);
+    const R = s => ev(p, s => { const e = document.querySelector(s); if (!e) return null; const r = e.getBoundingClientRect(); return [r.x, r.y, r.width, r.height].map(Math.round); }, s);
+    ok(await ev(p, () => document.documentElement.dataset.pc === '1' && !!document.querySelector('.pc-top') && !!document.querySelector('.pc-trai') && !!document.querySelector('.pc-phai')), 'máy tính: thanh trên, cột trái, cột phải riêng');
+    const top = await R('#hud'), trai = await R('#nav'), phai = await R('.pc-phai');
+    ok(top && top[0] === 0 && top[2] === 1440 && top[3] < 70, 'thanh trên ngang màn ' + top);
+    ok(trai && trai[0] === 0 && trai[2] < 320 && trai[3] > 700, 'cột trái dọc cả chiều cao ' + trai);
+    ok(phai && phai[0] + phai[2] === 1440, 'cột phải ' + phai);
+    ok(await ev(p, () => document.querySelectorAll('.pc-menu .pc-mi kbd').length === 7 && !!document.querySelector('.pc-bars .pc-bar.hp')), 'menu 7 mục có phím tắt, thanh khí huyết có số');
+    await p.keyboard.press('2'); await p.waitForTimeout(200);
+    ok(await ev(p, () => UI.panel === 'char'), 'phím 2 mở bảng nhân vật');
+    const P = await R('#panel');
+    ok(P && P[0] === trai[2] && P[0] + P[2] === 1440, 'bảng mở ở vùng giữa, cột trái vẫn thấy ' + P);
+    await p.keyboard.press('4'); await p.waitForTimeout(150);
+    ok(await ev(p, () => UI.panel === null), 'phím 4 về bản đồ');
+    await ev(p, () => { const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'thanh' && n.state !== 'ruin'); G.run.at = n.id; G.run.region = n.r; arrive(n.id); openPlace(n.id); render(); }); await p.waitForTimeout(300);
+    const S = await R('#sheet'), pan = await R('.pl-home .pl-pan');
+    ok(S && S[0] === trai[2] && pan && pan[0] > S[0] + S[2] / 2, 'địa điểm: công trình bên trái, bảng việc bên phải ' + S + ' / ' + pan);
     await ev(p, () => { G.run.scene = null; UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(300);
-    ok(await ev(p, () => { const r = document.querySelector('.bq-home').getBoundingClientRect(); return r.width <= 860 && Math.abs(r.x + r.width / 2 - 720) < 3; }), 'bế quan ở giữa, rộng vừa');
+    const st = await R('.bq-home .bq-stage'), bp = await R('.bq-home .bq-pan');
+    ok(st && bp && bp[0] >= st[0] + st[2] - 2, 'tu luyện: nhân vật bên trái, bảng chọn bên phải ' + st + ' / ' + bp);
     await ev(p, () => { UI.modal = null; render(); });
-    await p.setViewportSize({ width: 400, height: 800 }); await p.waitForTimeout(200);
-    ok(await ev(p, () => document.getElementById('nav').getBoundingClientRect().width > 300), 'màn hẹp: trở lại thanh dưới như điện thoại');
+    await p.setViewportSize({ width: 400, height: 800 }); await p.waitForTimeout(300);
+    ok(await ev(p, () => !document.documentElement.dataset.pc && !document.querySelector('.pc-trai') && document.querySelectorAll('#nav .nv').length === 7), 'màn hẹp: trở lại giao diện điện thoại');
   },
   // giao diện mới (kiểu Ngọc Hành Trình): thanh dưới 7 ô có ảnh, nút Nhân vật/Túi đồ, nhân vật ngồi thiền, ảnh vật phẩm
   async giao_dien_moi(p) {

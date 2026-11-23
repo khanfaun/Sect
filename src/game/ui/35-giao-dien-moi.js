@@ -16,3 +16,13 @@ function tbDat(){const t=tbTop();const tb=document.getElementById('toast');if(tb
 {const _fp=favPop;favPop=function(){const x=_fp.apply(this,arguments);tbDat();return x;};}
 // bế quan: kéo thanh trượt thì ô nhập số năm đổi theo
 {const _bu=bqUpd;bqUpd=function(y){_bu.apply(this,arguments);const e=document.getElementById('bqYn');if(e&&document.activeElement!==e)e.value=+(+y).toFixed(2);};}
+// ---------- máy tính: giao diện riêng (thanh trên, cột trái nhân vật + menu, cột phải nhiệm vụ) ----------
+// Chỉ khi màn đủ rộng; bản đồ / cảnh dùng bố cục máy tính (React: src/react/may-tinh), trận và màn ngoài vẫn khung điện thoại.
+function laPC(){return typeof window!=='undefined'&&window.innerWidth>=1000&&window.innerHeight>=600;}
+{const _r=render;render=function(){if(typeof document!=='undefined'){const d=document.documentElement;if(laPC())d.dataset.pc='1';else delete d.dataset.pc;}return _r.apply(this,arguments);};}
+if(typeof window!=='undefined'){let _pc=laPC();window.addEventListener('resize',()=>{const v=laPC();if(v!==_pc){_pc=v;render();}});
+  // phím tắt trên máy tính: 1–7 mở các mục, B bế quan, M bản đồ
+  const PK={'1':'bagOpen','2':'navChar','3':['panel','tong'],'4':'closePanel','5':['panel','pets'],'6':['panel','journal'],'7':['panel','bonds'],b:'hudBq',m:'closePanel'};
+  document.addEventListener('keydown',e=>{if(!laPC()||e.ctrlKey||e.metaKey||e.altKey)return;const t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable))return;
+    if(G.screen!=='map'||!G.run||UI.modal||(G.run.scene&&G.run.scene.type==='combat'))return;const k=PK[e.key.toLowerCase()];if(!k)return;
+    const [a,arg]=Array.isArray(k)?k:[k];if(!ACT[a])return;if(a==='hudBq'&&bqCan())return;e.preventDefault();ACT[a](arg);render();dbg('pc.phim',{k:e.key,a});});}
