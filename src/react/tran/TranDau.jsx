@@ -3,7 +3,7 @@
 import { Html, PS } from '../html';
 import { Ic, Tranh, pcs, tip } from '../chung';
 import { ThanhHanhDong, TheMinh, TheNguoi } from './TheNguoi';
-import { I } from '../giao-dien/anh';
+import { I, nenTran } from '../giao-dien/anh';
 
 const H = ({ h }) => <Html style={{ display: 'contents' }} h={h} />;
 const PT_SVG = () => PS.ptFigSVG();
@@ -16,7 +16,7 @@ function KhungCanh({ sc, me, foes, al }) {
   foes.forEach((u, i) => figs.push([PS.unitKind(u), 0.72 + i * 0.12 - (foes.length - 1) * 0.06, u.kind === 'kiep' ? 0.95 : 0.5 - (foes.length > 1 ? 0.08 : 0), 1, u.name].join(':')));
   const aura = (sc.ht ? ' ht' : '') + (me && me.st && me.st.soul > 0 ? ' soul' : '');
   return (
-    <div className="cb-art" id="cbArt" data-nf={foes.length}>
+    <div className="cb-art" id="cbArt" data-nf={foes.length} style={nenTran(n && n.type) ? { backgroundImage: `url(${nenTran(n && n.type)})` } : undefined}>
       <button className="cb-more" data-act="panel" data-arg="more" aria-label="Thêm"><Ic n="more" /></button>
       <span className="cspd cspd-art">
         {[1, 2, 3].map(k => <button key={k} className={(CFG.cspeed || 1) === k ? 'on' : ''} data-act="cspd" data-arg={k} {...tip('Tốc độ trận ×' + k)}>×{k}</button>)}

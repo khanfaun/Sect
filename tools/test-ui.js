@@ -130,6 +130,38 @@ const TESTS = {
     ok(fb > 0, 'loại chưa có ảnh vẫn vẽ huy hiệu cũ (' + fb + ')');
     ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
   },
+  async anh_thu_nguyen_lieu(p) {
+    const r = await ev(p, () => { const thu = Object.keys(EN).filter(k => EN[k].f === 'thu'), u = new Set(thu.map(k => ASSET.foe[k]).filter(Boolean));
+      const mats = Object.values(CAT.byId).filter(m => ['thao', 'khoang', 'dan'].includes(m.cat) && /^(thao|khoang|vl)_/.test(m.id)), mu = new Set(mats.map(m => ASSET.item['mat:' + m.id]).filter(Boolean));
+      return { thu: thu.length, thuAnh: u.size, mats: mats.length, matAnh: mu.size, hoa: ASSET.item['mat:thao_linh_hoa_giang_vu'] !== ASSET.item['mat:thao'] }; });
+    ok(r.thuAnh >= 60, 'thú có ảnh riêng: ' + r.thuAnh + ' ảnh cho ' + r.thu + ' loài');
+    ok(r.matAnh >= 15 && r.hoa, 'nguyên liệu có ảnh theo loại: ' + r.matAnh + ' ảnh cho ' + r.mats + ' món');
+    ok(await ev(p, () => { UI.panel = 'char'; UI.tab.char = 'bag'; render(); return !/undefined|NaN/.test(document.querySelector('#app').innerText); }), 'túi đồ vẫn hiện bình thường');
+    ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
+  },
+  async nen_dia_diem(p) {
+    const r = await ev(p, () => { const T = ['tran', 'thanh', 'tutran', 'tuthanh', 'tong', 'cho', 'ancu', 'song', 'bien', 'dam', 'rung', 'nui', 'hoang', 'duoc', 'khoang', 'linhdia', 'dong', 'dongthien', 'bicanh', 'phe', 'ditich', 'como', 'ma', 'sao', 'yeusao', 'thien'];
+      return { n: T.length, ok: T.filter(t => /^data:image/.test(ASSET.place[t] || '')).length, khac: new Set(T.map(t => ASSET.place[t])).size }; });
+    ok(r.ok === r.n && r.khac === r.n, 'nền địa điểm: ' + r.ok + '/' + r.n + ' loại có nền, ' + r.khac + ' ảnh khác nhau');
+    // mỗi loại nơi mở trên một trang mới (trận đánh trong cùng trang giữ lại khung cũ nên không so được)
+    const bg = async t => { const q = await boot(p.context().browser());
+      await ev(q, t => { const n = W().regions.flatMap(R => R.nodes).find(n => n.type === t); G.run.at = n.id; G.run.scene = null; openPlace(n.id); startCombat({ cnt: 1 }, { kind: 'node' }); CFG.autoFight = 0; render(); }, t); await q.waitForTimeout(400);
+      const go = await q.$('[data-act="cbGo"]'); if (go) await go.click(); await q.waitForSelector('.cb-ally', { timeout: 8000 }).catch(() => {}); await q.waitForTimeout(300);
+      const v = await ev(q, () => { const a = document.querySelector('#cbArt'); const b = a ? a.style.backgroundImage : ''; return b ? b.length + '|' + b.slice(-30) : ''; }); await q.close(); return v; };
+    const A = await bg('rung'), B = await bg('dong'), C = await bg('thanh');
+    ok(/\|/.test(A) && A !== B && B !== C && A !== C, 'nền trận đánh đổi theo nơi (rừng / hang / thành đều khác nhau)');
+    ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
+  },
+  async trang_phuc_xuat_than(p) {
+    const r = await ev(p, () => { devSetRealm(3, 2); const out = []; for (const tu of ['teen', 'young', 'middle', 'elder']) for (const [id] of NH_TUOI[tu].ao) { G.run.origin = 'nong'; nhDoTuoiSet(tu); nhSet('ao', id); UI.modal = null; render();
+        const u = ngoaiHinh(); if (u.ao !== id) out.push(tu + '/' + id + ' không chọn được'); }
+      return out; });
+    ok(r.length === 0, '28 áo (7 kiểu × 4 tuổi) đều chọn được ' + r.join(', '));
+    await ev(p, () => { UI.panel = null; UI.confirm = null; G.screen = 'map'; G.run.scene = null; G.run.origin = 'ren'; delete G.run.ngoai; nhDoTuoiSet('young'); const dp = regionOf(0).nodes.find(n => n.dp); G.run.at = dp.id; arrive(dp.id); openPlace(dp.id); UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(700);
+    const src = await ev(p, () => { const i = document.querySelector('.bq-home .doll3 img.ost') || document.querySelector('.doll3 img.ost'); return i ? i.src.slice(0, 22) : ''; });
+    ok(/^data:image\/webp/.test(src), 'nhân vật ngồi thiền hiện áo theo xuất thân (thợ rèn): ' + src);
+    ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
+  },
   async giao_dien_moi(p) {
     const nav = await ev(p, () => [...document.querySelectorAll('#nav .nv')].map(b => [b.textContent, !!b.querySelector('img[src^="data:image"]')]));
     ok(nav.length === 7 && nav.every(x => x[1]), 'thanh dưới 7 ô, ô nào cũng có ảnh: ' + nav.map(x => x[0]).join(', '));

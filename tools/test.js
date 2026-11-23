@@ -3477,10 +3477,17 @@ const TESTS = {
     fresh("G.run.pham=0;G.run.realm=3;G.run.g='nam'"); fixtureSeed = seed0;
     ok(run("nhTuoiOf(16)")==='teen'&&run("nhTuoiOf(25)")==='young'&&run("nhTuoiOf(45)")==='middle'&&run("nhTuoiOf(80)")==='elder', 'bốn độ tuổi theo số tuổi');
     ok(['teen','young','middle','elder'].every(k=>run(`nhHien('${k}')`)===k), 'cả bốn độ tuổi đều có ảnh riêng');
+    // trang phục theo xuất thân × độ tuổi
+    ok(run("ORIGIN.every(o=>AO_XT[o.id]&&AO_KIEU[AO_XT[o.id]])"), 'mọi xuất thân (' + run("ORIGIN.length") + ') đều có kiểu áo');
+    ok(run("Object.keys(AO_KIEU).length")===7&&run("Object.values(NH_TUOI).every(T=>T.ao.length===7&&new Set(T.ao.map(x=>x[0])).size===7)"), 'bảy kiểu áo ở cả bốn độ tuổi, không trùng');
+    const ao=(og,tu)=>{run(`G.run.origin='${og}';delete G.run.ngoai;nhDoTuoiSet('${tu}')`);return run("ngoaiHinh().ao");};
+    ok(ao('nong','teen')==='t1'&&ao('nong','young')==='pho-y'&&ao('ren','middle')==='tho-m'&&ao('thusinh','middle')==='m1'&&ao('daodong','elder')==='e1'&&ao('thegia','young')==='hero'&&ao('mahuyet','elder')==='ma-e'&&ao('xt_ke_cheo_do_ban_dem','teen')==='khach-t', 'xuất thân → áo: nông→vải thô, thợ rèn→áo thợ, thư sinh→thư sinh, đạo đồng→đạo y, thế gia→thế gia, ma tộc→ma, chèo đò→lữ khách');
+    run("G.run.origin='nong';nhDoTuoiSet('young');nhSet('ao','hero')");ok(run("ngoaiHinh().ao")==='hero', 'người chơi vẫn đổi được sang áo khác cùng độ tuổi');
+    run("nhDoTuoiSet('elder')");ok(run("ngoaiHinh().ao")==='pho-e', 'đổi sang độ tuổi khác: áo đã chọn của tuổi cũ không còn thì về áo theo xuất thân');
     run("nhDoTuoiSet('teen')");ok(run("ngoaiHinh().toc")==='t1'&&run("ngoaiHinh().ao")==='t1', 'thiếu niên: tóc búi cao, áo vải');
-    run("nhDoTuoiSet('middle')");ok(run("ngoaiHinh().toc")==='m1'&&run("ngoaiHinh().ao")==='m1', 'trung niên: búi tóc râu ngắn, thanh bào');
-    run("nhDoTuoiSet('young')");ok(run("ngoaiHinh().toc")==='r1'&&run("ngoaiHinh().ao")==='hero', 'thanh niên: tóc búi, lục bào');
-    const life=run("S().life");run("nhDoTuoiSet('elder')");
+    run("G.run.origin='thusinh';delete G.run.ngoai;nhDoTuoiSet('middle')");ok(run("ngoaiHinh().toc")==='m1'&&run("ngoaiHinh().ao")==='m1', 'trung niên: búi tóc râu ngắn, thanh bào');
+    run("G.run.origin='thegia'");run("nhDoTuoiSet('young')");ok(run("ngoaiHinh().toc")==='r1'&&run("ngoaiHinh().ao")==='hero', 'thế gia thanh niên: tóc búi, lục bào');
+    const life=run("S().life");run("G.run.origin='daodong';delete G.run.ngoai;nhDoTuoiSet('elder')");
     ok(Math.abs(run("G.run.age")-75)<0.01&&run("ngoaiHinh().toc")==='e1'&&run("ngoaiHinh().ao")==='e1', 'chọn lão giả: tuổi 75, tự đổi sang tóc bạc, áo lão giả');
     run("W().t+=HY*2;G.run.age=G.run.birthAge+(W().t-G.run.bornT)/HY");ok(Math.abs(run("G.run.age")-77)<0.01, 'thời gian trôi: tuổi vẫn tính đúng từ birthAge (77)');
     run("nhTuoiSet(9999)");ok(run("G.run.age")<life&&run("G.run.age")>=life-1, 'đổi tuổi không vượt thọ nguyên ('+life+')');
