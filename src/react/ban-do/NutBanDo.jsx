@@ -4,7 +4,7 @@ import { PS } from '../html';
 import { Ic, tip } from '../chung';
 import { TanThu } from '../chung/TanThu';
 import { I } from '../giao-dien/anh';
-import { CotPhai, laPC } from '../may-tinh/MayTinh';
+import { CongCuBanDo, laPC } from '../may-tinh/MayTinh';
 
 function Nut({ act, arg, icon, img, t, on, dis, cls, l }) {
   return (
@@ -50,17 +50,17 @@ function TienIco({ k }) {
 }
 
 // Cụm tiền tệ: xu, lượng bạc, lượng vàng rồi tới 4 phẩm linh thạch (cuối cùng), dàn ngang
-export function CumTien({ r }) {
+export function CumTien({ r, ten }) {
   const T = PS.TIEN, d = Math.max(0, Math.round(r.bac || 0));
   const vang = Math.floor(d / T.vang), bac = Math.floor((d % T.vang) / T.luong), xu = d % T.luong;
   const C = [['xu', xu, 'Xu', 'Tiền lẻ của phàm nhân, dùng mua đồ rẻ.'], ['bac', bac, 'Lượng bạc', 'Bằng ' + T.luong + ' xu.'], ['vang', vang, 'Lượng vàng', 'Bằng ' + T.vang / T.luong + ' lượng bạc.']];
   const noT = (r.bac || 0) < 0 ? (PS.noTip ? PS.noTip(r) : '') : '';
   const tp = ['Hạ phẩm', 'Trung phẩm', 'Thượng phẩm', 'Cực phẩm'], tpd = ['Linh thạch thường, dùng hằng ngày.', 'Gấp 100 lần hạ phẩm.', 'Gấp 100 lần trung phẩm.', 'Quý nhất, gấp 100 lần thượng phẩm.'];
   return (
-    <div className={'tien-cum' + ((r.bac || 0) < 0 ? ' no' : '')}>
-      {C.map(([k, v, n, d]) => <span key={k} className={'tc' + (v ? '' : ' z') + (k === 'xu' ? ' xu' : '')} {...tip(n + ': ' + v + '\n' + d + (k === 'xu' ? noT : ''))}><TienIco k={k} />{v}</span>)}
+    <div className={'tien-cum' + (ten ? ' ten' : '') + ((r.bac || 0) < 0 ? ' no' : '')}>
+      {C.map(([k, v, n, d]) => <span key={k} className={'tc' + (v ? '' : ' z') + (k === 'xu' ? ' xu' : '')} {...tip(n + ': ' + v + '\n' + d + (k === 'xu' ? noT : ''))}><TienIco k={k} />{ten && <span className="tc-n">{n}</span>}<b className="tc-v">{v}</b></span>)}
       <u className="tc-sep" />
-      {tp.map((n, k) => { const v = PS.ltGet(k, r) || 0; return <span key={'l' + k} className={'tc lt lt' + k + (v ? '' : ' z')} {...tip('Linh thạch ' + n.toLowerCase() + ': ' + PS.fmtN(v) + '\n' + tpd[k])}><TienIco k={k} />{PS.fmtN(v)}</span>; })}
+      {tp.map((n, k) => { const v = PS.ltGet(k, r) || 0; return <span key={'l' + k} className={'tc lt lt' + k + (v ? '' : ' z')} {...tip('Linh thạch ' + n.toLowerCase() + ': ' + PS.fmtN(v) + '\n' + tpd[k])}><TienIco k={k} />{ten && <span className="tc-n">Linh thạch {n.toLowerCase()}</span>}<b className="tc-v">{PS.fmtN(v)}</b></span>; })}
     </div>
   );
 }
@@ -69,7 +69,7 @@ export function NutBanDo() {
   const { G, CFG, UI } = PS;
   const r = G.run, bqNo = PS.bqCan(), brk = PS.canBreak();
   const dev = !!PS.DEV;
-  if (laPC()) return <CotPhai />;
+  if (laPC()) return <CongCuBanDo />;
   return <>
     <CumTien r={r} />
     <TanThu />

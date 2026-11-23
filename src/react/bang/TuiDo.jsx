@@ -66,6 +66,10 @@ function CotPhai({ items }) {
       <DdSel act="bagPham" label="Phẩm" opts={[{ v: -1, h: 'Mọi phẩm' }].concat(PHAM.map((p, i) => ({ v: i, h: PS.qName(p, i) })))} cur={B.pham} />
       <DdSel act="bagSort" label="Sắp xếp" opts={SORT.map((n, i) => ({ v: i, h: n }))} cur={B.sort} />
     </div>
+    <div className="bcap-r">
+      <div className="bcap" {...tip('Sức chứa tăng theo cảnh giới và túi trữ vật đang đeo.\nTối đa ' + PS.BAG_MAX + ' ô.')}><small>Túi đồ</small><b>{items.length} / {PS.bagCap()} ô</b>{PS.tuiSlots && PS.tuiSlots() > 0 && !PS.tuiOn() && <small className="tkh-n"><Ic n="lock" /> {PS.tuiSlots()} ô túi đang khoá</small>}</div>
+      <button className="icb" data-act="phamHelp" aria-label="Các phẩm" {...tip('Bảng màu các phẩm')}>?</button>
+    </div>
     <div className="bscroll">
       <div className="bgrid">
         {V.map(x => (
@@ -109,9 +113,7 @@ export function TuiDo() {
   const r = PS.run2(), items = PS.bagItems();
   return <>
     <div className="bagtop">
-      <div className="bst bst-tien" {...tip('Hầu bao: tiền phàm (xu, lượng bạc, lượng vàng) và linh thạch bốn phẩm' + (r.thuongLenh ? '\nThưởng Lệnh: ' + r.thuongLenh : ''))}><small>Tiền tệ</small><CumTien r={r} />{!!r.thuongLenh && <small className="tl">Thưởng Lệnh {r.thuongLenh}</small>}</div>
-      <div className="bcap" {...tip('Sức chứa tăng theo cảnh giới và túi trữ vật đang đeo.\nTối đa ' + PS.BAG_MAX + ' ô.')}><small>Túi đồ</small><b>{items.length} / {PS.bagCap()} ô</b>{PS.tuiSlots && PS.tuiSlots() > 0 && !PS.tuiOn() && <small className="tkh-n"><Ic n="lock" /> {PS.tuiSlots()} ô túi đang khoá</small>}</div>
-      <button className="icb" data-act="phamHelp" aria-label="Các phẩm" {...tip('Bảng màu các phẩm')}>?</button>
+      <div className="bst bst-tien" {...tip('Hầu bao: tiền phàm (xu, lượng bạc, lượng vàng) và linh thạch bốn phẩm' + (r.thuongLenh ? '\nThưởng Lệnh: ' + r.thuongLenh : ''))}><small>Tiền tệ</small><CumTien r={r} ten />{!!r.thuongLenh && <small className="tl">Thưởng Lệnh {r.thuongLenh}</small>}</div>
     </div>
     <div className="bagwrap bag-only">
       <div className="bagR"><CotPhai items={items} /><p className="hint">Chạm món đồ để xem cách dùng. Mặc, tháo trang bị ở thẻ Trang bị.</p><TamGiu /></div>

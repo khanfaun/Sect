@@ -5,7 +5,6 @@ const RELIC_K = [
   {k:'hotam',b:['Hộ Tâm Phù','Hộ Tâm Ngọc','Hộ Tâm Kính'],fx:{hoTam:6,defP:5}},
   {k:'phap',b:['Pháp Trượng','Phất Trần','Bảo Châu'],fx:{matkP:12}},
   {k:'giap',b:['Giáp','Nhuyễn Giáp','Hộ Tâm Kính'],fx:{defP:20}},
-  {k:'bao',b:['Đạo Bào','Pháp Y','Phi Phong'],fx:{hpP:12}},
   {k:'boi',b:['Ngọc Bội','Ngọc Quyết','Ngọc Bài'],fx:{mpP:18}},
   {k:'ngoa',b:['Ngoa','Vân Hài','Đạp Vân Ngoa'],fx:{tp:3,dodge:3}},
   {k:'linh',b:['Linh','Chung','Khánh'],fx:{startBlock:12}},

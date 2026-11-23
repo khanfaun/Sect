@@ -85,7 +85,7 @@ const Map2=(()=>{
   let TOPI=0,BOTI=0,VCY=0,wide=false;
   const AREA_COL=['#d9a441','#58a46f','#4797bb','#9a74c9','#8196b3'];
   // phần bản đồ thật sự nhìn thấy: dưới header (#hud), trên footer (#nav). Thu nhỏ hết cỡ thì cạnh trên bản đồ chạm header, cạnh dưới chạm footer.
-  function insets(){if(!cv)return false;const cr=cv.getBoundingClientRect();let t=TOPI,b=BOTI;const vis=e=>e&&!e.hidden&&getComputedStyle(e).display!=='none';
+  function insets(){if(!cv)return false;if(document.documentElement.dataset.pc){const ch=TOPI!==0||BOTI!==0;TOPI=0;BOTI=0;VCY=H0/2;return ch;}const cr=cv.getBoundingClientRect();let t=TOPI,b=BOTI;const vis=e=>e&&!e.hidden&&getComputedStyle(e).display!=='none';
     const h=document.getElementById('hud'),n=document.getElementById('nav');if(vis(h)&&h.getBoundingClientRect().width>cr.width*0.8){t=Math.max(0,Math.round((h.getBoundingClientRect().bottom-cr.top)/uz));}
     if(vis(n)&&n.getBoundingClientRect().top>cr.top+cr.height/2){b=Math.max(0,Math.round((cr.bottom-n.getBoundingClientRect().top)/uz));}
     if(vis(h)&&h.getBoundingClientRect().width<=cr.width*0.8)t=0;if(vis(n)&&n.getBoundingClientRect().top<=cr.top+cr.height/2)b=0;const ch=t!==TOPI||b!==BOTI;TOPI=t;BOTI=b;VCY=t+(H0-t-b)/2;return ch;}

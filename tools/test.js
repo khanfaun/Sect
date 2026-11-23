@@ -3462,6 +3462,16 @@ const TESTS = {
     ok(!/\d/.test(run("artMoTa(Object.assign({lv:3},CAT.arts[0]))")), 'công pháp mô tả bằng chữ');
     run("(()=>{const x=genRelic(1);delete x.bo;eqOf()[slotOf(x)]=x;})()");ok(Array.isArray(run("boView()")), 'đồ cũ không có bộ: không lỗi');
   },
+  bo_ao_choang() {
+    const seed0 = fixtureSeed;
+    fresh("G.run.pham=0;G.run.realm=2"); fixtureSeed = seed0;
+    ok(!run("SLOTS.some(x=>x[0]==='choang')") && !run("'choang' in SLOT_N") && !run("RELIC_K.some(x=>x.k==='bao')") && !run("CAT.relics.some(x=>x.k==='bao')"), 'không còn ô áo choàng, không còn đồ loại áo choàng');
+    ok(run("(()=>{for(let i=0;i<300;i++)if(genRelic(1+i%4).k==='bao')return false;return true})()"), 'sinh 300 món: không có áo choàng');
+    const n = run("(()=>{const r=G.run,E=eqOf();for(const k in E)delete E[k];E.choang={k:'bao',name:'Đạo Bào Cũ',tier:1,fx:{hpP:12}};r.relics.push({k:'bao',name:'Pháp Y Cũ',tier:1,fx:{}});return boChoang(r)})()");
+    ok(n >= 2 && run("!eqOf().choang&&eqOf().giap&&eqOf().giap.k==='giap'") && run("!G.run.relics.some(x=>x.k==='bao')"), 'bản lưu cũ: áo choàng đang mặc sang ô giáp, mọi món áo choàng thành giáp');
+    run("(()=>{const E=eqOf();E.choang={k:'bao',name:'B',tier:1,fx:{}};})()"); const nb = run("G.run.relics.length"); run("boChoang(G.run)");
+    ok(run("G.run.relics.length") === nb + 1 && !run("eqOf().choang"), 'ô giáp đã có đồ: áo choàng về túi');
+  },
   ngoai_hinh() {
     const seed0 = fixtureSeed; // không làm lệch seed của các bài sau
     fresh("G.run.pham=0;G.run.realm=3;G.run.g='nam'"); fixtureSeed = seed0;

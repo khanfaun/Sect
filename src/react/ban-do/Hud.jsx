@@ -2,7 +2,7 @@
 import { Html, PS } from '../html';
 import { Rt, tip } from '../chung';
 import { I } from '../giao-dien/anh';
-import { ThanhTren, laPC } from '../may-tinh/MayTinh';
+import { ChanTrang, laPC } from '../may-tinh/MayTinh';
 
 const Im = ({ k }) => <img className="hs-i" src={I(k)} alt="" draggable="false" />;
 
@@ -40,7 +40,7 @@ function TenCanhGioi() {
 }
 
 export function Hud() {
-  if (laPC()) return <ThanhTren />;
+  if (laPC()) return <ChanTrang />;
   const { G, clamp } = PS;
   const r = G.run, s = PS.S(), t = PS.W().t;
   const left = s.life - r.age, warn = left < s.life * 0.12, pa = PS.PART[PS.partOf(t)];

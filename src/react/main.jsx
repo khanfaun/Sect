@@ -1,5 +1,6 @@
 // Lối vào phần giao diện React. Phần luật chơi và các màn chưa chuyển vẫn nằm ở src/game/.
 // Mỗi màn React đăng ký tên ở đây; src/game/ui/22-cau-noi-react.js gọi RX.show để vẽ.
+import { useLayoutEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
 import { ManMoDau, ManChonKiep, ManHetKiep, ManBenVongXuyen, ManMoDauKiep, ManKet } from './man-ngoai';
@@ -32,7 +33,22 @@ const VIEWS = {
 };
 // Các cảnh: 'Canh:<loại>' vẽ cảnh đang mở (G.run.scene)
 // Hộp thoại: 'HopThoai:<loại>' vẽ hộp thoại đang mở (UI.modal)
-for (const [k, C] of Object.entries(HOP_THOAI)) VIEWS['HopThoai:' + k] = () => <C m={PS.UI.modal} />;
+// hộp nổi mở từ địa điểm: thêm nút X ở góc trên để đóng (chỉ đóng hộp, vẫn ở địa điểm)
+const CO_X = new Set(['nhansu', 'conghien', 'laibuon', 'tram', 'vehi', 'explore', 'pconf', 'board', 'thuongcac', 'muusinh', 'vconf', 'vreq', 'hopthu']);
+function CoX({ C }) {
+  const ref = useRef(null);
+  useLayoutEffect(() => {
+    const b = ref.current && ref.current.nextElementSibling;
+    const box = b && (b.classList.contains('mbox') ? b : b.querySelector('.mbox'));
+    if (box && !box.querySelector(':scope > .mb-x')) {
+      const x = document.createElement('button');
+      x.className = 'mb-x'; x.dataset.act = 'modalX'; x.setAttribute('aria-label', 'Đóng'); x.title = 'Đóng'; x.textContent = '×';
+      box.prepend(x);
+    }
+  });
+  return <><i ref={ref} hidden /><C m={PS.UI.modal} /></>;
+}
+for (const [k, C] of Object.entries(HOP_THOAI)) VIEWS['HopThoai:' + k] = CO_X.has(k) ? () => <CoX C={C} /> : () => <C m={PS.UI.modal} />;
 // Bảng: 'Bang:<tên>' vẽ bảng đang mở (UI.panel)
 for (const [k, C] of Object.entries(BANG)) VIEWS['Bang:' + k] = C;
 for (const [k, C] of Object.entries(CANH)) VIEWS['Canh:' + k] = () => <C sc={PS.G.run.scene} />;

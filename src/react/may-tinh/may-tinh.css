@@ -1,114 +1,116 @@
 /* Giao diện riêng cho máy tính. Bật khi :root[data-pc] (màn ≥1000×600, laPC() ở ui/35) và đang ở bản đồ / cảnh.
-   Khung: thanh trên 58px · cột trái 292px (nhân vật, chỉ số, menu) · vùng giữa (bản đồ / cửa sổ) · cột phải 300px khi xem bản đồ. */
-:root[data-pc]{--pcT:58px;--pcL:292px;--pcR:300px}
+   Khung: cột mục bên trái (--pcL, thu gọn 64px) · thanh dưới (--pcF) có nhân vật · bản đồ / cửa sổ ở vùng còn lại. */
+:root[data-pc]{--pcL:184px;--pcF:112px}
+:root[data-pc][data-pcthu]{--pcL:64px}
 :root[data-pc]:is([data-view=map],[data-view=scene]) #app{max-width:none!important;inset:0!important;border-radius:0!important;box-shadow:none!important;background:#0e2a24}
+/* bản đồ nằm đúng vùng trống: không bị cột trái, thanh dưới che */
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #mapcv{left:var(--pcL)!important;top:0!important;width:calc(100% - var(--pcL))!important;height:calc(100% - var(--pcF))!important;inset:auto}
 
-/* ---------- thanh trên ---------- */
-:root[data-pc]:is([data-view=map],[data-view=scene]) #app #hud{position:absolute!important;display:block!important;left:0!important;right:0!important;top:0!important;width:auto!important;height:var(--pcT)!important;margin:0!important;padding:0 14px!important;
-  border:0!important;border-bottom:2px solid var(--gd)!important;border-radius:0!important;background:linear-gradient(#fbfaf3,#e9f0ea)!important;box-shadow:0 3px 12px rgba(7,23,18,.35)!important;z-index:30}
-.pc-top{display:flex;align-items:center;gap:22px;height:100%}
-.pc-brand{display:flex;align-items:center;gap:8px;width:calc(var(--pcL) - 28px);flex:none}
-.pc-brand img{width:36px;height:36px;object-fit:contain}
-.pc-brand b{font-family:var(--disp);font-weight:400;font-size:1.45em;color:var(--jd2);letter-spacing:.02em}
-.pc-ngay{display:flex;flex-direction:column;line-height:1.15;flex:none}
-#app .pc-ngay .hud-clk3{margin:0!important;padding:0!important;align-self:auto!important;flex-direction:row!important;align-items:baseline!important;gap:8px;line-height:1.2}
-#app .pc-ngay .hud-clk3 .ck-y{order:-1;font-size:1.2em}
-#app .pc-ngay .hud-clk3 span{font-size:.78em}
-.pc-ngay small{font-size:.72em;color:var(--ink3)}
-.pc-tien{flex:1;display:flex;justify-content:center;min-width:0}
-#app .pc-tien .tien-cum{position:static!important;transform:none!important;left:auto!important;right:auto!important;bottom:auto!important;font-size:1.05em;padding:4px 12px;gap:10px}
-.pc-nut{display:flex;gap:8px;flex:none}
-.pc-ib{position:relative;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(#fff,#e6f1ea);border:0;box-shadow:0 0 0 2px var(--gd),0 2px 6px rgba(14,42,36,.3);cursor:pointer;color:var(--jd2)}
-.pc-ib img{width:28px;height:28px;object-fit:contain}
-.pc-ib:hover{box-shadow:0 0 0 2px var(--gd),0 0 10px rgba(196,154,62,.7)}
-.pc-ib em{position:absolute;top:-4px;right:-4px;min-width:16px;height:16px;border-radius:8px;background:var(--seal);color:#fff;font:700 10px/16px var(--font);font-style:normal}
-
-/* ---------- cột trái ---------- */
-:root[data-pc]:is([data-view=map],[data-view=scene]) #app #nav{position:absolute!important;display:block!important;left:0!important;right:auto!important;top:var(--pcT)!important;bottom:0!important;width:var(--pcL)!important;height:auto!important;
-  padding:12px!important;overflow-y:auto;border:0!important;border-right:2px solid var(--gd)!important;border-radius:0!important;background:linear-gradient(#f6f8f2,#e4ece6)!important;box-shadow:4px 0 14px rgba(7,23,18,.3)!important;z-index:20;scrollbar-width:thin}
-:root[data-theme=dark][data-pc] #app #nav,:root[data-theme=dark][data-pc] #app #hud{background:linear-gradient(#16332c,#0f2621)!important}
-.pc-trai{display:flex;flex-direction:column;gap:12px;color:var(--ink)}
-.pc-nv{display:flex;gap:12px;align-items:center}
-.pc-av{position:relative;flex:none;width:86px;height:86px;border-radius:50%;padding:0;border:0;background:radial-gradient(#fff,#e6f1ea);box-shadow:0 0 0 3px var(--gd),0 4px 10px rgba(14,42,36,.35);cursor:pointer;overflow:visible}
-.pc-av .pc-avi{position:absolute;inset:3px;border-radius:50%;overflow:hidden}
+/* ---------- thanh dưới ---------- */
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #hud{position:absolute!important;display:block!important;left:0!important;right:0!important;top:auto!important;bottom:0!important;width:auto!important;height:var(--pcF)!important;margin:0!important;padding:0 16px!important;
+  border:0!important;border-top:2px solid var(--gd)!important;border-radius:0!important;background:linear-gradient(#fbfaf3,#e6eee8)!important;box-shadow:0 -4px 14px rgba(7,23,18,.35)!important;z-index:30;overflow:visible}
+:root[data-theme=dark][data-pc] #app #hud,:root[data-theme=dark][data-pc] #app #nav{background:linear-gradient(#16332c,#0f2621)!important}
+.pc-day{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;height:100%;gap:14px}
+.pc-ben{display:flex;align-items:center;justify-content:space-between;gap:14px;min-width:0;height:100%}
+.pc-giua{position:relative;display:flex;flex-direction:column;align-items:center;align-self:end;padding-bottom:6px;width:170px;text-align:center;line-height:1.15}
+.pc-av{position:relative;width:100px;height:100px;margin-top:-40px;margin-bottom:4px;border-radius:50%;padding:0;border:0;background:radial-gradient(#fff,#e6f1ea);box-shadow:0 0 0 3px var(--gd),0 0 0 7px rgba(251,250,243,.9),0 6px 16px rgba(14,42,36,.45);cursor:pointer}
+.pc-av .pc-avi{position:absolute;inset:4px;border-radius:50%;overflow:hidden}
 .pc-av .pc-avi img{width:100%;height:100%;object-fit:cover}
-.pc-av .tfr{position:absolute;inset:-8px;pointer-events:none}
-.pc-id{display:flex;flex-direction:column;gap:1px;min-width:0}
-.pc-ten{font-family:var(--disp);font-weight:400!important;font-size:1.35em;line-height:1.1}
-.pc-cg{font-size:.88em;color:var(--jd2);font-weight:600}
-.pc-id small{font-size:.75em;color:var(--ink2)}
-.pc-id .bad{color:var(--seal)}
-.pc-id .hbt{align-self:flex-start;margin-top:4px}
-.pc-bars{display:flex;flex-direction:column;gap:7px;padding:10px;border-radius:12px;background:rgba(255,255,255,.7);border:1px solid var(--gl)}
-.pc-bar{display:grid;grid-template-columns:1fr auto;gap:2px 8px;font-size:.78em}
+.pc-av .tfr{position:absolute;inset:-10px;pointer-events:none}
+.pc-ten{font-family:var(--disp);font-weight:400!important;font-size:1.15em;line-height:1.1;white-space:nowrap}
+.pc-cg{font-size:.74em;color:var(--jd2);font-weight:600;white-space:nowrap}
+.pc-tuoi{font-size:.68em;color:var(--ink2);white-space:nowrap}.pc-tuoi.bad{color:var(--seal)}
+.pc-ngay{display:flex;flex-direction:column;line-height:1.15;flex:none}
+#app .pc-ngay .hud-clk3{margin:0!important;padding:0!important;align-self:auto!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;text-align:left!important;gap:0;line-height:1.25}
+#app .pc-ngay .hud-clk3 .ck-y{order:-1;font-size:1.15em}
+#app .pc-ngay .hud-clk3 span{font-size:.74em}
+.pc-ngay small{font-size:.7em;color:var(--ink3)}
+.pc-bars{display:flex;flex-direction:column;gap:7px;width:190px;flex:none}
+.pc-bar{display:grid;grid-template-columns:1fr auto;gap:1px 8px;font-size:.74em}
 .pc-bn{color:var(--ink2);font-weight:600}
 .pc-bt{font-variant-numeric:tabular-nums;color:var(--ink)}
 .pc-bar i{grid-column:1/-1;display:block;height:8px;border-radius:4px;background:rgba(14,42,36,.12);overflow:hidden}
 .pc-bar i b{display:block;height:100%;border-radius:4px;transition:width .4s}
 .pc-bar.hp i b{background:linear-gradient(90deg,#3f9a5a,#7fcf8f)}.pc-bar.hp.low i b{background:linear-gradient(90deg,#b8322a,#e8735c)}
 .pc-bar.mp i b{background:linear-gradient(90deg,#2f6fb8,#79b6f0)}
+.pc-bar.tho i b{background:linear-gradient(90deg,#9a8a5a,#d8c890)}
 .pc-bar.tv i b{background:linear-gradient(90deg,#1f8a76,#7ad0b0)}
 .pc-bar.ll i b{background:linear-gradient(90deg,#d77a22,#f2b65a)}
-.pc-cs{display:flex;flex-direction:column;padding:4px 10px;border-radius:12px;background:rgba(255,255,255,.7);border:1px solid var(--gl)}
-.pc-cs>*{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:.8em;border:0;border-bottom:1px solid var(--line);background:none;color:inherit;text-align:left;width:100%;font-family:inherit}
-.pc-cs>*:last-child{border-bottom:0}
+.pc-cs{display:grid;grid-template-columns:repeat(2,auto);gap:3px 14px;flex:none}
+.pc-cs>*{display:flex;align-items:center;gap:5px;padding:0;font-size:.72em;border:0;background:none;color:inherit;text-align:left;font-family:inherit;white-space:nowrap}
 .pc-cs button{cursor:pointer}
-.pc-cs img,.pc-cs .pc-em{width:22px;height:22px;object-fit:contain;font-style:normal;text-align:center;line-height:22px;flex:none}
-.pc-cs span{flex:1;color:var(--ink2)}
-.pc-cs b,.pc-cs .rt{font-weight:600;text-align:right}
+.pc-cs img,.pc-cs .pc-em{width:20px;height:20px;object-fit:contain;font-style:normal;text-align:center;line-height:20px;flex:none}
+.pc-cs span{color:var(--ink2)}
+.pc-cs b,.pc-cs .rt{font-weight:600}
 .pc-cs .hi b{color:var(--seal)}
-.pc-viec{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.pc-vb{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px 6px;border-radius:12px;border:0;background:linear-gradient(#fffdf5,#efe6cc);box-shadow:0 0 0 2px var(--gd),0 3px 8px rgba(14,42,36,.25);cursor:pointer;font-family:var(--disp);font-size:.95em;color:var(--ink)}
-.pc-vb img{width:42px;height:42px;object-fit:contain}
-.pc-vb:hover:not(:disabled){box-shadow:0 0 0 2px var(--gd),0 0 14px rgba(196,154,62,.7)}
-.pc-vb:disabled{opacity:.5;cursor:default}
-.pc-vb.on{background:linear-gradient(#e6f4ec,#cfe6da)}
-.pc-vb.glow{animation:hcNhip 1.6s ease-in-out infinite}
-.pc-menu{display:flex;flex-direction:column;gap:2px;padding:6px;border-radius:12px;background:rgba(255,255,255,.55);border:1px solid var(--gl)}
-.pc-mi{position:relative;display:flex;align-items:center;gap:10px;padding:6px 8px;border:0;border-radius:9px;background:none;cursor:pointer;color:var(--ink);font-family:inherit;font-size:.9em;text-align:left}
-.pc-mi img{width:30px;height:30px;object-fit:contain;flex:none}
-.pc-mi span{flex:1}
-.pc-mi kbd{font:600 .72em var(--font);color:var(--ink3);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;background:#fff}
-.pc-mi:hover{background:rgba(31,138,118,.08)}
-.pc-mi.on{background:linear-gradient(90deg,rgba(31,138,118,.18),rgba(31,138,118,.05));box-shadow:inset 3px 0 0 var(--jd);color:var(--jd2);font-weight:600}
-.pc-mi .dot{position:absolute;left:30px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--seal);box-shadow:0 0 0 1.5px #fff}
+.pc-tt{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pc-vt{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+#app .pc-vt .wi{position:static}
+.pc-yen{font-size:.72em;color:var(--jd2);font-weight:600;padding:1px 8px;border-radius:8px;background:rgba(31,138,118,.1)}
+#app .pc-tt .tien-cum{position:static!important;transform:none!important;left:auto!important;right:auto!important;bottom:auto!important;align-self:flex-start;font-size:.95em;padding:3px 10px;gap:8px}
+.pc-nut{display:flex;gap:8px;flex:none}
+.pc-ib{position:relative;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(#fff,#e6f1ea);border:0;box-shadow:0 0 0 2px var(--gd),0 2px 6px rgba(14,42,36,.3);cursor:pointer;color:var(--jd2)}
+.pc-ib img{width:28px;height:28px;object-fit:contain}
+.pc-ib:hover{box-shadow:0 0 0 2px var(--gd),0 0 10px rgba(196,154,62,.7)}
+.pc-ib em{position:absolute;top:-4px;right:-4px;min-width:16px;height:16px;border-radius:8px;background:var(--seal);color:#fff;font:700 10px/16px var(--font);font-style:normal}
+@media (max-width:1340px){.pc-cs .pc-cl{display:none}.pc-bars{width:150px}.pc-ngay small{display:none}#app .pc-tt .tien-cum{font-size:.82em;gap:5px;padding:2px 7px}}
 
-/* ---------- bản đồ: công cụ ở trên, cột phải ---------- */
+
+/* ---------- cột trái: các mục ---------- */
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #nav{position:absolute!important;display:block!important;left:0!important;right:auto!important;top:0!important;bottom:var(--pcF)!important;width:var(--pcL)!important;height:auto!important;
+  padding:8px!important;overflow-y:auto;overflow-x:hidden;border:0!important;border-right:2px solid var(--gd)!important;border-radius:0!important;background:linear-gradient(#f6f8f2,#e4ece6)!important;box-shadow:4px 0 14px rgba(7,23,18,.3)!important;z-index:20;scrollbar-width:none;transition:width .18s}
+.pc-trai{display:flex;flex-direction:column;gap:3px;color:var(--ink)}
+.pc-thu{align-self:flex-end;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--jd2);margin-bottom:4px}
+.pc-trai.thu .pc-thu{align-self:center}
+.pc-mi{position:relative;display:flex;align-items:center;gap:10px;padding:7px 8px;border:0;border-radius:10px;background:none;cursor:pointer;color:var(--ink);font-family:inherit;font-size:.9em;text-align:left;white-space:nowrap}
+.pc-mi img{width:30px;height:30px;object-fit:contain;flex:none}
+.pc-mi span:not(.pc-emi){flex:1;overflow:hidden;text-overflow:ellipsis}
+.pc-mi kbd{font:600 .7em var(--font);color:var(--ink3);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px;background:#fff}
+.pc-mi:hover:not(:disabled){background:rgba(31,138,118,.08)}
+.pc-mi:disabled{opacity:.45;cursor:default}
+.pc-mi.on{background:linear-gradient(90deg,rgba(31,138,118,.2),rgba(31,138,118,.05));box-shadow:inset 3px 0 0 var(--jd);color:var(--jd2);font-weight:600}
+.pc-mi.glow img{animation:hcNhip 1.6s ease-in-out infinite;border-radius:50%}
+.pc-mi .dot{position:absolute;left:32px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--seal);box-shadow:0 0 0 1.5px #fff}
+.pc-cuoi{margin-top:8px;padding-top:6px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:3px}
+.pc-emi{width:30px;height:30px;display:grid;place-items:center;flex:none!important;font-size:20px;color:var(--jd2)}
+.pc-trai.thu .pc-mi .pc-emi{display:grid}
+.pc-mi.nv-bq{margin-top:8px;border-top:1px solid var(--line);border-radius:0 0 10px 10px;padding-top:11px}
+.pc-trai.thu .pc-mi{justify-content:center;padding:7px 0}
+.pc-trai.thu .pc-mi span:not(.pc-emi),.pc-trai.thu .pc-mi kbd{display:none}
+.pc-trai.thu .pc-mi .dot{left:auto;right:6px}
+
+/* ---------- trên bản đồ: công cụ góc trên trái, nhiệm vụ góc trên phải ---------- */
 :root[data-pc] #app #mapui{position:absolute;inset:0;pointer-events:none}
 :root[data-pc] #app #mapui>*{pointer-events:auto}
-.pc-cong{position:absolute;top:calc(var(--pcT) + 12px);left:calc(var(--pcL) + 14px);display:flex;gap:6px;z-index:6}
+.pc-cong{position:absolute;top:12px;left:calc(var(--pcL) + 14px);display:flex;gap:6px;z-index:6}
 .pc-cb{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:0;background:rgba(251,250,243,.94);box-shadow:0 0 0 1.5px var(--gd),0 2px 8px rgba(14,42,36,.3);cursor:pointer;font:600 .78em var(--font);color:var(--ink)}
 .pc-cb .ic{width:16px;height:16px}
 .pc-cb.on{background:linear-gradient(var(--jd),var(--jd2));color:#fff}
 .pc-cb:disabled{opacity:.5}
-.pc-phai{position:absolute;top:var(--pcT);right:0;bottom:0;width:var(--pcR);overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:12px;
-  background:linear-gradient(rgba(246,248,242,.96),rgba(228,236,230,.96));border-left:2px solid var(--gd);box-shadow:-4px 0 14px rgba(7,23,18,.3);z-index:6;scrollbar-width:thin}
-:root[data-theme=dark] .pc-phai{background:linear-gradient(rgba(22,51,44,.97),rgba(15,38,33,.97))}
-.pc-sec{border-radius:12px;background:rgba(255,255,255,.7);border:1px solid var(--gl);padding:10px}
-.pc-sec:empty{display:none}
-.pc-sec h4{margin:0 0 6px;font-family:var(--disp);font-weight:400;font-size:1.05em;color:var(--jd2)}
-.pc-trong{margin:0;font-size:.8em;color:var(--ink3)}
-.pc-vt{display:flex;flex-wrap:wrap;gap:6px}
-#app .pc-vt .wi{position:static}
-#app .pc-nvu .tut{position:static!important;width:auto!important;max-width:none!important;left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;box-shadow:none;background:none;border:0;padding:0}
-#app .pc-nvu .tut-c{background:#fff}
-.pc-nvu:not(:has(.tut)){display:none}
-/* thẻ nơi đang chọn trên bản đồ: nằm trong vùng giữa, không đè cột phải */
-:root[data-pc]:is([data-view=map]) #app #dock:not(:has(.np)){left:var(--pcL)!important;right:var(--pcR)!important;bottom:16px!important;transform:none!important;width:auto!important}
+.pc-nvu{position:absolute;top:12px;right:14px;width:290px;z-index:6;pointer-events:none}
+.pc-nvu>*{pointer-events:auto}
+#app .pc-nvu .tut{position:static!important;width:auto!important;max-width:none!important;left:auto!important;right:auto!important;bottom:auto!important;top:auto!important}
+/* thẻ nơi đang chọn trên bản đồ: nằm trong vùng bản đồ */
+:root[data-pc]:is([data-view=map]) #app #dock:not(:has(.np)){left:var(--pcL)!important;right:0!important;bottom:calc(var(--pcF) + 16px)!important;transform:none!important;width:auto!important}
 
 /* ---------- vùng giữa: bảng, cảnh, hộp thoại mở thành cửa sổ ---------- */
-:root[data-pc]:is([data-view=map],[data-view=scene]) #app #panel{left:var(--pcL)!important;right:0!important;top:var(--pcT)!important;bottom:0!important;width:auto!important;transform:none!important;padding:0!important;z-index:18;box-shadow:none}
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #panel{left:var(--pcL)!important;right:0!important;top:0!important;bottom:var(--pcF)!important;width:auto!important;transform:none!important;padding:0!important;z-index:18;box-shadow:none}
 :root[data-pc] #app #panel .win{height:100%;max-width:none;display:flex;flex-direction:column}
 :root[data-pc] #app #panel .win-h{padding:12px 22px 10px}
 :root[data-pc] #app #panel .win-h h2{font-size:1.5em}
 :root[data-pc] #app #panel .win-b{padding:10px 22px 22px}
-:root[data-pc]:is([data-view=map],[data-view=scene]) #app #sheet{left:var(--pcL)!important;right:0!important;top:var(--pcT)!important;bottom:0!important;width:auto!important;transform:none!important;z-index:17}
-:root[data-pc]:is([data-view=map],[data-view=scene]) #modal{left:var(--pcL)!important;top:var(--pcT)!important;right:0!important;bottom:0!important;place-items:center!important}
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #sheet{left:var(--pcL)!important;right:0!important;top:0!important;bottom:var(--pcF)!important;width:auto!important;transform:none!important;z-index:17}
+:root[data-pc]:is([data-view=map],[data-view=scene]) #modal{left:var(--pcL)!important;top:0!important;right:0!important;bottom:var(--pcF)!important;place-items:center!important}
 :root[data-pc]:is([data-view=map],[data-view=scene]) #app #modal .mbox{width:600px;max-width:calc(100% - 60px);max-height:88%;border-radius:18px;border:2px solid var(--gd);animation:none}
 :root[data-pc]:is([data-view=map],[data-view=scene]) #app #modal .mbox.dev{width:900px}
 :root[data-pc] #app #toast{left:calc(var(--pcL) + (100% - var(--pcL)) / 2)!important;right:auto!important;width:480px;transform:translateX(-50%)}
 :root[data-pc] #hnote{left:calc(var(--pcL) + (100vw - var(--pcL)) / 2)}
 :root[data-pc]:is([data-view=map],[data-view=scene])[data-edge]::after,:root[data-pc]:is([data-view=map],[data-view=scene]) #lowfx{left:0!important;width:auto!important;right:0!important;transform:none!important;top:0!important;bottom:0!important;border-radius:0}
+
+/* bảng Thêm (mục lục, lớp bản đồ, chú giải, ghi chú, cấu hình): hộp ở giữa, không phủ kín */
+:root[data-pc][data-panel=more]:is([data-view=map],[data-view=scene]) #app #panel{left:calc(var(--pcL) + (100% - var(--pcL)) / 2)!important;right:auto!important;top:50%!important;bottom:auto!important;
+  width:clamp(440px,36vw,620px)!important;height:min(78%,760px);transform:translate(-50%,-50%)!important;border-radius:18px;overflow:hidden;box-shadow:0 0 0 2px var(--gd),0 20px 60px rgba(7,23,18,.6)!important}
+:root[data-pc][data-panel=more]:is([data-view=map],[data-view=scene]) #app::after{content:'';position:absolute;left:var(--pcL);right:0;top:0;bottom:var(--pcF);background:rgba(7,23,18,.45);z-index:17;pointer-events:none}
 
 /* ---------- bảng nhân vật: rộng, nhiều cột ---------- */
 :root[data-pc] #app #panel .tabs{gap:6px}
@@ -145,3 +147,12 @@
 :root[data-pc] .bq-home .orbb.r{right:40px!important;top:30px!important}
 :root[data-pc] .bq-home .bq-cult{grid-area:2/2/3/3;margin:10px 12px 0!important}
 :root[data-pc] .bq-home .bq-pan,:root[data-pc] .bq-home.cgbox .bq-pan{grid-area:3/2/4/3;height:auto!important;max-height:none!important;margin:10px 12px 12px!important}
+
+/* ---------- thẻ Trang bị trên máy tính: nhân vật (khung gần vuông) + bộ/chỉ số bên cạnh, dưới là 3 cột ---------- */
+:root[data-pc] #app .tb-wrap{display:grid;grid-template-columns:auto 1fr;gap:6px 28px;align-items:start}
+:root[data-pc] #app .tb-wrap .tb-doll{grid-template-columns:62px 360px 62px;max-width:none;width:auto;align-self:start;margin:4px 0}
+:root[data-pc] #app .tb-giua{height:auto;aspect-ratio:1.1}
+:root[data-pc] #app .tb-wrap .tb-ben{order:0;min-width:0}
+:root[data-pc] #app .tb-wrap .tb-ben .sgrp:first-child{margin-top:4px}
+:root[data-pc] #app .tb-duoi{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:0 24px;align-items:start}
+:root[data-pc] #app .tb-duoi .ddrow{grid-template-columns:repeat(3,1fr)!important}

@@ -34,44 +34,67 @@ export function KetQuaDotPha({ sc }) {
   );
 }
 
-export function BangTreoThuong({ sc }) {
+// nội dung bảng treo thưởng (dùng cho cảnh cũ và hộp nổi trong địa điểm)
+function NoiDungBang({ n }) {
   const { G, UI } = PS;
-  const r = G.run, n = PS.nodeById(sc.id), now = PS.W().t;
+  const r = G.run, now = PS.W().t;
   const open = r.quests.filter(q => q.state === 'open').length;
   const mine = r.quests.filter(q => q.state === 'open' && q.from === n.id);
   UI.qOpen = UI.qOpen || {};
+  return <>
+    <div className="story">
+      <p>Mấy tờ cáo thị dán chồng lên nhau, giấy đã ngả vàng. Nhận việc thì phải xong trước hạn, thất hứa thì mang tiếng.</p>
+      <p className="hint">Bảng thay việc mới sau {PS.durH(PS.boardLeft(n))}.</p>
+    </div>
+    <div className="choices">
+      {n.board.list.map((q, i) => {
+        const g = PS.questGrade(q), exp = q.acc && now > q.acc, dis = q.taken || open >= 3 || exp;
+        return (
+          <div key={i} role="button" className={'ch qrow' + (dis ? ' qdis' : '') + (g >= 5 ? ' q5' : '')} data-act={dis ? undefined : 'quest'} data-arg={dis ? undefined : i}
+            style={{ '--pc': PS.qpc(g).replace(/^--pc:/, '') }} {...tip(q.kind === 'diet' ? 'Tới nơi rồi lùng tìm, đánh hạ mục tiêu' : 'Tới nơi rồi giao tận tay')}>
+            <span className="ct">{q.text}</span>
+            <span className="qmeta">
+              <span className="qgr">{PS.QGRADE[g]}</span>
+              {!!q.special && <span className="qsp">Đặc biệt</span>}
+              <span className="qdl" {...tip('Thời gian để làm xong, tính từ lúc nhận')}>làm trong {PS.durH(q.days * PS.HD)}</span>
+              {!!q.acc && !q.taken && <span className={'qdl' + (exp ? '' : ' hot')} {...tip('Phải nhận trước hạn này')}>{exp ? 'hết hạn nhận' : 'hạn nhận còn ' + PS.durH(q.acc - now)}</span>}
+              {q.cancelled ? <span className="qtk">đã hủy, không nhận lại được</span> : q.taken ? <span className="qtk">đã nhận</span> : null}
+            </span>
+            <span className="qrw"><Chips list={q.taken ? PS.questRewardChips(q) : PS.questRewardChipsHidden(q)} /></span>
+          </div>
+        );
+      })}
+    </div>
+    <p className="hint">Đang nhận {open}/3 việc.</p>
+    {mine.length > 0 && <>
+      <h4 className="sgrp">Việc đã nhận ở đây</h4>
+      <div className="rows">{mine.map(q => <TheNhiemVu key={q.id} q={q} />)}</div>
+    </>}
+  </>;
+}
+
+export function BangTreoThuong({ sc }) {
+  const n = PS.nodeById(sc.id);
   return (
     <Card title="Bảng treo thưởng" sub={n.name} x
       foot={<><button className="btn" data-act="next">Quay lại</button><span className="grow"></span><button className="btn pri" data-act="openJournal"><Ic n="book" /> Sổ tay</button></>}>
-      <div className="story">
-        <p>Mấy tờ cáo thị dán chồng lên nhau, giấy đã ngả vàng. Nhận việc thì phải xong trước hạn, thất hứa thì mang tiếng.</p>
-        <p className="hint">Bảng thay việc mới sau {PS.durH(PS.boardLeft(n))}.</p>
-      </div>
-      <div className="choices">
-        {n.board.list.map((q, i) => {
-          const g = PS.questGrade(q), exp = q.acc && now > q.acc, dis = q.taken || open >= 3 || exp;
-          return (
-            <div key={i} role="button" className={'ch qrow' + (dis ? ' qdis' : '') + (g >= 5 ? ' q5' : '')} data-act={dis ? undefined : 'quest'} data-arg={dis ? undefined : i}
-              style={{ '--pc': PS.qpc(g).replace(/^--pc:/, '') }} {...tip(q.kind === 'diet' ? 'Tới nơi rồi lùng tìm, đánh hạ mục tiêu' : 'Tới nơi rồi giao tận tay')}>
-              <span className="ct">{q.text}</span>
-              <span className="qmeta">
-                <span className="qgr">{PS.QGRADE[g]}</span>
-                {!!q.special && <span className="qsp">Đặc biệt</span>}
-                <span className="qdl" {...tip('Thời gian để làm xong, tính từ lúc nhận')}>làm trong {PS.durH(q.days * PS.HD)}</span>
-                {!!q.acc && !q.taken && <span className={'qdl' + (exp ? '' : ' hot')} {...tip('Phải nhận trước hạn này')}>{exp ? 'hết hạn nhận' : 'hạn nhận còn ' + PS.durH(q.acc - now)}</span>}
-                {q.cancelled ? <span className="qtk">đã hủy, không nhận lại được</span> : q.taken ? <span className="qtk">đã nhận</span> : null}
-              </span>
-              <span className="qrw"><Chips list={q.taken ? PS.questRewardChips(q) : PS.questRewardChipsHidden(q)} /></span>
-            </div>
-          );
-        })}
-      </div>
-      <p className="hint">Đang nhận {open}/3 việc.</p>
-      {mine.length > 0 && <>
-        <h4 className="sgrp">Việc đã nhận ở đây</h4>
-        <div className="rows">{mine.map(q => <TheNhiemVu key={q.id} q={q} />)}</div>
-      </>}
+      <NoiDungBang n={n} />
     </Card>
+  );
+}
+
+// hộp nổi Bảng treo thưởng khi đang ở địa điểm (UI.modal.k 'board'): không rời cảnh địa điểm
+export function BangTreoThuongHop() {
+  const r = PS.G.run;
+  if (!r || !r.scene || r.scene.type !== 'place') return null;
+  const n = PS.nodeById(r.scene.id);
+  if (!n || !n.board) return null;
+  return (
+    <div className="mbox bang-tt">
+      <h3>Bảng treo thưởng</h3>
+      <NoiDungBang n={n} />
+      <div className="mb-f"><button className="btn" data-act="openJournal"><Ic n="book" /> Sổ tay</button><span className="grow"></span><button className="btn pri" data-act="modalX">Xong</button></div>
+    </div>
   );
 }
 

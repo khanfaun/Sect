@@ -492,3 +492,26 @@ body{font-family:var(--font);letter-spacing:0}
 #app .hrow .hn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;justify-content:flex-start}
 /* thanh đầu: biểu tượng + chữ nằm giữa ô */
 #app .hud-stats .hs{justify-content:center}
+
+/* thẻ Trang bị: thứ tự trên điện thoại (nhân vật → pháp bảo, đan điền, pháp khí → bộ, chỉ số); khung nhân vật không quá dài */
+.tb-wrap{display:flex;flex-direction:column}
+.tb-wrap .tb-ben{order:3}
+.tb-wrap .tb-doll{max-width:440px;width:100%;align-self:center}
+/* túi đồ: tiền tệ bung ra, ghi thẳng tên */
+#app .bst-tien .tien-cum.ten{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 14px;width:100%}
+#app .tien-cum.ten .tc-sep{display:none}
+#app .tien-cum.ten .tc{display:flex;gap:6px;font-size:.84em;font-weight:400;padding:3px 0;border-bottom:1px dashed var(--line)}
+#app .tien-cum.ten .tc .ti{width:18px;height:18px;flex:none}
+#app .tien-cum.ten .tc-n{flex:1;color:var(--ink2);white-space:nowrap}
+#app .tien-cum.ten .tc-v{font-weight:600;font-variant-numeric:tabular-nums}
+#app .tien-cum.ten .tc.z{opacity:.55}
+/* túi đồ: dòng sức chứa nằm ngay trên lưới ô */
+.bcap-r{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 6px}
+.bcap-r .bcap{display:flex;align-items:baseline;gap:6px;text-align:left}
+.bcap-r .bcap small{display:inline;font-size:.82em}
+/* nút X đóng hộp nổi (thêm tự động ở main.jsx cho các hộp mở từ địa điểm) */
+#app .mbox{position:relative}
+#app .mbox > .mb-x{position:absolute;top:6px;right:6px;z-index:3;width:30px;height:30px;border-radius:50%;border:1px solid rgba(201,162,74,.55);background:rgba(20,16,10,.55);color:#f1dfb4;font-size:20px;line-height:26px;padding:0;cursor:pointer}
+#app .mbox > .mb-x:hover{background:rgba(201,162,74,.3)}
+#app .mbox > .mb-x + h3{padding-right:34px}
+#app .mbox.bang-tt{max-height:82vh;overflow:auto}

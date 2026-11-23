@@ -11,6 +11,7 @@ import { TracLinh } from './TracLinh';
 import { XemVatPham, XemCongPhap, CacPham, TieuHuyet } from './VatPham';
 import { XacNhanViec, XacNhanNoiChon, LamNhiemVu, HuyNhiemVu } from './XacNhan';
 import { ThuongCac } from './ThuongCac';
+import { BangTreoThuongHop } from '../canh/ViecKhac';
 import { MuuSinh } from './MuuSinh';
 import { HopThu } from './HopThu';
 import { BoQuaTanThu, NguyenVong } from '../chung/TanThu';
@@ -29,6 +30,7 @@ export const HOP_THOAI = {
   vehi: TramDich,
   explore: ThamDo,
   pconf: XacNhanViec,
+  board: BangTreoThuongHop,
   vconf: XacNhanNoiChon,
   vreq: XacNhanNoiChon,
   qdo: LamNhiemVu,
