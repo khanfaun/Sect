@@ -100,6 +100,26 @@ const TESTS = {
   },
   // bảng treo thưởng mở thành hộp nổi (vẫn ở địa điểm), hộp nổi ở địa điểm có nút X; trang bị không còn áo choàng; túi đồ ghi tên tiền tệ
   // việc ở địa điểm (cổng sơn môn, thăm dò…) mở sự kiện thành hộp trắng ngay trên cảnh địa điểm
+  // chụp ảnh bố cục PC (chỉ dùng khi cần nhìn: --shot <thư mục>)
+  async pc_anh(p) {
+    await ev(p, () => { G.run.scene = null; render(); }); await p.waitForTimeout(800); await shot(p, 'dt-bando0');
+    await p.setViewportSize({ width: 1440, height: 860 }); await p.waitForTimeout(300);
+    await ev(p, () => { G.run.scene = null; UI.panel = null; UI.modal = null; render(); }); await p.waitForTimeout(300);
+    await shot(p, 'pc-bando');
+    if (SHOT) { await p.screenshot({ path: path.join(SHOT, 'pc-chantrang.png'), clip: { x: 0, y: 690, width: 1440, height: 170 } }); await p.screenshot({ path: path.join(SHOT, 'pc-ngay.png'), clip: { x: 560, y: 0, width: 520, height: 60 } }); }
+    await ev(p, () => { UI.panel = 'char'; UI.tab.char = 'tb'; render(); }); await p.waitForTimeout(300);
+    await shot(p, 'pc-trangbi');
+    await ev(p, () => { UI.panel = null; const n = W().regions.flatMap(R => R.nodes).find(n => n.type === 'sao' || n.type === 'rung'); if (n) { G.run.at = n.id; openPlace(n.id); } startCombat({ cnt: 2 }, { kind: 'node' }); CFG.autoFight = 0; render(); }); await p.waitForTimeout(600);
+    await shot(p, 'pc-tran');
+    await ev(p, () => { ACT.cbGo(); CFG.autoFight = 0; render(); }); await p.waitForTimeout(1200); await shot(p, 'pc-tran2');
+    await p.setViewportSize({ width: 400, height: 800 }); await p.waitForTimeout(3000); await shot(p, 'dt-tran');
+    await ev(p, () => { G.run.scene = null; render(); }); await p.waitForTimeout(400); await shot(p, 'dt-bando'); await p.setViewportSize({ width: 1440, height: 860 }); await p.waitForTimeout(300);
+    await ev(p, () => { G.run.scene = null; G.screen = 'title'; render(); }); await p.waitForTimeout(2500); await ev(p, () => render());
+    await shot(p, 'pc-tieude');
+    await ev(p, () => { G.screen = 'meta'; render(); }); await p.waitForTimeout(1500); await shot(p, 'pc-benvx');
+    await ev(p, () => { G.screen = 'life'; render(); }); await p.waitForTimeout(1500); await shot(p, 'pc-modaukiep');
+    ok(true, 'đã chụp');
+  },
   async su_kien_hop(p) {
     await p.setViewportSize({ width: 1440, height: 860 });
     await ev(p, () => { const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'tong' && n.state !== 'ruin'); G.run.at = n.id; G.run.region = n.r; arrive(n.id); UI.panel = null; openPlace(n.id); render(); }); await p.waitForTimeout(250);

@@ -517,7 +517,7 @@ body{font-family:var(--font);letter-spacing:0}
 #app .mbox.bang-tt{max-height:82vh;overflow:auto}
 
 /* hình người/thú trong trận vẽ riêng, không bị lớp nền mờ đè lên */
-#app .cb-art .art.cb-figs{opacity:1;mix-blend-mode:normal;position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#app .cb-art .art.cb-figs{opacity:1;mix-blend-mode:normal;background:none!important;border:0!important;box-shadow:none!important;position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 
 /* ---------- hộp nhiệm vụ tân thủ (làm lại): thẻ trắng, nút thu gọn nằm trong hộp, nhiều việc cùng lúc ---------- */
 #app .tut{align-items:stretch;padding:8px 8px 8px;border-radius:16px;background:rgba(251,250,243,.96);box-shadow:0 0 0 1.5px var(--gd),0 6px 18px rgba(14,42,36,.28);gap:0;max-height:min(60vh,520px)}
@@ -560,3 +560,12 @@ body{font-family:var(--font);letter-spacing:0}
 #app .hud-clk3{display:flex;flex-direction:column;align-items:flex-end;gap:1px;line-height:1.2}
 #app .hud-clk3 .ck-p{display:inline-flex;gap:6px;margin-top:1px}
 #app .hud-clk3 .ck-i svg{width:1.4em;height:1.4em;display:block}
+/* điện thoại: Năm ở dòng trên; dòng dưới ngày · tháng, giờ và hai biểu tượng buổi / mùa thẳng hàng */
+:root:not([data-pc]) #app .hud-clk3{flex-direction:row;flex-wrap:wrap;justify-content:flex-end;align-items:center;column-gap:7px;row-gap:2px}
+:root:not([data-pc]) #app .hud-clk3 .ck-y{flex-basis:100%;text-align:right;line-height:1.1}
+:root:not([data-pc]) #app .hud-clk3 .ck-d,:root:not([data-pc]) #app .hud-clk3 .ck-g{font-size:.66em;color:var(--ink2);line-height:1}
+:root:not([data-pc]) #app .hud-clk3 .ck-p{flex-basis:100%;justify-content:flex-end;gap:5px;margin:1px 0 0}
+:root:not([data-pc]) #app .hud-clk3 .ck-i svg{width:17px;height:17px}
+:root:not([data-pc]) #app .hud-clk3{max-width:120px}
+:root:not([data-pc]) #app .hud-clk3 .ck-d{flex-basis:100%;text-align:right;justify-content:flex-end;display:flex}
+:root:not([data-pc]) #app .hud-clk3 .ck-p{flex-basis:auto;margin:0}
