@@ -117,6 +117,19 @@ const TESTS = {
     await ev(p, () => { UI.panel = null; render(); });
   },
   // giao diện mới (kiểu Ngọc Hành Trình): thanh dưới 7 ô có ảnh, nút Nhân vật/Túi đồ, nhân vật ngồi thiền, ảnh vật phẩm
+  async anh_ban_do(p) {
+    const k = await ev(p, () => Object.keys(ASSET.map || {}));
+    ok(k.length >= 30 && k.includes('map-thanh-3') && k.includes('map-tong-4') && k.includes('map-tran-ruin'), 'ảnh công trình bản đồ đã gắn: ' + k.length);
+    await ev(p, () => { for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); }).catch(() => {});
+    for (let i = 0; i < 12 && !(await ev(p, () => NK.count('map.anh'))); i++) { await ev(p, () => { UI.sel = null; render(); }); await p.waitForTimeout(250); }
+    const st = await ev(p, () => ({ nap: NK.count('map.anh'), im: UI._mapImN || 0 }));
+    ok(st.nap > 0, 'ảnh bản đồ nạp xong (' + st.nap + ')');
+    await p.waitForTimeout(400);
+    ok(await ev(p, () => (UI._mapImN || 0) > 0), 'bản đồ vẽ ảnh công trình (' + await ev(p, () => UI._mapImN) + ' nơi, huy hiệu ' + await ev(p, () => UI._mapBadgeN) + ')');
+    const fb = await ev(p, () => { const M = ASSET.map; ASSET.map = {}; const a = UI._mapBadgeN; return new Promise(res => setTimeout(() => { const b = UI._mapBadgeN; ASSET.map = M; res(b); }, 600)); });
+    ok(fb > 0, 'loại chưa có ảnh vẫn vẽ huy hiệu cũ (' + fb + ')');
+    ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
+  },
   async giao_dien_moi(p) {
     const nav = await ev(p, () => [...document.querySelectorAll('#nav .nv')].map(b => [b.textContent, !!b.querySelector('img[src^="data:image"]')]));
     ok(nav.length === 7 && nav.every(x => x[1]), 'thanh dưới 7 ô, ô nào cũng có ảnh: ' + nav.map(x => x[0]).join(', '));

@@ -3476,8 +3476,10 @@ const TESTS = {
     const seed0 = fixtureSeed; // không làm lệch seed của các bài sau
     fresh("G.run.pham=0;G.run.realm=3;G.run.g='nam'"); fixtureSeed = seed0;
     ok(run("nhTuoiOf(16)")==='teen'&&run("nhTuoiOf(25)")==='young'&&run("nhTuoiOf(45)")==='middle'&&run("nhTuoiOf(80)")==='elder', 'bốn độ tuổi theo số tuổi');
-    ok(run("nhHien('teen')")==='young'&&run("nhHien('elder')")==='elder', 'thiếu niên chưa có ảnh: mượn thanh niên; lão giả có ảnh riêng');
-    ok(run("ngoaiHinh().toc")==='r1'&&run("ngoaiHinh().ao")==='hero', 'mới sinh: tóc búi, lục bào');
+    ok(['teen','young','middle','elder'].every(k=>run(`nhHien('${k}')`)===k), 'cả bốn độ tuổi đều có ảnh riêng');
+    run("nhDoTuoiSet('teen')");ok(run("ngoaiHinh().toc")==='t1'&&run("ngoaiHinh().ao")==='t1', 'thiếu niên: tóc búi cao, áo vải');
+    run("nhDoTuoiSet('middle')");ok(run("ngoaiHinh().toc")==='m1'&&run("ngoaiHinh().ao")==='m1', 'trung niên: búi tóc râu ngắn, thanh bào');
+    run("nhDoTuoiSet('young')");ok(run("ngoaiHinh().toc")==='r1'&&run("ngoaiHinh().ao")==='hero', 'thanh niên: tóc búi, lục bào');
     const life=run("S().life");run("nhDoTuoiSet('elder')");
     ok(Math.abs(run("G.run.age")-75)<0.01&&run("ngoaiHinh().toc")==='e1'&&run("ngoaiHinh().ao")==='e1', 'chọn lão giả: tuổi 75, tự đổi sang tóc bạc, áo lão giả');
     run("W().t+=HY*2;G.run.age=G.run.birthAge+(W().t-G.run.bornT)/HY");ok(Math.abs(run("G.run.age")-77)<0.01, 'thời gian trôi: tuổi vẫn tính đúng từ birthAge (77)');
@@ -3501,6 +3503,15 @@ const TESTS = {
     ok(run(`(()=>{const d=${dup};for(let i=0;i<2000;i++){const x=genRelic(i%5);if(x&&d(x.name))return false;}return true})()`), 'tên pháp bảo không lặp chữ');
     ok(run(`(()=>{const d=${dup};for(let i=0;i<2000;i++){const a=genArt(i%2?'cp':'tp',i%5);if(d(a.n))return false;}return true})()`), 'tên công pháp không lặp chữ');
     ok(run("tenBoLap('Thanh Tâm Tâm Pháp')")==='Thanh Tâm Pháp', 'gộp chữ lặp');
+  },
+  cap_quy_mo() {
+    const seed0 = fixtureSeed; fresh(); fixtureSeed = seed0;
+    const r = run(`(()=>{const T={tran:['Thôn nhỏ','Trấn vừa','Trấn lớn'],thanh:['Thành trì','Thành cổ','Đại thành'],tong:['Sơn môn nhỏ','Tông môn hạng trung','Đại tông','Đại tông'],cho:['Phường thị nhỏ','Phường thị sầm uất']};let n=0,bad=[];const seen={};
+      for(const R0 of W().regions)for(const x of R0.nodes){const t=isTownT(x.type)?(isThanhT(x.type)?'thanh':'tran'):x.type;if(!T[t]||(x.vstate||x.state)==='ruin')continue;const c=capOf(x),q=placeMeta(x).quy;n++;seen[t+c]=1;if(!q.startsWith(T[t][c-1]))bad.push(x.name+':'+c+':'+q);}
+      return {n,bad:bad.slice(0,5),k:Object.keys(seen).length}})()`);
+    ok(r.n > 10 && r.bad.length === 0, 'bậc quy mô khớp chữ quy mô ở ' + r.n + ' nơi ' + JSON.stringify(r.bad));
+    ok(r.k >= 5, 'có nhiều bậc khác nhau (' + r.k + ')');
+    ok(run("(()=>{const x=W().regions[0].nodes.find(n=>isTownT(n.type));return capOf(x)===capOf(x)&&!('cap' in x)})()"), 'bậc tính lại được, không lưu vào nơi');
   },
 };
 

@@ -13,6 +13,8 @@
 .doll3 .hg i.tn{mix-blend-mode:color}
 .doll3 .hair{transform-origin:51.8% 6.92%;animation:hsw 4.5s ease-in-out infinite}
 .doll3 .hair.s-e1{transform-origin:49.04% 10.26%}
+.doll3 .hair.s-t1{transform-origin:49.79% 19.36%}
+.doll3 .hair.s-m1{transform-origin:49.98% 11.59%}
 @keyframes hsw{0%,100%{transform:rotate(-0.6deg)}50%{transform:rotate(0.6deg)}}
 .doll3 .glw{position:absolute;inset:0;transform-origin:49.92% 54.79%}
 .doll3 .gl{transform-origin:49.92% 54.79%;animation:gspin2 7s linear infinite}

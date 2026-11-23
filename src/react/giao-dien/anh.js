@@ -10,7 +10,7 @@ const ITEM = {
   kiem: 'it-kiem', dao: 'it-kiem', giap: 'it-ao-lam', bao: 'it-ao-tim', boi: 'it-ngoc-boi', ngoa: 'it-giay', nhan: 'it-nhan', hoan: 'it-dai',
   thap: 'it-thap', lenh: 'it-lenh-bai', phu: 'it-bua', book: 'it-bi-kip', dinh: 'it-lo-dan', phien: 'it-co', huyet: 'it-huyet-ngoc', tui: 'it-ruong',
   gian: 'it-truc-thu', chau: 'it-dan-trang', an: 'it-lenh-ngoc', phap: 'it-long-vu', hotam: 'it-luc-bao', but: 'it-long-vu',
-  non: 'it-mu', dai: 'it-dai', gang: 'it-nhan', hap: 'it-ruong', hoa: 'sk-fire', tran: 'it-co',
+  non: 'it-non', dai: 'it-dai-lung', gang: 'it-gang', hap: 'it-hap', hoa: 'it-hoa', tran: 'it-tran',
 };
 const MAT = { thao: 'it-thao-lam', khoang: 'it-quang-lam', dan: 'cau-ma' };
 // đan dược: chọn viên theo màu
@@ -50,11 +50,13 @@ export function ganAnh() {
   // kẻ địch đã gắn sẵn theo loại: người → tu sĩ áo giáp, quỷ → tâm ma
   const EN = PS.EN;
   if (EN) for (const k of Object.keys(EN)) { const f = EN[k].f; if (f === 'nhan') A.foe[k] = IMG['mo-kim-giap']; else if (f === 'quy') A.foe[k] = IMG['mo-tam-ma']; else if (f === 'boss') A.foe[k] = IMG['mo-huyet-ma']; }
-  if (A.veh) { A.veh.hac = IMG['mt-crane']; A.veh.kiem = IMG['mt-sword']; A.veh.chu = IMG['mt-phoenix']; A.veh.rua = IMG['mt-turtle']; }
+  if (A.veh) { A.veh.hac = IMG['mt-crane']; A.veh.kiem = IMG['mt-sword']; A.veh.chu = IMG['mt-phoenix']; A.veh.rua = IMG['mt-boat'] || IMG['mt-turtle']; if (IMG['mt-horse']) A.veh.ngua = IMG['mt-horse']; if (IMG['mt-deer']) A.veh.loc = IMG['mt-deer']; }
+  // ảnh công trình trên bản đồ (ui/05-gfx.js: mapKey/mapIc)
+  A.map = {}; for (const k in IMG) if (k.startsWith('map-')) A.map[k] = IMG[k];
   for (const k in PLACE) A.place[k] = IMG[PLACE[k]];
-  A.heroG = { nam: IMG['cd-nam'], nu: IMG['cd-nu'], lao: IMG['cd-lao'] };
-  // chân dung nhân vật chính: nam / nữ, từ 70 tuổi trở lên dùng chân dung lão giả
-  Object.defineProperty(A.hero, 'me', { get() { const r = PS.G && PS.G.run; return r && r.age >= 70 && r.g !== 'nu' ? A.heroG.lao : A.heroG[r && r.g === 'nu' ? 'nu' : 'nam']; }, configurable: true, enumerable: true });
+  A.heroG = { nam: IMG['cd-nam'], nu: IMG['cd-nu'], lao: IMG['cd-lao'], laonu: IMG['cd-lao-nu'] || IMG['cd-nu'] };
+  // chân dung nhân vật chính: nam / nữ, từ 70 tuổi trở lên dùng chân dung lão giả (nam: cd-lao, nữ: cd-lao-nu)
+  Object.defineProperty(A.hero, 'me', { get() { const r = PS.G && PS.G.run; const nu = r && r.g === 'nu'; return r && r.age >= 70 ? (nu ? A.heroG.laonu : A.heroG.lao) : A.heroG[nu ? 'nu' : 'nam']; }, configurable: true, enumerable: true });
   // chân dung người khác (NPC): chọn theo giới và tên, cùng người luôn cùng mặt
   if (typeof window.npcAv === 'function') {
     const NAM = ['cd-dt3', 'cd-dt4', 'cd-dt0'], NU = ['cd-dt1', 'cd-dt2', 'cd-dt6'];

@@ -94,14 +94,22 @@ function dangerTag(n){const r=G.run;if(!n||!r)return 0;
 function dangerWhy(n){const g=dangerTag(n);if(SETTLE.includes(n.type))return g?contentText("core2_02-dia-diem-mo-rong_js.dangerWhy.042"):contentText("core2_02-dia-diem-mo-rong_js.dangerWhy.043");
   return [contentText("core2_02-dia-diem-mo-rong_js.dangerWhy.044"),contentText("core2_02-dia-diem-mo-rong_js.dangerWhy.045"),contentText("core2_02-dia-diem-mo-rong_js.dangerWhy.046"),contentText("core2_02-dia-diem-mo-rong_js.dangerWhy.047")][g];}
 
+// ----- bậc quy mô của một nơi (dùng chung cho chữ quy mô ở placeMeta và ảnh trên bản đồ) -----
+// tông môn: n.quy (1–4) · thành: 1 Thành trì, 2 Thành cổ, 3 Đại thành · trấn: 1 Thôn nhỏ, 2 Trấn vừa, 3 Trấn lớn · phường thị 1–2 · nơi khác: 2 nếu nguy hiểm từ 2 trở lên
+// tính lại từ seed + id, không lưu gì vào G.run
+function capOf(n){if(!n)return 1;if(n.type==='tong')return Math.max(1,Math.min(4,n.quy||1));
+  const h=hashS('pm'+W().seed+':'+n.id),i=h>>>6;
+  if(isTownT(n.type))return isThanhT(n.type)?[1,3,2][i%3]:[1,2,3][i%3];
+  if(n.type==='cho')return 1+i%2;
+  return (n.danger||0)>=2?2:1;}
 // ----- thông tin thêm cho thẻ địa điểm: thế lực tọa trấn, quy mô, đôi dòng mô tả (cố định theo từng nơi) -----
 function placeMeta(n){const h=hashS('pm'+W().seed+':'+n.id),w=W();const pk=(L,k)=>L[(h>>>(k||0))%L.length];
   const sect=w.sects&&w.sects.length?pk(w.sects,3).n:contentText("core2_02-dia-diem-mo-rong_js.placeMeta.048");const ho=pk(NAME.ho,5);
   let luc,quy;const t=isTownT(n.type)?(isThanhT(n.type)?'thanh':'tran'):n.type;
-  if(t==='tong'){luc=n.owner||sect;quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.049"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.050"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.051")],7);}
-  else if(t==='thanh'){luc=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.052")+ho,contentText("core2_02-dia-diem-mo-rong_js.placeMeta.053"),sect+contentText("core2_02-dia-diem-mo-rong_js.placeMeta.054"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.055")+ho+' gia'],2);quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.056"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.057"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.058")],6);}
-  else if(t==='tran'){luc=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.059"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.060")+ho,ho+contentText("core2_02-dia-diem-mo-rong_js.placeMeta.061"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.062")+ho],2);quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.063"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.064"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.065")],6);}
-  else if(t==='cho'){luc=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.066")+ho+' gia';quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.067"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.068")],6);}
+  if(t==='tong'){luc=n.owner||sect;quy=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.0"+[49,50,51,51][capOf(n)-1]);}
+  else if(t==='thanh'){luc=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.052")+ho,contentText("core2_02-dia-diem-mo-rong_js.placeMeta.053"),sect+contentText("core2_02-dia-diem-mo-rong_js.placeMeta.054"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.055")+ho+' gia'],2);quy=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.0"+[56,58,57][capOf(n)-1]);}
+  else if(t==='tran'){luc=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.059"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.060")+ho,ho+contentText("core2_02-dia-diem-mo-rong_js.placeMeta.061"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.062")+ho],2);quy=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.0"+[63,64,65][capOf(n)-1]);}
+  else if(t==='cho'){luc=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.066")+ho+' gia';quy=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.0"+[67,68][capOf(n)-1]);}
   else if(t==='ancu'){luc=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.069");quy=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.070");}
   else if(t==='ai'){luc=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.071");quy=contentText("core2_02-dia-diem-mo-rong_js.placeMeta.072");}
   else if(t==='ma'){luc=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.073"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.074"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.075")],2);quy=pk([contentText("core2_02-dia-diem-mo-rong_js.placeMeta.076"),contentText("core2_02-dia-diem-mo-rong_js.placeMeta.077")],6);}

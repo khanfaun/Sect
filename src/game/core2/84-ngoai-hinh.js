@@ -2,9 +2,9 @@
 // Độ tuổi tự suy từ r.age, nên lớn tuổi lên là tự đổi hình. Độ tuổi chưa có ảnh thì mượn độ tuổi gần nhất có ảnh.
 // Lựa chọn của người chơi lưu ở r.ngoai={toc,ao,chau} (bản lưu cũ không có thì dùng mặc định).
 const NH_TUOI={
-  teen:  {n:'Thiếu niên',tu:0, den:20, mau:16,toc:[],ao:[]},
+  teen:  {n:'Thiếu niên',tu:0, den:20, mau:16,toc:[['t1','Tóc búi cao']],ao:[['t1','Áo vải giản dị']]},
   young: {n:'Thanh niên',tu:20,den:40, mau:25,toc:[['r1','Búi nhỏ trâm vàng']],ao:[['hero','Lục bào ngọc']]},
-  middle:{n:'Trung niên',tu:40,den:70, mau:45,toc:[],ao:[]},
+  middle:{n:'Trung niên',tu:40,den:70, mau:45,toc:[['m1','Búi tóc, râu ngắn']],ao:[['m1','Thanh bào trầm']]},
   elder: {n:'Lão giả',   tu:70,den:1e9,mau:75,toc:[['e1','Tóc bạc râu dài, mũ ngọc']],ao:[['e1','Thanh bào lão giả']]},
 };
 const NH_CHAU=[['auto','Tự động (vàng khi đủ đột phá)'],['teal','Thanh ngọc'],['gold','Kim hỏa']];

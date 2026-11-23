@@ -233,6 +233,14 @@ const Map2=(()=>{
     if(glyph==='?'){ctx.fillStyle=C.dark?'#10151b':'#fbf7ea';ctx.font=`700 ${Math.round(s*0.6)}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('?',0,1);}
     else{ctx.scale(s/36,s/36);ctx.translate(-12,-12);ctx.strokeStyle=o.hollow?C.ink2:(C.dark?'#10151b':'#fbf7ea');ctx.lineWidth=1.7;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke(p2d(glyph));}
     ctx.restore();}
+  // ảnh công trình 2D thay huy hiệu (ASSET.map do giao-dien/anh.js gắn: map-<loại>-<bậc>, map-<loại>-ruin). Loại chưa có ảnh -> null -> vẫn vẽ huy hiệu cũ
+  const MAPIC={},MAP_AL={yeusao:'sao'};
+  function mapKey(n,ruin){const M=ASSET.map;if(!M)return null;let t=MAP_AL[n.type]||n.type;
+    if(ruin){const b=isThanhT(n.type)?'thanh':n.type==='tong'?'tong':(isTownT(n.type)||n.type==='cho')?'tran':null;return b&&M['map-'+b+'-ruin']?'map-'+b+'-ruin':null;}
+    for(let c=capOf(n);c>=1;c--)if(M['map-'+t+'-'+c])return 'map-'+t+'-'+c;
+    return M['map-'+t]?'map-'+t:null;}
+  function mapIc(k){let o=MAPIC[k];if(!o){const im=new Image();o=MAPIC[k]={im,ok:false};im.onload=()=>{o.ok=true;dirty=true;if(typeof dbg==='function')dbg('map.anh',{k,w:im.naturalWidth});};im.onerror=()=>{o.bad=true;if(typeof dbg==='function')dbg('map.anh',{k,loi:1});};im.src=ASSET.map[k];}
+    return o.ok?o.im:null;}
   function label(t,x,y,o){o=o||{};ctx.font=`${o.b?700:600} ${o.s||12}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='top';ctx.lineWidth=3;ctx.strokeStyle=hexA(C.paper,0.85);ctx.lineJoin='round';ctx.strokeText(t,x,y);ctx.fillStyle=o.c||C.ink;ctx.fillText(t,x,y);}
   let FONT='serif';
   function draw(now,dt){
@@ -348,11 +356,16 @@ const Map2=(()=>{
     // một ô lục giác có cả địa điểm lẫn người (ngươi, hoặc thực thể đang dừng chân): địa điểm lùi sang trái, người sang phải, cả hai nhỏ lại cho khỏi đè nhau
     const HW=HEXW/2*z;const OCC=new Set();if(!r.moving&&!HT._me)OCC.add(r.at);
     if(CFG.ents){const sr0=senseR();for(const e of entsHere(reg)){if(HE[e.type]||e.to!=null)continue;const p=entXY(e);if(Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr0)OCC.add(e.at);}}
+    UI._mapImN=0;UI._mapBadgeN=0;
     if(showIc)for(const R0 of w.regions)for(const n of R0.nodes){const k=R0.k;if(n.fog<1)continue;if(HT[n.type])continue;const [nx,ny]=mapNode(n);let x=SX(nx),y=SY(ny);if(x<-60||y<-60||x>W0+60||y>H0+60)continue;const under=OCC.has(n.id);const sN=s0;
       const sure=n.fog>=2||n.memory;const old=n.fog>=2&&n.seenT>=0&&w.t-n.seenT>HY;const ruin=(n.vstate||'ok')==='ruin'&&n.fog>=2;const sel=UI.sel===n.id;
       const col=C[NODE_CAT[n.type]||'ink'];
       
-      badge(x,y,sN,ruin?C.ink3:(sure?DC[dangerTag(n)]:col),sure?(ruin?'ruin':n.type):'?',{hollow:!sure,dash:!sure,sel});if(under){if(CFG.names)label(n.name,SX(nx),SY(ny)+s0/2+5,{c:C.ink,s:CFG.font==='m'?12:14});continue;}
+      {const ik=sure?mapKey(n,ruin):null,im=ik&&mapIc(ik);
+        if(im){const cp=capOf(n),sz=sN*(1.3+0.1*(cp-1)),fy=y+sN*0.42,dg=dangerTag(n);ctx.save();if(old)ctx.globalAlpha=0.72;
+          if(dg>0||sel){ctx.beginPath();ctx.ellipse(x,fy-sz*0.04,sz*0.42,sz*0.13,0,0,6.3);ctx.fillStyle=hexA(sel?C.gold:DC[dg],sel?0.55:0.45);ctx.fill();}
+          if(sel&&lv>0){ctx.shadowColor=C.gold;ctx.shadowBlur=10;}ctx.drawImage(im,x-sz/2,fy-sz,sz,sz);ctx.restore();UI._mapImN=(UI._mapImN||0)+1;}
+        else{badge(x,y,sN,ruin?C.ink3:(sure?DC[dangerTag(n)]:col),sure?(ruin?'ruin':n.type):'?',{hollow:!sure,dash:!sure,sel});UI._mapBadgeN=(UI._mapBadgeN||0)+1;}}if(under){if(CFG.names)label(n.name,SX(nx),SY(ny)+s0/2+5,{c:C.ink,s:CFG.font==='m'?12:14});continue;}
       if(n.dp&&n.fog>=3){ctx.beginPath();ctx.arc(x+s0/2-1,y-s0/2+1,4,0,6.3);ctx.fillStyle=C.jade;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();}
       if(n.grave&&n.fog>=1){ctx.fillStyle=C.ink2;ctx.fillRect(x-s0/2-2,y-s0/2-2,5,7);}
       if(QN.has(n.id)){const qx=x+s0/2,qy=y+s0/2;ctx.beginPath();ctx.arc(qx,qy,6.5,0,6.3);ctx.fillStyle=C.gold;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='#fffaf0';ctx.font='700 10px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('!',qx,qy+0.5);}
