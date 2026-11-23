@@ -258,7 +258,7 @@ Kẻ làm giả {$a.ten} xin ngươi xem giùm con dấu hắn khắc để mi�
 ### Lựa chọn
 
 - **1. Mua da mới thay mặt trống**
-  Ngươi trả tiền mua tấm da ở xưởng gần đó, cùng người giữ canh thay trước giờ điểm trống. Khi tháo mặt cũ, bên trong trống trống rỗng. Tiếng gõ vẫn vang thêm ba lần rồi mới dứt.
+  Ngươi trả tiền mua tấm da ở xưởng gần đó, cùng người giữ canh thay trước giờ điểm trống. Khi tháo mặt cũ, bên trong trống rỗng. Tiếng gõ vẫn vang thêm ba lần rồi mới dứt.
   - `cost`: `{"st":10}`
   - `e`: `{"hd":{"p":3},"ng":{"g":3},"tamma":-3}`
 - **2. Đánh theo nhịp vọng bên trong**

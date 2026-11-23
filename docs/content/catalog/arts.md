@@ -2237,13 +2237,13 @@ Nguồn: `content/catalog/arts.json`
 }
 ```
 
-## Bạch Phạn Phạn Quyển — `cp_bach_phan_phan_quyen`
+## Bạch Phạn Quyển — `cp_bach_phan_phan_quyen`
 
 ```json
 {
   "id": "cp_bach_phan_phan_quyen",
   "type": "cp",
-  "n": "Bạch Phạn Phạn Quyển",
+  "n": "Bạch Phạn Quyển",
   "el": "phat",
   "t": 2,
   "req": 1,

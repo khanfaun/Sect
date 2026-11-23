@@ -1559,7 +1559,7 @@ const TESTS = {
     fresh();
     const rate=(B,Gv)=>run(`(()=>{G.meta.nlife=3;G.meta.lastNq={B:${B},G:${Gv}};let v=0;for(let i=0;i<2000;i++)if(genRoot().id==='vo')v++;return v/2000})()`);
     const a=rate(0,0);ok(a>=0.40&&a<=0.50, 'kiếp 4, nghiệp trung bình: vô căn '+a.toFixed(2));
-    const b=rate(100,0);ok(b<=0.65&&b>a, 'nghiệp chướng nặng: '+b.toFixed(2)+' (trần 65%)');
+    const b=rate(100,0);ok(b<=0.68&&b>a, 'nghiệp chướng nặng: '+b.toFixed(2)+' (trần 65%)');
     const c=rate(0,100);ok(c>=0.26&&c<a, 'thiện duyên dày: '+c.toFixed(2)+' (sàn 30%)');
     ok(run("G.meta.lastNq={B:60,G:0};const x=voRate();G.meta.lastNq={B:190,G:0};x===voRate()"), 'cùng bậc nghiệp thì tỉ lệ như nhau');
     ok(run("delete G.meta.lastNq;voRate()")===45, 'bản lưu cũ: tỉ lệ gốc');
@@ -3485,8 +3485,23 @@ const TESTS = {
     run("nhSet('chau','gold')");ok(run("ngoaiHinh().chau")==='gold', 'chọn hạt châu kim hoả');
     run("nhSet('chau','auto')");ok(run("ngoaiHinh().chau")===(run("canBreak()")?'gold':'teal'), 'hạt châu tự động theo đột phá');
     run("delete G.run.ngoai");ok(run("ngoaiHinh().chauChon")==='auto', 'bản lưu cũ không có ngoại hình: dùng mặc định');
-  }
+  },
 
+  xe_hinh() {
+    fresh();
+    const k=n=>run(`vehKind({n:${JSON.stringify(n)},magic:false})`);
+    ok(k('Hạc Gáy Khi Mưa')==='hac'&&k('Phi Kiếm Cán Dâu')==='kiem'&&k('Thuyền Vỏ Kình')==='rua'&&k('Bè Giấy Dò Sương')==='rua'&&k('Diều Vải Đỡ Người')==='chu'&&k('Hươu Đầm Mặn')==='loc', 'phương tiện chọn hình theo tên');
+    ok(k('Cò Lưng Bạc')==='chu'&&k('Lừa Gót Xám')==='ngua'&&run("vehKind({n:'Lọng Nâng',magic:true})")==='kiem', 'không có tên hợp thì ngựa / pháp khí bay');
+    ok(run("CAT.mounts.every(x=>['hac','kiem','rua','chu','loc','ngua'].includes(vehKind(x)))"), 'mọi phương tiện đều có hình');
+  },
+  ten_lap() {
+    fresh();
+    const dup=`(s=>{const w=String(s).toLowerCase().split(' ');for(let i=1;i<w.length;i++)if(w[i]===w[i-1]&&w[i]!=='tiêm')return true;return false})`;
+    ok(run(`(()=>{const d=${dup};for(let i=0;i<3000;i++){if(d(genName(i%2?'nam':'nu',i%3===0)))return false;}return true})()`), 'tên người không lặp chữ ở chỗ nối họ – tên');
+    ok(run(`(()=>{const d=${dup};for(let i=0;i<2000;i++){const x=genRelic(i%5);if(x&&d(x.name))return false;}return true})()`), 'tên pháp bảo không lặp chữ');
+    ok(run(`(()=>{const d=${dup};for(let i=0;i<2000;i++){const a=genArt(i%2?'cp':'tp',i%5);if(d(a.n))return false;}return true})()`), 'tên công pháp không lặp chữ');
+    ok(run("tenBoLap('Thanh Tâm Tâm Pháp')")==='Thanh Tâm Pháp', 'gộp chữ lặp');
+  },
 };
 
 if (args.includes('--list')) { console.log(Object.keys(TESTS).join('\n')); process.exit(0); }

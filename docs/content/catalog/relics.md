@@ -14255,12 +14255,12 @@ Nguồn: `content/catalog/relics.json`
 }
 ```
 
-## Phi Phong Phong Đăng — `ao_phi_phong_phong_dang`
+## Phi Phong Đăng — `ao_phi_phong_phong_dang`
 
 ```json
 {
   "id": "ao_phi_phong_phong_dang",
-  "n": "Phi Phong Phong Đăng",
+  "n": "Phi Phong Đăng",
   "k": "bao",
   "el": "phong",
   "t": 0,

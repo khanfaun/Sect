@@ -10,6 +10,7 @@ const ITEM = {
   kiem: 'it-kiem', dao: 'it-kiem', giap: 'it-ao-lam', bao: 'it-ao-tim', boi: 'it-ngoc-boi', ngoa: 'it-giay', nhan: 'it-nhan', hoan: 'it-dai',
   thap: 'it-thap', lenh: 'it-lenh-bai', phu: 'it-bua', book: 'it-bi-kip', dinh: 'it-lo-dan', phien: 'it-co', huyet: 'it-huyet-ngoc', tui: 'it-ruong',
   gian: 'it-truc-thu', chau: 'it-dan-trang', an: 'it-lenh-ngoc', phap: 'it-long-vu', hotam: 'it-luc-bao', but: 'it-long-vu',
+  non: 'it-mu', dai: 'it-dai', gang: 'it-nhan', hap: 'it-ruong', hoa: 'sk-fire', tran: 'it-co',
 };
 const MAT = { thao: 'it-thao-lam', khoang: 'it-quang-lam', dan: 'cau-ma' };
 // đan dược: chọn viên theo màu
@@ -49,7 +50,7 @@ export function ganAnh() {
   // kẻ địch đã gắn sẵn theo loại: người → tu sĩ áo giáp, quỷ → tâm ma
   const EN = PS.EN;
   if (EN) for (const k of Object.keys(EN)) { const f = EN[k].f; if (f === 'nhan') A.foe[k] = IMG['mo-kim-giap']; else if (f === 'quy') A.foe[k] = IMG['mo-tam-ma']; else if (f === 'boss') A.foe[k] = IMG['mo-huyet-ma']; }
-  if (A.veh) { A.veh.hac = IMG['mt-crane']; A.veh.kiem = IMG['mt-sword']; A.veh.chu = IMG['mt-phoenix']; }
+  if (A.veh) { A.veh.hac = IMG['mt-crane']; A.veh.kiem = IMG['mt-sword']; A.veh.chu = IMG['mt-phoenix']; A.veh.rua = IMG['mt-turtle']; }
   for (const k in PLACE) A.place[k] = IMG[PLACE[k]];
   A.heroG = { nam: IMG['cd-nam'], nu: IMG['cd-nu'], lao: IMG['cd-lao'] };
   // chân dung nhân vật chính: nam / nữ, từ 70 tuổi trở lên dùng chân dung lão giả

@@ -1,3 +1,7 @@
+// kiểu hình phương tiện theo tên (để chọn ảnh): hạc, kiếm, chim, thuyền/rùa, hươu, còn lại ngựa
+function vehKind(x){const n=String(x.n||'').toLowerCase();
+  if(/hạc/.test(n))return 'hac';if(/kiếm/.test(n))return 'kiem';if(/thuyền|(^| )bè( |$)|(^| )ghe( |$)|kình|rùa/.test(n))return 'rua';
+  if(/điểu|điêu|diều|phượng|(^| )ưng( |$)|nhạn|chim|(^| )cò( |$)/.test(n))return 'chu';if(/hươu|lộc/.test(n))return 'loc';return x.magic?'kiem':'ngua';}
 // Nối nguồn content/ với các bộ xử lý hiện có; không dùng eval khi chơi.
 // Dùng chung điều kiện cho cảnh thường, phần tiếp theo và danh sách địa điểm.
 function contentLocation(){const r=G.run;if(!r)return {};const sc=r.scene;return {node:typeof nodeById==='function'?nodeById(r.at):null,venue:sc&&sc.type==='place'?sc.venue:null};}
@@ -102,7 +106,7 @@ function contentRumor(){const r=G.run,w=W();const rv=pick(r.rivals);if(!rv)retur
 }
 // Danh mục phương tiện viết sẵn tham gia kho trạm dịch đang hoạt động.
 {const _ts=tramStock;tramStock=function(n){const L=_ts(n);if(!n.tram.contentVersion){n.tram.contentVersion=1;
- const pool=CAT.mounts.filter(x=>x.realm<=rT()+1);for(const x of shuffle(pool.slice()).slice(0,2))L.push({k:x.magic?'kiem':'ngua',cid:x.id,n:x.n,m:x.m,p:x.p,realm:x.realm,minUserLevel:x.minUserLevel,magic:x.magic,tier:clamp(x.realm,0,4),ic:x.magic?'sword':'run',qty:1});L.sort((a,b)=>a.p-b.p);}
+ const pool=CAT.mounts.filter(x=>x.realm<=rT()+1);for(const x of shuffle(pool.slice()).slice(0,2))L.push({k:vehKind(x),cid:x.id,n:x.n,m:x.m,p:x.p,realm:x.realm,minUserLevel:x.minUserLevel,magic:x.magic,tier:clamp(x.realm,0,4),ic:x.magic?'sword':'run',qty:1});L.sort((a,b)=>a.p-b.p);}
  // giá luôn đọc lại từ nguồn chuẩn (danh mục cho món có cid, VEH_T cho món sinh theo loại/bậc), kể cả hàng đã lưu trong bản lưu
  for(const v of L){if(v.cid&&CAT.byId[v.cid]&&CAT.byId[v.cid].p!=null)v.p=CAT.byId[v.cid].p;else if(!v.cid&&v.k&&v.tier!=null&&VEH_T.some(x=>x.k===v.k))v.p=vehMake(v.k,v.tier).p;}
  return L;};}

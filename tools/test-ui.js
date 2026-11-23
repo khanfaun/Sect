@@ -34,6 +34,30 @@ const ev = (p, f, a) => p.evaluate(f, a);
 const shot = async (p, name) => { if (SHOT) await p.screenshot({ path: path.join(SHOT, name + '.png') }); };
 
 const TESTS = {
+  // dò chữ hỏng (undefined / NaN / [object) ở mọi bảng, mọi thẻ, cả điện thoại lẫn máy tính
+  async do_chu(p) {
+    const BANG = { char: ['base', 'tb', 'bag', 'hoc', 'kn', 'dao'], journal: ['log', 'quest', 'cc', 'nq', 'su', 'news', 'chron', 'notes', 'ng', 'fa', 'ty'], affairs: [null], bonds: [null, 'an'], pets: [null], craft: [null], tong: [null], more: ['menu', 'cfg', 'legend', 'layer', 'aff'] };
+    const xau = [];
+    for (const [w, h, giau] of [[400, 800], [1440, 860], [400, 800, 1], [1440, 860, 1]]) {
+      if (giau) await ev(p, () => { devSetRealm(3, 2); for (const l of ['pb', 'cp', 'dan', 'lieu', 'vat', 'xe', 'trung']) devGiveMany(l); devWAdd(Object.keys(WOUND)[0]); render(); });
+      await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(250);
+      for (const [pn, tabs] of Object.entries(BANG)) for (const t of tabs) {
+        const r = await ev(p, ([pn, t]) => { try { UI.modal = null; UI.panel = pn; if (t) UI.tab[pn] = t; render(); } catch (e) { return 'NGOẠI LỆ ' + e.message; }
+          const s = document.querySelector('#app').innerText + ' ' + [...document.querySelectorAll('[data-tip],[title]')].map(e => (e.dataset.tip || '') + ' ' + (e.title || '')).join(' ');
+          const m = s.match(/.{0,30}(undefined|NaN|\[object|\bnull\b).{0,30}/); return m ? m[0].replace(/\s+/g, ' ') : ''; }, [pn, t]);
+        if (r) xau.push(w + (giau ? ' giàu ' : ' ') + pn + '/' + t + ': ' + r);
+      }
+    }
+    // hộp thông tin từng món trong túi (đang giàu đồ)
+    const vp = await ev(p, () => { const out = []; let n = 0; UI.panel = 'char'; UI.tab.char = 'bag';
+      const BI = bagItems(); for (const it of BI.filter((x, i) => i % Math.ceil(BI.length / 120) === 0)) { n++; try { ACT.bagSel(it.k || it.key); render(); } catch (e) { out.push((it.n || it.k) + ': NGOẠI LỆ ' + e.message); continue; }
+        const m = document.querySelector('.mbox'); const s = m ? m.innerText : '';
+        const x = s.match(/.{0,30}(undefined|NaN|\[object|\bnull\b).{0,30}/); if (x) out.push((it.n || it.k) + ': ' + x[0].replace(/\s+/g, ' ')); }
+      UI.modal = null; return { n, out }; });
+    ok(vp.n > 50 && vp.out.length === 0, 'hộp thông tin ' + vp.n + ' món không có chữ hỏng' + (vp.out.length ? ':\n      ' + vp.out.slice(0, 20).join('\n      ') : ''));
+    await ev(p, () => { UI.panel = null; render(); });
+    ok(xau.length === 0, 'không có chữ hỏng ở các bảng' + (xau.length ? ':\n      ' + xau.join('\n      ') : ''));
+  },
   // máy tính: cột trái chỉ có mục (thu gọn được), thanh dưới có chân dung giữa, bản đồ không bị che; bảng / địa điểm / tu luyện ở vùng giữa
   async may_tinh(p) {
     await p.setViewportSize({ width: 1440, height: 860 }); await ev(p, () => { UI.pcThu = false; render(); }); await p.waitForTimeout(300);
