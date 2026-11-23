@@ -70,6 +70,8 @@ const TESTS = {
     ok(await ev(p, () => !document.querySelector('#nav .nv.c.on') && getComputedStyle(document.querySelector('#nav .nv.c .nv-i')).boxShadow === 'none'), 'mở bảng khác: ô Bản đồ thôi sáng, không còn vòng nổi');
     await clk('#nav .nv-map'); await p.waitForTimeout(150);
     ok(await ev(p, () => UI.panel === null), 'ô Bản đồ đóng bảng');
+    ok(await ev(p, () => { const B = [...document.querySelectorAll('#mapui .mbl .mb')]; return B.length === 3 && B.every(b => b.querySelector('img.mb-img[src^="data:image"]') && !b.querySelector('svg')) && !document.querySelector('#mapui [data-act="cgOpen"]'); }), 'cụm nút góc trái dưới: 3 nút ảnh 2D, không còn nút Cảnh giới');
+    ok(await ev(p, () => !document.querySelector('#hud .hrow .hn') && [...document.querySelectorAll('.hrow .hn')].every(e => getComputedStyle(e).borderTopStyle === 'none')), 'nhãn hàng tiến độ không bị kiểu khung thông báo nổi');
     ok(await ev(p, () => /^data:image\/webp/.test(ASSET.item.kiem) && /^data:image\/webp/.test(ASSET.item['pill:hoixuan']) && /^data:image\/webp/.test(ASSET.hero.me)), 'pháp bảo, đan dược, chân dung dùng ảnh mới');
     ok(await ev(p, () => getComputedStyle(document.querySelector('.btn') || document.body).borderImageSource.includes('data:image') || !document.querySelector('.btn')), 'nút dùng khung ảnh vàng');
     await ev(p, () => { const dp = regionOf(0).nodes.find(n => n.dp); G.run.at = dp.id; arrive(dp.id); openPlace(dp.id); UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(300);

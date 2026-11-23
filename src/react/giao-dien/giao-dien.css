@@ -205,7 +205,7 @@ body{font-family:var(--font);letter-spacing:0}
 .bq-home .bq-cult .rb img{width:100%;height:100%;object-fit:contain}
 .bq-home .bq-cult .mid{flex:1;min-width:0;text-align:center}
 .bq-home .bq-cult .mid>b{font-family:var(--disp);font-weight:400;font-size:1em;display:block;color:var(--ink)}
-.bq-home .bq-cult .tvrow{grid-template-columns:4.6em 1fr 3.4em;margin:2px 0;font-size:.74em}
+.bq-home .bq-cult .tvrow{grid-template-columns:5.4em 1fr 3.4em;text-align:left;margin:2px 0;font-size:.74em}
 .bq-home .bq-cult .tvrow .hb{height:10px}
 .bq-home .bq-pan{position:relative;z-index:5;flex:none;max-height:44%;overflow-y:auto;margin:0 6px 6px;padding:8px 10px 10px;border-radius:14px;background:linear-gradient(rgba(251,250,243,.97),rgba(238,244,239,.96));border:1px solid var(--gl);box-shadow:0 3px 10px rgba(14,42,36,.3);overscroll-behavior:contain}
 .bq-home .bq-pan h3{display:none}
@@ -523,3 +523,12 @@ body{font-family:var(--font);letter-spacing:0}
 @media (max-height:640px){.bq-home .bq-pan,.bq-home.cgbox .bq-pan{height:46%}}
 /* dưới ảnh nền (sau các thẻ) là màu nước của ảnh */
 #app #modal .mbox.bq-home{background:linear-gradient(#cfe0d8,#9fb9b0)!important}
+
+/* cụm nút góc trái dưới bản đồ: ảnh 2D thay hình vẽ đường nét */
+#app .mbl .mb .mb-img{width:34px;height:34px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(14,42,36,.35))}
+#app .mbl .mb:disabled .mb-img{filter:grayscale(.8);opacity:.55}
+
+/* nhãn hàng tiến độ (Tu vi, Lịch luyện…): chữ gọn một dòng, canh trái thẳng hàng */
+#app .hrow .hn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;justify-content:flex-start}
+/* thanh đầu: biểu tượng + chữ nằm giữa ô */
+#app .hud-stats .hs{justify-content:center}

@@ -1,13 +1,14 @@
 // Các nút nổi trên bản đồ: vết thương bên trái, lưới/chú giải/về chỗ mình bên phải,
-// góc trái dưới: luyện chế, túi đồ, bế quan (sáng lên khi đủ điều kiện đột phá), cảnh giới.
+// góc trái dưới: luyện chế, túi đồ, bế quan (sáng lên khi đủ điều kiện đột phá), vẽ bằng ảnh 2D.
 import { PS } from '../html';
 import { Ic, tip } from '../chung';
 import { TanThu } from '../chung/TanThu';
+import { I } from '../giao-dien/anh';
 
-function Nut({ act, arg, icon, t, on, dis, cls, l }) {
+function Nut({ act, arg, icon, img, t, on, dis, cls, l }) {
   return (
     <button className={'mb' + (on ? ' on' : '') + (cls ? ' ' + cls : '')} data-act={act} data-arg={arg} disabled={!!dis} {...tip(t)}>
-      <Ic n={icon} />{l && <span className="mb-l">{l}</span>}
+      {img ? <img className="mb-img" src={I(img)} alt="" /> : <Ic n={icon} />}{l && <span className="mb-l">{l}</span>}
     </button>
   );
 }
@@ -79,10 +80,9 @@ export function NutBanDo() {
       <Nut act="center" icon="target" l="Về chỗ" t="Về chỗ ngươi" />
     </div>
     <div className="mbl">
-      <Nut act="panel" arg="craft" icon="flask" l="Luyện chế" t="Luyện chế: luyện đan, luyện khí từ vật liệu" on={UI.panel === 'craft'} dis={r.moving} />
-      <Nut act="bagOpen" icon="bag" l="Túi đồ" t="Túi đồ" on={UI.panel === 'char' && UI.tab.char === 'bag'} />
-      <Nut act="hudBq" icon="seat" l="Bế quan" cls={brk ? 'glow' : ''} dis={!!bqNo || PS.voKnown()} t={PS.voKnown() ? 'Vô linh căn: chưa thể bế quan tu luyện' : bqNo || (brk ? 'Bế quan · tu vi viên mãn: vào để đột phá' : 'Bế quan tu luyện ngay tại đây')} />
-      <Nut act="cgOpen" icon="yin" l="Cảnh giới" on={!!(UI.modal && /cg/.test(UI.modal.k || ''))} t="Cảnh giới: các đại cảnh giới, tiểu cảnh giới, phẩm và đột phá" />
+      <Nut act="panel" arg="craft" img="it-lo-dan" l="Luyện chế" t="Luyện chế: luyện đan, luyện khí từ vật liệu" on={UI.panel === 'craft'} dis={r.moving} />
+      <Nut act="bagOpen" img="it-ruong" l="Túi đồ" t="Túi đồ" on={UI.panel === 'char' && UI.tab.char === 'bag'} />
+      <Nut act="hudBq" img="it-sen" l="Bế quan" cls={brk ? 'glow' : ''} dis={!!bqNo || PS.voKnown()} t={PS.voKnown() ? 'Vô linh căn: chưa thể bế quan tu luyện' : bqNo || (brk ? 'Bế quan · tu vi viên mãn: vào để đột phá' : 'Bế quan tu luyện ngay tại đây')} />
     </div>
   </>;
 }
