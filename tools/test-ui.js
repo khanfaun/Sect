@@ -34,6 +34,24 @@ const ev = (p, f, a) => p.evaluate(f, a);
 const shot = async (p, name) => { if (SHOT) await p.screenshot({ path: path.join(SHOT, name + '.png') }); };
 
 const TESTS = {
+  // máy tính (kiểu A): bản đồ phủ màn hình, thanh 7 mục dọc bên trái, bảng mở thành cột phải, địa điểm ở giữa
+  async may_tinh(p) {
+    await p.setViewportSize({ width: 1440, height: 860 }); await ev(p, () => render()); await p.waitForTimeout(300);
+    const L = await ev(p, () => { const a = document.getElementById('app').getBoundingClientRect(), n = document.getElementById('nav').getBoundingClientRect(); return { aw: a.width, nx: n.x, nw: n.width, nh: n.height }; });
+    ok(L.aw === 1440, 'bản đồ phủ cả màn hình: ' + L.aw);
+    ok(L.nx < 40 && L.nh > L.nw * 3, 'thanh 7 mục dọc bên trái ' + JSON.stringify(L));
+    await ev(p, () => { UI.panel = 'char'; render(); }); await p.waitForTimeout(200);
+    const P = await ev(p, () => { const r = document.querySelector('#panel').getBoundingClientRect(); return [Math.round(r.x), Math.round(r.width)]; });
+    ok(P[0] + P[1] === 1440 && P[1] < 600, 'bảng mở thành cột phải ' + P);
+    await ev(p, () => { UI.panel = null; const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'thanh' && n.state !== 'ruin'); G.run.at = n.id; G.run.region = n.r; arrive(n.id); openPlace(n.id); render(); }); await p.waitForTimeout(300);
+    const S = await ev(p, () => { const r = document.querySelector('#sheet').getBoundingClientRect(); return [Math.round(r.x), Math.round(r.width)]; });
+    ok(S[0] > 100 && Math.abs(S[0] + S[1] / 2 - 720) < 3, 'địa điểm ở giữa, hai bên thấy bản đồ ' + S);
+    await ev(p, () => { G.run.scene = null; UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(300);
+    ok(await ev(p, () => { const r = document.querySelector('.bq-home').getBoundingClientRect(); return r.width <= 860 && Math.abs(r.x + r.width / 2 - 720) < 3; }), 'bế quan ở giữa, rộng vừa');
+    await ev(p, () => { UI.modal = null; render(); });
+    await p.setViewportSize({ width: 400, height: 800 }); await p.waitForTimeout(200);
+    ok(await ev(p, () => document.getElementById('nav').getBoundingClientRect().width > 300), 'màn hẹp: trở lại thanh dưới như điện thoại');
+  },
   // giao diện mới (kiểu Ngọc Hành Trình): thanh dưới 7 ô có ảnh, nút Nhân vật/Túi đồ, nhân vật ngồi thiền, ảnh vật phẩm
   async giao_dien_moi(p) {
     const nav = await ev(p, () => [...document.querySelectorAll('#nav .nv')].map(b => [b.textContent, !!b.querySelector('img[src^="data:image"]')]));
@@ -70,6 +88,13 @@ const TESTS = {
     ok(await ev(p, () => !!document.querySelector('.bq-home .doll3 .hc-nut[data-act="cgGo"]')), 'đủ điều kiện: hạt châu giữa người thành nút Đột phá / Xung kích');
     await ev(p, () => { window.canBreak = window._cb0; render(); });
     ok(await ev(p, () => { const sh = document.querySelector('.bq-home .doll3 .shd').getBoundingClientRect(), n = document.querySelector('.bq-canh').getBoundingClientRect(); const py = (sh.top + sh.height / 2 - n.top) / n.height; return Math.abs(py - 0.675) < 0.02; }), 'nhân vật ngồi đúng trên bậc thềm của ảnh nền');
+    {
+      const vt = () => ev(p, () => { const d = document.querySelector('.bq-stage .doll3').getBoundingClientRect(), n = document.querySelector('.bq-canh').getBoundingClientRect(); return [d.x, d.y, d.width, n.x, n.y, n.width].map(Math.round).join(','); });
+      const a = await vt(); await ev(p, () => { ACT.bqTab('tt'); render(); }); await p.waitForTimeout(150); const b2 = await vt(); await ev(p, () => { ACT.bqTab('bq'); render(); }); await p.waitForTimeout(150);
+      ok(a === b2, 'chuyển Bế quan ↔ Tĩnh toạ: nhân vật và nền đứng yên ' + a + ' / ' + b2);
+      ok(await ev(p, () => document.querySelector('.bq-top button[data-arg="bq"]').textContent === 'Tu luyện'), 'thẻ đổi tên thành Tu luyện');
+      ok(await ev(p, () => { const d = document.querySelector('.bq-stage .doll3').getBoundingClientRect(), n = document.querySelector('.bq-canh').getBoundingClientRect(); return Math.abs(d.width / n.width - 0.566) < 0.03; }), 'tỉ lệ nhân vật / nền như bản mẫu');
+    }
     await shot(p, 'giao-dien-moi');
     // Dev test > Nhân vật: đổi độ tuổi là đổi tuổi thật, hình đổi theo
     await ev(p, () => { UI.modal = null; G.run.g = 'nam'; G.run.pham = 0; G.run.realm = 3; render(); ACT.devOpen(); devSt().tab = 'nv'; render(); }); await p.waitForTimeout(200);
@@ -212,7 +237,7 @@ const TESTS = {
   async tinhtoa(p) {
     await ev(p, () => { G.run.hp = 1; G.run.bac = 5000; /* Sửa-B: bỏ cơm nhà, tĩnh toạ dài ngày phải có tiền ăn */ openPlace(G.run.at); UI.modal = { k: 'bq', tab: 'tt' }; render(); });
     await p.waitForTimeout(400);
-    ok(await ev(p, () => !!document.querySelector('.bq-k.on[data-arg="tt"]') && !!document.querySelector('[data-act="ttGo"]')), 'có Tĩnh toạ (chọn trong thẻ Bế quan · Tĩnh toạ)');
+    ok(await ev(p, () => !!document.querySelector('.bq-k.on[data-arg="tt"]') && !!document.querySelector('[data-act="ttGo"]')), 'có Tĩnh toạ (chọn trong thẻ Tu luyện)');
     const b = await p.$('[data-act="ttGo"]'); ok(!!b, 'có nút Tĩnh toạ');
     if (b) { await b.click(); await p.waitForTimeout(400); }
     ok(await ev(p, () => NK.count('tinhtoa') === 1 && G.run.hp > 1), 'tĩnh toạ xong, khí huyết tăng');

@@ -476,3 +476,50 @@ body{font-family:var(--font);letter-spacing:0}
 /* bế quan: nhân vật nhỏ lại cho thấy bậc thềm */
 .bq-home .bq-stage .doll3{height:80%;bottom:2%}
 .bq-home .bq-pan{max-height:40%}
+
+/* ================= MÁY TÍNH (kiểu A): bản đồ phủ cả màn hình =================
+   Chỉ khi đang ở bản đồ / cảnh (data-view map|scene) và màn đủ rộng; màn khác (trận, tạo nhân vật…) vẫn khung điện thoại.
+   Thẻ nhân vật góc trên trái, thanh 7 mục dọc bên trái, bảng mở thành cột phải, địa điểm / bế quan ở giữa rộng hơn. */
+@media (min-width:1000px) and (min-height:560px){
+  :root:is([data-view=map],[data-view=scene]) #app{max-width:none!important;top:0!important;bottom:0!important;border-radius:0!important;box-shadow:none!important}
+  :root:is([data-view=map],[data-view=scene]) #app #hud{left:14px!important;right:auto!important;top:14px!important;width:440px;border-radius:16px}
+  /* thanh 7 mục: cột dọc bên trái, dưới thẻ nhân vật */
+  :root:is([data-view=map],[data-view=scene]) #app #nav{left:14px!important;right:auto!important;top:calc(var(--hudh,90px) + 26px)!important;bottom:auto!important;width:78px;height:auto!important;
+    display:flex!important;flex-direction:column;gap:2px!important;padding:8px 4px!important;border:2px solid var(--gd)!important;border-radius:16px;box-shadow:0 6px 18px rgba(14,42,36,.3)}
+  :root:is([data-view=map],[data-view=scene]) #app .nv{height:62px;justify-content:center;gap:2px;font-size:.7em!important}
+  :root:is([data-view=map],[data-view=scene]) #app .nv .nv-i{width:34px;height:34px}
+  :root:is([data-view=map],[data-view=scene]) #app .nv.c .nv-i{width:38px;height:38px;margin-top:0;padding:4px}
+  :root:is([data-view=map],[data-view=scene]) #app .nv.on .nv-i{transform:scale(1.12)}
+  :root:is([data-view=map],[data-view=scene]) #app .nv.on::before{inset:2px 0;width:auto;height:auto;margin:0;border-radius:12px;box-shadow:0 0 0 1.5px var(--gd)}
+  :root:is([data-view=map],[data-view=scene]) #app .nv.c.on::before{display:block}
+  :root:is([data-view=map],[data-view=scene]) #app .nv.c .nv-i{box-shadow:none;background:none}
+  /* cảnh (địa điểm, sự kiện) chiếm chỗ thanh dưới cũ: giờ kéo hết chiều cao */
+  :root:is([data-view=map],[data-view=scene]) #app #mapcv{bottom:0!important}
+  /* nút trên bản đồ bên trái né thanh dọc */
+  :root:is([data-view=map],[data-view=scene]) #app #mapui .mleft,:root:is([data-view=map],[data-view=scene]) #app #mapui .mbl{left:106px!important}
+  :root:is([data-view=map],[data-view=scene]) #app #mapui .mleft{top:14px!important}
+  :root:is([data-view=map],[data-view=scene]) #app #mapui .mbl{bottom:18px!important;top:auto!important}
+  :root:is([data-view=map],[data-view=scene]) #app #mapui .tien-cum{bottom:14px!important}
+  :root:is([data-view=map],[data-view=scene]) #app #mapui .tut{bottom:56px!important}
+  /* bảng (Túi đồ, Nhân vật…): cột bên phải, vẫn thấy bản đồ */
+  :root:is([data-view=map],[data-view=scene]) #app #panel{left:auto!important;right:0!important;top:0!important;bottom:0!important;width:500px;box-shadow:-10px 0 30px rgba(7,23,18,.45);border-left:2px solid var(--gd)}
+  :root:is([data-view=map],[data-view=scene]) #app:has(#panel:not([hidden]):not(:empty)) #mapui :is(.mright,.tut,.tien-cum){right:514px!important}
+  /* địa điểm, sự kiện: ở giữa, rộng hơn; hai bên vẫn thấy bản đồ */
+  :root:is([data-view=map],[data-view=scene]) #app #sheet{left:50%!important;right:auto!important;top:0!important;bottom:0!important;width:min(860px,calc(100% - 240px));transform:translateX(-50%);
+    box-shadow:0 0 0 2px var(--gd),0 0 50px rgba(7,23,18,.6)}
+  /* hộp thoại: ở giữa màn hình thay vì trượt từ dưới */
+  :root:is([data-view=map],[data-view=scene]) #modal{place-items:center!important}
+  :root:is([data-view=map],[data-view=scene]) #app #modal .mbox{width:560px;max-width:calc(100% - 40px);max-height:86%;border-radius:18px;border:2px solid var(--gd)}
+  :root:is([data-view=map],[data-view=scene]) #app #modal .mbox.dev{width:820px}
+  :root:is([data-view=map],[data-view=scene]) #modal:has(.bq-home){place-items:stretch center!important;background:rgba(7,23,18,.6)!important}
+  :root:is([data-view=map],[data-view=scene]) #app #modal .mbox.bq-home{width:min(860px,calc(100% - 240px));border-radius:0!important;border:0!important;box-shadow:0 0 0 2px var(--gd),0 0 50px rgba(7,23,18,.6)}
+  /* thông báo, viền hiệu ứng, thanh chí mạng: theo cả màn hình */
+  :root:is([data-view=map],[data-view=scene]) #app #toast{left:50%!important;right:auto!important;width:480px;transform:translateX(-50%)}
+  :root:is([data-view=map],[data-view=scene])[data-edge]::after,:root:is([data-view=map],[data-view=scene]) #lowfx{left:0!important;width:auto!important;right:0!important;transform:none!important;top:0!important;bottom:0!important;border-radius:0}
+}
+
+/* Tu luyện: bảng dưới cao cố định cho mọi thẻ (Bế quan / Tĩnh toạ / Cảnh giới) để chuyển qua lại thì cụm nhân vật và nền đứng yên */
+.bq-home .bq-pan,.bq-home.cgbox .bq-pan{flex:none;height:42%;max-height:none!important}
+@media (max-height:640px){.bq-home .bq-pan,.bq-home.cgbox .bq-pan{height:46%}}
+/* dưới ảnh nền (sau các thẻ) là màu nước của ảnh */
+#app #modal .mbox.bq-home{background:linear-gradient(#cfe0d8,#9fb9b0)!important}

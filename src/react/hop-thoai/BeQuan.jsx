@@ -9,14 +9,14 @@ import { I } from '../giao-dien/anh';
 import { NhanVatThien } from '../giao-dien/NhanVatThien';
 
 // ảnh nền nen-tu-luyen: 780×1045, tâm mặt bậc thềm ở (50%, 67.5%), mặt thềm rộng chừng 47% bề ngang ảnh
-const NEN = { w: 780, h: 1045, x: 0.5, y: 0.675, rong: 0.47 };
+const NEN = { w: 780, h: 1045, x: 0.5, y: 0.675, rong: 0.566 }; // rong: bề ngang nhân vật / bề ngang ảnh nền, đo từ bản mẫu (356 / 628)
 
 function Tabs({ m }) {
   const noBq = PS.bqNoWhy();
   const cg = m.tab === 'cg';
   return (
     <div className="tabs bq-tabs">
-      <button className={!cg ? 'on' : ''} data-act="bqTab" data-arg="bq" disabled={!!noBq && cg} {...(noBq ? tip(noBq) : {})}>Bế quan · Tĩnh toạ</button>
+      <button className={!cg ? 'on' : ''} data-act="bqTab" data-arg="bq" disabled={!!noBq && cg} {...(noBq ? tip(noBq) : {})}>Tu luyện</button>
       <button className={cg ? 'on' : ''} data-act="bqTab" data-arg="cg">Cảnh giới</button>
     </div>
   );
@@ -72,7 +72,8 @@ function useCanhNen(root) {
       const R = el.getBoundingClientRect(), S = sh.getBoundingClientRect(), D = dl.getBoundingClientRect();
       if (!R.width || !R.height) return;
       const cx = S.left + S.width / 2 - R.left, sy = S.top + S.height / 2 - R.top;
-      const ih = Math.max(R.height, R.width * NEN.h / NEN.w, sy / NEN.y, (R.height - sy) / (1 - NEN.y), D.width * 1.55 / NEN.rong * NEN.h / NEN.w);
+      // cỡ ảnh theo tỉ lệ bản mẫu (nhân vật / nền); chỉ cần phủ bề ngang và phía trên, phía dưới đã có các thẻ che
+      const ih = Math.max(R.width * NEN.h / NEN.w, sy / NEN.y, D.width / NEN.rong * NEN.h / NEN.w);
       const iw = ih * NEN.w / NEN.h;
       const x0 = Math.min(0, Math.max(R.width - iw, cx - NEN.x * iw)), y0 = sy - NEN.y * ih;
       Object.assign(nen.style, { width: iw + 'px', height: ih + 'px', left: x0 + 'px', top: y0 + 'px' });
