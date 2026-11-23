@@ -80,9 +80,9 @@ const Map2=(()=>{
   function attach(el){if(cv===el)return;cv=el;ctx=cv?cv.getContext('2d',{alpha:false}):null;if(cv){bind();resize();}}
   function resize(){if(!cv)return;const r=cv.getBoundingClientRect();if(!r.width)return;const lv=gfxLv();uz=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--dz'))||1;H0=r.height/uz;insets();
     dpr=Math.min(window.devicePixelRatio||1,CFG.dpr||(MOBILE?[1,1.25,1.5]:[1,1.5,2])[lv])*uz;W0=r.width/uz;H0=r.height/uz;
-    const w=Math.round(W0*dpr),h=Math.round(H0*dpr);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}dirty=true;}
+    const w=Math.round(W0*dpr),h=Math.round(H0*dpr);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}GW=document.documentElement.dataset.pc?1.7:1;dirty=true;if(cam&&cam.z)clampCam();}
   function resetAll(){INK=null;LCV=null;BGK='';for(const k in DTC)delete DTC[k];dtWant='';clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();}
-  let TOPI=0,BOTI=0,VCY=0,wide=false;
+  let TOPI=0,BOTI=0,VCY=0,wide=false,GW=1;
   const AREA_COL=['#d9a441','#58a46f','#4797bb','#9a74c9','#8196b3'];
   // phần bản đồ thật sự nhìn thấy: dưới header (#hud), trên footer (#nav). Thu nhỏ hết cỡ thì cạnh trên bản đồ chạm header, cạnh dưới chạm footer.
   function insets(){if(!cv)return false;if(document.documentElement.dataset.pc){const ch=TOPI!==0||BOTI!==0;TOPI=0;BOTI=0;VCY=H0/2;return ch;}const cr=cv.getBoundingClientRect();let t=TOPI,b=BOTI;const vis=e=>e&&!e.hidden&&getComputedStyle(e).display!=='none';
@@ -90,8 +90,9 @@ const Map2=(()=>{
     if(vis(n)&&n.getBoundingClientRect().top>cr.top+cr.height/2){b=Math.max(0,Math.round((cr.bottom-n.getBoundingClientRect().top)/uz));}
     if(vis(h)&&h.getBoundingClientRect().width<=cr.width*0.8)t=0;if(vis(n)&&n.getBoundingClientRect().top<=cr.top+cr.height/2)b=0;const ch=t!==TOPI||b!==BOTI;TOPI=t;BOTI=b;VCY=t+(H0-t-b)/2;return ch;}
   function viewH(){return Math.max(60,H0-TOPI-BOTI);}
-  function zMin(){return viewH()/WORLD_H;}
-  function zDeep(){return Math.min(W0/WORLD_W,zMin()*0.6);}
+  function zFit(){return Math.min(viewH()/WORLD_H,W0/WORLD_W);}
+  function zMin(){return Math.max(viewH()/WORLD_H,W0/WORLD_W);} // phủ kín khung nhìn, không lòi mép
+  function zDeep(){return Math.min(zFit(),zMin()*0.6);}
   let bT=0,bN=0;function bump(){const n=performance.now();if(n-bT>1500)bN=0;if(n-bT>150||bN===0)bN++;bT=n;if(bN>=2&&!wide){wide=true;}}
   function zFloor(){return wide?zDeep():zMin();} // lăn chuột chỉ tới zMin; sau khi bấm nút thu nhỏ thì tạm xuống tới mức bản đồ rộng bằng màn hình
   function zfNow(){return clamp(Math.log(cam.z/zMin())/Math.log(ZMAX/zMin()),0,1);}
@@ -285,9 +286,9 @@ const Map2=(()=>{
         if(fillA>0.01){for(let k=0;k<5;k++){ctx.fillStyle=hexA(AREA_COL[k],0.2*fillA);ctx.fill(hx.rp[k]);}}
         if(macroA>0.01){ctx.strokeStyle=hexA(BR,0.5*macroA);ctx.lineWidth=1/z;ctx.setLineDash([7/z,5/z]);ctx.stroke(hx.macro);ctx.setLineDash([]);}
         if(CFG.grid&&distA>0.01){ctx.strokeStyle=hexA(C.dark?'#10151b':'#fff4d6',0.6*distA);ctx.lineWidth=2.6/z;ctx.stroke(hx.dist);ctx.stroke(hx.macro); // viền sáng (ranh đại khu vực cũng là ranh quận) để ranh quận không chìm vào nền đã khám phá
-          ctx.strokeStyle=hexA(BR,0.85*distA);ctx.lineWidth=1/z;ctx.setLineDash([5/z,4/z]);ctx.stroke(hx.dist);ctx.stroke(hx.macro);ctx.setLineDash([]);
+          ctx.strokeStyle=hexA(BR,0.85*distA);ctx.lineWidth=GW/z;ctx.setLineDash([5/z,4/z]);ctx.stroke(hx.dist);ctx.stroke(hx.macro);ctx.setLineDash([]);
           const d=sel!=null&&g0.reg[sel]>=0?g0.dist[sel]:-1;
-          if(d>=0&&hx.dp[d]){ctx.fillStyle=hexA(C.dark?'#ffffff':'#fff6dc',(C.dark?0.1:0.34)*distA);ctx.fill(hx.dp[d]);ctx.globalCompositeOperation=C.dark?'source-over':'multiply';ctx.strokeStyle=hexA(BR,0.32*distA);ctx.lineWidth=0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(hx.dp[d]);ctx.setLineDash([]);ctx.globalCompositeOperation='source-over';}}
+          if(d>=0&&hx.dp[d]){ctx.fillStyle=hexA(C.dark?'#ffffff':'#fff6dc',(C.dark?0.1:0.34)*distA);ctx.fill(hx.dp[d]);ctx.globalCompositeOperation=C.dark?'source-over':'multiply';ctx.strokeStyle=hexA(BR,0.32*distA);ctx.lineWidth=GW*0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(hx.dp[d]);ctx.setLineDash([]);ctx.globalCompositeOperation='source-over';}}
         // địa điểm: tô các ô của nó bằng màu icon (phủ overlay, rất nhạt), nếu bật lưới thì có thêm đường ô mảnh
         {const hn=hov!=null&&showIc?hexNode(hov):null;const L=[];const sn0=UI.sel!=null?nodeById(UI.sel):null;
           // đích đang ngắm / đã đánh dấu: cả cụm địa điểm sáng lên, viền đỏ quanh cụm; ô đất trống thì viền đỏ riêng ô đó
@@ -301,7 +302,7 @@ const Map2=(()=>{
             const sure=n.fog>=2||n.memory;const col=sure?DC0[dangerTag(n)]:C[NODE_CAT[n.type]||'ink'];
             ctx.globalCompositeOperation='overlay';ctx.fillStyle=hexA(col,0.7*a);ctx.fill(cp);ctx.globalCompositeOperation='source-over';
             ctx.fillStyle=hexA(C.dark?'#ffffff':'#fff8e4',0.3*a);ctx.fill(cp);ctx.fillStyle=hexA(col,0.14*a);ctx.fill(cp);
-            if(CFG.grid){ctx.strokeStyle=hexA(BR,0.3*a);ctx.lineWidth=0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(cp);ctx.setLineDash([]);}
+            if(CFG.grid){ctx.strokeStyle=hexA(BR,0.3*a);ctx.lineWidth=GW*0.5/z;ctx.setLineDash([2/z,2.5/z]);ctx.stroke(cp);ctx.setLineDash([]);}
             if(red){ctx.strokeStyle=hexA('#f0b81c',0.98);ctx.lineWidth=2.2/z;ctx.stroke(op);}else{ctx.strokeStyle=hexA(C.dark?'#fff1d0':mixHex(col,BR,0.5),0.95*a);ctx.lineWidth=1.6/z;ctx.setLineDash([4/z,3/z]);ctx.stroke(op);ctx.setLineDash([]);}}
           if(tgC!=null&&tgC>=0&&!tgN){hexPoly(tgC);ctx.strokeStyle=hexA('#f0b81c',0.98);ctx.lineWidth=2/z;ctx.stroke();}
           if(sel!=null&&showIc&&!hn&&!(UI.sel!=null)){hexPoly(sel);ctx.strokeStyle=hexA(BR,0.6);ctx.lineWidth=0.7/z;ctx.stroke();}}}

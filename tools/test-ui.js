@@ -68,6 +68,7 @@ const TESTS = {
     ok(trai && trai[0] === 0 && trai[2] <= 200, 'cột trái hẹp ' + trai);
     ok(cv && cv[0] >= trai[2] - 1 && cv[1] + cv[3] <= day[1] + 1, 'bản đồ không bị cột trái / thanh dưới che ' + cv);
     ok(av && Math.abs(av[0] + av[2] / 2 - 720) < 40 && av[3] >= 64, 'chân dung lớn ở giữa thanh dưới ' + av);
+    await shot(p, "may-tinh");
     ok(await ev(p, () => !/Phù Sinh/.test(document.querySelector('#hud').innerText) && document.querySelectorAll('.pc-trai > .pc-mi kbd').length === 9 && !!document.querySelector('.pc-bars .pc-bar.hp') && !!document.querySelector('.pc-nvu')), 'không còn chữ Phù Sinh; 9 mục có phím; thanh khí huyết; nhiệm vụ trên bản đồ');
     await ev(p, () => { ACT.pcThu(); render(); }); await p.waitForTimeout(200);
     const t2 = await R('#nav'), cv2 = await R('#mapcv');
