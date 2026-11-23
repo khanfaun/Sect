@@ -1,122 +1,96 @@
-// Hộp thoại bế quan (thẻ "Bế quan") và cảnh giới (thẻ "Cảnh giới").
-// Lưu ý: khi kéo thanh trượt, game cập nhật thẳng các ô có id bqY, bqG, bqS, bqL, bqN, bqHint, bqGoB
-// (hàm bqUpd) cho nhanh. Vì vậy mỗi ô đó chỉ chứa đúng một chuỗi chữ.
+// Màn bế quan (toàn màn hình, giống màn tu luyện của bản mẫu) gồm hai thẻ: "Bế quan" (chọn Bế quan hoặc Tĩnh toạ) và "Cảnh giới".
+// Nhân vật ngồi đúng trên bậc thềm của ảnh nền (KhungBeQuan tự canh ảnh nền theo chỗ ngồi).
+// Đủ điều kiện đột phá / xung kích: hạt châu giữa người thành nút bấm.
+// Lưu ý: khi kéo thanh trượt bế quan, game cập nhật thẳng các ô có id bqY, bqG, bqS, bqL, bqN, bqHint, bqGoB, bqYn (hàm bqUpd).
 import { useLayoutEffect, useRef } from 'react';
 import { Html, PS } from '../html';
 import { Ic, tip } from '../chung';
 import { I } from '../giao-dien/anh';
 import { NhanVatThien } from '../giao-dien/NhanVatThien';
 
+// ảnh nền nen-tu-luyen: 780×1045, tâm mặt bậc thềm ở (50%, 67.5%), mặt thềm rộng chừng 47% bề ngang ảnh
+const NEN = { w: 780, h: 1045, x: 0.5, y: 0.675, rong: 0.47 };
+
 function Tabs({ m }) {
   const noBq = PS.bqNoWhy();
+  const cg = m.tab === 'cg';
   return (
     <div className="tabs bq-tabs">
-      <button className={m.tab !== 'cg' && m.tab !== 'tt' ? 'on' : ''} data-act="bqTab" data-arg="bq" disabled={!!noBq && m.tab === 'cg'} {...(noBq ? tip(noBq) : {})}>Bế quan</button>
-      <button className={m.tab === 'tt' ? 'on' : ''} data-act="bqTab" data-arg="tt">Tĩnh toạ</button>
-      <button className={m.tab === 'cg' ? 'on' : ''} data-act="bqTab" data-arg="cg">Cảnh giới</button>
+      <button className={!cg ? 'on' : ''} data-act="bqTab" data-arg="bq" disabled={!!noBq && cg} {...(noBq ? tip(noBq) : {})}>Bế quan · Tĩnh toạ</button>
+      <button className={cg ? 'on' : ''} data-act="bqTab" data-arg="cg">Cảnh giới</button>
     </div>
   );
 }
 
-// Ô báo đột phá / tu vi viên mãn
-function OBaoDotPha({ cn }) {
-  const cw = PS.tuCapWhy();
-  if (PS.btReadyTv() && cw) return <div className="bt-box"><b><Ic n="spark" /> Tu vi đã viên mãn</b><p className="hint bad">{cw}</p></div>;
-  const ph = PS.isPham();
-  const bth = ph ? 'Đủ để xung kích Luyện Khí tầng 1' : PS.lkOn() ? 'Luyện Khí tầng ' + PS.lkTang() + ', đủ để đột phá' : 'Tu vi đã viên mãn';
-  if (PS.btReadyTv() && PS.llOf() < PS.llNeedBt()) return <div className="bt-box"><b><Ic n="spark" /> {bth}</b><p className="hint bad">Lịch luyện chưa theo kịp nên chưa đột phá được. Hãy ra ngoài lịch luyện.</p></div>;
-  if (!PS.canBreak()) return null;
-  const atDp = (cn && cn.dp) || ph;
-  const vo = !!PS.voKnown();
+// Chọn kiểu ngồi: bế quan (tăng tu vi) hoặc tĩnh toạ (hồi phục, giảm tâm ma)
+function ChonKieu({ tt }) {
   return (
-    <div className={'bt-box' + (atDp ? ' on' : '')}>
-      <b><Ic n="spark" /> {bth}</b>
-      <p className="hint">{ph ? 'Có thể dẫn khí nhập thể ngay tại đây.' : atDp ? 'Nơi này có động phủ, có thể đột phá ngay.' : 'Phải tới nơi có động phủ mới đột phá được.'}</p>
-      <button className={'btn ' + (atDp && !vo ? 'pri glow' : '')} data-act="cgGo" disabled={!atDp || vo} {...(vo ? tip('Vô linh căn: không thể đột phá') : {})}>{ph ? 'Xung kích' : 'Đột phá'}</button>
+    <div className="bq-kieu" role="radiogroup">
+      <button className={'bq-k' + (!tt ? ' on' : '')} role="radio" aria-checked={!tt} data-act="bqTab" data-arg="bq">
+        <i className="bq-tick" /><span><b>Bế quan</b><small>Tăng tu vi. Thời gian trôi qua.</small></span>
+      </button>
+      <button className={'bq-k' + (tt ? ' on' : '')} role="radio" aria-checked={tt} data-act="bqTab" data-arg="tt">
+        <i className="bq-tick" /><span><b>Tĩnh toạ</b><small>Không tăng tu vi. Hồi khí huyết, linh lực; tâm ma lắng xuống.</small></span>
+      </button>
     </div>
   );
 }
 
-// Ô xung kích tầng / kỳ kế tiếp
-function OXungKich() {
-  const X = PS.lkXkState();
-  if (!X) return null;
-  const g = PS.sgGate();
-  return (
-    <div className={'bt-box' + (X.ok ? ' on' : '')}>
-      <b><Ic n="spark" /> Xung kích {X.nx}</b>
-      <p className={'hint' + (X.ok ? '' : ' bad')}>{X.ok ? 'Thanh tu vi ' + PS.sgName(g) + ' đã đầy. Dồn linh lực phá quan để lên ' + X.nx + ' (mất chừng một tháng).' + (X.why ? ' ' + X.why : '') : X.why}</p>
-      <button className={'btn ' + (X.ok ? 'pri' : '')} data-act="cgGo" disabled={!X.ok}>Xung kích</button>
-    </div>
-  );
+// Ghi chú dưới thẻ cảnh giới: vì sao chưa đột phá / xung kích được, hoặc báo đã đủ điều kiện
+function ghiChu(cn) {
+  const L = [], X = PS.lkXkState && PS.lkXkState(), ph = PS.isPham();
+  if (PS.voKnown()) return [['bad', 'Vô linh căn: chưa thể tu luyện.']];
+  const cw = PS.tuCapWhy && PS.tuCapWhy();
+  if (PS.btReadyTv() && cw) L.push(['bad', cw]);
+  else if (PS.btReadyTv() && PS.llOf() < PS.llNeedBt()) L.push(['bad', 'Thiếu lịch luyện để ' + (ph ? 'xung kích' : 'đột phá') + ': hãy ra ngoài đánh trận, đi đây đó, làm việc.']);
+  else if (PS.canBreak()) L.push((cn && cn.dp) || ph ? ['ok', 'Đủ điều kiện ' + (ph ? 'xung kích' : 'đột phá') + ': chạm hạt châu giữa người.'] : ['bad', 'Đủ tu vi đột phá, nhưng phải tới nơi có động phủ mới đột phá được.']);
+  if (X) {
+    if (X.ok) L.push(['ok', 'Đủ điều kiện xung kích ' + X.nx + ': chạm hạt châu giữa người.']);
+    else if (X.ll) L.push(['bad', 'Thiếu lịch luyện để xung kích ' + X.nx + '.']);
+  }
+  const B = PS.bqFullNow && PS.bqFullNow();
+  if (!L.length && B) L.push(['mid', 'Tu vi đã đầy, bế quan thêm không tăng.']);
+  return L;
 }
 
-function ThanhTruot({ y, mx, capP }) {
-  const ref = useRef(null);
-  // thanh trượt tự do (không khóa theo React) để kéo mượt; khi bấm nút chọn nhanh thì đặt lại giá trị
-  useLayoutEffect(() => { if (ref.current && +ref.current.value !== y) ref.current.value = y; }, [y]);
-  return <input ref={ref} type="range" id="bqR" min="0" max={mx} step="0.25" defaultValue={y} style={{ '--cap': capP + '%', '--val': (mx > 0 ? y / mx * 100 : 0) + '%' }} />;
+// nút trên hạt châu khi đủ điều kiện
+function NutHatChau({ cn }) {
+  const X = PS.lkXkState && PS.lkXkState(), ph = PS.isPham(), vo = PS.voKnown();
+  const dp = PS.canBreak() && ((cn && cn.dp) || ph) && !vo;
+  if (!dp && !(X && X.ok)) return null;
+  const t = X && X.ok && !dp ? 'Xung kích' : ph ? 'Xung kích' : 'Đột phá';
+  return <button className="hc-nut" data-act="cgGo" {...tip(t + (X && X.ok && !dp ? ' lên ' + X.nx : ''))}><b>{t}</b></button>;
 }
 
-// Bầu trời bế quan: tranh động phủ phủ màu theo giờ hiện tại (cùng màu với bản đồ)
-const PHAN = { sang: 'Buổi sáng', chieu: 'Buổi chiều', toi: 'Chạng vạng', dem: 'Ban đêm' };
+// Canh ảnh nền để tâm bậc thềm trùng chỗ ngồi (bóng dưới người), ảnh luôn phủ kín màn
+function useCanhNen(root) {
+  useLayoutEffect(() => {
+    const el = root.current; if (!el) return;
+    const go = () => {
+      const nen = el.querySelector('.bq-canh'), sh = el.querySelector('.bq-stage .doll3 .shd'), dl = el.querySelector('.bq-stage .doll3');
+      if (!nen || !sh || !dl) return;
+      const R = el.getBoundingClientRect(), S = sh.getBoundingClientRect(), D = dl.getBoundingClientRect();
+      if (!R.width || !R.height) return;
+      const cx = S.left + S.width / 2 - R.left, sy = S.top + S.height / 2 - R.top;
+      const ih = Math.max(R.height, R.width * NEN.h / NEN.w, sy / NEN.y, (R.height - sy) / (1 - NEN.y), D.width * 1.55 / NEN.rong * NEN.h / NEN.w);
+      const iw = ih * NEN.w / NEN.h;
+      const x0 = Math.min(0, Math.max(R.width - iw, cx - NEN.x * iw)), y0 = sy - NEN.y * ih;
+      Object.assign(nen.style, { width: iw + 'px', height: ih + 'px', left: x0 + 'px', top: y0 + 'px' });
+    };
+    go();
+    const t = setTimeout(go, 60);
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(go) : null;
+    if (ro) ro.observe(el);
+    return () => { clearTimeout(t); if (ro) ro.disconnect(); };
+  });
+}
+
+// Nền: chỉ ảnh phong cảnh có bậc thềm (đã bỏ lớp phủ màu theo giờ và dòng giờ)
 function TroiBeQuan() {
-  const w = PS.W(), h = PS.tHour(w.t);
-  const on = !PS.CFG || PS.CFG.daynight !== false;
-  const c = on ? PS.dnTint(h, !!(PS.C && PS.C.dark)) : [0, 0, 0, 0];
-  const ph = PS.partOf(w.t);
-  return (
-    <div className="bq-sky">
-      <img className="bq-nen" src={I('nen-tu-luyen')} alt="" />
-      <i className="bq-tint" style={{ background: `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${Math.min(0.5, c[3] * 2.2).toFixed(3)})` }} />
-      <small className="bq-time">{PHAN[ph]} · {Math.floor(h)}h</small>
-    </div>
-  );
+  return <div className="bq-sky"><div className="bq-canh"><img className="bq-nen" src={I('nen-tu-luyen')} alt="" /></div></div>;
 }
 
-// Màn bế quan / tĩnh toạ toàn màn hình (giống màn tu luyện của bản mẫu):
-// phong cảnh phủ kín, nhân vật ngồi thiền lớn ở giữa, hai hạt cầu Đột phá / Tâm ma hai bên,
-// thẻ cảnh giới + thanh tu vi, lịch luyện, bên dưới là bảng chọn thời gian.
-function KhungBeQuan({ m, cls, children }) {
-  const r = PS.G.run, tm = r.tamma || 0, X = PS.lkXkState && PS.lkXkState();
-  const brk = PS.canBreak(), ready = PS.btReadyTv();
-  const nx = PS.isPham() ? 'Luyện Khí' : r.realm >= 4 ? 'Phi thăng' : PS.REALM[r.realm + 1];
-  const dpT = X ? 'Xung kích' : PS.isPham() ? 'Dẫn khí' : 'Đột phá';
-  const dpL = X ? X.nx : brk ? 'Đủ để lên ' + nx : ready ? 'Tu vi viên mãn' : 'Tu vi ' + PS.tvShow() + '%';
-  const voK = PS.voKnown();
-  return (
-    <div className={'mbox bq bq-home' + (cls ? ' ' + cls : '')}>
-      <TroiBeQuan />
-      <div className="bq-top">
-        <Tabs m={m} />
-        <button className="xb" data-act="modalX" aria-label="Đóng"><Ic n="close" /></button>
-      </div>
-      <div className="bq-stage">
-        <NhanVatThien />
-        <button className={'orbb l' + (brk || (X && X.ok) ? ' rdy' : '')} data-act="bqTab" data-arg="cg" {...tip(dpT + ': ' + dpL + '\nChạm để xem cảnh giới và đột phá')}>
-          <div className="o"><img src={I('cau-kiep')} alt="" /><b>{dpT}</b></div><small>{dpL}</small>
-        </button>
-        <button className={'orbb r' + (tm >= 60 ? ' hi' : '')} data-act="bqTab" data-arg="tt" {...tip('Tâm ma ' + Math.round(tm) + '/100: ' + PS.tmWord(tm).toLowerCase() + '\nĐầy sẽ phải đối mặt với chính mình. Tĩnh toạ để giảm.')}>
-          <div className="o"><img src={I('cau-ma')} alt="" /><b>Tâm Ma</b></div><small>Tâm ma {Math.round(tm)}/100</small>
-        </button>
-      </div>
-      <div className="bq-cult">
-        <span className="rb" {...tip('Linh căn: ' + PS.rootLabel(r) + (PS.rootElsLabel(r) ? ': ' + PS.rootElsLabel(r) : ''))}><i><img src={I('cau-tu')} alt="" /></i>Linh căn</span>
-        <div className="mid">
-          <b>{PS.realmLabel()}</b>
-          {voK ? <small className="bad">Vô linh căn — chưa thể tu luyện</small> : <>
-            <ThanhBQ n="Tu vi" v={PS.tvShow()} cls="tv" note={ready ? 'Viên mãn' : PS.tvShow() + '%'} t={'Tu vi ' + PS.tvShow() + '%\nĐầy thì đủ sức đột phá.'} />
-            <ThanhBQ n="Lịch luyện" v={PS.llShow()} cls="ll" t={'Lịch luyện ' + PS.llShow() + '%\nCó được nhờ thực chiến, tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Muốn đột phá cần lịch luyện đầy.'} />
-          </>}
-        </div>
-        <button className="rb" data-act="bqTab" data-arg="cg"><i><img src={I('it-bi-kip')} alt="" /></i>Cảnh giới</button>
-      </div>
-      <div className="bq-pan">{children}</div>
-    </div>
-  );
-}
-
-// Thanh tiến độ: tu vi (còn bao xa tới đột phá) và lịch luyện
+// Thanh tiến độ: tu vi và lịch luyện
 function ThanhBQ({ n, v, cls, t, note }) {
   const p = Math.max(0, Math.min(100, v));
   return (
@@ -128,36 +102,105 @@ function ThanhBQ({ n, v, cls, t, note }) {
   );
 }
 
+function KhungBeQuan({ m, cls, children }) {
+  const r = PS.G.run, s = PS.S(), tm = r.tamma || 0, cn = PS.curNode();
+  const ready = PS.btReadyTv(), voK = PS.voKnown();
+  const root = useRef(null);
+  useCanhNen(root);
+  const dt = PS.rateOf('tam', s.tam, 'muc');
+  const notes = ghiChu(cn);
+  return (
+    <div ref={root} className={'mbox bq bq-home' + (cls ? ' ' + cls : '')}>
+      <TroiBeQuan />
+      <div className="bq-top">
+        <Tabs m={m} />
+        <button className="xb" data-act="modalX" aria-label="Đóng"><Ic n="close" /></button>
+      </div>
+      <div className="bq-stage">
+        <NhanVatThien nut={<NutHatChau cn={cn} />} />
+        <div className="orbb l" {...tip('Đạo tâm: ' + dt.t + '\nChống ảo cảnh, tâm ma; giúp đột phá.')}>
+          <div className="o"><img src={I('cau-kiep')} alt="" /><b>Đạo Tâm</b></div><small>Đạo tâm {Math.round(s.tam)}</small>
+        </div>
+        <button className={'orbb r' + (tm >= 60 ? ' hi' : '')} data-act="bqTab" data-arg="tt" {...tip('Tâm ma ' + Math.round(tm) + '/100: ' + PS.tmWord(tm).toLowerCase() + '\nĐầy sẽ phải đối mặt với chính mình. Tĩnh toạ để giảm.')}>
+          <div className="o"><img src={I('cau-ma')} alt="" /><b>Tâm Ma</b></div><small>Tâm ma {Math.round(tm)}/100</small>
+        </button>
+      </div>
+      <div className="bq-cult">
+        <span className="rb" {...tip('Linh căn: ' + PS.rootLabel(r) + (PS.rootElsLabel(r) ? ': ' + PS.rootElsLabel(r) : ''))}><i><img src={I('cau-tu')} alt="" /></i>Linh căn</span>
+        <div className="mid">
+          <b>{PS.realmLabel()}</b>
+          {!voK && <>
+            <ThanhBQ n="Tu vi" v={PS.tvShow()} cls="tv" note={ready ? 'Viên mãn' : PS.tvShow() + '%'} t={'Tu vi ' + PS.tvShow() + '%\nĐầy thì đủ sức đột phá.'} />
+            <ThanhBQ n="Lịch luyện" v={PS.llShow()} cls="ll" t={'Lịch luyện ' + PS.llShow() + '%\nCó được nhờ thực chiến, tới nơi mới, quen người mới, làm xong việc.\nTu vi bỏ xa lịch luyện thì tu vi thực nhận giảm dần. Muốn đột phá cần lịch luyện đầy.'} />
+          </>}
+          {notes.map(([c, t], i) => <p key={i} className={'bq-note ' + c}>{t}</p>)}
+        </div>
+        <button className="rb" data-act="bqTab" data-arg="cg"><i><img src={I('it-bi-kip')} alt="" /></i>Cảnh giới</button>
+      </div>
+      <div className="bq-pan">{children}</div>
+    </div>
+  );
+}
+
+// thanh trượt bế quan (không khóa theo React để kéo mượt; game tự cập nhật số liệu)
+function ThanhTruot({ y, mx, capP }) {
+  const ref = useRef(null);
+  useLayoutEffect(() => { if (ref.current && +ref.current.value !== y) ref.current.value = y; }, [y]);
+  return <input ref={ref} type="range" id="bqR" min="0" max={mx} step="0.25" defaultValue={y} style={{ '--cap': capP + '%', '--val': (mx > 0 ? y / mx * 100 : 0) + '%' }} />;
+}
+
+// ô nhập số năm (bế quan dùng năm, tĩnh toạ đổi ra tháng)
+function NhapNam({ id, v, max, onSet }) {
+  const ref = useRef(null);
+  useLayoutEffect(() => { if (ref.current && document.activeElement !== ref.current) ref.current.value = +(+v).toFixed(2); }, [v]);
+  return (
+    <label className="bq-nam">
+      <input ref={ref} id={id} type="number" min="0.25" max={max} step="0.25" defaultValue={+(+v).toFixed(2)} inputMode="decimal"
+        onChange={e => { const x = +e.target.value; if (x > 0) onSet(Math.min(max, x)); }}
+        onBlur={e => { e.target.value = +(+v).toFixed(2); }} />
+      <span>năm</span>
+    </label>
+  );
+}
+
+function Dong({ n, children, id, cls }) {
+  return <div className="bq-dong"><span>{n}</span><b id={id} className={cls}>{children}</b></div>;
+}
+
 function TheBeQuan({ m }) {
-  const { G, HY } = PS;
-  const I = PS.bqInfo(), mx = Math.min(5, I.maxY);
-  const y = PS.clamp(m.y == null ? Math.min(1, mx) : m.y, 0, mx); m.y = y;
-  const cn = PS.curNode(), B = PS.bqBits(y, I), cap = PS.bqCapY();
+  const { HY } = PS;
+  const In = PS.bqInfo(), maxY = Math.max(0.25, Math.floor(In.maxY * 4) / 4);
+  const y = PS.clamp(m.y == null ? Math.min(1, maxY) : m.y, 0, maxY); m.y = y;
+  const mx = Math.min(maxY, Math.max(5, Math.ceil(y)));
+  const cn = PS.curNode(), B = PS.bqBits(y, In), cap = PS.bqCapY();
   const capP = cap != null && mx > 0 ? Math.min(100, cap / mx * 100) : 100;
   const sgLabel = PS.sgOn() && PS.sgGate() < PS.sgTh().length ? 'Tới đầy ' + (PS.lkOn() ? 'tầng' : 'kỳ') : null;
+  const need = PS.bqNeedY();
+  const datY = v => { PS.ACT.bqSet(v); PS.render(); };
   return (
     <KhungBeQuan m={m}>
-      <h3>Bế quan</h3>
-      <div className="kv">
-        <div><span>Nơi bế quan</span><Html style={{ display: 'contents' }} h={PS.lkTag(cn)} /></div>
+      <ChonKieu tt={false} />
+      <div className="bq-tg">
+        <span className="bq-tgn">Bế quan trong</span>
+        <NhapNam id="bqYn" v={y} max={maxY} onSet={datY} />
+        <b id="bqY" className="bq-tgc">{y > 0 ? PS.durH(y * HY) : '0 tháng'}</b>
       </div>
-      <label className="rng"><span>Thời gian: <b id="bqY">{y > 0 ? PS.durH(y * HY) : '0 tháng'}</b></span><ThanhTruot y={y} mx={mx} capP={capP} /></label>
+      <ThanhTruot y={y} mx={mx} capP={capP} />
       <div className="hbtns">
         <button data-act="bqSet" data-arg="0.25">3 tháng</button>
-        <button data-act="bqSet" data-arg="0.5" disabled={mx < 0.5}>6 tháng</button>
-        <button data-act="bqSet" data-arg="1" disabled={mx < 1}>1 năm</button>
-        <button data-act="bqSet" data-arg={Math.min(mx, PS.bqNeedY())} disabled={!!I.full}>{sgLabel || 'Tới viên mãn'}</button>
+        <button data-act="bqSet" data-arg="0.5" disabled={maxY < 0.5}>6 tháng</button>
+        <button data-act="bqSet" data-arg="1" disabled={maxY < 1}>1 năm</button>
+        <button data-act="bqSet" data-arg={Math.min(maxY, isFinite(need) ? need : maxY)} disabled={!!In.full || !isFinite(need)}>{sgLabel || 'Tới viên mãn'}</button>
       </div>
-      <div className="bq-res" {...tip('Hên xui: mỗi lần bế quan nhận được một số trong khoảng này. Đã gồm phần thổ nạp.')}><small>Nhận được</small><b className="tu-c" id="bqG">{B.g}</b></div>
+      <div className="bq-kq">
+        <Dong n="Tu vi nhận được" id="bqG" cls="tu-c">{B.g}</Dong>
+        <Dong n="Thọ nguyên còn lại sau đó" id="bqL" cls={B.lc}>{B.l}</Dong>
+        <Dong n={sgLabel ? sgLabel + ' còn' : 'Tới viên mãn còn'} id="bqN">{B.n}</Dong>
+        <Dong n="Nơi bế quan"><Html style={{ display: 'contents' }} h={PS.lkTag(cn)} /></Dong>
+      </div>
       <p className={'bq-ll ' + B.sc} id="bqS">{B.s}</p>
-      <div className="kv">
-        <div><span>Thọ nguyên còn lại</span><b id="bqL" className={B.lc}>{B.l}</b></div>
-        <div><span>{sgLabel ? sgLabel + ' còn' : 'Tới viên mãn còn'}</span><b id="bqN">{B.n}</b></div>
-      </div>
       <p className="hint" id="bqHint">{B.h}</p>
-      {y > 0 && y * 12 >= PS.ttLeftM() && <p className="bad"><b>Vượt thọ nguyên:</b> sẽ tọa hóa trước khi xuất quan (theo thọ nguyên hiện tại).</p>}
-      <OBaoDotPha cn={cn} />
-      <OXungKich />
+      {y > 0 && y * 12 >= PS.ttLeftM() && <p className="bad"><b>Vượt thọ nguyên:</b> sẽ tọa hóa trước khi xuất quan.</p>}
       {!!m.warn && (
         <div className="bq-warn">
           <p><b>Lịch luyện không đủ</b></p>
@@ -171,25 +214,33 @@ function TheBeQuan({ m }) {
   );
 }
 
-// Thẻ tĩnh toạ: không tăng tu vi, hồi khí huyết/linh lực nhanh hơn, giảm tâm ma; đổi bằng thời gian (tuổi thọ)
+// Tĩnh toạ: giống bế quan (nhập số năm, kéo thanh trượt), tính bằng tháng
 function TheTinhToa({ m }) {
   const left = PS.ttLeftM(), why = PS.ttWhy();
   const mx = Math.max(1, Math.min(PS.TT_MAXM, left + 1));
   const v = Math.max(1, Math.min(mx, m.tt || 3)); m.tt = v;
   const P = PS.ttPreview(v), s = PS.S(), r = PS.G.run;
+  const datT = t => { m.tt = Math.max(1, Math.min(mx, Math.round(t))); PS.render(); };
   return (
     <KhungBeQuan m={m}>
-      <h3>Tĩnh toạ</h3>
-      <p className="hint">Ngồi yên dưỡng thân. Không tăng tu vi; khí huyết, linh lực hồi nhanh gấp {PS.TT_MUL} lần, tâm ma lắng xuống. Thời gian vẫn trôi.</p>
-      <label className="rng"><span>Thời gian: <b>{PS.durH(v * PS.HM)}</b></span>
-        <input type="range" min="1" max={mx} step="1" value={v} onChange={e => { m.tt = +e.target.value; PS.render(); }} /></label>
-      <div className="kv">
-        <div><span>Khí huyết</span><b>+{P.hp} <small>({Math.round(r.hp)}/{s.maxHp})</small></b></div>
-        {!PS.isPham() && <div><span>Linh lực</span><b>+{P.mp}</b></div>}
-        <div><span>Tâm ma</span><b>−{P.tamma}</b></div>
-        <div><span>Thọ nguyên còn lại</span><b className={P.over ? 'bad' : ''}>{PS.durH(left * PS.HM)}</b></div>
+      <ChonKieu tt />
+      <div className="bq-tg">
+        <span className="bq-tgn">Tĩnh toạ trong</span>
+        <NhapNam id="ttYn" v={v / 12} max={mx / 12} onSet={x => datT(x * 12)} />
+        <b className="bq-tgc">{PS.durH(v * PS.HM)}</b>
       </div>
-      {P.over && <p className="bad"><b>Vượt thọ nguyên:</b> sẽ tọa hóa trước khi xả toạ (theo thọ nguyên hiện tại).</p>}
+      <input type="range" id="ttR" min="1" max={mx} step="1" value={v} onChange={e => datT(+e.target.value)} style={{ '--val': (v / mx * 100) + '%' }} />
+      <div className="hbtns">
+        {[[1, '1 tháng'], [3, '3 tháng'], [6, '6 tháng'], [12, '1 năm']].map(([t, n]) => <button key={t} onClick={() => datT(t)} disabled={t > mx}>{n}</button>)}
+      </div>
+      <div className="bq-kq">
+        <Dong n="Khí huyết">+{P.hp} <small>({Math.round(r.hp)}/{s.maxHp})</small></Dong>
+        {!PS.isPham() && <Dong n="Linh lực">+{P.mp}</Dong>}
+        <Dong n="Tâm ma">−{P.tamma}</Dong>
+        <Dong n="Thọ nguyên còn lại" cls={P.over ? 'bad' : ''}>{PS.durH(left * PS.HM)}</Dong>
+      </div>
+      <p className="hint">Hồi nhanh gấp {PS.TT_MUL} lần bình thường. Thời gian vẫn trôi.</p>
+      {P.over && <p className="bad"><b>Vượt thọ nguyên:</b> sẽ tọa hóa trước khi xả toạ.</p>}
       {!!why && <p className="bad">{why}</p>}
       <div className="mb-f"><button className="btn" data-act="modalX">Thôi</button><button className="btn pri" data-act="ttGo" data-arg={v} disabled={!!why}>{P.over ? 'Vẫn tĩnh toạ' : 'Tĩnh toạ'}</button></div>
     </KhungBeQuan>

@@ -5,11 +5,12 @@ import { PS } from '../html';
 import { I } from './anh';
 import './doll3.css';
 
-export function NhanVatThien({ orb, cls }) {
+// nut: nút đặt ngay trên hạt châu (vd nút Đột phá / Xung kích khi đủ điều kiện)
+export function NhanVatThien({ orb, cls, nut }) {
   const N = PS.ngoaiHinh ? PS.ngoaiHinh() : { toc: 'r1', ao: 'hero', chau: 'teal', hien: 'young' };
   const chau = orb || N.chau;
   if (N.nu) return (
-    <div className={'doll3 nu ' + (cls || '')} aria-hidden="true" data-tuoi={N.tuoi}><div className="shd" /><img className="nu-i" src={I('de-tu-1')} alt="" /><div className={'hal ' + chau} /></div>
+    <div className={'doll3 nu ' + (cls || '')} aria-hidden="true" data-tuoi={N.tuoi}><div className="shd" /><img className="nu-i" src={I('de-tu-1')} alt="" /><div className={'hal ' + chau} />{nut && <div className="doll-nut">{nut}</div>}</div>
   );
   const o = I('ch-of-' + N.ao), h = I('ch-head-' + N.toc), v = I('ch-hmv-' + N.toc);
   const mk = { WebkitMaskImage: `url(${v})`, maskImage: `url(${v})` };
@@ -23,6 +24,7 @@ export function NhanVatThien({ orb, cls }) {
       <div className="glw"><img className="gl" src={I('ch-glow-' + chau)} alt="" /></div>
       <div className={'hco ' + chau} />
       <img src={I('ch-hands')} alt="" />
+      {nut && <div className="doll-nut">{nut}</div>}
     </div>
   );
 }

@@ -58,6 +58,18 @@ const TESTS = {
     ok(await ev(p, () => !!document.querySelector('.bq-home .bq-stage .doll3') && !!document.querySelector('.bq-sky .bq-nen')), 'bế quan: phong cảnh và nhân vật ngồi thiền');
     ok(await ev(p, () => !!document.querySelector('.bq-home .orbb.l') && !!document.querySelector('.bq-home .orbb.r') && document.querySelectorAll('.bq-home .bq-cult .hb').length === 2), 'bế quan toàn màn hình: hai hạt cầu Đột phá / Tâm ma, thẻ cảnh giới có thanh tu vi và lịch luyện');
     ok(await ev(p, () => { const L = [...document.querySelectorAll('.bq-home .doll3 *')].flatMap(e => e.getAnimations().map(a => a.animationName)); return ['flp', 'brz', 'hsw', 'gspin2'].every(k => L.includes(k)) || G.run.g === 'nu'; }), 'nhân vật ngồi thiền có chuyển động áo, ngực, tóc, hạt châu');
+    // bế quan đợt 3: chọn bế quan / tĩnh toạ trong cùng thẻ, nhập số năm, hạt cầu Đạo tâm, không lỗi "Infinity"
+    ok(await ev(p, () => /Đạo tâm/.test(document.querySelector('.bq-home .orbb.l').innerText) && document.querySelectorAll('.bq-kieu .bq-k').length === 2 && !!document.querySelector('#bqYn') && !/Infinity/.test(document.querySelector('.bq-home').innerText)), 'bế quan: hạt cầu trái là Đạo tâm, có chọn Bế quan/Tĩnh toạ, ô nhập số năm, không có chữ Infinity');
+    await p.fill('#bqYn', '2'); await p.waitForTimeout(200);
+    ok(await ev(p, () => UI.modal.y === 2 && /2 năm/.test(document.querySelector('#bqY').textContent)), 'nhập 2 năm: thời gian bế quan thành 2 năm');
+    await ev(p, () => { document.querySelector('.bq-k[data-arg="tt"]').click(); }); await p.waitForTimeout(200);
+    ok(await ev(p, () => UI.modal.tab === 'tt' && !!document.querySelector('#ttYn') && !!document.querySelector('#ttR') && /Tĩnh toạ/.test(document.querySelector('[data-act="ttGo"]').textContent)), 'chọn Tĩnh toạ: cùng thẻ, có ô nhập năm và thanh trượt');
+    await p.fill('#ttYn', '1'); await p.waitForTimeout(200);
+    ok(await ev(p, () => UI.modal.tt === 12), 'tĩnh toạ nhập 1 năm = 12 tháng');
+    await ev(p, () => { UI.modal.tab = 'bq'; window._cb0 = canBreak; window.canBreak = () => true; render(); }); await p.waitForTimeout(200);
+    ok(await ev(p, () => !!document.querySelector('.bq-home .doll3 .hc-nut[data-act="cgGo"]')), 'đủ điều kiện: hạt châu giữa người thành nút Đột phá / Xung kích');
+    await ev(p, () => { window.canBreak = window._cb0; render(); });
+    ok(await ev(p, () => { const sh = document.querySelector('.bq-home .doll3 .shd').getBoundingClientRect(), n = document.querySelector('.bq-canh').getBoundingClientRect(); const py = (sh.top + sh.height / 2 - n.top) / n.height; return Math.abs(py - 0.675) < 0.02; }), 'nhân vật ngồi đúng trên bậc thềm của ảnh nền');
     await shot(p, 'giao-dien-moi');
     // Dev test > Nhân vật: đổi độ tuổi là đổi tuổi thật, hình đổi theo
     await ev(p, () => { UI.modal = null; G.run.g = 'nam'; G.run.pham = 0; G.run.realm = 3; render(); ACT.devOpen(); devSt().tab = 'nv'; render(); }); await p.waitForTimeout(200);
@@ -181,7 +193,7 @@ const TESTS = {
     await ev(p, () => { const dp = regionOf(0).nodes.find(n => n.dp); G.run.at = dp.id; arrive(dp.id); openPlace(dp.id); UI.modal = { k: 'bq' }; render(); });
     await p.waitForTimeout(500);
     const r = await ev(p, () => ({ sky: !!document.querySelector('.bq-sky'), tint: !!document.querySelector('.bq-tint'), time: (document.querySelector('.bq-time') || {}).textContent, bars: document.querySelectorAll('.mbox.bq .hb').length, slider: !!document.querySelector('#bqR') }));
-    ok(r.sky && r.tint, 'có bầu trời ngày đêm (' + r.time + ')'); ok(r.bars >= 2, 'có ' + r.bars + ' thanh tiến độ (tu vi, lịch luyện)'); ok(r.slider, 'có thanh trượt thời gian');
+    ok(r.sky && !r.tint && !r.time, 'nền bế quan chỉ có phong cảnh, không lớp phủ giờ, không dòng giờ'); ok(r.bars >= 2, 'có ' + r.bars + ' thanh tiến độ (tu vi, lịch luyện)'); ok(r.slider, 'có thanh trượt thời gian');
     ok(await ev(p, () => !document.querySelector('.tvrow .hb.ll') || !!document.querySelector('.mbox.bq .hb.ll')), 'lịch luyện nằm trong màn bế quan');
     await shot(p, 'bequan');
   },
@@ -200,7 +212,7 @@ const TESTS = {
   async tinhtoa(p) {
     await ev(p, () => { G.run.hp = 1; G.run.bac = 5000; /* Sửa-B: bỏ cơm nhà, tĩnh toạ dài ngày phải có tiền ăn */ openPlace(G.run.at); UI.modal = { k: 'bq', tab: 'tt' }; render(); });
     await p.waitForTimeout(400);
-    ok(await ev(p, () => [...document.querySelectorAll('.mbox h3')].some(h => h.textContent === 'Tĩnh toạ')), 'có thẻ Tĩnh toạ');
+    ok(await ev(p, () => !!document.querySelector('.bq-k.on[data-arg="tt"]') && !!document.querySelector('[data-act="ttGo"]')), 'có Tĩnh toạ (chọn trong thẻ Bế quan · Tĩnh toạ)');
     const b = await p.$('[data-act="ttGo"]'); ok(!!b, 'có nút Tĩnh toạ');
     if (b) { await b.click(); await p.waitForTimeout(400); }
     ok(await ev(p, () => NK.count('tinhtoa') === 1 && G.run.hp > 1), 'tĩnh toạ xong, khí huyết tăng');

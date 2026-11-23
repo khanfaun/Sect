@@ -14,3 +14,5 @@ function tbDat(){const t=tbTop();const tb=document.getElementById('toast');if(tb
 {const _tf=toastFlush;toastFlush=function(){if(G.toasts&&G.toasts.length)tbDat();return _tf.apply(this,arguments);};}
 {const _hn=hnote;hnote=function(){const x=_hn.apply(this,arguments);tbDat();return x;};}
 {const _fp=favPop;favPop=function(){const x=_fp.apply(this,arguments);tbDat();return x;};}
+// bế quan: kéo thanh trượt thì ô nhập số năm đổi theo
+{const _bu=bqUpd;bqUpd=function(y){_bu.apply(this,arguments);const e=document.getElementById('bqYn');if(e&&document.activeElement!==e)e.value=+(+y).toFixed(2);};}
