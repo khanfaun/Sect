@@ -13,9 +13,12 @@ function LuoiCongPhap({ type }) {
   const cap = PS.artCap(type);
   const books = r.relics.filter(x => x.k === 'book' && x.art.type === type).length + PS.artKho().filter(x => x.type === type).length;
   const cells = A.map(a => (
-    <button key={a.u} className={'acell' + (PS.artSlot(a) >= 0 ? ' run' : '')} data-act="artOpen" data-arg={a.u} style={pcs(a.tier)} {...tah(PS.artTipH(a))}>
-      <span className="qi"><Html style={{ display: 'contents' }} h={PS.artArt(a)} /><i className="alv" {...tip('Tầng ' + a.lv + ' / ' + a.lines.length)}>{a.lv}</i></span>
+    <button key={a.u} className={'acell lb' + (PS.artSlot(a) >= 0 ? ' run' : '')} data-act="artOpen" data-arg={a.u} style={pcs(a.tier)} {...tah(PS.artTipH(a))}>
+      <i className="alv lb-so" {...tip('Tầng ' + a.lv + ' / ' + a.lines.length)}>{a.lv}</i>
+      <span className="qi lb-i"><Html style={{ display: 'contents' }} h={PS.artArt(a)} /></span>
       <b className="qt">{a.n}</b>
+      <span className={'lb-tag ' + type}>{type === 'tp' ? 'Tâm pháp' : 'Công pháp'}</span>
+      <small className="lb-d">{PS.artMoTa(a)}</small>
       <SlotX act="artStash" arg={a.u} t="Tháo ra, cất vào kho công pháp" />
     </button>
   ));
@@ -73,10 +76,10 @@ export function KyNang() {
               {Array.from({ length: CAT_MAX[c] }, (_, i) => {
                 const id = L[i], sk = id && SK[id];
                 return (
-                  <button key={i} className={'kns' + (sk ? ' on' : '')} data-act="knPick" data-arg={c + ':' + i} style={sk ? pcs(sk.t) : undefined} {...(sk ? tah(PS.skTipH(sk, av[id])) : tip('Ô trống. Chạm để chọn chiêu.'))}>
+                  <button key={i} className={'kns lb' + (sk ? ' on' : '')} data-act="knPick" data-arg={c + ':' + i} style={sk ? pcs(sk.t) : undefined} {...(sk ? tah(PS.skTipH(sk, av[id])) : tip('Ô trống. Chạm để chọn chiêu.'))}>
                     {sk ? <>
-                      <span className="qi"><Html style={{ display: 'contents' }} h={PS.skArt(sk)} /></span>
-                      <span className="at-t"><b className="qt">{sk.n}</b><small>{PS.skillCost(sk)} linh lực</small></span>
+                      <span className="qi lb-i"><Html style={{ display: 'contents' }} h={PS.skArt(sk)} /></span>
+                      <span className="at-t"><b className="qt">{sk.n}</b><span className={'lb-tag ' + c}>{CAT_N[c]}</span><small className="lb-d">{PS.skMoTa(sk)}</small><small className="lb-c">{PS.skTonChu(sk)}</small></span>
                       <SlotX act="knDel" arg={c + ':' + i} t="Gỡ chiêu" />
                     </> : <><span className="kn-e"><Ic n="plus" /></span><small>{Object.keys(av).length ? 'chọn chiêu' : 'trống'}</small></>}
                   </button>

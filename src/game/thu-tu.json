@@ -357,6 +357,8 @@
  "core2/82-tri-npc.js",
  "core2/83-dev-test.js",
  "core2/84-ngoai-hinh.js",
+ "core2/85-bo-trang-bi.js",
+ "core2/86-mo-ta-chu.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",

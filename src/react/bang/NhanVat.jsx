@@ -4,9 +4,8 @@ import { Html, PS } from '../html';
 import { Ib, Ic, Tabs, tip, tah } from '../chung';
 import { Win } from './Khung';
 import { TuiDo } from './TuiDo';
+import { TrangBi } from './TrangBi';
 import { SoHoc, KyNang } from './SoHoc';
-import { NhanVatThien } from '../giao-dien/NhanVatThien';
-import { I } from '../giao-dien/anh';
 
 // Một dòng tên — giá trị (giống kvRow()). v là chuỗi HTML (mức đánh giá có màu…)
 function Kv({ n, v, t, th, cls, tut }) {
@@ -114,7 +113,7 @@ function CanCo() {
   </>;
 }
 
-const TABS = [['base', 'Căn cơ'], ['bag', 'Túi đồ'], ['hoc', 'Sở học'], ['kn', 'Kỹ năng'], ['dao', 'Đạo đồ']];
+const TABS = [['base', 'Căn cơ'], ['tb', 'Trang bị'], ['bag', 'Túi đồ'], ['hoc', 'Sở học'], ['kn', 'Kỹ năng'], ['dao', 'Đạo đồ']];
 
 // Đ5.2: Đạo đồ — các đường đời đang theo (nghề phàm), danh vị và tiến độ bằng chữ; võ học
 function DaoDo() {
@@ -138,8 +137,8 @@ export function NhanVat() {
   return (
     <Win title={G.run.ten} cls="tall wide">
       <Tabs k="char" list={TABS} cur={tab} />
-      {tab === 'base' && <div className="nvt-khung"><NhanVatThien /><b className="tag"><img src={I('sk-sword')} alt="" />Lực chiến {PS.fmtN(Math.round(PS.lucChien()))}</b><small className="tag2">{PS.realmLabel()}</small></div>}
       {tab === 'base' && <CanCo />}
+      {tab === 'tb' && <TrangBi />}
       {tab === 'bag' && <TuiDo />}
       {tab === 'hoc' && <SoHoc />}
       {tab === 'kn' && <KyNang />}

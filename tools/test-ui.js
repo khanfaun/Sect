@@ -44,11 +44,12 @@ const TESTS = {
     ok(await ev(p, () => UI.panel === 'char' && UI.tab.char === 'bag' && document.querySelector('#nav .nv-bag.on')), 'bấm Túi đồ: mở túi đồ');
     await clk('#nav .nv-char'); await p.waitForTimeout(300);
     const nvc = await ev(p, () => [UI.panel, UI.tab.char, !!document.querySelector('.nvt-khung .doll3')]);
-    ok(nvc[0] === 'char' && nvc[1] !== 'bag' && nvc[2], 'bấm Nhân vật khi đang ở túi: chuyển sang Căn cơ (không đóng), có nhân vật ngồi thiền ' + JSON.stringify(nvc));
+    ok(nvc[0] === 'char' && nvc[1] !== 'bag', 'bấm Nhân vật khi đang ở túi: chuyển sang Căn cơ (không đóng) ' + JSON.stringify(nvc));
     await clk('#nav .nv-char'); await p.waitForTimeout(150);
     ok(await ev(p, () => UI.panel === null), 'bấm Nhân vật lần nữa: đóng bảng');
     await clk('.hud-more'); await p.waitForTimeout(150);
     ok(await ev(p, () => UI.panel === 'more'), 'nút Thêm trên thẻ trạng thái mở bảng Thêm');
+    ok(await ev(p, () => !document.querySelector('#nav .nv.c.on') && getComputedStyle(document.querySelector('#nav .nv.c .nv-i')).boxShadow === 'none'), 'mở bảng khác: ô Bản đồ thôi sáng, không còn vòng nổi');
     await clk('#nav .nv-map'); await p.waitForTimeout(150);
     ok(await ev(p, () => UI.panel === null), 'ô Bản đồ đóng bảng');
     ok(await ev(p, () => /^data:image\/webp/.test(ASSET.item.kiem) && /^data:image\/webp/.test(ASSET.item['pill:hoixuan']) && /^data:image\/webp/.test(ASSET.hero.me)), 'pháp bảo, đan dược, chân dung dùng ảnh mới');
@@ -71,6 +72,20 @@ const TESTS = {
     await p.locator('.pl-home .ct-b[data-arg="tea"]').click(); await p.waitForTimeout(200);
     ok(await ev(p, () => G.run.scene.venue === 'tea' && !!document.querySelector('.pl-pan .venue .vn-o') && !!document.querySelector('.ct-b.on[data-arg="tea"]')), 'bấm công trình Trà lâu: hiện lựa chọn của trà lâu');
     await shot(p, 'dia-diem');
+    // đợt sửa 2: thanh đầu, thông báo ở trên, thẻ Trang bị, túi đồ, căn cơ, lá bài
+    await ev(p, () => { G.run.scene = null; UI.panel = null; UI.modal = null; render(); }); await p.waitForTimeout(150);
+    ok(await ev(p, () => !document.querySelector('#hud .mbar') && !document.querySelector('#hud .hs.st')), 'thanh đầu: bỏ thanh thọ nguyên, khí huyết, ô linh thạch');
+    await ev(p, () => { G.toasts = [{ t: 'Thử báo' }]; toastFlush(); }); await p.waitForTimeout(100);
+    ok(await ev(p, () => { const t = document.querySelector('#toast .toast').getBoundingClientRect(), h = document.querySelector('#hud').getBoundingClientRect(); return t.top >= h.bottom - 2 && t.top < innerHeight / 2; }), 'thông báo hiện ở trên, ngay dưới thanh đầu');
+    await ev(p, () => { UI.panel = 'char'; UI.tab.char = 'base'; render(); }); await p.waitForTimeout(150);
+    ok(await ev(p, () => !document.querySelector('#panel .nvt-khung')), 'Căn cơ: không còn khung ảnh nhân vật');
+    await ev(p, () => { UI.tab.char = 'tb'; render(); }); await p.waitForTimeout(150);
+    ok(await ev(p, () => document.querySelectorAll('#panel .tb-doll .tb-o .eqc').length === 9 && !!document.querySelector('#panel .tb-giua .doll3') && /Bộ trang bị/.test(document.querySelector('#panel').innerText) && /Chỉ số từ trang bị/.test(document.querySelector('#panel').innerText)), 'thẻ Trang bị: 9 ô hai bên, nhân vật giữa, bộ trang bị, chỉ số bằng chữ');
+    await ev(p, () => { UI.tab.char = 'bag'; render(); }); await p.waitForTimeout(150);
+    ok(await ev(p, () => !document.querySelector('#panel .eqwrap') && document.querySelectorAll('#panel .bst-tien .tc').length >= 7), 'Túi đồ: không còn ô trang bị, hiện đủ các loại tiền');
+    await ev(p, () => { const r = G.run; r.pham = 0; r.realm = 1; UI.tab.char = 'hoc'; render(); }); await p.waitForTimeout(150);
+    ok(await ev(p, () => [...document.querySelectorAll('#panel .acell.lb:not(.emp):not(.lockc)')].every(c => !!c.querySelector('.lb-d') && !/\d/.test(c.querySelector('.lb-d').textContent))), 'Sở học: công pháp dạng lá bài, mô tả không có số');
+    await ev(p, () => { UI.panel = null; render(); });
     await ev(p, () => { G.run.scene = null; render(); });
     await ev(p, () => { UI.modal = null; G.run.scene = null; render(); });
   },
@@ -703,8 +718,8 @@ const TESTS = {
     ok(a[0].n === 1 && a[1].n === 2 && a[2].n === 3 && a[3].n === 3, 'số mũi tên theo mức: ' + a.map(x => x.n).join(','));
     ok(a[0].up && !a[3].up && a[0].col === 'rgb(47, 154, 78)' && a[3].col === 'rgb(192, 57, 43)', 'tăng xanh, giảm đỏ: ' + a[0].col + ' / ' + a[3].col);
     ok(/Lý Mặc/.test(a[0].t) && a.every(x => x.bg === 'rgba(0, 0, 0, 0)' && x.bd === '0px'), 'có tên NPC, không nền không khung');
-    const g = await ev(p, () => { const b = document.getElementById('favpop').getBoundingClientRect(), rs = [...document.querySelectorAll('#favpop .favrow')].map(e => e.getBoundingClientRect()); const nv = document.getElementById('nav').getBoundingClientRect(); return { bottom: b.bottom, navTop: nv.top, left: b.left, ov: rs.some((r, i) => rs.some((s, j) => j > i && r.bottom > s.top + 1)) }; });
-    ok(g.bottom <= g.navTop && g.left < 30 && !g.ov, 'nằm trên chân trang, sát trái, không đè nhau ' + JSON.stringify(g));
+    const g = await ev(p, () => { const b = document.getElementById('favpop').getBoundingClientRect(), rs = [...document.querySelectorAll('#favpop .favrow')].map(e => e.getBoundingClientRect()); const nv = document.getElementById('nav').getBoundingClientRect(), hd = document.getElementById('hud').getBoundingClientRect(); return { top: b.top, hudBot: hd.bottom, bottom: b.bottom, navTop: nv.top, left: b.left, ov: rs.some((r, i) => rs.some((s, j) => j > i && r.bottom > s.top + 1)) }; });
+    ok(g.top >= g.hudBot - 2 && g.top < 400 && g.bottom <= g.navTop && !g.ov, 'nằm ở trên, ngay dưới thanh đầu (giao diện mới: mọi thông báo ở trên), không đè nhau ' + JSON.stringify(g));
     ok(await ev(p, () => NK.count('thiencam') === 4), 'nhật ký thiencam.hien đủ 4 dòng');
     await p.waitForTimeout(2300);
     ok(await ev(p, () => document.querySelectorAll('#favpop .favrow').length === 0), 'biến mất sau chừng 2 giây');

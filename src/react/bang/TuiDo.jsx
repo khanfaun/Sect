@@ -1,10 +1,11 @@
 // Thẻ túi đồ trong bảng nhân vật: hình người mặc trang bị, pháp bảo, đan điền uẩn dưỡng,
 // pháp khí tùy thân; bên phải là bộ lọc và lưới ô đồ.
 import { Html, PS } from '../html';
-import { DdSel, Ic, SlotX, Stone, Tranh, pcs, tah, tip } from '../chung';
+import { DdSel, Ic, SlotX, pcs, tah, tip } from '../chung';
+import { CumTien } from '../ban-do/NutBanDo';
 
 // Một ô trang bị: bấm mở hộp chọn, nút × ở góc để tháo (giống eqCell())
-function OTrangBi({ k, label, rel, o = {} }) {
+export function OTrangBi({ k, label, rel, o = {} }) {
   const t = rel ? tah(PS.relTip(rel)) : tip(o.tip || label + ': trống. Chạm để chọn.');
   if (o.lock && !rel) return <span className="eqc lock" {...t}><Ic n="lock" /><small>{label}</small></span>;
   const icon = rel ? PS.relIcon(rel) : o.lock ? PS.ic('lock') : PS.slotIcon(o.ic || 'phapbao');
@@ -18,7 +19,7 @@ function OTrangBi({ k, label, rel, o = {} }) {
   );
 }
 
-function PhuongTien({ k, n }) {
+export function PhuongTien({ k, n }) {
   const { G, ASSET } = PS;
   const r = G.run, m = PS.mountOf(), off = r.vehOff || r.rentOff;
   const t = m ? m.n + (m.d ? '\n' + m.d : '') + '\nTốc độ ×' + PS.numVN(m.m || 1) : off ? 'Đã cất ' + off.n + (off.v ? off.v.n : '') + '. Chạm để dùng lại.' : 'Chưa có phương tiện. Sắm ở Trạm dịch trong thôn trấn.';
@@ -31,45 +32,7 @@ function PhuongTien({ k, n }) {
   );
 }
 
-const Help = ({ t }) => <span className="qhelp" {...tip(t)}><Ic n="info" cls="sm" /></span>;
-
-function CotTrai() {
-  const { REALM, PB_SLOTS, PB_REQ, DD_N, SLOTS, SPEC } = PS;
-  const r = PS.run2(), E = PS.eqOf(), dn = DD_N[r.realm], po = PS.pbOpen();
-  return (
-    <div className="eqwrap">
-      <div className="doll">
-        <Tranh seed={'doll' + r.ten} reg={r.region} type="" cls="dollbg" figs="nhan:0.5:0.92:0:doll" />
-        <div className="dgrid">{SLOTS.map(([k, n]) => <OTrangBi key={k} k={'E' + k} label={n} rel={E[k]} o={{ ic: k, x: ['eqOff', k, 'Tháo ra'] }} />)}</div>
-      </div>
-      <div className="ddpair">
-        <div className="ddg">
-          <h4 className="sgrp">Pháp bảo <small>{PB_SLOTS.filter(k => E[k]).length}/{po}</small><span className="grow"></span><Help t="Pháp bảo đang mang theo người: cho chỉ số. Ô thứ nhất mở ở Trúc Cơ, ô thứ hai ở Kết Đan, ô thứ ba ở Nguyên Anh." /></h4>
-          <div className="ddrow three">
-            {PB_SLOTS.map((k, j) => j < po
-              ? <OTrangBi key={k} k={'E' + k} label="Pháp bảo" rel={E[k]} o={{ ic: 'phapbao', x: ['eqOff', k, 'Tháo ra'] }} />
-              : <OTrangBi key={k} k={'E' + k} label={REALM[PB_REQ[j]]} rel={null} o={{ lock: 1, ic: 'phapbao', tip: 'Mở khi đạt ' + REALM[PB_REQ[j]] + '.' }} />)}
-          </div>
-          <h4 className="sgrp">Đan điền · uẩn dưỡng <small>{r.dd.length}/{dn}</small><span className="grow"></span><Help t="Vũ khí, pháp bảo nuôi trong đan điền mỗi năm mạnh thêm 5% (tối đa gấp đôi), vẫn cho chỉ số, và trong trận tế ra đánh được một lần." /></h4>
-          <div className="ddrow">
-            {[0, 1, 2, 3].map(j => {
-              const d = r.dd[j];
-              if (d) return <OTrangBi key={j} k={'D' + j} label="" rel={d.rel} o={{ badge: '+' + Math.round((PS.ddMul(d) - 1) * 100) + '%', x: ['ddTake', j, 'Lấy ra'] }} />;
-              const need = DD_N.findIndex(x => x > j);
-              return <OTrangBi key={j} k={'D' + j} label={j < dn ? 'Trống' : REALM[need]} rel={null} o={{ lock: j >= dn, ic: 'phapbao', tip: j < dn ? 'Chạm để chọn vũ khí hoặc pháp bảo đưa vào uẩn dưỡng.' : 'Mở khi đạt ' + REALM[need] + '.' }} />;
-            })}
-          </div>
-        </div>
-        <div className="ddg">
-          <h4 className="sgrp">Pháp khí tùy thân</h4>
-          <div className="ddrow five">
-            {SPEC.map(([k, n]) => k === 'phuongtien' ? <PhuongTien key={k} k={k} n={n} /> : <OTrangBi key={k} k={'E' + k} label={n} rel={E[k]} o={{ ic: k, x: ['eqOff', k, 'Tháo ra'] }} />)}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+export const Help = ({ t }) => <span className="qhelp" {...tip(t)}><Ic n="info" cls="sm" /></span>;
 
 const SORT = ['Phẩm cao', 'Phẩm thấp', 'Tên A–Z', 'Loại'];
 const SORTF = [(a, b) => b.tier - a.tier || a.n.localeCompare(b.n), (a, b) => a.tier - b.tier || a.n.localeCompare(b.n), (a, b) => a.n.localeCompare(b.n), (a, b) => a.cat.localeCompare(b.cat) || b.tier - a.tier];
@@ -146,13 +109,12 @@ export function TuiDo() {
   const r = PS.run2(), items = PS.bagItems();
   return <>
     <div className="bagtop">
-      <div className="bst" {...tip('Linh thạch: tiền tệ của giới tu tiên\n' + PS.ltTxt(r) + '\nĐổi phẩm ở phường thị, chợ tu sĩ, tông môn mình')}><span><small>Linh thạch</small><Stone v={r.st} />{[1, 2, 3].some(k => PS.ltGet(k, r)) && <small> {PS.ltTxt(r)}</small>}</span></div>
+      <div className="bst bst-tien" {...tip('Hầu bao: tiền phàm (xu, lượng bạc, lượng vàng) và linh thạch bốn phẩm' + (r.thuongLenh ? '\nThưởng Lệnh: ' + r.thuongLenh : ''))}><small>Tiền tệ</small><CumTien r={r} />{!!r.thuongLenh && <small className="tl">Thưởng Lệnh {r.thuongLenh}</small>}</div>
       <div className="bcap" {...tip('Sức chứa tăng theo cảnh giới và túi trữ vật đang đeo.\nTối đa ' + PS.BAG_MAX + ' ô.')}><small>Túi đồ</small><b>{items.length} / {PS.bagCap()} ô</b>{PS.tuiSlots && PS.tuiSlots() > 0 && !PS.tuiOn() && <small className="tkh-n"><Ic n="lock" /> {PS.tuiSlots()} ô túi đang khoá</small>}</div>
       <button className="icb" data-act="phamHelp" aria-label="Các phẩm" {...tip('Bảng màu các phẩm')}>?</button>
     </div>
-    <div className="bagwrap">
-      <div className="bagL"><CotTrai /></div>
-      <div className="bagR"><CotPhai items={items} /><p className="hint">Chạm món đồ để xem cách dùng. Chạm ô trang bị để chọn món hoặc chạm dấu × để tháo.</p><TamGiu /></div>
+    <div className="bagwrap bag-only">
+      <div className="bagR"><CotPhai items={items} /><p className="hint">Chạm món đồ để xem cách dùng. Mặc, tháo trang bị ở thẻ Trang bị.</p><TamGiu /></div>
     </div>
   </>;
 }

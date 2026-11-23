@@ -3446,6 +3446,22 @@ const TESTS = {
     ok(run("G.run.scene.over")==='lose', 'yêu thú Luyện Khí thua thiên kiêu Nguyên Anh');run("combatContinue()");ok(!!run("G.run")&&!run("G.run.scene"), 'thua trận thử không chết');
   },
   // ngoại hình theo độ tuổi (core2/84): tự đổi hình theo tuổi, độ tuổi chưa có ảnh thì mượn gần nhất, đổi tuổi giữ đúng thọ nguyên
+  // bộ trang bị (core2/85), tổng hợp chỉ số bằng chữ, mô tả chiêu/công pháp bằng chữ (core2/86)
+  bo_trang_bi() {
+    const seed0 = fixtureSeed;
+    fresh("G.run.pham=0;G.run.realm=2"); fixtureSeed = seed0;
+    const a0=run("(()=>{const E=eqOf();for(const k in E)delete E[k];return aggFx().atkP||0})()");
+    run("(()=>{const E=eqOf();let n=0;for(let i=0;i<60&&n<2;i++){const x=genRelic(2);if(boOSlot(x)&&!E[slotOf(x)]){x.bo='thanhphong';E[slotOf(x)]=x;n++;}}})()");
+    ok(run("boDem().thanhphong")===2, 'mặc 2 món Bộ Thanh Phong');
+    ok(run("boView()[0].muc[0].on")===true&&run("boView()[0].muc[1].on")===false, '2 món: kích hoạt mốc 2, chưa mốc 4');
+    ok(run("aggFx().atkP||0")>=a0+8, 'hiệu ứng bộ cộng vào chỉ số (công vật lý)');
+    const L=run("JSON.stringify(tbTongHop())");ok(/Tăng (nhẹ|vừa|mạnh)/.test(L)&&!/\d+%/.test(run("tbTongHop().map(x=>x.t).join(' ')")), 'tổng hợp chỉ số trang bị bằng chữ, không ghi số');
+    ok(run("tbMuc('atkP',5)")==='Tăng nhẹ'&&run("tbMuc('atkP',25)")==='Tăng mạnh'&&run("tbMuc('defP',-12)")==='Giảm vừa', 'mức chữ: nhẹ / vừa / mạnh, tăng / giảm');
+    const d=run("skMoTa(Object.values(SK).find(s=>s.fx&&s.fx.p))");ok(/^Gây sát thương (nhỏ|vừa|lớn)/.test(d)&&!/\d/.test(d), 'chiêu đánh: "'+d+'"');
+    const h=run("skMoTa(Object.values(SK).find(s=>s.fx&&s.fx.heal&&!s.fx.p))");ok(/Hồi một lượng (nhỏ|vừa|lớn) khí huyết/.test(h), 'chiêu hồi máu: "'+h+'"');
+    ok(!/\d/.test(run("artMoTa(Object.assign({lv:3},CAT.arts[0]))")), 'công pháp mô tả bằng chữ');
+    run("(()=>{const x=genRelic(1);delete x.bo;eqOf()[slotOf(x)]=x;})()");ok(Array.isArray(run("boView()")), 'đồ cũ không có bộ: không lỗi');
+  },
   ngoai_hinh() {
     const seed0 = fixtureSeed; // không làm lệch seed của các bài sau
     fresh("G.run.pham=0;G.run.realm=3;G.run.g='nam'"); fixtureSeed = seed0;

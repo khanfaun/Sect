@@ -21,7 +21,7 @@ const CT = {
   // Hoang dã
   sanbat: 'bd-linh-thu', sanyeu: 'bd-linh-thu', haithuoc: 'bd-linh-dien', daokhoang: 'bd-dong-thien',
   // Việc khác
-  coduyen: ['it-sen', 1], grave: ['it-giay', 1], patron: ['it-lenh-ngoc', 1], bury: ['it-ruong', 1], quyan: ['it-kiem', 1], datdai: ['it-ban-do', 1],
+  coduyen: ['it-sen', 1], grave: ['it-bua-ren', 1], patron: ['it-lenh-ngoc', 1], bury: ['it-ruong', 1], quyan: ['it-kiem', 1], datdai: ['it-ban-do', 1],
   quyen: ['it-co', 1], dungdau: ['it-lenh-bai', 1], daomo: ['it-quang-lam', 1], aocanh: ['it-bua', 1], caitrang: ['it-ao-tim', 1], daisu: ['it-truc-thu', 1],
   // chuyện lớn
   boss: ['mo-huyet-ma', 1], cross: ['it-co', 1],

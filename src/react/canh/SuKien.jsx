@@ -29,23 +29,36 @@ export function SuKien({ sc }) {
   const r = G.run, e = PS.EVMAP[sc.id], st = sc.story;
   const qi = st.findIndex(x => typeof x === 'object');
   const choose = sc.phase === 'choose';
+  const body = <>
+    {qi < 0 ? <div className="story"><Story story={st} /></div> : <>
+      <div className="story"><Story story={st.slice(0, qi)} /></div>
+      <div className="dlg" id="dlg">
+        {st.slice(qi).map((x, i) => typeof x === 'object'
+          ? <p key={i} className="dq">› {x.q}</p>
+          : <Html as="p" key={i} className={qi + i >= UI.lastStory ? 'new' : ''} h={PS.txt(x)} />)}
+      </div>
+    </>}
+    {/* tin đồn chỉ hiện lúc đang chọn, ghi rõ là tin đồn để không lẫn vào lời kể */}
+    {sc.news && choose && <p className="news"><b>Tin đồn giang hồ:</b> {sc.news}</p>}
+    <Chips list={sc.chips} />
+    {choose && <CacLuaChon sc={sc} />}
+  </>;
+  const minBtn = choose ? <button className="pl-tg" data-act="evMin" {...tip('Tạm gác lại để xem bản đồ, túi đồ… rồi quay lại chọn sau')}>Để sau <Ic n="down" /></button> : null;
+  const foot = choose ? null : <GoBtn act="next" label="Tiếp tục" />;
+  // đang đứng ở một địa điểm: sự kiện hiện ngay trên phong cảnh nơi đó, chữ nằm thẳng trên nền (vùng cố định phía dưới)
+  const n = !r.moving && PS.curNode && PS.curNode();
+  const pimg = n && (PS.ASSET.place[n.type] || PS.ASSET.place[(PS.NEWT[n.type] || {}).as]);
+  if (pimg) return (
+    <section className="scard tall place pl-home pl-ev">
+      <div className="pl-nen"><img src={pimg} alt="" /></div>
+      <header className="sc-h pl-top"><h2>{e && e.n || 'Kỳ ngộ'}</h2><small>{r.place.n}</small>{minBtn}</header>
+      <div className="pl-pho" />
+      <div className="pl-pan sc-b">{body}</div>
+      {foot && <footer className="sc-f">{foot}</footer>}
+    </section>
+  );
   return (
-    <Card title={e && e.n || 'Kỳ ngộ'} sub={r.place.n}
-      head={choose ? <button className="pl-tg" data-act="evMin" {...tip('Tạm gác lại để xem bản đồ, túi đồ… rồi quay lại chọn sau')}>Để sau <Ic n="down" /></button> : null}
-      foot={choose ? null : <GoBtn act="next" label="Tiếp tục" />}>
-      {qi < 0 ? <div className="story"><Story story={st} /></div> : <>
-        <div className="story"><Story story={st.slice(0, qi)} /></div>
-        <div className="dlg" id="dlg">
-          {st.slice(qi).map((x, i) => typeof x === 'object'
-            ? <p key={i} className="dq">› {x.q}</p>
-            : <Html as="p" key={i} className={qi + i >= UI.lastStory ? 'new' : ''} h={PS.txt(x)} />)}
-        </div>
-      </>}
-      {/* tin đồn chỉ hiện lúc đang chọn, ghi rõ là tin đồn để không lẫn vào lời kể */}
-      {sc.news && choose && <p className="news"><b>Tin đồn giang hồ:</b> {sc.news}</p>}
-      <Chips list={sc.chips} />
-      {choose && <CacLuaChon sc={sc} />}
-    </Card>
+    <Card title={e && e.n || 'Kỳ ngộ'} sub={r.place.n} head={minBtn} foot={foot}>{body}</Card>
   );
 }
 

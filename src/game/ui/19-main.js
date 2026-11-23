@@ -24,7 +24,7 @@ function render(){
       if(cb)full=rxv('TranDau');
       else{hud=rxv('Hud');nav=rxv('Nav');
         if(!sc||(UI.evMin&&sc.type==='event')){mapui=rxv('NutBanDo');dock=rxv('TheDiaDiem');}
-        else{sheet=rxv('Canh:'+sc.type);if(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine) and (min-width:1200px)').matches)mapui=rxv('NutBanDo');} // máy tính: giữ các nút nổi khi mở bảng
+        else{sheet=rxv('Canh:'+sc.type);if(false)mapui=rxv('NutBanDo');} // máy tính: giữ các nút nổi khi mở bảng
       }
     }
     if(UI.panel)panel=rxv('Bang:'+UI.panel);

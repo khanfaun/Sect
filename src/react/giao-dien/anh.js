@@ -35,7 +35,7 @@ const PLACE = {
 };
 // chiêu thức theo hệ
 const SK_EL = { kim: 'sk-sword', moc: 'sk-heal', thuy: 'sk-qi', hoa: 'sk-fire', tho: 'sk-meteor', loi: 'sk-thunder', bang: 'sk-ice', phong: 'sk-wind', am: 'sk-illusion', phat: 'sk-palm', vo: 'sk-palm', doc: 'sk-poison', huyet: 'sk-blood' };
-const CP = ['it-bi-kip', 'it-truc-thu', 'it-giay'];
+const CP = ['it-bi-kip', 'it-truc-thu', 'it-ban-do'];
 function hsh(s) { let h = 2166136261; for (const c of String(s)) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
 
 export function ganAnh() {
