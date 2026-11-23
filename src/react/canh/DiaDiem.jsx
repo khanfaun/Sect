@@ -1,4 +1,5 @@
 // Cảnh đang ở trong một địa điểm: lời kể, nhiệm vụ, chuyện lớn, chuyện trước mắt, việc thường nhật theo nhóm.
+import { useLayoutEffect, useRef } from 'react';
 import { Html, PS } from '../html';
 import { Tranh } from '../html';
 import { Chips, Cost, Ib, Ic, tip } from '../chung';
@@ -29,9 +30,12 @@ function NutViec({ a, n, num }) {
   );
 }
 
+// thứ tự ưu tiên chọn công trình chủ chốt (nằm giữa, to hơn) của mỗi nơi
+const CT_CHINH = ['congmon', 'join', 'quanphu', 'board', 'thuongcac', 'shop', 'ghost', 'laibuon', 'tea', 'inn', 'muusinh', 'tram', 'khaiphu', 'sanyeu', 'sanbat', 'haithuoc', 'daokhoang'];
+
 // Một công trình (toà nhà / vật) trên màn địa điểm: bấm = chọn việc đó (như chọn một mục trong bảng địa điểm cũ).
 // Nơi chọn việc (trà lâu, khách điếm…) thì mở danh sách lựa chọn của nơi đó ở bảng dưới.
-function CongTrinh({ a, n, nhom, on }) {
+function CongTrinh({ a, n, nhom, on, chinh, st }) {
   const { G, VENUE_N, PL_N } = PS;
   const r = G.run, w = PS.W(), A = anhCongTrinh(a.a, nhom);
   const hot = VENUE_N[a.a] && n.vsp && n.vsp.k === r.kiep && n.vsp.v === a.a && n.vsp.until > w.t;
@@ -39,7 +43,7 @@ function CongTrinh({ a, n, nhom, on }) {
   const ten = qa ? 'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc' : PL_N[a.a] || VENUE_N[a.a] || a.l;
   const sub = VENUE_N[a.a] ? (a.dis ? 'đang đóng cửa' : '') : (a.h && !a.dis ? PS.durH(a.h) : '');
   return (
-    <button className={'ct-b' + (A.nho ? ' nho' : '') + (on ? ' on' : '') + (a.dis ? ' dis' : '') + (a.a === 'quyan' ? ' soft' : '')} data-act="pact" data-arg={a.a} disabled={!!a.dis}
+    <button style={st} className={'ct-b' + (chinh ? ' chinh' : '') + (A.nho ? ' nho' : '') + (on ? ' on' : '') + (a.dis ? ' dis' : '') + (a.a === 'quyan' ? ' soft' : '')} data-act="pact" data-arg={a.a} disabled={!!a.dis}
       data-anh={A.ten} {...tip((ten !== a.l ? a.l + '\n' : '') + (a.tip || ''))}>
       <span className="ct-i"><img src={A.src} alt="" draggable="false" /></span>
       {hot && <span className="ex" {...tip('Đang có chuyện đặc biệt, không chờ lâu')}>!</span>}
@@ -106,7 +110,20 @@ export function DiaDiem({ sc }) {
     </button>
   ));
   const pimg = ASSET.place[n.type] || ASSET.place[(PS.NEWT[n.type] || {}).as];
-  const ctrinh = groups.flatMap(([name, L]) => L.map(a => <CongTrinh key={a.a} a={a} n={n} nhom={name} on={sc.venue === a.a} />));
+  // công trình chủ chốt của nơi này (to, nằm giữa): lấy theo thứ tự ưu tiên CT_CHINH, không có thì món đầu
+  const all = groups.flatMap(([name, L]) => L.map(a => [a, name]));
+  const ck = (CT_CHINH.find(k => all.some(([a]) => a.a === k)) || (all[0] && all[0][0].a));
+  const rows = Math.max(2, Math.ceil((all.length + 1) / 3)), r0 = Math.max(1, Math.floor((rows - 2) / 2) + 1);
+  const ctrinh = all.map(([a, name]) => a.a === ck
+    ? <CongTrinh key={a.a} a={a} n={n} nhom={name} on={sc.venue === a.a} chinh st={{ gridColumn: '2', gridRow: r0 + ' / span 2' }} />
+    : <CongTrinh key={a.a} a={a} n={n} nhom={name} on={sc.venue === a.a} />);
+  // vừa vào nơi này: cuộn để công trình chủ chốt nằm giữa vùng nhìn
+  const pho = useRef(null);
+  useLayoutEffect(() => {
+    const go = () => { const el = pho.current, c = el && el.querySelector('.ct-b.chinh'); if (c && el.clientHeight) { el.scrollTop = Math.max(0, c.offsetTop + c.offsetHeight / 2 - el.clientHeight / 2); return true; } return false; };
+    // khung có thể chưa hiện (chưa có chiều cao) ở lần vẽ đầu: thử lại sau
+    if (!go()) { const t1 = setTimeout(go, 30), t2 = setTimeout(go, 200); return () => { clearTimeout(t1); clearTimeout(t2); }; }
+  }, [sc.id]);
   const specials = qs.length + big.length + ents.length + evs.length;
   return (
     <section className="scard tall place pl-home" data-n={ctrinh.length}>
@@ -121,8 +138,8 @@ export function DiaDiem({ sc }) {
         </div>
         {M && <div className="pl-kv"><div><small>Tọa trấn</small><span>{M.luc}</span></div><div><small>Quy mô</small><span>{M.quy}</span></div>{PS.SETTLE.includes(n.type) && <div><small>Danh tiếng nơi này</small><span>{PS.danhName(n)}</span></div>}</div>}
       </header>
-      <div className="pl-pho">
-        {ctrinh.length ? <div className="pl-ct">{ctrinh}</div> : <p className="hint pl-trong">Nơi này không có công trình nào để vào.</p>}
+      <div className="pl-pho" ref={pho}>
+        {ctrinh.length ? <div className="pl-ct" data-chinh={ck}>{ctrinh}</div> : <p className="hint pl-trong">Nơi này không có công trình nào để vào.</p>}
       </div>
       <div className={'pl-pan' + (sc.venue ? ' vn' : '')}>
         {sc.venue && VENUE_N[sc.venue] && <NoiChonViec n={n} v={sc.venue} />}

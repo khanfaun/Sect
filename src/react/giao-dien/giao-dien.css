@@ -413,3 +413,21 @@ body{font-family:var(--font);letter-spacing:0}
 /* ô giữa (Bản đồ): chỉ nổi vòng tròn sáng khi đang ở bản đồ; mở bảng khác thì về như ô thường */
 #app .nv.c:not(.on) .nv-i{width:32px;height:32px;margin-top:0;padding:2px;border-radius:0;background:none;box-shadow:none;filter:grayscale(.35) opacity(.85)}
 #app .nv.c:not(.on){color:var(--ink2)!important}
+
+/* viền hiệu ứng (vàng: lên cảnh giới / tiềm chất, đỏ: máu thấp / tụt, xanh: hồi phục): mỏng và nhạt hơn */
+:root[data-edge=up]::after{box-shadow:inset 0 0 14px 3px rgba(255,196,40,.55),inset 0 0 44px 8px rgba(255,180,40,.22)!important}
+:root[data-edge=down]::after{box-shadow:inset 0 0 18px 4px rgba(150,20,30,.4)!important;background:radial-gradient(ellipse at center,transparent 70%,rgba(60,0,0,.08))!important}
+#lowfx.low{box-shadow:inset 0 0 20px 4px rgba(150,20,30,.42)!important;background:radial-gradient(ellipse at center,transparent 70%,rgba(60,0,0,.08))!important}
+#lowfx.heal{box-shadow:inset 0 0 18px 4px rgba(60,170,90,.38)!important;background:none!important}
+/* trên máy tính: viền bám theo khung game */
+@media (min-width:560px){:root[data-edge]::after,#lowfx{left:50%!important;right:auto!important;width:480px;transform:translateX(-50%);top:12px!important;bottom:12px!important;border-radius:22px}}
+/* công trình: vật nhỏ không còn vòng tròn, vẽ như công trình; công trình chủ chốt to, nằm giữa */
+.pl-home .pl-ct{grid-auto-flow:row dense;align-items:center}
+.pl-home .ct-b:nth-child(3n+2),.pl-home .ct-b:nth-child(3n+2):not(:disabled):active{transform:none}
+.pl-home .ct-b.nho .ct-i{width:78px;height:78px;margin:9px 0 9px;border-radius:0;padding:6px;background:none;box-shadow:none}
+.pl-home .ct-b.nho .ct-n{margin-top:-10px}
+.pl-home .ct-b.chinh{align-self:center;z-index:1}
+.pl-home .ct-b.chinh .ct-i{width:150px;height:150px;max-width:none}
+.pl-home .ct-b.chinh .ct-i img{filter:drop-shadow(0 0 14px rgba(255,232,150,.55)) drop-shadow(0 8px 6px rgba(14,42,36,.45))}
+.pl-home .ct-b.chinh .ct-n{font-size:.82em;padding:1px 10px;background:linear-gradient(#fff4cf,#f0d98c);border-color:var(--gd2)}
+@media (max-height:640px){.pl-home .ct-b.chinh .ct-i{width:118px;height:118px}}

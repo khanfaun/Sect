@@ -69,6 +69,7 @@ const TESTS = {
     // địa điểm: chuyển cảnh, công trình bấm được, bấm trà lâu hiện lựa chọn trà lâu
     await ev(p, () => { UI.modal = null; const r = G.run; r.st = 1e4; const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'thanh' && n.state !== 'ruin'); r.at = n.id; r.region = n.r; arrive(n.id); openPlace(n.id); W().t += ((9 - tHour(W().t) + 24) % 24); render(); }); await p.waitForTimeout(300);
     ok(await ev(p, () => !!document.querySelector('#sheet .scard.pl-home') && document.querySelectorAll('.pl-home .ct-b img[src^="data:image"]').length >= 4), 'địa điểm hiện thành cảnh, có các công trình có ảnh');
+    ok(await ev(p, () => document.querySelectorAll('.pl-home .ct-b.chinh').length === 1 && getComputedStyle(document.querySelector('.pl-home .ct-b.chinh')).gridColumnStart === '2' && [...document.querySelectorAll('.pl-home .ct-b.nho .ct-i')].every(e => getComputedStyle(e).boxShadow === 'none')), 'có đúng một công trình chủ chốt nằm cột giữa; vật nhỏ không còn vòng tròn');
     await p.locator('.pl-home .ct-b[data-arg="tea"]').click(); await p.waitForTimeout(200);
     ok(await ev(p, () => G.run.scene.venue === 'tea' && !!document.querySelector('.pl-pan .venue .vn-o') && !!document.querySelector('.ct-b.on[data-arg="tea"]')), 'bấm công trình Trà lâu: hiện lựa chọn của trà lâu');
     await shot(p, 'dia-diem');
