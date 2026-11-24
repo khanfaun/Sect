@@ -38,25 +38,37 @@ function TienPC({ r }) {
   );
 }
 
+// Cái ăn (giống ô trên thanh đầu bản điện thoại): bát cơm, thanh no/đói ngắn, chữ trạng thái; chạm để đổi mức ăn
+function CaiAn({ r }) {
+  const st = PS.anState(r), chet = (PS.AN && PS.AN.doi && PS.AN.doi.chet) || 200;
+  const w = Math.round(100 * Math.max(0.04, 1 - Math.min(1, (r.doi || 0) / chet)));
+  const tui = PS.anTui && PS.anTui(r).length ? '\nĐồ ăn mang theo: ' + PS.anTui(r).map(x => x.k + ' ' + (PS.CAT.byId[x.id] || {}).n).join(', ') : '';
+  const t = 'Cái ăn: ' + PS.contentText('an.' + st) + ' · no ' + (r.no != null ? r.no : 100) + '/100\nMức ăn: ' + PS.anMuc(r).n + ' · ' + PS.fmtBac(PS.anCost(r) * (PS.AN.buaX || 30)) + ' một bữa no' + tui + '\nChạm để đổi mức ăn';
+  return (
+    <button className={'pc-an' + (st !== 'no' ? ' hi' : '')} data-act="anMuc" {...tip(t)}>
+      <i className="pc-em">🍚</i><em className="pc-cl">Cái ăn</em>
+      <span className="pc-anb"><i className={'st-' + st}><b style={{ width: w + '%' }} /></i><b>{PS.contentText('an.' + st)}</b></span>
+    </button>
+  );
+}
+
 // ---------- thanh dưới: [chỉ số + cái ăn][khí huyết, linh lực] (chân dung) [tu vi, lịch luyện][tiền tệ]; trạng thái nổi phía trên hai bên chân dung ----------
 export function ChanTrang() {
   const r = PS.G.run, s = PS.S();
   const left = s.life - r.age, warn = left < s.life * 0.12;
   const tal = PS.playerTal(), tm = r.tamma || 0, voK = PS.voKnown();
   const an = (PS.anShow ? PS.anShow(r) : PS.needFood && PS.needFood(r));
-  const vt = DaiVetThuong(), vtL = vt.slice(0, 4), vtR = vt.slice(4);
+  const vt = DaiVetThuong();
   const mpN = s.maxMp > 0 ? PS.mpName() : 'Linh lực';
   return (
     <div className="pc-day">
       <div className="pc-ben trai">
-        <div className="pc-info">
-          <div className="pc-cs">
-            <span {...tip('Lực chiến: so với người cùng cảnh giới, tính từ chỉ số chiến đấu và trang bị.')}><img src={I('sk-sword')} alt="" /><em className="pc-cl">Lực chiến</em><Rt k="lc" v={PS.lucChien()} /></span>
-            <span {...tip('Tu luyện: tốc độ tu luyện khi bế quan ở chỗ đang đứng')}><img src={I('cau-tu')} alt="" /><em className="pc-cl">Tu luyện</em><Rt k="bq" v={PS.bqReal()} kind="toc" /></span>
-            <span {...tip('Đạo tâm: chống ảo cảnh, tâm ma; giúp đột phá')}><img src={I('it-sen')} alt="" /><em className="pc-cl">Đạo tâm</em><Rt k="tam" v={s.tam} kind="muc" /></span>
-            <span className={tm >= 60 ? 'hi' : ''} {...tip('Tâm ma ' + Math.round(tm) + '/100. Đầy sẽ phải đối mặt với chính mình.')}><img src={I('cau-ma')} alt="" /><em className="pc-cl">Tâm ma</em><b>{PS.tmWord(tm)}</b></span>
-          </div>
-          {an && <div className="pc-an" data-act="anMuc" {...tip('Cái ăn: no ' + (r.no != null ? r.no : 100) + '/100\nMức ăn: ' + PS.anMuc(r).n + '\nChạm để đổi mức ăn')}><Thanh n="Cái ăn" v={r.no != null ? r.no : 100} max={100} cls={'an' + (PS.anState(r) !== 'no' ? ' low' : '')} txt={PS.contentText('an.' + PS.anState(r))} /></div>}
+        <div className="pc-cs">
+          <span {...tip('Lực chiến: so với người cùng cảnh giới, tính từ chỉ số chiến đấu và trang bị.')}><img src={I('sk-sword')} alt="" /><em className="pc-cl">Lực chiến</em><Rt k="lc" v={PS.lucChien()} /></span>
+          <span {...tip('Tu luyện: tốc độ tu luyện khi bế quan ở chỗ đang đứng')}><img src={I('cau-tu')} alt="" /><em className="pc-cl">Tu luyện</em><Rt k="bq" v={PS.bqReal()} kind="toc" /></span>
+          <span {...tip('Đạo tâm: chống ảo cảnh, tâm ma; giúp đột phá')}><img src={I('it-sen')} alt="" /><em className="pc-cl">Đạo tâm</em><Rt k="tam" v={s.tam} kind="muc" /></span>
+          <span className={tm >= 60 ? 'hi' : ''} {...tip('Tâm ma ' + Math.round(tm) + '/100. Đầy sẽ phải đối mặt với chính mình.')}><img src={I('cau-ma')} alt="" /><em className="pc-cl">Tâm ma</em><b>{PS.tmWord(tm)}</b></span>
+          {an && <CaiAn r={r} />}
         </div>
         <div className="pc-bars">
           <Thanh n="Khí huyết" v={r.hp} max={s.maxHp} cls={'hp' + (r.hp < s.maxHp * 0.35 ? ' low' : '')} t="Khí huyết: về 0 là thua trận" />
@@ -80,8 +92,8 @@ export function ChanTrang() {
         </div>
         <TienPC r={r} />
       </div>
-      <div className="pc-vt l">{vtL}</div>
-      <div className="pc-vt r">{vtR}<NhanDotPha /></div>
+      <div className="pc-vt l">{vt}</div>
+      <div className="pc-vt r"><NhanDotPha /></div>
     </div>
   );
 }

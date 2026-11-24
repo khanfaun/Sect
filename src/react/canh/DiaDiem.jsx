@@ -41,7 +41,7 @@ function CongTrinh({ a, n, nhom, on, chinh, st }) {
   const hot = VENUE_N[a.a] && n.vsp && n.vsp.k === r.kiep && n.vsp.v === a.a && n.vsp.until > w.t;
   const qa = a.a === 'quyan' && PS.UI.confirm === 'quyan';
   const ten = qa ? 'Chắc chắn gác kiếm? Kiếp này sẽ kết thúc' : PL_N[a.a] || VENUE_N[a.a] || a.l;
-  const sub = VENUE_N[a.a] ? (a.dis ? 'đang đóng cửa' : '') : (a.h && !a.dis ? PS.durH(a.h) : '');
+  const sub = a.cho ? 'chờ ' + a.cho : VENUE_N[a.a] ? (a.dis ? 'đang đóng cửa' : '') : (a.h && !a.dis ? PS.durH(a.h) : '');
   return (
     <button style={st} className={'ct-b' + (chinh ? ' chinh' : '') + (A.nho ? ' nho' : '') + (on ? ' on' : '') + (a.dis ? ' dis' : '') + (a.a === 'quyan' ? ' soft' : '')} data-act="pact" data-arg={a.a} disabled={!!a.dis}
       data-anh={A.ten} {...tip((ten !== a.l ? a.l + '\n' : '') + (a.tip || ''))}>
@@ -62,6 +62,7 @@ function ghiLichSu(sc) {
     if (sc.histK !== key) { sc.hist.push({ q: UI.lastQ || null, m: sc.msg.slice(), c: (sc.chips || []).slice() }); sc.histK = key; if (sc.hist.length > 12) sc.hist.shift(); }
   }
   UI.lastQ = null;
+  if (PS.lkLuu) PS.lkLuu(sc); // giữ hội thoại khi đi làm chuyện khác rồi quay về (ui/38-loi-ke-dia-diem.js)
 }
 
 function LoiKe({ sc }) {
@@ -73,7 +74,8 @@ function LoiKe({ sc }) {
         <div className="story">
           {!(tm && HL.length) && <Html as="p" h={PS.txt(sc.intro)} />}
           {HL.map((h, i) => [
-            h.q ? <div key={'q' + i} className="ev-q"><p className="ev-c">› {h.q}</p>{h.m.map((m, j) => <Html as="p" key={j} h={PS.txt(m)} />)}</div>
+            h.ev ? <div key={'e' + i} className="ev-q ev-log"><p className="ev-t">{h.q}</p>{h.m.map((m, j) => <Html as="p" key={j} className={/^› /.test(m) ? 'ev-c' : ''} h={PS.txt(m)} />)}</div>
+            : h.q ? <div key={'q' + i} className="ev-q"><p className="ev-c">› {h.q}</p>{h.m.map((m, j) => <Html as="p" key={j} h={PS.txt(m)} />)}</div>
               : h.m.map((m, j) => <Html as="p" key={i + '-' + j} h={PS.txt(m)} />),
             <Chips key={'c' + i} list={h.c} />,
           ])}

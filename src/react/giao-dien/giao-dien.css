@@ -569,3 +569,20 @@ body{font-family:var(--font);letter-spacing:0}
 :root:not([data-pc]) #app .hud-clk3{max-width:120px}
 :root:not([data-pc]) #app .hud-clk3 .ck-d{flex-basis:100%;text-align:right;justify-content:flex-end;display:flex}
 :root:not([data-pc]) #app .hud-clk3 .ck-p{flex-basis:auto;margin:0}
+
+/* chốt nổi trên bản đồ (ChotBanDo): nút vào nơi đang đứng dưới tên; khi đi: thời gian còn lại trên đầu nơi tới, nút Dừng lại đỏ dưới chân */
+#app .mpin{position:absolute;left:0;top:0;z-index:5;visibility:hidden;pointer-events:auto;white-space:nowrap}
+#app .mp-b{display:inline-flex;align-items:center;gap:4px;padding:5px 14px;border-radius:999px;border:0;cursor:pointer;font:700 .8em var(--font);color:#fff;
+  background:linear-gradient(#2a9a82,#1b6f5c);box-shadow:0 0 0 1.5px var(--gd),0 3px 10px rgba(14,42,36,.4);letter-spacing:.01em}
+#app .mp-b:hover{filter:brightness(1.08)}
+#app .mp-b.do{background:linear-gradient(#e0533f,#b62d1f);box-shadow:0 0 0 1.5px #ffd9c8,0 3px 10px rgba(120,20,10,.45)}
+#app .mp-b .ic{width:13px;height:13px}
+#app .mp-t{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(251,250,243,.95);color:#b62d1f;font:700 .8em var(--font);box-shadow:0 0 0 1.5px #e0533f,0 2px 8px rgba(14,42,36,.3)}
+
+/* địa điểm (điện thoại): cụm hội thoại thấp lại để không che ảnh công trình */
+:root:not([data-pc]) #app .pl-home:not(.pl-ev) .pl-pan{height:30%}
+:root:not([data-pc]) #app .pl-home:not(.pl-ev) .pl-pan.vn{height:44%}
+/* chuyện vừa làm (ghi lại từ sự kiện) trong hội thoại */
+#app .pl-talk .ev-log{border-left:2px solid rgba(255,224,138,.7);padding-left:8px;margin:6px 0}
+#app .pl-talk .ev-log .ev-t{font-weight:700;color:#ffe08a!important;margin:0 0 2px}
+#app .pl-talk .ev-log .ev-c{opacity:.85;font-style:italic}

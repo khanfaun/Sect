@@ -36,7 +36,7 @@ function NgoaiHinh() {
           <select data-nh="devNhChau" value={N.chauChon} onChange={doiNh}>{PS.NH_CHAU.map(([v, n]) => <option key={v} value={v}>{n}</option>)}</select></label>
       </div>
     </div>
-    <p className="hint">Sau này mỗi độ tuổi có bộ tóc, áo riêng: thêm vào NH_TUOI (core2/84-ngoai-hinh.js) và ảnh ch-head-*, ch-hmv-*, ch-of-* trong src/assets/ui là tự dùng.</p>
+    <p className="hint">Mỗi ngoại hình là một ảnh nguyên vẹn nv-&lt;tuổi&gt;-&lt;áo&gt;[-&lt;tóc&gt;] trong src/assets/ui (tạo bằng tools/nv-comfy.py); khai báo ở NH_TUOI (core2/84-ngoai-hinh.js).</p>
   </>;
 }
 

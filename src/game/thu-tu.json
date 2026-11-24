@@ -396,5 +396,9 @@
  "ui/33-hop-thu.js",
  "ui/34-dev-test.js",
  "ui/35-giao-dien-moi.js",
+ "ui/36-bam-ra-ngoai.js",
+ "ui/37-chot-ban-do.js",
+ "ui/38-loi-ke-dia-diem.js",
+ "core2/89-viec-goi-su-kien.js",
  "nap:devBotNap"
 ]

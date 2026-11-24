@@ -4,6 +4,7 @@ import { Html, PS } from '../html';
 import { Ic, Tranh, pcs, tip } from '../chung';
 import { ThanhHanhDong, TheMinh, TheNguoi } from './TheNguoi';
 import { I, nenTran } from '../giao-dien/anh';
+import { laPC } from '../may-tinh/MayTinh';
 
 const H = ({ h }) => <Html style={{ display: 'contents' }} h={h} />;
 const PT_SVG = () => PS.ptFigSVG();
@@ -194,11 +195,11 @@ export function TranDau() {
   const party = al.filter(u => !u.isMain), fc = foes.length > 1, lg = sc.log.slice(-3);
   const head = <>
     <ThanhHanhDong sc={sc} />
-    <div className={'cb-foes' + (fc ? ' many' : '')}>{foes.map(u => <TheNguoi key={u.id} sc={sc} u={u} pickMode={pickMode} compact={fc} />)}</div>
+    <div className={'cb-foes' + (fc ? ' many' : '')}>{foes.map(u => <TheNguoi key={u.id} sc={sc} u={u} pickMode={pickMode} compact={fc && !laPC()} />)}</div>
     <KhungCanh sc={sc} me={me} foes={foes} al={al} />
     <div className="cb-ally">
       <TheMinh sc={sc} u={me} />
-      {party.length > 0 && <div className="cb-party">{party.map(u => <TheNguoi key={u.id} sc={sc} u={u} pickMode={false} compact />)}</div>}
+      {party.length > 0 && <div className="cb-party">{party.map(u => <TheNguoi key={u.id} sc={sc} u={u} pickMode={false} compact={!laPC()} />)}</div>}
     </div>
     <div className="clog" data-act="clog" {...tip('Chạm để xem toàn bộ diễn biến')}>
       {lg.map((l, i) => <p key={sc.log.length - lg.length + i} className={(l.c ? 'lg-' + l.c : '') + ' ' + (i < lg.length - 1 ? 'old' : '')}>{l.t}</p>)}

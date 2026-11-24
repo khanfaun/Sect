@@ -12,7 +12,7 @@ function setH(id,html){const el=document.getElementById(id);if(!el)return false;
 function viewKey(id){const sc=G.run&&G.run.scene;if(id==='sheet')return sc?sc.type+':'+(sc.id||'')+':'+(sc.story?sc.story.length:0)+':'+(sc.phase||''):'';if(id==='panel')return (UI.panel||'')+JSON.stringify(UI.tab);if(id==='full')return G.screen+(UI.tab.meta||'');if(id==='modal')return UI.modal?UI.modal.k:'';return '';}
 function syncDodge(){const o=G.meta.opt=G.meta.opt||{};if(o.userDodge===undefined)o.userDodge=!!o.autoDodge;o.autoDodge=!!o.userDodge;o.autoQte=!!CFG.autoFight;}
 function render(){
-  let full='',hud='',mapui='',dock='',nav='',sheet='',panel='',modal='';
+  let full='',hud='',mapui='',dock='',nav='',sheet='',panel='',modal='',view=document.documentElement.dataset.view||'screen';
   try{
     if(G.screen==='map'&&!G.run)G.screen='title';
     const inMap=G.screen==='map'&&!!G.run;const sc=inMap?G.run.scene:null;const cb=sc&&sc.type==='combat'&&!sc.prep;
@@ -29,12 +29,12 @@ function render(){
     }
     if(UI.panel)panel=rxv('Bang:'+UI.panel);
     modal=modalHTML();
-    document.documentElement.dataset.tf=CFG.tfStyle||'hang';document.documentElement.dataset.view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
+    document.documentElement.dataset.tf=CFG.tfStyle||'hang';view=inMap?(cb?'combat':sc?'scene':'map'):'screen';
   }catch(e){console.error(e);full=`<div class="title"><p>Có lỗi khi vẽ màn hình: ${esc(e.message)}</p><button class="btn pri" data-act="screen" data-arg="title">Về màn hình đầu</button></div>`;UI.panel=null;UI.modal=null;panel='';modal='';}
-  const vtok=document.documentElement.dataset.view==='combat'?'combat':G.screen==='map'&&G.run?'map':'screen:'+G.screen;
+  const vtok=view==='combat'?'combat':G.screen==='map'&&G.run?'map':'screen:'+G.screen;
   if(UI.inkBusy)return;
   if(UI.vtok&&UI.vtok!==vtok&&CFG.anim!==false){UI.inkBusy=true;inkCover(()=>{UI.inkBusy=false;UI.vtok=vtok;render();inkReveal();});return;}
-  UI.vtok=vtok;
+  UI.vtok=vtok;document.documentElement.dataset.view=view; // đổi kiểu khung đúng lúc vẽ màn mới (sau lớp mực che); đổi sớm thì máy tính lòi thanh dưới trống lên màn cũ
   setH('hud',hud);setH('mapui',mapui);setH('dock',dock);setH('nav',nav);setH('sheet',sheet);setH('full',full);setH('panel',panel);setH('modal',modal);
   const sc2=G.run&&G.run.scene;UI.lastStory=sc2&&sc2.story?sc2.story.length:0;
   const hd=document.getElementById('hud');document.getElementById('app').style.setProperty('--hudh',(hd&&!hd.hidden?hd.offsetHeight:0)+'px');

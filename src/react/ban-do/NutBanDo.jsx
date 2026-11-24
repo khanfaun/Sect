@@ -65,12 +65,33 @@ export function CumTien({ r, ten }) {
   );
 }
 
+// Chốt nổi bám theo địa điểm trên bản đồ (game đặt vị trí mỗi khung, ui/05-gfx.js):
+// đứng yên → nút vào nơi đang đứng ngay dưới tên; đang đi → thời gian còn lại trên đầu nơi tới, nút Dừng lại màu đỏ dưới chân.
+export function ChotBanDo() {
+  const { G, UI } = PS;
+  const r = G.run;
+  if (!r || (r.scene && !UI.evMin)) return null;
+  if (r.moving && !r.halt) {
+    const m = r.moving, d = PS.nodeById(m.path[m.path.length - 1]);
+    if (!d) return null;
+    return <>
+      <div className="mpin tren" data-node={d.id} data-pos="tren"><span className="mp-t" id="mvLeftT">còn {PS.durH(PS.mvConGio())}</span></div>
+      <div className="mpin duoi" data-node={d.id} data-pos="duoi"><button className="mp-b do" data-act="stop" {...tip('Dừng lại giữa đường (đi tiếp được)')}><Ic n="close" />Dừng lại</button></div>
+    </>;
+  }
+  if (r.moving || r.at == null || UI.evMin || UI.sel === r.at || UI.hold) return null;
+  const n = PS.nodeById(r.at);
+  if (!n) return null;
+  return <div className="mpin duoi" data-node={n.id} data-pos="duoi"><button className="mp-b" data-act="enter">{PS.ENTER_L[n.type] || 'Vào'}</button></div>;
+}
+
 export function NutBanDo() {
   const { G, CFG, UI } = PS;
   const r = G.run, bqNo = PS.bqCan(), brk = PS.canBreak();
   const dev = !!PS.DEV;
-  if (laPC()) return <CongCuBanDo />;
+  if (laPC()) return <><CongCuBanDo /><ChotBanDo /></>;
   return <>
+    <ChotBanDo />
     <CumTien r={r} />
     <TanThu />
     <div className="mleft wb"><DaiVetThuong />{dev && <Nut act="devOpen" icon="bolt" cls="dev" t="Dev test: thử hiệu ứng" />}</div>

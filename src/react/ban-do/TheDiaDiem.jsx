@@ -163,18 +163,8 @@ export function TheDiaDiem() {
       </div>
     );
   }
-  if (r.moving) {
-    const m = r.moving, dest = PS.nodeById(m.path[m.path.length - 1]);
-    let L = 0;
-    for (let i = m.seg; i < m.path.length - 1; i++) L += PS.edgeLen(m.path[i], m.path[i + 1]) * (i === m.seg ? 1 - m.prog : 1);
-    // số dặm còn lại được vòng lặp khung hình của game cập nhật thẳng vào #mvLeft
-    return (
-      <div className="dock go">
-        <div className="dk-t"><small>Đang trên đường tới</small><b>{dest.name}</b><small id="mvLeft" dangerouslySetInnerHTML={{ __html: 'còn ' + Math.round(L) + ' dặm' }} /></div>
-        <button className="btn" data-act="stop">Dừng lại</button>
-      </div>
-    );
-  }
+  // đang đi: không còn thẻ dưới đáy; thời gian còn lại và nút Dừng lại nằm ngay ở nơi tới (ChotBanDo, NutBanDo.jsx)
+  if (r.moving) return null;
   if (UI.hold) { const h = UI.hold; return h.n != null ? <TheNoi n={PS.nodeById(h.n)} hold={h} /> : <TheO c={h.c} hold={h} />; }
   const n = UI.sel != null && PS.nodeById(UI.sel);
   if (n && n.fog >= 1) return <TheNoi n={n} />;

@@ -1508,7 +1508,7 @@ const TESTS = {
     ok(run("HD_W[DEED.cuu_nguoi.p]<HD_W[DEED.cuu_nguoi_hy_sinh.p]"), 'cứu người phải hy sinh nặng hơn cứu người');
     const fs=require('fs'),path=require('path'),glob=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?glob(path.join(d,x.name)):x.name.endsWith('.json')?[path.join(d,x.name)]:[]);
     const ev={};for(const f of glob(path.join(__dirname,'../content/events'))){const d=JSON.parse(fs.readFileSync(f,'utf8'));for(const e of d.events||[])ev[e.id]=e;}
-    const rows=fs.readFileSync(path.join(__dirname,'../docs/thiet-ke/karma-muc-giup.csv'),'utf8').trim().split('\n').slice(1).map(l=>l.split(','));
+    const rows=fs.readFileSync(path.join(__dirname,'../docs/thiet-ke/karma-muc-giup.csv'),'utf8').trim().split(/\r?\n/).slice(1).map(l=>l.split(','));
     const V={nhe:1,vua:3,nang:5};let bad=0;const n={nhe:0,vua:0,nang:0};
     for(const [id,p,k] of rows){let o=ev[id];for(const m of p.matchAll(/(\w+)(?:\[(\d+)\])?/g)){o=o&&o[m[1]];if(m[2]!=null)o=o&&o[+m[2]];}const E=o&&(o.e||o.fx);n[k]++;if(!E||!E.hd||E.hd.p!==V[k]||E.ng.g!==V[k])bad++;}
     ok(bad===0&&rows.length>=180, 'các lựa chọn giúp đỡ đã chia mức: '+JSON.stringify(n));
@@ -2729,13 +2729,13 @@ const TESTS = {
     ok(!run("tutClaim('HD01')"), 'chưa xong thì không nhận');
     run("tutTick('panel:char')");const b0=run("(G.run.qitems||[]).filter(x=>x==='luong_kho').length");
     ok(!!run("tutClaim('HD01')")&&run("(G.run.qitems||[]).filter(x=>x==='luong_kho').length")===b0+2, 'HD01 nhận hai gói lương khô');
-    ok(run("JSON.stringify(G.run.tut.open)")==='["HD02"]', 'sau HD01 là HD02');
+    ok(run("JSON.stringify(G.run.tut.open)")==='["HD02","HD03"]', 'sau HD01: mở dần thêm một việc (HD02, HD03)');
     run("tutTick('panel:char');tutTick('panel:char')");ok(run("tutDoneN()")===1, 'đếm lặp không nhận thêm');
     const bac0=run("G.run.bac");run("tutTick('rootinfo');tutClaim('HD02')");ok(run("G.run.bac")===bac0+200, 'HD02 thưởng 200 đồng');
     const p0=run("G.run.pills.length");run("tutSkip('HD03')");ok(run("G.run.pills.length")===p0&&run("!!G.run.tut.skip.HD03"), 'bỏ qua HD03 không có thưởng');
     ok(run("G.run.tut.open[0]")==='HD04', 'bỏ xong mở HD04');
     run("['HD04','HD05','HD06'].forEach(id=>tutSkip(id))");
-    ok(run("G.run.tut.open.length")===3&&run("G.run.tut.open[0]")==='HD07', 'hết nhóm A mở ba cái: '+run("G.run.tut.open.join(',')"));
+    ok(run("G.run.tut.open.length")===5&&run("G.run.tut.open[0]")==='HD07', 'hết nhóm A mở năm cái (tối đa TUT_MAX): '+run("G.run.tut.open.join(',')"));
     // điểm đếm thật: đi tới nơi khác
     const nb=run("(()=>{const r=G.run;const n=W().regions[r.region].nodes.find(x=>x.id!==r.at&&x.id!==r.tut.at0);arrive(n.id);return n.id})()");
     ok(run("!!G.run.tut.ready.HD07"), 'tới nơi khác xong HD07');
@@ -2744,7 +2744,7 @@ const TESTS = {
     run("(()=>{const sc=G.run.scene;if(sc&&sc.items){const i=sc.items.findIndex(x=>!x.sold&&(x.k==='pill'||x.k==='qi'));if(i>=0)buy(i);}})()");
     ok(run("!!G.run.tut.ready.HD08"), 'mua một món xong HD08 ('+run("G.run.scene&&G.run.scene.type")+')');
     run("tutClaim('HD07');tutClaim('HD08')");ok(run("G.run.relics.some(x=>x.cid==='non_dauap_suong')"), 'HD07 thưởng nón');
-    ok(run("G.run.tut.open.length")===3, 'vẫn ba cái: '+run("G.run.tut.open.join(',')"));
+    ok(run("G.run.tut.open.length")===5, 'vẫn năm cái: '+run("G.run.tut.open.join(',')"));
     // săn yêu: chỉ tính thắng trận khởi từ săn yêu, một trận đếm một lần
     run("(()=>{const T=G.run.tut;T.open=['HD11'];})()");
     run("(()=>{G.run.scene={type:'enc',en:{n:'x',_tutH:1}};startCombat({},{kind:'node'});const sc=G.run.scene;sc.over='win';finishCombat(sc);finishCombat(sc);})()");
@@ -3481,14 +3481,18 @@ const TESTS = {
     ok(run("ORIGIN.every(o=>AO_XT[o.id]&&AO_KIEU[AO_XT[o.id]])"), 'mọi xuất thân (' + run("ORIGIN.length") + ') đều có kiểu áo');
     ok(run("Object.keys(AO_KIEU).length")===7&&run("Object.values(NH_TUOI).every(T=>T.ao.length===7&&new Set(T.ao.map(x=>x[0])).size===7)"), 'bảy kiểu áo ở cả bốn độ tuổi, không trùng');
     const ao=(og,tu)=>{run(`G.run.origin='${og}';delete G.run.ngoai;nhDoTuoiSet('${tu}')`);return run("ngoaiHinh().ao");};
-    ok(ao('nong','teen')==='t1'&&ao('nong','young')==='pho-y'&&ao('ren','middle')==='tho-m'&&ao('thusinh','middle')==='m1'&&ao('daodong','elder')==='e1'&&ao('thegia','young')==='hero'&&ao('mahuyet','elder')==='ma-e'&&ao('xt_ke_cheo_do_ban_dem','teen')==='khach-t', 'xuất thân → áo: nông→vải thô, thợ rèn→áo thợ, thư sinh→thư sinh, đạo đồng→đạo y, thế gia→thế gia, ma tộc→ma, chèo đò→lữ khách');
-    run("G.run.origin='nong';nhDoTuoiSet('young');nhSet('ao','hero')");ok(run("ngoaiHinh().ao")==='hero', 'người chơi vẫn đổi được sang áo khác cùng độ tuổi');
-    run("nhDoTuoiSet('elder')");ok(run("ngoaiHinh().ao")==='pho-e', 'đổi sang độ tuổi khác: áo đã chọn của tuổi cũ không còn thì về áo theo xuất thân');
-    run("nhDoTuoiSet('teen')");ok(run("ngoaiHinh().toc")==='t1'&&run("ngoaiHinh().ao")==='t1', 'thiếu niên: tóc búi cao, áo vải');
-    run("G.run.origin='thusinh';delete G.run.ngoai;nhDoTuoiSet('middle')");ok(run("ngoaiHinh().toc")==='m1'&&run("ngoaiHinh().ao")==='m1', 'trung niên: búi tóc râu ngắn, thanh bào');
-    run("G.run.origin='thegia'");run("nhDoTuoiSet('young')");ok(run("ngoaiHinh().toc")==='r1'&&run("ngoaiHinh().ao")==='hero', 'thế gia thanh niên: tóc búi, lục bào');
+    ok(ao('nong','teen')==='pho'&&ao('ren','middle')==='tho'&&ao('thusinh','middle')==='thu'&&ao('daodong','elder')==='duoc'&&ao('thegia','young')==='gia'&&ao('mahuyet','elder')==='ma'&&ao('xt_ke_cheo_do_ban_dem','teen')==='khach', 'xuất thân → áo: nông→vải thô, thợ rèn→áo thợ, thư sinh→thư sinh, đạo đồng→đạo y, thế gia→thế gia, ma tộc→ma, chèo đò→lữ khách');
+    run("G.run.origin='nong';nhDoTuoiSet('young');nhSet('ao','gia')");ok(run("ngoaiHinh().ao")==='gia', 'người chơi vẫn đổi được sang áo khác cùng độ tuổi');
+    run("nhDoTuoiSet('elder')");ok(run("ngoaiHinh().ao")==='gia'&&run("ngoaiHinh().anh")==='nv-elder-gia', 'đổi độ tuổi giữ kiểu áo đã chọn, ảnh nguyên vẹn nv-<tuổi>-<áo>');
+    run("nhDoTuoiSet('teen')");ok(run("ngoaiHinh().toc")==='co'&&run("ngoaiHinh().ao")==='gia', 'thiếu niên: một kiểu tóc');
+    run("G.run.origin='thusinh';delete G.run.ngoai;nhDoTuoiSet('middle')");ok(run("ngoaiHinh().anh")==='nv-middle-thu', 'trung niên thư sinh: nv-middle-thu');
+    run("G.run.origin='thegia'");run("nhDoTuoiSet('young')");ok(run("ngoaiHinh().anh")==='nv-young-gia-den-bui', 'thế gia thanh niên: tóc đen búi mặc định');
+    run("nhSet('toc','bac-xoa')");ok(run("ngoaiHinh().anh")==='nv-young-gia-bac-xoa', 'thanh niên đổi được tóc bạc xoã');
+    { const ds=run("JSON.stringify(Object.keys(NH_TUOI).flatMap(k=>NH_TUOI[k].ao.flatMap(a=>k==='young'?NH_TUOI[k].toc.map(t=>'nv-'+k+'-'+a[0]+'-'+t[0]):['nv-'+k+'-'+a[0]])))");
+      const L=JSON.parse(ds),thieu=L.filter(k=>!require('fs').existsSync('src/assets/ui/'+k+'.webp'));
+      ok(L.length===49&&!thieu.length, 'đủ 49 ảnh nhân vật' + (thieu.length?' (thiếu '+thieu.join(', ')+')':'')); }
     const life=run("S().life");run("G.run.origin='daodong';delete G.run.ngoai;nhDoTuoiSet('elder')");
-    ok(Math.abs(run("G.run.age")-75)<0.01&&run("ngoaiHinh().toc")==='e1'&&run("ngoaiHinh().ao")==='e1', 'chọn lão giả: tuổi 75, tự đổi sang tóc bạc, áo lão giả');
+    ok(Math.abs(run("G.run.age")-75)<0.01&&run("ngoaiHinh().anh")==='nv-elder-duoc', 'chọn lão giả: tuổi 75, ảnh lão giả đạo y');
     run("W().t+=HY*2;G.run.age=G.run.birthAge+(W().t-G.run.bornT)/HY");ok(Math.abs(run("G.run.age")-77)<0.01, 'thời gian trôi: tuổi vẫn tính đúng từ birthAge (77)');
     run("nhTuoiSet(9999)");ok(run("G.run.age")<life&&run("G.run.age")>=life-1, 'đổi tuổi không vượt thọ nguyên ('+life+')');
     run("nhSet('chau','gold')");ok(run("ngoaiHinh().chau")==='gold', 'chọn hạt châu kim hoả');

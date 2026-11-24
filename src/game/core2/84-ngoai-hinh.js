@@ -1,10 +1,10 @@
 // Ngoại hình nhân vật chính (kiểu bản mẫu Ngọc Hành Trình): 4 độ tuổi, mỗi độ tuổi có kiểu tóc + trang phục riêng.
 // Độ tuổi tự suy từ r.age, nên lớn tuổi lên là tự đổi hình. Độ tuổi chưa có ảnh thì mượn độ tuổi gần nhất có ảnh.
 // Lựa chọn của người chơi lưu ở r.ngoai={toc,ao,chau} (bản lưu cũ không có thì dùng mặc định).
-// Trang phục theo xuất thân: 7 kiểu áo × 4 độ tuổi. Ảnh áo: ch-of-<id>. Bốn áo làm đầu tiên giữ tên cũ (AO_CO).
+// Ảnh nhân vật NGUYÊN VẸN (không ghép lớp): nv-<tuổi>-<áo>[-<tóc>].webp, tạo bằng tools/nv-comfy.py.
+// 7 kiểu áo theo xuất thân × 4 độ tuổi; riêng thanh niên mỗi áo có 4 kiểu tóc (đen/bạc × búi/xoã).
 const AO_KIEU={pho:'Áo vải thô',tho:'Áo thợ',thu:'Áo thư sinh',duoc:'Áo đạo y',khach:'Áo lữ khách',gia:'Áo thế gia',ma:'Áo ma tộc'};
-const AO_CO={pho_teen:'t1',gia_young:'hero',thu_middle:'m1',duoc_elder:'e1'};
-const aoId=(kieu,tuoi)=>AO_CO[kieu+'_'+tuoi]||kieu+'-'+({teen:'t',young:'y',middle:'m',elder:'e'})[tuoi];
+const aoId=(kieu,tuoi)=>kieu;
 const aoList=tuoi=>Object.keys(AO_KIEU).map(k=>[aoId(k,tuoi),AO_KIEU[k]]);
 // xuất thân (r.origin) → kiểu áo mặc định; xuất thân lạ → áo vải thô
 const AO_XT={
@@ -17,10 +17,10 @@ const AO_XT={
   mahuyet:'ma'};
 const aoKieuXt=r=>AO_XT[r&&r.origin]||'pho';
 const NH_TUOI={
-  teen:  {n:'Thiếu niên',tu:0, den:20, mau:16,toc:[['t1','Tóc búi cao']],ao:aoList('teen')},
-  young: {n:'Thanh niên',tu:20,den:40, mau:25,toc:[['r1','Búi nhỏ trâm vàng']],ao:aoList('young')},
-  middle:{n:'Trung niên',tu:40,den:70, mau:45,toc:[['m1','Búi tóc, râu ngắn']],ao:aoList('middle')},
-  elder: {n:'Lão giả',   tu:70,den:1e9,mau:75,toc:[['e1','Tóc bạc râu dài, mũ ngọc']],ao:aoList('elder')},
+  teen:  {n:'Thiếu niên',tu:0, den:20, mau:16,toc:[['co','Tóc búi cao']],ao:aoList('teen')},
+  young: {n:'Thanh niên',tu:20,den:40, mau:25,toc:[['den-bui','Tóc đen, búi'],['den-xoa','Tóc đen, xoã'],['bac-bui','Tóc bạc, búi'],['bac-xoa','Tóc bạc, xoã']],ao:aoList('young')},
+  middle:{n:'Trung niên',tu:40,den:70, mau:45,toc:[['co','Búi tóc, râu ngắn']],ao:aoList('middle')},
+  elder: {n:'Lão giả',   tu:70,den:1e9,mau:75,toc:[['co','Tóc bạc râu dài, mũ ngọc']],ao:aoList('elder')},
 };
 const NH_CHAU=[['auto','Tự động (vàng khi đủ đột phá)'],['teal','Thanh ngọc'],['gold','Kim hỏa']];
 function nhTuoiOf(a){a=+a||0;for(const k in NH_TUOI){const T=NH_TUOI[k];if(a>=T.tu&&a<T.den)return k;}return 'elder';}
@@ -32,7 +32,8 @@ function ngoaiHinh(r){r=r||G.run;const N=(r&&r.ngoai)||{};const tuoi=nhTuoiOf(r?
   const pick=(L,v)=>(L.find(x=>x[0]===v)||L[0])[0];
   let chau=N.chau||'auto';if(chau==='auto')chau=typeof canBreak==='function'&&r&&canBreak()?'gold':'teal';
   const ao0=aoId(aoKieuXt(r),hien);
-  return {tuoi,hien,toc:pick(T.toc,N.toc),ao:(T.ao.find(x=>x[0]===N.ao)||T.ao.find(x=>x[0]===ao0)||T.ao[0])[0],kieuAo:aoKieuXt(r),chau,chauChon:N.chau||'auto',nu:!!(r&&r.g==='nu')};}
+  const toc=pick(T.toc,N.toc),ao=(T.ao.find(x=>x[0]===N.ao)||T.ao.find(x=>x[0]===ao0)||T.ao[0])[0];
+  return {tuoi,hien,toc,ao,anh:'nv-'+hien+'-'+ao+(hien==='young'?'-'+toc:''),kieuAo:aoKieuXt(r),chau,chauChon:N.chau||'auto',nu:!!(r&&r.g==='nu')};}
 // đổi tuổi (dev): giữ đúng công thức tuổi = birthAge + thời gian đã sống; không vượt thọ nguyên
 function nhTuoiSet(a){const r=G.run;if(!r)return null;const life=S().life;a=clamp(+a||16,1,Math.max(1,life-0.5));
   const lived=(W().t-r.bornT)/HY;r.birthAge=a-lived;r.age=a;dbg('nh.tuoi',{tuoi:+a.toFixed(1),tho:life,con:+(life-a).toFixed(1),do:nhTuoiOf(a)});return a;}

@@ -33,11 +33,18 @@
 @keyframes hcg{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(.92)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}}
 .doll3 .shd{position:absolute;left:49.92%;top:93.52%;width:74.71%;height:9.57%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse at center,rgba(10,30,24,.42) 0%,rgba(10,30,24,.2) 45%,rgba(10,30,24,0) 72%)}
 .nvt-khung .doll3{bottom:22px;height:82%}
-/* chân dung tròn cắt từ nhân vật ngồi thiền (avatarHTML) */
-.avd{position:absolute;inset:0;overflow:hidden;border-radius:50%;display:block;background:radial-gradient(#fff,#dcebe3)}
-.avd .doll3.av-doll{position:absolute;left:50%;top:-4%;bottom:auto;width:250%;height:250%;aspect-ratio:auto;filter:none;display:block}
+/* chân dung tròn (avatarHTML): đủ lớp áo + đầu + tóc + tay, không nền, đứng yên; cắt đầu và vai */
+.avd{position:absolute;inset:0;overflow:hidden;border-radius:50%;display:block;background:none}
+.avd .doll3.av-doll{position:absolute;left:50%;top:-16%;bottom:auto;width:230%;height:230%;aspect-ratio:auto;transform:translateX(-50%);filter:none;display:block;pointer-events:none}
+.avd .doll3.av-doll *{animation:none!important}
 .avd .doll3 .hg{display:block}
-.avd .doll3 .hair{animation:none}
-.avd.nu .doll3{width:150%;height:150%;top:-2%}
+.avd .doll3[data-tuoi=teen]{top:-20%}
+.avd.nu .doll3.av-doll{width:340%;height:340%;top:-6%}
 .avd.nu .nu-i{object-fit:cover}
-.avd.nu .doll3.av-doll{width:330%;height:330%;top:1%}
+/* vòng xoáy sáng (ch-glow-*) và quả cầu (.hal/.hco) dùng chung một tâm đo từ ảnh vòng xoáy (50,15% · 54,86%);
+   bỏ viền gạch chân của lớp .gl dùng chung tên trong style.css (làm ảnh xoay lệch 1px mỗi vòng) */
+.doll3 .glw,.doll3 .gl{transform-origin:50.15% 54.86%!important}
+.doll3 .gl{border:0!important;box-sizing:border-box}
+.doll3 .glw{clip-path:circle(15.5% at 50.15% 54.86%)!important;-webkit-clip-path:circle(15.5% at 50.15% 54.86%)!important}
+.doll3 .hal,.doll3 .hco{left:50.15%!important;top:54.86%!important}
+

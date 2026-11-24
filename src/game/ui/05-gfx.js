@@ -82,7 +82,7 @@ const Map2=(()=>{
     dpr=Math.min(window.devicePixelRatio||1,CFG.dpr||(MOBILE?[1,1.25,1.5]:[1,1.5,2])[lv])*uz;W0=r.width/uz;H0=r.height/uz;
     const w=Math.round(W0*dpr),h=Math.round(H0*dpr);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}GW=document.documentElement.dataset.pc?1.7:1;dirty=true;if(cam&&cam.z)clampCam();}
   function resetAll(){INK=null;LCV=null;BGK='';for(const k in DTC)delete DTC[k];dtWant='';clouds.length=0;parts.length=0;terr=null;terrKey='';fogC=null;fogKey='';fogS=null;fogKey2='';cloudSpr=null;invalidate(true);resize();}
-  let TOPI=0,BOTI=0,VCY=0,wide=false,GW=1;
+  let TOPI=0,BOTI=0,VCY=0,wide=false,GW=1;const NPOS={};
   const AREA_COL=['#d9a441','#58a46f','#4797bb','#9a74c9','#8196b3'];
   // phần bản đồ thật sự nhìn thấy: dưới header (#hud), trên footer (#nav). Thu nhỏ hết cỡ thì cạnh trên bản đồ chạm header, cạnh dưới chạm footer.
   function insets(){if(!cv)return false;if(document.documentElement.dataset.pc){const ch=TOPI!==0||BOTI!==0;TOPI=0;BOTI=0;VCY=H0/2;return ch;}const cr=cv.getBoundingClientRect();let t=TOPI,b=BOTI;const vis=e=>e&&!e.hidden&&getComputedStyle(e).display!=='none';
@@ -357,9 +357,9 @@ const Map2=(()=>{
     // một ô lục giác có cả địa điểm lẫn người (ngươi, hoặc thực thể đang dừng chân): địa điểm lùi sang trái, người sang phải, cả hai nhỏ lại cho khỏi đè nhau
     const HW=HEXW/2*z;const OCC=new Set();if(!r.moving&&!HT._me)OCC.add(r.at);
     if(CFG.ents){const sr0=senseR();for(const e of entsHere(reg)){if(HE[e.type]||e.to!=null)continue;const p=entXY(e);if(Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr0)OCC.add(e.at);}}
-    UI._mapImN=0;UI._mapBadgeN=0;
+    UI._mapImN=0;UI._mapBadgeN=0;for(const k in NPOS)delete NPOS[k];
     if(showIc)for(const R0 of w.regions)for(const n of R0.nodes){const k=R0.k;if(n.fog<1)continue;if(HT[n.type])continue;const [nx,ny]=mapNode(n);let x=SX(nx),y=SY(ny);if(x<-60||y<-60||x>W0+60||y>H0+60)continue;const under=OCC.has(n.id);const sN=s0;
-      const sure=n.fog>=2||n.memory;const old=n.fog>=2&&n.seenT>=0&&w.t-n.seenT>HY;const ruin=(n.vstate||'ok')==='ruin'&&n.fog>=2;const sel=UI.sel===n.id;
+      const sure=n.fog>=2||n.memory;const old=n.fog>=2&&n.seenT>=0&&w.t-n.seenT>HY;NPOS[n.id]=[x,y+s0/2+(under?5:3)+(CFG.font==='m'?14:17)+(old&&!under?14:0),y-sN*0.95];const ruin=(n.vstate||'ok')==='ruin'&&n.fog>=2;const sel=UI.sel===n.id;
       const col=C[NODE_CAT[n.type]||'ink'];
       
       {const ik=sure?mapKey(n,ruin):null,im=ik&&mapIc(ik);
@@ -402,6 +402,10 @@ const Map2=(()=>{
       else{const w=el.offsetWidth,h=el.offsetHeight;const cr=cv.getBoundingClientRect(),dr=el.parentElement.getBoundingClientRect();const sx=SX(ax),sy=SY(ay);const ic=el.dataset.ic?+el.dataset.ic:el.dataset.area?4:Math.max(10,HEXW*z*0.6);
         let left=clamp(sx-w/2,6,Math.max(6,W0-w-6)),top=sy-ic-h-8;if(top<TOPI+4)top=sy+ic+8;top=clamp(top,TOPI+4,Math.max(TOPI+4,H0-BOTI-h-4));
         el.style.left=Math.round(left+(cr.left-dr.left)/uz)+'px';el.style.top=Math.round(top+(cr.top-dr.top)/uz)+'px';el.style.visibility='visible';}}}
+    for(const el of document.querySelectorAll('.mpin')){const q=NPOS[+el.dataset.node];if(!q){el.style.visibility='hidden';continue;}
+      const cr=cv.getBoundingClientRect(),dr=el.parentElement.getBoundingClientRect();const w=el.offsetWidth,h=el.offsetHeight;
+      const top=el.dataset.pos==='tren'?q[2]-h-4:q[1]+3;el.style.left=Math.round(q[0]-w/2+(cr.left-dr.left)/uz)+'px';el.style.top=Math.round(top+(cr.top-dr.top)/uz)+'px';el.style.visibility=(top<TOPI-h||top>H0-BOTI)?'hidden':'visible';}
+    {const mt=document.getElementById('mvLeftT');if(mt&&r.moving){const t='còn '+durH(mvConGio());if(mt.textContent!==t)mt.textContent=t;}}
     if(false&&CFG.showFps){ctx.font='11px monospace';ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillStyle=C.ink2;ctx.fillText(fpsShow+' khung/giây · mức '+['tiết kiệm','cân bằng','đẹp'][lv],8,H0-6);}
   }
   function animating(){const r=G.run;if(!r)return false;const lv=gfxLv();return (!!r.moving&&!r.halt)||(lv>0&&(CFG.fx||CFG.clouds))||(pos&&(()=>{const w0=playerXY(),q=mapXY(r.region,w0[0],w0[1]);return Math.hypot(pos[0]-q[0],pos[1]-q[1])>0.5;})());}

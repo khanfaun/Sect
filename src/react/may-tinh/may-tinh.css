@@ -250,4 +250,132 @@
 :root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(1),:root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(2){width:156px}
 :root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(-n+2) .sgrp{flex-wrap:nowrap;white-space:nowrap;font-size:.86em;gap:4px}
 /* chân dung nhô lên trên thanh dưới: chừa chỗ cuối bảng để nội dung không bị che */
-:root[data-pc] #app #panel .win-b{padding-bottom:72px!important}
+/* tiêu đề cột hẹp (pháp bảo / đan điền): tên một dòng, số ô + nút hỏi xuống dòng dưới, không tràn khỏi khung */
+:root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(1),:root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(2){width:184px;box-sizing:border-box;overflow:hidden}
+:root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(-n+2) .sgrp{display:flex;flex-wrap:wrap;white-space:normal;justify-content:center;align-items:center;column-gap:6px;row-gap:2px;font-size:.92em;width:100%;text-align:center}
+:root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(-n+2) .sgrp small{flex-basis:auto}
+:root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(-n+2) .sgrp::after{display:none}
+
+/* =====================================================================================
+   BẢNG VÀ HỘP TRÊN MÁY TÍNH: cửa sổ nổi giữa vùng bản đồ (~60% bề ngang), không phủ kín màn hình.
+   Nền mờ phía sau; bấm ra ngoài (vào bản đồ) là đóng (ui/36-bam-ra-ngoai.js).
+   ===================================================================================== */
+:root[data-pc]{--pcWin:min(calc(100vw - var(--pcL) - 48px),max(940px,60vw));--pcWinH:calc(100vh - var(--pcF) - 96px)}
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #panel{left:calc(var(--pcL) + (100% - var(--pcL)) / 2)!important;right:auto!important;top:24px!important;bottom:auto!important;
+  width:var(--pcWin)!important;height:var(--pcWinH)!important;transform:translateX(-50%)!important;border-radius:18px;overflow:hidden;background:linear-gradient(#f7faf5,#ecf2ec)!important;
+  box-shadow:0 0 0 2px var(--gd),0 22px 60px rgba(7,23,18,.6)!important;z-index:18}
+:root[data-theme=dark][data-pc] #app #panel{background:linear-gradient(#16332c,#0f2621)!important}
+:root[data-pc][data-panel]:is([data-view=map],[data-view=scene]) #app::after{content:'';position:absolute;left:var(--pcL);right:0;top:0;bottom:var(--pcF);background:rgba(7,23,18,.45);z-index:17;pointer-events:none}
+/* hộp tu luyện (bế quan / cảnh giới): cửa sổ lớn giữa màn, vẫn chia nhân vật trái / bảng chọn phải */
+:root[data-pc]:is([data-view=map],[data-view=scene]) #modal:has(.bq-home){place-items:center!important;background:rgba(7,23,18,.5)!important}
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #modal .mbox.bq-home{width:var(--pcWin)!important;height:var(--pcWinH)!important;max-height:none!important;border:2px solid var(--gd)!important;border-radius:18px!important;overflow:hidden;box-shadow:0 22px 60px rgba(7,23,18,.6)}
+:root[data-pc]:is([data-view=map],[data-view=scene]) #modal:has(.bq-home){align-items:start!important;padding-top:24px!important}
+:root[data-pc] .bq-home .bq-stage .doll3{height:78%;bottom:6%}
+/* thẻ Trang bị vừa trong cửa sổ: khung nhân vật co theo bề rộng màn */
+:root[data-pc] #app .tb-wrap .tb-doll{grid-template-columns:70px clamp(250px,21vw,420px) 70px;gap:10px;padding:10px}
+:root[data-pc] #app .tb-wrap .tb-doll .tb-o .eqc{width:64px;height:64px}
+:root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(1),:root[data-pc] #app .tb-duoi>.tb-nhom:nth-child(2){width:170px}
+:root[data-pc] #app #panel .win-b{overflow-x:hidden}
+
+/* ---------- thanh dưới trải rộng hết bề ngang (bản chỉnh 5) ----------
+   trái: [5 ô chỉ số trải đều, Cái ăn ở cuối][khí huyết, linh lực sát chân dung]  ·  phải: [tu vi, lịch luyện sát chân dung][tiền tệ trải đều] */
+.pc-day{grid-template-columns:minmax(0,1fr) 156px minmax(0,1fr);column-gap:28px}
+.pc-ben{gap:clamp(18px,2.4vw,44px)}
+.pc-ben.trai,.pc-ben.phai{justify-content:stretch}
+.pc-bars{width:clamp(210px,17vw,330px)}
+.pc-cs{flex:1;min-width:0;justify-content:space-between;gap:10px}
+.pc-tien{flex:1;min-width:0}
+.pc-th{justify-content:space-between;gap:10px}
+/* Cái ăn: bát cơm + nhãn, dưới là thanh ngắn và chữ trạng thái */
+.pc-an{display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:6px;align-items:center;padding:0;border:0;background:none;font:inherit;font-size:.74em;line-height:1.15;color:inherit;cursor:pointer;text-align:left;white-space:nowrap}
+.pc-an .pc-em{grid-row:1/3;font-style:normal;font-size:19px;line-height:22px}
+.pc-an em{font-style:normal;font-size:.84em;color:var(--ink3)}
+.pc-anb{display:inline-flex;align-items:center;gap:6px}
+.pc-anb>i{display:block;width:54px;height:7px;border-radius:4px;background:rgba(14,42,36,.12);overflow:hidden}
+.pc-anb>i>b{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#3f9a5a,#8fd49a)}
+.pc-anb>i.st-doi>b{background:linear-gradient(90deg,#c98a2c,#efc766)}
+.pc-anb>i.st-la>b,.pc-anb>i.st-kiet>b{background:linear-gradient(90deg,#b8322a,#e8735c)}
+.pc-anb>b{font-weight:700}
+.pc-an.hi .pc-anb>b{color:var(--seal)}
+/* trạng thái: tất cả ở bên trái chân dung, nhiều thì xếp thêm hàng lên trên; bên phải để dành cho trạng thái có lợi */
+.pc-vt.l{flex-wrap:wrap-reverse;max-width:calc(50% - 90px);row-gap:6px}
+@media (max-width:1300px){.pc-cs>span em,.pc-an em{display:none}}
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #hud{padding:0 12px!important}
+.pc-day{column-gap:20px}
+.pc-ben{gap:clamp(14px,1.8vw,40px)}
+.pc-bars{width:clamp(160px,14vw,300px)}
+.pc-cs>span,.pc-an{font-size:.7em}
+.pc-cs{gap:8px}
+.pc-th{gap:8px}
+.pc-tc{font-size:.7em}
+.pc-bars{width:clamp(150px,12vw,300px)}
+.pc-anb>i{width:44px}
+.pc-ben.trai .pc-cs{padding-left:4px}
+/* cỡ chữ thanh dưới theo bề ngang màn (màn lớn chữ to hơn, khỏi lọt thỏm) */
+.pc-day{font-size:clamp(14px,.95vw,19px)}
+.pc-av{width:5.6em;height:5.6em}
+/* màn hẹp (≤1300px): ô chỉ số chỉ còn biểu tượng + giá trị, xuống 2 hàng cho khỏi tràn */
+@media (max-width:1300px){.pc-cs{flex-wrap:wrap;justify-content:flex-start;row-gap:5px;column-gap:12px}.pc-cs>span,.pc-an{grid-template-rows:auto}.pc-anb>i{width:34px}}
+:root[data-pc]{--pcF:clamp(88px,5.8vw,112px)}
+.pc-day .pc-av{margin-top:-4em}
+
+/* =====================================================================================
+   TRẬN ĐÁNH TRÊN MÁY TÍNH: toàn màn hình, 3 cột — phe ta | sân đấu (tranh lớn) | phe địch;
+   hàng dưới: diễn biến | bảng lệnh | nút phụ. Thanh lượt đi dài hết bề ngang ở trên cùng.
+   ===================================================================================== */
+:root[data-pc][data-view=combat] #app{max-width:none!important;inset:0!important;border-radius:0!important;box-shadow:none!important}
+:root[data-pc][data-view=combat] #app #full:has(.cb){padding:0!important}
+:root[data-pc][data-view=combat] #app .cb{display:grid!important;grid-template-columns:minmax(280px,22%) minmax(0,1fr) minmax(280px,22%);grid-template-rows:auto minmax(0,1fr) auto;
+  gap:14px 22px;width:100%;max-width:none!important;height:100%;min-height:100%;margin:0;padding:14px 26px 18px!important;box-sizing:border-box}
+:root[data-pc][data-view=combat] #app .cb>.track{grid-column:1/-1;grid-row:1;width:auto;margin:22px 40px 4px}
+:root[data-pc][data-view=combat] #app .cb>.cb-ally{grid-column:1;grid-row:2;display:flex;flex-direction:column;justify-content:center;gap:14px;min-height:0}
+:root[data-pc][data-view=combat] #app .cb>.cb-art{grid-column:2;grid-row:2;min-height:0;max-height:none;height:100%;display:block!important}
+:root[data-pc][data-view=combat] #app .cb>.cb-foes{grid-column:3;grid-row:2;display:flex;flex-direction:column;justify-content:center;gap:14px;min-height:0;overflow-y:auto}
+:root[data-pc][data-view=combat] #app .cb>.cb-ally>*,:root[data-pc][data-view=combat] #app .cb>.cb-foes>*{width:100%;flex:none;max-width:none}
+:root[data-pc][data-view=combat] #app .cb .cb-party{flex-direction:column}
+:root[data-pc][data-view=combat] #app .cb>.clog{grid-column:1;grid-row:3;min-height:150px;max-height:200px;overflow:auto;font-size:.92em;align-self:stretch}
+:root[data-pc][data-view=combat] #app .cb>.cb-cmd{grid-column:2;grid-row:3;min-height:150px;align-self:center}
+:root[data-pc][data-view=combat] #app .cb>.cb-bot{grid-column:3;grid-row:3;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;gap:8px;flex-wrap:nowrap}
+:root[data-pc][data-view=combat] #app .cb>.cb-bot .btn,:root[data-pc][data-view=combat] #app .cb>.cb-bot .burnw,:root[data-pc][data-view=combat] #app .cb>.cb-bot .autow{width:100%}
+:root[data-pc][data-view=combat] #app .cb>.cb-bot .btn{min-height:42px;justify-content:center}
+:root[data-pc][data-view=combat] #app .cb>.cb-warn{grid-column:2;grid-row:3;align-self:start}
+:root[data-pc][data-view=combat] #app .cb>.cb-end{grid-column:2;grid-row:3;align-self:center}
+:root[data-pc][data-view=combat] #app .cb .skills{grid-template-columns:repeat(2,1fr);gap:10px}
+:root[data-pc][data-view=combat] #app .cb .skills.main4{grid-template-columns:repeat(4,1fr)}
+:root[data-pc][data-view=combat] #app .cb .sk{min-height:60px}
+
+/* ---------- Chuẩn bị giao chiến (PC): hộp nổi giữa màn, hai phe đối mặt có chữ "Đấu" ở giữa ---------- */
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #sheet:has(.cbprep){left:calc(var(--pcL) + (100% - var(--pcL)) / 2)!important;right:auto!important;top:24px!important;bottom:auto!important;
+  width:min(1080px,var(--pcWin))!important;max-height:var(--pcWinH);height:auto!important;transform:translateX(-50%)!important;border-radius:18px;overflow:hidden;box-shadow:0 0 0 2px var(--gd),0 22px 60px rgba(7,23,18,.6)!important;z-index:18}
+:root[data-pc]:is([data-view=map],[data-view=scene]):has(#sheet .cbprep) #app::after{content:'';position:absolute;left:var(--pcL);right:0;top:0;bottom:var(--pcF);background:rgba(7,23,18,.5);z-index:17;pointer-events:none}
+:root[data-pc] #app .scard.cbprep{height:auto!important;max-height:var(--pcWinH);display:flex;flex-direction:column}
+:root[data-pc] #app .cbprep .sc-h{padding:14px 22px 8px}
+:root[data-pc] #app .cbprep .sc-h h2{font-size:1.5em}
+:root[data-pc] #app .cbprep .sc-b{padding:6px 22px 10px;overflow-y:auto}
+:root[data-pc] #app .cbprep .pp-sides.pp-cmp{position:relative;display:grid;grid-template-columns:1fr 90px 1fr;gap:0;align-items:stretch}
+:root[data-pc] #app .cbprep .pp-cmp>div{padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.6);border:1px solid var(--line)}
+:root[data-pc] #app .cbprep .pp-cmp>div:first-child{grid-column:1;border-top:3px solid var(--jd)}
+:root[data-pc] #app .cbprep .pp-cmp>div:last-child{grid-column:3;border-top:3px solid var(--seal)}
+:root[data-pc] #app .cbprep .pp-cmp::after{content:'Đấu';grid-column:2;grid-row:1;align-self:center;justify-self:center;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--disp);font-size:1.3em;color:#fff;background:radial-gradient(#d24a35,#8e2416);box-shadow:0 0 0 3px var(--gd),0 6px 16px rgba(120,20,10,.4)}
+:root[data-pc] #app .cbprep .pp-u{gap:12px;padding:8px 0;align-items:center}
+:root[data-pc] #app .cbprep .pp-u .u-av{width:62px;height:62px;font-size:1.4em}
+:root[data-pc] #app .cbprep .pp-n{font-size:1.05em}
+:root[data-pc] #app .cbprep .pp-kn{display:grid;grid-template-columns:repeat(4,1fr);gap:6px 18px}
+:root[data-pc] #app .cbprep .pp-act{display:flex;justify-content:center;gap:14px}
+:root[data-pc] #app .cbprep .pp-act .btn{min-width:240px}
+:root[data-pc] #app .cbprep .sc-f{padding:10px 22px 16px}
+:root[data-pc] #app .cbprep .sc-f .btn.big{min-width:420px;min-height:50px;font-size:1.15em}
+/* phông tiêu đề thiếu dấu "ắ, ế" (hiện tách dấu) → dùng phông thường cho tiêu đề chuẩn bị trận và chữ Đấu */
+#app .cbprep .sc-h h2{font-family:var(--font)!important;font-weight:700!important;letter-spacing:.01em}
+:root[data-pc] #app .cbprep .pp-cmp::after{font-family:var(--font);font-weight:800;font-size:1.05em}
+:root[data-pc] #app .cbprep .pp-cmp>div{align-self:start}
+
+/* mọi cảnh dạng thẻ khác (kỳ ngộ ngoài địa điểm, chiến lợi phẩm, đột phá…) cũng là hộp nổi giữa màn, không phủ kín */
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #sheet:has(> .scard:not(.pl-home)),
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #sheet:has(> * > .scard:not(.pl-home)){left:calc(var(--pcL) + (100% - var(--pcL)) / 2)!important;right:auto!important;top:24px!important;bottom:auto!important;
+  width:min(980px,var(--pcWin))!important;max-height:var(--pcWinH);height:auto!important;transform:translateX(-50%)!important;border-radius:18px;overflow:hidden;box-shadow:0 0 0 2px var(--gd),0 22px 60px rgba(7,23,18,.6)!important;z-index:18}
+:root[data-pc]:is([data-view=map],[data-view=scene]):has(#sheet .scard:not(.pl-home)) #app::after{content:'';position:absolute;left:var(--pcL);right:0;top:0;bottom:var(--pcF);background:rgba(7,23,18,.5);z-index:17;pointer-events:none}
+:root[data-pc] #app #sheet .scard:not(.pl-home){height:auto!important;max-height:var(--pcWinH);display:flex;flex-direction:column}
+:root[data-pc] #app #sheet .scard:not(.pl-home)>.sc-b{overflow-y:auto;min-height:0}
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #sheet:has(.cbprep){width:min(1080px,var(--pcWin))!important}

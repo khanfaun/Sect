@@ -106,12 +106,21 @@ const TESTS = {
     await p.setViewportSize({ width: 1440, height: 860 }); await p.waitForTimeout(300);
     await ev(p, () => { G.run.scene = null; UI.panel = null; UI.modal = null; render(); }); await p.waitForTimeout(300);
     await shot(p, 'pc-bando');
+    if (SHOT) for (const [g, a, ten] of [['nam', 16, 'av-nam16'], ['nam', 28, 'av-nam28'], ['nam', 50, 'av-nam50'], ['nu', 18, 'av-nu']]) { await ev(p, ([g, a]) => { G.run.g = g; nhTuoiSet(a); render(); }, [g, a]); await p.waitForTimeout(400); const bb = await ev(p, () => { const r = document.querySelector('.pc-av').getBoundingClientRect(); return [r.x, r.y, r.width, r.height]; }); await p.screenshot({ path: path.join(SHOT, ten + '.png'), clip: { x: bb[0] - 12, y: bb[1] - 12, width: bb[2] + 24, height: bb[3] + 24 } }); }
+    await ev(p, () => { nhTuoiSet(16); render(); });
+    if (SHOT) { await ev(p, () => { for (const k of Object.keys(WOUND).slice(0, 9)) try { devWAdd(k); } catch (e) {} render(); }); await p.waitForTimeout(400); await p.screenshot({ path: path.join(SHOT, 'pc-trangthai.png'), clip: { x: 0, y: 560, width: 1440, height: 300 } }); await ev(p, () => { for (const k of Object.keys(WOUND)) try { devWDel(k); } catch (e) {} render(); }); }
+    if (SHOT) for (const [w, h] of [[1920, 1080], [1100, 700]]) { await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(400); await p.screenshot({ path: path.join(SHOT, 'pc-chantrang-' + w + '.png'), clip: { x: 0, y: h - 170, width: w, height: 170 } }); }
+    await p.setViewportSize({ width: 1440, height: 860 }); await p.waitForTimeout(300);
     if (SHOT) { await p.screenshot({ path: path.join(SHOT, 'pc-chantrang.png'), clip: { x: 0, y: 690, width: 1440, height: 170 } }); await p.screenshot({ path: path.join(SHOT, 'pc-ngay.png'), clip: { x: 560, y: 0, width: 520, height: 60 } }); }
-    await ev(p, () => { UI.panel = 'char'; UI.tab.char = 'tb'; render(); }); await p.waitForTimeout(300);
+    await ev(p, () => { G.run.g = 'nam'; UI.panel = 'char'; UI.tab.char = 'tb'; render(); }); await p.waitForTimeout(600);
     await shot(p, 'pc-trangbi');
+    if (SHOT) { const bb = await ev(p, () => { const e = document.querySelector('.tb-giua .doll3 .hal'); const r = e.getBoundingClientRect(); return [r.x, r.y, r.width, r.height]; }); await p.screenshot({ path: path.join(SHOT, 'pc-cau.png'), clip: { x: bb[0] - 20, y: bb[1] - 20, width: bb[2] + 40, height: bb[3] + 40 } }); }
+    await ev(p, () => { G.run.g = 'nam'; devSetRealm(1, 1); G.run.scene = null; UI.panel = null; render(); ACT.hudBq(); render(); }); await p.waitForTimeout(1500); await shot(p, 'pc-bequan');
+    if (SHOT) { const bb = await ev(p, () => { const e = document.querySelector('.bq-stage .doll3 .hal'); if (!e) return null; const r = e.getBoundingClientRect(); return [r.x, r.y, r.width, r.height]; }); if (bb) await p.screenshot({ path: path.join(SHOT, 'pc-bq-cau.png'), clip: { x: bb[0] - 30, y: bb[1] - 30, width: bb[2] + 60, height: bb[3] + 60 } }); }
+    await ev(p, () => { UI.modal = null; G.run.scene = null; render(); }); await p.waitForTimeout(300);
     await ev(p, () => { UI.panel = null; const n = W().regions.flatMap(R => R.nodes).find(n => n.type === 'sao' || n.type === 'rung'); if (n) { G.run.at = n.id; openPlace(n.id); } startCombat({ cnt: 2 }, { kind: 'node' }); CFG.autoFight = 0; render(); }); await p.waitForTimeout(600);
     await shot(p, 'pc-tran');
-    await ev(p, () => { ACT.cbGo(); CFG.autoFight = 0; render(); }); await p.waitForTimeout(1200); await shot(p, 'pc-tran2');
+    await ev(p, () => { ACT.cbGo(); CFG.autoFight = 0; CFG.anim = false; render(); }); await p.waitForTimeout(3500); await ev(p, () => { CFG.anim = true; }); await shot(p, 'pc-tran2');
     await p.setViewportSize({ width: 400, height: 800 }); await p.waitForTimeout(3000); await shot(p, 'dt-tran');
     await ev(p, () => { G.run.scene = null; render(); }); await p.waitForTimeout(400); await shot(p, 'dt-bando'); await p.setViewportSize({ width: 1440, height: 860 }); await p.waitForTimeout(300);
     await ev(p, () => { G.run.scene = null; G.screen = 'title'; render(); }); await p.waitForTimeout(2500); await ev(p, () => render());
@@ -119,6 +128,129 @@ const TESTS = {
     await ev(p, () => { G.screen = 'meta'; render(); }); await p.waitForTimeout(1500); await shot(p, 'pc-benvx');
     await ev(p, () => { G.screen = 'life'; render(); }); await p.waitForTimeout(1500); await shot(p, 'pc-modaukiep');
     ok(true, 'đã chụp');
+  },
+  // quét mọi việc ở mọi loại địa điểm: bấm Đồng ý rồi phải thấy có gì đó xảy ra (cảnh đổi, lời kể mới, hộp mới)
+  async quet_viec(p) {
+    const kq = await ev(p, () => { const types={};for(const R of W().regions)for(const n of R.nodes){if(n.state==='ruin')continue;(types[n.type]=types[n.type]||[]).push(n);}
+      const out=[];const snap=JSON.stringify(G);const UIK=(k,v)=>typeof v==='function'||/^(lastQ|plTop|_map|confirm)/.test(k)?undefined:v;
+      for(const t in types){for(const n of types[t].slice(0,3)){
+        let acts;try{G=JSON.parse(snap);const r=G.run;r.at=n.id;r.region=n.r;r.scene=null;openPlace(n.id);acts=placeActs(nodeById(n.id)).filter(a=>!a.dis&&a.a!=='quyan').map(a=>a.a);}catch(e){out.push(t+' openPlace LỖI '+e.message);continue;}
+        for(const a of acts){G=JSON.parse(snap);
+          // làm hai lần liền nhau (lần hai: vừa xong lần một, mở lại địa điểm) — bắt cả lỗi "lần sau bấm không thấy gì"
+          for(let lan=1;lan<=2;lan++){try{const r=G.run;if(!r)break;r.at=n.id;r.region=n.r;r.scene=null;r.moving=null;UI.modal=null;UI.panel=null;openPlace(n.id);
+            const A=placeActs(nodeById(n.id)).find(x=>x.a===a);if(!A||A.dis)break;
+            const sc0=r.scene,t0=W().t;const m0=JSON.stringify(sc0);const u0=JSON.stringify(UI,UIK);
+            ACT.pact(a);const viaConf=UI.modal&&UI.modal.k==='pconf';if(viaConf)ACT.pactGo(a);
+            const r2=G.run;const sc=r2&&r2.scene;const changed=!r2||(sc!==sc0&&(!sc||sc.type!=='place'||sc.id!==sc0.id))||(sc&&((sc.msg&&sc.msg.length)||(sc.chips&&sc.chips.length)||sc.venue!==sc0.venue||sc.venue===a||sc.sub!==sc0.sub))||JSON.stringify(UI,UIK)!==u0;
+            if(!changed)out.push(t+'#'+n.id+' '+a+' lần '+lan+(viaConf?' (hộp xác nhận)':'')+': KHÔNG THẤY GÌ, thời gian +'+(W().t-t0));
+          }catch(e){out.push(t+'#'+n.id+' '+a+' lần '+lan+': LỖI '+e.message);break;}}}
+      }}
+      G=JSON.parse(snap);return out;
+ });
+    for (const x of kq) console.log('     · ' + x);
+    ok(kq.length === 0, 'mọi việc ở địa điểm đều có phản hồi (' + kq.length + ' chỗ lỗi)');
+    await ev(p, () => { G.run.scene = null; UI.modal = null; render(); });
+  },
+  async quet_congmon(p) {
+    const kq = await ev(p, () => { const out = []; const snap = JSON.stringify(G); const L = W().regions.flatMap(R => R.nodes).filter(n => n.type === 'tong');
+      for (const n of L) for (let h = 0; h < 24; h += 1) { try { G = JSON.parse(snap); const r = G.run; W().t = Math.floor(W().t / HD) * HD + h; r.at = n.id; r.region = n.r; r.scene = null; UI.modal = null; openPlace(n.id);
+        const a = placeActs(nodeById(n.id)).find(x => x.a === 'congmon'); if (!a) { if (h === 0) out.push(n.name + ': không có việc congmon'); continue; } if (a.dis) { out.push(n.name + ' giờ ' + h + ': bị khoá ' + (a.why || '')); continue; }
+        ACT.pact('congmon'); ACT.pactGo('congmon'); const sc = G.run && G.run.scene; if (!sc || sc.type !== 'event') out.push(n.name + ' giờ ' + h + ': cảnh=' + (sc && sc.type) + ' modal=' + (UI.modal && UI.modal.k)); } catch (e) { out.push(n.name + ' giờ ' + h + ' LỖI ' + e.message); } }
+      G = JSON.parse(snap); return out; });
+    for (const x of kq.slice(0, 40)) console.log('     · ' + x);
+    ok(kq.length === 0, 'Cổng sơn môn: mọi giờ, mọi tông môn đều mở sự kiện (' + kq.length + ')');
+  },
+  // bấm thật như người chơi: công trình Cổng sơn môn → Đồng ý (điện thoại và máy tính)
+  async bam_congmon(p) {
+    for (const [w, h] of [[1440, 860], [400, 800]]) {
+      await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(300);
+      const vao = () => ev(p, () => { const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'tong' && n.state !== 'ruin'); G.run.at = n.id; G.run.region = n.r; arrive(n.id); UI.panel = null; UI.modal = null; UI.evMin = false; G.run.scene = null; openPlace(n.id); render(); });
+      await ev(p, () => { delete (G.run.contentLast || {}).cong_son_mon; }); await vao(); await p.waitForTimeout(400);
+      await p.locator('[data-act="pact"][data-arg="congmon"]').first().click(); await p.waitForTimeout(300);
+      const m = await ev(p, () => UI.modal && UI.modal.k);
+      await p.locator('#modal [data-act="pactGo"]').first().click(); await p.waitForTimeout(500);
+      const st = await ev(p, () => ({ sc: G.run.scene && G.run.scene.type, id: G.run.scene && G.run.scene.id, hop: (() => { const e = document.querySelector('.pl-evm'); if (!e) return 0; const r = e.getBoundingClientRect(); return r.width > 100 && r.height > 100; })() }));
+      ok(m === 'pconf' && st.sc === 'event' && st.hop, w + 'px: bấm Cổng sơn môn → Đồng ý thấy hộp sự kiện ' + JSON.stringify(st));
+      await shot(p, 'bam-congmon-' + w);
+      // lần hai trong 30 ngày: nút khoá, ghi rõ còn chờ bao lâu (trước đây bấm vẫn được mà không thấy gì)
+      await vao(); await p.waitForTimeout(300);
+      const k = await ev(p, () => { const b = document.querySelector('[data-act="pact"][data-arg="congmon"]'); return b && { dis: b.disabled, t: b.innerText }; });
+      ok(k && k.dis && /chờ/.test(k.t), w + 'px: lần hai trong lúc chờ: nút khoá, có chữ chờ ' + JSON.stringify(k));
+      await ev(p, () => { W().t += 721; G.run.scene = null; openPlace(G.run.at); render(); }); await p.waitForTimeout(300);
+      ok(await ev(p, () => { const b = document.querySelector('[data-act="pact"][data-arg="congmon"]'); return b && !b.disabled; }), w + 'px: hết 30 ngày thì mở lại');
+      await ev(p, () => { G.run.scene = null; UI.modal = null; render(); });
+    }
+  },
+  // bấm ra ngoài: bảng (máy tính) và hộp có nút X tự đóng; hộp sự kiện phải chọn thì không đóng
+  async bam_ngoai(p) {
+    await p.setViewportSize({ width: 1440, height: 860 }); await p.waitForTimeout(300);
+    await ev(p, () => { const r = G.run; r.scene = null; r.moving = null; r.dest = null; UI.modal = null; UI.sel = null; UI.cell = null; UI.pop = null; UI.hold = null; UI.mark = null; UI.panel = 'char'; UI.tab.char = 'tb'; render(); }); await p.waitForTimeout(300);
+    const P = await ev(p, () => { const r = document.querySelector('#panel').getBoundingClientRect(); return [r.x, r.y, r.width, r.height]; });
+    ok(P[2] < 1440 * 0.75 && P[2] > 800 && P[1] > 10, 'bảng là cửa sổ giữa màn, không phủ kín ' + P.map(Math.round));
+    await shot(p, 'pc-cuaso');
+    await p.mouse.click(200, 400); await p.waitForTimeout(300);
+    const sau = await ev(p, () => ({ panel: UI.panel, sel: UI.sel, cell: UI.cell, pop: UI.pop, modal: UI.modal && UI.modal.k, sc: G.run.scene && G.run.scene.type, el: (document.elementFromPoint(200, 400) || {}).id || (document.elementFromPoint(200, 400) || {}).className }));
+    ok(!sau.panel && sau.sel == null && sau.cell == null, 'bấm vào bản đồ ngoài bảng: đóng bảng, không chọn nhầm ô ' + JSON.stringify(sau));
+    await ev(p, () => { const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'tong' && n.state !== 'ruin'); G.run.at = n.id; openPlace(n.id); delete (G.run.contentLast || {}).cong_son_mon; ACT.pact('congmon'); render(); }); await p.waitForTimeout(300);
+    await p.mouse.click(230, 120); await p.waitForTimeout(300);
+    ok(await ev(p, () => !UI.modal && G.run.scene && G.run.scene.type === 'place'), 'hộp xác nhận: bấm ra ngoài thì đóng, vẫn ở địa điểm');
+    await ev(p, () => { ACT.pact('congmon'); ACT.pactGo('congmon'); render(); }); await p.waitForTimeout(300);
+    await p.mouse.click(230, 120); await p.waitForTimeout(300);
+    ok(await ev(p, () => G.run.scene && G.run.scene.type === 'event'), 'hộp sự kiện (phải chọn): bấm ra ngoài không mất sự kiện');
+    await ev(p, () => { G.run.scene = null; UI.modal = null; render(); });
+    await p.setViewportSize({ width: 400, height: 800 }); await p.waitForTimeout(300);
+    await ev(p, () => { const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'tong' && n.state !== 'ruin'); G.run.at = n.id; openPlace(n.id); delete (G.run.contentLast || {}).cong_son_mon; ACT.pact('congmon'); render(); }); await p.waitForTimeout(300);
+    await p.mouse.click(200, 60); await p.waitForTimeout(300);
+    ok(await ev(p, () => !UI.modal), 'điện thoại: bấm nền mờ ngoài hộp xác nhận thì đóng');
+    await ev(p, () => { G.run.scene = null; UI.modal = null; render(); });
+  },
+  // chốt nổi trên bản đồ: nút vào nơi đang đứng ngay dưới tên; khi đi: thời gian còn lại trên đầu nơi tới + nút Dừng lại đỏ, không còn thẻ dưới đáy
+  async chot_ban_do(p) {
+    for (const [w, h] of [[1440, 860], [400, 800]]) {
+      await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(300);
+      await ev(p, () => { const r = G.run; r.moving = null; r.halt = false; r.dest = null; r.scene = null; UI.modal = null; UI.panel = null; UI.sel = null; UI.cell = null; const n = W().regions.flatMap(x => x.nodes).find(n => n.type === 'tran' && n.state !== 'ruin'); r.at = n.id; r.region = n.r; arrive(n.id); Map2.center(); render(); }); await p.waitForTimeout(700);
+      const a = await ev(p, () => { const e = document.querySelector('.mpin.duoi [data-act="enter"]'); if (!e) return null; const b = e.getBoundingClientRect(); const pin = e.closest('.mpin'); return { t: e.innerText, vis: getComputedStyle(pin).visibility, x: Math.round(b.x + b.width / 2), y: Math.round(b.y) }; });
+      ok(a && a.vis === 'visible' && /Vào/.test(a.t), w + 'px: nút vào nơi đang đứng nằm dưới tên ' + JSON.stringify(a));
+      await shot(p, 'chot-dung-' + w);
+      await p.locator('.mpin.duoi [data-act="enter"]').click(); await p.waitForTimeout(300);
+      ok(await ev(p, () => G.run.scene && G.run.scene.type === 'place'), w + 'px: bấm nút là vào địa điểm');
+      await ev(p, () => { const r = G.run; r.scene = null; const L = W().regions.flatMap(x => x.nodes).filter(n => n.id !== r.at && n.fog >= 1 && findPath(r.at, n.id)); const n = L.sort((a, b) => travelHours(findPath(r.at, a.id)) - travelHours(findPath(r.at, b.id)))[Math.min(3, L.length - 1)]; r.doi = 0; r.truy = null; UI.anOk = 1; UI.modal = null; ACT.goSure(n.id); UI.modal = null; render(); }); await p.waitForTimeout(900);
+      const m = await ev(p, () => ({ modal: UI.modal && UI.modal.k, sc: G.run.scene && G.run.scene.type, mv: !!G.run.moving, tren: (document.querySelector('.mpin.tren') || {}).innerText, trenVis: document.querySelector('.mpin.tren') && getComputedStyle(document.querySelector('.mpin.tren')).visibility, dung: !!document.querySelector('.mpin.duoi [data-act="stop"]'), dock: !!document.querySelector('#dock .go') }));
+      ok(m.mv && /còn/.test(m.tren || '') && m.dung && !m.dock, w + 'px: đang đi: có thời gian còn lại + nút Dừng lại ở nơi tới, không còn thẻ dưới đáy ' + JSON.stringify(m));
+      await shot(p, 'chot-di-' + w);
+      await ev(p, () => { const b = document.querySelector('.mpin.duoi [data-act="stop"]'); if (b) b.click(); }); await p.waitForTimeout(300);
+      ok(await ev(p, () => G.run.moving && G.run.halt), w + 'px: bấm Dừng lại thì dừng giữa đường');
+      await ev(p, () => { const r = G.run; r.moving = null; r.halt = false; r.dest = null; render(); });
+    }
+  },
+  // từ màn mở đầu vào game (máy tính): lúc mực đang che, khung vẫn là màn mở đầu — không lòi thanh dưới trống lên
+  async vao_game(p) {
+    await p.setViewportSize({ width: 1440, height: 860 }); await p.waitForTimeout(300);
+    await ev(p, () => { G.run.scene = null; UI.panel = null; G.screen = 'title'; render(); }); await p.waitForTimeout(2600); await ev(p, () => render()); await p.waitForTimeout(300);
+    ok(await ev(p, () => document.documentElement.dataset.view === 'screen' && !!document.querySelector('[data-act="resume"]')), 'đang ở màn mở đầu');
+    await p.locator('[data-act="resume"]').click();
+    const L = [];
+    for (let i = 0; i < 8; i++) { await p.waitForTimeout(200); L.push(await ev(p, () => ({ v: document.documentElement.dataset.view, title: !!document.querySelector('#full .title'), hud: (() => { const h = document.getElementById('hud'); if (!h) return 0; const r = h.getBoundingClientRect(); return r.height > 0 && getComputedStyle(h).display !== 'none' && h.innerText.trim().length > 0 ? 1 : 0; })(), hudBox: (() => { const h = document.getElementById('hud'); return h ? Math.round(h.getBoundingClientRect().height) : 0; })() }))); }
+    const xau = L.filter(x => x.title && x.v !== 'screen');
+    ok(xau.length === 0, 'màn mở đầu còn hiện thì khung chưa chuyển sang bản đồ (không lòi thanh dưới) ' + JSON.stringify(L.map(x => x.v + (x.title ? '+tieude' : '') + ':' + x.hudBox)));
+    await p.waitForTimeout(2500);
+    ok(await ev(p, () => document.documentElement.dataset.view === 'map' && G.screen === 'map'), 'sau lớp mực: đã vào bản đồ');
+  },
+  // địa điểm: làm xong chuyện trước mắt rồi quay về → hội thoại ghi lại chuyện đó; điện thoại: cụm hội thoại không che hết ảnh công trình
+  async loi_ke_su_kien(p) {
+    await p.setViewportSize({ width: 400, height: 800 }); await p.waitForTimeout(300);
+    const kq = await ev(p, () => { const r = G.run; UI.modal = null; UI.panel = null; const L = W().regions.flatMap(x => x.nodes).filter(n => n.state !== 'ruin' && n.type === 'thanh');
+      for (const n of L) { r.at = n.id; r.region = n.r; r.scene = null; openPlace(n.id); const ev = nodeEvs(n); if (!ev.length) continue; const ten = EVMAP[ev[0]].n;
+        ACT.evGo(0); if (!r.scene || r.scene.type !== 'event') continue;
+        for (let i = 0; i < 12 && G.run.scene && G.run.scene.type === 'event'; i++) { const sc = G.run.scene; if (sc.phase === 'choose') { const v = visChoices(sc).find(({ c }) => !needList(c).some(x => !x.ok)); if (!v) break; choose(v.i); } else ACT.next(); }
+        render(); const sc = G.run.scene; return { ten, type: sc && sc.type, hist: sc && sc.hist && sc.hist.map(h => h.q), dom: (document.querySelector('#plTalk') || {}).innerText || '' }; }
+      return null; });
+    ok(kq && kq.type === 'place' && kq.hist && kq.hist.includes(kq.ten) && kq.dom.includes(kq.ten), 'xong chuyện trước mắt: quay về địa điểm, hội thoại ghi lại "' + (kq && kq.ten) + '" ' + JSON.stringify(kq && { t: kq.type, h: kq.hist }));
+    await p.waitForTimeout(300);
+    const hh = await ev(p, () => { const a = document.querySelector('.pl-home .pl-pan'), b = document.querySelector('.pl-home'); if (!a || !b) return null; return Math.round(a.getBoundingClientRect().height / b.getBoundingClientRect().height * 100); });
+    ok(hh != null && hh <= 34, 'điện thoại: cụm hội thoại thấp (≤ 34% cảnh): ' + hh + '%');
+    await shot(p, 'dt-diadiem');
+    await ev(p, () => { G.run.scene = null; render(); });
   },
   async su_kien_hop(p) {
     await p.setViewportSize({ width: 1440, height: 860 });
@@ -247,7 +379,7 @@ const TESTS = {
     await ev(p, () => { UI.modal = null; G.run.g = 'nam'; G.run.pham = 0; G.run.realm = 3; render(); ACT.devOpen(); devSt().tab = 'nv'; render(); }); await p.waitForTimeout(200);
     ok(await ev(p, () => !!document.querySelector('.mbox.dev .dev-nv .doll3') && !!document.querySelector('select[data-nh="devNhTuoi"]')), 'Dev test có thẻ Nhân vật: xem trước, chọn độ tuổi');
     await p.selectOption('select[data-nh="devNhTuoi"]', 'elder'); await p.waitForTimeout(200);
-    ok(await ev(p, () => Math.round(G.run.age) === 75 && document.querySelector('.dev-nv .doll3').dataset.toc === 'e1' && /còn/.test(document.querySelector('.dev-nv-ds').innerText)), 'chọn Lão giả: tuổi thành 75, hình đổi sang lão giả, hiện số năm còn lại');
+    ok(await ev(p, () => Math.round(G.run.age) === 75 && document.querySelector('.dev-nv .doll3').dataset.tuoi === 'elder' && /^nv-elder-/.test(document.querySelector('.dev-nv .doll3').dataset.anh) && /còn/.test(document.querySelector('.dev-nv-ds').innerText)), 'chọn Lão giả: tuổi thành 75, hình đổi sang lão giả, hiện số năm còn lại');
     await p.selectOption('select[data-nh="devNhChau"]', 'gold'); await p.waitForTimeout(150);
     ok(await ev(p, () => document.querySelector('.dev-nv .doll3').dataset.chau === 'gold'), 'đổi hạt châu sang kim hoả');
     // địa điểm: chuyển cảnh, công trình bấm được, bấm trà lâu hiện lựa chọn trà lâu
