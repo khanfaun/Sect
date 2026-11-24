@@ -14,14 +14,14 @@ export function NhanVatThien({ orb, cls, nut }) {
   const N = PS.ngoaiHinh ? PS.ngoaiHinh() : MAC;
   const chau = orb || N.chau;
   if (N.nu) return (
-    <div className={'doll3 nu ' + (cls || '')} aria-hidden="true" data-tuoi={N.tuoi}><div className="shd" /><img className="nu-i" src={I('de-tu-1')} alt="" /><div className={'hal ' + chau} />{nut && <div className="doll-nut">{nut}</div>}</div>
+    <div className={'doll3 nu ' + (cls || '')} aria-hidden="true" data-tuoi={N.tuoi}><div className="shd" /><img className="nu-i" src={I('de-tu-1')} alt="" />{nut && <div className="doll-nut">{nut}</div>}</div>
   );
   const o = I(N.anh) || I(MAC.anh);
   return (
     <div className={'doll3 ' + (cls || '')} aria-hidden="true" data-tuoi={N.hien} data-toc={N.toc} data-ao={N.ao} data-anh={N.anh} data-chau={chau}>
       <div className="shd" />
       <div className="nvk"><img className="ost" src={o} alt="" /><img className="ofl" src={o} alt="" /><img className="ofr" src={o} alt="" /><img className="och" src={o} alt="" /></div>
-      <div className={'hal ' + chau} />
+      
       <div className="glw"><img className="gl" src={I('ch-glow-' + chau)} alt="" /></div>
       <div className={'hco ' + chau} />
       {nut && <div className="doll-nut">{nut}</div>}
