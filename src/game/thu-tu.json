@@ -400,5 +400,6 @@
  "ui/37-chot-ban-do.js",
  "ui/38-loi-ke-dia-diem.js",
  "core2/89-viec-goi-su-kien.js",
+ "core2/90-tru-nhan.js",
  "nap:devBotNap"
 ]

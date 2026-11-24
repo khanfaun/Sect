@@ -354,7 +354,7 @@ const TESTS = {
     await ev(p, () => { const dp = regionOf(0).nodes.find(n => n.dp); G.run.at = dp.id; arrive(dp.id); openPlace(dp.id); UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(300);
     ok(await ev(p, () => !!document.querySelector('.bq-home .bq-stage .doll3') && !!document.querySelector('.bq-sky .bq-nen')), 'bế quan: phong cảnh và nhân vật ngồi thiền');
     ok(await ev(p, () => !!document.querySelector('.bq-home .orbb.l') && !!document.querySelector('.bq-home .orbb.r') && document.querySelectorAll('.bq-home .bq-cult .hb').length === 2), 'bế quan toàn màn hình: hai hạt cầu Đột phá / Tâm ma, thẻ cảnh giới có thanh tu vi và lịch luyện');
-    ok(await ev(p, () => { const L = [...document.querySelectorAll('.bq-home .doll3 *')].flatMap(e => e.getAnimations().map(a => a.animationName)); return ['flp', 'brz', 'hsw', 'gspin2'].every(k => L.includes(k)) || G.run.g === 'nu'; }), 'nhân vật ngồi thiền có chuyển động áo, ngực, tóc, hạt châu');
+    ok(await ev(p, () => { const L = [...document.querySelectorAll('.bq-home .doll3 *')].flatMap(e => e.getAnimations().map(a => a.animationName)); return ['flp', 'brz', 'gspin2'].every(k => L.includes(k)) || G.run.g === 'nu'; }), 'nhân vật ngồi thiền có chuyển động áo, ngực, hạt châu');
     // bế quan đợt 3: chọn bế quan / tĩnh toạ trong cùng thẻ, nhập số năm, hạt cầu Đạo tâm, không lỗi "Infinity"
     ok(await ev(p, () => /Đạo tâm/.test(document.querySelector('.bq-home .orbb.l').innerText) && document.querySelectorAll('.bq-kieu .bq-k').length === 2 && !!document.querySelector('#bqYn') && !/Infinity/.test(document.querySelector('.bq-home').innerText)), 'bế quan: hạt cầu trái là Đạo tâm, có chọn Bế quan/Tĩnh toạ, ô nhập số năm, không có chữ Infinity');
     await p.fill('#bqYn', '2'); await p.waitForTimeout(200);
@@ -379,7 +379,7 @@ const TESTS = {
     await ev(p, () => { UI.modal = null; G.run.g = 'nam'; G.run.pham = 0; G.run.realm = 3; render(); ACT.devOpen(); devSt().tab = 'nv'; render(); }); await p.waitForTimeout(200);
     ok(await ev(p, () => !!document.querySelector('.mbox.dev .dev-nv .doll3') && !!document.querySelector('select[data-nh="devNhTuoi"]')), 'Dev test có thẻ Nhân vật: xem trước, chọn độ tuổi');
     await p.selectOption('select[data-nh="devNhTuoi"]', 'elder'); await p.waitForTimeout(200);
-    ok(await ev(p, () => Math.round(G.run.age) === 75 && document.querySelector('.dev-nv .doll3').dataset.tuoi === 'elder' && /^nv-elder-/.test(document.querySelector('.dev-nv .doll3').dataset.anh) && /còn/.test(document.querySelector('.dev-nv-ds').innerText)), 'chọn Lão giả: tuổi thành 75, hình đổi sang lão giả, hiện số năm còn lại');
+    ok(await ev(p, () => G.run.age / S().life > 0.9 && document.querySelector('.dev-nv .doll3').dataset.tuoi === 'elder' && /^nv-elder-/.test(document.querySelector('.dev-nv .doll3').dataset.anh) && /còn/.test(document.querySelector('.dev-nv-ds').innerText)), 'chọn Lão giả: tuổi trên 90% thọ nguyên, hình đổi sang lão giả, hiện số năm còn lại');
     await p.selectOption('select[data-nh="devNhChau"]', 'gold'); await p.waitForTimeout(150);
     ok(await ev(p, () => document.querySelector('.dev-nv .doll3').dataset.chau === 'gold'), 'đổi hạt châu sang kim hoả');
     // địa điểm: chuyển cảnh, công trình bấm được, bấm trà lâu hiện lựa chọn trà lâu

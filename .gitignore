@@ -3,3 +3,10 @@ dist/
 node_modules/
 work/
 output/
+
+# Ảnh nhân vật: chỉ giữ đầu vào để tạo lại (thân gốc, lớp tay, bảng tóc, bảng áo). Ảnh 1024 trung gian/kết quả ở máy, game dùng src/assets/nv + anh-nv
+src/assets-goc/nv/*
+!src/assets-goc/nv/than-*.png
+!src/assets-goc/nv/lop-tay.png
+!src/assets-goc/nv/toc-bac-9-7.png
+!src/assets-goc/nv/ao-cg*.png

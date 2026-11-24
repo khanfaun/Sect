@@ -37,6 +37,61 @@ AO = {
 GIU = ("Keep the face, head, hairstyle, hair color, body pose, ink line art style, size and position EXACTLY the same as image 1, and keep the sleeve openings at the knees exactly where they are. "
        "He has NO hands: the sleeve openings stay empty, never draw hands. "
        "Only change the clothing to: ")
+# Áo theo cảnh giới (bảng 3x3 trong src/assets-goc/nv): id -> (bảng, hàng, cột)
+CG = {'lk1': ('ao-cg-luyenkhi', 0, 0), 'lk2': ('ao-cg-luyenkhi', 1, 0), 'lk3': ('ao-cg-luyenkhi', 1, 2),
+      'tc1': ('ao-cg-trucco', 0, 0), 'tc2': ('ao-cg-trucco', 0, 2), 'tc3': ('ao-cg-trucco', 1, 1),
+      'kd1': ('ao-cg-ketdan', 0, 0), 'kd2': ('ao-cg-ketdan', 0, 2), 'kd3': ('ao-cg-ketdan', 1, 1),
+      'na1': ('ao-cg-nguyenanh', 0, 0), 'na2': ('ao-cg-nguyenanh', 0, 2), 'na3': ('ao-cg-nguyenanh', 1, 1), 'na4': ('ao-cg-nguyenanh', 2, 1)}
+CG.update({'ht%d' % (k + 1): ('ao-cg2-hoathan', k // 3, k % 3) for k in range(9)})
+CG.update({'dk%d' % (k + 1): ('ao-cg2-dokiep', k // 3, k % 3) for k in range(9)})
+MAU = {'bac': 'shiny silver-white', 'den': 'jet black'}
+O5 = {'duoi': (0, 2), 'bui': (1, 1), 'xoa': (0, 0), 'mai': (1, 0), 'song': (2, 0)}
+THEM = {'duoi': 'A high ponytail tied with a metal band. No gold crown.',
+        'bui': 'A top bun held by a small silver hair crown with a hairpin, long hair hanging down the back. No gold crown.',
+        'xoa': 'REMOVE the bun, the gold crown and the hairpin completely: all the hair hangs loose and straight with a center part, nothing on top of the head.',
+        'mai': 'REMOVE the bun, the gold crown and the hairpin completely: all the hair hangs loose, with two long front locks framing the face, nothing on top of the head.',
+        'song': 'REMOVE the bun, the gold crown and the hairpin completely: long wavy flowing hair hanging loose over the shoulders, nothing on top of the head.'}
+GIU_T = ("Keep his face, head size, clothes, sleeves, hands, pose, line work, size and position EXACTLY the same as image 1, keep the image clean and smooth. "
+         "Fully transparent background, output a PNG image with transparency.")
+for _k in ('ht7', 'dk1', 'dk4'): CG.pop(_k, None)   # người dùng bỏ 3 bộ này
+EO = 'Keep his body as broad and solid as in image 1: normal adult male waist and torso width, not slim, not narrow-waisted. '
+THEM_AO = {'dk6': (EO, 57), 'dk8': (EO, 57), 'dk9': (EO, 57)}   # chỉnh riêng từng bộ: (câu thêm, seed)
+KHONG_REF = set()   # bộ nào chỉ tả bằng chữ (không dùng ảnh mẫu)
+CG_TXT = {
+ 'lk1': 'an ivory-white cross-collar robe with green trim and a dark green sash with a jade pendant',
+ 'lk2': 'a light green cross-collar robe with darker green trim and a dark sash with a jade pendant',
+ 'lk3': 'a slate-blue cross-collar robe with dark blue trim and a dark sash with a jade pendant',
+ 'tc1': 'a two-layer ivory and pale gold silk robe with gold embroidered collar, a long open outer robe and a gold tassel belt',
+ 'tc2': 'a two-layer dark green silk robe with a sleeveless dark green outer vest, gold trim and a gold tassel belt',
+ 'tc3': 'a two-layer navy blue and silver-grey silk robe with a sleeveless navy outer vest, silver trim and tassel belt',
+ 'kd1': 'a luxurious layered ivory and gold silk robe with long wide sleeves, gold crane embroidery and a long embroidered front panel',
+ 'kd2': 'a luxurious layered deep forest-green silk robe with long wide sleeves, gold embroidery and an ornate jade belt',
+ 'kd3': 'a luxurious layered navy-blue silk robe with silver-white inner layers, gold embroidery and an ornate belt with tassels',
+ 'na1': 'grand ivory and gold ceremonial robes with small gold shoulder guards, long sweeping sleeves and dense gold filigree',
+ 'na2': 'grand dark emerald-green ceremonial robes with gold shoulder guards, long sweeping sleeves and dense gold filigree',
+ 'na3': 'grand azure-blue ceremonial robes with silver shoulder guards, flowing ribbons and dense silver filigree',
+ 'na4': 'grand midnight navy and black ceremonial robes with dark gold shoulder guards, flowing dark ribbons and gold filigree',
+ 'ht1': 'a vermilion and gold phoenix-feather robe with flame-shaped shoulder plates',
+ 'ht2': 'a deep violet and silver robe with crescent-moon shoulder pieces',
+ 'ht3': 'a dark teal and bronze robe with an ancient beast-mask chest plate',
+ 'ht4': 'a snow-white and pale gold robe with crane-wing shoulder pieces',
+ 'ht5': 'an obsidian black and crimson robe with jagged spiky shoulder ornaments',
+ 'ht6': 'a turquoise and silver robe with flowing water-wave filigree and translucent ribbons',
+ 'ht7': 'an amber and dark brown robe with tiger-stripe patterns and armor collar',
+ 'ht8': 'an indigo robe embroidered with silver star constellations',
+ 'ht9': 'a rose-gold and ivory robe with peony embroidery and pearl chains',
+ 'dk1': 'radiant sun-gold glowing regalia with a high sunburst collar and glowing runes',
+ 'dk2': 'lightning-blue and silver glowing regalia with crackling thunder patterns',
+ 'dk3': 'cosmic black regalia full of glowing galaxies and stars',
+ 'dk4': 'pure white glowing regalia of translucent layered silk like wings of light',
+ 'dk5': 'blood-red and black demon-emperor regalia with glowing red cracks and spiky collar',
+ 'dk6': 'jade-green celestial regalia with a translucent jade dragon coiling around it',
+ 'dk7': 'purple and gold nebula regalia with floating ribbons of violet light',
+ 'dk8': 'silver-white frost regalia with ice crystal armor pieces',
+ 'dk9': 'prismatic rainbow-pearl regalia shimmering like aurora'}
+KIEU_CG = {'lk': 'duoi', 'tc': 'bui', 'kd': 'bui', 'na': 'xoa', 'ht': 'mai', 'dk': 'song'}
+BAC_TN = ("Change ONLY the hair color to silver-white with a few grey strands (hair, beard and moustache). Keep exactly the same hairstyle, beard shape, face, clothes, hands, pose, size and position, keep the image clean and smooth. "
+          "Fully transparent background, output a PNG image with transparency.")
 TOC_P = {
  'bac-bui': "Change ONLY the hair color to shiny silver-white (all of the hair). Keep the same hairstyle with the topknot bun and gold crown, same face, same clothes, same pose, same background.",
  'den-xoa': "Change ONLY the hairstyle: no bun, no hair crown, no hairpin; the long straight black hair hangs loose and free down his back and over his shoulders, with a center part. Keep the same face, same clothes, same pose, same background.",
@@ -94,11 +149,15 @@ def chay(viec):
         f = hi['outputs']['15']['images'][0]
         urllib.request.urlretrieve(f"{URL}/view?filename={f['filename']}&subfolder={f.get('subfolder','')}&type=output", G + ra + '.png')
         print('xong', ra, flush=True)
-    con = [ra for ra in ids if Image.open(G + ra + '.png').convert('RGBA').getextrema()[3][0] > 0]
-    if con and not getattr(chay, 'dang', 0):  # ảnh còn nền -> cho Qwen 2.1 tách nền
-        chay.dang = 1
-        try: chay([(ra, Image.open(G + ra + '.png'), 'Remove the background, and output a PNG image', 1, None) for ra in con])
-        finally: chay.dang = 0
+    # tạo thẳng nền trong suốt; ảnh nào còn nền thì vẽ lại cả ảnh với seed khác (không qua bước tách nền)
+    con = [x for x in viec if Image.open(G + x[0] + '.png').convert('RGBA').getextrema()[3][0] > 0]
+    lan = getattr(chay, 'lan', 0)
+    if con and lan < 3:
+        print('con nen, ve lai:', [x[0] for x in con], flush=True)
+        chay.lan = lan + 1
+        try: chay([(ra, im, p, seed + 101, im2) for ra, im, p, seed, im2 in con])
+        finally: chay.lan = lan
+    elif con: print('CANH BAO van con nen:', [x[0] for x in con], flush=True)
 
 def anh_cu(tuoi):
     a, h = CU_LOP[tuoi]; L = Image.new('RGBA', (640, 640), NEN + (255,))
@@ -135,10 +194,69 @@ if __name__ == '__main__':
             b = Image.open(G + 'young-' + a + '.png')
             for k, p in TOC_P.items(): v.append(('young-' + a + '-' + k, b, p + ' No hands, keep the sleeve openings empty. Fully transparent background, output a PNG image with transparency.', seed, None))
         chay(v)
+    elif cmd == 'toc5':
+        # 5 kiểu tóc thanh niên theo cảnh giới (mẫu: ô trên bảng toc-bac-9-7.png, 3x3) x 2 màu, trên ảnh khop/young-<áo>.png
+        bang = Image.open(G + 'toc-bac-9-7.png').convert('RGBA'); c = bang.size[0] // 3
+        kieus = arg('--kieu') or list(O5); maus = arg('--mau') or list(MAU)
+        if 'bac' in maus:   # bước 1: tóc bạc theo mẫu
+            v = []
+            for a in aos:
+                b = Image.open(G + 'khop/young-' + a + '.png')
+                for k in kieus:
+                    y, x = O5[k]; mau = nen_trang(bang.crop((x * c, y * c, x * c + c, y * c + c)))
+                    v.append(('khop/young-' + a + '-bac-' + k, b, "Change ONLY the hairstyle of the man in image 1 to exactly the hairstyle shown in image 2, with shiny silver-white hair. " + THEM[k] + ' ' + GIU_T, seed, mau))
+            chay(v)
+        if 'den' in maus:   # bước 2: nhuộm đen từ bản bạc, giữ nguyên kiểu
+            v = [('khop/young-' + a + '-den-' + k, Image.open(G + 'khop/young-' + a + '-bac-' + k + '.png'),
+                  "Change ONLY the hair color to jet black (all of the hair). Keep exactly the same hairstyle, hair shape and accessories. " + GIU_T, seed, None)
+                 for a in aos for k in kieus]
+            chay(v)
+        v = []
+        os.makedirs(G + 'khop', exist_ok=True); chay(v)
+    elif cmd == 'cg':
+        # Áo theo cảnh giới: CG[id] = (bảng, hàng, cột). Mỗi bộ: thay áo trên thân không tay 4 tuổi -> khớp tay áo -> 10 kiểu tóc thanh niên -> tóc bạc trung niên.
+        LAI = '--lai' in rest; rest = [x for x in rest if x != '--lai']
+        ids = [i for i in (rest or list(AO) + list(CG)) if i in CG or i in AO]   # 7 áo phàm nhân + 31 áo cảnh giới
+        L = Image.open(G + 'lop-tay.png').convert('RGBA')
+        PK = ("Fix ONLY the ends of the two sleeves so each sleeve opening wraps naturally around the wrist of the hand next to it, with the wrist going into the sleeve and no gap. "
+              "Do NOT change the hands at all, and do not change anything else: face, hair, robe, pose, colors, size and position stay exactly the same. "
+              "Fully transparent background, output a PNG image with transparency.")
+        PK2 = ("Fix the ends of the two sleeves so each sleeve opening wraps naturally around the wrist of the hand next to it, with the wrist going into the sleeve and no gap; do NOT change the hands. ")
+        for i in ids:
+            if i in CG and i not in KHONG_REF:
+                bang, hg, cot = CG[i]; B = Image.open(G + bang + '.png').convert('RGBA'); c = B.size[0] // 3
+                mau = nen_trang(B.crop((cot * c, hg * c, cot * c + c, hg * c + c))); mo = CG_TXT[i]
+            else: mau = None; mo = CG_TXT[i] if i in CG else AO[i]   # áo phàm nhân: chỉ tả bằng chữ
+            v = []
+            for t in TUOI:
+                pa = ("Completely REPLACE the clothes of the man in image 1 with " + ("the outfit shown in image 2: " if mau else "this outfit: ") + mo + ". "
+                      "None of his old robe may remain; the colors of his clothes must match the description. The whole robe must stay fully inside the image with margins on both sides. Adapt the outfit to his cross-legged seated meditation pose, legs crossed flat on the ground. "
+                      "Keep his face, head, hairstyle, hair color, body pose, ink line art style, size and position EXACTLY the same, keep the sleeve openings at the knees where they are, NO hands. "
+                      "Fully transparent background, output a PNG image with transparency.")
+                ta, sd = THEM_AO.get(i, ('', 23))
+                v.append((t + '-' + i, Image.open(G + 'than-' + t + '.png'), ta + pa, sd, mau))
+            if not LAI: chay(v)
+            # lượt 2 (gộp): ghép lớp tay + khớp ống tay, cùng lượt đổi tóc -> mỗi ảnh chỉ qua 2 lượt vẽ, đỡ sần
+            k = KIEU_CG.get(i[:2], 'duoi'); y, x = O5[k]; bt = Image.open(G + 'toc-bac-9-7.png').convert('RGBA'); cc = bt.size[0] // 3
+            mt = nen_trang(bt.crop((x * cc, y * cc, x * cc + cc, y * cc + cc)))
+            tay = {}
+            for t in TUOI:
+                b = Image.open(G + t + '-' + i + '.png').convert('RGBA'); b.alpha_composite(L); tay[t] = b
+            v = [('khop/' + t + '-' + i, tay[t], PK, 2, None) for t in ('teen', 'middle', 'elder')]
+            v += [('khop/young-' + i + '-' + m + '-' + k, tay['young'],
+                   PK2 + "Also change the hairstyle to exactly the hairstyle shown in image 2, with " + MAU[m] + " hair. " + THEM[k] + ' ' + GIU_T, 23, mt)
+                  for m in ('bac', 'den')]
+            v += [('khop/middle-' + i + '-bac', tay['middle'], PK2 + BAC_TN, 11, None)]
+            chay(v)
+            print('XONG BO', i, flush=True)
+    elif cmd == 'bac-tn':
+        # trung niên tóc bạc (giữ râu, kiểu tóc; chỉ đổi màu)
+        aos2 = rest or list(AO)
+        chay([('khop/middle-' + a + '-bac', Image.open(G + 'khop/middle-' + a + '.png'), BAC_TN, 11, None) for a in aos2])
     elif cmd == 'khop':
         L = Image.open(G + 'lop-tay.png').convert('RGBA'); la = np.array(L)[..., 3] > 200
         P = ("Fix ONLY the ends of the two sleeves so each sleeve opening wraps naturally around the wrist of the hand next to it, with the wrist going into the sleeve and no gap. "
-             "Do NOT change the hands at all, and do not change anything else: face, hair, robe, pose, colors, ink style, size and position stay exactly the same. "
+             "Do NOT change the hands at all, and do not change anything else: face, hair, robe, pose, colors, size and position stay exactly the same. "
              "Fully transparent background, output a PNG image with transparency.")
         loc = rest[0] if rest else ''
         ds = [os.path.basename(f)[:-4] for f in sorted(glob.glob(G + '*-*.png'))]
@@ -153,11 +271,12 @@ if __name__ == '__main__':
         for f in sorted(glob.glob(G + 'khop/*-*.png')):
             n = os.path.basename(f)[:-4]
             if not n.startswith(tuple(TUOI)): continue
-            if n.startswith('young-') and n.count('-') == 1: n += '-den-bui'  # ảnh gốc thanh niên = tóc đen búi
+            if n.startswith('young-') and n.count('-') == 1: continue      # ảnh gốc thanh niên chỉ để đổi tóc
+            if n.startswith('middle-') and n.count('-') == 1: n += '-den'  # trung niên gốc = tóc đen
             im = Image.open(f)
             if im.mode != 'RGBA': print('!! khong trong suot', n)
             out = np.array(im.convert('RGBA').resize((640, 640), Image.LANCZOS))
-            Image.fromarray(out).save(O + 'nv-' + n + '.webp', quality=90, method=6)
+            os.makedirs('src/assets/nv', exist_ok=True); Image.fromarray(out).save('src/assets/nv/nv-' + n + '.webp', quality=88, method=4)
             print('cat', n)
     elif cmd == 'xem':
         out = rest[0]; loc = rest[1] if len(rest) > 1 else ''

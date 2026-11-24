@@ -3,7 +3,10 @@
 const M = import.meta.glob('../../assets/ui/*.webp', { eager: true, query: '?url', import: 'default' });
 export const IMG = {};
 for (const [p, u] of Object.entries(M)) IMG[p.split('/').pop().replace(/\.webp$/, '')] = u;
-export const I = k => IMG[k] || '';
+// Ảnh nhân vật (nv-<tuổi>-…, vài trăm ảnh) KHÔNG nhúng vào trang: để thành tệp riêng, chỉ tải ảnh đang dùng.
+// Chạy thử (npm run dev): src/assets/nv/; bản build: thư mục anh-nv/ cạnh phu-sinh.html (tools/build.js chép sang).
+const NV = /^nv-(teen|young|middle|elder)-/;
+export const I = k => IMG[k] || (NV.test(k) ? (import.meta.env.DEV ? '/assets/nv/' : 'anh-nv/') + k + '.webp' : '');
 
 // loại pháp bảo → ảnh
 const ITEM = {

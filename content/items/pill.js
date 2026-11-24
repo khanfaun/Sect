@@ -13,6 +13,7 @@ const PILL = {
   khaitri:{dao:1,n:'Khai Trí Đan',i:'🧿',x:2,d:'Ngộ tính +{x}',w:'any',p:55},
   luanhoi:{n:'Luân Hồi Đan',i:'🌀',x:0,d:'Dùng để mở quyền chọn lá số ở lượt đầu thai kế tiếp.',w:'any',p:120},
   dientho:{n:'Diên Thọ Đan',i:'🍑',x:8,d:'Thọ nguyên +{x}%',w:'any',p:70},
+  trunhan:{n:'Trú Nhan Đan',i:'🌸',x:0,d:'Giữ dung nhan vĩnh viễn ở độ tuổi hiện tại (tuổi vẫn tăng). Mất tác dụng khi luân hồi.',w:'any',p:150},
   phacanh:{n:'Phá Cảnh Đan',i:'🌕',x:15,d:'Đặt vào ô chuẩn bị để cộng {x} điểm phần trăm vào tỷ lệ đột phá.',w:'bt',p:55,bt:{rate:15}},
   homach:{n:'Hộ Mạch Đan',i:'🛡️',x:0,d:'Giữ tu vi và tránh trọng thương khi đột phá thất bại. Cứu mạng nếu ngươi gục giữa thiên kiếp.',w:'bt',p:70,bt:{guard:1}},
   bode:{n:'Bồ Đề Tử',i:'📿',x:0,d:'Hộ mệnh khi đột phá, giữ mạng khi gục giữa kiếp',w:'bt',p:70,bt:{guard:1}},

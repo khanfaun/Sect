@@ -28,10 +28,12 @@ function NgoaiHinh() {
           </select></label>
         <label>Tuổi: {Math.floor(r.age)}
           <input type="range" min="1" max={Math.max(1, Math.floor(s.life - 1))} step="1" value={Math.floor(r.age)} onChange={e => { PS.ACT.devNhAge(+e.target.value); PS.render(); }} /></label>
-        <label>Tóc + gương mặt
+        <label>Màu tóc
           <select data-nh="devNhToc" value={N.toc} onChange={doiNh}>{H.toc.map(([v, n]) => <option key={v} value={v}>{n}</option>)}</select></label>
+        {N.hien === 'young' && <p className="hint" data-nh="kieuToc">Kiểu tóc theo cảnh giới: {(PS.NH_KIEU_TOC.find(x => x[0] === N.kieu) || [0, N.kieu])[1]}</p>}
+        {N.truNhan && <p className="hint" data-nh="truNhan">Đã uống Trú Nhan Đan: dung nhan giữ ở {T[N.hien].n}</p>}
         <label>Trang phục
-          <select data-nh="devNhAo" value={N.ao} onChange={doiNh}>{H.ao.map(([v, n]) => <option key={v} value={v}>{n}</option>)}</select></label>
+          <select data-nh="devNhAo" value={N.ao} onChange={doiNh}>{N.aoDs.map(([v, n]) => <option key={v} value={v}>{n}</option>)}</select></label>
         <label>Hạt châu
           <select data-nh="devNhChau" value={N.chauChon} onChange={doiNh}>{PS.NH_CHAU.map(([v, n]) => <option key={v} value={v}>{n}</option>)}</select></label>
       </div>
