@@ -22,9 +22,14 @@ function NgoaiHinh() {
       <div className="dev-nv-ds">
         <p><b>{Math.floor(r.age)} tuổi</b> · thọ nguyên {s.life} năm · còn <b className={con < s.life * 0.12 ? 'bad' : ''}>{Math.floor(con)} năm</b></p>
         <p className="hint">Độ tuổi hiện tại: {T[N.tuoi].n}{N.hien !== N.tuoi ? ' (chưa có ảnh, đang mượn hình ' + H.n.toLowerCase() + ')' : ''}{N.nu ? ' · nhân vật nữ chưa có bộ ảnh ngồi thiền' : ''}</p>
+        <label>Cảnh giới
+          <select data-nh="devNhRealm" value={r.pham ? -1 : r.realm} onChange={doiNh}>
+            <option value={-1}>Phàm nhân</option>{PS.REALM.map((n, i) => <option key={i} value={i}>{n}</option>)}
+          </select></label>
+        {r.devNh && <p className="hint" data-nh="devNh">Đang ép hình {T[r.devNh].n.toLowerCase()} (tuổi thật không đổi)</p>}
         <label>Độ tuổi
           <select data-nh="devNhTuoi" value={N.tuoi} onChange={doiNh}>
-            {Object.entries(T).map(([k, x]) => <option key={k} value={k} disabled={x.mau >= s.life}>{x.n} ({x.tu}{x.den < 1e8 ? '–' + (x.den - 1) : '+'}){PS.nhCo(k) ? '' : ' – chưa có ảnh'}{x.mau >= s.life ? ' – vượt thọ nguyên' : ''}</option>)}
+            {Object.entries(T).map(([k, x]) => <option key={k} value={k}>{x.n}{r.pham ? ' (' + x.tu + (x.den < 1e8 ? '–' + (x.den - 1) : '+') + ')' : ''}{PS.nhCo(k) ? '' : ' – chưa có ảnh'}{r.pham && x.mau >= s.life ? ' – vượt thọ nguyên (chỉ đổi hình)' : ''}</option>)}
           </select></label>
         <label>Tuổi: {Math.floor(r.age)}
           <input type="range" min="1" max={Math.max(1, Math.floor(s.life - 1))} step="1" value={Math.floor(r.age)} onChange={e => { PS.ACT.devNhAge(+e.target.value); PS.render(); }} /></label>
@@ -38,7 +43,7 @@ function NgoaiHinh() {
           <select data-nh="devNhChau" value={N.chauChon} onChange={doiNh}>{PS.NH_CHAU.map(([v, n]) => <option key={v} value={v}>{n}</option>)}</select></label>
       </div>
     </div>
-    <p className="hint">Mỗi ngoại hình là một ảnh nguyên vẹn nv-&lt;tuổi&gt;-&lt;áo&gt;[-&lt;tóc&gt;] trong src/assets/ui (tạo bằng tools/nv-comfy.py); khai báo ở NH_TUOI (core2/84-ngoai-hinh.js).</p>
+    <p className="hint">Mỗi ngoại hình là một ảnh nguyên vẹn nv-&lt;tuổi&gt;-&lt;áo&gt;[-&lt;tóc&gt;] trong src/assets/nv (tạo bằng tools/nv-comfy.py); khai báo ở NH_TUOI (core2/84-ngoai-hinh.js).</p>
   </>;
 }
 

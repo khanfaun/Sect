@@ -3515,6 +3515,12 @@ const TESTS = {
     run("nhSet('ao','na3')");ok(run("ngoaiHinh().anh")==='nv-teen-na3', 'vẫn đổi được quần áo (trong bộ của cảnh giới)');
     run("delete G.run.truNhan");ok(run("ngoaiHinh().hien")==='elder', 'bản lưu cũ không có truNhan: theo tuổi như thường');
     ok(run("(()=>{const o=G.run;o.truNhan='young';newRun({ten:o.ten,g:o.g,origin:o.origin,trait:o.trait,root:o.root,que:o.que,base:o.base,at:o.at});return !G.run.truNhan;})()")===true, 'luân hồi (nhân vật mới) không giữ Trú Nhan Đan');
+    // Dev test: chọn cảnh giới, ép lão giả khi thọ nguyên chưa tới
+    run("devSetRealm(-1,1)");ok(run("G.run.pham")===1, 'dev: chọn Phàm nhân');
+    run("delete G.run.devNh;nhTuoiSet(20)");const a0=run("G.run.age");run("nhDoTuoiSet('elder')");
+    ok(run("ngoaiHinh().hien")==='elder'&&run("G.run.age")===a0&&run("ngoaiHinh().anh").startsWith('nv-elder-'), 'dev: phàm nhân thọ nguyên ngắn vẫn chọn được lão giả (tuổi thật giữ nguyên)');
+    run("delete G.run.devNh;nhTuoiSet(22)");ok(run("ngoaiHinh().hien")==='young', 'dev: kéo tuổi thì bỏ ép hình');
+    run("devSetRealm(4,1)");ok(run("G.run.realm")===4&&!run("G.run.pham")&&run("ngoaiHinh().aoDs.length")===8, 'dev: chọn Hóa Thần, đổi bộ áo theo cảnh giới');
   },
 
   xe_hinh() {

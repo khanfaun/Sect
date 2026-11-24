@@ -62,5 +62,6 @@ ACT.devCbGo=()=>{const d=devSt();const A=d.cb.A.map(x=>x.v==='main'?{v:'main',re
 document.addEventListener('input',e=>{const el=e.target;if(!el||!el.matches||!el.matches('input[data-devq]'))return;devSt().q=el.value;render();});
 // thẻ Nhân vật (ngoại hình): độ tuổi, tuổi, tóc, áo, hạt châu
 ACT.devNhTuoi=k=>{nhDoTuoiSet(k);};
-ACT.devNhAge=a=>{nhTuoiSet(+a);};
+ACT.devNhAge=a=>{if(G.run)delete G.run.devNh;nhTuoiSet(+a);};
+ACT.devNhRealm=v=>{const re=+v;if(devSetRealm(re,1))note('Đã đổi cảnh giới: '+(re<0?'Phàm nhân':REALM[re])+'.','up');};
 ACT.devNhToc=v=>{nhSet('toc',v);};ACT.devNhAo=v=>{nhSet('ao',v);};ACT.devNhChau=v=>{nhSet('chau',v);};

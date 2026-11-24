@@ -106,6 +106,9 @@ const TESTS = {
     await p.setViewportSize({ width: 1440, height: 860 }); await p.waitForTimeout(300);
     await ev(p, () => { G.run.scene = null; UI.panel = null; UI.modal = null; render(); }); await p.waitForTimeout(300);
     await shot(p, 'pc-bando');
+    await ev(p, () => { G.run.g = 'nam'; G.run.pham = 0; G.run.realm = 5; render(); ACT.devOpen(); devSt().tab = 'nv'; render(); }); await p.waitForTimeout(500);
+    ok(await ev(p, () => { const x = document.querySelector('.dev-nv-xem').getBoundingClientRect(), m = document.querySelector('.mbox.dev').getBoundingClientRect(); return m.width > 1000 && x.width > 400 && x.height > 450; }), 'PC: hộp Dev test rộng, ảnh xem trước nhân vật to');
+    await shot(p, 'pc-dev-nv'); await ev(p, () => { UI.modal = null; render(); });
     if (SHOT) for (const [g, a, ten] of [['nam', 16, 'av-nam16'], ['nam', 28, 'av-nam28'], ['nam', 50, 'av-nam50'], ['nu', 18, 'av-nu']]) { await ev(p, ([g, a]) => { G.run.g = g; nhTuoiSet(a); render(); }, [g, a]); await p.waitForTimeout(400); const bb = await ev(p, () => { const r = document.querySelector('.pc-av').getBoundingClientRect(); return [r.x, r.y, r.width, r.height]; }); await p.screenshot({ path: path.join(SHOT, ten + '.png'), clip: { x: bb[0] - 12, y: bb[1] - 12, width: bb[2] + 24, height: bb[3] + 24 } }); }
     await ev(p, () => { nhTuoiSet(16); render(); });
     if (SHOT) { await ev(p, () => { for (const k of Object.keys(WOUND).slice(0, 9)) try { devWAdd(k); } catch (e) {} render(); }); await p.waitForTimeout(400); await p.screenshot({ path: path.join(SHOT, 'pc-trangthai.png'), clip: { x: 0, y: 560, width: 1440, height: 300 } }); await ev(p, () => { for (const k of Object.keys(WOUND)) try { devWDel(k); } catch (e) {} render(); }); }
@@ -379,7 +382,9 @@ const TESTS = {
     await ev(p, () => { UI.modal = null; G.run.g = 'nam'; G.run.pham = 0; G.run.realm = 3; render(); ACT.devOpen(); devSt().tab = 'nv'; render(); }); await p.waitForTimeout(200);
     ok(await ev(p, () => !!document.querySelector('.mbox.dev .dev-nv .doll3') && !!document.querySelector('select[data-nh="devNhTuoi"]')), 'Dev test có thẻ Nhân vật: xem trước, chọn độ tuổi');
     await p.selectOption('select[data-nh="devNhTuoi"]', 'elder'); await p.waitForTimeout(200);
-    ok(await ev(p, () => G.run.age / S().life > 0.9 && document.querySelector('.dev-nv .doll3').dataset.tuoi === 'elder' && /^nv-elder-/.test(document.querySelector('.dev-nv .doll3').dataset.anh) && /còn/.test(document.querySelector('.dev-nv-ds').innerText)), 'chọn Lão giả: tuổi trên 90% thọ nguyên, hình đổi sang lão giả, hiện số năm còn lại');
+    ok(await ev(p, () => (G.run.age / S().life > 0.9 || G.run.devNh === 'elder') && document.querySelector('.dev-nv .doll3').dataset.tuoi === 'elder' && /^nv-elder-/.test(document.querySelector('.dev-nv .doll3').dataset.anh) && /còn/.test(document.querySelector('.dev-nv-ds').innerText)), 'chọn Lão giả: tuổi trên 90% thọ nguyên, hình đổi sang lão giả, hiện số năm còn lại');
+    await p.selectOption('select[data-nh="devNhRealm"]', '4'); await p.waitForTimeout(200);
+    ok(await ev(p, () => G.run.realm === 4 && !G.run.pham && document.querySelectorAll('select[data-nh="devNhAo"] option').length === 8), 'Dev test/Nhân vật: chọn cảnh giới Hóa Thần ngay trong thẻ, danh sách áo đổi theo');
     await p.selectOption('select[data-nh="devNhChau"]', 'gold'); await p.waitForTimeout(150);
     ok(await ev(p, () => document.querySelector('.dev-nv .doll3').dataset.chau === 'gold'), 'đổi hạt châu sang kim hoả');
     // địa điểm: chuyển cảnh, công trình bấm được, bấm trà lâu hiện lựa chọn trà lâu

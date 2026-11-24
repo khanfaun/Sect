@@ -41,6 +41,7 @@ function nhTuoiOf(a){a=+a||0;for(const k in NH_TUOI){const T=NH_TUOI[k];if(a>=T.
 const NH_MOC=[[55,85],[60,88],[65,90],[70,92],[75,94],[80,95]];
 const nhMoc=r=>NH_MOC[Math.min(NH_MOC.length-1,Math.max(0,(r&&r.realm)||0))];
 function nhDoTuoi(r){r=r||G.run;const a=r?+r.age||0:25;
+  if(r&&r.devNh&&NH_TUOI[r.devNh])return r.devNh;                 // Dev test: ép độ tuổi (kể cả vượt thọ nguyên)
   if(r&&r.truNhan&&NH_TUOI[r.truNhan])return r.truNhan;          // Trú Nhan Đan: dung nhan cố định
   if(!r||r.pham||a<20)return nhTuoiOf(a);
   const life=typeof S==='function'?S().life:LIFE[r.realm]||60,pc=a/Math.max(1,life)*100,[m1,m2]=nhMoc(r);
@@ -67,6 +68,7 @@ function nhTuoiSet(a){const r=G.run;if(!r)return null;const life=S().life;a=clam
   const lived=(W().t-r.bornT)/HY;r.birthAge=a-lived;r.age=a;dbg('nh.tuoi',{tuoi:+a.toFixed(1),tho:life,con:+(life-a).toFixed(1),do:nhDoTuoi(r)});return a;}
 // chọn độ tuổi (dev): đặt tuổi về tuổi mẫu của độ tuổi đó
 // tu sĩ: tuổi mẫu đặt giữa khoảng % thọ nguyên của độ tuổi đó
-function nhDoTuoiSet(k){const T=NH_TUOI[k],r=G.run;if(!T||!r)return null;if(r.pham||k==='teen')return nhTuoiSet(T.mau);
+function nhDoTuoiSet(k){const T=NH_TUOI[k],r=G.run;if(!T||!r)return null;delete r.devNh;
+  if(r.pham?T.mau>=S().life:(k==='teen'&&S().life<=T.mau)){r.devNh=k;dbg('nh.ep',{tuoi:k});return r.age;}   // không đủ thọ nguyên: chỉ ép hìnhif(r.pham||k==='teen')return nhTuoiSet(T.mau);
   const life=S().life,[m1,m2]=nhMoc(r),pc={young:m1/2,middle:(m1+m2)/2,elder:(m2+100)/2}[k];return nhTuoiSet(Math.max(20,life*pc/100));}
 function nhSet(k,v){const r=G.run;if(!r||!['toc','ao','chau'].includes(k))return;r.ngoai=Object.assign({},r.ngoai||{},{[k]:v});dbg('nh.set',{k,v});}

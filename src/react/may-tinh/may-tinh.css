@@ -54,7 +54,7 @@
 :root[data-pc]:is([data-view=map],[data-view=scene]) #app #sheet{left:var(--pcL)!important;right:0!important;top:0!important;bottom:var(--pcF)!important;width:auto!important;transform:none!important;z-index:17}
 :root[data-pc]:is([data-view=map],[data-view=scene]) #modal{left:var(--pcL)!important;top:0!important;right:0!important;bottom:var(--pcF)!important;place-items:center!important}
 :root[data-pc]:is([data-view=map],[data-view=scene]) #app #modal .mbox{width:600px;max-width:calc(100% - 60px);max-height:88%;border-radius:18px;border:2px solid var(--gd);animation:none}
-:root[data-pc]:is([data-view=map],[data-view=scene]) #app #modal .mbox.dev{width:900px}
+:root[data-pc]:is([data-view=map],[data-view=scene]) #app #modal .mbox.dev{width:min(1240px,94vw)}
 :root[data-pc] #app #toast{left:calc(var(--pcL) + (100% - var(--pcL)) / 2)!important;right:auto!important;width:480px;transform:translateX(-50%)}
 :root[data-pc] #hnote{left:calc(var(--pcL) + (100vw - var(--pcL)) / 2)}
 :root[data-pc]:is([data-view=map],[data-view=scene])[data-edge]::after,:root[data-pc]:is([data-view=map],[data-view=scene]) #lowfx{left:0!important;width:auto!important;right:0!important;transform:none!important;top:0!important;bottom:0!important;border-radius:0}
