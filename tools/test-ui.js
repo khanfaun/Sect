@@ -79,8 +79,8 @@ const TESTS = {
     const P = await R('#panel');
     ok(P && P[0] >= trai[2] - 1 && P[1] + P[3] <= day[1] + 1, 'bảng mở ở vùng giữa ' + P);
     await ev(p, () => { UI.tab.char = 'tb'; render(); }); await p.waitForTimeout(200);
-    const g = await R('.tb-giua'), pb = await R('.tb-duoi > .tb-nhom:nth-child(1)'), dd = await R('.tb-duoi > .tb-nhom:nth-child(2)'), pk = await R('.tb-duoi > .tb-nhom:nth-child(3)'), bo = await R('.tb-ben');
-    ok(g && g[2] / g[3] >= 0.8 && g[2] / g[3] <= 1.3 && pb && dd && pb[0] + pb[2] <= g[0] + 2 && dd[0] >= g[0] + g[2] - 2 && pk && pk[1] >= g[1] + g[3] - 2 && bo && bo[1] >= pk[1] + pk[3] - 2, 'trang bị PC: pháp bảo | nhân vật | đan điền, pháp khí rồi bộ + chỉ số dưới cùng ' + [g, pb, dd, pk, bo].join(' / '));
+    const g = await R('.tb-giua'), tr = await R('.tb-trai'), ph = await R('.tb-phai'), dd = await R('.tb-duoi2 > .tb-nhom:nth-child(1)'), pk = await R('.tb-duoi2 > .tb-nhom:nth-child(2)'), bo = await R('.tb-trai .tb-ben');
+    ok(g && tr && ph && dd && pk && bo && tr[0] + tr[2] <= ph[0] + 2 && dd[1] >= g[1] + g[3] - 2 && pk[1] >= dd[1] + dd[3] - 2 && await ev(p, () => document.querySelectorAll('.tb-giua .tb-pb').length === PB_SLOTS.length && !!document.querySelector('.tb-giua .tb-tal') && !!document.querySelector('.tb-trai .basegrid') && getComputedStyle(document.querySelector('.tb-trai .tb-ben')).overflowY === 'auto'), 'PC: Căn cơ (trái) gộp Trang bị; nhân vật có ô pháp bảo tròn + tiềm chất, đan điền, pháp khí bên phải; bộ + chỉ số chung thanh trượt ' + [g, tr, ph, dd, pk, bo].join(' / '));
     await shot(p, 'trang-bi');
     await ev(p, () => { UI.panel = 'more'; UI.tab.more = 'cfg'; render(); }); await p.waitForTimeout(200);
     const M = await R('#panel');
@@ -327,13 +327,13 @@ const TESTS = {
     ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
   },
   async trang_phuc_xuat_than(p) {
-    const r = await ev(p, () => { devSetRealm(3, 2); const out = []; for (const tu of ['teen', 'young', 'middle', 'elder']) for (const [id] of NH_TUOI[tu].ao) { G.run.origin = 'nong'; nhDoTuoiSet(tu); nhSet('ao', id); UI.modal = null; render();
+    const r = await ev(p, () => { devSetRealm(-1, 1); const out = []; for (const tu of ['teen', 'young', 'middle', 'elder']) for (const [id] of NH_TUOI[tu].ao) { G.run.origin = 'nong'; nhDoTuoiSet(tu); nhSet('ao', id); UI.modal = null; render();
         const u = ngoaiHinh(); if (u.ao !== id) out.push(tu + '/' + id + ' không chọn được'); }
       return out; });
-    ok(r.length === 0, '28 áo (7 kiểu × 4 tuổi) đều chọn được ' + r.join(', '));
+    ok(r.length === 0, 'phàm nhân: 28 áo (7 kiểu × 4 tuổi) đều chọn được ' + r.join(', '));
     await ev(p, () => { UI.panel = null; UI.confirm = null; G.screen = 'map'; G.run.scene = null; G.run.origin = 'ren'; delete G.run.ngoai; nhDoTuoiSet('young'); const dp = regionOf(0).nodes.find(n => n.dp); G.run.at = dp.id; arrive(dp.id); openPlace(dp.id); UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(700);
-    const src = await ev(p, () => { const i = document.querySelector('.bq-home .doll3 img.ost') || document.querySelector('.doll3 img.ost'); return i ? i.src.slice(0, 22) : ''; });
-    ok(/^data:image\/webp/.test(src), 'nhân vật ngồi thiền hiện áo theo xuất thân (thợ rèn): ' + src);
+    const src = await ev(p, () => { const i = document.querySelector('.bq-home .doll3 img.ost') || document.querySelector('.doll3 img.ost'); return i ? i.src.split('/').pop() : ''; });
+    ok(/nv-young-tho-/.test(src), 'nhân vật ngồi thiền hiện áo theo xuất thân (thợ rèn): ' + src);
     ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
   },
   async giao_dien_moi(p) {
@@ -360,7 +360,7 @@ const TESTS = {
     await ev(p, () => { const dp = regionOf(0).nodes.find(n => n.dp); G.run.at = dp.id; arrive(dp.id); openPlace(dp.id); UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(300);
     ok(await ev(p, () => !!document.querySelector('.bq-home .bq-stage .doll3') && !!document.querySelector('.bq-sky .bq-nen')), 'bế quan: phong cảnh và nhân vật ngồi thiền');
     ok(await ev(p, () => !!document.querySelector('.bq-home .orbb.l') && !!document.querySelector('.bq-home .orbb.r') && document.querySelectorAll('.bq-home .bq-cult .hb').length === 2), 'bế quan toàn màn hình: hai hạt cầu Đột phá / Tâm ma, thẻ cảnh giới có thanh tu vi và lịch luyện');
-    ok(await ev(p, () => { const L = [...document.querySelectorAll('.bq-home .doll3 *')].flatMap(e => e.getAnimations().map(a => a.animationName)); return ['flp', 'gspin2'].every(k => L.includes(k)) || G.run.g === 'nu'; }), 'nhân vật ngồi thiền có chuyển động áo, hạt châu (bỏ lớp thở ngực)');
+    ok(await ev(p, () => { const L = [...document.querySelectorAll('.bq-home .doll3 *')].flatMap(e => e.getAnimations().map(a => a.animationName)); return ['gspin2'].every(k => L.includes(k)) || G.run.g === 'nu'; }), 'nhân vật ngồi thiền có hạt châu xoay (ảnh người đứng yên)');
     // bế quan đợt 3: chọn bế quan / tĩnh toạ trong cùng thẻ, nhập số năm, hạt cầu Đạo tâm, không lỗi "Infinity"
     ok(await ev(p, () => /Đạo tâm/.test(document.querySelector('.bq-home .orbb.l').innerText) && document.querySelectorAll('.bq-kieu .bq-k').length === 2 && !!document.querySelector('#bqYn') && !/Infinity/.test(document.querySelector('.bq-home').innerText)), 'bế quan: hạt cầu trái là Đạo tâm, có chọn Bế quan/Tĩnh toạ, ô nhập số năm, không có chữ Infinity');
     await p.fill('#bqYn', '2'); await p.waitForTimeout(200);

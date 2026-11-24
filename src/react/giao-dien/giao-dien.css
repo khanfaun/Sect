@@ -590,3 +590,17 @@ body{font-family:var(--font);letter-spacing:0}
 /* PC: ảnh xem trước nhân vật to bên trái, danh sách chọn bên phải */
 :root[data-pc] .dev-nv{flex-wrap:nowrap}
 :root[data-pc] .dev-nv-xem{flex:0 0 46%;height:min(560px,62vh)}
+
+/* Trang bị: pháp bảo thành ô tròn trên cung phía trên nhân vật; đan điền, pháp khí căn giữa; bộ + chỉ số chung một thanh trượt */
+.tb-giua{height:370px}
+#app .tb-giua .doll3{height:76%;bottom:6px}
+.tb-pbc{position:absolute;inset:0;pointer-events:none;z-index:2}
+.tb-pb{position:absolute;transform:translate(-50%,-50%);pointer-events:auto}
+#app .tb-pb .eqc{width:48px;height:48px;min-height:0;border-radius:50%!important;padding:4px;background:rgba(251,250,243,.88);box-shadow:0 0 0 1.5px var(--gd),0 2px 6px rgba(14,42,36,.25)}
+#app .tb-pb .eqc small{display:none}
+#app .tb-pb .eqc img{border-radius:50%}
+.tb-pb.khoa{opacity:.8}
+.tb-tal{position:absolute;left:50%;top:30px;transform:translateX(-50%) scale(.5);transform-origin:top center;z-index:3}
+#app .tb-duoi .tb-nhom .sgrp{justify-content:center}
+#app .tb-duoi .ddrow,#app .tb-duoi2 .ddrow{justify-content:center}
+.tb-cuon{max-height:300px;overflow-y:auto;overscroll-behavior:contain;padding-right:4px}

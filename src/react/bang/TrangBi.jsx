@@ -38,31 +38,47 @@ function TongHop() {
   </>;
 }
 
-export function TrangBi() {
-  const { REALM, PB_SLOTS, PB_REQ, DD_N, SPEC } = PS;
+// vị trí ô pháp bảo: rải đều trên một cung tròn phía trên nhân vật (trái -> phải), % theo khung ảnh
+function cungPB(n) {
+  const L = [];
+  for (let i = 0; i < n; i++) {
+    const t = n === 1 ? 0.5 : i / (n - 1), g = Math.PI * (1 - t) * 0.84 + Math.PI * 0.08; // từ ~165° tới ~15°
+    L.push({ left: 50 + Math.cos(g) * 38 + '%', top: 50 - Math.sin(g) * 30 + '%' });
+  }
+  return L;
+}
+
+function PhapBaoCung({ E }) {
+  const { REALM, PB_SLOTS, PB_REQ } = PS, po = PS.pbOpen(), P = cungPB(PB_SLOTS.length);
+  return <div className="tb-pbc" data-n={PB_SLOTS.length}>
+    {PB_SLOTS.map((k, j) => <div key={k} className={'tb-pb' + (j < po ? '' : ' khoa')} style={P[j]}>
+      {j < po
+        ? <OTrangBi k={'E' + k} label="Pháp bảo" rel={E[k]} o={{ ic: 'phapbao', x: ['eqOff', k, 'Tháo ra'] }} />
+        : <OTrangBi k={'E' + k} label={REALM[PB_REQ[j]]} rel={null} o={{ lock: 1, ic: 'phapbao', tip: 'Pháp bảo: mở khi đạt ' + REALM[PB_REQ[j]] + '.' }} />}
+    </div>)}
+  </div>;
+}
+
+// gop: máy tính, thẻ Căn cơ gộp vào đây (canCo = các mục chỉ số, đặt cột trái)
+export function TrangBi({ gop, canCo }) {
+  const { REALM, PB_SLOTS, DD_N, SPEC } = PS;
   const r = PS.run2(), E = PS.eqOf(), dn = DD_N[r.realm], po = PS.pbOpen();
   const N = Object.fromEntries(PS.SLOTS);
-  return (
-    <div className="tb-wrap">
-      <div className="tb-doll">
-        <div className="tb-col">{TRAI.map(k => <O key={k} k={k} E={E} N={N} />)}</div>
-        <div className="tb-giua">
-          <b className="tag"><img src={I('sk-sword')} alt="" />Lực chiến {PS.fmtN(Math.round(PS.lucChien()))}</b>
-          <NhanVatThien />
-          <small className="tag2">{PS.realmLabel()}</small>
-        </div>
-        <div className="tb-col">{PHAI.map(k => <O key={k} k={k} E={E} N={N} />)}</div>
+  const hinh = (
+    <div className="tb-doll">
+      <div className="tb-col">{TRAI.map(k => <O key={k} k={k} E={E} N={N} />)}</div>
+      <div className="tb-giua">
+        <b className="tag"><img src={I('sk-sword')} alt="" />Lực chiến {PS.fmtN(Math.round(PS.lucChien()))}</b>
+        {gop && <div className="tb-tal" dangerouslySetInnerHTML={{ __html: PS.talCardHTML() }} />}
+        <NhanVatThien />
+        <PhapBaoCung E={E} />
+        <small className="tag2">{PS.realmLabel()} · pháp bảo {PB_SLOTS.filter(k => E[k]).length}/{po}</small>
       </div>
-      <div className="tb-ben"><BoTrangBi /><TongHop /></div>
-      <div className="tb-duoi">
-      <section className="tb-nhom">
-      <h4 className="sgrp">Pháp bảo <small>{PB_SLOTS.filter(k => E[k]).length}/{po}</small><span className="grow"></span><Help t="Pháp bảo đang mang theo người: cho chỉ số. Ô thứ nhất mở ở Trúc Cơ, ô thứ hai ở Kết Đan, ô thứ ba ở Nguyên Anh." /></h4>
-      <div className="ddrow three">
-        {PB_SLOTS.map((k, j) => j < po
-          ? <OTrangBi key={k} k={'E' + k} label="Pháp bảo" rel={E[k]} o={{ ic: 'phapbao', x: ['eqOff', k, 'Tháo ra'] }} />
-          : <OTrangBi key={k} k={'E' + k} label={REALM[PB_REQ[j]]} rel={null} o={{ lock: 1, ic: 'phapbao', tip: 'Mở khi đạt ' + REALM[PB_REQ[j]] + '.' }} />)}
-      </div>
-      </section>
+      <div className="tb-col">{PHAI.map(k => <O key={k} k={k} E={E} N={N} />)}</div>
+    </div>
+  );
+  const duoi = (
+    <div className={gop ? 'tb-duoi2' : 'tb-duoi'}>
       <section className="tb-nhom">
       <h4 className="sgrp">Đan điền · uẩn dưỡng <small>{r.dd.length}/{dn}</small><span className="grow"></span><Help t="Vũ khí, pháp bảo nuôi trong đan điền mỗi năm mạnh thêm, vẫn cho chỉ số, và trong trận tế ra đánh được một lần." /></h4>
       <div className="ddrow">
@@ -80,7 +96,15 @@ export function TrangBi() {
         {SPEC.map(([k, n]) => k === 'phuongtien' ? <PhuongTien key={k} k={k} n={n} /> : <OTrangBi key={k} k={'E' + k} label={n} rel={E[k]} o={{ ic: k, x: ['eqOff', k, 'Tháo ra'] }} />)}
       </div>
       </section>
-      </div>
     </div>
   );
+  // bộ trang bị + chỉ số từ trang bị: chung một thanh trượt riêng
+  const ben = <div className="tb-ben tb-cuon"><BoTrangBi /><TongHop /></div>;
+  if (gop) return (
+    <div className="tb-gop">
+      <div className="tb-trai">{canCo}{ben}</div>
+      <div className="tb-phai">{hinh}{duoi}</div>
+    </div>
+  );
+  return <div className="tb-wrap">{hinh}{ben}{duoi}</div>;
 }

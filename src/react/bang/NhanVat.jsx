@@ -42,7 +42,7 @@ function Thanh({ n, v, cls, t }) {
 const esc = s => PS.esc(s);
 const RT = (k, v, kind) => PS.RT(k, v, kind);
 
-function CanCo() {
+function CanCo({ gop }) {
   const { G, UI, ORIGIN, TRAIT, ROOT, TT_DEST, PCOL, TC_N, REALM, QNAME } = PS;
   const r = G.run, s = PS.S();
   const og = ORIGIN.find(o => o.id === r.origin), tr = TRAIT.find(t => t.id === r.trait), R0 = PS.rootView(r.root);
@@ -57,7 +57,7 @@ function CanCo() {
   const hs = e > 1.001 ? ['rt4', 'Ngộ đạo'] : e >= 0.99 ? ['rt3', 'Đầy đủ'] : e >= 0.7 ? ['rt2', 'Hơi giảm'] : e >= 0.35 ? ['rt1', 'Giảm'] : e >= 0.1 ? ['rt0', 'Giảm mạnh'] : ['bad', 'Bình cảnh'];
   const cbOpen = UI.cbOpen !== false;
   return <>
-    <Html style={{ display: 'contents' }} h={PS.talCardHTML()} />
+    {!gop && <Html style={{ display: 'contents' }} h={PS.talCardHTML()} />}
     <div className="basegrid">
       <HopGon k="than" icon="flag" name="Thân thế">
         <Kv n="Xuất thân" v={esc(og.n)} t={og.d} />
@@ -134,11 +134,15 @@ export function NhanVat() {
   const { G, UI } = PS;
   let tab = UI.tab.char || 'base';
   if (tab === 'chu') tab = 'hoc';
+  // máy tính: Căn cơ gộp chung thẻ Trang bị
+  const pc = typeof document !== 'undefined' && document.documentElement.hasAttribute('data-pc');
+  if (pc && tab === 'base') tab = 'tb';
+  const list = pc ? TABS.filter(x => x[0] !== 'base').map(x => x[0] === 'tb' ? ['tb', 'Căn cơ · Trang bị'] : x) : TABS;
   return (
     <Win title={G.run.ten} cls="tall wide">
-      <Tabs k="char" list={TABS} cur={tab} />
+      <Tabs k="char" list={list} cur={tab} />
       {tab === 'base' && <CanCo />}
-      {tab === 'tb' && <TrangBi />}
+      {tab === 'tb' && (pc ? <TrangBi gop canCo={<CanCo gop />} /> : <TrangBi />)}
       {tab === 'bag' && <TuiDo />}
       {tab === 'hoc' && <SoHoc />}
       {tab === 'kn' && <KyNang />}

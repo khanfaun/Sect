@@ -3547,6 +3547,12 @@ const TESTS = {
     ok(r.k >= 5, 'có nhiều bậc khác nhau (' + r.k + ')');
     ok(run("(()=>{const x=W().regions[0].nodes.find(n=>isTownT(n.type));return capOf(x)===capOf(x)&&!('cap' in x)})()"), 'bậc tính lại được, không lưu vào nơi');
   },
+  phap_bao_5o() {
+    fresh();
+    ok(run("PB_SLOTS.length")===5&&run("JSON.stringify(PB_REQ)")==='[1,2,3,4,5]', '5 ô pháp bảo, mở ở Trúc Cơ, Kết Đan, Nguyên Anh, Hóa Thần, Độ Kiếp');
+    const mo=[-1,0,1,2,3,4,5].map(re=>{run("devSetRealm("+re+",1)");return run("pbOpen()");});
+    ok(JSON.stringify(mo)==='[0,0,1,2,3,4,5]', 'số ô mở theo cảnh giới (phàm → Độ Kiếp): '+mo.join(','));
+  },
 };
 
 if (args.includes('--list')) { console.log(Object.keys(TESTS).join('\n')); process.exit(0); }

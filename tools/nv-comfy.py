@@ -1,10 +1,8 @@
-# Ảnh nhân vật ngồi thiền NGUYÊN VẸN (không ghép lớp) bằng ComfyUI (Qwen Image 2.1 Turbo, 127.0.0.1:8000), xuất PNG trong suốt (RGBA).
-#   python tools/nv-comfy.py goc [tuổi ...]        : ảnh gốc mỗi độ tuổi (mặt + tóc chuẩn) -> src/assets-goc/nv/goc-<tuổi>.png
-#   python tools/nv-comfy.py ao  [tuổi ...] [--ao a,b]: từ ảnh gốc, thay áo (giữ mặt, tóc) -> nv/<tuổi>-<áo>.png
-#   python tools/nv-comfy.py toc [--ao a,b]         : thanh niên: thêm 3 kiểu tóc (bạc búi, đen xoã, bạc xoã)
-#   python tools/nv-comfy.py khop [lọc]      : ghép lớp tay, cho Qwen vẽ lại miệng ống tay áo ôm cổ tay, rồi xoá tay khỏi ảnh thân -> nv/<tên>.png
-#   python tools/nv-comfy.py cat                    : thu nhỏ ảnh trong suốt -> src/assets/ui/nv-<tuổi>-<áo>[-<tóc>].webp
-#   python tools/nv-comfy.py xem <ảnh.png> [lọc]    : bảng soát
+# Ảnh nhân vật ngồi thiền NGUYÊN VẸN bằng ComfyUI (Qwen Image 2.1 Turbo, 127.0.0.1:8000), PNG trong suốt.
+# HƯỚNG DẪN ĐẦY ĐỦ: docs/thiet-ke/anh-nhan-vat.md
+#   python tools/nv-comfy.py cg [id ...] [--lai] : tạo trọn bộ áo (thay áo -> khớp tay + tóc, 2 lượt vẽ) -> src/assets-goc/nv/khop/
+#   python tools/nv-comfy.py cat                 : khop/*.png -> src/assets/nv/nv-*.webp (640px)
+# Các lệnh cũ (goc, ao, toc, toc5, khop, bac-tn, xem) giữ để tham khảo, không dùng cho bộ ảnh hiện tại.
 import glob, io, json, os, sys, time, urllib.request, uuid
 import numpy as np
 from PIL import Image

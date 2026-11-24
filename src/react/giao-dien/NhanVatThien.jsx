@@ -1,5 +1,5 @@
 // Nhân vật chính ngồi thiền (một ảnh nguyên vẹn, chuyển động bằng CSS):
-// vạt áo trái/phải đung đưa (.ofl/.ofr), hạt châu xoay + hào quang thở.
+// ảnh đứng yên (đã bỏ lớp vạt áo đung đưa và lớp thở: lệch mép thành vệt), hạt châu xoay + hào quang thở.
 // Ngoại hình (độ tuổi, tóc, áo, hạt châu) lấy từ ngoaiHinh() ở core2/84-ngoai-hinh.js nên lớn tuổi là tự đổi hình.
 import { PS } from '../html';
 import { I } from './anh';
@@ -20,7 +20,7 @@ export function NhanVatThien({ orb, cls, nut }) {
   return (
     <div className={'doll3 ' + (cls || '')} aria-hidden="true" data-tuoi={N.hien} data-toc={N.toc} data-ao={N.ao} data-anh={N.anh} data-chau={chau}>
       <div className="shd" />
-      <div className="nvk"><img className="ost" src={o} alt="" /><img className="ofl" src={o} alt="" /><img className="ofr" src={o} alt="" /></div>
+      <div className="nvk"><img className="ost" src={o} alt="" /></div>
       <div className={'hal ' + chau} />
       <div className="glw"><img className="gl" src={I('ch-glow-' + chau)} alt="" /></div>
       <div className={'hco ' + chau} />
