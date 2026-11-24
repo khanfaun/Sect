@@ -73,9 +73,11 @@ function useCanhNen(root) {
       if (!R.width || !R.height) return;
       const cx = S.left + S.width / 2 - R.left, sy = S.top + S.height / 2 - R.top;
       // cỡ ảnh theo tỉ lệ bản mẫu (nhân vật / nền); chỉ cần phủ bề ngang và phía trên, phía dưới đã có các thẻ che
-      const ih = Math.max(R.width * NEN.h / NEN.w, sy / NEN.y, D.width / NEN.rong * NEN.h / NEN.w);
+      // ảnh đủ rộng để tâm bậc thềm trùng đúng chỗ ngồi mà vẫn phủ kín hai bên (không cần dịch ngang ảnh)
+      const phu = Math.max(cx / NEN.x, (R.width - cx) / (1 - NEN.x));
+      const ih = Math.max(R.width * NEN.h / NEN.w, phu * NEN.h / NEN.w, sy / NEN.y, D.width / NEN.rong * NEN.h / NEN.w);
       const iw = ih * NEN.w / NEN.h;
-      const x0 = Math.min(0, Math.max(R.width - iw, cx - NEN.x * iw)), y0 = sy - NEN.y * ih;
+      const x0 = cx - NEN.x * iw, y0 = sy - NEN.y * ih;
       Object.assign(nen.style, { width: iw + 'px', height: ih + 'px', left: x0 + 'px', top: y0 + 'px' });
     };
     go();
