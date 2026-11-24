@@ -270,7 +270,7 @@
 :root[data-pc]:is([data-view=map],[data-view=scene]) #modal:has(.bq-home){place-items:center!important;background:rgba(7,23,18,.5)!important}
 :root[data-pc]:is([data-view=map],[data-view=scene]) #app #modal .mbox.bq-home{width:var(--pcWin)!important;height:var(--pcWinH)!important;max-height:none!important;border:2px solid var(--gd)!important;border-radius:18px!important;overflow:hidden;box-shadow:0 22px 60px rgba(7,23,18,.6)}
 :root[data-pc]:is([data-view=map],[data-view=scene]) #modal:has(.bq-home){align-items:start!important;padding-top:24px!important}
-:root[data-pc] .bq-home .bq-stage .doll3{height:78%;bottom:6%}
+:root[data-pc] .bq-home .bq-stage .doll3{height:min(52%,560px);bottom:14%}
 /* thẻ Trang bị vừa trong cửa sổ: khung nhân vật co theo bề rộng màn */
 :root[data-pc] #app .tb-wrap .tb-doll{grid-template-columns:70px clamp(250px,21vw,420px) 70px;gap:10px;padding:10px}
 :root[data-pc] #app .tb-wrap .tb-doll .tb-o .eqc{width:64px;height:64px}
