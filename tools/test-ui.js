@@ -106,6 +106,9 @@ const TESTS = {
     await p.setViewportSize({ width: 1440, height: 860 }); await p.waitForTimeout(300);
     await ev(p, () => { G.run.scene = null; UI.panel = null; UI.modal = null; render(); }); await p.waitForTimeout(300);
     await shot(p, 'pc-bando');
+    await ev(p, () => { G.run.g = 'nam'; G.run.scene = null; UI.modal = { k: 'bq' }; render(); }); await p.waitForTimeout(600);
+    ok(await ev(p, () => { const c = e => { const r = document.querySelector(e).getBoundingClientRect(); return r.top + r.height / 2; }, sh = document.querySelector('.bq-home .doll3 .shd').getBoundingClientRect(), n = document.querySelector('.bq-canh').getBoundingClientRect(); return Math.abs(c('.bq-home .orbb.l .o') - c('.bq-home .doll3 .hco')) < 8 && Math.abs(c('.bq-home .orbb.r .o') - c('.bq-home .doll3 .hco')) < 8 && Math.abs((sh.left + sh.width / 2 - n.left) / n.width - 0.5) < 0.02; }), 'PC tu luyện: Đạo tâm / Tâm ma ngang hạt châu, nhân vật giữa bậc thềm');
+    await ev(p, () => { UI.modal = null; render(); });
     await ev(p, () => { G.run.g = 'nam'; G.run.pham = 0; G.run.realm = 5; render(); ACT.devOpen(); devSt().tab = 'nv'; render(); }); await p.waitForTimeout(500);
     ok(await ev(p, () => { const x = document.querySelector('.dev-nv-xem').getBoundingClientRect(), m = document.querySelector('.mbox.dev').getBoundingClientRect(); return m.width > 1000 && x.width > 400 && x.height > 450; }), 'PC: hộp Dev test rộng, ảnh xem trước nhân vật to');
     await shot(p, 'pc-dev-nv'); await ev(p, () => { UI.modal = null; render(); });

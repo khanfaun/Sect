@@ -75,10 +75,15 @@ function useCanhNen(root) {
       // cỡ ảnh theo tỉ lệ bản mẫu (nhân vật / nền); chỉ cần phủ bề ngang và phía trên, phía dưới đã có các thẻ che
       // ảnh đủ rộng để tâm bậc thềm trùng đúng chỗ ngồi mà vẫn phủ kín hai bên (không cần dịch ngang ảnh)
       const phu = Math.max(cx / NEN.x, (R.width - cx) / (1 - NEN.x));
-      const ih = Math.max(R.width * NEN.h / NEN.w, phu * NEN.h / NEN.w, sy / NEN.y, D.width / NEN.rong * NEN.h / NEN.w);
+      // PC: nền chỉ theo cỡ nhân vật (tỉ lệ bản mẫu), phần trống xung quanh là bản mờ của chính ảnh nền (.bq-mo)
+      const pc = document.documentElement.hasAttribute('data-pc');
+      const ih = pc ? D.width / NEN.rong * NEN.h / NEN.w : Math.max(R.width * NEN.h / NEN.w, phu * NEN.h / NEN.w, sy / NEN.y, D.width / NEN.rong * NEN.h / NEN.w);
       const iw = ih * NEN.w / NEN.h;
       const x0 = cx - NEN.x * iw, y0 = sy - NEN.y * ih;
       Object.assign(nen.style, { width: iw + 'px', height: ih + 'px', left: x0 + 'px', top: y0 + 'px' });
+      // tâm hạt châu (để đặt cầu Đạo tâm / Tâm ma ngang hàng trên PC), tính theo khung chứa cầu
+      const hc = el.querySelector('.bq-stage .doll3 .hco'), ob = el.querySelector('.orbb');
+      if (hc && ob && ob.offsetParent) { const H = hc.getBoundingClientRect(), P = ob.offsetParent.getBoundingClientRect(); ob.offsetParent.style.setProperty('--chauY', (H.top + H.height / 2 - P.top) + 'px'); }
     };
     go();
     const t = setTimeout(go, 60);
@@ -90,7 +95,7 @@ function useCanhNen(root) {
 
 // Nền: chỉ ảnh phong cảnh có bậc thềm (đã bỏ lớp phủ màu theo giờ và dòng giờ)
 function TroiBeQuan() {
-  return <div className="bq-sky"><div className="bq-canh"><img className="bq-nen" src={I('nen-tu-luyen')} alt="" /></div></div>;
+  return <div className="bq-sky"><img className="bq-mo" src={I('nen-tu-luyen')} alt="" /><div className="bq-canh"><img className="bq-nen" src={I('nen-tu-luyen')} alt="" /></div></div>;
 }
 
 // Thanh tiến độ: tu vi và lịch luyện

@@ -95,8 +95,8 @@
 :root[data-pc] .bq-home .bq-top{grid-area:1/2/2/3;margin:12px 12px 0!important}
 :root[data-pc] .bq-home .bq-stage{grid-area:1/1/4/2;min-height:0}
 :root[data-pc] .bq-home .bq-stage .doll3{height:72%;bottom:9%}
-:root[data-pc] .bq-home .orbb.l{left:40px!important;top:30px!important}
-:root[data-pc] .bq-home .orbb.r{right:40px!important;top:30px!important}
+:root[data-pc] .bq-home .orbb.l{left:40px!important;top:calc(var(--chauY,65px) - 35px)!important}
+:root[data-pc] .bq-home .orbb.r{right:40px!important;top:calc(var(--chauY,65px) - 35px)!important}
 :root[data-pc] .bq-home .bq-cult{grid-area:2/2/3/3;margin:10px 12px 0!important}
 :root[data-pc] .bq-home .bq-pan,:root[data-pc] .bq-home.cgbox .bq-pan{grid-area:3/2/4/3;height:auto!important;max-height:none!important;margin:10px 12px 12px!important}
 
@@ -379,3 +379,8 @@
 :root[data-pc] #app #sheet .scard:not(.pl-home){height:auto!important;max-height:var(--pcWinH);display:flex;flex-direction:column}
 :root[data-pc] #app #sheet .scard:not(.pl-home)>.sc-b{overflow-y:auto;min-height:0}
 :root[data-pc]:is([data-view=map],[data-view=scene]) #app #sheet:has(.cbprep){width:min(1080px,var(--pcWin))!important}
+
+/* Tu luyện PC: nền bậc thềm nhỏ theo nhân vật, mép mờ dần vào bản phóng mờ của chính ảnh */
+.bq-home .bq-mo{display:none}
+:root[data-pc] .bq-home .bq-mo{display:block;position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);object-fit:cover;filter:blur(22px) brightness(.92) saturate(.9);pointer-events:none}
+:root[data-pc] .bq-home .bq-canh{-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 52%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 52%,#000 62%,transparent 100%)}
