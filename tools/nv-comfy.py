@@ -55,7 +55,8 @@ GIU_T = ("Keep his face, head size, clothes, sleeves, hands, pose, line work, si
          "Fully transparent background, output a PNG image with transparency.")
 for _k in ('ht7', 'dk1', 'dk4'): CG.pop(_k, None)   # người dùng bỏ 3 bộ này
 EO = 'Keep his body as broad and solid as in image 1: normal adult male waist and torso width, not slim, not narrow-waisted. '
-THEM_AO = {'dk6': (EO, 57), 'dk8': (EO, 57), 'dk9': (EO, 57)}   # chỉnh riêng từng bộ: (câu thêm, seed)
+KHONG_TAY = 'Absolutely NO hands and no fingers anywhere: no hands resting on the knees or thighs, the sleeve openings are empty. '
+THEM_AO = {'khach': (KHONG_TAY, 77), 'ma': (KHONG_TAY, 77), 'dk6': (EO, 57), 'dk8': (EO, 57), 'dk9': (EO, 57)}   # chỉnh riêng từng bộ: (câu thêm, seed)
 KHONG_REF = set()   # bộ nào chỉ tả bằng chữ (không dùng ảnh mẫu)
 CG_TXT = {
  'lk1': 'an ivory-white cross-collar robe with green trim and a dark green sash with a jade pendant',
