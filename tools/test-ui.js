@@ -1206,6 +1206,11 @@ const TESTS = {
     const o = await ev(p, () => document.body.innerText), ten = await ev(p, () => NTU_DATA.TU17.ket.K03.ten);
     ok(/Kết cục nghề tu/.test(o) && o.includes(ten), 'màn hết kiếp: kết cục nghề tu "' + ten + '"');
   },
+  async phuong_thi_anh(p) {
+    await ev(p, () => { devSetRealm(2, 1); openShop(null); render(); }); await p.waitForTimeout(600);
+    ok(await ev(p, () => { const c = [...document.querySelectorAll('.cell.qc')]; return c.length > 3 && c.every(x => !/đan|tán|bí tịch/i.test(x.innerText) || x.querySelector('.c-i img')); }), 'phường thị / tạp hoá: đan dược và bí tịch có ảnh');
+    ok(await ev(p, () => G.run.scene.items.filter(i => i.k === 'pill' || i.k === 'skill').length === [...document.querySelectorAll('.cell.qc .c-i img')].length - G.run.scene.items.filter(i => i.k === 'relic' || (i.k === 'qi' && ASSET.item['mat:' + i.id])).length), 'mỗi đan dược, bí tịch trong tiệm đều hiện ảnh');
+  },
 };
 
 (async () => {
