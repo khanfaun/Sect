@@ -103,7 +103,7 @@ const TESTS = {
   // xem ảnh từng ô của thành / trấn / tông môn / nơi hoang dã trên bản đồ (chỉ để chụp: --shot <thư mục>)
   async o_ban_do_anh(p) {
     await p.setViewportSize({ width: 1440, height: 860 });
-    await ev(p, () => { for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); G.run.scene = null; UI.panel = null; render(); });
+    await ev(p, () => { devMoMap(); for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); G.run.scene = null; UI.panel = null; render(); });
     for (const t of ['thanh', 'tran', 'tong', 'rung', 'tuthanh']) {
       const ok1 = await ev(p, t => { let b = null; for (const R0 of W().regions) for (const n of R0.nodes) if (n.type === t && (!b || placeCells(n).length > placeCells(b).length)) b = n; if (!b) return 0; Map2.zoom(50); Map2.focus(b.x, b.y); Map2.invalidate(); return placeCells(b).length; }, t);
       await p.waitForTimeout(900); await shot(p, 'o-' + t); ok(ok1 > 0, t + ' ' + ok1 + ' ô');

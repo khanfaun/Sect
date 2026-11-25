@@ -273,10 +273,10 @@ const Map2=(()=>{
       ctx.fillStyle=da?'#8c8c7e':'#7a5c3c';ctx.fillRect(gx-w0/2,gy-h0,w0,h0);ctx.fillStyle='#2e2c26';ctx.fillRect(gx-w0*0.18,gy-h0*0.55,w0*0.36,h0*0.55);
       ctx.beginPath();ctx.moveTo(gx-w0*0.75,gy-h0);ctx.quadraticCurveTo(gx,gy-h0-w0*0.55,gx+w0*0.75,gy-h0);ctx.closePath();ctx.fillStyle='#3d4a40';ctx.fill();}
     ctx.restore();}
-  function oDraw(ctx,n,ruin,s0,SXf,SYf){const T=oTiles(n,ruin);if(!T.length)return false;const k=s0/HEXW,sz=s0*1.32;
+  function oDraw(ctx,n,ruin,s0,SXf,SYf){const T=oTiles(n,ruin);if(!T.length)return false;const k=s0/HEXW,sz=s0*1.62;
     oWall(ctx,n,ruin,false,SXf,SYf,k);
     T.sort((a,b)=>hexCenter(a[0])[1]-hexCenter(b[0])[1]);
-    for(const [c,key] of T){const o=mapIc('o-'+key);if(!o)continue;const p=hexCenter(c),x=SXf(p[0]),y=SYf(p[1]);ctx.drawImage(o,x-sz/2,y+s0*0.55-sz,sz,sz);}
+    for(const [c,key] of T){const o=mapIc('o-'+key);if(!o)continue;const p=hexCenter(c),x=SXf(p[0]),y=SYf(p[1]);ctx.drawImage(o,x-sz/2,y-sz*0.47,sz,sz);}
     oWall(ctx,n,ruin,true,SXf,SYf,k);return true;}
   // tâm và bề rộng (đơn vị ô) của cụm ô địa điểm, để ảnh phủ đúng quy mô
   function mapFoot(n){const L=placeCells(n);let sx=0,sy=0,x0=1e9,x1=-1e9;for(const c of L){const p=hexCenter(c);sx+=p[0];sy+=p[1];x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);}

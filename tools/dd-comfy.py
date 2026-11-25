@@ -80,7 +80,7 @@ TILE = (' A single small map tile that fills ONE hexagonal map cell, seen from a
         'Crisp dark ink outlines, clear contrast, not hazy. Plain white background.')
 O = {
   # thành
-  'pho-1': 'A dense block of a city: eight tightly packed houses with dark grey tile roofs and narrow lanes.',
+  'pho-1': 'A loose cluster of six city houses with dark grey tile roofs and narrow lanes.',
   'pho-2': 'A city block: courtyard houses with grey tile roofs around small yards, a few trees.',
   'pho-3': 'A city street block: two rows of two-storey shops with tile roofs, a lantern string.',
   'dien': 'A grand palace hall with double-eaved dark green tile roof on a stone platform with steps, small courtyard.',
@@ -95,7 +95,7 @@ O = {
   'ngoi-2': 'Four wooden houses with dark tile roofs along a dirt road, a wooden fence.',
   'tranh-1': 'Three thatched-roof cottages, a haystack, a bamboo clump.',
   'tranh-2': 'Two thatched cottages beside a well and a small bamboo grove.',
-  'ruong': 'Terraced rice paddies with a small field hut.',
+  'ruong': 'A few small irregular rice paddy plots with a small field hut.',
   'dinh': 'A village communal hall with tile roof and a big banyan tree beside it.',
   'chonho': 'A small village market: a few stalls with awnings and a teahouse.',
   # tông môn
@@ -108,16 +108,16 @@ O = {
   'tcong': 'A sect mountain gate: a tall stone pailou archway at the foot of long stone stairs.',
   # hoang dã
   'ho': 'A small lake with reeds and lotus.', 'song': 'A short stretch of river with rocks and reeds.',
-  'rung-1': 'A dense clump of dark pine trees.', 'rung-2': 'A grove of broadleaf trees and bamboo.',
+  'rung-1': 'A loose clump of pine trees, like the trees on the map.', 'rung-2': 'A grove of broadleaf trees and bamboo.',
   'nui-1': 'A steep ink-wash mountain peak with pines.', 'nui-2': 'Two rocky hills with mist at their feet.',
   'hang': 'A dark cave mouth in a mossy rocky cliff.', 'dam': 'A marsh with reeds, shallow pools and twisted trees.',
   'duoc': 'A patch of spirit herbs with glowing flowers and a tiny herb hut.', 'hoang': 'Dry wasteland with sparse grass, rocks and a dead tree.',
   'mo': 'An old graveyard: tombstones, a stone stele, cypress trees.', 'phe': 'Ruins: broken walls and collapsed roofs overgrown with weeds.',
   'ltuyen': 'A glowing spirit spring pool among old stones.', 'khoang': 'A mine entrance in a rocky hill with wooden supports and an ore cart.',
-  'sao': 'A monster lair: jagged rocks, bones and a dark den.', 'ma': 'Demonic land: twisted black rocks and dead trees in dark red mist.',
+  'sao': 'A monster lair: jagged rocks, bones and a dark den.', 'ma': 'A few twisted black rocks and two dead trees with a faint red haze, on the open ground.',
   'ai': 'A mountain pass fortress gate tower in a narrow gorge.', 'bicanh': 'A glowing stone arch portal among floating rocks.',
   'ancu': 'A hermit thatched hut with bamboo and a small pond.', 'thien': 'A stone stairway climbing up a cliff into clouds.',
-  'bien': 'A rocky sea shore with waves.', 'dthien': 'A cave grotto behind a small waterfall curtain with glowing light.',
+  'bien': 'A rocky sea shore with waves.', 'dthien': 'A rounded ink-painted rocky hill like the hills on the map, with a dark cave opening and a thin white waterfall.',
   'chay': 'Burnt ruins of houses with charred beams and smoke.',
 }
 for k, t in O.items(): V['o-' + k] = (t, TILE)
