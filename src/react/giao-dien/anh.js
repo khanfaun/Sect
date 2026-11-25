@@ -74,7 +74,7 @@ export function ganAnh() {
   if (CATG) for (const id of Object.keys(CATG)) { const m = CATG[id], u = m && matImg(m); if (u) A.item['mat:' + id] = u; }
   if (A.veh) { A.veh.hac = IMG['mt-crane']; A.veh.kiem = IMG['mt-sword']; A.veh.chu = IMG['mt-phoenix']; A.veh.rua = IMG['mt-boat'] || IMG['mt-turtle']; if (IMG['mt-horse']) A.veh.ngua = IMG['mt-horse']; if (IMG['mt-deer']) A.veh.loc = IMG['mt-deer']; }
   // ảnh công trình trên bản đồ (ui/05-gfx.js: mapKey/mapIc)
-  A.map = {}; for (const k in IMG) if (k.startsWith('map-')) A.map[k] = IMG[k];
+  A.map = {}; for (const k in IMG) if (k.startsWith('map-') || k.startsWith('o-')) A.map[k] = IMG[k];
   for (const k in PLACE) A.place[k] = IMG[PLACE[k]];
   // nền riêng cho từng loại nơi (nen-<loại>), đè lên nền chung cũ
   for (const k of ['thanh', 'tutran', 'tuthanh', 'tong', 'cho', 'ancu', 'song', 'bien', 'dam', 'rung', 'nui', 'hoang', 'duoc', 'khoang', 'linhdia', 'dong', 'dongthien', 'bicanh', 'phe', 'ditich', 'como', 'ma', 'sao', 'yeusao', 'thien']) if (IMG['nen-' + k]) A.place[k] = IMG['nen-' + k];

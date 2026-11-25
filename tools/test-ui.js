@@ -100,6 +100,15 @@ const TESTS = {
   },
   // bảng treo thưởng mở thành hộp nổi (vẫn ở địa điểm), hộp nổi ở địa điểm có nút X; trang bị không còn áo choàng; túi đồ ghi tên tiền tệ
   // việc ở địa điểm (cổng sơn môn, thăm dò…) mở sự kiện thành hộp trắng ngay trên cảnh địa điểm
+  // xem ảnh từng ô của thành / trấn / tông môn / nơi hoang dã trên bản đồ (chỉ để chụp: --shot <thư mục>)
+  async o_ban_do_anh(p) {
+    await p.setViewportSize({ width: 1440, height: 860 });
+    await ev(p, () => { for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); G.run.scene = null; UI.panel = null; render(); });
+    for (const t of ['thanh', 'tran', 'tong', 'rung', 'tuthanh']) {
+      const ok1 = await ev(p, t => { let b = null; for (const R0 of W().regions) for (const n of R0.nodes) if (n.type === t && (!b || placeCells(n).length > placeCells(b).length)) b = n; if (!b) return 0; Map2.zoom(50); Map2.focus(b.x, b.y); Map2.invalidate(); return placeCells(b).length; }, t);
+      await p.waitForTimeout(900); await shot(p, 'o-' + t); ok(ok1 > 0, t + ' ' + ok1 + ' ô');
+    }
+  },
   // chụp ảnh bố cục PC (chỉ dùng khi cần nhìn: --shot <thư mục>)
   async pc_anh(p) {
     await ev(p, () => { G.run.scene = null; render(); }); await p.waitForTimeout(800); await shot(p, 'dt-bando0');
@@ -294,6 +303,9 @@ const TESTS = {
   async anh_ban_do(p) {
     const k = await ev(p, () => Object.keys(ASSET.map || {}));
     ok(k.length >= 30 && k.includes('map-thanh-3') && k.includes('map-tong-4') && k.includes('map-tran-ruin'), 'ảnh công trình bản đồ đã gắn: ' + k.length);
+    ok(['o-dien', 'o-pho-1', 'o-tdien', 'o-tcong', 'o-ho', 'o-rung-1', 'o-chay'].every(x => k.includes(x)), 'ảnh từng ô lục giác đã gắn');
+    const oc = await ev(p, () => { const L = []; for (const R0 of W().regions) for (const n of R0.nodes) if (isThanhT(n.type) && placeCells(n).length > 1) L.push(placeCells(n).length); return L; });
+    ok(oc.length > 0, 'thành chiếm nhiều ô: ' + oc.slice(0, 6).join(','));
     await ev(p, () => { for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); }).catch(() => {});
     for (let i = 0; i < 12 && !(await ev(p, () => NK.count('map.anh'))); i++) { await ev(p, () => { UI.sel = null; render(); }); await p.waitForTimeout(250); }
     const st = await ev(p, () => ({ nap: NK.count('map.anh'), im: UI._mapImN || 0 }));
