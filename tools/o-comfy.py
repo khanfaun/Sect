@@ -14,13 +14,14 @@ def hexpts(cx, cy, r): return [(cx + r * np.cos(np.radians(a)), cy + r * np.sin(
 # chỗ lấy nền: điểm (x,y) trên ảnh bản đồ gốc theo loại đất cần nền
 NEN = {'dong': (2300, 860), 'nui': (1540, 700), 'rung': (1200, 1125), 'nuoc': (1300, 872)}
 def nen(k):
-    x, y = NEN[k]; s = 46  # ~2 ô bản đồ mỗi bên -> phóng lên 512
+    x, y = NEN[k]; s = 46  # 92px gốc ~ 4 ô  # ~2 ô bản đồ mỗi bên -> phóng lên 512
     return MAP.crop((x - s, y - s, x + s, y + s)).resize((N, N), Image.BICUBIC).filter(ImageFilter.SMOOTH)
-P = ('Image 1 is an old sepia parchment ink-wash fantasy world map with a red hexagon outline drawn on it. Paint {t} INSIDE the red hexagon, '
-     'in exactly the same painting style, colors and brushwork as the surrounding map, as if it was always part of this painted map. '
-     'The painted things have a natural organic outline (NOT a hexagon-shaped block), with small gaps of map ground between them. Remove the red outline completely. Keep everything outside the hexagon unchanged. High bird view. No text.')
+P = ('Image 1 is a zoomed-in piece of an old sepia ink-wash fantasy world map, with a soft red oval mark in the middle. Paint {t} at the red mark, '
+     'about the size of the mark, with an irregular natural outline. Use the SAME loose, soft, coarse brush strokes and the same faded sepia ink tones as the surrounding map; '
+     'it must look painted by the same hand at the same scale, slightly blurry like the rest, not sharper, not more detailed, no bright colors. '
+     'Remove the red mark completely. Keep everything else unchanged. High bird view. No text.')
 def lam(ten, txt, loai, seed):
-    b = nen(loai); m = b.copy(); ImageDraw.Draw(m).polygon(hexpts(N / 2, N / 2, R), outline=(230, 20, 20), width=5)
+    b = nen(loai); m = b.copy(); ImageDraw.Draw(m).ellipse((N/2-R*0.62, N/2-R*0.5, N/2+R*0.62, N/2+R*0.5), outline=(220, 40, 30), width=4)
     fn = nv.upload('o2-' + ten + '.png', m)
     pid = nv.post('/prompt', json.dumps({'prompt': nv.wf(fn, P.format(t=txt), seed, 'o2-' + ten)}).encode(), 'application/json')['prompt_id']
     return ten, b, pid
@@ -35,12 +36,12 @@ def lay(ten, b, pid):
 def tach(ten, b):
     a = Image.open(G + ten + '.png').convert('RGB').resize((N, N))
     # mặt nạ: lục giác nới 12%, mép mờ; nhân với độ đổi màu so với nền (chỗ không vẽ gì -> trong suốt)
-    hm = Image.new('L', (N, N), 0); ImageDraw.Draw(hm).polygon(hexpts(N / 2, N / 2, R * 1.12), fill=255); hm = np.asarray(hm.filter(ImageFilter.GaussianBlur(14))) / 255
+    hm = Image.new('L', (N, N), 0); ImageDraw.Draw(hm).ellipse((N/2-R*0.95, N/2-R*0.85, N/2+R*0.95, N/2+R*0.8), fill=255); hm = np.asarray(hm.filter(ImageFilter.GaussianBlur(28))) / 255  # tròn, mép loang, không theo hình ô
     d = np.abs(np.asarray(a, np.float32) - np.asarray(b, np.float32)).max(axis=2)
     d = np.asarray(Image.fromarray(np.clip(d * 3, 0, 255).astype(np.uint8)).filter(ImageFilter.MinFilter(9)).filter(ImageFilter.MaxFilter(13)).filter(ImageFilter.GaussianBlur(4)), np.float32) / 255
     al = np.clip(hm * np.clip(d * 1.6, 0, 1), 0, 1)
     o = Image.fromarray(np.dstack([np.asarray(a), (al * 255).astype(np.uint8)]))
-    c = int(R * 1.3); o = o.crop((N // 2 - c, N // 2 - c - 10, N // 2 + c, N // 2 + c - 10)).resize((192, 192), Image.LANCZOS)
+    o = o.resize((184, 184), Image.LANCZOS).filter(ImageFilter.GaussianBlur(0.4)).crop((46, 40, 138, 132))  # 92px = 2 ô, đúng độ nét bản đồ gốc x2
     o.save('src/assets/ui/o-' + ten + '.webp', 'WEBP', quality=86, method=6); print('xong', ten, flush=True)
 O = {k: v for k, v in dd.O.items()}
 LOAI = {'ho': 'nuoc', 'song': 'nuoc', 'bien': 'nuoc', 'dam': 'nuoc', 'nui-1': 'nui', 'nui-2': 'nui', 'hang': 'nui', 'khoang': 'nui', 'tnui': 'nui', 'ai': 'nui', 'thien': 'nui', 'dthien': 'nui', 'rung-1': 'rung', 'rung-2': 'rung'}
