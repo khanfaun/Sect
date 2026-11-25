@@ -106,7 +106,7 @@ const TESTS = {
     await ev(p, () => { devMoMap(); for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); G.run.scene = null; UI.panel = null; render(); });
     for (const t of ['thanh', 'tran', 'tong', 'rung', 'tuthanh']) {
       const ok1 = await ev(p, t => { let b = null; for (const R0 of W().regions) for (const n of R0.nodes) if (n.type === t && (!b || placeCells(n).length > placeCells(b).length)) b = n; if (!b) return 0; Map2.zoom(50); Map2.focus(b.x, b.y); Map2.invalidate(); return placeCells(b).length; }, t);
-      await p.waitForTimeout(900); await shot(p, 'o-' + t); ok(ok1 > 0, t + ' ' + ok1 + ' ô');
+      for (const bl of ['source-over', 'multiply']) { await ev(p, bl => { UI.mapBlend = bl; Map2.invalidate(); }, bl); await p.waitForTimeout(900); await shot(p, 'o-' + t + '-' + (bl === 'multiply' ? 'mul' : 'thuong')); } ok(ok1 > 0, t + ' ' + ok1 + ' ô');
     }
   },
   // chụp ảnh bố cục PC (chỉ dùng khi cần nhìn: --shot <thư mục>)
@@ -302,8 +302,8 @@ const TESTS = {
   // giao diện mới (kiểu Ngọc Hành Trình): thanh dưới 7 ô có ảnh, nút Nhân vật/Túi đồ, nhân vật ngồi thiền, ảnh vật phẩm
   async anh_ban_do(p) {
     const k = await ev(p, () => Object.keys(ASSET.map || {}));
-    ok(k.length >= 30 && k.includes('map-thanh-3') && k.includes('map-tong-4') && k.includes('map-tran-ruin'), 'ảnh công trình bản đồ đã gắn: ' + k.length);
-    ok(['o-dien', 'o-pho-1', 'o-tdien', 'o-tcong', 'o-ho', 'o-rung-1', 'o-chay'].every(x => k.includes(x)), 'ảnh từng ô lục giác đã gắn');
+    ok(k.length >= 30 && k.includes('map-thanh-7a') && k.includes('map-tongnui-9a') && k.includes('map-tran-ruin'), 'ảnh công trình bản đồ đã gắn: ' + k.length);
+    ok(['map-thanh-5a', 'map-tran-1', 'map-tongnui-3a', 'map-tong-3a', 'map-ancu-1'].every(x => k.includes(x)), 'ảnh địa điểm nguyên khối (ComfyUI) đã gắn');
     const oc = await ev(p, () => { const L = []; for (const R0 of W().regions) for (const n of R0.nodes) if (isThanhT(n.type) && placeCells(n).length > 1) L.push(placeCells(n).length); return L; });
     ok(oc.length > 0, 'thành chiếm nhiều ô: ' + oc.slice(0, 6).join(','));
     await ev(p, () => { for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); }).catch(() => {});

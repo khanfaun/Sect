@@ -118,6 +118,7 @@
  "core2/03-cong-hien-tong-mon.js",
  "content/rules/mapd.js",
  "core2/03b-dia-hinh-du-lieu.js",
+ "core2/03c-o-phang.js",
  "content/items/pham.js",
  "content/items/pham-m.js",
  "content/items/slots.js",
@@ -401,5 +402,6 @@
  "ui/38-loi-ke-dia-diem.js",
  "core2/89-viec-goi-su-kien.js",
  "core2/90-tru-nhan.js",
+ "core2/91-dia-diem-co-dinh.js",
  "nap:devBotNap"
 ]

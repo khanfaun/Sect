@@ -13,3 +13,10 @@ src/assets-goc/nv/*
 src/assets-goc/dia-diem/
 src/assets-goc/ban-do/ve/
 src/assets-goc/ban-do/ve-an/
+# ảnh trung gian vẽ địa điểm (dd-ve-ban-do / thu-ve-moi); chỉ giữ ảnh mẫu đã duyệt
+src/assets-goc/ban-do/dd/*
+!src/assets-goc/ban-do/dd/thu-moi/
+src/assets-goc/ban-do/dd/thu-moi/*
+!src/assets-goc/ban-do/dd/thu-moi/DAT-*
+!src/assets-goc/ban-do/dd/thu-moi/ref-1.webp
+!src/assets-goc/ban-do/dd/thu-moi/ref-2.webp
