@@ -39,16 +39,39 @@ def ve(ids):
 def mo(a, r=24):
     from PIL import ImageFilter
     return np.asarray(Image.fromarray(a.astype(np.uint8)).filter(ImageFilter.GaussianBlur(r)), np.float32)
+def duong_cat(d):
+    """Đường cắt dọc ít khác biệt nhất qua vùng gối (quy hoạch động): trả về cột cắt cho từng hàng."""
+    h, w = d.shape; c = d.copy(); bk = np.zeros((h, w), np.int8)
+    for y in range(1, h):
+        p = c[y - 1]; l = np.r_[np.inf, p[:-1]]; r = np.r_[p[1:], np.inf]
+        st = np.stack([l, p, r]); k = st.argmin(0); c[y] += st[k, np.arange(w)]; bk[y] = k - 1
+    x = np.empty(h, int); x[-1] = int(c[-1].argmin())
+    for y in range(h - 1, 0, -1): x[y - 1] = x[y] + bk[y, x[y]]
+    return x
+def noi(A, B, ov, doc=True, fe=10):
+    """Nối A (trái/trên) với B (phải/dưới), gối ov điểm ảnh, theo đường cắt; mép mờ fe."""
+    if not doc: return noi(A.transpose(1, 0, 2), B.transpose(1, 0, 2), ov, True, fe).transpose(1, 0, 2)
+    h = A.shape[0]; a = A[:, -ov:]; b = B[:, :ov]
+    d = np.abs(a - b).mean(2); d = mo(np.repeat(d[..., None], 3, 2), 2)[..., 0]
+    d[:, :fe] += 1e6; d[:, -fe:] += 1e6  # không cắt sát mép
+    x = duong_cat(d); xx = np.arange(ov)[None, :]
+    m = np.clip((xx - x[:, None]) / fe + 0.5, 0, 1)[..., None]  # 0 = lấy A, 1 = lấy B
+    return np.concatenate([A[:, :-ov], a * (1 - m) + b * m, B[:, ov:]], 1)
 def ghep(out):
     big = np.asarray(Image.open(SRC).convert('RGB').resize((W, H), Image.BICUBIC), np.float32)
-    acc = np.zeros((H, W, 3), np.float32); wt = np.zeros((H, W, 1), np.float32)
-    r = np.minimum(np.arange(T) + 1, T - np.arange(T)).astype(np.float32); r = np.clip(r / OV, 0.02, 1)
-    m = (r[:, None] * r[None, :])[..., None]
-    for i, (x, y) in enumerate(TILES):
-        t = np.asarray(Image.open(TMP + f'{i}.png').convert('RGB').resize((T, T), Image.LANCZOS), np.float32)
-        g = big[y:y + T, x:x + T]; t = t - mo(t) + mo(g)  # giữ tông màu mảng lớn của bản cũ, lấy nét mới
-        acc[y:y + T, x:x + T] += t * m; wt[y:y + T, x:x + T] += m
-    Image.fromarray(np.clip(acc / wt, 0, 255).astype(np.uint8)).save(out)
+    rows = []
+    for y in ys:
+        row = None; x0 = 0
+        for x in xs:
+            i = TILES.index((x, y))
+            t = np.asarray(Image.open(TMP + f'{i}.png').convert('RGB').resize((T, T), Image.LANCZOS), np.float32)
+            g = big[y:y + T, x:x + T]; t = t - mo(t) + mo(g)  # giữ tông màu mảng lớn của bản cũ, lấy nét mới
+            if row is None: row = t
+            else: row = noi(row, t, x0 + row.shape[1] - x if False else (row.shape[1] - x), True)
+        rows.append(row[:, :W])
+    img = rows[0]
+    for k in range(1, len(ys)): img = noi(img, rows[k], img.shape[0] - ys[k], False)
+    Image.fromarray(np.clip(img[:H, :W], 0, 255).astype(np.uint8)).save(out)
 def an(src, out):
     """Bản chưa khám phá: nét của bản mới in mờ lên giấy trơn (Transition-map), không màu."""
     a = np.asarray(Image.open(src).convert('RGB'), np.float32) / 255
