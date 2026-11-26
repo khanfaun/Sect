@@ -174,69 +174,6 @@ const Map2=(()=>{
     let o=MIMG[id];if(!o){const im=new Image();o=MIMG[id]={im,ok:false,i:0};const B=['src/'+q+'/ban-do/',q+'/ban-do/'];const go=()=>{im.src=B[o.i]+encodeURIComponent(f);};
       im.onload=()=>{o.ok=true;invalidate();};im.onerror=()=>{o.i++;if(o.i<B.length)go();};go();}
     return o.ok?o.im:null;}
-  // ----- bản đồ lục giác 3D (docs/thiet-ke/ban-do-luc-giac-3d.md, tools/lg-ghep.py): quận có trong LG_QUAN thì dán ảnh quận lên trên ảnh bản đồ cũ,
-  // địa điểm trong quận đó vẽ bằng ảnh 3D src/assets/luc-giac/dd-*.webp -----
-  const LGI={};
-  function lgImg(f){let o=LGI[f];if(!o){const im=new Image();o=LGI[f]={im,ok:false,i:0};const B=['src/assets/luc-giac/','assets/luc-giac/'];const go=()=>{im.src=B[o.i]+f+'.webp';};
-      im.onload=()=>{o.ok=true;invalidate();};im.onerror=()=>{o.i++;if(o.i<B.length)go();else o.bad=true;};go();}
-    return o.ok?o.im:null;}
-  function lgN(){let n=0;for(const k in LGI)if(LGI[k].ok)n++;return n;}
-  function lgDraw(g){if(typeof LG_QUAN==='undefined')return;for(const q in LG_QUAN){const b=LG_QUAN[q],im=lgImg('quan-'+q);if(im)g.drawImage(im,SX(b.x),SY(b.y),b.w*cam.z,b.h*cam.z);}lgVat(g);}
-  // ô có địa điểm của thế giới hiện tại (cây, núi ở đó không vẽ); tính lại khi thế giới / số nơi đổi
-  let LGP=null;function lgPlaces(){const w=W();let n=0;for(const R0 of w.regions)n+=R0.nodes.length;const key=w.seed+':'+n;
-    if(!LGP||LGP.key!==key){const s=new Set();for(const R0 of w.regions)for(const x of R0.nodes)if(!x.wp)for(const c of placeCells(x))s.add(c);LGP={key,s,bo:{}};}return LGP;}
-  // cây, núi, đá… (LG_VAT: [ô, ảnh, x, y chân, cao, cha]) đã xếp theo chân; núi nhỏ dự phòng (cha>=0) chỉ vẽ khi núi to của nó bị bỏ
-  function lgVat(g){if(typeof LG_VAT==='undefined')return;const P=lgPlaces(),z=cam.z;
-    for(const q in LG_VAT.q){const L=LG_VAT.q[q];let bo=P.bo[q];if(!bo){bo=P.bo[q]=new Uint8Array(L.length);for(let j=0;j<L.length;j++)if(P.s.has(L[j][0]))bo[j]=1;}
-      for(let j=0;j<L.length;j++){const v=L[j];if(v[5]>=0?(!bo[v[5]]||bo[j]):bo[j])continue;const im=lgImg('v-'+LG_VAT.k[v[1]]);if(!im)continue;
-        const h=v[4]*z,w=h*im.naturalWidth/im.naturalHeight,x=SX(v[2]),y=SY(v[3]);if(x+w<0||x-w>W0||y<0||y-h>H0)continue;
-        g.fillStyle='rgba(0,0,0,0.22)';g.beginPath();g.ellipse(x+w*0.06,y-h*0.02,w*0.42,Math.max(1,h*0.07),0,0,6.3);g.fill();g.drawImage(im,x-w/2,y-h,w,h);}}}
-  // nơi nằm trong ảnh quận nào thì theo các ô đã vẽ (LG_QUAN[q].o), không theo số quận (ranh quận có thể khác giữa các thế giới)
-  let LGO=null;function lgQuan(n){if(typeof LG_QUAN==='undefined')return false;if(!LGO){LGO=new Set();for(const q in LG_QUAN)for(const c of LG_QUAN[q].o||[])LGO.add(c);}return LGO.has(n.hex);}
-  // ----- địa điểm = lục giác lớn, MỖI Ô MỘT CÔNG TRÌNH (core2/33 hinhLG): ô giữa là công trình chính, ô dưới cùng là cổng,
-  // còn lại là nhà / tháp / lầu…; tông môn xen ô cảnh (núi, hồ, thác, đảo bay); thành có tường theo mép cụm -----
-  const LG_BO={
-    tong:{tam:'o-tong-chinh',tamTo:'o-tong-dinh',cong:'o-tong-cong',nha:['o-tong-thap','o-tong-lau','o-tong-dien','o-tong-dan','o-tong-vo','o-tong-xa'],canh:['o-tong-nui','o-tong-ho','o-tong-thac','o-tong-tung','o-tong-dao','o-tong-nui'],ti:0.35},
-    thanh:{tam:'o-thanh-cung',cong:'o-thanh-cong',nha:['o-thanh-nha-0','o-thanh-nha-1','o-thanh-nha-2','o-thanh-cho','o-thanh-lau','o-thanh-mieu','o-thanh-phu','o-thanh-nha-0'],canh:[],ti:0},
-    tran:{mot:'o-tran-lang',tam:'o-tran-chinh',nha:['o-tran-nha-0','o-tran-nha-1','o-tran-ruong','o-tran-gieng','o-tran-mieu','o-tran-ruong'],canh:[],ti:0}};
-  // nơi hoang dã 7 ô: ô giữa là ảnh nơi (dd-<loại>), vòng ngoài là cảnh hợp loại
-  const LG_VONG={como:['o-bia'],ditich:['o-bia'],duoc:['o-duoc'],khoang:['o-khoang'],linhdia:['o-linh'],bicanh:['o-linh'],dongthien:['o-linh','v-nui-2'],
-    rung:['v-cay-la-0','v-cay-la-1','v-cay-nd-2'],nui:['v-nui-0','v-nui-1','v-nui-2'],dam:['v-say-0','v-say-1'],hoang:['v-da-0','v-da-1'],ancu:['v-truc-0','v-cay-la-2']};
-  const lgCo=k=>typeof LG_DD!=='undefined'&&LG_DD.includes(k);
-  function lgBo(n){const t=n.type;return t==='tong'?LG_BO.tong:isThanhT(t)?LG_BO.thanh:isTownT(t)||t==='cho'?LG_BO.tran:null;}
-  // vai từng ô: [ô, ảnh, bề ngang (ô)], tính một lần cho mỗi nơi
-  const LGV={};
-  function lgVai(n){const L=placeCells(n),key=n.id+':'+L.length+':'+n.type+':'+L[0];if(LGV[n.id]&&LGV[n.id].key===key)return LGV[n.id].v;
-    const B=lgBo(n),c0=n.hex,R=Math.max(0,...L.map(c=>hexD(c,c0))),out=[],h=c=>(hashS('lgo'+n.id+':'+c)>>>3)%1000/1000,P=c=>hexCenter(c);
-    if(L.length===1){const k=B?(B.mot||B.tam):'dd-'+(MAP_AL[n.type]||n.type);if(lgCo(k))out.push([c0,k,B?1.1:1.2]);}
-    else if(B){let cong=-1,bac=-1;for(const c of L){if(hexD(c,c0)!==R)continue;const p=P(c),q=P(c0);if(cong<0||p[1]>P(cong)[1]+1||(Math.abs(p[1]-P(cong)[1])<=1&&Math.abs(p[0]-q[0])<Math.abs(P(cong)[0]-q[0])))cong=c;}
-      if(R>=2&&B.tamTo){for(const c of L)if(hexD(c,c0)===1&&(bac<0||P(c)[1]<P(bac)[1]))bac=c;}
-      let j=0;for(const c of L){const d=hexD(c,c0),r=h(c);let k,s=1.0;
-        if(c===c0){k=R>=2&&B.tamTo?B.tamTo:B.tam;s=R>=2&&B.tamTo?1.9:1.25;}
-        else if(c===cong){k=B.cong;s=1.1;}else if(c===bac){k=B.tam;s=1.25;}
-        else if(B.canh.length&&r<B.ti+(d===R&&R>1?0.15:0)){k=B.canh[Math.floor(h(c+7)*B.canh.length)];s=k==='o-tong-dao'?0.95:1.1;}
-        else{k=B.nha[(j++ +Math.floor(r*7))%B.nha.length];}
-        if(lgCo(k))out.push([c,k,s]);}}
-    else{const k='dd-'+(MAP_AL[n.type]||n.type);if(lgCo(k))out.push([c0,k,1.25]);const V=LG_VONG[n.type]||['v-cay-la-0','v-cay-la-2'];
-      for(const c of L)if(c!==c0&&h(c)<0.7){const k2=V[Math.floor(h(c+3)*V.length)];if(lgCo(k2))out.push([c,k2,k2.startsWith('v-')?(k2.startsWith('v-nui')?1.1:0.7):1.15]);}}
-    LGV[n.id]={key,v:out};return out;}
-  // đế lục giác dưới mỗi công trình: khối đá / đất nện khớp đúng ô, dày như ô địa hình (tools/lg-ghep.py DAY), mặt trên lát ảnh t-lat / t-datnen
-  const LG_NANG=HEXW*0.035,LG_DAY=HEXW*0.16,LG_DE=HEXW*0.07;
-  function lgDe(c,tex,z){const g=geo(),[cx,cy]=hexCenter(c),up=(g.el[c]||0)*LG_NANG+LG_DE,v=hexVerts(c).map(([x,y])=>[cx+(x-cx)*0.94,cy+(y-cy)*0.94-up]),dn=up+LG_DAY;
-    const im=lgImg(tex);let col=tex==='t-lat'?[176,172,160]:[160,128,92];
-    for(const [a,b,f] of [[1,2,0.62],[2,3,0.5],[3,4,0.44],[4,5,0.56]]){const A=v[a],B=v[b];ctx.beginPath();ctx.moveTo(SX(A[0]),SY(A[1]));ctx.lineTo(SX(B[0]),SY(B[1]));ctx.lineTo(SX(B[0]),SY(B[1]+dn));ctx.lineTo(SX(A[0]),SY(A[1]+dn));ctx.closePath();ctx.fillStyle=`rgb(${col.map(x=>x*f|0)})`;ctx.fill();}
-    ctx.save();ctx.beginPath();v.forEach(([x,y],i)=>i?ctx.lineTo(SX(x),SY(y)):ctx.moveTo(SX(x),SY(y)));ctx.closePath();
-    if(im){ctx.clip();const k=(hashS('de'+c)>>>4)%1000/1000,sw=im.naturalWidth*0.3,ox=k*(im.naturalWidth-sw),oy=((k*7)%1)*(im.naturalHeight-sw),R=HEXW*0.6;ctx.drawImage(im,ox,oy,sw,sw,SX(cx-R),SY(cy-up-R),2*R*z,2*R*z);}
-    else{ctx.fillStyle=`rgb(${col})`;ctx.fill();}ctx.restore();
-    ctx.beginPath();[4,5,0,1].forEach((q,i)=>i?ctx.lineTo(SX(v[q][0]),SY(v[q][1])):ctx.moveTo(SX(v[q][0]),SY(v[q][1])));ctx.strokeStyle='rgba(255,255,240,.35)';ctx.lineWidth=Math.max(0.6,z*0.8);ctx.stroke();
-    return up;}
-  // vẽ cả nơi; trả về số ô đã vẽ (0: chưa nạp ảnh nào -> vẽ kiểu cũ)
-  function lgDiem(n,z){const V=lgVai(n);if(!V.length)return 0;const B=lgBo(n),tex=B&&B!==LG_BO.tran?'t-lat':'t-datnen',items=[],de=[];let ok=0;
-    for(const [c,k,s] of V){const im=lgImg(k);if(!im)continue;const p=hexCenter(c);de.push([p[1],c,!k.startsWith('v-')]);const w=HEXW*s,hh=w*im.naturalHeight/im.naturalWidth;items.push([p[1],im,p[0],w,hh,c]);ok++;}
-    if(!ok)return 0;const UP={};de.sort((a,b)=>a[0]-b[0]);for(const [,c,co] of de)UP[c]=co?lgDe(c,tex,z):(geo().el[c]||0)*LG_NANG;
-    for(const it of items)it[0]=it[0]+HEXW*0.26-UP[it[5]];
-    items.sort((a,b)=>a[0]-b[0]);for(const [y,im,x,w,hh] of items){ctx.fillStyle='rgba(0,0,0,.2)';ctx.beginPath();ctx.ellipse(SX(x),SY(y-HEXW*0.02),w*z*0.4,Math.max(1,w*z*0.08),0,0,6.3);ctx.fill();ctx.drawImage(im,SX(x-w/2),SY(y-hh),w*z,hh*z);}
-    return ok;}
   let LCV=null;function layerCv(){const w=Math.max(1,Math.round(W0*dpr)),h=Math.max(1,Math.round(H0*dpr));if(!LCV)LCV=document.createElement('canvas');if(LCV.width!==w||LCV.height!==h){LCV.width=w;LCV.height=h;}return LCV;}
   // ----- mặt nạ "đã thấy": mỗi ô đã thấy là một vệt mực; ô mới thấy loang dần ra -----
   let INK=null;const INK_MS=1700,INK_ST=8;
@@ -324,18 +261,18 @@ const Map2=(()=>{
     if(cam.follow&&r.moving){cam.x=pos[0];cam.y=pos[1];clampCam();}
     const z=cam.z,X0=reg*1000;
     // nền + lưới chỉ vẽ lại khi camera, tầm nhìn, ô chọn đổi; còn lại (mây, hạt, đi đường) chỉ dán lại ảnh đệm
-    const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,UI.mark&&UI.mark.k,UI.hold&&UI.hold.c,lv,imgN,lgN()].join('|');
+    const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,UI.mark&&UI.mark.k,UI.hold&&UI.hold.c,lv,imgN].join('|');
     const bgHit=BGK===bgKey&&BGC&&!(INK&&INK.anim);const realCtx=ctx;ctx.setTransform(dpr,0,0,dpr,0,0);
     if(!bgHit){if(!BGC)BGC=document.createElement('canvas');const bw=Math.round(W0*dpr),bh=Math.round(H0*dpr);if(BGC.width!==bw||BGC.height!==bh){BGC.width=bw;BGC.height=bh;}ctx=BGC.getContext('2d');}
     if(!bgHit){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle=C.dark?C.bg2:mixHex(C.paper,C.bg2,0.55);ctx.fillRect(0,0,W0,H0);
     // nền: ảnh "chưa tới" phủ cả bản đồ; chỗ đã đi qua hoặc đang thấy hiện ảnh chi tiết, viền chuyển tiếp là giấy loang mực
     {const hid=mapImg('hid'),bk=mapImg('bk'),tr=mapImg('tr');const X=SX(0),Y=SY(0),Wd=WORLD_W*z,Hd=WORLD_H*z;
-      if(!CFG.terrain){if(bk)ctx.drawImage(bk,X,Y,Wd,Hd);lgDraw(ctx);}
+      if(!CFG.terrain){if(bk)ctx.drawImage(bk,X,Y,Wd,Hd);}
       else{if(hid)ctx.drawImage(hid,X,Y,Wd,Hd);
         const M=inkMask(now);if(M&&bk){const L=layerCv();const g=L.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);
           if(tr){g.globalCompositeOperation='source-over';g.drawImage(tr,X,Y,Wd,Hd);g.globalCompositeOperation='destination-in';g.drawImage(M.outer,X,Y,Wd,Hd);
             g.globalCompositeOperation='source-over';ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=0.9;ctx.drawImage(L,0,0);ctx.restore();g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);}
-          g.globalCompositeOperation='source-over';g.drawImage(bk,X,Y,Wd,Hd);lgDraw(g);g.globalCompositeOperation='destination-in';g.drawImage(M.inner,X,Y,Wd,Hd);g.globalCompositeOperation='source-over';
+          g.globalCompositeOperation='source-over';g.drawImage(bk,X,Y,Wd,Hd);g.globalCompositeOperation='destination-in';g.drawImage(M.inner,X,Y,Wd,Hd);g.globalCompositeOperation='source-over';
           ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(L,0,0);ctx.restore();
           if(M.rim)ctx.drawImage(M.rim,X,Y,Wd,Hd);
           const NW=nowMask();if(NW){g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);g.globalCompositeOperation='source-over';
@@ -426,18 +363,13 @@ const Map2=(()=>{
     // một ô lục giác có cả địa điểm lẫn người (ngươi, hoặc thực thể đang dừng chân): địa điểm lùi sang trái, người sang phải, cả hai nhỏ lại cho khỏi đè nhau
     const HW=HEXW/2*z;const OCC=new Set();if(!r.moving&&!HT._me)OCC.add(r.at);
     if(CFG.ents){const sr0=senseR();for(const e of entsHere(reg)){if(HE[e.type]||e.to!=null)continue;const p=entXY(e);if(Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr0)OCC.add(e.at);}}
-    UI._mapImN=0;UI._mapBadgeN=0;UI._lgN=0;for(const k in NPOS)delete NPOS[k];
+    UI._mapImN=0;UI._mapBadgeN=0;for(const k in NPOS)delete NPOS[k];
     if(showIc)for(const R0 of w.regions)for(const n of R0.nodes){const k=R0.k;if(n.fog<1)continue;if(HT[n.type])continue;const [nx,ny]=mapNode(n);let x=SX(nx),y=SY(ny);if(x<-60||y<-60||x>W0+60||y>H0+60)continue;const under=OCC.has(n.id);const sN=s0;
       const sure=n.fog>=2||n.memory;const old=n.fog>=2&&n.seenT>=0&&w.t-n.seenT>HY;NPOS[n.id]=[x,y+s0/2+(under?5:3)+(CFG.font==='m'?14:17)+(old&&!under?14:0),y-sN*0.95];const ruin=(n.vstate||'ok')==='ruin'&&n.fog>=2;const sel=UI.sel===n.id;
       const col=C[NODE_CAT[n.type]||'ink'];
       
-      {const lgOk=sure&&!ruin&&lgQuan(n);let lgD=0;
-        if(lgOk){const dg=dangerTag(n);ctx.save();if(old)ctx.globalAlpha=0.72;const L=placeCells(n);
-          if(dg>0||sel){const q=hexCenter(n.hex),rr=HEXW*z*0.55*Math.sqrt(L.length);ctx.beginPath();ctx.ellipse(SX(q[0]),SY(q[1]),rr,rr*0.55,0,0,6.3);ctx.fillStyle=hexA(sel?C.gold:DC[dg],sel?0.4:0.3);ctx.fill();}
-          lgD=lgDiem(n,z);ctx.restore();if(lgD){x=SX(hexCenter(n.hex)[0]);UI._mapImN=(UI._mapImN||0)+1;UI._lgN=(UI._lgN||0)+1;}}
-        const ik=sure&&!lgD?mapKey(n,ruin):null,im=ik&&mapIc(ik);
-        if(lgD){}
-        else if(im){const ft=mapFoot(n),a0=hexCenter(n.hex),sz=sN/0.97*im.naturalWidth/64,fy=SY(a0[1])+sz/2,dg=dangerTag(n);x=SX(a0[0]); // tâm ảnh = tâm ô gốc (tools/dd2-comfy.py)
+      {const ik=sure?mapKey(n,ruin):null,im=ik&&mapIc(ik);
+        if(im){const ft=mapFoot(n),a0=hexCenter(n.hex),sz=sN/0.97*im.naturalWidth/64,fy=SY(a0[1])+sz/2,dg=dangerTag(n);x=SX(a0[0]); // tâm ảnh = tâm ô gốc (tools/dd2-comfy.py)
           ctx.save();if(old)ctx.globalAlpha=0.72;
           if(dg>0||sel){const rr=sN*0.55*Math.sqrt(ft.n);ctx.beginPath();ctx.ellipse(x,SY(ft.y)+sN*0.25,rr,rr*0.4,0,0,6.3);ctx.fillStyle=hexA(sel?C.gold:DC[dg],sel?0.55:0.45);ctx.fill();}
           if(sel&&lv>0){ctx.shadowColor=C.gold;ctx.shadowBlur=10;}ctx.globalCompositeOperation=UI.mapBlend||'source-over';ctx.drawImage(im,x-sz/2,fy-sz,sz,sz);x=SX(ft.x);ctx.restore();UI._mapImN=(UI._mapImN||0)+1;}

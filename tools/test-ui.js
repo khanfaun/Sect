@@ -109,23 +109,6 @@ const TESTS = {
       for (const bl of ['source-over', 'multiply']) { await ev(p, bl => { UI.mapBlend = bl; Map2.invalidate(); }, bl); await p.waitForTimeout(900); await shot(p, 'o-' + t + '-' + (bl === 'multiply' ? 'mul' : 'thuong')); } ok(ok1 > 0, t + ' ' + ok1 + ' ô');
     }
   },
-  // bản đồ lục giác 3D: quận có ảnh (LG_QUAN, tools/lg-ghep.py) dán lên bản đồ, địa điểm trong quận vẽ bằng ảnh 3D
-  async luc_giac(p) {
-    await p.setViewportSize({ width: 1440, height: 860 });
-    const q = await ev(p, () => { devMoMap(); for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); G.run.scene = null; UI.panel = null; render();
-      const d = Object.keys(LG_QUAN)[0], b = LG_QUAN[d];
-      Map2.zoom(50); Map2.focus(b.x + b.w / 2, b.y + b.h / 2); Map2.invalidate(); return { d, n: b.o.length }; });
-    ok(q.n > 0, 'quận ' + q.d + ' có ' + q.n + ' ô');
-    for (let i = 0; i < 12 && !(await ev(p, () => (UI._lgN || 0) > 0)); i++) { await ev(p, () => { Map2.invalidate(); render(); }); await p.waitForTimeout(300); }
-    ok(await ev(p, () => (UI._lgN || 0) > 0), 'địa điểm trong quận vẽ bằng ảnh 3D (' + await ev(p, () => UI._lgN) + ' nơi)');
-    await p.waitForTimeout(500); await shot(p, 'luc-giac-quan');
-    await ev(p, () => { Map2.zoom(-50); Map2.invalidate(); }); await p.waitForTimeout(600); await shot(p, 'luc-giac-xa');
-    // gần tông môn lớn nhất trong ảnh quận (ban ngày)
-    const tg = await ev(p, () => { CFG.daynight = false; let b = null; const S = new Set(Object.values(LG_QUAN).flatMap(q => q.o)); for (const R0 of W().regions) for (const n of R0.nodes) if (n.type === 'tong' && S.has(n.hex) && (!b || placeCells(n).length > placeCells(b).length)) b = n;
-      if (!b) return 0; const q = hexCenter(b.hex); Map2.zoom(80); Map2.focus(q[0], q[1] - 20); Map2.invalidate(); return placeCells(b).length; });
-    await p.waitForTimeout(900); await shot(p, 'luc-giac-tong'); ok(tg >= 7, 'tông môn trong quận: ' + tg + ' ô');
-    ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
-  },
   // chụp ảnh bố cục PC (chỉ dùng khi cần nhìn: --shot <thư mục>)
   async pc_anh(p) {
     await ev(p, () => { G.run.scene = null; render(); }); await p.waitForTimeout(800); await shot(p, 'dt-bando0');

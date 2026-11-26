@@ -99,8 +99,7 @@ function dangerWhy(n){const g=dangerTag(n);if(SETTLE.includes(n.type))return g?c
 // tính lại từ seed + id, không lưu gì vào G.run
 function capOf(n){if(!n)return 1;if(n.type==='tong')return Math.max(1,Math.min(4,n.quy||1));
   const h=hashS('pm'+W().seed+':'+n.id),i=h>>>6;
-  // thành trấn: bậc theo cỡ lục giác (core2/33 lgCo): thành 7 ô bậc 1–2, 19 ô bậc 3; trấn 1 ô bậc 1, 7 ô bậc 2–3
-  if(isTownT(n.type)){const c=placeCells(n).length;return isThanhT(n.type)?(c>=19?3:1+i%2):(c>=7?2+i%2:1);}
+  if(isTownT(n.type))return isThanhT(n.type)?[1,3,2][i%3]:[1,2,3][i%3];
   if(n.type==='cho')return 1+i%2;
   return (n.danger||0)>=2?2:1;}
 // ----- thông tin thêm cho thẻ địa điểm: thế lực tọa trấn, quy mô, đôi dòng mô tả (cố định theo từng nơi) -----
