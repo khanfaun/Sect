@@ -20,3 +20,6 @@ src/assets-goc/ban-do/dd/thu-moi/*
 !src/assets-goc/ban-do/dd/thu-moi/DAT-*
 !src/assets-goc/ban-do/dd/thu-moi/ref-1.webp
 !src/assets-goc/ban-do/dd/thu-moi/ref-2.webp
+!src/assets-goc/luc-giac/
+src/assets-goc/luc-giac/*
+!src/assets-goc/luc-giac/quan-*.json

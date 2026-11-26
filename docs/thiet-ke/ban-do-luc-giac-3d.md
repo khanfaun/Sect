@@ -32,3 +32,20 @@ Người dùng yêu cầu ngày 2026-11-26. Thay hướng cũ (vẽ thuỷ mặc
 4. **Địa điểm**: giảm số, cỡ theo quy mô, ngẫu nhiên kiếp đầu, giãn cách; ảnh 3D mới + trang trí rìa.
 5. **Dấu sự kiện** trên bản đồ (ông lão, lá thư, yêu lang…).
 6. (Sau) biến thể địa điểm theo đại khu vực.
+
+## Demo một quận (2026-11-26): Xích Hà Quận (số 13, Nam Trạch)
+Ảnh xem: `docs/thiet-ke/anh/quan-13-xem.jpg` (ghép thử), `quan-13-trong-game.jpg`.
+Quy trình cho một quận:
+1. `python tools/lg-comfy.py dat [loại…]` — ComfyUI (Qwen 2.1 Turbo, **vẽ thẳng từ chữ**, latent rỗng `EmptySD3LatentImage`) vẽ mặt đất nhìn thẳng từ trên, 2 tấm/loại.
+   Vẽ từ ảnh màu mẫu thì mô hình bám màu phẳng / vệt mờ của ảnh mẫu, không dùng.
+2. `python tools/lg-comfy.py vat [tên…]` — cây, núi, đá, sậy, địa điểm (nền trong suốt sẵn). Lời nhắc cấm đế vuông.
+   Ảnh gốc ở `src/assets-goc/luc-giac/` (không lưu git, trừ `quan-*.json`).
+3. `node tools/lg-xuat.js <quận>` — xuất ô / độ cao / sinh thái / địa điểm.
+4. `python tools/lg-ghep.py src/assets-goc/luc-giac/quan-<số>.json` — cắt ô lục giác (cắt chỗ ngẫu nhiên, xoay 60°, chỉnh sáng; nước chỉ lấy phần giữa tấm),
+   khối dày + nâng theo độ cao, nước lún xuống, khe hở tối. Ra `src/assets/luc-giac/quan-<số>.webp`, ảnh vật `v-*.webp`, ảnh địa điểm `dd-*.webp`,
+   và `content/rules/luc-giac.js` (`LG_QUAN` khung + ô, `LG_DD`, `LG_VAT` danh sách cây/núi). Thêm `--dd --xem tệp.jpg` để xem thử cả địa điểm.
+5. Game (`src/game/ui/05-gfx.js`, `lgDraw` / `lgVat` / `lgKey`): dán ảnh quận lên trên ảnh bản đồ cũ (vẫn dưới sương), vẽ cây/núi lúc chạy và
+   **bỏ ô có địa điểm** (địa điểm đổi theo thế giới); núi to bị bỏ thì hiện núi nhỏ dự phòng. Địa điểm trong quận dùng ảnh `dd-*`
+   (tông môn ≥9 ô dùng tông môn bay). Bài giao diện `luc_giac`.
+Còn lại: các quận khác + loại đất lạnh/khô (tuyết, lá kim…); ranh quận khác giữa thế giới nên game nhận quận theo danh sách ô;
+cỡ tông môn hiện vẫn theo bố cục cũ (7/9 ô), làm 10/20/40 ở bước 4.

@@ -174,6 +174,31 @@ const Map2=(()=>{
     let o=MIMG[id];if(!o){const im=new Image();o=MIMG[id]={im,ok:false,i:0};const B=['src/'+q+'/ban-do/',q+'/ban-do/'];const go=()=>{im.src=B[o.i]+encodeURIComponent(f);};
       im.onload=()=>{o.ok=true;invalidate();};im.onerror=()=>{o.i++;if(o.i<B.length)go();};go();}
     return o.ok?o.im:null;}
+  // ----- bản đồ lục giác 3D (docs/thiet-ke/ban-do-luc-giac-3d.md, tools/lg-ghep.py): quận có trong LG_QUAN thì dán ảnh quận lên trên ảnh bản đồ cũ,
+  // địa điểm trong quận đó vẽ bằng ảnh 3D src/assets/luc-giac/dd-*.webp -----
+  const LGI={};
+  function lgImg(f){let o=LGI[f];if(!o){const im=new Image();o=LGI[f]={im,ok:false,i:0};const B=['src/assets/luc-giac/','assets/luc-giac/'];const go=()=>{im.src=B[o.i]+f+'.webp';};
+      im.onload=()=>{o.ok=true;invalidate();};im.onerror=()=>{o.i++;if(o.i<B.length)go();else o.bad=true;};go();}
+    return o.ok?o.im:null;}
+  function lgN(){let n=0;for(const k in LGI)if(LGI[k].ok)n++;return n;}
+  function lgDraw(g){if(typeof LG_QUAN==='undefined')return;for(const q in LG_QUAN){const b=LG_QUAN[q],im=lgImg('quan-'+q);if(im)g.drawImage(im,SX(b.x),SY(b.y),b.w*cam.z,b.h*cam.z);}lgVat(g);}
+  // ô có địa điểm của thế giới hiện tại (cây, núi ở đó không vẽ); tính lại khi thế giới / số nơi đổi
+  let LGP=null;function lgPlaces(){const w=W();let n=0;for(const R0 of w.regions)n+=R0.nodes.length;const key=w.seed+':'+n;
+    if(!LGP||LGP.key!==key){const s=new Set();for(const R0 of w.regions)for(const x of R0.nodes)if(!x.wp)for(const c of placeCells(x))s.add(c);LGP={key,s,bo:{}};}return LGP;}
+  // cây, núi, đá… (LG_VAT: [ô, ảnh, x, y chân, cao, cha]) đã xếp theo chân; núi nhỏ dự phòng (cha>=0) chỉ vẽ khi núi to của nó bị bỏ
+  function lgVat(g){if(typeof LG_VAT==='undefined')return;const P=lgPlaces(),z=cam.z;
+    for(const q in LG_VAT.q){const L=LG_VAT.q[q];let bo=P.bo[q];if(!bo){bo=P.bo[q]=new Uint8Array(L.length);for(let j=0;j<L.length;j++)if(P.s.has(L[j][0]))bo[j]=1;}
+      for(let j=0;j<L.length;j++){const v=L[j];if(v[5]>=0?(!bo[v[5]]||bo[j]):bo[j])continue;const im=lgImg('v-'+LG_VAT.k[v[1]]);if(!im)continue;
+        const h=v[4]*z,w=h*im.naturalWidth/im.naturalHeight,x=SX(v[2]),y=SY(v[3]);if(x+w<0||x-w>W0||y<0||y-h>H0)continue;
+        g.fillStyle='rgba(0,0,0,0.22)';g.beginPath();g.ellipse(x+w*0.06,y-h*0.02,w*0.42,Math.max(1,h*0.07),0,0,6.3);g.fill();g.drawImage(im,x-w/2,y-h,w,h);}}}
+  // nơi nằm trong ảnh quận nào thì theo các ô đã vẽ (LG_QUAN[q].o), không theo số quận (ranh quận có thể khác giữa các thế giới)
+  let LGO=null;function lgQuan(n){if(typeof LG_QUAN==='undefined')return false;if(!LGO){LGO=new Set();for(const q in LG_QUAN)for(const c of LG_QUAN[q].o||[])LGO.add(c);}return LGO.has(n.hex);}
+  const LG_TO={tong:1,thanh:1,tuthanh:1,tran:1,tutran:1,cho:1};
+  function lgKey(n){const t=n.type;let k;if(t==='tong')k=placeCells(n).length>=9?'dd-tong-lon':'dd-tong';else if(isThanhT(t))k='dd-thanh';else if(LG_TO[t]||isTownT(t))k='dd-tran';else k='dd-'+(MAP_AL[t]||t);
+    return typeof LG_DD!=='undefined'&&LG_DD.includes(k)?k:null;}
+  // khung ảnh địa điểm (toạ độ thế giới): nơi lớn phủ cụm ô, nơi nhỏ cỡ hơn một ô; chân ảnh ở mép dưới cụm
+  function lgFoot(n,im){const L=placeCells(n);let x0=1e9,x1=-1e9,sx=0,yb=-1e9;for(const c of L){const p=hexCenter(c);x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);sx+=p[0];yb=Math.max(yb,p[1]);}
+    const w=LG_TO[n.type]||isTownT(n.type)?(x1-x0+HEXW)*1.25:HEXW*1.7,h=w*im.naturalHeight/im.naturalWidth,y=yb+HEXW*0.35-(LG_TO[n.type]?0:HEXW*0.15);return {x:sx/L.length,y,w,h,n:L.length};}
   let LCV=null;function layerCv(){const w=Math.max(1,Math.round(W0*dpr)),h=Math.max(1,Math.round(H0*dpr));if(!LCV)LCV=document.createElement('canvas');if(LCV.width!==w||LCV.height!==h){LCV.width=w;LCV.height=h;}return LCV;}
   // ----- mặt nạ "đã thấy": mỗi ô đã thấy là một vệt mực; ô mới thấy loang dần ra -----
   let INK=null;const INK_MS=1700,INK_ST=8;
@@ -261,18 +286,18 @@ const Map2=(()=>{
     if(cam.follow&&r.moving){cam.x=pos[0];cam.y=pos[1];clampCam();}
     const z=cam.z,X0=reg*1000;
     // nền + lưới chỉ vẽ lại khi camera, tầm nhìn, ô chọn đổi; còn lại (mây, hạt, đi đường) chỉ dán lại ảnh đệm
-    const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,UI.mark&&UI.mark.k,UI.hold&&UI.hold.c,lv,imgN].join('|');
+    const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,UI.mark&&UI.mark.k,UI.hold&&UI.hold.c,lv,imgN,lgN()].join('|');
     const bgHit=BGK===bgKey&&BGC&&!(INK&&INK.anim);const realCtx=ctx;ctx.setTransform(dpr,0,0,dpr,0,0);
     if(!bgHit){if(!BGC)BGC=document.createElement('canvas');const bw=Math.round(W0*dpr),bh=Math.round(H0*dpr);if(BGC.width!==bw||BGC.height!==bh){BGC.width=bw;BGC.height=bh;}ctx=BGC.getContext('2d');}
     if(!bgHit){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle=C.dark?C.bg2:mixHex(C.paper,C.bg2,0.55);ctx.fillRect(0,0,W0,H0);
     // nền: ảnh "chưa tới" phủ cả bản đồ; chỗ đã đi qua hoặc đang thấy hiện ảnh chi tiết, viền chuyển tiếp là giấy loang mực
     {const hid=mapImg('hid'),bk=mapImg('bk'),tr=mapImg('tr');const X=SX(0),Y=SY(0),Wd=WORLD_W*z,Hd=WORLD_H*z;
-      if(!CFG.terrain){if(bk)ctx.drawImage(bk,X,Y,Wd,Hd);}
+      if(!CFG.terrain){if(bk)ctx.drawImage(bk,X,Y,Wd,Hd);lgDraw(ctx);}
       else{if(hid)ctx.drawImage(hid,X,Y,Wd,Hd);
         const M=inkMask(now);if(M&&bk){const L=layerCv();const g=L.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);
           if(tr){g.globalCompositeOperation='source-over';g.drawImage(tr,X,Y,Wd,Hd);g.globalCompositeOperation='destination-in';g.drawImage(M.outer,X,Y,Wd,Hd);
             g.globalCompositeOperation='source-over';ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=0.9;ctx.drawImage(L,0,0);ctx.restore();g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);}
-          g.globalCompositeOperation='source-over';g.drawImage(bk,X,Y,Wd,Hd);g.globalCompositeOperation='destination-in';g.drawImage(M.inner,X,Y,Wd,Hd);g.globalCompositeOperation='source-over';
+          g.globalCompositeOperation='source-over';g.drawImage(bk,X,Y,Wd,Hd);lgDraw(g);g.globalCompositeOperation='destination-in';g.drawImage(M.inner,X,Y,Wd,Hd);g.globalCompositeOperation='source-over';
           ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(L,0,0);ctx.restore();
           if(M.rim)ctx.drawImage(M.rim,X,Y,Wd,Hd);
           const NW=nowMask();if(NW){g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);g.globalCompositeOperation='source-over';
@@ -363,13 +388,16 @@ const Map2=(()=>{
     // một ô lục giác có cả địa điểm lẫn người (ngươi, hoặc thực thể đang dừng chân): địa điểm lùi sang trái, người sang phải, cả hai nhỏ lại cho khỏi đè nhau
     const HW=HEXW/2*z;const OCC=new Set();if(!r.moving&&!HT._me)OCC.add(r.at);
     if(CFG.ents){const sr0=senseR();for(const e of entsHere(reg)){if(HE[e.type]||e.to!=null)continue;const p=entXY(e);if(Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr0)OCC.add(e.at);}}
-    UI._mapImN=0;UI._mapBadgeN=0;for(const k in NPOS)delete NPOS[k];
+    UI._mapImN=0;UI._mapBadgeN=0;UI._lgN=0;for(const k in NPOS)delete NPOS[k];
     if(showIc)for(const R0 of w.regions)for(const n of R0.nodes){const k=R0.k;if(n.fog<1)continue;if(HT[n.type])continue;const [nx,ny]=mapNode(n);let x=SX(nx),y=SY(ny);if(x<-60||y<-60||x>W0+60||y>H0+60)continue;const under=OCC.has(n.id);const sN=s0;
       const sure=n.fog>=2||n.memory;const old=n.fog>=2&&n.seenT>=0&&w.t-n.seenT>HY;NPOS[n.id]=[x,y+s0/2+(under?5:3)+(CFG.font==='m'?14:17)+(old&&!under?14:0),y-sN*0.95];const ruin=(n.vstate||'ok')==='ruin'&&n.fog>=2;const sel=UI.sel===n.id;
       const col=C[NODE_CAT[n.type]||'ink'];
       
-      {const ik=sure?mapKey(n,ruin):null,im=ik&&mapIc(ik);
-        if(im){const ft=mapFoot(n),a0=hexCenter(n.hex),sz=sN/0.97*im.naturalWidth/64,fy=SY(a0[1])+sz/2,dg=dangerTag(n);x=SX(a0[0]); // tâm ảnh = tâm ô gốc (tools/dd2-comfy.py)
+      {const lk=sure&&!ruin&&lgQuan(n)?lgKey(n):null,lim=lk&&lgImg(lk);const ik=sure&&!lim?mapKey(n,ruin):null,im=ik&&mapIc(ik);
+        if(lim){const f=lgFoot(n,lim),dg=dangerTag(n);ctx.save();if(old)ctx.globalAlpha=0.72;
+          if(dg>0||sel){const rr=HEXW*z*0.55*Math.sqrt(f.n);ctx.beginPath();ctx.ellipse(SX(f.x),SY(f.y)-HEXW*z*0.2,rr,rr*0.4,0,0,6.3);ctx.fillStyle=hexA(sel?C.gold:DC[dg],sel?0.55:0.45);ctx.fill();}
+          if(sel&&lv>0){ctx.shadowColor=C.gold;ctx.shadowBlur=10;}ctx.drawImage(lim,SX(f.x-f.w/2),SY(f.y-f.h),f.w*z,f.h*z);ctx.restore();x=SX(f.x);UI._mapImN=(UI._mapImN||0)+1;UI._lgN=(UI._lgN||0)+1;}
+        else if(im){const ft=mapFoot(n),a0=hexCenter(n.hex),sz=sN/0.97*im.naturalWidth/64,fy=SY(a0[1])+sz/2,dg=dangerTag(n);x=SX(a0[0]); // tâm ảnh = tâm ô gốc (tools/dd2-comfy.py)
           ctx.save();if(old)ctx.globalAlpha=0.72;
           if(dg>0||sel){const rr=sN*0.55*Math.sqrt(ft.n);ctx.beginPath();ctx.ellipse(x,SY(ft.y)+sN*0.25,rr,rr*0.4,0,0,6.3);ctx.fillStyle=hexA(sel?C.gold:DC[dg],sel?0.55:0.45);ctx.fill();}
           if(sel&&lv>0){ctx.shadowColor=C.gold;ctx.shadowBlur=10;}ctx.globalCompositeOperation=UI.mapBlend||'source-over';ctx.drawImage(im,x-sz/2,fy-sz,sz,sz);x=SX(ft.x);ctx.restore();UI._mapImN=(UI._mapImN||0)+1;}
