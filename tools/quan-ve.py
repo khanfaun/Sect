@@ -376,7 +376,7 @@ def loang(mk_vung, seed=5, rong=110):
     a = np.clip(t + 0.5, 0, 1); a = a * a * (3 - 2 * a)
     return ndi.gaussian_filter(a, 1.5)
 
-def ghep_mem(cu, mo, mk, rong=110):
+def ghep_mem(cu, mo, mk, rong=110, giu_cay=None):
     """cu: nền gốc, mo: kết quả (float HxWx3), mk: mặt nạ vẽ bù (HxW 0..1). Khớp màu cả vùng, rồi trong dải chuyển tiếp kéo dần mảng màu lớn
     (nhoè 40 đ.ả) của bản vẽ về mảng màu của nền -> chuyển tông mượt, nét giữ nguyên; cuối cùng ghép theo mép loang mực."""
     m3 = mk[..., None]
@@ -395,8 +395,23 @@ def ghep_mem(cu, mo, mk, rong=110):
     ab = ab * (1 - vr) + tran * vr
     ab = ab * (1 - 0.18 * vr)  # bớt bão hoà thêm ở rìa
     L[..., 1:] = ab; mo = np.clip(skc.lab2rgb(L), 0, 1) * 255
+    if giu_cay is None: giu_cay = os.environ.get('GIU_CAY', '1') != '0'  # tuỳ nơi: GIU_CAY=0 để tắt (vd khi nét gốc lấp ló qua mây / thân nơi đó)
+    if not giu_cay:
+        a3 = a[..., None]; return np.clip(cu * (1 - a3) + mo * a3, 0, 255), a
+    # giữ cây cối của bản đồ: (1) cụm cây dày ở phía trước (dưới) chân nơi đó thì bản gốc phủ lên, (2) trong dải chuyển tiếp nét gốc đậm hơn thì thắng
+    lum = lambda x: x @ np.array([0.299, 0.587, 0.114], np.float32)
+    Lg = lum(cu); muc = np.clip((ndi.gaussian_filter(Lg, 25) - Lg) / 35, 0, 1)        # nét mực của bản gốc (cây, mép núi)
+    day = ndi.gaussian_filter(muc, 14); cum = np.clip((day - 0.18) / 0.15, 0, 1)    # cụm nét dày = cụm cây
+    ys = np.nonzero(mk > 0.5)[0]; y0, y1 = (np.percentile(ys, 55), ys.max()) if ys.size else (0, 1)
+    duoi = np.clip((np.arange(mk.shape[0], dtype=np.float32) - y0) / max(1.0, (y1 - y0) * 0.5), 0, 1)[:, None]  # nửa dưới vùng vẽ = phía trước
+    truoc = ndi.gaussian_filter(cum * duoi * np.clip(1 - sau * 0.6, 0, 1), 4)
+    a = a * (1 - truoc)
     a3 = a[..., None]
-    return np.clip(cu * (1 - a3) + mo * a3, 0, 255), a
+    out = cu * (1 - a3) + mo * a3
+    dai = np.clip((1 - sau) * 1.4, 0, 1) * (a > 0.01)                                  # dải chuyển tiếp
+    Lo = lum(out); thang = np.clip((Lo - Lg) / 25, 0, 1) * muc * dai                  # gốc đậm hơn ở chỗ có nét -> giữ nét gốc
+    out = out * (1 - thang[..., None]) + cu * thang[..., None]
+    return np.clip(out, 0, 255), a
 
 def ghep_k(q, k, anh):
     d = D(q); v = json.load(open(d + f'ra/v{k}.json')); lam = Image.open(d + 'lam.png').convert('RGB')
