@@ -70,6 +70,43 @@ def wf(img1, prompt, seed, pre, img2=None, mask=None, res=N):
         w['9']['inputs']['model'] = ['21', 0]; w['12']['inputs']['model'] = ['21', 0]; w['13']['inputs']['latent_image'] = ['20', 0]
     return w
 
+def wf_lp(img1, prompt, seed, pre, mask, mo='klein', res=N, buoc=None, refs=()):
+    """Vẽ bù bằng LanPaint (lấy mẫu chuyên cho inpaint: vùng khoanh vẽ mới, mép tự nối) trên Klein 9B hoặc Qwen 2.1."""
+    T = lambda ct, ins, t: {'class_type': ct, 'inputs': ins, '_meta': {'title': t}}
+    w = {'6': T('LoadImage', {'image': img1}, 'Map crop'),
+         '19': T('LoadImageMask', {'image': mask, 'channel': 'red'}, 'Inpaint mask'),
+         '10': T('RandomNoise', {'noise_seed': seed}, 'Noise'),
+         '11': T('KSamplerSelect', {'sampler_name': 'euler'}, 'Sampler'),
+         '18': T('VAEEncode', {'pixels': ['6', 0], 'vae': ['5', 0]}, 'Encode map'),
+         '20': T('SetLatentNoiseMask', {'samples': ['18', 0], 'mask': ['19', 0]}, 'Noise mask'),
+         '13': T('LanPaint_SamplerCustomAdvanced', {'noise': ['10', 0], 'guider': ['9', 0], 'sampler': ['11', 0], 'sigmas': ['12', 0], 'latent_image': ['20', 0],
+                 'LanPaint_NumSteps': 5, 'LanPaint_Lambda': 4.0, 'LanPaint_StepSize': 0.15, 'LanPaint_Beta': 1.0, 'LanPaint_Friction': 15.0,
+                 'LanPaint_PromptMode': 'Image First', 'LanPaint_EarlyStop': 1, 'LanPaint_Info': '', 'LanPaint_InnerThreshold': 0.02, 'LanPaint_InnerPatience': 1}, 'LanPaint sample'),
+         '14': T('VAEDecode', {'samples': ['13', 0], 'vae': ['5', 0]}, 'Decode'),
+         '15': T('SaveImage', {'images': ['14', 0], 'filename_prefix': pre}, 'Save')}
+    if mo == 'klein':
+        w.update({'1': T('UNETLoader', {'unet_name': 'flux-2-klein-9b-kv-fp8.safetensors', 'weight_dtype': 'default'}, 'FLUX.2 Klein 9B'),
+                  '4': T('CLIPLoader', {'clip_name': 'qwen_3_8b_fp8mixed.safetensors', 'type': 'flux2', 'device': 'default'}, 'Text encoder'),
+                  '5': T('VAELoader', {'vae_name': 'flux2-vae.safetensors'}, 'VAE'),
+                  '7': T('CLIPTextEncode', {'clip': ['4', 0], 'text': prompt}, 'Prompt'),
+                  '8': T('ReferenceLatent', {'conditioning': ['7', 0], 'latent': ['18', 0]}, 'Map as reference'),
+                  **{f'3{i}': T('LoadImage', {'image': r}, f'Style ref {i + 1}') for i, r in enumerate(refs)},
+                  **{f'4{i}': T('VAEEncode', {'pixels': [f'3{i}', 0], 'vae': ['5', 0]}, f'Encode ref {i + 1}') for i, r in enumerate(refs)},
+                  **{f'5{i}': T('ReferenceLatent', {'conditioning': ['8' if i == 0 else f'5{i - 1}', 0], 'latent': [f'4{i}', 0]}, f'Style ref {i + 1}') for i, r in enumerate(refs)},
+                  '21': T('ConditioningZeroOut', {'conditioning': ['7', 0]}, 'Negative'),
+                  '9': T('CFGGuider', {'model': ['1', 0], 'positive': [f'5{len(refs) - 1}' if refs else '8', 0], 'negative': ['21', 0], 'cfg': 1.0}, 'Guider'),
+                  '12': T('Flux2Scheduler', {'steps': buoc or 8, 'width': res, 'height': res}, 'Scheduler')})
+    else:
+        enc = {'clip': ['4', 0], 'vae': ['5', 0], 'prompt': prompt, 'negative_prompt': '', 'resolution': res, 'images.image_1': ['6', 0]}
+        w.update({'1': T('UNETLoader', {'unet_name': MODEL, 'weight_dtype': 'default'}, 'Qwen 2.1 full'),
+                  '2': T('QwenImage21Cache', {'model': ['1', 0], 'device': 'auto', 'dtype': 'default'}, 'Cache'),
+                  '4': T('CLIPLoader', {'clip_name': 'qwen3vl_8b_int8_convrot.safetensors', 'type': 'qwen_image', 'device': 'default'}, 'Text encoder'),
+                  '5': T('VAELoader', {'vae_name': 'qwen_image_2.1_vae_bf16.safetensors'}, 'VAE'),
+                  '8': T('TextEncodeQwenImage21', enc, 'Encode'),
+                  '9': T('CFGGuider', {'model': ['2', 0], 'positive': ['8', 0], 'negative': ['8', 1], 'cfg': 1.0}, 'Guider'),
+                  '12': T('BasicScheduler', {'model': ['2', 0], 'scheduler': 'simple', 'steps': buoc or 25, 'denoise': 1.0}, 'Scheduler')})
+    return w
+
 # ---------- lời tả ----------
 GOC_NHIN = ("seen from a high oblique bird's-eye view, about 40 degrees down, from the front (south), facades facing the viewer, "
             "like the mountains and trees of the map; NOT a top-down plan view, NOT isometric")
@@ -268,9 +305,115 @@ def ghep_lai(q, den=99):
         ghep_khung(lam, xong, x, y, ra); print('ghép khung', k, (x, y), 'nắn tối đa', round(dl), 'đ.ả')
     lam.save(d + 'lam.png'); np.save(d + 'xong.npy', xong)
 
-# ---------- cắt ô ảnh ----------
-def xuat(q):
+# ---------- vẽ bù thẳng lên tấm bản đồ (không vẽ mẫu riêng) ----------
+KIEU = ("Use EXACTLY the map's own style and colours: the same brown-black ink lines, the same warm sepia, ochre and faded grey-green washes with the same darkness and contrast "
+        "as the surrounding mountains and trees, the same paper; nothing paler, greyer or hazier than the rest of the map. ")
+NOI_VB = ("It grows naturally out of the surrounding land, with trees and low hills of the map overlapping its base; no border, no halo, no pale patch. "
+          "Keep everything outside the blurred area exactly as it is. No text.")
+P_VB = {
+    'tong': ("Inpaint the blurred area of this hand-painted antique Chinese fantasy world map. Paint there, directly on the map, a grand and majestic immortal "
+             "cultivation sect: a cluster of steep rock peaks crowned with many tiers of palace halls, pagodas and pavilions joined by long stone stairways and arched bridges, "
+             "a great hall on the highest summit; several small mountains FLOATING in the sky above and around it carrying pavilions, with thin waterfalls pouring from them and "
+             "chains linking them to the peaks; bands of soft cloud drifting horizontally across the middle of the peaks, so it looks immensely tall. "
+             "Seen from the same high oblique bird's-eye view as the mountains of the map (not top-down). " + KIEU + NOI_VB),
+    'thanh': ("Inpaint the blurred area of this hand-painted antique Chinese fantasy world map. Paint there, directly on the map, a walled ancient Chinese city: "
+              "stone walls with crenellations following the lie of the land, a gate tower in the front wall, corner towers, streets packed with tiled roofs, a palace hall in the middle. "
+              "Seen from the same high oblique bird's-eye view as the mountains of the map (not top-down). " + KIEU + NOI_VB),
+}
+
+def ve_k(q, k, loai, seed=71):
+    """Khung k: 1536 ở mức 2 (cỡ thật khi phóng sát), cắt thẳng từ bản đang vẽ (lam.png; khung 0 từ nền gốc).
+    Vùng nơi đó chỉ làm nhoè (giữ tông màu tại chỗ, mô hình vẽ mới chứ không chép), mặt nạ vẽ bù 1.0, mép mềm. Khung sau thấy cả phần khung trước đã vẽ."""
     d = D(q); B = json.load(open(d + 'bocuc.json', encoding='utf-8')); K = B['K']
+    src = d + ('lam.png' if k > 0 and os.path.exists(d + 'lam.png') else 'nen.png')
+    nen = Image.open(src).convert('RGB'); W, H = nen.size
+    if k == 0: nen.save(d + 'lam.png')
+    n = max([x for x in B['noi'] if x['t'] == loai], key=lambda x: x['o'])
+    R = {1: 0, 7: 1, 19: 2, 37: 3}.get(n['o'], 0); cx, cy = px(K, *n['c'])
+    rx = (2 * R + 1) * 30 * S2 * 0.62; day = cy + (R + 0.8) * 26 * S2
+    cao = rx * (2.6 if loai == 'tong' else 1.5)  # tông môn vươn cao (núi bay), thành thấp
+    x0 = int(min(max(0, cx - N / 2), W - N)); y0 = int(min(max(0, day + 160 - N), H - N))
+    cr = nen.crop((x0, y0, x0 + N, y0 + N))
+    yy, xx = np.mgrid[0:N, 0:N].astype(np.float32); X, Y = xx + x0, yy + y0
+    rng = np.random.default_rng(seed + k); nz = ndi.gaussian_filter(rng.standard_normal((N, N)), 45); nz /= np.abs(nz).max()
+    tamy = day - cao / 2; dy = (Y - tamy) / (cao / 2); dx = (X - cx) / rx
+    mk = (np.sqrt(dx * dx + dy * dy) + 0.15 * nz) < 1
+    mm = ndi.gaussian_filter(mk.astype(np.float32), 18)
+    lo = ndi.gaussian_filter(ndi.binary_erosion(mk, iterations=30).astype(np.float32), 20)
+    a = np.asarray(cr, np.float32); mo = ndi.gaussian_filter(a, (24, 24, 0))
+    vao = a * (1 - lo[..., None]) + mo * lo[..., None]
+    Image.fromarray(vao.astype(np.uint8)).save(d + f'ra/qv{q}-v{k}-vao.png')
+    Image.fromarray((np.clip(mm * 1.15, 0, 1) * 255).astype(np.uint8)).convert('RGB').save(d + f'ra/qv{q}-v{k}-mn.png')
+    json.dump({'x': x0, 'y': y0, 'id': n['id']}, open(d + f'ra/v{k}.json', 'w'))
+    json.dump(wf(f'qv{q}-v{k}-vao.png', P_VB[loai], seed, f'qv{q}-v{k}', mask=f'qv{q}-v{k}-mn.png'), open(d + f'ra/v{k}-wf.json', 'w'))
+    print('khung', k, (x0, y0), 'nơi', n['t'], n['o'], 'ô ->', os.path.abspath(d + f'ra/v{k}-wf.json'))
+
+def khop_mau(ra, goc, m):
+    """Chỉnh màu vùng vừa vẽ theo chính chỗ đó trên bản đồ: độ sáng, độ tương phản, sắc vàng / đỏ (LAB) về gần bản gốc,
+    tính trên vùng mặt nạ, áp dần theo mặt nạ (mép giữ nguyên)."""
+    from skimage import color as skc
+    A = skc.rgb2lab(np.asarray(ra, np.float32) / 255); G = skc.rgb2lab(np.asarray(goc, np.float32) / 255)
+    w = m[..., 0] > 0.5; out = A.copy()
+    for c, st in ((0, 0.85), (1, 0.9), (2, 0.9)):
+        ma, sa = A[..., c][w].mean(), A[..., c][w].std() + 1e-3; mg, sg = G[..., c][w].mean(), G[..., c][w].std() + 1e-3
+        mt = ma + (mg - ma) * st; s_ = sa + (max(sg, sa * 0.8) - sa) * st if c == 0 else sa
+        out[..., c] = (A[..., c] - ma) * (s_ / sa) + mt
+    rgb = np.clip(skc.lab2rgb(out), 0, 1) * 255
+    return rgb * m + np.asarray(ra, np.float32) * (1 - m)
+
+def loang(mk_vung, seed=5, rong=110):
+    """Độ trong ghép kiểu mực loang: theo khoảng cách tới mép vùng vẽ, cộng nhiễu nhiều tầng (méo không đều) và sợi toả theo hướng ra ngoài,
+    nên mép là vệt mực thấm giấy chứ không phải mép mờ đều. rong: bề rộng dải chuyển tiếp (đ.ả)."""
+    vung = mk_vung > 0.5
+    din = ndi.distance_transform_edt(vung); dout = ndi.distance_transform_edt(~vung); dd = din - dout  # >0 trong vùng
+    H, W = vung.shape; rng = np.random.default_rng(seed)
+    nz = sum(ndi.gaussian_filter(rng.standard_normal((H, W)), s) * w for s, w in ((60, 1.0), (22, 0.55), (7, 0.3)))
+    nz /= np.abs(nz).max() + 1e-6
+    gy, gx = np.gradient(ndi.gaussian_filter(dd, 8)); an = np.arctan2(gy, gx)
+    fib = ndi.gaussian_filter(rng.standard_normal((H, W)), 1.2); fib = ndi.gaussian_filter(fib, (6 * np.abs(np.sin(an)).mean() + 2, 2))  # sợi mảnh
+    fib /= np.abs(fib).max() + 1e-6
+    t = (dd + rong * 0.55 * nz + rong * 0.12 * fib) / rong
+    a = np.clip(t + 0.5, 0, 1); a = a * a * (3 - 2 * a)
+    return ndi.gaussian_filter(a, 1.5)
+
+def ghep_mem(cu, mo, mk, rong=110):
+    """cu: nền gốc, mo: kết quả (float HxWx3), mk: mặt nạ vẽ bù (HxW 0..1). Khớp màu cả vùng, rồi trong dải chuyển tiếp kéo dần mảng màu lớn
+    (nhoè 40 đ.ả) của bản vẽ về mảng màu của nền -> chuyển tông mượt, nét giữ nguyên; cuối cùng ghép theo mép loang mực."""
+    m3 = mk[..., None]
+    mo = khop_mau(Image.fromarray(np.clip(mo, 0, 255).astype(np.uint8)), Image.fromarray(cu.astype(np.uint8)), m3)
+    a = loang(mk, rong=rong)
+    sau = np.clip(ndi.distance_transform_edt(a > 0.02) / (rong * 2.2), 0, 1)  # 0 ở mép -> 1 sâu bên trong
+    lo_c = ndi.gaussian_filter(cu, (40, 40, 0)); lo_m = ndi.gaussian_filter(mo, (40, 40, 0))
+    keo = (1 - sau)[..., None] ** 1.5
+    mo = mo + (lo_c - lo_m) * keo
+    # càng ra rìa càng bớt vàng: sắc độ (a*, b* LAB) không được đậm hơn đất bản đồ quanh đó, kéo dần về sắc độ nền; thêm giảm bão hoà nhẹ theo rìa
+    from skimage import color as skc
+    L = skc.rgb2lab(np.clip(mo, 0, 255) / 255); Lc = skc.rgb2lab(cu / 255)
+    nen_ab = ndi.gaussian_filter(Lc[..., 1:], (60, 60, 0))
+    vr = np.clip((1 - sau) * 1.25, 0, 1)[..., None]  # 1 ở mép, 0 sâu bên trong
+    ab = L[..., 1:]; tran = np.sign(nen_ab) * np.minimum(np.abs(ab), np.abs(nen_ab) + 1.5)  # không vượt sắc độ nền
+    ab = ab * (1 - vr) + tran * vr
+    ab = ab * (1 - 0.18 * vr)  # bớt bão hoà thêm ở rìa
+    L[..., 1:] = ab; mo = np.clip(skc.lab2rgb(L), 0, 1) * 255
+    a3 = a[..., None]
+    return np.clip(cu * (1 - a3) + mo * a3, 0, 255), a
+
+def ghep_k(q, k, anh):
+    d = D(q); v = json.load(open(d + f'ra/v{k}.json')); lam = Image.open(d + 'lam.png').convert('RGB')
+    ra = Image.open(anh).convert('RGB').resize((N, N), Image.LANCZOS)
+    m = np.asarray(Image.open(d + f'ra/qv{q}-v{k}-mn.png').convert('L'), np.float32)[..., None] / 255
+    cu = np.asarray(lam.crop((v['x'], v['y'], v['x'] + N, v['y'] + N)), np.float32)
+    ra_ = np.asarray(ra, np.float32); out, _ = ghep_mem(cu, ra_, m[..., 0])
+    lam.paste(Image.fromarray(out.astype(np.uint8)), (v['x'], v['y'])); lam.save(d + 'lam.png')
+    import shutil, glob; shutil.rmtree('src/assets/ban-do/o', ignore_errors=True)
+    if os.path.exists('src/game/core2/03d-o-anh.js'): os.remove('src/game/core2/03d-o-anh.js')
+    ids = {json.load(open(f))['id'] for f in glob.glob(d + 'ra/v[0-9].json') if int(os.path.basename(f)[1]) <= k}
+    B = json.load(open(d + 'bocuc.json', encoding='utf-8')); B['noi'] = [x for x in B['noi'] if x['id'] in ids]; json.dump(B, open(d + 'bocuc-ve.json', 'w', encoding='utf-8'))
+    xuat(q, d + 'bocuc-ve.json')
+
+# ---------- cắt ô ảnh ----------
+def xuat(q, bc=None):
+    d = D(q); B = json.load(open(bc or d + 'bocuc.json', encoding='utf-8')); K = B['K']
     lam = Image.open(d + 'lam.png').convert('RGB'); W, H = lam.size
     # mép khung quận mờ dần vào bản đồ nền (màu đã vẽ lại hơi khác bản nền)
     f = 160; yy, xx = np.mgrid[0:H, 0:W]
@@ -316,3 +459,16 @@ if __name__ == '__main__':
     elif a[0] == 'viet': viet_khung(int(a[1]), int(a[2]))
     elif a[0] == 'ghep-lai': ghep_lai(int(a[1]), int(a[2]) if len(a) > 2 else 99)
     elif a[0] == 'xuat': xuat(int(a[1]))
+    elif a[0] == 've': ve_k(int(a[1]), int(a[2]), a[3], int(a[4]) if len(a) > 4 else 71)
+    elif a[0] == 'lp':  # lp <q> <k> <loai> <klein|qwen>: workflow LanPaint cho khung đã chuẩn bị bằng 've'
+        q_, k_, lo_, mo_ = int(a[1]), int(a[2]), a[3], a[4]; d_ = D(q_)
+        json.dump(wf_lp(f'qv{q_}-v{k_}-vao.png', P_VB[lo_], 71, f'qv{q_}-v{k_}-{mo_}', f'qv{q_}-v{k_}-mn.png', mo_), open(d_ + f'ra/v{k_}-{mo_}.json', 'w'))
+        print(os.path.abspath(d_ + f'ra/v{k_}-{mo_}.json'))
+    elif a[0] == 'lpref':  # lpref <q> <k> <loai>: Klein + LanPaint + 2 ảnh mẫu phong cách tông môn (ref-1/2 đã duyệt)
+        q_, k_, lo_ = int(a[1]), int(a[2]), a[3]; d_ = D(q_)
+        p_ = P_VB[lo_].replace('Inpaint the blurred area', 'Image 1 is a piece of a world map. Inpaint the blurred area of image 1') + (
+            " Draw the sect in exactly the drawing style of images 2 and 3 (their ink linework, the way palaces, rocks, floating islands, waterfalls and clouds are drawn, their colours), "
+            "but do not copy their layout and do not paste them: paint a new sect fitted into the blurred area of image 1, blending into image 1's land.")
+        json.dump(wf_lp(f'qv{q_}-v{k_}-vao.png', p_, 71, f'qv{q_}-v{k_}-kref', f'qv{q_}-v{k_}-mn.png', 'klein', refs=(f'qv{q_}-ref-tong-1.png', f'qv{q_}-ref-tong-2.png')), open(d_ + f'ra/v{k_}-kref.json', 'w'))
+        print(os.path.abspath(d_ + f'ra/v{k_}-kref.json'))
+    elif a[0] == 'ghepk': ghep_k(int(a[1]), int(a[2]), a[3])

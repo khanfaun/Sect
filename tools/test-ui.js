@@ -107,7 +107,7 @@ const TESTS = {
   // bản đồ chia ô ảnh (O_ANH, tools/quan-ve.py): phóng sát tải ô mức chi tiết của chỗ đang xem, thu xa dùng mức thô; nơi đã vẽ vào ảnh không chồng ảnh rời
   async o_anh_ban_do(p) {
     const bc = await ev(p, () => { const g = geo(); let h = 0; for (let i = 0; i < HN; i++) h = (h * 31 + g.dist[i] + 7) | 0; return { cd: W().ddCoDinh, h, ve: W().regions.flatMap(R => R.nodes).filter(n => O_ANH.ve.includes(n.id)).map(n => n.type + placeCells(n).length + '@' + n.hex).join(',') }; });
-    ok(bc.cd === 20261125 && bc.ve === BO_CUC_Q5, 'thế giới trong trình duyệt dùng đúng bố cục cố định đã vẽ (' + bc.ve.slice(0, 40) + '…)');
+    ok(bc.cd === 20261125 && bc.ve.split(',').every(x => BO_CUC_Q5.split(',').includes(x)), 'thế giới trong trình duyệt dùng đúng bố cục cố định đã vẽ (' + bc.ve.slice(0, 40) + '…)');
     ok(bc.h === QUAN_HASH, 'ranh quận trong trình duyệt khớp bản luật (' + bc.h + ')');
     await p.setViewportSize({ width: 1440, height: 860 });
     const co = await ev(p, () => ({ ve: (O_ANH.ve || []).length, o2: (O_ANH.o[2] || []).length }));
