@@ -184,11 +184,50 @@ def tach_trang(path, tol=26):
     al = Image.fromarray(np.where(seen, 0, 255).astype(np.uint8)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(0.8))
     o = im.convert('RGBA'); o.putalpha(al); o.save(path)
 
+# ---- công trình dựng trên ĐẾ LỤC GIÁC do Qwen vẽ (DE=1): ảnh đầu vào là một ô lục giác trống đúng hình ô bản đồ (đỉnh nhọn, có độ dày),
+# Qwen dựng công trình lên ô đó, giữ nguyên hình ô -> game biết đúng chỗ đặt (DE_W, DE_C: bề ngang và tâm mặt ô trong ảnh 1024x1280) ----
+DE = os.environ.get('DE') == '1'
+DE_SZ, DE_W, DE_C, DE_DAY = (1024, 1280), 500, (512, 880), 80
+def de_mau(dat=False):
+    from PIL import ImageDraw
+    import math
+    im = Image.new('RGB', DE_SZ, (255, 255, 255)); d = ImageDraw.Draw(im); r = DE_W / math.sqrt(3); cx, cy = DE_C
+    v = [(cx + r * math.cos(math.radians(a)), cy + r * math.sin(math.radians(a))) for a in (-90, -30, 30, 90, 150, 210)]
+    top, side = ((176, 150, 110), (120, 96, 66)) if dat else ((196, 192, 182), (128, 124, 116))
+    for a2, b2, f in ((1, 2, 0.95), (2, 3, 0.8), (3, 4, 0.7), (4, 5, 0.85)):
+        A, B = v[a2], v[b2]; d.polygon([A, B, (B[0], B[1] + DE_DAY), (A[0], A[1] + DE_DAY)], fill=tuple(int(c * f) for c in side))
+    d.polygon(v, fill=top); return im
+P_DE = ('Picture 1 shows an empty hexagonal stone tile, a game board tile seen from the front and above. Build {t} standing ON TOP of this hexagonal tile, '
+        'filling the tile and rising above it. Keep the hexagonal tile EXACTLY the same shape, size and position as in picture 1 (its top face stays this exact regular hexagon, its sides the same height): it is the base of the asset; '
+        'you may give its top a nice paved or {mat} surface with small details and its sides a clean stone texture. ' + GOC45 + STYLE +
+        'Crisp clean edges, no outlines. Nothing outside the tile except the object rising above it: no background, no extra ground, no clouds, no mist. '
+        'Fully transparent background. Output a PNG image with transparency.')
+def de_dung(path):
+    import numpy as np
+    a = np.asarray(Image.open(path).convert('RGBA').getchannel('A')) > 128
+    if a[0].any() or a[:, 0].any() or a[:, -1].any(): return False          # chạm mép: còn nền
+    ys, xs = np.nonzero(a)
+    if not len(ys): return False
+    y0 = int(ys.max()); hang = xs[ys == y0 - int(DE_DAY + DE_W / 3 ** 0.5 * 0.5 + 40)]  # hàng ngang qua hai đỉnh dưới của mặt ô
+    w = (hang.max() - hang.min()) if len(hang) else 0
+    return abs(y0 - (DE_C[1] + DE_W / 3 ** 0.5 + DE_DAY)) < 45 and abs(w - DE_W) < 40 and abs((hang.min() + hang.max()) / 2 - DE_C[0]) < 30 if len(hang) else False
+_DEUP = {}
+def de_up(dat):
+    if dat not in _DEUP: _DEUP[dat] = nv.upload('lg-de-%d.png' % dat, de_mau(dat))
+    return _DEUP[dat]
+
 def gui(viec, sub):
     """viec: list (tên, prompt, seed). Gửi hết lên ComfyUI rồi chờ, lưu vào G/sub/tên.png"""
     os.makedirs(G + sub, exist_ok=True); ids = {}
     for ten, p, seed in viec:
-        w = jug(P_JUG.format(t=p), seed, 'lg-' + ten) if (JUG and sub != 'dat') else t2i(p, seed, 'lg-' + ten)
+        if DE and sub != 'dat':
+            dat = ten.startswith('o-tran') or ten.startswith('dd-')
+            w = nv.wf(de_up(dat), P_DE.format(t=VAT[ten], mat='packed earth' if dat else 'stone paving'), seed, 'lg-' + ten)
+            w['1']['inputs']['unet_name'] = 'qwen-image-2.1-UC-int8_convrot.safetensors'
+            w['12'] = {'class_type': 'BasicScheduler', 'inputs': {'model': ['2', 0], 'scheduler': 'simple', 'steps': 25, 'denoise': 1.0}, '_meta': {'title': 'Scheduler'}}
+            w['8']['inputs']['resolution'] = 0
+        else:
+            w = jug(P_JUG.format(t=p), seed, 'lg-' + ten) if (JUG and sub != 'dat') else t2i(p, seed, 'lg-' + ten)
         ids[ten] = nv.post('/prompt', json.dumps({'prompt': w}).encode(), 'application/json')['prompt_id']
     for ten, pid in ids.items():
         while True:
@@ -200,6 +239,13 @@ def gui(viec, sub):
         urllib.request.urlretrieve(f"{nv.URL}/view?filename={f['filename']}&subfolder={f.get('subfolder','')}&type=output", G + sub + '/' + ten + '.png')
         if JUG and sub != 'dat': tach_trang(G + sub + '/' + ten + '.png')
         print('xong', sub, ten, flush=True)
+    if DE and sub != 'dat':  # đế phải giữ đúng hình ô mẫu: bề ngang ~DE_W, đáy ~ đáy mẫu; sai thì vẽ lại (tối đa 4 lần)
+        sai = [(t, p, sd + 211) for t, p, sd in viec if not de_dung(G + sub + '/' + t + '.png')]
+        if sai and getattr(gui, 'lan_de', 0) < 4:
+            print('de sai, ve lai:', [c[0] for c in sai], flush=True); gui.lan_de = getattr(gui, 'lan_de', 0) + 1
+            try: gui(sai, sub)
+            finally: gui.lan_de -= 1
+        return
     if sub != 'dat' and not JUG:  # ảnh vật phải trong suốt: còn nền thì vẽ lại với hạt giống khác (tối đa 2 lần)
         con = [(t, p, sd + 101) for t, p, sd in viec if Image.open(G + sub + '/' + t + '.png').convert('RGBA').getextrema()[3][0] > 0]
         if con and getattr(gui, 'lan', 0) < 2:
