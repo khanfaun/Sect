@@ -120,6 +120,10 @@ const TESTS = {
     ok(await ev(p, () => (UI._lgN || 0) > 0), 'địa điểm trong quận vẽ bằng ảnh 3D (' + await ev(p, () => UI._lgN) + ' nơi)');
     await p.waitForTimeout(500); await shot(p, 'luc-giac-quan');
     await ev(p, () => { Map2.zoom(-50); Map2.invalidate(); }); await p.waitForTimeout(600); await shot(p, 'luc-giac-xa');
+    // gần tông môn lớn nhất trong ảnh quận (ban ngày)
+    const tg = await ev(p, () => { CFG.daynight = false; let b = null; const S = new Set(Object.values(LG_QUAN).flatMap(q => q.o)); for (const R0 of W().regions) for (const n of R0.nodes) if (n.type === 'tong' && S.has(n.hex) && (!b || placeCells(n).length > placeCells(b).length)) b = n;
+      if (!b) return 0; const q = hexCenter(b.hex); Map2.zoom(80); Map2.focus(q[0], q[1] - 20); Map2.invalidate(); return placeCells(b).length; });
+    await p.waitForTimeout(900); await shot(p, 'luc-giac-tong'); ok(tg >= 7, 'tông môn trong quận: ' + tg + ' ô');
     ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
   },
   // chụp ảnh bố cục PC (chỉ dùng khi cần nhìn: --shot <thư mục>)

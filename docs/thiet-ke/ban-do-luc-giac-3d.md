@@ -49,3 +49,13 @@ Quy trình cho một quận:
    (tông môn ≥9 ô dùng tông môn bay). Bài giao diện `luc_giac`.
 Còn lại: các quận khác + loại đất lạnh/khô (tuyết, lá kim…); ranh quận khác giữa thế giới nên game nhận quận theo danh sách ô;
 cỡ tông môn hiện vẫn theo bố cục cũ (7/9 ô), làm 10/20/40 ở bước 4.
+
+## Cập nhật 2026-11-26 (lần 2)
+- Mô hình: **Qwen 2.1 bản đầy đủ** (`qwen-image-2.1-UC`, 25 bước, cfg 1) — không dùng Turbo. Phối cảnh: nhìn thẳng từ phía nam, chếch ~30–35°, mặt chính quay về người xem;
+  **không isometric** (đế hình thoi). Công trình một ô dùng lời nhắc `P_O` (chỉ đúng công trình, không núi / ụ đất phía sau); ô cảnh dùng `P_DD`.
+- **Cụm ô địa điểm luôn là lục giác lớn** (core2/33 `hinhLG`, `lgCo`, `LG_SO`): 1 / 7 / 19 / 37 ô. Tông môn nhỏ/trung/lớn 7/19/37, thành 7, đại thành 19,
+  trấn 1 hoặc 7, nơi hoang dã 1 hoặc 7. Bậc thành trấn (`capOf`) theo số ô. Bản lưu cũ xếp lại (`w.sep=4`).
+- **Mỗi ô một công trình** (ui/05-gfx.js `LG_BO`, `lgVai`, `lgDiem`): ô giữa công trình chính (tông môn ≥19 ô: đỉnh núi bay, chính điện ở ô phía bắc),
+  ô dưới cùng là cổng, còn lại nhà/tháp/lầu…; tông môn xen ô cảnh (núi, hồ, thác, tùng, đảo bay) ~35%; thành có tường vẽ theo mép cụm (`lgTuong`).
+  Nơi hoang dã 7 ô: ô giữa ảnh `dd-<loại>`, vòng ngoài cảnh hợp loại (`LG_VONG`). Ô có địa điểm không mọc cây/núi.
+- Còn chưa đẹp: vài công trình vẫn có đế (ruộng, điện, xá, võ trường), dd-ancu / dd-rung / dd-duoc còn nền núi — vẽ lại bằng `SEED=…`.

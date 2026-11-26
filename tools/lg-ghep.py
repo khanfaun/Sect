@@ -163,6 +163,7 @@ def ve(q, dd=False, game=False):
         return img, (X0, Y0, X1 - X0, Y1 - Y0), keys, L
     for it in sorted(vl, key=lambda v: v[0]):
         yb, k, x, h = it[:4]; im = vat(k)
+        if im is None: continue
         if h is None: sc = it[6] / im.width
         else: sc = h / im.height
         w2, h2 = max(1, int(im.width * sc)), max(1, int(im.height * sc))
@@ -183,10 +184,12 @@ if __name__ == '__main__':
     else:
         out = os.path.join(ROOT, 'src/assets/luc-giac/'); os.makedirs(out, exist_ok=True)
         # ảnh địa điểm 3D cho game
-        for k in ('dd-tong-lon', 'dd-tong', 'dd-thanh', 'dd-tran'):
+        # ảnh cho game: địa điểm dd-*, công trình từng ô o-* (giữ tên), vật trên ô -> v-*
+        for k in sorted(f[:-4] for f in os.listdir(A + 'vat') if f.endswith('.png')):
             im = vat(k)
-            if im is not None:
-                im = im.copy(); im.thumbnail((512, 512), Image.LANCZOS); im.save(out + k + '.webp', 'WEBP', quality=88, method=6)
+            if im is None: continue
+            im = im.copy(); ra = k if k.startswith(('dd-', 'o-')) else 'v-' + k
+            im.thumbnail((512, 512) if k.startswith('dd-') else (384, 384), Image.LANCZOS); im.save(out + ra + '.webp', 'WEBP', quality=88, method=6)
         img.save(out + 'quan-%d.webp' % q['q'], 'WEBP', quality=88, method=6)
         # khung đặt ảnh trên bản đồ (toạ độ thế giới) -> content/rules/luc-giac.js
         lp = os.path.join(ROOT, 'content/rules/luc-giac.js'); Q = {}
@@ -198,11 +201,10 @@ if __name__ == '__main__':
         if os.path.exists(lp) and 'LG_VAT=' in t: V = json.loads(t[t.index('LG_VAT=') + 7:t.index(';', t.index('LG_VAT='))])
         for k in keys:
             if k not in V['k']: V['k'].append(k)
-            im = vat(k).copy(); im.thumbnail((320, 320), Image.LANCZOS); im.save(out + 'v-' + k + '.webp', 'WEBP', quality=86, method=6)
         V['q'][str(q['q'])] = [[c, V['k'].index(keys[ki]), x, y, h, cha] for c, ki, x, y, h, cha in L]
         open(lp, 'w', encoding='utf-8').write('// Sinh tự động bởi tools/lg-ghep.py: quận đã có ảnh lục giác 3D (src/assets/luc-giac/quan-<số>.webp) và khung đặt trên bản đồ.\n'
                                              '// Vẽ ở src/game/ui/05-gfx.js (lgDraw). o: các ô có trong ảnh. LG_DD: ảnh địa điểm 3D đã có. Đừng sửa tay.\n'
                                              'const LG_QUAN=' + json.dumps(Q) + ';\n'
-                                             'const LG_DD=' + json.dumps(sorted(f[:-5] for f in os.listdir(out) if f.startswith('dd-'))) + ';\n'
+                                             'const LG_DD=' + json.dumps(sorted(f[:-5] for f in os.listdir(out) if f.startswith(('dd-', 'o-', 'v-')))) + ';\n'
                                              'const LG_VAT=' + json.dumps(V, separators=(',', ':')) + ';\n')
         print('ra', out + 'quan-%d.webp' % q['q'], img.size, os.path.getsize(out + 'quan-%d.webp' % q['q']) // 1024, 'KB')
