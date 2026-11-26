@@ -3564,6 +3564,16 @@ const TESTS = {
     ok(h.n > 0 && h.khop === h.n, 'cụm ô đúng hình mẫu ' + h.khop + '/' + h.n + ' ' + JSON.stringify(h.dem));
     ok(r.sai.length === 0, 'mọi ô của thành trấn là đất bằng trống hoặc sườn núi không bị che' + (r.sai.length ? ': ' + r.sai.slice(0, 5).join(', ') : ''));
   },
+  // địa hình theo khí hậu: bắc lạnh, tây khô, nam ẩm, đông hoang dã (content/rules/mapd-bio.js, tools/sinh-thai.py)
+  sinh_thai() {
+    fresh();
+    ok(run("MAPD_BIO.length===HN&&BIO_N.length===BIO_GOC.length&&BIO_N.length===BIO_COST.length"), 'dữ liệu sinh thái đủ ô, bảng đủ cột');
+    ok(run("(()=>{const g=geo();for(let i=0;i<HN;i++)if(terWalk(BIO_GOC[g.bio[i]])!==terWalk(g.ter[i])||(g.ter[i]===4)!==(g.bio[i]===4))return i;return -1})()")===-1, 'ô đi được / sông giữ như địa hình cũ');
+    const dem = JSON.parse(run("JSON.stringify((()=>{const g=geo(),D={};for(let i=0;i<HN;i++){const k=g.reg[i]+':'+BIO_N[g.bio[i]];D[k]=(D[k]||0)+1;}return D})())"));
+    ok((dem['4:Tuyết nguyên']||0) > 100 && (dem['3:Sa mạc']||0) > 50 && (dem['2:Rừng nhiệt đới']||0) > 50 && (dem['1:Thảo nguyên']||0) > 100, 'mỗi vùng có địa hình riêng: tuyết bắc, sa mạc tây, rừng nhiệt đới nam, thảo nguyên đông');
+    ok(run("(()=>{const g=geo();const i=g.bio.indexOf(12);return hexInfo(i).ter==='Sa mạc'&&wpDraft(i).name.startsWith('Sa mạc')})()"), 'tên ô và nơi vô danh dùng tên sinh thái');
+    ok(run("(()=>{const g=geo();const a=g.bio.indexOf(18),b=g.bio.indexOf(12);return stepCost(g,a,a)<stepCost(g,b,b)})()"), 'đi thảo nguyên nhanh hơn sa mạc');
+  },
 };
 
 if (args.includes('--list')) { console.log(Object.keys(TESTS).join('\n')); process.exit(0); }

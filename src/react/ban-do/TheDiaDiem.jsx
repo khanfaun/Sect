@@ -45,7 +45,7 @@ function TheQuan({ c }) {
   const d = g.dist[c], cells = [];
   for (let i = 0; i < g.dist.length; i++) if (g.dist[i] === d && g.reg[i] === I.reg) cells.push(i);
   const tc = {};
-  for (const i of cells) { const t = PS.TER_N[g.ter[i]]; tc[t] = (tc[t] || 0) + 1; }
+  for (const i of cells) { const t = PS.terTen(i, g); tc[t] = (tc[t] || 0) + 1; }
   const ter = Object.keys(tc).sort((a, b) => tc[b] - tc[a]).slice(0, 3);
   const all = PS.regionOf(I.reg).nodes.filter(n => g.dist[PS.nodeHex(n)] === d), kn = all.filter(n => n.fog >= 2 || n.memory);
   const dg = kn.length ? Math.max(...kn.map(PS.dangerTag)) : 0;
@@ -73,7 +73,7 @@ function TheO({ c, hold }) {
       <div className="np-h">
         <div className="np-pic ter" style={{ background: TER_COL[t] }}><Ic n="hex" /></div>
         <div className="np-t">
-          <b className="np-nm">{seen || !walk ? PS.TER_N[t] : 'Vùng chưa khám phá'}</b>
+          <b className="np-nm">{seen || !walk ? PS.terTen(c, g) : 'Vùng chưa khám phá'}</b>
           <small>{[I.dist, I.regName].filter(Boolean).join(' · ')}</small>
         </div>
         <NutThe hold={hold} />

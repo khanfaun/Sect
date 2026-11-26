@@ -22,19 +22,20 @@ function hexVerts(i){const [x,y]=hexCenter(i),dx=HEXW/2,dy=HEXP;return [[x,y-dy*
 // giờ đi qua một ô (đồng bằng = 1); sông phải tìm cầu, đò; hồ và vân hải coi như không đi được (rất đắt, chỉ dùng khi không còn lối)
 // Bảng TER_COST: content/rules/ter-cost.js
 function terWalk(t){return t!==0&&t!==5;}
-function stepCost(g,u,v){return TER_COST[g.ter[v]]+0.35*Math.max(0,g.el[v]-g.el[u]);} // lên dốc tốn thêm
+function stepCost(g,u,v){return (g.bio?BIO_COST[g.bio[v]]:TER_COST[g.ter[v]])+0.35*Math.max(0,g.el[v]-g.el[u]);} // lên dốc tốn thêm
 // Bảng QUAN_N: content/rules/quan-n.js
 let GEO=null;
 function geoFor(w){if(GEO&&GEO.seed===w.seed)return GEO;
   const nz=makeNoise(hashS('terr'+w.seed));const reg=new Int8Array(HN),ter=new Uint8Array(HN),el=new Uint8Array(HN),dist=new Int16Array(HN).fill(-1);
-  for(let i=0;i<HN;i++){ter[i]=+MAPD.ter[i];el[i]=+MAPD.el[i];const c=MAPD.reg[i];reg[i]=c==='x'?-1:+c;}
+  const bio=new Uint8Array(HN);const B=typeof MAPD_BIO==='string'&&MAPD_BIO.length===HN?MAPD_BIO:null;
+  for(let i=0;i<HN;i++){ter[i]=+MAPD.ter[i];el[i]=+MAPD.el[i];const c=MAPD.reg[i];reg[i]=c==='x'?-1:+c;bio[i]=B?parseInt(B[i],36):ter[i];}
   // tiểu khu vực (quận): mỗi đại khu vực chia sáu quận quanh sáu hạt giống trên đất đi được
   const dnames=[];const rnd=mul(hashS('quan'+w.seed));const pool=QUAN_N.slice();
   for(let k=0;k<5;k++){const cells=[];for(let i=0;i<HN;i++)if(reg[i]===k)cells.push(i);const seeds=[];const land=cells.filter(i=>terWalk(ter[i]));
     for(let g=0;g<600&&seeds.length<6&&land.length;g++){const c=land[Math.floor(rnd()*land.length)];const p=hexCenter(c);if(seeds.every(s=>{const q=hexCenter(s);return Math.hypot(p[0]-q[0],p[1]-q[1])>230;}))seeds.push(c);}
     const base=dnames.length;for(const s of seeds){const j=Math.floor(rnd()*pool.length);dnames.push((pool.splice(j,1)[0]||contentText("core2_04-luoi-luc-giac_js.geoFor.039"))+' Quận');}
     for(const i of cells){const p=hexCenter(i);let b=0,bd=1e18;seeds.forEach((s,j)=>{const q=hexCenter(s);const d=(p[0]-q[0])**2+(p[1]-q[1])**2;if(d<bd){bd=d;b=j;}});dist[i]=base+b;}}
-  return GEO={seed:w.seed,nz,reg,ter,el,dist,dnames,paths:{},nodeAt:null};}
+  return GEO={seed:w.seed,nz,reg,ter,bio,el,dist,dnames,paths:{},nodeAt:null};}
 function geo(){return geoFor(W());}
 // đặt mọi địa điểm vào đúng tâm một ô đất trống trong vùng của nó
 const AREA_BOX=[];
@@ -77,7 +78,9 @@ function playerXY(){const r=G.run;const d=playerMapXY();return invXY(r.region,d[
 // dừng giữa đường thì đứng lại ở tâm ô gần nhất
 function snapStop(){const r=G.run,m=r&&r.moving;if(!m||m.seg>=m.path.length-1)return;const hp=hexPath(nodeHex(nodeById(m.path[m.seg])),nodeHex(nodeById(m.path[m.seg+1])));const tot=hp.cum[hp.cum.length-1]||1;const t=m.prog*tot;
   let b=0,bd=1e9;hp.cum.forEach((c,i)=>{if(Math.abs(c-t)<bd){bd=Math.abs(c-t);b=i;}});m.prog=clamp(hp.cum[b]/tot,0.001,0.999);}
-function hexInfo(i){const g=geo();const k=g.reg[i];return {i,sea:k<0,reg:k,regName:k<0?contentText("core2_04-luoi-luc-giac_js.hexInfo.040"):REG[k].n,dist:k<0?'':g.dnames[g.dist[i]]||'',ter:TER_N[g.ter[i]],el:g.el[i]};}
+function hexInfo(i){const g=geo();const k=g.reg[i];return {i,sea:k<0,reg:k,regName:k<0?contentText("core2_04-luoi-luc-giac_js.hexInfo.040"):REG[k].n,dist:k<0?'':g.dnames[g.dist[i]]||'',ter:terTen(i),bio:g.bio?g.bio[i]:g.ter[i],el:g.el[i]};}
+// tên địa hình theo khí hậu của ô (Sa mạc, Tuyết nguyên…), không có thì tên loại gốc
+function terTen(i,g){g=g||geo();return g.bio?BIO_N[g.bio[i]]:TER_N[g.ter[i]];}
 function hexNode(i){const g=geo(),r=G.run;if(!g.nodeAt||g.nodeKey!==r.kiep+':'+W().t){g.nodeAt={};g.nodeKey=r.kiep+':'+W().t;const L=[];for(const R0 of W().regions)for(const n of R0.nodes)if(n.fog>=1)L.push([R0,n]);
     // lượt 1: ô gốc của từng địa điểm (nơi đã biết thì ở ô thật, nơi mới nghe đồn thì ở ô hiển thị); lượt 2: các ô phụ, chỉ lấy ô còn trống
     for(const [R0,n] of L){const h=(n.fog>=2||n.memory)?nodeHex(n):hexAt(...nodeShown(n));if(g.nodeAt[h]==null||n.fog>=2)g.nodeAt[h]=n.id;}

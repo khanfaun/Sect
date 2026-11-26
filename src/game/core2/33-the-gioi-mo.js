@@ -217,7 +217,7 @@ if(typeof loadData==='function'){const _ld=loadData;loadData=function(d){
 
 // thống kê một đại khu vực cho thẻ mô tả: địa thế chính, tỉ lệ đã khám phá, số quận
 function areaStat(k){const g=geo();visLoad();const tc={};let land=0,seen=0;const ds=new Set();
-  for(let i=0;i<HN;i++){if(g.reg[i]!==k)continue;if(g.dist[i]>=0)ds.add(g.dist[i]);if(!terWalk(g.ter[i]))continue;land++;if(VIS&&(VIS[i]||VNOW[i]))seen++;const t=TER_N[g.ter[i]];tc[t]=(tc[t]||0)+1;}
+  for(let i=0;i<HN;i++){if(g.reg[i]!==k)continue;if(g.dist[i]>=0)ds.add(g.dist[i]);if(!terWalk(g.ter[i]))continue;land++;if(VIS&&(VIS[i]||VNOW[i]))seen++;const t=terTen(i,g);tc[t]=(tc[t]||0)+1;}
   return {ter:Object.keys(tc).sort((a,b)=>tc[b]-tc[a]).slice(0,3),pct:land?Math.round(seen*100/land):0,quan:ds.size,land};}
 
 // ================= ĐI TỚI Ô ĐẤT BẤT KỲ =================
@@ -228,7 +228,7 @@ function wpGC(){const r=G.run,w=W();if(!r||!w||!w.wp)return;const keep=new Set([
 function wpDraft(c){const g=geo(),k=g.reg[c],t=g.ter[c];if(k<0||!terWalk(t))return null;
   let nd=null,bd=1e9;const [cx,cy]=hexCenter(c);for(const n of regionOf(k).nodes){const p=mapXY(k,n.x,n.y),d=Math.hypot(p[0]-cx,p[1]-cy);if(d<bd){bd=d;nd=n;}}
   const dg=clamp(Math.round((WP_BASE[t]+(nd?nd.danger:1))/2),0,3);
-  return {id:-1,r:k,wp:1,hex:c,type:WP_TY[t],name:TER_N[t]+contentText("core2_33-the-gioi-mo_js.wpDraft.028"),danger:dg,fog:3,seenT:W().t,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0,x:invXY(k,cx,cy)[0],y:invXY(k,cx,cy)[1]};}
+  return {id:-1,r:k,wp:1,hex:c,type:WP_TY[t],name:terTen(c,g)+contentText("core2_33-the-gioi-mo_js.wpDraft.028"),danger:dg,fog:3,seenT:W().t,memory:false,state:'ok',stateUntil:0,explore:0,exploreT:-1,grave:null,cache:null,patron:null,dp:0,x:invXY(k,cx,cy)[0],y:invXY(k,cx,cy)[1]};}
 function wpMake(c){const w=W();wpGC();w.wp=w.wp||{};for(const id in w.wp)if(w.wp[id].hex===c)return w.wp[id];
   const d=wpDraft(c);if(!d)return null;let s=0;while(w.wp[d.r*100+WP0+s]&&s<9)s++;d.id=d.r*100+WP0+s;w.wp[d.id]=d;return d;}
 function cellHours(c){const r=G.run;const a=nodeById(r.at);if(!a)return null;const h=nodeHex(a);if(h===c)return 0;const L=hexPath(h,c).len;return L/walkSpeed();}

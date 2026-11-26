@@ -129,6 +129,8 @@
  "content/rules/cell.js",
  "content/rules/ter-n.js",
  "content/rules/ter-cost.js",
+ "content/rules/sinh-thai.js",
+ "content/rules/mapd-bio.js",
  "content/rules/quan-n.js",
  "content/rules/pb-slots.js",
  "content/rules/bag-base.js",
