@@ -18,14 +18,14 @@ Người dùng yêu cầu ngày 2026-11-26. Thay hướng cũ (vẽ thuỷ mặc
 - Để sau: mỗi địa điểm vài biến thể theo đại khu vực.
 
 ## Các bước
-1. **Sinh thái** (đang làm): thêm loại địa hình theo 5 đại khu vực từ địa hình cũ (MAPD) + độ cao + khoảng cách tới nước + nhiễu.
+1. **Sinh thái** (XONG, commit 2d21906; ô có `g.bio`, tên `terTen(i)`, công `BIO_COST`; `g.ter` gốc giữ nguyên nên luật cũ chạy như trước): thêm loại địa hình theo 5 đại khu vực từ địa hình cũ (MAPD) + độ cao + khoảng cách tới nước + nhiễu.
    Bản nháp: công cụ sẽ là `tools/sinh-thai.py`. 0=Trung Châu (giữa), 1=Đông Hoang, 2=Nam Trạch, 3=Tây Lĩnh, 4=Bắc Nhạc.
    - Bắc (lạnh): Tuyết nguyên, Đồi tuyết, Núi tuyết, Rừng lá kim, Hồ băng.
    - Tây (khô): Sa mạc, Hoang mạc đá, Núi đá đỏ, Ốc đảo.
    - Nam (ẩm): Rừng nhiệt đới, Trúc lâm, Đầm lầy, Hồ sen.
    - Đông (hoang dã): Thảo nguyên, Rừng nguyên sinh.
    - Giữa: giữ Đồng bằng, Đồi, Núi cao, Rừng lá rộng, Sông; đỉnh rất cao có tuyết.
-   Loại mới cần thêm vào `TER_N`, `TER_COST`, `WP_TY`, `WP_BASE` (content/rules) và rà ~33 chỗ dùng `.ter[`/`terWalk`.
+   Đã làm theo cách thêm lớp `g.bio` (BIO_N, BIO_GOC, BIO_COST ở content/rules/sinh-thai.js) thay vì đổi TER_N.
 2. **Mặt đất ô**: ComfyUI vẽ 2–3 tấm mặt đất liền mạch / loại → code cắt ô lục giác (đầu nhọn, lệch hàng lẻ, `hexCenter`),
    viền dày phía dưới cho khối, khe hở; vẽ sẵn thành từng mảng canvas để chạy nhanh.
 3. **Đồ trên ô**: cây theo khí hậu (nhiều biến thể), núi lớn phủ cụm ô, đá, cỏ.
