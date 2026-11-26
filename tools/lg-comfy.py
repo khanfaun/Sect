@@ -112,8 +112,12 @@ GOC45 = ('Camera: from the FRONT and above, looking down at about 45 degrees (a 
          'not straight top-down, not a side view, not from a corner, not isometric. The object is perfectly FRONT-FACING and symmetrical: '
          'its front wall runs exactly horizontally across the image, parallel to the bottom edge; we see the front facade and the top of the roof, '
          'but not its left or right side walls. ')
-P_O = ('A 3D render of {t}, a game asset. ' + GOC45 +
-       'Clean stylized 3D rendering with crisp clean edges, soft even daylight from the upper left, rich colors, no ink wash, no painterly bleeding, no outlines. '
+# phong cách chung cho MỌI ảnh trong một mẻ (đồng bộ màu, chất liệu): bóng bẩy như ảnh src/assets-goc/backup-anh-3d/
+STYLE = ('Unified art style for the whole asset set: polished glossy stylized 3D like a premium mobile strategy game, smooth shiny materials, '
+         'warm golden late-afternoon sunlight from the upper left, soft ambient occlusion, vibrant harmonious palette of jade green, warm gold, vermilion red, '
+         'cream white stone and dark grey-blue roof tiles. ')
+P_O = ('A 3D render of {t}, a game asset. ' + GOC45 + STYLE +
+       'Crisp clean edges, no ink wash, no painterly bleeding, no outlines. '
        'ONLY the object itself: no background, no ground, no grass, no rocks, no base, no platform, no clouds, no mist, no shadow. '
        'Centered, the whole object visible with margin. Fully transparent background. Output a PNG image with transparency.')
 CANH = ()  # (trước đây ô cảnh vẽ kiểu tranh; nay mọi ô địa điểm cùng kiểu 3D render P_O)
@@ -122,11 +126,22 @@ def loi(k):
     return P_DD if k.startswith(('dd-', 'o-')) else P_VAT
 
 FULL = os.environ.get('TURBO') != '1'  # mặc định Qwen 2.1 bản đầy đủ (UC, 25 bước); TURBO=1 dùng bản nhanh 8 bước
+_REF = {}
+def REF_UP():
+    r = os.environ['REF']
+    if r not in _REF:
+        im = Image.open(r).convert('RGBA'); bg = Image.new('RGBA', im.size, (255, 255, 255, 255)); bg.alpha_composite(im)
+        _REF[r] = nv.upload('lg-ref.png', bg.convert('RGB').resize((768, 768), Image.LANCZOS))
+    return _REF[r]
 def t2i(prompt, seed, pre, w=1024, h=1024):
     """Qwen 2.1 vẽ thẳng từ chữ: bỏ ảnh đầu vào của nv.wf, dùng latent rỗng."""
     x = nv.wf('x.png', prompt, seed, pre); del x['6']; e = x['8']['inputs']; del e['images.image_1']; e['resolution'] = max(w, h)
     x['20'] = {'class_type': 'EmptySD3LatentImage', 'inputs': {'width': w, 'height': h, 'batch_size': 1}, '_meta': {'title': 'Empty latent'}}
     x['13']['inputs']['latent_image'] = ['20', 0]
+    if os.environ.get('REF'):  # ảnh mẫu phong cách (chỉ lấy màu, chất liệu, ánh sáng)
+        x['6'] = {'class_type': 'LoadImage', 'inputs': {'image': REF_UP()}, '_meta': {'title': 'Style reference'}}; e['images.image_1'] = ['6', 0]
+        e['prompt'] = ('Picture 1 is only a STYLE reference. Create a completely new, different object in exactly the same art style, materials, glossiness, lighting and color palette as picture 1, '
+                       'but NOT its shape, NOT its isometric corner view and NOT its round ground base. ') + prompt
     if FULL:
         x['1']['inputs']['unet_name'] = 'qwen-image-2.1-UC-int8_convrot.safetensors'
         x['12'] = {'class_type': 'BasicScheduler', 'inputs': {'model': ['2', 0], 'scheduler': 'simple', 'steps': 25, 'denoise': 1.0}, '_meta': {'title': 'Scheduler'}}
@@ -135,9 +150,11 @@ def t2i(prompt, seed, pre, w=1024, h=1024):
 
 # ---- Juggernaut XL v9 Lightning (SDXL): MODEL=jugg. Không ra nền trong suốt -> vẽ trên nền trắng rồi xoá nền nối với mép (tach_trang) ----
 JUG = os.environ.get('MODEL') == 'jugg'
-P_JUG = ('3D render of {t}, single game asset, camera in front and above looking down at 45 degrees, front facade facing the camera, symmetrical, '
-         'clean stylized 3D rendering, crisp edges, soft daylight, highly detailed, isolated on a pure flat white background')
-N_JUG = ('ground, grass, terrain, landscape, sky, clouds, mist, fog, shadow, text, watermark, isometric, side view, top-down view, blurry, painting, ink, sketch, frame, border')
+P_JUG = ('(isolated on a pure white background:1.5), (white background:1.3), product shot of a single game asset, 3D render of {t}, '
+         'camera in front and above looking down at 45 degrees, front facade facing the camera, symmetrical, '
+         'polished glossy stylized 3D, premium mobile strategy game asset, smooth shiny materials, warm golden sunlight from the upper left, soft ambient occlusion, '
+         'vibrant harmonious palette of jade green, warm gold, vermilion red, cream white stone, dark grey-blue roof tiles, crisp edges, highly detailed')
+N_JUG = ('background scenery, environment, room, interior, street, mountains behind, ground, grass, terrain, landscape, sky, clouds, mist, fog, shadow, text, watermark, isometric, side view, top-down view, blurry, painting, ink, sketch, frame, border')
 def jug(prompt, seed, pre):
     T = lambda ct, ins, t: {'class_type': ct, 'inputs': ins, '_meta': {'title': t}}
     return {'1': T('CheckpointLoaderSimple', {'ckpt_name': 'juggernautXL_v9Rdphoto2Lightning.safetensors'}, 'Juggernaut XL'),
