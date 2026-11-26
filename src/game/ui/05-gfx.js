@@ -197,7 +197,7 @@ const Map2=(()=>{
   // còn lại là nhà / tháp / lầu…; tông môn xen ô cảnh (núi, hồ, thác, đảo bay); thành có tường theo mép cụm -----
   const LG_BO={
     tong:{tam:'o-tong-chinh',tamTo:'o-tong-dinh',cong:'o-tong-cong',nha:['o-tong-thap','o-tong-lau','o-tong-dien','o-tong-dan','o-tong-vo','o-tong-xa'],canh:['o-tong-nui','o-tong-ho','o-tong-thac','o-tong-tung','o-tong-dao','o-tong-nui'],ti:0.35},
-    thanh:{tam:'o-thanh-cung',cong:'o-thanh-cong',nha:['o-thanh-nha-0','o-thanh-nha-1','o-thanh-nha-2','o-thanh-cho','o-thanh-lau','o-thanh-mieu','o-thanh-phu','o-thanh-nha-0'],canh:[],ti:0,tuong:1},
+    thanh:{tam:'o-thanh-cung',cong:'o-thanh-cong',nha:['o-thanh-nha-0','o-thanh-nha-1','o-thanh-nha-2','o-thanh-cho','o-thanh-lau','o-thanh-mieu','o-thanh-phu','o-thanh-nha-0'],canh:[],ti:0},
     tran:{mot:'o-tran-lang',tam:'o-tran-chinh',nha:['o-tran-nha-0','o-tran-nha-1','o-tran-ruong','o-tran-gieng','o-tran-mieu','o-tran-ruong'],canh:[],ti:0}};
   // nơi hoang dã 7 ô: ô giữa là ảnh nơi (dd-<loại>), vòng ngoài là cảnh hợp loại
   const LG_VONG={como:['o-bia'],ditich:['o-bia'],duoc:['o-duoc'],khoang:['o-khoang'],linhdia:['o-linh'],bicanh:['o-linh'],dongthien:['o-linh','v-nui-2'],
@@ -208,30 +208,35 @@ const Map2=(()=>{
   const LGV={};
   function lgVai(n){const L=placeCells(n),key=n.id+':'+L.length+':'+n.type+':'+L[0];if(LGV[n.id]&&LGV[n.id].key===key)return LGV[n.id].v;
     const B=lgBo(n),c0=n.hex,R=Math.max(0,...L.map(c=>hexD(c,c0))),out=[],h=c=>(hashS('lgo'+n.id+':'+c)>>>3)%1000/1000,P=c=>hexCenter(c);
-    if(L.length===1){const k=B?(B.mot||B.tam):'dd-'+(MAP_AL[n.type]||n.type);if(lgCo(k))out.push([c0,k,B?1.25:1.45]);}
+    if(L.length===1){const k=B?(B.mot||B.tam):'dd-'+(MAP_AL[n.type]||n.type);if(lgCo(k))out.push([c0,k,B?1.1:1.2]);}
     else if(B){let cong=-1,bac=-1;for(const c of L){if(hexD(c,c0)!==R)continue;const p=P(c),q=P(c0);if(cong<0||p[1]>P(cong)[1]+1||(Math.abs(p[1]-P(cong)[1])<=1&&Math.abs(p[0]-q[0])<Math.abs(P(cong)[0]-q[0])))cong=c;}
       if(R>=2&&B.tamTo){for(const c of L)if(hexD(c,c0)===1&&(bac<0||P(c)[1]<P(bac)[1]))bac=c;}
-      let j=0;for(const c of L){const d=hexD(c,c0),r=h(c);let k,s=1.22;
-        if(c===c0){k=R>=2&&B.tamTo?B.tamTo:B.tam;s=R>=2&&B.tamTo?2.3:B===LG_BO.thanh?1.6:1.4;}
-        else if(c===cong){k=B.cong;s=1.35;}else if(c===bac){k=B.tam;s=1.5;}
-        else if(B.canh.length&&r<B.ti+(d===R&&R>1?0.15:0)){k=B.canh[Math.floor(h(c+7)*B.canh.length)];s=k==='o-tong-dao'?1.1:1.3;}
+      let j=0;for(const c of L){const d=hexD(c,c0),r=h(c);let k,s=1.0;
+        if(c===c0){k=R>=2&&B.tamTo?B.tamTo:B.tam;s=R>=2&&B.tamTo?1.9:1.25;}
+        else if(c===cong){k=B.cong;s=1.1;}else if(c===bac){k=B.tam;s=1.25;}
+        else if(B.canh.length&&r<B.ti+(d===R&&R>1?0.15:0)){k=B.canh[Math.floor(h(c+7)*B.canh.length)];s=k==='o-tong-dao'?0.95:1.1;}
         else{k=B.nha[(j++ +Math.floor(r*7))%B.nha.length];}
         if(lgCo(k))out.push([c,k,s]);}}
-    else{const k='dd-'+(MAP_AL[n.type]||n.type);if(lgCo(k))out.push([c0,k,1.6]);const V=LG_VONG[n.type]||['v-cay-la-0','v-cay-la-2'];
+    else{const k='dd-'+(MAP_AL[n.type]||n.type);if(lgCo(k))out.push([c0,k,1.25]);const V=LG_VONG[n.type]||['v-cay-la-0','v-cay-la-2'];
       for(const c of L)if(c!==c0&&h(c)<0.7){const k2=V[Math.floor(h(c+3)*V.length)];if(lgCo(k2))out.push([c,k2,k2.startsWith('v-')?(k2.startsWith('v-nui')?1.1:0.7):1.15]);}}
     LGV[n.id]={key,v:out};return out;}
-  // tường thành: các cạnh ngoài của cụm, vẽ cạnh phía sau trước công trình, cạnh phía trước sau công trình
-  function lgTuong(n,z,front){const L=placeCells(n),S=new Set(L),hW=HEXW*0.32;
-    for(const c of L){const v=hexVerts(c),[cx,cy]=hexCenter(c);for(let q=0;q<6;q++){const A=v[q],B=v[(q+1)%6],my=(A[1]+B[1])/2;if(S.has(hexAt(A[0]+B[0]-cx,A[1]+B[1]-cy)))continue;if((my>cy)!==front)continue;
-      ctx.beginPath();ctx.moveTo(SX(A[0]),SY(A[1]));ctx.lineTo(SX(B[0]),SY(B[1]));ctx.lineTo(SX(B[0]),SY(B[1]-hW));ctx.lineTo(SX(A[0]),SY(A[1]-hW));ctx.closePath();
-      ctx.fillStyle=front?'#8d8a82':'#6f6c66';ctx.fill();ctx.strokeStyle='rgba(40,36,30,.55)';ctx.lineWidth=Math.max(0.6,z*0.6);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(SX(A[0]),SY(A[1]-hW));ctx.lineTo(SX(B[0]),SY(B[1]-hW));ctx.strokeStyle='#b5b0a5';ctx.lineWidth=Math.max(1,z*1.6);ctx.stroke();}}}
+  // đế lục giác dưới mỗi công trình: khối đá / đất nện khớp đúng ô, dày như ô địa hình (tools/lg-ghep.py DAY), mặt trên lát ảnh t-lat / t-datnen
+  const LG_NANG=HEXW*0.035,LG_DAY=HEXW*0.16,LG_DE=HEXW*0.07;
+  function lgDe(c,tex,z){const g=geo(),[cx,cy]=hexCenter(c),up=(g.el[c]||0)*LG_NANG+LG_DE,v=hexVerts(c).map(([x,y])=>[cx+(x-cx)*0.94,cy+(y-cy)*0.94-up]),dn=up+LG_DAY;
+    const im=lgImg(tex);let col=tex==='t-lat'?[176,172,160]:[160,128,92];
+    for(const [a,b,f] of [[1,2,0.62],[2,3,0.5],[3,4,0.44],[4,5,0.56]]){const A=v[a],B=v[b];ctx.beginPath();ctx.moveTo(SX(A[0]),SY(A[1]));ctx.lineTo(SX(B[0]),SY(B[1]));ctx.lineTo(SX(B[0]),SY(B[1]+dn));ctx.lineTo(SX(A[0]),SY(A[1]+dn));ctx.closePath();ctx.fillStyle=`rgb(${col.map(x=>x*f|0)})`;ctx.fill();}
+    ctx.save();ctx.beginPath();v.forEach(([x,y],i)=>i?ctx.lineTo(SX(x),SY(y)):ctx.moveTo(SX(x),SY(y)));ctx.closePath();
+    if(im){ctx.clip();const k=(hashS('de'+c)>>>4)%1000/1000,sw=im.naturalWidth*0.3,ox=k*(im.naturalWidth-sw),oy=((k*7)%1)*(im.naturalHeight-sw),R=HEXW*0.6;ctx.drawImage(im,ox,oy,sw,sw,SX(cx-R),SY(cy-up-R),2*R*z,2*R*z);}
+    else{ctx.fillStyle=`rgb(${col})`;ctx.fill();}ctx.restore();
+    ctx.beginPath();[4,5,0,1].forEach((q,i)=>i?ctx.lineTo(SX(v[q][0]),SY(v[q][1])):ctx.moveTo(SX(v[q][0]),SY(v[q][1])));ctx.strokeStyle='rgba(255,255,240,.35)';ctx.lineWidth=Math.max(0.6,z*0.8);ctx.stroke();
+    return up;}
   // vẽ cả nơi; trả về số ô đã vẽ (0: chưa nạp ảnh nào -> vẽ kiểu cũ)
-  function lgDiem(n,z){const V=lgVai(n);if(!V.length)return 0;const g=geo(),items=[];let ok=0;
-    for(const [c,k,s] of V){const im=lgImg(k);if(!im)continue;const p=hexCenter(c),w=HEXW*s,hh=w*im.naturalHeight/im.naturalWidth,y=p[1]+HEXW*0.3-(g.el[c]||0)*HEXW*0.035;items.push([y,im,p[0],w,hh]);ok++;}
-    if(!ok)return 0;const B=lgBo(n),tuong=B&&B.tuong&&placeCells(n).length>1;if(tuong)lgTuong(n,z,false);
+  function lgDiem(n,z){const V=lgVai(n);if(!V.length)return 0;const B=lgBo(n),tex=B&&B!==LG_BO.tran?'t-lat':'t-datnen',items=[],de=[];let ok=0;
+    for(const [c,k,s] of V){const im=lgImg(k);if(!im)continue;const p=hexCenter(c);de.push([p[1],c,!k.startsWith('v-')]);const w=HEXW*s,hh=w*im.naturalHeight/im.naturalWidth;items.push([p[1],im,p[0],w,hh,c]);ok++;}
+    if(!ok)return 0;const UP={};de.sort((a,b)=>a[0]-b[0]);for(const [,c,co] of de)UP[c]=co?lgDe(c,tex,z):(geo().el[c]||0)*LG_NANG;
+    for(const it of items)it[0]=it[0]+HEXW*0.26-UP[it[5]];
     items.sort((a,b)=>a[0]-b[0]);for(const [y,im,x,w,hh] of items){ctx.fillStyle='rgba(0,0,0,.2)';ctx.beginPath();ctx.ellipse(SX(x),SY(y-HEXW*0.02),w*z*0.4,Math.max(1,w*z*0.08),0,0,6.3);ctx.fill();ctx.drawImage(im,SX(x-w/2),SY(y-hh),w*z,hh*z);}
-    if(tuong)lgTuong(n,z,true);return ok;}
+    return ok;}
   let LCV=null;function layerCv(){const w=Math.max(1,Math.round(W0*dpr)),h=Math.max(1,Math.round(H0*dpr));if(!LCV)LCV=document.createElement('canvas');if(LCV.width!==w||LCV.height!==h){LCV.width=w;LCV.height=h;}return LCV;}
   // ----- mặt nạ "đã thấy": mỗi ô đã thấy là một vệt mực; ô mới thấy loang dần ra -----
   let INK=null;const INK_MS=1700,INK_ST=8;

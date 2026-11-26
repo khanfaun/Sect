@@ -184,6 +184,10 @@ if __name__ == '__main__':
     else:
         out = os.path.join(ROOT, 'src/assets/luc-giac/'); os.makedirs(out, exist_ok=True)
         # ảnh địa điểm 3D cho game
+        # mặt đế lục giác dưới công trình (ui/05-gfx.js lgDe): t-lat (đá lát), t-datnen (đất nện)
+        for k in ('lat', 'datnen'):
+            L = tex(k)
+            if L: L[0].resize((512, 512), Image.LANCZOS).save(out + 't-' + k + '.webp', 'WEBP', quality=86, method=6)
         # ảnh cho game: địa điểm dd-*, công trình từng ô o-* (giữ tên), vật trên ô -> v-*
         for k in sorted(f[:-4] for f in os.listdir(A + 'vat') if f.endswith('.png')):
             im = vat(k)

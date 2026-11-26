@@ -59,3 +59,10 @@ cỡ tông môn hiện vẫn theo bố cục cũ (7/9 ô), làm 10/20/40 ở bư
   ô dưới cùng là cổng, còn lại nhà/tháp/lầu…; tông môn xen ô cảnh (núi, hồ, thác, tùng, đảo bay) ~35%; thành có tường vẽ theo mép cụm (`lgTuong`).
   Nơi hoang dã 7 ô: ô giữa ảnh `dd-<loại>`, vòng ngoài cảnh hợp loại (`LG_VONG`). Ô có địa điểm không mọc cây/núi.
 - Còn chưa đẹp: vài công trình vẫn có đế (ruộng, điện, xá, võ trường), dd-ancu / dd-rung / dd-duoc còn nền núi — vẽ lại bằng `SEED=…`.
+
+## Cập nhật 2026-11-26 (lần 3)
+- Công trình địa điểm: **vật 3D render** (lời nhắc `P_O` + `GOC45`): góc xiên ~45° từ phía trước, mặt chính quay về camera, đối xứng (mặt trước song song mép dưới ảnh),
+  chỉ có vật thể (không nền, không đất, không mây/sương), nét sạch không loang mực. Đế lục giác do game vẽ (`lgDe`, mặt lát `t-lat` / `t-datnen`) nên luôn khớp ô.
+- Bỏ tường thành. Mặt đất rừng (rung, nhietdoi, truc) vẽ lại như các loại đất khác (cỏ + bụi), cây mọc từ ô.
+- Thử **Juggernaut XL v9 Lightning** (`MODEL=jugg`, vẽ nền trắng rồi `tach_trang`): nhanh (~4 giây/ảnh) nhưng phần lớn ảnh ra cả cảnh có nền, không tách được
+  (`docs/thiet-ke/anh/so-sanh-qwen-juggernaut.jpg`). Giữ Qwen 2.1 bản đầy đủ.

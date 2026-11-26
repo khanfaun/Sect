@@ -21,9 +21,11 @@ DAT = {
  'hmda':     'rocky desert: dry cracked tan earth with pebbles and small stones',
  'dado':     'red sandstone rock ground with layered cracks and red dust',
  'samac':    'golden desert sand with soft wind ripples',
- 'nhietdoi': 'tropical jungle floor: dense dark green ferns, moss and broad leaves',
- 'truc':     'bamboo grove floor: light green grass covered with fallen dry bamboo leaves',
- 'rung':     'temperate forest floor: green moss, fallen leaves and small plants',
+ 'nhietdoi': 'lush tropical green grass with small ferns and low leafy bushes, a few darker patches',
+ 'truc':     'light green grass with small clumps of low plants and some fallen yellow-green leaves',
+ 'rung':     'green grass with moss patches, small bushes and a few fallen leaves',
+ 'lat':      'pale grey stone paving slabs of a temple courtyard, neatly fitted, a little moss in the joints',
+ 'datnen':   'packed light brown earth of a village yard with a few small stones and tufts of grass',
  'hosen':    'calm pond water covered with green lotus pads and a few pink lotus flowers',
 }
 P_DAT = ('A square top-down orthographic terrain texture of {t}, seen straight down from high above. '
@@ -50,7 +52,7 @@ VAT = {
  # ---- công trình TỪNG Ô của địa điểm nhiều ô (mỗi ô một công trình, ghép thành cả nơi; ui/05-gfx.js lgDiem) ----
  # tông môn tiên hiệp
  'o-tong-chinh': 'A grand xianxia sect main hall: a large multi-tiered palace with sweeping golden roofs on a white stone terrace with stairs, compact footprint',
- 'o-tong-dinh': 'A floating mountain peak in the sky with a golden-roofed palace on its top, waterfalls falling from its rocky underside, white clouds around it',
+ 'o-tong-dinh': 'A floating rocky mountain island with a golden-roofed palace and a pagoda on its top and a thin waterfall falling from its underside',
  'o-tong-cong': 'A sect mountain gate: a tall ornate stone paifang archway with a golden plaque and stone stairs leading up, two stone lions',
  'o-tong-thap': 'A tall slender seven-story Chinese pagoda with golden roofs',
  'o-tong-lau': 'A two-story Chinese scripture pavilion tower with red pillars and golden roofs',
@@ -58,11 +60,11 @@ VAT = {
  'o-tong-dan': 'An alchemy pavilion: an open hall with a huge bronze cauldron in front, smoke and a faint magical glow',
  'o-tong-vo': 'A martial training plaza: a square raised stone platform with weapon racks, banners and a big bronze bell',
  'o-tong-xa': 'Disciple quarters: a row of small Chinese houses with grey tiled roofs and a little courtyard',
- 'o-tong-dao': 'A small floating rock island in the sky with a tiny pavilion and a thin waterfall, wisps of cloud',
- 'o-tong-nui': 'A steep jade-green rocky peak with pine trees and a tiny pavilion on top, mist at the foot',
- 'o-tong-ho': 'A small calm lake with pink lotus flowers and an arched white stone bridge',
- 'o-tong-thac': 'A mossy cliff with a tall waterfall falling into a small pool, mist',
- 'o-tong-tung': 'A cluster of old twisted pine trees with drifting white clouds',
+ 'o-tong-dao': 'A small floating rock island with a tiny pavilion on top',
+ 'o-tong-nui': 'A steep green rocky peak with pine trees and a tiny pavilion on top',
+ 'o-tong-ho': 'A small round lotus pond with pink lotus flowers and a little arched white stone bridge over it',
+ 'o-tong-thac': 'A mossy rock cliff with a waterfall falling into a small round pool',
+ 'o-tong-tung': 'A cluster of three old twisted pine trees',
  # thành
  'o-thanh-cung': 'An imperial Chinese palace with a grand double-eaved golden roof on a high stone platform with red walls',
  'o-thanh-cong': 'A Chinese city gate tower: a thick grey brick gate with a red arched door and a two-story tower with tiled roof on top',
@@ -105,14 +107,18 @@ P_DD = ('{t}. ' + GOC +
         'soft sunny light from the upper left, centered, the whole thing visible with margin. '
         'Nothing around it: no ground base, no square or round platform, no landscape or mountains behind it. Fully transparent background, no shadow, no text. Output a PNG image with transparency.')
 
-# công trình MỘT Ô: chỉ đúng công trình, tách hẳn như sprite (không núi, không ụ đất phía sau)
-P_O = ('{t}. ' + GOC.replace('35 degrees', '30 degrees') +
-       'Highly detailed hand-painted xianxia fantasy game art, warm golden and red roofs, soft sunny light from the upper left, centered, whole thing visible with margin. '
-       'ONLY this one subject, cut out and isolated like a game sprite: no mountains, no hills, no cliffs, no extra trees, no rocks, no landscape, '
-       'no ground mound, no platform, no square or diamond base around or behind it. Fully transparent background, no shadow, no text. Output a PNG image with transparency.')
-CANH = ('o-tong-nui', 'o-tong-ho', 'o-tong-thac', 'o-tong-tung', 'o-tong-dao', 'o-tong-dinh', 'o-linh', 'o-khoang')  # ô cảnh: vẽ cả cảnh (P_DD)
+# công trình MỘT Ô: vật 3D render, chỉ có vật thể (đế lục giác do game vẽ: ui/05-gfx.js lgDe), góc xiên ~45° từ phía trước, mặt chính quay về camera
+GOC45 = ('Camera: from the FRONT and above, looking down at about 45 degrees (a three-quarter view from the front, like a strategy game camera): '
+         'not straight top-down, not a side view, not from a corner, not isometric. The object is perfectly FRONT-FACING and symmetrical: '
+         'its front wall runs exactly horizontally across the image, parallel to the bottom edge; we see the front facade and the top of the roof, '
+         'but not its left or right side walls. ')
+P_O = ('A 3D render of {t}, a game asset. ' + GOC45 +
+       'Clean stylized 3D rendering with crisp clean edges, soft even daylight from the upper left, rich colors, no ink wash, no painterly bleeding, no outlines. '
+       'ONLY the object itself: no background, no ground, no grass, no rocks, no base, no platform, no clouds, no mist, no shadow. '
+       'Centered, the whole object visible with margin. Fully transparent background. Output a PNG image with transparency.')
+CANH = ()  # (trước đây ô cảnh vẽ kiểu tranh; nay mọi ô địa điểm cùng kiểu 3D render P_O)
 def loi(k):
-    if k.startswith('o-') and k not in CANH: return P_O
+    if k.startswith(('o-', 'dd-')): return P_O
     return P_DD if k.startswith(('dd-', 'o-')) else P_VAT
 
 FULL = os.environ.get('TURBO') != '1'  # mặc định Qwen 2.1 bản đầy đủ (UC, 25 bước); TURBO=1 dùng bản nhanh 8 bước
@@ -127,11 +133,46 @@ def t2i(prompt, seed, pre, w=1024, h=1024):
         x['9']['inputs']['cfg'] = float(os.environ.get('CFG', '1.0'))
     return x
 
+# ---- Juggernaut XL v9 Lightning (SDXL): MODEL=jugg. Không ra nền trong suốt -> vẽ trên nền trắng rồi xoá nền nối với mép (tach_trang) ----
+JUG = os.environ.get('MODEL') == 'jugg'
+P_JUG = ('3D render of {t}, single game asset, camera in front and above looking down at 45 degrees, front facade facing the camera, symmetrical, '
+         'clean stylized 3D rendering, crisp edges, soft daylight, highly detailed, isolated on a pure flat white background')
+N_JUG = ('ground, grass, terrain, landscape, sky, clouds, mist, fog, shadow, text, watermark, isometric, side view, top-down view, blurry, painting, ink, sketch, frame, border')
+def jug(prompt, seed, pre):
+    T = lambda ct, ins, t: {'class_type': ct, 'inputs': ins, '_meta': {'title': t}}
+    return {'1': T('CheckpointLoaderSimple', {'ckpt_name': 'juggernautXL_v9Rdphoto2Lightning.safetensors'}, 'Juggernaut XL'),
+            '2': T('CLIPTextEncode', {'clip': ['1', 1], 'text': prompt}, 'Positive'), '3': T('CLIPTextEncode', {'clip': ['1', 1], 'text': N_JUG}, 'Negative'),
+            '4': T('EmptyLatentImage', {'width': 1024, 'height': 1024, 'batch_size': 1}, 'Latent'),
+            '5': T('KSampler', {'model': ['1', 0], 'positive': ['2', 0], 'negative': ['3', 0], 'latent_image': ['4', 0], 'seed': seed, 'steps': 6, 'cfg': 1.8,
+                                 'sampler_name': 'dpmpp_sde', 'scheduler': 'karras', 'denoise': 1.0}, 'Sample'),
+            '6': T('VAEDecode', {'samples': ['5', 0], 'vae': ['1', 2]}, 'Decode'), '15': T('SaveImage', {'images': ['6', 0], 'filename_prefix': pre}, 'Save')}
+def tach_trang(path, tol=26):
+    """xoá nền trắng nối với mép ảnh (loang từ mép), giữ phần trắng bên trong vật; mép mềm 1px"""
+    import numpy as np
+    from collections import deque
+    im = Image.open(path).convert('RGB'); a = np.asarray(im).astype(np.int16); H, W = a.shape[:2]
+    nen = (np.abs(a - 255).max(axis=2) <= tol); seen = np.zeros((H, W), bool); q = deque()
+    for x in range(W):
+        for y in (0, H - 1):
+            if nen[y, x] and not seen[y, x]: seen[y, x] = True; q.append((y, x))
+    for y in range(H):
+        for x in (0, W - 1):
+            if nen[y, x] and not seen[y, x]: seen[y, x] = True; q.append((y, x))
+    while q:
+        y, x = q.popleft()
+        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            yy, xx = y + dy, x + dx
+            if 0 <= yy < H and 0 <= xx < W and nen[yy, xx] and not seen[yy, xx]: seen[yy, xx] = True; q.append((yy, xx))
+    from PIL import ImageFilter
+    al = Image.fromarray(np.where(seen, 0, 255).astype(np.uint8)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(0.8))
+    o = im.convert('RGBA'); o.putalpha(al); o.save(path)
+
 def gui(viec, sub):
     """viec: list (tên, prompt, seed). Gửi hết lên ComfyUI rồi chờ, lưu vào G/sub/tên.png"""
     os.makedirs(G + sub, exist_ok=True); ids = {}
     for ten, p, seed in viec:
-        ids[ten] = nv.post('/prompt', json.dumps({'prompt': t2i(p, seed, 'lg-' + ten)}).encode(), 'application/json')['prompt_id']
+        w = jug(P_JUG.format(t=p), seed, 'lg-' + ten) if (JUG and sub != 'dat') else t2i(p, seed, 'lg-' + ten)
+        ids[ten] = nv.post('/prompt', json.dumps({'prompt': w}).encode(), 'application/json')['prompt_id']
     for ten, pid in ids.items():
         while True:
             hi = json.load(urllib.request.urlopen(f'{nv.URL}/history/{pid}')).get(pid)
@@ -140,8 +181,9 @@ def gui(viec, sub):
             time.sleep(1.5)
         f = hi['outputs']['15']['images'][0]
         urllib.request.urlretrieve(f"{nv.URL}/view?filename={f['filename']}&subfolder={f.get('subfolder','')}&type=output", G + sub + '/' + ten + '.png')
+        if JUG and sub != 'dat': tach_trang(G + sub + '/' + ten + '.png')
         print('xong', sub, ten, flush=True)
-    if sub != 'dat':  # ảnh vật phải trong suốt: còn nền thì vẽ lại với hạt giống khác (tối đa 2 lần)
+    if sub != 'dat' and not JUG:  # ảnh vật phải trong suốt: còn nền thì vẽ lại với hạt giống khác (tối đa 2 lần)
         con = [(t, p, sd + 101) for t, p, sd in viec if Image.open(G + sub + '/' + t + '.png').convert('RGBA').getextrema()[3][0] > 0]
         if con and getattr(gui, 'lan', 0) < 2:
             print('con nen, ve lai:', [c[0] for c in con], flush=True); gui.lan = getattr(gui, 'lan', 0) + 1
@@ -154,4 +196,4 @@ if __name__ == '__main__':
     if lenh == 'dat':
         gui([(f'{k}-{j}', P_DAT.format(t=DAT[k]), 500 + j * 17 + s0) for k in ds or list(DAT) for j in range(2)], 'dat')
     elif lenh == 'vat':
-        gui([(k, loi(k).format(t=VAT[k]), 700 + i + s0) for i, k in enumerate(ds or list(VAT))], os.environ.get('SUB', 'vat'))
+        gui([(k, (VAT[k] if JUG else loi(k).format(t=VAT[k])), 700 + i + s0) for i, k in enumerate(ds or list(VAT))], os.environ.get('SUB', 'vat'))
