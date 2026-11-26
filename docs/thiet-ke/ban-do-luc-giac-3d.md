@@ -66,3 +66,9 @@ cỡ tông môn hiện vẫn theo bố cục cũ (7/9 ô), làm 10/20/40 ở bư
 - Bỏ tường thành. Mặt đất rừng (rung, nhietdoi, truc) vẽ lại như các loại đất khác (cỏ + bụi), cây mọc từ ô.
 - Thử **Juggernaut XL v9 Lightning** (`MODEL=jugg`, vẽ nền trắng rồi `tach_trang`): nhanh (~4 giây/ảnh) nhưng phần lớn ảnh ra cả cảnh có nền, không tách được
   (`docs/thiet-ke/anh/so-sanh-qwen-juggernaut.jpg`). Giữ Qwen 2.1 bản đầy đủ.
+
+## Cập nhật 2026-11-26 (lần 4) — đã chốt
+- Không dùng Juggernaut. Không để Qwen vẽ đế (`DE=1` còn trong công cụ để thử): Qwen luôn vẽ đế dẹt theo góc xiên, không khớp ô nhìn thẳng của bản đồ.
+  Đế lục giác do game vẽ (`lgDe`).
+- Cả mẻ công trình dùng **Qwen 2.1 đầy đủ + `STYLE`** (bóng bẩy, bảng màu cố định: ngọc bích, vàng ấm, đỏ son, đá kem, ngói xám xanh; nắng ấm trên-trái)
+  để đồng bộ màu, chất liệu. Ảnh mẻ: `docs/thiet-ke/anh/me-cong-trinh.jpg`. Ảnh mẫu `REF=` (backup) bị chép cả hình dạng -> không dùng.
