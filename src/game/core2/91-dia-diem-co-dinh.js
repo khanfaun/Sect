@@ -25,7 +25,11 @@ function ddTenMoi(w,seed){
   });
 }
 let ddBoCuc;
-{const _gw=genWorld;ddBoCuc=h=>seeded('dd'+h,()=>_gw(h)); // một bố cục địa điểm hoàn chỉnh theo hạt giống h
+let ddSinh;
+{const _gw=genWorld;ddSinh=h=>seeded('dd'+h,()=>_gw(h)); // sinh một bố cục địa điểm hoàn chỉnh theo hạt giống h (chỉ dùng cho tools/dd-luu.js)
+ // bố cục chính đọc từ dữ liệu đã lưu (DD_BOCUC, core2/03e): sinh lại bằng máy ngẫu nhiên thì chỉ cần mã / nội dung đổi chút là lệch hết,
+ // không còn khớp ảnh bản đồ đã vẽ (tools/quan-ve.py). Muốn đổi bố cục: node tools/dd-luu.js rồi vẽ lại ảnh.
+ ddBoCuc=h=>h===DD_HAT&&typeof DD_BOCUC!=='undefined'?JSON.parse(JSON.stringify(DD_BOCUC)):ddSinh(h);
  genWorld=function(seed){seed=seed||Math.floor(Math.random()*1e9);
   const w=ddBoCuc(DD_HAT);w.seed=seed;w.ddCoDinh=DD_HAT;ddTenMoi(w,seed);dbg('dd.codinh',{seed,n:w.regions.reduce((s,R0)=>s+R0.nodes.length,0)});return w;};}
 // ranh giới quận cũng cố định theo DD_HAT (địa điểm phân theo quận), chỉ tên quận theo thế giới

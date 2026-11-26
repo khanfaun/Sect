@@ -66,7 +66,7 @@ const Map2=(()=>{
   const MOBILE=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
   let cv=null,ctx=null,W0=0,H0=0,dpr=1,uz=1; // uz: hệ số phóng giao diện máy tính (--dz trong CSS)
   const cam={x:500,y:500,z:0.8,follow:true,reg:-1};
-  const ZMAX=1.5,DT_Z=99,DTC={};let dtWant='',dtTimer=0; // mảnh địa hình chi tiết khi phóng to sâu
+  const ZMAX=3,ZREF=1.5,DT_Z=99,DTC={};let dtWant='',dtTimer=0; // mảnh địa hình chi tiết khi phóng to sâu
   let terr=null,terrKey='',fogC=null,fogKey='',C={},cloudSpr=null;
   let fogS=null,fogKey2='',holeSpr=null;
   let lastAct=performance.now(),dirty=true,soft=false,ema=0,slow=0,fpsT=0,fpsN=0,fpsShow=0,lastT=0,lastDraw=0;
@@ -95,13 +95,13 @@ const Map2=(()=>{
   function zDeep(){return Math.min(zFit(),zMin()*0.6);}
   let bT=0,bN=0;function bump(){const n=performance.now();if(n-bT>1500)bN=0;if(n-bT>150||bN===0)bN++;bT=n;if(bN>=3&&!wide){wide=true;}}
   function zFloor(){return wide?zDeep():zMin();} // lăn chuột chỉ tới zMin; sau khi bấm nút thu nhỏ thì tạm xuống tới mức bản đồ rộng bằng màn hình
-  function zfNow(){return clamp(Math.log(cam.z/zMin())/Math.log(ZMAX/zMin()),0,1);}
+  function zfNow(){return clamp(Math.log(cam.z/zMin())/Math.log(ZREF/zMin()),0,1);}
   function worldAt(sx,sy){return [(sx-W0/2)/cam.z+cam.x,(sy-VCY)/cam.z+cam.y];}
   function clampCam(){if(wide&&cam.z>=zMin()*0.9999)wide=false;cam.z=clamp(cam.z,zFloor(),ZMAX);const hw=W0/2/cam.z,hh=viewH()/2/cam.z;const ov=zfNow();const px=0,py=0;
     const rx=2*hw>=WORLD_W?[WORLD_W/2,WORLD_W/2]:[hw,WORLD_W-hw],ry=2*hh>=WORLD_H-0.5?[WORLD_H/2,WORLD_H/2]:[hh,WORLD_H-hh];
     cam.x=clamp(cam.x,rx[0]-px,rx[1]+px);cam.y=clamp(cam.y,ry[0]-py,ry[1]+py);} // cho kéo quá mép để điểm sát rìa vẫn kéo ra giữa được
   function center(){const r=G.run;if(!r)return;const w0=playerXY(),p=mapXY(r.region,w0[0],w0[1]);cam.x=p[0];cam.y=p[1];cam.follow=true;cam.reg=r.region;clampCam();dirty=true;}
-  function zAt(f){const m=zMin();return clamp(m*Math.pow(ZMAX/m,f),zFloor(),ZMAX);}
+  function zAt(f){const m=zMin();return clamp(m*Math.pow(ZREF/m,f),zFloor(),ZMAX);}
   function zoomOutAll(){wide=true;cam.z=zFloor();cam.follow=false;cam.x=WORLD_W/2;cam.y=WORLD_H/2;clampCam();dirty=true;}
   function locate(){cam.z=zAt(0.53);center();dirty=true;}
   function focus(x,y){const p=mapXY(clamp(Math.floor(x/1000),0,4),x,y);cam.x=p[0];cam.y=p[1];cam.follow=false;clampCam();dirty=true;}
@@ -174,6 +174,22 @@ const Map2=(()=>{
     let o=MIMG[id];if(!o){const im=new Image();o=MIMG[id]={im,ok:false,i:0};const B=['src/'+q+'/ban-do/',q+'/ban-do/'];const go=()=>{im.src=B[o.i]+encodeURIComponent(f);};
       im.onload=()=>{o.ok=true;invalidate();};im.onerror=()=>{o.i++;if(o.i<B.length)go();};go();}
     return o.ok?o.im:null;}
+  // ----- ô ảnh chi tiết (O_ANH ở core2/03d, tools/quan-ve.py): phóng tới đâu tải ô ảnh tới đó, chưa tải xong thì mượn ô mức thấp hơn -----
+  const OIMG={},OSET={};let O_N=0,O_USE=0;
+  let OVE=null;function oVe(n){if(!OVE)OVE=new Set((typeof O_ANH!=='undefined'&&O_ANH.ve)||[]);return OVE.has(n.id);}
+  function oSet(lv){if(!OSET[lv])OSET[lv]=new Set(((typeof O_ANH!=='undefined'&&O_ANH.o)||{})[lv]||[]);return OSET[lv];}
+  function oTile(lv,k,want){const id=lv+'/'+k;let o=OIMG[id];if(!o){if(!want)return null;const im=new Image();o=OIMG[id]={im,ok:false,i:0,t:0};const B=['src/assets/ban-do/o/','assets/ban-do/o/'];
+      const go=()=>{im.src=B[o.i]+lv+'/'+k+'.webp';};im.onload=()=>{o.ok=true;O_N++;invalidate();if(typeof dbg==='function')dbg('map.o',{id});};im.onerror=()=>{o.i++;if(o.i<B.length)go();else o.bad=true;};go();
+      const ks=Object.keys(OIMG);if(ks.length>120){ks.sort((a,b)=>OIMG[a].t-OIMG[b].t);for(const x of ks.slice(0,ks.length-100)){OIMG[x].im.src='';delete OIMG[x];}}} // bỏ bớt ô lâu không xem
+    o.t=performance.now();return o.ok?o.im:null;}
+  function oAnh(g,z){if(typeof O_ANH==='undefined')return;const T=O_ANH.t,S=O_ANH.s,pu=z*dpr;let lv=pu>1.7?2:pu>0.85?1:0;if(gfxLv()===0)lv=Math.min(lv,1);
+    const L=oSet(lv);if(!L.size&&!oSet(0).size)return;const wx0=cam.x-W0/2/z,wx1=cam.x+W0/2/z,wy0=cam.y-VCY/z,wy1=cam.y+(H0-VCY)/z;O_USE=0;
+    const s=S[lv],tw=T/s;
+    for(let ty=Math.floor(wy0/tw);ty<=Math.floor(wy1/tw);ty++)for(let tx=Math.floor(wx0/tw);tx<=Math.floor(wx1/tw);tx++){const k=tx+'-'+ty;
+      let im=L.has(k)?oTile(lv,k,true):null;
+      if(im){g.drawImage(im,SX(tx*tw),SY(ty*tw),tw*z,tw*z);O_USE++;continue;}
+      for(let l2=lv-1;l2>=0;l2--){const f=1<<(lv-l2),k2=Math.floor(tx/f)+'-'+Math.floor(ty/f);if(!oSet(l2).has(k2))continue;const im2=oTile(l2,k2,true);if(!im2)continue; // mượn ô thô hơn
+        const sw=T/f;g.drawImage(im2,(tx%f)*sw,(ty%f)*sw,sw,sw,SX(tx*tw),SY(ty*tw),tw*z,tw*z);O_USE++;break;}}}
   let LCV=null;function layerCv(){const w=Math.max(1,Math.round(W0*dpr)),h=Math.max(1,Math.round(H0*dpr));if(!LCV)LCV=document.createElement('canvas');if(LCV.width!==w||LCV.height!==h){LCV.width=w;LCV.height=h;}return LCV;}
   // ----- mặt nạ "đã thấy": mỗi ô đã thấy là một vệt mực; ô mới thấy loang dần ra -----
   let INK=null;const INK_MS=1700,INK_ST=8;
@@ -254,25 +270,25 @@ const Map2=(()=>{
     const r=G.run;if(!r||!ctx||!W0)return;
     if(!C.paper)colors();
     if(insets())clampCam();const reg=r.region,lv=gfxLv(),w=W();visLoad();const imgN=Object.values(MIMG).filter(o=>o.ok).length;
-    if(cam.kz!==(r.rid||'')+r.kiep){cam.kz=(r.rid||'')+r.kiep;cam.reg=reg;cam.z=clamp(zMin()*Math.pow(ZMAX/zMin(),0.62),zMin(),ZMAX);center();pos=null;}
+    if(cam.kz!==(r.rid||'')+r.kiep){cam.kz=(r.rid||'')+r.kiep;cam.reg=reg;cam.z=clamp(zMin()*Math.pow(ZREF/zMin(),0.62),zMin(),ZMAX);center();pos=null;}
     const lastR=r.reveal[r.reveal.length-1];const base=lv+':'+CFG.theme+':'+w.seed,fbase=base+':'+(r.rid||'')+r.kiep+':'+r.reveal.length+':'+(lastR?lastR.join(','):'');
     // vị trí người chơi được làm mượt giữa các nhịp đồng hồ
     const pw=playerXY(),pp=mapXY(reg,pw[0],pw[1]);if(!pos||Math.hypot(pos[0]-pp[0],pos[1]-pp[1])>120)pos=[pp[0],pp[1]];else{const f=r.moving?1:1-Math.pow(0.002,dt);pos[0]+=(pp[0]-pos[0])*f;pos[1]+=(pp[1]-pos[1])*f;}
     if(cam.follow&&r.moving){cam.x=pos[0];cam.y=pos[1];clampCam();}
     const z=cam.z,X0=reg*1000;
     // nền + lưới chỉ vẽ lại khi camera, tầm nhìn, ô chọn đổi; còn lại (mây, hạt, đi đường) chỉ dán lại ảnh đệm
-    const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,UI.mark&&UI.mark.k,UI.hold&&UI.hold.c,lv,imgN].join('|');
+    const bgKey=[cam.x.toFixed(2),cam.y.toFixed(2),z.toFixed(5),W0,H0,dpr,VIS_N,CFG.grid,CFG.terrain,CFG.theme,hov,UI.sel,UI.cell,UI.mark&&UI.mark.k,UI.hold&&UI.hold.c,lv,imgN,O_N].join('|');
     const bgHit=BGK===bgKey&&BGC&&!(INK&&INK.anim);const realCtx=ctx;ctx.setTransform(dpr,0,0,dpr,0,0);
     if(!bgHit){if(!BGC)BGC=document.createElement('canvas');const bw=Math.round(W0*dpr),bh=Math.round(H0*dpr);if(BGC.width!==bw||BGC.height!==bh){BGC.width=bw;BGC.height=bh;}ctx=BGC.getContext('2d');}
     if(!bgHit){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle=C.dark?C.bg2:mixHex(C.paper,C.bg2,0.55);ctx.fillRect(0,0,W0,H0);
     // nền: ảnh "chưa tới" phủ cả bản đồ; chỗ đã đi qua hoặc đang thấy hiện ảnh chi tiết, viền chuyển tiếp là giấy loang mực
     {const hid=mapImg('hid'),bk=mapImg('bk'),tr=mapImg('tr');const X=SX(0),Y=SY(0),Wd=WORLD_W*z,Hd=WORLD_H*z;
-      if(!CFG.terrain){if(bk)ctx.drawImage(bk,X,Y,Wd,Hd);}
+      if(!CFG.terrain){if(bk){ctx.drawImage(bk,X,Y,Wd,Hd);oAnh(ctx,z);}}
       else{if(hid)ctx.drawImage(hid,X,Y,Wd,Hd);
         const M=inkMask(now);if(M&&bk){const L=layerCv();const g=L.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);
           if(tr){g.globalCompositeOperation='source-over';g.drawImage(tr,X,Y,Wd,Hd);g.globalCompositeOperation='destination-in';g.drawImage(M.outer,X,Y,Wd,Hd);
             g.globalCompositeOperation='source-over';ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=0.9;ctx.drawImage(L,0,0);ctx.restore();g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);}
-          g.globalCompositeOperation='source-over';g.drawImage(bk,X,Y,Wd,Hd);g.globalCompositeOperation='destination-in';g.drawImage(M.inner,X,Y,Wd,Hd);g.globalCompositeOperation='source-over';
+          g.globalCompositeOperation='source-over';g.drawImage(bk,X,Y,Wd,Hd);oAnh(g,z);g.globalCompositeOperation='destination-in';g.drawImage(M.inner,X,Y,Wd,Hd);g.globalCompositeOperation='source-over';
           ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(L,0,0);ctx.restore();
           if(M.rim)ctx.drawImage(M.rim,X,Y,Wd,Hd);
           const NW=nowMask();if(NW){g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.setTransform(dpr,0,0,dpr,0,0);g.globalCompositeOperation='source-over';
@@ -283,7 +299,7 @@ const Map2=(()=>{
       }}
     ctx.globalAlpha=1;
     // lưới lục giác, ranh quận, ranh đại khu vực, ô đang rê chuột hoặc đang chọn
-    const zf=clamp(Math.log(z/zMin())/Math.log(ZMAX/zMin()),0,1);const showIc=zf>=0.5;const zTop=zf>=0.96;
+    const zf=clamp(Math.log(z/zMin())/Math.log(ZREF/zMin()),0,1);const showIc=zf>=0.5;const zTop=zf>=0.96;
     // thu nhỏ: ranh đại khu vực · tầm thấy tên quận: ranh quận (nét đứt) · tầm thấy địa điểm: chỉ sáng địa điểm đang rê hoặc chọn; không bao giờ phủ cả lưới
     const fillA=clamp(1-(cam.z-zDeep())/Math.max(1e-6,zMin()-zDeep()),0,1),macroA=Math.max(fillA,clamp(1-(zf-0.12)/0.12,0,1)),distA=Math.min(clamp((zf-0.12)/0.1,0,1),clamp((0.5-zf)/0.1,0,1));
     {const hx=hexPaths(),g0=geo();ctx.save();ctx.translate(W0/2-cam.x*z,VCY-cam.y*z);ctx.scale(z,z);ctx.lineJoin='round';ctx.lineCap='round';
@@ -363,12 +379,14 @@ const Map2=(()=>{
     // một ô lục giác có cả địa điểm lẫn người (ngươi, hoặc thực thể đang dừng chân): địa điểm lùi sang trái, người sang phải, cả hai nhỏ lại cho khỏi đè nhau
     const HW=HEXW/2*z;const OCC=new Set();if(!r.moving&&!HT._me)OCC.add(r.at);
     if(CFG.ents){const sr0=senseR();for(const e of entsHere(reg)){if(HE[e.type]||e.to!=null)continue;const p=entXY(e);if(Math.hypot(p[0]-pw[0],p[1]-pw[1])<=sr0)OCC.add(e.at);}}
-    UI._mapImN=0;UI._mapBadgeN=0;for(const k in NPOS)delete NPOS[k];
+    UI._mapImN=0;UI._mapBadgeN=0;UI._mapVeN=0;for(const k in NPOS)delete NPOS[k];
     if(showIc)for(const R0 of w.regions)for(const n of R0.nodes){const k=R0.k;if(n.fog<1)continue;if(HT[n.type])continue;const [nx,ny]=mapNode(n);let x=SX(nx),y=SY(ny);if(x<-60||y<-60||x>W0+60||y>H0+60)continue;const under=OCC.has(n.id);const sN=s0;
       const sure=n.fog>=2||n.memory;const old=n.fog>=2&&n.seenT>=0&&w.t-n.seenT>HY;NPOS[n.id]=[x,y+s0/2+(under?5:3)+(CFG.font==='m'?14:17)+(old&&!under?14:0),y-sN*0.95];const ruin=(n.vstate||'ok')==='ruin'&&n.fog>=2;const sel=UI.sel===n.id;
       const col=C[NODE_CAT[n.type]||'ink'];
       
-      {const ik=sure?mapKey(n,ruin):null,im=ik&&mapIc(ik);
+      // nơi đã vẽ thẳng vào ô ảnh bản đồ (O_ANH.ve, tools/quan-ve.py): không chồng ảnh rời / huy hiệu, chỉ vòng chọn + tên
+      if(sure&&!ruin&&oVe(n)){const ft=mapFoot(n),dg=dangerTag(n);if(dg>0||sel){const rr=sN*0.55*Math.sqrt(ft.n);ctx.beginPath();ctx.ellipse(SX(ft.x),SY(ft.y)+sN*0.25,rr,rr*0.4,0,0,6.3);ctx.fillStyle=hexA(sel?C.gold:DC[dg],sel?0.35:0.25);ctx.fill();}x=SX(ft.x);UI._mapVeN=(UI._mapVeN||0)+1;}
+      else{const ik=sure?mapKey(n,ruin):null,im=ik&&mapIc(ik);
         if(im){const ft=mapFoot(n),a0=hexCenter(n.hex),sz=sN/0.97*im.naturalWidth/64,fy=SY(a0[1])+sz/2,dg=dangerTag(n);x=SX(a0[0]); // tâm ảnh = tâm ô gốc (tools/dd2-comfy.py)
           ctx.save();if(old)ctx.globalAlpha=0.72;
           if(dg>0||sel){const rr=sN*0.55*Math.sqrt(ft.n);ctx.beginPath();ctx.ellipse(x,SY(ft.y)+sN*0.25,rr,rr*0.4,0,0,6.3);ctx.fillStyle=hexA(sel?C.gold:DC[dg],sel?0.55:0.45);ctx.fill();}
@@ -445,9 +463,9 @@ const Map2=(()=>{
       if(drag){const dx=(e.offsetX/uz)-drag.x,dy=(e.offsetY/uz)-drag.y;if(Math.abs(dx)+Math.abs(dy)>7&&!drag.moved){drag.moved=true;clearTimeout(drag.t);}if(drag.moved){cam.x=drag.cx-dx/cam.z;cam.y=drag.cy-dy/cam.z;cam.follow=false;clampCam();dirty=true;}}});
     const up=e=>{const d=drag;ptr.delete(e.pointerId);if(ptr.size<2)pinch=null;if(d)clearTimeout(d.t);if(d&&d.aim){if(typeof mapAimEnd==='function')mapAimEnd(e.type==='pointerup');}else if(e.type==='pointerup'&&d&&!d.moved&&ptr.size===0){const c=cellAt((e.offsetX/uz),(e.offsetY/uz));let n=hexNode(c);if(n&&(CFG.hideT||{})[n.type])n=null;if(!n)n=hit((e.offsetX/uz),(e.offsetY/uz));mapTap(n,c,worldAt((e.offsetX/uz),(e.offsetY/uz)),zfNow());}if(ptr.size===0)drag=null;};
     cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
-    cv.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||drag||!G.run||G.run.scene)return;const c=cellAt((e.offsetX/uz),(e.offsetY/uz));if(c!==hov){hov=c;dirty=true;}if(cam.z>=ZMAX*0.97)hideTip();else hexTip(c,e.clientX,e.clientY);});
+    cv.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||drag||!G.run||G.run.scene)return;const c=cellAt((e.offsetX/uz),(e.offsetY/uz));if(c!==hov){hov=c;dirty=true;}if(cam.z>=ZREF*0.97)hideTip();else hexTip(c,e.clientX,e.clientY);});
     cv.addEventListener('pointerleave',()=>{if(hov!=null){hov=null;dirty=true;}hideTip();});
     cv.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.15:1/1.15,(e.offsetX/uz),(e.offsetY/uz));},{passive:false});
   }
-  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,zoomOutAll,locate,reset:resetAll,get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},get zf(){return zfNow();},worldAt,get wide(){return wide;},get dtc(){return Object.keys(DTC).filter(k=>DTC[k]).length;},get imgOk(){return Object.values(MIMG).filter(o=>o.ok).length;},get ink(){return !!(INK&&INK.any);},get zmax(){return ZMAX;},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
+  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,zoomOutAll,locate,reset:resetAll,get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},get zf(){return zfNow();},worldAt,get wide(){return wide;},get dtc(){return Object.keys(DTC).filter(k=>DTC[k]).length;},get imgOk(){return Object.values(MIMG).filter(o=>o.ok).length;},get ink(){return !!(INK&&INK.any);},get zmax(){return ZMAX;},get oAnh(){return {n:O_N,use:O_USE,tai:Object.keys(OIMG).length};},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
 })();

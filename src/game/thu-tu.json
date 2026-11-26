@@ -119,6 +119,8 @@
  "content/rules/mapd.js",
  "core2/03b-dia-hinh-du-lieu.js",
  "core2/03c-o-phang.js",
+ "core2/03d-o-anh.js",
+ "core2/03e-bo-cuc-co-dinh.js",
  "content/items/pham.js",
  "content/items/pham-m.js",
  "content/items/slots.js",
@@ -362,6 +364,7 @@
  "core2/86-mo-ta-chu.js",
  "core2/87-bo-ao-choang.js",
  "core2/88-sua-ten-lap.js",
+ "core2/91-dia-diem-co-dinh.js",
  "ui/01-base.js",
  "ui/02-assets.js",
  "ui/03-ngu-hanh-bieu-tuong.js",
@@ -402,6 +405,5 @@
  "ui/38-loi-ke-dia-diem.js",
  "core2/89-viec-goi-su-kien.js",
  "core2/90-tru-nhan.js",
- "core2/91-dia-diem-co-dinh.js",
  "nap:devBotNap"
 ]

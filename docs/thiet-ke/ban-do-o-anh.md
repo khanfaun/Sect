@@ -1,4 +1,10 @@
-# Bản đồ chia ô ảnh, phóng tới đâu tải chi tiết tới đó — Ý TƯỞNG, để làm sau
+# Bản đồ chia ô ảnh, phóng tới đâu tải chi tiết tới đó
+
+## Trạng thái (2026-11-27): đã làm, thử ở quận 5
+- Ô 512 ở 3 mức (0,75 / 1,5 / 3 điểm ảnh mỗi đơn vị thế giới), bảng `O_ANH` (core2/03d), vẽ ở `oAnh` (ui/05-gfx.js), ảnh ở src/assets/ban-do/o/.
+- Quận 5 vẽ bằng `tools/quan-ve.py`: nền phóng ×2,6 từ ảnh 4128 rồi để Qwen sửa cả khung (làm nét + hoà địa điểm đã dán), nắn khớp vị trí, ghép theo đường cắt.
+- Chỗ chưa vẽ vẫn dùng ảnh bản đồ liền. Phần dưới là ý tưởng ban đầu.
+
 
 ## Vì sao
 Địa điểm (nhất là tông môn) giờ vẽ thẳng vào ảnh bản đồ bằng ComfyUI (`tools/dd-ve-ban-do.py`, vẽ bù / inpaint).

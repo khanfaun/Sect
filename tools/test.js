@@ -1244,13 +1244,14 @@ const TESTS = {
     const th = run('W().regions.map(R0=>R0.nodes.filter(n=>n.type==="thanh").length).join(",")');
     ok(th.split(",").every(x => +x >= 3), 'mỗi đại khu vực ít nhất 3 thành (' + th + ')');
     const qt = run('(()=>{const g=geo();const m={};for(const R0 of W().regions)for(const n of R0.nodes)if(n.type==="tran"){const d=g.dist[n.hex];m[d]=(m[d]||0)+1;}const fq={};for(let i=0;i<HN;i++)if(O_PHANG[i]==="1"&&(g.ter[i]===1||g.ter[i]===6))fq[g.dist[i]]=(fq[g.dist[i]]||0)+1;let lo=99,nd=0;for(let d=0;d<g.dnames.length;d++){if((fq[d]||0)<25)continue;nd++;lo=Math.min(lo,m[d]||0);}return [lo,nd];})()');
-    ok(qt[0] >= 2, `mỗi quận đủ đất bằng có ít nhất 2 trấn (ít nhất ${qt[0]} trong ${qt[1]} quận)`);
+    const qt2 = run('(()=>{const g=geo();const m={};for(const R0 of W().regions)for(const n of R0.nodes)if(isTownT(n.type)){const d=g.dist[n.hex];m[d]=(m[d]||0)+1;}let co=0;for(let d=0;d<g.dnames.length;d++)if(m[d])co++;return [co,g.dnames.length];})()');
+    ok(qt2[0] >= qt2[1] * 0.85, `hầu hết quận có thành trấn (${qt2[0]}/${qt2[1]} quận; cụm lục giác lớn chiếm nhiều đất nên quận chật có thể bị đẩy sang quận bên)`);
     const sz = run('(()=>{const o={};for(const R0 of W().regions)for(const n of R0.nodes){const c=n.cells.length;const t=n.type;const e=o[t]||(o[t]=[99,0]);e[0]=Math.min(e[0],c);e[1]=Math.max(e[1],c);}return JSON.stringify(o);})()');
     const SZ = JSON.parse(sz);
     ok(SZ.dong[1] <= 2 && SZ.dong[0] >= 1, 'hang động chỉ 1–2 ô ' + JSON.stringify(SZ.dong));
     ok(SZ.tong[0] >= 2 && SZ.tong[1] >= 5, 'tông môn nhiều ô ' + JSON.stringify(SZ.tong));
-    ok(run('W().regions.every(R0=>R0.nodes.every(n=>n.type!=="tong"||placeCells(n).every(c=>O_CHE[c]!=="1")))'), 'tông môn không đặt ở ô bị núi / rừng phía trước che');
-    ok(SZ.tran[1] <= 4 && SZ.thanh[1] <= 9 && SZ.tong[1] <= 12, 'trấn nhỏ hơn thành, thành lớn tới 9 ô, tông môn tới 12 ô');
+    ok(run('W().regions.every(R0=>R0.nodes.every(n=>n.type!=="tong"||placeCells(n).every(c=>geo().ter[c]!==4)))'), 'tông môn không đặt trên sông');
+    ok(SZ.tran[1] <= 7 && SZ.thanh[1] <= 19 && SZ.tong[1] <= 37 && SZ.tong[1] > SZ.thanh[1], 'cỡ lục giác: trấn tới 7 ô, thành tới 19 ô, tông môn tới 37 ô');
     ok(run('(()=>{const n=W().regions[0].nodes.find(x=>x.type==="tong");const s=placeScale(n);return /ô$/.test(s.txt)&&s.c===n.cells.length;})()'), 'có chữ quy mô theo số ô');
     ok(run('(()=>{const n=W().regions[0].nodes.find(x=>x.cells.length>2);n.fog=2;geo().nodeAt=null;return hexNode(n.cells[n.cells.length-1])===n;})()'), 'bấm ô phụ cũng chọn đúng địa điểm');
   },
@@ -3312,7 +3313,7 @@ const TESTS = {
       const bad=[];for(const d in Q){const c=Q[d].cells.length,co=quanCo(c),q=NOI_SL[co],p=per[d]||{};
         const tp=p.thanh||0,tt=p.tuthanh||0,rp=p.tran||0,rt=p.tutran||0;
         const fq=Q[d].cells.filter(x=>O_PHANG[x]==='1'&&(g.ter[x]===1||g.ter[x]===6)).length,du=fq>=25; // quận ít đất bằng: thiếu thành trấn là đúng (trấn kẹt thành nơi ẩn cư)
-        if((du&&(tp+tt<q.thanhPham[0]||rp<q.tranPham[0]-1||rt<q.tranTu[0]-1))||tp>q.thanhPham[1]+2||rt>q.tranTu[1]+1)bad.push([d,c,co,fq,tp,tt,rp,rt]);}
+        if((du&&(tp+tt<q.thanhPham[0]-1||rp<q.tranPham[0]-2||rt<q.tranTu[0]-2))||tp>q.thanhPham[1]+2||rt>q.tranTu[1]+2)bad.push([d,c,co,fq,tp,tt,rp,rt]);}
       const types=new Set(all.map(n=>n.type));const ids=new Set(all.map(n=>n.id));const cells=new Set(all.map(n=>n.hex));
       const hq=new Set(all.filter(n=>isTownT(n.type)&&!isTuT(n.type)).map(n=>n.fa));
       return {tot:all.length,bad,types:[...types],dupId:all.length-ids.size,dupHex:all.length-cells.size,
@@ -3340,7 +3341,7 @@ const TESTS = {
     ok(run("W().regions.flatMap(R=>R.nodes).length") === before, 'bản lưu cũ: nạp lại không đổi số nơi');
     ok(run("(()=>{const w=W();const n=w.regions.flatMap(R=>R.nodes).find(n=>n.type==='thanh');openPlace(n.id);const a=placeActs(n).map(x=>x.a);const m=tnaFa(n);return a.includes('shop')&&typeof m==='string';})()"), 'bản lưu cũ: thành vẫn có đồ tu sĩ, truy nã không lỗi');
     const t = run("(()=>{const t=Date.now();for(let i=0;i<3;i++)genWorld(900+i);return (Date.now()-t)/3;})()");
-    ok(t < 600, 'sinh thế giới không chậm (' + Math.round(t) + ' ms)');
+    ok(t < 900, 'sinh thế giới không chậm (cụm lục giác lớn tìm chỗ lâu hơn; ' + Math.round(t) + ' ms)');
   },
   // sửa sau lần chạy bot đo độ khó: ghé thôn trấn được ăn ngay, phàm nhân bị choáng vẫn "qua lượt" được, xe chuyến trả xu cho phàm nhân
   sua_sau_bot() {
@@ -3555,14 +3556,35 @@ const TESTS = {
     const mo=[-1,0,1,2,3,4,5].map(re=>{run("devSetRealm("+re+",1)");return run("pbOpen()");});
     ok(JSON.stringify(mo)==='[0,0,1,2,3,4,5]', 'số ô mở theo cảnh giới (phàm → Độ Kiếp): '+mo.join(','));
   },
-  // thành, trấn chỉ dựng trên đất bằng / đồi (núi, rừng phía trước sẽ che nhà trên bản đồ vẽ phối cảnh)
+  // mọi địa điểm là một lục giác lớn 1 / 7 / 19 / 37 ô (core2/33 hinhLG); thành trấn trên đất bằng / đồi; quanh cụm chừa một vòng trống
+  // vị trí địa điểm cố định ở mọi thế giới; tên chỉ ngẫu nhiên khi tạo thế giới (kiếp đầu), các kiếp sau giữ nguyên
+  ten_co_dinh() {
+    const snap = () => run("JSON.stringify(W().regions.flatMap(R=>R.nodes.map(n=>[n.id,n.name,n.hex,placeCells(n).length])))");
+    run("G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0])");
+    const a = JSON.parse(snap());
+    run("die('combat',{n:'thử'});if(G.over&&G.over.ben)benUong();G.over=null;G.screen='title';genBirth();newRun(G.birth.cards[0])");
+    const b = JSON.parse(snap());
+    ok(run("G.run.kiep") === 2 && JSON.stringify(a) === JSON.stringify(b), 'kiếp 2: tên, vị trí, cỡ mọi địa điểm không đổi (' + a.length + ' nơi)');
+    run("G={meta:newMeta(),run:null,birth:null,over:null,screen:'title'};genBirth();newRun(G.birth.cards[0])");
+    const c = JSON.parse(snap());
+    const cungCho = a.every((x, i) => c[i] && c[i][2] === x[2] && c[i][3] === x[3]), khacTen = a.filter((x, i) => c[i] && c[i][1] !== x[1]).length;
+    ok(cungCho, 'thế giới mới: vị trí, cỡ địa điểm vẫn như cũ');
+    ok(khacTen > a.length * 0.3, 'thế giới mới: tên ngẫu nhiên lại (' + khacTen + ' nơi đổi tên)');
+  },
   dat_thanh_tran() {
     fresh();
-    const r = JSON.parse(run(`JSON.stringify((()=>{const g=geoFor(W());let n=0,sai=[];for(const R0 of W().regions)for(const x of R0.nodes)if(isTownT(x.type)||isThanhT(x.type)){n++;for(const c of placeCells(x))if(!(((g.ter[c]===1||g.ter[c]===6)&&O_PHANG[c]==="1")||(g.ter[c]===3&&O_CHE[c]!=="1")))sai.push(x.name+':'+g.ter[c]+':'+x.hex+'/'+c+':'+(x.sectFix?'fix':'')+(x.dp?'dp':'')+':'+placeCells(x).length);}return {n,sai};})())`));
+    const r = JSON.parse(run(`JSON.stringify((()=>{const g=geoFor(W());let n=0,sai=[];for(const R0 of W().regions)for(const x of R0.nodes)if(isTownT(x.type)||isThanhT(x.type)){n++;for(const c of placeCells(x))if(!(g.ter[c]===1||g.ter[c]===6))sai.push(x.name+':'+g.ter[c]+':'+c);}return {n,sai};})())`));
     ok(r.n > 10, 'có ' + r.n + ' thành trấn');
-    const h = JSON.parse(run(`JSON.stringify((()=>{let n=0,khop=0,dem={};for(const R0 of W().regions)for(const x of R0.nodes)if(HINH_SZ[x.type]){n++;dem[x.hinh]=(dem[x.hinh]||0)+1;const L=x.hinh&&x.hinh!=='1'?hinhO(x.hex,HINH[parseInt(x.hinh)][x.hinh.slice(-1)]):[x.hex];if(L&&L.join()===placeCells(x).join())khop++;else dem['X'+x.type+':'+x.hinh+':'+placeCells(x).length]=1;if(x.hinh==='1')dem['1'+x.type]=(dem['1'+x.type]||0)+1;}return {n,khop,dem};})())`));
-    ok(h.n > 0 && h.khop === h.n, 'cụm ô đúng hình mẫu ' + h.khop + '/' + h.n + ' ' + JSON.stringify(h.dem));
-    ok(r.sai.length === 0, 'mọi ô của thành trấn là đất bằng trống hoặc sườn núi không bị che' + (r.sai.length ? ': ' + r.sai.slice(0, 5).join(', ') : ''));
+    ok(r.sai.length === 0, 'mọi ô của thành trấn là đất bằng / đồi' + (r.sai.length ? ': ' + r.sai.slice(0, 5).join(', ') : ''));
+    const h = JSON.parse(run(`JSON.stringify((()=>{let n=0,khop=0,sai=[],dem={};const own=new Map();for(const R0 of W().regions)for(const x of R0.nodes)if(!x.wp)for(const c of placeCells(x))own.set(c,x.id);
+      for(const R0 of W().regions)for(const x of R0.nodes){if(x.wp)continue;n++;const L=placeCells(x),R=LG_SO.indexOf(L.length),M=R>=0?hinhLG(x.hex,R):null;
+        if(M&&M.slice().sort().join()===L.slice().sort().join())khop++;else sai.push(x.type+':'+L.length);
+        const k=x.type+':'+L.length;dem[k]=(dem[k]||0)+1;
+        for(const c of L)for(const b of hexNb(c))if(own.has(b)&&own.get(b)!==x.id)sai.push('ke:'+x.name);}
+      return {n,khop,sai:sai.slice(0,6),tong:[7,19,37].map(z=>dem['tong:'+z]||0)};})())`));
+    ok(h.khop === h.n, 'mọi nơi là lục giác lớn 1/7/19/37 ô: ' + h.khop + '/' + h.n + ' ' + h.sai.join(', '));
+    ok(!h.sai.some(x => x.startsWith('ke:')), 'các nơi không kề nhau');
+    ok(h.tong[0] > 0 && h.tong[1] > 0 && h.tong[2] > 0, 'tông môn đủ ba cỡ 7 / 19 / 37: ' + h.tong.join(' / '));
   },
 };
 

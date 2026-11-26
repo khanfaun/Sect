@@ -33,6 +33,9 @@ async function boot(b, w = 400, h = 800) {
 const ev = (p, f, a) => p.evaluate(f, a);
 const shot = async (p, name) => { if (SHOT) await p.screenshot({ path: path.join(SHOT, name + '.png') }); };
 
+// quận 5 đã vẽ vào ô ảnh (tools/quan-ve.py): bố cục cố định phải đúng như lúc vẽ; mã băm ranh quận (geo().dist) như bản luật
+const BO_CUC_Q5 = 'tong37@3939,ancu1@4051,khoang1@3349,ancu1@2881,ditich1@2870,thanh7@2877,tuthanh1@3474,tran1@3707,tran1@4170,tran1@3696,tran1@3110,tutran1@3232,tutran1@3237,dongthien1@2523,linhdia1@4065,como1@3234,como1@2874';
+const QUAN_HASH = 497262121;
 const TESTS = {
   // dò chữ hỏng (undefined / NaN / [object) ở mọi bảng, mọi thẻ, cả điện thoại lẫn máy tính
   async do_chu(p) {
@@ -101,6 +104,29 @@ const TESTS = {
   // bảng treo thưởng mở thành hộp nổi (vẫn ở địa điểm), hộp nổi ở địa điểm có nút X; trang bị không còn áo choàng; túi đồ ghi tên tiền tệ
   // việc ở địa điểm (cổng sơn môn, thăm dò…) mở sự kiện thành hộp trắng ngay trên cảnh địa điểm
   // xem ảnh từng ô của thành / trấn / tông môn / nơi hoang dã trên bản đồ (chỉ để chụp: --shot <thư mục>)
+  // bản đồ chia ô ảnh (O_ANH, tools/quan-ve.py): phóng sát tải ô mức chi tiết của chỗ đang xem, thu xa dùng mức thô; nơi đã vẽ vào ảnh không chồng ảnh rời
+  async o_anh_ban_do(p) {
+    const bc = await ev(p, () => { const g = geo(); let h = 0; for (let i = 0; i < HN; i++) h = (h * 31 + g.dist[i] + 7) | 0; return { cd: W().ddCoDinh, h, ve: W().regions.flatMap(R => R.nodes).filter(n => O_ANH.ve.includes(n.id)).map(n => n.type + placeCells(n).length + '@' + n.hex).join(',') }; });
+    ok(bc.cd === 20261125 && bc.ve === BO_CUC_Q5, 'thế giới trong trình duyệt dùng đúng bố cục cố định đã vẽ (' + bc.ve.slice(0, 40) + '…)');
+    ok(bc.h === QUAN_HASH, 'ranh quận trong trình duyệt khớp bản luật (' + bc.h + ')');
+    await p.setViewportSize({ width: 1440, height: 860 });
+    const co = await ev(p, () => ({ ve: (O_ANH.ve || []).length, o2: (O_ANH.o[2] || []).length }));
+    ok(co.ve > 0 && co.o2 > 0, 'có quận đã vẽ: ' + co.ve + ' nơi, ' + co.o2 + ' ô ảnh mức 2');
+    await ev(p, () => { devMoMap(); for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); G.run.scene = null; UI.panel = null; UI.modal = null; render(); NK.on = true; NK.clear(); });
+    const n = await ev(p, () => { const n = W().regions.flatMap(R => R.nodes).filter(n => O_ANH.ve.includes(n.id)).sort((a, b) => placeCells(b).length - placeCells(a).length)[0]; Map2.zoom(50); Map2.focus(n.x, n.y); Map2.invalidate(); return { t: n.type, o: placeCells(n).length, z: Map2.cam.z, zmax: Map2.zmax }; });
+    ok(n.z > 1.5 && n.z === n.zmax, 'phóng sâu hơn trước (z ' + n.z + ')');
+    let st = null;
+    for (let i = 0; i < 20; i++) { await p.waitForTimeout(250); st = await ev(p, () => ({ ...Map2.oAnh, nap: NK.dump(200).split(String.fromCharCode(10)).filter(x => /map\.o /.test(x)).map(x => x.match(/"id":"([^"]+)"/)[1]), ve: UI._mapVeN || 0 })); if (st.use > 0 && st.nap.some(x => x.startsWith('2/'))) break; }
+    ok(st.use > 0 && st.nap.some(x => x.startsWith('2/')), 'phóng sát: tải ô ảnh mức 2 (' + st.nap.filter(x => x.startsWith('2/')).length + ' ô, đang vẽ ' + st.use + ')');
+    ok(st.nap.length < 30, 'chỉ tải ô quanh chỗ đang xem (' + st.nap.length + ')');
+    ok(st.ve > 0, 'nơi đã vẽ vào ảnh không chồng ảnh rời (' + st.ve + ' nơi; ' + n.t + ' ' + n.o + ' ô)');
+    await shot(p, 'o-anh-gan');
+    await ev(p, () => { NK.clear(); Map2.zoomOutAll(); Map2.invalidate(); });
+    for (let i = 0; i < 12; i++) { await p.waitForTimeout(250); st = await ev(p, () => ({ ...Map2.oAnh, nap: NK.dump(200).split(String.fromCharCode(10)).filter(x => /map\.o /.test(x)).map(x => x.match(/"id":"([^"]+)"/)[1]) })); if (st.nap.some(x => !x.startsWith('2/'))) break; }
+    ok(st.nap.some(x => !x.startsWith('2/')) && !st.nap.some(x => x.startsWith('2/')), 'thu xa: dùng ô mức thô ' + st.nap.join(','));
+    await shot(p, 'o-anh-xa');
+    ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
+  },
   async o_ban_do_anh(p) {
     await p.setViewportSize({ width: 1440, height: 860 });
     await ev(p, () => { devMoMap(); for (const R0 of W().regions) for (const n of R0.nodes) n.fog = Math.max(n.fog, 2); G.run.scene = null; UI.panel = null; render(); });
