@@ -34,7 +34,7 @@ const ev = (p, f, a) => p.evaluate(f, a);
 const shot = async (p, name) => { if (SHOT) await p.screenshot({ path: path.join(SHOT, name + '.png') }); };
 
 // quận 5 đã vẽ vào ô ảnh (tools/quan-ve.py): bố cục cố định phải đúng như lúc vẽ; mã băm ranh quận (geo().dist) như bản luật
-const BO_CUC_Q5 = 'tong37@3939,ancu1@4051,khoang1@3349,ancu1@2881,ditich1@2870,thanh7@2877,tuthanh1@3474,tran1@3707,tran1@4170,tran1@3696,tran1@3110,tutran1@3232,tutran1@3237,dongthien1@2523,linhdia1@4065,como1@3234,como1@2874';
+const BO_CUC_Q5 = 'tong37@2757,ancu1@4170,khoang1@3467,ancu1@2881,tran1@3352,tuthanh1@4285,thanh7@3473,thanh7@3344,tuthanh1@3824,tran1@4296,tran1@4523,tran1@3821,tran1@2987,tutran1@4292,phe1@2765,bicanh1@3583,phe1@3936';
 const QUAN_HASH = 497262121;
 const TESTS = {
   // dò chữ hỏng (undefined / NaN / [object) ở mọi bảng, mọi thẻ, cả điện thoại lẫn máy tính
@@ -122,8 +122,8 @@ const TESTS = {
     ok(st.ve > 0, 'nơi đã vẽ vào ảnh không chồng ảnh rời (' + st.ve + ' nơi; ' + n.t + ' ' + n.o + ' ô)');
     await shot(p, 'o-anh-gan');
     await ev(p, () => { NK.clear(); Map2.zoomOutAll(); Map2.invalidate(); });
-    for (let i = 0; i < 12; i++) { await p.waitForTimeout(250); st = await ev(p, () => ({ ...Map2.oAnh, nap: NK.dump(200).split(String.fromCharCode(10)).filter(x => /map\.o /.test(x)).map(x => x.match(/"id":"([^"]+)"/)[1]) })); if (st.nap.some(x => !x.startsWith('2/'))) break; }
-    ok(st.nap.some(x => !x.startsWith('2/')) && !st.nap.some(x => x.startsWith('2/')), 'thu xa: dùng ô mức thô ' + st.nap.join(','));
+    for (let i = 0; i < 12; i++) { await p.waitForTimeout(250); st = await ev(p, () => ({ ...Map2.oAnh, nap: NK.dump(200).split(String.fromCharCode(10)).filter(x => /map\.o /.test(x)).map(x => x.match(/"id":"([^"]+)"/)[1]) })); if (st.lv >= 0 && st.lv < 2 && st.use > 0) break; }
+    ok(st.lv >= 0 && st.lv < 2 && st.use > 0 && !st.nap.some(x => x.startsWith('2/')), 'thu xa: dùng ô mức thô (mức ' + st.lv + ', ' + st.use + ' ô; ô mức thô có thể đã tải sẵn khi phóng sát) ' + st.nap.join(','));
     await shot(p, 'o-anh-xa');
     ok(p.errs.length === 0, 'không lỗi trang ' + p.errs.slice(0, 2).join(' | '));
   },

@@ -51,13 +51,34 @@ function lgCo(n,sz){const t=n.type;if(t==='tong')return [7,19,37,37][Math.max(0,
 function hinhLG(c0,R){const C0=c0%HCOLS,R0=(c0-C0)/HCOLS,q0=C0-(R0-(R0&1))/2,out=[c0];
   for(let dr=-R;dr<=R;dr++)for(let dq=-R;dq<=R;dq++){if(!dq&&!dr)continue;if(Math.abs(dq+dr)>R)continue;const r=R0+dr,q=q0+dq,c=q+(r-(r&1))/2;if(r<0||r>=HROWS||c<0||c>=HCOLS)return null;out.push(r*HCOLS+c);}
   return out;}
+// Vùng TRANH của một nơi trên ảnh bản đồ (khớp tools/quan-ve.py ve_k): elip rộng theo cỡ lục giác, cao gấp 1,5 (tông môn 2,6 vì núi bay),
+// đáy ở mép dưới cụm ô nên tranh vươn lên phía bắc. Trả về các ô có tâm trong elip nới thêm `ho` đơn vị.
+let VE_LUAT={ho:16,tt:0.2,hd:0.25,co:1.6};const VE_HO=16; // ho: nửa khoảng hở; tt/hd: tỉ lệ ô xấu tối đa dưới tranh thành trấn / nơi hoang dã; co: cỡ tranh nơi 1 ô (khớp quan-ve.py ESC) // nửa khoảng hở giữa hai vùng tranh (hai nơi cách nhau ít nhất ~1,6 ô ngoài phần tranh)
+function vungVe(a,R,t,ho){const [cx,cy]=hexCenter(a);const rx=(2*R+1)*HEXW*0.62*(R?1:VE_LUAT.co),cao=rx*(t==='tong'?2.6:1.5),day=cy+(R+0.8)*HEXP;
+  const ey=day-cao/2,ax=rx+ho,ay=cao/2+ho,out=[];
+  const r0=Math.max(0,Math.floor((ey-ay)/HEXP-1)),r1=Math.min(HROWS-1,Math.ceil((ey+ay)/HEXP));
+  for(let r=r0;r<=r1;r++){const y=(r+2/3)*HEXP,dy=(y-ey)/ay;if(dy*dy>1)continue;const hx=ax*Math.sqrt(1-dy*dy),o=(r%2)*0.5;
+    const c0=Math.max(0,Math.ceil((cx-hx)/HEXW-0.5-o)),c1=Math.min(HCOLS-1,Math.floor((cx+hx)/HEXW-0.5-o));for(let c=c0;c<=c1;c++)out.push(r*HCOLS+c);}
+  return out;}
+const lgR=L=>L.length>=37?3:L.length>=19?2:L.length>=7?1:0;
 function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô -> địa điểm đang chiếm
   const blk=new Uint8Array(HN),chiem=c=>{blk[c]=1;for(const b of hexNb(c))blk[b]=1;}; // blk: ô đã chiếm và vòng ô kề (chừa một vòng trống)
-  for(const R0 of w.regions)for(const n of R0.nodes){all.push(n);if(n.cells)for(const c of n.cells){own.set(c,n.id);chiem(c);}}
+  const tranh=new Uint8Array(HN),giuVe=(a,R,t)=>{for(const c of vungVe(a,R,t,VE_LUAT.ho))tranh[c]=1;}; // vùng tranh đã có chủ (kể cả khoảng hở)
+  const deVe=(a,R,t)=>vungVe(a,R,t,VE_LUAT.ho).some(c=>tranh[c]); // tranh nơi mới chồng lên tranh nơi khác
+  // địa hình dưới vùng tranh: thành trấn không vẽ lên vách núi / núi che / nước (tối đa 12%), nơi hoang dã không nằm trên mặt nước (tối đa 20%);
+  // tông môn vẽ trên núi riêng nên chỉ cấm nước
+  const nuoc=c=>!terWalk(g.ter[c])||g.ter[c]===4||O_NUOC[c]==="1",da=c=>g.ter[c]===3||O_CHE[c]==="1";
+  // thêm: ô cao hơn ô gốc từ 2 bậc trở lên = vách dốc phía sau (ảnh vẽ vách đá trơ, dữ liệu vẫn ghi đất bằng) -> tính là xấu với thành trấn
+  const xauVe=(a,R,n)=>{const V=vungVe(a,R,n.type,0);if(!V.length)return false;let w=0,d=0;const e0=g.el[a];for(const c of V){if(nuoc(c))w++;else if(da(c)||(laTT(n)&&g.el[c]>=e0+2))d++;}
+    if(laTT(n)&&vungVe(a,R,n.type,10).some(nuoc))return true; // thành trấn: sông hẹp lọt giữa tâm ô -> nới vùng tranh 10 đơn vị, không được chạm nước
+    return laTT(n)?(w+d)>V.length*VE_LUAT.tt:w>V.length*VE_LUAT.hd;};
+  for(const R0 of w.regions)for(const n of R0.nodes){all.push(n);if(n.cells){for(const c of n.cells){own.set(c,n.id);chiem(c);}giuVe(n.cells[0],lgR(n.cells),n.type);}}
   const DB={1:1,6:1},laTT=n=>isTownT(n.type)||isThanhT(n.type);
   // ô dùng được: chưa ai chiếm, cùng khu vực, đi được, không phải sông; thành trấn chỉ trên đất bằng / đồi; quanh cụm chừa một vòng trống
   // không đặt lên núi (dữ liệu ghi núi) hay ô mà ảnh bản đồ có núi / rừng che (O_CHE): ảnh vẽ phối cảnh, nhà đè giữa núi trông sai
-  const okT=(c,k,n)=>!blk[c]&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4&&(!laTT(n)||(DB[g.ter[c]]&&O_CHE[c]!=="1"));
+  const okT=(c,k,n,ch)=>!blk[c]&&g.reg[c]===k&&terWalk(g.ter[c])&&g.ter[c]!==4&&(!laTT(n)||(DB[g.ter[c]]&&(ch||O_CHE[c]!=="1")));
+  // thành trấn 7+ ô: O_CHE hay bắt nhầm lối mòn / vệt cỏ giữa đồng -> cho vòng ngoài tối đa 2 ô như vậy, ô giữa phải sạch
+  const okCum=(L,k,n)=>L.length<7||!laTT(n)?L.every(c=>okT(c,k,n)):O_CHE[L[0]]!=="1"&&L.every(c=>okT(c,k,n,1))&&L.filter(c=>O_CHE[c]==="1").length<=2;
   // núi trong cụm: thành trấn không có; tông môn lõi 7 ô giữa phải trống, vòng ngoài lấn núi tối đa 1/3 (tông môn vẽ trên núi riêng của nó)
   const nui=c=>g.ter[c]===3||O_CHE[c]==="1";
   // vùng toàn núi (Bắc Nhạc…) không có chỗ: lần 2 nới (lõi tối đa 2 ô núi, ngoài tối đa 1/2), lần 3 bỏ hẳn điều kiện núi
@@ -67,16 +88,17 @@ function growPlaces(w){const g=geoFor(w);const all=[];const own=new Map(); // ô
   all.filter(n=>!n.cells).map(n=>[n,lgCo(n,placeSize(n))]).sort((a,b)=>uu(b[0])-uu(a[0])||b[1]-a[1]).forEach(([n,want])=>{const k=idReg(n.id);
     let got=null;
     // tìm tâm gần chỗ cũ nhất (ưu tiên cùng quận) mà cả lục giác lớn dùng được; không đủ chỗ thì lùi cỡ nhỏ hơn
-    for(NL=0;NL<(n.type==='tong'?3:1)&&!got;NL++)for(const R of [0,1,2,3].filter(R=>LG_SO[R]<=want&&(n.type!=='tong'||R>0)).reverse()){
+        for(let thoang=2;thoang>=0&&!got;thoang--) // 2: thoáng + địa hình tốt; 1: cho chồng tranh nhưng địa hình vẫn tốt; 0: luật cũ
+    for(NL=0;NL<(n.type==='tong'?3:1)&&!got;NL++)for(const R of [0,1,2,3].filter(R=>LG_SO[R]<=want&&(n.type!=='tong'||R>0)&&(!thoang||(n.type==='tong'?R>=lgR({length:want})-1:isThanhT(n.type)&&n.type==='thanh'?R>=1:true))).reverse()){
       const seen=new Set([n.hex]);let fr=[n.hex];const dq=g.dist[n.hex];let alt=null;
-      for(let d=0;d<(R>=2?40:R?24:90)&&!got&&fr.length;d++){for(const a of fr){if(!okT(a,k,n))continue;const L=hinhLG(a,R);if(L&&L.every(c=>okT(c,k,n))&&okNui(n,L)){if(g.dist[a]===dq||R===0){got={a,L};break;}if(!alt)alt={a,L};}}
+      for(let d=0;d<(R>=2?40:R?24:90)&&!got&&fr.length;d++){for(const a of fr){if(!okT(a,k,n))continue;const L=hinhLG(a,R);if(L&&okCum(L,k,n)&&okNui(n,L)&&(thoang<2||!deVe(a,R,n.type))&&(thoang<1||!xauVe(a,R,n))){if(g.dist[a]===dq||R===0){got={a,L,th:thoang};break;}if(!alt&&!(d>=24&&isThanhT(n.type)))alt={a,L,th:thoang};}}
         if(got)break;const nx=[];for(const u of fr)for(const b of hexNb(u))if(!seen.has(b)&&g.reg[b]>=0){seen.add(b);nx.push(b);}fr=nx;}
       if(!got&&alt)got=alt;if(got)break;}
     if(!got&&laTT(n)){ // không còn đất bằng nào: trấn thành nơi ẩn cư (núi rừng vẫn ở được)
       n.type='ancu';n.name=placeName('ancu',w);n.danger=0;dbg('mo.tranAncu',{id:n.id});}
     if(!got){got={a:n.hex,L:[n.hex]};dbg('mo.chat',{n:n.name,t:n.type});} // cả khu vực không còn chỗ (rất hiếm)
     if(got.a!==n.hex){n.hex=got.a;const q=hexCenter(got.a);n.x=Math.round(q[0]*10)/10;n.y=Math.round(q[1]*10)/10;}
-    for(const c of got.L){own.set(c,n.id);chiem(c);}n.cells=got.L;n.hinh=String(got.L.length);dbg('mo.lg',{n:n.name,t:n.type,o:got.L.length,muon:want});});}
+    for(const c of got.L){own.set(c,n.id);chiem(c);}giuVe(got.a,lgR(got.L),n.type);n.cells=got.L;n.hinh=String(got.L.length);dbg('mo.lg',{n:n.name,t:n.type,o:got.L.length,muon:want,thoang:got.th});});}
 
 // ================= SINH NƠI THEO QUẬN (CHỈ THẾ GIỚI MỚI) =================
 // Mỗi quận có số thành, trấn phàm nhân / tu sĩ và nơi hoang dã, bí cảnh theo cỡ quận (bảng NOI_SL, NOI_HOANG: content/world/size-t.js).

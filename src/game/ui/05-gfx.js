@@ -175,14 +175,14 @@ const Map2=(()=>{
       im.onload=()=>{o.ok=true;invalidate();};im.onerror=()=>{o.i++;if(o.i<B.length)go();};go();}
     return o.ok?o.im:null;}
   // ----- ô ảnh chi tiết (O_ANH ở core2/03d, tools/quan-ve.py): phóng tới đâu tải ô ảnh tới đó, chưa tải xong thì mượn ô mức thấp hơn -----
-  const OIMG={},OSET={};let O_N=0,O_USE=0;
+  const OIMG={},OSET={};let O_N=0,O_USE=0,O_LV=-1;
   let OVE=null;function oVe(n){if(!OVE)OVE=new Set((typeof O_ANH!=='undefined'&&O_ANH.ve)||[]);return OVE.has(n.id);}
   function oSet(lv){if(!OSET[lv])OSET[lv]=new Set(((typeof O_ANH!=='undefined'&&O_ANH.o)||{})[lv]||[]);return OSET[lv];}
   function oTile(lv,k,want){const id=lv+'/'+k;let o=OIMG[id];if(!o){if(!want)return null;const im=new Image();o=OIMG[id]={im,ok:false,i:0,t:0};const B=['src/assets/ban-do/o/','assets/ban-do/o/'];
       const go=()=>{im.src=B[o.i]+lv+'/'+k+'.webp';};im.onload=()=>{o.ok=true;O_N++;invalidate();if(typeof dbg==='function')dbg('map.o',{id});};im.onerror=()=>{o.i++;if(o.i<B.length)go();else o.bad=true;};go();
       const ks=Object.keys(OIMG);if(ks.length>120){ks.sort((a,b)=>OIMG[a].t-OIMG[b].t);for(const x of ks.slice(0,ks.length-100)){OIMG[x].im.src='';delete OIMG[x];}}} // bỏ bớt ô lâu không xem
     o.t=performance.now();return o.ok?o.im:null;}
-  function oAnh(g,z){if(typeof O_ANH==='undefined')return;const T=O_ANH.t,S=O_ANH.s,pu=z*dpr;let lv=pu>1.7?2:pu>0.85?1:0;if(gfxLv()===0)lv=Math.min(lv,1);
+  function oAnh(g,z){if(typeof O_ANH==='undefined')return;const T=O_ANH.t,S=O_ANH.s,pu=z*dpr;let lv=pu>1.7?2:pu>0.85?1:0;if(gfxLv()===0)lv=Math.min(lv,1);O_LV=lv;
     const L=oSet(lv);if(!L.size&&!oSet(0).size)return;const wx0=cam.x-W0/2/z,wx1=cam.x+W0/2/z,wy0=cam.y-VCY/z,wy1=cam.y+(H0-VCY)/z;O_USE=0;
     const s=S[lv],tw=T/s;
     for(let ty=Math.floor(wy0/tw);ty<=Math.floor(wy1/tw);ty++)for(let tx=Math.floor(wx0/tw);tx<=Math.floor(wx1/tw);tx++){const k=tx+'-'+ty;
@@ -467,5 +467,5 @@ const Map2=(()=>{
     cv.addEventListener('pointerleave',()=>{if(hov!=null){hov=null;dirty=true;}hideTip();});
     cv.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.15:1/1.15,(e.offsetX/uz),(e.offsetY/uz));},{passive:false});
   }
-  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,zoomOutAll,locate,reset:resetAll,get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},get zf(){return zfNow();},worldAt,get wide(){return wide;},get dtc(){return Object.keys(DTC).filter(k=>DTC[k]).length;},get imgOk(){return Object.values(MIMG).filter(o=>o.ok).length;},get ink(){return !!(INK&&INK.any);},get zmax(){return ZMAX;},get oAnh(){return {n:O_N,use:O_USE,tai:Object.keys(OIMG).length};},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
+  return {attach,resize,invalidate,soft(){soft=true;},frame,center,focus,zoom,cam,zoomOutAll,locate,reset:resetAll,get fps(){return performance.now()-lastDraw>1500?0:fpsShow;},get dpr(){return dpr;},get zf(){return zfNow();},worldAt,get wide(){return wide;},get dtc(){return Object.keys(DTC).filter(k=>DTC[k]).length;},get imgOk(){return Object.values(MIMG).filter(o=>o.ok).length;},get ink(){return !!(INK&&INK.any);},get zmax(){return ZMAX;},get oAnh(){return {n:O_N,use:O_USE,tai:Object.keys(OIMG).length,lv:O_LV};},setFont:f=>{FONT=f;},get lv(){return gfxLv();}};
 })();

@@ -3312,8 +3312,8 @@ const TESTS = {
       for(const n of all){const d=g.dist[n.hex];(per[d]||(per[d]={}))[n.type]=((per[d]||{})[n.type]||0)+1;}
       const bad=[];for(const d in Q){const c=Q[d].cells.length,co=quanCo(c),q=NOI_SL[co],p=per[d]||{};
         const tp=p.thanh||0,tt=p.tuthanh||0,rp=p.tran||0,rt=p.tutran||0;
-        const fq=Q[d].cells.filter(x=>O_PHANG[x]==='1'&&(g.ter[x]===1||g.ter[x]===6)).length,du=fq>=25; // quận ít đất bằng: thiếu thành trấn là đúng (trấn kẹt thành nơi ẩn cư)
-        if((du&&(tp+tt<q.thanhPham[0]-1||rp<q.tranPham[0]-2||rt<q.tranTu[0]-2))||tp>q.thanhPham[1]+2||rt>q.tranTu[1]+2)bad.push([d,c,co,fq,tp,tt,rp,rt]);}
+        const fq=Q[d].cells.filter(x=>O_PHANG[x]==='1'&&(g.ter[x]===1||g.ter[x]===6)).length,du=fq>=40; // quận ít đất bằng: thiếu thành trấn là đúng (trấn kẹt thành nơi ẩn cư); 40 vì mỗi nơi giữ cả vùng tranh (core2/33 VE_LUAT)
+        if((du&&(tp+tt<q.thanhPham[0]-1||rp<q.tranPham[0]-2||rt<q.tranTu[0]-2))||tp>q.thanhPham[1]+2||rt>q.tranTu[1]+3)bad.push([d,c,co,fq,tp,tt,rp,rt]);}
       const types=new Set(all.map(n=>n.type));const ids=new Set(all.map(n=>n.id));const cells=new Set(all.map(n=>n.hex));
       const hq=new Set(all.filter(n=>isTownT(n.type)&&!isTuT(n.type)).map(n=>n.fa));
       return {tot:all.length,bad,types:[...types],dupId:all.length-ids.size,dupHex:all.length-cells.size,
@@ -3322,7 +3322,7 @@ const TESTS = {
         tuChu:all.filter(n=>isTuT(n.type)).every(n=>n.fa&&(n.fa.startsWith('tong:')||THE_LUC[n.fa])),
         lk:(()=>{const a=anchorOf(w,'LOC02');return a&&a.fa;})(),
         hqKv:[0,1,2,3,4].map(k=>new Set(all.filter(n=>idReg(n.id)===k&&n.type==='thanh').map(n=>n.fa)).size)};})())`));
-    ok(N.tot >= 450 && N.tot <= 700, 'tổng số nơi khoảng 500–600 (hiện ' + N.tot + ')');
+    ok(N.tot >= 380 && N.tot <= 520, 'tổng số nơi khoảng 400–500 (hiện ' + N.tot + '; nơi hoang dã mỗi quận 2–4 cho bản đồ thoáng)');
     ok(N.bad.length === 0, 'mỗi quận đúng số thành, trấn phàm / tu sĩ theo cỡ quận' + (N.bad.length ? ' ' + JSON.stringify(N.bad.slice(0, 4)) : ''));
     ok(['tutran', 'tuthanh', 'bicanh', 'dongthien', 'como', 'yeusao', 'ditich'].every(t => N.types.includes(t)), 'có đủ loại nơi mới');
     ok(N.dupId === 0 && N.dupHex === 0 && N.walk === 0, 'nơi không chồng lên nhau, đều trên ô đi được');

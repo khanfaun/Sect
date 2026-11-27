@@ -321,16 +321,31 @@ P_VB = {
               "Seen from the same high oblique bird's-eye view as the mountains of the map (not top-down). " + KIEU + NOI_VB),
 }
 
-def ve_k(q, k, loai, seed=71):
+def bao_ve(q, pid, x0, y0, n):
+    """Vùng đã vẽ của các nơi KHÁC trong khung (x0,y0,n), nới 24 đ.ả, mềm mép: không cho nơi mới đè lên."""
+    import glob, re; d = D(q); bv = np.zeros((n, n), np.float32)
+    for f in glob.glob(d + 'ra/v*.json'):
+        b = os.path.basename(f)
+        if not re.fullmatch(r'v\d+\.json', b): continue
+        v = json.load(open(f)); kk = int(b[1:-5])
+        if v.get('id') == pid or not os.path.exists(d + f'ra/qv{q}-v{kk}-mn.png') or not os.path.exists(d + f'ra/done-{kk}') and kk != 0: continue
+        fm = d + f'ra/qv{q}-v{kk}-nd.png'  # nét thật sự đã vẽ (khác nền gốc), không phải cả vùng khoanh
+        m = np.asarray(Image.open(fm if os.path.exists(fm) else d + f'ra/qv{q}-v{kk}-mn.png').convert('L'), np.float32) / 255; h = m.shape[0]
+        ox, oy = v['x'] - x0, v['y'] - y0; xa, ya, xb, yb = max(0, ox), max(0, oy), min(n, ox + h), min(n, oy + h)
+        if xa < xb and ya < yb: bv[ya:yb, xa:xb] = np.maximum(bv[ya:yb, xa:xb], m[ya - oy:yb - oy, xa - ox:xb - ox])
+    bv = ndi.grey_dilation((bv > 0.3).astype(np.float32), size=(25, 25))
+    return ndi.gaussian_filter(bv, 8)
+
+def ve_k(q, k, loai, seed=71, pid=None):
     """Khung k: 1536 ở mức 2 (cỡ thật khi phóng sát), cắt thẳng từ bản đang vẽ (lam.png; khung 0 từ nền gốc).
     Vùng nơi đó chỉ làm nhoè (giữ tông màu tại chỗ, mô hình vẽ mới chứ không chép), mặt nạ vẽ bù 1.0, mép mềm. Khung sau thấy cả phần khung trước đã vẽ."""
     d = D(q); B = json.load(open(d + 'bocuc.json', encoding='utf-8')); K = B['K']
     src = d + ('lam.png' if k > 0 and os.path.exists(d + 'lam.png') else 'nen.png')
     nen = Image.open(src).convert('RGB'); W, H = nen.size
     if k == 0: nen.save(d + 'lam.png')
-    n = max([x for x in B['noi'] if x['t'] == loai], key=lambda x: x['o'])
+    n = [x for x in B['noi'] if x['id'] == pid][0] if pid else max([x for x in B['noi'] if x['t'] == loai], key=lambda x: x['o'])
     R = {1: 0, 7: 1, 19: 2, 37: 3}.get(n['o'], 0); cx, cy = px(K, *n['c'])
-    rx = (2 * R + 1) * 30 * S2 * 0.62; day = cy + (R + 0.8) * 26 * S2
+    rx = (2 * R + 1) * 30 * S2 * 0.62 * (float(os.environ.get('ESC', 1)) if R == 0 else 1); day = cy + (R + 0.8) * 26 * S2
     cao = rx * (2.6 if loai == 'tong' else 1.5)  # tông môn vươn cao (núi bay), thành thấp
     x0 = int(min(max(0, cx - N / 2), W - N)); y0 = int(min(max(0, day + 160 - N), H - N))
     cr = nen.crop((x0, y0, x0 + N, y0 + N))
@@ -339,7 +354,9 @@ def ve_k(q, k, loai, seed=71):
     tamy = day - cao / 2; dy = (Y - tamy) / (cao / 2); dx = (X - cx) / rx
     mk = (np.sqrt(dx * dx + dy * dy) + 0.15 * nz) < 1
     mm = ndi.gaussian_filter(mk.astype(np.float32), 18)
-    lo = ndi.gaussian_filter(ndi.binary_erosion(mk, iterations=30).astype(np.float32), 20)
+    bv = bao_ve(q, n['id'], x0, y0, N)
+    mm = mm * (1 - bv); mk = mk & (bv < 0.5)
+    lo = ndi.gaussian_filter(ndi.binary_erosion(mk, iterations=30).astype(np.float32), 20) * (1 - bv)
     a = np.asarray(cr, np.float32); mo = ndi.gaussian_filter(a, (24, 24, 0))
     vao = a * (1 - lo[..., None]) + mo * lo[..., None]
     Image.fromarray(vao.astype(np.uint8)).save(d + f'ra/qv{q}-v{k}-vao.png')
@@ -354,9 +371,11 @@ def khop_mau(ra, goc, m):
     from skimage import color as skc
     A = skc.rgb2lab(np.asarray(ra, np.float32) / 255); G = skc.rgb2lab(np.asarray(goc, np.float32) / 255)
     w = m[..., 0] > 0.5; out = A.copy()
-    for c, st in ((0, 0.85), (1, 0.9), (2, 0.9)):
-        ma, sa = A[..., c][w].mean(), A[..., c][w].std() + 1e-3; mg, sg = G[..., c][w].mean(), G[..., c][w].std() + 1e-3
-        mt = ma + (mg - ma) * st; s_ = sa + (max(sg, sa * 0.8) - sa) * st if c == 0 else sa
+    vanh = ndi.binary_dilation(w, iterations=120) & ~ndi.binary_dilation(w, iterations=10)  # vành đất quanh nơi đó
+    wg = vanh if vanh.sum() > 2000 else w
+    for c, st in ((0, float(os.environ.get('KM_L', 0.35))), (1, 0.9), (2, 0.9)):
+        ma, sa = A[..., c][w].mean(), A[..., c][w].std() + 1e-3; mg, sg = G[..., c][wg].mean(), G[..., c][wg].std() + 1e-3
+        mt = ma + (mg - ma) * st; s_ = max(sa, sg) if c == 0 else sa
         out[..., c] = (A[..., c] - ma) * (s_ / sa) + mt
     rgb = np.clip(skc.lab2rgb(out), 0, 1) * 255
     return rgb * m + np.asarray(ra, np.float32) * (1 - m)
@@ -376,16 +395,41 @@ def loang(mk_vung, seed=5, rong=110):
     a = np.clip(t + 0.5, 0, 1); a = a * a * (3 - 2 * a)
     return ndi.gaussian_filter(a, 1.5)
 
+def khop_giay(mo, cu, mk, o=11):
+    """Màu GIẤY (nền sáng giữa các nét) của bản vẽ phải trùng bản đồ tại chỗ: bản vẽ thường sáng / bạc hơn (sân trắng, quầng nhạt).
+    Đo theo ô nhỏ (ảnh thu 1/4): L lấy phân vị 75 (giấy, bỏ nét), a* b* lấy trung vị; dịch cả bản vẽ theo chênh lệch, nét giữ độ đậm tương đối."""
+    from skimage import color as skc
+    A = skc.rgb2lab(np.clip(mo, 0, 255) / 255); C = skc.rgb2lab(np.clip(cu, 0, 255) / 255)
+    h, w = mk.shape; f = 4; sm = lambda x: x[::f, ::f]
+    d = np.zeros((len(range(0, h, f)), len(range(0, w, f)), 3), np.float32)
+    d[..., 0] = ndi.percentile_filter(sm(C[..., 0]), 75, size=o) - ndi.percentile_filter(sm(A[..., 0]), 75, size=o)
+    for c in (1, 2): d[..., c] = ndi.median_filter(sm(C[..., c]), size=o) - ndi.median_filter(sm(A[..., c]), size=o)
+    d = np.stack([ndi.zoom(d[..., c], (h / d.shape[0], w / d.shape[1]), order=1)[:h, :w] for c in range(3)], -1)
+    d = ndi.gaussian_filter(d, (6, 6, 0)) * np.clip(mk * 2, 0, 1)[..., None]
+    return np.clip(skc.lab2rgb(A + d), 0, 1) * 255
+
 def ghep_mem(cu, mo, mk, rong=110, giu_cay=None):
     """cu: nền gốc, mo: kết quả (float HxWx3), mk: mặt nạ vẽ bù (HxW 0..1). Khớp màu cả vùng, rồi trong dải chuyển tiếp kéo dần mảng màu lớn
     (nhoè 40 đ.ả) của bản vẽ về mảng màu của nền -> chuyển tông mượt, nét giữ nguyên; cuối cùng ghép theo mép loang mực."""
     m3 = mk[..., None]
+    # vật mới vẽ (nhà, tường...): chỗ bản mới khác hẳn bản gốc trong vùng khoanh
+    lum0 = lambda x: x @ np.array([0.299, 0.587, 0.114], np.float32)
+    Lm = lum0(mo); chi = np.abs(Lm - ndi.gaussian_filter(Lm, 4))  # nét / chi tiết của bản vẽ (sân trống phẳng thì không tính)
+    vat = ((chi > 9) | (Lm < lum0(cu) - 25)) & (mk > 0.15)
+    vat = ndi.binary_closing(ndi.binary_opening(vat, iterations=1), iterations=6)
+    vat = np.clip(ndi.gaussian_filter(ndi.binary_dilation(vat, iterations=3).astype(np.float32), 2) * 1.5, 0, 1) * np.clip(mk * 3, 0, 1)
     mo = khop_mau(Image.fromarray(np.clip(mo, 0, 255).astype(np.uint8)), Image.fromarray(cu.astype(np.uint8)), m3)
+    GIAY = os.environ.get('GIAY', '0') == '1'  # người dùng thấy ghép cũ (không khớp màu giấy) đẹp hơn: mặc định tắt
+    if GIAY: mo = khop_giay(mo, cu, mk)
     a = loang(mk, rong=rong)
     sau = np.clip(ndi.distance_transform_edt(a > 0.02) / (rong * 2.2), 0, 1)  # 0 ở mép -> 1 sâu bên trong
     lo_c = ndi.gaussian_filter(cu, (40, 40, 0)); lo_m = ndi.gaussian_filter(mo, (40, 40, 0))
     keo = (1 - sau)[..., None] ** 1.5
+    # chống quầng nhạt: đất trống quanh vật (không có vật mới) lấy đúng mảng màu lớn của bản gốc, chỉ giữ nét nhỏ của bản vẽ
     mo = mo + (lo_c - lo_m) * keo
+    nen_trong = (1 - ndi.gaussian_filter(ndi.binary_dilation(vat > 0.3, iterations=2).astype(np.float32), 3))[..., None]
+    lc2 = ndi.gaussian_filter(cu, (10, 10, 0)); lm2 = ndi.gaussian_filter(mo, (10, 10, 0))
+    if GIAY: mo = mo + (lc2 - lm2) * nen_trong * 0.95  # đất trống / sân: tông màu bản gốc (mịn 10 đ.ả), chỉ giữ nét nhỏ của bản vẽ
     # càng ra rìa càng bớt vàng: sắc độ (a*, b* LAB) không được đậm hơn đất bản đồ quanh đó, kéo dần về sắc độ nền; thêm giảm bão hoà nhẹ theo rìa
     from skimage import color as skc
     L = skc.rgb2lab(np.clip(mo, 0, 255) / 255); Lc = skc.rgb2lab(cu / 255)
@@ -396,6 +440,7 @@ def ghep_mem(cu, mo, mk, rong=110, giu_cay=None):
     ab = ab * (1 - 0.18 * vr)  # bớt bão hoà thêm ở rìa
     L[..., 1:] = ab; mo = np.clip(skc.lab2rgb(L), 0, 1) * 255
     if giu_cay is None: giu_cay = os.environ.get('GIU_CAY', '1') != '0'  # tuỳ nơi: GIU_CAY=0 để tắt (vd khi nét gốc lấp ló qua mây / thân nơi đó)
+    a = np.maximum(a, vat)  # vật mới phải đặc: mép loang / giữ cây không làm nó trong suốt
     if not giu_cay:
         a3 = a[..., None]; return np.clip(cu * (1 - a3) + mo * a3, 0, 255), a
     # giữ cây cối của bản đồ: (1) cụm cây dày ở phía trước (dưới) chân nơi đó thì bản gốc phủ lên, (2) trong dải chuyển tiếp nét gốc đậm hơn thì thắng
@@ -405,24 +450,45 @@ def ghep_mem(cu, mo, mk, rong=110, giu_cay=None):
     ys = np.nonzero(mk > 0.5)[0]; y0, y1 = (np.percentile(ys, 55), ys.max()) if ys.size else (0, 1)
     duoi = np.clip((np.arange(mk.shape[0], dtype=np.float32) - y0) / max(1.0, (y1 - y0) * 0.5), 0, 1)[:, None]  # nửa dưới vùng vẽ = phía trước
     truoc = ndi.gaussian_filter(cum * duoi * np.clip(1 - sau * 0.6, 0, 1), 4)
-    a = a * (1 - truoc)
+    a = a * (1 - truoc * (1 - vat))
     a3 = a[..., None]
     out = cu * (1 - a3) + mo * a3
     dai = np.clip((1 - sau) * 1.4, 0, 1) * (a > 0.01)                                  # dải chuyển tiếp
     Lo = lum(out); thang = np.clip((Lo - Lg) / 25, 0, 1) * muc * dai                  # gốc đậm hơn ở chỗ có nét -> giữ nét gốc
+    thang = thang * (1 - vat)
     out = out * (1 - thang[..., None]) + cu * thang[..., None]
     return np.clip(out, 0, 255), a
 
-def ghep_k(q, k, anh):
+def luu_nd(q, k, truoc, sau):
+    """Lưu vùng có nét mới (khác hẳn trước khi vẽ) của nơi k: để nơi vẽ sau tránh, nhưng vẫn được vẽ lên chỗ trống trong vùng khoanh cũ."""
+    df = ndi.gaussian_filter(np.abs(np.asarray(sau, np.float32) - np.asarray(truoc, np.float32)).sum(2), 6)
+    nd = ndi.binary_opening(df > 45, iterations=3); nd = ndi.binary_closing(nd, iterations=6)
+    Image.fromarray((nd * 255).astype(np.uint8)).save(D(q) + f'ra/qv{q}-v{k}-nd.png')
+
+def ghep_k(q, k, anh, xuat_ngay=True):
     d = D(q); v = json.load(open(d + f'ra/v{k}.json')); lam = Image.open(d + 'lam.png').convert('RGB')
     ra = Image.open(anh).convert('RGB').resize((N, N), Image.LANCZOS)
     m = np.asarray(Image.open(d + f'ra/qv{q}-v{k}-mn.png').convert('L'), np.float32)[..., None] / 255
     cu = np.asarray(lam.crop((v['x'], v['y'], v['x'] + N, v['y'] + N)), np.float32)
     ra_ = np.asarray(ra, np.float32); out, _ = ghep_mem(cu, ra_, m[..., 0])
     lam.paste(Image.fromarray(out.astype(np.uint8)), (v['x'], v['y'])); lam.save(d + 'lam.png')
-    import shutil, glob; shutil.rmtree('src/assets/ban-do/o', ignore_errors=True)
+    luu_nd(q, k, cu, out)
+    if not xuat_ngay: return
+    xuat_ve(q, k)
+
+def ghep_lai_ve(q, ds_k):
+    """Ghép lại cả quận từ nền gốc theo thứ tự ds_k, dùng ảnh đã vẽ (ra/g-v<k>-tot.png, hoặc -nhe) và mặt nạ đã lưu: đổi cách ghép không phải vẽ lại."""
+    global N
+    d = D(q); shutil_ = __import__('shutil'); shutil_.copy(d + 'nen.png', d + 'lam.png')
+    for k in ds_k:
+        f = next((d + f'ra/g-v{k}-{t}.png' for t in ('tot', 'nhe') if os.path.exists(d + f'ra/g-v{k}-{t}.png')), None)
+        if not f: print('thiếu ảnh', k); continue
+        N = Image.open(d + f'ra/qv{q}-v{k}-mn.png').size[0]; ghep_k(q, k, f, xuat_ngay=False); print('ghép lại', k, N)
+
+def xuat_ve(q, k=999):
+    d = D(q); import shutil, glob, re; shutil.rmtree('src/assets/ban-do/o', ignore_errors=True)
     if os.path.exists('src/game/core2/03d-o-anh.js'): os.remove('src/game/core2/03d-o-anh.js')
-    ids = {json.load(open(f))['id'] for f in glob.glob(d + 'ra/v[0-9].json') if int(os.path.basename(f)[1]) <= k}
+    ids = {json.load(open(f))['id'] for f in glob.glob(d + 'ra/v*.json') if re.fullmatch(r'v(\d+)\.json', os.path.basename(f)) and int(re.findall(r'\d+', os.path.basename(f))[0]) <= k}
     B = json.load(open(d + 'bocuc.json', encoding='utf-8')); B['noi'] = [x for x in B['noi'] if x['id'] in ids]; json.dump(B, open(d + 'bocuc-ve.json', 'w', encoding='utf-8'))
     xuat(q, d + 'bocuc-ve.json')
 
@@ -470,7 +536,7 @@ def xuat(q, bc=None):
 P_Q2 = {'tong': "Inpaint the blurred area of this hand-painted antique Chinese fantasy world map with a grand immortal sect: steep rock peaks crowned with tiers of palace halls and pagodas joined by stone stairways, small floating mountains with pavilions, chains and thin waterfalls, bands of soft cloud. Drawn in exactly the same ink style as this map: the same brown-black ink pen lines, warm sepia, ochre and faded grey-green washes, same darkness and contrast, same high oblique bird's-eye view; no bright colours, no illustration look. Its ground merges seamlessly into the surrounding land. Keep everything outside the blurred area exactly as it is. No text."}
 def wf_qwen2(q, k, loai, seed=73, buoc=8, dn=0.6):
     """Qwen bắt đầu từ bản Klein (qv<q>-v<k>-klein-vao.png), ảnh mẫu là bản đồ gốc (qv<q>-v<k>-vao.png)."""
-    w = wf_lp(f'qv{q}-v{k}-vao.png', P_Q2.get(loai, P_VB[loai]), seed, f'qv{q}-v{k}-nhe', f'qv{q}-v{k}-mn.png', 'qwen', buoc=buoc)
+    w = wf_lp(f'qv{q}-v{k}-vao.png', P_Q2.get(loai, P_VB[loai]), seed, f'qv{q}-v{k}-nhe', f'qv{q}-v{k}-mn.png', 'qwen', res=N, buoc=buoc)
     w['22'] = {'class_type': 'LoadImage', 'inputs': {'image': f'qv{q}-v{k}-klein-vao.png'}, '_meta': {'title': 'Klein start'}}
     w['18']['inputs']['pixels'] = ['22', 0]; w['12']['inputs']['denoise'] = dn
     return w
