@@ -232,3 +232,32 @@ def ti_le_che(lop, chan, n, che_min=12):
         l = Image.new('L', (chan.shape[1], chan.shape[0]), 0); f(_Gom(ImageDraw.Draw(l))); m_ = np.asarray(l, np.float32) / 255
         a_ = np.maximum(a_, m_); che = np.maximum(che, m_ * (chan > day + che_min))
     return che.sum() / max(1, a_.sum())
+
+def m_tong(box, rnd):
+    """Tông môn tự động: quần thể hình tháp leo núi — điện đỉnh 3 tầng + tháp cao lệch trục, hai tầng sân giữa, nhà dưới, bậc đá zíc zắc từ cổng,
+    hai đảo bay (coi như tiền cảnh: không bị núi sau che) nối xích về đỉnh, hai dải mây ngang so le, một thác."""
+    x0, y0, x1, y1 = box; W = x1 - x0; H = y1 - y0; cx = (x0 + x1) / 2; L = []
+    sy = y0 + 0.34 * H
+    L.append((sy, lambda d: (nen_da(d, cx, sy, W * 0.5), nha(d, cx, sy - 2, W * 0.3, tang=3), nha(d, cx - W * 0.2, sy + H * 0.02, W * 0.16, tang=2), nha(d, cx + W * 0.2, sy + H * 0.02, W * 0.16, tang=2))))
+    L.append((sy - 1, lambda d: thap(d, cx + W * 0.25, y0 + 0.3 * H, W * 0.06, tang=8)))
+    for fx, fy, s_ in ((-0.2, 0.55, 0.2), (0.21, 0.5, 0.19)):
+        L.append((y0 + fy * H, lambda d, fx=fx, fy=fy, s_=s_: (nen_da(d, cx + W * fx, y0 + fy * H, W * s_ * 1.4), nha(d, cx + W * fx, y0 + fy * H, W * s_, tang=2), nha(d, cx + W * (fx + 0.13 * (1 if fx > 0 else -1)), y0 + (fy + 0.02) * H, W * s_ * 0.5))))
+    L.append((y0 + 0.75 * H, lambda d: (nen_da(d, cx + W * 0.08, y0 + 0.75 * H, W * 0.24), nha(d, cx + W * 0.08, y0 + 0.75 * H, W * 0.17))))
+    L.append((y0 + 0.9 * H, lambda d: bac_da(d, [(cx, y1 - 0.02 * H), (cx + 0.05 * W, y0 + 0.82 * H), (cx - 0.04 * W, y0 + 0.66 * H), (cx + 0.02 * W, y0 + 0.46 * H), (cx, y0 + 0.35 * H)], max(10, W * 0.04))))
+    L.append((y1, lambda d: cong_chao(d, cx, y1 - 0.01 * H, W * 0.16)))
+    for (fx, fy, s_) in ((0.13, 0.17, 0.22), (0.86, 0.12, 0.16)):
+        L.append((1e6, lambda d, fx=fx, fy=fy, s_=s_: (dao_bay(d, x0 + W * fx, y0 + H * fy, W * s_), xich(d, (x0 + W * fx + W * s_ * 0.3 * (1 if fx < 0.5 else -1), y0 + H * fy), (cx + W * 0.12 * (-1 if fx < 0.5 else 1), sy - H * 0.06)))))
+    L.append((y0 + 0.47 * H, lambda d: may(d, x0 + W * 0.04, cx - W * 0.12, y0 + 0.46 * H, H * 0.035)))
+    L.append((y0 + 0.63 * H, lambda d: may(d, cx + W * 0.12, x1 - W * 0.04, y0 + 0.62 * H, H * 0.03)))
+    L.append((y0 + 0.62 * H, lambda d: d.line((cx + W * 0.33, y0 + 0.4 * H, cx + W * 0.335, y0 + 0.62 * H), fill=NUOC, width=max(4, int(W * 0.012)))))
+    return L
+
+def m_dam(box, rnd):
+    x0, y0, x1, y1 = box; W = x1 - x0; H = y1 - y0; cx = (x0 + x1) / 2
+    def f(d):
+        for i in range(5): d.line((cx - W * 0.3 + i * W * 0.12, y1 - H * 0.12, cx - W * 0.3 + i * W * 0.12, y1 - H * 0.3), fill=(110, 82, 58), width=3)
+        nha(d, cx, y1 - H * 0.3, W * 0.5)
+        for i in range(9): x = x0 + W * (0.05 + i * 0.11); d.line((x, y1, x + W * 0.02, y1 - H * 0.2), fill=CAY, width=2)
+    return [(y1, f)]
+
+MAU.update({'tong': m_tong, 'dong': m_khoang, 'cho': lambda b, r: m_tran(b, r), 'duoc': m_am_cu, 'dam': m_dam})

@@ -34,7 +34,7 @@ const ev = (p, f, a) => p.evaluate(f, a);
 const shot = async (p, name) => { if (SHOT) await p.screenshot({ path: path.join(SHOT, name + '.png') }); };
 
 // quận 5 đã vẽ vào ô ảnh (tools/quan-ve.py): bố cục cố định phải đúng như lúc vẽ; mã băm ranh quận (geo().dist) như bản luật
-const BO_CUC_Q5 = 'tong37@2757,ancu1@4170,khoang1@3467,ancu1@2881,tran1@3352,tuthanh1@4285,thanh7@3473,thanh7@3344,tuthanh1@3824,tran1@4296,tran1@4523,tran1@3821,tran1@2987,tutran1@4292,phe1@2765,bicanh1@3583,phe1@3936';
+const BO_CUC_Q5 = ''; // mọi nơi đã vẽ (các quận)
 const QUAN_HASH = 497262121;
 const TESTS = {
   // dò chữ hỏng (undefined / NaN / [object) ở mọi bảng, mọi thẻ, cả điện thoại lẫn máy tính

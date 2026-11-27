@@ -143,6 +143,15 @@ def chuan_bi(q):
     G = Image.open(GOC).convert('RGB'); s = G.size[0] / WW
     wx0, wy0 = K[0] * TS / S2, K[1] * TS / S2; W, H = (K[2] - K[0]) * TS, (K[3] - K[1]) * TS
     nen = G.crop((round(wx0 * s), round(wy0 * s), round((wx0 + W / S2) * s), round((wy0 + H / S2) * s))).resize((W, H), Image.LANCZOS)
+    # chỗ khung chồng lên quận khác đã vẽ: lấy luôn tranh đã vẽ (ô ảnh mức 2 = đúng tỉ lệ khung) làm nền, để không đè mất
+    od = 'src/assets/ban-do/o/2/'; n_ = 0
+    for ty in range(K[1], K[3]):
+        for tx in range(K[0], K[2]):
+            fn = od + f'{tx}-{ty}.webp'
+            if os.path.exists(fn):
+                o = Image.open(fn).convert('RGBA'); c = nen.crop(((tx - K[0]) * TS, (ty - K[1]) * TS, (tx - K[0] + 1) * TS, (ty - K[1] + 1) * TS)).convert('RGBA'); c.alpha_composite(o)
+                nen.paste(c.convert('RGB'), ((tx - K[0]) * TS, (ty - K[1]) * TS)); n_ += 1
+    print('ô đã vẽ của quận khác lấy làm nền:', n_)
     nen.save(d + 'nen.png'); ref_phong(K).save(d + 'ref-phong.png')
     for k, p in MAU.items():
         json.dump(wf(f'qv{q}-ref-phong.png', PHONG + p, 1000 + len(k), f'qv{q}-mau-{k}'), open(d + f'mau-{k}.json', 'w'))
@@ -493,8 +502,7 @@ def ghep_lai_ve(q, ds_k):
         N = Image.open(d + f'ra/qv{q}-v{k}-mn.png').size[0]; ghep_k(q, k, f, xuat_ngay=False); print('ghép lại', k, N)
 
 def xuat_ve(q, k=999):
-    d = D(q); import shutil, glob, re; shutil.rmtree('src/assets/ban-do/o', ignore_errors=True)
-    if os.path.exists('src/game/core2/03d-o-anh.js'): os.remove('src/game/core2/03d-o-anh.js')
+    d = D(q); import glob, re   # ghi CHỒNG lên ô ảnh / bảng O_ANH sẵn có (không xoá: còn các quận khác đã vẽ)
     ids = {json.load(open(f))['id'] for f in glob.glob(d + 'ra/v*.json') if re.fullmatch(r'v(\d+)\.json', os.path.basename(f)) and int(re.findall(r'\d+', os.path.basename(f))[0]) <= k}
     B = json.load(open(d + 'bocuc.json', encoding='utf-8')); B['noi'] = [x for x in B['noi'] if x['id'] in ids]; json.dump(B, open(d + 'bocuc-ve.json', 'w', encoding='utf-8'))
     xuat(q, d + 'bocuc-ve.json')

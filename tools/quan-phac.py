@@ -21,8 +21,13 @@ TA = {'tong': "a grand and majestic immortal cultivation sect built on these mou
       'phe': "the ruins of an abandoned village: roofless broken walls, rubble and a dead tree",
       'ditich': "ancient ruins: broken walls and toppled pillars, rubble and a dead tree",
       'bicanh': "the hidden entrance of a secret realm: an ancient carved stone gate between rocks with mist coming out of it",
-      'dongthien': "a cave-heaven: a carved stone gate in the rocks with mist, an old pine"}
+      'dongthien': "a cave-heaven: a carved stone gate in the rocks with mist, an old pine",
+      'dong': "a cave: a dark cave entrance in a rocky cliff with boulders and a few pines",
+      'cho': "a small market: stalls with awnings and tiled roofs around a busy square, a memorial gateway at the entrance",
+      'duoc': "a herb garden: neat beds of medicinal herbs with a small thatched hut and a bamboo fence, two pines",
+      'dam': "a small hut on stilts in a reedy marsh, reeds and still water"}
 KHUNG = {'tong': 1280, 'thanh': 768}
+for t_ in ('dong', 'cho', 'duoc', 'dam'): m.P_VB.setdefault(t_, m.P_VB['phe'])  # ve_k cần lời tả (chỉ ghi vào wf phụ)
 P = lambda t: ("Image 1 is a piece of an antique hand-painted Chinese fantasy world map. Paint into it " + TA[t] + ", following the composition already blocked in on the map "
                "(the positions, sizes and shapes of every building, wall, tower, tree and rock). Painted in exactly the map's own style: bold confident brush strokes with thick dark brown-black ink outlines and strong dark ink wash shading on roofs, cliffs and shadows, "
                "as dark, heavy and high-contrast as the trees and mountains of the map, warm sepia, ochre and grey-green tones; not a thin technical line drawing, not pale. Seen from the front and above like the map, not isometric. Trees and rocks in front stay in front. "
