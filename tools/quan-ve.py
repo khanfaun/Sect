@@ -352,8 +352,15 @@ def ve_k(q, k, loai, seed=71, pid=None):
     yy, xx = np.mgrid[0:N, 0:N].astype(np.float32); X, Y = xx + x0, yy + y0
     rng = np.random.default_rng(seed + k); nz = ndi.gaussian_filter(rng.standard_normal((N, N)), 45); nz /= np.abs(nz).max()
     tamy = day - cao / 2; dy = (Y - tamy) / (cao / 2); dx = (X - cx) / rx
-    mk = (np.sqrt(dx * dx + dy * dy) + 0.15 * nz) < 1
-    mm = ndi.gaussian_filter(mk.astype(np.float32), 18)
+    # cọ mềm nhưng không phải elip đơn điệu: 3-5 chỗ lồi / lõm theo các hướng ngẫu nhiên + gợn mép to nhỏ
+    goc_ = np.arctan2(dy, dx); bk = np.ones_like(dx)
+    for _ in range(int(rng.integers(3, 6))):
+        th0 = rng.uniform(-np.pi, np.pi); w_ = rng.uniform(0.35, 0.8); a_ = rng.uniform(0.12, 0.32) * (1 if rng.random() < 0.7 else -0.6)
+        dth = np.angle(np.exp(1j * (goc_ - th0))); bk = bk + a_ * np.exp(-(dth / w_) ** 2)
+    nz2 = ndi.gaussian_filter(rng.standard_normal((N, N)), 14); nz2 /= np.abs(nz2).max()
+    mk = (np.sqrt(dx * dx + dy * dy) / bk + 0.18 * nz + 0.06 * nz2) < 1
+    f_ = max(4, N // 160)   # vùng vẽ trắng ĐẶC 100% bên trong, chỉ mềm một viền mảnh f_ đ.ả (mép nhoè rộng làm nơi vẽ mờ nhạt)
+    di_ = ndi.distance_transform_edt(mk) - ndi.distance_transform_edt(~mk); mm = np.clip((di_ + f_) / (2 * f_), 0, 1)
     bv = bao_ve(q, n['id'], x0, y0, N)
     mm = mm * (1 - bv); mk = mk & (bv < 0.5)
     lo = ndi.gaussian_filter(ndi.binary_erosion(mk, iterations=30).astype(np.float32), 20) * (1 - bv)
@@ -470,7 +477,7 @@ def ghep_k(q, k, anh, xuat_ngay=True):
     ra = Image.open(anh).convert('RGB').resize((N, N), Image.LANCZOS)
     m = np.asarray(Image.open(d + f'ra/qv{q}-v{k}-mn.png').convert('L'), np.float32)[..., None] / 255
     cu = np.asarray(lam.crop((v['x'], v['y'], v['x'] + N, v['y'] + N)), np.float32)
-    ra_ = np.asarray(ra, np.float32); out, _ = ghep_mem(cu, ra_, m[..., 0])
+    ra_ = np.asarray(ra, np.float32); out, _ = ghep_mem(cu, ra_, m[..., 0], rong=int(max(16, N * 0.03)))  # mép loang hẹp theo cỡ khung (110 cũ làm nhoè cả nơi nhỏ)
     lam.paste(Image.fromarray(out.astype(np.uint8)), (v['x'], v['y'])); lam.save(d + 'lam.png')
     luu_nd(q, k, cu, out)
     if not xuat_ngay: return

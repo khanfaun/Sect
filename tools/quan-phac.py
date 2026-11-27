@@ -9,6 +9,7 @@ from scipy import ndimage as ndi
 def nap(ten, f): sp = importlib.util.spec_from_file_location(ten, f); m_ = importlib.util.module_from_spec(sp); sp.loader.exec_module(m_); return m_
 _argv = sys.argv; sys.argv = ['x']; lo = nap('lo', 'tools/quan-ve-lo.py'); sys.argv = _argv
 m = lo.m; pm = nap('pm', 'tools/phac-mau.py')
+os.environ.setdefault('KM_L', '0')  # ghép không kéo sáng nét (làm nhạt)
 
 TA = {'tong': "a grand and majestic immortal cultivation sect built on these mountains: many tiers of palace halls and pagodas on the summit and terraces, a long stone stairway from a memorial gateway at the foot, pavilions on the peaks behind, small mountains FLOATING in the sky with pavilions, waterfalls and iron chains to the summit, bands of white cloud drifting across",
       'thanh': "a large walled ancient Chinese city: crenellated grey stone walls, a big gate tower in the front wall, corner towers, a three-storey imperial palace and a tall pagoda at the back, rows of tiled roofs packed inside, pines",
@@ -23,9 +24,9 @@ TA = {'tong': "a grand and majestic immortal cultivation sect built on these mou
       'dongthien': "a cave-heaven: a carved stone gate in the rocks with mist, an old pine"}
 KHUNG = {'tong': 1280, 'thanh': 768}
 P = lambda t: ("Image 1 is a piece of an antique hand-painted Chinese fantasy world map. Paint into it " + TA[t] + ", following the composition already blocked in on the map "
-               "(the positions, sizes and shapes of every building, wall, tower, tree and rock). Painted in exactly the map's own style: fine brown-black ink pen lines, warm sepia, ochre and faded grey-green washes, "
-               "the same darkness and contrast as the mountains and trees around it. Seen from the front and above like the map, not isometric. Trees and rocks in front stay in front. "
-               "Keep everything outside it exactly as it is. No text.")
+               "(the positions, sizes and shapes of every building, wall, tower, tree and rock). Painted in exactly the map's own style: bold confident brush strokes with thick dark brown-black ink outlines and strong dark ink wash shading on roofs, cliffs and shadows, "
+               "as dark, heavy and high-contrast as the trees and mountains of the map, warm sepia, ochre and grey-green tones; not a thin technical line drawing, not pale. Seen from the front and above like the map, not isometric. Trees and rocks in front stay in front. "
+               "Keep everything outside it exactly as it is. No text, no circles, rings or map markers.")
 
 def m_tong_17(box, goc_size):
     """Tông môn 17 (quận 5): dựng theo khối núi thật trong khung 1280 (toạ độ đo trên bản đồ)."""
@@ -71,7 +72,7 @@ def lam_mot(q, n, k, che_do, seed):
     if che_do == 'phac': return 0
     t0 = time.time()
     for f in (f'qv{q}-v{k}-phac.png', f'qv{q}-v{k}-mn.png', f'qv{q}-v{k}-goc.png'): lo.up(d + 'ra/' + f)
-    w = m.wf_lp(f'qv{q}-v{k}-goc.png', P(t), seed, f'qv{q}-v{k}-qp', f'qv{q}-v{k}-mn.png', 'qwen', res=N, buoc=int(os.environ.get('QB', 14))); w['12']['inputs']['denoise'] = float(os.environ.get('DN', 0.85 if t == 'tong' else 0.9))  # tông môn 85%: bám phác hơn (90% dồn cả quần thể lên đỉnh)
+    w = m.wf_lp(f'qv{q}-v{k}-goc.png', P(t), seed, f'qv{q}-v{k}-qp', f'qv{q}-v{k}-mn.png', 'qwen', res=N, buoc=int(os.environ.get('QB', 14))); w['12']['inputs']['denoise'] = float(os.environ.get('DN', 0.9 if t in ('tong', 'thanh') else 0.75))  # nơi nhỏ 75%: 90% hay xoá trắng bản phác  # tông môn 85%: bám phác hơn (90% dồn cả quần thể lên đỉnh)
     w['22'] = {'class_type': 'LoadImage', 'inputs': {'image': f'qv{q}-v{k}-phac.png'}, '_meta': {'title': 'Sketch start'}}; w['18']['inputs']['pixels'] = ['22', 0]
     lo.chay(w, d + f'ra/g-v{k}-tot.png'); tg = time.time() - t0
     lam0 = Image.open(d + 'lam.png').convert('RGB'); m.ghep_k(q, k, d + f'ra/g-v{k}-tot.png', xuat_ngay=False)

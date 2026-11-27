@@ -34,6 +34,8 @@ description: Vẽ địa điểm (tông môn, thành, trấn, nơi nhỏ) thẳn
 - Thời gian quận 5 (17 nơi): lượt đầu 349 giây (Qwen 241: tông môn ~50, thành 16–22, nơi nhỏ 11–14); vẽ lại chỗ hỏng thêm ~6 phút.
 - Lỗi đã gặp: Qwen ra nhiễu lấm tấm / để trống khi bản phác nằm lệch ra mép (sửa chấm điểm vị trí); ở 90% Qwen có thể dồn quần thể lên đỉnh (thử 85% hoặc hạt giống khác).
 
+- Cập nhật 2026-11-28: vùng khoanh cọ mềm TRẮNG ĐẶC 100% (viền mềm ~N/160 đ.ả), hình elip có lồi lõm ngẫu nhiên; mép ghép hẹp (rong = 3% khung). Lời tả nét cọ đậm + `KM_L=0` (không kéo sáng) — trước đó nét mờ nhạt do mép nhoè rộng, lời tả "fine/faded" và ghép kéo sáng. Vẽ lại: tông môn / thành 90%, nơi nhỏ 75% (90% hay xoá trắng). Mặt nạ theo hình vector đã thử, bỏ (tông môn thưa nhạt). Klein vẽ theo phác: 58 giây, kiểu game — không dùng.
+
 ## Vẽ cả quận (cách cũ, chỉ Klein)
 1. Dọn `work/quan-<q>/ra` cũ, `cp nen.png lam.png`.
 2. `python tools/quan-ve-lo.py <q> [id ...]`: tông môn trước (Klein + 2 ảnh mẫu `qv5-ref-tong-1/2.png`, rồi Qwen 8 bước vẽ lại 60%, khung 1280), rồi thành (khung 768), nơi 1 ô (khung 640, cỡ tranh 1,6 = `VE_LUAT.co`) — đều chỉ Klein + 2 ảnh mẫu. Gọi thẳng ComfyUI ở 127.0.0.1:8000; mỗi nơi ~20–60 giây.
