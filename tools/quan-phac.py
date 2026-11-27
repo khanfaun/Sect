@@ -107,6 +107,7 @@ if __name__ == '__main__':
     for i, n in enumerate(ds):
         k = KCO.get(n['id']) or max([99, *KCO.values()]) + 1; KCO[n['id']] = k
         if che_do == 've' and os.path.exists(d + f'ra/done-{k}'): continue
+        if che_do == 've' and os.environ.get('HAN') and time.time() + (90 if n['t'] == 'tong' else 40) > float(os.environ['HAN']): print('HẾT GIỜ, dừng trước', n['t'], n['id'], flush=True); open(d + 'ra/het-gio', 'w').write('1'); break
         tg = lam_mot(q, n, k, che_do, int(os.environ.get('SEED', 900)) + k); T.append((n['t'], n['id'], k, round(tg)))
         print(f'[{i + 1}/{len(ds)}] {n["t"]} id {n["id"]} khung {k}: {tg:.0f}s', flush=True)
     if che_do == 've': m.xuat_ve(q)
