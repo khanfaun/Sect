@@ -17,7 +17,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 GOC = 'src/assets-goc/ban-do/Hidden-map - Backup.webp'
 WW, WH = 3556, 2000
-S2 = 3.0; TS = 512; N = 1536; BG = float(os.environ.get('BG', 0.62))
+S2 = 3.0; TS = 512; N = int(os.environ.get('KHUNG', 1280)); BG = float(os.environ.get('BG', 0.62))
 MUC = {0: 0.75, 1: 1.5, 2: 3.0}
 MODEL = 'qwen-image-2.1-UC-int8_convrot.safetensors'
 XAY = ('tong', 'thanh', 'tuthanh', 'tran', 'tutran', 'ancu', 'khoang', 'ditich', 'dongthien', 'linhdia', 'como', 'bicanh', 'duoc', 'sao', 'cho', 'phe')
@@ -80,7 +80,7 @@ def wf_lp(img1, prompt, seed, pre, mask, mo='klein', res=N, buoc=None, refs=()):
          '18': T('VAEEncode', {'pixels': ['6', 0], 'vae': ['5', 0]}, 'Encode map'),
          '20': T('SetLatentNoiseMask', {'samples': ['18', 0], 'mask': ['19', 0]}, 'Noise mask'),
          '13': T('LanPaint_SamplerCustomAdvanced', {'noise': ['10', 0], 'guider': ['9', 0], 'sampler': ['11', 0], 'sigmas': ['12', 0], 'latent_image': ['20', 0],
-                 'LanPaint_NumSteps': 5, 'LanPaint_Lambda': 4.0, 'LanPaint_StepSize': 0.15, 'LanPaint_Beta': 1.0, 'LanPaint_Friction': 15.0,
+                 'LanPaint_NumSteps': int(os.environ.get('LP', 2)), 'LanPaint_Lambda': 4.0, 'LanPaint_StepSize': 0.15, 'LanPaint_Beta': 1.0, 'LanPaint_Friction': 15.0,
                  'LanPaint_PromptMode': 'Image First', 'LanPaint_EarlyStop': 1, 'LanPaint_Info': '', 'LanPaint_InnerThreshold': 0.02, 'LanPaint_InnerPatience': 1}, 'LanPaint sample'),
          '14': T('VAEDecode', {'samples': ['13', 0], 'vae': ['5', 0]}, 'Decode'),
          '15': T('SaveImage', {'images': ['14', 0], 'filename_prefix': pre}, 'Save')}
@@ -466,6 +466,15 @@ def xuat(q, bc=None):
         'const O_ANH=' + json.dumps({'t': TS, 's': [MUC[0], MUC[1], MUC[2]], 'o': cu, 've': sorted(ve)}, separators=(',', ':')) + ';\n')
     print({k: len(v) for k, v in ds.items()})
 
+# Bước 2 (Qwen 2.1 vẽ lại nét) — bản nhẹ đã duyệt: 8 bước, vẽ lại 60 phần trăm, LanPaint 2 vòng, khung 1280 (nơi nhỏ/trấn/thành nhỏ dùng KHUNG=1024).
+P_Q2 = {'tong': "Inpaint the blurred area of this hand-painted antique Chinese fantasy world map with a grand immortal sect: steep rock peaks crowned with tiers of palace halls and pagodas joined by stone stairways, small floating mountains with pavilions, chains and thin waterfalls, bands of soft cloud. Drawn in exactly the same ink style as this map: the same brown-black ink pen lines, warm sepia, ochre and faded grey-green washes, same darkness and contrast, same high oblique bird's-eye view; no bright colours, no illustration look. Its ground merges seamlessly into the surrounding land. Keep everything outside the blurred area exactly as it is. No text."}
+def wf_qwen2(q, k, loai, seed=73, buoc=8, dn=0.6):
+    """Qwen bắt đầu từ bản Klein (qv<q>-v<k>-klein-vao.png), ảnh mẫu là bản đồ gốc (qv<q>-v<k>-vao.png)."""
+    w = wf_lp(f'qv{q}-v{k}-vao.png', P_Q2.get(loai, P_VB[loai]), seed, f'qv{q}-v{k}-nhe', f'qv{q}-v{k}-mn.png', 'qwen', buoc=buoc)
+    w['22'] = {'class_type': 'LoadImage', 'inputs': {'image': f'qv{q}-v{k}-klein-vao.png'}, '_meta': {'title': 'Klein start'}}
+    w['18']['inputs']['pixels'] = ['22', 0]; w['12']['inputs']['denoise'] = dn
+    return w
+
 if __name__ == '__main__':
     a = sys.argv[1:]
     if a[0] == 'chuan-bi': chuan_bi(int(a[1]))
@@ -486,4 +495,7 @@ if __name__ == '__main__':
             "but do not copy their layout and do not paste them: paint a new sect fitted into the blurred area of image 1, blending into image 1's land.")
         json.dump(wf_lp(f'qv{q_}-v{k_}-vao.png', p_, 71, f'qv{q_}-v{k_}-kref', f'qv{q_}-v{k_}-mn.png', 'klein', refs=(f'qv{q_}-ref-tong-1.png', f'qv{q_}-ref-tong-2.png')), open(d_ + f'ra/v{k_}-kref.json', 'w'))
         print(os.path.abspath(d_ + f'ra/v{k_}-kref.json'))
+    elif a[0] == 'qwen2':  # qwen2 <q> <k> <loai>: workflow Qwen bước 2 (sau khi tải bản Klein về thành qv<q>-v<k>-klein-vao.png và upload)
+        q_, k_, lo_ = int(a[1]), int(a[2]), a[3]; d_ = D(q_)
+        json.dump(wf_qwen2(q_, k_, lo_), open(d_ + f'ra/v{k_}-nhe.json', 'w')); print(os.path.abspath(d_ + f'ra/v{k_}-nhe.json'))
     elif a[0] == 'ghepk': ghep_k(int(a[1]), int(a[2]), a[3])
