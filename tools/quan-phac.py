@@ -27,7 +27,19 @@ TA = {'tong': "a grand and majestic immortal cultivation sect built on these mou
       'duoc': "a herb garden: neat beds of medicinal herbs with a small thatched hut and a bamboo fence, two pines",
       'dam': "a small hut on stilts in a reedy marsh, reeds and still water"}
 KHUNG = {'tong': 1280, 'thanh': 768}
-for t_ in ('dong', 'cho', 'duoc', 'dam'): m.P_VB.setdefault(t_, m.P_VB['phe'])  # ve_k cần lời tả (chỉ ghi vào wf phụ)
+TA.update({'yeusao': "a monster lair: a dark cave mouth among jagged rocks and twisted dead trees, bones scattered, a menacing mist",
+           'sao': "a monster lair: a dark cave mouth among jagged rocks and twisted dead trees, bones scattered",
+           'ma': "a haunted place: an abandoned shrine among dead trees and old graves, drifting mist",
+           'thien': "a sacred celestial altar: a stone platform with a small pavilion on a rock, clouds around it",
+           'linhdia': "a sacred spirit land: a small shrine pavilion beside a spring pool among ancient trees, soft mist",
+           'como': "an ancient tomb: a grass-covered burial mound with a stone gate, a stele and gnarled cypress trees"})
+class _TA(dict):
+    def __missing__(self, k): return "a small landmark: an old stone shrine with a pavilion roof among a few pines and rocks"
+TA = _TA(TA)
+class _PV(dict):
+    def __missing__(self, k): return self['phe']
+m.P_VB = _PV(m.P_VB)
+for t_ in ('yeusao', 'sao', 'ma', 'thien'): pm.MAU.setdefault(t_, pm.MAU['bicanh'])  # ve_k cần lời tả (chỉ ghi vào wf phụ)
 P = lambda t: ("Image 1 is a piece of an antique hand-painted Chinese fantasy world map. Paint into it " + TA[t] + ", following the composition already blocked in on the map "
                "(the positions, sizes and shapes of every building, wall, tower, tree and rock). Painted in exactly the map's own style: bold confident brush strokes with thick dark brown-black ink outlines and strong dark ink wash shading on roofs, cliffs and shadows, "
                "as dark, heavy and high-contrast as the trees and mountains of the map, warm sepia, ochre and grey-green tones; not a thin technical line drawing, not pale. Seen from the front and above like the map, not isometric. Trees and rocks in front stay in front. "
