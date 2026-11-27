@@ -26,7 +26,15 @@ description: Vẽ địa điểm (tông môn, thành, trấn, nơi nhỏ) thẳn
 - Dữ liệu đất bằng / nước theo ảnh: `python tools/o-phang.py` (vách đá trơ nhạt bị tính nhầm là đất bằng → loại bằng b* và a* thấp hơn trung vị vùng).
 - Đổi luật đặt nơi ⇒ vẽ lại các quận đã vẽ; cập nhật `BO_CUC_Q5` trong tools/test-ui.js (lấy từ bocuc.json + O_ANH.ve).
 
-## Vẽ cả quận
+## Cách đang dùng (2026-11-28): PHÁC VECTOR + QWEN 90%
+- `python tools/quan-phac.py <q> phac [id...]` chỉ phác (không GPU) → soát `work/quan-<q>/phac-<k>.png`; `... ve [id...]` phác + Qwen + ghép + xuất ô ảnh; in thời gian từng nơi.
+- Mẫu phác ở `tools/phac-mau.py` (thành, tu thành, trấn, tu trấn, am cư, khoáng, phế / di tích, bí cảnh / động thiên); tông môn dựng tay theo địa hình (`m_tong_17` trong quan-phac.py). Bố cục hình tháp, trục giữa, điểm nhấn cao, mái chồng lớp.
+- Tiền cảnh: `tien_canh` (khối mực đặc + chân từng điểm), `ve_lop` vẽ xa→gần và cho tiền cảnh che; `ne_tien_canh` dịch cả cụm tới chỗ ít bị che (ở hẳn trong lõi vùng khoanh); bị che >45% (nơi nằm lọt trong rừng) thì vẽ thành khoảng trống.
+- Qwen: ảnh mẫu = bản đồ gốc, điểm xuất phát = bản phác (chỉ dán vào LÕI vùng khoanh, mép mà có phác thì sót nét), 14 bước, vẽ lại 90% (tông môn 85–90%, thử vài hạt giống chọn bản hùng tráng nhất). Đảo bay coi như tiền cảnh.
+- Thời gian quận 5 (17 nơi): lượt đầu 349 giây (Qwen 241: tông môn ~50, thành 16–22, nơi nhỏ 11–14); vẽ lại chỗ hỏng thêm ~6 phút.
+- Lỗi đã gặp: Qwen ra nhiễu lấm tấm / để trống khi bản phác nằm lệch ra mép (sửa chấm điểm vị trí); ở 90% Qwen có thể dồn quần thể lên đỉnh (thử 85% hoặc hạt giống khác).
+
+## Vẽ cả quận (cách cũ, chỉ Klein)
 1. Dọn `work/quan-<q>/ra` cũ, `cp nen.png lam.png`.
 2. `python tools/quan-ve-lo.py <q> [id ...]`: tông môn trước (Klein + 2 ảnh mẫu `qv5-ref-tong-1/2.png`, rồi Qwen 8 bước vẽ lại 60%, khung 1280), rồi thành (khung 768), nơi 1 ô (khung 640, cỡ tranh 1,6 = `VE_LUAT.co`) — đều chỉ Klein + 2 ảnh mẫu. Gọi thẳng ComfyUI ở 127.0.0.1:8000; mỗi nơi ~20–60 giây.
 3. Soát phóng to từng nơi. Nơi hỏng: xoá vùng đó về nền (`nen.png` theo mặt nạ), xoá `ra/done-<k>`, vẽ lại với `SEED=` khác. Klein hay ra cây / để trống ở đất bằng đồng màu: vẽ 3–4 ứng viên rồi chọn bằng mắt; nếu vẫn trống thì dán mờ một nơi cùng loại đã vẽ đạt vào giữa vùng khoanh làm bản phác (75%) rồi cho Klein vẽ lại.
